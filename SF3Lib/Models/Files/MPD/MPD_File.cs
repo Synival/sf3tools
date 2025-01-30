@@ -180,15 +180,31 @@ namespace SF3.Models.Files.MPD {
                     ChunkData[i] = MakeChunkData(i, true);
                 }
                 catch {
-                    // TODO: This is likely failing because the texture is the wrong encoding.
-                    //       Finding a table that determines whether this is 16- or 8-bit would be great.
+                    // TODO: report an error somehow
                 }
             }
+
+            // Scroll pane chunks.
+            // TODO: Do something with these!!
+            for (var i = 14; i <= 19; i++) {
+                if (chunks[i].Exists && ChunkData[i] == null && !(i == 19 && MPDHeader[0].HasChunk19Model)) {
+                    try {
+                        ChunkData[i] = MakeChunkData(i, true, "Compressed (WIP)");
+                    }
+                    catch {
+                        // TODO: report an error somehow
+                    }
+                }
+            }
+
+            // TODO: what is Chunk[21]?
+            if (chunks[21].Exists)
+                ChunkData[21] = MakeChunkData(21, true);
 
             // Add remaining unhandled chunks.
             for (var i = 0; i < chunks.Length; i++)
                 if (ChunkData[i] == null && chunks[i].Exists)
-                    ChunkData[i] = MakeChunkData(i, false, "(WIP)");
+                    ChunkData[i] = MakeChunkData(i, false, "(Unhandled)");
 
             return ChunkData;
         }
@@ -241,6 +257,8 @@ namespace SF3.Models.Files.MPD {
             var indices = new List<int>();
             if (chunks[1].Exists)
                 indices.Add(1);
+            if (chunks[19].Exists && MPDHeader[0].HasChunk19Model)
+                indices.Add(19);
             if (chunks[20].Exists && SurfaceModelChunkIndex != 20)
                 indices.Add(20);
             return indices.ToArray();
@@ -264,20 +282,14 @@ namespace SF3.Models.Files.MPD {
                     case 8:
                     case 9:
                         return TextureCollectionType.PrimaryTextures;
-
                     case 10:
-                        // TODO: Scn1 Z_AS.mpd has something special going on how. Why? Is there some flag for this?
-                        return chunkDatas[chunkIndex].DecompressedData.GetWord(0x02) == 0
-                            ? TextureCollectionType.SpecialChunk10Textures
-                            : TextureCollectionType.PrimaryTextures;
-
+                        return MPDHeader[0].HasChunk19Model ? TextureCollectionType.Chunk19ModelTextures : TextureCollectionType.PrimaryTextures;
                     case 11:
                         return TextureCollectionType.MovableObjects1;
                     case 12:
                         return TextureCollectionType.MovableObjects2;
                     case 13:
                         return TextureCollectionType.MovableObjects3;
-
                     default:
                         throw new Exception("Unhandled case!");
                 }
@@ -287,7 +299,10 @@ namespace SF3.Models.Files.MPD {
 
             var modelsList = new List<ModelCollection>();
             foreach (var mc in modelsChunks) {
-                var newModel = ModelCollection.Create(mc.DecompressedData, NameGetterContext, 0x00, "Models", mc.Index);
+                var texCollection = (mc.Index == 19 && MPDHeader[0].HasChunk19Model)
+                    ? TextureCollectionType.Chunk19ModelTextures : TextureCollectionType.PrimaryTextures;
+
+                var newModel = ModelCollection.Create(mc.DecompressedData, NameGetterContext, 0x00, "Models" + mc.Index, texCollection, mc.Index);
                 modelsList.Add(newModel);
                 tables.AddRange(newModel.Tables);
             }

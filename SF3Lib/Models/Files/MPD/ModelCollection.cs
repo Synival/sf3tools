@@ -6,18 +6,20 @@ using SF3.ByteData;
 using SF3.Models.Structs.MPD.Model;
 using SF3.Models.Tables;
 using SF3.Models.Tables.MPD.Model;
+using SF3.Types;
 
 namespace SF3.Models.Files.MPD {
     public class ModelCollection : TableFile {
-        protected ModelCollection(IByteData data, INameGetterContext nameContext, int address, string name, int? chunkIndex)
+        protected ModelCollection(IByteData data, INameGetterContext nameContext, int address, string name, TextureCollectionType textureCollection, int? chunkIndex)
         : base(data, nameContext) {
             Address    = address;
             Name       = name;
+            TextureCollection = textureCollection;
             ChunkIndex = chunkIndex;
         }
 
-        public static ModelCollection Create(IByteData data, INameGetterContext nameContext, int address, string name, int? chunkIndex) {
-            var newFile = new ModelCollection(data, nameContext, address, name, chunkIndex);
+        public static ModelCollection Create(IByteData data, INameGetterContext nameContext, int address, string name, TextureCollectionType textureCollection, int? chunkIndex) {
+            var newFile = new ModelCollection(data, nameContext, address, name, textureCollection, chunkIndex);
             newFile.Init();
             return newFile;
         }
@@ -117,7 +119,7 @@ namespace SF3.Models.Files.MPD {
 
         [BulkCopyRowName]
         public string Name { get; }
-
+        public TextureCollectionType TextureCollection { get; }
         public int Address { get; }
         public int? ChunkIndex { get; }
 

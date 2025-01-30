@@ -102,14 +102,23 @@ namespace SF3.Models.Structs.MPD {
 
         [BulkCopy]
         [TableViewModelColumn(displayOrder: 0, displayFormat: "X4")]
-        public int MapFlags {
-            get => Data.GetWord(mapFlagsAddress);
+        public ushort MapFlags {
+            get => (ushort) Data.GetWord(mapFlagsAddress);
             set => Data.SetWord(mapFlagsAddress, value);
         }
 
+        [TableViewModelColumn(displayOrder: 0.1f, displayName: "HasChunk19Model (Scn1)")]
+        public bool HasChunk19Model {
+            get => Scenario == ScenarioType.Scenario1 && (MapFlags & 0x0080) == 0x0080;
+            set {
+                if (Scenario == ScenarioType.Scenario1)
+                    MapFlags = (ushort) ((MapFlags & ~0x0080) | (value ? 0x0080 : 0));
+            }
+        }
+
         [BulkCopy]
-        public int Padding1 {
-            get => Data.GetWord(padding1Address);
+        public ushort Padding1 {
+            get => (ushort) Data.GetWord(padding1Address);
             set => Data.SetWord(padding1Address, value);
         }
 
@@ -134,14 +143,14 @@ namespace SF3.Models.Structs.MPD {
 
         [BulkCopy]
         [TableViewModelColumn(displayOrder: 5, displayFormat: "X2")]
-        public int ViewDistance {
-            get => Data.GetWord(viewDistanceAddress);
+        public ushort ViewDistance {
+            get => (ushort) Data.GetWord(viewDistanceAddress);
             set => Data.SetWord(viewDistanceAddress, value);
         }
 
         [BulkCopy]
-        public int Padding2 {
-            get => Data.GetWord(padding2Address);
+        public ushort Padding2 {
+            get => (ushort) Data.GetWord(padding2Address);
             set => Data.SetWord(padding2Address, value);
         }
 

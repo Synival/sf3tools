@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using CommonLib.Extensions;
+using CommonLib.Imaging;
 using CommonLib.SGL;
 using CommonLib.Types;
 using OpenTK.Graphics.OpenGL;
@@ -61,7 +62,7 @@ namespace SF3.Win.OpenGL.MPD_File {
                     .Distinct();
 
                 foreach (var address in uniquePData1Addresses)
-                    AddModel(mpdFile, address);
+                    AddModel(mpdFile, models.TextureCollection, address);
             }
 
             Models = modelsList.ToArray();
@@ -78,7 +79,7 @@ namespace SF3.Win.OpenGL.MPD_File {
             return null;
         }
 
-        public void AddModel(IMPD_File mpdFile, int pdataAddressInMemory) {
+        public void AddModel(IMPD_File mpdFile, TextureCollectionType texCollection, int pdataAddressInMemory) {
             TextureFlipType ToggleHorizontalFlipping(TextureFlipType flip)
                 => (flip & ~TextureFlipType.Horizontal) | (TextureFlipType) (TextureFlipType.Horizontal - (flip & TextureFlipType.Horizontal));
 
@@ -93,14 +94,14 @@ namespace SF3.Win.OpenGL.MPD_File {
                 return;
 
             var texturesById = mpdFile.TextureCollections != null ? mpdFile.TextureCollections
-                .Where(x => x?.TextureTable != null && x.TextureTable.Collection == TextureCollectionType.PrimaryTextures)
+                .Where(x => x?.TextureTable != null && x.TextureTable.Collection == texCollection)
                 .SelectMany(x => x.TextureTable)
                 .GroupBy(x => x.ID)
                 .Select(x => x.First())
                 .ToDictionary(x => x.ID, x => x.Texture)
                 : [];
 
-            var animationsById = mpdFile.TextureAnimations != null ? mpdFile.TextureAnimations
+            var animationsById = (texCollection == TextureCollectionType.PrimaryTextures && mpdFile.TextureAnimations != null) ? mpdFile.TextureAnimations
                 .GroupBy(x => x.TextureID)
                 .Select(x => x.First())
                 .ToDictionary(x => (int) x.TextureID, x => new { Textures = x.Frames.OrderBy(x => x.FrameNum).Select(x => x.Texture).ToArray(), x.FrameTimerStart })
@@ -134,10 +135,13 @@ namespace SF3.Win.OpenGL.MPD_File {
                 if (attr.Mode_DrawMode == DrawMode.CL_Trans)
                     color[3] /= 2;
 
-                // TODO: Proper color handling!
-
+                // TODO: wtf do these mean???
+                if (attr.Mode_ECdis && attr.Mode_SPdis) {
+                    var colorChannels = PixelConversion.ABGR1555toChannels(attr.ColorNo);
+                    color = new Vector4(colorChannels.r, colorChannels.g, colorChannels.b, 1.0f);
+                }
                 // TODO: There isn't always a texture. What to do?
-                if (anim == null)
+                else if (anim == null)
                     continue;
 
                 VECTOR[] polyVertexModels = [
