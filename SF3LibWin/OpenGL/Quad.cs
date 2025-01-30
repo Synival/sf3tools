@@ -29,31 +29,80 @@ namespace SF3.Win.OpenGL {
             TextureRotate = rotate;
             TextureFlip   = flip;
 
-            Attributes = [
-                new PolyAttribute(1, OpenTK.Graphics.OpenGL.ActiveAttribType.FloatVec3, "position", 4,
-                    vertices.SelectMany(x => x.ToFloatArray()).ToArray().To2DArray(4, 3)),
-                new PolyAttribute(1, OpenTK.Graphics.OpenGL.ActiveAttribType.FloatVec4, "color", 4,
-                    colors.SelectMany(x => x.ToFloatArray()).ToArray().To2DArray(4, 4)),
-            ];
-            _attributesByName = Attributes.ToDictionary(x => x.Name);
+            // If the center of this quad isn't equal to the sum/average of its opposite corners, add a fifth vertex
+            // that will divide it into 4 triangles rather than 2.
+            var sum1 = vertices[0] + vertices[2];
+            var sum2 = vertices[1] + vertices[3];
+            HasCenterVertex = !VerticesAreBasicallyEqual(sum1, sum2);
+            Vertices = HasCenterVertex ? 5 : 4;
+
+            Attributes = [];
+            AddAttribute(new PolyAttribute(1, OpenTK.Graphics.OpenGL.ActiveAttribType.FloatVec3, "position", 4,
+                vertices.SelectMany(x => x.ToFloatArray()).ToArray().To2DArray(4, 3)));
+            AddAttribute(new PolyAttribute(1, OpenTK.Graphics.OpenGL.ActiveAttribType.FloatVec4, "color", 4,
+                colors.SelectMany(x => x.ToFloatArray()).ToArray().To2DArray(4, 4)));
+        }
+
+        private bool VerticesAreBasicallyEqual(Vector3 lhs, Vector3 rhs) {
+            if (lhs[0] > rhs[0] + 0.0001f || lhs[0] < rhs[0] - 0.0001f)
+                return false;
+            if (lhs[1] > rhs[1] + 0.0001f || lhs[1] < rhs[1] - 0.0001f)
+                return false;
+            if (lhs[2] > rhs[2] + 0.0001f || lhs[2] < rhs[2] - 0.0001f)
+                return false;
+            return true;
         }
 
         public void AddAttribute(PolyAttribute attr) {
             if (_attributesByName.ContainsKey(attr.Name))
                 throw new ArgumentException(nameof(attr.Name));
-            Attributes.Add(attr);
-            _attributesByName.Add(attr.Name, attr);
+
+            if (attr.Vertices != 4) {
+                try {
+                    throw new ArgumentException(nameof(attr.Vertices) + ": Is " + attr.Vertices + ", should be 4");
+                }
+                catch { }
+                return;
+            }
+
+            if (HasCenterVertex) {
+                // Produce a fifth center vertex attribute with an average of all 4 corners.
+                var length2 = attr.Data.GetLength(1);
+                var newData = new float[5, length2];
+                for (var i = 0; i < 4; i++) {
+                    for (var j = 0; j < length2; j++) {
+                        newData[i, j] = attr.Data[i, j];
+                        newData[4, j] += attr.Data[i, j];
+                    }
+                }
+                for (var j = 0; j < length2; j++)
+                    newData[4, j] /= 4.0f;
+
+                if (newData[4, 0] != attr.Data[0, 0])
+                    ;
+
+                var newAttr = new PolyAttribute(attr.Elements, attr.Type, attr.Name, 5, newData);
+                Attributes.Add(newAttr);
+                _attributesByName.Add(newAttr.Name, newAttr);
+            }
+            else {
+                Attributes.Add(attr);
+                _attributesByName.Add(attr.Name, attr);
+            }
         }
 
         public PolyAttribute GetAttributeByName(string name)
             => _attributesByName.TryGetValue(name, out var value) ? value : null;
 
         public List<PolyAttribute> Attributes { get; }
-        private Dictionary<string, PolyAttribute> _attributesByName;
+        private Dictionary<string, PolyAttribute> _attributesByName = [];
 
         public TextureAnimation TextureAnim { get; }
 
         public TextureRotateType TextureRotate { get; }
         public TextureFlipType TextureFlip { get; }
+
+        public bool HasCenterVertex { get; }
+        public int Vertices { get; }
     }
 }

@@ -36,7 +36,7 @@ namespace SF3.Win.OpenGL {
             }
 
             // Create the VBO.
-            var quadAttrs = quads[0].Attributes.Select(x => new VBO_Attribute(x.Elements, x.Type, x.Name)).ToDictionary(x => x.Name);
+            var quadAttrs = (quads.Length > 0) ? quads[0].Attributes.Select(x => new VBO_Attribute(x.Elements, x.Type, x.Name)).ToDictionary(x => x.Name) : [];
 
             var expectedAttrs = new List<VBO_Attribute>() {
                 new VBO_Attribute(1, ActiveAttribType.FloatVec3, "position"),
@@ -54,7 +54,8 @@ namespace SF3.Win.OpenGL {
             _vbo = new VBO(quadAttrs.Select(x => x.Value).ToArray());
 
             // Create the vertex buffer with all the data needed for each vertex.
-            _vertexBuffer = new float[_vbo.GetSizeInBytes(Quads.Length * 4) / sizeof(float)];
+            var totalVertices = Quads.Sum(x => x.Vertices);
+            _vertexBuffer = new float[_vbo.GetSizeInBytes(totalVertices) / sizeof(float)];
 
             foreach (var texInfo in Shader.TextureInfos)
                 AssignVertexBufferDefaultTexCoords(texInfo);
@@ -69,12 +70,26 @@ namespace SF3.Win.OpenGL {
             AssignVBO_Data();
 
             // Create indices for DrawElements().
-            // TODO: quads are malformed :( :( :(
+            uint vertexPos = 0;
             _elementBuffer = quads
-                .Select((x, i) => new { Quad = x, StartIndex = (uint) i * 4 })
-                .SelectMany(x => new uint[] {
-                    x.StartIndex + 0, x.StartIndex + 1, x.StartIndex + 2,
-                    x.StartIndex + 0, x.StartIndex + 2, x.StartIndex + 3
+                .SelectMany(x => {
+                    uint[] polys = null;
+                    if (x.HasCenterVertex) {
+                        polys = [
+                            vertexPos + 0, vertexPos + 1, vertexPos + 4,
+                            vertexPos + 1, vertexPos + 2, vertexPos + 4,
+                            vertexPos + 2, vertexPos + 3, vertexPos + 4,
+                            vertexPos + 3, vertexPos + 0, vertexPos + 4,
+                        ];
+                    }
+                    else {
+                        polys = [
+                            vertexPos + 0, vertexPos + 1, vertexPos + 2,
+                            vertexPos + 0, vertexPos + 2, vertexPos + 3,
+                        ];
+                    }
+                    vertexPos += (uint) x.Vertices;
+                    return polys;
                 })
                 .ToArray();
 
@@ -92,10 +107,14 @@ namespace SF3.Win.OpenGL {
                 return;
 
             var pos = vboAttr.OffsetInBytes.Value / sizeof(float);
+            var stride = _vbo.StrideInBytes / sizeof(float);
+
             foreach (var quad in Quads) {
                 var polyAttr = quad.GetAttributeByName(attrName);
                 if (polyAttr == null || !vboAttr.IsAssignable(polyAttr))
                     continue;
+                if (polyAttr.Vertices != quad.Vertices)
+                    ;
 
                 var vertices        = polyAttr.Data.GetLength(0);
                 var floatsPerVertex = polyAttr.Data.GetLength(1);
@@ -103,7 +122,7 @@ namespace SF3.Win.OpenGL {
                 for (var i = 0; i < vertices; i++) {
                     for (var j = 0; j < floatsPerVertex; j++)
                         _vertexBuffer[pos + j] = polyAttr.Data[i, j];
-                    pos += _vbo.StrideInBytes / sizeof(float);
+                    pos += stride;
                 }
             }
         }
@@ -124,9 +143,11 @@ namespace SF3.Win.OpenGL {
                 return false;
 
             var pos = vboAttr.OffsetInBytes.Value / sizeof(float);
+            var stride = _vbo.StrideInBytes / sizeof(float);
 
             // Update UV coordinates
             var modified = false;
+
             foreach (var quad in Quads) {
                 var frame = quad.TextureAnim?.GetFrame(_frame);
                 var texCoords = (frame != null)
@@ -139,8 +160,16 @@ namespace SF3.Win.OpenGL {
                         modified = true;
                     _vertexBuffer[pos + 0] = texCoords[vertexIndex].X;
                     _vertexBuffer[pos + 1] = texCoords[vertexIndex].Y;
-                    pos += _vbo.StrideInBytes / sizeof(float);
+                    pos += stride;
                 }
+
+                if (quad.Vertices == 5) {
+                    _vertexBuffer[pos + 0] = texCoords.Select(x => x.X).Average();
+                    _vertexBuffer[pos + 1] = texCoords.Select(x => x.Y).Average();
+                    pos += stride;
+                }
+                else if (quad.Vertices != 4)
+                    throw new InvalidOperationException("Quad should have either 4 or 5 (4+extra) vertices");
             }
 
             return modified;
@@ -152,10 +181,12 @@ namespace SF3.Win.OpenGL {
                 return;
 
             var pos = vboAttr.OffsetInBytes.Value / sizeof(float);
-            void SetTexCoord(int x, int y) {
+            var stride = _vbo.StrideInBytes / sizeof(float);
+
+            void SetTexCoord(float x, float y) {
                 _vertexBuffer[pos + 0] = x;
                 _vertexBuffer[pos + 1] = y;
-                pos += _vbo.StrideInBytes / sizeof(float);
+                pos += stride;
             };
 
             foreach (var quad in Quads) {
@@ -163,6 +194,11 @@ namespace SF3.Win.OpenGL {
                 SetTexCoord(Corner2UVX, Corner2UVY);
                 SetTexCoord(Corner3UVX, Corner3UVY);
                 SetTexCoord(Corner4UVX, Corner4UVY);
+
+                if (quad.Vertices == 5)
+                    SetTexCoord(0.5f, 0.5f);
+                else if (quad.Vertices != 4)
+                    throw new InvalidOperationException("Quad should have either 4 or 5 (4+extra) vertices");
             }
         }
 

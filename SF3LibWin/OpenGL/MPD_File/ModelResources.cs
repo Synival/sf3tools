@@ -9,7 +9,6 @@ using OpenTK.Graphics.OpenGL;
 using OpenTK.Mathematics;
 using SF3.Models.Files.MPD;
 using SF3.Models.Structs.MPD.Model;
-using SF3.Models.Tables;
 using SF3.Types;
 using SF3.Win.Extensions;
 

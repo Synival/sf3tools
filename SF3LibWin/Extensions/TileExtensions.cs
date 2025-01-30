@@ -12,9 +12,7 @@ namespace SF3.Win.Extensions {
 
             var heights = tile.GetSurfaceModelVertexHeights();
             if (scale != 1.00f) {
-                // The center height is just an average between these two heighs (not all four)
-                // because of the way quads are drawn as two triangles.
-                var centerHeight = (heights[0] + heights[2]) / 2;
+                var centerHeight = heights.Average();
                 for (var i = 0; i < 4; i++)
                     heights[i] = (heights[i] - centerHeight) * scale + centerHeight;
             }
