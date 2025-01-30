@@ -442,10 +442,13 @@ namespace SF3.Models.Files.MPD {
                 foreach (var frame in anim.Frames) {
                     var offset = frame.CompressedTextureOffset;
                     var existingFrame = Chunk3Frames.FirstOrDefault(x => x.Offset == offset);
-                    var referenceTex = GetTextureModelByID(frame.TextureID)?.Texture;
+
+                    var pixelFormat = ((frame.TextureID & 0x100) == 0x100) ? TexturePixelFormat.Palette3 : TexturePixelFormat.ABGR1555;
+                    var referenceTexID = ((frame.TextureID & 0x100) == 0x100) ? frame.TextureID - 0x100 : frame.TextureID;
+                    var referenceTex = GetTextureModelByID(referenceTexID)?.Texture;
 
                     if (existingFrame != null) {
-                        frame.FetchAndCacheTexture(existingFrame.Data.DecompressedData, chunk3Textures[offset].PixelFormat, GetPalette(chunk3Textures[offset].PixelFormat), referenceTex);
+                        frame.FetchAndCacheTexture(existingFrame.Data.DecompressedData, pixelFormat, GetPalette(pixelFormat), referenceTex);
                         continue;
                     }
 
@@ -456,17 +459,20 @@ namespace SF3.Models.Files.MPD {
                     ByteArraySegment byteArray = null;
 
                     try {
-                        var compressedBytes = Math.Min(uncompressedBytes16 + 8, ChunkData[3].Length - (int) offset);
-                        byteArray = new ByteArraySegment(ChunkData[3].Data, (int) offset, compressedBytes);
-                        newData = new CompressedData(byteArray, uncompressedBytes16);
-                        frame.FetchAndCacheTexture(newData.DecompressedData, TexturePixelFormat.ABGR1555, null, referenceTex);
+                        if (pixelFormat.BytesPerPixel() == 2) {
+                            var compressedBytes = Math.Min(uncompressedBytes16 + 8, ChunkData[3].Length - (int) offset);
+                            byteArray = new ByteArraySegment(ChunkData[3].Data, (int) offset, compressedBytes);
+                            newData = new CompressedData(byteArray, uncompressedBytes16);
+                            frame.FetchAndCacheTexture(newData.DecompressedData, pixelFormat, null, referenceTex);
+                        }
+                        else {
+                            var compressedBytes = Math.Min(uncompressedBytes8 + 8, ChunkData[3].Length - (int) offset);
+                            byteArray = new ByteArraySegment(ChunkData[3].Data, (int) offset, compressedBytes);
+                            newData = new CompressedData(byteArray, uncompressedBytes8);
+                            frame.FetchAndCacheTexture(newData.DecompressedData, pixelFormat, GetPalette(pixelFormat), referenceTex);
+                        }
                     }
-                    catch {
-                        var compressedBytes = Math.Min(uncompressedBytes8 + 8, ChunkData[3].Length - (int) offset);
-                        byteArray = new ByteArraySegment(ChunkData[3].Data, (int) offset, compressedBytes);
-                        newData = new CompressedData(byteArray, uncompressedBytes8);
-                        frame.FetchAndCacheTexture(newData.DecompressedData, TexturePixelFormat.UnknownPalette, GetPalette(TexturePixelFormat.UnknownPalette), referenceTex);
-                    }
+                    catch { }
 
                     if (newData != null && frame.Texture != null) {
                         byteArray.Redefine(byteArray.Offset, newData.LastDataReadForDecompress.Value); // Sets the correct compressed size, which wasn't available before

@@ -142,6 +142,9 @@ namespace SF3.Win.OpenGL.MPD_File {
                     if (textureId != 0xFF && texturesById.ContainsKey(textureId)) {
                         if (animationsById.ContainsKey(textureId))
                             anim = new TextureAnimation(textureId, animationsById[textureId].Textures, animationsById[textureId].FrameTimerStart);
+                        // TODO: this isn't quite right... it should check to see if it's in the "Palette3" list
+                        else if (animationsById.ContainsKey(textureId + 0x100))
+                            anim = new TextureAnimation(textureId + 0x100, animationsById[textureId + 0x100].Textures, animationsById[textureId + 0x100].FrameTimerStart);
                         else if (texturesById.ContainsKey(textureId))
                             anim = new TextureAnimation(textureId, [texturesById[textureId]], 0);
                     }
