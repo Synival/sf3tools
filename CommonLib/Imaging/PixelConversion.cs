@@ -55,9 +55,9 @@ namespace CommonLib.Imaging {
             };
         }
 
-        public static PixelChannels IndexedToChannels(byte input, Palette palette) {
+        public static PixelChannels IndexedToChannels(byte input, Palette palette, bool zeroIsTransparent) {
             return new PixelChannels {
-                a = (byte) ((input == 0) ? 0 : 255),
+                a = (byte) ((zeroIsTransparent && input == 0) ? 0 : 255),
                 r = palette[input].r,
                 g = palette[input].g,
                 b = palette[input].b
@@ -94,9 +94,9 @@ namespace CommonLib.Imaging {
         public static uint BGRA8888toARGB8888(uint input) => BGRA8888toChannels(input).ToARGB8888();
         public static uint BGRA8888toABGR8888(uint input) => BGRA8888toChannels(input).ToBGRA8888();
 
-        public static ushort IndexedToABGR1555(byte input, Palette palette) => IndexedToChannels(input, palette).ToABGR1555();
-        public static uint IndexedToABGR8888(byte input, Palette palette) => IndexedToChannels(input, palette).ToABGR8888();
-        public static ushort IndexedToARGB1555(byte input, Palette palette) => IndexedToChannels(input, palette).ToARGB1555();
-        public static uint IndexedToARGB8888(byte input, Palette palette) => IndexedToChannels(input, palette).ToARGB8888();
+        public static ushort IndexedToABGR1555(byte input, Palette palette, bool zeroIsTransparent) => IndexedToChannels(input, palette, zeroIsTransparent).ToABGR1555();
+        public static uint IndexedToABGR8888(byte input, Palette palette, bool zeroIsTransparent) => IndexedToChannels(input, palette, zeroIsTransparent).ToABGR8888();
+        public static ushort IndexedToARGB1555(byte input, Palette palette, bool zeroIsTransparent) => IndexedToChannels(input, palette, zeroIsTransparent).ToARGB1555();
+        public static uint IndexedToARGB8888(byte input, Palette palette, bool zeroIsTransparent) => IndexedToChannels(input, palette, zeroIsTransparent).ToARGB8888();
     }
 }

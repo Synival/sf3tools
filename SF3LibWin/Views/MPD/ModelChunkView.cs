@@ -1,7 +1,6 @@
 ﻿using System.Linq;
 using System.Windows.Forms;
 using SF3.Models.Tables.MPD.Model;
-using static SF3.Models.Files.MPD.ModelCollection;
 
 namespace SF3.Win.Views.MPD {
     public class ModelChunkView : TabView {
