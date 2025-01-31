@@ -51,24 +51,22 @@ namespace SF3.Win.Views.MPD {
 
             // TODO: The view layer shouldn't be accessing this itself. Use an ITexture in IMPD_File.
             // TODO: This needs a separate view which takes multiple chunks as an input.
-            if (Model.MPDHeader[0].HasSkyBox) {
-                foreach (var chunk in Model.SkyboxChunkData) {
-                    var width = Math.Min(512, chunk.DecompressedData.Length);
-                    var height = chunk.DecompressedData.Length / width;
+            foreach (var chunk in Model.SkyboxChunkData) {
+                var width = Math.Min(512, chunk.DecompressedData.Length);
+                var height = chunk.DecompressedData.Length / width;
 
-                    var imageData = chunk.DecompressedData.GetDataCopyAt(0, width * height).To2DArrayColumnMajor(width, height);
-                    var palette = (Model.PaletteTables[1] != null) ? new Palette(Model.PaletteTables[1].Select(x => x.ColorABGR1555).ToArray()) : new Palette(256);
-                    var bitmapData = BitmapUtils.ConvertIndexedDataToABGR8888BitmapData(imageData, palette, false);
+                var imageData = chunk.DecompressedData.GetDataCopyAt(0, width * height).To2DArrayColumnMajor(width, height);
+                var palette = (Model.PaletteTables[1] != null) ? new Palette(Model.PaletteTables[1].Select(x => x.ColorABGR1555).ToArray()) : new Palette(256);
+                var bitmapData = BitmapUtils.ConvertIndexedDataToABGR8888BitmapData(imageData, palette, false);
 
-                    var bitmap = new Bitmap(width, height, PixelFormat.Format32bppArgb);
-                    unsafe {
-                        var bitmapLock = bitmap.LockBits(new Rectangle(0, 0, width, height), ImageLockMode.WriteOnly, bitmap.PixelFormat);
-                        Marshal.Copy(bitmapData, 0, bitmapLock.Scan0, bitmapData.Length);
-                        bitmap.UnlockBits(bitmapLock);
-                    }
-
-                    AddChunkView(chunk.Index, "Skybox", (name) => new TextureView(name, bitmap, 2));
+                var bitmap = new Bitmap(width, height, PixelFormat.Format32bppArgb);
+                unsafe {
+                    var bitmapLock = bitmap.LockBits(new Rectangle(0, 0, width, height), ImageLockMode.WriteOnly, bitmap.PixelFormat);
+                    Marshal.Copy(bitmapData, 0, bitmapLock.Scan0, bitmapData.Length);
+                    bitmap.UnlockBits(bitmapLock);
                 }
+
+                AddChunkView(chunk.Index, "Skybox", (name) => new TextureView(name, bitmap, 2));
             }
 
             // Add chunks, sorted by their chunk index.

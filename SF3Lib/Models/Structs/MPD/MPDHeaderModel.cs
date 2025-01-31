@@ -93,9 +93,6 @@ namespace SF3.Models.Structs.MPD {
 
         public ScenarioType Scenario { get; }
 
-        public bool UseNewLighting =>
-            Scenario >= ScenarioType.Scenario2 && (MapFlags & 0x2000) == 0x2000;
-
         public bool HasPalette3 => Scenario >= ScenarioType.Scenario3;
 
         public bool HasIndexedTextures => Scenario >= ScenarioType.Scenario3;
@@ -116,10 +113,22 @@ namespace SF3.Models.Structs.MPD {
             }
         }
 
-        [TableViewModelColumn(displayOrder: 0.2f, displayName: "HasSkyBox")]
+        [TableViewModelColumn(displayOrder: 0.2f, displayName: "HasSkyBox (Scn1)")]
         public bool HasSkyBox {
-            get => (MapFlags & 0x2000) == 0x2000;
-            set => MapFlags = (ushort) ((MapFlags & ~0x2000) | (value ? 0x2000 : 0));
+            get => Scenario == ScenarioType.Scenario1 && (MapFlags & 0x2000) == 0x2000;
+            set {
+                if (Scenario == ScenarioType.Scenario1)
+                    MapFlags = (ushort) ((MapFlags & ~0x2000) | (value ? 0x2000 : 0));
+            }
+        }
+
+        [TableViewModelColumn(displayOrder: 0.3f, displayName: "UseNewLighting (Scn2+)")]
+        public bool UseNewLighting {
+            get => Scenario >= ScenarioType.Scenario2 && (MapFlags & 0x2000) == 0x2000;
+            set {
+                if (Scenario == ScenarioType.Scenario2)
+                    MapFlags = (ushort) ((MapFlags & ~0x2000) | (value ? 0x2000 : 0));
+            }
         }
 
         [BulkCopy]

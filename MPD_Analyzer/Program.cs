@@ -40,6 +40,9 @@ namespace MPD_Analyzer {
                         using (var mpdFile = MPD_File.Create(byteData, nameGetterContexts)) {
                             Console.WriteLine(scenario.ToString() + ": " + Path.GetFileName(file) + ":");
 
+                            var header = mpdFile.MPDHeader[0];
+                            var chunkHeaders = mpdFile.ChunkHeader;
+
                             // Is this MPD file in the wrong format for this scenario? (Scenario 3 and Premium Disk are the same)
                             // (This actually happens!)
                             var expectedScenario = (scenario == ScenarioType.PremiumDisk) ? ScenarioType.Scenario3 : scenario;
@@ -48,8 +51,8 @@ namespace MPD_Analyzer {
 
                             // Anything Scenario 2 or higher should have addresses for Chunk[20] and Chunk[21].
                             bool shouldHaveChunk20_21 = mpdFile.Scenario >= ScenarioType.Scenario2;
-                            bool hasChunk20 = mpdFile.ChunkHeader[20].ChunkAddress > 0;
-                            bool hasChunk21 = mpdFile.ChunkHeader[21].ChunkAddress > 0;
+                            bool hasChunk20 = chunkHeaders[20].ChunkAddress > 0;
+                            bool hasChunk21 = chunkHeaders[21].ChunkAddress > 0;
 
                             if (shouldHaveChunk20_21 != hasChunk20)
                                 Console.WriteLine("  !!! Chunk[20] problem! ShouldHave=" + shouldHaveChunk20_21 + ", DoesHave=" + hasChunk20);
@@ -57,24 +60,24 @@ namespace MPD_Analyzer {
                                 Console.WriteLine("  !!! Chunk[21] problem! ShouldHave=" + shouldHaveChunk20_21 + ", DoesHave=" + hasChunk21);
 
                             // Only a few files have both Chunk[1] and Chunk[20]. Let's log them.
-                            if (mpdFile.ChunkHeader[1].Exists && mpdFile.ChunkHeader[20].Exists && mpdFile.SurfaceModelChunkIndex != 20)
-                                Console.WriteLine("  Has Chunk1 and Chunk20");
+                            if (chunkHeaders[1].Exists && chunkHeaders[20].Exists && mpdFile.SurfaceModelChunkIndex != 20)
+                                Console.WriteLine("  Info: has Chunk[1] and Chunk[20]");
 
                             // For Scenario 2 onwards, if Chunk 2 is empty, Chunk 20 should probably have the surface data, or nothing at all.
                             if (mpdFile.Scenario >= ScenarioType.Scenario2) {
-                                if (!mpdFile.ChunkHeader[2].Exists) {
+                                if (!chunkHeaders[2].Exists) {
                                     var fn = file;
-                                    if (mpdFile.ChunkHeader[20].Exists && mpdFile.ChunkHeader[20].ChunkSize != 0xCF00)
+                                    if (chunkHeaders[20].Exists && chunkHeaders[20].ChunkSize != 0xCF00)
                                         Console.WriteLine("  !!! Chunk[2] missing, Chunk[20] present, but not surface data!");
-                                    if (mpdFile.ChunkHeader[21].Exists)
+                                    if (chunkHeaders[21].Exists)
                                         Console.WriteLine("  !!! Chunk[2] missing, but Chunk[21] exists??");
                                 }
                                 else {
-                                    if (!mpdFile.ChunkHeader[20].Exists) {
+                                    if (!chunkHeaders[20].Exists) {
                                         // Three valid MPDs in Scenario 3 have Chunk[2] but no Chunk[20], but that's it.
                                         // This isn't the case in Scenario 2 or the Premium Disk.
                                         Console.WriteLine("  !!! Chunk[2] exists, but Chunk[20] should exist as well!");
-                                        if (mpdFile.ChunkHeader[21].Exists)
+                                        if (chunkHeaders[21].Exists)
                                             Console.WriteLine("  !!! Chunk[2] and Chunk[20] is missing, but Chunk[21] exists??");
                                     }
                                 }
@@ -82,7 +85,7 @@ namespace MPD_Analyzer {
 
                             // Anything Scenario 3 or higher should have Palette3.
                             bool shouldHavePalette3 = mpdFile.Scenario >= ScenarioType.Scenario3;
-                            bool hasPalette3 = mpdFile.MPDHeader.Data.GetWord(mpdFile.MPDHeader.Address + 0x44) == 0x0029;
+                            bool hasPalette3 = header.Data.GetWord(header.Address + 0x44) == 0x0029;
                             if (shouldHavePalette3 != hasPalette3)
                                 Console.WriteLine("  !!! Palette3 problem! ShouldHave=" + shouldHavePalette3 + ", DoesHave=" + hasPalette3);
 
@@ -127,17 +130,32 @@ namespace MPD_Analyzer {
                                 }
                             }
 
-                            var header = mpdFile.MPDHeader[0];
                             if (header.Padding1 != 0 || header.Padding2 != 0 || header.Padding3 != 0 || header.Padding4 != 0) {
                                 Console.WriteLine($"  !!! Padding has non-zero data:");
                                 Console.WriteLine($"    1={header.Padding1}, 2={header.Padding2}, 3={header.Padding3}, 4={header.Padding4}");
                             }
 
                             // Chunk[0] and Chunk[4] should always be empty.
-                            if (mpdFile.ChunkHeader[0].Exists)
+                            if (chunkHeaders[0].Exists)
                                 Console.WriteLine("  !!! Chunk[0] exists!");
-                            if (mpdFile.ChunkHeader[4].Exists)
+                            if (chunkHeaders[4].Exists)
                                 Console.WriteLine("  !!! Chunk[4] exists!");
+
+                            // Check Scenario 1 flags.
+                            if (scenario == ScenarioType.Scenario1) {
+                                if (header.HasSkyBox) {
+                                    if (!chunkHeaders[17].Exists)
+                                        Console.WriteLine("  !!! HasSkyBox is 'true', but Chunk[17] is missing!");
+                                    if (!chunkHeaders[18].Exists)
+                                        Console.WriteLine("  !!! HasSkyBox is 'true', but Chunk[18] is missing!");
+                                }
+                                else {
+                                    if (chunkHeaders[17].Exists)
+                                        Console.WriteLine("  !!! HasSkyBox is 'false', but Chunk[17] exists!");
+                                    if (chunkHeaders[18].Exists)
+                                        Console.WriteLine("  !!! HasSkyBox is 'false', but Chunk[18] exists!");
+                                }
+                            }
                         }
                     }
                     catch (Exception e) {

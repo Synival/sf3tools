@@ -193,14 +193,16 @@ namespace SF3.Models.Files.MPD {
             }
 
             // Sky boxes
+            var skyboxChunks = new List<IChunkData>();
             if (MPDHeader[0].HasSkyBox) {
-                var skyboxChunks = new List<IChunkData>();
+                // TODO: This only works for Scenario 1!
+                // TODO: What chunks are used in Scn2 and beyond? It seems to change!!
                 if (chunks[17].Exists)
                     skyboxChunks.Add(ChunkData[17] = MakeChunkData(17, true));
                 if (chunks[18].Exists)
                     skyboxChunks.Add(ChunkData[18] = MakeChunkData(18, true));
-                SkyboxChunkData = skyboxChunks.Where(x => x != null).ToArray();
             }
+            SkyboxChunkData = skyboxChunks.Where(x => x != null).ToArray();
 
             // Add remaining unhandled chunks.
             for (var i = 0; i < chunks.Length; i++) {
