@@ -116,6 +116,12 @@ namespace SF3.Models.Structs.MPD {
             }
         }
 
+        [TableViewModelColumn(displayOrder: 0.2f, displayName: "HasSkyBox")]
+        public bool HasSkyBox {
+            get => (MapFlags & 0x2000) == 0x2000;
+            set => MapFlags = (ushort) ((MapFlags & ~0x2000) | (value ? 0x2000 : 0));
+        }
+
         [BulkCopy]
         public ushort Padding1 {
             get => (ushort) Data.GetWord(padding1Address);

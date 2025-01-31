@@ -160,10 +160,12 @@ namespace SF3.Models.Files.MPD {
         private IChunkData[] MakeChunkDatas(ChunkHeader[] chunks) {
             ChunkData = new IChunkData[chunks.Length];
 
+            // Surface model chunk
             SurfaceModelChunkIndex = GetSurfaceModelChunkIndex(chunks);
             if (SurfaceModelChunkIndex != null)
                 ChunkData[SurfaceModelChunkIndex.Value] = MakeChunkData(SurfaceModelChunkIndex.Value, false);
 
+            // All model chunks
             ModelsChunkIndices = GetModelsChunkIndices(chunks);
             var modelsChunksList = new List<IChunkData>();
             foreach (var i in ModelsChunkIndices) {
@@ -172,8 +174,11 @@ namespace SF3.Models.Files.MPD {
             }
             this.ModelsChunkData = modelsChunksList.ToArray();
 
+            // Animated textures chunk
             if (chunks[3].Exists)
                 ChunkData[3] = MakeChunkData(3, false, "Individually Compressed");
+
+            // Surface chunk (heightmap, terrain, event IDs)
             if (chunks[5].Exists)
                 ChunkData[5] = MakeChunkData(5, true);
 
@@ -187,27 +192,26 @@ namespace SF3.Models.Files.MPD {
                 }
             }
 
-            // Scroll pane chunks.
-            // TODO: Do something with these!!
-            for (var i = 14; i <= 19; i++) {
-                if (chunks[i].Exists && ChunkData[i] == null && !(i == 19 && MPDHeader[0].HasChunk19Model)) {
-                    try {
-                        ChunkData[i] = MakeChunkData(i, true, "Compressed (WIP)");
-                    }
-                    catch {
-                        // TODO: report an error somehow
-                    }
-                }
+            // Sky boxes
+            if (MPDHeader[0].HasSkyBox) {
+                var skyboxChunks = new List<IChunkData>();
+                if (chunks[17].Exists)
+                    skyboxChunks.Add(ChunkData[17] = MakeChunkData(17, true));
+                if (chunks[18].Exists)
+                    skyboxChunks.Add(ChunkData[18] = MakeChunkData(18, true));
+                SkyboxChunkData = skyboxChunks.Where(x => x != null).ToArray();
             }
 
-            // TODO: what is Chunk[21]?
-            if (chunks[21].Exists)
-                ChunkData[21] = MakeChunkData(21, true);
-
             // Add remaining unhandled chunks.
-            for (var i = 0; i < chunks.Length; i++)
-                if (ChunkData[i] == null && chunks[i].Exists)
-                    ChunkData[i] = MakeChunkData(i, false, "(Unhandled)");
+            for (var i = 0; i < chunks.Length; i++) {
+                if (ChunkData[i] != null || !chunks[i].Exists)
+                    continue;
+
+                var isScrollPane = i >= 14 && i <= 19;
+                var isCompressed = isScrollPane || (i == 21);
+
+                ChunkData[i] = MakeChunkData(i, isCompressed, (isCompressed ? "Compressed" : "Uncompressed") + " (Unhandled)");
+            }
 
             return ChunkData;
         }
@@ -679,5 +683,6 @@ namespace SF3.Models.Files.MPD {
         public TextureCollection[] TextureCollections { get; private set; }
 
         public Tile[,] Tiles { get; } = new Tile[64, 64];
+        public IChunkData[] SkyboxChunkData { get; private set; }
     }
 }

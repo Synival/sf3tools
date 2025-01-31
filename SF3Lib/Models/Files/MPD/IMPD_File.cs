@@ -59,5 +59,6 @@ namespace SF3.Models.Files.MPD {
         TextureCollection[] TextureCollections { get; }
 
         Tile[,] Tiles { get; }
+        IChunkData[] SkyboxChunkData { get; }
     }
 }

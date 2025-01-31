@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using CommonLib.Extensions;
 using CommonLib.Imaging;
@@ -48,35 +49,25 @@ namespace SF3.Win.Views.MPD {
                     if (texCollection != null)
                         AddChunkView(texCollection.ChunkIndex, "Textures", (name) => new TextureChunkView(name, texCollection));
 
-            // TODO: Temporary. These are likely just scroll panes. For now, just draw every other chunk as an image.
-            foreach (var chunk in Model.ChunkData) {
-                if (chunk != null && !chunkViews.ContainsKey(chunk.Index)) {
+            // TODO: The view layer shouldn't be accessing this itself. Use an ITexture in IMPD_File.
+            // TODO: This needs a separate view which takes multiple chunks as an input.
+            if (Model.MPDHeader[0].HasSkyBox) {
+                foreach (var chunk in Model.SkyboxChunkData) {
                     var width = Math.Min(512, chunk.DecompressedData.Length);
                     var height = chunk.DecompressedData.Length / width;
 
                     var imageData = chunk.DecompressedData.GetDataCopyAt(0, width * height).To2DArrayColumnMajor(width, height);
+                    var palette = (Model.PaletteTables[1] != null) ? new Palette(Model.PaletteTables[1].Select(x => x.ColorABGR1555).ToArray()) : new Palette(256);
+                    var bitmapData = BitmapUtils.ConvertIndexedDataToABGR8888BitmapData(imageData, palette, false);
 
-                    var uniquePalettes = Model.PaletteTables.Where(x => x != null).GroupBy(x => x.Address).Select(x => x.First()).ToArray();
-                    var palettes = uniquePalettes .Select(x => x != null ? new Palette(x.Select(x => x.ColorABGR1555).ToArray()) : null).ToArray();
-                    var bitmapDatas = palettes.Select(x => x != null ? BitmapUtils.ConvertIndexedDataToABGR8888BitmapData(imageData, x, false) : null).ToArray();
-                    var bitmapHeight = bitmapDatas.Sum(x => x != null ? height : 0);
-                    var bitmapData = new byte[width * bitmapHeight * 4];
-
-                    var pos = 0;
-                    foreach (var bd in bitmapDatas) {
-                        if (bd != null) {
-                            bd.CopyTo(bitmapData, pos);
-                            pos += bd.Length;
-                        }
-                    }
-
-                    Bitmap bitmap = null;
+                    var bitmap = new Bitmap(width, height, PixelFormat.Format32bppArgb);
                     unsafe {
-                        fixed (byte* bitmapDataPtr = bitmapData)
-                            bitmap = new Bitmap(width, bitmapHeight, width * 4, PixelFormat.Format32bppArgb, (nint) bitmapDataPtr);
+                        var bitmapLock = bitmap.LockBits(new Rectangle(0, 0, width, height), ImageLockMode.WriteOnly, bitmap.PixelFormat);
+                        Marshal.Copy(bitmapData, 0, bitmapLock.Scan0, bitmapData.Length);
+                        bitmap.UnlockBits(bitmapLock);
                     }
 
-                    AddChunkView(chunk.Index, "Image", (name) => new TextureView(name, bitmap, 2));
+                    AddChunkView(chunk.Index, "Skybox", (name) => new TextureView(name, bitmap, 2));
                 }
             }
 
