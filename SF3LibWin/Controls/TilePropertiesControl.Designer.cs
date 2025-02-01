@@ -158,6 +158,8 @@
             // 
             // cbMoveTerrain
             // 
+            cbMoveTerrain.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            cbMoveTerrain.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             cbMoveTerrain.FormattingEnabled = true;
             cbMoveTerrain.Location = new System.Drawing.Point(73, 22);
             cbMoveTerrain.Name = "cbMoveTerrain";

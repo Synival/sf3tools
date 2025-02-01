@@ -1,4 +1,5 @@
 ﻿using CommonLib.Attributes;
+using CommonLib.Imaging;
 using CommonLib.Types;
 using SF3.ByteData;
 
@@ -108,6 +109,16 @@ namespace SF3.Models.Structs.MPD.Model {
         public ushort ColorNo {
             get => (ushort) Data.GetWord(_colorNoAddr);
             set => Data.SetWord(_colorNoAddr, value);
+        }
+
+        [TableViewModelColumn(displayName: "HTML Color", displayOrder: 4.5f, displayFormat: "X", minWidth: 80)]
+        public string HtmlColor {
+            get => PixelConversion.ABGR1555toChannels((ushort) Data.GetWord(_colorNoAddr)).ToHtmlColor();
+            set {
+                if (!PixelConversion.IsValidHtmlColor(value))
+                    return;
+                ColorNo = PixelChannels.FromHtmlColor(value, 255).ToABGR1555();
+            }
         }
 
         [BulkCopy]

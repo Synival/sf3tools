@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using CommonLib;
 using CommonLib.Types;
@@ -264,6 +265,9 @@ namespace SF3.Win.Controls {
             }
         }
 
+        [DllImport("user32.dll")]
+        public static extern int SendMessage(IntPtr hWnd, int wMsg, IntPtr wParam, IntPtr lParam);
+
         private Dictionary<NumericUpDown, bool> _nudSelectAll = [];
 
         private void RecursivelyAttachedEventsToControls(Control control) {
@@ -279,7 +283,7 @@ namespace SF3.Win.Controls {
 
                 // Selecting the control should highlight all text.
                 if (c is NumericUpDown nud) {
-                    // The NumericUpDown is frustrating. The 'enter' event *on tab* will selects all the text, but not when clicking it.
+                    // The NumericUpDown is frustrating. The 'enter' event *on tab* will select all the text, but not when clicking it.
                     // The selection is probably overridden on click for some reason. So: select text always, and on MouseDown (which
                     // happens after 'Enter'), select text again. If the 'KeyUp' event is received (which happens after 'Tab'), disrecard
                     // the '_nudSelectAll[nud]' flag.
@@ -299,8 +303,16 @@ namespace SF3.Win.Controls {
                 }
                 if (c is TextBox tb)
                     tb.Enter += (s, e) => tb.SelectAll();
-                else if (c is ComboBox cb)
+                else if (c is ComboBox cb) {
                     cb.Enter += (s, e) => cb.Select(0, cb.Text.Length);
+
+                    // Hit 'enter' before leaving a combo box to select whatever item the highlighted text was referring to
+                    cb.LostFocus += (s, e) => {
+                        const int WM_KEYDOWN = 0x0100;
+                        const int VK_RETURN  = 0x0D;
+                        SendMessage(cb.Handle, WM_KEYDOWN, VK_RETURN, 0);
+                    };
+                }
                 else
                     RecursivelyAttachedEventsToControls(c);
             }
