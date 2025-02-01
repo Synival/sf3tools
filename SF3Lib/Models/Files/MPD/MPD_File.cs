@@ -147,7 +147,9 @@ namespace SF3.Models.Files.MPD {
             var tables = new List<ITable>();
 
             if (header.OffsetUnknown1 != 0)
-                tables.Add(OffsetUnknown1Table = UnknownUInt16Table.Create(Data, "Unknown1", header.OffsetUnknown1 - c_RamOffset, 32, null));
+                tables.Add(OffsetUnknown1Table = UnknownUInt16Table.Create(Data, "Unknown1", header.OffsetUnknown1 - c_RamOffset, 32, 0xFFFF));
+            if (header.OffsetUnknown2 != 0)
+                tables.Add(OffsetUnknown2Table = UnknownUInt16Table.Create(Data, "Unknown2", header.OffsetUnknown2 - c_RamOffset, 32, 0xFFFF));
             if (header.OffsetModelSwitchGroups != 0)
                 tables.Add(OffsetModelSwitchGroupsTable = OffsetModelSwitchGroupsTable.Create(Data, "ModelSwitchGroups", header.OffsetModelSwitchGroups - c_RamOffset));
             if (header.OffsetScrollScreenAnimation != 0)
@@ -753,6 +755,9 @@ namespace SF3.Models.Files.MPD {
 
         [BulkCopyRecurse]
         public TextureAnimationTable TextureAnimations { get; private set; }
+
+        [BulkCopyRecurse]
+        public UnknownUInt16Table OffsetUnknown2Table { get; private set; }
 
         public List<Chunk3Frame> Chunk3Frames { get; private set; }
 

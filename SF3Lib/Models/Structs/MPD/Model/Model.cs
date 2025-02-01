@@ -215,8 +215,8 @@ namespace SF3.Models.Structs.MPD.Model {
         }
 
         [BulkCopy]
-        [TableViewModelColumn(displayOrder: 17)]
-        public ushort ModelID {
+        [TableViewModelColumn(displayOrder: 17, displayName: "Tag (unused?)")]
+        public ushort Tag {
             get => (ushort) Data.GetWord(_modelIdAddress);
             set => Data.SetWord(_modelIdAddress, value);
         }

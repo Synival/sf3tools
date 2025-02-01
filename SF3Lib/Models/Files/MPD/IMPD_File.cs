@@ -52,6 +52,7 @@ namespace SF3.Models.Files.MPD {
         ColorTable[] PaletteTables { get; }
         TextureIDTable IndexedTextureTable { get; }
         TextureAnimationTable TextureAnimations { get; }
+        UnknownUInt16Table OffsetUnknown2Table { get; }
         BoundaryTable BoundariesTable { get; }
 
         /// <summary>
