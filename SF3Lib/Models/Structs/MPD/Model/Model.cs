@@ -227,5 +227,11 @@ namespace SF3.Models.Structs.MPD.Model {
             get => (ushort) Data.GetWord(_flagsAddress);
             set => Data.SetWord(_flagsAddress, value);
         }
+
+        [TableViewModelColumn(displayOrder: 18.1f)]
+        public bool AlwaysFacesCamera {
+            get => (Flags & 0x08) == 0x08;
+            set => Flags = (ushort) ((Flags & ~0x08) | (value ? 0x08 : 0x00));
+        }
     }
 }

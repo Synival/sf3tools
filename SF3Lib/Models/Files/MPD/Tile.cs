@@ -156,6 +156,9 @@ namespace SF3.Models.Files.MPD {
             }
         }
 
+        public int? TreeModelChunkIndex { get; set; } = null;
+        public int? TreeModelID { get; set; } = null;
+
         public float GetModelVertexHeightmap(CornerType corner) {
             var bl = BlockVertexLocations[corner];
             return MPD_File.SurfaceModel.VertexHeightBlockTable[bl.Num][bl.X, bl.Y] / 16f;

@@ -5,6 +5,7 @@ using CommonLib.Arrays;
 using CommonLib.Attributes;
 using CommonLib.Imaging;
 using CommonLib.NamedValues;
+using CommonLib.SGL;
 using SF3.ByteData;
 using SF3.Models.Structs.MPD;
 using SF3.Models.Structs.MPD.TextureChunk;
@@ -598,6 +599,96 @@ namespace SF3.Models.Files.MPD {
             for (var x = 0; x < 64; x++)
                 for (var y = 0; y < 64; y++)
                     Tiles[x, y] = new Tile(this, x, y);
+        }
+
+        private struct TreeModelInfo {
+            public ModelCollection ModelCollection;
+            public Structs.MPD.Model.Model Model;
+            public VECTOR TilePosition;
+            public Tile Tile;
+            public float Distance;
+        }
+
+        public void AssociateTilesWithTrees() {
+            ResetTileTrees();
+
+            // Gather a list of models that appear to be trees, associated with their tile.
+            var treeModels = new List<TreeModelInfo>();
+            foreach (var mc in ModelCollections) {
+                if (mc == null || !mc.ChunkIndex.HasValue)
+                    continue;
+
+                foreach (var model in mc.ModelTable) {
+                    // Trees always face the camera.
+                    if (!model.AlwaysFacesCamera)
+                        continue;
+
+                    // Look into the model...
+                    var pdataAddr = model.PData1;
+                    if (!mc.PDatasByMemoryAddress.ContainsKey(pdataAddr))
+                        continue;
+                    var pdata = mc.PDatasByMemoryAddress[pdataAddr];
+
+                    // Trees always have one polygon.
+                    var firstAttrAddr = pdata.AttributesOffset;
+                    if (firstAttrAddr == 0 || !mc.AttrTablesByMemoryAddress.ContainsKey(firstAttrAddr))
+                        continue;
+                    var attr = mc.AttrTablesByMemoryAddress[firstAttrAddr];
+                    if (attr.Length != 1)
+                        continue;
+
+                    // Get the tile at its location. Skip it if it's out of bounds.
+                    var tilePosition = new VECTOR(model.PositionX / -32.0f - 0.5f, model.PositionY / -32.0f, model.PositionZ / -32.0f - 0.5f);
+                    int tileX = (int) Math.Round(tilePosition.X.Float);
+                    int tileZ = (int) Math.Round(tilePosition.Z.Float);
+                    if (tileX < 0 || tileX >= 64 || tileZ < 0 || tileZ >= 64)
+                        continue;
+
+                    var tile = Tiles[tileX, tileZ];
+                    var tileY = tile.GetAverageHeight();
+
+                    // Trees should be very close to the center of the tile vertically.
+                    var distance = (new VECTOR(tileX, tileY, tileZ) - tilePosition).GetLength();
+                    if (Math.Abs(tileY - tilePosition.Y.Float) > 0.25f)
+                        continue;
+
+                    // Looks like a tree -- add it to the list.
+                    treeModels.Add(new TreeModelInfo() {
+                        ModelCollection = mc,
+                        Model = model,
+                        TilePosition = tilePosition,
+                        Tile = tile,
+                        Distance = distance
+                    });
+                }
+            }
+
+            // Sort trees by their distance to their tile, from closest to farthest.
+            // This can be considered their accuracy.
+            var mostAccurateTreesForTile = treeModels
+                .OrderBy(x => x.Distance)
+                .ToArray();
+
+            foreach (var tree in mostAccurateTreesForTile) {
+                // Skip tiles already accounted for by more accurate trees.
+                if (tree.Tile.TreeModelID.HasValue)
+                    continue;
+                tree.Tile.TreeModelChunkIndex = tree.ModelCollection.ChunkIndex;
+                tree.Tile.TreeModelID = tree.Model.ID;
+
+                // Uncomment this code to automatically fix tree locations and terrain types.
+#if false
+                tree.Tile.MoveTerrainType = TerrainType.Forest;
+                tree.Model.PositionX = (short) ((Math.Round(tree.Model.PositionX / -32.0f + 0.5f) - 0.5f) * -32.0f);
+                tree.Model.PositionY = (short) (tree.Tile.GetAverageHeight() * -32.0f);
+                tree.Model.PositionZ = (short) ((Math.Round(tree.Model.PositionZ / -32.0f + 0.5f) - 0.5f) * -32.0f);
+#endif
+            }
+        }
+
+        public void ResetTileTrees() {
+            foreach (var tile in Tiles)
+                tile.TreeModelID = null;
         }
 
         public override bool IsModified {

@@ -47,6 +47,7 @@
             cbModelFlip = new System.Windows.Forms.ComboBox();
             labelTileEdited = new System.Windows.Forms.Label();
             labelRealCoordinates = new System.Windows.Forms.Label();
+            cbModelHasTree = new System.Windows.Forms.CheckBox();
             gbMovement.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize) nudMoveHeightmapBR).BeginInit();
             ((System.ComponentModel.ISupportInitialize) nudMoveHeightmapBL).BeginInit();
@@ -208,6 +209,7 @@
             // 
             // gbModel
             // 
+            gbModel.Controls.Add(cbModelHasTree);
             gbModel.Controls.Add(nudModelTextureID);
             gbModel.Controls.Add(cbModelTileIsFlat);
             gbModel.Controls.Add(cbModelRotate);
@@ -217,7 +219,7 @@
             gbModel.Controls.Add(cbModelFlip);
             gbModel.Location = new System.Drawing.Point(3, 337);
             gbModel.Name = "gbModel";
-            gbModel.Size = new System.Drawing.Size(200, 153);
+            gbModel.Size = new System.Drawing.Size(200, 181);
             gbModel.TabIndex = 2;
             gbModel.TabStop = false;
             gbModel.Text = "Model";
@@ -236,26 +238,26 @@
             // 
             cbModelTileIsFlat.AutoSize = true;
             cbModelTileIsFlat.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point,  0);
-            cbModelTileIsFlat.Location = new System.Drawing.Point(6, 111);
+            cbModelTileIsFlat.Location = new System.Drawing.Point(6, 142);
             cbModelTileIsFlat.Name = "cbModelTileIsFlat";
             cbModelTileIsFlat.Size = new System.Drawing.Size(165, 34);
-            cbModelTileIsFlat.TabIndex = 11;
+            cbModelTileIsFlat.TabIndex = 12;
             cbModelTileIsFlat.Text = "Tile is Flat and Unlinked to\r\nNeighboring Tiles";
             cbModelTileIsFlat.UseVisualStyleBackColor = true;
             // 
             // cbModelRotate
             // 
             cbModelRotate.FormattingEnabled = true;
-            cbModelRotate.Location = new System.Drawing.Point(73, 49);
+            cbModelRotate.Location = new System.Drawing.Point(73, 80);
             cbModelRotate.Name = "cbModelRotate";
             cbModelRotate.Size = new System.Drawing.Size(121, 23);
-            cbModelRotate.TabIndex = 9;
+            cbModelRotate.TabIndex = 10;
             cbModelRotate.Text = "90° CW";
             // 
             // labelModelRotate
             // 
             labelModelRotate.AutoSize = true;
-            labelModelRotate.Location = new System.Drawing.Point(6, 52);
+            labelModelRotate.Location = new System.Drawing.Point(6, 83);
             labelModelRotate.Name = "labelModelRotate";
             labelModelRotate.Size = new System.Drawing.Size(44, 15);
             labelModelRotate.TabIndex = 13;
@@ -264,7 +266,7 @@
             // labelModelFlip
             // 
             labelModelFlip.AutoSize = true;
-            labelModelFlip.Location = new System.Drawing.Point(6, 81);
+            labelModelFlip.Location = new System.Drawing.Point(6, 112);
             labelModelFlip.Name = "labelModelFlip";
             labelModelFlip.Size = new System.Drawing.Size(29, 15);
             labelModelFlip.TabIndex = 12;
@@ -282,10 +284,10 @@
             // cbModelFlip
             // 
             cbModelFlip.FormattingEnabled = true;
-            cbModelFlip.Location = new System.Drawing.Point(73, 78);
+            cbModelFlip.Location = new System.Drawing.Point(73, 109);
             cbModelFlip.Name = "cbModelFlip";
             cbModelFlip.Size = new System.Drawing.Size(121, 23);
-            cbModelFlip.TabIndex = 10;
+            cbModelFlip.TabIndex = 11;
             cbModelFlip.Text = "Horizontal";
             // 
             // labelTileEdited
@@ -307,6 +309,16 @@
             labelRealCoordinates.TabIndex = 4;
             labelRealCoordinates.Text = "Center Real Coordinates:\r\nAddress 1:\r\nAddress 2:";
             // 
+            // cbModelHasTree
+            // 
+            cbModelHasTree.AutoSize = true;
+            cbModelHasTree.Location = new System.Drawing.Point(7, 54);
+            cbModelHasTree.Name = "cbModelHasTree";
+            cbModelHasTree.Size = new System.Drawing.Size(71, 19);
+            cbModelHasTree.TabIndex = 9;
+            cbModelHasTree.Text = "Has Tree";
+            cbModelHasTree.UseVisualStyleBackColor = true;
+            // 
             // TilePropertiesControl
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -319,7 +331,7 @@
             MaximumSize = new System.Drawing.Size(207, 10000);
             MinimumSize = new System.Drawing.Size(207, 494);
             Name = "TilePropertiesControl";
-            Size = new System.Drawing.Size(207, 494);
+            Size = new System.Drawing.Size(207, 521);
             gbMovement.ResumeLayout(false);
             gbMovement.PerformLayout();
             ((System.ComponentModel.ISupportInitialize) nudMoveHeightmapBR).EndInit();
@@ -363,5 +375,6 @@
         private System.Windows.Forms.NumericUpDown nudEventID;
         private System.Windows.Forms.NumericUpDown nudModelTextureID;
         private System.Windows.Forms.CheckBox cbMoveSlope;
+        private System.Windows.Forms.CheckBox cbModelHasTree;
     }
 }

@@ -134,6 +134,8 @@ namespace SF3.Win.Controls {
                 gbModel.Enabled = _tile != null && _tile.MPD_File.SurfaceModel != null;
                 if (!gbModel.Enabled) {
                     nudModelTextureID.Text = "";
+                    cbModelHasTree.Checked = false;
+                    cbModelHasTree.Enabled = false; // TODO: Let us use this!
                     cbModelRotate.SelectedItem = null;
                     cbModelRotate.Text = "";
                     cbModelRotate.Enabled = true;
@@ -146,6 +148,8 @@ namespace SF3.Win.Controls {
                 }
                 else {
                     InitNUD(nudModelTextureID, _tile.ModelTextureID);
+                    cbModelHasTree.Checked = _tile.TreeModelID != null;
+                    cbModelHasTree.Enabled = false; // TODO: Let us use this!
 
                     if (_tile.MPD_File.SurfaceModel.TileTextureRowTable.HasRotation) {
                         cbModelRotate.SelectedItem = _tile.ModelTextureRotate;

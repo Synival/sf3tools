@@ -25,6 +25,16 @@ namespace SF3.Models.Files.MPD {
         bool Recompress(bool onlyModified);
 
         /// <summary>
+        /// Scans the model collections for trees and associates them with specific tiles.
+        /// </summary>
+        void AssociateTilesWithTrees();
+
+        /// <summary>
+        /// Removes all associations between tree models and tiles.
+        /// </summary>
+        void ResetTileTrees();
+
+        /// <summary>
         /// Byte data for (de)compressed data for chunks
         /// </summary>
         IChunkData[] ChunkData { get; }
