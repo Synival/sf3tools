@@ -99,7 +99,7 @@ namespace SF3.MPD_Editor.Forms {
                 var textures1 = (File.TextureCollections == null) ? [] : File.TextureCollections
                     .Where(x => x != null && x.TextureTable != null)
                     .SelectMany(x => x.TextureTable)
-                    .Where(x => x.TextureIsLoaded)
+                    .Where(x => x.TextureIsLoaded && x.Collection == TextureCollectionType.PrimaryTextures)
                     .ToDictionary(x => x.Name, x => new { Model = (object) x, x.Texture });
 
                 var textures2 = (File.TextureAnimations == null) ? [] : File.TextureAnimations
@@ -221,7 +221,7 @@ namespace SF3.MPD_Editor.Forms {
                 var textures1 = (File.TextureCollections == null) ? [] : File.TextureCollections
                     .Where(x => x != null && x.TextureTable != null)
                     .SelectMany(x => x.TextureTable)
-                    .Where(x => x.TextureIsLoaded)
+                    .Where(x => x.TextureIsLoaded && x.Collection == TextureCollectionType.PrimaryTextures)
                     .ToDictionary(x => x.Name, x => x.Texture);
 
                 var textures2 = (File.TextureAnimations == null) ? [] : File.TextureAnimations
