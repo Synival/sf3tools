@@ -32,6 +32,11 @@ namespace SF3.Models.Files.MPD {
             // Get addresses we need to check.
             var headerAddrPtr = data.GetDouble(0x0000) - c_RamOffset;
             var headerAddr    = data.GetDouble(headerAddrPtr) - c_RamOffset;
+            var demoAddr      = data.GetDouble(headerAddr + 0x0030);
+
+            if ((demoAddr & 0xFFFF0000) == 0x00290000)
+                return ScenarioType.Demo;
+
             var palette3Addr  = data.GetDouble(headerAddr + 0x0044);
             var chunk21Addr   = data.GetDouble(0x20A8);
 
