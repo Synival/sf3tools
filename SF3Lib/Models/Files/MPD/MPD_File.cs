@@ -216,7 +216,14 @@ namespace SF3.Models.Files.MPD {
                 throw new ArgumentException(nameof(chunkIndex));
 
             var isCompressed = (compressionType == CompressionType.Compressed);
-            var newChunk = new ChunkData(new ByteArraySegment(Data.Data, ChunkHeader[chunkIndex].ChunkAddress - c_RamOffset, ChunkHeader[chunkIndex].ChunkSize), isCompressed, chunkIndex);
+            ChunkData newChunk = null;
+            try {
+                newChunk = new ChunkData(new ByteArraySegment(Data.Data, ChunkHeader[chunkIndex].ChunkAddress - c_RamOffset, ChunkHeader[chunkIndex].ChunkSize), isCompressed, chunkIndex);
+            }
+            catch {
+                // TODO: what to do???
+                return null;
+            }
             var chunkHeader = ChunkHeader[chunkIndex];
 
             chunkHeader.DecompressedSize = newChunk.DecompressedData.Length;
@@ -627,47 +634,52 @@ namespace SF3.Models.Files.MPD {
                     continue;
 
                 foreach (var model in mc.ModelTable) {
-                    // Trees always face the camera.
-                    if (!model.AlwaysFacesCamera)
-                        continue;
+                    try {
+                        // Trees always face the camera.
+                        if (!model.AlwaysFacesCamera)
+                            continue;
 
-                    // Look into the model...
-                    var pdataAddr = model.PData1;
-                    if (!mc.PDatasByMemoryAddress.ContainsKey(pdataAddr))
-                        continue;
-                    var pdata = mc.PDatasByMemoryAddress[pdataAddr];
+                        // Look into the model...
+                        var pdataAddr = model.PData1;
+                        if (!mc.PDatasByMemoryAddress.ContainsKey(pdataAddr))
+                            continue;
+                        var pdata = mc.PDatasByMemoryAddress[pdataAddr];
 
-                    // Trees always have one polygon.
-                    var firstAttrAddr = pdata.AttributesOffset;
-                    if (firstAttrAddr == 0 || !mc.AttrTablesByMemoryAddress.ContainsKey(firstAttrAddr))
-                        continue;
-                    var attr = mc.AttrTablesByMemoryAddress[firstAttrAddr];
-                    if (attr.Length != 1)
-                        continue;
+                        // Trees always have one polygon.
+                        var firstAttrAddr = pdata.AttributesOffset;
+                        if (firstAttrAddr == 0 || !mc.AttrTablesByMemoryAddress.ContainsKey(firstAttrAddr))
+                            continue;
+                        var attr = mc.AttrTablesByMemoryAddress[firstAttrAddr];
+                        if (attr.Length != 1)
+                            continue;
 
-                    // Get the tile at its location. Skip it if it's out of bounds.
-                    var tilePosition = new VECTOR(model.PositionX / -32.0f - 0.5f, model.PositionY / -32.0f, model.PositionZ / -32.0f - 0.5f);
-                    int tileX = (int) Math.Round(tilePosition.X.Float);
-                    int tileZ = (int) Math.Round(tilePosition.Z.Float);
-                    if (tileX < 0 || tileX >= 64 || tileZ < 0 || tileZ >= 64)
-                        continue;
+                        // Get the tile at its location. Skip it if it's out of bounds.
+                        var tilePosition = new VECTOR(model.PositionX / -32.0f - 0.5f, model.PositionY / -32.0f, model.PositionZ / -32.0f - 0.5f);
+                        int tileX = (int) Math.Round(tilePosition.X.Float);
+                        int tileZ = (int) Math.Round(tilePosition.Z.Float);
+                        if (tileX < 0 || tileX >= 64 || tileZ < 0 || tileZ >= 64)
+                            continue;
 
-                    var tile = Tiles[tileX, tileZ];
-                    var tileY = tile.GetAverageHeight();
+                        var tile = Tiles[tileX, tileZ];
+                        var tileY = tile.GetAverageHeight();
 
-                    // Trees should be very close to the center of the tile vertically.
-                    var distance = (new VECTOR(tileX, tileY, tileZ) - tilePosition).GetLength();
-                    if (Math.Abs(tileY - tilePosition.Y.Float) > 0.25f)
-                        continue;
+                        // Trees should be very close to the center of the tile vertically.
+                        var distance = (new VECTOR(tileX, tileY, tileZ) - tilePosition).GetLength();
+                        if (Math.Abs(tileY - tilePosition.Y.Float) > 0.25f)
+                            continue;
 
-                    // Looks like a tree -- add it to the list.
-                    treeModels.Add(new TreeModelInfo() {
-                        ModelCollection = mc,
-                        Model = model,
-                        TilePosition = tilePosition,
-                        Tile = tile,
-                        Distance = distance
-                    });
+                        // Looks like a tree -- add it to the list.
+                        treeModels.Add(new TreeModelInfo() {
+                            ModelCollection = mc,
+                            Model = model,
+                            TilePosition = tilePosition,
+                            Tile = tile,
+                            Distance = distance
+                        });
+                    }
+                    catch {
+                        // TODO: what to do in this case??
+                    }
                 }
             }
 

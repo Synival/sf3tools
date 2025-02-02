@@ -44,57 +44,81 @@ namespace SF3.Models.Files.MPD {
                 .ToArray();
 
             PDataTable = PDataTable.Create(Data, "PDATAs", pdataAddresses.Select(x => GetOffsetInChunk(x.AddressInMemory)).ToArray(), pdataAddresses.Select(x => x.Count).ToArray());
-            PDatasByMemoryAddress = PDataTable
-                .Select((PData, i) => new { PData, pdataAddresses[i].AddressInMemory })
-                .ToDictionary(x => x.AddressInMemory, x => x.PData);
+            try {
+                PDatasByMemoryAddress = PDataTable
+                    .Select((PData, i) => new { PData, pdataAddresses[i].AddressInMemory })
+                    .ToDictionary(x => x.AddressInMemory, x => x.PData);
+            }
+            catch {
+                // TODO: what to do on error??
+                PDatasByMemoryAddress = new Dictionary<int, PDataModel>();
+            }
 
-            VertexTablesByMemoryAddress = PDataTable
-                .Select(x => new ModelElementKey { AddressInMemory = x.VerticesOffset, Count = x.VertexCount })
-                .Where(x => x.AddressInMemory != 0)
-                .GroupBy(x => x.AddressInMemory)
-                .Select(x => {
-                    var first = x.First();
-                    first.Refs = x.Count();
-                    return first;
-                })
-                .OrderBy(x => x.AddressInMemory)
-                .ThenBy(x => x.Count)
-                .ToDictionary(
-                    x => x.AddressInMemory,
-                    x => VertexTable.Create(Data, "POINTs @ 0x" + x.AddressInMemory.ToString("X") + " (Count=" + x.Count + ", Refs=" + x.Refs + ")", GetOffsetInChunk(x.AddressInMemory), x.Count)
-                );
+            try {
+                VertexTablesByMemoryAddress = PDataTable
+                    .Select(x => new ModelElementKey { AddressInMemory = x.VerticesOffset, Count = x.VertexCount })
+                    .Where(x => x.AddressInMemory != 0)
+                    .GroupBy(x => x.AddressInMemory)
+                    .Select(x => {
+                        var first = x.First();
+                        first.Refs = x.Count();
+                        return first;
+                    })
+                    .OrderBy(x => x.AddressInMemory)
+                    .ThenBy(x => x.Count)
+                    .ToDictionary(
+                        x => x.AddressInMemory,
+                        x => VertexTable.Create(Data, "POINTs @ 0x" + x.AddressInMemory.ToString("X") + " (Count=" + x.Count + ", Refs=" + x.Refs + ")", GetOffsetInChunk(x.AddressInMemory), x.Count)
+                    );
+            }
+            catch {
+                // TODO: what to do on error??
+                VertexTablesByMemoryAddress = new Dictionary<int, VertexTable>();
+            }
 
-            PolygonTablesByMemoryAddress = PDataTable
-                .Select(x => new ModelElementKey { AddressInMemory = x.PolygonsOffset, Count = x.PolygonCount })
-                .Where(x => x.AddressInMemory != 0)
-                .GroupBy(x => x.AddressInMemory)
-                .Select(x => {
-                    var first = x.First();
-                    first.Refs = x.Count();
-                    return first;
-                })
-                .OrderBy(x => x.AddressInMemory)
-                .ThenBy(x => x.Count)
-                .ToDictionary(
-                    x => x.AddressInMemory,
-                    x => PolygonTable.Create(Data, "POLYGONs @ 0x" + x.AddressInMemory.ToString("X") + " (Count=" + x.Count + ", Refs=" + x.Refs + ")", GetOffsetInChunk(x.AddressInMemory), x.Count)
-                );
+            try {
+                PolygonTablesByMemoryAddress = PDataTable
+                    .Select(x => new ModelElementKey { AddressInMemory = x.PolygonsOffset, Count = x.PolygonCount })
+                    .Where(x => x.AddressInMemory != 0)
+                    .GroupBy(x => x.AddressInMemory)
+                    .Select(x => {
+                        var first = x.First();
+                        first.Refs = x.Count();
+                        return first;
+                    })
+                    .OrderBy(x => x.AddressInMemory)
+                    .ThenBy(x => x.Count)
+                    .ToDictionary(
+                        x => x.AddressInMemory,
+                        x => PolygonTable.Create(Data, "POLYGONs @ 0x" + x.AddressInMemory.ToString("X") + " (Count=" + x.Count + ", Refs=" + x.Refs + ")", GetOffsetInChunk(x.AddressInMemory), x.Count)
+                    );
+            }
+            catch {
+                // TODO: what to do on error??
+                PolygonTablesByMemoryAddress = new Dictionary<int, PolygonTable>();
+            }
 
-            AttrTablesByMemoryAddress = PDataTable
-                .Select(x => new ModelElementKey { AddressInMemory = x.AttributesOffset, Count = x.PolygonCount })
-                .Where(x => x.AddressInMemory != 0)
-                .GroupBy(x => x.AddressInMemory)
-                .Select(x => {
-                    var first = x.First();
-                    first.Refs = x.Count();
-                    return first;
-                })
-                .OrderBy(x => x.AddressInMemory)
-                .ThenBy(x => x.Count)
-                .ToDictionary(
-                    x => x.AddressInMemory,
-                    x => AttrTable.Create(Data, "ATTRs @ 0x" + x.AddressInMemory.ToString("X") + " (Count=" + x.Count + ", Refs=" + x.Refs + ")", GetOffsetInChunk(x.AddressInMemory), x.Count)
-                );
+            try {
+                AttrTablesByMemoryAddress = PDataTable
+                    .Select(x => new ModelElementKey { AddressInMemory = x.AttributesOffset, Count = x.PolygonCount })
+                    .Where(x => x.AddressInMemory != 0)
+                    .GroupBy(x => x.AddressInMemory)
+                    .Select(x => {
+                        var first = x.First();
+                        first.Refs = x.Count();
+                        return first;
+                    })
+                    .OrderBy(x => x.AddressInMemory)
+                    .ThenBy(x => x.Count)
+                    .ToDictionary(
+                        x => x.AddressInMemory,
+                        x => AttrTable.Create(Data, "ATTRs @ 0x" + x.AddressInMemory.ToString("X") + " (Count=" + x.Count + ", Refs=" + x.Refs + ")", GetOffsetInChunk(x.AddressInMemory), x.Count)
+                    );
+            }
+            catch {
+                // TODO: what to do on error??
+                AttrTablesByMemoryAddress = new Dictionary<int, AttrTable>();
+            }
 
             var tables = new List<ITable>() {
                 ModelsHeaderTable,

@@ -67,44 +67,49 @@ namespace SF3.Win.OpenGL.MPD_File {
             var boundaries = mpdFile.BoundariesTable;
 
             // Camera boundary coords
-            var camera = boundaries[0];
-            var ccX1 =  0.0f + camera.X1 / 32.00f + WorldResources.ModelOffsetX;
-            var ccY1 = 64.0f - camera.Y1 / 32.00f + WorldResources.ModelOffsetZ;
-            var ccX2 =  0.0f + camera.X2 / 32.00f + WorldResources.ModelOffsetX;
-            var ccY2 = 64.0f - camera.Y2 / 32.00f + WorldResources.ModelOffsetZ;
+            try {
+                var camera = boundaries[0];
+                var ccX1 =  0.0f + camera.X1 / 32.00f + WorldResources.ModelOffsetX;
+                var ccY1 = 64.0f - camera.Y1 / 32.00f + WorldResources.ModelOffsetZ;
+                var ccX2 =  0.0f + camera.X2 / 32.00f + WorldResources.ModelOffsetX;
+                var ccY2 = 64.0f - camera.Y2 / 32.00f + WorldResources.ModelOffsetZ;
 
-            // Battle boundary coords
-            var battle = boundaries[1];
-            var bcX1 =  0.0f + battle.X1 / 32.00f + WorldResources.ModelOffsetX;
-            var bcY1 = 64.0f - battle.Y1 / 32.00f + WorldResources.ModelOffsetZ;
-            var bcX2 =  0.0f + battle.X2 / 32.00f + WorldResources.ModelOffsetX;
-            var bcY2 = 64.0f - battle.Y2 / 32.00f + WorldResources.ModelOffsetZ;
+                // Battle boundary coords
+                var battle = boundaries[1];
+                var bcX1 =  0.0f + battle.X1 / 32.00f + WorldResources.ModelOffsetX;
+                var bcY1 = 64.0f - battle.Y1 / 32.00f + WorldResources.ModelOffsetZ;
+                var bcX2 =  0.0f + battle.X2 / 32.00f + WorldResources.ModelOffsetX;
+                var bcY2 = 64.0f - battle.Y2 / 32.00f + WorldResources.ModelOffsetZ;
 
-            // Fetch minimum height of the world.
-            var minHeight = mpdFile.Tiles.To1DArray().SelectMany(x => x.GetSurfaceModelVertexHeights()).Min();
+                // Fetch minimum height of the world.
+                var minHeight = mpdFile.Tiles.To1DArray().SelectMany(x => x.GetSurfaceModelVertexHeights()).Min();
 
-            var cameraQuads = new Quad[] {
-                new Quad([
-                    new Vector3(ccX1, minHeight, ccY1),
-                    new Vector3(ccX2, minHeight, ccY1),
-                    new Vector3(ccX2, minHeight, ccY2),
-                    new Vector3(ccX1, minHeight, ccY2)
-                ], new Vector4(1.00f, 0.00f, 0.00f, 0.25f))
-            };
-            CameraBoundaryModel = new QuadModel(cameraQuads);
+                var cameraQuads = new Quad[] {
+                    new Quad([
+                        new Vector3(ccX1, minHeight, ccY1),
+                        new Vector3(ccX2, minHeight, ccY1),
+                        new Vector3(ccX2, minHeight, ccY2),
+                        new Vector3(ccX1, minHeight, ccY2)
+                    ], new Vector4(1.00f, 0.00f, 0.00f, 0.25f))
+                };
+                CameraBoundaryModel = new QuadModel(cameraQuads);
 
-            var battleQuads = new Quad[] {
-                new Quad([
-                    new Vector3(bcX1, minHeight, bcY1),
-                    new Vector3(bcX2, minHeight, bcY1),
-                    new Vector3(bcX2, minHeight, bcY2),
-                    new Vector3(bcX1, minHeight, bcY2)
-                ], new Vector4(0.00f, 0.50f, 1.00f, 0.25f))
-            };
-            BattleBoundaryModel = new QuadModel(battleQuads);
+                var battleQuads = new Quad[] {
+                    new Quad([
+                        new Vector3(bcX1, minHeight, bcY1),
+                        new Vector3(bcX2, minHeight, bcY1),
+                        new Vector3(bcX2, minHeight, bcY2),
+                        new Vector3(bcX1, minHeight, bcY2)
+                    ], new Vector4(0.00f, 0.50f, 1.00f, 0.25f))
+                };
+                BattleBoundaryModel = new QuadModel(battleQuads);
 
-            Models.Add(CameraBoundaryModel);
-            Models.Add(BattleBoundaryModel);
+                Models.Add(CameraBoundaryModel);
+                Models.Add(BattleBoundaryModel);
+            }
+            catch {
+                // TODO: what to do in this case?
+            }
         }
 
         public void SetLightingTexture(Texture texture) {

@@ -9,6 +9,7 @@ using OpenTK.Graphics.OpenGL;
 using OpenTK.Mathematics;
 using SF3.Models.Files.MPD;
 using SF3.Models.Structs.MPD.Model;
+using SF3.Models.Tables.MPD.Model;
 using SF3.Types;
 using SF3.Win.Extensions;
 
@@ -86,9 +87,20 @@ namespace SF3.Win.OpenGL.MPD_File {
             if (pdata == null)
                 return;
 
-            var vertices = GetFromAnyCollection(mpdFile, mc => mc.VertexTablesByMemoryAddress,  pdata.VerticesOffset);
-            var polygons = GetFromAnyCollection(mpdFile, mc => mc.PolygonTablesByMemoryAddress, pdata.PolygonsOffset);
-            var attrs    = GetFromAnyCollection(mpdFile, mc => mc.AttrTablesByMemoryAddress,    pdata.AttributesOffset);
+            VertexTable  vertices = null;
+            PolygonTable polygons = null;
+            AttrTable    attrs    = null;
+
+            try {
+                vertices = GetFromAnyCollection(mpdFile, mc => mc.VertexTablesByMemoryAddress,  pdata.VerticesOffset);
+                polygons = GetFromAnyCollection(mpdFile, mc => mc.PolygonTablesByMemoryAddress, pdata.PolygonsOffset);
+                attrs    = GetFromAnyCollection(mpdFile, mc => mc.AttrTablesByMemoryAddress,    pdata.AttributesOffset);
+            }
+            catch {
+                // TODO: what to do in this case??
+                return;
+            }
+
             if (vertices == null || polygons == null || attrs == null)
                 return;
 
