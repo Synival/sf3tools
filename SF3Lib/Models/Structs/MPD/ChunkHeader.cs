@@ -1,5 +1,6 @@
 ﻿using CommonLib.Attributes;
 using SF3.ByteData;
+using SF3.Types;
 
 namespace SF3.Models.Structs.MPD {
     public class ChunkHeader : Struct {
@@ -29,9 +30,15 @@ namespace SF3.Models.Structs.MPD {
         [TableViewModelColumn(displayName: "Exists", displayOrder: 2)]
         public bool Exists => ChunkAddress > 0 && ChunkSize != 0;
 
-        [BulkCopy]
-        [TableViewModelColumn(displayName: "Compression Type", displayOrder: 3, isReadOnly: true, minWidth: 150)]
-        public string CompressionType { get; set; } = "(Unset)";
+        public ChunkType ChunkType { get; set; } = ChunkType.Unset;
+
+        [TableViewModelColumn(displayName: "Type", displayOrder: 3, isReadOnly: true, minWidth: 150)]
+        public string ChunkTypeForView => Exists ? ChunkType.ToString() : "--";
+
+        public CompressionType CompressionType { get; set; } = CompressionType.Unset;
+
+        [TableViewModelColumn(displayName: "Compression Type", displayOrder: 3.1f, isReadOnly: true, minWidth: 150)]
+        public string CompressionTypeForView => Exists ? CompressionType.ToString() : "--";
 
         [BulkCopy]
         [TableViewModelColumn(displayName: "Un/decompressed Size", displayFormat: "X4", displayOrder: 4, isReadOnly: true)]

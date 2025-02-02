@@ -95,14 +95,8 @@ namespace SF3.Models.Files.MPD {
             return tables.ToArray();
         }
 
-        private ChunkHeaderTable MakeChunkHeaderTable() {
-            // Create chunk data
-            ChunkHeader = ChunkHeaderTable.Create(Data, "ChunkHeader", 0x2000);
-            foreach (var chunkHeader in ChunkHeader)
-                chunkHeader.CompressionType = "--";
-
-            return ChunkHeader;
-        }
+        private ChunkHeaderTable MakeChunkHeaderTable()
+            => ChunkHeader = ChunkHeaderTable.Create(Data, "ChunkHeader", 0x2000);
 
         private ITable[] MakeTexturePaletteTables(MPDHeaderModel header) {
             PaletteTables = new ColorTable[3];
@@ -166,30 +160,30 @@ namespace SF3.Models.Files.MPD {
             // Surface model chunk
             SurfaceModelChunkIndex = GetSurfaceModelChunkIndex(chunks);
             if (SurfaceModelChunkIndex != null)
-                ChunkData[SurfaceModelChunkIndex.Value] = MakeChunkData(SurfaceModelChunkIndex.Value, false);
+                ChunkData[SurfaceModelChunkIndex.Value] = MakeChunkData(SurfaceModelChunkIndex.Value, ChunkType.SurfaceModel, CompressionType.Uncompressed);
 
             // All model chunks
             ModelsChunkIndices = GetModelsChunkIndices(chunks);
             var modelsChunksList = new List<IChunkData>();
             foreach (var i in ModelsChunkIndices) {
-                ChunkData[i] = MakeChunkData(i, false);
+                ChunkData[i] = MakeChunkData(i, ChunkType.Models, CompressionType.Uncompressed);
                 modelsChunksList.Add(ChunkData[i]);
             }
             this.ModelsChunkData = modelsChunksList.ToArray();
 
             // Animated textures chunk
             if (chunks[3].Exists)
-                ChunkData[3] = MakeChunkData(3, false, "Individually Compressed");
+                ChunkData[3] = MakeChunkData(3, ChunkType.AnimationFrames, CompressionType.IndividuallyCompressed);
 
             // Surface chunk (heightmap, terrain, event IDs)
             if (chunks[5].Exists)
-                ChunkData[5] = MakeChunkData(5, true);
+                ChunkData[5] = MakeChunkData(5, ChunkType.Surface, CompressionType.Compressed);
 
             // Texture data, in chunks (6...13)
             for (var i = 6; i <= 13; i++)
-                ChunkData[i] = MakeChunkData(i, true);
+                ChunkData[i] = MakeChunkData(i, ChunkType.Textures, CompressionType.Compressed);
             if (chunks[21].Exists)
-                ChunkData[21] = MakeChunkData(21, true);
+                ChunkData[21] = MakeChunkData(21, ChunkType.Textures, CompressionType.Compressed);
 
             // Sky boxes
             var skyboxChunks = new List<IChunkData>();
@@ -197,28 +191,23 @@ namespace SF3.Models.Files.MPD {
                 // TODO: This only works for Scenario 1!
                 // TODO: What chunks are used in Scn2 and beyond? It seems to change!!
                 if (chunks[17].Exists)
-                    skyboxChunks.Add(ChunkData[17] = MakeChunkData(17, true));
+                    skyboxChunks.Add(ChunkData[17] = MakeChunkData(17, ChunkType.SkyBox, CompressionType.Compressed));
                 if (chunks[18].Exists)
-                    skyboxChunks.Add(ChunkData[18] = MakeChunkData(18, true));
+                    skyboxChunks.Add(ChunkData[18] = MakeChunkData(18, ChunkType.SkyBox, CompressionType.Compressed));
             }
             SkyBoxChunkData = skyboxChunks.Where(x => x != null).ToArray();
 
             // Add remaining unhandled chunks.
-            for (var i = 0; i < chunks.Length; i++) {
-                if (ChunkData[i] != null || !chunks[i].Exists)
-                    continue;
-
-                var isScrollPane = i >= 14 && i <= 19;
-                var isCompressed = isScrollPane || (i == 21);
-
-                ChunkData[i] = MakeChunkData(i, isCompressed, (isCompressed ? "Compressed" : "Uncompressed") + " (Unhandled)");
-            }
+            for (var i = 0; i < chunks.Length; i++)
+                if (ChunkData[i] == null && chunks[i].Exists)
+                    ChunkData[i] = MakeChunkData(i, ChunkType.Unknown, CompressionType.Uncompressed);
 
             return ChunkData;
         }
 
-        private IChunkData MakeChunkData(int chunkIndex, bool chunkIsCompressed, string compressionType = null) {
-            var newChunk = new ChunkData(new ByteArraySegment(Data.Data, ChunkHeader[chunkIndex].ChunkAddress - c_RamOffset, ChunkHeader[chunkIndex].ChunkSize), chunkIsCompressed, chunkIndex);
+        private IChunkData MakeChunkData(int chunkIndex, ChunkType type, CompressionType compressionType) {
+            var isCompressed = (compressionType == CompressionType.Compressed);
+            var newChunk = new ChunkData(new ByteArraySegment(Data.Data, ChunkHeader[chunkIndex].ChunkAddress - c_RamOffset, ChunkHeader[chunkIndex].ChunkSize), isCompressed, chunkIndex);
             var chunkHeader = ChunkHeader[chunkIndex];
 
             chunkHeader.DecompressedSize = newChunk.DecompressedData.Length;
@@ -257,7 +246,8 @@ namespace SF3.Models.Files.MPD {
                     chunkHeader.ChunkSize = newChunk.Data.Length;
             };
 
-            chunkHeader.CompressionType = compressionType ?? (chunkIsCompressed ? "Compressed" : "Uncompressed");
+            chunkHeader.ChunkType = type;
+            chunkHeader.CompressionType = compressionType;
             return newChunk;
         }
 

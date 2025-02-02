@@ -295,22 +295,25 @@ namespace SF3.MPD_Editor.Forms {
             );
         }
 
-        private Dictionary<int, string> GetChunksForDialog()
-            => File.ChunkHeader.ToDictionary(x => x.ID, x => x.ID + ": " + x.CompressionType);
+        private Dictionary<int, string> GetChunksForDialog(bool onlyExisting) {
+            return File.ChunkHeader
+                .Where(x => !onlyExisting || x.Exists)
+                .ToDictionary(x => x.ID, x => x.ID + ": " + (x.Exists ? (x.ChunkType + " (" + x.CompressionType + ")") : "--"));
+        }
 
         private void tsmiChunks_ExportChunk_Click(object sender, EventArgs e) {
-            var dialog = new ManipulateChunkDialog(ManipulateChunkDialogType.ExportChunk, GetChunksForDialog());
-            dialog.ShowDialog();
+            var dialog = new ManipulateChunkDialog(ManipulateChunkDialogType.ExportChunk, GetChunksForDialog(true));
+            var result = dialog.ShowDialog();
         }
 
         private void tsmiChunks_ImportChunk_Click(object sender, EventArgs e) {
-            var dialog = new ManipulateChunkDialog(ManipulateChunkDialogType.ImportChunk, GetChunksForDialog());
-            dialog.ShowDialog();
+            var dialog = new ManipulateChunkDialog(ManipulateChunkDialogType.ImportChunk, GetChunksForDialog(false));
+            var result = dialog.ShowDialog();
         }
 
         private void tsmiChunks_DeleteChunk_Click(object sender, EventArgs e) {
-            var dialog = new ManipulateChunkDialog(ManipulateChunkDialogType.DeleteChunk, GetChunksForDialog());
-            dialog.ShowDialog();
+            var dialog = new ManipulateChunkDialog(ManipulateChunkDialogType.DeleteChunk, GetChunksForDialog(true));
+            var result = dialog.ShowDialog();
         }
     }
 }

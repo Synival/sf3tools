@@ -11,6 +11,8 @@ namespace SF3.Win.Forms {
 
             InitializeComponent();
 
+            DialogResult = DialogResult.Cancel;
+
             switch (Type) {
                 case ManipulateChunkDialogType.ExportChunk:
                     Text = "Export Chunk...";
