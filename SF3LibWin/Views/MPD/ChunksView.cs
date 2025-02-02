@@ -4,6 +4,7 @@ using System.Linq;
 using System.Windows.Forms;
 using CommonLib.Imaging;
 using SF3.Models.Files.MPD;
+using SF3.Types;
 
 namespace SF3.Win.Views.MPD {
     public class ChunksView : TabView {
@@ -33,7 +34,6 @@ namespace SF3.Win.Views.MPD {
             if (Model.Surface != null)
                 AddChunkView(Model.Surface.ChunkIndex, "Surface", (name) => new SurfaceChunkView(name, Model.Surface));
 
-
             if (Model.ModelCollections != null)
                 foreach (var modelCollection in Model.ModelCollections)
                     if (modelCollection != null)
@@ -45,22 +45,31 @@ namespace SF3.Win.Views.MPD {
                         AddChunkView(texCollection.ChunkIndex, "Textures", (name) => new TextureChunkView(name, texCollection));
 
             var palettes = Model.PaletteTables
+                .Take(Model.MPDHeader[0].HasPalette3 ? 3 : 2)
                 .Select(x => x != null ? new Palette(x.Select(x => x.ColorABGR1555).ToArray()) : new Palette(256))
                 .ToArray();
 
-            if (Model.SkyBoxChunkData != null)
-                foreach (var chunk in Model.SkyBoxChunkData)
-                    AddChunkView(chunk.Index, "SkyBox", (name) => new DataImageView(name, chunk.DecompressedData.Data, palettes[1]));
-
-            // Add image panes for unhandled chunks.
             foreach (var chunk in Model.ChunkData) {
                 if (chunk == null || chunkViews.ContainsKey(chunk.Index))
                     continue;
 
-                if (chunk.DecompressedData.Length == 0x10000)
-                    AddChunkView(chunk.Index, "Unhandled Image", (name) => new DataImageView(name, chunk.DecompressedData.Data, palettes));
-                else
-                    AddChunkView(chunk.Index, "Unhandled Data", (name) => new DataHexView(name, chunk.DecompressedData.Data));
+                var header = Model.ChunkHeader[chunk.Index];
+                var name = header.ChunkType.ToString();
+
+                switch (header.ChunkType) {
+                    case ChunkType.Unset:
+                    case ChunkType.Unknown:
+                        AddChunkView(chunk.Index, name, (name) => new DataHexView(name, chunk.DecompressedData.Data));
+                        break;
+
+                    case ChunkType.SkyBox:
+                        AddChunkView(chunk.Index, name, (name) => new DataImageView(name, chunk.DecompressedData.Data, palettes[1]));
+                        break;
+
+                    case ChunkType.UnhandledImage:
+                        AddChunkView(chunk.Index, name, (name) => new DataImageView(name, chunk.DecompressedData.Data, palettes));
+                        break;
+                }
             }
 
             // Add chunks, sorted by their chunk index.

@@ -197,6 +197,12 @@ namespace SF3.Models.Files.MPD {
             }
             SkyBoxChunkData = skyboxChunks.Where(x => x != null).ToArray();
 
+            // Add unhandled images/scroll panes.
+            // TODO: on what conditions are we sure these are scroll panes?
+            for (var i = 14; i <= 19; i++)
+                if (ChunkData[i] == null && chunks[i].Exists)
+                    ChunkData[i] = MakeChunkData(i, ChunkType.UnhandledImage, CompressionType.Compressed);
+
             // Add remaining unhandled chunks.
             for (var i = 0; i < chunks.Length; i++)
                 if (ChunkData[i] == null && chunks[i].Exists)
