@@ -7,9 +7,10 @@ using SF3.Win.Types;
 
 namespace SF3.Win.Forms {
     public partial class ManipulateChunkDialog : Form {
-        public ManipulateChunkDialog(ManipulateChunkDialogType type, ChunkHeader[] chunks) {
-            Type = type;
-            Chunks = chunks;
+        public ManipulateChunkDialog(ManipulateChunkDialogType type, ChunkHeader[] chunks, string fileNamePrefix) {
+            Type           = type;
+            Chunks         = chunks;
+            FileNamePrefix = fileNamePrefix;
 
             InitializeComponent();
 
@@ -91,8 +92,44 @@ namespace SF3.Win.Forms {
             SelectedChunk = (item != null) ? Chunks[item.Value.Key] : null;
         }
 
+        private string GetFileExtension => Uncompressed ? "UChunk" : "CChunk";
+        private string GetDefaultFileName => $"{FileNamePrefix}_Chunk{SelectedChunk.ID.ToString("D2")}_{SelectedChunk.ChunkType.ToString()}.{GetFileExtension}";
+        private string GetFileDialogFilter => $"{GetFileExtension} Files (*.{GetFileExtension})|*.{GetFileExtension}|All Files (*.*)|*.*";
+
         private void btnAction_Click(object sender, EventArgs e) {
-            
+            switch (Type) {
+                case ManipulateChunkDialogType.ExportChunk: {
+                    var savefile = new SaveFileDialog {
+                        Filter = GetFileDialogFilter,
+                        FileName = GetDefaultFileName
+                    };
+                    if (savefile.ShowDialog() != DialogResult.OK)
+                        return;
+
+                    DialogResult = DialogResult.OK;
+                    FileName = savefile.FileName;
+                    Close();
+                    break;
+                }
+
+                case ManipulateChunkDialogType.ImportChunk: {
+                    var openfile = new OpenFileDialog {
+                        Filter = GetFileDialogFilter,
+                    };
+                    if (openfile.ShowDialog() != DialogResult.OK)
+                        return;
+
+                    DialogResult = DialogResult.OK;
+                    FileName = openfile.FileName;
+                    Close();
+                    break;
+                }
+
+                case ManipulateChunkDialogType.DeleteChunk:
+                    DialogResult = DialogResult.OK;
+                    Close();
+                    break;
+            }
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
@@ -100,8 +137,10 @@ namespace SF3.Win.Forms {
 
         public ManipulateChunkDialogType Type { get; }
         public ChunkHeader[] Chunks { get; }
+        public string FileNamePrefix { get; }
 
         public bool Uncompressed => rbUncompressed.Checked;
         public ChunkHeader SelectedChunk { get; private set; } = null;
+        public string FileName { get; private set; } = null;
     }
 }

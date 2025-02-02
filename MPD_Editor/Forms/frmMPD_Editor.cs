@@ -22,6 +22,7 @@ using SF3.Win.Types;
 using SF3.Win.Views;
 using SF3.Win.Views.MPD;
 using static CommonLib.Imaging.PixelConversion;
+using static CommonLib.Utils.Compression;
 using static CommonLib.Win.Utils.MessageUtils;
 
 namespace SF3.MPD_Editor.Forms {
@@ -295,19 +296,71 @@ namespace SF3.MPD_Editor.Forms {
             );
         }
 
+        private string FileNameWithoutExtension => Path.GetFileNameWithoutExtension(ModelLoader.Filename);
+
         private void tsmiChunks_ExportChunk_Click(object sender, EventArgs e) {
-            var dialog = new ManipulateChunkDialog(ManipulateChunkDialogType.ExportChunk, File.ChunkHeader.Rows);
-            var result = dialog.ShowDialog();
+            var dialog = new ManipulateChunkDialog(ManipulateChunkDialogType.ExportChunk, File.ChunkHeader.Rows, FileNameWithoutExtension);
+            if (dialog.ShowDialog() != DialogResult.OK)
+                return;
+
+            try {
+                var chunkData = File.ChunkData[dialog.SelectedChunk.ID];
+                var chunkDataBytes = dialog.Uncompressed ? chunkData.DecompressedData.GetDataCopy() : chunkData.GetDataCopy();
+                System.IO.File.WriteAllBytes(dialog.FileName, chunkDataBytes);
+                InfoMessage("Chunk exported successfully.");
+            }
+            catch (Exception ex) {
+                ErrorMessage("Error while exporting:\r\n\r\n" + ex.Message);
+            }
         }
 
         private void tsmiChunks_ImportChunk_Click(object sender, EventArgs e) {
-            var dialog = new ManipulateChunkDialog(ManipulateChunkDialogType.ImportChunk, File.ChunkHeader.Rows);
-            var result = dialog.ShowDialog();
+            var dialog = new ManipulateChunkDialog(ManipulateChunkDialogType.ImportChunk, File.ChunkHeader.Rows, FileNameWithoutExtension);
+            if (dialog.ShowDialog() != DialogResult.OK)
+                return;
+
+            try {
+                var chunk = dialog.SelectedChunk;
+                var chunkData = File.ChunkData[chunk.ID];
+                if (chunkData == null)
+                    chunkData = ((MPD_File) File).MakeChunkData(chunk.ID, ChunkType.Unknown, dialog.Uncompressed ? CompressionType.Uncompressed : CompressionType.Compressed);
+
+                var chunkDataBytes = System.IO.File.ReadAllBytes(dialog.FileName);
+                if (dialog.Uncompressed)
+                    chunkData.DecompressedData.SetDataTo(chunkDataBytes);
+                else {
+                    // Make sure this can actually be decompressed.
+                    try {
+                        var decompressedData = Decompress(chunkDataBytes, null, out var _);
+                    }
+                    catch (Exception ex) {
+                        ErrorMessage("Data is corrupt - failure to decompress:\r\n\r\n" + ex.Message);
+                        return;
+                    }
+                    chunkData.SetDataTo(chunkDataBytes);
+                }
+                InfoMessage("Chunk imported successfully.\r\n" +
+                            "(You should probably save and reload the file!!!)");
+            }
+            catch (Exception ex) {
+                ErrorMessage("Error while importing:\r\n\r\n" + ex.Message);
+            }
         }
 
         private void tsmiChunks_DeleteChunk_Click(object sender, EventArgs e) {
-            var dialog = new ManipulateChunkDialog(ManipulateChunkDialogType.DeleteChunk, File.ChunkHeader.Rows);
-            var result = dialog.ShowDialog();
+            var dialog = new ManipulateChunkDialog(ManipulateChunkDialogType.DeleteChunk, File.ChunkHeader.Rows, FileNameWithoutExtension);
+            if (dialog.ShowDialog() != DialogResult.OK)
+                return;
+
+            try {
+                var chunkData = File.ChunkData[dialog.SelectedChunk.ID];
+                chunkData.SetDataTo([]);
+                InfoMessage("Chunk deleted successfully." +
+                            "(You should probably save and reload the file!!!)");
+            }
+            catch (Exception ex) {
+                ErrorMessage("Error while deleting:\r\n\r\n" + ex.Message);
+            }
         }
     }
 }
