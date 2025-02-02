@@ -124,6 +124,7 @@
             MinimizeBox = false;
             Name = "ManipulateChunkDialog";
             ShowIcon = false;
+            StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             Text = "Manipulate Chunk Dialog";
             ResumeLayout(false);
             PerformLayout();
