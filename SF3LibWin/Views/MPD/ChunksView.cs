@@ -1,13 +1,8 @@
 using System;
 using System.Collections.Generic;
-using System.Drawing;
-using System.Drawing.Imaging;
 using System.Linq;
-using System.Runtime.InteropServices;
 using System.Windows.Forms;
-using CommonLib.Extensions;
 using CommonLib.Imaging;
-using CommonLib.Utils;
 using SF3.Models.Files.MPD;
 
 namespace SF3.Win.Views.MPD {
@@ -55,7 +50,7 @@ namespace SF3.Win.Views.MPD {
 
             if (Model.SkyBoxChunkData != null)
                 foreach (var chunk in Model.SkyBoxChunkData)
-                    AddChunkView(chunk.Index, "SkyBox", (name) => new DataImageView(name, chunk.DecompressedData.Data, palettes[0]));
+                    AddChunkView(chunk.Index, "SkyBox", (name) => new DataImageView(name, chunk.DecompressedData.Data, palettes[1]));
 
             // Add image panes for unhandled chunks.
             foreach (var chunk in Model.ChunkData) {
