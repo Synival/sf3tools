@@ -1,5 +1,6 @@
 ﻿using CommonLib.Attributes;
 using SF3.ByteData;
+using SF3.Types;
 
 namespace SF3.Models.Structs {
     public class UnknownUInt16Struct : Struct {

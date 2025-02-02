@@ -151,6 +151,8 @@ namespace SF3.Models.Structs.MPD {
             set => Data.SetDouble(offsetLightPosAddress, value);
         }
 
+        [BulkCopy]
+        [TableViewModelColumn(displayOrder: 4, isPointer: true)]
         public int OffsetUnknown1 {
             get => Data.GetDouble(offsetUnknown1Address);
             set => Data.SetDouble(offsetUnknown1Address, value);

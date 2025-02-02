@@ -141,7 +141,7 @@ namespace SF3.Models.Files.MPD {
             var tables = new List<ITable>();
 
             if (header.OffsetUnknown1 != 0)
-                tables.Add(OffsetUnknown1Table = UnknownUInt16Table.Create(Data, "Unknown1", header.OffsetUnknown1 - c_RamOffset, 32, 0xFFFF));
+                tables.Add(OffsetUnknown1Table = UnknownInt16Table.Create(Data, "Unknown1", header.OffsetUnknown1 - c_RamOffset, (header.OffsetModelSwitchGroups - header.OffsetUnknown1) / 2, null));
             if (header.OffsetUnknown2 != 0)
                 tables.Add(OffsetUnknown2Table = UnknownUInt16Table.Create(Data, "Unknown2", header.OffsetUnknown2 - c_RamOffset, 32, 0xFFFF));
             if (header.OffsetModelSwitchGroups != 0)
@@ -742,7 +742,7 @@ namespace SF3.Models.Files.MPD {
         public LightPositionTable LightPositionTable { get; private set; }
 
         [BulkCopyRecurse]
-        public UnknownUInt16Table OffsetUnknown1Table { get; private set; }
+        public UnknownInt16Table OffsetUnknown1Table { get; private set; }
 
         [BulkCopyRecurse]
         public OffsetModelSwitchGroupsTable OffsetModelSwitchGroupsTable { get; private set; }
