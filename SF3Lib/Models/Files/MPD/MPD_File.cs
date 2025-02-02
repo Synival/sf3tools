@@ -205,7 +205,7 @@ namespace SF3.Models.Files.MPD {
                 if (chunks[18].Exists)
                     skyboxChunks.Add(ChunkData[18] = MakeChunkData(18, true));
             }
-            SkyboxChunkData = skyboxChunks.Where(x => x != null).ToArray();
+            SkyBoxChunkData = skyboxChunks.Where(x => x != null).ToArray();
 
             // Add remaining unhandled chunks.
             for (var i = 0; i < chunks.Length; i++) {
@@ -781,6 +781,6 @@ namespace SF3.Models.Files.MPD {
         public TextureCollection[] TextureCollections { get; private set; }
 
         public Tile[,] Tiles { get; } = new Tile[64, 64];
-        public IChunkData[] SkyboxChunkData { get; private set; }
+        public IChunkData[] SkyBoxChunkData { get; private set; }
     }
 }

@@ -49,25 +49,18 @@ namespace SF3.Win.Views.MPD {
                     if (texCollection != null)
                         AddChunkView(texCollection.ChunkIndex, "Textures", (name) => new TextureChunkView(name, texCollection));
 
-            // TODO: The view layer shouldn't be accessing this itself. Use an ITexture in IMPD_File.
-            // TODO: This needs a separate view which takes multiple chunks as an input.
-            foreach (var chunk in Model.SkyboxChunkData) {
-                var width = Math.Min(512, chunk.DecompressedData.Length);
-                var height = chunk.DecompressedData.Length / width;
+            var palettes = Model.PaletteTables
+                .Select(x => x != null ? new Palette(x.Select(x => x.ColorABGR1555).ToArray()) : new Palette(256))
+                .ToArray();
 
-                var imageData = chunk.DecompressedData.GetDataCopyAt(0, width * height).To2DArrayColumnMajor(width, height);
-                var palette = (Model.PaletteTables[1] != null) ? new Palette(Model.PaletteTables[1].Select(x => x.ColorABGR1555).ToArray()) : new Palette(256);
-                var bitmapData = BitmapUtils.ConvertIndexedDataToABGR8888BitmapData(imageData, palette, false);
+            if (Model.SkyBoxChunkData != null)
+                foreach (var chunk in Model.SkyBoxChunkData)
+                    AddChunkView(chunk.Index, "SkyBox", (name) => new ChunkImageView(name, chunk.DecompressedData.Data, palettes[0]));
 
-                var bitmap = new Bitmap(width, height, PixelFormat.Format32bppArgb);
-                unsafe {
-                    var bitmapLock = bitmap.LockBits(new Rectangle(0, 0, width, height), ImageLockMode.WriteOnly, bitmap.PixelFormat);
-                    Marshal.Copy(bitmapData, 0, bitmapLock.Scan0, bitmapData.Length);
-                    bitmap.UnlockBits(bitmapLock);
-                }
-
-                AddChunkView(chunk.Index, "Skybox", (name) => new TextureView(name, bitmap, 2));
-            }
+            // Add image panes for unhandled chunks.
+            foreach (var chunk in Model.ChunkData)
+                if (chunk != null && !chunkViews.ContainsKey(chunk.Index))
+                    AddChunkView(chunk.Index, "Unhandled", (name) => new ChunkImageView(name, chunk.DecompressedData.Data, palettes));
 
             // Add chunks, sorted by their chunk index.
             var chunkViewArray = chunkViews.OrderBy(x => x.Key).Select(x => x.Value).ToArray();
