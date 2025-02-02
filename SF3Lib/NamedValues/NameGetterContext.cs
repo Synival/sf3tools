@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Reflection;
 using CommonLib.NamedValues;
@@ -96,7 +97,14 @@ namespace SF3.NamedValues {
             var valueType = (NamedValueType) parameters[0];
             if (!_nameGetters.ContainsKey(valueType))
                 return false;
-            return _nameGetters[valueType].CanGetName(obj, property, (int) value, parameters);
+
+            var valueInt =
+                (value is int)    ? (int) value :
+                (value is uint)   ? (int) ((uint) value) :
+                (value is short)  ? (int) ((short) value) :
+                (value is ushort) ? (int) ((ushort) value) : 0;
+
+            return _nameGetters[valueType].CanGetName(obj, property, valueInt, parameters);
         }
 
         public bool CanGetInfo(object obj, PropertyInfo property, params object[] parameters) {
