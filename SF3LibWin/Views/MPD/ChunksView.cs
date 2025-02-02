@@ -55,12 +55,18 @@ namespace SF3.Win.Views.MPD {
 
             if (Model.SkyBoxChunkData != null)
                 foreach (var chunk in Model.SkyBoxChunkData)
-                    AddChunkView(chunk.Index, "SkyBox", (name) => new ChunkImageView(name, chunk.DecompressedData.Data, palettes[0]));
+                    AddChunkView(chunk.Index, "SkyBox", (name) => new DataImageView(name, chunk.DecompressedData.Data, palettes[0]));
 
             // Add image panes for unhandled chunks.
-            foreach (var chunk in Model.ChunkData)
-                if (chunk != null && !chunkViews.ContainsKey(chunk.Index))
-                    AddChunkView(chunk.Index, "Unhandled", (name) => new ChunkImageView(name, chunk.DecompressedData.Data, palettes));
+            foreach (var chunk in Model.ChunkData) {
+                if (chunk == null || chunkViews.ContainsKey(chunk.Index))
+                    continue;
+
+                if (chunk.DecompressedData.Length == 0x10000)
+                    AddChunkView(chunk.Index, "Unhandled Image", (name) => new DataImageView(name, chunk.DecompressedData.Data, palettes));
+                else
+                    AddChunkView(chunk.Index, "Unhandled Data", (name) => new DataHexView(name, chunk.DecompressedData.Data));
+            }
 
             // Add chunks, sorted by their chunk index.
             var chunkViewArray = chunkViews.OrderBy(x => x.Key).Select(x => x.Value).ToArray();

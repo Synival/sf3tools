@@ -9,5 +9,10 @@ namespace SF3.Win.Views {
             Control.Name = Name;
             return Control;
         }
+
+        public new T Control {
+            get => (T) base.Control;
+            protected set => base.Control = value;
+        }
     }
 }

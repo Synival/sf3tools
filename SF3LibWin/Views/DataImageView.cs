@@ -9,10 +9,10 @@ using CommonLib.Imaging;
 using CommonLib.Utils;
 
 namespace SF3.Win.Views {
-    public class ChunkImageView : TextureView {
-        public ChunkImageView(string name, IByteArray data, Palette palette) : this(name, data, [palette]) { }
+    public class DataImageView : TextureView {
+        public DataImageView(string name, IByteArray data, Palette palette) : this(name, data, [palette]) { }
 
-        public ChunkImageView(string name, IByteArray data, Palette[] palettes) : base(name, 2) {
+        public DataImageView(string name, IByteArray data, Palette[] palettes) : base(name, 2) {
             Data = data;
             Palettes = palettes;
         }
