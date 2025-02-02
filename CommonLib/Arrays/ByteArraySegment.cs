@@ -35,8 +35,9 @@ namespace CommonLib.Arrays {
 
         public void OnParentRangeModifiedReal(object sender, ByteArrayRangeModifiedArgs args, bool isPre) {
             // TODO: moving!
+            // TODO: add unit tests for expanding size of a ByteSegment that starts at the same location as another, but its size is 0
             if (args.Moved)
-                throw new NotImplementedException();
+                ; //throw new NotImplementedException();
 
             var end       = Length;
             var argOffset = args.Offset - Offset;
