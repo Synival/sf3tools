@@ -5,7 +5,6 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
-using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using CommonLib.Imaging;
@@ -19,6 +18,7 @@ using SF3.Models.Structs.MPD.TextureChunk;
 using SF3.NamedValues;
 using SF3.Types;
 using SF3.Win.Forms;
+using SF3.Win.Types;
 using SF3.Win.Views;
 using SF3.Win.Views.MPD;
 using static CommonLib.Imaging.PixelConversion;
@@ -63,6 +63,10 @@ namespace SF3.MPD_Editor.Forms {
             }
 
             FileIsLoadedChanged += (s, e) => {
+                tsmiChunks_ExportChunk.Enabled = IsLoaded;
+                tsmiChunks_ImportChunk.Enabled = IsLoaded;
+                tsmiChunks_DeleteChunk.Enabled = IsLoaded;
+
                 tsmiTextures_ImportFolder.Enabled = IsLoaded;
                 tsmiTextures_ExportToFolder.Enabled = IsLoaded;
             };
@@ -289,6 +293,24 @@ namespace SF3.MPD_Editor.Forms {
                 "https://github.com/Agrathejagged",
                 "About " + BaseTitle
             );
+        }
+
+        private Dictionary<int, string> GetChunksForDialog()
+            => File.ChunkHeader.ToDictionary(x => x.ID, x => x.ID + ": " + x.CompressionType);
+
+        private void tsmiChunks_ExportChunk_Click(object sender, EventArgs e) {
+            var dialog = new ManipulateChunkDialog(ManipulateChunkDialogType.ExportChunk, GetChunksForDialog());
+            dialog.ShowDialog();
+        }
+
+        private void tsmiChunks_ImportChunk_Click(object sender, EventArgs e) {
+            var dialog = new ManipulateChunkDialog(ManipulateChunkDialogType.ImportChunk, GetChunksForDialog());
+            dialog.ShowDialog();
+        }
+
+        private void tsmiChunks_DeleteChunk_Click(object sender, EventArgs e) {
+            var dialog = new ManipulateChunkDialog(ManipulateChunkDialogType.DeleteChunk, GetChunksForDialog());
+            dialog.ShowDialog();
         }
     }
 }
