@@ -93,9 +93,6 @@ namespace SF3.Win.OpenGL {
                 for (var j = 0; j < length2; j++)
                     newData[4, j] /= 4.0f;
 
-                if (newData[4, 0] != attr.Data[0, 0])
-                    ;
-
                 var newAttr = new PolyAttribute(attr.Elements, attr.Type, attr.Name, 5, newData);
                 Attributes.Add(newAttr);
                 _attributesByName.Add(newAttr.Name, newAttr);

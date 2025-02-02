@@ -113,8 +113,6 @@ namespace SF3.Win.OpenGL {
                 var polyAttr = quad.GetAttributeByName(attrName);
                 if (polyAttr == null || !vboAttr.IsAssignable(polyAttr))
                     continue;
-                if (polyAttr.Vertices != quad.Vertices)
-                    ;
 
                 var vertices        = polyAttr.Data.GetLength(0);
                 var floatsPerVertex = polyAttr.Data.GetLength(1);
