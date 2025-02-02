@@ -186,14 +186,10 @@ namespace SF3.Models.Files.MPD {
                 ChunkData[5] = MakeChunkData(5, true);
 
             // Texture data, in chunks (6...13)
-            for (var i = 6; i <= 13; i++) {
-                try {
-                    ChunkData[i] = MakeChunkData(i, true);
-                }
-                catch {
-                    // TODO: report an error somehow
-                }
-            }
+            for (var i = 6; i <= 13; i++)
+                ChunkData[i] = MakeChunkData(i, true);
+            if (chunks[21].Exists)
+                ChunkData[21] = MakeChunkData(21, true);
 
             // Sky boxes
             var skyboxChunks = new List<IChunkData>();
@@ -302,6 +298,8 @@ namespace SF3.Models.Files.MPD {
                         return TextureCollectionType.MovableObjects2;
                     case 13:
                         return TextureCollectionType.MovableObjects3;
+                    case 21:
+                        return TextureCollectionType.Chunk1ModelTextures;
                     default:
                         throw new Exception("Unhandled case!");
                 }
@@ -312,7 +310,9 @@ namespace SF3.Models.Files.MPD {
             var modelsList = new List<ModelCollection>();
             foreach (var mc in modelsChunks) {
                 var texCollection = (mc.Index == 19 && MPDHeader[0].HasChunk19Model)
-                    ? TextureCollectionType.Chunk19ModelTextures : TextureCollectionType.PrimaryTextures;
+                    ? TextureCollectionType.Chunk19ModelTextures
+                    : (chunkDatas[21] != null && mc.Index == 1) ? TextureCollectionType.Chunk1ModelTextures
+                    : TextureCollectionType.PrimaryTextures;
 
                 var newModel = ModelCollection.Create(mc.DecompressedData, NameGetterContext, 0x00, "Models" + mc.Index, texCollection, mc.Index);
                 modelsList.Add(newModel);
@@ -375,9 +375,9 @@ namespace SF3.Models.Files.MPD {
             // Gather palettes.
             var palettes = CreatePalettesForTextures();
 
-            TextureCollections = new TextureCollection[8];
+            TextureCollections = new TextureCollection[9];
             for (var i = 0; i < TextureCollections.Length; i++) {
-                var chunkIndex = i + 6;
+                var chunkIndex = (i == 8) ? 21 : i + 6;
                 if (chunkDatas[chunkIndex]?.Length > 0) {
                     var collection = TextureCollectionForChunkIndex(chunkIndex);
 
