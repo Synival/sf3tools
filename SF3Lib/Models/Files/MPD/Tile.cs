@@ -48,6 +48,9 @@ namespace SF3.Models.Files.MPD {
                 return new float[] { brHeight, brHeight, brHeight, brHeight };
             }
 
+            if (MPD_File.Surface == null)
+                return new float[] { 0, 0, 0, 0 };
+
             // Otherwise, gather heights from the 5x5 block with the surface mesh's heightmap.
             if (MPD_File.SurfaceModel?.VertexNormalBlockTable == null)
                 return MPD_File.Surface.HeightmapRowTable[Y].GetQuadHeights(X);
@@ -78,7 +81,7 @@ namespace SF3.Models.Files.MPD {
         public Dictionary<CornerType, BlockVertexLocation[]> SharedBlockVertexLocations { get; }
 
         public TerrainType MoveTerrainType {
-            get => MPD_File.Surface.HeightTerrainRowTable[Y].GetTerrainType(X);
+            get => (MPD_File.Surface != null) ? MPD_File.Surface.HeightTerrainRowTable[Y].GetTerrainType(X) : 0;
             set {
                 MPD_File.Surface.HeightTerrainRowTable[Y].SetTerrainType(X, value);
                 Modified?.Invoke(this, EventArgs.Empty);
@@ -86,7 +89,7 @@ namespace SF3.Models.Files.MPD {
         }
 
         public TerrainFlags MoveTerrainFlags {
-            get => MPD_File.Surface.HeightTerrainRowTable[Y].GetTerrainFlags(X);
+            get => (MPD_File.Surface != null) ? MPD_File.Surface.HeightTerrainRowTable[Y].GetTerrainFlags(X) : 0;
             set {
                 MPD_File.Surface.HeightTerrainRowTable[Y].SetTerrainFlags(X, value);
                 Modified?.Invoke(this, EventArgs.Empty);
@@ -94,7 +97,7 @@ namespace SF3.Models.Files.MPD {
         }
 
         public float MoveHeight {
-            get => MPD_File.Surface.HeightTerrainRowTable[Y].GetHeight(X);
+            get => (MPD_File.Surface != null) ? MPD_File.Surface.HeightTerrainRowTable[Y].GetHeight(X) : 0.0f;
             set {
                 MPD_File.Surface.HeightTerrainRowTable[Y].SetHeight(X, value);
                 Modified?.Invoke(this, EventArgs.Empty);
@@ -102,14 +105,14 @@ namespace SF3.Models.Files.MPD {
         }
 
         public float GetMoveHeightmap(CornerType corner)
-            => MPD_File.Surface.HeightmapRowTable[Y].GetHeight(X, corner);
+            => (MPD_File.Surface != null) ? MPD_File.Surface.HeightmapRowTable[Y].GetHeight(X, corner) : 0.0f;
         public void SetMoveHeightmap(CornerType corner, float value) {
             MPD_File.Surface.HeightmapRowTable[Y].SetHeight(X, corner, value);
             Modified?.Invoke(this, EventArgs.Empty);
         }
 
         public byte EventID {
-            get => MPD_File.Surface.EventIDRowTable[Y][X];
+            get => (MPD_File.Surface != null) ? MPD_File.Surface.EventIDRowTable[Y][X] : (byte) 0;
             set {
                 MPD_File.Surface.EventIDRowTable[Y][X] = value;
                 Modified?.Invoke(this, EventArgs.Empty);
@@ -117,7 +120,7 @@ namespace SF3.Models.Files.MPD {
         }
 
         public byte ModelTextureID {
-            get => MPD_File.SurfaceModel.TileTextureRowTable[Y].GetTextureID(X);
+            get => (MPD_File.SurfaceModel != null) ? MPD_File.SurfaceModel.TileTextureRowTable[Y].GetTextureID(X) : (byte) 0;
             set {
                 MPD_File.SurfaceModel.TileTextureRowTable[Y].SetTextureID(X, value);
                 Modified?.Invoke(this, EventArgs.Empty);
@@ -125,7 +128,7 @@ namespace SF3.Models.Files.MPD {
         }
 
         public byte ModelTextureFlags {
-            get => MPD_File.SurfaceModel.TileTextureRowTable[Y].GetTextureFlags(X);
+            get => (MPD_File.SurfaceModel != null) ? MPD_File.SurfaceModel.TileTextureRowTable[Y].GetTextureFlags(X) : (byte) 0;
             set {
                 MPD_File.SurfaceModel.TileTextureRowTable[Y].SetTextureFlags(X, value);
                 Modified?.Invoke(this, EventArgs.Empty);
@@ -133,7 +136,7 @@ namespace SF3.Models.Files.MPD {
         }
 
         public TextureFlipType ModelTextureFlip {
-            get => MPD_File.SurfaceModel.TileTextureRowTable[Y].GetFlip(X);
+            get => (MPD_File.SurfaceModel != null) ? MPD_File.SurfaceModel.TileTextureRowTable[Y].GetFlip(X) : 0;
             set {
                 MPD_File.SurfaceModel.TileTextureRowTable[Y].SetFlip(X, value);
                 Modified?.Invoke(this, EventArgs.Empty);
@@ -141,7 +144,7 @@ namespace SF3.Models.Files.MPD {
         }
 
         public TextureRotateType ModelTextureRotate {
-            get => MPD_File.SurfaceModel.TileTextureRowTable[Y].GetRotate(X);
+            get => (MPD_File.SurfaceModel != null) ? MPD_File.SurfaceModel.TileTextureRowTable[Y].GetRotate(X) : 0;
             set {
                 MPD_File.SurfaceModel.TileTextureRowTable[Y].SetRotate(X, value);
                 Modified?.Invoke(this, EventArgs.Empty);
@@ -149,7 +152,7 @@ namespace SF3.Models.Files.MPD {
         }
 
         public bool ModelIsFlat {
-            get => MPD_File.SurfaceModel.TileTextureRowTable[Y].GetIsFlatFlag(X);
+            get => (MPD_File.SurfaceModel != null) ? MPD_File.SurfaceModel.TileTextureRowTable[Y].GetIsFlatFlag(X) : false;
             set {
                 MPD_File.SurfaceModel.TileTextureRowTable[Y].SetIsFlatFlag(X, value);
                 Modified?.Invoke(this, EventArgs.Empty);

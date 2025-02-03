@@ -134,10 +134,23 @@ namespace SF3.Models.Files.MPD {
         private ITable[] MakeTextureAnimationTables(MPDHeaderModel header, bool areAnimatedTextures32Bit) {
             var tables = new List<ITable>();
 
-            if (header.OffsetTextureAnimations != 0)
-                tables.Add(TextureAnimations = TextureAnimationTable.Create(Data, "TextureAnimations", header.OffsetTextureAnimations - c_RamOffset, areAnimatedTextures32Bit));
-            if (header.OffsetTextureAnimAlt != 0)
-                tables.Add(TextureAnimationsAlt = TextureIDTable.Create(Data, "TextureAnimationsAlt", header.OffsetTextureAnimAlt - c_RamOffset));
+            if (header.OffsetTextureAnimations != 0) {
+                try {
+                    tables.Add(TextureAnimations = TextureAnimationTable.Create(Data, "TextureAnimations", header.OffsetTextureAnimations - c_RamOffset, areAnimatedTextures32Bit));
+                }
+                catch {
+                    // TODO: what to do here??
+                }
+            }
+
+            if (header.OffsetTextureAnimAlt != 0) {
+                try {
+                    tables.Add(TextureAnimationsAlt = TextureIDTable.Create(Data, "TextureAnimationsAlt", header.OffsetTextureAnimAlt - c_RamOffset));
+                }
+                catch {
+                    // TODO: what to do here??
+                }
+            }
 
             return tables.ToArray();
         }
@@ -432,7 +445,7 @@ namespace SF3.Models.Files.MPD {
 
         // TODO: refactor this mess!!
         private void BuildTextureAnimFrameData() {
-            if (ChunkData[3] == null)
+            if (ChunkData[3] == null || TextureAnimations == null)
                 return;
 
             if (Chunk3Frames == null)

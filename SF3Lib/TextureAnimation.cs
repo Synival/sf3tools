@@ -6,12 +6,12 @@ namespace SF3 {
         public TextureAnimation(int id, ITexture[] frames, int frameTimerStart) {
             if (frames == null)
                 throw new ArgumentNullException(nameof(frames));
-            if (!frames.All(x => x.ID == id) || frames.Length == 0)
+            if (!frames.Where(x => x != null).All(x => x.ID == id) || frames.Length == 0)
                 throw new ArgumentException(nameof(id));
 
             ID = id;
             FrameTimerStart = frameTimerStart;
-            Frames = frames.OrderBy(x => x.Frame).ToArray();
+            Frames = frames.Where(x => x != null).OrderBy(x => x.Frame).ToArray();
 
             _frameByTimeFrame = new ITexture[Frames.Sum(x => Math.Max(0, x.Duration))];
             int pos = 0;
