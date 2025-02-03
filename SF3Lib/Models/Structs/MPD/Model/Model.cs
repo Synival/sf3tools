@@ -53,58 +53,58 @@ namespace SF3.Models.Structs.MPD.Model {
 
         [BulkCopy]
         [TableViewModelColumn(displayOrder: 0, isPointer: true)]
-        public int PData1 {
-            get => Data.GetDouble(_pdata1Address);
-            set => Data.SetDouble(_pdata1Address, value);
+        public uint PData1 {
+            get => (uint) Data.GetDouble(_pdata1Address);
+            set => Data.SetDouble(_pdata1Address, (int) value);
         }
 
         [BulkCopy]
         [TableViewModelColumn(displayOrder: 1, isPointer: true)]
-        public int PData2 {
-            get => Data.GetDouble(_pdata2Address);
-            set => Data.SetDouble(_pdata2Address, value);
+        public uint PData2 {
+            get => (uint) Data.GetDouble(_pdata2Address);
+            set => Data.SetDouble(_pdata2Address, (int) value);
         }
 
         [BulkCopy]
         [TableViewModelColumn(displayOrder: 2, isPointer: true)]
-        public int PData3 {
-            get => Data.GetDouble(_pdata3Address);
-            set => Data.SetDouble(_pdata3Address, value);
+        public uint PData3 {
+            get => (uint) Data.GetDouble(_pdata3Address);
+            set => Data.SetDouble(_pdata3Address, (int) value);
         }
 
         [BulkCopy]
         [TableViewModelColumn(displayOrder: 3, isPointer: true)]
-        public int PData4 {
-            get => Data.GetDouble(_pdata4Address);
-            set => Data.SetDouble(_pdata4Address, value);
+        public uint PData4 {
+            get => (uint) Data.GetDouble(_pdata4Address);
+            set => Data.SetDouble(_pdata4Address, (int) value);
         }
 
         [BulkCopy]
         [TableViewModelColumn(displayOrder: 4, isPointer: true)]
-        public int PData5 {
-            get => Data.GetDouble(_pdata5Address);
-            set => Data.SetDouble(_pdata5Address, value);
+        public uint PData5 {
+            get => (uint) Data.GetDouble(_pdata5Address);
+            set => Data.SetDouble(_pdata5Address, (int) value);
         }
 
         [BulkCopy]
         [TableViewModelColumn(displayOrder: 5, isPointer: true)]
-        public int PData6 {
-            get => Data.GetDouble(_pdata6Address);
-            set => Data.SetDouble(_pdata6Address, value);
+        public uint PData6 {
+            get => (uint) Data.GetDouble(_pdata6Address);
+            set => Data.SetDouble(_pdata6Address, (int) value);
         }
 
         [BulkCopy]
         [TableViewModelColumn(displayOrder: 6, isPointer: true)]
-        public int PData7 {
-            get => Data.GetDouble(_pdata7Address);
-            set => Data.SetDouble(_pdata7Address, value);
+        public uint PData7 {
+            get => (uint) Data.GetDouble(_pdata7Address);
+            set => Data.SetDouble(_pdata7Address, (int) value);
         }
 
         [BulkCopy]
         [TableViewModelColumn(displayOrder: 7, isPointer: true)]
-        public int PData8 {
-            get => Data.GetDouble(_pdata8Address);
-            set => Data.SetDouble(_pdata8Address, value);
+        public uint PData8 {
+            get => (uint) Data.GetDouble(_pdata8Address);
+            set => Data.SetDouble(_pdata8Address, (int) value);
         }
 
         public class PDataAccessor {
@@ -113,9 +113,9 @@ namespace SF3.Models.Structs.MPD.Model {
                 Index = index;
             }
 
-            public int Value {
-                get => Model.Data.GetDouble(Model._pdata1Address + Index * 0x04);
-                set => Model.Data.SetDouble(Model._pdata1Address + Index * 0x04, value);
+            public uint Value {
+                get => (uint) Model.Data.GetDouble(Model._pdata1Address + Index * 0x04);
+                set => Model.Data.SetDouble(Model._pdata1Address + Index * 0x04, (int) value);
             }
 
             public Model Model { get; }
@@ -138,7 +138,7 @@ namespace SF3.Models.Structs.MPD.Model {
                 };
             }
 
-            public int this[int index] {
+            public uint this[int index] {
                 get => _accessors[index].Value;
                 set => _accessors[index].Value = value;
             }

@@ -24,9 +24,9 @@ namespace SF3.Models.Structs.MPD.Model {
 
         [BulkCopy]
         [TableViewModelColumn(displayOrder: 0.5f, isPointer: true)]
-        public int VerticesOffset {
-            get => Data.GetDouble(_verticesOffsetAddr);
-            set => Data.SetDouble(_verticesOffsetAddr, value);
+        public uint VerticesOffset {
+            get => (uint) Data.GetDouble(_verticesOffsetAddr);
+            set => Data.SetDouble(_verticesOffsetAddr, (int) value);
         }
 
         [BulkCopy]
@@ -38,9 +38,9 @@ namespace SF3.Models.Structs.MPD.Model {
 
         [BulkCopy]
         [TableViewModelColumn(displayOrder: 2, isPointer: true)]
-        public int PolygonsOffset {
-            get => Data.GetDouble(_polygonsOffsetAddr);
-            set => Data.SetDouble(_polygonsOffsetAddr, value);
+        public uint PolygonsOffset {
+            get => (uint) Data.GetDouble(_polygonsOffsetAddr);
+            set => Data.SetDouble(_polygonsOffsetAddr, (int) value);
         }
 
         [BulkCopy]
@@ -52,9 +52,9 @@ namespace SF3.Models.Structs.MPD.Model {
 
         [BulkCopy]
         [TableViewModelColumn(displayOrder: 4, isPointer: true)]
-        public int AttributesOffset {
-            get => Data.GetDouble(_attributesOffsetAddr);
-            set => Data.SetDouble(_attributesOffsetAddr, value);
+        public uint AttributesOffset {
+            get => (uint) Data.GetDouble(_attributesOffsetAddr);
+            set => Data.SetDouble(_attributesOffsetAddr, (int) value);
         }
     }
 }

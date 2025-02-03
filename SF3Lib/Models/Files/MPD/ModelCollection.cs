@@ -25,7 +25,7 @@ namespace SF3.Models.Files.MPD {
         }
 
         private struct ModelElementKey {
-            public int AddressInMemory;
+            public uint AddressInMemory;
             public int Count;
             public int Refs;
         }
@@ -43,7 +43,7 @@ namespace SF3.Models.Files.MPD {
                 .OrderBy(x => x.AddressInMemory)
                 .ToArray();
 
-            PDataTable = PDataTable.Create(Data, "PDATAs", pdataAddresses.Select(x => GetOffsetInChunk(x.AddressInMemory)).ToArray(), pdataAddresses.Select(x => x.Count).ToArray());
+            PDataTable = PDataTable.Create(Data, "PDATAs", pdataAddresses.Select(x => (int) GetOffsetInChunk(x.AddressInMemory)).ToArray(), pdataAddresses.Select(x => x.Count).ToArray());
             try {
                 PDatasByMemoryAddress = PDataTable
                     .Select((PData, i) => new { PData, pdataAddresses[i].AddressInMemory })
@@ -51,7 +51,7 @@ namespace SF3.Models.Files.MPD {
             }
             catch {
                 // TODO: what to do on error??
-                PDatasByMemoryAddress = new Dictionary<int, PDataModel>();
+                PDatasByMemoryAddress = new Dictionary<uint, PDataModel>();
             }
 
             try {
@@ -68,12 +68,12 @@ namespace SF3.Models.Files.MPD {
                     .ThenBy(x => x.Count)
                     .ToDictionary(
                         x => x.AddressInMemory,
-                        x => VertexTable.Create(Data, "POINTs @ 0x" + x.AddressInMemory.ToString("X") + " (Count=" + x.Count + ", Refs=" + x.Refs + ")", GetOffsetInChunk(x.AddressInMemory), x.Count)
+                        x => VertexTable.Create(Data, "POINTs @ 0x" + x.AddressInMemory.ToString("X") + " (Count=" + x.Count + ", Refs=" + x.Refs + ")", (int) GetOffsetInChunk(x.AddressInMemory), x.Count)
                     );
             }
             catch {
                 // TODO: what to do on error??
-                VertexTablesByMemoryAddress = new Dictionary<int, VertexTable>();
+                VertexTablesByMemoryAddress = new Dictionary<uint, VertexTable>();
             }
 
             try {
@@ -90,12 +90,12 @@ namespace SF3.Models.Files.MPD {
                     .ThenBy(x => x.Count)
                     .ToDictionary(
                         x => x.AddressInMemory,
-                        x => PolygonTable.Create(Data, "POLYGONs @ 0x" + x.AddressInMemory.ToString("X") + " (Count=" + x.Count + ", Refs=" + x.Refs + ")", GetOffsetInChunk(x.AddressInMemory), x.Count)
+                        x => PolygonTable.Create(Data, "POLYGONs @ 0x" + x.AddressInMemory.ToString("X") + " (Count=" + x.Count + ", Refs=" + x.Refs + ")", (int) GetOffsetInChunk(x.AddressInMemory), x.Count)
                     );
             }
             catch {
                 // TODO: what to do on error??
-                PolygonTablesByMemoryAddress = new Dictionary<int, PolygonTable>();
+                PolygonTablesByMemoryAddress = new Dictionary<uint, PolygonTable>();
             }
 
             try {
@@ -112,12 +112,12 @@ namespace SF3.Models.Files.MPD {
                     .ThenBy(x => x.Count)
                     .ToDictionary(
                         x => x.AddressInMemory,
-                        x => AttrTable.Create(Data, "ATTRs @ 0x" + x.AddressInMemory.ToString("X") + " (Count=" + x.Count + ", Refs=" + x.Refs + ")", GetOffsetInChunk(x.AddressInMemory), x.Count)
+                        x => AttrTable.Create(Data, "ATTRs @ 0x" + x.AddressInMemory.ToString("X") + " (Count=" + x.Count + ", Refs=" + x.Refs + ")", (int) GetOffsetInChunk(x.AddressInMemory), x.Count)
                     );
             }
             catch {
                 // TODO: what to do on error??
-                AttrTablesByMemoryAddress = new Dictionary<int, AttrTable>();
+                AttrTablesByMemoryAddress = new Dictionary<uint, AttrTable>();
             }
 
             var tables = new List<ITable>() {
@@ -132,7 +132,7 @@ namespace SF3.Models.Files.MPD {
             return tables;
         }
 
-        public int GetOffsetInChunk(int memoryAddress) {
+        public uint GetOffsetInChunk(uint memoryAddress) {
             if (memoryAddress >= 0x60a0000)
                 return memoryAddress - 0x60a0000 /* TODO: apply actual offset of chunk! */;
             else if (memoryAddress >= 0x290000)
@@ -156,15 +156,15 @@ namespace SF3.Models.Files.MPD {
         [BulkCopyRecurse]
         public PDataTable PDataTable { get; private set; }
 
-        public Dictionary<int, PDataModel> PDatasByMemoryAddress { get; private set; }
+        public Dictionary<uint, PDataModel> PDatasByMemoryAddress { get; private set; }
 
         [BulkCopyRecurse]
-        public Dictionary<int, VertexTable> VertexTablesByMemoryAddress { get; private set; }
+        public Dictionary<uint, VertexTable> VertexTablesByMemoryAddress { get; private set; }
 
         [BulkCopyRecurse]
-        public Dictionary<int, PolygonTable> PolygonTablesByMemoryAddress { get; private set; }
+        public Dictionary<uint, PolygonTable> PolygonTablesByMemoryAddress { get; private set; }
 
         [BulkCopyRecurse]
-        public Dictionary<int, AttrTable> AttrTablesByMemoryAddress { get; private set; }
+        public Dictionary<uint, AttrTable> AttrTablesByMemoryAddress { get; private set; }
     }
 }

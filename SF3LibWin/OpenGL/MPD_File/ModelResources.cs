@@ -59,7 +59,8 @@ namespace SF3.Win.OpenGL.MPD_File {
                 var uniquePData1Addresses = models.ModelTable
                     .Select(x => x.PData1)
                     .Where(x => x != 0)
-                    .Distinct();
+                    .Distinct()
+                    .ToArray();
 
                 foreach (var address in uniquePData1Addresses)
                     AddModel(mpdFile, models.TextureCollection, address);
@@ -68,7 +69,7 @@ namespace SF3.Win.OpenGL.MPD_File {
             Models = modelsList.ToArray();
         }
 
-        private TValue GetFromAnyCollection<TValue>(IMPD_File mpdFile, Func<Models.Files.MPD.ModelCollection, Dictionary<int, TValue>> tableGetter, int address) where TValue : class {
+        private TValue GetFromAnyCollection<TValue>(IMPD_File mpdFile, Func<Models.Files.MPD.ModelCollection, Dictionary<uint, TValue>> tableGetter, uint address) where TValue : class {
             foreach (var mc in mpdFile.ModelCollections) {
                 if (mc != null) {
                     var dict = tableGetter(mc);
@@ -79,7 +80,7 @@ namespace SF3.Win.OpenGL.MPD_File {
             return null;
         }
 
-        public void AddModel(IMPD_File mpdFile, TextureCollectionType texCollection, int pdataAddressInMemory) {
+        public void AddModel(IMPD_File mpdFile, TextureCollectionType texCollection, uint pdataAddressInMemory) {
             TextureFlipType ToggleHorizontalFlipping(TextureFlipType flip)
                 => (flip & ~TextureFlipType.Horizontal) | (TextureFlipType) (TextureFlipType.Horizontal - (flip & TextureFlipType.Horizontal));
 
@@ -241,7 +242,7 @@ namespace SF3.Win.OpenGL.MPD_File {
             }
         }
 
-        public Dictionary<int, ModelGroup> ModelsByMemoryAddress { get; } = [];
+        public Dictionary<uint, ModelGroup> ModelsByMemoryAddress { get; } = [];
         public Model[] Models { get; private set; }
     }
 }
