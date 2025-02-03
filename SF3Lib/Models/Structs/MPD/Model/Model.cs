@@ -26,9 +26,10 @@ namespace SF3.Models.Structs.MPD.Model {
         private readonly int _modelIdAddress;
         private readonly int _flagsAddress;
 
-        public Model(IByteData data, int id, string name, int address)
-        : base(data, id, name, address, 0x3C) {
+        public Model(IByteData data, int id, string name, int address, bool hasTagsAndFlags)
+        : base(data, id, name, address, hasTagsAndFlags ? 0x3C : 0x38) {
             PDatas = new PDataAccessorCollection(this);
+            HasTagsAndFlags = hasTagsAndFlags;
 
             _pdata1Address    = Address + 0x00; // 4 bytes
             _pdata2Address    = Address + 0x04; // 4 bytes
@@ -47,8 +48,8 @@ namespace SF3.Models.Structs.MPD.Model {
             _scaleXAddress    = Address + 0x2C; // 4 bytes
             _scaleYAddress    = Address + 0x30; // 4 bytes
             _scaleZAddress    = Address + 0x34; // 4 bytes
-            _modelIdAddress   = Address + 0x38; // 2 bytes
-            _flagsAddress     = Address + 0x3A; // 2 bytes
+            _modelIdAddress   = hasTagsAndFlags ? (Address + 0x38) : -1; // 2 bytes
+            _flagsAddress     = hasTagsAndFlags ? (Address + 0x3A) : -1; // 2 bytes
         }
 
         [BulkCopy]
@@ -150,6 +151,7 @@ namespace SF3.Models.Structs.MPD.Model {
         }
 
         public readonly PDataAccessorCollection PDatas;
+        public bool HasTagsAndFlags { get; }
 
         [BulkCopy]
         [TableViewModelColumn(displayOrder: 8)]
@@ -217,15 +219,21 @@ namespace SF3.Models.Structs.MPD.Model {
         [BulkCopy]
         [TableViewModelColumn(displayOrder: 17, displayName: "Tag (unused?)")]
         public ushort Tag {
-            get => (ushort) Data.GetWord(_modelIdAddress);
-            set => Data.SetWord(_modelIdAddress, value);
+            get => HasTagsAndFlags ? (ushort) Data.GetWord(_modelIdAddress) : (ushort) 0;
+            set {
+                if (HasTagsAndFlags)
+                    Data.SetWord(_modelIdAddress, value);
+            }
         }
 
         [BulkCopy]
         [TableViewModelColumn(displayOrder: 18, displayFormat: "X4")]
         public ushort Flags {
-            get => (ushort) Data.GetWord(_flagsAddress);
-            set => Data.SetWord(_flagsAddress, value);
+            get => HasTagsAndFlags ? (ushort) Data.GetWord(_flagsAddress) : (ushort) 0;
+            set {
+                if (HasTagsAndFlags)
+                    Data.SetWord(_flagsAddress, value);
+            }
         }
 
         [TableViewModelColumn(displayOrder: 18.1f)]

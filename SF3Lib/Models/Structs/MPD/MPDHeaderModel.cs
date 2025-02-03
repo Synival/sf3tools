@@ -56,45 +56,57 @@ namespace SF3.Models.Structs.MPD {
             offsetTextureAnimationsAddress = Address + 0x18; // 4 bytes
             offsetUnknown2Address       = Address + 0x1C; // 4 bytes
             offsetScrollScreenAnimationAddr = Address + 0x20; // 4 bytes
-            offsetMesh1Address          = Address + 0x24; // 4 bytes
-            offsetMesh2Address          = Address + 0x28; // 4 bytes
-            offsetMesh3Address          = Address + 0x2C; // 4 bytes
-            modelsPreYRotation          = Address + 0x30; // 2 bytes
-            modelsViewAngleMin          = Address + 0x32; // 2 bytes
-            modelsViewAngleMax          = Address + 0x34; // 2 bytes
-            padding3Address             = Address + 0x36; // 2 bytes
-            offsetTextureAnimAltAddress = Address + 0x38; // 4 bytes
-            offsetPal1Address           = Address + 0x3C; // 4 bytes
-            offsetPal2Address           = Address + 0x40; // 4 bytes
 
-            int address2;
+            int addressNext;
+            if (Scenario >= ScenarioType.Scenario1) {
+                offsetMesh1Address = Address + 0x24; // 4 bytes
+                offsetMesh2Address = Address + 0x28; // 4 bytes
+                offsetMesh3Address = Address + 0x2C; // 4 bytes
+                addressNext = Address + 0x30;
+            }
+            else {
+                offsetMesh1Address = -1;
+                offsetMesh2Address = -1;
+                offsetMesh3Address = -1;
+                addressNext = Address + 0x24;
+            }
+
+            modelsPreYRotation          = addressNext + 0x00; // 2 bytes
+            modelsViewAngleMin          = addressNext + 0x02; // 2 bytes
+            modelsViewAngleMax          = addressNext + 0x04; // 2 bytes
+            padding3Address             = addressNext + 0x06; // 2 bytes
+            offsetTextureAnimAltAddress = addressNext + 0x08; // 4 bytes
+            offsetPal1Address           = addressNext + 0x0C; // 4 bytes
+            offsetPal2Address           = addressNext + 0x10; // 4 bytes
+
             if (HasPalette3) {
-                offsetPal3Address = Address + 0x44; // 4 bytes
-                offsetIndexedTextures = Address + 0x48; // 4 bytes
-                address2 = Address + 0x4C;
+                offsetPal3Address = addressNext + 0x14; // 4 bytes
+                offsetIndexedTextures = addressNext + 0x18; // 4 bytes
+                addressNext = addressNext + 0x1C;
             }
             else {
                 offsetPal3Address = -1;
-                address2 = Address + 0x44;
+                offsetIndexedTextures = -1; // 4 bytes
+                addressNext = addressNext + 0x14;
             }
 
-            scrollScreenXAddress        = address2 + 0x00; // 2 bytes
-            scrollScreenYAddress        = address2 + 0x02; // 2 bytes
-            scrollScreenZAddress        = address2 + 0x04; // 2 bytes
-            scrollScreenAngleAddress    = address2 + 0x06; // 2 bytes
-            unknown1Address             = address2 + 0x08; // 2 bytes
-            backgroundScrollXAddress    = address2 + 0x0A; // 2 bytes
-            backgroundScrollYAddress    = address2 + 0x0C; // 2 bytes
-            padding4Address             = address2 + 0x0E; // 2 bytes
-            offsetBoundariesAddress     = address2 + 0x10; // 4 bytes
+            scrollScreenXAddress        = addressNext + 0x00; // 2 bytes
+            scrollScreenYAddress        = addressNext + 0x02; // 2 bytes
+            scrollScreenZAddress        = addressNext + 0x04; // 2 bytes
+            scrollScreenAngleAddress    = addressNext + 0x06; // 2 bytes
+            unknown1Address             = addressNext + 0x08; // 2 bytes
+            backgroundScrollXAddress    = addressNext + 0x0A; // 2 bytes
+            backgroundScrollYAddress    = addressNext + 0x0C; // 2 bytes
+            padding4Address             = addressNext + 0x0E; // 2 bytes
+            offsetBoundariesAddress     = addressNext + 0x10; // 4 bytes
 
             Size = (offsetBoundariesAddress - Address) + 0x04;
         }
 
         public ScenarioType Scenario { get; }
 
+        public bool HasMeshes => Scenario >= ScenarioType.Scenario1;
         public bool HasPalette3 => Scenario >= ScenarioType.Scenario3;
-
         public bool HasIndexedTextures => Scenario >= ScenarioType.Scenario3;
 
         [BulkCopy]
@@ -202,22 +214,31 @@ namespace SF3.Models.Structs.MPD {
         [BulkCopy]
         [TableViewModelColumn(displayOrder: 11, isPointer: true)]
         public int OffsetMesh1 {
-            get => Data.GetDouble(offsetMesh1Address);
-            set => Data.SetDouble(offsetMesh1Address, value);
+            get => HasMeshes ? Data.GetDouble(offsetMesh1Address) : 0;
+            set {
+                if (HasMeshes)
+                    Data.SetDouble(offsetMesh1Address, value);
+            }
         }
 
         [BulkCopy]
         [TableViewModelColumn(displayOrder: 12, isPointer: true)]
         public int OffsetMesh2 {
-            get => Data.GetDouble(offsetMesh2Address);
-            set => Data.SetDouble(offsetMesh2Address, value);
+            get => HasMeshes ? Data.GetDouble(offsetMesh2Address) : 0;
+            set {
+                if (HasMeshes)
+                    Data.SetDouble(offsetMesh2Address, value);
+            }
         }
 
         [BulkCopy]
         [TableViewModelColumn(displayOrder: 13, isPointer: true)]
         public int OffsetMesh3 {
-            get => Data.GetDouble(offsetMesh3Address);
-            set => Data.SetDouble(offsetMesh3Address, value);
+            get => HasMeshes ? Data.GetDouble(offsetMesh3Address) : 0;
+            set {
+                if (HasMeshes)
+                    Data.SetDouble(offsetMesh3Address, value);
+            }
         }
 
         [BulkCopy]

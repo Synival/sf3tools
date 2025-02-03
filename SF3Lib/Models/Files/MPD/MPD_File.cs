@@ -35,7 +35,7 @@ namespace SF3.Models.Files.MPD {
             var demoAddr      = data.GetDouble(headerAddr + 0x0030);
 
             if ((demoAddr & 0xFFFF0000) == 0x00290000)
-                return ScenarioType.Demo;
+                return ScenarioType.Ship2;
 
             var palette3Addr  = data.GetDouble(headerAddr + 0x0044);
             var chunk21Addr   = data.GetDouble(0x20A8);
@@ -185,9 +185,10 @@ namespace SF3.Models.Files.MPD {
                 _ = MakeChunkData(5, ChunkType.Surface, CompressionType.Compressed);
 
             // Texture data, in chunks (6...13)
-            for (var i = 6; i <= 13; i++)
+            var lastTextureChunk = (Scenario >= ScenarioType.Scenario1) ? 13 : 10;
+            for (var i = 6; i <= lastTextureChunk; i++)
                 _ = MakeChunkData(i, ChunkType.Textures, CompressionType.Compressed);
-            if (chunks[21].Exists)
+            if (Scenario >= ScenarioType.Scenario2 && chunks[21].Exists)
                 _ = MakeChunkData(21, ChunkType.Textures, CompressionType.Compressed);
 
             // Sky boxes
@@ -204,7 +205,8 @@ namespace SF3.Models.Files.MPD {
 
             // Add unhandled images/scroll panes.
             // TODO: on what conditions are we sure these are scroll panes?
-            for (var i = 14; i <= 19; i++)
+            var scrollPaneStart = (Scenario >= ScenarioType.Scenario1) ? 14 : 11;
+            for (var i = scrollPaneStart; i < scrollPaneStart + 6; i++)
                 if (ChunkData[i] == null && chunks[i].Exists)
                     _ = MakeChunkData(i, ChunkType.UnhandledImage, CompressionType.Compressed);
 
@@ -327,7 +329,7 @@ namespace SF3.Models.Files.MPD {
                     : (chunkDatas[21] != null && mc.Index == 1) ? TextureCollectionType.Chunk1ModelTextures
                     : TextureCollectionType.PrimaryTextures;
 
-                var newModel = ModelCollection.Create(mc.DecompressedData, NameGetterContext, 0x00, "Models" + mc.Index, texCollection, mc.Index);
+                var newModel = ModelCollection.Create(mc.DecompressedData, NameGetterContext, 0x00, "Models" + mc.Index, Scenario, texCollection, mc.Index);
                 modelsList.Add(newModel);
                 tables.AddRange(newModel.Tables);
             }

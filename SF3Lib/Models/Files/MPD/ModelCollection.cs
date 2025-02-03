@@ -10,16 +10,17 @@ using SF3.Types;
 
 namespace SF3.Models.Files.MPD {
     public class ModelCollection : TableFile {
-        protected ModelCollection(IByteData data, INameGetterContext nameContext, int address, string name, TextureCollectionType textureCollection, int? chunkIndex)
+        protected ModelCollection(IByteData data, INameGetterContext nameContext, int address, string name, ScenarioType scenario, TextureCollectionType textureCollection, int? chunkIndex)
         : base(data, nameContext) {
             Address    = address;
             Name       = name;
+            Scenario   = scenario;
             TextureCollection = textureCollection;
             ChunkIndex = chunkIndex;
         }
 
-        public static ModelCollection Create(IByteData data, INameGetterContext nameContext, int address, string name, TextureCollectionType textureCollection, int? chunkIndex) {
-            var newFile = new ModelCollection(data, nameContext, address, name, textureCollection, chunkIndex);
+        public static ModelCollection Create(IByteData data, INameGetterContext nameContext, int address, string name, ScenarioType scenario, TextureCollectionType textureCollection, int? chunkIndex) {
+            var newFile = new ModelCollection(data, nameContext, address, name, scenario, textureCollection, chunkIndex);
             newFile.Init();
             return newFile;
         }
@@ -32,7 +33,7 @@ namespace SF3.Models.Files.MPD {
 
         public override IEnumerable<ITable> MakeTables() {
             ModelsHeaderTable = ModelsHeaderTable.Create(Data, "ModelsHeader", 0x0000);
-            ModelTable = ModelTable.Create(Data, "Models", 0x000C, ModelsHeaderTable[0].NumModels);
+            ModelTable = ModelTable.Create(Data, "Models", 0x000C, ModelsHeaderTable[0].NumModels, Scenario >= ScenarioType.Scenario1);
 
             var pdataAddresses = ModelTable
                 .SelectMany(x => x.PDatas)
@@ -137,12 +138,15 @@ namespace SF3.Models.Files.MPD {
                 return memoryAddress - 0x60a0000 /* TODO: apply actual offset of chunk! */;
             else if (memoryAddress >= 0x290000)
                 return memoryAddress - 0x292100 /* TODO: apply actual offset of chunk! */;
+            else if (memoryAddress >= 0x252100) // SHIP2.MPD
+                return memoryAddress - 0x252100;
             else
                 return memoryAddress;
         }
 
         [BulkCopyRowName]
         public string Name { get; }
+        public ScenarioType Scenario { get; }
         public TextureCollectionType TextureCollection { get; }
         public int Address { get; }
         public int? ChunkIndex { get; }
