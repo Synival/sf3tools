@@ -609,11 +609,12 @@ namespace SF3.Models.Files.MPD {
 
                 // Enforce alignment by inserting bytes where necessary before this chunk begins.
                 if (chunk.ChunkAddress != expectedRamAddr) {
-                    Data.Data.ResizeAt(
-                        lastChunkEndRamAddr - c_RamOffset,
-                        Math.Min(chunk.ChunkAddress - lastChunkEndRamAddr, Data.Data.Length),
-                        expectedRamAddr - lastChunkEndRamAddr
-                    );
+                    var resizeStart = lastChunkEndRamAddr - c_RamOffset;
+                    var resizeEnd = Math.Min(Data.Data.Length, chunk.ChunkAddress - c_RamOffset);
+                    var resizeOldSize = resizeEnd - resizeStart;
+                    var resizeNewSize = expectedRamAddr - lastChunkEndRamAddr;
+
+                    Data.Data.ResizeAt(resizeStart, resizeOldSize, resizeNewSize);
                 }
 
                 // Finish compressed chunks.
