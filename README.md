@@ -15,9 +15,9 @@ The editors themselves are written for .NET 8.0 using Winforms.
 
 Can be used to view and modify all .MPD files across all scenarios. Not all data is yet loaded.
 
-| ![BTL02_CatchupMountain](https://github.com/user-attachments/assets/6845cf02-a395-4946-91bb-d57ee474f9a2) | ![TOMTOM00_TerrainAndEvents](https://github.com/user-attachments/assets/f8b4a005-5922-451b-a4f4-e32aec455600) |
-|---|---|
-| ![BTL47_PrettyLighting](https://github.com/user-attachments/assets/dc410ccf-9f38-4d9f-9033-f69958b0d332) | ![DORA_LookAtThemDragons](https://github.com/user-attachments/assets/774f48df-811c-4dd3-9ea3-d77429c06841) |
+| ![BTL02 Original](https://github.com/user-attachments/assets/6d555e9c-c68e-4a29-a7ae-2a808cf05bd3) | ![BTL02_Modified](https://github.com/user-attachments/assets/2c409599-3878-4e5d-9381-43073426b8e3) | ![TOMTOM00_TerrainAndEvents](https://github.com/user-attachments/assets/ef191c3b-3259-426b-9722-3beda3bb2c8e) |
+|---|---|---|
+| ![BTL47_PrettyLighting](https://github.com/user-attachments/assets/20a7ddcc-2d6c-4022-b708-1c29ea120511) | ![DORA_LookAtThemDragons](https://github.com/user-attachments/assets/cd1b8b01-d398-4486-b8eb-9fdcca3370e5) | ![Animations](https://github.com/user-attachments/assets/f0ceed56-293b-49de-8f91-521dbaff488f) |
 
 Features:
 
