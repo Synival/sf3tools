@@ -14,10 +14,20 @@ namespace SF3.Models.Structs.MPD {
         }
 
         [BulkCopy]
-        [TableViewModelColumn(displayName: "Chunk Address", isPointer: true, displayOrder: 0)]
+        [TableViewModelColumn(displayName: "Chunk RAM Address", isPointer: true, displayOrder: 0)]
         public int ChunkAddress {
             get => Data.GetDouble(chunkAddressAddress);
             set => Data.SetDouble(chunkAddressAddress, value);
+        }
+
+        [BulkCopy]
+        [TableViewModelColumn(displayName: "Chunk File Address", displayFormat: "X6", displayOrder: 0.5f)]
+        public int ChunkFileAddress {
+            get {
+                var addr = ChunkAddress;
+                return (addr == 0) ? 0 : (ChunkAddress - 0x290000);
+            }
+            set => ChunkAddress = (value == 0) ? 0 : + 0x290000;
         }
 
         [BulkCopy]
