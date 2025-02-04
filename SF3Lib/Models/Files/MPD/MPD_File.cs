@@ -623,6 +623,17 @@ namespace SF3.Models.Files.MPD {
                     var resizeNewSize = expectedFileAddr - lastChunkEndFileAddr;
 
                     Data.Data.ResizeAt(resizeStart, resizeOldSize, resizeNewSize);
+
+                    // If the chunk just moved isn't managed by any ChunkData, then it's one of the first
+                    // chunks, and its empty. It should be at 0x2100, and so should every other empty chunk
+                    // at the beginning.
+                    if (chunk.ID < firstChunkDataIndex) {
+                        if (expectedFileAddr != 0x2100)
+                            throw new InvalidOperationException("Huh? We shouldn't be trying to fix chunks here!");
+                        for (int i = 0; i < firstChunkDataIndex; i++)
+                            if (i != chunk.ID)
+                                ChunkHeader[i].ChunkAddress = chunk.Address;
+                    }
                 }
 
                 // Move forward. Make sure the next chunk starts at an alignment of 4 bytes.
