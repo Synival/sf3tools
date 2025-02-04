@@ -23,10 +23,10 @@ namespace CommonLib.Tests.Utils {
             var input = (ushort) (0x8000 | (0x1F << 10) | (0x10 << 5) | (0x05 <<  0));
             var channels = ABGR1555toChannels(input);
 
-            Assert.AreEqual(0xFF,      channels.a);
-            Assert.AreEqual(0x1F << 3, channels.b);
-            Assert.AreEqual(0x10 << 3, channels.g);
-            Assert.AreEqual(0x05 << 3, channels.r);
+            Assert.AreEqual(0xFF,            channels.a);
+            Assert.AreEqual(0x1F * 255 / 31, channels.b);
+            Assert.AreEqual(0x10 * 255 / 31, channels.g);
+            Assert.AreEqual(0x05 * 255 / 31, channels.r);
         }
 
         [TestMethod]
@@ -34,10 +34,10 @@ namespace CommonLib.Tests.Utils {
             var input = (ushort) (0x8000 | (0x1F << 10) | (0x10 << 5) | (0x05 <<  0));
             var channels = ARGB1555toChannels(input);
 
-            Assert.AreEqual(0xFF,      channels.a);
-            Assert.AreEqual(0x1F << 3, channels.r);
-            Assert.AreEqual(0x10 << 3, channels.g);
-            Assert.AreEqual(0x05 << 3, channels.b);
+            Assert.AreEqual(0xFF,            channels.a);
+            Assert.AreEqual(0x1F * 255 / 31, channels.r);
+            Assert.AreEqual(0x10 * 255 / 31, channels.g);
+            Assert.AreEqual(0x05 * 255 / 31, channels.b);
         }
 
         [TestMethod]
