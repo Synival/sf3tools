@@ -595,39 +595,43 @@ namespace SF3.Models.Files.MPD {
             }
         }
 
-        private void RebuildChunkTable(bool onlyModified) {
-            int expectedRamAddr = 0x292100;
-            int lastChunkEndRamAddr = expectedRamAddr;
+        public void RebuildChunkTable(bool onlyModified) {
+            // Finish compressed chunks.
+            foreach (var cd in ChunkData)
+                if (cd != null && cd.IsCompressed && (!onlyModified || cd.NeedsRecompression || cd.IsModified))
+                    _ = cd.Recompress();
 
-            for (var i = 0; i < ChunkData.Length; i++) {
-                var chunk = ChunkHeader[i];
-                if (chunk.ChunkAddress == 0)
-                    continue;
+            int expectedFileAddr = 0x2100;
+            int lastChunkEndFileAddr = expectedFileAddr;
 
-                var chunkData = ChunkData[i];
-                var chunkByteArray = (ByteArraySegment) chunkData?.Data;
+            var chunksOrderedByPosition = ChunkHeader
+                .Where(x => x.ChunkAddress != 0)
+                .OrderBy(x => x.ChunkAddress)
+                .ThenBy(x => x.ChunkSize)
+                .ThenBy(x => x.ID)
+                .ToArray();
 
+            var firstChunkData = ChunkData.FirstOrDefault(x => x != null);
+            var firstChunkDataIndex = firstChunkData?.Index ?? 100;
+
+            foreach (var chunk in chunksOrderedByPosition) {
                 // Enforce alignment by inserting bytes where necessary before this chunk begins.
-                if (chunk.ChunkAddress != expectedRamAddr) {
-                    var resizeStart = lastChunkEndRamAddr - c_RamOffset;
-                    var resizeEnd = Math.Min(Data.Data.Length, chunk.ChunkAddress - c_RamOffset);
+                if (chunk.ChunkFileAddress != expectedFileAddr) {
+                    var resizeStart = lastChunkEndFileAddr;
+                    var resizeEnd = Math.Min(Data.Data.Length, chunk.ChunkFileAddress);
                     var resizeOldSize = resizeEnd - resizeStart;
-                    var resizeNewSize = expectedRamAddr - lastChunkEndRamAddr;
+                    var resizeNewSize = expectedFileAddr - lastChunkEndFileAddr;
 
                     Data.Data.ResizeAt(resizeStart, resizeOldSize, resizeNewSize);
                 }
 
-                // Finish compressed chunks.
-                if (chunkData != null && chunkData.IsCompressed && (!onlyModified || chunkData.NeedsRecompression || chunkData.IsModified))
-                    _ = chunkData.Recompress();
-
                 // Move forward. Make sure the next chunk starts at an alignment of 4 bytes.
-                expectedRamAddr += chunk.ChunkSize;
-                if (expectedRamAddr % 4 != 0)
-                    expectedRamAddr += 4 - (expectedRamAddr % 4);
+                expectedFileAddr += chunk.ChunkSize;
+                if (expectedFileAddr % 4 != 0)
+                    expectedFileAddr += 4 - (expectedFileAddr % 4);
 
                 // Keep track of where the last chunk ended. We'll add or remove zeroes here to enforce alignemnt.
-                lastChunkEndRamAddr = chunk.ChunkAddress + chunk.ChunkSize;
+                lastChunkEndFileAddr = chunk.ChunkFileAddress + chunk.ChunkSize;
             }
         }
 

@@ -112,7 +112,7 @@ namespace SF3.Tests.Models.Files {
                     //       so the content of the chunks will have been modified from the original test data.
                     //       The MPD_File should be an a modified state.
                     //       A few chunks are actually unmodified, how about that!
-                    var expectedResult = (i == 9 || i == 10 || i == 14 || i == 15) ? false : true;
+                    var expectedResult = (i == 5 || i == 6) ? true : false;
                     Assert.IsFalse(chunkData.NeedsRecompression);
                     Assert.IsFalse(chunkData.DecompressedData.IsModified);
                     Assert.AreEqual(expectedResult, chunkData.IsModified);
