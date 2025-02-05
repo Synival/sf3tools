@@ -35,14 +35,17 @@ namespace CommonLib.Arrays {
 
         public void OnParentRangeModifiedReal(object sender, ByteArrayRangeModifiedArgs args, bool isPre) {
             // TODO: moving!
-            // TODO: add unit tests for expanding size of a ByteSegment that starts at the same location as another, but its size is 0
             if (args.Moved)
                 ; //throw new NotImplementedException();
 
-            var end       = Length;
-            var argOffset = args.Offset - Offset;
-            var argLength = args.Length;
-            var argEnd    = argOffset + argLength;
+            // Offsets relative to this chunk.
+            const int thisStart = 0;
+            int thisLength = Length;
+            var thisEnd    = thisStart + thisLength;
+
+            var argStart   = args.Offset - Offset;
+            var argLength  = args.Length;
+            var argEnd     = argStart + argLength;
 
             int offsetChange = 0;
             int lengthChange = 0;
@@ -51,36 +54,36 @@ namespace CommonLib.Arrays {
             int? modifiedStart = null;
             int? modifiedEnd = null;
 
-            void UpdateModifiedRange(int start, int end2) {
+            void UpdateModifiedRange(int start, int end) {
                 modifiedStart = Math.Min(modifiedStart ?? start, start);
-                modifiedEnd   = Math.Max(modifiedEnd   ?? end2,  end2);
+                modifiedEnd   = Math.Max(modifiedEnd   ?? end,   end);
             }
 
             void HandleResize() {
                 // If the change was inside the ByteArraySegment but for some reason beyond
                 // the applicable range, throw an exception. This should never happen!!
-                if (_resizingInside != 0 && (argOffset < 0 || argEnd > end))
+                if (_resizingInside != 0 && (argStart < 0 || argEnd > thisEnd))
                     throw new InvalidByteArraySegmentRangeException();
 
                 // Ignore changes after the ByteArraySegment.
-                if (argOffset > end || (argOffset == end && _resizingInside == 0))
+                if (argStart > thisEnd || (argStart == thisEnd && _resizingInside == 0))
                     return;
 
                 // If the change was before the ByteArraySegment start, just adjust the offset.
-                if (argEnd < 0 || (argEnd == 0 && _resizingInside == 0)) {
-                    UpdateModifiedRange(0, Length);
+                if (argEnd < thisStart || (argEnd == 0 && _resizingInside == 0)) {
+                    UpdateModifiedRange(thisStart, thisEnd);
                     offsetChange = args.LengthChange;
                     return;
                 }
 
                 // Throw an exception if the resize is both inside and outside the ByteArraySegment.
                 // This is invalid because the new start/end of the segment can't be determined.
-                if ((argOffset < 0 && argEnd > 0) || (argOffset < end && argEnd > end))
+                if ((argStart < thisStart && argEnd > thisStart) || (argStart < thisEnd && argEnd > thisEnd))
                     throw new InvalidByteArraySegmentRangeException();
 
                 // If the resized range was inside, modify the ByteArraySegment length.
-                if (argOffset >= 0 && argEnd <= end) {
-                    UpdateModifiedRange(argOffset, argEnd);
+                if (argStart >= thisStart && argEnd <= thisEnd) {
+                    UpdateModifiedRange(argStart, argEnd);
                     lengthChange = args.LengthChange;
                     return;
                 }
@@ -92,8 +95,8 @@ namespace CommonLib.Arrays {
                 HandleResize();
 
             void HandleModified() {
-                var overlapStart = Math.Max(0,   argOffset);
-                var overlapEnd   = Math.Min(end, argEnd);
+                var overlapStart = Math.Max(thisStart, argStart);
+                var overlapEnd   = Math.Min(thisEnd, argEnd);
                 if (overlapStart < overlapEnd) {
                     UpdateModifiedRange(overlapStart, overlapEnd);
                     wasModified = true;
