@@ -596,24 +596,38 @@ namespace SF3.Models.Files.MPD {
         }
 
         public void RebuildChunkTable(bool onlyModified) {
+            // Gets all the chunks in order of their address, followed by the order in which they'll be updated.
+            ChunkHeader[] GetSortedChunks() {
+                return ChunkHeader
+                    .Where(x => x.ChunkAddress != 0)
+                    .OrderBy(x => x.ChunkAddress)
+                    .ThenBy(x => x.ChunkSize)
+                    .ThenBy(x => x.ID)
+                    .ToArray();
+            }
+
             // Finish compressed chunks.
+            var oldChunksOrderedByPosition = GetSortedChunks();
             foreach (var cd in ChunkData)
                 if (cd != null && cd.IsCompressed && (!onlyModified || cd.NeedsRecompression || cd.IsModified))
                     _ = cd.Recompress();
+            
+            // When fixing offsets and removing empty space, we want to apply changes in order from
+            // lowest to highest address.
+            var chunksOrderedByPosition = GetSortedChunks();
 
-            int expectedFileAddr = 0x2100;
-            int lastChunkEndFileAddr = expectedFileAddr;
+            // Perform sanity check.
+            var oldOrderedChunkIds = oldChunksOrderedByPosition.Select(x => x.ID).ToArray();
+            var newOrderedChunkIds = chunksOrderedByPosition.Select(x => x.ID).ToArray();
+            if (!Enumerable.SequenceEqual<int>(oldOrderedChunkIds, newOrderedChunkIds))
+                throw new InvalidOperationException("Chunks became out of order during decompression. This is bad, please contact the devs!");
 
-            var chunksOrderedByPosition = ChunkHeader
-                .Where(x => x.ChunkAddress != 0)
-                .OrderBy(x => x.ChunkAddress)
-                .ThenBy(x => x.ChunkSize)
-                .ThenBy(x => x.ID)
-                .ToArray();
-
+            // We need to know when the first chunk begins 
             var firstChunkData = ChunkData.FirstOrDefault(x => x != null);
             var firstChunkDataIndex = firstChunkData?.Index ?? 100;
 
+            int expectedFileAddr = 0x2100;
+            int lastChunkEndFileAddr = expectedFileAddr;
             foreach (var chunk in chunksOrderedByPosition) {
                 // Enforce alignment by inserting bytes where necessary before this chunk begins.
                 if (chunk.ChunkFileAddress != expectedFileAddr) {
