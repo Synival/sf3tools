@@ -257,7 +257,7 @@ namespace CommonLib.Tests.Arrays {
             var args = new List<ByteArrayRangeModifiedArgs>();
             arraySegment.RangeModified += (s, a) => args.Add(a);
 
-            _ = Assert.ThrowsException<InvalidByteArraySegmentRangeException>(
+            _ = Assert.ThrowsException<ArgumentOutOfRangeException>(
                 () => arraySegment.ExpandOrContractAt(4, -2));
         }
 

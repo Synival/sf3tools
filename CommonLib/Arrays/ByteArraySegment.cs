@@ -134,6 +134,8 @@ namespace CommonLib.Arrays {
         public int ExpandOrContractAt(int offset, int bytesToAddOrRemove) {
             if (offset < 0 || offset > Length)
                 throw new ArgumentOutOfRangeException(nameof(offset));
+            if (bytesToAddOrRemove < 0 && offset - bytesToAddOrRemove > Length)
+                throw new ArgumentOutOfRangeException(nameof(bytesToAddOrRemove));
             using (var insideIncr = InsideIncr())
                 return ParentArray.ExpandOrContractAt(Offset + offset, bytesToAddOrRemove);
         }
