@@ -286,6 +286,7 @@ namespace SF3.Models.Files.MPD {
 
             // Add some integrity checks after recompression.
             chunkData.Recompressed += (s, e) => {
+                var errors = new List<string>();
                 for (var i = 0; i < ChunkHeader.Length; i++) {
                     var ch = ChunkHeader[i];
                     var cd = ChunkData[i];
@@ -293,15 +294,22 @@ namespace SF3.Models.Files.MPD {
                         continue;
 
                     if (ch.ChunkFileAddress != cd.Offset) {
-                        throw new InvalidOperationException(
+                        errors.Add(
                             $"ChunkHeader[{i}].ChunkFileAddress and ChunkData[{i}].Offset mismatch after recompress: " +
                             $"{ch.ChunkFileAddress} vs {cd.Offset}");
                     }
                     if (ch.ChunkSize != cd.Length) {
-                        throw new InvalidOperationException(
+                        errors.Add(
                             $"ChunkHeader[{i}].ChunkSize and ChunkData[{i}].Length length/size mismatch after recompress: " +
                             $"{ch.ChunkSize} vs {cd.Length}");
                     }
+                }
+
+                if (errors.Count > 0) {
+                    throw new InvalidOperationException(
+                        "Integrity checks failed when recompressing chunk " + chunkIndex + ":\r\n" +
+                        string.Join("\r\n", errors)
+                    );
                 }
             };
 
