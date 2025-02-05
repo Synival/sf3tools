@@ -10,5 +10,10 @@
         /// Index of the Chunk in the file.
         /// </summary>
         int Index { get; }
+
+        /// <summary>
+        /// Position of the chunk.
+        /// </summary>
+        int Offset { get; }
     }
 }

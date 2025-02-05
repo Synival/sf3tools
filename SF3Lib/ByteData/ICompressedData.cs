@@ -30,5 +30,11 @@ namespace SF3.ByteData {
         /// Invoked when 'NeedsRecompression' value is changed.
         /// </summary>
         event EventHandler NeedsRecompressionChanged;
+
+        /// <summary>
+        /// Invoked when the data is recompressed.
+        /// </summary>
+        event EventHandler Recompressed;
+
     }
 }

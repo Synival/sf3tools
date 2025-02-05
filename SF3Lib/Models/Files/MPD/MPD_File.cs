@@ -236,9 +236,12 @@ namespace SF3.Models.Files.MPD {
                 throw new ArgumentException(nameof(chunkIndex));
 
             var isCompressed = (compressionType == CompressionType.Compressed);
-            ChunkData newChunk = null;
+            ByteArraySegment byteArraySegment = null;
+            ChunkData chunkData = null;
+
             try {
-                newChunk = new ChunkData(new ByteArraySegment(Data.Data, ChunkHeader[chunkIndex].ChunkAddress - c_RamOffset, ChunkHeader[chunkIndex].ChunkSize), isCompressed, chunkIndex);
+                byteArraySegment = new ByteArraySegment(Data.Data, ChunkHeader[chunkIndex].ChunkAddress - c_RamOffset, ChunkHeader[chunkIndex].ChunkSize);
+                chunkData = new ChunkData(byteArraySegment, isCompressed, chunkIndex);
             }
             catch {
                 // TODO: what to do???
@@ -246,16 +249,15 @@ namespace SF3.Models.Files.MPD {
             }
             var chunkHeader = ChunkHeader[chunkIndex];
 
-            chunkHeader.DecompressedSize = newChunk.DecompressedData.Length;
-            newChunk.DecompressedData.Data.RangeModified += (s, a) => {
+            chunkHeader.DecompressedSize = chunkData.DecompressedData.Length;
+            chunkData.DecompressedData.Data.RangeModified += (s, a) => {
                 if (a.Resized)
-                    chunkHeader.DecompressedSize = newChunk.DecompressedData.Length;
+                    chunkHeader.DecompressedSize = chunkData.DecompressedData.Length;
             };
 
-            newChunk.Data.RangeModified += (s, a) => {
+            chunkData.Data.RangeModified += (s, a) => {
+                var chunkName = chunkHeader.Name;
                 if (a.Moved) {
-                    var byteArraySegment = (ByteArraySegment) newChunk.Data;
-
                     // Figure out how much the offset has changed.
                     var oldOffset = chunkHeader.ChunkAddress - c_RamOffset;
                     var newOffset = byteArraySegment.Offset;
@@ -279,14 +281,35 @@ namespace SF3.Models.Files.MPD {
                     }
                 }
                 if (a.Resized)
-                    chunkHeader.ChunkSize = newChunk.Data.Length;
+                    chunkHeader.ChunkSize = chunkData.Data.Length;
+            };
+
+            // Add some integrity checks after recompression.
+            chunkData.Recompressed += (s, e) => {
+                for (var i = 0; i < ChunkHeader.Length; i++) {
+                    var ch = ChunkHeader[i];
+                    var cd = ChunkData[i];
+                    if (ch.ChunkAddress == 0 || cd == null)
+                        continue;
+
+                    if (ch.ChunkFileAddress != cd.Offset) {
+                        throw new InvalidOperationException(
+                            $"ChunkHeader[{i}].ChunkFileAddress and ChunkData[{i}].Offset mismatch after recompress: " +
+                            $"{ch.ChunkFileAddress} vs {cd.Offset}");
+                    }
+                    if (ch.ChunkSize != cd.Length) {
+                        throw new InvalidOperationException(
+                            $"ChunkHeader[{i}].ChunkSize and ChunkData[{i}].Length length/size mismatch after recompress: " +
+                            $"{ch.ChunkSize} vs {cd.Length}");
+                    }
+                }
             };
 
             chunkHeader.ChunkType = type;
             chunkHeader.CompressionType = compressionType;
 
-            ChunkData[chunkIndex] = newChunk;
-            return newChunk;
+            ChunkData[chunkIndex] = chunkData;
+            return chunkData;
         }
 
         private int[] GetModelsChunkIndices(ChunkHeader[] chunks) {
@@ -611,7 +634,7 @@ namespace SF3.Models.Files.MPD {
             foreach (var cd in ChunkData)
                 if (cd != null && cd.IsCompressed && (!onlyModified || cd.NeedsRecompression || cd.IsModified))
                     _ = cd.Recompress();
-            
+
             // When fixing offsets and removing empty space, we want to apply changes in order from
             // lowest to highest address.
             var chunksOrderedByPosition = GetSortedChunks();
