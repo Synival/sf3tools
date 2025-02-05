@@ -200,7 +200,7 @@ namespace CommonLib.Tests.Arrays {
             Assert.IsNotNull(args);
 
             Assert.AreEqual(3, args.Offset);
-            Assert.AreEqual(0, args.Length);
+            Assert.AreEqual(4, args.Length);
             Assert.AreEqual(-4, args.LengthChange);
             Assert.AreEqual(0, args.OffsetChange);
             Assert.IsFalse(args.Moved);

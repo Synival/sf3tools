@@ -215,7 +215,7 @@ namespace CommonLib.Tests.Arrays {
             Assert.AreEqual(1, args.Count);
             var a = args[0];
             Assert.AreEqual(0, a.Offset);
-            Assert.AreEqual(0, a.Length);
+            Assert.AreEqual(2, a.Length);
             Assert.AreEqual(0, a.OffsetChange);
             Assert.AreEqual(-2, a.LengthChange);
             Assert.AreEqual(false, a.Moved);
@@ -305,7 +305,7 @@ namespace CommonLib.Tests.Arrays {
             Assert.AreEqual(1, args.Count);
             var a = args[0];
             Assert.AreEqual(2, a.Offset);
-            Assert.AreEqual(0, a.Length);
+            Assert.AreEqual(2, a.Length);
             Assert.AreEqual(0, a.OffsetChange);
             Assert.AreEqual(-2, a.LengthChange);
             Assert.AreEqual(false, a.Moved);
