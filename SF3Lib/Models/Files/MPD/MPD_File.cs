@@ -257,14 +257,14 @@ namespace SF3.Models.Files.MPD {
                     var byteArraySegment = (ByteArraySegment) newChunk.Data;
 
                     // Figure out how much the offset has changed.
-                    var oldOffset = ChunkHeader[chunkIndex].ChunkAddress - c_RamOffset;
+                    var oldOffset = chunkHeader.ChunkAddress - c_RamOffset;
                     var newOffset = byteArraySegment.Offset;
                     var offsetDelta = newOffset - oldOffset;
                     if (offsetDelta == 0)
                         return;
 
                     // Update the address in the chunk table.
-                    ChunkHeader[chunkIndex].ChunkAddress = newOffset + c_RamOffset;
+                    chunkHeader.ChunkAddress = newOffset + c_RamOffset;
 
                     // Chunks after this one with something assigned to ChunkData[] will have their
                     // ChunkAddress updated automatically. For chunks without a ChunkData[] after this one
