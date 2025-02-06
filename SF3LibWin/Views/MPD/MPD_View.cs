@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Linq;
 using System.Windows.Forms;
+using CommonLib.Imaging;
 using SF3.Models.Files.MPD;
 
 namespace SF3.Win.Views.MPD {
@@ -23,6 +25,9 @@ namespace SF3.Win.Views.MPD {
             CreateChild(new LightingView("Lighting", Model));
             CreateChild(new TableView("Boundaries", Model.BoundariesTable, Model.NameGetterContext));
             CreateChild(new TexturesView("Textures", Model));
+
+            if (Model.SkyBoxImage != null)
+                CreateChild(new TwoChunkImageView("SkyBox", Model.SkyBoxImage));
 
             CreateChild(new DataView("Data (only modify if you know what you're doing!)", Model));
 

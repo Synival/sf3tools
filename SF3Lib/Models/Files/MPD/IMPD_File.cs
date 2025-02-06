@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using CommonLib.Imaging;
 using SF3.ByteData;
 using SF3.Models.Tables;
 using SF3.Models.Tables.MPD;
@@ -33,6 +34,13 @@ namespace SF3.Models.Files.MPD {
         /// Removes all associations between tree models and tiles.
         /// </summary>
         void ResetTileTrees();
+
+        /// <summary>
+        /// Creates a palette using PaletteTable[index]. If a palette does not exist, a 256 grayscale palette is returned.
+        /// </summary>
+        /// <param name="index">Corresponding zero-indexed palette number, with 0 as Palette1.</param>
+        /// <returns>A 256-color palette for the requested index.</returns>
+        Palette CreatePalette(int index);
 
         /// <summary>
         /// Byte data for (de)compressed data for chunks
@@ -71,5 +79,6 @@ namespace SF3.Models.Files.MPD {
 
         Tile[,] Tiles { get; }
         IChunkData[] SkyBoxChunkData { get; }
+        TwoChunkImage SkyBoxImage { get; }
     }
 }

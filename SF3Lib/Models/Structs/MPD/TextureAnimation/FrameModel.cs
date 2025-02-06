@@ -54,7 +54,7 @@ namespace SF3.Models.Structs.MPD.TextureAnimation {
                 for (var x = 0; x < Width; x++)
                     imageData[x, y] = (byte) data.GetByte(off++);
 
-            Texture = new TextureIndexed(TextureID, FrameNum, (int) Duration, imageData, pixelFormat, palette,
+            Texture = new TextureIndexed(TextureID, FrameNum, (int) Duration, imageData, pixelFormat, palette, true,
                 tags: referenceTexture?.Tags, hashPrefix: referenceTexture?.Hash ?? "NOTEX");
         }
 

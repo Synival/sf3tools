@@ -139,7 +139,7 @@ namespace SF3.MPD_Editor.Forms {
 
                     // Try to actually load the texture!
                     try {
-                        var image = Image.FromFile(filename);
+                        var image = System.Drawing.Image.FromFile(filename);
                         if (image.Width != texture.Width || image.Height != texture.Height) {
                             failed++;
                             continue;

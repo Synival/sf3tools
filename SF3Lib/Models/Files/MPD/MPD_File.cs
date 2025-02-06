@@ -457,6 +457,10 @@ namespace SF3.Models.Files.MPD {
             // TODO: This function is a MESS. Please refactor it!!
             BuildTextureAnimFrameData();
 
+            // Add some images.
+            if (SkyBoxChunkData?.Length == 2)
+                SkyBoxImage = new TwoChunkImage(SkyBoxChunkData[0].DecompressedData, SkyBoxChunkData[1].DecompressedData, TexturePixelFormat.Palette2, CreatePalette(1));
+
             return tables.ToArray();
         }
 
@@ -817,6 +821,24 @@ namespace SF3.Models.Files.MPD {
             }
         }
 
+        public Palette CreatePalette(int index)
+        {
+            if (index < 0 || index > 2)
+                throw new ArgumentOutOfRangeException(nameof(index));
+
+            if (PaletteTables == null || index >= PaletteTables.Length)
+                return new Palette(256);
+
+            var paletteTable = PaletteTables[index];
+            if (paletteTable == null)
+                return new Palette(256);
+
+            if (paletteTable.Length != 256)
+                throw new InvalidOperationException($"PaletteTable[{index}] should be 256 colors, instead it's {paletteTable.Length}");
+
+            return new Palette(paletteTable.Select(x => x.ColorABGR1555).ToArray());
+        }
+
         public IChunkData[] ChunkData { get; private set; }
 
         public IChunkData[] ModelsChunkData { get; private set; }
@@ -881,5 +903,6 @@ namespace SF3.Models.Files.MPD {
 
         public Tile[,] Tiles { get; } = new Tile[64, 64];
         public IChunkData[] SkyBoxChunkData { get; private set; }
+        public TwoChunkImage SkyBoxImage { get; private set; }
     }
 }

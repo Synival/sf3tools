@@ -9,7 +9,7 @@ using SF3.Types;
 namespace SF3 {
     public class TextureIndexed : ITexture {
         public TextureIndexed(int id, int frame, int duration, byte[,] data,
-            TexturePixelFormat format, Palette palette, Dictionary<TagKey, TagValue> tags = null, string hashPrefix = ""
+            TexturePixelFormat format, Palette palette, bool zeroIsTransparent, Dictionary<TagKey, TagValue> tags = null, string hashPrefix = ""
         ) {
             ID          = id;
             Frame       = frame;
@@ -17,6 +17,7 @@ namespace SF3 {
             _data       = data;
             PixelFormat = format;
             Palette     = palette;
+            ZeroIsTransparent = zeroIsTransparent;
             Tags        = (tags == null) ? new Dictionary<TagKey, TagValue>() : tags.ToDictionary(x => x.Key, x => x.Value);
             _hashPrefix = hashPrefix;
         }
@@ -40,7 +41,7 @@ namespace SF3 {
         public byte[] BitmapDataARGB1555 {
             get {
                 if (_bitmapDataARGB1555 == null)
-                    _bitmapDataARGB1555 = BitmapUtils.ConvertIndexedDataToABGR1555BitmapData(_data, Palette, true);
+                    _bitmapDataARGB1555 = BitmapUtils.ConvertIndexedDataToABGR1555BitmapData(_data, Palette, ZeroIsTransparent);
                 return _bitmapDataARGB1555;
             }
         }
@@ -48,7 +49,7 @@ namespace SF3 {
         public byte[] BitmapDataARGB8888 {
             get {
                 if (_bitmapDataARGB8888 == null)
-                    _bitmapDataARGB8888 = BitmapUtils.ConvertIndexedDataToABGR8888BitmapData(_data, Palette, true);
+                    _bitmapDataARGB8888 = BitmapUtils.ConvertIndexedDataToABGR8888BitmapData(_data, Palette, ZeroIsTransparent);
                 return _bitmapDataARGB8888;
             }
         }
@@ -79,5 +80,7 @@ namespace SF3 {
                 }
             }
         }
+
+        public bool ZeroIsTransparent { get; }
     }
 }
