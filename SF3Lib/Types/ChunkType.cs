@@ -7,7 +7,8 @@ namespace SF3.Types {
         Surface = 4,
         Textures = 5,
         AnimationFrames = 6,
-        Image = 7,
-        Unhandled = 8
+        Palette1Image = 7,
+        Palette2Image = 8,
+        UnhandledImageOrData = 9
     }
 }

@@ -57,17 +57,20 @@ namespace SF3.Win.Views.MPD {
                 var name = header.ChunkType.ToString();
 
                 switch (header.ChunkType) {
-                    case ChunkType.Unset:
-                    case ChunkType.Unknown:
-                        AddChunkView(chunk.Index, name, (name) => new DataHexView(name, chunk.DecompressedData.Data));
+                    case ChunkType.Palette1Image:
+                        AddChunkView(chunk.Index, name, (name) => new DataImageView(name, chunk.DecompressedData.Data, palettes[0]));
                         break;
 
-                    case ChunkType.Image:
+                    case ChunkType.Palette2Image:
                         AddChunkView(chunk.Index, name, (name) => new DataImageView(name, chunk.DecompressedData.Data, palettes[1]));
                         break;
 
-                    case ChunkType.Unhandled:
+                    case ChunkType.UnhandledImageOrData:
                         AddChunkView(chunk.Index, name, (name) => new DataImageView(name, chunk.DecompressedData.Data, palettes));
+                        break;
+
+                    default:
+                        AddChunkView(chunk.Index, name, (name) => new DataHexView(name, chunk.DecompressedData.Data));
                         break;
                 }
             }

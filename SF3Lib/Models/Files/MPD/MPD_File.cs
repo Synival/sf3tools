@@ -210,9 +210,9 @@ namespace SF3.Models.Files.MPD {
                 // TODO: This only works for Scenario 1!
                 // TODO: What chunks are used in Scn2 and beyond? It seems to change!!
                 if (chunks[14].Exists)
-                    repeatingGroundChunks.Add(_ = MakeChunkData(14, ChunkType.Image, CompressionType.Compressed));
+                    repeatingGroundChunks.Add(_ = MakeChunkData(14, ChunkType.Palette1Image, CompressionType.Compressed));
                 if (chunks[15].Exists)
-                    repeatingGroundChunks.Add(_ = MakeChunkData(15, ChunkType.Image, CompressionType.Compressed));
+                    repeatingGroundChunks.Add(_ = MakeChunkData(15, ChunkType.Palette1Image, CompressionType.Compressed));
             }
             RepeatingGroundChunkData = repeatingGroundChunks.Where(x => x != null).ToArray();
 
@@ -222,9 +222,9 @@ namespace SF3.Models.Files.MPD {
                 // TODO: This only works for Scenario 1!
                 // TODO: What chunks are used in Scn2 and beyond? It seems to change!!
                 if (chunks[17].Exists)
-                    skyboxChunks.Add(_ = MakeChunkData(17, ChunkType.Image, CompressionType.Compressed));
+                    skyboxChunks.Add(_ = MakeChunkData(17, ChunkType.Palette2Image, CompressionType.Compressed));
                 if (chunks[18].Exists)
-                    skyboxChunks.Add(_ = MakeChunkData(18, ChunkType.Image, CompressionType.Compressed));
+                    skyboxChunks.Add(_ = MakeChunkData(18, ChunkType.Palette2Image, CompressionType.Compressed));
             }
             SkyBoxChunkData = skyboxChunks.Where(x => x != null).ToArray();
 
@@ -233,7 +233,7 @@ namespace SF3.Models.Files.MPD {
             var scrollPlaneStart = (Scenario >= ScenarioType.Scenario1) ? 14 : 11;
             for (var i = scrollPlaneStart; i < scrollPlaneStart + 6; i++)
                 if (ChunkData[i] == null && chunks[i].Exists)
-                    _ = MakeChunkData(i, ChunkType.Unhandled, CompressionType.Compressed);
+                    _ = MakeChunkData(i, ChunkType.UnhandledImageOrData, CompressionType.Compressed);
 
             // Add remaining unhandled chunks.
             for (var i = 0; i < chunks.Length; i++)
