@@ -204,7 +204,7 @@ namespace SF3.Models.Files.MPD {
             if (Scenario >= ScenarioType.Scenario2 && chunks[21].Exists)
                 _ = MakeChunkData(21, ChunkType.Textures, CompressionType.Compressed);
 
-            // Sky boxes
+            // Repeating backgrounds
             var repeatingGroundChunks = new List<IChunkData>();
             if (MPDHeader[0].HasRepeatingGround) {
                 // TODO: This only works for Scenario 1!
@@ -227,6 +227,18 @@ namespace SF3.Models.Files.MPD {
                     skyboxChunks.Add(_ = MakeChunkData(18, ChunkType.Palette2Image, CompressionType.Compressed));
             }
             SkyBoxChunkData = skyboxChunks.Where(x => x != null).ToArray();
+
+            // Background image
+            var backgroundChunks = new List<IChunkData>();
+            if (MPDHeader[0].HasBackground) {
+                // TODO: This only works for Scenario 1!
+                // TODO: What chunks are used in Scn2 and beyond? It seems to change!!
+                if (chunks[14].Exists)
+                    backgroundChunks.Add(_ = MakeChunkData(14, ChunkType.Palette1Image, CompressionType.Compressed));
+                if (chunks[15].Exists)
+                    backgroundChunks.Add(_ = MakeChunkData(15, ChunkType.Palette1Image, CompressionType.Compressed));
+            }
+            BackgroundChunkData = backgroundChunks.Where(x => x != null).ToArray();
 
             // Add unhandled images/scroll planes.
             // TODO: on what conditions are we sure these are scroll planes?
@@ -474,6 +486,8 @@ namespace SF3.Models.Files.MPD {
                 RepeatingGroundImage = new TwoChunkImage(RepeatingGroundChunkData[0].DecompressedData, RepeatingGroundChunkData[1].DecompressedData, TexturePixelFormat.Palette1, CreatePalette(0));
             if (SkyBoxChunkData?.Length == 2)
                 SkyBoxImage = new TwoChunkImage(SkyBoxChunkData[0].DecompressedData, SkyBoxChunkData[1].DecompressedData, TexturePixelFormat.Palette2, CreatePalette(1));
+            if (BackgroundChunkData?.Length == 2)
+                BackgroundImage = new TwoChunkImage(BackgroundChunkData[0].DecompressedData, BackgroundChunkData[1].DecompressedData, TexturePixelFormat.Palette1, CreatePalette(0));
 
             return tables.ToArray();
         }
@@ -922,5 +936,8 @@ namespace SF3.Models.Files.MPD {
 
         public IChunkData[] SkyBoxChunkData { get; private set; }
         public TwoChunkImage SkyBoxImage { get; private set; }
+
+        public IChunkData[] BackgroundChunkData { get; private set; }
+        public TwoChunkImage BackgroundImage { get; private set; }
     }
 }

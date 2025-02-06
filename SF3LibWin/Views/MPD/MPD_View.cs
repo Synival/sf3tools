@@ -30,6 +30,8 @@ namespace SF3.Win.Views.MPD {
                 CreateChild(new TwoChunkImageView("Repeating Ground", Model.RepeatingGroundImage));
             if (Model.SkyBoxImage != null)
                 CreateChild(new TwoChunkImageView("Sky Box", Model.SkyBoxImage));
+            if (Model.BackgroundImage != null)
+                CreateChild(new TwoChunkImageView("Background", Model.BackgroundImage));
 
             CreateChild(new DataView("Data (only modify if you know what you're doing!)", Model));
 

@@ -8,7 +8,8 @@ namespace SF3.Types {
         SkyBox                   = 3,
         RepeatingGroundAndSkybox = 4,
         TiledGround              = 5,
-        TiledGroundAndSkybox     = 6
+        TiledGroundAndSkybox     = 6,
+        BackgroundWithTiledForeground = 7,
     }
 
     public static class MPDImageChunksTypeExtensions {
@@ -20,6 +21,8 @@ namespace SF3.Types {
                     switch (mf) {
                         case 0x0000:
                             return MPDImageChunksType.Nothing;
+                        case 0x0050:
+                            return MPDImageChunksType.BackgroundWithTiledForeground;
                         case 0x0400:
                             return MPDImageChunksType.RepeatingGround;
                         case 0x1000:
@@ -42,8 +45,20 @@ namespace SF3.Types {
                     }
                     break;
 
+                case ScenarioType.Scenario2:
+                case ScenarioType.Scenario3:
+                case ScenarioType.PremiumDisk:
+                    switch (mf) {
+                        case 0x0000:
+                            return MPDImageChunksType.Nothing;
+                        case 0x0050:
+                            return MPDImageChunksType.BackgroundWithTiledForeground;
+                        default:
+                            // TODO: figure out how these work!!
+                            return MPDImageChunksType.Unknown;
+                    }
+
                 default:
-                    // TODO: implement other scenarios
                     return MPDImageChunksType.Unknown;
             }
 
@@ -57,10 +72,15 @@ namespace SF3.Types {
         public static ushort ApplicableMapFlags(ScenarioType scenario) {
             switch (scenario) {
                 case ScenarioType.Scenario1:
-                    return 0x3400;
+                    return 0x3450;
+
+                case ScenarioType.Scenario2:
+                case ScenarioType.Scenario3:
+                case ScenarioType.PremiumDisk:
+                    // TODO: figure out how these work!!
+                    return 0x0050;
 
                 default:
-                    // TODO: implement other scenarios
                     return 0x0000;
             }
         }
@@ -72,6 +92,8 @@ namespace SF3.Types {
                         case MPDImageChunksType.Unknown:
                         case MPDImageChunksType.Nothing:
                             return 0x0000;
+                        case MPDImageChunksType.BackgroundWithTiledForeground:
+                            return 0x0050;
                         case MPDImageChunksType.RepeatingGround:
                             return 0x0400;
                         case MPDImageChunksType.TiledGround:
@@ -89,8 +111,22 @@ namespace SF3.Types {
                             catch { }
                             return 0x0000;
                     }
+
+                case ScenarioType.Scenario2:
+                case ScenarioType.Scenario3:
+                case ScenarioType.PremiumDisk:
+                    switch (type) {
+                        case MPDImageChunksType.Unknown:
+                        case MPDImageChunksType.Nothing:
+                            return 0x0000;
+                        case MPDImageChunksType.BackgroundWithTiledForeground:
+                            return 0x0050;
+                        default:
+                            // TODO: figure out how these work!!
+                            return 0x0000;
+                    }
+
                 default:
-                    // TODO: implement other scenarios
                     return 0x0000;
             }
         }
@@ -103,5 +139,8 @@ namespace SF3.Types {
 
         public static bool HasSkyBox(this MPDImageChunksType type)
             => (type == MPDImageChunksType.SkyBox || type == MPDImageChunksType.RepeatingGroundAndSkybox);
+
+        public static bool HasBackground(this MPDImageChunksType type)
+            => (type == MPDImageChunksType.BackgroundWithTiledForeground);
     }
 }

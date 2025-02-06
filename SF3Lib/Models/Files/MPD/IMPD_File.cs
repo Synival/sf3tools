@@ -84,5 +84,8 @@ namespace SF3.Models.Files.MPD {
 
         IChunkData[] SkyBoxChunkData { get; }
         TwoChunkImage SkyBoxImage { get; }
+
+        IChunkData[] BackgroundChunkData { get; }
+        TwoChunkImage BackgroundImage { get; }
     }
 }

@@ -164,6 +164,12 @@ namespace MPD_Analyzer {
                                     if (!chunkHeaders[19].Exists)
                                         Console.WriteLine("  !!! HasTiledGround is 'true', but Chunk[19] is missing!");
                                 }
+                                else if (header.HasBackground) {
+                                    if (!chunkHeaders[14].Exists)
+                                        Console.WriteLine("  !!! HasBackground is 'true', but Chunk[14] is missing!");
+                                    if (!chunkHeaders[15].Exists)
+                                        Console.WriteLine("  !!! HasBackground is 'true', but Chunk[15] is missing!");
+                                }
                                 else {
                                     if (chunkHeaders[14].Exists)
                                         Console.WriteLine("  !!! Has no ground, but Chunk[14] exists!");
@@ -181,6 +187,14 @@ namespace MPD_Analyzer {
                                         Console.WriteLine("  !!! HasSkyBox is 'true', but Chunk[17] is missing!");
                                     if (!chunkHeaders[18].Exists)
                                         Console.WriteLine("  !!! HasSkyBox is 'true', but Chunk[18] is missing!");
+                                }
+                                else if (header.HasBackground) {
+                                    if (!chunkHeaders[17].Exists)
+                                        Console.WriteLine("  !!! HasBackground is 'true', but Chunk[17] is missing!");
+                                    if (!chunkHeaders[18].Exists)
+                                        Console.WriteLine("  !!! HasBackground is 'true', but Chunk[18] is missing!");
+                                    if (!chunkHeaders[19].Exists)
+                                        Console.WriteLine("  !!! HasBackground is 'true', but Chunk[19] is missing!");
                                 }
                                 else {
                                     if (chunkHeaders[17].Exists)
