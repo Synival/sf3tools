@@ -62,11 +62,11 @@ namespace SF3.Win.Views.MPD {
                         AddChunkView(chunk.Index, name, (name) => new DataHexView(name, chunk.DecompressedData.Data));
                         break;
 
-                    case ChunkType.SkyBox:
+                    case ChunkType.Image:
                         AddChunkView(chunk.Index, name, (name) => new DataImageView(name, chunk.DecompressedData.Data, palettes[1]));
                         break;
 
-                    case ChunkType.UnhandledImage:
+                    case ChunkType.Unhandled:
                         AddChunkView(chunk.Index, name, (name) => new DataImageView(name, chunk.DecompressedData.Data, palettes));
                         break;
                 }

@@ -78,6 +78,10 @@ namespace SF3.Models.Files.MPD {
         TextureCollection[] TextureCollections { get; }
 
         Tile[,] Tiles { get; }
+
+        IChunkData[] RepeatingGroundChunkData { get; }
+        TwoChunkImage RepeatingGroundImage { get; }
+
         IChunkData[] SkyBoxChunkData { get; }
         TwoChunkImage SkyBoxImage { get; }
     }

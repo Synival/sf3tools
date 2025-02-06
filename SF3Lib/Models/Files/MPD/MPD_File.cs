@@ -205,14 +205,26 @@ namespace SF3.Models.Files.MPD {
                 _ = MakeChunkData(21, ChunkType.Textures, CompressionType.Compressed);
 
             // Sky boxes
+            var repeatingGroundChunks = new List<IChunkData>();
+            if (MPDHeader[0].HasRepeatingGround) {
+                // TODO: This only works for Scenario 1!
+                // TODO: What chunks are used in Scn2 and beyond? It seems to change!!
+                if (chunks[14].Exists)
+                    repeatingGroundChunks.Add(_ = MakeChunkData(14, ChunkType.Image, CompressionType.Compressed));
+                if (chunks[15].Exists)
+                    repeatingGroundChunks.Add(_ = MakeChunkData(15, ChunkType.Image, CompressionType.Compressed));
+            }
+            RepeatingGroundChunkData = repeatingGroundChunks.Where(x => x != null).ToArray();
+
+            // Sky boxes
             var skyboxChunks = new List<IChunkData>();
             if (MPDHeader[0].HasSkyBox) {
                 // TODO: This only works for Scenario 1!
                 // TODO: What chunks are used in Scn2 and beyond? It seems to change!!
                 if (chunks[17].Exists)
-                    skyboxChunks.Add(_ = MakeChunkData(17, ChunkType.SkyBox, CompressionType.Compressed));
+                    skyboxChunks.Add(_ = MakeChunkData(17, ChunkType.Image, CompressionType.Compressed));
                 if (chunks[18].Exists)
-                    skyboxChunks.Add(_ = MakeChunkData(18, ChunkType.SkyBox, CompressionType.Compressed));
+                    skyboxChunks.Add(_ = MakeChunkData(18, ChunkType.Image, CompressionType.Compressed));
             }
             SkyBoxChunkData = skyboxChunks.Where(x => x != null).ToArray();
 
@@ -221,7 +233,7 @@ namespace SF3.Models.Files.MPD {
             var scrollPlaneStart = (Scenario >= ScenarioType.Scenario1) ? 14 : 11;
             for (var i = scrollPlaneStart; i < scrollPlaneStart + 6; i++)
                 if (ChunkData[i] == null && chunks[i].Exists)
-                    _ = MakeChunkData(i, ChunkType.UnhandledImage, CompressionType.Compressed);
+                    _ = MakeChunkData(i, ChunkType.Unhandled, CompressionType.Compressed);
 
             // Add remaining unhandled chunks.
             for (var i = 0; i < chunks.Length; i++)
@@ -458,6 +470,8 @@ namespace SF3.Models.Files.MPD {
             BuildTextureAnimFrameData();
 
             // Add some images.
+            if (RepeatingGroundChunkData?.Length == 2)
+                RepeatingGroundImage = new TwoChunkImage(RepeatingGroundChunkData[0].DecompressedData, RepeatingGroundChunkData[1].DecompressedData, TexturePixelFormat.Palette1, CreatePalette(0));
             if (SkyBoxChunkData?.Length == 2)
                 SkyBoxImage = new TwoChunkImage(SkyBoxChunkData[0].DecompressedData, SkyBoxChunkData[1].DecompressedData, TexturePixelFormat.Palette2, CreatePalette(1));
 
@@ -902,6 +916,10 @@ namespace SF3.Models.Files.MPD {
         public TextureCollection[] TextureCollections { get; private set; }
 
         public Tile[,] Tiles { get; } = new Tile[64, 64];
+
+        public IChunkData[] RepeatingGroundChunkData { get; private set; }
+        public TwoChunkImage RepeatingGroundImage { get; private set; }
+
         public IChunkData[] SkyBoxChunkData { get; private set; }
         public TwoChunkImage SkyBoxImage { get; private set; }
     }

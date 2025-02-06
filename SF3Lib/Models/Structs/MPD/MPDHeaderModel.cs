@@ -125,14 +125,20 @@ namespace SF3.Models.Structs.MPD {
             }
         }
 
-        [TableViewModelColumn(displayOrder: 0.2f, displayName: "HasSkyBox (Scn1)")]
-        public bool HasSkyBox {
-            get => Scenario == ScenarioType.Scenario1 && (MapFlags & 0x2000) == 0x2000;
-            set {
-                if (Scenario == ScenarioType.Scenario1)
-                    MapFlags = (ushort) ((MapFlags & ~0x2000) | (value ? 0x2000 : 0));
-            }
+        [TableViewModelColumn(displayOrder: 0.20f, displayName: "Image Chunks Type")]
+        public MPDImageChunksType ImageChunksType {
+            get => MPDImageChunksTypeExtensions.FromMapFlags(MapFlags, Scenario);
+            set => MapFlags = (ushort) ((MapFlags & ~MPDImageChunksTypeExtensions.ApplicableMapFlags(Scenario)) | value.ToMapFlags(Scenario));
         }
+
+        [TableViewModelColumn(displayOrder: 0.21f, displayName: "HasRepeatingGround")]
+        public bool HasRepeatingGround => ImageChunksType.HasRepeatingGround();
+
+        [TableViewModelColumn(displayOrder: 0.22f, displayName: "HasTiledGround")]
+        public bool HasTiledGround => ImageChunksType.HasTiledGround();
+
+        [TableViewModelColumn(displayOrder: 0.23f, displayName: "HasSkyBox")]
+        public bool HasSkyBox => ImageChunksType.HasSkyBox();
 
         [TableViewModelColumn(displayOrder: 0.3f, displayName: "UseNewLighting (Scn2+)")]
         public bool UseNewLighting {

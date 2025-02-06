@@ -26,8 +26,10 @@ namespace SF3.Win.Views.MPD {
             CreateChild(new TableView("Boundaries", Model.BoundariesTable, Model.NameGetterContext));
             CreateChild(new TexturesView("Textures", Model));
 
+            if (Model.RepeatingGroundImage != null)
+                CreateChild(new TwoChunkImageView("Repeating Ground", Model.RepeatingGroundImage));
             if (Model.SkyBoxImage != null)
-                CreateChild(new TwoChunkImageView("SkyBox", Model.SkyBoxImage));
+                CreateChild(new TwoChunkImageView("Sky Box", Model.SkyBoxImage));
 
             CreateChild(new DataView("Data (only modify if you know what you're doing!)", Model));
 
