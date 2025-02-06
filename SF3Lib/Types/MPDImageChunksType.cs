@@ -41,7 +41,6 @@ namespace SF3.Types {
                             }
                             catch { }
                             return MPDImageChunksType.Unknown;
-
                     }
                     break;
 
@@ -53,12 +52,12 @@ namespace SF3.Types {
                             return MPDImageChunksType.Nothing;
                         case 0x0050:
                             return MPDImageChunksType.BackgroundWithTiledForeground;
+                        case 0x0400:
+                            return MPDImageChunksType.RepeatingGround;
                         case 0x1000:
                             return MPDImageChunksType.TiledGround;
-                        default:
-                            // TODO: figure out how these work!!
-                            return MPDImageChunksType.Unknown;
                     }
+                    break;
 
                 default:
                     return MPDImageChunksType.Unknown;
@@ -79,8 +78,7 @@ namespace SF3.Types {
                 case ScenarioType.Scenario2:
                 case ScenarioType.Scenario3:
                 case ScenarioType.PremiumDisk:
-                    // TODO: figure out how these work!!
-                    return 0x1050;
+                    return 0x1450;
 
                 default:
                     return 0x0000;
@@ -106,13 +104,8 @@ namespace SF3.Types {
                             return 0x2400;
                         case MPDImageChunksType.TiledGroundAndSkybox:
                             return 0x3000;
-                        default:
-                            try {
-                                throw new InvalidOperationException($"Unhandled map flags for {scenario} MPDImageChunksType: {type}");
-                            }
-                            catch { }
-                            return 0x0000;
                     }
+                    break;
 
                 case ScenarioType.Scenario2:
                 case ScenarioType.Scenario3:
@@ -123,16 +116,22 @@ namespace SF3.Types {
                             return 0x0000;
                         case MPDImageChunksType.BackgroundWithTiledForeground:
                             return 0x0050;
+                        case MPDImageChunksType.RepeatingGround:
+                            return 0x0400;
                         case MPDImageChunksType.TiledGround:
                             return 0x1000;
-                        default:
-                            // TODO: figure out how these work!!
-                            return 0x0000;
                     }
+                    break;
 
                 default:
                     return 0x0000;
             }
+
+            try {
+                throw new InvalidOperationException($"Unhandled map flags for {scenario} MPDImageChunksType: {type}");
+            }
+            catch { }
+            return 0x0000;
         }
 
         public static bool HasRepeatingGround(this MPDImageChunksType type)

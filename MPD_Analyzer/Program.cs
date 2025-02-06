@@ -142,45 +142,45 @@ namespace MPD_Analyzer {
                             if (chunkHeaders[4].Exists)
                                 Console.WriteLine("  !!! Chunk[4] exists!");
 
+                            // Check for ground chunks.
+                            if (header.HasRepeatingGround && header.HasTiledGround)
+                                Console.WriteLine("  !!! Has both HasRepeatingGround and HasTiledGround!");
+                            else if (header.HasRepeatingGround) {
+                                if (!chunkHeaders[14].Exists)
+                                    Console.WriteLine("  !!! HasRepeatingGround is 'true', but Chunk[14] is missing!");
+                                if (!chunkHeaders[15].Exists)
+                                    Console.WriteLine("  !!! HasRepeatingGround is 'true', but Chunk[15] is missing!");
+                            }
+                            else if (header.HasTiledGround) {
+                                if (!chunkHeaders[14].Exists)
+                                    Console.WriteLine("  !!! HasTiledGround is 'true', but Chunk[14] is missing!");
+                                if (!chunkHeaders[15].Exists)
+                                    Console.WriteLine("  !!! HasTiledGround is 'true', but Chunk[15] is missing!");
+                                if (!chunkHeaders[16].Exists)
+                                    Console.WriteLine("  !!! HasTiledGround is 'true', but Chunk[16] is missing!");
+                                if (!chunkHeaders[19].Exists)
+                                    Console.WriteLine("  !!! HasTiledGround is 'true', but Chunk[19] is missing!");
+                            }
+                            else if (header.HasBackground) {
+                                if (!chunkHeaders[14].Exists)
+                                    Console.WriteLine("  !!! HasBackground is 'true', but Chunk[14] is missing!");
+                                if (!chunkHeaders[15].Exists)
+                                    Console.WriteLine("  !!! HasBackground is 'true', but Chunk[15] is missing!");
+                            }
+                            else {
+                                if (chunkHeaders[14].Exists)
+                                    Console.WriteLine("  !!! Has no ground, but Chunk[14] exists!");
+                                if (chunkHeaders[15].Exists)
+                                    Console.WriteLine("  !!! Has no ground, but Chunk[15] exists!");
+                                if (chunkHeaders[16].Exists)
+                                    Console.WriteLine("  !!! Has no ground, but Chunk[16] exists!");
+                                if (chunkHeaders[19].Exists)
+                                    Console.WriteLine("  !!! Has no ground, but Chunk[19] exists!");
+                            }
+
                             // Check Scenario 1 flags.
                             // TODO: this totally applies to other scenarios, but these flags aren't working yet.
                             if (scenario == ScenarioType.Scenario1) {
-                                // Check for ground chunks.
-                                if (header.HasRepeatingGround && header.HasTiledGround)
-                                    Console.WriteLine("  !!! Has both HasRepeatingGround and HasTiledGround!");
-                                else if (header.HasRepeatingGround) {
-                                    if (!chunkHeaders[14].Exists)
-                                        Console.WriteLine("  !!! HasRepeatingGround is 'true', but Chunk[14] is missing!");
-                                    if (!chunkHeaders[15].Exists)
-                                        Console.WriteLine("  !!! HasRepeatingGround is 'true', but Chunk[15] is missing!");
-                                }
-                                else if (header.HasTiledGround) {
-                                    if (!chunkHeaders[14].Exists)
-                                        Console.WriteLine("  !!! HasTiledGround is 'true', but Chunk[14] is missing!");
-                                    if (!chunkHeaders[15].Exists)
-                                        Console.WriteLine("  !!! HasTiledGround is 'true', but Chunk[15] is missing!");
-                                    if (!chunkHeaders[16].Exists)
-                                        Console.WriteLine("  !!! HasTiledGround is 'true', but Chunk[16] is missing!");
-                                    if (!chunkHeaders[19].Exists)
-                                        Console.WriteLine("  !!! HasTiledGround is 'true', but Chunk[19] is missing!");
-                                }
-                                else if (header.HasBackground) {
-                                    if (!chunkHeaders[14].Exists)
-                                        Console.WriteLine("  !!! HasBackground is 'true', but Chunk[14] is missing!");
-                                    if (!chunkHeaders[15].Exists)
-                                        Console.WriteLine("  !!! HasBackground is 'true', but Chunk[15] is missing!");
-                                }
-                                else {
-                                    if (chunkHeaders[14].Exists)
-                                        Console.WriteLine("  !!! Has no ground, but Chunk[14] exists!");
-                                    if (chunkHeaders[15].Exists)
-                                        Console.WriteLine("  !!! Has no ground, but Chunk[15] exists!");
-                                    if (chunkHeaders[16].Exists)
-                                        Console.WriteLine("  !!! Has no ground, but Chunk[16] exists!");
-                                    if (chunkHeaders[19].Exists)
-                                        Console.WriteLine("  !!! Has no ground, but Chunk[19] exists!");
-                                }
-
                                 // Check for skybox chunks.
                                 if (header.HasSkyBox) {
                                     if (!chunkHeaders[17].Exists)

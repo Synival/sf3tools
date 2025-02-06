@@ -137,7 +137,7 @@ namespace SF3.Models.Structs.MPD {
         [TableViewModelColumn(displayOrder: 0.22f, displayName: "Tiled Ground")]
         public bool HasTiledGround => ImageChunksType.HasTiledGround();
 
-        [TableViewModelColumn(displayOrder: 0.23f, displayName: "Sky Box")]
+        [TableViewModelColumn(displayOrder: 0.23f, displayName: "Sky Box (Scn1 only)")]
         public bool HasSkyBox => ImageChunksType.HasSkyBox();
 
         [TableViewModelColumn(displayOrder: 0.24f, displayName: "Background")]
