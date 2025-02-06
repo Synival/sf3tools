@@ -82,7 +82,7 @@ namespace LightPaletteSetter {
                 for (var i = 0; i < 32; i++)
                     lightingPalette[i].ColorABGR1555 = c_lighting.Palette[i];
 
-                // Update texture palettes.
+                // Update palette tables.
                 var palettes = mpdFile.PaletteTables
                     .Select((x, i) => new { Obj = x, Index = i })
                     .Where(x => x.Obj != null)

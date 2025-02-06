@@ -34,7 +34,7 @@ namespace SF3.Win.Views.MPD {
 
             for (var i = 0; i < Model.PaletteTables.Length; i++)
                 if (Model.PaletteTables[i] != null)
-                    CreateChild(new ColorTableView("Texture Palette " + (i + 1).ToString(), Model.PaletteTables[i], Model.NameGetterContext));
+                    CreateChild(new ColorTableView("Palette " + (i + 1).ToString(), Model.PaletteTables[i], Model.NameGetterContext));
 
             if (Model.IndexedTextureTable != null)
                 CreateChild(new TableView("Indexed Textures",  Model.IndexedTextureTable, ngc));
