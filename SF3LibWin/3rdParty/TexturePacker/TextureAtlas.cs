@@ -8,11 +8,8 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.Linq;
 using System.Runtime.InteropServices;
-using CommonLib.Utils;
 using OpenTK.Mathematics;
 using SF3.Types;
-using SF3.Win.Extensions;
-using SF3.Win.ThirdParty.TexturePacker.Extensions;
 using static CommonLib.Types.CornerTypeConsts;
 
 namespace SF3.Win.ThirdParty.TexturePacker {
@@ -128,10 +125,28 @@ namespace SF3.Win.ThirdParty.TexturePacker {
             if (MaxX <= 0 || MaxY <= 0)
                 return null;
 
-            // TODO: just get the correct dimensinos for this thing...
-            Bitmap atlas = new Bitmap(MaxX, MaxY);
+            var dimensions = GetDimensions();
+            Bitmap atlas = new Bitmap(dimensions.Width, dimensions.Height);
             DrawPackedNodes(atlas);
-            return atlas.Trim(true, true) ?? new Bitmap(16, 16, PixelFormat.Format32bppArgb);
+            return atlas;
+        }
+
+        public Rectangle GetDimensions() {
+            int width = 0;
+            int height = 0;
+            GetDimensionsSub(_rootNode, ref width, ref height);
+            return new Rectangle(0, 0, width, height);
+        }
+
+        private void GetDimensionsSub(TextureAtlasNode node, ref int width, ref int height) {
+            if (node == null)
+                return;
+            if (node.Rect.Right > width)
+                width = node.Rect.Right;
+            if (node.Rect.Bottom > height)
+                height = node.Rect.Bottom;
+            GetDimensionsSub(node.Left, ref width, ref height);
+            GetDimensionsSub(node.Right, ref width, ref height);
         }
 
         public void DrawPackedNodes(Bitmap atlas) {
