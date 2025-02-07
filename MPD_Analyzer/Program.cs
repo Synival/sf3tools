@@ -3,6 +3,7 @@ using CommonLib.NamedValues;
 using CommonLib.Types;
 using SF3.ByteData;
 using SF3.Models.Files.MPD;
+using SF3.Models.Structs.MPD;
 using SF3.NamedValues;
 using SF3.Types;
 
@@ -41,8 +42,11 @@ namespace MPD_Analyzer {
                         using (var mpdFile = MPD_File.Create(byteData, nameGetterContexts)) {
                             var header = mpdFile.MPDHeader[0];
                             var chunkHeaders = mpdFile.ChunkHeader;
+                            var mapFlags = mpdFile.MPDHeader[0].MapFlags;
 
-                            Console.WriteLine(scenario.ToString() + ": " + Path.GetFileName(file) + " (0x" + header.MapFlags.ToString("X4") + ")");
+                            Console.WriteLine(scenario.ToString().PadLeft(11) + ": " + Path.GetFileName(file).PadLeft(12) + " | "
+                                + mapFlags.ToString("X4") + ", " + BitString(mapFlags) + " | "
+                                + ChunkString(chunkHeaders.Rows));
 
                             // Is this MPD file in the wrong format for this scenario? (Scenario 3 and Premium Disk are the same)
                             // (This actually happens!)
@@ -212,6 +216,28 @@ namespace MPD_Analyzer {
                     }
                 }
             }
+        }
+
+        private static string BitString(ushort bits) {
+            var str = "";
+            for (var i = 0; i < 16; i++) {
+                if (i % 4 == 0 && i != 0)
+                    str += ",";
+                str += (bits & (0x8000 >> i)) != 0 ? "1" : "0";
+            }
+            return str;
+        }
+
+        private static string ChunkString(ChunkHeader[] chunkHeaders) {
+            var chunkString = "";
+            for (var i = 0; i < chunkHeaders.Length; i++) {
+                if (chunkHeaders[i].Address == 0)
+                    break;
+                if (i % 4 == 0 && i != 0)
+                    chunkString += ",";
+                chunkString += (chunkHeaders[i].Exists) ? "1" : "0";
+            }
+            return chunkString;
         }
     }
 }
