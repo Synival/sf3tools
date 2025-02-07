@@ -23,20 +23,19 @@ namespace SF3.Win.Controls {
             TileModified += (s, e) => OnTileModifiedRendering(s);
         }
 
-        public void UpdateLighting() {
+        public void UpdateLighting(bool? useFancyOutsideSurfaceLighting = null) {
             MakeCurrent();
-            UpdateShaderLighting();
+            UpdateShaderLighting(useFancyOutsideSurfaceLighting);
             using (var textureBitmap = CreateLightPaletteBitmap())
                 _surfaceModel.SetLightingTexture(textureBitmap != null ? new Texture(textureBitmap, clampToEdge: false) : null);
         }
 
-        private void UpdateShaderLighting() {
+        private void UpdateShaderLighting(bool? useFancyOutsideSurfaceLighting = null) {
             MakeCurrent();
             var lightPos = GetLightPosition();
-            var useNewLighting = (MPD_File == null) ? false : MPD_File.MPDHeader[0].UseNewLighting;
             foreach (var shader in _world.Shaders) {
                 using (shader.Use())
-                    UpdateShaderLighting(shader, lightPos, useNewLighting);
+                    UpdateShaderLighting(shader, lightPos, useFancyOutsideSurfaceLighting);
             }
         }
 
@@ -84,7 +83,7 @@ namespace SF3.Win.Controls {
 
             SetInitialCameraPosition();
             UpdateSelectFramebuffer();
-            UpdateLighting();
+            UpdateLighting(false);
 
             foreach (var shader in _world.Shaders) {
                 UpdateShaderModelMatrix(shader, Matrix4.Identity);
@@ -229,16 +228,16 @@ namespace SF3.Win.Controls {
                     GL.UniformMatrix3(handle, false, ref matrix);
         }
 
-        private void UpdateShaderLighting(Shader shader, Vector3 lightPos, bool useNewLighting) {
+        private void UpdateShaderLighting(Shader shader, Vector3 lightPos, bool? useFancyOutdoorSurfaceLighting = null) {
             var handle1 = GL.GetUniformLocation(shader.Handle, "lightPosition");
-            var handle2 = GL.GetUniformLocation(shader.Handle, "useNewLighting");
+            var handle2 = (useFancyOutdoorSurfaceLighting.HasValue) ? GL.GetUniformLocation(shader.Handle, "useNewLighting") : -1;
 
             if (handle1 >= 0 || handle2 >= 0) {
                 using (shader.Use()) {
                     if (handle1 >= 0)
                         GL.Uniform3(handle1, lightPos);
                     if (handle2 >= 0)
-                        GL.Uniform1(handle2, useNewLighting ? 1 : 0);
+                        GL.Uniform1(handle2, useFancyOutdoorSurfaceLighting.Value ? 1 : 0);
                 }
             }
         }
@@ -280,16 +279,25 @@ namespace SF3.Win.Controls {
                 var terrainTypesTexture = DrawTerrainTypes ? _surfaceModel.TerrainTypesTexture : _world.TransparentBlackTexture;
                 var eventIdsTexture     = DrawEventIDs     ? _surfaceModel.EventIDsTexture     : _world.TransparentBlackTexture;
                 var lightingTexture     = _surfaceModel.LightingTexture ?? _world.WhiteTexture;
+                var useFancyOutdoorSurfaceLighting = (MPD_File == null) ? false : MPD_File.MPDHeader[0].UseNewLighting;
 
-                using (terrainTypesTexture.Use(MPD_TextureUnit.TextureTerrainTypes))
-                using (eventIdsTexture.Use(MPD_TextureUnit.TextureEventIDs))
-                using (lightingTexture.Use(MPD_TextureUnit.TextureLighting))
-                using (_world.ObjectShader.Use()) {
-                    foreach (var block in _surfaceModel.Blocks) {
-                        block.Model?.Draw(_world.ObjectShader);
-                        using (_world.TransparentBlackTexture.Use(MPD_TextureUnit.TextureAtlas))
-                            block.UntexturedModel?.Draw(_world.ObjectShader, null);
+                if (_surfaceModel?.Blocks?.Length > 0) {
+                    if (useFancyOutdoorSurfaceLighting)
+                        UpdateShaderLighting(true);
+
+                    using (terrainTypesTexture.Use(MPD_TextureUnit.TextureTerrainTypes))
+                    using (eventIdsTexture.Use(MPD_TextureUnit.TextureEventIDs))
+                    using (lightingTexture.Use(MPD_TextureUnit.TextureLighting))
+                    using (_world.ObjectShader.Use()) {
+                        foreach (var block in _surfaceModel.Blocks) {
+                            block.Model?.Draw(_world.ObjectShader);
+                            using (_world.TransparentBlackTexture.Use(MPD_TextureUnit.TextureAtlas))
+                                block.UntexturedModel?.Draw(_world.ObjectShader, null);
+                        }
                     }
+
+                    if (useFancyOutdoorSurfaceLighting)
+                        UpdateShaderLighting(false);
                 }
 
                 if (_models?.Models != null) {
