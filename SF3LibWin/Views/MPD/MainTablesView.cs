@@ -23,8 +23,8 @@ namespace SF3.Win.Views.MPD {
             if (Model.OffsetUnknown1Table != null)
                 CreateChild(new TableView("Unknown 1",  Model.OffsetUnknown1Table, ngc));
 
-            if (Model.OffsetModelSwitchGroupsTable != null)
-                CreateChild(new TableView("Model Switch Groups",  Model.OffsetModelSwitchGroupsTable, ngc));
+            if (Model.ModelSwitchGroupsTable != null)
+                CreateChild(new TableView("Model Switch Groups",  Model.ModelSwitchGroupsTable, ngc));
 
             if (Model.TextureAnimations != null)
                 CreateChild(new TextureAnimationsView("Texture Animations", Model.TextureAnimations, ngc));

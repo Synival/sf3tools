@@ -163,7 +163,7 @@ namespace SF3.Models.Files.MPD {
             if (header.OffsetUnknown2 != 0)
                 tables.Add(OffsetUnknown2Table = UnknownUInt16Table.Create(Data, "Unknown2", header.OffsetUnknown2 - c_RamOffset, 32, 0xFFFF));
             if (header.OffsetModelSwitchGroups != 0)
-                tables.Add(OffsetModelSwitchGroupsTable = OffsetModelSwitchGroupsTable.Create(Data, "ModelSwitchGroups", header.OffsetModelSwitchGroups - c_RamOffset));
+                tables.Add(ModelSwitchGroupsTable = ModelSwitchGroupsTable.Create(Data, "ModelSwitchGroups", header.OffsetModelSwitchGroups - c_RamOffset));
             if (header.OffsetScrollScreenAnimation != 0)
                 tables.Add(OffsetScrollScreenAnimationTable = UnknownUInt8Table.Create(Data, "ScrollScreenAnimations", header.OffsetScrollScreenAnimation - c_RamOffset, null, 0xFF));
             if (header.OffsetIndexedTextures != 0)
@@ -886,7 +886,7 @@ namespace SF3.Models.Files.MPD {
         public UnknownInt16Table OffsetUnknown1Table { get; private set; }
 
         [BulkCopyRecurse]
-        public OffsetModelSwitchGroupsTable OffsetModelSwitchGroupsTable { get; private set; }
+        public ModelSwitchGroupsTable ModelSwitchGroupsTable { get; private set; }
 
         [BulkCopyRecurse]
         public UnknownUInt8Table OffsetScrollScreenAnimationTable { get; private set; }
