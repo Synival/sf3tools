@@ -143,15 +143,15 @@ namespace MPD_Analyzer {
                                 Console.WriteLine("  !!! Chunk[4] exists!");
 
                             // Check for ground chunks.
-                            if (header.HasRepeatingGround && header.HasTiledGround)
+                            if (header.GroundImageType == GroundImageType.Invalid)
                                 Console.WriteLine("  !!! Has both HasRepeatingGround and HasTiledGround!");
-                            else if (header.HasRepeatingGround) {
+                            else if (header.GroundImageType == GroundImageType.Repeated) {
                                 if (!chunkHeaders[14].Exists)
                                     Console.WriteLine("  !!! HasRepeatingGround is 'true', but Chunk[14] is missing!");
                                 if (!chunkHeaders[15].Exists)
                                     Console.WriteLine("  !!! HasRepeatingGround is 'true', but Chunk[15] is missing!");
                             }
-                            else if (header.HasTiledGround) {
+                            else if (header.GroundImageType == GroundImageType.Tiled) {
                                 if (!chunkHeaders[14].Exists)
                                     Console.WriteLine("  !!! HasTiledGround is 'true', but Chunk[14] is missing!");
                                 if (!chunkHeaders[15].Exists)
@@ -161,7 +161,7 @@ namespace MPD_Analyzer {
                                 if (!chunkHeaders[19].Exists)
                                     Console.WriteLine("  !!! HasTiledGround is 'true', but Chunk[19] is missing!");
                             }
-                            else if (header.HasBackground) {
+                            else if (header.BackgroundImageType.HasFlag(BackgroundImageType.Still)) {
                                 if (!chunkHeaders[14].Exists)
                                     Console.WriteLine("  !!! HasBackground is 'true', but Chunk[14] is missing!");
                                 if (!chunkHeaders[15].Exists)
@@ -178,30 +178,32 @@ namespace MPD_Analyzer {
                                     Console.WriteLine("  !!! Has no ground, but Chunk[19] exists!");
                             }
 
-                            // Check Scenario 1 flags.
-                            // TODO: this totally applies to other scenarios, but these flags aren't working yet.
-                            if (scenario == ScenarioType.Scenario1) {
-                                // Check for skybox chunks.
-                                if (header.HasSkyBox) {
+                            // Check for skybox chunks.
+                            if (header.HasSkyBox) {
+                                if (mpdFile.Scenario > ScenarioType.Scenario1 && !chunkHeaders[17].Exists && !chunkHeaders[18].Exists)
+                                    Console.WriteLine("  SkyBox is elsewhere");
+                                else if (mpdFile.Scenario > ScenarioType.Scenario1 && chunkHeaders[17].Exists && chunkHeaders[18].Exists)
+                                    Console.WriteLine("  SkyBox is in Chunk[17] and Chunk[18]");
+                                else {
                                     if (!chunkHeaders[17].Exists)
                                         Console.WriteLine("  !!! HasSkyBox is 'true', but Chunk[17] is missing!");
                                     if (!chunkHeaders[18].Exists)
                                         Console.WriteLine("  !!! HasSkyBox is 'true', but Chunk[18] is missing!");
                                 }
-                                else if (header.HasBackground) {
-                                    if (!chunkHeaders[17].Exists)
-                                        Console.WriteLine("  !!! HasBackground is 'true', but Chunk[17] is missing!");
-                                    if (!chunkHeaders[18].Exists)
-                                        Console.WriteLine("  !!! HasBackground is 'true', but Chunk[18] is missing!");
-                                    if (!chunkHeaders[19].Exists)
-                                        Console.WriteLine("  !!! HasBackground is 'true', but Chunk[19] is missing!");
-                                }
-                                else {
-                                    if (chunkHeaders[17].Exists)
-                                        Console.WriteLine("  !!! HasSkyBox is 'false', but Chunk[17] exists!");
-                                    if (chunkHeaders[18].Exists)
-                                        Console.WriteLine("  !!! HasSkyBox is 'false', but Chunk[18] exists!");
-                                }
+                            }
+                            else if (header.BackgroundImageType.HasFlag(BackgroundImageType.Tiled)) {
+                                if (!chunkHeaders[17].Exists)
+                                    Console.WriteLine("  !!! HasBackground is 'true', but Chunk[17] is missing!");
+                                if (!chunkHeaders[18].Exists)
+                                    Console.WriteLine("  !!! HasBackground is 'true', but Chunk[18] is missing!");
+                                if (!chunkHeaders[19].Exists)
+                                    Console.WriteLine("  !!! HasBackground is 'true', but Chunk[19] is missing!");
+                            }
+                            else {
+                                if (chunkHeaders[17].Exists)
+                                    Console.WriteLine("  !!! HasSkyBox is 'false', but Chunk[17] exists!");
+                                if (chunkHeaders[18].Exists)
+                                    Console.WriteLine("  !!! HasSkyBox is 'false', but Chunk[18] exists!");
                             }
                         }
                     }

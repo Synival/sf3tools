@@ -125,23 +125,25 @@ namespace SF3.Models.Structs.MPD {
             }
         }
 
-        [TableViewModelColumn(displayOrder: 0.20f, displayName: "Image Chunks Type")]
-        public MPDImageChunksType ImageChunksType {
-            get => MPDImageChunksTypeExtensions.FromMapFlags(MapFlags, Scenario);
-            set => MapFlags = (ushort) ((MapFlags & ~MPDImageChunksTypeExtensions.ApplicableMapFlags(Scenario)) | value.ToMapFlags(Scenario));
+        [TableViewModelColumn(displayOrder: 0.20f, displayName: "Background Image Type")]
+        public BackgroundImageType BackgroundImageType {
+            get => BackgroundImageTypeExtensions.FromMapFlags(MapFlags);
+            set => MapFlags = (ushort) ((MapFlags & ~BackgroundImageTypeExtensions.ApplicableMapFlags) | value.ToMapFlags());
         }
 
-        [TableViewModelColumn(displayOrder: 0.21f, displayName: "Repeating Ground")]
-        public bool HasRepeatingGround => ImageChunksType.HasRepeatingGround();
+        [TableViewModelColumn(displayOrder: 0.21f, displayName: "Ground Image Type")]
+        public GroundImageType GroundImageType {
+            get => GroundImageTypeExtensions.FromMapFlags(MapFlags);
+            set => MapFlags = (ushort) ((MapFlags & ~GroundImageTypeExtensions.ApplicableMapFlags) | value.ToMapFlags());
+        }
 
-        [TableViewModelColumn(displayOrder: 0.22f, displayName: "Tiled Ground")]
-        public bool HasTiledGround => ImageChunksType.HasTiledGround();
+        private int SkyBoxFlag => (Scenario == ScenarioType.Scenario1) ? 0x2000 : 0x0800;
 
-        [TableViewModelColumn(displayOrder: 0.23f, displayName: "Sky Box (Scn1 only)")]
-        public bool HasSkyBox => ImageChunksType.HasSkyBox();
-
-        [TableViewModelColumn(displayOrder: 0.24f, displayName: "Background")]
-        public bool HasBackground => ImageChunksType.HasBackground();
+        [TableViewModelColumn(displayOrder: 0.22f, displayName: "Sky Box")]
+        public bool HasSkyBox {
+            get => (MapFlags & SkyBoxFlag) != 0;
+            set => MapFlags = (ushort) ((MapFlags & ~SkyBoxFlag) | (value ? SkyBoxFlag : 0));
+        }
 
         [TableViewModelColumn(displayOrder: 0.3f, displayName: "UseNewLighting (Scn2+)")]
         public bool UseNewLighting {

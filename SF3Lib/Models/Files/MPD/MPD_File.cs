@@ -206,9 +206,7 @@ namespace SF3.Models.Files.MPD {
 
             // Repeating backgrounds
             var repeatingGroundChunks = new List<IChunkData>();
-            if (MPDHeader[0].HasRepeatingGround) {
-                // TODO: This only works for Scenario 1!
-                // TODO: What chunks are used in Scn2 and beyond? It seems to change!!
+            if (MPDHeader[0].GroundImageType == GroundImageType.Repeated) {
                 if (chunks[14].Exists)
                     repeatingGroundChunks.Add(_ = MakeChunkData(14, ChunkType.Palette1Image, CompressionType.Compressed));
                 if (chunks[15].Exists)
@@ -216,11 +214,11 @@ namespace SF3.Models.Files.MPD {
             }
             RepeatingGroundChunkData = repeatingGroundChunks.Where(x => x != null).ToArray();
 
+            // TODO: Tiled ground images
+
             // Sky boxes
             var skyboxChunks = new List<IChunkData>();
             if (MPDHeader[0].HasSkyBox) {
-                // TODO: This only works for Scenario 1!
-                // TODO: What chunks are used in Scn2 and beyond? It seems to change!!
                 if (chunks[17].Exists)
                     skyboxChunks.Add(_ = MakeChunkData(17, ChunkType.Palette2Image, CompressionType.Compressed));
                 if (chunks[18].Exists)
@@ -230,15 +228,15 @@ namespace SF3.Models.Files.MPD {
 
             // Background image
             var backgroundChunks = new List<IChunkData>();
-            if (MPDHeader[0].HasBackground) {
-                // TODO: This only works for Scenario 1!
-                // TODO: What chunks are used in Scn2 and beyond? It seems to change!!
+            if (MPDHeader[0].BackgroundImageType.HasFlag(BackgroundImageType.Still)) {
                 if (chunks[14].Exists)
                     backgroundChunks.Add(_ = MakeChunkData(14, ChunkType.Palette1Image, CompressionType.Compressed));
                 if (chunks[15].Exists)
                     backgroundChunks.Add(_ = MakeChunkData(15, ChunkType.Palette1Image, CompressionType.Compressed));
             }
             BackgroundChunkData = backgroundChunks.Where(x => x != null).ToArray();
+
+            // TODO: Tiled backgrounds
 
             // Add unhandled images/scroll planes.
             // TODO: on what conditions are we sure these are scroll planes?
