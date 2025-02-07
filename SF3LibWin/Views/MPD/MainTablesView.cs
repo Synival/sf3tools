@@ -32,6 +32,9 @@ namespace SF3.Win.Views.MPD {
             if (Model.OffsetUnknown2Table != null)
                 CreateChild(new TableView("Unknown 2",  Model.OffsetUnknown2Table, ngc));
 
+            if (Model.RepeatingGroundAnimationTable != null)
+                CreateChild(new TableView("Repeating Ground Animation",  Model.RepeatingGroundAnimationTable, ngc));
+
             for (var i = 0; i < Model.PaletteTables.Length; i++)
                 if (Model.PaletteTables[i] != null)
                     CreateChild(new ColorTableView("Palette " + (i + 1).ToString(), Model.PaletteTables[i], Model.NameGetterContext));
@@ -41,9 +44,6 @@ namespace SF3.Win.Views.MPD {
 
             if (Model.TextureAnimationsAlt != null)
                 CreateChild(new TableView("Texture Animations (Alt)", Model.TextureAnimationsAlt, ngc));
-
-            if (Model.OffsetScrollScreenAnimationTable != null)
-                CreateChild(new TableView("Scroll Screen Animation",  Model.OffsetScrollScreenAnimationTable, ngc));
 
             if (Model.BoundariesTable != null)
                 CreateChild(new TableView("Boundaries", Model.BoundariesTable, ngc));

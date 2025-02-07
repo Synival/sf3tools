@@ -55,7 +55,7 @@ namespace SF3.Models.Files.MPD {
         LightPositionTable LightPositionTable { get; }
         UnknownInt16Table OffsetUnknown1Table { get; }
         ModelSwitchGroupsTable ModelSwitchGroupsTable { get; }
-        UnknownUInt8Table OffsetScrollScreenAnimationTable { get; }
+        UnknownUInt8Table RepeatingGroundAnimationTable { get; }
         TextureIDTable TextureAnimationsAlt { get; }
         ColorTable[] PaletteTables { get; }
         TextureIDTable IndexedTextureTable { get; }

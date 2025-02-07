@@ -165,7 +165,7 @@ namespace SF3.Models.Files.MPD {
             if (header.OffsetModelSwitchGroups != 0)
                 tables.Add(ModelSwitchGroupsTable = ModelSwitchGroupsTable.Create(Data, "ModelSwitchGroups", header.OffsetModelSwitchGroups - c_RamOffset));
             if (header.OffsetScrollScreenAnimation != 0)
-                tables.Add(OffsetScrollScreenAnimationTable = UnknownUInt8Table.Create(Data, "ScrollScreenAnimations", header.OffsetScrollScreenAnimation - c_RamOffset, null, 0xFF));
+                tables.Add(RepeatingGroundAnimationTable = UnknownUInt8Table.Create(Data, "ScrollScreenAnimations", header.OffsetScrollScreenAnimation - c_RamOffset, null, 0xFF));
             if (header.OffsetIndexedTextures != 0)
                 tables.Add(IndexedTextureTable = TextureIDTable.Create(Data, "IndexedTextures", header.OffsetIndexedTextures - c_RamOffset));
 
@@ -889,7 +889,7 @@ namespace SF3.Models.Files.MPD {
         public ModelSwitchGroupsTable ModelSwitchGroupsTable { get; private set; }
 
         [BulkCopyRecurse]
-        public UnknownUInt8Table OffsetScrollScreenAnimationTable { get; private set; }
+        public UnknownUInt8Table RepeatingGroundAnimationTable { get; private set; }
 
         [BulkCopyRecurse]
         public TextureIDTable TextureAnimationsAlt { get; private set; }
