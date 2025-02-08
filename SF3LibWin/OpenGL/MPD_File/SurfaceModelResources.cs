@@ -81,25 +81,23 @@ namespace SF3.Win.OpenGL.MPD_File {
                 var bcX2 =  0.0f + battle.X2 / 32.00f + WorldResources.ModelOffsetX;
                 var bcY2 = 64.0f - battle.Y2 / 32.00f + WorldResources.ModelOffsetZ;
 
-                // Fetch minimum height of the world.
-                var minHeight = mpdFile.Tiles.To1DArray().SelectMany(x => x.GetSurfaceModelVertexHeights()).Min();
-
+                var height = mpdFile.MPDHeader[0].GroundY / -32.0f;
                 var cameraQuads = new Quad[] {
                     new Quad([
-                        new Vector3(ccX1, minHeight, ccY1),
-                        new Vector3(ccX2, minHeight, ccY1),
-                        new Vector3(ccX2, minHeight, ccY2),
-                        new Vector3(ccX1, minHeight, ccY2)
+                        new Vector3(ccX1, height, ccY1),
+                        new Vector3(ccX2, height, ccY1),
+                        new Vector3(ccX2, height, ccY2),
+                        new Vector3(ccX1, height, ccY2)
                     ], new Vector4(1.00f, 0.00f, 0.00f, 0.25f))
                 };
                 CameraBoundaryModel = new QuadModel(cameraQuads);
 
                 var battleQuads = new Quad[] {
                     new Quad([
-                        new Vector3(bcX1, minHeight, bcY1),
-                        new Vector3(bcX2, minHeight, bcY1),
-                        new Vector3(bcX2, minHeight, bcY2),
-                        new Vector3(bcX1, minHeight, bcY2)
+                        new Vector3(bcX1, height, bcY1),
+                        new Vector3(bcX2, height, bcY1),
+                        new Vector3(bcX2, height, bcY2),
+                        new Vector3(bcX1, height, bcY2)
                     ], new Vector4(0.00f, 0.50f, 1.00f, 0.25f))
                 };
                 BattleBoundaryModel = new QuadModel(battleQuads);

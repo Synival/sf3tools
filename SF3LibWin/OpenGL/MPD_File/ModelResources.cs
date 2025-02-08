@@ -130,6 +130,10 @@ namespace SF3.Win.OpenGL.MPD_File {
                 var polygon = polygons[i];
                 var attr = attrs[i];
 
+                // This flag appears to hide the polygon.
+                if ((attr.Flags & 0x10) == 0x10)
+                    continue;
+
                 // Get texture. Fetch animated textures if possible.
                 var textureId = attr.TextureNo;
 
@@ -141,13 +145,11 @@ namespace SF3.Win.OpenGL.MPD_File {
 
                 // Apply semi-transparency for the appropriate draw mode.
                 var isSemiTransparent = attr.Mode_DrawMode == DrawMode.CL_Trans;
-                if (isSemiTransparent)
-                    color[3] /= 2;
 
                 TextureAnimation anim = null;
 
                 // TODO: wtf do these mean???
-                if (attr.Mode_ECdis && attr.Mode_SPdis) {
+                if (/*attr.Mode_ECdis && attr.Mode_SPdis*/ (attr.Flags & 0x0004) == 0) {
                     var colorChannels = PixelConversion.ABGR1555toChannels(attr.ColorNo);
                     color = new Vector4(colorChannels.r / 255.0f, colorChannels.g / 255.0f, colorChannels.b / 255.0f, 1.0f);
                 }
@@ -164,7 +166,12 @@ namespace SF3.Win.OpenGL.MPD_File {
                     // TODO: what to do for missing textures?
                     if (anim == null)
                         continue;
+                    else if (anim.Frames.Length > 0 && anim.Frames[0].PixelFormat == TexturePixelFormat.Palette3)
+                        color[3] /= 2;
                 }
+
+                if (isSemiTransparent)
+                    color[3] /= 2;
 
                 VECTOR[] polyVertexModels = [
                     vertices[polygon.Vertex1].Vector,

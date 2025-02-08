@@ -22,6 +22,9 @@ namespace SF3.Models.Structs.MPD.Model {
         [TableViewModelColumn(displayOrder: 0)]
         public int Refs { get; }
 
+        [TableViewModelColumn(displayOrder: 0.25f, isPointer: true, isReadOnly: true)]
+        public uint RamAddress { get; set; }
+
         [BulkCopy]
         [TableViewModelColumn(displayOrder: 0.5f, isPointer: true)]
         public uint VerticesOffset {

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using CommonLib.Utils;
 
 namespace SF3 {
     public class TextureAnimation {
@@ -21,16 +22,8 @@ namespace SF3 {
             }
         }
 
-        /// <summary>
-        /// Why do I have to keep re-writing this code???
-        /// </summary>
-        private int YetAnotherModImplementation(int num, int divisor) {
-            int remainder = num % divisor;
-            return remainder < 0 ? remainder + divisor : remainder;
-        }
-
         public ITexture GetFrame(int timeFrame)
-            => _frameByTimeFrame.Length == 0 ? Frames[0] : _frameByTimeFrame[YetAnotherModImplementation(timeFrame + FrameTimerStart, _frameByTimeFrame.Length)];
+            => _frameByTimeFrame.Length == 0 ? Frames[0] : _frameByTimeFrame[MathHelpers.ActualMod(timeFrame + FrameTimerStart, _frameByTimeFrame.Length)];
 
         public int ID { get; set; }
         public int FrameTimerStart { get; set; }

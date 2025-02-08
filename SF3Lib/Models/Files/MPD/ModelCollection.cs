@@ -49,6 +49,8 @@ namespace SF3.Models.Files.MPD {
                 PDatasByMemoryAddress = PDataTable
                     .Select((PData, i) => new { PData, pdataAddresses[i].AddressInMemory })
                     .ToDictionary(x => x.AddressInMemory, x => x.PData);
+                foreach (var pdata in PDatasByMemoryAddress)
+                    pdata.Value.RamAddress = pdata.Key;
             }
             catch {
                 // TODO: what to do on error??

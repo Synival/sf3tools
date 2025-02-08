@@ -61,7 +61,16 @@ namespace SF3.Win.OpenGL.MPD_File {
             Texture = new Texture(texture.CreateBitmapARGB8888(), clampToEdge: false);
 
             var header = mpdFile.MPDHeader[0];
-            var position = new Vector3(header.GroundX / 32.0f, header.GroundY / -32.0f, header.GroundZ / -32.0f);
+
+            var position = new Vector3(
+                header.GroundX / 32.0f,
+                header.GroundY / -32.0f,
+                header.GroundZ / -32.0f
+            );
+
+            // A lot of maps like MUCHUR.MPD and BEER.MPD have some pretty stupid offsets for their ground planes.
+            // Put the ground plane into the most ideal location based on the camera boundaries.
+            MoveToMostIdealCameraBoundaries(mpdFile, ref position);
 
             var uvWidth  = size / (Texture.Width  / 32.0f);
             var uvHeight = size / (Texture.Height / 32.0f);
@@ -101,6 +110,30 @@ namespace SF3.Win.OpenGL.MPD_File {
             quad.AddAttribute(new PolyAttribute(1, ActiveAttribType.FloatVec2, texInfo.TexCoordName, 4, uvCoords));
 
             Model = new QuadModel([quad]);
+        }
+
+        private void MoveToMostIdealCameraBoundaries(IMPD_File mpdFile, ref Vector3 position) {
+            if (mpdFile.BoundariesTable?.Length == 0)
+                return;
+            var cameraBoundaries = mpdFile.BoundariesTable[0];
+
+            var centerX = (cameraBoundaries.X1 + cameraBoundaries.X2) / 2.0f / 32.0f - 32.0f;
+            var centerZ = (cameraBoundaries.Y1 + cameraBoundaries.Y2) / 2.0f / 32.0f - 32.0f;
+
+            void MoveCoordNearestToCameraBounds(ref float positionCoord, float cameraCoord) {
+                // Move positionCoord to a +(0, 63) offset to cameraCoord.
+                while (positionCoord < cameraCoord)
+                    positionCoord += 64.0f;
+                while (positionCoord > cameraCoord + 64.0f)
+                    positionCoord -= 64.0f;
+
+                // Move to a negative position if it's closer than the positive one.
+                if (cameraCoord - (positionCoord - 64.0f) < positionCoord - cameraCoord)
+                    positionCoord -= 64.0f;
+            }
+
+            MoveCoordNearestToCameraBounds(ref position.X, centerX);
+            MoveCoordNearestToCameraBounds(ref position.Z, centerZ);
         }
 
         public QuadModel Model { get; private set; }
