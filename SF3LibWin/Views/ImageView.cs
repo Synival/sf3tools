@@ -3,12 +3,12 @@ using System.Windows.Forms;
 using SF3.Win.Controls;
 
 namespace SF3.Win.Views {
-    public class TextureView : ControlView<TextureControl> {
-        public TextureView(string name, int textureScale = 0) : base(name) {
+    public class ImageView : ControlView<TextureControl> {
+        public ImageView(string name, int textureScale = 0) : base(name) {
             ImageScale = textureScale;
         }
 
-        public TextureView(string name, Image image, int textureScale = 0) : base(name) {
+        public ImageView(string name, Image image, int textureScale = 0) : base(name) {
             _image = image;
             ImageScale = textureScale;
         }

@@ -13,7 +13,7 @@ namespace SF3.Win.Views {
         public ColorTableView(string name, ColorTable table, INameGetterContext nameGetterContext) : base(name) {
             Table       = table;
             TableView   = new TableView("Table", table, nameGetterContext);
-            TextureView = new TextureView("Texture");
+            TextureView = new ImageView("Texture");
         }
 
         public override Control Create() {
@@ -76,7 +76,7 @@ namespace SF3.Win.Views {
 
         public readonly ColorTable Table = null;
         public readonly TableView TableView = null;
-        public readonly TextureView TextureView = null;
+        public readonly ImageView TextureView = null;
 
         public Bitmap PaletteBitmap { get; private set; } = null;
 

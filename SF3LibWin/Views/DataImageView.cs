@@ -10,7 +10,7 @@ using CommonLib.Imaging;
 using CommonLib.Utils;
 
 namespace SF3.Win.Views {
-    public class DataImageView : TextureView {
+    public class DataImageView : ImageView {
         public DataImageView(string name, IByteArray data, Palette palette) : this(name, [data], [palette]) { }
 
         public DataImageView(string name, IByteArray data, Palette[] palettes) : this(name, [data], palettes) { }

@@ -14,7 +14,7 @@ namespace SF3.Win.Views.MPD {
 
             Model       = model;
             TableView   = new TableView("Frames", frameTable, nameGetterContext);
-            TextureView = new TextureView("Texture");
+            TextureView = new ImageView("Texture");
         }
 
         public override Control Create() {
@@ -50,6 +50,6 @@ namespace SF3.Win.Views.MPD {
 
         public IMPD_File Model { get; }
         public TableView TableView { get; private set; }
-        public TextureView TextureView { get; private set; }
+        public ImageView TextureView { get; private set; }
     }
 }

@@ -12,7 +12,7 @@ namespace SF3.Win.Views.MPD {
         public TextureTableView(string name, ITable<TextureModel> model, INameGetterContext ngc) : base(name) {
             Model = model;
             TexturesView = new TableView("Textures", model, ngc);
-            TextureView  = new TextureView("Texture");
+            TextureView  = new ImageView("Texture");
         }
 
         public override Control Create() {
@@ -56,7 +56,7 @@ namespace SF3.Win.Views.MPD {
 
         public ITable<TextureModel> Model { get; }
         public TableView TexturesView { get; }
-        public TextureView TextureView { get; }
+        public ImageView TextureView { get; }
 
     }
 }

@@ -3,7 +3,7 @@ using SF3.Win.Extensions;
 
 namespace SF3.Win.Views.MPD
 {
-    public class TwoChunkImageView : TextureView {
+    public class TwoChunkImageView : ImageView {
         public TwoChunkImageView(string name, TwoChunkImage twoChunkImage) : base(name, twoChunkImage.FullTexture.CreateBitmapARGB1555(), 1) {
             TwoChunkImage = twoChunkImage;
         }

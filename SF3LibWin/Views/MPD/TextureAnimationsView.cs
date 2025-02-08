@@ -12,7 +12,7 @@ namespace SF3.Win.Views.MPD {
         public TextureAnimationsView(string name, TextureAnimationTable model, INameGetterContext nameGetterContext) : base(name) {
             Model       = model;
             TableView   = new TableView("Animations", model, nameGetterContext);
-            TextureView = new TextureView("Texture");
+            TextureView = new ImageView("Texture");
 
             _timer = new Timer() { Interval = 250 };
             _timer.Tick += AdvanceFrame;
@@ -72,7 +72,7 @@ namespace SF3.Win.Views.MPD {
 
         public TextureAnimationTable Model { get; }
         public TableView TableView { get; private set; }
-        public TextureView TextureView { get; private set; }
+        public ImageView TextureView { get; private set; }
 
         private TextureAnimationModel _currentAnimation = null;
         private int _currentFrameNum = 0;
