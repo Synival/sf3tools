@@ -73,6 +73,10 @@ namespace SF3.Win.Views.MPD {
                         AddChunkView(chunk.Index, name, (name) => new DataImageView(name, chunk.DecompressedData.Data, palettes[0], Types.DataImageViewMode.Tiles8x8));
                         break;
 
+                    case ChunkType.TiledGroundMap:
+                        AddChunkView(chunk.Index, name, (name) => new DataHexView(name, chunk.DecompressedData.Data, 128));
+                        break;
+
                     default:
                         AddChunkView(chunk.Index, name, (name) => new DataHexView(name, chunk.DecompressedData.Data));
                         break;
