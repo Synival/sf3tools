@@ -62,7 +62,7 @@ namespace SF3.Win.OpenGL.MPD_File {
             Texture = new Texture(mpdFile.RepeatingGroundImage.FullTexture.CreateBitmapARGB8888(), clampToEdge: false);
 
             var header = mpdFile.MPDHeader[0];
-            var position = new Vector3(header.GroundX - 32.0f, header.GroundY / -32.0f, header.GroundZ - -32.0f);
+            var position = new Vector3(header.GroundX - 32.0f, header.GroundY / -32.0f, header.GroundZ / -32.0f);
 
             var uvWidth  = c_groundWidthDepth / (Texture.Width  / 32.0f);
             var uvHeight = c_groundWidthDepth / (Texture.Height / 32.0f);
@@ -76,9 +76,9 @@ namespace SF3.Win.OpenGL.MPD_File {
                     var x = c.GetDirectionX() * c_groundXZ;
                     var z = c.GetDirectionZ() * c_groundXZ;
                     return new Vector3(
-                        cos * x - sin * z,
+                        position.X + cos * x - sin * z,
                         position.Y,
-                        sin * x + cos * z
+                        position.Z + sin * x + cos * z
                     );
                 })
                 .ToArray();
