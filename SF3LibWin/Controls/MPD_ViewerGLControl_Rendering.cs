@@ -75,11 +75,13 @@ namespace SF3.Win.Controls {
             _world         = new WorldResources();
             _models        = new ModelResources();
             _surfaceModel  = new SurfaceModelResources();
+            _groundModel        = new GroundModelResources();
             _surfaceEditor = new SurfaceEditorResources();
 
             _world.Init();
             _surfaceModel.Init();
             _surfaceEditor.Init();
+            _groundModel.Init();
 
             SetInitialCameraPosition();
             UpdateSelectFramebuffer();
@@ -95,11 +97,13 @@ namespace SF3.Win.Controls {
             _world?.Dispose();
             _models?.Dispose();
             _surfaceModel?.Dispose();
+            _groundModel?.Dispose();
             _surfaceEditor?.Dispose();
             _selectFramebuffer?.Dispose();
 
             _world             = null;
             _surfaceModel      = null;
+            _groundModel       = null;
             _surfaceEditor     = null;
             _selectFramebuffer = null;
         }
@@ -172,6 +176,15 @@ namespace SF3.Win.Controls {
 
             MakeCurrent();
             _surfaceModel.Update(MPD_File);
+            Invalidate();
+        }
+
+        public void UpdateGroundModel() {
+            if (_groundModel == null)
+                return;
+
+            MakeCurrent();
+            _groundModel.Update(MPD_File);
             Invalidate();
         }
 
@@ -276,6 +289,13 @@ namespace SF3.Win.Controls {
                 }
             }
             else {
+                if (_groundModel.Model != null) {
+                    GL.DepthMask(false);
+                    using (_groundModel.Texture.Use())
+                        _groundModel.Model.Draw(_world.TextureShader, null);
+                    GL.DepthMask(true);
+                }
+
                 var terrainTypesTexture = DrawTerrainTypes ? _surfaceModel.TerrainTypesTexture : _world.TransparentBlackTexture;
                 var eventIdsTexture     = DrawEventIDs     ? _surfaceModel.EventIDsTexture     : _world.TransparentBlackTexture;
                 var lightingTexture     = _surfaceModel.LightingTexture ?? _world.WhiteTexture;
@@ -625,6 +645,7 @@ namespace SF3.Win.Controls {
         private WorldResources _world = null;
         private ModelResources _models = null;
         private SurfaceModelResources _surfaceModel = null;
+        private GroundModelResources _groundModel = null;
         private SurfaceEditorResources _surfaceEditor = null;
         private Framebuffer _selectFramebuffer;
     }

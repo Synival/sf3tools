@@ -104,6 +104,7 @@ namespace SF3.Win.Controls {
                 MPD_File.AssociateTilesWithTrees();
                 GLControl.UpdateModels();
                 GLControl.UpdateSurfaceModels();
+                GLControl.UpdateGroundModel();
             }
         }
 
