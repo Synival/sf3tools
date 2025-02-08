@@ -494,16 +494,82 @@ namespace SF3.Models.Files.MPD {
             // Add some images.
             if (RepeatingGroundChunkData?.Length == 2)
                 RepeatingGroundImage = new TwoChunkImage(RepeatingGroundChunkData[0].DecompressedData, RepeatingGroundChunkData[1].DecompressedData, TexturePixelFormat.Palette1, CreatePalette(0));
+
             if (TiledGroundChunkData?.Length == 4) {
-                TiledGroundTileImage = new TwoChunkImage(TiledGroundChunkData[0].DecompressedData, TiledGroundChunkData[1].DecompressedData, TexturePixelFormat.Palette1, CreatePalette(0), true);
-                // TODO: actual tiled ground
+                var palette = CreatePalette(0);
+                TiledGroundTileImage = new TwoChunkImage(TiledGroundChunkData[0].DecompressedData, TiledGroundChunkData[1].DecompressedData, TexturePixelFormat.Palette1, palette, true);
+
+                var tiledGroundImageData = CreateTiledGroundImageData(
+                    TiledGroundTileImage,
+                    TiledGroundChunkData[2].DecompressedData.GetDataCopy(),
+                    TiledGroundChunkData[3].DecompressedData.GetDataCopy()
+                );
+                TiledGroundImage = new TextureIndexed(0, 0, 0, tiledGroundImageData, TexturePixelFormat.Palette1, palette, true);
             }
+
             if (SkyBoxChunkData?.Length == 2)
                 SkyBoxImage = new TwoChunkImage(SkyBoxChunkData[0].DecompressedData, SkyBoxChunkData[1].DecompressedData, TexturePixelFormat.Palette2, CreatePalette(1));
+
             if (BackgroundChunkData?.Length == 2)
                 BackgroundImage = new TwoChunkImage(BackgroundChunkData[0].DecompressedData, BackgroundChunkData[1].DecompressedData, TexturePixelFormat.Palette1, CreatePalette(0));
 
             return tables.ToArray();
+        }
+
+        private byte[,] CreateTiledGroundImageData(TwoChunkImage tiledGroundTileImage, byte[] upperTileMap, byte[] lowerTileMap) {
+            const int c_blockWidth  = 64;
+            const int c_blockHeight = 64;
+            const int c_tilesPerBlock = c_blockWidth * c_blockHeight;
+            const int c_blockCountX = 4;
+            const int c_blockCountY = 4;
+            const int c_blockCount  = 16;
+
+            if (upperTileMap.Length + lowerTileMap.Length != c_blockWidth * c_blockHeight * c_blockCount * 2)
+                throw new ArgumentException($"Wrong size for {nameof(upperTileMap)} + {nameof(lowerTileMap)}");
+
+            var tileImageData = tiledGroundTileImage.FullTexture.ImageData8Bit;
+            var tileImageDataWidth  = tileImageData.GetLength(0);
+            var tileImageDataHeight = tileImageData.GetLength(1);
+
+            var tileCountX = tileImageDataWidth / 8;
+            var tileCountY = tileImageDataHeight / 8;
+            var tileCount = tileCountX * tileCountY;
+            var outputImage = new byte[c_blockWidth * c_blockCountX * 8, c_blockHeight * c_blockCountY * 8];
+
+            var tile = 0;
+            void AddTileData(byte[] data) {
+                for (var dataPos = 0; dataPos < upperTileMap.Length - 1; dataPos += 2, tile++) {
+                    var high = data[dataPos];
+                    var low = data[dataPos + 1];
+
+                    var tileIndex = ((high << 8) + low) / 2;
+                    if (tileIndex >= tileCount) {
+                        System.Diagnostics.Debug.WriteLine($"{dataPos:X4}: {tileIndex} ({high}, {low})");
+                        continue;
+                    }
+
+                    // TODO: refactor this to reduce all these calculations!!
+                    var inputX = (tileIndex % tileCountX) * 8;
+                    var inputY = (tileIndex / tileCountX) * 8;
+
+                    var blockIndex = tile / c_tilesPerBlock;
+                    var blockX = blockIndex % c_blockCountX;
+                    var blockY = blockIndex / c_blockCountX;
+
+                    var tileInBlock = tile % c_tilesPerBlock;
+                    var outputX = ((tileInBlock % c_blockWidth) + (blockX * c_blockWidth)) * 8;
+                    var outputY = ((tileInBlock / c_blockWidth) + (blockY * c_blockHeight)) * 8;
+
+                    for (int y = 0; y < 8; y++)
+                        for (int x = 0; x < 8; x++)
+                            outputImage[outputX + x, outputY + y] = tileImageData[inputX + x, inputY + y];
+                }
+            }
+
+            AddTileData(upperTileMap);
+            AddTileData(lowerTileMap);
+
+            return outputImage;
         }
 
         private Dictionary<TexturePixelFormat, Palette> CreatePalettesForTextures() {
