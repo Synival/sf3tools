@@ -280,11 +280,31 @@ namespace SF3.Win.Controls {
             GL.Enable(EnableCap.CullFace);
             if (_drawNormals) {
                 using (_world.NormalsShader.Use()) {
-                    foreach (var block in _surfaceModel.Blocks) {
-                        if (block.Model != null || block.UntexturedModel != null) {
-                            block.Model?.Draw(_world.NormalsShader, null);
-                            block.UntexturedModel?.Draw(_world.NormalsShader, null);
+                    if (_surfaceModel?.Blocks?.Length > 0) {
+                        foreach (var block in _surfaceModel.Blocks) {
+                            if (block.Model != null || block.UntexturedModel != null) {
+                                block.Model?.Draw(_world.NormalsShader, null);
+                                block.UntexturedModel?.Draw(_world.NormalsShader, null);
+                            }
                         }
+                    }
+                    if (_models?.ModelsByMemoryAddress != null) {
+                        var modelsWithGroups = _models.Models
+                            .Select(x => new { Model = x, ModelGroup = _models.ModelsByMemoryAddress.TryGetValue(x.PData1, out ModelGroup pd) ? pd : null })
+                            .Where(x => x.ModelGroup != null)
+                            .ToArray();
+
+                        foreach (var mwg in modelsWithGroups) {
+                            SetModelAndNormalMatricesForModel(mwg.Model, _world.NormalsShader);
+                            mwg.ModelGroup.SolidTexturedModel?.Draw(_world.NormalsShader, null);
+                            mwg.ModelGroup.SolidUntexturedModel?.Draw(_world.NormalsShader, null);
+                            mwg.ModelGroup.SemiTransparentTexturedModel?.Draw(_world.NormalsShader, null);
+                            mwg.ModelGroup.SemiTransparentUntexturedModel?.Draw(_world.NormalsShader, null);
+                        }
+
+                        // Reset model matrices to their identity.
+                        UpdateShaderModelMatrix(_world.NormalsShader, Matrix4.Identity);
+                        UpdateShaderNormalMatrix(_world.NormalsShader, Matrix3.Identity);
                     }
                 }
             }
