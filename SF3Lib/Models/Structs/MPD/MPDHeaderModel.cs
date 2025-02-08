@@ -145,6 +145,16 @@ namespace SF3.Models.Structs.MPD {
             get => (MapFlags & SkyBoxFlag) != 0;
             set => MapFlags = (ushort) ((MapFlags & ~SkyBoxFlag) | (value ? SkyBoxFlag : 0));
         }
+ 
+        [TableViewModelColumn(displayOrder: 0.3f, displayName: "Apply Lighting to Ground (Scn2)")]
+        public bool ApplyLightingToGround {
+            // TODO: this doesn't seem to be the right flag in Scenario 3... Or is it always on?
+            get => Scenario == ScenarioType.Scenario2 && (MapFlags & 0x0080) == 0x0080;
+            set {
+                if (Scenario == ScenarioType.Scenario2)
+                    MapFlags = (ushort) ((MapFlags & ~0x0080) | (value ? 0x0080 : 0));
+            }
+        }
 
         [TableViewModelColumn(displayOrder: 0.3f, displayName: "Outdoor Lighting (Scn2+)")]
         public bool OutdoorLighting {

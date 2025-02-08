@@ -309,17 +309,28 @@ namespace SF3.Win.Controls {
                 }
             }
             else {
+                var lightingTexture = _surfaceModel.LightingTexture ?? _world.WhiteTexture;
+                var useFancyOutdoorSurfaceLighting = (MPD_File == null) ? false : MPD_File.MPDHeader[0].OutdoorLighting;
+
                 if (_groundModel.Model != null) {
+                    var applyLightingToGround = (MPD_File == null) ? false : MPD_File.MPDHeader[0].ApplyLightingToGround;
+                    if (useFancyOutdoorSurfaceLighting && applyLightingToGround)
+                        UpdateShaderLighting(true);
+
                     GL.DepthMask(false);
-                    using (_groundModel.Texture.Use())
-                        _groundModel.Model.Draw(_world.TextureShader, null);
+                    using (_world.TransparentBlackTexture.Use(MPD_TextureUnit.TextureTerrainTypes))
+                    using (_world.TransparentBlackTexture.Use(MPD_TextureUnit.TextureEventIDs))
+                    using (lightingTexture.Use(MPD_TextureUnit.TextureLighting))
+                    using (_groundModel.Texture.Use(MPD_TextureUnit.TextureAtlas))
+                        _groundModel.Model.Draw(_world.ObjectShader, null);
                     GL.DepthMask(true);
+
+                    if (useFancyOutdoorSurfaceLighting && applyLightingToGround)
+                        UpdateShaderLighting(false);
                 }
 
                 var terrainTypesTexture = DrawTerrainTypes ? _surfaceModel.TerrainTypesTexture : _world.TransparentBlackTexture;
                 var eventIdsTexture     = DrawEventIDs     ? _surfaceModel.EventIDsTexture     : _world.TransparentBlackTexture;
-                var lightingTexture     = _surfaceModel.LightingTexture ?? _world.WhiteTexture;
-                var useFancyOutdoorSurfaceLighting = (MPD_File == null) ? false : MPD_File.MPDHeader[0].OutdoorLighting;
 
                 if (_surfaceModel?.Blocks?.Length > 0) {
                     if (useFancyOutdoorSurfaceLighting)

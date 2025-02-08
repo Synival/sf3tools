@@ -57,6 +57,20 @@ namespace SF3.Win.OpenGL.MPD_File {
                 CreateGroundImageModel(mpdFile, mpdFile.TiledGroundImage, 64.0f);
         }
 
+        private static readonly float[,] c_normalCoordsVboData = new float[4, 3] {
+            {0, 1, 0},
+            {0, 1, 0},
+            {0, 1, 0},
+            {0, 1, 0},
+        };
+
+        private static readonly float[,] c_glowVboData = new float[4, 3] {
+            {0, 0, 0},
+            {0, 0, 0},
+            {0, 0, 0},
+            {0, 0, 0},
+        };
+
         private void CreateGroundImageModel(IMPD_File mpdFile, ITexture texture, float size) {
             Texture = new Texture(texture.CreateBitmapARGB8888(), clampToEdge: false);
 
@@ -97,7 +111,7 @@ namespace SF3.Win.OpenGL.MPD_File {
                 })
                 .ToArray();
 
-            var uvCoords = Enum.GetValues<CornerType>()
+            var uvCoordsVboData = Enum.GetValues<CornerType>()
                 .SelectMany(x => new float[] {
                     x.GetUVX() * uvWidth  + uvOffsetX,
                     x.GetUVY() * uvHeight + uvOffsetY
@@ -105,9 +119,15 @@ namespace SF3.Win.OpenGL.MPD_File {
                 .ToArray()
                 .To2DArray(4, 2);
 
+            float applyLighting = mpdFile.MPDHeader[0].ApplyLightingToGround ? 1.0f : 0.0f;
+            var applyLightingVboData = new float[,] {{applyLighting}, {applyLighting}, {applyLighting}, {applyLighting}};
+
             var quad = new Quad(vertices);
-            var texInfo = Shader.GetTextureInfo(TextureUnit.Texture0);
-            quad.AddAttribute(new PolyAttribute(1, ActiveAttribType.FloatVec2, texInfo.TexCoordName, 4, uvCoords));
+            var texInfo = Shader.GetTextureInfo(MPD_TextureUnit.TextureAtlas);
+            quad.AddAttribute(new PolyAttribute(1, ActiveAttribType.FloatVec2, texInfo.TexCoordName, 4, uvCoordsVboData));
+            quad.AddAttribute(new PolyAttribute(1, ActiveAttribType.Float, "applyLighting", 4, applyLightingVboData));
+            quad.AddAttribute(new PolyAttribute(1, ActiveAttribType.FloatVec3, "normal", 4, c_normalCoordsVboData));
+            quad.AddAttribute(new PolyAttribute(1, ActiveAttribType.FloatVec3, "glow", 4, c_glowVboData));
 
             Model = new QuadModel([quad]);
         }
