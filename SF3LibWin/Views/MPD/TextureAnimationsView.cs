@@ -33,7 +33,7 @@ namespace SF3.Win.Views.MPD {
             var anim = (TextureAnimationModel) item?.RowObject;
 
             var frame = anim?.Frames?.FirstOrDefault();
-            TextureView.Image = frame?.Texture?.CreateBitmap() ?? null;
+            TextureView.Image = frame?.Texture?.CreateBitmapARGB1555() ?? null;
 
             _timer.Stop();
 
@@ -66,7 +66,7 @@ namespace SF3.Win.Views.MPD {
                 return;
             _currentFrameNum = (_currentFrameNum + 1) % _currentAnimation.NumFrames;
             var currentFrame = _currentAnimation.Frames[_currentFrameNum];
-            TextureView.Image = currentFrame.Texture?.CreateBitmap();
+            TextureView.Image = currentFrame.Texture?.CreateBitmapARGB1555();
             _timer.Interval = (int) currentFrame.Duration * 1000 / 30;
         }
 

@@ -1,4 +1,5 @@
 ﻿using CommonLib.Attributes;
+using CommonLib.SGL;
 using SF3.ByteData;
 using SF3.Types;
 
@@ -14,7 +15,7 @@ namespace SF3.Models.Structs.MPD {
         private readonly int offsetModelSwitchGroupsAddr; // int32  Pointer to model switch group list.
         private readonly int offsetTextureAnimationsAddress; // int32 Offset to list of texture groups. See (#texture-groups)
         private readonly int offsetUnknown2Address;       // int32  Pointer to unknown list. Only used in RAIL1.MPD. 5 values.
-        private readonly int offsetScrollScreenAnimationAddr; // int32  Pointer to list of KA table for scroll screen animation.
+        private readonly int offsetScrollScreenAnimationAddr; // int32  Pointer to list of KA table for ground model animation.
         private readonly int offsetMesh1Address;          // int32  Pointer to list of 2 movable/interactable mesh. may be null.
         private readonly int offsetMesh2Address;          // int32  Pointer to list of 2 movable/interactable mesh. may be null.
         private readonly int offsetMesh3Address;          // int32  Pointer to list of 2 movable/interactable mesh. may be null.
@@ -31,13 +32,13 @@ namespace SF3.Models.Structs.MPD {
         private readonly int offsetIndexedTextures;       // (scn3+pd) int32  Pointer to unknown data.
         // ^^^ Screnario 3+ only
 
-        private readonly int scrollScreenXAddress;        // int16  X Pos of scroll screen
-        private readonly int scrollScreenYAddress;        // int16  Y Pos of scroll screen
-        private readonly int scrollScreenZAddress;        // int16  Z Pos of scroll screen
-        private readonly int scrollScreenAngleAddress;    // ANGLE  Yaw angle (X) of scroll screen
+        private readonly int groundXAddress;              // int16  X Pos of ground plane
+        private readonly int groundYAddress;              // int16  Y Pos of ground plane
+        private readonly int groundZAddress;              // int16  Z Pos of ground plane
+        private readonly int groundAngleAddress;          // ANGLE  Yaw angle (X) of scroll screen
         private readonly int unknown1Address;             // int16  Unknown. Looks like a map coordinate.
-        private readonly int backgroundScrollXAddress;    // int16  X coordinate for background scroll screen.
-        private readonly int backgroundScrollYAddress;    // int16  Y coordinate for background scroll screen.
+        private readonly int backgroundXAddress;          // int16  X coordinate for background
+        private readonly int backgroundYAddress;          // int16  Y coordinate for background
         private readonly int padding4Address;             // int16  Always zero
         private readonly int offsetBoundariesAddress;     // int32  Pointer to camera and battle boundaries in real-world coordinates.
 
@@ -90,13 +91,13 @@ namespace SF3.Models.Structs.MPD {
                 addressNext = addressNext + 0x14;
             }
 
-            scrollScreenXAddress        = addressNext + 0x00; // 2 bytes
-            scrollScreenYAddress        = addressNext + 0x02; // 2 bytes
-            scrollScreenZAddress        = addressNext + 0x04; // 2 bytes
-            scrollScreenAngleAddress    = addressNext + 0x06; // 2 bytes
+            groundXAddress              = addressNext + 0x00; // 2 bytes
+            groundYAddress              = addressNext + 0x02; // 2 bytes
+            groundZAddress              = addressNext + 0x04; // 2 bytes
+            groundAngleAddress          = addressNext + 0x06; // 2 bytes
             unknown1Address             = addressNext + 0x08; // 2 bytes
-            backgroundScrollXAddress    = addressNext + 0x0A; // 2 bytes
-            backgroundScrollYAddress    = addressNext + 0x0C; // 2 bytes
+            backgroundXAddress          = addressNext + 0x0A; // 2 bytes
+            backgroundYAddress          = addressNext + 0x0C; // 2 bytes
             padding4Address             = addressNext + 0x0E; // 2 bytes
             offsetBoundariesAddress     = addressNext + 0x10; // 4 bytes
 
@@ -145,11 +146,11 @@ namespace SF3.Models.Structs.MPD {
             set => MapFlags = (ushort) ((MapFlags & ~SkyBoxFlag) | (value ? SkyBoxFlag : 0));
         }
 
-        [TableViewModelColumn(displayOrder: 0.3f, displayName: "UseNewLighting (Scn2+)")]
-        public bool UseNewLighting {
+        [TableViewModelColumn(displayOrder: 0.3f, displayName: "Outdoor Lighting (Scn2+)")]
+        public bool OutdoorLighting {
             get => Scenario >= ScenarioType.Scenario2 && (MapFlags & 0x2000) == 0x2000;
             set {
-                if (Scenario == ScenarioType.Scenario2)
+                if (Scenario >= ScenarioType.Scenario2)
                     MapFlags = (ushort) ((MapFlags & ~0x2000) | (value ? 0x2000 : 0));
             }
         }
@@ -321,30 +322,30 @@ namespace SF3.Models.Structs.MPD {
         }
 
         [BulkCopy]
-        [TableViewModelColumn(displayOrder: 20, displayFormat: "X4")]
-        public ushort ScrollScreenX {
-            get => (ushort) Data.GetWord(scrollScreenXAddress);
-            set => Data.SetWord(scrollScreenXAddress, value);
+        [TableViewModelColumn(displayOrder: 20)]
+        public short GroundX {
+            get => (short) Data.GetWord(groundXAddress);
+            set => Data.SetWord(groundXAddress, value);
         }
 
         [BulkCopy]
-        [TableViewModelColumn(displayOrder: 20.5f, displayFormat: "X4")]
-        public ushort ScrollScreenY {
-            get => (ushort) Data.GetWord(scrollScreenYAddress);
-            set => Data.SetWord(scrollScreenYAddress, value);
+        [TableViewModelColumn(displayOrder: 20.5f)]
+        public short GroundY {
+            get => (short) Data.GetWord(groundYAddress);
+            set => Data.SetWord(groundYAddress, value);
         }
         [BulkCopy]
-        [TableViewModelColumn(displayOrder: 21, displayFormat: "X4")]
-        public ushort ScrollScreenZ {
-            get => (ushort) Data.GetWord(scrollScreenZAddress);
-            set => Data.SetWord(scrollScreenZAddress, value);
+        [TableViewModelColumn(displayOrder: 21)]
+        public short GroundZ {
+            get => (short) Data.GetWord(groundZAddress);
+            set => Data.SetWord(groundZAddress, value);
         }
 
         [BulkCopy]
-        [TableViewModelColumn(displayOrder: 21.5f, displayFormat: "X4")]
-        public ushort ScrollScreenAngle {
-            get => (ushort) Data.GetWord(scrollScreenAngleAddress);
-            set => Data.SetWord(scrollScreenAngleAddress, value);
+        [TableViewModelColumn(displayOrder: 21.5f)]
+        public float GroundAngle {
+            get => Data.GetCompressedFIXED(groundAngleAddress).Float;
+            set => Data.SetCompressedFIXED(groundAngleAddress, new CompressedFIXED(value, 0));
         }
 
         [BulkCopy]
@@ -355,17 +356,17 @@ namespace SF3.Models.Structs.MPD {
         }
 
         [BulkCopy]
-        [TableViewModelColumn(displayOrder: 22.5f, displayFormat: "X4")]
-        public ushort BackgroundScrollX {
-            get => (ushort) Data.GetWord(backgroundScrollXAddress);
-            set => Data.SetWord(backgroundScrollXAddress, value);
+        [TableViewModelColumn(displayOrder: 22.5f)]
+        public short BackgroundX {
+            get => (short) Data.GetWord(backgroundXAddress);
+            set => Data.SetWord(backgroundXAddress, value);
         }
 
         [BulkCopy]
-        [TableViewModelColumn(displayOrder: 23, displayFormat: "X4")]
-        public ushort BackgroundScrollY {
-            get => (ushort) Data.GetWord(backgroundScrollYAddress);
-            set => Data.SetWord(backgroundScrollYAddress, value);
+        [TableViewModelColumn(displayOrder: 23)]
+        public short BackgroundY {
+            get => (short) Data.GetWord(backgroundYAddress);
+            set => Data.SetWord(backgroundYAddress, value);
         }
 
         [BulkCopy]

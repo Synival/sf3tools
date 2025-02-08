@@ -279,7 +279,7 @@ namespace SF3.Win.Controls {
                 var terrainTypesTexture = DrawTerrainTypes ? _surfaceModel.TerrainTypesTexture : _world.TransparentBlackTexture;
                 var eventIdsTexture     = DrawEventIDs     ? _surfaceModel.EventIDsTexture     : _world.TransparentBlackTexture;
                 var lightingTexture     = _surfaceModel.LightingTexture ?? _world.WhiteTexture;
-                var useFancyOutdoorSurfaceLighting = (MPD_File == null) ? false : MPD_File.MPDHeader[0].UseNewLighting;
+                var useFancyOutdoorSurfaceLighting = (MPD_File == null) ? false : MPD_File.MPDHeader[0].OutdoorLighting;
 
                 if (_surfaceModel?.Blocks?.Length > 0) {
                     if (useFancyOutdoorSurfaceLighting)
