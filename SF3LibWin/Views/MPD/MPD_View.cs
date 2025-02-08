@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Linq;
 using System.Windows.Forms;
-using CommonLib.Imaging;
 using SF3.Models.Files.MPD;
 
 namespace SF3.Win.Views.MPD {

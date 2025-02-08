@@ -63,10 +63,9 @@ namespace SF3.Win.Views {
                             imageData = dataCopy.To2DArrayColumnMajor(width, height);
                             break;
 
-                        case DataImageViewMode.Tiles8x8: {
+                        case DataImageViewMode.Tiles8x8:
                             imageData = dataCopy.ToTiles(width, height, 8, 8);
                             break;
-                        }
 
                         default:
                             throw new InvalidOperationException($"Unhandled {nameof(ViewMode)}: {ViewMode}");
