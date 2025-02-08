@@ -8,18 +8,20 @@ using CommonLib.Arrays;
 using CommonLib.Extensions;
 using CommonLib.Imaging;
 using CommonLib.Utils;
+using SF3.Win.Types;
 
 namespace SF3.Win.Views {
     public class DataImageView : ImageView {
-        public DataImageView(string name, IByteArray data, Palette palette) : this(name, [data], [palette]) { }
+        public DataImageView(string name, IByteArray data, Palette palette, DataImageViewMode viewMode) : this(name, [data], [palette], viewMode = DataImageViewMode.ColumnMajor) { }
 
-        public DataImageView(string name, IByteArray data, Palette[] palettes) : this(name, [data], palettes) { }
+        public DataImageView(string name, IByteArray data, Palette[] palettes, DataImageViewMode viewMode) : this(name, [data], palettes, viewMode = DataImageViewMode.ColumnMajor) { }
 
-        public DataImageView(string name, IByteArray[] datas, Palette palette) : this(name, datas, [palette]) { }
+        public DataImageView(string name, IByteArray[] datas, Palette palette, DataImageViewMode viewMode) : this(name, datas, [palette], viewMode = DataImageViewMode.ColumnMajor) { }
 
-        public DataImageView(string name, IByteArray[] datas, Palette[] palettes) : base(name, 2) {
-            Datas = datas;
+        public DataImageView(string name, IByteArray[] datas, Palette[] palettes, DataImageViewMode viewMode = DataImageViewMode.ColumnMajor) : base(name, 2) {
+            Datas    = datas;
             Palettes = palettes;
+            ViewMode = viewMode;
         }
 
         public override Control Create() {
@@ -50,7 +52,25 @@ namespace SF3.Win.Views {
                     var height = heights[i];
                     var data = Datas[i];
 
-                    var imageData = data.GetDataCopyAt(0, width * height).To2DArrayColumnMajor(width, height);
+                    byte[,] imageData;
+                    var dataCopy = data.GetDataCopyAt(0, width * height);
+                    switch (ViewMode) {
+                        case DataImageViewMode.RowMajor:
+                            imageData = dataCopy.To2DArray(width, height);
+                            break;
+
+                        case DataImageViewMode.ColumnMajor:
+                            imageData = dataCopy.To2DArrayColumnMajor(width, height);
+                            break;
+
+                        case DataImageViewMode.Tiles8x8: {
+                            imageData = dataCopy.ToTiles(width, height, 8, 8);
+                            break;
+                        }
+
+                        default:
+                            throw new InvalidOperationException($"Unhandled {nameof(ViewMode)}: {ViewMode}");
+                    }
 
                     var paletteBitmapData = BitmapUtils.ConvertIndexedDataToABGR8888BitmapData(imageData, palette, false);
                     paletteBitmapData.CopyTo(bitmapData, pos);
@@ -70,5 +90,6 @@ namespace SF3.Win.Views {
 
         public IByteArray[] Datas { get; }
         public Palette[] Palettes { get; }
+        public DataImageViewMode ViewMode { get; }
     }
 }

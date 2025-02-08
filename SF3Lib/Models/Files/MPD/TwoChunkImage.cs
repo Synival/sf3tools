@@ -6,8 +6,10 @@ using SF3.Types;
 
 namespace SF3.Models.Files.MPD {
     public class TwoChunkImage {
-        public TwoChunkImage(IByteData upperData, IByteData lowerData, TexturePixelFormat format, Palette palette) {
-            const int c_width = 512;
+        public const int c_width = 512;
+
+        public TwoChunkImage(IByteData upperData, IByteData lowerData, TexturePixelFormat format, Palette palette, bool isTiled = false) {
+            IsTiled = isTiled;
 
             if (upperData.Length % c_width != 0)
                 throw new ArgumentException(nameof(upperData) + " height is not divisible by 512");
@@ -25,13 +27,17 @@ namespace SF3.Models.Files.MPD {
             upperDataBytes.CopyTo(fullDataBytes, 0);
             lowerDataBytes.CopyTo(fullDataBytes, c_width * upperDataHeight);
 
-            UpperTexture = new TextureIndexed(0, 0, 0, upperDataBytes.To2DArrayColumnMajor(c_width, upperDataHeight), format, palette, false);
-            LowerTexture = new TextureIndexed(1, 0, 0, lowerDataBytes.To2DArrayColumnMajor(c_width, lowerDataHeight), format, palette, false);
-            FullTexture  = new TextureIndexed(2, 0, 0, fullDataBytes .To2DArrayColumnMajor(c_width, fullDataHeight),  format, palette, false);
+            UpperTexture = new TextureIndexed(0, 0, 0, ToTextureData(upperDataBytes, upperDataHeight), format, palette, false);
+            LowerTexture = new TextureIndexed(1, 0, 0, ToTextureData(lowerDataBytes, lowerDataHeight), format, palette, false);
+            FullTexture  = new TextureIndexed(2, 0, 0, ToTextureData(fullDataBytes,  fullDataHeight),  format, palette, false);
         }
+
+        private byte[,] ToTextureData(byte[] data, int height)
+            => IsTiled ? data.ToTiles(c_width, height, 8, 8) : data.To2DArrayColumnMajor(c_width, height);
 
         public TextureIndexed FullTexture { get; }
         public TextureIndexed UpperTexture { get; }
         public TextureIndexed LowerTexture { get; }
+        public bool IsTiled { get; }
     }
 }
