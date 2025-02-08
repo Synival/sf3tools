@@ -58,15 +58,19 @@ namespace SF3.Win.Views.MPD {
 
                 switch (header.ChunkType) {
                     case ChunkType.Palette1Image:
-                        AddChunkView(chunk.Index, name, (name) => new DataImageView(name, chunk.DecompressedData.Data, palettes[0]));
+                        AddChunkView(chunk.Index, name, (name) => new DataImageView(name, chunk.DecompressedData.Data, palettes[0], Types.DataImageViewMode.ColumnMajor));
                         break;
 
                     case ChunkType.Palette2Image:
-                        AddChunkView(chunk.Index, name, (name) => new DataImageView(name, chunk.DecompressedData.Data, palettes[1]));
+                        AddChunkView(chunk.Index, name, (name) => new DataImageView(name, chunk.DecompressedData.Data, palettes[1], Types.DataImageViewMode.ColumnMajor));
                         break;
 
                     case ChunkType.UnhandledImageOrData:
-                        AddChunkView(chunk.Index, name, (name) => new DataImageView(name, chunk.DecompressedData.Data, palettes));
+                        AddChunkView(chunk.Index, name, (name) => new DataImageView(name, chunk.DecompressedData.Data, palettes, Types.DataImageViewMode.ColumnMajor));
+                        break;
+
+                    case ChunkType.TiledGroundTiles:
+                        AddChunkView(chunk.Index, name, (name) => new DataImageView(name, chunk.DecompressedData.Data, palettes[0], Types.DataImageViewMode.Tiles8x8));
                         break;
 
                     default:

@@ -9,6 +9,8 @@ namespace SF3.Types {
         AnimationFrames = 6,
         Palette1Image = 7,
         Palette2Image = 8,
-        UnhandledImageOrData = 9
+        UnhandledImageOrData = 9,
+        TiledGroundTiles = 10,
+        TiledGroundMap = 11,
     }
 }

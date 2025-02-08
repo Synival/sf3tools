@@ -214,7 +214,19 @@ namespace SF3.Models.Files.MPD {
             }
             RepeatingGroundChunkData = repeatingGroundChunks.Where(x => x != null).ToArray();
 
-            // TODO: Tiled ground images
+            // Tiled ground images
+            var tiledGroundChunks = new List<IChunkData>();
+            if (MPDHeader[0].GroundImageType == GroundImageType.Tiled) {
+                if (chunks[14].Exists)
+                    tiledGroundChunks.Add(_ = MakeChunkData(14, ChunkType.TiledGroundTiles, CompressionType.Compressed));
+                if (chunks[15].Exists)
+                    tiledGroundChunks.Add(_ = MakeChunkData(15, ChunkType.TiledGroundTiles, CompressionType.Compressed));
+                if (chunks[16].Exists)
+                    tiledGroundChunks.Add(_ = MakeChunkData(16, ChunkType.TiledGroundMap, CompressionType.Compressed));
+                if (chunks[19].Exists)
+                    tiledGroundChunks.Add(_ = MakeChunkData(19, ChunkType.TiledGroundMap, CompressionType.Compressed));
+            }
+            TiledGroundChunkData = tiledGroundChunks.Where(x => x != null).ToArray();
 
             // Sky boxes
             var skyboxChunks = new List<IChunkData>();
@@ -482,6 +494,10 @@ namespace SF3.Models.Files.MPD {
             // Add some images.
             if (RepeatingGroundChunkData?.Length == 2)
                 RepeatingGroundImage = new TwoChunkImage(RepeatingGroundChunkData[0].DecompressedData, RepeatingGroundChunkData[1].DecompressedData, TexturePixelFormat.Palette1, CreatePalette(0));
+            if (TiledGroundChunkData?.Length == 4) {
+                TiledGroundTileImage = new TwoChunkImage(TiledGroundChunkData[0].DecompressedData, TiledGroundChunkData[1].DecompressedData, TexturePixelFormat.Palette1, CreatePalette(0), true);
+                // TODO: actual tiled ground
+            }
             if (SkyBoxChunkData?.Length == 2)
                 SkyBoxImage = new TwoChunkImage(SkyBoxChunkData[0].DecompressedData, SkyBoxChunkData[1].DecompressedData, TexturePixelFormat.Palette2, CreatePalette(1));
             if (BackgroundChunkData?.Length == 2)
@@ -931,6 +947,10 @@ namespace SF3.Models.Files.MPD {
 
         public IChunkData[] RepeatingGroundChunkData { get; private set; }
         public TwoChunkImage RepeatingGroundImage { get; private set; }
+
+        public IChunkData[] TiledGroundChunkData { get; private set; }
+        public TwoChunkImage TiledGroundTileImage { get; private set; }
+        public ITexture TiledGroundImage { get; private set; }
 
         public IChunkData[] SkyBoxChunkData { get; private set; }
         public TwoChunkImage SkyBoxImage { get; private set; }
