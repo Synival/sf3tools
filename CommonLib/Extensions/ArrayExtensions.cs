@@ -149,17 +149,15 @@ namespace CommonLib.Extensions {
 
             var tileXCount = width  / tileWidth;
             var tileYCount = height / tileHeight;
-            var maxTiles = tileXCount * tileYCount;
+            var tileCount = tileXCount * tileYCount;
 
             int pos = 0;
-            for (var tile = 0; tile < maxTiles; tile++) {
+            for (var tile = 0; tile < tileCount; tile++) {
                 int tileX = (tile % tileXCount) * tileWidth;
                 int tileY = (tile / tileXCount) * tileHeight;
-                for (var y = 0; y < tileHeight; y++) {
-                    for (var x = 0; x < tileWidth; x++) {
+                for (var y = 0; y < tileHeight; y++)
+                    for (var x = 0; x < tileWidth; x++)
                         newArray[tileX + x, tileY + y] = array[pos++];
-                    }
-                }
             }
 
             return newArray;
