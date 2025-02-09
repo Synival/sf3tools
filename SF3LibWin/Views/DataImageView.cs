@@ -12,11 +12,11 @@ using SF3.Win.Types;
 
 namespace SF3.Win.Views {
     public class DataImageView : ImageView {
-        public DataImageView(string name, IByteArray data, Palette palette, DataImageViewMode viewMode) : this(name, [data], [palette], viewMode = DataImageViewMode.ColumnMajor) { }
+        public DataImageView(string name, IByteArray data, Palette palette, DataImageViewMode viewMode) : this(name, [data], [palette], viewMode) { }
 
-        public DataImageView(string name, IByteArray data, Palette[] palettes, DataImageViewMode viewMode) : this(name, [data], palettes, viewMode = DataImageViewMode.ColumnMajor) { }
+        public DataImageView(string name, IByteArray data, Palette[] palettes, DataImageViewMode viewMode) : this(name, [data], palettes, viewMode) { }
 
-        public DataImageView(string name, IByteArray[] datas, Palette palette, DataImageViewMode viewMode) : this(name, datas, [palette], viewMode = DataImageViewMode.ColumnMajor) { }
+        public DataImageView(string name, IByteArray[] datas, Palette palette, DataImageViewMode viewMode) : this(name, datas, [palette], viewMode) { }
 
         public DataImageView(string name, IByteArray[] datas, Palette[] palettes, DataImageViewMode viewMode = DataImageViewMode.ColumnMajor) : base(name, 2) {
             Datas    = datas;
