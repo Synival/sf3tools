@@ -158,8 +158,6 @@ namespace SF3.Models.Files.MPD {
         private ITable[] MakeUnknownTables(MPDHeaderModel header) {
             var tables = new List<ITable>();
 
-            if (header.OffsetUnknown1 != 0)
-                tables.Add(OffsetUnknown1Table = UnknownInt16Table.Create(Data, "Unknown1", header.OffsetUnknown1 - c_RamOffset, (header.OffsetModelSwitchGroups - header.OffsetUnknown1) / 2, null));
             if (header.OffsetUnknown2 != 0)
                 tables.Add(OffsetUnknown2Table = UnknownUInt16Table.Create(Data, "Unknown2", header.OffsetUnknown2 - c_RamOffset, 32, 0xFFFF));
             if (header.OffsetModelSwitchGroups != 0)
@@ -168,6 +166,33 @@ namespace SF3.Models.Files.MPD {
                 tables.Add(RepeatingGroundAnimationTable = UnknownUInt8Table.Create(Data, "ScrollScreenAnimations", header.OffsetScrollScreenAnimation - c_RamOffset, null, 0xFF));
             if (header.OffsetIndexedTextures != 0)
                 tables.Add(IndexedTextureTable = TextureIDTable.Create(Data, "IndexedTextures", header.OffsetIndexedTextures - c_RamOffset));
+
+            // This table size varies between scenarios, whatever it is.
+            // In Scenario 1, it's always 32 or 0 bytes.
+            // In Scenario 2, it's always 3 bytes, with maybe 1 byte of padding.
+            // In Scenario 3, it's always 7 bytes, with maybe 1 byte of padding.
+            // Its content is usually all zeroes.
+            if (header.OffsetUnknown1 != 0) {
+                // Use at most 0x20 2-byte values (0x40 bytes total).
+                int lowestOffset = header.OffsetUnknown1 + 0x40;
+
+                void updateLowest(int value) {
+                    if (value < lowestOffset && value >= header.OffsetUnknown1)
+                        lowestOffset = value;
+                }
+
+                // The offset model switch groups usually (always?) occupy some space before its address.
+                // Make sure this table doesn't occupy that space.
+                updateLowest(header.OffsetModelSwitchGroups);
+                foreach (var msg in ModelSwitchGroupsTable) {
+                    updateLowest((int) msg.DisabledModelsOffset);
+                    updateLowest((int) msg.EnabledModelsOffset);
+                }
+
+                // We have our best guess for the size. Add the table!
+                var lengthInBytes = ((int) lowestOffset - header.OffsetUnknown1);
+                tables.Add(OffsetUnknown1Table = UnknownUInt16Table.Create(Data, "Unknown1", header.OffsetUnknown1 - c_RamOffset, lengthInBytes / 2, null));
+            }
 
             return tables.ToArray();
         }
@@ -965,7 +990,7 @@ namespace SF3.Models.Files.MPD {
         public LightPositionTable LightPositionTable { get; private set; }
 
         [BulkCopyRecurse]
-        public UnknownInt16Table OffsetUnknown1Table { get; private set; }
+        public UnknownUInt16Table OffsetUnknown1Table { get; private set; }
 
         [BulkCopyRecurse]
         public ModelSwitchGroupsTable ModelSwitchGroupsTable { get; private set; }
