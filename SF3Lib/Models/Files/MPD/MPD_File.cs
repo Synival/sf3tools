@@ -32,15 +32,15 @@ namespace SF3.Models.Files.MPD {
             // Get addresses we need to check.
             var headerAddrPtr = data.GetDouble(0x0000) - c_RamOffset;
             var headerAddr    = data.GetDouble(headerAddrPtr) - c_RamOffset;
-            var demoAddr      = data.GetDouble(headerAddr + 0x0030);
 
-            if ((demoAddr & 0xFFFF0000) == 0x00290000)
-                return ScenarioType.Ship2;
-
+            var chunk18Addr   = data.GetDouble(0x2090);
+            var chunk19Addr   = data.GetDouble(0x2098);
             var palette3Addr  = data.GetDouble(headerAddr + 0x0044);
             var chunk21Addr   = data.GetDouble(0x20A8);
 
             // Determine some things about this MPD file.
+            var hasChunk18  = (chunk18Addr > 0);
+            var hasChunk19  = (chunk19Addr > 0);
             var hasPalette3 = (palette3Addr & 0xFFFF0000) == 0x00290000;
             var hasChunk21  = (chunk21Addr > 0);
 
@@ -50,8 +50,12 @@ namespace SF3.Models.Files.MPD {
                 return ScenarioType.Scenario3;
             else if (hasChunk21)
                 return ScenarioType.Scenario2;
-            else
+            else if (hasChunk19)
                 return ScenarioType.Scenario1;
+            else if (hasChunk18)
+                return ScenarioType.Other;
+            else
+                return ScenarioType.Ship2;
         }
 
         public override IEnumerable<ITable> MakeTables() {
@@ -223,62 +227,66 @@ namespace SF3.Models.Files.MPD {
                 _ = MakeChunkData(5, ChunkType.Surface, CompressionType.Compressed);
 
             // Texture data, in chunks (6...13)
-            var lastTextureChunk = (Scenario >= ScenarioType.Scenario1) ? 13 : 10;
+            var lastTextureChunk =
+                (Scenario >= ScenarioType.Scenario1) ? 13 :
+                (Scenario == ScenarioType.Other)     ? 12 :
+                                                       10;
+
             for (var i = 6; i <= lastTextureChunk; i++)
                 _ = MakeChunkData(i, ChunkType.Textures, CompressionType.Compressed);
             if (Scenario >= ScenarioType.Scenario2 && chunks[21].Exists)
                 _ = MakeChunkData(21, ChunkType.Textures, CompressionType.Compressed);
 
+            var groundChunkStart = lastTextureChunk + 1;
+            var skyboxChunkStart = lastTextureChunk + 4;
+
             // Repeating backgrounds
             var repeatingGroundChunks = new List<IChunkData>();
             if (MPDHeader[0].GroundImageType == GroundImageType.Repeated) {
-                if (chunks[14].Exists)
-                    repeatingGroundChunks.Add(_ = MakeChunkData(14, ChunkType.Palette1Image, CompressionType.Compressed));
-                if (chunks[15].Exists)
-                    repeatingGroundChunks.Add(_ = MakeChunkData(15, ChunkType.Palette1Image, CompressionType.Compressed));
+                if (chunks[groundChunkStart + 0].Exists)
+                    repeatingGroundChunks.Add(_ = MakeChunkData(groundChunkStart + 0, ChunkType.Palette1Image, CompressionType.Compressed));
+                if (chunks[groundChunkStart + 1].Exists)
+                    repeatingGroundChunks.Add(_ = MakeChunkData(groundChunkStart + 1, ChunkType.Palette1Image, CompressionType.Compressed));
             }
             RepeatingGroundChunkData = repeatingGroundChunks.Where(x => x != null).ToArray();
 
             // Tiled ground images
             var tiledGroundChunks = new List<IChunkData>();
             if (MPDHeader[0].GroundImageType == GroundImageType.Tiled) {
-                if (chunks[14].Exists)
-                    tiledGroundChunks.Add(_ = MakeChunkData(14, ChunkType.TiledGroundTiles, CompressionType.Compressed));
-                if (chunks[15].Exists)
-                    tiledGroundChunks.Add(_ = MakeChunkData(15, ChunkType.TiledGroundTiles, CompressionType.Compressed));
-                if (chunks[16].Exists)
-                    tiledGroundChunks.Add(_ = MakeChunkData(16, ChunkType.TiledGroundMap, CompressionType.Compressed));
-                if (chunks[19].Exists)
-                    tiledGroundChunks.Add(_ = MakeChunkData(19, ChunkType.TiledGroundMap, CompressionType.Compressed));
+                if (chunks[groundChunkStart + 0].Exists)
+                    tiledGroundChunks.Add(_ = MakeChunkData(groundChunkStart + 0, ChunkType.TiledGroundTiles, CompressionType.Compressed));
+                if (chunks[groundChunkStart + 1].Exists)
+                    tiledGroundChunks.Add(_ = MakeChunkData(groundChunkStart + 1, ChunkType.TiledGroundTiles, CompressionType.Compressed));
+                if (chunks[groundChunkStart + 2].Exists)
+                    tiledGroundChunks.Add(_ = MakeChunkData(groundChunkStart + 2, ChunkType.TiledGroundMap, CompressionType.Compressed));
+                if (chunks[groundChunkStart + 5].Exists)
+                    tiledGroundChunks.Add(_ = MakeChunkData(groundChunkStart + 5, ChunkType.TiledGroundMap, CompressionType.Compressed));
             }
             TiledGroundChunkData = tiledGroundChunks.Where(x => x != null).ToArray();
 
             // Sky boxes
             var skyboxChunks = new List<IChunkData>();
             if (MPDHeader[0].HasSkyBox) {
-                if (chunks[17].Exists)
-                    skyboxChunks.Add(_ = MakeChunkData(17, ChunkType.Palette2Image, CompressionType.Compressed));
-                if (chunks[18].Exists)
-                    skyboxChunks.Add(_ = MakeChunkData(18, ChunkType.Palette2Image, CompressionType.Compressed));
+                if (chunks[skyboxChunkStart + 0].Exists)
+                    skyboxChunks.Add(_ = MakeChunkData(skyboxChunkStart + 0, ChunkType.Palette2Image, CompressionType.Compressed));
+                if (chunks[skyboxChunkStart + 1].Exists)
+                    skyboxChunks.Add(_ = MakeChunkData(skyboxChunkStart + 1, ChunkType.Palette2Image, CompressionType.Compressed));
             }
             SkyBoxChunkData = skyboxChunks.Where(x => x != null).ToArray();
 
             // Background image
             var backgroundChunks = new List<IChunkData>();
             if (MPDHeader[0].BackgroundImageType.HasFlag(BackgroundImageType.Still)) {
-                if (chunks[14].Exists)
-                    backgroundChunks.Add(_ = MakeChunkData(14, ChunkType.Palette1Image, CompressionType.Compressed));
-                if (chunks[15].Exists)
-                    backgroundChunks.Add(_ = MakeChunkData(15, ChunkType.Palette1Image, CompressionType.Compressed));
+                if (chunks[groundChunkStart + 0].Exists)
+                    backgroundChunks.Add(_ = MakeChunkData(groundChunkStart + 0, ChunkType.Palette1Image, CompressionType.Compressed));
+                if (chunks[groundChunkStart + 1].Exists)
+                    backgroundChunks.Add(_ = MakeChunkData(groundChunkStart + 1, ChunkType.Palette1Image, CompressionType.Compressed));
             }
             BackgroundChunkData = backgroundChunks.Where(x => x != null).ToArray();
 
-            // TODO: Tiled backgrounds
-
-            // Add unhandled images/scroll planes.
-            // TODO: on what conditions are we sure these are scroll planes?
-            var scrollPlaneStart = (Scenario >= ScenarioType.Scenario1) ? 14 : 11;
-            for (var i = scrollPlaneStart; i < scrollPlaneStart + 6; i++)
+            // Add unhandled images/scroll planes, in case they're not indicated by flags.
+            // TODO: we should know what these are 100% of the time if the map flags are off.
+            for (var i = groundChunkStart; i < groundChunkStart + 6; i++)
                 if (ChunkData[i] == null && chunks[i].Exists)
                     _ = MakeChunkData(i, ChunkType.UnhandledImageOrData, CompressionType.Compressed);
 

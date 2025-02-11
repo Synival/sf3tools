@@ -57,39 +57,62 @@ namespace SF3.Models.Structs.MPD {
             offsetTextureAnimationsAddress = Address + 0x18; // 4 bytes
             offsetUnknown2Address       = Address + 0x1C; // 4 bytes
             offsetScrollScreenAnimationAddr = Address + 0x20; // 4 bytes
+            offsetMesh1Address          = Address + 0x24; // 4 bytes
+            offsetMesh2Address          = Address + 0x28; // 4 bytes
 
             int addressNext;
             if (Scenario >= ScenarioType.Scenario1) {
-                offsetMesh1Address = Address + 0x24; // 4 bytes
-                offsetMesh2Address = Address + 0x28; // 4 bytes
                 offsetMesh3Address = Address + 0x2C; // 4 bytes
+                otherUnknownAddr   = -1;
+                addressNext = Address + 0x30;
+            }
+            else if (Scenario == ScenarioType.Other) {
+                offsetMesh3Address = -1;
+                otherUnknownAddr   = Address + 0x2C; // 4 bytes
                 addressNext = Address + 0x30;
             }
             else {
-                offsetMesh1Address = -1;
-                offsetMesh2Address = -1;
+                otherUnknownAddr   = -1;
                 offsetMesh3Address = -1;
-                addressNext = Address + 0x24;
+                addressNext = Address + 0x2C;
             }
 
-            modelsPreYRotation          = addressNext + 0x00; // 2 bytes
-            modelsViewAngleMin          = addressNext + 0x02; // 2 bytes
-            modelsViewAngleMax          = addressNext + 0x04; // 2 bytes
-            padding3Address             = addressNext + 0x06; // 2 bytes
-            offsetTextureAnimAltAddress = addressNext + 0x08; // 4 bytes
-            offsetPal1Address           = addressNext + 0x0C; // 4 bytes
-            offsetPal2Address           = addressNext + 0x10; // 4 bytes
+            if (Scenario != ScenarioType.Other) {
+                modelsPreYRotation = addressNext + 0x00; // 2 bytes
+                modelsViewAngleMin = addressNext + 0x02; // 2 bytes
+                modelsViewAngleMax = addressNext + 0x04; // 2 bytes
+                padding3Address    = addressNext + 0x06; // 2 bytes
+                offsetTextureAnimAltAddress = addressNext + 0x08; // 4 bytes
+                addressNext += 0x0C;
+            }
+            else {
+                modelsPreYRotation = -1;
+                modelsViewAngleMin = -1;
+                modelsViewAngleMax = -1;
+                padding3Address    = -1;
+                offsetTextureAnimAltAddress = -1;
+                // TODO: missing 4-byte value
+                addressNext += 0x04;
+            }
+
+            offsetPal1Address           = addressNext + 0x00; // 4 bytes
+            offsetPal2Address           = addressNext + 0x04; // 4 bytes
 
             if (HasPalette3) {
-                offsetPal3Address = addressNext + 0x14; // 4 bytes
-                offsetIndexedTextures = addressNext + 0x18; // 4 bytes
-                addressNext = addressNext + 0x1C;
+                offsetPal3Address = addressNext + 0x08; // 4 bytes
+                addressNext += 0x0C;
             }
             else {
                 offsetPal3Address = -1;
-                offsetIndexedTextures = -1; // 4 bytes
-                addressNext = addressNext + 0x14;
+                addressNext += 0x08;
             }
+
+            if (HasIndexedTextures) {
+                offsetIndexedTextures = addressNext; // 4 bytes
+                addressNext += 0x04;
+            }
+            else
+                offsetIndexedTextures = -1; // 4 bytes
 
             groundXAddress              = addressNext + 0x00; // 2 bytes
             groundYAddress              = addressNext + 0x02; // 2 bytes
@@ -106,8 +129,9 @@ namespace SF3.Models.Structs.MPD {
 
         public ScenarioType Scenario { get; }
 
-        public bool HasMeshes => Scenario >= ScenarioType.Scenario1;
-        public bool HasPalette3 => Scenario >= ScenarioType.Scenario3;
+        public bool HasMesh3 => Scenario >= ScenarioType.Scenario1;
+        public bool HasModelsInfo => Scenario != ScenarioType.Other;
+        public bool HasPalette3 => Scenario >= ScenarioType.Scenario3 || Scenario == ScenarioType.Other;
         public bool HasIndexedTextures => Scenario >= ScenarioType.Scenario3;
 
         [BulkCopy]
@@ -236,29 +260,23 @@ namespace SF3.Models.Structs.MPD {
         [BulkCopy]
         [TableViewModelColumn(displayOrder: 11, isPointer: true)]
         public int OffsetMesh1 {
-            get => HasMeshes ? Data.GetDouble(offsetMesh1Address) : 0;
-            set {
-                if (HasMeshes)
-                    Data.SetDouble(offsetMesh1Address, value);
-            }
+            get => Data.GetDouble(offsetMesh1Address);
+            set => Data.SetDouble(offsetMesh1Address, value);
         }
 
         [BulkCopy]
         [TableViewModelColumn(displayOrder: 12, isPointer: true)]
         public int OffsetMesh2 {
-            get => HasMeshes ? Data.GetDouble(offsetMesh2Address) : 0;
-            set {
-                if (HasMeshes)
-                    Data.SetDouble(offsetMesh2Address, value);
-            }
+            get => Data.GetDouble(offsetMesh2Address);
+            set => Data.SetDouble(offsetMesh2Address, value);
         }
 
         [BulkCopy]
         [TableViewModelColumn(displayOrder: 13, isPointer: true)]
         public int OffsetMesh3 {
-            get => HasMeshes ? Data.GetDouble(offsetMesh3Address) : 0;
+            get => HasMesh3 ? Data.GetDouble(offsetMesh3Address) : 0;
             set {
-                if (HasMeshes)
+                if (HasMesh3)
                     Data.SetDouble(offsetMesh3Address, value);
             }
         }
@@ -266,35 +284,51 @@ namespace SF3.Models.Structs.MPD {
         [BulkCopy]
         [TableViewModelColumn(displayOrder: 14, displayFormat: "X4")]
         public ushort ModelsPreYRotation {
-            get => (ushort) Data.GetWord(modelsPreYRotation);
-            set => Data.SetWord(modelsPreYRotation, value);
+            get => HasModelsInfo ? (ushort) Data.GetWord(modelsPreYRotation) : (ushort) 0;
+            set {
+                if (HasModelsInfo)
+                    Data.SetWord(modelsPreYRotation, value);
+            }
         }
 
         [BulkCopy]
         [TableViewModelColumn(displayOrder: 14.5f, displayFormat: "X4")]
         public ushort ModelsViewAngleMin {
-            get => (ushort) Data.GetWord(modelsViewAngleMin);
-            set => Data.SetWord(modelsViewAngleMin, value);
+            get => HasModelsInfo ? (ushort) Data.GetWord(modelsViewAngleMin) : (ushort) 0;
+            set {
+                if (HasModelsInfo)
+                    Data.SetWord(modelsViewAngleMin, value);
+            }
         }
 
         [BulkCopy]
         [TableViewModelColumn(displayOrder: 15, displayFormat: "X4")]
         public ushort ModelsViewAngleMax {
-            get => (ushort) Data.GetWord(modelsViewAngleMax);
-            set => Data.SetWord(modelsViewAngleMax, value);
+            get => HasModelsInfo ? (ushort) Data.GetWord(modelsViewAngleMax) : (ushort) 0;
+            set {
+                if (HasModelsInfo)
+                    Data.SetWord(modelsViewAngleMax, value);
+            }
         }
 
         [BulkCopy]
         public ushort Padding3 {
-            get => (ushort) Data.GetWord(padding3Address);
-            set => Data.SetWord(padding3Address, value);
+            get => HasModelsInfo ? (ushort) Data.GetWord(padding3Address) : (ushort) 0;
+            set {
+                if (HasModelsInfo)
+                    Data.SetWord(padding3Address, value);
+            }
         }
 
         [BulkCopy]
         [TableViewModelColumn(displayOrder: 16, isPointer: true)]
         public int OffsetTextureAnimAlt {
-            get => Data.GetDouble(offsetTextureAnimAltAddress);
-            set => Data.SetDouble(offsetTextureAnimAltAddress, value);
+            // TODO: Create HasOffsetTexturesAnimAlt for this case
+            get => HasModelsInfo ? Data.GetDouble(offsetTextureAnimAltAddress) : 0;
+            set {
+                if (HasModelsInfo)
+                    Data.SetDouble(offsetTextureAnimAltAddress, value);
+            }
         }
 
         [BulkCopy]

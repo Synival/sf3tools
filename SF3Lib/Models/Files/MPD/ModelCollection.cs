@@ -33,7 +33,7 @@ namespace SF3.Models.Files.MPD {
 
         public override IEnumerable<ITable> MakeTables() {
             ModelsHeaderTable = ModelsHeaderTable.Create(Data, "ModelsHeader", 0x0000);
-            ModelTable = ModelTable.Create(Data, "Models", 0x000C, ModelsHeaderTable[0].NumModels, Scenario >= ScenarioType.Scenario1);
+            ModelTable = ModelTable.Create(Data, "Models", 0x000C, ModelsHeaderTable[0].NumModels, Scenario >= ScenarioType.Other);
 
             var pdataAddresses = ModelTable
                 .SelectMany(x => x.PDatas)

@@ -32,6 +32,7 @@ namespace SF3.Utils {
         public static string ResourceFileForScenario(ScenarioType scenario, string resourceName) {
             switch (scenario) {
                 case ScenarioType.Ship2:
+                case ScenarioType.Other: // (Not actually present)
                 case ScenarioType.Scenario1:
                     return ResourceFile("S1/" + resourceName);
                 case ScenarioType.Scenario2:
