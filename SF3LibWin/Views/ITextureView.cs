@@ -4,11 +4,11 @@ using SF3.Win.Extensions;
 
 namespace SF3.Win.Views {
     public class ITextureView : ControlView<TextureControl> {
-        public ITextureView(string name, int textureScale = 0) : base(name) {
+        public ITextureView(string name, float textureScale = 0) : base(name) {
             ImageScale = textureScale;
         }
 
-        public ITextureView(string name, ITexture texture, int textureScale = 0) : base(name) {
+        public ITextureView(string name, ITexture texture, float textureScale = 0) : base(name) {
             _texture = texture;
             ImageScale = textureScale;
         }
@@ -48,8 +48,8 @@ namespace SF3.Win.Views {
             }
         }
 
-        private int _imageScale = 0;
-        public int ImageScale {
+        private float _imageScale = 0;
+        public float ImageScale {
             get => _imageScale;
             set {
                 if (value != _imageScale) {
