@@ -54,7 +54,7 @@ namespace SF3.Win.OpenGL.MPD_File {
             if (mpdFile?.RepeatingGroundImage != null)
                 CreateGroundImageModel(mpdFile, mpdFile.RepeatingGroundImage.FullTexture, 65536.0f);
             else if (mpdFile?.TiledGroundImage != null)
-                CreateGroundImageModel(mpdFile, mpdFile.TiledGroundImage, 64.0f);
+                CreateGroundImageModel(mpdFile, mpdFile.TiledGroundImage, 128.0f);
         }
 
         private static readonly float[,] c_normalCoordsVboData = new float[4, 3] {
@@ -137,8 +137,15 @@ namespace SF3.Win.OpenGL.MPD_File {
                 return;
             var cameraBoundaries = mpdFile.BoundariesTable[0];
 
-            var centerX = (cameraBoundaries.X1 + cameraBoundaries.X2) / 2.0f / 32.0f - 32.0f;
-            var centerZ = (cameraBoundaries.Y1 + cameraBoundaries.Y2) / 2.0f / 32.0f - 32.0f;
+            float centerX = 0.0f;
+            float centerZ = 0.0f;
+            try {
+                centerX = (cameraBoundaries.X1 + cameraBoundaries.X2) / 2.0f / 32.0f - 32.0f;
+                centerZ = -((cameraBoundaries.Y1 + cameraBoundaries.Y2) / 2.0f / 32.0f - 32.0f);
+            }
+            catch {
+                // TODO: some error when reading camera bounds. What to do here???
+            }
 
             void MoveCoordNearestToCameraBounds(ref float positionCoord, float cameraCoord) {
                 // Move positionCoord to a +(0, 63) offset to cameraCoord.
