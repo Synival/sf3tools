@@ -119,15 +119,9 @@ namespace SF3.Win.OpenGL.MPD_File {
                 .ToArray()
                 .To2DArray(4, 2);
 
-            float applyLighting = mpdFile.MPDHeader[0].ApplyLightingToGround ? 1.0f : 0.0f;
-            var applyLightingVboData = new float[,] {{applyLighting}, {applyLighting}, {applyLighting}, {applyLighting}};
-
             var quad = new Quad(vertices);
-            var texInfo = Shader.GetTextureInfo(MPD_TextureUnit.TextureAtlas);
+            var texInfo = Shader.GetTextureInfo(TextureUnit.Texture0);
             quad.AddAttribute(new PolyAttribute(1, ActiveAttribType.FloatVec2, texInfo.TexCoordName, 4, uvCoordsVboData));
-            quad.AddAttribute(new PolyAttribute(1, ActiveAttribType.Float, "applyLighting", 4, applyLightingVboData));
-            quad.AddAttribute(new PolyAttribute(1, ActiveAttribType.FloatVec3, "normal", 4, c_normalCoordsVboData));
-            quad.AddAttribute(new PolyAttribute(1, ActiveAttribType.FloatVec3, "glow", 4, c_glowVboData));
 
             Model = new QuadModel([quad]);
         }

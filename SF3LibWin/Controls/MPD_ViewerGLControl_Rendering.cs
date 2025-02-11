@@ -5,6 +5,7 @@ using System.Drawing.Imaging;
 using System.Linq;
 using System.Runtime.InteropServices;
 using CommonLib.Imaging;
+using CommonLib.Utils;
 using OpenTK.Graphics.OpenGL;
 using OpenTK.Mathematics;
 using SF3.Models.Files.MPD;
@@ -44,15 +45,24 @@ namespace SF3.Win.Controls {
             if (lightPal == null)
                 return null;
 
+            var lightAdjustment = MPD_File.LightAdjustmentTable?.Length > 0 ? MPD_File.LightAdjustmentTable[0] : null;
+            var adjR = lightAdjustment?.RAdjustment ?? 0;
+            var adjG = lightAdjustment?.GAdjustment ?? 0;
+            var adjB = lightAdjustment?.BAdjustment ?? 0;
+
             var numColors = lightPal.Length;
 
             var colorData = new byte[numColors * 4];
             int pos = 0;
             foreach (var color in lightPal) {
-                var channels = PixelConversion.ABGR1555toChannels(color.ColorABGR1555);
-                colorData[pos++] = channels.b;
-                colorData[pos++] = channels.g;
-                colorData[pos++] = channels.r;
+                var colorValue = color.ColorABGR1555;
+                var colorR = MathHelpers.Clamp((short) ((colorValue >>  0) & 0x1F) + adjR, 0x00, 0x1F);
+                var colorG = MathHelpers.Clamp((short) ((colorValue >>  5) & 0x1F) + adjG, 0x00, 0x1F);
+                var colorB = MathHelpers.Clamp((short) ((colorValue >> 10) & 0x1F) + adjB, 0x00, 0x1F);
+
+                colorData[pos++] = (byte) (colorB * 255 / 31);
+                colorData[pos++] = (byte) (colorG * 255 / 31);
+                colorData[pos++] = (byte) (colorR * 255 / 31);
                 colorData[pos++] = 255;
             }
 
@@ -313,20 +323,10 @@ namespace SF3.Win.Controls {
                 var useFancyOutdoorSurfaceLighting = (MPD_File == null) ? false : MPD_File.MPDHeader[0].OutdoorLighting;
 
                 if (_groundModel.Model != null) {
-                    var applyLightingToGround = (MPD_File == null) ? false : MPD_File.MPDHeader[0].ApplyLightingToGround;
-                    if (useFancyOutdoorSurfaceLighting && applyLightingToGround)
-                        UpdateShaderLighting(true);
-
                     GL.DepthMask(false);
-                    using (_world.TransparentBlackTexture.Use(MPD_TextureUnit.TextureTerrainTypes))
-                    using (_world.TransparentBlackTexture.Use(MPD_TextureUnit.TextureEventIDs))
-                    using (lightingTexture.Use(MPD_TextureUnit.TextureLighting))
-                    using (_groundModel.Texture.Use(MPD_TextureUnit.TextureAtlas))
-                        _groundModel.Model.Draw(_world.ObjectShader, null);
+                    using (_groundModel.Texture.Use(TextureUnit.Texture0))
+                        _groundModel.Model.Draw(_world.TextureShader, null);
                     GL.DepthMask(true);
-
-                    if (useFancyOutdoorSurfaceLighting && applyLightingToGround)
-                        UpdateShaderLighting(false);
                 }
 
                 var terrainTypesTexture = DrawTerrainTypes ? _surfaceModel.TerrainTypesTexture : _world.TransparentBlackTexture;

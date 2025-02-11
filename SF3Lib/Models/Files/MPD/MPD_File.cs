@@ -131,6 +131,8 @@ namespace SF3.Models.Files.MPD {
                 tables.Add(LightPalette = ColorTable.Create(Data, "LightPalette", header.OffsetLightPalette - c_RamOffset, 32));
             if (header.OffsetLightPosition != 0)
                 tables.Add(LightPositionTable = LightPositionTable.Create(Data, "LightPositions", header.OffsetLightPosition - c_RamOffset));
+            if (header.OffsetLightAdjustment != 0)
+                tables.Add(LightAdjustmentTable = LightAdjustmentTable.Create(Data, "LightAdjustment", header.OffsetLightAdjustment - c_RamOffset, Scenario));
 
             if (header.OffsetGradient != 0) {
                 if ((ushort) Data.GetWord(header.OffsetGradient - c_RamOffset) != 0xFFFF)
@@ -176,7 +178,7 @@ namespace SF3.Models.Files.MPD {
             if (header.OffsetIndexedTextures != 0)
                 tables.Add(IndexedTextureTable = TextureIDTable.Create(Data, "IndexedTextures", header.OffsetIndexedTextures - c_RamOffset));
 
-            // This table isn't present in Scenario2+, and is always 32 bytes, if it exists.
+            // This table is only present before Scenario 2 and is always 32 bytes if it exists.
             if (header.OffsetUnknown1 != 0) {
                 // Use at most 0x20 2-byte values (0x40 bytes total).
                 int lowestOffset = header.OffsetUnknown1 + 0x40;
@@ -1001,6 +1003,9 @@ namespace SF3.Models.Files.MPD {
 
         [BulkCopyRecurse]
         public UnknownUInt16Table Unknown1Table { get; private set; }
+
+        [BulkCopyRecurse]
+        public LightAdjustmentTable LightAdjustmentTable { get; private set; }
 
         [BulkCopyRecurse]
         public ModelSwitchGroupsTable ModelSwitchGroupsTable { get; private set; }

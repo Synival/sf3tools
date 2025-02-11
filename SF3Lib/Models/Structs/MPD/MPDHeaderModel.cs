@@ -10,6 +10,7 @@ namespace SF3.Models.Structs.MPD {
         private readonly int offsetLightPaletteAddress;   // int32  Always 0x0c. Pointer to 32 values for light palette. See (#header-offset-1).
         private readonly int offsetLightPosAddress;       // int32  Always 0x4c. Pointer to light position. See (#header-offset-2).
         private readonly int offsetUnknown1Address;       // int32  Always 0x50. pointer to 0x20 unknown int16s at the start of the file. Mostly zero or 0x8000. (#header-offset-3)
+        private readonly int offsetLightAdjustmentAddr;   // int32  Always 0x50. Replaces Scenario1 'unknown 1' table. A single structure with adjustments to overall lighting.
         private readonly int viewDistanceAddress;         // int16  Something like a view distance for meshes from the models chunk.
         private readonly int padding2Address;             // int16  Always zero
         private readonly int offsetModelSwitchGroupsAddr; // int32  Pointer to model switch group list.
@@ -52,7 +53,16 @@ namespace SF3.Models.Structs.MPD {
             padding1Address             = Address + 0x02; // 2 bytes
             offsetLightPaletteAddress   = Address + 0x04; // 4 bytes
             offsetLightPosAddress       = Address + 0x08; // 4 bytes
-            offsetUnknown1Address       = Address + 0x0C; // 4 bytes
+
+            if (Scenario >= ScenarioType.Scenario2) {
+                offsetUnknown1Address     = -1;
+                offsetLightAdjustmentAddr = Address + 0x0C; // 4 bytes
+            }
+            else {
+                offsetUnknown1Address     = Address + 0x0C; // 4 bytes
+                offsetLightAdjustmentAddr = -1;
+            }
+
             viewDistanceAddress         = Address + 0x10; // 2 bytes
             padding2Address             = Address + 0x12; // 2 bytes
             offsetModelSwitchGroupsAddr = Address + 0x14; // 4 bytes
@@ -140,8 +150,10 @@ namespace SF3.Models.Structs.MPD {
 
         public ScenarioType Scenario { get; }
 
+        public bool HasUnknown1Table => Scenario <= ScenarioType.Scenario1;
+        public bool HasLightAdjustmentTable => Scenario >= ScenarioType.Scenario2;
         public bool HasUnknown2Table => Scenario <= ScenarioType.Scenario1;
-        public bool HasGradient => Scenario >= ScenarioType.Scenario2;
+        public bool HasGradientTable => Scenario >= ScenarioType.Scenario2;
         public bool HasMesh3 => Scenario >= ScenarioType.Scenario1;
         public bool HasModelsInfo => Scenario != ScenarioType.Other;
         public bool HasPalette3 => Scenario >= ScenarioType.Scenario3 || Scenario == ScenarioType.Other;
@@ -183,16 +195,6 @@ namespace SF3.Models.Structs.MPD {
             set => MapFlags = (ushort) ((MapFlags & ~SkyBoxFlag) | (value ? SkyBoxFlag : 0));
         }
  
-        [TableViewModelColumn(displayOrder: 0.3f, displayName: "Apply Lighting to Ground (Scn2)")]
-        public bool ApplyLightingToGround {
-            // TODO: this doesn't seem to be the right flag in Scenario 3... Or is it always on?
-            get => Scenario == ScenarioType.Scenario2 && (MapFlags & 0x0080) == 0x0080;
-            set {
-                if (Scenario == ScenarioType.Scenario2)
-                    MapFlags = (ushort) ((MapFlags & ~0x0080) | (value ? 0x0080 : 0));
-            }
-        }
-
         [TableViewModelColumn(displayOrder: 0.3f, displayName: "Outdoor Lighting (Scn2+)")]
         public bool OutdoorLighting {
             get => Scenario >= ScenarioType.Scenario2 && (MapFlags & 0x2000) == 0x2000;
@@ -225,8 +227,21 @@ namespace SF3.Models.Structs.MPD {
         [BulkCopy]
         [TableViewModelColumn(displayOrder: 4, isPointer: true)]
         public int OffsetUnknown1 {
-            get => Data.GetDouble(offsetUnknown1Address);
-            set => Data.SetDouble(offsetUnknown1Address, value);
+            get => HasUnknown1Table ? Data.GetDouble(offsetUnknown1Address) : 0;
+            set {
+                if (HasUnknown1Table)
+                    Data.SetDouble(offsetUnknown1Address, value);
+            }
+        }
+
+        [BulkCopy]
+        [TableViewModelColumn(displayOrder: 4, isPointer: true)]
+        public int OffsetLightAdjustment {
+            get => HasLightAdjustmentTable ? Data.GetDouble(offsetLightAdjustmentAddr) : 0;
+            set {
+                if (HasLightAdjustmentTable)
+                    Data.SetDouble(offsetLightAdjustmentAddr, value);
+            }
         }
 
         [BulkCopy]
@@ -269,9 +284,9 @@ namespace SF3.Models.Structs.MPD {
         [BulkCopy]
         [TableViewModelColumn(displayOrder: 9.5f, isPointer: true)]
         public int OffsetGradient {
-            get => HasGradient ? Data.GetDouble(offsetGradientAddress) : 0;
+            get => HasGradientTable ? Data.GetDouble(offsetGradientAddress) : 0;
             set {
-                if (HasGradient)
+                if (HasGradientTable)
                     Data.SetDouble(offsetGradientAddress, value);
             }
         }

@@ -47,6 +47,8 @@ void main() {
         // - the color used changes more rapidly the less direct the light is due to the exponent
         : (normalLightDot < 0) ? 0 : (0.666 * normalLightDot + 0.334 * pow(normalLightDot, 12)) * 1.999;
 
+    lighting = floor(lighting * 32.00f) / 32.0f;
+
     lightColorFrag           = (applyLighting > 0.50) ? vec4(clamp(texture(textureLighting, vec2(0, lighting)).xyz - 0.5, -0.5, 0.5), 0) : vec4(0, 0, 0, 0);
     texCoordAtlasFrag        = texCoordAtlas;
     texCoordTerrainTypesFrag = texCoordTerrainTypes;
