@@ -132,6 +132,11 @@ namespace SF3.Models.Files.MPD {
             if (header.OffsetLightPosition != 0)
                 tables.Add(LightPositionTable = LightPositionTable.Create(Data, "LightPositions", header.OffsetLightPosition - c_RamOffset));
 
+            if (header.OffsetGradient != 0) {
+                if ((ushort) Data.GetWord(header.OffsetGradient - c_RamOffset) != 0xFFFF)
+                    tables.Add(GradientTable = GradientTable.Create(Data, "Gradient", header.OffsetGradient - c_RamOffset));
+            }
+
             return tables.ToArray();
         }
 
@@ -163,7 +168,7 @@ namespace SF3.Models.Files.MPD {
             var tables = new List<ITable>();
 
             if (header.OffsetUnknown2 != 0)
-                tables.Add(OffsetUnknown2Table = UnknownUInt16Table.Create(Data, "Unknown2", header.OffsetUnknown2 - c_RamOffset, 32, 0xFFFF));
+                tables.Add(Unknown2Table = UnknownUInt16Table.Create(Data, "Unknown2", header.OffsetUnknown2 - c_RamOffset, 32, 0xFFFF));
             if (header.OffsetModelSwitchGroups != 0)
                 tables.Add(ModelSwitchGroupsTable = ModelSwitchGroupsTable.Create(Data, "ModelSwitchGroups", header.OffsetModelSwitchGroups - c_RamOffset));
             if (header.OffsetScrollScreenAnimation != 0)
@@ -171,11 +176,7 @@ namespace SF3.Models.Files.MPD {
             if (header.OffsetIndexedTextures != 0)
                 tables.Add(IndexedTextureTable = TextureIDTable.Create(Data, "IndexedTextures", header.OffsetIndexedTextures - c_RamOffset));
 
-            // This table size varies between scenarios, whatever it is.
-            // In Scenario 1, it's always 32 or 0 bytes.
-            // In Scenario 2, it's always 3 bytes, with maybe 1 byte of padding.
-            // In Scenario 3, it's always 7 bytes, with maybe 1 byte of padding.
-            // Its content is usually all zeroes.
+            // This table isn't present in Scenario2+, and is always 32 bytes, if it exists.
             if (header.OffsetUnknown1 != 0) {
                 // Use at most 0x20 2-byte values (0x40 bytes total).
                 int lowestOffset = header.OffsetUnknown1 + 0x40;
@@ -195,7 +196,8 @@ namespace SF3.Models.Files.MPD {
 
                 // We have our best guess for the size. Add the table!
                 var lengthInBytes = ((int) lowestOffset - header.OffsetUnknown1);
-                tables.Add(OffsetUnknown1Table = UnknownUInt16Table.Create(Data, "Unknown1", header.OffsetUnknown1 - c_RamOffset, lengthInBytes / 2, null));
+                var size = Math.Max(32, lengthInBytes / 2);
+                tables.Add(Unknown1Table = UnknownUInt16Table.Create(Data, "Unknown1", header.OffsetUnknown1 - c_RamOffset, size, null));
             }
 
             return tables.ToArray();
@@ -998,7 +1000,7 @@ namespace SF3.Models.Files.MPD {
         public LightPositionTable LightPositionTable { get; private set; }
 
         [BulkCopyRecurse]
-        public UnknownUInt16Table OffsetUnknown1Table { get; private set; }
+        public UnknownUInt16Table Unknown1Table { get; private set; }
 
         [BulkCopyRecurse]
         public ModelSwitchGroupsTable ModelSwitchGroupsTable { get; private set; }
@@ -1019,7 +1021,10 @@ namespace SF3.Models.Files.MPD {
         public TextureAnimationTable TextureAnimations { get; private set; }
 
         [BulkCopyRecurse]
-        public UnknownUInt16Table OffsetUnknown2Table { get; private set; }
+        public UnknownUInt16Table Unknown2Table { get; private set; }
+
+        [BulkCopyRecurse]
+        public GradientTable GradientTable { get; private set; }
 
         public List<Chunk3Frame> Chunk3Frames { get; private set; }
 

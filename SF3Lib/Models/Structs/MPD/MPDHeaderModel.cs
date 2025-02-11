@@ -15,9 +15,11 @@ namespace SF3.Models.Structs.MPD {
         private readonly int offsetModelSwitchGroupsAddr; // int32  Pointer to model switch group list.
         private readonly int offsetTextureAnimationsAddress; // int32 Offset to list of texture groups. See (#texture-groups)
         private readonly int offsetUnknown2Address;       // int32  Pointer to unknown list. Only used in RAIL1.MPD. 5 values.
+        private readonly int offsetGradientAddress;       // int32  Pointer to gradient table that replaces Scenario 1 "unknown2" table.
         private readonly int offsetScrollScreenAnimationAddr; // int32  Pointer to list of KA table for ground model animation.
         private readonly int offsetMesh1Address;          // int32  Pointer to list of 2 movable/interactable mesh. may be null.
         private readonly int offsetMesh2Address;          // int32  Pointer to list of 2 movable/interactable mesh. may be null.
+        private readonly int otherUnknownAddr;            // int32  Unknown value only present in 'Other' MPD files
         private readonly int offsetMesh3Address;          // int32  Pointer to list of 2 movable/interactable mesh. may be null.
         private readonly int modelsPreYRotation;          // ANGLE  mostly 0x8000. The meshes from the models chunk are pre-rotated by this angle.
         private readonly int modelsViewAngleMin;          // ANGLE  mostly 0xb334. Has something to do with the view angle. more research necessary.
@@ -55,7 +57,16 @@ namespace SF3.Models.Structs.MPD {
             padding2Address             = Address + 0x12; // 2 bytes
             offsetModelSwitchGroupsAddr = Address + 0x14; // 4 bytes
             offsetTextureAnimationsAddress = Address + 0x18; // 4 bytes
-            offsetUnknown2Address       = Address + 0x1C; // 4 bytes
+
+            if (Scenario >= ScenarioType.Scenario2) {
+                offsetGradientAddress = Address + 0x1C; // 4 bytes
+                offsetUnknown2Address = -1;
+            }
+            else {
+                offsetGradientAddress = -1;
+                offsetUnknown2Address = Address + 0x1C; // 4 bytes
+            }
+
             offsetScrollScreenAnimationAddr = Address + 0x20; // 4 bytes
             offsetMesh1Address          = Address + 0x24; // 4 bytes
             offsetMesh2Address          = Address + 0x28; // 4 bytes
@@ -129,6 +140,8 @@ namespace SF3.Models.Structs.MPD {
 
         public ScenarioType Scenario { get; }
 
+        public bool HasUnknown2Table => Scenario <= ScenarioType.Scenario1;
+        public bool HasGradient => Scenario >= ScenarioType.Scenario2;
         public bool HasMesh3 => Scenario >= ScenarioType.Scenario1;
         public bool HasModelsInfo => Scenario != ScenarioType.Other;
         public bool HasPalette3 => Scenario >= ScenarioType.Scenario3 || Scenario == ScenarioType.Other;
@@ -246,8 +259,21 @@ namespace SF3.Models.Structs.MPD {
         [BulkCopy]
         [TableViewModelColumn(displayOrder: 9, isPointer: true)]
         public int OffsetUnknown2 {
-            get => Data.GetDouble(offsetUnknown2Address);
-            set => Data.SetDouble(offsetUnknown2Address, value);
+            get => HasUnknown2Table ? Data.GetDouble(offsetUnknown2Address) : 0;
+            set {
+                if (HasUnknown2Table)
+                    Data.SetDouble(offsetUnknown2Address, value);
+            }
+        }
+
+        [BulkCopy]
+        [TableViewModelColumn(displayOrder: 9.5f, isPointer: true)]
+        public int OffsetGradient {
+            get => HasGradient ? Data.GetDouble(offsetGradientAddress) : 0;
+            set {
+                if (HasGradient)
+                    Data.SetDouble(offsetGradientAddress, value);
+            }
         }
 
         [BulkCopy]

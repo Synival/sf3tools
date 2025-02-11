@@ -20,8 +20,8 @@ namespace SF3.Win.Views.MPD {
             if (Model.LightPositionTable != null)
                 CreateChild(new TableView("Light Position", Model.LightPositionTable, ngc));
 
-            if (Model.OffsetUnknown1Table != null)
-                CreateChild(new TableView("Unknown 1",  Model.OffsetUnknown1Table, ngc));
+            if (Model.Unknown1Table != null)
+                CreateChild(new TableView("Unknown 1",  Model.Unknown1Table, ngc));
 
             if (Model.ModelSwitchGroupsTable != null)
                 CreateChild(new TableView("Model Switch Groups",  Model.ModelSwitchGroupsTable, ngc));
@@ -29,8 +29,11 @@ namespace SF3.Win.Views.MPD {
             if (Model.TextureAnimations != null)
                 CreateChild(new TextureAnimationsView("Texture Animations", Model.TextureAnimations, ngc));
 
-            if (Model.OffsetUnknown2Table != null)
-                CreateChild(new TableView("Unknown 2",  Model.OffsetUnknown2Table, ngc));
+            if (Model.Unknown2Table != null)
+                CreateChild(new TableView("Unknown 2",  Model.Unknown2Table, ngc));
+
+            if (Model.GradientTable != null)
+                CreateChild(new TableView("Gradient",  Model.GradientTable, ngc));
 
             if (Model.RepeatingGroundAnimationTable != null)
                 CreateChild(new TableView("Repeating Ground Animation",  Model.RepeatingGroundAnimationTable, ngc));
