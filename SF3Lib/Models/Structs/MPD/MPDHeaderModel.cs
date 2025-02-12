@@ -17,7 +17,7 @@ namespace SF3.Models.Structs.MPD {
         private readonly int offsetTextureAnimationsAddress; // int32 Offset to list of texture groups. See (#texture-groups)
         private readonly int offsetUnknown2Address;       // int32  Pointer to unknown list. Only used in RAIL1.MPD. 5 values.
         private readonly int offsetGradientAddress;       // int32  Pointer to gradient table that replaces Scenario 1 "unknown2" table.
-        private readonly int offsetScrollScreenAnimationAddr; // int32  Pointer to list of KA table for ground model animation.
+        private readonly int offsetGroundAnimationAddr;   // int32  Pointer to list of KA table for ground model animation.
         private readonly int offsetMesh1Address;          // int32  Pointer to list of 2 movable/interactable mesh. may be null.
         private readonly int offsetMesh2Address;          // int32  Pointer to list of 2 movable/interactable mesh. may be null.
         private readonly int otherUnknownAddr;            // int32  Unknown value only present in 'Other' MPD files
@@ -77,7 +77,7 @@ namespace SF3.Models.Structs.MPD {
                 offsetUnknown2Address = Address + 0x1C; // 4 bytes
             }
 
-            offsetScrollScreenAnimationAddr = Address + 0x20; // 4 bytes
+            offsetGroundAnimationAddr   = Address + 0x20; // 4 bytes
             offsetMesh1Address          = Address + 0x24; // 4 bytes
             offsetMesh2Address          = Address + 0x28; // 4 bytes
 
@@ -293,9 +293,9 @@ namespace SF3.Models.Structs.MPD {
 
         [BulkCopy]
         [TableViewModelColumn(displayOrder: 10, isPointer: true)]
-        public int OffsetScrollScreenAnimation {
-            get => Data.GetDouble(offsetScrollScreenAnimationAddr);
-            set => Data.SetDouble(offsetScrollScreenAnimationAddr, value);
+        public int OffsetGroundAnimation {
+            get => Data.GetDouble(offsetGroundAnimationAddr);
+            set => Data.SetDouble(offsetGroundAnimationAddr, value);
         }
 
         [BulkCopy]

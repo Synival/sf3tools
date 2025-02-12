@@ -169,12 +169,15 @@ namespace SF3.Models.Files.MPD {
         private ITable[] MakeUnknownTables(MPDHeaderModel header) {
             var tables = new List<ITable>();
 
-            if (header.OffsetUnknown2 != 0)
-                tables.Add(Unknown2Table = UnknownUInt16Table.Create(Data, "Unknown2", header.OffsetUnknown2 - c_RamOffset, 32, 0xFFFF));
+            // TODO: put somewhere else!!
             if (header.OffsetModelSwitchGroups != 0)
                 tables.Add(ModelSwitchGroupsTable = ModelSwitchGroupsTable.Create(Data, "ModelSwitchGroups", header.OffsetModelSwitchGroups - c_RamOffset));
-            if (header.OffsetScrollScreenAnimation != 0)
-                tables.Add(RepeatingGroundAnimationTable = UnknownUInt8Table.Create(Data, "ScrollScreenAnimations", header.OffsetScrollScreenAnimation - c_RamOffset, null, 0xFF));
+
+            // TODO: put somewhere else!!
+            if (header.OffsetGroundAnimation != 0)
+                tables.Add(GroundAnimationTable = UnknownUInt8Table.Create(Data, "ScrollScreenAnimations", header.OffsetGroundAnimation - c_RamOffset, null, 0xFF));
+
+            // TODO: put somewhere else!!
             if (header.OffsetIndexedTextures != 0)
                 tables.Add(IndexedTextureTable = TextureIDTable.Create(Data, "IndexedTextures", header.OffsetIndexedTextures - c_RamOffset));
 
@@ -201,6 +204,9 @@ namespace SF3.Models.Files.MPD {
                 var size = Math.Max(32, lengthInBytes / 2);
                 tables.Add(Unknown1Table = UnknownUInt16Table.Create(Data, "Unknown1", header.OffsetUnknown1 - c_RamOffset, size, null));
             }
+
+            if (header.OffsetUnknown2 != 0)
+                tables.Add(Unknown2Table = UnknownUInt16Table.Create(Data, "Unknown2", header.OffsetUnknown2 - c_RamOffset, 32, 0xFFFF));
 
             return tables.ToArray();
         }
@@ -1011,7 +1017,7 @@ namespace SF3.Models.Files.MPD {
         public ModelSwitchGroupsTable ModelSwitchGroupsTable { get; private set; }
 
         [BulkCopyRecurse]
-        public UnknownUInt8Table RepeatingGroundAnimationTable { get; private set; }
+        public UnknownUInt8Table GroundAnimationTable { get; private set; }
 
         [BulkCopyRecurse]
         public TextureIDTable TextureAnimationsAlt { get; private set; }

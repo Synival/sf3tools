@@ -38,8 +38,8 @@ namespace SF3.Win.Views.MPD {
             if (Model.GradientTable != null)
                 CreateChild(new TableView("Gradient",  Model.GradientTable, ngc));
 
-            if (Model.RepeatingGroundAnimationTable != null)
-                CreateChild(new TableView("Repeating Ground Animation",  Model.RepeatingGroundAnimationTable, ngc));
+            if (Model.GroundAnimationTable != null)
+                CreateChild(new TableView("Ground Animation",  Model.GroundAnimationTable, ngc));
 
             for (var i = 0; i < Model.PaletteTables.Length; i++)
                 if (Model.PaletteTables[i] != null)
