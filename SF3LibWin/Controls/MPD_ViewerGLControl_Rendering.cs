@@ -4,7 +4,6 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.Linq;
 using System.Runtime.InteropServices;
-using CommonLib.Imaging;
 using CommonLib.Utils;
 using OpenTK.Graphics.OpenGL;
 using OpenTK.Mathematics;
@@ -81,12 +80,14 @@ namespace SF3.Win.Controls {
             GL.DepthFunc(DepthFunction.Less);
             GL.Enable(EnableCap.Blend);
             GL.BlendFunc(BlendingFactor.SrcAlpha, BlendingFactor.OneMinusSrcAlpha);
+            GL.BlendEquationSeparate(BlendEquationMode.FuncAdd, BlendEquationMode.Max);
 
             _world         = new WorldResources();
             _models        = new ModelResources();
             _surfaceModel  = new SurfaceModelResources();
-            _groundModel        = new GroundModelResources();
+            _groundModel   = new GroundModelResources();
             _surfaceEditor = new SurfaceEditorResources();
+            _gradients     = new GradientResources();
 
             _world.Init();
             _surfaceModel.Init();
@@ -109,12 +110,17 @@ namespace SF3.Win.Controls {
             _surfaceModel?.Dispose();
             _groundModel?.Dispose();
             _surfaceEditor?.Dispose();
+            _gradients?.Dispose();
+
             _selectFramebuffer?.Dispose();
 
             _world             = null;
+            _models            = null;
             _surfaceModel      = null;
             _groundModel       = null;
             _surfaceEditor     = null;
+            _gradients         = null;
+
             _selectFramebuffer = null;
         }
 
@@ -198,6 +204,15 @@ namespace SF3.Win.Controls {
             Invalidate();
         }
 
+        public void UpdateGradients() {
+            if (_gradients == null)
+                return;
+
+            MakeCurrent();
+            _gradients.Update(MPD_File);
+            Invalidate();
+        }
+
         private void UpdateSelectFramebuffer() {
             _selectFramebuffer?.Dispose();
             _selectFramebuffer = new Framebuffer(Width, Height);
@@ -214,20 +229,21 @@ namespace SF3.Win.Controls {
                 return;
 
             UpdateProjectionMatrix();
-            var projectionMatrix = _projectionMatrix;
-
-            foreach (var shader in _world.Shaders) {
-                var handle = GL.GetUniformLocation(shader.Handle, "projection");
-                if (handle >= 0)
-                    using (shader.Use())
-                        GL.UniformMatrix4(handle, false, ref projectionMatrix);
-            }
+            foreach (var shader in _world.Shaders)
+                UpdateShaderProjectionMatrix(shader, _projectionMatrix);
         }
 
         private void UpdateViewMatrix() {
             _viewMatrix = Matrix4.CreateTranslation(-Position)
                 * Matrix4.CreateRotationY(MathHelper.DegreesToRadians(-Yaw))
                 * Matrix4.CreateRotationX(MathHelper.DegreesToRadians(-Pitch));
+        }
+
+        private void UpdateShaderProjectionMatrix(Shader shader, Matrix4 matrix) {
+            var handle = GL.GetUniformLocation(shader.Handle, "projection");
+            if (handle >= 0)
+                using (shader.Use())
+                    GL.UniformMatrix4(handle, false, ref matrix);
         }
 
         private void UpdateShaderViewMatrix(Shader shader, Matrix4 matrix) {
@@ -285,7 +301,8 @@ namespace SF3.Win.Controls {
         }
 
         private void DrawScene() {
-            GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
+            GL.StencilMask(0xFF);
+            GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit | ClearBufferMask.StencilBufferBit);
 
             GL.Enable(EnableCap.CullFace);
             if (_drawNormals) {
@@ -319,15 +336,37 @@ namespace SF3.Win.Controls {
                 }
             }
             else {
+                GL.Enable(EnableCap.StencilTest);
+                GL.StencilOp(StencilOp.Keep, StencilOp.Keep, StencilOp.Replace);
+
                 var lightingTexture = _surfaceModel.LightingTexture ?? _world.WhiteTexture;
                 var useFancyOutdoorSurfaceLighting = (MPD_File == null) ? false : MPD_File.MPDHeader[0].OutdoorLighting;
 
                 if (_groundModel.Model != null) {
                     GL.DepthMask(false);
+
+                    GL.StencilFunc(StencilFunction.Always, 1, 0x01);
+                    GL.StencilMask(0x01);
+
                     using (_groundModel.Texture.Use(TextureUnit.Texture0))
                         _groundModel.Model.Draw(_world.TextureShader, null);
+
+                    if (_gradients?.GroundGradientModel != null) {
+                        UpdateShaderProjectionMatrix(_world.SolidShader, Matrix4.Identity);
+                        UpdateShaderViewMatrix(_world.SolidShader, Matrix4.Identity);
+
+                        GL.StencilFunc(StencilFunction.Equal, 1, 0x01);
+                        _gradients.GroundGradientModel.Draw(_world.SolidShader, null);
+    
+                        UpdateShaderProjectionMatrix(_world.SolidShader, _projectionMatrix);
+                        UpdateShaderViewMatrix(_world.SolidShader, _viewMatrix);
+                    }
+
                     GL.DepthMask(true);
                 }
+
+                GL.StencilFunc(StencilFunction.Always, 4, 0x04);
+                GL.StencilMask(0x04);
 
                 var terrainTypesTexture = DrawTerrainTypes ? _surfaceModel.TerrainTypesTexture : _world.TransparentBlackTexture;
                 var eventIdsTexture     = DrawEventIDs     ? _surfaceModel.EventIDsTexture     : _world.TransparentBlackTexture;
@@ -400,6 +439,24 @@ namespace SF3.Win.Controls {
                     UpdateShaderModelMatrix(_world.ObjectShader, Matrix4.Identity);
                     UpdateShaderNormalMatrix(_world.ObjectShader, Matrix3.Identity);
                 }
+
+                if (_gradients?.ModelsGradientModel != null) {
+                    GL.Disable(EnableCap.DepthTest);
+                    GL.DepthMask(false);
+
+                    UpdateShaderProjectionMatrix(_world.SolidShader, Matrix4.Identity);
+                    UpdateShaderViewMatrix(_world.SolidShader, Matrix4.Identity);
+
+                    GL.StencilFunc(StencilFunction.Equal, 4, 0x04);
+                    _gradients.ModelsGradientModel.Draw(_world.SolidShader, null);
+    
+                    UpdateShaderProjectionMatrix(_world.SolidShader, _projectionMatrix);
+                    UpdateShaderViewMatrix(_world.SolidShader, _viewMatrix);
+                    GL.DepthMask(true);
+                    GL.Enable(EnableCap.DepthTest);
+                }
+
+                GL.Disable(EnableCap.StencilTest);
             }
             GL.Disable(EnableCap.CullFace);
 
@@ -678,6 +735,8 @@ namespace SF3.Win.Controls {
         private SurfaceModelResources _surfaceModel = null;
         private GroundModelResources _groundModel = null;
         private SurfaceEditorResources _surfaceEditor = null;
+        private GradientResources _gradients = null;
+
         private Framebuffer _selectFramebuffer;
     }
 }

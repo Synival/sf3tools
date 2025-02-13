@@ -105,6 +105,7 @@ namespace SF3.Win.Controls {
                 GLControl.UpdateModels();
                 GLControl.UpdateSurfaceModels();
                 GLControl.UpdateGroundModel();
+                GLControl.UpdateGradients();
             }
         }
 
