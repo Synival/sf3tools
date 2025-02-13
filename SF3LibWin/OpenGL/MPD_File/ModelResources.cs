@@ -130,10 +130,6 @@ namespace SF3.Win.OpenGL.MPD_File {
                 var polygon = polygons[i];
                 var attr = attrs[i];
 
-                // This flag appears to hide the polygon.
-                if ((attr.Flags & 0x10) == 0x10)
-                    continue;
-
                 // Get texture. Fetch animated textures if possible.
                 var textureId = attr.TextureNo;
 
