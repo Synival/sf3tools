@@ -95,6 +95,24 @@ namespace SF3.Models.Structs.MPD {
             set => Data.SetWord(_partsAffectedBitsAddr, value);
         }
 
+        [TableViewModelColumn(displayOrder: 8.1f)]
+        public bool AffectsGround {
+            get => (PartsAffectedBits & 0x01) == 0x01;
+            set => PartsAffectedBits = (ushort) ((PartsAffectedBits & ~0x01) | (value ? 0x01 : 0x00));
+        }
+
+        [TableViewModelColumn(displayOrder: 8.2f)]
+        public bool AffectsSkyBox {
+            get => (PartsAffectedBits & 0x02) == 0x02;
+            set => PartsAffectedBits = (ushort) ((PartsAffectedBits & ~0x02) | (value ? 0x02 : 0x00));
+        }
+
+        [TableViewModelColumn(displayOrder: 8.3f)]
+        public bool AffectsModelsAndTiles {
+            get => (PartsAffectedBits & 0x04) == 0x04;
+            set => PartsAffectedBits = (ushort) ((PartsAffectedBits & ~0x04) | (value ? 0x04 : 0x00));
+        }
+
         [BulkCopy]
         [TableViewModelColumn(displayOrder: 9, displayFormat: "X2")]
         public ushort GroundOpacity {
