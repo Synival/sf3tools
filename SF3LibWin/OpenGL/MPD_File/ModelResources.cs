@@ -166,8 +166,10 @@ namespace SF3.Win.OpenGL.MPD_File {
                     // TODO: what to do for missing textures?
                     if (anim == null)
                         continue;
-                    else if (anim.Frames.Length > 0 && anim.Frames[0].PixelFormat == TexturePixelFormat.Palette3)
-                        color[3] /= 2;
+                    else if (anim.Frames.Length > 0 && anim.Frames[0].PixelFormat == TexturePixelFormat.Palette3) {
+                        var transparency = mpdFile.LightAdjustmentTable?.Length > 0 ? (mpdFile.LightAdjustmentTable[0].Palette3Transparency & 0x1F) / (float) 0x1F : 0.5f;
+                        color[3] *= 1.0f - transparency;
+                    }
                 }
 
                 if (isSemiTransparent)
