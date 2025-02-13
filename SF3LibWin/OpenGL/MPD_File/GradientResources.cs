@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using CommonLib;
 using CommonLib.Extensions;
@@ -59,8 +60,8 @@ namespace SF3.Win.OpenGL.MPD_File {
             }
 
             Update(
-                gradient.StartPosition,
-                gradient.StopPosition,
+                gradient.StartPosition / 255f,
+                gradient.StopPosition  / 255f,
                 new Vector3(
                     Math.Clamp(gradient.StartR / (float) 0x1f, 0.00f, 1.00f),
                     Math.Clamp(gradient.StartG / (float) 0x1f, 0.00f, 1.00f),
@@ -82,24 +83,32 @@ namespace SF3.Win.OpenGL.MPD_File {
 
             var corners = Enum.GetValues<CornerType>();
 
-            var vertices  = corners.Select(x => new Vector3(x.GetDirectionX(), x.GetDirectionY(), 0)).ToArray();
+            var topY    = posTop * -2.0f + 1.0f;
+            var bottomY = Math.Min(topY, posBottom * -2.0f + 1.0f);
+
+            var verticesTop    = corners.Select(x => new Vector3(x.GetDirectionX(), x.IsTopSide() ? 1.0f : topY,     0)).ToArray();
+            var verticesMiddle = corners.Select(x => new Vector3(x.GetDirectionX(), x.IsTopSide() ? topY : bottomY,  0)).ToArray();
+            var verticesBottom = corners.Select(x => new Vector3(x.GetDirectionX(), x.IsTopSide() ? bottomY : -1.0f, 0)).ToArray();
+
             var positions = corners.Select(x => x.IsTopSide() ? posTop : posBottom).ToArray().To2DArray(4, 1);
 
             QuadModel MakeModel(float opacity) {
                 if (opacity <= 0.0f)
                     return null;
 
-                // TODO: why in the world do I need to cut make these changes???
-                //       is there something wrong with the blend function???
-                opacity = opacity / 2;
+                var colorTopVec    = new Vector4(colorTop, opacity);
+                var colorBottomVec = new Vector4(colorBottom, opacity);
+                var colorsMiddle   = corners.Select(x => x.IsTopSide() ? colorTopVec : colorBottomVec).ToArray();
 
-                var colors = corners.Select(x => x.IsTopSide() ? new Vector4(colorTop, opacity) : new Vector4(colorBottom, opacity)).ToArray();
-                var quads = corners.Select((x, i) => {
-                    var quad = new Quad(vertices, colors);
-                    quad.AddAttribute(new PolyAttribute(1, OpenTK.Graphics.OpenGL.ActiveAttribType.Float, "gradientPos", 4, positions));
-                    return quad;
-                }).ToArray();
-                return new QuadModel(quads);
+                var quads = new List<Quad>();
+                if (topY < 1.00f)
+                    quads.Add(new Quad(verticesTop, colorTopVec));
+                if (bottomY < topY)
+                    quads.Add(new Quad(verticesMiddle, colorsMiddle));
+                if (-1.00f < bottomY)
+                    quads.Add(new Quad(verticesBottom, colorBottomVec));
+
+                return new QuadModel(quads.ToArray());
             }
 
             GroundGradientModel = MakeModel(groundOpacity);
