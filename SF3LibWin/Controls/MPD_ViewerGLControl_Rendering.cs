@@ -86,6 +86,7 @@ namespace SF3.Win.Controls {
             _models        = new ModelResources();
             _surfaceModel  = new SurfaceModelResources();
             _groundModel   = new GroundModelResources();
+            _skyBoxModel   = new SkyBoxModelResources();
             _surfaceEditor = new SurfaceEditorResources();
             _gradients     = new GradientResources();
 
@@ -109,6 +110,7 @@ namespace SF3.Win.Controls {
             _models?.Dispose();
             _surfaceModel?.Dispose();
             _groundModel?.Dispose();
+            _skyBoxModel?.Dispose();
             _surfaceEditor?.Dispose();
             _gradients?.Dispose();
 
@@ -118,6 +120,7 @@ namespace SF3.Win.Controls {
             _models            = null;
             _surfaceModel      = null;
             _groundModel       = null;
+            _skyBoxModel       = null;
             _surfaceEditor     = null;
             _gradients         = null;
 
@@ -178,38 +181,12 @@ namespace SF3.Win.Controls {
         }
 
         public void UpdateModels() {
-            if (_models == null)
-                return;
-
             MakeCurrent();
-            _models.UpdateModels(MPD_File);
-            Invalidate();
-        }
-
-        public void UpdateSurfaceModels() {
-            if (_surfaceModel == null)
-                return;
-
-            MakeCurrent();
-            _surfaceModel.Update(MPD_File);
-            Invalidate();
-        }
-
-        public void UpdateGroundModel() {
-            if (_groundModel == null)
-                return;
-
-            MakeCurrent();
-            _groundModel.Update(MPD_File);
-            Invalidate();
-        }
-
-        public void UpdateGradients() {
-            if (_gradients == null)
-                return;
-
-            MakeCurrent();
-            _gradients.Update(MPD_File);
+            _models?.Update(MPD_File);
+            _surfaceModel?.Update(MPD_File);
+            _groundModel?.Update(MPD_File);
+            _skyBoxModel?.Update(MPD_File);
+            _gradients?.Update(MPD_File);
             Invalidate();
         }
 
@@ -341,6 +318,37 @@ namespace SF3.Win.Controls {
 
                 var lightingTexture = _surfaceModel.LightingTexture ?? _world.WhiteTexture;
                 var useFancyOutdoorSurfaceLighting = (MPD_File == null) ? false : MPD_File.MPDHeader[0].OutdoorLighting;
+
+                if (_skyBoxModel.Model != null) {
+                    GL.DepthMask(false);
+                    UpdateShaderProjectionMatrix(_world.TextureShader, Matrix4.Identity);
+
+                    var xOffset = MathHelpers.ActualMod(Yaw * 8f + 180f, 360) / 360.0f * 4.0f - 2.0f;
+                    var yOffset = (float) Math.Sin(-Pitch / 360.0f) * 32f + 0.975f;
+
+                    UpdateShaderViewMatrix(_world.TextureShader, Matrix4.Identity * Matrix4.CreateTranslation(xOffset, yOffset, 0));
+
+                    GL.StencilFunc(StencilFunction.Always, 1, 0x02);
+                    GL.StencilMask(0x02);
+
+                    using (_skyBoxModel.Texture.Use(TextureUnit.Texture0))
+                        _skyBoxModel.Model.Draw(_world.TextureShader, null);
+
+                    if (_gradients?.SkyBoxGradientModel != null) {
+                        UpdateShaderProjectionMatrix(_world.SolidShader, Matrix4.Identity);
+                        UpdateShaderViewMatrix(_world.SolidShader, Matrix4.Identity);
+
+                        GL.StencilFunc(StencilFunction.Equal, 1, 0x02);
+                        _gradients.SkyBoxGradientModel.Draw(_world.SolidShader, null);
+    
+                        UpdateShaderProjectionMatrix(_world.SolidShader, _projectionMatrix);
+                        UpdateShaderViewMatrix(_world.SolidShader, _viewMatrix);
+                    }
+
+                    UpdateShaderProjectionMatrix(_world.TextureShader, _projectionMatrix);
+                    UpdateShaderViewMatrix(_world.TextureShader, _viewMatrix);
+                    GL.DepthMask(true);
+                }
 
                 if (_groundModel.Model != null) {
                     GL.DepthMask(false);
@@ -734,6 +742,7 @@ namespace SF3.Win.Controls {
         private ModelResources _models = null;
         private SurfaceModelResources _surfaceModel = null;
         private GroundModelResources _groundModel = null;
+        private SkyBoxModelResources _skyBoxModel = null;
         private SurfaceEditorResources _surfaceEditor = null;
         private GradientResources _gradients = null;
 

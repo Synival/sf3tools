@@ -45,7 +45,7 @@ namespace SF3.Win.OpenGL.MPD_File {
             Models = null;
         }
 
-        public void UpdateModels(IMPD_File mpdFile) {
+        public void Update(IMPD_File mpdFile) {
             Reset();
 
             if (mpdFile.ModelCollections == null)
