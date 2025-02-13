@@ -77,21 +77,52 @@ namespace SF3.Models.Files.MPD {
         ModelCollection[] ModelCollections { get; }
 
         Surface Surface { get; }
+
+        int PrimaryTextureChunksFirstIndex { get; }
+        int PrimaryTextureChunksLastIndex { get; }
+        int MeshTextureChunksFirstIndex { get; }
+        int MeshTextureChunksLastIndex { get; }
+        int? ExtraModelTextureChunkIndex { get; }
+
         TextureCollection[] TextureCollections { get; }
 
         Tile[,] Tiles { get; }
 
-        IChunkData[] RepeatingGroundChunkData { get; }
-        TwoChunkImage RepeatingGroundImage { get; }
+        int RepeatingGroundChunk1Index { get; }
+        int RepeatingGroundChunk2Index { get; }
 
-        IChunkData[] TiledGroundChunkData { get; }
-        TwoChunkImage TiledGroundTileImage { get; }
+        IChunkData[] RepeatingGroundChunks { get; }
+        MultiChunkImage RepeatingGroundImage { get; }
+
+        int TiledGroundTileChunk1Index { get; }
+        int TiledGroundTileChunk2Index { get; }
+        int TiledGroundMapChunks1Index { get; }
+        int TiledGroundMapChunks2Index { get; }
+
+        IChunkData[] TiledGroundTileChunks { get; }
+        IChunkData[] TiledGroundMapChunks { get; }
+        MultiChunkImage TiledGroundTileImage { get; }
         ITexture TiledGroundImage { get; }
 
-        IChunkData[] SkyBoxChunkData { get; }
-        TwoChunkImage SkyBoxImage { get; }
+        int SkyBoxChunk1Index { get; }
+        int SkyBoxChunk2Index { get; }
 
-        IChunkData[] BackgroundChunkData { get; }
-        TwoChunkImage BackgroundImage { get; }
+        IChunkData[] SkyBoxChunks { get; }
+        MultiChunkImage SkyBoxImage { get; }
+
+        int BackgroundChunk1Index { get; }
+        int BackgroundChunk2Index { get; }
+
+        IChunkData[] BackgroundChunks { get; }
+        MultiChunkImage BackgroundImage { get; }
+
+        int ForegroundTileChunk1Index { get; }
+        int ForegroundTileChunk2Index { get; }
+
+        IChunkData[] ForegroundTileChunks { get; }
+        IChunkData ForegroundMapChunk { get; }
+        MultiChunkImage ForegroundTileImage { get; }
+        ITexture ForegroundImage { get; }
+
     }
 }

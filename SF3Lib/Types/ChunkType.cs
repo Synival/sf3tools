@@ -12,5 +12,7 @@ namespace SF3.Types {
         UnhandledImageOrData = 9,
         TiledGroundTiles = 10,
         TiledGroundMap = 11,
+        ForegroundTiles = 12,
+        ForegroundMap = 13,
     }
 }

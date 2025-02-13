@@ -122,7 +122,7 @@ namespace SF3.Models.Structs.MPD.TextureAnimation {
         public string Hash => Texture?.Hash ?? "";
 
         [TableViewModelColumn(displayName: "Tags", displayOrder: 8, minWidth: 200)]
-        public string Tags => (Texture.Tags == null) ? "" : string.Join(", ", Texture.Tags.Select(x => x.Key + "|" + x.Value));
+        public string Tags => (Texture?.Tags == null) ? "" : string.Join(", ", Texture.Tags.Select(x => x.Key + "|" + x.Value));
 
         private readonly int _bytesPerProperty;
 

@@ -25,15 +25,19 @@ namespace SF3.Win.Views.MPD {
             CreateChild(new TexturesView("Textures", Model));
 
             if (Model.RepeatingGroundImage != null)
-                CreateChild(new TwoChunkImageView("Ground", Model.RepeatingGroundImage));
+                CreateChild(new MultiChunkImageView("Ground", Model.RepeatingGroundImage));
             if (Model.TiledGroundImage != null)
                 CreateChild(new ITextureView("Ground", Model.TiledGroundImage, 0.50f));
             if (Model.TiledGroundTileImage != null)
-                CreateChild(new TwoChunkImageView("Ground Tiles", Model.TiledGroundTileImage));
+                CreateChild(new MultiChunkImageView("Ground Tiles", Model.TiledGroundTileImage));
             if (Model.SkyBoxImage != null)
-                CreateChild(new TwoChunkImageView("Sky Box", Model.SkyBoxImage));
+                CreateChild(new MultiChunkImageView("Sky Box", Model.SkyBoxImage));
             if (Model.BackgroundImage != null)
-                CreateChild(new TwoChunkImageView("Background", Model.BackgroundImage));
+                CreateChild(new MultiChunkImageView("Background", Model.BackgroundImage));
+            if (Model.ForegroundTileImage != null)
+                CreateChild(new MultiChunkImageView("Foreground Tiles", Model.ForegroundTileImage));
+            if (Model.ForegroundImage != null)
+                CreateChild(new ITextureView("Foreground", Model.ForegroundImage, 1));
 
             CreateChild(new DataView("Data (only modify if you know what you're doing!)", Model));
 
