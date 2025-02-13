@@ -53,6 +53,24 @@ namespace CommonLib.Types {
         public const int Corner3Z = BottomZ;
         public const int Corner4Z = BottomZ;
 
+        // X coordinate in OpenGL space in range (-1..1) for vertices in CornerType order.
+        public const int Corner1DirX = RightX * 2 - 1;
+        public const int Corner2DirX = LeftX * 2 - 1;
+        public const int Corner3DirX = LeftX * 2 - 1;
+        public const int Corner4DirX = RightX * 2 - 1;
+
+        // Y coordinate in OpenGL space in range (-1..1) for front-facing vertices in CornerType order.
+        public const int Corner1DirY = TopY * 2 - 1;
+        public const int Corner2DirY = TopY * 2 - 1;
+        public const int Corner3DirY = BottomY * 2 - 1;
+        public const int Corner4DirY = BottomY * 2 - 1;
+
+        // Z coordinate in OpenGL space in range (-1..1) for top-facing vertices in CornerType order.
+        public const int Corner1DirZ = TopZ * 2 - 1;
+        public const int Corner2DirZ = TopZ * 2 - 1;
+        public const int Corner3DirZ = BottomZ * 2 - 1;
+        public const int Corner4DirZ = BottomZ * 2 - 1;
+
         // X coordinate in texture space in range (0..1) for vertices in CornerType order.
         public const int Corner1UVX = RightUVX;
         public const int Corner2UVX = LeftUVX;
