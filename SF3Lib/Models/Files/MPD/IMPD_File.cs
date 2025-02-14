@@ -92,7 +92,7 @@ namespace SF3.Models.Files.MPD {
         int RepeatingGroundChunk2Index { get; }
 
         IChunkData[] RepeatingGroundChunks { get; }
-        MultiChunkImage RepeatingGroundImage { get; }
+        ITexture RepeatingGroundImage { get; }
 
         int TiledGroundTileChunk1Index { get; }
         int TiledGroundTileChunk2Index { get; }
@@ -101,27 +101,27 @@ namespace SF3.Models.Files.MPD {
 
         IChunkData[] TiledGroundTileChunks { get; }
         IChunkData[] TiledGroundMapChunks { get; }
-        MultiChunkImage TiledGroundTileImage { get; }
+        ITexture TiledGroundTileImage { get; }
         ITexture TiledGroundImage { get; }
 
         int SkyBoxChunk1Index { get; }
         int SkyBoxChunk2Index { get; }
 
         IChunkData[] SkyBoxChunks { get; }
-        MultiChunkImage SkyBoxImage { get; }
+        ITexture SkyBoxImage { get; }
 
         int BackgroundChunk1Index { get; }
         int BackgroundChunk2Index { get; }
 
         IChunkData[] BackgroundChunks { get; }
-        MultiChunkImage BackgroundImage { get; }
+        ITexture BackgroundImage { get; }
 
         int ForegroundTileChunk1Index { get; }
         int ForegroundTileChunk2Index { get; }
 
         IChunkData[] ForegroundTileChunks { get; }
         IChunkData ForegroundMapChunk { get; }
-        MultiChunkImage ForegroundTileImage { get; }
+        ITexture ForegroundTileImage { get; }
         ITexture ForegroundImage { get; }
 
     }

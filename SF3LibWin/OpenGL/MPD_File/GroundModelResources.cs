@@ -52,7 +52,7 @@ namespace SF3.Win.OpenGL.MPD_File {
         public void Update(IMPD_File mpdFile) {
             Reset();
             if (mpdFile?.RepeatingGroundImage != null)
-                CreateGroundImageModel(mpdFile, mpdFile.RepeatingGroundImage.FullTexture, 65536.0f);
+                CreateGroundImageModel(mpdFile, mpdFile.RepeatingGroundImage, 65536.0f);
             else if (mpdFile?.TiledGroundImage != null)
                 CreateGroundImageModel(mpdFile, mpdFile.TiledGroundImage, 128.0f);
         }

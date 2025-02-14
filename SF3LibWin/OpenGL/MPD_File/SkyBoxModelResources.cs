@@ -49,25 +49,25 @@ namespace SF3.Win.OpenGL.MPD_File {
         }
 
         private static readonly Vector3[] c_skyBoxCoords = [
-            new Vector3(Corner1DirX * 4, Corner1DirY, 0),
-            new Vector3(Corner2DirX * 4, Corner2DirY, 0),
-            new Vector3(Corner3DirX * 4, Corner3DirY, 0),
-            new Vector3(Corner4DirX * 4, Corner4DirY, 0),
+            new Vector3(Corner1DirX * 2, Corner1DirY, 0),
+            new Vector3(Corner2DirX * 2, Corner2DirY, 0),
+            new Vector3(Corner3DirX * 2, Corner3DirY, 0),
+            new Vector3(Corner4DirX * 2, Corner4DirY, 0),
         ];
 
         private static readonly float[,] c_skyBoxUvCoords = new float[,] {
-            { Corner1UVX * 2, Corner1UVY },
-            { Corner2UVX * 2, Corner2UVY },
-            { Corner3UVX * 2, Corner3UVY },
-            { Corner4UVX * 2, Corner4UVY }
+            { Corner1UVX * 2 - 0.5f, Corner1UVY },
+            { Corner2UVX * 2 - 0.5f, Corner2UVY },
+            { Corner3UVX * 2 - 0.5f, Corner3UVY },
+            { Corner4UVX * 2 - 0.5f, Corner4UVY }
         };
 
         public void Update(IMPD_File mpdFile) {
             Reset();
-            if (mpdFile?.SkyBoxImage?.FullTexture == null)
+            if (mpdFile?.SkyBoxImage == null)
                 return;
 
-            Texture = new Texture(mpdFile.SkyBoxImage.FullTexture.CreateBitmapARGB8888(), clampToEdge: false);
+            Texture = new Texture(mpdFile.SkyBoxImage.CreateBitmapARGB8888(), clampToEdge: false);
 
             var quad = new Quad(c_skyBoxCoords);
             var texInfo = GetTextureInfo(TextureUnit.Texture0);

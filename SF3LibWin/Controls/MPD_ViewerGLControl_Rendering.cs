@@ -323,7 +323,8 @@ namespace SF3.Win.Controls {
                     GL.DepthMask(false);
                     UpdateShaderProjectionMatrix(_world.TextureShader, Matrix4.Identity);
 
-                    var xOffset = MathHelpers.ActualMod(Yaw * 8f + 180f, 360) / 360.0f * 4.0f - 2.0f;
+                    const float c_repeatCount = 8f;
+                    var xOffset = (MathHelpers.ActualMod((Yaw / 360f) * c_repeatCount, 1.0f) - 0.5f) * 2.0f;
                     var yOffset = (float) Math.Sin(-Pitch / 360.0f) * 32f + 0.975f;
 
                     UpdateShaderViewMatrix(_world.TextureShader, Matrix4.Identity * Matrix4.CreateTranslation(xOffset, yOffset, 0));

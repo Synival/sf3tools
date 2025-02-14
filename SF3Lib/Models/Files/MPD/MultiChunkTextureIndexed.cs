@@ -6,12 +6,16 @@ using SF3.ByteData;
 using SF3.Types;
 
 namespace SF3.Models.Files.MPD {
-    public class MultiChunkImage {
+    public class MultiChunkTextureIndexed : TextureIndexed {
         public const int c_width = 512;
 
-        public MultiChunkImage(IByteData[] datas, TexturePixelFormat format, Palette palette, bool isTiled = false) {
+        public MultiChunkTextureIndexed(IByteData[] datas, TexturePixelFormat format, Palette palette, bool isTiled = false)
+        : base(0, 0, 0, FetchTextureData(datas, isTiled), format, palette, false)
+        {
             IsTiled = isTiled;
+        }
 
+        private static byte[,] FetchTextureData(IByteData[] datas, bool isTiled) {
             for (int i = 0; i < datas.Length; i++)
                 if (datas[i].Length % c_width != 0)
                     throw new ArgumentException($"{nameof(datas)}[{i}] height is not divisible by 512");
@@ -26,13 +30,9 @@ namespace SF3.Models.Files.MPD {
                 pos += data.Length;
             }
 
-            FullTexture  = new TextureIndexed(2, 0, 0, ToTextureData(fullDataBytes,  fullDataHeight),  format, palette, false);
+            return isTiled ? fullDataBytes.ToTiles(c_width, fullDataHeight, 8, 8) : fullDataBytes.To2DArrayColumnMajor(c_width, fullDataHeight);
         }
 
-        private byte[,] ToTextureData(byte[] data, int height)
-            => IsTiled ? data.ToTiles(c_width, height, 8, 8) : data.To2DArrayColumnMajor(c_width, height);
-
-        public TextureIndexed FullTexture { get; }
         public bool IsTiled { get; }
     }
 }

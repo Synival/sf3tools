@@ -573,7 +573,7 @@ namespace SF3.Models.Files.MPD {
             // Add some images.
             if (RepeatingGroundChunks?.Any() == true) {
                 try {
-                    RepeatingGroundImage = new MultiChunkImage(RepeatingGroundChunks.Select(x => x.DecompressedData).ToArray(), TexturePixelFormat.Palette1, CreatePalette(0));
+                    RepeatingGroundImage = new MultiChunkTextureIndexed(RepeatingGroundChunks.Select(x => x.DecompressedData).ToArray(), TexturePixelFormat.Palette1, CreatePalette(0));
                 }
                 catch {
                     // TODO: what to do here??
@@ -582,21 +582,21 @@ namespace SF3.Models.Files.MPD {
 
             if (TiledGroundTileChunks?.Any() == true && TiledGroundMapChunks?.Any() == true) {
                 var palette = CreatePalette(0);
-                TiledGroundTileImage = new MultiChunkImage(TiledGroundTileChunks.Select(x => x.DecompressedData).ToArray(), TexturePixelFormat.Palette1, palette, true);
+                TiledGroundTileImage = new MultiChunkTextureIndexed(TiledGroundTileChunks.Select(x => x.DecompressedData).ToArray(), TexturePixelFormat.Palette1, palette, true);
 
                 var tiledGroundImageData = CreateTiledImageData(TiledGroundTileImage, TiledGroundMapChunks.Select(x => x.DecompressedData).ToArray(), 64, 4);
-                TiledGroundImage = new TextureIndexed(0, 0, 0, tiledGroundImageData, TexturePixelFormat.Palette1, palette, true);
+                TiledGroundImage = new TextureIndexed(0, 0, 0, tiledGroundImageData, TexturePixelFormat.Palette1, palette, false);
             }
 
             if (SkyBoxChunks?.Any() == true)
-                SkyBoxImage = new MultiChunkImage(SkyBoxChunks.Select(x => x.DecompressedData).ToArray(), TexturePixelFormat.Palette2, CreatePalette(1));
+                SkyBoxImage = new MultiChunkTextureIndexed(SkyBoxChunks.Select(x => x.DecompressedData).ToArray(), TexturePixelFormat.Palette2, CreatePalette(1));
 
             if (BackgroundChunks?.Any() == true)
-                BackgroundImage = new MultiChunkImage(BackgroundChunks.Select(x => x.DecompressedData).ToArray(), TexturePixelFormat.Palette1, CreatePalette(0));
+                BackgroundImage = new MultiChunkTextureIndexed(BackgroundChunks.Select(x => x.DecompressedData).ToArray(), TexturePixelFormat.Palette1, CreatePalette(0));
 
             if (ForegroundTileChunks?.Any() == true) {
                 var palette = CreatePalette(1);
-                ForegroundTileImage = new MultiChunkImage(ForegroundTileChunks.Select(x => x.DecompressedData).ToArray(), TexturePixelFormat.Palette1, palette, true);
+                ForegroundTileImage = new MultiChunkTextureIndexed(ForegroundTileChunks.Select(x => x.DecompressedData).ToArray(), TexturePixelFormat.Palette1, palette, true);
 
                 var foregroundImageData = CreateTiledImageData(ForegroundTileImage, new IByteData[] { ForegroundMapChunk.DecompressedData }, 64, 1);
                 ForegroundImage = new TextureIndexed(0, 0, 0, foregroundImageData, TexturePixelFormat.Palette2, palette, true);
@@ -605,7 +605,7 @@ namespace SF3.Models.Files.MPD {
             return tables.ToArray();
         }
 
-        private byte[,] CreateTiledImageData(MultiChunkImage tiledGroundTileImage, IByteData[] tileMaps, int tileSize, int blockCountX) {
+        private byte[,] CreateTiledImageData(ITexture tiledGroundTileImage, IByteData[] tileMaps, int tileSize, int blockCountX) {
             int tilesPerBlock = tileSize * tileSize;
 
             // Count the number of tiles (they're 16 bits, so divide the byte count by 2)
@@ -613,7 +613,7 @@ namespace SF3.Models.Files.MPD {
 
             var blockCountYf = (float) tileMapTileCount / tilesPerBlock / blockCountX;
 
-            var tileImageData = tiledGroundTileImage.FullTexture.ImageData8Bit;
+            var tileImageData = tiledGroundTileImage.ImageData8Bit;
             var tileImageDataWidth  = tileImageData.GetLength(0);
             var tileImageDataHeight = tileImageData.GetLength(1);
 
@@ -1111,7 +1111,7 @@ namespace SF3.Models.Files.MPD {
         public int RepeatingGroundChunk2Index { get; }
 
         public IChunkData[] RepeatingGroundChunks { get; private set; }
-        public MultiChunkImage RepeatingGroundImage { get; private set; }
+        public ITexture RepeatingGroundImage { get; private set; }
 
         public int TiledGroundTileChunk1Index { get; }
         public int TiledGroundTileChunk2Index { get; }
@@ -1121,20 +1121,20 @@ namespace SF3.Models.Files.MPD {
         public IChunkData[] TiledGroundTileChunks { get; private set; }
         public IChunkData[] TiledGroundMapChunks { get; private set; }
 
-        public MultiChunkImage TiledGroundTileImage { get; private set; }
+        public ITexture TiledGroundTileImage { get; private set; }
         public ITexture TiledGroundImage { get; private set; }
 
         public int SkyBoxChunk1Index { get; }
         public int SkyBoxChunk2Index { get; }
 
         public IChunkData[] SkyBoxChunks { get; private set; }
-        public MultiChunkImage SkyBoxImage { get; private set; }
+        public ITexture SkyBoxImage { get; private set; }
 
         public int BackgroundChunk1Index { get; }
         public int BackgroundChunk2Index { get; }
 
         public IChunkData[] BackgroundChunks { get; private set; }
-        public MultiChunkImage BackgroundImage { get; private set; }
+        public ITexture BackgroundImage { get; private set; }
 
 
         public int ForegroundTileChunk1Index { get; }
@@ -1143,7 +1143,7 @@ namespace SF3.Models.Files.MPD {
 
         public IChunkData[] ForegroundTileChunks { get; private set; }
         public IChunkData ForegroundMapChunk { get; private set; }
-        public MultiChunkImage ForegroundTileImage { get; private set; }
+        public ITexture ForegroundTileImage { get; private set; }
         public ITexture ForegroundImage { get; private set; }
     }
 }
