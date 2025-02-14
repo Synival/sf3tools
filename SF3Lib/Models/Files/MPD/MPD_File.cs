@@ -266,7 +266,8 @@ namespace SF3.Models.Files.MPD {
 
             // Texture data, in chunks (6...13)
             for (var i = PrimaryTextureChunksFirstIndex; i <= MeshTextureChunksLastIndex; i++)
-                _ = MakeChunkData(i, ChunkType.Textures, CompressionType.Compressed);
+                if (chunks[i].Exists)
+                    _ = MakeChunkData(i, ChunkType.Textures, CompressionType.Compressed);
             if (ExtraModelTextureChunkIndex.HasValue && chunks[ExtraModelTextureChunkIndex.Value].Exists)
                 _ = MakeChunkData(ExtraModelTextureChunkIndex.Value, ChunkType.Textures, CompressionType.Compressed);
 
@@ -544,7 +545,7 @@ namespace SF3.Models.Files.MPD {
             var palettes = CreatePalettesForTextures();
 
             var texColList = new List<TextureCollection>();
-            var texChunks = ChunkHeader.Where(x => x.ChunkType == ChunkType.Textures).Select(x => chunkDatas[x.ID]).ToList();
+            var texChunks = ChunkHeader.Where(x => x.Exists && x.ChunkType == ChunkType.Textures).Select(x => chunkDatas[x.ID]).ToList();
 
             int index = 0;
             foreach (var chunk in texChunks) {
