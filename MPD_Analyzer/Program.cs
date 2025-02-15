@@ -36,9 +36,11 @@ namespace MPD_Analyzer {
             { ScenarioType.Scenario3, [
                 "AS_OKU",
                 "BTL42",
+                "FIELD",
                 "MUHASI",
                 "SNIOKI",
-                "YAMIDA",
+                "YSKI00",
+                "VOID3",
             ]}
         };
 
