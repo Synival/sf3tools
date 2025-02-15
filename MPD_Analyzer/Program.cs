@@ -273,8 +273,7 @@ namespace MPD_Analyzer {
             totalErrors.AddRange(ScanForPaletteErrors(mpdFile));
             totalErrors.AddRange(ScanForModelErrors(mpdFile));
             totalErrors.AddRange(ScanForSurfaceModelErrors(mpdFile));
-            totalErrors.AddRange(ScanForGroundErrors(mpdFile));
-            totalErrors.AddRange(ScanForSkyBoxErrors(mpdFile));
+            totalErrors.AddRange(ScanForImageChunkErrors(mpdFile));
 
             foreach (var error in totalErrors)
                 Console.WriteLine("    !!! " + error);
@@ -441,83 +440,76 @@ namespace MPD_Analyzer {
             return errors.ToArray();
         }
 
-        private static string[] ScanForGroundErrors(IMPD_File mpdFile) {
+        private static string[] ScanForImageChunkErrors(IMPD_File mpdFile) {
             var header = mpdFile.MPDHeader[0];
             var chunkHeaders = mpdFile.ChunkHeader;
             var errors = new List<string>();
 
-            // Check for ground chunks.
-            if (header.GroundImageType == GroundImageType.Invalid)
-                errors.Add($"Has invalid GroundImageType: {header.GroundImageType} ({((int) header.GroundImageType).ToString("X4")})");
-            else if (header.GroundImageType == GroundImageType.Repeated) {
-                // TODO: proper chunk indices
-                if (!chunkHeaders[14].Exists)
-                    errors.Add("HasRepeatingGround is 'true', but Chunk[14] is missing!");
-                if (!chunkHeaders[15].Exists)
-                    errors.Add("HasRepeatingGround is 'true', but Chunk[15] is missing!");
-            }
-            else if (header.GroundImageType == GroundImageType.Tiled) {
-                // TODO: proper chunk indices
-                if (!chunkHeaders[14].Exists)
-                    errors.Add("HasTiledGround is 'true', but Chunk[14] is missing!");
-                if (!chunkHeaders[15].Exists)
-                    errors.Add("HasTiledGround is 'true', but Chunk[15] is missing!");
-                if (!chunkHeaders[16].Exists)
-                    errors.Add("HasTiledGround is 'true', but Chunk[16] is missing!");
-                if (!chunkHeaders[19].Exists)
-                    errors.Add("HasTiledGround is 'true', but Chunk[19] is missing!");
-            }
-            else {
-                // TODO: proper chunk indices
-                // TODO: check for backgrounds
-                if (chunkHeaders[14].Exists)
-                    errors.Add("Has no ground, but Chunk[14] exists!");
-                if (chunkHeaders[15].Exists)
-                    errors.Add("Has no ground, but Chunk[15] exists!");
-                if (chunkHeaders[16].Exists)
-                    errors.Add("Has no ground, but Chunk[16] exists!");
-                if (chunkHeaders[19].Exists)
-                    errors.Add("Has no ground, but Chunk[19] exists!");
+            var chunkUses = new Dictionary<int, List<string>>() {
+                { 14, new List<string>() },
+                { 15, new List<string>() },
+                { 16, new List<string>() },
+                { 17, new List<string>() },
+                { 18, new List<string>() },
+                { 19, new List<string>() },
+            };
+
+            var typicalUse = new Dictionary<int, string>() {
+                { 14, "GroundImageTop(Tiles)" },
+                { 15, "GroundImageBottom(Tiles)" },
+                { 16, "GroundImageTopTileMap" },
+                { 17, "SkyBoxImageTop" },
+                { 18, "SkyBoxImageBottom" },
+                { 19, "GroundImageBottomTileMap" },
+            };
+
+            if (header.GroundImageType.HasFlag(GroundImageType.Repeated)) {
+                chunkUses[14].Add("GroundImageTop");
+                chunkUses[15].Add("GroundImageBottom");
             }
 
-            return errors.ToArray();
-        }
+            if (header.GroundImageType.HasFlag(GroundImageType.Tiled)) {
+                chunkUses[14].Add("GroundImageTopTiles");
+                chunkUses[15].Add("GroundImageBottomTiles");
+                chunkUses[16].Add("GroundImageTopTileMap");
+                chunkUses[19].Add("GroundImageBottomTileMap");
+            }
 
-        private static string[] ScanForSkyBoxErrors(IMPD_File mpdFile) {
-            var header = mpdFile.MPDHeader[0];
-            var chunkHeaders = mpdFile.ChunkHeader;
-            var errors = new List<string>();
-
-            // Check for skybox chunks.
             if (header.HasSkyBox) {
-                // TODO: proper chunk indices
-                if (mpdFile.Scenario > ScenarioType.Scenario1 && !chunkHeaders[17].Exists && !chunkHeaders[18].Exists)
-                    // TODO: not an error. What to do with this info?
-                    ; //errors.Add("(normal) SkyBox is elsewhere");
-                else {
-                    // TODO: proper chunk indices
-                    if (!chunkHeaders[17].Exists)
-                        errors.Add("HasSkyBox is 'true', but Chunk[17] is missing!");
-                    if (!chunkHeaders[18].Exists)
-                        errors.Add("HasSkyBox is 'true', but Chunk[18] is missing!");
+                chunkUses[17].Add("SkyBoxImageTop");
+                chunkUses[18].Add("SkyBoxImageBottom");
+            }
+
+            if (header.BackgroundImageType.HasFlag(BackgroundImageType.Still)) {
+                chunkUses[14].Add("BackgroundImageTop");
+                chunkUses[15].Add("BackgroundImageBottom");
+            }
+
+            if (header.BackgroundImageType.HasFlag(BackgroundImageType.Tiled)) {
+                chunkUses[17].Add("ForegroundImageTopTiles");
+                chunkUses[18].Add("ForegroundImageBottomTiles");
+                chunkUses[19].Add("ForegroundImageTileMap");
+            }
+
+            if (header.HasChunk19Model)
+                chunkUses[19].Add("ExtraModel");
+
+            foreach (var cu in chunkUses) {
+                if (cu.Value.Count == 0) {
+                    if (chunkHeaders[cu.Key].Exists)
+                        errors.Add($"Image Chunk[{cu.Key}] exists, but has no flag to indicate its use! (probably {typicalUse[cu.Key]}");
                 }
-            }
-            else if (header.BackgroundImageType.HasFlag(BackgroundImageType.Tiled)) {
-                // TODO: proper chunk indices
-                if (!chunkHeaders[17].Exists)
-                    errors.Add("HasBackground is 'true', but Chunk[17] is missing!");
-                if (!chunkHeaders[18].Exists)
-                    errors.Add("HasBackground is 'true', but Chunk[18] is missing!");
-                if (!chunkHeaders[19].Exists)
-                    errors.Add("HasBackground is 'true', but Chunk[19] is missing!");
-            }
-            else {
-                // TODO: proper chunk indices
-                // TODO: check for backgrounds
-                if (chunkHeaders[17].Exists)
-                    errors.Add("HasSkyBox is 'false', but Chunk[17] exists!");
-                if (chunkHeaders[18].Exists)
-                    errors.Add("HasSkyBox is 'false', but Chunk[18] exists!");
+                else {
+                    var usesStr = string.Join(", ", cu.Value);
+                    if (cu.Value.Count > 1)
+                        errors.Add($"Image Chunk[{cu.Key}] has multiple uses indicated: {usesStr}");
+
+                    if (!chunkHeaders[cu.Key].Exists) {
+                        // The skybox is allowed to be missing from Scenario2 onward.
+                        if (!(usesStr.StartsWith("SkyBoxImage") && mpdFile.Scenario >= ScenarioType.Scenario2))
+                            errors.Add($"{usesStr} Chunk[{cu.Key}] is missing!");
+                    }
+                }
             }
 
             return errors.ToArray();
