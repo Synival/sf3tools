@@ -254,7 +254,7 @@ namespace SF3.Models.Files.MPD {
                 _ = MakeChunkData(i, ChunkType.Models, CompressionType.Uncompressed);
                 modelsChunksList.Add(ChunkData[i]);
             }
-            this.ModelsChunkData = modelsChunksList.ToArray();
+            ModelsChunkData = modelsChunksList.ToArray();
 
             // Animated textures chunk
             if (chunks[3].Exists)
@@ -433,21 +433,39 @@ namespace SF3.Models.Files.MPD {
         }
 
         private int[] GetModelsChunkIndices(ChunkHeader[] chunks) {
+            var header = MPDHeader[0];
             var indices = new List<int>();
-            if (chunks[1].Exists)
-                indices.Add(1);
+
+            if (chunks[20].Exists && header.Chunk20IsModels)
+                indices.Add(20);
+
+            if (chunks[1].Exists) {
+                if (!header.Chunk20IsModels || header.HasExtraChunk1ModelWithChunk21Textures)
+                    indices.Add(1);
+                else
+                    throw new InvalidOperationException("Models found in both Chunk[1] and Chunk[20]");
+            }
+
             if (chunks[19].Exists && MPDHeader[0].HasChunk19Model)
                 indices.Add(19);
-            if (chunks[20].Exists && SurfaceModelChunkIndex != 20)
-                indices.Add(20);
+
             return indices.ToArray();
         }
 
         private int? GetSurfaceModelChunkIndex(ChunkHeader[] chunks) {
+            var header = MPDHeader[0];
 
-            if (chunks[2].Exists && chunks[2].ChunkSize == c_SurfaceModelChunkSize)
+            if (!header.HasSurfaceModel)
+                return null;
+
+            if (!header.Chunk20IsSurfaceModelIfExists)
+                return chunks[2].Exists ? 2 : (int?) null;
+
+            if (chunks[2].Exists && chunks[20].Exists)
+                throw new InvalidOperationException("Surface model found in both Chunk[2] and Chunk[20]");
+            else if (chunks[2].Exists)
                 return 2;
-            else if (chunks[20].Exists && chunks[20].ChunkSize == c_SurfaceModelChunkSize)
+            else if (chunks[20].Exists)
                 return 20;
             else
                 return null;

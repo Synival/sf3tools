@@ -166,12 +166,44 @@ namespace SF3.Models.Structs.MPD {
             set => Data.SetWord(mapFlagsAddress, value);
         }
 
+        [TableViewModelColumn(displayOrder: 0.05f)]
+        public bool HasSurfaceModel {
+            get => (MapFlags & 0x0200) == 0x0200;
+            set => MapFlags = value ? (ushort) (MapFlags | 0x0200) : (ushort) (MapFlags & ~0x0200);
+        }
+
+        [TableViewModelColumn(displayOrder: 0.055f, displayName: "HasHighMemoryChunk1 (Scn1)")]
+        public bool HasHighMemoryChunk1
+            => Scenario <= ScenarioType.Scenario1 && HasSurfaceModel;
+
+        [TableViewModelColumn(displayOrder: 0.06f, displayName: "Chunk20IsSurfaceModelIfExists (Scn2+)")]
+        public bool Chunk20IsSurfaceModelIfExists {
+            get => Scenario >= ScenarioType.Scenario2 ? (MapFlags & 0x8000) == 0x8000 : false;
+            set {
+                if (Scenario >= ScenarioType.Scenario2)
+                    MapFlags = value ? (ushort) (MapFlags | 0x8000) : (ushort) (MapFlags & ~0x8000);
+            }
+        }
+
+        [TableViewModelColumn(displayOrder: 0.07f, displayName: "Chunk20IsModelsIfExists (Scn2+)")]
+        public bool Chunk20IsModels
+            => Scenario >= ScenarioType.Scenario2 && HasSurfaceModel && !Chunk20IsSurfaceModelIfExists;
+
         [TableViewModelColumn(displayOrder: 0.1f, displayName: "HasChunk19Model (Scn1)")]
         public bool HasChunk19Model {
             get => Scenario == ScenarioType.Scenario1 && (MapFlags & 0x0080) == 0x0080;
             set {
                 if (Scenario == ScenarioType.Scenario1)
                     MapFlags = (ushort) ((MapFlags & ~0x0080) | (value ? 0x0080 : 0));
+            }
+        }
+
+        [TableViewModelColumn(displayOrder: 0.11f, displayName: "HasChunk19Model (Scn1)")]
+        public bool HasExtraChunk1ModelWithChunk21Textures {
+            get => Scenario >= ScenarioType.Scenario2 && (MapFlags & 0x4000) == 0x4000;
+            set {
+                if (Scenario >= ScenarioType.Scenario2)
+                    MapFlags = (ushort) (value ? MapFlags | 0x4000 : MapFlags & ~0x4000);
             }
         }
 
