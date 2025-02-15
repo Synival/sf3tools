@@ -94,11 +94,7 @@ namespace MPD_Analyzer {
                             var mapFlags = mpdFile.MPDHeader[0].MapFlags;
 
                             // Condition for match checks here
-                            var lightAdj = mpdFile.LightAdjustmentTable?[0];
-                            bool match = lightAdj?.HasGroundAdjust == true &&
-                                (lightAdj.GroundRAdjustment != 0 ||
-                                 lightAdj.GroundGAdjustment != 0 ||
-                                 lightAdj.GroundBAdjustment != 0);
+                            bool match = HasHighMemoryModels(mpdFile.ModelCollections.FirstOrDefault(x => x.ChunkIndex == 1)) == true;
 
                             var fileStr = GetFileString(scenario, file, mpdFile);
                             Console.Write(fileStr + " | " + (match ? "Match  " : "NoMatch"));
@@ -244,13 +240,26 @@ namespace MPD_Analyzer {
             return chunkString;
         }
 
+        private static bool? HasHighMemoryModels(ModelCollection? mc) {
+            if (mc == null)
+                return null;
+            return mc.PDatasByMemoryAddress.Values.Count == 0
+                ? null
+                : mc.PDatasByMemoryAddress.Values.First().RamAddress >= 0x0600_0000;
+        }
+
         private static string GetFileString(ScenarioType inputScenario, string filename, IMPD_File mpdFile) {
             var mapFlags = mpdFile.MPDHeader[0].MapFlags;
             var chunkHeaders = mpdFile.ChunkHeader;
 
+            var hmm1  = HasHighMemoryModels(mpdFile.ModelCollections.FirstOrDefault(x => x.ChunkIndex == 1));
+            var hmm20 = HasHighMemoryModels(mpdFile.ModelCollections.FirstOrDefault(x => x.ChunkIndex == 20));
+
             return inputScenario.ToString().PadLeft(11) + ": " + Path.GetFileName(filename).PadLeft(12)
                 + " | " + mapFlags.ToString("X4") + ", " + BitString(mapFlags)
-                + " | " + ChunkString(chunkHeaders.Rows);
+                + " | " + ChunkString(chunkHeaders.Rows)
+                + " | " + (hmm1  == true ? "High, " : hmm1  == false ? "Low,  " : "N/A,  ")
+                + (hmm20 == true ? "High" : hmm20 == false ? "Low " : "N/A ");
         }
 
         private static void ScanForErrorsAndReport(ScenarioType inputScenario, IMPD_File mpdFile) {
@@ -262,6 +271,7 @@ namespace MPD_Analyzer {
             totalErrors.AddRange(ScanForNonZeroHeaderPadding(mpdFile));
             totalErrors.AddRange(ScanForChunkHeaderErrors(mpdFile));
             totalErrors.AddRange(ScanForPaletteErrors(mpdFile));
+            totalErrors.AddRange(ScanForModelErrors(mpdFile));
             totalErrors.AddRange(ScanForSurfaceModelErrors(mpdFile));
             totalErrors.AddRange(ScanForGroundErrors(mpdFile));
             totalErrors.AddRange(ScanForSkyBoxErrors(mpdFile));
@@ -342,8 +352,60 @@ namespace MPD_Analyzer {
             return errors.ToArray();
         }
 
-        private static string[] ScanForSurfaceModelErrors(IMPD_File mpdFile) {
+        private static string[] ScanForModelErrors(IMPD_File mpdFile) {
+            var header = mpdFile.MPDHeader[0];
             var errors = new List<string>();
+
+            var mc2  = mpdFile.ModelCollections.FirstOrDefault(x => x.ChunkIndex == 2);
+            var mc20 = mpdFile.ModelCollections.FirstOrDefault(x => x.ChunkIndex == 20);
+
+            if (mc2 != null) {
+                var expectedHmm = header.HasHighMemoryChunk1;
+                var actualHmm   = HasHighMemoryModels(mc2) == true;
+
+                if (expectedHmm && !actualHmm)
+                    errors.Add("Chunk[2] models have low memory, but they should be high memory");
+                else if (!expectedHmm && actualHmm)
+                    errors.Add("Chunk[2] models have high memory, but they should be low memory");
+            }
+
+            if (mc20 != null && HasHighMemoryModels(mc20) == false)
+                errors.Add("Chunk[20] models have low memory, but they should be high memory");
+
+            return errors.ToArray();
+        }
+
+        private static string[] ScanForSurfaceModelErrors(IMPD_File mpdFile) {
+            var header = mpdFile.MPDHeader[0];
+            var chunkHeaders = mpdFile.ChunkHeader;
+            var errors = new List<string>();
+
+            var expectedIndex = (header.Chunk20IsSurfaceModelIfExists && chunkHeaders[20].Exists) ? 20 : 2;
+            var chunk2LooksLikeSurfaceChunk  = chunkHeaders[2].Exists  && chunkHeaders[2].ChunkSize  == 0xCF00;
+            var chunk20LooksLikeSurfaceChunk = chunkHeaders[20].Exists && chunkHeaders[20].ChunkSize == 0xCF00;
+
+            if (header.HasSurfaceModel) {
+                if (mpdFile.SurfaceModel == null) {
+                    errors.Add("SurfaceModel is missing!");
+                    if (chunk2LooksLikeSurfaceChunk)
+                        errors.Add($"  Chunk[2] (expected={expectedIndex}) looks like one!");
+                    if (chunk20LooksLikeSurfaceChunk)
+                        errors.Add($"  Chunk[20] (expected={expectedIndex}) looks like one!");
+                }
+                else if (mpdFile.SurfaceModelChunkIndex != expectedIndex)
+                    errors.Add($"(normal?) SurfaceModel in unexpected index. Expected in {expectedIndex}, found in {mpdFile.SurfaceModelChunkIndex}");
+            }
+            else if (!header.HasSurfaceModel) {
+                if (header.Chunk20IsSurfaceModelIfExists)
+                    errors.Add("Has no SurfaceModel, but Chunk20SurfaceModel bit is set!");
+                if (chunk2LooksLikeSurfaceChunk)
+                    errors.Add($"Has no SurfaceModel, but Chunk[2] (expected={expectedIndex}) looks like one!");
+                if (chunk20LooksLikeSurfaceChunk)
+                    errors.Add($"Has no SurfaceModel, but Chunk[20] (expected={expectedIndex}) looks like one!");
+            }
+
+            if (chunk2LooksLikeSurfaceChunk && chunk20LooksLikeSurfaceChunk)
+                errors.Add("Both Chunk[2] and Chunk[20] look like surface chunks. Probably an error!");
 
             if (mpdFile.SurfaceModel != null) {
                 var corners = Enum.GetValues<CornerType>();
