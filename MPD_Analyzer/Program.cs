@@ -455,8 +455,8 @@ namespace MPD_Analyzer {
             };
 
             var typicalUse = new Dictionary<int, string>() {
-                { 14, "GroundImageTop(Tiles)" },
-                { 15, "GroundImageBottom(Tiles)" },
+                { 14, "GroundImageTop[Tiles]" },
+                { 15, "GroundImageBottom[Tiles]" },
                 { 16, "GroundImageTopTileMap" },
                 { 17, "SkyBoxImageTop" },
                 { 18, "SkyBoxImageBottom" },
@@ -497,7 +497,7 @@ namespace MPD_Analyzer {
             foreach (var cu in chunkUses) {
                 if (cu.Value.Count == 0) {
                     if (chunkHeaders[cu.Key].Exists)
-                        errors.Add($"Image Chunk[{cu.Key}] exists, but has no flag to indicate its use! (probably {typicalUse[cu.Key]}");
+                        errors.Add($"Image Chunk[{cu.Key}] exists, but has no flag to indicate its use! (probably {typicalUse[cu.Key]})");
                 }
                 else {
                     var usesStr = string.Join(", ", cu.Value);
