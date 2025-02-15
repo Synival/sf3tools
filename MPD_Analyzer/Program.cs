@@ -58,16 +58,15 @@ namespace MPD_Analyzer {
             ushort matchFlagsAlways     = 0xFFFF;
             ushort matchFlagsNever      = 0xFFFF;
             var matchFlagsSet           = new HashSet<ushort>();
+            HashSet<int> matchChunksPossible   = [];
+            HashSet<int> matchChunksAlways     = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21];
+            HashSet<int> matchChunksNever      = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21];
 
             var nomatchSet              = new List<string>();
             ushort nomatchFlagsPossible = 0x0000;
             ushort nomatchFlagsAlways   = 0xFFFF;
             ushort nomatchFlagsNever    = 0xFFFF;
             var nomatchFlagsSet         = new HashSet<ushort>();
-
-            HashSet<int> matchChunksPossible   = [];
-            HashSet<int> matchChunksAlways     = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21];
-            HashSet<int> matchChunksNever      = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21];
             HashSet<int> nomatchChunksPossible = [];
             HashSet<int> nomatchChunksAlways   = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21];
             HashSet<int> nomatchChunksNever    = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21];
@@ -431,8 +430,8 @@ namespace MPD_Analyzer {
             if (header.HasSkyBox) {
                 // TODO: proper chunk indices
                 if (mpdFile.Scenario > ScenarioType.Scenario1 && !chunkHeaders[17].Exists && !chunkHeaders[18].Exists)
-                    // TODO: not an error
-                    errors.Add("(normal) SkyBox is elsewhere");
+                    // TODO: not an error. What to do with this info?
+                    ; //errors.Add("(normal) SkyBox is elsewhere");
                 else {
                     // TODO: proper chunk indices
                     if (!chunkHeaders[17].Exists)
