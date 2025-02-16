@@ -6,6 +6,7 @@ using CommonLib.Attributes;
 using CommonLib.Imaging;
 using CommonLib.NamedValues;
 using CommonLib.SGL;
+using CommonLib.Utils;
 using SF3.ByteData;
 using SF3.Models.Structs.MPD;
 using SF3.Models.Structs.MPD.TextureChunk;
@@ -592,7 +593,9 @@ namespace SF3.Models.Files.MPD {
             // Add some images.
             if (RepeatingGroundChunks?.Any() == true) {
                 try {
-                    RepeatingGroundImage = new MultiChunkTextureIndexed(RepeatingGroundChunks.Select(x => x.DecompressedData).ToArray(), TexturePixelFormat.Palette1, CreatePalette(0));
+                    var lat = LightAdjustmentTable?[0];
+                    var palette = CreatePalette(0, lat?.GroundRAdjustment ?? 0, lat?.GroundGAdjustment ?? 0, lat?.GroundBAdjustment ?? 0);
+                    RepeatingGroundImage = new MultiChunkTextureIndexed(RepeatingGroundChunks.Select(x => x.DecompressedData).ToArray(), TexturePixelFormat.Palette1, palette);
                 }
                 catch {
                     // TODO: what to do here??
@@ -600,7 +603,8 @@ namespace SF3.Models.Files.MPD {
             }
 
             if (TiledGroundTileChunks?.Any() == true && TiledGroundMapChunks?.Any() == true) {
-                var palette = CreatePalette(0);
+                var lat = LightAdjustmentTable?[0];
+                var palette = CreatePalette(0, lat?.GroundRAdjustment ?? 0, lat?.GroundGAdjustment ?? 0, lat?.GroundBAdjustment ?? 0);
                 TiledGroundTileImage = new MultiChunkTextureIndexed(TiledGroundTileChunks.Select(x => x.DecompressedData).ToArray(), TexturePixelFormat.Palette1, palette, true);
 
                 var tiledGroundImageData = CreateTiledImageData(TiledGroundTileImage, TiledGroundMapChunks.Select(x => x.DecompressedData).ToArray(), 64, 4);
@@ -1032,8 +1036,24 @@ namespace SF3.Models.Files.MPD {
             }
         }
 
-        public Palette CreatePalette(int index)
-        {
+        public Palette CreatePalette(int index, int adjR, int adjG, int adjB) {
+            var palette = CreatePalette(index);
+            if (adjR != 0 || adjG != 0 || adjB != 0) {
+                adjR = adjR * 255 / 31;
+                adjG = adjG * 255 / 31;
+                adjB = adjB * 255 / 31;
+
+                for (int i = 0; i < palette.Channels.Length; i++) {
+                    ref var ch = ref palette.Channels[i];
+                    ch.r = (byte) MathHelpers.Clamp(ch.r + adjR, 0, 255);
+                    ch.g = (byte) MathHelpers.Clamp(ch.g + adjG, 0, 255);
+                    ch.b = (byte) MathHelpers.Clamp(ch.b + adjB, 0, 255);
+                }
+            }
+            return palette;
+        }
+
+        public Palette CreatePalette(int index) {
             if (index < 0 || index > 2)
                 throw new ArgumentOutOfRangeException(nameof(index));
 
