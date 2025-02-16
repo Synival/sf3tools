@@ -71,7 +71,7 @@ namespace SF3.Win.Views {
                             throw new InvalidOperationException($"Unhandled {nameof(ViewMode)}: {ViewMode}");
                     }
 
-                    var paletteBitmapData = BitmapUtils.ConvertIndexedDataToABGR8888BitmapData(imageData, palette, false);
+                    var paletteBitmapData = BitmapUtils.ConvertIndexedDataToARGB8888BitmapData(imageData, palette, false);
                     paletteBitmapData.CopyTo(bitmapData, pos);
                     pos += width * height * 4;
                 }
