@@ -73,7 +73,7 @@ namespace TextureExtractor {
             var texturesFound = new Dictionary<string, List<TextureRef>>();
 
             // For each file, fetch ALL textures in ALL their texture chunks.
-            // (This doesn't yet fetch floor images or scroll panes)
+            // (This doesn't yet fetch floor images or scroll planes)
             foreach (var filesKv in allFiles) {
                 var scenario = filesKv.Key;
                 var nameGetter = nameGetterContexts[scenario];

@@ -45,7 +45,7 @@ namespace SF3.Win.OpenGL.MPD_File {
             Models = null;
         }
 
-        public void UpdateModels(IMPD_File mpdFile) {
+        public void Update(IMPD_File mpdFile) {
             Reset();
 
             if (mpdFile.ModelCollections == null)
@@ -141,13 +141,11 @@ namespace SF3.Win.OpenGL.MPD_File {
 
                 // Apply semi-transparency for the appropriate draw mode.
                 var isSemiTransparent = attr.Mode_DrawMode == DrawMode.CL_Trans;
-                if (isSemiTransparent)
-                    color[3] /= 2;
 
                 TextureAnimation anim = null;
 
                 // TODO: wtf do these mean???
-                if (attr.Mode_ECdis && attr.Mode_SPdis) {
+                if (/*attr.Mode_ECdis && attr.Mode_SPdis*/ (attr.Flags & 0x0004) == 0) {
                     var colorChannels = PixelConversion.ABGR1555toChannels(attr.ColorNo);
                     color = new Vector4(colorChannels.r / 255.0f, colorChannels.g / 255.0f, colorChannels.b / 255.0f, 1.0f);
                 }
@@ -164,7 +162,14 @@ namespace SF3.Win.OpenGL.MPD_File {
                     // TODO: what to do for missing textures?
                     if (anim == null)
                         continue;
+                    else if (anim.Frames.Length > 0 && anim.Frames[0].PixelFormat == TexturePixelFormat.Palette3) {
+                        var transparency = mpdFile.LightAdjustmentTable?.Length > 0 ? (mpdFile.LightAdjustmentTable[0].Palette3Transparency & 0x1F) / (float) 0x1F : 0.5f;
+                        color[3] *= 1.0f - transparency;
+                    }
                 }
+
+                if (isSemiTransparent)
+                    color[3] /= 2;
 
                 VECTOR[] polyVertexModels = [
                     vertices[polygon.Vertex1].Vector,

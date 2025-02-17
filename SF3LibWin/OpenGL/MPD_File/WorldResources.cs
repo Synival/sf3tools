@@ -40,19 +40,19 @@ namespace SF3.Win.OpenGL.MPD_File {
                 Shaders?.Dispose();
                 Textures?.Dispose();
 
-                TextureShader = null;
+                TextureShader    = null;
                 TwoTextureShader = null;
-                SolidShader = null;
-                NormalsShader = null;
-                WireframeShader = null;
-                ObjectShader = null;
+                SolidShader      = null;
+                NormalsShader    = null;
+                WireframeShader  = null;
+                ObjectShader     = null;
 
-                WhiteTexture = null;
+                WhiteTexture            = null;
                 TransparentWhiteTexture = null;
                 TransparentBlackTexture = null;
-                TileWireframeTexture = null;
+                TileWireframeTexture    = null;
 
-                Shaders = null;
+                Shaders  = null;
                 Textures = null;
             }
 

@@ -124,5 +124,43 @@ namespace CommonLib.Extensions {
 
             return newArray;
         }
+
+        /// <summary>
+        /// Converts an array of bytes divided into tile chunks into image data in column-major order.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <typeparam name="T">Type of array to convert.</typeparam>
+        /// <param name="array">The 1D array to convert.</param>
+        /// <param name="width">The width (first index) of the new 2D array.</param>
+        /// <param name="height">The height (second index) of the new 2D array.</param>
+        /// <param name="tileWidth">Width of each tile in the input array.</param>
+        /// <param name="tileHeight">Height of each tile in the input array.</param>
+        /// <returns>A new 2D array with data from the input 1D array in column-major order.</returns>
+        /// <exception cref="ArgumentException">Thrown if width * height != array.Length, or width or height is not divisible tile width or height.</exception>
+        public static T[,] ToTiles<T>(this T[] array, int width, int height, int tileWidth, int tileHeight) {
+            if (width * height != array.Length)
+                throw new ArgumentException(nameof(array) + ": length does not equal width x height");
+            if (width % tileWidth != 0)
+                throw new ArgumentException($"{nameof(width)} ({width}) is not divisible by {nameof(tileWidth)} ({tileWidth})");
+            if (height % tileHeight != 0)
+                throw new ArgumentException($"{nameof(height)} ({height}) is not divisible by {nameof(tileHeight)} ({tileHeight})");
+
+            var newArray = new T[width, height];
+
+            var tileXCount = width  / tileWidth;
+            var tileYCount = height / tileHeight;
+            var tileCount = tileXCount * tileYCount;
+
+            int pos = 0;
+            for (var tile = 0; tile < tileCount; tile++) {
+                int tileX = (tile % tileXCount) * tileWidth;
+                int tileY = (tile / tileXCount) * tileHeight;
+                for (var y = 0; y < tileHeight; y++)
+                    for (var x = 0; x < tileWidth; x++)
+                        newArray[tileX + x, tileY + y] = array[pos++];
+            }
+
+            return newArray;
+        }
     }
 }

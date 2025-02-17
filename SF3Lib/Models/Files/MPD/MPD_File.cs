@@ -6,6 +6,7 @@ using CommonLib.Attributes;
 using CommonLib.Imaging;
 using CommonLib.NamedValues;
 using CommonLib.SGL;
+using CommonLib.Utils;
 using SF3.ByteData;
 using SF3.Models.Structs.MPD;
 using SF3.Models.Structs.MPD.TextureChunk;
@@ -19,7 +20,35 @@ namespace SF3.Models.Files.MPD {
         private const int c_RamOffset = 0x290000;
         private const int c_SurfaceModelChunkSize = 0xCF00;
 
-        protected MPD_File(IByteData data, Dictionary<ScenarioType, INameGetterContext> nameContexts) : base(data, nameContexts?[DetectScenario(data)], DetectScenario(data)) { }
+        protected MPD_File(IByteData data, Dictionary<ScenarioType, INameGetterContext> nameContexts) : base(data, nameContexts?[DetectScenario(data)], DetectScenario(data)) {
+            PrimaryTextureChunksFirstIndex = 6;
+            PrimaryTextureChunksLastIndex  = PrimaryTextureChunksFirstIndex +
+                ((Scenario >= ScenarioType.Other) ? 4 : 3);
+
+            ExtraModelTextureChunkIndex = (Scenario >= ScenarioType.Scenario2) ? 21 : (int?) null;
+
+            MeshTextureChunksFirstIndex = PrimaryTextureChunksLastIndex + 1;
+            MeshTextureChunksLastIndex = MeshTextureChunksFirstIndex +
+                ((Scenario >= ScenarioType.Scenario1) ? 2 : 1);
+
+            RepeatingGroundChunk1Index = MeshTextureChunksLastIndex + 1;
+            RepeatingGroundChunk2Index = MeshTextureChunksLastIndex + 2;
+
+            TiledGroundTileChunk1Index = MeshTextureChunksLastIndex + 1;
+            TiledGroundTileChunk2Index = MeshTextureChunksLastIndex + 2;
+            TiledGroundMapChunks1Index = RepeatingGroundChunk2Index + 1;
+            TiledGroundMapChunks2Index = RepeatingGroundChunk2Index + 4;
+
+            SkyBoxChunk1Index          = RepeatingGroundChunk2Index + 2;
+            SkyBoxChunk2Index          = RepeatingGroundChunk2Index + 3;
+
+            BackgroundChunk1Index      = MeshTextureChunksLastIndex + 1;
+            BackgroundChunk2Index      = MeshTextureChunksLastIndex + 2;
+
+            ForegroundTileChunk1Index  = BackgroundChunk2Index + 2;
+            ForegroundTileChunk2Index  = BackgroundChunk2Index + 3;
+            ForegroundMapChunkIndex    = BackgroundChunk2Index + 4;
+        }
 
         public static MPD_File Create(IByteData data, Dictionary<ScenarioType, INameGetterContext> nameContexts) {
             var newFile = new MPD_File(data, nameContexts);
@@ -32,15 +61,15 @@ namespace SF3.Models.Files.MPD {
             // Get addresses we need to check.
             var headerAddrPtr = data.GetDouble(0x0000) - c_RamOffset;
             var headerAddr    = data.GetDouble(headerAddrPtr) - c_RamOffset;
-            var demoAddr      = data.GetDouble(headerAddr + 0x0030);
 
-            if ((demoAddr & 0xFFFF0000) == 0x00290000)
-                return ScenarioType.Ship2;
-
+            var chunk18Addr   = data.GetDouble(0x2090);
+            var chunk19Addr   = data.GetDouble(0x2098);
             var palette3Addr  = data.GetDouble(headerAddr + 0x0044);
             var chunk21Addr   = data.GetDouble(0x20A8);
 
             // Determine some things about this MPD file.
+            var hasChunk18  = (chunk18Addr > 0);
+            var hasChunk19  = (chunk19Addr > 0);
             var hasPalette3 = (palette3Addr & 0xFFFF0000) == 0x00290000;
             var hasChunk21  = (chunk21Addr > 0);
 
@@ -50,8 +79,12 @@ namespace SF3.Models.Files.MPD {
                 return ScenarioType.Scenario3;
             else if (hasChunk21)
                 return ScenarioType.Scenario2;
-            else
+            else if (hasChunk19)
                 return ScenarioType.Scenario1;
+            else if (hasChunk18)
+                return ScenarioType.Other;
+            else
+                return ScenarioType.Ship2;
         }
 
         public override IEnumerable<ITable> MakeTables() {
@@ -127,6 +160,13 @@ namespace SF3.Models.Files.MPD {
                 tables.Add(LightPalette = ColorTable.Create(Data, "LightPalette", header.OffsetLightPalette - c_RamOffset, 32));
             if (header.OffsetLightPosition != 0)
                 tables.Add(LightPositionTable = LightPositionTable.Create(Data, "LightPositions", header.OffsetLightPosition - c_RamOffset));
+            if (header.OffsetLightAdjustment != 0)
+                tables.Add(LightAdjustmentTable = LightAdjustmentTable.Create(Data, "LightAdjustment", header.OffsetLightAdjustment - c_RamOffset, Scenario));
+
+            if (header.OffsetGradient != 0) {
+                if ((ushort) Data.GetWord(header.OffsetGradient - c_RamOffset) != 0xFFFF)
+                    tables.Add(GradientTable = GradientTable.Create(Data, "Gradient", header.OffsetGradient - c_RamOffset));
+            }
 
             return tables.ToArray();
         }
@@ -158,16 +198,44 @@ namespace SF3.Models.Files.MPD {
         private ITable[] MakeUnknownTables(MPDHeaderModel header) {
             var tables = new List<ITable>();
 
-            if (header.OffsetUnknown1 != 0)
-                tables.Add(OffsetUnknown1Table = UnknownInt16Table.Create(Data, "Unknown1", header.OffsetUnknown1 - c_RamOffset, (header.OffsetModelSwitchGroups - header.OffsetUnknown1) / 2, null));
-            if (header.OffsetUnknown2 != 0)
-                tables.Add(OffsetUnknown2Table = UnknownUInt16Table.Create(Data, "Unknown2", header.OffsetUnknown2 - c_RamOffset, 32, 0xFFFF));
+            // TODO: put somewhere else!!
             if (header.OffsetModelSwitchGroups != 0)
-                tables.Add(OffsetModelSwitchGroupsTable = OffsetModelSwitchGroupsTable.Create(Data, "ModelSwitchGroups", header.OffsetModelSwitchGroups - c_RamOffset));
-            if (header.OffsetScrollScreenAnimation != 0)
-                tables.Add(OffsetScrollScreenAnimationTable = UnknownUInt8Table.Create(Data, "ScrollScreenAnimations", header.OffsetScrollScreenAnimation - c_RamOffset, null, 0xFF));
+                tables.Add(ModelSwitchGroupsTable = ModelSwitchGroupsTable.Create(Data, "ModelSwitchGroups", header.OffsetModelSwitchGroups - c_RamOffset));
+
+            // TODO: put somewhere else!!
+            if (header.OffsetGroundAnimation != 0)
+                tables.Add(GroundAnimationTable = UnknownUInt8Table.Create(Data, "ScrollScreenAnimations", header.OffsetGroundAnimation - c_RamOffset, null, 0xFF));
+
+            // TODO: put somewhere else!!
             if (header.OffsetIndexedTextures != 0)
                 tables.Add(IndexedTextureTable = TextureIDTable.Create(Data, "IndexedTextures", header.OffsetIndexedTextures - c_RamOffset));
+
+            // This table is only present before Scenario 2 and is always 32 bytes if it exists.
+            if (header.OffsetUnknown1 != 0) {
+                // Use at most 0x20 2-byte values (0x40 bytes total).
+                int lowestOffset = header.OffsetUnknown1 + 0x40;
+
+                void updateLowest(int value) {
+                    if (value < lowestOffset && value >= header.OffsetUnknown1)
+                        lowestOffset = value;
+                }
+
+                // The offset model switch groups usually (always?) occupy some space before its address.
+                // Make sure this table doesn't occupy that space.
+                updateLowest(header.OffsetModelSwitchGroups);
+                foreach (var msg in ModelSwitchGroupsTable) {
+                    updateLowest((int) msg.DisabledModelsOffset);
+                    updateLowest((int) msg.EnabledModelsOffset);
+                }
+
+                // We have our best guess for the size. Add the table!
+                var lengthInBytes = ((int) lowestOffset - header.OffsetUnknown1);
+                var size = Math.Max(32, lengthInBytes / 2);
+                tables.Add(Unknown1Table = UnknownUInt16Table.Create(Data, "Unknown1", header.OffsetUnknown1 - c_RamOffset, size, null));
+            }
+
+            if (header.OffsetUnknown2 != 0)
+                tables.Add(Unknown2Table = UnknownUInt16Table.Create(Data, "Unknown2", header.OffsetUnknown2 - c_RamOffset, 32, 0xFFFF));
 
             return tables.ToArray();
         }
@@ -187,7 +255,7 @@ namespace SF3.Models.Files.MPD {
                 _ = MakeChunkData(i, ChunkType.Models, CompressionType.Uncompressed);
                 modelsChunksList.Add(ChunkData[i]);
             }
-            this.ModelsChunkData = modelsChunksList.ToArray();
+            ModelsChunkData = modelsChunksList.ToArray();
 
             // Animated textures chunk
             if (chunks[3].Exists)
@@ -198,30 +266,75 @@ namespace SF3.Models.Files.MPD {
                 _ = MakeChunkData(5, ChunkType.Surface, CompressionType.Compressed);
 
             // Texture data, in chunks (6...13)
-            var lastTextureChunk = (Scenario >= ScenarioType.Scenario1) ? 13 : 10;
-            for (var i = 6; i <= lastTextureChunk; i++)
-                _ = MakeChunkData(i, ChunkType.Textures, CompressionType.Compressed);
-            if (Scenario >= ScenarioType.Scenario2 && chunks[21].Exists)
-                _ = MakeChunkData(21, ChunkType.Textures, CompressionType.Compressed);
+            for (var i = PrimaryTextureChunksFirstIndex; i <= MeshTextureChunksLastIndex; i++)
+                if (chunks[i].Exists)
+                    _ = MakeChunkData(i, ChunkType.Textures, CompressionType.Compressed);
+            if (ExtraModelTextureChunkIndex.HasValue && chunks[ExtraModelTextureChunkIndex.Value].Exists)
+                _ = MakeChunkData(ExtraModelTextureChunkIndex.Value, ChunkType.Textures, CompressionType.Compressed);
+
+            // Repeating backgrounds
+            var repeatingGroundChunks = new List<IChunkData>();
+            if (MPDHeader[0].GroundImageType == GroundImageType.Repeated) {
+                if (chunks[RepeatingGroundChunk1Index].Exists)
+                    repeatingGroundChunks.Add(_ = MakeChunkData(RepeatingGroundChunk1Index, ChunkType.Palette1Image, CompressionType.Compressed));
+                if (chunks[RepeatingGroundChunk2Index].Exists)
+                    repeatingGroundChunks.Add(_ = MakeChunkData(RepeatingGroundChunk2Index, ChunkType.Palette1Image, CompressionType.Compressed));
+            }
+            RepeatingGroundChunks = repeatingGroundChunks.ToArray();
+
+            // Tiled ground images
+            var tiledGroundTileChunks = new List<IChunkData>();
+            var tiledGroundMapChunks = new List<IChunkData>();
+            if (MPDHeader[0].GroundImageType == GroundImageType.Tiled) {
+                if (chunks[TiledGroundTileChunk1Index].Exists)
+                    tiledGroundTileChunks.Add(_ = MakeChunkData(TiledGroundTileChunk1Index, ChunkType.TiledGroundTiles, CompressionType.Compressed));
+                if (chunks[TiledGroundTileChunk2Index].Exists)
+                    tiledGroundTileChunks.Add(_ = MakeChunkData(TiledGroundTileChunk2Index, ChunkType.TiledGroundTiles, CompressionType.Compressed));
+                if (chunks[TiledGroundMapChunks1Index].Exists)
+                    tiledGroundMapChunks.Add(_ = MakeChunkData(TiledGroundMapChunks1Index, ChunkType.TiledGroundMap, CompressionType.Compressed));
+                if (chunks[TiledGroundMapChunks2Index].Exists)
+                    tiledGroundMapChunks.Add(_ = MakeChunkData(TiledGroundMapChunks2Index, ChunkType.TiledGroundMap, CompressionType.Compressed));
+            }
+            TiledGroundTileChunks = tiledGroundTileChunks.ToArray();
+            TiledGroundMapChunks = tiledGroundMapChunks.ToArray();
 
             // Sky boxes
-            var skyboxChunks = new List<IChunkData>();
+            var skyBoxChunks = new List<IChunkData>();
             if (MPDHeader[0].HasSkyBox) {
-                // TODO: This only works for Scenario 1!
-                // TODO: What chunks are used in Scn2 and beyond? It seems to change!!
-                if (chunks[17].Exists)
-                    skyboxChunks.Add(_ = MakeChunkData(17, ChunkType.SkyBox, CompressionType.Compressed));
-                if (chunks[18].Exists)
-                    skyboxChunks.Add(_ = MakeChunkData(18, ChunkType.SkyBox, CompressionType.Compressed));
+                if (chunks[SkyBoxChunk1Index].Exists)
+                    skyBoxChunks.Add(_ = MakeChunkData(SkyBoxChunk1Index, ChunkType.Palette2Image, CompressionType.Compressed));
+                if (chunks[SkyBoxChunk2Index].Exists)
+                    skyBoxChunks.Add(_ = MakeChunkData(SkyBoxChunk2Index, ChunkType.Palette2Image, CompressionType.Compressed));
             }
-            SkyBoxChunkData = skyboxChunks.Where(x => x != null).ToArray();
+            SkyBoxChunks = skyBoxChunks.ToArray();
 
-            // Add unhandled images/scroll panes.
-            // TODO: on what conditions are we sure these are scroll panes?
-            var scrollPaneStart = (Scenario >= ScenarioType.Scenario1) ? 14 : 11;
-            for (var i = scrollPaneStart; i < scrollPaneStart + 6; i++)
+            // Background image
+            var backgroundChunks = new List<IChunkData>();
+            if (MPDHeader[0].BackgroundImageType.HasFlag(BackgroundImageType.Still)) {
+                if (chunks[BackgroundChunk1Index].Exists)
+                    backgroundChunks.Add(_ = MakeChunkData(BackgroundChunk1Index, ChunkType.Palette1Image, CompressionType.Compressed));
+                if (chunks[BackgroundChunk2Index].Exists)
+                    backgroundChunks.Add(_ = MakeChunkData(BackgroundChunk2Index, ChunkType.Palette1Image, CompressionType.Compressed));
+            }
+            BackgroundChunks = backgroundChunks.ToArray();
+
+            // Foreground image tiles
+            var foregroundTileChunks = new List<IChunkData>();
+            if (MPDHeader[0].BackgroundImageType.HasFlag(BackgroundImageType.Tiled)) {
+                if (chunks[ForegroundTileChunk1Index].Exists)
+                    foregroundTileChunks.Add(_ = MakeChunkData(ForegroundTileChunk1Index, ChunkType.ForegroundTiles, CompressionType.Compressed));
+                if (chunks[ForegroundTileChunk2Index].Exists)
+                    foregroundTileChunks.Add(_ = MakeChunkData(ForegroundTileChunk2Index, ChunkType.ForegroundTiles, CompressionType.Compressed));
+                if (chunks[ForegroundMapChunkIndex].Exists)
+                    ForegroundMapChunk = MakeChunkData(ForegroundMapChunkIndex, ChunkType.ForegroundMap, CompressionType.Compressed);
+            }
+            ForegroundTileChunks = foregroundTileChunks.ToArray();
+
+            // Add unhandled images/scroll planes, in case they're not indicated by flags.
+            // TODO: we should know what these are 100% of the time if the map flags are off.
+            for (var i = RepeatingGroundChunk1Index; i <= TiledGroundMapChunks2Index; i++)
                 if (ChunkData[i] == null && chunks[i].Exists)
-                    _ = MakeChunkData(i, ChunkType.UnhandledImage, CompressionType.Compressed);
+                    _ = MakeChunkData(i, ChunkType.UnhandledImageOrData, CompressionType.Compressed);
 
             // Add remaining unhandled chunks.
             for (var i = 0; i < chunks.Length; i++)
@@ -236,9 +349,12 @@ namespace SF3.Models.Files.MPD {
                 throw new ArgumentException(nameof(chunkIndex));
 
             var isCompressed = (compressionType == CompressionType.Compressed);
-            ChunkData newChunk = null;
+            ByteArraySegment byteArraySegment = null;
+            ChunkData chunkData = null;
+
             try {
-                newChunk = new ChunkData(new ByteArraySegment(Data.Data, ChunkHeader[chunkIndex].ChunkAddress - c_RamOffset, ChunkHeader[chunkIndex].ChunkSize), isCompressed, chunkIndex);
+                byteArraySegment = new ByteArraySegment(Data.Data, ChunkHeader[chunkIndex].ChunkAddress - c_RamOffset, ChunkHeader[chunkIndex].ChunkSize);
+                chunkData = new ChunkData(byteArraySegment, isCompressed, chunkIndex);
             }
             catch {
                 // TODO: what to do???
@@ -246,25 +362,24 @@ namespace SF3.Models.Files.MPD {
             }
             var chunkHeader = ChunkHeader[chunkIndex];
 
-            chunkHeader.DecompressedSize = newChunk.DecompressedData.Length;
-            newChunk.DecompressedData.Data.RangeModified += (s, a) => {
+            chunkHeader.DecompressedSize = chunkData.DecompressedData.Length;
+            chunkData.DecompressedData.Data.RangeModified += (s, a) => {
                 if (a.Resized)
-                    chunkHeader.DecompressedSize = newChunk.DecompressedData.Length;
+                    chunkHeader.DecompressedSize = chunkData.DecompressedData.Length;
             };
 
-            newChunk.Data.RangeModified += (s, a) => {
+            chunkData.Data.RangeModified += (s, a) => {
+                var chunkName = chunkHeader.Name;
                 if (a.Moved) {
-                    var byteArraySegment = (ByteArraySegment) newChunk.Data;
-
                     // Figure out how much the offset has changed.
-                    var oldOffset = ChunkHeader[chunkIndex].ChunkAddress - c_RamOffset;
+                    var oldOffset = chunkHeader.ChunkAddress - c_RamOffset;
                     var newOffset = byteArraySegment.Offset;
                     var offsetDelta = newOffset - oldOffset;
                     if (offsetDelta == 0)
                         return;
 
                     // Update the address in the chunk table.
-                    ChunkHeader[chunkIndex].ChunkAddress = newOffset + c_RamOffset;
+                    chunkHeader.ChunkAddress = newOffset + c_RamOffset;
 
                     // Chunks after this one with something assigned to ChunkData[] will have their
                     // ChunkAddress updated automatically. For chunks without a ChunkData[] after this one
@@ -279,32 +394,79 @@ namespace SF3.Models.Files.MPD {
                     }
                 }
                 if (a.Resized)
-                    chunkHeader.ChunkSize = newChunk.Data.Length;
+                    chunkHeader.ChunkSize = chunkData.Data.Length;
+            };
+
+            // Add some integrity checks after recompression.
+            chunkData.Recompressed += (s, e) => {
+                var errors = new List<string>();
+                for (var i = 0; i < ChunkHeader.Length; i++) {
+                    var ch = ChunkHeader[i];
+                    var cd = ChunkData[i];
+                    if (ch.ChunkAddress == 0 || cd == null)
+                        continue;
+
+                    if (ch.ChunkFileAddress != cd.Offset) {
+                        errors.Add(
+                            $"ChunkHeader[{i}].ChunkFileAddress and ChunkData[{i}].Offset mismatch after recompress: " +
+                            $"{ch.ChunkFileAddress} vs {cd.Offset}");
+                    }
+                    if (ch.ChunkSize != cd.Length) {
+                        errors.Add(
+                            $"ChunkHeader[{i}].ChunkSize and ChunkData[{i}].Length length/size mismatch after recompress: " +
+                            $"{ch.ChunkSize} vs {cd.Length}");
+                    }
+                }
+
+                if (errors.Count > 0) {
+                    throw new InvalidOperationException(
+                        "Integrity checks failed when recompressing chunk " + chunkIndex + ":\r\n" +
+                        string.Join("\r\n", errors)
+                    );
+                }
             };
 
             chunkHeader.ChunkType = type;
             chunkHeader.CompressionType = compressionType;
 
-            ChunkData[chunkIndex] = newChunk;
-            return newChunk;
+            ChunkData[chunkIndex] = chunkData;
+            return chunkData;
         }
 
         private int[] GetModelsChunkIndices(ChunkHeader[] chunks) {
+            var header = MPDHeader[0];
             var indices = new List<int>();
-            if (chunks[1].Exists)
-                indices.Add(1);
+
+            if (chunks[20].Exists && header.Chunk20IsModels)
+                indices.Add(20);
+
+            if (chunks[1].Exists) {
+                if (!header.Chunk20IsModels || header.HasExtraChunk1ModelWithChunk21Textures)
+                    indices.Add(1);
+                else
+                    throw new InvalidOperationException("Models found in both Chunk[1] and Chunk[20]");
+            }
+
             if (chunks[19].Exists && MPDHeader[0].HasChunk19Model)
                 indices.Add(19);
-            if (chunks[20].Exists && SurfaceModelChunkIndex != 20)
-                indices.Add(20);
+
             return indices.ToArray();
         }
 
         private int? GetSurfaceModelChunkIndex(ChunkHeader[] chunks) {
+            var header = MPDHeader[0];
 
-            if (chunks[2].Exists && chunks[2].ChunkSize == c_SurfaceModelChunkSize)
+            if (!header.HasSurfaceModel)
+                return null;
+
+            if (!header.Chunk20IsSurfaceModelIfExists)
+                return chunks[2].Exists ? 2 : (int?) null;
+
+            if (chunks[2].Exists && chunks[20].Exists)
+                throw new InvalidOperationException("Surface model found in both Chunk[2] and Chunk[20]");
+            else if (chunks[2].Exists)
                 return 2;
-            else if (chunks[20].Exists && chunks[20].ChunkSize == c_SurfaceModelChunkSize)
+            else if (chunks[20].Exists)
                 return 20;
             else
                 return null;
@@ -312,25 +474,23 @@ namespace SF3.Models.Files.MPD {
 
         private ITable[] MakeChunkTables(ChunkHeader[] chunkHeaders, IChunkData[] chunkDatas, IChunkData[] modelsChunks, IChunkData surfaceModelChunk) {
             TextureCollectionType TextureCollectionForChunkIndex(int chunkIndex) {
-                switch (chunkIndex) {
-                    case 6:
-                    case 7:
-                    case 8:
-                    case 9:
-                        return TextureCollectionType.PrimaryTextures;
-                    case 10:
-                        return MPDHeader[0].HasChunk19Model ? TextureCollectionType.Chunk19ModelTextures : TextureCollectionType.PrimaryTextures;
-                    case 11:
-                        return TextureCollectionType.MovableObjects1;
-                    case 12:
-                        return TextureCollectionType.MovableObjects2;
-                    case 13:
-                        return TextureCollectionType.MovableObjects3;
-                    case 21:
-                        return TextureCollectionType.Chunk1ModelTextures;
-                    default:
-                        throw new Exception("Unhandled case!");
-                }
+                if (chunkIndex == 10 && MPDHeader[0].HasChunk19Model)
+                    return TextureCollectionType.Chunk19ModelTextures;
+
+                if (chunkIndex >= PrimaryTextureChunksFirstIndex && chunkIndex <= PrimaryTextureChunksLastIndex)
+                    return TextureCollectionType.PrimaryTextures;
+
+                if (chunkIndex == MeshTextureChunksFirstIndex + 0 && chunkIndex <= MeshTextureChunksLastIndex)
+                    return TextureCollectionType.MovableObjects1;
+                if (chunkIndex == MeshTextureChunksFirstIndex + 1 && chunkIndex <= MeshTextureChunksLastIndex)
+                    return TextureCollectionType.MovableObjects2;
+                if (chunkIndex == MeshTextureChunksFirstIndex + 2 && chunkIndex <= MeshTextureChunksLastIndex)
+                    return TextureCollectionType.MovableObjects3;
+
+                if (chunkIndex == ExtraModelTextureChunkIndex)
+                    return TextureCollectionType.Chunk1ModelTextures;
+
+                throw new Exception("Can't determine texture collection based on chunk index");
             }
 
             var tables = new List<ITable>();
@@ -403,30 +563,120 @@ namespace SF3.Models.Files.MPD {
             // Gather palettes.
             var palettes = CreatePalettesForTextures();
 
-            TextureCollections = new TextureCollection[9];
-            for (var i = 0; i < TextureCollections.Length; i++) {
-                var chunkIndex = (i == 8) ? 21 : i + 6;
-                if (chunkDatas[chunkIndex]?.Length > 0) {
-                    var collection = TextureCollectionForChunkIndex(chunkIndex);
+            var texColList = new List<TextureCollection>();
+            var texChunks = ChunkHeader.Where(x => x.Exists && x.ChunkType == ChunkType.Textures).Select(x => chunkDatas[x.ID]).ToList();
 
-                    try {
-                        TextureCollections[i] = TextureCollection.Create(
-                            chunkDatas[chunkIndex].DecompressedData, NameGetterContext, 0x00, "TextureCollection" + (i + 1),
-                            collection, pixelFormats[collection], palettes, chunkIndex
-                        );
-                        tables.AddRange(TextureCollections[i].Tables);
-                    }
-                    catch {
-                        // TODO: what to do if we get an error here?
-                    }
+            int index = 0;
+            foreach (var chunk in texChunks) {
+                var collection = TextureCollectionForChunkIndex(chunk.Index);
+
+                try {
+                    var texCol = TextureCollection.Create(
+                        chunk.DecompressedData, NameGetterContext, 0x00, "TextureCollection" + index,
+                        collection, pixelFormats[collection], palettes, chunk.Index
+                    );
+                    texColList.Add(texCol);
+                    tables.AddRange(texCol.Tables);
                 }
+                catch {
+                    // TODO: what to do if we get an error here?
+                }
+
+                index++;
             }
+            TextureCollections = texColList.ToArray();
 
             // Now that textures are loaded, build the texture animation frame data.
             // TODO: This function is a MESS. Please refactor it!!
             BuildTextureAnimFrameData();
 
+            // Add some images.
+            if (RepeatingGroundChunks?.Any() == true) {
+                try {
+                    var lat = LightAdjustmentTable?[0];
+                    var palette = CreatePalette(0, lat?.GroundRAdjustment ?? 0, lat?.GroundGAdjustment ?? 0, lat?.GroundBAdjustment ?? 0);
+                    RepeatingGroundImage = new MultiChunkTextureIndexed(RepeatingGroundChunks.Select(x => x.DecompressedData).ToArray(), TexturePixelFormat.Palette1, palette);
+                }
+                catch {
+                    // TODO: what to do here??
+                }
+            }
+
+            if (TiledGroundTileChunks?.Any() == true && TiledGroundMapChunks?.Any() == true) {
+                var lat = LightAdjustmentTable?[0];
+                var palette = CreatePalette(0, lat?.GroundRAdjustment ?? 0, lat?.GroundGAdjustment ?? 0, lat?.GroundBAdjustment ?? 0);
+                TiledGroundTileImage = new MultiChunkTextureIndexed(TiledGroundTileChunks.Select(x => x.DecompressedData).ToArray(), TexturePixelFormat.Palette1, palette, true);
+
+                var tiledGroundImageData = CreateTiledImageData(TiledGroundTileImage, TiledGroundMapChunks.Select(x => x.DecompressedData).ToArray(), 64, 4);
+                TiledGroundImage = new TextureIndexed(0, 0, 0, tiledGroundImageData, TexturePixelFormat.Palette1, palette, false);
+            }
+
+            if (SkyBoxChunks?.Any() == true)
+                SkyBoxImage = new MultiChunkTextureIndexed(SkyBoxChunks.Select(x => x.DecompressedData).ToArray(), TexturePixelFormat.Palette2, CreatePalette(1));
+
+            if (BackgroundChunks?.Any() == true)
+                BackgroundImage = new MultiChunkTextureIndexed(BackgroundChunks.Select(x => x.DecompressedData).ToArray(), TexturePixelFormat.Palette1, CreatePalette(0));
+
+            if (ForegroundTileChunks?.Any() == true) {
+                var palette = CreatePalette(1);
+                ForegroundTileImage = new MultiChunkTextureIndexed(ForegroundTileChunks.Select(x => x.DecompressedData).ToArray(), TexturePixelFormat.Palette1, palette, true);
+
+                var foregroundImageData = CreateTiledImageData(ForegroundTileImage, new IByteData[] { ForegroundMapChunk.DecompressedData }, 64, 1);
+                ForegroundImage = new TextureIndexed(0, 0, 0, foregroundImageData, TexturePixelFormat.Palette2, palette, true);
+            }
+
             return tables.ToArray();
+        }
+
+        private byte[,] CreateTiledImageData(ITexture tiledGroundTileImage, IByteData[] tileMaps, int tileSize, int blockCountX) {
+            int tilesPerBlock = tileSize * tileSize;
+
+            // Count the number of tiles (they're 16 bits, so divide the byte count by 2)
+            var tileMapTileCount = tileMaps.Sum(x => x.Length) / 2;
+
+            var blockCountYf = (float) tileMapTileCount / tilesPerBlock / blockCountX;
+
+            var tileImageData = tiledGroundTileImage.ImageData8Bit;
+            var tileImageDataWidth  = tileImageData.GetLength(0);
+            var tileImageDataHeight = tileImageData.GetLength(1);
+
+            var tileCountX = tileImageDataWidth / 8;
+            var tileCountY = tileImageDataHeight / 8;
+            var tileCount = tileCountX * tileCountY;
+            var outputImage = new byte[tileSize * blockCountX * 8, (int) Math.Ceiling(tileSize * blockCountYf) * 8];
+
+            var tile = 0;
+            foreach (var tileMap in tileMaps) {
+                var data = tileMap.GetDataCopy();
+                for (var dataPos = 0; dataPos < data.Length - 1; dataPos += 2, tile++) {
+                    var high = data[dataPos];
+                    var low = data[dataPos + 1];
+
+                    var tileIndex = ((high << 8) + low) / 2;
+                    if (tileIndex >= tileCount) {
+                        System.Diagnostics.Debug.WriteLine($"{dataPos:X4}: {tileIndex} ({high}, {low})");
+                        continue;
+                    }
+
+                    // TODO: refactor this to reduce all these calculations!!
+                    var inputX = (tileIndex % tileCountX) * 8;
+                    var inputY = (tileIndex / tileCountX) * 8;
+
+                    var blockIndex = tile / tilesPerBlock;
+                    var blockX = blockIndex % blockCountX;
+                    var blockY = blockIndex / blockCountX;
+
+                    var tileInBlock = tile % tilesPerBlock;
+                    var outputX = ((tileInBlock % tileSize) + (blockX * tileSize)) * 8;
+                    var outputY = ((tileInBlock / tileSize) + (blockY * tileSize)) * 8;
+
+                    for (int y = 0; y < 8; y++)
+                        for (int x = 0; x < 8; x++)
+                            outputImage[outputX + x, outputY + y] = tileImageData[inputX + x, inputY + y];
+                }
+            }
+
+            return outputImage;
         }
 
         private Dictionary<TexturePixelFormat, Palette> CreatePalettesForTextures() {
@@ -595,38 +845,68 @@ namespace SF3.Models.Files.MPD {
             }
         }
 
-        private void RebuildChunkTable(bool onlyModified) {
-            int expectedRamAddr = 0x292100;
-            int lastChunkEndRamAddr = expectedRamAddr;
+        public void RebuildChunkTable(bool onlyModified) {
+            // Gets all the chunks in order of their address, followed by the order in which they'll be updated.
+            ChunkHeader[] GetSortedChunks() {
+                return ChunkHeader
+                    .Where(x => x.ChunkAddress != 0)
+                    .OrderBy(x => x.ChunkAddress)
+                    .ThenBy(x => x.ChunkSize)
+                    .ThenBy(x => x.ID)
+                    .ToArray();
+            }
 
-            for (var i = 0; i < ChunkData.Length; i++) {
-                var chunk = ChunkHeader[i];
-                if (chunk.ChunkAddress == 0)
-                    continue;
+            // Finish compressed chunks.
+            var oldChunksOrderedByPosition = GetSortedChunks();
+            foreach (var cd in ChunkData)
+                if (cd != null && cd.IsCompressed && (!onlyModified || cd.NeedsRecompression || cd.IsModified))
+                    _ = cd.Recompress();
 
-                var chunkData = ChunkData[i];
-                var chunkByteArray = (ByteArraySegment) chunkData?.Data;
+            // When fixing offsets and removing empty space, we want to apply changes in order from
+            // lowest to highest address.
+            var chunksOrderedByPosition = GetSortedChunks();
 
+            // Perform sanity check.
+            var oldOrderedChunkIds = oldChunksOrderedByPosition.Select(x => x.ID).ToArray();
+            var newOrderedChunkIds = chunksOrderedByPosition.Select(x => x.ID).ToArray();
+            if (!Enumerable.SequenceEqual<int>(oldOrderedChunkIds, newOrderedChunkIds))
+                throw new InvalidOperationException("Chunks became out of order during decompression. This is bad, please contact the devs!");
+
+            // We need to know when the first chunk begins 
+            var firstChunkData = ChunkData.FirstOrDefault(x => x != null);
+            var firstChunkDataIndex = firstChunkData?.Index ?? 100;
+
+            int expectedFileAddr = 0x2100;
+            int lastChunkEndFileAddr = expectedFileAddr;
+            foreach (var chunk in chunksOrderedByPosition) {
                 // Enforce alignment by inserting bytes where necessary before this chunk begins.
-                if (chunk.ChunkAddress != expectedRamAddr) {
-                    Data.Data.ResizeAt(
-                        lastChunkEndRamAddr - c_RamOffset,
-                        Math.Min(chunk.ChunkAddress - lastChunkEndRamAddr, Data.Data.Length),
-                        expectedRamAddr - lastChunkEndRamAddr
-                    );
+                if (chunk.ChunkFileAddress != expectedFileAddr) {
+                    var resizeStart = lastChunkEndFileAddr;
+                    var resizeEnd = Math.Min(Data.Data.Length, chunk.ChunkFileAddress);
+                    var resizeOldSize = resizeEnd - resizeStart;
+                    var resizeNewSize = expectedFileAddr - lastChunkEndFileAddr;
+
+                    Data.Data.ResizeAt(resizeStart, resizeOldSize, resizeNewSize);
+
+                    // If the chunk just moved isn't managed by any ChunkData, then it's one of the first
+                    // chunks, and its empty. It should be at 0x2100, and so should every other empty chunk
+                    // at the beginning.
+                    if (chunk.ID < firstChunkDataIndex) {
+                        if (expectedFileAddr != 0x2100)
+                            throw new InvalidOperationException("Huh? We shouldn't be trying to fix chunks here!");
+                        for (int i = 0; i < firstChunkDataIndex; i++)
+                            if (i != chunk.ID)
+                                ChunkHeader[i].ChunkAddress = chunk.Address;
+                    }
                 }
 
-                // Finish compressed chunks.
-                if (chunkData != null && chunkData.IsCompressed && (!onlyModified || chunkData.NeedsRecompression || chunkData.IsModified))
-                    _ = chunkData.Recompress();
-
                 // Move forward. Make sure the next chunk starts at an alignment of 4 bytes.
-                expectedRamAddr += chunk.ChunkSize;
-                if (expectedRamAddr % 4 != 0)
-                    expectedRamAddr += 4 - (expectedRamAddr % 4);
+                expectedFileAddr += chunk.ChunkSize;
+                if (expectedFileAddr % 4 != 0)
+                    expectedFileAddr += 4 - (expectedFileAddr % 4);
 
                 // Keep track of where the last chunk ended. We'll add or remove zeroes here to enforce alignemnt.
-                lastChunkEndRamAddr = chunk.ChunkAddress + chunk.ChunkSize;
+                lastChunkEndFileAddr = chunk.ChunkFileAddress + chunk.ChunkSize;
             }
         }
 
@@ -756,6 +1036,40 @@ namespace SF3.Models.Files.MPD {
             }
         }
 
+        public Palette CreatePalette(int index, int adjR, int adjG, int adjB) {
+            var palette = CreatePalette(index);
+            if (adjR != 0 || adjG != 0 || adjB != 0) {
+                adjR = adjR * 255 / 31;
+                adjG = adjG * 255 / 31;
+                adjB = adjB * 255 / 31;
+
+                for (int i = 0; i < palette.Channels.Length; i++) {
+                    ref var ch = ref palette.Channels[i];
+                    ch.r = (byte) MathHelpers.Clamp(ch.r + adjR, 0, 255);
+                    ch.g = (byte) MathHelpers.Clamp(ch.g + adjG, 0, 255);
+                    ch.b = (byte) MathHelpers.Clamp(ch.b + adjB, 0, 255);
+                }
+            }
+            return palette;
+        }
+
+        public Palette CreatePalette(int index) {
+            if (index < 0 || index > 2)
+                throw new ArgumentOutOfRangeException(nameof(index));
+
+            if (PaletteTables == null || index >= PaletteTables.Length)
+                return new Palette(256);
+
+            var paletteTable = PaletteTables[index];
+            if (paletteTable == null)
+                return new Palette(256);
+
+            if (paletteTable.Length != 256)
+                throw new InvalidOperationException($"PaletteTable[{index}] should be 256 colors, instead it's {paletteTable.Length}");
+
+            return new Palette(paletteTable.Select(x => x.ColorABGR1555).ToArray());
+        }
+
         public IChunkData[] ChunkData { get; private set; }
 
         public IChunkData[] ModelsChunkData { get; private set; }
@@ -774,13 +1088,16 @@ namespace SF3.Models.Files.MPD {
         public LightPositionTable LightPositionTable { get; private set; }
 
         [BulkCopyRecurse]
-        public UnknownInt16Table OffsetUnknown1Table { get; private set; }
+        public UnknownUInt16Table Unknown1Table { get; private set; }
 
         [BulkCopyRecurse]
-        public OffsetModelSwitchGroupsTable OffsetModelSwitchGroupsTable { get; private set; }
+        public LightAdjustmentTable LightAdjustmentTable { get; private set; }
 
         [BulkCopyRecurse]
-        public UnknownUInt8Table OffsetScrollScreenAnimationTable { get; private set; }
+        public ModelSwitchGroupsTable ModelSwitchGroupsTable { get; private set; }
+
+        [BulkCopyRecurse]
+        public UnknownUInt8Table GroundAnimationTable { get; private set; }
 
         [BulkCopyRecurse]
         public TextureIDTable TextureAnimationsAlt { get; private set; }
@@ -795,7 +1112,10 @@ namespace SF3.Models.Files.MPD {
         public TextureAnimationTable TextureAnimations { get; private set; }
 
         [BulkCopyRecurse]
-        public UnknownUInt16Table OffsetUnknown2Table { get; private set; }
+        public UnknownUInt16Table Unknown2Table { get; private set; }
+
+        [BulkCopyRecurse]
+        public GradientTable GradientTable { get; private set; }
 
         public List<Chunk3Frame> Chunk3Frames { get; private set; }
 
@@ -815,10 +1135,54 @@ namespace SF3.Models.Files.MPD {
         [BulkCopyRecurse]
         public Surface Surface { get; private set; }
 
+        public int PrimaryTextureChunksFirstIndex { get; }
+        public int PrimaryTextureChunksLastIndex { get; }
+        public int MeshTextureChunksFirstIndex { get; }
+        public int MeshTextureChunksLastIndex { get; }
+        public int? ExtraModelTextureChunkIndex { get; }
+
         [BulkCopyRecurse]
         public TextureCollection[] TextureCollections { get; private set; }
 
         public Tile[,] Tiles { get; } = new Tile[64, 64];
-        public IChunkData[] SkyBoxChunkData { get; private set; }
+
+        public int RepeatingGroundChunk1Index { get; }
+        public int RepeatingGroundChunk2Index { get; }
+
+        public IChunkData[] RepeatingGroundChunks { get; private set; }
+        public ITexture RepeatingGroundImage { get; private set; }
+
+        public int TiledGroundTileChunk1Index { get; }
+        public int TiledGroundTileChunk2Index { get; }
+        public int TiledGroundMapChunks1Index { get; }
+        public int TiledGroundMapChunks2Index { get; }
+
+        public IChunkData[] TiledGroundTileChunks { get; private set; }
+        public IChunkData[] TiledGroundMapChunks { get; private set; }
+
+        public ITexture TiledGroundTileImage { get; private set; }
+        public ITexture TiledGroundImage { get; private set; }
+
+        public int SkyBoxChunk1Index { get; }
+        public int SkyBoxChunk2Index { get; }
+
+        public IChunkData[] SkyBoxChunks { get; private set; }
+        public ITexture SkyBoxImage { get; private set; }
+
+        public int BackgroundChunk1Index { get; }
+        public int BackgroundChunk2Index { get; }
+
+        public IChunkData[] BackgroundChunks { get; private set; }
+        public ITexture BackgroundImage { get; private set; }
+
+
+        public int ForegroundTileChunk1Index { get; }
+        public int ForegroundTileChunk2Index { get; }
+        public int ForegroundMapChunkIndex { get; }
+
+        public IChunkData[] ForegroundTileChunks { get; private set; }
+        public IChunkData ForegroundMapChunk { get; private set; }
+        public ITexture ForegroundTileImage { get; private set; }
+        public ITexture ForegroundImage { get; private set; }
     }
 }

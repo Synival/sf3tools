@@ -36,7 +36,7 @@ namespace SF3 {
         public byte[] BitmapDataARGB1555 {
             get {
                 if (_bitmapDataARGB1555 == null)
-                    _bitmapDataARGB1555 = BitmapUtils.ConvertABGR1555DataToABGR1555BitmapData(_data);
+                    _bitmapDataARGB1555 = BitmapUtils.ConvertABGR1555DataToARGB1555BitmapData(_data);
                 return _bitmapDataARGB1555;
             }
         }
@@ -44,7 +44,7 @@ namespace SF3 {
         public byte[] BitmapDataARGB8888 {
             get {
                 if (_bitmapDataARGB8888 == null)
-                    _bitmapDataARGB8888 = BitmapUtils.ConvertABGR1555DataToABGR8888BitmapData(_data);
+                    _bitmapDataARGB8888 = BitmapUtils.ConvertABGR1555DataToARGB8888BitmapData(_data);
                 return _bitmapDataARGB8888;
             }
         }

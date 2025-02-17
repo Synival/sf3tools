@@ -20,7 +20,11 @@ namespace SF3.Tests.Compression {
             var testCases = new List<TestCase>();
 
             foreach (var st in Enum.GetValues<ScenarioType>()) {
-                var mpdFiles = Directory.GetFiles(TestDataPaths.ResourcePath(st), "*.MPD");
+                var resourcePath = TestDataPaths.ResourcePath(st);
+                if (resourcePath == null)
+                    continue;
+
+                var mpdFiles = Directory.GetFiles(resourcePath, "*.MPD");
                 testCases.AddRange(mpdFiles
                     .Select(x => x.Split('/'))
                     .Select(x => x[x.Length - 1])
@@ -154,6 +158,53 @@ namespace SF3.Tests.Compression {
                 var nameGetters = new Dictionary<ScenarioType, INameGetterContext>() {
                     { mpdFile.Scenario, mpdFile.NameGetterContext }
                 };
+                var recreatedMpdFile = MPD_File.Create(new SF3.ByteData.ByteData(new ByteArray(mpdFile.Data.GetDataCopy())), nameGetters);
+            });
+        }
+
+        [TestMethod]
+        public void RebuildChunkTable_WithUncompressedChunkMovedToEnd_ChunkTableIsAccurate() {
+            RunOnAllTestCases((testCase, mpdFile) => {
+                var firstUncompressedChunk = mpdFile.ChunkHeader.FirstOrDefault(x => x.Exists && x.CompressionType != CompressionType.Compressed);
+                if (firstUncompressedChunk == null)
+                    return;
+
+                // Build a new MPD file with the first compressed chunk moved to the end of the file.
+                var oldChunkPos = firstUncompressedChunk.ChunkAddress - 0x290000;
+                var newChunkPos = mpdFile.Data.Length;
+                mpdFile.Data.Data.SetDataAtTo(newChunkPos, 0, mpdFile.Data.GetDataCopyAt(oldChunkPos, firstUncompressedChunk.ChunkSize));
+
+                var nameGetters = new Dictionary<ScenarioType, INameGetterContext>() {
+                    { mpdFile.Scenario, mpdFile.NameGetterContext }
+                };
+                firstUncompressedChunk.ChunkAddress = newChunkPos + 0x290000;
+                mpdFile = MPD_File.Create(new SF3.ByteData.ByteData(new ByteArray(mpdFile.Data.GetDataCopy())), nameGetters);
+
+                // Act
+                var orderedChunkHeadersOrig = mpdFile.ChunkHeader
+                    .Where(x => x.ChunkAddress != 0)
+                    .OrderBy(x => x.ChunkAddress)
+                    .ToArray();
+
+                mpdFile.RebuildChunkTable(onlyModified: true);
+
+                var pos = 0x2100;
+                var orderedChunkHeaders = mpdFile.ChunkHeader
+                    .Where(x => x.ChunkAddress != 0)
+                    .OrderBy(x => x.ChunkAddress)
+                    .ThenBy(x => x.ChunkSize)
+                    .ThenBy(x => x.ID)
+                    .ToArray();
+
+                foreach (var ch in orderedChunkHeaders) {
+                    if (ch.ChunkAddress != 0)
+                        Assert.AreEqual(pos, ch.ChunkFileAddress, "Chunk[" + ch.ID + "] is off");
+                    pos += ch.ChunkSize;
+                    if (pos % 4 != 0)
+                        pos += 4 - (pos % 4);
+                }
+
+                // Attempt to create the file to make sure it's not corrupted.
                 var recreatedMpdFile = MPD_File.Create(new SF3.ByteData.ByteData(new ByteArray(mpdFile.Data.GetDataCopy())), nameGetters);
             });
         }

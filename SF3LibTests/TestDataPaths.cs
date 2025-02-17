@@ -9,7 +9,7 @@ namespace SF3.Tests {
             { ScenarioType.PremiumDisk, "G:/" },
         };
 
-        public static string ResourcePath(ScenarioType scenario, string resource = "")
-            => ScenarioDataPath[scenario] + resource;
+        public static string? ResourcePath(ScenarioType scenario, string resource = "")
+            => ScenarioDataPath.TryGetValue(scenario, out string? value) ? (value + resource) : null;
     }
 }

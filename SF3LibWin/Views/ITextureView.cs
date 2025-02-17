@@ -1,15 +1,15 @@
-﻿using System.Drawing;
-using System.Windows.Forms;
+﻿using System.Windows.Forms;
 using SF3.Win.Controls;
+using SF3.Win.Extensions;
 
 namespace SF3.Win.Views {
-    public class TextureView : ControlView<TextureControl> {
-        public TextureView(string name, int textureScale = 0) : base(name) {
+    public class ITextureView : ControlView<TextureControl> {
+        public ITextureView(string name, float textureScale = 0) : base(name) {
             ImageScale = textureScale;
         }
 
-        public TextureView(string name, Image image, int textureScale = 0) : base(name) {
-            _image = image;
+        public ITextureView(string name, ITexture texture, float textureScale = 0) : base(name) {
+            _texture = texture;
             ImageScale = textureScale;
         }
 
@@ -21,7 +21,7 @@ namespace SF3.Win.Views {
             else
                 TextureControl.TextureScale = ImageScale;
 
-            TextureControl.TextureImage = _image;
+            TextureControl.TextureImage = _texture?.CreateBitmapARGB1555();
             return rval;
         }
 
@@ -36,20 +36,20 @@ namespace SF3.Win.Views {
 
         public TextureControl TextureControl => (TextureControl) Control;
 
-        private Image _image = null;
-        public Image Image {
-            get => _image;
+        private ITexture _texture = null;
+        public ITexture Image {
+            get => _texture;
             set {
-                if (value != _image) {
-                    _image = value;
+                if (value != _texture) {
+                    _texture = value;
                     if (TextureControl != null)
-                        TextureControl.TextureImage = value;
+                        TextureControl.TextureImage = value?.CreateBitmapARGB1555();
                 }
             }
         }
 
-        private int _imageScale = 0;
-        public int ImageScale {
+        private float _imageScale = 0;
+        public float ImageScale {
             get => _imageScale;
             set {
                 if (value != _imageScale) {

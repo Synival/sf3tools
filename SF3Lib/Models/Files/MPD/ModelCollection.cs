@@ -33,7 +33,7 @@ namespace SF3.Models.Files.MPD {
 
         public override IEnumerable<ITable> MakeTables() {
             ModelsHeaderTable = ModelsHeaderTable.Create(Data, "ModelsHeader", 0x0000);
-            ModelTable = ModelTable.Create(Data, "Models", 0x000C, ModelsHeaderTable[0].NumModels, Scenario >= ScenarioType.Scenario1);
+            ModelTable = ModelTable.Create(Data, "Models", 0x000C, ModelsHeaderTable[0].NumModels, Scenario >= ScenarioType.Other);
 
             var pdataAddresses = ModelTable
                 .SelectMany(x => x.PDatas)
@@ -49,6 +49,8 @@ namespace SF3.Models.Files.MPD {
                 PDatasByMemoryAddress = PDataTable
                     .Select((PData, i) => new { PData, pdataAddresses[i].AddressInMemory })
                     .ToDictionary(x => x.AddressInMemory, x => x.PData);
+                foreach (var pdata in PDatasByMemoryAddress)
+                    pdata.Value.RamAddress = pdata.Key;
             }
             catch {
                 // TODO: what to do on error??

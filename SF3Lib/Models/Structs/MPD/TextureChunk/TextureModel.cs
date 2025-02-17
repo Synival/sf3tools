@@ -68,7 +68,7 @@ namespace SF3.Models.Structs.MPD.TextureChunk {
             try {
                 Texture = PixelFormat == TexturePixelFormat.ABGR1555
                     ? new TextureABGR1555(ID, 0, 0, RawImageData16Bit, tags: tags)
-                    : (ITexture) new TextureIndexed(ID, 0, 0, RawImageData8Bit, PixelFormat, Palette, tags: tags);
+                    : (ITexture) new TextureIndexed(ID, 0, 0, RawImageData8Bit, PixelFormat, Palette, true, tags: tags);
                 return true;
             }
             catch {

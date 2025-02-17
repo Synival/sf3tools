@@ -27,7 +27,7 @@ namespace Grayscaler {
             };
 
             // For each file, update ALL textures in ALL their texture chunks.
-            // (This doesn't update scroll panes)
+            // (This doesn't update palettes)
             foreach (var fileIn in filesIn) {
                 Console.Write(fileIn + ": ");
 

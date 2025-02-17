@@ -8,7 +8,7 @@ namespace CommonLib.Imaging {
         /// </summary>
         /// <param name="colors">An array of colors in ABGR1555 format.</param>
         public Palette(ushort[] colors) {
-            Channels = colors.Select(x => ARGB1555toChannels(x)).ToArray();
+            Channels = colors.Select(x => ABGR1555toChannels(x)).ToArray();
         }
 
         /// <summary>

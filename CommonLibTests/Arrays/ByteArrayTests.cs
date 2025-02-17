@@ -183,6 +183,12 @@ namespace CommonLib.Tests.Arrays {
         }
 
         [TestMethod]
+        public void ExpandOrContractAt_ContractAtEnd_ThrowsException() {
+            var byteArray = new ByteArray(10);
+            _ = Assert.ThrowsException<ArgumentOutOfRangeException>(() => byteArray.ExpandOrContractAt(10, -1));
+        }
+
+        [TestMethod]
         public void ExpandOrContractAt_Contract_TriggersModified() {
             var byteArray = new ByteArray(10);
             for (var i = 0; i < 10; i++)
@@ -200,7 +206,7 @@ namespace CommonLib.Tests.Arrays {
             Assert.IsNotNull(args);
 
             Assert.AreEqual(3, args.Offset);
-            Assert.AreEqual(0, args.Length);
+            Assert.AreEqual(4, args.Length);
             Assert.AreEqual(-4, args.LengthChange);
             Assert.AreEqual(0, args.OffsetChange);
             Assert.IsFalse(args.Moved);

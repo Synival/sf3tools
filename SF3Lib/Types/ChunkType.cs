@@ -7,7 +7,12 @@ namespace SF3.Types {
         Surface = 4,
         Textures = 5,
         AnimationFrames = 6,
-        SkyBox = 7,
-        UnhandledImage = 8
+        Palette1Image = 7,
+        Palette2Image = 8,
+        UnhandledImageOrData = 9,
+        TiledGroundTiles = 10,
+        TiledGroundMap = 11,
+        ForegroundTiles = 12,
+        ForegroundMap = 13,
     }
 }

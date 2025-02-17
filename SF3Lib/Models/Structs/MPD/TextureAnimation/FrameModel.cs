@@ -54,7 +54,7 @@ namespace SF3.Models.Structs.MPD.TextureAnimation {
                 for (var x = 0; x < Width; x++)
                     imageData[x, y] = (byte) data.GetByte(off++);
 
-            Texture = new TextureIndexed(TextureID, FrameNum, (int) Duration, imageData, pixelFormat, palette,
+            Texture = new TextureIndexed(TextureID, FrameNum, (int) Duration, imageData, pixelFormat, palette, true,
                 tags: referenceTexture?.Tags, hashPrefix: referenceTexture?.Hash ?? "NOTEX");
         }
 
@@ -122,7 +122,7 @@ namespace SF3.Models.Structs.MPD.TextureAnimation {
         public string Hash => Texture?.Hash ?? "";
 
         [TableViewModelColumn(displayName: "Tags", displayOrder: 8, minWidth: 200)]
-        public string Tags => (Texture.Tags == null) ? "" : string.Join(", ", Texture.Tags.Select(x => x.Key + "|" + x.Value));
+        public string Tags => (Texture?.Tags == null) ? "" : string.Join(", ", Texture.Tags.Select(x => x.Key + "|" + x.Value));
 
         private readonly int _bytesPerProperty;
 

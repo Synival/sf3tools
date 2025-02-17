@@ -12,6 +12,7 @@ namespace CommonLib.Tests.Arrays {
             arraySegment[2] = 100;
             Assert.AreEqual(100, arraySegment[2]);
             Assert.AreEqual(100, parentArray[5]);
+            Assert.IsTrue(Enumerable.SequenceEqual<byte>([3, 4, 100, 6], arraySegment.GetDataCopy()));
         }
 
         [TestMethod]
@@ -105,6 +106,7 @@ namespace CommonLib.Tests.Arrays {
 
             Assert.AreEqual(3, arraySegment.Offset);
             Assert.AreEqual(2, arraySegment.Length);
+            Assert.IsTrue(Enumerable.SequenceEqual<byte>([3, 4], arraySegment.GetDataCopy()));
             Assert.AreEqual(8, parentArray.Length);
 
             Assert.AreEqual(1, args.Count);
@@ -130,6 +132,7 @@ namespace CommonLib.Tests.Arrays {
 
             Assert.AreEqual(3, arraySegment.Offset);
             Assert.AreEqual(6, arraySegment.Length);
+            Assert.IsTrue(Enumerable.SequenceEqual<byte>([3, 4, 5, 6, 0, 0], arraySegment.GetDataCopy()));
             Assert.AreEqual(12, parentArray.Length);
 
             Assert.AreEqual(1, args.Count);
@@ -155,6 +158,7 @@ namespace CommonLib.Tests.Arrays {
 
             Assert.AreEqual(3, arraySegment.Offset);
             Assert.AreEqual(2, arraySegment.Length);
+            Assert.IsTrue(Enumerable.SequenceEqual<byte>([3, 6], arraySegment.GetDataCopy()));
             Assert.AreEqual(8, parentArray.Length);
 
             Assert.AreEqual(1, args.Count);
@@ -180,6 +184,7 @@ namespace CommonLib.Tests.Arrays {
 
             Assert.AreEqual(3, arraySegment.Offset);
             Assert.AreEqual(6, arraySegment.Length);
+            Assert.IsTrue(Enumerable.SequenceEqual<byte>([3, 4, 5, 0, 0, 6], arraySegment.GetDataCopy()));
             Assert.AreEqual(12, parentArray.Length);
 
             Assert.AreEqual(1, args.Count);
@@ -202,15 +207,15 @@ namespace CommonLib.Tests.Arrays {
             arraySegment.RangeModified += (s, a) => args.Add(a);
 
             arraySegment.ExpandOrContractAt(0, -2);
-
             Assert.AreEqual(3, arraySegment.Offset);
             Assert.AreEqual(2, arraySegment.Length);
+            Assert.IsTrue(Enumerable.SequenceEqual<byte>([5, 6], arraySegment.GetDataCopy()));
             Assert.AreEqual(8, parentArray.Length);
 
             Assert.AreEqual(1, args.Count);
             var a = args[0];
             Assert.AreEqual(0, a.Offset);
-            Assert.AreEqual(0, a.Length);
+            Assert.AreEqual(2, a.Length);
             Assert.AreEqual(0, a.OffsetChange);
             Assert.AreEqual(-2, a.LengthChange);
             Assert.AreEqual(false, a.Moved);
@@ -230,6 +235,7 @@ namespace CommonLib.Tests.Arrays {
 
             Assert.AreEqual(3, arraySegment.Offset);
             Assert.AreEqual(6, arraySegment.Length);
+            Assert.IsTrue(Enumerable.SequenceEqual<byte>([0, 0, 3, 4, 5, 6], arraySegment.GetDataCopy()));
             Assert.AreEqual(12, parentArray.Length);
 
             Assert.AreEqual(1, args.Count);
@@ -244,28 +250,15 @@ namespace CommonLib.Tests.Arrays {
         }
 
         [TestMethod]
-        public void ExpandOrContractAt_AtEnd_Contract_UpdatesLengthAndContractsParent() {
+        public void ExpandOrContractAt_AtEnd_Contract_ThrowsException() {
             var parentArray = new ByteArray([0, 1, 2, 3, 4, 5, 6, 7, 8, 9]);
             var arraySegment = new ByteArraySegment(parentArray, 3, 4);
 
             var args = new List<ByteArrayRangeModifiedArgs>();
             arraySegment.RangeModified += (s, a) => args.Add(a);
 
-            arraySegment.ExpandOrContractAt(4, -2);
-
-            Assert.AreEqual(3, arraySegment.Offset);
-            Assert.AreEqual(2, arraySegment.Length);
-            Assert.AreEqual(8, parentArray.Length);
-
-            Assert.AreEqual(1, args.Count);
-            var a = args[0];
-            Assert.AreEqual(4, a.Offset);
-            Assert.AreEqual(0, a.Length);
-            Assert.AreEqual(0, a.OffsetChange);
-            Assert.AreEqual(-2, a.LengthChange);
-            Assert.AreEqual(false, a.Moved);
-            Assert.AreEqual(true, a.Resized);
-            Assert.AreEqual(false, a.Modified);
+            _ = Assert.ThrowsException<ArgumentOutOfRangeException>(
+                () => arraySegment.ExpandOrContractAt(4, -2));
         }
 
         [TestMethod]
@@ -280,6 +273,7 @@ namespace CommonLib.Tests.Arrays {
 
             Assert.AreEqual(3, arraySegment.Offset);
             Assert.AreEqual(6, arraySegment.Length);
+            Assert.IsTrue(Enumerable.SequenceEqual<byte>([3, 4, 5, 6, 0, 0], arraySegment.GetDataCopy()));
             Assert.AreEqual(12, parentArray.Length);
 
             Assert.AreEqual(1, args.Count);
@@ -305,12 +299,13 @@ namespace CommonLib.Tests.Arrays {
 
             Assert.AreEqual(3, arraySegment.Offset);
             Assert.AreEqual(2, arraySegment.Length);
+            Assert.IsTrue(Enumerable.SequenceEqual<byte>([3, 4], arraySegment.GetDataCopy()));
             Assert.AreEqual(8, parentArray.Length);
 
             Assert.AreEqual(1, args.Count);
             var a = args[0];
             Assert.AreEqual(2, a.Offset);
-            Assert.AreEqual(0, a.Length);
+            Assert.AreEqual(2, a.Length);
             Assert.AreEqual(0, a.OffsetChange);
             Assert.AreEqual(-2, a.LengthChange);
             Assert.AreEqual(false, a.Moved);
@@ -330,6 +325,7 @@ namespace CommonLib.Tests.Arrays {
 
             Assert.AreEqual(3, arraySegment.Offset);
             Assert.AreEqual(6, arraySegment.Length);
+            Assert.IsTrue(Enumerable.SequenceEqual<byte>([3, 4, 0, 0, 5, 6], arraySegment.GetDataCopy()));
             Assert.AreEqual(12, parentArray.Length);
 
             Assert.AreEqual(1, args.Count);
@@ -355,6 +351,7 @@ namespace CommonLib.Tests.Arrays {
 
             Assert.AreEqual(1, arraySegment.Offset);
             Assert.AreEqual(4, arraySegment.Length);
+            Assert.IsTrue(Enumerable.SequenceEqual<byte>([3, 4, 5, 6], arraySegment.GetDataCopy()));
 
             Assert.AreEqual(1, args.Count);
             var a = args[0];
@@ -379,6 +376,7 @@ namespace CommonLib.Tests.Arrays {
 
             Assert.AreEqual(5, arraySegment.Offset);
             Assert.AreEqual(4, arraySegment.Length);
+            Assert.IsTrue(Enumerable.SequenceEqual<byte>([3, 4, 5, 6], arraySegment.GetDataCopy()));
 
             Assert.AreEqual(1, args.Count);
             var a = args[0];
@@ -403,6 +401,7 @@ namespace CommonLib.Tests.Arrays {
 
             Assert.AreEqual(1, arraySegment.Offset);
             Assert.AreEqual(4, arraySegment.Length);
+            Assert.IsTrue(Enumerable.SequenceEqual<byte>([3, 4, 5, 6], arraySegment.GetDataCopy()));
 
             Assert.AreEqual(1, args.Count);
             var a = args[0];
@@ -427,6 +426,7 @@ namespace CommonLib.Tests.Arrays {
 
             Assert.AreEqual(1, arraySegment.Offset);
             Assert.AreEqual(4, arraySegment.Length);
+            Assert.IsTrue(Enumerable.SequenceEqual<byte>([3, 4, 5, 6], arraySegment.GetDataCopy()));
 
             Assert.AreEqual(1, args.Count);
             var a = args[0];
@@ -451,6 +451,7 @@ namespace CommonLib.Tests.Arrays {
 
             Assert.AreEqual(5, arraySegment.Offset);
             Assert.AreEqual(4, arraySegment.Length);
+            Assert.IsTrue(Enumerable.SequenceEqual<byte>([3, 4, 5, 6], arraySegment.GetDataCopy()));
 
             Assert.AreEqual(1, args.Count);
             var a = args[0];
@@ -475,6 +476,57 @@ namespace CommonLib.Tests.Arrays {
 
             Assert.AreEqual(5, arraySegment.Offset);
             Assert.AreEqual(4, arraySegment.Length);
+            Assert.IsTrue(Enumerable.SequenceEqual<byte>([3, 4, 5, 6], arraySegment.GetDataCopy()));
+
+            Assert.AreEqual(1, args.Count);
+            var a = args[0];
+            Assert.AreEqual(0, a.Offset);
+            Assert.AreEqual(arraySegment.Length, a.Length);
+            Assert.AreEqual(2, a.OffsetChange);
+            Assert.AreEqual(0, a.LengthChange);
+            Assert.AreEqual(true, a.Moved);
+            Assert.AreEqual(false, a.Resized);
+            Assert.AreEqual(false, a.Modified);
+        }
+
+        [TestMethod]
+        public void ParentResize_AtBeginning_WithResizeAt_ExpandedFromZeroSize_MovesSegment() {
+            var parentArray = new ByteArray([0, 1, 2, 3, 4, 5, 6, 7, 8, 9]);
+            var arraySegment = new ByteArraySegment(parentArray, 3, 4);
+
+            var args = new List<ByteArrayRangeModifiedArgs>();
+            arraySegment.RangeModified += (s, a) => args.Add(a);
+
+            parentArray.ResizeAt(3, 0, 2);
+
+            Assert.AreEqual(5, arraySegment.Offset);
+            Assert.AreEqual(4, arraySegment.Length);
+            Assert.IsTrue(Enumerable.SequenceEqual<byte>([3, 4, 5, 6], arraySegment.GetDataCopy()));
+
+            Assert.AreEqual(1, args.Count);
+            var a = args[0];
+            Assert.AreEqual(0, a.Offset);
+            Assert.AreEqual(arraySegment.Length, a.Length);
+            Assert.AreEqual(2, a.OffsetChange);
+            Assert.AreEqual(0, a.LengthChange);
+            Assert.AreEqual(true, a.Moved);
+            Assert.AreEqual(false, a.Resized);
+            Assert.AreEqual(false, a.Modified);
+        }
+
+        [TestMethod]
+        public void ParentResize_AtParentBeginning_WithResizeAt_ExpandedFromZeroSize_MovesSegment() {
+            var parentArray = new ByteArray([0, 1, 2, 3, 4, 5, 6, 7, 8, 9]);
+            var arraySegment = new ByteArraySegment(parentArray, 3, 4);
+
+            var args = new List<ByteArrayRangeModifiedArgs>();
+            arraySegment.RangeModified += (s, a) => args.Add(a);
+
+            parentArray.ResizeAt(0, 0, 2);
+
+            Assert.AreEqual(5, arraySegment.Offset);
+            Assert.AreEqual(4, arraySegment.Length);
+            Assert.IsTrue(Enumerable.SequenceEqual<byte>([3, 4, 5, 6], arraySegment.GetDataCopy()));
 
             Assert.AreEqual(1, args.Count);
             var a = args[0];
@@ -499,6 +551,7 @@ namespace CommonLib.Tests.Arrays {
 
             Assert.AreEqual(3, arraySegment.Offset);
             Assert.AreEqual(4, arraySegment.Length);
+            Assert.IsTrue(Enumerable.SequenceEqual<byte>([3, 4, 5, 6], arraySegment.GetDataCopy()));
 
             Assert.AreEqual(0, args.Count);
         }
@@ -515,6 +568,7 @@ namespace CommonLib.Tests.Arrays {
 
             Assert.AreEqual(3, arraySegment.Offset);
             Assert.AreEqual(4, arraySegment.Length);
+            Assert.IsTrue(Enumerable.SequenceEqual<byte>([3, 4, 5, 6], arraySegment.GetDataCopy()));
 
             Assert.AreEqual(0, args.Count);
         }
@@ -531,6 +585,7 @@ namespace CommonLib.Tests.Arrays {
 
             Assert.AreEqual(3, arraySegment.Offset);
             Assert.AreEqual(4, arraySegment.Length);
+            Assert.IsTrue(Enumerable.SequenceEqual<byte>([3, 4, 5, 6], arraySegment.GetDataCopy()));
 
             Assert.AreEqual(0, args.Count);
         }
@@ -547,6 +602,7 @@ namespace CommonLib.Tests.Arrays {
 
             Assert.AreEqual(3, arraySegment.Offset);
             Assert.AreEqual(4, arraySegment.Length);
+            Assert.IsTrue(Enumerable.SequenceEqual<byte>([3, 4, 5, 6], arraySegment.GetDataCopy()));
 
             Assert.AreEqual(0, args.Count);
         }
@@ -563,6 +619,7 @@ namespace CommonLib.Tests.Arrays {
 
             Assert.AreEqual(3, arraySegment.Offset);
             Assert.AreEqual(4, arraySegment.Length);
+            Assert.IsTrue(Enumerable.SequenceEqual<byte>([3, 4, 5, 6], arraySegment.GetDataCopy()));
 
             Assert.AreEqual(0, args.Count);
         }
@@ -579,6 +636,7 @@ namespace CommonLib.Tests.Arrays {
 
             Assert.AreEqual(3, arraySegment.Offset);
             Assert.AreEqual(4, arraySegment.Length);
+            Assert.IsTrue(Enumerable.SequenceEqual<byte>([3, 4, 5, 6], arraySegment.GetDataCopy()));
 
             Assert.AreEqual(0, args.Count);
         }
@@ -595,6 +653,7 @@ namespace CommonLib.Tests.Arrays {
 
             Assert.AreEqual(3, arraySegment.Offset);
             Assert.AreEqual(2, arraySegment.Length);
+            Assert.IsTrue(Enumerable.SequenceEqual<byte>([3, 4], arraySegment.GetDataCopy()));
 
             Assert.AreEqual(1, args.Count);
             var a = args[0];
@@ -619,6 +678,7 @@ namespace CommonLib.Tests.Arrays {
 
             Assert.AreEqual(3, arraySegment.Offset);
             Assert.AreEqual(2, arraySegment.Length);
+            Assert.IsTrue(Enumerable.SequenceEqual<byte>([3, 6], arraySegment.GetDataCopy()));
 
             Assert.AreEqual(1, args.Count);
             var a = args[0];
@@ -643,6 +703,7 @@ namespace CommonLib.Tests.Arrays {
 
             Assert.AreEqual(3, arraySegment.Offset);
             Assert.AreEqual(6, arraySegment.Length);
+            Assert.IsTrue(Enumerable.SequenceEqual<byte>([3, 4, 5, 6, 0, 0], arraySegment.GetDataCopy()));
 
             Assert.AreEqual(1, args.Count);
             var a = args[0];
@@ -667,6 +728,7 @@ namespace CommonLib.Tests.Arrays {
 
             Assert.AreEqual(3, arraySegment.Offset);
             Assert.AreEqual(6, arraySegment.Length);
+            Assert.IsTrue(Enumerable.SequenceEqual<byte>([3, 4, 5, 0, 0, 6], arraySegment.GetDataCopy()));
 
             Assert.AreEqual(1, args.Count);
             var a = args[0];

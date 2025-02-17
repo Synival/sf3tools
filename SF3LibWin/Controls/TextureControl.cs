@@ -18,8 +18,8 @@ namespace SF3.Win.Controls {
 
             if (_textureImage != null) {
                 var textureScale = TextureScale;
-                var w = _textureImage.Width * textureScale;
-                var h = _textureImage.Height * textureScale;
+                var w = (int) (_textureImage.Width * textureScale);
+                var h = (int) (_textureImage.Height * textureScale);
                 e.Graphics.DrawRectangle(Pens.Black, new Rectangle(1, 1, w + 1, h + 1));
                 e.Graphics.DrawImage(TextureImage, 1, 1, w, h);
             }
@@ -27,7 +27,7 @@ namespace SF3.Win.Controls {
 
         private Image _textureImage = null;
 
-        public int TextureScale { get; set; } = 4;
+        public float TextureScale { get; set; } = 4;
 
         public Image TextureImage {
             get => _textureImage;
@@ -36,7 +36,7 @@ namespace SF3.Win.Controls {
                     _textureImage = value;
                     if (_textureImage != null) {
                         var textureScale = TextureScale;
-                        var newSize = new Size(value.Width * textureScale + 2, value.Height * textureScale + 2);
+                        var newSize = new Size((int) (value.Width * textureScale) + 2, (int) (value.Height * textureScale) + 2);
                         var sizeDiff = new Point(newSize.Width - this.Size.Width, newSize.Height - this.Size.Height);
                         this.Size = newSize;
 

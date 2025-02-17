@@ -103,7 +103,6 @@ namespace SF3.Win.Controls {
             if (MPD_File != null) {
                 MPD_File.AssociateTilesWithTrees();
                 GLControl.UpdateModels();
-                GLControl.UpdateSurfaceModels();
             }
         }
 

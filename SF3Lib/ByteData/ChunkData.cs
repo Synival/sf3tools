@@ -41,7 +41,9 @@ namespace SF3.ByteData {
         public bool Recompress() {
             if (IsCompressed == false)
                 throw new ArgumentException("This ChunkData is not compressed");
-            return CompressedData.Recompress();
+            var rval = CompressedData.Recompress();
+            Recompressed?.Invoke(this, EventArgs.Empty);
+            return rval;
         }
 
         public bool SetDataTo(byte[] data) => ChildData.SetDataTo(data);
@@ -101,8 +103,11 @@ namespace SF3.ByteData {
             }
         }
 
+        public int Offset => (Data is ByteArraySegment bas) ? bas.Offset : 0;
+
         public event EventHandler NeedsRecompressionChanged;
         public event EventHandler Finished;
         public event EventHandler IsModifiedChanged;
+        public event EventHandler Recompressed;
     }
 }

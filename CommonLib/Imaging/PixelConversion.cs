@@ -92,7 +92,7 @@ namespace CommonLib.Imaging {
         public static ushort BGRA8888toABGR1555(uint input) => BGRA8888toChannels(input).ToABGR1555();
         public static ushort BGRA8888toARGB1555(uint input) => BGRA8888toChannels(input).ToARGB1555();
         public static uint BGRA8888toARGB8888(uint input) => BGRA8888toChannels(input).ToARGB8888();
-        public static uint BGRA8888toABGR8888(uint input) => BGRA8888toChannels(input).ToBGRA8888();
+        public static uint BGRA8888toABGR8888(uint input) => BGRA8888toChannels(input).ToABGR8888();
 
         public static ushort IndexedToABGR1555(byte input, Palette palette, bool zeroIsTransparent) => IndexedToChannels(input, palette, zeroIsTransparent).ToABGR1555();
         public static uint IndexedToABGR8888(byte input, Palette palette, bool zeroIsTransparent) => IndexedToChannels(input, palette, zeroIsTransparent).ToABGR8888();

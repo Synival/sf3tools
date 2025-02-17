@@ -67,6 +67,7 @@ namespace SF3.ByteData {
                 NeedsRecompression = false;
             }
             DecompressedData.IsModified = false;
+            Recompressed?.Invoke(this, EventArgs.Empty);
             return true;
         }
 
@@ -111,5 +112,6 @@ namespace SF3.ByteData {
         public int? LastDataReadForDecompress { get; private set; } = null;
 
         public event EventHandler NeedsRecompressionChanged;
+        public event EventHandler Recompressed;
     }
 }

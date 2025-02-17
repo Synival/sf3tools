@@ -14,7 +14,7 @@ namespace SF3.Win.Views.MPD {
 
             Model       = model;
             TableView   = new TableView("Frames", frameTable, nameGetterContext);
-            TextureView = new TextureView("Texture");
+            TextureView = new ImageView("Texture");
         }
 
         public override Control Create() {
@@ -30,7 +30,7 @@ namespace SF3.Win.Views.MPD {
         void OnTextureChanged(object sender, EventArgs e) {
             var item = (OLVListItem) TableView.OLVControl.SelectedItem;
             var frame = (FrameModel) item?.RowObject;
-            TextureView.Image = frame?.Texture?.CreateBitmap();
+            TextureView.Image = frame?.Texture?.CreateBitmapARGB1555();
         }
 
         public override void Destroy() {
@@ -50,6 +50,6 @@ namespace SF3.Win.Views.MPD {
 
         public IMPD_File Model { get; }
         public TableView TableView { get; private set; }
-        public TextureView TextureView { get; private set; }
+        public ImageView TextureView { get; private set; }
     }
 }

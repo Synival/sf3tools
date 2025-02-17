@@ -10,6 +10,9 @@ namespace CommonLib {
     /// </summary>
     /// <typeparam name="T">Type for List T.</typeparam>
     public class DisposableList<T> : List<T>, IDisposable where T : IDisposable {
+        public DisposableList() { }
+        public DisposableList(IEnumerable<T> collection) : base(collection) { }
+
         public void Dispose() {
             foreach (var element in this)
                 element.Dispose();

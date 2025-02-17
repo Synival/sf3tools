@@ -1,18 +1,13 @@
-﻿using System;
-using System.Drawing;
-using System.Drawing.Imaging;
-using System.Runtime.InteropServices;
+﻿using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using CommonLib.Arrays;
-using CommonLib.Extensions;
-using CommonLib.Imaging;
-using CommonLib.Utils;
 
 namespace SF3.Win.Views {
     public class DataHexView : ControlView<TextBox> {
-        public DataHexView(string name, IByteArray data) : base(name) {
+        public DataHexView(string name, IByteArray data, int bytesPerRow = 16) : base(name) {
             Data = data;
+            BytesPerRow = bytesPerRow;
         }
 
         public override Control Create() {
@@ -24,6 +19,7 @@ namespace SF3.Win.Views {
             Control.ReadOnly = true;
             Control.Multiline = true;
             Control.ScrollBars = ScrollBars.Both;
+            Control.WordWrap = false;
 
             UpdateData();
             return rval;
@@ -40,14 +36,16 @@ namespace SF3.Win.Views {
 
             var pos = 0;
             foreach (var b in rawData) {
+                if (pos != 0)
+                    stringBuilder.Append((pos % BytesPerRow == 0) ? "\r\n" : " ");
                 stringBuilder.Append(b.ToString("X2"));
-                stringBuilder.Append(pos == 15 ? "\r\n" : " ");
-                pos = (pos + 1) % 16;
+                pos++;
             }
 
             Control.Text = stringBuilder.ToString();
         }
 
         public IByteArray Data { get; }
+        public int BytesPerRow { get; }
     }
 }

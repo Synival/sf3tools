@@ -57,17 +57,33 @@ namespace SF3.Win.Views.MPD {
                 var name = header.ChunkType.ToString();
 
                 switch (header.ChunkType) {
-                    case ChunkType.Unset:
-                    case ChunkType.Unknown:
+                    case ChunkType.Palette1Image:
+                        AddChunkView(chunk.Index, name, (name) => new DataImageView(name, chunk.DecompressedData.Data, palettes[0], Types.DataImageViewMode.ColumnMajor));
+                        break;
+
+                    case ChunkType.Palette2Image:
+                        AddChunkView(chunk.Index, name, (name) => new DataImageView(name, chunk.DecompressedData.Data, palettes[1], Types.DataImageViewMode.ColumnMajor));
+                        break;
+
+                    case ChunkType.UnhandledImageOrData:
+                        AddChunkView(chunk.Index, name, (name) => new DataImageView(name, chunk.DecompressedData.Data, palettes, Types.DataImageViewMode.ColumnMajor));
+                        break;
+
+                    case ChunkType.TiledGroundTiles:
+                        AddChunkView(chunk.Index, name, (name) => new DataImageView(name, chunk.DecompressedData.Data, palettes[0], Types.DataImageViewMode.Tiles8x8));
+                        break;
+
+                    case ChunkType.ForegroundTiles:
+                        AddChunkView(chunk.Index, name, (name) => new DataImageView(name, chunk.DecompressedData.Data, palettes[1], Types.DataImageViewMode.Tiles8x8));
+                        break;
+
+                    case ChunkType.TiledGroundMap:
+                    case ChunkType.ForegroundMap:
+                        AddChunkView(chunk.Index, name, (name) => new DataHexView(name, chunk.DecompressedData.Data, 128));
+                        break;
+
+                    default:
                         AddChunkView(chunk.Index, name, (name) => new DataHexView(name, chunk.DecompressedData.Data));
-                        break;
-
-                    case ChunkType.SkyBox:
-                        AddChunkView(chunk.Index, name, (name) => new DataImageView(name, chunk.DecompressedData.Data, palettes[1]));
-                        break;
-
-                    case ChunkType.UnhandledImage:
-                        AddChunkView(chunk.Index, name, (name) => new DataImageView(name, chunk.DecompressedData.Data, palettes));
                         break;
                 }
             }
