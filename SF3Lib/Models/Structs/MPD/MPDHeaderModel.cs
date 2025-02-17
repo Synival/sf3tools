@@ -166,6 +166,15 @@ namespace SF3.Models.Structs.MPD {
             set => Data.SetWord(mapFlagsAddress, value);
         }
 
+        [TableViewModelColumn(displayOrder: 0x025f, displayName: "HasSurfaceTextureRotation (Scn3+)")]
+        public bool HasSurfaceTextureRotation {
+            get => Scenario >= ScenarioType.Scenario3 && (MapFlags & 0x0002) == 0x0002;
+            set {
+                if (Scenario >= ScenarioType.Scenario3)
+                    MapFlags = value ? (ushort) (MapFlags & ~0x0002) : (ushort) (MapFlags | 0x0002);
+            }
+        }
+
         [TableViewModelColumn(displayOrder: 0.05f)]
         public bool HasSurfaceModel {
             get => (MapFlags & 0x0200) == 0x0200;

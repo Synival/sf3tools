@@ -429,11 +429,13 @@ namespace MPD_Analyzer {
                     }
 
                     // Report unknown or unhandled tile flags. Only Scenario 3+ has rotation flags 0x01 and 0x02.
-                    var weirdTexFlags = tile.ModelTextureFlags & ~0x30 & ~0x80;
+                    var weirdTexFlags = tile.ModelTextureFlags & ~0xB0;
                     if (mpdFile.Scenario >= ScenarioType.Scenario3)
                         weirdTexFlags &= ~0x03;
                     if (weirdTexFlags != 0x00)
                         errors.Add("Unhandled tile texture flags: @(" + tile.X + ", " + tile.Y + "): " + weirdTexFlags.ToString("X2"));
+                    if (mpdFile.Scenario >= ScenarioType.Scenario3 && !header.HasSurfaceTextureRotation && (tile.ModelTextureFlags & 0x03) != 0)
+                        errors.Add("Disabled tile texture rotation flag: @(" + tile.X + ", " + tile.Y + "): " + weirdTexFlags.ToString("X2"));
                 }
             }
 
