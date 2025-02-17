@@ -116,7 +116,7 @@ namespace SF3.Win.OpenGL.MPD_File {
             var animationsById = (texCollection == TextureCollectionType.PrimaryTextures && mpdFile.TextureAnimations != null) ? mpdFile.TextureAnimations
                 .GroupBy(x => x.TextureID)
                 .Select(x => x.First())
-                .ToDictionary(x => (int) x.TextureID, x => new { Textures = x.Frames.OrderBy(x => x.FrameNum).Select(x => x.Texture).ToArray(), x.FrameTimerStart })
+                .ToDictionary(x => (int) x.TextureID, x => new { Textures = x.FrameTable.OrderBy(x => x.FrameNum).Select(x => x.Texture).ToArray(), x.FrameTimerStart })
                 : [];
 
             bool modelExists = false;

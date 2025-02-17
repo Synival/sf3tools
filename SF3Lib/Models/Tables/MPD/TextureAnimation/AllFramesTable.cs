@@ -19,7 +19,7 @@ namespace SF3.Models.Tables.MPD.TextureAnimation {
         }
 
         public override bool Load() {
-            _rows = Animations.SelectMany(x => x.Frames).ToArray();
+            _rows = Animations.SelectMany(x => x.FrameTable).ToArray();
             return true;
         }
 

@@ -30,8 +30,6 @@ namespace SF3.Models.Tables.MPD {
                 (currentRows, model) => model.TextureID != _frameEndId && model.TextureID != _textureEndId, addEndModel: false);
         }
 
-        public IEnumerable<object> Where(Func<object, bool> value) => throw new NotImplementedException();
-
         public bool Is32Bit { get; }
 
         private readonly uint _frameEndId;

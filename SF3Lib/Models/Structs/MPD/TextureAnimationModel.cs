@@ -2,6 +2,7 @@
 using CommonLib.Attributes;
 using SF3.ByteData;
 using SF3.Models.Structs.MPD.TextureAnimation;
+using SF3.Models.Tables.MPD.TextureAnimation;
 
 namespace SF3.Models.Structs.MPD {
     public class TextureAnimationModel : Struct {
@@ -28,28 +29,16 @@ namespace SF3.Models.Structs.MPD {
             var pos = FramesAddress;
 
             var frames = new List<FrameModel>();
-            var frameId = 0;
 
             // This happens in Scn2 SARA23.MPD for some reason...
             if (TextureID == _frameEndOffset)
                 pos = Address + _bytesPerProperty;
             else if (TextureID != _textureEndId) {
-                while (true) {
-                    var frameOffset = Data.GetData(pos, _bytesPerProperty);
-                    if (frameOffset == _frameEndOffset) {
-                        pos += _bytesPerProperty;
-                        break;
-                    }
-
-                    var newFrame = new FrameModel(Data, frameId, "TexAnim" + id + "_" + (frameId + 1), pos, is32Bit, (int) TextureID, (int) Width, (int) Height, id, frameId + 1);
-                    frames.Add(newFrame);
-                    frameId++;
-                    pos += newFrame.Size;
-                }
+                FrameTable = FrameTable.Create(data, "TexAnimFrames_" + id, pos, is32Bit, (int) TextureID, (int) Width, (int) Height, id);
+                pos += FrameTable.SizeInBytes + _bytesPerProperty;
             }
 
             Size = pos - Address;
-            Frames = frames.ToArray();
         }
 
         public bool Is32Bit { get; }
@@ -85,10 +74,10 @@ namespace SF3.Models.Structs.MPD {
 
         [BulkCopy]
         [TableViewModelColumn(displayName: "# Frames", displayOrder: 4, isReadOnly: true)]
-        public int NumFrames => Frames?.Length ?? 0;
+        public int NumFrames => FrameTable?.Length ?? 0;
 
         [BulkCopyRecurse]
-        public FrameModel[] Frames { get; } = null;
+        public FrameTable FrameTable { get; } = null;
 
         private readonly int _bytesPerProperty;
         private readonly uint _textureEndId;

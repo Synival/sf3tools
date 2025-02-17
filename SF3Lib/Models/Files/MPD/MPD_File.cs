@@ -731,7 +731,7 @@ namespace SF3.Models.Files.MPD {
             }
 
             foreach (var anim in TextureAnimations) {
-                foreach (var frame in anim.Frames) {
+                foreach (var frame in anim.FrameTable) {
                     var offset = frame.CompressedTextureOffset;
                     var existingFrame = Chunk3Frames.FirstOrDefault(x => x.Offset == offset);
 
@@ -782,7 +782,7 @@ namespace SF3.Models.Files.MPD {
                     if (a.Moved) {
                         var newOffset = ((ByteArraySegment) c3frame.Data.Data).Offset;
                         var oldOffset = newOffset - a.OffsetChange;
-                        var affectedFrames = TextureAnimations.SelectMany(x => x.Frames).Where(x => x.CompressedTextureOffset == oldOffset).ToArray();
+                        var affectedFrames = TextureAnimations.SelectMany(x => x.FrameTable).Where(x => x.CompressedTextureOffset == oldOffset).ToArray();
                         foreach (var frame in affectedFrames)
                             frame.CompressedTextureOffset = (uint) newOffset;
                     }
@@ -790,7 +790,7 @@ namespace SF3.Models.Files.MPD {
                 c3frame.Data.DecompressedData.Data.RangeModified += (s, a) => {
                     if (a.Resized || a.Modified) {
                         var offset = ((ByteArraySegment) c3frame.Data.Data).Offset;
-                        var affectedFrames = TextureAnimations.SelectMany(x => x.Frames).Where(x => x.CompressedTextureOffset == offset).ToArray();
+                        var affectedFrames = TextureAnimations.SelectMany(x => x.FrameTable).Where(x => x.CompressedTextureOffset == offset).ToArray();
                         foreach (var frame in affectedFrames) {
                             var referenceTex = GetTextureModelByID(frame.TextureID)?.Texture;
                             frame.FetchAndCacheTexture(c3frame.Data.DecompressedData, frame.PixelFormat, GetPalette(frame.PixelFormat), referenceTex);

@@ -108,7 +108,7 @@ namespace SF3.MPD_Editor.Forms {
                     .ToDictionary(x => x.Name, x => new { Model = (object) x, x.Texture });
 
                 var textures2 = (File.TextureAnimations == null) ? [] : File.TextureAnimations
-                    .SelectMany(x => x.Frames)
+                    .SelectMany(x => x.FrameTable)
                     .GroupBy(x => x.CompressedTextureOffset)
                     .Select(x => x.First())
                     .Where(x => x.TextureIsLoaded)
@@ -230,7 +230,7 @@ namespace SF3.MPD_Editor.Forms {
                     .ToDictionary(x => x.Name, x => x.Texture);
 
                 var textures2 = (File.TextureAnimations == null) ? [] : File.TextureAnimations
-                    .SelectMany(x => x.Frames)
+                    .SelectMany(x => x.FrameTable)
                     .GroupBy(x => x.CompressedTextureOffset)
                     .Select(x => x.First())
                     .Where(x => x.TextureIsLoaded)
