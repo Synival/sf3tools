@@ -17,11 +17,11 @@ namespace SF3.Win.Views {
             var rval = base.Create();
 
             if (ImageScale == 0)
-                ImageScale = TextureControl.TextureScale;
+                ImageScale = Control.TextureScale;
             else
-                TextureControl.TextureScale = ImageScale;
+                Control.TextureScale = ImageScale;
 
-            TextureControl.TextureImage = _texture?.CreateBitmapARGB1555();
+            Control.TextureImage = _texture?.CreateBitmapARGB1555();
             return rval;
         }
 
@@ -29,12 +29,10 @@ namespace SF3.Win.Views {
             if (!IsCreated)
                 return;
 
-            var old = TextureControl.TextureImage;
-            TextureControl.TextureImage = null;
-            TextureControl.TextureImage = old;
+            var old = Control.TextureImage;
+            Control.TextureImage = null;
+            Control.TextureImage = old;
         }
-
-        public TextureControl TextureControl => (TextureControl) Control;
 
         private ITexture _texture = null;
         public ITexture Image {
@@ -42,8 +40,8 @@ namespace SF3.Win.Views {
             set {
                 if (value != _texture) {
                     _texture = value;
-                    if (TextureControl != null)
-                        TextureControl.TextureImage = value?.CreateBitmapARGB1555();
+                    if (Control != null)
+                        Control.TextureImage = value?.CreateBitmapARGB1555();
                 }
             }
         }
@@ -54,8 +52,8 @@ namespace SF3.Win.Views {
             set {
                 if (value != _imageScale) {
                     _imageScale = value;
-                    if (TextureControl != null)
-                        TextureControl.TextureScale = value;
+                    if (Control != null)
+                        Control.TextureScale = value;
                 }
             }
         }

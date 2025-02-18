@@ -12,7 +12,7 @@ namespace SF3.Win.Views.MPD {
         public TextureTableView(string name, ITable<TextureModel> model, INameGetterContext ngc) : base(name) {
             Model = model;
             TexturesView = new TableView("Textures", model, ngc);
-            TextureView  = new ImageView("Texture");
+            TextureView  = new TextureView("Texture");
         }
 
         public override Control Create() {
@@ -39,7 +39,7 @@ namespace SF3.Win.Views.MPD {
 
         private void OnTextureChanged(object sender, EventArgs e) {
             var item = (OLVListItem) TexturesView.OLVControl.SelectedItem;
-            TextureView.Image = ((TextureModel) item?.RowObject)?.Texture?.CreateBitmapARGB1555();
+            TextureView.Image = ((TextureModel) item?.RowObject)?.Texture;
         }
 
         public override void Destroy() {
@@ -56,7 +56,7 @@ namespace SF3.Win.Views.MPD {
 
         public ITable<TextureModel> Model { get; }
         public TableView TexturesView { get; }
-        public ImageView TextureView { get; }
+        public TextureView TextureView { get; }
 
     }
 }
