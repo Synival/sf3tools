@@ -282,9 +282,9 @@ namespace SF3.Win.Controls {
             GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit | ClearBufferMask.StencilBufferBit);
 
             GL.Enable(EnableCap.CullFace);
-            if (_drawNormals) {
+            if (DrawNormals) {
                 using (_world.NormalsShader.Use()) {
-                    if (_surfaceModel?.Blocks?.Length > 0) {
+                    if (DrawSurfaceModel && _surfaceModel?.Blocks?.Length > 0) {
                         foreach (var block in _surfaceModel.Blocks) {
                             if (block.Model != null || block.UntexturedModel != null) {
                                 block.Model?.Draw(_world.NormalsShader, null);
@@ -292,7 +292,7 @@ namespace SF3.Win.Controls {
                             }
                         }
                     }
-                    if (_models?.ModelsByMemoryAddress != null) {
+                    if (DrawModels && _models?.ModelsByMemoryAddress != null) {
                         var modelsWithGroups = _models.Models
                             .Select(x => new { Model = x, ModelGroup = _models.ModelsByMemoryAddress.TryGetValue(x.PData1, out ModelGroup pd) ? pd : null })
                             .Where(x => x.ModelGroup != null)
@@ -319,7 +319,7 @@ namespace SF3.Win.Controls {
                 var lightingTexture = _surfaceModel.LightingTexture ?? _world.WhiteTexture;
                 var useFancyOutdoorSurfaceLighting = (MPD_File == null) ? false : MPD_File.MPDHeader.OutdoorLighting;
 
-                if (_skyBoxModel.Model != null) {
+                if (DrawSkyBox && _skyBoxModel.Model != null) {
                     GL.DepthMask(false);
                     UpdateShaderProjectionMatrix(_world.TextureShader, Matrix4.Identity);
 
@@ -335,7 +335,7 @@ namespace SF3.Win.Controls {
                     using (_skyBoxModel.Texture.Use(TextureUnit.Texture0))
                         _skyBoxModel.Model.Draw(_world.TextureShader, null);
 
-                    if (_gradients?.SkyBoxGradientModel != null) {
+                    if (DrawGradients && _gradients?.SkyBoxGradientModel != null) {
                         UpdateShaderProjectionMatrix(_world.SolidShader, Matrix4.Identity);
                         UpdateShaderViewMatrix(_world.SolidShader, Matrix4.Identity);
 
@@ -351,7 +351,7 @@ namespace SF3.Win.Controls {
                     GL.DepthMask(true);
                 }
 
-                if (_groundModel.Model != null) {
+                if (DrawGround && _groundModel.Model != null) {
                     GL.DepthMask(false);
 
                     GL.StencilFunc(StencilFunction.Always, 1, 0x01);
@@ -360,7 +360,7 @@ namespace SF3.Win.Controls {
                     using (_groundModel.Texture.Use(TextureUnit.Texture0))
                         _groundModel.Model.Draw(_world.TextureShader, null);
 
-                    if (_gradients?.GroundGradientModel != null) {
+                    if (DrawGradients && _gradients?.GroundGradientModel != null) {
                         UpdateShaderProjectionMatrix(_world.SolidShader, Matrix4.Identity);
                         UpdateShaderViewMatrix(_world.SolidShader, Matrix4.Identity);
 
@@ -380,7 +380,7 @@ namespace SF3.Win.Controls {
                 var terrainTypesTexture = DrawTerrainTypes ? _surfaceModel.TerrainTypesTexture : _world.TransparentBlackTexture;
                 var eventIdsTexture     = DrawEventIDs     ? _surfaceModel.EventIDsTexture     : _world.TransparentBlackTexture;
 
-                if (_models?.Models != null) {
+                if (DrawModels && _models?.Models != null) {
                     using (_world.TransparentBlackTexture.Use(MPD_TextureUnit.TextureTerrainTypes))
                     using (_world.TransparentBlackTexture.Use(MPD_TextureUnit.TextureEventIDs))
                     using (lightingTexture.Use(MPD_TextureUnit.TextureLighting))
@@ -430,7 +430,7 @@ namespace SF3.Win.Controls {
                     UpdateShaderNormalMatrix(_world.ObjectShader, Matrix3.Identity);
                 }
 
-                if (_surfaceModel?.Blocks?.Length > 0) {
+                if ((DrawSurfaceModel || DrawTerrainTypes || DrawEventIDs) && _surfaceModel?.Blocks?.Length > 0) {
                     GL.Enable(EnableCap.PolygonOffsetFill);
                     GL.PolygonOffset(-1.0f, -1.0f);
 
@@ -440,9 +440,14 @@ namespace SF3.Win.Controls {
                     using (terrainTypesTexture.Use(MPD_TextureUnit.TextureTerrainTypes))
                     using (eventIdsTexture.Use(MPD_TextureUnit.TextureEventIDs))
                     using (lightingTexture.Use(MPD_TextureUnit.TextureLighting))
+                    using (DrawSurfaceModel ? null : _world.TransparentBlackTexture.Use(MPD_TextureUnit.TextureAtlas))
                     using (_world.ObjectShader.Use()) {
                         foreach (var block in _surfaceModel.Blocks) {
-                            block.Model?.Draw(_world.ObjectShader);
+                            if (DrawSurfaceModel)
+                                block.Model?.Draw(_world.ObjectShader);
+                            else
+                                block.Model?.Draw(_world.ObjectShader, null);
+
                             using (_world.TransparentBlackTexture.Use(MPD_TextureUnit.TextureAtlas))
                                 block.UntexturedModel?.Draw(_world.ObjectShader, null);
                         }
@@ -454,7 +459,7 @@ namespace SF3.Win.Controls {
                     GL.Disable(EnableCap.PolygonOffsetFill);
                 }
 
-                if (_gradients?.ModelsGradientModel != null) {
+                if (DrawGradients && _gradients?.ModelsGradientModel != null) {
                     GL.Disable(EnableCap.DepthTest);
                     GL.DepthMask(false);
 
@@ -480,19 +485,23 @@ namespace SF3.Win.Controls {
 
                 using (_world.WireframeShader.Use())
                 using (_world.TileWireframeTexture.Use(TextureUnit.Texture1)) {
-                    foreach (var block in _surfaceModel.Blocks) {
-                        block.UntexturedModel?.Draw(_world.WireframeShader, null);
-                        block.Model?.Draw(_world.WireframeShader, null);
+                    if (DrawSurfaceModel || (!DrawNormals && (DrawTerrainTypes || DrawEventIDs))) {
+                        foreach (var block in _surfaceModel.Blocks) {
+                            block.UntexturedModel?.Draw(_world.WireframeShader, null);
+                            block.Model?.Draw(_world.WireframeShader, null);
+                        }
                     }
 
-                    foreach (var model in _models.Models) {
-                        var modelGroup = _models.ModelsByMemoryAddress.TryGetValue(model.PData1, out ModelGroup pd) ? pd : null;
-                        if (modelGroup != null) {
-                            SetModelAndNormalMatricesForModel(model, _world.WireframeShader);
-                            modelGroup.SolidTexturedModel?.Draw(_world.WireframeShader);
-                            modelGroup.SolidUntexturedModel?.Draw(_world.WireframeShader);
-                            modelGroup.SemiTransparentTexturedModel?.Draw(_world.WireframeShader);
-                            modelGroup.SemiTransparentUntexturedModel?.Draw(_world.WireframeShader);
+                    if (DrawModels) {
+                        foreach (var model in _models.Models) {
+                            var modelGroup = _models.ModelsByMemoryAddress.TryGetValue(model.PData1, out ModelGroup pd) ? pd : null;
+                            if (modelGroup != null) {
+                                SetModelAndNormalMatricesForModel(model, _world.WireframeShader);
+                                modelGroup.SolidTexturedModel?.Draw(_world.WireframeShader);
+                                modelGroup.SolidUntexturedModel?.Draw(_world.WireframeShader);
+                                modelGroup.SemiTransparentTexturedModel?.Draw(_world.WireframeShader);
+                                modelGroup.SemiTransparentUntexturedModel?.Draw(_world.WireframeShader);
+                            }
                         }
                     }
                 }
@@ -623,121 +632,100 @@ namespace SF3.Win.Controls {
             }
         }
 
-        private static bool _drawWireframe = true;
+        private AppState _appState = null;
+        private AppState AppState {
+            get {
+                if (_appState == null)
+                    _appState = AppState.RetrieveAppState();
+                return _appState;
+            }
+        }
+
+        private void UpdateAppState(string propertyName, bool value) {
+            var property = AppState.GetType().GetProperty(propertyName);
+            if (property == null || (bool) property.GetValue(AppState, null) == value)
+                return;
+
+            property.SetValue(AppState, value);
+            AppState.Serialize();
+            Invalidate();
+        }
+
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public bool DrawSurfaceModel {
+            get => AppState.ViewerDrawSurfaceModel;
+            set => UpdateAppState(nameof(AppState.ViewerDrawSurfaceModel), value);
+        }
+
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public bool DrawModels {
+            get => AppState.ViewerDrawModels;
+            set => UpdateAppState(nameof(AppState.ViewerDrawModels), value);
+        }
+
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public bool DrawGround {
+            get => AppState.ViewerDrawGround;
+            set => UpdateAppState(nameof(AppState.ViewerDrawGround), value);
+        }
+
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public bool DrawSkyBox {
+            get => AppState.ViewerDrawSkyBox;
+            set => UpdateAppState(nameof(AppState.ViewerDrawSkyBox), value);
+        }
+
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public bool DrawGradients {
+            get => AppState.ViewerDrawGradients;
+            set => UpdateAppState(nameof(AppState.ViewerDrawGradients), value);
+        }
 
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public bool DrawWireframe {
-            get => _drawWireframe;
-            set {
-                if (_drawWireframe != value) {
-                    _drawWireframe = value;
-                    var state = AppState.RetrieveAppState();
-                    state.ViewerDrawWireframe = value;
-                    state.Serialize();
-                    Invalidate();
-                }
-            }
+            get => AppState.ViewerDrawWireframe;
+            set => UpdateAppState(nameof(AppState.ViewerDrawWireframe), value);
         }
-
-        private static bool _drawBoundaries = false;
 
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public bool DrawBoundaries {
-            get => _drawBoundaries;
-            set {
-                if (_drawBoundaries != value) {
-                    _drawBoundaries = value;
-                    var state = AppState.RetrieveAppState();
-                    state.ViewerDrawBoundaries = value;
-                    state.Serialize();
-                    Invalidate();
-                }
-            }
+            get => AppState.ViewerDrawBoundaries;
+            set => UpdateAppState(nameof(AppState.ViewerDrawBoundaries), value);
         }
-
-        private static bool _drawHelp = true;
-
-        [Browsable(false)]
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public bool DrawHelp {
-            get => _drawHelp;
-            set {
-                if (_drawHelp != value) {
-                    _drawHelp = value;
-                    var state = AppState.RetrieveAppState();
-                    state.ViewerDrawHelp = value;
-                    state.Serialize();
-                    Invalidate();
-                }
-            }
-        }
-
-        private static bool _drawNormals = true;
-
-        [Browsable(false)]
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public bool DrawNormals {
-            get => _drawNormals;
-            set {
-                if (_drawNormals != value) {
-                    _drawNormals = value;
-                    if (_drawNormals == true) {
-                        _drawTerrainTypes = false;
-                        _drawEventIds = false;
-                    }
-
-                    var state = AppState.RetrieveAppState();
-                    state.ViewerDrawNormals      = value;
-                    state.ViewerDrawTerrainTypes = _drawTerrainTypes;
-                    state.ViewerDrawEventIDs     = _drawEventIds;
-                    state.Serialize();
-                    Invalidate();
-                }
-            }
-        }
-
-        private static bool _drawTerrainTypes = false;
 
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public bool DrawTerrainTypes {
-            get => _drawTerrainTypes;
-            set {
-                if (_drawTerrainTypes != value) {
-                    _drawTerrainTypes = value;
-                    if (_drawTerrainTypes == true)
-                        _drawNormals = false;
-
-                    var state = AppState.RetrieveAppState();
-                    state.ViewerDrawNormals      = _drawNormals;
-                    state.ViewerDrawTerrainTypes = _drawTerrainTypes;
-                    state.Serialize();
-                    Invalidate();
-                }
-            }
+            get => AppState.ViewerDrawTerrainTypes;
+            set => UpdateAppState(nameof(AppState.ViewerDrawTerrainTypes), value);
         }
-
-        private static bool _drawEventIds = false;
 
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public bool DrawEventIDs {
-            get => _drawEventIds;
-            set {
-                if (_drawEventIds != value) {
-                    _drawEventIds = value;
-                    if (_drawEventIds == true)
-                        _drawNormals = false;
+            get => AppState.ViewerDrawEventIDs;
+            set => UpdateAppState(nameof(AppState.ViewerDrawEventIDs), value);
+        }
 
-                    var state = AppState.RetrieveAppState();
-                    state.ViewerDrawNormals  = _drawNormals;
-                    state.ViewerDrawEventIDs = _drawTerrainTypes;
-                    state.Serialize();
-                    Invalidate();
-                }
-            }
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public bool DrawNormals {
+            get => AppState.ViewerDrawNormals;
+            set => UpdateAppState(nameof(AppState.ViewerDrawNormals), value);
+        }
+
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public bool DrawHelp {
+            get => AppState.ViewerDrawHelp;
+            set => UpdateAppState(nameof(AppState.ViewerDrawHelp), value);
         }
 
         private bool _tileSelectedNeedsUpdate = false;

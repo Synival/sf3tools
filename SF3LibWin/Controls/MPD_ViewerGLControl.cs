@@ -21,7 +21,6 @@ namespace SF3.Win.Controls {
                 _timer = null;
             };
 
-            InitToolstrip();
             InitRendering();
             InitKeyboardControls();
             InitMouseControls();
@@ -65,16 +64,6 @@ namespace SF3.Win.Controls {
                 return wasProcessed;
 
             return base.ProcessCmdKey(ref msg, keyData);
-        }
-
-        private void InitToolstrip() {
-            var state = AppState.RetrieveAppState();
-            _drawWireframe    = state.ViewerDrawWireframe;
-            _drawBoundaries   = state.ViewerDrawBoundaries;
-            _drawHelp         = state.ViewerDrawHelp;
-            _drawNormals      = state.ViewerDrawNormals;
-            _drawTerrainTypes = state.ViewerDrawTerrainTypes;
-            _drawEventIds     = state.ViewerDrawEventIDs;
         }
 
         private long _startTimeInMs = 0;

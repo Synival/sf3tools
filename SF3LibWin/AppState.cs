@@ -68,11 +68,18 @@ namespace SF3.Win {
         [JsonIgnore]
         public string FileFullPath { get; private set; }
 
+        public bool ViewerDrawSurfaceModel { get; set; } = true;
+        public bool ViewerDrawModels { get; set; } = true;
+        public bool ViewerDrawGround { get; set; } = true;
+        public bool ViewerDrawSkyBox { get; set; } = true;
+        public bool ViewerDrawGradients { get; set; } = true;
+
         public bool ViewerDrawWireframe { get; set; } = true;
         public bool ViewerDrawBoundaries { get; set; } = false;
-        public bool ViewerDrawHelp { get; set; } = true;
-        public bool ViewerDrawNormals { get; set; } = false;
         public bool ViewerDrawTerrainTypes { get; set; } = false;
         public bool ViewerDrawEventIDs { get; set; } = false;
+        public bool ViewerDrawNormals { get; set; } = false;
+
+        public bool ViewerDrawHelp { get; set; } = true;
     }
 }

@@ -11,12 +11,19 @@ namespace SF3.Win.Controls {
             GLControl.TilePropertiesControl = tilePropertyControl1;
             Disposed += (s, e) => GLControl.Dispose();
 
+            tsbDrawSurfaceModel.Checked  = GLControl.DrawSurfaceModel;
+            tsbDrawModels.Checked        = GLControl.DrawModels;
+            tsbDrawGround.Checked        = GLControl.DrawGround;
+            tsbDrawSkyBox.Checked        = GLControl.DrawSkyBox;
+            tsbDrawGradients.Checked     = GLControl.DrawGradients;
+
             tsbToggleWireframe.Checked   = GLControl.DrawWireframe;
             tsbToggleBoundaries.Checked  = GLControl.DrawBoundaries;
-            tsbToggleHelp.Checked        = GLControl.DrawHelp;
-            tsbToggleNormals.Checked     = GLControl.DrawNormals;
             tsbToggleTerrainType.Checked = GLControl.DrawTerrainTypes;
             tsbToggleEventID.Checked     = GLControl.DrawEventIDs;
+            tsbToggleNormals.Checked     = GLControl.DrawNormals;
+
+            tsbToggleHelp.Checked        = GLControl.DrawHelp;
 
             // Make sure certain key events make it to the GLControl.
             tilePropertyControl1.CmdKey += (object sender, ref Message msg, Keys keyData, ref bool wasProcessed) => {
@@ -55,44 +62,19 @@ namespace SF3.Win.Controls {
 
         public MPD_ViewerGLControl GLControl => mpdViewerGLControl1;
 
-        private void tsbToggleWireframe_Click(object sender, EventArgs e) {
-            GLControl.DrawWireframe = !GLControl.DrawWireframe;
-            tsbToggleWireframe.Checked = GLControl.DrawWireframe;
-        }
+        private void tsbDrawSurfaceModel_Click (object sender, EventArgs e) => tsbDrawSurfaceModel.Checked  = GLControl.DrawSurfaceModel = !GLControl.DrawSurfaceModel;
+        private void tsbDrawModels_Click       (object sender, EventArgs e) => tsbDrawModels.Checked        = GLControl.DrawModels       = !GLControl.DrawModels;
+        private void tsbDrawGround_Click       (object sender, EventArgs e) => tsbDrawGround.Checked        = GLControl.DrawGround       = !GLControl.DrawGround;
+        private void tsbDrawSkyBox_Click       (object sender, EventArgs e) => tsbDrawSkyBox.Checked        = GLControl.DrawSkyBox       = !GLControl.DrawSkyBox;
+        private void tsbDrawGradients_Click    (object sender, EventArgs e) => tsbDrawGradients.Checked     = GLControl.DrawGradients    = !GLControl.DrawGradients;
 
-        private void tsbToggleBoundaries_Click(object sender, EventArgs e) {
-            GLControl.DrawBoundaries = !GLControl.DrawBoundaries;
-            tsbToggleBoundaries.Checked = GLControl.DrawBoundaries;
-        }
+        private void tsbToggleWireframe_Click  (object sender, EventArgs e) => tsbToggleWireframe.Checked   = GLControl.DrawWireframe    = !GLControl.DrawWireframe;
+        private void tsbToggleBoundaries_Click (object sender, EventArgs e) => tsbToggleBoundaries.Checked  = GLControl.DrawBoundaries   = !GLControl.DrawBoundaries;
+        private void tsbToggleTerrainType_Click(object sender, EventArgs e) => tsbToggleTerrainType.Checked = GLControl.DrawTerrainTypes = !GLControl.DrawTerrainTypes;
+        private void tsbToggleEventID_Click    (object sender, EventArgs e) => tsbToggleEventID.Checked     = GLControl.DrawEventIDs     = !GLControl.DrawEventIDs;
+        private void tsbToggleNormals_Click    (object sender, EventArgs e) => tsbToggleNormals.Checked     = GLControl.DrawNormals      = !GLControl.DrawNormals;
 
-        private void tsbToggleHelp_Click(object sender, EventArgs e) {
-            GLControl.DrawHelp = !GLControl.DrawHelp;
-            tsbToggleHelp.Checked = GLControl.DrawHelp;
-        }
-
-        private void tsbToggleNormals_Click(object sender, EventArgs e) {
-            GLControl.DrawNormals = !GLControl.DrawNormals;
-
-            tsbToggleNormals.Checked     = GLControl.DrawNormals;
-            tsbToggleTerrainType.Checked = GLControl.DrawTerrainTypes;
-            tsbToggleEventID.Checked     = GLControl.DrawEventIDs;
-        }
-
-        private void tsbToggleTerrainType_Click(object sender, EventArgs e) {
-            GLControl.DrawTerrainTypes = !GLControl.DrawTerrainTypes;
-
-            tsbToggleNormals.Checked     = GLControl.DrawNormals;
-            tsbToggleTerrainType.Checked = GLControl.DrawTerrainTypes;
-            tsbToggleEventID.Checked     = GLControl.DrawEventIDs;
-        }
-
-        private void tsbToggleEventID_Click(object sender, EventArgs e) {
-            GLControl.DrawEventIDs = !GLControl.DrawEventIDs;
-
-            tsbToggleNormals.Checked     = GLControl.DrawNormals;
-            tsbToggleTerrainType.Checked = GLControl.DrawTerrainTypes;
-            tsbToggleEventID.Checked     = GLControl.DrawEventIDs;
-        }
+        private void tsbToggleHelp_Click       (object sender, EventArgs e) => tsbToggleHelp.Checked        = GLControl.DrawHelp         = !GLControl.DrawHelp;
 
         public void UpdateLighting() {
             if (MPD_File != null)
