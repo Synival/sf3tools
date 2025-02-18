@@ -66,7 +66,7 @@
     <item value="0x3F" name="Galm" />
     <item value="0x40" name="Lich" />
     <item value="0x41" name="Blue" />
-    <item value="0x42" name="Destonian Soldier" />
+    <item value="0x42" name="Crewart Soldier" />
     <item value="0x43" name="Aspinia Mage" />
     <item value="0x44" name="Saraband Knight" />
     <item value="0x45" name="Aspia Knight" />
@@ -118,8 +118,8 @@
     <item value="0x73" name="DomaricCh6" />
     <item value="0x74" name="Braff" />
     <item value="0x75" name="Basanda" />
-    <item value="0x76" name="Melinda" />
-    <item value="0x77" name="Heretic Golem" />
+    <item value="0x76" name="Masked Monk (Blue)" />
+    <item value="0x77" name="Masked Mage (Purple)" />
     <item value="0x78" name="Mask Monk (Red/Anhk 17)" />
     <item value="0x79" name="Aspia Mage" />
     <item value="0x7A" name="Arrawnt" />
