@@ -29,6 +29,7 @@
             tsbDrawModels = new System.Windows.Forms.ToolStripButton();
             tsbDrawGround = new System.Windows.Forms.ToolStripButton();
             tsbDrawSkyBox = new System.Windows.Forms.ToolStripButton();
+            tsbRunAnimations = new System.Windows.Forms.ToolStripButton();
             tsbDrawGradients = new System.Windows.Forms.ToolStripButton();
             toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             tsbToggleWireframe = new System.Windows.Forms.ToolStripButton();
@@ -43,14 +44,15 @@
             tsbToggleHelp = new System.Windows.Forms.ToolStripButton();
             tilePropertyControl1 = new TilePropertiesControl();
             mpdViewerGLControl1 = new MPD_ViewerGLControl();
-            tsbRunAnimations = new System.Windows.Forms.ToolStripButton();
+            toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            tsbRotateSpritesUp = new System.Windows.Forms.ToolStripButton();
             toolStrip1.SuspendLayout();
             SuspendLayout();
             // 
             // toolStrip1
             // 
             toolStrip1.ImageScalingSize = new System.Drawing.Size(24, 24);
-            toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { tsbDrawSurfaceModel, tsbDrawModels, tsbDrawGround, tsbDrawSkyBox, tsbRunAnimations, tsbDrawGradients, toolStripSeparator2, tsbToggleWireframe, tsbToggleBoundaries, tsbToggleTerrainType, tsbToggleEventID, tsbToggleNormals, toolStripSeparator3, tsbRecalculateLightmapOriginalMath, tsbUpdateLightmapUpdatedMath, toolStripSeparator4, tsbToggleHelp });
+            toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { tsbDrawSurfaceModel, tsbDrawModels, tsbDrawGround, tsbDrawSkyBox, tsbRunAnimations, tsbDrawGradients, toolStripSeparator2, tsbToggleWireframe, tsbToggleBoundaries, tsbToggleTerrainType, tsbToggleEventID, tsbToggleNormals, toolStripSeparator3, tsbRotateSpritesUp, toolStripSeparator1, tsbRecalculateLightmapOriginalMath, tsbUpdateLightmapUpdatedMath, toolStripSeparator4, tsbToggleHelp });
             toolStrip1.Location = new System.Drawing.Point(0, 0);
             toolStrip1.Name = "toolStrip1";
             toolStrip1.Size = new System.Drawing.Size(789, 31);
@@ -100,6 +102,16 @@
             tsbDrawSkyBox.Text = "Draw Sky Box";
             tsbDrawSkyBox.ToolTipText = "Draw Sky Box";
             tsbDrawSkyBox.Click += tsbDrawSkyBox_Click;
+            // 
+            // tsbRunAnimations
+            // 
+            tsbRunAnimations.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            tsbRunAnimations.Image = (System.Drawing.Image) resources.GetObject("tsbRunAnimations.Image");
+            tsbRunAnimations.ImageTransparentColor = System.Drawing.Color.Magenta;
+            tsbRunAnimations.Name = "tsbRunAnimations";
+            tsbRunAnimations.Size = new System.Drawing.Size(28, 28);
+            tsbRunAnimations.Text = "Run Animations";
+            tsbRunAnimations.Click += tsbRunAnimations_Click;
             // 
             // tsbDrawGradients
             // 
@@ -237,15 +249,20 @@
             mpdViewerGLControl1.Size = new System.Drawing.Size(582, 545);
             mpdViewerGLControl1.TabIndex = 1;
             // 
-            // tsbRunAnimations
+            // toolStripSeparator1
             // 
-            tsbRunAnimations.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            tsbRunAnimations.Image = (System.Drawing.Image) resources.GetObject("tsbRunAnimations.Image");
-            tsbRunAnimations.ImageTransparentColor = System.Drawing.Color.Magenta;
-            tsbRunAnimations.Name = "tsbRunAnimations";
-            tsbRunAnimations.Size = new System.Drawing.Size(28, 28);
-            tsbRunAnimations.Text = "Run Animations";
-            tsbRunAnimations.Click += tsbRunAnimations_Click;
+            toolStripSeparator1.Name = "toolStripSeparator1";
+            toolStripSeparator1.Size = new System.Drawing.Size(6, 31);
+            // 
+            // tsbRotateSpritesUp
+            // 
+            tsbRotateSpritesUp.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            tsbRotateSpritesUp.Image = (System.Drawing.Image) resources.GetObject("tsbRotateSpritesUp.Image");
+            tsbRotateSpritesUp.ImageTransparentColor = System.Drawing.Color.Magenta;
+            tsbRotateSpritesUp.Name = "tsbRotateSpritesUp";
+            tsbRotateSpritesUp.Size = new System.Drawing.Size(28, 28);
+            tsbRotateSpritesUp.Text = "Rotate Sprites Up to Camera";
+            tsbRotateSpritesUp.Click += tsbRotateSpritesUp_Click;
             // 
             // MPD_ViewerControl
             // 
@@ -284,5 +301,7 @@
         private System.Windows.Forms.ToolStripButton tsbDrawGradients;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
         private System.Windows.Forms.ToolStripButton tsbRunAnimations;
+        private System.Windows.Forms.ToolStripButton tsbRotateSpritesUp;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
     }
 }

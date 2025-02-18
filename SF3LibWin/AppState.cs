@@ -75,11 +75,13 @@ namespace SF3.Win {
         public bool ViewerRunAnimations { get; set; } = true;
         public bool ViewerDrawGradients { get; set; } = true;
 
-        public bool ViewerDrawWireframe { get; set; } = true;
+        public bool ViewerDrawWireframe { get; set; } = false;
         public bool ViewerDrawBoundaries { get; set; } = false;
         public bool ViewerDrawTerrainTypes { get; set; } = false;
         public bool ViewerDrawEventIDs { get; set; } = false;
         public bool ViewerDrawNormals { get; set; } = false;
+
+        public bool ViewerRotateSpritesUp { get; set; } = false;
 
         public bool ViewerDrawHelp { get; set; } = true;
     }

@@ -24,6 +24,8 @@ namespace SF3.Win.Controls {
             tsbToggleEventID.Checked     = GLControl.DrawEventIDs;
             tsbToggleNormals.Checked     = GLControl.DrawNormals;
 
+            tsbRotateSpritesUp.Checked   = GLControl.RotateSpritesUp;
+
             tsbToggleHelp.Checked        = GLControl.DrawHelp;
 
             // Make sure certain key events make it to the GLControl.
@@ -75,6 +77,8 @@ namespace SF3.Win.Controls {
         private void tsbToggleTerrainType_Click(object sender, EventArgs e) => tsbToggleTerrainType.Checked = GLControl.DrawTerrainTypes = !GLControl.DrawTerrainTypes;
         private void tsbToggleEventID_Click    (object sender, EventArgs e) => tsbToggleEventID.Checked     = GLControl.DrawEventIDs     = !GLControl.DrawEventIDs;
         private void tsbToggleNormals_Click    (object sender, EventArgs e) => tsbToggleNormals.Checked     = GLControl.DrawNormals      = !GLControl.DrawNormals;
+
+        private void tsbRotateSpritesUp_Click  (object sender, EventArgs e) => tsbRotateSpritesUp.Checked   = GLControl.RotateSpritesUp  = !GLControl.RotateSpritesUp;
 
         private void tsbToggleHelp_Click       (object sender, EventArgs e) => tsbToggleHelp.Checked        = GLControl.DrawHelp         = !GLControl.DrawHelp;
 

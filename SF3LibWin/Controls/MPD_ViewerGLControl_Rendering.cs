@@ -581,15 +581,34 @@ namespace SF3.Win.Controls {
         }
 
         private void SetModelAndNormalMatricesForModel(Model model, Shader shader) {
+            var angleXAdjust = 0.00f;
             var angleYAdjust = model.AlwaysFacesCamera ? (float) ((Yaw + 180.0f) / 180.0f * Math.PI) : 0.00f;
+
+            var yAdjust = 0.00f;
+            var prePostAdjustY = 0.00f;
+
+            if (model.AlwaysFacesCamera && RotateSpritesUp) {
+                // Not all sprites rotate around the X axis the same way, so get the center X to help with offsets.
+                var pdata    = MPD_File.ModelCollections[0].PDatasByMemoryAddress.TryGetValue(model.PData1, out var pdataValue) ? pdataValue : null;
+                var vertices = (pdata == null) ? null : MPD_File.ModelCollections[0].VertexTablesByMemoryAddress.TryGetValue(pdata.VerticesOffset, out var verticesValue) ? verticesValue : null;
+
+                var topY     = vertices?.Min(x => Math.Min(x.Vector.Y.Float, x.Vector.Z.Float)) / 32.0f ?? 0.00f;
+                var bottomY  = vertices?.Max(x => Math.Max(x.Vector.Y.Float, x.Vector.Z.Float)) / 32.0f ?? 0.00f;
+                var centerY  = (topY + bottomY) * 0.5f;
+
+                angleXAdjust = (float) (Pitch / 180.0f * Math.PI) * -1.00f;
+                prePostAdjustY = centerY;
+            }
 
             // TODO: This can be cached!!
             var modelMatrix =
                 Matrix4.CreateScale(model.ScaleX, model.ScaleY, model.ScaleZ) *
                 Matrix4.CreateRotationX(model.AngleX * (float) Math.PI * -2.00f) *
+                Matrix4.CreateTranslation(0, prePostAdjustY, 0) *
+                Matrix4.CreateRotationX(angleXAdjust) *
                 Matrix4.CreateRotationY(model.AngleY * (float) Math.PI * -2.00f + angleYAdjust) *
                 Matrix4.CreateRotationZ(model.AngleZ * (float) Math.PI * 2.00f) *
-                Matrix4.CreateTranslation(model.PositionX / -32.0f - 32.0f, model.PositionY / -32.0f, model.PositionZ / 32.0f + 32.0f);
+                Matrix4.CreateTranslation(model.PositionX / -32.0f - 32.0f, model.PositionY / -32.0f - prePostAdjustY + yAdjust, model.PositionZ / 32.0f + 32.0f);
 
             // TODO: This can be cached!!
             var normalMatrix = new Matrix3(modelMatrix).Inverted();
@@ -727,6 +746,13 @@ namespace SF3.Win.Controls {
         public bool DrawNormals {
             get => AppState.ViewerDrawNormals;
             set => UpdateAppState(nameof(AppState.ViewerDrawNormals), value);
+        }
+
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public bool RotateSpritesUp {
+            get => AppState.ViewerRotateSpritesUp;
+            set => UpdateAppState(nameof(AppState.ViewerRotateSpritesUp), value);
         }
 
         [Browsable(false)]
