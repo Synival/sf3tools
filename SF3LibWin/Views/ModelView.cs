@@ -110,7 +110,7 @@ namespace SF3.Win.Views {
                     var maxWidth = Math.Max(30, TextRenderer.MeasureText(lvc.Text, lvc.HeaderFont).Width + 8);
                     foreach (var mp in _modelProperties)
                         maxWidth = Math.Max(maxWidth, TextRenderer.MeasureText(mp.Name, lvc.HeaderFont).Width + 8);
-                    lvc.Width = (int) (maxWidth * 0.80);
+                    lvc.Width = (int) (maxWidth * 0.85);
 
                     lvcColumns.Add(lvc);
                 }

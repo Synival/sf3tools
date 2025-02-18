@@ -207,7 +207,7 @@ namespace SF3.Models.Structs.MPD {
             }
         }
 
-        [TableViewModelColumn(displayOrder: 0.11f, displayName: "HasChunk19Model (Scn1)")]
+        [TableViewModelColumn(displayOrder: 0.11f, displayName: "HasExtraChunk1ModelWithChunk21Textures (Scn2+)")]
         public bool HasExtraChunk1ModelWithChunk21Textures {
             get => Scenario >= ScenarioType.Scenario2 && (MapFlags & 0x4000) == 0x4000;
             set {
