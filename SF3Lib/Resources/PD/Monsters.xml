@@ -10,14 +10,14 @@
     <item value="0x07" name="Bow Knight" />
     <item value="0x08" name="Lesser Demon" />
     <item value="0x09" name="Kaiser Guard" />
-    <item value="0x0A" name="Death Knight" />
-    <item value="0x0B" name="White Knight" />
+    <item value="0x0A" name="Black Knight" />
+    <item value="0x0B" name="Royal Guard" />
     <item value="0x0C" name="Kaiser Knight" />
-    <item value="0x0D" name="Giga Breaker" />
+    <item value="0x0D" name="Giant Armour" />
     <item value="0x0E" name="Hill Giant" />
-    <item value="0x0F" name="Lizard Man" />
-    <item value="0x10" name="Dragon Newt" />
-    <item value="0x11" name="Hellhound" />
+    <item value="0x0F" name="Lizardman" />
+    <item value="0x10" name="Dragonewt" />
+    <item value="0x11" name="Hell Hound" />
     <item value="0x12" name="Cerberus" />
     <item value="0x13" name="Scaven" />
     <item value="0x14" name="Dwarf" />
@@ -34,7 +34,7 @@
     <item value="0x1F" name="Bloody Knight" />
     <item value="0x20" name="Ice Golem" />
     <item value="0x21" name="Giga Breaker" />
-    <item value="0x22" name="Talos" />
+    <item value="0x22" name="Taros" />
     <item value="0x23" name="Giant Ant" />
     <item value="0x24" name="Colossus" />
     <item value="0x25" name="Bat" />
@@ -50,7 +50,7 @@
     <item value="0x2F" name="Hell Succubus" />
     <item value="0x30" name="Succubus" />
     <item value="0x31" name="Sniper" />
-    <item value="0x32" name="Dire Wolf" />
+    <item value="0x32" name="Bulzome Elf" />
     <item value="0x33" name="Hell Sniper" />
     <item value="0x34" name="Mega Loader" />
     <item value="0x35" name="Metal Gunner" />
@@ -65,28 +65,28 @@
     <item value="0x3E" name="High Priest" />
     <item value="0x3F" name="Galm" />
     <item value="0x40" name="Lich" />
-    <item value="0x41" name="Blue" />
-    <item value="0x42" name="Destonian Soldier" />
+    <item value="0x41" name="Blue Priest" />
+    <item value="0x42" name="Destonia Soldier" />
     <item value="0x43" name="Aspinia Mage" />
     <item value="0x44" name="Saraband Knight" />
-    <item value="0x45" name="Aspia Knight" />
+    <item value="0x45" name="Aspinia Knight" />
     <item value="0x46" name="Kyon-Shi" />
     <item value="0x47" name="Thief" />
     <item value="0x48" name="Vampire Bat" />
-    <item value="0x49" name="Tentacle Arm" />
-    <item value="0x4A" name="Tentacle Leg" />
-    <item value="0x4B" name="Dark Dragon Left" />
-    <item value="0x4C" name="Dark Dragon" />
-    <item value="0x4D" name="Dark Dragon Right" />
+    <item value="0x49" name="Kraken Leg" />
+    <item value="0x4A" name="Kraken Arm" />
+    <item value="0x4B" name="Dark Dragon 1" />
+    <item value="0x4C" name="Dark Dragon 2" />
+    <item value="0x4D" name="Dark Dragon 3" />
     <item value="0x4E" name="Aspinia Mage" />
     <item value="0x4F" name="Dark Mage" />
     <item value="0x50" name="Masked Monk (Blue)" />
     <item value="0x51" name="Masked Monk (Brown)" />
     <item value="0x52" name="Masked Monk (Purple/Wand)" />
-    <item value="0x53" name="Masked Monk (Red/Ankh)" />
+    <item value="0x53" name="Masked Priest (Red/Ankh)" />
     <item value="0x54" name="Spiriel" />
     <item value="0x55" name="Abdark" />
-    <item value="0x56" name="Abdark" />
+    <item value="0x56" name="Guardian Pillar" />
     <item value="0x57" name="Walcuray" />
     <item value="0x58" name="Ghoul" />
     <item value="0x59" name="Domaric" />
@@ -94,9 +94,9 @@
     <item value="0x5B" name="(Character Placeholder)" />
     <item value="0x5C" name="Killer Fish" />
     <item value="0x5D" name="Skull Fish" />
-    <item value="0x5E" name="Masked Knight" />
+    <item value="0x5E" name="Bulzome Knight" />
     <item value="0x5F" name="Barrel" />
-    <item value="0x60" name="Masked Monk (Grey/Rod)" />
+    <item value="0x60" name="Masked Mage (Grey/Rod)" />
     <item value="0x61" name="MP Commander" />
     <item value="0x62" name="Brute" />
     <item value="0x63" name="Shiraf" />
@@ -105,8 +105,8 @@
     <item value="0x66" name="Dark Gunner" />
     <item value="0x67" name="Sting Worm" />
     <item value="0x68" name="Queen Worm" />
-    <item value="0x69" name="White Lord" />
-    <item value="0x6A" name="Colossus" />
+    <item value="0x69" name="White Knight" />
+    <item value="0x6A" name="Titan" />
     <item value="0x6B" name="Fafhard" />
     <item value="0x6C" name="Fiale" />
     <item value="0x6D" name="Chimera" />
@@ -119,17 +119,17 @@
     <item value="0x74" name="Braff" />
     <item value="0x75" name="Basanda" />
     <item value="0x76" name="Melinda" />
-    <item value="0x77" name="Heretic Golem" />
-    <item value="0x78" name="Ninja (Blue)" />
-    <item value="0x79" name="Ninja (Purple)" />
+    <item value="0x77" name="Bulzome Golem" />
+    <item value="0x78" name="Rin Ninja" />
+    <item value="0x79" name="Zai Ninja" />
     <item value="0x7A" name="Arrawnt" />
-    <item value="0x7B" name="Iom" />
-    <item value="0x7C" name="Iom Worm1" />
-    <item value="0x7D" name="Iom Worm2" />
-    <item value="0x7E" name="Evil Zion" />
-    <item value="0x7F" name="Dark Sol" />
+    <item value="0x7B" name="Iom 1" />
+    <item value="0x7C" name="Iom 2" />
+    <item value="0x7D" name="Iom 3" />
+    <item value="0x7E" name="Zeon" />
+    <item value="0x7F" name="Darksol" />
     <item value="0x80" name="Edmund" />
-    <item value="0x81" name="Ninja (Green)" />
+    <item value="0x81" name="Jin Ninja (Green)" />
     <item value="0x82" name="Red Dragon" />
     <item value="0x83" name="Earth Dragon" />
     <item value="0x84" name="High Wizard" />
@@ -141,15 +141,15 @@
     <item value="0x8A" name="Earth Dragon" />
     <item value="0x8B" name="Black Dragon" />
     <item value="0x8C" name="Sandworm" />
-    <item value="0x8D" name="High Priest (Red)" />
-    <item value="0x8E" name="High Priest (Blue)" />
-    <item value="0x8F" name="High Priest (Green)" />
+    <item value="0x8D" name="Dark Priest (Red)" />
+    <item value="0x8E" name="Dark Priest (Blue)" />
+    <item value="0x8F" name="Dark Priest (Green)" />
     <item value="0x90" name="Jane (Light A)" />
     <item value="0x91" name="Bulzome" />
     <item value="0x92" name="Goriate" />
     <item value="0x93" name="Baersol Soldier" />
-    <item value="0x94" name="Destonian Soldier (Axe)" />
-    <item value="0x95" name="Aspinian Knight (Axe)" />
+    <item value="0x94" name="Destonia Soldier (Axe)" />
+    <item value="0x95" name="Aspinia Knight (Axe)" />
     <item value="0x96" name="Gargoyle" />
     <item value="0x97" name="Jane (Light B)" />
     <item value="0x98" name="Goriate" />
@@ -159,16 +159,16 @@
     <item value="0x9C" name="Marky" />
     <item value="0x9D" name="Yasha" />
     <item value="0x9E" name="Ancient Mural" />
-    <item value="0x9F" name="Masked Monk (Green/Rod)" />
-    <item value="0xA0" name="Masked Monk (White/Ankh)" />
-    <item value="0xA1" name="Masked Monk (Yellow/Rod)" />
-    <item value="0xA2" name="Ice Crystal" />
-    <item value="0xA3" name="Mud Doll" />
-    <item value="0xA4" name="Kraken Head" />
-    <item value="0xA5" name="Jane(Dark)" />
+    <item value="0x9F" name="Masked Mage (Green/Rod)" />
+    <item value="0xA0" name="Masked Priest (White/Ankh)" />
+    <item value="0xA1" name="Masked Mage (Yellow/Rod)" />
+    <item value="0xA2" name="Ice Pillar" />
+    <item value="0xA3" name="Clay Doll" />
+    <item value="0xA4" name="Dark Kraken" />
+    <item value="0xA5" name="Jane (Dark)" />
     <item value="0xA6" name="Bulzome" />
     <item value="0xA7" name="Produn" />
-    <item value="0xA8" name="Masked Pegasus Knight" />
+    <item value="0xA8" name="Masked Pegasus" />
     <item value="0xA9" name="Tybalt" />
     <item value="0xAA" name="Crewart" />
     <item value="0xAB" name="Hermit Crab" />
@@ -187,29 +187,29 @@
     <item value="0xB8" name="Yasha (2nd)" />
     <item value="0xB9" name="Yasha (3rd)" />
     <item value="0xBA" name="Garvin" />
-    <item value="0xBB" name="Staff of Bulzome" />
+    <item value="0xBB" name="Dark Staff" />
     <item value="0xBC" name="Monster" />
-    <item value="0xBD" name="High Ninja" />
-    <item value="0xBE" name="Unknown" />
-    <item value="0xBF" name="Unknown" />
-    <item value="0xC0" name="Unknown" />
-    <item value="0xC1" name="Unknown" />
-    <item value="0xC2" name="Unknown" />
-    <item value="0xC3" name="Unknown" />
-    <item value="0xC4" name="Unknown" />
-    <item value="0xC5" name="Unknown" />
-    <item value="0xC6" name="Unknown" />
-    <item value="0xC7" name="Unknown" />
-    <item value="0xC8" name="Unknown" />
-    <item value="0xC9" name="Unknown" />
-    <item value="0xCA" name="Unknown" />
-    <item value="0xCB" name="Unknown" />
-    <item value="0xCC" name="Unknown" />
-    <item value="0xCD" name="Unknown" />
-    <item value="0xCE" name="Unknown" />
-    <item value="0xCF" name="Unknown" />
-    <item value="0xD0" name="Unknown" />
-    <item value="0xD1" name="Unknown" />
-    <item value="0xD2" name="Unknown" />
-    <item value="0xD3" name="Unknown" />
+    <item value="0xBD" name="High Shinobi" />
+    <item value="0xBE" name="? (0xBE)" />
+    <item value="0xBF" name="? (0xBF)" />
+    <item value="0xC0" name="? (0xC0)" />
+    <item value="0xC1" name="? (0xC1)" />
+    <item value="0xC2" name="? (0xC2)" />
+    <item value="0xC3" name="? (0xC3)" />
+    <item value="0xC4" name="? (0xC4)" />
+    <item value="0xC5" name="? (0xC5)" />
+    <item value="0xC6" name="? (0xC6)" />
+    <item value="0xC7" name="? (0xC7)" />
+    <item value="0xC8" name="? (0xC8)" />
+    <item value="0xC9" name="? (0xC9)" />
+    <item value="0xCA" name="? (0xCA)" />
+    <item value="0xCB" name="? (0xCB)" />
+    <item value="0xCC" name="? (0xCC)" />
+    <item value="0xCD" name="? (0xCD)" />
+    <item value="0xCE" name="? (0xCE)" />
+    <item value="0xCF" name="? (0xCF)" />
+    <item value="0xD0" name="? (0xD0)" />
+    <item value="0xD1" name="? (0xD1)" />
+    <item value="0xD2" name="? (0xD2)" />
+    <item value="0xD3" name="? (0xD3)" />
 </items>
