@@ -1,7 +1,10 @@
 ﻿using System;
+using System.Linq;
 using System.Windows.Forms;
 using CommonLib.Types;
+using OpenTK.Mathematics;
 using SF3.Models.Files.MPD;
+using SF3.Win.OpenGL.MPD_File;
 
 namespace SF3.Win.Controls {
     public partial class MPD_ViewerControl : UserControl {
@@ -102,6 +105,57 @@ namespace SF3.Win.Controls {
         private void tsbUpdateLightmapUpdatedMath_Click(object sender, EventArgs e) {
             MPD_File?.SurfaceModel?.UpdateVertexNormals(MPD_File.Surface?.HeightmapRowTable, POLYGON_NormalCalculationMethod.WeightedVerticalTriangles);
             UpdateModels();
+        }
+
+        private struct CameraRefs {
+            public float Width;
+            public float Height;
+            public Vector3 Center;
+        }
+
+        private CameraRefs CreateCameraRefs() {
+            float width   = 64.0f;
+            float height  = 64.0f;
+            float centerX = 0.0f;
+            float groundY = 0.0f;
+            float centerZ = 0.0f;
+
+            if (MPD_File?.BoundariesTable?.Length >= 2) {
+                var bounds = MPD_File.BoundariesTable;
+                var x1 = bounds.Min(x => x.X1);
+                var y1 = bounds.Min(x => x.Y1);
+                var x2 = bounds.Max(x => x.X2);
+                var y2 = bounds.Max(x => x.Y2);
+
+                width   = (x2 - x1) / 32.00f;
+                height  = (y2 - y1) / 32.00f;
+                centerX = (x1 + x2) / 2.0f /  32.00f + WorldResources.ModelOffsetX;
+                centerZ = (y1 + y2) / 2.0f / -32.00f + WorldResources.ModelOffsetZ + 64.00f;
+                groundY = (MPD_File?.MPDHeader?.GroundY ?? 0) / -32.0f;
+            }
+
+            return new CameraRefs { Width = width, Height = height, Center = new Vector3(centerX, groundY, centerZ) };
+        }
+
+        private void tsbCameraReset_Click(object sender, EventArgs e) {
+            var refs = CreateCameraRefs();
+            var size = Math.Max(refs.Width, refs.Height);
+            GLControl.ResetCamera(refs.Center + (0, size * 0.071f, 0), size * 2f);
+            GLControl.Invalidate();
+        }
+
+        private void tsbCameraTopView_Click(object sender, EventArgs e) {
+            var refs = CreateCameraRefs();
+            GLControl.Position = (refs.Center.X, Math.Max(refs.Width, refs.Height) * 2.75f + refs.Center.Y, refs.Center.Z);
+            GLControl.Pitch    = -90;
+            GLControl.Yaw      = 0;
+            GLControl.Invalidate();
+        }
+
+        private void tsbCameraLookAtCenter_Click(object sender, EventArgs e) {
+            var refs = CreateCameraRefs();
+            GLControl.LookAtTarget(refs.Center);
+            GLControl.Invalidate();
         }
 
         // TODO: This kinda works, but not completely! Improve, refine, and ship it!!!

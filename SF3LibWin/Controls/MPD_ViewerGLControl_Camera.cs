@@ -73,20 +73,21 @@ namespace SF3.Win.Controls {
             return new TargetAndDistance { Target = target, Distance = dist };
         }
 
-        private void SetInitialCameraPosition() {
-            if (!s_lastPosition.HasValue)
-                s_lastPosition = Position = new Vector3(0, 60, 120);
-            else
-                Position = s_lastPosition.Value;
+        public void ResetCamera()
+            => ResetCamera((0, 5, 0), 140.0f);
 
-            if (!s_lastPitch.HasValue || !s_lastYaw.HasValue) {
-                LookAtTarget(new Vector3(0, 5, 0));
-                s_lastPitch = Pitch;
-                s_lastYaw   = Yaw;
-            }
+        public void ResetCamera(Vector3 offset, float distance) {
+            Position = new Vector3(0.0f, 0.416f, 0.909f) * distance + offset;
+            LookAtTarget(offset);
+        }
+
+        private void SetInitialCameraPosition() {
+            if (!s_lastPosition.HasValue || !s_lastPitch.HasValue || !s_lastYaw.HasValue)
+                ResetCamera();
             else {
-                Pitch = s_lastPitch.Value;
-                Yaw   = s_lastYaw.Value;
+                Position = s_lastPosition.Value;
+                Pitch    = s_lastPitch.Value;
+                Yaw      = s_lastYaw.Value;
             }
         }
 
