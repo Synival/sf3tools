@@ -216,13 +216,13 @@ namespace SF3.Models.Structs.MPD {
             }
         }
 
-        [TableViewModelColumn(displayOrder: 0.20f, displayName: "Background Image Type")]
+        [TableViewModelColumn(displayOrder: 0.20f, displayName: "Background Image Type", minWidth: 100)]
         public BackgroundImageType BackgroundImageType {
             get => BackgroundImageTypeExtensions.FromMapFlags(MapFlags);
             set => MapFlags = (ushort) ((MapFlags & ~BackgroundImageTypeExtensions.ApplicableMapFlags) | value.ToMapFlags());
         }
 
-        [TableViewModelColumn(displayOrder: 0.21f, displayName: "Ground Image Type")]
+        [TableViewModelColumn(displayOrder: 0.21f, displayName: "Ground Image Type", minWidth: 100)]
         public GroundImageType GroundImageType {
             get => GroundImageTypeExtensions.FromMapFlags(MapFlags);
             set => MapFlags = (ushort) ((MapFlags & ~GroundImageTypeExtensions.ApplicableMapFlags) | value.ToMapFlags());
