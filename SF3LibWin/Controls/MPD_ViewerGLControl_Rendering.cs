@@ -471,19 +471,18 @@ namespace SF3.Win.Controls {
 
             if (DrawWireframe) {
                 GL.PolygonMode(MaterialFace.FrontAndBack, PolygonMode.Line);
-                GL.DepthFunc(DepthFunction.Lequal);
+                GL.Enable(EnableCap.PolygonOffsetLine);
+                GL.PolygonOffset(-1.0f, -1.0f);
 
                 using (_world.WireframeShader.Use())
                 using (_world.TileWireframeTexture.Use(TextureUnit.Texture1)) {
-                    UpdateShaderModelMatrix(_world.WireframeShader, Matrix4.CreateTranslation(0f, 0.02f, 0f));
                     foreach (var block in _surfaceModel.Blocks) {
                         block.UntexturedModel?.Draw(_world.WireframeShader, null);
                         block.Model?.Draw(_world.WireframeShader, null);
                     }
-                    UpdateShaderModelMatrix(_world.WireframeShader, Matrix4.Identity);
                 }
 
-                GL.DepthFunc(DepthFunction.Less);
+                GL.Disable(EnableCap.PolygonOffsetLine);
                 GL.PolygonMode(MaterialFace.FrontAndBack, PolygonMode.Fill);
             }
 
