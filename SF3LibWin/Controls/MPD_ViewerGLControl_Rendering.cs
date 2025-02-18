@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.Drawing.Imaging;
@@ -182,6 +183,9 @@ namespace SF3.Win.Controls {
         }
 
         public void UpdateModels() {
+            _normalMatricesByModel.Clear();
+            _modelMatricesByModel.Clear();
+
             MakeCurrent();
             _models?.Update(MPD_File);
             _surfaceModel?.Update(MPD_File);
@@ -580,42 +584,63 @@ namespace SF3.Win.Controls {
 #endif
         }
 
+        private Dictionary<Model, Matrix4?> _modelMatricesByModel = [];
+        private Dictionary<Model, Matrix3?> _normalMatricesByModel = [];
+
+        private void InvalidateSpriteMatrices() {
+            if (_models?.Models == null)
+                return;
+            var spriteModels = _models.Models.Where(x => x.AlwaysFacesCamera).ToList();
+            foreach (var sm in spriteModels) {
+                _modelMatricesByModel.Remove(sm);
+                _normalMatricesByModel.Remove(sm);
+            }
+        }
+
         private void SetModelAndNormalMatricesForModel(Model model, Shader shader) {
-            var angleXAdjust = 0.00f;
-            var angleYAdjust = model.AlwaysFacesCamera ? (float) ((Yaw + 180.0f) / 180.0f * Math.PI) : 0.00f;
+            var modelMatrix = _modelMatricesByModel.TryGetValue(model, out var modelMatrixValue) ? modelMatrixValue : null;
+            if (!modelMatrix.HasValue) {
+                var angleXAdjust = 0.00f;
+                var angleYAdjust = model.AlwaysFacesCamera ? (float) ((Yaw + 180.0f) / 180.0f * Math.PI) : 0.00f;
 
-            var yAdjust = 0.00f;
-            var prePostAdjustY = 0.00f;
+                var yAdjust = 0.00f;
+                var prePostAdjustY = 0.00f;
 
-            if (model.AlwaysFacesCamera && RotateSpritesUp) {
-                // Not all sprites rotate around the X axis the same way, so get the center X to help with offsets.
-                var pdata    = MPD_File.ModelCollections[0].PDatasByMemoryAddress.TryGetValue(model.PData1, out var pdataValue) ? pdataValue : null;
-                var vertices = (pdata == null) ? null : MPD_File.ModelCollections[0].VertexTablesByMemoryAddress.TryGetValue(pdata.VerticesOffset, out var verticesValue) ? verticesValue : null;
+                if (model.AlwaysFacesCamera && RotateSpritesUp) {
+                    // Not all sprites rotate around the X axis the same way, so get the center X to help with offsets.
+                    var pdata    = MPD_File.ModelCollections[0].PDatasByMemoryAddress.TryGetValue(model.PData1, out var pdataValue) ? pdataValue : null;
+                    var vertices = (pdata == null) ? null : MPD_File.ModelCollections[0].VertexTablesByMemoryAddress.TryGetValue(pdata.VerticesOffset, out var verticesValue) ? verticesValue : null;
 
-                var topY     = vertices?.Min(x => Math.Min(x.Vector.Y.Float, x.Vector.Z.Float)) / 32.0f ?? 0.00f;
-                var bottomY  = vertices?.Max(x => Math.Max(x.Vector.Y.Float, x.Vector.Z.Float)) / 32.0f ?? 0.00f;
-                var centerY  = (topY + bottomY) * 0.5f;
+                    var topY     = vertices?.Min(x => Math.Min(x.Vector.Y.Float, x.Vector.Z.Float)) / 32.0f ?? 0.00f;
+                    var bottomY  = vertices?.Max(x => Math.Max(x.Vector.Y.Float, x.Vector.Z.Float)) / 32.0f ?? 0.00f;
+                    var centerY  = (topY + bottomY) * 0.5f;
 
-                angleXAdjust = (float) (Pitch / 180.0f * Math.PI) * -1.00f;
-                prePostAdjustY = centerY;
+                    angleXAdjust = (float) (Pitch / 180.0f * Math.PI) * -1.00f;
+                    prePostAdjustY = centerY;
+                }
+
+                modelMatrix =
+                    Matrix4.CreateScale(model.ScaleX, model.ScaleY, model.ScaleZ) *
+                    Matrix4.CreateRotationX(model.AngleX * (float) Math.PI * -2.00f) *
+                    Matrix4.CreateTranslation(0, prePostAdjustY, 0) *
+                    Matrix4.CreateRotationX(angleXAdjust) *
+                    Matrix4.CreateRotationY(model.AngleY * (float) Math.PI * -2.00f + angleYAdjust) *
+                    Matrix4.CreateRotationZ(model.AngleZ * (float) Math.PI * 2.00f) *
+                    Matrix4.CreateTranslation(model.PositionX / -32.0f - 32.0f, model.PositionY / -32.0f - prePostAdjustY + yAdjust, model.PositionZ / 32.0f + 32.0f);
+
+                _modelMatricesByModel[model] = modelMatrix.Value;
             }
 
-            // TODO: This can be cached!!
-            var modelMatrix =
-                Matrix4.CreateScale(model.ScaleX, model.ScaleY, model.ScaleZ) *
-                Matrix4.CreateRotationX(model.AngleX * (float) Math.PI * -2.00f) *
-                Matrix4.CreateTranslation(0, prePostAdjustY, 0) *
-                Matrix4.CreateRotationX(angleXAdjust) *
-                Matrix4.CreateRotationY(model.AngleY * (float) Math.PI * -2.00f + angleYAdjust) *
-                Matrix4.CreateRotationZ(model.AngleZ * (float) Math.PI * 2.00f) *
-                Matrix4.CreateTranslation(model.PositionX / -32.0f - 32.0f, model.PositionY / -32.0f - prePostAdjustY + yAdjust, model.PositionZ / 32.0f + 32.0f);
+            var normalMatrix = _normalMatricesByModel.TryGetValue(model, out var normalMatrixValue) ? normalMatrixValue : null;
+            if (!normalMatrix.HasValue) {
+                normalMatrix = new Matrix3(modelMatrix.Value).Inverted();
+                normalMatrix.Value.Transpose();
 
-            // TODO: This can be cached!!
-            var normalMatrix = new Matrix3(modelMatrix).Inverted();
-            normalMatrix.Transpose();
+                _normalMatricesByModel[model] = normalMatrix.Value;
+            }
 
-            UpdateShaderModelMatrix(shader, modelMatrix);
-            UpdateShaderNormalMatrix(shader, normalMatrix);
+            UpdateShaderModelMatrix(shader, modelMatrix.Value);
+            UpdateShaderNormalMatrix(shader, normalMatrix.Value);
         }
 
         private void DrawSelectionScene() {
@@ -661,14 +686,16 @@ namespace SF3.Win.Controls {
             }
         }
 
-        private void UpdateAppState(string propertyName, bool value) {
+        private bool UpdateAppState(string propertyName, bool value) {
             var property = AppState.GetType().GetProperty(propertyName);
             if (property == null || (bool) property.GetValue(AppState, null) == value)
-                return;
+                return false;
 
             property.SetValue(AppState, value);
             AppState.Serialize();
             Invalidate();
+
+            return true;
         }
 
         [Browsable(false)]
@@ -752,7 +779,10 @@ namespace SF3.Win.Controls {
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public bool RotateSpritesUp {
             get => AppState.ViewerRotateSpritesUp;
-            set => UpdateAppState(nameof(AppState.ViewerRotateSpritesUp), value);
+            set {
+                if (UpdateAppState(nameof(AppState.ViewerRotateSpritesUp), value))
+                    InvalidateSpriteMatrices();
+            }
         }
 
         [Browsable(false)]
