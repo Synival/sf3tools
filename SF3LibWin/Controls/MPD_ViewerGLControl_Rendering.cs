@@ -380,30 +380,6 @@ namespace SF3.Win.Controls {
                 var terrainTypesTexture = DrawTerrainTypes ? _surfaceModel.TerrainTypesTexture : _world.TransparentBlackTexture;
                 var eventIdsTexture     = DrawEventIDs     ? _surfaceModel.EventIDsTexture     : _world.TransparentBlackTexture;
 
-                if (_surfaceModel?.Blocks?.Length > 0) {
-                    GL.Enable(EnableCap.PolygonOffsetFill);
-                    GL.PolygonOffset(-0.5f, -0.5f);
-
-                    if (useFancyOutdoorSurfaceLighting)
-                        UpdateShaderLighting(true);
-
-                    using (terrainTypesTexture.Use(MPD_TextureUnit.TextureTerrainTypes))
-                    using (eventIdsTexture.Use(MPD_TextureUnit.TextureEventIDs))
-                    using (lightingTexture.Use(MPD_TextureUnit.TextureLighting))
-                    using (_world.ObjectShader.Use()) {
-                        foreach (var block in _surfaceModel.Blocks) {
-                            block.Model?.Draw(_world.ObjectShader);
-                            using (_world.TransparentBlackTexture.Use(MPD_TextureUnit.TextureAtlas))
-                                block.UntexturedModel?.Draw(_world.ObjectShader, null);
-                        }
-                    }
-
-                    if (useFancyOutdoorSurfaceLighting)
-                        UpdateShaderLighting(false);
-
-                    GL.Disable(EnableCap.PolygonOffsetFill);
-                }
-
                 if (_models?.Models != null) {
                     using (_world.TransparentBlackTexture.Use(MPD_TextureUnit.TextureTerrainTypes))
                     using (_world.TransparentBlackTexture.Use(MPD_TextureUnit.TextureEventIDs))
@@ -454,6 +430,30 @@ namespace SF3.Win.Controls {
                     UpdateShaderNormalMatrix(_world.ObjectShader, Matrix3.Identity);
                 }
 
+                if (_surfaceModel?.Blocks?.Length > 0) {
+                    GL.Enable(EnableCap.PolygonOffsetFill);
+                    GL.PolygonOffset(-1.0f, -1.0f);
+
+                    if (useFancyOutdoorSurfaceLighting)
+                        UpdateShaderLighting(true);
+
+                    using (terrainTypesTexture.Use(MPD_TextureUnit.TextureTerrainTypes))
+                    using (eventIdsTexture.Use(MPD_TextureUnit.TextureEventIDs))
+                    using (lightingTexture.Use(MPD_TextureUnit.TextureLighting))
+                    using (_world.ObjectShader.Use()) {
+                        foreach (var block in _surfaceModel.Blocks) {
+                            block.Model?.Draw(_world.ObjectShader);
+                            using (_world.TransparentBlackTexture.Use(MPD_TextureUnit.TextureAtlas))
+                                block.UntexturedModel?.Draw(_world.ObjectShader, null);
+                        }
+                    }
+
+                    if (useFancyOutdoorSurfaceLighting)
+                        UpdateShaderLighting(false);
+
+                    GL.Disable(EnableCap.PolygonOffsetFill);
+                }
+
                 if (_gradients?.ModelsGradientModel != null) {
                     GL.Disable(EnableCap.DepthTest);
                     GL.DepthMask(false);
@@ -472,12 +472,11 @@ namespace SF3.Win.Controls {
 
                 GL.Disable(EnableCap.StencilTest);
             }
-            GL.Disable(EnableCap.CullFace);
 
             if (DrawWireframe) {
                 GL.PolygonMode(MaterialFace.FrontAndBack, PolygonMode.Line);
                 GL.Enable(EnableCap.PolygonOffsetLine);
-                GL.PolygonOffset(-1.0f, -1.0f);
+                GL.PolygonOffset(-2.0f, -2.0f);
 
                 using (_world.WireframeShader.Use())
                 using (_world.TileWireframeTexture.Use(TextureUnit.Texture1)) {
@@ -502,6 +501,7 @@ namespace SF3.Win.Controls {
                 GL.Disable(EnableCap.PolygonOffsetLine);
                 GL.PolygonMode(MaterialFace.FrontAndBack, PolygonMode.Fill);
             }
+            GL.Disable(EnableCap.CullFace);
 
             if (DrawBoundaries) {
                 if (_surfaceModel.CameraBoundaryModel != null || _surfaceModel.BattleBoundaryModel != null) {
