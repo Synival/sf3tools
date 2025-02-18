@@ -77,11 +77,28 @@ namespace SF3.Win.Controls {
             _drawEventIds     = state.ViewerDrawEventIDs;
         }
 
+        private long _startTimeInMs = 0;
+        private long _lastTimeInMs = 0;
+        private float _lastDeltaInMs = 0.0f;
+
         private void IncrementFrame() {
             if (!Visible)
                 return;
-            _frame = (_frame + 1) % 3600;
-            FrameTick?.Invoke(this, EventArgs.Empty);
+
+            var now = DateTimeOffset.Now.ToUnixTimeMilliseconds() - _startTimeInMs;
+            if (_startTimeInMs == 0) {
+                _startTimeInMs = now;
+                _lastTimeInMs = 0;
+                now = 0;
+                _lastDeltaInMs = now - _lastDeltaInMs;
+            }
+
+            // Frame delta is an average of this frame and the last to reduce some jittering.
+            var deltaInMs = now - _lastTimeInMs;
+            FrameTick?.Invoke(this, (_lastDeltaInMs + deltaInMs) / 2);
+
+            _lastTimeInMs = now;
+            _lastDeltaInMs = deltaInMs;
         }
 
         private void OnTileModified(object sender, EventArgs e)
@@ -125,11 +142,10 @@ namespace SF3.Win.Controls {
 
         public event EventHandler RightDoubleClick;
         public event EventHandler MiddleDoubleClick;
-        public event EventHandler FrameTick;
+        public event FrameTickEventHandler FrameTick;
         public event CmdKeyEventHandler CmdKey;
         public event EventHandler TileModified;
 
-        private int _frame = 0;
         private Timer _timer = null;
     }
 }

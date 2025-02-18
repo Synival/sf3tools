@@ -11,7 +11,7 @@ namespace SF3.Win.Controls {
             KeyUp             += (s, e) => OnKeyUpKeyboardControls(e);
             CmdKey            += (object s, ref Message msg, Keys k, ref bool wp) => OnCmdKeyKeyboardControls(k, ref wp);
             LostFocus         += (s, e) => OnLostFocusKeyboardControls();
-            FrameTick         += (s, e) => OnFrameTickKeyboardControls();
+            FrameTick         += (s, deltaInMs) => OnFrameTickKeyboardControls(deltaInMs);
         }
 
         private void OnKeyDownKeyboardControls(KeyEventArgs e) {
@@ -78,7 +78,7 @@ namespace SF3.Win.Controls {
             _keysPressed.Clear();
         }
 
-        private void OnFrameTickKeyboardControls() {
+        private void OnFrameTickKeyboardControls(float deltaInMs) {
             var keysDown = _keysPressed.Where(x => x.Value == true).Select(x => x.Key).ToHashSet();
 
             var moveUpKey    = keysDown.Contains(Keys.Subtract) || keysDown.Contains(Keys.R);
@@ -91,12 +91,14 @@ namespace SF3.Win.Controls {
             int moveZ = (keysDown.Contains(Keys.W) ? -1 : 0) + (keysDown.Contains(Keys.S) ? 1 : 0);
 
             var shiftFactor = GetShiftFactor();
+            const float c_expectedDelta = 1000.00f / 60.0f;
+            var rate = shiftFactor * (deltaInMs / c_expectedDelta);
 
             if (moveX != 0 || moveY != 0 || moveZ != 0) {
                 var move = new Vector3(moveX, moveY * 0.5f, moveZ * 2.5f)
                     * Matrix3.CreateRotationX(MathHelper.DegreesToRadians(Pitch))
                     * Matrix3.CreateRotationY(MathHelper.DegreesToRadians(Yaw));
-                Position += move * 0.25f * shiftFactor;
+                Position += move * 0.25f * rate;
                 Invalidate();
             }
 
@@ -105,7 +107,7 @@ namespace SF3.Win.Controls {
 
             int rotateYaw = (rotateLeftKey ? 1 : 0) + (rotateRightKey ? -1 : 0);
             if (rotateYaw != 0) {
-                Yaw += rotateYaw * 1.0f * shiftFactor;
+                Yaw += rotateYaw * 1.0f * rate;
                 Invalidate();
             }
 
@@ -115,7 +117,7 @@ namespace SF3.Win.Controls {
             int rotatePitch = (rotateUpKey ? -1 : 0) + (rotateDownKey ? 1 : 0);
             if (rotatePitch != 0) {
                 var oldPitch = Pitch;
-                Pitch += rotatePitch * 0.5f * shiftFactor;
+                Pitch += rotatePitch * 0.5f * rate;
                 if (oldPitch != Pitch)
                     Invalidate();
             }
@@ -123,23 +125,23 @@ namespace SF3.Win.Controls {
             // Keys to adjust lighting
             if (MPD_File?.LightPosition != null) {
                 if (keysDown.Contains(Keys.Oemcomma)) {
-                    MPD_File.LightPosition.Pitch -= (ushort) (0x080 * shiftFactor);
+                    MPD_File.LightPosition.Pitch -= (ushort) (0x080 * rate);
                     UpdateShaderLighting();
                     Invalidate();
                 }
                 else if (keysDown.Contains(Keys.OemPeriod)) {
-                    MPD_File.LightPosition.Pitch += (ushort) (0x080 * shiftFactor);
+                    MPD_File.LightPosition.Pitch += (ushort) (0x080 * rate);
                     UpdateShaderLighting();
                     Invalidate();
                 }
 
                 if (keysDown.Contains(Keys.OemOpenBrackets)) {
-                    MPD_File.LightPosition.Yaw -= (ushort) (0x080 * shiftFactor);
+                    MPD_File.LightPosition.Yaw -= (ushort) (0x080 * rate);
                     UpdateShaderLighting();
                     Invalidate();
                 }
                 else if (keysDown.Contains(Keys.OemCloseBrackets)) {
-                    MPD_File.LightPosition.Yaw += (ushort) (0x080 * shiftFactor);
+                    MPD_File.LightPosition.Yaw += (ushort) (0x080 * rate);
                     UpdateShaderLighting();
                     Invalidate();
                 }

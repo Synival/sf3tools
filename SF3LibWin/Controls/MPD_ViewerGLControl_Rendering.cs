@@ -19,7 +19,7 @@ namespace SF3.Win.Controls {
             Disposed  += (s, e) => OnDisposeRendering();
             Resize    += (s, e) => OnResizeRendering();
             Paint     += (s, e) => OnPaintRendering();
-            FrameTick += (s, e) => OnFrameTickRendering();
+            FrameTick += (s, deltaInMs) => OnFrameTickRendering(deltaInMs);
             TileModified += (s, e) => OnTileModifiedRendering(s);
         }
 
@@ -167,8 +167,8 @@ namespace SF3.Win.Controls {
             SwapBuffers();
         }
 
-        private void OnFrameTickRendering() {
-            UpdateAnimatedTextures();
+        private void OnFrameTickRendering(float deltaInMs) {
+            UpdateAnimatedTextures(deltaInMs);
         }
 
         private void OnTileModifiedRendering(object sender) {
@@ -599,21 +599,13 @@ namespace SF3.Win.Controls {
                         block.SelectionModel.Draw(_world.SolidShader);
         }
 
-        private long _startTimeInMs = 0;
-        private long _lastTimeInMs = 0;
         private float _frameDeltaTimeInMs = 0;
 
-        private void UpdateAnimatedTextures() {
-            var now = DateTimeOffset.Now.ToUnixTimeMilliseconds() - _startTimeInMs;
-            if (_startTimeInMs == 0) {
-                _startTimeInMs = now;
-                _lastTimeInMs = 0;
-                now = 0;
-            }
+        private void UpdateAnimatedTextures(float deltaInMs) {
 
             const float c_frameDurationInMs = (1000.0f / 30.0f);
 
-            _frameDeltaTimeInMs += (now - _lastTimeInMs);
+            _frameDeltaTimeInMs += deltaInMs;
             if (_frameDeltaTimeInMs >= c_frameDurationInMs) {
                 while (_frameDeltaTimeInMs >= c_frameDurationInMs)
                     _frameDeltaTimeInMs -= c_frameDurationInMs;
@@ -629,8 +621,6 @@ namespace SF3.Win.Controls {
                             if (model.UpdateAnimatedTextures() == true)
                                 Invalidate();
             }
-
-            _lastTimeInMs = now;
         }
 
         private static bool _drawWireframe = true;
