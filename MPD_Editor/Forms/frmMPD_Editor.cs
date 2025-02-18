@@ -63,6 +63,9 @@ namespace SF3.MPD_Editor.Forms {
                 }
             }
 
+            // TODO: re-enable these features once they're working properly...
+            tsmiChunks.Visible = false;
+
             FileIsLoadedChanged += (s, e) => {
                 tsmiChunks_ExportChunk.Enabled = IsLoaded;
                 tsmiChunks_ImportChunk.Enabled = IsLoaded;
