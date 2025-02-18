@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Drawing;
+using System.Linq;
+using System.Reflection;
 using System.Windows.Forms;
 using BrightIdeasSoftware;
 using CommonLib.NamedValues;
+using CommonLib.ViewModels;
 using SF3.Win.Extensions;
 using static CommonLib.Extensions.TypeExtensions;
 
@@ -30,6 +32,19 @@ namespace SF3.Win.Views {
                 _timer.Interval = 100;
                 _timer.Tick += CheckForVisibility;
                 _timer.Start();
+            }
+
+            public override void EditSubItem(OLVListItem item, int subItemIndex) {
+                // Make sure we can't edit the actual value, not just the column.
+                if (item == null || ((ModelProperty) item.RowObject).IsReadOnly)
+                    return;
+                base.EditSubItem(item, subItemIndex);
+            }
+
+            public override void Sort(OLVColumn columnToSort, SortOrder order) {
+                // Prevent sorting of "Value" column (it crashes at the moment).
+                if (columnToSort?.AspectName != "Value")
+                    base.Sort(columnToSort, order);
             }
 
             protected override void OnVisibleChanged(EventArgs e) {
@@ -83,32 +98,46 @@ namespace SF3.Win.Views {
         private ObjectListView GetOLV() {
             var olv = PopCachedOLV();
             if (olv == null) {
-                var vm = ModelType.GetTableViewModel();
-
                 var lvcColumns = new List<OLVColumn>();
-                Font hexFont = null;
+                var lvcNameBase = "lvcModelView" + s_controlIndex;
 
-                var lvcNameBase = "lvcTableView" + s_controlIndex;
+                // "Name" column
+                {
+                    var lvc = new OLVColumn(lvcNameBase + "Name", "Name");
+                    lvc.IsEditable = false;
+                    lvc.Text       = "Name";
 
-                foreach (var kv in vm.Properties) {
-                    var prop = kv.Key;
-                    var attr = kv.Value;
+                    var maxWidth = Math.Max(30, TextRenderer.MeasureText(lvc.Text, lvc.HeaderFont).Width + 8);
+                    foreach (var mp in _modelProperties)
+                        maxWidth = Math.Max(maxWidth, TextRenderer.MeasureText(mp.Name, lvc.HeaderFont).Width + 8);
+                    lvc.Width = (int) (maxWidth * 0.80);
 
-                    var lvc = new OLVColumn(lvcNameBase + prop.Name, prop.Name);
-                    if (hexFont == null)
-                        hexFont = new Font("Courier New", Control.DefaultFont.Size);
+                    lvcColumns.Add(lvc);
+                }
 
-                    lvc.IsEditable = !attr.IsReadOnly && prop.GetSetMethod() != null;
-                    lvc.Text = attr.DisplayName ?? prop.Name;
+                // "Is Read-Only" column
+                {
+                    var lvc = new OLVColumn(lvcNameBase + "IsReadOnly", "IsReadOnly");
+                    lvc.IsEditable = false;
+                    lvc.Text       = "Is Read-Only";
+                    lvcColumns.Add(lvc);
+                }
 
-                    if (attr.DisplayFormat != null && attr.DisplayFormat != string.Empty)
-                        lvc.AspectToStringFormat = "{0:" + attr.DisplayFormat + "}";
-                    else if (attr.IsPointer)
-                        lvc.AspectToStringFormat = "{0:X6}";
-                    else
-                        lvc.AspectToStringFormat = "";
+                // "Value" column
+                {
+                    var lvc = new OLVColumn(lvcNameBase + "Value", "Value");
+                    lvc.IsEditable = true;
+                    lvc.Text       = "Value";
+                    lvc.Width      = _modelProperties.Max(x => x.Width);
 
-                    lvc.Width = Math.Max(30, attr.MinWidth);
+                    // AspectToStringFormat is used after fetching fetching the aspect with AspectGetter().
+                    // We can take advantage of that by setting the AspectToStringFormat for the specific value.
+                    // (It would be nice if there was a string converter that took the actual row object, not just the value.)
+                    lvc.AspectGetter = (row) => {
+                        lvc.AspectToStringFormat = ((ModelProperty) row).AspectToStringFormat;
+                        return lvc.GetAspectByName(row);
+                    };
+
                     lvcColumns.Add(lvc);
                 }
 
@@ -122,7 +151,7 @@ namespace SF3.Win.Views {
                 olv.HasCollapsibleGroups = false;
                 olv.HideSelection = false;
                 olv.MenuLabelGroupBy = "";
-                olv.Name = "olvTableView" + (s_controlIndex++);
+                olv.Name = "olvModelView" + (s_controlIndex++);
                 olv.ShowGroups = false;
                 olv.TabIndex = 1;
                 olv.UseAlternatingBackColors = true;
@@ -138,7 +167,7 @@ namespace SF3.Win.Views {
 
             try {
                 if (Model != null)
-                    olv.AddObject(Model);
+                    olv.AddObjects(_modelProperties);
             }
             catch {
                 olv.ClearObjects();
@@ -182,20 +211,64 @@ namespace SF3.Win.Views {
             OLVControl.RefreshAllItems();
         }
 
+        /// <summary>
+        /// Item row representing an individual property with its own view model.
+        /// </summary>
+        private class ModelProperty {
+            public ModelProperty(object model, PropertyInfo propertyInfo, TableViewModelColumn vmColumn) {
+                Model                = model;
+                PropertyInfo         = propertyInfo;
+                VMColumn             = vmColumn;
+                IsReadOnly           = !vmColumn.GetColumnIsEditable(propertyInfo);
+                Name                 = vmColumn.GetColumnText(propertyInfo);
+                AspectToStringFormat = vmColumn.GetColumnAspectToStringFormat(propertyInfo);
+                Width                = vmColumn.GetColumnWidth();
+            }
+
+            public object Model { get; }
+            public PropertyInfo PropertyInfo { get; }
+            public TableViewModelColumn VMColumn { get; }
+
+            public bool IsReadOnly { get; }
+            public string Name { get; }
+            public string AspectToStringFormat { get; }
+            public int Width { get; }
+
+            public object Value {
+                get => PropertyInfo.GetValue(Model, null);
+                set {
+                    if (!IsReadOnly)
+                        PropertyInfo.SetValue(Model, value);
+                }
+            }
+        };
+
         private object _model = null;
 
         public object Model {
             get => _model;
             set {
+                _modelProperties = null;
+
+                // Update the property list when a new model is selected.
+                if (value != null) {
+                    var vm = value.GetType().GetTableViewModel();
+                    _modelProperties = vm.Properties
+                        .Where(x => x.Value.DisplayOrder >= 0 || x.Key.Name == "Address")
+                        .Select(x => new ModelProperty(value, x.Key, x.Value)).ToList();
+                }
+
                 if (IsCreated) {
                     if (_model != null)
                         OLVControl.ClearObjects();
                     if (value != null)
-                        OLVControl.AddObject(_model);
+                        OLVControl.AddObject(_modelProperties);
                 }
                 _model = value;
             }
         }
+
+        private List<ModelProperty> _modelProperties;
 
         public Type ModelType { get; }
         public INameGetterContext NameGetterContext { get; }
