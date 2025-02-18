@@ -74,7 +74,7 @@ namespace SF3.Win.OpenGL.MPD_File {
         private void CreateGroundImageModel(IMPD_File mpdFile, ITexture texture, float size) {
             Texture = new Texture(texture.CreateBitmapARGB8888(), clampToEdge: false);
 
-            var header = mpdFile.MPDHeader[0];
+            var header = mpdFile.MPDHeader;
 
             var position = new Vector3(
                 header.GroundX / 32.0f,

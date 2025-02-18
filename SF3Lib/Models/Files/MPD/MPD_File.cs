@@ -91,7 +91,7 @@ namespace SF3.Models.Files.MPD {
             var areAnimatedTextures32Bit = Scenario >= ScenarioType.Scenario3;
 
             // Load root headers
-            var header = MakeHeaderTable()[0];
+            var header = MakeHeader();
             var headerTables = MakeHeaderTables(header, areAnimatedTextures32Bit);
 
             // Load chunks
@@ -104,7 +104,6 @@ namespace SF3.Models.Files.MPD {
 
             // Build a list of all data tables.
             var tables = new List<ITable>() {
-                MPDHeader,
                 ChunkHeader,
             };
             tables.AddRange(headerTables);
@@ -114,11 +113,10 @@ namespace SF3.Models.Files.MPD {
             return tables;
         }
 
-        private MPDHeaderTable MakeHeaderTable() {
+        private MPDHeaderModel MakeHeader() {
             var headerAddrPtr = Data.GetDouble(0x0000) - c_RamOffset;
             var headerAddr = Data.GetDouble(headerAddrPtr) - c_RamOffset;
-            MPDHeader = MPDHeaderTable.Create(Data, "MPDHeader", headerAddr, Scenario);
-            return MPDHeader;
+            return (MPDHeader = new MPDHeaderModel(Data, 0, "MPDHeader", headerAddr, Scenario));
         }
 
         private ITable[] MakeHeaderTables(MPDHeaderModel header, bool areAnimatedTextures32Bit) {
@@ -159,13 +157,13 @@ namespace SF3.Models.Files.MPD {
             if (header.OffsetLightPalette != 0)
                 tables.Add(LightPalette = ColorTable.Create(Data, "LightPalette", header.OffsetLightPalette - c_RamOffset, 32));
             if (header.OffsetLightPosition != 0)
-                tables.Add(LightPositionTable = LightPositionTable.Create(Data, "LightPositions", header.OffsetLightPosition - c_RamOffset));
+                LightPosition = new LightPosition(Data, 0, "LightPositions", header.OffsetLightPosition - c_RamOffset);
             if (header.OffsetLightAdjustment != 0)
-                tables.Add(LightAdjustmentTable = LightAdjustmentTable.Create(Data, "LightAdjustment", header.OffsetLightAdjustment - c_RamOffset, Scenario));
+                LightAdjustment = new LightAdjustmentModel(Data, 0, "LightAdjustment", header.OffsetLightAdjustment - c_RamOffset, Scenario);
 
             if (header.OffsetGradient != 0) {
                 if ((ushort) Data.GetWord(header.OffsetGradient - c_RamOffset) != 0xFFFF)
-                    tables.Add(GradientTable = GradientTable.Create(Data, "Gradient", header.OffsetGradient - c_RamOffset));
+                    Gradient = new GradientModel(Data, 0, "Gradient", header.OffsetGradient - c_RamOffset);
             }
 
             return tables.ToArray();
@@ -274,7 +272,7 @@ namespace SF3.Models.Files.MPD {
 
             // Repeating backgrounds
             var repeatingGroundChunks = new List<IChunkData>();
-            if (MPDHeader[0].GroundImageType == GroundImageType.Repeated) {
+            if (MPDHeader.GroundImageType == GroundImageType.Repeated) {
                 if (chunks[RepeatingGroundChunk1Index].Exists)
                     repeatingGroundChunks.Add(_ = MakeChunkData(RepeatingGroundChunk1Index, ChunkType.Palette1Image, CompressionType.Compressed));
                 if (chunks[RepeatingGroundChunk2Index].Exists)
@@ -285,7 +283,7 @@ namespace SF3.Models.Files.MPD {
             // Tiled ground images
             var tiledGroundTileChunks = new List<IChunkData>();
             var tiledGroundMapChunks = new List<IChunkData>();
-            if (MPDHeader[0].GroundImageType == GroundImageType.Tiled) {
+            if (MPDHeader.GroundImageType == GroundImageType.Tiled) {
                 if (chunks[TiledGroundTileChunk1Index].Exists)
                     tiledGroundTileChunks.Add(_ = MakeChunkData(TiledGroundTileChunk1Index, ChunkType.TiledGroundTiles, CompressionType.Compressed));
                 if (chunks[TiledGroundTileChunk2Index].Exists)
@@ -300,7 +298,7 @@ namespace SF3.Models.Files.MPD {
 
             // Sky boxes
             var skyBoxChunks = new List<IChunkData>();
-            if (MPDHeader[0].HasSkyBox) {
+            if (MPDHeader.HasSkyBox) {
                 if (chunks[SkyBoxChunk1Index].Exists)
                     skyBoxChunks.Add(_ = MakeChunkData(SkyBoxChunk1Index, ChunkType.Palette2Image, CompressionType.Compressed));
                 if (chunks[SkyBoxChunk2Index].Exists)
@@ -310,7 +308,7 @@ namespace SF3.Models.Files.MPD {
 
             // Background image
             var backgroundChunks = new List<IChunkData>();
-            if (MPDHeader[0].BackgroundImageType.HasFlag(BackgroundImageType.Still)) {
+            if (MPDHeader.BackgroundImageType.HasFlag(BackgroundImageType.Still)) {
                 if (chunks[BackgroundChunk1Index].Exists)
                     backgroundChunks.Add(_ = MakeChunkData(BackgroundChunk1Index, ChunkType.Palette1Image, CompressionType.Compressed));
                 if (chunks[BackgroundChunk2Index].Exists)
@@ -320,7 +318,7 @@ namespace SF3.Models.Files.MPD {
 
             // Foreground image tiles
             var foregroundTileChunks = new List<IChunkData>();
-            if (MPDHeader[0].BackgroundImageType.HasFlag(BackgroundImageType.Tiled)) {
+            if (MPDHeader.BackgroundImageType.HasFlag(BackgroundImageType.Tiled)) {
                 if (chunks[ForegroundTileChunk1Index].Exists)
                     foregroundTileChunks.Add(_ = MakeChunkData(ForegroundTileChunk1Index, ChunkType.ForegroundTiles, CompressionType.Compressed));
                 if (chunks[ForegroundTileChunk2Index].Exists)
@@ -434,7 +432,7 @@ namespace SF3.Models.Files.MPD {
         }
 
         private int[] GetModelsChunkIndices(ChunkHeader[] chunks) {
-            var header = MPDHeader[0];
+            var header = MPDHeader;
             var indices = new List<int>();
 
             if (chunks[20].Exists && header.Chunk20IsModels)
@@ -447,14 +445,14 @@ namespace SF3.Models.Files.MPD {
                     throw new InvalidOperationException("Models found in both Chunk[1] and Chunk[20]");
             }
 
-            if (chunks[19].Exists && MPDHeader[0].HasChunk19Model)
+            if (chunks[19].Exists && MPDHeader.HasChunk19Model)
                 indices.Add(19);
 
             return indices.ToArray();
         }
 
         private int? GetSurfaceModelChunkIndex(ChunkHeader[] chunks) {
-            var header = MPDHeader[0];
+            var header = MPDHeader;
 
             if (!header.HasSurfaceModel)
                 return null;
@@ -474,7 +472,7 @@ namespace SF3.Models.Files.MPD {
 
         private ITable[] MakeChunkTables(ChunkHeader[] chunkHeaders, IChunkData[] chunkDatas, IChunkData[] modelsChunks, IChunkData surfaceModelChunk) {
             TextureCollectionType TextureCollectionForChunkIndex(int chunkIndex) {
-                if (chunkIndex == 10 && MPDHeader[0].HasChunk19Model)
+                if (chunkIndex == 10 && MPDHeader.HasChunk19Model)
                     return TextureCollectionType.Chunk19ModelTextures;
 
                 if (chunkIndex >= PrimaryTextureChunksFirstIndex && chunkIndex <= PrimaryTextureChunksLastIndex)
@@ -497,7 +495,7 @@ namespace SF3.Models.Files.MPD {
 
             var modelsList = new List<ModelCollection>();
             foreach (var mc in modelsChunks) {
-                var texCollection = (mc.Index == 19 && MPDHeader[0].HasChunk19Model)
+                var texCollection = (mc.Index == 19 && MPDHeader.HasChunk19Model)
                     ? TextureCollectionType.Chunk19ModelTextures
                     : (chunkDatas[21] != null && mc.Index == 1) ? TextureCollectionType.Chunk1ModelTextures
                     : TextureCollectionType.PrimaryTextures;
@@ -593,7 +591,7 @@ namespace SF3.Models.Files.MPD {
             // Add some images.
             if (RepeatingGroundChunks?.Any() == true) {
                 try {
-                    var lat = LightAdjustmentTable?[0];
+                    var lat = LightAdjustment;
                     var palette = CreatePalette(0, lat?.GroundRAdjustment ?? 0, lat?.GroundGAdjustment ?? 0, lat?.GroundBAdjustment ?? 0);
                     RepeatingGroundImage = new MultiChunkTextureIndexed(RepeatingGroundChunks.Select(x => x.DecompressedData).ToArray(), TexturePixelFormat.Palette1, palette);
                 }
@@ -603,7 +601,7 @@ namespace SF3.Models.Files.MPD {
             }
 
             if (TiledGroundTileChunks?.Any() == true && TiledGroundMapChunks?.Any() == true) {
-                var lat = LightAdjustmentTable?[0];
+                var lat = LightAdjustment;
                 var palette = CreatePalette(0, lat?.GroundRAdjustment ?? 0, lat?.GroundGAdjustment ?? 0, lat?.GroundBAdjustment ?? 0);
                 TiledGroundTileImage = new MultiChunkTextureIndexed(TiledGroundTileChunks.Select(x => x.DecompressedData).ToArray(), TexturePixelFormat.Palette1, palette, true);
 
@@ -1076,7 +1074,7 @@ namespace SF3.Models.Files.MPD {
         public IChunkData SurfaceChunkData => (SurfaceModelChunkIndex.HasValue) ? ChunkData[SurfaceModelChunkIndex.Value] : null;
 
         [BulkCopyRecurse]
-        public MPDHeaderTable MPDHeader { get; private set; }
+        public MPDHeaderModel MPDHeader { get; private set; }
 
         [BulkCopyRecurse]
         public ChunkHeaderTable ChunkHeader { get; private set; }
@@ -1085,13 +1083,13 @@ namespace SF3.Models.Files.MPD {
         public ColorTable LightPalette { get; private set; }
 
         [BulkCopyRecurse]
-        public LightPositionTable LightPositionTable { get; private set; }
+        public LightPosition LightPosition { get; private set; }
 
         [BulkCopyRecurse]
         public UnknownUInt16Table Unknown1Table { get; private set; }
 
         [BulkCopyRecurse]
-        public LightAdjustmentTable LightAdjustmentTable { get; private set; }
+        public LightAdjustmentModel LightAdjustment { get; private set; }
 
         [BulkCopyRecurse]
         public ModelSwitchGroupsTable ModelSwitchGroupsTable { get; private set; }
@@ -1115,7 +1113,7 @@ namespace SF3.Models.Files.MPD {
         public UnknownUInt16Table Unknown2Table { get; private set; }
 
         [BulkCopyRecurse]
-        public GradientTable GradientTable { get; private set; }
+        public GradientModel Gradient { get; private set; }
 
         public List<Chunk3Frame> Chunk3Frames { get; private set; }
 

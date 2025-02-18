@@ -79,7 +79,7 @@ namespace SF3.Win.OpenGL.MPD_File {
                 var bcX2 =  0.0f + battle.X2 / 32.00f + WorldResources.ModelOffsetX;
                 var bcY2 = 64.0f - battle.Y2 / 32.00f + WorldResources.ModelOffsetZ;
 
-                var height = mpdFile.MPDHeader[0].GroundY / -32.0f;
+                var height = mpdFile.MPDHeader.GroundY / -32.0f;
                 var cameraQuads = new Quad[] {
                     new Quad([
                         new Vector3(ccX1, height, ccY1),

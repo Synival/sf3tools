@@ -89,9 +89,9 @@ namespace MPD_Analyzer {
                     // Create an MPD file that works with our new ByteData.
                     try {
                         using (var mpdFile = MPD_File.Create(byteData, nameGetterContexts)) {
-                            var header = mpdFile.MPDHeader[0];
+                            var header = mpdFile.MPDHeader;
                             var chunkHeaders = mpdFile.ChunkHeader;
-                            var mapFlags = mpdFile.MPDHeader[0].MapFlags;
+                            var mapFlags = mpdFile.MPDHeader.MapFlags;
 
                             // Condition for match checks here
                             bool match = HasHighMemoryModels(mpdFile.ModelCollections.FirstOrDefault(x => x.ChunkIndex == 1)) == true;
@@ -249,7 +249,7 @@ namespace MPD_Analyzer {
         }
 
         private static string GetFileString(ScenarioType inputScenario, string filename, IMPD_File mpdFile) {
-            var mapFlags = mpdFile.MPDHeader[0].MapFlags;
+            var mapFlags = mpdFile.MPDHeader.MapFlags;
             var chunkHeaders = mpdFile.ChunkHeader;
 
             var hmm1  = HasHighMemoryModels(mpdFile.ModelCollections.FirstOrDefault(x => x.ChunkIndex == 1));
@@ -265,7 +265,7 @@ namespace MPD_Analyzer {
         private static void ScanForErrorsAndReport(ScenarioType inputScenario, IMPD_File mpdFile) {
             var totalErrors = new List<string>();
 
-            var header = mpdFile.MPDHeader[0];
+            var header = mpdFile.MPDHeader;
 
             totalErrors.AddRange(ScanForCorrectScenario(inputScenario, mpdFile));
             totalErrors.AddRange(ScanForNonZeroHeaderPadding(mpdFile));
@@ -289,7 +289,7 @@ namespace MPD_Analyzer {
         }
 
         private static string[] ScanForNonZeroHeaderPadding(IMPD_File mpdFile) {
-            var header = mpdFile.MPDHeader[0];
+            var header = mpdFile.MPDHeader;
             var errors = new List<string>();
 
             void CheckPadding(string prop, int value) {
@@ -329,7 +329,7 @@ namespace MPD_Analyzer {
         }
 
         private static string[] ScanForPaletteErrors(IMPD_File mpdFile) {
-            var header = mpdFile.MPDHeader[0];
+            var header = mpdFile.MPDHeader;
             var errors = new List<string>();
 
             // Anything Scenario 3 or higher should have Palette3.
@@ -352,7 +352,7 @@ namespace MPD_Analyzer {
         }
 
         private static string[] ScanForModelErrors(IMPD_File mpdFile) {
-            var header = mpdFile.MPDHeader[0];
+            var header = mpdFile.MPDHeader;
             var errors = new List<string>();
 
             var mc2  = mpdFile.ModelCollections.FirstOrDefault(x => x.ChunkIndex == 2);
@@ -375,7 +375,7 @@ namespace MPD_Analyzer {
         }
 
         private static string[] ScanForSurfaceModelErrors(IMPD_File mpdFile) {
-            var header = mpdFile.MPDHeader[0];
+            var header = mpdFile.MPDHeader;
             var chunkHeaders = mpdFile.ChunkHeader;
             var errors = new List<string>();
 
@@ -443,7 +443,7 @@ namespace MPD_Analyzer {
         }
 
         private static string[] ScanForImageChunkErrors(IMPD_File mpdFile) {
-            var header = mpdFile.MPDHeader[0];
+            var header = mpdFile.MPDHeader;
             var chunkHeaders = mpdFile.ChunkHeader;
             var errors = new List<string>();
 

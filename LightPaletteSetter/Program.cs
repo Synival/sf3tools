@@ -114,7 +114,7 @@ namespace LightPaletteSetter {
                 }
 
                 // Update light position.
-                var lightPosition = mpdFile.LightPositionTable[0];
+                var lightPosition = mpdFile.LightPosition;
                 if (c_lighting.Pitch.HasValue)
                     lightPosition.Pitch = c_lighting.Pitch.Value;
                 if (c_lighting.Yaw.HasValue)

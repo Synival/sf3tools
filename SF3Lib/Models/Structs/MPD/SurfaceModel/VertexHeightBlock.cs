@@ -9,7 +9,7 @@ namespace SF3.Models.Structs.MPD.SurfaceModel {
         private readonly int[,] normalAddresses = new int[5, 5];
 
         public VertexHeightBlock(IByteData data, int id, string name, int address, int blockX, int blockY)
-        : base(data, id, name, address, 1 * c_meshCount) {
+        : base(data, id, name, address, c_meshCount) {
             BlockX = blockX;
             BlockY = blockY;
 

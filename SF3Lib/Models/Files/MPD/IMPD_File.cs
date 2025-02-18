@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using CommonLib.Imaging;
 using SF3.ByteData;
+using SF3.Models.Structs.MPD;
 using SF3.Models.Tables;
 using SF3.Models.Tables.MPD;
 
@@ -49,12 +50,12 @@ namespace SF3.Models.Files.MPD {
         IChunkData[] ModelsChunkData { get; }
         IChunkData SurfaceChunkData { get; }
 
-        MPDHeaderTable MPDHeader { get; }
+        MPDHeaderModel MPDHeader { get; }
         ChunkHeaderTable ChunkHeader { get; }
         ColorTable LightPalette { get; }
-        LightPositionTable LightPositionTable { get; }
+        LightPosition LightPosition { get; }
         UnknownUInt16Table Unknown1Table { get; }
-        LightAdjustmentTable LightAdjustmentTable { get; }
+        LightAdjustmentModel LightAdjustment { get; }
         ModelSwitchGroupsTable ModelSwitchGroupsTable { get; }
         UnknownUInt8Table GroundAnimationTable { get; }
         TextureIDTable TextureAnimationsAlt { get; }
@@ -62,7 +63,7 @@ namespace SF3.Models.Files.MPD {
         TextureIDTable IndexedTextureTable { get; }
         TextureAnimationTable TextureAnimations { get; }
         UnknownUInt16Table Unknown2Table { get; }
-        GradientTable GradientTable { get; }
+        GradientModel Gradient { get; }
         BoundaryTable BoundariesTable { get; }
 
         /// <summary>

@@ -44,7 +44,7 @@ namespace SF3.Win.Controls {
             if (lightPal == null)
                 return null;
 
-            var lightAdjustment = MPD_File.LightAdjustmentTable?.Length > 0 ? MPD_File.LightAdjustmentTable[0] : null;
+            var lightAdjustment = MPD_File.LightAdjustment;
             var adjR = lightAdjustment?.RAdjustment ?? 0;
             var adjG = lightAdjustment?.GAdjustment ?? 0;
             var adjB = lightAdjustment?.BAdjustment ?? 0;
@@ -262,7 +262,7 @@ namespace SF3.Win.Controls {
             if (MPD_File == null)
                 return new Vector3(0, -1, 0);
 
-            var lightPos = MPD_File.LightPositionTable[0];
+            var lightPos = MPD_File.LightPosition;
             var pitch = lightPos.Pitch;
 
             var pitchInRadians = pitch / 32768f * Math.PI;
@@ -317,7 +317,7 @@ namespace SF3.Win.Controls {
                 GL.StencilOp(StencilOp.Keep, StencilOp.Keep, StencilOp.Replace);
 
                 var lightingTexture = _surfaceModel.LightingTexture ?? _world.WhiteTexture;
-                var useFancyOutdoorSurfaceLighting = (MPD_File == null) ? false : MPD_File.MPDHeader[0].OutdoorLighting;
+                var useFancyOutdoorSurfaceLighting = (MPD_File == null) ? false : MPD_File.MPDHeader.OutdoorLighting;
 
                 if (_skyBoxModel.Model != null) {
                     GL.DepthMask(false);
