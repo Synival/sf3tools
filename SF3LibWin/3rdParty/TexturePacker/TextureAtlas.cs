@@ -8,6 +8,7 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.Linq;
 using System.Runtime.InteropServices;
+using CommonLib.Types;
 using OpenTK.Mathematics;
 using SF3.Types;
 using static CommonLib.Types.CornerTypeConsts;
@@ -66,7 +67,7 @@ namespace SF3.Win.ThirdParty.TexturePacker {
             return _nodeByTextureIDFrame.ContainsKey(key) ? _nodeByTextureIDFrame[key] : null;
         }
 
-        public Vector2[] GetUVCoordinatesByTextureIDFrame(int id, int frame, int width, int height, TextureRotateType rotation, TextureFlipType flip) {
+        public Vector2[] GetUVCoordinatesByTextureIDFrame(int id, int frame, int width, int height, TextureRotateType rotation, TextureFlipType flip, float borderUVWidth = 0.00f, float borderUVHeight = 0.00f) {
             var node = GetNodeByTextureIDFrame(id, frame);
             if (node == null)
                 throw new ArgumentException(nameof(id) + ", " + nameof(frame));
@@ -75,10 +76,10 @@ namespace SF3.Win.ThirdParty.TexturePacker {
             var heightf = (float) height;
 
             // Perform calculations in texture coordinates, where (0, 0) is the top-left corner.
-            var x1 = node.Rect.Left   / widthf;
-            var y1 = node.Rect.Top    / heightf;
-            var x2 = node.Rect.Right  / widthf;
-            var y2 = node.Rect.Bottom / heightf;
+            var x1 = node.Rect.Left   / widthf  + CornerType.TopLeft.GetUVDirectionX() * borderUVWidth;
+            var y1 = node.Rect.Top    / heightf + CornerType.TopLeft.GetUVDirectionY() * borderUVHeight;
+            var x2 = node.Rect.Right  / widthf  + CornerType.BottomRight.GetUVDirectionX() * borderUVWidth;
+            var y2 = node.Rect.Bottom / heightf + CornerType.BottomRight.GetUVDirectionY() * borderUVHeight;
 
             var tl = new Vector2(x1, y1);
             var tr = new Vector2(x2, y1);

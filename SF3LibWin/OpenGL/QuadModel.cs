@@ -143,6 +143,9 @@ namespace SF3.Win.OpenGL {
             var pos = vboAttr.OffsetInBytes.Value / sizeof(float);
             var stride = _vbo.StrideInBytes / sizeof(float);
 
+            var pixelBorderWidth  = -0.25f / _textureBitmap.Width;
+            var pixelBorderHeight = -0.25f / _textureBitmap.Height;
+
             // Update UV coordinates
             var modified = false;
 
@@ -150,7 +153,8 @@ namespace SF3.Win.OpenGL {
                 var frame = quad.TextureAnim?.GetFrame(_frame);
                 var texCoords = (frame != null)
                     ? _textureAtlas.GetUVCoordinatesByTextureIDFrame(
-                        frame.ID, frame.Frame, _textureBitmap.Width, _textureBitmap.Height, quad.TextureRotate, quad.TextureFlip)
+                        frame.ID, frame.Frame, _textureBitmap.Width, _textureBitmap.Height, quad.TextureRotate, quad.TextureFlip,
+                        pixelBorderWidth, pixelBorderHeight)
                     : c_noTextureCoords;
 
                 for (var vertexIndex = 0; vertexIndex < 4; vertexIndex++) {

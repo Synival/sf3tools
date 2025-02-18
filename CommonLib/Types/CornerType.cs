@@ -99,6 +99,9 @@ namespace CommonLib.Types {
         public static int GetUVX(this CornerType type) => type.IsLeftSide() ? CornerTypeConsts.LeftUVX : CornerTypeConsts.RightUVX;
         public static int GetUVY(this CornerType type) => type.IsTopSide() ? CornerTypeConsts.TopUVY : CornerTypeConsts.BottomUVY;
 
+        public static int GetUVDirectionX(this CornerType type) => -1 + type.GetUVX() * 2;
+        public static int GetUVDirectionY(this CornerType type) => -1 + type.GetUVY() * 2;
+
         public static CornerType FromVertexOffsetXY(int x, int y) {
             if (x == CornerTypeConsts.LeftX) {
                 if (y == CornerTypeConsts.TopY)
