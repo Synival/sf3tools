@@ -3,12 +3,12 @@ using SF3.Win.Controls;
 using SF3.Win.Extensions;
 
 namespace SF3.Win.Views {
-    public class ITextureView : ControlView<TextureControl> {
-        public ITextureView(string name, float textureScale = 0) : base(name) {
+    public class TextureView : ControlView<TextureControl> {
+        public TextureView(string name, float textureScale = 0) : base(name) {
             ImageScale = textureScale;
         }
 
-        public ITextureView(string name, ITexture texture, float textureScale = 0) : base(name) {
+        public TextureView(string name, ITexture texture, float textureScale = 0) : base(name) {
             _texture = texture;
             ImageScale = textureScale;
         }
