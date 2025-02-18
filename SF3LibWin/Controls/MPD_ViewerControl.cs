@@ -150,7 +150,12 @@ namespace SF3.Win.Controls {
 
         private void tsbCameraTopView_Click(object sender, EventArgs e) {
             var refs = CreateCameraRefs();
-            GLControl.Position = (refs.Center.X, Math.Max(refs.Width * 0.80f, refs.Height) * 2.75f + refs.Center.Y, refs.Center.Z);
+
+            var screenRatio = (float) GLControl.Width / GLControl.Height;
+            var zoomFactorWidth = refs.Width / screenRatio;
+            var zoomFactorHeight = refs.Height;
+
+            GLControl.Position = (refs.Center.X, Math.Max(zoomFactorWidth, zoomFactorHeight) * 2.75f + refs.Center.Y, refs.Center.Z);
             GLControl.Pitch    = -90;
             GLControl.Yaw      = 0;
             GLControl.Invalidate();
