@@ -87,8 +87,6 @@ namespace SF3.Win.Views {
                 var vm = ModelType.GetTableViewModel();
 
                 var lvcColumns = new List<OLVColumn>();
-                Font hexFont = null;
-
                 var lvcNameBase = "lvcTableView" + s_controlIndex;
 
                 foreach (var kv in vm.Properties) {
@@ -96,20 +94,11 @@ namespace SF3.Win.Views {
                     var attr = kv.Value;
 
                     var lvc = new OLVColumn(lvcNameBase + prop.Name, prop.Name);
-                    if (hexFont == null)
-                        hexFont = new Font("Courier New", Control.DefaultFont.Size);
+                    lvc.IsEditable           = attr.GetColumnIsEditable(prop);
+                    lvc.Text                 = attr.GetColumnText(prop);
+                    lvc.AspectToStringFormat = attr.GetColumnAspectToStringFormat(prop);
+                    lvc.Width                = attr.GetColumnWidth();
 
-                    lvc.IsEditable = !attr.IsReadOnly && prop.GetSetMethod() != null;
-                    lvc.Text = attr.DisplayName ?? prop.Name;
-
-                    if (attr.DisplayFormat != null && attr.DisplayFormat != string.Empty)
-                        lvc.AspectToStringFormat = "{0:" + attr.DisplayFormat + "}";
-                    else if (attr.IsPointer)
-                        lvc.AspectToStringFormat = "{0:X6}";
-                    else
-                        lvc.AspectToStringFormat = "";
-
-                    lvc.Width = Math.Max(30, attr.MinWidth);
                     lvcColumns.Add(lvc);
                 }
 
