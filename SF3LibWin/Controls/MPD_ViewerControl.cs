@@ -15,6 +15,7 @@ namespace SF3.Win.Controls {
             tsbDrawModels.Checked        = GLControl.DrawModels;
             tsbDrawGround.Checked        = GLControl.DrawGround;
             tsbDrawSkyBox.Checked        = GLControl.DrawSkyBox;
+            tsbRunAnimations.Checked     = GLControl.RunAnimations;
             tsbDrawGradients.Checked     = GLControl.DrawGradients;
 
             tsbToggleWireframe.Checked   = GLControl.DrawWireframe;
@@ -66,6 +67,7 @@ namespace SF3.Win.Controls {
         private void tsbDrawModels_Click       (object sender, EventArgs e) => tsbDrawModels.Checked        = GLControl.DrawModels       = !GLControl.DrawModels;
         private void tsbDrawGround_Click       (object sender, EventArgs e) => tsbDrawGround.Checked        = GLControl.DrawGround       = !GLControl.DrawGround;
         private void tsbDrawSkyBox_Click       (object sender, EventArgs e) => tsbDrawSkyBox.Checked        = GLControl.DrawSkyBox       = !GLControl.DrawSkyBox;
+        private void tsbRunAnimations_Click    (object sender, EventArgs e) => tsbRunAnimations.Checked     = GLControl.RunAnimations    = !GLControl.RunAnimations;
         private void tsbDrawGradients_Click    (object sender, EventArgs e) => tsbDrawGradients.Checked     = GLControl.DrawGradients    = !GLControl.DrawGradients;
 
         private void tsbToggleWireframe_Click  (object sender, EventArgs e) => tsbToggleWireframe.Checked   = GLControl.DrawWireframe    = !GLControl.DrawWireframe;

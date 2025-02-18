@@ -72,6 +72,7 @@ namespace SF3.Win {
         public bool ViewerDrawModels { get; set; } = true;
         public bool ViewerDrawGround { get; set; } = true;
         public bool ViewerDrawSkyBox { get; set; } = true;
+        public bool ViewerRunAnimations { get; set; } = true;
         public bool ViewerDrawGradients { get; set; } = true;
 
         public bool ViewerDrawWireframe { get; set; } = true;

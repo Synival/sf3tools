@@ -35,21 +35,22 @@
             tsbToggleBoundaries = new System.Windows.Forms.ToolStripButton();
             tsbToggleTerrainType = new System.Windows.Forms.ToolStripButton();
             tsbToggleEventID = new System.Windows.Forms.ToolStripButton();
-            toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             tsbToggleNormals = new System.Windows.Forms.ToolStripButton();
+            toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             tsbRecalculateLightmapOriginalMath = new System.Windows.Forms.ToolStripButton();
             tsbUpdateLightmapUpdatedMath = new System.Windows.Forms.ToolStripButton();
             toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             tsbToggleHelp = new System.Windows.Forms.ToolStripButton();
             tilePropertyControl1 = new TilePropertiesControl();
             mpdViewerGLControl1 = new MPD_ViewerGLControl();
+            tsbRunAnimations = new System.Windows.Forms.ToolStripButton();
             toolStrip1.SuspendLayout();
             SuspendLayout();
             // 
             // toolStrip1
             // 
             toolStrip1.ImageScalingSize = new System.Drawing.Size(24, 24);
-            toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { tsbDrawSurfaceModel, tsbDrawModels, tsbDrawGround, tsbDrawSkyBox, tsbDrawGradients, toolStripSeparator2, tsbToggleWireframe, tsbToggleBoundaries, tsbToggleTerrainType, tsbToggleEventID, tsbToggleNormals, toolStripSeparator3, tsbRecalculateLightmapOriginalMath, tsbUpdateLightmapUpdatedMath, toolStripSeparator4, tsbToggleHelp });
+            toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { tsbDrawSurfaceModel, tsbDrawModels, tsbDrawGround, tsbDrawSkyBox, tsbRunAnimations, tsbDrawGradients, toolStripSeparator2, tsbToggleWireframe, tsbToggleBoundaries, tsbToggleTerrainType, tsbToggleEventID, tsbToggleNormals, toolStripSeparator3, tsbRecalculateLightmapOriginalMath, tsbUpdateLightmapUpdatedMath, toolStripSeparator4, tsbToggleHelp });
             toolStrip1.Location = new System.Drawing.Point(0, 0);
             toolStrip1.Name = "toolStrip1";
             toolStrip1.Size = new System.Drawing.Size(789, 31);
@@ -157,11 +158,6 @@
             tsbToggleEventID.Text = "Draw Event ID";
             tsbToggleEventID.Click += tsbToggleEventID_Click;
             // 
-            // toolStripSeparator3
-            // 
-            toolStripSeparator3.Name = "toolStripSeparator3";
-            toolStripSeparator3.Size = new System.Drawing.Size(6, 31);
-            // 
             // tsbToggleNormals
             // 
             tsbToggleNormals.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -172,6 +168,11 @@
             tsbToggleNormals.Text = "Show Normal Map";
             tsbToggleNormals.ToolTipText = "Show Normal Map";
             tsbToggleNormals.Click += tsbToggleNormals_Click;
+            // 
+            // toolStripSeparator3
+            // 
+            toolStripSeparator3.Name = "toolStripSeparator3";
+            toolStripSeparator3.Size = new System.Drawing.Size(6, 31);
             // 
             // tsbRecalculateLightmapOriginalMath
             // 
@@ -236,6 +237,16 @@
             mpdViewerGLControl1.Size = new System.Drawing.Size(582, 545);
             mpdViewerGLControl1.TabIndex = 1;
             // 
+            // tsbRunAnimations
+            // 
+            tsbRunAnimations.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            tsbRunAnimations.Image = (System.Drawing.Image) resources.GetObject("tsbRunAnimations.Image");
+            tsbRunAnimations.ImageTransparentColor = System.Drawing.Color.Magenta;
+            tsbRunAnimations.Name = "tsbRunAnimations";
+            tsbRunAnimations.Size = new System.Drawing.Size(28, 28);
+            tsbRunAnimations.Text = "Run Animations";
+            tsbRunAnimations.Click += tsbRunAnimations_Click;
+            // 
             // MPD_ViewerControl
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -272,5 +283,6 @@
         private System.Windows.Forms.ToolStripButton tsbDrawSkyBox;
         private System.Windows.Forms.ToolStripButton tsbDrawGradients;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
+        private System.Windows.Forms.ToolStripButton tsbRunAnimations;
     }
 }

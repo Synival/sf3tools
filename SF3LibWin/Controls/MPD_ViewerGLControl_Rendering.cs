@@ -168,7 +168,8 @@ namespace SF3.Win.Controls {
         }
 
         private void OnFrameTickRendering(float deltaInMs) {
-            UpdateAnimatedTextures(deltaInMs);
+            if (RunAnimations)
+                UpdateAnimatedTextures(deltaInMs);
         }
 
         private void OnTileModifiedRendering(object sender) {
@@ -677,6 +678,13 @@ namespace SF3.Win.Controls {
         public bool DrawSkyBox {
             get => AppState.ViewerDrawSkyBox;
             set => UpdateAppState(nameof(AppState.ViewerDrawSkyBox), value);
+        }
+
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public bool RunAnimations {
+            get => AppState.ViewerRunAnimations;
+            set => UpdateAppState(nameof(AppState.ViewerRunAnimations), value);
         }
 
         [Browsable(false)]
