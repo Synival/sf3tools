@@ -23,7 +23,6 @@
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent() {
-            var resources = new System.ComponentModel.ComponentResourceManager(typeof(MPD_ViewerControl));
             toolStrip1 = new System.Windows.Forms.ToolStrip();
             tsbDrawSurfaceModel = new System.Windows.Forms.ToolStripButton();
             tsbDrawModels = new System.Windows.Forms.ToolStripButton();
@@ -65,7 +64,7 @@
             // tsbDrawSurfaceModel
             // 
             tsbDrawSurfaceModel.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            tsbDrawSurfaceModel.Image = (System.Drawing.Image) resources.GetObject("tsbDrawSurfaceModel.Image");
+            tsbDrawSurfaceModel.Image = Properties.Resources.ShowSurfaceModelBmp;
             tsbDrawSurfaceModel.ImageTransparentColor = System.Drawing.Color.Magenta;
             tsbDrawSurfaceModel.Name = "tsbDrawSurfaceModel";
             tsbDrawSurfaceModel.Size = new System.Drawing.Size(28, 28);
@@ -76,7 +75,7 @@
             // tsbDrawModels
             // 
             tsbDrawModels.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            tsbDrawModels.Image = (System.Drawing.Image) resources.GetObject("tsbDrawModels.Image");
+            tsbDrawModels.Image = Properties.Resources.ShowModelsBmp;
             tsbDrawModels.ImageTransparentColor = System.Drawing.Color.Magenta;
             tsbDrawModels.Name = "tsbDrawModels";
             tsbDrawModels.Size = new System.Drawing.Size(28, 28);
@@ -87,7 +86,7 @@
             // tsbDrawGround
             // 
             tsbDrawGround.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            tsbDrawGround.Image = (System.Drawing.Image) resources.GetObject("tsbDrawGround.Image");
+            tsbDrawGround.Image = Properties.Resources.ShowGroundWaterBmp;
             tsbDrawGround.ImageTransparentColor = System.Drawing.Color.Magenta;
             tsbDrawGround.Name = "tsbDrawGround";
             tsbDrawGround.Size = new System.Drawing.Size(28, 28);
@@ -98,7 +97,7 @@
             // tsbDrawSkyBox
             // 
             tsbDrawSkyBox.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            tsbDrawSkyBox.Image = (System.Drawing.Image) resources.GetObject("tsbDrawSkyBox.Image");
+            tsbDrawSkyBox.Image = Properties.Resources.ShowSkyBoxBmp;
             tsbDrawSkyBox.ImageTransparentColor = System.Drawing.Color.Magenta;
             tsbDrawSkyBox.Name = "tsbDrawSkyBox";
             tsbDrawSkyBox.Size = new System.Drawing.Size(28, 28);
@@ -109,7 +108,7 @@
             // tsbRunAnimations
             // 
             tsbRunAnimations.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            tsbRunAnimations.Image = (System.Drawing.Image) resources.GetObject("tsbRunAnimations.Image");
+            tsbRunAnimations.Image = Properties.Resources.RunAnimationsBmp;
             tsbRunAnimations.ImageTransparentColor = System.Drawing.Color.Magenta;
             tsbRunAnimations.Name = "tsbRunAnimations";
             tsbRunAnimations.Size = new System.Drawing.Size(28, 28);
@@ -119,7 +118,7 @@
             // tsbDrawGradients
             // 
             tsbDrawGradients.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            tsbDrawGradients.Image = (System.Drawing.Image) resources.GetObject("tsbDrawGradients.Image");
+            tsbDrawGradients.Image = Properties.Resources.ShowGradientsBmp;
             tsbDrawGradients.ImageTransparentColor = System.Drawing.Color.Magenta;
             tsbDrawGradients.Name = "tsbDrawGradients";
             tsbDrawGradients.Size = new System.Drawing.Size(28, 28);
@@ -146,7 +145,7 @@
             // tsbToggleBoundaries
             // 
             tsbToggleBoundaries.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            tsbToggleBoundaries.Image = Properties.Resources.ShowCameraBoundaries;
+            tsbToggleBoundaries.Image = Properties.Resources.ShowCameraBoundariesBmp;
             tsbToggleBoundaries.ImageTransparentColor = System.Drawing.Color.Magenta;
             tsbToggleBoundaries.Name = "tsbToggleBoundaries";
             tsbToggleBoundaries.Size = new System.Drawing.Size(28, 28);
@@ -156,7 +155,7 @@
             // tsbToggleTerrainType
             // 
             tsbToggleTerrainType.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            tsbToggleTerrainType.Image = Properties.Resources.ShowTerrainTypes;
+            tsbToggleTerrainType.Image = Properties.Resources.ShowTerrainTypesBmp;
             tsbToggleTerrainType.ImageTransparentColor = System.Drawing.Color.Magenta;
             tsbToggleTerrainType.Name = "tsbToggleTerrainType";
             tsbToggleTerrainType.Size = new System.Drawing.Size(28, 28);
@@ -166,7 +165,7 @@
             // tsbToggleEventID
             // 
             tsbToggleEventID.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            tsbToggleEventID.Image = Properties.Resources.ShowEventIDs;
+            tsbToggleEventID.Image = Properties.Resources.ShowEventIDsBmp;
             tsbToggleEventID.ImageTransparentColor = System.Drawing.Color.Magenta;
             tsbToggleEventID.Name = "tsbToggleEventID";
             tsbToggleEventID.Size = new System.Drawing.Size(28, 28);

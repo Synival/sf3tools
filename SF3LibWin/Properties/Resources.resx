@@ -136,7 +136,7 @@
   <data name="ObjectVert" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Shaders\Object.vert;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
-  <data name="ShowTerrainTypes" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="ShowTerrainTypesBmp" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Images\ShowTerrainTypes.bmp;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="TileSelectedBmp" type="System.Resources.ResXFileRef, System.Windows.Forms">
@@ -163,7 +163,7 @@
   <data name="WireframeFrag" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Shaders\Wireframe.frag;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
-  <data name="ShowEventIDs" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="ShowEventIDsBmp" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Images\ShowEventIDs.bmp;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="SolidVert" type="System.Resources.ResXFileRef, System.Windows.Forms">
@@ -202,7 +202,7 @@
   <data name="IconHelpBmp" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Images\IconHelp.bmp;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="ShowCameraBoundaries" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="ShowCameraBoundariesBmp" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Images\ShowCameraBoundaries.bmp;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="CameraFromFrontBmp" type="System.Resources.ResXFileRef, System.Windows.Forms">
@@ -216,5 +216,23 @@
   </data>
   <data name="SpritesPointingUpBmp" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Images\SpritesPointingUp.bmp;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ShowSurfaceModelBmp" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\ShowSurfaceModel.bmp;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ShowModelsBmp" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\ShowModels.bmp;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ShowGroundWaterBmp" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\ShowGroundWater.bmp;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ShowSkyBoxBmp" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\ShowSkyBox.bmp;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ShowGradientsBmp" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\ShowGradients.bmp;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="RunAnimationsBmp" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\RunAnimations.bmp;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

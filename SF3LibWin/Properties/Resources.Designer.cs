@@ -256,9 +256,9 @@ namespace SF3.Win.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap ShowCameraBoundaries {
+        internal static System.Drawing.Bitmap RunAnimationsBmp {
             get {
-                object obj = ResourceManager.GetObject("ShowCameraBoundaries", resourceCulture);
+                object obj = ResourceManager.GetObject("RunAnimationsBmp", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -266,9 +266,9 @@ namespace SF3.Win.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap ShowEventIDs {
+        internal static System.Drawing.Bitmap ShowCameraBoundariesBmp {
             get {
-                object obj = ResourceManager.GetObject("ShowEventIDs", resourceCulture);
+                object obj = ResourceManager.GetObject("ShowCameraBoundariesBmp", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -276,9 +276,69 @@ namespace SF3.Win.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap ShowTerrainTypes {
+        internal static System.Drawing.Bitmap ShowEventIDsBmp {
             get {
-                object obj = ResourceManager.GetObject("ShowTerrainTypes", resourceCulture);
+                object obj = ResourceManager.GetObject("ShowEventIDsBmp", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap ShowGradientsBmp {
+            get {
+                object obj = ResourceManager.GetObject("ShowGradientsBmp", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap ShowGroundWaterBmp {
+            get {
+                object obj = ResourceManager.GetObject("ShowGroundWaterBmp", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap ShowModelsBmp {
+            get {
+                object obj = ResourceManager.GetObject("ShowModelsBmp", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap ShowSkyBoxBmp {
+            get {
+                object obj = ResourceManager.GetObject("ShowSkyBoxBmp", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap ShowSurfaceModelBmp {
+            get {
+                object obj = ResourceManager.GetObject("ShowSurfaceModelBmp", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap ShowTerrainTypesBmp {
+            get {
+                object obj = ResourceManager.GetObject("ShowTerrainTypesBmp", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
