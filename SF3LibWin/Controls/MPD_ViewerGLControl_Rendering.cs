@@ -480,8 +480,20 @@ namespace SF3.Win.Controls {
                         block.UntexturedModel?.Draw(_world.WireframeShader, null);
                         block.Model?.Draw(_world.WireframeShader, null);
                     }
+
+                    foreach (var model in _models.Models) {
+                        var modelGroup = _models.ModelsByMemoryAddress.TryGetValue(model.PData1, out ModelGroup pd) ? pd : null;
+                        if (modelGroup != null) {
+                            SetModelAndNormalMatricesForModel(model, _world.WireframeShader);
+                            modelGroup.SolidTexturedModel?.Draw(_world.WireframeShader);
+                            modelGroup.SolidUntexturedModel?.Draw(_world.WireframeShader);
+                            modelGroup.SemiTransparentTexturedModel?.Draw(_world.WireframeShader);
+                            modelGroup.SemiTransparentUntexturedModel?.Draw(_world.WireframeShader);
+                        }
+                    }
                 }
 
+                UpdateShaderModelMatrix(_world.WireframeShader, Matrix4.Identity);
                 GL.Disable(EnableCap.PolygonOffsetLine);
                 GL.PolygonMode(MaterialFace.FrontAndBack, PolygonMode.Fill);
             }
