@@ -87,12 +87,12 @@
     <item value="0x54" name="Spiriel1" />
     <item value="0x55" name="Abdark" />
     <item value="0x56" name="Elbesem Statue" />
-    <item value="0x57" name="Mask Monk (Blue)" />
+    <item value="0x57" name="Masked Monk (Blue)" />
     <item value="0x58" name="Imposter" />
     <item value="0x59" name="Domaric" />
     <item value="0x5A" name="Garrosh" />
     <item value="0x5B" name="(Character Placeholder)" />
-    <item value="0x5C" name="Mask Monk (Carrying Domaric)" />
+    <item value="0x5C" name="Masked Monk (Carrying Domaric)" />
     <item value="0x5D" name="Def Commander" />
     <item value="0x5E" name="Thief Commander" />
     <item value="0x5F" name="Barrel" />
@@ -118,9 +118,9 @@
     <item value="0x73" name="Aspia Soldier" />
     <item value="0x74" name="Braff" />
     <item value="0x75" name="Basanda2" />
-    <item value="0x76" name="Mask Monk (Blue 15)" />
-    <item value="0x77" name="Mask Monk (Purple Staff 17" />
-    <item value="0x78" name="Mask Monk (Red/Ankh 17)" />
+    <item value="0x76" name="Masked Monk (Blue 15)" />
+    <item value="0x77" name="Masked Monk (Purple Staff 17)" />
+    <item value="0x78" name="Masked Monk (Red/Ankh 17)" />
     <item value="0x79" name="Aspia Mage" />
     <item value="0x7A" name="Arrawnt" />
     <item value="0x7B" name="Thief (Chapter 2)" />

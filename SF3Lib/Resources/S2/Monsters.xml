@@ -87,18 +87,18 @@
     <item value="0x54" name="Spiriel" />
     <item value="0x55" name="Abdark" />
     <item value="0x56" name="Elbesem Temple Core" />
-    <item value="0x57" name="Walcuray" />
+    <item value="0x57" name="Masked Monk (Blue)" />
     <item value="0x58" name="Ghoul" />
     <item value="0x59" name="Domaric" />
     <item value="0x5A" name="Yeti" />
     <item value="0x5B" name="(Character Placeholder)" />
-    <item value="0x5C" name="Mask Monk (Red/Anhk)" />
+    <item value="0x5C" name="Masked Monk (Red/Anhk)" />
     <item value="0x5D" name="Saraband Solider" />
     <item value="0x5E" name="Masked Knight" />
     <item value="0x5F" name="Barrel" />
     <item value="0x60" name="Masked Monk (Grey/Rod)" />
     <item value="0x61" name="MP Commander" />
-    <item value="0x62" name="Brute" />
+    <item value="0x62" name="Wing Knight" />
     <item value="0x63" name="Shiraf" />
     <item value="0x64" name="Franz" />
     <item value="0x65" name="Garzel" />
@@ -112,7 +112,7 @@
     <item value="0x6D" name="Chimera" />
     <item value="0x6E" name="Wilmer" />
     <item value="0x6F" name="Aspinia Solider" />
-    <item value="0x70" name="White Dragon (Thousand NPC)" />
+    <item value="0x70" name="Baby Dragon" />
     <item value="0x71" name="Blue Dragon" />
     <item value="0x72" name="Blood Born" />
     <item value="0x73" name="DomaricCh6" />
@@ -120,7 +120,7 @@
     <item value="0x75" name="Basanda" />
     <item value="0x76" name="Masked Monk (Blue)" />
     <item value="0x77" name="Masked Mage (Purple)" />
-    <item value="0x78" name="Mask Monk (Red/Anhk 17)" />
+    <item value="0x78" name="Masked Monk (Red/Anhk 17)" />
     <item value="0x79" name="Aspia Mage" />
     <item value="0x7A" name="Arrawnt" />
     <item value="0x7B" name="Thief (Chapter 2)" />
@@ -129,7 +129,7 @@
     <item value="0x7E" name="Thief (Chapter 5)" />
     <item value="0x7F" name="Thief (Chapter 6)" />
     <item value="0x80" name="Edmund" />
-    <item value="0x81" name="Ninja (Green)" />
+    <item value="0x81" name="Giant Armor" />
     <item value="0x82" name="Red Dragon" />
     <item value="0x83" name="WhiteKnightCh6" />
     <item value="0x84" name="High Wizard" />
@@ -157,7 +157,7 @@
     <item value="0x9A" name="Varlant" />
     <item value="0x9B" name="Stella" />
     <item value="0x9C" name="Crewart Leader" />
-    <item value="0x9D" name="Yasha" />
+    <item value="0x9D" name="Priest (Battle 1 NPC)" />
     <item value="0x9E" name="Destonia Solider" />
     <item value="0x9F" name="Masked Monk (Green/Rod)" />
     <item value="0xA0" name="Edmund Solider (Halbard)" />
