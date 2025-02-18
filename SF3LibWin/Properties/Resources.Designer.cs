@@ -63,6 +63,36 @@ namespace SF3.Win.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap CameraFromFrontBmp {
+            get {
+                object obj = ResourceManager.GetObject("CameraFromFrontBmp", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap CameraFromTopBmp {
+            get {
+                object obj = ResourceManager.GetObject("CameraFromTopBmp", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap CameraPointToCenterBmp {
+            get {
+                object obj = ResourceManager.GetObject("CameraPointToCenterBmp", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap EventIDsBmp {
             get {
                 object obj = ResourceManager.GetObject("EventIDsBmp", resourceCulture);
@@ -147,12 +177,17 @@ namespace SF3.Win.Properties {
         ///uniform mat4 model;
         ///uniform mat4 view;
         ///uniform mat4 projection;
+        ///uniform mat3 normalMatrix;
         ///
         ///out vec3 normalFrag;
         ///
         ///void main() {
         ///    gl_Position = projection * view * model * vec4(position, 1.0);
-        ///    normalFrag = normal * 0.5 + 0.5;
+        ///
+        ///    float prevLength = length(normal);
+        ///    vec3 modelNormal = normalize(normalMatrix * normal) * prevLength;
+        ///
+        ///    normalFrag = modelNormal * vec3(1.0, 0.0, 1.0) + 0.5;
         ///}
         ///.
         /// </summary>
@@ -171,7 +206,7 @@ namespace SF3.Win.Properties {
         ///
         ///in vec4 colorFrag;
         ///in vec3 glowFrag;
-        ///in float lightingFrag;
+        ///in vec4 lightColorFrag;
         ///
         ///in vec2 texCoordAtlasFrag;
         ///in vec2 texCoordTerrainTypesFrag;
@@ -180,11 +215,11 @@ namespace SF3.Win.Properties {
         ///out vec4 FragColor;
         ///
         ///void main() {
-        ///    vec4 surfaceTex =
-        ///        (texture(textureAtlas, texCoordAtlasFrag) * colorFrag +
-        ///        vec4(glowFrag, 0.0) +
-        ///        vec4(vec3(1.0, 1.0, 0.5) * lightingFrag * 0.2, 0));
-        ///        /// [rest of string was truncated]&quot;;.
+        ///    vec4 surfaceTex = (texture(textureAtlas, texCoordAtlasFrag) + lightColorFrag);
+        ///    surfaceTex = surfaceTex * colorFrag + vec4(glowFrag, 0.0);
+        ///
+        ///    vec4 overlayTex =
+        ///        [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string ObjectFrag {
             get {
@@ -198,6 +233,10 @@ namespace SF3.Win.Properties {
         ///uniform mat4 model;
         ///uniform mat4 view;
         ///uniform mat4 projection;
+        ///uniform mat3 normalMatrix;
+        ///uniform vec3 lightPosition;
+        ///uniform sampler2D textureLighting;
+        ///uniform bool useNewLighting;
         ///
         ///layout (location = 0) in vec3 position;
         ///layout (location = 1) in vec4 color;
@@ -206,14 +245,7 @@ namespace SF3.Win.Properties {
         ///
         ///layout (location = 4) in vec2 texCoordAtlas;
         ///layout (location = 5) in vec2 texCoordTerrainTypes;
-        ///layout (location = 6) in vec2 texCoordEventIDs;
-        ///
-        ///out vec4 colorFrag;
-        ///out vec3 glowFrag;
-        ///out float lightingFrag;
-        ///
-        ///out vec2 texCoordAtlasFrag;
-        ///out vec2 texCoordT [rest of string was truncated]&quot;;.
+        ///layout (location = 6) in vec2 texCoordEvent [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string ObjectVert {
             get {
@@ -295,6 +327,16 @@ namespace SF3.Win.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap SpritesPointingUpBmp {
+            get {
+                object obj = ResourceManager.GetObject("SpritesPointingUpBmp", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap TerrainTypesBmp {
             get {
                 object obj = ResourceManager.GetObject("TerrainTypesBmp", resourceCulture);
@@ -314,7 +356,11 @@ namespace SF3.Win.Properties {
         ///out vec4 FragColor;
         ///
         ///void main() {
-        ///    FragColor = texture(texture0, texCoord0Frag) * colorFrag + vec4(glowFrag, 0.0);
+        ///    vec4 texColor = texture(texture0, texCoord0Frag) * colorFrag + vec4(glowFrag, 0.0);
+        ///    if (texColor.a &lt; 0.001)
+        ///        discard;
+        ///
+        ///    FragColor = texColor;
         ///}
         ///.
         /// </summary>
@@ -417,12 +463,15 @@ namespace SF3.Win.Properties {
         ///out vec4 FragColor;
         ///
         ///void main() {
+        ///    vec4 tex0Color = texture(texture0, texCoord0Frag);
         ///    vec4 tex1Color = texture(texture1, texCoord1Frag);
-        ///    FragColor = 
-        ///        texture(texture0, texCoord0Frag) * colorFrag * (1.0 - tex1Color.a) +
-        ///        vec4(tex1Color.rgb * tex1Color.a, tex1Color.a);
-        ///}
-        ///.
+        ///
+        ///    vec4 compositeColor = tex0Color * colorFrag * (1.0 - tex1Color.a) + vec4(tex1Color.rgb * tex1Color.a, tex1Color.a);
+        ///    if (compositeColor.a &lt; 0.001)
+        ///        discard;
+        ///
+        ///    FragColor = compositeColor;
+        /// [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string TwoTextureFrag {
             get {
@@ -490,7 +539,11 @@ namespace SF3.Win.Properties {
         ///out vec4 FragColor;
         ///
         ///void main() {
-        ///    FragColor = texture(texture1, texCoord1Frag);
+        ///    vec4 texColor = texture(texture1, texCoord1Frag);
+        ///    if (texColor.a &lt; 0.001)
+        ///        discard;
+        ///
+        ///    FragColor = texColor;
         ///}
         ///.
         /// </summary>

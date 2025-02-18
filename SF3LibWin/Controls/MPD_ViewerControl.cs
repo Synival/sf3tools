@@ -134,7 +134,11 @@ namespace SF3.Win.Controls {
                 groundY = (MPD_File?.MPDHeader?.GroundY ?? 0) / -32.0f;
             }
 
-            return new CameraRefs { Width = width, Height = height, Center = new Vector3(centerX, groundY, centerZ) };
+            return new CameraRefs {
+                Width  = width,
+                Height = height,
+                Center = new Vector3(centerX, groundY, centerZ)
+            };
         }
 
         private void tsbCameraReset_Click(object sender, EventArgs e) {
@@ -146,7 +150,7 @@ namespace SF3.Win.Controls {
 
         private void tsbCameraTopView_Click(object sender, EventArgs e) {
             var refs = CreateCameraRefs();
-            GLControl.Position = (refs.Center.X, Math.Max(refs.Width, refs.Height) * 2.75f + refs.Center.Y, refs.Center.Z);
+            GLControl.Position = (refs.Center.X, Math.Max(refs.Width * 0.80f, refs.Height) * 2.75f + refs.Center.Y, refs.Center.Z);
             GLControl.Pitch    = -90;
             GLControl.Yaw      = 0;
             GLControl.Invalidate();

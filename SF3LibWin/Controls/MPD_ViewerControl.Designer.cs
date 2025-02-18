@@ -187,7 +187,7 @@
             // tsbRotateSpritesUp
             // 
             tsbRotateSpritesUp.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            tsbRotateSpritesUp.Image = (System.Drawing.Image) resources.GetObject("tsbRotateSpritesUp.Image");
+            tsbRotateSpritesUp.Image = Properties.Resources.SpritesPointingUpBmp;
             tsbRotateSpritesUp.ImageTransparentColor = System.Drawing.Color.Magenta;
             tsbRotateSpritesUp.Name = "tsbRotateSpritesUp";
             tsbRotateSpritesUp.Size = new System.Drawing.Size(28, 28);
@@ -202,7 +202,7 @@
             // tsbCameraReset
             // 
             tsbCameraReset.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            tsbCameraReset.Image = (System.Drawing.Image) resources.GetObject("tsbCameraReset.Image");
+            tsbCameraReset.Image = Properties.Resources.CameraFromFrontBmp;
             tsbCameraReset.ImageTransparentColor = System.Drawing.Color.Magenta;
             tsbCameraReset.Name = "tsbCameraReset";
             tsbCameraReset.Size = new System.Drawing.Size(28, 28);
@@ -212,7 +212,7 @@
             // tsbCameraTopView
             // 
             tsbCameraTopView.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            tsbCameraTopView.Image = (System.Drawing.Image) resources.GetObject("tsbCameraTopView.Image");
+            tsbCameraTopView.Image = Properties.Resources.CameraFromTopBmp;
             tsbCameraTopView.ImageTransparentColor = System.Drawing.Color.Magenta;
             tsbCameraTopView.Name = "tsbCameraTopView";
             tsbCameraTopView.Size = new System.Drawing.Size(28, 28);
@@ -222,7 +222,7 @@
             // tsbCameraLookAtCenter
             // 
             tsbCameraLookAtCenter.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            tsbCameraLookAtCenter.Image = (System.Drawing.Image) resources.GetObject("tsbCameraLookAtCenter.Image");
+            tsbCameraLookAtCenter.Image = Properties.Resources.CameraPointToCenterBmp;
             tsbCameraLookAtCenter.ImageTransparentColor = System.Drawing.Color.Magenta;
             tsbCameraLookAtCenter.Name = "tsbCameraLookAtCenter";
             tsbCameraLookAtCenter.Size = new System.Drawing.Size(28, 28);
