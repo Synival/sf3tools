@@ -168,6 +168,16 @@ namespace SF3.Win.ThirdParty.TexturePacker {
 
                     var imageData = node.Texture.BitmapDataARGB8888;
 
+                    // Scan for transparent pixels. If there are any, turn the flag on.
+                    if (!HasTransparency) {
+                        for (int i = 3; i < imageData.Length; i += 4) {
+                            if (imageData[i] != 255) {
+                                HasTransparency = true;
+                                break;
+                            }
+                        }
+                    }
+
                     // Rotate the byte array clockwise if 'node.Rotated' is on.
                     if (node.Rotated) {
                         var newImageData = new byte[imageData.Length];
@@ -243,6 +253,7 @@ namespace SF3.Win.ThirdParty.TexturePacker {
         public int MaxY { get; }
         public int Padding { get; }
         public bool TryRotate { get; }
+        public bool HasTransparency { get; private set; } = false;
 
         private readonly TextureAtlasNode _rootNode;
         private readonly Dictionary<(int, int), TextureAtlasNode> _nodeByTextureIDFrame = [];

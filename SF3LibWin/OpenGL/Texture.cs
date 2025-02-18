@@ -6,7 +6,7 @@ using SF3.Win.OpenGL.MPD_File;
 
 namespace SF3.Win.OpenGL {
     public class Texture : IDisposable {
-        public Texture(Bitmap image, bool filterNearest = true, bool clampToEdge = true) {
+        public Texture(Bitmap image, bool minNearest = false, bool magNearest = true, bool clampToEdge = true) {
             if (image == null)
                 throw new ArgumentNullException(nameof(image));
             if (image.PixelFormat != System.Drawing.Imaging.PixelFormat.Format32bppArgb)
@@ -15,10 +15,13 @@ namespace SF3.Win.OpenGL {
             Handle = GL.GenTexture();
             Width  = image.Width;
             Height = image.Height;
+            MinNearest = minNearest;
+            MagNearest = magNearest;
+            ClampToEdge = clampToEdge;
 
             using (Use()) {
-                GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMinFilter, (int) TextureMinFilter.Linear);
-                GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMagFilter, (int) (filterNearest ? TextureMagFilter.Nearest : TextureMagFilter.Linear));
+                GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMinFilter, (int) (minNearest ? TextureMagFilter.Nearest : TextureMagFilter.Linear));
+                GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMagFilter, (int) (magNearest ? TextureMagFilter.Nearest : TextureMagFilter.Linear));
                 GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureWrapS, (int) (clampToEdge ? TextureWrapMode.ClampToEdge : TextureWrapMode.Repeat));
                 GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureWrapT, (int) (clampToEdge ? TextureWrapMode.ClampToEdge : TextureWrapMode.Repeat));
             }
@@ -26,14 +29,17 @@ namespace SF3.Win.OpenGL {
             Update(image);
         }
 
-        public Texture(int width, int height, PixelInternalFormat internalFormat, OpenTK.Graphics.OpenGL.PixelFormat format, PixelType pixelType, bool filterNearest = true, bool clampToEdge = true) {
+        public Texture(int width, int height, PixelInternalFormat internalFormat, OpenTK.Graphics.OpenGL.PixelFormat format, PixelType pixelType, bool minNearest = false, bool magNearest = true, bool clampToEdge = true) {
             Handle = GL.GenTexture();
             Width  = width;
             Height = height;
+            MinNearest = minNearest;
+            MagNearest = magNearest;
+            ClampToEdge = clampToEdge;
 
             using (Use()) {
-                GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMinFilter, (int) TextureMinFilter.Linear);
-                GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMagFilter, (int) (filterNearest ? TextureMagFilter.Nearest : TextureMagFilter.Linear));
+                GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMinFilter, (int) (minNearest ? TextureMagFilter.Nearest : TextureMagFilter.Linear));
+                GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMagFilter, (int) (magNearest ? TextureMagFilter.Nearest : TextureMagFilter.Linear));
                 GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureWrapS, (int) (clampToEdge ? TextureWrapMode.ClampToEdge : TextureWrapMode.Repeat));
                 GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureWrapT, (int) (clampToEdge ? TextureWrapMode.ClampToEdge : TextureWrapMode.Repeat));
                 Update(width, height, internalFormat, format, pixelType);
@@ -58,7 +64,6 @@ namespace SF3.Win.OpenGL {
         public void Update(int width, int height, PixelInternalFormat internalFormat, OpenTK.Graphics.OpenGL.PixelFormat format, PixelType pixelType) {
             Width  = width;
             Height = height;
-
             GL.TexImage2D(TextureTarget.Texture2D, 0, internalFormat, width, height, 0, format, pixelType, 0);
         }
 
@@ -123,5 +128,8 @@ namespace SF3.Win.OpenGL {
         public int Handle { get; }
         public int Width { get; private set; }
         public int Height { get; private set; }
+        public bool MinNearest { get; }
+        public bool MagNearest { get; }
+        public bool ClampToEdge { get; }
     }
 }
