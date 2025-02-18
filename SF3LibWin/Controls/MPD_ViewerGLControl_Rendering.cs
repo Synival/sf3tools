@@ -381,6 +381,9 @@ namespace SF3.Win.Controls {
                 var eventIdsTexture     = DrawEventIDs     ? _surfaceModel.EventIDsTexture     : _world.TransparentBlackTexture;
 
                 if (_surfaceModel?.Blocks?.Length > 0) {
+                    GL.Enable(EnableCap.PolygonOffsetFill);
+                    GL.PolygonOffset(-0.5f, -0.5f);
+
                     if (useFancyOutdoorSurfaceLighting)
                         UpdateShaderLighting(true);
 
@@ -397,6 +400,8 @@ namespace SF3.Win.Controls {
 
                     if (useFancyOutdoorSurfaceLighting)
                         UpdateShaderLighting(false);
+
+                    GL.Disable(EnableCap.PolygonOffsetFill);
                 }
 
                 if (_models?.Models != null) {
