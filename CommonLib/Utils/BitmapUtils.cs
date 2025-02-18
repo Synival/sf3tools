@@ -8,7 +8,7 @@ namespace CommonLib.Utils {
             var pos = 0;
             for (var y = 0; y < imageData.GetLength(1); y++) {
                 for (var x = 0; x < imageData.GetLength(0); x++) {
-                    var newBits = ABGR1555toARGB8888(imageData[x, y]);
+                    var newBits = ABGR1555toARGB1555(imageData[x, y]);
                     imageDataBytes[pos++] = (byte) ((newBits >> 0) & 0xFF);
                     imageDataBytes[pos++] = (byte) ((newBits >> 8) & 0xFF);
                 }
