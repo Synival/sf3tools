@@ -123,6 +123,7 @@ namespace SF3.Win.Extensions {
             // If no name exists, use the standard AspectToStringConverter.
             // (It would be nice if we could set one single AspectToStringConverter to check for this,
             // but alas, it only takes one paramter (value) and that's not enough to check for a name.)
+            var oldGetter = lvc.AspectGetter;
             lvc.AspectGetter = obj => {
                 AspectToStringConverterDelegate converter = null;
 
@@ -140,7 +141,7 @@ namespace SF3.Win.Extensions {
                 }
 
                 lvc.AspectToStringConverter = converter;
-                return lvc.GetAspectByName(obj);
+                return (oldGetter != null) ? oldGetter(obj) : lvc.GetAspectByName(obj);
             };
         }
 
@@ -166,7 +167,7 @@ namespace SF3.Win.Extensions {
                 // This needs to happen at a specific point: when the data is populated, and the correct item is selected.
                 // Normally we can wait for a SelectedIndexChanged event, but if the selected index is changed to 0,
                 // no change took place and the event will not trigger. In that case, just trigger on GotFocus.
-                var eValueIsNonZero = (e.Value is bool eBool) ? eBool : ((int) e.Value != 0);
+                var eValueIsNonZero = (e.Value is bool eBool) ? eBool : (e.Value as int? != 0);
                 if (eValueIsNonZero) {
                     void selectedIndexChangedFunc(object sender, EventArgs args) {
                         cb.DroppedDown = true;
