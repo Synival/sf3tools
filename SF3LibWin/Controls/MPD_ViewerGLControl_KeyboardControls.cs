@@ -1,7 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
+using CommonLib.Utils;
 using OpenTK.Mathematics;
 
 namespace SF3.Win.Controls {
@@ -44,17 +46,39 @@ namespace SF3.Win.Controls {
             }
         }
 
-        public bool ChangeFocusedTile(Keys keyData) {
+        private int GetDirectionForKeypress(Keys keyData) {
             var keyPressed = (Keys) ((int) keyData & 0xFFFF);
             switch (keyPressed) {
                 case Keys.Up:
-                    return ChangeFocusedTile(0, 1);
-                case Keys.Down:
-                    return ChangeFocusedTile(0, -1);
-                case Keys.Left:
-                    return ChangeFocusedTile(-1, 0);
+                    return 0;
                 case Keys.Right:
+                    return 1;
+                case Keys.Down:
+                    return 2;
+                case Keys.Left:
+                    return 3;
+                default:
+                    return -1;
+            }
+        }
+
+        public bool ChangeFocusedTile(Keys keyData) {
+            var dir = GetDirectionForKeypress(keyData);
+            if (dir == -1)
+                return false;
+
+            // Adjust the direction based on the current camera angle.
+            dir = MathHelpers.ActualMod((int) Math.Round(dir - Yaw / 90.0f), 4);
+
+            switch (dir) {
+                case 0:
+                    return ChangeFocusedTile(0, 1);
+                case 1:
                     return ChangeFocusedTile(1, 0);
+                case 2:
+                    return ChangeFocusedTile(0, -1);
+                case 3:
+                    return ChangeFocusedTile(-1, 0);
                 default:
                     return false;
             }

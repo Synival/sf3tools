@@ -602,6 +602,7 @@ namespace SF3.Win.Controls {
             if (!modelMatrix.HasValue) {
                 var angleXAdjust = 0.00f;
                 var angleYAdjust = model.AlwaysFacesCamera ? (float) ((Yaw + 180.0f) / 180.0f * Math.PI) : 0.00f;
+                var scaleAdjust  = 1.00f;
 
                 var yAdjust = 0.00f;
                 var prePostAdjustY = 0.00f;
@@ -616,11 +617,13 @@ namespace SF3.Win.Controls {
                     var centerY  = (topY + bottomY) * 0.5f;
 
                     angleXAdjust = (float) (Pitch / 180.0f * Math.PI) * -1.00f;
-                    prePostAdjustY = centerY;
+
+                    scaleAdjust = 1.00f - (float) Math.Sin(Math.Abs(angleXAdjust)) * 0.25f;
+                    prePostAdjustY = centerY * scaleAdjust;
                 }
 
                 modelMatrix =
-                    Matrix4.CreateScale(model.ScaleX, model.ScaleY, model.ScaleZ) *
+                    Matrix4.CreateScale(model.ScaleX * scaleAdjust, model.ScaleY * scaleAdjust, model.ScaleZ * scaleAdjust) *
                     Matrix4.CreateRotationX(model.AngleX * (float) Math.PI * -2.00f) *
                     Matrix4.CreateTranslation(0, prePostAdjustY, 0) *
                     Matrix4.CreateRotationX(angleXAdjust) *
