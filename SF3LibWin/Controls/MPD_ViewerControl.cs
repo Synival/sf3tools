@@ -5,6 +5,7 @@ using CommonLib.Types;
 using OpenTK.Mathematics;
 using SF3.Models.Files.MPD;
 using SF3.Win.OpenGL.MPD_File;
+using SF3.Win.Types;
 
 namespace SF3.Win.Controls {
     public partial class MPD_ViewerControl : UserControl {
@@ -13,6 +14,10 @@ namespace SF3.Win.Controls {
 
             GLControl.TilePropertiesControl = tilePropertyControl1;
             Disposed += (s, e) => GLControl.Dispose();
+
+            var cursorMode = GLControl.CursorMode;
+            tsbCursorSelect.Checked      = cursorMode == ViewerCursorMode.Select;
+            tsbCursorNavigate.Checked    = cursorMode == ViewerCursorMode.Navigate;
 
             tsbDrawSurfaceModel.Checked  = GLControl.DrawSurfaceModel;
             tsbDrawModels.Checked        = GLControl.DrawModels;
@@ -165,6 +170,18 @@ namespace SF3.Win.Controls {
             var refs = CreateCameraRefs();
             GLControl.LookAtTarget(refs.Center);
             GLControl.Invalidate();
+        }
+
+        private void tsbCursorSelect_Click(object sender, EventArgs e) {
+            GLControl.CursorMode = ViewerCursorMode.Select;
+            tsbCursorSelect.Checked   = true;
+            tsbCursorNavigate.Checked = false;
+        }
+
+        private void tsbCursorNavigate_Click(object sender, EventArgs e) {
+            GLControl.CursorMode = ViewerCursorMode.Navigate;
+            tsbCursorSelect.Checked   = false;
+            tsbCursorNavigate.Checked = true;
         }
 
         // TODO: This kinda works, but not completely! Improve, refine, and ship it!!!

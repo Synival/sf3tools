@@ -93,6 +93,26 @@ namespace SF3.Win.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap CursorNavigateBmp {
+            get {
+                object obj = ResourceManager.GetObject("CursorNavigateBmp", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap CursorSelectBmp {
+            get {
+                object obj = ResourceManager.GetObject("CursorSelectBmp", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap EventIDsBmp {
             get {
                 object obj = ResourceManager.GetObject("EventIDsBmp", resourceCulture);

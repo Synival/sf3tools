@@ -12,7 +12,7 @@ namespace SF3.Win.Controls {
         }
 
         private void OnMouseDownEditing(MouseEventArgs e) {
-            if (e.Button != MouseButtons.Left)
+            if (CursorMode != Types.ViewerCursorMode.Select || e.Button != MouseButtons.Left)
                 return;
             SelectTile(_tileHoverPos);
         }

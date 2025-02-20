@@ -24,6 +24,9 @@
         /// </summary>
         private void InitializeComponent() {
             toolStrip1 = new System.Windows.Forms.ToolStrip();
+            tsbCursorSelect = new System.Windows.Forms.ToolStripButton();
+            tsbCursorNavigate = new System.Windows.Forms.ToolStripButton();
+            toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
             tsbDrawSurfaceModel = new System.Windows.Forms.ToolStripButton();
             tsbDrawModels = new System.Windows.Forms.ToolStripButton();
             tsbDrawGround = new System.Windows.Forms.ToolStripButton();
@@ -54,12 +57,37 @@
             // toolStrip1
             // 
             toolStrip1.ImageScalingSize = new System.Drawing.Size(24, 24);
-            toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { tsbDrawSurfaceModel, tsbDrawModels, tsbDrawGround, tsbDrawSkyBox, tsbRunAnimations, tsbDrawGradients, toolStripSeparator2, tsbToggleWireframe, tsbToggleBoundaries, tsbToggleTerrainType, tsbToggleEventID, tsbToggleNormals, tsbRotateSpritesUp, toolStripSeparator1, tsbCameraReset, tsbCameraTopView, tsbCameraLookAtCenter, toolStripSeparator3, tsbRecalculateLightmapOriginalMath, tsbUpdateLightmapUpdatedMath, toolStripSeparator4, tsbToggleHelp });
+            toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { tsbCursorSelect, tsbCursorNavigate, toolStripSeparator5, tsbDrawSurfaceModel, tsbDrawModels, tsbDrawGround, tsbDrawSkyBox, tsbRunAnimations, tsbDrawGradients, toolStripSeparator2, tsbToggleWireframe, tsbToggleBoundaries, tsbToggleTerrainType, tsbToggleEventID, tsbToggleNormals, tsbRotateSpritesUp, toolStripSeparator1, tsbCameraReset, tsbCameraTopView, tsbCameraLookAtCenter, toolStripSeparator3, tsbRecalculateLightmapOriginalMath, tsbUpdateLightmapUpdatedMath, toolStripSeparator4, tsbToggleHelp });
             toolStrip1.Location = new System.Drawing.Point(0, 0);
             toolStrip1.Name = "toolStrip1";
             toolStrip1.Size = new System.Drawing.Size(789, 31);
             toolStrip1.TabIndex = 0;
             toolStrip1.Text = "toolStrip1";
+            // 
+            // tsbCursorSelect
+            // 
+            tsbCursorSelect.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            tsbCursorSelect.Image = Properties.Resources.CursorSelectBmp;
+            tsbCursorSelect.ImageTransparentColor = System.Drawing.Color.Magenta;
+            tsbCursorSelect.Name = "tsbCursorSelect";
+            tsbCursorSelect.Size = new System.Drawing.Size(28, 28);
+            tsbCursorSelect.Text = "Select";
+            tsbCursorSelect.Click += tsbCursorSelect_Click;
+            // 
+            // tsbCursorNavigate
+            // 
+            tsbCursorNavigate.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            tsbCursorNavigate.Image = Properties.Resources.CursorNavigateBmp;
+            tsbCursorNavigate.ImageTransparentColor = System.Drawing.Color.Magenta;
+            tsbCursorNavigate.Name = "tsbCursorNavigate";
+            tsbCursorNavigate.Size = new System.Drawing.Size(28, 28);
+            tsbCursorNavigate.Text = "Navigate";
+            tsbCursorNavigate.Click += tsbCursorNavigate_Click;
+            // 
+            // toolStripSeparator5
+            // 
+            toolStripSeparator5.Name = "toolStripSeparator5";
+            toolStripSeparator5.Size = new System.Drawing.Size(6, 31);
             // 
             // tsbDrawSurfaceModel
             // 
@@ -338,5 +366,8 @@
         private System.Windows.Forms.ToolStripButton tsbCameraReset;
         private System.Windows.Forms.ToolStripButton tsbCameraTopView;
         private System.Windows.Forms.ToolStripButton tsbCameraLookAtCenter;
+        private System.Windows.Forms.ToolStripButton tsbCursorSelect;
+        private System.Windows.Forms.ToolStripButton tsbCursorNavigate;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
     }
 }

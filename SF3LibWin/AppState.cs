@@ -84,5 +84,7 @@ namespace SF3.Win {
         public bool ViewerRotateSpritesUp { get; set; } = false;
 
         public bool ViewerDrawHelp { get; set; } = true;
+
+        public int ViewerCursorMode { get; set; } = 0;
     }
 }
