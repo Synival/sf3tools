@@ -511,7 +511,8 @@ namespace SF3.Models.Files.MPD {
                 tables.AddRange(Surface.Tables);
             }
 
-            if (surfaceModelChunk != null) {
+            // TODO: get this chunk loading with Ship2?
+            if (surfaceModelChunk != null && Scenario != ScenarioType.Ship2) {
                 SurfaceModel = SurfaceModel.Create(surfaceModelChunk.DecompressedData, NameGetterContext, 0x00, "SurfaceModel", surfaceModelChunk.Index, Scenario);
                 tables.AddRange(SurfaceModel.Tables);
             }
