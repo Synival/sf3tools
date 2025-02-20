@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 using BrightIdeasSoftware;
 using CommonLib.Extensions;
 using CommonLib.NamedValues;
+using SF3.Models.Structs;
 using SF3.Models.Tables;
 using SF3.Win.Extensions;
 
@@ -96,7 +98,7 @@ namespace SF3.Win.Views {
                     var lvc = new OLVColumn(lvcNameBase + prop.Name, prop.Name);
                     lvc.IsEditable           = attr.GetColumnIsEditable(prop);
                     lvc.Text                 = attr.GetColumnText(prop);
-                    lvc.AspectToStringFormat = attr.GetColumnAspectToStringFormat(prop);
+                    lvc.AspectToStringFormat = attr.GetColumnAspectToStringFormat();
                     lvc.Width                = attr.GetColumnWidth();
 
                     lvcColumns.Add(lvc);
@@ -127,8 +129,10 @@ namespace SF3.Win.Views {
             }
 
             try {
-                if (Table != null)
+                if (Table != null) {
                     olv.AddObjects(Table.RowObjs);
+                    UpdateColumnVisibility(olv);
+                }
             }
             catch {
                 olv.ClearObjects();
@@ -180,10 +184,29 @@ namespace SF3.Win.Views {
                 if (IsCreated) {
                     if (_table != null)
                         OLVControl.ClearObjects();
-                    if (value != null)
+                    if (value != null) {
                         OLVControl.AddObjects(value.RowObjs);
+                        UpdateColumnVisibility(OLVControl);
+                    }
                 }
                 _table = value;
+            }
+        }
+
+        private void UpdateColumnVisibility(ObjectListView olv) {
+            var objs = olv.Objects;
+            if (objs == null)
+                return;
+
+            var vm = ModelType.GetTableViewModel();
+            var vmProperties = vm.Properties.ToDictionary(x => x.Key.Name, x => x.Value);
+
+            var rows = objs.Cast<IStruct>().ToArray();
+            var columns = olv.AllColumns.ToArray();
+
+            foreach (var col in columns) {
+                var vmCol = vmProperties.TryGetValue(col.AspectName, out var vmColValue) ? vmColValue : null;
+                col.IsVisible = vmCol != null && rows.Any(x => vmCol.GetVisibility(x));
             }
         }
 

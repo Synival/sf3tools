@@ -29,6 +29,13 @@ namespace SF3.Models.Structs.MPD.Model {
         }
 
         [BulkCopy]
+        [TableViewModelColumn(displayOrder: 0.05f)]
+        public bool HasTexture {
+            get => (Flags & 0x0004) == 0x0004;
+            set => Flags = (ushort) ((Flags & ~0x0004) | (value ? 0x0004 : 0));
+        }
+
+        [BulkCopy]
         [TableViewModelColumn(displayOrder: 0.1f)]
         public bool ApplyLighting {
             get => (Flags & 0x0008) == 0x0008;

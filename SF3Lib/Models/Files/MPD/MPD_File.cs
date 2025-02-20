@@ -435,11 +435,11 @@ namespace SF3.Models.Files.MPD {
             var header = MPDHeader;
             var indices = new List<int>();
 
-            if (chunks[20].Exists && header.Chunk20IsModels)
+            if (chunks[20].Exists && header.Chunk20IsModelsIfSurfaceModelExists)
                 indices.Add(20);
 
             if (chunks[1].Exists) {
-                if (!header.Chunk20IsModels || header.HasExtraChunk1ModelWithChunk21Textures)
+                if (!header.Chunk20IsModelsIfSurfaceModelExists || header.HasExtraChunk1ModelWithChunk21Textures)
                     indices.Add(1);
                 else
                     throw new InvalidOperationException("Models found in both Chunk[1] and Chunk[20]");

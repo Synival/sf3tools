@@ -622,6 +622,12 @@ namespace SF3.Win.Controls {
                     prePostAdjustY = centerY * scaleAdjust;
                 }
 
+                var pdater = _mpdFile.ModelCollections[0].PDatasByMemoryAddress[model.PData1];
+                var attrTable = _mpdFile.ModelCollections[0].AttrTablesByMemoryAddress[pdater.AttributesOffset];
+
+                if (attrTable.Any(x => (x.Flags & ~0x10F) != 0x00))
+                    yAdjust += 16;
+
                 modelMatrix =
                     Matrix4.CreateScale(model.ScaleX * scaleAdjust, model.ScaleY * scaleAdjust, model.ScaleZ * scaleAdjust) *
                     Matrix4.CreateRotationX(model.AngleX * (float) Math.PI * -2.00f) *

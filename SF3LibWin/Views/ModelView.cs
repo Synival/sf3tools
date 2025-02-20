@@ -221,7 +221,7 @@ namespace SF3.Win.Views {
                 VMColumn             = vmColumn;
                 IsReadOnly           = !vmColumn.GetColumnIsEditable(propertyInfo);
                 Name                 = vmColumn.GetColumnText(propertyInfo);
-                AspectToStringFormat = vmColumn.GetColumnAspectToStringFormat(propertyInfo);
+                AspectToStringFormat = vmColumn.GetColumnAspectToStringFormat();
                 Width                = vmColumn.GetColumnWidth();
             }
 
@@ -255,6 +255,7 @@ namespace SF3.Win.Views {
                     var vm = value.GetType().GetTableViewModel();
                     _modelProperties = vm.Properties
                         .Where(x => x.Value.DisplayOrder >= 0 || x.Key.Name == "Address")
+                        .Where(x => x.Value.GetVisibility(value))
                         .Select(x => new ModelProperty(value, x.Key, x.Value)).ToList();
                 }
 

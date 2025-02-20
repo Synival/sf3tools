@@ -371,6 +371,12 @@ namespace MPD_Analyzer {
             if (mc20 != null && HasHighMemoryModels(mc20) == false)
                 errors.Add("Chunk[20] models have low memory, but they should be high memory");
 
+            foreach (var mc in mpdFile.ModelCollections)
+                foreach (var attrTable in mc.AttrTablesByMemoryAddress.Values)
+                    foreach (var attr in attrTable)
+                        if (attr.Mode_MSBon)
+                            errors.Add($"-- MSBon: {attr.Address}");
+
             return errors.ToArray();
         }
 

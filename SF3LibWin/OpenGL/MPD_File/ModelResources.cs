@@ -144,8 +144,7 @@ namespace SF3.Win.OpenGL.MPD_File {
 
                 TextureAnimation anim = null;
 
-                // TODO: wtf do these mean???
-                if (/*attr.Mode_ECdis && attr.Mode_SPdis*/ (attr.Flags & 0x0004) == 0) {
+                if (!attr.HasTexture) {
                     var colorChannels = PixelConversion.ABGR1555toChannels(attr.ColorNo);
                     color = new Vector4(colorChannels.r / 255.0f, colorChannels.g / 255.0f, colorChannels.b / 255.0f, 1.0f);
                 }
