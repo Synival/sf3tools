@@ -625,7 +625,7 @@ namespace SF3.Win.Controls {
                 var pdater = _mpdFile.ModelCollections[0].PDatasByMemoryAddress[model.PData1];
                 var attrTable = _mpdFile.ModelCollections[0].AttrTablesByMemoryAddress[pdater.AttributesOffset];
 
-                modelMatrix =
+                var newModelMatrix =
                     Matrix4.CreateScale(model.ScaleX * scaleAdjust, model.ScaleY * scaleAdjust, model.ScaleZ * scaleAdjust) *
                     Matrix4.CreateRotationX(model.AngleX * (float) Math.PI * -2.00f) *
                     Matrix4.CreateTranslation(0, prePostAdjustY, 0) *
@@ -634,15 +634,17 @@ namespace SF3.Win.Controls {
                     Matrix4.CreateRotationZ(model.AngleZ * (float) Math.PI * 2.00f) *
                     Matrix4.CreateTranslation(model.PositionX / -32.0f - 32.0f, model.PositionY / -32.0f - prePostAdjustY + yAdjust, model.PositionZ / 32.0f + 32.0f);
 
-                _modelMatricesByModel[model] = modelMatrix.Value;
+                _modelMatricesByModel[model] = newModelMatrix;
+                modelMatrix = newModelMatrix;
             }
 
             var normalMatrix = _normalMatricesByModel.TryGetValue(model, out var normalMatrixValue) ? normalMatrixValue : null;
             if (!normalMatrix.HasValue) {
-                normalMatrix = new Matrix3(modelMatrix.Value).Inverted();
-                normalMatrix.Value.Transpose();
+                var newNormalMatrix = new Matrix3(modelMatrix.Value).Inverted();
+                newNormalMatrix.Transpose();
 
-                _normalMatricesByModel[model] = normalMatrix.Value;
+                _normalMatricesByModel[model] = newNormalMatrix;
+                normalMatrix = newNormalMatrix;
             }
 
             UpdateShaderModelMatrix(shader, modelMatrix.Value);
