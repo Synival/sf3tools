@@ -326,6 +326,16 @@ namespace SF3.Win.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap ShowLightingBmp {
+            get {
+                object obj = ResourceManager.GetObject("ShowLightingBmp", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap ShowModelsBmp {
             get {
                 object obj = ResourceManager.GetObject("ShowModelsBmp", resourceCulture);

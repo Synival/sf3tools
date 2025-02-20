@@ -592,8 +592,7 @@ namespace SF3.Models.Files.MPD {
             // Add some images.
             if (RepeatingGroundChunks?.Any() == true) {
                 try {
-                    var lat = LightAdjustment;
-                    var palette = CreatePalette(0, lat?.GroundRAdjustment ?? 0, lat?.GroundGAdjustment ?? 0, lat?.GroundBAdjustment ?? 0);
+                    var palette = CreatePalette(0);
                     RepeatingGroundImage = new MultiChunkTextureIndexed(RepeatingGroundChunks.Select(x => x.DecompressedData).ToArray(), TexturePixelFormat.Palette1, palette);
                 }
                 catch {
@@ -602,8 +601,7 @@ namespace SF3.Models.Files.MPD {
             }
 
             if (TiledGroundTileChunks?.Any() == true && TiledGroundMapChunks?.Any() == true) {
-                var lat = LightAdjustment;
-                var palette = CreatePalette(0, lat?.GroundRAdjustment ?? 0, lat?.GroundGAdjustment ?? 0, lat?.GroundBAdjustment ?? 0);
+                var palette = CreatePalette(0);
                 TiledGroundTileImage = new MultiChunkTextureIndexed(TiledGroundTileChunks.Select(x => x.DecompressedData).ToArray(), TexturePixelFormat.Palette1, palette, true);
 
                 var tiledGroundImageData = CreateTiledImageData(TiledGroundTileImage, TiledGroundMapChunks.Select(x => x.DecompressedData).ToArray(), 64, 4);

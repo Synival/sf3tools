@@ -24,6 +24,7 @@ namespace SF3.Win.Controls {
             tsbDrawGround.Checked        = GLControl.DrawGround;
             tsbDrawSkyBox.Checked        = GLControl.DrawSkyBox;
             tsbRunAnimations.Checked     = GLControl.RunAnimations;
+            tsbApplyLighting.Checked     = GLControl.ApplyLighting;
             tsbDrawGradients.Checked     = GLControl.DrawGradients;
 
             tsbToggleWireframe.Checked   = GLControl.DrawWireframe;
@@ -78,6 +79,7 @@ namespace SF3.Win.Controls {
         private void tsbDrawGround_Click       (object sender, EventArgs e) => tsbDrawGround.Checked        = GLControl.DrawGround       = !GLControl.DrawGround;
         private void tsbDrawSkyBox_Click       (object sender, EventArgs e) => tsbDrawSkyBox.Checked        = GLControl.DrawSkyBox       = !GLControl.DrawSkyBox;
         private void tsbRunAnimations_Click    (object sender, EventArgs e) => tsbRunAnimations.Checked     = GLControl.RunAnimations    = !GLControl.RunAnimations;
+        private void tsbApplyLighting_Click    (object sender, EventArgs e) => tsbApplyLighting.Checked     = GLControl.ApplyLighting    = !GLControl.ApplyLighting;
         private void tsbDrawGradients_Click    (object sender, EventArgs e) => tsbDrawGradients.Checked     = GLControl.DrawGradients    = !GLControl.DrawGradients;
 
         private void tsbToggleWireframe_Click  (object sender, EventArgs e) => tsbToggleWireframe.Checked   = GLControl.DrawWireframe    = !GLControl.DrawWireframe;
@@ -91,8 +93,10 @@ namespace SF3.Win.Controls {
         private void tsbToggleHelp_Click       (object sender, EventArgs e) => tsbToggleHelp.Checked        = GLControl.DrawHelp         = !GLControl.DrawHelp;
 
         public void UpdateLighting() {
-            if (MPD_File != null)
-                GLControl.UpdateLighting();
+            if (MPD_File != null) {
+                GLControl.UpdateLightPosition();
+                GLControl.UpdateLightingTexture();
+            }
         }
 
         public void UpdateModels() {

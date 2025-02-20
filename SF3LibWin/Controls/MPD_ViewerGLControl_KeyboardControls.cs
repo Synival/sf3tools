@@ -9,11 +9,11 @@ using OpenTK.Mathematics;
 namespace SF3.Win.Controls {
     public partial class MPD_ViewerGLControl {
         private void InitKeyboardControls() {
-            KeyDown           += (s, e) => OnKeyDownKeyboardControls(e);
-            KeyUp             += (s, e) => OnKeyUpKeyboardControls(e);
-            CmdKey            += (object s, ref Message msg, Keys k, ref bool wp) => OnCmdKeyKeyboardControls(k, ref wp);
-            LostFocus         += (s, e) => OnLostFocusKeyboardControls();
-            FrameTick         += (s, deltaInMs) => OnFrameTickKeyboardControls(deltaInMs);
+            KeyDown   += (s, e) => OnKeyDownKeyboardControls(e);
+            KeyUp     += (s, e) => OnKeyUpKeyboardControls(e);
+            CmdKey    += (object s, ref Message msg, Keys k, ref bool wp) => OnCmdKeyKeyboardControls(k, ref wp);
+            LostFocus += (s, e) => OnLostFocusKeyboardControls();
+            FrameTick += (s, deltaInMs) => OnFrameTickKeyboardControls(deltaInMs);
         }
 
         private void OnKeyDownKeyboardControls(KeyEventArgs e) {
@@ -150,23 +150,23 @@ namespace SF3.Win.Controls {
             if (MPD_File?.LightPosition != null) {
                 if (keysDown.Contains(Keys.Oemcomma)) {
                     MPD_File.LightPosition.Pitch -= (ushort) (0x080 * rate);
-                    UpdateShaderLighting();
+                    UpdateLightPosition();
                     Invalidate();
                 }
                 else if (keysDown.Contains(Keys.OemPeriod)) {
                     MPD_File.LightPosition.Pitch += (ushort) (0x080 * rate);
-                    UpdateShaderLighting();
+                    UpdateLightPosition();
                     Invalidate();
                 }
 
                 if (keysDown.Contains(Keys.OemOpenBrackets)) {
                     MPD_File.LightPosition.Yaw -= (ushort) (0x080 * rate);
-                    UpdateShaderLighting();
+                    UpdateLightPosition();
                     Invalidate();
                 }
                 else if (keysDown.Contains(Keys.OemCloseBrackets)) {
                     MPD_File.LightPosition.Yaw += (ushort) (0x080 * rate);
-                    UpdateShaderLighting();
+                    UpdateLightPosition();
                     Invalidate();
                 }
             }

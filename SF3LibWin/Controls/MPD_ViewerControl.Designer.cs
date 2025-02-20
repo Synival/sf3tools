@@ -32,6 +32,7 @@
             tsbDrawGround = new System.Windows.Forms.ToolStripButton();
             tsbDrawSkyBox = new System.Windows.Forms.ToolStripButton();
             tsbRunAnimations = new System.Windows.Forms.ToolStripButton();
+            tsbApplyLighting = new System.Windows.Forms.ToolStripButton();
             tsbDrawGradients = new System.Windows.Forms.ToolStripButton();
             toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             tsbToggleWireframe = new System.Windows.Forms.ToolStripButton();
@@ -57,7 +58,7 @@
             // toolStrip1
             // 
             toolStrip1.ImageScalingSize = new System.Drawing.Size(24, 24);
-            toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { tsbCursorSelect, tsbCursorNavigate, toolStripSeparator5, tsbDrawSurfaceModel, tsbDrawModels, tsbDrawGround, tsbDrawSkyBox, tsbRunAnimations, tsbDrawGradients, toolStripSeparator2, tsbToggleWireframe, tsbToggleBoundaries, tsbToggleTerrainType, tsbToggleEventID, tsbToggleNormals, tsbRotateSpritesUp, toolStripSeparator1, tsbCameraReset, tsbCameraTopView, tsbCameraLookAtCenter, toolStripSeparator3, tsbRecalculateLightmapOriginalMath, tsbUpdateLightmapUpdatedMath, toolStripSeparator4, tsbToggleHelp });
+            toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { tsbCursorSelect, tsbCursorNavigate, toolStripSeparator5, tsbDrawSurfaceModel, tsbDrawModels, tsbDrawGround, tsbDrawSkyBox, tsbRunAnimations, tsbApplyLighting, tsbDrawGradients, toolStripSeparator2, tsbToggleWireframe, tsbToggleBoundaries, tsbToggleTerrainType, tsbToggleEventID, tsbToggleNormals, tsbRotateSpritesUp, toolStripSeparator1, tsbCameraReset, tsbCameraTopView, tsbCameraLookAtCenter, toolStripSeparator3, tsbRecalculateLightmapOriginalMath, tsbUpdateLightmapUpdatedMath, toolStripSeparator4, tsbToggleHelp });
             toolStrip1.Location = new System.Drawing.Point(0, 0);
             toolStrip1.Name = "toolStrip1";
             toolStrip1.Size = new System.Drawing.Size(789, 31);
@@ -142,6 +143,16 @@
             tsbRunAnimations.Size = new System.Drawing.Size(28, 28);
             tsbRunAnimations.Text = "Run Animations";
             tsbRunAnimations.Click += tsbRunAnimations_Click;
+            // 
+            // tsbApplyLighting
+            // 
+            tsbApplyLighting.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            tsbApplyLighting.Image = Properties.Resources.ShowLightingBmp;
+            tsbApplyLighting.ImageTransparentColor = System.Drawing.Color.Magenta;
+            tsbApplyLighting.Name = "tsbApplyLighting";
+            tsbApplyLighting.Size = new System.Drawing.Size(28, 28);
+            tsbApplyLighting.Text = "Apply Lighting";
+            tsbApplyLighting.Click += tsbApplyLighting_Click;
             // 
             // tsbDrawGradients
             // 
@@ -369,5 +380,6 @@
         private System.Windows.Forms.ToolStripButton tsbCursorSelect;
         private System.Windows.Forms.ToolStripButton tsbCursorNavigate;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
+        private System.Windows.Forms.ToolStripButton tsbApplyLighting;
     }
 }

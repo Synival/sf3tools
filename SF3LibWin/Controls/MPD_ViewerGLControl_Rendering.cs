@@ -24,19 +24,18 @@ namespace SF3.Win.Controls {
             TileModified += (s, e) => OnTileModifiedRendering(s);
         }
 
-        public void UpdateLighting(bool? useFancyOutsideSurfaceLighting = null) {
+        public void UpdateLightingTexture() {
             MakeCurrent();
-            UpdateShaderLighting(useFancyOutsideSurfaceLighting);
             using (var textureBitmap = CreateLightPaletteBitmap())
                 _surfaceModel.SetLightingTexture(textureBitmap != null ? new Texture(textureBitmap, clampToEdge: false) : null);
         }
 
-        private void UpdateShaderLighting(bool? useFancyOutsideSurfaceLighting = null) {
+        public void UpdateLightPosition() {
             MakeCurrent();
             var lightPos = GetLightPosition();
             foreach (var shader in _world.Shaders) {
                 using (shader.Use())
-                    UpdateShaderLighting(shader, lightPos, useFancyOutsideSurfaceLighting);
+                    UpdateLightPosition(shader, lightPos);
             }
         }
 
@@ -98,7 +97,11 @@ namespace SF3.Win.Controls {
 
             SetInitialCameraPosition();
             UpdateSelectFramebuffer();
-            UpdateLighting(false);
+
+            UpdateLightingTexture();
+            UpdateLightPosition();
+            UpdateLightingMode(_world.ObjectShader, false);
+            UpdateGroundGlow(_world.TextureShader, Vector3.Zero);
 
             foreach (var shader in _world.Shaders) {
                 UpdateShaderModelMatrix(shader, Matrix4.Identity);
@@ -249,18 +252,30 @@ namespace SF3.Win.Controls {
                     GL.UniformMatrix3(handle, false, ref matrix);
         }
 
-        private void UpdateShaderLighting(Shader shader, Vector3 lightPos, bool? useFancyOutdoorSurfaceLighting = null) {
-            var handle1 = GL.GetUniformLocation(shader.Handle, "lightPosition");
-            var handle2 = (useFancyOutdoorSurfaceLighting.HasValue) ? GL.GetUniformLocation(shader.Handle, "useNewLighting") : -1;
+        private void UpdateLightPosition(Shader shader, Vector3 lightPos) {
+            var handle = GL.GetUniformLocation(shader.Handle, "lightPosition");
+            if (handle >= 0)
+                using (shader.Use())
+                    GL.Uniform3(handle, lightPos);
+        }
 
-            if (handle1 >= 0 || handle2 >= 0) {
+        private void UpdateLightingMode(Shader shader, bool useFancyOutdoorSurfaceLighting) {
+            var handle = GL.GetUniformLocation(shader.Handle, "lightingMode");
+            if (handle >= 0) {
                 using (shader.Use()) {
-                    if (handle1 >= 0)
-                        GL.Uniform3(handle1, lightPos);
-                    if (handle2 >= 0)
-                        GL.Uniform1(handle2, useFancyOutdoorSurfaceLighting.Value ? 1 : 0);
+                    if (handle >= 0) {
+                        var lightingMode = !ApplyLighting ? 0 : !useFancyOutdoorSurfaceLighting ? 1 : 2;
+                        GL.Uniform1(handle, lightingMode);
+                    }
                 }
             }
+        }
+
+        private void UpdateGroundGlow(Shader shader, Vector3 glow) {
+            var handle = GL.GetUniformLocation(shader.Handle, "globalGlow");
+            if (handle >= 0)
+                using (shader.Use())
+                    GL.Uniform3(handle, glow);
         }
 
         private Vector3 GetLightPosition() {
@@ -322,7 +337,7 @@ namespace SF3.Win.Controls {
                 GL.StencilOp(StencilOp.Keep, StencilOp.Keep, StencilOp.Replace);
 
                 var lightingTexture = _surfaceModel.LightingTexture ?? _world.WhiteTexture;
-                var useFancyOutdoorSurfaceLighting = (MPD_File == null) ? false : MPD_File.MPDHeader.OutdoorLighting;
+                UpdateLightingMode(_world.ObjectShader, false);
 
                 if (DrawSkyBox && _skyBoxModel.Model != null) {
                     GL.DepthMask(false);
@@ -362,8 +377,21 @@ namespace SF3.Win.Controls {
                     GL.StencilFunc(StencilFunction.Always, 1, 0x01);
                     GL.StencilMask(0x01);
 
+                    Vector3 glow = Vector3.Zero;
+                    if (ApplyLighting && MPD_File.LightAdjustment != null) {
+                        var lightAdj = MPD_File.LightAdjustment;
+                        glow = new Vector3(
+                            lightAdj.GroundRAdjustment / (float) 0x1F, 
+                            lightAdj.GroundGAdjustment / (float) 0x1F, 
+                            lightAdj.GroundBAdjustment / (float) 0x1F
+                        );
+                    }
+                    UpdateGroundGlow(_world.TextureShader, glow);
+
                     using (_groundModel.Texture.Use(TextureUnit.Texture0))
                         _groundModel.Model.Draw(_world.TextureShader, null);
+
+                    UpdateGroundGlow(_world.TextureShader, Vector3.Zero);
 
                     if (DrawGradients && _gradients?.GroundGradientModel != null) {
                         UpdateShaderProjectionMatrix(_world.SolidShader, Matrix4.Identity);
@@ -439,8 +467,9 @@ namespace SF3.Win.Controls {
                     GL.Enable(EnableCap.PolygonOffsetFill);
                     GL.PolygonOffset(-1.0f, -1.0f);
 
+                    var useFancyOutdoorSurfaceLighting = (MPD_File == null) ? false : MPD_File.MPDHeader.OutdoorLighting;
                     if (useFancyOutdoorSurfaceLighting)
-                        UpdateShaderLighting(true);
+                        UpdateLightingMode(_world.ObjectShader, true);
 
                     using (terrainTypesTexture.Use(MPD_TextureUnit.TextureTerrainTypes))
                     using (eventIdsTexture.Use(MPD_TextureUnit.TextureEventIDs))
@@ -459,7 +488,7 @@ namespace SF3.Win.Controls {
                     }
 
                     if (useFancyOutdoorSurfaceLighting)
-                        UpdateShaderLighting(false);
+                        UpdateLightingMode(_world.ObjectShader, false);
 
                     GL.Disable(EnableCap.PolygonOffsetFill);
                 }
@@ -736,6 +765,13 @@ namespace SF3.Win.Controls {
         public bool RunAnimations {
             get => AppState.ViewerRunAnimations;
             set => UpdateAppState(nameof(AppState.ViewerRunAnimations), value);
+        }
+
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public bool ApplyLighting {
+            get => AppState.ViewerApplyLighting;
+            set => UpdateAppState(nameof(AppState.ViewerApplyLighting), value);
         }
 
         [Browsable(false)]
