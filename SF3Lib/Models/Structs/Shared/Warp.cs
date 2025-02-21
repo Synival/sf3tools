@@ -16,24 +16,28 @@ namespace SF3.Models.Structs.Shared {
             map      = Address + 3;
         }
 
+        [TableViewModelColumn(displayOrder: 0, displayName: "+0x00", displayFormat: "X2")]
         [BulkCopy]
         public int WarpUnknown1 {
             get => Data.GetByte(unknown1);
             set => Data.SetByte(unknown1, (byte) value);
         }
 
+        [TableViewModelColumn(displayOrder: 1, displayName: "+0x02", displayFormat: "X2")]
         [BulkCopy]
         public int WarpUnknown2 {
             get => Data.GetByte(unknown2);
             set => Data.SetByte(unknown2, (byte) value);
         }
 
+        [TableViewModelColumn(displayOrder: 2, displayName: "Type", displayFormat: "X2")]
         [BulkCopy]
         public int WarpType {
             get => Data.GetByte(type);
             set => Data.SetByte(type, (byte) value);
         }
 
+        [TableViewModelColumn(displayOrder: 3, displayName: "Map", displayFormat: "X2")]
         [BulkCopy]
         public int WarpMap {
             get => Data.GetByte(map);
