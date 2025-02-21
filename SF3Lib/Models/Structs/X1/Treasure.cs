@@ -7,18 +7,18 @@ namespace SF3.Models.Structs.X1 {
         private readonly int searched;
         private readonly int eventNumber;
         private readonly int flagUsed;
-        private readonly int unknown;
+        private readonly int unknown1;
         private readonly int eventType;
         private readonly int itemID;
 
         public Treasure(IByteData data, int id, string name, int address)
         : base(data, id, name, address, 0x0C) {
-            searched    = Address; //2 bytes. how is searched. second by being 0x13 is a treasure. if this is 0xffff terminate 
-            eventNumber = Address + 0x02;
-            flagUsed    = Address + 0x04;
-            unknown     = Address + 0x06;
-            eventType   = Address + 0x08;
-            itemID      = Address + 0x0a;
+            searched    = Address;        // 2 bytes. how is searched. second by being 0x13 is a treasure. if this is 0xffff terminate 
+            eventNumber = Address + 0x02; // 2 bytes
+            flagUsed    = Address + 0x04; // 2 bytes
+            unknown1    = Address + 0x06; // 2 bytes
+            eventType   = Address + 0x08; // 2 bytes
+            itemID      = Address + 0x0a; // 2 bytes
         }
 
         public string MPDTieIn
@@ -39,15 +39,15 @@ namespace SF3.Models.Structs.X1 {
         }
 
         [BulkCopy]
-        public int FlagUse {
+        public int FlagUsed {
             get => Data.GetWord(flagUsed);
             set => Data.SetWord(flagUsed, value);
         }
 
         [BulkCopy]
-        public int UnknownTreasure {
-            get => Data.GetWord(unknown);
-            set => Data.SetWord(unknown, value);
+        public int Unknown1 {
+            get => Data.GetWord(unknown1);
+            set => Data.SetWord(unknown1, value);
         }
 
         [BulkCopy]

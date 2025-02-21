@@ -58,7 +58,7 @@ namespace SF3.Tests.Models.Files {
 
             Assert.AreEqual(0xFFFF, table[0].Searched);
             Assert.AreEqual(0, table[0].EventParameter);
-            Assert.AreEqual(0, table[0].FlagUse);
+            Assert.AreEqual(0, table[0].FlagUsed);
             Assert.AreEqual(0, table[0].EventNumber);
 
             Assert.AreEqual(1, table.Length);

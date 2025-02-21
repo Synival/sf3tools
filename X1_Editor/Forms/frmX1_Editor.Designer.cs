@@ -949,13 +949,13 @@ namespace SF3.X1_Editor.Forms
             // 
             // lvcInteractablesFlagUsed
             // 
-            lvcInteractablesFlagUsed.AspectName = "FlagUse";
+            lvcInteractablesFlagUsed.AspectName = "FlagUsed";
             lvcInteractablesFlagUsed.AspectToStringFormat = "{0:X4}";
             lvcInteractablesFlagUsed.Text = "FlagUsed";
             // 
             // lvcInteractablesUnknown1
             // 
-            lvcInteractablesUnknown1.AspectName = "UnknownTreasure";
+            lvcInteractablesUnknown1.AspectName = "Unknown1";
             lvcInteractablesUnknown1.AspectToStringFormat = "{0:X}";
             lvcInteractablesUnknown1.Text = "Unknown1";
             lvcInteractablesUnknown1.Width = 70;
@@ -976,7 +976,7 @@ namespace SF3.X1_Editor.Forms
             // 
             // lvcInteractablesMPDTieInID
             // 
-            lvcInteractablesMPDTieInID.AspectName = "MPDTieIn";
+            lvcInteractablesMPDTieInID.AspectName = "MPDTieInID";
             lvcInteractablesMPDTieInID.AspectToStringFormat = "{0:X}";
             lvcInteractablesMPDTieInID.IsEditable = false;
             lvcInteractablesMPDTieInID.Text = "MPDTieInID";

@@ -122,17 +122,17 @@ namespace SF3.Tests.Models.Files {
 
             Assert.AreEqual(0x13, table[0].Searched);
             Assert.AreEqual(0xEA, table[0].EventParameter);
-            Assert.AreEqual(0xF0F, table[0].FlagUse);
+            Assert.AreEqual(0xF0F, table[0].FlagUsed);
             Assert.AreEqual(0x0F, table[0].EventNumber);
 
             Assert.AreEqual(0xC013, table[1].Searched);
             Assert.AreEqual(0x65, table[1].EventParameter);
-            Assert.AreEqual(0xF10, table[1].FlagUse);
+            Assert.AreEqual(0xF10, table[1].FlagUsed);
             Assert.AreEqual(14, table[1].EventNumber);
 
             Assert.AreEqual(0xFFFF, table[3].Searched);
             Assert.AreEqual(0, table[3].EventParameter);
-            Assert.AreEqual(0, table[3].FlagUse);
+            Assert.AreEqual(0, table[3].FlagUsed);
             Assert.AreEqual(0, table[3].EventNumber);
 
             Assert.AreEqual(4, table.Length);
