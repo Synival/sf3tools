@@ -33,7 +33,7 @@ namespace CommonLib.ViewModels {
             if (DisplayFormat != null && DisplayFormat != string.Empty)
                 return "{0:" + DisplayFormat + "}";
             else if (IsPointer)
-                return "{0:X6}";
+                return "{0:X2}";
             else
                 return "";
         }
