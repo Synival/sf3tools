@@ -230,112 +230,112 @@ namespace SF3.X1_Editor.Forms
             // 
             // lvcTileDataNoEntry
             // 
-            lvcTileDataNoEntry.AspectName = "TileNoEntry";
+            lvcTileDataNoEntry.AspectName = "NoEntry";
             lvcTileDataNoEntry.AspectToStringFormat = "{0:X}";
             lvcTileDataNoEntry.Text = "NoEntry";
             lvcTileDataNoEntry.Width = 50;
             // 
             // lvcTileDataAir
             // 
-            lvcTileDataAir.AspectName = "TileAir";
+            lvcTileDataAir.AspectName = "Air";
             lvcTileDataAir.AspectToStringFormat = "{0:X}";
             lvcTileDataAir.Text = "Air";
             lvcTileDataAir.Width = 40;
             // 
             // lvcTileDataGrassland
             // 
-            lvcTileDataGrassland.AspectName = "TileGrassland";
+            lvcTileDataGrassland.AspectName = "Grassland";
             lvcTileDataGrassland.AspectToStringFormat = "{0:X}";
             lvcTileDataGrassland.Text = "Grassland";
             lvcTileDataGrassland.Width = 65;
             // 
             // lvcTileDataDirt
             // 
-            lvcTileDataDirt.AspectName = "TileDirt";
+            lvcTileDataDirt.AspectName = "Dirt";
             lvcTileDataDirt.AspectToStringFormat = "{0:X}";
             lvcTileDataDirt.Text = "Dirt";
             lvcTileDataDirt.Width = 40;
             // 
             // lvcTileDataDarkGrass
             // 
-            lvcTileDataDarkGrass.AspectName = "TileDarkGrass";
+            lvcTileDataDarkGrass.AspectName = "DarkGrass";
             lvcTileDataDarkGrass.AspectToStringFormat = "{0:X}";
             lvcTileDataDarkGrass.Text = "DarkGrass";
             lvcTileDataDarkGrass.Width = 65;
             // 
             // lvcTileDataForest
             // 
-            lvcTileDataForest.AspectName = "TileForest";
+            lvcTileDataForest.AspectName = "Forest";
             lvcTileDataForest.AspectToStringFormat = "{0:X}";
             lvcTileDataForest.Text = "Forest";
             lvcTileDataForest.Width = 45;
             // 
             // lvcTileDataBrownMountain
             // 
-            lvcTileDataBrownMountain.AspectName = "TileBrownMountain";
+            lvcTileDataBrownMountain.AspectName = "BrownMountain";
             lvcTileDataBrownMountain.AspectToStringFormat = "{0:X}";
             lvcTileDataBrownMountain.Text = "BrownMountain";
             lvcTileDataBrownMountain.Width = 90;
             // 
             // lvcTileDataDesert
             // 
-            lvcTileDataDesert.AspectName = "TileDesert";
+            lvcTileDataDesert.AspectName = "Desert";
             lvcTileDataDesert.AspectToStringFormat = "{0:X}";
             lvcTileDataDesert.Text = "Desert";
             lvcTileDataDesert.Width = 50;
             // 
             // lvcTileDataGreyMountain
             // 
-            lvcTileDataGreyMountain.AspectName = "TileGreyMountain";
+            lvcTileDataGreyMountain.AspectName = "GreyMountain";
             lvcTileDataGreyMountain.AspectToStringFormat = "{0:X}";
             lvcTileDataGreyMountain.Text = "GreyMountain";
             lvcTileDataGreyMountain.Width = 80;
             // 
             // lvcTileDataWater
             // 
-            lvcTileDataWater.AspectName = "TileWater";
+            lvcTileDataWater.AspectName = "Water";
             lvcTileDataWater.AspectToStringFormat = "{0:X}";
             lvcTileDataWater.Text = "Water";
             lvcTileDataWater.Width = 65;
             // 
             // lvcTileDataCantStay
             // 
-            lvcTileDataCantStay.AspectName = "TileCantStay";
+            lvcTileDataCantStay.AspectName = "CantStay";
             lvcTileDataCantStay.AspectToStringFormat = "{0:X}";
             lvcTileDataCantStay.Text = "CantStay";
             lvcTileDataCantStay.Width = 70;
             // 
             // lvcTileDataSand
             // 
-            lvcTileDataSand.AspectName = "TileSand";
+            lvcTileDataSand.AspectName = "Sand";
             lvcTileDataSand.AspectToStringFormat = "{0:X}";
             lvcTileDataSand.Text = "Sand";
             lvcTileDataSand.Width = 45;
             // 
             // lvcTileDataEnemyOnly
             // 
-            lvcTileDataEnemyOnly.AspectName = "TileEnemyOnly";
+            lvcTileDataEnemyOnly.AspectName = "EnemyOnly";
             lvcTileDataEnemyOnly.AspectToStringFormat = "{0:X}";
             lvcTileDataEnemyOnly.Text = "EnemyOnly";
             lvcTileDataEnemyOnly.Width = 70;
             // 
             // lvcTileDataPlayerOnly
             // 
-            lvcTileDataPlayerOnly.AspectName = "TilePlayerOnly";
+            lvcTileDataPlayerOnly.AspectName = "PlayerOnly";
             lvcTileDataPlayerOnly.AspectToStringFormat = "{0:X}";
             lvcTileDataPlayerOnly.Text = "PlayerOnly";
             lvcTileDataPlayerOnly.Width = 70;
             // 
             // lvcTileDataUnknownE
             // 
-            lvcTileDataUnknownE.AspectName = "TileUnknownE";
+            lvcTileDataUnknownE.AspectName = "UnknownE";
             lvcTileDataUnknownE.AspectToStringFormat = "{0:X}";
             lvcTileDataUnknownE.Text = "UnknownE";
             lvcTileDataUnknownE.Width = 70;
             // 
             // lvcTileDataUnknownF
             // 
-            lvcTileDataUnknownF.AspectName = "TileUnknownF";
+            lvcTileDataUnknownF.AspectName = "UnknownF";
             lvcTileDataUnknownF.AspectToStringFormat = "{0:X}";
             lvcTileDataUnknownF.Text = "UnknownF";
             lvcTileDataUnknownF.Width = 70;

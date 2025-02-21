@@ -138,20 +138,20 @@ namespace SF3.Tests.Models.Files {
             var file = TestCase.Create();
             var table = file.TileMovementTable;
 
-            Assert.AreEqual(0x12, table[0].TileGrassland);
-            Assert.AreEqual(0x23, table[0].TileDarkGrass);
-            Assert.AreEqual(0x24, table[0].TileForest);
-            Assert.AreEqual(0xFF, table[0].TileNoEntry);
+            Assert.AreEqual(0x12, table[0].Grassland);
+            Assert.AreEqual(0x23, table[0].DarkGrass);
+            Assert.AreEqual(0x24, table[0].Forest);
+            Assert.AreEqual(0xFF, table[0].NoEntry);
 
-            Assert.AreEqual(0x12, table[1].TileGrassland);
-            Assert.AreEqual(0x23, table[1].TileDarkGrass);
-            Assert.AreEqual(0x24, table[1].TileForest);
-            Assert.AreEqual(0xFF, table[1].TileNoEntry);
+            Assert.AreEqual(0x12, table[1].Grassland);
+            Assert.AreEqual(0x23, table[1].DarkGrass);
+            Assert.AreEqual(0x24, table[1].Forest);
+            Assert.AreEqual(0xFF, table[1].NoEntry);
 
-            Assert.AreEqual(0x12, table[2].TileGrassland);
-            Assert.AreEqual(0x23, table[2].TileDarkGrass);
-            Assert.AreEqual(0x25, table[2].TileForest);
-            Assert.AreEqual(0xFF, table[2].TileNoEntry);
+            Assert.AreEqual(0x12, table[2].Grassland);
+            Assert.AreEqual(0x23, table[2].DarkGrass);
+            Assert.AreEqual(0x25, table[2].Forest);
+            Assert.AreEqual(0xFF, table[2].NoEntry);
 
             Assert.AreEqual(14, table.Length);
         }

@@ -41,97 +41,97 @@ namespace SF3.Models.Structs.Shared {
         }
 
         [BulkCopy]
-        public int TileNoEntry {
+        public int NoEntry {
             get => Data.GetByte(noEntry);
             set => Data.SetByte(noEntry, (byte) value);
         }
 
         [BulkCopy]
-        public int TileAir {
+        public int Air {
             get => Data.GetByte(air);
             set => Data.SetByte(air, (byte) value);
         }
 
         [BulkCopy]
-        public int TileGrassland {
+        public int Grassland {
             get => Data.GetByte(grassland);
             set => Data.SetByte(grassland, (byte) value);
         }
 
         [BulkCopy]
-        public int TileDirt {
+        public int Dirt {
             get => Data.GetByte(dirt);
             set => Data.SetByte(dirt, (byte) value);
         }
 
         [BulkCopy]
-        public int TileDarkGrass {
+        public int DarkGrass {
             get => Data.GetByte(darkGrass);
             set => Data.SetByte(darkGrass, (byte) value);
         }
 
         [BulkCopy]
-        public int TileForest {
+        public int Forest {
             get => Data.GetByte(forest);
             set => Data.SetByte(forest, (byte) value);
         }
 
         [BulkCopy]
-        public int TileBrownMountain {
+        public int BrownMountain {
             get => Data.GetByte(brownMountain);
             set => Data.SetByte(brownMountain, (byte) value);
         }
 
         [BulkCopy]
-        public int TileDesert {
+        public int Desert {
             get => Data.GetByte(desert);
             set => Data.SetByte(desert, (byte) value);
         }
 
         [BulkCopy]
-        public int TileGreyMountain {
+        public int GreyMountain {
             get => Data.GetByte(greyMountain);
             set => Data.SetByte(greyMountain, (byte) value);
         }
 
         [BulkCopy]
-        public int TileWater {
+        public int Water {
             get => Data.GetByte(water);
             set => Data.SetByte(water, (byte) value);
         }
 
         [BulkCopy]
-        public int TileCantStay {
+        public int CantStay {
             get => Data.GetByte(cantStay);
             set => Data.SetByte(cantStay, (byte) value);
         }
 
         [BulkCopy]
-        public int TileSand {
+        public int Sand {
             get => Data.GetByte(sand);
             set => Data.SetByte(sand, (byte) value);
         }
 
         [BulkCopy]
-        public int TileEnemyOnly {
+        public int EnemyOnly {
             get => Data.GetByte(enemyOnly);
             set => Data.SetByte(enemyOnly, (byte) value);
         }
 
         [BulkCopy]
-        public int TilePlayerOnly {
+        public int PlayerOnly {
             get => Data.GetByte(playerOnly);
             set => Data.SetByte(playerOnly, (byte) value);
         }
 
         [BulkCopy]
-        public int TileUnknownE {
+        public int UnknownE {
             get => Data.GetByte(unknown0e);
             set => Data.SetByte(unknown0e, (byte) value);
         }
 
         [BulkCopy]
-        public int TileUnknownF {
+        public int UnknownF {
             get => Data.GetByte(unknown0f);
             set => Data.SetByte(unknown0f, (byte) value);
         }
