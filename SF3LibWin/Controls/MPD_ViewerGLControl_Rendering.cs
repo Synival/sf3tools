@@ -10,6 +10,7 @@ using OpenTK.Graphics.OpenGL;
 using OpenTK.Mathematics;
 using SF3.Models.Files.MPD;
 using SF3.Models.Structs.MPD.Model;
+using SF3.Types;
 using SF3.Win.OpenGL;
 using SF3.Win.OpenGL.MPD_File;
 
@@ -339,7 +340,7 @@ namespace SF3.Win.Controls {
                 var lightingTexture = _surfaceModel.LightingTexture ?? _world.WhiteTexture;
                 UpdateLightingMode(_world.ObjectShader, false);
 
-                if (DrawSkyBox && _skyBoxModel.Model != null) {
+                if (DrawSkyBox && MPD_File.Scenario >= ScenarioType.Scenario2 && _skyBoxModel.Model != null) {
                     GL.DepthMask(false);
                     UpdateShaderProjectionMatrix(_world.TextureShader, Matrix4.Identity);
 
