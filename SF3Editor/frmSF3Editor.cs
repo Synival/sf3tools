@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
@@ -33,10 +34,17 @@ namespace SF3Editor {
             var controlContainer = new TabView("Test Container");
             var controlContainerControl = controlContainer.Create();
 
-            var x1sToLoad = new string[] {"X1ASCASL.BIN", "X1BTL123.BIN"};
+            var x1sToLoad = new List<KeyValuePair<ScenarioType, string>> {
+                new KeyValuePair<ScenarioType, string>(ScenarioType.Scenario1, "D://X1ASCASL.BIN"),
+                new KeyValuePair<ScenarioType, string>(ScenarioType.Scenario1, "D://X1BTL123.BIN"),
+                new KeyValuePair<ScenarioType, string>(ScenarioType.Scenario3, "F://X1ASBRK3.BIN"),
+                new KeyValuePair<ScenarioType, string>(ScenarioType.Scenario3, "F://X1BTL323.BIN"),
+            };
             foreach (var x1 in x1sToLoad) {
-                var x1File = X1_File.Create(new ByteData(new ByteArray(File.ReadAllBytes(c_discPath + x1))), nameGetters[ScenarioType.Scenario1], ScenarioType.Scenario1, false);
-                controlContainer.CreateChild(new X1_View(x1, x1File));
+                var scenario = x1.Key;
+                var fullPath = x1.Value;
+                var x1File = X1_File.Create(new ByteData(new ByteArray(File.ReadAllBytes(fullPath))), nameGetters[scenario], scenario, false);
+                controlContainer.CreateChild(new X1_View(Path.GetFileName(fullPath), x1File));
             }
 
             var iconPointerEditorBinsToLoad = new string[] {"X011.BIN", "X021.BIN"};
