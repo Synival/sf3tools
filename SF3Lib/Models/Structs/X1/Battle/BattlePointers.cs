@@ -10,6 +10,7 @@ namespace SF3.Models.Structs.X1.Battle {
             battlePointer = Address; // 2 bytes 
         }
 
+        [TableViewModelColumn(displayOrder: 0, displayName: "Pointer", isPointer: true)]
         [BulkCopy]
         public int BattlePointer {
             get => Data.GetDouble(battlePointer);
