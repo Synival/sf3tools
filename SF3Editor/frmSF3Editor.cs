@@ -7,6 +7,7 @@ using CommonLib.NamedValues;
 using SF3.ByteData;
 using SF3.Models.Files.IconPointer;
 using SF3.Models.Files.MPD;
+using SF3.Models.Files.X1;
 using SF3.NamedValues;
 using SF3.Types;
 using SF3.Win.Views;
@@ -31,6 +32,12 @@ namespace SF3Editor {
 
             var controlContainer = new TabView("Test Container");
             var controlContainerControl = controlContainer.Create();
+
+            var x1sToLoad = new string[] {"X1BTL101.BIN", "X1BTL103.BIN"};
+            foreach (var x1 in x1sToLoad) {
+                var x1File = X1_File.Create(new ByteData(new ByteArray(File.ReadAllBytes(c_discPath + x1))), nameGetters[ScenarioType.Scenario1], ScenarioType.Scenario1, false);
+                controlContainer.CreateChild(new X1_View(x1, x1File));
+            }
 
             var iconPointerEditorBinsToLoad = new string[] {"X011.BIN", "X021.BIN"};
             foreach (var bin in iconPointerEditorBinsToLoad) {
