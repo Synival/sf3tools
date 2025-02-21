@@ -21,46 +21,55 @@ namespace SF3.Models.Structs.X1 {
             itemID      = Address + 0x0a; // 2 bytes
         }
 
-        public string MPDTieIn
-            => Data.GetWord(eventNumber) <= 0x0f
-                ? (Data.GetWord(eventNumber) + 0x30).ToString("X")
-                : "";
-
+        [TableViewModelColumn(displayOrder: 0, displayName: "Direction/Searched", displayFormat: "X4")]
         [BulkCopy]
         public int Searched {
             get => Data.GetWord(searched);
             set => Data.SetWord(searched, value);
         }
 
+        [TableViewModelColumn(displayOrder: 1, displayFormat: "X2")]
         [BulkCopy]
         public int EventNumber {
             get => Data.GetWord(eventNumber);
             set => Data.SetWord(eventNumber, value);
         }
 
+        [TableViewModelColumn(displayOrder: 2, displayFormat: "X4")]
         [BulkCopy]
         public int FlagUsed {
             get => Data.GetWord(flagUsed);
             set => Data.SetWord(flagUsed, value);
         }
 
+
+        [TableViewModelColumn(displayOrder: 3, displayFormat: "X2")]
         [BulkCopy]
         public int Unknown1 {
             get => Data.GetWord(unknown1);
             set => Data.SetWord(unknown1, value);
         }
 
+        [TableViewModelColumn(displayOrder: 4, displayName: "EventType/Code", displayFormat: "X4")]
         [BulkCopy]
         public int EventType {
             get => Data.GetWord(eventType);
             set => Data.SetWord(eventType, value);
         }
 
+        [TableViewModelColumn(displayOrder: 5, displayName: "Item/Text/Code", displayFormat: "X4")]
         [BulkCopy]
         [NameGetter(NamedValueType.EventParameter, nameof(EventType))]
         public int EventParameter {
             get => Data.GetWord(itemID);
             set => Data.SetWord(itemID, value);
         }
+
+        [TableViewModelColumn(displayOrder: 6, isReadOnly: true, displayFormat: "X2")]
+        [BulkCopy]
+        public string MPDTieInID
+            => Data.GetWord(eventNumber) <= 0x0f
+                ? (Data.GetWord(eventNumber) + 0x30).ToString("X2")
+                : "";
     }
 }

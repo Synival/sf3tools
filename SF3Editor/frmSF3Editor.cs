@@ -33,7 +33,7 @@ namespace SF3Editor {
             var controlContainer = new TabView("Test Container");
             var controlContainerControl = controlContainer.Create();
 
-            var x1sToLoad = new string[] {"X1BTL101.BIN", "X1BTL103.BIN"};
+            var x1sToLoad = new string[] {"X1ASCASL.BIN", "X1BTL123.BIN"};
             foreach (var x1 in x1sToLoad) {
                 var x1File = X1_File.Create(new ByteData(new ByteArray(File.ReadAllBytes(c_discPath + x1))), nameGetters[ScenarioType.Scenario1], ScenarioType.Scenario1, false);
                 controlContainer.CreateChild(new X1_View(x1, x1File));
