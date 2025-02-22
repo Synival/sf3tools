@@ -28,7 +28,7 @@ using static CommonLib.Win.Utils.MessageUtils;
 namespace SF3.MPD_Editor.Forms {
     public partial class frmMPDEditor : EditorFormNew {
         // Used to display version in the application
-        protected override string Version => "0.2 RC1";
+        protected override string Version => "0.2";
 
         public IMPD_File File => ModelLoader.Model as IMPD_File;
 

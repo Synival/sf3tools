@@ -1,3 +1,190 @@
+## 2025-02-23
+
+I'm happy to announce a HUGE update: nearly all the work on rendering MPD files is complete! Models, ground planes, skyboxes, and gradients are now rendered properly,
+along with extras like the Titan, the Dark Kraken, and tables that tweak lighting. Speaking of lighting, the lighting model is now much more accurate to what appears in-game.
+
+Here's the small list of big features before the gigantic list of all changes and bugfixes:
+
+- Rendering: Models, Ground/water planes, Skyboxes (only in-map in Scenario2+), Gradients (Scenario2+)
+- 3D Viewer: Added buttons for select/navigation mode
+- 3D Viewer: Added buttons to enable/disable more elements in the MPD
+- 3D Viewer: Added buttons to set the camera angle
+- Beta MPDs now load, as does SHIP2.MPD (sort of)
+- Lots of bugfixes
+- "MPD Analyzer" program now reports a lot more MPD errors, including a lot of quirks in the original MPDs
+
+Enjoy!
+-- Synival
+
+Full changelog:
+
+### MPD_Editor
+
+- New Features / Improvements
+    - Rendering
+        - Models
+            - Models are now loaded and rendered
+            - Polygons now respect one- and two-sided modes
+            - Sprite models (like trees) automatically rotate to face the camera
+            - Semi-transparent polygons are rendered when they're indicated in the MPD (many things, like shadows in Balsamo, are not)
+            - Polygons with either colors or textures are rendered
+            - Added support for Chunk19 as a model, which is used by the Titan in Z_AS.MPD
+            - Transparency for Palette3 textures is applied (indicated by the "Light Adjustment Table")
+        - Ground / Water
+            - Both types of repeating ground/water chunks are rendered: single image (512x256) and tiled (2048x2048)
+            - Lighting is adjusted based on the "Light Adjustment Table" if available (this data is always present, but only actually used in-game in a few places)
+            - Tiled ground planes position themselves as close to the camera center as possible. This fixes MPDs like BEER.MPD (Baersol) whose offset is a full screen away for some reason
+            - Tiled ground planes, which repeat in-game, render 50% extra to show wraps that are normally visible in-game
+        - Skyboxes
+            - Skyboxes are now loaded and rendered in Scenario 2 or later (they only render in battle cutscenes in Scenario 1)
+        - Backgrounds
+            - Background images, like Ishahakat's background/foreground images, are now loaded
+        - Gradients
+            - Gradient effects in Scenario 2 and later are now loaded and rendered
+        - Lighting
+            - Applied much more accurate mixing formula for lighting
+            - Slightly more accurate but still not quite there Scn2 lighting (eventually should just use a lookup table)
+        - Other
+            - Increased render distance
+            - Non-planar quads rendering is improved by a lazy and not-accurate-at-all fix that adds a center vertex, splitting them into 4 triangles
+            - Removed a lot of seams when rendering surface models
+            - Polygons with alpha channels no longer have ugly visual artifacts on their edges when rendered from a distance
+    - Editors / Viewers
+        - 3D Viewer / Editor
+            - Added toolbar buttons for "select" vs "navigate" mode
+            - Added toolbar buttons for toggling display of various elements and in-game features (lighting, animations)
+            - Added toolbar buttons for camera control
+            - Added toolbar button to auto-rotate sprites up to face the camera. This doesn't happen in-game, but is very convenient for top-down views
+        - Tile Editor
+            - Changing tile terrain type by typing or pasting text now works a lot better
+            - Tiles are now associated with nearby tree models (can't yet toggle to add/remove trees for forest terrain type)
+            - Renamed recently-identified terrain type "UnknownA" to "CantStay"
+            - Renamed recently-identified terrain type "UnknownD" to "PlayerOnly"
+        - Table Editor
+            - Added new editor for single-row "tables" like the main header table. New editor has properties in rows rather one giant row with way too many columns
+            - Added bare-bones hex viewer for unknown/unhandled chunks
+            - Added columns "ChunkFileAddress", "ChunkType", and "CompressionType" to chunk table
+            - Added a lot of columns for individual flags in main header table
+    - Data
+        - Textures
+            - Added texture chunks for movable objects (chests and barrels)
+            - Indexed textures are now supported and detected whenever possible
+            - Added Scenario 3 "Indexed Textures" table that indicates which textures use Palette3
+            - Texture animations support indexed textures (indicated with a 0x100 flag in the texture ID)
+            - Added support for texture chunk Chunk[21] (used for the Dark Kraken and one other random thing)
+        - Tables
+            - Added several tables to model chunks (needs some corrections, but completely editable)
+            - Added "Gradients" table (Scenario 2+)
+            - Added "Light Adjustment" table (Scenario 2+)
+            - Added "TextureAnimationsAlt" table
+            - Added "ModelSwitchGroups" table (very incomplete)
+            - Added Scenario1 "Unknown2" table (research suggests this is completely unused, even in the one MPD where this exists)
+        - Chunks
+            - Chunk loading now respects flags indicated in the header
+        - Other
+            - Reverse-engineered a lot (but not yet all) of the MPD header flags and added columns for them
+    - Other Improvements
+        - Added support and detection for SHIP2.MPD
+        - Added support and detection for beta MPDs
+        - Added some integrity checks for chunk recompression and chunk table rebuilding
+
+- Fixes
+    - Rendering
+        - Surface Models
+            - Fixed some ugliness with wireframe rendering
+            - Fixed a lot of Z-fighting issues
+        - Lighting
+            - When correcting surface normal in-game bugs, the vectors are now normalized
+            - Corrected a texture palette UV wrapping bug when lighting was directly overhead
+        - Texture Atlases
+            - Texture atlases no longer fail to generate because the minimum size was too small
+            - Texture atlases no longer have distorted rectangular textures
+            - Texture atlases no longer cut-off textures that are transparent on the edges, causing distortion for the entire chunk
+        - Other
+            - Fragment shaders now discard transparent fragments, fixing some visual errors and improving performance
+    - Editors / Viewers
+        - 3D Viewer / Editor
+            - More accurate texture animation speeds and consistent camera movement (internal fixes to frame delta)
+        - Tile Editor
+            - Changing current tile using Ctrl+Direction now takes the current camera angle into account
+        - Table Editor
+            - Removed Palette3 from ChunkViews in Scenario 1
+            - Fixed ObjectListView combobox crashing when auto-expand for boolean values
+            - Added some minimum widths missing in the main header table
+    - Data
+        - Textures
+            - Fixes for MPD files with missing texture chunks
+        - Tables
+            - Palettes with invalid data are now detected and ignored
+            - Renamed "Light Direction" to more accurate "Light Position"
+            - Fixes to size of Scenario1 "Unknown1" table (research suggests this is completely unused)
+            - Renamed "OffsetScrollScreenTable" to "Ground Animation Table"
+        - Chunks
+            - Fixes so some MPDs with corrupt or missing data will load
+            - Fixed an issue where resizing a final empty chunk would try to resize non-existent data; fixed an issue when looking for ScenarioType.Demo resources
+            - Rebuilding an out-of-order chunk table *should* work now
+            - Fixes to rebuilding the chunk table when the first few empty chunks aren't in the correct position
+        - Technical / Internal
+            - Fixed Length values of 0 in event arguments when using ExpandOrContract and contracting
+
+- Code Stuff
+    - Rendering
+        - Overhauled OpenGL and texture coordinates to be consistently counter-clockwise, matching order in the model chunk; added face-culling; removed now-redundant twoSided shader attribute
+        - More pixel conversion functions (but not more tests...)
+        - Texture ARGB1555/8888 and Hash data is now lazily cached
+        - Replaced AssumedPixelFormat with actual PixelFormat; known PixelFormat's can now be supplied to the TextureCollection
+        - Expanded Texture.CreateBitmap into ARGB1555 and ARGB8888 variants
+    - Interface
+        - Some simplifications and enhancements to TextureTableView, TextureView
+    - Tables
+        - TableView table can now be changed after Create()
+        - Lots of refactoring for ITable's: introduced IBaseTable and different types of tables (TerminatedTable, FixedSizeTable, ResourceTable)
+        - ITable changes: renamed Reset() to Unload(), introduced indexer, is now an IEnumerable<T>, has Length
+        - Added SizeInBytes to ITable
+    - Data
+        - WIP patch for ByteArraySegment to not fail when adding an uncompressed chunk of size 0 that occurs at the same location of another
+        - NameGetterContext now works with values with types other than int
+        - Changed some offsets from 'int' to 'uint' for easier debugging
+        - Added more unit tests for ByteArray and ByteArraySegment
+        - Minor clean-ups of ByteArraySegment.OnParentRangeModifiedReal()
+        - Big updates to MPDHeaderModel based on Marf's notes
+        - Refactored TextureAnimationModel to have a sub-table for its frames
+        - Removed some tables that only have a single element (e.g. MPDHeaderTable)
+        - Migrated some column calculations to TableViewModelColumn
+    - Utility functions:
+        - Added column-major order version of To2DArray()
+        - Added MathHelpers.Clamp()
+        - Expanded CornerType extensions, added a ton of constants
+    - Other:
+        - Fixed incorrect namespace for several MPD structs
+        - FIXED and CompressedFIXED values can now be modified
+        - Renamed TextureView to ImageView
+
+### MPD_Analyzer
+
+- New Features / Improvements
+    - Added more random checks to MPD_Analyzer
+    - Added more info in MPD_Analyzer file line
+    - Updated MPD_Analyzer to check for some model and surface model chunk errors
+    - Rewrote analysis for chunks 14 through 19
+    - Added list of unused MPDs for Scenarios 1, 2
+
+- Fixes
+    - Fixes and upgrades to the MPD_Analyzer
+
+- Internal / Code Stuff
+    - Lots of refactoring and additional reports
+    - Some (very messy) code to match MPDs based on specific conditions, which reports header flags and chunks
+
+### X019 Editor
+
+- Fixes
+    - X019 Editor
+        - Some fixes for Monster names in S2, S3, PD
+        - More S2 monster name fixes
+        - More monster name corrections
+        - Updated Monsters.xml using the latest translations
+
 ## 2025-01-19
 
 This bug update introduces an MPD Editor! MPD files contain 3D map geometry, tiles, textures, terrain types, and much more. In this version, you can view and modify all the tiles of a map, modify their textures, tweak lighting (not yet shown visually), and change camera and battle boundaries.
