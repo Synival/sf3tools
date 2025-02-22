@@ -70,7 +70,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TextureExtractor", "Texture
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LightPaletteSetter", "LightPaletteSetter\LightPaletteSetter.csproj", "{EF731AA5-0B9B-4C68-A130-A32F50709F0A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MPD_Analyzer", "MPD_Analyzer\MPD_Analyzer.csproj", "{81519AE3-94D5-4F2B-B987-09084BD6F2A8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MPD_Analyzer", "MPD_Analyzer\MPD_Analyzer.csproj", "{81519AE3-94D5-4F2B-B987-09084BD6F2A8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Randomizer", "Randomizer\Randomizer.csproj", "{FB4791C1-6FD1-48E2-8160-EBCC9884ECD5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -174,6 +176,10 @@ Global
 		{81519AE3-94D5-4F2B-B987-09084BD6F2A8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{81519AE3-94D5-4F2B-B987-09084BD6F2A8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{81519AE3-94D5-4F2B-B987-09084BD6F2A8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FB4791C1-6FD1-48E2-8160-EBCC9884ECD5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FB4791C1-6FD1-48E2-8160-EBCC9884ECD5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FB4791C1-6FD1-48E2-8160-EBCC9884ECD5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FB4791C1-6FD1-48E2-8160-EBCC9884ECD5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -208,6 +214,7 @@ Global
 		{F983BE50-106A-4E2B-8026-EC4B18A2B885} = {276CACEF-0514-435D-91BF-F2D043C44667}
 		{EF731AA5-0B9B-4C68-A130-A32F50709F0A} = {276CACEF-0514-435D-91BF-F2D043C44667}
 		{81519AE3-94D5-4F2B-B987-09084BD6F2A8} = {276CACEF-0514-435D-91BF-F2D043C44667}
+		{FB4791C1-6FD1-48E2-8160-EBCC9884ECD5} = {276CACEF-0514-435D-91BF-F2D043C44667}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {A670A182-55F0-4C8C-A7B1-076126D32B1C}
