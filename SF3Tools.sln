@@ -74,6 +74,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MPD_Analyzer", "MPD_Analyze
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Randomizer", "Randomizer\Randomizer.csproj", "{FB4791C1-6FD1-48E2-8160-EBCC9884ECD5}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "X1_Editor_New", "X1_Editor_New\X1_Editor_New.csproj", "{236E409B-62E8-4B7B-8956-1821E3D148BA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -180,6 +182,10 @@ Global
 		{FB4791C1-6FD1-48E2-8160-EBCC9884ECD5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FB4791C1-6FD1-48E2-8160-EBCC9884ECD5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FB4791C1-6FD1-48E2-8160-EBCC9884ECD5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{236E409B-62E8-4B7B-8956-1821E3D148BA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{236E409B-62E8-4B7B-8956-1821E3D148BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{236E409B-62E8-4B7B-8956-1821E3D148BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{236E409B-62E8-4B7B-8956-1821E3D148BA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -215,6 +221,7 @@ Global
 		{EF731AA5-0B9B-4C68-A130-A32F50709F0A} = {276CACEF-0514-435D-91BF-F2D043C44667}
 		{81519AE3-94D5-4F2B-B987-09084BD6F2A8} = {276CACEF-0514-435D-91BF-F2D043C44667}
 		{FB4791C1-6FD1-48E2-8160-EBCC9884ECD5} = {276CACEF-0514-435D-91BF-F2D043C44667}
+		{236E409B-62E8-4B7B-8956-1821E3D148BA} = {756FDE67-5C95-4BFC-BFEA-8BB6F41FCBE9}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {A670A182-55F0-4C8C-A7B1-076126D32B1C}
