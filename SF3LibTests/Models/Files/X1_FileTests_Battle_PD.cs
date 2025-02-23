@@ -69,8 +69,8 @@ namespace SF3.Tests.Models.Files {
             var battle = file.Battles[MapLeaderType.Synbios];
             var header = battle.BattleHeader;
 
-            Assert.AreEqual(0, header.SizeUnknown1);
-            Assert.AreEqual(16, header.TableSize);
+            Assert.AreEqual(0, header.Unknown0x00);
+            Assert.AreEqual(16, header.NumSlots);
         }
 
         [TestMethod]
