@@ -72,7 +72,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MPD_Analyzer", "MPD_Analyze
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Randomizer", "Randomizer\Randomizer.csproj", "{FB4791C1-6FD1-48E2-8160-EBCC9884ECD5}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "X1_Editor_New", "X1_Editor_New\X1_Editor_New.csproj", "{236E409B-62E8-4B7B-8956-1821E3D148BA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "X1_Editor", "X1_Editor\X1_Editor.csproj", "{236E409B-62E8-4B7B-8956-1821E3D148BA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
