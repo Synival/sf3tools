@@ -25,6 +25,8 @@ namespace SF3.X1_Editor.Forms {
         private void InitializeComponent() {
             var resources = new System.ComponentModel.ComponentResourceManager(typeof(frmX1_Editor));
             menuStrip2 = new System.Windows.Forms.MenuStrip();
+            tsmiScenario = new System.Windows.Forms.ToolStripMenuItem();
+            tsmiScenario_BTL99 = new System.Windows.Forms.ToolStripMenuItem();
             tsmiHelp = new System.Windows.Forms.ToolStripMenuItem();
             tsmiHelp_About = new System.Windows.Forms.ToolStripMenuItem();
             menuStrip2.SuspendLayout();
@@ -33,12 +35,27 @@ namespace SF3.X1_Editor.Forms {
             // menuStrip2
             // 
             menuStrip2.Dock = System.Windows.Forms.DockStyle.None;
-            menuStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { tsmiHelp });
+            menuStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { tsmiScenario, tsmiHelp });
             menuStrip2.Location = new System.Drawing.Point(0, 0);
             menuStrip2.Name = "menuStrip2";
             menuStrip2.Padding = new System.Windows.Forms.Padding(7, 2, 0, 2);
-            menuStrip2.Size = new System.Drawing.Size(53, 24);
+            menuStrip2.Size = new System.Drawing.Size(237, 24);
             menuStrip2.TabIndex = 1;
+            // 
+            // tsmiScenario
+            // 
+            tsmiScenario.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { tsmiScenario_BTL99 });
+            tsmiScenario.Name = "tsmiScenario";
+            tsmiScenario.Size = new System.Drawing.Size(64, 20);
+            tsmiScenario.Text = "&Scenario";
+            // 
+            // tsmiScenario_BTL99
+            // 
+            tsmiScenario_BTL99.Name = "tsmiScenario_BTL99";
+            tsmiScenario_BTL99.ShortcutKeys =  System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.B;
+            tsmiScenario_BTL99.Size = new System.Drawing.Size(185, 22);
+            tsmiScenario_BTL99.Text = "&BTL99 Toggle";
+            tsmiScenario_BTL99.Click += tsmiScenario_BTL99_Click;
             // 
             // tsmiHelp
             // 
@@ -50,7 +67,7 @@ namespace SF3.X1_Editor.Forms {
             // tsmiHelp_About
             // 
             tsmiHelp_About.Name = "tsmiHelp_About";
-            tsmiHelp_About.Size = new System.Drawing.Size(180, 22);
+            tsmiHelp_About.Size = new System.Drawing.Size(116, 22);
             tsmiHelp_About.Text = "About...";
             tsmiHelp_About.Click += tsmiHelp_About_Click;
             // 
@@ -76,6 +93,8 @@ namespace SF3.X1_Editor.Forms {
         private System.Windows.Forms.MenuStrip menuStrip2;
         private System.Windows.Forms.ToolStripMenuItem tsmiHelp;
         private System.Windows.Forms.ToolStripMenuItem tsmiHelp_About;
+        private System.Windows.Forms.ToolStripMenuItem tsmiScenario;
+        private System.Windows.Forms.ToolStripMenuItem tsmiScenario_BTL99;
     }
 }
 

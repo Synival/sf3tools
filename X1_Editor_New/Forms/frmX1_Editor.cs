@@ -1,6 +1,5 @@
 using System;
 using System.Diagnostics;
-using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 using CommonLib.NamedValues;
@@ -18,6 +17,18 @@ namespace SF3.X1_Editor.Forms {
         // Used to display version in the application
         protected override string Version => "0.39";
 
+        private bool _isBTL99 = false;
+
+        public bool IsBTL99 {
+            get => _isBTL99;
+            set {
+                if (_isBTL99 != value) {
+                    _isBTL99 = value;
+                    tsmiScenario_BTL99.Checked = _isBTL99;
+                }
+            }
+        }
+
         public IX1_File File => ModelLoader.Model as IX1_File;
 
         public frmX1_Editor() {
@@ -26,14 +37,13 @@ namespace SF3.X1_Editor.Forms {
         }
 
         protected override string FileDialogFilter
-            => "SF3 Data (X1*.BIN)|X1*.BIN|" + base.FileDialogFilter;
+            => (IsBTL99 ? "SF3 Data (X1BTL99.BIN)|X1BTL99.BIN|" : "SF3 Data (X1*.BIN)|X1*.BIN|") + base.FileDialogFilter;
 
         protected override IBaseFile CreateModel(IModelFileLoader loader) {
             var nameGetters = Enum
                 .GetValues<ScenarioType>()
                 .ToDictionary(x => x, x => (INameGetterContext) new NameGetterContext(x));
-            // TODO: BTL99!
-            return X1_File.Create(loader.ByteData, nameGetters[Scenario], Scenario, false);
+            return X1_File.Create(loader.ByteData, nameGetters[Scenario], Scenario, IsBTL99);
         }
 
         protected override IView CreateView(IModelFileLoader loader, IBaseFile model)
@@ -50,6 +60,6 @@ namespace SF3.X1_Editor.Forms {
             );
         }
 
-        private string FileNameWithoutExtension => Path.GetFileNameWithoutExtension(ModelLoader.Filename);
+        private void tsmiScenario_BTL99_Click(object sender, EventArgs e) => IsBTL99 = !IsBTL99;
     }
 }
