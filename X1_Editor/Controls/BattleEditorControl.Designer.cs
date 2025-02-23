@@ -405,7 +405,7 @@ namespace SF3.X1_Editor.Controls {
             // 
             // lvcSlotTab1Plus0x09
             // 
-            lvcSlotTab1Plus0x09.AspectName = "Unknown2";
+            lvcSlotTab1Plus0x09.AspectName = "Unknown0x09";
             lvcSlotTab1Plus0x09.AspectToStringFormat = "{0:X}";
             lvcSlotTab1Plus0x09.Text = "+0x09 (probably drop rate override)";
             lvcSlotTab1Plus0x09.Width = 90;
@@ -418,21 +418,21 @@ namespace SF3.X1_Editor.Controls {
             // 
             // lvcSlotTab1Plus0x0B
             // 
-            lvcSlotTab1Plus0x0B.AspectName = "CharacterPlus0x0B";
+            lvcSlotTab1Plus0x0B.AspectName = "CharacterPlus";
             lvcSlotTab1Plus0x0B.AspectToStringFormat = "{0:X}";
             lvcSlotTab1Plus0x0B.Text = "Character (+0x0B)";
             lvcSlotTab1Plus0x0B.Width = 0;
             // 
             // lvcSlotTab1SpawnCondition
             // 
-            lvcSlotTab1SpawnCondition.AspectName = "Unknown4";
+            lvcSlotTab1SpawnCondition.AspectName = "SpawnCondition";
             lvcSlotTab1SpawnCondition.AspectToStringFormat = "{0:X}";
             lvcSlotTab1SpawnCondition.Text = "SpawnCondition?";
             lvcSlotTab1SpawnCondition.Width = 100;
             // 
             // lvcSlotTab1Plus0x0E
             // 
-            lvcSlotTab1Plus0x0E.AspectName = "Unknown5";
+            lvcSlotTab1Plus0x0E.AspectName = "Unknown0x0E";
             lvcSlotTab1Plus0x0E.AspectToStringFormat = "{0:X}";
             lvcSlotTab1Plus0x0E.Text = "+0x0E";
             lvcSlotTab1Plus0x0E.Width = 50;
@@ -503,7 +503,7 @@ namespace SF3.X1_Editor.Controls {
             // 
             // lvcSlotTab2Plus0x0F
             // 
-            lvcSlotTab2Plus0x0F.AspectName = "Unknown6";
+            lvcSlotTab2Plus0x0F.AspectName = "Unknown0x0F";
             lvcSlotTab2Plus0x0F.AspectToStringFormat = "{0:X}";
             lvcSlotTab2Plus0x0F.Text = "+0x0F";
             lvcSlotTab2Plus0x0F.Width = 50;
@@ -529,35 +529,35 @@ namespace SF3.X1_Editor.Controls {
             // 
             // lvcSlotTab2Plus0x12
             // 
-            lvcSlotTab2Plus0x12.AspectName = "Unknown8";
+            lvcSlotTab2Plus0x12.AspectName = "Unknown0x12";
             lvcSlotTab2Plus0x12.AspectToStringFormat = "{0:X}";
             lvcSlotTab2Plus0x12.Text = "+0x12";
             lvcSlotTab2Plus0x12.Width = 50;
             // 
             // lvcSlotTab2Respawn1
             // 
-            lvcSlotTab2Respawn1.AspectName = "Unknown9";
+            lvcSlotTab2Respawn1.AspectName = "Respawn1";
             lvcSlotTab2Respawn1.AspectToStringFormat = "{0:X}";
             lvcSlotTab2Respawn1.Text = "Respawn1?";
             lvcSlotTab2Respawn1.Width = 70;
             // 
             // lvcSlotTab2Respawn2
             // 
-            lvcSlotTab2Respawn2.AspectName = "Unknown10";
+            lvcSlotTab2Respawn2.AspectName = "Respawn2";
             lvcSlotTab2Respawn2.AspectToStringFormat = "{0:X}";
             lvcSlotTab2Respawn2.Text = "Respawn2?";
             lvcSlotTab2Respawn2.Width = 70;
             // 
             // lvcSlotTab2Respawn3
             // 
-            lvcSlotTab2Respawn3.AspectName = "Unknown11";
+            lvcSlotTab2Respawn3.AspectName = "Respawn3";
             lvcSlotTab2Respawn3.AspectToStringFormat = "{0:X}";
             lvcSlotTab2Respawn3.Text = "Respawn3?";
             lvcSlotTab2Respawn3.Width = 70;
             // 
             // lvcSlotTab2Respawn4
             // 
-            lvcSlotTab2Respawn4.AspectName = "Unknown12";
+            lvcSlotTab2Respawn4.AspectName = "Respawn4";
             lvcSlotTab2Respawn4.AspectToStringFormat = "{0:X}";
             lvcSlotTab2Respawn4.Text = "Respawn4?";
             lvcSlotTab2Respawn4.Width = 70;
@@ -571,42 +571,42 @@ namespace SF3.X1_Editor.Controls {
             // 
             // lvcSlotTab2Plus0x18
             // 
-            lvcSlotTab2Plus0x18.AspectName = "Unknown14";
+            lvcSlotTab2Plus0x18.AspectName = "Unknown0x18";
             lvcSlotTab2Plus0x18.AspectToStringFormat = "{0:X}";
             lvcSlotTab2Plus0x18.Text = "+0x18";
             lvcSlotTab2Plus0x18.Width = 50;
             // 
             // lvcSlotTab2Plus0x19
             // 
-            lvcSlotTab2Plus0x19.AspectName = "Unknown15";
+            lvcSlotTab2Plus0x19.AspectName = "Unknown0x19";
             lvcSlotTab2Plus0x19.AspectToStringFormat = "{0:X}";
             lvcSlotTab2Plus0x19.Text = "+0x19";
             lvcSlotTab2Plus0x19.Width = 50;
             // 
             // lvcSlotTab2Plus0x1A
             // 
-            lvcSlotTab2Plus0x1A.AspectName = "Unknown16";
+            lvcSlotTab2Plus0x1A.AspectName = "Unknown0x1A";
             lvcSlotTab2Plus0x1A.AspectToStringFormat = "{0:X}";
             lvcSlotTab2Plus0x1A.Text = "+0x1A";
             lvcSlotTab2Plus0x1A.Width = 50;
             // 
             // lvcSlotTab2Plus0x1B
             // 
-            lvcSlotTab2Plus0x1B.AspectName = "Unknown17";
+            lvcSlotTab2Plus0x1B.AspectName = "Unknown0x1B";
             lvcSlotTab2Plus0x1B.AspectToStringFormat = "{0:X}";
             lvcSlotTab2Plus0x1B.Text = "+0x1B";
             lvcSlotTab2Plus0x1B.Width = 50;
             // 
             // lvcSlotTab2Plus0x1C
             // 
-            lvcSlotTab2Plus0x1C.AspectName = "Unknown18";
+            lvcSlotTab2Plus0x1C.AspectName = "Unknown0x1C";
             lvcSlotTab2Plus0x1C.AspectToStringFormat = "{0:X}";
             lvcSlotTab2Plus0x1C.Text = "+0x1C";
             lvcSlotTab2Plus0x1C.Width = 50;
             // 
             // lvcSlotTab2Plus0x1D
             // 
-            lvcSlotTab2Plus0x1D.AspectName = "Unknown19";
+            lvcSlotTab2Plus0x1D.AspectName = "Unknown0x1D";
             lvcSlotTab2Plus0x1D.AspectToStringFormat = "{0:X}";
             lvcSlotTab2Plus0x1D.Text = "+0x1D";
             lvcSlotTab2Plus0x1D.Width = 50;
@@ -672,34 +672,34 @@ namespace SF3.X1_Editor.Controls {
             // 
             // lvcSlotTab3Plus0x1E
             // 
-            lvcSlotTab3Plus0x1E.AspectName = "Unknown20";
+            lvcSlotTab3Plus0x1E.AspectName = "Unknown0x1E";
             lvcSlotTab3Plus0x1E.AspectToStringFormat = "{0:X}";
             lvcSlotTab3Plus0x1E.Text = "+0x1E";
             lvcSlotTab3Plus0x1E.Width = 50;
             // 
             // lvcSlotTab3TurnSkip
             // 
-            lvcSlotTab3TurnSkip.AspectName = "TurnSkip";
+            lvcSlotTab3TurnSkip.AspectName = "NoTurnSkip";
             lvcSlotTab3TurnSkip.AspectToStringFormat = "{0:X}";
             lvcSlotTab3TurnSkip.Text = "!Turnskip";
             // 
             // lvcSlotTab3Plus0x20
             // 
-            lvcSlotTab3Plus0x20.AspectName = "Unknown22";
+            lvcSlotTab3Plus0x20.AspectName = "Unknown0x20";
             lvcSlotTab3Plus0x20.AspectToStringFormat = "{0:X}";
             lvcSlotTab3Plus0x20.Text = "+0x20";
             lvcSlotTab3Plus0x20.Width = 50;
             // 
             // lvcSlotTab3Plus0x21
             // 
-            lvcSlotTab3Plus0x21.AspectName = "Unknown23";
+            lvcSlotTab3Plus0x21.AspectName = "Unknown0x21";
             lvcSlotTab3Plus0x21.AspectToStringFormat = "{0:X}";
             lvcSlotTab3Plus0x21.Text = "+0x21";
             lvcSlotTab3Plus0x21.Width = 50;
             // 
             // lvcSlotTab3Plus0x22
             // 
-            lvcSlotTab3Plus0x22.AspectName = "Unknown24";
+            lvcSlotTab3Plus0x22.AspectName = "Unknown0x22";
             lvcSlotTab3Plus0x22.AspectToStringFormat = "{0:X}";
             lvcSlotTab3Plus0x22.Text = "+0x22";
             lvcSlotTab3Plus0x22.Width = 50;
@@ -847,21 +847,21 @@ namespace SF3.X1_Editor.Controls {
             // 
             // lvcSlotTab4Plus0x2F
             // 
-            lvcSlotTab4Plus0x2F.AspectName = "Unknown37";
+            lvcSlotTab4Plus0x2F.AspectName = "Unknown0x2F";
             lvcSlotTab4Plus0x2F.AspectToStringFormat = "{0:X}";
             lvcSlotTab4Plus0x2F.Text = "+0x2F";
             lvcSlotTab4Plus0x2F.Width = 50;
             // 
             // lvcSlotTab4Plus0x30
             // 
-            lvcSlotTab4Plus0x30.AspectName = "Unknown38";
+            lvcSlotTab4Plus0x30.AspectName = "Unknown0x30";
             lvcSlotTab4Plus0x30.AspectToStringFormat = "{0:X}";
             lvcSlotTab4Plus0x30.Text = "+0x30";
             lvcSlotTab4Plus0x30.Width = 50;
             // 
             // lvcSlotTab4Plus0x31
             // 
-            lvcSlotTab4Plus0x31.AspectName = "Unknown39";
+            lvcSlotTab4Plus0x31.AspectName = "Unknown0x31";
             lvcSlotTab4Plus0x31.AspectToStringFormat = "{0:X}";
             lvcSlotTab4Plus0x31.Text = "+0x31";
             lvcSlotTab4Plus0x31.Width = 50;
