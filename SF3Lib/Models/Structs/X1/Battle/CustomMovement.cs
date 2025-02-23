@@ -28,60 +28,70 @@ namespace SF3.Models.Structs.X1.Battle {
             ending    = Address + 18; // 4 bytes
         }
 
+        [TableViewModelColumn(displayOrder: 0, displayName: "+0x00", displayFormat: "X2")]
         [BulkCopy]
         public int CustomMovementUnknown {
             get => Data.GetWord(unknown00);
             set => Data.SetWord(unknown00, value);
         }
 
+        [TableViewModelColumn(displayOrder: 1, displayName: "CoordX1")]
         [BulkCopy]
         public int CustomMovementX1 {
             get => Data.GetWord(xPos1);
             set => Data.SetWord(xPos1, value);
         }
 
+        [TableViewModelColumn(displayOrder: 1, displayName: "CoordZ1")]
         [BulkCopy]
         public int CustomMovementZ1 {
             get => Data.GetWord(zPos1);
             set => Data.SetWord(zPos1, value);
         }
 
+        [TableViewModelColumn(displayOrder: 1, displayName: "CoordX2")]
         [BulkCopy]
         public int CustomMovementX2 {
             get => Data.GetWord(xPos2);
             set => Data.SetWord(xPos2, value);
         }
 
+        [TableViewModelColumn(displayOrder: 1, displayName: "CoordZ2")]
         [BulkCopy]
         public int CustomMovementZ2 {
             get => Data.GetWord(zPos2);
             set => Data.SetWord(zPos2, value);
         }
 
+        [TableViewModelColumn(displayOrder: 1, displayName: "CoordX3")]
         [BulkCopy]
         public int CustomMovementX3 {
             get => Data.GetWord(xPos3);
             set => Data.SetWord(xPos3, value);
         }
 
+        [TableViewModelColumn(displayOrder: 1, displayName: "CoordZ3")]
         [BulkCopy]
         public int CustomMovementZ3 {
             get => Data.GetWord(zPos3);
             set => Data.SetWord(zPos3, value);
         }
 
+        [TableViewModelColumn(displayOrder: 1, displayName: "CoordX4")]
         [BulkCopy]
         public int CustomMovementX4 {
             get => Data.GetWord(xPos4);
             set => Data.SetWord(xPos4, value);
         }
 
+        [TableViewModelColumn(displayOrder: 1, displayName: "CoordZ4")]
         [BulkCopy]
         public int CustomMovementZ4 {
             get => Data.GetWord(zPos4);
             set => Data.SetWord(zPos4, value);
         }
 
+        [TableViewModelColumn(displayOrder: 1, displayName: "End", displayFormat: "X2")]
         [BulkCopy]
         public int CustomMovementEnd {
             get => Data.GetDouble(ending);

@@ -12,12 +12,14 @@ namespace SF3.Models.Structs.X1.Battle {
             targetY = Address + 2; // 2 bytes
         }
 
+        [TableViewModelColumn(displayOrder: 0)]
         [BulkCopy]
         public int TargetX {
             get => Data.GetWord(targetX);
             set => Data.SetWord(targetX, value);
         }
 
+        [TableViewModelColumn(displayOrder: 1)]
         [BulkCopy]
         public int TargetY {
             get => Data.GetWord(targetY);

@@ -28,60 +28,70 @@ namespace SF3.Models.Structs.X1.Battle {
             unknown9  = Address + 9;
         }
 
+        [TableViewModelColumn(displayName: "+0x00", displayOrder: 0, displayFormat: "X2")]
         [BulkCopy]
         public int SizeUnknown1 {
             get => Data.GetByte(unknown1);
             set => Data.SetByte(unknown1, (byte) value);
         }
 
+        [TableViewModelColumn(displayName: "SizeLimit", displayOrder: 1, displayFormat: "X2")]
         [BulkCopy]
         public int TableSize {
             get => Data.GetByte(tableSize);
             set => Data.SetByte(tableSize, (byte) value);
         }
 
+        [TableViewModelColumn(displayName: "+0x02", displayOrder: 2, displayFormat: "X2")]
         [BulkCopy]
         public int SizeUnknown2 {
             get => Data.GetByte(unknown2);
             set => Data.SetByte(unknown2, (byte) value);
         }
 
+        [TableViewModelColumn(displayName: "+0x03", displayOrder: 3, displayFormat: "X2")]
         [BulkCopy]
         public int SizeUnknown3 {
             get => Data.GetByte(unknown3);
             set => Data.SetByte(unknown3, (byte) value);
         }
 
+        [TableViewModelColumn(displayName: "+0x04", displayOrder: 4, displayFormat: "X2")]
         [BulkCopy]
         public int SizeUnknown4 {
             get => Data.GetByte(unknown4);
             set => Data.SetByte(unknown4, (byte) value);
         }
 
+        [TableViewModelColumn(displayName: "+0x05", displayOrder: 5, displayFormat: "X2")]
         [BulkCopy]
         public int SizeUnknown5 {
             get => Data.GetByte(unknown5);
             set => Data.SetByte(unknown5, (byte) value);
         }
 
+        [TableViewModelColumn(displayName: "+0x06", displayOrder: 6, displayFormat: "X2")]
         [BulkCopy]
         public int SizeUnknown6 {
             get => Data.GetByte(unknown6);
             set => Data.SetByte(unknown6, (byte) value);
         }
 
+        [TableViewModelColumn(displayName: "+0x07", displayOrder: 7, displayFormat: "X2")]
         [BulkCopy]
         public int SizeUnknown7 {
             get => Data.GetByte(unknown7);
             set => Data.SetByte(unknown7, (byte) value);
         }
 
+        [TableViewModelColumn(displayName: "+0x08", displayOrder: 8, displayFormat: "X2")]
         [BulkCopy]
         public int SizeUnknown8 {
             get => Data.GetByte(unknown8);
             set => Data.SetByte(unknown8, (byte) value);
         }
 
+        [TableViewModelColumn(displayName: "+0x09", displayOrder: 9, displayFormat: "X2")]
         [BulkCopy]
         public int SizeUnknown9 {
             get => Data.GetByte(unknown9);

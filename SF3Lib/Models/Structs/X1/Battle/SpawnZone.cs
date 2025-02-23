@@ -26,54 +26,63 @@ namespace SF3.Models.Structs.X1.Battle {
             unknown10 = Address + 0x10; // 2 bytes
         }
 
+        [TableViewModelColumn(displayOrder: 0, displayName: "+0x00", displayFormat: "X2")]
         [BulkCopy]
         public int UnknownAI00 {
             get => Data.GetWord(unknown00);
             set => Data.SetWord(unknown00, value);
         }
 
+        [TableViewModelColumn(displayOrder: 1, displayName: "BottomLeftX")]
         [BulkCopy]
         public int UnknownAI02 {
             get => Data.GetWord(unknown02);
             set => Data.SetWord(unknown02, value);
         }
 
+        [TableViewModelColumn(displayOrder: 2, displayName: "BottomLeftZ")]
         [BulkCopy]
         public int UnknownAI04 {
             get => Data.GetWord(unknown04);
             set => Data.SetWord(unknown04, value);
         }
 
+        [TableViewModelColumn(displayOrder: 3, displayName: "TopLeftX")]
         [BulkCopy]
         public int UnknownAI06 {
             get => Data.GetWord(unknown06);
             set => Data.SetWord(unknown06, value);
         }
 
+        [TableViewModelColumn(displayOrder: 4, displayName: "TopLeftZ")]
         [BulkCopy]
         public int UnknownAI08 {
             get => Data.GetWord(unknown08);
             set => Data.SetWord(unknown08, value);
         }
 
+        [TableViewModelColumn(displayOrder: 5, displayName: "TopRightX")]
         [BulkCopy]
         public int UnknownAI0A {
             get => Data.GetWord(unknown0A);
             set => Data.SetWord(unknown0A, value);
         }
 
+        [TableViewModelColumn(displayOrder: 6, displayName: "TopRightZ")]
         [BulkCopy]
         public int UnknownAI0C {
             get => Data.GetWord(unknown0C);
             set => Data.SetWord(unknown0C, value);
         }
 
+        [TableViewModelColumn(displayOrder: 7, displayName: "BottomRightX")]
         [BulkCopy]
         public int UnknownAI0E {
             get => Data.GetWord(unknown0E);
             set => Data.SetWord(unknown0E, value);
         }
 
+        [TableViewModelColumn(displayOrder: 8, displayName: "BottomRightZ")]
         [BulkCopy]
         public int UnknownAI10 {
             get => Data.GetWord(unknown10);

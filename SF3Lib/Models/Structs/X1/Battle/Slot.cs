@@ -4,385 +4,448 @@ using SF3.Types;
 
 namespace SF3.Models.Structs.X1.Battle {
     public class Slot : Struct {
-        private readonly int unknown1;
-        private readonly int unknown2;
-        private readonly int enemyID;
-        private readonly int x;
-        private readonly int y;
-        private readonly int itemOverride;
-        private readonly int characterPlus0x0B;
-        private readonly int unknown4;
-        private readonly int joinID;
-        private readonly int unknown5;
-        private readonly int unknown6;
-        private readonly int facingIsBoss;
-        private readonly int unknown8;
-        private readonly int controlType;
-        private readonly int unknown9;
-        private readonly int unknown10;
-        private readonly int unknown11;
-        private readonly int unknown12;
-        private readonly int unknown13;
-        private readonly int unknown14;
-        private readonly int unknown15;
-        private readonly int unknown16;
-        private readonly int unknown17;
-        private readonly int unknown18;
-        private readonly int unknown19;
-        private readonly int unknown20;
-        private readonly int unknown21;
-        private readonly int unknown22;
-        private readonly int unknown23;
-        private readonly int unknown24;
-        private readonly int unknown25;
-        private readonly int unknown26;
-        private readonly int unknown27;
-        private readonly int unknown28;
-        private readonly int unknown29;
-        private readonly int unknown30;
-        private readonly int unknown31;
-        private readonly int unknown32;
-        private readonly int unknown33;
-        private readonly int unknown34;
-        private readonly int unknown35;
-        private readonly int unknown36;
-        private readonly int unknown37;
-        private readonly int unknown38;
-        private readonly int unknown39;
-        private readonly int unknown40;
+        private readonly int _enemyIDAddr;
+        private readonly int _xAddr;
+        private readonly int _yAddr;
+        private readonly int _itemOverrideAddr;
+        private readonly int _dropDisableAddr;
+        private readonly int _unknown0x09Addr;
+        private readonly int _characterPlusAddr;
+        private readonly int _spawnConditionAddr;
+        private readonly int _eventCallAddr;
+        private readonly int _unknown0x0EAddr;
+        private readonly int _unknown0x0FAddr;
+        private readonly int _facingIsBossAddr;
+        private readonly int _unknown0x12Addr;
+        private readonly int _controlTypeAddr;
+        private readonly int _respawn1Addr;
+        private readonly int _respawn2Addr;
+        private readonly int _respawn3Addr;
+        private readonly int _respawn4Addr;
+        private readonly int _strictAIAddr;
+        private readonly int _unknown0x18Addr;
+        private readonly int _unknown0x19Addr;
+        private readonly int _unknown0x1AAddr;
+        private readonly int _unknown0x1BAddr;
+        private readonly int _unknown0x1CAddr;
+        private readonly int _unknown0x1DAddr;
+        private readonly int _unknown0x1EAddr;
+        private readonly int _noTurnSkipAddr;
+        private readonly int _unknown0x20Addr;
+        private readonly int _unknown0x21Addr;
+        private readonly int _unknown0x22Addr;
+        private readonly int _aiTag1Addr;
+        private readonly int _aiType1Addr;
+        private readonly int _aiAggr1Addr;
+        private readonly int _aiTag2Addr;
+        private readonly int _aiType2Addr;
+        private readonly int _aiAggr2Addr;
+        private readonly int _aiTag3Addr;
+        private readonly int _aiType3Addr;
+        private readonly int _aiAggr3Addr;
+        private readonly int _aiTag4Addr;
+        private readonly int _aiType4Addr;
+        private readonly int _aiAggr4Addr;
+        private readonly int _unknown0x2FAddr;
+        private readonly int _unknown0x30Addr;
+        private readonly int _unknown0x31Addr;
+        private readonly int _flagsAddr;
 
         public Slot(IByteData data, int id, string name, int address)
         : base(data, id, name, address, 0x34) {
-            enemyID      = Address;      // 2 bytes  
-            x            = Address +  2; // 2 bytes
-            y            = Address +  4; // 2 bytes
-            itemOverride = Address +  6; // 2 bytes
-            unknown1     = Address +  8; // drop disabled
-            unknown2     = Address +  9; // probably droprate override
-            joinID       = Address + 10; // 2 bytes
-            characterPlus0x0B = Address + 12; // character that shows up when enemy id is 5b
-            unknown4     = Address + 13;
-            unknown5     = Address + 14;
-            unknown6     = Address + 15;
-            facingIsBoss = Address + 16;
-            controlType  = Address + 17;
-            unknown8     = Address + 18;
-            unknown9     = Address + 19;
-            unknown10    = Address + 20;
-            unknown11    = Address + 21;
-            unknown12    = Address + 22;
-            unknown13    = Address + 23;
-            unknown14    = Address + 24;
-            unknown15    = Address + 25;
-            unknown16    = Address + 26;
-            unknown17    = Address + 27;
-            unknown18    = Address + 28;
-            unknown19    = Address + 29;
-            unknown20    = Address + 30;
-            unknown21    = Address + 31; // turn not skipped?
-            unknown22    = Address + 32;
-            unknown23    = Address + 33;
-            unknown24    = Address + 34;
-            unknown25    = Address + 35; // aitag1?
-            unknown26    = Address + 36; // aitype1?
-            unknown27    = Address + 37; // aiaggression 1?
-            unknown28    = Address + 38; // aitag2?
-            unknown29    = Address + 39; // aitype4?
-            unknown30    = Address + 40; // aiaggression 2?
-            unknown31    = Address + 41; // aitag3?
-            unknown32    = Address + 42; // aitype4?
-            unknown33    = Address + 43; // aiaggression 3?
-            unknown34    = Address + 44; // aitag4?
-            unknown35    = Address + 45; // aitype4?
-            unknown36    = Address + 46; // aiaggression 4?
-            unknown37    = Address + 47;
-            unknown38    = Address + 48;
-            unknown39    = Address + 49;
-            unknown40    = Address + 50; // 2 bytes
+            _enemyIDAddr        = Address + 0x00; // 2 bytes  
+            _xAddr              = Address + 0x02; // 2 bytes
+            _yAddr              = Address + 0x04; // 2 bytes
+            _itemOverrideAddr   = Address + 0x06; // 2 bytes
+            _dropDisableAddr    = Address + 0x08; // 1 byte
+            _unknown0x09Addr    = Address + 0x09; // 1 byte
+            _eventCallAddr      = Address + 0x0A; // 2 bytes
+            _characterPlusAddr  = Address + 0x0C; // 1 byte
+            _spawnConditionAddr = Address + 0x0D; // 1 byte
+            _unknown0x0EAddr    = Address + 0x0E; // 1 byte
+            _unknown0x0FAddr    = Address + 0x0F; // 1 byte
+            _facingIsBossAddr   = Address + 0x10; // 1 byte
+            _controlTypeAddr    = Address + 0x11; // 1 byte
+            _unknown0x12Addr    = Address + 0x12; // 1 byte
+            _respawn1Addr       = Address + 0x13; // 1 byte
+            _respawn2Addr       = Address + 0x14; // 1 byte
+            _respawn3Addr       = Address + 0x15; // 1 byte
+            _respawn4Addr       = Address + 0x16; // 1 byte
+            _strictAIAddr       = Address + 0x17; // 1 byte
+            _unknown0x18Addr    = Address + 0x18; // 1 byte
+            _unknown0x19Addr    = Address + 0x19; // 1 byte
+            _unknown0x1AAddr    = Address + 0x1A; // 1 byte
+            _unknown0x1BAddr    = Address + 0x1B; // 1 byte
+            _unknown0x1CAddr    = Address + 0x1C; // 1 byte
+            _unknown0x1DAddr    = Address + 0x1D; // 1 byte
+            _unknown0x1EAddr    = Address + 0x1E; // 1 byte
+            _noTurnSkipAddr     = Address + 0x1F; // 1 byte
+            _unknown0x20Addr    = Address + 0x20; // 1 byte
+            _unknown0x21Addr    = Address + 0x21; // 1 byte
+            _unknown0x22Addr    = Address + 0x22; // 1 byte
+            _aiTag1Addr         = Address + 0x23; // 1 byte
+            _aiType1Addr        = Address + 0x24; // 1 byte
+            _aiAggr1Addr        = Address + 0x25; // 1 byte
+            _aiTag2Addr         = Address + 0x26; // 1 byte
+            _aiType2Addr        = Address + 0x27; // 1 byte
+            _aiAggr2Addr        = Address + 0x28; // 1 byte
+            _aiTag3Addr         = Address + 0x29; // 1 byte
+            _aiType3Addr        = Address + 0x2A; // 1 byte
+            _aiAggr3Addr        = Address + 0x2B; // 1 byte
+            _aiTag4Addr         = Address + 0x2C; // 1 byte
+            _aiType4Addr        = Address + 0x2D; // 1 byte
+            _aiAggr4Addr        = Address + 0x2E; // 1 byte
+            _unknown0x2FAddr    = Address + 0x2F; // 1 byte
+            _unknown0x30Addr    = Address + 0x30; // 1 byte
+            _unknown0x31Addr    = Address + 0x31; // 1 byte
+            _flagsAddr          = Address + 0x32; // 2 bytes
         }
 
-        [BulkCopy]
-        public int Unknown1 {
-            get => Data.GetByte(unknown1);
-            set => Data.SetByte(unknown1, (byte) value);
-        }
+        // ------------------------------------------------------------------------------------------------------------
+        // Page 1
+        // ------------------------------------------------------------------------------------------------------------
 
-        [BulkCopy]
-        public int Unknown2 {
-            get => Data.GetByte(unknown2);
-            set => Data.SetByte(unknown2, (byte) value);
-        }
-
+        [TableViewModelColumn(displayOrder: 0, minWidth: 150)]
         [BulkCopy]
         [NameGetter(NamedValueType.MonsterForSlot)]
         public int EnemyID {
-            get => Data.GetWord(enemyID);
-            set => Data.SetWord(enemyID, value);
+            get => Data.GetWord(_enemyIDAddr);
+            set => Data.SetWord(_enemyIDAddr, value);
         }
 
+        [TableViewModelColumn(displayOrder: 1)]
         [BulkCopy]
         public int EnemyX {
-            get => Data.GetWord(x);
-            set => Data.SetWord(x, value);
+            get => Data.GetWord(_xAddr);
+            set => Data.SetWord(_xAddr, value);
         }
 
+        [TableViewModelColumn(displayOrder: 2)]
         [BulkCopy]
         public int EnemyY {
-            get => Data.GetWord(y);
-            set => Data.SetWord(y, value);
+            get => Data.GetWord(_yAddr);
+            set => Data.SetWord(_yAddr, value);
         }
 
+        [TableViewModelColumn(displayOrder: 3, minWidth: 150)]
         [BulkCopy]
         [NameGetter(NamedValueType.Item)]
         public int ItemOverride {
-            get => Data.GetWord(itemOverride);
-            set => Data.SetWord(itemOverride, value);
+            get => Data.GetWord(_itemOverrideAddr);
+            set => Data.SetWord(_itemOverrideAddr, value);
         }
 
+        [TableViewModelColumn(displayOrder: 4, displayFormat: "X2")]
+        [BulkCopy]
+        public int DropDisable {
+            get => Data.GetByte(_dropDisableAddr);
+            set => Data.SetByte(_dropDisableAddr, (byte) value);
+        }
+
+        [TableViewModelColumn(displayOrder: 5, displayName: "+0x09 (probably drop rate override)", displayFormat: "X2")]
+        [BulkCopy]
+        public int Unknown0x09 {
+            get => Data.GetByte(_unknown0x09Addr);
+            set => Data.SetByte(_unknown0x09Addr, (byte) value);
+        }
+
+        [TableViewModelColumn(displayOrder: 6, displayFormat: "X2")]
+        [BulkCopy]
+        public int EventCall {
+            get => Data.GetWord(_eventCallAddr);
+            set => Data.SetWord(_eventCallAddr, value);
+        }
+
+        [TableViewModelColumn(displayOrder: 7, displayFormat: "X2")]
         [BulkCopy]
         [NameGetter(NamedValueType.CharacterPlus, nameof(EnemyID))]
-        public int CharacterPlus0x0B {
-            get => Data.GetByte(characterPlus0x0B);
-            set => Data.SetByte(characterPlus0x0B, (byte) value);
+        public int CharacterPlus {
+            get => Data.GetByte(_characterPlusAddr);
+            set => Data.SetByte(_characterPlusAddr, (byte) value);
         }
 
+        [TableViewModelColumn(displayOrder: 8, displayName: "SpawnCondition?", displayFormat: "X2")]
         [BulkCopy]
-        public int Unknown4 {
-            get => Data.GetByte(unknown4);
-            set => Data.SetByte(unknown4, (byte) value);
+        public int SpawnCondition {
+            get => Data.GetByte(_spawnConditionAddr);
+            set => Data.SetByte(_spawnConditionAddr, (byte) value);
         }
 
+        [TableViewModelColumn(displayOrder: 9, displayName: "+0x0E", displayFormat: "X2")]
         [BulkCopy]
-        public int Unknown5 {
-            get => Data.GetByte(unknown5);
-            set => Data.SetByte(unknown5, (byte) value);
+        public int Unknown0x0E {
+            get => Data.GetByte(_unknown0x0EAddr);
+            set => Data.SetByte(_unknown0x0EAddr, (byte) value);
         }
 
+        // ------------------------------------------------------------------------------------------------------------
+        // Page 2
+        // ------------------------------------------------------------------------------------------------------------
+
+        [TableViewModelColumn(displayOrder: 10, displayName: "+0x0F", displayFormat: "X2")]
         [BulkCopy]
-        public int JoinID {
-            get => Data.GetWord(joinID);
-            set => Data.SetWord(joinID, value);
+        public int Unknown0x0F {
+            get => Data.GetByte(_unknown0x0FAddr);
+            set => Data.SetByte(_unknown0x0FAddr, (byte) value);
         }
 
-        [BulkCopy]
-        public int Unknown6 {
-            get => Data.GetByte(unknown6);
-            set => Data.SetByte(unknown6, (byte) value);
-        }
-
-        public bool IsBoss {
-            get => Data.GetBit(facingIsBoss, 5);
-            set => Data.SetBit(facingIsBoss, 5, value);
-        }
-
+        [TableViewModelColumn(displayOrder: 11, displayName: "Facing/IsBoss", displayFormat: "X2")]
         [BulkCopy]
         public int FacingIsBoss {
-            get => Data.GetByte(facingIsBoss);
-            set => Data.SetByte(facingIsBoss, (byte) value);
+            get => Data.GetByte(_facingIsBossAddr);
+            set => Data.SetByte(_facingIsBossAddr, (byte) value);
         }
 
-        [BulkCopy]
-        public int Unknown8 {
-            get => Data.GetByte(unknown8);
-            set => Data.SetByte(unknown8, (byte) value);
+        [TableViewModelColumn(displayOrder: 12)]
+        public bool IsBoss {
+            get => Data.GetBit(_facingIsBossAddr, 5);
+            set => Data.SetBit(_facingIsBossAddr, 5, value);
         }
 
-        [BulkCopy]
-        public int Unknown9 {
-            get => Data.GetByte(unknown9);
-            set => Data.SetByte(unknown9, (byte) value);
-        }
-
+        [TableViewModelColumn(displayOrder: 13, displayFormat: "X2")]
         [BulkCopy]
         public int ControlType {
-            get => Data.GetByte(controlType);
-            set => Data.SetByte(controlType, (byte) value);
+            get => Data.GetByte(_controlTypeAddr);
+            set => Data.SetByte(_controlTypeAddr, (byte) value);
         }
 
+        [TableViewModelColumn(displayOrder: 14, displayName: "+0x12", displayFormat: "X2")]
         [BulkCopy]
-        public int Unknown10 {
-            get => Data.GetByte(unknown10);
-            set => Data.SetByte(unknown10, (byte) value);
+        public int Unknown0x12 {
+            get => Data.GetByte(_unknown0x12Addr);
+            set => Data.SetByte(_unknown0x12Addr, (byte) value);
         }
 
+        [TableViewModelColumn(displayOrder: 15, displayName: "Respawn1?", displayFormat: "X2")]
         [BulkCopy]
-        public int Unknown11 {
-            get => Data.GetByte(unknown11);
-            set => Data.SetByte(unknown11, (byte) value);
+        public int Respawn1 {
+            get => Data.GetByte(_respawn1Addr);
+            set => Data.SetByte(_respawn1Addr, (byte) value);
         }
 
+        [TableViewModelColumn(displayOrder: 16, displayName: "Respawn2?", displayFormat: "X2")]
         [BulkCopy]
-        public int Unknown12 {
-            get => Data.GetByte(unknown12);
-            set => Data.SetByte(unknown12, (byte) value);
+        public int Respawn2 {
+            get => Data.GetByte(_respawn2Addr);
+            set => Data.SetByte(_respawn2Addr, (byte) value);
         }
 
+        [TableViewModelColumn(displayOrder: 17, displayName: "Respawn3?", displayFormat: "X2")]
         [BulkCopy]
-        public int Unknown13 {
-            get => Data.GetByte(unknown13);
-            set => Data.SetByte(unknown13, (byte) value);
+        public int Respawn3 {
+            get => Data.GetByte(_respawn3Addr);
+            set => Data.SetByte(_respawn3Addr, (byte) value);
         }
 
+        [TableViewModelColumn(displayOrder: 18, displayName: "Respawn4?", displayFormat: "X2")]
         [BulkCopy]
-        public int Unknown14 {
-            get => Data.GetByte(unknown14);
-            set => Data.SetByte(unknown14, (byte) value);
+        public int Respawn4 {
+            get => Data.GetByte(_respawn4Addr);
+            set => Data.SetByte(_respawn4Addr, (byte) value);
         }
 
+        [TableViewModelColumn(displayOrder: 19, displayFormat: "X2")]
         [BulkCopy]
-        public int Unknown15 {
-            get => Data.GetByte(unknown15);
-            set => Data.SetByte(unknown15, (byte) value);
+        public int StrictAI {
+            get => Data.GetByte(_strictAIAddr);
+            set => Data.SetByte(_strictAIAddr, (byte) value);
         }
 
+        [TableViewModelColumn(displayOrder: 20, displayName: "+0x18", displayFormat: "X2")]
         [BulkCopy]
-        public int Unknown16 {
-            get => Data.GetByte(unknown16);
-            set => Data.SetByte(unknown16, (byte) value);
+        public int Unknown0x18 {
+            get => Data.GetByte(_unknown0x18Addr);
+            set => Data.SetByte(_unknown0x18Addr, (byte) value);
         }
 
+        [TableViewModelColumn(displayOrder: 21, displayName: "+0x19", displayFormat: "X2")]
         [BulkCopy]
-        public int Unknown17 {
-            get => Data.GetByte(unknown17);
-            set => Data.SetByte(unknown17, (byte) value);
+        public int Unknown0x19 {
+            get => Data.GetByte(_unknown0x19Addr);
+            set => Data.SetByte(_unknown0x19Addr, (byte) value);
         }
 
+        [TableViewModelColumn(displayOrder: 22, displayName: "+0x1A", displayFormat: "X2")]
         [BulkCopy]
-        public int Unknown18 {
-            get => Data.GetByte(unknown18);
-            set => Data.SetByte(unknown18, (byte) value);
+        public int Unknown0x1A {
+            get => Data.GetByte(_unknown0x1AAddr);
+            set => Data.SetByte(_unknown0x1AAddr, (byte) value);
         }
 
+        [TableViewModelColumn(displayOrder: 23, displayName: "+0x1B", displayFormat: "X2")]
         [BulkCopy]
-        public int Unknown19 {
-            get => Data.GetByte(unknown19);
-            set => Data.SetByte(unknown19, (byte) value);
+        public int Unknown0x1B {
+            get => Data.GetByte(_unknown0x1BAddr);
+            set => Data.SetByte(_unknown0x1BAddr, (byte) value);
         }
 
+        [TableViewModelColumn(displayOrder: 24, displayName: "+0x1C", displayFormat: "X2")]
         [BulkCopy]
-        public int Unknown20 {
-            get => Data.GetByte(unknown20);
-            set => Data.SetByte(unknown20, (byte) value);
+        public int Unknown0x1C {
+            get => Data.GetByte(_unknown0x1CAddr);
+            set => Data.SetByte(_unknown0x1CAddr, (byte) value);
         }
 
+        [TableViewModelColumn(displayOrder: 25, displayName: "+0x1D", displayFormat: "X2")]
         [BulkCopy]
-        public int Unknown21 {
-            get => Data.GetByte(unknown21);
-            set => Data.SetByte(unknown21, (byte) value);
+        public int Unknown0x1D {
+            get => Data.GetByte(_unknown0x1DAddr);
+            set => Data.SetByte(_unknown0x1DAddr, (byte) value);
         }
 
+        // ------------------------------------------------------------------------------------------------------------
+        // Page 3
+        // ------------------------------------------------------------------------------------------------------------
+
+        [TableViewModelColumn(displayOrder: 26, displayName: "+0x1E", displayFormat: "X2")]
         [BulkCopy]
-        public int Unknown22 {
-            get => Data.GetByte(unknown22);
-            set => Data.SetByte(unknown22, (byte) value);
+        public int Unknown0x1E {
+            get => Data.GetByte(_unknown0x1EAddr);
+            set => Data.SetByte(_unknown0x1EAddr, (byte) value);
         }
 
+        [TableViewModelColumn(displayOrder: 27, displayName: "!TurnSkip", displayFormat: "X2")]
         [BulkCopy]
-        public int Unknown23 {
-            get => Data.GetByte(unknown23);
-            set => Data.SetByte(unknown23, (byte) value);
+        public int NoTurnSkip {
+            get => Data.GetByte(_noTurnSkipAddr);
+            set => Data.SetByte(_noTurnSkipAddr, (byte) value);
         }
 
+        [TableViewModelColumn(displayOrder: 28, displayName: "+0x20", displayFormat: "X2")]
         [BulkCopy]
-        public int Unknown24 {
-            get => Data.GetByte(unknown24);
-            set => Data.SetByte(unknown24, (byte) value);
+        public int Unknown0x20 {
+            get => Data.GetByte(_unknown0x20Addr);
+            set => Data.SetByte(_unknown0x20Addr, (byte) value);
         }
 
+        [TableViewModelColumn(displayOrder: 29, displayName: "+0x21", displayFormat: "X2")]
         [BulkCopy]
-        public int Unknown25 {
-            get => Data.GetByte(unknown25);
-            set => Data.SetByte(unknown25, (byte) value);
+        public int Unknown0x21 {
+            get => Data.GetByte(_unknown0x21Addr);
+            set => Data.SetByte(_unknown0x21Addr, (byte) value);
         }
 
+        [TableViewModelColumn(displayOrder: 30, displayName: "+0x22", displayFormat: "X2")]
         [BulkCopy]
-        public int Unknown26 {
-            get => Data.GetByte(unknown26);
-            set => Data.SetByte(unknown26, (byte) value);
+        public int Unknown0x22 {
+            get => Data.GetByte(_unknown0x22Addr);
+            set => Data.SetByte(_unknown0x22Addr, (byte) value);
         }
 
+        [TableViewModelColumn(displayOrder: 31, displayFormat: "X2")]
         [BulkCopy]
-        public int Unknown27 {
-            get => Data.GetByte(unknown27);
-            set => Data.SetByte(unknown27, (byte) value);
+        public int AITag1 {
+            get => Data.GetByte(_aiTag1Addr);
+            set => Data.SetByte(_aiTag1Addr, (byte) value);
         }
 
+        [TableViewModelColumn(displayOrder: 32, displayFormat: "X2")]
         [BulkCopy]
-        public int Unknown28 {
-            get => Data.GetByte(unknown28);
-            set => Data.SetByte(unknown28, (byte) value);
+        public int AIType1 {
+            get => Data.GetByte(_aiType1Addr);
+            set => Data.SetByte(_aiType1Addr, (byte) value);
         }
 
+        [TableViewModelColumn(displayOrder: 33, displayFormat: "X2")]
         [BulkCopy]
-        public int Unknown29 {
-            get => Data.GetByte(unknown29);
-            set => Data.SetByte(unknown29, (byte) value);
+        public int AIAggr1 {
+            get => Data.GetByte(_aiAggr1Addr);
+            set => Data.SetByte(_aiAggr1Addr, (byte) value);
         }
 
+        [TableViewModelColumn(displayOrder: 34, displayFormat: "X2")]
         [BulkCopy]
-        public int Unknown30 {
-            get => Data.GetByte(unknown30);
-            set => Data.SetByte(unknown30, (byte) value);
+        public int AITag2 {
+            get => Data.GetByte(_aiTag2Addr);
+            set => Data.SetByte(_aiTag2Addr, (byte) value);
         }
 
+        [TableViewModelColumn(displayOrder: 35, displayFormat: "X2")]
         [BulkCopy]
-        public int Unknown31 {
-            get => Data.GetByte(unknown31);
-            set => Data.SetByte(unknown31, (byte) value);
+        public int AIType2 {
+            get => Data.GetByte(_aiType2Addr);
+            set => Data.SetByte(_aiType2Addr, (byte) value);
         }
 
+        [TableViewModelColumn(displayOrder: 36, displayFormat: "X2")]
         [BulkCopy]
-        public int Unknown32 {
-            get => Data.GetByte(unknown32);
-            set => Data.SetByte(unknown32, (byte) value);
+        public int AIAggr2 {
+            get => Data.GetByte(_aiAggr2Addr);
+            set => Data.SetByte(_aiAggr2Addr, (byte) value);
         }
 
+        // ------------------------------------------------------------------------------------------------------------
+        // Page 4
+        // ------------------------------------------------------------------------------------------------------------
+
+        [TableViewModelColumn(displayOrder: 37, displayFormat: "X2")]
         [BulkCopy]
-        public int Unknown33 {
-            get => Data.GetByte(unknown33);
-            set => Data.SetByte(unknown33, (byte) value);
+        public int AITag3 {
+            get => Data.GetByte(_aiTag3Addr);
+            set => Data.SetByte(_aiTag3Addr, (byte) value);
         }
 
+        [TableViewModelColumn(displayOrder: 38, displayFormat: "X2")]
         [BulkCopy]
-        public int Unknown34 {
-            get => Data.GetByte(unknown34);
-            set => Data.SetByte(unknown34, (byte) value);
+        public int AIType3 {
+            get => Data.GetByte(_aiType3Addr);
+            set => Data.SetByte(_aiType3Addr, (byte) value);
         }
 
+        [TableViewModelColumn(displayOrder: 39, displayFormat: "X2")]
         [BulkCopy]
-        public int Unknown35 {
-            get => Data.GetByte(unknown35);
-            set => Data.SetByte(unknown35, (byte) value);
+        public int AIAggr3 {
+            get => Data.GetByte(_aiAggr3Addr);
+            set => Data.SetByte(_aiAggr3Addr, (byte) value);
         }
 
+        [TableViewModelColumn(displayOrder: 40, displayFormat: "X2")]
         [BulkCopy]
-        public int Unknown36 {
-            get => Data.GetByte(unknown36);
-            set => Data.SetByte(unknown36, (byte) value);
+        public int AITag4 {
+            get => Data.GetByte(_aiTag4Addr);
+            set => Data.SetByte(_aiTag4Addr, (byte) value);
         }
 
+        [TableViewModelColumn(displayOrder: 41, displayFormat: "X2")]
         [BulkCopy]
-        public int Unknown37 {
-            get => Data.GetByte(unknown37);
-            set => Data.SetByte(unknown37, (byte) value);
+        public int AIType4 {
+            get => Data.GetByte(_aiType4Addr);
+            set => Data.SetByte(_aiType4Addr, (byte) value);
         }
 
+        [TableViewModelColumn(displayOrder: 42, displayFormat: "X2")]
         [BulkCopy]
-        public int Unknown38 {
-            get => Data.GetByte(unknown38);
-            set => Data.SetByte(unknown38, (byte) value);
+        public int AIAggr4 {
+            get => Data.GetByte(_aiAggr4Addr);
+            set => Data.SetByte(_aiAggr4Addr, (byte) value);
         }
 
+        [TableViewModelColumn(displayOrder: 43, displayName: "+0x2F", displayFormat: "X2")]
         [BulkCopy]
-        public int Unknown39 {
-            get => Data.GetByte(unknown39);
-            set => Data.SetByte(unknown39, (byte) value);
+        public int Unknown0x2F {
+            get => Data.GetByte(_unknown0x2FAddr);
+            set => Data.SetByte(_unknown0x2FAddr, (byte) value);
         }
 
+        [TableViewModelColumn(displayOrder: 44, displayName: "+0x30", displayFormat: "X2")]
         [BulkCopy]
-        public int Unknown40 {
-            get => Data.GetWord(unknown40);
-            set => Data.SetWord(unknown40, value);
+        public int Unknown0x30 {
+            get => Data.GetByte(_unknown0x30Addr);
+            set => Data.SetByte(_unknown0x30Addr, (byte) value);
+        }
+
+        [TableViewModelColumn(displayOrder: 45, displayName: "+0x31", displayFormat: "X2")]
+        [BulkCopy]
+        public int Unknown0x31 {
+            get => Data.GetByte(_unknown0x31Addr);
+            set => Data.SetByte(_unknown0x31Addr, (byte) value);
+        }
+
+        [TableViewModelColumn(displayOrder: 46, displayFormat: "X2")]
+        [BulkCopy]
+        public int Flags {
+            get => Data.GetWord(_flagsAddr);
+            set => Data.SetWord(_flagsAddr, value);
         }
     }
 }
