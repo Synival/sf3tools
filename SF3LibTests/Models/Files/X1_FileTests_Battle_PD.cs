@@ -67,12 +67,10 @@ namespace SF3.Tests.Models.Files {
         public void HeaderTable_HasExpectedData() {
             var file = TestCase.Create();
             var battle = file.Battles[MapLeaderType.Synbios];
-            var table = battle.BattleHeaderTable;
+            var header = battle.BattleHeader;
 
-            Assert.AreEqual(0, table[0].SizeUnknown1);
-            Assert.AreEqual(16, table[0].TableSize);
-
-            Assert.AreEqual(1, table.Length);
+            Assert.AreEqual(0, header.SizeUnknown1);
+            Assert.AreEqual(16, header.TableSize);
         }
 
         [TestMethod]

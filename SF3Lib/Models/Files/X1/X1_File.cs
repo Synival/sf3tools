@@ -129,17 +129,17 @@ namespace SF3.Models.Files.X1 {
             // Add tables present outside of the battle tables.
             var tables = new List<ITable>();
             if (treasureAddress >= 0)
-                tables.Add(TreasureTable = TreasureTable.Create(Data, "Treasure", ResourceFile("X1Treasure.xml"), treasureAddress));
+                tables.Add(TreasureTable = TreasureTable.Create(Data, "Treasure", treasureAddress));
             if (warpAddress >= 0)
                 tables.Add(WarpTable = WarpTable.Create(Data, "Warps", null, warpAddress));
             if (battlePointersAddress >= 0)
                 tables.Add(BattlePointersTable);
             if (npcAddress >= 0)
-                tables.Add(NpcTable = NpcTable.Create(Data, "NPCs", ResourceFile("X1Npc.xml"), npcAddress));
+                tables.Add(NpcTable = NpcTable.Create(Data, "NPCs", npcAddress));
             if (enterAddress >= 0)
-                tables.Add(EnterTable = EnterTable.Create(Data, "Entrances", ResourceFile("X1Enter.xml"), enterAddress));
+                tables.Add(EnterTable = EnterTable.Create(Data, "Entrances", enterAddress));
             if (arrowAddress >= 0)
-                tables.Add(ArrowTable = ArrowTable.Create(Data, "Arrows", ResourceFile("X1Arrow.xml"), arrowAddress));
+                tables.Add(ArrowTable = ArrowTable.Create(Data, "Arrows", arrowAddress));
 
             // Add tables for battle tables.
             if (Battles != null) {

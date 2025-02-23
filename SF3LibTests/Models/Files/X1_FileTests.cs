@@ -56,7 +56,7 @@ namespace SF3.Tests.Models.Files {
                     Assert.IsTrue(file.Battles.ContainsKey((MapLeaderType) testCase.MapLeader));
                     var battle = file.Battles[(MapLeaderType) testCase.MapLeader];
 
-                    Assert.IsNotNull(battle.BattleHeaderTable);
+                    Assert.IsNotNull(battle.BattleHeader);
                     Assert.IsNotNull(battle.SlotTable);
                     Assert.IsNotNull(battle.SpawnZoneTable);
                     Assert.IsNotNull(battle.AITable);

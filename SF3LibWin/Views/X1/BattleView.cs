@@ -12,8 +12,8 @@ namespace SF3.Win.Views.MPD {
             base.Create();
 
             var ngc = Model.NameGetterContext;
-            if (Model.BattleHeaderTable != null)
-                CreateChild(new TableView("Header", Model.BattleHeaderTable, ngc));
+            if (Model.BattleHeader != null)
+                CreateChild(new ModelView("Header", Model.BattleHeader, ngc));
             if (Model.SlotTable != null)
                 CreateChild(new TableView("Slots", Model.SlotTable, ngc));
             if (Model.SpawnZoneTable != null)
