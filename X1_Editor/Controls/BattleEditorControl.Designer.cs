@@ -398,7 +398,7 @@ namespace SF3.X1_Editor.Controls {
             // 
             // lvcSlotTab1DropDisable
             // 
-            lvcSlotTab1DropDisable.AspectName = "Unknown1";
+            lvcSlotTab1DropDisable.AspectName = "DropDisable";
             lvcSlotTab1DropDisable.AspectToStringFormat = "{0:X}";
             lvcSlotTab1DropDisable.Text = "DropDisable";
             lvcSlotTab1DropDisable.Width = 70;
@@ -412,7 +412,7 @@ namespace SF3.X1_Editor.Controls {
             // 
             // lvcSlotTab1EventCall
             // 
-            lvcSlotTab1EventCall.AspectName = "JoinID";
+            lvcSlotTab1EventCall.AspectName = "EventCall";
             lvcSlotTab1EventCall.AspectToStringFormat = "{0:X}";
             lvcSlotTab1EventCall.Text = "EventCall";
             // 
@@ -564,7 +564,7 @@ namespace SF3.X1_Editor.Controls {
             // 
             // lvcSlotTab2StrictAI
             // 
-            lvcSlotTab2StrictAI.AspectName = "Unknown13";
+            lvcSlotTab2StrictAI.AspectName = "StrictAI";
             lvcSlotTab2StrictAI.AspectToStringFormat = "{0:X}";
             lvcSlotTab2StrictAI.Text = "strict ai +0x17";
             lvcSlotTab2StrictAI.Width = 80;
@@ -679,7 +679,7 @@ namespace SF3.X1_Editor.Controls {
             // 
             // lvcSlotTab3TurnSkip
             // 
-            lvcSlotTab3TurnSkip.AspectName = "Unknown21";
+            lvcSlotTab3TurnSkip.AspectName = "TurnSkip";
             lvcSlotTab3TurnSkip.AspectToStringFormat = "{0:X}";
             lvcSlotTab3TurnSkip.Text = "!Turnskip";
             // 
@@ -706,42 +706,42 @@ namespace SF3.X1_Editor.Controls {
             // 
             // lvcSlotTab3PlusAITag1
             // 
-            lvcSlotTab3PlusAITag1.AspectName = "Unknown25";
+            lvcSlotTab3PlusAITag1.AspectName = "AITag1";
             lvcSlotTab3PlusAITag1.AspectToStringFormat = "{0:X}";
             lvcSlotTab3PlusAITag1.Text = "aiTag1";
             lvcSlotTab3PlusAITag1.Width = 50;
             // 
             // lvcSlotTab3PlusAIType1
             // 
-            lvcSlotTab3PlusAIType1.AspectName = "Unknown26";
+            lvcSlotTab3PlusAIType1.AspectName = "AIType1";
             lvcSlotTab3PlusAIType1.AspectToStringFormat = "{0:X}";
             lvcSlotTab3PlusAIType1.Text = "aiType1";
             lvcSlotTab3PlusAIType1.Width = 50;
             // 
             // lvcSlotTab3PlusAIAggr1
             // 
-            lvcSlotTab3PlusAIAggr1.AspectName = "Unknown27";
+            lvcSlotTab3PlusAIAggr1.AspectName = "AIAggr1";
             lvcSlotTab3PlusAIAggr1.AspectToStringFormat = "{0:X}";
             lvcSlotTab3PlusAIAggr1.Text = "aiAggr1";
             lvcSlotTab3PlusAIAggr1.Width = 50;
             // 
             // lvcSlotTab3PlusAITag2
             // 
-            lvcSlotTab3PlusAITag2.AspectName = "Unknown28";
+            lvcSlotTab3PlusAITag2.AspectName = "AITag2";
             lvcSlotTab3PlusAITag2.AspectToStringFormat = "{0:X}";
             lvcSlotTab3PlusAITag2.Text = "aiTag2";
             lvcSlotTab3PlusAITag2.Width = 50;
             // 
             // lvcSlotTab3PlusAIType2
             // 
-            lvcSlotTab3PlusAIType2.AspectName = "Unknown29";
+            lvcSlotTab3PlusAIType2.AspectName = "AIType2";
             lvcSlotTab3PlusAIType2.AspectToStringFormat = "{0:X}";
             lvcSlotTab3PlusAIType2.Text = "aiType2";
             lvcSlotTab3PlusAIType2.Width = 50;
             // 
             // lvcSlotTab3PlusAIAggr2
             // 
-            lvcSlotTab3PlusAIAggr2.AspectName = "Unknown30";
+            lvcSlotTab3PlusAIAggr2.AspectName = "AIAggr2";
             lvcSlotTab3PlusAIAggr2.AspectToStringFormat = "{0:X}";
             lvcSlotTab3PlusAIAggr2.Text = "aiAggr2";
             lvcSlotTab3PlusAIAggr2.Width = 50;
@@ -806,41 +806,41 @@ namespace SF3.X1_Editor.Controls {
             // 
             // lvcSlotTab4AITag3
             // 
-            lvcSlotTab4AITag3.AspectName = "Unknown31";
+            lvcSlotTab4AITag3.AspectName = "AITag3";
             lvcSlotTab4AITag3.AspectToStringFormat = "{0:X}";
             lvcSlotTab4AITag3.Text = "aiTag3";
             // 
             // lvcSlotTab4AIType3
             // 
-            lvcSlotTab4AIType3.AspectName = "Unknown32";
+            lvcSlotTab4AIType3.AspectName = "AIType3";
             lvcSlotTab4AIType3.AspectToStringFormat = "{0:X}";
             lvcSlotTab4AIType3.Text = "aiType3";
             lvcSlotTab4AIType3.Width = 50;
             // 
             // lvcSlotTab4AIAggr3
             // 
-            lvcSlotTab4AIAggr3.AspectName = "Unknown33";
+            lvcSlotTab4AIAggr3.AspectName = "AIAggr3";
             lvcSlotTab4AIAggr3.AspectToStringFormat = "{0:X}";
             lvcSlotTab4AIAggr3.Text = "aiAggr3";
             lvcSlotTab4AIAggr3.Width = 50;
             // 
             // lvcSlotTab4AITag4
             // 
-            lvcSlotTab4AITag4.AspectName = "Unknown34";
+            lvcSlotTab4AITag4.AspectName = "AITag4";
             lvcSlotTab4AITag4.AspectToStringFormat = "{0:X}";
             lvcSlotTab4AITag4.Text = "aiTag4";
             lvcSlotTab4AITag4.Width = 50;
             // 
             // lvcSlotTab4AIType4
             // 
-            lvcSlotTab4AIType4.AspectName = "Unknown35";
+            lvcSlotTab4AIType4.AspectName = "AIType4";
             lvcSlotTab4AIType4.AspectToStringFormat = "{0:X}";
             lvcSlotTab4AIType4.Text = "aiType4";
             lvcSlotTab4AIType4.Width = 50;
             // 
             // lvcSlotTab4AIAggr4
             // 
-            lvcSlotTab4AIAggr4.AspectName = "Unknown36";
+            lvcSlotTab4AIAggr4.AspectName = "AIAggr4";
             lvcSlotTab4AIAggr4.AspectToStringFormat = "{0:X}";
             lvcSlotTab4AIAggr4.Text = "aiAggr4";
             lvcSlotTab4AIAggr4.Width = 50;
@@ -868,7 +868,7 @@ namespace SF3.X1_Editor.Controls {
             // 
             // lvcSlotTab4Flags
             // 
-            lvcSlotTab4Flags.AspectName = "Unknown40";
+            lvcSlotTab4Flags.AspectName = "Flags";
             lvcSlotTab4Flags.AspectToStringFormat = "{0:X}";
             lvcSlotTab4Flags.Text = "Flags";
             lvcSlotTab4Flags.Width = 70;

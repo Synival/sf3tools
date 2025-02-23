@@ -4,7 +4,7 @@ using SF3.Types;
 
 namespace SF3.Models.Structs.X1.Battle {
     public class Slot : Struct {
-        private readonly int unknown1;
+        private readonly int dropDisableAddr;
         private readonly int unknown2;
         private readonly int enemyID;
         private readonly int x;
@@ -12,7 +12,7 @@ namespace SF3.Models.Structs.X1.Battle {
         private readonly int itemOverride;
         private readonly int characterPlus0x0B;
         private readonly int unknown4;
-        private readonly int joinID;
+        private readonly int eventCallAddr;
         private readonly int unknown5;
         private readonly int unknown6;
         private readonly int facingIsBoss;
@@ -22,7 +22,7 @@ namespace SF3.Models.Structs.X1.Battle {
         private readonly int unknown10;
         private readonly int unknown11;
         private readonly int unknown12;
-        private readonly int unknown13;
+        private readonly int strictAIAddr;
         private readonly int unknown14;
         private readonly int unknown15;
         private readonly int unknown16;
@@ -30,26 +30,26 @@ namespace SF3.Models.Structs.X1.Battle {
         private readonly int unknown18;
         private readonly int unknown19;
         private readonly int unknown20;
-        private readonly int unknown21;
+        private readonly int turnSkipAddr;
         private readonly int unknown22;
         private readonly int unknown23;
         private readonly int unknown24;
-        private readonly int unknown25;
-        private readonly int unknown26;
-        private readonly int unknown27;
-        private readonly int unknown28;
-        private readonly int unknown29;
-        private readonly int unknown30;
-        private readonly int unknown31;
-        private readonly int unknown32;
-        private readonly int unknown33;
-        private readonly int unknown34;
-        private readonly int unknown35;
-        private readonly int unknown36;
+        private readonly int aiTag1Addr;
+        private readonly int aiType1Addr;
+        private readonly int aiAggr1Addr;
+        private readonly int aiTag2Addr;
+        private readonly int aiType2Addr;
+        private readonly int aiAggr2Addr;
+        private readonly int aiTag3Addr;
+        private readonly int aiType3Addr;
+        private readonly int aiAggr3Addr;
+        private readonly int aiTag4Addr;
+        private readonly int aiType4Addr;
+        private readonly int aiAggr4Addr;
         private readonly int unknown37;
         private readonly int unknown38;
         private readonly int unknown39;
-        private readonly int unknown40;
+        private readonly int flagsAddr;
 
         public Slot(IByteData data, int id, string name, int address)
         : base(data, id, name, address, 0x34) {
@@ -57,9 +57,9 @@ namespace SF3.Models.Structs.X1.Battle {
             x            = Address +  2; // 2 bytes
             y            = Address +  4; // 2 bytes
             itemOverride = Address +  6; // 2 bytes
-            unknown1     = Address +  8; // drop disabled
+            dropDisableAddr = Address +  8; // drop disabled
             unknown2     = Address +  9; // probably droprate override
-            joinID       = Address + 10; // 2 bytes
+            eventCallAddr = Address + 10; // 2 bytes
             characterPlus0x0B = Address + 12; // character that shows up when enemy id is 5b
             unknown4     = Address + 13;
             unknown5     = Address + 14;
@@ -71,7 +71,7 @@ namespace SF3.Models.Structs.X1.Battle {
             unknown10    = Address + 20;
             unknown11    = Address + 21;
             unknown12    = Address + 22;
-            unknown13    = Address + 23;
+            strictAIAddr = Address + 23;
             unknown14    = Address + 24;
             unknown15    = Address + 25;
             unknown16    = Address + 26;
@@ -79,32 +79,32 @@ namespace SF3.Models.Structs.X1.Battle {
             unknown18    = Address + 28;
             unknown19    = Address + 29;
             unknown20    = Address + 30;
-            unknown21    = Address + 31; // turn not skipped?
+            turnSkipAddr = Address + 31; // turn not skipped?
             unknown22    = Address + 32;
             unknown23    = Address + 33;
             unknown24    = Address + 34;
-            unknown25    = Address + 35; // aitag1?
-            unknown26    = Address + 36; // aitype1?
-            unknown27    = Address + 37; // aiaggression 1?
-            unknown28    = Address + 38; // aitag2?
-            unknown29    = Address + 39; // aitype4?
-            unknown30    = Address + 40; // aiaggression 2?
-            unknown31    = Address + 41; // aitag3?
-            unknown32    = Address + 42; // aitype4?
-            unknown33    = Address + 43; // aiaggression 3?
-            unknown34    = Address + 44; // aitag4?
-            unknown35    = Address + 45; // aitype4?
-            unknown36    = Address + 46; // aiaggression 4?
+            aiTag1Addr   = Address + 35; // aitag1?
+            aiType1Addr  = Address + 36; // aitype1?
+            aiAggr1Addr  = Address + 37; // aiaggression 1?
+            aiTag2Addr   = Address + 38; // aitag2?
+            aiType2Addr  = Address + 39; // aitype4?
+            aiAggr2Addr  = Address + 40; // aiaggression 2?
+            aiTag3Addr   = Address + 41; // aitag3?
+            aiType3Addr  = Address + 42; // aitype4?
+            aiAggr3Addr  = Address + 43; // aiaggression 3?
+            aiTag4Addr   = Address + 44; // aitag4?
+            aiType4Addr  = Address + 45; // aitype4?
+            aiAggr4Addr  = Address + 46; // aiaggression 4?
             unknown37    = Address + 47;
             unknown38    = Address + 48;
             unknown39    = Address + 49;
-            unknown40    = Address + 50; // 2 bytes
+            flagsAddr    = Address + 50; // 2 bytes
         }
 
         [BulkCopy]
-        public int Unknown1 {
-            get => Data.GetByte(unknown1);
-            set => Data.SetByte(unknown1, (byte) value);
+        public int DropDisable {
+            get => Data.GetByte(dropDisableAddr);
+            set => Data.SetByte(dropDisableAddr, (byte) value);
         }
 
         [BulkCopy]
@@ -159,9 +159,9 @@ namespace SF3.Models.Structs.X1.Battle {
         }
 
         [BulkCopy]
-        public int JoinID {
-            get => Data.GetWord(joinID);
-            set => Data.SetWord(joinID, value);
+        public int EventCall {
+            get => Data.GetWord(eventCallAddr);
+            set => Data.SetWord(eventCallAddr, value);
         }
 
         [BulkCopy]
@@ -218,9 +218,9 @@ namespace SF3.Models.Structs.X1.Battle {
         }
 
         [BulkCopy]
-        public int Unknown13 {
-            get => Data.GetByte(unknown13);
-            set => Data.SetByte(unknown13, (byte) value);
+        public int StrictAI {
+            get => Data.GetByte(strictAIAddr);
+            set => Data.SetByte(strictAIAddr, (byte) value);
         }
 
         [BulkCopy]
@@ -266,9 +266,9 @@ namespace SF3.Models.Structs.X1.Battle {
         }
 
         [BulkCopy]
-        public int Unknown21 {
-            get => Data.GetByte(unknown21);
-            set => Data.SetByte(unknown21, (byte) value);
+        public int TurnSkip {
+            get => Data.GetByte(turnSkipAddr);
+            set => Data.SetByte(turnSkipAddr, (byte) value);
         }
 
         [BulkCopy]
@@ -290,75 +290,75 @@ namespace SF3.Models.Structs.X1.Battle {
         }
 
         [BulkCopy]
-        public int Unknown25 {
-            get => Data.GetByte(unknown25);
-            set => Data.SetByte(unknown25, (byte) value);
+        public int AITag1 {
+            get => Data.GetByte(aiTag1Addr);
+            set => Data.SetByte(aiTag1Addr, (byte) value);
         }
 
         [BulkCopy]
-        public int Unknown26 {
-            get => Data.GetByte(unknown26);
-            set => Data.SetByte(unknown26, (byte) value);
+        public int AIType1 {
+            get => Data.GetByte(aiType1Addr);
+            set => Data.SetByte(aiType1Addr, (byte) value);
         }
 
         [BulkCopy]
-        public int Unknown27 {
-            get => Data.GetByte(unknown27);
-            set => Data.SetByte(unknown27, (byte) value);
+        public int AIAggr1 {
+            get => Data.GetByte(aiAggr1Addr);
+            set => Data.SetByte(aiAggr1Addr, (byte) value);
         }
 
         [BulkCopy]
-        public int Unknown28 {
-            get => Data.GetByte(unknown28);
-            set => Data.SetByte(unknown28, (byte) value);
+        public int AITag2 {
+            get => Data.GetByte(aiTag2Addr);
+            set => Data.SetByte(aiTag2Addr, (byte) value);
         }
 
         [BulkCopy]
-        public int Unknown29 {
-            get => Data.GetByte(unknown29);
-            set => Data.SetByte(unknown29, (byte) value);
+        public int AIType2 {
+            get => Data.GetByte(aiType2Addr);
+            set => Data.SetByte(aiType2Addr, (byte) value);
         }
 
         [BulkCopy]
-        public int Unknown30 {
-            get => Data.GetByte(unknown30);
-            set => Data.SetByte(unknown30, (byte) value);
+        public int AIAggr2 {
+            get => Data.GetByte(aiAggr2Addr);
+            set => Data.SetByte(aiAggr2Addr, (byte) value);
         }
 
         [BulkCopy]
-        public int Unknown31 {
-            get => Data.GetByte(unknown31);
-            set => Data.SetByte(unknown31, (byte) value);
+        public int AITag3 {
+            get => Data.GetByte(aiTag3Addr);
+            set => Data.SetByte(aiTag3Addr, (byte) value);
         }
 
         [BulkCopy]
-        public int Unknown32 {
-            get => Data.GetByte(unknown32);
-            set => Data.SetByte(unknown32, (byte) value);
+        public int AIType3 {
+            get => Data.GetByte(aiType3Addr);
+            set => Data.SetByte(aiType3Addr, (byte) value);
         }
 
         [BulkCopy]
-        public int Unknown33 {
-            get => Data.GetByte(unknown33);
-            set => Data.SetByte(unknown33, (byte) value);
+        public int AIAggr3 {
+            get => Data.GetByte(aiAggr3Addr);
+            set => Data.SetByte(aiAggr3Addr, (byte) value);
         }
 
         [BulkCopy]
-        public int Unknown34 {
-            get => Data.GetByte(unknown34);
-            set => Data.SetByte(unknown34, (byte) value);
+        public int AITag4 {
+            get => Data.GetByte(aiTag4Addr);
+            set => Data.SetByte(aiTag4Addr, (byte) value);
         }
 
         [BulkCopy]
-        public int Unknown35 {
-            get => Data.GetByte(unknown35);
-            set => Data.SetByte(unknown35, (byte) value);
+        public int AIType4 {
+            get => Data.GetByte(aiType4Addr);
+            set => Data.SetByte(aiType4Addr, (byte) value);
         }
 
         [BulkCopy]
-        public int Unknown36 {
-            get => Data.GetByte(unknown36);
-            set => Data.SetByte(unknown36, (byte) value);
+        public int AIAggr4 {
+            get => Data.GetByte(aiAggr4Addr);
+            set => Data.SetByte(aiAggr4Addr, (byte) value);
         }
 
         [BulkCopy]
@@ -380,9 +380,9 @@ namespace SF3.Models.Structs.X1.Battle {
         }
 
         [BulkCopy]
-        public int Unknown40 {
-            get => Data.GetWord(unknown40);
-            set => Data.SetWord(unknown40, value);
+        public int Flags {
+            get => Data.GetWord(flagsAddr);
+            set => Data.SetWord(flagsAddr, value);
         }
     }
 }
