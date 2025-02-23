@@ -36,7 +36,7 @@ namespace SF3.Models.Files.X1 {
             BattleHeader = new BattleHeader(Data, 0, "BattleHeader", headerAddress);
 
             return new List<ITable>() {
-                (SlotTable           = SlotTable.Create          (Data, "Slots",          ResourceFile(HasLargeEnemyTable ? "X1List.xml" : "X1OtherList.xml"), slotAddress)),
+                (SlotTable           = SlotTable.Create          (Data, "Slots",          slotAddress, HasLargeEnemyTable ? 72 : 52)),
                 (SpawnZoneTable      = SpawnZoneTable.Create     (Data, "SpawnZones",     spawnZoneAddress)),
                 (AITable             = AITable.Create            (Data, "AI",             aiAddress)),
                 (CustomMovementTable = CustomMovementTable.Create(Data, "CustomMovement", customMovementAddress)),
