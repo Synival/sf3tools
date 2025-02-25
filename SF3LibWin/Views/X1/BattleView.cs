@@ -14,8 +14,12 @@ namespace SF3.Win.Views.MPD {
             var ngc = Model.NameGetterContext;
             if (Model.BattleHeader != null)
                 CreateChild(new ModelView("Header", Model.BattleHeader, ngc));
-            if (Model.SlotTable != null)
-                CreateChild(new TableView("Slots", Model.SlotTable, ngc));
+            if (Model.SlotTable != null) {
+                CreateChild(new TableView("Slots1", Model.SlotTable, ngc, displayGroups: ["Metadata", "Page1"]));
+                CreateChild(new TableView("Slots2", Model.SlotTable, ngc, displayGroups: ["Metadata", "Page2"]));
+                CreateChild(new TableView("Slots3", Model.SlotTable, ngc, displayGroups: ["Metadata", "Page3"]));
+                CreateChild(new TableView("Slots4", Model.SlotTable, ngc, displayGroups: ["Metadata", "Page4"]));
+            }
             if (Model.SpawnZoneTable != null)
                 CreateChild(new TableView("SpawnZones", Model.SpawnZoneTable, ngc));
             if (Model.AITable != null)

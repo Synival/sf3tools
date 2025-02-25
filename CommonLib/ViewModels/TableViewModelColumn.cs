@@ -4,7 +4,14 @@ using System.Reflection;
 namespace CommonLib.ViewModels {
     public class TableViewModelColumn {
         public TableViewModelColumn(
-            string displayName, float displayOrder, string displayFormat, bool isPointer, int minWidth, bool isReadOnly, string visibilityProperty
+            string displayName,
+            float displayOrder,
+            string displayFormat,
+            bool isPointer,
+            int minWidth,
+            bool isReadOnly,
+            string visibilityProperty,
+            string displayGroup
         ) {
             DisplayName   = displayName;
             DisplayOrder  = displayOrder;
@@ -13,6 +20,7 @@ namespace CommonLib.ViewModels {
             MinWidth      = minWidth;
             IsReadOnly    = isReadOnly;
             VisibilityProperty = visibilityProperty;
+            DisplayGroup  = displayGroup;
         }
 
         public string DisplayName { get; }
@@ -22,6 +30,7 @@ namespace CommonLib.ViewModels {
         public int MinWidth { get; }
         public bool IsReadOnly { get; }
         public string VisibilityProperty { get; }
+        public string DisplayGroup { get; }
 
         public bool GetColumnIsEditable(PropertyInfo prop)
             => !IsReadOnly && prop.GetSetMethod() != null;

@@ -13,14 +13,14 @@ namespace SF3.Models.Structs {
 
         public IByteData Data { get; protected set; }
 
-        [TableViewModelColumn(displayOrder: -3, displayFormat: "X2", minWidth: 45)]
+        [TableViewModelColumn(displayOrder: -3, displayFormat: "X2", minWidth: 45, displayGroup: "Metadata")]
         public int ID { get; protected set; }
 
-        [TableViewModelColumn(displayOrder: -2, displayFormat: "X4")]
+        [TableViewModelColumn(displayOrder: -2, displayFormat: "X4", displayGroup: "Metadata")]
         public int Address { get; protected set; }
 
         [BulkCopyRowName]
-        [TableViewModelColumn(displayOrder: -1, minWidth: 120)]
+        [TableViewModelColumn(displayOrder: -1, minWidth: 120, displayGroup: "Metadata")]
         public string Name { get; protected set; }
 
         public int Size { get; protected set; }

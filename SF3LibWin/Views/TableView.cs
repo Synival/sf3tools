@@ -14,11 +14,12 @@ namespace SF3.Win.Views {
     public class TableView : ViewBase, ITableView {
         private static int s_controlIndex = 1;
 
-        public TableView(string name, ITable table, INameGetterContext nameGetterContext, Type modelType = null)
+        public TableView(string name, ITable table, INameGetterContext nameGetterContext, Type modelType = null, string[] displayGroups = null)
         : base(name) {
             Table = table;
             NameGetterContext = nameGetterContext;
             ModelType = modelType ?? ((Table == null) ? null : Table.RowObjs.GetType().GetElementType()!);
+            DisplayGroups = displayGroups;
         }
 
         /// <summary>
@@ -94,6 +95,10 @@ namespace SF3.Win.Views {
                 foreach (var kv in vm.Properties) {
                     var prop = kv.Key;
                     var attr = kv.Value;
+
+                    if (DisplayGroups != null)
+                        if (!DisplayGroups.Contains(attr.DisplayGroup))
+                            continue;
 
                     var lvc = new OLVColumn(lvcNameBase + prop.Name, prop.Name);
                     lvc.IsEditable           = attr.GetColumnIsEditable(prop);
@@ -213,5 +218,6 @@ namespace SF3.Win.Views {
         public Type ModelType { get; }
         public INameGetterContext NameGetterContext { get; }
         public ObjectListView OLVControl { get; private set; } = null;
+        public string[] DisplayGroups { get; }
     }
 }

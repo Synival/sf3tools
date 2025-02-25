@@ -10,7 +10,8 @@ namespace CommonLib.Attributes {
             bool   isPointer     = false,
             int    minWidth      = 0,
             bool   isReadOnly    = false,
-            string visibilityProperty = null
+            string visibilityProperty = null,
+            string displayGroup  = null
         ) {
             Column = new TableViewModelColumn(
                 displayName:   displayName,
@@ -19,7 +20,8 @@ namespace CommonLib.Attributes {
                 isPointer:     isPointer,
                 minWidth:      minWidth,
                 isReadOnly:    isReadOnly,
-                visibilityProperty: visibilityProperty
+                visibilityProperty: visibilityProperty,
+                displayGroup:  displayGroup
             );
         }
 
