@@ -38,8 +38,8 @@ namespace SF3.Models.Files.X1 {
             return new List<ITable>() {
                 (SlotTable           = SlotTable.Create          (Data, "Slots",          slotAddress, HasLargeEnemyTable ? 72 : 52)),
                 (SpawnZoneTable      = SpawnZoneTable.Create     (Data, "SpawnZones",     spawnZoneAddress)),
-                (AITable             = AITable.Create            (Data, "AI",             aiAddress)),
-                (CustomMovementTable = CustomMovementTable.Create(Data, "CustomMovement", customMovementAddress)),
+                (AITargetPositionTable             = AITargetPositionTable.Create            (Data, "AI",             aiAddress)),
+                (ScriptedMovementTable = ScriptedMovementTable.Create(Data, "CustomMovement", customMovementAddress)),
             };
         }
 
@@ -57,8 +57,8 @@ namespace SF3.Models.Files.X1 {
         [BulkCopyRecurse]
         public SpawnZoneTable SpawnZoneTable { get; private set; }
         [BulkCopyRecurse]
-        public AITable AITable { get; private set; }
+        public AITargetPositionTable AITargetPositionTable { get; private set; }
         [BulkCopyRecurse]
-        public CustomMovementTable CustomMovementTable { get; private set; }
+        public ScriptedMovementTable ScriptedMovementTable { get; private set; }
     }
 }

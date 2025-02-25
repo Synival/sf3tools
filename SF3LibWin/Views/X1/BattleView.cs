@@ -15,17 +15,17 @@ namespace SF3.Win.Views.MPD {
             if (Model.BattleHeader != null)
                 CreateChild(new ModelView("Header", Model.BattleHeader, ngc));
             if (Model.SlotTable != null) {
-                CreateChild(new TableView("Slots1", Model.SlotTable, ngc, displayGroups: ["Metadata", "Page1"]));
-                CreateChild(new TableView("Slots2", Model.SlotTable, ngc, displayGroups: ["Metadata", "Page2"]));
-                CreateChild(new TableView("Slots3", Model.SlotTable, ngc, displayGroups: ["Metadata", "Page3"]));
-                CreateChild(new TableView("Slots4", Model.SlotTable, ngc, displayGroups: ["Metadata", "Page4"]));
+                CreateChild(new TableView("Slots 1", Model.SlotTable, ngc, displayGroups: ["Metadata", "Page1"]));
+                CreateChild(new TableView("Slots 2", Model.SlotTable, ngc, displayGroups: ["Metadata", "Page2"]));
+                CreateChild(new TableView("Slots 3", Model.SlotTable, ngc, displayGroups: ["Metadata", "Page3"]));
+                CreateChild(new TableView("Slots 4", Model.SlotTable, ngc, displayGroups: ["Metadata", "Page4"]));
             }
             if (Model.SpawnZoneTable != null)
-                CreateChild(new TableView("SpawnZones", Model.SpawnZoneTable, ngc));
-            if (Model.AITable != null)
-                CreateChild(new TableView("AI TargetPosition", Model.AITable, ngc));
-            if (Model.CustomMovementTable != null)
-                CreateChild(new TableView("ScriptedMovement", Model.CustomMovementTable, ngc));
+                CreateChild(new TableView("Spawn Zones", Model.SpawnZoneTable, ngc));
+            if (Model.AITargetPositionTable != null)
+                CreateChild(new TableView("AI Target Position", Model.AITargetPositionTable, ngc));
+            if (Model.ScriptedMovementTable != null)
+                CreateChild(new TableView("Scripted Movement", Model.ScriptedMovementTable, ngc));
 
             return Control;
         }

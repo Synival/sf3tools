@@ -2,7 +2,7 @@ using CommonLib.Attributes;
 using SF3.ByteData;
 
 namespace SF3.Models.Structs.X1.Battle {
-    public class CustomMovement : Struct {
+    public class ScriptedMovement : Struct {
         private readonly int unknown00;
         private readonly int xPos1;
         private readonly int zPos1;
@@ -14,7 +14,7 @@ namespace SF3.Models.Structs.X1.Battle {
         private readonly int zPos4;
         private readonly int ending;
 
-        public CustomMovement(IByteData data, int id, string name, int address)
+        public ScriptedMovement(IByteData data, int id, string name, int address)
         : base(data, id, name, address, 0x16) {
             unknown00 = Address;      // 2 bytes
             xPos1     = Address +  2; // 2 bytes

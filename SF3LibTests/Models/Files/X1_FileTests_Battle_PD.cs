@@ -23,7 +23,7 @@ namespace SF3.Tests.Models.Files {
         public void AITable_HasExpectedData() {
             var file = TestCase.Create();
             var battle = file.Battles[MapLeaderType.Synbios];
-            var table = battle.AITable;
+            var table = battle.AITargetPositionTable;
 
             Assert.AreEqual(8, table[0].TargetX);
             Assert.AreEqual(13, table[0].TargetY);
@@ -52,7 +52,7 @@ namespace SF3.Tests.Models.Files {
         public void CustomMovementTable_HasExpectedData() {
             var file = TestCase.Create();
             var battle = file.Battles[MapLeaderType.Synbios];
-            var table = battle.CustomMovementTable;
+            var table = battle.ScriptedMovementTable;
 
             Assert.AreEqual(0, table[0].CustomMovementX1);
             Assert.AreEqual(63, table[0].CustomMovementZ1);
