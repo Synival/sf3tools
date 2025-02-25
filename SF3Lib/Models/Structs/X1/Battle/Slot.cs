@@ -18,10 +18,10 @@ namespace SF3.Models.Structs.X1.Battle {
         private readonly int _facingIsBossAddr;
         private readonly int _unknown0x12Addr;
         private readonly int _controlTypeAddr;
-        private readonly int _respawn1Addr;
-        private readonly int _respawn2Addr;
-        private readonly int _respawn3Addr;
-        private readonly int _respawn4Addr;
+        private readonly int _spawnZone1Addr;
+        private readonly int _spawnZone1ConditionAddr;
+        private readonly int _spawnZone2Addr;
+        private readonly int _spawnZone2ConditionAddr;
         private readonly int _strictAIAddr;
         private readonly int _unknown0x18Addr;
         private readonly int _unknown0x19Addr;
@@ -67,10 +67,10 @@ namespace SF3.Models.Structs.X1.Battle {
             _facingIsBossAddr   = Address + 0x10; // 1 byte
             _controlTypeAddr    = Address + 0x11; // 1 byte
             _unknown0x12Addr    = Address + 0x12; // 1 byte
-            _respawn1Addr       = Address + 0x13; // 1 byte
-            _respawn2Addr       = Address + 0x14; // 1 byte
-            _respawn3Addr       = Address + 0x15; // 1 byte
-            _respawn4Addr       = Address + 0x16; // 1 byte
+            _spawnZone1Addr       = Address + 0x13; // 1 byte
+            _spawnZone1ConditionAddr       = Address + 0x14; // 1 byte
+            _spawnZone2Addr       = Address + 0x15; // 1 byte
+            _spawnZone2ConditionAddr       = Address + 0x16; // 1 byte
             _strictAIAddr       = Address + 0x17; // 1 byte
             _unknown0x18Addr    = Address + 0x18; // 1 byte
             _unknown0x19Addr    = Address + 0x19; // 1 byte
@@ -216,32 +216,32 @@ namespace SF3.Models.Structs.X1.Battle {
             set => Data.SetByte(_unknown0x12Addr, (byte) value);
         }
 
-        [TableViewModelColumn(displayOrder: 15, displayName: "Respawn1?", displayFormat: "X2")]
+        [TableViewModelColumn(displayOrder: 15, displayFormat: "X2")]
         [BulkCopy]
-        public int Respawn1 {
-            get => Data.GetByte(_respawn1Addr);
-            set => Data.SetByte(_respawn1Addr, (byte) value);
+        public int SpawnZone1 {
+            get => Data.GetByte(_spawnZone1Addr);
+            set => Data.SetByte(_spawnZone1Addr, (byte) value);
         }
 
-        [TableViewModelColumn(displayOrder: 16, displayName: "Respawn2?", displayFormat: "X2")]
+        [TableViewModelColumn(displayOrder: 16, displayFormat: "X2")]
         [BulkCopy]
-        public int Respawn2 {
-            get => Data.GetByte(_respawn2Addr);
-            set => Data.SetByte(_respawn2Addr, (byte) value);
+        public int SpawnZone1Condition {
+            get => Data.GetByte(_spawnZone1ConditionAddr);
+            set => Data.SetByte(_spawnZone1ConditionAddr, (byte) value);
         }
 
-        [TableViewModelColumn(displayOrder: 17, displayName: "Respawn3?", displayFormat: "X2")]
+        [TableViewModelColumn(displayOrder: 17, displayFormat: "X2")]
         [BulkCopy]
-        public int Respawn3 {
-            get => Data.GetByte(_respawn3Addr);
-            set => Data.SetByte(_respawn3Addr, (byte) value);
+        public int SpawnZone2 {
+            get => Data.GetByte(_spawnZone2Addr);
+            set => Data.SetByte(_spawnZone2Addr, (byte) value);
         }
 
-        [TableViewModelColumn(displayOrder: 18, displayName: "Respawn4?", displayFormat: "X2")]
+        [TableViewModelColumn(displayOrder: 18, displayFormat: "X2")]
         [BulkCopy]
-        public int Respawn4 {
-            get => Data.GetByte(_respawn4Addr);
-            set => Data.SetByte(_respawn4Addr, (byte) value);
+        public int SpawnZone2Condition {
+            get => Data.GetByte(_spawnZone2ConditionAddr);
+            set => Data.SetByte(_spawnZone2ConditionAddr, (byte) value);
         }
 
         [TableViewModelColumn(displayOrder: 19, displayFormat: "X2")]
