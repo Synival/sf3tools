@@ -24,14 +24,14 @@ namespace SF3.Tests.Models.Files {
             var file = TestCase.Create();
             var table = file.EnterTable;
 
-            Assert.AreEqual(1472, table[0].EnterXPos);
-            Assert.AreEqual(480, table[0].EnterZPos);
+            Assert.AreEqual(1472, table[0].XPos);
+            Assert.AreEqual(480, table[0].ZPos);
 
-            Assert.AreEqual(1472, table[1].EnterXPos);
-            Assert.AreEqual(480, table[1].EnterZPos);
+            Assert.AreEqual(1472, table[1].XPos);
+            Assert.AreEqual(480, table[1].ZPos);
 
-            Assert.AreEqual(1008, table[2].EnterXPos);
-            Assert.AreEqual(1184, table[2].EnterZPos);
+            Assert.AreEqual(1008, table[2].XPos);
+            Assert.AreEqual(1184, table[2].ZPos);
 
             Assert.AreEqual(7, table.Length);
         }
@@ -42,12 +42,12 @@ namespace SF3.Tests.Models.Files {
             var table = file.NpcTable;
 
             Assert.AreEqual(0x42, table[0].SpriteID);
-            Assert.AreEqual(1592, table[0].NpcXPos);
-            Assert.AreEqual(544, table[0].NpcZPos);
+            Assert.AreEqual(1592, table[0].XPos);
+            Assert.AreEqual(544, table[0].ZPos);
 
             Assert.AreEqual(0x3E, table[1].SpriteID);
-            Assert.AreEqual(1568, table[1].NpcXPos);
-            Assert.AreEqual(448, table[1].NpcZPos);
+            Assert.AreEqual(1568, table[1].XPos);
+            Assert.AreEqual(448, table[1].ZPos);
 
             Assert.AreEqual(25, table.Length);
         }
@@ -55,7 +55,7 @@ namespace SF3.Tests.Models.Files {
         [TestMethod]
         public void TreasureTable_HasExpectedData() {
             var file = TestCase.Create();
-            var table = file.TreasureTable;
+            var table = file.InteractableTable;
 
             Assert.AreEqual(0xC302, table[0].Searched);
             Assert.AreEqual(0xF2D0, table[0].EventParameter);

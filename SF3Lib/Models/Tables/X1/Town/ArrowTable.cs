@@ -17,7 +17,7 @@ namespace SF3.Models.Tables.X1.Town {
         public override bool Load()
             => Load(
                 (id, address) => new Arrow(Data, id, "Arrow" + id.ToString("D2"), address),
-                (rows, model) => model.ArrowUnknown0 != 0xFFFF,
+                (rows, model) => model.Unknown0x00 != 0xFFFF,
                 false);
     }
 }

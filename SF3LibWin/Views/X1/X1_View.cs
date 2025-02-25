@@ -12,8 +12,8 @@ namespace SF3.Win.Views.MPD {
             base.Create();
 
             var ngc = Model.NameGetterContext;
-            if (Model.TreasureTable != null)
-                CreateChild(new TableView("Interactables", Model.TreasureTable, ngc));
+            if (Model.InteractableTable != null)
+                CreateChild(new TableView("Interactables", Model.InteractableTable, ngc));
             if (Model.BattlePointersTable != null)
                 CreateChild(new TableView("Battle Pointers", Model.BattlePointersTable, ngc));
             if (Model.NpcTable != null)

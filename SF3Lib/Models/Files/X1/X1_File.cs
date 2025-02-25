@@ -88,7 +88,7 @@ namespace SF3.Models.Files.X1 {
                 Battles = new Dictionary<MapLeaderType, Battle>();
                 foreach (var mapLeader in (MapLeaderType[]) Enum.GetValues(typeof(MapLeaderType))) {
                     var mapIndex = (int) mapLeader;
-                    var battleTableAddress = BattlePointersTable[mapIndex].BattlePointer;
+                    var battleTableAddress = BattlePointersTable[mapIndex].Pointer;
                     if (battleTableAddress != 0)
                         Battles.Add(mapLeader, Battle.Create(Data, NameGetterContext, mapLeader, battleTableAddress - sub, hasLargeEnemyTable));
                 }
@@ -129,7 +129,7 @@ namespace SF3.Models.Files.X1 {
             // Add tables present outside of the battle tables.
             var tables = new List<ITable>();
             if (treasureAddress >= 0)
-                tables.Add(TreasureTable = TreasureTable.Create(Data, "Treasure", treasureAddress));
+                tables.Add(InteractableTable = InteractableTable.Create(Data, "Treasure", treasureAddress));
             if (warpAddress >= 0)
                 tables.Add(WarpTable = WarpTable.Create(Data, "Warps", null, warpAddress));
             if (battlePointersAddress >= 0)
@@ -168,7 +168,7 @@ namespace SF3.Models.Files.X1 {
         public bool IsBattle { get; private set; }
 
         [BulkCopyRecurse]
-        public TreasureTable TreasureTable { get; private set; }
+        public InteractableTable InteractableTable { get; private set; }
         [BulkCopyRecurse]
         public WarpTable WarpTable { get; private set; }
         [BulkCopyRecurse]

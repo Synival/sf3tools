@@ -39,10 +39,10 @@ namespace SF3.Tests.Models.Files {
             var file = TestCase.Create();
             var table = file.BattlePointersTable;
 
-            Assert.AreEqual(0, table[0].BattlePointer);
-            Assert.AreEqual(0x6062AF8, table[1].BattlePointer);
-            Assert.AreEqual(0, table[2].BattlePointer);
-            Assert.AreEqual(0, table[3].BattlePointer);
+            Assert.AreEqual(0, table[0].Pointer);
+            Assert.AreEqual(0x6062AF8, table[1].Pointer);
+            Assert.AreEqual(0, table[2].Pointer);
+            Assert.AreEqual(0, table[3].Pointer);
 
             Assert.AreEqual(4, table.Length);
         }
@@ -53,11 +53,11 @@ namespace SF3.Tests.Models.Files {
             var battle = file.Battles[MapLeaderType.Medion];
             var table = battle.ScriptedMovementTable;
 
-            Assert.AreEqual(21, table[0].CustomMovementX1);
-            Assert.AreEqual(17, table[0].CustomMovementZ1);
+            Assert.AreEqual(21, table[0].XPos1);
+            Assert.AreEqual(17, table[0].ZPos1);
 
-            Assert.AreEqual(0, table[1].CustomMovementX1);
-            Assert.AreEqual(63, table[1].CustomMovementZ1);
+            Assert.AreEqual(0, table[1].XPos1);
+            Assert.AreEqual(63, table[1].ZPos1);
 
             Assert.AreEqual(33, table.Length);
         }
@@ -95,15 +95,15 @@ namespace SF3.Tests.Models.Files {
             var battle = file.Battles[MapLeaderType.Medion];
             var table = battle.SpawnZoneTable;
 
-            Assert.AreEqual(0x400, table[0].UnknownAI00);
-            Assert.AreEqual(0x17, table[0].UnknownAI02);
-            Assert.AreEqual(0x0C, table[0].UnknownAI04);
-            Assert.AreEqual(0x17, table[0].UnknownAI06);
+            Assert.AreEqual(0x400, table[0].Unknown0x00);
+            Assert.AreEqual(0x17, table[0].BottomLeftX);
+            Assert.AreEqual(0x0C, table[0].BottomLeftZ);
+            Assert.AreEqual(0x17, table[0].TopLeftX);
 
-            Assert.AreEqual(0x400, table[1].UnknownAI00);
-            Assert.AreEqual(0x1A, table[1].UnknownAI02);
-            Assert.AreEqual(0x0B, table[1].UnknownAI04);
-            Assert.AreEqual(0x1A, table[1].UnknownAI06);
+            Assert.AreEqual(0x400, table[1].Unknown0x00);
+            Assert.AreEqual(0x1A, table[1].BottomLeftX);
+            Assert.AreEqual(0x0B, table[1].BottomLeftZ);
+            Assert.AreEqual(0x1A, table[1].TopLeftX);
 
             Assert.AreEqual(16, table.Length);
         }
@@ -111,7 +111,7 @@ namespace SF3.Tests.Models.Files {
         [TestMethod]
         public void TreasureTable_HasExpectedData() {
             var file = TestCase.Create();
-            var table = file.TreasureTable;
+            var table = file.InteractableTable;
 
             Assert.AreEqual(0x63, table[0].Searched);
             Assert.AreEqual(0x65, table[0].EventParameter);

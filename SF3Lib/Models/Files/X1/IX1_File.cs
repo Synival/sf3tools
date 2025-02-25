@@ -11,7 +11,7 @@ namespace SF3.Models.Files.X1 {
 
         bool IsBattle { get; }
 
-        TreasureTable TreasureTable { get; }
+        InteractableTable InteractableTable { get; }
         WarpTable WarpTable { get; }
         BattlePointersTable BattlePointersTable { get; }
         NpcTable NpcTable { get; }

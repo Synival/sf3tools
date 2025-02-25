@@ -24,14 +24,14 @@ namespace SF3.Tests.Models.Files {
             var file = TestCase.Create();
             var table = file.EnterTable;
 
-            Assert.AreEqual(304, table[0].EnterXPos);
-            Assert.AreEqual(976, table[0].EnterZPos);
+            Assert.AreEqual(304, table[0].XPos);
+            Assert.AreEqual(976, table[0].ZPos);
 
-            Assert.AreEqual(816, table[1].EnterXPos);
-            Assert.AreEqual(848, table[1].EnterZPos);
+            Assert.AreEqual(816, table[1].XPos);
+            Assert.AreEqual(848, table[1].ZPos);
 
-            Assert.AreEqual(528, table[2].EnterXPos);
-            Assert.AreEqual(912, table[2].EnterZPos);
+            Assert.AreEqual(528, table[2].XPos);
+            Assert.AreEqual(912, table[2].ZPos);
 
             Assert.AreEqual(13, table.Length);
         }
@@ -42,12 +42,12 @@ namespace SF3.Tests.Models.Files {
             var table = file.NpcTable;
 
             Assert.AreEqual(0x216, table[0].SpriteID);
-            Assert.AreEqual(240, table[0].NpcXPos);
-            Assert.AreEqual(688, table[0].NpcZPos);
+            Assert.AreEqual(240, table[0].XPos);
+            Assert.AreEqual(688, table[0].ZPos);
 
             Assert.AreEqual(0x217, table[1].SpriteID);
-            Assert.AreEqual(368, table[1].NpcXPos);
-            Assert.AreEqual(880, table[1].NpcZPos);
+            Assert.AreEqual(368, table[1].XPos);
+            Assert.AreEqual(880, table[1].ZPos);
 
             Assert.AreEqual(15, table.Length);
         }
@@ -55,7 +55,7 @@ namespace SF3.Tests.Models.Files {
         [TestMethod]
         public void TreasureTable_HasExpectedData() {
             var file = TestCase.Create();
-            var table = file.TreasureTable;
+            var table = file.InteractableTable;
 
             Assert.AreEqual(0x00, table[0].Searched);
             Assert.AreEqual(0x97C, table[0].EventParameter);
@@ -75,11 +75,11 @@ namespace SF3.Tests.Models.Files {
             var file = TestCase.Create();
             var table = file.ArrowTable;
 
-            Assert.AreEqual(0x960, table[0].ArrowText);
-            Assert.AreEqual(0x22, table[0].ArrowWarp);
+            Assert.AreEqual(0x960, table[0].TextID);
+            Assert.AreEqual(0x22, table[0].PointToWarpMPD);
 
-            Assert.AreEqual(0x961, table[1].ArrowText);
-            Assert.AreEqual(0x23, table[1].ArrowWarp);
+            Assert.AreEqual(0x961, table[1].TextID);
+            Assert.AreEqual(0x23, table[1].PointToWarpMPD);
 
             Assert.AreEqual(9, table.Length);
         }
