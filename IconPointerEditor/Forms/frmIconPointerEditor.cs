@@ -13,7 +13,7 @@ using SF3.Win.Views.MPD;
 namespace SF3.IconPointerEditor.Forms {
     public partial class frmIconPointerEditor : EditorFormNew {
         // Used to display version in the application
-        protected override string Version => "0.13";
+        protected override string Version => "0.13 (2025-02-26 dev)";
 
         public IIconPointerFile File => ModelLoader.Model as IIconPointerFile;
 

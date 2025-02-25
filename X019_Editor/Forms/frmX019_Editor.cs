@@ -11,7 +11,7 @@ using static SF3.Win.Extensions.TabControlExtensions;
 namespace SF3.X019_Editor.Forms {
     public partial class frmX019_Editor : EditorForm {
         // Used to display version in the application
-        protected override string Version => "0.16";
+        protected override string Version => "0.16 (2025-02-26 dev)";
 
         public IX019_File File => base.FileLoader.Model as IX019_File;
 

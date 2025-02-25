@@ -15,7 +15,7 @@ using SF3.Win.Views.MPD;
 namespace SF3.X1_Editor.Forms {
     public partial class frmX1_Editor : EditorFormNew {
         // Used to display version in the application
-        protected override string Version => "0.39";
+        protected override string Version => "0.39 (2025-02-26 dev)";
 
         private bool _isBTL99 = false;
 

@@ -12,7 +12,7 @@ using static SF3.Win.Extensions.TabControlExtensions;
 namespace SF3.X033_X031_Editor.Forms {
     public partial class frmX033_X031_Editor : EditorForm {
         // Used to display version in the application
-        protected override string Version => "0.23";
+        protected override string Version => "0.23 (2025-02-26 dev)";
 
         public IX033_X031_File File => base.FileLoader.Model as IX033_X031_File;
         private StatGrowthChart _statGrowthChart;

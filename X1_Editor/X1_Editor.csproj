@@ -14,18 +14,25 @@
     <FileVersion>0.39.0.0</FileVersion>
   </PropertyGroup>
   <ItemGroup>
-    <None Remove="Benetram_Shining_Force_III.ico" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Benetram_Shining_Force_III.ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <PackageReference Include="Microsoft-WindowsAPICodePack-Shell" Version="1.1.5" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CommonLib\CommonLib.csproj" />
     <ProjectReference Include="..\ObjectListView\ObjectListView\ObjectListView2008.csproj" />
     <ProjectReference Include="..\SF3LibWin\SF3LibWin.csproj" />
     <ProjectReference Include="..\SF3Lib\SF3Lib.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Update="Properties\Settings.Designer.cs">
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Update="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
   </ItemGroup>
 </Project>
