@@ -11,29 +11,29 @@ namespace SF3.Models.Structs.X1.Battle {
         private readonly int _dropDisableAddr;
         private readonly int _unknown0x09Addr;
         private readonly int _characterPlusAddr;
-        private readonly int _spawnConditionAddr;
+        private readonly int _spawnTypeAddr;
         private readonly int _eventCallAddr;
         private readonly int _unknown0x0EAddr;
-        private readonly int _unknown0x0FAddr;
+        private readonly int _creepUpWhenOutOfRangeAddr;
         private readonly int _facingIsBossAddr;
         private readonly int _unknown0x12Addr;
         private readonly int _controlTypeAddr;
-        private readonly int _spawnZone1Addr;
-        private readonly int _spawnZone1ConditionAddr;
-        private readonly int _spawnZone2Addr;
-        private readonly int _spawnZone2ConditionAddr;
-        private readonly int _strictAIAddr;
-        private readonly int _unknown0x18Addr;
-        private readonly int _unknown0x19Addr;
-        private readonly int _unknown0x1AAddr;
-        private readonly int _unknown0x1BAddr;
-        private readonly int _unknown0x1CAddr;
-        private readonly int _unknown0x1DAddr;
-        private readonly int _unknown0x1EAddr;
-        private readonly int _noTurnSkipAddr;
-        private readonly int _unknown0x20Addr;
-        private readonly int _unknown0x21Addr;
-        private readonly int _unknown0x22Addr;
+        private readonly int _condition1ZoneAddr;
+        private readonly int _condition1MovementAddr;
+        private readonly int _condition1UnknownAddr;
+        private readonly int _condition1AIIndexAddr;
+        private readonly int _condition2ZoneAddr;
+        private readonly int _condition2MovementAddr;
+        private readonly int _condition2UnknownAddr;
+        private readonly int _condition2AIIndexAddr;
+        private readonly int _condition3ZoneAddr;
+        private readonly int _condition3MovementAddr;
+        private readonly int _condition3UnknownAddr;
+        private readonly int _condition3AIIndexAddr;
+        private readonly int _condition4ZoneAddr;
+        private readonly int _condition4MovementAddr;
+        private readonly int _condition4UnknownAddr;
+        private readonly int _condition4AIIndex;
         private readonly int _aiTag1Addr;
         private readonly int _aiType1Addr;
         private readonly int _aiAggr1Addr;
@@ -53,52 +53,52 @@ namespace SF3.Models.Structs.X1.Battle {
 
         public Slot(IByteData data, int id, string name, int address)
         : base(data, id, name, address, 0x34) {
-            _enemyIDAddr        = Address + 0x00; // 2 bytes  
-            _xAddr              = Address + 0x02; // 2 bytes
-            _yAddr              = Address + 0x04; // 2 bytes
-            _itemOverrideAddr   = Address + 0x06; // 2 bytes
-            _dropDisableAddr    = Address + 0x08; // 1 byte
-            _unknown0x09Addr    = Address + 0x09; // 1 byte
-            _eventCallAddr      = Address + 0x0A; // 2 bytes
-            _characterPlusAddr  = Address + 0x0C; // 1 byte
-            _spawnConditionAddr = Address + 0x0D; // 1 byte
-            _unknown0x0EAddr    = Address + 0x0E; // 1 byte
-            _unknown0x0FAddr    = Address + 0x0F; // 1 byte
-            _facingIsBossAddr   = Address + 0x10; // 1 byte
-            _controlTypeAddr    = Address + 0x11; // 1 byte
-            _unknown0x12Addr    = Address + 0x12; // 1 byte
-            _spawnZone1Addr       = Address + 0x13; // 1 byte
-            _spawnZone1ConditionAddr       = Address + 0x14; // 1 byte
-            _spawnZone2Addr       = Address + 0x15; // 1 byte
-            _spawnZone2ConditionAddr       = Address + 0x16; // 1 byte
-            _strictAIAddr       = Address + 0x17; // 1 byte
-            _unknown0x18Addr    = Address + 0x18; // 1 byte
-            _unknown0x19Addr    = Address + 0x19; // 1 byte
-            _unknown0x1AAddr    = Address + 0x1A; // 1 byte
-            _unknown0x1BAddr    = Address + 0x1B; // 1 byte
-            _unknown0x1CAddr    = Address + 0x1C; // 1 byte
-            _unknown0x1DAddr    = Address + 0x1D; // 1 byte
-            _unknown0x1EAddr    = Address + 0x1E; // 1 byte
-            _noTurnSkipAddr     = Address + 0x1F; // 1 byte
-            _unknown0x20Addr    = Address + 0x20; // 1 byte
-            _unknown0x21Addr    = Address + 0x21; // 1 byte
-            _unknown0x22Addr    = Address + 0x22; // 1 byte
-            _aiTag1Addr         = Address + 0x23; // 1 byte
-            _aiType1Addr        = Address + 0x24; // 1 byte
-            _aiAggr1Addr        = Address + 0x25; // 1 byte
-            _aiTag2Addr         = Address + 0x26; // 1 byte
-            _aiType2Addr        = Address + 0x27; // 1 byte
-            _aiAggr2Addr        = Address + 0x28; // 1 byte
-            _aiTag3Addr         = Address + 0x29; // 1 byte
-            _aiType3Addr        = Address + 0x2A; // 1 byte
-            _aiAggr3Addr        = Address + 0x2B; // 1 byte
-            _aiTag4Addr         = Address + 0x2C; // 1 byte
-            _aiType4Addr        = Address + 0x2D; // 1 byte
-            _aiAggr4Addr        = Address + 0x2E; // 1 byte
-            _unknown0x2FAddr    = Address + 0x2F; // 1 byte
-            _unknown0x30Addr    = Address + 0x30; // 1 byte
-            _unknown0x31Addr    = Address + 0x31; // 1 byte
-            _flagsAddr          = Address + 0x32; // 2 bytes
+            _enemyIDAddr            = Address + 0x00; // 2 bytes  
+            _xAddr                  = Address + 0x02; // 2 bytes
+            _yAddr                  = Address + 0x04; // 2 bytes
+            _itemOverrideAddr       = Address + 0x06; // 2 bytes
+            _dropDisableAddr        = Address + 0x08; // 1 byte
+            _unknown0x09Addr        = Address + 0x09; // 1 byte
+            _eventCallAddr          = Address + 0x0A; // 2 bytes
+            _characterPlusAddr      = Address + 0x0C; // 1 byte
+            _spawnTypeAddr          = Address + 0x0D; // 1 byte
+            _unknown0x0EAddr        = Address + 0x0E; // 1 byte
+            _creepUpWhenOutOfRangeAddr = Address + 0x0F; // 1 byte
+            _facingIsBossAddr       = Address + 0x10; // 1 byte
+            _controlTypeAddr        = Address + 0x11; // 1 byte
+            _unknown0x12Addr        = Address + 0x12; // 1 byte
+            _condition1ZoneAddr     = Address + 0x13; // 1 byte
+            _condition1MovementAddr = Address + 0x14; // 1 byte
+            _condition1UnknownAddr  = Address + 0x15; // 1 byte
+            _condition1AIIndexAddr  = Address + 0x16; // 1 byte
+            _condition2ZoneAddr     = Address + 0x17; // 1 byte
+            _condition2MovementAddr = Address + 0x18; // 1 byte
+            _condition2UnknownAddr  = Address + 0x19; // 1 byte
+            _condition2AIIndexAddr  = Address + 0x1A; // 1 byte
+            _condition3ZoneAddr     = Address + 0x1B; // 1 byte
+            _condition3MovementAddr = Address + 0x1C; // 1 byte
+            _condition3UnknownAddr  = Address + 0x1D; // 1 byte
+            _condition3AIIndexAddr  = Address + 0x1E; // 1 byte
+            _condition4ZoneAddr     = Address + 0x1F; // 1 byte
+            _condition4MovementAddr = Address + 0x20; // 1 byte
+            _condition4UnknownAddr  = Address + 0x21; // 1 byte
+            _condition4AIIndex      = Address + 0x22; // 1 byte
+            _aiTag1Addr             = Address + 0x23; // 1 byte
+            _aiType1Addr            = Address + 0x24; // 1 byte
+            _aiAggr1Addr            = Address + 0x25; // 1 byte
+            _aiTag2Addr             = Address + 0x26; // 1 byte
+            _aiType2Addr            = Address + 0x27; // 1 byte
+            _aiAggr2Addr            = Address + 0x28; // 1 byte
+            _aiTag3Addr             = Address + 0x29; // 1 byte
+            _aiType3Addr            = Address + 0x2A; // 1 byte
+            _aiAggr3Addr            = Address + 0x2B; // 1 byte
+            _aiTag4Addr             = Address + 0x2C; // 1 byte
+            _aiType4Addr            = Address + 0x2D; // 1 byte
+            _aiAggr4Addr            = Address + 0x2E; // 1 byte
+            _unknown0x2FAddr        = Address + 0x2F; // 1 byte
+            _unknown0x30Addr        = Address + 0x30; // 1 byte
+            _unknown0x31Addr        = Address + 0x31; // 1 byte
+            _flagsAddr              = Address + 0x32; // 2 bytes
         }
 
         // ------------------------------------------------------------------------------------------------------------
@@ -164,11 +164,11 @@ namespace SF3.Models.Structs.X1.Battle {
             set => Data.SetByte(_characterPlusAddr, (byte) value);
         }
 
-        [TableViewModelColumn(displayOrder: 8, displayName: "SpawnCondition?", displayFormat: "X2", displayGroup: "Page1")]
+        [TableViewModelColumn(displayOrder: 8, displayFormat: "X2", displayGroup: "Page1")]
         [BulkCopy]
-        public int SpawnCondition {
-            get => Data.GetByte(_spawnConditionAddr);
-            set => Data.SetByte(_spawnConditionAddr, (byte) value);
+        public int SpawnType {
+            get => Data.GetByte(_spawnTypeAddr);
+            set => Data.SetByte(_spawnTypeAddr, (byte) value);
         }
 
         [TableViewModelColumn(displayOrder: 9, displayName: "+0x0E", displayFormat: "X2", displayGroup: "Page1")]
@@ -182,11 +182,11 @@ namespace SF3.Models.Structs.X1.Battle {
         // Page 2
         // ------------------------------------------------------------------------------------------------------------
 
-        [TableViewModelColumn(displayOrder: 10, displayName: "+0x0F", displayFormat: "X2", displayGroup: "Page2")]
+        [TableViewModelColumn(displayOrder: 10, displayFormat: "X2", displayGroup: "Page2")]
         [BulkCopy]
-        public int Unknown0x0F {
-            get => Data.GetByte(_unknown0x0FAddr);
-            set => Data.SetByte(_unknown0x0FAddr, (byte) value);
+        public int CreepUpWhenOutOfRange {
+            get => Data.GetByte(_creepUpWhenOutOfRangeAddr);
+            set => Data.SetByte(_creepUpWhenOutOfRangeAddr, (byte) value);
         }
 
         [TableViewModelColumn(displayOrder: 11, displayName: "Facing/IsBoss", displayFormat: "X2", displayGroup: "Page2")]
@@ -216,120 +216,120 @@ namespace SF3.Models.Structs.X1.Battle {
             set => Data.SetByte(_unknown0x12Addr, (byte) value);
         }
 
-        [TableViewModelColumn(displayOrder: 15, displayFormat: "X2", displayGroup: "Page2")]
-        [BulkCopy]
-        public int SpawnZone1 {
-            get => Data.GetByte(_spawnZone1Addr);
-            set => Data.SetByte(_spawnZone1Addr, (byte) value);
-        }
-
-        [TableViewModelColumn(displayOrder: 16, displayFormat: "X2", displayGroup: "Page2")]
-        [BulkCopy]
-        public int SpawnZone1Condition {
-            get => Data.GetByte(_spawnZone1ConditionAddr);
-            set => Data.SetByte(_spawnZone1ConditionAddr, (byte) value);
-        }
-
-        [TableViewModelColumn(displayOrder: 17, displayFormat: "X2", displayGroup: "Page2")]
-        [BulkCopy]
-        public int SpawnZone2 {
-            get => Data.GetByte(_spawnZone2Addr);
-            set => Data.SetByte(_spawnZone2Addr, (byte) value);
-        }
-
-        [TableViewModelColumn(displayOrder: 18, displayFormat: "X2", displayGroup: "Page2")]
-        [BulkCopy]
-        public int SpawnZone2Condition {
-            get => Data.GetByte(_spawnZone2ConditionAddr);
-            set => Data.SetByte(_spawnZone2ConditionAddr, (byte) value);
-        }
-
-        [TableViewModelColumn(displayOrder: 19, displayFormat: "X2", displayGroup: "Page2")]
-        [BulkCopy]
-        public int StrictAI {
-            get => Data.GetByte(_strictAIAddr);
-            set => Data.SetByte(_strictAIAddr, (byte) value);
-        }
-
-        [TableViewModelColumn(displayOrder: 20, displayName: "+0x18", displayFormat: "X2", displayGroup: "Page2")]
-        [BulkCopy]
-        public int Unknown0x18 {
-            get => Data.GetByte(_unknown0x18Addr);
-            set => Data.SetByte(_unknown0x18Addr, (byte) value);
-        }
-
-        [TableViewModelColumn(displayOrder: 21, displayName: "+0x19", displayFormat: "X2", displayGroup: "Page2")]
-        [BulkCopy]
-        public int Unknown0x19 {
-            get => Data.GetByte(_unknown0x19Addr);
-            set => Data.SetByte(_unknown0x19Addr, (byte) value);
-        }
-
-        [TableViewModelColumn(displayOrder: 22, displayName: "+0x1A", displayFormat: "X2", displayGroup: "Page2")]
-        [BulkCopy]
-        public int Unknown0x1A {
-            get => Data.GetByte(_unknown0x1AAddr);
-            set => Data.SetByte(_unknown0x1AAddr, (byte) value);
-        }
-
-        [TableViewModelColumn(displayOrder: 23, displayName: "+0x1B", displayFormat: "X2", displayGroup: "Page2")]
-        [BulkCopy]
-        public int Unknown0x1B {
-            get => Data.GetByte(_unknown0x1BAddr);
-            set => Data.SetByte(_unknown0x1BAddr, (byte) value);
-        }
-
-        [TableViewModelColumn(displayOrder: 24, displayName: "+0x1C", displayFormat: "X2", displayGroup: "Page2")]
-        [BulkCopy]
-        public int Unknown0x1C {
-            get => Data.GetByte(_unknown0x1CAddr);
-            set => Data.SetByte(_unknown0x1CAddr, (byte) value);
-        }
-
-        [TableViewModelColumn(displayOrder: 25, displayName: "+0x1D", displayFormat: "X2", displayGroup: "Page2")]
-        [BulkCopy]
-        public int Unknown0x1D {
-            get => Data.GetByte(_unknown0x1DAddr);
-            set => Data.SetByte(_unknown0x1DAddr, (byte) value);
-        }
-
         // ------------------------------------------------------------------------------------------------------------
         // Page 3
         // ------------------------------------------------------------------------------------------------------------
 
-        [TableViewModelColumn(displayOrder: 26, displayName: "+0x1E", displayFormat: "X2", displayGroup: "Page3")]
+        [TableViewModelColumn(displayOrder: 15, displayFormat: "X2", displayGroup: "Page3")]
         [BulkCopy]
-        public int Unknown0x1E {
-            get => Data.GetByte(_unknown0x1EAddr);
-            set => Data.SetByte(_unknown0x1EAddr, (byte) value);
+        public int Condition1Zone {
+            get => Data.GetByte(_condition1ZoneAddr);
+            set => Data.SetByte(_condition1ZoneAddr, (byte) value);
         }
 
-        [TableViewModelColumn(displayOrder: 27, displayName: "!TurnSkip", displayFormat: "X2", displayGroup: "Page3")]
+        [TableViewModelColumn(displayOrder: 16, displayName: "Condition1Movement?", displayFormat: "X2", displayGroup: "Page3")]
         [BulkCopy]
-        public int NoTurnSkip {
-            get => Data.GetByte(_noTurnSkipAddr);
-            set => Data.SetByte(_noTurnSkipAddr, (byte) value);
+        public int Condition1Movement {
+            get => Data.GetByte(_condition1MovementAddr);
+            set => Data.SetByte(_condition1MovementAddr, (byte) value);
         }
 
-        [TableViewModelColumn(displayOrder: 28, displayName: "+0x20", displayFormat: "X2", displayGroup: "Page3")]
+        [TableViewModelColumn(displayOrder: 17, displayFormat: "X2", displayGroup: "Page3")]
         [BulkCopy]
-        public int Unknown0x20 {
-            get => Data.GetByte(_unknown0x20Addr);
-            set => Data.SetByte(_unknown0x20Addr, (byte) value);
+        public int Condition1Unknown {
+            get => Data.GetByte(_condition1UnknownAddr);
+            set => Data.SetByte(_condition1UnknownAddr, (byte) value);
         }
 
-        [TableViewModelColumn(displayOrder: 29, displayName: "+0x21", displayFormat: "X2", displayGroup: "Page3")]
+        [TableViewModelColumn(displayOrder: 18, displayFormat: "X2", displayGroup: "Page3")]
         [BulkCopy]
-        public int Unknown0x21 {
-            get => Data.GetByte(_unknown0x21Addr);
-            set => Data.SetByte(_unknown0x21Addr, (byte) value);
+        public int Condition1AIIndex {
+            get => Data.GetByte(_condition1AIIndexAddr);
+            set => Data.SetByte(_condition1AIIndexAddr, (byte) value);
         }
 
-        [TableViewModelColumn(displayOrder: 30, displayName: "+0x22", displayFormat: "X2", displayGroup: "Page3")]
+        [TableViewModelColumn(displayOrder: 19, displayFormat: "X2", displayGroup: "Page3")]
         [BulkCopy]
-        public int Unknown0x22 {
-            get => Data.GetByte(_unknown0x22Addr);
-            set => Data.SetByte(_unknown0x22Addr, (byte) value);
+        public int Condition2Zone {
+            get => Data.GetByte(_condition2ZoneAddr);
+            set => Data.SetByte(_condition2ZoneAddr, (byte) value);
+        }
+
+        [TableViewModelColumn(displayOrder: 20, displayName: "Condition2Movement?", displayFormat: "X2", displayGroup: "Page3")]
+        [BulkCopy]
+        public int Condition2Movement {
+            get => Data.GetByte(_condition2MovementAddr);
+            set => Data.SetByte(_condition2MovementAddr, (byte) value);
+        }
+
+        [TableViewModelColumn(displayOrder: 21, displayFormat: "X2", displayGroup: "Page3")]
+        [BulkCopy]
+        public int Condition2Unknown {
+            get => Data.GetByte(_condition2UnknownAddr);
+            set => Data.SetByte(_condition2UnknownAddr, (byte) value);
+        }
+
+        [TableViewModelColumn(displayOrder: 22, displayFormat: "X2", displayGroup: "Page3")]
+        [BulkCopy]
+        public int Condition2AIIndex {
+            get => Data.GetByte(_condition2AIIndexAddr);
+            set => Data.SetByte(_condition2AIIndexAddr, (byte) value);
+        }
+
+        [TableViewModelColumn(displayOrder: 23, displayFormat: "X2", displayGroup: "Page3")]
+        [BulkCopy]
+        public int Condition3Zone {
+            get => Data.GetByte(_condition3ZoneAddr);
+            set => Data.SetByte(_condition3ZoneAddr, (byte) value);
+        }
+
+        [TableViewModelColumn(displayOrder: 24, displayName: "Condition3Movement?", displayFormat: "X2", displayGroup: "Page3")]
+        [BulkCopy]
+        public int Condition3Movement {
+            get => Data.GetByte(_condition3MovementAddr);
+            set => Data.SetByte(_condition3MovementAddr, (byte) value);
+        }
+
+        [TableViewModelColumn(displayOrder: 25, displayFormat: "X2", displayGroup: "Page3")]
+        [BulkCopy]
+        public int Condition3Unknown {
+            get => Data.GetByte(_condition3UnknownAddr);
+            set => Data.SetByte(_condition3UnknownAddr, (byte) value);
+        }
+
+        [TableViewModelColumn(displayOrder: 26, displayFormat: "X2", displayGroup: "Page3")]
+        [BulkCopy]
+        public int Condition3AIIndex {
+            get => Data.GetByte(_condition3AIIndexAddr);
+            set => Data.SetByte(_condition3AIIndexAddr, (byte) value);
+        }
+
+        [TableViewModelColumn(displayOrder: 27, displayFormat: "X2", displayGroup: "Page3")]
+        [BulkCopy]
+        public int Condition4Zone {
+            get => Data.GetByte(_condition4ZoneAddr);
+            set => Data.SetByte(_condition4ZoneAddr, (byte) value);
+        }
+
+        [TableViewModelColumn(displayOrder: 28, displayName: "Condition4Movement?", displayFormat: "X2", displayGroup: "Page3")]
+        [BulkCopy]
+        public int Condition4Movement {
+            get => Data.GetByte(_condition4MovementAddr);
+            set => Data.SetByte(_condition4MovementAddr, (byte) value);
+        }
+
+        [TableViewModelColumn(displayOrder: 29, displayFormat: "X2", displayGroup: "Page3")]
+        [BulkCopy]
+        public int Condition4Unknown {
+            get => Data.GetByte(_condition4UnknownAddr);
+            set => Data.SetByte(_condition4UnknownAddr, (byte) value);
+        }
+
+        [TableViewModelColumn(displayOrder: 30, displayFormat: "X2", displayGroup: "Page3")]
+        [BulkCopy]
+        public int Condition4AIIndex {
+            get => Data.GetByte(_condition4AIIndex);
+            set => Data.SetByte(_condition4AIIndex, (byte) value);
         }
 
         // ------------------------------------------------------------------------------------------------------------
