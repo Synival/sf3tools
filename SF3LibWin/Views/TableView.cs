@@ -64,8 +64,11 @@ namespace SF3.Win.Views {
 
         private static Dictionary<string, Stack<EnhancedObjectListView>> _cachedOLVControls = new Dictionary<string, Stack<EnhancedObjectListView>>();
 
+        private string GetCachedKey()
+            => ModelType.AssemblyQualifiedName + (DisplayGroups != null ? ("_" + string.Join("_", DisplayGroups)) : "");
+
         private ObjectListView PopCachedOLV() {
-            var key = ModelType.AssemblyQualifiedName;
+            var key = GetCachedKey();
             if (!_cachedOLVControls.ContainsKey(key))
                 return null;
             var stack = _cachedOLVControls[key];
@@ -78,7 +81,7 @@ namespace SF3.Win.Views {
         }
 
         private void PushCachedOLV() {
-            var key = ModelType.AssemblyQualifiedName;
+            var key = GetCachedKey();
             if (!_cachedOLVControls.ContainsKey(key))
                 _cachedOLVControls.Add(key, new Stack<EnhancedObjectListView>());
             _cachedOLVControls[key].Push((EnhancedObjectListView) OLVControl);
