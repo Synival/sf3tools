@@ -54,7 +54,7 @@ namespace SF3.X012_Editor.Forms {
             tsmiHelp_About.Text = "About...";
             tsmiHelp_About.Click += tsmiHelp_About_Click;
             // 
-            // frmX1_Editor
+            // frmX012_Editor
             // 
             AllowDrop = true;
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -63,8 +63,8 @@ namespace SF3.X012_Editor.Forms {
             Controls.Add(menuStrip2);
             Icon = (System.Drawing.Icon) resources.GetObject("$this.Icon");
             Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            Name = "frmX1_Editor";
-            Text = "SF3 X1 Editor";
+            Name = "frmX012_Editor";
+            Text = "SF3 X012 Editor";
             Controls.SetChildIndex(menuStrip2, 0);
             menuStrip2.ResumeLayout(false);
             menuStrip2.PerformLayout();
