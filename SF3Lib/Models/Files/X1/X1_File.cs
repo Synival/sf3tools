@@ -41,6 +41,7 @@ namespace SF3.Models.Files.X1 {
 
             int battlePointersAddress;
             int tileMovementAddress;
+            int characterTargetPriorityTablesAddresses;
 
             var battlePointersPointerPointerAddress = isScn1OrBTL99 ? 0x0018 : 0x0024;
             sub = IsBTL99 ? 0x06060000 : Scenario == ScenarioType.Scenario1 ? 0x0605f000 : 0x0605e000;
@@ -100,6 +101,14 @@ namespace SF3.Models.Files.X1 {
                     // The value we want is 0xac bytes later always (except for X1BTL330-339 and X1BTLP05)
                     var tileMovementAddressPointer = Data.GetDouble(0x000001c4) - sub + 0x00ac;
 
+                    var priorityTablesOffset =
+                        (Scenario == ScenarioType.Scenario2) ? 0x78 :
+                        (Scenario == ScenarioType.Scenario3) ? 0x5c :
+                                  /*ScenarioType.PremiumDisk*/ 0x5c;
+
+                    var funcAddr = Data.GetDouble(0x01DC) - sub;
+                    characterTargetPriorityTablesAddresses = Data.GetDouble(funcAddr + priorityTablesOffset) - sub;
+
                     // No problems with this method in Scenario 2.
                     if (Scenario == ScenarioType.Scenario2)
                         tileMovementAddress = Data.GetDouble(tileMovementAddressPointer) - sub;
@@ -116,14 +125,17 @@ namespace SF3.Models.Files.X1 {
                             tileMovementAddress = Data.GetDouble(0x0024) - sub + 0x14;
                     }
                 }
-                else
+                else {
                     tileMovementAddress = -1;
+                    characterTargetPriorityTablesAddresses = -1;
+                }
             }
             else {
                 // No battle, so none of these tables exist.
                 battlePointersAddress = -1;
                 Battles = null;
                 tileMovementAddress = -1;
+                characterTargetPriorityTablesAddresses = -1;
             }
 
             // Add tables present outside of the battle tables.
@@ -140,6 +152,16 @@ namespace SF3.Models.Files.X1 {
                 tables.Add(EnterTable = EnterTable.Create(Data, "Entrances", enterAddress));
             if (arrowAddress >= 0)
                 tables.Add(ArrowTable = ArrowTable.Create(Data, "Arrows", arrowAddress));
+            if (characterTargetPriorityTablesAddresses >= 0) {
+                CharacterTargetPriorityTables = new CharacterTargetPriorityTable[16];
+                int tablePointerAddr = characterTargetPriorityTablesAddresses;
+                for (int i = 0; i < 16; i++) {
+                    var tableAddr = Data.GetDouble(tablePointerAddr) - sub;
+                    var tableName = "CharacterTargetPriorities 0x" + i.ToString("X") + ": " + NameGetterContext.GetName(null, null, i, new object[] { NamedValueType.MovementType });
+                    tables.Add(CharacterTargetPriorityTables[i] = CharacterTargetPriorityTable.Create(Data, tableName, tableAddr));
+                    tablePointerAddr += 0x04;
+                }
+            }
 
             // Add tables for battle tables.
             if (Battles != null) {
@@ -185,5 +207,7 @@ namespace SF3.Models.Files.X1 {
 
         [BulkCopyRecurse]
         public TileMovementTable TileMovementTable { get; private set; }
+        [BulkCopyRecurse]
+        public CharacterTargetPriorityTable[] CharacterTargetPriorityTables { get; private set; }
     }
 }

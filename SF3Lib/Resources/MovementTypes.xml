@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <items>
-    <type value="0x00" name="Unknown" />
+    <type value="0x00" name="Unknown 0x0" />
     <type value="0x01" name="Normal" />
     <type value="0x02" name="Centaur" />
     <type value="0x03" name="Beast" />
@@ -13,5 +13,7 @@
     <type value="0x0A" name="Elf" />
     <type value="0x0B" name="Mage" />
     <type value="0x0C" name="Healer" />
-    <type value="0x0D" name="Unknown" />
+    <type value="0x0D" name="Unknown 0xD" />
+    <type value="0x0E" name="Unknown 0xE" />
+    <type value="0x0F" name="Unknown 0xF" />
 </items>

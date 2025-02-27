@@ -21,5 +21,6 @@ namespace SF3.Models.Files.X1 {
         Dictionary<MapLeaderType, Battle> Battles { get; }
 
         TileMovementTable TileMovementTable { get; }
+        CharacterTargetPriorityTable[] CharacterTargetPriorityTables { get; }
     }
 }

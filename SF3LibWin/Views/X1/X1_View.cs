@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using System.Windows.Forms;
 using SF3.Models.Files.X1;
+using SF3.Models.Tables.X1.Battle;
 
 namespace SF3.Win.Views.MPD {
     public class X1_View : TabView {
@@ -26,6 +27,8 @@ namespace SF3.Win.Views.MPD {
                 CreateChild(new TableView("Arrows (Scn2+)", Model.ArrowTable, ngc));
             if (Model.TileMovementTable != null)
                 CreateChild(new TableView("Tile Data (Scn2+)", Model.TileMovementTable, ngc));
+            if (Model.CharacterTargetPriorityTables != null)
+                CreateChild(new TableArrayView<CharacterTargetPriorityTable>("Character Target Priorities", Model.CharacterTargetPriorityTables, ngc));
 
             if (Model.Battles != null) {
                 foreach (var battleKv in Model.Battles.Where(x => x.Value != null))
