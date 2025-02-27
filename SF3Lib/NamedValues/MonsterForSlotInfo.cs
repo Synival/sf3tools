@@ -8,7 +8,7 @@ namespace SF3.NamedValues {
         public MonsterForSlotInfo() {
             Dictionary<int, string> dictionaryWithSpecialSlots(Dictionary<int, string> values)
                 => new Dictionary<int, string>(values) {
-                    { 0xFFFD, "Unkown BTL328 Slot" },
+                    { 0xFFFD, "Unknown BTL328 Slot" },
                     { 0xFFFF, "Character Slot" }
                 };
 
