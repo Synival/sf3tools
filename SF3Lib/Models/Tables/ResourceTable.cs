@@ -44,6 +44,9 @@ namespace SF3.Models.Tables {
 
                     T prevModel = null;
                     while (!xml.EOF) {
+                        if (MaxSize.HasValue && rows.Count >= MaxSize.Value)
+                            break;
+
                         _ = xml.Read();
                         if (xml.HasAttributes) {
                             var id = Convert.ToInt32(xml.GetAttribute(0), 16);

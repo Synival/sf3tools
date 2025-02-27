@@ -14,6 +14,8 @@ namespace SF3.Win.Views.X012 {
                 return null;
 
             var ngc = Model.NameGetterContext;
+            if (Model.TileMovementTable != null)
+                CreateChild(new TableView("Tile Data", Model.TileMovementTable, ngc));
             if (Model.ClassTargetPriorityTables != null)
                 CreateChild(new TableArrayView<ClassTargetPriorityTable>("Class Target Priorities", Model.ClassTargetPriorityTables, ngc));
             if (Model.UnknownPriorityTables != null)
