@@ -6,6 +6,7 @@ using System.Windows.Forms;
 using BrightIdeasSoftware;
 using CommonLib.NamedValues;
 using CommonLib.ViewModels;
+using SF3.Win.Controls;
 using SF3.Win.Extensions;
 using static CommonLib.Extensions.TypeExtensions;
 
@@ -20,20 +21,7 @@ namespace SF3.Win.Views {
             ModelType = modelType ?? ((model == null) ? null : model.GetType()!);
         }
 
-        /// <summary>
-        /// This exists because of many layers of stupid.
-        /// In short, Winforms provides no way to know when a Control is no longer visible because it's parent (like a tab) has changed.
-        /// The least-worst hack is to continuously check the "Visible" property to know if this is actually visible or not.
-        /// The alternative is to set up an elaborate system of events to *hopefully* inform child controls property.
-        /// Just don't make 1,000 of these things at once, okay?
-        /// </summary>
-        private class EnhancedObjectListView : ObjectListView {
-            public EnhancedObjectListView() {
-                _timer.Interval = 100;
-                _timer.Tick += CheckForVisibility;
-                _timer.Start();
-            }
-
+        private class ModelObjectListView : EnhancedObjectListView {
             public override void EditSubItem(OLVListItem item, int subItemIndex) {
                 // Make sure we can't edit the actual value, not just the column.
                 if (item == null || ((ModelProperty) item.RowObject).IsReadOnly)
@@ -46,56 +34,18 @@ namespace SF3.Win.Views {
                 if (columnToSort?.AspectName != "Value")
                     base.Sort(columnToSort, order);
             }
-
-            protected override void OnVisibleChanged(EventArgs e) {
-                base.OnVisibleChanged(e);
-                if (Items.Count == 0 || !Visible || Parent == null || _wasVisible)
-                    return;
-
-                // If we weren't visible before, refresh.
-                this.RefreshAllItems();
-                _wasVisible = true;
-                _timer.Start();
-            }
-
-            /// <summary>
-            /// Checks to see if we're visible. This is on a timer tick because there are no events to detect for this.
-            /// (This seems oddly deliberate!!!)
-            /// </summary>
-            private void CheckForVisibility(object sender, EventArgs args) {
-                if (Parent == null || !Visible) {
-                    _wasVisible = false;
-                    _timer.Stop();
-                }
-            }
-
-            private bool _wasVisible = true;
-            private Timer _timer = new Timer();
         }
 
-        private static Dictionary<string, Stack<EnhancedObjectListView>> _cachedOLVControls = new Dictionary<string, Stack<EnhancedObjectListView>>();
+        private string GetCacheKey()
+            => "ModelView_" + ModelType.FullName + "_" + NameGetterContext.Name;
 
-        private ObjectListView PopCachedOLV() {
-            var key = ModelType.AssemblyQualifiedName;
-            if (!_cachedOLVControls.ContainsKey(key))
-                return null;
-            var stack = _cachedOLVControls[key];
-            if (stack.Count == 0)
-                return null;
+        private EnhancedObjectListView PopCachedOLV()
+            => EnhancedObjectListView.PopCachedOLV(GetCacheKey());
 
-            var olv = stack.Pop();
-            olv.Show();
-            return olv;
-        }
+        private void PushCachedOLV()
+            => EnhancedObjectListView.PushCachedOLV(GetCacheKey(), OLVControl);
 
-        private void PushCachedOLV() {
-            var key = ModelType.AssemblyQualifiedName;
-            if (!_cachedOLVControls.ContainsKey(key))
-                _cachedOLVControls.Add(key, new Stack<EnhancedObjectListView>());
-            _cachedOLVControls[key].Push((EnhancedObjectListView) OLVControl);
-        }
-
-        private ObjectListView GetOLV() {
+        private EnhancedObjectListView GetOLV() {
             var olv = PopCachedOLV();
             if (olv == null) {
                 var lvcColumns = new List<OLVColumn>();
@@ -141,7 +91,7 @@ namespace SF3.Win.Views {
                     lvcColumns.Add(lvc);
                 }
 
-                olv = new EnhancedObjectListView();
+                olv = new ModelObjectListView();
                 olv.SuspendLayout();
                 ((System.ComponentModel.ISupportInitialize) olv).BeginInit();
                 olv.AllowColumnReorder = true;
@@ -273,6 +223,6 @@ namespace SF3.Win.Views {
 
         public Type ModelType { get; }
         public INameGetterContext NameGetterContext { get; }
-        public ObjectListView OLVControl { get; private set; } = null;
+        public EnhancedObjectListView OLVControl { get; private set; } = null;
     }
 }

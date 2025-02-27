@@ -45,5 +45,11 @@ namespace CommonLib.NamedValues {
         /// <param name="parameters">Optional parameters assigned to the NameGetterAttribute.</param>
         /// <returns>'true' if GetInfo() can be used.</returns>
         bool CanGetInfo(object obj, PropertyInfo property, params object[] parameters);
+
+        /// <summary>
+        /// Name with which to identify this INameGetterContext.
+        /// INameGetterContexts that have identical states and behave the same way should have identical names.
+        /// </summary>
+        string Name { get; }
     }
 }

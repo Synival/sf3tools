@@ -8,6 +8,7 @@ using CommonLib.Extensions;
 using CommonLib.NamedValues;
 using SF3.Models.Structs;
 using SF3.Models.Tables;
+using SF3.Win.Controls;
 using SF3.Win.Extensions;
 
 namespace SF3.Win.Views {
@@ -22,72 +23,16 @@ namespace SF3.Win.Views {
             DisplayGroups = displayGroups;
         }
 
-        /// <summary>
-        /// This exists because of many layers of stupid.
-        /// In short, Winforms provides no way to know when a Control is no longer visible because it's parent (like a tab) has changed.
-        /// The least-worst hack is to continuously check the "Visible" property to know if this is actually visible or not.
-        /// The alternative is to set up an elaborate system of events to *hopefully* inform child controls property.
-        /// Just don't make 1,000 of these things at once, okay?
-        /// </summary>
-        private class EnhancedObjectListView : ObjectListView {
-            public EnhancedObjectListView() {
-                _timer.Interval = 100;
-                _timer.Tick += CheckForVisibility;
-                _timer.Start();
-            }
+        private string GetCacheKey()
+            => "TableView_" + ModelType.FullName + "_" + NameGetterContext.Name + "_" + (DisplayGroups != null ? ("_" + string.Join("_", DisplayGroups)) : "");
 
-            protected override void OnVisibleChanged(EventArgs e) {
-                base.OnVisibleChanged(e);
-                if (Items.Count == 0 || !Visible || Parent == null || _wasVisible)
-                    return;
+        private EnhancedObjectListView PopCachedOLV()
+            => EnhancedObjectListView.PopCachedOLV(GetCacheKey());
 
-                // If we weren't visible before, refresh.
-                this.RefreshAllItems();
-                _wasVisible = true;
-                _timer.Start();
-            }
+        private void PushCachedOLV()
+            => EnhancedObjectListView.PushCachedOLV(GetCacheKey(), OLVControl);
 
-            /// <summary>
-            /// Checks to see if we're visible. This is on a timer tick because there are no events to detect for this.
-            /// (This seems oddly deliberate!!!)
-            /// </summary>
-            private void CheckForVisibility(object sender, EventArgs args) {
-                if (Parent == null || !Visible) {
-                    _wasVisible = false;
-                    _timer.Stop();
-                }
-            }
-
-            private bool _wasVisible = true;
-            private Timer _timer = new Timer();
-        }
-
-        private static Dictionary<string, Stack<EnhancedObjectListView>> _cachedOLVControls = new Dictionary<string, Stack<EnhancedObjectListView>>();
-
-        private string GetCachedKey()
-            => ModelType.AssemblyQualifiedName + (DisplayGroups != null ? ("_" + string.Join("_", DisplayGroups)) : "");
-
-        private ObjectListView PopCachedOLV() {
-            var key = GetCachedKey();
-            if (!_cachedOLVControls.ContainsKey(key))
-                return null;
-            var stack = _cachedOLVControls[key];
-            if (stack.Count == 0)
-                return null;
-
-            var olv = stack.Pop();
-            olv.Show();
-            return olv;
-        }
-
-        private void PushCachedOLV() {
-            var key = GetCachedKey();
-            if (!_cachedOLVControls.ContainsKey(key))
-                _cachedOLVControls.Add(key, new Stack<EnhancedObjectListView>());
-            _cachedOLVControls[key].Push((EnhancedObjectListView) OLVControl);
-        }
-
-        private ObjectListView GetOLV() {
+        private EnhancedObjectListView GetOLV() {
             var olv = PopCachedOLV();
             if (olv == null) {
                 var vm = ModelType.GetTableViewModel();
@@ -220,7 +165,7 @@ namespace SF3.Win.Views {
 
         public Type ModelType { get; }
         public INameGetterContext NameGetterContext { get; }
-        public ObjectListView OLVControl { get; private set; } = null;
+        public EnhancedObjectListView OLVControl { get; private set; } = null;
         public string[] DisplayGroups { get; }
     }
 }

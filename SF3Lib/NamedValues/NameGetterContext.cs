@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Reflection;
 using CommonLib.NamedValues;
@@ -205,5 +204,7 @@ namespace SF3.NamedValues {
                     return false;
             }
         }
+
+        public string Name => Scenario.ToString();
     }
 }

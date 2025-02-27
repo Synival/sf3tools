@@ -1,6 +1,6 @@
-﻿using BrightIdeasSoftware;
-using CommonLib.NamedValues;
+﻿using CommonLib.NamedValues;
 using SF3.Models.Tables;
+using SF3.Win.Controls;
 
 namespace SF3.Win.Views {
     public interface ITableView : IView {
@@ -17,6 +17,6 @@ namespace SF3.Win.Views {
         /// <summary>
         /// The ObjectListView control created during Create().
         /// </summary>
-        ObjectListView OLVControl { get; }
+        EnhancedObjectListView OLVControl { get; }
     }
 }
