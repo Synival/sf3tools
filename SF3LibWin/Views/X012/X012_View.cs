@@ -18,8 +18,8 @@ namespace SF3.Win.Views.X012 {
                 CreateChild(new TableView("Tile Data", Model.TileMovementTable, ngc));
             if (Model.ClassTargetPriorityTables != null)
                 CreateChild(new TableArrayView<ClassTargetPriorityTable>("Class Target Priorities", Model.ClassTargetPriorityTables, ngc));
-            if (Model.UnknownPriorityTables != null)
-                CreateChild(new TableArrayView<UnknownUInt8Table>("Unknown Tables", Model.UnknownPriorityTables, ngc));
+            if (Model.ClassTargetUnknownTables != null)
+                CreateChild(new TableArrayView<ClassTargetUnknownTable>("Class Unknown Tables", Model.ClassTargetUnknownTables, ngc));
 
             return Control;
         }

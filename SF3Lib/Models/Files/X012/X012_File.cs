@@ -39,12 +39,12 @@ namespace SF3.Models.Files.X012 {
                     tablePointerAddr += 0x04;
                 }
 
-                UnknownPriorityTables = new UnknownUInt8Table[16];
+                ClassTargetUnknownTables = new ClassTargetUnknownTable[16];
                 tablePointerAddr = 0xB8DC;
                 for (int i = 0; i < 16; i++) {
                     var tableAddr = Data.GetDouble(tablePointerAddr) - 0x06070000;
                     var tableName = "UnknownTable 0x" + i.ToString("X") + ": " + NameGetterContext.GetName(null, null, i, new object[] { NamedValueType.MovementType });
-                    tables.Add(UnknownPriorityTables[i] = UnknownUInt8Table.Create(Data, tableName, tableAddr, 0x3C, 0xFF));
+                    tables.Add(ClassTargetUnknownTables[i] = ClassTargetUnknownTable.Create(Data, tableName, tableAddr));
                     tablePointerAddr += 0x04;
                 }
             }
@@ -62,6 +62,6 @@ namespace SF3.Models.Files.X012 {
         public ClassTargetPriorityTable[] ClassTargetPriorityTables { get; private set; }
 
         [BulkCopyRecurse]
-        public UnknownUInt8Table[] UnknownPriorityTables { get; private set; }
+        public ClassTargetUnknownTable[] ClassTargetUnknownTables { get; private set; }
     }
 }
