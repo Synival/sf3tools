@@ -152,6 +152,7 @@ namespace SF3.Models.Files.X1 {
                 tables.Add(EnterTable = EnterTable.Create(Data, "Entrances", enterAddress));
             if (arrowAddress >= 0)
                 tables.Add(ArrowTable = ArrowTable.Create(Data, "Arrows", arrowAddress));
+
             if (characterTargetPriorityTablesAddresses >= 0) {
                 CharacterTargetPriorityTables = new CharacterTargetPriorityTable[16];
                 int tablePointerAddr = characterTargetPriorityTablesAddresses;
@@ -159,6 +160,15 @@ namespace SF3.Models.Files.X1 {
                     var tableAddr = Data.GetDouble(tablePointerAddr) - sub;
                     var tableName = "CharacterTargetPriorities 0x" + i.ToString("X") + ": " + NameGetterContext.GetName(null, null, i, new object[] { NamedValueType.MovementType });
                     tables.Add(CharacterTargetPriorityTables[i] = CharacterTargetPriorityTable.Create(Data, tableName, tableAddr));
+                    tablePointerAddr += 0x04;
+                }
+
+                UnknownTableAfterTargetPriorityTables = new UnknownUInt8Table[16];
+                tablePointerAddr = characterTargetPriorityTablesAddresses + 0x140;
+                for (int i = 0; i < 16; i++) {
+                    var tableAddr = Data.GetDouble(tablePointerAddr) - sub;
+                    var tableName = "UnknownTableAfterTargetPriorities 0x" + i.ToString("X") + ": " + NameGetterContext.GetName(null, null, i, new object[] { NamedValueType.MovementType });
+                    tables.Add(UnknownTableAfterTargetPriorityTables[i] = UnknownUInt8Table.Create(Data, tableName, tableAddr, 0x40, null));
                     tablePointerAddr += 0x04;
                 }
             }
@@ -209,5 +219,7 @@ namespace SF3.Models.Files.X1 {
         public TileMovementTable TileMovementTable { get; private set; }
         [BulkCopyRecurse]
         public CharacterTargetPriorityTable[] CharacterTargetPriorityTables { get; private set; }
+        [BulkCopyRecurse]
+        public UnknownUInt8Table[] UnknownTableAfterTargetPriorityTables { get; private set; }
     }
 }

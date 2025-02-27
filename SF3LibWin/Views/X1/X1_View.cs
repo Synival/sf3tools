@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using System.Windows.Forms;
 using SF3.Models.Files.X1;
+using SF3.Models.Tables;
 using SF3.Models.Tables.X1.Battle;
 
 namespace SF3.Win.Views.MPD {
@@ -29,6 +30,8 @@ namespace SF3.Win.Views.MPD {
                 CreateChild(new TableView("Tile Data (Scn2+)", Model.TileMovementTable, ngc));
             if (Model.CharacterTargetPriorityTables != null)
                 CreateChild(new TableArrayView<CharacterTargetPriorityTable>("Character Target Priorities", Model.CharacterTargetPriorityTables, ngc));
+            if (Model.UnknownTableAfterTargetPriorityTables != null)
+                CreateChild(new TableArrayView<UnknownUInt8Table>("Unknown 16 Tables", Model.UnknownTableAfterTargetPriorityTables, ngc));
 
             if (Model.Battles != null) {
                 foreach (var battleKv in Model.Battles.Where(x => x.Value != null))
