@@ -1,8 +1,7 @@
-﻿using System.Linq;
-using System.Windows.Forms;
+﻿using System.Windows.Forms;
 using SF3.Models.Files.X1;
 
-namespace SF3.Win.Views.MPD {
+namespace SF3.Win.Views.X1 {
     public class BattleView : TabView {
         public BattleView(string name, Battle model) : base(name) {
             Model = model;

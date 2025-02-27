@@ -8,7 +8,7 @@ using SF3.Models.Files.IconPointer;
 using SF3.NamedValues;
 using SF3.Win.Forms;
 using SF3.Win.Views;
-using SF3.Win.Views.MPD;
+using SF3.Win.Views.IconPointer;
 
 namespace SF3.IconPointerEditor.Forms {
     public partial class frmIconPointerEditor : EditorFormNew {

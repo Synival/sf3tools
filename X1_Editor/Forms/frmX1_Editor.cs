@@ -10,7 +10,7 @@ using SF3.NamedValues;
 using SF3.Types;
 using SF3.Win.Forms;
 using SF3.Win.Views;
-using SF3.Win.Views.MPD;
+using SF3.Win.Views.X1;
 
 namespace SF3.X1_Editor.Forms {
     public partial class frmX1_Editor : EditorFormNew {

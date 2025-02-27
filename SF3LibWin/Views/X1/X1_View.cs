@@ -3,7 +3,7 @@ using System.Windows.Forms;
 using SF3.Models.Files.X1;
 using SF3.Models.Tables.X1.Battle;
 
-namespace SF3.Win.Views.MPD {
+namespace SF3.Win.Views.X1 {
     public class X1_View : TabView {
         public X1_View(string name, IX1_File model) : base(name) {
             Model = model;

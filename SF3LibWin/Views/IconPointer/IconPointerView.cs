@@ -1,7 +1,7 @@
 ﻿using System.Windows.Forms;
 using SF3.Models.Files.IconPointer;
 
-namespace SF3.Win.Views.MPD {
+namespace SF3.Win.Views.IconPointer {
     public class IconPointerView : TabView {
         public IconPointerView(string name, IIconPointerFile model) : base(name) {
             Model = model;

@@ -12,7 +12,9 @@ using SF3.Models.Files.X1;
 using SF3.NamedValues;
 using SF3.Types;
 using SF3.Win.Views;
+using SF3.Win.Views.IconPointer;
 using SF3.Win.Views.MPD;
+using SF3.Win.Views.X1;
 using static SF3.Win.Extensions.ObjectListViewExtensions;
 
 namespace SF3Editor {
