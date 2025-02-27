@@ -4,7 +4,7 @@ using SF3.Models.Structs.Shared;
 
 namespace SF3.Models.Tables.Shared {
     public class TileMovementTable : ResourceTable<TileMovement> {
-        protected TileMovementTable(IByteData data, string name, string resourceFile, int address, bool hasExtra) : base(data, name, resourceFile, address, hasExtra ? 16 : 13) {
+        protected TileMovementTable(IByteData data, string name, string resourceFile, int address, bool hasExtra) : base(data, name, resourceFile, address, hasExtra ? 14 : 13) {
             HasExtra = hasExtra;
         }
 
