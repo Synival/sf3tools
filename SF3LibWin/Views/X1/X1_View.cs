@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using System.Windows.Forms;
 using SF3.Models.Files.X1;
-using SF3.Models.Tables.X1.Battle;
+using SF3.Models.Tables.X1;
 
 namespace SF3.Win.Views.X1 {
     public class X1_View : TabView {
@@ -10,7 +10,8 @@ namespace SF3.Win.Views.X1 {
         }
 
         public override Control Create() {
-            base.Create();
+            if (base.Create() == null)
+                return null;
 
             var ngc = Model.NameGetterContext;
             if (Model.InteractableTable != null)
