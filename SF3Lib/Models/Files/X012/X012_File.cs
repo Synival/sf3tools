@@ -1,12 +1,16 @@
 using System;
 using System.Collections.Generic;
+using CommonLib.Attributes;
 using CommonLib.NamedValues;
 using SF3.ByteData;
 using SF3.Models.Tables;
+using SF3.Models.Tables.X012;
 using SF3.Types;
 
 namespace SF3.Models.Files.X012 {
     public class X012_File : ScenarioTableFile, IX012_File {
+        public readonly int c_ramOffset = 0x06070000;
+
         protected X012_File(IByteData data, INameGetterContext nameContext, ScenarioType scenario) : base(data, nameContext, scenario) {
         }
 
@@ -18,11 +22,39 @@ namespace SF3.Models.Files.X012 {
         }
 
         public override IEnumerable<ITable> MakeTables() {
-            var tables = new List<ITable>();
+            var tables = new List<ITable>() {
+            };
+
+            if (Scenario == ScenarioType.Scenario1) {
+                ClassTargetPriorityTables = new ClassTargetPriorityTable[16];
+                var tablePointerAddr = 0xB7AC;
+                for (int i = 0; i < 16; i++) {
+                    var tableAddr = Data.GetDouble(tablePointerAddr) - 0x06070000;
+                    var tableName = "CharacterTargetPriorityTable 0x" + i.ToString("X") + ": " + NameGetterContext.GetName(null, null, i, new object[] { NamedValueType.MovementType });
+                    tables.Add(ClassTargetPriorityTables[i] = ClassTargetPriorityTable.Create(Data, tableName, tableAddr));
+                    tablePointerAddr += 0x04;
+                }
+
+                UnknownPriorityTables = new UnknownUInt8Table[16];
+                tablePointerAddr = 0xB8DC;
+                for (int i = 0; i < 16; i++) {
+                    var tableAddr = Data.GetDouble(tablePointerAddr) - 0x06070000;
+                    var tableName = "UnknownTable 0x" + i.ToString("X") + ": " + NameGetterContext.GetName(null, null, i, new object[] { NamedValueType.MovementType });
+                    tables.Add(UnknownPriorityTables[i] = UnknownUInt8Table.Create(Data, tableName, tableAddr, 0x3C, 0xFF));
+                    tablePointerAddr += 0x04;
+                }
+            }
+
             return tables;
         }
 
         public override void Dispose() {
         }
+
+        [BulkCopyRecurse]
+        public ClassTargetPriorityTable[] ClassTargetPriorityTables { get; private set; }
+
+        [BulkCopyRecurse]
+        public UnknownUInt8Table[] UnknownPriorityTables { get; private set; }
     }
 }
