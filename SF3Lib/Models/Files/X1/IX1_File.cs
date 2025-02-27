@@ -23,6 +23,6 @@ namespace SF3.Models.Files.X1 {
 
         TileMovementTable TileMovementTable { get; }
         CharacterTargetPriorityTable[] CharacterTargetPriorityTables { get; }
-        UnknownUInt8Table[] UnknownTableAfterTargetPriorityTables { get; }
+        CharacterTargetUnknownTable[] CharacterTargetUnknownTables { get; }
     }
 }
