@@ -17,6 +17,7 @@ namespace SF3.Types {
         MonsterForSlot,
         MovementType,
         Sex,
+        SpawnType,
         Special,
         SpecialEffect,
         SpecialElement,

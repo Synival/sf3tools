@@ -164,8 +164,9 @@ namespace SF3.Models.Structs.X1.Battle {
             set => Data.SetByte(_characterPlusAddr, (byte) value);
         }
 
-        [TableViewModelColumn(displayOrder: 8, displayFormat: "X2", displayGroup: "Page1")]
+        [TableViewModelColumn(displayOrder: 8, displayFormat: "X2", minWidth: 230, displayGroup: "Page1")]
         [BulkCopy]
+        [NameGetter(NamedValueType.SpawnType)]
         public int SpawnType {
             get => Data.GetByte(_spawnTypeAddr);
             set => Data.SetByte(_spawnTypeAddr, (byte) value);
