@@ -46,10 +46,9 @@ namespace SF3.Models.Structs.X1.Battle {
         private readonly int _aiTag4Addr;
         private readonly int _aiType4Addr;
         private readonly int _aiAggr4Addr;
-        private readonly int _unknown0x2FAddr;
-        private readonly int _unknown0x30Addr;
-        private readonly int _unknown0x31Addr;
-        private readonly int _flagsAddr;
+        private readonly int _paddingAddr;
+        private readonly int _enemyFlagsAddr;
+        private readonly int _flagTieInAddr;
 
         public Slot(IByteData data, int id, string name, int address)
         : base(data, id, name, address, 0x34) {
@@ -95,10 +94,9 @@ namespace SF3.Models.Structs.X1.Battle {
             _aiTag4Addr             = Address + 0x2C; // 1 byte
             _aiType4Addr            = Address + 0x2D; // 1 byte
             _aiAggr4Addr            = Address + 0x2E; // 1 byte
-            _unknown0x2FAddr        = Address + 0x2F; // 1 byte
-            _unknown0x30Addr        = Address + 0x30; // 1 byte
-            _unknown0x31Addr        = Address + 0x31; // 1 byte
-            _flagsAddr              = Address + 0x32; // 2 bytes
+            _paddingAddr            = Address + 0x2F; // 1 byte
+            _enemyFlagsAddr         = Address + 0x30; // 2 bytes
+            _flagTieInAddr          = Address + 0x32; // 2 bytes
         }
 
         // ------------------------------------------------------------------------------------------------------------
@@ -195,6 +193,12 @@ namespace SF3.Models.Structs.X1.Battle {
         public int FacingIsBoss {
             get => Data.GetByte(_facingIsBossAddr);
             set => Data.SetByte(_facingIsBossAddr, (byte) value);
+        }
+
+        [TableViewModelColumn(displayOrder: 11.5f, minWidth: 80, displayGroup: "Page2")]
+        public SlotFacingType Facing {
+            get => (SlotFacingType) (FacingIsBoss & 0xE0);
+            set => FacingIsBoss = (FacingIsBoss & ~0xE0) | ((int) value & 0xE0);
         }
 
         [TableViewModelColumn(displayOrder: 12, displayGroup: "Page2")]
@@ -421,32 +425,42 @@ namespace SF3.Models.Structs.X1.Battle {
             set => Data.SetByte(_aiAggr4Addr, (byte) value);
         }
 
-        [TableViewModelColumn(displayOrder: 43, displayName: "+0x2F", displayFormat: "X2", displayGroup: "Page4")]
         [BulkCopy]
-        public int Unknown0x2F {
-            get => Data.GetByte(_unknown0x2FAddr);
-            set => Data.SetByte(_unknown0x2FAddr, (byte) value);
+        public int Padding {
+            get => Data.GetByte(_paddingAddr);
+            set => Data.SetByte(_paddingAddr, (byte) value);
         }
 
-        [TableViewModelColumn(displayOrder: 44, displayName: "+0x30", displayFormat: "X2", displayGroup: "Page4")]
+        [TableViewModelColumn(displayOrder: 45, displayName: "EnemyFlags", displayFormat: "X4", displayGroup: "Page4")]
         [BulkCopy]
-        public int Unknown0x30 {
-            get => Data.GetByte(_unknown0x30Addr);
-            set => Data.SetByte(_unknown0x30Addr, (byte) value);
+        public ushort EnemyFlags {
+            get => (ushort) Data.GetWord(_enemyFlagsAddr);
+            set => Data.SetWord(_enemyFlagsAddr, value);
         }
 
-        [TableViewModelColumn(displayOrder: 45, displayName: "+0x31", displayFormat: "X2", displayGroup: "Page4")]
-        [BulkCopy]
-        public int Unknown0x31 {
-            get => Data.GetByte(_unknown0x31Addr);
-            set => Data.SetByte(_unknown0x31Addr, (byte) value);
+        [TableViewModelColumn(displayOrder: 45.1f, displayGroup: "Page4")]
+        public bool DontMove {
+            get => (EnemyFlags & 0x0002) != 0;
+            set => EnemyFlags = (ushort) (value ? (EnemyFlags | 0x0002) : (EnemyFlags & ~0x0002));
         }
 
-        [TableViewModelColumn(displayOrder: 46, displayFormat: "X2", displayGroup: "Page4")]
+        [TableViewModelColumn(displayOrder: 45.2f, displayGroup: "Page4")]
+        public bool NoTurn {
+            get => (EnemyFlags & 0x0040) != 0;
+            set => EnemyFlags = (ushort) (value ? (EnemyFlags | 0x0040) : (EnemyFlags & ~0x0040));
+        }
+
+        [TableViewModelColumn(displayOrder: 45.3f, displayGroup: "Page4")]
+        public bool DontGetMoreAggroWhenHurt {
+            get => (EnemyFlags & 0x0080) != 0;
+            set => EnemyFlags = (ushort) (value ? (EnemyFlags | 0x0080) : (EnemyFlags & ~0x0080));
+        }
+
+        [TableViewModelColumn(displayOrder: 46, displayFormat: "X4", displayGroup: "Page4")]
         [BulkCopy]
-        public int Flags {
-            get => Data.GetWord(_flagsAddr);
-            set => Data.SetWord(_flagsAddr, value);
+        public int FlagTieIn {
+            get => Data.GetWord(_flagTieInAddr);
+            set => Data.SetWord(_flagTieInAddr, value);
         }
     }
 }

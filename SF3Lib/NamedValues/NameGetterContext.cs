@@ -60,8 +60,8 @@ namespace SF3.NamedValues {
                 { NamedValueType.Monster,             new SubMethods((o, p, v, a) => new NameAndInfo(v, ValueNames.MonsterInfo.Info[Scenario])) },
                 { NamedValueType.MonsterForSlot,      new SubMethods((o, p, v, a) => new NameAndInfo(v, ValueNames.MonsterForSlotInfo.Info[Scenario])) },
                 { NamedValueType.MovementType,        new SubMethods((o, p, v, a) => new NameAndInfo(v, ValueNames.MovementTypeInfo)) },
-                { NamedValueType.SpawnType,           new SubMethods((o, p, v, a) => new NameAndInfo(v, ValueNames.SpawnTypeInfo)) },
                 { NamedValueType.Sex,                 new SubMethods((o, p, v, a) => new NameAndInfo(v, ValueNames.SexInfo)) },
+                { NamedValueType.SpawnType,           new SubMethods((o, p, v, a) => new NameAndInfo(v, ValueNames.SpawnTypeInfo)) },
                 { NamedValueType.Special,             new SubMethods((o, p, v, a) => new NameAndInfo(v, ValueNames.SpecialInfo.Info[Scenario])) },
                 { NamedValueType.SpecialEffect,       new SubMethods((o, p, v, a) => new NameAndInfo(v, ValueNames.SpecialEffectInfo)) },
 
