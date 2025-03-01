@@ -58,9 +58,6 @@
     <Content Include="Resources\HealExpList.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\MovementTypes.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Include="Resources\PD\ClassEquip.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

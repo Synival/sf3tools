@@ -180,7 +180,7 @@ namespace SF3.Models.Files.X1 {
             }
 
             if (tileMovementAddress >= 0)
-                tables.Add(TileMovementTable = TileMovementTable.Create(Data, "TileMovement", ResourceFile("MovementTypes.xml"), tileMovementAddress, true));
+                tables.Add(TileMovementTable = TileMovementTable.Create(Data, "TileMovement", tileMovementAddress, true));
 
             return tables;
         }

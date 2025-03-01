@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 
 namespace CommonLib.Utils {
@@ -25,5 +26,15 @@ namespace CommonLib.Utils {
             var hexName = value.ToString(formatString);
             return hexName + ((name != null) ? ": " + name : "");
         }
+
+        /// <summary>
+        /// Returns the name of the enum if it's defined or an alternative string retrieved with a function.
+        /// </summary>
+        /// <typeparam name="T">Type of the enum whose value you want to retrieve.</typeparam>
+        /// <param name="value">Value to retrieve a name from.</param>
+        /// <param name="alternate">Function to use if the value in the requested enum T is not defined.</param>
+        /// <returns>The name of the enum value if it is defined or a result of alternate(value).</returns>
+        public static string EnumNameOr<T>(T value, Func<T, string> alternate) where T : System.Enum
+            => Enum.IsDefined(typeof(T), value) ? value.ToString() : alternate(value);
     }
 }

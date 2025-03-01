@@ -1,4 +1,5 @@
 using CommonLib.NamedValues;
+using SF3.Types;
 
 namespace SF3.NamedValues {
     public static class ValueNames {
@@ -22,8 +23,8 @@ namespace SF3.NamedValues {
             = new NamedValueFromResourceForScenariosInfo("Monsters.xml");
         public static readonly MonsterForSlotInfo MonsterForSlotInfo
             = new MonsterForSlotInfo();
-        public static readonly NamedValueFromResourceInfo MovementTypeInfo
-            = new NamedValueFromResourceInfo("MovementTypes.xml");
+        public static readonly NamedValueFromEnum<MovementType> MovementTypeInfo
+            = new NamedValueFromEnum<MovementType>();
         public static readonly NamedValueFromResourceInfo SexInfo
             = new NamedValueFromResourceInfo("Sexes.xml");
         public static readonly NamedValueFromResourceInfo SpecialEffectInfo
