@@ -16,8 +16,8 @@ namespace SF3.Models.Structs.X1.Battle {
         private readonly int _unknown0x0EAddr;
         private readonly int _creepUpWhenOutOfRangeAddr;
         private readonly int _facingIsBossAddr;
-        private readonly int _unknown0x12Addr;
-        private readonly int _controlTypeAddr;
+        private readonly int _respawnCountAddr;
+        private readonly int _teamIdAddr;
         private readonly int _condition1ZoneAddr;
         private readonly int _condition1MovementAddr;
         private readonly int _condition1UnknownAddr;
@@ -65,8 +65,8 @@ namespace SF3.Models.Structs.X1.Battle {
             _unknown0x0EAddr        = Address + 0x0E; // 1 byte
             _creepUpWhenOutOfRangeAddr = Address + 0x0F; // 1 byte
             _facingIsBossAddr       = Address + 0x10; // 1 byte
-            _controlTypeAddr        = Address + 0x11; // 1 byte
-            _unknown0x12Addr        = Address + 0x12; // 1 byte
+            _teamIdAddr             = Address + 0x11; // 1 byte
+            _respawnCountAddr       = Address + 0x12; // 1 byte
             _condition1ZoneAddr     = Address + 0x13; // 1 byte
             _condition1MovementAddr = Address + 0x14; // 1 byte
             _condition1UnknownAddr  = Address + 0x15; // 1 byte
@@ -204,16 +204,16 @@ namespace SF3.Models.Structs.X1.Battle {
 
         [TableViewModelColumn(displayOrder: 13, displayFormat: "X2", displayGroup: "Page2")]
         [BulkCopy]
-        public int ControlType {
-            get => Data.GetByte(_controlTypeAddr);
-            set => Data.SetByte(_controlTypeAddr, (byte) value);
+        public int TeamID {
+            get => Data.GetByte(_teamIdAddr);
+            set => Data.SetByte(_teamIdAddr, (byte) value);
         }
 
-        [TableViewModelColumn(displayOrder: 14, displayName: "+0x12", displayFormat: "X2", displayGroup: "Page2")]
+        [TableViewModelColumn(displayOrder: 14, displayName: "RespawnCount?", displayFormat: "X2", displayGroup: "Page2")]
         [BulkCopy]
-        public int Unknown0x12 {
-            get => Data.GetByte(_unknown0x12Addr);
-            set => Data.SetByte(_unknown0x12Addr, (byte) value);
+        public int RespawnCount {
+            get => Data.GetByte(_respawnCountAddr);
+            set => Data.SetByte(_respawnCountAddr, (byte) value);
         }
 
         // ------------------------------------------------------------------------------------------------------------
