@@ -355,17 +355,17 @@ namespace MPD_Analyzer {
             var header = mpdFile.MPDHeader;
             var errors = new List<string>();
 
-            var mc2  = mpdFile.ModelCollections.FirstOrDefault(x => x.ChunkIndex == 2);
+            var mc1  = mpdFile.ModelCollections.FirstOrDefault(x => x.ChunkIndex == 1);
             var mc20 = mpdFile.ModelCollections.FirstOrDefault(x => x.ChunkIndex == 20);
 
-            if (mc2 != null) {
+            if (mc1 != null) {
                 var expectedHmm = header.HasHighMemoryChunk1;
-                var actualHmm   = HasHighMemoryModels(mc2) == true;
+                var actualHmm   = HasHighMemoryModels(mc1) == true;
 
                 if (expectedHmm && !actualHmm)
-                    errors.Add("Chunk[2] models have low memory, but they should be high memory");
+                    errors.Add("Chunk[1] models have low memory, but they should be high memory");
                 else if (!expectedHmm && actualHmm)
-                    errors.Add("Chunk[2] models have high memory, but they should be low memory");
+                    errors.Add("Chunk[1] models have high memory, but they should be low memory");
             }
 
             if (mc20 != null && HasHighMemoryModels(mc20) == false)

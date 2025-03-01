@@ -187,9 +187,18 @@ namespace SF3.Models.Structs.MPD {
             set => MapFlags = value ? (ushort) (MapFlags | 0x0200) : (ushort) (MapFlags & ~0x0200);
         }
 
+        [TableViewModelColumn(displayOrder: 0.053f, displayName: nameof(ForceLowMemoryChunk1) + " (Scn1)", visibilityProperty: nameof(IsScenario1OrEarlier))]
+        public bool ForceLowMemoryChunk1 {
+            get => IsScenario1OrEarlier ? (MapFlags & 0x8000) == 0x8000 : false;
+            set {
+                if (IsScenario1OrEarlier)
+                    MapFlags = value ? (ushort) (MapFlags | 0x8000) : (ushort) (MapFlags & ~0x8000);
+            }
+        }
+
         [TableViewModelColumn(displayOrder: 0.055f, displayName: nameof(HasHighMemoryChunk1) + " (Scn1)", visibilityProperty: nameof(IsScenario1OrEarlier))]
         public bool HasHighMemoryChunk1
-            => IsScenario1OrEarlier && HasSurfaceModel;
+            => IsScenario1OrEarlier && HasSurfaceModel && !ForceLowMemoryChunk1;
 
         [TableViewModelColumn(displayOrder: 0.06f, displayName: nameof(Chunk20IsSurfaceModelIfExists) + " (Scn2+)", visibilityProperty: nameof(IsScenario2OrLater))]
         public bool Chunk20IsSurfaceModelIfExists {
