@@ -197,8 +197,26 @@ namespace SF3.Models.Files.MPD {
             var tables = new List<ITable>();
 
             // TODO: put somewhere else!!
-            if (header.OffsetModelSwitchGroups != 0)
+            if (header.OffsetModelSwitchGroups != 0) {
                 tables.Add(ModelSwitchGroupsTable = ModelSwitchGroupsTable.Create(Data, "ModelSwitchGroups", header.OffsetModelSwitchGroups - c_RamOffset));
+
+                ModelsEnabledGroupsByAddr = ModelSwitchGroupsTable
+                    .Where(x => x.EnabledModelsOffset > 0)
+                    .ToDictionary(
+                        x => (int) x.EnabledModelsOffset,
+                        x => ModelIDTable.Create(Data, x.Name + "_EnabledIDs (0x" + x.EnabledModelsOffset.ToString("X") + ")", (int) x.EnabledModelsOffset - c_RamOffset)
+                    );
+
+                ModelsDisabledGroupsByAddr = ModelSwitchGroupsTable
+                    .Where(x => x.DisabledModelsOffset > 0)
+                    .ToDictionary(
+                        x => (int) x.DisabledModelsOffset,
+                        x => ModelIDTable.Create(Data, x.Name + "_DisabledIDs (0x" + x.DisabledModelsOffset.ToString("X") + ")", (int) x.DisabledModelsOffset - c_RamOffset)
+                    );
+
+                tables.AddRange(ModelsEnabledGroupsByAddr.Values);
+                tables.AddRange(ModelsDisabledGroupsByAddr.Values);
+            }
 
             // TODO: put somewhere else!!
             if (header.OffsetGroundAnimation != 0)
@@ -1092,6 +1110,9 @@ namespace SF3.Models.Files.MPD {
 
         [BulkCopyRecurse]
         public ModelSwitchGroupsTable ModelSwitchGroupsTable { get; private set; }
+
+        public Dictionary<int, ModelIDTable> ModelsEnabledGroupsByAddr { get; private set; }
+        public Dictionary<int, ModelIDTable> ModelsDisabledGroupsByAddr { get; private set; }
 
         [BulkCopyRecurse]
         public UnknownUInt8Table GroundAnimationTable { get; private set; }
