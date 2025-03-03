@@ -12,19 +12,19 @@ namespace SF3.Win.Views.MPD {
                 return null;
 
             var ngc = Model.NameGetterContext;
-            CreateChild(new ModelView("Header", Model.MPDHeader, ngc));
+            CreateChild(new DataModelView("Header", Model.MPDHeader, ngc));
 
             if (Model.LightPalette != null)
                 CreateChild(new ColorTableView("Light Palette", Model.LightPalette, Model.NameGetterContext));
 
             if (Model.LightPosition != null)
-                CreateChild(new ModelView("Light Position", Model.LightPosition, ngc));
+                CreateChild(new DataModelView("Light Position", Model.LightPosition, ngc));
 
             if (Model.Unknown1Table != null)
                 CreateChild(new TableView("Unknown 1",  Model.Unknown1Table, ngc));
 
             if (Model.LightAdjustment != null)
-                CreateChild(new ModelView("Light Adjustment", Model.LightAdjustment, ngc));
+                CreateChild(new DataModelView("Light Adjustment", Model.LightAdjustment, ngc));
 
             if (Model.ModelSwitchGroupsTable != null)
                 CreateChild(new ModelSwitchGroupsView("Model Switch Groups", Model));
@@ -36,7 +36,7 @@ namespace SF3.Win.Views.MPD {
                 CreateChild(new TableView("Unknown 2",  Model.Unknown2Table, ngc));
 
             if (Model.Gradient != null)
-                CreateChild(new ModelView("Gradient",  Model.Gradient, ngc));
+                CreateChild(new DataModelView("Gradient",  Model.Gradient, ngc));
 
             if (Model.GroundAnimationTable != null)
                 CreateChild(new TableView("Ground Animation",  Model.GroundAnimationTable, ngc));

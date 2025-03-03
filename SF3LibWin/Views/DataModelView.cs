@@ -11,10 +11,10 @@ using SF3.Win.Extensions;
 using static CommonLib.Extensions.TypeExtensions;
 
 namespace SF3.Win.Views {
-    public class ModelView : ViewBase {
+    public class DataModelView : ViewBase {
         private static int s_controlIndex = 1;
 
-        public ModelView(string name, object model, INameGetterContext nameGetterContext, Type modelType = null)
+        public DataModelView(string name, object model, INameGetterContext nameGetterContext, Type modelType = null)
         : base(name) {
             Model = model;
             NameGetterContext = nameGetterContext;

@@ -12,7 +12,7 @@ namespace SF3.Win.Views.X1 {
 
             var ngc = Model.NameGetterContext;
             if (Model.BattleHeader != null)
-                CreateChild(new ModelView("Header", Model.BattleHeader, ngc));
+                CreateChild(new DataModelView("Header", Model.BattleHeader, ngc));
             if (Model.SlotTable != null) {
                 CreateChild(new TableView("Slots 1", Model.SlotTable, ngc, displayGroups: ["Metadata", "Page1"]));
                 CreateChild(new TableView("Slots 2", Model.SlotTable, ngc, displayGroups: ["Metadata", "Page2"]));
