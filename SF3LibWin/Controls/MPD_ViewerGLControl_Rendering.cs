@@ -167,6 +167,8 @@ namespace SF3.Win.Controls {
             UpdateTilePosition();
 
             GL.ClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+            GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit | ClearBufferMask.StencilBufferBit);
+
             DrawScene();
 
             SwapBuffers();
@@ -300,318 +302,378 @@ namespace SF3.Win.Controls {
 
         private void DrawScene() {
             GL.StencilMask(0xFF);
-            GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit | ClearBufferMask.StencilBufferBit);
 
+            // Enable 'CullFace' to draw single-sided, and 'StencilTest' for gradients on various render passes.
             GL.Enable(EnableCap.CullFace);
-            if (DrawNormals) {
-                using (_world.NormalsShader.Use()) {
-                    if (DrawSurfaceModel && _surfaceModel?.Blocks?.Length > 0) {
-                        foreach (var block in _surfaceModel.Blocks) {
-                            if (block.Model != null || block.UntexturedModel != null) {
-                                block.Model?.Draw(_world.NormalsShader, null);
-                                block.UntexturedModel?.Draw(_world.NormalsShader, null);
-                            }
-                        }
-                    }
-                    if (DrawModels && _models?.ModelsByMemoryAddress != null) {
-                        var modelsWithGroups = _models.Models
-                            .Select(x => new { Model = x, ModelGroup = _models.ModelsByMemoryAddress.TryGetValue(x.PData1, out ModelGroup pd) ? pd : null })
-                            .Where(x => x.ModelGroup != null)
-                            .ToArray();
+            GL.Enable(EnableCap.StencilTest);
+            GL.StencilOp(StencilOp.Keep, StencilOp.Keep, StencilOp.Replace);
 
-                        foreach (var mwg in modelsWithGroups) {
-                            SetModelAndNormalMatricesForModel(mwg.Model, _world.NormalsShader);
-                            mwg.ModelGroup.SolidTexturedModel?.Draw(_world.NormalsShader, null);
-                            mwg.ModelGroup.SolidUntexturedModel?.Draw(_world.NormalsShader, null);
-                            mwg.ModelGroup.SemiTransparentTexturedModel?.Draw(_world.NormalsShader, null);
-                            mwg.ModelGroup.SemiTransparentUntexturedModel?.Draw(_world.NormalsShader, null);
-                        }
+            if (DrawSkyBox)
+                DrawSceneSkyBox();
+            if (DrawGround)
+                DrawSceneGround();
 
-                        // Reset model matrices to their identity.
-                        UpdateShaderModelMatrix(_world.NormalsShader, Matrix4.Identity);
-                        UpdateShaderNormalMatrix(_world.NormalsShader, Matrix3.Identity);
-                    }
-                }
-            }
-            else {
-                GL.Enable(EnableCap.StencilTest);
-                GL.StencilOp(StencilOp.Keep, StencilOp.Keep, StencilOp.Replace);
+            if (DrawNormals)
+                DrawSceneObjectNormals();
+            else if (DrawModels || DrawSurfaceModel || DrawTerrainTypes || DrawEventIDs)
+                DrawSceneObjects();
 
-                var lightingTexture = _surfaceModel.LightingTexture ?? _world.WhiteTexture;
-                UpdateLightingMode(_world.ObjectShader, false);
+            // Done rendering gradients; disable the stencil test.
+            GL.Disable(EnableCap.StencilTest);
 
-                if (DrawSkyBox && MPD_File.Scenario >= ScenarioType.Scenario2 && _skyBoxModel.Model != null) {
-                    GL.DepthMask(false);
-                    UpdateShaderProjectionMatrix(_world.TextureShader, Matrix4.Identity);
+            if (DrawWireframe)
+                DrawSceneWireframes();
 
-                    const float c_repeatCount = 8f;
-                    var xOffset = (MathHelpers.ActualMod((Yaw / 360f) * c_repeatCount, 1.0f) - 0.5f) * 2.0f;
-                    var yOffset = (float) Math.Sin(-Pitch / 360.0f) * 32f + 0.975f;
-
-                    UpdateShaderViewMatrix(_world.TextureShader, Matrix4.Identity * Matrix4.CreateTranslation(xOffset, yOffset, 0));
-
-                    GL.StencilFunc(StencilFunction.Always, 1, 0x02);
-                    GL.StencilMask(0x02);
-
-                    using (_skyBoxModel.Texture.Use(TextureUnit.Texture0))
-                        _skyBoxModel.Model.Draw(_world.TextureShader, null);
-
-                    if (DrawGradients && _gradients?.SkyBoxGradientModel != null) {
-                        UpdateShaderProjectionMatrix(_world.SolidShader, Matrix4.Identity);
-                        UpdateShaderViewMatrix(_world.SolidShader, Matrix4.Identity);
-
-                        GL.StencilFunc(StencilFunction.Equal, 1, 0x02);
-                        _gradients.SkyBoxGradientModel.Draw(_world.SolidShader, null);
-    
-                        UpdateShaderProjectionMatrix(_world.SolidShader, _projectionMatrix);
-                        UpdateShaderViewMatrix(_world.SolidShader, _viewMatrix);
-                    }
-
-                    UpdateShaderProjectionMatrix(_world.TextureShader, _projectionMatrix);
-                    UpdateShaderViewMatrix(_world.TextureShader, _viewMatrix);
-                    GL.DepthMask(true);
-                }
-
-                if (DrawGround && _groundModel.Model != null) {
-                    GL.DepthMask(false);
-
-                    GL.StencilFunc(StencilFunction.Always, 1, 0x01);
-                    GL.StencilMask(0x01);
-
-                    Vector3 glow = Vector3.Zero;
-                    if (ApplyLighting && MPD_File.LightAdjustment != null) {
-                        var lightAdj = MPD_File.LightAdjustment;
-                        glow = new Vector3(
-                            lightAdj.GroundRAdjustment / (float) 0x1F, 
-                            lightAdj.GroundGAdjustment / (float) 0x1F, 
-                            lightAdj.GroundBAdjustment / (float) 0x1F
-                        );
-                    }
-                    UpdateGroundGlow(_world.TextureShader, glow);
-
-                    using (_groundModel.Texture.Use(TextureUnit.Texture0))
-                        _groundModel.Model.Draw(_world.TextureShader, null);
-
-                    UpdateGroundGlow(_world.TextureShader, Vector3.Zero);
-
-                    if (DrawGradients && _gradients?.GroundGradientModel != null) {
-                        UpdateShaderProjectionMatrix(_world.SolidShader, Matrix4.Identity);
-                        UpdateShaderViewMatrix(_world.SolidShader, Matrix4.Identity);
-
-                        GL.StencilFunc(StencilFunction.Equal, 1, 0x01);
-                        _gradients.GroundGradientModel.Draw(_world.SolidShader, null);
-    
-                        UpdateShaderProjectionMatrix(_world.SolidShader, _projectionMatrix);
-                        UpdateShaderViewMatrix(_world.SolidShader, _viewMatrix);
-                    }
-
-                    GL.DepthMask(true);
-                }
-
-                GL.StencilFunc(StencilFunction.Always, 4, 0x04);
-                GL.StencilMask(0x04);
-
-                var terrainTypesTexture = DrawTerrainTypes ? _surfaceModel.TerrainTypesTexture : _world.TransparentBlackTexture;
-                var eventIdsTexture     = DrawEventIDs     ? _surfaceModel.EventIDsTexture     : _world.TransparentBlackTexture;
-
-                if (DrawModels && _models?.Models != null) {
-                    using (_world.TransparentBlackTexture.Use(MPD_TextureUnit.TextureTerrainTypes))
-                    using (_world.TransparentBlackTexture.Use(MPD_TextureUnit.TextureEventIDs))
-                    using (lightingTexture.Use(MPD_TextureUnit.TextureLighting))
-                    using (_world.ObjectShader.Use()) {
-                        var modelsWithGroups = _models.Models
-                            .Select(x => new { Model = x, ModelGroup = _models.ModelsByMemoryAddress.TryGetValue(x.PData1, out ModelGroup pd) ? pd : null })
-                            .Where(x => x.ModelGroup != null)
-                            .ToArray();
-
-                        // Pass 1: Textured models
-                        foreach (var mwg in modelsWithGroups.Where(x => x.ModelGroup.SolidTexturedModel != null).ToArray()) {
-                            SetModelAndNormalMatricesForModel(mwg.Model, _world.ObjectShader);
-                            mwg.ModelGroup.SolidTexturedModel.Draw(_world.ObjectShader);
-                        }
-
-                        // Pass 2: Untextured models
-                        using (_world.WhiteTexture.Use(MPD_TextureUnit.TextureAtlas)) {
-                            foreach (var mwg in modelsWithGroups.Where(x => x.ModelGroup.SolidUntexturedModel != null).ToArray()) {
-                                SetModelAndNormalMatricesForModel(mwg.Model, _world.ObjectShader);
-                                mwg.ModelGroup.SolidUntexturedModel.Draw(_world.ObjectShader, null);
-                            }
-                        }
-
-                        // Draw semi-transparent shaders now. Don't write to the depth buffer.
-                        GL.DepthMask(false);
-
-                        // Pass 3: Semi-transparent textured models
-                        foreach (var mwg in modelsWithGroups.Where(x => x.ModelGroup.SemiTransparentTexturedModel != null).ToArray()) {
-                            SetModelAndNormalMatricesForModel(mwg.Model, _world.ObjectShader);
-                            mwg.ModelGroup.SemiTransparentTexturedModel.Draw(_world.ObjectShader);
-                        }
-
-                        // Pass 4: Semi-transparent untextured models
-                        using (_world.WhiteTexture.Use(MPD_TextureUnit.TextureAtlas)) {
-                            foreach (var mwg in modelsWithGroups.Where(x => x.ModelGroup.SemiTransparentUntexturedModel != null).ToArray()) {
-                                SetModelAndNormalMatricesForModel(mwg.Model, _world.ObjectShader);
-                                mwg.ModelGroup.SemiTransparentUntexturedModel.Draw(_world.ObjectShader, null);
-                            }
-                        }
-
-                        // Done drawing semi-transparent shaders now. Write to the depth buffer again.
-                        GL.DepthMask(true);
-                    }
-
-                    // Reset model matrices to their identity.
-                    UpdateShaderModelMatrix(_world.ObjectShader, Matrix4.Identity);
-                    UpdateShaderNormalMatrix(_world.ObjectShader, Matrix3.Identity);
-                }
-
-                if ((DrawSurfaceModel || DrawTerrainTypes || DrawEventIDs) && _surfaceModel?.Blocks?.Length > 0) {
-                    GL.Enable(EnableCap.PolygonOffsetFill);
-                    GL.PolygonOffset(-1.0f, -1.0f);
-
-                    var useFancyOutdoorSurfaceLighting = (MPD_File == null) ? false : MPD_File.MPDHeader.OutdoorLighting;
-                    if (useFancyOutdoorSurfaceLighting)
-                        UpdateLightingMode(_world.ObjectShader, true);
-
-                    using (terrainTypesTexture.Use(MPD_TextureUnit.TextureTerrainTypes))
-                    using (eventIdsTexture.Use(MPD_TextureUnit.TextureEventIDs))
-                    using (lightingTexture.Use(MPD_TextureUnit.TextureLighting))
-                    using (DrawSurfaceModel ? null : _world.TransparentBlackTexture.Use(MPD_TextureUnit.TextureAtlas))
-                    using (_world.ObjectShader.Use()) {
-                        foreach (var block in _surfaceModel.Blocks) {
-                            if (DrawSurfaceModel)
-                                block.Model?.Draw(_world.ObjectShader);
-                            else
-                                block.Model?.Draw(_world.ObjectShader, null);
-
-                            using (_world.TransparentBlackTexture.Use(MPD_TextureUnit.TextureAtlas))
-                                block.UntexturedModel?.Draw(_world.ObjectShader, null);
-                        }
-                    }
-
-                    if (useFancyOutdoorSurfaceLighting)
-                        UpdateLightingMode(_world.ObjectShader, false);
-
-                    GL.Disable(EnableCap.PolygonOffsetFill);
-                }
-
-                if (DrawGradients && _gradients?.ModelsGradientModel != null) {
-                    GL.Disable(EnableCap.DepthTest);
-                    GL.DepthMask(false);
-
-                    UpdateShaderProjectionMatrix(_world.SolidShader, Matrix4.Identity);
-                    UpdateShaderViewMatrix(_world.SolidShader, Matrix4.Identity);
-
-                    GL.StencilFunc(StencilFunction.Equal, 4, 0x04);
-                    _gradients.ModelsGradientModel.Draw(_world.SolidShader, null);
-    
-                    UpdateShaderProjectionMatrix(_world.SolidShader, _projectionMatrix);
-                    UpdateShaderViewMatrix(_world.SolidShader, _viewMatrix);
-                    GL.DepthMask(true);
-                    GL.Enable(EnableCap.DepthTest);
-                }
-
-                GL.Disable(EnableCap.StencilTest);
-            }
-
-            if (DrawWireframe) {
-                GL.PolygonMode(MaterialFace.FrontAndBack, PolygonMode.Line);
-                GL.Enable(EnableCap.PolygonOffsetLine);
-                GL.PolygonOffset(-2.0f, -2.0f);
-
-                using (_world.WireframeShader.Use())
-                using (_world.TileWireframeTexture.Use(TextureUnit.Texture1)) {
-                    if (DrawSurfaceModel || (!DrawNormals && (DrawTerrainTypes || DrawEventIDs))) {
-                        foreach (var block in _surfaceModel.Blocks) {
-                            block.UntexturedModel?.Draw(_world.WireframeShader, null);
-                            block.Model?.Draw(_world.WireframeShader, null);
-                        }
-                    }
-
-                    if (DrawModels) {
-                        foreach (var model in _models.Models) {
-                            var modelGroup = _models.ModelsByMemoryAddress.TryGetValue(model.PData1, out ModelGroup pd) ? pd : null;
-                            if (modelGroup != null) {
-                                SetModelAndNormalMatricesForModel(model, _world.WireframeShader);
-                                modelGroup.SolidTexturedModel?.Draw(_world.WireframeShader);
-                                modelGroup.SolidUntexturedModel?.Draw(_world.WireframeShader);
-                                modelGroup.SemiTransparentTexturedModel?.Draw(_world.WireframeShader);
-                                modelGroup.SemiTransparentUntexturedModel?.Draw(_world.WireframeShader);
-                            }
-                        }
-                    }
-                }
-
-                UpdateShaderModelMatrix(_world.WireframeShader, Matrix4.Identity);
-                GL.Disable(EnableCap.PolygonOffsetLine);
-                GL.PolygonMode(MaterialFace.FrontAndBack, PolygonMode.Fill);
-            }
+            // Done rendering the real scene; disable one-sided rendering.
             GL.Disable(EnableCap.CullFace);
 
-            if (DrawBoundaries) {
-                if (_surfaceModel.CameraBoundaryModel != null || _surfaceModel.BattleBoundaryModel != null) {
-                    using (_world.SolidShader.Use()) {
-                        GL.Disable(EnableCap.DepthTest);
-                        _surfaceModel.BattleBoundaryModel?.Draw(_world.SolidShader, null);
-                        _surfaceModel.CameraBoundaryModel?.Draw(_world.SolidShader, null);
-                        GL.Enable(EnableCap.DepthTest);
+            if (DrawBoundaries)
+                DrawSceneBoundaries();
+
+            DrawEditorElements();
+        }
+
+        private void DrawSceneObjectNormals() {
+            if (DrawModels)
+                DrawSceneModelsNormals();
+
+            if (DrawSurfaceModel)
+                DrawSceneSurfaceModelNormals();
+        }
+
+        private void DrawSceneObjects() {
+            GL.StencilFunc(StencilFunction.Always, 4, 0x04);
+            GL.StencilMask(0x04);
+
+            if (DrawModels)
+                DrawSceneModels();
+
+            if (DrawSurfaceModel || DrawTerrainTypes || DrawEventIDs)
+                DrawSceneSurfaceModel();
+
+            if (DrawGradients)
+                DrawSceneGradient(_gradients?.ModelsGradientModel, 0x04, true);
+        }
+
+        private void DrawSceneWireframes() {
+            GL.PolygonMode(MaterialFace.FrontAndBack, PolygonMode.Line);
+            GL.Enable(EnableCap.PolygonOffsetLine);
+            GL.PolygonOffset(-2.0f, -2.0f);
+
+            using (_world.WireframeShader.Use())
+            using (_world.TileWireframeTexture.Use(TextureUnit.Texture1)) {
+                if (DrawModels)
+                    DrawSceneModelsWireframe();
+
+                if (DrawSurfaceModel || (!DrawNormals && (DrawTerrainTypes || DrawEventIDs)))
+                    DrawSceneSurfaceModelWireframe();
+            }
+
+            UpdateShaderModelMatrix(_world.WireframeShader, Matrix4.Identity);
+            GL.Disable(EnableCap.PolygonOffsetLine);
+            GL.PolygonMode(MaterialFace.FrontAndBack, PolygonMode.Fill);
+        }
+
+        private void DrawSceneBoundaries() {
+            if (_surfaceModel.CameraBoundaryModel != null || _surfaceModel.BattleBoundaryModel != null) {
+                using (_world.SolidShader.Use()) {
+                    GL.Disable(EnableCap.DepthTest);
+                    _surfaceModel.BattleBoundaryModel?.Draw(_world.SolidShader, null);
+                    _surfaceModel.CameraBoundaryModel?.Draw(_world.SolidShader, null);
+                    GL.Enable(EnableCap.DepthTest);
+                }
+            }
+        }
+
+        private void DrawEditorElements() {
+            using (_world.TextureShader.Use()) {
+                DrawSurfaceEditorTileSelected();
+                DrawSurfaceEditorTileHover();
+
+                if (DrawHelp)
+                    DrawEditorHelp();
+            }
+        }
+
+        private void DrawSceneModelsNormals() {
+            if (_models?.ModelsByMemoryAddress == null)
+                return;
+
+            var modelsWithGroups = _models.Models
+                .Select(x => new { Model = x, ModelGroup = _models.ModelsByMemoryAddress.TryGetValue(x.PData1, out ModelGroup pd) ? pd : null })
+                .Where(x => x.ModelGroup != null)
+                .ToArray();
+
+            foreach (var mwg in modelsWithGroups) {
+                SetModelAndNormalMatricesForModel(mwg.Model, _world.NormalsShader);
+                mwg.ModelGroup.SolidTexturedModel?.Draw(_world.NormalsShader, null);
+                mwg.ModelGroup.SolidUntexturedModel?.Draw(_world.NormalsShader, null);
+                mwg.ModelGroup.SemiTransparentTexturedModel?.Draw(_world.NormalsShader, null);
+                mwg.ModelGroup.SemiTransparentUntexturedModel?.Draw(_world.NormalsShader, null);
+            }
+
+            // Reset model matrices to their identity.
+            UpdateShaderModelMatrix(_world.NormalsShader, Matrix4.Identity);
+            UpdateShaderNormalMatrix(_world.NormalsShader, Matrix3.Identity);
+        }
+
+        private void DrawSceneSurfaceModelNormals() {
+            if (!(_surfaceModel?.Blocks?.Length > 0))
+                return;
+
+            using (_world.NormalsShader.Use()) {
+                foreach (var block in _surfaceModel.Blocks) {
+                    if (block.Model != null || block.UntexturedModel != null) {
+                        block.Model?.Draw(_world.NormalsShader, null);
+                        block.UntexturedModel?.Draw(_world.NormalsShader, null);
                     }
                 }
             }
+        }
 
-            using (_world.TextureShader.Use()) {
-                if (_surfaceEditor.TileSelectedModel != null) {
-                    GL.Disable(EnableCap.DepthTest);
-                    using (_surfaceEditor.TileSelectedTexture.Use())
-                        _surfaceEditor.TileSelectedModel.Draw(_world.TextureShader);
-                    GL.Enable(EnableCap.DepthTest);
+        private void DrawSceneSkyBox() {
+            if (MPD_File.Scenario >= ScenarioType.Scenario2 && _skyBoxModel.Model != null) {
+                GL.Disable(EnableCap.DepthTest);
+                GL.DepthMask(false);
+
+                UpdateShaderProjectionMatrix(_world.TextureShader, Matrix4.Identity);
+
+                const float c_repeatCount = 8f;
+                var xOffset = (MathHelpers.ActualMod((Yaw / 360f) * c_repeatCount, 1.0f) - 0.5f) * 2.0f;
+                var yOffset = (float) Math.Sin(-Pitch / 360.0f) * 32f + 0.975f;
+
+                UpdateShaderViewMatrix(_world.TextureShader, Matrix4.Identity * Matrix4.CreateTranslation(xOffset, yOffset, 0));
+
+                GL.StencilFunc(StencilFunction.Always, 2, 0x02);
+                GL.StencilMask(0x02);
+
+                using (_skyBoxModel.Texture.Use(TextureUnit.Texture0))
+                    _skyBoxModel.Model.Draw(_world.TextureShader, null);
+
+                if (DrawGradients)
+                    DrawSceneGradient(_gradients?.SkyBoxGradientModel, 0x02, false);
+
+                UpdateShaderProjectionMatrix(_world.TextureShader, _projectionMatrix);
+                UpdateShaderViewMatrix(_world.TextureShader, _viewMatrix);
+
+                GL.DepthMask(true);
+                GL.Enable(EnableCap.DepthTest);
+            }
+        }
+
+        private void DrawSceneGround() {
+            if (_groundModel.Model != null) {
+                GL.Disable(EnableCap.DepthTest);
+                GL.DepthMask(false);
+
+                Vector3 glow = Vector3.Zero;
+                if (ApplyLighting && MPD_File.LightAdjustment != null) {
+                    var lightAdj = MPD_File.LightAdjustment;
+                    glow = new Vector3(
+                        lightAdj.GroundRAdjustment / (float) 0x1F, 
+                        lightAdj.GroundGAdjustment / (float) 0x1F, 
+                        lightAdj.GroundBAdjustment / (float) 0x1F
+                    );
+                }
+                UpdateGroundGlow(_world.TextureShader, glow);
+
+                GL.StencilFunc(StencilFunction.Always, 1, 0x01);
+                GL.StencilMask(0x01);
+
+                using (_groundModel.Texture.Use(TextureUnit.Texture0))
+                    _groundModel.Model.Draw(_world.TextureShader, null);
+
+                if (DrawGradients)
+                    DrawSceneGradient(_gradients?.GroundGradientModel, 0x01, false);
+
+                UpdateGroundGlow(_world.TextureShader, Vector3.Zero);
+
+                GL.DepthMask(true);
+                GL.Enable(EnableCap.DepthTest);
+            }
+        }
+
+        private void DrawSceneModels() {
+            if (_models?.Models == null)
+                return;
+
+            UpdateLightingMode(_world.ObjectShader, false);
+            var lightingTexture = _surfaceModel.LightingTexture ?? _world.WhiteTexture;
+
+            using (_world.TransparentBlackTexture.Use(MPD_TextureUnit.TextureTerrainTypes))
+            using (_world.TransparentBlackTexture.Use(MPD_TextureUnit.TextureEventIDs))
+            using (lightingTexture.Use(MPD_TextureUnit.TextureLighting))
+            using (_world.ObjectShader.Use()) {
+                var modelsWithGroups = _models.Models
+                    .Select(x => new { Model = x, ModelGroup = _models.ModelsByMemoryAddress.TryGetValue(x.PData1, out ModelGroup pd) ? pd : null })
+                    .Where(x => x.ModelGroup != null)
+                    .ToArray();
+
+                // Pass 1: Textured models
+                foreach (var mwg in modelsWithGroups.Where(x => x.ModelGroup.SolidTexturedModel != null).ToArray()) {
+                    SetModelAndNormalMatricesForModel(mwg.Model, _world.ObjectShader);
+                    mwg.ModelGroup.SolidTexturedModel.Draw(_world.ObjectShader);
                 }
 
-                if (_surfaceEditor.TileHoverModel != null) {
-                    GL.Disable(EnableCap.DepthTest);
-                    using (_surfaceEditor.TileHoverTexture.Use())
-                        _surfaceEditor.TileHoverModel.Draw(_world.TextureShader);
-                    GL.Enable(EnableCap.DepthTest);
+                // Pass 2: Untextured models
+                using (_world.WhiteTexture.Use(MPD_TextureUnit.TextureAtlas)) {
+                    foreach (var mwg in modelsWithGroups.Where(x => x.ModelGroup.SolidUntexturedModel != null).ToArray()) {
+                        SetModelAndNormalMatricesForModel(mwg.Model, _world.ObjectShader);
+                        mwg.ModelGroup.SolidUntexturedModel.Draw(_world.ObjectShader, null);
+                    }
                 }
 
-                if (DrawHelp && _surfaceEditor.HelpModel != null) {
-                    const float c_viewSize = 0.40f;
+                // Draw semi-transparent shaders now. Don't write to the depth buffer.
+                GL.DepthMask(false);
 
-                    var viewportRatio = (float) Width / Height;
-                    var textureRatio = (float) _surfaceEditor.HelpTexture.Width / _surfaceEditor.HelpTexture.Height;
+                // Pass 3: Semi-transparent textured models
+                foreach (var mwg in modelsWithGroups.Where(x => x.ModelGroup.SemiTransparentTexturedModel != null).ToArray()) {
+                    SetModelAndNormalMatricesForModel(mwg.Model, _world.ObjectShader);
+                    mwg.ModelGroup.SemiTransparentTexturedModel.Draw(_world.ObjectShader);
+                }
 
-                    UpdateShaderViewMatrix(_world.TextureShader,
-                        Matrix4.CreateScale(2f / viewportRatio * textureRatio * c_viewSize, 2f * c_viewSize, 2f * c_viewSize) *
-                        Matrix4.CreateTranslation(1, -1, 0) *
-                        _projectionMatrix.Inverted());
+                // Pass 4: Semi-transparent untextured models
+                using (_world.WhiteTexture.Use(MPD_TextureUnit.TextureAtlas)) {
+                    foreach (var mwg in modelsWithGroups.Where(x => x.ModelGroup.SemiTransparentUntexturedModel != null).ToArray()) {
+                        SetModelAndNormalMatricesForModel(mwg.Model, _world.ObjectShader);
+                        mwg.ModelGroup.SemiTransparentUntexturedModel.Draw(_world.ObjectShader, null);
+                    }
+                }
 
-                    GL.Disable(EnableCap.DepthTest);
-                    using (_surfaceEditor.HelpTexture.Use())
-                        _surfaceEditor.HelpModel.Draw(_world.TextureShader);
-                    GL.Enable(EnableCap.DepthTest);
+                // Done drawing semi-transparent shaders now. Write to the depth buffer again.
+                GL.DepthMask(true);
+            }
 
-                    UpdateShaderViewMatrix(_world.TextureShader, _viewMatrix);
+            // Reset model matrices to their identity.
+            UpdateShaderModelMatrix(_world.ObjectShader, Matrix4.Identity);
+            UpdateShaderNormalMatrix(_world.ObjectShader, Matrix3.Identity);
+        }
+
+        private void DrawSceneSurfaceModel() {
+            if (!(_surfaceModel?.Blocks?.Length > 0))
+                return;
+
+            var terrainTypesTexture = DrawTerrainTypes ? _surfaceModel.TerrainTypesTexture : _world.TransparentBlackTexture;
+            var eventIdsTexture     = DrawEventIDs     ? _surfaceModel.EventIDsTexture     : _world.TransparentBlackTexture;
+            var lightingTexture     = _surfaceModel.LightingTexture ?? _world.WhiteTexture;
+
+            GL.Enable(EnableCap.PolygonOffsetFill);
+            GL.PolygonOffset(-1.0f, -1.0f);
+
+            var useFancyOutdoorSurfaceLighting = (MPD_File == null) ? false : MPD_File.MPDHeader.OutdoorLighting;
+            if (useFancyOutdoorSurfaceLighting)
+                UpdateLightingMode(_world.ObjectShader, true);
+
+            using (terrainTypesTexture.Use(MPD_TextureUnit.TextureTerrainTypes))
+            using (eventIdsTexture.Use(MPD_TextureUnit.TextureEventIDs))
+            using (lightingTexture.Use(MPD_TextureUnit.TextureLighting))
+            using (DrawSurfaceModel ? null : _world.TransparentBlackTexture.Use(MPD_TextureUnit.TextureAtlas))
+            using (_world.ObjectShader.Use()) {
+                foreach (var block in _surfaceModel.Blocks) {
+                    if (DrawSurfaceModel)
+                        block.Model?.Draw(_world.ObjectShader);
+                    else
+                        block.Model?.Draw(_world.ObjectShader, null);
+
+                    using (_world.TransparentBlackTexture.Use(MPD_TextureUnit.TextureAtlas))
+                        block.UntexturedModel?.Draw(_world.ObjectShader, null);
                 }
             }
 
-            // TODO: Code from SurfaceMap2DControl to indicate untagged tiles. Use this later somehow!!
-#if false
-            // Indicate unidentified textures.
-            var expectedTag = new TagKey(textureFlags);
-            if (!texture.Tags.ContainsKey(expectedTag)) {
-                // NOTE: Graphics.FromImage() throws an OutOfMemoryException due to a bad GDI+ implementation,
-                // so we have to do it this way.
-                using var questionMark = new Bitmap(image.Width / 2, image.Height / 2);
-                using (var g = Graphics.FromImage(questionMark)) {
-                    g.Clear(Color.Black);
-                    g.DrawString("?", new Font(new FontFamily("Consolas"), (int) (questionMark.Width * 0.75)), Brushes.White, 0, 0);
-                    g.Flush();
-                }
+            if (useFancyOutdoorSurfaceLighting)
+                UpdateLightingMode(_world.ObjectShader, false);
 
-                var posX = image.Width  - questionMark.Width;
-                var posY = image.Height - questionMark.Height;
-                image.SafeDrawImage(questionMark, posX, posY);
+            GL.Disable(EnableCap.PolygonOffsetFill);
+        }
+
+        private void DrawSceneGradient(QuadModel gradientModel, int stencilBit, bool depthCurrentlyEnabled) {
+            if (gradientModel == null)
+                return;
+
+            // TODO: 'depthCurrentlyEnabled' is pretty stilly. We should track the state somehow, and just push it.
+            if (depthCurrentlyEnabled) {
+                GL.Disable(EnableCap.DepthTest);
+                GL.DepthMask(false);
             }
-#endif
+
+            UpdateShaderProjectionMatrix(_world.SolidShader, Matrix4.Identity);
+            UpdateShaderViewMatrix(_world.SolidShader, Matrix4.Identity);
+
+            GL.StencilFunc(StencilFunction.Equal, stencilBit, stencilBit);
+            gradientModel.Draw(_world.SolidShader, null);
+    
+            UpdateShaderProjectionMatrix(_world.SolidShader, _projectionMatrix);
+            UpdateShaderViewMatrix(_world.SolidShader, _viewMatrix);
+
+            if (depthCurrentlyEnabled) {
+                GL.DepthMask(true);
+                GL.Enable(EnableCap.DepthTest);
+            }
+        }
+
+        private void DrawSceneModelsWireframe() {
+            if (_models.Models == null)
+                return;
+
+            foreach (var model in _models.Models) {
+                var modelGroup = _models.ModelsByMemoryAddress.TryGetValue(model.PData1, out ModelGroup pd) ? pd : null;
+                if (modelGroup != null) {
+                    SetModelAndNormalMatricesForModel(model, _world.WireframeShader);
+                    modelGroup.SolidTexturedModel?.Draw(_world.WireframeShader);
+                    modelGroup.SolidUntexturedModel?.Draw(_world.WireframeShader);
+                    modelGroup.SemiTransparentTexturedModel?.Draw(_world.WireframeShader);
+                    modelGroup.SemiTransparentUntexturedModel?.Draw(_world.WireframeShader);
+                }
+            }
+        }
+
+        private void DrawSceneSurfaceModelWireframe() {
+            foreach (var block in _surfaceModel.Blocks) {
+                block.UntexturedModel?.Draw(_world.WireframeShader, null);
+                block.Model?.Draw(_world.WireframeShader, null);
+            }
+        }
+
+        private void DrawSurfaceEditorTileSelected() {
+            if (_surfaceEditor.TileSelectedModel == null)
+                return;
+
+            GL.Disable(EnableCap.DepthTest);
+            using (_surfaceEditor.TileSelectedTexture.Use())
+                _surfaceEditor.TileSelectedModel.Draw(_world.TextureShader);
+            GL.Enable(EnableCap.DepthTest);
+        }
+
+        private void DrawSurfaceEditorTileHover() {
+            if (_surfaceEditor.TileHoverModel == null)
+                return;
+
+            GL.Disable(EnableCap.DepthTest);
+            using (_surfaceEditor.TileHoverTexture.Use())
+                _surfaceEditor.TileHoverModel.Draw(_world.TextureShader);
+            GL.Enable(EnableCap.DepthTest);
+        }
+
+        private void DrawEditorHelp() {
+            if (_surfaceEditor.HelpModel == null)
+                return;
+
+            const float c_viewSize = 0.40f;
+
+            var viewportRatio = (float) Width / Height;
+            var textureRatio = (float) _surfaceEditor.HelpTexture.Width / _surfaceEditor.HelpTexture.Height;
+
+            UpdateShaderViewMatrix(_world.TextureShader,
+                Matrix4.CreateScale(2f / viewportRatio * textureRatio * c_viewSize, 2f * c_viewSize, 2f * c_viewSize) *
+                Matrix4.CreateTranslation(1, -1, 0) *
+                _projectionMatrix.Inverted());
+
+            GL.Disable(EnableCap.DepthTest);
+            using (_surfaceEditor.HelpTexture.Use())
+                _surfaceEditor.HelpModel.Draw(_world.TextureShader);
+            GL.Enable(EnableCap.DepthTest);
+
+            UpdateShaderViewMatrix(_world.TextureShader, _viewMatrix);
         }
 
         private Dictionary<Model, Matrix4?> _modelMatricesByModel = [];
