@@ -488,6 +488,12 @@ namespace SF3.Models.Structs.X1.Battle {
             set => EnemyFlags = (ushort) (value ? (EnemyFlags | 0x0002) : (EnemyFlags & ~0x0002));
         }
 
+        [TableViewModelColumn(displayOrder: 45.15f, displayGroup: "Page4")]
+        public bool UnknownAITargettingAdustment {
+            get => (EnemyFlags & 0x0010) != 0;
+            set => EnemyFlags = (ushort) (value ? (EnemyFlags | 0x0010) : (EnemyFlags & ~0x0010));
+        }
+
         [TableViewModelColumn(displayOrder: 45.2f, displayGroup: "Page4")]
         public bool NoTurn {
             get => (EnemyFlags & 0x0040) != 0;
