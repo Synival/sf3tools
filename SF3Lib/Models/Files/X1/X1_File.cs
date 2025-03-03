@@ -87,11 +87,14 @@ namespace SF3.Models.Files.X1 {
 
                 // Get the address of the selected battle, or, if it's not available, the first available in the BattlePointersTable.
                 Battles = new Dictionary<MapLeaderType, Battle>();
+                Battle lastBattle = null;
                 foreach (var mapLeader in (MapLeaderType[]) Enum.GetValues(typeof(MapLeaderType))) {
                     var mapIndex = (int) mapLeader;
                     var battleTableAddress = BattlePointersTable[mapIndex].Pointer;
-                    if (battleTableAddress != 0)
-                        Battles.Add(mapLeader, Battle.Create(Data, NameGetterContext, mapLeader, battleTableAddress - sub, hasLargeEnemyTable));
+                    if (battleTableAddress != 0) {
+                        lastBattle = Battle.Create(Data, NameGetterContext, mapLeader, battleTableAddress - sub, hasLargeEnemyTable, Scenario, lastBattle);
+                        Battles.Add(mapLeader, lastBattle);
+                    }
                 }
 
                 // Determine the location of the TileMovementTable, which isn't so straight-forward.

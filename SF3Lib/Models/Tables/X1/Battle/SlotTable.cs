@@ -1,14 +1,17 @@
 using System;
 using SF3.ByteData;
 using SF3.Models.Structs.X1.Battle;
+using SF3.Types;
 
 namespace SF3.Models.Tables.X1.Battle {
     public class SlotTable : FixedSizeTable<Slot> {
-        protected SlotTable(IByteData data, string name, int address, int size) : base(data, name, address, size) {
+        protected SlotTable(IByteData data, string name, int address, int size, ScenarioType scenario, Slot prevSlot) : base(data, name, address, size) {
+            Scenario = scenario;
+            PrevSlot = prevSlot;
         }
 
-        public static SlotTable Create(IByteData data, string name, int address, int size) {
-            var newTable = new SlotTable(data, name, address, size);
+        public static SlotTable Create(IByteData data, string name, int address, int size, ScenarioType scenario, Slot prevSlot) {
+            var newTable = new SlotTable(data, name, address, size, scenario, prevSlot);
             if (!newTable.Load())
                 throw new InvalidOperationException("Couldn't initialize table");
             return newTable;
@@ -17,8 +20,12 @@ namespace SF3.Models.Tables.X1.Battle {
         public override bool Load() {
             return Load((id, address) => {
                 var name = (id < 12) ? ("CharacterSlot" + id.ToString("D2")) : ("EnemySlot" + (id - 12).ToString("D2"));
-                return new Slot(Data, id, name, address);
+                PrevSlot = new Slot(Data, id, name, address, Scenario, PrevSlot);
+                return PrevSlot;
             });
         }
+
+        public ScenarioType Scenario { get; }
+        public Slot PrevSlot { get; private set; }
     }
 }

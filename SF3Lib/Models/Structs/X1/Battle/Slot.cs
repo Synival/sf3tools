@@ -4,6 +4,8 @@ using SF3.Types;
 
 namespace SF3.Models.Structs.X1.Battle {
     public class Slot : Struct {
+        private readonly int _battleAddrBase;
+
         private readonly int _enemyIDAddr;
         private readonly int _xAddr;
         private readonly int _yAddr;
@@ -50,8 +52,12 @@ namespace SF3.Models.Structs.X1.Battle {
         private readonly int _enemyFlagsAddr;
         private readonly int _flagTieInAddr;
 
-        public Slot(IByteData data, int id, string name, int address)
+        public Slot(IByteData data, int id, string name, int address, ScenarioType scenario, Slot prevSlot)
         : base(data, id, name, address, 0x34) {
+            Scenario = scenario;
+            PrevSlot = prevSlot;
+            _battleAddrBase = GetBattleAddrBase(scenario);
+
             _enemyIDAddr            = Address + 0x00; // 2 bytes  
             _xAddr                  = Address + 0x02; // 2 bytes
             _yAddr                  = Address + 0x04; // 2 bytes
@@ -99,6 +105,24 @@ namespace SF3.Models.Structs.X1.Battle {
             _flagTieInAddr          = Address + 0x32; // 2 bytes
         }
 
+        private int GetBattleAddrBase(ScenarioType scenario) {
+            switch (scenario) {
+                case ScenarioType.Scenario1:
+                    return 0x0602f6f0;
+                case ScenarioType.Scenario2:
+                    return 0x06030970;
+                case ScenarioType.Scenario3:
+                    return 0x060312A0;
+                case ScenarioType.PremiumDisk:
+                    return 0x06030980;
+                default:
+                    return 0;
+            }
+        }
+
+        public ScenarioType Scenario { get; }
+        public Slot PrevSlot { get; }
+
         // ------------------------------------------------------------------------------------------------------------
         // Page 1
         // ------------------------------------------------------------------------------------------------------------
@@ -110,6 +134,26 @@ namespace SF3.Models.Structs.X1.Battle {
             get => Data.GetWord(_enemyIDAddr);
             set => Data.SetWord(_enemyIDAddr, value);
         }
+
+        public bool IsEnemy =>
+            EnemyID >= 0x01 && EnemyID < 0x8000 && EnemyID != 0x5B;
+
+        public int BattleIDEnemyCounter
+            => PrevSlot == null ? 0x80 : PrevSlot.BattleIDEnemyCounter + (PrevSlot.IsEnemy ? 1 : 0);
+
+        public int BattleID =>
+            IsEnemy ? BattleIDEnemyCounter : (EnemyID == 0x5B) ? CharacterPlus : -1;
+
+        [TableViewModelColumn(displayOrder: 0.7f, displayName: "Battle ID", displayGroup: "Page1", displayFormat: "X2")]
+        public string BattleIDStr =>
+            (BattleID < 0) ? "--" : BattleID.ToString("X2");
+
+        public int BattleAddress =>
+            (BattleID < 0) ? 0 : (BattleID - 0x80) * 0xB0 + _battleAddrBase;
+
+        [TableViewModelColumn(displayOrder: 0.8f, displayName: "Battle Address", displayGroup: "Page1", isPointer: true)]
+        public string BattleAddressStr =>
+            (BattleID < 0) ? "--" : BattleAddress.ToString("X6");
 
         [TableViewModelColumn(displayOrder: 1, displayGroup: "Page1")]
         [BulkCopy]
