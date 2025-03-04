@@ -156,7 +156,7 @@ namespace SF3.Win.OpenGL.MPD_File {
         }
 
         public void DrawSceneBoundaries(GeneralResources general, BoundaryModelResources boundaryModels) {
-            if (boundaryModels.CameraBoundaryModel == null && boundaryModels.BattleBoundaryModel == null)
+            if (boundaryModels?.CameraBoundaryModel == null && boundaryModels?.BattleBoundaryModel == null)
                 return;
 
             using (general.SolidShader.Use()) {
@@ -237,7 +237,7 @@ namespace SF3.Win.OpenGL.MPD_File {
             ref Matrix4 projectionMatrix,
             ref Matrix4 viewMatrix
         ) {
-            if (!(skyBoxModel.Model != null))
+            if (skyBoxModel?.Model == null)
                 return;
 
             GL.Disable(EnableCap.DepthTest);
@@ -276,7 +276,7 @@ namespace SF3.Win.OpenGL.MPD_File {
             ref Matrix4 projectionMatrix,
             ref Matrix4 viewMatrix
         ) {
-            if (groundModel.Model == null)
+            if (groundModel?.Model == null)
                 return;
 
             GL.Disable(EnableCap.DepthTest);
@@ -450,7 +450,7 @@ namespace SF3.Win.OpenGL.MPD_File {
             float cameraYaw,
             float cameraPitch
         ) {
-            if (models.Models == null)
+            if (models?.Models == null)
                 return;
 
             foreach (var model in models.Models) {
@@ -466,6 +466,9 @@ namespace SF3.Win.OpenGL.MPD_File {
         }
 
         public void DrawSceneSurfaceModelWireframe(GeneralResources general, SurfaceModelResources surfaceModel) {
+            if (surfaceModel?.Blocks == null)
+                return;
+
             foreach (var block in surfaceModel.Blocks) {
                 block.UntexturedModel?.Draw(general.WireframeShader, null);
                 block.Model?.Draw(general.WireframeShader, null);
@@ -473,7 +476,7 @@ namespace SF3.Win.OpenGL.MPD_File {
         }
 
         public void DrawSurfaceEditorTileSelected(GeneralResources general, SurfaceEditorResources surfaceEditor) {
-            if (surfaceEditor.TileSelectedModel == null)
+            if (surfaceEditor?.TileSelectedModel == null)
                 return;
 
             GL.Disable(EnableCap.DepthTest);
@@ -483,7 +486,7 @@ namespace SF3.Win.OpenGL.MPD_File {
         }
 
         public void DrawSurfaceEditorTileHover(GeneralResources general, SurfaceEditorResources surfaceEditor) {
-            if (surfaceEditor.TileHoverModel == null)
+            if (surfaceEditor?.TileHoverModel == null)
                 return;
 
             GL.Disable(EnableCap.DepthTest);
@@ -500,7 +503,7 @@ namespace SF3.Win.OpenGL.MPD_File {
             ref Matrix4 projectionMatrix,
             ref Matrix4 viewMatrix
         ) {
-            if (surfaceEditor.HelpModel == null)
+            if (surfaceEditor?.HelpModel == null)
                 return;
 
             const float c_viewSize = 0.40f;

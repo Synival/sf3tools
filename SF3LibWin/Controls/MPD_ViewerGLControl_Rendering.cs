@@ -69,7 +69,7 @@ namespace SF3.Win.Controls {
 
             UpdateLightingTexture();
             UpdateLightPosition();
-            _general.ObjectShader.UpdateUniform(ShaderUniformType.LightingMode, false);
+            _general.ObjectShader.UpdateUniform(ShaderUniformType.LightingMode, 0);
             _general.ObjectShader.UpdateUniform(ShaderUniformType.GlobalGlow, Vector3.Zero);
 
             foreach (var shader in _general.Shaders) {
@@ -211,12 +211,10 @@ namespace SF3.Win.Controls {
         }
 
         private void UpdateProjectionMatrices() {
-            if ((_general?.Shaders?.Count ?? 0) == 0)
-                return;
-
             UpdateProjectionMatrix();
-            foreach (var shader in _general.Shaders)
-                shader.UpdateUniform(ShaderUniformType.ProjectionMatrix, ref _projectionMatrix);
+            if (_general?.Shaders?.Count > 0)
+                foreach (var shader in _general.Shaders)
+                    shader.UpdateUniform(ShaderUniformType.ProjectionMatrix, ref _projectionMatrix);
         }
 
         private void UpdateViewMatrix() {

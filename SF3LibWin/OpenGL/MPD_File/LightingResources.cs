@@ -4,6 +4,8 @@ using System.Drawing.Imaging;
 using System.Runtime.InteropServices;
 using CommonLib.Utils;
 using SF3.Models.Files.MPD;
+using SF3.Models.Structs.MPD;
+using SF3.Models.Tables.MPD;
 
 namespace SF3.Win.OpenGL.MPD_File {
     public class LightingResources : ResourcesBase, IMPD_Resources {
@@ -31,12 +33,18 @@ namespace SF3.Win.OpenGL.MPD_File {
                 SetLightingTexture(textureBitmap != null ? new Texture(textureBitmap, clampToEdge: false) : null);
         }
 
-        private Bitmap CreateLightPaletteBitmap(IMPD_File mpdFile) {
-            var lightPal = mpdFile?.LightPalette;
+        public void Update(ColorTable lightPal, LightAdjustmentModel lightAdjustment) {
+            using (var textureBitmap = CreateLightPaletteBitmap(lightPal, lightAdjustment))
+                SetLightingTexture(textureBitmap != null ? new Texture(textureBitmap, clampToEdge: false) : null);
+        }
+
+        private Bitmap CreateLightPaletteBitmap(IMPD_File mpdFile)
+            => CreateLightPaletteBitmap(mpdFile?.LightPalette, mpdFile?.LightAdjustment);
+
+        private Bitmap CreateLightPaletteBitmap(ColorTable lightPal, LightAdjustmentModel lightAdjustment) {
             if (lightPal == null)
                 return null;
 
-            var lightAdjustment = mpdFile.LightAdjustment;
             var adjR = lightAdjustment?.RAdjustment ?? 0;
             var adjG = lightAdjustment?.GAdjustment ?? 0;
             var adjB = lightAdjustment?.BAdjustment ?? 0;

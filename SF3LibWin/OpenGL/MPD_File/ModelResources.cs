@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using CommonLib.Arrays;
 using CommonLib.Extensions;
 using CommonLib.Imaging;
 using CommonLib.SGL;
@@ -33,7 +34,7 @@ namespace SF3.Win.OpenGL.MPD_File {
         public void Update(IMPD_File mpdFile) {
             Reset();
 
-            if (mpdFile.ModelCollections == null)
+            if (mpdFile?.ModelCollections == null)
                 return;
 
             var modelsList = new List<Model>();
@@ -75,6 +76,29 @@ namespace SF3.Win.OpenGL.MPD_File {
             }
 
             Models = modelsList.ToArray();
+        }
+
+        public void Update(IMPD_File mpdFile, ModelCollection models, PDataModel pdata) {
+            Reset();
+            if (models == null || pdata == null)
+                return;
+
+            PDatasByAddress[pdata.RamAddress]           = pdata;
+            VerticesByAddress[pdata.VerticesOffset]     = models.VertexTablesByMemoryAddress .TryGetValue(pdata.VerticesOffset,   out var vv) ? vv.ToArray() : null;
+            PolygonsByAddress[pdata.PolygonsOffset]     = models.PolygonTablesByMemoryAddress.TryGetValue(pdata.PolygonsOffset,   out var pv) ? pv.ToArray() : null;
+            AttributesByAddress[pdata.AttributesOffset] = models.AttrTablesByMemoryAddress   .TryGetValue(pdata.AttributesOffset, out var av) ? av.ToArray() : null;
+
+            AddModel(mpdFile, models.TextureCollection, pdata);
+
+            var model = new Model(new ByteData.ByteData(new ByteArray(256)), 0, "Model", 0, true);
+            model.PData1 = pdata.RamAddress;
+            model.PositionX = -32 * 32;
+            model.PositionZ = -32 * 32;
+            model.ScaleX = 1.0f;
+            model.ScaleY = 1.0f;
+            model.ScaleZ = 1.0f;
+
+            Models = [model];
         }
 
         private TValue GetFromAnyCollection<TValue>(IMPD_File mpdFile, Func<ModelCollection, Dictionary<uint, TValue>> tableGetter, uint address) where TValue : class {

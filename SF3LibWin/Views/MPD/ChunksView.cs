@@ -37,7 +37,7 @@ namespace SF3.Win.Views.MPD {
             if (Model.ModelCollections != null)
                 foreach (var modelCollection in Model.ModelCollections)
                     if (modelCollection != null)
-                        AddChunkView(modelCollection.ChunkIndex, "Models", (name) => new ModelChunkView(name, modelCollection));
+                        AddChunkView(modelCollection.ChunkIndex, "Models", (name) => new ModelChunkView(name, Model, modelCollection));
 
             if (Model.TextureCollections != null)
                 foreach (var texCollection in Model.TextureCollections)
