@@ -30,6 +30,7 @@ namespace SF3.Win.OpenGL.MPD_File {
             public bool UseOutsideLighting;
             public bool RotateSpritesUp;
             public bool ForceTwoSidedTextures;
+            public bool SmoothLighting;
 
             public bool WillDrawSurfaceModel
                 => DrawSurfaceModel || DrawTerrainTypes || DrawEventIDs;
@@ -324,6 +325,8 @@ namespace SF3.Win.OpenGL.MPD_File {
                 return;
 
             general.ObjectShader.UpdateUniform(ShaderUniformType.LightingMode, options.ApplyLighting ? 1 : 0);
+            general.ObjectShader.UpdateUniform(ShaderUniformType.SmoothLighting, options.SmoothLighting);
+
             var lightingTexture = lighting.LightingTexture ?? general.WhiteTexture;
 
             using (general.TransparentBlackTexture.Use(MPD_TextureUnit.TextureTerrainTypes))
@@ -391,8 +394,8 @@ namespace SF3.Win.OpenGL.MPD_File {
             GL.Enable(EnableCap.PolygonOffsetFill);
             GL.PolygonOffset(-1.0f, -1.0f);
 
-            if (options.UseOutsideLighting)
-                general.ObjectShader.UpdateUniform(ShaderUniformType.LightingMode, options.ApplyLighting ? 2 : 0);
+            general.ObjectShader.UpdateUniform(ShaderUniformType.LightingMode, options.ApplyLighting ? (options.UseOutsideLighting ? 2 : 1) : 0);
+            general.ObjectShader.UpdateUniform(ShaderUniformType.SmoothLighting, options.SmoothLighting);
 
             using (terrainTypesTexture.Use(MPD_TextureUnit.TextureTerrainTypes))
             using (eventIdsTexture.Use(MPD_TextureUnit.TextureEventIDs))
@@ -409,9 +412,6 @@ namespace SF3.Win.OpenGL.MPD_File {
                         block.UntexturedModel?.Draw(general.ObjectShader, null);
                 }
             }
-
-            if (options.UseOutsideLighting)
-                general.ObjectShader.UpdateUniform(ShaderUniformType.LightingMode, options.ApplyLighting ? 1 : 0);
 
             GL.Disable(EnableCap.PolygonOffsetFill);
         }

@@ -30,12 +30,12 @@ namespace SF3.Win.OpenGL.MPD_File {
 
         public void Update(IMPD_File mpdFile) {
             using (var textureBitmap = CreateLightPaletteBitmap(mpdFile))
-                SetLightingTexture(textureBitmap != null ? new Texture(textureBitmap, clampToEdge: false) : null);
+                SetLightingTexture(textureBitmap != null ? new Texture(textureBitmap, minNearest: false, magNearest: false, clampToEdge: false) : null);
         }
 
         public void Update(ColorTable lightPal, LightAdjustmentModel lightAdjustment) {
             using (var textureBitmap = CreateLightPaletteBitmap(lightPal, lightAdjustment))
-                SetLightingTexture(textureBitmap != null ? new Texture(textureBitmap, clampToEdge: false) : null);
+                SetLightingTexture(textureBitmap != null ? new Texture(textureBitmap, minNearest: false, magNearest: false, clampToEdge: false) : null);
         }
 
         private Bitmap CreateLightPaletteBitmap(IMPD_File mpdFile)

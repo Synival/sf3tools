@@ -16,6 +16,7 @@ namespace SF3.Win.OpenGL {
             { ShaderUniformType.LightPosition,    "lightPosition" },
             { ShaderUniformType.LightingMode,     "lightingMode" },
             { ShaderUniformType.GlobalGlow,       "globalGlow" },
+            { ShaderUniformType.SmoothLighting,   "smoothLighting" },
         };
 
         public class TextureInfo {

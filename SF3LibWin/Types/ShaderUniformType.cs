@@ -6,6 +6,7 @@
         NormalMatrix,
         LightPosition,
         LightingMode,
-        GlobalGlow
+        GlobalGlow,
+        SmoothLighting,
     }
 }

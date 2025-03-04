@@ -137,7 +137,7 @@ namespace SF3.Win.Controls {
                 }
             }
 
-            var dist = (float) Math.Pow(size, 0.875f) * 5f;
+            var dist = (float) Math.Pow(size, 0.875f) * 4f;
             var yawRadians = MathHelper.DegreesToRadians(Yaw);
 
             Position = new Vector3(0.66f * (float) Math.Sin(yawRadians), 0.45f, 0.66f * (float) Math.Cos(yawRadians)).Normalized() * dist;
@@ -167,9 +167,10 @@ namespace SF3.Win.Controls {
             _renderer.DrawScene(
                 _general, _models, null, null, null, null, null, _lighting, null, null,
                 new Renderer.RendererOptions() {
-                    DrawModels    = true,
-                    ApplyLighting = true,
-                    DrawWireframe = true,
+                    DrawModels     = true,
+                    ApplyLighting  = true,
+                    DrawWireframe  = true,
+                    SmoothLighting = true,
                 },
                 Yaw, Pitch, ClientSize.Width, ClientSize.Height,
                 ref _projectionMatrix, ref _viewMatrix
