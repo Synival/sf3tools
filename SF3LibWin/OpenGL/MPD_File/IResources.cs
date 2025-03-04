@@ -8,7 +8,12 @@ namespace SF3.Win.OpenGL.MPD_File {
         void Init();
 
         /// <summary>
-        /// Disposes of any resources loaded in.
+        /// Uninitializes any resources loaded during Init().
+        /// </summary>
+        void DeInit();
+
+        /// <summary>
+        /// Disposes of any resources loaded in dynamically.
         /// </summary>
         void Reset();
     }

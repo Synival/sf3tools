@@ -1,5 +1,4 @@
-﻿using System;
-using OpenTK.Graphics.OpenGL;
+﻿using OpenTK.Graphics.OpenGL;
 using OpenTK.Mathematics;
 using SF3.Models.Files.MPD;
 using SF3.Win.Extensions;
@@ -7,40 +6,11 @@ using static CommonLib.Types.CornerTypeConsts;
 using static SF3.Win.OpenGL.Shader;
 
 namespace SF3.Win.OpenGL.MPD_File {
-    public class SkyBoxModelResources : IMPD_Resources {
-        private bool disposed = false;
+    public class SkyBoxModelResources : ResourcesBase, IMPD_Resources {
+        protected override void PerformInit() { }
+        public override void DeInit() { }
 
-        protected virtual void Dispose(bool disposing) {
-            if (disposed)
-                return;
-
-            if (disposing)
-                Reset();
-
-            disposed = true;
-        }
-
-        public void Dispose() {
-            Dispose(true);
-            GC.SuppressFinalize(this);
-        }
-
-        ~SkyBoxModelResources() {
-            if (!disposed)
-                System.Diagnostics.Debug.WriteLine(GetType().Name + ": GPU Resource leak! Did you forget to call Dispose()?");
-            Dispose(false);
-        }
-
-        private bool _isInitialized = false;
-        public void Init() {
-            if (_isInitialized)
-                return;
-            _isInitialized = true;
-
-            // TODO: nothing to initialize yet!
-        }
-
-        public void Reset() {
+        public override void Reset() {
             Model?.Dispose();
             Texture?.Dispose();
 

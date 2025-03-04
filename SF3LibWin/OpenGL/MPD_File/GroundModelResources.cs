@@ -8,40 +8,11 @@ using SF3.Models.Files.MPD;
 using SF3.Win.Extensions;
 
 namespace SF3.Win.OpenGL.MPD_File {
-    public class GroundModelResources : IMPD_Resources {
-        private bool disposed = false;
+    public class GroundModelResources : ResourcesBase, IMPD_Resources {
+        protected override void PerformInit() { }
+        public override void DeInit() { }
 
-        protected virtual void Dispose(bool disposing) {
-            if (disposed)
-                return;
-
-            if (disposing)
-                Reset();
-
-            disposed = true;
-        }
-
-        public void Dispose() {
-            Dispose(true);
-            GC.SuppressFinalize(this);
-        }
-
-        ~GroundModelResources() {
-            if (!disposed)
-                System.Diagnostics.Debug.WriteLine(GetType().Name + ": GPU Resource leak! Did you forget to call Dispose()?");
-            Dispose(false);
-        }
-
-        private bool _isInitialized = false;
-        public void Init() {
-            if (_isInitialized)
-                return;
-            _isInitialized = true;
-
-            // TODO: nothing to initialize yet!
-        }
-
-        public void Reset() {
+        public override void Reset() {
             Model?.Dispose();
             Texture?.Dispose();
 

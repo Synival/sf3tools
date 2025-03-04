@@ -46,6 +46,8 @@ namespace SF3.Win.OpenGL.MPD_File {
             SkyBoxModelResources skyBoxModel,
             GradientResources gradients,
             LightAdjustmentModel lightAdj,
+            LightingResources lighting,
+            BoundaryModelResources boundaryModels,
             SurfaceEditorResources surfaceEditor,
             RendererOptions options,
             float cameraYaw,
@@ -70,7 +72,7 @@ namespace SF3.Win.OpenGL.MPD_File {
             if (options.DrawNormals)
                 DrawSceneObjectNormals(world, models, surfaceModel, options, cameraYaw, cameraPitch);
             else if (options.WillDrawAnyObjects)
-                DrawSceneObjects(world, models, surfaceModel, gradients, options, cameraYaw, cameraPitch, ref projectionMatrix, ref viewMatrix);
+                DrawSceneObjects(world, models, surfaceModel, gradients, lighting, options, cameraYaw, cameraPitch, ref projectionMatrix, ref viewMatrix);
 
             // Done rendering gradients; disable the stencil test.
             GL.Disable(EnableCap.StencilTest);
@@ -82,7 +84,7 @@ namespace SF3.Win.OpenGL.MPD_File {
             GL.Disable(EnableCap.CullFace);
 
             if (options.DrawBoundaries)
-                DrawSceneBoundaries(world, surfaceModel);
+                DrawSceneBoundaries(world, boundaryModels);
 
             DrawEditorElements(world, surfaceEditor, options, screenWidth, screenHeight, ref projectionMatrix, ref viewMatrix);
         }
@@ -107,6 +109,7 @@ namespace SF3.Win.OpenGL.MPD_File {
             ModelResources models,
             SurfaceModelResources surfaceModel,
             GradientResources gradients,
+            LightingResources lighting,
             RendererOptions options,
             float cameraYaw,
             float cameraPitch,
@@ -117,10 +120,10 @@ namespace SF3.Win.OpenGL.MPD_File {
             GL.StencilMask(0x04);
 
             if (options.DrawModels)
-                DrawSceneModels(world, surfaceModel, models, options, cameraYaw, cameraPitch);
+                DrawSceneModels(world, models, lighting, options, cameraYaw, cameraPitch);
 
             if (options.WillDrawSurfaceModel)
-                DrawSceneSurfaceModel(world, surfaceModel, options);
+                DrawSceneSurfaceModel(world, surfaceModel, lighting, options);
 
             if (options.DrawGradients)
                 DrawSceneGradient(world, gradients?.ModelsGradientModel, 0x04, true, ref projectionMatrix, ref viewMatrix);
@@ -152,14 +155,15 @@ namespace SF3.Win.OpenGL.MPD_File {
             GL.PolygonMode(MaterialFace.FrontAndBack, PolygonMode.Fill);
         }
 
-        public void DrawSceneBoundaries(WorldResources world, SurfaceModelResources surfaceModel) {
-            if (surfaceModel.CameraBoundaryModel != null || surfaceModel.BattleBoundaryModel != null) {
-                using (world.SolidShader.Use()) {
-                    GL.Disable(EnableCap.DepthTest);
-                    surfaceModel.BattleBoundaryModel?.Draw(world.SolidShader, null);
-                    surfaceModel.CameraBoundaryModel?.Draw(world.SolidShader, null);
-                    GL.Enable(EnableCap.DepthTest);
-                }
+        public void DrawSceneBoundaries(WorldResources world, BoundaryModelResources boundaryModels) {
+            if (boundaryModels.CameraBoundaryModel == null && boundaryModels.BattleBoundaryModel == null)
+                return;
+
+            using (world.SolidShader.Use()) {
+                GL.Disable(EnableCap.DepthTest);
+                boundaryModels.BattleBoundaryModel?.Draw(world.SolidShader, null);
+                boundaryModels.CameraBoundaryModel?.Draw(world.SolidShader, null);
+                GL.Enable(EnableCap.DepthTest);
             }
         }
 
@@ -305,8 +309,8 @@ namespace SF3.Win.OpenGL.MPD_File {
 
         public void DrawSceneModels(
             WorldResources world,
-            SurfaceModelResources surfaceModel,
             ModelResources models,
+            LightingResources lighting,
             RendererOptions options,
             float cameraYaw,
             float cameraPitch
@@ -315,7 +319,7 @@ namespace SF3.Win.OpenGL.MPD_File {
                 return;
 
             world.ObjectShader.UpdateUniform(ShaderUniformType.LightingMode, options.ApplyLighting ? 1 : 0);
-            var lightingTexture = surfaceModel.LightingTexture ?? world.WhiteTexture;
+            var lightingTexture = lighting.LightingTexture ?? world.WhiteTexture;
 
             using (world.TransparentBlackTexture.Use(MPD_TextureUnit.TextureTerrainTypes))
             using (world.TransparentBlackTexture.Use(MPD_TextureUnit.TextureEventIDs))
@@ -369,6 +373,7 @@ namespace SF3.Win.OpenGL.MPD_File {
         public void DrawSceneSurfaceModel(
             WorldResources world,
             SurfaceModelResources surfaceModel,
+            LightingResources lighting,
             RendererOptions options
         ) {
             if (!(surfaceModel?.Blocks?.Length > 0))
@@ -376,7 +381,7 @@ namespace SF3.Win.OpenGL.MPD_File {
 
             var terrainTypesTexture = options.DrawTerrainTypes ? surfaceModel.TerrainTypesTexture : world.TransparentBlackTexture;
             var eventIdsTexture     = options.DrawEventIDs     ? surfaceModel.EventIDsTexture     : world.TransparentBlackTexture;
-            var lightingTexture     = surfaceModel.LightingTexture ?? world.WhiteTexture;
+            var lightingTexture     = lighting.LightingTexture ?? world.WhiteTexture;
 
             GL.Enable(EnableCap.PolygonOffsetFill);
             GL.PolygonOffset(-1.0f, -1.0f);

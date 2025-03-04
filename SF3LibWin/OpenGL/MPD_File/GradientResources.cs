@@ -9,38 +9,11 @@ using SF3.Models.Files.MPD;
 using SF3.Models.Structs.MPD;
 
 namespace SF3.Win.OpenGL.MPD_File {
-    public class GradientResources : IMPD_Resources {
-        private bool _isInitialized = false;
-        public void Init() {
-            if (_isInitialized)
-                return;
-            _isInitialized = true;
-        }
+    public class GradientResources : ResourcesBase, IMPD_Resources {
+        protected override void PerformInit() { }
+        public override void DeInit() { }
 
-        private bool disposed = false;
-
-        protected virtual void Dispose(bool disposing) {
-            if (disposed)
-                return;
-
-            if (disposing)
-                Reset();
-
-            disposed = true;
-        }
-
-        public void Dispose() {
-            Dispose(true);
-            GC.SuppressFinalize(this);
-        }
-
-        ~GradientResources() {
-            if (!disposed)
-                System.Diagnostics.Debug.WriteLine(GetType().Name + ": GPU Resource leak! Did you forget to call Dispose()?");
-            Dispose(false);
-        }
-
-        public void Reset() {
+        public override void Reset() {
             Models?.Dispose();
 
             GroundGradientModel = null;

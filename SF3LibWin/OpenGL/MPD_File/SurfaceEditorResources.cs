@@ -1,5 +1,4 @@
-﻿using System;
-using System.Drawing;
+﻿using System.Drawing;
 using CommonLib;
 using OpenTK.Mathematics;
 using SF3.Models.Files.MPD;
@@ -8,13 +7,8 @@ using SF3.Win.Properties;
 using static CommonLib.Types.CornerTypeConsts;
 
 namespace SF3.Win.OpenGL.MPD_File {
-    public class SurfaceEditorResources : IResources {
-        private bool _isInitialized = false;
-        public void Init() {
-            if (_isInitialized)
-                return;
-            _isInitialized = true;
-
+    public class SurfaceEditorResources : ResourcesBase {
+        protected override void PerformInit() {
             Textures = [
                 (TileHoverTexture    = new Texture(Resources.TileHoverBmp)),
                 (TileSelectedTexture = new Texture(Resources.TileSelectedBmp)),
@@ -34,9 +28,7 @@ namespace SF3.Win.OpenGL.MPD_File {
             ];
         }
 
-        private bool disposed = false;
-
-        public void Reset() {
+        public override void DeInit() {
             Models?.Dispose();
             Textures?.Dispose();
 
@@ -52,23 +44,8 @@ namespace SF3.Win.OpenGL.MPD_File {
             Textures = null;
         }
 
-        protected virtual void Dispose(bool disposing) {
-            if (disposed)
-                return;
-            if (disposing)
-                Reset();
-            disposed = true;
-        }
-
-        public void Dispose() {
-            Dispose(true);
-            GC.SuppressFinalize(this);
-        }
-
-        ~SurfaceEditorResources() {
-            if (!disposed)
-                System.Diagnostics.Debug.WriteLine(GetType().Name + ": GPU Resource leak! Did you forget to call Dispose()?");
-            Dispose(false);
+        public override void Reset() {
+            // Nothing loaded dynamically, so nothing to reset.
         }
 
         public void UpdateTileHoverModel(IMPD_File mpdFile, WorldResources world, Point? tilePos) {

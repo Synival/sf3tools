@@ -12,7 +12,7 @@ using SF3.Win.Extensions;
 using static CommonLib.Types.CornerTypeConsts;
 
 namespace SF3.Win.OpenGL.MPD_File {
-    public class SurfaceModelBlockResources : IMPD_Resources {
+    public class SurfaceModelBlockResources : ResourcesBase, IMPD_Resources {
         public SurfaceModelBlockResources(int blockNum) {
             BlockNum = blockNum;
             TileX1 = (blockNum % 16) * 4;
@@ -21,38 +21,10 @@ namespace SF3.Win.OpenGL.MPD_File {
             TileY2 = TileY1 + 4;
         }
 
-        private bool _isInitialized = false;
-        public void Init() {
-            if (_isInitialized)
-                return;
-            _isInitialized = true;
+        protected override void PerformInit() { }
+        public override void DeInit() { }
 
-            Models = [];
-        }
-
-        private bool disposed = false;
-        protected virtual void Dispose(bool disposing) {
-            if (disposed)
-                return;
-
-            if (disposing)
-                Reset();
-
-            disposed = true;
-        }
-
-        public void Dispose() {
-            Dispose(true);
-            GC.SuppressFinalize(this);
-        }
-
-        ~SurfaceModelBlockResources() {
-            if (!disposed)
-                System.Diagnostics.Debug.WriteLine(GetType().Name + ": GPU Resource leak! Did you forget to call Dispose()?");
-            Dispose(false);
-        }
-
-        public void Reset() {
+        public override void Reset() {
             Models?.Dispose();
             Models?.Clear();
 
@@ -63,8 +35,6 @@ namespace SF3.Win.OpenGL.MPD_File {
             Model = null;
             UntexturedModel = null;
             SelectionModel = null;
-
-            Models = null;
 
             NeedsUpdate = false;
         }
@@ -200,7 +170,7 @@ namespace SF3.Win.OpenGL.MPD_File {
                 models.Add(SelectionModel);
             }
 
-            Models = [.. models];
+            Models.AddRange(models);
             NeedsUpdate = false;
         }
 
@@ -217,7 +187,7 @@ namespace SF3.Win.OpenGL.MPD_File {
         public QuadModel UntexturedModel { get; private set; } = null;
         public QuadModel SelectionModel { get; private set; } = null;
 
-        public DisposableList<QuadModel> Models { get; private set; } = null;
+        public DisposableList<QuadModel> Models { get; } = [];
 
         public bool NeedsUpdate { get; private set; } = true;
     }

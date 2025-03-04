@@ -13,38 +13,11 @@ using SF3.Types;
 using SF3.Win.Extensions;
 
 namespace SF3.Win.OpenGL.MPD_File {
-    public class ModelResources : IMPD_Resources {
-        private bool _isInitialized = false;
-        public void Init() {
-            if (_isInitialized)
-                return;
-            _isInitialized = true;
-        }
+    public class ModelResources : ResourcesBase, IMPD_Resources {
+        protected override void PerformInit() { }
+        public override void DeInit() { }
 
-        private bool disposed = false;
-
-        protected virtual void Dispose(bool disposing) {
-            if (disposed)
-                return;
-
-            if (disposing)
-                Reset();
-
-            disposed = true;
-        }
-
-        public void Dispose() {
-            Dispose(true);
-            GC.SuppressFinalize(this);
-        }
-
-        ~ModelResources() {
-            if (!disposed)
-                System.Diagnostics.Debug.WriteLine(GetType().Name + ": GPU Resource leak! Did you forget to call Dispose()?");
-            Dispose(false);
-        }
-
-        public void Reset() {
+        public override void Reset() {
             foreach (var model in ModelsByMemoryAddress)
                 model.Value.Dispose();
 

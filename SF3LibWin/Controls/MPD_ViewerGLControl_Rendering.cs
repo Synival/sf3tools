@@ -1,15 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Drawing;
-using System.Drawing.Imaging;
-using System.Linq;
-using System.Runtime.InteropServices;
-using CommonLib.Utils;
 using OpenTK.Graphics.OpenGL;
 using OpenTK.Mathematics;
 using SF3.Models.Files.MPD;
-using SF3.Models.Structs.MPD.Model;
 using SF3.Types;
 using SF3.Win.OpenGL;
 using SF3.Win.OpenGL.MPD_File;
@@ -28,8 +21,7 @@ namespace SF3.Win.Controls {
 
         public void UpdateLightingTexture() {
             MakeCurrent();
-            using (var textureBitmap = CreateLightPaletteBitmap())
-                _surfaceModel.SetLightingTexture(textureBitmap != null ? new Texture(textureBitmap, clampToEdge: false) : null);
+            _lighting.Update(MPD_File);
         }
 
         public void UpdateLightPosition() {
@@ -41,40 +33,6 @@ namespace SF3.Win.Controls {
             }
         }
 
-        private Bitmap CreateLightPaletteBitmap() {
-            var lightPal = MPD_File?.LightPalette;
-            if (lightPal == null)
-                return null;
-
-            var lightAdjustment = MPD_File.LightAdjustment;
-            var adjR = lightAdjustment?.RAdjustment ?? 0;
-            var adjG = lightAdjustment?.GAdjustment ?? 0;
-            var adjB = lightAdjustment?.BAdjustment ?? 0;
-
-            var numColors = lightPal.Length;
-
-            var colorData = new byte[numColors * 4];
-            int pos = 0;
-            foreach (var color in lightPal) {
-                var colorValue = color.ColorABGR1555;
-                var colorR = MathHelpers.Clamp((short) ((colorValue >>  0) & 0x1F) + adjR, 0x00, 0x1F);
-                var colorG = MathHelpers.Clamp((short) ((colorValue >>  5) & 0x1F) + adjG, 0x00, 0x1F);
-                var colorB = MathHelpers.Clamp((short) ((colorValue >> 10) & 0x1F) + adjB, 0x00, 0x1F);
-
-                colorData[pos++] = (byte) (colorB * 255 / 31);
-                colorData[pos++] = (byte) (colorG * 255 / 31);
-                colorData[pos++] = (byte) (colorR * 255 / 31);
-                colorData[pos++] = 255;
-            }
-
-            var textureBitmap = new Bitmap(1, numColors, System.Drawing.Imaging.PixelFormat.Format32bppArgb);
-            var bitmapData = textureBitmap.LockBits(new Rectangle(0, 0, 1, numColors), ImageLockMode.WriteOnly, textureBitmap.PixelFormat);
-            Marshal.Copy(colorData, 0, bitmapData.Scan0, colorData.Length);
-            textureBitmap.UnlockBits(bitmapData);
-
-            return textureBitmap;
-        }
-
         private void OnLoadRendering() {
             MakeCurrent();
 
@@ -84,13 +42,15 @@ namespace SF3.Win.Controls {
             GL.BlendFunc(BlendingFactor.SrcAlpha, BlendingFactor.OneMinusSrcAlpha);
             GL.BlendEquationSeparate(BlendEquationMode.FuncAdd, BlendEquationMode.Max);
 
-            _world         = new WorldResources();
-            _models        = new ModelResources();
-            _surfaceModel  = new SurfaceModelResources();
-            _groundModel   = new GroundModelResources();
-            _skyBoxModel   = new SkyBoxModelResources();
-            _surfaceEditor = new SurfaceEditorResources();
-            _gradients     = new GradientResources();
+            _world          = new WorldResources();
+            _models         = new ModelResources();
+            _surfaceModel   = new SurfaceModelResources();
+            _groundModel    = new GroundModelResources();
+            _skyBoxModel    = new SkyBoxModelResources();
+            _surfaceEditor  = new SurfaceEditorResources();
+            _gradients      = new GradientResources();
+            _lighting       = new LightingResources();
+            _boundaryModels = new BoundaryModelResources();
 
             _renderer = new Renderer();
 
@@ -101,6 +61,8 @@ namespace SF3.Win.Controls {
             _skyBoxModel.Init();
             _surfaceEditor.Init();
             _gradients.Init();
+            _lighting.Init();
+            _boundaryModels.Init();
 
             SetInitialCameraPosition();
             UpdateSelectFramebuffer();
@@ -124,6 +86,8 @@ namespace SF3.Win.Controls {
             _skyBoxModel?.Dispose();
             _surfaceEditor?.Dispose();
             _gradients?.Dispose();
+            _lighting?.Dispose();
+            _boundaryModels?.Dispose();
 
             _selectFramebuffer?.Dispose();
 
@@ -134,6 +98,8 @@ namespace SF3.Win.Controls {
             _skyBoxModel       = null;
             _surfaceEditor     = null;
             _gradients         = null;
+            _lighting          = null;
+            _boundaryModels    = null;
 
             _selectFramebuffer = null;
         }
@@ -177,7 +143,8 @@ namespace SF3.Win.Controls {
 
             _renderer.DrawScene(
                 _world, _models, _surfaceModel, _groundModel, _skyBoxModel,
-                _gradients, MPD_File?.LightAdjustment, _surfaceEditor,
+                _gradients, MPD_File?.LightAdjustment, _lighting, _boundaryModels,
+                _surfaceEditor,
                 new Renderer.RendererOptions() {
                     DrawModels = DrawModels,
                     DrawSurfaceModel = DrawSurfaceModel,
@@ -228,6 +195,7 @@ namespace SF3.Win.Controls {
             _groundModel?.Update(MPD_File);
             _skyBoxModel?.Update(MPD_File);
             _gradients?.Update(MPD_File);
+            _boundaryModels?.Update(MPD_File);
             Invalidate();
         }
 
@@ -444,6 +412,8 @@ namespace SF3.Win.Controls {
         private SkyBoxModelResources _skyBoxModel = null;
         private SurfaceEditorResources _surfaceEditor = null;
         private GradientResources _gradients = null;
+        private LightingResources _lighting = null;
+        private BoundaryModelResources _boundaryModels = null;
 
         private Renderer _renderer = null;
 

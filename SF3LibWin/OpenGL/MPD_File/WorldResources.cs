@@ -1,18 +1,12 @@
-using System;
 using CommonLib;
 using SF3.Win.Properties;
 
 namespace SF3.Win.OpenGL.MPD_File {
-    public class WorldResources : IResources {
+    public class WorldResources : ResourcesBase {
         public const float ModelOffsetX = SurfaceModelResources.WidthInTiles / -2f;
         public const float ModelOffsetZ = SurfaceModelResources.HeightInTiles / -2f;
 
-        private bool _isInitialized = false;
-        public void Init() {
-            if (_isInitialized)
-                return;
-            _isInitialized = true;
-
+        protected override void PerformInit() {
             Shaders = [
                 (TextureShader    = new Shader(Resources.TextureVert,    Resources.TextureFrag)),
                 (TwoTextureShader = new Shader(Resources.TwoTextureVert, Resources.TwoTextureFrag)),
@@ -30,7 +24,7 @@ namespace SF3.Win.OpenGL.MPD_File {
             ];
         }
 
-        public void Reset() {
+        public override void DeInit() {
             Shaders?.Dispose();
             Textures?.Dispose();
 
@@ -50,25 +44,8 @@ namespace SF3.Win.OpenGL.MPD_File {
             Textures = null;
         }
 
-        private bool disposed = false;
-
-        protected virtual void Dispose(bool disposing) {
-            if (disposed)
-                return;
-            if (disposing)
-                Reset();
-            disposed = true;
-        }
-
-        public void Dispose() {
-            Dispose(true);
-            GC.SuppressFinalize(this);
-        }
-
-        ~WorldResources() {
-            if (!disposed)
-                System.Diagnostics.Debug.WriteLine(GetType().Name + ": GPU Resource leak! Did you forget to call Dispose()?");
-            Dispose(false);
+        public override void Reset() {
+            // Nothing dynmically loaded, so nothing to reset.
         }
 
         public Shader TextureShader { get; private set; } = null;
