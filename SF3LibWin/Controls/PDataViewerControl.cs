@@ -66,7 +66,8 @@ namespace SF3.Win.Controls {
             }
 
             // TODO: use good timer code from ViewerGLControl
-            _timer = new Timer() { Interval = 1000 / 60 };
+            // TODO: get this rendering at 60fps
+            _timer = new Timer() { Interval = 1000 / 45 };
             _timer.Tick += (s, a) => IncrementFrame();
             _timer.Start();
 
@@ -204,7 +205,15 @@ namespace SF3.Win.Controls {
         private void IncrementFrame() {
             if (!Visible)
                 return;
+
             Yaw = (Yaw + 1.0f) % 360f;
+
+            // TODO: this doesn't update at 30fps, please fix!
+            if (_models?.ModelsByMemoryAddress != null)
+                foreach (var modelGroup in _models.ModelsByMemoryAddress.Values)
+                    foreach (var model in modelGroup.Models)
+                        model.UpdateAnimatedTextures();
+
             Invalidate();
         }
 
