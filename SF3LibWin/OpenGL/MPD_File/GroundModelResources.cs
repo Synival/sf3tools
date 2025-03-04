@@ -8,7 +8,7 @@ using SF3.Models.Files.MPD;
 using SF3.Win.Extensions;
 
 namespace SF3.Win.OpenGL.MPD_File {
-    public class GroundModelResources : IDisposable {
+    public class GroundModelResources : IMPD_Resources {
         private bool disposed = false;
 
         protected virtual void Dispose(bool disposing) {

@@ -3,7 +3,7 @@ using CommonLib;
 using SF3.Win.Properties;
 
 namespace SF3.Win.OpenGL.MPD_File {
-    public class WorldResources : IDisposable {
+    public class WorldResources : IResources {
         public const float ModelOffsetX = SurfaceModelResources.WidthInTiles / -2f;
         public const float ModelOffsetZ = SurfaceModelResources.HeightInTiles / -2f;
 
@@ -30,32 +30,33 @@ namespace SF3.Win.OpenGL.MPD_File {
             ];
         }
 
+        public void Reset() {
+            Shaders?.Dispose();
+            Textures?.Dispose();
+
+            TextureShader    = null;
+            TwoTextureShader = null;
+            SolidShader      = null;
+            NormalsShader    = null;
+            WireframeShader  = null;
+            ObjectShader     = null;
+
+            WhiteTexture            = null;
+            TransparentWhiteTexture = null;
+            TransparentBlackTexture = null;
+            TileWireframeTexture    = null;
+
+            Shaders  = null;
+            Textures = null;
+        }
+
         private bool disposed = false;
 
         protected virtual void Dispose(bool disposing) {
             if (disposed)
                 return;
-
-            if (disposing) {
-                Shaders?.Dispose();
-                Textures?.Dispose();
-
-                TextureShader    = null;
-                TwoTextureShader = null;
-                SolidShader      = null;
-                NormalsShader    = null;
-                WireframeShader  = null;
-                ObjectShader     = null;
-
-                WhiteTexture            = null;
-                TransparentWhiteTexture = null;
-                TransparentBlackTexture = null;
-                TileWireframeTexture    = null;
-
-                Shaders  = null;
-                Textures = null;
-            }
-
+            if (disposing)
+                Reset();
             disposed = true;
         }
 

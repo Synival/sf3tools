@@ -7,7 +7,7 @@ using static CommonLib.Types.CornerTypeConsts;
 using static SF3.Win.OpenGL.Shader;
 
 namespace SF3.Win.OpenGL.MPD_File {
-    public class SkyBoxModelResources : IDisposable {
+    public class SkyBoxModelResources : IMPD_Resources {
         private bool disposed = false;
 
         protected virtual void Dispose(bool disposing) {

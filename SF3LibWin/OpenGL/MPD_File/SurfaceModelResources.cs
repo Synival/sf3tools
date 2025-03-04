@@ -5,7 +5,7 @@ using SF3.Models.Files.MPD;
 using SF3.Win.Properties;
 
 namespace SF3.Win.OpenGL.MPD_File {
-    public class SurfaceModelResources : IDisposable {
+    public class SurfaceModelResources : IMPD_Resources {
         public const int WidthInTiles = 64;
         public const int HeightInTiles = 64;
 

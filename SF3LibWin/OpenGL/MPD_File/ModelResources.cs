@@ -9,12 +9,11 @@ using OpenTK.Graphics.OpenGL;
 using OpenTK.Mathematics;
 using SF3.Models.Files.MPD;
 using SF3.Models.Structs.MPD.Model;
-using SF3.Models.Tables.MPD.Model;
 using SF3.Types;
 using SF3.Win.Extensions;
 
 namespace SF3.Win.OpenGL.MPD_File {
-    public class ModelResources : IDisposable {
+    public class ModelResources : IMPD_Resources {
         private bool _isInitialized = false;
         public void Init() {
             if (_isInitialized)

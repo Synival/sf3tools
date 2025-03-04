@@ -8,7 +8,7 @@ using SF3.Win.Properties;
 using static CommonLib.Types.CornerTypeConsts;
 
 namespace SF3.Win.OpenGL.MPD_File {
-    public class SurfaceEditorResources : IDisposable {
+    public class SurfaceEditorResources : IResources {
         private bool _isInitialized = false;
         public void Init() {
             if (_isInitialized)
@@ -36,26 +36,27 @@ namespace SF3.Win.OpenGL.MPD_File {
 
         private bool disposed = false;
 
+        public void Reset() {
+            Models?.Dispose();
+            Textures?.Dispose();
+
+            TileHoverModel = null;
+            TileSelectedModel = null;
+            HelpModel = null;
+
+            TileHoverTexture = null;
+            TileSelectedTexture = null;
+            HelpTexture = null;
+
+            Models = null;
+            Textures = null;
+        }
+
         protected virtual void Dispose(bool disposing) {
             if (disposed)
                 return;
-
-            if (disposing) {
-                Models?.Dispose();
-                Textures?.Dispose();
-
-                TileHoverModel = null;
-                TileSelectedModel = null;
-                HelpModel = null;
-
-                TileHoverTexture = null;
-                TileSelectedTexture = null;
-                HelpTexture = null;
-
-                Models = null;
-                Textures = null;
-            }
-
+            if (disposing)
+                Reset();
             disposed = true;
         }
 
