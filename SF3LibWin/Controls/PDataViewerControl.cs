@@ -44,9 +44,13 @@ namespace SF3.Win.Controls {
 
             var lighting = ColorTable.Create(new ByteData.ByteData(new ByteArray(256)), "Colors", 0, 32);
             for (int i = 0; i < 32; i++) {
-                float lightLevel = i / 32f * 0.5f + 0.25f;
-                byte level = (byte) (lightLevel * 255);
-                var channels = new PixelChannels() { a = 255, r = level, g = level, b = level };
+                var level = i / 31f;
+                var channels = new PixelChannels() {
+                    a = 255,
+                    r = (byte) ((level * 0.75f  + 0.125f) * 255),
+                    g = (byte) ((level * 0.50f +  0.25f)  * 255),
+                    b = (byte) ((level * 0.25f  + 0.375f) * 255)
+                };
                 lighting[i].ColorABGR1555 = channels.ToABGR1555();
             }
             _lighting.Update(lighting, null);
