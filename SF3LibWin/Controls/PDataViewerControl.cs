@@ -97,7 +97,7 @@ namespace SF3.Win.Controls {
                     shader.UpdateUniform(ShaderUniformType.ProjectionMatrix, ref _projectionMatrix);
         }
 
-        private void UpdateViewMatrix() {
+        private void UpdateCameraPosition() {
             float size = 1.0f;
             Vector3 center = Vector3.Zero;
 
@@ -119,13 +119,18 @@ namespace SF3.Win.Controls {
                 }
             }
 
-            var cameraPosition = new Vector3(0.33f, 0.45f, 0.66f).Normalized() * (float) Math.Pow(size, 0.875f) * 5f;
-            var pitch = -MathHelper.RadiansToDegrees((float) Math.Atan2(cameraPosition.Y, double.Hypot(cameraPosition.X, cameraPosition.Z)));
-            var yaw   =  MathHelper.RadiansToDegrees((float) Math.Atan2(cameraPosition.X, cameraPosition.Z));
+            Position = new Vector3(0.33f, 0.45f, 0.66f).Normalized() * (float) Math.Pow(size, 0.875f) * 5f;
+            Pitch    = -MathHelper.RadiansToDegrees((float) Math.Atan2(Position.Y, double.Hypot(Position.X, Position.Z)));
+            Yaw      =  MathHelper.RadiansToDegrees((float) Math.Atan2(Position.X, Position.Z));
 
-            _viewMatrix = Matrix4.CreateTranslation(-(cameraPosition + center))
-                * Matrix4.CreateRotationY(MathHelper.DegreesToRadians(-yaw))
-                * Matrix4.CreateRotationX(MathHelper.DegreesToRadians(-pitch));
+            Position += center;
+        }
+
+        private void UpdateViewMatrix() {
+            UpdateCameraPosition();
+            _viewMatrix = Matrix4.CreateTranslation(-Position)
+                * Matrix4.CreateRotationY(MathHelper.DegreesToRadians(-Yaw))
+                * Matrix4.CreateRotationX(MathHelper.DegreesToRadians(-Pitch));
         }
 
         protected override void OnPaint(PaintEventArgs e) {
@@ -141,11 +146,12 @@ namespace SF3.Win.Controls {
             _renderer.DrawScene(
                 _general, _models, null, null, null, null, null, _lighting, null, null,
                 new Renderer.RendererOptions() {
-                    DrawModels = true,
-                    ApplyLighting = true,
-                    DrawWireframe = true,
+                    DrawModels            = true,
+                    ApplyLighting         = true,
+                    DrawWireframe         = true,
+                    ForceTwoSidedTextures = true,
                 },
-                0f /*Yaw*/, 0f /*Pitch*/, ClientSize.Width, ClientSize.Height,
+                Yaw, Pitch, ClientSize.Width, ClientSize.Height,
                 ref _projectionMatrix, ref _viewMatrix
             );
 
@@ -173,6 +179,10 @@ namespace SF3.Win.Controls {
 
             Invalidate();
         }
+
+        public Vector3 Position { get; set; }
+        public float Yaw { get; set; }
+        public float Pitch { get; set; }
 
         private Matrix4 _projectionMatrix;
         private Matrix4 _viewMatrix;

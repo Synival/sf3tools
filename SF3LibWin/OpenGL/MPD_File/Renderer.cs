@@ -29,6 +29,7 @@ namespace SF3.Win.OpenGL.MPD_File {
             public bool ApplyLighting;
             public bool UseOutsideLighting;
             public bool RotateSpritesUp;
+            public bool ForceTwoSidedTextures;
 
             public bool WillDrawSurfaceModel
                 => DrawSurfaceModel || DrawTerrainTypes || DrawEventIDs;
@@ -59,8 +60,11 @@ namespace SF3.Win.OpenGL.MPD_File {
         ) {
             GL.StencilMask(0xFF);
 
-            // Enable 'CullFace' to draw single-sided, and 'StencilTest' for gradients on various render passes.
-            GL.Enable(EnableCap.CullFace);
+            // Enable 'CullFace' to draw everything single-sided (as the game actually is)
+            if (!options.ForceTwoSidedTextures)
+                GL.Enable(EnableCap.CullFace);
+
+            // Enable 'StencilTest' for gradients on various render passes.
             GL.Enable(EnableCap.StencilTest);
             GL.StencilOp(StencilOp.Keep, StencilOp.Keep, StencilOp.Replace);
 
@@ -80,8 +84,9 @@ namespace SF3.Win.OpenGL.MPD_File {
             if (options.DrawWireframe)
                 DrawSceneWireframes(general, models, surfaceModel, options, cameraYaw, cameraPitch);
 
-            // Done rendering the real scene; disable one-sided rendering.
-            GL.Disable(EnableCap.CullFace);
+            // Done rendering the real scene; disable one-sided rendering
+            if (!options.ForceTwoSidedTextures)
+                GL.Disable(EnableCap.CullFace);
 
             if (options.DrawBoundaries)
                 DrawSceneBoundaries(general, boundaryModels);
