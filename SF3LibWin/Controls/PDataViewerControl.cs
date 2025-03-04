@@ -44,27 +44,14 @@ namespace SF3.Win.Controls {
 
             var lighting = ColorTable.Create(new ByteData.ByteData(new ByteArray(256)), "Colors", 0, 32);
             for (int i = 0; i < 32; i++) {
-                byte level = (byte) (i * 255 / 32);
+                float lightLevel = i / 32f * 0.5f + 0.25f;
+                byte level = (byte) (lightLevel * 255);
                 var channels = new PixelChannels() { a = 255, r = level, g = level, b = level };
                 lighting[i].ColorABGR1555 = channels.ToABGR1555();
             }
             _lighting.Update(lighting, null);
 
-            Disposed += (s, e) => {
-                _general?.Dispose();
-                _models?.Dispose();
-                _lighting?.Dispose();
-
-                _general  = null;
-                _models   = null;
-                _lighting = null;
-            };
-
-            var lightPos = new Vector3(-0.632f, 0.632f, 0.447f);
-            foreach (var shader in _general.Shaders) {
-                using (shader.Use())
-                    shader.UpdateUniform(ShaderUniformType.LightPosition, ref lightPos);
-            }
+            UpdateLightPos();
 
             _general.ObjectShader.UpdateUniform(ShaderUniformType.LightingMode, 0);
             _general.ObjectShader.UpdateUniform(ShaderUniformType.GlobalGlow, Vector3.Zero);
@@ -73,6 +60,23 @@ namespace SF3.Win.Controls {
                 shader.UpdateUniform(ShaderUniformType.ModelMatrix, Matrix4.Identity);
                 shader.UpdateUniform(ShaderUniformType.NormalMatrix, Matrix3.Identity);
             }
+
+            // TODO: use good timer code from ViewerGLControl
+            _timer = new Timer() { Interval = 1000 / 60 };
+            _timer.Tick += (s, a) => IncrementFrame();
+            _timer.Start();
+
+            Disposed += (s, e) => {
+                _general?.Dispose();
+                _models?.Dispose();
+                _lighting?.Dispose();
+                _timer?.Dispose();
+
+                _general  = null;
+                _models   = null;
+                _lighting = null;
+                _timer    = null;
+            };
         }
 
         protected override void OnResize(EventArgs e) {
@@ -97,6 +101,16 @@ namespace SF3.Win.Controls {
                     shader.UpdateUniform(ShaderUniformType.ProjectionMatrix, ref _projectionMatrix);
         }
 
+        private void UpdateLightPos() {
+            var lightPos = new Vector3(-1.00f, 0.50f, 0.50f).Normalized()
+                * Matrix3.CreateRotationY(MathHelper.DegreesToRadians(Yaw));
+
+            foreach (var shader in _general.Shaders) {
+                using (shader.Use())
+                    shader.UpdateUniform(ShaderUniformType.LightPosition, ref lightPos);
+            }
+        }
+
         private void UpdateCameraPosition() {
             float size = 1.0f;
             Vector3 center = Vector3.Zero;
@@ -119,15 +133,18 @@ namespace SF3.Win.Controls {
                 }
             }
 
-            Position = new Vector3(0.33f, 0.45f, 0.66f).Normalized() * (float) Math.Pow(size, 0.875f) * 5f;
-            Pitch    = -MathHelper.RadiansToDegrees((float) Math.Atan2(Position.Y, double.Hypot(Position.X, Position.Z)));
-            Yaw      =  MathHelper.RadiansToDegrees((float) Math.Atan2(Position.X, Position.Z));
+            var dist = (float) Math.Pow(size, 0.875f) * 5f;
+            var yawRadians = MathHelper.DegreesToRadians(Yaw);
+
+            Position = new Vector3(0.66f * (float) Math.Sin(yawRadians), 0.45f, 0.66f * (float) Math.Cos(yawRadians)).Normalized() * dist;
+            Pitch = -MathHelper.RadiansToDegrees((float) Math.Atan2(Position.Y, double.Hypot(Position.X, Position.Z)));
 
             Position += center;
         }
 
         private void UpdateViewMatrix() {
             UpdateCameraPosition();
+            UpdateLightPos();
             _viewMatrix = Matrix4.CreateTranslation(-Position)
                 * Matrix4.CreateRotationY(MathHelper.DegreesToRadians(-Yaw))
                 * Matrix4.CreateRotationX(MathHelper.DegreesToRadians(-Pitch));
@@ -146,10 +163,9 @@ namespace SF3.Win.Controls {
             _renderer.DrawScene(
                 _general, _models, null, null, null, null, null, _lighting, null, null,
                 new Renderer.RendererOptions() {
-                    DrawModels            = true,
-                    ApplyLighting         = true,
-                    DrawWireframe         = true,
-                    ForceTwoSidedTextures = true,
+                    DrawModels    = true,
+                    ApplyLighting = true,
+                    DrawWireframe = true,
                 },
                 Yaw, Pitch, ClientSize.Width, ClientSize.Height,
                 ref _projectionMatrix, ref _viewMatrix
@@ -180,9 +196,16 @@ namespace SF3.Win.Controls {
             Invalidate();
         }
 
-        public Vector3 Position { get; set; }
-        public float Yaw { get; set; }
-        public float Pitch { get; set; }
+        private void IncrementFrame() {
+            if (!Visible)
+                return;
+            Yaw = (Yaw + 1.0f) % 360f;
+            Invalidate();
+        }
+
+        public Vector3 Position { get; private set; }
+        public float Yaw { get; private set; }
+        public float Pitch { get; private set; }
 
         private Matrix4 _projectionMatrix;
         private Matrix4 _viewMatrix;
@@ -192,5 +215,6 @@ namespace SF3.Win.Controls {
         private LightingResources _lighting = null;
 
         private Renderer _renderer = null;
+        private Timer _timer = null;
     }
 }
