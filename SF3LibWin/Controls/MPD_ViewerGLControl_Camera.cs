@@ -120,7 +120,7 @@ namespace SF3.Win.Controls {
             set {
                 _pitch = Math.Clamp(value, -90, 90);
                 s_lastPitch = _pitch;
-                InvalidateSpriteMatrices();
+                _renderer.InvalidateSpriteMatrices(_models);
             }
         }
 
@@ -136,7 +136,7 @@ namespace SF3.Win.Controls {
             set {
                 _yaw = value - 360.0f * ((int) value / 360);
                 s_lastYaw = _yaw;
-                InvalidateSpriteMatrices();
+                _renderer.InvalidateSpriteMatrices(_models);
             }
         }
     }

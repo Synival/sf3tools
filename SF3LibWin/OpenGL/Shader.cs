@@ -2,10 +2,22 @@
 using System.Collections.Generic;
 using System.Linq;
 using OpenTK.Graphics.OpenGL;
+using OpenTK.Mathematics;
 using SF3.Win.OpenGL.MPD_File;
+using SF3.Win.Types;
 
 namespace SF3.Win.OpenGL {
     public class Shader : IDisposable {
+        public static readonly Dictionary<ShaderUniformType, string> UniformNames = new() {
+            { ShaderUniformType.ProjectionMatrix, "projection" },
+            { ShaderUniformType.ViewMatrix,       "view" },
+            { ShaderUniformType.ModelMatrix,      "model" },
+            { ShaderUniformType.NormalMatrix,     "normalMatrix" },
+            { ShaderUniformType.LightPosition,    "lightPosition" },
+            { ShaderUniformType.LightingMode,     "lightingMode" },
+            { ShaderUniformType.GlobalGlow,       "globalGlow" },
+        };
+
         public class TextureInfo {
             public TextureInfo(int texIndex, TextureUnit texUnit, string uniformName, string texCoordName) {
                 TexIndex     = texIndex;
@@ -86,7 +98,7 @@ namespace SF3.Win.OpenGL {
                 GL.GetProgram(Handle, GetProgramParameterName.ActiveAttributes, out var attribCount);
                 var _attributes = new ShaderAttribute[attribCount];
 
-                int stride = 0;
+                var stride = 0;
                 for (var i = 0; i < attribCount; i++) {
                     GL.GetActiveAttrib(Handle, i, 256, out var length, out var size, out var type, out var name);
                     var location = GL.GetAttribLocation(Handle, name);
@@ -138,6 +150,138 @@ namespace SF3.Win.OpenGL {
                     state.ShaderHandle = lastHandle;
                 }
             );
+        }
+
+        public bool UpdateUniform(ShaderUniformType uniformType, bool value)
+            => UpdateUniform(UniformNames[uniformType], value ? 1 : 0);
+
+        public bool UpdateUniform(string uniformName, bool value)
+            => UpdateUniform(uniformName, value ? 1 : 0);
+
+        public bool UpdateUniform(ShaderUniformType uniformType, int value)
+            => UpdateUniform(UniformNames[uniformType], value);
+
+        public bool UpdateUniform(string uniformName, int value) {
+            var handle = GL.GetUniformLocation(Handle, uniformName);
+            if (handle < 0)
+                return false;
+            using (Use())
+                GL.Uniform1(handle, value);
+            return true;
+        }
+
+        public bool UpdateUniform(ShaderUniformType uniformType, Vector2 vec)
+            => UpdateUniform(UniformNames[uniformType], ref vec);
+
+        public bool UpdateUniform(ShaderUniformType uniformType, ref Vector2 vec)
+            => UpdateUniform(UniformNames[uniformType], ref vec);
+
+        public bool UpdateUniform(string uniformName, Vector2 vec)
+            => UpdateUniform(uniformName, ref vec);
+
+        public bool UpdateUniform(string uniformName, ref Vector2 vec) {
+            var handle = GL.GetUniformLocation(Handle, uniformName);
+            if (handle < 0)
+                return false;
+            using (Use())
+                GL.Uniform2(handle, ref vec);
+            return true;
+        }
+
+        public bool UpdateUniform(ShaderUniformType uniformType, Vector3 vec)
+            => UpdateUniform(UniformNames[uniformType], ref vec);
+
+        public bool UpdateUniform(ShaderUniformType uniformType, ref Vector3 vec)
+            => UpdateUniform(UniformNames[uniformType], ref vec);
+
+        public bool UpdateUniform(string uniformName, Vector3 vec)
+            => UpdateUniform(uniformName, ref vec);
+
+        public bool UpdateUniform(string uniformName, ref Vector3 vec) {
+            var handle = GL.GetUniformLocation(Handle, uniformName);
+            if (handle < 0)
+                return false;
+            using (Use())
+                GL.Uniform3(handle, ref vec);
+            return true;
+        }
+
+        public bool UpdateUniform(ShaderUniformType uniformType, Vector4 vec)
+            => UpdateUniform(UniformNames[uniformType], ref vec);
+
+        public bool UpdateUniform(ShaderUniformType uniformType, ref Vector4 vec)
+            => UpdateUniform(UniformNames[uniformType], ref vec);
+
+        public bool UpdateUniform(string uniformName, Vector4 vec)
+            => UpdateUniform(uniformName, ref vec);
+
+        public bool UpdateUniform(string uniformName, ref Vector4 vec) {
+            var handle = GL.GetUniformLocation(Handle, uniformName);
+            if (handle < 0)
+                return false;
+            using (Use())
+                GL.Uniform4(handle, ref vec);
+            return true;
+        }
+
+        public bool UpdateUniform(ShaderUniformType uniformType, Matrix3 matrix)
+            => UpdateUniform(UniformNames[uniformType], false, ref matrix);
+
+        public bool UpdateUniform(ShaderUniformType uniformType, ref Matrix3 matrix)
+            => UpdateUniform(UniformNames[uniformType], false, ref matrix);
+
+        public bool UpdateUniform(ShaderUniformType uniformType, bool transpose, Matrix3 matrix)
+            => UpdateUniform(UniformNames[uniformType], transpose, ref matrix);
+
+        public bool UpdateUniform(ShaderUniformType uniformType, bool transpose, ref Matrix3 matrix)
+            => UpdateUniform(UniformNames[uniformType], transpose, ref matrix);
+
+        public bool UpdateUniform(string uniformName, Matrix3 matrix)
+            => UpdateUniform(uniformName, false, ref matrix);
+
+        public bool UpdateUniform(string uniformName, ref Matrix3 matrix)
+            => UpdateUniform(uniformName, false, ref matrix);
+
+        public bool UpdateUniform(string uniformName, bool transpose, Matrix3 matrix)
+            => UpdateUniform(uniformName, transpose, ref matrix);
+
+        public bool UpdateUniform(string uniformName, bool transpose, ref Matrix3 matrix) {
+            var handle = GL.GetUniformLocation(Handle, uniformName);
+            if (handle < 0)
+                return false;
+            using (Use())
+                GL.UniformMatrix3(handle, transpose, ref matrix);
+            return true;
+        }
+
+        public bool UpdateUniform(ShaderUniformType uniformType, Matrix4 matrix)
+            => UpdateUniform(UniformNames[uniformType], false, ref matrix);
+
+        public bool UpdateUniform(ShaderUniformType uniformType, ref Matrix4 matrix)
+            => UpdateUniform(UniformNames[uniformType], false, ref matrix);
+
+        public bool UpdateUniform(ShaderUniformType uniformType, bool transpose, Matrix4 matrix)
+            => UpdateUniform(UniformNames[uniformType], transpose, ref matrix);
+
+        public bool UpdateUniform(ShaderUniformType uniformType, bool transpose, ref Matrix4 matrix)
+            => UpdateUniform(UniformNames[uniformType], transpose, ref matrix);
+
+        public bool UpdateUniform(string uniformName, Matrix4 matrix)
+            => UpdateUniform(uniformName, false, ref matrix);
+
+        public bool UpdateUniform(string uniformName, ref Matrix4 matrix)
+            => UpdateUniform(uniformName, false, ref matrix);
+
+        public bool UpdateUniform(string uniformName, bool transpose, Matrix4 matrix)
+            => UpdateUniform(uniformName, transpose, ref matrix);
+
+        public bool UpdateUniform(string uniformName, bool transpose, ref Matrix4 matrix) {
+            var handle = GL.GetUniformLocation(Handle, uniformName);
+            if (handle < 0)
+                return false;
+            using (Use())
+                GL.UniformMatrix4(handle, transpose, ref matrix);
+            return true;
         }
 
         private bool disposed = false;

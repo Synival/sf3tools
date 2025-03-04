@@ -15,6 +15,13 @@ using SF3.Win.Extensions;
 
 namespace SF3.Win.OpenGL.MPD_File {
     public class ModelResources : IDisposable {
+        private bool _isInitialized = false;
+        public void Init() {
+            if (_isInitialized)
+                return;
+            _isInitialized = true;
+        }
+
         private bool disposed = false;
 
         protected virtual void Dispose(bool disposing) {
@@ -41,7 +48,13 @@ namespace SF3.Win.OpenGL.MPD_File {
         public void Reset() {
             foreach (var model in ModelsByMemoryAddress)
                 model.Value.Dispose();
+
             ModelsByMemoryAddress.Clear();
+            PDatasByAddress.Clear();
+            VerticesByAddress.Clear();
+            PolygonsByAddress.Clear();
+            AttributesByAddress.Clear();
+
             Models = null;
         }
 
@@ -52,7 +65,6 @@ namespace SF3.Win.OpenGL.MPD_File {
                 return;
 
             var modelsList = new List<Model>();
-
             foreach (var models in mpdFile.ModelCollections) {
                 modelsList.AddRange(models.ModelTable.Rows);
 
@@ -62,14 +74,38 @@ namespace SF3.Win.OpenGL.MPD_File {
                     .Distinct()
                     .ToArray();
 
-                foreach (var address in uniquePData1Addresses)
-                    AddModel(mpdFile, models.TextureCollection, address);
+                foreach (var address in uniquePData1Addresses) {
+                    var pdata = PDatasByAddress.TryGetValue(address, out var pdataVal) ? pdataVal : null;
+                    if (pdata == null) {
+                        pdata = GetFromAnyCollection(mpdFile, mc => mc.PDatasByMemoryAddress, address);
+                        PDatasByAddress[address] = pdata;
+                    }
+                    if (pdata == null)
+                        continue;
+
+                    if (!VerticesByAddress.ContainsKey(pdata.VerticesOffset)) {
+                        var table = GetFromAnyCollection(mpdFile, mc => mc.VertexTablesByMemoryAddress, pdata.VerticesOffset);
+                        VerticesByAddress[pdata.VerticesOffset] = table.ToArray();
+                    }
+
+                    if (!PolygonsByAddress.ContainsKey(pdata.PolygonsOffset)) {
+                        var table = GetFromAnyCollection(mpdFile, mc => mc.PolygonTablesByMemoryAddress, pdata.PolygonsOffset);
+                        PolygonsByAddress[pdata.PolygonsOffset] = table.ToArray();
+                    }
+
+                    if (!AttributesByAddress.ContainsKey(pdata.AttributesOffset)) {
+                        var table = GetFromAnyCollection(mpdFile, mc => mc.AttrTablesByMemoryAddress, pdata.AttributesOffset);
+                        AttributesByAddress[pdata.AttributesOffset] = table.ToArray();
+                    }
+
+                    AddModel(mpdFile, models.TextureCollection, pdata);
+                }
             }
 
             Models = modelsList.ToArray();
         }
 
-        private TValue GetFromAnyCollection<TValue>(IMPD_File mpdFile, Func<Models.Files.MPD.ModelCollection, Dictionary<uint, TValue>> tableGetter, uint address) where TValue : class {
+        private TValue GetFromAnyCollection<TValue>(IMPD_File mpdFile, Func<ModelCollection, Dictionary<uint, TValue>> tableGetter, uint address) where TValue : class {
             foreach (var mc in mpdFile.ModelCollections) {
                 if (mc != null) {
                     var dict = tableGetter(mc);
@@ -80,22 +116,18 @@ namespace SF3.Win.OpenGL.MPD_File {
             return null;
         }
 
-        public void AddModel(IMPD_File mpdFile, TextureCollectionType texCollection, uint pdataAddressInMemory) {
+        public void AddModel(IMPD_File mpdFile, TextureCollectionType texCollection, PDataModel pdata) {
             TextureFlipType ToggleHorizontalFlipping(TextureFlipType flip)
                 => (flip & ~TextureFlipType.Horizontal) | (TextureFlipType) (TextureFlipType.Horizontal - (flip & TextureFlipType.Horizontal));
 
-            var pdata = GetFromAnyCollection(mpdFile, mc => mc.PDatasByMemoryAddress, pdataAddressInMemory);
-            if (pdata == null)
-                return;
-
-            VertexTable  vertices = null;
-            PolygonTable polygons = null;
-            AttrTable    attrs    = null;
+            VertexModel[]  vertices = null;
+            PolygonModel[] polygons = null;
+            AttrModel[]    attrs    = null;
 
             try {
-                vertices = GetFromAnyCollection(mpdFile, mc => mc.VertexTablesByMemoryAddress,  pdata.VerticesOffset);
-                polygons = GetFromAnyCollection(mpdFile, mc => mc.PolygonTablesByMemoryAddress, pdata.PolygonsOffset);
-                attrs    = GetFromAnyCollection(mpdFile, mc => mc.AttrTablesByMemoryAddress,    pdata.AttributesOffset);
+                vertices = VerticesByAddress[pdata.VerticesOffset];
+                polygons = PolygonsByAddress[pdata.PolygonsOffset];
+                attrs    = AttributesByAddress[pdata.AttributesOffset];
             }
             catch {
                 // TODO: what to do in this case??
@@ -237,7 +269,7 @@ namespace SF3.Win.OpenGL.MPD_File {
             var semiTransparentUntexturedModel = (semiTransparentUntexturedQuads.Count > 0) ? new QuadModel(semiTransparentUntexturedQuads.ToArray()) : null;
 
             if (modelExists) {
-                ModelsByMemoryAddress[pdataAddressInMemory] = new ModelGroup(
+                    ModelsByMemoryAddress[pdata.RamAddress] = new ModelGroup(
                     solidTexturedModel,
                     solidUntexturedModel,
                     semiTransparentTexturedModel,
@@ -247,6 +279,10 @@ namespace SF3.Win.OpenGL.MPD_File {
         }
 
         public Dictionary<uint, ModelGroup> ModelsByMemoryAddress { get; } = [];
+        public Dictionary<uint, PDataModel> PDatasByAddress { get; } = [];
+        public Dictionary<uint, VertexModel[]> VerticesByAddress { get; } = [];
+        public Dictionary<uint, PolygonModel[]> PolygonsByAddress { get; } = [];
+        public Dictionary<uint, AttrModel[]> AttributesByAddress { get; } = [];
         public Model[] Models { get; private set; }
     }
 }
