@@ -48,7 +48,7 @@ namespace SF3.Win.OpenGL.MPD_File {
             // Nothing loaded dynamically, so nothing to reset.
         }
 
-        public void UpdateTileHoverModel(IMPD_File mpdFile, WorldResources world, Point? tilePos) {
+        public void UpdateTileHoverModel(IMPD_File mpdFile, GeneralResources world, Point? tilePos) {
             TileHoverModel?.Dispose();
             if (TileHoverModel != null)
                 Models.Remove(TileHoverModel);
@@ -61,7 +61,7 @@ namespace SF3.Win.OpenGL.MPD_File {
             }
         }
 
-        public void UpdateTileSelectedModel(IMPD_File mpdFile, WorldResources world, Point? tilePos) {
+        public void UpdateTileSelectedModel(IMPD_File mpdFile, GeneralResources world, Point? tilePos) {
             TileSelectedModel?.Dispose();
             if (TileSelectedModel != null)
                 Models.Remove(TileSelectedModel);

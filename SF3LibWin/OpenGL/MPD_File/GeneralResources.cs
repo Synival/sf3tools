@@ -2,7 +2,7 @@ using CommonLib;
 using SF3.Win.Properties;
 
 namespace SF3.Win.OpenGL.MPD_File {
-    public class WorldResources : ResourcesBase {
+    public class GeneralResources : ResourcesBase {
         public const float ModelOffsetX = SurfaceModelResources.WidthInTiles / -2f;
         public const float ModelOffsetZ = SurfaceModelResources.HeightInTiles / -2f;
 

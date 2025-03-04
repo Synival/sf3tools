@@ -39,7 +39,7 @@ namespace SF3.Win.OpenGL.MPD_File {
         }
 
         public void DrawScene(
-            WorldResources world,
+            GeneralResources general,
             ModelResources models,
             SurfaceModelResources surfaceModel,
             GroundModelResources groundModel,
@@ -65,32 +65,32 @@ namespace SF3.Win.OpenGL.MPD_File {
             GL.StencilOp(StencilOp.Keep, StencilOp.Keep, StencilOp.Replace);
 
             if (options.DrawSkyBox)
-                DrawSceneSkyBox(world, skyBoxModel, gradients, options, cameraYaw, cameraPitch, ref projectionMatrix, ref viewMatrix);
+                DrawSceneSkyBox(general, skyBoxModel, gradients, options, cameraYaw, cameraPitch, ref projectionMatrix, ref viewMatrix);
             if (options.DrawGround)
-                DrawSceneGround(world, groundModel, gradients, lightAdj, options, ref projectionMatrix, ref viewMatrix);
+                DrawSceneGround(general, groundModel, gradients, lightAdj, options, ref projectionMatrix, ref viewMatrix);
 
             if (options.DrawNormals)
-                DrawSceneObjectNormals(world, models, surfaceModel, options, cameraYaw, cameraPitch);
+                DrawSceneObjectNormals(general, models, surfaceModel, options, cameraYaw, cameraPitch);
             else if (options.WillDrawAnyObjects)
-                DrawSceneObjects(world, models, surfaceModel, gradients, lighting, options, cameraYaw, cameraPitch, ref projectionMatrix, ref viewMatrix);
+                DrawSceneObjects(general, models, surfaceModel, gradients, lighting, options, cameraYaw, cameraPitch, ref projectionMatrix, ref viewMatrix);
 
             // Done rendering gradients; disable the stencil test.
             GL.Disable(EnableCap.StencilTest);
 
             if (options.DrawWireframe)
-                DrawSceneWireframes(world, models, surfaceModel, options, cameraYaw, cameraPitch);
+                DrawSceneWireframes(general, models, surfaceModel, options, cameraYaw, cameraPitch);
 
             // Done rendering the real scene; disable one-sided rendering.
             GL.Disable(EnableCap.CullFace);
 
             if (options.DrawBoundaries)
-                DrawSceneBoundaries(world, boundaryModels);
+                DrawSceneBoundaries(general, boundaryModels);
 
-            DrawEditorElements(world, surfaceEditor, options, screenWidth, screenHeight, ref projectionMatrix, ref viewMatrix);
+            DrawEditorElements(general, surfaceEditor, options, screenWidth, screenHeight, ref projectionMatrix, ref viewMatrix);
         }
 
         public void DrawSceneObjectNormals(
-            WorldResources world,
+            GeneralResources general,
             ModelResources models,
             SurfaceModelResources surfaceModel,
             RendererOptions options,
@@ -98,14 +98,14 @@ namespace SF3.Win.OpenGL.MPD_File {
             float cameraPitch
         ) {
             if (options.DrawModels)
-                DrawSceneModelsNormals(world, models, options, cameraYaw, cameraPitch);
+                DrawSceneModelsNormals(general, models, options, cameraYaw, cameraPitch);
 
             if (options.DrawSurfaceModel)
-                DrawSceneSurfaceModelNormals(world, surfaceModel);
+                DrawSceneSurfaceModelNormals(general, surfaceModel);
         }
 
         public void DrawSceneObjects(
-            WorldResources world,
+            GeneralResources general,
             ModelResources models,
             SurfaceModelResources surfaceModel,
             GradientResources gradients,
@@ -120,17 +120,17 @@ namespace SF3.Win.OpenGL.MPD_File {
             GL.StencilMask(0x04);
 
             if (options.DrawModels)
-                DrawSceneModels(world, models, lighting, options, cameraYaw, cameraPitch);
+                DrawSceneModels(general, models, lighting, options, cameraYaw, cameraPitch);
 
             if (options.WillDrawSurfaceModel)
-                DrawSceneSurfaceModel(world, surfaceModel, lighting, options);
+                DrawSceneSurfaceModel(general, surfaceModel, lighting, options);
 
             if (options.DrawGradients)
-                DrawSceneGradient(world, gradients?.ModelsGradientModel, 0x04, true, ref projectionMatrix, ref viewMatrix);
+                DrawSceneGradient(general, gradients?.ModelsGradientModel, 0x04, true, ref projectionMatrix, ref viewMatrix);
         }
 
         public void DrawSceneWireframes(
-            WorldResources world,
+            GeneralResources general,
             ModelResources models,
             SurfaceModelResources surfaceModel,
             RendererOptions options,
@@ -141,34 +141,34 @@ namespace SF3.Win.OpenGL.MPD_File {
             GL.Enable(EnableCap.PolygonOffsetLine);
             GL.PolygonOffset(-2.0f, -2.0f);
 
-            using (world.WireframeShader.Use())
-            using (world.TileWireframeTexture.Use(TextureUnit.Texture1)) {
+            using (general.WireframeShader.Use())
+            using (general.TileWireframeTexture.Use(TextureUnit.Texture1)) {
                 if (options.DrawModels)
-                    DrawSceneModelsWireframe(world, models, options, cameraYaw, cameraPitch);
+                    DrawSceneModelsWireframe(general, models, options, cameraYaw, cameraPitch);
 
                 if (options.WillDrawSurfaceModelWireframe)
-                    DrawSceneSurfaceModelWireframe(world, surfaceModel);
+                    DrawSceneSurfaceModelWireframe(general, surfaceModel);
             }
 
-            world.WireframeShader.UpdateUniform(ShaderUniformType.ModelMatrix, Matrix4.Identity);
+            general.WireframeShader.UpdateUniform(ShaderUniformType.ModelMatrix, Matrix4.Identity);
             GL.Disable(EnableCap.PolygonOffsetLine);
             GL.PolygonMode(MaterialFace.FrontAndBack, PolygonMode.Fill);
         }
 
-        public void DrawSceneBoundaries(WorldResources world, BoundaryModelResources boundaryModels) {
+        public void DrawSceneBoundaries(GeneralResources general, BoundaryModelResources boundaryModels) {
             if (boundaryModels.CameraBoundaryModel == null && boundaryModels.BattleBoundaryModel == null)
                 return;
 
-            using (world.SolidShader.Use()) {
+            using (general.SolidShader.Use()) {
                 GL.Disable(EnableCap.DepthTest);
-                boundaryModels.BattleBoundaryModel?.Draw(world.SolidShader, null);
-                boundaryModels.CameraBoundaryModel?.Draw(world.SolidShader, null);
+                boundaryModels.BattleBoundaryModel?.Draw(general.SolidShader, null);
+                boundaryModels.CameraBoundaryModel?.Draw(general.SolidShader, null);
                 GL.Enable(EnableCap.DepthTest);
             }
         }
 
         public void DrawEditorElements(
-            WorldResources world,
+            GeneralResources general,
             SurfaceEditorResources surfaceEditor,
             RendererOptions options,
             int screenWidth,
@@ -176,17 +176,17 @@ namespace SF3.Win.OpenGL.MPD_File {
             ref Matrix4 projectionMatrix,
             ref Matrix4 viewMatrix
         ) {
-            using (world.TextureShader.Use()) {
-                DrawSurfaceEditorTileSelected(world, surfaceEditor);
-                DrawSurfaceEditorTileHover(world, surfaceEditor);
+            using (general.TextureShader.Use()) {
+                DrawSurfaceEditorTileSelected(general, surfaceEditor);
+                DrawSurfaceEditorTileHover(general, surfaceEditor);
 
                 if (options.DrawHelp)
-                    DrawEditorHelp(world, surfaceEditor, screenWidth, screenHeight, ref projectionMatrix, ref viewMatrix);
+                    DrawEditorHelp(general, surfaceEditor, screenWidth, screenHeight, ref projectionMatrix, ref viewMatrix);
             }
         }
 
         public void DrawSceneModelsNormals(
-            WorldResources world,
+            GeneralResources general,
             ModelResources models,
             RendererOptions options,
             float cameraYaw,
@@ -201,34 +201,34 @@ namespace SF3.Win.OpenGL.MPD_File {
                 .ToArray();
 
             foreach (var mwg in modelsWithGroups) {
-                SetModelAndNormalMatricesForModel(models, mwg.Model, world.NormalsShader, options, cameraYaw, cameraPitch);
-                mwg.ModelGroup.SolidTexturedModel?.Draw(world.NormalsShader, null);
-                mwg.ModelGroup.SolidUntexturedModel?.Draw(world.NormalsShader, null);
-                mwg.ModelGroup.SemiTransparentTexturedModel?.Draw(world.NormalsShader, null);
-                mwg.ModelGroup.SemiTransparentUntexturedModel?.Draw(world.NormalsShader, null);
+                SetModelAndNormalMatricesForModel(models, mwg.Model, general.NormalsShader, options, cameraYaw, cameraPitch);
+                mwg.ModelGroup.SolidTexturedModel?.Draw(general.NormalsShader, null);
+                mwg.ModelGroup.SolidUntexturedModel?.Draw(general.NormalsShader, null);
+                mwg.ModelGroup.SemiTransparentTexturedModel?.Draw(general.NormalsShader, null);
+                mwg.ModelGroup.SemiTransparentUntexturedModel?.Draw(general.NormalsShader, null);
             }
 
             // Reset model matrices to their identity.
-            world.NormalsShader.UpdateUniform(ShaderUniformType.ModelMatrix, Matrix4.Identity);
-            world.NormalsShader.UpdateUniform(ShaderUniformType.NormalMatrix, Matrix3.Identity);
+            general.NormalsShader.UpdateUniform(ShaderUniformType.ModelMatrix, Matrix4.Identity);
+            general.NormalsShader.UpdateUniform(ShaderUniformType.NormalMatrix, Matrix3.Identity);
         }
 
-        public void DrawSceneSurfaceModelNormals(WorldResources world, SurfaceModelResources surfaceModel) {
+        public void DrawSceneSurfaceModelNormals(GeneralResources general, SurfaceModelResources surfaceModel) {
             if (!(surfaceModel?.Blocks?.Length > 0))
                 return;
 
-            using (world.NormalsShader.Use()) {
+            using (general.NormalsShader.Use()) {
                 foreach (var block in surfaceModel.Blocks) {
                     if (block.Model != null || block.UntexturedModel != null) {
-                        block.Model?.Draw(world.NormalsShader, null);
-                        block.UntexturedModel?.Draw(world.NormalsShader, null);
+                        block.Model?.Draw(general.NormalsShader, null);
+                        block.UntexturedModel?.Draw(general.NormalsShader, null);
                     }
                 }
             }
         }
 
         public void DrawSceneSkyBox(
-            WorldResources world,
+            GeneralResources general,
             SkyBoxModelResources skyBoxModel,
             GradientResources gradients,
             RendererOptions options,
@@ -243,32 +243,32 @@ namespace SF3.Win.OpenGL.MPD_File {
             GL.Disable(EnableCap.DepthTest);
             GL.DepthMask(false);
 
-            world.TextureShader.UpdateUniform(ShaderUniformType.ProjectionMatrix, Matrix4.Identity);
+            general.TextureShader.UpdateUniform(ShaderUniformType.ProjectionMatrix, Matrix4.Identity);
 
             const float c_repeatCount = 8f;
             var xOffset = (MathHelpers.ActualMod((cameraYaw / 360f) * c_repeatCount, 1.0f) - 0.5f) * 2.0f;
             var yOffset = (float) Math.Sin(-cameraPitch / 360.0f) * 32f + 0.975f;
 
-            world.TextureShader.UpdateUniform(ShaderUniformType.ViewMatrix, Matrix4.Identity * Matrix4.CreateTranslation(xOffset, yOffset, 0));
+            general.TextureShader.UpdateUniform(ShaderUniformType.ViewMatrix, Matrix4.Identity * Matrix4.CreateTranslation(xOffset, yOffset, 0));
 
             GL.StencilFunc(StencilFunction.Always, 2, 0x02);
             GL.StencilMask(0x02);
 
             using (skyBoxModel.Texture.Use(TextureUnit.Texture0))
-                skyBoxModel.Model.Draw(world.TextureShader, null);
+                skyBoxModel.Model.Draw(general.TextureShader, null);
 
             if (options.DrawGradients)
-                DrawSceneGradient(world, gradients?.SkyBoxGradientModel, 0x02, false, ref projectionMatrix, ref viewMatrix);
+                DrawSceneGradient(general, gradients?.SkyBoxGradientModel, 0x02, false, ref projectionMatrix, ref viewMatrix);
 
-            world.TextureShader.UpdateUniform(ShaderUniformType.ProjectionMatrix, ref projectionMatrix);
-            world.TextureShader.UpdateUniform(ShaderUniformType.ViewMatrix, ref viewMatrix);
+            general.TextureShader.UpdateUniform(ShaderUniformType.ProjectionMatrix, ref projectionMatrix);
+            general.TextureShader.UpdateUniform(ShaderUniformType.ViewMatrix, ref viewMatrix);
 
             GL.DepthMask(true);
             GL.Enable(EnableCap.DepthTest);
         }
 
         public void DrawSceneGround(
-            WorldResources world,
+            GeneralResources general,
             GroundModelResources groundModel,
             GradientResources gradients,
             LightAdjustmentModel lightAdj,
@@ -290,25 +290,25 @@ namespace SF3.Win.OpenGL.MPD_File {
                     lightAdj.GroundBAdjustment / (float) 0x1F
                 );
             }
-            world.TextureShader.UpdateUniform(ShaderUniformType.GlobalGlow, ref glow);
+            general.TextureShader.UpdateUniform(ShaderUniformType.GlobalGlow, ref glow);
 
             GL.StencilFunc(StencilFunction.Always, 1, 0x01);
             GL.StencilMask(0x01);
 
             using (groundModel.Texture.Use(TextureUnit.Texture0))
-                groundModel.Model.Draw(world.TextureShader, null);
+                groundModel.Model.Draw(general.TextureShader, null);
 
             if (options.DrawGradients)
-                DrawSceneGradient(world, gradients?.GroundGradientModel, 0x01, false, ref projectionMatrix, ref viewMatrix);
+                DrawSceneGradient(general, gradients?.GroundGradientModel, 0x01, false, ref projectionMatrix, ref viewMatrix);
 
-            world.TextureShader.UpdateUniform(ShaderUniformType.GlobalGlow, Vector3.Zero);
+            general.TextureShader.UpdateUniform(ShaderUniformType.GlobalGlow, Vector3.Zero);
 
             GL.DepthMask(true);
             GL.Enable(EnableCap.DepthTest);
         }
 
         public void DrawSceneModels(
-            WorldResources world,
+            GeneralResources general,
             ModelResources models,
             LightingResources lighting,
             RendererOptions options,
@@ -318,13 +318,13 @@ namespace SF3.Win.OpenGL.MPD_File {
             if (models?.Models == null)
                 return;
 
-            world.ObjectShader.UpdateUniform(ShaderUniformType.LightingMode, options.ApplyLighting ? 1 : 0);
-            var lightingTexture = lighting.LightingTexture ?? world.WhiteTexture;
+            general.ObjectShader.UpdateUniform(ShaderUniformType.LightingMode, options.ApplyLighting ? 1 : 0);
+            var lightingTexture = lighting.LightingTexture ?? general.WhiteTexture;
 
-            using (world.TransparentBlackTexture.Use(MPD_TextureUnit.TextureTerrainTypes))
-            using (world.TransparentBlackTexture.Use(MPD_TextureUnit.TextureEventIDs))
+            using (general.TransparentBlackTexture.Use(MPD_TextureUnit.TextureTerrainTypes))
+            using (general.TransparentBlackTexture.Use(MPD_TextureUnit.TextureEventIDs))
             using (lightingTexture.Use(MPD_TextureUnit.TextureLighting))
-            using (world.ObjectShader.Use()) {
+            using (general.ObjectShader.Use()) {
                 var modelsWithGroups = models.Models
                     .Select(x => new { Model = x, ModelGroup = models.ModelsByMemoryAddress.TryGetValue(x.PData1, out ModelGroup pd) ? pd : null })
                     .Where(x => x.ModelGroup != null)
@@ -332,15 +332,15 @@ namespace SF3.Win.OpenGL.MPD_File {
 
                 // Pass 1: Textured models
                 foreach (var mwg in modelsWithGroups.Where(x => x.ModelGroup.SolidTexturedModel != null).ToArray()) {
-                    SetModelAndNormalMatricesForModel(models, mwg.Model, world.ObjectShader, options, cameraYaw, cameraPitch);
-                    mwg.ModelGroup.SolidTexturedModel.Draw(world.ObjectShader);
+                    SetModelAndNormalMatricesForModel(models, mwg.Model, general.ObjectShader, options, cameraYaw, cameraPitch);
+                    mwg.ModelGroup.SolidTexturedModel.Draw(general.ObjectShader);
                 }
 
                 // Pass 2: Untextured models
-                using (world.WhiteTexture.Use(MPD_TextureUnit.TextureAtlas)) {
+                using (general.WhiteTexture.Use(MPD_TextureUnit.TextureAtlas)) {
                     foreach (var mwg in modelsWithGroups.Where(x => x.ModelGroup.SolidUntexturedModel != null).ToArray()) {
-                        SetModelAndNormalMatricesForModel(models, mwg.Model, world.ObjectShader, options, cameraYaw, cameraPitch);
-                        mwg.ModelGroup.SolidUntexturedModel.Draw(world.ObjectShader, null);
+                        SetModelAndNormalMatricesForModel(models, mwg.Model, general.ObjectShader, options, cameraYaw, cameraPitch);
+                        mwg.ModelGroup.SolidUntexturedModel.Draw(general.ObjectShader, null);
                     }
                 }
 
@@ -349,15 +349,15 @@ namespace SF3.Win.OpenGL.MPD_File {
 
                 // Pass 3: Semi-transparent textured models
                 foreach (var mwg in modelsWithGroups.Where(x => x.ModelGroup.SemiTransparentTexturedModel != null).ToArray()) {
-                    SetModelAndNormalMatricesForModel(models, mwg.Model, world.ObjectShader, options, cameraYaw, cameraPitch);
-                    mwg.ModelGroup.SemiTransparentTexturedModel.Draw(world.ObjectShader);
+                    SetModelAndNormalMatricesForModel(models, mwg.Model, general.ObjectShader, options, cameraYaw, cameraPitch);
+                    mwg.ModelGroup.SemiTransparentTexturedModel.Draw(general.ObjectShader);
                 }
 
                 // Pass 4: Semi-transparent untextured models
-                using (world.WhiteTexture.Use(MPD_TextureUnit.TextureAtlas)) {
+                using (general.WhiteTexture.Use(MPD_TextureUnit.TextureAtlas)) {
                     foreach (var mwg in modelsWithGroups.Where(x => x.ModelGroup.SemiTransparentUntexturedModel != null).ToArray()) {
-                        SetModelAndNormalMatricesForModel(models, mwg.Model, world.ObjectShader, options, cameraYaw, cameraPitch);
-                        mwg.ModelGroup.SemiTransparentUntexturedModel.Draw(world.ObjectShader, null);
+                        SetModelAndNormalMatricesForModel(models, mwg.Model, general.ObjectShader, options, cameraYaw, cameraPitch);
+                        mwg.ModelGroup.SemiTransparentUntexturedModel.Draw(general.ObjectShader, null);
                     }
                 }
 
@@ -366,12 +366,12 @@ namespace SF3.Win.OpenGL.MPD_File {
             }
 
             // Reset model matrices to their identity.
-            world.ObjectShader.UpdateUniform(ShaderUniformType.ModelMatrix, Matrix4.Identity);
-            world.ObjectShader.UpdateUniform(ShaderUniformType.NormalMatrix, Matrix3.Identity);
+            general.ObjectShader.UpdateUniform(ShaderUniformType.ModelMatrix, Matrix4.Identity);
+            general.ObjectShader.UpdateUniform(ShaderUniformType.NormalMatrix, Matrix3.Identity);
         }
 
         public void DrawSceneSurfaceModel(
-            WorldResources world,
+            GeneralResources general,
             SurfaceModelResources surfaceModel,
             LightingResources lighting,
             RendererOptions options
@@ -379,40 +379,40 @@ namespace SF3.Win.OpenGL.MPD_File {
             if (!(surfaceModel?.Blocks?.Length > 0))
                 return;
 
-            var terrainTypesTexture = options.DrawTerrainTypes ? surfaceModel.TerrainTypesTexture : world.TransparentBlackTexture;
-            var eventIdsTexture     = options.DrawEventIDs     ? surfaceModel.EventIDsTexture     : world.TransparentBlackTexture;
-            var lightingTexture     = lighting.LightingTexture ?? world.WhiteTexture;
+            var terrainTypesTexture = options.DrawTerrainTypes ? surfaceModel.TerrainTypesTexture : general.TransparentBlackTexture;
+            var eventIdsTexture     = options.DrawEventIDs     ? surfaceModel.EventIDsTexture     : general.TransparentBlackTexture;
+            var lightingTexture     = lighting.LightingTexture ?? general.WhiteTexture;
 
             GL.Enable(EnableCap.PolygonOffsetFill);
             GL.PolygonOffset(-1.0f, -1.0f);
 
             if (options.UseOutsideLighting)
-                world.ObjectShader.UpdateUniform(ShaderUniformType.LightingMode, options.ApplyLighting ? 2 : 0);
+                general.ObjectShader.UpdateUniform(ShaderUniformType.LightingMode, options.ApplyLighting ? 2 : 0);
 
             using (terrainTypesTexture.Use(MPD_TextureUnit.TextureTerrainTypes))
             using (eventIdsTexture.Use(MPD_TextureUnit.TextureEventIDs))
             using (lightingTexture.Use(MPD_TextureUnit.TextureLighting))
-            using (options.DrawSurfaceModel ? null : world.TransparentBlackTexture.Use(MPD_TextureUnit.TextureAtlas))
-            using (world.ObjectShader.Use()) {
+            using (options.DrawSurfaceModel ? null : general.TransparentBlackTexture.Use(MPD_TextureUnit.TextureAtlas))
+            using (general.ObjectShader.Use()) {
                 foreach (var block in surfaceModel.Blocks) {
                     if (options.DrawSurfaceModel)
-                        block.Model?.Draw(world.ObjectShader);
+                        block.Model?.Draw(general.ObjectShader);
                     else
-                        block.Model?.Draw(world.ObjectShader, null);
+                        block.Model?.Draw(general.ObjectShader, null);
 
-                    using (world.TransparentBlackTexture.Use(MPD_TextureUnit.TextureAtlas))
-                        block.UntexturedModel?.Draw(world.ObjectShader, null);
+                    using (general.TransparentBlackTexture.Use(MPD_TextureUnit.TextureAtlas))
+                        block.UntexturedModel?.Draw(general.ObjectShader, null);
                 }
             }
 
             if (options.UseOutsideLighting)
-                world.ObjectShader.UpdateUniform(ShaderUniformType.LightingMode, options.ApplyLighting ? 1 : 0);
+                general.ObjectShader.UpdateUniform(ShaderUniformType.LightingMode, options.ApplyLighting ? 1 : 0);
 
             GL.Disable(EnableCap.PolygonOffsetFill);
         }
 
         public void DrawSceneGradient(
-            WorldResources world,
+            GeneralResources general,
             QuadModel gradientModel,
             int stencilBit,
             bool depthCurrentlyEnabled,
@@ -428,14 +428,14 @@ namespace SF3.Win.OpenGL.MPD_File {
                 GL.DepthMask(false);
             }
 
-            world.SolidShader.UpdateUniform(ShaderUniformType.ProjectionMatrix, Matrix4.Identity);
-            world.SolidShader.UpdateUniform(ShaderUniformType.ViewMatrix, Matrix4.Identity);
+            general.SolidShader.UpdateUniform(ShaderUniformType.ProjectionMatrix, Matrix4.Identity);
+            general.SolidShader.UpdateUniform(ShaderUniformType.ViewMatrix, Matrix4.Identity);
 
             GL.StencilFunc(StencilFunction.Equal, stencilBit, stencilBit);
-            gradientModel.Draw(world.SolidShader, null);
+            gradientModel.Draw(general.SolidShader, null);
     
-            world.SolidShader.UpdateUniform(ShaderUniformType.ProjectionMatrix, ref projectionMatrix);
-            world.SolidShader.UpdateUniform(ShaderUniformType.ViewMatrix, ref viewMatrix);
+            general.SolidShader.UpdateUniform(ShaderUniformType.ProjectionMatrix, ref projectionMatrix);
+            general.SolidShader.UpdateUniform(ShaderUniformType.ViewMatrix, ref viewMatrix);
 
             if (depthCurrentlyEnabled) {
                 GL.DepthMask(true);
@@ -444,7 +444,7 @@ namespace SF3.Win.OpenGL.MPD_File {
         }
 
         public void DrawSceneModelsWireframe(
-            WorldResources world,
+            GeneralResources general,
             ModelResources models,
             RendererOptions options,
             float cameraYaw,
@@ -456,44 +456,44 @@ namespace SF3.Win.OpenGL.MPD_File {
             foreach (var model in models.Models) {
                 var modelGroup = models.ModelsByMemoryAddress.TryGetValue(model.PData1, out ModelGroup pd) ? pd : null;
                 if (modelGroup != null) {
-                    SetModelAndNormalMatricesForModel(models, model, world.WireframeShader, options, cameraYaw, cameraPitch);
-                    modelGroup.SolidTexturedModel?.Draw(world.WireframeShader);
-                    modelGroup.SolidUntexturedModel?.Draw(world.WireframeShader);
-                    modelGroup.SemiTransparentTexturedModel?.Draw(world.WireframeShader);
-                    modelGroup.SemiTransparentUntexturedModel?.Draw(world.WireframeShader);
+                    SetModelAndNormalMatricesForModel(models, model, general.WireframeShader, options, cameraYaw, cameraPitch);
+                    modelGroup.SolidTexturedModel?.Draw(general.WireframeShader);
+                    modelGroup.SolidUntexturedModel?.Draw(general.WireframeShader);
+                    modelGroup.SemiTransparentTexturedModel?.Draw(general.WireframeShader);
+                    modelGroup.SemiTransparentUntexturedModel?.Draw(general.WireframeShader);
                 }
             }
         }
 
-        public void DrawSceneSurfaceModelWireframe(WorldResources world, SurfaceModelResources surfaceModel) {
+        public void DrawSceneSurfaceModelWireframe(GeneralResources general, SurfaceModelResources surfaceModel) {
             foreach (var block in surfaceModel.Blocks) {
-                block.UntexturedModel?.Draw(world.WireframeShader, null);
-                block.Model?.Draw(world.WireframeShader, null);
+                block.UntexturedModel?.Draw(general.WireframeShader, null);
+                block.Model?.Draw(general.WireframeShader, null);
             }
         }
 
-        public void DrawSurfaceEditorTileSelected(WorldResources world, SurfaceEditorResources surfaceEditor) {
+        public void DrawSurfaceEditorTileSelected(GeneralResources general, SurfaceEditorResources surfaceEditor) {
             if (surfaceEditor.TileSelectedModel == null)
                 return;
 
             GL.Disable(EnableCap.DepthTest);
             using (surfaceEditor.TileSelectedTexture.Use())
-                surfaceEditor.TileSelectedModel.Draw(world.TextureShader);
+                surfaceEditor.TileSelectedModel.Draw(general.TextureShader);
             GL.Enable(EnableCap.DepthTest);
         }
 
-        public void DrawSurfaceEditorTileHover(WorldResources world, SurfaceEditorResources surfaceEditor) {
+        public void DrawSurfaceEditorTileHover(GeneralResources general, SurfaceEditorResources surfaceEditor) {
             if (surfaceEditor.TileHoverModel == null)
                 return;
 
             GL.Disable(EnableCap.DepthTest);
             using (surfaceEditor.TileHoverTexture.Use())
-                surfaceEditor.TileHoverModel.Draw(world.TextureShader);
+                surfaceEditor.TileHoverModel.Draw(general.TextureShader);
             GL.Enable(EnableCap.DepthTest);
         }
 
         public void DrawEditorHelp(
-            WorldResources world,
+            GeneralResources general,
             SurfaceEditorResources surfaceEditor,
             int screenWidth,
             int screenHeight,
@@ -508,17 +508,17 @@ namespace SF3.Win.OpenGL.MPD_File {
             var viewportRatio = (float) screenWidth / screenHeight;
             var textureRatio = (float) surfaceEditor.HelpTexture.Width / surfaceEditor.HelpTexture.Height;
 
-            world.TextureShader.UpdateUniform(ShaderUniformType.ViewMatrix,
+            general.TextureShader.UpdateUniform(ShaderUniformType.ViewMatrix,
                 Matrix4.CreateScale(2f / viewportRatio * textureRatio * c_viewSize, 2f * c_viewSize, 2f * c_viewSize) *
                 Matrix4.CreateTranslation(1, -1, 0) *
                 projectionMatrix.Inverted());
 
             GL.Disable(EnableCap.DepthTest);
             using (surfaceEditor.HelpTexture.Use())
-                surfaceEditor.HelpModel.Draw(world.TextureShader);
+                surfaceEditor.HelpModel.Draw(general.TextureShader);
             GL.Enable(EnableCap.DepthTest);
 
-            world.TextureShader.UpdateUniform(ShaderUniformType.ViewMatrix, ref viewMatrix);
+            general.TextureShader.UpdateUniform(ShaderUniformType.ViewMatrix, ref viewMatrix);
         }
 
 

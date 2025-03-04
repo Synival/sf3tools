@@ -27,7 +27,7 @@ namespace SF3.Win.Controls {
         public void UpdateLightPosition() {
             MakeCurrent();
             var lightPos = GetLightPosition();
-            foreach (var shader in _world.Shaders) {
+            foreach (var shader in _general.Shaders) {
                 using (shader.Use())
                     shader.UpdateUniform(ShaderUniformType.LightPosition, ref lightPos);
             }
@@ -42,7 +42,7 @@ namespace SF3.Win.Controls {
             GL.BlendFunc(BlendingFactor.SrcAlpha, BlendingFactor.OneMinusSrcAlpha);
             GL.BlendEquationSeparate(BlendEquationMode.FuncAdd, BlendEquationMode.Max);
 
-            _world          = new WorldResources();
+            _general        = new GeneralResources();
             _models         = new ModelResources();
             _surfaceModel   = new SurfaceModelResources();
             _groundModel    = new GroundModelResources();
@@ -54,7 +54,7 @@ namespace SF3.Win.Controls {
 
             _renderer = new Renderer();
 
-            _world.Init();
+            _general.Init();
             _models.Init();
             _surfaceModel.Init();
             _groundModel.Init();
@@ -69,17 +69,17 @@ namespace SF3.Win.Controls {
 
             UpdateLightingTexture();
             UpdateLightPosition();
-            _world.ObjectShader.UpdateUniform(ShaderUniformType.LightingMode, false);
-            _world.ObjectShader.UpdateUniform(ShaderUniformType.GlobalGlow, Vector3.Zero);
+            _general.ObjectShader.UpdateUniform(ShaderUniformType.LightingMode, false);
+            _general.ObjectShader.UpdateUniform(ShaderUniformType.GlobalGlow, Vector3.Zero);
 
-            foreach (var shader in _world.Shaders) {
+            foreach (var shader in _general.Shaders) {
                 shader.UpdateUniform(ShaderUniformType.ModelMatrix, Matrix4.Identity);
                 shader.UpdateUniform(ShaderUniformType.NormalMatrix, Matrix3.Identity);
             }
         }
 
         private void OnDisposeRendering() {
-            _world?.Dispose();
+            _general?.Dispose();
             _models?.Dispose();
             _surfaceModel?.Dispose();
             _groundModel?.Dispose();
@@ -91,7 +91,7 @@ namespace SF3.Win.Controls {
 
             _selectFramebuffer?.Dispose();
 
-            _world             = null;
+            _general           = null;
             _models            = null;
             _surfaceModel      = null;
             _groundModel       = null;
@@ -124,12 +124,12 @@ namespace SF3.Win.Controls {
                     block.Update(MPD_File);
 
             if (_tileSelectedNeedsUpdate) {
-                _surfaceEditor.UpdateTileSelectedModel(MPD_File, _world, _tileSelectedPos);
+                _surfaceEditor.UpdateTileSelectedModel(MPD_File, _general, _tileSelectedPos);
                 _tileSelectedNeedsUpdate = false;
             }
 
             UpdateViewMatrix();
-            foreach (var shader in _world.Shaders)
+            foreach (var shader in _general.Shaders)
                 shader.UpdateUniform(ShaderUniformType.ViewMatrix, ref _viewMatrix);
 
             using (_selectFramebuffer.Use()) {
@@ -142,7 +142,7 @@ namespace SF3.Win.Controls {
             GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit | ClearBufferMask.StencilBufferBit);
 
             _renderer.DrawScene(
-                _world, _models, _surfaceModel, _groundModel, _skyBoxModel,
+                _general, _models, _surfaceModel, _groundModel, _skyBoxModel,
                 _gradients, MPD_File?.LightAdjustment, _lighting, _boundaryModels,
                 _surfaceEditor,
                 new Renderer.RendererOptions() {
@@ -211,11 +211,11 @@ namespace SF3.Win.Controls {
         }
 
         private void UpdateProjectionMatrices() {
-            if ((_world?.Shaders?.Count ?? 0) == 0)
+            if ((_general?.Shaders?.Count ?? 0) == 0)
                 return;
 
             UpdateProjectionMatrix();
-            foreach (var shader in _world.Shaders)
+            foreach (var shader in _general.Shaders)
                 shader.UpdateUniform(ShaderUniformType.ProjectionMatrix, ref _projectionMatrix);
         }
 
@@ -248,10 +248,10 @@ namespace SF3.Win.Controls {
             GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
             if (_surfaceModel?.Blocks == null)
                 return;
-            using (_world.SolidShader.Use())
+            using (_general.SolidShader.Use())
                 foreach (var block in _surfaceModel.Blocks)
                     if (block.SelectionModel != null)
-                        block.SelectionModel.Draw(_world.SolidShader);
+                        block.SelectionModel.Draw(_general.SolidShader);
         }
 
         private float _frameDeltaTimeInMs = 0;
@@ -405,7 +405,7 @@ namespace SF3.Win.Controls {
         private Matrix4 _projectionMatrix;
         private Matrix4 _viewMatrix;
 
-        private WorldResources _world = null;
+        private GeneralResources _general = null;
         private ModelResources _models = null;
         private SurfaceModelResources _surfaceModel = null;
         private GroundModelResources _groundModel = null;

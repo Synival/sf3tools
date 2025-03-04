@@ -60,9 +60,9 @@ namespace SF3.Win.Controls {
             var tile = MPD_File.Tiles[_tileHoverPos.Value.X, _tileHoverPos.Value.Y];
             var tileVertices = tile.GetSurfaceModelVertices();
             var target = new Vector3(
-                _tileHoverPos.Value.X + WorldResources.ModelOffsetX + 0.5f,
+                _tileHoverPos.Value.X + GeneralResources.ModelOffsetX + 0.5f,
                 tileVertices.Select(x => x.Y).Average(),
-                (63 - _tileHoverPos.Value.Y) + WorldResources.ModelOffsetZ + 0.5f);
+                (63 - _tileHoverPos.Value.Y) + GeneralResources.ModelOffsetZ + 0.5f);
 
             var dist = (float) Math.Sqrt(
                 Math.Pow(target.X - Position.X, 2) +

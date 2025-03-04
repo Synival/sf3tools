@@ -35,17 +35,17 @@ namespace SF3.Win.OpenGL.MPD_File {
             // Camera boundary coords
             try {
                 var camera = boundaries[0];
-                var ccX1 =  0.0f + camera.X1 / 32.00f + WorldResources.ModelOffsetX;
-                var ccY1 = 64.0f - camera.Y1 / 32.00f + WorldResources.ModelOffsetZ;
-                var ccX2 =  0.0f + camera.X2 / 32.00f + WorldResources.ModelOffsetX;
-                var ccY2 = 64.0f - camera.Y2 / 32.00f + WorldResources.ModelOffsetZ;
+                var ccX1 =  0.0f + camera.X1 / 32.00f + GeneralResources.ModelOffsetX;
+                var ccY1 = 64.0f - camera.Y1 / 32.00f + GeneralResources.ModelOffsetZ;
+                var ccX2 =  0.0f + camera.X2 / 32.00f + GeneralResources.ModelOffsetX;
+                var ccY2 = 64.0f - camera.Y2 / 32.00f + GeneralResources.ModelOffsetZ;
 
                 // Battle boundary coords
                 var battle = boundaries[1];
-                var bcX1 =  0.0f + battle.X1 / 32.00f + WorldResources.ModelOffsetX;
-                var bcY1 = 64.0f - battle.Y1 / 32.00f + WorldResources.ModelOffsetZ;
-                var bcX2 =  0.0f + battle.X2 / 32.00f + WorldResources.ModelOffsetX;
-                var bcY2 = 64.0f - battle.Y2 / 32.00f + WorldResources.ModelOffsetZ;
+                var bcX1 =  0.0f + battle.X1 / 32.00f + GeneralResources.ModelOffsetX;
+                var bcY1 = 64.0f - battle.Y1 / 32.00f + GeneralResources.ModelOffsetZ;
+                var bcX2 =  0.0f + battle.X2 / 32.00f + GeneralResources.ModelOffsetX;
+                var bcY2 = 64.0f - battle.Y2 / 32.00f + GeneralResources.ModelOffsetZ;
 
                 var height = mpdFile.MPDHeader.GroundY / -32.0f;
                 var cameraQuads = new Quad[] {

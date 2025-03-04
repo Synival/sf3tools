@@ -27,8 +27,8 @@ namespace SF3.Win.Extensions {
             const int corner3Z = (Corner3Z * 2) - 1;
             const int corner4Z = (Corner4Z * 2) - 1;
 
-            const float modelOffX = WorldResources.ModelOffsetX + 0.5f;
-            const float modelOffZ = WorldResources.ModelOffsetZ + 0.5f;
+            const float modelOffX = GeneralResources.ModelOffsetX + 0.5f;
+            const float modelOffZ = GeneralResources.ModelOffsetZ + 0.5f;
 
             return [
                 (tile.X + (xzOff * corner1X) + modelOffX, heights[0], (63 - tile.Y) + (xzOff * corner1Z) + modelOffZ),

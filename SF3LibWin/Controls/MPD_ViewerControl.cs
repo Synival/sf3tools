@@ -138,8 +138,8 @@ namespace SF3.Win.Controls {
 
                 width   = (x2 - x1) / 32.00f;
                 height  = (y2 - y1) / 32.00f;
-                centerX = (x1 + x2) / 2.0f /  32.00f + WorldResources.ModelOffsetX;
-                centerZ = (y1 + y2) / 2.0f / -32.00f + WorldResources.ModelOffsetZ + 64.00f;
+                centerX = (x1 + x2) / 2.0f /  32.00f + GeneralResources.ModelOffsetX;
+                centerZ = (y1 + y2) / 2.0f / -32.00f + GeneralResources.ModelOffsetZ + 64.00f;
                 groundY = (MPD_File?.MPDHeader?.GroundY ?? 0) / -32.0f;
             }
 

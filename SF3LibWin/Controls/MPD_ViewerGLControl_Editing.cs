@@ -63,7 +63,7 @@ namespace SF3.Win.Controls {
                 return;
 
             _tileHoverPos = pos;
-            _surfaceEditor.UpdateTileHoverModel(MPD_File, _world, _tileHoverPos);
+            _surfaceEditor.UpdateTileHoverModel(MPD_File, _general, _tileHoverPos);
 
             Invalidate();
         }
