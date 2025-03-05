@@ -53,56 +53,56 @@ namespace SF3.Models.Structs.MPD.Model {
         }
 
         [BulkCopy]
-        [TableViewModelColumn(displayOrder: 0, displayName: "PDATA[0]", isPointer: true)]
+        [TableViewModelColumn(displayOrder: 0, displayName: "PDATA*[0]", isPointer: true)]
         public uint PData0 {
             get => (uint) Data.GetDouble(_pdata0Address);
             set => Data.SetDouble(_pdata0Address, (int) value);
         }
 
         [BulkCopy]
-        [TableViewModelColumn(displayOrder: 1, displayName: "PDATA[1]", isPointer: true)]
+        [TableViewModelColumn(displayOrder: 1, displayName: "PDATA*[1]", isPointer: true)]
         public uint PData1 {
             get => (uint) Data.GetDouble(_pdata1Address);
             set => Data.SetDouble(_pdata1Address, (int) value);
         }
 
         [BulkCopy]
-        [TableViewModelColumn(displayOrder: 2, displayName: "PDATA[2]", isPointer: true)]
+        [TableViewModelColumn(displayOrder: 2, displayName: "PDATA*[2]", isPointer: true)]
         public uint PData2 {
             get => (uint) Data.GetDouble(_pdata2Address);
             set => Data.SetDouble(_pdata2Address, (int) value);
         }
 
         [BulkCopy]
-        [TableViewModelColumn(displayOrder: 3, displayName: "PDATA[3]", isPointer: true)]
+        [TableViewModelColumn(displayOrder: 3, displayName: "PDATA*[3]", isPointer: true)]
         public uint PData3 {
             get => (uint) Data.GetDouble(_pdata3Address);
             set => Data.SetDouble(_pdata3Address, (int) value);
         }
 
         [BulkCopy]
-        [TableViewModelColumn(displayOrder: 4, displayName: "PDATA[4]", isPointer: true)]
+        [TableViewModelColumn(displayOrder: 4, displayName: "PDATA*[4]", isPointer: true)]
         public uint PData4 {
             get => (uint) Data.GetDouble(_pdata4Address);
             set => Data.SetDouble(_pdata4Address, (int) value);
         }
 
         [BulkCopy]
-        [TableViewModelColumn(displayOrder: 5, displayName: "PDATA[5]", isPointer: true)]
+        [TableViewModelColumn(displayOrder: 5, displayName: "PDATA*[5]", isPointer: true)]
         public uint PData5 {
             get => (uint) Data.GetDouble(_pdata5Address);
             set => Data.SetDouble(_pdata5Address, (int) value);
         }
 
         [BulkCopy]
-        [TableViewModelColumn(displayOrder: 6, displayName: "PDATA[6]", isPointer: true)]
+        [TableViewModelColumn(displayOrder: 6, displayName: "PDATA*[6]", isPointer: true)]
         public uint PData6 {
             get => (uint) Data.GetDouble(_pdata6Address);
             set => Data.SetDouble(_pdata6Address, (int) value);
         }
 
         [BulkCopy]
-        [TableViewModelColumn(displayOrder: 7, displayName: "PDATA[7]", isPointer: true)]
+        [TableViewModelColumn(displayOrder: 7, displayName: "PDATA*[7]", isPointer: true)]
         public uint PData7 {
             get => (uint) Data.GetDouble(_pdata7Address);
             set => Data.SetDouble(_pdata7Address, (int) value);

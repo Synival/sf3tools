@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using CommonLib.Attributes;
 using CommonLib.NamedValues;
@@ -19,6 +20,23 @@ namespace SF3.Models.Files.MPD {
             Scenario   = scenario;
             CollectionType = collectionType;
             ChunkIndex = chunkIndex;
+            MovableModelsIndex = null;
+        }
+
+        protected ModelCollection(IByteData data, INameGetterContext nameContext, int address, string name, int movableModelsIndex)
+        : base(data, nameContext) {
+            Address    = address;
+            Name       = name;
+            Scenario   = (ScenarioType) (-1);
+
+            CollectionType =
+                (movableModelsIndex == 0) ? ModelCollectionType.MovableModels1 :
+                (movableModelsIndex == 1) ? ModelCollectionType.MovableModels2 :
+                (movableModelsIndex == 2) ? ModelCollectionType.MovableModels3 :
+                throw new ArgumentException(nameof(movableModelsIndex));
+
+            ChunkIndex = null;
+            MovableModelsIndex = movableModelsIndex;
         }
 
         public static ModelCollection Create(
@@ -30,6 +48,12 @@ namespace SF3.Models.Files.MPD {
             return newFile;
         }
 
+        public static ModelCollection Create(IByteData data, INameGetterContext nameContext, int address, string name, int movableModelsIndex) {
+            var newFile = new ModelCollection(data, nameContext, address, name, movableModelsIndex);
+            newFile.Init();
+            return newFile;
+        }
+
         private struct ModelElementKey {
             public uint AddressInMemory;
             public int Count;
@@ -37,11 +61,21 @@ namespace SF3.Models.Files.MPD {
         }
 
         public override IEnumerable<ITable> MakeTables() {
-            ModelsHeaderTable = ModelsHeaderTable.Create(Data, "ModelsHeader", 0x0000);
-            ModelTable = ModelTable.Create(Data, "Models", 0x000C, ModelsHeaderTable[0].NumModels, Scenario >= ScenarioType.Other);
+            if (MovableModelsIndex.HasValue) {
+                MovableModelTable = MovableModelTable.Create(Data, "MovableModelsHeader", Address);
+            }
+            else {
+                ModelsHeaderTable = ModelsHeaderTable.Create(Data, "ModelsHeader", 0x0000);
+                ModelTable = ModelTable.Create(Data, "Models", 0x000C, ModelsHeaderTable[0].NumModels, Scenario >= ScenarioType.Other);
+            }
 
-            var pdataAddresses = ModelTable
-                .SelectMany(x => x.PDatas.Select((y, i) => new { PDataAddress = y.Value, Index = i }))
+            var pdataAddressesPre =
+                (ModelTable != null) ? ModelTable
+                    .SelectMany(x => x.PDatas.Select((y, i) => new { PDataAddress = y.Value, Index = i }))
+                : MovableModelTable
+                    .Select(x => new { PDataAddress = x.PDataOffset, Index = 0 });
+
+            var pdataAddresses = pdataAddressesPre
                 .Where(x => x.PDataAddress != 0)
                 .GroupBy(x => x.PDataAddress)
                 .Select(x => new { AddressInMemory = x.Key, x.First().Index, Count = x.Count() })
@@ -138,11 +172,15 @@ namespace SF3.Models.Files.MPD {
                 AttrTablesByMemoryAddress = new Dictionary<uint, AttrTable>();
             }
 
-            var tables = new List<ITable>() {
-                ModelsHeaderTable,
-                ModelTable,
-                PDataTable
-            };
+            var tables =
+                new List<ITable>() {
+                    ModelsHeaderTable,
+                    ModelTable,
+                    MovableModelTable,
+                    PDataTable
+                }
+                .Where(x => x != null)
+                .ToList();
 
             tables.AddRange(VertexTablesByMemoryAddress.Values);
             tables.AddRange(AttrTablesByMemoryAddress.Values);
@@ -151,7 +189,9 @@ namespace SF3.Models.Files.MPD {
         }
 
         public uint GetOffsetInChunk(uint memoryAddress) {
-            if (memoryAddress >= 0x60a0000)
+            if (MovableModelsIndex.HasValue)
+                return memoryAddress - 0x290000;
+            else if (memoryAddress >= 0x60a0000)
                 return memoryAddress - 0x60a0000 /* TODO: apply actual offset of chunk! */;
             else if (memoryAddress >= 0x290000)
                 return memoryAddress - 0x292100 /* TODO: apply actual offset of chunk! */;
@@ -167,12 +207,16 @@ namespace SF3.Models.Files.MPD {
         public ModelCollectionType CollectionType { get; }
         public int Address { get; }
         public int? ChunkIndex { get; }
+        public int? MovableModelsIndex { get; }
 
         [BulkCopyRecurse]
         public ModelsHeaderTable ModelsHeaderTable { get; private set; }
 
         [BulkCopyRecurse]
         public ModelTable ModelTable { get; private set; }
+
+        [BulkCopyRecurse]
+        public MovableModelTable MovableModelTable { get; private set; }
 
         [BulkCopyRecurse]
         public PDataTable PDataTable { get; private set; }

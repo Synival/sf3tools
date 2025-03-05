@@ -126,6 +126,7 @@ namespace SF3.Models.Files.MPD {
             tables.AddRange(MakeTexturePaletteTables(header));
             tables.AddRange(MakeTextureAnimationTables(header, areAnimatedTextures32Bit));
             tables.Add(BoundariesTable = BoundaryTable.Create(Data, "Boundaries", ResourceFile("BoundaryList.xml"), header.OffsetBoundaries - c_RamOffset));
+            tables.AddRange(MakeMovableModelCollections(header));
             tables.AddRange(MakeUnknownTables(header));
 
             return tables.ToArray();
@@ -189,6 +190,29 @@ namespace SF3.Models.Files.MPD {
                     // TODO: what to do here??
                 }
             }
+
+            return tables.ToArray();
+        }
+
+        private ITable[] MakeMovableModelCollections(MPDHeaderModel header) {
+            var tables = new List<ITable>();
+
+            var modelsList = new List<ModelCollection>();
+            if (ModelCollections != null)
+                modelsList.AddRange(ModelCollections);
+
+            var offsets = new int[] { header.OffsetMesh1, header.OffsetMesh2, header.OffsetMesh3 };
+            for (int i = 0; i < 3; i++) {
+                var offset = offsets[i];
+                if (offset == 0)
+                    continue;
+
+                var newModel = ModelCollection.Create(Data, NameGetterContext, offset - c_RamOffset, "MovableModels" + (i + 1), i);
+                modelsList.Add(newModel);
+                tables.AddRange(newModel.Tables);
+            }
+
+            ModelCollections = modelsList.ToArray();
 
             return tables.ToArray();
         }
@@ -512,6 +536,9 @@ namespace SF3.Models.Files.MPD {
             var tables = new List<ITable>();
 
             var modelsList = new List<ModelCollection>();
+            if (ModelCollections != null)
+                modelsList.AddRange(ModelCollections);
+
             foreach (var mc in modelsChunks) {
                 var collectionType = (mc.Index == 19 && MPDHeader.HasChunk19Model)
                     ? ModelCollectionType.Chunk19Model
