@@ -76,9 +76,11 @@ namespace SF3.Win.OpenGL.MPD_File {
                         new VECTOR(pos2.X, pos2.Y,        pos2.Z)
                     ]);
 
-                    var normal = poly.GetNormal(POLYGON_NormalCalculationMethod.AverageOfAllTriangles);
+                    var dist = (pos2.Xz - pos1.Xz).Length;
+                    var absCos = (float) Math.Abs(pos2.X - pos1.X) / dist;
+                    var absSin = (float) Math.Abs(pos2.Z - pos1.Z) / dist;
 
-                    var color = new Vector3(normal.X.Float * 0.25f + 0.75f, 0.75f, normal.Z.Float * 0.25f + 0.75f);
+                    var color = new Vector3(absSin * 0.25f + 0.75f, 0.75f, absCos * 0.25f + 0.75f);
                     var colors = new Vector3[] {
                         color * 0.7f,
                         color * 0.8f,

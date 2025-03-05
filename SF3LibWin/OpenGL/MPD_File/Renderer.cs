@@ -157,9 +157,15 @@ namespace SF3.Win.OpenGL.MPD_File {
                     model.Draw(general.SolidShader, null);
 
                 GL.Disable(EnableCap.DepthTest);
+                GL.DepthMask(false);
+
                 collisionModels.FullModel.Draw(general.SolidShader, null);
+
+                GL.DepthMask(true);
                 GL.Enable(EnableCap.DepthTest);
             }
+
+            GL.Disable(EnableCap.PolygonOffsetFill);
         }
 
         public void DrawSceneWireframes(
@@ -513,8 +519,12 @@ namespace SF3.Win.OpenGL.MPD_File {
                 return;
 
             GL.Disable(EnableCap.DepthTest);
+            GL.DepthMask(false);
+
             using (surfaceEditor.TileSelectedTexture.Use())
                 surfaceEditor.TileSelectedModel.Draw(general.TextureShader);
+
+            GL.DepthMask(true);
             GL.Enable(EnableCap.DepthTest);
         }
 
@@ -523,8 +533,12 @@ namespace SF3.Win.OpenGL.MPD_File {
                 return;
 
             GL.Disable(EnableCap.DepthTest);
+            GL.DepthMask(false);
+
             using (surfaceEditor.TileHoverTexture.Use())
                 surfaceEditor.TileHoverModel.Draw(general.TextureShader);
+
+            GL.DepthMask(true);
             GL.Enable(EnableCap.DepthTest);
         }
 
