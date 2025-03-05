@@ -44,7 +44,7 @@ namespace SF3.Win.Views.MPD {
 
             if (Model.ModelCollections != null) {
                 foreach (var models in Model.ModelCollections)
-                    if (models.CollectionType >= ModelCollectionType.MovableModels1 && models.CollectionType <= ModelCollectionType.MovableModels3)
+                    if (models.IsMovableModelCollection)
                         CreateChild(new ModelChunkView(models.CollectionType.ToString(), Model, models));
             }
 

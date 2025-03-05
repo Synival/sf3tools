@@ -74,7 +74,9 @@ namespace SF3.Win.OpenGL.MPD_File {
                         AttributesByAddress[pdata.AttributesOffset] = table.ToArray();
                     }
 
-                    AddModel(mpdFile, models.CollectionType, pdata);
+                    // Don't render movable models; they're not placed on the map in that way.
+                    if (!models.IsMovableModelCollection)
+                        AddModel(mpdFile, models.CollectionType, pdata);
                 }
             }
 

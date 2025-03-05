@@ -209,6 +209,9 @@ namespace SF3.Models.Files.MPD {
         public int? ChunkIndex { get; }
         public int? MovableModelsIndex { get; }
 
+        public bool IsMovableModelCollection
+            => CollectionType >= ModelCollectionType.MovableModels1 && CollectionType <= ModelCollectionType.MovableModels3;
+
         [BulkCopyRecurse]
         public ModelsHeaderTable ModelsHeaderTable { get; private set; }
 
