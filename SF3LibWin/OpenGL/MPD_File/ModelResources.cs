@@ -51,7 +51,7 @@ namespace SF3.Win.OpenGL.MPD_File {
 
                 if (models.MovableModelTable != null) {
                     movableModelsList.AddRange(models.MovableModelTable.Rows);
-                    pdata0Addresses.AddRange(models.MovableModelTable.Select(x => x.PDataOffset));
+                    pdata0Addresses.AddRange(models.MovableModelTable.Select(x => x.PData0));
                 }
 
                 var uniquePData0Addresses = pdata0Addresses

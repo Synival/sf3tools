@@ -73,7 +73,7 @@ namespace SF3.Models.Files.MPD {
                 (ModelTable != null) ? ModelTable
                     .SelectMany(x => x.PDatas.Select((y, i) => new { PDataAddress = y.Value, Index = i }))
                 : MovableModelTable
-                    .Select(x => new { PDataAddress = x.PDataOffset, Index = 0 });
+                    .Select(x => new { PDataAddress = x.PData0, Index = 0 });
 
             var pdataAddresses = pdataAddressesPre
                 .Where(x => x.PDataAddress != 0)
@@ -86,7 +86,7 @@ namespace SF3.Models.Files.MPD {
                 .Select(x => new PDataTable.PDataRef() {
                     Address    = (int) GetOffsetInChunk(x.AddressInMemory),
                     Collection = CollectionType,
-                    ChunkIndex = ChunkIndex ?? -1,
+                    ChunkIndex = ChunkIndex,
                     Index      = x.Index,
                     RefCount   = x.Count
                 })

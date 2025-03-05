@@ -9,7 +9,7 @@ namespace SF3.Models.Tables.MPD.Model {
         public struct PDataRef {
             public int Address;
             public ModelCollectionType Collection;
-            public int ChunkIndex;
+            public int? ChunkIndex;
             public int Index;
             public int RefCount;
         }

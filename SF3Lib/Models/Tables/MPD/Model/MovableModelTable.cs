@@ -17,7 +17,7 @@ namespace SF3.Models.Tables.MPD.Model {
         public override bool Load() {
             return Load(
                 (id, address) => new MovableModel(Data, id, "MovableModel" + id.ToString("D2"), address),
-                (rows, lastRow) => lastRow.PDataOffset != 0x00,
+                (rows, lastRow) => lastRow.PData0 != 0x00,
                 false);
         }
     }
