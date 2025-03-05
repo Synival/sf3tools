@@ -42,7 +42,7 @@ namespace SF3.Win.OpenGL.MPD_File {
                 modelsList.AddRange(models.ModelTable.Rows);
 
                 var uniquePData1Addresses = models.ModelTable
-                    .Select(x => x.PData1)
+                    .Select(x => x.PData0)
                     .Where(x => x != 0)
                     .Distinct()
                     .ToArray();
@@ -71,7 +71,7 @@ namespace SF3.Win.OpenGL.MPD_File {
                         AttributesByAddress[pdata.AttributesOffset] = table.ToArray();
                     }
 
-                    AddModel(mpdFile, models.TextureCollection, pdata);
+                    AddModel(mpdFile, models.CollectionType, pdata);
                 }
             }
 
@@ -88,10 +88,10 @@ namespace SF3.Win.OpenGL.MPD_File {
             PolygonsByAddress[pdata.PolygonsOffset]     = models.PolygonTablesByMemoryAddress.TryGetValue(pdata.PolygonsOffset,   out var pv) ? pv.ToArray() : null;
             AttributesByAddress[pdata.AttributesOffset] = models.AttrTablesByMemoryAddress   .TryGetValue(pdata.AttributesOffset, out var av) ? av.ToArray() : null;
 
-            AddModel(mpdFile, models.TextureCollection, pdata);
+            AddModel(mpdFile, models.CollectionType, pdata);
 
             var model = new Model(new ByteData.ByteData(new ByteArray(256)), 0, "Model", 0, true);
-            model.PData1 = pdata.RamAddress;
+            model.PData0 = pdata.RamAddress;
             model.PositionX = -32 * 32;
             model.PositionZ = -32 * 32;
             model.ScaleX = 1.0f;
@@ -112,7 +112,20 @@ namespace SF3.Win.OpenGL.MPD_File {
             return null;
         }
 
-        public void AddModel(IMPD_File mpdFile, TextureCollectionType texCollection, PDataModel pdata) {
+        private TextureCollectionType GetTextureCollection(ModelCollectionType modelCollection) {
+            switch (modelCollection) {
+                case ModelCollectionType.PrimaryModels:
+                    return TextureCollectionType.PrimaryTextures;
+                case ModelCollectionType.Chunk19Model:
+                    return TextureCollectionType.Chunk19ModelTextures;
+                case ModelCollectionType.Chunk1Model:
+                    return TextureCollectionType.Chunk1ModelTextures;
+                default:
+                    throw new ArgumentException(nameof(modelCollection));
+            }
+        }
+
+        public void AddModel(IMPD_File mpdFile, ModelCollectionType modelCollection, PDataModel pdata) {
             TextureFlipType ToggleHorizontalFlipping(TextureFlipType flip)
                 => (flip & ~TextureFlipType.Horizontal) | (TextureFlipType) (TextureFlipType.Horizontal - (flip & TextureFlipType.Horizontal));
 
@@ -132,6 +145,8 @@ namespace SF3.Win.OpenGL.MPD_File {
 
             if (vertices == null || polygons == null || attrs == null)
                 return;
+
+            var texCollection = GetTextureCollection(modelCollection);
 
             var texturesById = mpdFile.TextureCollections != null ? mpdFile.TextureCollections
                 .Where(x => x?.TextureTable != null && x.TextureTable.Collection == texCollection)

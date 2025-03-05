@@ -1,5 +1,6 @@
 ﻿using CommonLib.Attributes;
 using SF3.ByteData;
+using SF3.Types;
 
 namespace SF3.Models.Structs.MPD.Model {
     public class PDataModel : Struct {
@@ -9,8 +10,13 @@ namespace SF3.Models.Structs.MPD.Model {
         public readonly int _polygonCountAddr;
         public readonly int _attributesOffsetAddr;
 
-        public PDataModel(IByteData data, int id, string name, int address, int refs) : base(data, id, name, address, 0x14) {
-            Refs = refs;
+        public PDataModel(IByteData data, int id, string name, int address,
+            ModelCollectionType collection, int chunkIndex, int index, int refs
+        ) : base(data, id, name, address, 0x14) {
+            Collection = collection;
+            ChunkIndex = chunkIndex;
+            Index      = index;
+            Refs       = refs;
 
             _verticesOffsetAddr   = Address + 0x00; // 4 bytes
             _vertexCountAddr      = Address + 0x04; // 4 bytes
@@ -18,6 +24,15 @@ namespace SF3.Models.Structs.MPD.Model {
             _polygonCountAddr     = Address + 0x0C; // 4 bytes
             _attributesOffsetAddr = Address + 0x10; // 4 bytes
         }
+
+        [TableViewModelColumn(displayOrder: -2.66f, displayName: "Collection", minWidth: 110)]
+        public ModelCollectionType Collection { get; }
+
+        [TableViewModelColumn(displayOrder: -2.33f, displayName: "Chunk #")]
+        public int ChunkIndex { get; }
+
+        [TableViewModelColumn(displayOrder: -2.15f, displayName: "Index")]
+        public int Index { get; }
 
         [TableViewModelColumn(displayOrder: 0)]
         public int Refs { get; }

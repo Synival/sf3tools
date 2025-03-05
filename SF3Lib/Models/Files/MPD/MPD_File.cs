@@ -513,12 +513,12 @@ namespace SF3.Models.Files.MPD {
 
             var modelsList = new List<ModelCollection>();
             foreach (var mc in modelsChunks) {
-                var texCollection = (mc.Index == 19 && MPDHeader.HasChunk19Model)
-                    ? TextureCollectionType.Chunk19ModelTextures
-                    : (chunkDatas[21] != null && mc.Index == 1) ? TextureCollectionType.Chunk1ModelTextures
-                    : TextureCollectionType.PrimaryTextures;
+                var collectionType = (mc.Index == 19 && MPDHeader.HasChunk19Model)
+                    ? ModelCollectionType.Chunk19Model
+                    : (chunkDatas[21] != null && mc.Index == 1) ? ModelCollectionType.Chunk1Model
+                    : ModelCollectionType.PrimaryModels;
 
-                var newModel = ModelCollection.Create(mc.DecompressedData, NameGetterContext, 0x00, "Models" + mc.Index, Scenario, texCollection, mc.Index);
+                var newModel = ModelCollection.Create(mc.DecompressedData, NameGetterContext, 0x00, "Models" + mc.Index, Scenario, mc.Index, collectionType);
                 modelsList.Add(newModel);
                 tables.AddRange(newModel.Tables);
             }
@@ -955,7 +955,7 @@ namespace SF3.Models.Files.MPD {
                             continue;
 
                         // Look into the model...
-                        var pdataAddr = model.PData1;
+                        var pdataAddr = model.PData0;
                         if (!mc.PDatasByMemoryAddress.ContainsKey(pdataAddr))
                             continue;
                         var pdata = mc.PDatasByMemoryAddress[pdataAddr];

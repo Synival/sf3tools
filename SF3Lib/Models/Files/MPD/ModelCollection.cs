@@ -10,17 +10,22 @@ using SF3.Types;
 
 namespace SF3.Models.Files.MPD {
     public class ModelCollection : TableFile {
-        protected ModelCollection(IByteData data, INameGetterContext nameContext, int address, string name, ScenarioType scenario, TextureCollectionType textureCollection, int? chunkIndex)
+        protected ModelCollection(
+            IByteData data, INameGetterContext nameContext, int address, string name,
+            ScenarioType scenario, int? chunkIndex, ModelCollectionType collectionType)
         : base(data, nameContext) {
             Address    = address;
             Name       = name;
             Scenario   = scenario;
-            TextureCollection = textureCollection;
+            CollectionType = collectionType;
             ChunkIndex = chunkIndex;
         }
 
-        public static ModelCollection Create(IByteData data, INameGetterContext nameContext, int address, string name, ScenarioType scenario, TextureCollectionType textureCollection, int? chunkIndex) {
-            var newFile = new ModelCollection(data, nameContext, address, name, scenario, textureCollection, chunkIndex);
+        public static ModelCollection Create(
+            IByteData data, INameGetterContext nameContext, int address, string name,
+            ScenarioType scenario, int? chunkIndex, ModelCollectionType modelCollection
+        ) {
+            var newFile = new ModelCollection(data, nameContext, address, name, scenario, chunkIndex, modelCollection);
             newFile.Init();
             return newFile;
         }
@@ -36,15 +41,25 @@ namespace SF3.Models.Files.MPD {
             ModelTable = ModelTable.Create(Data, "Models", 0x000C, ModelsHeaderTable[0].NumModels, Scenario >= ScenarioType.Other);
 
             var pdataAddresses = ModelTable
-                .SelectMany(x => x.PDatas)
-                .Select(x => x.Value)
-                .Where(x => x != 0)
-                .GroupBy(x => x)
-                .Select(x => new { AddressInMemory = x.Key, Count = x.Count() })
+                .SelectMany(x => x.PDatas.Select((y, i) => new { PDataAddress = y.Value, Index = i }))
+                .Where(x => x.PDataAddress != 0)
+                .GroupBy(x => x.PDataAddress)
+                .Select(x => new { AddressInMemory = x.Key, x.First().Index, Count = x.Count() })
                 .OrderBy(x => x.AddressInMemory)
                 .ToArray();
 
-            PDataTable = PDataTable.Create(Data, "PDATAs", pdataAddresses.Select(x => (int) GetOffsetInChunk(x.AddressInMemory)).ToArray(), pdataAddresses.Select(x => x.Count).ToArray());
+            var pdataRefs = pdataAddresses
+                .Select(x => new PDataTable.PDataRef() {
+                    Address    = (int) GetOffsetInChunk(x.AddressInMemory),
+                    Collection = CollectionType,
+                    ChunkIndex = ChunkIndex ?? -1,
+                    Index      = x.Index,
+                    RefCount   = x.Count
+                })
+                .ToArray();
+
+            PDataTable = PDataTable.Create(Data, "PDATAs", pdataRefs);
+
             try {
                 PDatasByMemoryAddress = PDataTable
                     .Select((PData, i) => new { PData, pdataAddresses[i].AddressInMemory })
@@ -149,7 +164,7 @@ namespace SF3.Models.Files.MPD {
         [BulkCopyRowName]
         public string Name { get; }
         public ScenarioType Scenario { get; }
-        public TextureCollectionType TextureCollection { get; }
+        public ModelCollectionType CollectionType { get; }
         public int Address { get; }
         public int? ChunkIndex { get; }
 

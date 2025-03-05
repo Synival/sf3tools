@@ -202,7 +202,7 @@ namespace SF3.Win.OpenGL.MPD_File {
                 return;
 
             var modelsWithGroups = models.Models
-                .Select(x => new { Model = x, ModelGroup = models.ModelsByMemoryAddress.TryGetValue(x.PData1, out ModelGroup pd) ? pd : null })
+                .Select(x => new { Model = x, ModelGroup = models.ModelsByMemoryAddress.TryGetValue(x.PData0, out ModelGroup pd) ? pd : null })
                 .Where(x => x.ModelGroup != null)
                 .ToArray();
 
@@ -334,7 +334,7 @@ namespace SF3.Win.OpenGL.MPD_File {
             using (lightingTexture.Use(MPD_TextureUnit.TextureLighting))
             using (general.ObjectShader.Use()) {
                 var modelsWithGroups = models.Models
-                    .Select(x => new { Model = x, ModelGroup = models.ModelsByMemoryAddress.TryGetValue(x.PData1, out ModelGroup pd) ? pd : null })
+                    .Select(x => new { Model = x, ModelGroup = models.ModelsByMemoryAddress.TryGetValue(x.PData0, out ModelGroup pd) ? pd : null })
                     .Where(x => x.ModelGroup != null)
                     .ToArray();
 
@@ -459,7 +459,7 @@ namespace SF3.Win.OpenGL.MPD_File {
                 return;
 
             foreach (var model in models.Models) {
-                var modelGroup = models.ModelsByMemoryAddress.TryGetValue(model.PData1, out ModelGroup pd) ? pd : null;
+                var modelGroup = models.ModelsByMemoryAddress.TryGetValue(model.PData0, out ModelGroup pd) ? pd : null;
                 if (modelGroup != null) {
                     SetModelAndNormalMatricesForModel(models, model, general.WireframeShader, options, cameraYaw, cameraPitch);
                     modelGroup.SolidTexturedModel?.Draw(general.WireframeShader);
@@ -567,7 +567,7 @@ namespace SF3.Win.OpenGL.MPD_File {
 
                 if (model.AlwaysFacesCamera && options.RotateSpritesUp) {
                     // Not all sprites rotate around the X axis the same way, so get the center X to help with offsets.
-                    var pdata    = models.PDatasByAddress.TryGetValue(model.PData1, out var pdataValue) ? pdataValue : null;
+                    var pdata    = models.PDatasByAddress.TryGetValue(model.PData0, out var pdataValue) ? pdataValue : null;
                     var vertices = (pdata == null) ? null : models.VerticesByAddress.TryGetValue(pdata.VerticesOffset, out var verticesValue) ? verticesValue : null;
 
                     var topY     = vertices?.Min(x => Math.Min(x.Vector.Y.Float, x.Vector.Z.Float)) / 32.0f ?? 0.00f;

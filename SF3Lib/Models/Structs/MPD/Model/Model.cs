@@ -6,6 +6,7 @@ using SF3.ByteData;
 
 namespace SF3.Models.Structs.MPD.Model {
     public class Model : Struct {
+        private readonly int _pdata0Address;
         private readonly int _pdata1Address;
         private readonly int _pdata2Address;
         private readonly int _pdata3Address;
@@ -13,7 +14,6 @@ namespace SF3.Models.Structs.MPD.Model {
         private readonly int _pdata5Address;
         private readonly int _pdata6Address;
         private readonly int _pdata7Address;
-        private readonly int _pdata8Address;
         private readonly int _positionXAddress;
         private readonly int _positionYAddress;
         private readonly int _positionZAddress;
@@ -31,14 +31,14 @@ namespace SF3.Models.Structs.MPD.Model {
             PDatas = new PDataAccessorCollection(this);
             HasTagsAndFlags = hasTagsAndFlags;
 
-            _pdata1Address    = Address + 0x00; // 4 bytes
-            _pdata2Address    = Address + 0x04; // 4 bytes
-            _pdata3Address    = Address + 0x08; // 4 bytes
-            _pdata4Address    = Address + 0x0C; // 4 bytes
-            _pdata5Address    = Address + 0x10; // 4 bytes
-            _pdata6Address    = Address + 0x14; // 4 bytes
-            _pdata7Address    = Address + 0x18; // 4 bytes
-            _pdata8Address    = Address + 0x1C; // 4 bytes
+            _pdata0Address    = Address + 0x00; // 4 bytes
+            _pdata1Address    = Address + 0x04; // 4 bytes
+            _pdata2Address    = Address + 0x08; // 4 bytes
+            _pdata3Address    = Address + 0x0C; // 4 bytes
+            _pdata4Address    = Address + 0x10; // 4 bytes
+            _pdata5Address    = Address + 0x14; // 4 bytes
+            _pdata6Address    = Address + 0x18; // 4 bytes
+            _pdata7Address    = Address + 0x1C; // 4 bytes
             _positionXAddress = Address + 0x20; // 2 bytes
             _positionYAddress = Address + 0x22; // 2 bytes
             _positionZAddress = Address + 0x24; // 2 bytes
@@ -53,59 +53,59 @@ namespace SF3.Models.Structs.MPD.Model {
         }
 
         [BulkCopy]
-        [TableViewModelColumn(displayOrder: 0, isPointer: true)]
+        [TableViewModelColumn(displayOrder: 0, displayName: "PDATA[0]", isPointer: true)]
+        public uint PData0 {
+            get => (uint) Data.GetDouble(_pdata0Address);
+            set => Data.SetDouble(_pdata0Address, (int) value);
+        }
+
+        [BulkCopy]
+        [TableViewModelColumn(displayOrder: 1, displayName: "PDATA[1]", isPointer: true)]
         public uint PData1 {
             get => (uint) Data.GetDouble(_pdata1Address);
             set => Data.SetDouble(_pdata1Address, (int) value);
         }
 
         [BulkCopy]
-        [TableViewModelColumn(displayOrder: 1, isPointer: true)]
+        [TableViewModelColumn(displayOrder: 2, displayName: "PDATA[2]", isPointer: true)]
         public uint PData2 {
             get => (uint) Data.GetDouble(_pdata2Address);
             set => Data.SetDouble(_pdata2Address, (int) value);
         }
 
         [BulkCopy]
-        [TableViewModelColumn(displayOrder: 2, isPointer: true)]
+        [TableViewModelColumn(displayOrder: 3, displayName: "PDATA[3]", isPointer: true)]
         public uint PData3 {
             get => (uint) Data.GetDouble(_pdata3Address);
             set => Data.SetDouble(_pdata3Address, (int) value);
         }
 
         [BulkCopy]
-        [TableViewModelColumn(displayOrder: 3, isPointer: true)]
+        [TableViewModelColumn(displayOrder: 4, displayName: "PDATA[4]", isPointer: true)]
         public uint PData4 {
             get => (uint) Data.GetDouble(_pdata4Address);
             set => Data.SetDouble(_pdata4Address, (int) value);
         }
 
         [BulkCopy]
-        [TableViewModelColumn(displayOrder: 4, isPointer: true)]
+        [TableViewModelColumn(displayOrder: 5, displayName: "PDATA[5]", isPointer: true)]
         public uint PData5 {
             get => (uint) Data.GetDouble(_pdata5Address);
             set => Data.SetDouble(_pdata5Address, (int) value);
         }
 
         [BulkCopy]
-        [TableViewModelColumn(displayOrder: 5, isPointer: true)]
+        [TableViewModelColumn(displayOrder: 6, displayName: "PDATA[6]", isPointer: true)]
         public uint PData6 {
             get => (uint) Data.GetDouble(_pdata6Address);
             set => Data.SetDouble(_pdata6Address, (int) value);
         }
 
         [BulkCopy]
-        [TableViewModelColumn(displayOrder: 6, isPointer: true)]
+        [TableViewModelColumn(displayOrder: 7, displayName: "PDATA[7]", isPointer: true)]
         public uint PData7 {
             get => (uint) Data.GetDouble(_pdata7Address);
             set => Data.SetDouble(_pdata7Address, (int) value);
-        }
-
-        [BulkCopy]
-        [TableViewModelColumn(displayOrder: 7, isPointer: true)]
-        public uint PData8 {
-            get => (uint) Data.GetDouble(_pdata8Address);
-            set => Data.SetDouble(_pdata8Address, (int) value);
         }
 
         public class PDataAccessor {
@@ -115,8 +115,8 @@ namespace SF3.Models.Structs.MPD.Model {
             }
 
             public uint Value {
-                get => (uint) Model.Data.GetDouble(Model._pdata1Address + Index * 0x04);
-                set => Model.Data.SetDouble(Model._pdata1Address + Index * 0x04, (int) value);
+                get => (uint) Model.Data.GetDouble(Model._pdata0Address + Index * 0x04);
+                set => Model.Data.SetDouble(Model._pdata0Address + Index * 0x04, (int) value);
             }
 
             public Model Model { get; }
