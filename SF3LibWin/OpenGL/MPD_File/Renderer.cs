@@ -82,12 +82,12 @@ namespace SF3.Win.OpenGL.MPD_File {
             // Done rendering gradients; disable the stencil test.
             GL.Disable(EnableCap.StencilTest);
 
-            if (options.DrawWireframe)
-                DrawSceneWireframes(general, models, surfaceModel, options, cameraYaw, cameraPitch);
-
             // Done rendering the real scene; disable one-sided rendering
             if (!options.ForceTwoSidedTextures)
                 GL.Disable(EnableCap.CullFace);
+
+            if (options.DrawWireframe)
+                DrawSceneWireframes(general, models, surfaceModel, options, cameraYaw, cameraPitch);
 
             if (options.DrawBoundaries)
                 DrawSceneBoundaries(general, boundaryModels);
