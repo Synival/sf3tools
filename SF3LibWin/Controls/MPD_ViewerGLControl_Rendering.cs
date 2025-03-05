@@ -164,8 +164,7 @@ namespace SF3.Win.Controls {
                     DrawTerrainTypes = DrawTerrainTypes,
                     DrawEventIDs = DrawEventIDs,
                     DrawBoundaries = DrawBoundaries,
-                    // TODO: get this from an app setting with a button
-                    DrawCollisionLines = true,
+                    DrawCollisionLines = DrawCollisionLines,
 
                     DrawHelp = DrawHelp,
 
@@ -366,6 +365,13 @@ namespace SF3.Win.Controls {
         public bool DrawBoundaries {
             get => AppState.ViewerDrawBoundaries;
             set => UpdateAppState(nameof(AppState.ViewerDrawBoundaries), value);
+        }
+
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public bool DrawCollisionLines {
+            get => AppState.ViewerDrawCollisionLines;
+            set => UpdateAppState(nameof(AppState.ViewerDrawCollisionLines), value);
         }
 
         [Browsable(false)]

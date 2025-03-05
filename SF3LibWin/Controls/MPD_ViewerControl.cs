@@ -31,6 +31,7 @@ namespace SF3.Win.Controls {
             tsbToggleBoundaries.Checked  = GLControl.DrawBoundaries;
             tsbToggleTerrainType.Checked = GLControl.DrawTerrainTypes;
             tsbToggleEventID.Checked     = GLControl.DrawEventIDs;
+            tsbToggleCollisions.Checked  = GLControl.DrawCollisionLines;
             tsbToggleNormals.Checked     = GLControl.DrawNormals;
 
             tsbRotateSpritesUp.Checked   = GLControl.RotateSpritesUp;
@@ -86,6 +87,7 @@ namespace SF3.Win.Controls {
         private void tsbToggleBoundaries_Click (object sender, EventArgs e) => tsbToggleBoundaries.Checked  = GLControl.DrawBoundaries   = !GLControl.DrawBoundaries;
         private void tsbToggleTerrainType_Click(object sender, EventArgs e) => tsbToggleTerrainType.Checked = GLControl.DrawTerrainTypes = !GLControl.DrawTerrainTypes;
         private void tsbToggleEventID_Click    (object sender, EventArgs e) => tsbToggleEventID.Checked     = GLControl.DrawEventIDs     = !GLControl.DrawEventIDs;
+        private void tsbToggleCollisions_Click (object sender, EventArgs e) => tsbToggleCollisions.Checked  = GLControl.DrawCollisionLines = !GLControl.DrawCollisionLines;
         private void tsbToggleNormals_Click    (object sender, EventArgs e) => tsbToggleNormals.Checked     = GLControl.DrawNormals      = !GLControl.DrawNormals;
 
         private void tsbRotateSpritesUp_Click  (object sender, EventArgs e) => tsbRotateSpritesUp.Checked   = GLControl.RotateSpritesUp  = !GLControl.RotateSpritesUp;

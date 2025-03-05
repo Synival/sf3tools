@@ -23,6 +23,7 @@
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent() {
+            var resources = new System.ComponentModel.ComponentResourceManager(typeof(MPD_ViewerControl));
             toolStrip1 = new System.Windows.Forms.ToolStrip();
             tsbCursorSelect = new System.Windows.Forms.ToolStripButton();
             tsbCursorNavigate = new System.Windows.Forms.ToolStripButton();
@@ -52,13 +53,14 @@
             tsbToggleHelp = new System.Windows.Forms.ToolStripButton();
             tilePropertyControl1 = new TilePropertiesControl();
             mpdViewerGLControl1 = new MPD_ViewerGLControl();
+            tsbToggleCollisions = new System.Windows.Forms.ToolStripButton();
             toolStrip1.SuspendLayout();
             SuspendLayout();
             // 
             // toolStrip1
             // 
             toolStrip1.ImageScalingSize = new System.Drawing.Size(24, 24);
-            toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { tsbCursorSelect, tsbCursorNavigate, toolStripSeparator5, tsbDrawSurfaceModel, tsbDrawModels, tsbDrawGround, tsbDrawSkyBox, tsbRunAnimations, tsbApplyLighting, tsbDrawGradients, toolStripSeparator2, tsbToggleWireframe, tsbToggleBoundaries, tsbToggleTerrainType, tsbToggleEventID, tsbToggleNormals, tsbRotateSpritesUp, toolStripSeparator1, tsbCameraReset, tsbCameraTopView, tsbCameraLookAtCenter, toolStripSeparator3, tsbRecalculateLightmapOriginalMath, tsbUpdateLightmapUpdatedMath, toolStripSeparator4, tsbToggleHelp });
+            toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { tsbCursorSelect, tsbCursorNavigate, toolStripSeparator5, tsbDrawSurfaceModel, tsbDrawModels, tsbDrawGround, tsbDrawSkyBox, tsbRunAnimations, tsbApplyLighting, tsbDrawGradients, toolStripSeparator2, tsbToggleWireframe, tsbToggleBoundaries, tsbToggleTerrainType, tsbToggleEventID, tsbToggleCollisions, tsbToggleNormals, tsbRotateSpritesUp, toolStripSeparator1, tsbCameraReset, tsbCameraTopView, tsbCameraLookAtCenter, toolStripSeparator3, tsbRecalculateLightmapOriginalMath, tsbUpdateLightmapUpdatedMath, toolStripSeparator4, tsbToggleHelp });
             toolStrip1.Location = new System.Drawing.Point(0, 0);
             toolStrip1.Name = "toolStrip1";
             toolStrip1.Size = new System.Drawing.Size(789, 31);
@@ -335,6 +337,16 @@
             mpdViewerGLControl1.Size = new System.Drawing.Size(582, 545);
             mpdViewerGLControl1.TabIndex = 1;
             // 
+            // tsbToggleCollisions
+            // 
+            tsbToggleCollisions.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            tsbToggleCollisions.Image = (System.Drawing.Image) resources.GetObject("tsbToggleCollisions.Image");
+            tsbToggleCollisions.ImageTransparentColor = System.Drawing.Color.Magenta;
+            tsbToggleCollisions.Name = "tsbToggleCollisions";
+            tsbToggleCollisions.Size = new System.Drawing.Size(28, 28);
+            tsbToggleCollisions.Text = "Draw Collision Lines";
+            tsbToggleCollisions.Click += tsbToggleCollisions_Click;
+            // 
             // MPD_ViewerControl
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -381,5 +393,6 @@
         private System.Windows.Forms.ToolStripButton tsbCursorNavigate;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
         private System.Windows.Forms.ToolStripButton tsbApplyLighting;
+        private System.Windows.Forms.ToolStripButton tsbToggleCollisions;
     }
 }
