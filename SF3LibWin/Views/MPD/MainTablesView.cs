@@ -1,5 +1,6 @@
 ﻿using System.Windows.Forms;
 using SF3.Models.Files.MPD;
+using SF3.Types;
 
 namespace SF3.Win.Views.MPD {
     public class MainTablesView : TabView {
@@ -40,6 +41,12 @@ namespace SF3.Win.Views.MPD {
 
             if (Model.GroundAnimationTable != null)
                 CreateChild(new TableView("Ground Animation",  Model.GroundAnimationTable, ngc));
+
+            if (Model.ModelCollections != null) {
+                foreach (var models in Model.ModelCollections)
+                    if (models.CollectionType >= ModelCollectionType.MovableModels1 && models.CollectionType <= ModelCollectionType.MovableModels3)
+                        CreateChild(new ModelChunkView(models.CollectionType.ToString(), Model, models));
+            }
 
             for (var i = 0; i < Model.PaletteTables.Length; i++)
                 if (Model.PaletteTables[i] != null)
