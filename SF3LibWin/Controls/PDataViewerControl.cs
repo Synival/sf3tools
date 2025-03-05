@@ -185,13 +185,13 @@ namespace SF3.Win.Controls {
 
         private PDataModel _pdata = null;
 
-        public void Update(IMPD_File mpdFile, ModelCollection models, PDataModel pdata) {
-            if (Models == models && _pdata == pdata)
+        public void Update(IMPD_File mpdFile, PDataModel pdata) {
+            if (_pdata == pdata)
                 return;
 
             MPD_File = mpdFile;
-            Models = models;
             _pdata = pdata;
+            Models = (pdata == null) ? null : mpdFile.ModelCollections.FirstOrDefault(x => x.PDatasByMemoryAddress.ContainsKey(pdata.RamAddress));
 
             if (_models != null) {
                 _models.Reset();

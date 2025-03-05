@@ -9,11 +9,10 @@ using SF3.Win.Controls;
 
 namespace SF3.Win.Views.MPD {
     public class PDatasView : ControlSpaceView {
-        public PDatasView(string name, IMPD_File mpdFile, ModelCollection modelCollection, ITable<PDataModel> model, INameGetterContext ngc) : base(name) {
-            ModelCollection = modelCollection;
+        public PDatasView(string name, IMPD_File mpdFile, ITable<PDataModel> model, INameGetterContext ngc) : base(name) {
             Model = model;
             TableView = new TableView("PDATAs", model, ngc);
-            ModelView = new PDataView("Model", mpdFile, modelCollection);
+            ModelView = new PDataView("Model", mpdFile);
         }
 
         public override Control Create() {
@@ -55,7 +54,6 @@ namespace SF3.Win.Views.MPD {
             base.Destroy();
         }
 
-        public ModelCollection ModelCollection { get; }
         public ITable<PDataModel> Model { get; }
         public TableView TableView { get; }
         public PDataView ModelView { get; }

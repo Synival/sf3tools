@@ -5,20 +5,18 @@ using SF3.Win.Controls;
 
 namespace SF3.Win.Views {
     public class PDataView : ControlView<PDataViewerControl> {
-        public PDataView(string name, IMPD_File mpdFile, ModelCollection models) : base(name) {
+        public PDataView(string name, IMPD_File mpdFile) : base(name) {
             MPD_File = mpdFile;
-            Models = models;
         }
 
-        public PDataView(string name, IMPD_File mpdFile, ModelCollection models, PDataModel pdata) : base(name) {
+        public PDataView(string name, IMPD_File mpdFile, PDataModel pdata) : base(name) {
             MPD_File = mpdFile;
-            Models = models;
             _pdata = pdata;
         }
 
         public override Control Create() {
             var rval = base.Create();
-            Control.Update(MPD_File, Models, PData);
+            Control.Update(MPD_File, PData);
             return rval;
         }
 
@@ -26,12 +24,11 @@ namespace SF3.Win.Views {
             if (!IsCreated)
                 return;
 
-            Control.Update(null, null, null);
-            Control.Update(MPD_File, Models, PData);
+            Control.Update(null, null);
+            Control.Update(MPD_File, PData);
         }
 
         public IMPD_File MPD_File { get; }
-        public ModelCollection Models { get; }
 
         private PDataModel _pdata = null;
         public PDataModel PData {
@@ -40,7 +37,7 @@ namespace SF3.Win.Views {
                 if (value != _pdata) {
                     _pdata = value;
                     if (Control != null)
-                        Control.Update(MPD_File, Models, _pdata);
+                        Control.Update(MPD_File, _pdata);
                 }
             }
         }

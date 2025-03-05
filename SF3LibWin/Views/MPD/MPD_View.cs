@@ -22,6 +22,7 @@ namespace SF3.Win.Views.MPD {
 
             CreateChild(new LightingView("Lighting", Model));
             CreateChild(new TableView("Boundaries", Model.BoundariesTable, Model.NameGetterContext));
+            CreateChild(new ModelsView("Models", Model));
             CreateChild(new TexturesView("Textures", Model));
 
             if (Model.RepeatingGroundImage != null)
