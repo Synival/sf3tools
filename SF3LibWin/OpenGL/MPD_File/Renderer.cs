@@ -530,8 +530,8 @@ namespace SF3.Win.OpenGL.MPD_File {
         }
 
 
-        private Dictionary<Model, Matrix4?> _modelMatricesByModel = [];
-        private Dictionary<Model, Matrix3?> _normalMatricesByModel = [];
+        private Dictionary<ModelBase, Matrix4?> _modelMatricesByModel = [];
+        private Dictionary<ModelBase, Matrix3?> _normalMatricesByModel = [];
 
         public void InvalidateModelMatrices() {
             _normalMatricesByModel.Clear();
@@ -550,7 +550,7 @@ namespace SF3.Win.OpenGL.MPD_File {
 
         private void SetModelAndNormalMatricesForModel(
             ModelResources models,
-            Model model,
+            ModelBase model,
             Shader shader,
             RendererOptions options,
             float cameraYaw,

@@ -29,7 +29,6 @@ namespace SF3.Win.OpenGL.MPD_File {
             AttributesByAddress.Clear();
 
             Models = null;
-            MovableModels = null;
         }
 
         public void Update(IMPD_File mpdFile) {
@@ -38,23 +37,15 @@ namespace SF3.Win.OpenGL.MPD_File {
             if (mpdFile?.ModelCollections == null)
                 return;
 
-            var modelsList = new List<Model>();
-            var movableModelsList = new List<MovableModel>();
-
+            var modelsList = new List<ModelBase>();
             foreach (var models in mpdFile.ModelCollections) {
-                var pdata0Addresses = new List<uint>();
-
-                if (models.ModelTable != null) {
+                if (models.ModelTable != null)
                     modelsList.AddRange(models.ModelTable.Rows);
-                    pdata0Addresses.AddRange(models.ModelTable.Select(x => x.PData0));
-                }
+                if (models.MovableModelTable != null)
+                    modelsList.AddRange(models.MovableModelTable.Rows);
 
-                if (models.MovableModelTable != null) {
-                    movableModelsList.AddRange(models.MovableModelTable.Rows);
-                    pdata0Addresses.AddRange(models.MovableModelTable.Select(x => x.PData0));
-                }
-
-                var uniquePData0Addresses = pdata0Addresses
+                var uniquePData0Addresses = modelsList
+                    .Select(x => x.PData0)
                     .Where(x => x != 0)
                     .Distinct()
                     .ToArray();
@@ -88,7 +79,6 @@ namespace SF3.Win.OpenGL.MPD_File {
             }
 
             Models = modelsList.ToArray();
-            MovableModels = movableModelsList.ToArray();
         }
 
         public void Update(IMPD_File mpdFile, ModelCollection models, PDataModel pdata) {
@@ -313,7 +303,6 @@ namespace SF3.Win.OpenGL.MPD_File {
         public Dictionary<uint, VertexModel[]> VerticesByAddress { get; } = [];
         public Dictionary<uint, PolygonModel[]> PolygonsByAddress { get; } = [];
         public Dictionary<uint, AttrModel[]> AttributesByAddress { get; } = [];
-        public Model[] Models { get; private set; }
-        public MovableModel[] MovableModels { get; private set; }
+        public ModelBase[] Models { get; private set; }
     }
 }

@@ -3,7 +3,7 @@ using CommonLib.SGL;
 using SF3.ByteData;
 
 namespace SF3.Models.Structs.MPD.Model {
-    public class ModelBase : Struct {
+    public abstract class ModelBase : Struct {
         protected readonly int _pdata0Address;
         protected readonly int _positionXAddress;
         protected readonly int _positionYAddress;
@@ -98,5 +98,7 @@ namespace SF3.Models.Structs.MPD.Model {
             get => Data.GetFIXED(_scaleZAddress).Float;
             set => Data.SetFIXED(_scaleZAddress, new FIXED(value, 0));
         }
+
+        public abstract bool AlwaysFacesCamera { get; set; }
     }
 }

@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using CommonLib.Attributes;
-using CommonLib.SGL;
 using SF3.ByteData;
 
 namespace SF3.Models.Structs.MPD.Model {
@@ -147,7 +146,7 @@ namespace SF3.Models.Structs.MPD.Model {
         }
 
         [TableViewModelColumn(displayOrder: 18.1f)]
-        public bool AlwaysFacesCamera {
+        public override bool AlwaysFacesCamera {
             get => (Flags & 0x08) == 0x08;
             set => Flags = (ushort) ((Flags & ~0x08) | (value ? 0x08 : 0x00));
         }
