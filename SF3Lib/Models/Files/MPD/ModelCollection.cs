@@ -175,7 +175,7 @@ namespace SF3.Models.Files.MPD {
             if (ModelsHeader != null) {
                 if (ModelsHeader.CollisionBlocksOffset != 0) {
                     CollisionBlockTable = CollisionBlockTable.Create(Data, "CollisionBlocks", (int) GetOffsetInChunk((uint) ModelsHeader.CollisionBlocksOffset));
-                    CollisionLineTablesByBlock = new Dictionary<int, UnknownUInt16Table>();
+                    CollisionLineIndexTablesByBlock = new Dictionary<int, CollisionLineIndexTable>();
 
                     var pos = 0;
                     for (var y = 0; y < CollisionBlockTable.Length; y++) {
@@ -183,8 +183,8 @@ namespace SF3.Models.Files.MPD {
                         for (var x = 0; x < row.Length; x++) {
                             var addr = row[x];
                             if (addr > 0) {
-                                var name = $"CollisionBlockLineTable[{x}][{y}] (0x{addr:X})";
-                                CollisionLineTablesByBlock[pos] = UnknownUInt16Table.Create(Data, name, (int) GetOffsetInChunk((uint) addr), null, 0xFFFF);
+                                var name = $"CollisionBlockLineIndexTable[{x}][{y}] (0x{addr:X})";
+                                CollisionLineIndexTablesByBlock[pos] = CollisionLineIndexTable.Create(Data, name, (int) GetOffsetInChunk((uint) addr));
                             }
                             pos++;
                         }
@@ -205,8 +205,8 @@ namespace SF3.Models.Files.MPD {
             tables.AddRange(VertexTablesByMemoryAddress.Values);
             tables.AddRange(AttrTablesByMemoryAddress.Values);
 
-            if (CollisionLineTablesByBlock != null)
-                tables.AddRange(CollisionLineTablesByBlock.Values);
+            if (CollisionLineIndexTablesByBlock != null)
+                tables.AddRange(CollisionLineIndexTablesByBlock.Values);
 
             return tables;
         }
@@ -262,7 +262,6 @@ namespace SF3.Models.Files.MPD {
         public CollisionBlockTable CollisionBlockTable { get; private set; } 
 
         [BulkCopyRecurse]
-        // TODO: not actually unknown - it's a list of line indices
-        public Dictionary<int, UnknownUInt16Table> CollisionLineTablesByBlock { get; private set; } 
+        public Dictionary<int, CollisionLineIndexTable> CollisionLineIndexTablesByBlock { get; private set; } 
     }
 }

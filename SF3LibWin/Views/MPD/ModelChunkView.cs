@@ -33,8 +33,8 @@ namespace SF3.Win.Views.MPD {
 
             if (Model.CollisionBlockTable != null)
                 CreateChild(new TableView("Collision Blocks", Model.CollisionBlockTable, ngc));
-            if (Model.CollisionLineTablesByBlock != null)
-                CreateChild(new TableArrayView<UnknownUInt16Table>("Collision Block Lines", Model.CollisionLineTablesByBlock.Values.ToArray(), ngc));
+            if (Model.CollisionLineIndexTablesByBlock != null)
+                CreateChild(new TableArrayView<CollisionLineIndexTable>("Collision Block Line Indices", Model.CollisionLineIndexTablesByBlock.Values.ToArray(), ngc));
 
             return Control;
         }
