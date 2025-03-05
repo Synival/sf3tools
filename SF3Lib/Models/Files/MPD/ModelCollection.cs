@@ -65,8 +65,8 @@ namespace SF3.Models.Files.MPD {
                 MovableModelTable = MovableModelTable.Create(Data, "MovableModelsHeader", Address);
             }
             else {
-                ModelsHeaderTable = ModelsHeaderTable.Create(Data, "ModelsHeader", 0x0000);
-                ModelTable = ModelTable.Create(Data, "Models", 0x000C, ModelsHeaderTable[0].NumModels, Scenario >= ScenarioType.Other);
+                ModelsHeader = new ModelsHeader(Data, 0, "ModelsHeader", 0x0000);
+                ModelTable = ModelTable.Create(Data, "Models", 0x000C, ModelsHeader.NumModels, Scenario >= ScenarioType.Other);
             }
 
             var pdataAddressesPre =
@@ -172,18 +172,41 @@ namespace SF3.Models.Files.MPD {
                 AttrTablesByMemoryAddress = new Dictionary<uint, AttrTable>();
             }
 
+            if (ModelsHeader != null) {
+                if (ModelsHeader.CollisionBlocksOffset != 0) {
+                    CollisionBlockTable = CollisionBlockTable.Create(Data, "CollisionBlocks", (int) GetOffsetInChunk((uint) ModelsHeader.CollisionBlocksOffset));
+                    CollisionLineTablesByBlock = new Dictionary<int, UnknownUInt16Table>();
+
+                    var pos = 0;
+                    for (var y = 0; y < CollisionBlockTable.Length; y++) {
+                        var row = CollisionBlockTable[y];
+                        for (var x = 0; x < row.Length; x++) {
+                            var addr = row[x];
+                            if (addr > 0) {
+                                var name = $"CollisionBlockLineTable[{x}][{y}] (0x{addr:X})";
+                                CollisionLineTablesByBlock[pos] = UnknownUInt16Table.Create(Data, name, (int) GetOffsetInChunk((uint) addr), null, 0xFFFF);
+                            }
+                            pos++;
+                        }
+                    }
+                }
+            }
+
             var tables =
                 new List<ITable>() {
-                    ModelsHeaderTable,
                     ModelTable,
                     MovableModelTable,
-                    PDataTable
+                    PDataTable,
+                    CollisionBlockTable,
                 }
                 .Where(x => x != null)
                 .ToList();
 
             tables.AddRange(VertexTablesByMemoryAddress.Values);
             tables.AddRange(AttrTablesByMemoryAddress.Values);
+
+            if (CollisionLineTablesByBlock != null)
+                tables.AddRange(CollisionLineTablesByBlock.Values);
 
             return tables;
         }
@@ -213,7 +236,7 @@ namespace SF3.Models.Files.MPD {
             => CollectionType >= ModelCollectionType.MovableModels1 && CollectionType <= ModelCollectionType.MovableModels3;
 
         [BulkCopyRecurse]
-        public ModelsHeaderTable ModelsHeaderTable { get; private set; }
+        public ModelsHeader ModelsHeader { get; private set; }
 
         [BulkCopyRecurse]
         public ModelTable ModelTable { get; private set; }
@@ -234,5 +257,12 @@ namespace SF3.Models.Files.MPD {
 
         [BulkCopyRecurse]
         public Dictionary<uint, AttrTable> AttrTablesByMemoryAddress { get; private set; }
+
+        [BulkCopyRecurse]
+        public CollisionBlockTable CollisionBlockTable { get; private set; } 
+
+        [BulkCopyRecurse]
+        // TODO: not actually unknown - it's a list of line indices
+        public Dictionary<int, UnknownUInt16Table> CollisionLineTablesByBlock { get; private set; } 
     }
 }

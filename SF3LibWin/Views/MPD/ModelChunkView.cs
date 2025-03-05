@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using System.Windows.Forms;
 using SF3.Models.Files.MPD;
+using SF3.Models.Tables;
 using SF3.Models.Tables.MPD.Model;
 
 namespace SF3.Win.Views.MPD {
@@ -16,8 +17,8 @@ namespace SF3.Win.Views.MPD {
 
             var ngc = Model.NameGetterContext;
 
-            if (Model.ModelsHeaderTable != null)
-                CreateChild(new TableView("Header", Model.ModelsHeaderTable, ngc));
+            if (Model.ModelsHeader != null)
+                CreateChild(new DataModelView("Header", Model.ModelsHeader, ngc));
 
             if (Model.ModelTable != null)
                 CreateChild(new TableView("Models", Model.ModelTable, ngc));
@@ -29,6 +30,11 @@ namespace SF3.Win.Views.MPD {
             CreateChild(new TableArrayView<VertexTable>("POINT[]s", Model.VertexTablesByMemoryAddress.Values.ToArray(), ngc));
             CreateChild(new TableArrayView<PolygonTable>("POLYGON[]s", Model.PolygonTablesByMemoryAddress.Values.ToArray(), ngc));
             CreateChild(new TableArrayView<AttrTable>("ATTR[]s", Model.AttrTablesByMemoryAddress.Values.ToArray(), ngc));
+
+            if (Model.CollisionBlockTable != null)
+                CreateChild(new TableView("Collision Blocks", Model.CollisionBlockTable, ngc));
+            if (Model.CollisionLineTablesByBlock != null)
+                CreateChild(new TableArrayView<UnknownUInt16Table>("Collision Block Lines", Model.CollisionLineTablesByBlock.Values.ToArray(), ngc));
 
             return Control;
         }
