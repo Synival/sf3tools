@@ -521,11 +521,11 @@ namespace SF3.Models.Files.MPD {
                     return TextureCollectionType.PrimaryTextures;
 
                 if (chunkIndex == MeshTextureChunksFirstIndex + 0 && chunkIndex <= MeshTextureChunksLastIndex)
-                    return TextureCollectionType.MovableObjects1;
+                    return TextureCollectionType.MovableModels1;
                 if (chunkIndex == MeshTextureChunksFirstIndex + 1 && chunkIndex <= MeshTextureChunksLastIndex)
-                    return TextureCollectionType.MovableObjects2;
+                    return TextureCollectionType.MovableModels2;
                 if (chunkIndex == MeshTextureChunksFirstIndex + 2 && chunkIndex <= MeshTextureChunksLastIndex)
-                    return TextureCollectionType.MovableObjects3;
+                    return TextureCollectionType.MovableModels3;
 
                 if (chunkIndex == ExtraModelTextureChunkIndex)
                     return TextureCollectionType.Chunk1ModelTextures;

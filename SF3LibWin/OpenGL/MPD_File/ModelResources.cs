@@ -29,6 +29,7 @@ namespace SF3.Win.OpenGL.MPD_File {
             AttributesByAddress.Clear();
 
             Models = null;
+            MovableModels = null;
         }
 
         public void Update(IMPD_File mpdFile) {
@@ -38,16 +39,27 @@ namespace SF3.Win.OpenGL.MPD_File {
                 return;
 
             var modelsList = new List<Model>();
-            foreach (var models in mpdFile.ModelCollections) {
-                modelsList.AddRange(models.ModelTable.Rows);
+            var movableModelsList = new List<MovableModel>();
 
-                var uniquePData1Addresses = models.ModelTable
-                    .Select(x => x.PData0)
+            foreach (var models in mpdFile.ModelCollections) {
+                var pdata0Addresses = new List<uint>();
+
+                if (models.ModelTable != null) {
+                    modelsList.AddRange(models.ModelTable.Rows);
+                    pdata0Addresses.AddRange(models.ModelTable.Select(x => x.PData0));
+                }
+
+                if (models.MovableModelTable != null) {
+                    movableModelsList.AddRange(models.MovableModelTable.Rows);
+                    pdata0Addresses.AddRange(models.MovableModelTable.Select(x => x.PDataOffset));
+                }
+
+                var uniquePData0Addresses = pdata0Addresses
                     .Where(x => x != 0)
                     .Distinct()
                     .ToArray();
 
-                foreach (var address in uniquePData1Addresses) {
+                foreach (var address in uniquePData0Addresses) {
                     var pdata = PDatasByAddress.TryGetValue(address, out var pdataVal) ? pdataVal : null;
                     if (pdata == null) {
                         pdata = GetFromAnyCollection(mpdFile, mc => mc.PDatasByMemoryAddress, address);
@@ -76,6 +88,7 @@ namespace SF3.Win.OpenGL.MPD_File {
             }
 
             Models = modelsList.ToArray();
+            MovableModels = movableModelsList.ToArray();
         }
 
         public void Update(IMPD_File mpdFile, ModelCollection models, PDataModel pdata) {
@@ -120,6 +133,12 @@ namespace SF3.Win.OpenGL.MPD_File {
                     return TextureCollectionType.Chunk19ModelTextures;
                 case ModelCollectionType.Chunk1Model:
                     return TextureCollectionType.Chunk1ModelTextures;
+                case ModelCollectionType.MovableModels1:
+                    return TextureCollectionType.MovableModels1;
+                case ModelCollectionType.MovableModels2:
+                    return TextureCollectionType.MovableModels2;
+                case ModelCollectionType.MovableModels3:
+                    return TextureCollectionType.MovableModels3;
                 default:
                     throw new ArgumentException(nameof(modelCollection));
             }
@@ -295,5 +314,6 @@ namespace SF3.Win.OpenGL.MPD_File {
         public Dictionary<uint, PolygonModel[]> PolygonsByAddress { get; } = [];
         public Dictionary<uint, AttrModel[]> AttributesByAddress { get; } = [];
         public Model[] Models { get; private set; }
+        public MovableModel[] MovableModels { get; private set; }
     }
 }
