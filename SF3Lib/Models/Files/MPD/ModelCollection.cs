@@ -173,10 +173,6 @@ namespace SF3.Models.Files.MPD {
             }
 
             if (ModelsHeader != null) {
-                if (ModelsHeader.CollisionLinesHeaderOffset != 0) {
-                    CollisionLinesHeader = new CollisionLinesHeader(Data, 0, "CollisionLinesHeader", (int) GetOffsetInChunk((uint) ModelsHeader.CollisionLinesHeaderOffset));
-                }
-
                 var highestLineIndex = -1;
                 if (ModelsHeader.CollisionBlocksOffset != 0) {
                     CollisionBlockTable = CollisionBlockTable.Create(Data, "CollisionBlocks", (int) GetOffsetInChunk((uint) ModelsHeader.CollisionBlocksOffset));
@@ -196,6 +192,22 @@ namespace SF3.Models.Files.MPD {
                             pos++;
                         }
                     }
+                }
+
+                if (ModelsHeader.CollisionLinesHeaderOffset != 0) {
+                    CollisionLinesHeader = new CollisionLinesHeader(Data, 0, "CollisionLinesHeader", (int) GetOffsetInChunk((uint) ModelsHeader.CollisionLinesHeaderOffset));
+
+                    var lineCount = highestLineIndex + 1;
+                    var highestPointIndex = -1;
+
+                    if (CollisionLinesHeader.LinesOffset != 0) {
+                        CollisionLineTable = CollisionLineTable.Create(Data, "CollisionLines", (int) GetOffsetInChunk((uint) CollisionLinesHeader.LinesOffset), lineCount);
+                        highestPointIndex = CollisionLineTable.Max(x => Math.Max(x.Point1Index, x.Point2Index));
+                    }
+
+                    var pointCount = highestPointIndex + 1;
+                    if (CollisionLinesHeader.PointsOffset != 0)
+                        CollisionPointTable = CollisionPointTable.Create(Data, "CollisionPoints", (int) GetOffsetInChunk((uint) CollisionLinesHeader.PointsOffset), pointCount);
                 }
             }
 
@@ -267,6 +279,12 @@ namespace SF3.Models.Files.MPD {
 
         [BulkCopyRecurse]
         public CollisionLinesHeader CollisionLinesHeader { get; private set; }
+
+        [BulkCopyRecurse]
+        public CollisionPointTable CollisionPointTable { get; private set; }
+
+        [BulkCopyRecurse]
+        public CollisionLineTable CollisionLineTable { get; private set; }
 
         [BulkCopyRecurse]
         public CollisionBlockTable CollisionBlockTable { get; private set; } 

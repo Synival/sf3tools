@@ -15,6 +15,6 @@ namespace SF3.Models.Tables.MPD.Model {
         }
 
         public override bool Load()
-            => Load((id, address) => new CollisionLine(Data, id, "Line" + id.ToString("D2"), address));
+            => Load((id, address) => new CollisionLine(Data, id, "Line" + id.ToString("D3"), address));
     }
 }

@@ -34,6 +34,12 @@ namespace SF3.Win.Views.MPD {
             if (Model.CollisionLinesHeader != null)
                 CreateChild(new DataModelView("Collision Lines Header", Model.CollisionLinesHeader, ngc));
 
+            if (Model.CollisionPointTable != null)
+                CreateChild(new TableView("Collision Points", Model.CollisionPointTable, ngc));
+
+            if (Model.CollisionLineTable != null)
+                CreateChild(new TableView("Collision Lines", Model.CollisionLineTable, ngc));
+
             if (Model.CollisionBlockTable != null)
                 CreateChild(new TableView("Collision Blocks", Model.CollisionBlockTable, ngc));
 

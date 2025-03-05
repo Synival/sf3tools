@@ -16,14 +16,14 @@ namespace SF3.Models.Structs.MPD.Model {
         }
 
         [BulkCopy]
-        [TableViewModelColumn(displayOrder: 0, isPointer: true)]
+        [TableViewModelColumn(displayOrder: 0, isPointer: true, minWidth: 80)]
         public int CollisionLinesHeaderOffset {
             get => Data.GetDouble(_collisionLinesHeaderOffsetAddr);
             set => Data.SetDouble(_collisionLinesHeaderOffsetAddr, value);
         }
 
         [BulkCopy]
-        [TableViewModelColumn(displayOrder: 1, isPointer: true)]
+        [TableViewModelColumn(displayOrder: 1, isPointer: true, minWidth: 80)]
         public int CollisionBlocksOffset {
             get => Data.GetDouble(_collisionBlocksOffsetAddr);
             set => Data.SetDouble(_collisionBlocksOffsetAddr, value);
