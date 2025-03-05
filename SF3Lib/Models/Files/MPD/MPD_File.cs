@@ -610,15 +610,21 @@ namespace SF3.Models.Files.MPD {
             var texColList = new List<TextureCollection>();
             var texChunks = ChunkHeader.Where(x => x.Exists && x.ChunkType == ChunkType.Textures).Select(x => chunkDatas[x.ID]).ToList();
 
+            int nextModelCollectionStartId = 0x102;
             int index = 0;
             foreach (var chunk in texChunks) {
                 var collection = TextureCollectionForChunkIndex(chunk.Index);
+                bool isMovableModelsChunk = collection >= TextureCollectionType.MovableModels1 && collection <= TextureCollectionType.MovableModels3;
 
+                var startId = isMovableModelsChunk ? nextModelCollectionStartId : (int?) null;
                 try {
                     var texCol = TextureCollection.Create(
                         chunk.DecompressedData, NameGetterContext, 0x00, "TextureCollection" + index,
-                        collection, pixelFormats[collection], palettes, chunk.Index
+                        collection, pixelFormats[collection], palettes, chunk.Index, startId
                     );
+                    if (isMovableModelsChunk)
+                        nextModelCollectionStartId = texCol.TextureTable.Last().ID + 1;
+
                     texColList.Add(texCol);
                     tables.AddRange(texCol.Tables);
                 }
