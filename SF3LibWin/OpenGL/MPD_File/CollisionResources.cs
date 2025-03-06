@@ -21,6 +21,17 @@ namespace SF3.Win.OpenGL.MPD_File {
             FullModel = null;
         }
 
+        private struct Position {
+            public Position(float x, float topY, float bottomY, float z) {
+                X = x;
+                Z = z;
+                TopY = topY;
+                BottomY = bottomY;
+            }
+
+            public float X, TopY, BottomY, Z;
+        }
+
         public void Update(IMPD_File mpdFile) {
             Reset();
 
@@ -33,54 +44,63 @@ namespace SF3.Win.OpenGL.MPD_File {
                 if (mc.CollisionLineTable == null || mc.CollisionPointTable == null)
                     continue;
 
-                int pos = 0;
                 foreach (var line in mc.CollisionLineTable) {
                     var point1 = mc.CollisionPointTable[line.Point1Index];
                     var point2 = mc.CollisionPointTable[line.Point2Index];
 
-                    Vector3 GetPointPosition(CollisionPoint point) {
+                    Position GetPointPosition(CollisionPoint point) {
                         var x = point.X /  32.0f + GeneralResources.ModelOffsetX;
-                        var y = groundY;
+                        float? topY    = null;
+                        float? bottomY = null;
                         var z = point.Y / -32.0f - GeneralResources.ModelOffsetZ;
 
-                        var surfaceX = x + 32f;
-                        var surfaceY = -z + 32f;
+                        for (int ty = -1; ty <= 1; ty++) {
+                            for (int tx = -1; tx <= 1; tx++) {
+                                var surfaceX = x + 32f + (tx * 0.5f);
+                                var surfaceY = -z + 32f + (ty * 0.5f);
 
-                        var tileX = (int) surfaceX;
-                        var tileY = (int) surfaceY;
+                                var tileX = (int) surfaceX;
+                                var tileY = (int) surfaceY;
 
-                        pos++;
+                                if (tileX > 0 && tileX < 64 && tileY > 0 && tileY < 64) {
+                                    var tile = mpdFile.Tiles[tileX, tileY];
+                                    var xInTile = 1.00f - (surfaceX - tileX);
+                                    var yInTile = 1.00f - (surfaceY - tileY);
 
-                        if (tileX > 0 && tileX < 64 && tileY > 0 && tileY < 64) {
-                            var tile = mpdFile.Tiles[tileX, tileY];
-                            var xInTile = 1.00f - (surfaceX - tileX);
-                            var yInTile = 1.00f - (surfaceY - tileY);
+                                    var heights1 = tile.GetMoveHeightmap(CornerType.BottomLeft) * xInTile + tile.GetMoveHeightmap(CornerType.BottomRight) * (1.0f - xInTile);
+                                    var heights2 = tile.GetMoveHeightmap(CornerType.TopLeft)    * xInTile + tile.GetMoveHeightmap(CornerType.TopRight)    * (1.0f - xInTile);
+                                    var height = heights1 * yInTile + heights2 * (1.0f - yInTile);
 
-                            var heights1 = tile.GetMoveHeightmap(CornerType.BottomLeft) * xInTile + tile.GetMoveHeightmap(CornerType.BottomRight) * (1.0f - xInTile);
-                            var heights2 = tile.GetMoveHeightmap(CornerType.TopLeft)    * xInTile + tile.GetMoveHeightmap(CornerType.TopRight)    * (1.0f - xInTile);
-                            var height = heights1 * yInTile + heights2 * (1.0f - yInTile);
-
-                            y = Math.Max(y, height);
+                                    topY    = (topY == null) ? height + 1.0f : Math.Max(topY.Value, height + 1.0f);
+                                    bottomY = (bottomY == null) ? height : Math.Min(bottomY.Value, height);
+                                }
+                            }
                         }
 
-                        return new Vector3(x, y, z);
+                        return new Position(x, topY ?? groundY + 1.0f, bottomY ?? groundY, z);
                     }
 
                     var pos1 = GetPointPosition(point1);
                     var pos2 = GetPointPosition(point2);
 
                     var poly = new POLYGON([
-                        new VECTOR(pos1.X, pos1.Y,        pos1.Z),
-                        new VECTOR(pos1.X, pos1.Y + 1.0f, pos1.Z),
-                        new VECTOR(pos2.X, pos2.Y + 1.0f, pos2.Z),
-                        new VECTOR(pos2.X, pos2.Y,        pos2.Z)
+                        new VECTOR(pos1.X, pos1.BottomY, pos1.Z),
+                        new VECTOR(pos1.X, pos1.TopY,    pos1.Z),
+                        new VECTOR(pos2.X, pos2.TopY,    pos2.Z),
+                        new VECTOR(pos2.X, pos2.BottomY, pos2.Z)
                     ]);
 
-                    var dist = (pos2.Xz - pos1.Xz).Length;
+                    var dist = (new Vector2(pos2.X, pos2.Z) - new Vector2(pos1.X, pos1.Z)).Length;
                     var absCos = (float) Math.Abs(pos2.X - pos1.X) / dist;
                     var absSin = (float) Math.Abs(pos2.Z - pos1.Z) / dist;
 
-                    var color = new Vector3(absSin * 0.25f + 0.75f, 0.75f, absCos * 0.25f + 0.75f);
+                    // Assign a color similarly to a "normals" view, with blue for horizontal and red for vertical.
+                    // Highlight special line segments magenta/orange.
+                    var color = new Vector3(
+                        absSin * 0.25f + 0.75f,
+                        (line.Unknown2 == 0) ? 0.75f : 0.25f,
+                        absCos * 0.25f + 0.75f
+                    );
                     var colors = new Vector3[] {
                         color * 0.7f,
                         color * 0.8f,
