@@ -42,15 +42,16 @@ namespace SF3.Win.Controls {
             GL.BlendFunc(BlendingFactor.SrcAlpha, BlendingFactor.OneMinusSrcAlpha);
             GL.BlendEquationSeparate(BlendEquationMode.FuncAdd, BlendEquationMode.Max);
 
-            _general        = new GeneralResources();
-            _models         = new ModelResources();
-            _surfaceModel   = new SurfaceModelResources();
-            _groundModel    = new GroundModelResources();
-            _skyBoxModel    = new SkyBoxModelResources();
-            _surfaceEditor  = new SurfaceEditorResources();
-            _gradients      = new GradientResources();
-            _lighting       = new LightingResources();
-            _boundaryModels = new BoundaryModelResources();
+            _general         = new GeneralResources();
+            _models          = new ModelResources();
+            _surfaceModel    = new SurfaceModelResources();
+            _groundModel     = new GroundModelResources();
+            _skyBoxModel     = new SkyBoxModelResources();
+            _collisionModels = new CollisionResources();
+            _surfaceEditor   = new SurfaceEditorResources();
+            _gradients       = new GradientResources();
+            _lighting        = new LightingResources();
+            _boundaryModels  = new BoundaryModelResources();
 
             _renderer = new Renderer();
 
@@ -59,6 +60,7 @@ namespace SF3.Win.Controls {
             _surfaceModel.Init();
             _groundModel.Init();
             _skyBoxModel.Init();
+            _collisionModels.Init();
             _surfaceEditor.Init();
             _gradients.Init();
             _lighting.Init();
@@ -84,6 +86,7 @@ namespace SF3.Win.Controls {
             _surfaceModel?.Dispose();
             _groundModel?.Dispose();
             _skyBoxModel?.Dispose();
+            _collisionModels?.Dispose();
             _surfaceEditor?.Dispose();
             _gradients?.Dispose();
             _lighting?.Dispose();
@@ -96,6 +99,7 @@ namespace SF3.Win.Controls {
             _surfaceModel      = null;
             _groundModel       = null;
             _skyBoxModel       = null;
+            _collisionModels   = null;
             _surfaceEditor     = null;
             _gradients         = null;
             _lighting          = null;
@@ -143,7 +147,7 @@ namespace SF3.Win.Controls {
 
             _renderer.DrawScene(
                 _general, _models, _surfaceModel, _groundModel, _skyBoxModel,
-                _gradients, MPD_File?.LightAdjustment, _lighting, _boundaryModels,
+                _gradients, MPD_File?.LightAdjustment, _lighting, _boundaryModels, _collisionModels,
                 _surfaceEditor,
                 new Renderer.RendererOptions() {
                     DrawModels = DrawModels,
@@ -160,6 +164,8 @@ namespace SF3.Win.Controls {
                     DrawTerrainTypes = DrawTerrainTypes,
                     DrawEventIDs = DrawEventIDs,
                     DrawBoundaries = DrawBoundaries,
+                    // TODO: get this from an app setting with a button
+                    DrawCollisionLines = true,
 
                     DrawHelp = DrawHelp,
 
@@ -196,6 +202,8 @@ namespace SF3.Win.Controls {
             _skyBoxModel?.Update(MPD_File);
             _gradients?.Update(MPD_File);
             _boundaryModels?.Update(MPD_File);
+            _collisionModels?.Update(MPD_File);
+
             Invalidate();
         }
 
@@ -408,6 +416,7 @@ namespace SF3.Win.Controls {
         private SurfaceModelResources _surfaceModel = null;
         private GroundModelResources _groundModel = null;
         private SkyBoxModelResources _skyBoxModel = null;
+        private CollisionResources _collisionModels = null;
         private SurfaceEditorResources _surfaceEditor = null;
         private GradientResources _gradients = null;
         private LightingResources _lighting = null;

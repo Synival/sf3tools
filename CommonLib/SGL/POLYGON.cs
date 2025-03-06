@@ -60,6 +60,6 @@ namespace CommonLib.SGL {
             }
         }
 
-        VECTOR[] Vertices { get; }
+        public VECTOR[] Vertices { get; }
     }
 }

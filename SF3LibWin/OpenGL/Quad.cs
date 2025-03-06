@@ -28,6 +28,7 @@ namespace SF3.Win.OpenGL {
             TextureAnim   = textureAnim;
             TextureRotate = rotate;
             TextureFlip   = flip;
+            Center = vertices.Aggregate((a, b) => a + b) / vertices.Length;
 
             // Determine the largest dimension and consider that our scale.
             var minCoords = new float[] { vertices[0][0], vertices[0][1], vertices[0][2] };
@@ -116,5 +117,7 @@ namespace SF3.Win.OpenGL {
 
         public bool HasCenterVertex { get; }
         public int Vertices { get; }
+
+        public Vector3 Center { get; }
     }
 }

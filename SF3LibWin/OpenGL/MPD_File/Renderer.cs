@@ -23,6 +23,7 @@ namespace SF3.Win.OpenGL.MPD_File {
             public bool DrawTerrainTypes;
             public bool DrawEventIDs;
             public bool DrawBoundaries;
+            public bool DrawCollisionLines;
 
             public bool DrawHelp;
 
@@ -50,6 +51,7 @@ namespace SF3.Win.OpenGL.MPD_File {
             LightAdjustmentModel lightAdj,
             LightingResources lighting,
             BoundaryModelResources boundaryModels,
+            CollisionResources collisionModels,
             SurfaceEditorResources surfaceEditor,
             RendererOptions options,
             float cameraYaw,
@@ -85,6 +87,9 @@ namespace SF3.Win.OpenGL.MPD_File {
             // Done rendering the real scene; disable one-sided rendering
             if (!options.ForceTwoSidedTextures)
                 GL.Disable(EnableCap.CullFace);
+
+            if (options.DrawCollisionLines)
+                DrawSceneCollisionLines(general, collisionModels, cameraYaw);
 
             if (options.DrawWireframe)
                 DrawSceneWireframes(general, models, surfaceModel, options, cameraYaw, cameraPitch);
@@ -135,6 +140,28 @@ namespace SF3.Win.OpenGL.MPD_File {
                 DrawSceneGradient(general, gradients?.ModelsGradientModel, 0x04, true, ref projectionMatrix, ref viewMatrix);
         }
 
+        public void DrawSceneCollisionLines(GeneralResources general, CollisionResources collisionModels, float cameraYaw) {
+            if (collisionModels == null)
+                return;
+
+            GL.Enable(EnableCap.PolygonOffsetFill);
+            GL.PolygonOffset(-4.0f, -4.0f);
+
+            var yawSinCos = Math.SinCos(MathHelper.DegreesToRadians(cameraYaw));
+            var sortedModels = collisionModels.IndividualModels
+                .OrderBy(x => x.Quads[0].Center.X * yawSinCos.Sin + x.Quads[0].Center.Z * yawSinCos.Cos)
+                .ToArray();
+
+            using (general.SolidShader.Use()) {
+                foreach (var model in sortedModels)
+                    model.Draw(general.SolidShader, null);
+
+                GL.Disable(EnableCap.DepthTest);
+                collisionModels.FullModel.Draw(general.SolidShader, null);
+                GL.Enable(EnableCap.DepthTest);
+            }
+        }
+
         public void DrawSceneWireframes(
             GeneralResources general,
             ModelResources models,
@@ -156,7 +183,6 @@ namespace SF3.Win.OpenGL.MPD_File {
                     DrawSceneSurfaceModelWireframe(general, surfaceModel);
             }
 
-            general.WireframeShader.UpdateUniform(ShaderUniformType.ModelMatrix, Matrix4.Identity);
             GL.Disable(EnableCap.PolygonOffsetLine);
             GL.PolygonMode(MaterialFace.FrontAndBack, PolygonMode.Fill);
         }
@@ -468,6 +494,8 @@ namespace SF3.Win.OpenGL.MPD_File {
                     modelGroup.SemiTransparentUntexturedModel?.Draw(general.WireframeShader);
                 }
             }
+
+            general.WireframeShader.UpdateUniform(ShaderUniformType.ModelMatrix, Matrix4.Identity);
         }
 
         public void DrawSceneSurfaceModelWireframe(GeneralResources general, SurfaceModelResources surfaceModel) {
