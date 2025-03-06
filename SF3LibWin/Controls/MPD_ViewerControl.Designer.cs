@@ -23,7 +23,6 @@
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent() {
-            var resources = new System.ComponentModel.ComponentResourceManager(typeof(MPD_ViewerControl));
             toolStrip1 = new System.Windows.Forms.ToolStrip();
             tsbCursorSelect = new System.Windows.Forms.ToolStripButton();
             tsbCursorNavigate = new System.Windows.Forms.ToolStripButton();
@@ -40,6 +39,7 @@
             tsbToggleBoundaries = new System.Windows.Forms.ToolStripButton();
             tsbToggleTerrainType = new System.Windows.Forms.ToolStripButton();
             tsbToggleEventID = new System.Windows.Forms.ToolStripButton();
+            tsbToggleCollisions = new System.Windows.Forms.ToolStripButton();
             tsbToggleNormals = new System.Windows.Forms.ToolStripButton();
             tsbRotateSpritesUp = new System.Windows.Forms.ToolStripButton();
             toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
@@ -53,7 +53,6 @@
             tsbToggleHelp = new System.Windows.Forms.ToolStripButton();
             tilePropertyControl1 = new TilePropertiesControl();
             mpdViewerGLControl1 = new MPD_ViewerGLControl();
-            tsbToggleCollisions = new System.Windows.Forms.ToolStripButton();
             toolStrip1.SuspendLayout();
             SuspendLayout();
             // 
@@ -213,6 +212,16 @@
             tsbToggleEventID.Text = "Draw Event ID";
             tsbToggleEventID.Click += tsbToggleEventID_Click;
             // 
+            // tsbToggleCollisions
+            // 
+            tsbToggleCollisions.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            tsbToggleCollisions.Image = Properties.Resources.ShowCollisionsBmp;
+            tsbToggleCollisions.ImageTransparentColor = System.Drawing.Color.Magenta;
+            tsbToggleCollisions.Name = "tsbToggleCollisions";
+            tsbToggleCollisions.Size = new System.Drawing.Size(28, 28);
+            tsbToggleCollisions.Text = "Draw Collision Lines";
+            tsbToggleCollisions.Click += tsbToggleCollisions_Click;
+            // 
             // tsbToggleNormals
             // 
             tsbToggleNormals.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -336,16 +345,6 @@
             mpdViewerGLControl1.SharedContext = null;
             mpdViewerGLControl1.Size = new System.Drawing.Size(582, 545);
             mpdViewerGLControl1.TabIndex = 1;
-            // 
-            // tsbToggleCollisions
-            // 
-            tsbToggleCollisions.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            tsbToggleCollisions.Image = (System.Drawing.Image) resources.GetObject("tsbToggleCollisions.Image");
-            tsbToggleCollisions.ImageTransparentColor = System.Drawing.Color.Magenta;
-            tsbToggleCollisions.Name = "tsbToggleCollisions";
-            tsbToggleCollisions.Size = new System.Drawing.Size(28, 28);
-            tsbToggleCollisions.Text = "Draw Collision Lines";
-            tsbToggleCollisions.Click += tsbToggleCollisions_Click;
             // 
             // MPD_ViewerControl
             // 

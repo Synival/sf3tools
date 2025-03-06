@@ -256,7 +256,8 @@ namespace SF3.Win.Properties {
         ///uniform mat3 normalMatrix;
         ///uniform vec3 lightPosition;
         ///uniform sampler2D textureLighting;
-        ///uniform bool useNewLighting;
+        ///uniform int lightingMode;
+        ///uniform bool smoothLighting;
         ///
         ///layout (location = 0) in vec3 position;
         ///layout (location = 1) in vec4 color;
@@ -265,7 +266,7 @@ namespace SF3.Win.Properties {
         ///
         ///layout (location = 4) in vec2 texCoordAtlas;
         ///layout (location = 5) in vec2 texCoordTerrainTypes;
-        ///layout (location = 6) in vec2 texCoordEvent [rest of string was truncated]&quot;;.
+        ///layout (location [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string ObjectVert {
             get {
@@ -289,6 +290,16 @@ namespace SF3.Win.Properties {
         internal static System.Drawing.Bitmap ShowCameraBoundariesBmp {
             get {
                 object obj = ResourceManager.GetObject("ShowCameraBoundariesBmp", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap ShowCollisionsBmp {
+            get {
+                object obj = ResourceManager.GetObject("ShowCollisionsBmp", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -438,6 +449,7 @@ namespace SF3.Win.Properties {
         ///   Looks up a localized string similar to #version 330 core
         ///
         ///uniform sampler2D texture0;
+        ///uniform vec3 globalGlow;
         ///
         ///in vec4 colorFrag;
         ///in vec2 texCoord0Frag;
@@ -446,7 +458,7 @@ namespace SF3.Win.Properties {
         ///out vec4 FragColor;
         ///
         ///void main() {
-        ///    vec4 texColor = texture(texture0, texCoord0Frag) * colorFrag + vec4(glowFrag, 0.0);
+        ///    vec4 texColor = texture(texture0, texCoord0Frag) * colorFrag + vec4(glowFrag, 0.0) + vec4(globalGlow, 0.0);
         ///    if (texColor.a &lt; 0.001)
         ///        discard;
         ///
