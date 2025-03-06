@@ -19,102 +19,31 @@ namespace SF3.Win.OpenGL.MPD_File {
         public override void DeInit() { }
 
         public override void Reset() {
-            foreach (var model in ModelsByMemoryAddress)
-                model.Value.Dispose();
+            foreach (var modelsDict in ModelsByMemoryAddressByCollection.Values)
+                foreach (var model in modelsDict.Values)
+                    model.Dispose();
 
-            ModelsByMemoryAddress.Clear();
-            PDatasByAddress.Clear();
-            VerticesByAddress.Clear();
-            PolygonsByAddress.Clear();
-            AttributesByAddress.Clear();
+            ModelsByMemoryAddressByCollection.Clear();
+            PDatasByAddressByCollection.Clear();
+            VerticesByAddressByCollection.Clear();
+            PolygonsByAddressByCollection.Clear();
+            AttributesByAddressByCollection.Clear();
 
             Models = null;
         }
 
-        public void Update(IMPD_File mpdFile) {
-            Reset();
-
-            if (mpdFile?.ModelCollections == null)
-                return;
-
-            var modelsList = new List<ModelBase>();
-            foreach (var models in mpdFile.ModelCollections) {
-                if (models.ModelTable != null)
-                    modelsList.AddRange(models.ModelTable.Rows);
-                if (models.MovableModelTable != null)
-                    modelsList.AddRange(models.MovableModelTable.Rows);
-
-                var uniquePData0Addresses = modelsList
-                    .Select(x => x.PData0)
-                    .Where(x => x != 0)
-                    .Distinct()
-                    .ToArray();
-
-                foreach (var address in uniquePData0Addresses) {
-                    var pdata = PDatasByAddress.TryGetValue(address, out var pdataVal) ? pdataVal : null;
-                    if (pdata == null) {
-                        pdata = GetFromAnyCollection(mpdFile, mc => mc.PDatasByMemoryAddress, address);
-                        PDatasByAddress[address] = pdata;
-                    }
-                    if (pdata == null)
-                        continue;
-
-                    if (!VerticesByAddress.ContainsKey(pdata.VerticesOffset)) {
-                        var table = GetFromAnyCollection(mpdFile, mc => mc.VertexTablesByMemoryAddress, pdata.VerticesOffset);
-                        VerticesByAddress[pdata.VerticesOffset] = table.ToArray();
-                    }
-
-                    if (!PolygonsByAddress.ContainsKey(pdata.PolygonsOffset)) {
-                        var table = GetFromAnyCollection(mpdFile, mc => mc.PolygonTablesByMemoryAddress, pdata.PolygonsOffset);
-                        PolygonsByAddress[pdata.PolygonsOffset] = table.ToArray();
-                    }
-
-                    if (!AttributesByAddress.ContainsKey(pdata.AttributesOffset)) {
-                        var table = GetFromAnyCollection(mpdFile, mc => mc.AttrTablesByMemoryAddress, pdata.AttributesOffset);
-                        AttributesByAddress[pdata.AttributesOffset] = table.ToArray();
-                    }
-
-                    // Don't render movable models; they're not placed on the map in that way.
-                    if (!models.IsMovableModelCollection)
-                        AddModel(mpdFile, models.CollectionType, pdata);
-                }
-            }
-
-            Models = modelsList.ToArray();
-        }
-
-        public void Update(IMPD_File mpdFile, ModelCollection models, PDataModel pdata) {
-            Reset();
-            if (models == null || pdata == null)
-                return;
-
-            PDatasByAddress[pdata.RamAddress]           = pdata;
-            VerticesByAddress[pdata.VerticesOffset]     = models.VertexTablesByMemoryAddress .TryGetValue(pdata.VerticesOffset,   out var vv) ? vv.ToArray() : null;
-            PolygonsByAddress[pdata.PolygonsOffset]     = models.PolygonTablesByMemoryAddress.TryGetValue(pdata.PolygonsOffset,   out var pv) ? pv.ToArray() : null;
-            AttributesByAddress[pdata.AttributesOffset] = models.AttrTablesByMemoryAddress   .TryGetValue(pdata.AttributesOffset, out var av) ? av.ToArray() : null;
-
-            AddModel(mpdFile, models.CollectionType, pdata);
-
-            var model = new Model(new ByteData.ByteData(new ByteArray(256)), 0, "Model", 0, true);
-            model.PData0 = pdata.RamAddress;
-            model.PositionX = -32 * 32;
-            model.PositionZ = -32 * 32;
-            model.ScaleX = 1.0f;
-            model.ScaleY = 1.0f;
-            model.ScaleZ = 1.0f;
-
-            Models = [model];
-        }
-
-        private TValue GetFromAnyCollection<TValue>(IMPD_File mpdFile, Func<ModelCollection, Dictionary<uint, TValue>> tableGetter, uint address) where TValue : class {
-            foreach (var mc in mpdFile.ModelCollections) {
-                if (mc != null) {
-                    var dict = tableGetter(mc);
-                    if (dict.TryGetValue(address, out TValue value))
-                        return value;
-                }
-            }
-            return null;
+        private void InitDictsForType(ModelCollectionType collectionType) {
+            // TODO: Just have one structure with all this info!
+            if (!ModelsByMemoryAddressByCollection.ContainsKey(collectionType))
+                ModelsByMemoryAddressByCollection[collectionType] = [];
+            if (!PDatasByAddressByCollection.ContainsKey(collectionType))
+                PDatasByAddressByCollection[collectionType] = [];
+            if (!VerticesByAddressByCollection.ContainsKey(collectionType))
+                VerticesByAddressByCollection[collectionType] = [];
+            if (!PolygonsByAddressByCollection.ContainsKey(collectionType))
+                PolygonsByAddressByCollection[collectionType] = [];
+            if (!AttributesByAddressByCollection.ContainsKey(collectionType))
+                AttributesByAddressByCollection[collectionType] = [];
         }
 
         private TextureCollectionType GetTextureCollection(ModelCollectionType modelCollection) {
@@ -136,7 +65,142 @@ namespace SF3.Win.OpenGL.MPD_File {
             }
         }
 
-        public void AddModel(IMPD_File mpdFile, ModelCollectionType modelCollection, PDataModel pdata) {
+        public struct ModelAnimationInfo {
+            public ITexture[] Textures;
+            public int FrameTimerStart;
+        }
+
+        private Dictionary<int, ITexture> GetTexturesByID(IMPD_File mpdFile, TextureCollectionType texCollection) {
+            return mpdFile.TextureCollections != null ? mpdFile.TextureCollections
+                .Where(x => x?.TextureTable != null && x.TextureTable.Collection == texCollection)
+                .SelectMany(x => x.TextureTable)
+                .GroupBy(x => x.ID)
+                .Select(x => x.First())
+                .ToDictionary(x => x.ID, x => x.Texture)
+                : [];
+        }
+
+        private Dictionary<int, ModelAnimationInfo> GetAnimationsByID(IMPD_File mpdFile, TextureCollectionType texCollection) {
+            return (texCollection == TextureCollectionType.PrimaryTextures && mpdFile.TextureAnimations != null) ? mpdFile.TextureAnimations
+                .GroupBy(x => x.TextureID)
+                .Select(x => x.First())
+                .ToDictionary(x => (int) x.TextureID, x => new ModelAnimationInfo {
+                    Textures = x.FrameTable.OrderBy(x => x.FrameNum).Select(x => x.Texture).ToArray(),
+                    FrameTimerStart = x.FrameTimerStart
+                }) : [];
+        }
+
+        public void Update(IMPD_File mpdFile) {
+            Reset();
+
+            if (mpdFile?.ModelCollections == null)
+                return;
+
+            var modelsList = new List<ModelBase>();
+            foreach (var models in mpdFile.ModelCollections) {
+                if (models.CollectionType != ModelCollectionType.Chunk19Model && models.CollectionType != ModelCollectionType.PrimaryModels)
+                    continue;
+
+                InitDictsForType(models.CollectionType);
+                var pdatasByAddress     = PDatasByAddressByCollection[models.CollectionType];
+                var verticesByAddress   = VerticesByAddressByCollection[models.CollectionType];
+                var polygonsByAddress   = PolygonsByAddressByCollection[models.CollectionType];
+                var attributesByAddress = AttributesByAddressByCollection[models.CollectionType];
+
+                if (models.ModelTable != null)
+                    modelsList.AddRange(models.ModelTable.Rows);
+                if (models.MovableModelTable != null)
+                    modelsList.AddRange(models.MovableModelTable.Rows);
+
+                var uniquePData0Addresses = modelsList
+                    .Select(x => x.PData0)
+                    .Where(x => x != 0)
+                    .Distinct()
+                    .ToArray();
+
+                var texCollection = GetTextureCollection(models.CollectionType);
+                var texturesById = GetTexturesByID(mpdFile, texCollection);
+                var animationsById = GetAnimationsByID(mpdFile, texCollection);
+
+                foreach (var address in uniquePData0Addresses) {
+                    var pdata = pdatasByAddress.TryGetValue(address, out var pdataVal) ? pdataVal : null;
+                    if (pdata == null) {
+                        pdata = GetFromAnyCollection(mpdFile, mc => mc.PDatasByMemoryAddress, address);
+                        pdatasByAddress[address] = pdata;
+                    }
+                    if (pdata == null)
+                        continue;
+
+                    if (!verticesByAddress.ContainsKey(pdata.VerticesOffset)) {
+                        var table = GetFromAnyCollection(mpdFile, mc => mc.VertexTablesByMemoryAddress, pdata.VerticesOffset);
+                        verticesByAddress[pdata.VerticesOffset] = table.ToArray();
+                    }
+
+                    if (!polygonsByAddress.ContainsKey(pdata.PolygonsOffset)) {
+                        var table = GetFromAnyCollection(mpdFile, mc => mc.PolygonTablesByMemoryAddress, pdata.PolygonsOffset);
+                        polygonsByAddress[pdata.PolygonsOffset] = table.ToArray();
+                    }
+
+                    if (!attributesByAddress.ContainsKey(pdata.AttributesOffset)) {
+                        var table = GetFromAnyCollection(mpdFile, mc => mc.AttrTablesByMemoryAddress, pdata.AttributesOffset);
+                        attributesByAddress[pdata.AttributesOffset] = table.ToArray();
+                    }
+
+                    // Don't render movable models; they're not placed on the map in that way.
+                    if (!models.IsMovableModelCollection)
+                        CreateAndAddQuadModels(mpdFile, models.CollectionType, pdata, texturesById, animationsById);
+                }
+            }
+
+            Models = modelsList.ToArray();
+        }
+
+        public void Update(IMPD_File mpdFile, ModelCollection models, PDataModel pdata) {
+            Reset();
+            if (models == null || pdata == null)
+                return;
+
+            InitDictsForType(models.CollectionType);
+            PDatasByAddressByCollection[models.CollectionType][pdata.RamAddress]           = pdata;
+            VerticesByAddressByCollection[models.CollectionType][pdata.VerticesOffset]     = models.VertexTablesByMemoryAddress .TryGetValue(pdata.VerticesOffset,   out var vv) ? vv.ToArray() : null;
+            PolygonsByAddressByCollection[models.CollectionType][pdata.PolygonsOffset]     = models.PolygonTablesByMemoryAddress.TryGetValue(pdata.PolygonsOffset,   out var pv) ? pv.ToArray() : null;
+            AttributesByAddressByCollection[models.CollectionType][pdata.AttributesOffset] = models.AttrTablesByMemoryAddress   .TryGetValue(pdata.AttributesOffset, out var av) ? av.ToArray() : null;
+
+            var texCollection = GetTextureCollection(models.CollectionType);
+            var texturesById = GetTexturesByID(mpdFile, texCollection);
+            var animationsById = GetAnimationsByID(mpdFile, texCollection);
+
+            CreateAndAddQuadModels(mpdFile, models.CollectionType, pdata, texturesById, animationsById);
+
+            var model = new Model(new ByteData.ByteData(new ByteArray(256)), 0, "Model", 0, true, models.CollectionType);
+            model.PData0 = pdata.RamAddress;
+            model.PositionX = -32 * 32;
+            model.PositionZ = -32 * 32;
+            model.ScaleX = 1.0f;
+            model.ScaleY = 1.0f;
+            model.ScaleZ = 1.0f;
+
+            Models = [model];
+        }
+
+        private TValue GetFromAnyCollection<TValue>(IMPD_File mpdFile, Func<ModelCollection, Dictionary<uint, TValue>> tableGetter, uint address) where TValue : class {
+            foreach (var mc in mpdFile.ModelCollections) {
+                if (mc != null) {
+                    var dict = tableGetter(mc);
+                    if (dict.TryGetValue(address, out TValue value))
+                        return value;
+                }
+            }
+            return null;
+        }
+
+        private void CreateAndAddQuadModels(
+            IMPD_File mpdFile,
+            ModelCollectionType modelCollection,
+            PDataModel pdata,
+            Dictionary<int, ITexture> texturesById,
+            Dictionary<int, ModelAnimationInfo> animationsById
+        ) {
             TextureFlipType ToggleHorizontalFlipping(TextureFlipType flip)
                 => (flip & ~TextureFlipType.Horizontal) | (TextureFlipType) (TextureFlipType.Horizontal - (flip & TextureFlipType.Horizontal));
 
@@ -145,9 +209,9 @@ namespace SF3.Win.OpenGL.MPD_File {
             AttrModel[]    attrs    = null;
 
             try {
-                vertices = VerticesByAddress[pdata.VerticesOffset];
-                polygons = PolygonsByAddress[pdata.PolygonsOffset];
-                attrs    = AttributesByAddress[pdata.AttributesOffset];
+                vertices = VerticesByAddressByCollection[modelCollection][pdata.VerticesOffset];
+                polygons = PolygonsByAddressByCollection[modelCollection][pdata.PolygonsOffset];
+                attrs    = AttributesByAddressByCollection[modelCollection][pdata.AttributesOffset];
             }
             catch {
                 // TODO: what to do in this case??
@@ -156,22 +220,6 @@ namespace SF3.Win.OpenGL.MPD_File {
 
             if (vertices == null || polygons == null || attrs == null)
                 return;
-
-            var texCollection = GetTextureCollection(modelCollection);
-
-            var texturesById = mpdFile.TextureCollections != null ? mpdFile.TextureCollections
-                .Where(x => x?.TextureTable != null && x.TextureTable.Collection == texCollection)
-                .SelectMany(x => x.TextureTable)
-                .GroupBy(x => x.ID)
-                .Select(x => x.First())
-                .ToDictionary(x => x.ID, x => x.Texture)
-                : [];
-
-            var animationsById = (texCollection == TextureCollectionType.PrimaryTextures && mpdFile.TextureAnimations != null) ? mpdFile.TextureAnimations
-                .GroupBy(x => x.TextureID)
-                .Select(x => x.First())
-                .ToDictionary(x => (int) x.TextureID, x => new { Textures = x.FrameTable.OrderBy(x => x.FrameNum).Select(x => x.Texture).ToArray(), x.FrameTimerStart })
-                : [];
 
             bool modelExists = false;
 
@@ -291,7 +339,7 @@ namespace SF3.Win.OpenGL.MPD_File {
             var semiTransparentUntexturedModel = (semiTransparentUntexturedQuads.Count > 0) ? new QuadModel(semiTransparentUntexturedQuads.ToArray()) : null;
 
             if (modelExists) {
-                    ModelsByMemoryAddress[pdata.RamAddress] = new ModelGroup(
+                ModelsByMemoryAddressByCollection[modelCollection][pdata.RamAddress] = new ModelGroup(
                     solidTexturedModel,
                     solidUntexturedModel,
                     semiTransparentTexturedModel,
@@ -300,11 +348,11 @@ namespace SF3.Win.OpenGL.MPD_File {
             }
         }
 
-        public Dictionary<uint, ModelGroup> ModelsByMemoryAddress { get; } = [];
-        public Dictionary<uint, PDataModel> PDatasByAddress { get; } = [];
-        public Dictionary<uint, VertexModel[]> VerticesByAddress { get; } = [];
-        public Dictionary<uint, PolygonModel[]> PolygonsByAddress { get; } = [];
-        public Dictionary<uint, AttrModel[]> AttributesByAddress { get; } = [];
+        public Dictionary<ModelCollectionType, Dictionary<uint, ModelGroup>> ModelsByMemoryAddressByCollection { get; } = [];
+        public Dictionary<ModelCollectionType, Dictionary<uint, PDataModel>> PDatasByAddressByCollection { get; } = [];
+        public Dictionary<ModelCollectionType, Dictionary<uint, VertexModel[]>> VerticesByAddressByCollection { get; } = [];
+        public Dictionary<ModelCollectionType, Dictionary<uint, PolygonModel[]>> PolygonsByAddressByCollection { get; } = [];
+        public Dictionary<ModelCollectionType, Dictionary<uint, AttrModel[]>> AttributesByAddressByCollection { get; } = [];
         public ModelBase[] Models { get; private set; }
     }
 }

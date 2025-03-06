@@ -120,8 +120,8 @@ namespace SF3.Win.Controls {
             float size = 1.0f;
             Vector3 center = Vector3.Zero;
 
-            if (_models != null && _pdata != null) {
-                if (_models.VerticesByAddress.TryGetValue(_pdata.VerticesOffset, out var vertices)) {
+            if (_models != null && _pdata != null && Models != null) {
+                if (_models.VerticesByAddressByCollection[Models.CollectionType].TryGetValue(_pdata.VerticesOffset, out var vertices)) {
                     var minX = vertices.Min(x => x.X) / 32.0f;
                     var maxX = vertices.Max(x => x.X) / 32.0f;
                     var minY = vertices.Min(x => x.Y) / 32.0f;
@@ -209,8 +209,8 @@ namespace SF3.Win.Controls {
             Yaw = (Yaw + 1.0f) % 360f;
 
             // TODO: this doesn't update at 30fps, please fix!
-            if (_models?.ModelsByMemoryAddress != null)
-                foreach (var modelGroup in _models.ModelsByMemoryAddress.Values)
+            if (_models != null && Models != null)
+                foreach (var modelGroup in _models.ModelsByMemoryAddressByCollection[Models.CollectionType].Values)
                     foreach (var model in modelGroup.Models)
                         model.UpdateAnimatedTextures();
 

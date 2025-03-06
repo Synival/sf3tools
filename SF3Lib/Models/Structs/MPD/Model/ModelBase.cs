@@ -1,6 +1,7 @@
 ﻿using CommonLib.Attributes;
 using CommonLib.SGL;
 using SF3.ByteData;
+using SF3.Types;
 
 namespace SF3.Models.Structs.MPD.Model {
     public abstract class ModelBase : Struct {
@@ -15,8 +16,10 @@ namespace SF3.Models.Structs.MPD.Model {
         protected readonly int _scaleYAddress;
         protected readonly int _scaleZAddress;
 
-        public ModelBase(IByteData data, int id, string name, int address, int positionXOffset, int size)
+        public ModelBase(IByteData data, int id, string name, int address, int positionXOffset, int size, ModelCollectionType collectionType)
         : base(data, id, name, address, size) {
+            CollectionType = collectionType;
+
             _pdata0Address = Address + 0x00; // 4 bytes
             _positionXAddress   = Address + positionXOffset + 0x00; // 2 bytes
             _positionYAddress   = Address + positionXOffset + 0x02; // 2 bytes
@@ -28,6 +31,9 @@ namespace SF3.Models.Structs.MPD.Model {
             _scaleYAddress      = Address + positionXOffset + 0x10; // 4 bytes
             _scaleZAddress      = Address + positionXOffset + 0x14; // 4 bytes
         }
+
+        [TableViewModelColumn(displayOrder: -0.5f, minWidth: 120)]
+        public ModelCollectionType CollectionType { get; }
 
         [BulkCopy]
         [TableViewModelColumn(displayOrder: 0, displayName: "PDATA*[0]", isPointer: true)]

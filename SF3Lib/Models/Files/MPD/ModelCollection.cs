@@ -61,12 +61,11 @@ namespace SF3.Models.Files.MPD {
         }
 
         public override IEnumerable<ITable> MakeTables() {
-            if (MovableModelsIndex.HasValue) {
-                MovableModelTable = MovableModelTable.Create(Data, "MovableModelsHeader", Address);
-            }
+            if (MovableModelsIndex.HasValue)
+                MovableModelTable = MovableModelTable.Create(Data, "MovableModelsHeader", Address, CollectionType);
             else {
                 ModelsHeader = new ModelsHeader(Data, 0, "ModelsHeader", 0x0000);
-                ModelTable = ModelTable.Create(Data, "Models", 0x000C, ModelsHeader.NumModels, Scenario >= ScenarioType.Other);
+                ModelTable = ModelTable.Create(Data, "Models", 0x000C, ModelsHeader.NumModels, Scenario >= ScenarioType.Other, CollectionType);
             }
 
             var pdataAddressesPre =
