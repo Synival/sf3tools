@@ -173,40 +173,56 @@ namespace SF3.Models.Files.MPD {
 
             if (ModelsHeader != null) {
                 var highestLineIndex = -1;
-                if (ModelsHeader.CollisionBlocksOffset != 0) {
-                    CollisionBlockTable = CollisionBlockTable.Create(Data, "CollisionBlocks", (int) GetOffsetInChunk((uint) ModelsHeader.CollisionBlocksOffset));
+                if (ModelsHeader.CollisionBlocksOffset != 0 &&
+                    ModelsHeader.CollisionBlocksOffset != 0xDEADADD0 && /* found in some beta maps */
+                    (ModelsHeader.CollisionBlocksOffset & 0xF000000) != 0xF000000 /* SHIP2.MPD */
+                ) {
+                    CollisionBlockTable = CollisionBlockTable.Create(Data, "CollisionBlocks", (int) GetOffsetInChunk(ModelsHeader.CollisionBlocksOffset));
                     CollisionLineIndexTablesByBlock = new Dictionary<int, CollisionLineIndexTable>();
 
                     var pos = 0;
                     for (var y = 0; y < CollisionBlockTable.Length; y++) {
                         var row = CollisionBlockTable[y];
                         for (var x = 0; x < row.Length; x++) {
-                            var addr = row[x];
-                            if (addr > 0) {
-                                var name = $"CollisionBlockLineIndexTable[{x}][{y}] (0x{addr:X})";
-                                CollisionLineIndexTablesByBlock[pos] = CollisionLineIndexTable.Create(Data, name, (int) GetOffsetInChunk((uint) addr));
-                                if (CollisionLineIndexTablesByBlock[pos].Length > 0)
-                                    highestLineIndex = Math.Max(highestLineIndex, CollisionLineIndexTablesByBlock[pos].Max(li => li.LineIndex));
+                            try {
+                                var addr = row[x];
+                                if (addr > 0) {
+                                    var name = $"CollisionBlockLineIndexTable[{x}][{y}] (0x{addr:X})";
+                                    CollisionLineIndexTablesByBlock[pos] = CollisionLineIndexTable.Create(Data, name, (int) GetOffsetInChunk(addr));
+                                    if (CollisionLineIndexTablesByBlock[pos].Length > 0)
+                                        highestLineIndex = Math.Max(highestLineIndex, CollisionLineIndexTablesByBlock[pos].Max(li => li.LineIndex));
+                                }
+                            }
+                            catch {
+                                // TODO: what to do here??
                             }
                             pos++;
                         }
                     }
                 }
 
-                if (ModelsHeader.CollisionLinesHeaderOffset != 0) {
-                    CollisionLinesHeader = new CollisionLinesHeader(Data, 0, "CollisionLinesHeader", (int) GetOffsetInChunk((uint) ModelsHeader.CollisionLinesHeaderOffset));
+                if (ModelsHeader.CollisionLinesHeaderOffset != 0 &&
+                    ModelsHeader.CollisionLinesHeaderOffset != 0xDEADADD0 && /* found in some beta maps */
+                    (ModelsHeader.CollisionLinesHeaderOffset & 0xF000000) != 0xF000000 /* SHIP2.MPD */
+                ) {
+                    CollisionLinesHeader = new CollisionLinesHeader(Data, 0, "CollisionLinesHeader", (int) GetOffsetInChunk(ModelsHeader.CollisionLinesHeaderOffset));
 
                     var lineCount = highestLineIndex + 1;
                     var highestPointIndex = -1;
 
-                    if (CollisionLinesHeader.LinesOffset != 0) {
-                        CollisionLineTable = CollisionLineTable.Create(Data, "CollisionLines", (int) GetOffsetInChunk((uint) CollisionLinesHeader.LinesOffset), lineCount);
-                        highestPointIndex = CollisionLineTable.Max(x => Math.Max(x.Point1Index, x.Point2Index));
-                    }
+                    try {
+                        if (CollisionLinesHeader.LinesOffset != 0) {
+                            CollisionLineTable = CollisionLineTable.Create(Data, "CollisionLines", (int) GetOffsetInChunk(CollisionLinesHeader.LinesOffset), lineCount);
+                            highestPointIndex = CollisionLineTable.Max(x => Math.Max(x.Point1Index, x.Point2Index));
+                        }
 
-                    var pointCount = highestPointIndex + 1;
-                    if (CollisionLinesHeader.PointsOffset != 0)
-                        CollisionPointTable = CollisionPointTable.Create(Data, "CollisionPoints", (int) GetOffsetInChunk((uint) CollisionLinesHeader.PointsOffset), pointCount);
+                        var pointCount = highestPointIndex + 1;
+                        if (CollisionLinesHeader.PointsOffset != 0)
+                            CollisionPointTable = CollisionPointTable.Create(Data, "CollisionPoints", (int) GetOffsetInChunk(CollisionLinesHeader.PointsOffset), pointCount);
+                    }
+                    catch {
+                        // TODO: what to do here?
+                    }
                 }
             }
 

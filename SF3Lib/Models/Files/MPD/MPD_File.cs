@@ -622,7 +622,7 @@ namespace SF3.Models.Files.MPD {
                         chunk.DecompressedData, NameGetterContext, 0x00, "TextureCollection" + index,
                         collection, pixelFormats[collection], palettes, chunk.Index, startId
                     );
-                    if (isMovableModelsChunk)
+                    if (isMovableModelsChunk && texCol.TextureTable.Length > 0)
                         nextModelCollectionStartId = texCol.TextureTable.Last().ID + 1;
 
                     texColList.Add(texCol);
