@@ -31,8 +31,12 @@ namespace SF3.Win.Views.MPD {
             CreateChild(new TableArrayView<PolygonTable>("POLYGON[]s", Model.PolygonTablesByMemoryAddress.Values.ToArray(), ngc));
             CreateChild(new TableArrayView<AttrTable>("ATTR[]s", Model.AttrTablesByMemoryAddress.Values.ToArray(), ngc));
 
+            if (Model.CollisionLinesHeader != null)
+                CreateChild(new DataModelView("Collision Lines Header", Model.CollisionLinesHeader, ngc));
+
             if (Model.CollisionBlockTable != null)
                 CreateChild(new TableView("Collision Blocks", Model.CollisionBlockTable, ngc));
+
             if (Model.CollisionLineIndexTablesByBlock != null)
                 CreateChild(new TableArrayView<CollisionLineIndexTable>("Collision Block Line Indices", Model.CollisionLineIndexTablesByBlock.Values.ToArray(), ngc));
 

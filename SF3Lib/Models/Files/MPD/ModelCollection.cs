@@ -173,6 +173,11 @@ namespace SF3.Models.Files.MPD {
             }
 
             if (ModelsHeader != null) {
+                if (ModelsHeader.CollisionLinesHeaderOffset != 0) {
+                    CollisionLinesHeader = new CollisionLinesHeader(Data, 0, "CollisionLinesHeader", (int) GetOffsetInChunk((uint) ModelsHeader.CollisionLinesHeaderOffset));
+                }
+
+                var highestLineIndex = -1;
                 if (ModelsHeader.CollisionBlocksOffset != 0) {
                     CollisionBlockTable = CollisionBlockTable.Create(Data, "CollisionBlocks", (int) GetOffsetInChunk((uint) ModelsHeader.CollisionBlocksOffset));
                     CollisionLineIndexTablesByBlock = new Dictionary<int, CollisionLineIndexTable>();
@@ -185,6 +190,8 @@ namespace SF3.Models.Files.MPD {
                             if (addr > 0) {
                                 var name = $"CollisionBlockLineIndexTable[{x}][{y}] (0x{addr:X})";
                                 CollisionLineIndexTablesByBlock[pos] = CollisionLineIndexTable.Create(Data, name, (int) GetOffsetInChunk((uint) addr));
+                                if (CollisionLineIndexTablesByBlock[pos].Length > 0)
+                                    highestLineIndex = Math.Max(highestLineIndex, CollisionLineIndexTablesByBlock[pos].Max(li => li.LineIndex));
                             }
                             pos++;
                         }
@@ -257,6 +264,9 @@ namespace SF3.Models.Files.MPD {
 
         [BulkCopyRecurse]
         public Dictionary<uint, AttrTable> AttrTablesByMemoryAddress { get; private set; }
+
+        [BulkCopyRecurse]
+        public CollisionLinesHeader CollisionLinesHeader { get; private set; }
 
         [BulkCopyRecurse]
         public CollisionBlockTable CollisionBlockTable { get; private set; } 
