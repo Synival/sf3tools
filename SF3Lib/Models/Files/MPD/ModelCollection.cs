@@ -213,7 +213,8 @@ namespace SF3.Models.Files.MPD {
                     try {
                         if (CollisionLinesHeader.LinesOffset != 0) {
                             CollisionLineTable = CollisionLineTable.Create(Data, "CollisionLines", (int) GetOffsetInChunk(CollisionLinesHeader.LinesOffset), lineCount);
-                            highestPointIndex = CollisionLineTable.Max(x => Math.Max(x.Point1Index, x.Point2Index));
+                            if (CollisionLineTable.Length > 0)
+                                highestPointIndex = CollisionLineTable.Max(x => Math.Max(x.Point1Index, x.Point2Index));
                         }
 
                         var pointCount = highestPointIndex + 1;
