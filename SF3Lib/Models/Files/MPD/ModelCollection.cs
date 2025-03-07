@@ -64,8 +64,8 @@ namespace SF3.Models.Files.MPD {
             if (MovableModelsIndex.HasValue)
                 MovableModelTable = MovableModelTable.Create(Data, "MovableModelsHeader", Address, CollectionType);
             else {
-                ModelsHeader = new ModelsHeader(Data, 0, "ModelsHeader", 0x0000);
-                ModelTable = ModelTable.Create(Data, "Models", 0x000C, ModelsHeader.NumModels, Scenario >= ScenarioType.Other, CollectionType);
+                ModelsHeader = new ModelsHeader(Data, 0, "ModelsHeader", Address + 0x0000);
+                ModelTable = ModelTable.Create(Data, "Models", Address + 0x000C, ModelsHeader.NumModels, Scenario >= ScenarioType.Other, CollectionType);
             }
 
             var pdataAddressesPre =
@@ -232,12 +232,15 @@ namespace SF3.Models.Files.MPD {
                     ModelTable,
                     MovableModelTable,
                     PDataTable,
+                    CollisionPointTable,
+                    CollisionLineTable,
                     CollisionBlockTable,
                 }
                 .Where(x => x != null)
                 .ToList();
 
             tables.AddRange(VertexTablesByMemoryAddress.Values);
+            tables.AddRange(PolygonTablesByMemoryAddress.Values);
             tables.AddRange(AttrTablesByMemoryAddress.Values);
 
             if (CollisionLineIndexTablesByBlock != null)
