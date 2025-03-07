@@ -5,7 +5,7 @@ using SF3.Models.Structs.MPD.TextureAnimation;
 namespace SF3.Models.Tables.MPD.TextureAnimation {
     public class FrameTable : TerminatedTable<FrameModel> {
         protected FrameTable(IByteData data, string name, int address, bool is32Bit, int texId, int width, int height, int texAnimId)
-        : base(data, name, address) {
+        : base(data, name, address, is32Bit ? 4 : 2, null) {
             Is32Bit   = is32Bit;
             TexID     = texId;
             Width     = width;

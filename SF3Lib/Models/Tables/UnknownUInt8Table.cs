@@ -6,7 +6,7 @@ using SF3.Models.Structs;
 namespace SF3.Models.Tables {
     public class UnknownUInt8Table : TerminatedTable<UnknownUInt8Struct> {
         protected UnknownUInt8Table(IByteData data, string name, int address, int? count, int? readUntil)
-        : base(data, name, address, count) {
+        : base(data, name, address, readUntil.HasValue ? 1 : 0, count) {
             if (!count.HasValue && !readUntil.HasValue)
                 throw new ArgumentNullException(nameof(count) + ", " + nameof(readUntil));
 

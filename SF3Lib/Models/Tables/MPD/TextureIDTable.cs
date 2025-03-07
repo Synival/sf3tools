@@ -5,7 +5,7 @@ using SF3.Models.Structs.MPD;
 
 namespace SF3.Models.Tables.MPD {
     public class TextureIDTable : TerminatedTable<TextureIDModel> {
-        protected TextureIDTable(IByteData data, string name, int address) : base(data, name, address) {
+        protected TextureIDTable(IByteData data, string name, int address) : base(data, name, address, 2, null) {
         }
 
         public static TextureIDTable Create(IByteData data, string name, int address) {

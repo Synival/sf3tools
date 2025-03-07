@@ -30,5 +30,6 @@ namespace SF3.Models.Tables {
         }
 
         public int[] Addresses { get; }
+        public override int TerminatorSize => 0;
     }
 }

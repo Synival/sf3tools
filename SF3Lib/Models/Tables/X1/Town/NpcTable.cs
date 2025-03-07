@@ -4,7 +4,8 @@ using SF3.Models.Structs.X1.Town;
 
 namespace SF3.Models.Tables.X1.Town {
     public class NpcTable : TerminatedTable<Npc> {
-        protected NpcTable(IByteData data, string name, int address) : base(data, name, address, 100) {
+        protected NpcTable(IByteData data, string name, int address)
+        : base(data, name, address, 2, 100) {
         }
 
         public static NpcTable Create(IByteData data, string name, int address) {

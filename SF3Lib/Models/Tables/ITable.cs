@@ -54,6 +54,11 @@ namespace SF3.Models.Tables {
         /// Returns the number of bytes occupied by all rows together.
         /// </summary>
         int SizeInBytes { get; }
+
+        /// <summary>
+        /// Extra bytes at the end of the table if it is a terminated table.
+        /// </summary>
+        int TerminatorSize { get; }
     }
 
     /// <summary>

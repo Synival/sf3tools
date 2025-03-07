@@ -4,7 +4,8 @@ using SF3.Models.Structs.X1;
 
 namespace SF3.Models.Tables.X1 {
     public class InteractableTable : TerminatedTable<Interactable> {
-        protected InteractableTable(IByteData data, string name, int address) : base(data, name, address, 255) {
+        protected InteractableTable(IByteData data, string name, int address)
+        : base(data, name, address, 2, 255) {
         }
 
         public static InteractableTable Create(IByteData data, string name, int address) {

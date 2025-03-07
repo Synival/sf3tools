@@ -4,7 +4,8 @@ using SF3.Models.Structs.X1.Town;
 
 namespace SF3.Models.Tables.X1.Town {
     public class ArrowTable : TerminatedTable<Arrow> {
-        protected ArrowTable(IByteData data, string name, int address) : base(data, name, address, 100) {
+        protected ArrowTable(IByteData data, string name, int address)
+        : base(data, name, address, 2, 100) {
         }
 
         public static ArrowTable Create(IByteData data, string name, int address) {

@@ -5,7 +5,7 @@ using SF3.Models.Structs.MPD;
 namespace SF3.Models.Tables {
     public class ModelIDTable : TerminatedTable<ModelIDStruct> {
         protected ModelIDTable(IByteData data, string name, int address)
-        : base(data, name, address) {
+        : base(data, name, address, 2, null) {
         }
 
         public static ModelIDTable Create(IByteData data, string name, int address) {

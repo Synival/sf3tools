@@ -79,5 +79,6 @@ namespace SF3.Models.Tables {
 
         public string ResourceFile { get; }
         public int? MaxSize { get; }
+        public override int TerminatorSize => 0;
     }
 }

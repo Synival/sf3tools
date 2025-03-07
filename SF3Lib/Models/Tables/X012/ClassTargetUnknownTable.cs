@@ -4,7 +4,8 @@ using SF3.Models.Structs.X012;
 
 namespace SF3.Models.Tables.X012 {
     public class ClassTargetUnknownTable : TerminatedTable<ClassTargetUnknown> {
-        protected ClassTargetUnknownTable(IByteData data, string name, int address) : base(data, name, address) {
+        protected ClassTargetUnknownTable(IByteData data, string name, int address)
+        : base(data, name, address, 1, null) {
         }
 
         public static ClassTargetUnknownTable Create(IByteData data, string name, int address) {

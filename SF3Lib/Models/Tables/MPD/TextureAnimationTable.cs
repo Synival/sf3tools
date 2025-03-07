@@ -5,7 +5,7 @@ using SF3.Models.Structs.MPD;
 
 namespace SF3.Models.Tables.MPD {
     public class TextureAnimationTable : TerminatedTable<TextureAnimationModel> {
-        protected TextureAnimationTable(IByteData data, string name, int address, bool is32Bit) : base(data, name, address) {
+        protected TextureAnimationTable(IByteData data, string name, int address, bool is32Bit) : base(data, name, address, is32Bit ? 4 : 2, null) {
             Is32Bit       = is32Bit;
             _frameEndId   = is32Bit ? 0xFFFF_FFFE : 0xFFFE;
             _textureEndId = is32Bit ? 0xFFFF_FFFF : 0xFFFF;

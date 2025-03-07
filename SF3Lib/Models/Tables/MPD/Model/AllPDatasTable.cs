@@ -28,5 +28,6 @@ namespace SF3.Models.Tables.MPD.TextureCollection {
         }
 
         public PDataModel[] Models { get; }
+        public override int TerminatorSize => 0;
     }
 }

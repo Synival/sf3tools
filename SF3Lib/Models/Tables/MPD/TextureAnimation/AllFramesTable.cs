@@ -24,5 +24,6 @@ namespace SF3.Models.Tables.MPD.TextureAnimation {
         }
 
         public IEnumerable<TextureAnimationModel> Animations { get; }
+        public override int TerminatorSize => 0;
     }
 }

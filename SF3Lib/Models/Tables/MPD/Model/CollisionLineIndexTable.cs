@@ -4,7 +4,7 @@ using SF3.Models.Structs.MPD.Model;
 
 namespace SF3.Models.Tables.MPD.Model {
     public class CollisionLineIndexTable : TerminatedTable<CollisionLineIndex> {
-        protected CollisionLineIndexTable(IByteData data, string name, int address) : base(data, name, address) {
+        protected CollisionLineIndexTable(IByteData data, string name, int address) : base(data, name, address, 2, null) {
         }
 
         public static CollisionLineIndexTable Create(IByteData data, string name, int address) {

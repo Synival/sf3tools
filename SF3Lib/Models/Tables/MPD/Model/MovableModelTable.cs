@@ -5,7 +5,7 @@ using SF3.Types;
 
 namespace SF3.Models.Tables.MPD.Model {
     public class MovableModelTable : TerminatedTable<MovableModel> {
-        protected MovableModelTable(IByteData data, string name, int address, ModelCollectionType collectionType) : base(data, name, address) {
+        protected MovableModelTable(IByteData data, string name, int address, ModelCollectionType collectionType) : base(data, name, address, 4, null) {
             CollectionType = collectionType;
         }
 

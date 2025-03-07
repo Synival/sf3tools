@@ -42,6 +42,7 @@ namespace SF3.Models.Tables {
         public IStruct[] RowObjs => _rows;
         public int Length => RowObjs.Length;
         public int SizeInBytes => IsLoaded ? _rows.Sum(x => x.Size) : 0;
+        public abstract int TerminatorSize { get; }
 
         [BulkCopyRecurse]
         public T[] Rows => _rows;
