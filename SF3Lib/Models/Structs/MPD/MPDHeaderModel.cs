@@ -338,7 +338,7 @@ namespace SF3.Models.Structs.MPD {
         }
 
         [BulkCopy]
-        [TableViewModelColumn(displayOrder: 9.5f, isPointer: true, displayName: nameof(HasGradientTable) + " (Scn2+)", visibilityProperty: nameof(HasGradientTable))]
+        [TableViewModelColumn(displayOrder: 9.5f, isPointer: true, displayName: nameof(OffsetGradient) + " (Scn2+)", visibilityProperty: nameof(HasGradientTable))]
         public int OffsetGradient {
             get => HasGradientTable ? Data.GetDouble(offsetGradientAddress) : 0;
             set {

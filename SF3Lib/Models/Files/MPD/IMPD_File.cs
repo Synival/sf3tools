@@ -65,7 +65,7 @@ namespace SF3.Models.Files.MPD {
         TextureIDTable IndexedTextureTable { get; }
         TextureAnimationTable TextureAnimations { get; }
         UnknownUInt16Table Unknown2Table { get; }
-        GradientModel Gradient { get; }
+        GradientTable GradientTable { get; }
         BoundaryTable BoundariesTable { get; }
 
         /// <summary>

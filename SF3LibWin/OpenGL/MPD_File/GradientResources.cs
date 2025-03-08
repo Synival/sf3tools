@@ -24,7 +24,7 @@ namespace SF3.Win.OpenGL.MPD_File {
         }
 
         public void Update(IMPD_File mpdFile)
-            => Update(mpdFile?.Gradient);
+            => Update((mpdFile?.GradientTable?.Length > 0) ? mpdFile.GradientTable[0] : null);
 
         public void Update(GradientModel gradient) {
             if (gradient == null) {

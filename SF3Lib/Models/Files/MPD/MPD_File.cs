@@ -162,10 +162,8 @@ namespace SF3.Models.Files.MPD {
             if (header.OffsetLightAdjustment != 0)
                 LightAdjustment = new LightAdjustmentModel(Data, 0, "LightAdjustment", header.OffsetLightAdjustment - c_RamOffset, Scenario);
 
-            if (header.OffsetGradient != 0) {
-                if ((ushort) Data.GetWord(header.OffsetGradient - c_RamOffset) != 0xFFFF)
-                    Gradient = new GradientModel(Data, 0, "Gradient", header.OffsetGradient - c_RamOffset);
-            }
+            if (header.OffsetGradient != 0)
+                tables.Add(GradientTable = GradientTable.Create(Data, "Gradients", header.OffsetGradient - c_RamOffset));
 
             return tables.ToArray();
         }
@@ -1166,7 +1164,7 @@ namespace SF3.Models.Files.MPD {
         public UnknownUInt16Table Unknown2Table { get; private set; }
 
         [BulkCopyRecurse]
-        public GradientModel Gradient { get; private set; }
+        public GradientTable GradientTable { get; private set; }
 
         public List<Chunk3Frame> Chunk3Frames { get; private set; }
 

@@ -22,7 +22,7 @@ namespace SF3.Win.Views.MPD {
                 CreateChild(new DataModelView("Light Position", Model.LightPosition, ngc));
 
             if (Model.Unknown1Table != null)
-                CreateChild(new TableView("Unknown 1",  Model.Unknown1Table, ngc));
+                CreateChild(new TableView("Unknown 1", Model.Unknown1Table, ngc));
 
             if (Model.LightAdjustment != null)
                 CreateChild(new DataModelView("Light Adjustment", Model.LightAdjustment, ngc));
@@ -34,13 +34,17 @@ namespace SF3.Win.Views.MPD {
                 CreateChild(new TextureAnimationsView("Texture Animations", Model.TextureAnimations, ngc));
 
             if (Model.Unknown2Table != null)
-                CreateChild(new TableView("Unknown 2",  Model.Unknown2Table, ngc));
+                CreateChild(new TableView("Unknown 2", Model.Unknown2Table, ngc));
 
-            if (Model.Gradient != null)
-                CreateChild(new DataModelView("Gradient",  Model.Gradient, ngc));
+            if (Model.GradientTable != null) {
+                if (Model.GradientTable.Length == 1)
+                    CreateChild(new DataModelView("Gradient", Model.GradientTable[0], ngc));
+                else
+                    CreateChild(new TableView("Gradients", Model.GradientTable, ngc));
+            }
 
             if (Model.GroundAnimationTable != null)
-                CreateChild(new TableView("Ground Animation",  Model.GroundAnimationTable, ngc));
+                CreateChild(new TableView("Ground Animation", Model.GroundAnimationTable, ngc));
 
             if (Model.ModelCollections != null) {
                 foreach (var models in Model.ModelCollections)
