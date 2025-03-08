@@ -6,8 +6,8 @@ namespace SF3.Models.Tables.MPD {
     public class ColorTable : FixedSizeTable<ColorModel> {
         protected ColorTable(IByteData data, string name, int address, int size) : base(data, name, address, size) {}
 
-        public static ColorTable Create(IByteData data, string name, int address, int colors) {
-            var newTable = new ColorTable(data, name, address, colors);
+        public static ColorTable Create(IByteData data, string name, int address, int size) {
+            var newTable = new ColorTable(data, name, address, size);
             if (!newTable.Load())
                 throw new InvalidOperationException("Couldn't initialize table");
             return newTable;

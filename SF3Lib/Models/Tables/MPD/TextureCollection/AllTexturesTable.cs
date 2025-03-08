@@ -25,5 +25,6 @@ namespace SF3.Models.Tables.MPD.TextureCollection {
 
         public TextureModel[] Textures { get; }
         public override int TerminatorSize => 0;
+        public override bool IsContiguous => false;
     }
 }

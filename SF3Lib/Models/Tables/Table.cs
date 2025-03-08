@@ -43,6 +43,8 @@ namespace SF3.Models.Tables {
         public int Length => RowObjs.Length;
         public int SizeInBytes => IsLoaded ? _rows.Sum(x => x.Size) : 0;
         public abstract int TerminatorSize { get; }
+        public int SizeInBytesPlusTerminator => SizeInBytes + TerminatorSize;
+        public abstract bool IsContiguous { get; }
 
         [BulkCopyRecurse]
         public T[] Rows => _rows;

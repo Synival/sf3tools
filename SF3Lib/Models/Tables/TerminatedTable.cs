@@ -57,5 +57,6 @@ namespace SF3.Models.Tables {
 
         private int _terminatedBytes;
         public override int TerminatorSize => _terminatedBytes;
+        public override bool IsContiguous => true;
     }
 }

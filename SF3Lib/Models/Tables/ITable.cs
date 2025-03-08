@@ -59,6 +59,16 @@ namespace SF3.Models.Tables {
         /// Extra bytes at the end of the table if it is a terminated table.
         /// </summary>
         int TerminatorSize { get; }
+
+        /// <summary>
+        /// SizeInBytes + TerminatorSize
+        /// </summary>
+        int SizeInBytesPlusTerminator { get; }
+
+        /// <summary>
+        /// The rows represent a contiguous set of data from Address to Address + SizeInBytesPlusTerminator.
+        /// </summary>
+        bool IsContiguous { get; }
     }
 
     /// <summary>

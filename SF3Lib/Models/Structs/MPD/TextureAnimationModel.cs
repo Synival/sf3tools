@@ -35,7 +35,7 @@ namespace SF3.Models.Structs.MPD {
                 pos = Address + _bytesPerProperty;
             else if (TextureID != _textureEndId) {
                 FrameTable = FrameTable.Create(data, "TexAnimFrames_" + id, pos, is32Bit, (int) TextureID, (int) Width, (int) Height, id);
-                pos += FrameTable.SizeInBytes + _bytesPerProperty;
+                pos += FrameTable.SizeInBytesPlusTerminator;
             }
 
             Size = pos - Address;
