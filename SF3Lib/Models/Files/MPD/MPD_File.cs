@@ -265,11 +265,15 @@ namespace SF3.Models.Files.MPD {
                     updateLowest((int) msg.DisabledModelsOffset);
                     updateLowest((int) msg.EnabledModelsOffset);
                 }
+                updateLowest(header.OffsetTextureAnimations);
+                updateLowest(header.OffsetUnknown2);
 
                 // We have our best guess for the size. Add the table!
                 var lengthInBytes = ((int) lowestOffset - header.OffsetUnknown1);
-                var size = Math.Max(32, lengthInBytes / 2);
-                tables.Add(Unknown1Table = UnknownUInt16Table.Create(Data, "Unknown1", header.OffsetUnknown1 - c_RamOffset, size, null));
+                var size = Math.Min(32, lengthInBytes / 2);
+
+                if (size > 0)
+                    tables.Add(Unknown1Table = UnknownUInt16Table.Create(Data, "Unknown1", header.OffsetUnknown1 - c_RamOffset, size, null));
             }
 
             if (header.OffsetUnknown2 != 0)
