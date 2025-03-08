@@ -182,7 +182,7 @@ namespace SF3.Models.Files.MPD {
 
             if (header.OffsetTextureAnimAlt != 0) {
                 try {
-                    tables.Add(TextureAnimationsAlt = TextureIDTable.Create(Data, "TextureAnimationsAlt", header.OffsetTextureAnimAlt - c_RamOffset));
+                    tables.Add(TextureAnimationsAlt = TextureIDTable.Create(Data, "TextureAnimationsAlt", header.OffsetTextureAnimAlt - c_RamOffset, 2, 0x100));
                 }
                 catch {
                     // TODO: what to do here??
@@ -246,7 +246,7 @@ namespace SF3.Models.Files.MPD {
 
             // TODO: put somewhere else!!
             if (header.OffsetIndexedTextures != 0)
-                tables.Add(IndexedTextureTable = TextureIDTable.Create(Data, "IndexedTextures", header.OffsetIndexedTextures - c_RamOffset));
+                tables.Add(IndexedTextureTable = TextureIDTable.Create(Data, "IndexedTextures", header.OffsetIndexedTextures - c_RamOffset, 4, 0x100));
 
             // This table is only present before Scenario 2 and is always 32 bytes if it exists.
             if (header.OffsetUnknown1 != 0) {
