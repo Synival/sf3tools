@@ -58,14 +58,14 @@ namespace SF3.Tests.Compression {
                 _ = mpdFile.Recompress(onlyModified: false);
                 var allFrames = mpdFile.TextureAnimations
                     .SelectMany(x => x.FrameTable)
-                    .GroupBy(x => x.CompressedTextureOffset)
+                    .GroupBy(x => x.CompressedImageDataOffset)
                     .ToDictionary(x => x.Key, x => x.First());
 
                 foreach (var c3fKv in mpdFile.Chunk3Frames) {
                     var frame = allFrames[(uint) c3fKv.Offset];
                     var compressedByteArray = c3fKv.Data.GetDataCopy();
                     var bytesPerPixel = frame.PixelFormat.BytesPerPixel();
-                    var expectedUncompressedDataSize = frame.Width * frame.Height * bytesPerPixel;
+                    var expectedUncompressedDataSize = frame.UncompressedImageDataSize;
 
                     var compressedData = new CompressedData(new ByteArray(compressedByteArray), expectedUncompressedDataSize);
                     Assert.AreEqual(expectedUncompressedDataSize, compressedData.DecompressedData.Length);

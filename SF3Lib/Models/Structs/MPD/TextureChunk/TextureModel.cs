@@ -112,6 +112,9 @@ namespace SF3.Models.Structs.MPD.TextureChunk {
             }
         }
 
+        [TableViewModelColumn(displayOrder: 2.1f, displayFormat: "X4")]
+        public int ImageDataSize => Width * Height * BytesPerPixel;
+
         [TableViewModelColumn(displayName: "Pixel Format Known", displayOrder: 2.5f)]
         public bool PixelFormatKnown { get; }
 

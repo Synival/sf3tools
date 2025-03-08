@@ -44,6 +44,7 @@ namespace SF3.Models.Structs.MPD.TextureAnimation {
                 }
             }
 
+            PixelFormat = TexturePixelFormat.ABGR1555;
             Texture = new TextureABGR1555(TextureID, FrameNum, (int) Duration, imageData, tags: referenceTexture?.Tags, hashPrefix: referenceTexture?.Hash ?? "NOTEX");
         }
 
@@ -54,6 +55,7 @@ namespace SF3.Models.Structs.MPD.TextureAnimation {
                 for (var x = 0; x < Width; x++)
                     imageData[x, y] = (byte) data.GetByte(off++);
 
+            PixelFormat = pixelFormat;
             Texture = new TextureIndexed(TextureID, FrameNum, (int) Duration, imageData, pixelFormat, palette, true,
                 tags: referenceTexture?.Tags, hashPrefix: referenceTexture?.Hash ?? "NOTEX");
         }
@@ -85,8 +87,6 @@ namespace SF3.Models.Structs.MPD.TextureAnimation {
 
         public bool TextureIsLoaded => Texture != null;
 
-        public TexturePixelFormat PixelFormat => TexturePixelFormat.ABGR1555;
-
         [TableViewModelColumn(displayName: "Texture ID", displayOrder: 0, displayFormat: "X2")]
         public int TextureID { get; }
 
@@ -105,11 +105,17 @@ namespace SF3.Models.Structs.MPD.TextureAnimation {
         public string FrameNumStr => FrameNum == 0 ? "" : FrameNum.ToString();
 
         [BulkCopy]
-        [TableViewModelColumn(displayName: "Texture Offset", displayOrder: 5, displayFormat: "X4")]
-        public uint CompressedTextureOffset {
+        [TableViewModelColumn(displayOrder: 5, displayFormat: "X4")]
+        public uint CompressedImageDataOffset {
             get => Data.GetData(_compressedTextureOffsetAddress, _bytesPerProperty);
             set => Data.SetData(_compressedTextureOffsetAddress, value, _bytesPerProperty);
         }
+
+        [TableViewModelColumn(displayOrder: 5.5f, displayFormat: "X4")]
+        public int UncompressedImageDataSize => Width * Height * PixelFormat.BytesPerPixel();
+
+        [TableViewModelColumn(displayOrder: 5.6f)]
+        public TexturePixelFormat PixelFormat { get; private set; } = TexturePixelFormat.Unknown;
 
         [BulkCopy]
         [TableViewModelColumn(displayName: "Duration (30fps)", displayOrder: 6)]

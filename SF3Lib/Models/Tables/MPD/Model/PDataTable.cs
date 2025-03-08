@@ -26,7 +26,8 @@ namespace SF3.Models.Tables.MPD.Model {
         }
 
         public override bool Load() {
-            return Load((id, address) => new PDataModel(Data, id, "PDATA" + id.ToString("D4"), address,
+            return Load((id, address) => new PDataModel(
+                Data, id, "PDATA_" + Refs[id].Collection.ToString() + "_" + id.ToString("D4"), address,
                 Refs[id].Collection, Refs[id].ChunkIndex, Refs[id].Index, Refs[id].RefCount
             ));
         }

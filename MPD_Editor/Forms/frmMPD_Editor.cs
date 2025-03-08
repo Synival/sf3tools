@@ -112,7 +112,7 @@ namespace SF3.MPD_Editor.Forms {
 
                 var textures2 = (File.TextureAnimations == null) ? [] : File.TextureAnimations
                     .SelectMany(x => x.FrameTable)
-                    .GroupBy(x => x.CompressedTextureOffset)
+                    .GroupBy(x => x.CompressedImageDataOffset)
                     .Select(x => x.First())
                     .Where(x => x.TextureIsLoaded)
                     .ToDictionary(x => x.Name, x => new { Model = (object) x, x.Texture });
@@ -187,7 +187,7 @@ namespace SF3.MPD_Editor.Forms {
                                     tm.RawImageData16Bit = newImageData;
                                 else if (model is FrameModel fm) {
                                     var referenceTex = File.TextureCollections.Where(x => x != null).Select(x => x.TextureTable).SelectMany(x => x).FirstOrDefault(x => x.ID == fm.TextureID)?.Texture;
-                                    _ = fm.UpdateTextureABGR1555(File.Chunk3Frames.First(x => x.Offset == fm.CompressedTextureOffset).Data.DecompressedData, newImageData, referenceTex);
+                                    _ = fm.UpdateTextureABGR1555(File.Chunk3Frames.First(x => x.Offset == fm.CompressedImageDataOffset).Data.DecompressedData, newImageData, referenceTex);
                                 }
                                 else
                                     throw new NotSupportedException("Not sure what this is, but it's not supported here");
@@ -234,7 +234,7 @@ namespace SF3.MPD_Editor.Forms {
 
                 var textures2 = (File.TextureAnimations == null) ? [] : File.TextureAnimations
                     .SelectMany(x => x.FrameTable)
-                    .GroupBy(x => x.CompressedTextureOffset)
+                    .GroupBy(x => x.CompressedImageDataOffset)
                     .Select(x => x.First())
                     .Where(x => x.TextureIsLoaded)
                     .ToDictionary(x => x.Name, x => x.Texture);
