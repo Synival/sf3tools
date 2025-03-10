@@ -13,7 +13,7 @@ namespace SF3.X012_Editor {
                 if (!SetProcessDPIAware())
                     throw new NotSupportedException("SetProcessDPIAware()");
 
-            AppState.RetrieveAppState("X1 Editor");
+            AppState.RetrieveAppState("X012 Editor");
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
