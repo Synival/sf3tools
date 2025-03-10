@@ -1,5 +1,7 @@
-﻿using System.Windows.Forms;
+﻿using System.Linq;
+using System.Windows.Forms;
 using SF3.Models.Files.X014;
+using SF3.Models.Tables.X014;
 
 namespace SF3.Win.Views.X014 {
     public class X014_View : TabView {
@@ -14,6 +16,8 @@ namespace SF3.Win.Views.X014 {
             var ngc = Model.NameGetterContext;
             if (Model.MPDBattleSceneInfoTable != null)
                 CreateChild(new TableView("MPD Battle Scene Info", Model.MPDBattleSceneInfoTable, ngc));
+            if (Model.TerrainBasedBattleSceneTablesByRamAddress != null)
+                CreateChild(new TableArrayView<TerrainBasedBattleSceneTable>("Terrain-Based Battle Scenes", Model.TerrainBasedBattleSceneTablesByRamAddress.Values.ToArray(), ngc));
 
             return Control;
         }

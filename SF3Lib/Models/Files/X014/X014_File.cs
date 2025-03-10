@@ -9,7 +9,7 @@ using SF3.Types;
 
 namespace SF3.Models.Files.X014 {
     public class X014_File : ScenarioTableFile, IX014_File {
-        public readonly int c_ramOffset = 0x06070000;
+        public readonly int c_ramOffset = 0x06088000;
 
         protected X014_File(IByteData data, INameGetterContext nameContext, ScenarioType scenario) : base(data, nameContext, scenario) {
         }
@@ -41,9 +41,21 @@ namespace SF3.Models.Files.X014 {
                 (MPDBattleSceneInfoTable = (mpdBattleSceneAddr == 0) ? null : MPDBattleSceneInfoTable.Create(Data, "MPDBattleSceneInfoTable", (int) mpdBattleSceneAddr))
             }.Where(x => x != null).ToList();
 
+            if (MPDBattleSceneInfoTable != null) {
+                var addresses = MPDBattleSceneInfoTable
+                    .Select(x => x.BattleSceneFileID)
+                    .Where(x => x > 0x0600_0000)
+                    .Distinct()
+                    .ToList();
+                TerrainBasedBattleSceneTablesByRamAddress = addresses
+                    .ToDictionary(x => x, x => TerrainBasedBattleSceneTable.Create(Data, "TerrainBasedBattleSceneTable @" + x.ToString("X"), (int) (x - c_ramOffset)));
+                tables.AddRange(TerrainBasedBattleSceneTablesByRamAddress.Values);
+            }
+
             return tables;
         }
 
         public MPDBattleSceneInfoTable MPDBattleSceneInfoTable { get; private set; } = null;
+        public Dictionary<uint, TerrainBasedBattleSceneTable> TerrainBasedBattleSceneTablesByRamAddress { get; private set; } = null;
     }
 }
