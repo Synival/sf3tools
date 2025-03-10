@@ -51,9 +51,6 @@ namespace SF3.Models.Files.X012 {
             return tables;
         }
 
-        public override void Dispose() {
-        }
-
         [BulkCopyRecurse]
         public TileMovementTable TileMovementTable { get; private set; }
 
