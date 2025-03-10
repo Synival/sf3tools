@@ -95,9 +95,10 @@ namespace X1_Analyzer {
             s_allAiTags.AddRange(enemiesWithAI.SelectMany(x => x.AITags).ToArray());
             s_allAiTypes.AddRange(enemiesWithAI.SelectMany(x => x.AITypes).ToArray());
             s_allAiAggrs.AddRange(enemiesWithAI.SelectMany(x => x.AIAggrs).ToArray());
-            s_allSpawnTypes.AddRange(enemiesWithAI.Select(x => x.SpawnType));
+            s_allSpawnTypes.AddRange(enemiesWithAI.Select(x => (int) x.SpawnType));
             s_allUnknown0x0Es.AddRange(enemiesWithAI.Select(x => x.Unknown0x0E));
 
+#if false
             // Match enemies with any non-default AI.
             var enemiesWithNonDefaultAI = enemiesWithAI
                 .Where(x => x.AITags.Any(y => y != 0xFF) || x.AITypes.Any(y => y != 0xFF) || x.AIAggrs.Any(y => y != 0xFF))
@@ -109,6 +110,26 @@ namespace X1_Analyzer {
                     if (enemy.AITags[i] != 0xFF || enemy.AITags[i] != 0xFF || enemy.AIAggrs[i] != 0x00)
                         s_matchReports.Add($"Tags={enemy.AITags[i]:X2}, Type={enemy.AITypes[i]:X2}, Aggr={enemy.AIAggrs[i]:X2} | AI[{i}] | {enemyStr}");
             }
+#else
+            // Match enemies with a team other than 0 or 1.
+            foreach (var battle in x1File.Battles) {
+                var enemies = battle.Value.SlotTable.Where(x => x.EnemyID != 0).ToArray();
+                foreach (var enemy in enemies.Where(x => x.EnemyID != 0x00)) {
+                    var flagsWeCareAbout = 0x10; //0xFF & (~(0x02 | 0x40 | 0x80));
+                    var filterFor = (enemy.EnemyFlags & flagsWeCareAbout) != 0;
+                    if (!filterFor)
+                        continue;
+
+                    var realName = x1File.NameGetterContext.GetName(null, null, enemy.EnemyID, [NamedValueType.MonsterForSlot]);
+                    var enemyStr = $"{battle.Key} | {enemy.Name} (0x{enemy.ID:X2}) | {realName} (0x{enemy.EnemyID:X2})";
+                    s_matchReports.Add(
+                        enemy.EnemyFlags.ToString("X4") + " | " +
+                        BitString(enemy.EnemyFlags) + " | " +
+                        enemyStr
+                    );
+                }
+            }
+#endif
 
             return s_matchReports.Count > 0;
         }
@@ -153,6 +174,7 @@ namespace X1_Analyzer {
                             Console.WriteLine(fileStr + " | " + (match == true ? "Match  " : "NoMatch"));
                             foreach (var mr in s_matchReports)
                                 Console.WriteLine("    " + mr);
+                            Console.WriteLine();
                             s_matchReports.Clear();
 
                             if (match == true)
@@ -200,6 +222,16 @@ namespace X1_Analyzer {
 
             Console.WriteLine("AI Aggrs:");
             Console.WriteLine("    " + string.Join(", ", s_allAiAggrs.Distinct().OrderBy(x => x).Select(x => x.ToString("X2")).ToArray()));
+        }
+
+        private static string BitString(uint bits) {
+            var str = "";
+            for (var i = 0; i < 32; i++) {
+                if (i % 4 == 0 && i != 0)
+                    str += ",";
+                str += (bits & (0x8000_0000 >> i)) != 0 ? "1" : "0";
+            }
+            return str;
         }
 
         private static string BitString(ushort bits) {
