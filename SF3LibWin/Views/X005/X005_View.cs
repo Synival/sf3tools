@@ -12,7 +12,8 @@ namespace SF3.Win.Views.X005 {
                 return null;
 
             var ngc = Model.NameGetterContext;
-            // TODO: tables
+            if (Model.CameraSettings != null)
+                CreateChild(new DataModelView("Camera Settings", Model.CameraSettings, ngc));
 
             return Control;
         }
