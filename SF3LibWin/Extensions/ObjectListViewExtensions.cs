@@ -209,7 +209,7 @@ namespace SF3.Win.Extensions {
                     if (property != null) {
                         var attr = property.GetCustomAttribute<NameGetterAttribute>();
                         if (attr != null && nameContext.CanGetInfo(obj, property, attr.Parameters)) {
-                            var intValue = (int) property.GetValue(obj);
+                            var intValue = Convert.ToInt32(property.GetValue(obj));
                             if (nameContext.CanGetName(obj, property, intValue, attr.Parameters))
                                 return MakeNamedValueComboBox(nameContext.GetInfo(obj, property, attr.Parameters), intValue);
                         }

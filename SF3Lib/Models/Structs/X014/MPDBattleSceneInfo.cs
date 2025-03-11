@@ -6,62 +6,62 @@ namespace SF3.Models.Structs.X014 {
     public class MPDBattleSceneInfo : Struct {
         private readonly int _mpdFileIdAddr;
         private readonly int _battleSceneFileIdAddr;
-        private readonly int _unknown1Addr;
-        private readonly int _unknown2Addr;
-        private readonly int _hasFogAddr;
-        private readonly int _unknown3Addr;
+        private readonly int _skyBoxIdAddr;
+        private readonly int _lightingStyleAddr;
+        private readonly int _fogStyleAddr;
+        private readonly int _ffffAddr;
 
         public MPDBattleSceneInfo(IByteData data, int id, string name, int address) : base(data, id, name, address, 0x10) {
             _mpdFileIdAddr         = Address + 0x00;
             _battleSceneFileIdAddr = Address + 0x04;
-            _unknown1Addr          = Address + 0x08;
-            _unknown2Addr          = Address + 0x0A;
-            _hasFogAddr            = Address + 0x0C;
-            _unknown3Addr          = Address + 0x0E;
+            _skyBoxIdAddr          = Address + 0x08;
+            _lightingStyleAddr     = Address + 0x0A;
+            _fogStyleAddr          = Address + 0x0C;
+            _ffffAddr              = Address + 0x0E;
         }
 
         [TableViewModelColumn(displayOrder: 0, displayFormat: "X4", minWidth: 120)]
         [NameGetter(NamedValueType.FileIndex)]
         [BulkCopy]
-        public uint MPDFileID {
-            get => (uint) Data.GetDouble(_mpdFileIdAddr);
-            set => Data.SetDouble(_mpdFileIdAddr, (int) value);
+        public int MPDFileID {
+            get => Data.GetDouble(_mpdFileIdAddr);
+            set => Data.SetDouble(_mpdFileIdAddr, value);
         }
 
         [TableViewModelColumn(displayOrder: 1, displayFormat: "X4", minWidth: 120)]
         [NameGetter(NamedValueType.FileIndex)]
         [BulkCopy]
-        public uint BattleSceneFileID {
-            get => (uint) Data.GetDouble(_battleSceneFileIdAddr);
-            set => Data.SetDouble(_battleSceneFileIdAddr, (int) value);
+        public int BattleSceneFileID {
+            get => Data.GetDouble(_battleSceneFileIdAddr);
+            set => Data.SetDouble(_battleSceneFileIdAddr, value);
         }
 
         [TableViewModelColumn(displayOrder: 2, displayFormat: "X2")]
         [BulkCopy]
-        public ushort Unknown1 {
-            get => (ushort) Data.GetWord(_unknown1Addr);
-            set => Data.SetWord(_unknown1Addr, value);
+        public ushort SkyBoxID {
+            get => (ushort) Data.GetWord(_skyBoxIdAddr);
+            set => Data.SetWord(_skyBoxIdAddr, value);
         }
 
-        [TableViewModelColumn(displayOrder: 3, displayFormat: "X2")]
+        [TableViewModelColumn(displayOrder: 3, minWidth: 150)]
         [BulkCopy]
-        public ushort Unknown2 {
-            get => (ushort) Data.GetWord(_unknown2Addr);
-            set => Data.SetWord(_unknown2Addr, value);
+        public LightingStyleType LightingStyle {
+            get => (LightingStyleType) Data.GetWord(_lightingStyleAddr);
+            set => Data.SetWord(_lightingStyleAddr, (ushort) value);
         }
 
-        [TableViewModelColumn(displayOrder: 4, displayFormat: "X2")]
+        [TableViewModelColumn(displayOrder: 4, minWidth: 100)]
         [BulkCopy]
-        public ushort HasFog {
-            get => (ushort) Data.GetWord(_hasFogAddr);
-            set => Data.SetWord(_hasFogAddr, value);
+        public FogStyleType FogStyle {
+            get => (FogStyleType) Data.GetWord(_fogStyleAddr);
+            set => Data.SetWord(_fogStyleAddr, (ushort) value);
         }
 
         [TableViewModelColumn(displayOrder: 5, displayFormat: "X2")]
         [BulkCopy]
-        public ushort Unknown3 {
-            get => (ushort) Data.GetWord(_unknown3Addr);
-            set => Data.SetWord(_unknown3Addr, value);
+        public ushort FFFF {
+            get => (ushort) Data.GetWord(_ffffAddr);
+            set => Data.SetWord(_ffffAddr, value);
         }
     }
 }

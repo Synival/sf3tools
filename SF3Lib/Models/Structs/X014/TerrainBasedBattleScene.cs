@@ -13,9 +13,9 @@ namespace SF3.Models.Structs.X014 {
         [TableViewModelColumn(displayOrder: 1, minWidth: 120)]
         [NameGetter(NamedValueType.FileIndex)]
         [BulkCopy]
-        public uint BattleSceneFileID {
-            get => (uint) Data.GetDouble(Address);
-            set => Data.SetDouble(Address, (int) value);
+        public int BattleSceneFileID {
+            get => Data.GetDouble(Address);
+            set => Data.SetDouble(Address, value);
         }
     }
 }

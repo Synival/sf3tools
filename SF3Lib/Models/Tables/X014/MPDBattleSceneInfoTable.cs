@@ -16,8 +16,8 @@ namespace SF3.Models.Tables.X014 {
 
         public override bool Load() {
             return Load(
-                (id, address) => new MPDBattleSceneInfo(Data, id, "MPDBattleSceneInfo" + id.ToString("D2"), address),
-                (rows, lastRow) => lastRow.MPDFileID != 0xFFFFFFFFu,
+                (id, address) => new MPDBattleSceneInfo(Data, id, "MPDBattleScene" + id.ToString("D2"), address),
+                (rows, lastRow) => (uint) lastRow.MPDFileID != 0xFFFFFFFFu,
                 false
             );
         }

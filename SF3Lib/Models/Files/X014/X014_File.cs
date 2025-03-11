@@ -47,8 +47,13 @@ namespace SF3.Models.Files.X014 {
                     .Where(x => x > 0x0600_0000)
                     .Distinct()
                     .ToList();
+
+                // The Premium Disk has this, but it's unreferenced. Add if it doesn't exist.
+                if (Scenario == ScenarioType.PremiumDisk && !addresses.Contains(0x120D0 + c_ramOffset))
+                    addresses.Add(0x120D0 + c_ramOffset);
+
                 TerrainBasedBattleSceneTablesByRamAddress = addresses
-                    .ToDictionary(x => x, x => TerrainBasedBattleSceneTable.Create(Data, "TerrainBasedBattleSceneTable @" + x.ToString("X"), (int) (x - c_ramOffset)));
+                    .ToDictionary(x => x, x => TerrainBasedBattleSceneTable.Create(Data, "TerrainBasedBattleSceneTable @" + x.ToString("X"), (x - c_ramOffset)));
                 tables.AddRange(TerrainBasedBattleSceneTablesByRamAddress.Values);
             }
 
@@ -56,6 +61,6 @@ namespace SF3.Models.Files.X014 {
         }
 
         public MPDBattleSceneInfoTable MPDBattleSceneInfoTable { get; private set; } = null;
-        public Dictionary<uint, TerrainBasedBattleSceneTable> TerrainBasedBattleSceneTablesByRamAddress { get; private set; } = null;
+        public Dictionary<int, TerrainBasedBattleSceneTable> TerrainBasedBattleSceneTablesByRamAddress { get; private set; } = null;
     }
 }

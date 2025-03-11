@@ -15,6 +15,6 @@ namespace SF3.Models.Tables.X014 {
         }
 
         public override bool Load()
-            => Load((id, address) => new TerrainBasedBattleScene(Data, id, "TerrainBasedBattleScene" + id.ToString("D2"), address));
+            => Load((id, address) => new TerrainBasedBattleScene(Data, id, "TerrainBattleScene" + id.ToString("D2"), address));
     }
 }
