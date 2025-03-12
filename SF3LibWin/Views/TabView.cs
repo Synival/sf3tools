@@ -83,7 +83,7 @@ namespace SF3.Win.Views {
                 var ancestorTabControlPage = tabControl.SelectedTab;
                 var tabNameList = new List<string>();
 
-                while (ancestorTabControlPage != null) {
+                while (ancestorTabControlPage?.Parent != null) {
                     var ancestorTabControl = (TabControl) ancestorTabControlPage.Parent;
                     tabNameList.Add(ancestorTabControl.SelectedTab.Text);
 
