@@ -30,10 +30,10 @@ namespace SF3Editor {
             tsmiFile_Open = new System.Windows.Forms.ToolStripMenuItem();
             tsmiFile_Save = new System.Windows.Forms.ToolStripMenuItem();
             tsmiFile_SaveAs = new System.Windows.Forms.ToolStripMenuItem();
-            tsmiFile_Close = new System.Windows.Forms.ToolStripMenuItem();
             tsmiFile_Sep1 = new System.Windows.Forms.ToolStripSeparator();
-            tsmiFile_Exit = new System.Windows.Forms.ToolStripMenuItem();
+            tsmiFile_Close = new System.Windows.Forms.ToolStripMenuItem();
             tsmiFile_Sep2 = new System.Windows.Forms.ToolStripSeparator();
+            tsmiFile_Exit = new System.Windows.Forms.ToolStripMenuItem();
             menuStrip1.SuspendLayout();
             SuspendLayout();
             // 
@@ -59,6 +59,7 @@ namespace SF3Editor {
             tsmiFile_Open.ShortcutKeys =  System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O;
             tsmiFile_Open.Size = new Size(195, 22);
             tsmiFile_Open.Text = "&Open...";
+            tsmiFile_Open.Click += tsmiFile_Open_Click;
             // 
             // tsmiFile_Save
             // 
@@ -76,6 +77,11 @@ namespace SF3Editor {
             tsmiFile_SaveAs.Size = new Size(195, 22);
             tsmiFile_SaveAs.Text = "Save &As...";
             // 
+            // tsmiFile_Sep1
+            // 
+            tsmiFile_Sep1.Name = "tsmiFile_Sep1";
+            tsmiFile_Sep1.Size = new Size(192, 6);
+            // 
             // tsmiFile_Close
             // 
             tsmiFile_Close.Enabled = false;
@@ -84,10 +90,10 @@ namespace SF3Editor {
             tsmiFile_Close.Size = new Size(195, 22);
             tsmiFile_Close.Text = "&Close";
             // 
-            // tsmiFile_Sep1
+            // tsmiFile_Sep2
             // 
-            tsmiFile_Sep1.Name = "tsmiFile_Sep1";
-            tsmiFile_Sep1.Size = new Size(192, 6);
+            tsmiFile_Sep2.Name = "tsmiFile_Sep2";
+            tsmiFile_Sep2.Size = new Size(192, 6);
             // 
             // tsmiFile_Exit
             // 
@@ -95,11 +101,7 @@ namespace SF3Editor {
             tsmiFile_Exit.ShortcutKeys =  System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.F4;
             tsmiFile_Exit.Size = new Size(195, 22);
             tsmiFile_Exit.Text = "E&xit";
-            // 
-            // tsmiFile_Sep2
-            // 
-            tsmiFile_Sep2.Name = "tsmiFile_Sep2";
-            tsmiFile_Sep2.Size = new Size(192, 6);
+            tsmiFile_Exit.Click += tsmiFile_Exit_Click;
             // 
             // frmSF3Editor
             // 
