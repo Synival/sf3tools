@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace SF3.Win.Views {
@@ -25,10 +26,15 @@ namespace SF3.Win.Views {
 
             // Helper function to get a tab page with the same name.
             TabPage getTabPageByName(TabControl tabControl, string name) {
-                foreach (var tabPageObj in tabControl.Controls)
-                    if (tabPageObj is TabPage tabPage && tabPage.Text == name)
-                        return tabPage;
-                return null;
+                // We can't continue if there are zero tabs with that requested name, or two or more tabs with the same name.
+                var tabsWithName = tabControl.Controls
+                    .Cast<object>()
+                    .Where(x => x is TabPage)
+                    .Cast<TabPage>()
+                    .Where(x => x.Text == name)
+                    .ToArray();
+
+                return tabsWithName.Length == 1 ? tabsWithName[0] : null;
             };
 
             // Recurses downward from a TabControl to make the "cousin" tab with name tabNameList[0] is selected
@@ -111,17 +117,19 @@ namespace SF3.Win.Views {
             base.Destroy();
         }
 
-        public void CreateChild(IView childView, Action<Control> onCreate = null, bool autoFill = true)
-            => CreateCustomChild(childView, onCreate, autoFill, (name) => new TabPage(name) { AutoScroll = true });
+        public delegate Control CreateCustomChildDelegate(string name, string text);
 
-        public void CreateCustomChild(IView childView, Action<Control> onCreate, bool autoFill, Func<string, Control> createTabDelegate) {
+        public void CreateChild(IView childView, Action<Control> onCreate = null, bool autoFill = true)
+            => CreateCustomChild(childView, onCreate, autoFill, (name, text) => new TabPage(text) { Name = name, AutoScroll = true });
+
+        public void CreateCustomChild(IView childView, Action<Control> onCreate, bool autoFill, CreateCustomChildDelegate createTabDelegate) {
             if (childView == null)
                 return;
 
             Control childControl = null;
 
-            // TODO: the name should be internal, not used for display.
-            var tabPage = createTabDelegate(childView.Name);
+            var tabName = TabControl.Name + "_Tab_" + TabControl.TabPages.Count + 1;
+            var tabPage = createTabDelegate(tabName, childView.Name);
             TabControl.Controls.Add(tabPage);
 
             void ChildViewCreate() {
