@@ -5,6 +5,14 @@ using System.Linq;
 using System.Windows.Forms;
 using CommonLib.NamedValues;
 using SF3.ModelLoaders;
+using SF3.Models.Files.MPD;
+using SF3.Models.Files.X002;
+using SF3.Models.Files.X005;
+using SF3.Models.Files.X012;
+using SF3.Models.Files.X013;
+using SF3.Models.Files.X014;
+using SF3.Models.Files.X019;
+using SF3.Models.Files.X033_X031;
 using SF3.Models.Files.X1;
 using SF3.NamedValues;
 using SF3.Types;
@@ -67,26 +75,118 @@ namespace SF3Editor {
             if (openfile.ShowDialog() != DialogResult.OK)
                 return false;
 
-            return LoadFile(openfile.FileName);
+            var filters = openfile.Filter
+                .Split('|')
+                .Select((x, i) => new { Index = i / 2, Value = x })
+                .GroupBy(x => x.Index)
+                .ToDictionary(x => x.Key, x => x.Select(y => y.Value).ToArray());
+
+            return LoadFile(openfile.FileName, DetermineFileType(openfile.FileName, filters[openfile.FilterIndex - 1][1]));
         }
 
-        private bool LoadFile(string filename) {
-            try {
-                using (var stream = new FileStream(filename, FileMode.Open, FileAccess.Read))
-                    return LoadFile(filename, stream);
+        private SF3FileType DetermineFileType(string filename, string filter) {
+            // If the filter is explicit, don't guess.
+            switch (filter) {
+                case "X1*.BIN": {
+                    if (filename == "X1BTL99.BIN")
+                        return SF3FileType.X1BTL99;
+                    else
+                        return SF3FileType.X1;
+                }
+
+                case "X1BTL99.BIN":
+                    return SF3FileType.X1BTL99;
+                case "X002.BIN":
+                    return SF3FileType.X002;
+                case "X005.BIN":
+                    return SF3FileType.X005;
+                case "X012.BIN":
+                    return SF3FileType.X012;
+                case "X013.BIN":
+                    return SF3FileType.X013;
+                case "X014.BIN":
+                    return SF3FileType.X014;
+                case "X019.BIN":
+                    return SF3FileType.X019;
+                case "X031.BIN":
+                    return SF3FileType.X031;
+                case "X033.BIN":
+                    return SF3FileType.X033;
+                case "*.MPD":
+                    return SF3FileType.MPD;
             }
-            catch (Exception e) {
-                ErrorMessage("Error trying to load file:\n\n" + e.Message);
+
+            // No explicit filter. Look at the filename and guess.
+            var filenameUpper = filename.ToUpper();
+            var preExtension = Path.GetFileNameWithoutExtension(filenameUpper);
+
+            if (filenameUpper.Contains(".MPD"))
+                return SF3FileType.MPD;
+            else if (filenameUpper.Contains(".BIN")) {
+                if (preExtension.Contains("X1BTL99"))
+                    return SF3FileType.X1BTL99;
+                else if (preExtension.Contains("X1"))
+                    return SF3FileType.X1;
+                else if (preExtension.Contains("X002"))
+                    return SF3FileType.X002;
+                else if (preExtension.Contains("X005"))
+                    return SF3FileType.X005;
+                else if (preExtension.Contains("X012"))
+                    return SF3FileType.X012;
+                else if (preExtension.Contains("X013"))
+                    return SF3FileType.X013;
+                else if (preExtension.Contains("X014"))
+                    return SF3FileType.X014;
+                else if (preExtension.Contains("X019"))
+                    return SF3FileType.X019;
+                else if (preExtension.Contains("X031"))
+                    return SF3FileType.X031;
+                else if (preExtension.Contains("X033"))
+                    return SF3FileType.X033;
+            }
+
+            // Couldn't figure it out; it's unknown.
+            return SF3FileType.Unknown;
+        }
+
+        private bool LoadFile(string filename, SF3FileType fileType) {
+            // If we don't know the file type, we can't load it.
+            if (fileType == SF3FileType.Unknown) {
+                ErrorMessage("Can't determine file type for '" + filename + "'.");
                 return false;
             }
-        }
 
-        private bool LoadFile(string filename, Stream stream) {
+            // Attempt to the load the file.
             var fileLoader = new ModelFileLoader();
             bool success = fileLoader.LoadFile(filename, loader => {
-                // TODO: more than just X1 files.
-                // TODO: get scenario.
-                return X1_File.Create(loader.ByteData, c_nameGetterContexts[ScenarioType.Scenario1], ScenarioType.Scenario1, false);
+                // TODO: property scenario!
+                var scenario = ScenarioType.Scenario1;
+
+                switch (fileType) {
+                    case SF3FileType.X1:
+                        return X1_File.Create(loader.ByteData, c_nameGetterContexts[scenario], scenario, false);
+                    case SF3FileType.X1BTL99:
+                        return X1_File.Create(loader.ByteData, c_nameGetterContexts[scenario], scenario, true);
+                    case SF3FileType.X002:
+                        return X002_File.Create(loader.ByteData, c_nameGetterContexts[scenario], scenario);
+                    case SF3FileType.X005:
+                        return X005_File.Create(loader.ByteData, c_nameGetterContexts[scenario], scenario);
+                    case SF3FileType.X012:
+                        return X012_File.Create(loader.ByteData, c_nameGetterContexts[scenario], scenario);
+                    case SF3FileType.X013:
+                        return X013_File.Create(loader.ByteData, c_nameGetterContexts[scenario], scenario);
+                    case SF3FileType.X014:
+                        return X014_File.Create(loader.ByteData, c_nameGetterContexts[scenario], scenario);
+                    case SF3FileType.X019:
+                        return X019_File.Create(loader.ByteData, c_nameGetterContexts[scenario], scenario);
+                    case SF3FileType.X031:
+                    case SF3FileType.X033:
+                        return X033_X031_File.Create(loader.ByteData, c_nameGetterContexts[scenario], scenario);
+                    case SF3FileType.MPD:
+                        return MPD_File.Create(loader.ByteData, c_nameGetterContexts);
+                    default:
+                        throw new InvalidOperationException($"Unhandled file type '{fileType}'");
+                }
             });
 
             if (!success) {
@@ -123,8 +223,14 @@ namespace SF3Editor {
                 newControl = control;
             });
 
-            if (newControl == null)
-                throw new InvalidOperationException(nameof(newControl) + " should never be null at this point!");
+            // If there's no control here, something went wrong. Likely an unsupported file.
+            // TODO: what's the actual error?
+            if (newControl == null) {
+                _fileContainerView.RemoveChild(view);
+                fileLoader.Close();
+                ErrorMessage("Failed to create view. Maybe the file isn't supported yet?");
+                return false;
+            }
 
             // Focus the tab itself.
             var tabPage = (TabPage) newControl.Parent!;
