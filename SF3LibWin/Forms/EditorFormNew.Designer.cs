@@ -106,7 +106,7 @@ namespace SF3.Win.Forms {
             // 
             tsmiFile_SaveAs.Enabled = false;
             tsmiFile_SaveAs.Name = "tsmiFile_SaveAs";
-            tsmiFile_SaveAs.ShortcutKeys =  System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.S;
+            tsmiFile_SaveAs.ShortcutKeys =  System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift | System.Windows.Forms.Keys.S;
             tsmiFile_SaveAs.Size = new System.Drawing.Size(339, 22);
             tsmiFile_SaveAs.Text = "Save &As...";
             tsmiFile_SaveAs.Click += tsmiFile_SaveAs_Click;
