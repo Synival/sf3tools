@@ -89,6 +89,7 @@ namespace SF3Editor {
             tsmiFile_Close.ShortcutKeys =  System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.W;
             tsmiFile_Close.Size = new Size(195, 22);
             tsmiFile_Close.Text = "&Close";
+            tsmiFile_Close.Click += tsmiFile_Close_Click;
             // 
             // tsmiFile_Sep2
             // 

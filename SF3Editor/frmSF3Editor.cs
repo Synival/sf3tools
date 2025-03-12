@@ -9,12 +9,13 @@ using SF3.Models.Files.X1;
 using SF3.NamedValues;
 using SF3.Types;
 using SF3.Win.Views;
-using SF3.Win.Views.X1;
 using static CommonLib.Win.Utils.MessageUtils;
 using static SF3.Win.Extensions.ObjectListViewExtensions;
 
 namespace SF3Editor {
     public partial class frmSF3Editor : Form {
+        public static readonly string Version = "0.1";
+
         private readonly Dictionary<ScenarioType, INameGetterContext> c_nameGetterContexts = Enum.GetValues<ScenarioType>()
             .ToDictionary(x => x, x => (INameGetterContext) new NameGetterContext(x));
 
@@ -38,14 +39,20 @@ namespace SF3Editor {
             SuspendLayout();
             InitializeComponent();
 
-            FileContainerView = new TabView("File Container");
-            _ = FileContainerView.Create();
-            var fileContainerControl = FileContainerView.TabControl;
+            _fileContainerView = new TabView("File Container", lazyLoad: false);
+            _ = _fileContainerView.Create();
+            var fileContainerControl = _fileContainerView.TabControl;
             Controls.Add(fileContainerControl);
             fileContainerControl.Dock = DockStyle.Fill;
             fileContainerControl.BringToFront(); // If this isn't in the front, the menu is placed behind it (eep)
 
+            _baseTitle = Text;
+            _versionTitle = _baseTitle + " v" + Version;
+            Text = _versionTitle;
+
             ResumeLayout();
+
+            fileContainerControl.Selected += (s, e) => FocusFileTab(e.TabPage);
         }
 
         /// <summary>
@@ -89,12 +96,12 @@ namespace SF3Editor {
             }
 
             // Create a view for the file.
-            // TODO: not just for an X1 file!!
-            var view = (IView) new X1_View(fileLoader.ShortFilename, (X1_File) fileLoader.Model);
-            FileContainerView.CreateChild(view, control => {
+            var view = new FileView(fileLoader.Title, fileLoader.Model);
+            Control? newControl = null;
+            _fileContainerView.CreateChild(view, control => {
                 // Focus the first control. Drill downward through control containers
                 // to find the bottom-most control.
-                var focusView = view;
+                var focusView = (IView) view;
                 var focusControl = control;
                 while (focusControl != null && focusView is IContainerView cc) {
                     var firstChild = cc.ChildViews.FirstOrDefault();
@@ -109,14 +116,101 @@ namespace SF3Editor {
                     focusControl = this;
 
                 focusControl.Focus();
+
+                // The control should be created immediately; grab it!
+                newControl = control;
             });
+
+            if (newControl == null)
+                throw new InvalidOperationException(nameof(newControl) + " should never be null at this point!");
+
+            // Focus the tab itself.
+            var tabPage = (TabPage) newControl.Parent!;
+            _tabInfos[tabPage] = new TabInfo { FileLoader = fileLoader, View = view };
+
+            if (_fileContainerView.TabControl.SelectedTab != tabPage)
+                _fileContainerView.TabControl.SelectedTab = tabPage;
+            else
+                FocusFileTab(tabPage);
+
+            // Wire the view up to the file loader so it reacts to closing, OnModified changes, etc.
+            fileLoader.Closed += (s, e) => {
+                _ = _fileContainerView.RemoveChild(view);
+                fileLoader.Dispose();
+
+                var ti = _tabInfos.Select(x => new { x.Key, x.Value }).FirstOrDefault(x => x.Value.FileLoader == fileLoader);
+                if (ti != null)
+                    _tabInfos.Remove(ti.Key);
+            };
+
+            fileLoader.TitleChanged += (s, e) => {
+                tabPage.Text = fileLoader.Title;
+                if (_selectedFileLoader == fileLoader)
+                    Text = fileLoader.ModelTitle(_versionTitle);
+            };
 
             return true;
         }
 
+        /// <summary>
+        /// Closes a file in a tab.
+        /// If may prompt the user to save if the file has been modified.
+        /// </summary>
+        /// <param name="force">When true, a "Save Changes" dialog is never offered.</param>
+        /// <returns>'true' if the file was closed. Returns 'false' if the user clicked 'cancel' when prompted to save changes.</returns>
+        public bool CloseFile(ModelFileLoader loader, bool force = false) {
+            if (loader == null || !loader.IsLoaded)
+                return true;
+
+            if (!force && loader.IsModified)
+                ;
+            // TODO: prompt for save!
+/*
+                if (PromptForSave() == DialogResult.Cancel)
+                    return false;
+*/
+
+            bool wasFocused = ContainsFocus;
+            _ = loader.Close();
+            if (wasFocused && !ContainsFocus)
+                _ = Focus();
+
+            return true;
+        }
+
+        private void FocusFileTab(TabPage? tabPage) {
+            var ti = (tabPage == null) ? null : _tabInfos.TryGetValue(tabPage, out var tiValue) ? (TabInfo?) tiValue : null;
+
+            var hasFile = ti.HasValue;
+            if (_selectedFileLoader == ti?.FileLoader)
+                return;
+
+            tsmiFile_Save.Enabled   = hasFile;
+            tsmiFile_SaveAs.Enabled = hasFile;
+            tsmiFile_Close.Enabled  = hasFile;
+            _selectedFileLoader     = ti?.FileLoader;
+            Text = _selectedFileLoader == null ? _versionTitle : _selectedFileLoader.ModelTitle(_versionTitle);
+        }
+
         private void tsmiFile_Open_Click(object sender, EventArgs e) => OpenFileDialog();
+
+        private void tsmiFile_Close_Click(object sender, EventArgs e) {
+            if (_selectedFileLoader != null)
+                _ = CloseFile(_selectedFileLoader);
+        }
+
         private void tsmiFile_Exit_Click(object sender, EventArgs e) => Close();
 
-        private TabView FileContainerView { get; }
+        private struct TabInfo {
+            public ModelFileLoader FileLoader;
+            public FileView View;
+        };
+
+        private Dictionary<TabPage, TabInfo> _tabInfos = [];
+
+        private readonly string _baseTitle;
+        private readonly string _versionTitle;
+        private readonly TabView _fileContainerView;
+        private ModelFileLoader? _selectedFileLoader = null;
     }
 }
