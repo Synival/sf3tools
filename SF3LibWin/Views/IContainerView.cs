@@ -17,6 +17,13 @@ namespace SF3.Win.Views {
         void CreateChild(IView child, Action<Control> onCreate = null, bool autoFill = true);
 
         /// <summary>
+        /// Destroys a child and removes it from the list of children.
+        /// </summary>
+        /// <param name="child">The child view to destroy and remove.</param>
+        /// <returns>'true' when the child was found and removed, otherwise 'false'.</returns>
+        bool RemoveChild(IView child);
+
+        /// <summary>
         /// Collection of child views.
         /// </summary>
         IEnumerable<IView> ChildViews { get; }

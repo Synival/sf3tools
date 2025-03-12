@@ -105,6 +105,9 @@ namespace SF3.Win.Views {
                 _childViews = null;
             }
 
+            TabControl.TabPages.Clear();
+            _tabsForChildren.Clear();
+
             base.Destroy();
         }
 
@@ -159,6 +162,20 @@ namespace SF3.Win.Views {
                 ChildViewCreate();
 
             _childViews.Add(childView);
+            _tabsForChildren[childView] = (TabPage) tabPage;
+        }
+
+        public bool RemoveChild(IView child) {
+            if (!_childViews.Contains(child) || !_tabsForChildren.ContainsKey(child))
+                return false;
+
+            TabControl.TabPages.Remove(_tabsForChildren[child]);
+            _tabsForChildren.Remove(child);
+
+            child.Destroy();
+            _childViews.Remove(child);
+
+            return true;
         }
 
         public override void RefreshContent() {
@@ -173,6 +190,7 @@ namespace SF3.Win.Views {
         public TabControl TabControl => (TabControl) Control;
 
         private List<IView> _childViews = null;
+        private Dictionary<IView, TabPage> _tabsForChildren = [];
         public IEnumerable<IView> ChildViews => _childViews;
     }
 }

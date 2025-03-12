@@ -53,6 +53,16 @@ namespace SF3.Win.Views {
             onCreate?.Invoke(childControl);
         }
 
+        public bool RemoveChild(IView child) {
+            if (!_childViews.Contains(child))
+                return false;
+
+            child.Destroy();
+            _childViews.Remove(child);
+
+            return true;
+        }
+
         public override void RefreshContent() {
             if (!IsCreated)
                 return;
