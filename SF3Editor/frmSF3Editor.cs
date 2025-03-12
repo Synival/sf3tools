@@ -22,8 +22,10 @@ namespace SF3Editor {
         private readonly string FileDialogFilter =
             "All Supported Files|X1*.BIN;X002.BIN;X005.BIN;X012.BIN;X013.BIN;X014.BIN;X019.BIN;X031.BIN;X033.BIN;*.MPD"
             + "|X1 Files (X1*.BIN)|X1*.BIN"
+            + "|X1BTL99 File (X1BTL99.BIN)|X1BTL99.BIN"
             + "|X002 File (X002.BIN)|X002.BIN"
             + "|X005 File (X005.BIN)|X005.BIN"
+            + "|X012 File (X013.BIN)|X012.BIN"
             + "|X013 File (X013.BIN)|X013.BIN"
             + "|X014 File (X014.BIN)|X014.BIN"
             + "|X019 File (X019.BIN)|X019.BIN"
