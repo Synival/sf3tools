@@ -40,7 +40,7 @@ namespace SF3.Win.Views.MPD {
             if (Model.ForegroundImage != null)
                 CreateChild(new TextureView("Foreground", Model.ForegroundImage, 1));
 
-            CreateChild(new DataView("Data (only modify if you know what you're doing!)", Model));
+            CreateChild(new DataView("Data (advanced)", Model));
 
             return Control;
         }

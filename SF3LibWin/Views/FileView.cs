@@ -23,6 +23,9 @@ namespace SF3.Win.Views {
         public Control Create() {
             Destroy();
             ActualView = CreateActualView();
+            if (ActualView != null && ActualView is TabView tabView)
+                tabView.TabAlignment = TabAlignment.Left;
+
             return ActualView?.Create();
         }
 

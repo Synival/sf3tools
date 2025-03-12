@@ -2,13 +2,15 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
+using SF3.Win.Controls;
 
 namespace SF3.Win.Views {
     public class TabView : ViewBase, ITabView {
         private static int s_controlIndex = 1;
 
-        public TabView(string name, bool lazyLoad = true) : base(name) {
+        public TabView(string name, bool lazyLoad = true, TabAlignment tabAlignment = TabAlignment.Top) : base(name) {
             LazyLoad = lazyLoad;
+            TabAlignment = tabAlignment;
         }
 
         private static bool s_inSelectCousinTabs = false;
@@ -16,7 +18,7 @@ namespace SF3.Win.Views {
         public override Control Create() {
             _childViews = new List<IView>();
 
-            var tabControl = new TabControl();
+            var tabControl = new EnhancedTabControl(TabAlignment);
 
             tabControl.SuspendLayout();
             tabControl.Name = "tabsControlView" + (s_controlIndex++);
@@ -195,6 +197,8 @@ namespace SF3.Win.Views {
         }
 
         public bool LazyLoad { get; set; }
+        public TabAlignment TabAlignment { get; set; }
+
         public TabControl TabControl => (TabControl) Control;
 
         private List<IView> _childViews = null;
