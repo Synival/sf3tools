@@ -82,12 +82,14 @@ namespace SF3Editor {
             if (openfile.ShowDialog() != DialogResult.OK)
                 return false;
 
+            // Split each filter into a an n-element array of 2 strings
             var filters = openfile.Filter
                 .Split('|')
                 .Select((x, i) => new { Index = i / 2, Value = x })
                 .GroupBy(x => x.Index)
                 .ToDictionary(x => x.Key, x => x.Select(y => y.Value).ToArray());
 
+            // Attempt to load the file. Use an explicitly specificed scenario and file type if provided.
             return LoadFile(
                 openfile.FileName,
                 OpenScenario ?? DetermineScenario(openfile.FileName),
@@ -110,34 +112,8 @@ namespace SF3Editor {
 
             // Attempt to the load the file.
             var fileLoader = new ModelFileLoader();
-            bool success = fileLoader.LoadFile(filename, loader => {
-                var sc = scenario.Value;
-                switch (fileType) {
-                    case SF3FileType.X1:
-                        return X1_File.Create(loader.ByteData, c_nameGetterContexts[sc], sc, false);
-                    case SF3FileType.X1BTL99:
-                        return X1_File.Create(loader.ByteData, c_nameGetterContexts[sc], sc, true);
-                    case SF3FileType.X002:
-                        return X002_File.Create(loader.ByteData, c_nameGetterContexts[sc], sc);
-                    case SF3FileType.X005:
-                        return X005_File.Create(loader.ByteData, c_nameGetterContexts[sc], sc);
-                    case SF3FileType.X012:
-                        return X012_File.Create(loader.ByteData, c_nameGetterContexts[sc], sc);
-                    case SF3FileType.X013:
-                        return X013_File.Create(loader.ByteData, c_nameGetterContexts[sc], sc);
-                    case SF3FileType.X014:
-                        return X014_File.Create(loader.ByteData, c_nameGetterContexts[sc], sc);
-                    case SF3FileType.X019:
-                        return X019_File.Create(loader.ByteData, c_nameGetterContexts[sc], sc);
-                    case SF3FileType.X031:
-                    case SF3FileType.X033:
-                        return X033_X031_File.Create(loader.ByteData, c_nameGetterContexts[sc], sc);
-                    case SF3FileType.MPD:
-                        return MPD_File.Create(loader.ByteData, c_nameGetterContexts);
-                    default:
-                        throw new InvalidOperationException($"Unhandled file type '{fileType}'");
-                }
-            });
+            bool success = fileLoader.LoadFile(filename, loader
+                => CreateFile(loader.ByteData, fileType.Value, c_nameGetterContexts, scenario.Value));
 
             if (!success) {
                 // Wrong file was selected.
