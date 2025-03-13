@@ -51,6 +51,15 @@ namespace SF3.Win.Views {
                 var lvcColumns = new List<OLVColumn>();
                 var lvcNameBase = "lvcModelView" + s_controlIndex;
 
+                // "Index" column
+                {
+                    var lvc = new OLVColumn(lvcNameBase + "Index", "Index");
+                    lvc.IsEditable = false;
+                    lvc.Text       = "Index";
+                    lvc.Width      = 50;
+                    lvcColumns.Add(lvc);
+                }
+
                 // "Name" column
                 {
                     var lvc = new OLVColumn(lvcNameBase + "Name", "Name");
@@ -165,10 +174,11 @@ namespace SF3.Win.Views {
         /// Item row representing an individual property with its own view model.
         /// </summary>
         private class ModelProperty {
-            public ModelProperty(object model, PropertyInfo propertyInfo, TableViewModelColumn vmColumn) {
+            public ModelProperty(object model, PropertyInfo propertyInfo, TableViewModelColumn vmColumn, int index) {
                 Model                = model;
                 PropertyInfo         = propertyInfo;
                 VMColumn             = vmColumn;
+                Index                = index;
                 IsReadOnly           = !vmColumn.GetColumnIsEditable(propertyInfo);
                 Name                 = vmColumn.GetColumnText(propertyInfo);
                 AspectToStringFormat = vmColumn.GetColumnAspectToStringFormat();
@@ -178,6 +188,7 @@ namespace SF3.Win.Views {
             public object Model { get; }
             public PropertyInfo PropertyInfo { get; }
             public TableViewModelColumn VMColumn { get; }
+            public int Index { get; }
 
             public bool IsReadOnly { get; }
             public string Name { get; }
@@ -206,7 +217,7 @@ namespace SF3.Win.Views {
                     _modelProperties = vm.Properties
                         .Where(x => x.Value.DisplayOrder >= 0 || x.Key.Name == "Address")
                         .Where(x => x.Value.GetVisibility(value))
-                        .Select(x => new ModelProperty(value, x.Key, x.Value)).ToList();
+                        .Select((x, i) => new ModelProperty(value, x.Key, x.Value, i + 1)).ToList();
                 }
 
                 if (IsCreated) {
