@@ -25,6 +25,7 @@ namespace SF3Editor {
         ///  the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent() {
+            var resources = new System.ComponentModel.ComponentResourceManager(typeof(frmSF3Editor));
             menuStrip1 = new System.Windows.Forms.MenuStrip();
             tsmiFile = new System.Windows.Forms.ToolStripMenuItem();
             tsmiFile_Open = new System.Windows.Forms.ToolStripMenuItem();
@@ -42,7 +43,7 @@ namespace SF3Editor {
             menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { tsmiFile });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
-            menuStrip1.Size = new Size(800, 24);
+            menuStrip1.Size = new Size(891, 24);
             menuStrip1.TabIndex = 0;
             menuStrip1.Text = "menuStrip1";
             // 
@@ -108,8 +109,9 @@ namespace SF3Editor {
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(891, 631);
             Controls.Add(menuStrip1);
+            Icon = (Icon) resources.GetObject("$this.Icon");
             MainMenuStrip = menuStrip1;
             Name = "frmSF3Editor";
             Text = "SF3 Editor";
