@@ -18,7 +18,6 @@ using SF3.NamedValues;
 using SF3.Types;
 using SF3.Win.Views;
 using static CommonLib.Win.Utils.MessageUtils;
-using static SF3.Win.Extensions.ObjectListViewExtensions;
 
 namespace SF3Editor {
     public partial class frmSF3Editor : Form {
@@ -39,13 +38,11 @@ namespace SF3Editor {
             + "|X019 File (X019.BIN)|X019.BIN"
             + "|X031 File (X031.BIN)|X031.BIN"
             + "|X033 File (X033.BIN)|X033.BIN"
-            + "|MPD File (*.MPD)|*.MPD"
+            + "|MPD Files (*.MPD)|*.MPD"
             + "|All Files (*.*)|*.*"
             ;
 
         public frmSF3Editor() {
-            RegisterNamedValues();
-
             SuspendLayout();
             InitializeComponent();
 

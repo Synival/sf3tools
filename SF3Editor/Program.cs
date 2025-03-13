@@ -1,6 +1,7 @@
 using System;
 using System.Windows.Forms;
 using SF3.Win;
+using static SF3.Win.Extensions.ObjectListViewExtensions;
 
 namespace SF3Editor {
     internal static class Program {
@@ -13,7 +14,11 @@ namespace SF3Editor {
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
 
+            // Fetch saved application state
             AppState.RetrieveAppState("SF3 Editor");
+
+            // Add some special handles types to ObjectListView 
+            RegisterNamedValues();
 
             Application.Run(new frmSF3Editor());
         }
