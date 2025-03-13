@@ -117,8 +117,9 @@ namespace SF3Editor {
 
             if (!success) {
                 // Wrong file was selected.
-                ErrorMessage("Data in '" + filename + "' appears corrupt or invalid.\n" +
-                             "Is this the correct type of file?");
+                ErrorMessage($"Data in '{filename}' appears corrupt or invalid.\r\n\r\n" +
+                             $"Attempted to open as type '{fileType}' for '{scenario.Value}'.\r\n\r\n" +
+                              "Is this the correct type of file and the correct scenario?");
                 fileLoader.Close();
                 return false;
             }
