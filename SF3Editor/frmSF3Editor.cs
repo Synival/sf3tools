@@ -16,6 +16,7 @@ using SF3.Models.Files.X033_X031;
 using SF3.Models.Files.X1;
 using SF3.NamedValues;
 using SF3.Types;
+using SF3.Win;
 using SF3.Win.Views;
 using static CommonLib.Win.Utils.MessageUtils;
 
@@ -46,20 +47,29 @@ namespace SF3Editor {
             SuspendLayout();
             InitializeComponent();
 
+            // The application state should never change for the app's lifetime.
+            _appState = AppState.RetrieveAppState();
+
+            // Create a container for all files.
             _fileContainerView = new TabView("File Container", lazyLoad: false);
             _ = _fileContainerView.Create();
             var fileContainerControl = _fileContainerView.TabControl;
             Controls.Add(fileContainerControl);
             fileContainerControl.Dock = DockStyle.Fill;
             fileContainerControl.BringToFront(); // If this isn't in the front, the menu is placed behind it (eep)
+            fileContainerControl.Selected += (s, e) => FocusFileTab(e.TabPage);
 
+            // Store the original title in a few different forms. It's going to be changing around.
             _baseTitle = Text;
             _versionTitle = _baseTitle + " v" + Version;
             Text = _versionTitle;
 
-            ResumeLayout();
+            // Remember the last Scenario type to open.
+            _openScenario = (_appState.OpenScenario < 0 || !Enum.IsDefined(typeof(ScenarioType), (ScenarioType) _appState.OpenScenario))
+                ? null : (ScenarioType) _appState.OpenScenario;
+            UpdateCheckedOpenScenario();
 
-            fileContainerControl.Selected += (s, e) => FocusFileTab(e.TabPage);
+            ResumeLayout();
         }
 
         /// <summary>
@@ -78,10 +88,14 @@ namespace SF3Editor {
                 .GroupBy(x => x.Index)
                 .ToDictionary(x => x.Key, x => x.Select(y => y.Value).ToArray());
 
-            return LoadFile(openfile.FileName, DetermineFileType(openfile.FileName, filters[openfile.FilterIndex - 1][1]));
+            return LoadFile(
+                openfile.FileName,
+                OpenScenario ?? DetermineScenario(openfile.FileName),
+                DetermineFileType(openfile.FileName, filters[openfile.FilterIndex - 1][1])
+            );
         }
 
-        private SF3FileType DetermineFileType(string filename, string filter) {
+        private static SF3FileType? DetermineFileType(string filename, string filter) {
             // If the filter is explicit, don't guess.
             switch (filter) {
                 case "X1*.BIN": {
@@ -143,12 +157,62 @@ namespace SF3Editor {
             }
 
             // Couldn't figure it out; it's unknown.
-            return SF3FileType.Unknown;
+            return null;
         }
 
-        private bool LoadFile(string filename, SF3FileType fileType) {
+        private static ScenarioType? DetermineScenario(string filename) {
+            // Determine the scenario based on the path.
+            var directory = Path.GetDirectoryName(filename);
+            if (directory.EndsWith(Path.DirectorySeparatorChar))
+                directory = directory.Substring(0, directory.Length - 1);
+            var paths = directory.Split(Path.DirectorySeparatorChar);
+
+            if (paths.Length == 0)
+                return null;
+
+            switch (paths[paths.Length - 1]) {
+                case "GS-9175":
+                case "MK-81383":
+                    return ScenarioType.Scenario1;
+                case "GS-9188":
+                    return ScenarioType.Scenario2;
+                case "GS-9203":
+                    return ScenarioType.Scenario3;
+                case "6106979":
+                    return ScenarioType.PremiumDisk;
+            }
+
+            // Check the label of the drive.
+            if (paths[0].Length == 2 && paths[0][1] == ':') {
+                var drivePath = paths[0][0] + ":\\";
+                var drives = DriveInfo.GetDrives();
+                var drive = drives.FirstOrDefault(x => x.Name == drivePath);
+                if (drive != null) {
+                    switch (drive.VolumeLabel) {
+                        case "SHINING_FORCE_3_1":
+                            return ScenarioType.Scenario1;
+                        case "SHINING_FORCE_3_2":
+                            return ScenarioType.Scenario2;
+                        case "SHINING_FORCE_3_3":
+                            return ScenarioType.Scenario3;
+                        case "SHINING_FORCE_3_P":
+                            return ScenarioType.PremiumDisk;
+                    }
+                }
+            }
+
+            return null;
+        }
+
+        private bool LoadFile(string filename, ScenarioType? scenario, SF3FileType? fileType) {
+            // If we don't know the scenario, we can't load it.
+            if (!scenario.HasValue) {
+                ErrorMessage("Can't determine scenario for '" + filename + "'.");
+                return false;
+            }
+
             // If we don't know the file type, we can't load it.
-            if (fileType == SF3FileType.Unknown) {
+            if (!fileType.HasValue) {
                 ErrorMessage("Can't determine file type for '" + filename + "'.");
                 return false;
             }
@@ -156,29 +220,27 @@ namespace SF3Editor {
             // Attempt to the load the file.
             var fileLoader = new ModelFileLoader();
             bool success = fileLoader.LoadFile(filename, loader => {
-                // TODO: property scenario!
-                var scenario = ScenarioType.Scenario1;
-
+                var sc = scenario.Value;
                 switch (fileType) {
                     case SF3FileType.X1:
-                        return X1_File.Create(loader.ByteData, c_nameGetterContexts[scenario], scenario, false);
+                        return X1_File.Create(loader.ByteData, c_nameGetterContexts[sc], sc, false);
                     case SF3FileType.X1BTL99:
-                        return X1_File.Create(loader.ByteData, c_nameGetterContexts[scenario], scenario, true);
+                        return X1_File.Create(loader.ByteData, c_nameGetterContexts[sc], sc, true);
                     case SF3FileType.X002:
-                        return X002_File.Create(loader.ByteData, c_nameGetterContexts[scenario], scenario);
+                        return X002_File.Create(loader.ByteData, c_nameGetterContexts[sc], sc);
                     case SF3FileType.X005:
-                        return X005_File.Create(loader.ByteData, c_nameGetterContexts[scenario], scenario);
+                        return X005_File.Create(loader.ByteData, c_nameGetterContexts[sc], sc);
                     case SF3FileType.X012:
-                        return X012_File.Create(loader.ByteData, c_nameGetterContexts[scenario], scenario);
+                        return X012_File.Create(loader.ByteData, c_nameGetterContexts[sc], sc);
                     case SF3FileType.X013:
-                        return X013_File.Create(loader.ByteData, c_nameGetterContexts[scenario], scenario);
+                        return X013_File.Create(loader.ByteData, c_nameGetterContexts[sc], sc);
                     case SF3FileType.X014:
-                        return X014_File.Create(loader.ByteData, c_nameGetterContexts[scenario], scenario);
+                        return X014_File.Create(loader.ByteData, c_nameGetterContexts[sc], sc);
                     case SF3FileType.X019:
-                        return X019_File.Create(loader.ByteData, c_nameGetterContexts[scenario], scenario);
+                        return X019_File.Create(loader.ByteData, c_nameGetterContexts[sc], sc);
                     case SF3FileType.X031:
                     case SF3FileType.X033:
-                        return X033_X031_File.Create(loader.ByteData, c_nameGetterContexts[scenario], scenario);
+                        return X033_X031_File.Create(loader.ByteData, c_nameGetterContexts[sc], sc);
                     case SF3FileType.MPD:
                         return MPD_File.Create(loader.ByteData, c_nameGetterContexts);
                     default:
@@ -306,6 +368,15 @@ namespace SF3Editor {
 
         private void tsmiFile_Exit_Click(object sender, EventArgs e) => Close();
 
+        private void tsmiScenario_Detect_Click(object sender, EventArgs e) => OpenScenario = null;
+        private void tsmiScenario_Scenario1_Click(object sender, EventArgs e) => OpenScenario = ScenarioType.Scenario1;
+
+        private void tsmiScenario_Scenario2_Click(object sender, EventArgs e) => OpenScenario = ScenarioType.Scenario2;
+
+        private void tsmiScenario_Scenario3_Click(object sender, EventArgs e) => OpenScenario = ScenarioType.Scenario3;
+
+        private void tsmiScenario_PremiumDisk_Click(object sender, EventArgs e) => OpenScenario = ScenarioType.PremiumDisk;
+
         private struct TabInfo {
             public ModelFileLoader FileLoader;
             public FileView View;
@@ -316,6 +387,29 @@ namespace SF3Editor {
         private readonly string _baseTitle;
         private readonly string _versionTitle;
         private readonly TabView _fileContainerView;
+        private readonly AppState _appState;
+
         private ModelFileLoader? _selectedFileLoader = null;
+
+        private ScenarioType? _openScenario = null;
+        private ScenarioType? OpenScenario {
+            get => _openScenario;
+            set {
+                if (_openScenario != value) {
+                    _openScenario = value;
+                    _appState.OpenScenario = (_openScenario == null) ? -1 : (int) _openScenario;
+                    _appState.Serialize();
+                    UpdateCheckedOpenScenario();
+                }
+            }
+        }
+
+        private void UpdateCheckedOpenScenario() {
+            tsmiScenario_Detect.Checked      = _openScenario == null;
+            tsmiScenario_Scenario1.Checked   = _openScenario == ScenarioType.Scenario1;
+            tsmiScenario_Scenario2.Checked   = _openScenario == ScenarioType.Scenario2;
+            tsmiScenario_Scenario3.Checked   = _openScenario == ScenarioType.Scenario3;
+            tsmiScenario_PremiumDisk.Checked = _openScenario == ScenarioType.PremiumDisk;
+        }
     }
 }

@@ -1,6 +1,5 @@
 namespace SF3.Types {
     public enum SF3FileType {
-        Unknown = -1,
         X1 = 0,
         X1BTL99,
         X002,

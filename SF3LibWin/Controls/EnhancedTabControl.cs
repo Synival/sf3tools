@@ -12,7 +12,7 @@ namespace SF3.Win.Controls {
             Alignment = tabAlignment;
             if (Alignment == TabAlignment.Left || Alignment == TabAlignment.Right) {
                 SizeMode = TabSizeMode.Fixed;
-                ItemSize = new Size(25, 100);
+                ItemSize = new Size(40, 100);
             }
             DrawMode = TabDrawMode.OwnerDrawFixed;
             DrawItem += EnhancedDraw;

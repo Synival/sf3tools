@@ -88,5 +88,6 @@ namespace SF3.Win {
         public bool ViewerDrawHelp { get; set; } = true;
 
         public int ViewerCursorMode { get; set; } = 0;
+        public int OpenScenario { get; set; } = -1;
     }
 }
