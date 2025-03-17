@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
@@ -374,6 +375,26 @@ namespace SF3Editor {
             tsmiScenario_Scenario2.Checked   = _openScenario == ScenarioType.Scenario2;
             tsmiScenario_Scenario3.Checked   = _openScenario == ScenarioType.Scenario3;
             tsmiScenario_PremiumDisk.Checked = _openScenario == ScenarioType.PremiumDisk;
+        }
+
+        private void tsmiHelp_About_Click(object sender, EventArgs e) {
+            // Fetch copyright info from the assembly itself.
+            string? legalCopyright = null;
+            try {
+                var versionInfo = FileVersionInfo.GetVersionInfo(Environment.ProcessPath ?? "");
+                legalCopyright = versionInfo.LegalCopyright;
+            }
+            catch (Exception ex) {
+                legalCopyright = $"(Couldn't fetch copyright: {ex.GetType().Name} exception thrown with message: {ex.Message}";
+            }
+
+            // Show info, credits, and special thanks.
+            MessageBox.Show(
+                _versionTitle + "\n\n" +
+                legalCopyright + "\n\n" +
+                "All credit to Agrathejagged for the MPD compression/decompression code: https://github.com/Agrathejagged",
+                "About " + _baseTitle
+            );
         }
     }
 }

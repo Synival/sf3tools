@@ -42,12 +42,14 @@ namespace SF3Editor {
             tsmiFile_Close = new System.Windows.Forms.ToolStripMenuItem();
             tsmiFile_Sep2 = new System.Windows.Forms.ToolStripSeparator();
             tsmiFile_Exit = new System.Windows.Forms.ToolStripMenuItem();
+            tsmiHelp = new System.Windows.Forms.ToolStripMenuItem();
+            tsmiHelp_About = new System.Windows.Forms.ToolStripMenuItem();
             menuStrip1.SuspendLayout();
             SuspendLayout();
             // 
             // menuStrip1
             // 
-            menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { tsmiFile });
+            menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { tsmiFile, tsmiHelp });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
             menuStrip1.Size = new Size(891, 24);
@@ -166,6 +168,20 @@ namespace SF3Editor {
             tsmiFile_Exit.Text = "E&xit";
             tsmiFile_Exit.Click += tsmiFile_Exit_Click;
             // 
+            // tsmiHelp
+            // 
+            tsmiHelp.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { tsmiHelp_About });
+            tsmiHelp.Name = "tsmiHelp";
+            tsmiHelp.Size = new Size(44, 20);
+            tsmiHelp.Text = "&Help";
+            // 
+            // tsmiHelp_About
+            // 
+            tsmiHelp_About.Name = "tsmiHelp_About";
+            tsmiHelp_About.Size = new Size(180, 22);
+            tsmiHelp_About.Text = "&About...";
+            tsmiHelp_About.Click += tsmiHelp_About_Click;
+            // 
             // frmSF3Editor
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -200,5 +216,7 @@ namespace SF3Editor {
         private System.Windows.Forms.ToolStripMenuItem tsmiScenario_Scenario2;
         private System.Windows.Forms.ToolStripMenuItem tsmiScenario_Scenario3;
         private System.Windows.Forms.ToolStripMenuItem tsmiScenario_PremiumDisk;
+        private System.Windows.Forms.ToolStripMenuItem tsmiHelp;
+        private System.Windows.Forms.ToolStripMenuItem tsmiHelp_About;
     }
 }
