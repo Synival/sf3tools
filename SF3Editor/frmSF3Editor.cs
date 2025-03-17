@@ -4,15 +4,6 @@ using System.Linq;
 using System.Windows.Forms;
 using CommonLib.NamedValues;
 using SF3.ModelLoaders;
-using SF3.Models.Files.MPD;
-using SF3.Models.Files.X002;
-using SF3.Models.Files.X005;
-using SF3.Models.Files.X012;
-using SF3.Models.Files.X013;
-using SF3.Models.Files.X014;
-using SF3.Models.Files.X019;
-using SF3.Models.Files.X033_X031;
-using SF3.Models.Files.X1;
 using SF3.NamedValues;
 using SF3.Types;
 using SF3.Win;
@@ -198,12 +189,8 @@ namespace SF3Editor {
                 return true;
 
             if (!force && loader.IsModified)
-                ;
-            // TODO: prompt for save!
-/*
-                if (PromptForSave() == DialogResult.Cancel)
+                if (PromptForSave(loader) == DialogResult.Cancel)
                     return false;
-*/
 
             bool wasFocused = ContainsFocus;
             _ = loader.Close();
@@ -211,6 +198,26 @@ namespace SF3Editor {
                 _ = Focus();
 
             return true;
+        }
+
+        private DialogResult PromptForSave(ModelFileLoader loader) {
+            var result = MessageBox.Show(
+                $"{loader.Filename} has unsaved changes.\r\n" +
+                "Would you like to save?", "Save Changes",
+                MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question
+            );
+
+            if (result == DialogResult.Cancel) {
+                return result;
+            }
+            else if (result == DialogResult.Yes)
+                ;
+            // TODO: actually save!
+/* 
+                if (!Save())
+                    return DialogResult.Cancel;
+*/
+            return result;
         }
 
         private void FocusFileTab(TabPage? tabPage) {
