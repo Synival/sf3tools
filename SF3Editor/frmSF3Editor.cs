@@ -60,9 +60,11 @@ namespace SF3Editor {
             ResumeLayout();
 
             // Remember the last Scenario type to open.
-            _openScenario = (_appState.OpenScenario < 0 || !Enum.IsDefined(typeof(ScenarioType), (ScenarioType) _appState.OpenScenario))
-                ? null : (ScenarioType) _appState.OpenScenario;
-            UpdateCheckedOpenScenario();
+            UpdateLocalOpenScenario();
+            _appState.OpenScenarioChanged += (s, e) => {
+                UpdateLocalOpenScenario();
+                _appState.Serialize();
+            };
 
             // Link some dropdowns/values to the app state.
             tsmiEdit_UseDropdowns.Checked = _appState.UseDropdownsForNamedValues;
@@ -321,6 +323,28 @@ namespace SF3Editor {
             Text = _selectedFileLoader == null ? _versionTitle : _selectedFileLoader.ModelTitle(_versionTitle);
         }
 
+        /// <summary>
+        /// The ScenarioType to use when opening a file. Set to 'null' to auto-detect.
+        /// </summary>
+        public ScenarioType? OpenScenario {
+            get => _openScenario;
+            private set {
+                _appState.OpenScenario = ((int?) value) ?? -1;
+            }
+        }
+        private ScenarioType? _openScenario = null;
+
+        private void UpdateLocalOpenScenario() {
+            var os = _appState.OpenScenario;
+            _openScenario = (os < 0 || !Enum.IsDefined(typeof(ScenarioType), (ScenarioType) os)) ? null : (ScenarioType) os;
+
+            tsmiScenario_Detect.Checked      = _openScenario == null;
+            tsmiScenario_Scenario1.Checked   = _openScenario == ScenarioType.Scenario1;
+            tsmiScenario_Scenario2.Checked   = _openScenario == ScenarioType.Scenario2;
+            tsmiScenario_Scenario3.Checked   = _openScenario == ScenarioType.Scenario3;
+            tsmiScenario_PremiumDisk.Checked = _openScenario == ScenarioType.PremiumDisk;
+        }
+
         private void tsmiFile_Open_Click(object sender, EventArgs e) => OpenFileDialog();
 
         private void tsmiFile_Save_Click(object sender, EventArgs e) {
@@ -384,26 +408,5 @@ namespace SF3Editor {
         private readonly AppState _appState;
 
         private ModelFileLoader? _selectedFileLoader = null;
-
-        private ScenarioType? _openScenario = null;
-        private ScenarioType? OpenScenario {
-            get => _openScenario;
-            set {
-                if (_openScenario != value) {
-                    _openScenario = value;
-                    _appState.OpenScenario = (_openScenario == null) ? -1 : (int) _openScenario;
-                    _appState.Serialize();
-                    UpdateCheckedOpenScenario();
-                }
-            }
-        }
-
-        private void UpdateCheckedOpenScenario() {
-            tsmiScenario_Detect.Checked      = _openScenario == null;
-            tsmiScenario_Scenario1.Checked   = _openScenario == ScenarioType.Scenario1;
-            tsmiScenario_Scenario2.Checked   = _openScenario == ScenarioType.Scenario2;
-            tsmiScenario_Scenario3.Checked   = _openScenario == ScenarioType.Scenario3;
-            tsmiScenario_PremiumDisk.Checked = _openScenario == ScenarioType.PremiumDisk;
-        }
     }
 }

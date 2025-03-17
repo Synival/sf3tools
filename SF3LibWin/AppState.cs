@@ -88,7 +88,21 @@ namespace SF3.Win {
         public bool ViewerDrawHelp { get; set; } = true;
 
         public int ViewerCursorMode { get; set; } = 0;
-        public int OpenScenario { get; set; } = -1;
+
+        /// <summary>
+        /// The current ScenarioType to open, serialized as an int for simplicity.
+        /// </summary>
+        public int OpenScenario {
+            get => _openScenario;
+            set {
+                if (value != _openScenario) {
+                    _openScenario = value;
+                    OpenScenarioChanged?.Invoke(this, EventArgs.Empty);
+                }
+            }
+        }
+        private int _openScenario = -1;
+        public event EventHandler OpenScenarioChanged;
 
         /// <summary>
         /// When 'true', clicking a value with a named value (e.g, an enemy ID that has an associated name like 'Masked Monk')
@@ -104,7 +118,6 @@ namespace SF3.Win {
             }
         }
         private bool _useDropdownsForNamedValues = true;
-
         public event EventHandler UseDropdownsForNamedValuesChanged;
     }
 }
