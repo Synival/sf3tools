@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Forms;
 using SF3.Models.Files.MPD;
 using SF3.Models.Tables.MPD.TextureCollection;
@@ -6,7 +7,9 @@ using SF3.Models.Tables.MPD.TextureCollection;
 namespace SF3.Win.Views.MPD {
     public class TexturesView : TabView {
         public TexturesView(string name, IMPD_File model) : base(name) {
-            var allTables = model.TextureCollections.Where(x => x != null).Select(x => x.TextureTable).ToList();
+            var allTables = (model.TextureCollections == null)
+                ? new List<TextureTable>()
+                : model.TextureCollections.Where(x => x != null).Select(x => x.TextureTable).ToList();
             AllTexturesTable = AllTexturesTable.Create("AllTextures", allTables);
             Model = model;
         }
