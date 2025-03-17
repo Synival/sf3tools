@@ -44,12 +44,14 @@ namespace SF3Editor {
             tsmiFile_Exit = new System.Windows.Forms.ToolStripMenuItem();
             tsmiHelp = new System.Windows.Forms.ToolStripMenuItem();
             tsmiHelp_About = new System.Windows.Forms.ToolStripMenuItem();
+            tsmiEdit = new System.Windows.Forms.ToolStripMenuItem();
+            tsmiEdit_UseDropdowns = new System.Windows.Forms.ToolStripMenuItem();
             menuStrip1.SuspendLayout();
             SuspendLayout();
             // 
             // menuStrip1
             // 
-            menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { tsmiFile, tsmiHelp });
+            menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { tsmiFile, tsmiEdit, tsmiHelp });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
             menuStrip1.Size = new Size(891, 24);
@@ -182,6 +184,20 @@ namespace SF3Editor {
             tsmiHelp_About.Text = "&About...";
             tsmiHelp_About.Click += tsmiHelp_About_Click;
             // 
+            // tsmiEdit
+            // 
+            tsmiEdit.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { tsmiEdit_UseDropdowns });
+            tsmiEdit.Name = "tsmiEdit";
+            tsmiEdit.Size = new Size(39, 20);
+            tsmiEdit.Text = "&Edit";
+            // 
+            // tsmiEdit_UseDropdowns
+            // 
+            tsmiEdit_UseDropdowns.Name = "tsmiEdit_UseDropdowns";
+            tsmiEdit_UseDropdowns.Size = new Size(253, 22);
+            tsmiEdit_UseDropdowns.Text = "Use &Dropdowns for Named Values";
+            tsmiEdit_UseDropdowns.Click += tsmiEdit_UseDropdowns_Click;
+            // 
             // frmSF3Editor
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -218,5 +234,7 @@ namespace SF3Editor {
         private System.Windows.Forms.ToolStripMenuItem tsmiScenario_PremiumDisk;
         private System.Windows.Forms.ToolStripMenuItem tsmiHelp;
         private System.Windows.Forms.ToolStripMenuItem tsmiHelp_About;
+        private System.Windows.Forms.ToolStripMenuItem tsmiEdit;
+        private System.Windows.Forms.ToolStripMenuItem tsmiEdit_UseDropdowns;
     }
 }

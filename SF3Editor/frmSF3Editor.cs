@@ -57,12 +57,19 @@ namespace SF3Editor {
             _versionTitle = _baseTitle + " v" + Version;
             Text = _versionTitle;
 
+            ResumeLayout();
+
             // Remember the last Scenario type to open.
             _openScenario = (_appState.OpenScenario < 0 || !Enum.IsDefined(typeof(ScenarioType), (ScenarioType) _appState.OpenScenario))
                 ? null : (ScenarioType) _appState.OpenScenario;
             UpdateCheckedOpenScenario();
 
-            ResumeLayout();
+            // Link some dropdowns/values to the app state.
+            tsmiEdit_UseDropdowns.Checked = _appState.UseDropdownsForNamedValues;
+            _appState.UseDropdownsForNamedValuesChanged += (s, e) => {
+                tsmiEdit_UseDropdowns.Checked = _appState.UseDropdownsForNamedValues;
+                _appState.Serialize();
+            };
         }
 
         protected override void OnFormClosing(FormClosingEventArgs e) {
@@ -342,6 +349,28 @@ namespace SF3Editor {
 
         private void tsmiScenario_PremiumDisk_Click(object sender, EventArgs e) => OpenScenario = ScenarioType.PremiumDisk;
 
+        private void tsmiEdit_UseDropdowns_Click(object sender, EventArgs e) => _appState.UseDropdownsForNamedValues = !_appState.UseDropdownsForNamedValues;
+
+        private void tsmiHelp_About_Click(object sender, EventArgs e) {
+            // Fetch copyright info from the assembly itself.
+            string? legalCopyright = null;
+            try {
+                var versionInfo = FileVersionInfo.GetVersionInfo(Environment.ProcessPath ?? "");
+                legalCopyright = versionInfo.LegalCopyright;
+            }
+            catch (Exception ex) {
+                legalCopyright = $"(Couldn't fetch copyright: {ex.GetType().Name} exception thrown with message: {ex.Message}";
+            }
+
+            // Show info, credits, and special thanks.
+            MessageBox.Show(
+                _versionTitle + "\n\n" +
+                legalCopyright + "\n\n" +
+                "All credit to Agrathejagged for the MPD compression/decompression code: https://github.com/Agrathejagged",
+                "About " + _baseTitle
+            );
+        }
+
         private struct TabInfo {
             public ModelFileLoader FileLoader;
             public FileView View;
@@ -375,26 +404,6 @@ namespace SF3Editor {
             tsmiScenario_Scenario2.Checked   = _openScenario == ScenarioType.Scenario2;
             tsmiScenario_Scenario3.Checked   = _openScenario == ScenarioType.Scenario3;
             tsmiScenario_PremiumDisk.Checked = _openScenario == ScenarioType.PremiumDisk;
-        }
-
-        private void tsmiHelp_About_Click(object sender, EventArgs e) {
-            // Fetch copyright info from the assembly itself.
-            string? legalCopyright = null;
-            try {
-                var versionInfo = FileVersionInfo.GetVersionInfo(Environment.ProcessPath ?? "");
-                legalCopyright = versionInfo.LegalCopyright;
-            }
-            catch (Exception ex) {
-                legalCopyright = $"(Couldn't fetch copyright: {ex.GetType().Name} exception thrown with message: {ex.Message}";
-            }
-
-            // Show info, credits, and special thanks.
-            MessageBox.Show(
-                _versionTitle + "\n\n" +
-                legalCopyright + "\n\n" +
-                "All credit to Agrathejagged for the MPD compression/decompression code: https://github.com/Agrathejagged",
-                "About " + _baseTitle
-            );
         }
     }
 }
