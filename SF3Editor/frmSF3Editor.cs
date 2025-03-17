@@ -321,9 +321,12 @@ namespace SF3Editor {
             if (_selectedFileLoader == ti?.FileLoader)
                 return;
 
-            tsmiFile_Save.Enabled   = hasFile;
-            tsmiFile_SaveAs.Enabled = hasFile;
-            tsmiFile_Close.Enabled  = hasFile;
+            tsmiFile_Save.Enabled      = hasFile;
+            tsmiFile_SaveAs.Enabled    = hasFile;
+            tsmiFile_ApplyDFR.Enabled  = hasFile;
+            tsmiFile_CreateDFR.Enabled = hasFile;
+            tsmiFile_Close.Enabled     = hasFile;
+
             _selectedFileLoader     = ti?.FileLoader;
             Text = _selectedFileLoader == null ? _versionTitle : _selectedFileLoader.ModelTitle(_versionTitle);
         }
