@@ -27,8 +27,12 @@ namespace SF3.Win.Forms {
             InitializeComponent();
             RegisterNamedValues();
 
-            tsmiEdit_UseDropdowns.Checked = Globals.UseDropdowns;
-            Globals.UseDropdownsChanged += (s, e) => tsmiEdit_UseDropdowns.Checked = Globals.UseDropdowns;
+            _appState = AppState.RetrieveAppState();
+            tsmiEdit_UseDropdowns.Checked = _appState.UseDropdownsForNamedValues;
+            _appState.UseDropdownsForNamedValuesChanged += (s, e) => {
+                tsmiEdit_UseDropdowns.Checked = _appState.UseDropdownsForNamedValues;
+                _appState.Serialize();
+            };
 
             tsmiFile_OpenPrevious.ShortcutKeyDisplayString = "Ctrl+Alt+,";
             tsmiFile_OpenNext.ShortcutKeyDisplayString = "Ctrl+Alt+.";
@@ -634,7 +638,7 @@ namespace SF3.Win.Forms {
         protected virtual void tsmiScenario_Scenario3_Click(object sender, EventArgs e) => Scenario = ScenarioType.Scenario3;
         protected virtual void tsmiScenario_PremiumDisk_Click(object sender, EventArgs e) => Scenario = ScenarioType.PremiumDisk;
 
-        private void tsmiEdit_UseDropdowns_Click(object sender, EventArgs e) => Globals.UseDropdowns = !Globals.UseDropdowns;
+        private void tsmiEdit_UseDropdowns_Click(object sender, EventArgs e) => _appState.UseDropdownsForNamedValues = !_appState.UseDropdownsForNamedValues;
 
         private string[] GetOtherFilesAtDirectoryForOpenFilter() {
             var path = Path.GetDirectoryName(ModelLoader.Filename);
@@ -661,5 +665,7 @@ namespace SF3.Win.Forms {
             var indexToLoad = (index == null) ? 0 : (index == filesInDir.Length - 1) ? 0 : ((int) index + 1);
             _ = LoadFile(filesInDir[indexToLoad]);
         }
+
+        private readonly AppState _appState;
     }
 }

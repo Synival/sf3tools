@@ -202,7 +202,8 @@ namespace SF3.Win.Extensions {
         /// <param name="oldDelegate">The EditorCreatorDelegate we're replacing to use as a fallback.</param>
         /// <returns>The control to use when editing - a ComboBox for named values, otherwise the return value of 'oldDelegate'.</returns>
         private static Control NamedValueEditorCreator(object obj, OLVColumn model, object value, EditorCreatorDelegate oldDelegate) {
-            if (Globals.UseDropdowns) {
+            var appState = AppState.RetrieveAppState();
+            if (appState.UseDropdownsForNamedValues) {
                 var nameContext = ((ObjectListView) model.ListView).GetNameGetterContext();
                 if (nameContext != null) {
                     var property = obj.GetType().GetProperty(model.AspectName);

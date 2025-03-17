@@ -89,5 +89,22 @@ namespace SF3.Win {
 
         public int ViewerCursorMode { get; set; } = 0;
         public int OpenScenario { get; set; } = -1;
+
+        /// <summary>
+        /// When 'true', clicking a value with a named value (e.g, an enemy ID that has an associated name like 'Masked Monk')
+        /// will raise a dropdown with possible named values. When 'false', a numeric value editor will be raised instead.
+        /// </summary>
+        public bool UseDropdownsForNamedValues {
+            get => _useDropdownsForNamedValues;
+            set {
+                if (value != _useDropdownsForNamedValues) {
+                    _useDropdownsForNamedValues = value;
+                    UseDropdownsForNamedValuesChanged?.Invoke(this, EventArgs.Empty);
+                }
+            }
+        }
+        private bool _useDropdownsForNamedValues = true;
+
+        public event EventHandler UseDropdownsForNamedValuesChanged;
     }
 }

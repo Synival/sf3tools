@@ -9,18 +9,14 @@ namespace SF3.X014_Editor {
         /// </summary>
         [STAThread]
         static void Main() {
-            if (Environment.OSVersion.Version.Major >= 6)
-                if (!SetProcessDPIAware())
-                    throw new NotSupportedException("SetProcessDPIAware()");
+            // To customize application configuration such as set high DPI settings or default font,
+            // see https://aka.ms/applicationconfiguration.
+            ApplicationConfiguration.Initialize();
 
+            // Fetch saved application state
             AppState.RetrieveAppState("X014 Editor");
 
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Forms.frmX014_Editor());
         }
-
-        [System.Runtime.InteropServices.DllImport("user32.dll")]
-        private static extern bool SetProcessDPIAware();
     }
 }
