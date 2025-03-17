@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 using CommonLib.NamedValues;
@@ -61,6 +62,14 @@ namespace SF3Editor {
             UpdateCheckedOpenScenario();
 
             ResumeLayout();
+        }
+
+        protected override void OnFormClosing(FormClosingEventArgs e) {
+            bool force = (e.CloseReason == CloseReason.WindowsShutDown);
+            if (!CloseAllFiles(force: force) && !force)
+                e.Cancel = true;
+
+            base.OnFormClosing(e);
         }
 
         /// <summary>
@@ -237,13 +246,57 @@ namespace SF3Editor {
                 return result;
             }
             else if (result == DialogResult.Yes)
-                ;
-            // TODO: actually save!
-/* 
-                if (!Save())
+                if (!SaveFile(loader))
                     return DialogResult.Cancel;
-*/
+
             return result;
+        }
+
+        /// <summary>
+        /// Raises a "Save As" dialog for saving a file with a specific path/filename.
+        /// </summary>
+        /// <returns>'true' if a file was saved successfully (and not cancelled). Otherwise, 'false'.</returns>
+        public bool SaveFileAsDialog(ModelFileLoader loader) {
+            var savefile = new SaveFileDialog {
+                Filter = FileDialogFilter,
+                FileName = Path.GetFileName(loader.Filename)
+            };
+            if (savefile.ShowDialog() != DialogResult.OK)
+                return false;
+
+            return SaveFile(loader, savefile.FileName);
+        }
+
+        /// <summary>
+        /// Saves a file to the path/filename in which it was opened.
+        /// </summary>
+        /// <param name="loader">The file to save.</param>
+        /// <returns>'true' if a file was saved successfully. Otherwise, 'false'.</returns>
+        public bool SaveFile(ModelFileLoader loader)
+            => SaveFile(loader, loader.Filename);
+
+        /// <summary>
+        /// Saves a file to a given path/filename.
+        /// </summary>
+        /// <param name="loader">The file to save.</param>
+        /// <param name="filename">The filename to save the file as.</param>
+        /// <returns>'true' if a file was saved successfully. Otherwise, 'false'.</returns>
+        private bool SaveFile(ModelFileLoader loader, string filename) {
+            string? error = null;
+            try {
+                if (!loader.SaveFile(filename)) {
+                    // TODO: Actually get an error from SaveFile()!
+                    error = "Save failed";
+                }
+            }
+            catch (Exception e) {
+                error = $"{e.GetType().Name} exception with message:\r\n{e.Message}";
+            }
+
+            if (error != null)
+                ErrorMessage(error);
+
+            return error != null;
         }
 
         private void FocusFileTab(TabPage? tabPage) {
@@ -262,20 +315,22 @@ namespace SF3Editor {
 
         private void tsmiFile_Open_Click(object sender, EventArgs e) => OpenFileDialog();
 
+        private void tsmiFile_Save_Click(object sender, EventArgs e) {
+            if (_selectedFileLoader != null)
+                _ = SaveFile(_selectedFileLoader);
+        }
+
+        private void tsmiFile_SaveAs_Click(object sender, EventArgs e) {
+            if (_selectedFileLoader != null)
+                _ = SaveFileAsDialog(_selectedFileLoader);
+        }
+
         private void tsmiFile_Close_Click(object sender, EventArgs e) {
             if (_selectedFileLoader != null)
                 _ = CloseFile(_selectedFileLoader);
         }
 
         private void tsmiFile_Exit_Click(object sender, EventArgs e) => Close();
-
-        protected override void OnFormClosing(FormClosingEventArgs e) {
-            bool force = (e.CloseReason == CloseReason.WindowsShutDown);
-            if (!CloseAllFiles(force: force) && !force)
-                e.Cancel = true;
-
-            base.OnFormClosing(e);
-        }
 
         private void tsmiScenario_Detect_Click(object sender, EventArgs e) => OpenScenario = null;
         private void tsmiScenario_Scenario1_Click(object sender, EventArgs e) => OpenScenario = ScenarioType.Scenario1;

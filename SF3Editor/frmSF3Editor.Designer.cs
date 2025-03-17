@@ -128,6 +128,7 @@ namespace SF3Editor {
             tsmiFile_Save.ShortcutKeys =  System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S;
             tsmiFile_Save.Size = new Size(195, 22);
             tsmiFile_Save.Text = "&Save";
+            tsmiFile_Save.Click += tsmiFile_Save_Click;
             // 
             // tsmiFile_SaveAs
             // 
@@ -136,6 +137,7 @@ namespace SF3Editor {
             tsmiFile_SaveAs.ShortcutKeys =  System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift | System.Windows.Forms.Keys.S;
             tsmiFile_SaveAs.Size = new Size(195, 22);
             tsmiFile_SaveAs.Text = "Save &As...";
+            tsmiFile_SaveAs.Click += tsmiFile_SaveAs_Click;
             // 
             // tsmiFile_Sep1
             // 
