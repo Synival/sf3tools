@@ -99,36 +99,41 @@ namespace SF3Editor {
                 .GroupBy(x => x.Index)
                 .ToDictionary(x => x.Key, x => x.Select(y => y.Value).ToArray());
 
-            // Attempt to load the file. Use an explicitly specificed scenario and file type if provided.
-            return LoadFile(
-                openfile.FileName,
-                OpenScenario ?? DetermineScenario(openfile.FileName),
-                DetermineFileType(openfile.FileName, filters[openfile.FilterIndex - 1][1])
-            );
-        }
-
-        private bool LoadFile(string filename, ScenarioType? scenario, SF3FileType? fileType) {
             // If we don't know the scenario, we can't load it.
+            var scenario = OpenScenario ?? DetermineScenario(openfile.FileName);
             if (!scenario.HasValue) {
-                ErrorMessage("Can't determine scenario for '" + filename + "'.");
+                ErrorMessage("Can't determine scenario for '" + openfile.FileName + "'.");
                 return false;
             }
 
             // If we don't know the file type, we can't load it.
+            var fileType = DetermineFileType(openfile.FileName, filters[openfile.FilterIndex - 1][1]);
             if (!fileType.HasValue) {
-                ErrorMessage("Can't determine file type for '" + filename + "'.");
+                ErrorMessage("Can't determine file type for '" + openfile.FileName + "'.");
                 return false;
             }
 
+            // Attempt to load the file. Use an explicitly specificed scenario and file type if provided.
+            return LoadFile(openfile.FileName, scenario.Value, fileType.Value);
+        }
+
+        /// <summary>
+        /// Opens any file, provided a valid scenario type and file type.
+        /// </summary>
+        /// <param name="filename">Path/filename of the file to open.</param>
+        /// <param name="scenario">Scenario for the file to open.</param>
+        /// <param name="fileType">Type of the file to open.</param>
+        /// <returns>'true' when the file has been loaded successfully.</returns>
+        public bool LoadFile(string filename, ScenarioType scenario, SF3FileType fileType) {
             // Attempt to the load the file.
             var fileLoader = new ModelFileLoader();
             bool success = fileLoader.LoadFile(filename, loader
-                => CreateFile(loader.ByteData, fileType.Value, c_nameGetterContexts, scenario.Value));
+                => CreateFile(loader.ByteData, fileType, c_nameGetterContexts, scenario));
 
             if (!success) {
                 // Wrong file was selected.
                 ErrorMessage($"Data in '{filename}' appears corrupt or invalid.\r\n\r\n" +
-                             $"Attempted to open as type '{fileType}' for '{scenario.Value}'.\r\n\r\n" +
+                             $"Attempted to open as type '{fileType}' for '{scenario}'.\r\n\r\n" +
                               "Is this the correct type of file and the correct scenario?");
                 fileLoader.Close();
                 return false;
