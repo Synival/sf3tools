@@ -179,6 +179,32 @@ namespace SF3Editor {
         }
 
         /// <summary>
+        /// Closes all files in all open tabs, prompting for save when necessary.
+        /// The process is aborted on failure to close or file *or* by the user clicking 'Cancel'.
+        /// </summary>
+        /// <returns>'true' if all tabs were closed, otherwise 'false'.</returns>
+        public bool CloseAllFiles(bool force = false) {
+            // Close all tags, prompting the user to save for each tab if necessary.
+            while (_fileContainerView.TabControl.TabPages.Count > 0) {
+                var tabPage = _fileContainerView.TabControl.TabPages[0] as TabPage;
+                if (tabPage == null || !_tabInfos.ContainsKey(tabPage)) {
+                    _fileContainerView.TabControl.TabPages.RemoveAt(0);
+                    continue;
+                }
+
+                var tabInfo = _tabInfos[tabPage];
+                var closed = CloseFile(tabInfo.FileLoader, force);
+
+                // Abort on the first 'Cancel' result or failed closure.
+                if (!closed)
+                    break;
+            }
+
+            // Only return 'true' if no tabs remain.
+            return (_fileContainerView.TabControl.TabPages.Count == 0);
+        }
+
+        /// <summary>
         /// Closes a file in a tab.
         /// If may prompt the user to save if the file has been modified.
         /// </summary>
@@ -202,7 +228,7 @@ namespace SF3Editor {
 
         private DialogResult PromptForSave(ModelFileLoader loader) {
             var result = MessageBox.Show(
-                $"{loader.Filename} has unsaved changes.\r\n" +
+                $"{loader.Filename} has unsaved changes.\r\n\r\n" +
                 "Would you like to save?", "Save Changes",
                 MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question
             );
@@ -242,6 +268,14 @@ namespace SF3Editor {
         }
 
         private void tsmiFile_Exit_Click(object sender, EventArgs e) => Close();
+
+        protected override void OnFormClosing(FormClosingEventArgs e) {
+            bool force = (e.CloseReason == CloseReason.WindowsShutDown);
+            if (!CloseAllFiles(force: force) && !force)
+                e.Cancel = true;
+
+            base.OnFormClosing(e);
+        }
 
         private void tsmiScenario_Detect_Click(object sender, EventArgs e) => OpenScenario = null;
         private void tsmiScenario_Scenario1_Click(object sender, EventArgs e) => OpenScenario = ScenarioType.Scenario1;
