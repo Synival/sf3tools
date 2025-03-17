@@ -75,10 +75,8 @@ namespace SF3Editor {
         }
 
         protected override void OnFormClosing(FormClosingEventArgs e) {
-            bool force = (e.CloseReason == CloseReason.WindowsShutDown);
-            if (!CloseAllFiles(force: force) && !force)
+            if (!CloseAllFiles())
                 e.Cancel = true;
-
             base.OnFormClosing(e);
         }
 
