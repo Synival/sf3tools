@@ -5,6 +5,7 @@ using System.Linq;
 using CommonLib.NamedValues;
 using SF3.ByteData;
 using SF3.Models.Files;
+using SF3.Models.Files.IconPointer;
 using SF3.Models.Files.MPD;
 using SF3.Models.Files.X002;
 using SF3.Models.Files.X005;
@@ -52,6 +53,18 @@ namespace SF3.Utils {
                         return SF3FileType.X002;
                     case "X005.BIN":
                         return SF3FileType.X005;
+
+                    case "X011.BIN;X021.BIN;X026.BIN": {
+                        if (filename == "X011.BIN")
+                            return SF3FileType.X011;
+                        else if (filename == "X021.BIN")
+                            return SF3FileType.X021;
+                        else if (filename == "X026.BIN")
+                            return SF3FileType.X026;
+                        else
+                            break;
+                    }
+
                     case "X012.BIN":
                         return SF3FileType.X012;
                     case "X013.BIN":
@@ -84,6 +97,8 @@ namespace SF3.Utils {
                     return SF3FileType.X002;
                 else if (preExtension.Contains("X005"))
                     return SF3FileType.X005;
+                else if (preExtension.Contains("X011"))
+                    return SF3FileType.X011;
                 else if (preExtension.Contains("X012"))
                     return SF3FileType.X012;
                 else if (preExtension.Contains("X013"))
@@ -92,6 +107,10 @@ namespace SF3.Utils {
                     return SF3FileType.X014;
                 else if (preExtension.Contains("X019"))
                     return SF3FileType.X019;
+                else if (preExtension.Contains("X021"))
+                    return SF3FileType.X021;
+                else if (preExtension.Contains("X026"))
+                    return SF3FileType.X026;
                 else if (preExtension.Contains("X031"))
                     return SF3FileType.X031;
                 else if (preExtension.Contains("X033"))
@@ -176,6 +195,10 @@ namespace SF3.Utils {
                     return X002_File.Create(byteData, ngc, scenario);
                 case SF3FileType.X005:
                     return X005_File.Create(byteData, ngc, scenario);
+                case SF3FileType.X011:
+                case SF3FileType.X021:
+                case SF3FileType.X026:
+                    return IconPointerFile.Create(byteData, ngc, scenario);
                 case SF3FileType.X012:
                     return X012_File.Create(byteData, ngc, scenario);
                 case SF3FileType.X013:

@@ -23,7 +23,8 @@ namespace SF3Editor {
             .ToDictionary(x => x, x => (INameGetterContext) new NameGetterContext(x));
 
         private readonly string FileDialogFilter =
-            "All Supported Files|X1*.BIN;X002.BIN;X005.BIN;X012.BIN;X013.BIN;X014.BIN;X019.BIN;X031.BIN;X033.BIN;*.MPD"
+            "All Supported Files|X1*.BIN;X002.BIN;X005.BIN;X011.BIN;X012.BIN;X013.BIN;X014.BIN;X019.BIN;X021.BIN;X026.BIN;X031.BIN;X033.BIN;*.MPD"
+            + "|IconPointer Files (X011.BIN;X021.BIN;X026.BIN)|X011.BIN;X021.BIN;X026.BIN"
             + "|X1 Files (X1*.BIN)|X1*.BIN"
             + "|X1BTL99 File (X1BTL99.BIN)|X1BTL99.BIN"
             + "|X002 File (X002.BIN)|X002.BIN"
@@ -86,7 +87,7 @@ namespace SF3Editor {
         /// Creates an "Open" dialog and, if a file was chosen, opens it, processes its data, and loads it.
         /// </summary>
         /// <returns>A record for the file loaded, or 'null' on failure/cancel.</returns>
-        public LoadedFile OpenFileDialog() {
+        public LoadedFile? OpenFileDialog() {
             var openfile = new OpenFileDialog {
                 Filter = FileDialogFilter
             };
@@ -125,7 +126,7 @@ namespace SF3Editor {
         /// <param name="scenario">Scenario for the file to open.</param>
         /// <param name="fileType">Type of the file to open.</param>
         /// <returns>A record for the file loaded, or 'null' on failure/cancel.</returns>
-        public LoadedFile LoadFile(string filename, ScenarioType scenario, SF3FileType fileType) {
+        public LoadedFile? LoadFile(string filename, ScenarioType scenario, SF3FileType fileType) {
             try {
                 using (var stream = new FileStream(filename, FileMode.Open, FileAccess.Read))
                     return LoadFile(filename, scenario, fileType, stream);
@@ -144,7 +145,7 @@ namespace SF3Editor {
         /// <param name="fileType">Type of the file to open.</param>
         /// <param name="stream">Stream from which the input data comes.</param>
         /// <returns>A record for the file loaded, or 'null' on failure/cancel.</returns>
-        public LoadedFile LoadFile(string filename, ScenarioType scenario, SF3FileType fileType, Stream stream) {
+        public LoadedFile? LoadFile(string filename, ScenarioType scenario, SF3FileType fileType, Stream stream) {
             // Attempt to the load the file.
             var fileLoader = new ModelFileLoader();
             bool success = fileLoader.LoadFile(filename, stream,
@@ -190,7 +191,7 @@ namespace SF3Editor {
             // TODO: what's the actual error?
             if (newControl == null) {
                 _fileContainerView.RemoveChild(view);
-                fileLoader.Close();
+                _ = fileLoader.Close();
                 ErrorMessage("Failed to create view. Maybe the file isn't supported yet?");
                 return null;
             }
