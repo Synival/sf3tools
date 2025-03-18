@@ -35,36 +35,42 @@ namespace SF3.Models.Structs.X002 {
             extraChr   = Address + 0x22; // 4 bytes chr extra?
         }
 
+        [TableViewModelColumn(displayOrder: 0, displayName: "MapID", displayFormat: "X2")]
         [BulkCopy]
         public int MOMapID {
             get => Data.GetWord(mapID);
             set => Data.SetWord(mapID, value);
         }
 
+        [TableViewModelColumn(displayOrder: 1, displayFormat: "X2")]
         [BulkCopy]
         public int SynMusic {
             get => Data.GetByte(synMusic);
             set => Data.SetByte(synMusic, (byte) value);
         }
 
+        [TableViewModelColumn(displayOrder: 2, displayFormat: "X2")]
         [BulkCopy]
         public int MedMusic {
             get => Data.GetByte(medMusic);
             set => Data.SetByte(medMusic, (byte) value);
         }
 
+        [TableViewModelColumn(displayOrder: 3, displayFormat: "X2")]
         [BulkCopy]
         public int JulMusic {
             get => Data.GetByte(julMusic);
             set => Data.SetByte(julMusic, (byte) value);
         }
 
+        [TableViewModelColumn(displayOrder: 4, displayFormat: "X2")]
         [BulkCopy]
         public int ExtraMusic {
             get => Data.GetByte(extraMusic);
             set => Data.SetByte(extraMusic, (byte) value);
         }
 
+        [TableViewModelColumn(displayOrder: 5, displayName: "SynMPD", minWidth: 140)]
         [BulkCopy]
         [NameGetter(NamedValueType.FileIndex)]
         public int SynMpd {
@@ -72,6 +78,7 @@ namespace SF3.Models.Structs.X002 {
             set => Data.SetDouble(synMpd, value);
         }
 
+        [TableViewModelColumn(displayOrder: 6, displayName: "MedMPD", minWidth: 140)]
         [BulkCopy]
         [NameGetter(NamedValueType.FileIndex)]
         public int MedMpd {
@@ -79,6 +86,7 @@ namespace SF3.Models.Structs.X002 {
             set => Data.SetDouble(medMpd, value);
         }
 
+        [TableViewModelColumn(displayOrder: 7, displayName: "JulMPD", minWidth: 140)]
         [BulkCopy]
         [NameGetter(NamedValueType.FileIndex)]
         public int JulMpd {
@@ -86,6 +94,7 @@ namespace SF3.Models.Structs.X002 {
             set => Data.SetDouble(julMpd, value);
         }
 
+        [TableViewModelColumn(displayOrder: 8, displayName: "ExtraMPD", minWidth: 140)]
         [BulkCopy]
         [NameGetter(NamedValueType.FileIndex)]
         public int ExtraMpd {
@@ -93,6 +102,7 @@ namespace SF3.Models.Structs.X002 {
             set => Data.SetDouble(extraMpd, value);
         }
 
+        [TableViewModelColumn(displayOrder: 9, displayName: "SynCHR", minWidth: 140)]
         [BulkCopy]
         [NameGetter(NamedValueType.FileIndex)]
         public int SynChr {
@@ -100,6 +110,7 @@ namespace SF3.Models.Structs.X002 {
             set => Data.SetDouble(synChr, value);
         }
 
+        [TableViewModelColumn(displayOrder: 10, displayName: "MedCHR", minWidth: 140)]
         [BulkCopy]
         [NameGetter(NamedValueType.FileIndex)]
         public int MedChr {
@@ -107,6 +118,7 @@ namespace SF3.Models.Structs.X002 {
             set => Data.SetDouble(medChr, value);
         }
 
+        [TableViewModelColumn(displayOrder: 11, displayName: "JulCHR", minWidth: 140)]
         [BulkCopy]
         [NameGetter(NamedValueType.FileIndex)]
         public int JulChr {
@@ -114,6 +126,7 @@ namespace SF3.Models.Structs.X002 {
             set => Data.SetDouble(julChr, value);
         }
 
+        [TableViewModelColumn(displayOrder: 12, displayName: "ExtraCHR", minWidth: 140)]
         [BulkCopy]
         [NameGetter(NamedValueType.FileIndex)]
         public int ExtraChr {
