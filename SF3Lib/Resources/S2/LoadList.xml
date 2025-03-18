@@ -1,52 +1,52 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <items>
     
-  <item value="0x00" name="Measurement Test" />
-  <item value="0x01" name="ShopTest" />    
+  <item value="0x00" name="MEASUREMENT TEST" />
+  <item value="0x01" name="SHOPTEST" />    
   <item value="0x02" name="OPMOVIE" />
   <item value="0x03" name="LOGO" />
   <item value="0x04" name="DREAM" />
   <item value="0x05" name="COMPLETE" />
   <item value="0x06" name="ENDING" />
-  <item value="0x07" name="btl201" />
-  <item value="0x08" name="btl202" />
-  <item value="0x09" name="btl203" />
-  <item value="0x0a" name="btl204" />
-  <item value="0x0b" name="btl205" />
-  <item value="0x0c" name="btl206" />
-  <item value="0x0d" name="btl207" />
-  <item value="0x0e" name="btl208" />
-  <item value="0x0f" name="btl209" />
-  <item value="0x10" name="btl210" />
-  <item value="0x11" name="btl211" />
-  <item value="0x12" name="btl212" />
-  <item value="0x13" name="btl213" />
-  <item value="0x14" name="btl214" />
-  <item value="0x15" name="btl215" />
-  <item value="0x16" name="btl216" />
-  <item value="0x17" name="btl217" />
-  <item value="0x18" name="btl218" />
-  <item value="0x19" name="btl219" />
-  <item value="0x1a" name="btl220" />
-  <item value="0x1b" name="btl221" />
-  <item value="0x1c" name="btl222" />
-  <item value="0x1d" name="btl223" />
-  <item value="0x1e" name="btl224" />
-  <item value="0x1f" name="btl225" />
-  <item value="0x20" name="btl226" />
-  <item value="0x21" name="btl227" />
-  <item value="0x22" name="btl228" />
-  <item value="0x23" name="btl229" />
-  <item value="0x24" name="btl230" />
-  <item value="0x25" name="btl231" />
-  <item value="0x26" name="btl232" />
-  <item value="0x27" name="btl233" />
-  <item value="0x28" name="btl234" />
-  <item value="0x29" name="btl235" />
-  <item value="0x2A" name="btl236" />
-  <item value="0x2B" name="btl237" />
-  <item value="0x2C" name="btl238" />
-  <item value="0x2D" name="btl239" />
+  <item value="0x07" name="BTL201" />
+  <item value="0x08" name="BTL202" />
+  <item value="0x09" name="BTL203" />
+  <item value="0x0a" name="BTL204" />
+  <item value="0x0b" name="BTL205" />
+  <item value="0x0c" name="BTL206" />
+  <item value="0x0d" name="BTL207" />
+  <item value="0x0e" name="BTL208" />
+  <item value="0x0f" name="BTL209" />
+  <item value="0x10" name="BTL210" />
+  <item value="0x11" name="BTL211" />
+  <item value="0x12" name="BTL212" />
+  <item value="0x13" name="BTL213" />
+  <item value="0x14" name="BTL214" />
+  <item value="0x15" name="BTL215" />
+  <item value="0x16" name="BTL216" />
+  <item value="0x17" name="BTL217" />
+  <item value="0x18" name="BTL218" />
+  <item value="0x19" name="BTL219" />
+  <item value="0x1a" name="BTL220" />
+  <item value="0x1b" name="BTL221" />
+  <item value="0x1c" name="BTL222" />
+  <item value="0x1d" name="BTL223" />
+  <item value="0x1e" name="BTL224" />
+  <item value="0x1f" name="BTL225" />
+  <item value="0x20" name="BTL226" />
+  <item value="0x21" name="BTL227" />
+  <item value="0x22" name="BTL228" />
+  <item value="0x23" name="BTL229" />
+  <item value="0x24" name="BTL230" />
+  <item value="0x25" name="BTL231" />
+  <item value="0x26" name="BTL232" />
+  <item value="0x27" name="BTL233" />
+  <item value="0x28" name="BTL234" />
+  <item value="0x29" name="BTL235" />
+  <item value="0x2A" name="BTL236" />
+  <item value="0x2B" name="BTL237" />
+  <item value="0x2C" name="BTL238" />
+  <item value="0x2D" name="BTL239" />
   <item value="0x2E" name="OP201" />
   <item value="0x2F" name="SHINOKI" />
   <item value="0x30" name="SAR_W0" />
