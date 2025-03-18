@@ -12,7 +12,19 @@ namespace SF3.Win.Views.X033_X031 {
                 return null;
 
             var ngc = Model.NameGetterContext;
-            // TODO: tables!
+            if (Model.StatsTable != null) {
+                CreateChild(new TableView("Stats", Model.StatsTable, ngc, displayGroups: ["Metadata", "Stats"]));
+                CreateChild(new TableView("Spells", Model.StatsTable, ngc, displayGroups: ["Metadata", "Spells"]));
+                CreateChild(new TableView("Miscellaneous", Model.StatsTable, ngc, displayGroups: ["Metadata", "Miscellaneous"]));
+            }
+            if (Model.InitialInfoTable != null)
+                CreateChild(new TableView("Initial Info", Model.InitialInfoTable, ngc));
+            if (Model.WeaponLevelTable != null)
+                CreateChild(new TableView("Weapon Level Exp", Model.WeaponLevelTable, ngc));
+            if (Model.StatsTable != null)
+                CreateChild(new TableView("Curve Calc", Model.StatsTable, ngc, displayGroups: ["Metadata", "CurveGraph"]));
+
+            // TODO: Curve Graph
 
             return Control;
         }
