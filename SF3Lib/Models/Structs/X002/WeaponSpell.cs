@@ -19,6 +19,7 @@ namespace SF3.Models.Structs.X002 {
             weaponLv3 = Address + 4; // 1 byte
         }
 
+        [TableViewModelColumn(displayOrder: 0, displayName: "Spell", minWidth: 100)]
         [BulkCopy]
         [NameGetter(NamedValueType.Spell)]
         public int SpellID2 {
@@ -26,24 +27,28 @@ namespace SF3.Models.Structs.X002 {
             set => Data.SetByte(spell, (byte) value);
         }
 
+        [TableViewModelColumn(displayOrder: 1, displayName: "WeaponLv0")]
         [BulkCopy]
         public int Weapon0 {
             get => Data.GetByte(weaponLv0);
             set => Data.SetByte(weaponLv0, (byte) value);
         }
 
+        [TableViewModelColumn(displayOrder: 2, displayName: "WeaponLv1")]
         [BulkCopy]
         public int Weapon1 {
             get => Data.GetByte(weaponLv1);
             set => Data.SetByte(weaponLv1, (byte) value);
         }
 
+        [TableViewModelColumn(displayOrder: 3, displayName: "WeaponLv2")]
         [BulkCopy]
         public int Weapon2 {
             get => Data.GetByte(weaponLv2);
             set => Data.SetByte(weaponLv2, (byte) value);
         }
 
+        [TableViewModelColumn(displayOrder: 4, displayName: "WeaponLv3")]
         [BulkCopy]
         public int Weapon3 {
             get => Data.GetByte(weaponLv3);
