@@ -25,10 +25,10 @@ namespace SF3.Models.Tables.Shared {
             _rows = new Warp[0];
             var address = Address;
             Warp prevModel = null;
-            for (var i = 0; prevModel == null || prevModel.WarpType != 0x01 && prevModel.WarpType != 0xff; i++) {
+            for (var i = 0; prevModel == null || (prevModel.WarpType != 0x01 && prevModel.WarpType != 0xff); i++) {
                 if (i == MaxSize)
                     throw new IndexOutOfRangeException();
-                var newRow = new Warp(Data, i, values.ContainsKey(i) ? values[i] : "WarpIndex" + i, address);
+                var newRow = new Warp(Data, i, values.ContainsKey(i) ? values[i] : "WarpIndex" + i, address, prevModel);
                 address += newRow.Size;
                 _rows = _rows.ExpandedWith(newRow);
                 prevModel = newRow;

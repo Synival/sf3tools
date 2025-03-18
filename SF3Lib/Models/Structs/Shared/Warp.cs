@@ -8,13 +8,20 @@ namespace SF3.Models.Structs.Shared {
         private readonly int type;
         private readonly int map;
 
-        public Warp(IByteData data, int id, string name, int address)
+        public Warp(IByteData data, int id, string name, int address, Warp prevWarp)
         : base(data, id, name, address, 0x04) {
+            PrevWarp = prevWarp;
+
             unknown1 = Address;
             unknown2 = Address + 1;
             type     = Address + 2;
             map      = Address + 3;
         }
+
+        public Warp PrevWarp { get; }
+
+        [TableViewModelColumn(displayOrder: -1, displayFormat: "X2")]
+        public int WarpID => (WarpUnknown1 == 0x00 && WarpUnknown2 == 0x00 && WarpType == 0x00) ? 0 : (PrevWarp?.WarpID ?? 0) + 1;
 
         [TableViewModelColumn(displayOrder: 0, displayName: "+0x00", displayFormat: "X2")]
         [BulkCopy]
@@ -23,7 +30,7 @@ namespace SF3.Models.Structs.Shared {
             set => Data.SetByte(unknown1, (byte) value);
         }
 
-        [TableViewModelColumn(displayOrder: 1, displayName: "+0x02", displayFormat: "X2")]
+        [TableViewModelColumn(displayOrder: 1, displayName: "+0x01", displayFormat: "X2")]
         [BulkCopy]
         public int WarpUnknown2 {
             get => Data.GetByte(unknown2);
@@ -43,5 +50,8 @@ namespace SF3.Models.Structs.Shared {
             get => Data.GetByte(map);
             set => Data.SetByte(map, (byte) value);
         }
+
+        [TableViewModelColumn(displayOrder: 4, displayName: "MPD Tie-In", displayFormat: "X2")]
+        public int? MPDTieIn => (WarpID > 0) ? WarpID + 0x10 : (int?) null;
     }
 }
