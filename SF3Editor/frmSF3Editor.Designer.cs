@@ -172,6 +172,7 @@ namespace SF3Editor {
             tsmiFile_ApplyDFR.ShortcutKeys =  System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift | System.Windows.Forms.Keys.A;
             tsmiFile_ApplyDFR.Size = new Size(236, 22);
             tsmiFile_ApplyDFR.Text = "Apply DFR File...";
+            tsmiFile_ApplyDFR.Click += tsmiFile_ApplyDFR_Click;
             // 
             // tsmiFile_CreateDFR
             // 
@@ -180,6 +181,7 @@ namespace SF3Editor {
             tsmiFile_CreateDFR.ShortcutKeys =  System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift | System.Windows.Forms.Keys.C;
             tsmiFile_CreateDFR.Size = new Size(236, 22);
             tsmiFile_CreateDFR.Text = "Create DFR File...";
+            tsmiFile_CreateDFR.Click += tsmiFile_CreateDFR_Click;
             // 
             // tsmiFile_Sep3
             // 

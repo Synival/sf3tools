@@ -370,6 +370,65 @@ namespace SF3Editor {
             tsmiScenario_PremiumDisk.Checked = _openScenario == ScenarioType.PremiumDisk;
         }
 
+        /// <summary>
+        /// Creates an "Open" dialog and, if a DFR file was chosen, does the following:
+        /// 1. Create a ByteDiff() from the DFR file
+        /// 2. Close the current document
+        /// 3. Reload the current document, but with the new data instead of its own
+        /// </summary>
+        /// <param name="file">The loaded file to apply a DFR file to.</param>
+        /// <returns>'true' if the DFR was applied and the file was reloaded successfully and the user did not cancel. Otherwise, 'false'.</returns>
+        public bool ApplyDFRDialog(LoadedFile file) {
+            if (file.Loader.IsModified)
+                if (PromptForSave(file) == DialogResult.Cancel)
+                    return false;
+
+            var form = new frmDFRTool(CommandType.Apply, dialogMode: true);
+            form.ApplyDFRInputData = file.Loader.ByteData.GetDataCopy();
+            form.ApplyDFRInMemory = true;
+            var dialogResult = form.ShowDialog();
+            if (dialogResult != DialogResult.OK)
+                return false;
+
+            try {
+                var filename = file.Loader.Filename;
+                var scenario = file.Scenario;
+                var fileType = file.FileType;
+                var newBytes = form.ApplyDFRInMemoryOutput;
+
+                if (newBytes == null)
+                    throw new NullReferenceException("Internal error: No result from 'Apply DFR' command!");
+
+                if (!CloseFile(file, true))
+                    return false;
+
+                LoadedFile? newFile = null;
+                using (var newBytesStream = new MemoryStream(newBytes))
+                    if ((newFile = LoadFile(filename, scenario, fileType, newBytesStream)) == null)
+                        return false;
+
+                newFile.Loader.IsModified = true;
+            }
+            catch (Exception e) {
+                ErrorMessage("Error loading modified data:\n\n" + e.Message);
+                return false;
+            }
+
+            return true;
+        }
+
+        /// <summary>
+        /// Opens the DFRToolGUI as a modal dialog with the current editor data as its "Altered File".
+        /// </summary>
+        /// <param name="file">The loaded file to create a DFR file from.</param>
+        /// <returns>'true' if the DFR file was created successfully and the user did not cancel. Otherwise, 'false'.</returns>
+        public bool CreateDFRDialog(LoadedFile file) {
+            var form = new frmDFRTool(CommandType.Create, dialogMode: true);
+            form.CreateDFRAlteredData = file.Loader.ByteData.GetDataCopy();
+            var dialogResult = form.ShowDialog();
+            return (dialogResult == DialogResult.OK);
+        }
+
         private void tsmiFile_Open_Click(object sender, EventArgs e) => OpenFileDialog();
 
         private void tsmiFile_Save_Click(object sender, EventArgs e) {
@@ -385,6 +444,16 @@ namespace SF3Editor {
         private void tsmiFile_Close_Click(object sender, EventArgs e) {
             if (_selectedFile != null)
                 _ = CloseFile(_selectedFile);
+        }
+
+        private void tsmiFile_ApplyDFR_Click(object sender, EventArgs e) {
+            if (_selectedFile != null)
+                ApplyDFRDialog(_selectedFile);
+        }
+
+        private void tsmiFile_CreateDFR_Click(object sender, EventArgs e) {
+            if (_selectedFile != null)
+                CreateDFRDialog(_selectedFile);
         }
 
         private void tsmiFile_Exit_Click(object sender, EventArgs e) => Close();
