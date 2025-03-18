@@ -12,7 +12,24 @@ namespace SF3.Win.Views.X002 {
                 return null;
 
             var ngc = Model.NameGetterContext;
-            // TODO: tables!
+            if (Model.ItemTable != null)
+                CreateChild(new TableView("Items", Model.ItemTable, ngc));
+            if (Model.SpellTable != null)
+                CreateChild(new TableView("Spells", Model.SpellTable, ngc));
+            if (Model.WeaponSpellTable != null)
+                CreateChild(new TableView("Weapon Spells", Model.WeaponSpellTable, ngc));
+            if (Model.LoadingTable != null)
+                CreateChild(new TableView("Loading", Model.LoadingTable, ngc));
+            if (Model.LoadedOverrideTable != null)
+                CreateChild(new TableView("Loading Overrides", Model.LoadedOverrideTable, ngc));
+            if (Model.StatBoostTable != null)
+                CreateChild(new TableView("Stat Boosts", Model.StatBoostTable, ngc));
+            if (Model.WeaponRankTable != null)
+                CreateChild(new TableView("Weapon Rank Attack", Model.WeaponRankTable, ngc));
+            if (Model.AttackResistTable != null)
+                CreateChild(new TableView("Attack/Resist", Model.AttackResistTable, ngc));
+            if (Model.WarpTable != null)
+                CreateChild(new TableView("Warps (Scn1)", Model.WarpTable, ngc));
 
             return Control;
         }
