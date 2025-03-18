@@ -12,7 +12,8 @@ namespace SF3.Win.Views.X019 {
                 return null;
 
             var ngc = Model.NameGetterContext;
-            // TODO: tables!
+            if (Model.MonsterTable != null)
+                CreateChild(new MonstersView("Monsters", Model.MonsterTable, ngc));
 
             return Control;
         }
