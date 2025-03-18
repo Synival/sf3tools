@@ -12,12 +12,14 @@ namespace SF3.Models.Structs.X002 {
             resist = Address + 0xd2; // 1 byte
         }
 
+        [TableViewModelColumn(displayOrder: 0)]
         [BulkCopy]
         public int Attack {
             get => Data.GetByte(attack);
             set => Data.SetByte(attack, (byte) value);
         }
 
+        [TableViewModelColumn(displayOrder: 1)]
         [BulkCopy]
         public int Resist {
             get => Data.GetByte(resist);
