@@ -70,7 +70,7 @@ namespace SF3.Models.Structs.X002 {
             set => Data.SetByte(WeaponTypeLocation, (byte) value);
         }
 
-        [TableViewModelColumn(displayOrder: 23.9f, displayFormat: "X2", displayGroup: "FlagsDebug")]
+        [TableViewModelColumn(displayOrder: 25, displayFormat: "X2", displayGroup: "FlagsDebug")]
         [BulkCopy]
         public int EffectsEquip {
             get => Data.GetByte(EffectsEquipLocation);
