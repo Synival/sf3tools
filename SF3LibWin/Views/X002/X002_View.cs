@@ -13,7 +13,7 @@ namespace SF3.Win.Views.X002 {
 
             var ngc = Model.NameGetterContext;
             if (Model.ItemTable != null)
-                CreateChild(new TableView("Items", Model.ItemTable, ngc));
+                CreateChild(new ItemsView("Items", Model.ItemTable, ngc));
             if (Model.SpellTable != null)
                 CreateChild(new TableView("Spells", Model.SpellTable, ngc));
             if (Model.WeaponSpellTable != null)
