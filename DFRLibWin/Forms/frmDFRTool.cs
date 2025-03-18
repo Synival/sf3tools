@@ -1,4 +1,5 @@
 using System;
+using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 using DFRLib.Types;
@@ -41,19 +42,32 @@ namespace DFRLib.Win.Forms {
 
             // Move content from the tab to the main window, delete the tab, and resize accordingly.
             if (command != null) {
-                var widthDiff  = tabCommand.Width  - tabCommand.DisplayRectangle.Width  + tabCommand.Margin.Horizontal;
-                var heightDiff = tabCommand.Height - tabCommand.DisplayRectangle.Height + tabCommand.Margin.Vertical;
+                SuspendLayout();
+
+                const int c_margin = 6;
+                const int c_margin2 = c_margin * 2;
+
+                var widthDiff  = tabCommand.Width  - tabCommand.DisplayRectangle.Width  + tabCommand.Margin.Horizontal - c_margin2;
+                var heightDiff = tabCommand.Height - tabCommand.DisplayRectangle.Height + tabCommand.Margin.Vertical - c_margin2;
 
                 // Unanchor the tab control so it won't resize itself (and its contents) when we reduce window sizes.
                 tabCommand.Anchor = AnchorStyles.None;
-                this.MinimumSize = new System.Drawing.Size(this.MinimumSize.Width - widthDiff, this.MinimumSize.Height - heightDiff);
+                this.MinimumSize = new Size(this.MinimumSize.Width - widthDiff, this.MinimumSize.Height - heightDiff);
                 this.Width  -= widthDiff;
                 this.Height -= heightDiff;
-                this.MaximumSize = new System.Drawing.Size(this.MaximumSize.Width - widthDiff, this.MaximumSize.Height - heightDiff);
+                this.MaximumSize = new Size(this.MaximumSize.Width - widthDiff, this.MaximumSize.Height - heightDiff);
 
-                this.Controls.AddRange(tabCommand.SelectedTab!.Controls.Cast<Control>().ToArray());
+                var panel = new Panel();
+                panel.Location = new Point(c_margin, c_margin);
+                panel.Size = new Size(this.Width - c_margin2, this.Height - c_margin2);
+                panel.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+                panel.Controls.AddRange(tabCommand.SelectedTab!.Controls.Cast<Control>().ToArray());
+                this.Controls.Add(panel);
+
                 this.Controls.Remove(tabCommand);
-                this.BackColor = System.Drawing.SystemColors.Control;
+                this.BackColor = SystemColors.Control;
+
+                ResumeLayout();
             }
         }
 
