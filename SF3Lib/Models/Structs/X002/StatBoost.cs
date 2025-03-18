@@ -10,6 +10,7 @@ namespace SF3.Models.Structs.X002 {
             stat = Address; // 1 byte
         }
 
+        [TableViewModelColumn(displayOrder: 0, displayName: "Stat Value")]
         [BulkCopy]
         public int Stat {
             get => Data.GetByte(stat);

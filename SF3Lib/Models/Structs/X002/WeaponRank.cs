@@ -16,24 +16,28 @@ namespace SF3.Models.Structs.X002 {
             skill3 = Address + 3; // 1 byte
         }
 
+        [TableViewModelColumn(displayOrder: 0, displayName: "Skill0 Atk+")]
         [BulkCopy]
         public int Skill0 {
             get => Data.GetByte(skill0);
             set => Data.SetByte(skill0, (byte) value);
         }
 
+        [TableViewModelColumn(displayOrder: 0, displayName: "Skill1 Atk+")]
         [BulkCopy]
         public int Skill1 {
             get => Data.GetByte(skill1);
             set => Data.SetByte(skill1, (byte) value);
         }
 
+        [TableViewModelColumn(displayOrder: 0, displayName: "Skill2 Atk+")]
         [BulkCopy]
         public int Skill2 {
             get => Data.GetByte(skill2);
             set => Data.SetByte(skill2, (byte) value);
         }
 
+        [TableViewModelColumn(displayOrder: 0, displayName: "Skill3 Atk+")]
         [BulkCopy]
         public int Skill3 {
             get => Data.GetByte(skill3);
