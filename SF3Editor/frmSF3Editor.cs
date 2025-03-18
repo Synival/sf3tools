@@ -5,6 +5,8 @@ using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 using CommonLib.NamedValues;
+using DFRLib.Types;
+using DFRLib.Win.Forms;
 using SF3.ModelLoaders;
 using SF3.NamedValues;
 using SF3.Types;
@@ -83,12 +85,13 @@ namespace SF3Editor {
         /// <summary>
         /// Creates an "Open" dialog and, if a file was chosen, opens it, processes its data, and loads it.
         /// </summary>
-        public bool OpenFileDialog() {
+        /// <returns>A record for the file loaded, or 'null' on failure/cancel.</returns>
+        public LoadedFile OpenFileDialog() {
             var openfile = new OpenFileDialog {
                 Filter = FileDialogFilter
             };
             if (openfile.ShowDialog() != DialogResult.OK)
-                return false;
+                return null;
 
             // Split each filter into a an n-element array of 2 strings
             var filters = openfile.Filter
@@ -101,14 +104,14 @@ namespace SF3Editor {
             var scenario = OpenScenario ?? DetermineScenario(openfile.FileName);
             if (!scenario.HasValue) {
                 ErrorMessage("Can't determine scenario for '" + openfile.FileName + "'.");
-                return false;
+                return null;
             }
 
             // If we don't know the file type, we can't load it.
             var fileType = DetermineFileType(openfile.FileName, filters[openfile.FilterIndex - 1][1]);
             if (!fileType.HasValue) {
                 ErrorMessage("Can't determine file type for '" + openfile.FileName + "'.");
-                return false;
+                return null;
             }
 
             // Attempt to load the file. Use an explicitly specificed scenario and file type if provided.
@@ -116,25 +119,45 @@ namespace SF3Editor {
         }
 
         /// <summary>
-        /// Opens any file, provided a valid scenario type and file type.
+        /// Opens any file, provided a correct scenario type and file type.
         /// </summary>
         /// <param name="filename">Path/filename of the file to open.</param>
         /// <param name="scenario">Scenario for the file to open.</param>
         /// <param name="fileType">Type of the file to open.</param>
-        /// <returns>'true' when the file has been loaded successfully.</returns>
-        public bool LoadFile(string filename, ScenarioType scenario, SF3FileType fileType) {
+        /// <returns>A record for the file loaded, or 'null' on failure/cancel.</returns>
+        public LoadedFile LoadFile(string filename, ScenarioType scenario, SF3FileType fileType) {
+            try {
+                using (var stream = new FileStream(filename, FileMode.Open, FileAccess.Read))
+                    return LoadFile(filename, scenario, fileType, stream);
+            }
+            catch (Exception) {
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// Opens any file, provided a correct scenario type and file type. The 'filename' provided is just for
+        /// reference; the actual data will come from 'stream'.
+        /// </summary>
+        /// <param name="filename">Path/filename of the file belonging to 'stream'.</param>
+        /// <param name="scenario">Scenario for the file to open.</param>
+        /// <param name="fileType">Type of the file to open.</param>
+        /// <param name="stream">Stream from which the input data comes.</param>
+        /// <returns>A record for the file loaded, or 'null' on failure/cancel.</returns>
+        public LoadedFile LoadFile(string filename, ScenarioType scenario, SF3FileType fileType, Stream stream) {
             // Attempt to the load the file.
             var fileLoader = new ModelFileLoader();
-            bool success = fileLoader.LoadFile(filename, loader
-                => CreateFile(loader.ByteData, fileType, c_nameGetterContexts, scenario));
+            bool success = fileLoader.LoadFile(filename, stream,
+                loader => CreateFile(loader.ByteData, fileType, c_nameGetterContexts, scenario));
 
             if (!success) {
+                // TODO: maybe an actual error???
                 // Wrong file was selected.
                 ErrorMessage($"Data in '{filename}' appears corrupt or invalid.\r\n\r\n" +
                              $"Attempted to open as type '{fileType}' for '{scenario}'.\r\n\r\n" +
                               "Is this the correct type of file and the correct scenario?");
                 fileLoader.Close();
-                return false;
+                return null;
             }
 
             // Create a view for the file.
@@ -169,12 +192,13 @@ namespace SF3Editor {
                 _fileContainerView.RemoveChild(view);
                 fileLoader.Close();
                 ErrorMessage("Failed to create view. Maybe the file isn't supported yet?");
-                return false;
+                return null;
             }
 
             // Focus the tab itself.
             var tabPage = (TabPage) newControl.Parent!;
-            _tabInfos[tabPage] = new TabInfo { FileLoader = fileLoader, View = view };
+            var loadedFile = new LoadedFile(fileLoader, scenario, fileType, tabPage, view);
+            _loadedFiles.Add(loadedFile);
 
             if (_fileContainerView.TabControl.SelectedTab != tabPage)
                 _fileContainerView.TabControl.SelectedTab = tabPage;
@@ -186,18 +210,18 @@ namespace SF3Editor {
                 _ = _fileContainerView.RemoveChild(view);
                 fileLoader.Dispose();
 
-                var ti = _tabInfos.Select(x => new { x.Key, x.Value }).FirstOrDefault(x => x.Value.FileLoader == fileLoader);
-                if (ti != null)
-                    _tabInfos.Remove(ti.Key);
+                var lf = _loadedFiles.FirstOrDefault(x => x.Loader == fileLoader);
+                if (lf != null)
+                    _loadedFiles.Remove(lf);
             };
 
             fileLoader.TitleChanged += (s, e) => {
                 tabPage.Text = fileLoader.Title;
-                if (_selectedFileLoader == fileLoader)
+                if (_selectedFile?.Loader == fileLoader)
                     Text = fileLoader.ModelTitle(_versionTitle);
             };
 
-            return true;
+            return loadedFile;
         }
 
         /// <summary>
@@ -207,15 +231,9 @@ namespace SF3Editor {
         /// <returns>'true' if all tabs were closed, otherwise 'false'.</returns>
         public bool CloseAllFiles(bool force = false) {
             // Close all tags, prompting the user to save for each tab if necessary.
-            while (_fileContainerView.TabControl.TabPages.Count > 0) {
-                var tabPage = _fileContainerView.TabControl.TabPages[0] as TabPage;
-                if (tabPage == null || !_tabInfos.ContainsKey(tabPage)) {
-                    _fileContainerView.TabControl.TabPages.RemoveAt(0);
-                    continue;
-                }
-
-                var tabInfo = _tabInfos[tabPage];
-                var closed = CloseFile(tabInfo.FileLoader, force);
+            while (_loadedFiles.Count > 0) {
+                var loadedFile = _loadedFiles[0];
+                var closed = CloseFile(loadedFile, force);
 
                 // Abort on the first 'Cancel' result or failed closure.
                 if (!closed)
@@ -228,29 +246,30 @@ namespace SF3Editor {
 
         /// <summary>
         /// Closes a file in a tab.
-        /// If may prompt the user to save if the file has been modified.
+        /// It may prompt the user to save if the file has been modified.
         /// </summary>
+        /// <param name="file">The loaded file to close.</param>
         /// <param name="force">When true, a "Save Changes" dialog is never offered.</param>
-        /// <returns>'true' if the file was closed. Returns 'false' if the user clicked 'cancel' when prompted to save changes.</returns>
-        public bool CloseFile(ModelFileLoader loader, bool force = false) {
-            if (loader == null || !loader.IsLoaded)
+        /// <returns>'true' if the file was closed or never existed in the first place. Returns 'false' if the user clicked 'cancel' when prompted to save changes.</returns>
+        public bool CloseFile(LoadedFile file, bool force = false) {
+            if (file?.Loader == null || !file.Loader.IsLoaded)
                 return true;
 
-            if (!force && loader.IsModified)
-                if (PromptForSave(loader) == DialogResult.Cancel)
+            if (!force && file.Loader.IsModified)
+                if (PromptForSave(file) == DialogResult.Cancel)
                     return false;
 
             bool wasFocused = ContainsFocus;
-            _ = loader.Close();
+            _ = file.Loader.Close();
             if (wasFocused && !ContainsFocus)
                 _ = Focus();
 
             return true;
         }
 
-        private DialogResult PromptForSave(ModelFileLoader loader) {
+        private DialogResult PromptForSave(LoadedFile file) {
             var result = MessageBox.Show(
-                $"{loader.Filename} has unsaved changes.\r\n\r\n" +
+                $"{file.Loader.Filename} has unsaved changes.\r\n\r\n" +
                 "Would you like to save?", "Save Changes",
                 MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question
             );
@@ -259,7 +278,7 @@ namespace SF3Editor {
                 return result;
             }
             else if (result == DialogResult.Yes)
-                if (!SaveFile(loader))
+                if (!SaveFile(file))
                     return DialogResult.Cancel;
 
             return result;
@@ -268,36 +287,37 @@ namespace SF3Editor {
         /// <summary>
         /// Raises a "Save As" dialog for saving a file with a specific path/filename.
         /// </summary>
+        /// <param name="file">The loaded file to save.</param>
         /// <returns>'true' if a file was saved successfully (and not cancelled). Otherwise, 'false'.</returns>
-        public bool SaveFileAsDialog(ModelFileLoader loader) {
+        public bool SaveFileAsDialog(LoadedFile file) {
             var savefile = new SaveFileDialog {
                 Filter = FileDialogFilter,
-                FileName = Path.GetFileName(loader.Filename)
+                FileName = Path.GetFileName(file.Loader.Filename)
             };
             if (savefile.ShowDialog() != DialogResult.OK)
                 return false;
 
-            return SaveFile(loader, savefile.FileName);
+            return SaveFile(file, savefile.FileName);
         }
 
         /// <summary>
         /// Saves a file to the path/filename in which it was opened.
         /// </summary>
-        /// <param name="loader">The file to save.</param>
+        /// <param name="file">The loaded file to save.</param>
         /// <returns>'true' if a file was saved successfully. Otherwise, 'false'.</returns>
-        public bool SaveFile(ModelFileLoader loader)
-            => SaveFile(loader, loader.Filename);
+        public bool SaveFile(LoadedFile file)
+            => SaveFile(file, file.Loader.Filename);
 
         /// <summary>
         /// Saves a file to a given path/filename.
         /// </summary>
-        /// <param name="loader">The file to save.</param>
+        /// <param name="file">The loaded file to save.</param>
         /// <param name="filename">The filename to save the file as.</param>
         /// <returns>'true' if a file was saved successfully. Otherwise, 'false'.</returns>
-        private bool SaveFile(ModelFileLoader loader, string filename) {
+        private bool SaveFile(LoadedFile file, string filename) {
             string? error = null;
             try {
-                if (!loader.SaveFile(filename)) {
+                if (!file.Loader.SaveFile(filename)) {
                     // TODO: Actually get an error from SaveFile()!
                     error = "Save failed";
                 }
@@ -309,24 +329,23 @@ namespace SF3Editor {
             if (error != null)
                 ErrorMessage(error);
 
-            return error != null;
+            return error == null;
         }
 
         private void FocusFileTab(TabPage? tabPage) {
-            var ti = (tabPage == null) ? null : _tabInfos.TryGetValue(tabPage, out var tiValue) ? (TabInfo?) tiValue : null;
-
-            var hasFile = ti.HasValue;
-            if (_selectedFileLoader == ti?.FileLoader)
+            var file = (tabPage == null) ? null : _loadedFiles.FirstOrDefault(x => x.TabPage == tabPage);
+            if (_selectedFile == file)
                 return;
 
+            var hasFile = file != null;
             tsmiFile_Save.Enabled      = hasFile;
             tsmiFile_SaveAs.Enabled    = hasFile;
             tsmiFile_ApplyDFR.Enabled  = hasFile;
             tsmiFile_CreateDFR.Enabled = hasFile;
             tsmiFile_Close.Enabled     = hasFile;
 
-            _selectedFileLoader     = ti?.FileLoader;
-            Text = _selectedFileLoader == null ? _versionTitle : _selectedFileLoader.ModelTitle(_versionTitle);
+            _selectedFile = file;
+            Text = file == null ? _versionTitle : file.Loader.ModelTitle(_versionTitle);
         }
 
         /// <summary>
@@ -354,18 +373,18 @@ namespace SF3Editor {
         private void tsmiFile_Open_Click(object sender, EventArgs e) => OpenFileDialog();
 
         private void tsmiFile_Save_Click(object sender, EventArgs e) {
-            if (_selectedFileLoader != null)
-                _ = SaveFile(_selectedFileLoader);
+            if (_selectedFile != null)
+                _ = SaveFile(_selectedFile);
         }
 
         private void tsmiFile_SaveAs_Click(object sender, EventArgs e) {
-            if (_selectedFileLoader != null)
-                _ = SaveFileAsDialog(_selectedFileLoader);
+            if (_selectedFile != null)
+                _ = SaveFileAsDialog(_selectedFile);
         }
 
         private void tsmiFile_Close_Click(object sender, EventArgs e) {
-            if (_selectedFileLoader != null)
-                _ = CloseFile(_selectedFileLoader);
+            if (_selectedFile != null)
+                _ = CloseFile(_selectedFile);
         }
 
         private void tsmiFile_Exit_Click(object sender, EventArgs e) => Close();
@@ -401,18 +420,29 @@ namespace SF3Editor {
             );
         }
 
-        private struct TabInfo {
-            public ModelFileLoader FileLoader;
-            public FileView View;
+        public class LoadedFile {
+            public LoadedFile(ModelFileLoader loader, ScenarioType scenario, SF3FileType fileType, TabPage tabPage, FileView view) {
+                Loader   = loader;
+                Scenario = scenario;
+                FileType = fileType;
+                TabPage  = tabPage;
+                View     = view;
+            }
+
+            public readonly ModelFileLoader Loader;
+            public readonly ScenarioType Scenario;
+            public readonly SF3FileType FileType;
+            public readonly TabPage TabPage;
+            public readonly FileView View;
+
         };
 
-        private Dictionary<TabPage, TabInfo> _tabInfos = [];
+        private List<LoadedFile> _loadedFiles = [];
+        private LoadedFile? _selectedFile = null;
 
         private readonly string _baseTitle;
         private readonly string _versionTitle;
         private readonly TabView _fileContainerView;
         private readonly AppState _appState;
-
-        private ModelFileLoader? _selectedFileLoader = null;
     }
 }
