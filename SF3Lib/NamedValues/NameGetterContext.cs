@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Reflection;
 using CommonLib.NamedValues;
@@ -57,6 +58,7 @@ namespace SF3.NamedValues {
                 { NamedValueType.FileIndex,           new SubMethods((o, p, v, a) => new NameAndInfo(v, ValueNames.FileIndexInfo.Info[Scenario])) },
                 { NamedValueType.FriendshipBonusType, new SubMethods((o, p, v, a) => new NameAndInfo(v, ValueNames.FriendshipBonusTypeInfo)) },
                 { NamedValueType.Item,                new SubMethods((o, p, v, a) => new NameAndInfo(v, ValueNames.ItemInfo.Info[Scenario])) },
+                { NamedValueType.Load,                new SubMethods((o, p, v, a) => new NameAndInfo(v, ValueNames.LoadInfo.Info[Scenario])) },
                 { NamedValueType.Monster,             new SubMethods((o, p, v, a) => new NameAndInfo(v, ValueNames.MonsterInfo.Info[Scenario])) },
                 { NamedValueType.MonsterForSlot,      new SubMethods((o, p, v, a) => new NameAndInfo(v, ValueNames.MonsterForSlotInfo.Info[Scenario])) },
                 { NamedValueType.MovementType,        new SubMethods((o, p, v, a) => new NameAndInfo(v, ValueNames.MovementTypeInfo)) },
@@ -89,7 +91,7 @@ namespace SF3.NamedValues {
         }
 
         public string GetName(object obj, PropertyInfo property, object value, params object[] parameters)
-            => _nameGetters[(NamedValueType) parameters[0]].GetNameAndInfo(obj, property, (int) value, parameters).Name;
+            => _nameGetters[(NamedValueType) parameters[0]].GetNameAndInfo(obj, property, Convert.ToInt32(value), parameters).Name;
         public INamedValueInfo GetInfo(object obj, PropertyInfo property, params object[] parameters)
             => _nameGetters[(NamedValueType) parameters[0]].GetNameAndInfo(obj, property, 0, parameters).Info;
 
@@ -98,12 +100,7 @@ namespace SF3.NamedValues {
             if (!_nameGetters.ContainsKey(valueType))
                 return false;
 
-            var valueInt =
-                (value is int)    ? (int) value :
-                (value is uint)   ? (int) ((uint) value) :
-                (value is short)  ? (int) ((short) value) :
-                (value is ushort) ? (int) ((ushort) value) : 0;
-
+            var valueInt = Convert.ToInt32(value);
             return _nameGetters[valueType].CanGetName(obj, property, valueInt, parameters);
         }
 

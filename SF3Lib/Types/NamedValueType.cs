@@ -13,6 +13,7 @@ namespace SF3.Types {
         FileIndex,
         FriendshipBonusType,
         Item,
+        Load,
         Monster,
         MonsterForSlot,
         MovementType,

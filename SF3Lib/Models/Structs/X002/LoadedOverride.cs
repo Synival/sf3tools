@@ -35,8 +35,9 @@ namespace SF3.Models.Structs.X002 {
             extraChr   = Address + 0x22; // 4 bytes chr extra?
         }
 
-        [TableViewModelColumn(displayOrder: 0, displayName: "MapID", displayFormat: "X2")]
+        [TableViewModelColumn(displayOrder: 0, displayName: "MapID", minWidth: 120)]
         [BulkCopy]
+        [NameGetter(NamedValueType.Load)]
         public int MOMapID {
             get => Data.GetWord(mapID);
             set => Data.SetWord(mapID, value);
