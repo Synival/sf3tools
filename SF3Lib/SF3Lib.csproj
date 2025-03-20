@@ -229,9 +229,6 @@
     <Content Include="Resources\X002StatList.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\S1\Warps.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Include="Resources\X013StatList.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

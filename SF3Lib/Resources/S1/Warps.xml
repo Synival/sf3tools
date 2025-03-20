@@ -1,8 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
-<items>
-    <!-- Add any known values for S1 WarpIndexes here.
-         Not all values need to be provided, and order is irrelevant. -->
-    <item value="0x00" name="WarpIndex0" />
-    <item value="0x0A" name="WarpIndex10" />
-    <!-- etc. -->
-</items>

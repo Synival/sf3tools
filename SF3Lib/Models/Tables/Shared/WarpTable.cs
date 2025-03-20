@@ -7,36 +7,28 @@ using SF3.ByteData;
 using SF3.Models.Structs.Shared;
 
 namespace SF3.Models.Tables.Shared {
-    public class WarpTable : ResourceTable<Warp> {
-        protected WarpTable(IByteData data, string name, string resourceFile, int address, INameGetterContext nameGetterContext)
-        : base(data, name, resourceFile, address, 1000) {
+    public class WarpTable : TerminatedTable<Warp> {
+        protected WarpTable(IByteData data, string name, int address, INameGetterContext nameGetterContext)
+        : base(data, name, address, terminatedBytes: 4, maxSize: 1000) {
             NameGetterContext = nameGetterContext;
         }
 
-        public static WarpTable Create(IByteData data, string name, string resourceFile, int address, INameGetterContext nameGetterContext) {
-            var newTable = new WarpTable(data, name, resourceFile, address, nameGetterContext);
+        public static WarpTable Create(IByteData data, string name, int address, INameGetterContext nameGetterContext) {
+            var newTable = new WarpTable(data, name, address, nameGetterContext);
             if (!newTable.Load())
                 throw new InvalidOperationException("Couldn't initialize table");
             return newTable;
         }
 
         public override bool Load() {
-            var values = ResourceFile != null
-                ? ResourceUtils.GetValueNameDictionaryFromXML(ResourceFile)
-                : new Dictionary<int, string>();
-
-            _rows = new Warp[0];
-            var address = Address;
-            Warp prevModel = null;
-            for (var i = 0; prevModel == null || prevModel.LoadID != 0x1FF; i++) {
-                if (i == MaxSize)
-                    throw new IndexOutOfRangeException();
-                var newRow = new Warp(Data, i, values.ContainsKey(i) ? values[i] : "WarpIndex" + i, address, prevModel, NameGetterContext);
-                address += newRow.Size;
-                _rows = _rows.ExpandedWith(newRow);
-                prevModel = newRow;
-            }
-            return true;
+            Warp prevWarp = null;
+            return Load(
+                (id, addr) => new Warp(Data, id, "WarpIndex" + id.ToString("D3"), addr, prevWarp, NameGetterContext),
+                (rows, prevRow) => {
+                    prevWarp = prevRow;
+                    return (prevRow.LoadID != 0x1FF);
+                }
+            );
         }
 
         public INameGetterContext NameGetterContext { get; }
