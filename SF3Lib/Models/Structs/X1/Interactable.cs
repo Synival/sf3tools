@@ -64,11 +64,13 @@ namespace SF3.Models.Structs.X1 {
             set => Data.SetWord(_itemIDAddr, value);
         }
 
-        [TableViewModelColumn(displayOrder: 6, isReadOnly: true, displayFormat: "X2")]
+        [TableViewModelColumn(displayOrder: 6, displayName: "MPD Tie-In", isReadOnly: true, displayFormat: "X2")]
         [BulkCopy]
-        public string MPDTieInID
-            => Data.GetWord(_eventNumberAddr) <= 0x0f
-                ? (Data.GetWord(_eventNumberAddr) + 0x30).ToString("X2")
-                : "";
+        public byte? MPDTieIn {
+            get {
+                var eventNumber = Data.GetWord(_eventNumberAddr);
+                return (eventNumber <= 0x0f) ? (byte) (eventNumber + 0x30) : (byte?) null;
+            }
+        }
     }
 }
