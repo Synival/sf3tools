@@ -3184,18 +3184,18 @@
     <item value="0x0C6D" name="" />
     <item value="0x0C6E" name="" />
     <item value="0x0C6F" name="" />
-    <item value="0x0C70" name="Top 2nd Left Barrel" />
-    <item value="0x0C71" name="2nd Top Left Barrel" />
-    <item value="0x0C72" name="Left of Treasure Barrel" />
-    <item value="0x0C73" name="Front of Treasure Barrel" />
-    <item value="0x0C74" name="Far behind Treasure Barrel" />
-    <item value="0x0C75" name="Left between Treasure Barrel" />
-    <item value="0x0C76" name="Middle between barrel" />
-    <item value="0x0C77" name="Far middle between treasure barrel" />
-    <item value="0x0C78" name="Far left 3rd treasure barrel" />
-    <item value="0x0C79" name="Near left 3rd treasure barrel" />
-    <item value="0x0C7A" name="Right 3rd treasure barrel" />
-    <item value="0x0C7B" name="Far right 3rd treasure barrel" />
+    <item value="0x0C70" name="Scn3 Battle 12 Ruins Top 2nd Left Barrel" />
+    <item value="0x0C71" name="Scn3 Battle 12 Ruins 2nd Top Left Barrel" />
+    <item value="0x0C72" name="Scn3 Battle 12 Ruins Left of Treasure Barrel" />
+    <item value="0x0C73" name="Scn3 Battle 12 Ruins Front of Treasure Barrel" />
+    <item value="0x0C74" name="Scn3 Battle 12 Ruins Far behind Treasure Barrel" />
+    <item value="0x0C75" name="Scn3 Battle 12 Ruins Left between Treasure Barrel" />
+    <item value="0x0C76" name="Scn3 Battle 12 Ruins Middle between barrel" />
+    <item value="0x0C77" name="Scn3 Battle 12 Ruins Far middle between treasure barrel" />
+    <item value="0x0C78" name="Scn3 Battle 12 Ruins Far left 3rd treasure barrel" />
+    <item value="0x0C79" name="Scn3 Battle 12 Ruins Near left 3rd treasure barrel" />
+    <item value="0x0C7A" name="Scn3 Battle 12 Ruins Right 3rd treasure barrel" />
+    <item value="0x0C7B" name="Scn3 Battle 12 Ruins Far right 3rd treasure barrel" />
     <item value="0x0C7C" name="Scn3 Battle 2 Barrel 1" />
     <item value="0x0C7D" name="Scn3 Battle 2 Barrel 2" />
     <item value="0x0C7E" name="Scn3 Battle 2 Barrel 3 (Power Wine)" />
