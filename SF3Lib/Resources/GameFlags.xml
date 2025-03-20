@@ -1335,7 +1335,7 @@
     <item value="0x0534" name="Battle 122 ruins barrel with healing drop" />
     <item value="0x0535" name="" />
     <item value="0x0536" name="" />
-    <item value="0x0537" name="" />
+    <item value="0x0537" name="Scn1 Battle 22 Ruins Barrel (Fairy Powder)" />
     <item value="0x0538" name="Brave Apple in Barrel (Battle 125)" />
     <item value="0x0539" name="Barrel next to brave apple destroyed (Battle 125)" />
     <item value="0x053A" name="Leftmost barrel blocking door destroyed (Battle 125)" />
@@ -2120,8 +2120,8 @@
     <item value="0x0845" name="" />
     <item value="0x0846" name="" />
     <item value="0x0847" name="" />
-    <item value="0x0848" name="" />
-    <item value="0x0849" name="" />
+    <item value="0x0848" name="Scn2 Battle 11 Outside Tree Barrel 1" />
+    <item value="0x0849" name="Scn2 Battle 11 Outside Tree Barrel 2" />
     <item value="0x084A" name="" />
     <item value="0x084B" name="" />
     <item value="0x084C" name="" />
@@ -2326,34 +2326,34 @@
     <item value="0x0913" name="Barrel closest to Priest destroyed (Saraband Pier)" />
     <item value="0x0914" name="Barrel Next to health Bread destroyed" />
     <item value="0x0915" name="Health Bread in Barrel (Saraband Pier)" />
-    <item value="0x0916" name="" />
-    <item value="0x0917" name="" />
+    <item value="0x0916" name="Scn2 Battle 3 Ruins Barrel 1" />
+    <item value="0x0917" name="Scn2 Battle 3 Ruins Barrel 1" />
     <item value="0x0918" name="" />
-    <item value="0x0919" name="" />
-    <item value="0x091A" name="" />
-    <item value="0x091B" name="" />
-    <item value="0x091C" name="" />
-    <item value="0x091D" name="" />
-    <item value="0x091E" name="" />
-    <item value="0x091F" name="" />
-    <item value="0x0920" name="" />
-    <item value="0x0921" name="" />
-    <item value="0x0922" name="" />
-    <item value="0x0923" name="" />
-    <item value="0x0924" name="" />
-    <item value="0x0925" name="" />
-    <item value="0x0926" name="" />
+    <item value="0x0919" name="Scn2 Battle 10 Barrel 1" />
+    <item value="0x091A" name="Scn2 Battle 10 Barrel 2" />
+    <item value="0x091B" name="Scn2 Battle 10 Barrel 3 (Quick Chicken)" />
+    <item value="0x091C" name="Scn2 Battle 10 Barrel 4" />
+    <item value="0x091D" name="Scn2 Battle 10 Barrel 5 (Healing Drop)" />
+    <item value="0x091E" name="Scn2 Battle 10 Barrel 6" />
+    <item value="0x091F" name="Scn2 Battle 17 Ruins Barrel 1" />
+    <item value="0x0920" name="Scn2 Battle 17 Ruins Barrel 2" />
+    <item value="0x0921" name="Scn2 Battle 17 Ruins Barrel 3" />
+    <item value="0x0922" name="Scn2 Battle 17 Ruins Barrel 4" />
+    <item value="0x0923" name="Scn2 Battle 17 Ruins Barrel 5 (Small Mithril)" />
+    <item value="0x0924" name="Scn2 Battle 21 Barrel 1" />
+    <item value="0x0925" name="Scn2 Battle 21 Barrel 2" />
+    <item value="0x0926" name="Scn2 Battle 21 Barrel 3" />
     <item value="0x0927" name="" />
-    <item value="0x0928" name="" />
+    <item value="0x0928" name="Scn2 Battle 21 Barrel 4" />
     <item value="0x0929" name="Scn2 battle 27 empty barrel" />
     <item value="0x092A" name="Scn2 battle 27 small mithril barrel" />
     <item value="0x092B" name="Scn2 battle 27 empty barrel" />
     <item value="0x092C" name="Scn2 battle 27 goddess tear barrel" />
     <item value="0x092D" name="Scn2 battle 27 ultra lance barrel AND scn2 battle 27 empty ruins barrel" />
     <item value="0x092E" name="Scn2 battle 27 empty barrel AND scn2 battle 27 small mithril ruins barrel" />
-    <item value="0x092F" name="" />
-    <item value="0x0930" name="" />
-    <item value="0x0931" name="" />
+    <item value="0x092F" name="Scn2 Battle 28 Tank Barrel 1" />
+    <item value="0x0930" name="Scn2 Battle 28 Tank Barrel 2" />
+    <item value="0x0931" name="Scn2 Battle 28 Tank Barrel 3" />
     <item value="0x0932" name="" />
     <item value="0x0933" name="" />
     <item value="0x0934" name="" />
@@ -3196,22 +3196,22 @@
     <item value="0x0C79" name="Near left 3rd treasure barrel" />
     <item value="0x0C7A" name="Right 3rd treasure barrel" />
     <item value="0x0C7B" name="Far right 3rd treasure barrel" />
-    <item value="0x0C7C" name="" />
-    <item value="0x0C7D" name="" />
-    <item value="0x0C7E" name="" />
-    <item value="0x0C7F" name="" />
-    <item value="0x0C80" name="" />
+    <item value="0x0C7C" name="Scn3 Battle 2 Barrel 1" />
+    <item value="0x0C7D" name="Scn3 Battle 2 Barrel 2" />
+    <item value="0x0C7E" name="Scn3 Battle 2 Barrel 3 (Power Wine)" />
+    <item value="0x0C7F" name="Scn3 Battle 2 Barrel 4 (Healing Drop)" />
+    <item value="0x0C80" name="Scn3 Battle 2 Barrel 5" />
     <item value="0x0C81" name="" />
-    <item value="0x0C82" name="" />
-    <item value="0x0C83" name="" />
-    <item value="0x0C84" name="" />
-    <item value="0x0C85" name="" />
-    <item value="0x0C86" name="" />
-    <item value="0x0C87" name="" />
-    <item value="0x0C88" name="" />
-    <item value="0x0C89" name="" />
-    <item value="0x0C8A" name="" />
-    <item value="0x0C8B" name="" />
+    <item value="0x0C82" name="Scn3 Battle 8 Barrel 1 (Dark Matter)" />
+    <item value="0x0C83" name="Scn3 Battle 8 Barrel 2 (Large Mithril)" />
+    <item value="0x0C84" name="Scn3 Battle 8 Barrel 3" />
+    <item value="0x0C85" name="Scn3 Battle 8 Barrel 4 (Quick Chicken)" />
+    <item value="0x0C86" name="Scn3 Battle 8 Barrel 5" />
+    <item value="0x0C87" name="Scn3 Battle 8 Barrel 6" />
+    <item value="0x0C88" name="Scn3 Battle 18 Barrel 1 (Quick Chicken)" />
+    <item value="0x0C89" name="Scn3 Battle 18 Barrel 1" />
+    <item value="0x0C8A" name="Scn3 Battle 18 Barrel 1" />
+    <item value="0x0C8B" name="Scn3 Battle 18 Barrel 1 (Small Mithril)" />
     <item value="0x0C8C" name="" />
     <item value="0x0C8D" name="" />
     <item value="0x0C8E" name="" />
