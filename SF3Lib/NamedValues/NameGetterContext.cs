@@ -58,6 +58,14 @@ namespace SF3.NamedValues {
                 { NamedValueType.FileIndex,           new SubMethods((o, p, v, a) => new NameAndInfo(v, ValueNames.FileIndexInfo.Info[Scenario])) },
                 { NamedValueType.FriendshipBonusType, new SubMethods((o, p, v, a) => new NameAndInfo(v, ValueNames.FriendshipBonusTypeInfo)) },
                 { NamedValueType.GameFlag,            new SubMethods((o, p, v, a) => new NameAndInfo(v, ValueNames.GameFlagInfo)) },
+
+                { NamedValueType.GameFlagOrValue,
+                    new SubMethods(
+                        (o, p, v, a) => GetGameFlagValue(o, p, v, a),
+                        (o, p, v, a) => CanGetGameFlagValue(o, p, v, a),
+                        (o, p, a)    => CanGetGameFlagValue(o, p, 0, a)
+                    ) },
+
                 { NamedValueType.Item,                new SubMethods((o, p, v, a) => new NameAndInfo(v, ValueNames.ItemInfo.Info[Scenario])) },
                 { NamedValueType.Load,                new SubMethods((o, p, v, a) => new NameAndInfo(v, ValueNames.LoadInfo.Info[Scenario])) },
                 { NamedValueType.Monster,             new SubMethods((o, p, v, a) => new NameAndInfo(v, ValueNames.MonsterInfo.Info[Scenario])) },
@@ -202,6 +210,20 @@ namespace SF3.NamedValues {
                 default:
                     return false;
             }
+        }
+
+        private NameAndInfo GetGameFlagValue(object obj, PropertyInfo property, int value, object[] parameters) {
+            var isGameFlagName = (string) parameters[1];
+            var isGameFlagProperty = obj.GetType().GetProperty(isGameFlagName);
+            var isGameFlagValue = (bool) isGameFlagProperty.GetValue(obj);
+
+            return isGameFlagValue ? _nameGetters[NamedValueType.GameFlag].GetNameAndInfo(obj, property, value, parameters) : null;
+        }
+
+        private bool CanGetGameFlagValue(object obj, PropertyInfo property, int value, object[] parameters) {
+            var isGameFlagName = (string) parameters[1];
+            var isGameFlagProperty = obj.GetType().GetProperty(isGameFlagName);
+            return (bool) isGameFlagProperty.GetValue(obj);
         }
 
         public string Name => Scenario.ToString();

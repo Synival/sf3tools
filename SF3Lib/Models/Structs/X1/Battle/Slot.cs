@@ -506,10 +506,12 @@ namespace SF3.Models.Structs.X1.Battle {
             set => EnemyFlags = (ushort) (value ? (EnemyFlags | 0x0080) : (EnemyFlags & ~0x0080));
         }
 
-        [TableViewModelColumn(displayOrder: 46, minWidth: 200, displayGroup: "Page4")]
+        public bool IsBarrel => EnemyID == 0x5F;
+
+        [TableViewModelColumn(displayOrder: 46, displayName: "Flag Tie-in / Unknown", displayFormat: "X2", minWidth: 200, displayGroup: "Page4")]
         [BulkCopy]
-        [NameGetter(NamedValueType.GameFlag)]
-        public int FlagTieIn {
+        [NameGetter(NamedValueType.GameFlagOrValue, nameof(IsBarrel))]
+        public int FlagTieInOrUnknown {
             get => Data.GetWord(_flagTieInAddr);
             set => Data.SetWord(_flagTieInAddr, value);
         }
