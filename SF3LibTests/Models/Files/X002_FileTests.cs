@@ -239,13 +239,15 @@ namespace SF3.Tests.Models.Files {
                     return;
                 }
 
-                Assert.AreEqual(0, table[0].WarpType);
-                Assert.AreEqual(0, table[0].WarpUnknown1);
-                Assert.AreEqual(0, table[0].WarpUnknown2);
+                Assert.AreEqual(0, table[0].EntranceID);
+                Assert.AreEqual(0, table[0].Flag);
+                Assert.AreEqual(0, table[0].WarpTrigger);
+                Assert.AreEqual(0, table[0].LoadID);
 
-                Assert.AreEqual(130, table[1].WarpType);
-                Assert.AreEqual(15, table[1].WarpUnknown1);
-                Assert.AreEqual(255, table[1].WarpUnknown2);
+                Assert.AreEqual(0, table[1].EntranceID);
+                Assert.AreEqual(0, table[1].Flag);
+                Assert.AreEqual(0, table[1].WarpTrigger);
+                Assert.AreEqual(0, table[1].LoadID);
 
                 Assert.AreEqual(780, table.Length);
             });

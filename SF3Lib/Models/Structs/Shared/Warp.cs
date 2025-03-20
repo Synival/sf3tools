@@ -1,57 +1,83 @@
+using System;
 using CommonLib.Attributes;
+using CommonLib.NamedValues;
 using SF3.ByteData;
+using SF3.Types;
 
 namespace SF3.Models.Structs.Shared {
     public class Warp : Struct {
-        private readonly int unknown1;
-        private readonly int unknown2;
-        private readonly int type;
-        private readonly int map;
-
-        public Warp(IByteData data, int id, string name, int address, Warp prevWarp)
+        public Warp(IByteData data, int id, string name, int address, Warp prevWarp, INameGetterContext nameGetterContext)
         : base(data, id, name, address, 0x04) {
             PrevWarp = prevWarp;
+            NameGetterContext = nameGetterContext;
 
-            unknown1 = Address;
-            unknown2 = Address + 1;
-            type     = Address + 2;
-            map      = Address + 3;
+            Name = "Warp_" + MapName + "_" + (WarpID + 1).ToString("D2");
         }
 
         public Warp PrevWarp { get; }
+        public INameGetterContext NameGetterContext { get; }
 
-        [TableViewModelColumn(displayOrder: -1, displayFormat: "X2")]
-        public int WarpID => (WarpUnknown1 == 0x00 && WarpUnknown2 == 0x00 && WarpType == 0x00) ? 0 : (PrevWarp?.WarpID ?? 0) + 1;
-
-        [TableViewModelColumn(displayOrder: 0, displayName: "+0x00", displayFormat: "X2")]
-        [BulkCopy]
-        public int WarpUnknown1 {
-            get => Data.GetByte(unknown1);
-            set => Data.SetByte(unknown1, (byte) value);
+        public string MapName {
+            get {
+                var prevWarp = PrevWarp;
+                return (prevWarp == null || WarpTrigger == 0)
+                    ? NameGetterContext.GetName(null, null, LoadID, new object[] { NamedValueType.Load })
+                    : prevWarp.MapName;
+            }
         }
 
-        [TableViewModelColumn(displayOrder: 1, displayName: "+0x01", displayFormat: "X2")]
-        [BulkCopy]
-        public int WarpUnknown2 {
-            get => Data.GetByte(unknown2);
-            set => Data.SetByte(unknown2, (byte) value);
+        public int WarpID {
+            get {
+                var prevWarp = PrevWarp;
+                return (prevWarp == null || WarpTrigger == 0) ? 0 : prevWarp.WarpID + 1;
+            }
         }
 
-        [TableViewModelColumn(displayOrder: 2, displayName: "Type", displayFormat: "X2")]
-        [BulkCopy]
-        public int WarpType {
-            get => Data.GetByte(type);
-            set => Data.SetByte(type, (byte) value);
+        private uint RawData {
+            get => (uint) Data.GetDouble(Address);
+            set => Data.SetDouble(Address, (int) value);
         }
 
-        [TableViewModelColumn(displayOrder: 3, displayName: "Map", displayFormat: "X2")]
+        [TableViewModelColumn(displayOrder: 2, displayFormat: "X2")]
         [BulkCopy]
-        public int WarpMap {
-            get => Data.GetByte(map);
-            set => Data.SetByte(map, (byte) value);
+        public byte EntranceID {
+            // First 5 bits (F800,0000)
+            get => (byte) ((RawData & 0xF800_0000u) >> 27);
+            set => RawData = (RawData & ~0xF800_0000u) | ((uint) (value << 27) & 0xF800_0000u);
+        }
+
+        [TableViewModelColumn(displayOrder: 2, displayFormat: "X3")]
+        [BulkCopy]
+        public ushort Flag {
+            // Next 12 bits (07FF,8000)
+            get => (ushort) ((RawData & 0x07FF_8000u) >> 15);
+            set => RawData = (RawData & ~0x07FF_8000u) | ((uint) (value << 15) & 0x07FF_8000u);
+        }
+
+        [TableViewModelColumn(displayOrder: 3, displayFormat: "X2")]
+        [BulkCopy]
+        public byte WarpTrigger {
+            // Next 6 bits (0000,7E00)
+            get => (byte) ((RawData & 0x0000_7E00u) >> 9);
+            set => RawData = (RawData & ~0x0000_7E00u) | ((uint) (value << 9) & 0x0000_7E00u);
+        }
+
+        [TableViewModelColumn(displayOrder: 4, minWidth: 120)]
+        [BulkCopy]
+        [NameGetter(NamedValueType.Load)]
+        public int LoadID {
+            // Next 9 bits (0000,01FF)
+            get => (int) (RawData & 0x0000_01FF);
+            set => RawData = (uint) ((RawData & ~0x0000_01FFu) | (value & 0x0000_01FFu));
         }
 
         [TableViewModelColumn(displayOrder: 4, displayName: "MPD Tie-In", displayFormat: "X2")]
-        public int? MPDTieIn => (WarpID > 0) ? WarpID + 0x10 : (int?) null;
+        public byte? MPDTieIn {
+            get {
+                var warpId = WarpTrigger;
+                var loadId = LoadID;
+                return (warpId >= 0x01 && warpId <= 0x0F && loadId != 0x1FF) ? (byte) (warpId + 0x10u) : (byte?) null;
+            }
+        }
     }
 }

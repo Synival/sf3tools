@@ -89,11 +89,15 @@ namespace SF3.Tests.Models.Files {
             var file = TestCase.Create();
             var table = file.WarpTable;
 
-            Assert.AreEqual(0x41, table[0].WarpMap);
-            Assert.AreEqual(0x00, table[0].WarpType);
+            Assert.AreEqual(0, table[0].EntranceID);
+            Assert.AreEqual(0, table[0].Flag);
+            Assert.AreEqual(0, table[0].WarpTrigger);
+            Assert.AreEqual(0, table[0].LoadID);
 
-            Assert.AreEqual(0x87, table[1].WarpMap);
-            Assert.AreEqual(0x82, table[1].WarpType);
+            Assert.AreEqual(0, table[1].EntranceID);
+            Assert.AreEqual(0, table[1].Flag);
+            Assert.AreEqual(0, table[1].WarpTrigger);
+            Assert.AreEqual(0, table[1].LoadID);
 
             Assert.AreEqual(14, table.Length);
         }
