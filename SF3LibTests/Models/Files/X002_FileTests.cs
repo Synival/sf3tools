@@ -249,7 +249,7 @@ namespace SF3.Tests.Models.Files {
                 Assert.AreEqual(1, table[1].WarpTrigger);
                 Assert.AreEqual(0x02, table[1].LoadID);
 
-                Assert.AreEqual(780, table.Length);
+                Assert.AreEqual(779, table.Length);
             });
         }
     }

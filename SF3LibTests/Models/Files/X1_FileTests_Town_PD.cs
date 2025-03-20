@@ -24,15 +24,11 @@ namespace SF3.Tests.Models.Files {
             var file = TestCase.Create();
             var table = file.EnterTable;
 
-            Assert.AreEqual(0xFFFF, table[1].SceneNumber);
+            Assert.AreEqual(0, table[0].SceneNumber);
             Assert.AreEqual(0, table[0].XPos);
             Assert.AreEqual(0, table[0].ZPos);
 
-            Assert.AreEqual(0xFFFF, table[1].SceneNumber);
-            Assert.AreEqual(0, table[1].XPos);
-            Assert.AreEqual(0, table[1].ZPos);
-
-            Assert.AreEqual(2, table.Length);
+            Assert.AreEqual(1, table.Length);
         }
 
         [TestMethod]
@@ -48,7 +44,7 @@ namespace SF3.Tests.Models.Files {
             Assert.AreEqual(65472, table[1].XPos);
             Assert.AreEqual(0, table[1].ZPos);
 
-            Assert.AreEqual(7, table.Length);
+            Assert.AreEqual(6, table.Length);
         }
 
         [TestMethod]
@@ -56,12 +52,7 @@ namespace SF3.Tests.Models.Files {
             var file = TestCase.Create();
             var table = file.InteractableTable;
 
-            Assert.AreEqual(0xFFFF, table[0].Searched);
-            Assert.AreEqual(0, table[0].EventParameter);
-            Assert.AreEqual(0, table[0].FlagUsed);
-            Assert.AreEqual(0, table[0].EventNumber);
-
-            Assert.AreEqual(1, table.Length);
+            Assert.AreEqual(0, table.Length);
         }
 
         [TestMethod]
@@ -69,10 +60,7 @@ namespace SF3.Tests.Models.Files {
             var file = TestCase.Create();
             var table = file.ArrowTable;
 
-            Assert.AreEqual(0xFFFF, table[0].TextID);
-            Assert.AreEqual(0x00, table[0].PointToWarpMPD);
-
-            Assert.AreEqual(1, table.Length);
+            Assert.AreEqual(0, table.Length);
         }
 
         [TestMethod]
@@ -90,7 +78,7 @@ namespace SF3.Tests.Models.Files {
             Assert.AreEqual(1, table[1].WarpTrigger);
             Assert.AreEqual(0, table[1].LoadID);
 
-            Assert.AreEqual(7, table.Length);
+            Assert.AreEqual(6, table.Length);
         }
     }
 }

@@ -31,7 +31,7 @@ namespace SF3.Tests.Models.Files {
             Assert.AreEqual(7, table[1].TargetX);
             Assert.AreEqual(12, table[1].TargetY);
 
-            Assert.AreEqual(33, table.Length);
+            Assert.AreEqual(32, table.Length);
         }
 
         [TestMethod]
@@ -60,7 +60,7 @@ namespace SF3.Tests.Models.Files {
             Assert.AreEqual(0, table[1].XPos1);
             Assert.AreEqual(63, table[1].ZPos1);
 
-            Assert.AreEqual(33, table.Length);
+            Assert.AreEqual(32, table.Length);
         }
 
         [TestMethod]
@@ -119,12 +119,7 @@ namespace SF3.Tests.Models.Files {
             var table = file.InteractableTable;
 
             // No treasure to be found in PD, as far as I know.
-            Assert.AreEqual(0xFFFF, table[0].Searched);
-            Assert.AreEqual(0, table[0].EventParameter);
-            Assert.AreEqual(0, table[0].FlagUsed);
-            Assert.AreEqual(0, table[0].EventNumber);
-
-            Assert.AreEqual(1, table.Length);
+            Assert.AreEqual(0, table.Length);
         }
 
         [TestMethod]
@@ -165,7 +160,7 @@ namespace SF3.Tests.Models.Files {
             Assert.AreEqual(1, table[1].WarpTrigger);
             Assert.AreEqual(9, table[1].LoadID);
 
-            Assert.AreEqual(5, table.Length);
+            Assert.AreEqual(4, table.Length);
         }
     }
 }

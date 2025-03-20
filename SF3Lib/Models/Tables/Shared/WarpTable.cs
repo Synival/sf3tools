@@ -27,7 +27,8 @@ namespace SF3.Models.Tables.Shared {
                 (rows, prevRow) => {
                     prevWarp = prevRow;
                     return (prevRow.LoadID != 0x1FF);
-                }
+                },
+                false
             );
         }
 
