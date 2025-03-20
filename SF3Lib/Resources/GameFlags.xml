@@ -1,0 +1,4099 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<items>
+    <item value="0x0000" name="Synbios Team ID (1/4)" />
+    <item value="0x0001" name="Synbios Team ID (2/4)" />
+    <item value="0x0002" name="Synbios Team ID (3/4)" />
+    <item value="0x0003" name="Synbios Team ID (4/4)" />
+    <item value="0x0004" name="Dantares Team ID (1/4)" />
+    <item value="0x0005" name="Dantares Team ID (2/4)" />
+    <item value="0x0006" name="Dantares Team ID (3/4)" />
+    <item value="0x0007" name="Dantares Team ID (4/4)" />
+    <item value="0x0008" name="Masqurin Team ID (1/4)" />
+    <item value="0x0009" name="Masqurin Team ID (2/4)" />
+    <item value="0x000A" name="Masqurin Team ID (3/4)" />
+    <item value="0x000B" name="Masqurin Team ID (4/4)" />
+    <item value="0x000C" name="Grace Team ID (1/4)" />
+    <item value="0x000D" name="Grace Team ID (2/4)" />
+    <item value="0x000E" name="Grace Team ID (3/4)" />
+    <item value="0x000F" name="Grace Team ID (4/4)" />
+    <item value="0x0010" name="Hayward Team ID (1/4)" />
+    <item value="0x0011" name="Hayward Team ID (2/4)" />
+    <item value="0x0012" name="Hayward Team ID (3/4)" />
+    <item value="0x0013" name="Hayward Team ID (4/4)" />
+    <item value="0x0014" name="Obright Team ID (1/4)" />
+    <item value="0x0015" name="Obright Team ID (2/4)" />
+    <item value="0x0016" name="Obright Team ID (3/4)" />
+    <item value="0x0017" name="Obright Team ID (4/4)" />
+    <item value="0x0018" name="Irene Team ID (1/4)" />
+    <item value="0x0019" name="Irene Team ID (2/4)" />
+    <item value="0x001A" name="Irene Team ID (3/4)" />
+    <item value="0x001B" name="Irene Team ID (4/4)" />
+    <item value="0x001C" name="Julian Team ID (1/4)" />
+    <item value="0x001D" name="Julian Team ID (2/4)" />
+    <item value="0x001E" name="Julian Team ID (3/4)" />
+    <item value="0x001F" name="Julian Team ID (4/4)" />
+    <item value="0x0020" name="Cybel Team ID (1/4)" />
+    <item value="0x0021" name="Cybel Team ID (2/4)" />
+    <item value="0x0022" name="Cybel Team ID (3/4)" />
+    <item value="0x0023" name="Cybel Team ID (4/4)" />
+    <item value="0x0024" name="Eldar Team ID (1/4)" />
+    <item value="0x0025" name="Eldar Team ID (2/4)" />
+    <item value="0x0026" name="Eldar Team ID (3/4)" />
+    <item value="0x0027" name="Eldar Team ID (4/4)" />
+    <item value="0x0028" name="Kahn Team ID (1/4)" />
+    <item value="0x0029" name="Kahn Team ID (2/4)" />
+    <item value="0x002A" name="Kahn Team ID (3/4)" />
+    <item value="0x002B" name="Kahn Team ID (4/4)" />
+    <item value="0x002C" name="Noon Team ID (1/4)" />
+    <item value="0x002D" name="Noon Team ID (2/4)" />
+    <item value="0x002E" name="Noon Team ID (3/4)" />
+    <item value="0x002F" name="Noon Team ID (4/4)" />
+    <item value="0x0030" name="Justin Team ID (1/4)" />
+    <item value="0x0031" name="Justin Team ID (2/4)" />
+    <item value="0x0032" name="Justin Team ID (3/4)" />
+    <item value="0x0033" name="Justin Team ID (4/4)" />
+    <item value="0x0034" name="Horst Team ID (1/4)" />
+    <item value="0x0035" name="Horst Team ID (2/4)" />
+    <item value="0x0036" name="Horst Team ID (3/4)" />
+    <item value="0x0037" name="Horst Team ID (4/4)" />
+    <item value="0x0038" name="Penn Team ID (1/4)" />
+    <item value="0x0039" name="Penn Team ID (2/4)" />
+    <item value="0x003A" name="Penn Team ID (3/4)" />
+    <item value="0x003B" name="Penn Team ID (4/4)" />
+    <item value="0x003C" name="Ratchet Team ID (1/4)" />
+    <item value="0x003D" name="Ratchet Team ID (2/4)" />
+    <item value="0x003E" name="Ratchet Team ID (3/4)" />
+    <item value="0x003F" name="Ratchet Team ID (4/4)" />
+    <item value="0x0040" name="Frank Team ID (1/4)" />
+    <item value="0x0041" name="Frank Team ID (2/4)" />
+    <item value="0x0042" name="Frank Team ID (3/4)" />
+    <item value="0x0043" name="Frank Team ID (4/4)" />
+    <item value="0x0044" name="Hagane Team ID (1/4)" />
+    <item value="0x0045" name="Hagane Team ID (2/4)" />
+    <item value="0x0046" name="Hagane Team ID (3/4)" />
+    <item value="0x0047" name="Hagane Team ID (4/4)" />
+    <item value="0x0048" name="Murasame Team ID (1/4)" />
+    <item value="0x0049" name="Murasame Team ID (2/4)" />
+    <item value="0x004A" name="Murasame Team ID (3/4)" />
+    <item value="0x004B" name="Murasame Team ID (4/4)" />
+    <item value="0x004C" name="Fynnding Team ID (1/4)" />
+    <item value="0x004D" name="Fynnding Team ID (2/4)" />
+    <item value="0x004E" name="Fynnding Team ID (3/4)" />
+    <item value="0x004F" name="Fynnding Team ID (4/4)" />
+    <item value="0x0050" name="Medion Team ID (1/4)" />
+    <item value="0x0051" name="Medion Team ID (2/4)" />
+    <item value="0x0052" name="Medion Team ID (3/4)" />
+    <item value="0x0053" name="Medion Team ID (4/4)" />
+    <item value="0x0054" name="Campbell Team ID (1/4)" />
+    <item value="0x0055" name="Campbell Team ID (2/4)" />
+    <item value="0x0056" name="Campbell Team ID (3/4)" />
+    <item value="0x0057" name="Campbell Team ID (4/4)" />
+    <item value="0x0058" name="Syntesis Team ID (1/4)" />
+    <item value="0x0059" name="Syntesis Team ID (2/4)" />
+    <item value="0x005A" name="Syntesis Team ID (3/4)" />
+    <item value="0x005B" name="Syntesis Team ID (4/4)" />
+    <item value="0x005C" name="Uryudo Team ID (1/4)" />
+    <item value="0x005D" name="Uryudo Team ID (2/4)" />
+    <item value="0x005E" name="Uryudo Team ID (3/4)" />
+    <item value="0x005F" name="Uryudo Team ID (4/4)" />
+    <item value="0x0060" name="Waltz Team ID (1/4)" />
+    <item value="0x0061" name="Waltz Team ID (2/4)" />
+    <item value="0x0062" name="Waltz Team ID (3/4)" />
+    <item value="0x0063" name="Waltz Team ID (4/4)" />
+    <item value="0x0064" name="Rock Team ID (1/4)" />
+    <item value="0x0065" name="Rock Team ID (2/4)" />
+    <item value="0x0066" name="Rock Team ID (3/4)" />
+    <item value="0x0067" name="Rock Team ID (4/4)" />
+    <item value="0x0068" name="Bernard Team ID (1/4)" />
+    <item value="0x0069" name="Bernard Team ID (2/4)" />
+    <item value="0x006A" name="Bernard Team ID (3/4)" />
+    <item value="0x006B" name="Bernard Team ID (4/4)" />
+    <item value="0x006C" name="Zero Team ID (1/4)" />
+    <item value="0x006D" name="Zero Team ID (2/4)" />
+    <item value="0x006E" name="Zero Team ID (3/4)" />
+    <item value="0x006F" name="Zero Team ID (4/4)" />
+    <item value="0x0070" name="Hazuki Team ID (1/4)" />
+    <item value="0x0071" name="Hazuki Team ID (2/4)" />
+    <item value="0x0072" name="Hazuki Team ID (3/4)" />
+    <item value="0x0073" name="Hazuki Team ID (4/4)" />
+    <item value="0x0074" name="David Team ID (1/4)" />
+    <item value="0x0075" name="David Team ID (2/4)" />
+    <item value="0x0076" name="David Team ID (3/4)" />
+    <item value="0x0077" name="David Team ID (4/4)" />
+    <item value="0x0078" name="Hedva Team ID (1/4)" />
+    <item value="0x0079" name="Hedva Team ID (2/4)" />
+    <item value="0x007A" name="Hedva Team ID (3/4)" />
+    <item value="0x007B" name="Hedva Team ID (4/4)" />
+    <item value="0x007C" name="Gracia Team ID (1/4)" />
+    <item value="0x007D" name="Gracia Team ID (2/4)" />
+    <item value="0x007E" name="Gracia Team ID (3/4)" />
+    <item value="0x007F" name="Gracia Team ID (4/4)" />
+    <item value="0x0080" name="Donhort Team ID (1/4)" />
+    <item value="0x0081" name="Donhort Team ID (2/4)" />
+    <item value="0x0082" name="Donhort Team ID (3/4)" />
+    <item value="0x0083" name="Donhort Team ID (4/4)" />
+    <item value="0x0084" name="Hera Team ID (1/4)" />
+    <item value="0x0085" name="Hera Team ID (2/4)" />
+    <item value="0x0086" name="Hera Team ID (3/4)" />
+    <item value="0x0087" name="Hera Team ID (4/4)" />
+    <item value="0x0088" name="Robby Team ID (1/4)" />
+    <item value="0x0089" name="Robby Team ID (2/4)" />
+    <item value="0x008A" name="Robby Team ID (3/4)" />
+    <item value="0x008B" name="Robby Team ID (4/4)" />
+    <item value="0x008C" name="Arthur Team ID (1/4)" />
+    <item value="0x008D" name="Arthur Team ID (2/4)" />
+    <item value="0x008E" name="Arthur Team ID (3/4)" />
+    <item value="0x008F" name="Arthur Team ID (4/4)" />
+    <item value="0x0090" name="Garosh Team ID (1/4)" />
+    <item value="0x0091" name="Garosh Team ID (2/4)" />
+    <item value="0x0092" name="Garosh Team ID (3/4)" />
+    <item value="0x0093" name="Garosh Team ID (4/4)" />
+    <item value="0x0094" name="Jade Team ID (1/4)" />
+    <item value="0x0095" name="Jade Team ID (2/4)" />
+    <item value="0x0096" name="Jade Team ID (3/4)" />
+    <item value="0x0097" name="Jade Team ID (4/4)" />
+    <item value="0x0098" name="Penko Team ID (1/4)" />
+    <item value="0x0099" name="Penko Team ID (2/4)" />
+    <item value="0x009A" name="Penko Team ID (3/4)" />
+    <item value="0x009B" name="Penko Team ID (4/4)" />
+    <item value="0x009C" name="Pappets Team ID (1/4)" />
+    <item value="0x009D" name="Pappets Team ID (2/4)" />
+    <item value="0x009E" name="Pappets Team ID (3/4)" />
+    <item value="0x009F" name="Pappets Team ID (4/4)" />
+    <item value="0x00A0" name="Kate Team ID (1/4)" />
+    <item value="0x00A1" name="Kate Team ID (2/4)" />
+    <item value="0x00A2" name="Kate Team ID (3/4)" />
+    <item value="0x00A3" name="Kate Team ID (4/4)" />
+    <item value="0x00A4" name="Rogan Team ID (1/4)" />
+    <item value="0x00A5" name="Rogan Team ID (2/4)" />
+    <item value="0x00A6" name="Rogan Team ID (3/4)" />
+    <item value="0x00A7" name="Rogan Team ID (4/4)" />
+    <item value="0x00A8" name="Edmund Team ID (1/4)" />
+    <item value="0x00A9" name="Edmund Team ID (2/4)" />
+    <item value="0x00AA" name="Edmund Team ID (3/4)" />
+    <item value="0x00AB" name="Edmund Team ID (4/4)" />
+    <item value="0x00AC" name="Isabella Team ID (1/4)" />
+    <item value="0x00AD" name="Isabella Team ID (2/4)" />
+    <item value="0x00AE" name="Isabella Team ID (3/4)" />
+    <item value="0x00AF" name="Isabella Team ID (4/4)" />
+    <item value="0x00B0" name="Brigit Team ID (1/4)" />
+    <item value="0x00B1" name="Brigit Team ID (2/4)" />
+    <item value="0x00B2" name="Brigit Team ID (3/4)" />
+    <item value="0x00B3" name="Brigit Team ID (4/4)" />
+    <item value="0x00B4" name="Cyclops Team ID (1/4)" />
+    <item value="0x00B5" name="Cyclops Team ID (2/4)" />
+    <item value="0x00B6" name="Cyclops Team ID (3/4)" />
+    <item value="0x00B7" name="Cyclops Team ID (4/4)" />
+    <item value="0x00B8" name="Rollie Team ID (1/4)" />
+    <item value="0x00B9" name="Rollie Team ID (2/4)" />
+    <item value="0x00BA" name="Rollie Team ID (3/4)" />
+    <item value="0x00BB" name="Rollie Team ID (4/4)" />
+    <item value="0x00BC" name="Thousand Team ID (1/4)" />
+    <item value="0x00BD" name="Thousand Team ID (2/4)" />
+    <item value="0x00BE" name="Thousand Team ID (3/4)" />
+    <item value="0x00BF" name="Thousand Team ID (4/4)" />
+    <item value="0x00C0" name="Leon Team ID (1/4)" />
+    <item value="0x00C1" name="Leon Team ID (2/4)" />
+    <item value="0x00C2" name="Leon Team ID (3/4)" />
+    <item value="0x00C3" name="Leon Team ID (4/4)" />
+    <item value="0x00C4" name="Honesty Team ID (1/4)" />
+    <item value="0x00C5" name="Honesty Team ID (2/4)" />
+    <item value="0x00C6" name="Honesty Team ID (3/4)" />
+    <item value="0x00C7" name="Honesty Team ID (4/4)" />
+    <item value="0x00C8" name="Produn Team ID (1/4)" />
+    <item value="0x00C9" name="Produn Team ID (2/4)" />
+    <item value="0x00CA" name="Produn Team ID (3/4)" />
+    <item value="0x00CB" name="Produn Team ID (4/4)" />
+    <item value="0x00CC" name="Harold Team ID (1/4)" />
+    <item value="0x00CD" name="Harold Team ID (2/4)" />
+    <item value="0x00CE" name="Harold Team ID (3/4)" />
+    <item value="0x00CF" name="Harold Team ID (4/4)" />
+    <item value="0x00D0" name="Pendolf Team ID (1/4)" />
+    <item value="0x00D1" name="Pendolf Team ID (2/4)" />
+    <item value="0x00D2" name="Pendolf Team ID (3/4)" />
+    <item value="0x00D3" name="Pendolf Team ID (4/4)" />
+    <item value="0x00D4" name="Spiriel Team ID (1/4)" />
+    <item value="0x00D5" name="Spiriel Team ID (2/4)" />
+    <item value="0x00D6" name="Spiriel Team ID (3/4)" />
+    <item value="0x00D7" name="Spiriel Team ID (4/4)" />
+    <item value="0x00D8" name="Jubei Team ID (1/4)" />
+    <item value="0x00D9" name="Jubei Team ID (2/4)" />
+    <item value="0x00DA" name="Jubei Team ID (3/4)" />
+    <item value="0x00DB" name="Jubei Team ID (4/4)" />
+    <item value="0x00DC" name="Primula Team ID (1/4)" />
+    <item value="0x00DD" name="Primula Team ID (2/4)" />
+    <item value="0x00DE" name="Primula Team ID (3/4)" />
+    <item value="0x00DF" name="Primula Team ID (4/4)" />
+    <item value="0x00E0" name="Marky Team ID (1/4)" />
+    <item value="0x00E1" name="Marky Team ID (2/4)" />
+    <item value="0x00E2" name="Marky Team ID (3/4)" />
+    <item value="0x00E3" name="Marky Team ID (4/4)" />
+    <item value="0x00E4" name="Turk Team ID (1/4)" />
+    <item value="0x00E5" name="Turk Team ID (2/4)" />
+    <item value="0x00E6" name="Turk Team ID (3/4)" />
+    <item value="0x00E7" name="Turk Team ID (4/4)" />
+    <item value="0x00E8" name="Unoma Team ID (1/4)" />
+    <item value="0x00E9" name="Unoma Team ID (2/4)" />
+    <item value="0x00EA" name="Unoma Team ID (3/4)" />
+    <item value="0x00EB" name="Unoma Team ID (4/4)" />
+    <item value="0x00EC" name="Jane Team ID (1/4)" />
+    <item value="0x00ED" name="Jane Team ID (2/4)" />
+    <item value="0x00EE" name="Jane Team ID (3/4)" />
+    <item value="0x00EF" name="Jane Team ID (4/4)" />
+    <item value="0x00F0" name="" />
+    <item value="0x00F1" name="" />
+    <item value="0x00F2" name="" />
+    <item value="0x00F3" name="" />
+    <item value="0x00F4" name="" />
+    <item value="0x00F5" name="" />
+    <item value="0x00F6" name="" />
+    <item value="0x00F7" name="" />
+    <item value="0x00F8" name="" />
+    <item value="0x00F9" name="" />
+    <item value="0x00FA" name="" />
+    <item value="0x00FB" name="" />
+    <item value="0x00FC" name="" />
+    <item value="0x00FD" name="" />
+    <item value="0x00FE" name="" />
+    <item value="0x00FF" name="" />
+    <item value="0x0100" name="" />
+    <item value="0x0101" name="" />
+    <item value="0x0102" name="Sets itself when starting a battle" />
+    <item value="0x0103" name="When outside of battle it forces itself ON, disable during." />
+    <item value="0x0104" name="Sub Screen" />
+    <item value="0x0105" name="" />
+    <item value="0x0106" name="" />
+    <item value="0x0107" name="Sets itself when starting a Battle" />
+    <item value="0x0108" name="Forces the camera underneath (SC3)" />
+    <item value="0x0109" name="" />
+    <item value="0x010A" name="Window Layer Disable" />
+    <item value="0x010B" name="" />
+    <item value="0x010C" name="Disable Camera zoom" />
+    <item value="0x010D" name="Disable Camera Rotation" />
+    <item value="0x010E" name="" />
+    <item value="0x010F" name="Sprite Layer Disable" />
+    <item value="0x0110" name="(SC1 does nothing) Adds camera/position information to the printout." />
+    <item value="0x0111" name="Slow Mode" />
+    <item value="0x0112" name="Adds a 'NO' menu to right side of printout, use unknown." />
+    <item value="0x0113" name="Background Layer Disable" />
+    <item value="0x0114" name="Sets itself when starting a battle." />
+    <item value="0x0115" name="" />
+    <item value="0x0116" name="" />
+    <item value="0x0117" name="" />
+    <item value="0x0118" name="" />
+    <item value="0x0119" name="Asks you to save when leaving a room." />
+    <item value="0x011A" name="" />
+    <item value="0x011B" name="" />
+    <item value="0x011C" name="Hard difficulty set" />
+    <item value="0x011D" name="Difficult difficulty set" />
+    <item value="0x011E" name="" />
+    <item value="0x011F" name="" />
+    <item value="0x0120" name="" />
+    <item value="0x0121" name="" />
+    <item value="0x0122" name="" />
+    <item value="0x0123" name="" />
+    <item value="0x0124" name="" />
+    <item value="0x0125" name="" />
+    <item value="0x0126" name="" />
+    <item value="0x0127" name="" />
+    <item value="0x0128" name="Fight menu" />
+    <item value="0x0129" name="" />
+    <item value="0x012A" name="" />
+    <item value="0x012B" name="" />
+    <item value="0x012C" name="" />
+    <item value="0x012D" name="" />
+    <item value="0x012E" name="Enemy Control" />
+    <item value="0x012F" name="Sets itself when starting a battle." />
+    <item value="0x0130" name="Hit Box display" />
+    <item value="0x0131" name="Something with battle (Pier)" />
+    <item value="0x0132" name="" />
+    <item value="0x0133" name="" />
+    <item value="0x0134" name="" />
+    <item value="0x0135" name="" />
+    <item value="0x0136" name="Adds 'RGB' to printout, 3 values increased with ABC and decreased with XYZ on second controller, reset with 2nd start" />
+    <item value="0x0137" name="" />
+    <item value="0x0138" name="" />
+    <item value="0x0139" name="" />
+    <item value="0x013A" name="" />
+    <item value="0x013B" name="Camera tilt when rotating" />
+    <item value="0x013C" name="Camera slow when rotating" />
+    <item value="0x013D" name="" />
+    <item value="0x013E" name="?" />
+    <item value="0x013F" name="Something to do with Background Layer (i.e. reenables the boat model in Battle 301)" />
+    <item value="0x0140" name="" />
+    <item value="0x0141" name="House with Penn Egg" />
+    <item value="0x0142" name="" />
+    <item value="0x0143" name="" />
+    <item value="0x0144" name="" />
+    <item value="0x0145" name="" />
+    <item value="0x0146" name="" />
+    <item value="0x0147" name="" />
+    <item value="0x0148" name="" />
+    <item value="0x0149" name="" />
+    <item value="0x014A" name="" />
+    <item value="0x014B" name="" />
+    <item value="0x014C" name="" />
+    <item value="0x014D" name="" />
+    <item value="0x014E" name="" />
+    <item value="0x014F" name="" />
+    <item value="0x0150" name="" />
+    <item value="0x0151" name="" />
+    <item value="0x0152" name="" />
+    <item value="0x0153" name="" />
+    <item value="0x0154" name="" />
+    <item value="0x0155" name="" />
+    <item value="0x0156" name="" />
+    <item value="0x0157" name="" />
+    <item value="0x0158" name="Changes color of movable squares from White to Red" />
+    <item value="0x0159" name="" />
+    <item value="0x015A" name="" />
+    <item value="0x015B" name="" />
+    <item value="0x015C" name="" />
+    <item value="0x015D" name="" />
+    <item value="0x015E" name="" />
+    <item value="0x015F" name="" />
+    <item value="0x0160" name="Xfered save from sc1" />
+    <item value="0x0161" name="Xfered save from scn2" />
+    <item value="0x0162" name="" />
+    <item value="0x0163" name="" />
+    <item value="0x0164" name="" />
+    <item value="0x0165" name="" />
+    <item value="0x0166" name="" />
+    <item value="0x0167" name="" />
+    <item value="0x0168" name="" />
+    <item value="0x0169" name="" />
+    <item value="0x016A" name="" />
+    <item value="0x016B" name="" />
+    <item value="0x016C" name="" />
+    <item value="0x016D" name="" />
+    <item value="0x016E" name="" />
+    <item value="0x016F" name="" />
+    <item value="0x0170" name="" />
+    <item value="0x0171" name="" />
+    <item value="0x0172" name="" />
+    <item value="0x0173" name="" />
+    <item value="0x0174" name="" />
+    <item value="0x0175" name="" />
+    <item value="0x0176" name="" />
+    <item value="0x0177" name="" />
+    <item value="0x0178" name="" />
+    <item value="0x0179" name="" />
+    <item value="0x017A" name="" />
+    <item value="0x017B" name="" />
+    <item value="0x017C" name="" />
+    <item value="0x017D" name="" />
+    <item value="0x017E" name="" />
+    <item value="0x017F" name="" />
+    <item value="0x0180" name="" />
+    <item value="0x0181" name="" />
+    <item value="0x0182" name="" />
+    <item value="0x0183" name="" />
+    <item value="0x0184" name="" />
+    <item value="0x0185" name="" />
+    <item value="0x0186" name="" />
+    <item value="0x0187" name="" />
+    <item value="0x0188" name="" />
+    <item value="0x0189" name="" />
+    <item value="0x018A" name="" />
+    <item value="0x018B" name="" />
+    <item value="0x018C" name="" />
+    <item value="0x018D" name="" />
+    <item value="0x018E" name="" />
+    <item value="0x018F" name="" />
+    <item value="0x0190" name="" />
+    <item value="0x0191" name="" />
+    <item value="0x0192" name="" />
+    <item value="0x0193" name="" />
+    <item value="0x0194" name="" />
+    <item value="0x0195" name="" />
+    <item value="0x0196" name="" />
+    <item value="0x0197" name="" />
+    <item value="0x0198" name="" />
+    <item value="0x0199" name="" />
+    <item value="0x019A" name="" />
+    <item value="0x019B" name="" />
+    <item value="0x019C" name="" />
+    <item value="0x019D" name="" />
+    <item value="0x019E" name="" />
+    <item value="0x019F" name="" />
+    <item value="0x01A0" name="" />
+    <item value="0x01A1" name="" />
+    <item value="0x01A2" name="" />
+    <item value="0x01A3" name="" />
+    <item value="0x01A4" name="" />
+    <item value="0x01A5" name="" />
+    <item value="0x01A6" name="" />
+    <item value="0x01A7" name="" />
+    <item value="0x01A8" name="" />
+    <item value="0x01A9" name="" />
+    <item value="0x01AA" name="" />
+    <item value="0x01AB" name="" />
+    <item value="0x01AC" name="" />
+    <item value="0x01AD" name="" />
+    <item value="0x01AE" name="" />
+    <item value="0x01AF" name="" />
+    <item value="0x01B0" name="" />
+    <item value="0x01B1" name="" />
+    <item value="0x01B2" name="" />
+    <item value="0x01B3" name="" />
+    <item value="0x01B4" name="" />
+    <item value="0x01B5" name="" />
+    <item value="0x01B6" name="" />
+    <item value="0x01B7" name="" />
+    <item value="0x01B8" name="" />
+    <item value="0x01B9" name="" />
+    <item value="0x01BA" name="" />
+    <item value="0x01BB" name="" />
+    <item value="0x01BC" name="" />
+    <item value="0x01BD" name="" />
+    <item value="0x01BE" name="" />
+    <item value="0x01BF" name="" />
+    <item value="0x01C0" name="" />
+    <item value="0x01C1" name="" />
+    <item value="0x01C2" name="" />
+    <item value="0x01C3" name="" />
+    <item value="0x01C4" name="" />
+    <item value="0x01C5" name="" />
+    <item value="0x01C6" name="" />
+    <item value="0x01C7" name="" />
+    <item value="0x01C8" name="" />
+    <item value="0x01C9" name="" />
+    <item value="0x01CA" name="" />
+    <item value="0x01CB" name="" />
+    <item value="0x01CC" name="" />
+    <item value="0x01CD" name="" />
+    <item value="0x01CE" name="" />
+    <item value="0x01CF" name="" />
+    <item value="0x01D0" name="" />
+    <item value="0x01D1" name="" />
+    <item value="0x01D2" name="" />
+    <item value="0x01D3" name="" />
+    <item value="0x01D4" name="" />
+    <item value="0x01D5" name="" />
+    <item value="0x01D6" name="" />
+    <item value="0x01D7" name="" />
+    <item value="0x01D8" name="" />
+    <item value="0x01D9" name="" />
+    <item value="0x01DA" name="" />
+    <item value="0x01DB" name="" />
+    <item value="0x01DC" name="" />
+    <item value="0x01DD" name="" />
+    <item value="0x01DE" name="" />
+    <item value="0x01DF" name="" />
+    <item value="0x01E0" name="" />
+    <item value="0x01E1" name="" />
+    <item value="0x01E2" name="" />
+    <item value="0x01E3" name="" />
+    <item value="0x01E4" name="" />
+    <item value="0x01E5" name="" />
+    <item value="0x01E6" name="" />
+    <item value="0x01E7" name="" />
+    <item value="0x01E8" name="" />
+    <item value="0x01E9" name="" />
+    <item value="0x01EA" name="" />
+    <item value="0x01EB" name="" />
+    <item value="0x01EC" name="" />
+    <item value="0x01ED" name="" />
+    <item value="0x01EE" name="" />
+    <item value="0x01EF" name="" />
+    <item value="0x01F0" name="" />
+    <item value="0x01F1" name="" />
+    <item value="0x01F2" name="" />
+    <item value="0x01F3" name="" />
+    <item value="0x01F4" name="" />
+    <item value="0x01F5" name="" />
+    <item value="0x01F6" name="" />
+    <item value="0x01F7" name="" />
+    <item value="0x01F8" name="" />
+    <item value="0x01F9" name="" />
+    <item value="0x01FA" name="" />
+    <item value="0x01FB" name="" />
+    <item value="0x01FC" name="" />
+    <item value="0x01FD" name="" />
+    <item value="0x01FE" name="" />
+    <item value="0x01FF" name="" />
+    <item value="0x0200" name="Barrel destroyed pier" />
+    <item value="0x0201" name="Door to Start room open" />
+    <item value="0x0202" name="Door to Edmund Room open" />
+    <item value="0x0203" name="Door by Grace Unlocked" />
+    <item value="0x0204" name="Door to Back room unlocked" />
+    <item value="0x0205" name="Room upstairs open" />
+    <item value="0x0206" name="Room upstairs open" />
+    <item value="0x0207" name="Room upstairs open" />
+    <item value="0x0208" name="Room upstairs open" />
+    <item value="0x0209" name="Room upstairs open" />
+    <item value="0x020A" name="" />
+    <item value="0x020B" name="" />
+    <item value="0x020C" name="" />
+    <item value="0x020D" name="" />
+    <item value="0x020E" name="" />
+    <item value="0x020F" name="" />
+    <item value="0x0210" name="" />
+    <item value="0x0211" name="" />
+    <item value="0x0212" name="" />
+    <item value="0x0213" name="" />
+    <item value="0x0214" name="" />
+    <item value="0x0215" name="" />
+    <item value="0x0216" name="" />
+    <item value="0x0217" name="" />
+    <item value="0x0218" name="" />
+    <item value="0x0219" name="" />
+    <item value="0x021A" name="" />
+    <item value="0x021B" name="" />
+    <item value="0x021C" name="" />
+    <item value="0x021D" name="" />
+    <item value="0x021E" name="" />
+    <item value="0x021F" name="" />
+    <item value="0x0220" name="" />
+    <item value="0x0221" name="Door (1-4 Saraband Imperial Command 1st floor?) May not be specific." />
+    <item value="0x0222" name="Door (same as 221)" />
+    <item value="0x0223" name="Door (same as 221)" />
+    <item value="0x0224" name="Door (Set 1 to 'open')" />
+    <item value="0x0225" name="Door (5-0208-2) Saraband Imperial Command 2nd floor?" />
+    <item value="0x0226" name="Door" />
+    <item value="0x0227" name="Door" />
+    <item value="0x0228" name="Door" />
+    <item value="0x0229" name="Door" />
+    <item value="0x022A" name="Sets itself when starting a battle." />
+    <item value="0x022B" name="" />
+    <item value="0x022C" name="" />
+    <item value="0x022D" name="Ruin fight" />
+    <item value="0x022E" name="" />
+    <item value="0x022F" name="" />
+    <item value="0x0230" name="Life Ring Ruins 1. Proect Ring ruins 2" />
+    <item value="0x0231" name="Healing Drop Ruins 1. Goddess tear ruins 2" />
+    <item value="0x0232" name="" />
+    <item value="0x0233" name="" />
+    <item value="0x0234" name="" />
+    <item value="0x0235" name="" />
+    <item value="0x0236" name="" />
+    <item value="0x0237" name="" />
+    <item value="0x0238" name="" />
+    <item value="0x0239" name="" />
+    <item value="0x023A" name="" />
+    <item value="0x023B" name="" />
+    <item value="0x023C" name="" />
+    <item value="0x023D" name="" />
+    <item value="0x023E" name="" />
+    <item value="0x023F" name="" />
+    <item value="0x0240" name="" />
+    <item value="0x0241" name="" />
+    <item value="0x0242" name="" />
+    <item value="0x0243" name="" />
+    <item value="0x0244" name="" />
+    <item value="0x0245" name="" />
+    <item value="0x0246" name="" />
+    <item value="0x0247" name="" />
+    <item value="0x0248" name="" />
+    <item value="0x0249" name="" />
+    <item value="0x024A" name="" />
+    <item value="0x024B" name="" />
+    <item value="0x024C" name="" />
+    <item value="0x024D" name="" />
+    <item value="0x024E" name="" />
+    <item value="0x024F" name="" />
+    <item value="0x0250" name="" />
+    <item value="0x0251" name="" />
+    <item value="0x0252" name="" />
+    <item value="0x0253" name="" />
+    <item value="0x0254" name="" />
+    <item value="0x0255" name="" />
+    <item value="0x0256" name="" />
+    <item value="0x0257" name="" />
+    <item value="0x0258" name="" />
+    <item value="0x0259" name="" />
+    <item value="0x025A" name="" />
+    <item value="0x025B" name="" />
+    <item value="0x025C" name="" />
+    <item value="0x025D" name="" />
+    <item value="0x025E" name="" />
+    <item value="0x025F" name="" />
+    <item value="0x0260" name="Irene fight boss push back" />
+    <item value="0x0261" name="" />
+    <item value="0x0262" name="(Was set to on during Dam fight)" />
+    <item value="0x0263" name="" />
+    <item value="0x0264" name="" />
+    <item value="0x0265" name="" />
+    <item value="0x0266" name="" />
+    <item value="0x0267" name="" />
+    <item value="0x0268" name="" />
+    <item value="0x0269" name="" />
+    <item value="0x026A" name="" />
+    <item value="0x026B" name="" />
+    <item value="0x026C" name="" />
+    <item value="0x026D" name="" />
+    <item value="0x026E" name="" />
+    <item value="0x026F" name="" />
+    <item value="0x0270" name="" />
+    <item value="0x0271" name="" />
+    <item value="0x0272" name="" />
+    <item value="0x0273" name="" />
+    <item value="0x0274" name="" />
+    <item value="0x0275" name="" />
+    <item value="0x0276" name="" />
+    <item value="0x0277" name="" />
+    <item value="0x0278" name="" />
+    <item value="0x0279" name="" />
+    <item value="0x027A" name="" />
+    <item value="0x027B" name="" />
+    <item value="0x027C" name="" />
+    <item value="0x027D" name="" />
+    <item value="0x027E" name="" />
+    <item value="0x027F" name="" />
+    <item value="0x0280" name="Something With Masqurin (Set when Masqurins turn?)" />
+    <item value="0x0281" name="(Set after certain events?)" />
+    <item value="0x0282" name="" />
+    <item value="0x0283" name="" />
+    <item value="0x0284" name="" />
+    <item value="0x0285" name="Walked to Bernard 1" />
+    <item value="0x0286" name="Walked to Bernard 2" />
+    <item value="0x0287" name="" />
+    <item value="0x0288" name="Started windmill" />
+    <item value="0x0289" name="" />
+    <item value="0x028A" name="" />
+    <item value="0x028B" name="" />
+    <item value="0x028C" name="" />
+    <item value="0x028D" name="" />
+    <item value="0x028E" name="" />
+    <item value="0x028F" name="" />
+    <item value="0x0290" name="Temp flag set during battle 127" />
+    <item value="0x0291" name="" />
+    <item value="0x0292" name="" />
+    <item value="0x0293" name="" />
+    <item value="0x0294" name="" />
+    <item value="0x0295" name="" />
+    <item value="0x0296" name="" />
+    <item value="0x0297" name="" />
+    <item value="0x0298" name="" />
+    <item value="0x0299" name="" />
+    <item value="0x029A" name="" />
+    <item value="0x029B" name="" />
+    <item value="0x029C" name="" />
+    <item value="0x029D" name="" />
+    <item value="0x029E" name="" />
+    <item value="0x029F" name="" />
+    <item value="0x02A0" name="Switch pressed" />
+    <item value="0x02A1" name="Train moved maybe" />
+    <item value="0x02A2" name="Train moved maybe" />
+    <item value="0x02A3" name="Train moved maybe" />
+    <item value="0x02A4" name="" />
+    <item value="0x02A5" name="" />
+    <item value="0x02A6" name="" />
+    <item value="0x02A7" name="" />
+    <item value="0x02A8" name="" />
+    <item value="0x02A9" name="" />
+    <item value="0x02AA" name="" />
+    <item value="0x02AB" name="" />
+    <item value="0x02AC" name="" />
+    <item value="0x02AD" name="" />
+    <item value="0x02AE" name="" />
+    <item value="0x02AF" name="" />
+    <item value="0x02B0" name="" />
+    <item value="0x02B1" name="" />
+    <item value="0x02B2" name="" />
+    <item value="0x02B3" name="" />
+    <item value="0x02B4" name="" />
+    <item value="0x02B5" name="" />
+    <item value="0x02B6" name="" />
+    <item value="0x02B7" name="" />
+    <item value="0x02B8" name="" />
+    <item value="0x02B9" name="" />
+    <item value="0x02BA" name="" />
+    <item value="0x02BB" name="" />
+    <item value="0x02BC" name="" />
+    <item value="0x02BD" name="" />
+    <item value="0x02BE" name="" />
+    <item value="0x02BF" name="" />
+    <item value="0x02C0" name="" />
+    <item value="0x02C1" name="" />
+    <item value="0x02C2" name="" />
+    <item value="0x02C3" name="" />
+    <item value="0x02C4" name="" />
+    <item value="0x02C5" name="" />
+    <item value="0x02C6" name="" />
+    <item value="0x02C7" name="" />
+    <item value="0x02C8" name="" />
+    <item value="0x02C9" name="" />
+    <item value="0x02CA" name="" />
+    <item value="0x02CB" name="" />
+    <item value="0x02CC" name="" />
+    <item value="0x02CD" name="" />
+    <item value="0x02CE" name="" />
+    <item value="0x02CF" name="" />
+    <item value="0x02D0" name="" />
+    <item value="0x02D1" name="" />
+    <item value="0x02D2" name="" />
+    <item value="0x02D3" name="" />
+    <item value="0x02D4" name="" />
+    <item value="0x02D5" name="" />
+    <item value="0x02D6" name="" />
+    <item value="0x02D7" name="" />
+    <item value="0x02D8" name="" />
+    <item value="0x02D9" name="" />
+    <item value="0x02DA" name="" />
+    <item value="0x02DB" name="" />
+    <item value="0x02DC" name="" />
+    <item value="0x02DD" name="" />
+    <item value="0x02DE" name="" />
+    <item value="0x02DF" name="" />
+    <item value="0x02E0" name="" />
+    <item value="0x02E1" name="" />
+    <item value="0x02E2" name="" />
+    <item value="0x02E3" name="" />
+    <item value="0x02E4" name="" />
+    <item value="0x02E5" name="" />
+    <item value="0x02E6" name="" />
+    <item value="0x02E7" name="" />
+    <item value="0x02E8" name="" />
+    <item value="0x02E9" name="" />
+    <item value="0x02EA" name="" />
+    <item value="0x02EB" name="" />
+    <item value="0x02EC" name="" />
+    <item value="0x02ED" name="" />
+    <item value="0x02EE" name="" />
+    <item value="0x02EF" name="" />
+    <item value="0x02F0" name="" />
+    <item value="0x02F1" name="" />
+    <item value="0x02F2" name="" />
+    <item value="0x02F3" name="" />
+    <item value="0x02F4" name="" />
+    <item value="0x02F5" name="" />
+    <item value="0x02F6" name="" />
+    <item value="0x02F7" name="" />
+    <item value="0x02F8" name="" />
+    <item value="0x02F9" name="" />
+    <item value="0x02FA" name="" />
+    <item value="0x02FB" name="" />
+    <item value="0x02FC" name="" />
+    <item value="0x02FD" name="" />
+    <item value="0x02FE" name="" />
+    <item value="0x02FF" name="" />
+    <item value="0x0300" name="Chapter 1 Opener complete" />
+    <item value="0x0301" name="" />
+    <item value="0x0302" name="" />
+    <item value="0x0303" name="" />
+    <item value="0x0304" name="" />
+    <item value="0x0305" name="" />
+    <item value="0x0306" name="" />
+    <item value="0x0307" name="" />
+    <item value="0x0308" name="" />
+    <item value="0x0309" name="" />
+    <item value="0x030A" name="" />
+    <item value="0x030B" name="" />
+    <item value="0x030C" name="" />
+    <item value="0x030D" name="" />
+    <item value="0x030E" name="" />
+    <item value="0x030F" name="" />
+    <item value="0x0310" name="" />
+    <item value="0x0311" name="" />
+    <item value="0x0312" name="" />
+    <item value="0x0313" name="" />
+    <item value="0x0314" name="" />
+    <item value="0x0315" name="" />
+    <item value="0x0316" name="" />
+    <item value="0x0317" name="" />
+    <item value="0x0318" name="" />
+    <item value="0x0319" name="" />
+    <item value="0x031A" name="" />
+    <item value="0x031B" name="" />
+    <item value="0x031C" name="" />
+    <item value="0x031D" name="" />
+    <item value="0x031E" name="" />
+    <item value="0x031F" name="" />
+    <item value="0x0320" name="" />
+    <item value="0x0321" name="" />
+    <item value="0x0322" name="" />
+    <item value="0x0323" name="" />
+    <item value="0x0324" name="" />
+    <item value="0x0325" name="" />
+    <item value="0x0326" name="" />
+    <item value="0x0327" name="" />
+    <item value="0x0328" name="" />
+    <item value="0x0329" name="" />
+    <item value="0x032A" name="" />
+    <item value="0x032B" name="" />
+    <item value="0x032C" name="" />
+    <item value="0x032D" name="" />
+    <item value="0x032E" name="" />
+    <item value="0x032F" name="" />
+    <item value="0x0330" name="" />
+    <item value="0x0331" name="" />
+    <item value="0x0332" name="" />
+    <item value="0x0333" name="" />
+    <item value="0x0334" name="" />
+    <item value="0x0335" name="" />
+    <item value="0x0336" name="" />
+    <item value="0x0337" name="" />
+    <item value="0x0338" name="" />
+    <item value="0x0339" name="" />
+    <item value="0x033A" name="" />
+    <item value="0x033B" name="" />
+    <item value="0x033C" name="" />
+    <item value="0x033D" name="" />
+    <item value="0x033E" name="" />
+    <item value="0x033F" name="" />
+    <item value="0x0340" name="" />
+    <item value="0x0341" name="" />
+    <item value="0x0342" name="" />
+    <item value="0x0343" name="" />
+    <item value="0x0344" name="" />
+    <item value="0x0345" name="" />
+    <item value="0x0346" name="" />
+    <item value="0x0347" name="" />
+    <item value="0x0348" name="" />
+    <item value="0x0349" name="" />
+    <item value="0x034A" name="" />
+    <item value="0x034B" name="" />
+    <item value="0x034C" name="" />
+    <item value="0x034D" name="" />
+    <item value="0x034E" name="" />
+    <item value="0x034F" name="" />
+    <item value="0x0350" name="" />
+    <item value="0x0351" name="" />
+    <item value="0x0352" name="" />
+    <item value="0x0353" name="" />
+    <item value="0x0354" name="" />
+    <item value="0x0355" name="" />
+    <item value="0x0356" name="" />
+    <item value="0x0357" name="" />
+    <item value="0x0358" name="" />
+    <item value="0x0359" name="" />
+    <item value="0x035A" name="" />
+    <item value="0x035B" name="" />
+    <item value="0x035C" name="" />
+    <item value="0x035D" name="" />
+    <item value="0x035E" name="" />
+    <item value="0x035F" name="" />
+    <item value="0x0360" name="" />
+    <item value="0x0361" name="" />
+    <item value="0x0362" name="" />
+    <item value="0x0363" name="" />
+    <item value="0x0364" name="" />
+    <item value="0x0365" name="" />
+    <item value="0x0366" name="" />
+    <item value="0x0367" name="" />
+    <item value="0x0368" name="" />
+    <item value="0x0369" name="" />
+    <item value="0x036A" name="" />
+    <item value="0x036B" name="" />
+    <item value="0x036C" name="" />
+    <item value="0x036D" name="" />
+    <item value="0x036E" name="" />
+    <item value="0x036F" name="" />
+    <item value="0x0370" name="" />
+    <item value="0x0371" name="" />
+    <item value="0x0372" name="" />
+    <item value="0x0373" name="" />
+    <item value="0x0374" name="" />
+    <item value="0x0375" name="" />
+    <item value="0x0376" name="" />
+    <item value="0x0377" name="" />
+    <item value="0x0378" name="" />
+    <item value="0x0379" name="" />
+    <item value="0x037A" name="" />
+    <item value="0x037B" name="" />
+    <item value="0x037C" name="" />
+    <item value="0x037D" name="" />
+    <item value="0x037E" name="" />
+    <item value="0x037F" name="" />
+    <item value="0x0380" name="" />
+    <item value="0x0381" name="Battle 101 Done" />
+    <item value="0x0382" name="Battle 102 Done" />
+    <item value="0x0383" name="Battle 103 Done" />
+    <item value="0x0384" name="Battle 104 Done" />
+    <item value="0x0385" name="Battle 105 Done" />
+    <item value="0x0386" name="Battle 106 Done" />
+    <item value="0x0387" name="Battle 107 Done" />
+    <item value="0x0388" name="Battle 108 Done" />
+    <item value="0x0389" name="Battle 109 Done" />
+    <item value="0x038A" name="Battle 110 Done" />
+    <item value="0x038B" name="Battle 111 Done" />
+    <item value="0x038C" name="Battle 112 Done" />
+    <item value="0x038D" name="Battle 113 Done" />
+    <item value="0x038E" name="Battle 114 Done" />
+    <item value="0x038F" name="Battle 115 Done" />
+    <item value="0x0390" name="Battle 116 Done" />
+    <item value="0x0391" name="Battle 117 Done" />
+    <item value="0x0392" name="Battle 118 Done" />
+    <item value="0x0393" name="Battle 119 Done" />
+    <item value="0x0394" name="Battle 120 Done" />
+    <item value="0x0395" name="Battle 121 Done" />
+    <item value="0x0396" name="Battle 122 Done" />
+    <item value="0x0397" name="Battle 123 Done" />
+    <item value="0x0398" name="Battle 124 Done" />
+    <item value="0x0399" name="Battle 125 Done" />
+    <item value="0x039A" name="Battle 126 Done" />
+    <item value="0x039B" name="Battle 127 Done" />
+    <item value="0x039C" name="Battle 128 Done" />
+    <item value="0x039D" name="Battle 129 Done" />
+    <item value="0x039E" name="Battle 130 Done" />
+    <item value="0x039F" name="Battle 131 Done" />
+    <item value="0x03A0" name="Battle 132 Done" />
+    <item value="0x03A1" name="Battle 133 Done" />
+    <item value="0x03A2" name="" />
+    <item value="0x03A3" name="" />
+    <item value="0x03A4" name="" />
+    <item value="0x03A5" name="" />
+    <item value="0x03A6" name="" />
+    <item value="0x03A7" name="" />
+    <item value="0x03A8" name="" />
+    <item value="0x03A9" name="Battle 201 Done" />
+    <item value="0x03AA" name="" />
+    <item value="0x03AB" name="" />
+    <item value="0x03AC" name="" />
+    <item value="0x03AD" name="" />
+    <item value="0x03AE" name="" />
+    <item value="0x03AF" name="" />
+    <item value="0x03B0" name="" />
+    <item value="0x03B1" name="" />
+    <item value="0x03B2" name="" />
+    <item value="0x03B3" name="" />
+    <item value="0x03B4" name="" />
+    <item value="0x03B5" name="" />
+    <item value="0x03B6" name="" />
+    <item value="0x03B7" name="" />
+    <item value="0x03B8" name="" />
+    <item value="0x03B9" name="" />
+    <item value="0x03BA" name="" />
+    <item value="0x03BB" name="" />
+    <item value="0x03BC" name="" />
+    <item value="0x03BD" name="" />
+    <item value="0x03BE" name="" />
+    <item value="0x03BF" name="" />
+    <item value="0x03C0" name="" />
+    <item value="0x03C1" name="" />
+    <item value="0x03C2" name="" />
+    <item value="0x03C3" name="" />
+    <item value="0x03C4" name="" />
+    <item value="0x03C5" name="" />
+    <item value="0x03C6" name="" />
+    <item value="0x03C7" name="" />
+    <item value="0x03C8" name="" />
+    <item value="0x03C9" name="" />
+    <item value="0x03CA" name="" />
+    <item value="0x03CB" name="" />
+    <item value="0x03CC" name="" />
+    <item value="0x03CD" name="" />
+    <item value="0x03CE" name="" />
+    <item value="0x03CF" name="" />
+    <item value="0x03D0" name="" />
+    <item value="0x03D1" name="Battle 301 done" />
+    <item value="0x03D2" name="" />
+    <item value="0x03D3" name="" />
+    <item value="0x03D4" name="" />
+    <item value="0x03D5" name="" />
+    <item value="0x03D6" name="" />
+    <item value="0x03D7" name="" />
+    <item value="0x03D8" name="" />
+    <item value="0x03D9" name="" />
+    <item value="0x03DA" name="" />
+    <item value="0x03DB" name="" />
+    <item value="0x03DC" name="" />
+    <item value="0x03DD" name="" />
+    <item value="0x03DE" name="" />
+    <item value="0x03DF" name="" />
+    <item value="0x03E0" name="" />
+    <item value="0x03E1" name="" />
+    <item value="0x03E2" name="" />
+    <item value="0x03E3" name="" />
+    <item value="0x03E4" name="" />
+    <item value="0x03E5" name="" />
+    <item value="0x03E6" name="" />
+    <item value="0x03E7" name="" />
+    <item value="0x03E8" name="" />
+    <item value="0x03E9" name="" />
+    <item value="0x03EA" name="" />
+    <item value="0x03EB" name="" />
+    <item value="0x03EC" name="" />
+    <item value="0x03ED" name="" />
+    <item value="0x03EE" name="Battle 330 Done" />
+    <item value="0x03EF" name="Battle 331 Done" />
+    <item value="0x03F0" name="Battle 332 Done" />
+    <item value="0x03F1" name="Battle 333 Done" />
+    <item value="0x03F2" name="Battle 334 Done" />
+    <item value="0x03F3" name="Battle 335 Done" />
+    <item value="0x03F4" name="Battle 336 Done" />
+    <item value="0x03F5" name="Battle 337 Done" />
+    <item value="0x03F6" name="Battle 338 Done" />
+    <item value="0x03F7" name="Battle 339 Done" />
+    <item value="0x03F8" name="" />
+    <item value="0x03F9" name="BTL197 Done" />
+    <item value="0x03FA" name="(BTL198 done?)" />
+    <item value="0x03FB" name="(BTL199 done?)" />
+    <item value="0x03FC" name="" />
+    <item value="0x03FD" name="" />
+    <item value="0x03FE" name="" />
+    <item value="0x03FF" name="" />
+    <item value="0x0400" name="Basamo start" />
+    <item value="0x0401" name="Head upstairs Balsamo" />
+    <item value="0x0402" name="Spoke to priests again Balsamo" />
+    <item value="0x0403" name="Spoke with Obright" />
+    <item value="0x0404" name="Spoke with Duncan" />
+    <item value="0x0405" name="Spoke to Bernard" />
+    <item value="0x0406" name="Spoke to little girl Balsamo" />
+    <item value="0x0407" name="Spoke to Priests Balsamo" />
+    <item value="0x0408" name="Team gathered Balsamo" />
+    <item value="0x0409" name="Outside Saraband speech" />
+    <item value="0x040A" name="Entered Balsamo" />
+    <item value="0x040B" name="" />
+    <item value="0x040C" name="Dwarfthill Ruin completed" />
+    <item value="0x040D" name="Dwarfhill Ruin started" />
+    <item value="0x040E" name="Battle beyond Dwarf hill speech" />
+    <item value="0x040F" name="Chapter 1 Ended" />
+    <item value="0x0410" name="Path to Dwarf Hill Start" />
+    <item value="0x0411" name="Something with Pier fight (Speaking)" />
+    <item value="0x0412" name="Garosh Death speech" />
+    <item value="0x0413" name="Hayward Death speech" />
+    <item value="0x0414" name="Garosh Spoke" />
+    <item value="0x0415" name="Hayward spoke" />
+    <item value="0x0416" name="Imposter Benetram spoke before leaving" />
+    <item value="0x0417" name="Something with Pier fight (Speaking)" />
+    <item value="0x0418" name="Maquirin Synbios go walking" />
+    <item value="0x0419" name="Train arrived" />
+    <item value="0x041A" name="Enter Train station" />
+    <item value="0x041B" name="Outside train station" />
+    <item value="0x041C" name="Border guard enter station" />
+    <item value="0x041D" name="Told Benetram about guard" />
+    <item value="0x041E" name="Irene Battle starts" />
+    <item value="0x041F" name="" />
+    <item value="0x0420" name="Said No to Medion" />
+    <item value="0x0421" name="Said No to Medion again" />
+    <item value="0x0422" name="Medion interaction Railhead" />
+    <item value="0x0423" name="Refugee 1 dead" />
+    <item value="0x0424" name="Refugee 2 dead" />
+    <item value="0x0425" name="Refugee 3 dead" />
+    <item value="0x0426" name="Refugee 4 dead" />
+    <item value="0x0427" name="Refugee 5 dead" />
+    <item value="0x0428" name="" />
+    <item value="0x0429" name="Kyon Shi Spawn" />
+    <item value="0x042A" name="(Synchronicty point)" />
+    <item value="0x042B" name="" />
+    <item value="0x042C" name="" />
+    <item value="0x042D" name="" />
+    <item value="0x042E" name="Noon Joined" />
+    <item value="0x042F" name="Met Ratchet" />
+    <item value="0x0430" name="Saraband Fight started" />
+    <item value="0x0431" name="Saraband Fight end" />
+    <item value="0x0432" name="Medion interaction Saraband" />
+    <item value="0x0433" name="Run into imposter" />
+    <item value="0x0434" name="Escape with Benetram" />
+    <item value="0x0435" name="Pigeons freed" />
+    <item value="0x0436" name="Silver ring from boy" />
+    <item value="0x0437" name="Quonos Mansion checked" />
+    <item value="0x0438" name="Tables moved Quonos" />
+    <item value="0x0439" name="Boxes moved Quonos" />
+    <item value="0x043A" name="Doors moved quonos" />
+    <item value="0x043B" name="" />
+    <item value="0x043C" name="" />
+    <item value="0x043D" name="Kyon-shi died (Weapon Shop)" />
+    <item value="0x043E" name="Kyon-shi died (Item Shop)" />
+    <item value="0x043F" name="Kyon-shi died (Accessory Shop)" />
+    <item value="0x0440" name="Kyon-shi died (Old woman far right house)" />
+    <item value="0x0441" name="Kyon-shi died (Old man far right house)" />
+    <item value="0x0442" name="Kyon-shi died (Woman inside lone house)" />
+    <item value="0x0443" name="Kyon-shi died (Man inside lone house)" />
+    <item value="0x0444" name="Kyon-shi died (Baldman outside by HQ)" />
+    <item value="0x0445" name="Kyon-shi died (Woman outside by HQ)" />
+    <item value="0x0446" name="Kyon-shi died (Priest)" />
+    <item value="0x0447" name="Skeleton Died" />
+    <item value="0x0448" name="Bat in corner died" />
+    <item value="0x0449" name="Lich died" />
+    <item value="0x044A" name="Bat left of lake" />
+    <item value="0x044B" name="Bat right of lake" />
+    <item value="0x044C" name="Kyon-shi died (Noon)" />
+    <item value="0x044D" name="Grace joins Synbios Quonos HQ" />
+    <item value="0x044E" name="" />
+    <item value="0x044F" name="" />
+    <item value="0x0450" name="Julian joins" />
+    <item value="0x0451" name="Julian battle ended" />
+    <item value="0x0452" name="Blue ruin start" />
+    <item value="0x0453" name="Blue ruin end" />
+    <item value="0x0454" name="Medion choice" />
+    <item value="0x0455" name="Border battle begins" />
+    <item value="0x0456" name="Board train" />
+    <item value="0x0457" name="Synbios free roam train" />
+    <item value="0x0458" name="Bandits enter train" />
+    <item value="0x0459" name="Train fight ends" />
+    <item value="0x045A" name="Shiraf fight begins" />
+    <item value="0x045B" name="Shiraf fight ends" />
+    <item value="0x045C" name="" />
+    <item value="0x045D" name="" />
+    <item value="0x045E" name="Chicken follows you" />
+    <item value="0x045F" name="" />
+    <item value="0x0460" name="" />
+    <item value="0x0461" name="Justin joined the force?" />
+    <item value="0x0462" name="(Synchronicty point)" />
+    <item value="0x0463" name="Purchased Egg Message" />
+    <item value="0x0464" name="" />
+    <item value="0x0465" name="(Sets during/after Battle 123)" />
+    <item value="0x0466" name="" />
+    <item value="0x0467" name="" />
+    <item value="0x0468" name="Spoke with Braff" />
+    <item value="0x0469" name="Zero brings orb to Medion" />
+    <item value="0x046A" name="" />
+    <item value="0x046B" name="" />
+    <item value="0x046C" name="" />
+    <item value="0x046D" name="(Synchronicty point)" />
+    <item value="0x046E" name="" />
+    <item value="0x046F" name="(Synchronicty point)" />
+    <item value="0x0470" name="Far barrel on pier" />
+    <item value="0x0471" name="Bottom barrel by monk" />
+    <item value="0x0472" name="Top barrel by monk" />
+    <item value="0x0473" name="Barrel by Hayward" />
+    <item value="0x0474" name="Right Barrel Dwarf Hill" />
+    <item value="0x0475" name="Left Barrel Dwarf Hill" />
+    <item value="0x0476" name="Far Right Barrel Dwarf Hill" />
+    <item value="0x0477" name="Far Left Barrel Dwarf Hill" />
+    <item value="0x0478" name="Barrel by Irene Railhead" />
+    <item value="0x0479" name="Mid barrel Railhead" />
+    <item value="0x047A" name="Barrel by boss Railhead" />
+    <item value="0x047B" name="Left Barrel in boxes" />
+    <item value="0x047C" name="Mid Barrel in boxes" />
+    <item value="0x047D" name="Right Barrel in boxes" />
+    <item value="0x047E" name="Left near barrel on train" />
+    <item value="0x047F" name="Right near barrel on train" />
+    <item value="0x0480" name="2nd far left barrel on train" />
+    <item value="0x0481" name="3rd far right barrel on train" />
+    <item value="0x0482" name="Far left barrel on train" />
+    <item value="0x0483" name="2nd far right barrel  on train" />
+    <item value="0x0484" name="Far right barrel on train" />
+    <item value="0x0485" name="Quonos Vandal ended?" />
+    <item value="0x0486" name="" />
+    <item value="0x0487" name="" />
+    <item value="0x0488" name="" />
+    <item value="0x0489" name="(Sets on start of SC2 w/o SC1 save)" />
+    <item value="0x048A" name="Left Vagabond" />
+    <item value="0x048B" name="Something after vagabond" />
+    <item value="0x048C" name="" />
+    <item value="0x048D" name="" />
+    <item value="0x048E" name="" />
+    <item value="0x048F" name="" />
+    <item value="0x0490" name="" />
+    <item value="0x0491" name="" />
+    <item value="0x0492" name="" />
+    <item value="0x0493" name="" />
+    <item value="0x0494" name="" />
+    <item value="0x0495" name="Julian left party" />
+    <item value="0x0496" name="" />
+    <item value="0x0497" name="" />
+    <item value="0x0498" name="Battle 121 Opening Cutscene" />
+    <item value="0x0499" name="Battle 121 Ending Cutscene" />
+    <item value="0x049A" name="" />
+    <item value="0x049B" name="" />
+    <item value="0x049C" name="Quonus mansion barrel" />
+    <item value="0x049D" name="Quonus mansion barrel with healing drop" />
+    <item value="0x049E" name="Quonus mansion barrel" />
+    <item value="0x049F" name="Battle 114 barrel" />
+    <item value="0x04A0" name="" />
+    <item value="0x04A1" name="" />
+    <item value="0x04A2" name="" />
+    <item value="0x04A3" name="" />
+    <item value="0x04A4" name="" />
+    <item value="0x04A5" name="" />
+    <item value="0x04A6" name="" />
+    <item value="0x04A7" name="" />
+    <item value="0x04A8" name="" />
+    <item value="0x04A9" name="" />
+    <item value="0x04AA" name="" />
+    <item value="0x04AB" name="" />
+    <item value="0x04AC" name="" />
+    <item value="0x04AD" name="" />
+    <item value="0x04AE" name="" />
+    <item value="0x04AF" name="" />
+    <item value="0x04B0" name="" />
+    <item value="0x04B1" name="" />
+    <item value="0x04B2" name="" />
+    <item value="0x04B3" name="" />
+    <item value="0x04B4" name="" />
+    <item value="0x04B5" name="" />
+    <item value="0x04B6" name="" />
+    <item value="0x04B7" name="" />
+    <item value="0x04B8" name="" />
+    <item value="0x04B9" name="" />
+    <item value="0x04BA" name="" />
+    <item value="0x04BB" name="" />
+    <item value="0x04BC" name="" />
+    <item value="0x04BD" name="" />
+    <item value="0x04BE" name="" />
+    <item value="0x04BF" name="" />
+    <item value="0x04C0" name="" />
+    <item value="0x04C1" name="" />
+    <item value="0x04C2" name="" />
+    <item value="0x04C3" name="" />
+    <item value="0x04C4" name="" />
+    <item value="0x04C5" name="" />
+    <item value="0x04C6" name="" />
+    <item value="0x04C7" name="" />
+    <item value="0x04C8" name="" />
+    <item value="0x04C9" name="" />
+    <item value="0x04CA" name="" />
+    <item value="0x04CB" name="" />
+    <item value="0x04CC" name="" />
+    <item value="0x04CD" name="" />
+    <item value="0x04CE" name="" />
+    <item value="0x04CF" name="" />
+    <item value="0x04D0" name="" />
+    <item value="0x04D1" name="" />
+    <item value="0x04D2" name="" />
+    <item value="0x04D3" name="" />
+    <item value="0x04D4" name="" />
+    <item value="0x04D5" name="" />
+    <item value="0x04D6" name="" />
+    <item value="0x04D7" name="" />
+    <item value="0x04D8" name="" />
+    <item value="0x04D9" name="" />
+    <item value="0x04DA" name="" />
+    <item value="0x04DB" name="" />
+    <item value="0x04DC" name="" />
+    <item value="0x04DD" name="" />
+    <item value="0x04DE" name="" />
+    <item value="0x04DF" name="" />
+    <item value="0x04E0" name="" />
+    <item value="0x04E1" name="" />
+    <item value="0x04E2" name="" />
+    <item value="0x04E3" name="" />
+    <item value="0x04E4" name="" />
+    <item value="0x04E5" name="" />
+    <item value="0x04E6" name="" />
+    <item value="0x04E7" name="" />
+    <item value="0x04E8" name="" />
+    <item value="0x04E9" name="" />
+    <item value="0x04EA" name="" />
+    <item value="0x04EB" name="" />
+    <item value="0x04EC" name="" />
+    <item value="0x04ED" name="" />
+    <item value="0x04EE" name="" />
+    <item value="0x04EF" name="" />
+    <item value="0x04F0" name="" />
+    <item value="0x04F1" name="" />
+    <item value="0x04F2" name="" />
+    <item value="0x04F3" name="" />
+    <item value="0x04F4" name="" />
+    <item value="0x04F5" name="" />
+    <item value="0x04F6" name="" />
+    <item value="0x04F7" name="" />
+    <item value="0x04F8" name="" />
+    <item value="0x04F9" name="" />
+    <item value="0x04FA" name="" />
+    <item value="0x04FB" name="" />
+    <item value="0x04FC" name="" />
+    <item value="0x04FD" name="" />
+    <item value="0x04FE" name="" />
+    <item value="0x04FF" name="" />
+    <item value="0x0500" name="Palsis exits Tower" />
+    <item value="0x0501" name="" />
+    <item value="0x0502" name="" />
+    <item value="0x0503" name="Battle 114 ruins barrel with healing drop" />
+    <item value="0x0504" name="Battle 114 ruins barrel" />
+    <item value="0x0505" name="Battle 114 ruins barrel with angel wing" />
+    <item value="0x0506" name="Battle 117 ruins. barrel. next to angel wing barrel" />
+    <item value="0x0507" name="Battle 117 ruins. barrel with angel wing" />
+    <item value="0x0508" name="Battle 117 ruins. barrel middle of room" />
+    <item value="0x0509" name="Battle 117 ruins. barrel with goddess tears" />
+    <item value="0x050A" name="" />
+    <item value="0x050B" name="End of Spiriel Fight" />
+    <item value="0x050C" name="End of Spiriel Fight" />
+    <item value="0x050D" name="End of Spiriel Fight" />
+    <item value="0x050E" name="" />
+    <item value="0x050F" name="" />
+    <item value="0x0510" name="" />
+    <item value="0x0511" name="" />
+    <item value="0x0512" name="Met with Priest in Flagard" />
+    <item value="0x0513" name="" />
+    <item value="0x0514" name="Conrad tells you not to come closer" />
+    <item value="0x0515" name="Conrad tells you to go back" />
+    <item value="0x0516" name="Fiale's trap is sprung" />
+    <item value="0x0517" name="Entered Flagard Castle and saw Conrad" />
+    <item value="0x0518" name="Slapped Ship's Key off Fiale" />
+    <item value="0x0519" name="Fiale leaves for Lookover." />
+    <item value="0x051A" name="Forced Frank to HQ" />
+    <item value="0x051B" name="" />
+    <item value="0x051C" name="" />
+    <item value="0x051D" name="Battle 127 Opening" />
+    <item value="0x051E" name="" />
+    <item value="0x051F" name="" />
+    <item value="0x0520" name="" />
+    <item value="0x0521" name="???(Sets on starting Ch. 5)" />
+    <item value="0x0522" name="Khan gets Elbesem's Orb?" />
+    <item value="0x0523" name="" />
+    <item value="0x0524" name="" />
+    <item value="0x0525" name="" />
+    <item value="0x0526" name="" />
+    <item value="0x0527" name="" />
+    <item value="0x0528" name="" />
+    <item value="0x0529" name="" />
+    <item value="0x052A" name="Chapter 5 starts" />
+    <item value="0x052B" name="Chapter 5 intro finished, sets Conrad's desk to a coffin." />
+    <item value="0x052C" name="(Sets on beating Fiale)" />
+    <item value="0x052D" name="(Synchronicty point) Spiriel Killed catacombs" />
+    <item value="0x052E" name="Met with Aspia guards in Catacombs" />
+    <item value="0x052F" name="(Met Fynnding?)" />
+    <item value="0x0530" name="Battle 117 ruins. barrel. next to barrel with goddess tears" />
+    <item value="0x0531" name="(Sets on beating Battle 127, Changes exit from the Castle Moat to the Final battle.)" />
+    <item value="0x0532" name="" />
+    <item value="0x0533" name="" />
+    <item value="0x0534" name="Battle 122 ruins barrel with healing drop" />
+    <item value="0x0535" name="" />
+    <item value="0x0536" name="" />
+    <item value="0x0537" name="" />
+    <item value="0x0538" name="Brave Apple in Barrel (Battle 125)" />
+    <item value="0x0539" name="Barrel next to brave apple destroyed (Battle 125)" />
+    <item value="0x053A" name="Leftmost barrel blocking door destroyed (Battle 125)" />
+    <item value="0x053B" name="Barrel blocking door destroyed (Battle 125)" />
+    <item value="0x053C" name="Large Mithril in Barrel (Battle 125)" />
+    <item value="0x053D" name="(Sets on Autowinning Battle 127, Barrel in Thief Test?)" />
+    <item value="0x053E" name="Battle 127 ruins barrel" />
+    <item value="0x053F" name="Battle 127 ruins barrel" />
+    <item value="0x0540" name="Battle 127 ruins barrel" />
+    <item value="0x0541" name="Battle 127 ruins barrel" />
+    <item value="0x0542" name="Battle 127 ruins barrel" />
+    <item value="0x0543" name="Battle 127 ruins barrel" />
+    <item value="0x0544" name="Battle 127 ruins barrel" />
+    <item value="0x0545" name="Battle 127 ruins barrel with large mithril" />
+    <item value="0x0546" name="(Golem Boss appears?) battle 127 ruins. barrel." />
+    <item value="0x0547" name="" />
+    <item value="0x0548" name="Battle 122 Opening Cutscene" />
+    <item value="0x0549" name="Battle 124 Opening Cutscene" />
+    <item value="0x054A" name="" />
+    <item value="0x054B" name="" />
+    <item value="0x054C" name="" />
+    <item value="0x054D" name="" />
+    <item value="0x054E" name="" />
+    <item value="0x054F" name="" />
+    <item value="0x0550" name="" />
+    <item value="0x0551" name="" />
+    <item value="0x0552" name="" />
+    <item value="0x0553" name="" />
+    <item value="0x0554" name="" />
+    <item value="0x0555" name="" />
+    <item value="0x0556" name="Chapter 6 Opening Cutscene" />
+    <item value="0x0557" name="Talked with Wilmer and Guards outside the castle" />
+    <item value="0x0558" name="Wilmer leads you to waiting room" />
+    <item value="0x0559" name="Battle 125 Opening Cutscene" />
+    <item value="0x055A" name="" />
+    <item value="0x055B" name="" />
+    <item value="0x055C" name="" />
+    <item value="0x055D" name="" />
+    <item value="0x055E" name="" />
+    <item value="0x055F" name="" />
+    <item value="0x0560" name="" />
+    <item value="0x0561" name="" />
+    <item value="0x0562" name="Entering Malorie Castle 1st time" />
+    <item value="0x0563" name="" />
+    <item value="0x0564" name="" />
+    <item value="0x0565" name="" />
+    <item value="0x0566" name="" />
+    <item value="0x0567" name="" />
+    <item value="0x0568" name="" />
+    <item value="0x0569" name="" />
+    <item value="0x056A" name="" />
+    <item value="0x056B" name="" />
+    <item value="0x056C" name="" />
+    <item value="0x056D" name="" />
+    <item value="0x056E" name="" />
+    <item value="0x056F" name="" />
+    <item value="0x0570" name="" />
+    <item value="0x0571" name="" />
+    <item value="0x0572" name="" />
+    <item value="0x0573" name="" />
+    <item value="0x0574" name="" />
+    <item value="0x0575" name="" />
+    <item value="0x0576" name="" />
+    <item value="0x0577" name="" />
+    <item value="0x0578" name="" />
+    <item value="0x0579" name="" />
+    <item value="0x057A" name="" />
+    <item value="0x057B" name="" />
+    <item value="0x057C" name="" />
+    <item value="0x057D" name="" />
+    <item value="0x057E" name="" />
+    <item value="0x057F" name="" />
+    <item value="0x0580" name="" />
+    <item value="0x0581" name="" />
+    <item value="0x0582" name="" />
+    <item value="0x0583" name="" />
+    <item value="0x0584" name="(128/129 Opening)" />
+    <item value="0x0585" name="" />
+    <item value="0x0586" name="" />
+    <item value="0x0587" name="" />
+    <item value="0x0588" name="" />
+    <item value="0x0589" name="" />
+    <item value="0x058A" name="" />
+    <item value="0x058B" name="" />
+    <item value="0x058C" name="" />
+    <item value="0x058D" name="" />
+    <item value="0x058E" name="" />
+    <item value="0x058F" name="" />
+    <item value="0x0590" name="" />
+    <item value="0x0591" name="" />
+    <item value="0x0592" name="" />
+    <item value="0x0593" name="" />
+    <item value="0x0594" name="" />
+    <item value="0x0595" name="" />
+    <item value="0x0596" name="" />
+    <item value="0x0597" name="" />
+    <item value="0x0598" name="" />
+    <item value="0x0599" name="" />
+    <item value="0x059A" name="" />
+    <item value="0x059B" name="" />
+    <item value="0x059C" name="" />
+    <item value="0x059D" name="" />
+    <item value="0x059E" name="" />
+    <item value="0x059F" name="" />
+    <item value="0x05A0" name="" />
+    <item value="0x05A1" name="" />
+    <item value="0x05A2" name="" />
+    <item value="0x05A3" name="" />
+    <item value="0x05A4" name="" />
+    <item value="0x05A5" name="" />
+    <item value="0x05A6" name="" />
+    <item value="0x05A7" name="" />
+    <item value="0x05A8" name="" />
+    <item value="0x05A9" name="" />
+    <item value="0x05AA" name="" />
+    <item value="0x05AB" name="" />
+    <item value="0x05AC" name="" />
+    <item value="0x05AD" name="" />
+    <item value="0x05AE" name="" />
+    <item value="0x05AF" name="" />
+    <item value="0x05B0" name="" />
+    <item value="0x05B1" name="" />
+    <item value="0x05B2" name="" />
+    <item value="0x05B3" name="" />
+    <item value="0x05B4" name="" />
+    <item value="0x05B5" name="" />
+    <item value="0x05B6" name="" />
+    <item value="0x05B7" name="" />
+    <item value="0x05B8" name="" />
+    <item value="0x05B9" name="" />
+    <item value="0x05BA" name="" />
+    <item value="0x05BB" name="" />
+    <item value="0x05BC" name="" />
+    <item value="0x05BD" name="" />
+    <item value="0x05BE" name="" />
+    <item value="0x05BF" name="" />
+    <item value="0x05C0" name="" />
+    <item value="0x05C1" name="" />
+    <item value="0x05C2" name="" />
+    <item value="0x05C3" name="" />
+    <item value="0x05C4" name="" />
+    <item value="0x05C5" name="" />
+    <item value="0x05C6" name="" />
+    <item value="0x05C7" name="" />
+    <item value="0x05C8" name="" />
+    <item value="0x05C9" name="" />
+    <item value="0x05CA" name="" />
+    <item value="0x05CB" name="" />
+    <item value="0x05CC" name="" />
+    <item value="0x05CD" name="" />
+    <item value="0x05CE" name="" />
+    <item value="0x05CF" name="" />
+    <item value="0x05D0" name="" />
+    <item value="0x05D1" name="" />
+    <item value="0x05D2" name="" />
+    <item value="0x05D3" name="" />
+    <item value="0x05D4" name="" />
+    <item value="0x05D5" name="" />
+    <item value="0x05D6" name="" />
+    <item value="0x05D7" name="" />
+    <item value="0x05D8" name="" />
+    <item value="0x05D9" name="" />
+    <item value="0x05DA" name="" />
+    <item value="0x05DB" name="" />
+    <item value="0x05DC" name="" />
+    <item value="0x05DD" name="" />
+    <item value="0x05DE" name="" />
+    <item value="0x05DF" name="" />
+    <item value="0x05E0" name="" />
+    <item value="0x05E1" name="" />
+    <item value="0x05E2" name="" />
+    <item value="0x05E3" name="" />
+    <item value="0x05E4" name="" />
+    <item value="0x05E5" name="" />
+    <item value="0x05E6" name="" />
+    <item value="0x05E7" name="" />
+    <item value="0x05E8" name="" />
+    <item value="0x05E9" name="" />
+    <item value="0x05EA" name="" />
+    <item value="0x05EB" name="" />
+    <item value="0x05EC" name="" />
+    <item value="0x05ED" name="" />
+    <item value="0x05EE" name="" />
+    <item value="0x05EF" name="" />
+    <item value="0x05F0" name="" />
+    <item value="0x05F1" name="" />
+    <item value="0x05F2" name="" />
+    <item value="0x05F3" name="" />
+    <item value="0x05F4" name="" />
+    <item value="0x05F5" name="" />
+    <item value="0x05F6" name="" />
+    <item value="0x05F7" name="" />
+    <item value="0x05F8" name="" />
+    <item value="0x05F9" name="" />
+    <item value="0x05FA" name="" />
+    <item value="0x05FB" name="" />
+    <item value="0x05FC" name="" />
+    <item value="0x05FD" name="" />
+    <item value="0x05FE" name="" />
+    <item value="0x05FF" name="" />
+    <item value="0x0600" name="Scn1 autodeal unknown shop no item" />
+    <item value="0x0601" name="Scn1 autodeal saraband no item" />
+    <item value="0x0602" name="Scn1 autodeal balsamo no item" />
+    <item value="0x0603" name="Scn1 Railhead Auto Deal (Power Ankh)" />
+    <item value="0x0604" name="Scn1 autodeal 4th car no item" />
+    <item value="0x0605" name="Scn1 Quonos Auto Deal (Bronze Rod)" />
+    <item value="0x0606" name="Scn1 Vagabond 1 Auto Deal (Magic Wand)" />
+    <item value="0x0607" name="Scn1 Aspia Auto Deal (Saint Ankh)" />
+    <item value="0x0608" name="Scn1 autodeal storich no item" />
+    <item value="0x0609" name="Scn1 Flagard Auto Deal (Talisman Rod)" />
+    <item value="0x060A" name="Scn1 Lookover Auto Deal (Angel Wand)" />
+    <item value="0x060B" name="Scn1 Vagabond 2 Auto Deal (Misty Ankh)" />
+    <item value="0x060C" name="Scn1 autodeal Mallory no item" />
+    <item value="0x060D" name="Free space?" />
+    <item value="0x060E" name="Free space?" />
+    <item value="0x060F" name="Free space?" />
+    <item value="0x0610" name="Scn2 auto deal unknown shop no item" />
+    <item value="0x0611" name="Scn2 autodeal saraband1 no item" />
+    <item value="0x0612" name="Scn2 autodeal balsamo no item" />
+    <item value="0x0613" name="Scn2 autodeal dusty no item" />
+    <item value="0x0614" name="Scn2 autodeal anafect (Power Ankh)" />
+    <item value="0x0615" name="Scn2 autodeal lineside no item" />
+    <item value="0x0616" name="Scn2 autodeal stump village (Bronze Rod)" />
+    <item value="0x0617" name="Scn2 auto deal barrad" />
+    <item value="0x0618" name="Scn2 autodeal elblesem" />
+    <item value="0x0619" name="Scn2 autodeal seagate no item" />
+    <item value="0x061A" name="Scn2 auto deal saraband2" />
+    <item value="0x061B" name="Scn2 auto deal iro" />
+    <item value="0x061C" name="Scn2 auto deal swampland" />
+    <item value="0x061D" name="Scn2 auto deal storich1 no item" />
+    <item value="0x061E" name="Scn2 auto deal storich2 no item" />
+    <item value="0x061F" name="Free space?" />
+    <item value="0x0620" name="Scn3 haggle flagship" />
+    <item value="0x0621" name="Scn3 haggle port of destonia" />
+    <item value="0x0622" name="Scn3 haggle port of destonia revisit" />
+    <item value="0x0623" name="Scn3 haggle foothill" />
+    <item value="0x0624" name="Scn3 haggle guarder" />
+    <item value="0x0625" name="Scn3 haggle baersol item 1" />
+    <item value="0x0626" name="Scn3 haggle baersol item 2" />
+    <item value="0x0627" name="Scn3 haggle aspia item 1" />
+    <item value="0x0628" name="Scn3 haggle aspia item 2" />
+    <item value="0x0629" name="Scn3 haggle aural item 1" />
+    <item value="0x062A" name="Scn3 haggle aural item 2" />
+    <item value="0x062B" name="Scn3 haggle maya item 1" />
+    <item value="0x062C" name="Scn3 haggle maya item 2" />
+    <item value="0x062D" name="Scn3 haggle bowlet item 1" />
+    <item value="0x062E" name="Scn3 haggle bowlet item 2" />
+    <item value="0x062F" name="Scn3 haggle dormant item 1" />
+    <item value="0x0630" name="Scn3 haggle dormant item 2" />
+    <item value="0x0631" name="Scn3  haggle dormant item 3" />
+    <item value="0x0632" name="Scn3 haggle dormant item 4" />
+    <item value="0x0633" name="Scn3 haggle flagship2 item 1" />
+    <item value="0x0634" name="Scn3 haggle flagship2 item 2" />
+    <item value="0x0635" name="Scn3 haggle flagship2 item 3" />
+    <item value="0x0636" name="Scn3 haggle flagship2 item 4" />
+    <item value="0x0637" name="Scn3 haggle flagship2 item 5" />
+    <item value="0x0638" name="Scn3 haggle remotest item 1" />
+    <item value="0x0639" name="Scn3 haggle remotest item 2" />
+    <item value="0x063A" name="Scn3 haggle remotest item 3" />
+    <item value="0x063B" name="Scn3 haggle remotest item 4" />
+    <item value="0x063C" name="Scn3 haggle remotest item 5" />
+    <item value="0x063D" name="Free space?" />
+    <item value="0x063E" name="Free space?" />
+    <item value="0x063F" name="Free space?" />
+    <item value="0x0640" name="Scn1 Balsamo Haggle Deal Potion" />
+    <item value="0x0641" name="Scn1 Balsamo Haggle Deal Goddess tear" />
+    <item value="0x0642" name="Scn1 Railhead Haggle Loin Cloth" />
+    <item value="0x0643" name="Scn1 Railhead Haggle Potion" />
+    <item value="0x0644" name="Scn1 haggle 4th car" />
+    <item value="0x0645" name="Scn1 haggle quonos item 1" />
+    <item value="0x0646" name="Scn1 haggle quonos item 2" />
+    <item value="0x0647" name="Scn1 haggle vagabond1" />
+    <item value="0x0648" name="Scn1 haggle aspia" />
+    <item value="0x0649" name="Scn1 haggle storich item1" />
+    <item value="0x064A" name="Scn1 haggle storich item2" />
+    <item value="0x064B" name="Scn1 haggle flaggard item1" />
+    <item value="0x064C" name="Scn1 haggle flaggard item2" />
+    <item value="0x064D" name="Scn1 haggle lookover item1" />
+    <item value="0x064E" name="Scn1 haggle lookover item2" />
+    <item value="0x064F" name="Scn1 haggle lookover item3" />
+    <item value="0x0650" name="Scn1 haggle lookover item4" />
+    <item value="0x0651" name="Scn1 haggle vagabond2 item1" />
+    <item value="0x0652" name="Scn1 haggle vagabond2 item2" />
+    <item value="0x0653" name="Scn1 haggle Mallory item 1" />
+    <item value="0x0654" name="Scn1 haggle Mallory item2" />
+    <item value="0x0655" name="Scn1 haggle Mallory item 3" />
+    <item value="0x0656" name="Scn1 haggle Mallory item 4" />
+    <item value="0x0657" name="Scn1 haggle Mallory item5" />
+    <item value="0x0658" name="Scn2 haggles balsumo item 1" />
+    <item value="0x0659" name="Scn2 haggles balsumo item 2" />
+    <item value="0x065A" name="Scn2 haggles dusty item1" />
+    <item value="0x065B" name="Scn2 haggles dusty item2" />
+    <item value="0x065C" name="Scn2 haggles anafect item1" />
+    <item value="0x065D" name="Scn2 haggles anafect item2" />
+    <item value="0x065E" name="Scn2 haggles lineside" />
+    <item value="0x065F" name="Scn2 haggles stump village item1" />
+    <item value="0x0660" name="Scn2 haggles stump village item2" />
+    <item value="0x0661" name="Scn2 haggles barrad" />
+    <item value="0x0662" name="Scn2 haggles elblessem" />
+    <item value="0x0663" name="Scn2 haggles seagate" />
+    <item value="0x0664" name="Scn2 haggles saraband2 item1" />
+    <item value="0x0665" name="Scn2 haggles saraband2 item2" />
+    <item value="0x0666" name="Scn2 haggles saraband2 item3" />
+    <item value="0x0667" name="Scn2 haggles saraband2 item4" />
+    <item value="0x0668" name="Scn2 haggles saraband2 item5" />
+    <item value="0x0669" name="Scn2 haggles iro item1" />
+    <item value="0x066A" name="Scn2 haggles iro item2" />
+    <item value="0x066B" name="Scn2 haggles iro item3" />
+    <item value="0x066C" name="Scn2 haggles swampland item 1" />
+    <item value="0x066D" name="Scn2 haggles swampland item 2" />
+    <item value="0x066E" name="Scn2 haggles swampland item 3" />
+    <item value="0x066F" name="Scn2 haggles storich item1" />
+    <item value="0x0670" name="Scn2 haggles storich item2" />
+    <item value="0x0671" name="Scn2 haggles storich item3" />
+    <item value="0x0672" name="Scn2 haggles storich item4" />
+    <item value="0x0673" name="Scn2 haggles storich item5" />
+    <item value="0x0674" name="Scn3 autodeals port of destonia" />
+    <item value="0x0675" name="Scn3 autodeals port of destonia revisit" />
+    <item value="0x0676" name="Scn3 autodeals foothill" />
+    <item value="0x0677" name="Scn3 autodeals gaurder" />
+    <item value="0x0678" name="Scn3 autodeals baersol" />
+    <item value="0x0679" name="Scn3 autodeals aspia no item" />
+    <item value="0x067A" name="Scn3 autodeals aural no item" />
+    <item value="0x067B" name="Scn3 autodeals maya" />
+    <item value="0x067C" name="Scn3 autodeals bowlet" />
+    <item value="0x067D" name="Scn3 autodeals dormant" />
+    <item value="0x067E" name="Scn3 autodeals flagship2" />
+    <item value="0x067F" name="Scn3 autodeals remotest" />
+    <item value="0x0680" name="" />
+    <item value="0x0681" name="" />
+    <item value="0x0682" name="" />
+    <item value="0x0683" name="" />
+    <item value="0x0684" name="Tiamat Rod obtained" />
+    <item value="0x0685" name="" />
+    <item value="0x0686" name="" />
+    <item value="0x0687" name="" />
+    <item value="0x0688" name="" />
+    <item value="0x0689" name="" />
+    <item value="0x068A" name="" />
+    <item value="0x068B" name="" />
+    <item value="0x068C" name="" />
+    <item value="0x068D" name="" />
+    <item value="0x068E" name="" />
+    <item value="0x068F" name="" />
+    <item value="0x0690" name="" />
+    <item value="0x0691" name="" />
+    <item value="0x0692" name="" />
+    <item value="0x0693" name="" />
+    <item value="0x0694" name="" />
+    <item value="0x0695" name="" />
+    <item value="0x0696" name="" />
+    <item value="0x0697" name="" />
+    <item value="0x0698" name="" />
+    <item value="0x0699" name="" />
+    <item value="0x069A" name="" />
+    <item value="0x069B" name="" />
+    <item value="0x069C" name="" />
+    <item value="0x069D" name="" />
+    <item value="0x069E" name="" />
+    <item value="0x069F" name="" />
+    <item value="0x06A0" name="" />
+    <item value="0x06A1" name="" />
+    <item value="0x06A2" name="" />
+    <item value="0x06A3" name="" />
+    <item value="0x06A4" name="" />
+    <item value="0x06A5" name="" />
+    <item value="0x06A6" name="" />
+    <item value="0x06A7" name="" />
+    <item value="0x06A8" name="" />
+    <item value="0x06A9" name="" />
+    <item value="0x06AA" name="" />
+    <item value="0x06AB" name="" />
+    <item value="0x06AC" name="" />
+    <item value="0x06AD" name="" />
+    <item value="0x06AE" name="" />
+    <item value="0x06AF" name="" />
+    <item value="0x06B0" name="" />
+    <item value="0x06B1" name="" />
+    <item value="0x06B2" name="" />
+    <item value="0x06B3" name="" />
+    <item value="0x06B4" name="" />
+    <item value="0x06B5" name="" />
+    <item value="0x06B6" name="" />
+    <item value="0x06B7" name="" />
+    <item value="0x06B8" name="" />
+    <item value="0x06B9" name="" />
+    <item value="0x06BA" name="" />
+    <item value="0x06BB" name="" />
+    <item value="0x06BC" name="" />
+    <item value="0x06BD" name="" />
+    <item value="0x06BE" name="" />
+    <item value="0x06BF" name="" />
+    <item value="0x06C0" name="" />
+    <item value="0x06C1" name="" />
+    <item value="0x06C2" name="" />
+    <item value="0x06C3" name="" />
+    <item value="0x06C4" name="" />
+    <item value="0x06C5" name="" />
+    <item value="0x06C6" name="" />
+    <item value="0x06C7" name="" />
+    <item value="0x06C8" name="" />
+    <item value="0x06C9" name="" />
+    <item value="0x06CA" name="" />
+    <item value="0x06CB" name="" />
+    <item value="0x06CC" name="" />
+    <item value="0x06CD" name="" />
+    <item value="0x06CE" name="" />
+    <item value="0x06CF" name="" />
+    <item value="0x06D0" name="" />
+    <item value="0x06D1" name="" />
+    <item value="0x06D2" name="" />
+    <item value="0x06D3" name="" />
+    <item value="0x06D4" name="" />
+    <item value="0x06D5" name="" />
+    <item value="0x06D6" name="" />
+    <item value="0x06D7" name="" />
+    <item value="0x06D8" name="" />
+    <item value="0x06D9" name="" />
+    <item value="0x06DA" name="" />
+    <item value="0x06DB" name="" />
+    <item value="0x06DC" name="" />
+    <item value="0x06DD" name="" />
+    <item value="0x06DE" name="" />
+    <item value="0x06DF" name="" />
+    <item value="0x06E0" name="" />
+    <item value="0x06E1" name="" />
+    <item value="0x06E2" name="" />
+    <item value="0x06E3" name="" />
+    <item value="0x06E4" name="" />
+    <item value="0x06E5" name="" />
+    <item value="0x06E6" name="" />
+    <item value="0x06E7" name="" />
+    <item value="0x06E8" name="" />
+    <item value="0x06E9" name="" />
+    <item value="0x06EA" name="" />
+    <item value="0x06EB" name="" />
+    <item value="0x06EC" name="" />
+    <item value="0x06ED" name="" />
+    <item value="0x06EE" name="" />
+    <item value="0x06EF" name="" />
+    <item value="0x06F0" name="" />
+    <item value="0x06F1" name="" />
+    <item value="0x06F2" name="" />
+    <item value="0x06F3" name="" />
+    <item value="0x06F4" name="" />
+    <item value="0x06F5" name="" />
+    <item value="0x06F6" name="" />
+    <item value="0x06F7" name="" />
+    <item value="0x06F8" name="" />
+    <item value="0x06F9" name="" />
+    <item value="0x06FA" name="" />
+    <item value="0x06FB" name="" />
+    <item value="0x06FC" name="" />
+    <item value="0x06FD" name="" />
+    <item value="0x06FE" name="" />
+    <item value="0x06FF" name="" />
+    <item value="0x0700" name="Iron Bracer Saraband Pier" />
+    <item value="0x0701" name="" />
+    <item value="0x0702" name="Healing Drop Saraband" />
+    <item value="0x0703" name="Potion Saraband" />
+    <item value="0x0704" name="Health bread Saraband" />
+    <item value="0x0705" name="Healing Drop Saraband" />
+    <item value="0x0706" name="Large Mithril Saraband" />
+    <item value="0x0707" name="Medical Herb Saraband" />
+    <item value="0x0708" name="Large Mithril wall Balsamo" />
+    <item value="0x0709" name="Brainfood wall Balsamo" />
+    <item value="0x070A" name="Medical herb barrel Balsamo" />
+    <item value="0x070B" name="Power wine Balsamo" />
+    <item value="0x070C" name="" />
+    <item value="0x070D" name="" />
+    <item value="0x070E" name="Steel Bracer Dwarf Hill" />
+    <item value="0x070F" name="" />
+    <item value="0x0710" name="" />
+    <item value="0x0711" name="" />
+    <item value="0x0712" name="" />
+    <item value="0x0713" name="" />
+    <item value="0x0714" name="" />
+    <item value="0x0715" name="" />
+    <item value="0x0716" name="" />
+    <item value="0x0717" name="" />
+    <item value="0x0718" name="" />
+    <item value="0x0719" name="" />
+    <item value="0x071A" name="" />
+    <item value="0x071B" name="" />
+    <item value="0x071C" name="" />
+    <item value="0x071D" name="" />
+    <item value="0x071E" name="" />
+    <item value="0x071F" name="" />
+    <item value="0x0720" name="" />
+    <item value="0x0721" name="Large Mithril Railhead" />
+    <item value="0x0722" name="Happy Cookie Railhead" />
+    <item value="0x0723" name="Healing Drop Railhead" />
+    <item value="0x0724" name="Quick Chicken Railhead" />
+    <item value="0x0725" name="Large Mithril Railhead" />
+    <item value="0x0726" name="" />
+    <item value="0x0727" name="" />
+    <item value="0x0728" name="" />
+    <item value="0x0729" name="" />
+    <item value="0x072A" name="Healing Drop Train battle" />
+    <item value="0x072B" name="Large Mithril Train battle" />
+    <item value="0x072C" name="Gale Ring Train battle" />
+    <item value="0x072D" name="Chicken Feed" />
+    <item value="0x072E" name="" />
+    <item value="0x072F" name="Armor Milk" />
+    <item value="0x0730" name="" />
+    <item value="0x0731" name="" />
+    <item value="0x0732" name="Large Mithril top of train" />
+    <item value="0x0733" name="Brain food Quonos" />
+    <item value="0x0734" name="Brave Apple Quonos" />
+    <item value="0x0735" name="Large Mithril Quonos" />
+    <item value="0x0736" name="Dark Matter Quonos" />
+    <item value="0x0737" name="" />
+    <item value="0x0738" name="Black Ring (Quonos)" />
+    <item value="0x0739" name="" />
+    <item value="0x073A" name="Vagabond. health bread in barrels by fence" />
+    <item value="0x073B" name="Vagabond. swiftboots in crate near beds in main tent" />
+    <item value="0x073C" name="Vagabond. large mithril in tent" />
+    <item value="0x073D" name="" />
+    <item value="0x073E" name="" />
+    <item value="0x073F" name="" />
+    <item value="0x0740" name="" />
+    <item value="0x0741" name="" />
+    <item value="0x0742" name="" />
+    <item value="0x0743" name="" />
+    <item value="0x0744" name="Battle 115. white ring chest" />
+    <item value="0x0745" name="Battle 115. large mithril rock" />
+    <item value="0x0746" name="Aspia town. crate next to barracks. small mithril" />
+    <item value="0x0747" name="Aspia town. crate behind item shop with large mithril" />
+    <item value="0x0748" name="Large mythril, chest" />
+    <item value="0x0749" name="Aspia town. barrel in house with 2 scholars. healing drop" />
+    <item value="0x074A" name="Aspia town. inn storage room barrel with power wine" />
+    <item value="0x074B" name="Aspia town. inn second floor large mithril on ground by window" />
+    <item value="0x074C" name="Aspia castle barracks small mithril barrel." />
+    <item value="0x074D" name="Storich. large mithril on ground next to hq" />
+    <item value="0x074E" name="Storich. small mithril on bar table" />
+    <item value="0x074F" name="Storich. box with protect milk in couple's home." />
+    <item value="0x0750" name="Storich. large mithril in old couple home chest" />
+    <item value="0x0751" name="" />
+    <item value="0x0752" name="" />
+    <item value="0x0753" name="" />
+    <item value="0x0754" name="" />
+    <item value="0x0755" name="" />
+    <item value="0x0756" name="" />
+    <item value="0x0757" name="Battle 118. volcano large mithril" />
+    <item value="0x0758" name="Battle 118. volcano dark matter" />
+    <item value="0x0759" name="Battle 118. volcano mithril dirk" />
+    <item value="0x075A" name="Flaggard. well next to hq" />
+    <item value="0x075B" name="Flaggard. well with large mithril" />
+    <item value="0x075C" name="Flaggard. chest with large mithril in front of church" />
+    <item value="0x075D" name="Flaggard. small mithril in fireplace" />
+    <item value="0x075E" name="" />
+    <item value="0x075F" name="" />
+    <item value="0x0760" name="" />
+    <item value="0x0761" name="" />
+    <item value="0x0762" name="" />
+    <item value="0x0763" name="" />
+    <item value="0x0764" name="" />
+    <item value="0x0765" name="" />
+    <item value="0x0766" name="" />
+    <item value="0x0767" name="" />
+    <item value="0x0768" name="" />
+    <item value="0x0769" name="" />
+    <item value="0x076A" name="" />
+    <item value="0x076B" name="" />
+    <item value="0x076C" name="" />
+    <item value="0x076D" name="Battle 122 ruins locked chest with small mithril" />
+    <item value="0x076E" name="Battle 122 ruins locked chest with large mithril" />
+    <item value="0x076F" name="" />
+    <item value="0x0770" name="" />
+    <item value="0x0771" name="Battle 122 ruins locked chest goddess tears" />
+    <item value="0x0772" name="Battle 122 ruins locked chest wendego wand" />
+    <item value="0x0773" name="Battle 122 ruins locked chest gale lance" />
+    <item value="0x0774" name="Dark Matter in Lookover Tower" />
+    <item value="0x0775" name="" />
+    <item value="0x0776" name="Venom Blade in Great Wall" />
+    <item value="0x0777" name="" />
+    <item value="0x0778" name="" />
+    <item value="0x0779" name="" />
+    <item value="0x077A" name="" />
+    <item value="0x077B" name="" />
+    <item value="0x077C" name="" />
+    <item value="0x077D" name="" />
+    <item value="0x077E" name="Potion in Malorie Castle" />
+    <item value="0x077F" name="Pretty Glove in Malorie Castle" />
+    <item value="0x0780" name="Happy Cookie in Malorie Castle" />
+    <item value="0x0781" name="Macho Maul in Malorie Castle" />
+    <item value="0x0782" name="Ultra Lance in Malorie Castle" />
+    <item value="0x0783" name="Dark Matter in Malorie Castle" />
+    <item value="0x0784" name="Large Mithril in Malorie Castle" />
+    <item value="0x0785" name="" />
+    <item value="0x0786" name="" />
+    <item value="0x0787" name="" />
+    <item value="0x0788" name="Battle 127 ruins locked chest. mitra ankh" />
+    <item value="0x0789" name="" />
+    <item value="0x078A" name="Battle 127 ruins chest. dark matter" />
+    <item value="0x078B" name="" />
+    <item value="0x078C" name="Large Mithril (Battle 133)" />
+    <item value="0x078D" name="" />
+    <item value="0x078E" name="" />
+    <item value="0x078F" name="" />
+    <item value="0x0790" name="" />
+    <item value="0x0791" name="" />
+    <item value="0x0792" name="Hill Ruin Map" />
+    <item value="0x0793" name="Blue Ruin Map" />
+    <item value="0x0794" name="Middle Ruin Map" />
+    <item value="0x0795" name="Desert Ruin Map" />
+    <item value="0x0796" name="Tower Ruin Map" />
+    <item value="0x0797" name="Kingdom Ruin Map" />
+    <item value="0x0798" name="Potion Balsamo" />
+    <item value="0x0799" name="" />
+    <item value="0x079A" name="Zero Wing in Battle 124" />
+    <item value="0x079B" name="" />
+    <item value="0x079C" name="" />
+    <item value="0x079D" name="" />
+    <item value="0x079E" name="" />
+    <item value="0x079F" name="" />
+    <item value="0x07A0" name="10G Saraband" />
+    <item value="0x07A1" name="5G Saraband" />
+    <item value="0x07A2" name="5G Saraband" />
+    <item value="0x07A3" name="10G Saraband" />
+    <item value="0x07A4" name="10G Balsamo" />
+    <item value="0x07A5" name="5G Balsamo" />
+    <item value="0x07A6" name="20G Railhead" />
+    <item value="0x07A7" name="30G Quonos" />
+    <item value="0x07A8" name="Aspia town. 5 gold on shelf in house next to 2 scholar house" />
+    <item value="0x07A9" name="Aspia town. 40 gold on shelf in couple's house" />
+    <item value="0x07AA" name="Storich. 50 gold on shelf in old couple's home" />
+    <item value="0x07AB" name="1000G Flaggard Castle" />
+    <item value="0x07AC" name="1500G Lookover" />
+    <item value="0x07AD" name="2000G Malorie" />
+    <item value="0x07AE" name="3000G Malorie Castle" />
+    <item value="0x07AF" name="" />
+    <item value="0x07B0" name="" />
+    <item value="0x07B1" name="" />
+    <item value="0x07B2" name="" />
+    <item value="0x07B3" name="" />
+    <item value="0x07B4" name="" />
+    <item value="0x07B5" name="" />
+    <item value="0x07B6" name="" />
+    <item value="0x07B7" name="" />
+    <item value="0x07B8" name="" />
+    <item value="0x07B9" name="" />
+    <item value="0x07BA" name="" />
+    <item value="0x07BB" name="" />
+    <item value="0x07BC" name="" />
+    <item value="0x07BD" name="" />
+    <item value="0x07BE" name="" />
+    <item value="0x07BF" name="" />
+    <item value="0x07C0" name="" />
+    <item value="0x07C1" name="" />
+    <item value="0x07C2" name="" />
+    <item value="0x07C3" name="" />
+    <item value="0x07C4" name="" />
+    <item value="0x07C5" name="" />
+    <item value="0x07C6" name="" />
+    <item value="0x07C7" name="" />
+    <item value="0x07C8" name="" />
+    <item value="0x07C9" name="" />
+    <item value="0x07CA" name="" />
+    <item value="0x07CB" name="" />
+    <item value="0x07CC" name="" />
+    <item value="0x07CD" name="" />
+    <item value="0x07CE" name="" />
+    <item value="0x07CF" name="" />
+    <item value="0x07D0" name="" />
+    <item value="0x07D1" name="" />
+    <item value="0x07D2" name="" />
+    <item value="0x07D3" name="" />
+    <item value="0x07D4" name="" />
+    <item value="0x07D5" name="" />
+    <item value="0x07D6" name="" />
+    <item value="0x07D7" name="" />
+    <item value="0x07D8" name="" />
+    <item value="0x07D9" name="" />
+    <item value="0x07DA" name="" />
+    <item value="0x07DB" name="" />
+    <item value="0x07DC" name="" />
+    <item value="0x07DD" name="" />
+    <item value="0x07DE" name="" />
+    <item value="0x07DF" name="" />
+    <item value="0x07E0" name="" />
+    <item value="0x07E1" name="" />
+    <item value="0x07E2" name="" />
+    <item value="0x07E3" name="" />
+    <item value="0x07E4" name="" />
+    <item value="0x07E5" name="" />
+    <item value="0x07E6" name="" />
+    <item value="0x07E7" name="" />
+    <item value="0x07E8" name="" />
+    <item value="0x07E9" name="" />
+    <item value="0x07EA" name="" />
+    <item value="0x07EB" name="" />
+    <item value="0x07EC" name="" />
+    <item value="0x07ED" name="" />
+    <item value="0x07EE" name="" />
+    <item value="0x07EF" name="" />
+    <item value="0x07F0" name="" />
+    <item value="0x07F1" name="" />
+    <item value="0x07F2" name="" />
+    <item value="0x07F3" name="" />
+    <item value="0x07F4" name="" />
+    <item value="0x07F5" name="" />
+    <item value="0x07F6" name="" />
+    <item value="0x07F7" name="" />
+    <item value="0x07F8" name="" />
+    <item value="0x07F9" name="" />
+    <item value="0x07FA" name="" />
+    <item value="0x07FB" name="" />
+    <item value="0x07FC" name="" />
+    <item value="0x07FD" name="" />
+    <item value="0x07FE" name="" />
+    <item value="0x07FF" name="All 5 locked aspia castle chests" />
+    <item value="0x0800" name="Met w/ Synbios in Saraband" />
+    <item value="0x0801" name="Unlocks Saraband Imperial Command?, Cutscene part 1" />
+    <item value="0x0802" name="Imperial Command Cutscene Part 2" />
+    <item value="0x0803" name="Saraband Imperial Command cutscene 3" />
+    <item value="0x0804" name="" />
+    <item value="0x0805" name="" />
+    <item value="0x0806" name="" />
+    <item value="0x0807" name="" />
+    <item value="0x0808" name="" />
+    <item value="0x0809" name="" />
+    <item value="0x080A" name="" />
+    <item value="0x080B" name="" />
+    <item value="0x080C" name="" />
+    <item value="0x080D" name="" />
+    <item value="0x080E" name="" />
+    <item value="0x080F" name="" />
+    <item value="0x0810" name="" />
+    <item value="0x0811" name="" />
+    <item value="0x0812" name="" />
+    <item value="0x0813" name="" />
+    <item value="0x0814" name="" />
+    <item value="0x0815" name="" />
+    <item value="0x0816" name="" />
+    <item value="0x0817" name="" />
+    <item value="0x0818" name="" />
+    <item value="0x0819" name="" />
+    <item value="0x081A" name="" />
+    <item value="0x081B" name="Stella saved" />
+    <item value="0x081C" name="" />
+    <item value="0x081D" name="" />
+    <item value="0x081E" name="" />
+    <item value="0x081F" name="" />
+    <item value="0x0820" name="" />
+    <item value="0x0821" name="" />
+    <item value="0x0822" name="" />
+    <item value="0x0823" name="" />
+    <item value="0x0824" name="" />
+    <item value="0x0825" name="" />
+    <item value="0x0826" name="" />
+    <item value="0x0827" name="" />
+    <item value="0x0828" name="(Set @ start of SC2)" />
+    <item value="0x0829" name="" />
+    <item value="0x082A" name="" />
+    <item value="0x082B" name="" />
+    <item value="0x082C" name="" />
+    <item value="0x082D" name="" />
+    <item value="0x082E" name="" />
+    <item value="0x082F" name="???" />
+    <item value="0x0830" name="" />
+    <item value="0x0831" name="Chicken following Medion" />
+    <item value="0x0832" name="" />
+    <item value="0x0833" name="" />
+    <item value="0x0834" name="" />
+    <item value="0x0835" name="" />
+    <item value="0x0836" name="" />
+    <item value="0x0837" name="" />
+    <item value="0x0838" name="" />
+    <item value="0x0839" name="" />
+    <item value="0x083A" name="" />
+    <item value="0x083B" name="" />
+    <item value="0x083C" name="" />
+    <item value="0x083D" name="" />
+    <item value="0x083E" name="" />
+    <item value="0x083F" name="" />
+    <item value="0x0840" name="" />
+    <item value="0x0841" name="(Synchronicty point)" />
+    <item value="0x0842" name="" />
+    <item value="0x0843" name="" />
+    <item value="0x0844" name="" />
+    <item value="0x0845" name="" />
+    <item value="0x0846" name="" />
+    <item value="0x0847" name="" />
+    <item value="0x0848" name="" />
+    <item value="0x0849" name="" />
+    <item value="0x084A" name="" />
+    <item value="0x084B" name="" />
+    <item value="0x084C" name="" />
+    <item value="0x084D" name="" />
+    <item value="0x084E" name="" />
+    <item value="0x084F" name="" />
+    <item value="0x0850" name="" />
+    <item value="0x0851" name="" />
+    <item value="0x0852" name="" />
+    <item value="0x0853" name="" />
+    <item value="0x0854" name="" />
+    <item value="0x0855" name="" />
+    <item value="0x0856" name="" />
+    <item value="0x0857" name="" />
+    <item value="0x0858" name="" />
+    <item value="0x0859" name="(Synchronicty point)" />
+    <item value="0x085A" name="" />
+    <item value="0x085B" name="" />
+    <item value="0x085C" name="" />
+    <item value="0x085D" name="" />
+    <item value="0x085E" name="" />
+    <item value="0x085F" name="" />
+    <item value="0x0860" name="" />
+    <item value="0x0861" name="" />
+    <item value="0x0862" name="" />
+    <item value="0x0863" name="" />
+    <item value="0x0864" name="" />
+    <item value="0x0865" name="" />
+    <item value="0x0866" name="" />
+    <item value="0x0867" name="" />
+    <item value="0x0868" name="" />
+    <item value="0x0869" name="" />
+    <item value="0x086A" name="" />
+    <item value="0x086B" name="" />
+    <item value="0x086C" name="" />
+    <item value="0x086D" name="" />
+    <item value="0x086E" name="" />
+    <item value="0x086F" name="" />
+    <item value="0x0870" name="" />
+    <item value="0x0871" name="" />
+    <item value="0x0872" name="" />
+    <item value="0x0873" name="" />
+    <item value="0x0874" name="" />
+    <item value="0x0875" name="" />
+    <item value="0x0876" name="" />
+    <item value="0x0877" name="" />
+    <item value="0x0878" name="" />
+    <item value="0x0879" name="" />
+    <item value="0x087A" name="" />
+    <item value="0x087B" name="" />
+    <item value="0x087C" name="" />
+    <item value="0x087D" name="" />
+    <item value="0x087E" name="" />
+    <item value="0x087F" name="" />
+    <item value="0x0880" name="" />
+    <item value="0x0881" name="" />
+    <item value="0x0882" name="" />
+    <item value="0x0883" name="" />
+    <item value="0x0884" name="" />
+    <item value="0x0885" name="" />
+    <item value="0x0886" name="" />
+    <item value="0x0887" name="" />
+    <item value="0x0888" name="" />
+    <item value="0x0889" name="" />
+    <item value="0x088A" name="Villager saved?" />
+    <item value="0x088B" name="Theif saved?" />
+    <item value="0x088C" name="Villager saved?" />
+    <item value="0x088D" name="Villager saved?" />
+    <item value="0x088E" name="Villager saved?" />
+    <item value="0x088F" name="Hera saved?" />
+    <item value="0x0890" name="" />
+    <item value="0x0891" name="" />
+    <item value="0x0892" name="" />
+    <item value="0x0893" name="" />
+    <item value="0x0894" name="" />
+    <item value="0x0895" name="" />
+    <item value="0x0896" name="" />
+    <item value="0x0897" name="" />
+    <item value="0x0898" name="" />
+    <item value="0x0899" name="" />
+    <item value="0x089A" name="" />
+    <item value="0x089B" name="" />
+    <item value="0x089C" name="" />
+    <item value="0x089D" name="" />
+    <item value="0x089E" name="" />
+    <item value="0x089F" name="" />
+    <item value="0x08A0" name="" />
+    <item value="0x08A1" name="" />
+    <item value="0x08A2" name="" />
+    <item value="0x08A3" name="" />
+    <item value="0x08A4" name="(Synchronicty point)" />
+    <item value="0x08A5" name="" />
+    <item value="0x08A6" name="" />
+    <item value="0x08A7" name="" />
+    <item value="0x08A8" name="" />
+    <item value="0x08A9" name="" />
+    <item value="0x08AA" name="" />
+    <item value="0x08AB" name="" />
+    <item value="0x08AC" name="" />
+    <item value="0x08AD" name="" />
+    <item value="0x08AE" name="" />
+    <item value="0x08AF" name="" />
+    <item value="0x08B0" name="" />
+    <item value="0x08B1" name="" />
+    <item value="0x08B2" name="" />
+    <item value="0x08B3" name="" />
+    <item value="0x08B4" name="" />
+    <item value="0x08B5" name="" />
+    <item value="0x08B6" name="" />
+    <item value="0x08B7" name="" />
+    <item value="0x08B8" name="" />
+    <item value="0x08B9" name="" />
+    <item value="0x08BA" name="" />
+    <item value="0x08BB" name="" />
+    <item value="0x08BC" name="" />
+    <item value="0x08BD" name="" />
+    <item value="0x08BE" name="" />
+    <item value="0x08BF" name="" />
+    <item value="0x08C0" name="" />
+    <item value="0x08C1" name="" />
+    <item value="0x08C2" name="" />
+    <item value="0x08C3" name="" />
+    <item value="0x08C4" name="" />
+    <item value="0x08C5" name="" />
+    <item value="0x08C6" name="" />
+    <item value="0x08C7" name="" />
+    <item value="0x08C8" name="" />
+    <item value="0x08C9" name="" />
+    <item value="0x08CA" name="" />
+    <item value="0x08CB" name="" />
+    <item value="0x08CC" name="" />
+    <item value="0x08CD" name="" />
+    <item value="0x08CE" name="" />
+    <item value="0x08CF" name="" />
+    <item value="0x08D0" name="" />
+    <item value="0x08D1" name="" />
+    <item value="0x08D2" name="" />
+    <item value="0x08D3" name="" />
+    <item value="0x08D4" name="" />
+    <item value="0x08D5" name="" />
+    <item value="0x08D6" name="" />
+    <item value="0x08D7" name="" />
+    <item value="0x08D8" name="" />
+    <item value="0x08D9" name="" />
+    <item value="0x08DA" name="" />
+    <item value="0x08DB" name="(Synchronicty point)" />
+    <item value="0x08DC" name="" />
+    <item value="0x08DD" name="" />
+    <item value="0x08DE" name="" />
+    <item value="0x08DF" name="" />
+    <item value="0x08E0" name="" />
+    <item value="0x08E1" name="" />
+    <item value="0x08E2" name="" />
+    <item value="0x08E3" name="" />
+    <item value="0x08E4" name="" />
+    <item value="0x08E5" name="" />
+    <item value="0x08E6" name="" />
+    <item value="0x08E7" name="(Synchronicty point)" />
+    <item value="0x08E8" name="" />
+    <item value="0x08E9" name="" />
+    <item value="0x08EA" name="" />
+    <item value="0x08EB" name="" />
+    <item value="0x08EC" name="" />
+    <item value="0x08ED" name="" />
+    <item value="0x08EE" name="" />
+    <item value="0x08EF" name="" />
+    <item value="0x08F0" name="" />
+    <item value="0x08F1" name="" />
+    <item value="0x08F2" name="Penko joined?" />
+    <item value="0x08F3" name="" />
+    <item value="0x08F4" name="" />
+    <item value="0x08F5" name="" />
+    <item value="0x08F6" name="" />
+    <item value="0x08F7" name="" />
+    <item value="0x08F8" name="" />
+    <item value="0x08F9" name="" />
+    <item value="0x08FA" name="" />
+    <item value="0x08FB" name="" />
+    <item value="0x08FC" name="" />
+    <item value="0x08FD" name="" />
+    <item value="0x08FE" name="" />
+    <item value="0x08FF" name="" />
+    <item value="0x0900" name="" />
+    <item value="0x0901" name="" />
+    <item value="0x0902" name="" />
+    <item value="0x0903" name="" />
+    <item value="0x0904" name="" />
+    <item value="0x0905" name="" />
+    <item value="0x0906" name="" />
+    <item value="0x0907" name="" />
+    <item value="0x0908" name="" />
+    <item value="0x0909" name="" />
+    <item value="0x090A" name="(Synchronicty point)" />
+    <item value="0x090B" name="(Synchronicty point)" />
+    <item value="0x090C" name="" />
+    <item value="0x090D" name="" />
+    <item value="0x090E" name="" />
+    <item value="0x090F" name="" />
+    <item value="0x0910" name="Empty Barrel next to Healing Herb (Saraband Pier)" />
+    <item value="0x0911" name="Healing Herb Barrel destroyed (Saraband Pier)" />
+    <item value="0x0912" name="Barrel blocking Treasure Chest destroyed (Saraband Pier)" />
+    <item value="0x0913" name="Barrel closest to Priest destroyed (Saraband Pier)" />
+    <item value="0x0914" name="Barrel Next to health Bread destroyed" />
+    <item value="0x0915" name="Health Bread in Barrel (Saraband Pier)" />
+    <item value="0x0916" name="" />
+    <item value="0x0917" name="" />
+    <item value="0x0918" name="" />
+    <item value="0x0919" name="" />
+    <item value="0x091A" name="" />
+    <item value="0x091B" name="" />
+    <item value="0x091C" name="" />
+    <item value="0x091D" name="" />
+    <item value="0x091E" name="" />
+    <item value="0x091F" name="" />
+    <item value="0x0920" name="" />
+    <item value="0x0921" name="" />
+    <item value="0x0922" name="" />
+    <item value="0x0923" name="" />
+    <item value="0x0924" name="" />
+    <item value="0x0925" name="" />
+    <item value="0x0926" name="" />
+    <item value="0x0927" name="" />
+    <item value="0x0928" name="" />
+    <item value="0x0929" name="Scn2 battle 27 empty barrel" />
+    <item value="0x092A" name="Scn2 battle 27 small mithril barrel" />
+    <item value="0x092B" name="Scn2 battle 27 empty barrel" />
+    <item value="0x092C" name="Scn2 battle 27 goddess tear barrel" />
+    <item value="0x092D" name="Scn2 battle 27 ultra lance barrel AND scn2 battle 27 empty ruins barrel" />
+    <item value="0x092E" name="Scn2 battle 27 empty barrel AND scn2 battle 27 small mithril ruins barrel" />
+    <item value="0x092F" name="" />
+    <item value="0x0930" name="" />
+    <item value="0x0931" name="" />
+    <item value="0x0932" name="" />
+    <item value="0x0933" name="" />
+    <item value="0x0934" name="" />
+    <item value="0x0935" name="" />
+    <item value="0x0936" name="" />
+    <item value="0x0937" name="" />
+    <item value="0x0938" name="" />
+    <item value="0x0939" name="" />
+    <item value="0x093A" name="" />
+    <item value="0x093B" name="" />
+    <item value="0x093C" name="" />
+    <item value="0x093D" name="" />
+    <item value="0x093E" name="" />
+    <item value="0x093F" name="" />
+    <item value="0x0940" name="" />
+    <item value="0x0941" name="" />
+    <item value="0x0942" name="" />
+    <item value="0x0943" name="" />
+    <item value="0x0944" name="(Synchronicty point)" />
+    <item value="0x0945" name="" />
+    <item value="0x0946" name="" />
+    <item value="0x0947" name="" />
+    <item value="0x0948" name="" />
+    <item value="0x0949" name="" />
+    <item value="0x094A" name="" />
+    <item value="0x094B" name="" />
+    <item value="0x094C" name="" />
+    <item value="0x094D" name="" />
+    <item value="0x094E" name="" />
+    <item value="0x094F" name="" />
+    <item value="0x0950" name="" />
+    <item value="0x0951" name="(Synchronicty point)" />
+    <item value="0x0952" name="" />
+    <item value="0x0953" name="" />
+    <item value="0x0954" name="" />
+    <item value="0x0955" name="" />
+    <item value="0x0956" name="" />
+    <item value="0x0957" name="" />
+    <item value="0x0958" name="" />
+    <item value="0x0959" name="" />
+    <item value="0x095A" name="" />
+    <item value="0x095B" name="" />
+    <item value="0x095C" name="" />
+    <item value="0x095D" name="" />
+    <item value="0x095E" name="" />
+    <item value="0x095F" name="" />
+    <item value="0x0960" name="" />
+    <item value="0x0961" name="" />
+    <item value="0x0962" name="" />
+    <item value="0x0963" name="" />
+    <item value="0x0964" name="" />
+    <item value="0x0965" name="" />
+    <item value="0x0966" name="" />
+    <item value="0x0967" name="" />
+    <item value="0x0968" name="" />
+    <item value="0x0969" name="" />
+    <item value="0x096A" name="" />
+    <item value="0x096B" name="" />
+    <item value="0x096C" name="" />
+    <item value="0x096D" name="" />
+    <item value="0x096E" name="" />
+    <item value="0x096F" name="" />
+    <item value="0x0970" name="" />
+    <item value="0x0971" name="" />
+    <item value="0x0972" name="" />
+    <item value="0x0973" name="" />
+    <item value="0x0974" name="" />
+    <item value="0x0975" name="" />
+    <item value="0x0976" name="" />
+    <item value="0x0977" name="" />
+    <item value="0x0978" name="" />
+    <item value="0x0979" name="" />
+    <item value="0x097A" name="" />
+    <item value="0x097B" name="" />
+    <item value="0x097C" name="" />
+    <item value="0x097D" name="" />
+    <item value="0x097E" name="" />
+    <item value="0x097F" name="" />
+    <item value="0x0980" name="" />
+    <item value="0x0981" name="" />
+    <item value="0x0982" name="" />
+    <item value="0x0983" name="" />
+    <item value="0x0984" name="" />
+    <item value="0x0985" name="" />
+    <item value="0x0986" name="" />
+    <item value="0x0987" name="" />
+    <item value="0x0988" name="" />
+    <item value="0x0989" name="" />
+    <item value="0x098A" name="" />
+    <item value="0x098B" name="" />
+    <item value="0x098C" name="" />
+    <item value="0x098D" name="" />
+    <item value="0x098E" name="" />
+    <item value="0x098F" name="" />
+    <item value="0x0990" name="" />
+    <item value="0x0991" name="" />
+    <item value="0x0992" name="" />
+    <item value="0x0993" name="" />
+    <item value="0x0994" name="" />
+    <item value="0x0995" name="" />
+    <item value="0x0996" name="" />
+    <item value="0x0997" name="" />
+    <item value="0x0998" name="" />
+    <item value="0x0999" name="" />
+    <item value="0x099A" name="" />
+    <item value="0x099B" name="" />
+    <item value="0x099C" name="" />
+    <item value="0x099D" name="" />
+    <item value="0x099E" name="" />
+    <item value="0x099F" name="" />
+    <item value="0x09A0" name="" />
+    <item value="0x09A1" name="" />
+    <item value="0x09A2" name="" />
+    <item value="0x09A3" name="" />
+    <item value="0x09A4" name="" />
+    <item value="0x09A5" name="" />
+    <item value="0x09A6" name="" />
+    <item value="0x09A7" name="" />
+    <item value="0x09A8" name="" />
+    <item value="0x09A9" name="" />
+    <item value="0x09AA" name="" />
+    <item value="0x09AB" name="" />
+    <item value="0x09AC" name="" />
+    <item value="0x09AD" name="" />
+    <item value="0x09AE" name="" />
+    <item value="0x09AF" name="" />
+    <item value="0x09B0" name="" />
+    <item value="0x09B1" name="" />
+    <item value="0x09B2" name="" />
+    <item value="0x09B3" name="" />
+    <item value="0x09B4" name="" />
+    <item value="0x09B5" name="" />
+    <item value="0x09B6" name="" />
+    <item value="0x09B7" name="" />
+    <item value="0x09B8" name="" />
+    <item value="0x09B9" name="" />
+    <item value="0x09BA" name="" />
+    <item value="0x09BB" name="" />
+    <item value="0x09BC" name="" />
+    <item value="0x09BD" name="" />
+    <item value="0x09BE" name="" />
+    <item value="0x09BF" name="" />
+    <item value="0x09C0" name="" />
+    <item value="0x09C1" name="" />
+    <item value="0x09C2" name="" />
+    <item value="0x09C3" name="" />
+    <item value="0x09C4" name="" />
+    <item value="0x09C5" name="" />
+    <item value="0x09C6" name="" />
+    <item value="0x09C7" name="" />
+    <item value="0x09C8" name="" />
+    <item value="0x09C9" name="" />
+    <item value="0x09CA" name="" />
+    <item value="0x09CB" name="" />
+    <item value="0x09CC" name="" />
+    <item value="0x09CD" name="" />
+    <item value="0x09CE" name="" />
+    <item value="0x09CF" name="" />
+    <item value="0x09D0" name="" />
+    <item value="0x09D1" name="" />
+    <item value="0x09D2" name="" />
+    <item value="0x09D3" name="" />
+    <item value="0x09D4" name="" />
+    <item value="0x09D5" name="" />
+    <item value="0x09D6" name="" />
+    <item value="0x09D7" name="" />
+    <item value="0x09D8" name="" />
+    <item value="0x09D9" name="" />
+    <item value="0x09DA" name="" />
+    <item value="0x09DB" name="" />
+    <item value="0x09DC" name="" />
+    <item value="0x09DD" name="" />
+    <item value="0x09DE" name="" />
+    <item value="0x09DF" name="" />
+    <item value="0x09E0" name="" />
+    <item value="0x09E1" name="" />
+    <item value="0x09E2" name="" />
+    <item value="0x09E3" name="" />
+    <item value="0x09E4" name="" />
+    <item value="0x09E5" name="" />
+    <item value="0x09E6" name="" />
+    <item value="0x09E7" name="" />
+    <item value="0x09E8" name="" />
+    <item value="0x09E9" name="" />
+    <item value="0x09EA" name="" />
+    <item value="0x09EB" name="" />
+    <item value="0x09EC" name="" />
+    <item value="0x09ED" name="" />
+    <item value="0x09EE" name="" />
+    <item value="0x09EF" name="" />
+    <item value="0x09F0" name="" />
+    <item value="0x09F1" name="" />
+    <item value="0x09F2" name="" />
+    <item value="0x09F3" name="" />
+    <item value="0x09F4" name="" />
+    <item value="0x09F5" name="" />
+    <item value="0x09F6" name="" />
+    <item value="0x09F7" name="" />
+    <item value="0x09F8" name="" />
+    <item value="0x09F9" name="" />
+    <item value="0x09FA" name="" />
+    <item value="0x09FB" name="" />
+    <item value="0x09FC" name="" />
+    <item value="0x09FD" name="" />
+    <item value="0x09FE" name="" />
+    <item value="0x09FF" name="" />
+    <item value="0x0A00" name="" />
+    <item value="0x0A01" name="" />
+    <item value="0x0A02" name="" />
+    <item value="0x0A03" name="" />
+    <item value="0x0A04" name="" />
+    <item value="0x0A05" name="" />
+    <item value="0x0A06" name="" />
+    <item value="0x0A07" name="" />
+    <item value="0x0A08" name="" />
+    <item value="0x0A09" name="" />
+    <item value="0x0A0A" name="" />
+    <item value="0x0A0B" name="" />
+    <item value="0x0A0C" name="" />
+    <item value="0x0A0D" name="" />
+    <item value="0x0A0E" name="" />
+    <item value="0x0A0F" name="" />
+    <item value="0x0A10" name="" />
+    <item value="0x0A11" name="" />
+    <item value="0x0A12" name="" />
+    <item value="0x0A13" name="" />
+    <item value="0x0A14" name="" />
+    <item value="0x0A15" name="" />
+    <item value="0x0A16" name="" />
+    <item value="0x0A17" name="" />
+    <item value="0x0A18" name="" />
+    <item value="0x0A19" name="" />
+    <item value="0x0A1A" name="" />
+    <item value="0x0A1B" name="" />
+    <item value="0x0A1C" name="" />
+    <item value="0x0A1D" name="" />
+    <item value="0x0A1E" name="" />
+    <item value="0x0A1F" name="" />
+    <item value="0x0A20" name="" />
+    <item value="0x0A21" name="" />
+    <item value="0x0A22" name="" />
+    <item value="0x0A23" name="" />
+    <item value="0x0A24" name="" />
+    <item value="0x0A25" name="" />
+    <item value="0x0A26" name="" />
+    <item value="0x0A27" name="" />
+    <item value="0x0A28" name="" />
+    <item value="0x0A29" name="" />
+    <item value="0x0A2A" name="" />
+    <item value="0x0A2B" name="" />
+    <item value="0x0A2C" name="" />
+    <item value="0x0A2D" name="" />
+    <item value="0x0A2E" name="" />
+    <item value="0x0A2F" name="" />
+    <item value="0x0A30" name="" />
+    <item value="0x0A31" name="" />
+    <item value="0x0A32" name="" />
+    <item value="0x0A33" name="" />
+    <item value="0x0A34" name="" />
+    <item value="0x0A35" name="" />
+    <item value="0x0A36" name="" />
+    <item value="0x0A37" name="" />
+    <item value="0x0A38" name="" />
+    <item value="0x0A39" name="" />
+    <item value="0x0A3A" name="" />
+    <item value="0x0A3B" name="" />
+    <item value="0x0A3C" name="" />
+    <item value="0x0A3D" name="" />
+    <item value="0x0A3E" name="" />
+    <item value="0x0A3F" name="" />
+    <item value="0x0A40" name="" />
+    <item value="0x0A41" name="" />
+    <item value="0x0A42" name="" />
+    <item value="0x0A43" name="" />
+    <item value="0x0A44" name="" />
+    <item value="0x0A45" name="" />
+    <item value="0x0A46" name="" />
+    <item value="0x0A47" name="" />
+    <item value="0x0A48" name="" />
+    <item value="0x0A49" name="" />
+    <item value="0x0A4A" name="" />
+    <item value="0x0A4B" name="" />
+    <item value="0x0A4C" name="" />
+    <item value="0x0A4D" name="" />
+    <item value="0x0A4E" name="" />
+    <item value="0x0A4F" name="" />
+    <item value="0x0A50" name="" />
+    <item value="0x0A51" name="" />
+    <item value="0x0A52" name="" />
+    <item value="0x0A53" name="" />
+    <item value="0x0A54" name="" />
+    <item value="0x0A55" name="" />
+    <item value="0x0A56" name="" />
+    <item value="0x0A57" name="" />
+    <item value="0x0A58" name="" />
+    <item value="0x0A59" name="" />
+    <item value="0x0A5A" name="" />
+    <item value="0x0A5B" name="" />
+    <item value="0x0A5C" name="" />
+    <item value="0x0A5D" name="" />
+    <item value="0x0A5E" name="" />
+    <item value="0x0A5F" name="" />
+    <item value="0x0A60" name="" />
+    <item value="0x0A61" name="" />
+    <item value="0x0A62" name="" />
+    <item value="0x0A63" name="" />
+    <item value="0x0A64" name="" />
+    <item value="0x0A65" name="" />
+    <item value="0x0A66" name="" />
+    <item value="0x0A67" name="" />
+    <item value="0x0A68" name="" />
+    <item value="0x0A69" name="" />
+    <item value="0x0A6A" name="" />
+    <item value="0x0A6B" name="" />
+    <item value="0x0A6C" name="" />
+    <item value="0x0A6D" name="" />
+    <item value="0x0A6E" name="" />
+    <item value="0x0A6F" name="" />
+    <item value="0x0A70" name="" />
+    <item value="0x0A71" name="" />
+    <item value="0x0A72" name="" />
+    <item value="0x0A73" name="" />
+    <item value="0x0A74" name="" />
+    <item value="0x0A75" name="" />
+    <item value="0x0A76" name="" />
+    <item value="0x0A77" name="" />
+    <item value="0x0A78" name="" />
+    <item value="0x0A79" name="" />
+    <item value="0x0A7A" name="" />
+    <item value="0x0A7B" name="" />
+    <item value="0x0A7C" name="" />
+    <item value="0x0A7D" name="" />
+    <item value="0x0A7E" name="" />
+    <item value="0x0A7F" name="" />
+    <item value="0x0A80" name="" />
+    <item value="0x0A81" name="" />
+    <item value="0x0A82" name="" />
+    <item value="0x0A83" name="" />
+    <item value="0x0A84" name="" />
+    <item value="0x0A85" name="" />
+    <item value="0x0A86" name="" />
+    <item value="0x0A87" name="" />
+    <item value="0x0A88" name="" />
+    <item value="0x0A89" name="" />
+    <item value="0x0A8A" name="" />
+    <item value="0x0A8B" name="" />
+    <item value="0x0A8C" name="" />
+    <item value="0x0A8D" name="" />
+    <item value="0x0A8E" name="" />
+    <item value="0x0A8F" name="" />
+    <item value="0x0A90" name="" />
+    <item value="0x0A91" name="" />
+    <item value="0x0A92" name="" />
+    <item value="0x0A93" name="" />
+    <item value="0x0A94" name="" />
+    <item value="0x0A95" name="" />
+    <item value="0x0A96" name="" />
+    <item value="0x0A97" name="" />
+    <item value="0x0A98" name="" />
+    <item value="0x0A99" name="" />
+    <item value="0x0A9A" name="" />
+    <item value="0x0A9B" name="" />
+    <item value="0x0A9C" name="" />
+    <item value="0x0A9D" name="" />
+    <item value="0x0A9E" name="" />
+    <item value="0x0A9F" name="" />
+    <item value="0x0AA0" name="" />
+    <item value="0x0AA1" name="" />
+    <item value="0x0AA2" name="" />
+    <item value="0x0AA3" name="" />
+    <item value="0x0AA4" name="" />
+    <item value="0x0AA5" name="" />
+    <item value="0x0AA6" name="" />
+    <item value="0x0AA7" name="" />
+    <item value="0x0AA8" name="" />
+    <item value="0x0AA9" name="" />
+    <item value="0x0AAA" name="" />
+    <item value="0x0AAB" name="" />
+    <item value="0x0AAC" name="" />
+    <item value="0x0AAD" name="" />
+    <item value="0x0AAE" name="" />
+    <item value="0x0AAF" name="" />
+    <item value="0x0AB0" name="" />
+    <item value="0x0AB1" name="" />
+    <item value="0x0AB2" name="" />
+    <item value="0x0AB3" name="" />
+    <item value="0x0AB4" name="" />
+    <item value="0x0AB5" name="" />
+    <item value="0x0AB6" name="" />
+    <item value="0x0AB7" name="" />
+    <item value="0x0AB8" name="" />
+    <item value="0x0AB9" name="" />
+    <item value="0x0ABA" name="" />
+    <item value="0x0ABB" name="" />
+    <item value="0x0ABC" name="" />
+    <item value="0x0ABD" name="" />
+    <item value="0x0ABE" name="" />
+    <item value="0x0ABF" name="" />
+    <item value="0x0AC0" name="" />
+    <item value="0x0AC1" name="" />
+    <item value="0x0AC2" name="" />
+    <item value="0x0AC3" name="" />
+    <item value="0x0AC4" name="" />
+    <item value="0x0AC5" name="" />
+    <item value="0x0AC6" name="" />
+    <item value="0x0AC7" name="" />
+    <item value="0x0AC8" name="" />
+    <item value="0x0AC9" name="" />
+    <item value="0x0ACA" name="" />
+    <item value="0x0ACB" name="" />
+    <item value="0x0ACC" name="" />
+    <item value="0x0ACD" name="" />
+    <item value="0x0ACE" name="" />
+    <item value="0x0ACF" name="" />
+    <item value="0x0AD0" name="" />
+    <item value="0x0AD1" name="" />
+    <item value="0x0AD2" name="" />
+    <item value="0x0AD3" name="" />
+    <item value="0x0AD4" name="" />
+    <item value="0x0AD5" name="" />
+    <item value="0x0AD6" name="" />
+    <item value="0x0AD7" name="" />
+    <item value="0x0AD8" name="" />
+    <item value="0x0AD9" name="" />
+    <item value="0x0ADA" name="" />
+    <item value="0x0ADB" name="" />
+    <item value="0x0ADC" name="" />
+    <item value="0x0ADD" name="" />
+    <item value="0x0ADE" name="" />
+    <item value="0x0ADF" name="" />
+    <item value="0x0AE0" name="" />
+    <item value="0x0AE1" name="" />
+    <item value="0x0AE2" name="" />
+    <item value="0x0AE3" name="" />
+    <item value="0x0AE4" name="" />
+    <item value="0x0AE5" name="" />
+    <item value="0x0AE6" name="" />
+    <item value="0x0AE7" name="" />
+    <item value="0x0AE8" name="" />
+    <item value="0x0AE9" name="" />
+    <item value="0x0AEA" name="" />
+    <item value="0x0AEB" name="" />
+    <item value="0x0AEC" name="" />
+    <item value="0x0AED" name="" />
+    <item value="0x0AEE" name="" />
+    <item value="0x0AEF" name="" />
+    <item value="0x0AF0" name="" />
+    <item value="0x0AF1" name="" />
+    <item value="0x0AF2" name="" />
+    <item value="0x0AF3" name="" />
+    <item value="0x0AF4" name="" />
+    <item value="0x0AF5" name="" />
+    <item value="0x0AF6" name="" />
+    <item value="0x0AF7" name="" />
+    <item value="0x0AF8" name="" />
+    <item value="0x0AF9" name="" />
+    <item value="0x0AFA" name="" />
+    <item value="0x0AFB" name="" />
+    <item value="0x0AFC" name="" />
+    <item value="0x0AFD" name="" />
+    <item value="0x0AFE" name="" />
+    <item value="0x0AFF" name="" />
+    <item value="0x0B00" name="" />
+    <item value="0x0B01" name="" />
+    <item value="0x0B02" name="Fairy Powder in Treasure Chest (Battle 201)" />
+    <item value="0x0B03" name="Angel Wing in House next to Imperial Command" />
+    <item value="0x0B04" name="Protect Bracer in Saraband Imperial District" />
+    <item value="0x0B05" name="Power Wine in Imperial Command" />
+    <item value="0x0B06" name="" />
+    <item value="0x0B07" name="" />
+    <item value="0x0B08" name="" />
+    <item value="0x0B09" name="" />
+    <item value="0x0B0A" name="" />
+    <item value="0x0B0B" name="" />
+    <item value="0x0B0C" name="" />
+    <item value="0x0B0D" name="" />
+    <item value="0x0B0E" name="" />
+    <item value="0x0B0F" name="" />
+    <item value="0x0B10" name="" />
+    <item value="0x0B11" name="" />
+    <item value="0x0B12" name="" />
+    <item value="0x0B13" name="" />
+    <item value="0x0B14" name="" />
+    <item value="0x0B15" name="" />
+    <item value="0x0B16" name="" />
+    <item value="0x0B17" name="" />
+    <item value="0x0B18" name="" />
+    <item value="0x0B19" name="" />
+    <item value="0x0B1A" name="" />
+    <item value="0x0B1B" name="" />
+    <item value="0x0B1C" name="" />
+    <item value="0x0B1D" name="" />
+    <item value="0x0B1E" name="" />
+    <item value="0x0B1F" name="" />
+    <item value="0x0B20" name="" />
+    <item value="0x0B21" name="" />
+    <item value="0x0B22" name="" />
+    <item value="0x0B23" name="" />
+    <item value="0x0B24" name="" />
+    <item value="0x0B25" name="" />
+    <item value="0x0B26" name="" />
+    <item value="0x0B27" name="" />
+    <item value="0x0B28" name="" />
+    <item value="0x0B29" name="" />
+    <item value="0x0B2A" name="" />
+    <item value="0x0B2B" name="" />
+    <item value="0x0B2C" name="" />
+    <item value="0x0B2D" name="" />
+    <item value="0x0B2E" name="" />
+    <item value="0x0B2F" name="" />
+    <item value="0x0B30" name="" />
+    <item value="0x0B31" name="" />
+    <item value="0x0B32" name="" />
+    <item value="0x0B33" name="" />
+    <item value="0x0B34" name="" />
+    <item value="0x0B35" name="" />
+    <item value="0x0B36" name="" />
+    <item value="0x0B37" name="" />
+    <item value="0x0B38" name="" />
+    <item value="0x0B39" name="" />
+    <item value="0x0B3A" name="" />
+    <item value="0x0B3B" name="" />
+    <item value="0x0B3C" name="" />
+    <item value="0x0B3D" name="" />
+    <item value="0x0B3E" name="" />
+    <item value="0x0B3F" name="" />
+    <item value="0x0B40" name="" />
+    <item value="0x0B41" name="" />
+    <item value="0x0B42" name="" />
+    <item value="0x0B43" name="" />
+    <item value="0x0B44" name="" />
+    <item value="0x0B45" name="" />
+    <item value="0x0B46" name="" />
+    <item value="0x0B47" name="" />
+    <item value="0x0B48" name="" />
+    <item value="0x0B49" name="" />
+    <item value="0x0B4A" name="Healing Drop (Saraband Imperial District)" />
+    <item value="0x0B4B" name="" />
+    <item value="0x0B4C" name="" />
+    <item value="0x0B4D" name="" />
+    <item value="0x0B4E" name="" />
+    <item value="0x0B4F" name="" />
+    <item value="0x0B50" name="" />
+    <item value="0x0B51" name="" />
+    <item value="0x0B52" name="" />
+    <item value="0x0B53" name="" />
+    <item value="0x0B54" name="" />
+    <item value="0x0B55" name="" />
+    <item value="0x0B56" name="" />
+    <item value="0x0B57" name="" />
+    <item value="0x0B58" name="" />
+    <item value="0x0B59" name="" />
+    <item value="0x0B5A" name="" />
+    <item value="0x0B5B" name="" />
+    <item value="0x0B5C" name="" />
+    <item value="0x0B5D" name="" />
+    <item value="0x0B5E" name="" />
+    <item value="0x0B5F" name="" />
+    <item value="0x0B60" name="" />
+    <item value="0x0B61" name="" />
+    <item value="0x0B62" name="" />
+    <item value="0x0B63" name="" />
+    <item value="0x0B64" name="" />
+    <item value="0x0B65" name="" />
+    <item value="0x0B66" name="" />
+    <item value="0x0B67" name="" />
+    <item value="0x0B68" name="" />
+    <item value="0x0B69" name="" />
+    <item value="0x0B6A" name="" />
+    <item value="0x0B6B" name="" />
+    <item value="0x0B6C" name="" />
+    <item value="0x0B6D" name="" />
+    <item value="0x0B6E" name="" />
+    <item value="0x0B6F" name="" />
+    <item value="0x0B70" name="" />
+    <item value="0x0B71" name="" />
+    <item value="0x0B72" name="" />
+    <item value="0x0B73" name="" />
+    <item value="0x0B74" name="" />
+    <item value="0x0B75" name="" />
+    <item value="0x0B76" name="" />
+    <item value="0x0B77" name="" />
+    <item value="0x0B78" name="" />
+    <item value="0x0B79" name="" />
+    <item value="0x0B7A" name="" />
+    <item value="0x0B7B" name="" />
+    <item value="0x0B7C" name="" />
+    <item value="0x0B7D" name="" />
+    <item value="0x0B7E" name="" />
+    <item value="0x0B7F" name="" />
+    <item value="0x0B80" name="" />
+    <item value="0x0B81" name="" />
+    <item value="0x0B82" name="" />
+    <item value="0x0B83" name="" />
+    <item value="0x0B84" name="" />
+    <item value="0x0B85" name="" />
+    <item value="0x0B86" name="" />
+    <item value="0x0B87" name="" />
+    <item value="0x0B88" name="" />
+    <item value="0x0B89" name="50 coins (Imperial Command, Saraband Imperial District)" />
+    <item value="0x0B8A" name="" />
+    <item value="0x0B8B" name="50 Coins (Shelf next to Barracks, Saraband Imperial District)" />
+    <item value="0x0B8C" name="" />
+    <item value="0x0B8D" name="" />
+    <item value="0x0B8E" name="" />
+    <item value="0x0B8F" name="" />
+    <item value="0x0B90" name="" />
+    <item value="0x0B91" name="" />
+    <item value="0x0B92" name="" />
+    <item value="0x0B93" name="" />
+    <item value="0x0B94" name="" />
+    <item value="0x0B95" name="" />
+    <item value="0x0B96" name="" />
+    <item value="0x0B97" name="" />
+    <item value="0x0B98" name="" />
+    <item value="0x0B99" name="" />
+    <item value="0x0B9A" name="" />
+    <item value="0x0B9B" name="" />
+    <item value="0x0B9C" name="" />
+    <item value="0x0B9D" name="" />
+    <item value="0x0B9E" name="" />
+    <item value="0x0B9F" name="" />
+    <item value="0x0BA0" name="" />
+    <item value="0x0BA1" name="" />
+    <item value="0x0BA2" name="" />
+    <item value="0x0BA3" name="" />
+    <item value="0x0BA4" name="" />
+    <item value="0x0BA5" name="" />
+    <item value="0x0BA6" name="" />
+    <item value="0x0BA7" name="" />
+    <item value="0x0BA8" name="" />
+    <item value="0x0BA9" name="" />
+    <item value="0x0BAA" name="" />
+    <item value="0x0BAB" name="" />
+    <item value="0x0BAC" name="" />
+    <item value="0x0BAD" name="" />
+    <item value="0x0BAE" name="" />
+    <item value="0x0BAF" name="" />
+    <item value="0x0BB0" name="" />
+    <item value="0x0BB1" name="" />
+    <item value="0x0BB2" name="" />
+    <item value="0x0BB3" name="" />
+    <item value="0x0BB4" name="" />
+    <item value="0x0BB5" name="" />
+    <item value="0x0BB6" name="" />
+    <item value="0x0BB7" name="" />
+    <item value="0x0BB8" name="" />
+    <item value="0x0BB9" name="" />
+    <item value="0x0BBA" name="" />
+    <item value="0x0BBB" name="" />
+    <item value="0x0BBC" name="" />
+    <item value="0x0BBD" name="" />
+    <item value="0x0BBE" name="" />
+    <item value="0x0BBF" name="" />
+    <item value="0x0BC0" name="" />
+    <item value="0x0BC1" name="" />
+    <item value="0x0BC2" name="" />
+    <item value="0x0BC3" name="" />
+    <item value="0x0BC4" name="" />
+    <item value="0x0BC5" name="" />
+    <item value="0x0BC6" name="" />
+    <item value="0x0BC7" name="" />
+    <item value="0x0BC8" name="" />
+    <item value="0x0BC9" name="" />
+    <item value="0x0BCA" name="" />
+    <item value="0x0BCB" name="" />
+    <item value="0x0BCC" name="" />
+    <item value="0x0BCD" name="" />
+    <item value="0x0BCE" name="" />
+    <item value="0x0BCF" name="" />
+    <item value="0x0BD0" name="" />
+    <item value="0x0BD1" name="" />
+    <item value="0x0BD2" name="" />
+    <item value="0x0BD3" name="" />
+    <item value="0x0BD4" name="" />
+    <item value="0x0BD5" name="" />
+    <item value="0x0BD6" name="" />
+    <item value="0x0BD7" name="" />
+    <item value="0x0BD8" name="" />
+    <item value="0x0BD9" name="" />
+    <item value="0x0BDA" name="" />
+    <item value="0x0BDB" name="" />
+    <item value="0x0BDC" name="" />
+    <item value="0x0BDD" name="" />
+    <item value="0x0BDE" name="" />
+    <item value="0x0BDF" name="" />
+    <item value="0x0BE0" name="" />
+    <item value="0x0BE1" name="" />
+    <item value="0x0BE2" name="" />
+    <item value="0x0BE3" name="" />
+    <item value="0x0BE4" name="" />
+    <item value="0x0BE5" name="" />
+    <item value="0x0BE6" name="" />
+    <item value="0x0BE7" name="" />
+    <item value="0x0BE8" name="" />
+    <item value="0x0BE9" name="" />
+    <item value="0x0BEA" name="" />
+    <item value="0x0BEB" name="" />
+    <item value="0x0BEC" name="" />
+    <item value="0x0BED" name="" />
+    <item value="0x0BEE" name="" />
+    <item value="0x0BEF" name="" />
+    <item value="0x0BF0" name="" />
+    <item value="0x0BF1" name="" />
+    <item value="0x0BF2" name="" />
+    <item value="0x0BF3" name="" />
+    <item value="0x0BF4" name="" />
+    <item value="0x0BF5" name="" />
+    <item value="0x0BF6" name="" />
+    <item value="0x0BF7" name="" />
+    <item value="0x0BF8" name="" />
+    <item value="0x0BF9" name="" />
+    <item value="0x0BFA" name="" />
+    <item value="0x0BFB" name="" />
+    <item value="0x0BFC" name="" />
+    <item value="0x0BFD" name="" />
+    <item value="0x0BFE" name="" />
+    <item value="0x0BFF" name="" />
+    <item value="0x0C00" name="" />
+    <item value="0x0C01" name="" />
+    <item value="0x0C02" name="" />
+    <item value="0x0C03" name="" />
+    <item value="0x0C04" name="" />
+    <item value="0x0C05" name="" />
+    <item value="0x0C06" name="" />
+    <item value="0x0C07" name="" />
+    <item value="0x0C08" name="" />
+    <item value="0x0C09" name="" />
+    <item value="0x0C0A" name="" />
+    <item value="0x0C0B" name="" />
+    <item value="0x0C0C" name="" />
+    <item value="0x0C0D" name="" />
+    <item value="0x0C0E" name="" />
+    <item value="0x0C0F" name="" />
+    <item value="0x0C10" name="" />
+    <item value="0x0C11" name="" />
+    <item value="0x0C12" name="" />
+    <item value="0x0C13" name="" />
+    <item value="0x0C14" name="" />
+    <item value="0x0C15" name="" />
+    <item value="0x0C16" name="" />
+    <item value="0x0C17" name="" />
+    <item value="0x0C18" name="" />
+    <item value="0x0C19" name="" />
+    <item value="0x0C1A" name="" />
+    <item value="0x0C1B" name="" />
+    <item value="0x0C1C" name="" />
+    <item value="0x0C1D" name="" />
+    <item value="0x0C1E" name="" />
+    <item value="0x0C1F" name="" />
+    <item value="0x0C20" name="" />
+    <item value="0x0C21" name="" />
+    <item value="0x0C22" name="" />
+    <item value="0x0C23" name="" />
+    <item value="0x0C24" name="" />
+    <item value="0x0C25" name="" />
+    <item value="0x0C26" name="" />
+    <item value="0x0C27" name="" />
+    <item value="0x0C28" name="" />
+    <item value="0x0C29" name="" />
+    <item value="0x0C2A" name="" />
+    <item value="0x0C2B" name="" />
+    <item value="0x0C2C" name="" />
+    <item value="0x0C2D" name="" />
+    <item value="0x0C2E" name="" />
+    <item value="0x0C2F" name="" />
+    <item value="0x0C30" name="" />
+    <item value="0x0C31" name="" />
+    <item value="0x0C32" name="" />
+    <item value="0x0C33" name="" />
+    <item value="0x0C34" name="" />
+    <item value="0x0C35" name="" />
+    <item value="0x0C36" name="" />
+    <item value="0x0C37" name="" />
+    <item value="0x0C38" name="" />
+    <item value="0x0C39" name="" />
+    <item value="0x0C3A" name="Entered Baersol" />
+    <item value="0x0C3B" name="" />
+    <item value="0x0C3C" name="Harold Joins" />
+    <item value="0x0C3D" name="Wine Cellar Guards moved" />
+    <item value="0x0C3E" name="" />
+    <item value="0x0C3F" name="" />
+    <item value="0x0C40" name="" />
+    <item value="0x0C41" name="" />
+    <item value="0x0C42" name="" />
+    <item value="0x0C43" name="" />
+    <item value="0x0C44" name="" />
+    <item value="0x0C45" name="" />
+    <item value="0x0C46" name="Baersol Battle" />
+    <item value="0x0C47" name="Edmund Spoke Scen 3 Baersol" />
+    <item value="0x0C48" name="Edmund Killed Scen 3 Baersol" />
+    <item value="0x0C49" name="???" />
+    <item value="0x0C4A" name="" />
+    <item value="0x0C4B" name="" />
+    <item value="0x0C4C" name="" />
+    <item value="0x0C4D" name="" />
+    <item value="0x0C4E" name="" />
+    <item value="0x0C4F" name="" />
+    <item value="0x0C50" name="Kudan Battle" />
+    <item value="0x0C51" name="Middle Security" />
+    <item value="0x0C52" name="Right Security" />
+    <item value="0x0C53" name="Lower Security" />
+    <item value="0x0C54" name="" />
+    <item value="0x0C55" name="" />
+    <item value="0x0C56" name="" />
+    <item value="0x0C57" name="" />
+    <item value="0x0C58" name="" />
+    <item value="0x0C59" name="" />
+    <item value="0x0C5A" name="" />
+    <item value="0x0C5B" name="" />
+    <item value="0x0C5C" name="" />
+    <item value="0x0C5D" name="" />
+    <item value="0x0C5E" name="" />
+    <item value="0x0C5F" name="" />
+    <item value="0x0C60" name="" />
+    <item value="0x0C61" name="" />
+    <item value="0x0C62" name="" />
+    <item value="0x0C63" name="" />
+    <item value="0x0C64" name="" />
+    <item value="0x0C65" name="" />
+    <item value="0x0C66" name="" />
+    <item value="0x0C67" name="" />
+    <item value="0x0C68" name="" />
+    <item value="0x0C69" name="" />
+    <item value="0x0C6A" name="" />
+    <item value="0x0C6B" name="" />
+    <item value="0x0C6C" name="" />
+    <item value="0x0C6D" name="" />
+    <item value="0x0C6E" name="" />
+    <item value="0x0C6F" name="" />
+    <item value="0x0C70" name="Top 2nd Left Barrel" />
+    <item value="0x0C71" name="2nd Top Left Barrel" />
+    <item value="0x0C72" name="Left of Treasure Barrel" />
+    <item value="0x0C73" name="Front of Treasure Barrel" />
+    <item value="0x0C74" name="Far behind Treasure Barrel" />
+    <item value="0x0C75" name="Left between Treasure Barrel" />
+    <item value="0x0C76" name="Middle between barrel" />
+    <item value="0x0C77" name="Far middle between treasure barrel" />
+    <item value="0x0C78" name="Far left 3rd treasure barrel" />
+    <item value="0x0C79" name="Near left 3rd treasure barrel" />
+    <item value="0x0C7A" name="Right 3rd treasure barrel" />
+    <item value="0x0C7B" name="Far right 3rd treasure barrel" />
+    <item value="0x0C7C" name="" />
+    <item value="0x0C7D" name="" />
+    <item value="0x0C7E" name="" />
+    <item value="0x0C7F" name="" />
+    <item value="0x0C80" name="" />
+    <item value="0x0C81" name="" />
+    <item value="0x0C82" name="" />
+    <item value="0x0C83" name="" />
+    <item value="0x0C84" name="" />
+    <item value="0x0C85" name="" />
+    <item value="0x0C86" name="" />
+    <item value="0x0C87" name="" />
+    <item value="0x0C88" name="" />
+    <item value="0x0C89" name="" />
+    <item value="0x0C8A" name="" />
+    <item value="0x0C8B" name="" />
+    <item value="0x0C8C" name="" />
+    <item value="0x0C8D" name="" />
+    <item value="0x0C8E" name="" />
+    <item value="0x0C8F" name="" />
+    <item value="0x0C90" name="" />
+    <item value="0x0C91" name="" />
+    <item value="0x0C92" name="" />
+    <item value="0x0C93" name="" />
+    <item value="0x0C94" name="" />
+    <item value="0x0C95" name="" />
+    <item value="0x0C96" name="" />
+    <item value="0x0C97" name="" />
+    <item value="0x0C98" name="" />
+    <item value="0x0C99" name="" />
+    <item value="0x0C9A" name="" />
+    <item value="0x0C9B" name="" />
+    <item value="0x0C9C" name="" />
+    <item value="0x0C9D" name="" />
+    <item value="0x0C9E" name="" />
+    <item value="0x0C9F" name="" />
+    <item value="0x0CA0" name="" />
+    <item value="0x0CA1" name="" />
+    <item value="0x0CA2" name="" />
+    <item value="0x0CA3" name="Started final scn3 chapter event in catherdral" />
+    <item value="0x0CA4" name="" />
+    <item value="0x0CA5" name="" />
+    <item value="0x0CA6" name="" />
+    <item value="0x0CA7" name="" />
+    <item value="0x0CA8" name="" />
+    <item value="0x0CA9" name="" />
+    <item value="0x0CAA" name="" />
+    <item value="0x0CAB" name="" />
+    <item value="0x0CAC" name="" />
+    <item value="0x0CAD" name="" />
+    <item value="0x0CAE" name="" />
+    <item value="0x0CAF" name="" />
+    <item value="0x0CB0" name="" />
+    <item value="0x0CB1" name="" />
+    <item value="0x0CB2" name="" />
+    <item value="0x0CB3" name="" />
+    <item value="0x0CB4" name="" />
+    <item value="0x0CB5" name="" />
+    <item value="0x0CB6" name="" />
+    <item value="0x0CB7" name="" />
+    <item value="0x0CB8" name="" />
+    <item value="0x0CB9" name="" />
+    <item value="0x0CBA" name="" />
+    <item value="0x0CBB" name="" />
+    <item value="0x0CBC" name="" />
+    <item value="0x0CBD" name="" />
+    <item value="0x0CBE" name="" />
+    <item value="0x0CBF" name="Goddess tears recieved for S in heros test" />
+    <item value="0x0CC0" name="Health bread recieved for S in heros test" />
+    <item value="0x0CC1" name="Brain food recieved for S in heros test" />
+    <item value="0x0CC2" name="Power wine recieved for S in heros test" />
+    <item value="0x0CC3" name="Protect milk recieved for S in heros test" />
+    <item value="0x0CC4" name="Quick chicken recieved for S in heros test" />
+    <item value="0x0CC5" name="Lucky cookie recieved for S in heros test" />
+    <item value="0x0CC6" name="Kusanagi recieved for S in heros test" />
+    <item value="0x0CC7" name="Chaos ring recieved for S in heros test" />
+    <item value="0x0CC8" name="Shining sword recieved for S in heros test" />
+    <item value="0x0CC9" name="Health bread recieved for M in heros test" />
+    <item value="0x0CCA" name="Power wine recieved for M in heros test" />
+    <item value="0x0CCB" name="Brain food recieved for M in heros test" />
+    <item value="0x0CCC" name="Quick chicken recieved for M in heros test" />
+    <item value="0x0CCD" name="Protect milk recieved for M in heros test" />
+    <item value="0x0CCE" name="Lucky cookie recieved for M in heros test" />
+    <item value="0x0CCF" name="Healing rain recieved for M in heros test" />
+    <item value="0x0CD0" name="Running pimento recieved for M in heros test" />
+    <item value="0x0CD1" name="Kusanagi recieved for M in heros test" />
+    <item value="0x0CD2" name="Ark rapier recieved for M in heros test" />
+    <item value="0x0CD3" name="Potion recieved for J in heros test" />
+    <item value="0x0CD4" name="Quick chiken recieved for J in heros test" />
+    <item value="0x0CD5" name="Brain food recieved for J in heros test" />
+    <item value="0x0CD6" name="Power wine recieved for J in heros test" />
+    <item value="0x0CD7" name="Protect milk recieved for J in heros test" />
+    <item value="0x0CD8" name="Health bread recieved for J in heros test" />
+    <item value="0x0CD9" name="Running pimento recieved for J in heros test" />
+    <item value="0x0CDA" name="Chaos ring recieved for J in heros test" />
+    <item value="0x0CDB" name="Light of hope recieved for J in heros test" />
+    <item value="0x0CDC" name="Force blade recieved for J in heros test" />
+    <item value="0x0CDD" name="" />
+    <item value="0x0CDE" name="" />
+    <item value="0x0CDF" name="" />
+    <item value="0x0CE0" name="PD Battle #" />
+    <item value="0x0CE1" name="" />
+    <item value="0x0CE2" name="" />
+    <item value="0x0CE3" name="" />
+    <item value="0x0CE4" name="" />
+    <item value="0x0CE5" name="" />
+    <item value="0x0CE6" name="" />
+    <item value="0x0CE7" name="" />
+    <item value="0x0CE8" name="" />
+    <item value="0x0CE9" name="" />
+    <item value="0x0CEA" name="" />
+    <item value="0x0CEB" name="" />
+    <item value="0x0CEC" name="" />
+    <item value="0x0CED" name="" />
+    <item value="0x0CEE" name="" />
+    <item value="0x0CEF" name="" />
+    <item value="0x0CF0" name="" />
+    <item value="0x0CF1" name="" />
+    <item value="0x0CF2" name="" />
+    <item value="0x0CF3" name="" />
+    <item value="0x0CF4" name="" />
+    <item value="0x0CF5" name="" />
+    <item value="0x0CF6" name="" />
+    <item value="0x0CF7" name="" />
+    <item value="0x0CF8" name="" />
+    <item value="0x0CF9" name="" />
+    <item value="0x0CFA" name="" />
+    <item value="0x0CFB" name="" />
+    <item value="0x0CFC" name="" />
+    <item value="0x0CFD" name="" />
+    <item value="0x0CFE" name="" />
+    <item value="0x0CFF" name="" />
+    <item value="0x0D00" name="" />
+    <item value="0x0D01" name="" />
+    <item value="0x0D02" name="" />
+    <item value="0x0D03" name="" />
+    <item value="0x0D04" name="" />
+    <item value="0x0D05" name="" />
+    <item value="0x0D06" name="" />
+    <item value="0x0D07" name="" />
+    <item value="0x0D08" name="" />
+    <item value="0x0D09" name="" />
+    <item value="0x0D0A" name="" />
+    <item value="0x0D0B" name="" />
+    <item value="0x0D0C" name="" />
+    <item value="0x0D0D" name="" />
+    <item value="0x0D0E" name="" />
+    <item value="0x0D0F" name="" />
+    <item value="0x0D10" name="" />
+    <item value="0x0D11" name="" />
+    <item value="0x0D12" name="" />
+    <item value="0x0D13" name="" />
+    <item value="0x0D14" name="" />
+    <item value="0x0D15" name="" />
+    <item value="0x0D16" name="" />
+    <item value="0x0D17" name="" />
+    <item value="0x0D18" name="" />
+    <item value="0x0D19" name="" />
+    <item value="0x0D1A" name="" />
+    <item value="0x0D1B" name="" />
+    <item value="0x0D1C" name="" />
+    <item value="0x0D1D" name="" />
+    <item value="0x0D1E" name="" />
+    <item value="0x0D1F" name="" />
+    <item value="0x0D20" name="" />
+    <item value="0x0D21" name="" />
+    <item value="0x0D22" name="" />
+    <item value="0x0D23" name="" />
+    <item value="0x0D24" name="" />
+    <item value="0x0D25" name="" />
+    <item value="0x0D26" name="" />
+    <item value="0x0D27" name="" />
+    <item value="0x0D28" name="" />
+    <item value="0x0D29" name="" />
+    <item value="0x0D2A" name="" />
+    <item value="0x0D2B" name="" />
+    <item value="0x0D2C" name="" />
+    <item value="0x0D2D" name="" />
+    <item value="0x0D2E" name="" />
+    <item value="0x0D2F" name="" />
+    <item value="0x0D30" name="" />
+    <item value="0x0D31" name="" />
+    <item value="0x0D32" name="" />
+    <item value="0x0D33" name="" />
+    <item value="0x0D34" name="" />
+    <item value="0x0D35" name="" />
+    <item value="0x0D36" name="" />
+    <item value="0x0D37" name="" />
+    <item value="0x0D38" name="" />
+    <item value="0x0D39" name="" />
+    <item value="0x0D3A" name="" />
+    <item value="0x0D3B" name="" />
+    <item value="0x0D3C" name="" />
+    <item value="0x0D3D" name="" />
+    <item value="0x0D3E" name="" />
+    <item value="0x0D3F" name="" />
+    <item value="0x0D40" name="" />
+    <item value="0x0D41" name="" />
+    <item value="0x0D42" name="" />
+    <item value="0x0D43" name="" />
+    <item value="0x0D44" name="" />
+    <item value="0x0D45" name="" />
+    <item value="0x0D46" name="" />
+    <item value="0x0D47" name="" />
+    <item value="0x0D48" name="" />
+    <item value="0x0D49" name="" />
+    <item value="0x0D4A" name="" />
+    <item value="0x0D4B" name="" />
+    <item value="0x0D4C" name="" />
+    <item value="0x0D4D" name="" />
+    <item value="0x0D4E" name="" />
+    <item value="0x0D4F" name="" />
+    <item value="0x0D50" name="" />
+    <item value="0x0D51" name="" />
+    <item value="0x0D52" name="" />
+    <item value="0x0D53" name="" />
+    <item value="0x0D54" name="" />
+    <item value="0x0D55" name="" />
+    <item value="0x0D56" name="" />
+    <item value="0x0D57" name="" />
+    <item value="0x0D58" name="" />
+    <item value="0x0D59" name="" />
+    <item value="0x0D5A" name="" />
+    <item value="0x0D5B" name="" />
+    <item value="0x0D5C" name="" />
+    <item value="0x0D5D" name="" />
+    <item value="0x0D5E" name="" />
+    <item value="0x0D5F" name="" />
+    <item value="0x0D60" name="" />
+    <item value="0x0D61" name="" />
+    <item value="0x0D62" name="" />
+    <item value="0x0D63" name="" />
+    <item value="0x0D64" name="" />
+    <item value="0x0D65" name="" />
+    <item value="0x0D66" name="" />
+    <item value="0x0D67" name="" />
+    <item value="0x0D68" name="" />
+    <item value="0x0D69" name="" />
+    <item value="0x0D6A" name="" />
+    <item value="0x0D6B" name="" />
+    <item value="0x0D6C" name="" />
+    <item value="0x0D6D" name="" />
+    <item value="0x0D6E" name="" />
+    <item value="0x0D6F" name="" />
+    <item value="0x0D70" name="" />
+    <item value="0x0D71" name="" />
+    <item value="0x0D72" name="" />
+    <item value="0x0D73" name="" />
+    <item value="0x0D74" name="" />
+    <item value="0x0D75" name="" />
+    <item value="0x0D76" name="" />
+    <item value="0x0D77" name="" />
+    <item value="0x0D78" name="" />
+    <item value="0x0D79" name="" />
+    <item value="0x0D7A" name="" />
+    <item value="0x0D7B" name="" />
+    <item value="0x0D7C" name="" />
+    <item value="0x0D7D" name="" />
+    <item value="0x0D7E" name="" />
+    <item value="0x0D7F" name="" />
+    <item value="0x0D80" name="" />
+    <item value="0x0D81" name="" />
+    <item value="0x0D82" name="" />
+    <item value="0x0D83" name="" />
+    <item value="0x0D84" name="" />
+    <item value="0x0D85" name="" />
+    <item value="0x0D86" name="" />
+    <item value="0x0D87" name="" />
+    <item value="0x0D88" name="" />
+    <item value="0x0D89" name="" />
+    <item value="0x0D8A" name="" />
+    <item value="0x0D8B" name="" />
+    <item value="0x0D8C" name="" />
+    <item value="0x0D8D" name="" />
+    <item value="0x0D8E" name="" />
+    <item value="0x0D8F" name="" />
+    <item value="0x0D90" name="" />
+    <item value="0x0D91" name="" />
+    <item value="0x0D92" name="" />
+    <item value="0x0D93" name="" />
+    <item value="0x0D94" name="" />
+    <item value="0x0D95" name="" />
+    <item value="0x0D96" name="" />
+    <item value="0x0D97" name="" />
+    <item value="0x0D98" name="" />
+    <item value="0x0D99" name="" />
+    <item value="0x0D9A" name="" />
+    <item value="0x0D9B" name="" />
+    <item value="0x0D9C" name="" />
+    <item value="0x0D9D" name="" />
+    <item value="0x0D9E" name="" />
+    <item value="0x0D9F" name="" />
+    <item value="0x0DA0" name="" />
+    <item value="0x0DA1" name="" />
+    <item value="0x0DA2" name="" />
+    <item value="0x0DA3" name="" />
+    <item value="0x0DA4" name="" />
+    <item value="0x0DA5" name="" />
+    <item value="0x0DA6" name="" />
+    <item value="0x0DA7" name="" />
+    <item value="0x0DA8" name="" />
+    <item value="0x0DA9" name="" />
+    <item value="0x0DAA" name="" />
+    <item value="0x0DAB" name="" />
+    <item value="0x0DAC" name="" />
+    <item value="0x0DAD" name="" />
+    <item value="0x0DAE" name="" />
+    <item value="0x0DAF" name="" />
+    <item value="0x0DB0" name="" />
+    <item value="0x0DB1" name="" />
+    <item value="0x0DB2" name="" />
+    <item value="0x0DB3" name="" />
+    <item value="0x0DB4" name="" />
+    <item value="0x0DB5" name="" />
+    <item value="0x0DB6" name="" />
+    <item value="0x0DB7" name="" />
+    <item value="0x0DB8" name="" />
+    <item value="0x0DB9" name="" />
+    <item value="0x0DBA" name="" />
+    <item value="0x0DBB" name="" />
+    <item value="0x0DBC" name="" />
+    <item value="0x0DBD" name="" />
+    <item value="0x0DBE" name="" />
+    <item value="0x0DBF" name="" />
+    <item value="0x0DC0" name="" />
+    <item value="0x0DC1" name="" />
+    <item value="0x0DC2" name="" />
+    <item value="0x0DC3" name="" />
+    <item value="0x0DC4" name="" />
+    <item value="0x0DC5" name="" />
+    <item value="0x0DC6" name="" />
+    <item value="0x0DC7" name="" />
+    <item value="0x0DC8" name="" />
+    <item value="0x0DC9" name="" />
+    <item value="0x0DCA" name="" />
+    <item value="0x0DCB" name="" />
+    <item value="0x0DCC" name="" />
+    <item value="0x0DCD" name="" />
+    <item value="0x0DCE" name="" />
+    <item value="0x0DCF" name="" />
+    <item value="0x0DD0" name="" />
+    <item value="0x0DD1" name="" />
+    <item value="0x0DD2" name="" />
+    <item value="0x0DD3" name="" />
+    <item value="0x0DD4" name="" />
+    <item value="0x0DD5" name="" />
+    <item value="0x0DD6" name="" />
+    <item value="0x0DD7" name="" />
+    <item value="0x0DD8" name="" />
+    <item value="0x0DD9" name="" />
+    <item value="0x0DDA" name="" />
+    <item value="0x0DDB" name="" />
+    <item value="0x0DDC" name="" />
+    <item value="0x0DDD" name="" />
+    <item value="0x0DDE" name="" />
+    <item value="0x0DDF" name="" />
+    <item value="0x0DE0" name="" />
+    <item value="0x0DE1" name="" />
+    <item value="0x0DE2" name="" />
+    <item value="0x0DE3" name="" />
+    <item value="0x0DE4" name="" />
+    <item value="0x0DE5" name="" />
+    <item value="0x0DE6" name="" />
+    <item value="0x0DE7" name="" />
+    <item value="0x0DE8" name="" />
+    <item value="0x0DE9" name="" />
+    <item value="0x0DEA" name="" />
+    <item value="0x0DEB" name="" />
+    <item value="0x0DEC" name="" />
+    <item value="0x0DED" name="" />
+    <item value="0x0DEE" name="" />
+    <item value="0x0DEF" name="" />
+    <item value="0x0DF0" name="" />
+    <item value="0x0DF1" name="" />
+    <item value="0x0DF2" name="" />
+    <item value="0x0DF3" name="" />
+    <item value="0x0DF4" name="" />
+    <item value="0x0DF5" name="" />
+    <item value="0x0DF6" name="" />
+    <item value="0x0DF7" name="" />
+    <item value="0x0DF8" name="" />
+    <item value="0x0DF9" name="" />
+    <item value="0x0DFA" name="" />
+    <item value="0x0DFB" name="" />
+    <item value="0x0DFC" name="" />
+    <item value="0x0DFD" name="" />
+    <item value="0x0DFE" name="" />
+    <item value="0x0DFF" name="" />
+    <item value="0x0E00" name="" />
+    <item value="0x0E01" name="" />
+    <item value="0x0E02" name="" />
+    <item value="0x0E03" name="" />
+    <item value="0x0E04" name="" />
+    <item value="0x0E05" name="" />
+    <item value="0x0E06" name="" />
+    <item value="0x0E07" name="" />
+    <item value="0x0E08" name="" />
+    <item value="0x0E09" name="" />
+    <item value="0x0E0A" name="" />
+    <item value="0x0E0B" name="" />
+    <item value="0x0E0C" name="" />
+    <item value="0x0E0D" name="" />
+    <item value="0x0E0E" name="" />
+    <item value="0x0E0F" name="" />
+    <item value="0x0E10" name="" />
+    <item value="0x0E11" name="" />
+    <item value="0x0E12" name="" />
+    <item value="0x0E13" name="" />
+    <item value="0x0E14" name="" />
+    <item value="0x0E15" name="" />
+    <item value="0x0E16" name="" />
+    <item value="0x0E17" name="" />
+    <item value="0x0E18" name="" />
+    <item value="0x0E19" name="" />
+    <item value="0x0E1A" name="" />
+    <item value="0x0E1B" name="" />
+    <item value="0x0E1C" name="" />
+    <item value="0x0E1D" name="" />
+    <item value="0x0E1E" name="" />
+    <item value="0x0E1F" name="" />
+    <item value="0x0E20" name="" />
+    <item value="0x0E21" name="" />
+    <item value="0x0E22" name="" />
+    <item value="0x0E23" name="" />
+    <item value="0x0E24" name="" />
+    <item value="0x0E25" name="" />
+    <item value="0x0E26" name="" />
+    <item value="0x0E27" name="" />
+    <item value="0x0E28" name="" />
+    <item value="0x0E29" name="" />
+    <item value="0x0E2A" name="" />
+    <item value="0x0E2B" name="" />
+    <item value="0x0E2C" name="" />
+    <item value="0x0E2D" name="" />
+    <item value="0x0E2E" name="" />
+    <item value="0x0E2F" name="" />
+    <item value="0x0E30" name="" />
+    <item value="0x0E31" name="" />
+    <item value="0x0E32" name="" />
+    <item value="0x0E33" name="" />
+    <item value="0x0E34" name="" />
+    <item value="0x0E35" name="" />
+    <item value="0x0E36" name="" />
+    <item value="0x0E37" name="" />
+    <item value="0x0E38" name="" />
+    <item value="0x0E39" name="" />
+    <item value="0x0E3A" name="" />
+    <item value="0x0E3B" name="" />
+    <item value="0x0E3C" name="" />
+    <item value="0x0E3D" name="" />
+    <item value="0x0E3E" name="" />
+    <item value="0x0E3F" name="" />
+    <item value="0x0E40" name="" />
+    <item value="0x0E41" name="" />
+    <item value="0x0E42" name="" />
+    <item value="0x0E43" name="" />
+    <item value="0x0E44" name="" />
+    <item value="0x0E45" name="" />
+    <item value="0x0E46" name="" />
+    <item value="0x0E47" name="" />
+    <item value="0x0E48" name="" />
+    <item value="0x0E49" name="" />
+    <item value="0x0E4A" name="" />
+    <item value="0x0E4B" name="" />
+    <item value="0x0E4C" name="" />
+    <item value="0x0E4D" name="" />
+    <item value="0x0E4E" name="" />
+    <item value="0x0E4F" name="" />
+    <item value="0x0E50" name="" />
+    <item value="0x0E51" name="" />
+    <item value="0x0E52" name="" />
+    <item value="0x0E53" name="" />
+    <item value="0x0E54" name="" />
+    <item value="0x0E55" name="" />
+    <item value="0x0E56" name="" />
+    <item value="0x0E57" name="" />
+    <item value="0x0E58" name="" />
+    <item value="0x0E59" name="" />
+    <item value="0x0E5A" name="" />
+    <item value="0x0E5B" name="" />
+    <item value="0x0E5C" name="" />
+    <item value="0x0E5D" name="" />
+    <item value="0x0E5E" name="" />
+    <item value="0x0E5F" name="" />
+    <item value="0x0E60" name="" />
+    <item value="0x0E61" name="" />
+    <item value="0x0E62" name="" />
+    <item value="0x0E63" name="" />
+    <item value="0x0E64" name="" />
+    <item value="0x0E65" name="" />
+    <item value="0x0E66" name="" />
+    <item value="0x0E67" name="" />
+    <item value="0x0E68" name="" />
+    <item value="0x0E69" name="" />
+    <item value="0x0E6A" name="" />
+    <item value="0x0E6B" name="" />
+    <item value="0x0E6C" name="" />
+    <item value="0x0E6D" name="" />
+    <item value="0x0E6E" name="" />
+    <item value="0x0E6F" name="" />
+    <item value="0x0E70" name="" />
+    <item value="0x0E71" name="" />
+    <item value="0x0E72" name="" />
+    <item value="0x0E73" name="" />
+    <item value="0x0E74" name="" />
+    <item value="0x0E75" name="" />
+    <item value="0x0E76" name="" />
+    <item value="0x0E77" name="" />
+    <item value="0x0E78" name="" />
+    <item value="0x0E79" name="" />
+    <item value="0x0E7A" name="" />
+    <item value="0x0E7B" name="" />
+    <item value="0x0E7C" name="" />
+    <item value="0x0E7D" name="" />
+    <item value="0x0E7E" name="" />
+    <item value="0x0E7F" name="" />
+    <item value="0x0E80" name="" />
+    <item value="0x0E81" name="" />
+    <item value="0x0E82" name="" />
+    <item value="0x0E83" name="Left Red Dragon Baersol" />
+    <item value="0x0E84" name="" />
+    <item value="0x0E85" name="" />
+    <item value="0x0E86" name="" />
+    <item value="0x0E87" name="Left Red Dragon Baersol" />
+    <item value="0x0E88" name="" />
+    <item value="0x0E89" name="" />
+    <item value="0x0E8A" name="" />
+    <item value="0x0E8B" name="Right Red Dragon Baersol" />
+    <item value="0x0E8C" name="" />
+    <item value="0x0E8D" name="" />
+    <item value="0x0E8E" name="" />
+    <item value="0x0E8F" name="Right Red Dragon Baersol" />
+    <item value="0x0E90" name="" />
+    <item value="0x0E91" name="" />
+    <item value="0x0E92" name="" />
+    <item value="0x0E93" name="" />
+    <item value="0x0E94" name="" />
+    <item value="0x0E95" name="" />
+    <item value="0x0E96" name="" />
+    <item value="0x0E97" name="" />
+    <item value="0x0E98" name="" />
+    <item value="0x0E99" name="" />
+    <item value="0x0E9A" name="" />
+    <item value="0x0E9B" name="" />
+    <item value="0x0E9C" name="" />
+    <item value="0x0E9D" name="" />
+    <item value="0x0E9E" name="" />
+    <item value="0x0E9F" name="" />
+    <item value="0x0EA0" name="" />
+    <item value="0x0EA1" name="" />
+    <item value="0x0EA2" name="" />
+    <item value="0x0EA3" name="" />
+    <item value="0x0EA4" name="" />
+    <item value="0x0EA5" name="" />
+    <item value="0x0EA6" name="" />
+    <item value="0x0EA7" name="" />
+    <item value="0x0EA8" name="" />
+    <item value="0x0EA9" name="" />
+    <item value="0x0EAA" name="" />
+    <item value="0x0EAB" name="" />
+    <item value="0x0EAC" name="" />
+    <item value="0x0EAD" name="" />
+    <item value="0x0EAE" name="" />
+    <item value="0x0EAF" name="" />
+    <item value="0x0EB0" name="" />
+    <item value="0x0EB1" name="" />
+    <item value="0x0EB2" name="" />
+    <item value="0x0EB3" name="" />
+    <item value="0x0EB4" name="" />
+    <item value="0x0EB5" name="" />
+    <item value="0x0EB6" name="" />
+    <item value="0x0EB7" name="" />
+    <item value="0x0EB8" name="" />
+    <item value="0x0EB9" name="" />
+    <item value="0x0EBA" name="" />
+    <item value="0x0EBB" name="" />
+    <item value="0x0EBC" name="" />
+    <item value="0x0EBD" name="" />
+    <item value="0x0EBE" name="" />
+    <item value="0x0EBF" name="" />
+    <item value="0x0EC0" name="" />
+    <item value="0x0EC1" name="" />
+    <item value="0x0EC2" name="" />
+    <item value="0x0EC3" name="" />
+    <item value="0x0EC4" name="" />
+    <item value="0x0EC5" name="" />
+    <item value="0x0EC6" name="" />
+    <item value="0x0EC7" name="" />
+    <item value="0x0EC8" name="" />
+    <item value="0x0EC9" name="" />
+    <item value="0x0ECA" name="" />
+    <item value="0x0ECB" name="" />
+    <item value="0x0ECC" name="" />
+    <item value="0x0ECD" name="" />
+    <item value="0x0ECE" name="" />
+    <item value="0x0ECF" name="" />
+    <item value="0x0ED0" name="" />
+    <item value="0x0ED1" name="" />
+    <item value="0x0ED2" name="" />
+    <item value="0x0ED3" name="" />
+    <item value="0x0ED4" name="" />
+    <item value="0x0ED5" name="" />
+    <item value="0x0ED6" name="" />
+    <item value="0x0ED7" name="" />
+    <item value="0x0ED8" name="" />
+    <item value="0x0ED9" name="" />
+    <item value="0x0EDA" name="" />
+    <item value="0x0EDB" name="" />
+    <item value="0x0EDC" name="" />
+    <item value="0x0EDD" name="" />
+    <item value="0x0EDE" name="" />
+    <item value="0x0EDF" name="" />
+    <item value="0x0EE0" name="" />
+    <item value="0x0EE1" name="" />
+    <item value="0x0EE2" name="" />
+    <item value="0x0EE3" name="" />
+    <item value="0x0EE4" name="" />
+    <item value="0x0EE5" name="" />
+    <item value="0x0EE6" name="" />
+    <item value="0x0EE7" name="" />
+    <item value="0x0EE8" name="" />
+    <item value="0x0EE9" name="" />
+    <item value="0x0EEA" name="" />
+    <item value="0x0EEB" name="" />
+    <item value="0x0EEC" name="" />
+    <item value="0x0EED" name="" />
+    <item value="0x0EEE" name="" />
+    <item value="0x0EEF" name="" />
+    <item value="0x0EF0" name="" />
+    <item value="0x0EF1" name="" />
+    <item value="0x0EF2" name="" />
+    <item value="0x0EF3" name="" />
+    <item value="0x0EF4" name="" />
+    <item value="0x0EF5" name="" />
+    <item value="0x0EF6" name="" />
+    <item value="0x0EF7" name="" />
+    <item value="0x0EF8" name="" />
+    <item value="0x0EF9" name="" />
+    <item value="0x0EFA" name="" />
+    <item value="0x0EFB" name="" />
+    <item value="0x0EFC" name="" />
+    <item value="0x0EFD" name="" />
+    <item value="0x0EFE" name="" />
+    <item value="0x0EFF" name="" />
+    <item value="0x0F00" name="Bright Honey on Seagate (Scen 3)" />
+    <item value="0x0F01" name="Small Mythril on Seagate (Scen 3)" />
+    <item value="0x0F02" name="" />
+    <item value="0x0F03" name="" />
+    <item value="0x0F04" name="" />
+    <item value="0x0F05" name="" />
+    <item value="0x0F06" name="" />
+    <item value="0x0F07" name="" />
+    <item value="0x0F08" name="" />
+    <item value="0x0F09" name="" />
+    <item value="0x0F0A" name="" />
+    <item value="0x0F0B" name="" />
+    <item value="0x0F0C" name="" />
+    <item value="0x0F0D" name="" />
+    <item value="0x0F0E" name="" />
+    <item value="0x0F0F" name="" />
+    <item value="0x0F10" name="" />
+    <item value="0x0F11" name="" />
+    <item value="0x0F12" name="" />
+    <item value="0x0F13" name="" />
+    <item value="0x0F14" name="" />
+    <item value="0x0F15" name="" />
+    <item value="0x0F16" name="" />
+    <item value="0x0F17" name="" />
+    <item value="0x0F18" name="" />
+    <item value="0x0F19" name="" />
+    <item value="0x0F1A" name="" />
+    <item value="0x0F1B" name="" />
+    <item value="0x0F1C" name="" />
+    <item value="0x0F1D" name="" />
+    <item value="0x0F1E" name="" />
+    <item value="0x0F1F" name="" />
+    <item value="0x0F20" name="" />
+    <item value="0x0F21" name="" />
+    <item value="0x0F22" name="" />
+    <item value="0x0F23" name="" />
+    <item value="0x0F24" name="" />
+    <item value="0x0F25" name="" />
+    <item value="0x0F26" name="" />
+    <item value="0x0F27" name="" />
+    <item value="0x0F28" name="" />
+    <item value="0x0F29" name="Large Mithril in tree Baersol" />
+    <item value="0x0F2A" name="Dark Matter in Box Baersol" />
+    <item value="0x0F2B" name="Potion on table Baersol" />
+    <item value="0x0F2C" name="Power wine in chest Baersol" />
+    <item value="0x0F2D" name="" />
+    <item value="0x0F2E" name="Large Mithril at bar Baersol" />
+    <item value="0x0F2F" name="Large Mithril in box Baersol" />
+    <item value="0x0F30" name="Map in chest Baesol" />
+    <item value="0x0F31" name="Healing drop Baersol" />
+    <item value="0x0F32" name="" />
+    <item value="0x0F33" name="Light Of Hope Ruins" />
+    <item value="0x0F34" name="Dark Matter Ruins" />
+    <item value="0x0F35" name="Chaos Ring Ruins" />
+    <item value="0x0F36" name="" />
+    <item value="0x0F37" name="" />
+    <item value="0x0F38" name="" />
+    <item value="0x0F39" name="" />
+    <item value="0x0F3A" name="" />
+    <item value="0x0F3B" name="" />
+    <item value="0x0F3C" name="" />
+    <item value="0x0F3D" name="" />
+    <item value="0x0F3E" name="" />
+    <item value="0x0F3F" name="" />
+    <item value="0x0F40" name="" />
+    <item value="0x0F41" name="" />
+    <item value="0x0F42" name="" />
+    <item value="0x0F43" name="" />
+    <item value="0x0F44" name="" />
+    <item value="0x0F45" name="" />
+    <item value="0x0F46" name="" />
+    <item value="0x0F47" name="" />
+    <item value="0x0F48" name="" />
+    <item value="0x0F49" name="" />
+    <item value="0x0F4A" name="" />
+    <item value="0x0F4B" name="" />
+    <item value="0x0F4C" name="" />
+    <item value="0x0F4D" name="" />
+    <item value="0x0F4E" name="" />
+    <item value="0x0F4F" name="" />
+    <item value="0x0F50" name="" />
+    <item value="0x0F51" name="" />
+    <item value="0x0F52" name="" />
+    <item value="0x0F53" name="" />
+    <item value="0x0F54" name="" />
+    <item value="0x0F55" name="" />
+    <item value="0x0F56" name="" />
+    <item value="0x0F57" name="" />
+    <item value="0x0F58" name="" />
+    <item value="0x0F59" name="" />
+    <item value="0x0F5A" name="" />
+    <item value="0x0F5B" name="" />
+    <item value="0x0F5C" name="" />
+    <item value="0x0F5D" name="" />
+    <item value="0x0F5E" name="" />
+    <item value="0x0F5F" name="" />
+    <item value="0x0F60" name="" />
+    <item value="0x0F61" name="" />
+    <item value="0x0F62" name="" />
+    <item value="0x0F63" name="" />
+    <item value="0x0F64" name="" />
+    <item value="0x0F65" name="" />
+    <item value="0x0F66" name="" />
+    <item value="0x0F67" name="" />
+    <item value="0x0F68" name="" />
+    <item value="0x0F69" name="" />
+    <item value="0x0F6A" name="" />
+    <item value="0x0F6B" name="" />
+    <item value="0x0F6C" name="" />
+    <item value="0x0F6D" name="" />
+    <item value="0x0F6E" name="" />
+    <item value="0x0F6F" name="" />
+    <item value="0x0F70" name="" />
+    <item value="0x0F71" name="" />
+    <item value="0x0F72" name="" />
+    <item value="0x0F73" name="" />
+    <item value="0x0F74" name="" />
+    <item value="0x0F75" name="" />
+    <item value="0x0F76" name="" />
+    <item value="0x0F77" name="" />
+    <item value="0x0F78" name="" />
+    <item value="0x0F79" name="" />
+    <item value="0x0F7A" name="" />
+    <item value="0x0F7B" name="" />
+    <item value="0x0F7C" name="" />
+    <item value="0x0F7D" name="" />
+    <item value="0x0F7E" name="" />
+    <item value="0x0F7F" name="" />
+    <item value="0x0F80" name="" />
+    <item value="0x0F81" name="" />
+    <item value="0x0F82" name="100 Gold on Seagate (Scen 3)" />
+    <item value="0x0F83" name="" />
+    <item value="0x0F84" name="" />
+    <item value="0x0F85" name="" />
+    <item value="0x0F86" name="" />
+    <item value="0x0F87" name="" />
+    <item value="0x0F88" name="" />
+    <item value="0x0F89" name="" />
+    <item value="0x0F8A" name="" />
+    <item value="0x0F8B" name="" />
+    <item value="0x0F8C" name="" />
+    <item value="0x0F8D" name="" />
+    <item value="0x0F8E" name="" />
+    <item value="0x0F8F" name="" />
+    <item value="0x0F90" name="" />
+    <item value="0x0F91" name="800 Coins Baersol" />
+    <item value="0x0F92" name="900 Coins Baersol" />
+    <item value="0x0F93" name="1000 coins Baersol" />
+    <item value="0x0F94" name="" />
+    <item value="0x0F95" name="" />
+    <item value="0x0F96" name="" />
+    <item value="0x0F97" name="" />
+    <item value="0x0F98" name="" />
+    <item value="0x0F99" name="" />
+    <item value="0x0F9A" name="" />
+    <item value="0x0F9B" name="" />
+    <item value="0x0F9C" name="" />
+    <item value="0x0F9D" name="" />
+    <item value="0x0F9E" name="" />
+    <item value="0x0F9F" name="" />
+    <item value="0x0FA0" name="" />
+    <item value="0x0FA1" name="" />
+    <item value="0x0FA2" name="" />
+    <item value="0x0FA3" name="" />
+    <item value="0x0FA4" name="" />
+    <item value="0x0FA5" name="" />
+    <item value="0x0FA6" name="" />
+    <item value="0x0FA7" name="" />
+    <item value="0x0FA8" name="" />
+    <item value="0x0FA9" name="" />
+    <item value="0x0FAA" name="" />
+    <item value="0x0FAB" name="" />
+    <item value="0x0FAC" name="" />
+    <item value="0x0FAD" name="" />
+    <item value="0x0FAE" name="" />
+    <item value="0x0FAF" name="" />
+    <item value="0x0FB0" name="" />
+    <item value="0x0FB1" name="" />
+    <item value="0x0FB2" name="" />
+    <item value="0x0FB3" name="" />
+    <item value="0x0FB4" name="" />
+    <item value="0x0FB5" name="" />
+    <item value="0x0FB6" name="" />
+    <item value="0x0FB7" name="" />
+    <item value="0x0FB8" name="" />
+    <item value="0x0FB9" name="" />
+    <item value="0x0FBA" name="" />
+    <item value="0x0FBB" name="" />
+    <item value="0x0FBC" name="" />
+    <item value="0x0FBD" name="" />
+    <item value="0x0FBE" name="" />
+    <item value="0x0FBF" name="" />
+    <item value="0x0FC0" name="" />
+    <item value="0x0FC1" name="" />
+    <item value="0x0FC2" name="" />
+    <item value="0x0FC3" name="" />
+    <item value="0x0FC4" name="" />
+    <item value="0x0FC5" name="" />
+    <item value="0x0FC6" name="" />
+    <item value="0x0FC7" name="" />
+    <item value="0x0FC8" name="" />
+    <item value="0x0FC9" name="" />
+    <item value="0x0FCA" name="" />
+    <item value="0x0FCB" name="" />
+    <item value="0x0FCC" name="" />
+    <item value="0x0FCD" name="" />
+    <item value="0x0FCE" name="" />
+    <item value="0x0FCF" name="" />
+    <item value="0x0FD0" name="" />
+    <item value="0x0FD1" name="" />
+    <item value="0x0FD2" name="" />
+    <item value="0x0FD3" name="" />
+    <item value="0x0FD4" name="" />
+    <item value="0x0FD5" name="" />
+    <item value="0x0FD6" name="" />
+    <item value="0x0FD7" name="" />
+    <item value="0x0FD8" name="" />
+    <item value="0x0FD9" name="" />
+    <item value="0x0FDA" name="" />
+    <item value="0x0FDB" name="" />
+    <item value="0x0FDC" name="" />
+    <item value="0x0FDD" name="" />
+    <item value="0x0FDE" name="" />
+    <item value="0x0FDF" name="" />
+    <item value="0x0FE0" name="" />
+    <item value="0x0FE1" name="" />
+    <item value="0x0FE2" name="" />
+    <item value="0x0FE3" name="" />
+    <item value="0x0FE4" name="" />
+    <item value="0x0FE5" name="" />
+    <item value="0x0FE6" name="" />
+    <item value="0x0FE7" name="" />
+    <item value="0x0FE8" name="" />
+    <item value="0x0FE9" name="" />
+    <item value="0x0FEA" name="" />
+    <item value="0x0FEB" name="" />
+    <item value="0x0FEC" name="" />
+    <item value="0x0FED" name="" />
+    <item value="0x0FEE" name="" />
+    <item value="0x0FEF" name="" />
+    <item value="0x0FF0" name="" />
+    <item value="0x0FF1" name="" />
+    <item value="0x0FF2" name="" />
+    <item value="0x0FF3" name="" />
+    <item value="0x0FF4" name="" />
+    <item value="0x0FF5" name="" />
+    <item value="0x0FF6" name="" />
+    <item value="0x0FF7" name="" />
+    <item value="0x0FF8" name="" />
+    <item value="0x0FF9" name="" />
+    <item value="0x0FFA" name="" />
+    <item value="0x0FFB" name="" />
+    <item value="0x0FFC" name="" />
+    <item value="0x0FFD" name="" />
+    <item value="0x0FFE" name="" />
+    <item value="0x0FFF" name="" />
+</items>

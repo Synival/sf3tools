@@ -146,7 +146,7 @@ namespace SF3.Models.Files.X1 {
             if (treasureAddress >= 0)
                 tables.Add(InteractableTable = InteractableTable.Create(Data, "Treasure", treasureAddress));
             if (warpAddress >= 0)
-                tables.Add(WarpTable = WarpTable.Create(Data, "Warps", warpAddress, NameGetterContext));
+                tables.Add(WarpTable = WarpTable.Create(Data, "Warps", warpAddress, IsBattle, NameGetterContext));
             if (battlePointersAddress >= 0)
                 tables.Add(BattlePointersTable);
             if (npcAddress >= 0)

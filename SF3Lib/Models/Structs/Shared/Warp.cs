@@ -6,16 +6,18 @@ using SF3.Types;
 
 namespace SF3.Models.Structs.Shared {
     public class Warp : Struct {
-        public Warp(IByteData data, int id, string name, int address, Warp prevWarp, INameGetterContext nameGetterContext)
+        public Warp(IByteData data, int id, string name, int address, bool isBattle, Warp prevWarp, INameGetterContext nameGetterContext)
         : base(data, id, name, address, 0x04) {
             PrevWarp = prevWarp;
             NameGetterContext = nameGetterContext;
+            IsBattle = isBattle;
 
             Name = "Warp_" + MapName + "_" + (WarpID + 1).ToString("D2");
         }
 
         public Warp PrevWarp { get; }
         public INameGetterContext NameGetterContext { get; }
+        public bool IsBattle { get; }
 
         public string MapName {
             get {
@@ -46,11 +48,12 @@ namespace SF3.Models.Structs.Shared {
             set => RawData = (RawData & ~0xF800_0000u) | ((uint) (value << 27) & 0xF800_0000u);
         }
 
-        [TableViewModelColumn(displayOrder: 2, displayFormat: "X3")]
+        [TableViewModelColumn(displayOrder: 2, minWidth: 200)]
         [BulkCopy]
-        public ushort Flag {
+        [NameGetter(NamedValueType.GameFlag)]
+        public int IfFlagUnset {
             // Next 12 bits (07FF,8000)
-            get => (ushort) ((RawData & 0x07FF_8000u) >> 15);
+            get => (int) ((RawData & 0x07FF_8000u) >> 15);
             set => RawData = (RawData & ~0x07FF_8000u) | ((uint) (value << 15) & 0x07FF_8000u);
         }
 
@@ -61,6 +64,9 @@ namespace SF3.Models.Structs.Shared {
             get => (byte) ((RawData & 0x0000_7E00u) >> 9);
             set => RawData = (RawData & ~0x0000_7E00u) | ((uint) (value << 9) & 0x0000_7E00u);
         }
+
+        [TableViewModelColumn(displayOrder: 3.5f, visibilityProperty: nameof(IsBattle))]
+        public BattleWarpType? BattleWarpTrigger => (IsBattle && Enum.IsDefined(typeof(BattleWarpType), (int) WarpTrigger)) ? (BattleWarpType?) (int) WarpTrigger : null;
 
         [TableViewModelColumn(displayOrder: 4, minWidth: 120)]
         [BulkCopy]

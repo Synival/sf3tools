@@ -10,6 +10,7 @@
     <None Remove="Resources\BoundaryList.xml" />
     <None Remove="Resources\Elements.xml" />
     <None Remove="Resources\FriendshipBonusTypeList.xml" />
+    <None Remove="Resources\GameFlags.xml" />
     <None Remove="Resources\SpellTargets.xml" />
   </ItemGroup>
   <ItemGroup>
@@ -20,6 +21,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Elements.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\GameFlags.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\SpellTargets.xml">

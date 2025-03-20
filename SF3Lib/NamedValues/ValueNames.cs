@@ -17,6 +17,8 @@ namespace SF3.NamedValues {
             = new NamedValueFromResourceForScenariosInfo("FileIndexes.xml", formatString: "X4");
         public static readonly NamedValueFromResourceInfo FriendshipBonusTypeInfo
             = new NamedValueFromResourceInfo("FriendshipBonusTypeList.xml");
+        public static readonly NamedValueFromResourceInfo GameFlagInfo
+            = new NamedValueFromResourceInfo("GameFlags.xml");
         public static readonly NamedValueFromResourceForScenariosInfo ItemInfo
             = new NamedValueFromResourceForScenariosInfo("Items.xml");
         public static readonly NamedValueFromResourceForScenariosInfo LoadInfo

@@ -151,12 +151,12 @@ namespace SF3.Tests.Models.Files {
             var table = file.WarpTable;
 
             Assert.AreEqual(0, table[0].EntranceID);
-            Assert.AreEqual(0, table[0].Flag);
+            Assert.AreEqual(0, table[0].IfFlagUnset);
             Assert.AreEqual(0, table[0].WarpTrigger);
             Assert.AreEqual(7, table[0].LoadID);
 
             Assert.AreEqual(1, table[1].EntranceID);
-            Assert.AreEqual(0xFFF, table[1].Flag);
+            Assert.AreEqual(0xFFF, table[1].IfFlagUnset);
             Assert.AreEqual(1, table[1].WarpTrigger);
             Assert.AreEqual(9, table[1].LoadID);
 

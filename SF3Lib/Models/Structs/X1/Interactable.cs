@@ -35,8 +35,9 @@ namespace SF3.Models.Structs.X1 {
             set => Data.SetWord(_eventNumberAddr, value);
         }
 
-        [TableViewModelColumn(displayOrder: 2, displayFormat: "X4")]
+        [TableViewModelColumn(displayOrder: 2, minWidth: 200)]
         [BulkCopy]
+        [NameGetter(NamedValueType.GameFlag)]
         public int FlagUsed {
             get => Data.GetWord(_flagUsedAddr);
             set => Data.SetWord(_flagUsedAddr, value);

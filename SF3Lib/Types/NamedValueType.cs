@@ -12,6 +12,7 @@ namespace SF3.Types {
         EventParameter,
         FileIndex,
         FriendshipBonusType,
+        GameFlag,
         Item,
         Load,
         Monster,
