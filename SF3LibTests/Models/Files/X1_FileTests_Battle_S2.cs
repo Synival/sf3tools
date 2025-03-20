@@ -162,12 +162,12 @@ namespace SF3.Tests.Models.Files {
             Assert.AreEqual(0, table[0].EntranceID);
             Assert.AreEqual(0, table[0].Flag);
             Assert.AreEqual(0, table[0].WarpTrigger);
-            Assert.AreEqual(0, table[0].LoadID);
+            Assert.AreEqual(10, table[0].LoadID);
 
-            Assert.AreEqual(0, table[1].EntranceID);
-            Assert.AreEqual(0, table[1].Flag);
-            Assert.AreEqual(0, table[1].WarpTrigger);
-            Assert.AreEqual(0, table[1].LoadID);
+            Assert.AreEqual(1, table[1].EntranceID);
+            Assert.AreEqual(0xFFF, table[1].Flag);
+            Assert.AreEqual(1, table[1].WarpTrigger);
+            Assert.AreEqual(83, table[1].LoadID);
 
             Assert.AreEqual(5, table.Length);
         }
