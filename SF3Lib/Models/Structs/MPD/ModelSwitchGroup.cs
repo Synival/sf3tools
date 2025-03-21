@@ -1,5 +1,6 @@
 ﻿using CommonLib.Attributes;
 using SF3.ByteData;
+using SF3.Types;
 
 namespace SF3.Models.Structs.MPD {
     public class ModelSwitchGroup : Struct {
@@ -17,10 +18,11 @@ namespace SF3.Models.Structs.MPD {
         }
 
         [BulkCopy]
-        [TableViewModelColumn(displayOrder: 0, displayFormat: "X2")]
-        public uint TriggerFlag {
-            get => (uint) Data.GetDouble(_triggerFlagAddr);
-            set => Data.SetDouble(_triggerFlagAddr, (int) value);
+        [TableViewModelColumn(displayOrder: 0, displayFormat: "X3", minWidth: 200)]
+        [NameGetter(NamedValueType.GameFlag)]
+        public int TriggerFlag {
+            get => Data.GetDouble(_triggerFlagAddr);
+            set => Data.SetDouble(_triggerFlagAddr, value);
         }
 
         [BulkCopy]

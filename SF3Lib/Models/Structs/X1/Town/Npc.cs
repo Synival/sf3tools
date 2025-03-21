@@ -107,8 +107,12 @@ namespace SF3.Models.Structs.X1.Town {
             set => Data.SetWord(_unknown0x16Addr, value);
         }
 
-        [TableViewModelColumn(displayOrder: 11)]
-        public string TiedToEventNumber
-            => Data.GetWord(_spriteIDAddr) > 0x0f && Data.GetWord(_spriteIDAddr) != 0xffff ? (ID + 0x3D).ToString("X") : "";
+        [TableViewModelColumn(displayOrder: 11, displayFormat: "X2")]
+        public int? TiedToEventNumber {
+            get {
+                var spriteId = SpriteID;
+                return (spriteId > 0x0f && spriteId != 0xffff) ? (ID + 0x3D) : (int?) null;
+            }
+        }
     }
 }
