@@ -29,7 +29,7 @@ namespace SF3.Win.Views.X013 {
             if (Model.MagicBonusTable != null)
                 CreateChild(new TableView("Magic Bonus", Model.MagicBonusTable, ngc));
             if (Model.CritModTable != null)
-                CreateChild(new TableView("Crit Modifiers", Model.CritModTable, ngc));
+                CreateChild(new TableView("Crit Vantages", Model.CritModTable, ngc));
             if (Model.SpecialChanceTable != null)
                 CreateChild(new TableView("Special Chances", Model.SpecialChanceTable, ngc));
             if (Model.ExpLimitTable != null)
