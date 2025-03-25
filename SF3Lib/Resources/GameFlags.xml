@@ -560,10 +560,10 @@
     <item value="0x022D" name="Ruin fight" />
     <item value="0x022E" name="" />
     <item value="0x022F" name="" />
-    <item value="0x0230" name="Life Ring Ruins 1. Proect Ring ruins 2" />
-    <item value="0x0231" name="Healing Drop Ruins 1. Goddess tear ruins 2" />
-    <item value="0x0232" name="" />
-    <item value="0x0233" name="" />
+    <item value="0x0230" name="Life Ring Ruins 1. Proect Ring ruins 2. Healing Drop ruins 3." />
+    <item value="0x0231" name="Healing Drop Ruins 1. Goddess tear ruins 2. Large Mithril ruins 3." />
+    <item value="0x0232" name="Scn1 Battle 14 Ruins Chest 3 (Light of Hope), Scn1 Battle 17 Ruins Chest 1 (Large Mithril)" />
+    <item value="0x0233" name="Scn1 Battle 14 Elbesem Statue (Potion), Scn1 Battle 17 Ruins Chest 2 (Fire Axe)" />
     <item value="0x0234" name="" />
     <item value="0x0235" name="" />
     <item value="0x0236" name="" />
@@ -938,34 +938,34 @@
     <item value="0x03A7" name="" />
     <item value="0x03A8" name="" />
     <item value="0x03A9" name="Battle 201 Done" />
-    <item value="0x03AA" name="" />
-    <item value="0x03AB" name="" />
-    <item value="0x03AC" name="" />
-    <item value="0x03AD" name="" />
-    <item value="0x03AE" name="" />
-    <item value="0x03AF" name="" />
-    <item value="0x03B0" name="" />
-    <item value="0x03B1" name="" />
-    <item value="0x03B2" name="" />
-    <item value="0x03B3" name="" />
-    <item value="0x03B4" name="" />
-    <item value="0x03B5" name="" />
-    <item value="0x03B6" name="" />
-    <item value="0x03B7" name="" />
-    <item value="0x03B8" name="" />
-    <item value="0x03B9" name="" />
-    <item value="0x03BA" name="" />
-    <item value="0x03BB" name="" />
-    <item value="0x03BC" name="" />
-    <item value="0x03BD" name="" />
-    <item value="0x03BE" name="" />
-    <item value="0x03BF" name="" />
-    <item value="0x03C0" name="" />
-    <item value="0x03C1" name="" />
-    <item value="0x03C2" name="" />
-    <item value="0x03C3" name="" />
-    <item value="0x03C4" name="" />
-    <item value="0x03C5" name="" />
+    <item value="0x03AA" name="Battle 202 done" />
+    <item value="0x03AB" name="Battle 203 done" />
+    <item value="0x03AC" name="Battle 204 done" />
+    <item value="0x03AD" name="Battle 205 done" />
+    <item value="0x03AE" name="Battle 206 done" />
+    <item value="0x03AF" name="Battle 207 done" />
+    <item value="0x03B0" name="Battle 208 done" />
+    <item value="0x03B1" name="Battle 209 done" />
+    <item value="0x03B2" name="Battle 210 done" />
+    <item value="0x03B3" name="Battle 211 done" />
+    <item value="0x03B4" name="Battle 212 done" />
+    <item value="0x03B5" name="Battle 213 done" />
+    <item value="0x03B6" name="Battle 214 done" />
+    <item value="0x03B7" name="Battle 215 done" />
+    <item value="0x03B8" name="Battle 216 done" />
+    <item value="0x03B9" name="Battle 217 done" />
+    <item value="0x03BA" name="Battle 218 done" />
+    <item value="0x03BB" name="Battle 219 done" />
+    <item value="0x03BC" name="Battle 220 done" />
+    <item value="0x03BD" name="Battle 221 done" />
+    <item value="0x03BE" name="Battle 222 done" />
+    <item value="0x03BF" name="Battle 223 done" />
+    <item value="0x03C0" name="Battle 224 done" />
+    <item value="0x03C1" name="Battle 225 done" />
+    <item value="0x03C2" name="Battle 226 done" />
+    <item value="0x03C3" name="Battle 227 done" />
+    <item value="0x03C4" name="Battle 228 done" />
+    <item value="0x03C5" name="Battle 229 done" />
     <item value="0x03C6" name="" />
     <item value="0x03C7" name="" />
     <item value="0x03C8" name="" />
@@ -978,34 +978,34 @@
     <item value="0x03CF" name="" />
     <item value="0x03D0" name="" />
     <item value="0x03D1" name="Battle 301 done" />
-    <item value="0x03D2" name="" />
-    <item value="0x03D3" name="" />
-    <item value="0x03D4" name="" />
-    <item value="0x03D5" name="" />
-    <item value="0x03D6" name="" />
-    <item value="0x03D7" name="" />
-    <item value="0x03D8" name="" />
-    <item value="0x03D9" name="" />
-    <item value="0x03DA" name="" />
-    <item value="0x03DB" name="" />
-    <item value="0x03DC" name="" />
-    <item value="0x03DD" name="" />
-    <item value="0x03DE" name="" />
-    <item value="0x03DF" name="" />
-    <item value="0x03E0" name="" />
-    <item value="0x03E1" name="" />
-    <item value="0x03E2" name="" />
-    <item value="0x03E3" name="" />
-    <item value="0x03E4" name="" />
-    <item value="0x03E5" name="" />
-    <item value="0x03E6" name="" />
-    <item value="0x03E7" name="" />
-    <item value="0x03E8" name="" />
-    <item value="0x03E9" name="" />
-    <item value="0x03EA" name="" />
-    <item value="0x03EB" name="" />
-    <item value="0x03EC" name="" />
-    <item value="0x03ED" name="" />
+    <item value="0x03D2" name="Battle 302 done" />
+    <item value="0x03D3" name="Battle 303 done" />
+    <item value="0x03D4" name="Battle 304 done" />
+    <item value="0x03D5" name="Battle 305 done" />
+    <item value="0x03D6" name="Battle 306 done" />
+    <item value="0x03D7" name="Battle 307 done" />
+    <item value="0x03D8" name="Battle 308 done" />
+    <item value="0x03D9" name="Battle 309 done" />
+    <item value="0x03DA" name="Battle 310 done" />
+    <item value="0x03DB" name="Battle 311 done" />
+    <item value="0x03DC" name="Battle 312 done" />
+    <item value="0x03DD" name="Battle 313 done" />
+    <item value="0x03DE" name="Battle 314 done" />
+    <item value="0x03DF" name="Battle 315 done" />
+    <item value="0x03E0" name="Battle 316 done" />
+    <item value="0x03E1" name="Battle 317 done" />
+    <item value="0x03E2" name="Battle 318 done" />
+    <item value="0x03E3" name="Battle 319 done" />
+    <item value="0x03E4" name="Battle 320 done" />
+    <item value="0x03E5" name="Battle 321 done" />
+    <item value="0x03E6" name="Battle 322 done" />
+    <item value="0x03E7" name="Battle 323 done" />
+    <item value="0x03E8" name="Battle 324 done" />
+    <item value="0x03E9" name="Battle 325 done" />
+    <item value="0x03EA" name="Battle 326 done" />
+    <item value="0x03EB" name="Battle 327 done" />
+    <item value="0x03EC" name="Battle 328 done" />
+    <item value="0x03ED" name="Battle 329 done" />
     <item value="0x03EE" name="Battle 330 Done" />
     <item value="0x03EF" name="Battle 331 Done" />
     <item value="0x03F0" name="Battle 332 Done" />
@@ -1130,7 +1130,7 @@
     <item value="0x0467" name="" />
     <item value="0x0468" name="Spoke with Braff" />
     <item value="0x0469" name="Zero brings orb to Medion" />
-    <item value="0x046A" name="" />
+    <item value="0x046A" name="Horst Recruited" />
     <item value="0x046B" name="" />
     <item value="0x046C" name="" />
     <item value="0x046D" name="(Synchronicty point)" />
@@ -1849,11 +1849,11 @@
     <item value="0x0736" name="Dark Matter Quonos" />
     <item value="0x0737" name="" />
     <item value="0x0738" name="Black Ring (Quonos)" />
-    <item value="0x0739" name="" />
+    <item value="0x0739" name="Scn1 Battle 13 Searchable (Large Mithril)" />
     <item value="0x073A" name="Vagabond. health bread in barrels by fence" />
     <item value="0x073B" name="Vagabond. swiftboots in crate near beds in main tent" />
     <item value="0x073C" name="Vagabond. large mithril in tent" />
-    <item value="0x073D" name="" />
+    <item value="0x073D" name="Scn1 Battle 14 Ruins Chest 3 (Goddess Tear)" />
     <item value="0x073E" name="" />
     <item value="0x073F" name="" />
     <item value="0x0740" name="" />
@@ -1888,15 +1888,15 @@
     <item value="0x075D" name="Flaggard. small mithril in fireplace" />
     <item value="0x075E" name="" />
     <item value="0x075F" name="" />
-    <item value="0x0760" name="" />
-    <item value="0x0761" name="" />
-    <item value="0x0762" name="" />
+    <item value="0x0760" name="Flagard (Phoenix Sword)" />
+    <item value="0x0761" name="Flagard (Large Mithril)" />
+    <item value="0x0762" name="Flagard (Potion)" />
     <item value="0x0763" name="" />
     <item value="0x0764" name="" />
     <item value="0x0765" name="" />
     <item value="0x0766" name="" />
-    <item value="0x0767" name="" />
-    <item value="0x0768" name="" />
+    <item value="0x0767" name="Scn1 Battle 21 Chest (Magna Glove)" />
+    <item value="0x0768" name="Scn1 Battle 21 Searchable (Small Mithril)" />
     <item value="0x0769" name="" />
     <item value="0x076A" name="" />
     <item value="0x076B" name="" />
@@ -1909,15 +1909,15 @@
     <item value="0x0772" name="Battle 122 ruins locked chest wendego wand" />
     <item value="0x0773" name="Battle 122 ruins locked chest gale lance" />
     <item value="0x0774" name="Dark Matter in Lookover Tower" />
-    <item value="0x0775" name="" />
+    <item value="0x0775" name="Scn1 Battle 23 Searchable (Large Mithril)" />
     <item value="0x0776" name="Venom Blade in Great Wall" />
-    <item value="0x0777" name="" />
-    <item value="0x0778" name="" />
-    <item value="0x0779" name="" />
-    <item value="0x077A" name="" />
-    <item value="0x077B" name="" />
-    <item value="0x077C" name="" />
-    <item value="0x077D" name="" />
+    <item value="0x0777" name="Scn1 Battle 23 Searchable (Dark Matter)" />
+    <item value="0x0778" name="Vagabond 2 Searchable 1 (Quick Chicken)" />
+    <item value="0x0779" name="Vagabond 2 Searchable 2 (Small Mithril)" />
+    <item value="0x077A" name="Vagabond 2 Searchable 3 (Volcanon Wand)" />
+    <item value="0x077B" name="Malorie Barrel 1 (Large Mithril)" />
+    <item value="0x077C" name="Marloie Box (Holy Ankh)" />
+    <item value="0x077D" name="Malorie Barrel 2 (Small Mithril)" />
     <item value="0x077E" name="Potion in Malorie Castle" />
     <item value="0x077F" name="Pretty Glove in Malorie Castle" />
     <item value="0x0780" name="Happy Cookie in Malorie Castle" />
@@ -1931,13 +1931,13 @@
     <item value="0x0788" name="Battle 127 ruins locked chest. mitra ankh" />
     <item value="0x0789" name="" />
     <item value="0x078A" name="Battle 127 ruins chest. dark matter" />
-    <item value="0x078B" name="" />
-    <item value="0x078C" name="Large Mithril (Battle 133)" />
-    <item value="0x078D" name="" />
-    <item value="0x078E" name="" />
-    <item value="0x078F" name="" />
-    <item value="0x0790" name="" />
-    <item value="0x0791" name="" />
+    <item value="0x078B" name="Scn1 Heroes Test Pillar 1 (Large Mithril)" />
+    <item value="0x078C" name="Scn1 Heroes Test Pillar 2 (Large Mithril)" />
+    <item value="0x078D" name="Scn1 Heroes Test 4 Pillar (Large Mithril)" />
+    <item value="0x078E" name="Scn1 Heroes Test 3 Pillar 3 (Small Mithril)" />
+    <item value="0x078F" name="Scn1 Heroes Test 3 Pillar 2 (Large Mithril)" />
+    <item value="0x0790" name="Scn1 Heroes Test 3 Pillar 1 (Large Mithril)" />
+    <item value="0x0791" name="Scn1 Heroes Test 1 Pillar (Large Mithril)" />
     <item value="0x0792" name="Hill Ruin Map" />
     <item value="0x0793" name="Blue Ruin Map" />
     <item value="0x0794" name="Middle Ruin Map" />
@@ -1945,11 +1945,11 @@
     <item value="0x0796" name="Tower Ruin Map" />
     <item value="0x0797" name="Kingdom Ruin Map" />
     <item value="0x0798" name="Potion Balsamo" />
-    <item value="0x0799" name="" />
+    <item value="0x0799" name="Statue Gem after Braff Battle" />
     <item value="0x079A" name="Zero Wing in Battle 124" />
-    <item value="0x079B" name="" />
-    <item value="0x079C" name="" />
-    <item value="0x079D" name="" />
+    <item value="0x079B" name="Malorie Large Mithril in Box" />
+    <item value="0x079C" name="Malorie Gaia Axe in Box" />
+    <item value="0x079D" name="Malorie Nimble Ring in Box" />
     <item value="0x079E" name="" />
     <item value="0x079F" name="" />
     <item value="0x07A0" name="10G Saraband" />
@@ -2824,7 +2824,7 @@
     <item value="0x0B05" name="Power Wine in Imperial Command" />
     <item value="0x0B06" name="" />
     <item value="0x0B07" name="" />
-    <item value="0x0B08" name="" />
+    <item value="0x0B08" name="Dusty Treasure Chest (Power Wine)" />
     <item value="0x0B09" name="" />
     <item value="0x0B0A" name="" />
     <item value="0x0B0B" name="" />
@@ -2834,9 +2834,9 @@
     <item value="0x0B0F" name="" />
     <item value="0x0B10" name="" />
     <item value="0x0B11" name="" />
-    <item value="0x0B12" name="" />
-    <item value="0x0B13" name="" />
-    <item value="0x0B14" name="" />
+    <item value="0x0B12" name="Anafect Village Box 1 (Gale Ring)" />
+    <item value="0x0B13" name="Anafect Village Box 2 (Angel Wing)" />
+    <item value="0x0B14" name="Anafect Village Tombstone (Large Mithril)" />
     <item value="0x0B15" name="" />
     <item value="0x0B16" name="" />
     <item value="0x0B17" name="" />
@@ -2845,7 +2845,7 @@
     <item value="0x0B1A" name="" />
     <item value="0x0B1B" name="" />
     <item value="0x0B1C" name="" />
-    <item value="0x0B1D" name="" />
+    <item value="0x0B1D" name="Rheinside Barrel (Fairy Powder)" />
     <item value="0x0B1E" name="" />
     <item value="0x0B1F" name="" />
     <item value="0x0B20" name="" />
@@ -2881,9 +2881,9 @@
     <item value="0x0B3E" name="" />
     <item value="0x0B3F" name="" />
     <item value="0x0B40" name="" />
-    <item value="0x0B41" name="" />
-    <item value="0x0B42" name="" />
-    <item value="0x0B43" name="" />
+    <item value="0x0B41" name="Elbesem Temple Inside Chest (Earth Rod)" />
+    <item value="0x0B42" name="Elbesem Temple Inside Freeze Ball" />
+    <item value="0x0B43" name="Elbesem Temple Inside Pillar (Small Mithril)" />
     <item value="0x0B44" name="" />
     <item value="0x0B45" name="" />
     <item value="0x0B46" name="" />
@@ -3244,7 +3244,7 @@
     <item value="0x0CA9" name="" />
     <item value="0x0CAA" name="" />
     <item value="0x0CAB" name="" />
-    <item value="0x0CAC" name="" />
+    <item value="0x0CAC" name="Jane is at Ending" />
     <item value="0x0CAD" name="" />
     <item value="0x0CAE" name="" />
     <item value="0x0CAF" name="" />
