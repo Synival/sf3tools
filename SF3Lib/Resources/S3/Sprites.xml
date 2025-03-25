@@ -1,6 +1,292 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <items>
     <!-- 0x00 through 0x3B are characters -->
-    <item value="0x00" name="--" />
-    <!-- 0xC9 and later are monsters -->
+
+    <item value="0x3C" name="!Priest in Blue Robe (Church Priest) / Rock Thrown by Kid" />
+    <item value="0x3D" name="!Woman Carrying Rice (Item Dealer)" />
+    <item value="0x3E" name="!Burly Man with Black Hair (Weapon Dealer) / Man with Red Shirt" />
+    <item value="0x3F" name="!Woman with Brown Ponytail" />
+
+    <item value="0x40" name="!Monk with Orange Robe" />
+    <item value="0x41" name="!Girl with Red Parted Hair" />
+    <item value="0x42" name="!Woman with Green Dress" />
+    <item value="0x43" name="" />
+    <item value="0x44" name="!Businessman with Blonde Hair, Mustache, Coat" />
+    <item value="0x45" name="!Bald Shirtless Burly Man" />
+    <item value="0x46" name="!Messenger Soldier" />
+    <item value="0x47" name="!Elf Woman who Doesn't Like to be Pushed" />
+    <item value="0x48" name="!Man with Grey Shirt, Brown Pants, and Blonde Hair" />
+    <item value="0x49" name="!Old Man" />
+    <item value="0x4A" name="!Dwarf Man with White Beard (Duncan)" />
+    <item value="0x4B" name="!Girl with Green+Yellow Dress" />
+    <item value="0x4C" name="!Benetram" />
+    <item value="0x4D" name="!Boy with Green Shirt" />
+    <item value="0x4E" name="!Man with Red Shirt" />
+    <item value="0x4F" name="!Woman with Blue Dress and Apron" />
+
+    <item value="0x50" name="!Old Woman" />
+    <item value="0x51" name="!Saraband Soldier with Arrows in Back" />
+    <item value="0x52" name="!Blue Masked Monk with Sceptre" />
+    <item value="0x53" name="!Saraband Guard in Chair" />
+    <item value="0x54" name="" />
+    <item value="0x55" name="" />
+    <item value="0x56" name="" />
+    <item value="0x57" name="!Conrad" />
+    <item value="0x58" name="!Ratchet without Suit" />
+    <item value="0x59" name="!Chicken" />
+    <item value="0x5A" name="!Nobleman with Red Coat and Brown Hair" />
+    <item value="0x5B" name="!Noblewoman with Green Dress and Blonde Hair" />
+    <item value="0x5C" name="!Girl with Pink Dress" />
+    <item value="0x5D" name="!Dove" />
+    <item value="0x5E" name="!Boy with Blue Shirt and Blue Shoes" />
+    <item value="0x5F" name="!Burly Worker" />
+
+    <item value="0x60" name="!Train Conductor" />
+    <item value="0x61" name="!Train Official with White Uniform" />
+    <item value="0x62" name="!Purple Masked Monk with Flowers w/o Mask" />
+    <item value="0x63" name="!Flower Girl" />
+    <item value="0x64" name="!Waitress" />
+    <item value="0x65" name="!Bartender" />
+    <item value="0x66" name="!Woman with Blue/Yellow Dress and Black Hair" />
+    <item value="0x67" name="!Boy with Grey Shirt (Toby)" />
+    <item value="0x68" name="!Arthur (Out of Armor)" />
+    <item value="0x69" name="!Dead Republic Soldier" />
+    <item value="0x6A" name="!Resting Burly Worker" />
+    <item value="0x6B" name="" />
+    <item value="0x6C" name="!Dead Goblin" />
+    <item value="0x6D" name="!Tybalt" />
+    <item value="0x6E" name="!Tied-up Domaric" />
+    <item value="0x6F" name="!Brutus / Tied-up Domaric Mask" />
+
+    <item value="0x70" name="!Mageron" />
+    <item value="0x71" name="!Dead Sniper" />
+    <item value="0x72" name="!Birdwoman with Green Dress (Fynnding's Wife)" />
+    <item value="0x73" name="!Dessheren" />
+    <item value="0x74" name="!Varlant" />
+    <item value="0x75" name="!Goriate" />
+    <item value="0x76" name="!Grey Birdman" />
+    <item value="0x77" name="!Maid" />
+    <item value="0x78" name="!Galm / Medion Kneeling" />
+    <item value="0x79" name="!Fairy (Cursed Quonus Church Priest) / !Campbell Kneeling" />
+    <item value="0x7A" name="!Chef" />
+    <item value="0x7B" name="!Scholar with White Wig" />
+    <item value="0x7C" name="!Butler" />
+    <item value="0x7D" name="!Algernon" />
+    <item value="0x7E" name="!Red Dragon who Carries Braff Away" />
+    <item value="0x7F" name="!Palsis" />
+
+    <item value="0x80" name="!Grantack" />
+    <item value="0x81" name="!Dying Abdark / !David Kneeling" />
+    <item value="0x82" name="!Crewart" />
+    <item value="0x83" name="!Yasha" />
+    <item value="0x84" name="!Bernard / !Donhort Kneeling" />
+    <item value="0x85" name="!Birdgirl / !Tied-up Bernard" />
+    <item value="0x86" name="!Birdboy" />
+    <item value="0x87" name="!Nobleman with Black Suit and White Hair" />
+    <item value="0x88" name="!Tristus" />
+    <item value="0x89" name="!Margaret / !Dying Jade" />
+    <item value="0x8A" name="!Nobleman with Purple Hair" />
+    <item value="0x8B" name="!Fiderit" />
+    <item value="0x8C" name="!Bald Burly Man with Purple Shirt (Blacksmith)" />
+    <item value="0x8D" name="!Cat with White and Brown Fur / Dying Wolf Baron" />
+    <item value="0x8E" name="!Large Man with Turquoise Shirt" />
+    <item value="0x8F" name="!Old Woman with Purple Robe" />
+
+    <item value="0x90" name="!Old Man with Green Robe" />
+    <item value="0x91" name="!Woman with Green/Brown Dress and White Apron" />
+    <item value="0x92" name="!Waitress with Black Hair" />
+    <item value="0x93" name="!Boy with Green/Blue Shirt" />
+    <item value="0x94" name="!Girl with Red Dress" />
+    <item value="0x95" name="!Man with Orange and Green Shirt" />
+    <item value="0x96" name="!Synbios Mourning (Unpromoted) / !Woman with Green Dress and Blonde Hair" />
+    <item value="0x97" name="!Flowers on Conrad's Grave / !Dog with White Fur and Black Ears" />
+    <item value="0x98" name="!Synbios Mourning (Promoted)" />
+    <item value="0x99" name="!Unpromoted Garosh / Sea Gull" />
+    <item value="0x9A" name="!Pig" />
+    <item value="0x9B" name="!Hazuki Kneeling / Frozen Galm / Syntesis Stretching (Unpromoted) / Resting Bald Shirtless Burly Man" />
+    <item value="0x9C" name="!Hazuki Somersaulting / Syntesis Waving (Unpromoted) / Resting Blacksmith" />
+    <item value="0x9D" name="!Dead Blue Masked Monk / Hazuki Falling / Syntesis Stretching (Promoted)" />
+    <item value="0x9E" name="!Gracia / Dead White Lord / Syntesis Waving (Promoted)" />
+    <item value="0x9F" name="!Wounded Imperial Guard / Gracia Tortured / Fiale on Masked Pegasus" />
+
+    <item value="0xA0" name="!Dead Imperial Guard" />
+    <item value="0xA1" name="!Sailor" />
+    <item value="0xA2" name="!Sailor Hauling Bag / Resting Sailor" />
+    <item value="0xA3" name="!Produn" />
+    <item value="0xA4" name="!Hazuki's Father" />
+    <item value="0xA5" name="!Seven Dwarves 1/7" />
+    <item value="0xA6" name="!Seven Dwarves 2/7" />
+    <item value="0xA7" name="!Seven Dwarves 3/7" />
+    <item value="0xA8" name="!Seven Dwarves 4/7" />
+    <item value="0xA9" name="!Seven Dwarves 5/7" />
+    <item value="0xAA" name="!Seven Dwarves 6/7" />
+    <item value="0xAB" name="!Seven Dwarves 7/7" />
+    <item value="0xAC" name="!Man with Red Bandana and No Shirt Hammering Wall" />
+    <item value="0xAD" name="!Elf Man with Balding Turquoise Hair" />
+    <item value="0xAE" name="!Elf Girl with Green Hood" />
+    <item value="0xAF" name="!Elf Girl with Green Hair" />
+
+    <item value="0xB0" name="!Elf Woman with Brown Hood and Orange Hair" />
+    <item value="0xB1" name="!Elf Man with Pink Shirt and Balding Brown Hair" />
+    <item value="0xB2" name="!Elf Woman with Brown Dress and Hair" />
+    <item value="0xB3" name="!Elf Woman with White Apron / Domaric" />
+    <item value="0xB4" name="!Zero / !Blue Monk Getting Zapped" />
+    <item value="0xB5" name="" />
+    <item value="0xB6" name="" />
+    <item value="0xB7" name="!Blue Ninja (Hagane)" />
+    <item value="0xB8" name="!Dying Tybalt" />
+    <item value="0xB9" name="" />
+    <item value="0xBA" name="" />
+    <item value="0xBB" name="" />
+    <item value="0xBC" name="" />
+    <item value="0xBD" name="" />
+    <item value="0xBE" name="!Jade's Tank" />
+    <item value="0xBF" name="" />
+
+    <item value="0xC0" name="" />
+    <item value="0xC1" name="" />
+    <item value="0xC2" name="!Weapon Dealer" />
+    <item value="0xC3" name="!Item Dealer" />
+    <item value="0xC4" name="!Accessory Dealer" />
+    <item value="0xC5" name="!Blacksmith" />
+    <item value="0xC6" name="!Church Priest" />
+    <item value="0xC7" name="!STHA Treasure Chest" />
+
+    <!-- 0xC8 through 0x185 are monsters -->
+
+    <item value="0x186" name="!Explosion / !Small Fey" />
+    <item value="0x187" name="!Small Icons / !Small Fey Wings" />
+    <item value="0x188" name="!Smoke / !Firey Poof" />
+    <item value="0x189" name="!Lightning Bolt / !Big Fey" />
+    <item value="0x18A" name="" />
+    <item value="0x18B" name="!Cannon Ball / !Big Fey Wings" />
+    <item value="0x18C" name="!Small Poof of Smoke" />
+    <item value="0x18D" name="!Cannon Ball Splash" />
+    <item value="0x18E" name="!Popping Bubble" />
+    <item value="0x18F" name="!Small Torch Flame" />
+
+    <item value="0x190" name="!Red/Yellow/White Sphere(?)" />
+    <item value="0x191" name="" />
+    <item value="0x192" name="" />
+    <item value="0x193" name="" />
+    <item value="0x194" name="" />
+    <item value="0x195" name="" />
+    <item value="0x196" name="" />
+    <item value="0x197" name="" />
+    <item value="0x198" name="" />
+    <item value="0x199" name="" />
+    <item value="0x19A" name="" />
+    <item value="0x19B" name="" />
+    <item value="0x19C" name="" />
+    <item value="0x19D" name="" />
+    <item value="0x19E" name="" />
+    <item value="0x19F" name="" />
+
+    <item value="0x1A0" name="" />
+    <item value="0x1A1" name="" />
+    <item value="0x1A2" name="" />
+    <item value="0x1A3" name="" />
+    <item value="0x1A4" name="" />
+    <item value="0x1A5" name="" />
+    <item value="0x1A6" name="" />
+    <item value="0x1A7" name="" />
+    <item value="0x1A8" name="" />
+    <item value="0x1A9" name="" />
+    <item value="0x1AA" name="" />
+    <item value="0x1AB" name="" />
+    <item value="0x1AC" name="" />
+    <item value="0x1AD" name="" />
+    <item value="0x1AE" name="" />
+    <item value="0x1AF" name="" />
+
+    <item value="0x1B0" name="" />
+    <item value="0x1B1" name="" />
+    <item value="0x1B2" name="" />
+    <item value="0x1B3" name="" />
+    <item value="0x1B4" name="" />
+    <item value="0x1B5" name="" />
+    <item value="0x1B6" name="" />
+    <item value="0x1B7" name="" />
+    <item value="0x1B8" name="" />
+    <item value="0x1B9" name="" />
+    <item value="0x1BA" name="" />
+    <item value="0x1BB" name="" />
+    <item value="0x1BC" name="" />
+    <item value="0x1BD" name="" />
+    <item value="0x1BE" name="" />
+    <item value="0x1BF" name="" />
+
+    <item value="0x1C0" name="" />
+    <item value="0x1C1" name="" />
+    <item value="0x1C2" name="" />
+    <item value="0x1C3" name="" />
+    <item value="0x1C4" name="" />
+    <item value="0x1C5" name="" />
+    <item value="0x1C6" name="" />
+    <item value="0x1C7" name="" />
+    <item value="0x1C8" name="" />
+    <item value="0x1C9" name="" />
+    <item value="0x1CA" name="" />
+    <item value="0x1CB" name="" />
+    <item value="0x1CC" name="" />
+    <item value="0x1CD" name="" />
+    <item value="0x1CE" name="" />
+    <item value="0x1CF" name="" />
+
+    <item value="0x1E0" name="" />
+    <item value="0x1E1" name="" />
+    <item value="0x1E2" name="" />
+    <item value="0x1E3" name="" />
+    <item value="0x1E4" name="" />
+    <item value="0x1E5" name="" />
+    <item value="0x1E6" name="" />
+    <item value="0x1E7" name="" />
+    <item value="0x1E8" name="" />
+    <item value="0x1E9" name="" />
+    <item value="0x1EA" name="" />
+    <item value="0x1EB" name="" />
+    <item value="0x1EC" name="" />
+    <item value="0x1ED" name="" />
+    <item value="0x1EE" name="" />
+    <item value="0x1EF" name="" />
+
+    <item value="0x1F0" name="" />
+    <item value="0x1F1" name="" />
+    <item value="0x1F2" name="" />
+    <item value="0x1F3" name="" />
+    <item value="0x1F4" name="" />
+    <item value="0x1F5" name="" />
+    <item value="0x1F6" name="" />
+    <item value="0x1F7" name="" />
+    <item value="0x1F8" name="" />
+    <item value="0x1F9" name="" />
+    <item value="0x1FA" name="" />
+    <item value="0x1FB" name="" />
+    <item value="0x1FC" name="" />
+    <item value="0x1FD" name="" />
+    <item value="0x1FE" name="" />
+    <item value="0x1FF" name="" />
+
+    <item value="0x200" name="!Sleeping Train Conductor (Face Up)" />
+    <item value="0x201" name="!Yellow Staff of Besen / Sleeping(?) Train Conductor (Face Down)" />
+    <item value="0x202" name="!Staff of Besem" />
+    <item value="0x203" name="!Brown Bird" />
+    <item value="0x204" name="!Freeze Ball Pedestal" />
+    <item value="0x205" name="!Woman with Brown Dress and White Apron Sweeping with Broom" />
+    <item value="0x206" name="!Man with Blue/Yellow Shirt and Black/Grey Hair" />
+    <item value="0x207" name="!Woman with Brown Skirt, Blue Dress, and Blonde Ponytail" />
+    <item value="0x208" name="!Man with Blue Robes, Orange Cape, and Black/Grey Hair" />
+    <item value="0x209" name="!Woman with Pink Dress" />
+    <item value="0x20A" name="!Man in Fancy Blue Uniform" />
+    <item value="0x20B" name="!Woman with Turquoise Dress and Hat" />
+    <item value="0x20C" name="!Honesty" />
+    <item value="0x20D" name="!Iria" />
+    <item value="0x20E" name="!Iria's Boy" />
+    <item value="0x20F" name="!Iria's Girl" />
+
+    <item value="0x210" name="!Bresby" />
+    <item value="0x211" name="!Garvin" />
+    <item value="0x212" name="!Jane" />
+    <item value="0x213" name="!Unoma Sitting with Ramen" />
+    <item value="0x214" name="!Man with White Pants and Pipe" />
 </items>
