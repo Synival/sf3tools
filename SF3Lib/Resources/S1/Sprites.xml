@@ -1,0 +1,161 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<items>
+    <!-- 0x00 through 0x3B are characters -->
+
+    <item value="0x3C" name="Priest in Blue Robe (Church Priest)" />
+    <item value="0x3D" name="Woman Carrying Rice (Item Dealer)" />
+    <item value="0x3E" name="Burly Man with Black Hair (Weapon Dealer) / Man with Red Shirt" />
+    <item value="0x3F" name="Woman with Brown Ponytail" />
+
+    <item value="0x40" name="Monk with Orange Robe" />
+    <item value="0x41" name="Girl with Red Parted Hair" />
+    <item value="0x42" name="Woman with Green Dress" />
+    <item value="0x43" name="" />
+    <item value="0x44" name="Businessman with Blonde Hair, Mustache, Coat" />
+    <item value="0x45" name="Bald Burly Man" />
+    <item value="0x46" name="Messenger Soldier" />
+    <item value="0x47" name="Elf Woman who Doesn't Like to be Pushed" />
+    <item value="0x48" name="Man with Blonde Hair" />
+    <item value="0x49" name="Old Man" />
+    <item value="0x4A" name="Dwarf Man with White Beard (Duncan)" />
+    <item value="0x4B" name="Girl with Green+Yellow Dress" />
+    <item value="0x4C" name="Benetram" />
+    <item value="0x4D" name="Boy with Green Shirt" />
+    <item value="0x4E" name="Man with Red Shirt" />
+    <item value="0x4F" name="Woman with Blue Dress and Apron" />
+
+    <item value="0x50" name="Old Woman" />
+    <item value="0x51" name="Saraband Soldier with Arrows in Back" />
+    <item value="0x52" name="Blue Masked Monk with Sceptre" />
+    <item value="0x53" name="" />
+    <item value="0x54" name="" />
+    <item value="0x55" name="" />
+    <item value="0x56" name="" />
+    <item value="0x57" name="Conrad" />
+    <item value="0x58" name="Ratchet without Suit" />
+    <item value="0x59" name="Chicken" />
+    <item value="0x5A" name="Nobleman with Red Coat and Brown Hair" />
+    <item value="0x5B" name="Noblewoman with Green Dress and Blonde Hair" />
+    <item value="0x5C" name="Girl with Pink Dress" />
+    <item value="0x5D" name="Dove" />
+    <item value="0x5E" name="Boy with Blue Shirt and Blue Shoes" />
+    <item value="0x5F" name="Burly Worker" />
+
+    <item value="0x60" name="Train Conductor" />
+    <item value="0x61" name="Train Official with White Uniform" />
+    <item value="0x62" name="Purple Masked Monk with Flowers w/o Mask" />
+    <item value="0x63" name="Flower Girl" />
+    <item value="0x64" name="Waitress" />
+    <item value="0x65" name="Bartender" />
+    <item value="0x66" name="Woman with Blue Dress and Black Hair" />
+    <item value="0x67" name="Boy with Grey Shirt (Toby)" />
+    <item value="0x68" name="Arthur (Out of Armor)" />
+    <item value="0x69" name="Dead Republic Soldier" />
+    <item value="0x6A" name="Resting Burly Worker" />
+    <item value="0x6B" name="" />
+    <item value="0x6C" name="Dead Goblin" />
+    <item value="0x6D" name="Tybalt" />
+    <item value="0x6E" name="Tied-up Domaric" />
+    <item value="0x6F" name="Brutus / Tied-up Domaric Mask" />
+
+    <item value="0x70" name="Mageron" />
+    <item value="0x71" name="Dead Sniper" />
+    <item value="0x72" name="Birdwoman with Green Dress (Fynnding's Wife)" />
+    <item value="0x73" name="Dessheren" />
+    <item value="0x74" name="Varlant" />
+    <item value="0x75" name="Goriate" />
+    <item value="0x76" name="" />
+    <item value="0x77" name="Maid" />
+    <item value="0x78" name="Galm" />
+    <item value="0x79" name="Fairy (Cursed Quonus Church Priest)" />
+    <item value="0x7A" name="Chef" />
+    <item value="0x7B" name="Scholar with White Wig" />
+    <item value="0x7C" name="Nobleman in Black Suit and Black Hair" />
+    <item value="0x7D" name="Algernon" />
+    <item value="0x7E" name="Red Dragon who Carries Braff Away" />
+    <item value="0x7F" name="Palsis" />
+
+    <item value="0x80" name="Grantack" />
+    <item value="0x81" name="Dying Abdark" />
+    <item value="0x82" name="Crewart" />
+    <item value="0x83" name="Yasha" />
+    <item value="0x84" name="Bernard" />
+    <item value="0x85" name="Birdgirl / Tied-up Bernard" />
+    <item value="0x86" name="Birdboy" />
+    <item value="0x87" name="Nobleman with Black Suit and White Hair" />
+    <item value="0x88" name="Tristus" />
+    <item value="0x89" name="Margaret" />
+    <item value="0x8A" name="Nobleman with Purple Hair" />
+    <item value="0x8B" name="Fiderit" />
+    <item value="0x8C" name="" />
+    <item value="0x8D" name="" />
+    <item value="0x8E" name="" />
+    <item value="0x8F" name="" />
+
+    <item value="0x90" name="" />
+    <item value="0x91" name="" />
+    <item value="0x92" name="" />
+    <item value="0x93" name="" />
+    <item value="0x94" name="" />
+    <item value="0x95" name="" />
+    <item value="0x96" name="Synbios Mourning (Unpromoted)" />
+    <item value="0x97" name="Flowers on Conrad's Grave" />
+    <item value="0x98" name="Synbios Mourning (Promoted)" />
+    <item value="0x99" name="" />
+    <item value="0x9A" name="" />
+    <item value="0x9B" name="" />
+    <item value="0x9C" name="" />
+    <item value="0x9D" name="" />
+    <item value="0x9E" name="" />
+    <item value="0x9F" name="" />
+
+    <item value="0xA0" name="" />
+    <item value="0xA1" name="" />
+    <item value="0xA2" name="" />
+    <item value="0xA3" name="" />
+    <item value="0xA4" name="" />
+    <item value="0xA5" name="" />
+    <item value="0xA6" name="" />
+    <item value="0xA7" name="" />
+    <item value="0xA8" name="" />
+    <item value="0xA9" name="" />
+    <item value="0xAA" name="" />
+    <item value="0xAB" name="" />
+    <item value="0xAC" name="" />
+    <item value="0xAD" name="" />
+    <item value="0xAE" name="" />
+    <item value="0xAF" name="" />
+
+    <item value="0xB0" name="" />
+    <item value="0xB1" name="" />
+    <item value="0xB2" name="" />
+    <item value="0xB3" name="" />
+    <item value="0xB4" name="Zero" />
+    <item value="0xB5" name="" />
+    <item value="0xB6" name="" />
+    <item value="0xB7" name="Blue Ninja (Hagane)" />
+    <item value="0xB8" name="" />
+    <item value="0xB9" name="" />
+    <item value="0xBA" name="" />
+    <item value="0xBB" name="" />
+    <item value="0xBC" name="" />
+    <item value="0xBD" name="" />
+    <item value="0xBE" name="" />
+    <item value="0xBF" name="" />
+
+    <item value="0xC0" name="" />
+    <item value="0xC1" name="" />
+    <item value="0xC2" name="Weapon Dealer" />
+    <item value="0xC3" name="Item Dealer" />
+    <item value="0xC4" name="Accessory Dealer" />
+    <item value="0xC5" name="Blacksmith" />
+    <item value="0xC6" name="Church Priest" />
+    <item value="0xC7" name="STHA Treasure Chest" />
+
+    <!-- 0xC8 through 0x185 are monsters -->
+
+    <item value="0x186" name="Explosion / Small Fey" />
+    <item value="0x187" name="Small Icons / Small Fey Wings" />
+    <item value="0x189" name="Big Fey" />
+    <item value="0x18B" name="Big Fey Wings" />
+</items>
