@@ -1,10 +1,11 @@
 using CommonLib.Attributes;
 using SF3.ByteData;
+using SF3.Types;
 
 namespace SF3.Models.Structs.X1.Town {
     public class Enter : Struct {
-        private readonly int _sceneNumberAddr;     // 2 bytes
-        private readonly int _unknown0x02Addr; // 2 bytes
+        private readonly int _sceneNumberAddr; // 2 bytes
+        private readonly int _ifFlagOnAddr;    // 2 bytes
         private readonly int _xPosAddr;        // 2 bytes
         private readonly int _unknown0x06Addr; // 2 bytes
         private readonly int _zPosAddr;        // 2 bytes
@@ -15,7 +16,7 @@ namespace SF3.Models.Structs.X1.Town {
         public Enter(IByteData data, int id, string name, int address)
         : base(data, id, name, address, 0x10) {
             _sceneNumberAddr = Address;        // 2 bytes. how is searched. second by being 0x13 is a treasure. if this is 0xffff terminate 
-            _unknown0x02Addr = Address + 0x02; // 2 bytes
+            _ifFlagOnAddr    = Address + 0x02; // 2 bytes
             _xPosAddr        = Address + 0x04; // 2 bytes
             _unknown0x06Addr = Address + 0x06; // 2 bytes
             _zPosAddr        = Address + 0x08; // 2 bytes
@@ -31,11 +32,12 @@ namespace SF3.Models.Structs.X1.Town {
             set => Data.SetWord(_sceneNumberAddr, value);
         }
 
-        [TableViewModelColumn(displayOrder: 1, displayName: "+0x02", displayFormat: "X2")]
+        [TableViewModelColumn(displayOrder: 1, displayFormat: "X3")]
         [BulkCopy]
-        public int Unknown0x02 {
-            get => Data.GetWord(_unknown0x02Addr);
-            set => Data.SetWord(_unknown0x02Addr, value);
+        [NameGetter(NamedValueType.GameFlag)]
+        public int IfFlagOn {
+            get => Data.GetWord(_ifFlagOnAddr);
+            set => Data.SetWord(_ifFlagOnAddr, value);
         }
 
         [TableViewModelColumn(displayOrder: 2, displayName: "xPos")]

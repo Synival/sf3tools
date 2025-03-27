@@ -1,11 +1,12 @@
 using CommonLib.Attributes;
 using SF3.ByteData;
+using SF3.Types;
 
 namespace SF3.Models.Structs.X1.Town {
     public class Arrow : Struct {
         private readonly int _unknown0x00Addr;    // 2 bytes
         private readonly int _textIDAddr;         // 2 bytes
-        private readonly int _unknown0x04Addr;    // 2 bytes
+        private readonly int _ifFlagOffAddr;      // 2 bytes
         private readonly int _pointToWarpMPDAddr; // 2 bytes
         private readonly int _unknown0x08Addr;    // 2 bytes
         private readonly int _unknown0x0AAddr;    // 2 bytes
@@ -14,7 +15,7 @@ namespace SF3.Models.Structs.X1.Town {
         : base(data, id, name, address, 0x0c) {
             _unknown0x00Addr    = Address + 0x00; // 2 bytes
             _textIDAddr         = Address + 0x02; // 2 bytes
-            _unknown0x04Addr    = Address + 0x04; // 2 bytes
+            _ifFlagOffAddr      = Address + 0x04; // 2 bytes
             _pointToWarpMPDAddr = Address + 0x06; // 2 bytes
             _unknown0x08Addr    = Address + 0x08; // 2 bytes
             _unknown0x0AAddr    = Address + 0x0a; // 2 bytes
@@ -34,11 +35,12 @@ namespace SF3.Models.Structs.X1.Town {
             set => Data.SetWord(_textIDAddr, value);
         }
 
-        [TableViewModelColumn(displayOrder: 2, displayName: "+0x04", displayFormat: "X2")]
+        [TableViewModelColumn(displayOrder: 2, displayFormat: "X2")]
         [BulkCopy]
-        public int Unknown0x04 {
-            get => Data.GetWord(_unknown0x04Addr);
-            set => Data.SetWord(_unknown0x04Addr, value);
+        [NameGetter(NamedValueType.GameFlag)]
+        public int IfFlagOff {
+            get => Data.GetWord(_ifFlagOffAddr);
+            set => Data.SetWord(_ifFlagOffAddr, value);
         }
 
         [TableViewModelColumn(displayOrder: 3, displayFormat: "X2")]
