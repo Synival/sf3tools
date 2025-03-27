@@ -1,10 +1,11 @@
 using CommonLib.Attributes;
 using SF3.ByteData;
+using SF3.Types;
 
 namespace SF3.Models.Structs.X1.Town {
     public class Npc : Struct {
         private readonly int _spriteIDAddr;
-        private readonly int _unknown0x02Addr;
+        private readonly int _flagAddr;
         private readonly int _movementTableAddr;
         private readonly int _xPosAddr;
         private readonly int _zPosAddr;
@@ -18,7 +19,7 @@ namespace SF3.Models.Structs.X1.Town {
         public Npc(IByteData data, int id, string name, int address)
         : base(data, id, name, address, 0x18) {
             _spriteIDAddr      = Address + 0x00; // 2 bytes. how is searched. second by being 0x13 is a treasure. if this is 0xffff terminate 
-            _unknown0x02Addr   = Address + 0x02; // unknown + 0x02
+            _flagAddr          = Address + 0x02; // 2 bytes
             _movementTableAddr = Address + 0x04; // 2 bytes
             _xPosAddr          = Address + 0x08; // 2 bytes
             _unknown0x0AAddr   = Address + 0x0a; // 2 bytes
@@ -30,18 +31,31 @@ namespace SF3.Models.Structs.X1.Town {
             _unknown0x16Addr   = Address + 0x16; // 2 bytes
         }
 
-        [TableViewModelColumn(displayOrder: 0, displayFormat: "X3")]
+        [TableViewModelColumn(displayOrder: 0, displayFormat: "X3", minWidth: 200)]
         [BulkCopy]
+        [NameGetter(NamedValueType.Sprite)]
         public int SpriteID {
             get => Data.GetWord(_spriteIDAddr);
             set => Data.SetWord(_spriteIDAddr, value);
         }
 
-        [TableViewModelColumn(displayOrder: 1, displayName: "+0x02", displayFormat: "X4")]
         [BulkCopy]
-        public int Unknown0x02 {
-            get => Data.GetWord(_unknown0x02Addr);
-            set => Data.SetWord(_unknown0x02Addr, value);
+        public int FlagCheckedWithStatus {
+            get => Data.GetWord(_flagAddr);
+            set => Data.SetWord(_flagAddr, value);
+        }
+
+        [TableViewModelColumn(displayOrder: 1.0f, displayFormat: "X3", minWidth: 200)]
+        [NameGetter(NamedValueType.GameFlag)]
+        public int FlagChecked {
+            get => FlagCheckedWithStatus & 0x0FFF;
+            set => FlagCheckedWithStatus = (FlagCheckedWithStatus & ~0xFFF) | (value & 0x0FFF);
+        }
+
+        [TableViewModelColumn(displayOrder: 1.1f)]
+        public bool FlagStatus {
+            get => (FlagCheckedWithStatus & 0x1000) != 0;
+            set => FlagCheckedWithStatus = value ? (FlagCheckedWithStatus | ~0x1000) : (FlagCheckedWithStatus & ~0x1000);
         }
 
         [TableViewModelColumn(displayOrder: 2, displayName: "MovementTable?", isPointer: true)]
@@ -107,8 +121,8 @@ namespace SF3.Models.Structs.X1.Town {
             set => Data.SetWord(_unknown0x16Addr, value);
         }
 
-        [TableViewModelColumn(displayOrder: 11, displayFormat: "X2")]
-        public int? TiedToEventNumber {
+        [TableViewModelColumn(displayOrder: 11, displayName: "Interactable Tie-in", displayFormat: "X2")]
+        public int? InteractableTieIn {
             get {
                 var spriteId = SpriteID;
                 return (spriteId > 0x0f && spriteId != 0xffff) ? (ID + 0x3D) : (int?) null;

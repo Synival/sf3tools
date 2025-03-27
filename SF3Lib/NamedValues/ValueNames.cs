@@ -41,6 +41,8 @@ namespace SF3.NamedValues {
             = new NamedValueFromResourceForScenariosInfo("Spells.xml");
         public static readonly NamedValueFromResourceInfo SpellTargetInfo
             = new NamedValueFromResourceInfo("SpellTargets.xml");
+        public static readonly NamedValueFromResourceForScenariosInfo SpriteInfo
+            = new NamedValueFromResourceForScenariosInfo("Sprites.xml");
         public static readonly NamedValueFromResourceInfo StatTypeInfo
             = new NamedValueFromResourceInfo("StatTypes.xml");
         public static readonly NamedValueFromResourceForScenariosInfo WeaponSpellInfo

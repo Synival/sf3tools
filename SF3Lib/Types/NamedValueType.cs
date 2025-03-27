@@ -26,6 +26,7 @@ namespace SF3.Types {
         SpecialElement,
         Spell,
         SpellTarget,
+        Sprite,
         StatType,
         StatUpValueType,
         WeaponSpell,
