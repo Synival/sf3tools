@@ -13,6 +13,18 @@ namespace SF3.NamedValues {
             = new NamedValueFromResourceInfo("EffectiveTypes.xml");
         public static readonly NamedValueFromResourceInfo ElementInfo
             = new NamedValueFromResourceInfo("Elements.xml");
+        public static readonly NamedValueFromEnum<EventTriggerDirectionType> EventTriggerDirectionInfo
+            = new NamedValueFromEnum<EventTriggerDirectionType>(maxValue: 0x0F);
+        public static readonly NamedValueFromEnum<EventTriggerInspectType> EventTriggerInspectTypeInfo
+            = new NamedValueFromEnum<EventTriggerInspectType>(maxValue: 0xFF);
+        public static readonly NamedValueFromEnum<EventTriggerMoveOnTileType> EventTriggerMoveOnTileInfo
+            = new NamedValueFromEnum<EventTriggerMoveOnTileType>(maxValue: 0x0F);
+        public static readonly NamedValueFromEnum<EventTriggerType> EventTriggerTypeInfo
+            = new NamedValueFromEnum<EventTriggerType>(maxValue: 0x0F);
+        public static readonly NamedValueFromEnum<EventTriggerUseItemType> EventTriggerUseItemTypeInfo
+            = new NamedValueFromEnum<EventTriggerUseItemType>(maxValue: 0x0F);
+        public static readonly NamedValueFromEnum<EventTriggerWarpSoundType> EventTriggerWarpSoundInfo
+            = new NamedValueFromEnum<EventTriggerWarpSoundType>(maxValue: 0x0F);
         public static readonly NamedValueFromResourceForScenariosInfo FileIndexInfo
             = new NamedValueFromResourceForScenariosInfo("FileIndexes.xml", formatString: "X4");
         public static readonly NamedValueFromResourceInfo FriendshipBonusTypeInfo

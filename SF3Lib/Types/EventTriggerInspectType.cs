@@ -1,0 +1,38 @@
+﻿using System.ComponentModel;
+
+namespace SF3.Types {
+    public enum EventTriggerInspectType {
+        Nothing           = 0x00,
+        TreasureChest     = 0x01,
+        Vase              = 0x02,
+        Barrel            = 0x03,
+        Wall              = 0x04,
+        AreaDirectlyAhead = 0x05,
+        Rock              = 0x06,
+        Hole              = 0x07,
+        Tombstone         = 0x08,
+        Tree              = 0x09,
+        Bushes            = 0x0A,
+        Door              = 0x0B,
+        Painting          = 0x0C,
+        Box               = 0x0D,
+        Bed               = 0x0E,
+        Bookcase          = 0x0F,
+        Sarcophagus       = 0x10,
+        Fireplace         = 0x11,
+        Water             = 0x12,
+        StonePillar       = 0x13,
+        Stalagmite        = 0x14,
+        StoppingBoard     = 0x15,
+        Fountain          = 0x16,
+        Stove             = 0x17,
+        Table             = 0x18,
+        StoneStatue       = 0x19,
+        WritingOnStone    = 0x1A,
+        Shelf             = 0x1B,
+        Drawer            = 0x1C,
+        Reserved1_Bucket  = 0x1D,
+        Reserved2         = 0x1E,
+        Reserved3         = 0x1F,
+    }
+}

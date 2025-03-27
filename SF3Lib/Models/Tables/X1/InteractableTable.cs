@@ -22,7 +22,7 @@ namespace SF3.Models.Tables.X1 {
         public override bool Load() {
             return Load(
                 (id, address) => new Interactable(Data, id, "Interactable" + id.ToString("D2"), address, NameGetterContext, NpcTable),
-                (rows, model) => model.Searched != 0xFFFF,
+                (rows, model) => model.Trigger != 0xFFFF,
                 false);
         }
 

@@ -56,6 +56,13 @@ namespace SF3.NamedValues {
                         (o, p, a)    => CanGetEventParameterValue(o, p, 0, a)
                     ) },
 
+
+                { NamedValueType.EventTriggerDirection, new SubMethods((o, p, v, a) => new NameAndInfo(v, ValueNames.EventTriggerDirectionInfo)) },
+                { NamedValueType.EventTriggerInspectType, new SubMethods((o, p, v, a) => new NameAndInfo(v, ValueNames.EventTriggerInspectTypeInfo)) },
+                { NamedValueType.EventTriggerMoveOnTileType, new SubMethods((o, p, v, a) => new NameAndInfo(v, ValueNames.EventTriggerMoveOnTileInfo)) },
+                { NamedValueType.EventTriggerType,    new SubMethods((o, p, v, a) => new NameAndInfo(v, ValueNames.EventTriggerTypeInfo)) },
+                { NamedValueType.EventTriggerUseItemType, new SubMethods((o, p, v, a) => new NameAndInfo(v, ValueNames.EventTriggerUseItemTypeInfo)) },
+                { NamedValueType.EventTriggerWarpSound, new SubMethods((o, p, v, a) => new NameAndInfo(v, ValueNames.EventTriggerWarpSoundInfo)) },
                 { NamedValueType.FileIndex,           new SubMethods((o, p, v, a) => new NameAndInfo(v, ValueNames.FileIndexInfo.Info[Scenario])) },
                 { NamedValueType.FriendshipBonusType, new SubMethods((o, p, v, a) => new NameAndInfo(v, ValueNames.FriendshipBonusTypeInfo)) },
                 { NamedValueType.GameFlag,            new SubMethods((o, p, v, a) => new NameAndInfo(v, ValueNames.GameFlagInfo)) },

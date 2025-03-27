@@ -34,11 +34,14 @@ namespace X1_Analyzer {
             var ramOffset = (x1File.Scenario == ScenarioType.Scenario1) ? 0x0605f000 : 0x0605e000;
 
             // Gather a list of enemies with their relevant AI-related properties.
-            var enemiesWithAI = x1File.Battles?.Values
+            var battles = x1File.Battles ?? [];
+            var allEnemies = battles.Values
                 .SelectMany(x =>
                     x.SlotTable
                         .Where(y => y.EnemyID != 0x00)
                         .Select(y => new {
+                            BattleName = x.Name,
+
                             SlotID = y.ID,
                             SlotName = y.Name,
                             y.EnemyID,
@@ -80,7 +83,10 @@ namespace X1_Analyzer {
                                 y.Address + 0x26,
                                 y.Address + 0x29,
                                 y.Address + 0x2C,
-                            }
+                            },
+
+                            y.EnemyFlags,
+                            y.FlagTieInOrUnknown,
                         }
                     )
                 )
@@ -88,11 +94,11 @@ namespace X1_Analyzer {
 
             // Gather some data for a final report.
             // (This shouldn't really be in this function, but w/e)
-            s_allAiTags.AddRange(enemiesWithAI.SelectMany(x => x.AITags).ToArray());
-            s_allAiTypes.AddRange(enemiesWithAI.SelectMany(x => x.AITypes).ToArray());
-            s_allAiAggrs.AddRange(enemiesWithAI.SelectMany(x => x.AIAggrs).ToArray());
-            s_allSpawnTypes.AddRange(enemiesWithAI.Select(x => (int) x.SpawnType));
-            s_allUnknown0x0Es.AddRange(enemiesWithAI.Select(x => x.Unknown0x0E));
+            s_allAiTags.AddRange(allEnemies.SelectMany(x => x.AITags).ToArray());
+            s_allAiTypes.AddRange(allEnemies.SelectMany(x => x.AITypes).ToArray());
+            s_allAiAggrs.AddRange(allEnemies.SelectMany(x => x.AIAggrs).ToArray());
+            s_allSpawnTypes.AddRange(allEnemies.Select(x => (int) x.SpawnType));
+            s_allUnknown0x0Es.AddRange(allEnemies.Select(x => x.Unknown0x0E));
 
 #if false
             // Match enemies with any non-default AI.
@@ -108,31 +114,55 @@ namespace X1_Analyzer {
             }
 #elif false
             return (x1File.ArrowTable != null && x1File.ArrowTable.Any(x => x.IfFlagOff != 0xFFFF)) ? true : null;
-#else
+#elif false
             // Match enemies with a team other than 0 or 1.
-            foreach (var battle in x1File.Battles) {
+            foreach (var battle in x1File.Battles ?? []) {
                 var enemies = battle.Value.SlotTable.Where(x => x.EnemyID != 0).ToArray();
-                foreach (var enemy in enemies.Where(x => x.EnemyID != 0x00)) {
-                    var flagsWeCareAbout = 0x10; //0xFF & (~(0x02 | 0x40 | 0x80));
-                    var filterFor = (enemy.EnemyFlags & flagsWeCareAbout) != 0;
-                    if (!filterFor)
+                foreach (var enemy in enemies.Where(x => x.FlagTieInOrUnknown != 0x00)) {
+                    var realName = x1File.NameGetterContext.GetName(null, null, enemy.EnemyID, [NamedValueType.MonsterForSlot]);
+                    var flagName = x1File.NameGetterContext.GetName(null, null, enemy.FlagTieInOrUnknown, [NamedValueType.GameFlag]);
+                    var itemName = x1File.NameGetterContext.GetName(null, null, enemy.ItemOverride, [NamedValueType.Item]);
+                    if (flagName != "")
                         continue;
 
-                    var realName = x1File.NameGetterContext.GetName(null, null, enemy.EnemyID, [NamedValueType.MonsterForSlot]);
-                    var enemyStr = $"{battle.Key} | {enemy.Name} (0x{enemy.ID:X2}) | {realName} (0x{enemy.EnemyID:X2})";
+                    var enemyStr = $"{battle.Key.ToString().PadLeft(7)} | {enemy.Name} (0x{enemy.ID:X2}) | {realName} (0x{enemy.EnemyID:X2})";
+                    var flagStr  = $"{flagName.PadLeft(60)} (0x{enemy.FlagTieInOrUnknown:X3})";
+                    var itemStr  = $"{itemName} (0x{enemy.ItemOverride:X2})";
+
                     s_matchReports.Add(
                         enemy.EnemyFlags.ToString("X4") + " | " +
                         BitString(enemy.EnemyFlags) + " | " +
-                        enemyStr
+                        flagStr + " | " +
+                        enemyStr.PadRight(40) + " | " +
+                        itemStr
                     );
+                }
+            }
+#elif false
+            if (x1File.NpcTable != null) {
+                foreach (var i in x1File.InteractableTable.Where(x => (x.TriggerFlags & 0x07) != 0)) {
+                    var actionFlagChecked = i.ActionFlagChecked;
+                    var flagName = x1File.NameGetterContext.GetName(null, null, actionFlagChecked, [NamedValueType.GameFlag]) ?? "";
+                    var itemName = (i.ActionType == 0x100 || i.ActionType == 0x101) ? x1File.NameGetterContext.GetName(null, null, i.ActionParam, [NamedValueType.Item]) : "";
+
+                    var interactableStr = i.ID.ToString("X2") + " | " + i.Trigger.ToString("X4") + " | " + i.TriggerFlags.ToString("X2") + " | " + i.TriggerTargetID.ToString("X2");
+                    var flagStr = $"{flagName.PadLeft(60)} (0x{i.ActionFlagChecked:X3} == {i.ActionFlagStatus})";
+                    var itemStr = ((itemName != "") ? (itemName + " ") : "") + $"({(EventActionType) i.ActionType}, 0x{i.ActionParam:X3})";
+
+                    var charName = x1File.NameGetterContext.GetName(null, null, i.TriggerTargetID, [NamedValueType.Character]);
+
+                    s_matchReports.Add(interactableStr + " | " + i.TriggerDescription.PadRight(60) + " | " + flagStr.PadLeft(60) + " | " + itemStr);
                 }
             }
 #endif
 
-            return s_matchReports.Count > 0;
+            return s_matchReports.Count > 0 ? true : null;
         }
 
         public static void Main(string[] args) {
+            Console.WriteLine("Press a key to start...");
+            _ = Console.ReadKey();
+
             // Get a list of all .MPD files from all scenarios located at 'c_pathsIn[Scenario]'.
             var allFiles = Enum.GetValues<ScenarioType>()
                 .Where(x => c_pathsIn.ContainsKey(x))
