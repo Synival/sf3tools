@@ -1,5 +1,7 @@
 using CommonLib.Attributes;
+using CommonLib.NamedValues;
 using SF3.ByteData;
+using SF3.Models.Tables.X1.Town;
 using SF3.Types;
 
 namespace SF3.Models.Structs.X1 {
@@ -11,9 +13,12 @@ namespace SF3.Models.Structs.X1 {
         private readonly int _eventTypeAddr;
         private readonly int _itemIDAddr;
 
-        public Interactable(IByteData data, int id, string name, int address)
+        public Interactable(IByteData data, int id, string name, int address, INameGetterContext nameGetterContext, NpcTable npcTable)
         : base(data, id, name, address, 0x0C) {
-            _searchedAddr    = Address + 0x00; // 2 bytes. how is searched. second by being 0x13 is a treasure. if this is 0xffff terminate 
+            NameGetterContext = nameGetterContext;
+            NpcTable = npcTable;
+
+            _searchedAddr    = Address + 0x00; // 2 bytes
             _eventNumberAddr = Address + 0x02; // 2 bytes
             _flagUsedAddr    = Address + 0x04; // 2 bytes
             _unknown0x06Addr = Address + 0x06; // 2 bytes
@@ -21,7 +26,8 @@ namespace SF3.Models.Structs.X1 {
             _itemIDAddr      = Address + 0x0a; // 2 bytes
         }
 
-        [TableViewModelColumn(displayOrder: 0, displayName: "Direction/Searched", displayFormat: "X4")]
+        public INameGetterContext NameGetterContext { get; }
+        public NpcTable NpcTable { get; }
         [BulkCopy]
         public int Searched {
             get => Data.GetWord(_searchedAddr);

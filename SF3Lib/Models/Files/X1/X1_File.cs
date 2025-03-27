@@ -143,14 +143,14 @@ namespace SF3.Models.Files.X1 {
 
             // Add tables present outside of the battle tables.
             var tables = new List<ITable>();
-            if (treasureAddress >= 0)
-                tables.Add(InteractableTable = InteractableTable.Create(Data, "Treasure", treasureAddress));
             if (warpAddress >= 0)
                 tables.Add(WarpTable = WarpTable.Create(Data, "Warps", warpAddress, IsBattle, NameGetterContext));
             if (battlePointersAddress >= 0)
                 tables.Add(BattlePointersTable);
             if (npcAddress >= 0)
                 tables.Add(NpcTable = NpcTable.Create(Data, "NPCs", npcAddress));
+            if (treasureAddress >= 0)
+                tables.Add(InteractableTable = InteractableTable.Create(Data, "Interactables", treasureAddress, NameGetterContext, NpcTable));
             if (enterAddress >= 0)
                 tables.Add(EnterTable = EnterTable.Create(Data, "Entrances", enterAddress));
             if (arrowAddress >= 0)
