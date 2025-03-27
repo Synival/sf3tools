@@ -121,7 +121,7 @@ namespace SF3.NamedValues {
             if (!_nameGetters.ContainsKey(valueType))
                 return false;
 
-            var valueInt = Convert.ToInt32(value);
+            var valueInt = value.GetType() == typeof(uint) ? (int) Convert.ToUInt32(value) : Convert.ToInt32(value);
             return _nameGetters[valueType].CanGetName(obj, property, valueInt, parameters);
         }
 
@@ -201,7 +201,9 @@ namespace SF3.NamedValues {
         private NameAndInfo GetSpecialElementValue(object obj, PropertyInfo property, int value, object[] parameters) {
             var typePropertyName = (string) parameters[1];
             var typeProperty = obj.GetType().GetProperty(typePropertyName);
-            var typePropertyValue = (int) typeProperty.GetValue(obj);
+            var typePropertyValue = (int?) typeProperty.GetValue(obj);
+            if (!typePropertyValue.HasValue)
+                return null;
 
             switch (typePropertyValue) {
                 case 100:
@@ -214,7 +216,7 @@ namespace SF3.NamedValues {
         private bool CanGetSpecialElementValue(object obj, PropertyInfo property, int value, object[] parameters) {
             var typePropertyName = (string) parameters[1];
             var typeProperty = obj.GetType().GetProperty(typePropertyName);
-            var typePropertyValue = (int) typeProperty.GetValue(obj);
+            var typePropertyValue = (int?) typeProperty.GetValue(obj);
 
             switch (typePropertyValue) {
                 case 100:
