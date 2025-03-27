@@ -13,8 +13,13 @@ namespace SF3.NamedValues {
         private delegate bool CanGetNameChecker(object obj, PropertyInfo property, int value, object[] parameters);
         private delegate bool CanGetInfoChecker(object obj, PropertyInfo property, object[] parameters);
 
-        private static readonly CanGetNameChecker AlwaysCanGetName = new CanGetNameChecker((o, p, v, r) => true);
-        private static readonly CanGetInfoChecker AlwaysCanGetInfo = new CanGetInfoChecker((o, p, r) => true);
+        private static readonly CanGetNameChecker AlwaysCanGetName = new CanGetNameChecker((o, p, v, r) => {
+            return true;
+        });
+
+        private static readonly CanGetInfoChecker AlwaysCanGetInfo = new CanGetInfoChecker((o, p, r) => {
+            return true;
+        });
 
         private struct SubMethods {
             public SubMethods(NameAndInfoGetter getNameAndInfo, CanGetNameChecker canGetName = null, CanGetInfoChecker canGetInfo = null) {
@@ -116,6 +121,44 @@ namespace SF3.NamedValues {
         public INamedValueInfo GetInfo(object obj, PropertyInfo property, params object[] parameters)
             => _nameGetters[(NamedValueType) parameters[0]].GetNameAndInfo(obj, property, 0, parameters).Info;
 
+        private T GetParameterAsT<T>(object[] parameters, int index, T defaultValue = null) where T : class
+            => (parameters.Length > index) ? (T) parameters[index] : defaultValue;
+
+        private T? GetParameterAsTOrNull<T>(object[] parameters, int index) where T : struct
+            => (parameters.Length > index) ? (T?) parameters[index] : null;
+
+        private PropertyInfo GetParameterReferencedProperty(object obj, object[] parameters, int index)
+            => (parameters.Length > index) ? obj.GetType().GetProperty((string) parameters[index]) : null;
+
+        private object GetReferencedPropertyValue(object obj, object[] parameters, int index, object defaultValue = null)
+            => GetParameterReferencedProperty(obj, parameters, index)?.GetValue(obj) ?? defaultValue;
+
+        private T GetReferencedPropertyValueAsT<T>(object obj, object[] parameters, int index, T defaultValue = null) where T : class
+            => (T) (GetReferencedPropertyValue(obj, parameters, index, defaultValue) ?? defaultValue);
+
+        private T? GetReferencedPropertyValueAsTOrNull<T>(object obj, object[] parameters, int index) where T : struct
+            => (T?) GetReferencedPropertyValue(obj, parameters, index);
+
+        private int? GetReferencedPropertyValueAsIntOrNull(object obj, object[] parameters, int index) {
+            var propertyValue = GetReferencedPropertyValue(obj, parameters, index);
+            if (propertyValue == null)
+                return null;
+
+            var propertyValueType = propertyValue.GetType();
+            return (propertyValueType == typeof(uint) || propertyValueType == typeof(uint?))
+                ? (int) Convert.ToUInt32(propertyValue) : Convert.ToInt32(propertyValue);
+        }
+
+        private bool? GetReferencedPropertyValueAsBoolOrNull(object obj, object[] parameters, int index) {
+            var value = GetReferencedPropertyValueAsIntOrNull(obj, parameters, index);
+            return value.HasValue ? (value.Value == 0 ? false : true) : (bool?) null;
+        }
+
+        private T GetReferencedPropertyValueAsEnumOrNull<T>(object obj, object[] parameters, int index) where T : Enum {
+            var intValue = GetReferencedPropertyValueAsIntOrNull(obj, parameters, index);
+            return (intValue == null) ? (T) (object) null : (T) (object) intValue.Value;
+        }
+
         public bool CanGetName(object obj, PropertyInfo property, object value, params object[] parameters) {
             var valueType = (NamedValueType) parameters[0];
             if (!_nameGetters.ContainsKey(valueType))
@@ -135,11 +178,8 @@ namespace SF3.NamedValues {
         public ScenarioType Scenario { get; }
 
         private NameAndInfo GetStatUpValue(object obj, PropertyInfo property, int value, object[] parameters) {
-            var typePropertyName = (string) parameters[1];
-            var typeProperty = obj.GetType().GetProperty(typePropertyName);
-            var typePropertyValue = (StatUpType) typeProperty.GetValue(obj);
-
-            switch (typePropertyValue) {
+            var statUpType = GetReferencedPropertyValueAsEnumOrNull<StatUpType>(obj, parameters, 1);
+            switch (statUpType) {
                 case StatUpType.Special:
                     return _nameGetters[NamedValueType.Special].GetNameAndInfo(obj, property, value, parameters);
                 case StatUpType.Spell:
@@ -150,11 +190,8 @@ namespace SF3.NamedValues {
         }
 
         private bool CanGetStatUpValue(object obj, PropertyInfo property, int value, object[] parameters) {
-            var typePropertyName = (string) parameters[1];
-            var typeProperty = obj.GetType().GetProperty(typePropertyName);
-            var typePropertyValue = (StatUpType) typeProperty.GetValue(obj);
-
-            switch (typePropertyValue) {
+            var statUpType = GetReferencedPropertyValueAsEnumOrNull<StatUpType>(obj, parameters, 1);
+            switch (statUpType) {
                 case StatUpType.Special:
                 case StatUpType.Spell:
                     return true;
@@ -164,18 +201,13 @@ namespace SF3.NamedValues {
         }
 
         private bool CanGetCharacterPlusValue(object obj, PropertyInfo property, int value, object[] parameters) {
-            var typePropertyName = (string) parameters[1];
-            var typeProperty = obj.GetType().GetProperty(typePropertyName);
-            var typePropertyValue = (int) typeProperty.GetValue(obj);
-            return typePropertyValue == 0x5B; // magic number indicated "Character Placeholder"
+            var enemyID = GetReferencedPropertyValueAsIntOrNull(obj, parameters, 1);
+            return enemyID == 0x5B; // magic number indicated "Character Placeholder"
         }
 
         private NameAndInfo GetEventParameterValue(object obj, PropertyInfo property, int value, object[] parameters) {
-            var typePropertyName = (string) parameters[1];
-            var typeProperty = obj.GetType().GetProperty(typePropertyName);
-            var typePropertyValue = (int) typeProperty.GetValue(obj);
-
-            switch (typePropertyValue) {
+            var inspectActionType = GetReferencedPropertyValueAsIntOrNull(obj, parameters, 1);
+            switch (inspectActionType) {
                 case 0x100:
                 case 0x101:
                     return _nameGetters[NamedValueType.Item].GetNameAndInfo(obj, property, value, parameters);
@@ -185,11 +217,8 @@ namespace SF3.NamedValues {
         }
 
         private bool CanGetEventParameterValue(object obj, PropertyInfo property, int value, object[] parameters) {
-            var typePropertyName = (string) parameters[1];
-            var typeProperty = obj.GetType().GetProperty(typePropertyName);
-            var typePropertyValue = (int) typeProperty.GetValue(obj);
-
-            switch (typePropertyValue) {
+            var inspectActionType = GetReferencedPropertyValueAsIntOrNull(obj, parameters, 1);
+            switch (inspectActionType) {
                 case 0x100:
                 case 0x101:
                     return true;
@@ -199,13 +228,8 @@ namespace SF3.NamedValues {
         }
 
         private NameAndInfo GetSpecialElementValue(object obj, PropertyInfo property, int value, object[] parameters) {
-            var typePropertyName = (string) parameters[1];
-            var typeProperty = obj.GetType().GetProperty(typePropertyName);
-            var typePropertyValue = (int?) typeProperty.GetValue(obj);
-            if (!typePropertyValue.HasValue)
-                return null;
-
-            switch (typePropertyValue) {
+            var damageCalcType = GetReferencedPropertyValueAsIntOrNull(obj, parameters, 1);
+            switch (damageCalcType) {
                 case 100:
                     return _nameGetters[NamedValueType.Element].GetNameAndInfo(obj, property, value, parameters);
                 default:
@@ -214,11 +238,8 @@ namespace SF3.NamedValues {
         }
 
         private bool CanGetSpecialElementValue(object obj, PropertyInfo property, int value, object[] parameters) {
-            var typePropertyName = (string) parameters[1];
-            var typeProperty = obj.GetType().GetProperty(typePropertyName);
-            var typePropertyValue = (int?) typeProperty.GetValue(obj);
-
-            switch (typePropertyValue) {
+            var damageCalcType = GetReferencedPropertyValueAsIntOrNull(obj, parameters, 1);
+            switch (damageCalcType) {
                 case 100:
                     return true;
                 default:
@@ -227,18 +248,12 @@ namespace SF3.NamedValues {
         }
 
         private NameAndInfo GetGameFlagValue(object obj, PropertyInfo property, int value, object[] parameters) {
-            var isGameFlagName = (string) parameters[1];
-            var isGameFlagProperty = obj.GetType().GetProperty(isGameFlagName);
-            var isGameFlagValue = (bool) isGameFlagProperty.GetValue(obj);
-
-            return isGameFlagValue ? _nameGetters[NamedValueType.GameFlag].GetNameAndInfo(obj, property, value, parameters) : null;
+            var isGameFlagValue = GetReferencedPropertyValueAsBoolOrNull(obj, parameters, 1);
+            return (isGameFlagValue == true) ? _nameGetters[NamedValueType.GameFlag].GetNameAndInfo(obj, property, value, parameters) : null;
         }
 
-        private bool CanGetGameFlagValue(object obj, PropertyInfo property, int value, object[] parameters) {
-            var isGameFlagName = (string) parameters[1];
-            var isGameFlagProperty = obj.GetType().GetProperty(isGameFlagName);
-            return (bool) isGameFlagProperty.GetValue(obj);
-        }
+        private bool CanGetGameFlagValue(object obj, PropertyInfo property, int value, object[] parameters)
+            => GetReferencedPropertyValueAsBoolOrNull(obj, parameters, 1) ?? false;
 
         public string Name => Scenario.ToString();
     }
