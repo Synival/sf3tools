@@ -113,10 +113,8 @@ namespace SF3.Tests.Models.Files {
             var file = TestCase.Create();
             var table = file.InteractableTable;
 
-            Assert.AreEqual(0x8013, table[0].Searched);
-            Assert.AreEqual(0x53, table[0].EventParameter);
-            Assert.AreEqual(0x70E, table[0].FlagUsed);
-            Assert.AreEqual(0x0F, table[0].EventNumber);
+            // TODO: redo all of the data checks!
+            Assert.IsFalse(true);
 
             Assert.AreEqual(1, table.Length);
         }

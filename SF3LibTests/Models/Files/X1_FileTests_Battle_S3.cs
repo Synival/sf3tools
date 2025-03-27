@@ -118,20 +118,8 @@ namespace SF3.Tests.Models.Files {
             var file = TestCase2.Create();
             var table = file.InteractableTable;
 
-            Assert.AreEqual(0x13, table[0].Searched);
-            Assert.AreEqual(0xEA, table[0].EventParameter);
-            Assert.AreEqual(0xF0F, table[0].FlagUsed);
-            Assert.AreEqual(0x0F, table[0].EventNumber);
-
-            Assert.AreEqual(0xC013, table[1].Searched);
-            Assert.AreEqual(0x65, table[1].EventParameter);
-            Assert.AreEqual(0xF10, table[1].FlagUsed);
-            Assert.AreEqual(14, table[1].EventNumber);
-
-            Assert.AreEqual(0x8013, table[2].Searched);
-            Assert.AreEqual(0x5E, table[2].EventParameter);
-            Assert.AreEqual(0xF11, table[2].FlagUsed);
-            Assert.AreEqual(0x0D, table[2].EventNumber);
+            // TODO: redo all of the data checks!
+            Assert.IsFalse(true);
 
             Assert.AreEqual(3, table.Length);
         }
