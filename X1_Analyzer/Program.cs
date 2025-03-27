@@ -31,14 +31,10 @@ namespace X1_Analyzer {
         private static bool? X1_Match_Func(string filename, IX1_File x1File) {
             // Sample: Skip non-battles, and match non-battles with scripted movements.
 
-            // Return 'null' to skip.
-            if (!x1File.IsBattle || x1File.IsBTL99)
-                return null;
-
             var ramOffset = (x1File.Scenario == ScenarioType.Scenario1) ? 0x0605f000 : 0x0605e000;
 
             // Gather a list of enemies with their relevant AI-related properties.
-            var enemiesWithAI = x1File.Battles.Values
+            var enemiesWithAI = x1File.Battles?.Values
                 .SelectMany(x =>
                     x.SlotTable
                         .Where(y => y.EnemyID != 0x00)
@@ -88,7 +84,7 @@ namespace X1_Analyzer {
                         }
                     )
                 )
-                .ToArray();
+                .ToArray() ?? [];
 
             // Gather some data for a final report.
             // (This shouldn't really be in this function, but w/e)
@@ -110,6 +106,8 @@ namespace X1_Analyzer {
                     if (enemy.AITags[i] != 0xFF || enemy.AITags[i] != 0xFF || enemy.AIAggrs[i] != 0x00)
                         s_matchReports.Add($"Tags={enemy.AITags[i]:X2}, Type={enemy.AITypes[i]:X2}, Aggr={enemy.AIAggrs[i]:X2} | AI[{i}] | {enemyStr}");
             }
+#elif false
+            return (x1File.ArrowTable != null && x1File.ArrowTable.Any(x => x.IfFlagOff != 0xFFFF)) ? true : null;
 #else
             // Match enemies with a team other than 0 or 1.
             foreach (var battle in x1File.Battles) {
