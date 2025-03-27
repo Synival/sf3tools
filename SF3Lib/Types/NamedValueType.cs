@@ -31,5 +31,8 @@ namespace SF3.Types {
         StatUpValueType,
         WeaponSpell,
         WeaponType,
+
+        // Special Types
+        ConditionalType
     };
 }

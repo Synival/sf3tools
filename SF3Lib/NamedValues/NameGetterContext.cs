@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 using CommonLib.NamedValues;
 using SF3.Types;
@@ -13,13 +14,8 @@ namespace SF3.NamedValues {
         private delegate bool CanGetNameChecker(object obj, PropertyInfo property, int value, object[] parameters);
         private delegate bool CanGetInfoChecker(object obj, PropertyInfo property, object[] parameters);
 
-        private static readonly CanGetNameChecker AlwaysCanGetName = new CanGetNameChecker((o, p, v, r) => {
-            return true;
-        });
-
-        private static readonly CanGetInfoChecker AlwaysCanGetInfo = new CanGetInfoChecker((o, p, r) => {
-            return true;
-        });
+        private static readonly CanGetNameChecker AlwaysCanGetName = new CanGetNameChecker((o, p, v, r) => true);
+        private static readonly CanGetInfoChecker AlwaysCanGetInfo = new CanGetInfoChecker((o, p, r) => true);
 
         private struct SubMethods {
             public SubMethods(NameAndInfoGetter getNameAndInfo, CanGetNameChecker canGetName = null, CanGetInfoChecker canGetInfo = null) {
@@ -113,6 +109,13 @@ namespace SF3.NamedValues {
 
                 { NamedValueType.WeaponSpell,         new SubMethods((o, p, v, a) => new NameAndInfo(v, ValueNames.WeaponSpellInfo.Info[Scenario])) },
                 { NamedValueType.WeaponType,          new SubMethods((o, p, v, a) => new NameAndInfo(v, ValueNames.WeaponTypeInfo)) },
+
+                { NamedValueType.ConditionalType,
+                    new SubMethods(
+                        (o, p, v, a) => GetConditionalNameAndInfo(o, p, v, a),
+                        (o, p, v, a) => CanGetConditionalName(o, p, v, a),
+                        (o, p, a)    => CanGetConditionalInfo(o, p, a)
+                    ) },
             };
         }
 
@@ -139,14 +142,16 @@ namespace SF3.NamedValues {
         private T? GetReferencedPropertyValueAsTOrNull<T>(object obj, object[] parameters, int index) where T : struct
             => (T?) GetReferencedPropertyValue(obj, parameters, index);
 
-        private int? GetReferencedPropertyValueAsIntOrNull(object obj, object[] parameters, int index) {
-            var propertyValue = GetReferencedPropertyValue(obj, parameters, index);
-            if (propertyValue == null)
+        private int? GetReferencedPropertyValueAsIntOrNull(object obj, object[] parameters, int index)
+            => ObjectToIntOrNull(GetReferencedPropertyValue(obj, parameters, index));
+
+        private int? ObjectToIntOrNull(object value) {
+            if (value == null)
                 return null;
 
-            var propertyValueType = propertyValue.GetType();
+            var propertyValueType = value.GetType();
             return (propertyValueType == typeof(uint) || propertyValueType == typeof(uint?))
-                ? (int) Convert.ToUInt32(propertyValue) : Convert.ToInt32(propertyValue);
+                ? (int) Convert.ToUInt32(value) : Convert.ToInt32(value);
         }
 
         private bool? GetReferencedPropertyValueAsBoolOrNull(object obj, object[] parameters, int index) {
@@ -154,9 +159,9 @@ namespace SF3.NamedValues {
             return value.HasValue ? (value.Value == 0 ? false : true) : (bool?) null;
         }
 
-        private T GetReferencedPropertyValueAsEnumOrNull<T>(object obj, object[] parameters, int index) where T : Enum {
+        private T? GetReferencedPropertyValueAsEnumOrNull<T>(object obj, object[] parameters, int index) where T : struct, Enum {
             var intValue = GetReferencedPropertyValueAsIntOrNull(obj, parameters, index);
-            return (intValue == null) ? (T) (object) null : (T) (object) intValue.Value;
+            return (intValue == null) ? (T?) null : (T) (object) intValue.Value;
         }
 
         public bool CanGetName(object obj, PropertyInfo property, object value, params object[] parameters) {
@@ -164,8 +169,11 @@ namespace SF3.NamedValues {
             if (!_nameGetters.ContainsKey(valueType))
                 return false;
 
-            var valueInt = value.GetType() == typeof(uint) ? (int) Convert.ToUInt32(value) : Convert.ToInt32(value);
-            return _nameGetters[valueType].CanGetName(obj, property, valueInt, parameters);
+            var valueInt = ObjectToIntOrNull(value);
+            if (valueInt == null)
+                return false;
+
+            return _nameGetters[valueType].CanGetName(obj, property, valueInt.Value, parameters);
         }
 
         public bool CanGetInfo(object obj, PropertyInfo property, params object[] parameters) {
@@ -248,12 +256,39 @@ namespace SF3.NamedValues {
         }
 
         private NameAndInfo GetGameFlagValue(object obj, PropertyInfo property, int value, object[] parameters) {
-            var isGameFlagValue = GetReferencedPropertyValueAsBoolOrNull(obj, parameters, 1);
-            return (isGameFlagValue == true) ? _nameGetters[NamedValueType.GameFlag].GetNameAndInfo(obj, property, value, parameters) : null;
+            var isGameFlagValue = GetReferencedPropertyValueAsBoolOrNull(obj, parameters, 1) ?? true;
+            return isGameFlagValue ? _nameGetters[NamedValueType.GameFlag].GetNameAndInfo(obj, property, value, parameters) : null;
         }
 
         private bool CanGetGameFlagValue(object obj, PropertyInfo property, int value, object[] parameters)
-            => GetReferencedPropertyValueAsBoolOrNull(obj, parameters, 1) ?? false;
+            => GetReferencedPropertyValueAsBoolOrNull(obj, parameters, 1) ?? true;
+
+        private (NamedValueType, object[]) GetConditionalTypeAndParameters(object obj, object[] parameters) {
+            var type = GetReferencedPropertyValueAsEnumOrNull<NamedValueType>(obj, parameters, 1);
+            if (type == null || _nameGetters.ContainsKey(type.Value) == false)
+                return (default, null);
+
+            var restParameters = parameters.Skip(2).ToArray();
+            var newParameters = new List<object> { type.Value };
+            newParameters.AddRange(restParameters);
+
+            return (type.Value, newParameters.ToArray());
+        }
+
+        private NameAndInfo GetConditionalNameAndInfo(object obj, PropertyInfo property, int value, object[] parameters) {
+            var args = GetConditionalTypeAndParameters(obj, parameters);
+            return args.Item2 == null ?  null : _nameGetters[args.Item1].GetNameAndInfo(obj, property, value, args.Item2);
+        }
+
+        private bool CanGetConditionalName(object obj, PropertyInfo property, int value, object[] parameters) {
+            var args = GetConditionalTypeAndParameters(obj, parameters);
+            return args.Item2 == null ? false : _nameGetters[args.Item1].CanGetName(obj, property, value, args.Item2);
+        }
+
+        private bool CanGetConditionalInfo(object obj, PropertyInfo property, object[] parameters) {
+            var args = GetConditionalTypeAndParameters(obj, parameters);
+            return args.Item2 == null ? false : _nameGetters[args.Item1].CanGetInfo(obj, property, args.Item2);
+        }
 
         public string Name => Scenario.ToString();
     }
