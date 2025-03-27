@@ -10,8 +10,8 @@ namespace SF3.Models.Structs.X1 {
         private readonly int _triggerAddr;
         private readonly int _triggerFlagsAddr;
         private readonly int _triggerTargetIdAddr;
-        private readonly int _flagUsedAddr;
-        private readonly int _unknown0x06Addr;
+        private readonly int _flagCheckedAddr;
+        private readonly int _padding0x06;
         private readonly int _eventTypeAddr;
         private readonly int _itemIDAddr;
 
@@ -23,8 +23,8 @@ namespace SF3.Models.Structs.X1 {
             _triggerAddr         = Address + 0x00; // 2 bytes
             _triggerFlagsAddr    = Address + 0x02; // 1 byte
             _triggerTargetIdAddr = Address + 0x03; // 1 byte
-            _flagUsedAddr        = Address + 0x04; // 2 bytes
-            _unknown0x06Addr     = Address + 0x06; // 2 bytes
+            _flagCheckedAddr     = Address + 0x04; // 2 bytes
+            _padding0x06         = Address + 0x06; // 2 bytes
             _eventTypeAddr       = Address + 0x08; // 2 bytes
             _itemIDAddr          = Address + 0x0a; // 2 bytes
         }
@@ -304,19 +304,30 @@ namespace SF3.Models.Structs.X1 {
             }
         }
 
-        [TableViewModelColumn(displayOrder: 2, minWidth: 200)]
         [BulkCopy]
+        public int FlagCheckedWthExpectedStatuus {
+            get => Data.GetWord(_flagCheckedAddr);
+            set => Data.SetWord(_flagCheckedAddr, value);
+        }
+
+        [TableViewModelColumn(displayOrder: 2.0f, displayFormat: "X3", minWidth: 200)]
         [NameGetter(NamedValueType.GameFlag)]
-        public int FlagUsed {
-            get => Data.GetWord(_flagUsedAddr);
-            set => Data.SetWord(_flagUsedAddr, value);
+        public int FlagChecked {
+            get => FlagCheckedWthExpectedStatuus & 0x0FFF;
+            set => FlagCheckedWthExpectedStatuus = (FlagCheckedWthExpectedStatuus & ~0xFFF) | (value & 0x0FFF);
+        }
+
+        [TableViewModelColumn(displayOrder: 2.1f)]
+        public bool FlagExpectedStatus {
+            get => (FlagCheckedWthExpectedStatuus & 0x1000) != 0;
+            set => FlagCheckedWthExpectedStatuus = value ? (FlagCheckedWthExpectedStatuus | ~0x1000) : (FlagCheckedWthExpectedStatuus & ~0x1000);
         }
 
         [TableViewModelColumn(displayOrder: 3, displayName: "+0x06", displayFormat: "X2")]
         [BulkCopy]
-        public int Unknown0x06 {
-            get => Data.GetWord(_unknown0x06Addr);
-            set => Data.SetWord(_unknown0x06Addr, value);
+        public int Padding0x06 {
+            get => Data.GetWord(_padding0x06);
+            set => Data.SetWord(_padding0x06, value);
         }
 
         [TableViewModelColumn(displayOrder: 4, displayName: "EventType/Code", displayFormat: "X4")]
