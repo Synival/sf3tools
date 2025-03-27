@@ -25,9 +25,9 @@ namespace SF3.Models.Structs.X1.Town {
             _unknown0x0EAddr = Address + 0x0e; // 2 bytes
         }
 
-        [TableViewModelColumn(displayOrder: 0, displayName: "Scene#", displayFormat: "X2")]
+        [TableViewModelColumn(displayOrder: 0, displayFormat: "X2")]
         [BulkCopy]
-        public int SceneNumber {
+        public int SceneID {
             get => Data.GetWord(_sceneNumberAddr);
             set => Data.SetWord(_sceneNumberAddr, value);
         }
