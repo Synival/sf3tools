@@ -528,12 +528,12 @@
     <item value="0x020D" name="" />
     <item value="0x020E" name="" />
     <item value="0x020F" name="" />
-    <item value="0x0210" name="" />
-    <item value="0x0211" name="" />
-    <item value="0x0212" name="" />
-    <item value="0x0213" name="" />
-    <item value="0x0214" name="" />
-    <item value="0x0215" name="" />
+    <item value="0x0210" name="Anafect docks battle cannon 1" />
+    <item value="0x0211" name="Anafect docks battle cannon 2" />
+    <item value="0x0212" name="Anafect docks battle cannon 3" />
+    <item value="0x0213" name="Anafect docks battle cannon 4" />
+    <item value="0x0214" name="Anafect docks battle cannon 5" />
+    <item value="0x0215" name="Anafect docks Stella enters battle" />
     <item value="0x0216" name="" />
     <item value="0x0217" name="" />
     <item value="0x0218" name="" />
@@ -640,7 +640,7 @@
     <item value="0x027D" name="" />
     <item value="0x027E" name="" />
     <item value="0x027F" name="" />
-    <item value="0x0280" name="Something With Masqurin (Set when Masqurins turn?)" />
+    <item value="0x0280" name="Something With Masqurin (Set when Masqurins turn?) / Medion talked to train conductor in Storich" />
     <item value="0x0281" name="(Set after certain events?)" />
     <item value="0x0282" name="" />
     <item value="0x0283" name="" />
@@ -1024,7 +1024,7 @@
     <item value="0x03FD" name="" />
     <item value="0x03FE" name="" />
     <item value="0x03FF" name="" />
-    <item value="0x0400" name="Basamo start" />
+    <item value="0x0400" name="Balsamo start" />
     <item value="0x0401" name="Head upstairs Balsamo" />
     <item value="0x0402" name="Spoke to priests again Balsamo" />
     <item value="0x0403" name="Spoke with Obright" />
@@ -2074,21 +2074,21 @@
     <item value="0x0817" name="" />
     <item value="0x0818" name="" />
     <item value="0x0819" name="" />
-    <item value="0x081A" name="" />
+    <item value="0x081A" name="Anafect Docks battle started" />
     <item value="0x081B" name="Stella saved" />
     <item value="0x081C" name="" />
-    <item value="0x081D" name="" />
+    <item value="0x081D" name="Robby recruited" />
     <item value="0x081E" name="" />
     <item value="0x081F" name="" />
-    <item value="0x0820" name="" />
+    <item value="0x0820" name="Balsamo well explosion cutscene played" />
     <item value="0x0821" name="" />
     <item value="0x0822" name="" />
     <item value="0x0823" name="" />
-    <item value="0x0824" name="" />
+    <item value="0x0824" name="Medion talked to Duncan" />
     <item value="0x0825" name="" />
     <item value="0x0826" name="" />
     <item value="0x0827" name="" />
-    <item value="0x0828" name="(Set @ start of SC2)" />
+    <item value="0x0828" name="Saraband docks opening cutscene played" />
     <item value="0x0829" name="" />
     <item value="0x082A" name="" />
     <item value="0x082B" name="" />
@@ -2112,13 +2112,13 @@
     <item value="0x083D" name="" />
     <item value="0x083E" name="" />
     <item value="0x083F" name="" />
-    <item value="0x0840" name="" />
+    <item value="0x0840" name="Hazuki cutscene played" />
     <item value="0x0841" name="(Synchronicty point)" />
     <item value="0x0842" name="" />
     <item value="0x0843" name="" />
-    <item value="0x0844" name="" />
-    <item value="0x0845" name="" />
-    <item value="0x0846" name="" />
+    <item value="0x0844" name="Rhineside outside at night cutscene played" />
+    <item value="0x0845" name="Stamp tree battle started" />
+    <item value="0x0846" name="Battle with Hedva started" />
     <item value="0x0847" name="" />
     <item value="0x0848" name="Scn2 Battle 11 Outside Tree Barrel 1" />
     <item value="0x0849" name="Scn2 Battle 11 Outside Tree Barrel 2" />
@@ -2128,11 +2128,11 @@
     <item value="0x084D" name="" />
     <item value="0x084E" name="" />
     <item value="0x084F" name="" />
-    <item value="0x0850" name="" />
-    <item value="0x0851" name="" />
+    <item value="0x0850" name="Rhineside battle started" />
+    <item value="0x0851" name="Rhineside battle ended" />
     <item value="0x0852" name="" />
     <item value="0x0853" name="" />
-    <item value="0x0854" name="" />
+    <item value="0x0854" name="Edmund's army battle started" />
     <item value="0x0855" name="" />
     <item value="0x0856" name="" />
     <item value="0x0857" name="" />
@@ -2187,7 +2187,7 @@
     <item value="0x0888" name="" />
     <item value="0x0889" name="" />
     <item value="0x088A" name="Villager saved?" />
-    <item value="0x088B" name="Theif saved?" />
+    <item value="0x088B" name="Thief saved?" />
     <item value="0x088C" name="Villager saved?" />
     <item value="0x088D" name="Villager saved?" />
     <item value="0x088E" name="Villager saved?" />
@@ -2289,9 +2289,9 @@
     <item value="0x08EE" name="" />
     <item value="0x08EF" name="" />
     <item value="0x08F0" name="" />
-    <item value="0x08F1" name="" />
-    <item value="0x08F2" name="Penko joined?" />
-    <item value="0x08F3" name="" />
+    <item value="0x08F1" name="Gave cut flower to girl in Airo" />
+    <item value="0x08F2" name="Penko's egg found" />
+    <item value="0x08F3" name="Penko recruited" />
     <item value="0x08F4" name="" />
     <item value="0x08F5" name="" />
     <item value="0x08F6" name="" />
