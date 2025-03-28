@@ -1036,8 +1036,8 @@
     <item value="0x0409" name="Outside Saraband speech" />
     <item value="0x040A" name="Entered Balsamo" />
     <item value="0x040B" name="" />
-    <item value="0x040C" name="Dwarfthill Ruin completed" />
-    <item value="0x040D" name="Dwarfhill Ruin started" />
+    <item value="0x040C" name="Dwarf hill Ruin completed" />
+    <item value="0x040D" name="Dwarf hill Ruin started" />
     <item value="0x040E" name="Battle beyond Dwarf hill speech" />
     <item value="0x040F" name="Chapter 1 Ended" />
     <item value="0x0410" name="Path to Dwarf Hill Start" />
@@ -1055,7 +1055,7 @@
     <item value="0x041C" name="Border guard enter station" />
     <item value="0x041D" name="Told Benetram about guard" />
     <item value="0x041E" name="Irene Battle starts" />
-    <item value="0x041F" name="" />
+    <item value="0x041F" name="Hagane found in pillar" />
     <item value="0x0420" name="Said No to Medion" />
     <item value="0x0421" name="Said No to Medion again" />
     <item value="0x0422" name="Medion interaction Railhead" />
@@ -1886,21 +1886,21 @@
     <item value="0x075B" name="Flaggard. well with large mithril" />
     <item value="0x075C" name="Flaggard. chest with large mithril in front of church" />
     <item value="0x075D" name="Flaggard. small mithril in fireplace" />
-    <item value="0x075E" name="" />
-    <item value="0x075F" name="" />
-    <item value="0x0760" name="Flagard (Phoenix Sword)" />
-    <item value="0x0761" name="Flagard (Large Mithril)" />
-    <item value="0x0762" name="Flagard (Potion)" />
-    <item value="0x0763" name="" />
-    <item value="0x0764" name="" />
-    <item value="0x0765" name="" />
-    <item value="0x0766" name="" />
+    <item value="0x075E" name="Flagard inside chest (Potion)" />
+    <item value="0x075F" name="Flagard inside barrel 1 (Small Mithril)" />
+    <item value="0x0760" name="Flagard castle (Phoenix Sword)" />
+    <item value="0x0761" name="Flagard castle (Large Mithril)" />
+    <item value="0x0762" name="Flagard castle (Potion)" />
+    <item value="0x0763" name="Flagard inside box (Large Mithril) " />
+    <item value="0x0764" name="Flagard inside barrel 2 (Nimble Onion)" />
+    <item value="0x0765" name="Flagard inside sink (Potion)" />
+    <item value="0x0766" name="Flagard inside barrel 3 (Small Mithril)" />
     <item value="0x0767" name="Scn1 Battle 21 Chest (Magna Glove)" />
     <item value="0x0768" name="Scn1 Battle 21 Searchable (Small Mithril)" />
-    <item value="0x0769" name="" />
-    <item value="0x076A" name="" />
-    <item value="0x076B" name="" />
-    <item value="0x076C" name="" />
+    <item value="0x0769" name="Lookover stone pillar (Evil Ring)" />
+    <item value="0x076A" name="Lookover well (Potion)" />
+    <item value="0x076B" name="Lookover inside fireplace (Large Mithril)" />
+    <item value="0x076C" name="Lookover inside box (Small Mithril)" />
     <item value="0x076D" name="Battle 122 ruins locked chest with small mithril" />
     <item value="0x076E" name="Battle 122 ruins locked chest with large mithril" />
     <item value="0x076F" name="" />
