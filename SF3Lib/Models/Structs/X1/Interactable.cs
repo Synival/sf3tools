@@ -362,9 +362,15 @@ namespace SF3.Models.Structs.X1 {
 
         public NamedValueType? ActionParam3Type {
             get {
-                switch ((EventActionInspectType) ActionParam1) {
-                    case EventActionInspectType.GetItem:
-                        return NamedValueType.Item;
+                switch ((EventTriggerType) TriggerType) {
+                    case EventTriggerType.Inspect:
+                        switch ((EventActionInspectType) ActionParam1) {
+                            case EventActionInspectType.GetItem:
+                                return NamedValueType.Item;
+                            default:
+                                return null;
+                        }
+
                     default:
                         return null;
                 }
@@ -488,6 +494,22 @@ namespace SF3.Models.Structs.X1 {
                                 break;
                         }
                         break;
+                }
+            }
+        }
+
+        [TableViewModelColumn(displayOrder: 5, minWidth: 350)]
+        public string ActionDescription {
+            get {
+                // TODO: way better!!
+                switch (ActionParam3Type) {
+                    case NamedValueType.Item: {
+                        var item = ActionParam3;
+                        return "Get " + NameGetterContext.GetName(null, null, item, new object[] { NamedValueType.Item }) + $" (0x{item})";
+                    }
+
+                    default:
+                        return Action.ToString("X8");
                 }
             }
         }
