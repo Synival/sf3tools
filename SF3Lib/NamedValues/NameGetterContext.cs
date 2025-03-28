@@ -48,15 +48,9 @@ namespace SF3.NamedValues {
                 { NamedValueType.Droprate,            new SubMethods((o, p, v, a) => new NameAndInfo(v, ValueNames.DroprateInfo)) },
                 { NamedValueType.EffectiveType,       new SubMethods((o, p, v, a) => new NameAndInfo(v, ValueNames.EffectiveTypeInfo)) },
                 { NamedValueType.Element,             new SubMethods((o, p, v, a) => new NameAndInfo(v, ValueNames.ElementInfo)) },
-
-                { NamedValueType.EventParameter,
-                    new SubMethods(
-                        (o, p, v, a) => GetEventParameterValue(o, p, v, a),
-                        (o, p, v, a) => CanGetEventParameterValue(o, p, v, a),
-                        (o, p, a)    => CanGetEventParameterValue(o, p, 0, a)
-                    ) },
-
-
+                { NamedValueType.EventActionInspect,  new SubMethods((o, p, v, a) => new NameAndInfo(v, ValueNames.EventActionInspectInfo)) },
+                { NamedValueType.EventActionInspectFlags, new SubMethods((o, p, v, a) => new NameAndInfo(v, ValueNames.EventActionInspectFlagsInfo)) },
+                { NamedValueType.EventActionNpcTalk,  new SubMethods((o, p, v, a) => new NameAndInfo(v, ValueNames.EventActionNpcTalkInfo)) },
                 { NamedValueType.EventTriggerDirection, new SubMethods((o, p, v, a) => new NameAndInfo(v, ValueNames.EventTriggerDirectionInfo)) },
                 { NamedValueType.EventTriggerInspectType, new SubMethods((o, p, v, a) => new NameAndInfo(v, ValueNames.EventTriggerInspectTypeInfo)) },
                 { NamedValueType.EventTriggerMoveOnTileType, new SubMethods((o, p, v, a) => new NameAndInfo(v, ValueNames.EventTriggerMoveOnTileInfo)) },
@@ -218,28 +212,6 @@ namespace SF3.NamedValues {
         private bool CanGetCharacterPlusValue(object obj, PropertyInfo property, int value, object[] parameters) {
             var enemyID = GetReferencedPropertyValueAsIntOrNull(obj, parameters, 1);
             return enemyID == 0x5B; // magic number indicated "Character Placeholder"
-        }
-
-        private NameAndInfo GetEventParameterValue(object obj, PropertyInfo property, int value, object[] parameters) {
-            var inspectActionType = GetReferencedPropertyValueAsIntOrNull(obj, parameters, 1);
-            switch (inspectActionType) {
-                case 0x100:
-                case 0x101:
-                    return _nameGetters[NamedValueType.Item].GetNameAndInfo(obj, property, value, parameters);
-                default:
-                    return null;
-            }
-        }
-
-        private bool CanGetEventParameterValue(object obj, PropertyInfo property, int value, object[] parameters) {
-            var inspectActionType = GetReferencedPropertyValueAsIntOrNull(obj, parameters, 1);
-            switch (inspectActionType) {
-                case 0x100:
-                case 0x101:
-                    return true;
-                default:
-                    return false;
-            }
         }
 
         private NameAndInfo GetSpecialElementValue(object obj, PropertyInfo property, int value, object[] parameters) {

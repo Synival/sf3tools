@@ -12,8 +12,7 @@ namespace SF3.Models.Structs.X1 {
         private readonly int _triggerTargetIdAddr;
         private readonly int _flagCheckedAddr;
         private readonly int _padding0x06;
-        private readonly int _eventTypeAddr;
-        private readonly int _itemIDAddr;
+        private readonly int _actionAddr;
 
         public Interactable(IByteData data, int id, string name, int address, INameGetterContext nameGetterContext, NpcTable npcTable)
         : base(data, id, name, address, 0x0C) {
@@ -25,8 +24,7 @@ namespace SF3.Models.Structs.X1 {
             _triggerTargetIdAddr = Address + 0x03; // 1 byte
             _flagCheckedAddr     = Address + 0x04; // 2 bytes
             _padding0x06         = Address + 0x06; // 2 bytes
-            _eventTypeAddr       = Address + 0x08; // 2 bytes
-            _itemIDAddr          = Address + 0x0a; // 2 bytes
+            _actionAddr          = Address + 0x08; // 4 bytes
         }
 
         public INameGetterContext NameGetterContext { get; }
@@ -269,12 +267,14 @@ namespace SF3.Models.Structs.X1 {
                     }
 
                     case EventTriggerType.Inspect: {
-                        var actionType = EventType;
+                        var actionType = (EventActionInspectType) ActionParam1;
                         var inspectType = (EventTriggerInspectType) TriggerParam1;
+                        var inspectFlags = (ActionParam2Type == NamedValueType.EventActionInspectFlags) ? (EventActionInspectFlags) ActionParam2 : 0;
+
                         var inspectTypeMessage =
                             (inspectType == EventTriggerInspectType.Nothing)
                             ? ""
-                            : (((inspectType == EventTriggerInspectType.TreasureChest && actionType == 0x0101) ? "a locked " : "a ") + inspectType.ToString());
+                            : (((inspectType == EventTriggerInspectType.TreasureChest && inspectFlags.HasFlag(EventActionInspectFlags.Locked)) ? "a locked " : "a ") + inspectType.ToString());
                         var facingMessage = (TriggerParam2Type == NamedValueType.EventTriggerDirection) ? " facing " + ((EventTriggerDirectionType) TriggerParam2).ToString() : "";
                         var tileMessage = ((inspectTypeMessage == "") ? "tile" : " at tile");
 
@@ -329,19 +329,167 @@ namespace SF3.Models.Structs.X1 {
             set => Data.SetWord(_padding0x06, value);
         }
 
-        [TableViewModelColumn(displayOrder: 4, displayName: "EventType/Code", displayFormat: "X4")]
+        [TableViewModelColumn(displayOrder: 4, displayFormat: "X8")]
         [BulkCopy]
-        public int EventType {
-            get => Data.GetWord(_eventTypeAddr);
-            set => Data.SetWord(_eventTypeAddr, value);
+        public uint Action {
+            get => (uint) Data.GetDouble(_actionAddr);
+            set => Data.SetDouble(_actionAddr, (int) value);
         }
 
-        [TableViewModelColumn(displayOrder: 5, displayName: "Item/Text/Code", displayFormat: "X4")]
+        public NamedValueType? ActionParam1Type {
+            get {
+                switch ((EventTriggerType) TriggerType) {
+                    case EventTriggerType.TalkToNPC:
+                        return NamedValueType.EventActionNpcTalk;
+                    case EventTriggerType.Inspect:
+                        return NamedValueType.EventActionInspect;
+                    default:
+                        return null;
+                }
+            }
+        }
+
+        public NamedValueType? ActionParam2Type {
+            get {
+                switch ((EventTriggerType) TriggerType) {
+                    case EventTriggerType.Inspect:
+                        return (EventActionInspectType) ActionParam1 != EventActionInspectType.RunFunction ? NamedValueType.EventActionInspectFlags : (NamedValueType?) null;
+                    default:
+                        return null;
+                }
+            }
+        }
+
+        public NamedValueType? ActionParam3Type {
+            get {
+                switch ((EventActionInspectType) ActionParam1) {
+                    case EventActionInspectType.GetItem:
+                        return NamedValueType.Item;
+                    default:
+                        return null;
+                }
+            }
+        }
+
+        [TableViewModelColumn(displayOrder: 4.4f, displayFormat: "X2", minWidth: 150)]
         [BulkCopy]
-        [NameGetter(NamedValueType.EventParameter, nameof(EventType))]
-        public int EventParameter {
-            get => Data.GetWord(_itemIDAddr);
-            set => Data.SetWord(_itemIDAddr, value);
+        [NameGetter(NamedValueType.ConditionalType, nameof(ActionParam1Type))]
+        public int? ActionParam1 {
+            get {
+                switch (ActionParam1Type) {
+                    case NamedValueType.EventActionNpcTalk:
+                    case NamedValueType.EventActionInspect:
+                        return (int) ((Action & 0xFF00_0000u) >> 24);
+                    default:
+                        return (int) Action;
+                }
+            }
+            set {
+                switch (ActionParam1Type) {
+                    case NamedValueType.EventActionNpcTalk:
+                    case NamedValueType.EventActionInspect:
+                        Action = (uint) ((Action & ~0xFF00_0000u) | ((value << 24) & 0xFF00_0000u));
+                        break;
+                    default:
+                        Action = (uint) value;
+                        break;
+                }
+            }
+        }
+
+        [TableViewModelColumn(displayOrder: 4.5f, displayFormat: "X2", minWidth: 150)]
+        [BulkCopy]
+        [NameGetter(NamedValueType.ConditionalType, nameof(ActionParam2Type))]
+        public int? ActionParam2 {
+            get {
+                switch (ActionParam1Type) {
+                    case NamedValueType.EventActionNpcTalk:
+                        switch ((EventActionNpcTalkType) ActionParam1) {
+                            case EventActionNpcTalkType.RunFunction:
+                                return (int) Action;
+                            default:
+                                return (int) Action & 0x00FF_FFFF;
+                        }
+
+                    case NamedValueType.EventActionInspect:
+                        switch (ActionParam2Type) {
+                            case NamedValueType.EventActionInspectFlags:
+                                return (int) ((Action & 0x00FF_0000) >> 16);
+                            default:
+                                switch ((EventActionInspectType) ActionParam1) {
+                                    case EventActionInspectType.RunFunction:
+                                        return (int) Action;
+                                    default:
+                                        return (int) Action & 0x00FF_FFFF;
+                                }
+                        }
+
+                    default:
+                        return null;
+                }
+            }
+            set {
+                switch (ActionParam1Type) {
+                    case NamedValueType.EventActionNpcTalk:
+                        switch ((EventActionNpcTalkType) ActionParam1) {
+                            case EventActionNpcTalkType.RunFunction:
+                                Action = (uint) value;
+                                break;
+                            default:
+                                Action = (uint) ((Action & ~0x00FF_FFFFu) | (value & 0x00FF_FFFF));
+                                break;
+                        }
+                        break;
+
+                    case NamedValueType.EventActionInspect:
+                        switch (ActionParam2Type) {
+                            case NamedValueType.EventActionInspectFlags:
+                                Action = (uint) ((Action & ~0x00FF_0000u) | ((value << 16) & 0x00FF_0000u));
+                                break;
+                            default:
+                                switch ((EventActionInspectType) ActionParam1) {
+                                    case EventActionInspectType.RunFunction:
+                                        Action = (uint) value;
+                                        break;
+                                    default:
+                                        Action = (uint) ((Action & ~0x00FF_FFFFu) | (value & 0x00FF_FFFF));
+                                        break;
+                                }
+                                break;
+                        }
+                        break;
+                }
+            }
+        }
+
+        [TableViewModelColumn(displayOrder: 4.6f, displayFormat: "X2", minWidth: 150)]
+        [BulkCopy]
+        [NameGetter(NamedValueType.ConditionalType, nameof(ActionParam3Type))]
+        public int? ActionParam3 {
+            get {
+                switch (ActionParam1Type) {
+                    case NamedValueType.EventActionInspect:
+                        switch (ActionParam2Type) {
+                            case NamedValueType.EventActionInspectFlags:
+                                return (int) (Action & 0x0000_FFFF);
+                            default:
+                                return null;
+                        }
+                    default:
+                        return null;
+                }
+            }
+            set {
+                switch (ActionParam1Type) {
+                    case NamedValueType.EventActionInspect:
+                        switch (ActionParam2Type) {
+                            case NamedValueType.EventActionInspectFlags:
+                                Action = (uint) ((Action & ~0xFFFF) | (value & 0xFFFF));
+                                break;
+                        }
+                        break;
+                }
+            }
         }
     }
 }

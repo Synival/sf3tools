@@ -13,6 +13,12 @@ namespace SF3.NamedValues {
             = new NamedValueFromResourceInfo("EffectiveTypes.xml");
         public static readonly NamedValueFromResourceInfo ElementInfo
             = new NamedValueFromResourceInfo("Elements.xml");
+        public static readonly NamedValueFromEnum<EventActionInspectType> EventActionInspectInfo
+            = new NamedValueFromEnum<EventActionInspectType>();
+        public static readonly NamedValueFromEnum<EventActionInspectFlags> EventActionInspectFlagsInfo
+            = new NamedValueFromEnum<EventActionInspectFlags>();
+        public static readonly NamedValueFromEnum<EventActionNpcTalkType> EventActionNpcTalkInfo
+            = new NamedValueFromEnum<EventActionNpcTalkType>();
         public static readonly NamedValueFromEnum<EventTriggerDirectionType> EventTriggerDirectionInfo
             = new NamedValueFromEnum<EventTriggerDirectionType>(maxValue: 0x0F);
         public static readonly NamedValueFromEnum<EventTriggerInspectType> EventTriggerInspectTypeInfo
