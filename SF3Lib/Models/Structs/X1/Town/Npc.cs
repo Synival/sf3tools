@@ -40,7 +40,7 @@ namespace SF3.Models.Structs.X1.Town {
         }
 
         [BulkCopy]
-        public int FlagCheckedWithStatus {
+        public int FlagCheckedWithValue {
             get => Data.GetWord(_flagAddr);
             set => Data.SetWord(_flagAddr, value);
         }
@@ -48,14 +48,14 @@ namespace SF3.Models.Structs.X1.Town {
         [TableViewModelColumn(displayOrder: 1.0f, displayFormat: "X3", minWidth: 200)]
         [NameGetter(NamedValueType.GameFlag)]
         public int FlagChecked {
-            get => FlagCheckedWithStatus & 0x0FFF;
-            set => FlagCheckedWithStatus = (FlagCheckedWithStatus & ~0xFFF) | (value & 0x0FFF);
+            get => FlagCheckedWithValue & 0x0FFF;
+            set => FlagCheckedWithValue = (FlagCheckedWithValue & ~0xFFF) | (value & 0x0FFF);
         }
 
         [TableViewModelColumn(displayOrder: 1.1f)]
-        public bool FlagStatus {
-            get => (FlagCheckedWithStatus & 0x1000) != 0;
-            set => FlagCheckedWithStatus = value ? (FlagCheckedWithStatus | ~0x1000) : (FlagCheckedWithStatus & ~0x1000);
+        public bool FlagExpectedValue {
+            get => (FlagCheckedWithValue & 0x1000) != 0;
+            set => FlagCheckedWithValue = value ? (FlagCheckedWithValue | ~0x1000) : (FlagCheckedWithValue & ~0x1000);
         }
 
         [TableViewModelColumn(displayOrder: 2, displayName: "MovementTable?", isPointer: true)]
