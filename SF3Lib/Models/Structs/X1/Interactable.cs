@@ -78,7 +78,7 @@ namespace SF3.Models.Structs.X1 {
             }
         }
 
-        [TableViewModelColumn(displayOrder: 0.3f, minWidth: 150)]
+        [TableViewModelColumn(displayOrder: 0.3f, displayFormat: "X2", minWidth: 150)]
         [NameGetter(NamedValueType.ConditionalType, nameof(TriggerParam1Type))]
         public int? TriggerParam1 {
             get {
@@ -135,7 +135,7 @@ namespace SF3.Models.Structs.X1 {
             }
         }
 
-        [TableViewModelColumn(displayOrder: 0.31f, minWidth: 150)]
+        [TableViewModelColumn(displayOrder: 0.31f, displayFormat: "X2", minWidth: 150)]
         [NameGetter(NamedValueType.ConditionalType, nameof(TriggerParam2Type))]
         public int? TriggerParam2 {
             get {
@@ -305,7 +305,7 @@ namespace SF3.Models.Structs.X1 {
         }
 
         [BulkCopy]
-        public int FlagCheckedWthExpectedStatuus {
+        public int FlagCheckedWthExpectedValue {
             get => Data.GetWord(_flagCheckedAddr);
             set => Data.SetWord(_flagCheckedAddr, value);
         }
@@ -313,17 +313,16 @@ namespace SF3.Models.Structs.X1 {
         [TableViewModelColumn(displayOrder: 2.0f, displayFormat: "X3", minWidth: 200)]
         [NameGetter(NamedValueType.GameFlag)]
         public int FlagChecked {
-            get => FlagCheckedWthExpectedStatuus & 0x0FFF;
-            set => FlagCheckedWthExpectedStatuus = (FlagCheckedWthExpectedStatuus & ~0xFFF) | (value & 0x0FFF);
+            get => FlagCheckedWthExpectedValue & 0x0FFF;
+            set => FlagCheckedWthExpectedValue = (FlagCheckedWthExpectedValue & ~0xFFF) | (value & 0x0FFF);
         }
 
         [TableViewModelColumn(displayOrder: 2.1f)]
-        public bool FlagExpectedStatus {
-            get => (FlagCheckedWthExpectedStatuus & 0x1000) != 0;
-            set => FlagCheckedWthExpectedStatuus = value ? (FlagCheckedWthExpectedStatuus | ~0x1000) : (FlagCheckedWthExpectedStatuus & ~0x1000);
+        public bool FlagExpectedValue {
+            get => (FlagCheckedWthExpectedValue & 0x1000) != 0;
+            set => FlagCheckedWthExpectedValue = value ? (FlagCheckedWthExpectedValue | ~0x1000) : (FlagCheckedWthExpectedValue & ~0x1000);
         }
 
-        [TableViewModelColumn(displayOrder: 3, displayName: "+0x06", displayFormat: "X2")]
         [BulkCopy]
         public int Padding0x06 {
             get => Data.GetWord(_padding0x06);
