@@ -98,7 +98,7 @@ namespace SF3.Win.OpenGL.MPD_File {
                     // Highlight special line segments magenta/orange.
                     var color = new Vector3(
                         absSin * 0.25f + 0.75f,
-                        (line.Unknown2 == 0) ? 0.75f : 0.25f,
+                        (!line.IfFlagOff.HasValue) ? 0.75f : 0.25f,
                         absCos * 0.25f + 0.75f
                     );
                     var colors = new Vector3[] {

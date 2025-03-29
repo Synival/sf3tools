@@ -1,20 +1,21 @@
 ﻿using CommonLib.Attributes;
 using SF3.ByteData;
+using SF3.Types;
 
 namespace SF3.Models.Structs.MPD.Model {
     public class CollisionLine : Struct {
         private readonly int _point1Addr;
         private readonly int _point2Addr;
         private readonly int _angleAddr;
-        private readonly int _unknown1Addr;
-        private readonly int _unknown2Addr;
+        private readonly int _unknown0x06Addr;
+        private readonly int _ifFlag2XXOffAddr;
 
         public CollisionLine(IByteData data, int id, string name, int address) : base(data, id, name, address, 0x08) {
             _point1Addr   = Address + 0x00; // 2 bytes
             _point2Addr   = Address + 0x02; // 2 bytes
             _angleAddr    = Address + 0x04; // 2 bytes
-            _unknown1Addr = Address + 0x06; // 1 byte
-            _unknown2Addr = Address + 0x07; // 1 byte
+            _unknown0x06Addr = Address + 0x06; // 1 byte
+            _ifFlag2XXOffAddr = Address + 0x07; // 1 byte
         }
 
         [BulkCopy]
@@ -39,17 +40,27 @@ namespace SF3.Models.Structs.MPD.Model {
         }
 
         [BulkCopy]
-        [TableViewModelColumn(displayOrder: 3, displayFormat: "X2")]
-        public byte Unknown1 {
-            get => (byte) Data.GetByte(_unknown1Addr);
-            set => Data.SetByte(_unknown1Addr, value);
+        [TableViewModelColumn(displayOrder: 3, displayName: "+0x06 (Order?)", displayFormat: "X2")]
+        public byte Unknown0x06 {
+            get => (byte) Data.GetByte(_unknown0x06Addr);
+            set => Data.SetByte(_unknown0x06Addr, value);
         }
 
         [BulkCopy]
         [TableViewModelColumn(displayOrder: 4, displayFormat: "X2")]
-        public byte Unknown2 {
-            get => (byte) Data.GetByte(_unknown2Addr);
-            set => Data.SetByte(_unknown2Addr, value);
+        public byte IfFlagIn2XXOff {
+            get => (byte) Data.GetByte(_ifFlag2XXOffAddr);
+            set => Data.SetByte(_ifFlag2XXOffAddr, value);
+        }
+
+        [BulkCopy]
+        [TableViewModelColumn(displayOrder: 4.1f, displayFormat: "X3")]
+        [NameGetter(NamedValueType.GameFlag)]
+        public int? IfFlagOff {
+            get {
+                var flag200 = IfFlagIn2XXOff;
+                return (flag200 == 0) ? (int?) null : flag200 + 0x200;
+            }
         }
     }
 }
