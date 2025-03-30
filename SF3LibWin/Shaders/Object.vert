@@ -47,7 +47,12 @@ void main() {
         // - the color referenced used intentionally overflows, wrapping once
         // - a wider range of colors is used when the light is directly overhead
         // - the color used changes more rapidly the less direct the light is due to the exponent
-        (normalLightDot < 0) ? -1 : (1.333 * normalLightDot + 0.667 * pow(normalLightDot, 12) - 1) * 0.96875;
+        (normalLightDot < 0) ? -1 :
+            (-1
+                + 1.250f * normalLightDot +
+                + 0.375f * pow(normalLightDot, 4)
+                + 0.375f * pow(normalLightDot, 32)
+            ) * 0.96875;
 
     lighting = (smoothLighting ? lighting : floor(lighting * 32.00f) / 32.0f) + 0.015625;
 
