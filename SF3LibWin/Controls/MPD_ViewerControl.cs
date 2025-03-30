@@ -109,12 +109,14 @@ namespace SF3.Win.Controls {
         }
 
         private void tsbRecalculateLightmapOriginalMath_Click(object sender, EventArgs e) {
-            MPD_File?.SurfaceModel?.UpdateVertexNormals(MPD_File.Surface?.HeightmapRowTable, POLYGON_NormalCalculationMethod.TopRightTriangle);
+            var halfHeight = AppState.RetrieveAppState().UseVanillaHalfHeightForSurfaceNormalCalculations;
+            MPD_File?.SurfaceModel?.UpdateVertexNormals(MPD_File.Surface?.HeightmapRowTable, POLYGON_NormalCalculationMethod.TopRightTriangle, halfHeight);
             UpdateModels();
         }
 
         private void tsbUpdateLightmapUpdatedMath_Click(object sender, EventArgs e) {
-            MPD_File?.SurfaceModel?.UpdateVertexNormals(MPD_File.Surface?.HeightmapRowTable, POLYGON_NormalCalculationMethod.WeightedVerticalTriangles);
+            var halfHeight = AppState.RetrieveAppState().UseVanillaHalfHeightForSurfaceNormalCalculations;
+            MPD_File?.SurfaceModel?.UpdateVertexNormals(MPD_File.Surface?.HeightmapRowTable, POLYGON_NormalCalculationMethod.WeightedVerticalTriangles, halfHeight);
             UpdateModels();
         }
 

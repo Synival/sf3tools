@@ -31,9 +31,10 @@ namespace SF3.Models.Tables.MPD.Surface {
         /// <param name="tileY">Y coordinate of the tile.</param>
         /// <param name="corner">Corner of the tile whose vertex normal should be calculated.</param>
         /// <param name="calculationMethod">The calculations used for determining the normal for each part of the heightmap.</param>
+        /// <param name="halfHeight">When on (default, SF3 behavior), quad heights are halved for the purpose of normal calculations.</param>
         /// <returns>A freshly-calculated normal for the vertex requested.</returns>
-        public VECTOR CalculateVertexNormal(int tileX, int tileY, CornerType corner, POLYGON_NormalCalculationMethod calculationMethod)
-            => CalculateVertexNormal(TileToVertexX(tileX, corner), TileToVertexY(tileY, corner), calculationMethod);
+        public VECTOR CalculateVertexNormal(int tileX, int tileY, CornerType corner, POLYGON_NormalCalculationMethod calculationMethod, bool halfHeight = true)
+            => CalculateVertexNormal(TileToVertexX(tileX, corner), TileToVertexY(tileY, corner), calculationMethod, halfHeight);
 
         /// <summary>
         /// Calculates the vertex normal for a specific vertex of a tile.
@@ -41,20 +42,23 @@ namespace SF3.Models.Tables.MPD.Surface {
         /// <param name="vertexX">X coordinate of the vertex.</param>
         /// <param name="vertexY">Y coordinate of the vertex.</param>
         /// <param name="calculationMethod">The calculations used for determining the normal for each part of the heightmap.</param>
+        /// <param name="halfHeight">When on (default, SF3 behavior), quad heights are halved for the purpose of normal calculations.</param>
         /// <returns>A freshly-calculated normal for the vertex requested.</returns>
-        public VECTOR CalculateVertexNormal(int vertexX, int vertexY, POLYGON_NormalCalculationMethod calculationMethod) {
+        public VECTOR CalculateVertexNormal(int vertexX, int vertexY, POLYGON_NormalCalculationMethod calculationMethod, bool halfHeight = true) {
             // Determine the normals of the 4 quads surrounding the vertex.
             var sumNormals = new List<VECTOR>();
+
+            // SF3 intentionally cuts quad height by half when calculating surface vertex normals.
+            var quadHeightPercent = halfHeight ? 0.5f : 1.0f;
 
             void TryAddQuadNormal(int vx, int vy) {
                 if (vx >= 0 && vy >= 0 && vx <= 63 && vy <= 63) {
                     var heights = Rows[vy].GetQuadHeights(vx);
-                    // SF3 intentionally cuts quad height by half when calculating surface vertex normals.
                     var quad = new POLYGON(new VECTOR[] {
-                        new VECTOR(Corner1X, heights[0] / 2, Corner1Z),
-                        new VECTOR(Corner2X, heights[1] / 2, Corner2Z),
-                        new VECTOR(Corner3X, heights[2] / 2, Corner3Z),
-                        new VECTOR(Corner4X, heights[3] / 2, Corner4Z)
+                        new VECTOR(Corner1X, heights[0] * quadHeightPercent, Corner1Z),
+                        new VECTOR(Corner2X, heights[1] * quadHeightPercent, Corner2Z),
+                        new VECTOR(Corner3X, heights[2] * quadHeightPercent, Corner3Z),
+                        new VECTOR(Corner4X, heights[3] * quadHeightPercent, Corner4Z)
                     });
                     sumNormals.Add(quad.GetNormal(calculationMethod));
                 }

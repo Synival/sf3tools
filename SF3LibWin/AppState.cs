@@ -119,5 +119,7 @@ namespace SF3.Win {
         }
         private bool _useDropdownsForNamedValues = true;
         public event EventHandler UseDropdownsForNamedValuesChanged;
+
+        public bool UseVanillaHalfHeightForSurfaceNormalCalculations { get; set; } = true;
     }
 }

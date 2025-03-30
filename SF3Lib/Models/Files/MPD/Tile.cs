@@ -29,11 +29,16 @@ namespace SF3.Models.Files.MPD {
             }
         }
 
-        public void UpdateNormals() {
+        /// <summary>
+        /// Updates all normals for the tile, also correcting neighboring tiles.
+        /// </summary>
+        /// <param name="halfHeight">When on (default, SF3 behavior), quad heights are halved for the purpose of normal calculations.</param>
+        public void UpdateNormals(bool halfHeight = true) {
             MPD_File.SurfaceModel?.UpdateVertexNormals(
                 X, Y,
                 MPD_File.Surface.HeightmapRowTable,
-                POLYGON_NormalCalculationMethod.MostExtremeVerticalTriangle
+                POLYGON_NormalCalculationMethod.MostExtremeVerticalTriangle,
+                halfHeight
             );
 
             for (var y = -1; y <= 1; y++)

@@ -239,7 +239,7 @@ namespace SF3.Win.Controls {
             }
         }
 
-        private void UpdateNormalsForCorner(CornerType corner) {
+        private void UpdateNormalsForCorner(CornerType corner, bool halfHeight = true) {
             var surfaceModel = _tile.MPD_File.SurfaceModel;
             if (surfaceModel == null)
                 return;
@@ -253,7 +253,7 @@ namespace SF3.Win.Controls {
                     var vx = x + vxCenter;
                     var vy = y + vyCenter;
                     if (vx >= 0 && vy >= 0 && vx < 65 && vy < 65)
-                        surfaceModel.UpdateVertexNormal(vx, vy, _tile.MPD_File.Surface.HeightmapRowTable, POLYGON_NormalCalculationMethod.WeightedVerticalTriangles);
+                        surfaceModel.UpdateVertexNormal(vx, vy, _tile.MPD_File.Surface.HeightmapRowTable, POLYGON_NormalCalculationMethod.WeightedVerticalTriangles, halfHeight);
                 }
             }
 
@@ -370,10 +370,12 @@ namespace SF3.Win.Controls {
                     _tile.SetModelVertexHeightmap(corner, value);
                     CopyHeightToNonFlatTiles(corner);
 
+                    var halfHeight = AppState.RetrieveAppState().UseVanillaHalfHeightForSurfaceNormalCalculations;
+
                     // Technically we *could* recalculate normals because the normals of neighboring flat tiles are also included
                     // in the calculations, but the normals of flat tiles are constant, so neighboring tiles' normals never change
                     // when a flat tile moves up or down.
-                    UpdateNormalsForCorner(corner);
+                    UpdateNormalsForCorner(corner, halfHeight);
                 }
             }
         }
@@ -386,6 +388,8 @@ namespace SF3.Win.Controls {
         }
 
         private void FlattenTile() {
+            var halfHeight = AppState.RetrieveAppState().UseVanillaHalfHeightForSurfaceNormalCalculations;
+
             using (IncrementNonUserInputGuard()) {
                 var corners = (CornerType[]) Enum.GetValues(typeof(CornerType));
                 var height = _tile.MoveHeight;
@@ -394,11 +398,13 @@ namespace SF3.Win.Controls {
                     nud.Value.Value = (decimal) height;
                 }
                 foreach (var corner in corners)
-                    UpdateNormalsForCorner(corner);
+                    UpdateNormalsForCorner(corner, halfHeight);
             }
         }
 
         private void UnflattenTile() {
+            var halfHeight = AppState.RetrieveAppState().UseVanillaHalfHeightForSurfaceNormalCalculations;
+
             using (IncrementNonUserInputGuard()) {
                 var corners = (CornerType[]) Enum.GetValues(typeof(CornerType));
                 foreach (var nud in _nudMoveHeightmaps) {
@@ -408,7 +414,7 @@ namespace SF3.Win.Controls {
                     CopyHeightToNonFlatTiles(nud.Key);
                 }
                 foreach (var corner in corners)
-                    UpdateNormalsForCorner(corner);
+                    UpdateNormalsForCorner(corner, halfHeight);
             }
         }
 
