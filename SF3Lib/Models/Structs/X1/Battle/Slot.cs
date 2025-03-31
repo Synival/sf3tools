@@ -488,8 +488,14 @@ namespace SF3.Models.Structs.X1.Battle {
             set => EnemyFlags = (ushort) (value ? (EnemyFlags | 0x0002) : (EnemyFlags & ~0x0002));
         }
 
+        [TableViewModelColumn(displayOrder: 45.12f, displayGroup: "Page4")]
+        public bool DontMoveIfFlagOff {
+            get => (EnemyFlags & 0x0008) != 0;
+            set => EnemyFlags = (ushort) (value ? (EnemyFlags | 0x0008) : (EnemyFlags & ~0x0008));
+        }
+
         [TableViewModelColumn(displayOrder: 45.15f, displayGroup: "Page4")]
-        public bool UnknownAITargettingAdustment {
+        public bool PrioritizeTargetSpecified {
             get => (EnemyFlags & 0x0010) != 0;
             set => EnemyFlags = (ushort) (value ? (EnemyFlags | 0x0010) : (EnemyFlags & ~0x0010));
         }
@@ -504,6 +510,12 @@ namespace SF3.Models.Structs.X1.Battle {
         public bool DontGetMoreAggroWhenHurt {
             get => (EnemyFlags & 0x0080) != 0;
             set => EnemyFlags = (ushort) (value ? (EnemyFlags | 0x0080) : (EnemyFlags & ~0x0080));
+        }
+
+        [TableViewModelColumn(displayOrder: 45.4f, displayGroup: "Page4")]
+        public bool CreepTowardsMoveTarget {
+            get => (EnemyFlags & 0x4000) != 0;
+            set => EnemyFlags = (ushort) (value ? (EnemyFlags | 0x4000) : (EnemyFlags & ~0x4000));
         }
 
         public bool IsBarrel => EnemyID == 0x5F;
