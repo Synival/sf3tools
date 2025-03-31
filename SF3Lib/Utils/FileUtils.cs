@@ -125,8 +125,13 @@ namespace SF3.Utils {
         /// Attempts to guess the scenario of the file based on the filename's full path.
         /// </summary>
         /// <param name="filename">The name of a SF3 file with its full path.</param>
+        /// <param name="fileType">The type of file, if available. Some files, like MPD files, are detectable.</param>
         /// <returns>A scenario if it could be determined. Otherwise 'null'.</returns>
-        public static ScenarioType? DetermineScenario(string filename) {
+        public static ScenarioType? DetermineScenario(string filename, SF3FileType? fileType = null) {
+            // MPD's are automatically detected; default to Scenario 1.
+            if (fileType == SF3FileType.MPD)
+                return ScenarioType.Scenario1;
+
             if (filename == null)
                 throw new ArgumentNullException(nameof(filename));
 

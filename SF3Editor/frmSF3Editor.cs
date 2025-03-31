@@ -101,17 +101,17 @@ namespace SF3Editor {
                 .GroupBy(x => x.Index)
                 .ToDictionary(x => x.Key, x => x.Select(y => y.Value).ToArray());
 
-            // If we don't know the scenario, we can't load it.
-            var scenario = OpenScenario ?? DetermineScenario(openfile.FileName);
-            if (!scenario.HasValue) {
-                ErrorMessage("Can't determine scenario for '" + openfile.FileName + "'.");
-                return null;
-            }
-
             // If we don't know the file type, we can't load it.
             var fileType = DetermineFileType(openfile.FileName, filters[openfile.FilterIndex - 1][1]);
             if (!fileType.HasValue) {
                 ErrorMessage("Can't determine file type for '" + openfile.FileName + "'.");
+                return null;
+            }
+
+            // If we don't know the scenario, we can't load it.
+            var scenario = OpenScenario ?? DetermineScenario(openfile.FileName, fileType);
+            if (!scenario.HasValue) {
+                ErrorMessage("Can't determine scenario for '" + openfile.FileName + "'.");
                 return null;
             }
 
