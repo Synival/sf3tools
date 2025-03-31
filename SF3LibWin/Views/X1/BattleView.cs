@@ -14,10 +14,11 @@ namespace SF3.Win.Views.X1 {
             if (Model.BattleHeader != null)
                 CreateChild(new DataModelView("Header", Model.BattleHeader, ngc));
             if (Model.SlotTable != null) {
-                CreateChild(new TableView("Slots 1", Model.SlotTable, ngc, displayGroups: ["Metadata", "Page1"]));
-                CreateChild(new TableView("Slots 2", Model.SlotTable, ngc, displayGroups: ["Metadata", "Page2"]));
-                CreateChild(new TableView("Slots 3", Model.SlotTable, ngc, displayGroups: ["Metadata", "Page3"]));
-                CreateChild(new TableView("Slots 4", Model.SlotTable, ngc, displayGroups: ["Metadata", "Page4"]));
+                CreateChild(new TableView("Slots 1",     Model.SlotTable, ngc, displayGroups: ["Metadata", "Page1"]));
+                CreateChild(new TableView("Slots 2",     Model.SlotTable, ngc, displayGroups: ["Metadata", "Page2"]));
+                CreateChild(new TableView("Slots 3 (Conditions)", Model.SlotTable, ngc, displayGroups: ["Metadata", "Page3"]));
+                CreateChild(new TableView("Slots 4 (AI)",    Model.SlotTable, ngc, displayGroups: ["Metadata", "Page4"]));
+                CreateChild(new TableView("Slots 5 (Flags)", Model.SlotTable, ngc, displayGroups: ["Metadata", "Page5"]));
             }
             if (Model.SpawnZoneTable != null)
                 CreateChild(new TableView("Spawn Zones", Model.SpawnZoneTable, ngc));

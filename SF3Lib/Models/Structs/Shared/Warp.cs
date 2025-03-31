@@ -48,11 +48,11 @@ namespace SF3.Models.Structs.Shared {
             set => RawData = (RawData & ~0xF800_0000u) | ((uint) (value << 27) & 0xF800_0000u);
         }
 
-        public bool HasGameFlag => WarpTrigger != 0 && LoadID != 0x1FF;
+        public NamedValueType? IfFlagUnsetType => (WarpTrigger != 0 && LoadID != 0x1FF) ? NamedValueType.GameFlag : (NamedValueType?) null;
 
         [TableViewModelColumn(displayOrder: 2, displayFormat: "X2", minWidth: 200)]
         [BulkCopy]
-        [NameGetter(NamedValueType.GameFlagOrValue, nameof(HasGameFlag))]
+        [NameGetter(NamedValueType.ConditionalType, nameof(IfFlagUnsetType))]
         public int IfFlagUnset {
             // Next 12 bits (07FF,8000)
             get => (int) ((RawData & 0x07FF_8000u) >> 15);

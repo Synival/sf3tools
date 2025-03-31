@@ -475,44 +475,62 @@ namespace SF3.Models.Structs.X1.Battle {
             set => Data.SetByte(_paddingAddr, (byte) value);
         }
 
-        [TableViewModelColumn(displayOrder: 45, displayName: "EnemyFlags", displayFormat: "X4", displayGroup: "Page4")]
+        [TableViewModelColumn(displayOrder: 45, displayName: "EnemyFlags", displayFormat: "X4", displayGroup: "Page5")]
         [BulkCopy]
         public ushort EnemyFlags {
             get => (ushort) Data.GetWord(_enemyFlagsAddr);
             set => Data.SetWord(_enemyFlagsAddr, value);
         }
 
-        [TableViewModelColumn(displayOrder: 45.1f, displayGroup: "Page4")]
+        [TableViewModelColumn(displayOrder: 45.1f, displayGroup: "Page5")]
         public bool DontMove {
             get => (EnemyFlags & 0x0002) != 0;
             set => EnemyFlags = (ushort) (value ? (EnemyFlags | 0x0002) : (EnemyFlags & ~0x0002));
         }
 
-        [TableViewModelColumn(displayOrder: 45.12f, displayGroup: "Page4")]
+        [TableViewModelColumn(displayOrder: 45.12f, displayGroup: "Page5")]
         public bool DontMoveIfFlagOff {
             get => (EnemyFlags & 0x0008) != 0;
             set => EnemyFlags = (ushort) (value ? (EnemyFlags | 0x0008) : (EnemyFlags & ~0x0008));
         }
 
-        [TableViewModelColumn(displayOrder: 45.15f, displayGroup: "Page4")]
+        [TableViewModelColumn(displayOrder: 45.15f, displayGroup: "Page5")]
         public bool PrioritizeTargetSpecified {
             get => (EnemyFlags & 0x0010) != 0;
             set => EnemyFlags = (ushort) (value ? (EnemyFlags | 0x0010) : (EnemyFlags & ~0x0010));
         }
 
-        [TableViewModelColumn(displayOrder: 45.2f, displayGroup: "Page4")]
+        [TableViewModelColumn(displayOrder: 45.2f, displayGroup: "Page5")]
         public bool NoTurn {
             get => (EnemyFlags & 0x0040) != 0;
             set => EnemyFlags = (ushort) (value ? (EnemyFlags | 0x0040) : (EnemyFlags & ~0x0040));
         }
 
-        [TableViewModelColumn(displayOrder: 45.3f, displayGroup: "Page4")]
+        [TableViewModelColumn(displayOrder: 45.3f, displayGroup: "Page5")]
         public bool DontGetMoreAggroWhenHurt {
             get => (EnemyFlags & 0x0080) != 0;
             set => EnemyFlags = (ushort) (value ? (EnemyFlags | 0x0080) : (EnemyFlags & ~0x0080));
         }
 
-        [TableViewModelColumn(displayOrder: 45.4f, displayGroup: "Page4")]
+        [TableViewModelColumn(displayOrder: 45.32f, displayGroup: "Page5")]
+        public bool UnknownBattleIDFlag0x0200 {
+            get => (EnemyFlags & 0x0200) != 0;
+            set => EnemyFlags = (ushort) (value ? (EnemyFlags | 0x0200) : (EnemyFlags & ~0x0200));
+        }
+
+        [TableViewModelColumn(displayOrder: 45.33f, displayGroup: "Page5")]
+        public bool UnknownBattleIDFlag0x0400 {
+            get => (EnemyFlags & 0x0400) != 0;
+            set => EnemyFlags = (ushort) (value ? (EnemyFlags | 0x0400) : (EnemyFlags & ~0x0400));
+        }
+
+        [TableViewModelColumn(displayOrder: 45.34f, displayGroup: "Page5")]
+        public bool UnknownBattleIDFlag0x1000 {
+            get => (EnemyFlags & 0x1000) != 0;
+            set => EnemyFlags = (ushort) (value ? (EnemyFlags | 0x1000) : (EnemyFlags & ~0x1000));
+        }
+
+        [TableViewModelColumn(displayOrder: 45.4f, displayGroup: "Page5")]
         public bool CreepTowardsMoveTarget {
             get => (EnemyFlags & 0x4000) != 0;
             set => EnemyFlags = (ushort) (value ? (EnemyFlags | 0x4000) : (EnemyFlags & ~0x4000));
@@ -520,9 +538,23 @@ namespace SF3.Models.Structs.X1.Battle {
 
         public bool IsBarrel => EnemyID == 0x5F;
 
-        [TableViewModelColumn(displayOrder: 46, displayName: "Flag Tie-in / Unknown", displayFormat: "X2", minWidth: 200, displayGroup: "Page4")]
+        public NamedValueType? FlagOrBattleIDType {
+            get {
+                bool hasFlag = IsBarrel || DontMoveIfFlagOff;
+                bool hasBattleID = PrioritizeTargetSpecified || UnknownBattleIDFlag0x0200 || UnknownBattleIDFlag0x0400 || UnknownBattleIDFlag0x1000;
+
+                if (hasFlag && !hasBattleID)
+                    return NamedValueType.GameFlag;
+                else if (!hasFlag && hasBattleID)
+                    return NamedValueType.Character;
+                else
+                    return null;
+            }
+        }
+
+        [TableViewModelColumn(displayOrder: 46, displayName: "Flag / Battle ID", displayFormat: "X2", minWidth: 200, displayGroup: "Page5")]
         [BulkCopy]
-        [NameGetter(NamedValueType.GameFlagOrValue, nameof(IsBarrel))]
+        [NameGetter(NamedValueType.ConditionalType, nameof(FlagOrBattleIDType))]
         public int FlagTieInOrUnknown {
             get => Data.GetWord(_flagTieInAddr);
             set => Data.SetWord(_flagTieInAddr, value);
