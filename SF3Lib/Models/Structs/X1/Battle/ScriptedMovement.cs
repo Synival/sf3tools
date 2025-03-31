@@ -3,7 +3,7 @@ using SF3.ByteData;
 
 namespace SF3.Models.Structs.X1.Battle {
     public class ScriptedMovement : Struct {
-        private readonly int _unknown0x00Addr;
+        private readonly int _positionCountAddr;
         private readonly int _xPos1Addr;
         private readonly int _zPos1Addr;
         private readonly int _xPos2Addr;
@@ -16,7 +16,7 @@ namespace SF3.Models.Structs.X1.Battle {
 
         public ScriptedMovement(IByteData data, int id, string name, int address)
         : base(data, id, name, address, 0x16) {
-            _unknown0x00Addr = Address + 0x00; // 2 bytes
+            _positionCountAddr = Address + 0x00; // 2 bytes
             _xPos1Addr       = Address + 0x02; // 2 bytes
             _zPos1Addr       = Address + 0x04; // 2 bytes
             _xPos2Addr       = Address + 0x06; // 2 bytes
@@ -28,11 +28,11 @@ namespace SF3.Models.Structs.X1.Battle {
             _endAddr         = Address + 0x12; // 4 bytes
         }
 
-        [TableViewModelColumn(displayOrder: 0, displayName: "+0x00", displayFormat: "X2")]
+        [TableViewModelColumn(displayOrder: 0, displayFormat: "X2")]
         [BulkCopy]
-        public int Unknown0x00 {
-            get => Data.GetWord(_unknown0x00Addr);
-            set => Data.SetWord(_unknown0x00Addr, value);
+        public int PositionCount {
+            get => Data.GetWord(_positionCountAddr);
+            set => Data.SetWord(_positionCountAddr, value);
         }
 
         [TableViewModelColumn(displayOrder: 1, displayName: "xPos1")]
