@@ -33,7 +33,7 @@ namespace SF3.Models.Files.X1 {
             var slotAddress           = headerAddress + 0x0a;
             var spawnZoneAddress      = slotAddress + enemySpawnTableSize + 0x06;
             var aiAddress             = spawnZoneAddress + 0x120;
-            var customMovementAddress = aiAddress + 0x84;
+            var customMovementAddress = aiAddress + 0x80;
 
             BattleHeader = new BattleHeader(Data, 0, "BattleHeader", headerAddress);
 
