@@ -33,28 +33,30 @@ void main() {
     colorFrag     = color;
     glowFrag      = glow;
 
+    // Modify the normal based on the normal matrix.
+    // Preserve the length of the normal for in-game accuracy.
     float prevLength = length(normal);
     vec3 modelNormal = normalize(normalMatrix * normal) * prevLength;
     float normalLightDot = dot(modelNormal, lightPosition);
 
     float lighting =
-        (lightingMode == 0) ? 0 :
+        (lightingMode == 0) ? 0.0f :
         // Scenario 1 always uses a straight-forward lighting method where the dot product directly references the index of
         // the color palette to use.
-        (lightingMode == 1) ? ((normalLightDot * 0.5 + 0.5) * 0.96875) :
+        (lightingMode == 1) ? (normalLightDot * 0.5f + 0.5f) :
         // Scenario 2 outdoor maps uses this odd exponential function instead, usually at pitch 0xB308. With this formula:
         // - any polygon not facing the light source (90 degrees or more) always uses the darkest color
         // - the color referenced used intentionally overflows, wrapping once
         // - a wider range of colors is used when the light is directly overhead
         // - the color used changes more rapidly the less direct the light is due to the exponent
-        (normalLightDot < 0) ? -1 :
-            (-1
-                + 1.250f * normalLightDot +
+        (normalLightDot < 0) ? -1.0f :
+            (-1.0f
+                + 1.250f * normalLightDot
                 + 0.375f * pow(normalLightDot, 4)
                 + 0.375f * pow(normalLightDot, 32)
-            ) * 0.96875;
+            );
 
-    lighting = (smoothLighting ? lighting : floor(lighting * 32.00f) / 32.0f) + 0.015625;
+    lighting = (smoothLighting ? lighting : floor(lighting * 31.0f) / 32.0f) + 0.015625;
 
     lightColorFrag           = (lightingMode != 0 && applyLighting > 0.50) ? vec4(clamp(texture(textureLighting, vec2(0, lighting)).xyz - 0.5, -0.5, 0.5), 0) : vec4(0, 0, 0, 0);
     texCoordAtlasFrag        = texCoordAtlas;
