@@ -150,7 +150,7 @@ namespace SF3.Models.Files.X013 {
             };
 
             FriendshipExp = new FriendshipExp(Data, 0, "FriendshipExp", friendshipExpAddress);
-            SoulFail      = new Soulfail     (Data, 0, "SoulFail",      soulFailAddress);
+            SoulFail      = new SoulFail_     (Data, 0, "SoulFail",      soulFailAddress);
 
             if (specialEffectAddress >= 0)
                 tables.Add(SpecialEffectTable = SpecialEffectTable.Create(Data, "SpecialEffects", ResourceFile("SpecialEffects.xml"), specialEffectAddress));
@@ -171,7 +171,7 @@ namespace SF3.Models.Files.X013 {
         [BulkCopyRecurse]
         public SoulmateTable SoulmateTable { get; private set; }
         [BulkCopyRecurse]
-        public Soulfail SoulFail { get; private set; }
+        public SoulFail_ SoulFail { get; private set; }
         [BulkCopyRecurse]
         public MagicBonusTable MagicBonusTable { get; private set; }
         [BulkCopyRecurse]
