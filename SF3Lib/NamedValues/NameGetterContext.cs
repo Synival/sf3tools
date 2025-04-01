@@ -91,15 +91,8 @@ namespace SF3.NamedValues {
                             new NameAndInfo(v, ValueNames.SpriteInfo.Info[Scenario]);
                     })
                 },
+
                 { NamedValueType.StatType,            new SubMethods((o, p, v, a) => new NameAndInfo(v, ValueNames.StatTypeInfo)) },
-
-                { NamedValueType.StatUpValueType,
-                    new SubMethods(
-                        (o, p, v, a) => GetStatUpValue(o, p, v, a),
-                        (o, p, v, a) => CanGetStatUpValue(o, p, v, a),
-                        (o, p, a)    => CanGetStatUpValue(o, p, 0, a)
-                    ) },
-
                 { NamedValueType.WeaponSpell,         new SubMethods((o, p, v, a) => new NameAndInfo(v, ValueNames.WeaponSpellInfo.Info[Scenario])) },
                 { NamedValueType.WeaponType,          new SubMethods((o, p, v, a) => new NameAndInfo(v, ValueNames.WeaponTypeInfo)) },
 
@@ -177,29 +170,6 @@ namespace SF3.NamedValues {
         }
 
         public ScenarioType Scenario { get; }
-
-        private NameAndInfo GetStatUpValue(object obj, PropertyInfo property, int value, object[] parameters) {
-            var statUpType = GetReferencedPropertyValueAsEnumOrNull<StatUpType>(obj, parameters, 1);
-            switch (statUpType) {
-                case StatUpType.Special:
-                    return _nameGetters[NamedValueType.Special].GetNameAndInfo(obj, property, value, parameters);
-                case StatUpType.Spell:
-                    return _nameGetters[NamedValueType.WeaponSpell].GetNameAndInfo(obj, property, value, parameters);
-                default:
-                    return null;
-            }
-        }
-
-        private bool CanGetStatUpValue(object obj, PropertyInfo property, int value, object[] parameters) {
-            var statUpType = GetReferencedPropertyValueAsEnumOrNull<StatUpType>(obj, parameters, 1);
-            switch (statUpType) {
-                case StatUpType.Special:
-                case StatUpType.Spell:
-                    return true;
-                default:
-                    return false;
-            }
-        }
 
         private bool CanGetCharacterPlusValue(object obj, PropertyInfo property, int value, object[] parameters) {
             var enemyID = GetReferencedPropertyValueAsIntOrNull(obj, parameters, 1);

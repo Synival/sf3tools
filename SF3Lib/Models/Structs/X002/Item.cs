@@ -234,7 +234,18 @@ namespace SF3.Models.Structs.X002 {
             set => Data.SetByte(_effective2PowAddr, (byte) value);
         }
 
-        int conditionallySignedStatUp(int type, int value)
+        private NamedValueType? ValueTypeForStat(int type) {
+            switch ((StatUpType) type) {
+                case StatUpType.Special:
+                    return NamedValueType.Special;
+                case StatUpType.Spell:
+                    return NamedValueType.Spell;
+                default:
+                    return null;
+            }
+        }
+
+        private int ConditionallySignedStatUp(int type, int value)
             => type == (int) StatUpType.Special || type == (int) StatUpType.Spell ? value : (sbyte) value;
 
         [TableViewModelColumn(displayOrder: 13, minWidth: 90, displayGroup: "Bonuses")]
@@ -245,11 +256,13 @@ namespace SF3.Models.Structs.X002 {
             set => Data.SetByte(_stat1TypeAddr, (byte) value);
         }
 
+        public NamedValueType? Stat1ValueType => ValueTypeForStat(Stat1Type);
+
         [TableViewModelColumn(displayOrder: 14, minWidth: 100, displayGroup: "Bonuses")]
         [BulkCopy]
-        [NameGetter(NamedValueType.StatUpValueType, nameof(Stat1Type))]
+        [NameGetter(NamedValueType.ConditionalType, nameof(Stat1ValueType))]
         public int Stat1Mod {
-            get => conditionallySignedStatUp(Stat1Type, Data.GetByte(_stat1ModAddr));
+            get => ConditionallySignedStatUp(Stat1Type, Data.GetByte(_stat1ModAddr));
             set => Data.SetByte(_stat1ModAddr, (byte) value);
         }
 
@@ -261,11 +274,13 @@ namespace SF3.Models.Structs.X002 {
             set => Data.SetByte(_stat2TypeAddr, (byte) value);
         }
 
+        public NamedValueType? Stat2ValueType => ValueTypeForStat(Stat2Type);
+
         [TableViewModelColumn(displayOrder: 16, minWidth: 100, displayGroup: "Bonuses")]
         [BulkCopy]
-        [NameGetter(NamedValueType.StatUpValueType, nameof(Stat2Type))]
+        [NameGetter(NamedValueType.ConditionalType, nameof(Stat2ValueType))]
         public int Stat2Mod {
-            get => conditionallySignedStatUp(Stat2Type, Data.GetByte(_stat2ModAddr));
+            get => ConditionallySignedStatUp(Stat2Type, Data.GetByte(_stat2ModAddr));
             set => Data.SetByte(_stat2ModAddr, (byte) value);
         }
 
@@ -277,11 +292,13 @@ namespace SF3.Models.Structs.X002 {
             set => Data.SetByte(_stat3TypeAddr, (byte) value);
         }
 
+        public NamedValueType? Stat3ValueType => ValueTypeForStat(Stat3Type);
+
         [TableViewModelColumn(displayOrder: 18, minWidth: 100, displayGroup: "Bonuses")]
         [BulkCopy]
-        [NameGetter(NamedValueType.StatUpValueType, nameof(Stat3Type))]
+        [NameGetter(NamedValueType.ConditionalType, nameof(Stat3ValueType))]
         public int Stat3Mod {
-            get => conditionallySignedStatUp(Stat3Type, Data.GetByte(_stat3ModAddr));
+            get => ConditionallySignedStatUp(Stat3Type, Data.GetByte(_stat3ModAddr));
             set => Data.SetByte(_stat3ModAddr, (byte) value);
         }
 
@@ -293,11 +310,13 @@ namespace SF3.Models.Structs.X002 {
             set => Data.SetByte(_stat4TypeAddr, (byte) value);
         }
 
+        public NamedValueType? Stat4ValueType => ValueTypeForStat(Stat4Type);
+
         [TableViewModelColumn(displayOrder: 20, minWidth: 130, displayGroup: "Bonuses")]
         [BulkCopy]
-        [NameGetter(NamedValueType.StatUpValueType, nameof(Stat4Type))]
+        [NameGetter(NamedValueType.ConditionalType, nameof(Stat4ValueType))]
         public int Stat4Mod {
-            get => conditionallySignedStatUp(Stat4Type, Data.GetByte(_stat4ModAddr));
+            get => ConditionallySignedStatUp(Stat4Type, Data.GetByte(_stat4ModAddr));
             set => Data.SetByte(_stat4ModAddr, (byte) value);
         }
 
