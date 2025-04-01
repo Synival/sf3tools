@@ -69,14 +69,6 @@ namespace SF3.NamedValues {
                 { NamedValueType.SpawnType,           new SubMethods((o, p, v, a) => new NameAndInfo(v, ValueNames.SpawnTypeInfo)) },
                 { NamedValueType.Special,             new SubMethods((o, p, v, a) => new NameAndInfo(v, ValueNames.SpecialInfo.Info[Scenario])) },
                 { NamedValueType.SpecialEffect,       new SubMethods((o, p, v, a) => new NameAndInfo(v, ValueNames.SpecialEffectInfo)) },
-
-                { NamedValueType.SpecialElement,
-                    new SubMethods(
-                        (o, p, v, a) => GetSpecialElementValue(o, p, v, a),
-                        (o, p, v, a) => CanGetSpecialElementValue(o, p, v, a),
-                        (o, p, a)    => CanGetSpecialElementValue(o, p, 0, a)
-                    ) },
-
                 { NamedValueType.Spell,               new SubMethods((o, p, v, a) => new NameAndInfo(v, ValueNames.SpellInfo.Info[Scenario])) },
                 { NamedValueType.SpellTarget,         new SubMethods((o, p, v, a) => new NameAndInfo(v, ValueNames.SpellTargetInfo)) },
 
@@ -174,26 +166,6 @@ namespace SF3.NamedValues {
         private bool CanGetCharacterPlusValue(object obj, PropertyInfo property, int value, object[] parameters) {
             var enemyID = GetReferencedPropertyValueAsIntOrNull(obj, parameters, 1);
             return enemyID == 0x5B; // magic number indicated "Character Placeholder"
-        }
-
-        private NameAndInfo GetSpecialElementValue(object obj, PropertyInfo property, int value, object[] parameters) {
-            var damageCalcType = GetReferencedPropertyValueAsIntOrNull(obj, parameters, 1);
-            switch (damageCalcType) {
-                case 100:
-                    return _nameGetters[NamedValueType.Element].GetNameAndInfo(obj, property, value, parameters);
-                default:
-                    return null;
-            }
-        }
-
-        private bool CanGetSpecialElementValue(object obj, PropertyInfo property, int value, object[] parameters) {
-            var damageCalcType = GetReferencedPropertyValueAsIntOrNull(obj, parameters, 1);
-            switch (damageCalcType) {
-                case 100:
-                    return true;
-                default:
-                    return false;
-            }
         }
 
         private (NamedValueType, object[]) GetConditionalTypeAndParameters(object obj, object[] parameters) {

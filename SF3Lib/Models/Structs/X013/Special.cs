@@ -29,8 +29,11 @@ namespace SF3.Models.Structs.X013 {
             set => Data.SetByte(damageCalculation, (byte) value);
         }
 
+        public NamedValueType? ExtraPowType
+            => (DamageCalc == 100) ? NamedValueType.Element : (NamedValueType?) null;
+
         [BulkCopy]
-        [NameGetter(NamedValueType.SpecialElement, nameof(DamageCalc))]
+        [NameGetter(NamedValueType.ConditionalType, nameof(ExtraPowType))]
         public int ExtraPow {
             get => Data.GetByte(extraPow);
             set => Data.SetByte(extraPow, (byte) value);
