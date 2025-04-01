@@ -201,20 +201,20 @@ namespace SF3.Tests.Models.Files {
                 var file = testCase.Create();
                 var table = file.SpecialsTable;
 
-                Assert.AreEqual(0, table[0].Unknown1);
-                Assert.AreEqual(0, table[0].DamageCalc);
-                Assert.AreEqual(0, table[0].ExtraPow);
-                Assert.AreEqual(0, table[0].Pow);
+                Assert.AreEqual(0, table[0].IsSetH);
+                Assert.AreEqual(0, table[0].LowPow);
+                Assert.AreEqual(0, table[0].MidPow);
+                Assert.AreEqual(0, table[0].MaxPow);
 
-                Assert.AreEqual(1, table[1].Unknown1);
-                Assert.AreEqual(3, table[1].DamageCalc);
-                Assert.AreEqual(4, table[1].ExtraPow);
-                Assert.AreEqual(5, table[1].Pow);
+                Assert.AreEqual(1, table[1].IsSetH);
+                Assert.AreEqual(3, table[1].LowPow);
+                Assert.AreEqual(4, table[1].MidPow);
+                Assert.AreEqual(5, table[1].MaxPow);
 
-                Assert.AreEqual(2, table[2].Unknown1);
-                Assert.AreEqual(0, table[2].DamageCalc);
-                Assert.AreEqual(0, table[2].ExtraPow);
-                Assert.AreEqual(0, table[2].Pow);
+                Assert.AreEqual(2, table[2].IsSetH);
+                Assert.AreEqual(0, table[2].LowPow);
+                Assert.AreEqual(0, table[2].MidPow);
+                Assert.AreEqual(0, table[2].MaxPow);
 
                 Assert.AreEqual(testCase.ExpectedSpecials, table.Length);
             });
