@@ -10,6 +10,7 @@ namespace SF3.Models.Structs.X013 {
             healExp = Address; // 1 byte
         }
 
+        [TableViewModelColumn(displayOrder: 0, displayName: "Heal Exp Bonus")]
         [BulkCopy]
         public int HealBonus {
             get => Data.GetByte(healExp);

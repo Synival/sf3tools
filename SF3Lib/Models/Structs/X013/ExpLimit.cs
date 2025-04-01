@@ -12,12 +12,14 @@ namespace SF3.Models.Structs.X013 {
             expReplacement = Address + 6; // 1 byte
         }
 
+        [TableViewModelColumn(displayOrder: 0, displayName: "Checked Value")]
         [BulkCopy]
         public int ExpCheck {
             get => Data.GetByte(expCheck);
             set => Data.SetByte(expCheck, (byte) value);
         }
 
+        [TableViewModelColumn(displayOrder: 1, displayName: "Replaced Value")]
         [BulkCopy]
         public int ExpReplacement {
             get => Data.GetByte(expReplacement);

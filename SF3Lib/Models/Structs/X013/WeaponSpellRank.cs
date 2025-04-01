@@ -18,30 +18,35 @@ namespace SF3.Models.Structs.X013 {
             rankS    = Address + 4; // 1 byte
         }
 
+        [TableViewModelColumn(displayOrder: 0)]
         [BulkCopy]
         public int RankNone {
             get => Data.GetByte(rankNone);
             set => Data.SetByte(rankNone, (byte) value);
         }
 
+        [TableViewModelColumn(displayOrder: 0)]
         [BulkCopy]
         public int RankC {
             get => Data.GetByte(rankC);
             set => Data.SetByte(rankC, (byte) value);
         }
 
+        [TableViewModelColumn(displayOrder: 1)]
         [BulkCopy]
         public int RankB {
             get => Data.GetByte(rankB);
             set => Data.SetByte(rankB, (byte) value);
         }
 
+        [TableViewModelColumn(displayOrder: 2)]
         [BulkCopy]
         public int RankA {
             get => Data.GetByte(rankA);
             set => Data.SetByte(rankA, (byte) value);
         }
 
+        [TableViewModelColumn(displayOrder: 3)]
         [BulkCopy]
         public int RankS {
             get => Data.GetByte(rankS);
