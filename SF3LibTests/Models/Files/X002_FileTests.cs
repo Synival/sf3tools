@@ -47,24 +47,27 @@ namespace SF3.Tests.Models.Files {
                 var table = file.ItemTable;
 
                 Assert.AreEqual(0, table[0].Price);
-                Assert.AreEqual(0, table[0].WeaponType);
-                Assert.AreEqual(0, table[0].SpellUse);
-                Assert.AreEqual(0, table[0].StatType1);
-                Assert.AreEqual(0, table[0].Range);
+                Assert.AreEqual(0, table[0].WeaponEqType);
+                Assert.AreEqual(0, table[0].UseSpell);
+                Assert.AreEqual(0, table[0].Stat1Type);
+                Assert.AreEqual(0, table[0].RangeMax);
+                Assert.AreEqual(0, table[0].RangeMin);
                 Assert.AreEqual(0, table[0].Attack);
 
                 Assert.AreEqual(50, table[1].Price);
-                Assert.AreEqual(10, table[1].WeaponType);
-                Assert.AreEqual(0, table[1].SpellUse);
-                Assert.AreEqual(testCase.Scenario == ScenarioType.Scenario1 ? 20 : 0, table[1].StatType1);
-                Assert.AreEqual(0x21, table[1].Range);
+                Assert.AreEqual(10, table[1].WeaponEqType);
+                Assert.AreEqual(0, table[1].UseSpell);
+                Assert.AreEqual(testCase.Scenario == ScenarioType.Scenario1 ? 20 : 0, table[1].Stat1Type);
+                Assert.AreEqual(0x02, table[1].RangeMax);
+                Assert.AreEqual(0x01, table[1].RangeMin);
                 Assert.AreEqual(3, table[1].Attack);
 
                 Assert.AreEqual(250, table[2].Price);
-                Assert.AreEqual(10, table[2].WeaponType);
-                Assert.AreEqual(0, table[2].SpellUse);
-                Assert.AreEqual(testCase.Scenario == ScenarioType.Scenario1 ? 20 : 0, table[2].StatType1);
-                Assert.AreEqual(0x21, table[2].Range);
+                Assert.AreEqual(10, table[2].WeaponEqType);
+                Assert.AreEqual(0, table[2].UseSpell);
+                Assert.AreEqual(testCase.Scenario == ScenarioType.Scenario1 ? 20 : 0, table[2].Stat1Type);
+                Assert.AreEqual(0x02, table[2].RangeMax);
+                Assert.AreEqual(0x01, table[2].RangeMin);
                 Assert.AreEqual(7, table[2].Attack);
 
                 Assert.AreEqual(testCase.ExpectedItems, table.Length);
