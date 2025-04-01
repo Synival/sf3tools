@@ -88,15 +88,13 @@ namespace SF3.Tests.Models.Files {
         public void FriendshipExpTable_HasExpectedData() {
             TestCase.Run(TestCases, testCase => {
                 var file = testCase.Create();
-                var table = file.FriendshipExpTable;
+                var data = file.FriendshipExp;
 
-                Assert.AreEqual(0, table[0].SLvl0);
-                Assert.AreEqual(10, table[0].SLvl1);
-                Assert.AreEqual(20, table[0].SLvl2);
-                Assert.AreEqual(30, table[0].SLvl3);
-                Assert.AreEqual(45, table[0].SLvl4);
-
-                Assert.AreEqual(1, table.Length);
+                Assert.AreEqual(0, data.SLvl0_Ally);
+                Assert.AreEqual(10, data.SLvl1_Partner);
+                Assert.AreEqual(20, data.SLvl2_Friend);
+                Assert.AreEqual(30, data.SLvl3_Trusted);
+                Assert.AreEqual(45, data.SLvl4_Soulmate);
             });
         }
 

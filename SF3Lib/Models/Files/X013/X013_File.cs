@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using CommonLib.Attributes;
 using CommonLib.NamedValues;
 using SF3.ByteData;
+using SF3.Models.Structs.X013;
 using SF3.Models.Tables;
 using SF3.Models.Tables.X013;
 using SF3.Types;
@@ -136,7 +137,6 @@ namespace SF3.Models.Files.X013 {
             var tables = new List<ITable>() {
                 (SpecialsTable        = SpecialTable.Create        (Data, "Specials",         ResourceFileForScenario(Scenario, "Specials.xml"), specialAddress)),
                 (SupportTypeTable     = SupportTypeTable.Create    (Data, "SupportTypes",     ResourceFileForScenario(Scenario, "Characters.xml"), supportTypeAddress)),
-                (FriendshipExpTable   = FriendshipExpTable.Create  (Data, "FriendshipExp",    ResourceFile("ExpList.xml"), friendshipExpAddress)),
                 (SupportStatsTable    = SupportStatsTable.Create   (Data, "SupportStats",     ResourceFile("X013StatList.xml"), supportStatsAddress)),
                 (SoulmateTable        = SoulmateTable.Create       (Data, "Soulmate",         ResourceFile("SoulmateList.xml"), soulmateAddress)),
                 (SoulfailTable        = SoulfailTable.Create       (Data, "SoulFail",         ResourceFile("Soulfail.xml"), soulFailAddress)),
@@ -149,6 +149,8 @@ namespace SF3.Models.Files.X013 {
                 (WeaponSpellRankTable = WeaponSpellRankTable.Create(Data, "WeaponSpellRanks", ResourceFile("WeaponSpellRankList.xml"), weaponSpellRankAddress)),
                 (StatusEffectTable    = StatusEffectTable.Create   (Data, "StatusEffects",    ResourceFile("StatusGroupList.xml"), statusEffectAddress)),
             };
+
+            FriendshipExp = new FriendshipExp(Data, 0, "FriendshipExp", friendshipExpAddress);
 
             if (specialEffectAddress >= 0)
                 tables.Add(SpecialEffectTable = SpecialEffectTable.Create(Data, "SpecialEffects", ResourceFile("SpecialEffects.xml"), specialEffectAddress));
@@ -163,7 +165,7 @@ namespace SF3.Models.Files.X013 {
         [BulkCopyRecurse]
         public SupportTypeTable SupportTypeTable { get; private set; }
         [BulkCopyRecurse]
-        public FriendshipExpTable FriendshipExpTable { get; private set; }
+        public FriendshipExp FriendshipExp { get; private set; }
         [BulkCopyRecurse]
         public SupportStatsTable SupportStatsTable { get; private set; }
         [BulkCopyRecurse]

@@ -16,8 +16,8 @@ namespace SF3.Win.Views.X013 {
                 CreateChild(new TableView("Specials", Model.SpecialsTable, ngc));
             if (Model.SpecialEffectTable != null)
                 CreateChild(new TableView("Special Effects (Scn3+)", Model.SpecialEffectTable, ngc));
-            if (Model.FriendshipExpTable != null)
-                CreateChild(new TableView("Friendship Exp", Model.FriendshipExpTable, ngc));
+            if (Model.FriendshipExp != null)
+                CreateChild(new DataModelView("Friendship Exp", Model.FriendshipExp, ngc));
             if (Model.SupportTypeTable != null)
                 CreateChild(new TableView("Support Types", Model.SupportTypeTable, ngc));
             if (Model.SupportStatsTable != null)

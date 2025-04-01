@@ -1,3 +1,4 @@
+using SF3.Models.Structs.X013;
 using SF3.Models.Tables.X013;
 
 namespace SF3.Models.Files.X013 {
@@ -5,7 +6,7 @@ namespace SF3.Models.Files.X013 {
         SpecialTable SpecialsTable { get; }
         SpecialEffectTable SpecialEffectTable { get; }
         SupportTypeTable SupportTypeTable { get; }
-        FriendshipExpTable FriendshipExpTable { get; }
+        FriendshipExp FriendshipExp { get; }
         SupportStatsTable SupportStatsTable { get; }
         SoulmateTable SoulmateTable { get; }
         SoulfailTable SoulfailTable { get; }

@@ -3,49 +3,54 @@ using SF3.ByteData;
 
 namespace SF3.Models.Structs.X013 {
     public class FriendshipExp : Struct {
-        private readonly int sLvl0;
-        private readonly int sLvl1;
-        private readonly int sLvl2;
-        private readonly int sLvl3;
-        private readonly int sLvl4;
+        private readonly int _sLvl0Addr;
+        private readonly int _sLvl1Addr;
+        private readonly int _sLvl2Addr;
+        private readonly int _sLvl3Addr;
+        private readonly int _sLvl4Addr;
 
         public FriendshipExp(IByteData data, int id, string name, int address)
-        : base(data, id, name, address, 0x04) {
-            sLvl0 = Address;     // 1 byte
-            sLvl1 = Address + 1; // 1 byte
-            sLvl2 = Address + 2; // 1 byte
-            sLvl3 = Address + 3; // 1 byte
-            sLvl4 = Address + 4; // 1 byte
+        : base(data, id, name, address, 0x05) {
+            _sLvl0Addr = Address + 0x00; // 1 byte
+            _sLvl1Addr = Address + 0x01; // 1 byte
+            _sLvl2Addr = Address + 0x02; // 1 byte
+            _sLvl3Addr = Address + 0x03; // 1 byte
+            _sLvl4Addr = Address + 0x04; // 1 byte
         }
 
+        [TableViewModelColumn(displayOrder: 0, displayName: "Ally")]
         [BulkCopy]
-        public int SLvl0 {
-            get => Data.GetByte(sLvl0);
-            set => Data.SetByte(sLvl0, (byte) value);
+        public int SLvl0_Ally {
+            get => Data.GetByte(_sLvl0Addr);
+            set => Data.SetByte(_sLvl0Addr, (byte) value);
         }
 
+        [TableViewModelColumn(displayOrder: 0, displayName: "Partner")]
         [BulkCopy]
-        public int SLvl1 {
-            get => Data.GetByte(sLvl1);
-            set => Data.SetByte(sLvl1, (byte) value);
+        public int SLvl1_Partner {
+            get => Data.GetByte(_sLvl1Addr);
+            set => Data.SetByte(_sLvl1Addr, (byte) value);
         }
 
+        [TableViewModelColumn(displayOrder: 0, displayName: "Friend")]
         [BulkCopy]
-        public int SLvl2 {
-            get => Data.GetByte(sLvl2);
-            set => Data.SetByte(sLvl2, (byte) value);
+        public int SLvl2_Friend {
+            get => Data.GetByte(_sLvl2Addr);
+            set => Data.SetByte(_sLvl2Addr, (byte) value);
         }
 
+        [TableViewModelColumn(displayOrder: 0, displayName: "Trusted")]
         [BulkCopy]
-        public int SLvl3 {
-            get => Data.GetByte(sLvl3);
-            set => Data.SetByte(sLvl3, (byte) value);
+        public int SLvl3_Trusted {
+            get => Data.GetByte(_sLvl3Addr);
+            set => Data.SetByte(_sLvl3Addr, (byte) value);
         }
 
+        [TableViewModelColumn(displayOrder: 0, displayName: "Soulmate")]
         [BulkCopy]
-        public int SLvl4 {
-            get => Data.GetByte(sLvl4);
-            set => Data.SetByte(sLvl4, (byte) value);
+        public int SLvl4_Soulmate {
+            get => Data.GetByte(_sLvl4Addr);
+            set => Data.SetByte(_sLvl4Addr, (byte) value);
         }
     }
 }

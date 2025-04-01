@@ -29,9 +29,7 @@ namespace SF3.X013_Editor.Forms {
                 return false;
 
             return tabMain.PopulateAndToggleTabs(new List<IPopulateTabConfig>() {
-                new PopulateOLVTabConfig(tabSpecials, olvSpecials, File.SpecialsTable),
                 new PopulateOLVTabConfig(tabSpecialEffects, olvSpecialEffects, File.SpecialEffectTable),
-                new PopulateOLVTabConfig(tabFriendshipExp, olvFriendshipExp, File.FriendshipExpTable),
                 new PopulateOLVTabConfig(tabSupportType, olvSupportType, File.SupportTypeTable),
                 new PopulateOLVTabConfig(tabSupportStats, olvSupportStats, File.SupportStatsTable),
                 new PopulateOLVTabConfig(tabSoulmate, olvSoulmate, File.SoulmateTable),

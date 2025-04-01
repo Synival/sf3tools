@@ -72,9 +72,6 @@
     <Content Include="Resources\ExpLimitList.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\ExpList.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Include="Resources\HealExpList.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
