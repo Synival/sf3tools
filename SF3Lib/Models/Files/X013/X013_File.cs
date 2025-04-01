@@ -140,7 +140,6 @@ namespace SF3.Models.Files.X013 {
                 (SupportStatsTable    = SupportStatsTable.Create   (Data, "SupportStats",     ResourceFile("X013StatList.xml"), supportStatsAddress)),
                 (SoulmateTable        = SoulmateTable.Create       (Data, "Soulmate",         ResourceFile("SoulmateList.xml"), soulmateAddress)),
                 (MagicBonusTable      = MagicBonusTable.Create     (Data, "MagicBonuses",     ResourceFileForScenario(Scenario, "MagicBonus.xml"), magicBonusAddress, Scenario == ScenarioType.Scenario1)),
-                (CritModTable         = CritModTable.Create        (Data, "CritMods",         ResourceFile("CritModList.xml"), critModAddress)),
                 (CritrateTable        = CritrateTable.Create       (Data, "CritRates",        ResourceFile("CritrateList.xml"), critrateAddress)),
                 (SpecialChanceTable   = SpecialChanceTable.Create  (Data, "SpecialChances",   ResourceFile("SpecialChanceList.xml"), specialChanceAddress, Scenario <= ScenarioType.Scenario2)),
                 (ExpLimitTable        = ExpLimitTable.Create       (Data, "ExpLimit",         ResourceFile("ExpLimitList.xml"), expLimitAddress)),
@@ -151,6 +150,7 @@ namespace SF3.Models.Files.X013 {
 
             FriendshipExp = new FriendshipExp(Data, 0, "FriendshipExp", friendshipExpAddress);
             SoulFail      = new SoulFail     (Data, 0, "SoulFail",      soulFailAddress);
+            CritMod       = new CritMod      (Data, 0, "CritMod",       critModAddress);
 
             if (specialEffectAddress >= 0)
                 tables.Add(SpecialEffectTable = SpecialEffectTable.Create(Data, "SpecialEffects", ResourceFile("SpecialEffects.xml"), specialEffectAddress));
@@ -175,7 +175,7 @@ namespace SF3.Models.Files.X013 {
         [BulkCopyRecurse]
         public MagicBonusTable MagicBonusTable { get; private set; }
         [BulkCopyRecurse]
-        public CritModTable CritModTable { get; private set; }
+        public CritMod CritMod { get; private set; }
         [BulkCopyRecurse]
         public CritrateTable CritrateTable { get; private set; }
         [BulkCopyRecurse]

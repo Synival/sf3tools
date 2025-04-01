@@ -38,12 +38,10 @@ namespace SF3.Tests.Models.Files {
         public void CritModTable_HasExpectedData() {
             TestCase.Run(TestCases, testCase => {
                 var file = testCase.Create();
-                var table = file.CritModTable;
+                var data = file.CritMod;
 
-                Assert.AreEqual(20, table[0].Advantage);
-                Assert.AreEqual(236, table[0].Disadvantage);
-
-                Assert.AreEqual(1, table.Length);
+                Assert.AreEqual(20, data.Advantage);
+                Assert.AreEqual(-20, data.Disadvantage);
             });
         }
 
@@ -148,11 +146,11 @@ namespace SF3.Tests.Models.Files {
         }
 
         [TestMethod]
-        public void SoulfailTable_HasExpectedData() {
+        public void SoulFail_HasExpectedData() {
             TestCase.Run(TestCases, testCase => {
                 var file = testCase.Create();
                 var data = file.SoulFail;
-                Assert.AreEqual(246, data.ExpLost);
+                Assert.AreEqual(-10, data.ExpLost);
             });
         }
 

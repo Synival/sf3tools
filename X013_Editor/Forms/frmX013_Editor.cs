@@ -34,7 +34,6 @@ namespace SF3.X013_Editor.Forms {
                 new PopulateOLVTabConfig(tabSupportStats, olvSupportStats, File.SupportStatsTable),
                 new PopulateOLVTabConfig(tabSoulmate, olvSoulmate, File.SoulmateTable),
                 new PopulateOLVTabConfig(tabMagicBonus, olvMagicBonus, File.MagicBonusTable),
-                new PopulateOLVTabConfig(tabCritVantages, olvCritVantages, File.CritModTable),
                 new PopulateOLVTabConfig(tabCritCounterRate, olvCritCounterRate, File.CritrateTable),
                 new PopulateOLVTabConfig(tabSpecialChance, olvSpecialChance, File.SpecialChanceTable),
                 new PopulateOLVTabConfig(tabExpLimit, olvExpLimit, File.ExpLimitTable),

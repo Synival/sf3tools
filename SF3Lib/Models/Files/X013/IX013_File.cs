@@ -11,7 +11,7 @@ namespace SF3.Models.Files.X013 {
         SoulmateTable SoulmateTable { get; }
         SoulFail SoulFail { get; }
         MagicBonusTable MagicBonusTable { get; }
-        CritModTable CritModTable { get; }
+        CritMod CritMod { get; }
         CritrateTable CritrateTable { get; }
         SpecialChanceTable SpecialChanceTable { get; }
         ExpLimitTable ExpLimitTable { get; }

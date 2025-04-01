@@ -28,8 +28,8 @@ namespace SF3.Win.Views.X013 {
                 CreateChild(new DataModelView("Soulmate Chance Fail", Model.SoulFail, ngc));
             if (Model.MagicBonusTable != null)
                 CreateChild(new TableView("Magic Bonus", Model.MagicBonusTable, ngc));
-            if (Model.CritModTable != null)
-                CreateChild(new TableView("Crit Vantages", Model.CritModTable, ngc));
+            if (Model.CritMod != null)
+                CreateChild(new DataModelView("Crit Vantages", Model.CritMod, ngc));
             if (Model.SpecialChanceTable != null)
                 CreateChild(new TableView("Special Chances", Model.SpecialChanceTable, ngc));
             if (Model.ExpLimitTable != null)

@@ -63,9 +63,6 @@
     <Content Include="Resources\CharacterClasses.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\CritModList.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Include="Resources\CritrateList.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
