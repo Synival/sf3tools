@@ -4,24 +4,25 @@ using SF3.Types;
 
 namespace SF3.Models.Structs.X013 {
     public class Special : Struct {
-        private readonly int _isSetHAddr;
+        private readonly int _typeAddr;
         private readonly int _lowPowAddr;
         private readonly int _midPowAddr;
         private readonly int _highPowAddr;
 
         public Special(IByteData data, int id, string name, int address)
         : base(data, id, name, address, 0x04) {
-            _isSetHAddr  = Address + 0x00; // 1 byte
+            _typeAddr    = Address + 0x00; // 1 byte
             _lowPowAddr  = Address + 0x01; // 1 byte
             _midPowAddr  = Address + 0x02; // 1 byte
             _highPowAddr = Address + 0x03; // 1 byte
         }
 
-        [TableViewModelColumn(displayOrder: 0, displayFormat: "X2")]
+        [TableViewModelColumn(displayOrder: 0, displayFormat: "X2", minWidth: 100)]
         [BulkCopy]
-        public int IsSetH {
-            get => Data.GetByte(_isSetHAddr);
-            set => Data.SetByte(_isSetHAddr, (byte) value);
+        [NameGetter(NamedValueType.SpecialType)]
+        public int Type {
+            get => Data.GetByte(_typeAddr);
+            set => Data.SetByte(_typeAddr, (byte) value);
         }
 
         [TableViewModelColumn(displayOrder: 1)]

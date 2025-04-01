@@ -29,6 +29,7 @@ namespace SF3.Types {
         SpawnType,
         Special,
         SpecialEffect,
+        SpecialType,
         Spell,
         SpellTarget,
         Sprite,

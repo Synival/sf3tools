@@ -201,17 +201,17 @@ namespace SF3.Tests.Models.Files {
                 var file = testCase.Create();
                 var table = file.SpecialsTable;
 
-                Assert.AreEqual(0, table[0].IsSetH);
+                Assert.AreEqual(0, table[0].Type);
                 Assert.AreEqual(0, table[0].LowPow);
                 Assert.AreEqual(0, table[0].MidPow);
                 Assert.AreEqual(0, table[0].MaxPow);
 
-                Assert.AreEqual(1, table[1].IsSetH);
+                Assert.AreEqual(1, table[1].Type);
                 Assert.AreEqual(3, table[1].LowPow);
                 Assert.AreEqual(4, table[1].MidPow);
                 Assert.AreEqual(5, table[1].MaxPow);
 
-                Assert.AreEqual(2, table[2].IsSetH);
+                Assert.AreEqual(2, table[2].Type);
                 Assert.AreEqual(0, table[2].LowPow);
                 Assert.AreEqual(0, table[2].MidPow);
                 Assert.AreEqual(0, table[2].MaxPow);

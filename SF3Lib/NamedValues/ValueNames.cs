@@ -53,6 +53,8 @@ namespace SF3.NamedValues {
             = new NamedValueFromEnum<SpawnType>();
         public static readonly NamedValueFromResourceInfo SpecialEffectInfo
             = new NamedValueFromResourceInfo("SpecialEffects.xml");
+        public static readonly NamedValueFromResourceInfo SpecialTypeInfo
+            = new NamedValueFromResourceInfo("SpecialTypes.xml");
         public static readonly NamedValueFromResourceForScenariosInfo SpecialInfo
             = new NamedValueFromResourceForScenariosInfo("Specials.xml");
         public static readonly NamedValueFromResourceForScenariosInfo SpellInfo
