@@ -13,7 +13,7 @@ namespace SF3.Models.Structs.X013 {
         [TableViewModelColumn(displayOrder: 0)]
         [BulkCopy]
         public int ExpLost {
-            get => Data.GetByte(_expLostAddr);
+            get => (sbyte) Data.GetByte(_expLostAddr);
             set => Data.SetByte(_expLostAddr, (byte) value);
         }
     }
