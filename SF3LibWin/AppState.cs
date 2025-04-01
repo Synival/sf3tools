@@ -13,11 +13,11 @@ namespace SF3.Win {
             FileFullPath = GetFileFullPath(appName);
         }
 
-        public static bool Initialized() => _globalAppState != null;
+        public static bool Initialized => _globalAppState != null;
 
         public static AppState RetrieveAppState() {
             if (_globalAppState == null)
-                throw new InvalidOperationException("AppState not initialized");
+                _globalAppState = new AppState();
             return _globalAppState;
         }
 
@@ -35,12 +35,19 @@ namespace SF3.Win {
         public string GetFileFullPath()
             => GetFileFullPath(AppName);
 
-        public static string GetFileFullPath(string appName)
-            => Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "SF3Tools", appName + " State.json");
+        public static string GetFileFullPath(string appName) {
+            if (appName == null)
+                return null;
+            else
+                return Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "SF3Tools", appName + " State.json");
+        }
 
         public static AppState Deserialize(string appName) {
+            if (appName == null)
+                return null;
+
             var fullPath = GetFileFullPath(appName);
-            if (!File.Exists(fullPath))
+            if (fullPath == null || !File.Exists(fullPath))
                 return null;
 
             try {
@@ -56,6 +63,8 @@ namespace SF3.Win {
         }
 
         public void Serialize() {
+            if (FileFullPath == null)
+                return;
             if (!File.Exists(FileFullPath))
                 Directory.CreateDirectory(Path.GetDirectoryName(FileFullPath));
             var text = JsonConvert.SerializeObject(this, Formatting.Indented);
@@ -63,10 +72,10 @@ namespace SF3.Win {
         }
 
         [JsonIgnore]
-        public string AppName { get; private set; }
+        public string AppName { get; private set; } = null;
 
         [JsonIgnore]
-        public string FileFullPath { get; private set; }
+        public string FileFullPath { get; private set; } = null;
 
         public bool ViewerDrawSurfaceModel { get; set; } = true;
         public bool ViewerDrawModels { get; set; } = true;

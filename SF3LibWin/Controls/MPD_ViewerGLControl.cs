@@ -10,10 +10,6 @@ namespace SF3.Win.Controls {
         public MPD_ViewerGLControl() {
             InitializeComponent();
 
-            // Horrible hack to make this work in Design mode.
-            if (!AppState.Initialized())
-                return;
-
             _timer = new Timer() { Interval = 1000 / 60 };
             _timer.Tick += (s, a) => IncrementFrame();
             Disposed += (s, a) => {
