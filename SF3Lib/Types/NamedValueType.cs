@@ -4,7 +4,6 @@ namespace SF3.Types {
     /// </summary>
     public enum NamedValueType {
         Character,
-        CharacterPlus,
         CharacterClass,
         Droprate,
         EffectiveType,

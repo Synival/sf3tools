@@ -198,9 +198,12 @@ namespace SF3.Models.Structs.X1.Battle {
             set => Data.SetWord(_eventCallAddr, value);
         }
 
+        public NamedValueType? CharacterPlusType
+            => (EnemyID == 0x5B) ? NamedValueType.Character : (NamedValueType?) null;
+
         [TableViewModelColumn(displayOrder: 7, displayFormat: "X2", displayGroup: "Page1")]
         [BulkCopy]
-        [NameGetter(NamedValueType.CharacterPlus, nameof(EnemyID))]
+        [NameGetter(NamedValueType.ConditionalType, nameof(CharacterPlusType))]
         public int CharacterPlus {
             get => Data.GetByte(_characterPlusAddr);
             set => Data.SetByte(_characterPlusAddr, (byte) value);

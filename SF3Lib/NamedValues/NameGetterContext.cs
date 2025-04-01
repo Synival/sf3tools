@@ -36,14 +36,6 @@ namespace SF3.NamedValues {
 
             _nameGetters = new Dictionary<NamedValueType, SubMethods>() {
                 { NamedValueType.Character,           new SubMethods((o, p, v, a) => new NameAndInfo(v, ValueNames.CharacterInfo.Info[Scenario])) },
-
-                { NamedValueType.CharacterPlus,
-                    new SubMethods(
-                        (o, p, v, a) => new NameAndInfo(v, ValueNames.CharacterInfo.Info[Scenario]),
-                        (o, p, v, a) => CanGetCharacterPlusValue(o, p, v, a),
-                        (o, p, a)    => CanGetCharacterPlusValue(o, p, 0, a)
-                    ) },
-
                 { NamedValueType.CharacterClass,      new SubMethods((o, p, v, a) => new NameAndInfo(v, ValueNames.CharacterClassInfo)) },
                 { NamedValueType.Droprate,            new SubMethods((o, p, v, a) => new NameAndInfo(v, ValueNames.DroprateInfo)) },
                 { NamedValueType.EffectiveType,       new SubMethods((o, p, v, a) => new NameAndInfo(v, ValueNames.EffectiveTypeInfo)) },
@@ -161,13 +153,6 @@ namespace SF3.NamedValues {
             return _nameGetters[valueType].CanGetInfo(obj, property, parameters);
         }
 
-        public ScenarioType Scenario { get; }
-
-        private bool CanGetCharacterPlusValue(object obj, PropertyInfo property, int value, object[] parameters) {
-            var enemyID = GetReferencedPropertyValueAsIntOrNull(obj, parameters, 1);
-            return enemyID == 0x5B; // magic number indicated "Character Placeholder"
-        }
-
         private (NamedValueType, object[]) GetConditionalTypeAndParameters(object obj, object[] parameters) {
             var type = GetReferencedPropertyValueAsEnumOrNull<NamedValueType>(obj, parameters, 1);
             if (type == null || _nameGetters.ContainsKey(type.Value) == false)
@@ -195,6 +180,7 @@ namespace SF3.NamedValues {
             return args.Item2 == null ? false : _nameGetters[args.Item1].CanGetInfo(obj, property, args.Item2);
         }
 
+        public ScenarioType Scenario { get; }
         public string Name => Scenario.ToString();
     }
 }
