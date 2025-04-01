@@ -30,8 +30,8 @@ namespace SF3.Win.Views.X013 {
                 CreateChild(new TableView("Magic Bonus", Model.MagicBonusTable, ngc));
             if (Model.CritMod != null)
                 CreateChild(new DataModelView("Crit Vantages", Model.CritMod, ngc));
-            if (Model.SpecialChanceTable != null)
-                CreateChild(new TableView("Special Chances", Model.SpecialChanceTable, ngc));
+            if (Model.SpecialChances != null)
+                CreateChild(new DataModelView("Special Chances", Model.SpecialChances, ngc));
             if (Model.ExpLimitTable != null)
                 CreateChild(new TableView("Exp Limit", Model.ExpLimitTable, ngc));
             if (Model.HealExpTable != null)

@@ -175,16 +175,14 @@ namespace SF3.Tests.Models.Files {
         public void SpecialChanceTable_HasExpectedData() {
             TestCase.Run(TestCases, testCase => {
                 var file = testCase.Create();
-                var table = file.SpecialChanceTable;
+                var data = file.SpecialChances;
 
-                Assert.AreEqual(59, table[0].TwoSpecials2);
-                Assert.AreEqual(69, table[0].ThreeSpecials2);
-                Assert.AreEqual(39, table[0].ThreeSpecials3);
-                Assert.AreEqual(79, table[0].FourSpecials2);
-                Assert.AreEqual(59, table[0].FourSpecials3);
-                Assert.AreEqual(34, table[0].FourSpecials4);
-
-                Assert.AreEqual(1, table.Length);
+                Assert.AreEqual(59, data.TwoSpecials2);
+                Assert.AreEqual(69, data.ThreeSpecials2);
+                Assert.AreEqual(39, data.ThreeSpecials3);
+                Assert.AreEqual(79, data.FourSpecials2);
+                Assert.AreEqual(59, data.FourSpecials3);
+                Assert.AreEqual(34, data.FourSpecials4);
             });
         }
 

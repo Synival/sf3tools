@@ -13,7 +13,7 @@ namespace SF3.Models.Files.X013 {
         MagicBonusTable MagicBonusTable { get; }
         CritMod CritMod { get; }
         CritrateTable CritrateTable { get; }
-        SpecialChanceTable SpecialChanceTable { get; }
+        SpecialChances SpecialChances { get; }
         ExpLimitTable ExpLimitTable { get; }
         HealExpTable HealExpTable { get; }
         WeaponSpellRankTable WeaponSpellRankTable { get; }

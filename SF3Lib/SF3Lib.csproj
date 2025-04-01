@@ -219,9 +219,6 @@
     <Content Include="Resources\SoulmateList.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\SpecialChanceList.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Include="Resources\StatTypes.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

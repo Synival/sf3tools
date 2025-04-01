@@ -141,16 +141,16 @@ namespace SF3.Models.Files.X013 {
                 (SoulmateTable        = SoulmateTable.Create       (Data, "Soulmate",         ResourceFile("SoulmateList.xml"), soulmateAddress)),
                 (MagicBonusTable      = MagicBonusTable.Create     (Data, "MagicBonuses",     ResourceFileForScenario(Scenario, "MagicBonus.xml"), magicBonusAddress, Scenario == ScenarioType.Scenario1)),
                 (CritrateTable        = CritrateTable.Create       (Data, "CritRates",        ResourceFile("CritrateList.xml"), critrateAddress)),
-                (SpecialChanceTable   = SpecialChanceTable.Create  (Data, "SpecialChances",   ResourceFile("SpecialChanceList.xml"), specialChanceAddress, Scenario <= ScenarioType.Scenario2)),
                 (ExpLimitTable        = ExpLimitTable.Create       (Data, "ExpLimit",         ResourceFile("ExpLimitList.xml"), expLimitAddress)),
                 (HealExpTable         = HealExpTable.Create        (Data, "HealExp",          ResourceFile("HealExpList.xml"), healExpAddress)),
                 (WeaponSpellRankTable = WeaponSpellRankTable.Create(Data, "WeaponSpellRanks", ResourceFile("WeaponSpellRankList.xml"), weaponSpellRankAddress)),
                 (StatusEffectTable    = StatusEffectTable.Create   (Data, "StatusEffects",    ResourceFile("StatusGroupList.xml"), statusEffectAddress)),
             };
 
-            FriendshipExp = new FriendshipExp(Data, 0, "FriendshipExp", friendshipExpAddress);
-            SoulFail      = new SoulFail     (Data, 0, "SoulFail",      soulFailAddress);
-            CritMod       = new CritMod      (Data, 0, "CritMod",       critModAddress);
+            FriendshipExp  = new FriendshipExp (Data, 0, "FriendshipExp",  friendshipExpAddress);
+            SoulFail       = new SoulFail      (Data, 0, "SoulFail",       soulFailAddress);
+            CritMod        = new CritMod       (Data, 0, "CritMod",        critModAddress);
+            SpecialChances = new SpecialChances(Data, 0, "SpecialChances", specialChanceAddress, Scenario <= ScenarioType.Scenario2);
 
             if (specialEffectAddress >= 0)
                 tables.Add(SpecialEffectTable = SpecialEffectTable.Create(Data, "SpecialEffects", ResourceFile("SpecialEffects.xml"), specialEffectAddress));
@@ -179,7 +179,7 @@ namespace SF3.Models.Files.X013 {
         [BulkCopyRecurse]
         public CritrateTable CritrateTable { get; private set; }
         [BulkCopyRecurse]
-        public SpecialChanceTable SpecialChanceTable { get; private set; }
+        public SpecialChances SpecialChances { get; private set; }
         [BulkCopyRecurse]
         public ExpLimitTable ExpLimitTable { get; private set; }
         [BulkCopyRecurse]
