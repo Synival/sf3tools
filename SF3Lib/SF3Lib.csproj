@@ -219,9 +219,6 @@
     <Content Include="Resources\S3\Monsters.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\Soulfail.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Include="Resources\SoulmateList.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

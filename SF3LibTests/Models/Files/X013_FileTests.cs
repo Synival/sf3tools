@@ -151,11 +151,8 @@ namespace SF3.Tests.Models.Files {
         public void SoulfailTable_HasExpectedData() {
             TestCase.Run(TestCases, testCase => {
                 var file = testCase.Create();
-                var table = file.SoulfailTable;
-
-                Assert.AreEqual(246, table[0].ExpLost);
-
-                Assert.AreEqual(1, table.Length);
+                var data = file.SoulFail;
+                Assert.AreEqual(246, data.ExpLost);
             });
         }
 

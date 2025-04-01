@@ -19,13 +19,13 @@ namespace SF3.Win.Views.X013 {
             if (Model.FriendshipExp != null)
                 CreateChild(new DataModelView("Friendship Exp", Model.FriendshipExp, ngc));
             if (Model.SupportTypeTable != null)
-                CreateChild(new TableView("Support Types", Model.SupportTypeTable, ngc));
+                CreateChild(new TableView("Friendship Support Types", Model.SupportTypeTable, ngc));
             if (Model.SupportStatsTable != null)
                 CreateChild(new TableView("Support Stats", Model.SupportStatsTable, ngc));
             if (Model.SoulmateTable != null)
                 CreateChild(new TableView("Soulmate Chances", Model.SoulmateTable, ngc));
-            if (Model.SoulfailTable != null)
-                CreateChild(new TableView("Soulmate Chance Fail", Model.SoulfailTable, ngc));
+            if (Model.SoulFail != null)
+                CreateChild(new DataModelView("Soulmate Chance Fail", Model.SoulFail, ngc));
             if (Model.MagicBonusTable != null)
                 CreateChild(new TableView("Magic Bonus", Model.MagicBonusTable, ngc));
             if (Model.CritModTable != null)

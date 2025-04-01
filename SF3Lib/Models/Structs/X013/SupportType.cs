@@ -13,6 +13,7 @@ namespace SF3.Models.Structs.X013 {
             supportB = Address + 1; // 1 byte
         }
 
+        [TableViewModelColumn(displayOrder: 0, minWidth: 150)]
         [BulkCopy]
         [NameGetter(NamedValueType.FriendshipBonusType)]
         public int SupportA {
@@ -20,6 +21,7 @@ namespace SF3.Models.Structs.X013 {
             set => Data.SetByte(supportA, (byte) value);
         }
 
+        [TableViewModelColumn(displayOrder: 1, minWidth: 150)]
         [BulkCopy]
         [NameGetter(NamedValueType.FriendshipBonusType)]
         public int SupportB {

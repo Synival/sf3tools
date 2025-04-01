@@ -10,6 +10,7 @@ namespace SF3.Models.Structs.X013 {
             chance = Address; // 2 bytes
         }
 
+        [TableViewModelColumn(displayOrder: 0)]
         [BulkCopy]
         public int Chance {
             get => Data.GetByte(chance);

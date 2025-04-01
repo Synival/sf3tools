@@ -9,7 +9,7 @@ namespace SF3.Models.Files.X013 {
         FriendshipExp FriendshipExp { get; }
         SupportStatsTable SupportStatsTable { get; }
         SoulmateTable SoulmateTable { get; }
-        SoulfailTable SoulfailTable { get; }
+        Soulfail SoulFail { get; }
         MagicBonusTable MagicBonusTable { get; }
         CritModTable CritModTable { get; }
         CritrateTable CritrateTable { get; }

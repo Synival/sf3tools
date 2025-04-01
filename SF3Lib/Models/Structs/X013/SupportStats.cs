@@ -16,24 +16,28 @@ namespace SF3.Models.Structs.X013 {
             sLvlStat4 = Address + 3; // 1 byte
         }
 
+        [TableViewModelColumn(displayOrder: 0)]
         [BulkCopy]
         public int SLvlStat1 {
             get => Data.GetByte(sLvlStat1);
             set => Data.SetByte(sLvlStat1, (byte) value);
         }
 
+        [TableViewModelColumn(displayOrder: 1)]
         [BulkCopy]
         public int SLvlStat2 {
             get => Data.GetByte(sLvlStat2);
             set => Data.SetByte(sLvlStat2, (byte) value);
         }
 
+        [TableViewModelColumn(displayOrder: 2)]
         [BulkCopy]
         public int SLvlStat3 {
             get => Data.GetByte(sLvlStat3);
             set => Data.SetByte(sLvlStat3, (byte) value);
         }
 
+        [TableViewModelColumn(displayOrder: 3)]
         [BulkCopy]
         public int SLvlStat4 {
             get => Data.GetByte(sLvlStat4);
