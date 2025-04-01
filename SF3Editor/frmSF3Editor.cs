@@ -339,11 +339,13 @@ namespace SF3Editor {
                 return;
 
             var hasFile = file != null;
-            tsmiFile_Save.Enabled      = hasFile;
-            tsmiFile_SaveAs.Enabled    = hasFile;
-            tsmiFile_ApplyDFR.Enabled  = hasFile;
-            tsmiFile_CreateDFR.Enabled = hasFile;
-            tsmiFile_Close.Enabled     = hasFile;
+            tsmiFile_Save.Enabled         = hasFile;
+            tsmiFile_SaveAs.Enabled       = hasFile;
+            tsmiFile_Close.Enabled        = hasFile;
+            tsmiTools_ApplyDFR.Enabled    = hasFile;
+            tsmiTools_CreateDFR.Enabled   = hasFile;
+            tsmiTools_ImportTable.Enabled = hasFile;
+            tsmiTools_ExportTable.Enabled = hasFile;
 
             _selectedFile = file;
             Text = file == null ? _versionTitle : file.Loader.ModelTitle(_versionTitle);
@@ -447,15 +449,20 @@ namespace SF3Editor {
                 _ = CloseFile(_selectedFile);
         }
 
-        private void tsmiFile_ApplyDFR_Click(object sender, EventArgs e) {
+        private void tsmiTools_ApplyDFR_Click(object sender, EventArgs e) {
             if (_selectedFile != null)
                 ApplyDFRDialog(_selectedFile);
         }
 
-        private void tsmiFile_CreateDFR_Click(object sender, EventArgs e) {
+        private void tsmiTools_CreateDFR_Click(object sender, EventArgs e) {
             if (_selectedFile != null)
                 CreateDFRDialog(_selectedFile);
         }
+
+        private void tsmiTools_ImportTable_Click(object sender, EventArgs e)
+            => InfoMessage("Not yet implemented - sorry!");
+        private void tsmiTools_ExportTable_Click(object sender, EventArgs e)
+            => InfoMessage("Not yet implemented - sorry!");
 
         private void tsmiFile_Exit_Click(object sender, EventArgs e) => Close();
 
