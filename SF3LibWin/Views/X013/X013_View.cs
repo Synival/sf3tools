@@ -18,16 +18,10 @@ namespace SF3.Win.Views.X013 {
                 CreateChild(new TableView("Special Effects (Scn3+)", Model.SpecialEffectTable, ngc));
             if (Model.FriendshipExp != null)
                 CreateChild(new DataModelView("Friendship Exp", Model.FriendshipExp, ngc));
-            if (Model.SupportTypeTable != null)
-                CreateChild(new TableView("Friendship Support Types", Model.SupportTypeTable, ngc));
-            if (Model.SupportStatsTable != null)
-                CreateChild(new TableView("Support Stats", Model.SupportStatsTable, ngc));
             if (Model.SoulmateTable != null)
                 CreateChild(new TableView("Soulmate Chances", Model.SoulmateTable, ngc));
             if (Model.SoulFail != null)
-                CreateChild(new DataModelView("Soulmate Chance Fail", Model.SoulFail, ngc));
-            if (Model.MagicBonusTable != null)
-                CreateChild(new TableView("Magic Bonus", Model.MagicBonusTable, ngc));
+                CreateChild(new DataModelView("Soulmate Chance Fail Exp Loss", Model.SoulFail, ngc));
             if (Model.CritMod != null)
                 CreateChild(new DataModelView("Crit Vantages", Model.CritMod, ngc));
             if (Model.SpecialChances != null)
@@ -36,10 +30,18 @@ namespace SF3.Win.Views.X013 {
                 CreateChild(new DataModelView("Exp Limit", Model.ExpLimit, ngc));
             if (Model.HealExp != null)
                 CreateChild(new DataModelView("Heal Exp", Model.HealExp, ngc));
+            if (Model.SupportTypeTable != null)
+                CreateChild(new TableView("Friendship Support Types", Model.SupportTypeTable, ngc));
+            if (Model.SupportStatsTable != null)
+                CreateChild(new TableView("Support Stats", Model.SupportStatsTable, ngc));
+            if (Model.MagicBonusTable != null)
+                CreateChild(new TableView("Magic Bonuses", Model.MagicBonusTable, ngc));
+            if (Model.CritrateTable != null)
+                CreateChild(new TableView("Crit/Count Rates", Model.CritrateTable, ngc));
             if (Model.WeaponSpellRankTable != null)
-                CreateChild(new TableView("Weapon Spell Ranks", Model.WeaponSpellRankTable, ngc));
+                CreateChild(new TableView("Weapon Rank Magic Bonuses", Model.WeaponSpellRankTable, ngc));
             if (Model.StatusEffectTable != null)
-                CreateChild(new TableView("Status Effects", Model.StatusEffectTable, ngc));
+                CreateChild(new TableView("Status Effect Chances", Model.StatusEffectTable, ngc));
 
             return Control;
         }
