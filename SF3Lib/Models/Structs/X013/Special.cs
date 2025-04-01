@@ -45,13 +45,12 @@ namespace SF3.Models.Structs.X013 {
             set => Data.SetByte(pow, (byte) value);
         }
 
+        // Function used for low RNG damage rolls
         private int lowerRngFunc(int randomNumber) {
             int r1, r2, r3, machh;
 
             r1 = Data.GetByte(extraPow);
-            ;
             r1 -= Data.GetByte(damageCalculation);
-            ;
             r3 = randomNumber;
 
             machh = r1 * r3;
@@ -81,15 +80,7 @@ namespace SF3.Models.Structs.X013 {
             return r1;
         }
 
-        public int ranResult0 => DamageCalc == 100 ? Pow : lowerRngFunc(0);
-        public int ranResult1 => DamageCalc == 100 ? Pow : lowerRngFunc(1);
-        public int ranResult2 => DamageCalc == 100 ? Pow : lowerRngFunc(2);
-        public int ranResult3 => DamageCalc == 100 ? Pow : lowerRngFunc(3);
-        public int ranResult4 => DamageCalc == 100 ? Pow : lowerRngFunc(4);
-        public int ranResult5 => DamageCalc == 100 ? Pow : lowerRngFunc(5);
-        public int ranResult6 => DamageCalc == 100 ? Pow : lowerRngFunc(6);
-        public int ranResult7 => DamageCalc == 100 ? Pow : lowerRngFunc(7);
-
+        // Function used for high RNG damage rolls
         private int upperRngFunc(int randomNumber) {
             int r1, r2, r3, machh;
 
@@ -118,12 +109,23 @@ namespace SF3.Models.Structs.X013 {
             return r1;
         }
 
-        public int ranResult8 => DamageCalc == 100 ? Pow : upperRngFunc(8);
-        public int ranResult9 => DamageCalc == 100 ? Pow : upperRngFunc(9);
-        public int ranResult10 => DamageCalc == 100 ? Pow : upperRngFunc(10);
-        public int ranResult11 => DamageCalc == 100 ? Pow : upperRngFunc(11);
-        public int ranResult12 => DamageCalc == 100 ? Pow : upperRngFunc(12);
-        public int ranResult13 => DamageCalc == 100 ? Pow : upperRngFunc(13);
-        public int ranResult14 => DamageCalc == 100 ? Pow : upperRngFunc(14);
+        public int DamageRoll(int rng)
+            => (DamageCalc == 100) ? Pow : ((rng < 8) ? lowerRngFunc(rng) : upperRngFunc(rng));
+
+        public int DamageRoll0 => DamageRoll(0);
+        public int DamageRoll1 => DamageRoll(1);
+        public int DamageRoll2 => DamageRoll(2);
+        public int DamageRoll3 => DamageRoll(3);
+        public int DamageRoll4 => DamageRoll(4);
+        public int DamageRoll5 => DamageRoll(5);
+        public int DamageRoll6 => DamageRoll(6);
+        public int DamageRoll7 => DamageRoll(7);
+        public int DamageRoll8 => DamageRoll(8);
+        public int DamageRoll9 => DamageRoll(9);
+        public int DamageRoll10 => DamageRoll(10);
+        public int DamageRoll11 => DamageRoll(11);
+        public int DamageRoll12 => DamageRoll(12);
+        public int DamageRoll13 => DamageRoll(13);
+        public int DamageRoll14 => DamageRoll(14);
     }
 }
