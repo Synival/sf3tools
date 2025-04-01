@@ -32,10 +32,10 @@ namespace SF3.Win.Views.X013 {
                 CreateChild(new DataModelView("Crit Vantages", Model.CritMod, ngc));
             if (Model.SpecialChances != null)
                 CreateChild(new DataModelView("Special Chances", Model.SpecialChances, ngc));
-            if (Model.ExpLimitTable != null)
-                CreateChild(new TableView("Exp Limit", Model.ExpLimitTable, ngc));
-            if (Model.HealExpTable != null)
-                CreateChild(new TableView("Heal Exp", Model.HealExpTable, ngc));
+            if (Model.ExpLimit != null)
+                CreateChild(new DataModelView("Exp Limit", Model.ExpLimit, ngc));
+            if (Model.HealExp != null)
+                CreateChild(new DataModelView("Heal Exp", Model.HealExp, ngc));
             if (Model.WeaponSpellRankTable != null)
                 CreateChild(new TableView("Weapon Spell Ranks", Model.WeaponSpellRankTable, ngc));
             if (Model.StatusEffectTable != null)

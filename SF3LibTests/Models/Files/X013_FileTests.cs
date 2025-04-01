@@ -73,12 +73,10 @@ namespace SF3.Tests.Models.Files {
         public void ExpLimitTable_HasExpectedData() {
             TestCase.Run(TestCases, testCase => {
                 var file = testCase.Create();
-                var table = file.ExpLimitTable;
+                var data = file.ExpLimit;
 
-                Assert.AreEqual(49, table[0].ExpCheck);
-                Assert.AreEqual(49, table[0].ExpReplacement);
-
-                Assert.AreEqual(1, table.Length);
+                Assert.AreEqual(49, data.ExpCheck);
+                Assert.AreEqual(49, data.ExpReplacement);
             });
         }
 
@@ -100,11 +98,9 @@ namespace SF3.Tests.Models.Files {
         public void HealExpTable_HasExpectedData() {
             TestCase.Run(TestCases, testCase => {
                 var file = testCase.Create();
-                var table = file.HealExpTable;
+                var data = file.HealExp;
 
-                Assert.AreEqual(10, table[0].HealBonus);
-
-                Assert.AreEqual(1, table.Length);
+                Assert.AreEqual(10, data.HealBonus);
             });
         }
 

@@ -186,12 +186,10 @@ namespace SF3.Tests.Models.Files {
         public void AttackResistTable_HasExpectedData() {
             TestCase.Run(TestCases, testCase => {
                 var file = testCase.Create();
-                var table = file.AttackResistTable;
+                var data = file.AttackResist;
 
-                Assert.AreEqual(15, table[0].Attack);
-                Assert.AreEqual(30, table[0].Resist);
-
-                Assert.AreEqual(1, table.Length);
+                Assert.AreEqual(15, data.Attack);
+                Assert.AreEqual(30, data.Resist);
             });
         }
 

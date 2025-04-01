@@ -26,8 +26,8 @@ namespace SF3.Win.Views.X002 {
                 CreateChild(new TableView("Stat Boosts", Model.StatBoostTable, ngc));
             if (Model.WeaponRankTable != null)
                 CreateChild(new TableView("Weapon Rank Attack", Model.WeaponRankTable, ngc));
-            if (Model.AttackResistTable != null)
-                CreateChild(new TableView("Attack/Resist", Model.AttackResistTable, ngc));
+            if (Model.AttackResist != null)
+                CreateChild(new DataModelView("Attack/Resist", Model.AttackResist, ngc));
             if (Model.WarpTable != null)
                 CreateChild(new TableView("Warps (Scn1)", Model.WarpTable, ngc));
 

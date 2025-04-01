@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using CommonLib.Attributes;
 using CommonLib.NamedValues;
 using SF3.ByteData;
+using SF3.Models.Structs.X033_X031;
 using SF3.Models.Tables;
 using SF3.Models.Tables.X033_X031;
 using SF3.Types;
-using static CommonLib.Utils.ResourceUtils;
 using static SF3.Utils.ResourceUtils;
 
 namespace SF3.Models.Files.X033_X031 {
@@ -69,15 +69,16 @@ namespace SF3.Models.Files.X033_X031 {
                     throw new ArgumentException(nameof(Scenario));
             }
 
+            WeaponLevelExp = new WeaponLevel(Data, 0, "WeaponLevelExp", weaponLevelAddress);
+
             return new List<ITable>() {
-                (WeaponLevelTable = WeaponLevelTable.Create(Data, "WeaponLevels", ResourceFile("WeaponLevel.xml"), weaponLevelAddress)),
                 (StatsTable       = StatsTable.Create      (Data, "Stats",        ResourceFileForScenario(Scenario, "ClassList.xml"), statsAddress)),
                 (InitialInfoTable = InitialInfoTable.Create(Data, "InitialStats", ResourceFileForScenario(Scenario, "ClassEquip.xml"), initialInfoAddress)),
             };
         }
 
         [BulkCopyRecurse]
-        public WeaponLevelTable WeaponLevelTable { get; private set; }
+        public WeaponLevel WeaponLevelExp { get; private set; }
 
         [BulkCopyRecurse]
         public StatsTable StatsTable { get; private set; }

@@ -14,8 +14,8 @@ namespace SF3.Models.Files.X013 {
         CritMod CritMod { get; }
         CritrateTable CritrateTable { get; }
         SpecialChances SpecialChances { get; }
-        ExpLimitTable ExpLimitTable { get; }
-        HealExpTable HealExpTable { get; }
+        ExpLimit ExpLimit { get; }
+        HealExp HealExp { get; }
         WeaponSpellRankTable WeaponSpellRankTable { get; }
         StatusEffectTable StatusEffectTable { get; }
     }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using CommonLib.Attributes;
 using CommonLib.NamedValues;
 using SF3.ByteData;
+using SF3.Models.Structs.X002;
 using SF3.Models.Tables;
 using SF3.Models.Tables.Shared;
 using SF3.Models.Tables.X002;
@@ -90,8 +91,9 @@ namespace SF3.Models.Files.X002 {
                     throw new ArgumentException(nameof(Scenario));
             }
 
+            AttackResist = new AttackResist(Data, 0, "AttackResist", attackResistAddress);
+
             var tables = new List<ITable>() {
-                (AttackResistTable   = AttackResistTable.Create  (Data, "AttackResist",    ResourceFile("AttackResistList.xml"), attackResistAddress)),
                 (ItemTable           = ItemTable.Create          (Data, "Items",           ResourceFileForScenario(Scenario, "Items.xml"), itemAddress)),
                 (LoadedOverrideTable = LoadedOverrideTable.Create(Data, "LoadedOverrides", ResourceFileForScenario(Scenario, "LoadedOverrideList.xml"), loadedOverrideAddress)),
                 (LoadingTable        = LoadingTable.Create       (Data, "Loading",         ResourceFileForScenario(Scenario, "LoadList.xml"), loadingAddress)),
@@ -108,7 +110,7 @@ namespace SF3.Models.Files.X002 {
         }
 
         [BulkCopyRecurse]
-        public AttackResistTable AttackResistTable { get; private set; }
+        public AttackResist AttackResist { get; private set; }
         [BulkCopyRecurse]
         public ItemTable ItemTable { get; private set; }
         [BulkCopyRecurse]

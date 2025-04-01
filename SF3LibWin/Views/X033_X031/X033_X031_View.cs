@@ -19,8 +19,8 @@ namespace SF3.Win.Views.X033_X031 {
             }
             if (Model.InitialInfoTable != null)
                 CreateChild(new TableView("Initial Info", Model.InitialInfoTable, ngc));
-            if (Model.WeaponLevelTable != null)
-                CreateChild(new TableView("Weapon Level Exp", Model.WeaponLevelTable, ngc));
+            if (Model.WeaponLevelExp != null)
+                CreateChild(new DataModelView("Weapon Level Exp", Model.WeaponLevelExp, ngc));
             if (Model.StatsTable != null)
                 CreateChild(new TableView("Curve Calc", Model.StatsTable, ngc, displayGroups: ["Metadata", "CurveGraph"]));
 

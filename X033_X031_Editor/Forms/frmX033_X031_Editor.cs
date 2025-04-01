@@ -38,7 +38,6 @@ namespace SF3.X033_X031_Editor.Forms {
                 new PopulateOLVTabConfig(tabEquipStatistics, olvEquipStatistics, File.StatsTable),
                 new PopulateOLVTabConfig(tabMiscellaneous, olvMiscellaneous, File.StatsTable),
                 new PopulateOLVTabConfig(tabInitialInfo, olvInitialInfo, File.InitialInfoTable),
-                new PopulateOLVTabConfig(tabWeaponLevelReq, olvWeaponLevelReq, File.WeaponLevelTable),
                 new PopulateOLVTabConfig(tabCurveCalc, olvCurveCalc, File.StatsTable)
             })) {
                 return false;

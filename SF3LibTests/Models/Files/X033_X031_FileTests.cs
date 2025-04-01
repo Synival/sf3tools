@@ -97,12 +97,11 @@ namespace SF3.Tests.Models.Files {
             TestCase.Run(TestCases, testCase => {
                 var file = testCase.Create();
 
-                Assert.AreEqual(70, file.WeaponLevelTable[0].WLevel1);
-                Assert.AreEqual(150, file.WeaponLevelTable[0].WLevel2);
-                Assert.AreEqual(250, file.WeaponLevelTable[0].WLevel3);
-                Assert.AreEqual(9999, file.WeaponLevelTable[0].WLevel4);
-
-                Assert.AreEqual(1, file.WeaponLevelTable.Length);
+                var data = file.WeaponLevelExp;
+                Assert.AreEqual(  70, data.WLevel1);
+                Assert.AreEqual( 150, data.WLevel2);
+                Assert.AreEqual( 250, data.WLevel3);
+                Assert.AreEqual(9999, data.WLevel4);
             });
         }
     }
