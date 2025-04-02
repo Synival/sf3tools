@@ -71,8 +71,16 @@ namespace SF3.Utils {
                         return SF3FileType.X013;
                     case "X014.BIN":
                         return SF3FileType.X014;
-                    case "X019.BIN":
-                        return SF3FileType.X019;
+
+                    case "X019.BIN;X044.BIN": {
+                        if (filename == "X019.BIN")
+                            return SF3FileType.X019;
+                        else if (filename == "X044.BIN")
+                            return SF3FileType.X044;
+                        else
+                            break;
+                    }
+
                     case "X031.BIN":
                         return SF3FileType.X031;
                     case "X033.BIN":
@@ -115,6 +123,8 @@ namespace SF3.Utils {
                     return SF3FileType.X031;
                 else if (preExtension.Contains("X033"))
                     return SF3FileType.X033;
+                else if (preExtension.Contains("X044"))
+                    return SF3FileType.X044;
             }
 
             // Couldn't figure it out; it's unknown.
@@ -211,6 +221,7 @@ namespace SF3.Utils {
                 case SF3FileType.X014:
                     return X014_File.Create(byteData, ngc, scenario);
                 case SF3FileType.X019:
+                case SF3FileType.X044:
                     return X019_File.Create(byteData, ngc, scenario);
                 case SF3FileType.X031:
                 case SF3FileType.X033:

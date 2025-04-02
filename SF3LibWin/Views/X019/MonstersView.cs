@@ -16,11 +16,14 @@ namespace SF3.Win.Views.X019 {
             if (base.Create() == null)
                 return null;
 
-            CreateChild(new TableView("Page 1", Model, NameGetterContext, displayGroups: ["Metadata", "Page1"]));
-            CreateChild(new TableView("Page 2", Model, NameGetterContext, displayGroups: ["Metadata", "Page2"]));
-            CreateChild(new TableView("Page 3", Model, NameGetterContext, displayGroups: ["Metadata", "Page3"]));
-            CreateChild(new TableView("Page 4", Model, NameGetterContext, displayGroups: ["Metadata", "Page4"]));
-            CreateChild(new TableView("Page 5", Model, NameGetterContext, displayGroups: ["Metadata", "Page5"]));
+            CreateChild(new TableView("Stats (1/2)",  Model, NameGetterContext, displayGroups: ["Metadata", "Stats1"]));
+            CreateChild(new TableView("Stats (2/2)",  Model, NameGetterContext, displayGroups: ["Metadata", "Stats2"]));
+            CreateChild(new TableView("Magic Res",    Model, NameGetterContext, displayGroups: ["Metadata", "MagicRes"]));
+            CreateChild(new TableView("Spells",       Model, NameGetterContext, displayGroups: ["Metadata", "Spells"]));
+            CreateChild(new TableView("Eq / Items",   Model, NameGetterContext, displayGroups: ["Metadata", "Items"]));
+            CreateChild(new TableView("Specials",     Model, NameGetterContext, displayGroups: ["Metadata", "Specials"]));
+            CreateChild(new TableView("(Unknowns 1)", Model, NameGetterContext, displayGroups: ["Metadata", "Unknown"]));
+            CreateChild(new TableView("(Unknowns 2)", Model, NameGetterContext, displayGroups: ["Metadata", "LastPage"]));
 
             return Control;
         }

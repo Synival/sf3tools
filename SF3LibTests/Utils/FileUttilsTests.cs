@@ -16,6 +16,7 @@ namespace SF3.Tests.Utils {
             { "X019.BIN",    SF3FileType.X019 },
             { "X031.BIN",    SF3FileType.X031 },
             { "X033.BIN",    SF3FileType.X033 },
+            { "X044.BIN",    SF3FileType.X044 },
             { "FOO.MPD",     SF3FileType.MPD },
         };
 
@@ -27,7 +28,6 @@ namespace SF3.Tests.Utils {
             { "X012.BIN",    SF3FileType.X012 },
             { "X013.BIN",    SF3FileType.X013 },
             { "X014.BIN",    SF3FileType.X014 },
-            { "X019.BIN",    SF3FileType.X019 },
             { "X031.BIN",    SF3FileType.X031 },
             { "X033.BIN",    SF3FileType.X033 },
             { "*.MPD",       SF3FileType.MPD },

@@ -23,7 +23,7 @@ namespace SF3Editor {
             .ToDictionary(x => x, x => (INameGetterContext) new NameGetterContext(x));
 
         private readonly string FileDialogFilter =
-            "All Supported Files|X1*.BIN;X002.BIN;X005.BIN;X011.BIN;X012.BIN;X013.BIN;X014.BIN;X019.BIN;X021.BIN;X026.BIN;X031.BIN;X033.BIN;*.MPD"
+            "All Supported Files|X1*.BIN;X002.BIN;X005.BIN;X011.BIN;X012.BIN;X013.BIN;X014.BIN;X019.BIN;X021.BIN;X026.BIN;X031.BIN;X033.BIN;X044.BIN;*.MPD"
             + "|IconPointer Files (X011.BIN;X021.BIN;X026.BIN)|X011.BIN;X021.BIN;X026.BIN"
             + "|X1 Files (X1*.BIN)|X1*.BIN"
             + "|X1BTL99 File (X1BTL99.BIN)|X1BTL99.BIN"
@@ -32,7 +32,7 @@ namespace SF3Editor {
             + "|X012 File (X013.BIN)|X012.BIN"
             + "|X013 File (X013.BIN)|X013.BIN"
             + "|X014 File (X014.BIN)|X014.BIN"
-            + "|X019 File (X019.BIN)|X019.BIN"
+            + "|Monster Files (X019.BIN;X044.BIN)|X019.BIN;X044.BIN"
             + "|X031 File (X031.BIN)|X031.BIN"
             + "|X033 File (X033.BIN)|X033.BIN"
             + "|MPD Files (*.MPD)|*.MPD"

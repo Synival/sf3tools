@@ -13,6 +13,7 @@ namespace SF3.Types {
         X026,
         X031,
         X033,
+        X044,
         MPD
     }
 }
