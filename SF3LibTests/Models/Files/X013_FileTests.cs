@@ -35,13 +35,28 @@ namespace SF3.Tests.Models.Files {
         ];
 
         [TestMethod]
-        public void CritModTable_HasExpectedData() {
+        public void SignificantValues_HasExpectedData() {
             TestCase.Run(TestCases, testCase => {
                 var file = testCase.Create();
-                var data = file.CritMod;
+                var data = file.SignificantValues;
 
-                Assert.AreEqual(20, data.Advantage);
-                Assert.AreEqual(-20, data.Disadvantage);
+                Assert.AreEqual( 20, data.AttackAdvantageCritMod);
+                Assert.AreEqual(-20, data.AttackDisadvantageCritMod);
+                Assert.AreEqual( 49, data.MaxExpCheckedValue);
+                Assert.AreEqual( 49, data.MaxExpReplacementValue);
+                Assert.AreEqual(  0, data.FriendshipExp_Lvl0_Ally);
+                Assert.AreEqual( 10, data.FriendshipExp_Lvl1_Partner);
+                Assert.AreEqual( 20, data.FriendshipExp_Lvl2_Friend);
+                Assert.AreEqual( 30, data.FriendshipExp_Lvl3_Trusted);
+                Assert.AreEqual( 45, data.FriendshipExp_Lvl4_Soulmate);
+                Assert.AreEqual( 10, data.HealBonusExp);
+                Assert.AreEqual(-10, data.SoulmateFailExpMod);
+                Assert.AreEqual( 59, data.SpecialChances2Specials2);
+                Assert.AreEqual( 69, data.SpecialChances3Specials2);
+                Assert.AreEqual( 39, data.SpecialChances3Specials3);
+                Assert.AreEqual( 79, data.SpecialChances4Specials2);
+                Assert.AreEqual( 59, data.SpecialChances4Specials3);
+                Assert.AreEqual( 34, data.SpecialChances4Specials4);
             });
         }
 
@@ -66,41 +81,6 @@ namespace SF3.Tests.Models.Files {
                 Assert.AreEqual(0, table[1].FiveSpecial);
 
                 Assert.AreEqual(2, table.Length);
-            });
-        }
-
-        [TestMethod]
-        public void ExpLimitTable_HasExpectedData() {
-            TestCase.Run(TestCases, testCase => {
-                var file = testCase.Create();
-                var data = file.ExpLimit;
-
-                Assert.AreEqual(49, data.ExpCheck);
-                Assert.AreEqual(49, data.ExpReplacement);
-            });
-        }
-
-        [TestMethod]
-        public void FriendshipExpTable_HasExpectedData() {
-            TestCase.Run(TestCases, testCase => {
-                var file = testCase.Create();
-                var data = file.FriendshipExp;
-
-                Assert.AreEqual(0, data.SLvl0_Ally);
-                Assert.AreEqual(10, data.SLvl1_Partner);
-                Assert.AreEqual(20, data.SLvl2_Friend);
-                Assert.AreEqual(30, data.SLvl3_Trusted);
-                Assert.AreEqual(45, data.SLvl4_Soulmate);
-            });
-        }
-
-        [TestMethod]
-        public void HealExpTable_HasExpectedData() {
-            TestCase.Run(TestCases, testCase => {
-                var file = testCase.Create();
-                var data = file.HealExp;
-
-                Assert.AreEqual(10, data.HealBonus);
             });
         }
 
@@ -142,15 +122,6 @@ namespace SF3.Tests.Models.Files {
         }
 
         [TestMethod]
-        public void SoulFail_HasExpectedData() {
-            TestCase.Run(TestCases, testCase => {
-                var file = testCase.Create();
-                var data = file.SoulFail;
-                Assert.AreEqual(-10, data.ExpLost);
-            });
-        }
-
-        [TestMethod]
         public void SoulmateTable_HasExpectedData() {
             TestCase.Run(TestCases, testCase => {
                 var file = testCase.Create();
@@ -164,21 +135,6 @@ namespace SF3.Tests.Models.Files {
                 Assert.AreEqual(5, table[5].Chance);
 
                 Assert.AreEqual(1770, table.Length);
-            });
-        }
-
-        [TestMethod]
-        public void SpecialChanceTable_HasExpectedData() {
-            TestCase.Run(TestCases, testCase => {
-                var file = testCase.Create();
-                var data = file.SpecialChances;
-
-                Assert.AreEqual(59, data.TwoSpecials2);
-                Assert.AreEqual(69, data.ThreeSpecials2);
-                Assert.AreEqual(39, data.ThreeSpecials3);
-                Assert.AreEqual(79, data.FourSpecials2);
-                Assert.AreEqual(59, data.FourSpecials3);
-                Assert.AreEqual(34, data.FourSpecials4);
             });
         }
 

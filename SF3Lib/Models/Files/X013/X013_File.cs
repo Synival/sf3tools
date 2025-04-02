@@ -148,16 +148,16 @@ namespace SF3.Models.Files.X013 {
             if (specialEffectAddress >= 0)
                 tables.Add(SpecialEffectTable = SpecialEffectTable.Create(Data, "SpecialEffects", ResourceFile("SpecialEffects.xml"), specialEffectAddress));
 
-            FriendshipExp  = new FriendshipExp (Data, 0, "FriendshipExp",  friendshipExpAddress);
-            SoulFail       = new SoulFail      (Data, 0, "SoulFail",       soulFailAddress);
-            CritMod        = new CritMod       (Data, 0, "CritMod",        critModAddress);
-            SpecialChances = new SpecialChances(Data, 0, "SpecialChances", specialChanceAddress, Scenario <= ScenarioType.Scenario2);
-            ExpLimit       = new ExpLimit      (Data, 0, "ExpLimit",       expLimitAddress);
-            HealExp        = new HealExp       (Data, 0, "HealExp",        healExpAddress);
+            SignificantValues = new SignificantValues(Data, 0, "SignificantValues",
+                critModAddress, specialChanceAddress, expLimitAddress, friendshipExpAddress, healExpAddress, soulFailAddress,
+                Scenario <= ScenarioType.Scenario2
+            );
 
             return tables;
         }
 
+        [BulkCopyRecurse]
+        public SignificantValues SignificantValues { get; private set; }
         [BulkCopyRecurse]
         public SpecialTable SpecialsTable { get; private set; }
         [BulkCopyRecurse]
@@ -165,25 +165,13 @@ namespace SF3.Models.Files.X013 {
         [BulkCopyRecurse]
         public SupportTypeTable SupportTypeTable { get; private set; }
         [BulkCopyRecurse]
-        public FriendshipExp FriendshipExp { get; private set; }
-        [BulkCopyRecurse]
         public SupportStatsTable SupportStatsTable { get; private set; }
         [BulkCopyRecurse]
         public SoulmateTable SoulmateTable { get; private set; }
         [BulkCopyRecurse]
-        public SoulFail SoulFail { get; private set; }
-        [BulkCopyRecurse]
         public MagicBonusTable MagicBonusTable { get; private set; }
         [BulkCopyRecurse]
-        public CritMod CritMod { get; private set; }
-        [BulkCopyRecurse]
         public CritrateTable CritrateTable { get; private set; }
-        [BulkCopyRecurse]
-        public SpecialChances SpecialChances { get; private set; }
-        [BulkCopyRecurse]
-        public ExpLimit ExpLimit { get; private set; }
-        [BulkCopyRecurse]
-        public HealExp HealExp { get; private set; }
         [BulkCopyRecurse]
         public WeaponSpellRankTable WeaponSpellRankTable { get; private set; }
         [BulkCopyRecurse]

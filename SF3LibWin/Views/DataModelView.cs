@@ -215,7 +215,7 @@ namespace SF3.Win.Views {
                 if (value != null) {
                     var vm = value.GetType().GetTableViewModel();
                     _modelProperties = vm.Properties
-                        .Where(x => x.Value.DisplayOrder >= 0 || x.Key.Name == "Address")
+                        .Where(x => x.Value.DisplayOrder >= 0 || (x.Key.Name == "Address" && (int) x.Key.GetValue(value) >= 0))
                         .Where(x => x.Value.GetVisibility(value))
                         .Select((x, i) => new ModelProperty(value, x.Key, x.Value, i + 1)).ToList();
                 }
