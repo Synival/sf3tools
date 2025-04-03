@@ -101,6 +101,26 @@ namespace SF3.Win.OpenGL.MPD_File {
                 if (models.CollectionType != ModelCollectionType.Chunk19Model && models.CollectionType != ModelCollectionType.PrimaryModels)
                     continue;
 
+                // There is a function that scans for models with the tag '2000' and forcibly changes all the textures
+                // in their PDATAs to be semi-transparent. Yes, this is redundant to have on the *model* instead of the *PDATA*,
+                // so who knows why it works this way.
+                var modelsWith2000Tag = models.ModelTable
+                    .Where(x => x.Tag == 2000)
+                    .SelectMany(x => x.PDatas)
+                    .Select(x => x.Value)
+                    .Distinct()
+                    .ToHashSet();
+
+                // There are some (usually) bright-red models in Scenario 3 that are removed when
+                // the 3000 tag is present. They're an eyesore, so let's remove them as well.
+                // TODO: make this an option!
+                var modelsWith3000Tag = models.ModelTable
+                    .Where(x => x.Tag == 3000)
+                    .SelectMany(x => x.PDatas)
+                    .Select(x => x.Value)
+                    .Distinct()
+                    .ToHashSet();
+
                 InitDictsForType(models.CollectionType);
                 var pdatasByAddress     = PDatasByAddressByCollection[models.CollectionType];
                 var verticesByAddress   = VerticesByAddressByCollection[models.CollectionType];
@@ -147,15 +167,17 @@ namespace SF3.Win.OpenGL.MPD_File {
                     }
 
                     // Don't render movable models; they're not placed on the map in that way.
-                    if (!models.IsMovableModelCollection)
-                        CreateAndAddQuadModels(mpdFile, models.CollectionType, pdata, texturesById, animationsById);
+                    if (!models.IsMovableModelCollection && !modelsWith3000Tag.Contains(pdata.RamAddress)) {
+                        bool isForcedSemiTransparent = modelsWith2000Tag.Contains(pdata.RamAddress);
+                        CreateAndAddQuadModels(mpdFile, models.CollectionType, pdata, texturesById, animationsById, isForcedSemiTransparent);
+                    }
                 }
             }
 
             Models = modelsList.ToArray();
         }
 
-        public void Update(IMPD_File mpdFile, ModelCollection models, PDataModel pdata) {
+        public void Update(IMPD_File mpdFile, ModelCollection models, PDataModel pdata, bool forceSemiTransparent = false) {
             Reset();
             if (models == null || pdata == null)
                 return;
@@ -170,7 +192,7 @@ namespace SF3.Win.OpenGL.MPD_File {
             var texturesById = GetTexturesByID(mpdFile, texCollection);
             var animationsById = GetAnimationsByID(mpdFile, texCollection);
 
-            CreateAndAddQuadModels(mpdFile, models.CollectionType, pdata, texturesById, animationsById);
+            CreateAndAddQuadModels(mpdFile, models.CollectionType, pdata, texturesById, animationsById, forceSemiTransparent);
 
             var model = new Model(new ByteData.ByteData(new ByteArray(256)), 0, "Model", 0, true, models.CollectionType);
             model.PData0 = pdata.RamAddress;
@@ -199,7 +221,8 @@ namespace SF3.Win.OpenGL.MPD_File {
             ModelCollectionType modelCollection,
             PDataModel pdata,
             Dictionary<int, ITexture> texturesById,
-            Dictionary<int, ModelAnimationInfo> animationsById
+            Dictionary<int, ModelAnimationInfo> animationsById,
+            bool forceSemiTransparent
         ) {
             TextureFlipType ToggleHorizontalFlipping(TextureFlipType flip)
                 => (flip & ~TextureFlipType.Horizontal) | (TextureFlipType) (TextureFlipType.Horizontal - (flip & TextureFlipType.Horizontal));
@@ -242,7 +265,8 @@ namespace SF3.Win.OpenGL.MPD_File {
                 var color = new Vector4(1);
 
                 // Apply semi-transparency for the appropriate draw mode.
-                var isSemiTransparent = attr.Mode_DrawMode == DrawMode.CL_Trans;
+                var isSemiTransparent = attr.Mode_DrawMode == DrawMode.CL_Trans || forceSemiTransparent;
+                var transparency = 0.5f;
 
                 TextureAnimation anim = null;
 
@@ -264,13 +288,20 @@ namespace SF3.Win.OpenGL.MPD_File {
                     if (anim == null)
                         continue;
                     else if (anim.Frames.Length > 0 && anim.Frames[0].PixelFormat == TexturePixelFormat.Palette3) {
-                        var transparency = mpdFile.LightAdjustment != null ? (mpdFile.LightAdjustment.Palette3Transparency & 0x1F) / (float) 0x1F : 0.5f;
-                        color[3] *= 1.0f - transparency;
+                        var lightAdjTransparency = mpdFile.LightAdjustment != null ? (mpdFile.LightAdjustment.Palette3Transparency & 0x1F) / (float) 0x1F : 0.5f;
+                        transparency = 1.0f - transparency;
+                        if (transparency < 1.0f)
+                            isSemiTransparent = true;
                     }
                 }
 
+                // If forcing semi-transparency, and there aren't any already-indexed textures, force color to black.
+                // (This isn't how this actually works, but this is fine for display.)
+                if (forceSemiTransparent && (anim == null || anim.Frames.All(x => x.BytesPerPixel == 2)))
+                    color[0] = color[1] = color[2] = 0.0f;
+
                 if (isSemiTransparent)
-                    color[3] /= 2;
+                    color[3] *= transparency;
 
                 VECTOR[] polyVertexModels = [
                     vertices[polygon.Vertex1].Vector,
