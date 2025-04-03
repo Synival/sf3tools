@@ -5,8 +5,8 @@
         CL_Half   = 2,
         CL_Trans  = 3,
         CL_Gouraud = 4,
-        Invalid_5 = 5,
-        Invalid_6 = 6,
-        Invalid_7 = 7,
+        CL_Invalid = 5,
+        CL_Gouraud_Half = 6,
+        CL_Gouraud_Trans = 7,
     }
 }

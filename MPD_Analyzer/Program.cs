@@ -94,7 +94,9 @@ namespace MPD_Analyzer {
                             var mapFlags = mpdFile.MPDHeader.MapFlags;
 
                             // Condition for match checks here
-                            bool match = HasHighMemoryModels(mpdFile.ModelCollections.FirstOrDefault(x => x.ChunkIndex == 1)) == true;
+                            bool match = mpdFile.ModelCollections
+                                .Any(x => x.AttrTablesByMemoryAddress.Values
+                                .Any(y => y.Any(z => z.CL_Gouraud && z.Mode_DrawMode != DrawMode.CL_Gouraud)));
 
                             var fileStr = GetFileString(scenario, file, mpdFile);
                             Console.Write(fileStr + " | " + (match ? "Match  " : "NoMatch"));

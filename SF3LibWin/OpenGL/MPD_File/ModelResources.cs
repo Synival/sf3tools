@@ -265,8 +265,13 @@ namespace SF3.Win.OpenGL.MPD_File {
                 var color = new Vector4(1);
 
                 // Apply semi-transparency for the appropriate draw mode.
-                var isSemiTransparent = attr.Mode_DrawMode == DrawMode.CL_Trans || forceSemiTransparent;
-                var transparency = 0.5f;
+                var transparency = 1.0f;
+
+                var drawMode = (DrawMode) ((int) attr.Mode_DrawMode & 0x03);
+                if (drawMode == DrawMode.CL_Trans || drawMode == DrawMode.CL_Shadow || forceSemiTransparent)
+                    transparency *= 0.5f;
+                if (attr.Mode_MESHon)
+                    transparency *= 0.5f;
 
                 TextureAnimation anim = null;
 
@@ -289,9 +294,7 @@ namespace SF3.Win.OpenGL.MPD_File {
                         continue;
                     else if (anim.Frames.Length > 0 && anim.Frames[0].PixelFormat == TexturePixelFormat.Palette3) {
                         var lightAdjTransparency = mpdFile.LightAdjustment != null ? (mpdFile.LightAdjustment.Palette3Transparency & 0x1F) / (float) 0x1F : 0.5f;
-                        transparency = 1.0f - transparency;
-                        if (transparency < 1.0f)
-                            isSemiTransparent = true;
+                        transparency *= 1.0f - transparency;
                     }
                 }
 
@@ -300,8 +303,17 @@ namespace SF3.Win.OpenGL.MPD_File {
                 if (forceSemiTransparent && (anim == null || anim.Frames.All(x => x.BytesPerPixel == 2)))
                     color[0] = color[1] = color[2] = 0.0f;
 
-                if (isSemiTransparent)
-                    color[3] *= transparency;
+                color[3] *= transparency;
+                bool isSemiTransparent = color[3] < 0.99f;
+                if (!isSemiTransparent && color[3] < 1.00f)
+                    color[3] = 1.00f;
+
+                // "Half" draw mode darkens textures by 50%.
+                if (drawMode == DrawMode.CL_Half) {
+                    color[0] *= 0.5f;
+                    color[1] *= 0.5f;
+                    color[2] *= 0.5f;
+                }
 
                 VECTOR[] polyVertexModels = [
                     vertices[polygon.Vertex1].Vector,
@@ -318,7 +330,8 @@ namespace SF3.Win.OpenGL.MPD_File {
                 var vertexNormals = new Vector3[] { normal, normal, normal, normal };
                 var normalVboData = vertexNormals.SelectMany(x => x.ToFloatArray()).ToArray().To2DArray(4, 3);
 
-                var applyLighting = (attr.ApplyLighting || anim == null) ? 1.0f : 0.0f;
+                var useGouraud = attr.CL_Gouraud && attr.HasTexture;
+                var applyLighting = ((attr.ApplyLighting || anim == null) && !useGouraud) ? 1.0f : 0.0f;
                 var applyLightingVboData = new float[,] {{applyLighting}, {applyLighting}, {applyLighting}, {applyLighting}};
 
                 void AddQuad() {
@@ -344,7 +357,7 @@ namespace SF3.Win.OpenGL.MPD_File {
                 AddQuad();
 
                 // ...then add the other side, if it's there.
-                if (attr.TwoSided) {
+                if (attr.IsTwoSided) {
                     // Flip the coordinates in the polygon horizontally.
                     (polyVertices[0], polyVertices[1], polyVertices[2], polyVertices[3]) =
                         (polyVertices[1], polyVertices[0], polyVertices[3], polyVertices[2]);

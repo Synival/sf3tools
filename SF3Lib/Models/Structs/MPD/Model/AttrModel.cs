@@ -5,7 +5,8 @@ using SF3.ByteData;
 
 namespace SF3.Models.Structs.MPD.Model {
     public class AttrModel : Struct {
-        public int _flagsAddr;               // (Uint16) Single/double-sided flag, and other flags
+        public int _planeAddr;               // (Uint8) Single/double-sided flag
+        public int _sortAndOptionsAddr;      // (Uint8) Options for lighting, has texture, sorting
         public int _textureNoAddr;           // (Uint16) Texture number
         public int _modeAddr;                // (Uint16) Mode (bitset)
         public int _colorNoAddr;             // (Uint16) Color number
@@ -13,7 +14,8 @@ namespace SF3.Models.Structs.MPD.Model {
         public int _dirAddr;                 // (Uint16) Texture inversion and function number
 
         public AttrModel(IByteData data, int id, string name, int address) : base(data, id, name, address, 0x0C) {
-            _flagsAddr               = Address + 0x00; // 2 bytes
+            _planeAddr               = Address + 0x00; // 1 byte
+            _sortAndOptionsAddr      = Address + 0x01; // 1 byte
             _textureNoAddr           = Address + 0x02; // 2 bytes
             _modeAddr                = Address + 0x04; // 2 bytes
             _colorNoAddr             = Address + 0x06; // 2 bytes
@@ -22,31 +24,52 @@ namespace SF3.Models.Structs.MPD.Model {
         }
 
         [BulkCopy]
-        [TableViewModelColumn(displayOrder: 0, displayFormat: "X4")]
-        public ushort Flags {
-            get => (ushort) Data.GetWord(_flagsAddr);
-            set => Data.SetWord(_flagsAddr, value);
+        [TableViewModelColumn(displayOrder: 0, displayFormat: "X2")]
+        public byte Plane {
+            get => (byte) Data.GetByte(_planeAddr);
+            set => Data.SetByte(_planeAddr, value);
+        }
+
+        [BulkCopy]
+        [TableViewModelColumn(displayOrder: 0.01f)]
+        public bool IsTwoSided {
+            get => (Plane & 0x01) == 0x01;
+            set => Plane = (byte) ((Plane & ~0x01) | (value ? 0x01 : 0));
+        }
+
+        [BulkCopy]
+        [TableViewModelColumn(displayOrder: 0.04f, displayFormat: "X2")]
+        public byte SortAndOptions {
+            get => (byte) Data.GetByte(_sortAndOptionsAddr);
+            set => Data.SetByte(_sortAndOptionsAddr, value);
         }
 
         [BulkCopy]
         [TableViewModelColumn(displayOrder: 0.05f)]
         public bool HasTexture {
-            get => (Flags & 0x0004) == 0x0004;
-            set => Flags = (ushort) ((Flags & ~0x0004) | (value ? 0x0004 : 0));
+            get => (SortAndOptions & 0x04) == 0x0004;
+            set => SortAndOptions = (byte) ((SortAndOptions & ~0x04) | (value ? 0x04 : 0));
         }
 
         [BulkCopy]
         [TableViewModelColumn(displayOrder: 0.1f)]
         public bool ApplyLighting {
-            get => (Flags & 0x0008) == 0x0008;
-            set => Flags = (ushort) ((Flags & ~0x0008) | (value ? 0x0008 : 0));
+            get => (SortAndOptions & 0x08) == 0x08;
+            set => SortAndOptions = (byte) ((SortAndOptions & ~0x08) | (value ? 0x08 : 0));
         }
 
         [BulkCopy]
         [TableViewModelColumn(displayOrder: 0.2f)]
-        public bool TwoSided {
-            get => (Flags & 0x0100) == 0x0100;
-            set => Flags = (ushort) ((Flags & ~0x0100) | (value ? 0x0100 : 0));
+        public bool FlipH {
+            get => (SortAndOptions & 0x10) == 0x10;
+            set => SortAndOptions = (byte) ((SortAndOptions & ~0x10) | (value ? 0x10 : 0));
+        }
+
+        [BulkCopy]
+        [TableViewModelColumn(displayOrder: 0.3f)]
+        public bool FlipV {
+            get => (SortAndOptions & 0x20) == 0x20;
+            set => SortAndOptions = (byte) ((SortAndOptions & ~0x20) | (value ? 0x20 : 0));
         }
 
         [BulkCopy]
@@ -109,6 +132,12 @@ namespace SF3.Models.Structs.MPD.Model {
         public DrawMode Mode_DrawMode {
             get => (DrawMode) (Mode & 0x07);
             set => Mode = (ushort) ((Mode & ~0x07) | ((ushort) value & 0x07));
+        }
+
+        [TableViewModelColumn(displayOrder: 3.8f)]
+        public bool CL_Gouraud {
+            get => Mode_DrawMode.HasFlag(DrawMode.CL_Gouraud);
+            set => Mode_DrawMode = value ? (Mode_DrawMode | DrawMode.CL_Gouraud) : (Mode_DrawMode & ~DrawMode.CL_Gouraud);
         }
 
         [BulkCopy]
