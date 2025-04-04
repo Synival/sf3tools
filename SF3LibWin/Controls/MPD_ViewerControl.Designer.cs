@@ -73,7 +73,7 @@
             tsbCursorSelect.ImageTransparentColor = System.Drawing.Color.Magenta;
             tsbCursorSelect.Name = "tsbCursorSelect";
             tsbCursorSelect.Size = new System.Drawing.Size(28, 28);
-            tsbCursorSelect.Text = "Select";
+            tsbCursorSelect.Text = "S&elect";
             tsbCursorSelect.Click += tsbCursorSelect_Click;
             // 
             // tsbCursorNavigate
@@ -83,7 +83,7 @@
             tsbCursorNavigate.ImageTransparentColor = System.Drawing.Color.Magenta;
             tsbCursorNavigate.Name = "tsbCursorNavigate";
             tsbCursorNavigate.Size = new System.Drawing.Size(28, 28);
-            tsbCursorNavigate.Text = "Navigate";
+            tsbCursorNavigate.Text = "&Navigate";
             tsbCursorNavigate.Click += tsbCursorNavigate_Click;
             // 
             // toolStripSeparator5

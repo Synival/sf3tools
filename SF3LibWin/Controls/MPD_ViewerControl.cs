@@ -16,8 +16,8 @@ namespace SF3.Win.Controls {
             Disposed += (s, e) => GLControl.Dispose();
 
             var cursorMode = GLControl.CursorMode;
-            tsbCursorSelect.Checked      = cursorMode == ViewerCursorMode.Select;
-            tsbCursorNavigate.Checked    = cursorMode == ViewerCursorMode.Navigate;
+            GLControl.CursorModeChanged += (s, e) => UpdatedSelectedCursorModeButton();
+            UpdatedSelectedCursorModeButton();
 
             tsbDrawSurfaceModel.Checked  = GLControl.DrawSurfaceModel;
             tsbDrawModels.Checked        = GLControl.DrawModels;
@@ -59,6 +59,12 @@ namespace SF3.Win.Controls {
                 if (sendToGLControl)
                     GLControl.RunCmdKeyEvent(sender, ref msg, keyData, ref wasProcessed);
             };
+        }
+
+        private void UpdatedSelectedCursorModeButton() {
+            var cursorMode = GLControl.CursorMode;
+            tsbCursorSelect.Checked   = cursorMode == ViewerCursorMode.Select;
+            tsbCursorNavigate.Checked = cursorMode == ViewerCursorMode.Navigate;
         }
 
         private IMPD_File _mpdFile = null;
@@ -180,17 +186,11 @@ namespace SF3.Win.Controls {
             GLControl.Invalidate();
         }
 
-        private void tsbCursorSelect_Click(object sender, EventArgs e) {
-            GLControl.CursorMode = ViewerCursorMode.Select;
-            tsbCursorSelect.Checked   = true;
-            tsbCursorNavigate.Checked = false;
-        }
+        private void tsbCursorSelect_Click(object sender, EventArgs e)
+            => GLControl.CursorMode = ViewerCursorMode.Select;
 
-        private void tsbCursorNavigate_Click(object sender, EventArgs e) {
-            GLControl.CursorMode = ViewerCursorMode.Navigate;
-            tsbCursorSelect.Checked   = false;
-            tsbCursorNavigate.Checked = true;
-        }
+        private void tsbCursorNavigate_Click(object sender, EventArgs e)
+            => GLControl.CursorMode = ViewerCursorMode.Navigate;
 
         // TODO: This kinda works, but not completely! Improve, refine, and ship it!!!
 #if false

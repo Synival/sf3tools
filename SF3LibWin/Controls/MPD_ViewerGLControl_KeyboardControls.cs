@@ -5,6 +5,7 @@ using System.Linq;
 using System.Windows.Forms;
 using CommonLib.Utils;
 using OpenTK.Mathematics;
+using SF3.Win.Types;
 
 namespace SF3.Win.Controls {
     public partial class MPD_ViewerGLControl {
@@ -17,8 +18,24 @@ namespace SF3.Win.Controls {
         }
 
         private void OnKeyDownKeyboardControls(KeyEventArgs e) {
-            if (Enabled && Focused && Visible)
-                _keysPressed[(Keys) ((int) e.KeyCode & 0xFFFF)] = true;
+            if (!(Enabled && Focused && Visible))
+                return;
+
+            var keyCode = (Keys) ((int) e.KeyCode & 0xFFFF);
+            if (keyCode == Keys.None)
+                return;
+
+            switch (keyCode) {
+                case Keys.N:
+                    CursorMode = ViewerCursorMode.Navigate;
+                    break;
+
+                case Keys.E:
+                    CursorMode = ViewerCursorMode.Select;
+                    break;
+            }
+
+            _keysPressed[(Keys) ((int) e.KeyCode & 0xFFFF)] = true;
         }
 
         private void OnKeyUpKeyboardControls(KeyEventArgs e) =>

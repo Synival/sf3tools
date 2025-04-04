@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
 using OpenTK.Mathematics;
@@ -171,6 +172,7 @@ namespace SF3.Win.Controls {
                     AppState.ViewerCursorMode = (int) value;
                     AppState.Serialize();
                     UpdateCursor();
+                    CursorModeChanged?.Invoke(this, EventArgs.Empty);
                 }
             }
         }
@@ -185,5 +187,7 @@ namespace SF3.Win.Controls {
         private Point? _mousePos = null;
 
         private MouseButtons _mouseButtons = MouseButtons.None;
+
+        public event EventHandler CursorModeChanged;
     }
 }
