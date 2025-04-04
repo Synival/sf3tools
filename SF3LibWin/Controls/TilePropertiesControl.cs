@@ -6,7 +6,6 @@ using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using CommonLib;
 using CommonLib.Types;
-using CommonLib.Utils;
 using SF3.Models.Files.MPD;
 using SF3.Types;
 using SF3.Win.Extensions;
@@ -63,6 +62,23 @@ namespace SF3.Win.Controls {
                     FlattenTile();
                 else
                     UnflattenTile();
+            });
+
+            cbModelHasTree.CheckedChanged += (s, e) => DoIfUserInput(() => {
+                using (IncrementNonUserInputGuard()) {
+                    if (cbModelHasTree.Checked) {
+                        if (!_tile.AdoptTree())
+                            cbModelHasTree.Checked = false;
+                        else
+                            _tile.MPD_File.ModelsUpdated?.Invoke(this, EventArgs.Empty);
+                    }
+                    else {
+                        if (!_tile.OrphanTree())
+                            cbModelHasTree.Checked = true;
+                        else
+                            _tile.MPD_File.ModelsUpdated?.Invoke(this, EventArgs.Empty);
+                    }
+                }
             });
 
             // Update enabled status, visibility, and default values of controls.
@@ -135,7 +151,7 @@ namespace SF3.Win.Controls {
                 if (!gbModel.Enabled) {
                     nudModelTextureID.Text = "";
                     cbModelHasTree.Checked = false;
-                    cbModelHasTree.Enabled = false; // TODO: Let us use this!
+                    cbModelHasTree.Enabled = false;
                     cbModelRotate.SelectedItem = null;
                     cbModelRotate.Text = "";
                     cbModelRotate.Enabled = true;
@@ -149,7 +165,7 @@ namespace SF3.Win.Controls {
                 else {
                     InitNUD(nudModelTextureID, _tile.ModelTextureID);
                     cbModelHasTree.Checked = _tile.TreeModelID != null;
-                    cbModelHasTree.Enabled = false; // TODO: Let us use this!
+                    cbModelHasTree.Enabled = true;
 
                     var disabledMessage = _tile.MPD_File.Scenario >= ScenarioType.Scenario3 ? "(Enable in header)" : "(Scenario 3+ only)";
                     if (_tile.MPD_File.SurfaceModel.TileTextureRowTable.HasRotation && _tile.MPD_File.MPDHeader.HasSurfaceTextureRotation) {
