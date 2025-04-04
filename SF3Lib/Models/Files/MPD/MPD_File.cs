@@ -9,6 +9,7 @@ using CommonLib.SGL;
 using CommonLib.Utils;
 using SF3.ByteData;
 using SF3.Models.Structs.MPD;
+using SF3.Models.Structs.MPD.Model;
 using SF3.Models.Structs.MPD.TextureChunk;
 using SF3.Models.Tables;
 using SF3.Models.Tables.MPD;
@@ -1103,6 +1104,21 @@ namespace SF3.Models.Files.MPD {
                 throw new InvalidOperationException($"PaletteTable[{index}] should be 256 colors, instead it's {paletteTable.Length}");
 
             return new Palette(paletteTable.Select(x => x.ColorABGR1555).ToArray());
+        }
+
+        public PDataModel GetTreePData0() {
+            var mc = ModelCollections.FirstOrDefault(x => x.ChunkIndex == MPDHeader.ModelsChunkIndex);
+            if (mc == null)
+                return null;
+
+            // Look for the first PDATA with one polygon that uses the tree texture (seems to always be 0).
+            return mc.PDataTable.FirstOrDefault(x => {
+                if (x.PolygonCount != 1)
+                    return false;
+
+                var attr = mc.AttrTablesByMemoryAddress[x.AttributesOffset][0];
+                return attr.HasTexture && attr.TextureNo == 0;
+            });
         }
 
         public IChunkData[] ChunkData { get; private set; }

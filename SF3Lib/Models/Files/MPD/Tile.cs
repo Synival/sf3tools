@@ -357,7 +357,7 @@ namespace SF3.Models.Files.MPD {
             var associatedModels = new HashSet<int>(associatedModelsList);
 
             // Get the PDATA that represents a tree.
-            var pdata = GetTreePData0(modelCollection);
+            var pdata = MPD_File.GetTreePData0();
             if (pdata == null)
                 return false;
 
@@ -375,17 +375,6 @@ namespace SF3.Models.Files.MPD {
             TreeModelID = model.ID;
             TreeModelChunkIndex = chunkIndex;
             return true;
-        }
-
-        private PDataModel GetTreePData0(ModelCollection mc) {
-            // Look for the first PDATA with one polygon that uses the tree texture (seems to always be 0).
-            return mc.PDataTable.FirstOrDefault(x => {
-                if (x.PolygonCount != 1)
-                    return false;
-
-                var attr = mc.AttrTablesByMemoryAddress[x.AttributesOffset][0];
-                return attr.HasTexture && attr.TextureNo == 0;
-            });
         }
 
         public EventHandler Modified;

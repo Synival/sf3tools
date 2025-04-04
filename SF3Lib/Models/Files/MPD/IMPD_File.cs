@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using CommonLib.Imaging;
 using SF3.ByteData;
 using SF3.Models.Structs.MPD;
+using SF3.Models.Structs.MPD.Model;
 using SF3.Models.Tables;
 using SF3.Models.Tables.MPD;
 
@@ -43,6 +44,12 @@ namespace SF3.Models.Files.MPD {
         /// <param name="index">Corresponding zero-indexed palette number, with 0 as Palette1.</param>
         /// <returns>A 256-color palette for the requested index.</returns>
         Palette CreatePalette(int index);
+
+        /// <summary>
+        /// Fetches the PDataModel for a PDATA that looks like a tree, if one could be found.
+        /// </summary>
+        /// <returns>A PDataModel reference if one with matching criteria was found. Otherwise, 'null'.</returns>
+        PDataModel GetTreePData0();
 
         /// <summary>
         /// Byte data for (de)compressed data for chunks
