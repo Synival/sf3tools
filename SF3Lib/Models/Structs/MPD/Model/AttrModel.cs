@@ -38,11 +38,20 @@ namespace SF3.Models.Structs.MPD.Model {
         }
 
         [BulkCopy]
-        [TableViewModelColumn(displayOrder: 0.04f, displayFormat: "X2")]
+        [TableViewModelColumn(displayOrder: 0.02f, displayFormat: "X2")]
         public byte SortAndOptions {
             get => (byte) Data.GetByte(_sortAndOptionsAddr);
             set => Data.SetByte(_sortAndOptionsAddr, value);
         }
+
+/*
+        [BulkCopy]
+        [TableViewModelColumn(displayOrder: 0.03f, minWidth: 100)]
+        public SortOrder Sort {
+            get => (SortOrder) (Data.GetByte(_sortAndOptionsAddr) & 0x03);
+            set => Data.SetByte(_sortAndOptionsAddr, (byte) ((int) value & 0x03));
+        }
+*/
 
         [BulkCopy]
         [TableViewModelColumn(displayOrder: 0.05f)]
@@ -56,20 +65,6 @@ namespace SF3.Models.Structs.MPD.Model {
         public bool ApplyLighting {
             get => (SortAndOptions & 0x08) == 0x08;
             set => SortAndOptions = (byte) ((SortAndOptions & ~0x08) | (value ? 0x08 : 0));
-        }
-
-        [BulkCopy]
-        [TableViewModelColumn(displayOrder: 0.2f)]
-        public bool FlipH {
-            get => (SortAndOptions & 0x10) == 0x10;
-            set => SortAndOptions = (byte) ((SortAndOptions & ~0x10) | (value ? 0x10 : 0));
-        }
-
-        [BulkCopy]
-        [TableViewModelColumn(displayOrder: 0.3f)]
-        public bool FlipV {
-            get => (SortAndOptions & 0x20) == 0x20;
-            set => SortAndOptions = (byte) ((SortAndOptions & ~0x20) | (value ? 0x20 : 0));
         }
 
         [BulkCopy]
@@ -170,5 +165,22 @@ namespace SF3.Models.Structs.MPD.Model {
             get => (ushort) Data.GetWord(_dirAddr);
             set => Data.SetWord(_dirAddr, value);
         }
+
+        // TODO: test these!!!
+/*
+        [BulkCopy]
+        [TableViewModelColumn(displayOrder: 0.2f)]
+        public bool FlipH {
+            get => (Dir & 0x10) == 0x10;
+            set => Dir = (byte) ((Dir & ~0x10) | (value ? 0x10 : 0));
+        }
+
+        [BulkCopy]
+        [TableViewModelColumn(displayOrder: 0.3f)]
+        public bool FlipV {
+            get => (Dir & 0x20) == 0x20;
+            set => Dir = (byte) ((Dir & ~0x20) | (value ? 0x20 : 0));
+        }
+*/
     }
 }
