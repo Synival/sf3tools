@@ -37,7 +37,7 @@ namespace SF3.Models.Files.MPD {
             MPD_File.SurfaceModel?.UpdateVertexNormals(
                 X, Y,
                 MPD_File.Surface.HeightmapRowTable,
-                POLYGON_NormalCalculationMethod.MostExtremeVerticalTriangle,
+                POLYGON_NormalCalculationMethod.WeightedVerticalTriangles,
                 halfHeight
             );
 
