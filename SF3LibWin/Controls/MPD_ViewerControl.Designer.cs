@@ -23,6 +23,7 @@
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent() {
+            var resources = new System.ComponentModel.ComponentResourceManager(typeof(MPD_ViewerControl));
             toolStrip1 = new System.Windows.Forms.ToolStrip();
             tsbCursorSelect = new System.Windows.Forms.ToolStripButton();
             tsbCursorNavigate = new System.Windows.Forms.ToolStripButton();
@@ -53,7 +54,21 @@
             tsbToggleHelp = new System.Windows.Forms.ToolStripButton();
             tilePropertyControl1 = new TilePropertiesControl();
             mpdViewerGLControl1 = new MPD_ViewerGLControl();
+            toolStrip2 = new System.Windows.Forms.ToolStrip();
+            tsbDrawGrassland = new System.Windows.Forms.ToolStripButton();
+            tsbDrawDirt = new System.Windows.Forms.ToolStripButton();
+            tsbDrawDarkGrass = new System.Windows.Forms.ToolStripButton();
+            tsbDrawForest = new System.Windows.Forms.ToolStripButton();
+            tsbDrawBrownMountain = new System.Windows.Forms.ToolStripButton();
+            tsbDrawGreyMountain = new System.Windows.Forms.ToolStripButton();
+            tsbDrawMountainPeak = new System.Windows.Forms.ToolStripButton();
+            tsbDrawDesert = new System.Windows.Forms.ToolStripButton();
+            tsbDrawRiver = new System.Windows.Forms.ToolStripButton();
+            tsbDrawBridge = new System.Windows.Forms.ToolStripButton();
+            tsbDrawWater = new System.Windows.Forms.ToolStripButton();
+            tsbDrawNoEntry = new System.Windows.Forms.ToolStripButton();
             toolStrip1.SuspendLayout();
+            toolStrip2.SuspendLayout();
             SuspendLayout();
             // 
             // toolStrip1
@@ -73,7 +88,8 @@
             tsbCursorSelect.ImageTransparentColor = System.Drawing.Color.Magenta;
             tsbCursorSelect.Name = "tsbCursorSelect";
             tsbCursorSelect.Size = new System.Drawing.Size(28, 28);
-            tsbCursorSelect.Text = "S&elect";
+            tsbCursorSelect.Text = "Select";
+            tsbCursorSelect.ToolTipText = "Select (E)";
             tsbCursorSelect.Click += tsbCursorSelect_Click;
             // 
             // tsbCursorNavigate
@@ -83,7 +99,8 @@
             tsbCursorNavigate.ImageTransparentColor = System.Drawing.Color.Magenta;
             tsbCursorNavigate.Name = "tsbCursorNavigate";
             tsbCursorNavigate.Size = new System.Drawing.Size(28, 28);
-            tsbCursorNavigate.Text = "&Navigate";
+            tsbCursorNavigate.Text = "Navigate";
+            tsbCursorNavigate.ToolTipText = "Navigate (N)";
             tsbCursorNavigate.Click += tsbCursorNavigate_Click;
             // 
             // toolStripSeparator5
@@ -321,11 +338,11 @@
             // tilePropertyControl1
             // 
             tilePropertyControl1.Dock = System.Windows.Forms.DockStyle.Right;
-            tilePropertyControl1.Location = new System.Drawing.Point(582, 31);
+            tilePropertyControl1.Location = new System.Drawing.Point(582, 62);
             tilePropertyControl1.MaximumSize = new System.Drawing.Size(207, 10000);
             tilePropertyControl1.MinimumSize = new System.Drawing.Size(207, 446);
             tilePropertyControl1.Name = "tilePropertyControl1";
-            tilePropertyControl1.Size = new System.Drawing.Size(207, 545);
+            tilePropertyControl1.Size = new System.Drawing.Size(207, 514);
             tilePropertyControl1.TabIndex = 2;
             tilePropertyControl1.Tile = null;
             // 
@@ -337,14 +354,156 @@
             mpdViewerGLControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             mpdViewerGLControl1.Flags = OpenTK.Windowing.Common.ContextFlags.Default;
             mpdViewerGLControl1.IsEventDriven = true;
-            mpdViewerGLControl1.Location = new System.Drawing.Point(0, 31);
+            mpdViewerGLControl1.Location = new System.Drawing.Point(0, 62);
             mpdViewerGLControl1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             mpdViewerGLControl1.MinimumSize = new System.Drawing.Size(320, 240);
             mpdViewerGLControl1.Name = "mpdViewerGLControl1";
             mpdViewerGLControl1.Profile = OpenTK.Windowing.Common.ContextProfile.Core;
             mpdViewerGLControl1.SharedContext = null;
-            mpdViewerGLControl1.Size = new System.Drawing.Size(582, 545);
+            mpdViewerGLControl1.Size = new System.Drawing.Size(582, 514);
             mpdViewerGLControl1.TabIndex = 1;
+            // 
+            // toolStrip2
+            // 
+            toolStrip2.ImageScalingSize = new System.Drawing.Size(24, 24);
+            toolStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { tsbDrawGrassland, tsbDrawDirt, tsbDrawDarkGrass, tsbDrawForest, tsbDrawBrownMountain, tsbDrawGreyMountain, tsbDrawMountainPeak, tsbDrawDesert, tsbDrawRiver, tsbDrawBridge, tsbDrawWater, tsbDrawNoEntry });
+            toolStrip2.Location = new System.Drawing.Point(0, 31);
+            toolStrip2.Name = "toolStrip2";
+            toolStrip2.Size = new System.Drawing.Size(789, 31);
+            toolStrip2.TabIndex = 3;
+            toolStrip2.Text = "toolStrip2";
+            // 
+            // tsbDrawGrassland
+            // 
+            tsbDrawGrassland.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            tsbDrawGrassland.Image = (System.Drawing.Image) resources.GetObject("tsbDrawGrassland.Image");
+            tsbDrawGrassland.ImageTransparentColor = System.Drawing.Color.Magenta;
+            tsbDrawGrassland.Name = "tsbDrawGrassland";
+            tsbDrawGrassland.Size = new System.Drawing.Size(28, 28);
+            tsbDrawGrassland.Text = "Draw Grassland";
+            tsbDrawGrassland.ToolTipText = "Draw Grassland (1)";
+            tsbDrawGrassland.Click += tsbDrawGrassland_Click;
+            // 
+            // tsbDrawDirt
+            // 
+            tsbDrawDirt.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            tsbDrawDirt.Image = (System.Drawing.Image) resources.GetObject("tsbDrawDirt.Image");
+            tsbDrawDirt.ImageTransparentColor = System.Drawing.Color.Magenta;
+            tsbDrawDirt.Name = "tsbDrawDirt";
+            tsbDrawDirt.Size = new System.Drawing.Size(28, 28);
+            tsbDrawDirt.Text = "Draw Dirt";
+            tsbDrawDirt.ToolTipText = "Draw Dirt (2)";
+            tsbDrawDirt.Click += tsbDrawDirt_Click;
+            // 
+            // tsbDrawDarkGrass
+            // 
+            tsbDrawDarkGrass.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            tsbDrawDarkGrass.Image = (System.Drawing.Image) resources.GetObject("tsbDrawDarkGrass.Image");
+            tsbDrawDarkGrass.ImageTransparentColor = System.Drawing.Color.Magenta;
+            tsbDrawDarkGrass.Name = "tsbDrawDarkGrass";
+            tsbDrawDarkGrass.Size = new System.Drawing.Size(28, 28);
+            tsbDrawDarkGrass.Text = "Draw Dark Grass";
+            tsbDrawDarkGrass.ToolTipText = "Draw Dark Grass (3)";
+            tsbDrawDarkGrass.Click += tsbDrawDarkGrass_Click;
+            // 
+            // tsbDrawForest
+            // 
+            tsbDrawForest.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            tsbDrawForest.Image = (System.Drawing.Image) resources.GetObject("tsbDrawForest.Image");
+            tsbDrawForest.ImageTransparentColor = System.Drawing.Color.Magenta;
+            tsbDrawForest.Name = "tsbDrawForest";
+            tsbDrawForest.Size = new System.Drawing.Size(28, 28);
+            tsbDrawForest.Text = "Draw Forest";
+            tsbDrawForest.ToolTipText = "Draw Forest (4)";
+            tsbDrawForest.Click += tsbDrawForest_Click;
+            // 
+            // tsbDrawBrownMountain
+            // 
+            tsbDrawBrownMountain.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            tsbDrawBrownMountain.Image = (System.Drawing.Image) resources.GetObject("tsbDrawBrownMountain.Image");
+            tsbDrawBrownMountain.ImageTransparentColor = System.Drawing.Color.Magenta;
+            tsbDrawBrownMountain.Name = "tsbDrawBrownMountain";
+            tsbDrawBrownMountain.Size = new System.Drawing.Size(28, 28);
+            tsbDrawBrownMountain.Text = "Draw Brown Mountain";
+            tsbDrawBrownMountain.ToolTipText = "Draw Brown Mountain (5)";
+            tsbDrawBrownMountain.Click += tsbDrawBrownMountain_Click;
+            // 
+            // tsbDrawGreyMountain
+            // 
+            tsbDrawGreyMountain.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            tsbDrawGreyMountain.Image = (System.Drawing.Image) resources.GetObject("tsbDrawGreyMountain.Image");
+            tsbDrawGreyMountain.ImageTransparentColor = System.Drawing.Color.Magenta;
+            tsbDrawGreyMountain.Name = "tsbDrawGreyMountain";
+            tsbDrawGreyMountain.Size = new System.Drawing.Size(28, 28);
+            tsbDrawGreyMountain.Text = "Draw Grey Mountain";
+            tsbDrawGreyMountain.ToolTipText = "Draw Grey Mountain (6)";
+            tsbDrawGreyMountain.Click += tsbDrawGreyMountain_Click;
+            // 
+            // tsbDrawMountainPeak
+            // 
+            tsbDrawMountainPeak.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            tsbDrawMountainPeak.Image = (System.Drawing.Image) resources.GetObject("tsbDrawMountainPeak.Image");
+            tsbDrawMountainPeak.ImageTransparentColor = System.Drawing.Color.Magenta;
+            tsbDrawMountainPeak.Name = "tsbDrawMountainPeak";
+            tsbDrawMountainPeak.Size = new System.Drawing.Size(28, 28);
+            tsbDrawMountainPeak.Text = "Draw Mountain Peak";
+            tsbDrawMountainPeak.ToolTipText = "Draw Mountain Peak (7)";
+            tsbDrawMountainPeak.Click += tsbDrawMountainPeak_Click;
+            // 
+            // tsbDrawDesert
+            // 
+            tsbDrawDesert.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            tsbDrawDesert.Image = (System.Drawing.Image) resources.GetObject("tsbDrawDesert.Image");
+            tsbDrawDesert.ImageTransparentColor = System.Drawing.Color.Magenta;
+            tsbDrawDesert.Name = "tsbDrawDesert";
+            tsbDrawDesert.Size = new System.Drawing.Size(28, 28);
+            tsbDrawDesert.Text = "Draw Desert";
+            tsbDrawDesert.ToolTipText = "Draw Desert (8)";
+            tsbDrawDesert.Click += tsbDrawDesert_Click;
+            // 
+            // tsbDrawRiver
+            // 
+            tsbDrawRiver.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            tsbDrawRiver.Image = (System.Drawing.Image) resources.GetObject("tsbDrawRiver.Image");
+            tsbDrawRiver.ImageTransparentColor = System.Drawing.Color.Magenta;
+            tsbDrawRiver.Name = "tsbDrawRiver";
+            tsbDrawRiver.Size = new System.Drawing.Size(28, 28);
+            tsbDrawRiver.Text = "Draw River";
+            tsbDrawRiver.ToolTipText = "Draw River (9)";
+            tsbDrawRiver.Click += tsbDrawRiver_Click;
+            // 
+            // tsbDrawBridge
+            // 
+            tsbDrawBridge.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            tsbDrawBridge.Image = (System.Drawing.Image) resources.GetObject("tsbDrawBridge.Image");
+            tsbDrawBridge.ImageTransparentColor = System.Drawing.Color.Magenta;
+            tsbDrawBridge.Name = "tsbDrawBridge";
+            tsbDrawBridge.Size = new System.Drawing.Size(28, 28);
+            tsbDrawBridge.Text = "Draw Bridge";
+            tsbDrawBridge.ToolTipText = "Draw Bridge (0)";
+            tsbDrawBridge.Click += tsbDrawBridge_Click;
+            // 
+            // tsbDrawWater
+            // 
+            tsbDrawWater.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            tsbDrawWater.Image = (System.Drawing.Image) resources.GetObject("tsbDrawWater.Image");
+            tsbDrawWater.ImageTransparentColor = System.Drawing.Color.Magenta;
+            tsbDrawWater.Name = "tsbDrawWater";
+            tsbDrawWater.Size = new System.Drawing.Size(28, 28);
+            tsbDrawWater.Text = "Draw Water";
+            tsbDrawWater.ToolTipText = "Draw Water (-)";
+            tsbDrawWater.Click += tsbDrawWater_Click;
+            // 
+            // tsbDrawNoEntry
+            // 
+            tsbDrawNoEntry.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            tsbDrawNoEntry.Image = (System.Drawing.Image) resources.GetObject("tsbDrawNoEntry.Image");
+            tsbDrawNoEntry.ImageTransparentColor = System.Drawing.Color.Magenta;
+            tsbDrawNoEntry.Name = "tsbDrawNoEntry";
+            tsbDrawNoEntry.Size = new System.Drawing.Size(28, 28);
+            tsbDrawNoEntry.Text = "Draw NoEntry";
+            tsbDrawNoEntry.ToolTipText = "Draw NoEntry (=)";
+            tsbDrawNoEntry.Click += tsbDrawNoEntry_Click;
             // 
             // MPD_ViewerControl
             // 
@@ -352,11 +511,14 @@
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             Controls.Add(mpdViewerGLControl1);
             Controls.Add(tilePropertyControl1);
+            Controls.Add(toolStrip2);
             Controls.Add(toolStrip1);
             Name = "MPD_ViewerControl";
             Size = new System.Drawing.Size(789, 576);
             toolStrip1.ResumeLayout(false);
             toolStrip1.PerformLayout();
+            toolStrip2.ResumeLayout(false);
+            toolStrip2.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -393,5 +555,18 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
         private System.Windows.Forms.ToolStripButton tsbApplyLighting;
         private System.Windows.Forms.ToolStripButton tsbToggleCollisions;
+        private System.Windows.Forms.ToolStrip toolStrip2;
+        private System.Windows.Forms.ToolStripButton tsbDrawNoEntry;
+        private System.Windows.Forms.ToolStripButton tsbDrawWater;
+        private System.Windows.Forms.ToolStripButton tsbDrawRiver;
+        private System.Windows.Forms.ToolStripButton tsbDrawGrassland;
+        private System.Windows.Forms.ToolStripButton tsbDrawDirt;
+        private System.Windows.Forms.ToolStripButton tsbDrawDarkGrass;
+        private System.Windows.Forms.ToolStripButton tsbDrawForest;
+        private System.Windows.Forms.ToolStripButton tsbDrawBrownMountain;
+        private System.Windows.Forms.ToolStripButton tsbDrawGreyMountain;
+        private System.Windows.Forms.ToolStripButton tsbDrawMountainPeak;
+        private System.Windows.Forms.ToolStripButton tsbDrawDesert;
+        private System.Windows.Forms.ToolStripButton tsbDrawBridge;
     }
 }

@@ -63,8 +63,20 @@ namespace SF3.Win.Controls {
 
         private void UpdatedSelectedCursorModeButton() {
             var cursorMode = GLControl.CursorMode;
-            tsbCursorSelect.Checked   = cursorMode == ViewerCursorMode.Select;
-            tsbCursorNavigate.Checked = cursorMode == ViewerCursorMode.Navigate;
+            tsbCursorSelect.Checked      = cursorMode == ViewerCursorMode.Select;
+            tsbCursorNavigate.Checked    = cursorMode == ViewerCursorMode.Navigate;
+            tsbDrawGrassland.Checked     = cursorMode == ViewerCursorMode.DrawGrassland;
+            tsbDrawDirt.Checked          = cursorMode == ViewerCursorMode.DrawDirt;
+            tsbDrawDarkGrass.Checked     = cursorMode == ViewerCursorMode.DrawDarkGrass;
+            tsbDrawForest.Checked        = cursorMode == ViewerCursorMode.DrawForest;
+            tsbDrawBrownMountain.Checked = cursorMode == ViewerCursorMode.DrawBrownMountain;
+            tsbDrawGreyMountain.Checked  = cursorMode == ViewerCursorMode.DrawGreyMountain;
+            tsbDrawMountainPeak.Checked  = cursorMode == ViewerCursorMode.DrawMountainPeak;
+            tsbDrawDesert.Checked        = cursorMode == ViewerCursorMode.DrawDesert;
+            tsbDrawRiver.Checked         = cursorMode == ViewerCursorMode.DrawRiver;
+            tsbDrawBridge.Checked        = cursorMode == ViewerCursorMode.DrawBridge;
+            tsbDrawWater.Checked         = cursorMode == ViewerCursorMode.DrawWater;
+            tsbDrawNoEntry.Checked       = cursorMode == ViewerCursorMode.DrawNoEntry;
         }
 
         private IMPD_File _mpdFile = null;
@@ -81,24 +93,24 @@ namespace SF3.Win.Controls {
 
         public MPD_ViewerGLControl GLControl => mpdViewerGLControl1;
 
-        private void tsbDrawSurfaceModel_Click (object sender, EventArgs e) => tsbDrawSurfaceModel.Checked  = GLControl.DrawSurfaceModel = !GLControl.DrawSurfaceModel;
-        private void tsbDrawModels_Click       (object sender, EventArgs e) => tsbDrawModels.Checked        = GLControl.DrawModels       = !GLControl.DrawModels;
-        private void tsbDrawGround_Click       (object sender, EventArgs e) => tsbDrawGround.Checked        = GLControl.DrawGround       = !GLControl.DrawGround;
-        private void tsbDrawSkyBox_Click       (object sender, EventArgs e) => tsbDrawSkyBox.Checked        = GLControl.DrawSkyBox       = !GLControl.DrawSkyBox;
-        private void tsbRunAnimations_Click    (object sender, EventArgs e) => tsbRunAnimations.Checked     = GLControl.RunAnimations    = !GLControl.RunAnimations;
-        private void tsbApplyLighting_Click    (object sender, EventArgs e) => tsbApplyLighting.Checked     = GLControl.ApplyLighting    = !GLControl.ApplyLighting;
-        private void tsbDrawGradients_Click    (object sender, EventArgs e) => tsbDrawGradients.Checked     = GLControl.DrawGradients    = !GLControl.DrawGradients;
+        private void tsbDrawSurfaceModel_Click(object sender, EventArgs e) => tsbDrawSurfaceModel.Checked  = GLControl.DrawSurfaceModel = !GLControl.DrawSurfaceModel;
+        private void tsbDrawModels_Click(object sender, EventArgs e) => tsbDrawModels.Checked        = GLControl.DrawModels       = !GLControl.DrawModels;
+        private void tsbDrawGround_Click(object sender, EventArgs e) => tsbDrawGround.Checked        = GLControl.DrawGround       = !GLControl.DrawGround;
+        private void tsbDrawSkyBox_Click(object sender, EventArgs e) => tsbDrawSkyBox.Checked        = GLControl.DrawSkyBox       = !GLControl.DrawSkyBox;
+        private void tsbRunAnimations_Click(object sender, EventArgs e) => tsbRunAnimations.Checked     = GLControl.RunAnimations    = !GLControl.RunAnimations;
+        private void tsbApplyLighting_Click(object sender, EventArgs e) => tsbApplyLighting.Checked     = GLControl.ApplyLighting    = !GLControl.ApplyLighting;
+        private void tsbDrawGradients_Click(object sender, EventArgs e) => tsbDrawGradients.Checked     = GLControl.DrawGradients    = !GLControl.DrawGradients;
 
-        private void tsbToggleWireframe_Click  (object sender, EventArgs e) => tsbToggleWireframe.Checked   = GLControl.DrawWireframe    = !GLControl.DrawWireframe;
-        private void tsbToggleBoundaries_Click (object sender, EventArgs e) => tsbToggleBoundaries.Checked  = GLControl.DrawBoundaries   = !GLControl.DrawBoundaries;
+        private void tsbToggleWireframe_Click(object sender, EventArgs e) => tsbToggleWireframe.Checked   = GLControl.DrawWireframe    = !GLControl.DrawWireframe;
+        private void tsbToggleBoundaries_Click(object sender, EventArgs e) => tsbToggleBoundaries.Checked  = GLControl.DrawBoundaries   = !GLControl.DrawBoundaries;
         private void tsbToggleTerrainType_Click(object sender, EventArgs e) => tsbToggleTerrainType.Checked = GLControl.DrawTerrainTypes = !GLControl.DrawTerrainTypes;
-        private void tsbToggleEventID_Click    (object sender, EventArgs e) => tsbToggleEventID.Checked     = GLControl.DrawEventIDs     = !GLControl.DrawEventIDs;
-        private void tsbToggleCollisions_Click (object sender, EventArgs e) => tsbToggleCollisions.Checked  = GLControl.DrawCollisionLines = !GLControl.DrawCollisionLines;
-        private void tsbToggleNormals_Click    (object sender, EventArgs e) => tsbToggleNormals.Checked     = GLControl.DrawNormals      = !GLControl.DrawNormals;
+        private void tsbToggleEventID_Click(object sender, EventArgs e) => tsbToggleEventID.Checked     = GLControl.DrawEventIDs     = !GLControl.DrawEventIDs;
+        private void tsbToggleCollisions_Click(object sender, EventArgs e) => tsbToggleCollisions.Checked  = GLControl.DrawCollisionLines = !GLControl.DrawCollisionLines;
+        private void tsbToggleNormals_Click(object sender, EventArgs e) => tsbToggleNormals.Checked     = GLControl.DrawNormals      = !GLControl.DrawNormals;
 
-        private void tsbRotateSpritesUp_Click  (object sender, EventArgs e) => tsbRotateSpritesUp.Checked   = GLControl.RotateSpritesUp  = !GLControl.RotateSpritesUp;
+        private void tsbRotateSpritesUp_Click(object sender, EventArgs e) => tsbRotateSpritesUp.Checked   = GLControl.RotateSpritesUp  = !GLControl.RotateSpritesUp;
 
-        private void tsbToggleHelp_Click       (object sender, EventArgs e) => tsbToggleHelp.Checked        = GLControl.DrawHelp         = !GLControl.DrawHelp;
+        private void tsbToggleHelp_Click(object sender, EventArgs e) => tsbToggleHelp.Checked        = GLControl.DrawHelp         = !GLControl.DrawHelp;
 
         public void UpdateLighting() {
             if (MPD_File != null) {
@@ -186,11 +198,21 @@ namespace SF3.Win.Controls {
             GLControl.Invalidate();
         }
 
-        private void tsbCursorSelect_Click(object sender, EventArgs e)
-            => GLControl.CursorMode = ViewerCursorMode.Select;
+        private void tsbCursorSelect_Click     (object sender, EventArgs e) => GLControl.CursorMode = ViewerCursorMode.Select;
+        private void tsbCursorNavigate_Click   (object sender, EventArgs e) => GLControl.CursorMode = ViewerCursorMode.Navigate;
 
-        private void tsbCursorNavigate_Click(object sender, EventArgs e)
-            => GLControl.CursorMode = ViewerCursorMode.Navigate;
+        private void tsbDrawGrassland_Click    (object sender, EventArgs e) => GLControl.CursorMode = ViewerCursorMode.DrawGrassland;
+        private void tsbDrawDirt_Click         (object sender, EventArgs e) => GLControl.CursorMode = ViewerCursorMode.DrawDirt;
+        private void tsbDrawDarkGrass_Click    (object sender, EventArgs e) => GLControl.CursorMode = ViewerCursorMode.DrawDarkGrass;
+        private void tsbDrawForest_Click       (object sender, EventArgs e) => GLControl.CursorMode = ViewerCursorMode.DrawForest;
+        private void tsbDrawBrownMountain_Click(object sender, EventArgs e) => GLControl.CursorMode = ViewerCursorMode.DrawBrownMountain;
+        private void tsbDrawGreyMountain_Click (object sender, EventArgs e) => GLControl.CursorMode = ViewerCursorMode.DrawGreyMountain;
+        private void tsbDrawMountainPeak_Click (object sender, EventArgs e) => GLControl.CursorMode = ViewerCursorMode.DrawMountainPeak;
+        private void tsbDrawDesert_Click       (object sender, EventArgs e) => GLControl.CursorMode = ViewerCursorMode.DrawDesert;
+        private void tsbDrawRiver_Click        (object sender, EventArgs e) => GLControl.CursorMode = ViewerCursorMode.DrawRiver;
+        private void tsbDrawBridge_Click       (object sender, EventArgs e) => GLControl.CursorMode = ViewerCursorMode.DrawBridge;
+        private void tsbDrawWater_Click        (object sender, EventArgs e) => GLControl.CursorMode = ViewerCursorMode.DrawWater;
+        private void tsbDrawNoEntry_Click      (object sender, EventArgs e) => GLControl.CursorMode = ViewerCursorMode.DrawNoEntry;
 
         // TODO: This kinda works, but not completely! Improve, refine, and ship it!!!
 #if false

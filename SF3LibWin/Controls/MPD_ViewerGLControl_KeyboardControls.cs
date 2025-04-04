@@ -26,13 +26,22 @@ namespace SF3.Win.Controls {
                 return;
 
             switch (keyCode) {
-                case Keys.N:
-                    CursorMode = ViewerCursorMode.Navigate;
-                    break;
+                case Keys.N:  CursorMode = ViewerCursorMode.Navigate; break;
+                case Keys.E:  CursorMode = ViewerCursorMode.Select;   break;
 
-                case Keys.E:
-                    CursorMode = ViewerCursorMode.Select;
-                    break;
+                case Keys.D1: CursorMode = ViewerCursorMode.DrawGrassland;     break;
+                case Keys.D2: CursorMode = ViewerCursorMode.DrawDirt;          break;
+                case Keys.D3: CursorMode = ViewerCursorMode.DrawDarkGrass;     break;
+                case Keys.D4: CursorMode = ViewerCursorMode.DrawForest;        break;
+                case Keys.D5: CursorMode = ViewerCursorMode.DrawBrownMountain; break;
+                case Keys.D6: CursorMode = ViewerCursorMode.DrawGreyMountain;  break;
+                case Keys.D7: CursorMode = ViewerCursorMode.DrawMountainPeak;  break;
+                case Keys.D8: CursorMode = ViewerCursorMode.DrawDesert;        break;
+                case Keys.D9: CursorMode = ViewerCursorMode.DrawRiver;         break;
+                case Keys.D0: CursorMode = ViewerCursorMode.DrawBridge;        break;
+                case Keys.OemMinus: CursorMode = ViewerCursorMode.DrawWater;   break;
+                case Keys.Oemplus:  CursorMode = ViewerCursorMode.DrawNoEntry; break;
+
             }
 
             _keysPressed[(Keys) ((int) e.KeyCode & 0xFFFF)] = true;

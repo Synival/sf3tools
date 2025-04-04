@@ -150,7 +150,8 @@ namespace SF3.Win.Controls {
                 return;
             _mousePos = pos;
 
-            if (_mouseButtons == 0)
+            var cursorMode = CursorMode;
+            if (_mouseButtons == 0 || cursorMode.IsDrawingMode())
                 UpdateTilePosition();
         }
 
@@ -158,14 +159,11 @@ namespace SF3.Win.Controls {
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public ViewerCursorMode CursorMode {
             get {
-                switch (AppState.ViewerCursorMode) {
-                    case 0:
-                        return ViewerCursorMode.Select;
-                    case 1:
-                        return ViewerCursorMode.Navigate;
-                    default:
-                        return ViewerCursorMode.Select;
-                }
+                var appCursorMode = (ViewerCursorMode) AppState.ViewerCursorMode;
+                if (Enum.IsDefined(appCursorMode))
+                    return appCursorMode;
+                else
+                    return ViewerCursorMode.Select;
             }
             set {
                 if (AppState.ViewerCursorMode != (int) value) {
@@ -179,7 +177,17 @@ namespace SF3.Win.Controls {
 
         private void UpdateCursor() {
             var cursorMode = CursorMode;
-            Cursor = (cursorMode == ViewerCursorMode.Select) ? Cursors.Arrow : Cursors.SizeAll;
+            switch (cursorMode) {
+                case ViewerCursorMode.Select:
+                    Cursor = Cursors.Arrow;
+                    break;
+                case ViewerCursorMode.Navigate:
+                    Cursor = Cursors.SizeAll;
+                    break;
+                default:
+                    Cursor = Cursors.Cross;
+                    break;
+            }
         }
 
         private bool _mouseIn = false;
