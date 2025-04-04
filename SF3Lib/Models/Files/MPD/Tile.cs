@@ -208,6 +208,97 @@ namespace SF3.Models.Files.MPD {
         public float GetAverageHeight()
             => (float) Math.Round(((CornerType[]) Enum.GetValues(typeof(CornerType))).Average(x => GetMoveHeightmap(x) * 16f)) / 16f;
 
+        private struct TileAndCorner {
+            public int X;
+            public int Y;
+            public CornerType Corner;
+        }
+
+        private TileAndCorner[] GetAdjacentTilesAtCorner(CornerType corner) {
+            TileAndCorner[] GetUnfiltered() {
+                switch (corner) {
+                    case CornerType.TopLeft:
+                        return new TileAndCorner[] {
+                            new TileAndCorner { X = X - 1, Y = Y + 1, Corner = CornerType.BottomRight },
+                            new TileAndCorner { X = X - 1, Y = Y + 0, Corner = CornerType.TopRight },
+                            new TileAndCorner { X = X - 0, Y = Y + 1, Corner = CornerType.BottomLeft },
+                        };
+
+                    case CornerType.TopRight:
+                        return new TileAndCorner[] {
+                            new TileAndCorner { X = X + 1, Y = Y + 1, Corner = CornerType.BottomLeft },
+                            new TileAndCorner { X = X + 1, Y = Y + 0, Corner = CornerType.TopLeft },
+                            new TileAndCorner { X = X + 0, Y = Y + 1, Corner = CornerType.BottomRight },
+                        };
+
+                    case CornerType.BottomRight:
+                        return new TileAndCorner[] {
+                            new TileAndCorner { X = X + 1, Y = Y - 1, Corner = CornerType.TopLeft },
+                            new TileAndCorner { X = X + 1, Y = Y - 0, Corner = CornerType.BottomLeft },
+                            new TileAndCorner { X = X + 0, Y = Y - 1, Corner = CornerType.TopRight },
+                        };
+
+                    case CornerType.BottomLeft:
+                        return new TileAndCorner[] {
+                            new TileAndCorner { X = X - 1, Y = Y - 1, Corner = CornerType.TopRight },
+                            new TileAndCorner { X = X - 1, Y = Y - 0, Corner = CornerType.BottomRight },
+                            new TileAndCorner { X = X - 0, Y = Y - 1, Corner = CornerType.TopLeft },
+                        };
+
+                    default:
+                        throw new ArgumentException(nameof(corner));
+                }
+            }
+
+            return GetUnfiltered()
+                .Where(x => x.X >= 0 && x.Y >= 0 && x.X < 64 && x.Y < 64)
+                .ToArray();
+        }
+
+        public void CopyMoveHeightToNonFlatNeighbors(CornerType corner) {
+            var height = GetMoveHeightmap(corner);
+            var adjacentCorners = GetAdjacentTilesAtCorner(corner);
+            foreach (var ac in adjacentCorners) {
+                var acTile = MPD_File.Tiles[ac.X, ac.Y];
+                if (!acTile.ModelIsFlat) {
+                    acTile.SetMoveHeightmap(ac.Corner, height);
+                    acTile.MoveHeight = acTile.GetAverageHeight();
+                }
+            }
+        }
+
+        public void UpdateNormalsForCorner(CornerType corner, bool halfHeight = true) {
+            var surfaceModel = MPD_File.SurfaceModel;
+            if (surfaceModel == null)
+                return;
+
+            var vxCenter = TileToVertexX(X, corner);
+            var vyCenter = TileToVertexY(Y, corner);
+
+            // Normals need to be updated in a 3x3 grid.
+            var heightmapRowTable = MPD_File.Surface.HeightmapRowTable;
+            for (var x = -1; x <= 1; x++) {
+                for (var y = -1; y <= 1; y++) {
+                    var vx = x + vxCenter;
+                    var vy = y + vyCenter;
+                    if (vx >= 0 && vy >= 0 && vx < 65 && vy < 65)
+                        surfaceModel.UpdateVertexNormal(vx, vy, heightmapRowTable, POLYGON_NormalCalculationMethod.WeightedVerticalTriangles, halfHeight);
+                }
+            }
+
+            // Updating vertex normals in a 3x3 grid means tiles need to be re-rendered in a 4x4 grid.
+            for (var x = -2; x <= 2; x++) {
+                for (var y = -2; y <= 2; y++) {
+                    var tx = x + vxCenter;
+                    var ty = y + vyCenter;
+                    if (tx >= 0 && ty >= 0 && tx < 64 && ty < 64) {
+                        var tile = MPD_File.Tiles[tx, ty];
+                        tile.Modified?.Invoke(tile, EventArgs.Empty);
+                    }
+                }
+            }
+        }
+
         public EventHandler Modified;
     }
 }

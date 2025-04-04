@@ -180,96 +180,6 @@ namespace SF3.Win.Controls {
             }
         }
 
-        private struct TileAndCorner {
-            public int X;
-            public int Y;
-            public CornerType Corner;
-        }
-
-        private TileAndCorner[] GetAdjacentTilesAtCorner(CornerType corner) {
-            TileAndCorner[] GetUnfiltered() {
-                switch (corner) {
-                    case CornerType.TopLeft:
-                        return [
-                            new TileAndCorner { X = _tile.X - 1, Y = _tile.Y + 1, Corner = CornerType.BottomRight },
-                            new TileAndCorner { X = _tile.X - 1, Y = _tile.Y + 0, Corner = CornerType.TopRight },
-                            new TileAndCorner { X = _tile.X - 0, Y = _tile.Y + 1, Corner = CornerType.BottomLeft },
-                        ];
-
-                    case CornerType.TopRight:
-                        return [
-                            new TileAndCorner { X = _tile.X + 1, Y = _tile.Y + 1, Corner = CornerType.BottomLeft },
-                            new TileAndCorner { X = _tile.X + 1, Y = _tile.Y + 0, Corner = CornerType.TopLeft },
-                            new TileAndCorner { X = _tile.X + 0, Y = _tile.Y + 1, Corner = CornerType.BottomRight },
-                        ];
-
-                    case CornerType.BottomRight:
-                        return [
-                            new TileAndCorner { X = _tile.X + 1, Y = _tile.Y - 1, Corner = CornerType.TopLeft },
-                            new TileAndCorner { X = _tile.X + 1, Y = _tile.Y - 0, Corner = CornerType.BottomLeft },
-                            new TileAndCorner { X = _tile.X + 0, Y = _tile.Y - 1, Corner = CornerType.TopRight },
-                        ];
-
-                    case CornerType.BottomLeft:
-                        return [
-                            new TileAndCorner { X = _tile.X - 1, Y = _tile.Y - 1, Corner = CornerType.TopRight },
-                            new TileAndCorner { X = _tile.X - 1, Y = _tile.Y - 0, Corner = CornerType.BottomRight },
-                            new TileAndCorner { X = _tile.X - 0, Y = _tile.Y - 1, Corner = CornerType.TopLeft },
-                        ];
-
-                    default:
-                        throw new ArgumentException(nameof(corner));
-                }
-            }
-
-            return GetUnfiltered()
-                .Where(x => x.X >= 0 && x.Y >= 0 && x.X < 64 && x.Y < 64)
-                .ToArray();
-        }
-
-        private void CopyHeightToNonFlatTiles(CornerType corner) {
-            var height = _tile.GetMoveHeightmap(corner);
-            var adjacentCorners = GetAdjacentTilesAtCorner(corner);
-            foreach (var ac in adjacentCorners) {
-                var acTile = _tile.MPD_File.Tiles[ac.X, ac.Y];
-                if (!acTile.ModelIsFlat) {
-                    acTile.SetMoveHeightmap(ac.Corner, height);
-                    acTile.MoveHeight = acTile.GetAverageHeight();
-                }
-            }
-        }
-
-        private void UpdateNormalsForCorner(CornerType corner, bool halfHeight = true) {
-            var surfaceModel = _tile.MPD_File.SurfaceModel;
-            if (surfaceModel == null)
-                return;
-
-            var vxCenter = BlockHelpers.TileToVertexX(_tile.X, corner);
-            var vyCenter = BlockHelpers.TileToVertexY(_tile.Y, corner);
-
-            // Normals need to be updated in a 3x3 grid.
-            for (var x = -1; x <= 1; x++) {
-                for (var y = -1; y <= 1; y++) {
-                    var vx = x + vxCenter;
-                    var vy = y + vyCenter;
-                    if (vx >= 0 && vy >= 0 && vx < 65 && vy < 65)
-                        surfaceModel.UpdateVertexNormal(vx, vy, _tile.MPD_File.Surface.HeightmapRowTable, POLYGON_NormalCalculationMethod.WeightedVerticalTriangles, halfHeight);
-                }
-            }
-
-            // Updating vertex normals in a 3x3 grid means tiles need to be re-rendered in a 4x4 grid.
-            for (var x = -2; x < 2; x++) {
-                for (var y = -2; y < 2; y++) {
-                    var tx = x + vxCenter;
-                    var ty = y + vyCenter;
-                    if (tx >= 0 && ty >= 0 && tx < 64 && ty < 64) {
-                        var tile = _tile.MPD_File.Tiles[tx, ty];
-                        tile.Modified?.Invoke(tile, EventArgs.Empty);
-                    }
-                }
-            }
-        }
-
         [DllImport("user32.dll")]
         public static extern int SendMessage(IntPtr hWnd, int wMsg, IntPtr wParam, IntPtr lParam);
 
@@ -368,14 +278,14 @@ namespace SF3.Win.Controls {
 
                 if (_tile.MPD_File.SurfaceModel != null && !_tile.ModelIsFlat) {
                     _tile.SetModelVertexHeightmap(corner, value);
-                    CopyHeightToNonFlatTiles(corner);
+                    _tile.CopyMoveHeightToNonFlatNeighbors(corner);
 
                     var halfHeight = AppState.RetrieveAppState().UseVanillaHalfHeightForSurfaceNormalCalculations;
 
                     // Technically we *could* recalculate normals because the normals of neighboring flat tiles are also included
                     // in the calculations, but the normals of flat tiles are constant, so neighboring tiles' normals never change
                     // when a flat tile moves up or down.
-                    UpdateNormalsForCorner(corner, halfHeight);
+                    _tile.UpdateNormalsForCorner(corner, halfHeight);
                 }
             }
         }
@@ -398,7 +308,7 @@ namespace SF3.Win.Controls {
                     nud.Value.Value = (decimal) height;
                 }
                 foreach (var corner in corners)
-                    UpdateNormalsForCorner(corner, halfHeight);
+                    _tile.UpdateNormalsForCorner(corner, halfHeight);
             }
         }
 
@@ -411,10 +321,10 @@ namespace SF3.Win.Controls {
                     nud.Value.Enabled = true;
                     var height = _tile.GetMoveHeightmap(nud.Key);
                     _tile.SetModelVertexHeightmap(nud.Key, height);
-                    CopyHeightToNonFlatTiles(nud.Key);
+                    _tile.CopyMoveHeightToNonFlatNeighbors(nud.Key);
                 }
                 foreach (var corner in corners)
-                    UpdateNormalsForCorner(corner, halfHeight);
+                    _tile.UpdateNormalsForCorner(corner, halfHeight);
             }
         }
 
