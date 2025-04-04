@@ -479,11 +479,11 @@ namespace SF3.Models.Files.MPD {
             var header = MPDHeader;
             var indices = new List<int>();
 
-            if (chunks[20].Exists && header.Chunk20IsModelsIfSurfaceModelExists)
+            if (chunks[20].Exists && header.Chunk20IsModels)
                 indices.Add(20);
 
             if (chunks[1].Exists)
-                if (!header.Chunk20IsModelsIfSurfaceModelExists || header.HasExtraChunk1ModelWithChunk21Textures)
+                if (!header.Chunk20IsModels || header.HasExtraChunk1ModelWithChunk21Textures)
                     indices.Add(1);
 
             if (chunks[19].Exists && MPDHeader.HasChunk19Model)
@@ -498,17 +498,11 @@ namespace SF3.Models.Files.MPD {
             if (!header.HasSurfaceModel)
                 return null;
 
-            if (!header.Chunk20IsSurfaceModelIfExists)
-                return chunks[2].Exists ? 2 : (int?) null;
-
-            if (chunks[2].Exists && chunks[20].Exists)
-                throw new InvalidOperationException("Surface model found in both Chunk[2] and Chunk[20]");
-            else if (chunks[2].Exists)
-                return 2;
-            else if (chunks[20].Exists)
-                return 20;
-            else
+            var chunkIndex = header.SurfaceModelChunkIndex;
+            if (chunkIndex == null || !chunks[chunkIndex.Value].Exists)
                 return null;
+
+            return chunkIndex.Value;
         }
 
         private ITable[] MakeChunkTables(ChunkHeader[] chunkHeaders, IChunkData[] chunkDatas, IChunkData[] modelsChunks, IChunkData surfaceModelChunk) {
@@ -1054,8 +1048,10 @@ namespace SF3.Models.Files.MPD {
         }
 
         public void ResetTileTrees() {
-            foreach (var tile in Tiles)
+            foreach (var tile in Tiles) {
                 tile.TreeModelID = null;
+                tile.TreeModelChunkIndex = null;
+            }
         }
 
         public override bool IsModified {
