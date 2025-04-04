@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using CommonLib.Imaging;
 using SF3.ByteData;
@@ -127,5 +128,9 @@ namespace SF3.Models.Files.MPD {
         ITexture ForegroundTileImage { get; }
         ITexture ForegroundImage { get; }
 
+        /// <summary>
+        /// Triggered when models have been updated and something needs to be informed, like a viewer.
+        /// </summary>
+        EventHandler ModelsUpdated { get; set; }
     }
 }

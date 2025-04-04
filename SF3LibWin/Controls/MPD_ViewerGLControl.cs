@@ -93,16 +93,24 @@ namespace SF3.Win.Controls {
         private void OnTileModified(object sender, EventArgs e)
             => TileModified?.Invoke(sender, e);
 
+        private void OnModelsUpdated(object sender, EventArgs e) {
+            MakeCurrent();
+            _renderer.InvalidateModelMatrices();
+            Invalidate();
+        }
+
         private void AttachListeners(IMPD_File mpdFile) {
             for (var x = 0; x < mpdFile.Tiles.GetLength(0); x++)
                 for (var y = 0; y < mpdFile.Tiles.GetLength(1); y++)
                     mpdFile.Tiles[x, y].Modified += OnTileModified;
+            mpdFile.ModelsUpdated += OnModelsUpdated;
         }
 
         private void DetachListeners(IMPD_File mpdFile) {
             for (var x = 0; x < mpdFile.Tiles.GetLength(0); x++)
                 for (var y = 0; y < mpdFile.Tiles.GetLength(1); y++)
                     mpdFile.Tiles[x, y].Modified -= OnTileModified;
+            mpdFile.ModelsUpdated -= OnModelsUpdated;
         }
 
         private IMPD_File _mpdFile = null;

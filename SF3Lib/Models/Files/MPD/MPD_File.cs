@@ -1222,5 +1222,7 @@ namespace SF3.Models.Files.MPD {
         public IChunkData ForegroundMapChunk { get; private set; }
         public ITexture ForegroundTileImage { get; private set; }
         public ITexture ForegroundImage { get; private set; }
+
+        public EventHandler ModelsUpdated { get; set; }
     }
 }
