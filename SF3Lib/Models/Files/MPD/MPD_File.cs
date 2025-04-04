@@ -1036,14 +1036,6 @@ namespace SF3.Models.Files.MPD {
                     continue;
                 tree.Tile.TreeModelChunkIndex = tree.ModelCollection.ChunkIndex;
                 tree.Tile.TreeModelID = tree.Model.ID;
-
-                // Uncomment this code to automatically fix tree locations and terrain types.
-#if false
-                tree.Tile.MoveTerrainType = TerrainType.Forest;
-                tree.Model.PositionX = (short) ((Math.Round(tree.Model.PositionX / -32.0f + 0.5f) - 0.5f) * -32.0f);
-                tree.Model.PositionY = (short) (tree.Tile.GetAverageHeight() * -32.0f);
-                tree.Model.PositionZ = (short) ((Math.Round(tree.Model.PositionZ / -32.0f + 0.5f) - 0.5f) * -32.0f);
-#endif
             }
         }
 

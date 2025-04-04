@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using CommonLib.Extensions;
 using CommonLib.SGL;
 using CommonLib.Types;
+using SF3.Models.Structs.MPD.Model;
 using SF3.Types;
 using static CommonLib.Utils.BlockHelpers;
 
@@ -297,6 +299,93 @@ namespace SF3.Models.Files.MPD {
                     }
                 }
             }
+        }
+
+        /// <summary>
+        /// If a tree is assigned, it's placed very far off the camera screen and
+        /// disassociated with the tile.
+        /// </summary>
+        /// <returns>'true' if a tree was associated and now unassigned, otherwise 'false'.</returns>
+        public bool OrphanTree() {
+            // Get the tree model.
+            if (!TreeModelID.HasValue || !TreeModelChunkIndex.HasValue || TreeModelID < 0)
+                return false;
+
+            var modelCollection = MPD_File.ModelCollections.FirstOrDefault(x => x.ChunkIndex == TreeModelChunkIndex.Value);
+            if (modelCollection == null)
+                return false;
+
+            if (TreeModelID >= modelCollection.ModelTable.Length)
+                return false;
+
+            var model = modelCollection.ModelTable[TreeModelID.Value];
+
+            // Simply place it really far off the map.
+            model.PositionX -= 4096;
+
+            // Do whatever we need to do to detach the tree from the tile, and return success.
+            TreeModelID = null;
+            TreeModelChunkIndex = null;
+            return true;
+        }
+
+        /// <summary>
+        /// Looks for a tree that hasn't been assigned a tile and, if available,
+        /// positions it to the tile and associates it. Does nothing if a tree is
+        /// already associated.
+        /// </summary>
+        /// <returns>'true' if a new tree was associated and moved, otherwise 'false'.</returns>
+        public bool AdoptTree() {
+            // Do nothing if this tile already has a tree.
+            if (TreeModelID.HasValue)
+                return false;
+
+            // Get a list of all currently associated trees.
+            var chunkIndex = MPD_File.MPDHeader.ModelsChunkIndex;
+            if (!chunkIndex.HasValue)
+                return false;
+
+            var modelCollection = MPD_File.ModelCollections.FirstOrDefault(x => x.ChunkIndex == chunkIndex.Value);
+            if (modelCollection == null || modelCollection.PDataTable.Length == 0)
+                return false;
+
+            var associatedModelsList = MPD_File.Tiles.To1DArray()
+                .Where(x => x.TreeModelID.HasValue)
+                .Select(x => x.TreeModelID.Value)
+                .ToList();
+
+            var associatedModels = new HashSet<int>(associatedModelsList);
+
+            // Get the PDATA that represents a tree.
+            var pdata = GetTreePData0(modelCollection);
+            if (pdata == null)
+                return false;
+
+            // Look for any tree that doesn't have an assigned tile.
+            var model = modelCollection.ModelTable
+                .FirstOrDefault(x => x.PData0 == pdata.RamAddress && x.AlwaysFacesCamera && !associatedModels.Contains(x.ID));
+            if (model == null)
+                return false;
+
+            // We found a tree, so let's position it, associate it, and return success.
+            model.PositionX = (short) ((X + 0.5f) * -32.0f);
+            model.PositionY = (short) (GetAverageHeight() * -32.0f);
+            model.PositionZ = (short) ((Y + 0.5f) * -32.0f);
+
+            TreeModelID = model.ID;
+            TreeModelChunkIndex = chunkIndex;
+            return true;
+        }
+
+        private PDataModel GetTreePData0(ModelCollection mc) {
+            // Look for the first PDATA with one polygon that uses the tree texture (seems to always be 0).
+            return mc.PDataTable.FirstOrDefault(x => {
+                if (x.PolygonCount != 1)
+                    return false;
+
+                var attr = mc.AttrTablesByMemoryAddress[x.AttributesOffset][0];
+                return attr.HasTexture && attr.TextureNo == 0;
+            });
         }
 
         public EventHandler Modified;
