@@ -97,7 +97,7 @@ namespace SF3.Models.Files.MPD {
                 return;
             for (var y = 0; y < 65; y++)
                 for (var x = 0; x < 65; x++)
-                    UpdateVertexNormal(x, y, CornerType.TopLeft, heightmap, calculationMethod, halfHeight);
+                    UpdateVertexNormal(x, y, heightmap, calculationMethod, halfHeight);
         }
 
         [BulkCopyRowName]
