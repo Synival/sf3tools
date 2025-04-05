@@ -121,8 +121,6 @@ namespace SF3.Win.Controls {
             const byte texBridge        = 0x74;
             const byte texWater         = 0xFF;
 
-            var tile = MPD_File.Tiles[x, y];
-
             byte GetTextureForCursorMode() {
                 switch (CursorMode) {
                     case ViewerCursorMode.DrawGrassland:     return texGrassland;
@@ -183,7 +181,7 @@ namespace SF3.Win.Controls {
                 switch (texId) {
                     case texGrassland:     return GetRandomRange(0.0625f, 0.1875f) + ((nearbyCount - 1) * 0.025f);
                     case texDirt:          return 0f;
-                    case texDarkGrass:     return 0.125f;
+                    case texDarkGrass:     return atVertexCount * 0.03125f;
                     case texBrownMountain: return atVertexCount == 4f ? 0.75f : 0f;
                     case texGreyMountain:  return atVertexCount == 4f ? GetRandomRange(0.5f, 0.75f) + GetRandomRange(0.75f, 1.25f) * ((nearbyCount - 4) * 0.0625f) : 0f;
                     case texMountainPeak:  return atVertexCount == 4f ? 0.75f + ((nearbyCount - 4) * 0.125f) : 0f;
@@ -199,10 +197,10 @@ namespace SF3.Win.Controls {
             var terrainType = GetTerrainTypeForCursorMode();
             var layers      = GetLayersForTexture(texID);
 
-            tile.ModelTextureID  = texID;
-            tile.MoveTerrainType = terrainType;
-
-            var updateSurfaceModel = !tile.ModelIsFlat;
+            var thisTile = MPD_File.Tiles[x, y];
+            thisTile.ModelTextureID  = texID;
+            thisTile.MoveTerrainType = terrainType;
+            var updateSurfaceModel = !thisTile.ModelIsFlat;
 
             int SeedForCoordinates(int sx, int sy) {
                 var seed = 2166136261;
@@ -215,7 +213,7 @@ namespace SF3.Win.Controls {
 
             for (int x2 = Math.Max(0, x - nearbyRange); x2 <= Math.Min(63, x + nearbyRange); x2++) {
                 for (int y2 = Math.Max(0, y - nearbyRange); y2 <= Math.Min(63, y + nearbyRange); y2++) {
-                    tile = MPD_File.Tiles[x2, y2];
+                    var affectedTile = MPD_File.Tiles[x2, y2];
                     foreach (var corner in Enum.GetValues<CornerType>()) {
                         var vx = x2 + corner.GetVertexOffsetX();
                         var vy = y2 + corner.GetVertexOffsetY();
@@ -246,10 +244,10 @@ namespace SF3.Win.Controls {
                         foreach (var kv in layersAtVertex)
                             vertexHeight += GetHeightBonusForTexture(kv.Key, kv.Value, layersNearby[kv.Key]);
 
-                        tile.SetMoveHeightmap(corner, vertexHeight);
-                        tile.CopyMoveHeightToNonFlatNeighbors(corner);
+                        affectedTile.SetMoveHeightmap(corner, vertexHeight);
+                        affectedTile.CopyMoveHeightToNonFlatNeighbors(corner);
                         if (updateSurfaceModel)
-                            tile.SetModelVertexHeightmap(corner, vertexHeight);
+                            affectedTile.SetModelVertexHeightmap(corner, vertexHeight);
                     }
                 }
             }
@@ -257,12 +255,20 @@ namespace SF3.Win.Controls {
             for (int tx = x - 2 - nearbyRange; tx <= x + 2 + nearbyRange; tx++) {
                 for (int ty = y - 2 - nearbyRange; ty <= y + 2 + nearbyRange; ty++) {
                     if (tx >= 0 && ty >= 0 && tx < 64 && ty < 64) {
-                        tile = MPD_File.Tiles[tx, ty];
-                        tile.MoveHeight = tile.GetAverageHeight();
-                        tile.UpdateNormals();
+                        var affectedTile = MPD_File.Tiles[tx, ty];
+                        affectedTile.MoveHeight = affectedTile.GetAverageHeight();
+                        affectedTile.UpdateNormals();
                     }
                 }
             }
+
+            bool modelsChanged = false;
+            if (thisTile.MoveTerrainType == TerrainType.Forest)
+                modelsChanged = thisTile.AdoptTree();
+            else
+                modelsChanged = thisTile.OrphanTree();
+            if (modelsChanged)
+                OnModelsUpdated(this, EventArgs.Empty);
 
             Invalidate();
         }
