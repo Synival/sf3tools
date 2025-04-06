@@ -67,6 +67,8 @@
             tsbDrawBridge = new System.Windows.Forms.ToolStripButton();
             tsbDrawWater = new System.Windows.Forms.ToolStripButton();
             tsbDrawNoEntry = new System.Windows.Forms.ToolStripButton();
+            toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
+            tsbFixTiles = new System.Windows.Forms.ToolStripButton();
             toolStrip1.SuspendLayout();
             toolStrip2.SuspendLayout();
             SuspendLayout();
@@ -366,7 +368,7 @@
             // toolStrip2
             // 
             toolStrip2.ImageScalingSize = new System.Drawing.Size(24, 24);
-            toolStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { tsbDrawGrassland, tsbDrawDirt, tsbDrawDarkGrass, tsbDrawForest, tsbDrawBrownMountain, tsbDrawGreyMountain, tsbDrawMountainPeak, tsbDrawDesert, tsbDrawRiver, tsbDrawBridge, tsbDrawWater, tsbDrawNoEntry });
+            toolStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { tsbDrawGrassland, tsbDrawDirt, tsbDrawDarkGrass, tsbDrawForest, tsbDrawBrownMountain, tsbDrawGreyMountain, tsbDrawMountainPeak, tsbDrawDesert, tsbDrawRiver, tsbDrawBridge, tsbDrawWater, tsbDrawNoEntry, toolStripSeparator6, tsbFixTiles });
             toolStrip2.Location = new System.Drawing.Point(0, 31);
             toolStrip2.Name = "toolStrip2";
             toolStrip2.Size = new System.Drawing.Size(789, 31);
@@ -505,6 +507,21 @@
             tsbDrawNoEntry.ToolTipText = "Draw NoEntry (=)";
             tsbDrawNoEntry.Click += tsbDrawNoEntry_Click;
             // 
+            // toolStripSeparator6
+            // 
+            toolStripSeparator6.Name = "toolStripSeparator6";
+            toolStripSeparator6.Size = new System.Drawing.Size(6, 31);
+            // 
+            // tsbFixTiles
+            // 
+            tsbFixTiles.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            tsbFixTiles.Image = (System.Drawing.Image) resources.GetObject("tsbFixTiles.Image");
+            tsbFixTiles.ImageTransparentColor = System.Drawing.Color.Magenta;
+            tsbFixTiles.Name = "tsbFixTiles";
+            tsbFixTiles.Size = new System.Drawing.Size(28, 28);
+            tsbFixTiles.Text = "Fix Tiles";
+            tsbFixTiles.Click += tsbFixTiles_Click;
+            // 
             // MPD_ViewerControl
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -568,5 +585,7 @@
         private System.Windows.Forms.ToolStripButton tsbDrawMountainPeak;
         private System.Windows.Forms.ToolStripButton tsbDrawDesert;
         private System.Windows.Forms.ToolStripButton tsbDrawBridge;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator6;
+        private System.Windows.Forms.ToolStripButton tsbFixTiles;
     }
 }

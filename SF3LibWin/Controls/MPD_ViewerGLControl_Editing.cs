@@ -5,9 +5,11 @@ using System.Drawing;
 using System.Windows.Forms;
 using CommonLib.Types;
 using OpenTK.Graphics.OpenGL;
+using SF3.FieldEditing;
 using SF3.Types;
 using SF3.Win.OpenGL.MPD_File;
 using SF3.Win.Types;
+using static SF3.FieldEditing.Constants;
 
 namespace SF3.Win.Controls {
     public partial class MPD_ViewerGLControl {
@@ -110,31 +112,20 @@ namespace SF3.Win.Controls {
             if (MPD_File == null || MPD_File.SurfaceModel == null || x < 0 || y < 0 || x >= 64 || y >= 64)
                 return;
 
-            const byte texGrassland     = 0x01;
-            const byte texDirt          = 0x29;
-            const byte texDarkGrass     = 0x1C;
-            const byte texBrownMountain = 0x42;
-            const byte texGreyMountain  = 0x4C;
-            const byte texMountainPeak  = 0x4E;
-            const byte texDesert        = 0x7C;
-            const byte texRiver         = 0x2A;
-            const byte texBridge        = 0x74;
-            const byte texWater         = 0xFF;
-
-            byte GetTextureForCursorMode() {
+            TileType GetTileTypeForCursorMode() {
                 switch (CursorMode) {
-                    case ViewerCursorMode.DrawGrassland:     return texGrassland;
-                    case ViewerCursorMode.DrawDirt:          return texDirt;
-                    case ViewerCursorMode.DrawDarkGrass:     return texDarkGrass;
-                    case ViewerCursorMode.DrawForest:        return texDarkGrass;
-                    case ViewerCursorMode.DrawBrownMountain: return texBrownMountain;
-                    case ViewerCursorMode.DrawGreyMountain:  return texGreyMountain;
-                    case ViewerCursorMode.DrawMountainPeak:  return texMountainPeak;
-                    case ViewerCursorMode.DrawDesert:        return texDesert;
-                    case ViewerCursorMode.DrawRiver:         return texRiver;
-                    case ViewerCursorMode.DrawBridge:        return texBridge;
-                    case ViewerCursorMode.DrawWater:         return texWater;
-                    default:                                 return 0xFF;
+                    case ViewerCursorMode.DrawGrassland:     return TileType.Grass;
+                    case ViewerCursorMode.DrawDirt:          return TileType.Dirt;
+                    case ViewerCursorMode.DrawDarkGrass:     return TileType.DarkGrass;
+                    case ViewerCursorMode.DrawForest:        return TileType.DarkGrass;
+                    case ViewerCursorMode.DrawBrownMountain: return TileType.Hill;
+                    case ViewerCursorMode.DrawGreyMountain:  return TileType.Mountain;
+                    case ViewerCursorMode.DrawMountainPeak:  return TileType.Peak;
+                    case ViewerCursorMode.DrawDesert:        return TileType.Desert;
+                    case ViewerCursorMode.DrawRiver:         return TileType.River;
+                    case ViewerCursorMode.DrawBridge:        return TileType.Bridge;
+                    case ViewerCursorMode.DrawWater:         return TileType.Water;
+                    default:                                 return TileType.Water;
                 }
             }
 
@@ -155,19 +146,19 @@ namespace SF3.Win.Controls {
                 }
             }
 
-            byte[] GetLayersForTexture(byte texId) {
-                switch (texId) {
-                    case texGrassland:     return [texWater, texGrassland];
-                    case texDirt:          return [texWater, texGrassland, texDirt];
-                    case texDarkGrass:     return [texWater, texGrassland, texDarkGrass];
-                    case texBrownMountain: return [texWater, texGrassland, texDarkGrass, texBrownMountain];
-                    case texGreyMountain:  return [texWater, texGrassland, texDarkGrass, texGreyMountain];
-                    case texMountainPeak:  return [texWater, texGrassland, texDarkGrass, texGreyMountain, texMountainPeak];
-                    case texDesert:        return [texWater, texGrassland, texDesert];
-                    case texRiver:         return [texWater, texRiver];
-                    case texBridge:        return [texWater, texRiver];
-                    case texWater:         return [texWater];
-                    default:               return [texWater];
+            TileType[] GetLayersForTileType(TileType tileType) {
+                switch (tileType) {
+                    case TileType.Grass:     return [TileType.Water, TileType.Grass];
+                    case TileType.Dirt:      return [TileType.Water, TileType.Grass, TileType.Dirt];
+                    case TileType.DarkGrass: return [TileType.Water, TileType.Grass, TileType.DarkGrass];
+                    case TileType.Hill:      return [TileType.Water, TileType.Grass, TileType.DarkGrass, TileType.Hill];
+                    case TileType.Mountain:  return [TileType.Water, TileType.Grass, TileType.DarkGrass, TileType.Mountain];
+                    case TileType.Peak:      return [TileType.Water, TileType.Grass, TileType.DarkGrass, TileType.Mountain, TileType.Peak];
+                    case TileType.Desert:    return [TileType.Water, TileType.Grass, TileType.Desert];
+                    case TileType.River:     return [TileType.Water, TileType.River];
+                    case TileType.Bridge:    return [TileType.Water, TileType.River];
+                    case TileType.Water:     return [TileType.Water];
+                    default:                 return [TileType.Water];
                 }
             }
 
@@ -177,39 +168,30 @@ namespace SF3.Win.Controls {
             float GetRandomRange(float min, float max)
                 => ((float) random.NextDouble() * (max - min)) + min;
 
-            float GetHeightBonusForTexture(byte texId, int atVertexCount, int nearbyCount) {
-                switch (texId) {
-                    case texGrassland:     return GetRandomRange(0.0625f, 0.1875f) + ((nearbyCount - 1) * 0.025f);
-                    case texDirt:          return 0f;
-                    case texDarkGrass:     return atVertexCount * 0.03125f;
-                    case texBrownMountain: return atVertexCount == 4f ? 0.75f : 0f;
-                    case texGreyMountain:  return atVertexCount == 4f ? GetRandomRange(0.5f, 0.75f) + GetRandomRange(0.75f, 1.25f) * ((nearbyCount - 4) * 0.0625f) : 0f;
-                    case texMountainPeak:  return atVertexCount == 4f ? 0.75f + ((nearbyCount - 4) * 0.125f) : 0f;
-                    case texDesert:        return (nearbyCount - 1) * -0.025f;
-                    case texRiver:         return GetRandomRange(0.00f, 0.0625f) + (atVertexCount - 1) * 0.05f;
-                    case texBridge:        return 0.0625f;
-                    case texWater:         return 6.25f;
-                    default:               return 6.25f;
+            float GetHeightBonusForTileType(TileType tileType, int atVertexCount, int nearbyCount) {
+                switch (tileType) {
+                    case TileType.Grass:     return GetRandomRange(0.0625f, 0.1875f) + ((nearbyCount - 1) * 0.025f);
+                    case TileType.Dirt:      return 0f;
+                    case TileType.DarkGrass: return atVertexCount * 0.03125f;
+                    case TileType.Hill:      return atVertexCount == 4f ? 0.75f : 0f;
+                    case TileType.Mountain:  return atVertexCount == 4f ? GetRandomRange(0.5f, 0.75f) + GetRandomRange(0.75f, 1.25f) * ((nearbyCount - 4) * 0.0625f) : 0f;
+                    case TileType.Peak:      return atVertexCount == 4f ? 0.75f + ((nearbyCount - 4) * 0.125f) : 0f;
+                    case TileType.Desert:    return (nearbyCount - 1) * -0.025f;
+                    case TileType.River:     return GetRandomRange(0.00f, 0.0625f) + (atVertexCount - 1) * 0.05f;
+                    case TileType.Bridge:    return 0.0625f;
+                    case TileType.Water:     return 6.25f;
+                    default:                 return 6.25f;
                 }
             }
 
-            var texID       = GetTextureForCursorMode();
+            var tileType    = GetTileTypeForCursorMode();
             var terrainType = GetTerrainTypeForCursorMode();
-            var layers      = GetLayersForTexture(texID);
+            var layers      = GetLayersForTileType(tileType);
 
             var thisTile = MPD_File.Tiles[x, y];
-            thisTile.ModelTextureID  = texID;
+            thisTile.ModelTextureID  = GetDefaultTexIdByTileType(tileType);
             thisTile.MoveTerrainType = terrainType;
             var updateSurfaceModel = !thisTile.ModelIsFlat;
-
-            int SeedForCoordinates(int sx, int sy) {
-                var seed = 2166136261;
-                seed += (uint) sx;
-                seed *= 16777619;
-                seed += (uint) sy;
-                seed *= 16777619;
-                return (int) seed;
-            }
 
             for (int x2 = Math.Max(0, x - nearbyRange); x2 <= Math.Min(63, x + nearbyRange); x2++) {
                 for (int y2 = Math.Max(0, y - nearbyRange); y2 <= Math.Min(63, y + nearbyRange); y2++) {
@@ -218,23 +200,26 @@ namespace SF3.Win.Controls {
                         var vx = x2 + corner.GetVertexOffsetX();
                         var vy = y2 + corner.GetVertexOffsetY();
 
-                        Dictionary<byte, int> layersAtVertex = [];
+                        Dictionary<TileType, int> layersAtVertex = [];
                         for (int tx = Math.Max(0, vx - 1); tx <= Math.Min(63, vx); tx++) {
                             for (int ty = Math.Max(0, vy - 1); ty <= Math.Min(63, vy); ty++) {
-                                random = new Random(SeedForCoordinates(tx, ty));
+                                var neighborTile = MPD_File.Tiles[tx, ty];
+                                random = new Random(neighborTile.RandomSeed);
 
-                                var neighborTexID = MPD_File.Tiles[tx, ty].ModelTextureID;
-                                var neighborLayers = GetLayersForTexture(neighborTexID);
+                                var neighborTexId = neighborTile.ModelTextureID;
+                                var neighborTileType = GetTileTypeByTexID(neighborTexId) ?? TileType.Water;
+                                var neighborLayers = GetLayersForTileType(neighborTileType);
                                 foreach (var layer in neighborLayers)
                                     layersAtVertex[layer] = (layersAtVertex.TryGetValue(layer, out var v) ? v : 0) + 1;
                             }
                         }
 
-                        Dictionary<byte, int> layersNearby = [];
+                        Dictionary<TileType, int> layersNearby = [];
                         for (int tx = Math.Max(0, vx - 1 - nearbyRange); tx <= Math.Min(63, vx + nearbyRange); tx++) {
                             for (int ty = Math.Max(0, vy - 1 - nearbyRange); ty <= Math.Min(63, vy + nearbyRange); ty++) {
-                                var neighborTexID = MPD_File.Tiles[tx, ty].ModelTextureID;
-                                var neighborLayers = GetLayersForTexture(neighborTexID);
+                                var neighborTexId = MPD_File.Tiles[tx, ty].ModelTextureID;
+                                var neighborTileType = GetTileTypeByTexID(neighborTexId) ?? TileType.Water;
+                                var neighborLayers = GetLayersForTileType(neighborTileType);
                                 foreach (var layer in neighborLayers)
                                     layersNearby[layer] = (layersNearby.TryGetValue(layer, out var v) ? v : 0) + 1;
                             }
@@ -242,7 +227,7 @@ namespace SF3.Win.Controls {
 
                         var vertexHeight = 0.00f;
                         foreach (var kv in layersAtVertex)
-                            vertexHeight += GetHeightBonusForTexture(kv.Key, kv.Value, layersNearby[kv.Key]);
+                            vertexHeight += GetHeightBonusForTileType(kv.Key, kv.Value, layersNearby[kv.Key]);
 
                         affectedTile.SetMoveHeightmap(corner, vertexHeight);
                         affectedTile.CopyMoveHeightToNonFlatNeighbors(corner);
@@ -251,6 +236,11 @@ namespace SF3.Win.Controls {
                     }
                 }
             }
+
+            for (int tx = x - 1; tx <= x + 1; tx++)
+                for (int ty = y - 1; ty <= y + 1; ty++)
+                    if (tx >= 0 && ty >= 0 && tx < 64 && ty < 64)
+                        FieldEditing.FieldEditing.UpdateTileTexture(MPD_File.Tiles[tx, ty], true);
 
             for (int tx = x - 2 - nearbyRange; tx <= x + 2 + nearbyRange; tx++) {
                 for (int ty = y - 2 - nearbyRange; ty <= y + 2 + nearbyRange; ty++) {

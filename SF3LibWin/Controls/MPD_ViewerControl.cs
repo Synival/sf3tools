@@ -214,6 +214,13 @@ namespace SF3.Win.Controls {
         private void tsbDrawWater_Click        (object sender, EventArgs e) => GLControl.CursorMode = ViewerCursorMode.DrawWater;
         private void tsbDrawNoEntry_Click      (object sender, EventArgs e) => GLControl.CursorMode = ViewerCursorMode.DrawNoEntry;
 
+        // TODO: big dumb hack!!!
+        private void tsbFixTiles_Click(object sender, EventArgs e) {
+            if (MPD_File != null)
+                FieldEditing.FieldEditing.UpdateTileTextures(MPD_File.Tiles, true);
+            GLControl.UpdateModels();
+        }
+
         // TODO: This kinda works, but not completely! Improve, refine, and ship it!!!
 #if false
         private void WIP_CopyChnuk3FromOtherFile() {

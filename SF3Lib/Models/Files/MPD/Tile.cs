@@ -4,7 +4,6 @@ using System.Linq;
 using CommonLib.Extensions;
 using CommonLib.SGL;
 using CommonLib.Types;
-using SF3.Models.Structs.MPD.Model;
 using SF3.Types;
 using static CommonLib.Utils.BlockHelpers;
 
@@ -19,6 +18,13 @@ namespace SF3.Models.Files.MPD {
                 .ToDictionary(c => c, c => GetVertexBlockLocations(X, Y, c, true)[0]);
             SharedBlockVertexLocations = ((CornerType[]) Enum.GetValues(typeof(CornerType)))
                 .ToDictionary(c => c, c => GetVertexBlockLocations(X, Y, c, false));
+
+            var seed = 2166136261;
+            seed += (uint) x;
+            seed *= 16777619;
+            seed += (uint) y;
+            seed *= 16777619;
+            RandomSeed = (int) seed;
         }
 
         private void TriggerNeighborTileModified(int offsetX, int offsetY) {
@@ -376,6 +382,8 @@ namespace SF3.Models.Files.MPD {
             TreeModelChunkIndex = chunkIndex;
             return true;
         }
+
+        public int RandomSeed { get; private set; }
 
         public EventHandler Modified;
     }

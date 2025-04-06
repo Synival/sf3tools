@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using CommonLib.Arrays;
 using CommonLib.Attributes;
+using CommonLib.Extensions;
 using CommonLib.Imaging;
 using CommonLib.NamedValues;
 using CommonLib.SGL;
