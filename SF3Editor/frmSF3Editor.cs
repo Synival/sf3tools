@@ -17,7 +17,7 @@ using static SF3.Utils.FileUtils;
 
 namespace SF3Editor {
     public partial class frmSF3Editor : Form {
-        public static readonly string Version = "0.1";
+        public static readonly string Version = "0.1 (2025-04-08 dev)";
 
         private readonly Dictionary<ScenarioType, INameGetterContext> c_nameGetterContexts = Enum.GetValues<ScenarioType>()
             .ToDictionary(x => x, x => (INameGetterContext) new NameGetterContext(x));
