@@ -55,6 +55,7 @@ namespace SF3.Win {
                 var newState = JsonConvert.DeserializeObject<AppState>(text);
                 newState.AppName = appName;
                 newState.FileFullPath = fullPath;
+                newState.ViewerCursorMode = 0; /* 'Select' cursor */
                 return newState;
             }
             catch {
