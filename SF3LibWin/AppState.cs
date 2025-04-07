@@ -145,7 +145,7 @@ namespace SF3.Win {
                 }
             }
         }
-        private bool _enableExperimentalBlankFieldV2Brushes = false;
+        private bool _enableExperimentalBlankFieldV2Brushes = true;
         public event EventHandler EnableExperimentalBlankFieldV2BrushesChanged;
     }
 }

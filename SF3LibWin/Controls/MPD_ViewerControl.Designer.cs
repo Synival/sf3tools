@@ -519,7 +519,7 @@
             tsbFixTiles.ImageTransparentColor = System.Drawing.Color.Magenta;
             tsbFixTiles.Name = "tsbFixTiles";
             tsbFixTiles.Size = new System.Drawing.Size(28, 28);
-            tsbFixTiles.Text = "Fix Tiles";
+            tsbFixTiles.Text = "Fix All Tile Textures Based on Neighbors\n(You'll probably want to save first!!)";
             tsbFixTiles.Click += tsbFixTiles_Click;
             // 
             // MPD_ViewerControl
