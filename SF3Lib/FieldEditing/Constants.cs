@@ -179,6 +179,15 @@ namespace SF3.FieldEditing {
             { 0x91, new TileLayer[] { TL(TileType.Dirt), TL(TileType.Desert, "1U2")    } },
             { 0x92, new TileLayer[] { TL(TileType.Dirt), TL(TileType.Desert, "3D4")    } },
 
+            { 0x9C, new TileLayer[] { TL(TileType.Water), TL(TileType.Grass, "23")     } },
+
+            { 0x9D, new TileLayer[] { TL(TileType.Dirt), TL(TileType.Desert, "3D4L12")     } },
+            { 0x9E, new TileLayer[] { TL(TileType.Dirt), TL(TileType.Desert, "2R3D41")     } },
+            { 0xA1, new TileLayer[] { TL(TileType.Dirt), TL(TileType.Desert, "2R34L1")     } },
+            { 0xA2, new TileLayer[] { TL(TileType.Dirt), TL(TileType.Desert, "1U2R34")     } },
+            { 0xA3, new TileLayer[] { TL(TileType.Dirt), TL(TileType.Desert, "1U23D4")     } },
+            { 0xA4, new TileLayer[] { TL(TileType.Dirt), TL(TileType.Desert, "4L1U23")     } },
+
             { 0xFF, new TileLayer[] { TL(TileType.Water) } },
         };
 
