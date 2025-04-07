@@ -10,7 +10,7 @@ namespace SF3.Models.Structs.X014 {
         [TableViewModelColumn(displayOrder: 0, minWidth: 100)]
         public TerrainType TerrainType => (TerrainType) ID;
 
-        [TableViewModelColumn(displayOrder: 1, minWidth: 120)]
+        [TableViewModelColumn(displayOrder: 1, minWidth: 120, displayFormat: "X3")]
         [NameGetter(NamedValueType.FileIndex)]
         [BulkCopy]
         public int BattleSceneFileID {

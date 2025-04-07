@@ -49,7 +49,7 @@ namespace SF3.Models.Structs.X002 {
             lv4Damage   = Address + 19;
         }
 
-        [TableViewModelColumn(displayOrder: 0, minWidth: 100)]
+        [TableViewModelColumn(displayOrder: 0, minWidth: 100, displayFormat: "X2")]
         [BulkCopy]
         [NameGetter(NamedValueType.SpellTarget)]
         public int SpellTarget {
@@ -64,7 +64,7 @@ namespace SF3.Models.Structs.X002 {
             set => Data.SetByte(damageType, (byte) value);
         }
 
-        [TableViewModelColumn(displayOrder: 2, minWidth: 100)]
+        [TableViewModelColumn(displayOrder: 2, minWidth: 100, displayFormat: "X2")]
         [BulkCopy]
         [NameGetter(NamedValueType.Element)]
         public int Element {

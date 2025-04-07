@@ -37,7 +37,7 @@ namespace SF3.Models.Structs.X1 {
             set => Data.SetWord(_triggerAddr, value);
         }
 
-        [TableViewModelColumn(displayOrder: 0.1f, minWidth: 60)]
+        [TableViewModelColumn(displayOrder: 0.1f, minWidth: 60, displayFormat: "X1")]
         [NameGetter(NamedValueType.EventTriggerType)]
         public int TriggerType {
             get => Trigger & 0x000F;

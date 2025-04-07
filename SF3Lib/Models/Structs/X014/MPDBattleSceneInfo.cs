@@ -20,7 +20,7 @@ namespace SF3.Models.Structs.X014 {
             _ffffAddr              = Address + 0x0E;
         }
 
-        [TableViewModelColumn(displayOrder: 0, displayFormat: "X4", minWidth: 120)]
+        [TableViewModelColumn(displayOrder: 0, displayFormat: "X3", minWidth: 120)]
         [NameGetter(NamedValueType.FileIndex)]
         [BulkCopy]
         public int MPDFileID {
@@ -28,7 +28,7 @@ namespace SF3.Models.Structs.X014 {
             set => Data.SetDouble(_mpdFileIdAddr, value);
         }
 
-        [TableViewModelColumn(displayOrder: 1, displayFormat: "X4", minWidth: 120)]
+        [TableViewModelColumn(displayOrder: 1, displayFormat: "X3", minWidth: 120)]
         [NameGetter(NamedValueType.FileIndex)]
         [BulkCopy]
         public int BattleSceneFileID {

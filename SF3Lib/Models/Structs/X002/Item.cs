@@ -62,7 +62,7 @@ namespace SF3.Models.Structs.X002 {
             set => Data.SetWord(_priceAddr, value);
         }
 
-        [TableViewModelColumn(displayOrder: 1, displayName: "Weapon/Eq Type", minWidth: 120, displayGroup: "Stats")]
+        [TableViewModelColumn(displayOrder: 1, displayName: "Weapon/Eq Type", minWidth: 120, displayFormat: "X2", displayGroup: "Stats")]
         [BulkCopy]
         [NameGetter(NamedValueType.WeaponType)]
         public int WeaponEqType {
@@ -248,7 +248,7 @@ namespace SF3.Models.Structs.X002 {
         private int ConditionallySignedStatUp(int type, int value)
             => type == (int) StatUpType.Special || type == (int) StatUpType.Spell ? value : (sbyte) value;
 
-        [TableViewModelColumn(displayOrder: 13, minWidth: 90, displayGroup: "Bonuses")]
+        [TableViewModelColumn(displayOrder: 13, minWidth: 90, displayFormat: "X2", displayGroup: "Bonuses")]
         [BulkCopy]
         [NameGetter(NamedValueType.StatType)]
         public int Stat1Type {
@@ -258,7 +258,7 @@ namespace SF3.Models.Structs.X002 {
 
         public NamedValueType? Stat1ValueType => ValueTypeForStat(Stat1Type);
 
-        [TableViewModelColumn(displayOrder: 14, minWidth: 100, displayGroup: "Bonuses")]
+        [TableViewModelColumn(displayOrder: 14, minWidth: 100, displayFormat: "X2", displayGroup: "Bonuses")]
         [BulkCopy]
         [NameGetter(NamedValueType.ConditionalType, nameof(Stat1ValueType))]
         public int Stat1Mod {
@@ -266,7 +266,7 @@ namespace SF3.Models.Structs.X002 {
             set => Data.SetByte(_stat1ModAddr, (byte) value);
         }
 
-        [TableViewModelColumn(displayOrder: 15, minWidth: 90, displayGroup: "Bonuses")]
+        [TableViewModelColumn(displayOrder: 15, minWidth: 90, displayFormat: "X2", displayGroup: "Bonuses")]
         [BulkCopy]
         [NameGetter(NamedValueType.StatType)]
         public int Stat2Type {
@@ -276,7 +276,7 @@ namespace SF3.Models.Structs.X002 {
 
         public NamedValueType? Stat2ValueType => ValueTypeForStat(Stat2Type);
 
-        [TableViewModelColumn(displayOrder: 16, minWidth: 100, displayGroup: "Bonuses")]
+        [TableViewModelColumn(displayOrder: 16, minWidth: 100, displayFormat: "X2", displayGroup: "Bonuses")]
         [BulkCopy]
         [NameGetter(NamedValueType.ConditionalType, nameof(Stat2ValueType))]
         public int Stat2Mod {
@@ -284,7 +284,7 @@ namespace SF3.Models.Structs.X002 {
             set => Data.SetByte(_stat2ModAddr, (byte) value);
         }
 
-        [TableViewModelColumn(displayOrder: 17, minWidth: 90, displayGroup: "Bonuses")]
+        [TableViewModelColumn(displayOrder: 17, minWidth: 90, displayFormat: "X2", displayGroup: "Bonuses")]
         [BulkCopy]
         [NameGetter(NamedValueType.StatType)]
         public int Stat3Type {
@@ -294,7 +294,7 @@ namespace SF3.Models.Structs.X002 {
 
         public NamedValueType? Stat3ValueType => ValueTypeForStat(Stat3Type);
 
-        [TableViewModelColumn(displayOrder: 18, minWidth: 100, displayGroup: "Bonuses")]
+        [TableViewModelColumn(displayOrder: 18, minWidth: 100, displayFormat: "X2", displayGroup: "Bonuses")]
         [BulkCopy]
         [NameGetter(NamedValueType.ConditionalType, nameof(Stat3ValueType))]
         public int Stat3Mod {
@@ -302,7 +302,7 @@ namespace SF3.Models.Structs.X002 {
             set => Data.SetByte(_stat3ModAddr, (byte) value);
         }
 
-        [TableViewModelColumn(displayOrder: 19, minWidth: 90, displayGroup: "Bonuses")]
+        [TableViewModelColumn(displayOrder: 19, minWidth: 90, displayFormat: "X2", displayGroup: "Bonuses")]
         [BulkCopy]
         [NameGetter(NamedValueType.StatType)]
         public int Stat4Type {
@@ -312,7 +312,7 @@ namespace SF3.Models.Structs.X002 {
 
         public NamedValueType? Stat4ValueType => ValueTypeForStat(Stat4Type);
 
-        [TableViewModelColumn(displayOrder: 20, minWidth: 130, displayGroup: "Bonuses")]
+        [TableViewModelColumn(displayOrder: 20, minWidth: 130, displayFormat: "X2", displayGroup: "Bonuses")]
         [BulkCopy]
         [NameGetter(NamedValueType.ConditionalType, nameof(Stat4ValueType))]
         public int Stat4Mod {
@@ -320,7 +320,7 @@ namespace SF3.Models.Structs.X002 {
             set => Data.SetByte(_stat4ModAddr, (byte) value);
         }
 
-        [TableViewModelColumn(displayOrder: 21, minWidth: 130, displayGroup: "Stats")]
+        [TableViewModelColumn(displayOrder: 21, minWidth: 130, displayFormat: "X2", displayGroup: "Stats")]
         [BulkCopy]
         [NameGetter(NamedValueType.Spell)]
         public int UseSpell {

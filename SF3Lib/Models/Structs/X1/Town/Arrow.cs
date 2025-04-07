@@ -35,7 +35,7 @@ namespace SF3.Models.Structs.X1.Town {
             set => Data.SetWord(_textIDAddr, value);
         }
 
-        [TableViewModelColumn(displayOrder: 2, displayFormat: "X2")]
+        [TableViewModelColumn(displayOrder: 2, displayFormat: "X3")]
         [BulkCopy]
         [NameGetter(NamedValueType.GameFlag)]
         public int IfFlagOff {

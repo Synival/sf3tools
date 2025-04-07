@@ -19,7 +19,7 @@ namespace SF3.Models.Structs.X002 {
             weaponLv3 = Address + 4; // 1 byte
         }
 
-        [TableViewModelColumn(displayOrder: 0, displayName: "Spell", minWidth: 100)]
+        [TableViewModelColumn(displayOrder: 0, displayName: "Spell", minWidth: 100, displayFormat: "X2")]
         [BulkCopy]
         [NameGetter(NamedValueType.Spell)]
         public int SpellID2 {

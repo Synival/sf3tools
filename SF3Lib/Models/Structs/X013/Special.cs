@@ -35,7 +35,7 @@ namespace SF3.Models.Structs.X013 {
         public NamedValueType? MidPowType
             => (LowPow == 100) ? NamedValueType.Element : (NamedValueType?) null;
 
-        [TableViewModelColumn(displayOrder: 2, minWidth: 100)]
+        [TableViewModelColumn(displayOrder: 2, minWidth: 100, displayFormat: "X2")]
         [BulkCopy]
         [NameGetter(NamedValueType.ConditionalType, nameof(MidPowType))]
         public int MidPow {

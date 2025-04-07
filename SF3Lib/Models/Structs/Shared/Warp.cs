@@ -70,7 +70,7 @@ namespace SF3.Models.Structs.Shared {
         [TableViewModelColumn(displayOrder: 3.5f, visibilityProperty: nameof(IsBattle))]
         public BattleWarpType? BattleWarpTrigger => (IsBattle && Enum.IsDefined(typeof(BattleWarpType), (int) WarpTrigger)) ? (BattleWarpType?) (int) WarpTrigger : null;
 
-        [TableViewModelColumn(displayOrder: 4, minWidth: 120)]
+        [TableViewModelColumn(displayOrder: 4, minWidth: 120, displayFormat: "X3")]
         [BulkCopy]
         [NameGetter(NamedValueType.Load)]
         public int LoadID {

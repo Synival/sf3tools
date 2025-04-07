@@ -127,7 +127,7 @@ namespace SF3.Models.Structs.X1.Battle {
         // Page 1
         // ------------------------------------------------------------------------------------------------------------
 
-        [TableViewModelColumn(displayOrder: 0, minWidth: 150, displayGroup: "Page1")]
+        [TableViewModelColumn(displayOrder: 0, minWidth: 150, displayFormat: "X2", displayGroup: "Page1")]
         [BulkCopy]
         [NameGetter(NamedValueType.MonsterForSlot)]
         public int EnemyID {
@@ -169,7 +169,7 @@ namespace SF3.Models.Structs.X1.Battle {
             set => Data.SetWord(_yAddr, value);
         }
 
-        [TableViewModelColumn(displayOrder: 3, minWidth: 150, displayGroup: "Page1")]
+        [TableViewModelColumn(displayOrder: 3, minWidth: 150, displayFormat: "X2", displayGroup: "Page1")]
         [BulkCopy]
         [NameGetter(NamedValueType.Item)]
         public int ItemOverride {
@@ -562,7 +562,7 @@ namespace SF3.Models.Structs.X1.Battle {
             }
         }
 
-        [TableViewModelColumn(displayOrder: 46, displayName: "Flag / Battle ID", displayFormat: "X2", minWidth: 200, displayGroup: "Page5")]
+        [TableViewModelColumn(displayOrder: 46, displayName: "Flag / Battle ID", displayFormat: "X3", minWidth: 200, displayGroup: "Page5")]
         [BulkCopy]
         [NameGetter(NamedValueType.ConditionalType, nameof(FlagOrBattleIDType))]
         public int FlagTieInOrUnknown {

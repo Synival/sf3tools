@@ -280,7 +280,7 @@ namespace SF3.Models.Structs.X019 {
             set => Data.SetByte(unusedRes, (byte) value);
         }
 
-        [TableViewModelColumn(displayOrder: 19, displayGroup: "Spells", minWidth: 120)]
+        [TableViewModelColumn(displayOrder: 19, displayGroup: "Spells", minWidth: 120, displayFormat: "X2")]
         [BulkCopy]
         [NameGetter(NamedValueType.Spell)]
         public int Spell1 {
@@ -295,7 +295,7 @@ namespace SF3.Models.Structs.X019 {
             set => Data.SetByte(spell1Level, (byte) value);
         }
 
-        [TableViewModelColumn(displayOrder: 21, displayGroup: "Spells", minWidth: 120)]
+        [TableViewModelColumn(displayOrder: 21, displayGroup: "Spells", minWidth: 120, displayFormat: "X2")]
         [BulkCopy]
         [NameGetter(NamedValueType.Spell)]
         public int Spell2 {
@@ -310,7 +310,7 @@ namespace SF3.Models.Structs.X019 {
             set => Data.SetByte(spell2Level, (byte) value);
         }
 
-        [TableViewModelColumn(displayOrder: 23, displayGroup: "Spells", minWidth: 120)]
+        [TableViewModelColumn(displayOrder: 23, displayGroup: "Spells", minWidth: 120, displayFormat: "X2")]
         [BulkCopy]
         [NameGetter(NamedValueType.Spell)]
         public int Spell3 {
@@ -325,7 +325,7 @@ namespace SF3.Models.Structs.X019 {
             set => Data.SetByte(spell3Level, (byte) value);
         }
 
-        [TableViewModelColumn(displayOrder: 25, displayGroup: "Spells", minWidth: 120)]
+        [TableViewModelColumn(displayOrder: 25, displayGroup: "Spells", minWidth: 120, displayFormat: "X2")]
         [BulkCopy]
         [NameGetter(NamedValueType.Spell)]
         public int Spell4 {
@@ -340,7 +340,7 @@ namespace SF3.Models.Structs.X019 {
             set => Data.SetByte(spell4Level, (byte) value);
         }
 
-        [TableViewModelColumn(displayOrder: 27, displayGroup: "Items", minWidth: 120)]
+        [TableViewModelColumn(displayOrder: 27, displayGroup: "Items", minWidth: 120, displayFormat: "X2")]
         [BulkCopy]
         [NameGetter(NamedValueType.Item)]
         public int Weapon {
@@ -348,7 +348,7 @@ namespace SF3.Models.Structs.X019 {
             set => Data.SetWord(equippedWeapon, value);
         }
 
-        [TableViewModelColumn(displayOrder: 27, displayGroup: "Items", minWidth: 120)]
+        [TableViewModelColumn(displayOrder: 27, displayGroup: "Items", minWidth: 120, displayFormat: "X2")]
         [BulkCopy]
         [NameGetter(NamedValueType.Item)]
         public int Accessory {
@@ -356,7 +356,7 @@ namespace SF3.Models.Structs.X019 {
             set => Data.SetWord(equippedAccessory, value);
         }
 
-        [TableViewModelColumn(displayOrder: 28, displayGroup: "Items", minWidth: 120)]
+        [TableViewModelColumn(displayOrder: 28, displayGroup: "Items", minWidth: 120, displayFormat: "X2")]
         [BulkCopy]
         [NameGetter(NamedValueType.Item)]
         public int ItemSlot1 {
@@ -364,7 +364,7 @@ namespace SF3.Models.Structs.X019 {
             set => Data.SetWord(itemSlot1, value);
         }
 
-        [TableViewModelColumn(displayOrder: 29, displayGroup: "Items", minWidth: 120)]
+        [TableViewModelColumn(displayOrder: 29, displayGroup: "Items", minWidth: 120, displayFormat: "X2")]
         [BulkCopy]
         [NameGetter(NamedValueType.Item)]
         public int ItemSlot2 {
@@ -372,7 +372,7 @@ namespace SF3.Models.Structs.X019 {
             set => Data.SetWord(itemSlot2, value);
         }
 
-        [TableViewModelColumn(displayOrder: 30, displayGroup: "Items", minWidth: 120)]
+        [TableViewModelColumn(displayOrder: 30, displayGroup: "Items", minWidth: 120, displayFormat: "X2")]
         [BulkCopy]
         [NameGetter(NamedValueType.Item)]
         public int ItemSlot3 {
@@ -380,7 +380,7 @@ namespace SF3.Models.Structs.X019 {
             set => Data.SetWord(itemSlot3, value);
         }
 
-        [TableViewModelColumn(displayOrder: 31, displayGroup: "Items", minWidth: 120)]
+        [TableViewModelColumn(displayOrder: 31, displayGroup: "Items", minWidth: 120, displayFormat: "X2")]
         [BulkCopy]
         [NameGetter(NamedValueType.Item)]
         public int ItemSlot4 {
@@ -388,7 +388,7 @@ namespace SF3.Models.Structs.X019 {
             set => Data.SetWord(itemSlot4, value);
         }
 
-        [TableViewModelColumn(displayOrder: 32, displayGroup: "Specials", minWidth: 120)]
+        [TableViewModelColumn(displayOrder: 32, displayGroup: "Specials", minWidth: 120, displayFormat: "X2")]
         [BulkCopy]
         [NameGetter(NamedValueType.Special)]
         public int Special1 {
@@ -396,7 +396,7 @@ namespace SF3.Models.Structs.X019 {
             set => Data.SetByte(enemySpecial1, (byte) value);
         }
 
-        [TableViewModelColumn(displayOrder: 33, displayGroup: "Specials", minWidth: 120)]
+        [TableViewModelColumn(displayOrder: 33, displayGroup: "Specials", minWidth: 120, displayFormat: "X2")]
         [BulkCopy]
         [NameGetter(NamedValueType.Special)]
         public int Special2 {
@@ -404,7 +404,7 @@ namespace SF3.Models.Structs.X019 {
             set => Data.SetByte(enemySpecial2, (byte) value);
         }
 
-        [TableViewModelColumn(displayOrder: 34, displayGroup: "Specials", minWidth: 120)]
+        [TableViewModelColumn(displayOrder: 34, displayGroup: "Specials", minWidth: 120, displayFormat: "X2")]
         [BulkCopy]
         [NameGetter(NamedValueType.Special)]
         public int Special3 {
@@ -412,7 +412,7 @@ namespace SF3.Models.Structs.X019 {
             set => Data.SetByte(enemySpecial3, (byte) value);
         }
 
-        [TableViewModelColumn(displayOrder: 35, displayGroup: "Specials", minWidth: 120)]
+        [TableViewModelColumn(displayOrder: 35, displayGroup: "Specials", minWidth: 120, displayFormat: "X2")]
         [BulkCopy]
         [NameGetter(NamedValueType.Special)]
         public int Special4 {
@@ -420,7 +420,7 @@ namespace SF3.Models.Structs.X019 {
             set => Data.SetByte(enemySpecial4, (byte) value);
         }
 
-        [TableViewModelColumn(displayOrder: 36, displayGroup: "Specials", minWidth: 120)]
+        [TableViewModelColumn(displayOrder: 36, displayGroup: "Specials", minWidth: 120, displayFormat: "X2")]
         [BulkCopy]
         [NameGetter(NamedValueType.Special)]
         public int Special5 {
@@ -428,7 +428,7 @@ namespace SF3.Models.Structs.X019 {
             set => Data.SetByte(enemySpecial5, (byte) value);
         }
 
-        [TableViewModelColumn(displayOrder: 37, displayGroup: "Specials", minWidth: 120)]
+        [TableViewModelColumn(displayOrder: 37, displayGroup: "Specials", minWidth: 120, displayFormat: "X2")]
         [BulkCopy]
         [NameGetter(NamedValueType.Special)]
         public int Special6 {
@@ -436,7 +436,7 @@ namespace SF3.Models.Structs.X019 {
             set => Data.SetByte(enemySpecial6, (byte) value);
         }
 
-        [TableViewModelColumn(displayOrder: 38, displayGroup: "Specials", minWidth: 120)]
+        [TableViewModelColumn(displayOrder: 38, displayGroup: "Specials", minWidth: 120, displayFormat: "X2")]
         [BulkCopy]
         [NameGetter(NamedValueType.Special)]
         public int Special7 {
@@ -444,7 +444,7 @@ namespace SF3.Models.Structs.X019 {
             set => Data.SetByte(enemySpecial7, (byte) value);
         }
 
-        [TableViewModelColumn(displayOrder: 39, displayGroup: "Specials", minWidth: 120)]
+        [TableViewModelColumn(displayOrder: 39, displayGroup: "Specials", minWidth: 120, displayFormat: "X2")]
         [BulkCopy]
         [NameGetter(NamedValueType.Special)]
         public int Special8 {
@@ -452,7 +452,7 @@ namespace SF3.Models.Structs.X019 {
             set => Data.SetByte(enemySpecial8, (byte) value);
         }
 
-        [TableViewModelColumn(displayOrder: 40, displayGroup: "Specials", minWidth: 120)]
+        [TableViewModelColumn(displayOrder: 40, displayGroup: "Specials", minWidth: 120, displayFormat: "X2")]
         [BulkCopy]
         [NameGetter(NamedValueType.Special)]
         public int Special9 {
@@ -460,7 +460,7 @@ namespace SF3.Models.Structs.X019 {
             set => Data.SetByte(enemySpecial9, (byte) value);
         }
 
-        [TableViewModelColumn(displayOrder: 41, displayGroup: "Specials", minWidth: 120)]
+        [TableViewModelColumn(displayOrder: 41, displayGroup: "Specials", minWidth: 120, displayFormat: "X2")]
         [BulkCopy]
         [NameGetter(NamedValueType.Special)]
         public int Special10 {
@@ -523,7 +523,7 @@ namespace SF3.Models.Structs.X019 {
             set => Data.SetWord(gold, value);
         }
 
-        [TableViewModelColumn(displayOrder: 50, displayGroup: "Stats2", minWidth: 120)]
+        [TableViewModelColumn(displayOrder: 50, displayGroup: "Stats2", minWidth: 120, displayFormat: "X2")]
         [BulkCopy]
         [NameGetter(NamedValueType.Item)]
         public int Drop {
@@ -538,7 +538,7 @@ namespace SF3.Models.Structs.X019 {
             set => Data.SetByte(unknown7, (byte) value);
         }
 
-        [TableViewModelColumn(displayOrder: 52, displayGroup: "Stats2", minWidth: 100)]
+        [TableViewModelColumn(displayOrder: 52, displayGroup: "Stats2", minWidth: 100, displayFormat: "X2")]
         [BulkCopy]
         [NameGetter(NamedValueType.Droprate)]
         public int Droprate {
@@ -567,7 +567,7 @@ namespace SF3.Models.Structs.X019 {
             set => Data.SetByte(magicType, (byte) value);
         }
 
-        [TableViewModelColumn(displayOrder: 56, displayGroup: "Stats2")]
+        [TableViewModelColumn(displayOrder: 56, displayGroup: "Stats2", displayFormat: "X2")]
         [BulkCopy]
         [NameGetter(NamedValueType.MovementType)]
         public int MovementType {

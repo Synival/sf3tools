@@ -32,7 +32,7 @@ namespace SF3.Models.Structs.X002 {
             set => Data.SetWord(locationID, value);
         }
 
-        [TableViewModelColumn(displayOrder: 1, minWidth: 140)]
+        [TableViewModelColumn(displayOrder: 1, minWidth: 140, displayFormat: "X3")]
         [BulkCopy]
         [NameGetter(NamedValueType.FileIndex)]
         public int X1 {
@@ -47,7 +47,7 @@ namespace SF3.Models.Structs.X002 {
             set => Data.SetWord(chp, value);
         }
 
-        [TableViewModelColumn(displayOrder: 3, minWidth: 140)]
+        [TableViewModelColumn(displayOrder: 3, minWidth: 140, displayFormat: "X3")]
         [BulkCopy]
         [NameGetter(NamedValueType.FileIndex)]
         public int X5 {
@@ -62,7 +62,7 @@ namespace SF3.Models.Structs.X002 {
             set => Data.SetWord(music, value);
         }
 
-        [TableViewModelColumn(displayOrder: 5, minWidth: 140)]
+        [TableViewModelColumn(displayOrder: 5, minWidth: 140, displayFormat: "X3")]
         [BulkCopy]
         [NameGetter(NamedValueType.FileIndex)]
         public int MPD {
@@ -77,7 +77,7 @@ namespace SF3.Models.Structs.X002 {
             set => Data.SetWord(unknown, value);
         }
 
-        [TableViewModelColumn(displayOrder: 7, minWidth: 140)]
+        [TableViewModelColumn(displayOrder: 7, minWidth: 140, displayFormat: "X3")]
         [BulkCopy]
         [NameGetter(NamedValueType.FileIndex)]
         public int CHR {
