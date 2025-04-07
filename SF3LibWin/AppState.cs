@@ -131,5 +131,21 @@ namespace SF3.Win {
         public event EventHandler UseDropdownsForNamedValuesChanged;
 
         public bool UseVanillaHalfHeightForSurfaceNormalCalculations { get; set; } = true;
+
+        /// <summary>
+        /// Enables experimental map editing features that only work on a modified version of FIELD.MPD for the Premium Disk.
+        /// You'll never want this unless you're working with the BlankField_V2.MPD template.
+        /// </summary>
+        public bool EnableExperimentalBlankFieldV2Brushes {
+            get => _enableExperimentalBlankFieldV2Brushes;
+            set {
+                if (value != _enableExperimentalBlankFieldV2Brushes) {
+                    _enableExperimentalBlankFieldV2Brushes = value;
+                    EnableExperimentalBlankFieldV2BrushesChanged?.Invoke(this, EventArgs.Empty);
+                }
+            }
+        }
+        private bool _enableExperimentalBlankFieldV2Brushes = false;
+        public event EventHandler EnableExperimentalBlankFieldV2BrushesChanged;
     }
 }

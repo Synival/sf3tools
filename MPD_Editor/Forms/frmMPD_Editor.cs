@@ -17,6 +17,7 @@ using SF3.Models.Structs.MPD.TextureAnimation;
 using SF3.Models.Structs.MPD.TextureChunk;
 using SF3.NamedValues;
 using SF3.Types;
+using SF3.Win;
 using SF3.Win.Forms;
 using SF3.Win.Types;
 using SF3.Win.Views;
@@ -65,6 +66,15 @@ namespace SF3.MPD_Editor.Forms {
 
             // TODO: re-enable these features once they're working properly...
             tsmiChunks.Visible = false;
+
+            // Link some dropdowns/values to the app state.
+            _appState = AppState.RetrieveAppState();
+
+            tsmiEdit_EnableBlankFieldV2Controls.Checked = _appState.EnableExperimentalBlankFieldV2Brushes;
+            _appState.EnableExperimentalBlankFieldV2BrushesChanged += (s, e) => {
+                tsmiEdit_EnableBlankFieldV2Controls.Checked = _appState.EnableExperimentalBlankFieldV2Brushes;
+                _appState.Serialize();
+            };
 
             FileIsLoadedChanged += (s, e) => {
                 tsmiChunks_ExportChunk.Enabled = IsLoaded;
@@ -365,5 +375,10 @@ namespace SF3.MPD_Editor.Forms {
                 ErrorMessage("Error while deleting:\r\n\r\n" + ex.Message);
             }
         }
+
+        private void tsmiEdit_EnableBlankFieldV2Controls_Click(object sender, EventArgs e)
+            => _appState.EnableExperimentalBlankFieldV2Brushes = !_appState.EnableExperimentalBlankFieldV2Brushes;
+
+        private readonly AppState _appState;
     }
 }

@@ -39,17 +39,19 @@ namespace SF3.MPD_Editor.Forms {
             tsmiTextures_ExportToFolder = new System.Windows.Forms.ToolStripMenuItem();
             tsmiHelp = new System.Windows.Forms.ToolStripMenuItem();
             tsmiHelp_About = new System.Windows.Forms.ToolStripMenuItem();
+            tsmiEdit = new System.Windows.Forms.ToolStripMenuItem();
+            tsmiEdit_EnableBlankFieldV2Controls = new System.Windows.Forms.ToolStripMenuItem();
             menuStrip2.SuspendLayout();
             SuspendLayout();
             // 
             // menuStrip2
             // 
             menuStrip2.Dock = System.Windows.Forms.DockStyle.None;
-            menuStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { tsmiChunks, tsmiTextures, tsmiHelp });
+            menuStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { tsmiEdit, tsmiChunks, tsmiTextures, tsmiHelp });
             menuStrip2.Location = new System.Drawing.Point(0, 0);
             menuStrip2.Name = "menuStrip2";
             menuStrip2.Padding = new System.Windows.Forms.Padding(7, 2, 0, 2);
-            menuStrip2.Size = new System.Drawing.Size(294, 24);
+            menuStrip2.Size = new System.Drawing.Size(333, 24);
             menuStrip2.TabIndex = 1;
             // 
             // tsmiChunks
@@ -153,6 +155,20 @@ namespace SF3.MPD_Editor.Forms {
             tsmiHelp_About.Text = "About...";
             tsmiHelp_About.Click += tsmiHelp_About_Click;
             // 
+            // tsmiEdit
+            // 
+            tsmiEdit.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { tsmiEdit_EnableBlankFieldV2Controls });
+            tsmiEdit.Name = "tsmiEdit";
+            tsmiEdit.Size = new System.Drawing.Size(39, 20);
+            tsmiEdit.Text = "&Edit";
+            // 
+            // tsmiEdit_EnableBlankFieldV2Controls
+            // 
+            tsmiEdit_EnableBlankFieldV2Controls.Name = "tsmiEdit_EnableBlankFieldV2Controls";
+            tsmiEdit_EnableBlankFieldV2Controls.Size = new System.Drawing.Size(384, 22);
+            tsmiEdit_EnableBlankFieldV2Controls.Text = "EXPERIMENTAL: Enable tile controls for BlankField_V2.MPD";
+            tsmiEdit_EnableBlankFieldV2Controls.Click += tsmiEdit_EnableBlankFieldV2Controls_Click;
+            // 
             // frmMPDEditor
             // 
             AllowDrop = true;
@@ -187,6 +203,8 @@ namespace SF3.MPD_Editor.Forms {
         private System.Windows.Forms.ToolStripMenuItem tsmiChunks_CorrectChunkPlacement;
         private System.Windows.Forms.ToolStripSeparator tsmiChunks_Separator2;
         private System.Windows.Forms.ToolStripMenuItem tsmiChunks_MoveChunksAutomatically;
+        private System.Windows.Forms.ToolStripMenuItem tsmiEdit;
+        private System.Windows.Forms.ToolStripMenuItem tsmiEdit_EnableBlankFieldV2Controls;
     }
 }
 

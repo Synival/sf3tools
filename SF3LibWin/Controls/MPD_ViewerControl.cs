@@ -38,6 +38,16 @@ namespace SF3.Win.Controls {
 
             tsbToggleHelp.Checked        = GLControl.DrawHelp;
 
+            // Experimental controls that only apply to a modified FIELD.MPD on the PD (BlankField_V2.MPD).
+            var appState = AppState.RetrieveAppState();
+            toolStrip2.Visible = appState.EnableExperimentalBlankFieldV2Brushes;
+            appState.EnableExperimentalBlankFieldV2BrushesChanged += (s, e) => {
+                var isEnabled = appState.EnableExperimentalBlankFieldV2Brushes;
+                toolStrip2.Visible = isEnabled;
+                if (!isEnabled && GLControl.CursorMode.IsDrawingMode())
+                    GLControl.CursorMode = ViewerCursorMode.Select;
+            };
+
             // Make sure certain key events make it to the GLControl.
             tilePropertyControl1.CmdKey += (object sender, ref Message msg, Keys keyData, ref bool wasProcessed) => {
                 if (wasProcessed)
