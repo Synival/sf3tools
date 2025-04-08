@@ -14,9 +14,12 @@ namespace SF3.Win.Views.X033_X031 {
             var ngc = Model.NameGetterContext;
             if (Model.StatsTable != null) {
                 CreateChild(new TableView("Characters and Classes", Model.StatsTable, ngc, displayGroups: ["Metadata", "CharAndClass"]));
-                CreateChild(new TableView("Stat Growth", Model.StatsTable, ngc, displayGroups: ["Metadata", "Stats"]));
-                CreateChild(new TableView("Spells", Model.StatsTable, ngc, displayGroups: ["Metadata", "Spells"]));
-                CreateChild(new TableView("Miscellaneous", Model.StatsTable, ngc, displayGroups: ["Metadata", "Miscellaneous"]));
+                CreateChild(new TableView("Stats 1 (Growth)",       Model.StatsTable, ngc, displayGroups: ["Metadata", "Stats"]));
+                CreateChild(new TableView("Stats 2",                Model.StatsTable, ngc, displayGroups: ["Metadata", "Stats2"]));
+                CreateChild(new TableView("Magic Resistance",       Model.StatsTable, ngc, displayGroups: ["Metadata", "MagicRes"]));
+                CreateChild(new TableView("Equipment",              Model.StatsTable, ngc, displayGroups: ["Metadata", "Equipment"]));
+                CreateChild(new TableView("Spells",                 Model.StatsTable, ngc, displayGroups: ["Metadata", "Spells"]));
+                CreateChild(new TableView("Specials",               Model.StatsTable, ngc, displayGroups: ["Metadata", "Specials"]));
             }
             if (Model.InitialInfoTable != null)
                 CreateChild(new TableView("Initial Info", Model.InitialInfoTable, ngc));

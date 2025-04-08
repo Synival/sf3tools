@@ -1045,6 +1045,10 @@ namespace SF3.Models.Structs.X033_X031 {
             set => Data.SetByte(weapon4Special3, (byte) value);
         }
 
+        // ==============================
+        // Stats 2
+        // ==============================
+
         [BulkCopy]
         public int BaseLuck {
             get => Data.GetByte(baseLuck);
@@ -1074,6 +1078,10 @@ namespace SF3.Models.Structs.X033_X031 {
             get => Data.GetByte(baseMPRegen);
             set => Data.SetByte(baseMPRegen, (byte) value);
         }
+
+        // ==============================
+        // Magic Resistance
+        // ==============================
 
         [BulkCopy]
         public int EarthRes {
@@ -1123,6 +1131,10 @@ namespace SF3.Models.Structs.X033_X031 {
             set => Data.SetByte(unknownRes, (byte) value);
         }
 
+        // ==============================
+        // Stats 2 (2/2)
+        // ==============================
+
         [BulkCopy]
         public int Slow {
             get => Data.GetByte(slow);
@@ -1147,6 +1159,10 @@ namespace SF3.Models.Structs.X033_X031 {
             get => Data.GetByte(movementType);
             set => Data.SetByte(movementType, (byte) value);
         }
+
+        // ==============================
+        // Equipment
+        // ==============================
 
         [BulkCopy]
         [NameGetter(NamedValueType.WeaponType)]
