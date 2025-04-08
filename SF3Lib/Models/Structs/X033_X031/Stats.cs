@@ -446,12 +446,12 @@ namespace SF3.Models.Structs.X033_X031 {
             set => Data.SetByte(hpCurve30_99, (byte) value);
         }
 
-        public string HPgroup1 => GetAverageStatGrowthPerLevelAsPercent(StatType.HP, 0);
-        public string HPgroup2 => GetAverageStatGrowthPerLevelAsPercent(StatType.HP, 1);
-        public string HPgroup3 => GetAverageStatGrowthPerLevelAsPercent(StatType.HP, 2);
-        public string HPgroup4 => GetAverageStatGrowthPerLevelAsPercent(StatType.HP, 3);
-        public string HPgroup5 => GetAverageStatGrowthPerLevelAsPercent(StatType.HP, 4);
-        public string HPgroup6 => GetAverageStatGrowthPerLevelAsPercent(StatType.HP, 5);
+        [TableViewModelColumn(displayOrder: 100, displayGroup: "CurveCalc")] public string HPgroup1 => GetAverageStatGrowthPerLevelAsPercent(StatType.HP, 0);
+        [TableViewModelColumn(displayOrder: 101, displayGroup: "CurveCalc")] public string HPgroup2 => GetAverageStatGrowthPerLevelAsPercent(StatType.HP, 1);
+        [TableViewModelColumn(displayOrder: 102, displayGroup: "CurveCalc")] public string HPgroup3 => GetAverageStatGrowthPerLevelAsPercent(StatType.HP, 2);
+        [TableViewModelColumn(displayOrder: 103, displayGroup: "CurveCalc")] public string HPgroup4 => GetAverageStatGrowthPerLevelAsPercent(StatType.HP, 3);
+        [TableViewModelColumn(displayOrder: 104, displayGroup: "CurveCalc")] public string HPgroup5 => GetAverageStatGrowthPerLevelAsPercent(StatType.HP, 4);
+        [TableViewModelColumn(displayOrder: 105, displayGroup: "CurveCalc")] public string HPgroup6 => GetAverageStatGrowthPerLevelAsPercent(StatType.HP, 5);
 
         [BulkCopy]
         public int MPPromote {
@@ -501,12 +501,12 @@ namespace SF3.Models.Structs.X033_X031 {
             set => Data.SetByte(mpCurve30_99, (byte) value);
         }
 
-        public string MPgroup1 => GetAverageStatGrowthPerLevelAsPercent(StatType.MP, 0);
-        public string MPgroup2 => GetAverageStatGrowthPerLevelAsPercent(StatType.MP, 1);
-        public string MPgroup3 => GetAverageStatGrowthPerLevelAsPercent(StatType.MP, 2);
-        public string MPgroup4 => GetAverageStatGrowthPerLevelAsPercent(StatType.MP, 3);
-        public string MPgroup5 => GetAverageStatGrowthPerLevelAsPercent(StatType.MP, 4);
-        public string MPgroup6 => GetAverageStatGrowthPerLevelAsPercent(StatType.MP, 5);
+        [TableViewModelColumn(displayOrder: 110, displayGroup: "CurveCalc")] public string MPgroup1 => GetAverageStatGrowthPerLevelAsPercent(StatType.MP, 0);
+        [TableViewModelColumn(displayOrder: 111, displayGroup: "CurveCalc")] public string MPgroup2 => GetAverageStatGrowthPerLevelAsPercent(StatType.MP, 1);
+        [TableViewModelColumn(displayOrder: 112, displayGroup: "CurveCalc")] public string MPgroup3 => GetAverageStatGrowthPerLevelAsPercent(StatType.MP, 2);
+        [TableViewModelColumn(displayOrder: 113, displayGroup: "CurveCalc")] public string MPgroup4 => GetAverageStatGrowthPerLevelAsPercent(StatType.MP, 3);
+        [TableViewModelColumn(displayOrder: 114, displayGroup: "CurveCalc")] public string MPgroup5 => GetAverageStatGrowthPerLevelAsPercent(StatType.MP, 4);
+        [TableViewModelColumn(displayOrder: 115, displayGroup: "CurveCalc")] public string MPgroup6 => GetAverageStatGrowthPerLevelAsPercent(StatType.MP, 5);
 
         [BulkCopy]
         public int AtkPromote {
@@ -556,12 +556,12 @@ namespace SF3.Models.Structs.X033_X031 {
             set => Data.SetByte(atkCurve30_99, (byte) value);
         }
 
-        public string Atkgroup1 => GetAverageStatGrowthPerLevelAsPercent(StatType.Atk, 0);
-        public string Atkgroup2 => GetAverageStatGrowthPerLevelAsPercent(StatType.Atk, 1);
-        public string Atkgroup3 => GetAverageStatGrowthPerLevelAsPercent(StatType.Atk, 2);
-        public string Atkgroup4 => GetAverageStatGrowthPerLevelAsPercent(StatType.Atk, 3);
-        public string Atkgroup5 => GetAverageStatGrowthPerLevelAsPercent(StatType.Atk, 4);
-        public string Atkgroup6 => GetAverageStatGrowthPerLevelAsPercent(StatType.Atk, 5);
+        [TableViewModelColumn(displayOrder: 120, displayGroup: "CurveCalc")] public string Atkgroup1 => GetAverageStatGrowthPerLevelAsPercent(StatType.Atk, 0);
+        [TableViewModelColumn(displayOrder: 121, displayGroup: "CurveCalc")] public string Atkgroup2 => GetAverageStatGrowthPerLevelAsPercent(StatType.Atk, 1);
+        [TableViewModelColumn(displayOrder: 122, displayGroup: "CurveCalc")] public string Atkgroup3 => GetAverageStatGrowthPerLevelAsPercent(StatType.Atk, 2);
+        [TableViewModelColumn(displayOrder: 123, displayGroup: "CurveCalc")] public string Atkgroup4 => GetAverageStatGrowthPerLevelAsPercent(StatType.Atk, 3);
+        [TableViewModelColumn(displayOrder: 124, displayGroup: "CurveCalc")] public string Atkgroup5 => GetAverageStatGrowthPerLevelAsPercent(StatType.Atk, 4);
+        [TableViewModelColumn(displayOrder: 125, displayGroup: "CurveCalc")] public string Atkgroup6 => GetAverageStatGrowthPerLevelAsPercent(StatType.Atk, 5);
 
         [BulkCopy]
         public int DefPromote {
@@ -611,12 +611,12 @@ namespace SF3.Models.Structs.X033_X031 {
             set => Data.SetByte(defCurve30_99, (byte) value);
         }
 
-        public string Defgroup1 => GetAverageStatGrowthPerLevelAsPercent(StatType.Def, 0);
-        public string Defgroup2 => GetAverageStatGrowthPerLevelAsPercent(StatType.Def, 1);
-        public string Defgroup3 => GetAverageStatGrowthPerLevelAsPercent(StatType.Def, 2);
-        public string Defgroup4 => GetAverageStatGrowthPerLevelAsPercent(StatType.Def, 3);
-        public string Defgroup5 => GetAverageStatGrowthPerLevelAsPercent(StatType.Def, 4);
-        public string Defgroup6 => GetAverageStatGrowthPerLevelAsPercent(StatType.Def, 5);
+        [TableViewModelColumn(displayOrder: 130, displayGroup: "CurveCalc")] public string Defgroup1 => GetAverageStatGrowthPerLevelAsPercent(StatType.Def, 0);
+        [TableViewModelColumn(displayOrder: 131, displayGroup: "CurveCalc")] public string Defgroup2 => GetAverageStatGrowthPerLevelAsPercent(StatType.Def, 1);
+        [TableViewModelColumn(displayOrder: 132, displayGroup: "CurveCalc")] public string Defgroup3 => GetAverageStatGrowthPerLevelAsPercent(StatType.Def, 2);
+        [TableViewModelColumn(displayOrder: 133, displayGroup: "CurveCalc")] public string Defgroup4 => GetAverageStatGrowthPerLevelAsPercent(StatType.Def, 3);
+        [TableViewModelColumn(displayOrder: 134, displayGroup: "CurveCalc")] public string Defgroup5 => GetAverageStatGrowthPerLevelAsPercent(StatType.Def, 4);
+        [TableViewModelColumn(displayOrder: 135, displayGroup: "CurveCalc")] public string Defgroup6 => GetAverageStatGrowthPerLevelAsPercent(StatType.Def, 5);
 
         [BulkCopy]
         public int AgiPromote {
@@ -666,12 +666,12 @@ namespace SF3.Models.Structs.X033_X031 {
             set => Data.SetByte(agiCurve30_99, (byte) value);
         }
 
-        public string Agigroup1 => GetAverageStatGrowthPerLevelAsPercent(StatType.Agi, 0);
-        public string Agigroup2 => GetAverageStatGrowthPerLevelAsPercent(StatType.Agi, 1);
-        public string Agigroup3 => GetAverageStatGrowthPerLevelAsPercent(StatType.Agi, 2);
-        public string Agigroup4 => GetAverageStatGrowthPerLevelAsPercent(StatType.Agi, 3);
-        public string Agigroup5 => GetAverageStatGrowthPerLevelAsPercent(StatType.Agi, 4);
-        public string Agigroup6 => GetAverageStatGrowthPerLevelAsPercent(StatType.Agi, 5);
+        [TableViewModelColumn(displayOrder: 140, displayGroup: "CurveCalc")] public string Agigroup1 => GetAverageStatGrowthPerLevelAsPercent(StatType.Agi, 0);
+        [TableViewModelColumn(displayOrder: 141, displayGroup: "CurveCalc")] public string Agigroup2 => GetAverageStatGrowthPerLevelAsPercent(StatType.Agi, 1);
+        [TableViewModelColumn(displayOrder: 142, displayGroup: "CurveCalc")] public string Agigroup3 => GetAverageStatGrowthPerLevelAsPercent(StatType.Agi, 2);
+        [TableViewModelColumn(displayOrder: 143, displayGroup: "CurveCalc")] public string Agigroup4 => GetAverageStatGrowthPerLevelAsPercent(StatType.Agi, 3);
+        [TableViewModelColumn(displayOrder: 144, displayGroup: "CurveCalc")] public string Agigroup5 => GetAverageStatGrowthPerLevelAsPercent(StatType.Agi, 4);
+        [TableViewModelColumn(displayOrder: 145, displayGroup: "CurveCalc")] public string Agigroup6 => GetAverageStatGrowthPerLevelAsPercent(StatType.Agi, 5);
 
         [BulkCopy]
         public int S1LearnedAt {

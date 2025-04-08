@@ -8,6 +8,7 @@ using CommonLib.NamedValues;
 using DFRLib.Types;
 using DFRLib.Win.Forms;
 using SF3.ModelLoaders;
+using SF3.Models.Structs.X033_X031;
 using SF3.NamedValues;
 using SF3.Types;
 using SF3.Win;
@@ -83,8 +84,11 @@ namespace SF3Editor {
             };
 
             tsmiEdit_EnableDebugSettings.Checked = _appState.EnableDebugSettings;
+            Stats.DebugGrowthValues = _appState.EnableDebugSettings;
+
             _appState.EnableDebugSettingsChanged += (s, e) => {
                 tsmiEdit_EnableDebugSettings.Checked = _appState.EnableDebugSettings;
+                Stats.DebugGrowthValues = _appState.EnableDebugSettings;
                 _appState.Serialize();
             };
         }

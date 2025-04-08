@@ -22,7 +22,7 @@ namespace SF3.Win.Views.X033_X031 {
             if (Model.WeaponLevelExp != null)
                 CreateChild(new DataModelView("Weapon Level Exp", Model.WeaponLevelExp, ngc));
             if (Model.StatsTable != null)
-                CreateChild(new TableView("Curve Calc", Model.StatsTable, ngc, displayGroups: ["Metadata", "CurveGraph"]));
+                CreateChild(new TableView("Curve Calc", Model.StatsTable, ngc, displayGroups: ["Metadata", "CurveCalc"]));
 
             // TODO: Curve Graph
 
