@@ -1174,8 +1174,9 @@ namespace SF3.Models.Structs.X033_X031 {
             set => Data.SetByte(support, (byte) value);
         }
 
-        [TableViewModelColumn(displayOrder: 103, displayFormat: "X2", displayGroup: "Stats2")]
+        [TableViewModelColumn(displayOrder: 103, displayFormat: "X2", minWidth: 120, displayGroup: "Stats2")]
         [BulkCopy]
+        [NameGetter(NamedValueType.MagicBonus)]
         public int MagicBonusID {
             get => Data.GetByte(magicBonus);
             set => Data.SetByte(magicBonus, (byte) value);

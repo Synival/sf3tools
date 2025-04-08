@@ -24,6 +24,7 @@ namespace SF3.Types {
         EventTriggerMoveOnTileType,
         EventTriggerUseItemType,
         EventTriggerWarpSound,
+        MagicBonus,
         MovementType,
         Sex,
         SpawnType,

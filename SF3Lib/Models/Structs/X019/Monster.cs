@@ -560,14 +560,15 @@ namespace SF3.Models.Structs.X019 {
             set => Data.SetByte(supportPlus, (byte) value);
         }
 
-        [TableViewModelColumn(displayOrder: 55, displayGroup: "Stats2", displayFormat: "X2")]
+        [TableViewModelColumn(displayOrder: 55, displayGroup: "Stats2", displayFormat: "X2", minWidth: 120)]
         [BulkCopy]
-        public int MagicType {
+        [NameGetter(NamedValueType.MagicBonus)]
+        public int MagicBonusID {
             get => Data.GetByte(magicType);
             set => Data.SetByte(magicType, (byte) value);
         }
 
-        [TableViewModelColumn(displayOrder: 56, displayGroup: "Stats2", displayFormat: "X2")]
+        [TableViewModelColumn(displayOrder: 56, displayGroup: "Stats2", displayFormat: "X2", minWidth: 100)]
         [BulkCopy]
         [NameGetter(NamedValueType.MovementType)]
         public int MovementType {
