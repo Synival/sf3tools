@@ -90,6 +90,7 @@
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="OpenTK.GLControl" Version="4.0.1" />
+    <PackageReference Include="WinForms.DataVisualization" Version="1.10.0" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CommonLibWin\CommonLibWin.csproj" />

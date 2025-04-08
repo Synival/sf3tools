@@ -5,6 +5,7 @@ using SF3.Models.Files;
 using SF3.Models.Files.X033_X031;
 using SF3.Models.Structs.X033_X031;
 using SF3.NamedValues;
+using SF3.Win;
 using SF3.Win.Extensions;
 using SF3.Win.Forms;
 using static SF3.Win.Extensions.TabControlExtensions;
@@ -33,12 +34,9 @@ namespace SF3.X033_X031_Editor.Forms {
                 return false;
 
             if (!tabMain.PopulateAndToggleTabs(new List<IPopulateTabConfig>() {
-                new PopulateOLVTabConfig(tabStats, olvStats, File.StatsTable),
-                new PopulateOLVTabConfig(tabSpells, olvSpells, File.StatsTable),
                 new PopulateOLVTabConfig(tabEquipStatistics, olvEquipStatistics, File.StatsTable),
                 new PopulateOLVTabConfig(tabMiscellaneous, olvMiscellaneous, File.StatsTable),
                 new PopulateOLVTabConfig(tabInitialInfo, olvInitialInfo, File.InitialInfoTable),
-                new PopulateOLVTabConfig(tabCurveCalc, olvCurveCalc, File.StatsTable)
             })) {
                 return false;
             }

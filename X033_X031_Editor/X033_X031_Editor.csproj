@@ -16,9 +16,6 @@
     <Content Include="pen_penguin.ico" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="WinForms.DataVisualization" Version="1.9.2" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\CommonLib\CommonLib.csproj" />
     <ProjectReference Include="..\ObjectListView\ObjectListView\ObjectListView2008.csproj" />
     <ProjectReference Include="..\SF3LibWin\SF3LibWin.csproj" />
