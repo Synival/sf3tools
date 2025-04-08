@@ -1194,6 +1194,7 @@ namespace SF3.Models.Structs.X033_X031 {
         // Equipment
         // ==============================
 
+        [TableViewModelColumn(displayOrder: 105, displayFormat: "X2", minWidth: 120, displayGroup: "Equipment")]
         [BulkCopy]
         [NameGetter(NamedValueType.WeaponType)]
         public int WeaponEquipable1 {
@@ -1201,6 +1202,7 @@ namespace SF3.Models.Structs.X033_X031 {
             set => Data.SetByte(weaponEquipable1, (byte) value);
         }
 
+        [TableViewModelColumn(displayOrder: 106, displayFormat: "X2", minWidth: 120, displayGroup: "Equipment")]
         [BulkCopy]
         [NameGetter(NamedValueType.WeaponType)]
         public int WeaponEquipable2 {
@@ -1208,6 +1210,7 @@ namespace SF3.Models.Structs.X033_X031 {
             set => Data.SetByte(weaponEquipable2, (byte) value);
         }
 
+        [TableViewModelColumn(displayOrder: 107, displayFormat: "X2", minWidth: 120, displayGroup: "Equipment")]
         [BulkCopy]
         [NameGetter(NamedValueType.WeaponType)]
         public int WeaponEquipable3 {
@@ -1215,6 +1218,7 @@ namespace SF3.Models.Structs.X033_X031 {
             set => Data.SetByte(weaponEquipable3, (byte) value);
         }
 
+        [TableViewModelColumn(displayOrder: 108, displayFormat: "X2", minWidth: 120, displayGroup: "Equipment")]
         [BulkCopy]
         [NameGetter(NamedValueType.WeaponType)]
         public int WeaponEquipable4 {
@@ -1222,6 +1226,7 @@ namespace SF3.Models.Structs.X033_X031 {
             set => Data.SetByte(weaponEquipable4, (byte) value);
         }
 
+        [TableViewModelColumn(displayOrder: 109, displayFormat: "X2", minWidth: 120, displayGroup: "Equipment")]
         [BulkCopy]
         [NameGetter(NamedValueType.WeaponType)]
         public int AccessoryEquipable1 {
@@ -1229,6 +1234,7 @@ namespace SF3.Models.Structs.X033_X031 {
             set => Data.SetByte(accessoryEquipable1, (byte) value);
         }
 
+        [TableViewModelColumn(displayOrder: 110, displayFormat: "X2", minWidth: 120, displayGroup: "Equipment")]
         [BulkCopy]
         [NameGetter(NamedValueType.WeaponType)]
         public int AccessoryEquipable2 {
@@ -1236,6 +1242,7 @@ namespace SF3.Models.Structs.X033_X031 {
             set => Data.SetByte(accessoryEquipable2, (byte) value);
         }
 
+        [TableViewModelColumn(displayOrder: 111, displayFormat: "X2", minWidth: 120, displayGroup: "Equipment")]
         [BulkCopy]
         [NameGetter(NamedValueType.WeaponType)]
         public int AccessoryEquipable3 {
@@ -1243,6 +1250,7 @@ namespace SF3.Models.Structs.X033_X031 {
             set => Data.SetByte(accessoryEquipable3, (byte) value);
         }
 
+        [TableViewModelColumn(displayOrder: 112, displayFormat: "X2", minWidth: 120, displayGroup: "Equipment")]
         [BulkCopy]
         [NameGetter(NamedValueType.WeaponType)]
         public int AccessoryEquipable4 {
