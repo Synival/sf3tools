@@ -6,6 +6,14 @@ using SF3.Types;
 namespace SF3.FieldEditing {
 
     public class FlattenedLayers : IEqualityComparer<FlattenedLayers> {
+        public FlattenedLayers(TileType?[,] tileTypes) {
+            if (tileTypes.GetLength(0) != 3 || tileTypes.GetLength(1) != 3)
+                throw new ArgumentException(nameof(tileTypes));
+
+            Types = tileTypes;
+            _hashCode = CreateHashCode();
+        }
+
         public FlattenedLayers(TileLayer[] layers, TileType? underlyingType = TileType.Water) {
             layers = layers.ToArray();
 
@@ -26,7 +34,6 @@ namespace SF3.FieldEditing {
             TileType? GetTopmostLayerWithFillBit(TileFill bit)
                 => layers.LastOrDefault(l => l.Fill.HasFlag(bit))?.Type;
 
-            _hashCode = 0;
             for (int ix = 0; ix <= 2; ix++) {
                 for (int iy = 0; iy <= 2; iy++) {
                     var bit = GetFillBitForCoordinate(ix, iy);
@@ -34,6 +41,16 @@ namespace SF3.FieldEditing {
                     _hashCode = _hashCode * (_hashCode * 31) + ((int) (Types[ix, iy] ?? (TileType) (-1))) + 1;
                 }
             }
+
+            _hashCode = CreateHashCode();
+        }
+
+        private int CreateHashCode() {
+            int hashCode = 0;
+            for (int ix = 0; ix <= 2; ix++)
+                for (int iy = 0; iy <= 2; iy++)
+                    hashCode = _hashCode * (_hashCode * 31) + ((int) (Types[ix, iy] ?? (TileType) (-1))) + 1;
+            return _hashCode;
         }
 
         public static bool operator==(FlattenedLayers lhs, FlattenedLayers rhs) {
