@@ -386,10 +386,10 @@ namespace SF3.Models.Structs.X033_X031 {
         }
 
         // ==============================
-        // Stats
+        // Character and Class
         // ==============================
 
-        [TableViewModelColumn(displayOrder: 0, minWidth: 100, displayFormat: "X2", displayGroup: "Stats")]
+        [TableViewModelColumn(displayOrder: 0, minWidth: 100, displayFormat: "X2", displayGroup: "CharAndClass")]
         [BulkCopy]
         [NameGetter(NamedValueType.Character)]
         public int CharacterID {
@@ -397,13 +397,17 @@ namespace SF3.Models.Structs.X033_X031 {
             set => Data.SetByte(character, (byte) value);
         }
 
-        [TableViewModelColumn(displayOrder: 1, displayName: "Class", minWidth: 150, displayFormat: "X2", displayGroup: "Stats")]
+        [TableViewModelColumn(displayOrder: 1, displayName: "Class", minWidth: 150, displayFormat: "X2", displayGroup: "CharAndClass")]
         [BulkCopy]
         [NameGetter(NamedValueType.CharacterClass)]
         public int CharacterClass {
             get => Data.GetByte(characterClass);
             set => Data.SetByte(characterClass, (byte) value);
         }
+
+        // ==============================
+        // Stats
+        // ==============================
 
         [TableViewModelColumn(displayOrder: 2, displayGroup: "Stats")]
         [BulkCopy]
