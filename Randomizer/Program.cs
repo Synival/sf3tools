@@ -126,7 +126,7 @@ namespace Randomizer {
 
                 StatGainOnPromotion = new StatSnapshot(stats.Average(x => x.HPPromote), stats.Average(x => x.MPPromote), stats.Average(x => x.AtkPromote), stats.Average(x => x.DefPromote), stats.Average(x => x.AgiPromote));
 
-                MagicBonus = stats.Average(x => x.MagicBonus);
+                MagicBonus = stats.Average(x => x.MagicBonusID);
                 Slow       = stats.Average(x => x.Slow);
                 Support    = stats.Average(x => x.Support);
 

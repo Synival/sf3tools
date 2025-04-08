@@ -1061,30 +1061,35 @@ namespace SF3.Models.Structs.X033_X031 {
         // Stats 2
         // ==============================
 
+        [TableViewModelColumn(displayOrder: 89, displayName: "Luck", displayGroup: "Stats2")]
         [BulkCopy]
         public int BaseLuck {
             get => Data.GetByte(baseLuck);
             set => Data.SetByte(baseLuck, (byte) value);
         }
 
+        [TableViewModelColumn(displayOrder: 90, displayName: "Mov", displayGroup: "Stats2")]
         [BulkCopy]
         public int BaseMov {
             get => Data.GetByte(baseMov);
             set => Data.SetByte(baseMov, (byte) value);
         }
 
+        [TableViewModelColumn(displayOrder: 91, displayName: "Turns", displayGroup: "Stats2")]
         [BulkCopy]
         public int BaseTurns {
             get => Data.GetByte(baseTurns);
             set => Data.SetByte(baseTurns, (byte) value);
         }
 
+        [TableViewModelColumn(displayOrder: 92, displayName: "HPRegen", displayGroup: "Stats2")]
         [BulkCopy]
         public int BaseHPRegen {
             get => Data.GetByte(baseHPRegen);
             set => Data.SetByte(baseHPRegen, (byte) value);
         }
 
+        [TableViewModelColumn(displayOrder: 93, displayName: "MPRegen", displayGroup: "Stats2")]
         [BulkCopy]
         public int BaseMPRegen {
             get => Data.GetByte(baseMPRegen);
@@ -1095,48 +1100,56 @@ namespace SF3.Models.Structs.X033_X031 {
         // Magic Resistance
         // ==============================
 
+        [TableViewModelColumn(displayOrder: 94, displayGroup: "MagicRes")]
         [BulkCopy]
         public int EarthRes {
             get => (sbyte) Data.GetByte(earthRes);
             set => Data.SetByte(earthRes, (byte) value);
         }
 
+        [TableViewModelColumn(displayOrder: 95, displayGroup: "MagicRes")]
         [BulkCopy]
         public int FireRes {
             get => (sbyte) Data.GetByte(fireRes);
             set => Data.SetByte(fireRes, (byte) value);
         }
 
+        [TableViewModelColumn(displayOrder: 96, displayGroup: "MagicRes")]
         [BulkCopy]
         public int IceRes {
             get => (sbyte) Data.GetByte(iceRes);
             set => Data.SetByte(iceRes, (byte) value);
         }
 
+        [TableViewModelColumn(displayOrder: 97, displayGroup: "MagicRes")]
         [BulkCopy]
         public int SparkRes {
             get => (sbyte) Data.GetByte(sparkRes);
             set => Data.SetByte(sparkRes, (byte) value);
         }
 
+        [TableViewModelColumn(displayOrder: 98, displayGroup: "MagicRes")]
         [BulkCopy]
         public int WindRes {
             get => (sbyte) Data.GetByte(windRes);
             set => Data.SetByte(windRes, (byte) value);
         }
 
+        [TableViewModelColumn(displayOrder: 99, displayGroup: "MagicRes")]
         [BulkCopy]
         public int LightRes {
             get => (sbyte) Data.GetByte(lightRes);
             set => Data.SetByte(lightRes, (byte) value);
         }
 
+        [TableViewModelColumn(displayOrder: 100, displayGroup: "MagicRes")]
         [BulkCopy]
         public int DarkRes {
             get => (sbyte) Data.GetByte(darkRes);
             set => Data.SetByte(darkRes, (byte) value);
         }
 
+        [TableViewModelColumn(displayOrder: 101, displayGroup: "MagicRes")]
         [BulkCopy]
         public int UnknownRes {
             get => (sbyte) Data.GetByte(unknownRes);
@@ -1147,24 +1160,28 @@ namespace SF3.Models.Structs.X033_X031 {
         // Stats 2 (2/2)
         // ==============================
 
+        [TableViewModelColumn(displayOrder: 102, displayName: "SlowPlus", displayGroup: "Stats2")]
         [BulkCopy]
         public int Slow {
             get => Data.GetByte(slow);
             set => Data.SetByte(slow, (byte) value);
         }
 
+        [TableViewModelColumn(displayOrder: 102, displayName: "SupportPlus", displayGroup: "Stats2")]
         [BulkCopy]
         public int Support {
             get => Data.GetByte(support);
             set => Data.SetByte(support, (byte) value);
         }
 
+        [TableViewModelColumn(displayOrder: 103, displayFormat: "X2", displayGroup: "Stats2")]
         [BulkCopy]
-        public int MagicBonus {
+        public int MagicBonusID {
             get => Data.GetByte(magicBonus);
             set => Data.SetByte(magicBonus, (byte) value);
         }
 
+        [TableViewModelColumn(displayOrder: 104, displayFormat: "X2", minWidth: 100, displayGroup: "Stats2")]
         [BulkCopy]
         [NameGetter(NamedValueType.MovementType)]
         public int MovementType {
