@@ -961,6 +961,7 @@ namespace SF3.Models.Structs.X033_X031 {
         // Specials
         // ==============================
 
+        [TableViewModelColumn(displayOrder: 77, displayFormat: "X2", minWidth: 150, displayGroup: "Specials")]
         [BulkCopy]
         [NameGetter(NamedValueType.Special)]
         public int Weapon1Special1 {
@@ -968,6 +969,7 @@ namespace SF3.Models.Structs.X033_X031 {
             set => Data.SetByte(weapon1Special1, (byte) value);
         }
 
+        [TableViewModelColumn(displayOrder: 78, displayFormat: "X2", minWidth: 150, displayGroup: "Specials")]
         [BulkCopy]
         [NameGetter(NamedValueType.Special)]
         public int Weapon1Special2 {
@@ -975,6 +977,7 @@ namespace SF3.Models.Structs.X033_X031 {
             set => Data.SetByte(weapon1Special2, (byte) value);
         }
 
+        [TableViewModelColumn(displayOrder: 79, displayFormat: "X2", minWidth: 150, displayGroup: "Specials")]
         [BulkCopy]
         [NameGetter(NamedValueType.Special)]
         public int Weapon1Special3 {
@@ -982,6 +985,7 @@ namespace SF3.Models.Structs.X033_X031 {
             set => Data.SetByte(weapon1Special3, (byte) value);
         }
 
+        [TableViewModelColumn(displayOrder: 80, displayFormat: "X2", minWidth: 150, displayGroup: "Specials")]
         [BulkCopy]
         [NameGetter(NamedValueType.Special)]
         public int Weapon2Special1 {
@@ -989,6 +993,7 @@ namespace SF3.Models.Structs.X033_X031 {
             set => Data.SetByte(weapon2Special1, (byte) value);
         }
 
+        [TableViewModelColumn(displayOrder: 81, displayFormat: "X2", minWidth: 150, displayGroup: "Specials")]
         [BulkCopy]
         [NameGetter(NamedValueType.Special)]
         public int Weapon2Special2 {
@@ -996,6 +1001,7 @@ namespace SF3.Models.Structs.X033_X031 {
             set => Data.SetByte(weapon2Special2, (byte) value);
         }
 
+        [TableViewModelColumn(displayOrder: 82, displayFormat: "X2", minWidth: 150, displayGroup: "Specials")]
         [BulkCopy]
         [NameGetter(NamedValueType.Special)]
         public int Weapon2Special3 {
@@ -1003,6 +1009,7 @@ namespace SF3.Models.Structs.X033_X031 {
             set => Data.SetByte(weapon2Special3, (byte) value);
         }
 
+        [TableViewModelColumn(displayOrder: 83, displayFormat: "X2", minWidth: 150, displayGroup: "Specials")]
         [BulkCopy]
         [NameGetter(NamedValueType.Special)]
         public int Weapon3Special1 {
@@ -1010,6 +1017,7 @@ namespace SF3.Models.Structs.X033_X031 {
             set => Data.SetByte(weapon3Special1, (byte) value);
         }
 
+        [TableViewModelColumn(displayOrder: 84, displayFormat: "X2", minWidth: 150, displayGroup: "Specials")]
         [BulkCopy]
         [NameGetter(NamedValueType.Special)]
         public int Weapon3Special2 {
@@ -1017,6 +1025,7 @@ namespace SF3.Models.Structs.X033_X031 {
             set => Data.SetByte(weapon3Special2, (byte) value);
         }
 
+        [TableViewModelColumn(displayOrder: 85, displayFormat: "X2", minWidth: 150, displayGroup: "Specials")]
         [BulkCopy]
         [NameGetter(NamedValueType.Special)]
         public int Weapon3Special3 {
@@ -1024,6 +1033,7 @@ namespace SF3.Models.Structs.X033_X031 {
             set => Data.SetByte(weapon3Special3, (byte) value);
         }
 
+        [TableViewModelColumn(displayOrder: 86, displayFormat: "X2", minWidth: 150, displayGroup: "Specials")]
         [BulkCopy]
         [NameGetter(NamedValueType.Special)]
         public int Weapon4Special1 {
@@ -1031,6 +1041,7 @@ namespace SF3.Models.Structs.X033_X031 {
             set => Data.SetByte(weapon4Special1, (byte) value);
         }
 
+        [TableViewModelColumn(displayOrder: 87, displayFormat: "X2", minWidth: 150, displayGroup: "Specials")]
         [BulkCopy]
         [NameGetter(NamedValueType.Special)]
         public int Weapon4Special2 {
@@ -1038,6 +1049,7 @@ namespace SF3.Models.Structs.X033_X031 {
             set => Data.SetByte(weapon4Special2, (byte) value);
         }
 
+        [TableViewModelColumn(displayOrder: 88, displayFormat: "X2", minWidth: 150, displayGroup: "Specials")]
         [BulkCopy]
         [NameGetter(NamedValueType.Special)]
         public int Weapon4Special3 {
