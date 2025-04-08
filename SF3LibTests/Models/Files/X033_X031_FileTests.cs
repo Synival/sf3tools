@@ -66,24 +66,24 @@ namespace SF3.Tests.Models.Files {
                 var file = testCase.Create();
 
                 if (testCase.Scenario == ScenarioType.Scenario1) {
-                    Assert.AreEqual(0x00, file.InitialInfoTable[0].CharacterE);
-                    Assert.AreEqual(0x00, file.InitialInfoTable[0].CharacterClassE);
+                    Assert.AreEqual(0x00, file.InitialInfoTable[0].CharacterID);
+                    Assert.AreEqual(0x00, file.InitialInfoTable[0].CharacterClass);
                     Assert.AreEqual(1, file.InitialInfoTable[0].Level);
                     // TODO: maybe more data?
 
-                    Assert.AreEqual(0x01, file.InitialInfoTable[1].CharacterE);
-                    Assert.AreEqual(0x01, file.InitialInfoTable[1].CharacterClassE);
+                    Assert.AreEqual(0x01, file.InitialInfoTable[1].CharacterID);
+                    Assert.AreEqual(0x01, file.InitialInfoTable[1].CharacterClass);
                     Assert.AreEqual(1, file.InitialInfoTable[1].Level);
                     // TODO: maybe more data?
                 }
                 else {
-                    Assert.AreEqual(0x00, file.InitialInfoTable[0].CharacterE);
-                    Assert.AreEqual(0x20, file.InitialInfoTable[0].CharacterClassE);
+                    Assert.AreEqual(0x00, file.InitialInfoTable[0].CharacterID);
+                    Assert.AreEqual(0x20, file.InitialInfoTable[0].CharacterClass);
                     Assert.AreEqual(15, file.InitialInfoTable[0].Level);
                     // TODO: maybe more data?
 
-                    Assert.AreEqual(0x01, file.InitialInfoTable[1].CharacterE);
-                    Assert.AreEqual(0x21, file.InitialInfoTable[1].CharacterClassE);
+                    Assert.AreEqual(0x01, file.InitialInfoTable[1].CharacterID);
+                    Assert.AreEqual(0x21, file.InitialInfoTable[1].CharacterClass);
                     Assert.AreEqual(15, file.InitialInfoTable[1].Level);
                     // TODO: maybe more data?
                 }

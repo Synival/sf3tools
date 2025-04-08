@@ -46,25 +46,30 @@ namespace SF3.Models.Structs.X033_X031 {
             weapon4Exp     = Address + 0x1e; // 2 bytes
         }
 
+        [TableViewModelColumn(displayOrder: 0, minWidth: 100, displayFormat: "X2")]
         [BulkCopy]
-        public int CharacterE {
+        [NameGetter(NamedValueType.Character)]
+        public int CharacterID {
             get => Data.GetByte(character);
             set => Data.SetByte(character, (byte) value);
         }
 
+        [TableViewModelColumn(displayOrder: 1, displayName: "Class", minWidth: 150, displayFormat: "X2")]
         [BulkCopy]
         [NameGetter(NamedValueType.CharacterClass)]
-        public int CharacterClassE {
+        public int CharacterClass {
             get => Data.GetByte(characterClass);
             set => Data.SetByte(characterClass, (byte) value);
         }
 
+        [TableViewModelColumn(displayOrder: 2)]
         [BulkCopy]
         public int Level {
             get => Data.GetByte(level);
             set => Data.SetByte(level, (byte) value);
         }
 
+        [TableViewModelColumn(displayOrder: 3, minWidth: 100, displayFormat: "X2")]
         [BulkCopy]
         [NameGetter(NamedValueType.Sex)]
         public int Sex {
@@ -72,6 +77,7 @@ namespace SF3.Models.Structs.X033_X031 {
             set => Data.SetByte(sex, (byte) value);
         }
 
+        [TableViewModelColumn(displayOrder: 4, minWidth: 120, displayFormat: "X2")]
         [BulkCopy]
         [NameGetter(NamedValueType.Item)]
         public int Weapon {
@@ -79,6 +85,7 @@ namespace SF3.Models.Structs.X033_X031 {
             set => Data.SetWord(weapon, value);
         }
 
+        [TableViewModelColumn(displayOrder: 5, minWidth: 120, displayFormat: "X2")]
         [BulkCopy]
         [NameGetter(NamedValueType.Item)]
         public int Accessory {
@@ -86,6 +93,7 @@ namespace SF3.Models.Structs.X033_X031 {
             set => Data.SetWord(accessory, value);
         }
 
+        [TableViewModelColumn(displayOrder: 6, minWidth: 120, displayFormat: "X2")]
         [BulkCopy]
         [NameGetter(NamedValueType.Item)]
         public int Item1 {
@@ -93,6 +101,7 @@ namespace SF3.Models.Structs.X033_X031 {
             set => Data.SetWord(item1, value);
         }
 
+        [TableViewModelColumn(displayOrder: 7, minWidth: 120, displayFormat: "X2")]
         [BulkCopy]
         [NameGetter(NamedValueType.Item)]
         public int Item2 {
@@ -100,6 +109,7 @@ namespace SF3.Models.Structs.X033_X031 {
             set => Data.SetWord(item2, value);
         }
 
+        [TableViewModelColumn(displayOrder: 8, minWidth: 120, displayFormat: "X2")]
         [BulkCopy]
         [NameGetter(NamedValueType.Item)]
         public int Item3 {
@@ -107,6 +117,7 @@ namespace SF3.Models.Structs.X033_X031 {
             set => Data.SetWord(item3, value);
         }
 
+        [TableViewModelColumn(displayOrder: 9, minWidth: 120, displayFormat: "X2")]
         [BulkCopy]
         [NameGetter(NamedValueType.Item)]
         public int Item4 {
@@ -114,6 +125,7 @@ namespace SF3.Models.Structs.X033_X031 {
             set => Data.SetWord(item4, value);
         }
 
+        [TableViewModelColumn(displayOrder: 10, minWidth: 120, displayFormat: "X2")]
         [BulkCopy]
         [NameGetter(NamedValueType.WeaponType)]
         public int Weapon1Type {
@@ -121,12 +133,14 @@ namespace SF3.Models.Structs.X033_X031 {
             set => Data.SetByte(weapon1Type, (byte) value);
         }
 
+        [TableViewModelColumn(displayOrder: 11)]
         [BulkCopy]
         public int Weapon1Exp {
             get => Data.GetWord(weapon1Exp);
             set => Data.SetWord(weapon1Exp, value);
         }
 
+        [TableViewModelColumn(displayOrder: 12, minWidth: 120, displayFormat: "X2")]
         [BulkCopy]
         [NameGetter(NamedValueType.WeaponType)]
         public int Weapon2Type {
@@ -134,12 +148,14 @@ namespace SF3.Models.Structs.X033_X031 {
             set => Data.SetByte(weapon2Type, (byte) value);
         }
 
+        [TableViewModelColumn(displayOrder: 13)]
         [BulkCopy]
         public int Weapon2Exp {
             get => Data.GetWord(weapon2Exp);
             set => Data.SetWord(weapon2Exp, value);
         }
 
+        [TableViewModelColumn(displayOrder: 14, minWidth: 120, displayFormat: "X2")]
         [BulkCopy]
         [NameGetter(NamedValueType.WeaponType)]
         public int Weapon3Type {
@@ -147,12 +163,14 @@ namespace SF3.Models.Structs.X033_X031 {
             set => Data.SetByte(weapon3Type, (byte) value);
         }
 
+        [TableViewModelColumn(displayOrder: 15)]
         [BulkCopy]
         public int Weapon3Exp {
             get => Data.GetWord(weapon3Exp);
             set => Data.SetWord(weapon3Exp, value);
         }
 
+        [TableViewModelColumn(displayOrder: 16, minWidth: 120, displayFormat: "X2")]
         [BulkCopy]
         [NameGetter(NamedValueType.WeaponType)]
         public int Weapon4Type {
@@ -160,6 +178,7 @@ namespace SF3.Models.Structs.X033_X031 {
             set => Data.SetByte(weapon4Type, (byte) value);
         }
 
+        [TableViewModelColumn(displayOrder: 17)]
         [BulkCopy]
         public int Weapon4Exp {
             get => Data.GetWord(weapon4Exp);

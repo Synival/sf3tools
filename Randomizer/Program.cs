@@ -328,8 +328,8 @@ namespace Randomizer {
         public static void Main(string[] args) {
             // Gather are initial stats for each character. This is something we'll ultimately want to modify.
             var initialInfosByID = s_x033.InitialInfoTable
-                .Where(x => x.CharacterE != 0xFF)
-                .ToDictionary(x => x.CharacterE, x => x);
+                .Where(x => x.CharacterID != 0xFF)
+                .ToDictionary(x => x.CharacterID, x => x);
 
             // Gather a list of all characters, with all their relevant info.
             // Classes don't exist yet, so we'll add those later.

@@ -12,6 +12,7 @@ namespace SF3.Win.Views.X033_X031 {
                 return null;
 
             var ngc = Model.NameGetterContext;
+
             if (Model.StatsTable != null) {
                 CreateChild(new TableView("Characters and Classes", Model.StatsTable, ngc, displayGroups: ["Metadata", "CharAndClass"]));
                 CreateChild(new TableView("Stats (1/2) (Growth)",   Model.StatsTable, ngc, displayGroups: ["Metadata", "Stats"]));
@@ -20,13 +21,14 @@ namespace SF3.Win.Views.X033_X031 {
                 CreateChild(new TableView("Spells",                 Model.StatsTable, ngc, displayGroups: ["Metadata", "Spells"]));
                 CreateChild(new TableView("Weapons / Accessories",  Model.StatsTable, ngc, displayGroups: ["Metadata", "Equipment"]));
                 CreateChild(new TableView("Specials",               Model.StatsTable, ngc, displayGroups: ["Metadata", "Specials"]));
+                CreateChild(new TableView("Growth Curve Calc",      Model.StatsTable, ngc, displayGroups: ["Metadata", "CurveCalc"]));
             }
+
             if (Model.InitialInfoTable != null)
                 CreateChild(new TableView("Initial Info", Model.InitialInfoTable, ngc));
+
             if (Model.WeaponLevelExp != null)
                 CreateChild(new DataModelView("Weapon Level Exp", Model.WeaponLevelExp, ngc));
-            if (Model.StatsTable != null)
-                CreateChild(new TableView("Curve Calc", Model.StatsTable, ngc, displayGroups: ["Metadata", "CurveCalc"]));
 
             // TODO: Curve Graph
 
