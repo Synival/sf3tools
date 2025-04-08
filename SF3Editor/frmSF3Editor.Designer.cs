@@ -44,6 +44,8 @@ namespace SF3Editor {
             tsmiFile_Exit = new System.Windows.Forms.ToolStripMenuItem();
             tsmiEdit = new System.Windows.Forms.ToolStripMenuItem();
             tsmiEdit_UseDropdowns = new System.Windows.Forms.ToolStripMenuItem();
+            tsmiEdit_EnableDebugSettings = new System.Windows.Forms.ToolStripMenuItem();
+            tsmiEdit_EnableBlankFieldV2Controls = new System.Windows.Forms.ToolStripMenuItem();
             tsmi_Tools = new System.Windows.Forms.ToolStripMenuItem();
             tsmiTools_ImportTable = new System.Windows.Forms.ToolStripMenuItem();
             tsmiTools_ExportTable = new System.Windows.Forms.ToolStripMenuItem();
@@ -52,7 +54,7 @@ namespace SF3Editor {
             tsmiTools_CreateDFR = new System.Windows.Forms.ToolStripMenuItem();
             tsmiHelp = new System.Windows.Forms.ToolStripMenuItem();
             tsmiHelp_About = new System.Windows.Forms.ToolStripMenuItem();
-            tsmiEdit_EnableBlankFieldV2Controls = new System.Windows.Forms.ToolStripMenuItem();
+            tsmiEdit_Sep1 = new System.Windows.Forms.ToolStripSeparator();
             menuStrip1.SuspendLayout();
             SuspendLayout();
             // 
@@ -179,7 +181,7 @@ namespace SF3Editor {
             // 
             // tsmiEdit
             // 
-            tsmiEdit.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { tsmiEdit_UseDropdowns, tsmiEdit_EnableBlankFieldV2Controls });
+            tsmiEdit.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { tsmiEdit_UseDropdowns, tsmiEdit_EnableDebugSettings, tsmiEdit_Sep1, tsmiEdit_EnableBlankFieldV2Controls });
             tsmiEdit.Name = "tsmiEdit";
             tsmiEdit.Size = new Size(39, 20);
             tsmiEdit.Text = "&Edit";
@@ -190,6 +192,20 @@ namespace SF3Editor {
             tsmiEdit_UseDropdowns.Size = new Size(384, 22);
             tsmiEdit_UseDropdowns.Text = "Use &Dropdowns for Named Values";
             tsmiEdit_UseDropdowns.Click += tsmiEdit_UseDropdowns_Click;
+            // 
+            // tsmiEdit_EnableDebugSettings
+            // 
+            tsmiEdit_EnableDebugSettings.Name = "tsmiEdit_EnableDebugSettings";
+            tsmiEdit_EnableDebugSettings.Size = new Size(384, 22);
+            tsmiEdit_EnableDebugSettings.Text = "Enable Debu&g Settings";
+            tsmiEdit_EnableDebugSettings.Click += tsmiEdit_EnableDebugSettings_Click;
+            // 
+            // tsmiEdit_EnableBlankFieldV2Controls
+            // 
+            tsmiEdit_EnableBlankFieldV2Controls.Name = "tsmiEdit_EnableBlankFieldV2Controls";
+            tsmiEdit_EnableBlankFieldV2Controls.Size = new Size(384, 22);
+            tsmiEdit_EnableBlankFieldV2Controls.Text = "EXPERIMENTAL: Enable tile controls for BlankField_V2.MPD";
+            tsmiEdit_EnableBlankFieldV2Controls.Click += tsmiEdit_EnableBlankFieldV2Controls_Click;
             // 
             // tsmi_Tools
             // 
@@ -245,12 +261,10 @@ namespace SF3Editor {
             tsmiHelp_About.Text = "&About...";
             tsmiHelp_About.Click += tsmiHelp_About_Click;
             // 
-            // tsmiEdit_EnableBlankFieldV2Controls
+            // tsmiEdit_Sep1
             // 
-            tsmiEdit_EnableBlankFieldV2Controls.Name = "tsmiEdit_EnableBlankFieldV2Controls";
-            tsmiEdit_EnableBlankFieldV2Controls.Size = new Size(384, 22);
-            tsmiEdit_EnableBlankFieldV2Controls.Text = "EXPERIMENTAL: Enable tile controls for BlankField_V2.MPD";
-            tsmiEdit_EnableBlankFieldV2Controls.Click += tsmiEdit_EnableBlankFieldV2Controls_Click;
+            tsmiEdit_Sep1.Name = "tsmiEdit_Sep1";
+            tsmiEdit_Sep1.Size = new Size(381, 6);
             // 
             // frmSF3Editor
             // 
@@ -297,5 +311,7 @@ namespace SF3Editor {
         private System.Windows.Forms.ToolStripMenuItem tsmiTools_ImportTable;
         private System.Windows.Forms.ToolStripMenuItem tsmiTools_ExportTable;
         private System.Windows.Forms.ToolStripMenuItem tsmiEdit_EnableBlankFieldV2Controls;
+        private System.Windows.Forms.ToolStripMenuItem tsmiEdit_EnableDebugSettings;
+        private System.Windows.Forms.ToolStripSeparator tsmiEdit_Sep1;
     }
 }

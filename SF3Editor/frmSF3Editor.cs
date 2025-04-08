@@ -81,6 +81,12 @@ namespace SF3Editor {
                 tsmiEdit_EnableBlankFieldV2Controls.Checked = _appState.EnableExperimentalBlankFieldV2Brushes;
                 _appState.Serialize();
             };
+
+            tsmiEdit_EnableDebugSettings.Checked = _appState.EnableDebugSettings;
+            _appState.EnableDebugSettingsChanged += (s, e) => {
+                tsmiEdit_EnableDebugSettings.Checked = _appState.EnableDebugSettings;
+                _appState.Serialize();
+            };
         }
 
         protected override void OnFormClosing(FormClosingEventArgs e) {
@@ -528,9 +534,10 @@ namespace SF3Editor {
         private readonly TabView _fileContainerView;
         private readonly AppState _appState;
 
-        private void tsmiEdit_EnableBlankFieldV2Controls_Click(object sender, EventArgs e) {
-            _appState.EnableExperimentalBlankFieldV2Brushes = !_appState.EnableExperimentalBlankFieldV2Brushes;
-            tsmiEdit_EnableBlankFieldV2Controls.Checked = _appState.EnableExperimentalBlankFieldV2Brushes;
-        }
+        private void tsmiEdit_EnableBlankFieldV2Controls_Click(object sender, EventArgs e)
+            => _appState.EnableExperimentalBlankFieldV2Brushes = !_appState.EnableExperimentalBlankFieldV2Brushes;
+
+        private void tsmiEdit_EnableDebugSettings_Click(object sender, EventArgs e)
+            => _appState.EnableDebugSettings = !_appState.EnableDebugSettings;
     }
 }

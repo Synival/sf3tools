@@ -147,5 +147,20 @@ namespace SF3.Win {
         }
         private bool _enableExperimentalBlankFieldV2Brushes = false;
         public event EventHandler EnableExperimentalBlankFieldV2BrushesChanged;
+
+        /// <summary>
+        /// When enabled, several debugging options appear that aren't usually relevant.
+        /// </summary>
+        public bool EnableDebugSettings {
+            get => _enableDebugSettings;
+            set {
+                if (value != _enableDebugSettings) {
+                    _enableDebugSettings = value;
+                    EnableDebugSettingsChanged?.Invoke(this, EventArgs.Empty);
+                }
+            }
+        }
+        private bool _enableDebugSettings = false;
+        public event EventHandler EnableDebugSettingsChanged;
     }
 }
