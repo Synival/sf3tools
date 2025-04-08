@@ -16,24 +16,28 @@ namespace SF3.Models.Structs.X033_X031 {
             level4 = Address + 0x0e; // 4 bytes
         }
 
+        [TableViewModelColumn(displayOrder: 0, displayName: "Weapon Level 1 Exp")]
         [BulkCopy]
         public int WLevel1 {
             get => Data.GetWord(level1);
             set => Data.SetWord(level1, value);
         }
 
+        [TableViewModelColumn(displayOrder: 1, displayName: "Weapon Level 2 Exp")]
         [BulkCopy]
         public int WLevel2 {
             get => Data.GetWord(level2);
             set => Data.SetWord(level2, value);
         }
 
+        [TableViewModelColumn(displayOrder: 2, displayName: "Weapon Level 3 Exp")]
         [BulkCopy]
         public int WLevel3 {
             get => Data.GetWord(level3);
             set => Data.SetWord(level3, value);
         }
 
+        [TableViewModelColumn(displayOrder: 3, displayName: "Weapon Level 4 Exp")]
         [BulkCopy]
         public int WLevel4 {
             get => Data.GetWord(level4);
