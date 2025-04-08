@@ -14,11 +14,11 @@ namespace SF3.Win.Views.X033_X031 {
             var ngc = Model.NameGetterContext;
             if (Model.StatsTable != null) {
                 CreateChild(new TableView("Characters and Classes", Model.StatsTable, ngc, displayGroups: ["Metadata", "CharAndClass"]));
-                CreateChild(new TableView("Stats 1 (Growth)",       Model.StatsTable, ngc, displayGroups: ["Metadata", "Stats"]));
-                CreateChild(new TableView("Stats 2",                Model.StatsTable, ngc, displayGroups: ["Metadata", "Stats2"]));
-                CreateChild(new TableView("Magic Resistance",       Model.StatsTable, ngc, displayGroups: ["Metadata", "MagicRes"]));
-                CreateChild(new TableView("Equipment",              Model.StatsTable, ngc, displayGroups: ["Metadata", "Equipment"]));
+                CreateChild(new TableView("Stats (1/2) (Growth)",   Model.StatsTable, ngc, displayGroups: ["Metadata", "Stats"]));
+                CreateChild(new TableView("Stats (2/2)",            Model.StatsTable, ngc, displayGroups: ["Metadata", "Stats2"]));
+                CreateChild(new TableView("Magic Res",              Model.StatsTable, ngc, displayGroups: ["Metadata", "MagicRes"]));
                 CreateChild(new TableView("Spells",                 Model.StatsTable, ngc, displayGroups: ["Metadata", "Spells"]));
+                CreateChild(new TableView("Weapons / Accessories",  Model.StatsTable, ngc, displayGroups: ["Metadata", "Equipment"]));
                 CreateChild(new TableView("Specials",               Model.StatsTable, ngc, displayGroups: ["Metadata", "Specials"]));
             }
             if (Model.InitialInfoTable != null)
