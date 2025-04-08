@@ -22,6 +22,7 @@ namespace SF3.Win.Views.X033_X031 {
                 CreateChild(new TableView("Weapons / Accessories",  Model.StatsTable, ngc, displayGroups: ["Metadata", "Equipment"]));
                 CreateChild(new TableView("Specials",               Model.StatsTable, ngc, displayGroups: ["Metadata", "Specials"]));
                 CreateChild(new TableView("Growth Curve Calc",      Model.StatsTable, ngc, displayGroups: ["Metadata", "CurveCalc"]));
+                CreateChild(new GrowthChartView("Growth Graph",     Model.StatsTable));
             }
 
             if (Model.InitialInfoTable != null)
