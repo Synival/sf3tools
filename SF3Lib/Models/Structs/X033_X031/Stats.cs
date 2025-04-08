@@ -689,233 +689,273 @@ namespace SF3.Models.Structs.X033_X031 {
         // Spells
         // ==============================
 
+        [TableViewModelColumn(displayOrder: 41, displayGroup: "Spells")]
         [BulkCopy]
-        public int S1LearnedAt {
+        public int S1CharLevel {
             get => Data.GetByte(s1LearnedAt);
             set => Data.SetByte(s1LearnedAt, (byte) value);
         }
 
+        [TableViewModelColumn(displayOrder: 42, displayGroup: "Spells")]
         [BulkCopy]
-        public int S1LearnedLevel {
+        public int S1SpellLevel {
             get => Data.GetByte(s1LearnedLevel);
             set => Data.SetByte(s1LearnedLevel, (byte) value);
         }
 
+        [TableViewModelColumn(displayOrder: 43, displayFormat: "X2", minWidth: 120, displayGroup: "Spells")]
         [BulkCopy]
         [NameGetter(NamedValueType.Spell)]
-        public int S1LearnedID {
+        public int S1SpellID {
             get => Data.GetByte(s1LearnedID);
             set => Data.SetByte(s1LearnedID, (byte) value);
         }
 
+        [TableViewModelColumn(displayOrder: 44, displayGroup: "Spells")]
         [BulkCopy]
-        public int S2LearnedAt {
+        public int S2CharLevel {
             get => Data.GetByte(s2LearnedAt);
             set => Data.SetByte(s2LearnedAt, (byte) value);
         }
 
+        [TableViewModelColumn(displayOrder: 45, displayGroup: "Spells")]
         [BulkCopy]
-        public int S2LearnedLevel {
+        public int S2SpellLv {
             get => Data.GetByte(s2LearnedLevel);
             set => Data.SetByte(s2LearnedLevel, (byte) value);
         }
 
+        [TableViewModelColumn(displayOrder: 46, displayFormat: "X2", minWidth: 120, displayGroup: "Spells")]
         [BulkCopy]
         [NameGetter(NamedValueType.Spell)]
-        public int S2LearnedID {
+        public int S2SpellID {
             get => Data.GetByte(s2LearnedID);
             set => Data.SetByte(s2LearnedID, (byte) value);
         }
 
+        [TableViewModelColumn(displayOrder: 47, displayGroup: "Spells")]
         [BulkCopy]
-        public int S3LearnedAt {
+        public int S3CharLevel {
             get => Data.GetByte(s3LearnedAt);
             set => Data.SetByte(s3LearnedAt, (byte) value);
         }
 
+        [TableViewModelColumn(displayOrder: 48, displayGroup: "Spells")]
         [BulkCopy]
-        public int S3LearnedLevel {
+        public int S3SpellLv {
             get => Data.GetByte(s3LearnedLevel);
             set => Data.SetByte(s3LearnedLevel, (byte) value);
         }
 
+        [TableViewModelColumn(displayOrder: 49, displayFormat: "X2", minWidth: 120, displayGroup: "Spells")]
         [BulkCopy]
         [NameGetter(NamedValueType.Spell)]
-        public int S3LearnedID {
+        public int S3SpellID {
             get => Data.GetByte(s3LearnedID);
             set => Data.SetByte(s3LearnedID, (byte) value);
         }
 
+        [TableViewModelColumn(displayOrder: 50, displayGroup: "Spells")]
         [BulkCopy]
-        public int S4LearnedAt {
+        public int S4CharLevel {
             get => Data.GetByte(s4LearnedAt);
             set => Data.SetByte(s4LearnedAt, (byte) value);
         }
 
+        [TableViewModelColumn(displayOrder: 51, displayGroup: "Spells")]
         [BulkCopy]
-        public int S4LearnedLevel {
+        public int S4SpellLv {
             get => Data.GetByte(s4LearnedLevel);
             set => Data.SetByte(s4LearnedLevel, (byte) value);
         }
 
+        [TableViewModelColumn(displayOrder: 52, displayFormat: "X2", minWidth: 120, displayGroup: "Spells")]
         [BulkCopy]
         [NameGetter(NamedValueType.Spell)]
-        public int S4LearnedID {
+        public int S4SpellID {
             get => Data.GetByte(s4LearnedID);
             set => Data.SetByte(s4LearnedID, (byte) value);
         }
 
+        [TableViewModelColumn(displayOrder: 53, displayGroup: "Spells")]
         [BulkCopy]
-        public int S5LearnedAt {
+        public int S5CharLevel {
             get => Data.GetByte(s5LearnedAt);
             set => Data.SetByte(s5LearnedAt, (byte) value);
         }
 
+        [TableViewModelColumn(displayOrder: 54, displayGroup: "Spells")]
         [BulkCopy]
-        public int S5LearnedLevel {
+        public int S5SpellLv {
             get => Data.GetByte(s5LearnedLevel);
             set => Data.SetByte(s5LearnedLevel, (byte) value);
         }
 
+        [TableViewModelColumn(displayOrder: 55, displayFormat: "X2", minWidth: 120, displayGroup: "Spells")]
         [BulkCopy]
         [NameGetter(NamedValueType.Spell)]
-        public int S5LearnedID {
+        public int S5SpellID {
             get => Data.GetByte(s5LearnedID);
             set => Data.SetByte(s5LearnedID, (byte) value);
         }
 
+        [TableViewModelColumn(displayOrder: 56, displayGroup: "Spells")]
         [BulkCopy]
-        public int S6LearnedAt {
+        public int S6CharLevel {
             get => Data.GetByte(s6LearnedAt);
             set => Data.SetByte(s6LearnedAt, (byte) value);
         }
 
+        [TableViewModelColumn(displayOrder: 57, displayGroup: "Spells")]
         [BulkCopy]
-        public int S6LearnedLevel {
+        public int S6SpellLv {
             get => Data.GetByte(s6LearnedLevel);
             set => Data.SetByte(s6LearnedLevel, (byte) value);
         }
 
+        [TableViewModelColumn(displayOrder: 58, displayFormat: "X2", minWidth: 120, displayGroup: "Spells")]
         [BulkCopy]
         [NameGetter(NamedValueType.Spell)]
-        public int S6LearnedID {
+        public int S6SpellID {
             get => Data.GetByte(s6LearnedID);
             set => Data.SetByte(s6LearnedID, (byte) value);
         }
 
+        [TableViewModelColumn(displayOrder: 59, displayGroup: "Spells")]
         [BulkCopy]
-        public int S7LearnedAt {
+        public int S7CharLevel {
             get => Data.GetByte(s7LearnedAt);
             set => Data.SetByte(s7LearnedAt, (byte) value);
         }
 
+        [TableViewModelColumn(displayOrder: 60, displayGroup: "Spells")]
         [BulkCopy]
-        public int S7LearnedLevel {
+        public int S7SpellLv {
             get => Data.GetByte(s7LearnedLevel);
             set => Data.SetByte(s7LearnedLevel, (byte) value);
         }
 
+        [TableViewModelColumn(displayOrder: 61, displayFormat: "X2", minWidth: 120, displayGroup: "Spells")]
         [BulkCopy]
         [NameGetter(NamedValueType.Spell)]
-        public int S7LearnedID {
+        public int S7SpellID {
             get => Data.GetByte(s7LearnedID);
             set => Data.SetByte(s7LearnedID, (byte) value);
         }
 
+        [TableViewModelColumn(displayOrder: 62, displayGroup: "Spells")]
         [BulkCopy]
-        public int S8LearnedAt {
+        public int S8CharLevel {
             get => Data.GetByte(s8LearnedAt);
             set => Data.SetByte(s8LearnedAt, (byte) value);
         }
 
+        [TableViewModelColumn(displayOrder: 63, displayGroup: "Spells")]
         [BulkCopy]
-        public int S8LearnedLevel {
+        public int S8SpellLv {
             get => Data.GetByte(s8LearnedLevel);
             set => Data.SetByte(s8LearnedLevel, (byte) value);
         }
 
+        [TableViewModelColumn(displayOrder: 64, displayFormat: "X2", minWidth: 120, displayGroup: "Spells")]
         [BulkCopy]
         [NameGetter(NamedValueType.Spell)]
-        public int S8LearnedID {
+        public int S8SpellID {
             get => Data.GetByte(s8LearnedID);
             set => Data.SetByte(s8LearnedID, (byte) value);
         }
 
+        [TableViewModelColumn(displayOrder: 65, displayGroup: "Spells")]
         [BulkCopy]
-        public int S9LearnedAt {
+        public int S9CharLevel {
             get => Data.GetByte(s9LearnedAt);
             set => Data.SetByte(s9LearnedAt, (byte) value);
         }
 
+        [TableViewModelColumn(displayOrder: 66, displayGroup: "Spells")]
         [BulkCopy]
-        public int S9LearnedLevel {
+        public int S9SpellLv {
             get => Data.GetByte(s9LearnedLevel);
             set => Data.SetByte(s9LearnedLevel, (byte) value);
         }
 
+        [TableViewModelColumn(displayOrder: 67, displayFormat: "X2", minWidth: 120, displayGroup: "Spells")]
         [BulkCopy]
         [NameGetter(NamedValueType.Spell)]
-        public int S9LearnedID {
+        public int S9SpellID {
             get => Data.GetByte(s9LearnedID);
             set => Data.SetByte(s9LearnedID, (byte) value);
         }
 
+        [TableViewModelColumn(displayOrder: 68, displayGroup: "Spells")]
         [BulkCopy]
-        public int S10LearnedAt {
+        public int S10CharLevel {
             get => Data.GetByte(s10LearnedAt);
             set => Data.SetByte(s10LearnedAt, (byte) value);
         }
 
+        [TableViewModelColumn(displayOrder: 69, displayGroup: "Spells")]
         [BulkCopy]
-        public int S10LearnedLevel {
+        public int S10SpellLv {
             get => Data.GetByte(s10LearnedLevel);
             set => Data.SetByte(s10LearnedLevel, (byte) value);
         }
 
+        [TableViewModelColumn(displayOrder: 70, displayFormat: "X2", minWidth: 120, displayGroup: "Spells")]
         [BulkCopy]
         [NameGetter(NamedValueType.Spell)]
-        public int S10LearnedID {
+        public int S10SpellID {
             get => Data.GetByte(s10LearnedID);
             set => Data.SetByte(s10LearnedID, (byte) value);
         }
 
+        [TableViewModelColumn(displayOrder: 71, displayGroup: "Spells")]
         [BulkCopy]
-        public int S11LearnedAt {
+        public int S11CharLevel {
             get => Data.GetByte(s11LearnedAt);
             set => Data.SetByte(s11LearnedAt, (byte) value);
         }
 
+        [TableViewModelColumn(displayOrder: 72, displayGroup: "Spells")]
         [BulkCopy]
-        public int S11LearnedLevel {
+        public int S11SpellLv {
             get => Data.GetByte(s11LearnedLevel);
             set => Data.SetByte(s11LearnedLevel, (byte) value);
         }
 
+        [TableViewModelColumn(displayOrder: 73, displayFormat: "X2", minWidth: 120, displayGroup: "Spells")]
         [BulkCopy]
         [NameGetter(NamedValueType.Spell)]
-        public int S11LearnedID {
+        public int S11SpellID {
             get => Data.GetByte(s11LearnedID);
             set => Data.SetByte(s11LearnedID, (byte) value);
         }
 
+        [TableViewModelColumn(displayOrder: 74, displayGroup: "Spells")]
         [BulkCopy]
-        public int S12LearnedAt {
+        public int S12CharLevel {
             get => Data.GetByte(s12LearnedAt);
             set => Data.SetByte(s12LearnedAt, (byte) value);
         }
 
+        [TableViewModelColumn(displayOrder: 75, displayGroup: "Spells")]
         [BulkCopy]
-        public int S12LearnedLevel {
+        public int S12SpellLv {
             get => Data.GetByte(s12LearnedLevel);
             set => Data.SetByte(s12LearnedLevel, (byte) value);
         }
 
+        [TableViewModelColumn(displayOrder: 76, displayFormat: "X2", minWidth: 120, displayGroup: "Spells")]
         [BulkCopy]
         [NameGetter(NamedValueType.Spell)]
-        public int S12LearnedID {
+        public int S12SpellID {
             get => Data.GetByte(s12LearnedID);
             set => Data.SetByte(s12LearnedID, (byte) value);
         }
+
+        // ==============================
+        // Specials
+        // ==============================
 
         [BulkCopy]
         [NameGetter(NamedValueType.Special)]
