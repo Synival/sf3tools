@@ -385,12 +385,19 @@ namespace SF3.Models.Structs.X033_X031 {
                     GrowthStats.GetAverageStatGrowthPerLevelAsPercent(growthValue);
         }
 
+        // ==============================
+        // Stats
+        // ==============================
+
+        [TableViewModelColumn(displayOrder: 0, minWidth: 100, displayFormat: "X2", displayGroup: "Stats")]
         [BulkCopy]
+        [NameGetter(NamedValueType.Character)]
         public int CharacterID {
             get => Data.GetByte(character);
             set => Data.SetByte(character, (byte) value);
         }
 
+        [TableViewModelColumn(displayOrder: 1, displayName: "Class", minWidth: 150, displayFormat: "X2", displayGroup: "Stats")]
         [BulkCopy]
         [NameGetter(NamedValueType.CharacterClass)]
         public int CharacterClass {
@@ -398,48 +405,56 @@ namespace SF3.Models.Structs.X033_X031 {
             set => Data.SetByte(characterClass, (byte) value);
         }
 
+        [TableViewModelColumn(displayOrder: 2, displayGroup: "Stats")]
         [BulkCopy]
         public int HPPromote {
             get => Data.GetByte(hpPromote);
             set => Data.SetByte(hpPromote, (byte) value);
         }
 
+        [TableViewModelColumn(displayOrder: 3, displayName: "HPLv1", displayGroup: "Stats")]
         [BulkCopy]
         public int HPCurve1 {
             get => Data.GetByte(hpCurve1);
             set => Data.SetByte(hpCurve1, (byte) value);
         }
 
+        [TableViewModelColumn(displayOrder: 4, displayName: "HPLv5", displayGroup: "Stats")]
         [BulkCopy]
         public int HPCurve5 {
             get => Data.GetByte(hpCurve5);
             set => Data.SetByte(hpCurve5, (byte) value);
         }
 
+        [TableViewModelColumn(displayOrder: 5, displayName: "HPLv10", displayGroup: "Stats")]
         [BulkCopy]
         public int HPCurve10 {
             get => Data.GetByte(hpCurve10);
             set => Data.SetByte(hpCurve10, (byte) value);
         }
 
+        [TableViewModelColumn(displayOrder: 6, displayName: "HPLv12/15", displayGroup: "Stats")]
         [BulkCopy]
         public int HPCurve12_15 {
             get => Data.GetByte(hpCurve12_15);
             set => Data.SetByte(hpCurve12_15, (byte) value);
         }
 
+        [TableViewModelColumn(displayOrder: 7, displayName: "HPLv14/20", displayGroup: "Stats")]
         [BulkCopy]
         public int HPCurve14_20 {
             get => Data.GetByte(hpCurve14_20);
             set => Data.SetByte(hpCurve14_20, (byte) value);
         }
 
+        [TableViewModelColumn(displayOrder: 8, displayName: "HPLv17/30", displayGroup: "Stats")]
         [BulkCopy]
         public int HPCurve17_30 {
             get => Data.GetByte(hpCurve17_30);
             set => Data.SetByte(hpCurve17_30, (byte) value);
         }
 
+        [TableViewModelColumn(displayOrder: 9, displayName: "HPLv30/99", displayGroup: "Stats")]
         [BulkCopy]
         public int HPCurve30_99 {
             get => Data.GetByte(hpCurve30_99);
@@ -453,48 +468,56 @@ namespace SF3.Models.Structs.X033_X031 {
         [TableViewModelColumn(displayOrder: 104, displayGroup: "CurveCalc")] public string HPgroup5 => GetAverageStatGrowthPerLevelAsPercent(StatType.HP, 4);
         [TableViewModelColumn(displayOrder: 105, displayGroup: "CurveCalc")] public string HPgroup6 => GetAverageStatGrowthPerLevelAsPercent(StatType.HP, 5);
 
+        [TableViewModelColumn(displayOrder: 9.5f, displayGroup: "Stats")]
         [BulkCopy]
         public int MPPromote {
             get => Data.GetByte(mpPromote);
             set => Data.SetByte(mpPromote, (byte) value);
         }
 
+        [TableViewModelColumn(displayOrder: 10, displayName: "MPLv1", displayGroup: "Stats")]
         [BulkCopy]
         public int MPCurve1 {
             get => Data.GetByte(mpCurve1);
             set => Data.SetByte(mpCurve1, (byte) value);
         }
 
+        [TableViewModelColumn(displayOrder: 11, displayName: "MPLv5", displayGroup: "Stats")]
         [BulkCopy]
         public int MPCurve5 {
             get => Data.GetByte(mpCurve5);
             set => Data.SetByte(mpCurve5, (byte) value);
         }
 
+        [TableViewModelColumn(displayOrder: 12, displayName: "MPLv10", displayGroup: "Stats")]
         [BulkCopy]
         public int MPCurve10 {
             get => Data.GetByte(mpCurve10);
             set => Data.SetByte(mpCurve10, (byte) value);
         }
 
+        [TableViewModelColumn(displayOrder: 13, displayName: "MPLv12/15", displayGroup: "Stats")]
         [BulkCopy]
         public int MPCurve12_15 {
             get => Data.GetByte(mpCurve12_15);
             set => Data.SetByte(mpCurve12_15, (byte) value);
         }
 
+        [TableViewModelColumn(displayOrder: 14, displayName: "MPLv14/20", displayGroup: "Stats")]
         [BulkCopy]
         public int MPCurve14_20 {
             get => Data.GetByte(mpCurve14_20);
             set => Data.SetByte(mpCurve14_20, (byte) value);
         }
 
+        [TableViewModelColumn(displayOrder: 15, displayName: "MPLv17/30", displayGroup: "Stats")]
         [BulkCopy]
         public int MPCurve17_30 {
             get => Data.GetByte(mpCurve17_30);
             set => Data.SetByte(mpCurve17_30, (byte) value);
         }
 
+        [TableViewModelColumn(displayOrder: 16, displayName: "MPLv30/99", displayGroup: "Stats")]
         [BulkCopy]
         public int MPCurve30_99 {
             get => Data.GetByte(mpCurve30_99);
@@ -508,48 +531,56 @@ namespace SF3.Models.Structs.X033_X031 {
         [TableViewModelColumn(displayOrder: 114, displayGroup: "CurveCalc")] public string MPgroup5 => GetAverageStatGrowthPerLevelAsPercent(StatType.MP, 4);
         [TableViewModelColumn(displayOrder: 115, displayGroup: "CurveCalc")] public string MPgroup6 => GetAverageStatGrowthPerLevelAsPercent(StatType.MP, 5);
 
+        [TableViewModelColumn(displayOrder: 17, displayGroup: "Stats")]
         [BulkCopy]
         public int AtkPromote {
             get => Data.GetByte(atkPromote);
             set => Data.SetByte(atkPromote, (byte) value);
         }
 
+        [TableViewModelColumn(displayOrder: 18, displayName: "AtkLv1", displayGroup: "Stats")]
         [BulkCopy]
         public int AtkCurve1 {
             get => Data.GetByte(atkCurve1);
             set => Data.SetByte(atkCurve1, (byte) value);
         }
 
+        [TableViewModelColumn(displayOrder: 19, displayName: "AtkLv5", displayGroup: "Stats")]
         [BulkCopy]
         public int AtkCurve5 {
             get => Data.GetByte(atkCurve5);
             set => Data.SetByte(atkCurve5, (byte) value);
         }
 
+        [TableViewModelColumn(displayOrder: 20, displayName: "AtkLv10", displayGroup: "Stats")]
         [BulkCopy]
         public int AtkCurve10 {
             get => Data.GetByte(atkCurve10);
             set => Data.SetByte(atkCurve10, (byte) value);
         }
 
+        [TableViewModelColumn(displayOrder: 21, displayName: "AtkLv12/15", displayGroup: "Stats")]
         [BulkCopy]
         public int AtkCurve12_15 {
             get => Data.GetByte(atkCurve12_15);
             set => Data.SetByte(atkCurve12_15, (byte) value);
         }
 
+        [TableViewModelColumn(displayOrder: 22, displayName: "AtkLv14/20", displayGroup: "Stats")]
         [BulkCopy]
         public int AtkCurve14_20 {
             get => Data.GetByte(atkCurve14_20);
             set => Data.SetByte(atkCurve14_20, (byte) value);
         }
 
+        [TableViewModelColumn(displayOrder: 23, displayName: "AtkLv17/30", displayGroup: "Stats")]
         [BulkCopy]
         public int AtkCurve17_30 {
             get => Data.GetByte(atkCurve17_30);
             set => Data.SetByte(atkCurve17_30, (byte) value);
         }
 
+        [TableViewModelColumn(displayOrder: 24, displayName: "AtkLv30/99", displayGroup: "Stats")]
         [BulkCopy]
         public int AtkCurve30_99 {
             get => Data.GetByte(atkCurve30_99);
@@ -563,48 +594,56 @@ namespace SF3.Models.Structs.X033_X031 {
         [TableViewModelColumn(displayOrder: 124, displayGroup: "CurveCalc")] public string Atkgroup5 => GetAverageStatGrowthPerLevelAsPercent(StatType.Atk, 4);
         [TableViewModelColumn(displayOrder: 125, displayGroup: "CurveCalc")] public string Atkgroup6 => GetAverageStatGrowthPerLevelAsPercent(StatType.Atk, 5);
 
+        [TableViewModelColumn(displayOrder: 25, displayGroup: "Stats")]
         [BulkCopy]
         public int DefPromote {
             get => Data.GetByte(defPromote);
             set => Data.SetByte(defPromote, (byte) value);
         }
 
+        [TableViewModelColumn(displayOrder: 26, displayName: "DefLv1", displayGroup: "Stats")]
         [BulkCopy]
         public int DefCurve1 {
             get => Data.GetByte(defCurve1);
             set => Data.SetByte(defCurve1, (byte) value);
         }
 
+        [TableViewModelColumn(displayOrder: 27, displayName: "DefLv5", displayGroup: "Stats")]
         [BulkCopy]
         public int DefCurve5 {
             get => Data.GetByte(defCurve5);
             set => Data.SetByte(defCurve5, (byte) value);
         }
 
+        [TableViewModelColumn(displayOrder: 28, displayName: "DefLv10", displayGroup: "Stats")]
         [BulkCopy]
         public int DefCurve10 {
             get => Data.GetByte(defCurve10);
             set => Data.SetByte(defCurve10, (byte) value);
         }
 
+        [TableViewModelColumn(displayOrder: 29, displayName: "DefLv12/15", displayGroup: "Stats")]
         [BulkCopy]
         public int DefCurve12_15 {
             get => Data.GetByte(defCurve12_15);
             set => Data.SetByte(defCurve12_15, (byte) value);
         }
 
+        [TableViewModelColumn(displayOrder: 30, displayName: "DefLv14/20", displayGroup: "Stats")]
         [BulkCopy]
         public int DefCurve14_20 {
             get => Data.GetByte(defCurve14_20);
             set => Data.SetByte(defCurve14_20, (byte) value);
         }
 
+        [TableViewModelColumn(displayOrder: 31, displayName: "DefLv17/30", displayGroup: "Stats")]
         [BulkCopy]
         public int DefCurve17_30 {
             get => Data.GetByte(defCurve17_30);
             set => Data.SetByte(defCurve17_30, (byte) value);
         }
 
+        [TableViewModelColumn(displayOrder: 32, displayName: "DefLv30/99", displayGroup: "Stats")]
         [BulkCopy]
         public int DefCurve30_99 {
             get => Data.GetByte(defCurve30_99);
@@ -618,48 +657,56 @@ namespace SF3.Models.Structs.X033_X031 {
         [TableViewModelColumn(displayOrder: 134, displayGroup: "CurveCalc")] public string Defgroup5 => GetAverageStatGrowthPerLevelAsPercent(StatType.Def, 4);
         [TableViewModelColumn(displayOrder: 135, displayGroup: "CurveCalc")] public string Defgroup6 => GetAverageStatGrowthPerLevelAsPercent(StatType.Def, 5);
 
+        [TableViewModelColumn(displayOrder: 33, displayGroup: "Stats")]
         [BulkCopy]
         public int AgiPromote {
             get => Data.GetByte(agiPromote);
             set => Data.SetByte(agiPromote, (byte) value);
         }
 
+        [TableViewModelColumn(displayOrder: 34, displayName: "AgiLv1", displayGroup: "Stats")]
         [BulkCopy]
         public int AgiCurve1 {
             get => Data.GetByte(agiCurve1);
             set => Data.SetByte(agiCurve1, (byte) value);
         }
 
+        [TableViewModelColumn(displayOrder: 35, displayName: "AgiLv5", displayGroup: "Stats")]
         [BulkCopy]
         public int AgiCurve5 {
             get => Data.GetByte(agiCurve5);
             set => Data.SetByte(agiCurve5, (byte) value);
         }
 
+        [TableViewModelColumn(displayOrder: 36, displayName: "AgiLv10", displayGroup: "Stats")]
         [BulkCopy]
         public int AgiCurve10 {
             get => Data.GetByte(agiCurve10);
             set => Data.SetByte(agiCurve10, (byte) value);
         }
 
+        [TableViewModelColumn(displayOrder: 37, displayName: "AgiLv12/15", displayGroup: "Stats")]
         [BulkCopy]
         public int AgiCurve12_15 {
             get => Data.GetByte(agiCurve12_15);
             set => Data.SetByte(agiCurve12_15, (byte) value);
         }
 
+        [TableViewModelColumn(displayOrder: 38, displayName: "AgiLv14/20", displayGroup: "Stats")]
         [BulkCopy]
         public int AgiCurve14_20 {
             get => Data.GetByte(agiCurve14_20);
             set => Data.SetByte(agiCurve14_20, (byte) value);
         }
 
+        [TableViewModelColumn(displayOrder: 39, displayName: "AgiLv17/30", displayGroup: "Stats")]
         [BulkCopy]
         public int AgiCurve17_30 {
             get => Data.GetByte(agiCurve17_30);
             set => Data.SetByte(agiCurve17_30, (byte) value);
         }
 
+        [TableViewModelColumn(displayOrder: 40, displayName: "AgiLv30/99", displayGroup: "Stats")]
         [BulkCopy]
         public int AgiCurve30_99 {
             get => Data.GetByte(agiCurve30_99);
@@ -672,6 +719,10 @@ namespace SF3.Models.Structs.X033_X031 {
         [TableViewModelColumn(displayOrder: 143, displayGroup: "CurveCalc")] public string Agigroup4 => GetAverageStatGrowthPerLevelAsPercent(StatType.Agi, 3);
         [TableViewModelColumn(displayOrder: 144, displayGroup: "CurveCalc")] public string Agigroup5 => GetAverageStatGrowthPerLevelAsPercent(StatType.Agi, 4);
         [TableViewModelColumn(displayOrder: 145, displayGroup: "CurveCalc")] public string Agigroup6 => GetAverageStatGrowthPerLevelAsPercent(StatType.Agi, 5);
+
+        // ==============================
+        // Spells
+        // ==============================
 
         [BulkCopy]
         public int S1LearnedAt {
