@@ -5,7 +5,6 @@ using SF3.Models.Files;
 using SF3.Models.Files.X033_X031;
 using SF3.Models.Structs.X033_X031;
 using SF3.NamedValues;
-using SF3.Win;
 using SF3.Win.Extensions;
 using SF3.Win.Forms;
 using static SF3.Win.Extensions.TabControlExtensions;
@@ -16,12 +15,10 @@ namespace SF3.X033_X031_Editor.Forms {
         protected override string Version => "0.23 (2025-02-26 dev)";
 
         public IX033_X031_File File => base.FileLoader.Model as IX033_X031_File;
-        private StatGrowthChart _statGrowthChart;
 
         public frmX033_X031_Editor() {
             InitializeComponent();
             InitializeEditor(menuStrip2);
-            _statGrowthChart = new StatGrowthChart(CurveGraph);
         }
 
         protected override string FileDialogFilter => "SF3 Data (X033.BIN;X031.BIN)|X033.BIN;X031.BIN|" + base.FileDialogFilter;
@@ -59,7 +56,6 @@ namespace SF3.X033_X031_Editor.Forms {
                 olvCurveCalc.AddObjects(File?.StatsTable.Rows);
         }
 
-        private void CurveGraphCharacterComboBox_SelectedIndexChanged(object sender, EventArgs e)
-            => _statGrowthChart.RefreshCurveGraph(File.StatsTable, cbCurveGraphCharacter);
+        private void CurveGraphCharacterComboBox_SelectedIndexChanged(object sender, EventArgs e) {}
     }
 }

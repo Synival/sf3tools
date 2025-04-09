@@ -58,7 +58,7 @@
             cbCurveGraphCharacter.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             cbCurveGraphCharacter.Name = "cbCurveGraphCharacter";
             cbCurveGraphCharacter.Size = new System.Drawing.Size(226, 23);
-            cbCurveGraphCharacter.TabIndex = 1;
+            cbCurveGraphCharacter.TabIndex = 0;
             cbCurveGraphCharacter.SelectedIndexChanged += CurveGraphCharacterComboBox_SelectedIndexChanged;
             // 
             // CurveGraph
@@ -268,8 +268,9 @@
             CurveGraph.Series.Add(series19);
             CurveGraph.Series.Add(series20);
             CurveGraph.Size = new System.Drawing.Size(653, 412);
-            CurveGraph.TabIndex = 0;
+            CurveGraph.TabIndex = 1;
             CurveGraph.Text = "chartCurveGraph";
+            CurveGraph.MouseMove += CurveGraph_MouseMove;
             // 
             // StatGrowthChartControl
             // 
