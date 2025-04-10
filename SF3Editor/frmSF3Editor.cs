@@ -1,17 +1,23 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Drawing;
+using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 using CommonLib.NamedValues;
 using DFRLib.Types;
 using DFRLib.Win.Forms;
+using Microsoft.WindowsAPICodePack.Dialogs;
 using SF3.ModelLoaders;
+using SF3.Models.Files.MPD;
 using SF3.Models.Structs.X033_X031;
 using SF3.NamedValues;
 using SF3.Types;
 using SF3.Win;
+using SF3.Win.Extensions;
+using SF3.Win.Utils;
 using SF3.Win.Views;
 using static CommonLib.Win.Utils.MessageUtils;
 using static SF3.Utils.FileUtils;
@@ -451,6 +457,81 @@ namespace SF3Editor {
             return (dialogResult == DialogResult.OK);
         }
 
+        /// <summary>
+        /// Opens a dialog to import all textures to an MPD file.
+        /// </summary>
+        /// <param name="mpdFile">The MPD file to load textures into.</param>
+        /// <returns>'true' if an import was attempted (dialog was not cancelled), 'false' if the dialog was cancelled.</returns>
+        public bool ImportAllMPDTexturesDialog(IMPD_File mpdFile) {
+            using (var dialog = new CommonOpenFileDialog() {
+                Title = "Import Textures",
+                IsFolderPicker = true,
+                Multiselect = false,
+                EnsureValidNames = true,
+                EnsureFileExists = true,
+                EnsurePathExists = true,
+            }) {
+                if (dialog.ShowDialog() != CommonFileDialogResult.Ok)
+                    return false;
+
+                var path = dialog.FileName;
+                var files = Directory.GetFiles(path);
+
+                var results = mpdFile.ReplaceTexturesFromFiles(files, (f) => Image.FromFile(f).Get2DDataABGR1555());
+                var message =
+                    "Import complete.\n" +
+                    "   Imported successfully: " + results.Replaced + "\n" +
+                    "   Textures missing: " + results.Missing + "\n" +
+                    "   Failed: " + results.Failed + "\n" +
+                    "   Ignored (256-color not yet supported): " + results.Skipped;
+
+                InfoMessage(message);
+            }
+
+            return true;
+        }
+
+        /// <summary>
+        /// Opens a dialog to export all textures to an MPD file.
+        /// </summary>
+        /// <param name="mpdFile">The MPD file to export textures from.</param>
+        /// <returns>'true' if an export was attempted (dialog was not cancelled), 'false' if the dialog was cancelled.</returns>
+        public bool ExportAllMPDTexturesDialog(IMPD_File mpdFile) {
+            using (var dialog = new CommonOpenFileDialog() {
+                Title = "Export Textures to Folder",
+                IsFolderPicker = true,
+                Multiselect = false,
+                EnsureValidNames = false,
+                EnsureFileExists = false,
+                EnsurePathExists = false, // Not respected!! User still has to select a folder that exists :( :(
+            }) {
+                if (dialog.ShowDialog() != CommonFileDialogResult.Ok)
+                    return false;
+
+                var path = dialog.FileName;
+
+                var results = mpdFile.ExportTexturesToPath(path, (f, data) => ImageUtils.SaveBitmapToFile(f, data, ImageFormat.Png));
+                var message =
+                    "Export complete.\n" +
+                    "   Exported successfully: " + results.Exported + "\n" +
+                    "   Failed: " + results.Failed + "\n" +
+                    "   Ignored (256-color not yet supported): " + results.Skipped;
+
+                InfoMessage(message);
+
+                // Automatically open the folder, just for fun.
+                try {
+                    using (Process.Start(new ProcessStartInfo(path) { UseShellExecute = true }))
+#pragma warning disable CS0642 // Possible mistaken empty statement
+                        ;
+#pragma warning restore CS0642 // Possible mistaken empty statement
+                }
+                catch { }
+            }
+
+            return true;
+        }
+
         private void tsmiFile_Open_Click(object sender, EventArgs e) => OpenFileDialog();
 
         private void tsmiFile_Save_Click(object sender, EventArgs e) {
@@ -546,5 +627,15 @@ namespace SF3Editor {
 
         private void tsmiMPD_EnableBlankFieldV2Controls_Click(object sender, EventArgs e)
             => _appState.EnableExperimentalBlankFieldV2Brushes = !_appState.EnableExperimentalBlankFieldV2Brushes;
+
+        private void tsmiMPD_Textures_ImportAll_Click(object sender, EventArgs e) {
+            if (_selectedFile?.FileType == SF3FileType.MPD)
+                ImportAllMPDTexturesDialog((IMPD_File) _selectedFile.Loader.Model);
+        }
+
+        private void tsmiMPD_Textures_ExportAll_Click(object sender, EventArgs e) {
+            if (_selectedFile?.FileType == SF3FileType.MPD)
+                ExportAllMPDTexturesDialog((IMPD_File) _selectedFile.Loader.Model);
+        }
     }
 }
