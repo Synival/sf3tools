@@ -77,9 +77,9 @@ namespace SF3Editor {
                 _appState.Serialize();
             };
 
-            tsmiEdit_EnableBlankFieldV2Controls.Checked = _appState.EnableExperimentalBlankFieldV2Brushes;
+            tsmiMPD_EnableBlankFieldV2Controls.Checked = _appState.EnableExperimentalBlankFieldV2Brushes;
             _appState.EnableExperimentalBlankFieldV2BrushesChanged += (s, e) => {
-                tsmiEdit_EnableBlankFieldV2Controls.Checked = _appState.EnableExperimentalBlankFieldV2Brushes;
+                tsmiMPD_EnableBlankFieldV2Controls.Checked = _appState.EnableExperimentalBlankFieldV2Brushes;
                 _appState.Serialize();
             };
 
@@ -365,6 +365,9 @@ namespace SF3Editor {
 
             _selectedFile = file;
             Text = file == null ? _versionTitle : file.Loader.ModelTitle(_versionTitle);
+
+            var fileType = file?.FileType;
+            tsmiMPD.Visible = tsmiMPD.Enabled = hasFile && (fileType == SF3FileType.MPD);
         }
 
         /// <summary>
@@ -538,10 +541,10 @@ namespace SF3Editor {
         private readonly TabView _fileContainerView;
         private readonly AppState _appState;
 
-        private void tsmiEdit_EnableBlankFieldV2Controls_Click(object sender, EventArgs e)
-            => _appState.EnableExperimentalBlankFieldV2Brushes = !_appState.EnableExperimentalBlankFieldV2Brushes;
-
         private void tsmiEdit_EnableDebugSettings_Click(object sender, EventArgs e)
             => _appState.EnableDebugSettings = !_appState.EnableDebugSettings;
+
+        private void tsmiMPD_EnableBlankFieldV2Controls_Click(object sender, EventArgs e)
+            => _appState.EnableExperimentalBlankFieldV2Brushes = !_appState.EnableExperimentalBlankFieldV2Brushes;
     }
 }
