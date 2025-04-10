@@ -12,6 +12,12 @@ namespace SF3.Win.Extensions {
             return bitmap;
         }
 
+        public static byte[] GetDataBGRA8888(this Image image)
+            => image.CreateBitmap().GetDataBGRA8888();
+
+        public static ushort[,] Get2DDataABGR1555(this Image image)
+            => image.CreateBitmap().Get2DDataABGR1555();
+
         public static TextureABGR1555 CreateTextureABGR1555(this Image image, int id, int frame, int duration) {
             using (var bitmap = image.CreateBitmap())
                 return BitmapExtensions.CreateTextureABGR1555(bitmap, id, frame, duration);

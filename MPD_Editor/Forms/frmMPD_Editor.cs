@@ -18,6 +18,7 @@ using SF3.Models.Structs.MPD.TextureChunk;
 using SF3.NamedValues;
 using SF3.Types;
 using SF3.Win;
+using SF3.Win.Extensions;
 using SF3.Win.Forms;
 using SF3.Win.Types;
 using SF3.Win.Views;
@@ -114,53 +115,16 @@ namespace SF3.MPD_Editor.Forms {
                 var path = dialog.FileName;
                 var files = Directory.GetFiles(path);
 
-                ImportTextures(files);
+                var results = File.ReplaceTexturesFromFiles(files, (f) => Image.FromFile(f).Get2DDataABGR1555());
+                var message =
+                    "Import complete.\n" +
+                    "   Imported successfully: " + results.Replaced + "\n" +
+                    "   Textures missing: " + results.Missing + "\n" +
+                    "   Failed: " + results.Failed + "\n" +
+                    "   Ignored (256-color not yet supported): " + results.Skipped;
+
+                InfoMessage(message);
             }
-        }
-
-        private void ImportTextures(string[] files) {
-            ushort[,] GetTextureData(string filename) {
-                var image = Image.FromFile(filename);
-
-                using (var bitmap = new Bitmap(image.Width, image.Height, PixelFormat.Format32bppArgb)) {
-                    using (var graphics = Graphics.FromImage(bitmap)) {
-                        graphics.DrawImage(image, new Point(0, 0));
-                    }
-                    var readBytes = new byte[image.Width * image.Height * 4];
-
-                    var bitmapData = bitmap.LockBits(new Rectangle(0, 0, image.Width, image.Height), ImageLockMode.ReadWrite, bitmap.PixelFormat);
-                    Marshal.Copy(bitmapData.Scan0, readBytes, 0, readBytes.Length);
-                    bitmap.UnlockBits(bitmapData);
-
-                    var newImageData = new ushort[image.Width, image.Height];
-                    int pos = 0;
-                    for (int y = 0; y < image.Height; y++) {
-                        for (int x = 0; x < image.Width; x++) {
-                            var byteB = readBytes[pos++];
-                            var byteG = readBytes[pos++];
-                            var byteR = readBytes[pos++];
-                            var byteA = readBytes[pos++];
-
-                            var channels = new PixelChannels() { a = byteA, r = byteR, g = byteG, b = byteB };
-                            var abgr1555 = channels.ToABGR1555();
-
-                            newImageData[x, y] = abgr1555;
-                        }
-                    }
-
-                    return newImageData;
-                }
-            }
-
-            var results = File.ReplaceTexturesFromFiles(files, GetTextureData);
-            var message =
-                "Import complete.\n" +
-                "   Imported successfully: " + results.Replaced + "\n" +
-                "   Textures missing: " + results.Missing + "\n" +
-                "   Failed: " + results.Failed + "\n" +
-                "   Ignored (256-color not yet supported): " + results.Skipped;
-
-            InfoMessage(message);
         }
 
         private void tsmiTextures_ExportToFolder_Click(object sender, System.EventArgs e) {

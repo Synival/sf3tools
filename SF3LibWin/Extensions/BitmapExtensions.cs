@@ -21,7 +21,7 @@ namespace SF3.Win.Extensions {
                     to.SetPixel(ix + x, iy + y, from.GetPixel(ix, iy));
         }
 
-        public static byte[] GetABGRBytes(this Bitmap bitmap) {
+        public static byte[] GetDataBGRA8888(this Bitmap bitmap) {
             if (bitmap.PixelFormat != PixelFormat.Format32bppArgb)
                 throw new ArgumentException(nameof(bitmap.PixelFormat));
 
@@ -33,24 +33,27 @@ namespace SF3.Win.Extensions {
             return readBytes;
         }
 
-        public static TextureABGR1555 CreateTextureABGR1555(this Bitmap bitmap, int id, int frame, int duration) {
-            var data = new ushort[bitmap.Width, bitmap.Height];
-            var bitmapData = bitmap.GetABGRBytes();
+        public static ushort[,] Get2DDataABGR1555(this Bitmap bitmap) {
+            var outputData = new ushort[bitmap.Width, bitmap.Height];
+            var inputData = bitmap.GetDataBGRA8888();
 
             int pos = 0;
             for (var y = 0; y < bitmap.Height; y++) {
                 for (var x = 0; x < bitmap.Width; x++) {
                     var channels = new PixelChannels() {
-                        b = bitmapData[pos++],
-                        g = bitmapData[pos++],
-                        r = bitmapData[pos++],
-                        a = bitmapData[pos++]
+                        b = inputData[pos++],
+                        g = inputData[pos++],
+                        r = inputData[pos++],
+                        a = inputData[pos++]
                     };
-                    data[x, y] = channels.ToARGB1555();
+                    outputData[x, y] = channels.ToABGR1555();
                 }
             }
 
-            return new TextureABGR1555(id, frame, duration, data);
+            return outputData;
         }
+
+        public static TextureABGR1555 CreateTextureABGR1555(this Bitmap bitmap, int id, int frame, int duration)
+            => new TextureABGR1555(id, frame, duration, Get2DDataABGR1555(bitmap));
     }
 }
