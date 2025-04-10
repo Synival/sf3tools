@@ -12,6 +12,6 @@ namespace SF3.Models.Files.X002 {
         WeaponRankTable WeaponRankTable { get; }
         AttackResist AttackResist { get; }
         WarpTable WarpTable { get; }
-        LoadedOverrideTable LoadedOverrideTable { get; }
+        LoadingOverrideTable LoadingOverrideTable { get; }
     }
 }

@@ -197,7 +197,7 @@ namespace SF3.Tests.Models.Files {
         public void LoadedOverrideTable_HasExpectedData() {
             TestCase.Run(TestCases, testCase => {
                 var file = testCase.Create();
-                var table = file.LoadedOverrideTable;
+                var table = file.LoadingOverrideTable;
 
                 switch (file.Scenario) {
                     case ScenarioType.Scenario1:

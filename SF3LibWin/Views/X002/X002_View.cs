@@ -20,8 +20,8 @@ namespace SF3.Win.Views.X002 {
                 CreateChild(new TableView("Weapon Spells", Model.WeaponSpellTable, ngc));
             if (Model.LoadingTable != null)
                 CreateChild(new TableView("Loading", Model.LoadingTable, ngc));
-            if (Model.LoadedOverrideTable != null)
-                CreateChild(new TableView("Loading Overrides", Model.LoadedOverrideTable, ngc));
+            if (Model.LoadingOverrideTable != null)
+                CreateChild(new TableView("Loading Overrides", Model.LoadingOverrideTable, ngc));
             if (Model.StatBoostTable != null)
                 CreateChild(new TableView("Stat Boosts", Model.StatBoostTable, ngc));
             if (Model.WeaponRankTable != null)

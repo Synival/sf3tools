@@ -3,7 +3,7 @@ using SF3.ByteData;
 using SF3.Types;
 
 namespace SF3.Models.Structs.X002 {
-    public class LoadedOverride : Struct {
+    public class LoadingOverride : Struct {
         private readonly int _mapIDAddr;
         private readonly int _synMusicAddr;
         private readonly int _medMusicAddr;
@@ -18,7 +18,7 @@ namespace SF3.Models.Structs.X002 {
         private readonly int _julCHRAddr;
         private readonly int _extraCHRAddr;
 
-        public LoadedOverride(IByteData data, int id, string name, int address)
+        public LoadingOverride(IByteData data, int id, string name, int address)
         : base(data, id, name, address, 0x28) {
             _mapIDAddr      = Address + 0x00; // 2 bytes
             _synMusicAddr   = Address + 0x02; // 1 byte
