@@ -12,8 +12,7 @@ namespace SF3.Models.Structs.MPD.TextureAnimation {
         private readonly int _unknownAddress;
 
         public FrameModel(
-            IByteData data, int id, string name, int address, bool is32Bit, int texId, int width, int height, int texAnimId, int frameNum,
-            string importExportName
+            IByteData data, int id, string name, int address, bool is32Bit, int texId, int width, int height, int texAnimId, int frameNum
         ) : base(data, id, name, address, is32Bit ? 0x08 : 0x04) {
             Is32Bit          = is32Bit;
             TextureID        = texId;
@@ -21,7 +20,7 @@ namespace SF3.Models.Structs.MPD.TextureAnimation {
             Height           = height;
             texAnimID        = texAnimId;
             FrameNum         = frameNum;
-            ImportExportName = importExportName;
+            ImportExportName = $"Texture_{texId:X2}_Frame_{(frameNum):X2}";
 
             _bytesPerProperty = is32Bit ? 0x04 : 0x02;
 

@@ -1133,7 +1133,7 @@ namespace SF3.Models.Files.MPD {
             var textures1 = (TextureCollections == null) ? new Dictionary<string, TextureModelAndTextureByName>() : TextureCollections
                 .Where(x => x != null && x.TextureTable != null)
                 .SelectMany(x => x.TextureTable)
-                .Where(x => x.TextureIsLoaded && x.Collection == TextureCollectionType.PrimaryTextures)
+                .Where(x => x.TextureIsLoaded)
                 .ToDictionary(x => x.ImportExportName, x => new TextureModelAndTextureByName { Model = x, Texture = x.Texture });
 
             var textures2 = (TextureAnimations == null) ? new Dictionary<string, TextureModelAndTextureByName>() : TextureAnimations
@@ -1221,7 +1221,7 @@ namespace SF3.Models.Files.MPD {
             var textures1 = (TextureCollections == null) ? new Dictionary<string, ITexture>() : TextureCollections
                 .Where(x => x != null && x.TextureTable != null)
                 .SelectMany(x => x.TextureTable)
-                .Where(x => x.TextureIsLoaded && x.Collection == TextureCollectionType.PrimaryTextures)
+                .Where(x => x.TextureIsLoaded)
                 .ToDictionary(x => x.ImportExportName, x => x.Texture);
 
             var textures2 = (TextureAnimations == null) ? new Dictionary<string, ITexture>() : TextureAnimations
