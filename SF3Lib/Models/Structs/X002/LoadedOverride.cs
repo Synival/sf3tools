@@ -43,22 +43,25 @@ namespace SF3.Models.Structs.X002 {
             set => Data.SetWord(mapID, value);
         }
 
-        [TableViewModelColumn(displayOrder: 1, displayFormat: "X2")]
+        [TableViewModelColumn(displayOrder: 1, displayFormat: "X2", minWidth: 210)]
         [BulkCopy]
+        [NameGetter(NamedValueType.Music)]
         public int SynMusic {
             get => Data.GetByte(synMusic);
             set => Data.SetByte(synMusic, (byte) value);
         }
 
-        [TableViewModelColumn(displayOrder: 2, displayFormat: "X2")]
+        [TableViewModelColumn(displayOrder: 2, displayFormat: "X2", minWidth: 210)]
         [BulkCopy]
+        [NameGetter(NamedValueType.Music)]
         public int MedMusic {
             get => Data.GetByte(medMusic);
             set => Data.SetByte(medMusic, (byte) value);
         }
 
-        [TableViewModelColumn(displayOrder: 3, displayFormat: "X2")]
+        [TableViewModelColumn(displayOrder: 3, displayFormat: "X2", minWidth: 210)]
         [BulkCopy]
+        [NameGetter(NamedValueType.Music)]
         public int JulMusic {
             get => Data.GetByte(julMusic);
             set => Data.SetByte(julMusic, (byte) value);

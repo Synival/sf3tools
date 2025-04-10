@@ -55,8 +55,9 @@ namespace SF3.Models.Structs.X002 {
             set => Data.SetWord(x5, value);
         }
 
-        [TableViewModelColumn(displayOrder: 4, displayFormat: "X2")]
+        [TableViewModelColumn(displayOrder: 4, displayFormat: "X2", minWidth: 210)]
         [BulkCopy]
+        [NameGetter(NamedValueType.Music)]
         public int Music {
             get => Data.GetWord(music);
             set => Data.SetWord(music, value);

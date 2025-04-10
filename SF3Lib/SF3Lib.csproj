@@ -11,9 +11,13 @@
     <None Remove="Resources\Elements.xml" />
     <None Remove="Resources\FriendshipBonusTypeList.xml" />
     <None Remove="Resources\GameFlags.xml" />
+    <None Remove="Resources\PD\Music.xml" />
     <None Remove="Resources\PD\Sprites.xml" />
+    <None Remove="Resources\S1\Music.xml" />
     <None Remove="Resources\S1\Sprites.xml" />
+    <None Remove="Resources\S2\Music.xml" />
     <None Remove="Resources\S2\Sprites.xml" />
+    <None Remove="Resources\S3\Music.xml" />
     <None Remove="Resources\S3\Sprites.xml" />
     <None Remove="Resources\SpellTargets.xml" />
   </ItemGroup>
@@ -30,13 +34,25 @@
     <Content Include="Resources\GameFlags.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\PD\Music.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\PD\Sprites.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\S1\Music.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\S1\Sprites.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\S2\Music.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\S2\Sprites.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\S3\Music.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\S3\Sprites.xml">

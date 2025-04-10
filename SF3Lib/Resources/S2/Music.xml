@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<items>
+    <item value="0x00" name="--" />
+    <item value="0x01" name="Soldier of The Republic" />
+    <item value="0x02" name="Hero of The Republic" />
+    <item value="0x03" name="Soldier of The Empire" />
+    <item value="0x04" name="Hero of The Empire" />
+    <item value="0x05" name="Monsters" />
+    <item value="0x06" name="A Formidable Enemy" />
+    <item value="0x07" name="The Mercenary Soldier" />
+    <item value="0x08" name="The Mercenary Soldier (2)" />
+    <item value="0x09" name="Devil's Fury" />
+    <item value="0x0a" name="Soldier of The Republic (2)" />
+    <item value="0x0b" name="Credits Theme" />
+    <item value="0x0c" name="Ishahacut's Room" />
+    <item value="0x0d" name="A Life of Harmony" />
+    <item value="0x0e" name="Peaceful Early Afternoon" />
+    <item value="0x0f" name="Sorrow" />
+    <item value="0x10" name="The Ramshackle Vilage" />
+    <item value="0x11" name="Conspiracies of Bulzome" />
+    <item value="0x12" name="The White Swan Castle" />
+    <item value="0x13" name="Church Prayer" />
+    <item value="0x14" name="Town Full of Life" />
+    <item value="0x15" name="Song of Soul's Rest" />
+    <item value="0x16" name="Accident" />
+    <item value="0x17" name="Flying Dragon of The Battlefield" />
+    <item value="0x18" name="Confrontation" />
+    <item value="0x19" name="Flowing River, Light of The Moon" />
+    <item value="0x1a" name="An Afternoon of Rest" />
+    <item value="0x1b" name="Peaceful Times" />
+    <item value="0x1c" name="Council of War" />
+    <item value="0x1d" name="The Blacksmith" />
+    <item value="0x1e" name="A Slightly Drunken Mood" />
+    <item value="0x1f" name="Tiger of Honest and Affection" />
+    <item value="0x20" name="A Distant Journey" />
+    <item value="0x21" name="The Final Battle" />
+    <item value="0x22" name="A Powerful Force" />
+    <item value="0x23" name="Winds of Despair" />
+    <item value="0x24" name="Dignity and Pride" />
+    <item value="0x25" name="World of Mystery" />
+    <item value="0x26" name="And The Legend Begins" />
+    <item value="0x27" name="Title Screen" />
+    <item value="0x28" name="The Lone Wolf (Unused Early Version)" />
+    <item value="0x29" name="The Shadowy Onlooker" />
+    <item value="0x2a" name="An Eerie Silence" />
+    <item value="0x2b" name="A Time of Rest" />
+    <item value="0x2c" name="Ending Title Song" />
+    <item value="0x2d" name="The Bustling Wilderness" />
+    <item value="0x2e" name="The Holy Land of Elbesem" />
+    <item value="0x2f" name="At The Great Cathedral" />
+    <item value="0x30" name="The Red Assassins" />
+    <item value="0x31" name="Advancing Enemy" />
+    <item value="0x32" name="The Nautical Life" />
+    <item value="0x33" name="Omens" />
+    <item value="0x34" name="Soldier of The Republic (3)" />
+    <item value="0x35" name="Soldier of The Republic (4)" />
+    <item value="0x36" name="Soldier of The Republic (5)" />
+    <item value="0x37" name="Soldier of The Republic (6)" />
+    <item value="0x38" name="Soldier of The Republic (7)" />
+    <item value="0x39" name="Soldier of The Republic (8)" />
+    <item value="0x3A" name="Soldier of The Republic (9)" />
+    <item value="0x3B" name="Soldier of The Republic (10)" />
+</items>

@@ -26,6 +26,7 @@ namespace SF3.Types {
         EventTriggerWarpSound,
         MagicBonus,
         MovementType,
+        Music,
         Sex,
         SpawnType,
         Special,

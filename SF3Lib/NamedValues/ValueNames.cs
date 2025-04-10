@@ -49,6 +49,8 @@ namespace SF3.NamedValues {
             = new MonsterForSlotInfo();
         public static readonly NamedValueFromEnum<MovementType> MovementTypeInfo
             = new NamedValueFromEnum<MovementType>();
+        public static readonly NamedValueFromResourceForScenariosInfo MusicInfo
+            = new NamedValueFromResourceForScenariosInfo("Music.xml");
         public static readonly NamedValueFromResourceInfo SexInfo
             = new NamedValueFromResourceInfo("Sexes.xml");
         public static readonly NamedValueFromEnum<SpawnType> SpawnTypeInfo
