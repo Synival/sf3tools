@@ -685,6 +685,37 @@ namespace SF3Editor {
 
         private void tsmiEdit_UseDropdowns_Click(object sender, EventArgs e) => _appState.UseDropdownsForNamedValues = !_appState.UseDropdownsForNamedValues;
 
+        private void tsmiEdit_EnableDebugSettings_Click(object sender, EventArgs e)
+            => _appState.EnableDebugSettings = !_appState.EnableDebugSettings;
+
+        private void tsmiMPD_EnableBlankFieldV2Controls_Click(object sender, EventArgs e)
+            => _appState.EnableExperimentalBlankFieldV2Brushes = !_appState.EnableExperimentalBlankFieldV2Brushes;
+
+        private void tsmiMPD_Textures_ImportAll_Click(object sender, EventArgs e) {
+            if (_selectedFile?.FileType == SF3FileType.MPD)
+                ImportAllMPDTexturesDialog((IMPD_File) _selectedFile.Loader.Model);
+        }
+
+        private void tsmiMPD_Textures_ExportAll_Click(object sender, EventArgs e) {
+            if (_selectedFile?.FileType == SF3FileType.MPD)
+                ExportAllMPDTexturesDialog((IMPD_File) _selectedFile.Loader.Model);
+        }
+
+        private void tsmiMPD_Chunks_ExportChunk_Click(object sender, EventArgs e) {
+            if (_selectedFile?.FileType == SF3FileType.MPD)
+                ExportMPDChunkDialog((IMPD_File) _selectedFile.Loader.Model, Path.GetFileNameWithoutExtension(_selectedFile.Loader.ShortFilename));
+        }
+
+        private void tsmiMPD_Chunks_ImportChunk_Click(object sender, EventArgs e) {
+            if (_selectedFile?.FileType == SF3FileType.MPD)
+                ImportMPDChunkDialog((IMPD_File) _selectedFile.Loader.Model, Path.GetFileNameWithoutExtension(_selectedFile.Loader.ShortFilename));
+        }
+
+        private void tsmiMPD_Chunks_DeleteChunk_Click(object sender, EventArgs e) {
+            if (_selectedFile?.FileType == SF3FileType.MPD)
+                DeleteMPDChunkDialog((IMPD_File) _selectedFile.Loader.Model, Path.GetFileNameWithoutExtension(_selectedFile.Loader.ShortFilename));
+        }
+
         private void tsmiHelp_About_Click(object sender, EventArgs e) {
             // Fetch copyright info from the assembly itself.
             string? legalCopyright = null;
@@ -729,36 +760,5 @@ namespace SF3Editor {
         private readonly string _versionTitle;
         private readonly TabView _fileContainerView;
         private readonly AppState _appState;
-
-        private void tsmiEdit_EnableDebugSettings_Click(object sender, EventArgs e)
-            => _appState.EnableDebugSettings = !_appState.EnableDebugSettings;
-
-        private void tsmiMPD_EnableBlankFieldV2Controls_Click(object sender, EventArgs e)
-            => _appState.EnableExperimentalBlankFieldV2Brushes = !_appState.EnableExperimentalBlankFieldV2Brushes;
-
-        private void tsmiMPD_Textures_ImportAll_Click(object sender, EventArgs e) {
-            if (_selectedFile?.FileType == SF3FileType.MPD)
-                ImportAllMPDTexturesDialog((IMPD_File) _selectedFile.Loader.Model);
-        }
-
-        private void tsmiMPD_Textures_ExportAll_Click(object sender, EventArgs e) {
-            if (_selectedFile?.FileType == SF3FileType.MPD)
-                ExportAllMPDTexturesDialog((IMPD_File) _selectedFile.Loader.Model);
-        }
-
-        private void tsmiMPD_Chunks_ExportChunk_Click(object sender, EventArgs e) {
-            if (_selectedFile?.FileType == SF3FileType.MPD)
-                ExportMPDChunkDialog((IMPD_File) _selectedFile.Loader.Model, Path.GetFileNameWithoutExtension(_selectedFile.Loader.ShortFilename));
-        }
-
-        private void tsmiMPD_Chunks_ImportChunk_Click(object sender, EventArgs e) {
-            if (_selectedFile?.FileType == SF3FileType.MPD)
-                ImportMPDChunkDialog((IMPD_File) _selectedFile.Loader.Model, Path.GetFileNameWithoutExtension(_selectedFile.Loader.ShortFilename));
-        }
-
-        private void tsmiMPD_Chunks_DeleteChunk_Click(object sender, EventArgs e) {
-            if (_selectedFile?.FileType == SF3FileType.MPD)
-                DeleteMPDChunkDialog((IMPD_File) _selectedFile.Loader.Model, Path.GetFileNameWithoutExtension(_selectedFile.Loader.ShortFilename));
-        }
     }
 }

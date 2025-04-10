@@ -45,7 +45,6 @@ namespace SF3Editor {
             tsmiEdit = new System.Windows.Forms.ToolStripMenuItem();
             tsmiEdit_UseDropdowns = new System.Windows.Forms.ToolStripMenuItem();
             tsmiEdit_EnableDebugSettings = new System.Windows.Forms.ToolStripMenuItem();
-            eXPERIMENTALEnableTileControlsForBlankFieldV2MPDToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             tsmi_Tools = new System.Windows.Forms.ToolStripMenuItem();
             tsmiTools_ImportTable = new System.Windows.Forms.ToolStripMenuItem();
             tsmiTools_ExportTable = new System.Windows.Forms.ToolStripMenuItem();
@@ -213,12 +212,6 @@ namespace SF3Editor {
             tsmiEdit_EnableDebugSettings.Size = new Size(253, 22);
             tsmiEdit_EnableDebugSettings.Text = "Enable Debu&g Settings";
             tsmiEdit_EnableDebugSettings.Click += tsmiEdit_EnableDebugSettings_Click;
-            // 
-            // eXPERIMENTALEnableTileControlsForBlankFieldV2MPDToolStripMenuItem
-            // 
-            eXPERIMENTALEnableTileControlsForBlankFieldV2MPDToolStripMenuItem.Name = "eXPERIMENTALEnableTileControlsForBlankFieldV2MPDToolStripMenuItem";
-            eXPERIMENTALEnableTileControlsForBlankFieldV2MPDToolStripMenuItem.Size = new Size(384, 22);
-            eXPERIMENTALEnableTileControlsForBlankFieldV2MPDToolStripMenuItem.Text = "EXPERIMENTAL: Enable tile controls for BlankField_V2.MPD";
             // 
             // tsmi_Tools
             // 
