@@ -114,112 +114,53 @@ namespace SF3.MPD_Editor.Forms {
                 var path = dialog.FileName;
                 var files = Directory.GetFiles(path);
 
-                var textures1 = (File.TextureCollections == null) ? [] : File.TextureCollections
-                    .Where(x => x != null && x.TextureTable != null)
-                    .SelectMany(x => x.TextureTable)
-                    .Where(x => x.TextureIsLoaded && x.Collection == TextureCollectionType.PrimaryTextures)
-                    .ToDictionary(x => x.Name, x => new { Model = (object) x, x.Texture });
-
-                var textures2 = (File.TextureAnimations == null) ? [] : File.TextureAnimations
-                    .SelectMany(x => x.FrameTable)
-                    .GroupBy(x => x.CompressedImageDataOffset)
-                    .Select(x => x.First())
-                    .Where(x => x.TextureIsLoaded)
-                    .ToDictionary(x => x.Name, x => new { Model = (object) x, x.Texture });
-
-                var textures = textures1.Concat(textures2).ToDictionary(x => x.Key, x => x.Value);
-
-                int succeeded = 0;
-                int failed = 0;
-                int missing = 0;
-                int skipped = 0;
-
-                foreach (var textureKv in textures) {
-                    var name = textureKv.Key;
-                    var model = textureKv.Value.Model;
-                    var texture = textureKv.Value.Texture;
-
-                    if (texture.PixelFormat != TexturePixelFormat.ABGR1555) {
-                        skipped++;
-                        continue;
-                    }
-
-                    var filename = files.FirstOrDefault(x => Path.GetFileNameWithoutExtension(x).ToLower() == name.ToLower());
-                    if (filename == null) {
-                        missing++;
-                        continue;
-                    }
-
-                    // Try to actually load the texture!
-                    try {
-                        var image = System.Drawing.Image.FromFile(filename);
-                        if (image.Width != texture.Width || image.Height != texture.Height) {
-                            failed++;
-                            continue;
-                        }
-
-                        if (texture.PixelFormat == TexturePixelFormat.ABGR1555) {
-                            using (var bitmap = new Bitmap(texture.Width, texture.Height, PixelFormat.Format32bppArgb)) {
-                                using (var graphics = Graphics.FromImage(bitmap)) {
-                                    graphics.DrawImage(image, new Point(0, 0));
-                                }
-                                var readBytes = new byte[texture.Width * texture.Height * 4];
-
-                                var bitmapData = bitmap.LockBits(new Rectangle(0, 0, texture.Width, texture.Height), ImageLockMode.ReadWrite, bitmap.PixelFormat);
-                                Marshal.Copy(bitmapData.Scan0, readBytes, 0, readBytes.Length);
-                                bitmap.UnlockBits(bitmapData);
-
-                                var newImageData = new ushort[texture.Width, texture.Height];
-                                int pos = 0;
-                                for (int y = 0; y < texture.Height; y++) {
-                                    for (int x = 0; x < texture.Width; x++) {
-                                        var byteB = readBytes[pos++];
-                                        var byteG = readBytes[pos++];
-                                        var byteR = readBytes[pos++];
-                                        var byteA = readBytes[pos++];
-
-                                        var channels = new PixelChannels() { a = byteA, r = byteR, g = byteG, b = byteB };
-                                        var abgr1555 = channels.ToABGR1555();
-
-                                        // If the alpha channel is clear, preserve whatever color was originally used.
-                                        // This should prevent marking data as 'modified' too often.
-                                        if ((abgr1555 & 0x8000) == 0) {
-                                            var cached = ABGR1555toChannels(texture.ImageData16Bit[x, y]);
-                                            cached.a = 0;
-                                            abgr1555 = cached.ToABGR1555();
-                                        }
-
-                                        newImageData[x, y] = abgr1555;
-                                    }
-                                }
-
-                                if (model is TextureModel tm)
-                                    tm.RawImageData16Bit = newImageData;
-                                else if (model is FrameModel fm) {
-                                    var referenceTex = File.TextureCollections.Where(x => x != null).Select(x => x.TextureTable).SelectMany(x => x).FirstOrDefault(x => x.ID == fm.TextureID)?.Texture;
-                                    _ = fm.UpdateTextureABGR1555(File.Chunk3Frames.First(x => x.Offset == fm.CompressedImageDataOffset).Data.DecompressedData, newImageData, referenceTex);
-                                }
-                                else
-                                    throw new NotSupportedException("Not sure what this is, but it's not supported here");
-                            }
-                            succeeded++;
-                        }
-                        else
-                            skipped++;
-                    }
-                    catch {
-                        failed++;
-                    }
-                }
-
-                var message =
-                    "Import complete.\n" +
-                    "   Imported successfully: " + succeeded + "\n" +
-                    "   Textures missing: " + missing + "\n" +
-                    "   Failed: " + failed + "\n" +
-                    "   Ignored (256-color not yet supported): " + skipped;
-                InfoMessage(message);
+                ImportTextures(files);
             }
+        }
+
+        private void ImportTextures(string[] files) {
+            ushort[,] GetTextureData(string filename) {
+                var image = Image.FromFile(filename);
+
+                using (var bitmap = new Bitmap(image.Width, image.Height, PixelFormat.Format32bppArgb)) {
+                    using (var graphics = Graphics.FromImage(bitmap)) {
+                        graphics.DrawImage(image, new Point(0, 0));
+                    }
+                    var readBytes = new byte[image.Width * image.Height * 4];
+
+                    var bitmapData = bitmap.LockBits(new Rectangle(0, 0, image.Width, image.Height), ImageLockMode.ReadWrite, bitmap.PixelFormat);
+                    Marshal.Copy(bitmapData.Scan0, readBytes, 0, readBytes.Length);
+                    bitmap.UnlockBits(bitmapData);
+
+                    var newImageData = new ushort[image.Width, image.Height];
+                    int pos = 0;
+                    for (int y = 0; y < image.Height; y++) {
+                        for (int x = 0; x < image.Width; x++) {
+                            var byteB = readBytes[pos++];
+                            var byteG = readBytes[pos++];
+                            var byteR = readBytes[pos++];
+                            var byteA = readBytes[pos++];
+
+                            var channels = new PixelChannels() { a = byteA, r = byteR, g = byteG, b = byteB };
+                            var abgr1555 = channels.ToABGR1555();
+
+                            newImageData[x, y] = abgr1555;
+                        }
+                    }
+
+                    return newImageData;
+                }
+            }
+
+            var results = File.ReplaceTexturesFromFiles(files, GetTextureData);
+            var message =
+                "Import complete.\n" +
+                "   Imported successfully: " + results.Replaced + "\n" +
+                "   Textures missing: " + results.Missing + "\n" +
+                "   Failed: " + results.Failed + "\n" +
+                "   Ignored (256-color not yet supported): " + results.Skipped;
+
+            InfoMessage(message);
         }
 
         private void tsmiTextures_ExportToFolder_Click(object sender, System.EventArgs e) {

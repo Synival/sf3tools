@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using CommonLib.Arrays;
 using CommonLib.Attributes;
-using CommonLib.Extensions;
 using CommonLib.Imaging;
 using CommonLib.NamedValues;
 using CommonLib.SGL;
@@ -11,11 +11,13 @@ using CommonLib.Utils;
 using SF3.ByteData;
 using SF3.Models.Structs.MPD;
 using SF3.Models.Structs.MPD.Model;
+using SF3.Models.Structs.MPD.TextureAnimation;
 using SF3.Models.Structs.MPD.TextureChunk;
 using SF3.Models.Tables;
 using SF3.Models.Tables.MPD;
 using SF3.Types;
 using static CommonLib.Utils.ResourceUtils;
+using static CommonLib.Imaging.PixelConversion;
 
 namespace SF3.Models.Files.MPD {
     public class MPD_File : ScenarioTableFile, IMPD_File {
@@ -1120,6 +1122,99 @@ namespace SF3.Models.Files.MPD {
                 var attr = mc.AttrTablesByMemoryAddress[x.AttributesOffset][0];
                 return attr.HasTexture && attr.TextureNo == 0;
             });
+        }
+
+        private struct TextureModelAndTextureByName {
+            public object Model;
+            public ITexture Texture;
+        }
+
+        public ReplaceTexturesFromFilesResult ReplaceTexturesFromFiles(string[] files, Func<string, ushort[,]> argb1555ImageDataLoader) {
+            var textures1 = (TextureCollections == null) ? new Dictionary<string, TextureModelAndTextureByName>() : TextureCollections
+                .Where(x => x != null && x.TextureTable != null)
+                .SelectMany(x => x.TextureTable)
+                .Where(x => x.TextureIsLoaded && x.Collection == TextureCollectionType.PrimaryTextures)
+                .ToDictionary(x => x.Name, x => new TextureModelAndTextureByName { Model = x, Texture = x.Texture });
+
+            var textures2 = (TextureAnimations == null) ? new Dictionary<string, TextureModelAndTextureByName>() : TextureAnimations
+                .SelectMany(x => x.FrameTable)
+                .GroupBy(x => x.CompressedImageDataOffset)
+                .Select(x => x.First())
+                .Where(x => x.TextureIsLoaded)
+                .ToDictionary(x => x.Name, x => new TextureModelAndTextureByName { Model = x, Texture = x.Texture });
+
+            var textures = textures1.Concat(textures2).ToDictionary(x => x.Key, x => x.Value);
+
+            int succeeded = 0;
+            int failed    = 0;
+            int missing   = 0;
+            int skipped   = 0;
+
+            foreach (var textureKv in textures) {
+                var name = textureKv.Key;
+                var model = textureKv.Value.Model;
+                var texture = textureKv.Value.Texture;
+
+                if (texture.PixelFormat != TexturePixelFormat.ABGR1555) {
+                    skipped++;
+                    continue;
+                }
+
+                var filename = files.FirstOrDefault(x => Path.GetFileNameWithoutExtension(x).ToLower() == name.ToLower());
+                if (filename == null) {
+                    missing++;
+                    continue;
+                }
+
+                // Try to actually load the texture!
+                try {
+                    var imageData = argb1555ImageDataLoader(filename);
+                    if (imageData == null) {
+                        failed++;
+                        continue;
+                    }
+
+                    var imageDataWidth  = imageData.GetLength(0);
+                    var imageDataHeight = imageData.GetLength(1);
+                    if (imageDataWidth != texture.Width || imageDataWidth != texture.Height) {
+                        failed++;
+                        continue;
+                    }
+
+                    for (var ix = 0; ix < imageDataWidth; ix++) {
+                        for (var iy = 0; iy < imageDataHeight; iy++) {
+                            // If the alpha channel is clear, preserve whatever color was originally used.
+                            // This should prevent marking data as 'modified' too often.
+                            if ((imageData[ix, iy] & 0x8000u) == 0) {
+                                var cached = ABGR1555toChannels(texture.ImageData16Bit[ix, iy]);
+                                cached.a = 0;
+                                imageData[ix, iy] = cached.ToABGR1555();
+                            }
+                        }
+                    }
+
+                    if (model is TextureModel tm)
+                        tm.RawImageData16Bit = imageData;
+                    else if (model is FrameModel fm) {
+                        var referenceTex = TextureCollections.Where(x => x != null).Select(x => x.TextureTable).SelectMany(x => x).FirstOrDefault(x => x.ID == fm.TextureID)?.Texture;
+                        _ = fm.UpdateTextureABGR1555(Chunk3Frames.First(x => x.Offset == fm.CompressedImageDataOffset).Data.DecompressedData, imageData, referenceTex);
+                    }
+                    else
+                        throw new NotSupportedException("Not sure what this is, but it's not supported here");
+
+                    succeeded++;
+                }
+                catch {
+                    failed++;
+                }
+            }
+
+            return new ReplaceTexturesFromFilesResult {
+                Replaced = succeeded,
+                Missing  = missing,
+                Failed   = failed,
+                Skipped  = skipped
+            };
         }
 
         public IChunkData[] ChunkData { get; private set; }
