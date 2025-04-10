@@ -39,8 +39,11 @@ namespace SF3.Models.Tables.MPD.TextureCollection {
                 var nextImageDataOffset = id + 1 >= Size
                     ? Data.Length
                     : Data.GetWord(address + size + 2);
-                return new TextureModel(Data, Collection, StartID + id, "Texture" + (StartID + id).ToString("D3"), address,
-                    pixelFormat, GetPalette(pixelFormat), ChunkIndex, nextImageDataOffset);
+                return new TextureModel(
+                    Data, Collection, StartID + id, "Texture" + (StartID + id).ToString("D3"), address,
+                    pixelFormat, GetPalette(pixelFormat), ChunkIndex, nextImageDataOffset,
+                    $"Texture_{(StartID + id):X2}"
+                );
             });
         }
 

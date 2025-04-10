@@ -11,14 +11,17 @@ namespace SF3.Models.Structs.MPD.TextureAnimation {
         private readonly int _compressedTextureOffsetAddress;
         private readonly int _unknownAddress;
 
-        public FrameModel(IByteData data, int id, string name, int address, bool is32Bit, int texId, int width, int height, int texAnimId, int frameNum)
-        : base(data, id, name, address, is32Bit ? 0x08 : 0x04) {
-            Is32Bit   = is32Bit;
-            TextureID = texId;
-            Width     = width;
-            Height    = height;
-            texAnimID = texAnimId;
-            FrameNum  = frameNum;
+        public FrameModel(
+            IByteData data, int id, string name, int address, bool is32Bit, int texId, int width, int height, int texAnimId, int frameNum,
+            string importExportName
+        ) : base(data, id, name, address, is32Bit ? 0x08 : 0x04) {
+            Is32Bit          = is32Bit;
+            TextureID        = texId;
+            Width            = width;
+            Height           = height;
+            texAnimID        = texAnimId;
+            FrameNum         = frameNum;
+            ImportExportName = importExportName;
 
             _bytesPerProperty = is32Bit ? 0x04 : 0x02;
 
@@ -133,5 +136,7 @@ namespace SF3.Models.Structs.MPD.TextureAnimation {
         private readonly int _bytesPerProperty;
 
         public ITexture Texture { get; private set; }
+
+        public string ImportExportName { get; }
     }
 }

@@ -1134,14 +1134,14 @@ namespace SF3.Models.Files.MPD {
                 .Where(x => x != null && x.TextureTable != null)
                 .SelectMany(x => x.TextureTable)
                 .Where(x => x.TextureIsLoaded && x.Collection == TextureCollectionType.PrimaryTextures)
-                .ToDictionary(x => x.Name, x => new TextureModelAndTextureByName { Model = x, Texture = x.Texture });
+                .ToDictionary(x => x.ImportExportName, x => new TextureModelAndTextureByName { Model = x, Texture = x.Texture });
 
             var textures2 = (TextureAnimations == null) ? new Dictionary<string, TextureModelAndTextureByName>() : TextureAnimations
                 .SelectMany(x => x.FrameTable)
                 .GroupBy(x => x.CompressedImageDataOffset)
                 .Select(x => x.First())
                 .Where(x => x.TextureIsLoaded)
-                .ToDictionary(x => x.Name, x => new TextureModelAndTextureByName { Model = x, Texture = x.Texture });
+                .ToDictionary(x => x.ImportExportName, x => new TextureModelAndTextureByName { Model = x, Texture = x.Texture });
 
             var textures = textures1.Concat(textures2).ToDictionary(x => x.Key, x => x.Value);
 
@@ -1222,14 +1222,14 @@ namespace SF3.Models.Files.MPD {
                 .Where(x => x != null && x.TextureTable != null)
                 .SelectMany(x => x.TextureTable)
                 .Where(x => x.TextureIsLoaded && x.Collection == TextureCollectionType.PrimaryTextures)
-                .ToDictionary(x => x.Name, x => x.Texture);
+                .ToDictionary(x => x.ImportExportName, x => x.Texture);
 
             var textures2 = (TextureAnimations == null) ? new Dictionary<string, ITexture>() : TextureAnimations
                 .SelectMany(x => x.FrameTable)
                 .GroupBy(x => x.CompressedImageDataOffset)
                 .Select(x => x.First())
                 .Where(x => x.TextureIsLoaded)
-                .ToDictionary(x => x.Name, x => x.Texture);
+                .ToDictionary(x => x.ImportExportName, x => x.Texture);
 
             var textures = textures1.Concat(textures2).ToDictionary(x => x.Key, x => x.Value);
 
