@@ -136,13 +136,13 @@ namespace SF3.Tests.Models.Files {
                 var file = testCase.Create();
                 var table = file.LoadingTable;
 
-                Assert.AreEqual(1, table[0].LocationID);
+                Assert.AreEqual(1, table[0].SceneID);
                 Assert.AreEqual(testCase.Scenario <= ScenarioType.Scenario2 ? 27 : 0, table[0].Music);
 
-                Assert.AreEqual(2, table[1].LocationID);
+                Assert.AreEqual(2, table[1].SceneID);
                 Assert.AreEqual(testCase.Scenario <= ScenarioType.Scenario2 ? 29 : 12, table[1].Music);
 
-                Assert.AreEqual(3, table[2].LocationID);
+                Assert.AreEqual(3, table[2].SceneID);
                 Assert.AreEqual(testCase.Scenario <= ScenarioType.Scenario2 ? 0 : 12, table[2].Music);
 
                 Assert.AreEqual(testCase.ExpectedLoads, table.Length);
@@ -201,20 +201,20 @@ namespace SF3.Tests.Models.Files {
 
                 switch (file.Scenario) {
                     case ScenarioType.Scenario1:
-                        Assert.AreEqual(0, table[0].SynChr);
-                        Assert.AreEqual(0x1D, table[0].SynMpd);
+                        Assert.AreEqual(0, table[0].SynCHR);
+                        Assert.AreEqual(0x1D, table[0].SynMPD);
                         Assert.AreEqual(0x20, table[0].SynMusic);
                         break;
 
                     case ScenarioType.Scenario2:
-                        Assert.AreEqual(0, table[0].MedChr);
-                        Assert.AreEqual(0x1A, table[0].MedMpd);
+                        Assert.AreEqual(0, table[0].MedCHR);
+                        Assert.AreEqual(0x1A, table[0].MedMPD);
                         Assert.AreEqual(0x20, table[0].MedMusic);
                         break;
 
                     case ScenarioType.Scenario3:
-                        Assert.AreEqual(0, table[0].JulChr);
-                        Assert.AreEqual(0xE6, table[0].JulMpd);
+                        Assert.AreEqual(0, table[0].JulCHR);
+                        Assert.AreEqual(0xE6, table[0].JulMPD);
                         Assert.AreEqual(0x3F, table[0].JulMusic);
                         break;
 
