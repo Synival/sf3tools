@@ -62,9 +62,9 @@ namespace SF3.Models.Files.MPD {
         /// Replaces a set of textures based on appropriately named files (e.g, Texture_0A.png).
         /// </summary>
         /// <param name="files">A list of files named by their texture in format "Texture_{HexID:X2}".</param>
-        /// <param name="argb1555ImageDataLoader">Function to convert the filename provided to image data.</param>
+        /// <param name="abgr1555ImageDataLoader">Function to convert the filename provided to image data.</param>
         /// <returns>Returns a summary report of the textures replaced.</returns>
-        ReplaceTexturesFromFilesResult ReplaceTexturesFromFiles(string[] files, Func<string, ushort[,]> argb1555ImageDataLoader);
+        ReplaceTexturesFromFilesResult ReplaceTexturesFromFiles(string[] files, Func<string, ushort[,]> abgr1555ImageDataLoader);
 
         /// <summary>
         /// Byte data for (de)compressed data for chunks

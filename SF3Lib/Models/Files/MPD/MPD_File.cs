@@ -1129,7 +1129,7 @@ namespace SF3.Models.Files.MPD {
             public ITexture Texture;
         }
 
-        public ReplaceTexturesFromFilesResult ReplaceTexturesFromFiles(string[] files, Func<string, ushort[,]> argb1555ImageDataLoader) {
+        public ReplaceTexturesFromFilesResult ReplaceTexturesFromFiles(string[] files, Func<string, ushort[,]> abgr1555ImageDataLoader) {
             var textures1 = (TextureCollections == null) ? new Dictionary<string, TextureModelAndTextureByName>() : TextureCollections
                 .Where(x => x != null && x.TextureTable != null)
                 .SelectMany(x => x.TextureTable)
@@ -1168,7 +1168,7 @@ namespace SF3.Models.Files.MPD {
 
                 // Try to actually load the texture!
                 try {
-                    var imageData = argb1555ImageDataLoader(filename);
+                    var imageData = abgr1555ImageDataLoader(filename);
                     if (imageData == null) {
                         failed++;
                         continue;
@@ -1176,7 +1176,7 @@ namespace SF3.Models.Files.MPD {
 
                     var imageDataWidth  = imageData.GetLength(0);
                     var imageDataHeight = imageData.GetLength(1);
-                    if (imageDataWidth != texture.Width || imageDataWidth != texture.Height) {
+                    if (imageDataWidth != texture.Width || imageDataHeight != texture.Height) {
                         failed++;
                         continue;
                     }
