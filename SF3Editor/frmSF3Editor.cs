@@ -17,8 +17,11 @@ using SF3.NamedValues;
 using SF3.Types;
 using SF3.Win;
 using SF3.Win.Extensions;
+using SF3.Win.Forms;
+using SF3.Win.Types;
 using SF3.Win.Utils;
 using SF3.Win.Views;
+using static CommonLib.Utils.Compression;
 using static CommonLib.Win.Utils.MessageUtils;
 using static SF3.Utils.FileUtils;
 
@@ -545,6 +548,98 @@ namespace SF3Editor {
             return true;
         }
 
+        /// <summary>
+        /// Opens a dialog to export a particular chunk of an MPD file.
+        /// </summary>
+        /// <param name="mpdFile">The MPD file from which to export a chunk.</param>
+        /// <param name="filenameWithoutExtension">The name of the MPD file that it is normally saved to, without the .MPD extension.</param>
+        /// <returns>'true' if an export was successful, otherwise 'false'.</returns>
+        public bool ExportMPDChunkDialog(IMPD_File mpdFile, string filenameWithoutExtension) {
+            var dialog = new ManipulateChunkDialog(ManipulateChunkDialogType.ExportChunk, mpdFile.ChunkHeader.Rows, filenameWithoutExtension);
+            if (dialog.ShowDialog() != DialogResult.OK)
+                return false;
+
+            try {
+                var chunkData = mpdFile.ChunkData[dialog.SelectedChunk.ID];
+                var chunkDataBytes = dialog.Uncompressed ? chunkData.DecompressedData.GetDataCopy() : chunkData.GetDataCopy();
+                File.WriteAllBytes(dialog.FileName, chunkDataBytes);
+                InfoMessage("Chunk exported successfully.");
+            }
+            catch (Exception ex) {
+                ErrorMessage("Error while exporting:\r\n\r\n" + ex.Message);
+                return false;
+            }
+
+            return true;
+        }
+
+        /// <summary>
+        /// Opens a dialog to import a particular chunk into an MPD file.
+        /// </summary>
+        /// <param name="mpdFile">The MPD file to which a chunk should be imported.</param>
+        /// <param name="filenameWithoutExtension">The name of the MPD file that it is normally saved to, without the .MPD extension.</param>
+        /// <returns>'true' if an import was successful, otherwise 'false'.</returns>
+        public bool ImportMPDChunkDialog(IMPD_File mpdFile, string filenameWithoutExtension) {
+            var dialog = new ManipulateChunkDialog(ManipulateChunkDialogType.ImportChunk, mpdFile.ChunkHeader.Rows, filenameWithoutExtension);
+            if (dialog.ShowDialog() != DialogResult.OK)
+                return false;
+
+            try {
+                var chunk = dialog.SelectedChunk;
+                var chunkData = mpdFile.ChunkData[chunk.ID];
+                if (chunkData == null)
+                    chunkData = ((MPD_File) mpdFile).MakeChunkData(chunk.ID, ChunkType.Unknown, dialog.Uncompressed ? CompressionType.Uncompressed : CompressionType.Compressed);
+
+                var chunkDataBytes = System.IO.File.ReadAllBytes(dialog.FileName);
+                if (dialog.Uncompressed)
+                    chunkData.DecompressedData.SetDataTo(chunkDataBytes);
+                else {
+                    // Make sure this can actually be decompressed.
+                    try {
+                        var decompressedData = Decompress(chunkDataBytes, null, out var _);
+                    }
+                    catch (Exception ex) {
+                        ErrorMessage("Data is corrupt - failure to decompress:\r\n\r\n" + ex.Message);
+                        return false;
+                    }
+                    chunkData.SetDataTo(chunkDataBytes);
+                }
+                InfoMessage("Chunk imported successfully.\r\n" +
+                            "(You should probably save and reload the file!!!)");
+            }
+            catch (Exception ex) {
+                ErrorMessage("Error while importing:\r\n\r\n" + ex.Message);
+                return false;
+            }
+
+            return true;
+        }
+
+        /// <summary>
+        /// Opens a dialog to delete a particular chunk of an MPD file.
+        /// </summary>
+        /// <param name="mpdFile">The MPD file from which a chunk should be deleted.</param>
+        /// <param name="filenameWithoutExtension">The name of the MPD file that it is normally saved to, without the .MPD extension.</param>
+        /// <returns>'true' if a deletion was successful, otherwise 'false'.</returns>
+        public bool DeleteMPDChunkDialog(IMPD_File mpdFile, string fileNameWithoutExtension) {
+            var dialog = new ManipulateChunkDialog(ManipulateChunkDialogType.DeleteChunk, mpdFile.ChunkHeader.Rows, fileNameWithoutExtension);
+            if (dialog.ShowDialog() != DialogResult.OK)
+                return false;
+
+            try {
+                var chunkData = mpdFile.ChunkData[dialog.SelectedChunk.ID];
+                chunkData.SetDataTo([]);
+                InfoMessage("Chunk deleted successfully." +
+                            "(You should probably save and reload the file!!!)");
+            }
+            catch (Exception ex) {
+                ErrorMessage("Error while deleting:\r\n\r\n" + ex.Message);
+                return false;
+            }
+
+            return true;
+        }
+
         private void tsmiFile_Open_Click(object sender, EventArgs e) => OpenFileDialog();
 
         private void tsmiFile_Save_Click(object sender, EventArgs e) {
@@ -649,6 +744,21 @@ namespace SF3Editor {
         private void tsmiMPD_Textures_ExportAll_Click(object sender, EventArgs e) {
             if (_selectedFile?.FileType == SF3FileType.MPD)
                 ExportAllMPDTexturesDialog((IMPD_File) _selectedFile.Loader.Model);
+        }
+
+        private void tsmiMPD_Chunks_ExportChunk_Click(object sender, EventArgs e) {
+            if (_selectedFile?.FileType == SF3FileType.MPD)
+                ExportMPDChunkDialog((IMPD_File) _selectedFile.Loader.Model, Path.GetFileNameWithoutExtension(_selectedFile.Loader.ShortFilename));
+        }
+
+        private void tsmiMPD_Chunks_ImportChunk_Click(object sender, EventArgs e) {
+            if (_selectedFile?.FileType == SF3FileType.MPD)
+                ImportMPDChunkDialog((IMPD_File) _selectedFile.Loader.Model, Path.GetFileNameWithoutExtension(_selectedFile.Loader.ShortFilename));
+        }
+
+        private void tsmiMPD_Chunks_DeleteChunk_Click(object sender, EventArgs e) {
+            if (_selectedFile?.FileType == SF3FileType.MPD)
+                DeleteMPDChunkDialog((IMPD_File) _selectedFile.Loader.Model, Path.GetFileNameWithoutExtension(_selectedFile.Loader.ShortFilename));
         }
     }
 }

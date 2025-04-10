@@ -53,6 +53,15 @@ namespace SF3Editor {
             tsmiTools_ApplyDFR = new System.Windows.Forms.ToolStripMenuItem();
             tsmiTools_CreateDFR = new System.Windows.Forms.ToolStripMenuItem();
             tsmiMPD = new System.Windows.Forms.ToolStripMenuItem();
+            tsmiMPD_Chunks = new System.Windows.Forms.ToolStripMenuItem();
+            tsmiMPD_Chunks_ImportChunk = new System.Windows.Forms.ToolStripMenuItem();
+            tsmiMPD_Chunks_ExportChunk = new System.Windows.Forms.ToolStripMenuItem();
+            tsmiMPD_Chunks_DeleteChunk = new System.Windows.Forms.ToolStripMenuItem();
+            toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            tsmiMPD_Chunks_RecompressChunks = new System.Windows.Forms.ToolStripMenuItem();
+            tsmiMPD_Chunks_CorrectChunkPlacement = new System.Windows.Forms.ToolStripMenuItem();
+            toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            tsmiMPD_Chunks_MoveChunksAutomatically = new System.Windows.Forms.ToolStripMenuItem();
             tsmiMPD_Textures = new System.Windows.Forms.ToolStripMenuItem();
             tsmiMPD_Textures_ImportAll = new System.Windows.Forms.ToolStripMenuItem();
             tsmiMPD_Textures_ExportAll = new System.Windows.Forms.ToolStripMenuItem();
@@ -253,12 +262,74 @@ namespace SF3Editor {
             // 
             // tsmiMPD
             // 
-            tsmiMPD.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { tsmiMPD_Textures, tsmiMPD_Sep1, tsmiMPD_EnableBlankFieldV2Controls });
+            tsmiMPD.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { tsmiMPD_Chunks, tsmiMPD_Textures, tsmiMPD_Sep1, tsmiMPD_EnableBlankFieldV2Controls });
             tsmiMPD.Enabled = false;
             tsmiMPD.Name = "tsmiMPD";
             tsmiMPD.Size = new Size(45, 20);
             tsmiMPD.Text = "&MPD";
             tsmiMPD.Visible = false;
+            // 
+            // tsmiMPD_Chunks
+            // 
+            tsmiMPD_Chunks.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { tsmiMPD_Chunks_ImportChunk, tsmiMPD_Chunks_ExportChunk, tsmiMPD_Chunks_DeleteChunk, toolStripSeparator1, tsmiMPD_Chunks_RecompressChunks, tsmiMPD_Chunks_CorrectChunkPlacement, toolStripSeparator2, tsmiMPD_Chunks_MoveChunksAutomatically });
+            tsmiMPD_Chunks.Name = "tsmiMPD_Chunks";
+            tsmiMPD_Chunks.Size = new Size(384, 22);
+            tsmiMPD_Chunks.Text = "&Chunks";
+            tsmiMPD_Chunks.Visible = false;
+            // 
+            // tsmiMPD_Chunks_ImportChunk
+            // 
+            tsmiMPD_Chunks_ImportChunk.Name = "tsmiMPD_Chunks_ImportChunk";
+            tsmiMPD_Chunks_ImportChunk.Size = new Size(224, 22);
+            tsmiMPD_Chunks_ImportChunk.Text = "&Import Chunk...";
+            tsmiMPD_Chunks_ImportChunk.Click += tsmiMPD_Chunks_ImportChunk_Click;
+            // 
+            // tsmiMPD_Chunks_ExportChunk
+            // 
+            tsmiMPD_Chunks_ExportChunk.Name = "tsmiMPD_Chunks_ExportChunk";
+            tsmiMPD_Chunks_ExportChunk.Size = new Size(224, 22);
+            tsmiMPD_Chunks_ExportChunk.Text = "&Export Chunk...";
+            tsmiMPD_Chunks_ExportChunk.Click += tsmiMPD_Chunks_ExportChunk_Click;
+            // 
+            // tsmiMPD_Chunks_DeleteChunk
+            // 
+            tsmiMPD_Chunks_DeleteChunk.Name = "tsmiMPD_Chunks_DeleteChunk";
+            tsmiMPD_Chunks_DeleteChunk.Size = new Size(224, 22);
+            tsmiMPD_Chunks_DeleteChunk.Text = "&Delete Chunk...";
+            tsmiMPD_Chunks_DeleteChunk.Click += tsmiMPD_Chunks_DeleteChunk_Click;
+            // 
+            // toolStripSeparator1
+            // 
+            toolStripSeparator1.Name = "toolStripSeparator1";
+            toolStripSeparator1.Size = new Size(221, 6);
+            // 
+            // tsmiMPD_Chunks_RecompressChunks
+            // 
+            tsmiMPD_Chunks_RecompressChunks.Enabled = false;
+            tsmiMPD_Chunks_RecompressChunks.Name = "tsmiMPD_Chunks_RecompressChunks";
+            tsmiMPD_Chunks_RecompressChunks.Size = new Size(224, 22);
+            tsmiMPD_Chunks_RecompressChunks.Text = "Recompress Chunks";
+            // 
+            // tsmiMPD_Chunks_CorrectChunkPlacement
+            // 
+            tsmiMPD_Chunks_CorrectChunkPlacement.Enabled = false;
+            tsmiMPD_Chunks_CorrectChunkPlacement.Name = "tsmiMPD_Chunks_CorrectChunkPlacement";
+            tsmiMPD_Chunks_CorrectChunkPlacement.Size = new Size(224, 22);
+            tsmiMPD_Chunks_CorrectChunkPlacement.Text = "Correct Chunk Placement";
+            // 
+            // toolStripSeparator2
+            // 
+            toolStripSeparator2.Name = "toolStripSeparator2";
+            toolStripSeparator2.Size = new Size(221, 6);
+            // 
+            // tsmiMPD_Chunks_MoveChunksAutomatically
+            // 
+            tsmiMPD_Chunks_MoveChunksAutomatically.Checked = true;
+            tsmiMPD_Chunks_MoveChunksAutomatically.CheckState = System.Windows.Forms.CheckState.Checked;
+            tsmiMPD_Chunks_MoveChunksAutomatically.Enabled = false;
+            tsmiMPD_Chunks_MoveChunksAutomatically.Name = "tsmiMPD_Chunks_MoveChunksAutomatically";
+            tsmiMPD_Chunks_MoveChunksAutomatically.Size = new Size(224, 22);
+            tsmiMPD_Chunks_MoveChunksAutomatically.Text = "Move Chunks Automatically";
             // 
             // tsmiMPD_Textures
             // 
@@ -290,7 +361,7 @@ namespace SF3Editor {
             // 
             tsmiMPD_EnableBlankFieldV2Controls.Name = "tsmiMPD_EnableBlankFieldV2Controls";
             tsmiMPD_EnableBlankFieldV2Controls.Size = new Size(384, 22);
-            tsmiMPD_EnableBlankFieldV2Controls.Text = "EXPERIMENTAL: Enable tile controls for BlankField_V2.MPD";
+            tsmiMPD_EnableBlankFieldV2Controls.Text = "E&XPERIMENTAL: Enable tile controls for BlankField_V2.MPD";
             tsmiMPD_EnableBlankFieldV2Controls.Click += tsmiMPD_EnableBlankFieldV2Controls_Click;
             // 
             // tsmiHelp
@@ -358,5 +429,14 @@ namespace SF3Editor {
         private System.Windows.Forms.ToolStripMenuItem tsmiMPD_Textures_ExportAll;
         private System.Windows.Forms.ToolStripSeparator tsmiMPD_Sep1;
         private System.Windows.Forms.ToolStripMenuItem tsmiMPD_EnableBlankFieldV2Controls;
+        private System.Windows.Forms.ToolStripMenuItem tsmiMPD_Chunks;
+        private System.Windows.Forms.ToolStripMenuItem tsmiMPD_Chunks_ExportChunk;
+        private System.Windows.Forms.ToolStripMenuItem tsmiMPD_Chunks_ImportChunk;
+        private System.Windows.Forms.ToolStripMenuItem tsmiMPD_Chunks_DeleteChunk;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripMenuItem tsmiMPD_Chunks_RecompressChunks;
+        private System.Windows.Forms.ToolStripMenuItem tsmiMPD_Chunks_CorrectChunkPlacement;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private System.Windows.Forms.ToolStripMenuItem tsmiMPD_Chunks_MoveChunksAutomatically;
     }
 }
