@@ -38,6 +38,7 @@ Features:
 - Individual rendered components can be toggles on and off
 - Extra technical components can be displayed like collision lines, terrain types, tile event IDs, camera/battle cursor boundaries, and normal maps
 - 3D models, textures, animations, and images can be viewed
+- Textures can be exported and replaced via import
 - Lighting direction and palette can be modified
 - Camera/battle boundaries, gradients, color palettes, and much more can be modified
 - Normal maps can be recalculated using a better method than used in SF3, fixing some bugs and quirks
