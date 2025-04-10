@@ -1,22 +1,28 @@
 # SF3 Tools
 
-A fork of Rika's Tools for Shining Force III Hacking with enhancements, a single editor for all files, additional modifiable data, and a
+**Frameworks and utilities for modifying Shining Force III**
+
+## About
+
+This is a fork of Rika's Tools for Shining Force III Hacking with enhancements, a single editor for all files, additional modifiable data, and a
 completely rewritten architecture with a portable backend. All data can be edited using a program called SF3Editor (C# .NET 8.0 WinForms app)
 or accessed by referencing the SF3Lib framework.
 
 It boasts editors for data in several .BIN files along with an advanced editor for .MPD files for creating maps (still limited, but possible).
-
-To edit files, simply:
-- Run `SF3Editor.exe`
-- Open any file using the "File -> Open" menu from either:
-    - the game disc (scenario auto-detected), or
-    - any other folder (must select the scenario via the "File -> Open Scenario" menu)
 
 ![image](https://github.com/user-attachments/assets/29d511ed-db26-4cfa-a841-431ef534cfbe)
 
 All of the work done by the editors is performed in a cross-platform backend project called SF3Lib. SF3Lib can
 be used to create small applications that tasks like make bulk changes, randomize data, perform analysis, or anything
 else you can think of in a console app.
+
+## How to Use
+
+To edit files, simply:
+- Run `SF3Editor.exe`
+- Open any supported file using the "File -> Open" menu from either:
+    - the game disc (scenario auto-detected), or
+    - any other folder (must select the scenario via the "File -> Open Scenario" menu)
 
 ## Files Currently Supported
 
