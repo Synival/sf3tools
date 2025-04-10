@@ -461,7 +461,7 @@ namespace SF3Editor {
         /// Opens a dialog to import all textures to an MPD file.
         /// </summary>
         /// <param name="mpdFile">The MPD file to load textures into.</param>
-        /// <returns>'true' if an import was attempted (dialog was not cancelled), 'false' if the dialog was cancelled.</returns>
+        /// <returns>'true' if an import was successful, otherwise 'false'.</returns>
         public bool ImportAllMPDTexturesDialog(IMPD_File mpdFile) {
             using (var dialog = new CommonOpenFileDialog() {
                 Title = "Import Textures",
@@ -474,18 +474,25 @@ namespace SF3Editor {
                 if (dialog.ShowDialog() != CommonFileDialogResult.Ok)
                     return false;
 
-                var path = dialog.FileName;
-                var files = Directory.GetFiles(path);
+                try {
+                    var path = dialog.FileName;
+                    var files = Directory.GetFiles(path);
 
-                var results = mpdFile.ReplaceTexturesFromFiles(files, (f) => Image.FromFile(f).Get2DDataABGR1555());
-                var message =
-                    "Import complete.\n" +
-                    "   Imported successfully: " + results.Replaced + "\n" +
-                    "   Textures missing: " + results.Missing + "\n" +
-                    "   Failed: " + results.Failed + "\n" +
-                    "   Ignored (256-color not yet supported): " + results.Skipped;
+                    var results = mpdFile.ReplaceTexturesFromFiles(files, (f) => Image.FromFile(f).Get2DDataABGR1555());
 
-                InfoMessage(message);
+                    var message =
+                        "Import complete.\n" +
+                        "   Imported successfully: " + results.Replaced + "\n" +
+                        "   Textures missing: " + results.Missing + "\n" +
+                        "   Failed: " + results.Failed + "\n" +
+                        "   Ignored (256-color not yet supported): " + results.Skipped;
+
+                    InfoMessage(message);
+                }
+                catch (Exception ex) {
+                    ErrorMessage("Error while importing:\r\n\r\n" + ex.Message);
+                    return false;
+                }
             }
 
             return true;
@@ -495,7 +502,7 @@ namespace SF3Editor {
         /// Opens a dialog to export all textures to an MPD file.
         /// </summary>
         /// <param name="mpdFile">The MPD file to export textures from.</param>
-        /// <returns>'true' if an export was attempted (dialog was not cancelled), 'false' if the dialog was cancelled.</returns>
+        /// <returns>'true' if an export was successful, otherwise 'false'.</returns>
         public bool ExportAllMPDTexturesDialog(IMPD_File mpdFile) {
             using (var dialog = new CommonOpenFileDialog() {
                 Title = "Export Textures to Folder",
@@ -510,14 +517,20 @@ namespace SF3Editor {
 
                 var path = dialog.FileName;
 
-                var results = mpdFile.ExportTexturesToPath(path, (f, data) => ImageUtils.SaveBitmapToFile(f, data, ImageFormat.Png));
-                var message =
-                    "Export complete.\n" +
-                    "   Exported successfully: " + results.Exported + "\n" +
-                    "   Failed: " + results.Failed + "\n" +
-                    "   Ignored (256-color not yet supported): " + results.Skipped;
+                try {
+                    var results = mpdFile.ExportTexturesToPath(path, (f, data) => ImageUtils.SaveBitmapToFile(f, data, ImageFormat.Png));
+                    var message =
+                        "Export complete.\n" +
+                        "   Exported successfully: " + results.Exported + "\n" +
+                        "   Failed: " + results.Failed + "\n" +
+                        "   Ignored (256-color not yet supported): " + results.Skipped;
 
-                InfoMessage(message);
+                    InfoMessage(message);
+                }
+                catch (Exception ex) {
+                    ErrorMessage("Error while exporting:\r\n\r\n" + ex.Message);
+                    return false;
+                }
 
                 // Automatically open the folder, just for fun.
                 try {
