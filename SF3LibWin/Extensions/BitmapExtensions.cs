@@ -21,7 +21,7 @@ namespace SF3.Win.Extensions {
                     to.SetPixel(ix + x, iy + y, from.GetPixel(ix, iy));
         }
 
-        public static byte[] GetDataBGRA8888(this Bitmap bitmap) {
+        public static byte[] GetDataARGB8888(this Bitmap bitmap) {
             if (bitmap.PixelFormat != PixelFormat.Format32bppArgb)
                 throw new ArgumentException(nameof(bitmap.PixelFormat));
 
@@ -35,7 +35,7 @@ namespace SF3.Win.Extensions {
 
         public static ushort[,] Get2DDataABGR1555(this Bitmap bitmap) {
             var outputData = new ushort[bitmap.Width, bitmap.Height];
-            var inputData = bitmap.GetDataBGRA8888();
+            var inputData = bitmap.GetDataARGB8888();
 
             int pos = 0;
             for (var y = 0; y < bitmap.Height; y++) {

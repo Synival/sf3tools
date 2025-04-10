@@ -13,7 +13,7 @@ namespace SF3.Win.Extensions {
         }
 
         public static byte[] GetDataBGRA8888(this Image image)
-            => image.CreateBitmap().GetDataBGRA8888();
+            => image.CreateBitmap().GetDataARGB8888();
 
         public static ushort[,] Get2DDataABGR1555(this Image image)
             => image.CreateBitmap().Get2DDataABGR1555();

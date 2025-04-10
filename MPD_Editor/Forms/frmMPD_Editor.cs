@@ -19,6 +19,7 @@ using SF3.Win;
 using SF3.Win.Extensions;
 using SF3.Win.Forms;
 using SF3.Win.Types;
+using SF3.Win.Utils;
 using SF3.Win.Views;
 using SF3.Win.Views.MPD;
 using static CommonLib.Utils.Compression;
@@ -136,21 +137,9 @@ namespace SF3.MPD_Editor.Forms {
                 if (dialog.ShowDialog() != CommonFileDialogResult.Ok)
                     return;
 
-                void Exporter(string filename, ushort[,] imageData) {
-                    var width  = imageData.GetLength(0);
-                    var height = imageData.GetLength(1);
-                    var imageByteData = BitmapUtils.ConvertABGR1555DataToARGB1555BitmapData(imageData);
-
-                    using (var bitmap = new Bitmap(width, height, PixelFormat.Format16bppArgb1555)) {
-                        var bitmapData = bitmap.LockBits(new Rectangle(0, 0, width, height), ImageLockMode.WriteOnly, bitmap.PixelFormat);
-                        Marshal.Copy(imageByteData, 0, bitmapData.Scan0, imageByteData.Length);
-                        bitmap.UnlockBits(bitmapData);
-                        bitmap.Save(filename, ImageFormat.Png);
-                    }
-                }
-
                 var path = dialog.FileName;
-                var results = File.ExportTexturesToPath(path, Exporter);
+
+                var results = File.ExportTexturesToPath(path, (f, data) => ImageUtils.SaveBitmapToFile(f, data, ImageFormat.Png));
                 var message =
                     "Export complete.\n" +
                     "   Exported successfully: " + results.Exported + "\n" +
