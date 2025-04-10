@@ -513,21 +513,21 @@
     <item value="0x01FE" name="" />
     <item value="0x01FF" name="" />
     <item value="0x0200" name="Barrel destroyed pier" />
-    <item value="0x0201" name="MPD Collision Line 0x01 / Door to Start room open" />
-    <item value="0x0202" name="MPD Collision Line 0x02 / Door to Edmund Room open" />
-    <item value="0x0203" name="MPD Collision Line 0x03 / Door by Grace Unlocked" />
-    <item value="0x0204" name="MPD Collision Line 0x04 / Door to Back room unlocked" />
-    <item value="0x0205" name="MPD Collision Line 0x05 / Room upstairs open" />
-    <item value="0x0206" name="MPD Collision Line 0x06 / Room upstairs open" />
-    <item value="0x0207" name="MPD Collision Line 0x07 / Room upstairs open" />
-    <item value="0x0208" name="MPD Collision Line 0x08 / Room upstairs open" />
-    <item value="0x0209" name="MPD Collision Line 0x09 / Room upstairs open" />
-    <item value="0x020A" name="MPD Collision Line 0x0A" />
-    <item value="0x020B" name="MPD Collision Line 0x0B" />
-    <item value="0x020C" name="MPD Collision Line 0x0C" />
-    <item value="0x020D" name="MPD Collision Line 0x0D" />
-    <item value="0x020E" name="MPD Collision Line 0x0E" />
-    <item value="0x020F" name="MPD Collision Line 0x0F" />
+    <item value="0x0201" name="Collision Line 0x01 / Door to Start room open" />
+    <item value="0x0202" name="Collision Line 0x02 / Door to Edmund Room open" />
+    <item value="0x0203" name="Collision Line 0x03 / Door by Grace Unlocked" />
+    <item value="0x0204" name="Collision Line 0x04 / Door to Back room unlocked" />
+    <item value="0x0205" name="Collision Line 0x05 / Room upstairs open" />
+    <item value="0x0206" name="Collision Line 0x06 / Room upstairs open" />
+    <item value="0x0207" name="Collision Line 0x07 / Room upstairs open" />
+    <item value="0x0208" name="Collision Line 0x08 / Room upstairs open" />
+    <item value="0x0209" name="Collision Line 0x09 / Room upstairs open" />
+    <item value="0x020A" name="Collision Line 0x0A" />
+    <item value="0x020B" name="Collision Line 0x0B" />
+    <item value="0x020C" name="Collision Line 0x0C" />
+    <item value="0x020D" name="Collision Line 0x0D" />
+    <item value="0x020E" name="Collision Line 0x0E" />
+    <item value="0x020F" name="Collision Line 0x0F" />
     <item value="0x0210" name="Anafect docks battle cannon 1" />
     <item value="0x0211" name="Anafect docks battle cannon 2" />
     <item value="0x0212" name="Anafect docks battle cannon 3" />
@@ -2327,7 +2327,7 @@
     <item value="0x0914" name="Barrel Next to health Bread destroyed" />
     <item value="0x0915" name="Health Bread in Barrel (Saraband Pier)" />
     <item value="0x0916" name="Scn2 Battle 3 Ruins Barrel 1" />
-    <item value="0x0917" name="Scn2 Battle 3 Ruins Barrel 1" />
+    <item value="0x0917" name="Scn2 Battle 3 Ruins Barrel 2" />
     <item value="0x0918" name="" />
     <item value="0x0919" name="Scn2 Battle 10 Barrel 1" />
     <item value="0x091A" name="Scn2 Battle 10 Barrel 2" />
@@ -3209,9 +3209,9 @@
     <item value="0x0C86" name="Scn3 Battle 8 Barrel 5" />
     <item value="0x0C87" name="Scn3 Battle 8 Barrel 6" />
     <item value="0x0C88" name="Scn3 Battle 18 Barrel 1 (Quick Chicken)" />
-    <item value="0x0C89" name="Scn3 Battle 18 Barrel 1" />
-    <item value="0x0C8A" name="Scn3 Battle 18 Barrel 1" />
-    <item value="0x0C8B" name="Scn3 Battle 18 Barrel 1 (Small Mithril)" />
+    <item value="0x0C89" name="Scn3 Battle 18 Barrel 2" />
+    <item value="0x0C8A" name="Scn3 Battle 18 Barrel 3" />
+    <item value="0x0C8B" name="Scn3 Battle 18 Barrel 4 (Small Mithril)" />
     <item value="0x0C8C" name="" />
     <item value="0x0C8D" name="" />
     <item value="0x0C8E" name="" />
