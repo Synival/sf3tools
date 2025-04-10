@@ -25,6 +25,12 @@ namespace SF3.Models.Files.MPD {
         public int Failed;
     }
 
+    public struct ExportTexturesToPathResult {
+        public int Exported;
+        public int Skipped;
+        public int Failed;
+    }
+
     public interface IMPD_File : IScenarioTableFile {
         /// <summary>
         /// Recompresses compressed chunks, updating the ChunkHeader however necessary.
@@ -65,6 +71,14 @@ namespace SF3.Models.Files.MPD {
         /// <param name="abgr1555ImageDataLoader">Function to convert the filename provided to image data.</param>
         /// <returns>Returns a summary report of the textures replaced.</returns>
         ReplaceTexturesFromFilesResult ReplaceTexturesFromFiles(string[] files, Func<string, ushort[,]> abgr1555ImageDataLoader);
+
+        /// <summary>
+        /// Exports all textures to a path with an appropriate filename (e.g, Texture_0A.png).
+        /// </summary>
+        /// <param name="path">Path to which all textures should be exported.</param>
+        /// <param name="abgr1555ImageDataWriter">Function to save the ABGR1555 image data to a file.</param>
+        /// <returns>Returns a summary report of the textures exported.</returns>
+        ExportTexturesToPathResult ExportTexturesToPath(string path, Action<string, ushort[,]> abgr1555ImageDataWriter);
 
         /// <summary>
         /// Byte data for (de)compressed data for chunks

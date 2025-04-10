@@ -7,14 +7,12 @@ using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
-using CommonLib.Imaging;
 using CommonLib.NamedValues;
+using CommonLib.Utils;
 using Microsoft.WindowsAPICodePack.Dialogs;
 using SF3.ModelLoaders;
 using SF3.Models.Files;
 using SF3.Models.Files.MPD;
-using SF3.Models.Structs.MPD.TextureAnimation;
-using SF3.Models.Structs.MPD.TextureChunk;
 using SF3.NamedValues;
 using SF3.Types;
 using SF3.Win;
@@ -23,7 +21,6 @@ using SF3.Win.Forms;
 using SF3.Win.Types;
 using SF3.Win.Views;
 using SF3.Win.Views.MPD;
-using static CommonLib.Imaging.PixelConversion;
 using static CommonLib.Utils.Compression;
 using static CommonLib.Win.Utils.MessageUtils;
 
@@ -139,55 +136,27 @@ namespace SF3.MPD_Editor.Forms {
                 if (dialog.ShowDialog() != CommonFileDialogResult.Ok)
                     return;
 
-                var path = dialog.FileName;
+                void Exporter(string filename, ushort[,] imageData) {
+                    var width  = imageData.GetLength(0);
+                    var height = imageData.GetLength(1);
+                    var imageByteData = BitmapUtils.ConvertABGR1555DataToARGB1555BitmapData(imageData);
 
-                var textures1 = (File.TextureCollections == null) ? [] : File.TextureCollections
-                    .Where(x => x != null && x.TextureTable != null)
-                    .SelectMany(x => x.TextureTable)
-                    .Where(x => x.TextureIsLoaded && x.Collection == TextureCollectionType.PrimaryTextures)
-                    .ToDictionary(x => x.Name, x => x.Texture);
-
-                var textures2 = (File.TextureAnimations == null) ? [] : File.TextureAnimations
-                    .SelectMany(x => x.FrameTable)
-                    .GroupBy(x => x.CompressedImageDataOffset)
-                    .Select(x => x.First())
-                    .Where(x => x.TextureIsLoaded)
-                    .ToDictionary(x => x.Name, x => x.Texture);
-
-                var textures = textures1.Concat(textures2).ToDictionary(x => x.Key, x => x.Value);
-
-                int succeeded = 0;
-                int failed = 0;
-                int skipped = 0;
-
-                foreach (var textureKv in textures) {
-                    var name = textureKv.Key;
-                    var texture = textureKv.Value;
-
-                    var filename = Path.Combine(path, name + ".png");
-                    try {
-                        if (texture.PixelFormat == TexturePixelFormat.ABGR1555) {
-                            using (var bitmap = new Bitmap(texture.Width, texture.Height, PixelFormat.Format16bppArgb1555)) {
-                                var bitmapData = bitmap.LockBits(new Rectangle(0, 0, texture.Width, texture.Height), ImageLockMode.WriteOnly, bitmap.PixelFormat);
-                                Marshal.Copy(texture.BitmapDataARGB1555, 0, bitmapData.Scan0, texture.BitmapDataARGB1555.Length);
-                                bitmap.UnlockBits(bitmapData);
-                                bitmap.Save(filename, ImageFormat.Png);
-                            }
-                            succeeded++;
-                        }
-                        else
-                            skipped++;
-                    }
-                    catch {
-                        failed++;
+                    using (var bitmap = new Bitmap(width, height, PixelFormat.Format16bppArgb1555)) {
+                        var bitmapData = bitmap.LockBits(new Rectangle(0, 0, width, height), ImageLockMode.WriteOnly, bitmap.PixelFormat);
+                        Marshal.Copy(imageByteData, 0, bitmapData.Scan0, imageByteData.Length);
+                        bitmap.UnlockBits(bitmapData);
+                        bitmap.Save(filename, ImageFormat.Png);
                     }
                 }
 
+                var path = dialog.FileName;
+                var results = File.ExportTexturesToPath(path, Exporter);
                 var message =
                     "Export complete.\n" +
-                    "   Exported successfully: " + succeeded + "\n" +
-                    "   Failed: " + failed + "\n" +
-                    "   Ignored (256-color not yet supported): " + skipped;
+                    "   Exported successfully: " + results.Exported + "\n" +
+                    "   Failed: " + results.Failed + "\n" +
+                    "   Ignored (256-color not yet supported): " + results.Skipped;
+
                 InfoMessage(message);
 
                 // Automatically open the folder, just for fun.

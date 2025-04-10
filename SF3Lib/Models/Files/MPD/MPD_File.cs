@@ -1217,6 +1217,49 @@ namespace SF3.Models.Files.MPD {
             };
         }
 
+        public ExportTexturesToPathResult ExportTexturesToPath(string path, Action<string, ushort[,]> abgr1555ImageDataWriter) {
+            var textures1 = (TextureCollections == null) ? new Dictionary<string, ITexture>() : TextureCollections
+                .Where(x => x != null && x.TextureTable != null)
+                .SelectMany(x => x.TextureTable)
+                .Where(x => x.TextureIsLoaded && x.Collection == TextureCollectionType.PrimaryTextures)
+                .ToDictionary(x => x.Name, x => x.Texture);
+
+            var textures2 = (TextureAnimations == null) ? new Dictionary<string, ITexture>() : TextureAnimations
+                .SelectMany(x => x.FrameTable)
+                .GroupBy(x => x.CompressedImageDataOffset)
+                .Select(x => x.First())
+                .Where(x => x.TextureIsLoaded)
+                .ToDictionary(x => x.Name, x => x.Texture);
+
+            var textures = textures1.Concat(textures2).ToDictionary(x => x.Key, x => x.Value);
+
+            int succeeded = 0;
+            int failed = 0;
+            int skipped = 0;
+
+            foreach (var textureKv in textures) {
+                var name = textureKv.Key;
+                var texture = textureKv.Value;
+
+                var filename = Path.Combine(path, name + ".png");
+                try {
+                    if (texture.PixelFormat != TexturePixelFormat.ABGR1555)
+                        skipped++;
+                    abgr1555ImageDataWriter(filename, texture.ImageData16Bit);
+                    succeeded++;
+                }
+                catch {
+                    failed++;
+                }
+            }
+
+            return new ExportTexturesToPathResult {
+                Exported = succeeded,
+                Failed   = failed,
+                Skipped  = skipped
+            };
+        }
+
         public IChunkData[] ChunkData { get; private set; }
 
         public IChunkData[] ModelsChunkData { get; private set; }
