@@ -232,5 +232,79 @@ namespace SF3.Utils {
                     throw new InvalidOperationException($"Unhandled file type '{fileType}'");
             }
         }
+
+        public static string GetFileFilterNameForFileType(SF3FileType type) {
+            switch (type) {
+                case SF3FileType.X011:
+                case SF3FileType.X021:
+                case SF3FileType.X026:
+                    return "IconPointer Files";
+                case SF3FileType.X1:
+                    return "X1 Files";
+                case SF3FileType.X1BTL99:
+                    return "X1BTL99 File";
+                case SF3FileType.X002:
+                    return "X002 File";
+                case SF3FileType.X005:
+                    return "X005 File";
+                case SF3FileType.X012:
+                    return "X012 File";
+                case SF3FileType.X013:
+                    return "X013 File";
+                case SF3FileType.X014:
+                    return "X014 File";
+                case SF3FileType.X019:
+                case SF3FileType.X044:
+                    return "Monster Files";
+                case SF3FileType.X031:
+                    return "X031 File";
+                case SF3FileType.X033:
+                    return "X033 File";
+                case SF3FileType.MPD:
+                    return "MPD Files";
+                default:
+                    throw new ArgumentException($"Unhandled value '{type}' for '{nameof(type)}'");
+            }
+        }
+
+        public static string GetFileFilterForFileType(SF3FileType type) {
+            switch (type) {
+                case SF3FileType.X011:
+                case SF3FileType.X021:
+                case SF3FileType.X026:
+                    return "X011.BIN;X021.BIN;X026.BIN";
+                case SF3FileType.X1:
+                    return "X1*.BIN";
+                case SF3FileType.X1BTL99:
+                    return "X1BTL99.BIN";
+                case SF3FileType.X002:
+                    return "X002.BIN";
+                case SF3FileType.X005:
+                    return "X005.BIN";
+                case SF3FileType.X012:
+                    return "X012.BIN";
+                case SF3FileType.X013:
+                    return "X013.BIN";
+                case SF3FileType.X014:
+                    return "X014.BIN";
+                case SF3FileType.X019:
+                case SF3FileType.X044:
+                    return "X019.BIN;X044.BIN";
+                case SF3FileType.X031:
+                    return "X031.BIN";
+                case SF3FileType.X033:
+                    return "X033.BIN";
+                case SF3FileType.MPD:
+                    return "*.MPD";
+                default:
+                    throw new ArgumentException($"Unhandled value '{type}' for '{nameof(type)}'");
+            }
+        }
+
+        public static string GetFileDialogFilterForFileType(SF3FileType type) {
+            var name = GetFileFilterNameForFileType(type);
+            var filter = GetFileFilterForFileType(type);
+            return $"{name} ({filter})|{filter}";
+        }
     }
 }

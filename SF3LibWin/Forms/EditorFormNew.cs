@@ -151,7 +151,7 @@ namespace SF3.Win.Forms {
 
             bool PerformLoad() {
                 try {
-                    if (!ModelLoader.LoadFile(filename, stream, CreateModel))
+                    if (!ModelLoader.LoadFile(filename, null, stream, CreateModel))
                         return false;
 
                     if ((View = CreateView(ModelLoader, ModelLoader.Model)) == null)
@@ -388,7 +388,7 @@ namespace SF3.Win.Forms {
             ObjectExtensions.BulkCopyPropertiesResult result = null;
             try {
                 var copyModelLoader = new ModelFileLoader();
-                if (!copyModelLoader.LoadFile(copyToFilename, CreateModel)) {
+                if (!copyModelLoader.LoadFile(copyToFilename, null, CreateModel)) {
                     ErrorMessage("Error trying to load file. It is probably in use by another process.");
                     return;
                 }
@@ -428,7 +428,7 @@ namespace SF3.Win.Forms {
             ObjectExtensions.BulkCopyPropertiesResult result = null;
             try {
                 var copyModelLoader = new ModelFileLoader();
-                if (!copyModelLoader.LoadFile(copyFromFilename, CreateModel)) {
+                if (!copyModelLoader.LoadFile(copyFromFilename, null, CreateModel)) {
                     ErrorMessage("Error trying to load file. It is probably in use by another process.");
                     return;
                 }

@@ -10,13 +10,13 @@ namespace SF3.ModelLoaders {
     /// </summary>
     public partial class ModelFileLoader : BaseModelLoader, IModelFileLoader {
         public ModelFileLoader() {
-            _createByteData = (IModelFileLoader loader, string filename, Stream stream) => {
+            _createByteData = (IModelFileLoader loader, string filename, string fileDialogFilter, Stream stream) => {
                 byte[] newData;
                 using (var memoryStream = new MemoryStream()) {
                     stream.CopyTo(memoryStream);
                     newData = memoryStream.ToArray();
                 }
-                return new SF3.ByteData.ByteData(new ByteArray(newData));
+                return new ByteData.ByteData(new ByteArray(newData));
             };
         }
 
@@ -24,23 +24,24 @@ namespace SF3.ModelLoaders {
             _createByteData = createByteData;
         }
 
-        public virtual bool LoadFile(string filename, ModelFileLoaderCreateModelDelegate createModel) {
+        public virtual bool LoadFile(string filename, string fileDialogFilter, ModelFileLoaderCreateModelDelegate createModel) {
             try {
                 using (var stream = new FileStream(filename, FileMode.Open, FileAccess.Read))
-                    return LoadFile(filename, stream, createModel);
+                    return LoadFile(filename, fileDialogFilter, stream, createModel);
             }
             catch (Exception) {
                 return false;
             }
         }
 
-        public virtual bool LoadFile(string filename, Stream stream, ModelFileLoaderCreateModelDelegate createModel) {
+        public virtual bool LoadFile(string filename, string fileDialogFilter, Stream stream, ModelFileLoaderCreateModelDelegate createModel) {
             return PerformLoad(e => {
                 try {
-                    var newData = _createByteData(this, filename, stream);
+                    var newData = _createByteData(this, filename, fileDialogFilter, stream);
                     if (newData == null)
                         return null;
                     Filename = filename;
+                    FileDialogFilter = fileDialogFilter;
                     return newData;
                 }
                 catch (Exception) {
@@ -86,8 +87,11 @@ namespace SF3.ModelLoaders {
 
         public string ShortFilename { get; private set; } = null;
 
+        public string FileDialogFilter { get; set; } = null;
+
         protected override bool OnClose() {
             Filename = null;
+            FileDialogFilter = null;
             return true;
         }
 

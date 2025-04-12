@@ -10,18 +10,20 @@ namespace SF3.ModelLoaders {
         /// Loads a file's binary data for editing. Invokes events 'PreLoaded' and 'Loaded'.
         /// </summary>
         /// <param name="filename">The file to load.</param>
+        /// <param name="fileDialogFilter">The filter used for saving the dialog or looking for similar files.</param>
         /// <param name="createModel">Callback to create a model once after creating the byte data.</param>
         /// <returns>'true' on success, 'false' on failure.</returns>
-        bool LoadFile(string filename, ModelFileLoaderCreateModelDelegate createModel);
+        bool LoadFile(string filename, string fileDialogFilter, ModelFileLoaderCreateModelDelegate createModel);
 
         /// <summary>
         /// Loads a stream of binary data for editing. Invokes events 'PreLoaded' and 'Loaded'.
         /// </summary>
         /// <param name="filename">The filename of 'stream' to be stored.</param>
+        /// <param name="fileDialogFilter">The filter used for saving the dialog or looking for similar files.</param>
         /// <param name="stream">The data stream to load.</param>
         /// <param name="createModel">Callback to create a model once after creating the byte data.</param>
         /// <returns>'true' on success, 'false' on failure.</returns>
-        bool LoadFile(string filename, Stream stream, ModelFileLoaderCreateModelDelegate createModel);
+        bool LoadFile(string filename, string fileDialogFilter, Stream stream, ModelFileLoaderCreateModelDelegate createModel);
 
         /// <summary>
         /// Saves a file's binary data for editing. Invokes events 'PreSaved' and 'Saved'.

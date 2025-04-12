@@ -32,20 +32,9 @@ namespace SF3Editor {
         private readonly Dictionary<ScenarioType, INameGetterContext> c_nameGetterContexts = Enum.GetValues<ScenarioType>()
             .ToDictionary(x => x, x => (INameGetterContext) new NameGetterContext(x));
 
-        private readonly string FileDialogFilter =
+        private readonly string OpenDialogFilter =
             "All Supported Files|X1*.BIN;X002.BIN;X005.BIN;X011.BIN;X012.BIN;X013.BIN;X014.BIN;X019.BIN;X021.BIN;X026.BIN;X031.BIN;X033.BIN;X044.BIN;*.MPD"
-            + "|IconPointer Files (X011.BIN;X021.BIN;X026.BIN)|X011.BIN;X021.BIN;X026.BIN"
-            + "|X1 Files (X1*.BIN)|X1*.BIN"
-            + "|X1BTL99 File (X1BTL99.BIN)|X1BTL99.BIN"
-            + "|X002 File (X002.BIN)|X002.BIN"
-            + "|X005 File (X005.BIN)|X005.BIN"
-            + "|X012 File (X013.BIN)|X012.BIN"
-            + "|X013 File (X013.BIN)|X013.BIN"
-            + "|X014 File (X014.BIN)|X014.BIN"
-            + "|Monster Files (X019.BIN;X044.BIN)|X019.BIN;X044.BIN"
-            + "|X031 File (X031.BIN)|X031.BIN"
-            + "|X033 File (X033.BIN)|X033.BIN"
-            + "|MPD Files (*.MPD)|*.MPD"
+            + "|" + string.Join('|', Enum.GetValues<SF3FileType>().Select(x => GetFileDialogFilterForFileType(x)).Distinct())
             + "|All Files (*.*)|*.*"
             ;
 
@@ -114,7 +103,7 @@ namespace SF3Editor {
         /// <returns>A record for the file loaded, or 'null' on failure/cancel.</returns>
         public LoadedFile? OpenFileDialog() {
             var openfile = new OpenFileDialog {
-                Filter = FileDialogFilter
+                Filter = OpenDialogFilter
             };
             if (openfile.ShowDialog() != DialogResult.OK)
                 return null;
@@ -173,7 +162,7 @@ namespace SF3Editor {
         public LoadedFile? LoadFile(string filename, ScenarioType scenario, SF3FileType fileType, Stream stream) {
             // Attempt to the load the file.
             var fileLoader = new ModelFileLoader();
-            bool success = fileLoader.LoadFile(filename, stream,
+            bool success = fileLoader.LoadFile(filename, GetFileDialogFilterForFileType(fileType), stream,
                 loader => CreateFile(loader.ByteData, fileType, c_nameGetterContexts, scenario));
 
             if (!success) {
@@ -317,7 +306,7 @@ namespace SF3Editor {
         /// <returns>'true' if a file was saved successfully (and not cancelled). Otherwise, 'false'.</returns>
         public bool SaveFileAsDialog(LoadedFile file) {
             var savefile = new SaveFileDialog {
-                Filter = FileDialogFilter,
+                Filter = file.Loader.FileDialogFilter + "|All Files (*.*)|*.*",
                 FileName = Path.GetFileName(file.Loader.Filename)
             };
             if (savefile.ShowDialog() != DialogResult.OK)
@@ -340,7 +329,7 @@ namespace SF3Editor {
         /// <param name="file">The loaded file to save.</param>
         /// <param name="filename">The filename to save the file as.</param>
         /// <returns>'true' if a file was saved successfully. Otherwise, 'false'.</returns>
-        private bool SaveFile(LoadedFile file, string filename) {
+        public bool SaveFile(LoadedFile file, string filename) {
             string? error = null;
             try {
                 if (!file.Loader.SaveFile(filename)) {
