@@ -38,62 +38,21 @@ namespace SF3.Utils {
                 throw new ArgumentNullException(nameof(filename));
 
             // If the filter is explicit, don't guess.
+            var filenameUpper = filename.ToUpper();
             if (filter != null) {
-                switch (filter.ToUpper()) {
-                    case "X1*.BIN": {
-                        if (filename == "X1BTL99.BIN")
-                            return SF3FileType.X1BTL99;
-                        else
-                            return SF3FileType.X1;
-                    }
+                var filterFileTypes = GetFileTypesForFileFilter(filter);
+                if (filterFileTypes.Length == 1)
+                    return filterFileTypes[0];
 
-                    case "X1BTL99.BIN":
-                        return SF3FileType.X1BTL99;
-                    case "X002.BIN":
-                        return SF3FileType.X002;
-                    case "X005.BIN":
-                        return SF3FileType.X005;
-
-                    case "X011.BIN;X021.BIN;X026.BIN": {
-                        if (filename == "X011.BIN")
-                            return SF3FileType.X011;
-                        else if (filename == "X021.BIN")
-                            return SF3FileType.X021;
-                        else if (filename == "X026.BIN")
-                            return SF3FileType.X026;
-                        else
-                            break;
-                    }
-
-                    case "X012.BIN":
-                        return SF3FileType.X012;
-                    case "X013.BIN":
-                        return SF3FileType.X013;
-                    case "X014.BIN":
-                        return SF3FileType.X014;
-
-                    case "X019.BIN;X044.BIN": {
-                        if (filename == "X019.BIN")
-                            return SF3FileType.X019;
-                        else if (filename == "X044.BIN")
-                            return SF3FileType.X044;
-                        else
-                            break;
-                    }
-
-                    case "X031.BIN":
-                        return SF3FileType.X031;
-                    case "X033.BIN":
-                        return SF3FileType.X033;
-                    case "*.MPD":
-                        return SF3FileType.MPD;
-                }
+                // It looks like this filter is for more on than type; we have to guess a little.
+                var allFileTypes = (SF3FileType[]) Enum.GetValues(typeof(SF3FileType));
+                foreach (var ft in allFileTypes)
+                    if (filterFileTypes.Contains(ft) && filenameUpper.Contains(ft.ToString()))
+                        return ft;
             }
 
             // No explicit filter. Look at the filename and guess.
-            var filenameUpper = filename.ToUpper();
             var preExtension = Path.GetFileNameWithoutExtension(filenameUpper);
-
             if (filenameUpper.Contains(".MPD"))
                 return SF3FileType.MPD;
             else if (filenameUpper.Contains(".BIN")) {
@@ -257,9 +216,8 @@ namespace SF3.Utils {
                 case SF3FileType.X044:
                     return "Monster Files";
                 case SF3FileType.X031:
-                    return "X031 File";
                 case SF3FileType.X033:
-                    return "X033 File";
+                    return "X031/X033 File";
                 case SF3FileType.MPD:
                     return "MPD Files";
                 default:
@@ -272,32 +230,60 @@ namespace SF3.Utils {
                 case SF3FileType.X011:
                 case SF3FileType.X021:
                 case SF3FileType.X026:
-                    return "X011.BIN;X021.BIN;X026.BIN";
+                    return "*X011*.BIN;*X021*.BIN;*X026*.BIN";
                 case SF3FileType.X1:
-                    return "X1*.BIN";
+                    return "*X1*.BIN";
                 case SF3FileType.X1BTL99:
-                    return "X1BTL99.BIN";
+                    return "*X1BTL99*.BIN";
                 case SF3FileType.X002:
-                    return "X002.BIN";
+                    return "*X002*.BIN";
                 case SF3FileType.X005:
-                    return "X005.BIN";
+                    return "*X005*.BIN";
                 case SF3FileType.X012:
-                    return "X012.BIN";
+                    return "*X012*.BIN";
                 case SF3FileType.X013:
-                    return "X013.BIN";
+                    return "X013*.BIN";
                 case SF3FileType.X014:
-                    return "X014.BIN";
+                    return "*X014*.BIN";
                 case SF3FileType.X019:
                 case SF3FileType.X044:
-                    return "X019.BIN;X044.BIN";
+                    return "*X019*.BIN;X044*.BIN";
                 case SF3FileType.X031:
-                    return "X031.BIN";
                 case SF3FileType.X033:
-                    return "X033.BIN";
+                    return "*X031*.BIN;*X033*.BIN";
                 case SF3FileType.MPD:
                     return "*.MPD";
                 default:
                     throw new ArgumentException($"Unhandled value '{type}' for '{nameof(type)}'");
+            }
+        }
+
+        public static SF3FileType[] GetFileTypesForFileFilter(string filter) {
+            switch (filter) {
+                case "*X011*.BIN;*X021*.BIN;*X026*.BIN":
+                    return new SF3FileType[] { SF3FileType.X011, SF3FileType.X021, SF3FileType.X026 };
+                case "*X1BTL99*.BIN":
+                    return new SF3FileType[] { SF3FileType.X1BTL99 };
+                case "*X1*.BIN":
+                    return new SF3FileType[] { SF3FileType.X1 };
+                case "*X002*.BIN":
+                    return new SF3FileType[] { SF3FileType.X002 };
+                case "*X005*.BIN":
+                    return new SF3FileType[] { SF3FileType.X005 };
+                case "*X012*.BIN":
+                    return new SF3FileType[] { SF3FileType.X012 };
+                case "*X013*.BIN":
+                    return new SF3FileType[] { SF3FileType.X013 };
+                case "*X014*.BIN":
+                    return new SF3FileType[] { SF3FileType.X014 };
+                case "*X019*.BIN;X044*.BIN":
+                    return new SF3FileType[] { SF3FileType.X019, SF3FileType.X044 };
+                case "*X031*.BIN;*X033*.BIN":
+                    return new SF3FileType[] { SF3FileType.X031, SF3FileType.X033 };
+                case "*.MPD":
+                    return new SF3FileType[] { SF3FileType.MPD };
+                default:
+                    return new SF3FileType[] {};
             }
         }
 

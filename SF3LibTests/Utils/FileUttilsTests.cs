@@ -21,16 +21,14 @@ namespace SF3.Tests.Utils {
         };
 
         private static readonly Dictionary<string, SF3FileType> c_supportedFileTypesByFilter = new() {
-            { "X1*.BIN",     SF3FileType.X1 },
-            { "X1BTL99.BIN", SF3FileType.X1BTL99 },
-            { "X002.BIN",    SF3FileType.X002 },
-            { "X005.BIN",    SF3FileType.X005 },
-            { "X012.BIN",    SF3FileType.X012 },
-            { "X013.BIN",    SF3FileType.X013 },
-            { "X014.BIN",    SF3FileType.X014 },
-            { "X031.BIN",    SF3FileType.X031 },
-            { "X033.BIN",    SF3FileType.X033 },
-            { "*.MPD",       SF3FileType.MPD },
+            { "*X1*.BIN",      SF3FileType.X1 },
+            { "*X1BTL99*.BIN", SF3FileType.X1BTL99 },
+            { "*X002*.BIN",    SF3FileType.X002 },
+            { "*X005*.BIN",    SF3FileType.X005 },
+            { "*X012*.BIN",    SF3FileType.X012 },
+            { "*X013*.BIN",    SF3FileType.X013 },
+            { "*X014*.BIN",    SF3FileType.X014 },
+            { "*.MPD",         SF3FileType.MPD },
         };
 
         [TestMethod]
