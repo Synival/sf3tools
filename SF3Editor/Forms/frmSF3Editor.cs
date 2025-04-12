@@ -26,7 +26,7 @@ using static CommonLib.Utils.Compression;
 using static CommonLib.Win.Utils.MessageUtils;
 using static SF3.Utils.FileUtils;
 
-namespace SF3Editor {
+namespace SF3.Editor.Forms {
     public partial class frmSF3Editor : Form {
         public static readonly string Version = "0.1.1 (DEV 2025-04-11)";
 

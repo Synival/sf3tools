@@ -22,4 +22,21 @@
   <ItemGroup>
     <ProjectReference Include="..\SF3LibWin\SF3LibWin.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <Compile Update="Forms\frmSF3Editor.File.cs">
+      <DependentUpon>frmSF3Editor.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Forms\frmSF3Editor.Edit.cs">
+      <DependentUpon>frmSF3Editor.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Forms\frmSF3Editor.Tools.cs">
+      <DependentUpon>frmSF3Editor.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Forms\frmSF3Editor.MPD.cs">
+      <DependentUpon>frmSF3Editor.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Forms\frmSF3Editor.Help.cs">
+      <DependentUpon>frmSF3Editor.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
 </Project>

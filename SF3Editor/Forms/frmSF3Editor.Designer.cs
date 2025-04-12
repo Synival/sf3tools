@@ -1,6 +1,6 @@
 ﻿using System.Drawing;
 
-namespace SF3Editor {
+namespace SF3.Editor.Forms {
     partial class frmSF3Editor {
         /// <summary>
         ///  Required designer variable.

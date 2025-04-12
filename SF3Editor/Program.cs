@@ -1,9 +1,10 @@
 using System;
 using System.Windows.Forms;
+using SF3.Editor.Forms;
 using SF3.Win;
 using static SF3.Win.Extensions.ObjectListViewExtensions;
 
-namespace SF3Editor {
+namespace SF3.Editor {
     internal static class Program {
         /// <summary>
         ///  The main entry point for the application.
