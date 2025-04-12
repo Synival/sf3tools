@@ -6,6 +6,7 @@ using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
+using CommonLib.Extensions;
 using CommonLib.NamedValues;
 using DFRLib.Types;
 using DFRLib.Win.Forms;
@@ -741,6 +742,124 @@ namespace SF3Editor {
                 .ToArray();
         }
 
+        /// <summary>
+        /// Opens a dialog to perform a bulk copy of tables to another .BIN file.
+        /// </summary>
+        public void CopyTablesTo(LoadedFile file) {
+            if (file?.Loader?.IsLoaded != true)
+                return;
+
+            var saveFileDialog = new SaveFileDialog {
+                Title = "Copy Tables To",
+                Filter = file.Loader.FileDialogFilter
+            };
+            if (saveFileDialog.ShowDialog() != DialogResult.OK)
+                return;
+            var copyToFilename = saveFileDialog.FileName;
+
+            // If we don't know the scenario, we can't load it.
+            var scenario = OpenScenario ?? DetermineScenario(copyToFilename, file.FileType);
+            if (!scenario.HasValue) {
+                ErrorMessage("Can't determine scenario for '" + copyToFilename + "'.");
+                return;
+            }
+
+            ObjectExtensions.BulkCopyPropertiesResult result = null;
+            try {
+                var copyModelLoader = new ModelFileLoader();
+                if (!copyModelLoader.LoadFile(copyToFilename, null, loader => CreateFile(loader.ByteData, file.FileType, c_nameGetterContexts, scenario.Value))) {
+                    ErrorMessage("Error trying to load file. It is probably in use by another process.");
+                    return;
+                }
+
+                result = file.Loader.Model.BulkCopyProperties(copyModelLoader.Model);
+                if (!copyModelLoader.SaveFile(copyToFilename)) {
+                    ErrorMessage("Error trying to update file.");
+                    return;
+                }
+            }
+            catch (Exception e) {
+                //wrong file was selected
+                ErrorMessage("Data in '" + copyToFilename + "' appears corrupt or invalid:\n\n" +
+                             e.Message + "\n\n" +
+                             "Is this the correct type of file?");
+                return;
+            }
+
+            ProduceAndPresentBulkCopyReport(result, file.Loader.Model.NameGetterContext);
+        }
+
+        /// <summary>
+        /// Opens a dialog to perform a bulk copy of tables from another .BIN file.
+        /// </summary>
+        public void CopyTablesFrom(LoadedFile file) {
+            if (file?.Loader?.IsLoaded != true)
+                return;
+
+            var openFileDialog = new OpenFileDialog {
+                Title = "Copy Tables From",
+                Filter = file.Loader.FileDialogFilter
+            };
+            if (openFileDialog.ShowDialog() != DialogResult.OK)
+                return;
+            var copyFromFilename = openFileDialog.FileName;
+
+            // If we don't know the scenario, we can't load it.
+            var scenario = OpenScenario ?? DetermineScenario(copyFromFilename, file.FileType);
+            if (!scenario.HasValue) {
+                ErrorMessage("Can't determine scenario for '" + copyFromFilename + "'.");
+                return;
+            }
+
+            ObjectExtensions.BulkCopyPropertiesResult result = null;
+            try {
+                var copyModelLoader = new ModelFileLoader();
+                if (!copyModelLoader.LoadFile(copyFromFilename, null, loader => CreateFile(loader.ByteData, file.FileType, c_nameGetterContexts, scenario.Value))) {
+                    ErrorMessage("Error trying to load file. It is probably in use by another process.");
+                    return;
+                }
+                result = copyModelLoader.Model.BulkCopyProperties(file.Loader.Model);
+            }
+            catch (Exception e) {
+                //wrong file was selected
+                ErrorMessage("Data in '" + copyFromFilename + "' appears corrupt or invalid:\n\n" +
+                             e.Message + "\n\n" +
+                             "Is this the correct type of file?");
+                return;
+            }
+
+            file.View.RefreshContent();
+            ProduceAndPresentBulkCopyReport(result, file.Loader.Model.NameGetterContext);
+        }
+
+        private void ProduceAndPresentBulkCopyReport(ObjectExtensions.BulkCopyPropertiesResult result, INameGetterContext nameContext) {
+            var copyReport = result.MakeSummaryReport(nameContext);
+
+            // Output summary files.
+            var fullReport = result.MakeFullReport(nameContext);
+            var wroteBulkCopyReport = false;
+            if (fullReport != "") {
+                try {
+                    File.WriteAllText("BulkCopyReport.txt", fullReport);
+                    wroteBulkCopyReport = true;
+                    copyReport += "\n\nDetailed reports dumped to 'BulkCopyReport.txt'.";
+                }
+                catch {
+                    copyReport += "\n\nError: Couldn't dump detailed report to 'BulkCopyReport.txt'.";
+                }
+            }
+
+            // Show the user a nice report.
+            InfoMessage("Copy successful.\n\nResults:\n\n" + copyReport);
+            if (wroteBulkCopyReport) {
+                _=new Process {
+                    StartInfo = new ProcessStartInfo("BulkCopyReport.txt") {
+                        UseShellExecute = true
+                    }
+                }.Start();
+            }
+        }
+
         private void tsmiTools_ApplyDFR_Click(object sender, EventArgs e) {
             if (_selectedFile != null)
                 ApplyDFRDialog(_selectedFile);
@@ -751,10 +870,15 @@ namespace SF3Editor {
                 CreateDFRDialog(_selectedFile);
         }
 
-        private void tsmiTools_ImportTable_Click(object sender, EventArgs e)
-            => InfoMessage("Not yet implemented - sorry!");
-        private void tsmiTools_ExportTable_Click(object sender, EventArgs e)
-            => InfoMessage("Not yet implemented - sorry!");
+        private void tsmiTools_ImportTable_Click(object sender, EventArgs e) {
+            if (_selectedFile != null)
+                CopyTablesFrom(_selectedFile);
+        }
+
+        private void tsmiTools_ExportTable_Click(object sender, EventArgs e) {
+            if (_selectedFile != null)
+                CopyTablesTo(_selectedFile);
+        }
 
         private void tsmiFile_Exit_Click(object sender, EventArgs e) => Close();
 

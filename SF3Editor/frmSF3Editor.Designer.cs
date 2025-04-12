@@ -252,28 +252,28 @@ namespace SF3Editor {
             // 
             tsmiTools_ImportTable.Enabled = false;
             tsmiTools_ImportTable.Name = "tsmiTools_ImportTable";
-            tsmiTools_ImportTable.Size = new Size(162, 22);
-            tsmiTools_ImportTable.Text = "&Import Table...";
+            tsmiTools_ImportTable.Size = new Size(180, 22);
+            tsmiTools_ImportTable.Text = "Copy Tables &From...";
             tsmiTools_ImportTable.Click += tsmiTools_ImportTable_Click;
             // 
             // tsmiTools_ExportTable
             // 
             tsmiTools_ExportTable.Enabled = false;
             tsmiTools_ExportTable.Name = "tsmiTools_ExportTable";
-            tsmiTools_ExportTable.Size = new Size(162, 22);
-            tsmiTools_ExportTable.Text = "&Export Table...";
+            tsmiTools_ExportTable.Size = new Size(180, 22);
+            tsmiTools_ExportTable.Text = "Copy Tables &To...";
             tsmiTools_ExportTable.Click += tsmiTools_ExportTable_Click;
             // 
             // tsmiTools_Sep1
             // 
             tsmiTools_Sep1.Name = "tsmiTools_Sep1";
-            tsmiTools_Sep1.Size = new Size(159, 6);
+            tsmiTools_Sep1.Size = new Size(177, 6);
             // 
             // tsmiTools_ApplyDFR
             // 
             tsmiTools_ApplyDFR.Enabled = false;
             tsmiTools_ApplyDFR.Name = "tsmiTools_ApplyDFR";
-            tsmiTools_ApplyDFR.Size = new Size(162, 22);
+            tsmiTools_ApplyDFR.Size = new Size(180, 22);
             tsmiTools_ApplyDFR.Text = "&Apply DFR File...";
             tsmiTools_ApplyDFR.Click += tsmiTools_ApplyDFR_Click;
             // 
@@ -281,7 +281,7 @@ namespace SF3Editor {
             // 
             tsmiTools_CreateDFR.Enabled = false;
             tsmiTools_CreateDFR.Name = "tsmiTools_CreateDFR";
-            tsmiTools_CreateDFR.Size = new Size(162, 22);
+            tsmiTools_CreateDFR.Size = new Size(180, 22);
             tsmiTools_CreateDFR.Text = "&Create DFR File...";
             tsmiTools_CreateDFR.Click += tsmiTools_CreateDFR_Click;
             // 
