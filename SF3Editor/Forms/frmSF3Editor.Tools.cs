@@ -47,7 +47,7 @@ namespace SF3.Editor.Forms {
 
                 LoadedFile? newFile = null;
                 using (var newBytesStream = new MemoryStream(newBytes))
-                    if ((newFile = LoadFile(filename, scenario, fileType, newBytesStream)) == null)
+                    if ((newFile = LoadFile(filename, scenario, fileType, newBytesStream, false)) == null)
                         return false;
 
                 newFile.Loader.IsModified = true;

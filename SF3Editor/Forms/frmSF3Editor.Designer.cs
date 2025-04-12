@@ -73,6 +73,18 @@ namespace SF3.Editor.Forms {
             tsmiMPD_EnableBlankFieldV2Controls = new System.Windows.Forms.ToolStripMenuItem();
             tsmiHelp = new System.Windows.Forms.ToolStripMenuItem();
             tsmiHelp_About = new System.Windows.Forms.ToolStripMenuItem();
+            tsmiFile_RecentFiles = new System.Windows.Forms.ToolStripMenuItem();
+            tsmiFile_RecentFiles_1 = new System.Windows.Forms.ToolStripMenuItem();
+            tsmiFile_RecentFiles_2 = new System.Windows.Forms.ToolStripMenuItem();
+            tsmiFile_RecentFiles_3 = new System.Windows.Forms.ToolStripMenuItem();
+            tsmiFile_RecentFiles_4 = new System.Windows.Forms.ToolStripMenuItem();
+            tsmiFile_RecentFiles_5 = new System.Windows.Forms.ToolStripMenuItem();
+            tsmiFile_RecentFiles_6 = new System.Windows.Forms.ToolStripMenuItem();
+            tsmiFile_RecentFiles_7 = new System.Windows.Forms.ToolStripMenuItem();
+            tsmiFile_RecentFiles_8 = new System.Windows.Forms.ToolStripMenuItem();
+            tsmiFile_RecentFiles_9 = new System.Windows.Forms.ToolStripMenuItem();
+            tsmiFile_RecentFiles_10 = new System.Windows.Forms.ToolStripMenuItem();
+            tsmiFile_Sep4 = new System.Windows.Forms.ToolStripSeparator();
             menuStrip1.SuspendLayout();
             SuspendLayout();
             // 
@@ -87,7 +99,7 @@ namespace SF3.Editor.Forms {
             // 
             // tsmiFile
             // 
-            tsmiFile.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { tsmiFile_Open, tsmiFile_OpenScenario, tsmiFile_Save, tsmiFile_SaveAs, tsmiFile_SaveAll, tsmiFile_Sep1, tsmiFile_Close, tsmiFile_CloseAll, tsmiFile_Sep2, tsmiFile_SwapToPrev, tsmiFile_SwapToNext, tsmiFile_Sep3, tsmiFile_Exit });
+            tsmiFile.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { tsmiFile_Open, tsmiFile_OpenScenario, tsmiFile_Save, tsmiFile_SaveAs, tsmiFile_SaveAll, tsmiFile_Sep1, tsmiFile_Close, tsmiFile_CloseAll, tsmiFile_Sep2, tsmiFile_SwapToPrev, tsmiFile_SwapToNext, tsmiFile_Sep3, tsmiFile_RecentFiles, tsmiFile_Sep4, tsmiFile_Exit });
             tsmiFile.Name = "tsmiFile";
             tsmiFile.Size = new Size(37, 20);
             tsmiFile.Text = "&File";
@@ -423,6 +435,88 @@ namespace SF3.Editor.Forms {
             tsmiHelp_About.Text = "&About...";
             tsmiHelp_About.Click += tsmiHelp_About_Click;
             // 
+            // tsmiFile_RecentFiles
+            // 
+            tsmiFile_RecentFiles.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { tsmiFile_RecentFiles_1, tsmiFile_RecentFiles_2, tsmiFile_RecentFiles_3, tsmiFile_RecentFiles_4, tsmiFile_RecentFiles_5, tsmiFile_RecentFiles_6, tsmiFile_RecentFiles_7, tsmiFile_RecentFiles_8, tsmiFile_RecentFiles_9, tsmiFile_RecentFiles_10 });
+            tsmiFile_RecentFiles.Name = "tsmiFile_RecentFiles";
+            tsmiFile_RecentFiles.Size = new Size(259, 22);
+            tsmiFile_RecentFiles.Text = "&Recent Files";
+            // 
+            // tsmiFile_RecentFiles_1
+            // 
+            tsmiFile_RecentFiles_1.Name = "tsmiFile_RecentFiles_1";
+            tsmiFile_RecentFiles_1.Size = new Size(180, 22);
+            tsmiFile_RecentFiles_1.Text = "&1";
+            tsmiFile_RecentFiles_1.Click += tsmiFile_RecentFiles_1_Click;
+            // 
+            // tsmiFile_RecentFiles_2
+            // 
+            tsmiFile_RecentFiles_2.Name = "tsmiFile_RecentFiles_2";
+            tsmiFile_RecentFiles_2.Size = new Size(180, 22);
+            tsmiFile_RecentFiles_2.Text = "&2";
+            tsmiFile_RecentFiles_2.Click += tsmiFile_RecentFiles_2_Click;
+            // 
+            // tsmiFile_RecentFiles_3
+            // 
+            tsmiFile_RecentFiles_3.Name = "tsmiFile_RecentFiles_3";
+            tsmiFile_RecentFiles_3.Size = new Size(180, 22);
+            tsmiFile_RecentFiles_3.Text = "&3";
+            tsmiFile_RecentFiles_3.Click += tsmiFile_RecentFiles_3_Click;
+            // 
+            // tsmiFile_RecentFiles_4
+            // 
+            tsmiFile_RecentFiles_4.Name = "tsmiFile_RecentFiles_4";
+            tsmiFile_RecentFiles_4.Size = new Size(180, 22);
+            tsmiFile_RecentFiles_4.Text = "&4";
+            tsmiFile_RecentFiles_4.Click += tsmiFile_RecentFiles_4_Click;
+            // 
+            // tsmiFile_RecentFiles_5
+            // 
+            tsmiFile_RecentFiles_5.Name = "tsmiFile_RecentFiles_5";
+            tsmiFile_RecentFiles_5.Size = new Size(180, 22);
+            tsmiFile_RecentFiles_5.Text = "&5";
+            tsmiFile_RecentFiles_5.Click += tsmiFile_RecentFiles_5_Click;
+            // 
+            // tsmiFile_RecentFiles_6
+            // 
+            tsmiFile_RecentFiles_6.Name = "tsmiFile_RecentFiles_6";
+            tsmiFile_RecentFiles_6.Size = new Size(180, 22);
+            tsmiFile_RecentFiles_6.Text = "&6";
+            tsmiFile_RecentFiles_6.Click += tsmiFile_RecentFiles_6_Click;
+            // 
+            // tsmiFile_RecentFiles_7
+            // 
+            tsmiFile_RecentFiles_7.Name = "tsmiFile_RecentFiles_7";
+            tsmiFile_RecentFiles_7.Size = new Size(180, 22);
+            tsmiFile_RecentFiles_7.Text = "&7";
+            tsmiFile_RecentFiles_7.Click += tsmiFile_RecentFiles_7_Click;
+            // 
+            // tsmiFile_RecentFiles_8
+            // 
+            tsmiFile_RecentFiles_8.Name = "tsmiFile_RecentFiles_8";
+            tsmiFile_RecentFiles_8.Size = new Size(180, 22);
+            tsmiFile_RecentFiles_8.Text = "&8";
+            tsmiFile_RecentFiles_8.Click += tsmiFile_RecentFiles_8_Click;
+            // 
+            // tsmiFile_RecentFiles_9
+            // 
+            tsmiFile_RecentFiles_9.Name = "tsmiFile_RecentFiles_9";
+            tsmiFile_RecentFiles_9.Size = new Size(180, 22);
+            tsmiFile_RecentFiles_9.Text = "&9";
+            tsmiFile_RecentFiles_9.Click += tsmiFile_RecentFiles_9_Click;
+            // 
+            // tsmiFile_RecentFiles_10
+            // 
+            tsmiFile_RecentFiles_10.Name = "tsmiFile_RecentFiles_10";
+            tsmiFile_RecentFiles_10.Size = new Size(180, 22);
+            tsmiFile_RecentFiles_10.Text = "1&0";
+            tsmiFile_RecentFiles_10.Click += tsmiFile_RecentFiles_10_Click;
+            // 
+            // tsmiFile_Sep4
+            // 
+            tsmiFile_Sep4.Name = "tsmiFile_Sep4";
+            tsmiFile_Sep4.Size = new Size(256, 6);
+            // 
             // frmSF3Editor
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -488,5 +582,17 @@ namespace SF3.Editor.Forms {
         private System.Windows.Forms.ToolStripMenuItem tsmiFile_SwapToNext;
         private System.Windows.Forms.ToolStripMenuItem tsmiFile_CloseAll;
         private System.Windows.Forms.ToolStripMenuItem tsmiFile_SaveAll;
+        private System.Windows.Forms.ToolStripMenuItem tsmiFile_RecentFiles;
+        private System.Windows.Forms.ToolStripMenuItem tsmiFile_RecentFiles_1;
+        private System.Windows.Forms.ToolStripMenuItem tsmiFile_RecentFiles_2;
+        private System.Windows.Forms.ToolStripMenuItem tsmiFile_RecentFiles_3;
+        private System.Windows.Forms.ToolStripMenuItem tsmiFile_RecentFiles_4;
+        private System.Windows.Forms.ToolStripMenuItem tsmiFile_RecentFiles_5;
+        private System.Windows.Forms.ToolStripMenuItem tsmiFile_RecentFiles_6;
+        private System.Windows.Forms.ToolStripMenuItem tsmiFile_RecentFiles_7;
+        private System.Windows.Forms.ToolStripMenuItem tsmiFile_RecentFiles_8;
+        private System.Windows.Forms.ToolStripMenuItem tsmiFile_RecentFiles_9;
+        private System.Windows.Forms.ToolStripMenuItem tsmiFile_RecentFiles_10;
+        private System.Windows.Forms.ToolStripSeparator tsmiFile_Sep4;
     }
 }

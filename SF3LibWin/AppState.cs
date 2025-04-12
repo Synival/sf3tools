@@ -1,6 +1,8 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
 using Newtonsoft.Json;
+using SF3.Types;
 
 namespace SF3.Win {
     public class AppState {
@@ -70,6 +72,20 @@ namespace SF3.Win {
                 Directory.CreateDirectory(Path.GetDirectoryName(FileFullPath));
             var text = JsonConvert.SerializeObject(this, Formatting.Indented);
             File.WriteAllText(FileFullPath, text);
+        }
+
+        /// <summary>
+        /// Prepends a new file to the list of most recent files, truncating to 'max' if necessary.
+        /// </summary>
+        /// <param name="file">The new file to add at index 0.</param>
+        /// <param name="max">The maximum number of files to keep in the 'RecentFiles' array.</param>
+        public void PushRecentFile(string filename, ScenarioType scenario, SF3FileType fileType, int max = 10) {
+            RecentFiles = new RecentFile[] { new RecentFile { Filename = filename, Scenario = scenario, FileType = fileType } }
+                .Concat(RecentFiles
+                    .Where(x => x.Filename != filename)
+                    .Take(max - 1)
+                )
+                .ToArray();
         }
 
         [JsonIgnore]
@@ -162,5 +178,27 @@ namespace SF3.Win {
         }
         private bool _enableDebugSettings = false;
         public event EventHandler EnableDebugSettingsChanged;
+
+        public struct RecentFile {
+            public string Filename { get; set; }
+            public ScenarioType Scenario { get; set; }
+            public SF3FileType FileType { get; set; }
+        }
+
+        /// <summary>
+        /// List of recent files, with the first index being the most recent.
+        /// </summary>
+        public RecentFile[] RecentFiles {
+            get => _recentFiles ?? [];
+            set {
+                var newValue = value ?? (_recentFiles?.Length == 0 ? _recentFiles : []);
+                if (_recentFiles != newValue) {
+                    _recentFiles = newValue;
+                    RecentFilesChanged?.Invoke(this, EventArgs.Empty);
+                }
+            }
+        }
+        private RecentFile[] _recentFiles = [];
+        public event EventHandler RecentFilesChanged;
     }
 }

@@ -7,6 +7,7 @@ using static CommonLib.Win.Utils.MessageUtils;
 using System.IO;
 using SF3.ModelLoaders;
 using SF3.Win.Views;
+using SF3.Win;
 
 namespace SF3.Editor.Forms {
     public partial class frmSF3Editor {
@@ -43,7 +44,7 @@ namespace SF3.Editor.Forms {
             }
 
             // Attempt to load the file. Use an explicitly specificed scenario and file type if provided.
-            return LoadFile(openfile.FileName, scenario.Value, fileType.Value);
+            return LoadFile(openfile.FileName, scenario.Value, fileType.Value, true);
         }
 
         /// <summary>
@@ -53,10 +54,10 @@ namespace SF3.Editor.Forms {
         /// <param name="scenario">Scenario for the file to open.</param>
         /// <param name="fileType">Type of the file to open.</param>
         /// <returns>A record for the file loaded, or 'null' on failure/cancel.</returns>
-        public LoadedFile? LoadFile(string filename, ScenarioType scenario, SF3FileType fileType) {
+        public LoadedFile? LoadFile(string filename, ScenarioType scenario, SF3FileType fileType, bool addToRecentFiles) {
             try {
                 using (var stream = new FileStream(filename, FileMode.Open, FileAccess.Read))
-                    return LoadFile(filename, scenario, fileType, stream);
+                    return LoadFile(filename, scenario, fileType, stream, addToRecentFiles);
             }
             catch (Exception) {
                 return null;
@@ -72,7 +73,7 @@ namespace SF3.Editor.Forms {
         /// <param name="fileType">Type of the file to open.</param>
         /// <param name="stream">Stream from which the input data comes.</param>
         /// <returns>A record for the file loaded, or 'null' on failure/cancel.</returns>
-        public LoadedFile? LoadFile(string filename, ScenarioType scenario, SF3FileType fileType, Stream stream) {
+        public LoadedFile? LoadFile(string filename, ScenarioType scenario, SF3FileType fileType, Stream stream, bool addToRecentFiles) {
             // Attempt to the load the file.
             var fileLoader = new ModelFileLoader();
             bool success = fileLoader.LoadFile(filename, GetFileDialogFilterForFileType(fileType), stream,
@@ -148,6 +149,12 @@ namespace SF3.Editor.Forms {
                 if (SelectedFile?.Loader == fileLoader)
                     Text = fileLoader.ModelTitle(_versionTitle);
             };
+
+            // Add this file to the 'Recent Files' menu.
+            if (addToRecentFiles) {
+                _appState.PushRecentFile(filename, scenario, fileType);
+                _appState.Serialize();
+            }
 
             return loadedFile;
         }
@@ -293,6 +300,20 @@ namespace SF3.Editor.Forms {
         }
 
         /// <summary>
+        /// Opens a recent file in the saved list of recent files, with '0' being the most recent.
+        /// </summary>
+        /// <param name="index">The index of the recent file to open, with '0' being the most recent.</param>
+        /// <returns>The new LoadedFile or 'null' if an error occured.</returns>
+        public LoadedFile? OpenRecentFile(int index) {
+            var recentItems = _appState.RecentFiles ?? [];
+            if (index >= recentItems.Length)
+                return null;
+
+            var recentItem = recentItems[index];
+            return LoadFile(recentItem.Filename, recentItem.Scenario, recentItem.FileType, true);
+        }
+
+        /// <summary>
         /// The ScenarioType to use when opening a file. Set to 'null' to auto-detect.
         /// </summary>
         public ScenarioType? OpenScenario {
@@ -360,7 +381,7 @@ namespace SF3.Editor.Forms {
         private LoadedFile? SwapToFile(LoadedFile file, string filename, ScenarioType scenario, SF3FileType fileType) {
             // TODO: The tab should be at the same index.
 
-            var newLoadedFile = LoadFile(filename, scenario, fileType);
+            var newLoadedFile = LoadFile(filename, scenario, fileType, true);
             if (newLoadedFile == null) {
                 ErrorMessage($"Couldn't open {fileType} file '{filename}'");
                 return null;
@@ -408,6 +429,34 @@ namespace SF3.Editor.Forms {
                 .Where(x => x.FileType.HasValue && x.Scenario.HasValue && x.FileType == file.FileType)
                 .Select(x => new FileInDirectory { Filename = x.Filename, FileType = x.FileType!.Value, Scenario = x.Scenario!.Value })
                 .ToArray();
+        }
+
+        private ToolStripMenuItem[] _recentFileMenuItems = null;
+
+        private void UpdateRecentFilesMenu() {
+            if (_recentFileMenuItems == null) {
+                _recentFileMenuItems = [
+                    tsmiFile_RecentFiles_1,
+                    tsmiFile_RecentFiles_2,
+                    tsmiFile_RecentFiles_3,
+                    tsmiFile_RecentFiles_4,
+                    tsmiFile_RecentFiles_5,
+                    tsmiFile_RecentFiles_6,
+                    tsmiFile_RecentFiles_7,
+                    tsmiFile_RecentFiles_8,
+                    tsmiFile_RecentFiles_9,
+                    tsmiFile_RecentFiles_10
+                ];
+            }
+
+            var recentFiles = _appState.RecentFiles ?? [];
+            for (int i = 0; i < _recentFileMenuItems.Length; i++) {
+                var menuItem = _recentFileMenuItems[i];
+                var recentFile = (i < recentFiles.Length) ? recentFiles[i] : (AppState.RecentFile?) null;
+
+                menuItem.Enabled = (recentFile != null);
+                menuItem.Text = ((i == 9) ? "1&0" : $"&{i + 1}") + $" - " + (recentFile.HasValue ? recentFile.Value.Filename : "");
+            }
         }
 
         private void tsmiFile_Open_Click(object sender, EventArgs e)
@@ -458,6 +507,36 @@ namespace SF3.Editor.Forms {
             if (SelectedFile != null)
                 _ = SwapToNextOfSameTypeInFolder(SelectedFile);
         }
+
+        private void tsmiFile_RecentFiles_1_Click(object sender, EventArgs e)
+            => OpenRecentFile(0);
+
+        private void tsmiFile_RecentFiles_2_Click(object sender, EventArgs e)
+            => OpenRecentFile(1);
+
+        private void tsmiFile_RecentFiles_3_Click(object sender, EventArgs e)
+            => OpenRecentFile(2);
+
+        private void tsmiFile_RecentFiles_4_Click(object sender, EventArgs e)
+            => OpenRecentFile(3);
+
+        private void tsmiFile_RecentFiles_5_Click(object sender, EventArgs e)
+            => OpenRecentFile(4);
+
+        private void tsmiFile_RecentFiles_6_Click(object sender, EventArgs e)
+            => OpenRecentFile(5);
+
+        private void tsmiFile_RecentFiles_7_Click(object sender, EventArgs e)
+            => OpenRecentFile(6);
+
+        private void tsmiFile_RecentFiles_8_Click(object sender, EventArgs e)
+            => OpenRecentFile(7);
+
+        private void tsmiFile_RecentFiles_9_Click(object sender, EventArgs e)
+            => OpenRecentFile(8);
+
+        private void tsmiFile_RecentFiles_10_Click(object sender, EventArgs e)
+            => OpenRecentFile(9);
 
         private void tsmiFile_Exit_Click(object sender, EventArgs e) => Close();
     }

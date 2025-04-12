@@ -79,6 +79,9 @@ namespace SF3.Editor.Forms {
                 _appState.Serialize();
             };
 
+            UpdateRecentFilesMenu();
+            _appState.RecentFilesChanged += (s, e) => UpdateRecentFilesMenu();
+
             ResumeLayout();
         }
 
