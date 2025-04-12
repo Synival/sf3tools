@@ -88,6 +88,9 @@ namespace SF3.Editor.Forms {
             base.OnFormClosing(e);
         }
 
+        /// <summary>
+        /// Information about a file loaded into the SF3Editor, including UI object references.
+        /// </summary>
         public class LoadedFile {
             public LoadedFile(ModelFileLoader loader, ScenarioType scenario, SF3FileType fileType, TabPage tabPage, FileView view) {
                 Loader   = loader;
@@ -104,8 +107,22 @@ namespace SF3.Editor.Forms {
             public readonly FileView View;
         };
 
-        private List<LoadedFile> _loadedFiles = [];
+        /// <summary>
+        /// The file/tab currently selected.
+        /// </summary>
+        public LoadedFile? SelectedFile {
+            get => _selectedFile;
+            private set {
+                if (_selectedFile != value) {
+                    _selectedFile = value;
+                    if (_selectedFile != null)
+                        _selectedFile.TabPage.Select();
+                }
+            }
+        }
         private LoadedFile? _selectedFile = null;
+
+        private List<LoadedFile> _loadedFiles = [];
 
         private readonly string _baseTitle;
         private readonly string _versionTitle;

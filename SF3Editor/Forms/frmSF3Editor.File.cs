@@ -145,7 +145,7 @@ namespace SF3.Editor.Forms {
 
             fileLoader.TitleChanged += (s, e) => {
                 tabPage.Text = fileLoader.Title;
-                if (_selectedFile?.Loader == fileLoader)
+                if (SelectedFile?.Loader == fileLoader)
                     Text = fileLoader.ModelTitle(_versionTitle);
             };
 
@@ -290,7 +290,7 @@ namespace SF3.Editor.Forms {
 
         private void FocusFileTab(TabPage? tabPage) {
             var file = (tabPage == null) ? null : _loadedFiles.FirstOrDefault(x => x.TabPage == tabPage);
-            if (_selectedFile == file)
+            if (SelectedFile == file)
                 return;
 
             var hasFile = file != null;
@@ -305,7 +305,7 @@ namespace SF3.Editor.Forms {
             tsmiTools_ImportTable.Enabled = hasFile;
             tsmiTools_ExportTable.Enabled = hasFile;
 
-            _selectedFile = file;
+            SelectedFile = file;
             Text = file == null ? _versionTitle : file.Loader.ModelTitle(_versionTitle);
 
             var fileType = file?.FileType;
@@ -412,28 +412,28 @@ namespace SF3.Editor.Forms {
             => OpenScenario = ScenarioType.PremiumDisk;
 
         private void tsmiFile_Save_Click(object sender, EventArgs e) {
-            if (_selectedFile != null)
-                _ = SaveFile(_selectedFile);
+            if (SelectedFile != null)
+                _ = SaveFile(SelectedFile);
         }
 
         private void tsmiFile_SaveAs_Click(object sender, EventArgs e) {
-            if (_selectedFile != null)
-                _ = SaveFileAsDialog(_selectedFile);
+            if (SelectedFile != null)
+                _ = SaveFileAsDialog(SelectedFile);
         }
 
         private void tsmiFile_Close_Click(object sender, EventArgs e) {
-            if (_selectedFile != null)
-                _ = CloseFile(_selectedFile);
+            if (SelectedFile != null)
+                _ = CloseFile(SelectedFile);
         }
 
         private void tsmiFile_SwapToPrev_Click(object sender, EventArgs e) {
-            if (_selectedFile != null)
-                _ = SwapToPrevOfSameTypeInFolder(_selectedFile);
+            if (SelectedFile != null)
+                _ = SwapToPrevOfSameTypeInFolder(SelectedFile);
         }
 
         private void tsmiFile_SwapToNext_Click(object sender, EventArgs e) {
-            if (_selectedFile != null)
-                _ = SwapToNextOfSameTypeInFolder(_selectedFile);
+            if (SelectedFile != null)
+                _ = SwapToNextOfSameTypeInFolder(SelectedFile);
         }
 
         private void tsmiFile_Exit_Click(object sender, EventArgs e) => Close();

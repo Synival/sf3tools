@@ -191,23 +191,23 @@ namespace SF3.Editor.Forms {
         }
 
         private void tsmiTools_ApplyDFR_Click(object sender, EventArgs e) {
-            if (_selectedFile != null)
-                ApplyDFRDialog(_selectedFile);
+            if (SelectedFile != null)
+                ApplyDFRDialog(SelectedFile);
         }
 
         private void tsmiTools_CreateDFR_Click(object sender, EventArgs e) {
-            if (_selectedFile != null)
-                CreateDFRDialog(_selectedFile);
+            if (SelectedFile != null)
+                CreateDFRDialog(SelectedFile);
         }
 
         private void tsmiTools_ImportTable_Click(object sender, EventArgs e) {
-            if (_selectedFile != null)
-                CopyTablesFrom(_selectedFile);
+            if (SelectedFile != null)
+                CopyTablesFrom(SelectedFile);
         }
 
         private void tsmiTools_ExportTable_Click(object sender, EventArgs e) {
-            if (_selectedFile != null)
-                CopyTablesTo(_selectedFile);
+            if (SelectedFile != null)
+                CopyTablesTo(SelectedFile);
         }
     }
 }
