@@ -399,7 +399,7 @@ namespace SF3.Models.Files.MPD {
             ChunkData chunkData = null;
 
             try {
-                byteArraySegment = new ByteArraySegment(Data.Data, ChunkHeader[chunkIndex].ChunkAddress - c_RamOffset, ChunkHeader[chunkIndex].ChunkSize);
+                byteArraySegment = new ByteArraySegment(Data.Data, ChunkHeader[chunkIndex].ChunkRAMAddress - c_RamOffset, ChunkHeader[chunkIndex].ChunkSize);
                 chunkData = new ChunkData(byteArraySegment, isCompressed, chunkIndex);
             }
             catch {
@@ -418,14 +418,14 @@ namespace SF3.Models.Files.MPD {
                 var chunkName = chunkHeader.Name;
                 if (a.Moved) {
                     // Figure out how much the offset has changed.
-                    var oldOffset = chunkHeader.ChunkAddress - c_RamOffset;
+                    var oldOffset = chunkHeader.ChunkRAMAddress - c_RamOffset;
                     var newOffset = byteArraySegment.Offset;
                     var offsetDelta = newOffset - oldOffset;
                     if (offsetDelta == 0)
                         return;
 
                     // Update the address in the chunk table.
-                    chunkHeader.ChunkAddress = newOffset + c_RamOffset;
+                    chunkHeader.ChunkRAMAddress = newOffset + c_RamOffset;
 
                     // Chunks after this one with something assigned to ChunkData[] will have their
                     // ChunkAddress updated automatically. For chunks without a ChunkData[] after this one
@@ -435,8 +435,8 @@ namespace SF3.Models.Files.MPD {
                             break;
 
                         var ch = ChunkHeader[j];
-                        if (ch != null && ch.ChunkAddress != 0)
-                            ch.ChunkAddress += offsetDelta;
+                        if (ch != null && ch.ChunkRAMAddress != 0)
+                            ch.ChunkRAMAddress += offsetDelta;
                     }
                 }
                 if (a.Resized)
@@ -449,7 +449,7 @@ namespace SF3.Models.Files.MPD {
                 for (var i = 0; i < ChunkHeader.Length; i++) {
                     var ch = ChunkHeader[i];
                     var cd = ChunkData[i];
-                    if (ch.ChunkAddress == 0 || cd == null)
+                    if (ch.ChunkRAMAddress == 0 || cd == null)
                         continue;
 
                     if (ch.ChunkFileAddress != cd.Offset) {
@@ -894,8 +894,8 @@ namespace SF3.Models.Files.MPD {
             // Gets all the chunks in order of their address, followed by the order in which they'll be updated.
             ChunkHeader[] GetSortedChunks() {
                 return ChunkHeader
-                    .Where(x => x.ChunkAddress != 0)
-                    .OrderBy(x => x.ChunkAddress)
+                    .Where(x => x.ChunkRAMAddress != 0)
+                    .OrderBy(x => x.ChunkRAMAddress)
                     .ThenBy(x => x.ChunkSize)
                     .ThenBy(x => x.ID)
                     .ToArray();
@@ -941,7 +941,7 @@ namespace SF3.Models.Files.MPD {
                             throw new InvalidOperationException("Huh? We shouldn't be trying to fix chunks here!");
                         for (int i = 0; i < firstChunkDataIndex; i++)
                             if (i != chunk.ID)
-                                ChunkHeader[i].ChunkAddress = chunk.Address;
+                                ChunkHeader[i].ChunkRAMAddress = chunk.Address;
                     }
                 }
 

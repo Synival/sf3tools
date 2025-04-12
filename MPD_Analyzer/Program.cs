@@ -319,8 +319,8 @@ namespace MPD_Analyzer {
 
             // Anything Scenario 2 or higher should have addresses for Chunk[20] and Chunk[21].
             bool shouldHaveChunk20_21 = mpdFile.Scenario >= ScenarioType.Scenario2;
-            bool hasChunk20 = chunkHeaders[20].ChunkAddress > 0;
-            bool hasChunk21 = chunkHeaders[21].ChunkAddress > 0;
+            bool hasChunk20 = chunkHeaders[20].ChunkRAMAddress > 0;
+            bool hasChunk21 = chunkHeaders[21].ChunkRAMAddress > 0;
 
             if (shouldHaveChunk20_21 != hasChunk20)
                 errors.Add("Chunk[20] problem! ShouldHave=" + shouldHaveChunk20_21 + ", DoesHave=" + hasChunk20);

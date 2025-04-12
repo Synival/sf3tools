@@ -4,41 +4,43 @@ using SF3.Types;
 
 namespace SF3.Models.Structs.MPD {
     public class ChunkHeader : Struct {
-        private readonly int chunkAddressAddress;
-        private readonly int chunkSizeAddress;
+        private const int c_mpdRAMLocation = 0x290000;
+
+        private readonly int _chunkAddressAddr;
+        private readonly int _chunkSizeAddr;
 
         public ChunkHeader(IByteData data, int id, string name, int address)
         : base(data, id, name, address, 8) {
-            chunkAddressAddress = Address;     // 4 bytes
-            chunkSizeAddress    = Address + 4; // 4 bytes
+            _chunkAddressAddr = Address;     // 4 bytes
+            _chunkSizeAddr    = Address + 4; // 4 bytes
         }
 
         [BulkCopy]
         [TableViewModelColumn(displayName: "Chunk RAM Address", isPointer: true, displayOrder: 0)]
-        public int ChunkAddress {
-            get => Data.GetDouble(chunkAddressAddress);
-            set => Data.SetDouble(chunkAddressAddress, value);
+        public int ChunkRAMAddress {
+            get => Data.GetDouble(_chunkAddressAddr);
+            set => Data.SetDouble(_chunkAddressAddr, value);
         }
 
         [BulkCopy]
         [TableViewModelColumn(displayName: "Chunk File Address", displayFormat: "X6", displayOrder: 0.5f)]
         public int ChunkFileAddress {
             get {
-                var addr = ChunkAddress;
-                return (addr == 0) ? 0 : (ChunkAddress - 0x290000);
+                var addr = ChunkRAMAddress;
+                return (addr == 0) ? 0 : (addr - c_mpdRAMLocation);
             }
-            set => ChunkAddress = (value == 0) ? 0 : + 0x290000;
+            set => ChunkRAMAddress = (value == 0) ? 0 : (value + c_mpdRAMLocation);
         }
 
         [BulkCopy]
         [TableViewModelColumn(displayName: "Chunk Size", displayFormat: "X4", displayOrder: 1)]
         public int ChunkSize {
-            get => Data.GetDouble(chunkSizeAddress);
-            set => Data.SetDouble(chunkSizeAddress, value);
+            get => Data.GetDouble(_chunkSizeAddr);
+            set => Data.SetDouble(_chunkSizeAddr, value);
         }
 
         [TableViewModelColumn(displayName: "Exists", displayOrder: 2)]
-        public bool Exists => ChunkAddress > 0 && ChunkSize != 0;
+        public bool Exists => ChunkRAMAddress > 0 && ChunkSize != 0;
 
         public ChunkType ChunkType { get; set; } = ChunkType.Unset;
 

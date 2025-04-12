@@ -147,8 +147,8 @@ namespace SF3.Tests.Compression {
 
                 var pos = 0x292100;
                 foreach (var ch in mpdFile.ChunkHeader) {
-                    if (ch.ChunkAddress != 0)
-                        Assert.AreEqual(pos, ch.ChunkAddress, "Chunk[" + ch.ID + "] is off");
+                    if (ch.ChunkRAMAddress != 0)
+                        Assert.AreEqual(pos, ch.ChunkRAMAddress, "Chunk[" + ch.ID + "] is off");
                     pos += ch.ChunkSize;
                     if (pos % 4 != 0)
                         pos += 4 - (pos % 4);
@@ -170,34 +170,34 @@ namespace SF3.Tests.Compression {
                     return;
 
                 // Build a new MPD file with the first compressed chunk moved to the end of the file.
-                var oldChunkPos = firstUncompressedChunk.ChunkAddress - 0x290000;
+                var oldChunkPos = firstUncompressedChunk.ChunkRAMAddress - 0x290000;
                 var newChunkPos = mpdFile.Data.Length;
                 mpdFile.Data.Data.SetDataAtTo(newChunkPos, 0, mpdFile.Data.GetDataCopyAt(oldChunkPos, firstUncompressedChunk.ChunkSize));
 
                 var nameGetters = new Dictionary<ScenarioType, INameGetterContext>() {
                     { mpdFile.Scenario, mpdFile.NameGetterContext }
                 };
-                firstUncompressedChunk.ChunkAddress = newChunkPos + 0x290000;
+                firstUncompressedChunk.ChunkRAMAddress = newChunkPos + 0x290000;
                 mpdFile = MPD_File.Create(new SF3.ByteData.ByteData(new ByteArray(mpdFile.Data.GetDataCopy())), nameGetters);
 
                 // Act
                 var orderedChunkHeadersOrig = mpdFile.ChunkHeader
-                    .Where(x => x.ChunkAddress != 0)
-                    .OrderBy(x => x.ChunkAddress)
+                    .Where(x => x.ChunkRAMAddress != 0)
+                    .OrderBy(x => x.ChunkRAMAddress)
                     .ToArray();
 
                 mpdFile.RebuildChunkTable(onlyModified: true);
 
                 var pos = 0x2100;
                 var orderedChunkHeaders = mpdFile.ChunkHeader
-                    .Where(x => x.ChunkAddress != 0)
-                    .OrderBy(x => x.ChunkAddress)
+                    .Where(x => x.ChunkRAMAddress != 0)
+                    .OrderBy(x => x.ChunkRAMAddress)
                     .ThenBy(x => x.ChunkSize)
                     .ThenBy(x => x.ID)
                     .ToArray();
 
                 foreach (var ch in orderedChunkHeaders) {
-                    if (ch.ChunkAddress != 0)
+                    if (ch.ChunkRAMAddress != 0)
                         Assert.AreEqual(pos, ch.ChunkFileAddress, "Chunk[" + ch.ID + "] is off");
                     pos += ch.ChunkSize;
                     if (pos % 4 != 0)
