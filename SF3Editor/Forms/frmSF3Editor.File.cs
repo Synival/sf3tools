@@ -171,11 +171,11 @@ namespace SF3.Editor.Forms {
             try {
                 if (!file.Loader.SaveFile(filename)) {
                     // TODO: Actually get an error from SaveFile()!
-                    error = "Save failed";
+                    error = $"Error while saving '{filename}'";
                 }
             }
             catch (Exception e) {
-                error = $"{e.GetType().Name} exception with message:\r\n{e.Message}";
+                error = $"{e.GetType().Name} exception while saving '{filename}' with message:\r\n{e.Message}";
             }
 
             if (error != null)
@@ -198,6 +198,21 @@ namespace SF3.Editor.Forms {
                 return false;
 
             return SaveFile(file, savefile.FileName);
+        }
+
+        /// <summary>
+        /// Attempts to save all files, bringing up a 'Save As...' dialog when necessary.
+        /// TODO: this is never necessary, so it never does it!
+        /// Cancelling the dialog will not cancel saving, only saving for the particular cancelled document.
+        /// Files not marked as modified are not saved.
+        /// </summary>
+        /// <returns>Returns 'true' if saving was performed, otherwise 'false'.</returns>
+        public bool SaveAllFiles() {
+            bool saveHappened = false;
+            foreach (var loadedFile in _loadedFiles)
+                if (loadedFile.Loader?.Model?.IsModified == true)
+                    saveHappened |= SaveFile(loadedFile);
+            return saveHappened;
         }
 
         /// <summary>
@@ -296,7 +311,9 @@ namespace SF3.Editor.Forms {
             var hasFile = file != null;
             tsmiFile_Save.Enabled         = hasFile;
             tsmiFile_SaveAs.Enabled       = hasFile;
+            tsmiFile_SaveAll.Enabled      = hasFile;
             tsmiFile_Close.Enabled        = hasFile;
+            tsmiFile_CloseAll.Enabled     = hasFile;
             tsmiFile_SwapToPrev.Enabled   = hasFile;
             tsmiFile_SwapToNext.Enabled   = hasFile;
 
@@ -421,10 +438,16 @@ namespace SF3.Editor.Forms {
                 _ = SaveFileAsDialog(SelectedFile);
         }
 
+        private void tsmiFile_SaveAll_Click(object sender, EventArgs e)
+            => SaveAllFiles();
+
         private void tsmiFile_Close_Click(object sender, EventArgs e) {
             if (SelectedFile != null)
                 _ = CloseFile(SelectedFile);
         }
+
+        private void tsmiFile_CloseAll_Click(object sender, EventArgs e)
+            => CloseAllFiles();
 
         private void tsmiFile_SwapToPrev_Click(object sender, EventArgs e) {
             if (SelectedFile != null)
