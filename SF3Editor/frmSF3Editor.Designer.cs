@@ -41,6 +41,9 @@ namespace SF3Editor {
             tsmiFile_Sep1 = new System.Windows.Forms.ToolStripSeparator();
             tsmiFile_Close = new System.Windows.Forms.ToolStripMenuItem();
             tsmiFile_Sep2 = new System.Windows.Forms.ToolStripSeparator();
+            tsmiFile_SwapToPrev = new System.Windows.Forms.ToolStripMenuItem();
+            tsmiFile_SwapToNext = new System.Windows.Forms.ToolStripMenuItem();
+            tsmiFile_Sep3 = new System.Windows.Forms.ToolStripSeparator();
             tsmiFile_Exit = new System.Windows.Forms.ToolStripMenuItem();
             tsmiEdit = new System.Windows.Forms.ToolStripMenuItem();
             tsmiEdit_UseDropdowns = new System.Windows.Forms.ToolStripMenuItem();
@@ -82,7 +85,7 @@ namespace SF3Editor {
             // 
             // tsmiFile
             // 
-            tsmiFile.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { tsmiFile_Open, tsmiFile_OpenScenario, tsmiFile_Save, tsmiFile_SaveAs, tsmiFile_Sep1, tsmiFile_Close, tsmiFile_Sep2, tsmiFile_Exit });
+            tsmiFile.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { tsmiFile_Open, tsmiFile_OpenScenario, tsmiFile_Save, tsmiFile_SaveAs, tsmiFile_Sep1, tsmiFile_Close, tsmiFile_Sep2, tsmiFile_SwapToPrev, tsmiFile_SwapToNext, tsmiFile_Sep3, tsmiFile_Exit });
             tsmiFile.Name = "tsmiFile";
             tsmiFile.Size = new Size(37, 20);
             tsmiFile.Text = "&File";
@@ -91,7 +94,7 @@ namespace SF3Editor {
             // 
             tsmiFile_Open.Name = "tsmiFile_Open";
             tsmiFile_Open.ShortcutKeys =  System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O;
-            tsmiFile_Open.Size = new Size(195, 22);
+            tsmiFile_Open.Size = new Size(259, 22);
             tsmiFile_Open.Text = "&Open...";
             tsmiFile_Open.Click += tsmiFile_Open_Click;
             // 
@@ -99,7 +102,7 @@ namespace SF3Editor {
             // 
             tsmiFile_OpenScenario.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { tsmiScenario_Detect, tsmiScenario_Sep1, tsmiScenario_Scenario1, tsmiScenario_Scenario2, tsmiScenario_Scenario3, tsmiScenario_PremiumDisk });
             tsmiFile_OpenScenario.Name = "tsmiFile_OpenScenario";
-            tsmiFile_OpenScenario.Size = new Size(195, 22);
+            tsmiFile_OpenScenario.Size = new Size(259, 22);
             tsmiFile_OpenScenario.Text = "Open Sce&nario";
             // 
             // tsmiScenario_Detect
@@ -152,7 +155,7 @@ namespace SF3Editor {
             tsmiFile_Save.Enabled = false;
             tsmiFile_Save.Name = "tsmiFile_Save";
             tsmiFile_Save.ShortcutKeys =  System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S;
-            tsmiFile_Save.Size = new Size(195, 22);
+            tsmiFile_Save.Size = new Size(259, 22);
             tsmiFile_Save.Text = "&Save";
             tsmiFile_Save.Click += tsmiFile_Save_Click;
             // 
@@ -161,34 +164,59 @@ namespace SF3Editor {
             tsmiFile_SaveAs.Enabled = false;
             tsmiFile_SaveAs.Name = "tsmiFile_SaveAs";
             tsmiFile_SaveAs.ShortcutKeys =  System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift | System.Windows.Forms.Keys.S;
-            tsmiFile_SaveAs.Size = new Size(195, 22);
+            tsmiFile_SaveAs.Size = new Size(259, 22);
             tsmiFile_SaveAs.Text = "Save &As...";
             tsmiFile_SaveAs.Click += tsmiFile_SaveAs_Click;
             // 
             // tsmiFile_Sep1
             // 
             tsmiFile_Sep1.Name = "tsmiFile_Sep1";
-            tsmiFile_Sep1.Size = new Size(192, 6);
+            tsmiFile_Sep1.Size = new Size(256, 6);
             // 
             // tsmiFile_Close
             // 
             tsmiFile_Close.Enabled = false;
             tsmiFile_Close.Name = "tsmiFile_Close";
             tsmiFile_Close.ShortcutKeys =  System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.W;
-            tsmiFile_Close.Size = new Size(195, 22);
+            tsmiFile_Close.Size = new Size(259, 22);
             tsmiFile_Close.Text = "&Close";
             tsmiFile_Close.Click += tsmiFile_Close_Click;
             // 
             // tsmiFile_Sep2
             // 
             tsmiFile_Sep2.Name = "tsmiFile_Sep2";
-            tsmiFile_Sep2.Size = new Size(192, 6);
+            tsmiFile_Sep2.Size = new Size(256, 6);
+            // 
+            // tsmiFile_SwapToPrev
+            // 
+            tsmiFile_SwapToPrev.Enabled = false;
+            tsmiFile_SwapToPrev.Name = "tsmiFile_SwapToPrev";
+            tsmiFile_SwapToPrev.ShortcutKeys =  System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.Oemcomma;
+            tsmiFile_SwapToPrev.ShowShortcutKeys = false;
+            tsmiFile_SwapToPrev.Size = new Size(259, 22);
+            tsmiFile_SwapToPrev.Text = "Swap to Prev of Same Type in Folder";
+            tsmiFile_SwapToPrev.Click += tsmiFile_SwapToPrev_Click;
+            // 
+            // tsmiFile_SwapToNext
+            // 
+            tsmiFile_SwapToNext.Enabled = false;
+            tsmiFile_SwapToNext.Name = "tsmiFile_SwapToNext";
+            tsmiFile_SwapToNext.ShortcutKeys =  System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.OemPeriod;
+            tsmiFile_SwapToNext.ShowShortcutKeys = false;
+            tsmiFile_SwapToNext.Size = new Size(259, 22);
+            tsmiFile_SwapToNext.Text = "Swap to Next of Same Type in Folder";
+            tsmiFile_SwapToNext.Click += tsmiFile_SwapToNext_Click;
+            // 
+            // tsmiFile_Sep3
+            // 
+            tsmiFile_Sep3.Name = "tsmiFile_Sep3";
+            tsmiFile_Sep3.Size = new Size(256, 6);
             // 
             // tsmiFile_Exit
             // 
             tsmiFile_Exit.Name = "tsmiFile_Exit";
             tsmiFile_Exit.ShortcutKeys =  System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.F4;
-            tsmiFile_Exit.Size = new Size(195, 22);
+            tsmiFile_Exit.Size = new Size(259, 22);
             tsmiFile_Exit.Text = "E&xit";
             tsmiFile_Exit.Click += tsmiFile_Exit_Click;
             // 
@@ -224,7 +252,7 @@ namespace SF3Editor {
             // 
             tsmiTools_ImportTable.Enabled = false;
             tsmiTools_ImportTable.Name = "tsmiTools_ImportTable";
-            tsmiTools_ImportTable.Size = new Size(180, 22);
+            tsmiTools_ImportTable.Size = new Size(162, 22);
             tsmiTools_ImportTable.Text = "&Import Table...";
             tsmiTools_ImportTable.Click += tsmiTools_ImportTable_Click;
             // 
@@ -232,20 +260,20 @@ namespace SF3Editor {
             // 
             tsmiTools_ExportTable.Enabled = false;
             tsmiTools_ExportTable.Name = "tsmiTools_ExportTable";
-            tsmiTools_ExportTable.Size = new Size(180, 22);
+            tsmiTools_ExportTable.Size = new Size(162, 22);
             tsmiTools_ExportTable.Text = "&Export Table...";
             tsmiTools_ExportTable.Click += tsmiTools_ExportTable_Click;
             // 
             // tsmiTools_Sep1
             // 
             tsmiTools_Sep1.Name = "tsmiTools_Sep1";
-            tsmiTools_Sep1.Size = new Size(177, 6);
+            tsmiTools_Sep1.Size = new Size(159, 6);
             // 
             // tsmiTools_ApplyDFR
             // 
             tsmiTools_ApplyDFR.Enabled = false;
             tsmiTools_ApplyDFR.Name = "tsmiTools_ApplyDFR";
-            tsmiTools_ApplyDFR.Size = new Size(180, 22);
+            tsmiTools_ApplyDFR.Size = new Size(162, 22);
             tsmiTools_ApplyDFR.Text = "&Apply DFR File...";
             tsmiTools_ApplyDFR.Click += tsmiTools_ApplyDFR_Click;
             // 
@@ -253,7 +281,7 @@ namespace SF3Editor {
             // 
             tsmiTools_CreateDFR.Enabled = false;
             tsmiTools_CreateDFR.Name = "tsmiTools_CreateDFR";
-            tsmiTools_CreateDFR.Size = new Size(180, 22);
+            tsmiTools_CreateDFR.Size = new Size(162, 22);
             tsmiTools_CreateDFR.Text = "&Create DFR File...";
             tsmiTools_CreateDFR.Click += tsmiTools_CreateDFR_Click;
             // 
@@ -435,5 +463,8 @@ namespace SF3Editor {
         private System.Windows.Forms.ToolStripMenuItem tsmiMPD_Chunks_CorrectChunkPlacement;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripMenuItem tsmiMPD_Chunks_MoveChunksAutomatically;
+        private System.Windows.Forms.ToolStripSeparator tsmiFile_Sep3;
+        private System.Windows.Forms.ToolStripMenuItem tsmiFile_SwapToPrev;
+        private System.Windows.Forms.ToolStripMenuItem tsmiFile_SwapToNext;
     }
 }

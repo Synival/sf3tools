@@ -33,7 +33,7 @@ namespace SF3Editor {
             .ToDictionary(x => x, x => (INameGetterContext) new NameGetterContext(x));
 
         private readonly string OpenDialogFilter =
-            "All Supported Files|X1*.BIN;X002.BIN;X005.BIN;X011.BIN;X012.BIN;X013.BIN;X014.BIN;X019.BIN;X021.BIN;X026.BIN;X031.BIN;X033.BIN;X044.BIN;*.MPD"
+            "All Supported Files|" + string.Join(';', Enum.GetValues<SF3FileType>().Select(x => GetFileFilterForFileType(x)).Distinct())
             + "|" + string.Join('|', Enum.GetValues<SF3FileType>().Select(x => GetFileDialogFilterForFileType(x)).Distinct())
             + "|All Files (*.*)|*.*"
             ;
@@ -59,14 +59,17 @@ namespace SF3Editor {
             _versionTitle = _baseTitle + " v" + Version;
             Text = _versionTitle;
 
-            ResumeLayout();
-
             // Remember the last Scenario type to open.
             UpdateLocalOpenScenario();
             _appState.OpenScenarioChanged += (s, e) => {
                 UpdateLocalOpenScenario();
                 _appState.Serialize();
             };
+
+            tsmiFile_SwapToPrev.ShortcutKeyDisplayString = "Ctrl+Alt+,";
+            tsmiFile_SwapToPrev.ShowShortcutKeys = true;
+            tsmiFile_SwapToNext.ShortcutKeyDisplayString = "Ctrl+Alt+.";
+            tsmiFile_SwapToNext.ShowShortcutKeys = true;
 
             // Link some dropdowns/values to the app state.
             tsmiEdit_UseDropdowns.Checked = _appState.UseDropdownsForNamedValues;
@@ -89,6 +92,8 @@ namespace SF3Editor {
                 Stats.DebugGrowthValues = _appState.EnableDebugSettings;
                 _appState.Serialize();
             };
+
+            ResumeLayout();
         }
 
         protected override void OnFormClosing(FormClosingEventArgs e) {
@@ -356,6 +361,9 @@ namespace SF3Editor {
             tsmiFile_Save.Enabled         = hasFile;
             tsmiFile_SaveAs.Enabled       = hasFile;
             tsmiFile_Close.Enabled        = hasFile;
+            tsmiFile_SwapToPrev.Enabled   = hasFile;
+            tsmiFile_SwapToNext.Enabled   = hasFile;
+
             tsmiTools_ApplyDFR.Enabled    = hasFile;
             tsmiTools_CreateDFR.Enabled   = hasFile;
             tsmiTools_ImportTable.Enabled = hasFile;
@@ -644,6 +652,93 @@ namespace SF3Editor {
         private void tsmiFile_Close_Click(object sender, EventArgs e) {
             if (_selectedFile != null)
                 _ = CloseFile(_selectedFile);
+        }
+
+        private void tsmiFile_SwapToPrev_Click(object sender, EventArgs e) {
+            if (_selectedFile != null)
+                _ = SwapToPrevOfSameTypeInFolder(_selectedFile);
+        }
+
+        private void tsmiFile_SwapToNext_Click(object sender, EventArgs e) {
+            if (_selectedFile != null)
+                _ = SwapToNextOfSameTypeInFolder(_selectedFile);
+        }
+
+        private LoadedFile? SwapToPrevOfSameTypeInFolder(LoadedFile file) {
+            var filesInDir = GetOtherFilesAtDirectoryForOpenFilter(file);
+            if (filesInDir.Length <= 1)
+                return null;
+
+            var index = filesInDir.Select((x, i) => new {Entry = x, Index = i}).FirstOrDefault(x => x.Entry.Filename == file.Loader.Filename)?.Index;
+            var indexToLoad = (index == null) ? 0 : (index == 0) ? (filesInDir.Length - 1) : ((int) index - 1);
+            var fileToLoad = filesInDir[indexToLoad];
+
+            return SwapToFile(file, fileToLoad.Filename, fileToLoad.Scenario, fileToLoad.FileType);
+        }
+
+        private LoadedFile? SwapToNextOfSameTypeInFolder(LoadedFile file) {
+            var filesInDir = GetOtherFilesAtDirectoryForOpenFilter(file);
+            if (filesInDir.Length <= 1)
+                return null;
+
+            var index = filesInDir.Select((x, i) => new {Entry = x, Index = i}).FirstOrDefault(x => x.Entry.Filename == file.Loader.Filename)?.Index;
+            var indexToLoad = (index == null) ? 0 : (index == filesInDir.Length - 1) ? 0 : ((int) index + 1);
+            var fileToLoad = filesInDir[indexToLoad];
+
+            return SwapToFile(file, fileToLoad.Filename, fileToLoad.Scenario, fileToLoad.FileType);
+        }
+
+        private LoadedFile? SwapToFile(LoadedFile file, string filename, ScenarioType scenario, SF3FileType fileType) {
+            // TODO: The tab should be at the same index.
+
+            var newLoadedFile = LoadFile(filename, scenario, fileType);
+            if (newLoadedFile == null) {
+                ErrorMessage($"Couldn't open {fileType} file '{filename}'");
+                return null;
+            }
+
+            if (!CloseFile(file)) {
+                newLoadedFile.Loader.Close();
+                return null;
+            }
+
+            return newLoadedFile;
+        }
+
+        private struct FileInDirectory {
+            public string Filename;
+            public SF3FileType FileType;
+            public ScenarioType Scenario;
+        };
+
+        private FileInDirectory[] GetOtherFilesAtDirectoryForOpenFilter(LoadedFile file) {
+            if (file?.Loader?.IsLoaded != true)
+                return [];
+
+            var path = Path.GetDirectoryName(file.Loader.Filename);
+            if (path == null)
+                return [];
+
+            var filterSplit = file.Loader.FileDialogFilter?.Split('|');
+            if (filterSplit?.Length != 2)
+                return [];
+
+            var filter = filterSplit[1];
+
+            // If we don't know the scenario, we can't load it.
+            return Directory.GetFiles(path, filter)
+                .OrderBy(x => x)
+                .Select(x => {
+                    var fileType = DetermineFileType(x, null);
+                    return new {
+                        Filename = x,
+                        FileType = fileType,
+                        Scenario = DetermineScenario(x, fileType)
+                    };
+                })
+                .Where(x => x.FileType.HasValue && x.Scenario.HasValue && x.FileType == file.FileType)
+                .Select(x => new FileInDirectory { Filename = x.Filename, FileType = x.FileType!.Value, Scenario = x.Scenario!.Value })
+                .ToArray();
         }
 
         private void tsmiTools_ApplyDFR_Click(object sender, EventArgs e) {
