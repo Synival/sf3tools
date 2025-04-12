@@ -30,12 +30,12 @@ namespace SF3.Editor.Forms {
             tsmiFile = new System.Windows.Forms.ToolStripMenuItem();
             tsmiFile_Open = new System.Windows.Forms.ToolStripMenuItem();
             tsmiFile_OpenScenario = new System.Windows.Forms.ToolStripMenuItem();
-            tsmiScenario_Detect = new System.Windows.Forms.ToolStripMenuItem();
-            tsmiScenario_Sep1 = new System.Windows.Forms.ToolStripSeparator();
-            tsmiScenario_Scenario1 = new System.Windows.Forms.ToolStripMenuItem();
-            tsmiScenario_Scenario2 = new System.Windows.Forms.ToolStripMenuItem();
-            tsmiScenario_Scenario3 = new System.Windows.Forms.ToolStripMenuItem();
-            tsmiScenario_PremiumDisk = new System.Windows.Forms.ToolStripMenuItem();
+            tsmiFile_OpenScenario_Detect = new System.Windows.Forms.ToolStripMenuItem();
+            tsmiFile_OpenScenario_Sep1 = new System.Windows.Forms.ToolStripSeparator();
+            tsmiFile_OpenScenario_Scenario1 = new System.Windows.Forms.ToolStripMenuItem();
+            tsmiFile_OpenScenario_Scenario2 = new System.Windows.Forms.ToolStripMenuItem();
+            tsmiFile_OpenScenario_Scenario3 = new System.Windows.Forms.ToolStripMenuItem();
+            tsmiFile_OpenScenario_PremiumDisk = new System.Windows.Forms.ToolStripMenuItem();
             tsmiFile_Save = new System.Windows.Forms.ToolStripMenuItem();
             tsmiFile_SaveAs = new System.Windows.Forms.ToolStripMenuItem();
             tsmiFile_Sep1 = new System.Windows.Forms.ToolStripSeparator();
@@ -100,55 +100,55 @@ namespace SF3.Editor.Forms {
             // 
             // tsmiFile_OpenScenario
             // 
-            tsmiFile_OpenScenario.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { tsmiScenario_Detect, tsmiScenario_Sep1, tsmiScenario_Scenario1, tsmiScenario_Scenario2, tsmiScenario_Scenario3, tsmiScenario_PremiumDisk });
+            tsmiFile_OpenScenario.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { tsmiFile_OpenScenario_Detect, tsmiFile_OpenScenario_Sep1, tsmiFile_OpenScenario_Scenario1, tsmiFile_OpenScenario_Scenario2, tsmiFile_OpenScenario_Scenario3, tsmiFile_OpenScenario_PremiumDisk });
             tsmiFile_OpenScenario.Name = "tsmiFile_OpenScenario";
             tsmiFile_OpenScenario.Size = new Size(259, 22);
             tsmiFile_OpenScenario.Text = "Open Sce&nario";
             // 
-            // tsmiScenario_Detect
+            // tsmiFile_OpenScenario_Detect
             // 
-            tsmiScenario_Detect.Name = "tsmiScenario_Detect";
-            tsmiScenario_Detect.ShortcutKeys =  System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.D0;
-            tsmiScenario_Detect.Size = new Size(249, 22);
-            tsmiScenario_Detect.Text = "&Detect or Based on Folder";
-            tsmiScenario_Detect.Click += tsmiScenario_Detect_Click;
+            tsmiFile_OpenScenario_Detect.Name = "tsmiFile_OpenScenario_Detect";
+            tsmiFile_OpenScenario_Detect.ShortcutKeys =  System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.D0;
+            tsmiFile_OpenScenario_Detect.Size = new Size(249, 22);
+            tsmiFile_OpenScenario_Detect.Text = "&Detect or Based on Folder";
+            tsmiFile_OpenScenario_Detect.Click += tsmiFile_OpenScenario_Detect_Click;
             // 
-            // tsmiScenario_Sep1
+            // tsmiFile_OpenScenario_Sep1
             // 
-            tsmiScenario_Sep1.Name = "tsmiScenario_Sep1";
-            tsmiScenario_Sep1.Size = new Size(246, 6);
+            tsmiFile_OpenScenario_Sep1.Name = "tsmiFile_OpenScenario_Sep1";
+            tsmiFile_OpenScenario_Sep1.Size = new Size(246, 6);
             // 
-            // tsmiScenario_Scenario1
+            // tsmiFile_OpenScenario_Scenario1
             // 
-            tsmiScenario_Scenario1.Name = "tsmiScenario_Scenario1";
-            tsmiScenario_Scenario1.ShortcutKeys =  System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.D1;
-            tsmiScenario_Scenario1.Size = new Size(249, 22);
-            tsmiScenario_Scenario1.Text = "Scenario &1";
-            tsmiScenario_Scenario1.Click += tsmiScenario_Scenario1_Click;
+            tsmiFile_OpenScenario_Scenario1.Name = "tsmiFile_OpenScenario_Scenario1";
+            tsmiFile_OpenScenario_Scenario1.ShortcutKeys =  System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.D1;
+            tsmiFile_OpenScenario_Scenario1.Size = new Size(249, 22);
+            tsmiFile_OpenScenario_Scenario1.Text = "Scenario &1";
+            tsmiFile_OpenScenario_Scenario1.Click += tsmiFile_OpenScenario_Scenario1_Click;
             // 
-            // tsmiScenario_Scenario2
+            // tsmiFile_OpenScenario_Scenario2
             // 
-            tsmiScenario_Scenario2.Name = "tsmiScenario_Scenario2";
-            tsmiScenario_Scenario2.ShortcutKeys =  System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.D2;
-            tsmiScenario_Scenario2.Size = new Size(249, 22);
-            tsmiScenario_Scenario2.Text = "Scenario &2";
-            tsmiScenario_Scenario2.Click += tsmiScenario_Scenario2_Click;
+            tsmiFile_OpenScenario_Scenario2.Name = "tsmiFile_OpenScenario_Scenario2";
+            tsmiFile_OpenScenario_Scenario2.ShortcutKeys =  System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.D2;
+            tsmiFile_OpenScenario_Scenario2.Size = new Size(249, 22);
+            tsmiFile_OpenScenario_Scenario2.Text = "Scenario &2";
+            tsmiFile_OpenScenario_Scenario2.Click += tsmiFile_OpenScenario_Scenario2_Click;
             // 
-            // tsmiScenario_Scenario3
+            // tsmiFile_OpenScenario_Scenario3
             // 
-            tsmiScenario_Scenario3.Name = "tsmiScenario_Scenario3";
-            tsmiScenario_Scenario3.ShortcutKeys =  System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.D3;
-            tsmiScenario_Scenario3.Size = new Size(249, 22);
-            tsmiScenario_Scenario3.Text = "Scenario &3";
-            tsmiScenario_Scenario3.Click += tsmiScenario_Scenario3_Click;
+            tsmiFile_OpenScenario_Scenario3.Name = "tsmiFile_OpenScenario_Scenario3";
+            tsmiFile_OpenScenario_Scenario3.ShortcutKeys =  System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.D3;
+            tsmiFile_OpenScenario_Scenario3.Size = new Size(249, 22);
+            tsmiFile_OpenScenario_Scenario3.Text = "Scenario &3";
+            tsmiFile_OpenScenario_Scenario3.Click += tsmiFile_OpenScenario_Scenario3_Click;
             // 
-            // tsmiScenario_PremiumDisk
+            // tsmiFile_OpenScenario_PremiumDisk
             // 
-            tsmiScenario_PremiumDisk.Name = "tsmiScenario_PremiumDisk";
-            tsmiScenario_PremiumDisk.ShortcutKeys =  System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.D4;
-            tsmiScenario_PremiumDisk.Size = new Size(249, 22);
-            tsmiScenario_PremiumDisk.Text = "&Premium Disk";
-            tsmiScenario_PremiumDisk.Click += tsmiScenario_PremiumDisk_Click;
+            tsmiFile_OpenScenario_PremiumDisk.Name = "tsmiFile_OpenScenario_PremiumDisk";
+            tsmiFile_OpenScenario_PremiumDisk.ShortcutKeys =  System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.D4;
+            tsmiFile_OpenScenario_PremiumDisk.Size = new Size(249, 22);
+            tsmiFile_OpenScenario_PremiumDisk.Text = "&Premium Disk";
+            tsmiFile_OpenScenario_PremiumDisk.Click += tsmiFile_OpenScenario_PremiumDisk_Click;
             // 
             // tsmiFile_Save
             // 
@@ -252,7 +252,7 @@ namespace SF3.Editor.Forms {
             // 
             tsmiTools_ImportTable.Enabled = false;
             tsmiTools_ImportTable.Name = "tsmiTools_ImportTable";
-            tsmiTools_ImportTable.Size = new Size(180, 22);
+            tsmiTools_ImportTable.Size = new Size(178, 22);
             tsmiTools_ImportTable.Text = "Copy Tables &From...";
             tsmiTools_ImportTable.Click += tsmiTools_ImportTable_Click;
             // 
@@ -260,20 +260,20 @@ namespace SF3.Editor.Forms {
             // 
             tsmiTools_ExportTable.Enabled = false;
             tsmiTools_ExportTable.Name = "tsmiTools_ExportTable";
-            tsmiTools_ExportTable.Size = new Size(180, 22);
+            tsmiTools_ExportTable.Size = new Size(178, 22);
             tsmiTools_ExportTable.Text = "Copy Tables &To...";
             tsmiTools_ExportTable.Click += tsmiTools_ExportTable_Click;
             // 
             // tsmiTools_Sep1
             // 
             tsmiTools_Sep1.Name = "tsmiTools_Sep1";
-            tsmiTools_Sep1.Size = new Size(177, 6);
+            tsmiTools_Sep1.Size = new Size(175, 6);
             // 
             // tsmiTools_ApplyDFR
             // 
             tsmiTools_ApplyDFR.Enabled = false;
             tsmiTools_ApplyDFR.Name = "tsmiTools_ApplyDFR";
-            tsmiTools_ApplyDFR.Size = new Size(180, 22);
+            tsmiTools_ApplyDFR.Size = new Size(178, 22);
             tsmiTools_ApplyDFR.Text = "&Apply DFR File...";
             tsmiTools_ApplyDFR.Click += tsmiTools_ApplyDFR_Click;
             // 
@@ -281,7 +281,7 @@ namespace SF3.Editor.Forms {
             // 
             tsmiTools_CreateDFR.Enabled = false;
             tsmiTools_CreateDFR.Name = "tsmiTools_CreateDFR";
-            tsmiTools_CreateDFR.Size = new Size(180, 22);
+            tsmiTools_CreateDFR.Size = new Size(178, 22);
             tsmiTools_CreateDFR.Text = "&Create DFR File...";
             tsmiTools_CreateDFR.Click += tsmiTools_CreateDFR_Click;
             // 
@@ -431,12 +431,12 @@ namespace SF3.Editor.Forms {
         private System.Windows.Forms.ToolStripMenuItem tsmiFile_Exit;
         private System.Windows.Forms.ToolStripSeparator tsmiFile_Sep2;
         private System.Windows.Forms.ToolStripMenuItem tsmiFile_OpenScenario;
-        private System.Windows.Forms.ToolStripMenuItem tsmiScenario_Detect;
-        private System.Windows.Forms.ToolStripSeparator tsmiScenario_Sep1;
-        private System.Windows.Forms.ToolStripMenuItem tsmiScenario_Scenario1;
-        private System.Windows.Forms.ToolStripMenuItem tsmiScenario_Scenario2;
-        private System.Windows.Forms.ToolStripMenuItem tsmiScenario_Scenario3;
-        private System.Windows.Forms.ToolStripMenuItem tsmiScenario_PremiumDisk;
+        private System.Windows.Forms.ToolStripMenuItem tsmiFile_OpenScenario_Detect;
+        private System.Windows.Forms.ToolStripSeparator tsmiFile_OpenScenario_Sep1;
+        private System.Windows.Forms.ToolStripMenuItem tsmiFile_OpenScenario_Scenario1;
+        private System.Windows.Forms.ToolStripMenuItem tsmiFile_OpenScenario_Scenario2;
+        private System.Windows.Forms.ToolStripMenuItem tsmiFile_OpenScenario_Scenario3;
+        private System.Windows.Forms.ToolStripMenuItem tsmiFile_OpenScenario_PremiumDisk;
         private System.Windows.Forms.ToolStripMenuItem tsmiHelp;
         private System.Windows.Forms.ToolStripMenuItem tsmiHelp_About;
         private System.Windows.Forms.ToolStripMenuItem tsmiEdit;

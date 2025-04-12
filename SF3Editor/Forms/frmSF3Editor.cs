@@ -392,11 +392,11 @@ namespace SF3.Editor.Forms {
             var os = _appState.OpenScenario;
             _openScenario = (os < 0 || !Enum.IsDefined(typeof(ScenarioType), (ScenarioType) os)) ? null : (ScenarioType) os;
 
-            tsmiScenario_Detect.Checked      = _openScenario == null;
-            tsmiScenario_Scenario1.Checked   = _openScenario == ScenarioType.Scenario1;
-            tsmiScenario_Scenario2.Checked   = _openScenario == ScenarioType.Scenario2;
-            tsmiScenario_Scenario3.Checked   = _openScenario == ScenarioType.Scenario3;
-            tsmiScenario_PremiumDisk.Checked = _openScenario == ScenarioType.PremiumDisk;
+            tsmiFile_OpenScenario_Detect.Checked      = _openScenario == null;
+            tsmiFile_OpenScenario_Scenario1.Checked   = _openScenario == ScenarioType.Scenario1;
+            tsmiFile_OpenScenario_Scenario2.Checked   = _openScenario == ScenarioType.Scenario2;
+            tsmiFile_OpenScenario_Scenario3.Checked   = _openScenario == ScenarioType.Scenario3;
+            tsmiFile_OpenScenario_PremiumDisk.Checked = _openScenario == ScenarioType.PremiumDisk;
         }
 
         /// <summary>
@@ -831,117 +831,6 @@ namespace SF3.Editor.Forms {
                     }
                 }.Start();
             }
-        }
-
-        private void tsmiFile_Open_Click(object sender, EventArgs e) => OpenFileDialog();
-
-        private void tsmiFile_Save_Click(object sender, EventArgs e) {
-            if (_selectedFile != null)
-                _ = SaveFile(_selectedFile);
-        }
-
-        private void tsmiFile_SaveAs_Click(object sender, EventArgs e) {
-            if (_selectedFile != null)
-                _ = SaveFileAsDialog(_selectedFile);
-        }
-
-        private void tsmiFile_Close_Click(object sender, EventArgs e) {
-            if (_selectedFile != null)
-                _ = CloseFile(_selectedFile);
-        }
-
-        private void tsmiFile_SwapToPrev_Click(object sender, EventArgs e) {
-            if (_selectedFile != null)
-                _ = SwapToPrevOfSameTypeInFolder(_selectedFile);
-        }
-
-        private void tsmiFile_SwapToNext_Click(object sender, EventArgs e) {
-            if (_selectedFile != null)
-                _ = SwapToNextOfSameTypeInFolder(_selectedFile);
-        }
-
-        private void tsmiTools_ApplyDFR_Click(object sender, EventArgs e) {
-            if (_selectedFile != null)
-                ApplyDFRDialog(_selectedFile);
-        }
-
-        private void tsmiTools_CreateDFR_Click(object sender, EventArgs e) {
-            if (_selectedFile != null)
-                CreateDFRDialog(_selectedFile);
-        }
-
-        private void tsmiTools_ImportTable_Click(object sender, EventArgs e) {
-            if (_selectedFile != null)
-                CopyTablesFrom(_selectedFile);
-        }
-
-        private void tsmiTools_ExportTable_Click(object sender, EventArgs e) {
-            if (_selectedFile != null)
-                CopyTablesTo(_selectedFile);
-        }
-
-        private void tsmiFile_Exit_Click(object sender, EventArgs e) => Close();
-
-        private void tsmiScenario_Detect_Click(object sender, EventArgs e) => OpenScenario = null;
-        private void tsmiScenario_Scenario1_Click(object sender, EventArgs e) => OpenScenario = ScenarioType.Scenario1;
-
-        private void tsmiScenario_Scenario2_Click(object sender, EventArgs e) => OpenScenario = ScenarioType.Scenario2;
-
-        private void tsmiScenario_Scenario3_Click(object sender, EventArgs e) => OpenScenario = ScenarioType.Scenario3;
-
-        private void tsmiScenario_PremiumDisk_Click(object sender, EventArgs e) => OpenScenario = ScenarioType.PremiumDisk;
-
-        private void tsmiEdit_UseDropdowns_Click(object sender, EventArgs e) => _appState.UseDropdownsForNamedValues = !_appState.UseDropdownsForNamedValues;
-
-        private void tsmiEdit_EnableDebugSettings_Click(object sender, EventArgs e)
-            => _appState.EnableDebugSettings = !_appState.EnableDebugSettings;
-
-        private void tsmiMPD_EnableBlankFieldV2Controls_Click(object sender, EventArgs e)
-            => _appState.EnableExperimentalBlankFieldV2Brushes = !_appState.EnableExperimentalBlankFieldV2Brushes;
-
-        private void tsmiMPD_Textures_ImportAll_Click(object sender, EventArgs e) {
-            if (_selectedFile?.FileType == SF3FileType.MPD)
-                ImportAllMPDTexturesDialog((IMPD_File) _selectedFile.Loader.Model);
-        }
-
-        private void tsmiMPD_Textures_ExportAll_Click(object sender, EventArgs e) {
-            if (_selectedFile?.FileType == SF3FileType.MPD)
-                ExportAllMPDTexturesDialog((IMPD_File) _selectedFile.Loader.Model);
-        }
-
-        private void tsmiMPD_Chunks_ExportChunk_Click(object sender, EventArgs e) {
-            if (_selectedFile?.FileType == SF3FileType.MPD)
-                ExportMPDChunkDialog((IMPD_File) _selectedFile.Loader.Model, Path.GetFileNameWithoutExtension(_selectedFile.Loader.ShortFilename));
-        }
-
-        private void tsmiMPD_Chunks_ImportChunk_Click(object sender, EventArgs e) {
-            if (_selectedFile?.FileType == SF3FileType.MPD)
-                ImportMPDChunkDialog((IMPD_File) _selectedFile.Loader.Model, Path.GetFileNameWithoutExtension(_selectedFile.Loader.ShortFilename));
-        }
-
-        private void tsmiMPD_Chunks_DeleteChunk_Click(object sender, EventArgs e) {
-            if (_selectedFile?.FileType == SF3FileType.MPD)
-                DeleteMPDChunkDialog((IMPD_File) _selectedFile.Loader.Model, Path.GetFileNameWithoutExtension(_selectedFile.Loader.ShortFilename));
-        }
-
-        private void tsmiHelp_About_Click(object sender, EventArgs e) {
-            // Fetch copyright info from the assembly itself.
-            string? legalCopyright = null;
-            try {
-                var versionInfo = FileVersionInfo.GetVersionInfo(Environment.ProcessPath ?? "");
-                legalCopyright = versionInfo.LegalCopyright;
-            }
-            catch (Exception ex) {
-                legalCopyright = $"(Couldn't fetch copyright: {ex.GetType().Name} exception thrown with message: {ex.Message}";
-            }
-
-            // Show info, credits, and special thanks.
-            MessageBox.Show(
-                _versionTitle + "\n\n" +
-                legalCopyright + "\n\n" +
-                "All credit to Agrathejagged for the MPD compression/decompression code: https://github.com/Agrathejagged",
-                "About " + _baseTitle
-            );
         }
 
         public class LoadedFile {
