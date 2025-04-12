@@ -143,7 +143,7 @@ namespace MPD_DataSearcher {
 
                             // Add compressed data as tracked data streams. This will prevent the *compressed data* from being
                             // analyzed, but the *uncompressed data* will still be looked at.
-                            foreach (var cd in mpdFile.ChunkHeader)
+                            foreach (var cd in mpdFile.ChunkLocations)
                                 if (cd.Exists && (cd.CompressionType != CompressionType.Uncompressed || cd.ChunkType == ChunkType.Unknown))
                                     dataRanges.Add(new DataRange(mpdFileData, "Chunk" + cd.ID, cd.ChunkFileAddress, cd.ChunkFileAddress + cd.ChunkSize));
 
@@ -251,7 +251,7 @@ namespace MPD_DataSearcher {
             return str;
         }
 
-        private static string ChunkString(ChunkHeader[] chunkHeaders) {
+        private static string ChunkString(ChunkLocation[] chunkHeaders) {
             var chunkString = "";
             for (var i = 0; i < chunkHeaders.Length; i++) {
                 if (chunkHeaders[i].Address == 0)
@@ -265,7 +265,7 @@ namespace MPD_DataSearcher {
 
         private static string GetFileString(ScenarioType inputScenario, string filename, IMPD_File mpdFile) {
             var mapFlags = mpdFile.MPDHeader.MapFlags;
-            var chunkHeaders = mpdFile.ChunkHeader;
+            var chunkHeaders = mpdFile.ChunkLocations;
 
             return inputScenario.ToString().PadLeft(11) + ": " + Path.GetFileName(filename).PadLeft(12)
                 //+ " | " + mapFlags.ToString("X4") + ", " + BitString(mapFlags)

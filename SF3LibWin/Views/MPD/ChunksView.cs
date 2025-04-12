@@ -18,7 +18,7 @@ namespace SF3.Win.Views.MPD {
 
             var ngc = Model.NameGetterContext;
 
-            CreateChild(new TableView("Header", Model.ChunkHeader, ngc));
+            CreateChild(new TableView("Header (Locations)", Model.ChunkLocations, ngc));
 
             // Build views for all chunks.
             var chunkViews = new Dictionary<int, IView>();
@@ -53,7 +53,7 @@ namespace SF3.Win.Views.MPD {
                 if (chunk == null || chunkViews.ContainsKey(chunk.Index))
                     continue;
 
-                var header = Model.ChunkHeader[chunk.Index];
+                var header = Model.ChunkLocations[chunk.Index];
                 var name = header.ChunkType.ToString();
 
                 switch (header.ChunkType) {

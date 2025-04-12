@@ -146,7 +146,7 @@ namespace SF3.Tests.Compression {
                 _ = mpdFile.Recompress(onlyModified: true);
 
                 var pos = 0x292100;
-                foreach (var ch in mpdFile.ChunkHeader) {
+                foreach (var ch in mpdFile.ChunkLocations) {
                     if (ch.ChunkRAMAddress != 0)
                         Assert.AreEqual(pos, ch.ChunkRAMAddress, "Chunk[" + ch.ID + "] is off");
                     pos += ch.ChunkSize;
@@ -165,7 +165,7 @@ namespace SF3.Tests.Compression {
         [TestMethod]
         public void RebuildChunkTable_WithUncompressedChunkMovedToEnd_ChunkTableIsAccurate() {
             RunOnAllTestCases((testCase, mpdFile) => {
-                var firstUncompressedChunk = mpdFile.ChunkHeader.FirstOrDefault(x => x.Exists && x.CompressionType != CompressionType.Compressed);
+                var firstUncompressedChunk = mpdFile.ChunkLocations.FirstOrDefault(x => x.Exists && x.CompressionType != CompressionType.Compressed);
                 if (firstUncompressedChunk == null)
                     return;
 
@@ -181,7 +181,7 @@ namespace SF3.Tests.Compression {
                 mpdFile = MPD_File.Create(new SF3.ByteData.ByteData(new ByteArray(mpdFile.Data.GetDataCopy())), nameGetters);
 
                 // Act
-                var orderedChunkHeadersOrig = mpdFile.ChunkHeader
+                var orderedChunkLocationsOrig = mpdFile.ChunkLocations
                     .Where(x => x.ChunkRAMAddress != 0)
                     .OrderBy(x => x.ChunkRAMAddress)
                     .ToArray();
@@ -189,14 +189,14 @@ namespace SF3.Tests.Compression {
                 mpdFile.RebuildChunkTable(onlyModified: true);
 
                 var pos = 0x2100;
-                var orderedChunkHeaders = mpdFile.ChunkHeader
+                var orderedChunkLocations = mpdFile.ChunkLocations
                     .Where(x => x.ChunkRAMAddress != 0)
                     .OrderBy(x => x.ChunkRAMAddress)
                     .ThenBy(x => x.ChunkSize)
                     .ThenBy(x => x.ID)
                     .ToArray();
 
-                foreach (var ch in orderedChunkHeaders) {
+                foreach (var ch in orderedChunkLocations) {
                     if (ch.ChunkRAMAddress != 0)
                         Assert.AreEqual(pos, ch.ChunkFileAddress, "Chunk[" + ch.ID + "] is off");
                     pos += ch.ChunkSize;

@@ -90,7 +90,7 @@ namespace MPD_Analyzer {
                     try {
                         using (var mpdFile = MPD_File.Create(byteData, nameGetterContexts)) {
                             var header = mpdFile.MPDHeader;
-                            var chunkHeaders = mpdFile.ChunkHeader;
+                            var chunkHeaders = mpdFile.ChunkLocations;
                             var mapFlags = mpdFile.MPDHeader.MapFlags;
 
                             // Condition for match checks here
@@ -230,7 +230,7 @@ namespace MPD_Analyzer {
             return str;
         }
 
-        private static string ChunkString(ChunkHeader[] chunkHeaders) {
+        private static string ChunkString(ChunkLocation[] chunkHeaders) {
             var chunkString = "";
             for (var i = 0; i < chunkHeaders.Length; i++) {
                 if (chunkHeaders[i].Address == 0)
@@ -252,14 +252,14 @@ namespace MPD_Analyzer {
 
         private static string GetFileString(ScenarioType inputScenario, string filename, IMPD_File mpdFile) {
             var mapFlags = mpdFile.MPDHeader.MapFlags;
-            var chunkHeaders = mpdFile.ChunkHeader;
+            var chunkLocations = mpdFile.ChunkLocations;
 
             var hmm1  = HasHighMemoryModels(mpdFile.ModelCollections.FirstOrDefault(x => x.ChunkIndex == 1));
             var hmm20 = HasHighMemoryModels(mpdFile.ModelCollections.FirstOrDefault(x => x.ChunkIndex == 20));
 
             return inputScenario.ToString().PadLeft(11) + ": " + Path.GetFileName(filename).PadLeft(12)
                 + " | " + mapFlags.ToString("X4") + ", " + BitString(mapFlags)
-                + " | " + ChunkString(chunkHeaders.Rows)
+                + " | " + ChunkString(chunkLocations.Rows)
                 + " | " + (hmm1  == true ? "High, " : hmm1  == false ? "Low,  " : "N/A,  ")
                 + (hmm20 == true ? "High" : hmm20 == false ? "Low " : "N/A ");
         }
@@ -308,7 +308,7 @@ namespace MPD_Analyzer {
         }
 
         private static string[] ScanForChunkHeaderErrors(IMPD_File mpdFile) {
-            var chunkHeaders = mpdFile.ChunkHeader;
+            var chunkHeaders = mpdFile.ChunkLocations;
             var errors = new List<string>();
 
             // Chunk[0] and Chunk[4] should always be empty.
@@ -384,7 +384,7 @@ namespace MPD_Analyzer {
 
         private static string[] ScanForSurfaceModelErrors(IMPD_File mpdFile) {
             var header = mpdFile.MPDHeader;
-            var chunkHeaders = mpdFile.ChunkHeader;
+            var chunkHeaders = mpdFile.ChunkLocations;
             var errors = new List<string>();
 
             var expectedIndex = (header.Chunk20IsSurfaceModelIfExists && chunkHeaders[20].Exists) ? 20 : 2;
@@ -452,7 +452,7 @@ namespace MPD_Analyzer {
 
         private static string[] ScanForImageChunkErrors(IMPD_File mpdFile) {
             var header = mpdFile.MPDHeader;
-            var chunkHeaders = mpdFile.ChunkHeader;
+            var chunkHeaders = mpdFile.ChunkLocations;
             var errors = new List<string>();
 
             var chunkUses = new Dictionary<int, List<string>>() {

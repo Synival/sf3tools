@@ -7,7 +7,7 @@ using SF3.Win.Types;
 
 namespace SF3.Win.Forms {
     public partial class ManipulateChunkDialog : Form {
-        public ManipulateChunkDialog(ManipulateChunkDialogType type, ChunkHeader[] chunks, string fileNamePrefix) {
+        public ManipulateChunkDialog(ManipulateChunkDialogType type, ChunkLocation[] chunks, string fileNamePrefix) {
             Type           = type;
             Chunks         = chunks;
             FileNamePrefix = fileNamePrefix;
@@ -136,11 +136,11 @@ namespace SF3.Win.Forms {
             => Close();
 
         public ManipulateChunkDialogType Type { get; }
-        public ChunkHeader[] Chunks { get; }
+        public ChunkLocation[] Chunks { get; }
         public string FileNamePrefix { get; }
 
         public bool Uncompressed => rbUncompressed.Checked;
-        public ChunkHeader SelectedChunk { get; private set; } = null;
+        public ChunkLocation SelectedChunk { get; private set; } = null;
         public string FileName { get; private set; } = null;
     }
 }

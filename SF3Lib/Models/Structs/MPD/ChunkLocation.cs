@@ -3,13 +3,13 @@ using SF3.ByteData;
 using SF3.Types;
 
 namespace SF3.Models.Structs.MPD {
-    public class ChunkHeader : Struct {
+    public class ChunkLocation : Struct {
         private const int c_mpdRAMLocation = 0x290000;
 
         private readonly int _chunkAddressAddr;
         private readonly int _chunkSizeAddr;
 
-        public ChunkHeader(IByteData data, int id, string name, int address)
+        public ChunkLocation(IByteData data, int id, string name, int address)
         : base(data, id, name, address, 8) {
             _chunkAddressAddr = Address;     // 4 bytes
             _chunkSizeAddr    = Address + 4; // 4 bytes

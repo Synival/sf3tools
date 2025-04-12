@@ -555,7 +555,7 @@ namespace SF3Editor {
         /// <param name="filenameWithoutExtension">The name of the MPD file that it is normally saved to, without the .MPD extension.</param>
         /// <returns>'true' if an export was successful, otherwise 'false'.</returns>
         public bool ExportMPDChunkDialog(IMPD_File mpdFile, string filenameWithoutExtension) {
-            var dialog = new ManipulateChunkDialog(ManipulateChunkDialogType.ExportChunk, mpdFile.ChunkHeader.Rows, filenameWithoutExtension);
+            var dialog = new ManipulateChunkDialog(ManipulateChunkDialogType.ExportChunk, mpdFile.ChunkLocations.Rows, filenameWithoutExtension);
             if (dialog.ShowDialog() != DialogResult.OK)
                 return false;
 
@@ -580,7 +580,7 @@ namespace SF3Editor {
         /// <param name="filenameWithoutExtension">The name of the MPD file that it is normally saved to, without the .MPD extension.</param>
         /// <returns>'true' if an import was successful, otherwise 'false'.</returns>
         public bool ImportMPDChunkDialog(IMPD_File mpdFile, string filenameWithoutExtension) {
-            var dialog = new ManipulateChunkDialog(ManipulateChunkDialogType.ImportChunk, mpdFile.ChunkHeader.Rows, filenameWithoutExtension);
+            var dialog = new ManipulateChunkDialog(ManipulateChunkDialogType.ImportChunk, mpdFile.ChunkLocations.Rows, filenameWithoutExtension);
             if (dialog.ShowDialog() != DialogResult.OK)
                 return false;
 
@@ -622,7 +622,7 @@ namespace SF3Editor {
         /// <param name="filenameWithoutExtension">The name of the MPD file that it is normally saved to, without the .MPD extension.</param>
         /// <returns>'true' if a deletion was successful, otherwise 'false'.</returns>
         public bool DeleteMPDChunkDialog(IMPD_File mpdFile, string fileNameWithoutExtension) {
-            var dialog = new ManipulateChunkDialog(ManipulateChunkDialogType.DeleteChunk, mpdFile.ChunkHeader.Rows, fileNameWithoutExtension);
+            var dialog = new ManipulateChunkDialog(ManipulateChunkDialogType.DeleteChunk, mpdFile.ChunkLocations.Rows, fileNameWithoutExtension);
             if (dialog.ShowDialog() != DialogResult.OK)
                 return false;
 

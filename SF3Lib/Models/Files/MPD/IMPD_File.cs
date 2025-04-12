@@ -88,7 +88,7 @@ namespace SF3.Models.Files.MPD {
         IChunkData SurfaceChunkData { get; }
 
         MPDHeaderModel MPDHeader { get; }
-        ChunkHeaderTable ChunkHeader { get; }
+        ChunkLocationTable ChunkLocations { get; }
         ColorTable LightPalette { get; }
         LightPosition LightPosition { get; }
         UnknownUInt16Table Unknown1Table { get; }

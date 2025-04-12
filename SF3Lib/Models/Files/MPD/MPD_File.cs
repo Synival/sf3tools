@@ -108,7 +108,7 @@ namespace SF3.Models.Files.MPD {
 
             // Build a list of all data tables.
             var tables = new List<ITable>() {
-                ChunkHeader,
+                ChunkLocations,
             };
             tables.AddRange(headerTables);
             tables.AddRange(chunkTables);
@@ -136,8 +136,8 @@ namespace SF3.Models.Files.MPD {
             return tables.ToArray();
         }
 
-        private ChunkHeaderTable MakeChunkHeaderTable()
-            => ChunkHeader = ChunkHeaderTable.Create(Data, "ChunkHeader", 0x2000);
+        private ChunkLocationTable MakeChunkHeaderTable()
+            => ChunkLocations = ChunkLocationTable.Create(Data, "ChunkHeader", 0x2000);
 
         private ITable[] MakeTexturePaletteTables(MPDHeaderModel header) {
             PaletteTables = new ColorTable[3];
@@ -286,7 +286,7 @@ namespace SF3.Models.Files.MPD {
             return tables.ToArray();
         }
 
-        private IChunkData[] MakeChunkDatas(ChunkHeader[] chunks) {
+        private IChunkData[] MakeChunkDatas(ChunkLocation[] chunks) {
             ChunkData = new IChunkData[chunks.Length];
 
             // Surface model chunk
@@ -399,55 +399,55 @@ namespace SF3.Models.Files.MPD {
             ChunkData chunkData = null;
 
             try {
-                byteArraySegment = new ByteArraySegment(Data.Data, ChunkHeader[chunkIndex].ChunkRAMAddress - c_RamOffset, ChunkHeader[chunkIndex].ChunkSize);
+                byteArraySegment = new ByteArraySegment(Data.Data, ChunkLocations[chunkIndex].ChunkRAMAddress - c_RamOffset, ChunkLocations[chunkIndex].ChunkSize);
                 chunkData = new ChunkData(byteArraySegment, isCompressed, chunkIndex);
             }
             catch {
                 // TODO: what to do???
                 return null;
             }
-            var chunkHeader = ChunkHeader[chunkIndex];
+            var chunkLocations = ChunkLocations[chunkIndex];
 
-            chunkHeader.DecompressedSize = chunkData.DecompressedData.Length;
+            chunkLocations.DecompressedSize = chunkData.DecompressedData.Length;
             chunkData.DecompressedData.Data.RangeModified += (s, a) => {
                 if (a.Resized)
-                    chunkHeader.DecompressedSize = chunkData.DecompressedData.Length;
+                    chunkLocations.DecompressedSize = chunkData.DecompressedData.Length;
             };
 
             chunkData.Data.RangeModified += (s, a) => {
-                var chunkName = chunkHeader.Name;
+                var chunkName = chunkLocations.Name;
                 if (a.Moved) {
                     // Figure out how much the offset has changed.
-                    var oldOffset = chunkHeader.ChunkRAMAddress - c_RamOffset;
+                    var oldOffset = chunkLocations.ChunkRAMAddress - c_RamOffset;
                     var newOffset = byteArraySegment.Offset;
                     var offsetDelta = newOffset - oldOffset;
                     if (offsetDelta == 0)
                         return;
 
                     // Update the address in the chunk table.
-                    chunkHeader.ChunkRAMAddress = newOffset + c_RamOffset;
+                    chunkLocations.ChunkRAMAddress = newOffset + c_RamOffset;
 
                     // Chunks after this one with something assigned to ChunkData[] will have their
                     // ChunkAddress updated automatically. For chunks without a ChunkData[] after this one
                     // (but before the next ChunkData), update addresses manually.
-                    for (var j = chunkIndex + 1; j < ChunkHeader.Length; j++) {
+                    for (var j = chunkIndex + 1; j < ChunkLocations.Length; j++) {
                         if (ChunkData[j] != null)
                             break;
 
-                        var ch = ChunkHeader[j];
+                        var ch = ChunkLocations[j];
                         if (ch != null && ch.ChunkRAMAddress != 0)
                             ch.ChunkRAMAddress += offsetDelta;
                     }
                 }
                 if (a.Resized)
-                    chunkHeader.ChunkSize = chunkData.Data.Length;
+                    chunkLocations.ChunkSize = chunkData.Data.Length;
             };
 
             // Add some integrity checks after recompression.
             chunkData.Recompressed += (s, e) => {
                 var errors = new List<string>();
-                for (var i = 0; i < ChunkHeader.Length; i++) {
-                    var ch = ChunkHeader[i];
+                for (var i = 0; i < ChunkLocations.Length; i++) {
+                    var ch = ChunkLocations[i];
                     var cd = ChunkData[i];
                     if (ch.ChunkRAMAddress == 0 || cd == null)
                         continue;
@@ -472,14 +472,14 @@ namespace SF3.Models.Files.MPD {
                 }
             };
 
-            chunkHeader.ChunkType = type;
-            chunkHeader.CompressionType = compressionType;
+            chunkLocations.ChunkType = type;
+            chunkLocations.CompressionType = compressionType;
 
             ChunkData[chunkIndex] = chunkData;
             return chunkData;
         }
 
-        private int[] GetModelsChunkIndices(ChunkHeader[] chunks) {
+        private int[] GetModelsChunkIndices(ChunkLocation[] chunks) {
             var header = MPDHeader;
             var indices = new List<int>();
 
@@ -496,7 +496,7 @@ namespace SF3.Models.Files.MPD {
             return indices.ToArray();
         }
 
-        private int? GetSurfaceModelChunkIndex(ChunkHeader[] chunks) {
+        private int? GetSurfaceModelChunkIndex(ChunkLocation[] chunks) {
             var header = MPDHeader;
 
             if (!header.HasSurfaceModel)
@@ -509,7 +509,7 @@ namespace SF3.Models.Files.MPD {
             return chunkIndex.Value;
         }
 
-        private ITable[] MakeChunkTables(ChunkHeader[] chunkHeaders, IChunkData[] chunkDatas, IChunkData[] modelsChunks, IChunkData surfaceModelChunk) {
+        private ITable[] MakeChunkTables(ChunkLocation[] chunkHeaders, IChunkData[] chunkDatas, IChunkData[] modelsChunks, IChunkData surfaceModelChunk) {
             TextureCollectionType TextureCollectionForChunkIndex(int chunkIndex) {
                 if (chunkIndex == 10 && MPDHeader.HasChunk19Model)
                     return TextureCollectionType.Chunk19ModelTextures;
@@ -605,7 +605,7 @@ namespace SF3.Models.Files.MPD {
             var palettes = CreatePalettesForTextures();
 
             var texColList = new List<TextureCollection>();
-            var texChunks = ChunkHeader.Where(x => x.Exists && x.ChunkType == ChunkType.Textures).Select(x => chunkDatas[x.ID]).ToList();
+            var texChunks = ChunkLocations.Where(x => x.Exists && x.ChunkType == ChunkType.Textures).Select(x => chunkDatas[x.ID]).ToList();
 
             int nextModelCollectionStartId = 0x102;
             int index = 0;
@@ -892,8 +892,8 @@ namespace SF3.Models.Files.MPD {
 
         public void RebuildChunkTable(bool onlyModified) {
             // Gets all the chunks in order of their address, followed by the order in which they'll be updated.
-            ChunkHeader[] GetSortedChunks() {
-                return ChunkHeader
+            ChunkLocation[] GetSortedChunks() {
+                return ChunkLocations
                     .Where(x => x.ChunkRAMAddress != 0)
                     .OrderBy(x => x.ChunkRAMAddress)
                     .ThenBy(x => x.ChunkSize)
@@ -941,7 +941,7 @@ namespace SF3.Models.Files.MPD {
                             throw new InvalidOperationException("Huh? We shouldn't be trying to fix chunks here!");
                         for (int i = 0; i < firstChunkDataIndex; i++)
                             if (i != chunk.ID)
-                                ChunkHeader[i].ChunkRAMAddress = chunk.Address;
+                                ChunkLocations[i].ChunkRAMAddress = chunk.Address;
                     }
                 }
 
@@ -1269,7 +1269,7 @@ namespace SF3.Models.Files.MPD {
         public MPDHeaderModel MPDHeader { get; private set; }
 
         [BulkCopyRecurse]
-        public ChunkHeaderTable ChunkHeader { get; private set; }
+        public ChunkLocationTable ChunkLocations { get; private set; }
 
         [BulkCopyRecurse]
         public ColorTable LightPalette { get; private set; }
