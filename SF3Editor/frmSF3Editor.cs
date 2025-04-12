@@ -638,33 +638,6 @@ namespace SF3Editor {
             return true;
         }
 
-        private void tsmiFile_Open_Click(object sender, EventArgs e) => OpenFileDialog();
-
-        private void tsmiFile_Save_Click(object sender, EventArgs e) {
-            if (_selectedFile != null)
-                _ = SaveFile(_selectedFile);
-        }
-
-        private void tsmiFile_SaveAs_Click(object sender, EventArgs e) {
-            if (_selectedFile != null)
-                _ = SaveFileAsDialog(_selectedFile);
-        }
-
-        private void tsmiFile_Close_Click(object sender, EventArgs e) {
-            if (_selectedFile != null)
-                _ = CloseFile(_selectedFile);
-        }
-
-        private void tsmiFile_SwapToPrev_Click(object sender, EventArgs e) {
-            if (_selectedFile != null)
-                _ = SwapToPrevOfSameTypeInFolder(_selectedFile);
-        }
-
-        private void tsmiFile_SwapToNext_Click(object sender, EventArgs e) {
-            if (_selectedFile != null)
-                _ = SwapToNextOfSameTypeInFolder(_selectedFile);
-        }
-
         private LoadedFile? SwapToPrevOfSameTypeInFolder(LoadedFile file) {
             var filesInDir = GetOtherFilesAtDirectoryForOpenFilter(file);
             if (filesInDir.Length <= 1)
@@ -858,6 +831,33 @@ namespace SF3Editor {
                     }
                 }.Start();
             }
+        }
+
+        private void tsmiFile_Open_Click(object sender, EventArgs e) => OpenFileDialog();
+
+        private void tsmiFile_Save_Click(object sender, EventArgs e) {
+            if (_selectedFile != null)
+                _ = SaveFile(_selectedFile);
+        }
+
+        private void tsmiFile_SaveAs_Click(object sender, EventArgs e) {
+            if (_selectedFile != null)
+                _ = SaveFileAsDialog(_selectedFile);
+        }
+
+        private void tsmiFile_Close_Click(object sender, EventArgs e) {
+            if (_selectedFile != null)
+                _ = CloseFile(_selectedFile);
+        }
+
+        private void tsmiFile_SwapToPrev_Click(object sender, EventArgs e) {
+            if (_selectedFile != null)
+                _ = SwapToPrevOfSameTypeInFolder(_selectedFile);
+        }
+
+        private void tsmiFile_SwapToNext_Click(object sender, EventArgs e) {
+            if (_selectedFile != null)
+                _ = SwapToNextOfSameTypeInFolder(_selectedFile);
         }
 
         private void tsmiTools_ApplyDFR_Click(object sender, EventArgs e) {
