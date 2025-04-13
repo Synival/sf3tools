@@ -81,11 +81,22 @@ namespace SF3.ModelLoaders {
                         var words = Filename.Split('\\');
                         ShortFilename = words[Math.Max(0, words.Length - 1)];
                     }
+
+                    UpdateTitle();
                 }
             }
         }
 
-        public string ShortFilename { get; private set; } = null;
+        private string _shortFilename = null;
+        public string ShortFilename {
+            get => _shortFilename;
+            private set {
+                if (_shortFilename != value) {
+                    _shortFilename = value;
+                    UpdateTitle();
+                }
+            }
+        }
 
         public string FileDialogFilter { get; set; } = null;
 
