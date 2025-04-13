@@ -35,11 +35,27 @@ namespace SF3.Win.Controls {
             tsbToggleNormals.Checked     = GLControl.DrawNormals;
 
             tsbRotateSpritesUp.Checked   = GLControl.RotateSpritesUp;
-
             tsbToggleHelp.Checked        = GLControl.DrawHelp;
 
-            // Experimental controls that only apply to a modified FIELD.MPD on the PD (BlankField_V2.MPD).
             var appState = AppState.RetrieveAppState();
+
+            appState.ViewerDrawSurfaceModelChanged   += (s, e) => { tsbDrawSurfaceModel.Checked  = appState.ViewerDrawSurfaceModel; };
+            appState.ViewerDrawModelsChanged         += (s, e) => { tsbDrawModels.Checked        = appState.ViewerDrawModels; };
+            appState.ViewerDrawGroundChanged         += (s, e) => { tsbDrawGround.Checked        = appState.ViewerDrawGround; };
+            appState.ViewerDrawSkyBoxChanged         += (s, e) => { tsbDrawSkyBox.Checked        = appState.ViewerDrawSkyBox; };
+            appState.ViewerRunAnimationsChanged      += (s, e) => { tsbRunAnimations.Checked     = appState.ViewerRunAnimations; };
+            appState.ViewerApplyLightingChanged      += (s, e) => { tsbApplyLighting.Checked     = appState.ViewerApplyLighting; };
+            appState.ViewerDrawGradientsChanged      += (s, e) => { tsbDrawGradients.Checked     = appState.ViewerDrawGradients; };
+            appState.ViewerDrawWireframeChanged      += (s, e) => { tsbToggleWireframe.Checked   = appState.ViewerDrawWireframe; };
+            appState.ViewerDrawBoundariesChanged     += (s, e) => { tsbToggleBoundaries.Checked  = appState.ViewerDrawBoundaries; };
+            appState.ViewerDrawTerrainTypesChanged   += (s, e) => { tsbToggleTerrainType.Checked = appState.ViewerDrawTerrainTypes; };
+            appState.ViewerDrawEventIDsChanged       += (s, e) => { tsbToggleEventID.Checked     = appState.ViewerDrawEventIDs; };
+            appState.ViewerDrawCollisionLinesChanged += (s, e) => { tsbToggleCollisions.Checked  = appState.ViewerDrawCollisionLines; };
+            appState.ViewerDrawNormalsChanged        += (s, e) => { tsbToggleNormals.Checked     = appState.ViewerDrawNormals; };
+            appState.ViewerRotateSpritesUpChanged    += (s, e) => { tsbRotateSpritesUp.Checked   = appState.ViewerRotateSpritesUp; };
+            appState.ViewerDrawHelpChanged           += (s, e) => { tsbToggleHelp.Checked        = appState.ViewerDrawHelp; };
+
+            // Experimental controls that only apply to a modified FIELD.MPD on the PD (BlankField_V2.MPD).
             toolStrip2.Visible = appState.EnableExperimentalBlankFieldV2Brushes;
             appState.EnableExperimentalBlankFieldV2BrushesChanged += (s, e) => {
                 var isEnabled = appState.EnableExperimentalBlankFieldV2Brushes;

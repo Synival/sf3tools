@@ -64,12 +64,6 @@ namespace SF3.Editor.Forms {
                 _appState.Serialize();
             };
 
-            tsmiMPD_EnableBlankFieldV2Controls.Checked = _appState.EnableExperimentalBlankFieldV2Brushes;
-            _appState.EnableExperimentalBlankFieldV2BrushesChanged += (s, e) => {
-                tsmiMPD_EnableBlankFieldV2Controls.Checked = _appState.EnableExperimentalBlankFieldV2Brushes;
-                _appState.Serialize();
-            };
-
             tsmiEdit_EnableDebugSettings.Checked = _appState.EnableDebugSettings;
             Stats.DebugGrowthValues = _appState.EnableDebugSettings;
 
@@ -82,35 +76,39 @@ namespace SF3.Editor.Forms {
             UpdateRecentFilesMenu();
             _appState.RecentFilesChanged += (s, e) => UpdateRecentFilesMenu();
 
-            tsmiMPD_View_DrawSurfaceModel.Checked        = _appState.ViewerDrawSurfaceModel;
-            tsmiMPD_View_DrawModels.Checked              = _appState.ViewerDrawModels;
-            tsmiMPD_View_DrawGround.Checked              = _appState.ViewerDrawGround;
-            tsmiMPD_View_DrawSkyBox.Checked              = _appState.ViewerDrawSkyBox;
-            tsmiMPD_View_RunAnimations.Checked           = _appState.ViewerRunAnimations;
-            tsmiMPD_View_ApplyLighting.Checked           = _appState.ViewerApplyLighting;
-            tsmiMPD_View_DrawGradients.Checked           = _appState.ViewerDrawGradients;
-            tsmiMPD_View_DrawWireframes.Checked          = _appState.ViewerDrawWireframe;
-            tsmiMPD_View_DrawBoundaries.Checked          = _appState.ViewerDrawBoundaries;
-            tsmiMPD_View_DrawTerrainTypes.Checked        = _appState.ViewerDrawTerrainTypes;
-            tsmiMPD_View_DrawEventIDs.Checked            = _appState.ViewerDrawEventIDs;
-            tsmiMPD_View_DrawCollisionLines.Checked      = _appState.ViewerDrawCollisionLines;
-            tsmiMPD_View_DrawNormalMap.Checked           = _appState.ViewerDrawNormals;
-            tsmiMPD_View_RotateSpritesUpToCamera.Checked = _appState.ViewerRotateSpritesUp;
+            tsmiView_MPD_DrawSurfaceModel.Checked        = _appState.ViewerDrawSurfaceModel;
+            tsmiView_MPD_DrawModels.Checked              = _appState.ViewerDrawModels;
+            tsmiView_MPD_DrawGround.Checked              = _appState.ViewerDrawGround;
+            tsmiView_MPD_DrawSkyBox.Checked              = _appState.ViewerDrawSkyBox;
+            tsmiView_MPD_RunAnimations.Checked           = _appState.ViewerRunAnimations;
+            tsmiView_MPD_ApplyLighting.Checked           = _appState.ViewerApplyLighting;
+            tsmiView_MPD_DrawGradients.Checked           = _appState.ViewerDrawGradients;
+            tsmiView_MPD_DrawWireframes.Checked          = _appState.ViewerDrawWireframe;
+            tsmiView_MPD_DrawBoundaries.Checked          = _appState.ViewerDrawBoundaries;
+            tsmiView_MPD_DrawTerrainTypes.Checked        = _appState.ViewerDrawTerrainTypes;
+            tsmiView_MPD_DrawEventIDs.Checked            = _appState.ViewerDrawEventIDs;
+            tsmiView_MPD_DrawCollisionLines.Checked      = _appState.ViewerDrawCollisionLines;
+            tsmiView_MPD_DrawNormalMap.Checked           = _appState.ViewerDrawNormals;
+            tsmiView_MPD_RotateSpritesUpToCamera.Checked = _appState.ViewerRotateSpritesUp;
+            tsmiView_MPD_ShowHelp.Checked                = _appState.ViewerDrawHelp;
+            tsmiView_MPD_EnableBlankFieldV2Controls.Checked = _appState.EnableExperimentalBlankFieldV2Brushes;
 
-            _appState.ViewerDrawSurfaceModelChanged   += (s, e) => { tsmiMPD_View_DrawSurfaceModel.Checked        = _appState.ViewerDrawSurfaceModel;   _appState.Serialize(); };
-            _appState.ViewerDrawModelsChanged         += (s, e) => { tsmiMPD_View_DrawModels.Checked              = _appState.ViewerDrawModels;         _appState.Serialize(); };
-            _appState.ViewerDrawGroundChanged         += (s, e) => { tsmiMPD_View_DrawGround.Checked              = _appState.ViewerDrawGround;         _appState.Serialize(); };
-            _appState.ViewerDrawSkyBoxChanged         += (s, e) => { tsmiMPD_View_DrawSkyBox.Checked              = _appState.ViewerDrawSkyBox;         _appState.Serialize(); };
-            _appState.ViewerRunAnimationsChanged      += (s, e) => { tsmiMPD_View_RunAnimations.Checked           = _appState.ViewerRunAnimations;      _appState.Serialize(); };
-            _appState.ViewerApplyLightingChanged      += (s, e) => { tsmiMPD_View_ApplyLighting.Checked           = _appState.ViewerApplyLighting;      _appState.Serialize(); };
-            _appState.ViewerDrawGradientsChanged      += (s, e) => { tsmiMPD_View_DrawGradients.Checked           = _appState.ViewerDrawGradients;      _appState.Serialize(); };
-            _appState.ViewerDrawWireframeChanged      += (s, e) => { tsmiMPD_View_DrawWireframes.Checked          = _appState.ViewerDrawWireframe;      _appState.Serialize(); };
-            _appState.ViewerDrawBoundariesChanged     += (s, e) => { tsmiMPD_View_DrawBoundaries.Checked          = _appState.ViewerDrawBoundaries;     _appState.Serialize(); };
-            _appState.ViewerDrawTerrainTypesChanged   += (s, e) => { tsmiMPD_View_DrawTerrainTypes.Checked        = _appState.ViewerDrawTerrainTypes;   _appState.Serialize(); };
-            _appState.ViewerDrawEventIDsChanged       += (s, e) => { tsmiMPD_View_DrawEventIDs.Checked            = _appState.ViewerDrawEventIDs;       _appState.Serialize(); };
-            _appState.ViewerDrawCollisionLinesChanged += (s, e) => { tsmiMPD_View_DrawCollisionLines.Checked      = _appState.ViewerDrawCollisionLines; _appState.Serialize(); };
-            _appState.ViewerDrawNormalsChanged        += (s, e) => { tsmiMPD_View_DrawNormalMap.Checked           = _appState.ViewerDrawNormals;        _appState.Serialize(); };
-            _appState.ViewerRotateSpritesUpChanged    += (s, e) => { tsmiMPD_View_RotateSpritesUpToCamera.Checked = _appState.ViewerRotateSpritesUp;    _appState.Serialize(); };
+            _appState.ViewerDrawSurfaceModelChanged   += (s, e) => { tsmiView_MPD_DrawSurfaceModel.Checked        = _appState.ViewerDrawSurfaceModel;   _appState.Serialize(); };
+            _appState.ViewerDrawModelsChanged         += (s, e) => { tsmiView_MPD_DrawModels.Checked              = _appState.ViewerDrawModels;         _appState.Serialize(); };
+            _appState.ViewerDrawGroundChanged         += (s, e) => { tsmiView_MPD_DrawGround.Checked              = _appState.ViewerDrawGround;         _appState.Serialize(); };
+            _appState.ViewerDrawSkyBoxChanged         += (s, e) => { tsmiView_MPD_DrawSkyBox.Checked              = _appState.ViewerDrawSkyBox;         _appState.Serialize(); };
+            _appState.ViewerRunAnimationsChanged      += (s, e) => { tsmiView_MPD_RunAnimations.Checked           = _appState.ViewerRunAnimations;      _appState.Serialize(); };
+            _appState.ViewerApplyLightingChanged      += (s, e) => { tsmiView_MPD_ApplyLighting.Checked           = _appState.ViewerApplyLighting;      _appState.Serialize(); };
+            _appState.ViewerDrawGradientsChanged      += (s, e) => { tsmiView_MPD_DrawGradients.Checked           = _appState.ViewerDrawGradients;      _appState.Serialize(); };
+            _appState.ViewerDrawWireframeChanged      += (s, e) => { tsmiView_MPD_DrawWireframes.Checked          = _appState.ViewerDrawWireframe;      _appState.Serialize(); };
+            _appState.ViewerDrawBoundariesChanged     += (s, e) => { tsmiView_MPD_DrawBoundaries.Checked          = _appState.ViewerDrawBoundaries;     _appState.Serialize(); };
+            _appState.ViewerDrawTerrainTypesChanged   += (s, e) => { tsmiView_MPD_DrawTerrainTypes.Checked        = _appState.ViewerDrawTerrainTypes;   _appState.Serialize(); };
+            _appState.ViewerDrawEventIDsChanged       += (s, e) => { tsmiView_MPD_DrawEventIDs.Checked            = _appState.ViewerDrawEventIDs;       _appState.Serialize(); };
+            _appState.ViewerDrawCollisionLinesChanged += (s, e) => { tsmiView_MPD_DrawCollisionLines.Checked      = _appState.ViewerDrawCollisionLines; _appState.Serialize(); };
+            _appState.ViewerDrawNormalsChanged        += (s, e) => { tsmiView_MPD_DrawNormalMap.Checked           = _appState.ViewerDrawNormals;        _appState.Serialize(); };
+            _appState.ViewerRotateSpritesUpChanged    += (s, e) => { tsmiView_MPD_RotateSpritesUpToCamera.Checked = _appState.ViewerRotateSpritesUp;    _appState.Serialize(); };
+            _appState.ViewerDrawHelpChanged           += (s, e) => { tsmiView_MPD_ShowHelp.Checked                = _appState.ViewerDrawHelp;           _appState.Serialize(); };
+            _appState.EnableExperimentalBlankFieldV2BrushesChanged += (s, e) => { tsmiView_MPD_EnableBlankFieldV2Controls.Checked = _appState.EnableExperimentalBlankFieldV2Brushes; _appState.Serialize(); };
 
             ResumeLayout();
         }

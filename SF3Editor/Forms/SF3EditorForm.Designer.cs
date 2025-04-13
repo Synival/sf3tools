@@ -62,6 +62,25 @@ namespace SF3.Editor.Forms {
             tsmiEdit = new System.Windows.Forms.ToolStripMenuItem();
             tsmiEdit_UseDropdowns = new System.Windows.Forms.ToolStripMenuItem();
             tsmiEdit_EnableDebugSettings = new System.Windows.Forms.ToolStripMenuItem();
+            tsmiView = new System.Windows.Forms.ToolStripMenuItem();
+            tsmiView_MPD = new System.Windows.Forms.ToolStripMenuItem();
+            tsmiView_MPD_DrawSurfaceModel = new System.Windows.Forms.ToolStripMenuItem();
+            tsmiView_MPD_DrawModels = new System.Windows.Forms.ToolStripMenuItem();
+            tsmiView_MPD_DrawGround = new System.Windows.Forms.ToolStripMenuItem();
+            tsmiView_MPD_DrawSkyBox = new System.Windows.Forms.ToolStripMenuItem();
+            tsmiView_MPD_RunAnimations = new System.Windows.Forms.ToolStripMenuItem();
+            tsmiView_MPD_ApplyLighting = new System.Windows.Forms.ToolStripMenuItem();
+            tsmiView_MPD_DrawGradients = new System.Windows.Forms.ToolStripMenuItem();
+            tsmiView_MPD_Sep1 = new System.Windows.Forms.ToolStripSeparator();
+            tsmiView_MPD_DrawWireframes = new System.Windows.Forms.ToolStripMenuItem();
+            tsmiView_MPD_DrawBoundaries = new System.Windows.Forms.ToolStripMenuItem();
+            tsmiView_MPD_DrawTerrainTypes = new System.Windows.Forms.ToolStripMenuItem();
+            tsmiView_MPD_DrawEventIDs = new System.Windows.Forms.ToolStripMenuItem();
+            tsmiView_MPD_DrawCollisionLines = new System.Windows.Forms.ToolStripMenuItem();
+            tsmiView_MPD_DrawNormalMap = new System.Windows.Forms.ToolStripMenuItem();
+            tsmiView_MPD_RotateSpritesUpToCamera = new System.Windows.Forms.ToolStripMenuItem();
+            tsmiView_MPD_Sep2 = new System.Windows.Forms.ToolStripSeparator();
+            tsmiView_MPD_EnableBlankFieldV2Controls = new System.Windows.Forms.ToolStripMenuItem();
             tsmi_Tools = new System.Windows.Forms.ToolStripMenuItem();
             tsmiTools_ImportTable = new System.Windows.Forms.ToolStripMenuItem();
             tsmiTools_ExportTable = new System.Windows.Forms.ToolStripMenuItem();
@@ -69,23 +88,6 @@ namespace SF3.Editor.Forms {
             tsmiTools_ApplyDFR = new System.Windows.Forms.ToolStripMenuItem();
             tsmiTools_CreateDFR = new System.Windows.Forms.ToolStripMenuItem();
             tsmiMPD = new System.Windows.Forms.ToolStripMenuItem();
-            tsmiMPD_View = new System.Windows.Forms.ToolStripMenuItem();
-            tsmiMPD_View_DrawSurfaceModel = new System.Windows.Forms.ToolStripMenuItem();
-            tsmiMPD_View_DrawModels = new System.Windows.Forms.ToolStripMenuItem();
-            tsmiMPD_View_DrawGround = new System.Windows.Forms.ToolStripMenuItem();
-            tsmiMPD_View_DrawSkyBox = new System.Windows.Forms.ToolStripMenuItem();
-            tsmiMPD_View_RunAnimations = new System.Windows.Forms.ToolStripMenuItem();
-            tsmiMPD_View_ApplyLighting = new System.Windows.Forms.ToolStripMenuItem();
-            tsmiMPD_View_DrawGradients = new System.Windows.Forms.ToolStripMenuItem();
-            tsmiMPD_View_Sep1 = new System.Windows.Forms.ToolStripSeparator();
-            tsmiMPD_View_DrawWireframes = new System.Windows.Forms.ToolStripMenuItem();
-            tsmiMPD_View_DrawBoundaries = new System.Windows.Forms.ToolStripMenuItem();
-            tsmiMPD_View_DrawTerrainTypes = new System.Windows.Forms.ToolStripMenuItem();
-            tsmiMPD_View_DrawEventIDs = new System.Windows.Forms.ToolStripMenuItem();
-            tsmiMPD_View_DrawCollisionLines = new System.Windows.Forms.ToolStripMenuItem();
-            tsmiMPD_View_DrawNormalMap = new System.Windows.Forms.ToolStripMenuItem();
-            tsmiMPD_View_RotateSpritesUpToCamera = new System.Windows.Forms.ToolStripMenuItem();
-            tsmiMPD_Sep1 = new System.Windows.Forms.ToolStripSeparator();
             tsmiMPD_Chunks = new System.Windows.Forms.ToolStripMenuItem();
             tsmiMPD_Chunks_ImportChunk = new System.Windows.Forms.ToolStripMenuItem();
             tsmiMPD_Chunks_ExportChunk = new System.Windows.Forms.ToolStripMenuItem();
@@ -98,16 +100,16 @@ namespace SF3.Editor.Forms {
             tsmiMPD_Textures = new System.Windows.Forms.ToolStripMenuItem();
             tsmiMPD_Textures_ImportAll = new System.Windows.Forms.ToolStripMenuItem();
             tsmiMPD_Textures_ExportAll = new System.Windows.Forms.ToolStripMenuItem();
-            tsmiMPD_Sep2 = new System.Windows.Forms.ToolStripSeparator();
-            tsmiMPD_EnableBlankFieldV2Controls = new System.Windows.Forms.ToolStripMenuItem();
             tsmiHelp = new System.Windows.Forms.ToolStripMenuItem();
             tsmiHelp_About = new System.Windows.Forms.ToolStripMenuItem();
+            tsmiView_MPD_ShowHelp = new System.Windows.Forms.ToolStripMenuItem();
+            tsmiView_MPD_Sep3 = new System.Windows.Forms.ToolStripSeparator();
             menuStrip1.SuspendLayout();
             SuspendLayout();
             // 
             // menuStrip1
             // 
-            menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { tsmiFile, tsmiEdit, tsmi_Tools, tsmiMPD, tsmiHelp });
+            menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { tsmiFile, tsmiEdit, tsmiView, tsmi_Tools, tsmiMPD, tsmiHelp });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
             menuStrip1.Size = new Size(891, 24);
@@ -372,6 +374,135 @@ namespace SF3.Editor.Forms {
             tsmiEdit_EnableDebugSettings.Text = "Enable Debu&g Settings";
             tsmiEdit_EnableDebugSettings.Click += tsmiEdit_EnableDebugSettings_Click;
             // 
+            // tsmiView
+            // 
+            tsmiView.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { tsmiView_MPD });
+            tsmiView.Name = "tsmiView";
+            tsmiView.Size = new Size(44, 20);
+            tsmiView.Text = "&View";
+            // 
+            // tsmiView_MPD
+            // 
+            tsmiView_MPD.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { tsmiView_MPD_DrawSurfaceModel, tsmiView_MPD_DrawModels, tsmiView_MPD_DrawGround, tsmiView_MPD_DrawSkyBox, tsmiView_MPD_RunAnimations, tsmiView_MPD_ApplyLighting, tsmiView_MPD_DrawGradients, tsmiView_MPD_Sep1, tsmiView_MPD_DrawWireframes, tsmiView_MPD_DrawBoundaries, tsmiView_MPD_DrawTerrainTypes, tsmiView_MPD_DrawEventIDs, tsmiView_MPD_DrawCollisionLines, tsmiView_MPD_DrawNormalMap, tsmiView_MPD_RotateSpritesUpToCamera, tsmiView_MPD_Sep2, tsmiView_MPD_ShowHelp, tsmiView_MPD_Sep3, tsmiView_MPD_EnableBlankFieldV2Controls });
+            tsmiView_MPD.Name = "tsmiView_MPD";
+            tsmiView_MPD.Size = new Size(180, 22);
+            tsmiView_MPD.Text = "&MPD";
+            // 
+            // tsmiView_MPD_DrawSurfaceModel
+            // 
+            tsmiView_MPD_DrawSurfaceModel.Name = "tsmiView_MPD_DrawSurfaceModel";
+            tsmiView_MPD_DrawSurfaceModel.Size = new Size(384, 22);
+            tsmiView_MPD_DrawSurfaceModel.Text = "Draw Surface Model";
+            tsmiView_MPD_DrawSurfaceModel.Click += tsmiView_MPD_DrawSurfaceModel_Click;
+            // 
+            // tsmiView_MPD_DrawModels
+            // 
+            tsmiView_MPD_DrawModels.Name = "tsmiView_MPD_DrawModels";
+            tsmiView_MPD_DrawModels.Size = new Size(384, 22);
+            tsmiView_MPD_DrawModels.Text = "Draw Models";
+            tsmiView_MPD_DrawModels.Click += tsmiView_MPD_DrawModels_Click;
+            // 
+            // tsmiView_MPD_DrawGround
+            // 
+            tsmiView_MPD_DrawGround.Name = "tsmiView_MPD_DrawGround";
+            tsmiView_MPD_DrawGround.Size = new Size(384, 22);
+            tsmiView_MPD_DrawGround.Text = "Draw Ground/Water";
+            tsmiView_MPD_DrawGround.Click += tsmiView_MPD_DrawGround_Click;
+            // 
+            // tsmiView_MPD_DrawSkyBox
+            // 
+            tsmiView_MPD_DrawSkyBox.Name = "tsmiView_MPD_DrawSkyBox";
+            tsmiView_MPD_DrawSkyBox.Size = new Size(384, 22);
+            tsmiView_MPD_DrawSkyBox.Text = "Draw Sky Box";
+            tsmiView_MPD_DrawSkyBox.Click += tsmiView_MPD_DrawSkyBox_Click;
+            // 
+            // tsmiView_MPD_RunAnimations
+            // 
+            tsmiView_MPD_RunAnimations.Name = "tsmiView_MPD_RunAnimations";
+            tsmiView_MPD_RunAnimations.Size = new Size(384, 22);
+            tsmiView_MPD_RunAnimations.Text = "Run Animations";
+            tsmiView_MPD_RunAnimations.Click += tsmiView_MPD_RunAnimations_Click;
+            // 
+            // tsmiView_MPD_ApplyLighting
+            // 
+            tsmiView_MPD_ApplyLighting.Name = "tsmiView_MPD_ApplyLighting";
+            tsmiView_MPD_ApplyLighting.Size = new Size(384, 22);
+            tsmiView_MPD_ApplyLighting.Text = "Apply Lighting";
+            tsmiView_MPD_ApplyLighting.Click += tsmiView_MPD_ApplyLighting_Click;
+            // 
+            // tsmiView_MPD_DrawGradients
+            // 
+            tsmiView_MPD_DrawGradients.Name = "tsmiView_MPD_DrawGradients";
+            tsmiView_MPD_DrawGradients.Size = new Size(384, 22);
+            tsmiView_MPD_DrawGradients.Text = "Draw Gradients";
+            tsmiView_MPD_DrawGradients.Click += tsmiView_MPD_DrawGradients_Click;
+            // 
+            // tsmiView_MPD_Sep1
+            // 
+            tsmiView_MPD_Sep1.Name = "tsmiView_MPD_Sep1";
+            tsmiView_MPD_Sep1.Size = new Size(381, 6);
+            // 
+            // tsmiView_MPD_DrawWireframes
+            // 
+            tsmiView_MPD_DrawWireframes.Name = "tsmiView_MPD_DrawWireframes";
+            tsmiView_MPD_DrawWireframes.Size = new Size(384, 22);
+            tsmiView_MPD_DrawWireframes.Text = "Draw Wireframes";
+            tsmiView_MPD_DrawWireframes.Click += tsmiView_MPD_DrawWireframes_Click;
+            // 
+            // tsmiView_MPD_DrawBoundaries
+            // 
+            tsmiView_MPD_DrawBoundaries.Name = "tsmiView_MPD_DrawBoundaries";
+            tsmiView_MPD_DrawBoundaries.Size = new Size(384, 22);
+            tsmiView_MPD_DrawBoundaries.Text = "Draw Boundaries";
+            tsmiView_MPD_DrawBoundaries.Click += tsmiView_MPD_DrawBoundaries_Click;
+            // 
+            // tsmiView_MPD_DrawTerrainTypes
+            // 
+            tsmiView_MPD_DrawTerrainTypes.Name = "tsmiView_MPD_DrawTerrainTypes";
+            tsmiView_MPD_DrawTerrainTypes.Size = new Size(384, 22);
+            tsmiView_MPD_DrawTerrainTypes.Text = "Draw Terrain Types";
+            tsmiView_MPD_DrawTerrainTypes.Click += tsmiView_MPD_DrawTerrainTypes_Click;
+            // 
+            // tsmiView_MPD_DrawEventIDs
+            // 
+            tsmiView_MPD_DrawEventIDs.Name = "tsmiView_MPD_DrawEventIDs";
+            tsmiView_MPD_DrawEventIDs.Size = new Size(384, 22);
+            tsmiView_MPD_DrawEventIDs.Text = "Draw Event IDs";
+            tsmiView_MPD_DrawEventIDs.Click += tsmiView_MPD_DrawEventIDs_Click;
+            // 
+            // tsmiView_MPD_DrawCollisionLines
+            // 
+            tsmiView_MPD_DrawCollisionLines.Name = "tsmiView_MPD_DrawCollisionLines";
+            tsmiView_MPD_DrawCollisionLines.Size = new Size(384, 22);
+            tsmiView_MPD_DrawCollisionLines.Text = "Draw Collision Lines";
+            tsmiView_MPD_DrawCollisionLines.Click += tsmiView_MPD_DrawCollisionLines_Click;
+            // 
+            // tsmiView_MPD_DrawNormalMap
+            // 
+            tsmiView_MPD_DrawNormalMap.Name = "tsmiView_MPD_DrawNormalMap";
+            tsmiView_MPD_DrawNormalMap.Size = new Size(384, 22);
+            tsmiView_MPD_DrawNormalMap.Text = "Draw Normal Map";
+            tsmiView_MPD_DrawNormalMap.Click += tsmiView_MPD_DrawNormalMap_Click;
+            // 
+            // tsmiView_MPD_RotateSpritesUpToCamera
+            // 
+            tsmiView_MPD_RotateSpritesUpToCamera.Name = "tsmiView_MPD_RotateSpritesUpToCamera";
+            tsmiView_MPD_RotateSpritesUpToCamera.Size = new Size(384, 22);
+            tsmiView_MPD_RotateSpritesUpToCamera.Text = "Rotate Sprites Up to Camera";
+            tsmiView_MPD_RotateSpritesUpToCamera.Click += tsmiView_MPD_RotateSpritesUpToCamera_Click;
+            // 
+            // tsmiView_MPD_Sep2
+            // 
+            tsmiView_MPD_Sep2.Name = "tsmiView_MPD_Sep2";
+            tsmiView_MPD_Sep2.Size = new Size(381, 6);
+            // 
+            // tsmiView_MPD_EnableBlankFieldV2Controls
+            // 
+            tsmiView_MPD_EnableBlankFieldV2Controls.Name = "tsmiView_MPD_EnableBlankFieldV2Controls";
+            tsmiView_MPD_EnableBlankFieldV2Controls.Size = new Size(384, 22);
+            tsmiView_MPD_EnableBlankFieldV2Controls.Text = "E&XPERIMENTAL: Enable tile controls for BlankField_V2.MPD";
+            tsmiView_MPD_EnableBlankFieldV2Controls.Click += tsmiView_MPD_EnableBlankFieldV2Controls_Click;
+            // 
             // tsmi_Tools
             // 
             tsmi_Tools.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { tsmiTools_ImportTable, tsmiTools_ExportTable, tsmiTools_Sep1, tsmiTools_ApplyDFR, tsmiTools_CreateDFR });
@@ -383,7 +514,7 @@ namespace SF3.Editor.Forms {
             // 
             tsmiTools_ImportTable.Enabled = false;
             tsmiTools_ImportTable.Name = "tsmiTools_ImportTable";
-            tsmiTools_ImportTable.Size = new Size(180, 22);
+            tsmiTools_ImportTable.Size = new Size(178, 22);
             tsmiTools_ImportTable.Text = "Copy Tables &From...";
             tsmiTools_ImportTable.Click += tsmiTools_ImportTable_Click;
             // 
@@ -391,20 +522,20 @@ namespace SF3.Editor.Forms {
             // 
             tsmiTools_ExportTable.Enabled = false;
             tsmiTools_ExportTable.Name = "tsmiTools_ExportTable";
-            tsmiTools_ExportTable.Size = new Size(180, 22);
+            tsmiTools_ExportTable.Size = new Size(178, 22);
             tsmiTools_ExportTable.Text = "Copy Tables &To...";
             tsmiTools_ExportTable.Click += tsmiTools_ExportTable_Click;
             // 
             // tsmiTools_Sep1
             // 
             tsmiTools_Sep1.Name = "tsmiTools_Sep1";
-            tsmiTools_Sep1.Size = new Size(177, 6);
+            tsmiTools_Sep1.Size = new Size(175, 6);
             // 
             // tsmiTools_ApplyDFR
             // 
             tsmiTools_ApplyDFR.Enabled = false;
             tsmiTools_ApplyDFR.Name = "tsmiTools_ApplyDFR";
-            tsmiTools_ApplyDFR.Size = new Size(180, 22);
+            tsmiTools_ApplyDFR.Size = new Size(178, 22);
             tsmiTools_ApplyDFR.Text = "&Apply DFR File...";
             tsmiTools_ApplyDFR.Click += tsmiTools_ApplyDFR_Click;
             // 
@@ -412,139 +543,24 @@ namespace SF3.Editor.Forms {
             // 
             tsmiTools_CreateDFR.Enabled = false;
             tsmiTools_CreateDFR.Name = "tsmiTools_CreateDFR";
-            tsmiTools_CreateDFR.Size = new Size(180, 22);
+            tsmiTools_CreateDFR.Size = new Size(178, 22);
             tsmiTools_CreateDFR.Text = "&Create DFR File...";
             tsmiTools_CreateDFR.Click += tsmiTools_CreateDFR_Click;
             // 
             // tsmiMPD
             // 
-            tsmiMPD.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { tsmiMPD_View, tsmiMPD_Sep1, tsmiMPD_Chunks, tsmiMPD_Textures, tsmiMPD_Sep2, tsmiMPD_EnableBlankFieldV2Controls });
+            tsmiMPD.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { tsmiMPD_Chunks, tsmiMPD_Textures });
             tsmiMPD.Enabled = false;
             tsmiMPD.Name = "tsmiMPD";
             tsmiMPD.Size = new Size(45, 20);
             tsmiMPD.Text = "&MPD";
             tsmiMPD.Visible = false;
             // 
-            // tsmiMPD_View
-            // 
-            tsmiMPD_View.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { tsmiMPD_View_DrawSurfaceModel, tsmiMPD_View_DrawModels, tsmiMPD_View_DrawGround, tsmiMPD_View_DrawSkyBox, tsmiMPD_View_RunAnimations, tsmiMPD_View_ApplyLighting, tsmiMPD_View_DrawGradients, tsmiMPD_View_Sep1, tsmiMPD_View_DrawWireframes, tsmiMPD_View_DrawBoundaries, tsmiMPD_View_DrawTerrainTypes, tsmiMPD_View_DrawEventIDs, tsmiMPD_View_DrawCollisionLines, tsmiMPD_View_DrawNormalMap, tsmiMPD_View_RotateSpritesUpToCamera });
-            tsmiMPD_View.Name = "tsmiMPD_View";
-            tsmiMPD_View.Size = new Size(384, 22);
-            tsmiMPD_View.Text = "&View";
-            // 
-            // tsmiMPD_View_DrawSurfaceModel
-            // 
-            tsmiMPD_View_DrawSurfaceModel.Name = "tsmiMPD_View_DrawSurfaceModel";
-            tsmiMPD_View_DrawSurfaceModel.Size = new Size(222, 22);
-            tsmiMPD_View_DrawSurfaceModel.Text = "Draw Surface Model";
-            tsmiMPD_View_DrawSurfaceModel.Click += tsmiMPD_View_DrawSurfaceModel_Click;
-            // 
-            // tsmiMPD_View_DrawModels
-            // 
-            tsmiMPD_View_DrawModels.Name = "tsmiMPD_View_DrawModels";
-            tsmiMPD_View_DrawModels.Size = new Size(222, 22);
-            tsmiMPD_View_DrawModels.Text = "Draw Models";
-            tsmiMPD_View_DrawModels.Click += tsmiMPD_View_DrawModels_Click;
-            // 
-            // tsmiMPD_View_DrawGround
-            // 
-            tsmiMPD_View_DrawGround.Name = "tsmiMPD_View_DrawGround";
-            tsmiMPD_View_DrawGround.Size = new Size(222, 22);
-            tsmiMPD_View_DrawGround.Text = "Draw Ground/Water";
-            tsmiMPD_View_DrawGround.Click += tsmiMPD_View_DrawGround_Click;
-            // 
-            // tsmiMPD_View_DrawSkyBox
-            // 
-            tsmiMPD_View_DrawSkyBox.Name = "tsmiMPD_View_DrawSkyBox";
-            tsmiMPD_View_DrawSkyBox.Size = new Size(222, 22);
-            tsmiMPD_View_DrawSkyBox.Text = "Draw Sky Box";
-            tsmiMPD_View_DrawSkyBox.Click += tsmiMPD_View_DrawSkyBox_Click;
-            // 
-            // tsmiMPD_View_RunAnimations
-            // 
-            tsmiMPD_View_RunAnimations.Name = "tsmiMPD_View_RunAnimations";
-            tsmiMPD_View_RunAnimations.Size = new Size(222, 22);
-            tsmiMPD_View_RunAnimations.Text = "Run Animations";
-            tsmiMPD_View_RunAnimations.Click += tsmiMPD_View_RunAnimations_Click;
-            // 
-            // tsmiMPD_View_ApplyLighting
-            // 
-            tsmiMPD_View_ApplyLighting.Name = "tsmiMPD_View_ApplyLighting";
-            tsmiMPD_View_ApplyLighting.Size = new Size(222, 22);
-            tsmiMPD_View_ApplyLighting.Text = "Apply Lighting";
-            tsmiMPD_View_ApplyLighting.Click += tsmiMPD_View_ApplyLighting_Click;
-            // 
-            // tsmiMPD_View_DrawGradients
-            // 
-            tsmiMPD_View_DrawGradients.Name = "tsmiMPD_View_DrawGradients";
-            tsmiMPD_View_DrawGradients.Size = new Size(222, 22);
-            tsmiMPD_View_DrawGradients.Text = "Draw Gradients";
-            tsmiMPD_View_DrawGradients.Click += tsmiMPD_View_DrawGradients_Click;
-            // 
-            // tsmiMPD_View_Sep1
-            // 
-            tsmiMPD_View_Sep1.Name = "tsmiMPD_View_Sep1";
-            tsmiMPD_View_Sep1.Size = new Size(219, 6);
-            // 
-            // tsmiMPD_View_DrawWireframes
-            // 
-            tsmiMPD_View_DrawWireframes.Name = "tsmiMPD_View_DrawWireframes";
-            tsmiMPD_View_DrawWireframes.Size = new Size(222, 22);
-            tsmiMPD_View_DrawWireframes.Text = "Draw Wireframes";
-            tsmiMPD_View_DrawWireframes.Click += tsmiMPD_View_DrawWireframes_Click;
-            // 
-            // tsmiMPD_View_DrawBoundaries
-            // 
-            tsmiMPD_View_DrawBoundaries.Name = "tsmiMPD_View_DrawBoundaries";
-            tsmiMPD_View_DrawBoundaries.Size = new Size(222, 22);
-            tsmiMPD_View_DrawBoundaries.Text = "Draw Boundaries";
-            tsmiMPD_View_DrawBoundaries.Click += tsmiMPD_View_DrawBoundaries_Click;
-            // 
-            // tsmiMPD_View_DrawTerrainTypes
-            // 
-            tsmiMPD_View_DrawTerrainTypes.Name = "tsmiMPD_View_DrawTerrainTypes";
-            tsmiMPD_View_DrawTerrainTypes.Size = new Size(222, 22);
-            tsmiMPD_View_DrawTerrainTypes.Text = "Draw Terrain Types";
-            tsmiMPD_View_DrawTerrainTypes.Click += tsmiMPD_View_DrawTerrainTypes_Click;
-            // 
-            // tsmiMPD_View_DrawEventIDs
-            // 
-            tsmiMPD_View_DrawEventIDs.Name = "tsmiMPD_View_DrawEventIDs";
-            tsmiMPD_View_DrawEventIDs.Size = new Size(222, 22);
-            tsmiMPD_View_DrawEventIDs.Text = "Draw Event IDs";
-            tsmiMPD_View_DrawEventIDs.Click += tsmiMPD_View_DrawEventIDs_Click;
-            // 
-            // tsmiMPD_View_DrawCollisionLines
-            // 
-            tsmiMPD_View_DrawCollisionLines.Name = "tsmiMPD_View_DrawCollisionLines";
-            tsmiMPD_View_DrawCollisionLines.Size = new Size(222, 22);
-            tsmiMPD_View_DrawCollisionLines.Text = "Draw Collision Lines";
-            tsmiMPD_View_DrawCollisionLines.Click += tsmiMPD_View_DrawCollisionLines_Click;
-            // 
-            // tsmiMPD_View_DrawNormalMap
-            // 
-            tsmiMPD_View_DrawNormalMap.Name = "tsmiMPD_View_DrawNormalMap";
-            tsmiMPD_View_DrawNormalMap.Size = new Size(222, 22);
-            tsmiMPD_View_DrawNormalMap.Text = "Draw Normal Map";
-            tsmiMPD_View_DrawNormalMap.Click += tsmiMPD_View_DrawNormalMap_Click;
-            // 
-            // tsmiMPD_View_RotateSpritesUpToCamera
-            // 
-            tsmiMPD_View_RotateSpritesUpToCamera.Name = "tsmiMPD_View_RotateSpritesUpToCamera";
-            tsmiMPD_View_RotateSpritesUpToCamera.Size = new Size(222, 22);
-            tsmiMPD_View_RotateSpritesUpToCamera.Text = "Rotate Sprites Up to Camera";
-            tsmiMPD_View_RotateSpritesUpToCamera.Click += tsmiMPD_View_RotateSpritesUpToCamera_Click;
-            // 
-            // tsmiMPD_Sep1
-            // 
-            tsmiMPD_Sep1.Name = "tsmiMPD_Sep1";
-            tsmiMPD_Sep1.Size = new Size(381, 6);
-            // 
             // tsmiMPD_Chunks
             // 
             tsmiMPD_Chunks.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { tsmiMPD_Chunks_ImportChunk, tsmiMPD_Chunks_ExportChunk, tsmiMPD_Chunks_DeleteChunk, toolStripSeparator1, tsmiMPD_Chunks_RecompressChunks, tsmiMPD_Chunks_CorrectChunkPlacement, toolStripSeparator2, tsmiMPD_Chunks_MoveChunksAutomatically });
             tsmiMPD_Chunks.Name = "tsmiMPD_Chunks";
-            tsmiMPD_Chunks.Size = new Size(384, 22);
+            tsmiMPD_Chunks.Size = new Size(117, 22);
             tsmiMPD_Chunks.Text = "&Chunks";
             tsmiMPD_Chunks.Visible = false;
             // 
@@ -606,7 +622,7 @@ namespace SF3.Editor.Forms {
             // 
             tsmiMPD_Textures.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { tsmiMPD_Textures_ImportAll, tsmiMPD_Textures_ExportAll });
             tsmiMPD_Textures.Name = "tsmiMPD_Textures";
-            tsmiMPD_Textures.Size = new Size(384, 22);
+            tsmiMPD_Textures.Size = new Size(117, 22);
             tsmiMPD_Textures.Text = "&Textures";
             // 
             // tsmiMPD_Textures_ImportAll
@@ -623,18 +639,6 @@ namespace SF3.Editor.Forms {
             tsmiMPD_Textures_ExportAll.Text = "&Export All...";
             tsmiMPD_Textures_ExportAll.Click += tsmiMPD_Textures_ExportAll_Click;
             // 
-            // tsmiMPD_Sep2
-            // 
-            tsmiMPD_Sep2.Name = "tsmiMPD_Sep2";
-            tsmiMPD_Sep2.Size = new Size(381, 6);
-            // 
-            // tsmiMPD_EnableBlankFieldV2Controls
-            // 
-            tsmiMPD_EnableBlankFieldV2Controls.Name = "tsmiMPD_EnableBlankFieldV2Controls";
-            tsmiMPD_EnableBlankFieldV2Controls.Size = new Size(384, 22);
-            tsmiMPD_EnableBlankFieldV2Controls.Text = "E&XPERIMENTAL: Enable tile controls for BlankField_V2.MPD";
-            tsmiMPD_EnableBlankFieldV2Controls.Click += tsmiMPD_EnableBlankFieldV2Controls_Click;
-            // 
             // tsmiHelp
             // 
             tsmiHelp.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { tsmiHelp_About });
@@ -648,6 +652,18 @@ namespace SF3.Editor.Forms {
             tsmiHelp_About.Size = new Size(116, 22);
             tsmiHelp_About.Text = "&About...";
             tsmiHelp_About.Click += tsmiHelp_About_Click;
+            // 
+            // tsmiView_MPD_ShowHelp
+            // 
+            tsmiView_MPD_ShowHelp.Name = "tsmiView_MPD_ShowHelp";
+            tsmiView_MPD_ShowHelp.Size = new Size(384, 22);
+            tsmiView_MPD_ShowHelp.Text = "Show Help";
+            tsmiView_MPD_ShowHelp.Click += tsmiView_MPD_ShowHelp_Click;
+            // 
+            // tsmiView_MPD_Sep3
+            // 
+            tsmiView_MPD_Sep3.Name = "tsmiView_MPD_Sep3";
+            tsmiView_MPD_Sep3.Size = new Size(381, 6);
             // 
             // SF3EditorForm
             // 
@@ -698,8 +714,6 @@ namespace SF3.Editor.Forms {
         private System.Windows.Forms.ToolStripMenuItem tsmiMPD_Textures;
         private System.Windows.Forms.ToolStripMenuItem tsmiMPD_Textures_ImportAll;
         private System.Windows.Forms.ToolStripMenuItem tsmiMPD_Textures_ExportAll;
-        private System.Windows.Forms.ToolStripSeparator tsmiMPD_Sep1;
-        private System.Windows.Forms.ToolStripMenuItem tsmiMPD_EnableBlankFieldV2Controls;
         private System.Windows.Forms.ToolStripMenuItem tsmiMPD_Chunks;
         private System.Windows.Forms.ToolStripMenuItem tsmiMPD_Chunks_ExportChunk;
         private System.Windows.Forms.ToolStripMenuItem tsmiMPD_Chunks_ImportChunk;
@@ -726,22 +740,26 @@ namespace SF3.Editor.Forms {
         private System.Windows.Forms.ToolStripMenuItem tsmiFile_RecentFiles_9;
         private System.Windows.Forms.ToolStripMenuItem tsmiFile_RecentFiles_10;
         private System.Windows.Forms.ToolStripSeparator tsmiFile_Sep4;
-        private System.Windows.Forms.ToolStripMenuItem tsmiMPD_View;
-        private System.Windows.Forms.ToolStripSeparator tsmiMPD_Sep2;
-        private System.Windows.Forms.ToolStripMenuItem tsmiMPD_View_DrawSurfaceModel;
-        private System.Windows.Forms.ToolStripMenuItem tsmiMPD_View_DrawModels;
-        private System.Windows.Forms.ToolStripMenuItem tsmiMPD_View_DrawGround;
-        private System.Windows.Forms.ToolStripMenuItem tsmiMPD_View_DrawSkyBox;
-        private System.Windows.Forms.ToolStripMenuItem tsmiMPD_View_RunAnimations;
-        private System.Windows.Forms.ToolStripMenuItem tsmiMPD_View_ApplyLighting;
-        private System.Windows.Forms.ToolStripMenuItem tsmiMPD_View_DrawGradients;
-        private System.Windows.Forms.ToolStripSeparator tsmiMPD_View_Sep1;
-        private System.Windows.Forms.ToolStripMenuItem tsmiMPD_View_DrawWireframes;
-        private System.Windows.Forms.ToolStripMenuItem tsmiMPD_View_DrawBoundaries;
-        private System.Windows.Forms.ToolStripMenuItem tsmiMPD_View_DrawTerrainTypes;
-        private System.Windows.Forms.ToolStripMenuItem tsmiMPD_View_DrawEventIDs;
-        private System.Windows.Forms.ToolStripMenuItem tsmiMPD_View_DrawCollisionLines;
-        private System.Windows.Forms.ToolStripMenuItem tsmiMPD_View_DrawNormalMap;
-        private System.Windows.Forms.ToolStripMenuItem tsmiMPD_View_RotateSpritesUpToCamera;
+        private System.Windows.Forms.ToolStripMenuItem tsmiView;
+        private System.Windows.Forms.ToolStripMenuItem tsmiView_MPD;
+        private System.Windows.Forms.ToolStripMenuItem tsmiView_MPD_DrawSurfaceModel;
+        private System.Windows.Forms.ToolStripMenuItem tsmiView_MPD_DrawModels;
+        private System.Windows.Forms.ToolStripMenuItem tsmiView_MPD_DrawGround;
+        private System.Windows.Forms.ToolStripMenuItem tsmiView_MPD_DrawSkyBox;
+        private System.Windows.Forms.ToolStripMenuItem tsmiView_MPD_RunAnimations;
+        private System.Windows.Forms.ToolStripMenuItem tsmiView_MPD_ApplyLighting;
+        private System.Windows.Forms.ToolStripMenuItem tsmiView_MPD_DrawGradients;
+        private System.Windows.Forms.ToolStripSeparator tsmiView_MPD_Sep1;
+        private System.Windows.Forms.ToolStripMenuItem tsmiView_MPD_DrawWireframes;
+        private System.Windows.Forms.ToolStripMenuItem tsmiView_MPD_DrawBoundaries;
+        private System.Windows.Forms.ToolStripMenuItem tsmiView_MPD_DrawTerrainTypes;
+        private System.Windows.Forms.ToolStripMenuItem tsmiView_MPD_DrawEventIDs;
+        private System.Windows.Forms.ToolStripMenuItem tsmiView_MPD_DrawCollisionLines;
+        private System.Windows.Forms.ToolStripMenuItem tsmiView_MPD_DrawNormalMap;
+        private System.Windows.Forms.ToolStripMenuItem tsmiView_MPD_RotateSpritesUpToCamera;
+        private System.Windows.Forms.ToolStripSeparator tsmiView_MPD_Sep2;
+        private System.Windows.Forms.ToolStripMenuItem tsmiView_MPD_EnableBlankFieldV2Controls;
+        private System.Windows.Forms.ToolStripMenuItem tsmiView_MPD_ShowHelp;
+        private System.Windows.Forms.ToolStripSeparator tsmiView_MPD_Sep3;
     }
 }
