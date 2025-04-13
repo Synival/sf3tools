@@ -14,7 +14,7 @@ using static CommonLib.Utils.Compression;
 using static CommonLib.Win.Utils.MessageUtils;
 
 namespace SF3.Editor.Forms {
-    public partial class frmSF3Editor {
+    public partial class SF3EditorForm {
 
         /// <summary>
         /// Opens a dialog to export a particular chunk of an MPD file.

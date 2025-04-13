@@ -10,7 +10,7 @@ using SF3.Win.Views;
 using SF3.Win;
 
 namespace SF3.Editor.Forms {
-    public partial class frmSF3Editor {
+    public partial class SF3EditorForm {
         /// <summary>
         /// Creates an "Open" dialog and, if a file was chosen, opens it, processes its data, and loads it.
         /// </summary>

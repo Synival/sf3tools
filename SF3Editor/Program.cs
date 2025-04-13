@@ -21,7 +21,7 @@ namespace SF3.Editor {
             // Add some special handles types to ObjectListView 
             RegisterNamedValues();
 
-            Application.Run(new frmSF3Editor());
+            Application.Run(new SF3EditorForm());
         }
     }
 }

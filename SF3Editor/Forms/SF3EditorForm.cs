@@ -12,7 +12,7 @@ using SF3.Win.Views;
 using static SF3.Utils.FileUtils;
 
 namespace SF3.Editor.Forms {
-    public partial class frmSF3Editor : Form {
+    public partial class SF3EditorForm : Form {
         public static readonly string Version = "0.1.1 (DEV 2025-04-11)";
 
         private readonly Dictionary<ScenarioType, INameGetterContext> c_nameGetterContexts = Enum.GetValues<ScenarioType>()
@@ -24,7 +24,7 @@ namespace SF3.Editor.Forms {
             + "|All Files (*.*)|*.*"
             ;
 
-        public frmSF3Editor() {
+        public SF3EditorForm() {
             SuspendLayout();
             InitializeComponent();
 

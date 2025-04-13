@@ -11,7 +11,7 @@ using static CommonLib.Win.Utils.MessageUtils;
 using static SF3.Utils.FileUtils;
 
 namespace SF3.Editor.Forms {
-    public partial class frmSF3Editor {
+    public partial class SF3EditorForm {
 
         /// <summary>
         /// Creates an "Open" dialog and, if a DFR file was chosen, does the following:

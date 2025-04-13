@@ -1,7 +1,7 @@
 ﻿using System.Drawing;
 
 namespace SF3.Editor.Forms {
-    partial class frmSF3Editor {
+    partial class SF3EditorForm {
         /// <summary>
         ///  Required designer variable.
         /// </summary>
@@ -25,7 +25,7 @@ namespace SF3.Editor.Forms {
         ///  the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent() {
-            var resources = new System.ComponentModel.ComponentResourceManager(typeof(frmSF3Editor));
+            var resources = new System.ComponentModel.ComponentResourceManager(typeof(SF3EditorForm));
             menuStrip1 = new System.Windows.Forms.MenuStrip();
             tsmiFile = new System.Windows.Forms.ToolStripMenuItem();
             tsmiFile_Open = new System.Windows.Forms.ToolStripMenuItem();

@@ -3,7 +3,7 @@ using System.Diagnostics;
 using System.Windows.Forms;
 
 namespace SF3.Editor.Forms {
-    public partial class frmSF3Editor {
+    public partial class SF3EditorForm {
         private void tsmiHelp_About_Click(object sender, EventArgs e) {
             // Fetch copyright info from the assembly itself.
             string? legalCopyright = null;
