@@ -1,4 +1,4 @@
-﻿namespace SF3.Win.Forms {
+﻿namespace SF3.Editor.Forms {
     partial class ManipulateChunkDialog {
         /// <summary>
         /// Required designer variable.

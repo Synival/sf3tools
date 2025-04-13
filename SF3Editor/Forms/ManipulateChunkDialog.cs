@@ -5,7 +5,7 @@ using System.Windows.Forms;
 using SF3.Models.Structs.MPD;
 using SF3.Win.Types;
 
-namespace SF3.Win.Forms {
+namespace SF3.Editor.Forms {
     public partial class ManipulateChunkDialog : Form {
         public ManipulateChunkDialog(ManipulateChunkDialogType type, ChunkLocation[] chunks, string fileNamePrefix) {
             Type           = type;
