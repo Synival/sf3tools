@@ -15,8 +15,8 @@ namespace SF3.Win.Views.MPD {
 
             var ngc = Model.NameGetterContext;
             CreateChild(new TableView("Groups", Model.ModelSwitchGroupsTable, ngc));
-            CreateChild(new TableArrayView<ModelIDTable>("Enable IDs", Model.ModelsEnabledGroupsByAddr.Values.ToArray(), ngc));
-            CreateChild(new TableArrayView<ModelIDTable>("Disable IDs", Model.ModelsDisabledGroupsByAddr.Values.ToArray(), ngc));
+            CreateChild(new TableArrayView<ModelIDTable>("Visible Models (Flag Off)", Model.VisibleModelsWhenFlagOffByAddr.Values.ToArray(), ngc));
+            CreateChild(new TableArrayView<ModelIDTable>("Visible Models (Flag On)", Model.VisibleModelsWhenFlagOnByAddr.Values.ToArray(), ngc));
 
             return Control;
         }

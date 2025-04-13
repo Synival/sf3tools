@@ -17,7 +17,7 @@ namespace SF3.Models.Tables.MPD {
         public override bool Load() {
             return Load(
                 (id, address) => new ModelSwitchGroup(Data, id, "ModelSwitchGroup" + id.ToString("D2"), address),
-                (currentRows, model) => model.TriggerFlag != -1,
+                (currentRows, model) => model.Flag != -1,
                 false);
         }
     }

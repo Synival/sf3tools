@@ -94,14 +94,25 @@ namespace MPD_Analyzer {
                             var mapFlags = mpdFile.MPDHeader.MapFlags;
 
                             // Condition for match checks here
-                            bool match = mpdFile.ModelCollections
-                                .Any(x => x.AttrTablesByMemoryAddress.Values
-                                .Any(y => y.Any(z => z.CL_Gouraud && z.Mode_DrawMode != DrawMode.CL_Gouraud)));
+                            var reports = new List<string>();
+                            foreach (var msg in mpdFile.ModelSwitchGroupsTable) {
+                                if (msg.Flag >= 0x2C0 && msg.Flag <= 0x2CF)
+                                    continue;
+
+                                var flagName = mpdFile.NameGetterContext.GetName(null, null, msg.Flag, [NamedValueType.GameFlag]) ?? "";
+                                reports.Add(filename.PadLeft(8) + " | 0x" + msg.ID.ToString("X2") + " | Flag 0x" + msg.Flag.ToString("X3") + " " + flagName);
+                            }
+                            bool match = reports.Count > 0;
+                            if (!match)
+                                continue;
 
                             var fileStr = GetFileString(scenario, file, mpdFile);
-                            Console.Write(fileStr + " | " + (match ? "Match  " : "NoMatch"));
-
-                            Console.WriteLine();
+                            Console.WriteLine(fileStr + " | " + (match ? "Match  " : "NoMatch"));
+                            if (reports.Count > 0) {
+                                foreach (var r in reports)
+                                    Console.WriteLine("    " + r);
+                                Console.WriteLine();
+                            }
 
                             if (match) {
                                 matchSet.Add(fileStr);

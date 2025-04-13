@@ -4,46 +4,46 @@ using SF3.Types;
 
 namespace SF3.Models.Structs.MPD {
     public class ModelSwitchGroup : Struct {
-        private readonly int _triggerFlagAddr;
-        private readonly int _enabledModelsOffsetAddr;
-        private readonly int _disabledModelsOffsetAddr;
-        private readonly int _triggerStateAddr;
+        private readonly int _flagAddr;
+        private readonly int _visibleModelsWhenFlagOffOffsetAddr;
+        private readonly int _visibleModelsWhenFlagOnOffsetAddr;
+        private readonly int _stateAddr;
 
         public ModelSwitchGroup(IByteData data, int id, string name, int address)
         : base(data, id, name, address, 0x10) {
-            _triggerFlagAddr          = Address + 0x00; // 4 bytes
-            _enabledModelsOffsetAddr  = Address + 0x04; // 4 bytes
-            _disabledModelsOffsetAddr = Address + 0x08; // 4 bytes
-            _triggerStateAddr         = Address + 0x0C; // 4 bytes
+            _flagAddr                           = Address + 0x00; // 4 bytes
+            _visibleModelsWhenFlagOffOffsetAddr = Address + 0x04; // 4 bytes
+            _visibleModelsWhenFlagOnOffsetAddr  = Address + 0x08; // 4 bytes
+            _stateAddr                          = Address + 0x0C; // 4 bytes
         }
 
         [BulkCopy]
         [TableViewModelColumn(displayOrder: 0, displayFormat: "X3", minWidth: 200)]
         [NameGetter(NamedValueType.GameFlag)]
-        public int TriggerFlag {
-            get => Data.GetDouble(_triggerFlagAddr);
-            set => Data.SetDouble(_triggerFlagAddr, value);
+        public int Flag {
+            get => Data.GetDouble(_flagAddr);
+            set => Data.SetDouble(_flagAddr, value);
         }
 
         [BulkCopy]
-        [TableViewModelColumn(displayOrder: 1, isPointer: true)]
-        public uint EnabledModelsOffset {
-            get => (uint) Data.GetDouble(_enabledModelsOffsetAddr);
-            set => Data.SetDouble(_enabledModelsOffsetAddr, (int) value);
+        [TableViewModelColumn(displayOrder: 1, displayName: "Visible Models (Flag Off)", isPointer: true)]
+        public uint VisibleModelsWhenFlagOffOffset {
+            get => (uint) Data.GetDouble(_visibleModelsWhenFlagOffOffsetAddr);
+            set => Data.SetDouble(_visibleModelsWhenFlagOffOffsetAddr, (int) value);
         }
 
         [BulkCopy]
-        [TableViewModelColumn(displayOrder: 2, isPointer: true)]
-        public uint DisabledModelsOffset {
-            get => (uint) Data.GetDouble(_disabledModelsOffsetAddr);
-            set => Data.SetDouble(_disabledModelsOffsetAddr, (int) value);
+        [TableViewModelColumn(displayOrder: 2, displayName: "Visible Models (Flag On)", isPointer: true)]
+        public uint VisibleModelsWhenFlagOnOffset {
+            get => (uint) Data.GetDouble(_visibleModelsWhenFlagOnOffsetAddr);
+            set => Data.SetDouble(_visibleModelsWhenFlagOnOffsetAddr, (int) value);
         }
 
         [BulkCopy]
-        [TableViewModelColumn(displayOrder: 3, displayFormat: "X2")]
-        public uint TriggerState {
-            get => (uint) Data.GetDouble(_triggerStateAddr);
-            set => Data.SetDouble(_triggerStateAddr, (int) value);
+        [TableViewModelColumn(displayOrder: 3, displayName: "State (set in-game)", displayFormat: "X2")]
+        public uint State {
+            get => (uint) Data.GetDouble(_stateAddr);
+            set => Data.SetDouble(_stateAddr, (int) value);
         }
     }
 }

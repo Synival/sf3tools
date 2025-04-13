@@ -565,7 +565,7 @@ namespace SF3.Models.Structs.X1.Battle {
         [TableViewModelColumn(displayOrder: 46, displayName: "Flag / Battle ID", displayFormat: "X3", minWidth: 200, displayGroup: "Page5")]
         [BulkCopy]
         [NameGetter(NamedValueType.ConditionalType, nameof(FlagOrBattleIDType))]
-        public int FlagTieInOrUnknown {
+        public int FlagOrBattleID {
             get => Data.GetWord(_flagTieInAddr);
             set => Data.SetWord(_flagTieInAddr, value);
         }

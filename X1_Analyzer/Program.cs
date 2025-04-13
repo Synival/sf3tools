@@ -86,7 +86,7 @@ namespace X1_Analyzer {
                             },
 
                             y.EnemyFlags,
-                            y.FlagTieInOrUnknown,
+                            y.FlagOrBattleID,
                         }
                     )
                 )
@@ -138,20 +138,67 @@ namespace X1_Analyzer {
                     );
                 }
             }
-#elif false
-            if (x1File.NpcTable != null) {
-                foreach (var i in x1File.InteractableTable.Where(x => (x.TriggerFlags & 0x07) != 0)) {
-                    var actionFlagChecked = i.ActionFlagChecked;
-                    var flagName = x1File.NameGetterContext.GetName(null, null, actionFlagChecked, [NamedValueType.GameFlag]) ?? "";
-                    var itemName = (i.ActionType == 0x100 || i.ActionType == 0x101) ? x1File.NameGetterContext.GetName(null, null, i.ActionParam, [NamedValueType.Item]) : "";
+#elif true
+            // Match 'Interactables' with unknown flags
+            foreach (var i in x1File.InteractableTable?.Rows ?? []) {
+                var actionFlagChecked = i.FlagChecked;
+                var flagName = x1File.NameGetterContext.GetName(null, null, actionFlagChecked, [NamedValueType.GameFlag]) ?? "";
+                if (flagName != "")
+                    continue;
 
-                    var interactableStr = i.ID.ToString("X2") + " | " + i.Trigger.ToString("X4") + " | " + i.TriggerFlags.ToString("X2") + " | " + i.TriggerTargetID.ToString("X2");
-                    var flagStr = $"{flagName.PadLeft(60)} (0x{i.ActionFlagChecked:X3} == {i.ActionFlagStatus})";
-                    var itemStr = ((itemName != "") ? (itemName + " ") : "") + $"({(EventActionType) i.ActionType}, 0x{i.ActionParam:X3})";
+                var itemName = (i.ActionParam3Type == NamedValueType.Item)
+                    ? (x1File.NameGetterContext.GetName(null, null, i.ActionParam3, [NamedValueType.Item]) + $" (0x{i.ActionParam3:X3})")
+                    : "";
 
-                    var charName = x1File.NameGetterContext.GetName(null, null, i.TriggerTargetID, [NamedValueType.Character]);
+                var interactableStr = i.ID.ToString("X2") + " | " + i.Trigger.ToString("X4") + " | " + i.TriggerFlags.ToString("X2") + " | " + i.TriggerTargetID.ToString("X2");
+                var flagStr = $"Flag (0x{i.FlagChecked:X3} == {i.FlagExpectedValue,5})";
+                var itemStr = ((itemName != "") ? (itemName + " ") : "");
 
-                    s_matchReports.Add(interactableStr + " | " + i.TriggerDescription.PadRight(60) + " | " + flagStr.PadLeft(60) + " | " + itemStr);
+                var charName = x1File.NameGetterContext.GetName(null, null, i.TriggerTargetID, [NamedValueType.Character]);
+
+                s_matchReports.Add("Event | " + interactableStr + " | " + i.TriggerDescription.PadRight(60) + " | " + flagStr + " | " + itemStr);
+            }
+
+            // Match Warps with unknown flags
+            foreach (var i in x1File.WarpTable?.Rows ?? []) {
+                if (i.IfFlagUnsetType != NamedValueType.GameFlag)
+                    continue;
+
+                var warpStr = i.Name.PadLeft(19) + " | " + x1File.NameGetterContext.GetName(null, null, i.LoadID, [NamedValueType.Load]) + $" (0x{i.LoadID:X2}) Scene {i.SceneID}";
+
+                var flagName = x1File.NameGetterContext.GetName(null, null, i.IfFlagUnset, [NamedValueType.GameFlag]) ?? "";
+                if (flagName != "")
+                    continue;
+
+                var flagStr = $"Flag (0x{i.IfFlagUnset:X3} == False)";
+                s_matchReports.Add(" Warp | " + warpStr + " | " + flagStr);
+            }
+
+            // Match enemies with unknown flags
+            foreach (var battle in x1File.Battles ?? []) {
+                var enemies = battle.Value.SlotTable.Where(x => x.EnemyID != 0).ToArray();
+                foreach (var enemy in enemies.Where(x => x.FlagOrBattleID != 0x00)) {
+                    if (enemy.FlagOrBattleIDType != NamedValueType.GameFlag)
+                        continue;
+
+                    var realName = x1File.NameGetterContext.GetName(null, null, enemy.EnemyID, [NamedValueType.MonsterForSlot]);
+                    var flagName = x1File.NameGetterContext.GetName(null, null, enemy.FlagOrBattleID, [NamedValueType.GameFlag]);
+                    var itemName = x1File.NameGetterContext.GetName(null, null, enemy.ItemOverride, [NamedValueType.Item]);
+                    if (flagName != "")
+                        continue;
+
+                    var enemyStr = $"{battle.Key,7} | {enemy.Name} (0x{enemy.ID:X2}) | {realName} (0x{enemy.EnemyID:X2})";
+                    var flagStr  = $"Flag (0x{enemy.FlagOrBattleID:X3})";
+                    var itemStr  = $"{itemName} (0x{enemy.ItemOverride:X2})";
+
+                    s_matchReports.Add(
+                        "Enemy | " +
+                        enemy.EnemyFlags.ToString("X4") + " | " +
+                        BitString(enemy.EnemyFlags) + " | " +
+                        flagStr + " | " +
+                        enemyStr.PadRight(60) + " | " +
+                        itemStr
+                    );
                 }
             }
 #endif

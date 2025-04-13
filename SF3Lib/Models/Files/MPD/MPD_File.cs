@@ -226,22 +226,22 @@ namespace SF3.Models.Files.MPD {
             if (header.OffsetModelSwitchGroups != 0) {
                 tables.Add(ModelSwitchGroupsTable = ModelSwitchGroupsTable.Create(Data, "ModelSwitchGroups", header.OffsetModelSwitchGroups - c_RamOffset));
 
-                ModelsEnabledGroupsByAddr = ModelSwitchGroupsTable
-                    .Where(x => x.EnabledModelsOffset > 0)
+                VisibleModelsWhenFlagOffByAddr = ModelSwitchGroupsTable
+                    .Where(x => x.VisibleModelsWhenFlagOffOffset > 0)
                     .ToDictionary(
-                        x => (int) x.EnabledModelsOffset,
-                        x => ModelIDTable.Create(Data, x.Name + "_EnabledIDs (0x" + x.EnabledModelsOffset.ToString("X") + ")", (int) x.EnabledModelsOffset - c_RamOffset)
+                        x => (int) x.VisibleModelsWhenFlagOffOffset,
+                        x => ModelIDTable.Create(Data, x.Name + "_FlagOffIDs (0x" + x.VisibleModelsWhenFlagOffOffset.ToString("X") + ")", (int) x.VisibleModelsWhenFlagOffOffset - c_RamOffset)
                     );
 
-                ModelsDisabledGroupsByAddr = ModelSwitchGroupsTable
-                    .Where(x => x.DisabledModelsOffset > 0)
+                VisibleModelsWhenFlagOnByAddr = ModelSwitchGroupsTable
+                    .Where(x => x.VisibleModelsWhenFlagOnOffset > 0)
                     .ToDictionary(
-                        x => (int) x.DisabledModelsOffset,
-                        x => ModelIDTable.Create(Data, x.Name + "_DisabledIDs (0x" + x.DisabledModelsOffset.ToString("X") + ")", (int) x.DisabledModelsOffset - c_RamOffset)
+                        x => (int) x.VisibleModelsWhenFlagOnOffset,
+                        x => ModelIDTable.Create(Data, x.Name + "_FlagOnIDs (0x" + x.VisibleModelsWhenFlagOnOffset.ToString("X") + ")", (int) x.VisibleModelsWhenFlagOnOffset - c_RamOffset)
                     );
 
-                tables.AddRange(ModelsEnabledGroupsByAddr.Values);
-                tables.AddRange(ModelsDisabledGroupsByAddr.Values);
+                tables.AddRange(VisibleModelsWhenFlagOffByAddr.Values);
+                tables.AddRange(VisibleModelsWhenFlagOnByAddr.Values);
             }
 
             // TODO: put somewhere else!!
@@ -266,8 +266,8 @@ namespace SF3.Models.Files.MPD {
                 // Make sure this table doesn't occupy that space.
                 updateLowest(header.OffsetModelSwitchGroups);
                 foreach (var msg in ModelSwitchGroupsTable) {
-                    updateLowest((int) msg.DisabledModelsOffset);
-                    updateLowest((int) msg.EnabledModelsOffset);
+                    updateLowest((int) msg.VisibleModelsWhenFlagOnOffset);
+                    updateLowest((int) msg.VisibleModelsWhenFlagOffOffset);
                 }
                 updateLowest(header.OffsetTextureAnimations);
                 updateLowest(header.OffsetUnknown2);
@@ -1286,8 +1286,8 @@ namespace SF3.Models.Files.MPD {
         [BulkCopyRecurse]
         public ModelSwitchGroupsTable ModelSwitchGroupsTable { get; private set; }
 
-        public Dictionary<int, ModelIDTable> ModelsEnabledGroupsByAddr { get; private set; }
-        public Dictionary<int, ModelIDTable> ModelsDisabledGroupsByAddr { get; private set; }
+        public Dictionary<int, ModelIDTable> VisibleModelsWhenFlagOffByAddr { get; private set; }
+        public Dictionary<int, ModelIDTable> VisibleModelsWhenFlagOnByAddr { get; private set; }
 
         [BulkCopyRecurse]
         public UnknownUInt8Table GroundAnimationTable { get; private set; }
