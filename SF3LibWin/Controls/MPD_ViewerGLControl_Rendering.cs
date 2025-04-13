@@ -17,6 +17,24 @@ namespace SF3.Win.Controls {
             Paint     += (s, e) => OnPaintRendering();
             FrameTick += (s, deltaInMs) => OnFrameTickRendering(deltaInMs);
             TileModified += (s, e) => OnTileModifiedRendering(s);
+
+            _appState.ViewerDrawSurfaceModelChanged   += (s, e) => Invalidate();
+            _appState.ViewerDrawModelsChanged         += (s, e) => Invalidate();
+            _appState.ViewerDrawGroundChanged         += (s, e) => Invalidate();
+            _appState.ViewerDrawSkyBoxChanged         += (s, e) => Invalidate();
+            _appState.ViewerRunAnimationsChanged      += (s, e) => Invalidate();
+            _appState.ViewerApplyLightingChanged      += (s, e) => Invalidate();
+            _appState.ViewerDrawGradientsChanged      += (s, e) => Invalidate();
+            _appState.ViewerDrawWireframeChanged      += (s, e) => Invalidate();
+            _appState.ViewerDrawBoundariesChanged     += (s, e) => Invalidate();
+            _appState.ViewerDrawTerrainTypesChanged   += (s, e) => Invalidate();
+            _appState.ViewerDrawEventIDsChanged       += (s, e) => Invalidate();
+            _appState.ViewerDrawCollisionLinesChanged += (s, e) => Invalidate();
+            _appState.ViewerDrawNormalsChanged        += (s, e) => Invalidate();
+            _appState.ViewerRotateSpritesUpChanged    += (s, e) => Invalidate();
+            _appState.ViewerDrawHelpChanged           += (s, e) => Invalidate();
+
+            _appState.ViewerRotateSpritesUpChanged += (s, e) => _renderer.InvalidateSpriteMatrices(_models);
         }
 
         public void UpdateLightingTexture() {
@@ -284,24 +302,12 @@ namespace SF3.Win.Controls {
             }
         }
 
-        private AppState _appState = null;
-        private AppState AppState {
-            get {
-                if (_appState == null)
-                    _appState = AppState.RetrieveAppState();
-                return _appState;
-            }
-        }
-
         private bool UpdateAppState(string propertyName, bool value) {
             var property = AppState.GetType().GetProperty(propertyName);
             if (property == null || (bool) property.GetValue(AppState, null) == value)
                 return false;
 
             property.SetValue(AppState, value);
-            AppState.Serialize();
-            Invalidate();
-
             return true;
         }
 
@@ -400,10 +406,7 @@ namespace SF3.Win.Controls {
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public bool RotateSpritesUp {
             get => AppState.ViewerRotateSpritesUp;
-            set {
-                if (UpdateAppState(nameof(AppState.ViewerRotateSpritesUp), value))
-                    _renderer.InvalidateSpriteMatrices(_models);
-            }
+            set => UpdateAppState(nameof(AppState.ViewerRotateSpritesUp), value);
         }
 
         [Browsable(false)]

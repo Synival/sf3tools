@@ -94,24 +94,185 @@ namespace SF3.Win {
         [JsonIgnore]
         public string FileFullPath { get; private set; } = null;
 
-        public bool ViewerDrawSurfaceModel { get; set; } = true;
-        public bool ViewerDrawModels { get; set; } = true;
-        public bool ViewerDrawGround { get; set; } = true;
-        public bool ViewerDrawSkyBox { get; set; } = true;
-        public bool ViewerRunAnimations { get; set; } = true;
-        public bool ViewerApplyLighting { get; set; } = true;
-        public bool ViewerDrawGradients { get; set; } = true;
+        public bool ViewerDrawSurfaceModel {
+            get => _viewerDrawSurfaceModel;
+            set {
+                if (value != _viewerDrawSurfaceModel) {
+                    _viewerDrawSurfaceModel = value;
+                    ViewerDrawSurfaceModelChanged?.Invoke(this, EventArgs.Empty);
+                }
+            }
+        }
+        private bool _viewerDrawSurfaceModel = true;
+        public event EventHandler ViewerDrawSurfaceModelChanged;
 
-        public bool ViewerDrawWireframe { get; set; } = false;
-        public bool ViewerDrawBoundaries { get; set; } = false;
-        public bool ViewerDrawCollisionLines { get; set; } = false;
-        public bool ViewerDrawTerrainTypes { get; set; } = false;
-        public bool ViewerDrawEventIDs { get; set; } = false;
-        public bool ViewerDrawNormals { get; set; } = false;
+        public bool ViewerDrawModels {
+            get => _viewerDrawModels;
+            set {
+                if (value != _viewerDrawModels) {
+                    _viewerDrawModels = value;
+                    ViewerDrawModelsChanged?.Invoke(this, EventArgs.Empty);
+                }
+            }
+        }
+        private bool _viewerDrawModels = true;
+        public event EventHandler ViewerDrawModelsChanged;
 
-        public bool ViewerRotateSpritesUp { get; set; } = false;
+        public bool ViewerDrawGround {
+            get => _viewerDrawGround;
+            set {
+                if (value != _viewerDrawGround) {
+                    _viewerDrawGround = value;
+                    ViewerDrawGroundChanged?.Invoke(this, EventArgs.Empty);
+                }
+            }
+        }
+        private bool _viewerDrawGround = true;
+        public event EventHandler ViewerDrawGroundChanged;
 
-        public bool ViewerDrawHelp { get; set; } = true;
+        public bool ViewerDrawSkyBox {
+            get => _viewerDrawSkyBox;
+            set {
+                if (value != _viewerDrawSkyBox) {
+                    _viewerDrawSkyBox = value;
+                    ViewerDrawSkyBoxChanged?.Invoke(this, EventArgs.Empty);
+                }
+            }
+        }
+        private bool _viewerDrawSkyBox = true;
+        public event EventHandler ViewerDrawSkyBoxChanged;
+
+        public bool ViewerRunAnimations {
+            get => _viewerRunAnimations;
+            set {
+                if (value != _viewerRunAnimations) {
+                    _viewerRunAnimations = value;
+                    ViewerRunAnimationsChanged?.Invoke(this, EventArgs.Empty);
+                }
+            }
+        }
+        private bool _viewerRunAnimations = true;
+        public event EventHandler ViewerRunAnimationsChanged;
+
+        public bool ViewerApplyLighting {
+            get => _viewerApplyLighting;
+            set {
+                if (value != _viewerApplyLighting) {
+                    _viewerApplyLighting = value;
+                    ViewerApplyLightingChanged?.Invoke(this, EventArgs.Empty);
+                }
+            }
+        }
+        private bool _viewerApplyLighting = true;
+        public event EventHandler ViewerApplyLightingChanged;
+
+        public bool ViewerDrawGradients {
+            get => _viewerDrawGradients;
+            set {
+                if (value != _viewerDrawGradients) {
+                    _viewerDrawGradients = value;
+                    ViewerDrawGradientsChanged?.Invoke(this, EventArgs.Empty);
+                }
+            }
+        }
+        private bool _viewerDrawGradients = true;
+        public event EventHandler ViewerDrawGradientsChanged;
+
+        public bool ViewerDrawWireframe {
+            get => _viewerDrawWireframe;
+            set {
+                if (value != _viewerDrawWireframe) {
+                    _viewerDrawWireframe = value;
+                    ViewerDrawWireframeChanged?.Invoke(this, EventArgs.Empty);
+                }
+            }
+        }
+        private bool _viewerDrawWireframe = false;
+        public event EventHandler ViewerDrawWireframeChanged;
+
+        public bool ViewerDrawBoundaries {
+            get => _viewerDrawBoundaries;
+            set {
+                if (value != _viewerDrawBoundaries) {
+                    _viewerDrawBoundaries = value;
+                    ViewerDrawBoundariesChanged?.Invoke(this, EventArgs.Empty);
+                }
+            }
+        }
+        private bool _viewerDrawBoundaries = false;
+        public event EventHandler ViewerDrawBoundariesChanged;
+
+        public bool ViewerDrawCollisionLines {
+            get => _viewerDrawCollisionLines;
+            set {
+                if (value != _viewerDrawCollisionLines) {
+                    _viewerDrawCollisionLines = value;
+                    ViewerDrawCollisionLinesChanged?.Invoke(this, EventArgs.Empty);
+                }
+            }
+        }
+        private bool _viewerDrawCollisionLines = false;
+        public event EventHandler ViewerDrawCollisionLinesChanged;
+
+        public bool ViewerDrawTerrainTypes {
+            get => _viewerDrawTerrainTypes;
+            set {
+                if (value != _viewerDrawTerrainTypes) {
+                    _viewerDrawTerrainTypes = value;
+                    ViewerDrawTerrainTypesChanged?.Invoke(this, EventArgs.Empty);
+                }
+            }
+        }
+        private bool _viewerDrawTerrainTypes = false;
+        public event EventHandler ViewerDrawTerrainTypesChanged;
+
+        public bool ViewerDrawEventIDs {
+            get => _viewerDrawEventIDs;
+            set {
+                if (value != _viewerDrawEventIDs) {
+                    _viewerDrawEventIDs = value;
+                    ViewerDrawEventIDsChanged?.Invoke(this, EventArgs.Empty);
+                }
+            }
+        }
+        private bool _viewerDrawEventIDs = false;
+        public event EventHandler ViewerDrawEventIDsChanged;
+
+        public bool ViewerDrawNormals {
+            get => _viewerDrawNormals;
+            set {
+                if (value != _viewerDrawNormals) {
+                    _viewerDrawNormals = value;
+                    ViewerDrawNormalsChanged?.Invoke(this, EventArgs.Empty);
+                }
+            }
+        }
+        private bool _viewerDrawNormals = false;
+        public event EventHandler ViewerDrawNormalsChanged;
+
+        public bool ViewerRotateSpritesUp {
+            get => _viewerRotateSpritesUp;
+            set {
+                if (value != _viewerRotateSpritesUp) {
+                    _viewerRotateSpritesUp = value;
+                    ViewerRotateSpritesUpChanged?.Invoke(this, EventArgs.Empty);
+                }
+            }
+        }
+        private bool _viewerRotateSpritesUp = false;
+        public event EventHandler ViewerRotateSpritesUpChanged;
+
+        public bool ViewerDrawHelp {
+            get => _viewerDrawHelp;
+            set {
+                if (value != _viewerDrawHelp) {
+                    _viewerDrawHelp = value;
+                    ViewerDrawHelpChanged?.Invoke(this, EventArgs.Empty);
+                }
+            }
+        }
+        private bool _viewerDrawHelp = true;
+        public event EventHandler ViewerDrawHelpChanged;
 
         public int ViewerCursorMode { get; set; } = 0;
 

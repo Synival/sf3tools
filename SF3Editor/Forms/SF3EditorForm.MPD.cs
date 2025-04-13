@@ -196,6 +196,21 @@ namespace SF3.Editor.Forms {
             return true;
         }
 
+        private void tsmiMPD_View_DrawSurfaceModel_Click(object sender, EventArgs e)        => _appState.ViewerDrawSurfaceModel = !_appState.ViewerDrawSurfaceModel;
+        private void tsmiMPD_View_DrawModels_Click(object sender, EventArgs e)              => _appState.ViewerDrawModels = !_appState.ViewerDrawModels;
+        private void tsmiMPD_View_DrawGround_Click(object sender, EventArgs e)              => _appState.ViewerDrawGround = !_appState.ViewerDrawGround;
+        private void tsmiMPD_View_DrawSkyBox_Click(object sender, EventArgs e)              => _appState.ViewerDrawSkyBox = !_appState.ViewerDrawSkyBox;
+        private void tsmiMPD_View_RunAnimations_Click(object sender, EventArgs e)           => _appState.ViewerRunAnimations = !_appState.ViewerRunAnimations;
+        private void tsmiMPD_View_ApplyLighting_Click(object sender, EventArgs e)           => _appState.ViewerApplyLighting = !_appState.ViewerApplyLighting;
+        private void tsmiMPD_View_DrawGradients_Click(object sender, EventArgs e)           => _appState.ViewerDrawGradients = !_appState.ViewerDrawGradients;
+        private void tsmiMPD_View_DrawWireframes_Click(object sender, EventArgs e)          => _appState.ViewerDrawWireframe = !_appState.ViewerDrawWireframe;
+        private void tsmiMPD_View_DrawBoundaries_Click(object sender, EventArgs e)          => _appState.ViewerDrawBoundaries = !_appState.ViewerDrawBoundaries;
+        private void tsmiMPD_View_DrawTerrainTypes_Click(object sender, EventArgs e)        => _appState.ViewerDrawTerrainTypes = !_appState.ViewerDrawTerrainTypes;
+        private void tsmiMPD_View_DrawEventIDs_Click(object sender, EventArgs e)            => _appState.ViewerDrawEventIDs = !_appState.ViewerDrawEventIDs;
+        private void tsmiMPD_View_DrawCollisionLines_Click(object sender, EventArgs e)      => _appState.ViewerDrawCollisionLines = !_appState.ViewerDrawCollisionLines;
+        private void tsmiMPD_View_DrawNormalMap_Click(object sender, EventArgs e)           => _appState.ViewerDrawNormals = !_appState.ViewerDrawNormals;
+        private void tsmiMPD_View_RotateSpritesUpToCamera_Click(object sender, EventArgs e) => _appState.ViewerRotateSpritesUp = !_appState.ViewerRotateSpritesUp;
+
         private void tsmiMPD_Textures_ImportAll_Click(object sender, EventArgs e) {
             if (SelectedFile?.FileType == SF3FileType.MPD)
                 ImportAllMPDTexturesDialog((IMPD_File) SelectedFile.Loader.Model);

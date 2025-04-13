@@ -14,6 +14,8 @@ namespace SF3.Win.Controls {
             if (!AppState.Initialized)
                 return;
 
+            _appState = AppState.RetrieveAppState();
+
             _timer = new Timer() { Interval = 1000 / 60 };
             _timer.Tick += (s, a) => IncrementFrame();
             Disposed += (s, a) => {
@@ -137,6 +139,9 @@ namespace SF3.Win.Controls {
                 Invalidate();
             }
         }
+
+        private AppState _appState = null;
+        private AppState AppState => _appState;
 
         public event EventHandler RightDoubleClick;
         public event EventHandler MiddleDoubleClick;
