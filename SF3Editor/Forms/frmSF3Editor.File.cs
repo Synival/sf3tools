@@ -164,8 +164,8 @@ namespace SF3.Editor.Forms {
         /// </summary>
         /// <param name="file">The loaded file to save.</param>
         /// <returns>'true' if a file was saved successfully. Otherwise, 'false'.</returns>
-        public bool SaveFile(LoadedFile file)
-            => SaveFile(file, file.Loader.Filename);
+        public bool SaveFile(LoadedFile file, bool addToRecentFiles)
+            => SaveFile(file, file.Loader.Filename, addToRecentFiles);
 
         /// <summary>
         /// Saves a file to a given path/filename.
@@ -173,7 +173,7 @@ namespace SF3.Editor.Forms {
         /// <param name="file">The loaded file to save.</param>
         /// <param name="filename">The filename to save the file as.</param>
         /// <returns>'true' if a file was saved successfully. Otherwise, 'false'.</returns>
-        public bool SaveFile(LoadedFile file, string filename) {
+        public bool SaveFile(LoadedFile file, string filename, bool addToRecentFiles) {
             string? error = null;
             try {
                 if (!file.Loader.SaveFile(filename)) {
@@ -185,10 +185,17 @@ namespace SF3.Editor.Forms {
                 error = $"{e.GetType().Name} exception while saving '{filename}' with message:\r\n{e.Message}";
             }
 
-            if (error != null)
+            if (error != null) {
                 ErrorMessage(error);
+                return false;
+            }
 
-            return error == null;
+            if (addToRecentFiles) {
+                _appState.PushRecentFile(filename, file.Scenario, file.FileType);
+                _appState.Serialize();
+            }
+
+            return true;
         }
 
         /// <summary>
@@ -204,7 +211,7 @@ namespace SF3.Editor.Forms {
             if (savefile.ShowDialog() != DialogResult.OK)
                 return false;
 
-            return SaveFile(file, savefile.FileName);
+            return SaveFile(file, savefile.FileName, true);
         }
 
         /// <summary>
@@ -218,7 +225,7 @@ namespace SF3.Editor.Forms {
             bool saveHappened = false;
             foreach (var loadedFile in _loadedFiles)
                 if (loadedFile.Loader?.Model?.IsModified == true)
-                    saveHappened |= SaveFile(loadedFile);
+                    saveHappened |= SaveFile(loadedFile, true);
             return saveHappened;
         }
 
@@ -372,7 +379,7 @@ namespace SF3.Editor.Forms {
                 return result;
             }
             else if (result == DialogResult.Yes)
-                if (!SaveFile(file))
+                if (!SaveFile(file, true))
                     return DialogResult.Cancel;
 
             return result;
@@ -479,7 +486,7 @@ namespace SF3.Editor.Forms {
 
         private void tsmiFile_Save_Click(object sender, EventArgs e) {
             if (SelectedFile != null)
-                _ = SaveFile(SelectedFile);
+                _ = SaveFile(SelectedFile, true);
         }
 
         private void tsmiFile_SaveAs_Click(object sender, EventArgs e) {
