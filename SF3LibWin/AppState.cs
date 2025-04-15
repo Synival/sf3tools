@@ -307,7 +307,29 @@ namespace SF3.Win {
         private bool _useDropdownsForNamedValues = true;
         public event EventHandler UseDropdownsForNamedValuesChanged;
 
-        public bool UseVanillaHalfHeightForSurfaceNormalCalculations { get; set; } = true;
+        public bool UseImprovedNormalCalculations {
+            get => _useImprovedNormalCalculations;
+            set {
+                if (value != _useImprovedNormalCalculations) {
+                    _useImprovedNormalCalculations = value;
+                    UseImprovedNormalCalculationsChanged?.Invoke(this, EventArgs.Empty);
+                }
+            }
+        }
+        private bool _useImprovedNormalCalculations = true;
+        public event EventHandler UseImprovedNormalCalculationsChanged;
+
+        public bool UseVanillaHalfHeightForSurfaceNormalCalculations {
+            get => _useVanillaHalfHeightForSurfaceNormalCalculations;
+            set {
+                if (value != _useVanillaHalfHeightForSurfaceNormalCalculations) {
+                    _useVanillaHalfHeightForSurfaceNormalCalculations = value;
+                    UseVanillaHalfHeightForSurfaceNormalCalculationsChanged?.Invoke(this, EventArgs.Empty);
+                }
+            }
+        }
+        private bool _useVanillaHalfHeightForSurfaceNormalCalculations = true;
+        public event EventHandler UseVanillaHalfHeightForSurfaceNormalCalculationsChanged;
 
         /// <summary>
         /// Enables experimental map editing features that only work on a modified version of FIELD.MPD for the Premium Disk.

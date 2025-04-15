@@ -4,12 +4,14 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Windows.Forms;
+using CommonLib.Types;
 using Microsoft.WindowsAPICodePack.Dialogs;
 using SF3.Models.Files.MPD;
 using SF3.Types;
 using SF3.Win.Extensions;
 using SF3.Win.Types;
 using SF3.Win.Utils;
+using SF3.Win.Views.MPD;
 using static CommonLib.Utils.Compression;
 using static CommonLib.Win.Utils.MessageUtils;
 
@@ -236,6 +238,18 @@ namespace SF3.Editor.Forms {
         private void tsmiMPD_Chunks_DeleteChunk_Click(object sender, EventArgs e) {
             if (SelectedFile?.FileType == SF3FileType.MPD)
                 DeleteMPDChunkDialog((IMPD_File) SelectedFile.Loader.Model, Path.GetFileNameWithoutExtension(SelectedFile.Loader.ShortFilename));
+        }
+
+        private void tsmiMPD_RecalculateSurfaceModelNormals_Click(object sender, EventArgs e) {
+            if (SelectedFile?.FileType == SF3FileType.MPD) {
+                var mpdFile           = (IMPD_File) SelectedFile.Loader.Model;
+                var halfHeight        = _appState.UseVanillaHalfHeightForSurfaceNormalCalculations;
+                var calculationMethod = _appState.UseImprovedNormalCalculations ? POLYGON_NormalCalculationMethod.WeightedVerticalTriangles : POLYGON_NormalCalculationMethod.TopRightTriangle;
+                mpdFile.SurfaceModel?.UpdateVertexNormals(mpdFile.Surface?.HeightmapRowTable, calculationMethod, halfHeight);
+
+                var mpdView = (MPD_View) (SelectedFile.View.ActualView);
+                mpdView.UpdateViewerMap();
+            }
         }
     }
 }

@@ -18,7 +18,7 @@ namespace SF3.Win.Views.MPD {
                 ViewerView.UpdateMap();
             }, autoFill: true);
 
-            TabControl.Selected += UpdateViewer;
+            TabControl.Selected += UpdateViewerMapEvent;
 
             CreateChild(new LightingView("Lighting", Model));
             CreateChild(new TableView("Boundaries", Model.BoundariesTable, Model.NameGetterContext));
@@ -47,7 +47,10 @@ namespace SF3.Win.Views.MPD {
 
         private TabPage _viewerTab = null;
 
-        void UpdateViewer(object sender, EventArgs eventArgs) {
+        void UpdateViewerMapEvent(object sender, EventArgs eventArgs)
+            => UpdateViewerMap();
+
+        public void UpdateViewerMap() {
             if (TabControl.SelectedTab == _viewerTab)
                 ViewerView?.UpdateMap();
         }
@@ -57,7 +60,7 @@ namespace SF3.Win.Views.MPD {
                 return;
 
             if (TabControl != null)
-                TabControl.Selected -= UpdateViewer;
+                TabControl.Selected -= UpdateViewerMapEvent;
 
             ViewerView.Destroy();
             _viewerTab = null;

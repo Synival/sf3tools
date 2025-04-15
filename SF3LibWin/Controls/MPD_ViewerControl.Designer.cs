@@ -48,9 +48,6 @@
             tsbCameraTopView = new System.Windows.Forms.ToolStripButton();
             tsbCameraLookAtCenter = new System.Windows.Forms.ToolStripButton();
             toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
-            tsbRecalculateLightmapOriginalMath = new System.Windows.Forms.ToolStripButton();
-            tsbUpdateLightmapUpdatedMath = new System.Windows.Forms.ToolStripButton();
-            toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             tsbToggleHelp = new System.Windows.Forms.ToolStripButton();
             tilePropertyControl1 = new TilePropertiesControl();
             mpdViewerGLControl1 = new MPD_ViewerGLControl();
@@ -76,7 +73,7 @@
             // toolStrip1
             // 
             toolStrip1.ImageScalingSize = new System.Drawing.Size(24, 24);
-            toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { tsbCursorSelect, tsbCursorNavigate, toolStripSeparator5, tsbDrawSurfaceModel, tsbDrawModels, tsbDrawGround, tsbDrawSkyBox, tsbRunAnimations, tsbApplyLighting, tsbDrawGradients, toolStripSeparator2, tsbToggleWireframe, tsbToggleBoundaries, tsbToggleTerrainType, tsbToggleEventID, tsbToggleCollisions, tsbToggleNormals, tsbRotateSpritesUp, toolStripSeparator1, tsbCameraReset, tsbCameraTopView, tsbCameraLookAtCenter, toolStripSeparator3, tsbRecalculateLightmapOriginalMath, tsbUpdateLightmapUpdatedMath, toolStripSeparator4, tsbToggleHelp });
+            toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { tsbCursorSelect, tsbCursorNavigate, toolStripSeparator5, tsbDrawSurfaceModel, tsbDrawModels, tsbDrawGround, tsbDrawSkyBox, tsbRunAnimations, tsbApplyLighting, tsbDrawGradients, toolStripSeparator2, tsbToggleWireframe, tsbToggleBoundaries, tsbToggleTerrainType, tsbToggleEventID, tsbToggleCollisions, tsbToggleNormals, tsbRotateSpritesUp, toolStripSeparator1, tsbCameraReset, tsbCameraTopView, tsbCameraLookAtCenter, toolStripSeparator3, tsbToggleHelp });
             toolStrip1.Location = new System.Drawing.Point(0, 0);
             toolStrip1.Name = "toolStrip1";
             toolStrip1.Size = new System.Drawing.Size(789, 31);
@@ -302,31 +299,6 @@
             toolStripSeparator3.Name = "toolStripSeparator3";
             toolStripSeparator3.Size = new System.Drawing.Size(6, 31);
             // 
-            // tsbRecalculateLightmapOriginalMath
-            // 
-            tsbRecalculateLightmapOriginalMath.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            tsbRecalculateLightmapOriginalMath.Image = Properties.Resources.LightingOldBmp;
-            tsbRecalculateLightmapOriginalMath.ImageTransparentColor = System.Drawing.Color.Magenta;
-            tsbRecalculateLightmapOriginalMath.Name = "tsbRecalculateLightmapOriginalMath";
-            tsbRecalculateLightmapOriginalMath.Size = new System.Drawing.Size(28, 28);
-            tsbRecalculateLightmapOriginalMath.Text = "Recalculate Lightmap (Original Math)";
-            tsbRecalculateLightmapOriginalMath.Click += tsbRecalculateLightmapOriginalMath_Click;
-            // 
-            // tsbUpdateLightmapUpdatedMath
-            // 
-            tsbUpdateLightmapUpdatedMath.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            tsbUpdateLightmapUpdatedMath.Image = Properties.Resources.LightingNewBmp;
-            tsbUpdateLightmapUpdatedMath.ImageTransparentColor = System.Drawing.Color.Magenta;
-            tsbUpdateLightmapUpdatedMath.Name = "tsbUpdateLightmapUpdatedMath";
-            tsbUpdateLightmapUpdatedMath.Size = new System.Drawing.Size(28, 28);
-            tsbUpdateLightmapUpdatedMath.Text = "Update Lightmap (Updated Math)";
-            tsbUpdateLightmapUpdatedMath.Click += tsbUpdateLightmapUpdatedMath_Click;
-            // 
-            // toolStripSeparator4
-            // 
-            toolStripSeparator4.Name = "toolStripSeparator4";
-            toolStripSeparator4.Size = new System.Drawing.Size(6, 31);
-            // 
             // tsbToggleHelp
             // 
             tsbToggleHelp.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -547,8 +519,6 @@
         private System.Windows.Forms.ToolStripButton tsbToggleHelp;
         private System.Windows.Forms.ToolStripButton tsbToggleNormals;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
-        private System.Windows.Forms.ToolStripButton tsbRecalculateLightmapOriginalMath;
-        private System.Windows.Forms.ToolStripButton tsbUpdateLightmapUpdatedMath;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private TilePropertiesControl tilePropertyControl1;
         private MPD_ViewerGLControl mpdViewerGLControl1;
@@ -560,7 +530,6 @@
         private System.Windows.Forms.ToolStripButton tsbDrawGround;
         private System.Windows.Forms.ToolStripButton tsbDrawSkyBox;
         private System.Windows.Forms.ToolStripButton tsbDrawGradients;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
         private System.Windows.Forms.ToolStripButton tsbRunAnimations;
         private System.Windows.Forms.ToolStripButton tsbRotateSpritesUp;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;

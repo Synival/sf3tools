@@ -41,14 +41,8 @@ namespace SF3.Models.Files.MPD {
         /// Updates all normals for the tile, also correcting neighboring tiles.
         /// </summary>
         /// <param name="halfHeight">When on (default, SF3 behavior), quad heights are halved for the purpose of normal calculations.</param>
-        public void UpdateNormals(bool halfHeight = true) {
-            MPD_File.SurfaceModel?.UpdateVertexNormals(
-                X, Y,
-                MPD_File.Surface.HeightmapRowTable,
-                POLYGON_NormalCalculationMethod.WeightedVerticalTriangles,
-                halfHeight
-            );
-
+        public void UpdateNormals(POLYGON_NormalCalculationMethod calculationMethod, bool halfHeight = true) {
+            MPD_File.SurfaceModel?.UpdateVertexNormals(X, Y, MPD_File.Surface.HeightmapRowTable, calculationMethod, halfHeight);
             for (var y = -1; y <= 1; y++)
                 for (var x = -1; x <= 1; x++)
                     TriggerNeighborTileModified(x, y);
@@ -275,7 +269,7 @@ namespace SF3.Models.Files.MPD {
             }
         }
 
-        public void UpdateNormalsForCorner(CornerType corner, bool halfHeight = true) {
+        public void UpdateNormalsForCorner(CornerType corner,  POLYGON_NormalCalculationMethod calculationMethod, bool halfHeight = true) {
             var surfaceModel = MPD_File.SurfaceModel;
             if (surfaceModel == null)
                 return;
@@ -290,7 +284,7 @@ namespace SF3.Models.Files.MPD {
                     var vx = x + vxCenter;
                     var vy = y + vyCenter;
                     if (vx >= 0 && vy >= 0 && vx < 65 && vy < 65)
-                        surfaceModel.UpdateVertexNormal(vx, vy, heightmapRowTable, POLYGON_NormalCalculationMethod.WeightedVerticalTriangles, halfHeight);
+                        surfaceModel.UpdateVertexNormal(vx, vy, heightmapRowTable, calculationMethod, halfHeight);
                 }
             }
 

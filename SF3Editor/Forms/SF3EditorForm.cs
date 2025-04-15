@@ -58,20 +58,17 @@ namespace SF3.Editor.Forms {
             tsmiFile_SwapToNext.ShowShortcutKeys = true;
 
             // Link some dropdowns/values to the app state.
-            tsmiSettings_UseDropdowns.Checked = _appState.UseDropdownsForNamedValues;
-            _appState.UseDropdownsForNamedValuesChanged += (s, e) => {
-                tsmiSettings_UseDropdowns.Checked = _appState.UseDropdownsForNamedValues;
-                _appState.Serialize();
-            };
-
-            tsmiSettings_EnableDebugSettings.Checked = _appState.EnableDebugSettings;
+            tsmiSettings_UseDropdowns.Checked                   = _appState.UseDropdownsForNamedValues;
+            tsmiSettings_EnableDebugSettings.Checked            = _appState.EnableDebugSettings;
+            tsmiSettings_MPD_ImprovedNormalCalculations.Checked = _appState.UseImprovedNormalCalculations;
+            tsmiSettings_MPD_UseFullHeightForNormals.Checked    = !_appState.UseVanillaHalfHeightForSurfaceNormalCalculations;
             Stats.DebugGrowthValues = _appState.EnableDebugSettings;
 
-            _appState.EnableDebugSettingsChanged += (s, e) => {
-                tsmiSettings_EnableDebugSettings.Checked = _appState.EnableDebugSettings;
-                Stats.DebugGrowthValues = _appState.EnableDebugSettings;
-                _appState.Serialize();
-            };
+            _appState.UseDropdownsForNamedValuesChanged                       += (s, e) => { tsmiSettings_UseDropdowns.Checked                   = _appState.UseDropdownsForNamedValues; _appState.Serialize(); };
+            _appState.EnableDebugSettingsChanged                              += (s, e) => { tsmiSettings_EnableDebugSettings.Checked            = _appState.EnableDebugSettings; Stats.DebugGrowthValues = _appState.EnableDebugSettings; _appState.Serialize(); };
+            _appState.UseImprovedNormalCalculationsChanged                    += (s, e) => { tsmiSettings_MPD_ImprovedNormalCalculations.Checked = _appState.UseImprovedNormalCalculations; _appState.Serialize(); };
+            _appState.UseVanillaHalfHeightForSurfaceNormalCalculationsChanged += (s, e) => { tsmiSettings_MPD_UseFullHeightForNormals.Checked    = !_appState.UseVanillaHalfHeightForSurfaceNormalCalculations; _appState.Serialize(); };
+
 
             UpdateRecentFilesMenu();
             _appState.RecentFilesChanged += (s, e) => UpdateRecentFilesMenu();

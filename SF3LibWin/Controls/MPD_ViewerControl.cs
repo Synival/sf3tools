@@ -152,18 +152,6 @@ namespace SF3.Win.Controls {
             }
         }
 
-        private void tsbRecalculateLightmapOriginalMath_Click(object sender, EventArgs e) {
-            var halfHeight = AppState.RetrieveAppState().UseVanillaHalfHeightForSurfaceNormalCalculations;
-            MPD_File?.SurfaceModel?.UpdateVertexNormals(MPD_File.Surface?.HeightmapRowTable, POLYGON_NormalCalculationMethod.TopRightTriangle, halfHeight);
-            UpdateModels();
-        }
-
-        private void tsbUpdateLightmapUpdatedMath_Click(object sender, EventArgs e) {
-            var halfHeight = AppState.RetrieveAppState().UseVanillaHalfHeightForSurfaceNormalCalculations;
-            MPD_File?.SurfaceModel?.UpdateVertexNormals(MPD_File.Surface?.HeightmapRowTable, POLYGON_NormalCalculationMethod.WeightedVerticalTriangles, halfHeight);
-            UpdateModels();
-        }
-
         private struct CameraRefs {
             public float Width;
             public float Height;
