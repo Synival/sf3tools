@@ -58,17 +58,17 @@ namespace SF3.Editor.Forms {
             tsmiFile_SwapToNext.ShowShortcutKeys = true;
 
             // Link some dropdowns/values to the app state.
-            tsmiEdit_UseDropdowns.Checked = _appState.UseDropdownsForNamedValues;
+            tsmiSettings_UseDropdowns.Checked = _appState.UseDropdownsForNamedValues;
             _appState.UseDropdownsForNamedValuesChanged += (s, e) => {
-                tsmiEdit_UseDropdowns.Checked = _appState.UseDropdownsForNamedValues;
+                tsmiSettings_UseDropdowns.Checked = _appState.UseDropdownsForNamedValues;
                 _appState.Serialize();
             };
 
-            tsmiEdit_EnableDebugSettings.Checked = _appState.EnableDebugSettings;
+            tsmiSettings_EnableDebugSettings.Checked = _appState.EnableDebugSettings;
             Stats.DebugGrowthValues = _appState.EnableDebugSettings;
 
             _appState.EnableDebugSettingsChanged += (s, e) => {
-                tsmiEdit_EnableDebugSettings.Checked = _appState.EnableDebugSettings;
+                tsmiSettings_EnableDebugSettings.Checked = _appState.EnableDebugSettings;
                 Stats.DebugGrowthValues = _appState.EnableDebugSettings;
                 _appState.Serialize();
             };

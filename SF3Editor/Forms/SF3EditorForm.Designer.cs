@@ -59,9 +59,6 @@ namespace SF3.Editor.Forms {
             tsmiFile_RecentFiles_10 = new System.Windows.Forms.ToolStripMenuItem();
             tsmiFile_Sep4 = new System.Windows.Forms.ToolStripSeparator();
             tsmiFile_Exit = new System.Windows.Forms.ToolStripMenuItem();
-            tsmiEdit = new System.Windows.Forms.ToolStripMenuItem();
-            tsmiEdit_UseDropdowns = new System.Windows.Forms.ToolStripMenuItem();
-            tsmiEdit_EnableDebugSettings = new System.Windows.Forms.ToolStripMenuItem();
             tsmiView = new System.Windows.Forms.ToolStripMenuItem();
             tsmiView_MPD = new System.Windows.Forms.ToolStripMenuItem();
             tsmiView_MPD_DrawSurfaceModel = new System.Windows.Forms.ToolStripMenuItem();
@@ -80,6 +77,8 @@ namespace SF3.Editor.Forms {
             tsmiView_MPD_DrawNormalMap = new System.Windows.Forms.ToolStripMenuItem();
             tsmiView_MPD_RotateSpritesUpToCamera = new System.Windows.Forms.ToolStripMenuItem();
             tsmiView_MPD_Sep2 = new System.Windows.Forms.ToolStripSeparator();
+            tsmiView_MPD_ShowHelp = new System.Windows.Forms.ToolStripMenuItem();
+            tsmiView_MPD_Sep3 = new System.Windows.Forms.ToolStripSeparator();
             tsmiView_MPD_EnableBlankFieldV2Controls = new System.Windows.Forms.ToolStripMenuItem();
             tsmi_Tools = new System.Windows.Forms.ToolStripMenuItem();
             tsmiTools_ImportTable = new System.Windows.Forms.ToolStripMenuItem();
@@ -100,16 +99,17 @@ namespace SF3.Editor.Forms {
             tsmiMPD_Textures = new System.Windows.Forms.ToolStripMenuItem();
             tsmiMPD_Textures_ImportAll = new System.Windows.Forms.ToolStripMenuItem();
             tsmiMPD_Textures_ExportAll = new System.Windows.Forms.ToolStripMenuItem();
+            tsmiSettings = new System.Windows.Forms.ToolStripMenuItem();
+            tsmiSettings_UseDropdowns = new System.Windows.Forms.ToolStripMenuItem();
+            tsmiSettings_EnableDebugSettings = new System.Windows.Forms.ToolStripMenuItem();
             tsmiHelp = new System.Windows.Forms.ToolStripMenuItem();
             tsmiHelp_About = new System.Windows.Forms.ToolStripMenuItem();
-            tsmiView_MPD_ShowHelp = new System.Windows.Forms.ToolStripMenuItem();
-            tsmiView_MPD_Sep3 = new System.Windows.Forms.ToolStripSeparator();
             menuStrip1.SuspendLayout();
             SuspendLayout();
             // 
             // menuStrip1
             // 
-            menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { tsmiFile, tsmiEdit, tsmiView, tsmi_Tools, tsmiMPD, tsmiHelp });
+            menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { tsmiFile, tsmiView, tsmi_Tools, tsmiMPD, tsmiSettings, tsmiHelp });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
             menuStrip1.Size = new Size(891, 24);
@@ -353,27 +353,6 @@ namespace SF3.Editor.Forms {
             tsmiFile_Exit.Text = "E&xit";
             tsmiFile_Exit.Click += tsmiFile_Exit_Click;
             // 
-            // tsmiEdit
-            // 
-            tsmiEdit.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { tsmiEdit_UseDropdowns, tsmiEdit_EnableDebugSettings });
-            tsmiEdit.Name = "tsmiEdit";
-            tsmiEdit.Size = new Size(39, 20);
-            tsmiEdit.Text = "&Edit";
-            // 
-            // tsmiEdit_UseDropdowns
-            // 
-            tsmiEdit_UseDropdowns.Name = "tsmiEdit_UseDropdowns";
-            tsmiEdit_UseDropdowns.Size = new Size(253, 22);
-            tsmiEdit_UseDropdowns.Text = "Use &Dropdowns for Named Values";
-            tsmiEdit_UseDropdowns.Click += tsmiEdit_UseDropdowns_Click;
-            // 
-            // tsmiEdit_EnableDebugSettings
-            // 
-            tsmiEdit_EnableDebugSettings.Name = "tsmiEdit_EnableDebugSettings";
-            tsmiEdit_EnableDebugSettings.Size = new Size(253, 22);
-            tsmiEdit_EnableDebugSettings.Text = "Enable Debu&g Settings";
-            tsmiEdit_EnableDebugSettings.Click += tsmiEdit_EnableDebugSettings_Click;
-            // 
             // tsmiView
             // 
             tsmiView.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { tsmiView_MPD });
@@ -385,7 +364,7 @@ namespace SF3.Editor.Forms {
             // 
             tsmiView_MPD.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { tsmiView_MPD_DrawSurfaceModel, tsmiView_MPD_DrawModels, tsmiView_MPD_DrawGround, tsmiView_MPD_DrawSkyBox, tsmiView_MPD_RunAnimations, tsmiView_MPD_ApplyLighting, tsmiView_MPD_DrawGradients, tsmiView_MPD_Sep1, tsmiView_MPD_DrawWireframes, tsmiView_MPD_DrawBoundaries, tsmiView_MPD_DrawTerrainTypes, tsmiView_MPD_DrawEventIDs, tsmiView_MPD_DrawCollisionLines, tsmiView_MPD_DrawNormalMap, tsmiView_MPD_RotateSpritesUpToCamera, tsmiView_MPD_Sep2, tsmiView_MPD_ShowHelp, tsmiView_MPD_Sep3, tsmiView_MPD_EnableBlankFieldV2Controls });
             tsmiView_MPD.Name = "tsmiView_MPD";
-            tsmiView_MPD.Size = new Size(180, 22);
+            tsmiView_MPD.Size = new Size(100, 22);
             tsmiView_MPD.Text = "&MPD";
             // 
             // tsmiView_MPD_DrawSurfaceModel
@@ -495,6 +474,18 @@ namespace SF3.Editor.Forms {
             // 
             tsmiView_MPD_Sep2.Name = "tsmiView_MPD_Sep2";
             tsmiView_MPD_Sep2.Size = new Size(381, 6);
+            // 
+            // tsmiView_MPD_ShowHelp
+            // 
+            tsmiView_MPD_ShowHelp.Name = "tsmiView_MPD_ShowHelp";
+            tsmiView_MPD_ShowHelp.Size = new Size(384, 22);
+            tsmiView_MPD_ShowHelp.Text = "Show Help";
+            tsmiView_MPD_ShowHelp.Click += tsmiView_MPD_ShowHelp_Click;
+            // 
+            // tsmiView_MPD_Sep3
+            // 
+            tsmiView_MPD_Sep3.Name = "tsmiView_MPD_Sep3";
+            tsmiView_MPD_Sep3.Size = new Size(381, 6);
             // 
             // tsmiView_MPD_EnableBlankFieldV2Controls
             // 
@@ -639,6 +630,27 @@ namespace SF3.Editor.Forms {
             tsmiMPD_Textures_ExportAll.Text = "&Export All...";
             tsmiMPD_Textures_ExportAll.Click += tsmiMPD_Textures_ExportAll_Click;
             // 
+            // tsmiSettings
+            // 
+            tsmiSettings.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { tsmiSettings_UseDropdowns, tsmiSettings_EnableDebugSettings });
+            tsmiSettings.Name = "tsmiSettings";
+            tsmiSettings.Size = new Size(61, 20);
+            tsmiSettings.Text = "&Settings";
+            // 
+            // tsmiSettings_UseDropdowns
+            // 
+            tsmiSettings_UseDropdowns.Name = "tsmiSettings_UseDropdowns";
+            tsmiSettings_UseDropdowns.Size = new Size(253, 22);
+            tsmiSettings_UseDropdowns.Text = "Use &Dropdowns for Named Values";
+            tsmiSettings_UseDropdowns.Click += tsmiSettings_UseDropdowns_Click;
+            // 
+            // tsmiSettings_EnableDebugSettings
+            // 
+            tsmiSettings_EnableDebugSettings.Name = "tsmiSettings_EnableDebugSettings";
+            tsmiSettings_EnableDebugSettings.Size = new Size(253, 22);
+            tsmiSettings_EnableDebugSettings.Text = "Show Debu&g Fields";
+            tsmiSettings_EnableDebugSettings.Click += tsmiSettings_EnableDebugSettings_Click;
+            // 
             // tsmiHelp
             // 
             tsmiHelp.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { tsmiHelp_About });
@@ -652,18 +664,6 @@ namespace SF3.Editor.Forms {
             tsmiHelp_About.Size = new Size(116, 22);
             tsmiHelp_About.Text = "&About...";
             tsmiHelp_About.Click += tsmiHelp_About_Click;
-            // 
-            // tsmiView_MPD_ShowHelp
-            // 
-            tsmiView_MPD_ShowHelp.Name = "tsmiView_MPD_ShowHelp";
-            tsmiView_MPD_ShowHelp.Size = new Size(384, 22);
-            tsmiView_MPD_ShowHelp.Text = "Show Help";
-            tsmiView_MPD_ShowHelp.Click += tsmiView_MPD_ShowHelp_Click;
-            // 
-            // tsmiView_MPD_Sep3
-            // 
-            tsmiView_MPD_Sep3.Name = "tsmiView_MPD_Sep3";
-            tsmiView_MPD_Sep3.Size = new Size(381, 6);
             // 
             // SF3EditorForm
             // 
@@ -701,15 +701,15 @@ namespace SF3.Editor.Forms {
         private System.Windows.Forms.ToolStripMenuItem tsmiFile_OpenScenario_PremiumDisk;
         private System.Windows.Forms.ToolStripMenuItem tsmiHelp;
         private System.Windows.Forms.ToolStripMenuItem tsmiHelp_About;
-        private System.Windows.Forms.ToolStripMenuItem tsmiEdit;
-        private System.Windows.Forms.ToolStripMenuItem tsmiEdit_UseDropdowns;
+        private System.Windows.Forms.ToolStripMenuItem tsmiSettings;
+        private System.Windows.Forms.ToolStripMenuItem tsmiSettings_UseDropdowns;
         private System.Windows.Forms.ToolStripMenuItem tsmi_Tools;
         private System.Windows.Forms.ToolStripMenuItem tsmiTools_ApplyDFR;
         private System.Windows.Forms.ToolStripMenuItem tsmiTools_CreateDFR;
         private System.Windows.Forms.ToolStripSeparator tsmiTools_Sep1;
         private System.Windows.Forms.ToolStripMenuItem tsmiTools_ImportTable;
         private System.Windows.Forms.ToolStripMenuItem tsmiTools_ExportTable;
-        private System.Windows.Forms.ToolStripMenuItem tsmiEdit_EnableDebugSettings;
+        private System.Windows.Forms.ToolStripMenuItem tsmiSettings_EnableDebugSettings;
         private System.Windows.Forms.ToolStripMenuItem tsmiMPD;
         private System.Windows.Forms.ToolStripMenuItem tsmiMPD_Textures;
         private System.Windows.Forms.ToolStripMenuItem tsmiMPD_Textures_ImportAll;
