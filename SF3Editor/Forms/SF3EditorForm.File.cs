@@ -11,6 +11,23 @@ using SF3.Win;
 
 namespace SF3.Editor.Forms {
     public partial class SF3EditorForm {
+        private void InitFileMenu() {
+            // Remember the last Scenario type to open.
+            UpdateLocalOpenScenario();
+            _appState.OpenScenarioChanged += (s, e) => {
+                UpdateLocalOpenScenario();
+                _appState.Serialize();
+            };
+
+            tsmiFile_SwapToPrev.ShortcutKeyDisplayString = "Ctrl+Alt+,";
+            tsmiFile_SwapToPrev.ShowShortcutKeys = true;
+            tsmiFile_SwapToNext.ShortcutKeyDisplayString = "Ctrl+Alt+.";
+            tsmiFile_SwapToNext.ShowShortcutKeys = true;
+
+            UpdateRecentFilesMenu();
+            _appState.RecentFilesChanged += (s, e) => UpdateRecentFilesMenu();
+        }
+
         /// <summary>
         /// Creates an "Open" dialog and, if a file was chosen, opens it, processes its data, and loads it.
         /// </summary>
