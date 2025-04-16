@@ -26,13 +26,16 @@
     <Compile Update="Forms\SF3EditorForm.File.cs">
       <DependentUpon>SF3EditorForm.cs</DependentUpon>
     </Compile>
-    <Compile Update="Forms\SF3EditorForm.Edit.cs">
+    <Compile Update="Forms\SF3EditorForm.View.cs">
       <DependentUpon>SF3EditorForm.cs</DependentUpon>
     </Compile>
     <Compile Update="Forms\SF3EditorForm.Tools.cs">
       <DependentUpon>SF3EditorForm.cs</DependentUpon>
     </Compile>
     <Compile Update="Forms\SF3EditorForm.MPD.cs">
+      <DependentUpon>SF3EditorForm.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Forms\SF3EditorForm.Settings.cs">
       <DependentUpon>SF3EditorForm.cs</DependentUpon>
     </Compile>
     <Compile Update="Forms\SF3EditorForm.Help.cs">
