@@ -88,205 +88,199 @@ namespace SF3.Win {
                 .ToArray();
         }
 
+        private void SetValue(ref bool valueVar, bool newValue, EventHandler changedEvent) {
+            if (valueVar != newValue) {
+                valueVar = newValue;
+                changedEvent?.Invoke(this, EventArgs.Empty);
+            }
+        }
+
+        private void SetValue(ref int valueVar, int newValue, EventHandler changedEvent) {
+            if (valueVar != newValue) {
+                valueVar = newValue;
+                changedEvent?.Invoke(this, EventArgs.Empty);
+            }
+        }
+
+        /// <summary>
+        /// Name of the application. Should be set when initializing the AppState.
+        /// </summary>
         [JsonIgnore]
         public string AppName { get; private set; } = null;
 
+        /// <summary>
+        /// Filename of the AppState file with its absolute path. Should be set when initializing the AppState.
+        /// </summary>
         [JsonIgnore]
         public string FileFullPath { get; private set; } = null;
 
+        /// <summary>
+        /// When enabled, the MPD Viewer will draw the surface model.
+        /// </summary>
         public bool ViewerDrawSurfaceModel {
             get => _viewerDrawSurfaceModel;
-            set {
-                if (value != _viewerDrawSurfaceModel) {
-                    _viewerDrawSurfaceModel = value;
-                    ViewerDrawSurfaceModelChanged?.Invoke(this, EventArgs.Empty);
-                }
-            }
+            set => SetValue(ref _viewerDrawSurfaceModel, value, ViewerDrawSurfaceModelChanged);
         }
         private bool _viewerDrawSurfaceModel = true;
         public event EventHandler ViewerDrawSurfaceModelChanged;
 
+        /// <summary>
+        /// When enabled, the MPD Viewer will draw models.
+        /// </summary>
         public bool ViewerDrawModels {
             get => _viewerDrawModels;
-            set {
-                if (value != _viewerDrawModels) {
-                    _viewerDrawModels = value;
-                    ViewerDrawModelsChanged?.Invoke(this, EventArgs.Empty);
-                }
-            }
+            set => SetValue(ref _viewerDrawModels, value, ViewerDrawModelsChanged);
         }
         private bool _viewerDrawModels = true;
         public event EventHandler ViewerDrawModelsChanged;
 
+        /// <summary>
+        /// When enabled, the MPD Viewer will draw the ground / water layer.
+        /// </summary>
         public bool ViewerDrawGround {
             get => _viewerDrawGround;
-            set {
-                if (value != _viewerDrawGround) {
-                    _viewerDrawGround = value;
-                    ViewerDrawGroundChanged?.Invoke(this, EventArgs.Empty);
-                }
-            }
+            set => SetValue(ref _viewerDrawGround, value, ViewerDrawGroundChanged);
         }
         private bool _viewerDrawGround = true;
         public event EventHandler ViewerDrawGroundChanged;
 
+        /// <summary>
+        /// When enabled, the MPD Viewer will draw the skyboxes present in Scenario 2 MPD files onward.
+        /// </summary>
         public bool ViewerDrawSkyBox {
             get => _viewerDrawSkyBox;
-            set {
-                if (value != _viewerDrawSkyBox) {
-                    _viewerDrawSkyBox = value;
-                    ViewerDrawSkyBoxChanged?.Invoke(this, EventArgs.Empty);
-                }
-            }
+            set => SetValue(ref _viewerDrawSkyBox, value, ViewerDrawSkyBoxChanged);
         }
         private bool _viewerDrawSkyBox = true;
         public event EventHandler ViewerDrawSkyBoxChanged;
 
+        /// <summary>
+        /// When enabled, texture animations will run in the MPD Viewer.
+        /// </summary>
         public bool ViewerRunAnimations {
             get => _viewerRunAnimations;
-            set {
-                if (value != _viewerRunAnimations) {
-                    _viewerRunAnimations = value;
-                    ViewerRunAnimationsChanged?.Invoke(this, EventArgs.Empty);
-                }
-            }
+            set => SetValue(ref _viewerRunAnimations, value, ViewerRunAnimationsChanged);
         }
         private bool _viewerRunAnimations = true;
         public event EventHandler ViewerRunAnimationsChanged;
 
+        /// <summary>
+        /// When enabled, lighting will be applied to models and the surface model in the MPD Viewer.
+        /// </summary>
         public bool ViewerApplyLighting {
             get => _viewerApplyLighting;
-            set {
-                if (value != _viewerApplyLighting) {
-                    _viewerApplyLighting = value;
-                    ViewerApplyLightingChanged?.Invoke(this, EventArgs.Empty);
-                }
-            }
+            set => SetValue(ref _viewerApplyLighting, value, ViewerApplyLightingChanged);
         }
         private bool _viewerApplyLighting = true;
         public event EventHandler ViewerApplyLightingChanged;
 
+        /// <summary>
+        /// When enabled, the MPD Viewer will apply gradients if they're available.
+        /// </summary>
         public bool ViewerDrawGradients {
             get => _viewerDrawGradients;
-            set {
-                if (value != _viewerDrawGradients) {
-                    _viewerDrawGradients = value;
-                    ViewerDrawGradientsChanged?.Invoke(this, EventArgs.Empty);
-                }
-            }
+            set => SetValue(ref _viewerDrawGradients, value, ViewerDrawGradientsChanged);
         }
         private bool _viewerDrawGradients = true;
         public event EventHandler ViewerDrawGradientsChanged;
 
+        /// <summary>
+        /// When enabled, the MPD Viewer will draw wireframes on models and the surface model.
+        /// </summary>
         public bool ViewerDrawWireframe {
             get => _viewerDrawWireframe;
-            set {
-                if (value != _viewerDrawWireframe) {
-                    _viewerDrawWireframe = value;
-                    ViewerDrawWireframeChanged?.Invoke(this, EventArgs.Empty);
-                }
-            }
+            set => SetValue(ref _viewerDrawWireframe, value, ViewerDrawWireframeChanged);
         }
         private bool _viewerDrawWireframe = false;
         public event EventHandler ViewerDrawWireframeChanged;
 
+        /// <summary>
+        /// When enabled, the MPD Viewer will overlay boxes for the camera boundaries and battle cursor boundaries.
+        /// </summary>
         public bool ViewerDrawBoundaries {
             get => _viewerDrawBoundaries;
-            set {
-                if (value != _viewerDrawBoundaries) {
-                    _viewerDrawBoundaries = value;
-                    ViewerDrawBoundariesChanged?.Invoke(this, EventArgs.Empty);
-                }
-            }
+            set => SetValue(ref _viewerDrawBoundaries, value, ViewerDrawBoundariesChanged);
         }
         private bool _viewerDrawBoundaries = false;
         public event EventHandler ViewerDrawBoundariesChanged;
 
+        /// <summary>
+        /// When enabled, the MPD Viewer will draw 2D collision lines that affect movement when freely walking.
+        /// </summary>
         public bool ViewerDrawCollisionLines {
             get => _viewerDrawCollisionLines;
-            set {
-                if (value != _viewerDrawCollisionLines) {
-                    _viewerDrawCollisionLines = value;
-                    ViewerDrawCollisionLinesChanged?.Invoke(this, EventArgs.Empty);
-                }
-            }
+            set => SetValue(ref _viewerDrawCollisionLines, value, ViewerDrawCollisionLinesChanged);
         }
         private bool _viewerDrawCollisionLines = false;
         public event EventHandler ViewerDrawCollisionLinesChanged;
 
+        /// <summary>
+        /// When enabled, the MPD Viewer will overlay an icon for terrain types over each tile, or darken the tile for 'NoEntry' terrain.
+        /// </summary>
         public bool ViewerDrawTerrainTypes {
             get => _viewerDrawTerrainTypes;
-            set {
-                if (value != _viewerDrawTerrainTypes) {
-                    _viewerDrawTerrainTypes = value;
-                    ViewerDrawTerrainTypesChanged?.Invoke(this, EventArgs.Empty);
-                }
-            }
+            set => SetValue(ref _viewerDrawTerrainTypes, value, ViewerDrawTerrainTypesChanged);
         }
         private bool _viewerDrawTerrainTypes = false;
         public event EventHandler ViewerDrawTerrainTypesChanged;
 
+        /// <summary>
+        /// When enabled, the MPD Viewer will overlay an icon for an event ID when present.
+        /// </summary>
         public bool ViewerDrawEventIDs {
             get => _viewerDrawEventIDs;
-            set {
-                if (value != _viewerDrawEventIDs) {
-                    _viewerDrawEventIDs = value;
-                    ViewerDrawEventIDsChanged?.Invoke(this, EventArgs.Empty);
-                }
-            }
+            set => SetValue(ref _viewerDrawEventIDs, value, ViewerDrawEventIDsChanged);
         }
         private bool _viewerDrawEventIDs = false;
         public event EventHandler ViewerDrawEventIDsChanged;
 
+        /// <summary>
+        /// When enabled, the MPD Viewer will render an RGB value representing the normal instead of a lit texture.
+        /// </summary>
         public bool ViewerDrawNormals {
             get => _viewerDrawNormals;
-            set {
-                if (value != _viewerDrawNormals) {
-                    _viewerDrawNormals = value;
-                    ViewerDrawNormalsChanged?.Invoke(this, EventArgs.Empty);
-                }
-            }
+            set => SetValue(ref _viewerDrawNormals, value, ViewerDrawNormalsChanged);
         }
         private bool _viewerDrawNormals = false;
         public event EventHandler ViewerDrawNormalsChanged;
 
+        /// <summary>
+        /// When enabled, trees will be rotated upwards to face the camera. This isn't done during gameplay,
+        /// but useful for editing when viewing the terrain from above.
+        /// </summary>
         public bool ViewerRotateSpritesUp {
             get => _viewerRotateSpritesUp;
-            set {
-                if (value != _viewerRotateSpritesUp) {
-                    _viewerRotateSpritesUp = value;
-                    ViewerRotateSpritesUpChanged?.Invoke(this, EventArgs.Empty);
-                }
-            }
+            set => SetValue(ref _viewerRotateSpritesUp, value, ViewerRotateSpritesUpChanged);
         }
         private bool _viewerRotateSpritesUp = false;
         public event EventHandler ViewerRotateSpritesUpChanged;
 
+        /// <summary>
+        /// When enabled, the MPD Viewer will display a small 'Help' cheat sheet in the lower-right corner.
+        /// </summary>
         public bool ViewerDrawHelp {
             get => _viewerDrawHelp;
-            set {
-                if (value != _viewerDrawHelp) {
-                    _viewerDrawHelp = value;
-                    ViewerDrawHelpChanged?.Invoke(this, EventArgs.Empty);
-                }
-            }
+            set => SetValue(ref _viewerDrawHelp, value, ViewerDrawHelpChanged);
         }
         private bool _viewerDrawHelp = true;
         public event EventHandler ViewerDrawHelpChanged;
 
-        public int ViewerCursorMode { get; set; } = 0;
+        /// <summary>
+        /// The current the cursor tool selected in the MPD Viewer.
+        /// </summary>
+        public int ViewerCursorMode {
+            get => _viewerCursorMode;
+            set => SetValue(ref _viewerCursorMode, value, ViewerCursorModeChanged);
+        }
+        private int _viewerCursorMode = 0;
+        public event EventHandler ViewerCursorModeChanged;
 
         /// <summary>
         /// The current ScenarioType to open, serialized as an int for simplicity.
         /// </summary>
         public int OpenScenario {
             get => _openScenario;
-            set {
-                if (value != _openScenario) {
-                    _openScenario = value;
-                    OpenScenarioChanged?.Invoke(this, EventArgs.Empty);
-                }
-            }
+            set => SetValue(ref _openScenario, value, OpenScenarioChanged);
         }
         private int _openScenario = -1;
         public event EventHandler OpenScenarioChanged;
@@ -297,36 +291,30 @@ namespace SF3.Win {
         /// </summary>
         public bool UseDropdownsForNamedValues {
             get => _useDropdownsForNamedValues;
-            set {
-                if (value != _useDropdownsForNamedValues) {
-                    _useDropdownsForNamedValues = value;
-                    UseDropdownsForNamedValuesChanged?.Invoke(this, EventArgs.Empty);
-                }
-            }
+            set => SetValue(ref _useDropdownsForNamedValues, value, UseDropdownsForNamedValuesChanged);
         }
         private bool _useDropdownsForNamedValues = true;
         public event EventHandler UseDropdownsForNamedValuesChanged;
 
+        /// <summary>
+        /// When enabled, normals will be calculated using a method that considers all four corners of each quad, not just
+        /// the triangle in the upper-right corner.
+        /// </summary>
         public bool UseImprovedNormalCalculations {
             get => _useImprovedNormalCalculations;
-            set {
-                if (value != _useImprovedNormalCalculations) {
-                    _useImprovedNormalCalculations = value;
-                    UseImprovedNormalCalculationsChanged?.Invoke(this, EventArgs.Empty);
-                }
-            }
+            set => SetValue(ref _useImprovedNormalCalculations, value, UseImprovedNormalCalculationsChanged);
         }
         private bool _useImprovedNormalCalculations = true;
         public event EventHandler UseImprovedNormalCalculationsChanged;
 
+        /// <summary>
+        /// When disabled, the vanilla behavior is used, when halves the Y coordinates of every vertex when calculating the normal vector.
+        /// When enabled, the Y coordinates are not halved when calculating the normal vector, which results in much more contrast between
+        /// slopes and flat tiles, but is not accurate for SF3 maps.
+        /// </summary>
         public bool UseVanillaHalfHeightForSurfaceNormalCalculations {
             get => _useVanillaHalfHeightForSurfaceNormalCalculations;
-            set {
-                if (value != _useVanillaHalfHeightForSurfaceNormalCalculations) {
-                    _useVanillaHalfHeightForSurfaceNormalCalculations = value;
-                    UseVanillaHalfHeightForSurfaceNormalCalculationsChanged?.Invoke(this, EventArgs.Empty);
-                }
-            }
+            set => SetValue(ref _useVanillaHalfHeightForSurfaceNormalCalculations, value, UseVanillaHalfHeightForSurfaceNormalCalculationsChanged);
         }
         private bool _useVanillaHalfHeightForSurfaceNormalCalculations = true;
         public event EventHandler UseVanillaHalfHeightForSurfaceNormalCalculationsChanged;
@@ -337,12 +325,7 @@ namespace SF3.Win {
         /// </summary>
         public bool EnableExperimentalBlankFieldV2Brushes {
             get => _enableExperimentalBlankFieldV2Brushes;
-            set {
-                if (value != _enableExperimentalBlankFieldV2Brushes) {
-                    _enableExperimentalBlankFieldV2Brushes = value;
-                    EnableExperimentalBlankFieldV2BrushesChanged?.Invoke(this, EventArgs.Empty);
-                }
-            }
+            set => SetValue(ref _enableExperimentalBlankFieldV2Brushes, value, EnableExperimentalBlankFieldV2BrushesChanged);
         }
         private bool _enableExperimentalBlankFieldV2Brushes = false;
         public event EventHandler EnableExperimentalBlankFieldV2BrushesChanged;
@@ -352,12 +335,7 @@ namespace SF3.Win {
         /// </summary>
         public bool EnableDebugSettings {
             get => _enableDebugSettings;
-            set {
-                if (value != _enableDebugSettings) {
-                    _enableDebugSettings = value;
-                    EnableDebugSettingsChanged?.Invoke(this, EventArgs.Empty);
-                }
-            }
+            set => SetValue(ref _enableDebugSettings, value, EnableDebugSettingsChanged);
         }
         private bool _enableDebugSettings = false;
         public event EventHandler EnableDebugSettingsChanged;
