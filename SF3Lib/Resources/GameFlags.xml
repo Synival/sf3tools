@@ -2822,35 +2822,35 @@
     <item value="0x0B03" name="Angel Wing in House next to Imperial Command" />
     <item value="0x0B04" name="Protect Bracer in Saraband Imperial District" />
     <item value="0x0B05" name="Power Wine in Imperial Command" />
-    <item value="0x0B06" name="" />
-    <item value="0x0B07" name="" />
+    <item value="0x0B06" name="Scn2 Battle 3 Ruins Locked Chest (Silver Ring)" />
+    <item value="0x0B07" name="Scn2 Battle 3 Ruins Unlocked Chest (Healing Drop)" />
     <item value="0x0B08" name="Dusty Treasure Chest (Power Wine)" />
     <item value="0x0B09" name="" />
     <item value="0x0B0A" name="" />
     <item value="0x0B0B" name="" />
     <item value="0x0B0C" name="" />
-    <item value="0x0B0D" name="" />
-    <item value="0x0B0E" name="" />
-    <item value="0x0B0F" name="" />
-    <item value="0x0B10" name="" />
-    <item value="0x0B11" name="" />
+    <item value="0x0B0D" name="Dusty Mountain Trail Rock 1 (Large Mithril)" />
+    <item value="0x0B0E" name="Dusty Mountain Trail Rock 2 (Healing Drop)" />
+    <item value="0x0B0F" name="Scn2 Battle 5 Rock 1 (Large Mithril)" />
+    <item value="0x0B10" name="Scn2 Battle 5 Rock 2 (Life Ring)" />
+    <item value="0x0B11" name="Scn2 Battle 5 Rock 3 (Healing Drop)" />
     <item value="0x0B12" name="Anafect Village Box 1 (Gale Ring)" />
     <item value="0x0B13" name="Anafect Village Box 2 (Angel Wing)" />
     <item value="0x0B14" name="Anafect Village Tombstone (Large Mithril)" />
     <item value="0x0B15" name="" />
     <item value="0x0B16" name="" />
-    <item value="0x0B17" name="" />
-    <item value="0x0B18" name="" />
-    <item value="0x0B19" name="" />
-    <item value="0x0B1A" name="" />
-    <item value="0x0B1B" name="" />
-    <item value="0x0B1C" name="" />
+    <item value="0x0B17" name="Scn2 Battle 6 Treasure Chest (Potion)" />
+    <item value="0x0B18" name="Scn2 Battle 8 Treasure Chest (Happy Cookie)" />
+    <item value="0x0B19" name="Scn2 Battle 8 Pillar (Large Mithril)" />
+    <item value="0x0B1A" name="Scn2 Battle 9 Ruins Locked Chest (Protect Ring)" />
+    <item value="0x0B1B" name="Scn2 Battle 9 Ruins Unlocked Chest 1 (Large Mithril)" />
+    <item value="0x0B1C" name="Scn2 Battle 9 Ruins Unlocked Chest 2 (Healing Drop)" />
     <item value="0x0B1D" name="Rhineside Barrel (Fairy Powder)" />
     <item value="0x0B1E" name="Rhineside Inside Barrel (Antidote Herb)" />
     <item value="0x0B1F" name="Rhineside Inside Vase 1 (Healing Rain)" />
     <item value="0x0B20" name="Rhineside Inside Vase 2 (Chicken Feed)" />
     <item value="0x0B21" name="" />
-    <item value="0x0B22" name="" />
+    <item value="0x0B22" name="Scn2 Battle 10 Box (Large Mithril) " />
     <item value="0x0B23" name="" />
     <item value="0x0B24" name="" />
     <item value="0x0B25" name="" />
@@ -2861,15 +2861,15 @@
     <item value="0x0B2A" name="" />
     <item value="0x0B2B" name="" />
     <item value="0x0B2C" name="" />
-    <item value="0x0B2D" name="" />
-    <item value="0x0B2E" name="" />
-    <item value="0x0B2F" name="" />
-    <item value="0x0B30" name="" />
-    <item value="0x0B31" name="" />
-    <item value="0x0B32" name="" />
-    <item value="0x0B33" name="" />
-    <item value="0x0B34" name="" />
-    <item value="0x0B35" name="" />
+    <item value="0x0B2D" name="Barrand Box in SW Corner (Large Mithril)" />
+    <item value="0x0B2E" name="Barrand Lighthouse Barrel (Swift Boots)" />
+    <item value="0x0B2F" name="Barrand Inside Box in House (Large Mithril)" />
+    <item value="0x0B30" name="Barrand Inside Barrel in House (Potion)" />
+    <item value="0x0B31" name="Barrand Mansion Table Near Fireplace (Large Mithril)" />
+    <item value="0x0B32" name="Barrand Prison Middle of Passage (Dark Matter)" />
+    <item value="0x0B33" name="Barrand Prison Stone Statue (Brave Apple)" />
+    <item value="0x0B34" name="Scn2 Battle 14 Ruins Unlocked Chest 1 (Large Mithril)" />
+    <item value="0x0B35" name="Scn2 Battle 14 Ruins Unlocked Chest 2 (Black Ring)" />
     <item value="0x0B36" name="" />
     <item value="0x0B37" name="" />
     <item value="0x0B38" name="" />
@@ -2878,13 +2878,13 @@
     <item value="0x0B3B" name="" />
     <item value="0x0B3C" name="" />
     <item value="0x0B3D" name="" />
-    <item value="0x0B3E" name="" />
-    <item value="0x0B3F" name="" />
+    <item value="0x0B3E" name="Scn2 Battle 17 Ruins Locked Chest 1 (Accurate Axe)" />
+    <item value="0x0B3F" name="Scn2 Battle 17 Ruins Locked Chest 2 (Large Mithril)" />
     <item value="0x0B40" name="" />
     <item value="0x0B41" name="Elbesem Temple Inside Chest (Earth Rod)" />
     <item value="0x0B42" name="Elbesem Temple Inside Freeze Ball" />
     <item value="0x0B43" name="Elbesem Temple Inside Pillar (Small Mithril)" />
-    <item value="0x0B44" name="" />
+    <item value="0x0B44" name="Elbesem Temple Basement Pillar (Large Mithril)" />
     <item value="0x0B45" name="" />
     <item value="0x0B46" name="" />
     <item value="0x0B47" name="" />
@@ -2904,16 +2904,16 @@
     <item value="0x0B55" name="" />
     <item value="0x0B56" name="" />
     <item value="0x0B57" name="" />
-    <item value="0x0B58" name="" />
-    <item value="0x0B59" name="" />
-    <item value="0x0B5A" name="" />
-    <item value="0x0B5B" name="" />
-    <item value="0x0B5C" name="" />
-    <item value="0x0B5D" name="" />
-    <item value="0x0B5E" name="" />
-    <item value="0x0B5F" name="" />
-    <item value="0x0B60" name="" />
-    <item value="0x0B61" name="" />
+    <item value="0x0B58" name="Scn2 Battle 22 Outside Tree 1 (Evil Ring)" />
+    <item value="0x0B59" name="Scn2 Battle 22 Outside Tree 2 (Small Mithril)" />
+    <item value="0x0B5A" name="Garvin's Office Treasure Chest (Wendigo Wand)" />
+    <item value="0x0B5B" name="Scn2 Battle 22 Inside Statue (Holy Halberd)" />
+    <item value="0x0B5C" name="Airo Bridge (0x3F) (Small Mithril)" />
+    <item value="0x0B5D" name="Airo Inside Barrel in House (Large Mithril)" />
+    <item value="0x0B5E" name="Airo Inside Box in House (0x3E) (Pretty Glove)" />
+    <item value="0x0B5F" name="Airo Inside Search Table in House (Quick Chicken)" />
+    <item value="0x0B60" name="Airo Inside Box in Bar (Small Mthril)" />
+    <item value="0x0B61" name="Airo Inside Box in Shops (0x3B) (Large Mithril)" />
     <item value="0x0B62" name="" />
     <item value="0x0B63" name="" />
     <item value="0x0B64" name="" />
@@ -2952,7 +2952,7 @@
     <item value="0x0B85" name="" />
     <item value="0x0B86" name="" />
     <item value="0x0B87" name="" />
-    <item value="0x0B88" name="" />
+    <item value="0x0B88" name="Barrand Treasure Chest Outside Secret Exit (Chaos Ring)" />
     <item value="0x0B89" name="50 coins (Imperial Command, Saraband Imperial District)" />
     <item value="0x0B8A" name="" />
     <item value="0x0B8B" name="50 Coins (Shelf next to Barracks, Saraband Imperial District)" />
@@ -2975,7 +2975,7 @@
     <item value="0x0B9C" name="" />
     <item value="0x0B9D" name="" />
     <item value="0x0B9E" name="" />
-    <item value="0x0B9F" name="" />
+    <item value="0x0B9F" name="Scn2 Balsamo Treasure Chest (Ruin Map)" />
     <item value="0x0BA0" name="" />
     <item value="0x0BA1" name="" />
     <item value="0x0BA2" name="" />
