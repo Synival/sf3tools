@@ -97,7 +97,7 @@ namespace SF3.Win {
             return new NormalCalculationSettings(
                 UseImprovedNormalCalculations ? POLYGON_NormalCalculationMethod.WeightedVerticalTriangles : POLYGON_NormalCalculationMethod.TopRightTriangle,
                 UseVanillaHalfHeightForSurfaceNormalCalculations,
-                true
+                FixSurfaceMapTileNormalOverflowUnderflowErrors
             );
         }
 
@@ -352,6 +352,18 @@ namespace SF3.Win {
         }
         private bool _enableDebugSettings = false;
         public event EventHandler EnableDebugSettingsChanged;
+
+        /// <summary>
+        /// When enabled, each component of surface map tile normal vectors are clamped to (roughly) within the -.5 to .5 range to
+        /// prevent weird errors that occur when the "0.5 bit" is interpreted as the signed most-significant bit.
+        /// (See implementation of ByteData.SetWeirdCompressedFIXED and GetWeirdCompressedFIXED to see why this could happen)
+        /// </summary>
+        public bool FixSurfaceMapTileNormalOverflowUnderflowErrors {
+            get => _fixSurfaceMapTileNormalOverflowUnderflowErrors;
+            set => SetValue(ref _fixSurfaceMapTileNormalOverflowUnderflowErrors, value, FixSurfaceMapTileNormalOverflowUnderflowErrorsChanged);
+        }
+        private bool _fixSurfaceMapTileNormalOverflowUnderflowErrors = true;
+        public event EventHandler FixSurfaceMapTileNormalOverflowUnderflowErrorsChanged;
 
         public struct RecentFile {
             public string Filename { get; set; }

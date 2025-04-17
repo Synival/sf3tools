@@ -99,6 +99,8 @@ namespace SF3.Editor.Forms {
             tsmiMPD_Textures = new System.Windows.Forms.ToolStripMenuItem();
             tsmiMPD_Textures_ImportAll = new System.Windows.Forms.ToolStripMenuItem();
             tsmiMPD_Textures_ExportAll = new System.Windows.Forms.ToolStripMenuItem();
+            tsmiMPD_Sep1 = new System.Windows.Forms.ToolStripSeparator();
+            tsmiMPD_RecalculateSurfaceModelNormals = new System.Windows.Forms.ToolStripMenuItem();
             tsmiSettings = new System.Windows.Forms.ToolStripMenuItem();
             tsmiSettings_UseDropdowns = new System.Windows.Forms.ToolStripMenuItem();
             tsmiSettings_EnableDebugSettings = new System.Windows.Forms.ToolStripMenuItem();
@@ -108,8 +110,7 @@ namespace SF3.Editor.Forms {
             tsmiSettings_MPD_UseFullHeightForNormals = new System.Windows.Forms.ToolStripMenuItem();
             tsmiHelp = new System.Windows.Forms.ToolStripMenuItem();
             tsmiHelp_About = new System.Windows.Forms.ToolStripMenuItem();
-            tsmiMPD_Sep1 = new System.Windows.Forms.ToolStripSeparator();
-            tsmiMPD_RecalculateSurfaceModelNormals = new System.Windows.Forms.ToolStripMenuItem();
+            tsmiSettings_MPD_FixNormalOverflowUnderflowErrors = new System.Windows.Forms.ToolStripMenuItem();
             menuStrip1.SuspendLayout();
             SuspendLayout();
             // 
@@ -636,6 +637,18 @@ namespace SF3.Editor.Forms {
             tsmiMPD_Textures_ExportAll.Text = "&Export All...";
             tsmiMPD_Textures_ExportAll.Click += tsmiMPD_Textures_ExportAll_Click;
             // 
+            // tsmiMPD_Sep1
+            // 
+            tsmiMPD_Sep1.Name = "tsmiMPD_Sep1";
+            tsmiMPD_Sep1.Size = new Size(262, 6);
+            // 
+            // tsmiMPD_RecalculateSurfaceModelNormals
+            // 
+            tsmiMPD_RecalculateSurfaceModelNormals.Name = "tsmiMPD_RecalculateSurfaceModelNormals";
+            tsmiMPD_RecalculateSurfaceModelNormals.Size = new Size(265, 22);
+            tsmiMPD_RecalculateSurfaceModelNormals.Text = "Recalculate Surface Model &Norrmals";
+            tsmiMPD_RecalculateSurfaceModelNormals.Click += tsmiMPD_RecalculateSurfaceModelNormals_Click;
+            // 
             // tsmiSettings
             // 
             tsmiSettings.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { tsmiSettings_UseDropdowns, tsmiSettings_EnableDebugSettings, tsmiSettings_Sep1, tsmiSettings_MPD });
@@ -664,7 +677,7 @@ namespace SF3.Editor.Forms {
             // 
             // tsmiSettings_MPD
             // 
-            tsmiSettings_MPD.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { tsmiSettings_MPD_ImprovedNormalCalculations, tsmiSettings_MPD_UseFullHeightForNormals });
+            tsmiSettings_MPD.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { tsmiSettings_MPD_ImprovedNormalCalculations, tsmiSettings_MPD_UseFullHeightForNormals, tsmiSettings_MPD_FixNormalOverflowUnderflowErrors });
             tsmiSettings_MPD.Name = "tsmiSettings_MPD";
             tsmiSettings_MPD.Size = new Size(253, 22);
             tsmiSettings_MPD.Text = "&MPD";
@@ -672,15 +685,15 @@ namespace SF3.Editor.Forms {
             // tsmiSettings_MPD_ImprovedNormalCalculations
             // 
             tsmiSettings_MPD_ImprovedNormalCalculations.Name = "tsmiSettings_MPD_ImprovedNormalCalculations";
-            tsmiSettings_MPD_ImprovedNormalCalculations.Size = new Size(363, 22);
-            tsmiSettings_MPD_ImprovedNormalCalculations.Text = "Use Improved Normal Calculation Function";
+            tsmiSettings_MPD_ImprovedNormalCalculations.Size = new Size(454, 22);
+            tsmiSettings_MPD_ImprovedNormalCalculations.Text = "Use Improved Surface Map Tile Normal Calculation Function";
             tsmiSettings_MPD_ImprovedNormalCalculations.Click += tsmiSettings_MPD_ImprovedNormalCalculations_Click;
             // 
             // tsmiSettings_MPD_UseFullHeightForNormals
             // 
             tsmiSettings_MPD_UseFullHeightForNormals.Name = "tsmiSettings_MPD_UseFullHeightForNormals";
-            tsmiSettings_MPD_UseFullHeightForNormals.Size = new Size(363, 22);
-            tsmiSettings_MPD_UseFullHeightForNormals.Text = "Use Full Instead of Half Height for Normal Calculations";
+            tsmiSettings_MPD_UseFullHeightForNormals.Size = new Size(454, 22);
+            tsmiSettings_MPD_UseFullHeightForNormals.Text = "Use Full Instead of Half Height for Surface Map Tile Normal Calculations";
             tsmiSettings_MPD_UseFullHeightForNormals.Click += tsmiSettings_MPD_UseFullHeightForNormals_Click;
             // 
             // tsmiHelp
@@ -697,17 +710,12 @@ namespace SF3.Editor.Forms {
             tsmiHelp_About.Text = "&About...";
             tsmiHelp_About.Click += tsmiHelp_About_Click;
             // 
-            // tsmiMPD_Sep1
+            // tsmiSettings_MPD_FixNormalOverflowUnderflowErrors
             // 
-            tsmiMPD_Sep1.Name = "tsmiMPD_Sep1";
-            tsmiMPD_Sep1.Size = new Size(262, 6);
-            // 
-            // tsmiMPD_RecalculateSurfaceModelNormals
-            // 
-            tsmiMPD_RecalculateSurfaceModelNormals.Name = "tsmiMPD_RecalculateSurfaceModelNormals";
-            tsmiMPD_RecalculateSurfaceModelNormals.Size = new Size(265, 22);
-            tsmiMPD_RecalculateSurfaceModelNormals.Text = "Recalculate Surface Model &Norrmals";
-            tsmiMPD_RecalculateSurfaceModelNormals.Click += tsmiMPD_RecalculateSurfaceModelNormals_Click;
+            tsmiSettings_MPD_FixNormalOverflowUnderflowErrors.Name = "tsmiSettings_MPD_FixNormalOverflowUnderflowErrors";
+            tsmiSettings_MPD_FixNormalOverflowUnderflowErrors.Size = new Size(454, 22);
+            tsmiSettings_MPD_FixNormalOverflowUnderflowErrors.Text = "Fix Surface Map Tile Normal Overflow/Underflow Errors";
+            tsmiSettings_MPD_FixNormalOverflowUnderflowErrors.Click += tsmiSettings_MPD_FixNormalOverflowUnderflowErrors_Click;
             // 
             // SF3EditorForm
             // 
@@ -811,5 +819,6 @@ namespace SF3.Editor.Forms {
         private System.Windows.Forms.ToolStripMenuItem tsmiSettings_MPD_UseFullHeightForNormals;
         private System.Windows.Forms.ToolStripSeparator tsmiMPD_Sep1;
         private System.Windows.Forms.ToolStripMenuItem tsmiMPD_RecalculateSurfaceModelNormals;
+        private System.Windows.Forms.ToolStripMenuItem tsmiSettings_MPD_FixNormalOverflowUnderflowErrors;
     }
 }
