@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Linq;
+using CommonLib.Types;
 using Newtonsoft.Json;
 using SF3.Types;
 
@@ -86,6 +87,18 @@ namespace SF3.Win {
                     .Take(max - 1)
                 )
                 .ToArray();
+        }
+
+        /// <summary>
+        /// Creates a NormalCalculationSettings based on settings in the AppState.
+        /// </summary>
+        /// <returns>A new NormalCalculationSettings instance.</returns>
+        public NormalCalculationSettings MakeNormalCalculationSettings() {
+            return new NormalCalculationSettings(
+                UseImprovedNormalCalculations ? POLYGON_NormalCalculationMethod.WeightedVerticalTriangles : POLYGON_NormalCalculationMethod.TopRightTriangle,
+                UseVanillaHalfHeightForSurfaceNormalCalculations,
+                true
+            );
         }
 
         private void SetValue(ref bool valueVar, bool newValue, EventHandler changedEvent) {

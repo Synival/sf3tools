@@ -242,14 +242,13 @@ namespace SF3.Win.Controls {
                     if (tx >= 0 && ty >= 0 && tx < 64 && ty < 64)
                         FieldEditing.FieldEditing.UpdateTileTexture(MPD_File.Tiles[tx, ty], true);
 
-            var halfHeight        = _appState.UseVanillaHalfHeightForSurfaceNormalCalculations;
-            var calculationMethod = _appState.UseImprovedNormalCalculations ? POLYGON_NormalCalculationMethod.WeightedVerticalTriangles : POLYGON_NormalCalculationMethod.TopRightTriangle;
+            var settings = _appState.MakeNormalCalculationSettings();
             for (int tx = x - 2 - nearbyRange; tx <= x + 2 + nearbyRange; tx++) {
                 for (int ty = y - 2 - nearbyRange; ty <= y + 2 + nearbyRange; ty++) {
                     if (tx >= 0 && ty >= 0 && tx < 64 && ty < 64) {
                         var affectedTile = MPD_File.Tiles[tx, ty];
                         affectedTile.MoveHeight = affectedTile.GetAverageHeight();
-                        affectedTile.UpdateNormals(calculationMethod, halfHeight);
+                        affectedTile.UpdateNormals(settings);
                     }
                 }
             }

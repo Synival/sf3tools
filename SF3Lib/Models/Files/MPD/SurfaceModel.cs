@@ -41,23 +41,21 @@ namespace SF3.Models.Files.MPD {
         /// <param name="tileX">X coordinate of the tile.</param>
         /// <param name="tileY">Y coordinate of the tile.</param>
         /// <param name="corner">Corner of the tile to update.</param>
-        /// <param name="calculationMethod">The calculations used for determining the normal for each part of the heightmap.</param>
-        /// <param name="halfHeight">When on (default, SF3 behavior), quad heights are halved for the purpose of normal calculations.</param>
-        public void UpdateVertexNormal(int tileX, int tileY, CornerType corner, HeightmapRowTable heightmap, POLYGON_NormalCalculationMethod calculationMethod, bool halfHeight = true)
-            => UpdateVertexNormal(TileToVertexX(tileX, corner), TileToVertexY(tileY, corner), heightmap, calculationMethod, halfHeight);
+        /// <param name="settings">Settings for normal calculations.</param>
+        public void UpdateVertexNormal(int tileX, int tileY, CornerType corner, HeightmapRowTable heightmap, NormalCalculationSettings settings)
+            => UpdateVertexNormal(TileToVertexX(tileX, corner), TileToVertexY(tileY, corner), heightmap, settings);
 
         /// <summary>
         /// Updates the vertex normal for a specific vertex in the vertex mesh.
         /// </summary>
         /// <param name="vertexX">X coordinate of the vertex.</param>
         /// <param name="vertexY">Y coordinate of the vertex.</param>
-        /// <param name="calculationMethod">The calculations used for determining the normal for each part of the heightmap.</param>
-        /// <param name="halfHeight">When on (default, SF3 behavior), quad heights are halved for the purpose of normal calculations.</param>
-        public void UpdateVertexNormal(int vertexX, int vertexY, HeightmapRowTable heightmap, POLYGON_NormalCalculationMethod calculationMethod, bool halfHeight = true) {
+        /// <param name="settings">Settings for normal calculations.</param>
+        public void UpdateVertexNormal(int vertexX, int vertexY, HeightmapRowTable heightmap, NormalCalculationSettings settings) {
             if (heightmap == null || vertexX < 0 || vertexY < 0 || vertexX > 64 || vertexY > 64)
                 return;
 
-            var normal = heightmap.CalculateVertexNormal(vertexX, vertexY, calculationMethod, halfHeight);
+            var normal = heightmap.CalculateVertexNormal(vertexX, vertexY, settings);
             var locations = GetVertexBlockLocations(vertexX, vertexY);
             UpdateVertexNormals(locations, normal);
         }
@@ -78,26 +76,25 @@ namespace SF3.Models.Files.MPD {
         /// </summary>
         /// <param name="tileX">X coordinate of the tile.</param>
         /// <param name="tileY">Y coordinate of the tile.</param>
-        /// <param name="calculationMethod">The calculations used for determining the normal for each part of the heightmap.</param>
-        /// <param name="halfHeight">When on (default, SF3 behavior), quad heights are halved for the purpose of normal calculations.</param>
-        public void UpdateVertexNormals(int tileX, int tileY, HeightmapRowTable heightmap, POLYGON_NormalCalculationMethod calculationMethod, bool halfHeight = true) {
+        /// <param name="settings">Settings for normal calculations.</param>
+        public void UpdateVertexNormals(int tileX, int tileY, HeightmapRowTable heightmap, NormalCalculationSettings settings) {
             if (heightmap == null)
                 return;
             foreach (var c in (CornerType[]) Enum.GetValues(typeof(CornerType)))
-                UpdateVertexNormal(tileX, tileY, c, heightmap, calculationMethod, halfHeight);
+                UpdateVertexNormal(tileX, tileY, c, heightmap, settings);
         }
 
         /// <summary>
         /// Recalculates all vertex "normals" for all tiles.
         /// </summary>
-        /// <param name="calculationMethod">The calculations used for determining the normal for each part of the heightmap.</param>
-        /// <param name="halfHeight">When on (default, SF3 behavior), quad heights are halved for the purpose of normal calculations.</param>
-        public void UpdateVertexNormals(HeightmapRowTable heightmap, POLYGON_NormalCalculationMethod calculationMethod, bool halfHeight = true) {
+        /// <param name="heightmap">The heightmap table to recalculate.</param>
+        /// <param name="settings">Settings for normal calculations.</param>
+        public void UpdateVertexNormals(HeightmapRowTable heightmap, NormalCalculationSettings settings) {
             if (heightmap == null)
                 return;
             for (var y = 0; y < 65; y++)
                 for (var x = 0; x < 65; x++)
-                    UpdateVertexNormal(x, y, heightmap, calculationMethod, halfHeight);
+                    UpdateVertexNormal(x, y, heightmap, settings);
         }
 
         [BulkCopyRowName]
