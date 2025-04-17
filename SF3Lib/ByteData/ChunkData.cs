@@ -54,6 +54,7 @@ namespace SF3.ByteData {
         public int GetWord(int location) => ChildData.GetWord(location);
         public int GetDouble(int location) => ChildData.GetDouble(location);
         public CompressedFIXED GetCompressedFIXED(int location) => ChildData.GetCompressedFIXED(location);
+        public CompressedFIXED GetWeirdCompressedFIXED(int location) => ChildData.GetWeirdCompressedFIXED(location);
         public FIXED GetFIXED(int location) => ChildData.GetFIXED(location);
         public string GetString(int location, int length) => ChildData.GetString(location, length);
         public bool GetBit(int location, int bit) => ChildData.GetBit(location, bit);
@@ -62,6 +63,7 @@ namespace SF3.ByteData {
         public void SetWord(int location, int value) => ChildData.SetWord(location, value);
         public void SetDouble(int location, int value) => ChildData.SetDouble(location, value);
         public void SetCompressedFIXED(int location, CompressedFIXED value) => ChildData.SetCompressedFIXED(location, value);
+        public void SetWeirdCompressedFIXED(int location, CompressedFIXED value) => ChildData.SetWeirdCompressedFIXED(location, value);
         public void SetFIXED(int location, FIXED value) => ChildData.SetFIXED(location, value);
         public void SetString(int location, int length, string value) => ChildData.SetString(location, length, value);
         public void SetBit(int location, int bit, bool value) => ChildData.SetBit(location, bit, value);

@@ -81,7 +81,10 @@ namespace SF3.ByteData {
         public int GetByte(int location) => (int) GetData(location, 1);
         public int GetWord(int location) => (int) GetData(location, 2);
         public int GetDouble(int location) => (int) GetData(location, 4);
-        public CompressedFIXED GetCompressedFIXED(int location) {
+
+        public CompressedFIXED GetCompressedFIXED(int location) => new CompressedFIXED((short) GetWord(location));
+
+        public CompressedFIXED GetWeirdCompressedFIXED(int location) {
             // These are *weird* -- the *lowest* bit is the signed bit.
             var uWord = (ushort) GetWord(location);
             var sWord = (short) ((uWord & 0x01) << 15 | (uWord >> 1));
@@ -120,7 +123,10 @@ namespace SF3.ByteData {
         public void SetByte(int location, byte value) => SetData(location, value, 1);
         public void SetWord(int location, int value) => SetData(location, (uint) value, 2);
         public void SetDouble(int location, int value) => SetData(location, (uint) value, 4);
-        public void SetCompressedFIXED(int location, CompressedFIXED value) {
+
+        public void SetCompressedFIXED(int location, CompressedFIXED value) => SetWord(location, value.RawShort);
+
+        public void SetWeirdCompressedFIXED(int location, CompressedFIXED value) {
             // These are *weird* -- the *lowest* bit is the signed bit.
             var uWord = (ushort) value.RawShort;
             SetWord(location, ((value.RawShort & 0x7FFF) << 1) + ((value.RawShort & 0x8000) >> 15));

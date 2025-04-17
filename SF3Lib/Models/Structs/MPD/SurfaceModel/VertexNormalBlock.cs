@@ -26,15 +26,15 @@ namespace SF3.Models.Structs.MPD.SurfaceModel {
         public VECTOR this[int x, int y] {
             get {
                 return new VECTOR(
-                    new FIXED(Data.GetCompressedFIXED(normalAddresses[x, y] + 0)),
-                    new FIXED(Data.GetCompressedFIXED(normalAddresses[x, y] + 2)),
-                    new FIXED(Data.GetCompressedFIXED(normalAddresses[x, y] + 4))
+                    new FIXED(Data.GetWeirdCompressedFIXED(normalAddresses[x, y] + 0)),
+                    new FIXED(Data.GetWeirdCompressedFIXED(normalAddresses[x, y] + 2)),
+                    new FIXED(Data.GetWeirdCompressedFIXED(normalAddresses[x, y] + 4))
                 );
             }
             set {
-                Data.SetCompressedFIXED(normalAddresses[x, y] + 0, new CompressedFIXED(value.X));
-                Data.SetCompressedFIXED(normalAddresses[x, y] + 2, new CompressedFIXED(value.Y));
-                Data.SetCompressedFIXED(normalAddresses[x, y] + 4, new CompressedFIXED(value.Z));
+                Data.SetWeirdCompressedFIXED(normalAddresses[x, y] + 0, new CompressedFIXED(value.X));
+                Data.SetWeirdCompressedFIXED(normalAddresses[x, y] + 2, new CompressedFIXED(value.Y));
+                Data.SetWeirdCompressedFIXED(normalAddresses[x, y] + 4, new CompressedFIXED(value.Z));
             }
         }
 

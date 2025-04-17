@@ -68,6 +68,14 @@ namespace SF3.ByteData {
         CompressedFIXED GetCompressedFIXED(int location);
 
         /// <summary>
+        /// Gets the value of a 16-bit compressed FIXED at a location.
+        /// These numbers are 'weird' because the highest bit with the sign is moved
+        /// to the *opposite* side.
+        /// </summary>
+        /// <param name="location">The address of the 16-bit compressed FIXED.</param>
+        CompressedFIXED GetWeirdCompressedFIXED(int location);
+
+        /// <summary>
         /// Gets the value of a 32-bit FIXED at a location.
         /// </summary>
         /// <param name="location">The address of the 32-bit FIXED.</param>
@@ -123,6 +131,15 @@ namespace SF3.ByteData {
         /// <param name="location">The address of the 16-bit compressed FIXED.</param>
         /// <param name="value">The new value of the 16-bit compressed FIXED.</param>
         void SetCompressedFIXED(int location, CompressedFIXED value);
+
+        /// <summary>
+        /// Sets the value of a 16-bit compressed FIXED at a location.
+        /// These numbers are 'weird' because the highest bit with the sign is moved
+        /// to the *opposite* side.
+        /// </summary>
+        /// <param name="location">The address of the 16-bit compressed FIXED.</param>
+        /// <param name="value">The new value of the 16-bit compressed FIXED.</param>
+        void SetWeirdCompressedFIXED(int location, CompressedFIXED value);
 
         /// <summary>
         /// Sets the value of a 32-bit FIXED at a location.

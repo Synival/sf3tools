@@ -624,11 +624,11 @@ namespace SF3.Win.OpenGL.MPD_File {
 
                 var newModelMatrix =
                     Matrix4.CreateScale(model.ScaleX * scaleAdjust, model.ScaleY * scaleAdjust, model.ScaleZ * scaleAdjust) *
-                    Matrix4.CreateRotationX(model.AngleX * (float) Math.PI * -2.00f) *
+                    Matrix4.CreateRotationX(model.AngleX * (float) Math.PI * -1.00f) *
                     Matrix4.CreateTranslation(0, prePostAdjustY, 0) *
                     Matrix4.CreateRotationX(angleXAdjust) *
-                    Matrix4.CreateRotationY(model.AngleY * (float) Math.PI * -2.00f + angleYAdjust) *
-                    Matrix4.CreateRotationZ(model.AngleZ * (float) Math.PI * 2.00f) *
+                    Matrix4.CreateRotationY(model.AngleY * (float) Math.PI * -1.00f + angleYAdjust) *
+                    Matrix4.CreateRotationZ(model.AngleZ * (float) Math.PI * 1.00f) *
                     Matrix4.CreateTranslation(model.PositionX / -32.0f - 32.0f, model.PositionY / -32.0f - prePostAdjustY + yAdjust, model.PositionZ / 32.0f + 32.0f);
 
                 _modelMatricesByModel[model] = newModelMatrix;

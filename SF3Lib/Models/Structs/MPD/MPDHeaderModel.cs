@@ -497,8 +497,8 @@ namespace SF3.Models.Structs.MPD {
         [BulkCopy]
         [TableViewModelColumn(displayOrder: 21.5f)]
         public float GroundAngle {
-            get => Data.GetCompressedFIXED(groundAngleAddress).Float;
-            set => Data.SetCompressedFIXED(groundAngleAddress, new CompressedFIXED(value, 0));
+            get => Data.GetWeirdCompressedFIXED(groundAngleAddress).Float;
+            set => Data.SetWeirdCompressedFIXED(groundAngleAddress, new CompressedFIXED(value, 0));
         }
 
         [BulkCopy]
