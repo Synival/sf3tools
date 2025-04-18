@@ -98,8 +98,12 @@ namespace SF3.Win.OpenGL.MPD_File {
 
             var modelsList = new List<ModelBase>();
             foreach (var models in mpdFile.ModelCollections) {
-                if (models.CollectionType != ModelCollectionType.Chunk19Model && models.CollectionType != ModelCollectionType.PrimaryModels)
+                if (models.CollectionType != ModelCollectionType.Chunk19Model &&
+                    models.CollectionType != ModelCollectionType.PrimaryModels &&
+                    models.CollectionType != ModelCollectionType.Chunk1Model)
+                {
                     continue;
+                }
 
                 // There is a function that scans for models with the tag '2000' and forcibly changes all the textures
                 // in their PDATAs to be semi-transparent. Yes, this is redundant to have on the *model* instead of the *PDATA*,
