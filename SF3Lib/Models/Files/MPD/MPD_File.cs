@@ -1113,13 +1113,13 @@ namespace SF3.Models.Files.MPD {
             if (mc == null)
                 return null;
 
-            // Look for the first PDATA with one polygon that uses the tree texture (seems to always be 0).
+            // Look for the first PDATA with one polygon that uses the tree texture (usually 0, but not always).
             return mc.PDataTable.FirstOrDefault(x => {
                 if (x.PolygonCount != 1)
                     return false;
 
                 var attr = mc.AttrTablesByMemoryAddress[x.AttributesOffset][0];
-                return attr.HasTexture && attr.TextureNo == 0;
+                return attr.HasTexture;
             });
         }
 
