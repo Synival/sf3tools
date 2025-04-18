@@ -213,17 +213,9 @@ namespace SF3.Models.Structs.MPD {
         public bool Chunk20IsModels
             => IsScenario2OrLater && HasSurfaceModel && !Chunk20IsSurfaceModelIfExists;
 
-        [TableViewModelColumn(displayOrder: 0.075f, displayName: nameof(Chunk20IsSurfaceModelIfExists) + " (Scn2+)", visibilityProperty: nameof(IsScenario2OrLater))]
+        [TableViewModelColumn(displayOrder: 0.075f, displayName: nameof(Chunk20IsSurfaceModel) + " (Scn2+)", visibilityProperty: nameof(IsScenario2OrLater))]
         public bool Chunk20IsSurfaceModel
             => IsScenario2OrLater && HasSurfaceModel && Chunk20IsSurfaceModelIfExists;
-
-        [TableViewModelColumn(displayOrder: 0.08f)]
-        public int? ModelsChunkIndex
-            => Chunk20IsModels ? 20 : 1;
-
-        [TableViewModelColumn(displayOrder: 0.085f)]
-        public int? SurfaceModelChunkIndex
-            => HasSurfaceModel ? (Chunk20IsSurfaceModel ? 20 : 2) : (int?) null;
 
         [TableViewModelColumn(displayOrder: 0.1f, displayName: nameof(HasChunk19Model) + " (Scn1)", visibilityProperty: nameof(IsScenario1))]
         public bool HasChunk19Model {

@@ -498,15 +498,13 @@ namespace SF3.Models.Files.MPD {
 
         private int? GetSurfaceModelChunkIndex(ChunkLocation[] chunks) {
             var header = MPDHeader;
-
             if (!header.HasSurfaceModel)
                 return null;
 
-            var chunkIndex = header.SurfaceModelChunkIndex;
-            if (chunkIndex == null || !chunks[chunkIndex.Value].Exists)
-                return null;
-
-            return chunkIndex.Value;
+            return
+                chunks[2].Exists ? 2 :
+                (header.Chunk20IsSurfaceModel && chunks[20].Exists) ? 20 :
+                (int?) null;
         }
 
         private ITable[] MakeChunkTables(ChunkLocation[] chunkHeaders, IChunkData[] chunkDatas, IChunkData[] modelsChunks, IChunkData surfaceModelChunk) {
@@ -1110,7 +1108,8 @@ namespace SF3.Models.Files.MPD {
         }
 
         public PDataModel GetTreePData0() {
-            var mc = ModelCollections.FirstOrDefault(x => x.ChunkIndex == MPDHeader.ModelsChunkIndex);
+            var modelChunkIndex = MPDHeader.Chunk20IsModels ? 20 : 1;
+            var mc = ModelCollections.FirstOrDefault(x => x.ChunkIndex == modelChunkIndex);
             if (mc == null)
                 return null;
 

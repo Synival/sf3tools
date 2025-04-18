@@ -341,11 +341,8 @@ namespace SF3.Models.Files.MPD {
                 return false;
 
             // Get a list of all currently associated trees.
-            var chunkIndex = MPD_File.MPDHeader.ModelsChunkIndex;
-            if (!chunkIndex.HasValue)
-                return false;
-
-            var modelCollection = MPD_File.ModelCollections.FirstOrDefault(x => x.ChunkIndex == chunkIndex.Value);
+            var chunkIndex = MPD_File.MPDHeader.Chunk20IsModels ? 20 : 1;
+            var modelCollection = MPD_File.ModelCollections.FirstOrDefault(x => x.ChunkIndex == chunkIndex);
             if (modelCollection == null || modelCollection.PDataTable.Length == 0)
                 return false;
 
