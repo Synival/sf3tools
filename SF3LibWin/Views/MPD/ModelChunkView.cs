@@ -21,12 +21,12 @@ namespace SF3.Win.Views.MPD {
                 CreateChild(new DataModelView("Header", Model.ModelsHeader, ngc));
 
             if (Model.ModelTable != null)
-                CreateChild(new TableView("Models", Model.ModelTable, ngc));
+                CreateChild(new ModelTableView("Models", MPD_File, Model.ModelTable, ngc));
 
             if (Model.MovableModelTable != null)
                 CreateChild(new TableView("Movable Models", Model.MovableModelTable, ngc));
 
-            CreateChild(new PDatasView("PDATAs", MPD_File, Model.PDataTable, ngc));
+            CreateChild(new PDataTableView("PDATAs", MPD_File, Model.PDataTable, ngc));
             CreateChild(new TableArrayView<VertexTable>("POINT[]s", Model.VertexTablesByMemoryAddress.Values.ToArray(), ngc));
             CreateChild(new TableArrayView<PolygonTable>("POLYGON[]s", Model.PolygonTablesByMemoryAddress.Values.ToArray(), ngc));
             CreateChild(new TableArrayView<AttrTable>("ATTR[]s", Model.AttrTablesByMemoryAddress.Values.ToArray(), ngc));

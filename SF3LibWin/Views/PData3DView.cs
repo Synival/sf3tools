@@ -4,12 +4,12 @@ using SF3.Models.Structs.MPD.Model;
 using SF3.Win.Controls;
 
 namespace SF3.Win.Views {
-    public class PDataView : ControlView<PDataViewerControl> {
-        public PDataView(string name, IMPD_File mpdFile) : base(name) {
+    public class PData3DView : ControlView<PDataViewerControl> {
+        public PData3DView(string name, IMPD_File mpdFile) : base(name) {
             MPD_File = mpdFile;
         }
 
-        public PDataView(string name, IMPD_File mpdFile, PDataModel pdata) : base(name) {
+        public PData3DView(string name, IMPD_File mpdFile, PDataModel pdata) : base(name) {
             MPD_File = mpdFile;
             _pdata = pdata;
         }
