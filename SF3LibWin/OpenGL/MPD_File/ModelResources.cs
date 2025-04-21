@@ -181,7 +181,10 @@ namespace SF3.Win.OpenGL.MPD_File {
             Models = modelsList.ToArray();
         }
 
-        public void Update(IMPD_File mpdFile, ModelCollection models, PDataModel pdata, bool forceSemiTransparent = false) {
+        public void Update(IMPD_File mpdFile, ModelCollection models, PDataModel pdata, bool forceSemiTransparent = false,
+            float rotX = 0f, float rotY = 0f, float rotZ = 0f,
+            float scaleX = 1f, float scaleY = 1f, float scaleZ = 1f
+        ) {
             Reset();
             if (models == null || pdata == null)
                 return;
@@ -192,8 +195,8 @@ namespace SF3.Win.OpenGL.MPD_File {
             PolygonsByAddressByCollection[models.CollectionType][pdata.PolygonsOffset]     = models.PolygonTablesByMemoryAddress.TryGetValue(pdata.PolygonsOffset,   out var pv) ? pv.ToArray() : null;
             AttributesByAddressByCollection[models.CollectionType][pdata.AttributesOffset] = models.AttrTablesByMemoryAddress   .TryGetValue(pdata.AttributesOffset, out var av) ? av.ToArray() : null;
 
-            var texCollection = GetTextureCollection(models.CollectionType);
-            var texturesById = GetTexturesByID(mpdFile, texCollection);
+            var texCollection  = GetTextureCollection(models.CollectionType);
+            var texturesById   = GetTexturesByID(mpdFile, texCollection);
             var animationsById = GetAnimationsByID(mpdFile, texCollection);
 
             CreateAndAddQuadModels(mpdFile, models.CollectionType, pdata, texturesById, animationsById, forceSemiTransparent);
@@ -202,9 +205,12 @@ namespace SF3.Win.OpenGL.MPD_File {
             model.PData0 = pdata.RamAddress;
             model.PositionX = -32 * 32;
             model.PositionZ = -32 * 32;
-            model.ScaleX = 1.0f;
-            model.ScaleY = 1.0f;
-            model.ScaleZ = 1.0f;
+            model.AngleX = rotX;
+            model.AngleY = rotY;
+            model.AngleZ = rotZ;
+            model.ScaleX = scaleX;
+            model.ScaleY = scaleY;
+            model.ScaleZ = scaleZ;
 
             Models = [model];
         }

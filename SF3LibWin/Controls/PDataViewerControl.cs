@@ -9,6 +9,7 @@ using OpenTK.Mathematics;
 using SF3.Models.Files.MPD;
 using SF3.Models.Structs.MPD.Model;
 using SF3.Models.Tables.MPD;
+using SF3.Win.Extensions;
 using SF3.Win.OpenGL.MPD_File;
 using SF3.Win.Types;
 
@@ -117,34 +118,12 @@ namespace SF3.Win.Controls {
         }
 
         private void UpdateCameraPosition() {
-            float size = 1.0f;
-            Vector3 center = Vector3.Zero;
-
-            if (_models != null && _pdata != null && Models != null) {
-                if (_models.VerticesByAddressByCollection[Models.CollectionType].TryGetValue(_pdata.VerticesOffset, out var vertices)) {
-                    var minX = vertices.Min(x => x.X) / 32.0f;
-                    var maxX = vertices.Max(x => x.X) / 32.0f;
-                    var minY = vertices.Min(x => x.Y) / 32.0f;
-                    var maxY = vertices.Max(x => x.Y) / 32.0f;
-                    var minZ = vertices.Min(x => x.Z) / 32.0f;
-                    var maxZ = vertices.Max(x => x.Z) / 32.0f;
-
-                    var width  = maxX - minX;
-                    var height = maxY - minY;
-                    var depth  = maxZ - minZ;
-                    size = Math.Max(0.1f, Math.Max(width, Math.Max(height, depth)));
-
-                    center = new Vector3((minX + maxX) / -2, (minY + maxY) / -2, (minZ + maxZ) / 2);
-                }
-            }
-
-            var dist = (float) Math.Pow(size, 0.875f) * 4f;
             var yawRadians = MathHelper.DegreesToRadians(Yaw);
 
-            Position = new Vector3(0.66f * (float) Math.Sin(yawRadians), 0.45f, 0.66f * (float) Math.Cos(yawRadians)).Normalized() * dist;
+            Position = new Vector3(0.66f * (float) Math.Sin(yawRadians), 0.45f, 0.66f * (float) Math.Cos(yawRadians)).Normalized() * _dist;
             Pitch = -MathHelper.RadiansToDegrees((float) Math.Atan2(Position.Y, double.Hypot(Position.X, Position.Z)));
 
-            Position += center;
+            Position += _center;
         }
 
         private void UpdateViewMatrix() {
@@ -185,18 +164,58 @@ namespace SF3.Win.Controls {
 
         private PDataModel _pdata = null;
 
-        public void Update(IMPD_File mpdFile, PDataModel pdata) {
+        public void Update(
+            IMPD_File mpdFile, PDataModel pdata,
+            float rotX = 0f, float rotY = 0f, float rotZ = 0f,
+            float scaleX = 1f, float scaleY = 1f, float scaleZ = 1f
+        ) {
             if (_pdata == pdata)
                 return;
 
             MPD_File = mpdFile;
             _pdata = pdata;
             Models = (pdata == null) ? null : mpdFile.ModelCollections.FirstOrDefault(x => x.PDatasByMemoryAddress.ContainsKey(pdata.RamAddress));
+            _vertices = null;
+
+            _size = 1.0f;
+            _center = new Vector3();
+            _dist = 1.0f;
 
             if (_models != null) {
                 _models.Reset();
-                if (MPD_File != null && Models != null && _pdata != null)
-                    _models.Update(MPD_File, Models, _pdata);
+                if (MPD_File != null && Models != null && _pdata != null) {
+                    _models.Update(MPD_File, Models, _pdata, forceSemiTransparent: false, rotX, rotY, rotZ, scaleX, scaleY, scaleZ);
+
+                    if (_models.VerticesByAddressByCollection[Models.CollectionType]?.TryGetValue(_pdata.VerticesOffset, out var vertices) == true) {
+                        var verticesMatrix =
+                            Matrix3.CreateScale(scaleX, scaleY, scaleZ) *
+                            Matrix3.CreateRotationX(rotX * (float) Math.PI) *
+                            Matrix3.CreateRotationY(rotY * (float) Math.PI) *
+                            Matrix3.CreateRotationZ(rotZ * (float) Math.PI);
+
+                        _vertices = vertices.Select(x => x.Vector.ToVector3() * verticesMatrix).ToArray();
+
+                        _minX = _vertices.Min(x => x.X) / 32.0f;
+                        _minY = _vertices.Min(x => x.Y) / 32.0f;
+                        _minZ = _vertices.Min(x => x.Z) / 32.0f;
+
+                        _maxX = _vertices.Max(x => x.X) / 32.0f;
+                        _maxY = _vertices.Max(x => x.Y) / 32.0f;
+                        _maxZ = _vertices.Max(x => x.Z) / 32.0f;
+
+                        _width  = _maxX - _minX;
+                        _height = _maxY - _minY;
+                        _depth  = _maxZ - _minZ;
+
+                        _size   = Math.Max(0.1f, Math.Max(_width, Math.Max(_height, _depth)));
+                        _center = new Vector3((_minX + _maxX) / -2, (_minY + _maxY) / -2, (_minZ + _maxZ) / 2);
+
+                        _dist = (float) Math.Pow(_size, 0.875f) * 4f;
+                    }
+                }
+                else {
+                    // TODO: throw?? what to do here???
+                }
             }
 
             Invalidate();
@@ -221,6 +240,31 @@ namespace SF3.Win.Controls {
         public float Yaw { get; private set; }
         public float Pitch { get; private set; }
 
+        private float _rotX = 0f;
+        private float _rotY = 0f;
+        private float _rotZ = 0f;
+
+        private float _scaleX = 1f;
+        private float _scaleY = 1f;
+        private float _scaleZ = 1f;
+
+        private float _minX = 0f;
+        private float _minY = 0f;
+        private float _minZ = 0f;
+
+        private float _maxX = 0f;
+        private float _maxY = 0f;
+        private float _maxZ = 0f;
+
+        private float _width  = 0f;
+        private float _height = 0f;
+        private float _depth  = 0f;
+
+        private float _size = 0f;
+        private Vector3 _center;
+        private float _dist = 0f;
+
+        private Vector3[] _vertices = null;
         private Matrix4 _projectionMatrix;
         private Matrix4 _viewMatrix;
 

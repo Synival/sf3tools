@@ -17,7 +17,7 @@ namespace SF3.Win.Views {
 
         public override Control Create() {
             var rval = base.Create();
-            Control.Update(MPD_File, _pdata);
+            UpdateViewerControl();
             return rval;
         }
 
@@ -26,7 +26,7 @@ namespace SF3.Win.Views {
                 return;
 
             Control.Update(null, null);
-            Control.Update(MPD_File, _pdata);
+            UpdateViewerControl();
         }
 
         public IMPD_File MPD_File { get; }
@@ -40,13 +40,20 @@ namespace SF3.Win.Views {
                     _pdata = (_model == null) ? null : ((MPD_File?.ModelCollections
                         ?.FirstOrDefault(x => x.CollectionType == _model.CollectionType)
                         ?.PDatasByMemoryAddress?.TryGetValue(_model.PData0, out var pdataVal) == true) ? pdataVal : null);
-                        
+
                     if (Control != null)
-                        Control.Update(MPD_File, _pdata);
+                        UpdateViewerControl();
                 }
             }
         }
 
         private PDataModel _pdata = null;
+
+        private void UpdateViewerControl() {
+            if (_model == null)
+                Control.Update(MPD_File, _pdata);
+            else
+                Control.Update(MPD_File, _pdata, _model.AngleX, _model.AngleY, _model.AngleZ, _model.ScaleX, _model.ScaleY, _model.ScaleZ);
+        }
     }
 }
