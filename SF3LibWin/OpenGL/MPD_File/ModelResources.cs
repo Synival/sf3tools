@@ -278,8 +278,15 @@ namespace SF3.Win.OpenGL.MPD_File {
                 var transparency = 1.0f;
 
                 var drawMode = (DrawMode) ((int) attr.Mode_DrawMode & 0x03);
-                if (drawMode == DrawMode.CL_Trans || drawMode == DrawMode.CL_Shadow || forceSemiTransparent)
+                bool transparencyForced = false;
+
+                if (drawMode == DrawMode.CL_Trans || drawMode == DrawMode.CL_Shadow)
                     transparency *= 0.5f;
+                else if (forceSemiTransparent) {
+                    transparency *= 0.5f;
+                    transparencyForced = true;
+                }
+
                 if (attr.Mode_MESHon)
                     transparency *= 0.5f;
 
@@ -304,7 +311,9 @@ namespace SF3.Win.OpenGL.MPD_File {
                         continue;
                     else if (anim.Frames.Length > 0 && anim.Frames[0].PixelFormat == TexturePixelFormat.Palette3) {
                         var lightAdjTransparency = mpdFile.LightAdjustment != null ? (mpdFile.LightAdjustment.Palette3Transparency & 0x1F) / (float) 0x1F : 0.5f;
-                        transparency *= 1.0f - transparency;
+                        if (transparencyForced)
+                            transparency *= 2.0f;
+                        transparency *= 1.0f - lightAdjTransparency;
                     }
                 }
 

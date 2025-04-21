@@ -128,7 +128,7 @@ namespace SF3.Models.Structs.MPD.Model {
         public bool HasTagsAndFlags { get; }
 
         [BulkCopy]
-        [TableViewModelColumn(displayOrder: 17, displayName: "Tag (unused?)")]
+        [TableViewModelColumn(displayOrder: 17)]
         public ushort Tag {
             get => HasTagsAndFlags ? (ushort) Data.GetWord(_modelIdAddress) : (ushort) 0;
             set {
