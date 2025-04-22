@@ -106,5 +106,6 @@ namespace SF3.Models.Structs.MPD.Model {
         }
 
         public abstract bool AlwaysFacesCamera { get; set; }
+        public abstract ModelDirectionType OnlyVisibleFromDirection { get; set; }
     }
 }

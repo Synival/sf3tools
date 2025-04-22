@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using CommonLib.Attributes;
 using SF3.ByteData;
-using SF3.Models.Files.MPD;
 using SF3.Types;
 
 namespace SF3.Models.Structs.MPD.Model {
@@ -151,6 +150,12 @@ namespace SF3.Models.Structs.MPD.Model {
         public override bool AlwaysFacesCamera {
             get => (Flags & 0x08) == 0x08;
             set => Flags = (ushort) ((Flags & ~0x08) | (value ? 0x08 : 0x00));
+        }
+
+        [TableViewModelColumn(displayOrder: 18.2f, minWidth: 100)]
+        public override ModelDirectionType OnlyVisibleFromDirection {
+            get => ((Flags & 0x10) == 0x10) ? (ModelDirectionType) (Flags & 0x07) : ModelDirectionType.Unset;
+            set => Flags = (ushort) ((Flags & 0x07) | (((((short) value) & 0x07) == (short) ModelDirectionType.Unset) ? 0 : (((ushort) value) & 0x07)));
         }
     }
 }

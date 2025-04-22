@@ -19,6 +19,7 @@ namespace SF3.Types {
         GameFlag,
         Item,
         Load,
+        ModelDirection,
         Monster,
         MonsterForSlot,
         EventTriggerMoveOnTileType,

@@ -43,6 +43,8 @@ namespace SF3.NamedValues {
             = new NamedValueFromResourceForScenariosInfo("LoadList.xml");
         public static readonly NamedValueFromResourceForScenariosInfo MagicBonusInfo
             = new NamedValueFromResourceForScenariosInfo("MagicBonus.xml");
+        public static readonly NamedValueFromEnum<ModelDirectionType> ModelDirection
+            = new NamedValueFromEnum<ModelDirectionType>();
         public static readonly NamedValueFromResourceForScenariosInfo MonsterInfo
             = new NamedValueFromResourceForScenariosInfo("Monsters.xml");
         public static readonly MonsterForSlotInfo MonsterForSlotInfo

@@ -11,5 +11,10 @@ namespace SF3.Models.Structs.MPD.Model {
             get => false;
             set {}
         }
+
+        public override ModelDirectionType OnlyVisibleFromDirection {
+            get => ModelDirectionType.Unset;
+            set {}
+        }
     }
 }
