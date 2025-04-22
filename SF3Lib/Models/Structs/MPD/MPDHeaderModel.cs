@@ -383,32 +383,32 @@ namespace SF3.Models.Structs.MPD {
         }
 
         [BulkCopy]
-        [TableViewModelColumn(displayOrder: 14, displayFormat: "X4", visibilityProperty: nameof(HasModelsInfo))]
-        public ushort ModelsPreYRotation {
-            get => HasModelsInfo ? (ushort) Data.GetWord(modelsPreYRotation) : (ushort) 0;
+        [TableViewModelColumn(displayOrder: 14, visibilityProperty: nameof(HasModelsInfo))]
+        public float ModelsPreYRotation {
+            get => HasModelsInfo ? Data.GetCompressedFIXED(modelsPreYRotation).Float : 0;
             set {
                 if (HasModelsInfo)
-                    Data.SetWord(modelsPreYRotation, value);
+                    Data.SetCompressedFIXED(modelsPreYRotation, new CompressedFIXED(value, 0));
             }
         }
 
         [BulkCopy]
-        [TableViewModelColumn(displayOrder: 14.5f, displayFormat: "X4", visibilityProperty: nameof(HasModelsInfo))]
-        public ushort ModelsViewAngleMin {
-            get => HasModelsInfo ? (ushort) Data.GetWord(modelsViewAngleMin) : (ushort) 0;
+        [TableViewModelColumn(displayOrder: 14.5f, visibilityProperty: nameof(HasModelsInfo))]
+        public float ModelsViewAngleMin {
+            get => HasModelsInfo ? Data.GetCompressedFIXED(modelsViewAngleMin).Float : 0;
             set {
                 if (HasModelsInfo)
-                    Data.SetWord(modelsViewAngleMin, value);
+                    Data.SetCompressedFIXED(modelsViewAngleMin, new CompressedFIXED(value, 0));
             }
         }
 
         [BulkCopy]
-        [TableViewModelColumn(displayOrder: 15, displayFormat: "X4", visibilityProperty: nameof(HasModelsInfo))]
-        public ushort ModelsViewAngleMax {
-            get => HasModelsInfo ? (ushort) Data.GetWord(modelsViewAngleMax) : (ushort) 0;
+        [TableViewModelColumn(displayOrder: 15, visibilityProperty: nameof(HasModelsInfo))]
+        public float ModelsViewAngleMax {
+            get => HasModelsInfo ? Data.GetCompressedFIXED(modelsViewAngleMax).Float : 0;
             set {
                 if (HasModelsInfo)
-                    Data.SetWord(modelsViewAngleMax, value);
+                    Data.SetCompressedFIXED(modelsViewAngleMax, new CompressedFIXED(value, 0));
             }
         }
 

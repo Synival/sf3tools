@@ -25,6 +25,8 @@ namespace SF3.Win.Controls {
             _appState.ViewerRunAnimationsChanged      += (s, e) => Invalidate();
             _appState.ViewerApplyLightingChanged      += (s, e) => Invalidate();
             _appState.ViewerDrawGradientsChanged      += (s, e) => Invalidate();
+            _appState.HideModelsNotFacingCameraChanged += (s, e) => Invalidate();
+
             _appState.ViewerDrawWireframeChanged      += (s, e) => Invalidate();
             _appState.ViewerDrawBoundariesChanged     += (s, e) => Invalidate();
             _appState.ViewerDrawTerrainTypesChanged   += (s, e) => Invalidate();
@@ -174,7 +176,10 @@ namespace SF3.Win.Controls {
                     DrawSkyBox = MPD_File?.Scenario >= ScenarioType.Scenario2 && DrawSkyBox,
                     DrawGradients = DrawGradients,
                     ApplyLighting = ApplyLighting,
+
                     HideModelsNotFacingCamera = HideModelsNotFacingCamera,
+                    ModelsViewAngleMin = MPD_File.MPDHeader.ModelsViewAngleMin * 180.0f,
+                    ModelsViewAngleMax = MPD_File.MPDHeader.ModelsViewAngleMax * 180.0f,
 
                     DrawNormals = DrawNormals,
                     DrawWireframe = DrawWireframe,
