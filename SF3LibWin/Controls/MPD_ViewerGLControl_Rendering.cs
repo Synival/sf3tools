@@ -174,6 +174,7 @@ namespace SF3.Win.Controls {
                     DrawSkyBox = MPD_File?.Scenario >= ScenarioType.Scenario2 && DrawSkyBox,
                     DrawGradients = DrawGradients,
                     ApplyLighting = ApplyLighting,
+                    HideModelsNotFacingCamera = HideModelsNotFacingCamera,
 
                     DrawNormals = DrawNormals,
                     DrawWireframe = DrawWireframe,
@@ -186,7 +187,7 @@ namespace SF3.Win.Controls {
 
                     DrawHelp = DrawHelp,
 
-                    UseOutsideLighting = MPD_File?.MPDHeader?.OutdoorLighting == true
+                    UseOutsideLighting = MPD_File?.MPDHeader?.OutdoorLighting == true,
                 },
                 Yaw, Pitch, Width, Height,
                 ref _projectionMatrix, ref _viewMatrix
@@ -414,6 +415,13 @@ namespace SF3.Win.Controls {
         public bool DrawHelp {
             get => AppState.ViewerDrawHelp;
             set => UpdateAppState(nameof(AppState.ViewerDrawHelp), value);
+        }
+
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public bool HideModelsNotFacingCamera {
+            get => AppState.HideModelsNotFacingCamera;
+            set => UpdateAppState(nameof(AppState.HideModelsNotFacingCamera), value);
         }
 
         private bool _tileSelectedNeedsUpdate = false;

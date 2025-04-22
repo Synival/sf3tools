@@ -26,6 +26,7 @@ namespace SF3.Win.Controls {
             tsbRunAnimations.Checked     = GLControl.RunAnimations;
             tsbApplyLighting.Checked     = GLControl.ApplyLighting;
             tsbDrawGradients.Checked     = GLControl.DrawGradients;
+            tsbHideModelsNotFacingCamera.Checked = GLControl.HideModelsNotFacingCamera;
 
             tsbToggleWireframe.Checked   = GLControl.DrawWireframe;
             tsbToggleBoundaries.Checked  = GLControl.DrawBoundaries;
@@ -46,12 +47,15 @@ namespace SF3.Win.Controls {
             appState.ViewerRunAnimationsChanged      += (s, e) => { tsbRunAnimations.Checked     = appState.ViewerRunAnimations; };
             appState.ViewerApplyLightingChanged      += (s, e) => { tsbApplyLighting.Checked     = appState.ViewerApplyLighting; };
             appState.ViewerDrawGradientsChanged      += (s, e) => { tsbDrawGradients.Checked     = appState.ViewerDrawGradients; };
+            appState.HideModelsNotFacingCameraChanged += (s, e) => { tsbHideModelsNotFacingCamera.Checked = appState.HideModelsNotFacingCamera; };
+
             appState.ViewerDrawWireframeChanged      += (s, e) => { tsbToggleWireframe.Checked   = appState.ViewerDrawWireframe; };
             appState.ViewerDrawBoundariesChanged     += (s, e) => { tsbToggleBoundaries.Checked  = appState.ViewerDrawBoundaries; };
             appState.ViewerDrawTerrainTypesChanged   += (s, e) => { tsbToggleTerrainType.Checked = appState.ViewerDrawTerrainTypes; };
             appState.ViewerDrawEventIDsChanged       += (s, e) => { tsbToggleEventID.Checked     = appState.ViewerDrawEventIDs; };
             appState.ViewerDrawCollisionLinesChanged += (s, e) => { tsbToggleCollisions.Checked  = appState.ViewerDrawCollisionLines; };
             appState.ViewerDrawNormalsChanged        += (s, e) => { tsbToggleNormals.Checked     = appState.ViewerDrawNormals; };
+
             appState.ViewerRotateSpritesUpChanged    += (s, e) => { tsbRotateSpritesUp.Checked   = appState.ViewerRotateSpritesUp; };
             appState.ViewerDrawHelpChanged           += (s, e) => { tsbToggleHelp.Checked        = appState.ViewerDrawHelp; };
 
@@ -119,24 +123,24 @@ namespace SF3.Win.Controls {
 
         public MPD_ViewerGLControl GLControl => mpdViewerGLControl1;
 
-        private void tsbDrawSurfaceModel_Click(object sender, EventArgs e) => tsbDrawSurfaceModel.Checked  = GLControl.DrawSurfaceModel = !GLControl.DrawSurfaceModel;
-        private void tsbDrawModels_Click(object sender, EventArgs e) => tsbDrawModels.Checked        = GLControl.DrawModels       = !GLControl.DrawModels;
-        private void tsbDrawGround_Click(object sender, EventArgs e) => tsbDrawGround.Checked        = GLControl.DrawGround       = !GLControl.DrawGround;
-        private void tsbDrawSkyBox_Click(object sender, EventArgs e) => tsbDrawSkyBox.Checked        = GLControl.DrawSkyBox       = !GLControl.DrawSkyBox;
-        private void tsbRunAnimations_Click(object sender, EventArgs e) => tsbRunAnimations.Checked     = GLControl.RunAnimations    = !GLControl.RunAnimations;
-        private void tsbApplyLighting_Click(object sender, EventArgs e) => tsbApplyLighting.Checked     = GLControl.ApplyLighting    = !GLControl.ApplyLighting;
-        private void tsbDrawGradients_Click(object sender, EventArgs e) => tsbDrawGradients.Checked     = GLControl.DrawGradients    = !GLControl.DrawGradients;
+        private void tsbDrawSurfaceModel_Click (object sender, EventArgs e) => tsbDrawSurfaceModel.Checked  = GLControl.DrawSurfaceModel = !GLControl.DrawSurfaceModel;
+        private void tsbDrawModels_Click       (object sender, EventArgs e) => tsbDrawModels.Checked        = GLControl.DrawModels       = !GLControl.DrawModels;
+        private void tsbDrawGround_Click       (object sender, EventArgs e) => tsbDrawGround.Checked        = GLControl.DrawGround       = !GLControl.DrawGround;
+        private void tsbDrawSkyBox_Click       (object sender, EventArgs e) => tsbDrawSkyBox.Checked        = GLControl.DrawSkyBox       = !GLControl.DrawSkyBox;
+        private void tsbRunAnimations_Click    (object sender, EventArgs e) => tsbRunAnimations.Checked     = GLControl.RunAnimations    = !GLControl.RunAnimations;
+        private void tsbApplyLighting_Click    (object sender, EventArgs e) => tsbApplyLighting.Checked     = GLControl.ApplyLighting    = !GLControl.ApplyLighting;
+        private void tsbDrawGradients_Click    (object sender, EventArgs e) => tsbDrawGradients.Checked     = GLControl.DrawGradients    = !GLControl.DrawGradients;
+        private void tsbHideModelsNotFacingCamera_Click(object sender, EventArgs e) => tsbHideModelsNotFacingCamera.Checked = GLControl.HideModelsNotFacingCamera = !GLControl.HideModelsNotFacingCamera;
 
-        private void tsbToggleWireframe_Click(object sender, EventArgs e) => tsbToggleWireframe.Checked   = GLControl.DrawWireframe    = !GLControl.DrawWireframe;
-        private void tsbToggleBoundaries_Click(object sender, EventArgs e) => tsbToggleBoundaries.Checked  = GLControl.DrawBoundaries   = !GLControl.DrawBoundaries;
+        private void tsbToggleWireframe_Click  (object sender, EventArgs e) => tsbToggleWireframe.Checked   = GLControl.DrawWireframe    = !GLControl.DrawWireframe;
+        private void tsbToggleBoundaries_Click (object sender, EventArgs e) => tsbToggleBoundaries.Checked  = GLControl.DrawBoundaries   = !GLControl.DrawBoundaries;
         private void tsbToggleTerrainType_Click(object sender, EventArgs e) => tsbToggleTerrainType.Checked = GLControl.DrawTerrainTypes = !GLControl.DrawTerrainTypes;
-        private void tsbToggleEventID_Click(object sender, EventArgs e) => tsbToggleEventID.Checked     = GLControl.DrawEventIDs     = !GLControl.DrawEventIDs;
-        private void tsbToggleCollisions_Click(object sender, EventArgs e) => tsbToggleCollisions.Checked  = GLControl.DrawCollisionLines = !GLControl.DrawCollisionLines;
-        private void tsbToggleNormals_Click(object sender, EventArgs e) => tsbToggleNormals.Checked     = GLControl.DrawNormals      = !GLControl.DrawNormals;
+        private void tsbToggleEventID_Click    (object sender, EventArgs e) => tsbToggleEventID.Checked     = GLControl.DrawEventIDs     = !GLControl.DrawEventIDs;
+        private void tsbToggleCollisions_Click (object sender, EventArgs e) => tsbToggleCollisions.Checked  = GLControl.DrawCollisionLines = !GLControl.DrawCollisionLines;
+        private void tsbToggleNormals_Click    (object sender, EventArgs e) => tsbToggleNormals.Checked     = GLControl.DrawNormals      = !GLControl.DrawNormals;
+        private void tsbRotateSpritesUp_Click  (object sender, EventArgs e) => tsbRotateSpritesUp.Checked   = GLControl.RotateSpritesUp  = !GLControl.RotateSpritesUp;
 
-        private void tsbRotateSpritesUp_Click(object sender, EventArgs e) => tsbRotateSpritesUp.Checked   = GLControl.RotateSpritesUp  = !GLControl.RotateSpritesUp;
-
-        private void tsbToggleHelp_Click(object sender, EventArgs e) => tsbToggleHelp.Checked        = GLControl.DrawHelp         = !GLControl.DrawHelp;
+        private void tsbToggleHelp_Click       (object sender, EventArgs e) => tsbToggleHelp.Checked        = GLControl.DrawHelp         = !GLControl.DrawHelp;
 
         public void UpdateLighting() {
             if (MPD_File != null) {

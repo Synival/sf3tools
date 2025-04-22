@@ -279,6 +279,16 @@ namespace SF3.Win {
         public event EventHandler ViewerDrawHelpChanged;
 
         /// <summary>
+        /// When set, models that are only visible from certain camera directions are not rendered.
+        /// </summary>
+        public bool HideModelsNotFacingCamera {
+            get => _hideModelsNotFacingCamera;
+            set => SetValue(ref _hideModelsNotFacingCamera, value, HideModelsNotFacingCameraChanged);
+        }
+        private bool _hideModelsNotFacingCamera = true;
+        public event EventHandler HideModelsNotFacingCameraChanged;
+
+        /// <summary>
         /// The current the cursor tool selected in the MPD Viewer.
         /// </summary>
         public int ViewerCursorMode {

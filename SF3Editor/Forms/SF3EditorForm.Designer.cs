@@ -108,9 +108,10 @@ namespace SF3.Editor.Forms {
             tsmiSettings_MPD = new System.Windows.Forms.ToolStripMenuItem();
             tsmiSettings_MPD_ImprovedNormalCalculations = new System.Windows.Forms.ToolStripMenuItem();
             tsmiSettings_MPD_UseFullHeightForNormals = new System.Windows.Forms.ToolStripMenuItem();
+            tsmiSettings_MPD_FixNormalOverflowUnderflowErrors = new System.Windows.Forms.ToolStripMenuItem();
             tsmiHelp = new System.Windows.Forms.ToolStripMenuItem();
             tsmiHelp_About = new System.Windows.Forms.ToolStripMenuItem();
-            tsmiSettings_MPD_FixNormalOverflowUnderflowErrors = new System.Windows.Forms.ToolStripMenuItem();
+            tsmiView_MPD_HideModelsNotFacingCamera = new System.Windows.Forms.ToolStripMenuItem();
             menuStrip1.SuspendLayout();
             SuspendLayout();
             // 
@@ -369,9 +370,9 @@ namespace SF3.Editor.Forms {
             // 
             // tsmiView_MPD
             // 
-            tsmiView_MPD.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { tsmiView_MPD_DrawSurfaceModel, tsmiView_MPD_DrawModels, tsmiView_MPD_DrawGround, tsmiView_MPD_DrawSkyBox, tsmiView_MPD_RunAnimations, tsmiView_MPD_ApplyLighting, tsmiView_MPD_DrawGradients, tsmiView_MPD_Sep1, tsmiView_MPD_DrawWireframes, tsmiView_MPD_DrawBoundaries, tsmiView_MPD_DrawTerrainTypes, tsmiView_MPD_DrawEventIDs, tsmiView_MPD_DrawCollisionLines, tsmiView_MPD_DrawNormalMap, tsmiView_MPD_RotateSpritesUpToCamera, tsmiView_MPD_Sep2, tsmiView_MPD_ShowHelp, tsmiView_MPD_Sep3, tsmiView_MPD_EnableBlankFieldV2Controls });
+            tsmiView_MPD.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { tsmiView_MPD_DrawSurfaceModel, tsmiView_MPD_DrawModels, tsmiView_MPD_DrawGround, tsmiView_MPD_DrawSkyBox, tsmiView_MPD_RunAnimations, tsmiView_MPD_ApplyLighting, tsmiView_MPD_DrawGradients, tsmiView_MPD_HideModelsNotFacingCamera, tsmiView_MPD_Sep1, tsmiView_MPD_DrawWireframes, tsmiView_MPD_DrawBoundaries, tsmiView_MPD_DrawTerrainTypes, tsmiView_MPD_DrawEventIDs, tsmiView_MPD_DrawCollisionLines, tsmiView_MPD_DrawNormalMap, tsmiView_MPD_RotateSpritesUpToCamera, tsmiView_MPD_Sep2, tsmiView_MPD_ShowHelp, tsmiView_MPD_Sep3, tsmiView_MPD_EnableBlankFieldV2Controls });
             tsmiView_MPD.Name = "tsmiView_MPD";
-            tsmiView_MPD.Size = new Size(100, 22);
+            tsmiView_MPD.Size = new Size(180, 22);
             tsmiView_MPD.Text = "&MPD";
             // 
             // tsmiView_MPD_DrawSurfaceModel
@@ -696,6 +697,13 @@ namespace SF3.Editor.Forms {
             tsmiSettings_MPD_UseFullHeightForNormals.Text = "Use Full Instead of Half Height for Surface Map Tile Normal Calculations";
             tsmiSettings_MPD_UseFullHeightForNormals.Click += tsmiSettings_MPD_UseFullHeightForNormals_Click;
             // 
+            // tsmiSettings_MPD_FixNormalOverflowUnderflowErrors
+            // 
+            tsmiSettings_MPD_FixNormalOverflowUnderflowErrors.Name = "tsmiSettings_MPD_FixNormalOverflowUnderflowErrors";
+            tsmiSettings_MPD_FixNormalOverflowUnderflowErrors.Size = new Size(454, 22);
+            tsmiSettings_MPD_FixNormalOverflowUnderflowErrors.Text = "Fix Surface Map Tile Normal Overflow/Underflow Errors";
+            tsmiSettings_MPD_FixNormalOverflowUnderflowErrors.Click += tsmiSettings_MPD_FixNormalOverflowUnderflowErrors_Click;
+            // 
             // tsmiHelp
             // 
             tsmiHelp.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { tsmiHelp_About });
@@ -710,12 +718,12 @@ namespace SF3.Editor.Forms {
             tsmiHelp_About.Text = "&About...";
             tsmiHelp_About.Click += tsmiHelp_About_Click;
             // 
-            // tsmiSettings_MPD_FixNormalOverflowUnderflowErrors
+            // tsmiView_MPD_HideModelsNotFacingCamera
             // 
-            tsmiSettings_MPD_FixNormalOverflowUnderflowErrors.Name = "tsmiSettings_MPD_FixNormalOverflowUnderflowErrors";
-            tsmiSettings_MPD_FixNormalOverflowUnderflowErrors.Size = new Size(454, 22);
-            tsmiSettings_MPD_FixNormalOverflowUnderflowErrors.Text = "Fix Surface Map Tile Normal Overflow/Underflow Errors";
-            tsmiSettings_MPD_FixNormalOverflowUnderflowErrors.Click += tsmiSettings_MPD_FixNormalOverflowUnderflowErrors_Click;
+            tsmiView_MPD_HideModelsNotFacingCamera.Name = "tsmiView_MPD_HideModelsNotFacingCamera";
+            tsmiView_MPD_HideModelsNotFacingCamera.Size = new Size(384, 22);
+            tsmiView_MPD_HideModelsNotFacingCamera.Text = "Hide Models Not Facing Camera";
+            tsmiView_MPD_HideModelsNotFacingCamera.Click += tsmiView_MPD_HideModelsNotFacingCamera_Click;
             // 
             // SF3EditorForm
             // 
@@ -820,5 +828,6 @@ namespace SF3.Editor.Forms {
         private System.Windows.Forms.ToolStripSeparator tsmiMPD_Sep1;
         private System.Windows.Forms.ToolStripMenuItem tsmiMPD_RecalculateSurfaceModelNormals;
         private System.Windows.Forms.ToolStripMenuItem tsmiSettings_MPD_FixNormalOverflowUnderflowErrors;
+        private System.Windows.Forms.ToolStripMenuItem tsmiView_MPD_HideModelsNotFacingCamera;
     }
 }

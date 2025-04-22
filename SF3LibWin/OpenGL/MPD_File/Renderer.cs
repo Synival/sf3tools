@@ -28,6 +28,8 @@ namespace SF3.Win.OpenGL.MPD_File {
             public bool DrawHelp;
 
             public bool ApplyLighting;
+            public bool HideModelsNotFacingCamera;
+
             public bool UseOutsideLighting;
             public bool RotateSpritesUp;
             public bool ForceTwoSidedTextures;
