@@ -33,6 +33,17 @@ namespace MPD_Analyzer {
                 "TREE00",
                 "TURI00",
             ]},
+            { ScenarioType.Scenario2, [
+                "FIELD",
+                "HOR",
+                "MUHASI",
+                "SOGEST",
+                "TESMAP",
+                "TEST01",
+                "TM_OC",
+                "YSKI00",
+                "VOID",
+            ]},
             { ScenarioType.Scenario3, [
                 "AS_OKU",
                 "BTL42",
