@@ -640,22 +640,22 @@
     <item value="0x027D" name="" />
     <item value="0x027E" name="" />
     <item value="0x027F" name="" />
-    <item value="0x0280" name="Current Map Flag 1" />
-    <item value="0x0281" name="Current Map Flag 2" />
-    <item value="0x0282" name="Current Map Flag 3" />
-    <item value="0x0283" name="Current Map Flag 4" />
-    <item value="0x0284" name="Current Map Flag 5" />
-    <item value="0x0285" name="Current Map Flag 6" />
-    <item value="0x0286" name="Current Map Flag 7" />
-    <item value="0x0287" name="Current Map Flag 8" />
-    <item value="0x0288" name="Current Map Flag 9" />
-    <item value="0x0289" name="Current Map Flag 10" />
-    <item value="0x028A" name="Current Map Flag 11" />
-    <item value="0x028B" name="Current Map Flag 12" />
-    <item value="0x028C" name="Current Map Flag 13" />
-    <item value="0x028D" name="Current Map Flag 14" />
-    <item value="0x028E" name="Current Map Flag 15" />
-    <item value="0x028F" name="Current Map Flag 16" />
+    <item value="0x0280" name="Current Map State Flag 280" />
+    <item value="0x0281" name="Current Map State Flag 281" />
+    <item value="0x0282" name="Current Map State Flag 282" />
+    <item value="0x0283" name="Current Map State Flag 283" />
+    <item value="0x0284" name="Current Map State Flag 284" />
+    <item value="0x0285" name="Current Map State Flag 285" />
+    <item value="0x0286" name="Current Map State Flag 286" />
+    <item value="0x0287" name="Current Map State Flag 287" />
+    <item value="0x0288" name="Current Map State Flag 288" />
+    <item value="0x0289" name="Current Map State Flag 289" />
+    <item value="0x028A" name="Current Map State Flag 28A" />
+    <item value="0x028B" name="Current Map State Flag 28B" />
+    <item value="0x028C" name="Current Map State Flag 28C" />
+    <item value="0x028D" name="Current Map State Flag 28D" />
+    <item value="0x028E" name="Current Map State Flag 28E" />
+    <item value="0x028F" name="Current Map State Flag 28F" />
     <item value="0x0290" name="Temp flag set during battle 127" />
     <item value="0x0291" name="" />
     <item value="0x0292" name="" />
@@ -672,13 +672,13 @@
     <item value="0x029D" name="" />
     <item value="0x029E" name="" />
     <item value="0x029F" name="" />
-    <item value="0x02A0" name="Switch pressed" />
-    <item value="0x02A1" name="Train moved maybe" />
-    <item value="0x02A2" name="Train moved maybe" />
-    <item value="0x02A3" name="Train moved maybe" />
-    <item value="0x02A4" name="" />
-    <item value="0x02A5" name="" />
-    <item value="0x02A6" name="" />
+    <item value="0x02A0" name="Current Map State Flag 2A0 / Switch pressed" />
+    <item value="0x02A1" name="Current Map State Flag 2A1 / Train moved maybe" />
+    <item value="0x02A2" name="Current Map State Flag 2A2 / Train moved maybe" />
+    <item value="0x02A3" name="Current Map State Flag 2A3 / Train moved maybe" />
+    <item value="0x02A4" name="Current Map State Flag 2A4" />
+    <item value="0x02A5" name="Current Map State Flag 2A5" />
+    <item value="0x02A6" name="Aspia Drawbridge Gate Opened" />
     <item value="0x02A7" name="" />
     <item value="0x02A8" name="" />
     <item value="0x02A9" name="" />
@@ -736,18 +736,18 @@
     <item value="0x02DD" name="" />
     <item value="0x02DE" name="" />
     <item value="0x02DF" name="" />
-    <item value="0x02E0" name="" />
-    <item value="0x02E1" name="" />
-    <item value="0x02E2" name="" />
+    <item value="0x02E0" name="Walcuray Destroyed Rock 3" />
+    <item value="0x02E1" name="Walcuray Destroyed Rock 1" />
+    <item value="0x02E2" name="Walcuray Destroyed Rock 2" />
     <item value="0x02E3" name="" />
-    <item value="0x02E4" name="" />
+    <item value="0x02E4" name="Walcuray Destroyed Rock 5" />
     <item value="0x02E5" name="" />
-    <item value="0x02E6" name="" />
-    <item value="0x02E7" name="" />
-    <item value="0x02E8" name="" />
-    <item value="0x02E9" name="" />
+    <item value="0x02E6" name="Walcuray Destroyed Rock 4" />
+    <item value="0x02E7" name="Walcuray Destroyed Rock 6" />
+    <item value="0x02E8" name="Walcuray Destroyed Rock 7" />
+    <item value="0x02E9" name="Walcuray Destroyed Rock 9" />
     <item value="0x02EA" name="" />
-    <item value="0x02EB" name="" />
+    <item value="0x02EB" name="Walcuray Destroyed Rock 8" />
     <item value="0x02EC" name="" />
     <item value="0x02ED" name="" />
     <item value="0x02EE" name="" />
@@ -769,7 +769,7 @@
     <item value="0x02FE" name="" />
     <item value="0x02FF" name="" />
     <item value="0x0300" name="Chapter 1 Opener complete" />
-    <item value="0x0301" name="" />
+    <item value="0x0301" name="Map Ruins Active" />
     <item value="0x0302" name="" />
     <item value="0x0303" name="" />
     <item value="0x0304" name="" />
@@ -1036,9 +1036,9 @@
     <item value="0x0409" name="Outside Saraband speech" />
     <item value="0x040A" name="Entered Balsamo" />
     <item value="0x040B" name="" />
-    <item value="0x040C" name="Dwarf hill Ruin completed" />
-    <item value="0x040D" name="Dwarf hill Ruin started" />
-    <item value="0x040E" name="Battle beyond Dwarf hill speech" />
+    <item value="0x040C" name="Dwarf Hill Ruin Completed" />
+    <item value="0x040D" name="Dwarf Hill Ruin Started" />
+    <item value="0x040E" name="Battle Beyond Dwarf Hill Speech" />
     <item value="0x040F" name="Chapter 1 Ended" />
     <item value="0x0410" name="Path to Dwarf Hill Start" />
     <item value="0x0411" name="Something with Pier fight (Speaking)" />
@@ -1106,8 +1106,8 @@
     <item value="0x044F" name="" />
     <item value="0x0450" name="Julian joins" />
     <item value="0x0451" name="Julian battle ended" />
-    <item value="0x0452" name="Blue ruin start" />
-    <item value="0x0453" name="Blue ruin end" />
+    <item value="0x0452" name="Blue Ruin Start" />
+    <item value="0x0453" name="Blue Ruin End" />
     <item value="0x0454" name="Medion choice" />
     <item value="0x0455" name="Border battle begins" />
     <item value="0x0456" name="Board train" />
@@ -1360,10 +1360,10 @@
     <item value="0x054D" name="" />
     <item value="0x054E" name="" />
     <item value="0x054F" name="" />
-    <item value="0x0550" name="" />
-    <item value="0x0551" name="" />
-    <item value="0x0552" name="" />
-    <item value="0x0553" name="" />
+    <item value="0x0550" name="Highland Ruins Opened" />
+    <item value="0x0551" name="Highland Ruins Destroyed" />
+    <item value="0x0552" name="Desert Ruins Opened" />
+    <item value="0x0553" name="Desert Ruins Destroyed" />
     <item value="0x0554" name="" />
     <item value="0x0555" name="" />
     <item value="0x0556" name="Chapter 6 Opening Cutscene" />
@@ -2148,7 +2148,7 @@
     <item value="0x0861" name="" />
     <item value="0x0862" name="" />
     <item value="0x0863" name="" />
-    <item value="0x0864" name="" />
+    <item value="0x0864" name="Barrand Jail Key Taken" />
     <item value="0x0865" name="" />
     <item value="0x0866" name="" />
     <item value="0x0867" name="" />
@@ -2247,12 +2247,12 @@
     <item value="0x08C4" name="" />
     <item value="0x08C5" name="" />
     <item value="0x08C6" name="" />
-    <item value="0x08C7" name="" />
-    <item value="0x08C8" name="" />
-    <item value="0x08C9" name="" />
-    <item value="0x08CA" name="" />
-    <item value="0x08CB" name="" />
-    <item value="0x08CC" name="" />
+    <item value="0x08C7" name="Executor Front Cannon Destroyed (No visual change)" />
+    <item value="0x08C8" name="Executor Front Middle Cannon Destroyed" />
+    <item value="0x08C9" name="Executor Back Middle Cannon Destroyed" />
+    <item value="0x08CA" name="Executor Back Cannon Destroyed" />
+    <item value="0x08CB" name="Seagate Back Cannon Destroyed" />
+    <item value="0x08CC" name="Seagate Front Cannon Destroyed" />
     <item value="0x08CD" name="" />
     <item value="0x08CE" name="" />
     <item value="0x08CF" name="" />

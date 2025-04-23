@@ -233,12 +233,12 @@
     <item value="0xE6" name="Divine Cane" />
     <item value="0xE7" name="Negate Cane" />
     <item value="0xE8" name="Spark Blade" />
-    <item value="0xE9" name="Ruin Map" />
-    <item value="0xEA" name="Ruin Map" />
-    <item value="0xEB" name="Ruin Map" />
-    <item value="0xEC" name="Ruin Map" />
-    <item value="0xED" name="Ruin Map" />
-    <item value="0xEE" name="Ruin Map" />
+    <item value="0xE9" name="Dwarf Hill Map" />
+    <item value="0xEA" name="Blue Ruins Map" />
+    <item value="0xEB" name="Highlands Map" />
+    <item value="0xEC" name="Desert Map" />
+    <item value="0xED" name="Tower Map" />
+    <item value="0xEE" name="Catacombs Map" />
     <item value="0xEF" name="Elbesem Orb" />
     <item value="0xF0" name="Unused Barrand Prison Key" />
     <item value="0xF1" name="Unused Robot Eyes" />
