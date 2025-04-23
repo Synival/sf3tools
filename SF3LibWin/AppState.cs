@@ -285,7 +285,7 @@ namespace SF3.Win {
             get => _hideModelsNotFacingCamera;
             set => SetValue(ref _hideModelsNotFacingCamera, value, HideModelsNotFacingCameraChanged);
         }
-        private bool _hideModelsNotFacingCamera = true;
+        private bool _hideModelsNotFacingCamera = false;
         public event EventHandler HideModelsNotFacingCameraChanged;
 
         /// <summary>

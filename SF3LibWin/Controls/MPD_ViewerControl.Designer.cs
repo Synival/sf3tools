@@ -74,7 +74,7 @@
             // toolStrip1
             // 
             toolStrip1.ImageScalingSize = new System.Drawing.Size(24, 24);
-            toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { tsbCursorSelect, tsbCursorNavigate, toolStripSeparator5, tsbDrawSurfaceModel, tsbDrawModels, tsbDrawGround, tsbDrawSkyBox, tsbRunAnimations, tsbApplyLighting, tsbDrawGradients, tsbHideModelsNotFacingCamera, toolStripSeparator2, tsbToggleWireframe, tsbToggleBoundaries, tsbToggleTerrainType, tsbToggleEventID, tsbToggleCollisions, tsbToggleNormals, tsbRotateSpritesUp, toolStripSeparator1, tsbCameraReset, tsbCameraTopView, tsbCameraLookAtCenter, toolStripSeparator3, tsbToggleHelp });
+            toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { tsbCursorSelect, tsbCursorNavigate, toolStripSeparator5, tsbDrawSurfaceModel, tsbDrawModels, tsbDrawGround, tsbDrawSkyBox, tsbRunAnimations, tsbApplyLighting, tsbDrawGradients, toolStripSeparator2, tsbToggleWireframe, tsbToggleBoundaries, tsbToggleTerrainType, tsbToggleEventID, tsbToggleCollisions, tsbHideModelsNotFacingCamera, tsbToggleNormals, tsbRotateSpritesUp, toolStripSeparator1, tsbCameraReset, tsbCameraTopView, tsbCameraLookAtCenter, toolStripSeparator3, tsbToggleHelp });
             toolStrip1.Location = new System.Drawing.Point(0, 0);
             toolStrip1.Name = "toolStrip1";
             toolStrip1.Size = new System.Drawing.Size(789, 31);
