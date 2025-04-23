@@ -1056,8 +1056,8 @@
     <item value="0x041D" name="Told Benetram about guard" />
     <item value="0x041E" name="Irene Battle starts" />
     <item value="0x041F" name="Hagane found in pillar" />
-    <item value="0x0420" name="Said No to Medion" />
-    <item value="0x0421" name="Said No to Medion again" />
+    <item value="0x0420" name="Said No to Varlant at Switchpoint" />
+    <item value="0x0421" name="Said No to Medion at Switchpoint" />
     <item value="0x0422" name="Medion interaction Railhead" />
     <item value="0x0423" name="Refugee 1 dead" />
     <item value="0x0424" name="Refugee 2 dead" />
