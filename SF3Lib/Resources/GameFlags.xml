@@ -640,22 +640,22 @@
     <item value="0x027D" name="" />
     <item value="0x027E" name="" />
     <item value="0x027F" name="" />
-    <item value="0x0280" name="Something With Masqurin (Set when Masqurins turn?) / Medion talked to train conductor in Storich" />
-    <item value="0x0281" name="(Set after certain events?)" />
-    <item value="0x0282" name="" />
-    <item value="0x0283" name="" />
-    <item value="0x0284" name="" />
-    <item value="0x0285" name="Walked to Bernard 1" />
-    <item value="0x0286" name="Walked to Bernard 2" />
-    <item value="0x0287" name="" />
-    <item value="0x0288" name="Started windmill" />
-    <item value="0x0289" name="" />
-    <item value="0x028A" name="" />
-    <item value="0x028B" name="" />
-    <item value="0x028C" name="" />
-    <item value="0x028D" name="" />
-    <item value="0x028E" name="" />
-    <item value="0x028F" name="" />
+    <item value="0x0280" name="Current Map Flag 1" />
+    <item value="0x0281" name="Current Map Flag 2" />
+    <item value="0x0282" name="Current Map Flag 3" />
+    <item value="0x0283" name="Current Map Flag 4" />
+    <item value="0x0284" name="Current Map Flag 5" />
+    <item value="0x0285" name="Current Map Flag 6" />
+    <item value="0x0286" name="Current Map Flag 7" />
+    <item value="0x0287" name="Current Map Flag 8" />
+    <item value="0x0288" name="Current Map Flag 9" />
+    <item value="0x0289" name="Current Map Flag 10" />
+    <item value="0x028A" name="Current Map Flag 11" />
+    <item value="0x028B" name="Current Map Flag 12" />
+    <item value="0x028C" name="Current Map Flag 13" />
+    <item value="0x028D" name="Current Map Flag 14" />
+    <item value="0x028E" name="Current Map Flag 15" />
+    <item value="0x028F" name="Current Map Flag 16" />
     <item value="0x0290" name="Temp flag set during battle 127" />
     <item value="0x0291" name="" />
     <item value="0x0292" name="" />
@@ -705,21 +705,21 @@
     <item value="0x02BE" name="" />
     <item value="0x02BF" name="" />
     <item value="0x02C0" name="" />
-    <item value="0x02C1" name="" />
-    <item value="0x02C2" name="" />
-    <item value="0x02C3" name="" />
-    <item value="0x02C4" name="" />
-    <item value="0x02C5" name="" />
-    <item value="0x02C6" name="" />
-    <item value="0x02C7" name="" />
-    <item value="0x02C8" name="" />
-    <item value="0x02C9" name="" />
-    <item value="0x02CA" name="" />
-    <item value="0x02CB" name="" />
-    <item value="0x02CC" name="" />
-    <item value="0x02CD" name="" />
-    <item value="0x02CE" name="" />
-    <item value="0x02CF" name="" />
+    <item value="0x02C1" name="Cupboard 1" />
+    <item value="0x02C2" name="Cupboard 2" />
+    <item value="0x02C3" name="Cupboard 3" />
+    <item value="0x02C4" name="Cupboard 4" />
+    <item value="0x02C5" name="Cupboard 5" />
+    <item value="0x02C6" name="Cupboard 6" />
+    <item value="0x02C7" name="Cupboard 7" />
+    <item value="0x02C8" name="Cupboard 8" />
+    <item value="0x02C9" name="Cupboard 9" />
+    <item value="0x02CA" name="Cupboard 10" />
+    <item value="0x02CB" name="Cupboard 11" />
+    <item value="0x02CC" name="Cupboard 12" />
+    <item value="0x02CD" name="Cupboard 13" />
+    <item value="0x02CE" name="Cupboard 14" />
+    <item value="0x02CF" name="Cupboard 15" />
     <item value="0x02D0" name="" />
     <item value="0x02D1" name="" />
     <item value="0x02D2" name="" />
