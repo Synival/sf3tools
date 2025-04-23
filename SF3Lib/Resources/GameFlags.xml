@@ -704,22 +704,22 @@
     <item value="0x02BD" name="" />
     <item value="0x02BE" name="" />
     <item value="0x02BF" name="" />
-    <item value="0x02C0" name="" />
-    <item value="0x02C1" name="Cupboard 1" />
-    <item value="0x02C2" name="Cupboard 2" />
-    <item value="0x02C3" name="Cupboard 3" />
-    <item value="0x02C4" name="Cupboard 4" />
-    <item value="0x02C5" name="Cupboard 5" />
-    <item value="0x02C6" name="Cupboard 6" />
-    <item value="0x02C7" name="Cupboard 7" />
-    <item value="0x02C8" name="Cupboard 8" />
-    <item value="0x02C9" name="Cupboard 9" />
-    <item value="0x02CA" name="Cupboard 10" />
-    <item value="0x02CB" name="Cupboard 11" />
-    <item value="0x02CC" name="Cupboard 12" />
-    <item value="0x02CD" name="Cupboard 13" />
-    <item value="0x02CE" name="Cupboard 14" />
-    <item value="0x02CF" name="Cupboard 15" />
+    <item value="0x02C0" name="Cupboard 1" />
+    <item value="0x02C1" name="Cupboard 2" />
+    <item value="0x02C2" name="Cupboard 3" />
+    <item value="0x02C3" name="Cupboard 4" />
+    <item value="0x02C4" name="Cupboard 5" />
+    <item value="0x02C5" name="Cupboard 6" />
+    <item value="0x02C6" name="Cupboard 7" />
+    <item value="0x02C7" name="Cupboard 8" />
+    <item value="0x02C8" name="Cupboard 9" />
+    <item value="0x02C9" name="Cupboard 10" />
+    <item value="0x02CA" name="Cupboard 11" />
+    <item value="0x02CB" name="Cupboard 12" />
+    <item value="0x02CC" name="Cupboard 13" />
+    <item value="0x02CD" name="Cupboard 14" />
+    <item value="0x02CE" name="Cupboard 15" />
+    <item value="0x02CF" name="Cupboard 16" />
     <item value="0x02D0" name="" />
     <item value="0x02D1" name="" />
     <item value="0x02D2" name="" />
@@ -2069,11 +2069,11 @@
     <item value="0x0812" name="" />
     <item value="0x0813" name="" />
     <item value="0x0814" name="" />
-    <item value="0x0815" name="" />
-    <item value="0x0816" name="" />
-    <item value="0x0817" name="" />
-    <item value="0x0818" name="" />
-    <item value="0x0819" name="" />
+    <item value="0x0815" name="Anafect Docks Section 1 Destroyed" />
+    <item value="0x0816" name="Anafect Docks Section 2 Destroyed" />
+    <item value="0x0817" name="Anafect Docks Section 3 Destroyed" />
+    <item value="0x0818" name="Anafect Docks Section 4 Destroyed" />
+    <item value="0x0819" name="Anafect Docks Section 5 Destroyed" />
     <item value="0x081A" name="Anafect Docks battle started" />
     <item value="0x081B" name="Stella saved" />
     <item value="0x081C" name="" />
