@@ -663,7 +663,7 @@ namespace SF3.Editor.Forms {
             // 
             tsmiMPD_RecalculateSurfaceModelNormals.Name = "tsmiMPD_RecalculateSurfaceModelNormals";
             tsmiMPD_RecalculateSurfaceModelNormals.Size = new Size(265, 22);
-            tsmiMPD_RecalculateSurfaceModelNormals.Text = "Recalculate Surface Model &Norrmals";
+            tsmiMPD_RecalculateSurfaceModelNormals.Text = "Recalculate Surface Model &Normals";
             tsmiMPD_RecalculateSurfaceModelNormals.Click += tsmiMPD_RecalculateSurfaceModelNormals_Click;
             // 
             // tsmiSettings
