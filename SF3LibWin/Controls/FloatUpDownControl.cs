@@ -4,7 +4,7 @@ namespace SF3.Win.Controls {
 
     public class FloatUpDownControl : NumericUpDown {
         public FloatUpDownControl() {
-            this.DecimalPlaces = 0;
+            this.DecimalPlaces = 7;
             this.Maximum = int.MaxValue;
             this.Minimum = -int.MaxValue;
         }
