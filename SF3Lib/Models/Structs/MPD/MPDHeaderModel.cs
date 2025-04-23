@@ -385,7 +385,7 @@ namespace SF3.Models.Structs.MPD {
         [BulkCopy]
         [TableViewModelColumn(displayOrder: 14, visibilityProperty: nameof(HasModelsInfo))]
         public float ModelsPreYRotation {
-            get => HasModelsInfo ? Data.GetCompressedFIXED(modelsPreYRotation).Float : 0;
+            get => HasModelsInfo ? Data.GetCompressedFIXED(modelsPreYRotation).Float : -1;
             set {
                 if (HasModelsInfo)
                     Data.SetCompressedFIXED(modelsPreYRotation, new CompressedFIXED(value, 0));
@@ -395,7 +395,7 @@ namespace SF3.Models.Structs.MPD {
         [BulkCopy]
         [TableViewModelColumn(displayOrder: 14.5f, visibilityProperty: nameof(HasModelsInfo))]
         public float ModelsViewAngleMin {
-            get => HasModelsInfo ? Data.GetCompressedFIXED(modelsViewAngleMin).Float : 0;
+            get => HasModelsInfo ? Data.GetCompressedFIXED(modelsViewAngleMin).Float : -0.6f;
             set {
                 if (HasModelsInfo)
                     Data.SetCompressedFIXED(modelsViewAngleMin, new CompressedFIXED(value, 0));
@@ -405,7 +405,7 @@ namespace SF3.Models.Structs.MPD {
         [BulkCopy]
         [TableViewModelColumn(displayOrder: 15, visibilityProperty: nameof(HasModelsInfo))]
         public float ModelsViewAngleMax {
-            get => HasModelsInfo ? Data.GetCompressedFIXED(modelsViewAngleMax).Float : 0;
+            get => HasModelsInfo ? Data.GetCompressedFIXED(modelsViewAngleMax).Float : 0.6f;
             set {
                 if (HasModelsInfo)
                     Data.SetCompressedFIXED(modelsViewAngleMax, new CompressedFIXED(value, 0));
