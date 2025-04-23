@@ -8,6 +8,7 @@ using System.IO;
 using SF3.ModelLoaders;
 using SF3.Win.Views;
 using SF3.Win;
+using SF3.Models.Files.MPD;
 
 namespace SF3.Editor.Forms {
     public partial class SF3EditorForm {
@@ -372,6 +373,7 @@ namespace SF3.Editor.Forms {
 
             var fileType = file?.FileType;
             tsmiMPD.Visible = tsmiMPD.Enabled = hasFile && (fileType == SF3FileType.MPD);
+            UpdateModelSwitchGroupsMenu((fileType == SF3FileType.MPD && file?.Loader?.Model != null) ? (IMPD_File) file.Loader.Model : null);
         }
 
         private void UpdateLocalOpenScenario() {

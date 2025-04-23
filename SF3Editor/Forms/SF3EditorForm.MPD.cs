@@ -232,5 +232,28 @@ namespace SF3.Editor.Forms {
                 mpdView.UpdateViewerMap();
             }
         }
+
+        private void UpdateModelSwitchGroupsMenu(IMPD_File? mpdFile) {
+            var items = tsmiMPD_ModelSwitchGroups.DropDown.Items;
+
+            items.Clear();
+            int itemIndex = 1;
+            if (mpdFile?.ModelSwitchGroupsTable?.Rows?.Length > 0) {
+                var ngc = mpdFile.NameGetterContext;
+                foreach (var msg in mpdFile.ModelSwitchGroupsTable) {
+                    var flag = msg.Flag;
+                    var flagName = ngc.GetName(null, null, msg.Flag, [NamedValueType.GameFlag]) ?? "";
+                    _ = items.Add(new ToolStripMenuItem(
+                        $"&{itemIndex} - Flag {flag:X3}" + (flagName == "" ? "" : $" ({flagName})"),
+                        null,
+                        null,
+                        $"tsbMPD_ModelSwitchGroups_Item{itemIndex}"
+                    ));
+                    itemIndex++;
+                }
+            }
+
+            tsmiMPD_ModelSwitchGroups.Enabled = items.Count > 0;
+        }
     }
 }

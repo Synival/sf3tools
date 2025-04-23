@@ -75,12 +75,12 @@ namespace SF3.Editor.Forms {
             tsmiView_MPD_DrawEventIDs = new System.Windows.Forms.ToolStripMenuItem();
             tsmiView_MPD_DrawCollisionLines = new System.Windows.Forms.ToolStripMenuItem();
             tsmiView_MPD_HideModelsNotFacingCamera = new System.Windows.Forms.ToolStripMenuItem();
+            tsmiView_MPD_RenderOnBlackBackground = new System.Windows.Forms.ToolStripMenuItem();
             tsmiView_MPD_DrawNormalMap = new System.Windows.Forms.ToolStripMenuItem();
             tsmiView_MPD_RotateSpritesUpToCamera = new System.Windows.Forms.ToolStripMenuItem();
             tsmiView_MPD_Sep2 = new System.Windows.Forms.ToolStripSeparator();
             tsmiView_MPD_ShowHelp = new System.Windows.Forms.ToolStripMenuItem();
             tsmiView_MPD_Sep3 = new System.Windows.Forms.ToolStripSeparator();
-            tsmiView_MPD_RenderOnBlackBackground = new System.Windows.Forms.ToolStripMenuItem();
             tsmiView_MPD_EnableBlankFieldV2Controls = new System.Windows.Forms.ToolStripMenuItem();
             tsmi_Tools = new System.Windows.Forms.ToolStripMenuItem();
             tsmiTools_ImportTable = new System.Windows.Forms.ToolStripMenuItem();
@@ -113,6 +113,7 @@ namespace SF3.Editor.Forms {
             tsmiSettings_MPD_FixNormalOverflowUnderflowErrors = new System.Windows.Forms.ToolStripMenuItem();
             tsmiHelp = new System.Windows.Forms.ToolStripMenuItem();
             tsmiHelp_About = new System.Windows.Forms.ToolStripMenuItem();
+            tsmiMPD_ModelSwitchGroups = new System.Windows.Forms.ToolStripMenuItem();
             menuStrip1.SuspendLayout();
             SuspendLayout();
             // 
@@ -373,7 +374,7 @@ namespace SF3.Editor.Forms {
             // 
             tsmiView_MPD.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { tsmiView_MPD_DrawSurfaceModel, tsmiView_MPD_DrawModels, tsmiView_MPD_DrawGround, tsmiView_MPD_DrawSkyBox, tsmiView_MPD_RunAnimations, tsmiView_MPD_ApplyLighting, tsmiView_MPD_DrawGradients, tsmiView_MPD_Sep1, tsmiView_MPD_DrawWireframes, tsmiView_MPD_DrawBoundaries, tsmiView_MPD_DrawTerrainTypes, tsmiView_MPD_DrawEventIDs, tsmiView_MPD_DrawCollisionLines, tsmiView_MPD_HideModelsNotFacingCamera, tsmiView_MPD_RenderOnBlackBackground, tsmiView_MPD_DrawNormalMap, tsmiView_MPD_RotateSpritesUpToCamera, tsmiView_MPD_Sep2, tsmiView_MPD_ShowHelp, tsmiView_MPD_Sep3, tsmiView_MPD_EnableBlankFieldV2Controls });
             tsmiView_MPD.Name = "tsmiView_MPD";
-            tsmiView_MPD.Size = new Size(180, 22);
+            tsmiView_MPD.Size = new Size(100, 22);
             tsmiView_MPD.Text = "&MPD";
             // 
             // tsmiView_MPD_DrawSurfaceModel
@@ -472,6 +473,13 @@ namespace SF3.Editor.Forms {
             tsmiView_MPD_HideModelsNotFacingCamera.Text = "Hide Models Not Facing Camera";
             tsmiView_MPD_HideModelsNotFacingCamera.Click += tsmiView_MPD_HideModelsNotFacingCamera_Click;
             // 
+            // tsmiView_MPD_RenderOnBlackBackground
+            // 
+            tsmiView_MPD_RenderOnBlackBackground.Name = "tsmiView_MPD_RenderOnBlackBackground";
+            tsmiView_MPD_RenderOnBlackBackground.Size = new Size(384, 22);
+            tsmiView_MPD_RenderOnBlackBackground.Text = "Render on Black Background";
+            tsmiView_MPD_RenderOnBlackBackground.Click += tsmiView_MPD_RenderOnBlackBackground_Click;
+            // 
             // tsmiView_MPD_DrawNormalMap
             // 
             tsmiView_MPD_DrawNormalMap.Name = "tsmiView_MPD_DrawNormalMap";
@@ -502,13 +510,6 @@ namespace SF3.Editor.Forms {
             // 
             tsmiView_MPD_Sep3.Name = "tsmiView_MPD_Sep3";
             tsmiView_MPD_Sep3.Size = new Size(381, 6);
-            // 
-            // tsmiView_MPD_RenderOnBlackBackground
-            // 
-            tsmiView_MPD_RenderOnBlackBackground.Name = "tsmiView_MPD_RenderOnBlackBackground";
-            tsmiView_MPD_RenderOnBlackBackground.Size = new Size(384, 22);
-            tsmiView_MPD_RenderOnBlackBackground.Text = "Render on Black Background";
-            tsmiView_MPD_RenderOnBlackBackground.Click += tsmiView_MPD_RenderOnBlackBackground_Click;
             // 
             // tsmiView_MPD_EnableBlankFieldV2Controls
             // 
@@ -563,7 +564,7 @@ namespace SF3.Editor.Forms {
             // 
             // tsmiMPD
             // 
-            tsmiMPD.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { tsmiMPD_Chunks, tsmiMPD_Textures, tsmiMPD_Sep1, tsmiMPD_RecalculateSurfaceModelNormals });
+            tsmiMPD.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { tsmiMPD_Chunks, tsmiMPD_Textures, tsmiMPD_ModelSwitchGroups, tsmiMPD_Sep1, tsmiMPD_RecalculateSurfaceModelNormals });
             tsmiMPD.Enabled = false;
             tsmiMPD.Name = "tsmiMPD";
             tsmiMPD.Size = new Size(45, 20);
@@ -733,6 +734,13 @@ namespace SF3.Editor.Forms {
             tsmiHelp_About.Text = "&About...";
             tsmiHelp_About.Click += tsmiHelp_About_Click;
             // 
+            // tsmiMPD_ModelSwitchGroups
+            // 
+            tsmiMPD_ModelSwitchGroups.Enabled = false;
+            tsmiMPD_ModelSwitchGroups.Name = "tsmiMPD_ModelSwitchGroups";
+            tsmiMPD_ModelSwitchGroups.Size = new Size(265, 22);
+            tsmiMPD_ModelSwitchGroups.Text = "Model &Switch Groups";
+            // 
             // SF3EditorForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -838,5 +846,6 @@ namespace SF3.Editor.Forms {
         private System.Windows.Forms.ToolStripMenuItem tsmiSettings_MPD_FixNormalOverflowUnderflowErrors;
         private System.Windows.Forms.ToolStripMenuItem tsmiView_MPD_HideModelsNotFacingCamera;
         private System.Windows.Forms.ToolStripMenuItem tsmiView_MPD_RenderOnBlackBackground;
+        private System.Windows.Forms.ToolStripMenuItem tsmiMPD_ModelSwitchGroups;
     }
 }
