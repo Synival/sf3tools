@@ -25,15 +25,17 @@ namespace SF3.Win.Controls {
             _appState.ViewerRunAnimationsChanged      += (s, e) => Invalidate();
             _appState.ViewerApplyLightingChanged      += (s, e) => Invalidate();
             _appState.ViewerDrawGradientsChanged      += (s, e) => Invalidate();
-            _appState.HideModelsNotFacingCameraChanged += (s, e) => Invalidate();
 
             _appState.ViewerDrawWireframeChanged      += (s, e) => Invalidate();
             _appState.ViewerDrawBoundariesChanged     += (s, e) => Invalidate();
             _appState.ViewerDrawTerrainTypesChanged   += (s, e) => Invalidate();
             _appState.ViewerDrawEventIDsChanged       += (s, e) => Invalidate();
             _appState.ViewerDrawCollisionLinesChanged += (s, e) => Invalidate();
+            _appState.HideModelsNotFacingCameraChanged += (s, e) => Invalidate();
+            _appState.RenderOnBlackBackgroundChanged  += (s, e) => Invalidate();
             _appState.ViewerDrawNormalsChanged        += (s, e) => Invalidate();
             _appState.ViewerRotateSpritesUpChanged    += (s, e) => Invalidate();
+
             _appState.ViewerDrawHelpChanged           += (s, e) => Invalidate();
 
             _appState.ViewerRotateSpritesUpChanged += (s, e) => _renderer.InvalidateSpriteMatrices(_models);
@@ -162,7 +164,11 @@ namespace SF3.Win.Controls {
             }
             UpdateTilePosition();
 
-            GL.ClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+            if (RenderOnBlackBackground)
+                GL.ClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+            else
+                GL.ClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+
             GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit | ClearBufferMask.StencilBufferBit);
 
             _renderer.DrawScene(
@@ -403,6 +409,20 @@ namespace SF3.Win.Controls {
 
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public bool HideModelsNotFacingCamera {
+            get => AppState.HideModelsNotFacingCamera;
+            set => UpdateAppState(nameof(AppState.HideModelsNotFacingCamera), value);
+        }
+
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public bool RenderOnBlackBackground {
+            get => AppState.RenderOnBlackBackground;
+            set => UpdateAppState(nameof(AppState.RenderOnBlackBackground), value);
+        }
+
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public bool DrawNormals {
             get => AppState.ViewerDrawNormals;
             set => UpdateAppState(nameof(AppState.ViewerDrawNormals), value);
@@ -420,13 +440,6 @@ namespace SF3.Win.Controls {
         public bool DrawHelp {
             get => AppState.ViewerDrawHelp;
             set => UpdateAppState(nameof(AppState.ViewerDrawHelp), value);
-        }
-
-        [Browsable(false)]
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public bool HideModelsNotFacingCamera {
-            get => AppState.HideModelsNotFacingCamera;
-            set => UpdateAppState(nameof(AppState.HideModelsNotFacingCamera), value);
         }
 
         private bool _tileSelectedNeedsUpdate = false;

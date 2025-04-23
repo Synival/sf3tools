@@ -10,15 +10,17 @@ namespace SF3.Editor.Forms {
             tsmiView_MPD_RunAnimations.Checked           = _appState.ViewerRunAnimations;
             tsmiView_MPD_ApplyLighting.Checked           = _appState.ViewerApplyLighting;
             tsmiView_MPD_DrawGradients.Checked           = _appState.ViewerDrawGradients;
-            tsmiView_MPD_HideModelsNotFacingCamera.Checked = _appState.HideModelsNotFacingCamera;
 
             tsmiView_MPD_DrawWireframes.Checked          = _appState.ViewerDrawWireframe;
             tsmiView_MPD_DrawBoundaries.Checked          = _appState.ViewerDrawBoundaries;
             tsmiView_MPD_DrawTerrainTypes.Checked        = _appState.ViewerDrawTerrainTypes;
             tsmiView_MPD_DrawEventIDs.Checked            = _appState.ViewerDrawEventIDs;
             tsmiView_MPD_DrawCollisionLines.Checked      = _appState.ViewerDrawCollisionLines;
+            tsmiView_MPD_HideModelsNotFacingCamera.Checked = _appState.HideModelsNotFacingCamera;
             tsmiView_MPD_DrawNormalMap.Checked           = _appState.ViewerDrawNormals;
             tsmiView_MPD_RotateSpritesUpToCamera.Checked = _appState.ViewerRotateSpritesUp;
+            tsmiView_MPD_RenderOnBlackBackground.Checked = _appState.RenderOnBlackBackground;
+
             tsmiView_MPD_ShowHelp.Checked                = _appState.ViewerDrawHelp;
 
             tsmiView_MPD_EnableBlankFieldV2Controls.Checked = _appState.EnableExperimentalBlankFieldV2Brushes;
@@ -30,15 +32,17 @@ namespace SF3.Editor.Forms {
             _appState.ViewerRunAnimationsChanged      += (s, e) => { tsmiView_MPD_RunAnimations.Checked           = _appState.ViewerRunAnimations;      _appState.Serialize(); };
             _appState.ViewerApplyLightingChanged      += (s, e) => { tsmiView_MPD_ApplyLighting.Checked           = _appState.ViewerApplyLighting;      _appState.Serialize(); };
             _appState.ViewerDrawGradientsChanged      += (s, e) => { tsmiView_MPD_DrawGradients.Checked           = _appState.ViewerDrawGradients;      _appState.Serialize(); };
-            _appState.HideModelsNotFacingCameraChanged += (s, e) => { tsmiView_MPD_HideModelsNotFacingCamera.Checked = _appState.HideModelsNotFacingCamera; _appState.Serialize(); };
 
             _appState.ViewerDrawWireframeChanged      += (s, e) => { tsmiView_MPD_DrawWireframes.Checked          = _appState.ViewerDrawWireframe;      _appState.Serialize(); };
             _appState.ViewerDrawBoundariesChanged     += (s, e) => { tsmiView_MPD_DrawBoundaries.Checked          = _appState.ViewerDrawBoundaries;     _appState.Serialize(); };
             _appState.ViewerDrawTerrainTypesChanged   += (s, e) => { tsmiView_MPD_DrawTerrainTypes.Checked        = _appState.ViewerDrawTerrainTypes;   _appState.Serialize(); };
             _appState.ViewerDrawEventIDsChanged       += (s, e) => { tsmiView_MPD_DrawEventIDs.Checked            = _appState.ViewerDrawEventIDs;       _appState.Serialize(); };
             _appState.ViewerDrawCollisionLinesChanged += (s, e) => { tsmiView_MPD_DrawCollisionLines.Checked      = _appState.ViewerDrawCollisionLines; _appState.Serialize(); };
+            _appState.HideModelsNotFacingCameraChanged += (s, e) => { tsmiView_MPD_HideModelsNotFacingCamera.Checked = _appState.HideModelsNotFacingCamera; _appState.Serialize(); };
             _appState.ViewerDrawNormalsChanged        += (s, e) => { tsmiView_MPD_DrawNormalMap.Checked           = _appState.ViewerDrawNormals;        _appState.Serialize(); };
             _appState.ViewerRotateSpritesUpChanged    += (s, e) => { tsmiView_MPD_RotateSpritesUpToCamera.Checked = _appState.ViewerRotateSpritesUp;    _appState.Serialize(); };
+            _appState.RenderOnBlackBackgroundChanged  += (s, e) => { tsmiView_MPD_RenderOnBlackBackground.Checked = _appState.RenderOnBlackBackground;  _appState.Serialize(); };
+
             _appState.ViewerDrawHelpChanged           += (s, e) => { tsmiView_MPD_ShowHelp.Checked                = _appState.ViewerDrawHelp;           _appState.Serialize(); };
 
             _appState.EnableExperimentalBlankFieldV2BrushesChanged += (s, e) => { tsmiView_MPD_EnableBlankFieldV2Controls.Checked = _appState.EnableExperimentalBlankFieldV2Brushes; _appState.Serialize(); };
@@ -60,6 +64,9 @@ namespace SF3.Editor.Forms {
         private void tsmiView_MPD_DrawCollisionLines_Click(object sender, EventArgs e)      => _appState.ViewerDrawCollisionLines = !_appState.ViewerDrawCollisionLines;
         private void tsmiView_MPD_DrawNormalMap_Click(object sender, EventArgs e)           => _appState.ViewerDrawNormals = !_appState.ViewerDrawNormals;
         private void tsmiView_MPD_RotateSpritesUpToCamera_Click(object sender, EventArgs e) => _appState.ViewerRotateSpritesUp = !_appState.ViewerRotateSpritesUp;
+
+        private void tsmiView_MPD_RenderOnBlackBackground_Click(object sender, EventArgs e) => _appState.RenderOnBlackBackground = ! _appState.RenderOnBlackBackground;
+
         private void tsmiView_MPD_ShowHelp_Click(object sender, EventArgs e)                => _appState.ViewerDrawHelp = !_appState.ViewerDrawHelp;
 
         private void tsmiView_MPD_EnableBlankFieldV2Controls_Click(object sender, EventArgs e) => _appState.EnableExperimentalBlankFieldV2Brushes = !_appState.EnableExperimentalBlankFieldV2Brushes;

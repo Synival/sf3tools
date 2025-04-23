@@ -35,13 +35,13 @@
             tsbRunAnimations = new System.Windows.Forms.ToolStripButton();
             tsbApplyLighting = new System.Windows.Forms.ToolStripButton();
             tsbDrawGradients = new System.Windows.Forms.ToolStripButton();
-            tsbHideModelsNotFacingCamera = new System.Windows.Forms.ToolStripButton();
             toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             tsbToggleWireframe = new System.Windows.Forms.ToolStripButton();
             tsbToggleBoundaries = new System.Windows.Forms.ToolStripButton();
             tsbToggleTerrainType = new System.Windows.Forms.ToolStripButton();
             tsbToggleEventID = new System.Windows.Forms.ToolStripButton();
             tsbToggleCollisions = new System.Windows.Forms.ToolStripButton();
+            tsbHideModelsNotFacingCamera = new System.Windows.Forms.ToolStripButton();
             tsbToggleNormals = new System.Windows.Forms.ToolStripButton();
             tsbRotateSpritesUp = new System.Windows.Forms.ToolStripButton();
             toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
@@ -67,6 +67,7 @@
             tsbDrawNoEntry = new System.Windows.Forms.ToolStripButton();
             toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
             tsbFixTiles = new System.Windows.Forms.ToolStripButton();
+            tsbRenderOnBlackBackground = new System.Windows.Forms.ToolStripButton();
             toolStrip1.SuspendLayout();
             toolStrip2.SuspendLayout();
             SuspendLayout();
@@ -74,7 +75,7 @@
             // toolStrip1
             // 
             toolStrip1.ImageScalingSize = new System.Drawing.Size(24, 24);
-            toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { tsbCursorSelect, tsbCursorNavigate, toolStripSeparator5, tsbDrawSurfaceModel, tsbDrawModels, tsbDrawGround, tsbDrawSkyBox, tsbRunAnimations, tsbApplyLighting, tsbDrawGradients, toolStripSeparator2, tsbToggleWireframe, tsbToggleBoundaries, tsbToggleTerrainType, tsbToggleEventID, tsbToggleCollisions, tsbHideModelsNotFacingCamera, tsbToggleNormals, tsbRotateSpritesUp, toolStripSeparator1, tsbCameraReset, tsbCameraTopView, tsbCameraLookAtCenter, toolStripSeparator3, tsbToggleHelp });
+            toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { tsbCursorSelect, tsbCursorNavigate, toolStripSeparator5, tsbDrawSurfaceModel, tsbDrawModels, tsbDrawGround, tsbDrawSkyBox, tsbRunAnimations, tsbApplyLighting, tsbDrawGradients, toolStripSeparator2, tsbToggleWireframe, tsbToggleBoundaries, tsbToggleTerrainType, tsbToggleEventID, tsbToggleCollisions, tsbHideModelsNotFacingCamera, tsbRenderOnBlackBackground, tsbToggleNormals, tsbRotateSpritesUp, toolStripSeparator1, tsbCameraReset, tsbCameraTopView, tsbCameraLookAtCenter, toolStripSeparator3, tsbToggleHelp });
             toolStrip1.Location = new System.Drawing.Point(0, 0);
             toolStrip1.Name = "toolStrip1";
             toolStrip1.Size = new System.Drawing.Size(789, 31);
@@ -183,16 +184,6 @@
             tsbDrawGradients.ToolTipText = "Draw Gradients";
             tsbDrawGradients.Click += tsbDrawGradients_Click;
             // 
-            // tsbHideModelsNotFacingCamera
-            // 
-            tsbHideModelsNotFacingCamera.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            tsbHideModelsNotFacingCamera.Image = Properties.Resources.HideModelsFacingAwayBmp;
-            tsbHideModelsNotFacingCamera.ImageTransparentColor = System.Drawing.Color.Magenta;
-            tsbHideModelsNotFacingCamera.Name = "tsbHideModelsNotFacingCamera";
-            tsbHideModelsNotFacingCamera.Size = new System.Drawing.Size(28, 28);
-            tsbHideModelsNotFacingCamera.Text = "Hide Models Not Facing Camera";
-            tsbHideModelsNotFacingCamera.Click += tsbHideModelsNotFacingCamera_Click;
-            // 
             // toolStripSeparator2
             // 
             toolStripSeparator2.Name = "toolStripSeparator2";
@@ -248,6 +239,16 @@
             tsbToggleCollisions.Size = new System.Drawing.Size(28, 28);
             tsbToggleCollisions.Text = "Draw Collision Lines";
             tsbToggleCollisions.Click += tsbToggleCollisions_Click;
+            // 
+            // tsbHideModelsNotFacingCamera
+            // 
+            tsbHideModelsNotFacingCamera.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            tsbHideModelsNotFacingCamera.Image = Properties.Resources.HideModelsFacingAwayBmp;
+            tsbHideModelsNotFacingCamera.ImageTransparentColor = System.Drawing.Color.Magenta;
+            tsbHideModelsNotFacingCamera.Name = "tsbHideModelsNotFacingCamera";
+            tsbHideModelsNotFacingCamera.Size = new System.Drawing.Size(28, 28);
+            tsbHideModelsNotFacingCamera.Text = "Hide Models Not Facing Camera";
+            tsbHideModelsNotFacingCamera.Click += tsbHideModelsNotFacingCamera_Click;
             // 
             // tsbToggleNormals
             // 
@@ -505,6 +506,16 @@
             tsbFixTiles.Text = "Fix All Tile Textures Based on Neighbors\n(You'll probably want to save first!!)";
             tsbFixTiles.Click += tsbFixTiles_Click;
             // 
+            // tsbRenderOnBlackBackground
+            // 
+            tsbRenderOnBlackBackground.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            tsbRenderOnBlackBackground.Image = Properties.Resources.RenderOnBlackBackgroundBmp;
+            tsbRenderOnBlackBackground.ImageTransparentColor = System.Drawing.Color.Magenta;
+            tsbRenderOnBlackBackground.Name = "tsbRenderOnBlackBackground";
+            tsbRenderOnBlackBackground.Size = new System.Drawing.Size(28, 28);
+            tsbRenderOnBlackBackground.Text = "Render on Black Background";
+            tsbRenderOnBlackBackground.Click += tsbRenderOnBlackBackground_Click;
+            // 
             // MPD_ViewerControl
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -568,5 +579,6 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator6;
         private System.Windows.Forms.ToolStripButton tsbFixTiles;
         private System.Windows.Forms.ToolStripButton tsbHideModelsNotFacingCamera;
+        private System.Windows.Forms.ToolStripButton tsbRenderOnBlackBackground;
     }
 }

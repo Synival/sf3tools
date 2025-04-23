@@ -269,6 +269,16 @@ namespace SF3.Win {
         public event EventHandler ViewerRotateSpritesUpChanged;
 
         /// <summary>
+        /// When enabled, MPDs are rendered on a black background instead of the usual cyan for visibility.
+        /// </summary>
+        public bool RenderOnBlackBackground {
+            get => _renderOnBlackBackground;
+            set => SetValue(ref _renderOnBlackBackground, value, RenderOnBlackBackgroundChanged);
+        }
+        private bool _renderOnBlackBackground = false;
+        public event EventHandler RenderOnBlackBackgroundChanged;
+
+        /// <summary>
         /// When enabled, the MPD Viewer will display a small 'Help' cheat sheet in the lower-right corner.
         /// </summary>
         public bool ViewerDrawHelp {
