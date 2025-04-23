@@ -1,8 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 using OpenTK.Graphics.OpenGL;
 using OpenTK.Mathematics;
 using SF3.Models.Files.MPD;
+using SF3.Models.Structs.MPD;
 using SF3.Types;
 using SF3.Win.OpenGL;
 using SF3.Win.OpenGL.MPD_File;
@@ -171,10 +174,26 @@ namespace SF3.Win.Controls {
 
             GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit | ClearBufferMask.StencilBufferBit);
 
+            int[] GetModelsToHide(bool flagIsOn, IEnumerable<ModelIDStruct> showWhenOff, IEnumerable<ModelIDStruct> showWhenOn) {
+                var modelIDs = flagIsOn ? showWhenOff.Select(x => (int) x.ModelID).ToArray() : showWhenOn.Select(x => (int) x.ModelID).ToArray();
+                return modelIDs;
+            }
+
+            // TODO: cache this!!
+            var allModelsToHide = MPD_File?.ModelSwitchGroupsTable
+                ?.SelectMany(x => GetModelsToHide(
+                    x.StateInEditor,
+                    MPD_File.VisibleModelsWhenFlagOffByAddr.TryGetValue((int) x.VisibleModelsWhenFlagOffOffset, out var arr1) ? arr1 : [],
+                    MPD_File.VisibleModelsWhenFlagOnByAddr .TryGetValue((int) x.VisibleModelsWhenFlagOnOffset,  out var arr2) ? arr2 : []
+                ))
+                ?.Distinct()
+                ?.ToHashSet() ?? [];
+
             _renderer.DrawScene(
                 _general, _models, _surfaceModel, _groundModel, _skyBoxModel,
                 _gradients, MPD_File?.LightAdjustment, _lighting, _boundaryModels, _collisionModels,
                 _surfaceEditor,
+                // TODO: these options should be cached!!!
                 new Renderer.RendererOptions() {
                     DrawModels = DrawModels,
                     DrawSurfaceModel = DrawSurfaceModel,
@@ -199,6 +218,8 @@ namespace SF3.Win.Controls {
                     DrawHelp = DrawHelp,
 
                     UseOutsideLighting = MPD_File?.MPDHeader?.OutdoorLighting == true,
+
+                    ModelsToHide = allModelsToHide,
                 },
                 Yaw, Pitch, Width, Height,
                 ref _projectionMatrix, ref _viewMatrix

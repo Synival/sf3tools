@@ -45,5 +45,8 @@ namespace SF3.Models.Structs.MPD {
             get => (uint) Data.GetDouble(_stateAddr);
             set => Data.SetDouble(_stateAddr, (int) value);
         }
+
+        [TableViewModelColumn(displayOrder: 4, displayName: "State (in editor)")]
+        public bool StateInEditor { get; set; }
     }
 }

@@ -31,13 +31,15 @@ namespace SF3.Win.OpenGL.MPD_File {
             public bool ApplyLighting;
 
             public bool HideModelsNotFacingCamera;
-            public float ModelsViewAngleMax = 45.0f;
-            public float ModelsViewAngleMin = 45.0f;
+            public float ModelsViewAngleMax = 90.0f;
+            public float ModelsViewAngleMin = -90.0f;
 
             public bool UseOutsideLighting;
             public bool RotateSpritesUp;
             public bool ForceTwoSidedTextures;
             public bool SmoothLighting;
+
+            public HashSet<int> ModelsToHide;
 
             public bool WillDrawSurfaceModel
                 => DrawSurfaceModel || DrawTerrainTypes || DrawEventIDs;
@@ -278,6 +280,7 @@ namespace SF3.Win.OpenGL.MPD_File {
                     var direction = x.Model.OnlyVisibleFromDirection;
                     return direction == SF3.Types.ModelDirectionType.Unset || modelDirectionsFacingCamera[(int) direction];
                 })
+                .Where(x => options.ModelsToHide?.Contains(x.Model.ID) != true)
                 .ToArray();
 
             foreach (var mwg in modelsWithGroups) {
@@ -416,6 +419,7 @@ namespace SF3.Win.OpenGL.MPD_File {
                         var direction = x.Model.OnlyVisibleFromDirection;
                         return direction == SF3.Types.ModelDirectionType.Unset || modelDirectionsFacingCamera[(int) direction];
                     })
+                    .Where(x => options.ModelsToHide?.Contains(x.Model.ID) != true)
                     .ToArray();
 
                 if (!transparentPass) {
@@ -545,6 +549,8 @@ namespace SF3.Win.OpenGL.MPD_File {
             foreach (var model in models.Models) {
                 var direction = model.OnlyVisibleFromDirection;
                 if (!(direction == ModelDirectionType.Unset || modelDirectionsFacingCamera[(int) direction]))
+                    continue;
+                if (options.ModelsToHide?.Contains(model.ID) == true)
                     continue;
 
                 var modelGroup = models.ModelsByMemoryAddressByCollection[model.CollectionType].TryGetValue(model.PData0, out ModelGroup pd) ? pd : null;

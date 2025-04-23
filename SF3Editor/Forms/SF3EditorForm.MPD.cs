@@ -7,6 +7,7 @@ using System.Windows.Forms;
 using CommonLib.Types;
 using Microsoft.WindowsAPICodePack.Dialogs;
 using SF3.Models.Files.MPD;
+using SF3.Models.Structs.MPD;
 using SF3.Types;
 using SF3.Win.Extensions;
 using SF3.Win.Types;
@@ -243,17 +244,29 @@ namespace SF3.Editor.Forms {
                 foreach (var msg in mpdFile.ModelSwitchGroupsTable) {
                     var flag = msg.Flag;
                     var flagName = ngc.GetName(null, null, msg.Flag, [NamedValueType.GameFlag]) ?? "";
-                    _ = items.Add(new ToolStripMenuItem(
+
+                    var newItem = new ToolStripMenuItem(
                         $"&{itemIndex} - Flag {flag:X3}" + (flagName == "" ? "" : $" ({flagName})"),
                         null,
                         null,
                         $"tsbMPD_ModelSwitchGroups_Item{itemIndex}"
-                    ));
+                    );
+                    newItem.Checked = msg.StateInEditor;
+                    newItem.Click += (s, e) => ToggleModelSwitchGroup(mpdFile, msg, newItem);
+
+                    _ = items.Add(newItem);
+
                     itemIndex++;
                 }
             }
 
             tsmiMPD_ModelSwitchGroups.Enabled = items.Count > 0;
+        }
+
+        private void ToggleModelSwitchGroup(IMPD_File mpdFile, ModelSwitchGroup msg, ToolStripMenuItem item) {
+            item.Checked = msg.StateInEditor = !msg.StateInEditor;
+            if (SelectedFile?.View?.ActualView is MPD_View mpdView && mpdView.Model == mpdFile)
+                mpdView.UpdateViewerMap();
         }
     }
 }
