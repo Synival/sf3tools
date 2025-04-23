@@ -35,6 +35,7 @@
             tsbRunAnimations = new System.Windows.Forms.ToolStripButton();
             tsbApplyLighting = new System.Windows.Forms.ToolStripButton();
             tsbDrawGradients = new System.Windows.Forms.ToolStripButton();
+            tsbHideModelsNotFacingCamera = new System.Windows.Forms.ToolStripButton();
             toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             tsbToggleWireframe = new System.Windows.Forms.ToolStripButton();
             tsbToggleBoundaries = new System.Windows.Forms.ToolStripButton();
@@ -66,7 +67,6 @@
             tsbDrawNoEntry = new System.Windows.Forms.ToolStripButton();
             toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
             tsbFixTiles = new System.Windows.Forms.ToolStripButton();
-            tsbHideModelsNotFacingCamera = new System.Windows.Forms.ToolStripButton();
             toolStrip1.SuspendLayout();
             toolStrip2.SuspendLayout();
             SuspendLayout();
@@ -182,6 +182,16 @@
             tsbDrawGradients.Text = "Draw Gradients";
             tsbDrawGradients.ToolTipText = "Draw Gradients";
             tsbDrawGradients.Click += tsbDrawGradients_Click;
+            // 
+            // tsbHideModelsNotFacingCamera
+            // 
+            tsbHideModelsNotFacingCamera.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            tsbHideModelsNotFacingCamera.Image = Properties.Resources.HideModelsFacingAwayBmp;
+            tsbHideModelsNotFacingCamera.ImageTransparentColor = System.Drawing.Color.Magenta;
+            tsbHideModelsNotFacingCamera.Name = "tsbHideModelsNotFacingCamera";
+            tsbHideModelsNotFacingCamera.Size = new System.Drawing.Size(28, 28);
+            tsbHideModelsNotFacingCamera.Text = "Hide Models Not Facing Camera";
+            tsbHideModelsNotFacingCamera.Click += tsbHideModelsNotFacingCamera_Click;
             // 
             // toolStripSeparator2
             // 
@@ -494,16 +504,6 @@
             tsbFixTiles.Size = new System.Drawing.Size(28, 28);
             tsbFixTiles.Text = "Fix All Tile Textures Based on Neighbors\n(You'll probably want to save first!!)";
             tsbFixTiles.Click += tsbFixTiles_Click;
-            // 
-            // tsbHideModelsNotFacingCamera
-            // 
-            tsbHideModelsNotFacingCamera.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            tsbHideModelsNotFacingCamera.Image = (System.Drawing.Image) resources.GetObject("tsbHideModelsNotFacingCamera.Image");
-            tsbHideModelsNotFacingCamera.ImageTransparentColor = System.Drawing.Color.Magenta;
-            tsbHideModelsNotFacingCamera.Name = "tsbHideModelsNotFacingCamera";
-            tsbHideModelsNotFacingCamera.Size = new System.Drawing.Size(28, 28);
-            tsbHideModelsNotFacingCamera.Text = "Hide Models Not Facing Camera";
-            tsbHideModelsNotFacingCamera.Click += tsbHideModelsNotFacingCamera_Click;
             // 
             // MPD_ViewerControl
             // 
