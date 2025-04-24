@@ -256,62 +256,62 @@
     <item value="0x00FD" name="" />
     <item value="0x00FE" name="" />
     <item value="0x00FF" name="" />
-    <item value="0x0100" name="" />
+    <item value="0x0100" name="Fade to white instead of black" />
     <item value="0x0101" name="" />
-    <item value="0x0102" name="Sets itself when starting a battle" />
-    <item value="0x0103" name="When outside of battle it forces itself ON, disable during." />
+    <item value="0x0102" name="" />
+    <item value="0x0103" name="Sets itself when starting a battle" />
     <item value="0x0104" name="Sub Screen" />
     <item value="0x0105" name="" />
     <item value="0x0106" name="" />
-    <item value="0x0107" name="Sets itself when starting a Battle" />
-    <item value="0x0108" name="Forces the camera underneath (SC3)" />
-    <item value="0x0109" name="" />
+    <item value="0x0107" name="Set when stepping onto a 0x5X tile (Next scene loaded?)" />
+    <item value="0x0108" name="Forces default camera pitch" />
+    <item value="0x0109" name="Unknown - Setting this affects loading coordinates for warps" />
     <item value="0x010A" name="Window Layer Disable" />
     <item value="0x010B" name="" />
-    <item value="0x010C" name="Disable Camera zoom" />
-    <item value="0x010D" name="Disable Camera Rotation" />
+    <item value="0x010C" name="Forces default camera" />
+    <item value="0x010D" name="Stationary camera, follows player" />
     <item value="0x010E" name="" />
     <item value="0x010F" name="Sprite Layer Disable" />
     <item value="0x0110" name="(SC1 does nothing) Adds camera/position information to the printout." />
     <item value="0x0111" name="Slow Mode" />
     <item value="0x0112" name="Adds a 'NO' menu to right side of printout, use unknown." />
-    <item value="0x0113" name="Background Layer Disable" />
-    <item value="0x0114" name="Sets itself when starting a battle." />
+    <item value="0x0113" name="Map Layer Disable" />
+    <item value="0x0114" name="Current turn is hero's turn??" />
     <item value="0x0115" name="" />
     <item value="0x0116" name="" />
     <item value="0x0117" name="" />
     <item value="0x0118" name="" />
-    <item value="0x0119" name="Asks you to save when leaving a room." />
-    <item value="0x011A" name="" />
+    <item value="0x0119" name="Asks you to save when leaving a room" />
+    <item value="0x011A" name="Don't change music when loading" />
     <item value="0x011B" name="" />
-    <item value="0x011C" name="Hard difficulty set" />
-    <item value="0x011D" name="Difficult difficulty set" />
+    <item value="0x011C" name="Difficulty Bit 1" />
+    <item value="0x011D" name="Difficulty Bit 2" />
     <item value="0x011E" name="" />
     <item value="0x011F" name="" />
-    <item value="0x0120" name="" />
+    <item value="0x0120" name="When set, battles cutscenes crash when finished" />
     <item value="0x0121" name="" />
     <item value="0x0122" name="" />
     <item value="0x0123" name="" />
     <item value="0x0124" name="" />
-    <item value="0x0125" name="" />
-    <item value="0x0126" name="" />
-    <item value="0x0127" name="" />
+    <item value="0x0125" name="Disable camera pitch adjustment for steep slopes" />
+    <item value="0x0126" name="Unknown - turned off when entering battle cutscene" />
+    <item value="0x0127" name="Unknown - turned off when entering battle cutscene" />
     <item value="0x0128" name="Fight menu" />
     <item value="0x0129" name="" />
     <item value="0x012A" name="" />
     <item value="0x012B" name="" />
     <item value="0x012C" name="" />
-    <item value="0x012D" name="" />
+    <item value="0x012D" name="Disables icons above character's heads" />
     <item value="0x012E" name="Enemy Control" />
-    <item value="0x012F" name="Sets itself when starting a battle." />
+    <item value="0x012F" name="Unknown - sets itself when starting a battle" />
     <item value="0x0130" name="Hit Box display" />
     <item value="0x0131" name="Something with battle (Pier)" />
     <item value="0x0132" name="" />
-    <item value="0x0133" name="" />
-    <item value="0x0134" name="" />
-    <item value="0x0135" name="" />
+    <item value="0x0133" name="Camera tilting when rotating (Drunk Mode)" />
+    <item value="0x0134" name="Moving left/right partially turns camera" />
+    <item value="0x0135" name="Unknown - disables itself in Scn3 when entering certain menus in battle or leaving a battle cutscene" />
     <item value="0x0136" name="Adds 'RGB' to printout, 3 values increased with ABC and decreased with XYZ on second controller, reset with 2nd start" />
-    <item value="0x0137" name="" />
+    <item value="0x0137" name="Unknown - disables itself in Scn3 when leaving a battle cutscene" />
     <item value="0x0138" name="" />
     <item value="0x0139" name="" />
     <item value="0x013A" name="" />
@@ -512,390 +512,390 @@
     <item value="0x01FD" name="" />
     <item value="0x01FE" name="" />
     <item value="0x01FF" name="" />
-    <item value="0x0200" name="Barrel destroyed pier" />
-    <item value="0x0201" name="Collision Line 0x01 / Door to Start room open" />
-    <item value="0x0202" name="Collision Line 0x02 / Door to Edmund Room open" />
-    <item value="0x0203" name="Collision Line 0x03 / Door by Grace Unlocked" />
-    <item value="0x0204" name="Collision Line 0x04 / Door to Back room unlocked" />
-    <item value="0x0205" name="Collision Line 0x05 / Room upstairs open" />
-    <item value="0x0206" name="Collision Line 0x06 / Room upstairs open" />
-    <item value="0x0207" name="Collision Line 0x07 / Room upstairs open" />
-    <item value="0x0208" name="Collision Line 0x08 / Room upstairs open" />
-    <item value="0x0209" name="Collision Line 0x09 / Room upstairs open" />
-    <item value="0x020A" name="Collision Line 0x0A" />
-    <item value="0x020B" name="Collision Line 0x0B" />
-    <item value="0x020C" name="Collision Line 0x0C" />
-    <item value="0x020D" name="Collision Line 0x0D" />
-    <item value="0x020E" name="Collision Line 0x0E" />
-    <item value="0x020F" name="Collision Line 0x0F" />
-    <item value="0x0210" name="Anafect docks battle cannon 1" />
-    <item value="0x0211" name="Anafect docks battle cannon 2" />
-    <item value="0x0212" name="Anafect docks battle cannon 3" />
-    <item value="0x0213" name="Anafect docks battle cannon 4" />
-    <item value="0x0214" name="Anafect docks battle cannon 5" />
-    <item value="0x0215" name="Anafect docks Stella enters battle" />
-    <item value="0x0216" name="" />
-    <item value="0x0217" name="" />
-    <item value="0x0218" name="" />
-    <item value="0x0219" name="" />
-    <item value="0x021A" name="" />
-    <item value="0x021B" name="" />
-    <item value="0x021C" name="" />
-    <item value="0x021D" name="" />
-    <item value="0x021E" name="" />
-    <item value="0x021F" name="" />
-    <item value="0x0220" name="" />
-    <item value="0x0221" name="Door (1-4 Saraband Imperial Command 1st floor?) May not be specific." />
-    <item value="0x0222" name="Door (same as 221)" />
-    <item value="0x0223" name="Door (same as 221)" />
-    <item value="0x0224" name="Door (Set 1 to 'open')" />
-    <item value="0x0225" name="Door (5-0208-2) Saraband Imperial Command 2nd floor?" />
-    <item value="0x0226" name="Door" />
-    <item value="0x0227" name="Door" />
-    <item value="0x0228" name="Door" />
-    <item value="0x0229" name="Door" />
-    <item value="0x022A" name="Sets itself when starting a battle." />
-    <item value="0x022B" name="" />
-    <item value="0x022C" name="" />
-    <item value="0x022D" name="Ruin fight" />
-    <item value="0x022E" name="" />
-    <item value="0x022F" name="" />
-    <item value="0x0230" name="Life Ring Ruins 1. Proect Ring ruins 2. Healing Drop ruins 3." />
-    <item value="0x0231" name="Healing Drop Ruins 1. Goddess tear ruins 2. Large Mithril ruins 3." />
-    <item value="0x0232" name="Scn1 Battle 14 Ruins Chest 3 (Light of Hope), Scn1 Battle 17 Ruins Chest 1 (Large Mithril)" />
-    <item value="0x0233" name="Scn1 Battle 14 Elbesem Statue (Potion), Scn1 Battle 17 Ruins Chest 2 (Fire Axe)" />
-    <item value="0x0234" name="" />
-    <item value="0x0235" name="" />
-    <item value="0x0236" name="" />
-    <item value="0x0237" name="" />
-    <item value="0x0238" name="" />
-    <item value="0x0239" name="" />
-    <item value="0x023A" name="" />
-    <item value="0x023B" name="" />
-    <item value="0x023C" name="" />
-    <item value="0x023D" name="" />
-    <item value="0x023E" name="" />
-    <item value="0x023F" name="" />
-    <item value="0x0240" name="" />
-    <item value="0x0241" name="" />
-    <item value="0x0242" name="" />
-    <item value="0x0243" name="" />
-    <item value="0x0244" name="" />
-    <item value="0x0245" name="" />
-    <item value="0x0246" name="" />
-    <item value="0x0247" name="" />
-    <item value="0x0248" name="" />
-    <item value="0x0249" name="" />
-    <item value="0x024A" name="" />
-    <item value="0x024B" name="" />
-    <item value="0x024C" name="" />
-    <item value="0x024D" name="" />
-    <item value="0x024E" name="" />
-    <item value="0x024F" name="" />
-    <item value="0x0250" name="" />
-    <item value="0x0251" name="" />
-    <item value="0x0252" name="" />
-    <item value="0x0253" name="" />
-    <item value="0x0254" name="" />
-    <item value="0x0255" name="" />
-    <item value="0x0256" name="" />
-    <item value="0x0257" name="" />
-    <item value="0x0258" name="" />
-    <item value="0x0259" name="" />
-    <item value="0x025A" name="" />
-    <item value="0x025B" name="" />
-    <item value="0x025C" name="" />
-    <item value="0x025D" name="" />
-    <item value="0x025E" name="" />
-    <item value="0x025F" name="" />
-    <item value="0x0260" name="Irene fight boss push back" />
-    <item value="0x0261" name="" />
-    <item value="0x0262" name="(Was set to on during Dam fight)" />
-    <item value="0x0263" name="" />
-    <item value="0x0264" name="" />
-    <item value="0x0265" name="" />
-    <item value="0x0266" name="" />
-    <item value="0x0267" name="" />
-    <item value="0x0268" name="" />
-    <item value="0x0269" name="" />
-    <item value="0x026A" name="" />
-    <item value="0x026B" name="" />
-    <item value="0x026C" name="" />
-    <item value="0x026D" name="" />
-    <item value="0x026E" name="" />
-    <item value="0x026F" name="" />
-    <item value="0x0270" name="" />
-    <item value="0x0271" name="" />
-    <item value="0x0272" name="" />
-    <item value="0x0273" name="" />
-    <item value="0x0274" name="" />
-    <item value="0x0275" name="" />
-    <item value="0x0276" name="" />
-    <item value="0x0277" name="" />
-    <item value="0x0278" name="" />
-    <item value="0x0279" name="" />
-    <item value="0x027A" name="" />
-    <item value="0x027B" name="" />
-    <item value="0x027C" name="" />
-    <item value="0x027D" name="" />
-    <item value="0x027E" name="" />
-    <item value="0x027F" name="" />
-    <item value="0x0280" name="Current Map State Flag 280" />
-    <item value="0x0281" name="Current Map State Flag 281" />
-    <item value="0x0282" name="Current Map State Flag 282" />
-    <item value="0x0283" name="Current Map State Flag 283" />
-    <item value="0x0284" name="Current Map State Flag 284" />
-    <item value="0x0285" name="Current Map State Flag 285" />
-    <item value="0x0286" name="Current Map State Flag 286" />
-    <item value="0x0287" name="Current Map State Flag 287" />
-    <item value="0x0288" name="Current Map State Flag 288" />
-    <item value="0x0289" name="Current Map State Flag 289" />
-    <item value="0x028A" name="Current Map State Flag 28A" />
-    <item value="0x028B" name="Current Map State Flag 28B" />
-    <item value="0x028C" name="Current Map State Flag 28C" />
-    <item value="0x028D" name="Current Map State Flag 28D" />
-    <item value="0x028E" name="Current Map State Flag 28E" />
-    <item value="0x028F" name="Current Map State Flag 28F" />
-    <item value="0x0290" name="Temp flag set during battle 127" />
-    <item value="0x0291" name="" />
-    <item value="0x0292" name="" />
-    <item value="0x0293" name="" />
-    <item value="0x0294" name="" />
-    <item value="0x0295" name="" />
-    <item value="0x0296" name="" />
-    <item value="0x0297" name="" />
-    <item value="0x0298" name="" />
-    <item value="0x0299" name="" />
-    <item value="0x029A" name="" />
-    <item value="0x029B" name="" />
-    <item value="0x029C" name="" />
-    <item value="0x029D" name="" />
-    <item value="0x029E" name="" />
-    <item value="0x029F" name="" />
-    <item value="0x02A0" name="Current Map State Flag 2A0 / Switch pressed" />
-    <item value="0x02A1" name="Current Map State Flag 2A1 / Train moved maybe" />
-    <item value="0x02A2" name="Current Map State Flag 2A2 / Train moved maybe" />
-    <item value="0x02A3" name="Current Map State Flag 2A3 / Train moved maybe" />
-    <item value="0x02A4" name="Current Map State Flag 2A4" />
-    <item value="0x02A5" name="Current Map State Flag 2A5" />
-    <item value="0x02A6" name="Aspia Drawbridge Gate Opened" />
-    <item value="0x02A7" name="" />
-    <item value="0x02A8" name="" />
-    <item value="0x02A9" name="" />
-    <item value="0x02AA" name="" />
-    <item value="0x02AB" name="" />
-    <item value="0x02AC" name="" />
-    <item value="0x02AD" name="" />
-    <item value="0x02AE" name="" />
-    <item value="0x02AF" name="" />
-    <item value="0x02B0" name="" />
-    <item value="0x02B1" name="" />
-    <item value="0x02B2" name="" />
-    <item value="0x02B3" name="" />
-    <item value="0x02B4" name="" />
-    <item value="0x02B5" name="" />
-    <item value="0x02B6" name="" />
-    <item value="0x02B7" name="" />
-    <item value="0x02B8" name="" />
-    <item value="0x02B9" name="" />
-    <item value="0x02BA" name="" />
-    <item value="0x02BB" name="" />
-    <item value="0x02BC" name="" />
-    <item value="0x02BD" name="" />
-    <item value="0x02BE" name="" />
-    <item value="0x02BF" name="" />
-    <item value="0x02C0" name="Cupboard 1" />
-    <item value="0x02C1" name="Cupboard 2" />
-    <item value="0x02C2" name="Cupboard 3" />
-    <item value="0x02C3" name="Cupboard 4" />
-    <item value="0x02C4" name="Cupboard 5" />
-    <item value="0x02C5" name="Cupboard 6" />
-    <item value="0x02C6" name="Cupboard 7" />
-    <item value="0x02C7" name="Cupboard 8" />
-    <item value="0x02C8" name="Cupboard 9" />
-    <item value="0x02C9" name="Cupboard 10" />
-    <item value="0x02CA" name="Cupboard 11" />
-    <item value="0x02CB" name="Cupboard 12" />
-    <item value="0x02CC" name="Cupboard 13" />
-    <item value="0x02CD" name="Cupboard 14" />
-    <item value="0x02CE" name="Cupboard 15" />
-    <item value="0x02CF" name="Cupboard 16" />
-    <item value="0x02D0" name="" />
-    <item value="0x02D1" name="" />
-    <item value="0x02D2" name="" />
-    <item value="0x02D3" name="" />
-    <item value="0x02D4" name="" />
-    <item value="0x02D5" name="" />
-    <item value="0x02D6" name="" />
-    <item value="0x02D7" name="" />
-    <item value="0x02D8" name="" />
-    <item value="0x02D9" name="" />
-    <item value="0x02DA" name="" />
-    <item value="0x02DB" name="" />
-    <item value="0x02DC" name="" />
-    <item value="0x02DD" name="" />
-    <item value="0x02DE" name="" />
-    <item value="0x02DF" name="" />
-    <item value="0x02E0" name="Walcuray Destroyed Rock 3" />
-    <item value="0x02E1" name="Walcuray Destroyed Rock 1" />
-    <item value="0x02E2" name="Walcuray Destroyed Rock 2" />
-    <item value="0x02E3" name="" />
-    <item value="0x02E4" name="Walcuray Destroyed Rock 5" />
-    <item value="0x02E5" name="" />
-    <item value="0x02E6" name="Walcuray Destroyed Rock 4" />
-    <item value="0x02E7" name="Walcuray Destroyed Rock 6" />
-    <item value="0x02E8" name="Walcuray Destroyed Rock 7" />
-    <item value="0x02E9" name="Walcuray Destroyed Rock 9" />
-    <item value="0x02EA" name="" />
-    <item value="0x02EB" name="Walcuray Destroyed Rock 8" />
-    <item value="0x02EC" name="" />
-    <item value="0x02ED" name="" />
-    <item value="0x02EE" name="" />
-    <item value="0x02EF" name="" />
-    <item value="0x02F0" name="" />
-    <item value="0x02F1" name="" />
-    <item value="0x02F2" name="" />
-    <item value="0x02F3" name="" />
-    <item value="0x02F4" name="" />
-    <item value="0x02F5" name="" />
-    <item value="0x02F6" name="" />
-    <item value="0x02F7" name="" />
-    <item value="0x02F8" name="" />
-    <item value="0x02F9" name="" />
-    <item value="0x02FA" name="" />
-    <item value="0x02FB" name="" />
-    <item value="0x02FC" name="" />
-    <item value="0x02FD" name="" />
-    <item value="0x02FE" name="" />
-    <item value="0x02FF" name="" />
-    <item value="0x0300" name="Chapter 1 Opener complete" />
-    <item value="0x0301" name="Map Ruins Active" />
-    <item value="0x0302" name="" />
-    <item value="0x0303" name="" />
-    <item value="0x0304" name="" />
-    <item value="0x0305" name="" />
-    <item value="0x0306" name="" />
-    <item value="0x0307" name="" />
-    <item value="0x0308" name="" />
-    <item value="0x0309" name="" />
-    <item value="0x030A" name="" />
-    <item value="0x030B" name="" />
-    <item value="0x030C" name="" />
-    <item value="0x030D" name="" />
-    <item value="0x030E" name="" />
-    <item value="0x030F" name="" />
-    <item value="0x0310" name="" />
-    <item value="0x0311" name="" />
-    <item value="0x0312" name="" />
-    <item value="0x0313" name="" />
-    <item value="0x0314" name="" />
-    <item value="0x0315" name="" />
-    <item value="0x0316" name="" />
-    <item value="0x0317" name="" />
-    <item value="0x0318" name="" />
-    <item value="0x0319" name="" />
-    <item value="0x031A" name="" />
-    <item value="0x031B" name="" />
-    <item value="0x031C" name="" />
-    <item value="0x031D" name="" />
-    <item value="0x031E" name="" />
-    <item value="0x031F" name="" />
-    <item value="0x0320" name="" />
-    <item value="0x0321" name="" />
-    <item value="0x0322" name="" />
-    <item value="0x0323" name="" />
-    <item value="0x0324" name="" />
-    <item value="0x0325" name="" />
-    <item value="0x0326" name="" />
-    <item value="0x0327" name="" />
-    <item value="0x0328" name="" />
-    <item value="0x0329" name="" />
-    <item value="0x032A" name="" />
-    <item value="0x032B" name="" />
-    <item value="0x032C" name="" />
-    <item value="0x032D" name="" />
-    <item value="0x032E" name="" />
-    <item value="0x032F" name="" />
-    <item value="0x0330" name="" />
-    <item value="0x0331" name="" />
-    <item value="0x0332" name="" />
-    <item value="0x0333" name="" />
-    <item value="0x0334" name="" />
-    <item value="0x0335" name="" />
-    <item value="0x0336" name="" />
-    <item value="0x0337" name="" />
-    <item value="0x0338" name="" />
-    <item value="0x0339" name="" />
-    <item value="0x033A" name="" />
-    <item value="0x033B" name="" />
-    <item value="0x033C" name="" />
-    <item value="0x033D" name="" />
-    <item value="0x033E" name="" />
-    <item value="0x033F" name="" />
-    <item value="0x0340" name="" />
-    <item value="0x0341" name="" />
-    <item value="0x0342" name="" />
-    <item value="0x0343" name="" />
-    <item value="0x0344" name="" />
-    <item value="0x0345" name="" />
-    <item value="0x0346" name="" />
-    <item value="0x0347" name="" />
-    <item value="0x0348" name="" />
-    <item value="0x0349" name="" />
-    <item value="0x034A" name="" />
-    <item value="0x034B" name="" />
-    <item value="0x034C" name="" />
-    <item value="0x034D" name="" />
-    <item value="0x034E" name="" />
-    <item value="0x034F" name="" />
-    <item value="0x0350" name="" />
-    <item value="0x0351" name="" />
-    <item value="0x0352" name="" />
-    <item value="0x0353" name="" />
-    <item value="0x0354" name="" />
-    <item value="0x0355" name="" />
-    <item value="0x0356" name="" />
-    <item value="0x0357" name="" />
-    <item value="0x0358" name="" />
-    <item value="0x0359" name="" />
-    <item value="0x035A" name="" />
-    <item value="0x035B" name="" />
-    <item value="0x035C" name="" />
-    <item value="0x035D" name="" />
-    <item value="0x035E" name="" />
-    <item value="0x035F" name="" />
-    <item value="0x0360" name="" />
-    <item value="0x0361" name="" />
-    <item value="0x0362" name="" />
-    <item value="0x0363" name="" />
-    <item value="0x0364" name="" />
-    <item value="0x0365" name="" />
-    <item value="0x0366" name="" />
-    <item value="0x0367" name="" />
-    <item value="0x0368" name="" />
-    <item value="0x0369" name="" />
-    <item value="0x036A" name="" />
-    <item value="0x036B" name="" />
-    <item value="0x036C" name="" />
-    <item value="0x036D" name="" />
-    <item value="0x036E" name="" />
-    <item value="0x036F" name="" />
-    <item value="0x0370" name="" />
-    <item value="0x0371" name="" />
-    <item value="0x0372" name="" />
-    <item value="0x0373" name="" />
-    <item value="0x0374" name="" />
-    <item value="0x0375" name="" />
-    <item value="0x0376" name="" />
-    <item value="0x0377" name="" />
-    <item value="0x0378" name="" />
-    <item value="0x0379" name="" />
-    <item value="0x037A" name="" />
-    <item value="0x037B" name="" />
-    <item value="0x037C" name="" />
-    <item value="0x037D" name="" />
-    <item value="0x037E" name="" />
-    <item value="0x037F" name="" />
+    <item value="0x0200" name="Load Flag 0x200 (Barrel destroyed pier)" />
+    <item value="0x0201" name="Load Flag 0x201 (Collision Line 0x01)" />
+    <item value="0x0202" name="Load Flag 0x202 (Collision Line 0x02)" />
+    <item value="0x0203" name="Load Flag 0x203 (Collision Line 0x03)" />
+    <item value="0x0204" name="Load Flag 0x204 (Collision Line 0x04)" />
+    <item value="0x0205" name="Load Flag 0x205 (Collision Line 0x05)" />
+    <item value="0x0206" name="Load Flag 0x206 (Collision Line 0x06)" />
+    <item value="0x0207" name="Load Flag 0x207 (Collision Line 0x07)" />
+    <item value="0x0208" name="Load Flag 0x208 (Collision Line 0x08)" />
+    <item value="0x0209" name="Load Flag 0x209 (Collision Line 0x09)" />
+    <item value="0x020A" name="Load Flag 0x20A (Collision Line 0x0A)" />
+    <item value="0x020B" name="Load Flag 0x20B (Collision Line 0x0B)" />
+    <item value="0x020C" name="Load Flag 0x20C (Collision Line 0x0C)" />
+    <item value="0x020D" name="Load Flag 0x20D (Collision Line 0x0D)" />
+    <item value="0x020E" name="Load Flag 0x20E (Collision Line 0x0E)" />
+    <item value="0x020F" name="Load Flag 0x20F (Collision Line 0x0F)" />
+    <item value="0x0210" name="Load Flag 0x210 (Anafect docks battle cannon 1)" />
+    <item value="0x0211" name="Load Flag 0x211 (Anafect docks battle cannon 2)" />
+    <item value="0x0212" name="Load Flag 0x212 (Anafect docks battle cannon 3)" />
+    <item value="0x0213" name="Load Flag 0x213 (Anafect docks battle cannon 4)" />
+    <item value="0x0214" name="Load Flag 0x214 (Anafect docks battle cannon 5)" />
+    <item value="0x0215" name="Load Flag 0x215 (Anafect docks Stella enters battle)" />
+    <item value="0x0216" name="Load Flag 0x216" />
+    <item value="0x0217" name="Load Flag 0x217" />
+    <item value="0x0218" name="Load Flag 0x218" />
+    <item value="0x0219" name="Load Flag 0x219" />
+    <item value="0x021A" name="Load Flag 0x21A" />
+    <item value="0x021B" name="Load Flag 0x21B" />
+    <item value="0x021C" name="Load Flag 0x21C" />
+    <item value="0x021D" name="Load Flag 0x21D" />
+    <item value="0x021E" name="Load Flag 0x21E" />
+    <item value="0x021F" name="Load Flag 0x21F" />
+    <item value="0x0220" name="Load Flag 0x220" />
+    <item value="0x0221" name="Load Flag 0x221" />
+    <item value="0x0222" name="Load Flag 0x222" />
+    <item value="0x0223" name="Load Flag 0x223" />
+    <item value="0x0224" name="Load Flag 0x224" />
+    <item value="0x0225" name="Load Flag 0x225" />
+    <item value="0x0226" name="Load Flag 0x226" />
+    <item value="0x0227" name="Load Flag 0x227" />
+    <item value="0x0228" name="Load Flag 0x228" />
+    <item value="0x0229" name="Load Flag 0x229" />
+    <item value="0x022A" name="Load Flag 0x22A" />
+    <item value="0x022B" name="Load Flag 0x22B" />
+    <item value="0x022C" name="Load Flag 0x22C" />
+    <item value="0x022D" name="Load Flag 0x22D (Ruin fight)" />
+    <item value="0x022E" name="Load Flag 0x22E" />
+    <item value="0x022F" name="Load Flag 0x22F" />
+    <item value="0x0230" name="Load Flag 0x230 (Life Ring Ruins 1. Proect Ring ruins 2. Healing Drop ruins 3.)" />
+    <item value="0x0231" name="Load Flag 0x231 (Healing Drop Ruins 1. Goddess tear ruins 2. Large Mithril ruins 3.)" />
+    <item value="0x0232" name="Load Flag 0x232 (Scn1 Battle 14 Ruins Chest 3 (Light of Hope), Scn1 Battle 17 Ruins Chest 1 (Large Mithril))" />
+    <item value="0x0233" name="Load Flag 0x233 (Scn1 Battle 14 Elbesem Statue (Potion), Scn1 Battle 17 Ruins Chest 2 (Fire Axe))" />
+    <item value="0x0234" name="Load Flag 0x234" />
+    <item value="0x0235" name="Load Flag 0x235" />
+    <item value="0x0236" name="Load Flag 0x236" />
+    <item value="0x0237" name="Load Flag 0x237" />
+    <item value="0x0238" name="Load Flag 0x238" />
+    <item value="0x0239" name="Load Flag 0x239" />
+    <item value="0x023A" name="Load Flag 0x23A" />
+    <item value="0x023B" name="Load Flag 0x23B" />
+    <item value="0x023C" name="Load Flag 0x23C" />
+    <item value="0x023D" name="Load Flag 0x23D" />
+    <item value="0x023E" name="Load Flag 0x23E" />
+    <item value="0x023F" name="Load Flag 0x23F" />
+    <item value="0x0240" name="Load Flag 0x240" />
+    <item value="0x0241" name="Load Flag 0x241" />
+    <item value="0x0242" name="Load Flag 0x242" />
+    <item value="0x0243" name="Load Flag 0x243" />
+    <item value="0x0244" name="Load Flag 0x244" />
+    <item value="0x0245" name="Load Flag 0x245" />
+    <item value="0x0246" name="Load Flag 0x246" />
+    <item value="0x0247" name="Load Flag 0x247" />
+    <item value="0x0248" name="Load Flag 0x248" />
+    <item value="0x0249" name="Load Flag 0x249" />
+    <item value="0x024A" name="Load Flag 0x24A" />
+    <item value="0x024B" name="Load Flag 0x24B" />
+    <item value="0x024C" name="Load Flag 0x24C" />
+    <item value="0x024D" name="Load Flag 0x24D" />
+    <item value="0x024E" name="Load Flag 0x24E" />
+    <item value="0x024F" name="Load Flag 0x24F" />
+    <item value="0x0250" name="Load Flag 0x250" />
+    <item value="0x0251" name="Load Flag 0x251" />
+    <item value="0x0252" name="Load Flag 0x252" />
+    <item value="0x0253" name="Load Flag 0x253" />
+    <item value="0x0254" name="Load Flag 0x254" />
+    <item value="0x0255" name="Load Flag 0x255" />
+    <item value="0x0256" name="Load Flag 0x256" />
+    <item value="0x0257" name="Load Flag 0x257" />
+    <item value="0x0258" name="Load Flag 0x258" />
+    <item value="0x0259" name="Load Flag 0x259" />
+    <item value="0x025A" name="Load Flag 0x25A" />
+    <item value="0x025B" name="Load Flag 0x25B" />
+    <item value="0x025C" name="Load Flag 0x25C" />
+    <item value="0x025D" name="Load Flag 0x25D" />
+    <item value="0x025E" name="Load Flag 0x25E" />
+    <item value="0x025F" name="Load Flag 0x25F" />
+    <item value="0x0260" name="Load Flag 0x260 (Irene fight boss push back)" />
+    <item value="0x0261" name="Load Flag 0x261" />
+    <item value="0x0262" name="Load Flag 0x262 (Was set to on during Dam fight)" />
+    <item value="0x0263" name="Load Flag 0x263" />
+    <item value="0x0264" name="Load Flag 0x264" />
+    <item value="0x0265" name="Load Flag 0x265" />
+    <item value="0x0266" name="Load Flag 0x266" />
+    <item value="0x0267" name="Load Flag 0x267" />
+    <item value="0x0268" name="Load Flag 0x268" />
+    <item value="0x0269" name="Load Flag 0x269" />
+    <item value="0x026A" name="Load Flag 0x26A" />
+    <item value="0x026B" name="Load Flag 0x26B" />
+    <item value="0x026C" name="Load Flag 0x26C" />
+    <item value="0x026D" name="Load Flag 0x26D" />
+    <item value="0x026E" name="Load Flag 0x26E" />
+    <item value="0x026F" name="Load Flag 0x26F" />
+    <item value="0x0270" name="Load Flag 0x270" />
+    <item value="0x0271" name="Load Flag 0x271" />
+    <item value="0x0272" name="Load Flag 0x272" />
+    <item value="0x0273" name="Load Flag 0x273" />
+    <item value="0x0274" name="Load Flag 0x274" />
+    <item value="0x0275" name="Load Flag 0x275" />
+    <item value="0x0276" name="Load Flag 0x276" />
+    <item value="0x0277" name="Load Flag 0x277" />
+    <item value="0x0278" name="Load Flag 0x278" />
+    <item value="0x0279" name="Load Flag 0x279" />
+    <item value="0x027A" name="Load Flag 0x27A" />
+    <item value="0x027B" name="Load Flag 0x27B" />
+    <item value="0x027C" name="Load Flag 0x27C" />
+    <item value="0x027D" name="Load Flag 0x27D" />
+    <item value="0x027E" name="Load Flag 0x27E" />
+    <item value="0x027F" name="Load Flag 0x27F" />
+    <item value="0x0280" name="Load Flag 0x280" />
+    <item value="0x0281" name="Load Flag 0x281" />
+    <item value="0x0282" name="Load Flag 0x282" />
+    <item value="0x0283" name="Load Flag 0x283" />
+    <item value="0x0284" name="Load Flag 0x284" />
+    <item value="0x0285" name="Load Flag 0x285" />
+    <item value="0x0286" name="Load Flag 0x286" />
+    <item value="0x0287" name="Load Flag 0x287" />
+    <item value="0x0288" name="Load Flag 0x288" />
+    <item value="0x0289" name="Load Flag 0x289" />
+    <item value="0x028A" name="Load Flag 0x28A" />
+    <item value="0x028B" name="Load Flag 0x28B" />
+    <item value="0x028C" name="Load Flag 0x28C" />
+    <item value="0x028D" name="Load Flag 0x28D" />
+    <item value="0x028E" name="Load Flag 0x28E" />
+    <item value="0x028F" name="Load Flag 0x28F" />
+    <item value="0x0290" name="Load Flag 0x290" />
+    <item value="0x0291" name="Load Flag 0x291" />
+    <item value="0x0292" name="Load Flag 0x292" />
+    <item value="0x0293" name="Load Flag 0x293" />
+    <item value="0x0294" name="Load Flag 0x294" />
+    <item value="0x0295" name="Load Flag 0x295" />
+    <item value="0x0296" name="Load Flag 0x296" />
+    <item value="0x0297" name="Load Flag 0x297" />
+    <item value="0x0298" name="Load Flag 0x298" />
+    <item value="0x0299" name="Load Flag 0x299" />
+    <item value="0x029A" name="Load Flag 0x29A" />
+    <item value="0x029B" name="Load Flag 0x29B" />
+    <item value="0x029C" name="Load Flag 0x29C" />
+    <item value="0x029D" name="Load Flag 0x29D" />
+    <item value="0x029E" name="Load Flag 0x29E" />
+    <item value="0x029F" name="Load Flag 0x29F" />
+    <item value="0x02A0" name="Load Flag 0x2A0 (Switch pressed)" />
+    <item value="0x02A1" name="Load Flag 0x2A1 (Train moved maybe)" />
+    <item value="0x02A2" name="Load Flag 0x2A2 (Train moved maybe)" />
+    <item value="0x02A3" name="Load Flag 0x2A3 (Train moved maybe)" />
+    <item value="0x02A4" name="Load Flag 0x2A4" />
+    <item value="0x02A5" name="Load Flag 0x2A5" />
+    <item value="0x02A6" name="Load Flag 0x2A6 (Aspia Drawbridge Gate Opened)" />
+    <item value="0x02A7" name="Load Flag 0x2A7" />
+    <item value="0x02A8" name="Load Flag 0x2A8" />
+    <item value="0x02A9" name="Load Flag 0x2A9" />
+    <item value="0x02AA" name="Load Flag 0x2AA" />
+    <item value="0x02AB" name="Load Flag 0x2AB" />
+    <item value="0x02AC" name="Load Flag 0x2AC" />
+    <item value="0x02AD" name="Load Flag 0x2AD" />
+    <item value="0x02AE" name="Load Flag 0x2AE" />
+    <item value="0x02AF" name="Load Flag 0x2AF" />
+    <item value="0x02B0" name="Load Flag 0x2B0" />
+    <item value="0x02B1" name="Load Flag 0x2B1" />
+    <item value="0x02B2" name="Load Flag 0x2B2" />
+    <item value="0x02B3" name="Load Flag 0x2B3" />
+    <item value="0x02B4" name="Load Flag 0x2B4" />
+    <item value="0x02B5" name="Load Flag 0x2B5" />
+    <item value="0x02B6" name="Load Flag 0x2B6" />
+    <item value="0x02B7" name="Load Flag 0x2B7" />
+    <item value="0x02B8" name="Load Flag 0x2B8" />
+    <item value="0x02B9" name="Load Flag 0x2B9" />
+    <item value="0x02BA" name="Load Flag 0x2BA" />
+    <item value="0x02BB" name="Load Flag 0x2BB" />
+    <item value="0x02BC" name="Load Flag 0x2BC" />
+    <item value="0x02BD" name="Load Flag 0x2BD" />
+    <item value="0x02BE" name="Load Flag 0x2BE" />
+    <item value="0x02BF" name="Load Flag 0x2BF" />
+    <item value="0x02C0" name="Load Flag 0x2C0 (Cupboard 1)" />
+    <item value="0x02C1" name="Load Flag 0x2C1 (Cupboard 2)" />
+    <item value="0x02C2" name="Load Flag 0x2C2 (Cupboard 3)" />
+    <item value="0x02C3" name="Load Flag 0x2C3 (Cupboard 4)" />
+    <item value="0x02C4" name="Load Flag 0x2C4 (Cupboard 5)" />
+    <item value="0x02C5" name="Load Flag 0x2C5 (Cupboard 6)" />
+    <item value="0x02C6" name="Load Flag 0x2C6 (Cupboard 7)" />
+    <item value="0x02C7" name="Load Flag 0x2C7 (Cupboard 8)" />
+    <item value="0x02C8" name="Load Flag 0x2C8 (Cupboard 9)" />
+    <item value="0x02C9" name="Load Flag 0x2C9 (Cupboard 10)" />
+    <item value="0x02CA" name="Load Flag 0x2CA (Cupboard 11)" />
+    <item value="0x02CB" name="Load Flag 0x2CB (Cupboard 12)" />
+    <item value="0x02CC" name="Load Flag 0x2CC (Cupboard 13)" />
+    <item value="0x02CD" name="Load Flag 0x2CD (Cupboard 14)" />
+    <item value="0x02CE" name="Load Flag 0x2CE (Cupboard 15)" />
+    <item value="0x02CF" name="Load Flag 0x2CF (Cupboard 16)" />
+    <item value="0x02D0" name="Load Flag 0x2D0" />
+    <item value="0x02D1" name="Load Flag 0x2D1" />
+    <item value="0x02D2" name="Load Flag 0x2D2" />
+    <item value="0x02D3" name="Load Flag 0x2D3" />
+    <item value="0x02D4" name="Load Flag 0x2D4" />
+    <item value="0x02D5" name="Load Flag 0x2D5" />
+    <item value="0x02D6" name="Load Flag 0x2D6" />
+    <item value="0x02D7" name="Load Flag 0x2D7" />
+    <item value="0x02D8" name="Load Flag 0x2D8" />
+    <item value="0x02D9" name="Load Flag 0x2D9" />
+    <item value="0x02DA" name="Load Flag 0x2DA" />
+    <item value="0x02DB" name="Load Flag 0x2DB" />
+    <item value="0x02DC" name="Load Flag 0x2DC" />
+    <item value="0x02DD" name="Load Flag 0x2DD" />
+    <item value="0x02DE" name="Load Flag 0x2DE" />
+    <item value="0x02DF" name="Load Flag 0x2DF" />
+    <item value="0x02E0" name="Load Flag 0x2E0 (Walcuray Destroyed Rock 3)" />
+    <item value="0x02E1" name="Load Flag 0x2E1 (Walcuray Destroyed Rock 1)" />
+    <item value="0x02E2" name="Load Flag 0x2E2 (Walcuray Destroyed Rock 2)" />
+    <item value="0x02E3" name="Load Flag 0x2E3" />
+    <item value="0x02E4" name="Load Flag 0x2E4 (Walcuray Destroyed Rock 5)" />
+    <item value="0x02E5" name="Load Flag 0x2E5" />
+    <item value="0x02E6" name="Load Flag 0x2E6 (Walcuray Destroyed Rock 4)" />
+    <item value="0x02E7" name="Load Flag 0x2E7 (Walcuray Destroyed Rock 6)" />
+    <item value="0x02E8" name="Load Flag 0x2E8 (Walcuray Destroyed Rock 7)" />
+    <item value="0x02E9" name="Load Flag 0x2E9 (Walcuray Destroyed Rock 9)" />
+    <item value="0x02EA" name="Load Flag 0x2EA" />
+    <item value="0x02EB" name="Load Flag 0x2EB (Walcuray Destroyed Rock 8)" />
+    <item value="0x02EC" name="Load Flag 0x2EC" />
+    <item value="0x02ED" name="Load Flag 0x2ED" />
+    <item value="0x02EE" name="Load Flag 0x2EE" />
+    <item value="0x02EF" name="Load Flag 0x2EF" />
+    <item value="0x02F0" name="Load Flag 0x2F0" />
+    <item value="0x02F1" name="Load Flag 0x2F1" />
+    <item value="0x02F2" name="Load Flag 0x2F2" />
+    <item value="0x02F3" name="Load Flag 0x2F3" />
+    <item value="0x02F4" name="Load Flag 0x2F4" />
+    <item value="0x02F5" name="Load Flag 0x2F5" />
+    <item value="0x02F6" name="Load Flag 0x2F6" />
+    <item value="0x02F7" name="Load Flag 0x2F7" />
+    <item value="0x02F8" name="Load Flag 0x2F8" />
+    <item value="0x02F9" name="Load Flag 0x2F9" />
+    <item value="0x02FA" name="Load Flag 0x2FA" />
+    <item value="0x02FB" name="Load Flag 0x2FB" />
+    <item value="0x02FC" name="Load Flag 0x2FC" />
+    <item value="0x02FD" name="Load Flag 0x2FD" />
+    <item value="0x02FE" name="Load Flag 0x2FE" />
+    <item value="0x02FF" name="Load Flag 0x2FF" />
+    <item value="0x0300" name="Scene Flag 0x300" />
+    <item value="0x0301" name="Scene Flag 0x301 (Map Ruins Active)" />
+    <item value="0x0302" name="Scene Flag 0x302" />
+    <item value="0x0303" name="Scene Flag 0x303" />
+    <item value="0x0304" name="Scene Flag 0x304" />
+    <item value="0x0305" name="Scene Flag 0x305" />
+    <item value="0x0306" name="Scene Flag 0x306" />
+    <item value="0x0307" name="Scene Flag 0x307" />
+    <item value="0x0308" name="Scene Flag 0x308" />
+    <item value="0x0309" name="Scene Flag 0x309" />
+    <item value="0x030A" name="Scene Flag 0x30A" />
+    <item value="0x030B" name="Scene Flag 0x30B" />
+    <item value="0x030C" name="Scene Flag 0x30C" />
+    <item value="0x030D" name="Scene Flag 0x30D" />
+    <item value="0x030E" name="Scene Flag 0x30E" />
+    <item value="0x030F" name="Scene Flag 0x30F" />
+    <item value="0x0310" name="Scene Flag 0x310" />
+    <item value="0x0311" name="Scene Flag 0x311" />
+    <item value="0x0312" name="Scene Flag 0x312" />
+    <item value="0x0313" name="Scene Flag 0x313" />
+    <item value="0x0314" name="Scene Flag 0x314" />
+    <item value="0x0315" name="Scene Flag 0x315" />
+    <item value="0x0316" name="Scene Flag 0x316" />
+    <item value="0x0317" name="Scene Flag 0x317" />
+    <item value="0x0318" name="Scene Flag 0x318" />
+    <item value="0x0319" name="Scene Flag 0x319" />
+    <item value="0x031A" name="Scene Flag 0x31A" />
+    <item value="0x031B" name="Scene Flag 0x31B" />
+    <item value="0x031C" name="Scene Flag 0x31C" />
+    <item value="0x031D" name="Scene Flag 0x31D" />
+    <item value="0x031E" name="Scene Flag 0x31E" />
+    <item value="0x031F" name="Scene Flag 0x31F" />
+    <item value="0x0320" name="Scene Flag 0x320" />
+    <item value="0x0321" name="Scene Flag 0x321" />
+    <item value="0x0322" name="Scene Flag 0x322" />
+    <item value="0x0323" name="Scene Flag 0x323" />
+    <item value="0x0324" name="Scene Flag 0x324" />
+    <item value="0x0325" name="Scene Flag 0x325" />
+    <item value="0x0326" name="Scene Flag 0x326" />
+    <item value="0x0327" name="Scene Flag 0x327" />
+    <item value="0x0328" name="Scene Flag 0x328" />
+    <item value="0x0329" name="Scene Flag 0x329" />
+    <item value="0x032A" name="Scene Flag 0x32A" />
+    <item value="0x032B" name="Scene Flag 0x32B" />
+    <item value="0x032C" name="Scene Flag 0x32C" />
+    <item value="0x032D" name="Scene Flag 0x32D" />
+    <item value="0x032E" name="Scene Flag 0x32E" />
+    <item value="0x032F" name="Scene Flag 0x32F" />
+    <item value="0x0330" name="Scene Flag 0x330" />
+    <item value="0x0331" name="Scene Flag 0x331" />
+    <item value="0x0332" name="Scene Flag 0x332" />
+    <item value="0x0333" name="Scene Flag 0x333" />
+    <item value="0x0334" name="Scene Flag 0x334" />
+    <item value="0x0335" name="Scene Flag 0x335" />
+    <item value="0x0336" name="Scene Flag 0x336" />
+    <item value="0x0337" name="Scene Flag 0x337" />
+    <item value="0x0338" name="Scene Flag 0x338" />
+    <item value="0x0339" name="Scene Flag 0x339" />
+    <item value="0x033A" name="Scene Flag 0x33A" />
+    <item value="0x033B" name="Scene Flag 0x33B" />
+    <item value="0x033C" name="Scene Flag 0x33C" />
+    <item value="0x033D" name="Scene Flag 0x33D" />
+    <item value="0x033E" name="Scene Flag 0x33E" />
+    <item value="0x033F" name="Scene Flag 0x33F" />
+    <item value="0x0340" name="Scene Flag 0x340" />
+    <item value="0x0341" name="Scene Flag 0x341" />
+    <item value="0x0342" name="Scene Flag 0x342" />
+    <item value="0x0343" name="Scene Flag 0x343" />
+    <item value="0x0344" name="Scene Flag 0x344" />
+    <item value="0x0345" name="Scene Flag 0x345" />
+    <item value="0x0346" name="Scene Flag 0x346" />
+    <item value="0x0347" name="Scene Flag 0x347" />
+    <item value="0x0348" name="Scene Flag 0x348" />
+    <item value="0x0349" name="Scene Flag 0x349" />
+    <item value="0x034A" name="Scene Flag 0x34A" />
+    <item value="0x034B" name="Scene Flag 0x34B" />
+    <item value="0x034C" name="Scene Flag 0x34C" />
+    <item value="0x034D" name="Scene Flag 0x34D" />
+    <item value="0x034E" name="Scene Flag 0x34E" />
+    <item value="0x034F" name="Scene Flag 0x34F" />
+    <item value="0x0350" name="Scene Flag 0x350" />
+    <item value="0x0351" name="Scene Flag 0x351" />
+    <item value="0x0352" name="Scene Flag 0x352" />
+    <item value="0x0353" name="Scene Flag 0x353" />
+    <item value="0x0354" name="Scene Flag 0x354" />
+    <item value="0x0355" name="Scene Flag 0x355" />
+    <item value="0x0356" name="Scene Flag 0x356" />
+    <item value="0x0357" name="Scene Flag 0x357" />
+    <item value="0x0358" name="Scene Flag 0x358" />
+    <item value="0x0359" name="Scene Flag 0x359" />
+    <item value="0x035A" name="Scene Flag 0x35A" />
+    <item value="0x035B" name="Scene Flag 0x35B" />
+    <item value="0x035C" name="Scene Flag 0x35C" />
+    <item value="0x035D" name="Scene Flag 0x35D" />
+    <item value="0x035E" name="Scene Flag 0x35E" />
+    <item value="0x035F" name="Scene Flag 0x35F" />
+    <item value="0x0360" name="Scene Flag 0x360" />
+    <item value="0x0361" name="Scene Flag 0x361" />
+    <item value="0x0362" name="Scene Flag 0x362" />
+    <item value="0x0363" name="Scene Flag 0x363" />
+    <item value="0x0364" name="Scene Flag 0x364" />
+    <item value="0x0365" name="Scene Flag 0x365" />
+    <item value="0x0366" name="Scene Flag 0x366" />
+    <item value="0x0367" name="Scene Flag 0x367" />
+    <item value="0x0368" name="Scene Flag 0x368" />
+    <item value="0x0369" name="Scene Flag 0x369" />
+    <item value="0x036A" name="Scene Flag 0x36A" />
+    <item value="0x036B" name="Scene Flag 0x36B" />
+    <item value="0x036C" name="Scene Flag 0x36C" />
+    <item value="0x036D" name="Scene Flag 0x36D" />
+    <item value="0x036E" name="Scene Flag 0x36E" />
+    <item value="0x036F" name="Scene Flag 0x36F" />
+    <item value="0x0370" name="Scene Flag 0x370" />
+    <item value="0x0371" name="Scene Flag 0x371" />
+    <item value="0x0372" name="Scene Flag 0x372" />
+    <item value="0x0373" name="Scene Flag 0x373" />
+    <item value="0x0374" name="Scene Flag 0x374" />
+    <item value="0x0375" name="Scene Flag 0x375" />
+    <item value="0x0376" name="Scene Flag 0x376" />
+    <item value="0x0377" name="Scene Flag 0x377" />
+    <item value="0x0378" name="Scene Flag 0x378" />
+    <item value="0x0379" name="Scene Flag 0x379" />
+    <item value="0x037A" name="Scene Flag 0x37A" />
+    <item value="0x037B" name="Scene Flag 0x37B" />
+    <item value="0x037C" name="Scene Flag 0x37C" />
+    <item value="0x037D" name="Scene Flag 0x37D" />
+    <item value="0x037E" name="Scene Flag 0x37E" />
+    <item value="0x037F" name="Scene Flag 0x37F" />
     <item value="0x0380" name="" />
     <item value="0x0381" name="Battle 101 Done" />
     <item value="0x0382" name="Battle 102 Done" />
