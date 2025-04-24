@@ -2,11 +2,11 @@
 <items>
     <item value="0x00" name="--" />
     <item value="0x01" name="Bronze Knife" />
-    <item value="0x02" name="Steel Knife " />
+    <item value="0x02" name="Steel Knife" />
     <item value="0x03" name="Hunter Knife" />
-    <item value="0x04" name="Steel Sword " />
-    <item value="0x05" name="Broad Sword " />
-    <item value="0x06" name="Bastard Sword " />
+    <item value="0x04" name="Steel Sword" />
+    <item value="0x05" name="Broad Sword" />
+    <item value="0x06" name="Bastard Sword" />
     <item value="0x07" name="Great Sword" />
     <item value="0x08" name="Epee" />
     <item value="0x09" name="Foil" />
@@ -14,8 +14,8 @@
     <item value="0x0B" name="Iron Blade" />
     <item value="0x0C" name="Battle Blade" />
     <item value="0x0D" name="Steel Blade" />
-    <item value="0x0E" name="Booty Sword" />
-    <item value="0x0F" name="Iron Ninjato" />
+    <item value="0x0E" name="Small Katana" />
+    <item value="0x0F" name="Ninja Katana" />
     <item value="0x10" name="Steel Ninjato" />
     <item value="0x11" name="Bronze Lance" />
     <item value="0x12" name="Iron Lance" />
@@ -31,17 +31,17 @@
     <item value="0x1C" name="Power Axe" />
     <item value="0x1D" name="Battle Axe" />
     <item value="0x1E" name="Great Axe" />
-    <item value="0x1F" name="Hand Axe" />
-    <item value="0x20" name="Iron Hand Axe" />
-    <item value="0x21" name="Steel Hand Axe" />
+    <item value="0x1F" name="Tomahawk" />
+    <item value="0x20" name="Power Hatchet" />
+    <item value="0x21" name="Battle Hatchet" />
     <item value="0x22" name="Mace" />
     <item value="0x23" name="Flail" />
-    <item value="0x24" name="Maul" />
+    <item value="0x24" name="Battle Mace" />
     <item value="0x25" name="Bronze Claw" />
     <item value="0x26" name="Iron Claw" />
-    <item value="0x27" name="SteelClaw" />
+    <item value="0x27" name="Steel Claw" />
     <item value="0x28" name="Battle Claw" />
-    <item value="0x29" name="Cloth Glove" />
+    <item value="0x29" name="Leather Glove" />
     <item value="0x2A" name="Iron Glove" />
     <item value="0x2B" name="Steel Glove" />
     <item value="0x2C" name="Cestus" />
@@ -52,20 +52,20 @@
     <item value="0x31" name="Talisman Rod" />
     <item value="0x32" name="Small Wand" />
     <item value="0x33" name="Magic Wand" />
-    <item value="0x34" name="Angel Wand" />
+    <item value="0x34" name="Anger Wand" />
     <item value="0x35" name="Power Ankh" />
     <item value="0x36" name="Saint Ankh" />
-    <item value="0x37" name="Misty Ankh" />
-    <item value="0x38" name="Small Bow" />
-    <item value="0x39" name="Short Bow" />
-    <item value="0x3A" name="Faerie Bow" />
-    <item value="0x3B" name="King's Bow" />
-    <item value="0x3C" name="Light Crossbow" />
-    <item value="0x3D" name="Heavy Crossbow" />
-    <item value="0x3E" name="Arbalest" />
-    <item value="0x3F" name="Long Bow" />
-    <item value="0x40" name="Heavy Long Bow" />
-    <item value="0x41" name="Elven Bow" />
+    <item value="0x37" name="Mystery Ankh" />
+    <item value="0x38" name="Wooden Arrow" />
+    <item value="0x39" name="Steel Arrow" />
+    <item value="0x3A" name="Robin Arrow" />
+    <item value="0x3B" name="King Arrow" />
+    <item value="0x3C" name="Light Quarrel" />
+    <item value="0x3D" name="Middle Quarrel" />
+    <item value="0x3E" name="Heavy Quarrel" />
+    <item value="0x3F" name="Assault Shell" />
+    <item value="0x40" name="Great Shell" />
+    <item value="0x41" name="Buster Shot" />
     <item value="0x42" name="Scimitar" />
     <item value="0x43" name="Chaos Ring" />
     <item value="0x44" name="Power Ring" />
@@ -76,14 +76,14 @@
     <item value="0x49" name="Master Ring" />
     <item value="0x4A" name="Silver Ring" />
     <item value="0x4B" name="Life Ring" />
-    <item value="0x4C" name="Nimble Ring" />
+    <item value="0x4C" name="Running Ring" />
     <item value="0x4D" name="White Ring" />
     <item value="0x4E" name="Black Ring" />
-    <item value="0x4F" name="Iburu Ring" />
-    <item value="0x50" name="Artimis Pin" />
+    <item value="0x4F" name="Evil Ring" />
+    <item value="0x50" name="Artemis Pin" />
     <item value="0x51" name="Apollo Pin" />
-    <item value="0x52" name="Iron Bracer" />
-    <item value="0x53" name="Steel Bracer" />
+    <item value="0x52" name="Battle Bracer" />
+    <item value="0x53" name="Protect Bracer" />
     <item value="0x54" name="Medical Herb" />
     <item value="0x55" name="Healing Drop" />
     <item value="0x56" name="Potion" />
@@ -94,27 +94,27 @@
     <item value="0x5B" name="Fairy Powder" />
     <item value="0x5C" name="Angel Wing" />
     <item value="0x5D" name="Power Wine" />
-    <item value="0x5E" name="Armor Milk" />
+    <item value="0x5E" name="Protect Milk" />
     <item value="0x5F" name="Quick Chicken" />
-    <item value="0x60" name="Nimble Onion" />
-    <item value="0x61" name="Happy Cookie" />
+    <item value="0x60" name="Running Pepper" />
+    <item value="0x61" name="Lucky Cookie" />
     <item value="0x62" name="Health Bread" />
-    <item value="0x63" name="Brain Food" />
+    <item value="0x63" name="Bright Honey" />
     <item value="0x64" name="Brave Apple" />
     <item value="0x65" name="Large Mithril" />
     <item value="0x66" name="Small Mithril" />
     <item value="0x67" name="Dark Matter" />
-    <item value="0x68" name="Iron Circlet" />
-    <item value="0x69" name="Steel Tiara" />
+    <item value="0x68" name="Platina Circlet" />
+    <item value="0x69" name="Royal Tiara" />
     <item value="0x6A" name="Swift Boots" />
-    <item value="0x6B" name="Shadow Bowl" />
-    <item value="0x6C" name="Dark Bowl" />
+    <item value="0x6B" name="Shadow Helm" />
+    <item value="0x6C" name="Dark Helmet" />
     <item value="0x6D" name="Loincloth" />
     <item value="0x6E" name="Power Undies" />
     <item value="0x6F" name="Mithril Dirk" />
-    <item value="0x70" name="Butter Knife" />
-    <item value="0x71" name="Killer Knife" />
-    <item value="0x72" name="Sneaky Knife" />
+    <item value="0x70" name="Butterfly Knife" />
+    <item value="0x71" name="Assassin Knife" />
+    <item value="0x72" name="Thief Knife" />
     <item value="0x73" name="Joker Knife" />
     <item value="0x74" name="Counter Sword" />
     <item value="0x75" name="Shiva Sword" />
@@ -131,36 +131,36 @@
     <item value="0x80" name="Photon Blade" />
     <item value="0x81" name="Venom Blade" />
     <item value="0x82" name="Force Blade" />
-    <item value="0x83" name="Nelson Lance" />
+    <item value="0x83" name="Gale Lance" />
     <item value="0x84" name="Holy Lance" />
     <item value="0x85" name="Dragon Lance" />
-    <item value="0x86" name="Ultra Lance" />
+    <item value="0x86" name="Gungnir" />
     <item value="0x87" name="Silver Spear" />
     <item value="0x88" name="Counter Spear" />
     <item value="0x89" name="Rune Spear" />
     <item value="0x8A" name="Beast Spear" />
     <item value="0x8B" name="Comet Spear" />
-    <item value="0x8C" name="Holy Halbard" />
-    <item value="0x8D" name="Star Halbard" />
-    <item value="0x8E" name="Arc Halbard" />
-    <item value="0x8F" name="Dark Halbard" />
-    <item value="0x90" name="Fire Axe" />
-    <item value="0x91" name="Gigantic Axe" />
-    <item value="0x92" name="Sharp Axe" />
+    <item value="0x8C" name="Holy Halberd" />
+    <item value="0x8D" name="Lord Halberd" />
+    <item value="0x8E" name="Ark Halberd" />
+    <item value="0x8F" name="Dark Halberd" />
+    <item value="0x90" name="Heat Axe" />
+    <item value="0x91" name="Giant Axe" />
+    <item value="0x92" name="Dragon Axe" />
     <item value="0x93" name="Gaia Axe" />
-    <item value="0x94" name="Sorrow Axe" />
-    <item value="0x95" name="Accurate Axe" />
-    <item value="0x96" name="Super Axe" />
-    <item value="0x97" name="Arrow Axe" />
-    <item value="0x98" name="Ultra Axe" />
-    <item value="0x99" name="Saint's Mace" />
+    <item value="0x94" name="Evil Axe" />
+    <item value="0x95" name="Rune Tomahawk" />
+    <item value="0x96" name="Killer Hatchet" />
+    <item value="0x97" name="Sky Tomahawk" />
+    <item value="0x98" name="Ultra Tomahawk" />
+    <item value="0x99" name="Saint Mace" />
     <item value="0x9A" name="Revenge Mace" />
-    <item value="0x9B" name="Power Hammer" />
-    <item value="0x9C" name="Macho Maul" />
+    <item value="0x9B" name="Thor Hammer" />
+    <item value="0x9C" name="Macho Mace" />
     <item value="0x9D" name="Mithril Claw" />
     <item value="0x9E" name="Tiger Claw" />
     <item value="0x9F" name="Berserk Claw" />
-    <item value="0xA0" name="Pokey Claw" />
+    <item value="0xA0" name="Digitalis Claw" />
     <item value="0xA1" name="Spiked Glove" />
     <item value="0xA2" name="Muscle Glove" />
     <item value="0xA3" name="Spark Glove" />
@@ -169,49 +169,49 @@
     <item value="0xA6" name="Giant Cestus" />
     <item value="0xA7" name="Mist Cestus" />
     <item value="0xA8" name="Wire Cestus" />
-    <item value="0xA9" name="Holy Cestus" />
+    <item value="0xA9" name="Dragon Cestus" />
     <item value="0xAA" name="Torture Rod" />
     <item value="0xAB" name="Sleepy Rod" />
-    <item value="0xAC" name="Soul Rod" />
-    <item value="0xAD" name="Tiamat Rod" />
+    <item value="0xAC" name="Alchemy Rod" />
+    <item value="0xAD" name="Crystal Rod" />
     <item value="0xAE" name="Demon Rod" />
     <item value="0xAF" name="Jester Wand" />
-    <item value="0xB0" name="Jewel Wand" />
+    <item value="0xB0" name="Charm Wand" />
     <item value="0xB1" name="Witch Wand" />
-    <item value="0xB2" name="Spark Wand" />
+    <item value="0xB2" name="Pyra's Wand" />
     <item value="0xB3" name="Wendigo Wand" />
-    <item value="0xB4" name="Tornado Ankh" />
+    <item value="0xB4" name="Druid Ankh" />
     <item value="0xB5" name="Silence Ankh" />
     <item value="0xB6" name="Blessed Ankh" />
     <item value="0xB7" name="Holy Ankh" />
-    <item value="0xB8" name="Moon Bow" />
-    <item value="0xB9" name="Dragon Bow" />
-    <item value="0xBA" name="Breaker Bow" />
-    <item value="0xBB" name="Kantar's Bow" />
-    <item value="0xBC" name="Caylon's Bow" />
-    <item value="0xBD" name="Hunter Crossbow" />
-    <item value="0xBE" name="Flame Crossbow" />
-    <item value="0xBF" name="Sonic Crossbow" />
-    <item value="0xC0" name="Needle Crossbow" />
-    <item value="0xC1" name="Magnum Bow" />
-    <item value="0xC2" name="Storm Bow" />
-    <item value="0xC3" name="Meteor Bow" />
-    <item value="0xC4" name="Cool Braid" />
+    <item value="0xB8" name="Moonlight Arrow" />
+    <item value="0xB9" name="Dragon Arrow" />
+    <item value="0xBA" name="Breaker Arrow" />
+    <item value="0xBB" name="Cantarella" />
+    <item value="0xBC" name="Moogie Arrow" />
+    <item value="0xBD" name="Mithril Quarrel" />
+    <item value="0xBE" name="Flame Quarrel" />
+    <item value="0xBF" name="Sonic Quarrel" />
+    <item value="0xC0" name="Needle Quarrel" />
+    <item value="0xC1" name="Magnum Shell" />
+    <item value="0xC2" name="Storm Shot" />
+    <item value="0xC3" name="Meteor Shot" />
+    <item value="0xC4" name="Cold Blood" />
     <item value="0xC5" name="Wind Cutter" />
     <item value="0xC6" name="Bone Eater" />
     <item value="0xC7" name="Rumbling Sea" />
     <item value="0xC8" name="Kusanagi" />
     <item value="0xC9" name="Muramasa" />
-    <item value="0xCA" name="Cross Star" />
-    <item value="0xCB" name="Fox Suriken" />
+    <item value="0xCA" name="Cross Shuriken" />
+    <item value="0xCB" name="Fox Shuriken" />
     <item value="0xCC" name="Shaken" />
-    <item value="0xCD" name="Deadly Star" />
+    <item value="0xCD" name="Spark Shuriken" />
     <item value="0xCE" name="Octagon Star" />
-    <item value="0xCF" name="Wind Star" />
+    <item value="0xCF" name="Wind Shuriken" />
     <item value="0xD0" name="Metal Wing" />
     <item value="0xD1" name="Silver Wing" />
     <item value="0xD2" name="Battle Wing" />
-    <item value="0xD3" name="Silk Wing" />
+    <item value="0xD3" name="Sylph Wing" />
     <item value="0xD4" name="Sonic Wing" />
     <item value="0xD5" name="Cosmic Wing" />
     <item value="0xD6" name="Zero Wing" />
@@ -221,83 +221,82 @@
     <item value="0xDA" name="Power Anchor" />
     <item value="0xDB" name="Spin Anchor" />
     <item value="0xDC" name="Crash Anchor" />
-    <item value="0xDD" name="Grav Anchor" />
+    <item value="0xDD" name="Gravity Anchor" />
     <item value="0xDE" name="Cut Flowers" />
     <item value="0xDF" name="Chicken Feed" />
-    <item value="0xE0" name="Volcano Wand" />
-    <item value="0xE1" name="Penko Egg" />
-    <item value="0xE2" name="Ship's Key" />
+    <item value="0xE0" name="Volcanon Wand" />
+    <item value="0xE1" name="Large Egg" />
+    <item value="0xE2" name="Ship Key" />
     <item value="0xE3" name="Statue Gem" />
     <item value="0xE4" name="Mitra Ankh" />
-    <item value="0xE5" name="Saraband Prison Key" />
+    <item value="0xE5" name="Saraband Key" />
     <item value="0xE6" name="Divine Cane" />
     <item value="0xE7" name="Hell Rod" />
     <item value="0xE8" name="Penko Beak" />
-    <item value="0xE9" name="Ruin Map" />
-    <item value="0xEA" name="Ruin Map" />
-    <item value="0xEB" name="Ruin Map" />
-    <item value="0xEC" name="Ruin Map" />
-    <item value="0xED" name="Ruin Map" />
-    <item value="0xEE" name="Ruin Map" />
+    <item value="0xE9" name="Gateway Map" />
+    <item value="0xEA" name="Cave Ruins Map" />
+    <item value="0xEB" name="Mountain Map" />
+    <item value="0xEC" name="Dark Ruins Map" />
+    <item value="0xED" name="Mine Map" />
+    <item value="0xEE" name="Armoury Map" />
     <item value="0xEF" name="Elbesem Orb" />
-    <item value="0xF0" name="Barrand Prison Key" />
-    <item value="0xF1" name="Robot Eyes" />
-    <item value="0xF2" name="Crewart's Key" />
-    <item value="0xF3" name="Freeze Ball" />
+    <item value="0xF0" name="Barrand Key" />
+    <item value="0xF1" name="Robot Eye" />
+    <item value="0xF2" name="Secret Key" />
+    <item value="0xF3" name="Freeze Orb" />
     <item value="0xF4" name="God Rapier" />
-    <item value="0xF5" name="Arc Wand" />
+    <item value="0xF5" name="Thunder Wand" />
     <item value="0xF6" name="Dragon Rod" />
     <item value="0xF7" name="Earth Rod" />
     <item value="0xF8" name="Chain Whip" />
     <item value="0xF9" name="Queen Whip" />
     <item value="0xFA" name="Love Whip" />
-    <item value="0xFB" name="Double-Headed Whip" />
+    <item value="0xFB" name="Jester Whip" />
     <item value="0xFC" name="Silver Beak" />
-    <item value="0xFD" name="Gold Beak" />
-    <item value="0xFE" name="Penn Beak" />
+    <item value="0xFD" name="Golden Beak" />
+    <item value="0xFE" name="Penguin Beak" />
     <item value="0xFF" name="Remove" />
-    <item value="0x100" name="Elbesem Staff" />
-    <item value="0x101" name="Horn" />
-    <item value="0x102" name="Horn2" />
-    <item value="0x103" name="Talon" />
-    <item value="0x104" name="Talon2" />
+    <item value="0x100" name="Staff of Besem (1)" />
+    <item value="0x101" name="Unicorn Horn (1)" />
+    <item value="0x102" name="Unicorn Horn (2)" />
+    <item value="0x103" name="Dragon Talon (1)" />
+    <item value="0x104" name="Dragon Talon (2)" />
     <item value="0x105" name="Reaper Knife" />
-    <item value="0x106" name="Sword of Blood" />
+    <item value="0x106" name="Lord Sword" />
     <item value="0x107" name="Nebula Rapier" />
-    <item value="0x108" name="Baryon Blade" />
+    <item value="0x108" name="Varion Blade" />
     <item value="0x109" name="Masamune" />
     <item value="0x10A" name="Full Metal Wing" />
-    <item value="0x10B" name="Bosen Lance" />
-    <item value="0x10C" name="Mercury Spear" />
-    <item value="0x10D" name="Buster Halbard" />
-    <item value="0x10E" name="Apollyon Axe" />
-    <item value="0x10F" name="Flaming Tomahawk" />
+    <item value="0x10B" name="Bozon Lance" />
+    <item value="0x10C" name="Mercurius" />
+    <item value="0x10D" name="Buster Halberd" />
+    <item value="0x10E" name="Apollo Axe" />
+    <item value="0x10F" name="Flame Hatchet" />
     <item value="0x110" name="Geo Hammer" />
     <item value="0x111" name="Plasma Anchor" />
     <item value="0x112" name="Gehenna Claw" />
-    <item value="0x113" name="Kokyuto's Glove" />
-    <item value="0x114" name="Aura Knuckle" />
+    <item value="0x113" name="Cocytus Glove" />
+    <item value="0x114" name="Aura Cestus" />
     <item value="0x115" name="Rod of Will" />
     <item value="0x116" name="Eternal Wand" />
     <item value="0x117" name="Golgotha Ankh" />
-    <item value="0x118" name="Sagittarius Bow" />
-    <item value="0x119" name="Doppler Crossbow" />
-    <item value="0x11A" name="Hotrod Shell" />
-    <item value="0x11B" name="Yamima Shuriken" />
+    <item value="0x118" name="Sagittarius" />
+    <item value="0x119" name="Doppler Quarrel" />
+    <item value="0x11A" name="Hot Rod Shell" />
+    <item value="0x11B" name="Dark Shuriken" />
     <item value="0x11C" name="Rainbow Beak" />
     <item value="0x11D" name="Silk Whip" />
     <item value="0x11E" name="Orichalcum" />
     <item value="0x11F" name="Shining Sword" />
-    <item value="0x120" name="Arch Rapier" />
+    <item value="0x120" name="Ark Rapier" />
     <item value="0x121" name="Dragonman Claw" />
     <item value="0x122" name="Chaos Blade" />
     <item value="0x123" name="Raphael Ankh" />
     <item value="0x124" name="Abyss Wand" />
     <item value="0x125" name="Murasame" />
-    <item value="0x126" name="Wind God Fan" />
-    <item value="0x127" name="Halbarod" />
-    <item value="0x128" name="Ogre Meat" />
-    <item value="0x129" name="Great Priest Halo" />
-    <item value="0x12A" name="Elbesem Staff2" />
-    <item value="0x12B" name="Jane's Arc Wand" />
+    <item value="0x126" name="Divine Wind Fan" />
+    <item value="0x127" name="Halberod" />
+    <item value="0x128" name="Delicious Meat" />
+    <item value="0x129" name="Chaos Mobius" />
+    <item value="0x12A" name="Staff of Besem (2)" />
 </items>
