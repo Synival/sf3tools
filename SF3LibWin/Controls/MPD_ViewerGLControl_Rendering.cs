@@ -15,7 +15,6 @@ namespace SF3.Win.Controls {
     public partial class MPD_ViewerGLControl {
         private void InitRendering() {
             Load      += (s, e) => OnLoadRendering();
-            Disposed  += (s, e) => OnDisposeRendering();
             Resize    += (s, e) => OnResizeRendering();
             Paint     += (s, e) => OnPaintRendering();
             FrameTick += (s, deltaInMs) => OnFrameTickRendering(deltaInMs);
@@ -42,6 +41,15 @@ namespace SF3.Win.Controls {
             _appState.ViewerDrawHelpChanged           += (s, e) => Invalidate();
 
             _appState.ViewerRotateSpritesUpChanged += (s, e) => _renderer.InvalidateSpriteMatrices(_models);
+        }
+
+        /// <summary>
+        /// We have to dispose of resources here because by the time OnDisposeRendering() would
+        /// be called via the Disposed event, the context is already gone.
+        /// </summary>
+        protected override void OnHandleDestroyed(EventArgs e) {
+            OnDisposeRendering();
+            base.OnHandleDestroyed(e);
         }
 
         public void UpdateLightingTexture() {
@@ -106,6 +114,8 @@ namespace SF3.Win.Controls {
         }
 
         private void OnDisposeRendering() {
+            MakeCurrent();
+
             _general?.Dispose();
             _models?.Dispose();
             _surfaceModel?.Dispose();
