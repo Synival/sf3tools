@@ -1,4 +1,4 @@
-## SF3Editor and SF3Lib v1.1: 2025-04-26
+## SF3Editor and SF3Lib v0.1.1 (2025-04-26)
 
 Another release, another huge batch of changes!
 
