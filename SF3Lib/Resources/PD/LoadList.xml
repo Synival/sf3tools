@@ -1,34 +1,33 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8" ?>
 <items>
-  <item value="0x00" name="OPMOVIE" />
-  <item value="0x01" name="DREAM" />
-  <item value="0x02" name="COMPLETE" />
-  <item value="0x03" name="ENDING" />
-  <item value="0x04" name="BTLP01" />
-  <item value="0x05" name="BTLP02" />
-  <item value="0x06" name="BTLP03" />
-  <item value="0x07" name="BTLP04" />
-  <item value="0x08" name="BTLP05" />
-  <item value="0x09" name="BTLP06" />
-  <item value="0x0A" name="BTLP07" />
-  <item value="0x0B" name="BTLP08" />
-  <item value="0x0C" name="BTLP09" />
-  <item value="0x0D" name="BTLP10" />
-  <item value="0x0E" name="HNSNOP" />
-  <item value="0x0F" name="SETTEI" />
-  <item value="0x10" name="D2" />
-  <item value="0x11" name="NIGI01" />
-  <item value="0x12" name="NIGI02" />
-  <item value="0x13" name="KANSHOU" />
-  <item value="0x14" name="EPILOG" />
-  <item value="0x15" name="PD_MAP" />
-  <item value="0x16" name="ILLUST" />
-  <item value="0x17" name="BTLSTART" />
-  <item value="0x18" name="S3BDAT" />
-  <item value="0x19" name="MOVSEL" />
-  <item value="0x1A" name="SNDTEST" />
-  <item value="0x1B" name="OPPREM" />
-  <item value="0x1C" name="TESMAP" />
-  <item value="0x1D" name="SHOP_T" />
-  
+    <item value="0x00" name="OPMOVIE" />
+    <item value="0x01" name="DREAM" />
+    <item value="0x02" name="COMPLETE" />
+    <item value="0x03" name="ENDING" />
+    <item value="0x04" name="BTLP01" />
+    <item value="0x05" name="BTLP02" />
+    <item value="0x06" name="BTLP03" />
+    <item value="0x07" name="BTLP04" />
+    <item value="0x08" name="BTLP05" />
+    <item value="0x09" name="BTLP06" />
+    <item value="0x0A" name="BTLP07" />
+    <item value="0x0B" name="BTLP08" />
+    <item value="0x0C" name="BTLP09" />
+    <item value="0x0D" name="BTLP10" />
+    <item value="0x0E" name="HNSNOP" />
+    <item value="0x0F" name="SETTEI" />
+    <item value="0x10" name="D2" />
+    <item value="0x11" name="NIGI01" />
+    <item value="0x12" name="NIGI02" />
+    <item value="0x13" name="KANSHOU" />
+    <item value="0x14" name="EPILOG" />
+    <item value="0x15" name="PD_MAP" />
+    <item value="0x16" name="ILLUST" />
+    <item value="0x17" name="BTLSTART" />
+    <item value="0x18" name="S3BDAT" />
+    <item value="0x19" name="MOVSEL" />
+    <item value="0x1A" name="SNDTEST" />
+    <item value="0x1B" name="OPPREM" />
+    <item value="0x1C" name="TESMAP" />
+    <item value="0x1D" name="SHOP_T" />
 </items>

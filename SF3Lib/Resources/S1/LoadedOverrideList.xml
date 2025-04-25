@@ -1,11 +1,11 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8" ?>
 <items>
-  <item value="0x00" name="Dwarf Hill Battle" />
-  <item value="0x01" name="Luggage Check Battle" />
-  <item value="0x02" name="North Plain Battle" />
-  <item value="0x03" name="Barrand North Plateau Battle" />
-  <item value="0x04" name="Aspinia South Desert Area Battle" />
-  <item value="0x05" name="Tower of Lookover Battle" />
-  <item value="0x06" name="Aspia Catacombs Battle" />
-  <item value="0x07" name="King's City Battle (Colossus)" />
+    <item value="0x00" name="Dwarf Hill Battle" />
+    <item value="0x01" name="Luggage Check Battle" />
+    <item value="0x02" name="North Plain Battle" />
+    <item value="0x03" name="Barrand North Plateau Battle" />
+    <item value="0x04" name="Aspinia South Desert Area Battle" />
+    <item value="0x05" name="Tower of Lookover Battle" />
+    <item value="0x06" name="Aspia Catacombs Battle" />
+    <item value="0x07" name="King's City Battle (Colossus)" />
 </items>

@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8" ?>
 <items>
     <item value="0x00" name="--" />
     <item value="0x01" name="Critical Hit" />
@@ -18,8 +18,8 @@
     <item value="0x0F" name="Berserk" />
     <item value="0x10" name="Blood Sucker" />
     <item value="0x11" name="Regret Hit" />
-    <item value="0x12" name="Critical Hit//NOT SET" />
-    <item value="0x13" name="Critical Hit//NOT SET" />
+    <item value="0x12" name="NOT SET (Critical Hit)" />
+    <item value="0x13" name="NOT SET (Critical Hit)" />
     <item value="0x14" name="Shadow Edge" />
     <item value="0x15" name="Twin Slash" />
     <item value="0x16" name="Laser Edge" />
@@ -254,6 +254,6 @@
     <item value="0xFB" name="Absolute Zero" />
     <item value="0xFC" name="Blizzard Breath" />
     <item value="0xFD" name="Hell Napalm" />
-    <item value="0xFE" name="Critical Hit//?" />
-    <item value="0xFF" name="Critical Hit//?" />
+    <item value="0xFE" name="Critical Hit / ?" />
+    <item value="0xFF" name="Critical Hit / ?" />
 </items>

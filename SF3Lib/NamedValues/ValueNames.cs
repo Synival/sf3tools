@@ -32,7 +32,7 @@ namespace SF3.NamedValues {
         public static readonly NamedValueFromEnum<EventTriggerWarpSoundType> EventTriggerWarpSoundInfo
             = new NamedValueFromEnum<EventTriggerWarpSoundType>(maxValue: 0x0F);
         public static readonly NamedValueFromResourceForScenariosInfo FileIndexInfo
-            = new NamedValueFromResourceForScenariosInfo("FileIndexes.xml", formatString: "X4");
+            = new NamedValueFromResourceForScenariosInfo("FileIndexes.xml", formatString: "X3");
         public static readonly NamedValueFromResourceInfo FriendshipBonusTypeInfo
             = new NamedValueFromResourceInfo("FriendshipBonusTypeList.xml");
         public static readonly NamedValueFromResourceInfo GameFlagInfo
