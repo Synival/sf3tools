@@ -1,3 +1,154 @@
+## SF3Editor and SF3Lib v1.1: 2025-04-26
+
+Another release, another huge batch of changes!
+
+This release adds a lot of features and accomplishes a major milestone: all of the file editors are now bundled together
+into a single master editor! The code reorganization to make this possible has been in the works for quite a while and I'm
+very happy that this goal has finally be reached. The edito supports opening multiple files into tabs, scenario /
+file type autodetection, and all the featues found in the standalone editos (and more!).
+
+The MPD editor is also more complete: all data is now loaded and supported for editing, it's more configurable, it
+renders more accurately, and it's a bit easier to use.
+
+With some extra hacking outside the editor, the MPD editor can now be used to make new overworld maps for Shining
+Force III. This is still in the experimental stages and only works with a very specific file (which, unfortunately,
+cannot be made public), but it's approaching! To get a glimpse of how it can work, enable the experimental setting
+at the bottom of the "Settings | MPD" menu and play around with "FIELD.MPD" on the Scenario 3 or Premium Disk.
+
+X1 files have been demystified a bit: it's now much easier to modify game events and triggers, warp locations, and some
+aspects of the enemy AI.
+
+Enjoy!
+-- Synival
+
+Full changelog:
+
+#### SF3Lib (all editors/files):
+- Added more dropdowns:
+    - Game flags (Not all game flags referenced are documented yet; Scenario 2 and 3 still need some work)
+    - Sprites (Scenario 1 and 2 have been identified, but Scenario 3 + PD are still WIP and marked with a preceeding '!' mark)
+    - 'Load' table name
+    - Music track names
+    - Magic bonus table reference
+    - Special attack type (crit or counter)
+- Renamed 'EntranceID' and 'SceneNumber' to 'SceneID' everywhere for consistency
+- Updated names of items and monsters to match their SF3 Translation Team names and corrected mistakes.
+    - (Thanks to Clear Crossroads for the names and info!)
+
+#### SF3LibWin:
+- Bugfix: Decimal entry control no longer truncates values to only their integer component
+
+#### SF3Editor:
+- All standalone editors have been merged into one single editor called 'SF3Editor.exe'. It supports all files the standalone editors and some new ones:
+    - *.MPD: Map assets
+    - X1*.BIN: Town/battle tables and programming
+    - X002.BIN: Items, spells, weapon spells, "load" scenes, several misc. game stats, and Scenario 1 warp table
+    - X005.BIN (new): Camera settings
+    - X011.BIN: Icon pointers
+    - X012.BIN (new): Scenario 1 terrain type info and some tables for AI targeting priority
+    - X013.BIN: Several battle-specific stat tables
+    - X014.BIN (new): Scenario 2+ battle scene info
+    - X019.BIN: Monsters
+    - X021.BIN: Icon pointers
+    - X026.BIN: Icon pointers
+    - X031.BIN: Character stats and initial info (copy 1/2)
+    - X033.BIN: Character stats and initial info (copy 2/2)
+    - X044.BIN: Monsters (PD only)
+- New editor can open multiple files as tabs
+- Scenario is now auto-detected based on folder or drive volume name.
+    - (If the editor can't figure it out, you can set it explicitly in the 'File | Open Scenario' menu)
+- Improved menus from standalone editors:
+    - Added convenient/QoL items to the file menu:
+        - Save All
+        - Close All
+        - Recent Files
+    - New 'View' menu (currently only has options for the MPD viewer)
+    - New 'Tools' menu (DFR and Table import/export tools have been migrated here from the 'File' menu)
+    - New 'MPD' menu with various tools when editing an MPD file
+    - New 'Settings' menu with more settings than before
+
+#### MPDs:
+- Editor:
+    - New Features:
+        - Wireframes are now rendered without face culling so they're visible from behind
+        - Collision lines can now be viewed in 3D (is has some quirks still, but it's very functional):
+            - Collision lines that are disabled based on game flags have different coloration
+        - Shadow models marked with the 2000 tag are now properly made semi-transparent
+        - "Technical"(?) models marked with the 3000 tag are now properly hidden
+        - Added keyboard shortcuts 'E' and 'N' for S(e)lect mode and (N)avigate mode
+        - Trees can now be discarded and replaced onto tiles using the 'Has Tree' checkbox.
+            - (Unchecking the checkbox moves a tree out-of-bounds and checking it attempts to pull one in. We can't *add* or *remove* tree models yet, all we can do it move them around.)
+        - Textue importing/exporting now supports textures from all collections and uses hex IDs in filenames instead of decimal
+        - Added new settings to control how surface map normals are calculated (includes some non-vanilla options and vanilla bugfixes)
+        - Added rotating 3D model viewer to PDATAs[] and Models tables
+        - Implemented 'MPD -> Model Switch Groups' menu for toggling models based on game flags
+            - (This is used for cupboards, ruins state, the Elbesem statue, etc)
+        - Added viewer option to reproduce in-game model hiding based on camera direction
+        - Added viewer option to render on a black background instead of cyan
+        - Removed the 'Recalculate Surface Map Normals' toolbar buttons; they're now in the 'MPD' menu, not taking up valuable real estate
+    - Bugfixes:
+        - Wireframes are now placed on top of models with much less clipping/artifacts
+        - Tile normals weren't calculated in a consistent matter when updating tile heights
+        - Current cursor is now reset to 'Select' when starting the app
+        - Fixed some render order issues related to transparent models
+        - Renamed some misleading property names with Model Switch Groups
+        - More tweaks to lighting (still not perfect!)
+    - EXPERIMENTAL: proof-of-concept tile editor tools. Worked with one specific (private) map, but should generally work with the PD file FIELD.MPD
+- Files:
+    - Walking collision lines have been figured out; added appropriate tables
+    - "Movable" models (chests and barrels) are now supported (they're not placed in the map in the MPD file, but their assets are in there)
+    - Added support for "OnlyVisibleFromDirection" property for models
+    - Bugfix: Model angles and scales were incorrectly read in the "weird" CompressedFIXED format
+
+#### X1's:
+- Added tables:
+    - CharacterTargetPriority(s)
+    - Unknown 16 tables after character target priority
+- Regrouped and re-ordered 'Slots' submenus for better clarity and navigatibility
+- More is known about the warp table:
+    - Added a dropdown for the 'Load' index
+    - Added game flag checked dropdown
+- More is known about interactables:
+    - Most of the parameters have been identified and associated with dropdowns and better descriptions
+    - Implemented context-dependent dropdowns depending on parameters (it gets messy!)
+    - Added human-readable description for interactable trigger and action (still WIP, mostly finished)
+    - Added associated game flag with dropdown for expected on/off value
+    - Updated MPD EventID referencing
+- More is known about the 'Slots' table:
+    - Added a 'Battle ID' field to show the enemy index referenced in game code
+    - Added more enemy flag dropdowns. Not all flags are yet known, but it's getting close
+    - The field for the 'game flag' is sometimes a 'Battle ID' based on context. The dropdown now reflects this
+- More about the 'Scripted Movements' table is known; made corrections and improvements
+- Added game flag dropdowns for 'Enter' and 'Arrow' tables (not actually used for arrows, but it's supported!)
+
+#### X005 (new editor):
+- Added camera settings
+
+#### X012 (new editor):
+- Added some tables specific to Scenario 1:
+    - Class/terrain type movement and land effect table        - ClassTargetPriorityTable(s)
+    - UnknownPriorityTable(s)
+
+#### X013:
+- Single-element tables like "Heal Exp", "Soulmate Change Fail", etc. have been merged into one "Significant Values" table
+
+#### X014 (new editor):
+- Added table for battle scenes based on MPD file (Scenario 2+ only)
+    - Can set the 3D scene used, skybox image (how this is stored is not yet known), lighting, and fog type
+- Added tables for terrain type-based battle scenes
+
+#### X019:
+- Regrouped and re-ordered monster submenus for better clarity and navigatibility
+
+#### X031/X033:
+- Regrouped and re-ordered character stat submenus for better clarity and navigatibility
+
+#### DFRToolGUI:
+- Bugfix: When used in the SF3Editor, the window margin was missing
+
+#### X1\_Analyzer (new project):
+- Similar to the MPD\_Analyzer, this can be used to search through X1 files for info
+
 ## 2025-02-23
 
 I'm happy to announce a HUGE update: nearly all the work on rendering MPD files is complete! Models, ground planes, skyboxes, and gradients are now rendered properly,

@@ -62,7 +62,8 @@ Various tables and other bits of data can be modified across a large number of .
 - `X013.BIN`: Special attacks, partnership bonuses/chances, and several misc. battle stats
 - `X014.BIN`: 3D scenes played during battles (Scenario 2+)
 - `X019.BIN`: Monster/enemy stats
-- `X031.BIN`, `X033.BIN`: Player stats and growth charts
+- `X031.BIN, X033.BIN`: Player stats and growth charts
+-  X011.BIN, X021.BIN, X026.BIN: Icon pointers
 
 ## Additional Tools
 
