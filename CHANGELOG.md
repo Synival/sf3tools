@@ -23,7 +23,7 @@ Enjoy!
 
 Full changelog:
 
-#### SF3Lib (all editors/files):
+### SF3Lib (all editors/files):
 - Added more dropdowns:
     - Game flags (Not all game flags referenced are documented yet; Scenario 2 and 3 still need some work)
     - Sprites (Scenario 1 and 2 have been identified, but Scenario 3 + PD are still WIP and marked with a preceeding '!' mark)
@@ -35,10 +35,10 @@ Full changelog:
 - Updated names of items and monsters to match their SF3 Translation Team names and corrected mistakes.
     - (Thanks to Clear Crossroads for the names and info!)
 
-#### SF3LibWin:
+### SF3LibWin:
 - Bugfix: Decimal entry control no longer truncates values to only their integer component
 
-#### SF3Editor:
+### SF3Editor:
 - All standalone editors have been merged into one single editor called 'SF3Editor.exe'. It supports all files the standalone editors and some new ones:
     - *.MPD: Map assets
     - X1*.BIN: Town/battle tables and programming
@@ -67,7 +67,7 @@ Full changelog:
     - New 'MPD' menu with various tools when editing an MPD file
     - New 'Settings' menu with more settings than before
 
-#### MPDs:
+### MPDs:
 - Editor:
     - New Features:
         - Wireframes are now rendered without face culling so they're visible from behind
@@ -100,7 +100,7 @@ Full changelog:
     - Added support for "OnlyVisibleFromDirection" property for models
     - Bugfix: Model angles and scales were incorrectly read in the "weird" CompressedFIXED format
 
-#### X1's:
+### X1's:
 - Added tables:
     - CharacterTargetPriority(s)
     - Unknown 16 tables after character target priority
@@ -121,32 +121,32 @@ Full changelog:
 - More about the 'Scripted Movements' table is known; made corrections and improvements
 - Added game flag dropdowns for 'Enter' and 'Arrow' tables (not actually used for arrows, but it's supported!)
 
-#### X005 (new editor):
+### X005 (new editor):
 - Added camera settings
 
-#### X012 (new editor):
+### X012 (new editor):
 - Added some tables specific to Scenario 1:
     - Class/terrain type movement and land effect table        - ClassTargetPriorityTable(s)
     - UnknownPriorityTable(s)
 
-#### X013:
+### X013:
 - Single-element tables like "Heal Exp", "Soulmate Change Fail", etc. have been merged into one "Significant Values" table
 
-#### X014 (new editor):
+### X014 (new editor):
 - Added table for battle scenes based on MPD file (Scenario 2+ only)
     - Can set the 3D scene used, skybox image (how this is stored is not yet known), lighting, and fog type
 - Added tables for terrain type-based battle scenes
 
-#### X019:
+### X019:
 - Regrouped and re-ordered monster submenus for better clarity and navigatibility
 
-#### X031/X033:
+### X031/X033:
 - Regrouped and re-ordered character stat submenus for better clarity and navigatibility
 
-#### DFRToolGUI:
+### DFRToolGUI:
 - Bugfix: When used in the SF3Editor, the window margin was missing
 
-#### X1\_Analyzer (new project):
+### X1\_Analyzer (new project):
 - Similar to the MPD\_Analyzer, this can be used to search through X1 files for info
 
 ## 2025-02-23
