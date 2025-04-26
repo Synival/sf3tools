@@ -10,7 +10,7 @@ or accessed by referencing the SF3Lib framework.
 
 It boasts editors for data in several .BIN files along with an advanced editor for .MPD files for creating maps (still limited, but possible).
 
-![image](https://github.com/user-attachments/assets/29d511ed-db26-4cfa-a841-431ef534cfbe)
+![image](https://github.com/user-attachments/assets/bfc97004-066d-4ea2-b3fc-5704cc797efe)
 
 All of the work done by the editors is performed in a cross-platform backend project called SF3Lib. SF3Lib can
 be used to create small applications that tasks like make bulk changes, randomize data, perform analysis, or anything
@@ -30,9 +30,9 @@ To edit files, simply:
 
 Can be used to view and modify all .MPD files across all scenarios. Not all data is yet loaded.
 
-| ![BTL91](https://github.com/user-attachments/assets/7bbaebce-a688-4a15-a06e-838f1345d4ae) | ![BTL02_Modified](https://github.com/user-attachments/assets/2c409599-3878-4e5d-9381-43073426b8e3) | ![TOMTOM00_TerrainAndEvents](https://github.com/user-attachments/assets/ef191c3b-3259-426b-9722-3beda3bb2c8e) |
+| ![BTL91](https://github.com/user-attachments/assets/bb61fd38-061f-4918-94e3-7d6f7101680c) | ![BTL02 Modified](https://github.com/user-attachments/assets/1594105a-5908-47f8-8ae3-b7fa868acf59) | ![TOMT00.MPD](https://github.com/user-attachments/assets/3bf0b8a2-3ee2-4e67-a8e6-aa7a9ff5b54a) |
 |---|---|---|
-| ![BTL47_PrettyLighting](https://github.com/user-attachments/assets/20a7ddcc-2d6c-4022-b708-1c29ea120511) | ![image](https://github.com/user-attachments/assets/6ac9cee6-ff0f-4186-a7e2-aedd99e81071) | ![Animations](https://github.com/user-attachments/assets/f0ceed56-293b-49de-8f91-521dbaff488f) |
+| ![BTL47.MPD](https://github.com/user-attachments/assets/6d1eba16-512e-4273-8b7a-67f1e9dded49) | ![DLMANT.MPD](https://github.com/user-attachments/assets/52e0b556-dbee-4c79-b256-996a98e05bab) | ![HNSNOP.MPD](https://github.com/user-attachments/assets/8c8b92f8-9a89-435d-8944-e34901b96787) |
 | ![image](https://github.com/user-attachments/assets/26de635b-010a-4918-87eb-e0697ff6e4b6) | ![image](https://github.com/user-attachments/assets/0aa93801-efb3-4ae0-a80c-fdd8e82844aa) | ![image](https://github.com/user-attachments/assets/d7516e4a-6fec-41f1-b211-4eb5a425edf6) |
 
 
