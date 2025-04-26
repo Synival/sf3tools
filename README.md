@@ -10,7 +10,8 @@ or accessed by referencing the SF3Lib framework.
 
 It boasts editors for data in several .BIN files along with an advanced editor for .MPD files for creating maps (still limited, but possible).
 
-![image](https://github.com/user-attachments/assets/bfc97004-066d-4ea2-b3fc-5704cc797efe)
+| ![image](https://github.com/user-attachments/assets/bfc97004-066d-4ea2-b3fc-5704cc797efe) | ![X014.BIN](https://github.com/user-attachments/assets/f38620a8-5f80-4a80-a182-e54dbcd46aea) |
+|---|---|
 
 All of the work done by the editors is performed in a cross-platform backend project called SF3Lib. SF3Lib can
 be used to create small applications that tasks like make bulk changes, randomize data, perform analysis, or anything
