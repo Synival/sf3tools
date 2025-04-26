@@ -56,7 +56,7 @@ void main() {
                 + 0.375f * pow(normalLightDot, 32)
             );
 
-    lighting = (smoothLighting ? lighting : floor(lighting * 31.0f) / 32.0f) + 0.015625;
+    lighting = (smoothLighting ? lighting : floor(lighting * 32.0f) / 32.0f) + 0.015625;
 
     lightColorFrag           = (lightingMode != 0 && applyLighting > 0.50) ? vec4(clamp(texture(textureLighting, vec2(0, lighting)).xyz - 0.5, -0.5, 0.5), 0) : vec4(0, 0, 0, 0);
     texCoordAtlasFrag        = texCoordAtlas;
