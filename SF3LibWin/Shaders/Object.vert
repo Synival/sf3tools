@@ -44,17 +44,8 @@ void main() {
         // Scenario 1 always uses a straight-forward lighting method where the dot product directly references the index of
         // the color palette to use.
         (lightingMode == 1) ? (normalLightDot * 0.5f + 0.5f) :
-        // Scenario 2 outdoor maps uses this odd exponential function instead, usually at pitch 0xB308. With this formula:
-        // - any polygon not facing the light source (90 degrees or more) always uses the darkest color
-        // - the color referenced used intentionally overflows, wrapping once
-        // - a wider range of colors is used when the light is directly overhead
-        // - the color used changes more rapidly the less direct the light is due to the exponent
-        (normalLightDot < 0) ? -1.0f :
-            (-1.0f
-                + 1.250f * normalLightDot
-                + 0.375f * pow(normalLightDot, 4)
-                + 0.375f * pow(normalLightDot, 32)
-            );
+        // Reverse-engineered function. Don't ask me why it is what it is!
+        ((normalLightDot < 0) ? 0.0f : (atan(normalLightDot, sqrt(1.0f - normalLightDot * normalLightDot)) * 1.27323954477 /* <-- 4/pi */ + 2.0f));
 
     lighting = (smoothLighting ? lighting : floor(lighting * 32.0f) / 32.0f) + 0.015625;
 
