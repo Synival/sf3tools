@@ -88,6 +88,9 @@ namespace SF3.Editor.Forms {
             tsmiTools_Sep1 = new System.Windows.Forms.ToolStripSeparator();
             tsmiTools_ApplyDFR = new System.Windows.Forms.ToolStripMenuItem();
             tsmiTools_CreateDFR = new System.Windows.Forms.ToolStripMenuItem();
+            tsmiX019 = new System.Windows.Forms.ToolStripMenuItem();
+            tsmiX019_UnapplyMonsterEq = new System.Windows.Forms.ToolStripMenuItem();
+            tsmiX019_ApplyMonsterEq = new System.Windows.Forms.ToolStripMenuItem();
             tsmiMPD = new System.Windows.Forms.ToolStripMenuItem();
             tsmiMPD_Chunks = new System.Windows.Forms.ToolStripMenuItem();
             tsmiMPD_Chunks_ImportChunk = new System.Windows.Forms.ToolStripMenuItem();
@@ -101,6 +104,7 @@ namespace SF3.Editor.Forms {
             tsmiMPD_Textures = new System.Windows.Forms.ToolStripMenuItem();
             tsmiMPD_Textures_ImportAll = new System.Windows.Forms.ToolStripMenuItem();
             tsmiMPD_Textures_ExportAll = new System.Windows.Forms.ToolStripMenuItem();
+            tsmiMPD_ModelSwitchGroups = new System.Windows.Forms.ToolStripMenuItem();
             tsmiMPD_Sep1 = new System.Windows.Forms.ToolStripSeparator();
             tsmiMPD_RecalculateSurfaceModelNormals = new System.Windows.Forms.ToolStripMenuItem();
             tsmiSettings = new System.Windows.Forms.ToolStripMenuItem();
@@ -113,13 +117,12 @@ namespace SF3.Editor.Forms {
             tsmiSettings_MPD_FixNormalOverflowUnderflowErrors = new System.Windows.Forms.ToolStripMenuItem();
             tsmiHelp = new System.Windows.Forms.ToolStripMenuItem();
             tsmiHelp_About = new System.Windows.Forms.ToolStripMenuItem();
-            tsmiMPD_ModelSwitchGroups = new System.Windows.Forms.ToolStripMenuItem();
             menuStrip1.SuspendLayout();
             SuspendLayout();
             // 
             // menuStrip1
             // 
-            menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { tsmiFile, tsmiView, tsmi_Tools, tsmiMPD, tsmiSettings, tsmiHelp });
+            menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { tsmiFile, tsmiView, tsmi_Tools, tsmiX019, tsmiMPD, tsmiSettings, tsmiHelp });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
             menuStrip1.Size = new Size(891, 24);
@@ -562,6 +565,27 @@ namespace SF3.Editor.Forms {
             tsmiTools_CreateDFR.Text = "&Create DFR File...";
             tsmiTools_CreateDFR.Click += tsmiTools_CreateDFR_Click;
             // 
+            // tsmiX019
+            // 
+            tsmiX019.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { tsmiX019_UnapplyMonsterEq, tsmiX019_ApplyMonsterEq });
+            tsmiX019.Enabled = false;
+            tsmiX019.Name = "tsmiX019";
+            tsmiX019.Size = new Size(44, 20);
+            tsmiX019.Text = "&X019";
+            tsmiX019.Visible = false;
+            // 
+            // tsmiX019_UnapplyMonsterEq
+            // 
+            tsmiX019_UnapplyMonsterEq.Name = "tsmiX019_UnapplyMonsterEq";
+            tsmiX019_UnapplyMonsterEq.Size = new Size(263, 22);
+            tsmiX019_UnapplyMonsterEq.Text = "&Unapply Monster Equipment Stats...";
+            // 
+            // tsmiX019_ApplyMonsterEq
+            // 
+            tsmiX019_ApplyMonsterEq.Name = "tsmiX019_ApplyMonsterEq";
+            tsmiX019_ApplyMonsterEq.Size = new Size(263, 22);
+            tsmiX019_ApplyMonsterEq.Text = "&Apply Monster Equipment Stats...";
+            // 
             // tsmiMPD
             // 
             tsmiMPD.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { tsmiMPD_Chunks, tsmiMPD_Textures, tsmiMPD_ModelSwitchGroups, tsmiMPD_Sep1, tsmiMPD_RecalculateSurfaceModelNormals });
@@ -575,7 +599,7 @@ namespace SF3.Editor.Forms {
             // 
             tsmiMPD_Chunks.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { tsmiMPD_Chunks_ImportChunk, tsmiMPD_Chunks_ExportChunk, tsmiMPD_Chunks_DeleteChunk, toolStripSeparator1, tsmiMPD_Chunks_RecompressChunks, tsmiMPD_Chunks_CorrectChunkPlacement, toolStripSeparator2, tsmiMPD_Chunks_MoveChunksAutomatically });
             tsmiMPD_Chunks.Name = "tsmiMPD_Chunks";
-            tsmiMPD_Chunks.Size = new Size(265, 22);
+            tsmiMPD_Chunks.Size = new Size(261, 22);
             tsmiMPD_Chunks.Text = "&Chunks";
             tsmiMPD_Chunks.Visible = false;
             // 
@@ -637,7 +661,7 @@ namespace SF3.Editor.Forms {
             // 
             tsmiMPD_Textures.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { tsmiMPD_Textures_ImportAll, tsmiMPD_Textures_ExportAll });
             tsmiMPD_Textures.Name = "tsmiMPD_Textures";
-            tsmiMPD_Textures.Size = new Size(265, 22);
+            tsmiMPD_Textures.Size = new Size(261, 22);
             tsmiMPD_Textures.Text = "&Textures";
             // 
             // tsmiMPD_Textures_ImportAll
@@ -654,15 +678,22 @@ namespace SF3.Editor.Forms {
             tsmiMPD_Textures_ExportAll.Text = "&Export All...";
             tsmiMPD_Textures_ExportAll.Click += tsmiMPD_Textures_ExportAll_Click;
             // 
+            // tsmiMPD_ModelSwitchGroups
+            // 
+            tsmiMPD_ModelSwitchGroups.Enabled = false;
+            tsmiMPD_ModelSwitchGroups.Name = "tsmiMPD_ModelSwitchGroups";
+            tsmiMPD_ModelSwitchGroups.Size = new Size(261, 22);
+            tsmiMPD_ModelSwitchGroups.Text = "Model &Switch Groups";
+            // 
             // tsmiMPD_Sep1
             // 
             tsmiMPD_Sep1.Name = "tsmiMPD_Sep1";
-            tsmiMPD_Sep1.Size = new Size(262, 6);
+            tsmiMPD_Sep1.Size = new Size(258, 6);
             // 
             // tsmiMPD_RecalculateSurfaceModelNormals
             // 
             tsmiMPD_RecalculateSurfaceModelNormals.Name = "tsmiMPD_RecalculateSurfaceModelNormals";
-            tsmiMPD_RecalculateSurfaceModelNormals.Size = new Size(265, 22);
+            tsmiMPD_RecalculateSurfaceModelNormals.Size = new Size(261, 22);
             tsmiMPD_RecalculateSurfaceModelNormals.Text = "Recalculate Surface Model &Normals";
             tsmiMPD_RecalculateSurfaceModelNormals.Click += tsmiMPD_RecalculateSurfaceModelNormals_Click;
             // 
@@ -733,13 +764,6 @@ namespace SF3.Editor.Forms {
             tsmiHelp_About.Size = new Size(116, 22);
             tsmiHelp_About.Text = "&About...";
             tsmiHelp_About.Click += tsmiHelp_About_Click;
-            // 
-            // tsmiMPD_ModelSwitchGroups
-            // 
-            tsmiMPD_ModelSwitchGroups.Enabled = false;
-            tsmiMPD_ModelSwitchGroups.Name = "tsmiMPD_ModelSwitchGroups";
-            tsmiMPD_ModelSwitchGroups.Size = new Size(265, 22);
-            tsmiMPD_ModelSwitchGroups.Text = "Model &Switch Groups";
             // 
             // SF3EditorForm
             // 
@@ -847,5 +871,8 @@ namespace SF3.Editor.Forms {
         private System.Windows.Forms.ToolStripMenuItem tsmiView_MPD_HideModelsNotFacingCamera;
         private System.Windows.Forms.ToolStripMenuItem tsmiView_MPD_RenderOnBlackBackground;
         private System.Windows.Forms.ToolStripMenuItem tsmiMPD_ModelSwitchGroups;
+        private System.Windows.Forms.ToolStripMenuItem tsmiX019;
+        private System.Windows.Forms.ToolStripMenuItem tsmiX019_UnapplyMonsterEq;
+        private System.Windows.Forms.ToolStripMenuItem tsmiX019_ApplyMonsterEq;
     }
 }

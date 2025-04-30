@@ -372,7 +372,9 @@ namespace SF3.Editor.Forms {
             Text = file == null ? _versionTitle : file.Loader.ModelTitle(_versionTitle);
 
             var fileType = file?.FileType;
-            tsmiMPD.Visible = tsmiMPD.Enabled = hasFile && (fileType == SF3FileType.MPD);
+            tsmiX019.Visible = tsmiX019.Enabled = hasFile && (fileType == SF3FileType.X019 || fileType == SF3FileType.X044);
+            tsmiMPD.Visible  = tsmiMPD.Enabled  = hasFile && (fileType == SF3FileType.MPD);
+
             UpdateModelSwitchGroupsMenu((fileType == SF3FileType.MPD && file?.Loader?.Model != null) ? (IMPD_File) file.Loader.Model : null);
         }
 
