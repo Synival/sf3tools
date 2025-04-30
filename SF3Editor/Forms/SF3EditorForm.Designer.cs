@@ -579,12 +579,14 @@ namespace SF3.Editor.Forms {
             tsmiX019_UnapplyMonsterEq.Name = "tsmiX019_UnapplyMonsterEq";
             tsmiX019_UnapplyMonsterEq.Size = new Size(263, 22);
             tsmiX019_UnapplyMonsterEq.Text = "&Unapply Monster Equipment Stats...";
+            tsmiX019_UnapplyMonsterEq.Click += tsmiX019_UnapplyMonsterEq_Click;
             // 
             // tsmiX019_ApplyMonsterEq
             // 
             tsmiX019_ApplyMonsterEq.Name = "tsmiX019_ApplyMonsterEq";
             tsmiX019_ApplyMonsterEq.Size = new Size(263, 22);
             tsmiX019_ApplyMonsterEq.Text = "&Apply Monster Equipment Stats...";
+            tsmiX019_ApplyMonsterEq.Click += tsmiX019_ApplyMonsterEq_Click;
             // 
             // tsmiMPD
             // 

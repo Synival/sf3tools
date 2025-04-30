@@ -1,5 +1,7 @@
 using CommonLib.Attributes;
 using SF3.ByteData;
+using SF3.Models.Structs.X002;
+using SF3.Models.Tables.X002;
 using SF3.Types;
 
 namespace SF3.Models.Structs.X019 {
@@ -142,6 +144,42 @@ namespace SF3.Models.Structs.X019 {
             unknown19         = Address + 74;
             unknown20         = Address + 75;
             SpriteID          = id + 200;
+        }
+
+        /// <summary>
+        /// Adjusts Monster stats based on their equipment.
+        /// </summary>
+        /// <param name="itemTable">Table from which to get equipment.</param>
+        /// <param name="apply">When true, stat changes are applied. When false, stat changes are unapplied.</param>
+        /// <returns>The number of items which had their stats applied.</returns>
+        public int ApplyEquipmentStats(ItemTable itemTable, bool apply) {
+            return (ApplyItemStats(itemTable, Weapon, apply) ? 1 : 0) +
+                   (ApplyItemStats(itemTable, Accessory, apply) ? 1 : 0);
+        }
+
+        /// <summary>
+        /// Adjusts Monster stats based on an item/piece of equipment.
+        /// </summary>
+        /// <param name="itemTable">Table from which to get the item.</param>
+        /// <param name="itemId">The ID of the item.</param>
+        /// <param name="apply">When true, stat changes are applied. When false, stat changes are unapplied.</param>
+        /// <returns>Returns 'true' if an item was found and applied, otherwise 'false'.</returns>
+        public bool ApplyItemStats(ItemTable itemTable, int itemId, bool apply) {
+            if (itemId <= 0 || itemId >= itemTable.Length)
+                return false;
+            ApplyItemStats(itemTable[itemId], apply);
+            return true;
+        }
+
+        /// <summary>
+        /// Adjusts Monster stats based on an item/piece of equipment.
+        /// </summary>
+        /// <param name="item">The item to apply/unapply</param>
+        /// <param name="apply">When true, stat changes are applied. When false, stat changes are unapplied.</param>
+        public void ApplyItemStats(Item item, bool apply) {
+            var statMult = apply ? 1 : -1;
+            Attack  += item.Attack  * statMult;
+            Defense += item.Defense * statMult;
         }
 
         [TableViewModelColumn(displayOrder: -0.5f, displayFormat: "X2", displayGroup: "Stats1")]
