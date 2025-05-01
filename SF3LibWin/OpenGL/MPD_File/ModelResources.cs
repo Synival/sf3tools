@@ -292,7 +292,7 @@ namespace SF3.Win.OpenGL.MPD_File {
 
                 TextureAnimation anim = null;
 
-                if (!attr.HasTexture) {
+                if (!attr.UseTexture) {
                     var colorChannels = PixelConversion.ABGR1555toChannels(attr.ColorNo);
                     color = new Vector4(colorChannels.r / 255.0f, colorChannels.g / 255.0f, colorChannels.b / 255.0f, 1.0f);
                 }
@@ -349,8 +349,8 @@ namespace SF3.Win.OpenGL.MPD_File {
                 var vertexNormals = new Vector3[] { normal, normal, normal, normal };
                 var normalVboData = vertexNormals.SelectMany(x => x.ToFloatArray()).ToArray().To2DArray(4, 3);
 
-                var useGouraud = attr.CL_Gouraud && attr.HasTexture;
-                var applyLighting = ((attr.ApplyLighting || anim == null) && !useGouraud) ? 1.0f : 0.0f;
+                var useGouraud = attr.CL_Gouraud && attr.UseTexture;
+                var applyLighting = ((attr.UseLight || anim == null) && !useGouraud) ? 1.0f : 0.0f;
                 var applyLightingVboData = new float[,] {{applyLighting}, {applyLighting}, {applyLighting}, {applyLighting}};
 
                 void AddQuad() {

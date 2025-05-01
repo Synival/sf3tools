@@ -1119,7 +1119,7 @@ namespace SF3.Models.Files.MPD {
                     return false;
 
                 var attr = mc.AttrTablesByMemoryAddress[x.AttributesOffset][0];
-                return attr.HasTexture;
+                return attr.UseTexture;
             });
         }
 
