@@ -69,8 +69,6 @@ namespace SF3.Win.OpenGL.MPD_File {
             ref Matrix4 projectionMatrix,
             ref Matrix4 viewMatrix
         ) {
-            GL.StencilMask(0xFF);
-
             // Enable 'CullFace' to draw everything single-sided (as the game actually is)
             if (!options.ForceTwoSidedTextures)
                 GL.Enable(EnableCap.CullFace);

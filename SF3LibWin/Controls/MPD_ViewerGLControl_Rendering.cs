@@ -182,6 +182,7 @@ namespace SF3.Win.Controls {
             else
                 GL.ClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 
+            GL.StencilMask(0xFF);
             GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit | ClearBufferMask.StencilBufferBit);
 
             int[] GetModelsToHide(bool flagIsOn, IEnumerable<ModelIDStruct> showWhenOff, IEnumerable<ModelIDStruct> showWhenOn) {
