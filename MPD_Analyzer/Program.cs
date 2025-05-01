@@ -383,7 +383,7 @@ namespace MPD_Analyzer {
             var mc20 = mpdFile.ModelCollections.FirstOrDefault(x => x.ChunkIndex == 20);
 
             if (mc1 != null) {
-                var expectedHmm = header.HasHighMemoryChunk1;
+                var expectedHmm = header.Chunk1IsLoadedToHighMemory;
                 var actualHmm   = HasHighMemoryModels(mc1) == true;
 
                 if (expectedHmm && !actualHmm)
@@ -507,7 +507,7 @@ namespace MPD_Analyzer {
                 chunkUses[19].Add("GroundImageBottomTileMap");
             }
 
-            if (header.HasSkyBox) {
+            if (header.HasAnySkyBox) {
                 chunkUses[17].Add("SkyBoxImageTop");
                 chunkUses[18].Add("SkyBoxImageBottom");
             }

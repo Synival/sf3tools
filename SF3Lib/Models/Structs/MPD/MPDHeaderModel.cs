@@ -153,6 +153,7 @@ namespace SF3.Models.Structs.MPD {
         public bool IsScenario1 => Scenario == ScenarioType.Scenario1;
         public bool IsScenario1OrEarlier => Scenario <= ScenarioType.Scenario1;
         public bool IsScenario1OrLater => Scenario >= ScenarioType.Scenario1;
+        public bool IsScenario2OrEarlier => Scenario <= ScenarioType.Scenario2;
         public bool IsScenario2OrLater => Scenario >= ScenarioType.Scenario2;
         public bool IsScenario3OrLater => Scenario >= ScenarioType.Scenario3;
 
@@ -166,13 +167,28 @@ namespace SF3.Models.Structs.MPD {
         public bool HasIndexedTextures => IsScenario3OrLater;
 
         [BulkCopy]
-        [TableViewModelColumn(displayOrder: 0, displayFormat: "X4")]
+        [TableViewModelColumn(displayOrder: 0, displayFormat: "X4", displayGroup: "Main")]
         public ushort MapFlags {
             get => (ushort) Data.GetWord(mapFlagsAddress);
             set => Data.SetWord(mapFlagsAddress, value);
         }
 
-        [TableViewModelColumn(displayOrder: 0x025f, displayName: "HasSurfaceTextureRotation (Scn3+)", visibilityProperty: nameof(IsScenario3OrLater))]
+        [TableViewModelColumn(displayOrder: 0.0001f, displayName: "(0x0001) " + nameof(UnknownMapFlag0x0001), displayGroup: "Flags")]
+        public bool UnknownMapFlag0x0001 {
+            get => (MapFlags & 0x0001) == 0x0001;
+            set => MapFlags = value ? (ushort) (MapFlags & ~0x0001) : (ushort) (MapFlags | 0x0001);
+        }
+
+        [TableViewModelColumn(displayOrder: 0.0002f, displayName: "(0x0002) " + nameof(UnknownMapFlag0x0002) + " (Scn1,2)", visibilityProperty: nameof(IsScenario2OrEarlier), displayGroup: "Flags")]
+        public bool UnknownMapFlag0x0002 {
+            get => Scenario < ScenarioType.Scenario3 && (MapFlags & 0x0002) == 0x0002;
+            set {
+                if (Scenario < ScenarioType.Scenario3)
+                    MapFlags = value ? (ushort) (MapFlags & ~0x0002) : (ushort) (MapFlags | 0x0002);
+            }
+        }
+
+        [TableViewModelColumn(displayOrder: 0.00021f, displayName: "(0x0002) " + nameof(HasSurfaceTextureRotation) + " (Scn3+)", visibilityProperty: nameof(IsScenario3OrLater), displayGroup: "Flags")]
         public bool HasSurfaceTextureRotation {
             get => Scenario >= ScenarioType.Scenario3 && (MapFlags & 0x0002) == 0x0002;
             set {
@@ -181,43 +197,31 @@ namespace SF3.Models.Structs.MPD {
             }
         }
 
-        [TableViewModelColumn(displayOrder: 0.05f)]
-        public bool HasSurfaceModel {
-            get => (MapFlags & 0x0200) == 0x0200;
-            set => MapFlags = value ? (ushort) (MapFlags | 0x0200) : (ushort) (MapFlags & ~0x0200);
+        [TableViewModelColumn(displayOrder: 0.0004f, displayName: "(0x0004) " + nameof(AddDotProductBasedNoiseToStandardLightmap), displayGroup: "Flags")]
+        public bool AddDotProductBasedNoiseToStandardLightmap {
+            get => (MapFlags & 0x0004) == 0x0004;
+            set => MapFlags = value ? (ushort) (MapFlags & ~0x0004) : (ushort) (MapFlags | 0x0004);
         }
 
-        [TableViewModelColumn(displayOrder: 0.053f, displayName: nameof(ForceLowMemoryChunk1) + " (Scn1)", visibilityProperty: nameof(IsScenario1OrEarlier))]
-        public bool ForceLowMemoryChunk1 {
-            get => IsScenario1OrEarlier ? (MapFlags & 0x8000) == 0x8000 : false;
-            set {
-                if (IsScenario1OrEarlier)
-                    MapFlags = value ? (ushort) (MapFlags | 0x8000) : (ushort) (MapFlags & ~0x8000);
-            }
+        [TableViewModelColumn(displayOrder: 0.0008f, displayName: "(0x0008) " + nameof(UnknownFlatTileFlag0x0008), displayGroup: "Flags")]
+        public bool UnknownFlatTileFlag0x0008 {
+            get => (MapFlags & 0x0008) == 0x0008;
+            set => MapFlags = value ? (ushort) (MapFlags & ~0x0008) : (ushort) (MapFlags | 0x0008);
         }
 
-        [TableViewModelColumn(displayOrder: 0.055f, displayName: nameof(HasHighMemoryChunk1) + " (Scn1)", visibilityProperty: nameof(IsScenario1OrEarlier))]
-        public bool HasHighMemoryChunk1
-            => IsScenario1OrEarlier && HasSurfaceModel && !ForceLowMemoryChunk1;
-
-        [TableViewModelColumn(displayOrder: 0.06f, displayName: nameof(Chunk20IsSurfaceModelIfExists) + " (Scn2+)", visibilityProperty: nameof(IsScenario2OrLater))]
-        public bool Chunk20IsSurfaceModelIfExists {
-            get => IsScenario2OrLater ? (MapFlags & 0x8000) == 0x8000 : false;
-            set {
-                if (IsScenario2OrLater)
-                    MapFlags = value ? (ushort) (MapFlags | 0x8000) : (ushort) (MapFlags & ~0x8000);
-            }
+        [TableViewModelColumn(displayOrder: 0.0010f, displayName: "(0x0010 | 40) " + nameof(BackgroundImageType), minWidth: 100, displayGroup: "Flags")]
+        public BackgroundImageType BackgroundImageType {
+            get => BackgroundImageTypeExtensions.FromMapFlags(MapFlags);
+            set => MapFlags = (ushort) ((MapFlags & ~BackgroundImageTypeExtensions.ApplicableMapFlags) | value.ToMapFlags());
         }
 
-        [TableViewModelColumn(displayOrder: 0.07f, displayName: nameof(Chunk20IsModels) + " (Scn2+)", visibilityProperty: nameof(IsScenario2OrLater))]
-        public bool Chunk20IsModels
-            => IsScenario2OrLater && HasSurfaceModel && !Chunk20IsSurfaceModelIfExists;
+        [TableViewModelColumn(displayOrder: 0.0020f, displayName: "(0x0020) " + nameof(UnknownMapFlag0x0020), displayGroup: "Flags")]
+        public bool UnknownMapFlag0x0020 {
+            get => (MapFlags & 0x0020) == 0x0020;
+            set => MapFlags = value ? (ushort) (MapFlags & ~0x0020) : (ushort) (MapFlags | 0x0020);
+        }
 
-        [TableViewModelColumn(displayOrder: 0.075f, displayName: nameof(Chunk20IsSurfaceModel) + " (Scn2+)", visibilityProperty: nameof(IsScenario2OrLater))]
-        public bool Chunk20IsSurfaceModel
-            => IsScenario2OrLater && HasSurfaceModel && Chunk20IsSurfaceModelIfExists;
-
-        [TableViewModelColumn(displayOrder: 0.1f, displayName: nameof(HasChunk19Model) + " (Scn1)", visibilityProperty: nameof(IsScenario1))]
+        [TableViewModelColumn(displayOrder: 0.0080f, displayName: "(0x0080) " + nameof(HasChunk19Model) + " (Scn1)", visibilityProperty: nameof(IsScenario1), displayGroup: "Flags")]
         public bool HasChunk19Model {
             get => IsScenario1 && (MapFlags & 0x0080) == 0x0080;
             set {
@@ -226,7 +230,61 @@ namespace SF3.Models.Structs.MPD {
             }
         }
 
-        [TableViewModelColumn(displayOrder: 0.11f, displayName: nameof(HasExtraChunk1ModelWithChunk21Textures) + " (Scn2+)", visibilityProperty: nameof(IsScenario2OrLater))]
+        [TableViewModelColumn(displayOrder: 0.0081f, displayName: "(0x0080) " + nameof(ModifyPalette1ForGradient) + " (Redundant) (Scn2+)", visibilityProperty: nameof(IsScenario2OrLater), displayGroup: "Flags")]
+        public bool ModifyPalette1ForGradient {
+            get => Scenario >= ScenarioType.Scenario2 && (MapFlags & 0x0080) == 0x0080;
+            set {
+                if (Scenario >= ScenarioType.Scenario2)
+                    MapFlags = value ? (ushort) (MapFlags & ~0x0080) : (ushort) (MapFlags | 0x0080);
+            }
+        }
+
+        [TableViewModelColumn(displayOrder: 0.0100f, displayName: "(0x0100) " + nameof(HasModels), displayGroup: "Flags")]
+        public bool HasModels {
+            get => (MapFlags & 0x0100) == 0x0100;
+            set => MapFlags = value ? (ushort) (MapFlags & ~0x0100) : (ushort) (MapFlags | 0x0100);
+        }
+
+        [TableViewModelColumn(displayOrder: 0.0200f, displayName: "(0x0200) " + nameof(HasSurfaceModel), displayGroup: "Flags")]
+        public bool HasSurfaceModel {
+            get => (MapFlags & 0x0200) == 0x0200;
+            set => MapFlags = value ? (ushort) (MapFlags | 0x0200) : (ushort) (MapFlags & ~0x0200);
+        }
+
+        [TableViewModelColumn(displayOrder: 0.0400f, displayName: "(0x0400 | 1000): Ground Image Type", minWidth: 100, displayGroup: "Flags")]
+        public GroundImageType GroundImageType {
+            get => GroundImageTypeExtensions.FromMapFlags(MapFlags);
+            set => MapFlags = (ushort) ((MapFlags & ~GroundImageTypeExtensions.ApplicableMapFlags) | value.ToMapFlags());
+        }
+
+        [TableViewModelColumn(displayOrder: 0.0801f, displayName: "(0x0800) " + nameof(HasCutsceneSkyBox) + " (Scn2+)", visibilityProperty: nameof(IsScenario2OrLater), displayGroup: "Flags")]
+        public bool HasCutsceneSkyBox {
+            get => IsScenario2OrLater ? (MapFlags & 0x0800) == 0x0800 : false;
+            set {
+                if (IsScenario2OrLater)
+                    MapFlags = value ? (ushort) (MapFlags | 0x0800) : (ushort) (MapFlags & ~0x0800);
+            }
+        }
+
+        [TableViewModelColumn(displayOrder: 0.2000f, displayName: "(0x2000) " + nameof(HasBattleSkyBox) + " (Scn1)", visibilityProperty: nameof(IsScenario1OrEarlier), displayGroup: "Flags")]
+        public bool HasBattleSkyBox {
+            get => IsScenario1OrEarlier ? (MapFlags & 0x2000) == 0x2000 : false;
+            set {
+                if (IsScenario1OrEarlier)
+                    MapFlags = value ? (ushort) (MapFlags | 0x2000) : (ushort) (MapFlags & ~0x2000);
+            }
+        }
+ 
+        [TableViewModelColumn(displayOrder: 0.2001f, displayName: "(0x2000) " + nameof(NarrowAngleBasedLightmap) + " (Scn2+)", visibilityProperty: nameof(IsScenario2OrLater), displayGroup: "Flags")]
+        public bool NarrowAngleBasedLightmap {
+            get => IsScenario2OrLater && (MapFlags & 0x2000) == 0x2000;
+            set {
+                if (IsScenario2OrLater)
+                    MapFlags = (ushort) ((MapFlags & ~0x2000) | (value ? 0x2000 : 0));
+            }
+        }
+
+        [TableViewModelColumn(displayOrder: 0.4001f, displayName: "(0x4000) " + nameof(HasExtraChunk1ModelWithChunk21Textures) + " (Scn2+)", visibilityProperty: nameof(IsScenario2OrLater), displayGroup: "Flags")]
         public bool HasExtraChunk1ModelWithChunk21Textures {
             get => IsScenario2OrLater && (MapFlags & 0x4000) == 0x4000;
             set {
@@ -235,34 +293,43 @@ namespace SF3.Models.Structs.MPD {
             }
         }
 
-        [TableViewModelColumn(displayOrder: 0.20f, displayName: "Background Image Type", minWidth: 100)]
-        public BackgroundImageType BackgroundImageType {
-            get => BackgroundImageTypeExtensions.FromMapFlags(MapFlags);
-            set => MapFlags = (ushort) ((MapFlags & ~BackgroundImageTypeExtensions.ApplicableMapFlags) | value.ToMapFlags());
-        }
-
-        [TableViewModelColumn(displayOrder: 0.21f, displayName: "Ground Image Type", minWidth: 100)]
-        public GroundImageType GroundImageType {
-            get => GroundImageTypeExtensions.FromMapFlags(MapFlags);
-            set => MapFlags = (ushort) ((MapFlags & ~GroundImageTypeExtensions.ApplicableMapFlags) | value.ToMapFlags());
-        }
-
-        private int SkyBoxFlag => (Scenario == ScenarioType.Scenario1) ? 0x2000 : 0x0800;
-
-        [TableViewModelColumn(displayOrder: 0.22f, displayName: "Sky Box")]
-        public bool HasSkyBox {
-            get => (MapFlags & SkyBoxFlag) != 0;
-            set => MapFlags = (ushort) ((MapFlags & ~SkyBoxFlag) | (value ? SkyBoxFlag : 0));
-        }
- 
-        [TableViewModelColumn(displayOrder: 0.3f, displayName: "Outdoor Lighting (Scn2+)", visibilityProperty: nameof(IsScenario2OrLater))]
-        public bool OutdoorLighting {
-            get => IsScenario2OrLater && (MapFlags & 0x2000) == 0x2000;
+        [TableViewModelColumn(displayOrder: 0.8000f, displayName: "(0x8000) " + nameof(Chunk2IsLoadedToHighMemory) + " (Scn1)", visibilityProperty: nameof(IsScenario1OrEarlier), displayGroup: "Flags")]
+        public bool Chunk2IsLoadedToHighMemory {
+            get => IsScenario1OrEarlier ? (MapFlags & 0x8000) == 0x8000 : false;
             set {
-                if (IsScenario2OrLater)
-                    MapFlags = (ushort) ((MapFlags & ~0x2000) | (value ? 0x2000 : 0));
+                if (IsScenario1OrEarlier)
+                    MapFlags = value ? (ushort) (MapFlags | 0x8000) : (ushort) (MapFlags & ~0x8000);
             }
         }
+
+        [TableViewModelColumn(displayOrder: 0.80001f, displayName: "(Derived) " + nameof(Chunk1IsLoadedToHighMemory) + " (Scn1)", visibilityProperty: nameof(IsScenario1OrEarlier), displayGroup: "Flags")]
+        public bool Chunk1IsLoadedToHighMemory
+            => IsScenario1OrEarlier && !Chunk2IsLoadedToHighMemory;
+
+        [TableViewModelColumn(displayOrder: 0.8001f, displayName: "(0x8000) " + nameof(Chunk20IsSurfaceModelIfExists) + " (Scn2+)", visibilityProperty: nameof(IsScenario2OrLater), displayGroup: "Flags")]
+        public bool Chunk20IsSurfaceModelIfExists {
+            get => IsScenario2OrLater ? (MapFlags & 0x8000) == 0x8000 : false;
+            set {
+                if (IsScenario2OrLater)
+                    MapFlags = value ? (ushort) (MapFlags | 0x8000) : (ushort) (MapFlags & ~0x8000);
+            }
+        }
+
+        [TableViewModelColumn(displayOrder: 0.80011f, displayName: "(Derived) " + nameof(Chunk20IsSurfaceModel) + " (Scn2+)", visibilityProperty: nameof(IsScenario2OrLater), displayGroup: "Flags")]
+        public bool Chunk20IsSurfaceModel
+            => IsScenario2OrLater && HasSurfaceModel && Chunk20IsSurfaceModelIfExists;
+
+        [TableViewModelColumn(displayOrder: 0.80012f, displayName: "(Derived) " + nameof(Chunk20IsModels) + " (Scn2+)", visibilityProperty: nameof(IsScenario2OrLater), displayGroup: "Flags")]
+        public bool Chunk20IsModels
+            => IsScenario2OrLater && HasSurfaceModel && !Chunk20IsSurfaceModelIfExists;
+
+        [TableViewModelColumn(displayOrder: 0.80021f, displayName: "(Derived) " + nameof(HighMemoryHasModels), displayGroup: "Flags")]
+        public bool HighMemoryHasModels => (HasModels && Chunk1IsLoadedToHighMemory) || Chunk20IsModels;
+
+        [TableViewModelColumn(displayOrder: 0.80022f, displayName: "(Derived) " + nameof(HighMemoryHasSurfaceModel), displayGroup: "Flags")]
+        public bool HighMemoryHasSurfaceModel => (HasSurfaceModel && Chunk2IsLoadedToHighMemory) || Chunk20IsSurfaceModel;
+
+        public bool HasAnySkyBox => HasCutsceneSkyBox || HasBattleSkyBox;
 
         [BulkCopy]
         public ushort Padding1 {
@@ -271,21 +338,21 @@ namespace SF3.Models.Structs.MPD {
         }
 
         [BulkCopy]
-        [TableViewModelColumn(displayOrder: 2, isPointer: true)]
+        [TableViewModelColumn(displayOrder: 2, isPointer: true, displayGroup: "Main")]
         public int OffsetLightPalette {
             get => Data.GetDouble(offsetLightPaletteAddress);
             set => Data.SetDouble(offsetLightPaletteAddress, value);
         }
 
         [BulkCopy]
-        [TableViewModelColumn(displayOrder: 3, isPointer: true)]
+        [TableViewModelColumn(displayOrder: 3, isPointer: true, displayGroup: "Main")]
         public int OffsetLightPosition {
             get => Data.GetDouble(offsetLightPosAddress);
             set => Data.SetDouble(offsetLightPosAddress, value);
         }
 
         [BulkCopy]
-        [TableViewModelColumn(displayOrder: 4, isPointer: true, displayName: nameof(OffsetUnknown1) + " (Scn1)", visibilityProperty: nameof(HasUnknown1Table))]
+        [TableViewModelColumn(displayOrder: 4, isPointer: true, displayName: nameof(OffsetUnknown1) + " (Scn1)", visibilityProperty: nameof(HasUnknown1Table), displayGroup: "Main")]
         public int OffsetUnknown1 {
             get => HasUnknown1Table ? Data.GetDouble(offsetUnknown1Address) : 0;
             set {
@@ -295,7 +362,7 @@ namespace SF3.Models.Structs.MPD {
         }
 
         [BulkCopy]
-        [TableViewModelColumn(displayOrder: 4, isPointer: true, displayName: nameof(OffsetLightAdjustment) + " (Scn2+)", visibilityProperty: nameof(HasLightAdjustmentTable))]
+        [TableViewModelColumn(displayOrder: 4, isPointer: true, displayName: nameof(OffsetLightAdjustment) + " (Scn2+)", visibilityProperty: nameof(HasLightAdjustmentTable), displayGroup: "Main")]
         public int OffsetLightAdjustment {
             get => HasLightAdjustmentTable ? Data.GetDouble(offsetLightAdjustmentAddr) : 0;
             set {
@@ -305,7 +372,7 @@ namespace SF3.Models.Structs.MPD {
         }
 
         [BulkCopy]
-        [TableViewModelColumn(displayOrder: 5, displayFormat: "X2")]
+        [TableViewModelColumn(displayOrder: 5, displayFormat: "X2", displayGroup: "Main")]
         public ushort ViewDistance {
             get => (ushort) Data.GetWord(viewDistanceAddress);
             set => Data.SetWord(viewDistanceAddress, value);
@@ -318,21 +385,21 @@ namespace SF3.Models.Structs.MPD {
         }
 
         [BulkCopy]
-        [TableViewModelColumn(displayOrder: 7, isPointer: true)]
+        [TableViewModelColumn(displayOrder: 7, isPointer: true, displayGroup: "Main")]
         public int OffsetModelSwitchGroups {
             get => Data.GetDouble(offsetModelSwitchGroupsAddr);
             set => Data.SetDouble(offsetModelSwitchGroupsAddr, value);
         }
 
         [BulkCopy]
-        [TableViewModelColumn(displayOrder: 8, isPointer: true)]
+        [TableViewModelColumn(displayOrder: 8, isPointer: true, displayGroup: "Main")]
         public int OffsetTextureAnimations {
             get => Data.GetDouble(offsetTextureAnimationsAddress);
             set => Data.SetDouble(offsetTextureAnimationsAddress, value);
         }
 
         [BulkCopy]
-        [TableViewModelColumn(displayOrder: 9, isPointer: true, displayName: nameof(OffsetUnknown2) + " (Scn1)", visibilityProperty: nameof(HasUnknown2Table))]
+        [TableViewModelColumn(displayOrder: 9, isPointer: true, displayName: nameof(OffsetUnknown2) + " (Scn1)", visibilityProperty: nameof(HasUnknown2Table), displayGroup: "Main")]
         public int OffsetUnknown2 {
             get => HasUnknown2Table ? Data.GetDouble(offsetUnknown2Address) : 0;
             set {
@@ -342,7 +409,7 @@ namespace SF3.Models.Structs.MPD {
         }
 
         [BulkCopy]
-        [TableViewModelColumn(displayOrder: 9.5f, isPointer: true, displayName: nameof(OffsetGradient) + " (Scn2+)", visibilityProperty: nameof(HasGradientTable))]
+        [TableViewModelColumn(displayOrder: 9.5f, isPointer: true, displayName: nameof(OffsetGradient) + " (Scn2+)", visibilityProperty: nameof(HasGradientTable), displayGroup: "Main")]
         public int OffsetGradient {
             get => HasGradientTable ? Data.GetDouble(offsetGradientAddress) : 0;
             set {
@@ -352,28 +419,28 @@ namespace SF3.Models.Structs.MPD {
         }
 
         [BulkCopy]
-        [TableViewModelColumn(displayOrder: 10, isPointer: true)]
+        [TableViewModelColumn(displayOrder: 10, isPointer: true, displayGroup: "Main")]
         public int OffsetGroundAnimation {
             get => Data.GetDouble(offsetGroundAnimationAddr);
             set => Data.SetDouble(offsetGroundAnimationAddr, value);
         }
 
         [BulkCopy]
-        [TableViewModelColumn(displayOrder: 11, isPointer: true)]
+        [TableViewModelColumn(displayOrder: 11, isPointer: true, displayGroup: "Main")]
         public int OffsetMesh1 {
             get => Data.GetDouble(offsetMesh1Address);
             set => Data.SetDouble(offsetMesh1Address, value);
         }
 
         [BulkCopy]
-        [TableViewModelColumn(displayOrder: 12, isPointer: true)]
+        [TableViewModelColumn(displayOrder: 12, isPointer: true, displayGroup: "Main")]
         public int OffsetMesh2 {
             get => Data.GetDouble(offsetMesh2Address);
             set => Data.SetDouble(offsetMesh2Address, value);
         }
 
         [BulkCopy]
-        [TableViewModelColumn(displayOrder: 13, isPointer: true, visibilityProperty: nameof(HasMesh3))]
+        [TableViewModelColumn(displayOrder: 13, isPointer: true, visibilityProperty: nameof(HasMesh3), displayGroup: "Main")]
         public int OffsetMesh3 {
             get => HasMesh3 ? Data.GetDouble(offsetMesh3Address) : 0;
             set {
@@ -383,7 +450,7 @@ namespace SF3.Models.Structs.MPD {
         }
 
         [BulkCopy]
-        [TableViewModelColumn(displayOrder: 14, visibilityProperty: nameof(HasModelsInfo))]
+        [TableViewModelColumn(displayOrder: 14, visibilityProperty: nameof(HasModelsInfo), displayGroup: "Main")]
         public float ModelsPreYRotation {
             get => HasModelsInfo ? Data.GetCompressedFIXED(modelsPreYRotation).Float : -1;
             set {
@@ -393,7 +460,7 @@ namespace SF3.Models.Structs.MPD {
         }
 
         [BulkCopy]
-        [TableViewModelColumn(displayOrder: 14.5f, visibilityProperty: nameof(HasModelsInfo))]
+        [TableViewModelColumn(displayOrder: 14.5f, visibilityProperty: nameof(HasModelsInfo), displayGroup: "Main")]
         public float ModelsViewAngleMin {
             get => HasModelsInfo ? Data.GetCompressedFIXED(modelsViewAngleMin).Float : -0.6f;
             set {
@@ -403,7 +470,7 @@ namespace SF3.Models.Structs.MPD {
         }
 
         [BulkCopy]
-        [TableViewModelColumn(displayOrder: 15, visibilityProperty: nameof(HasModelsInfo))]
+        [TableViewModelColumn(displayOrder: 15, visibilityProperty: nameof(HasModelsInfo), displayGroup: "Main")]
         public float ModelsViewAngleMax {
             get => HasModelsInfo ? Data.GetCompressedFIXED(modelsViewAngleMax).Float : 0.6f;
             set {
@@ -422,7 +489,7 @@ namespace SF3.Models.Structs.MPD {
         }
 
         [BulkCopy]
-        [TableViewModelColumn(displayOrder: 16, isPointer: true, visibilityProperty: nameof(HasModelsInfo))]
+        [TableViewModelColumn(displayOrder: 16, isPointer: true, visibilityProperty: nameof(HasModelsInfo), displayGroup: "Main")]
         public int OffsetTextureAnimAlt {
             // TODO: Create HasOffsetTexturesAnimAlt for this case
             get => HasModelsInfo ? Data.GetDouble(offsetTextureAnimAltAddress) : 0;
@@ -433,21 +500,21 @@ namespace SF3.Models.Structs.MPD {
         }
 
         [BulkCopy]
-        [TableViewModelColumn(displayOrder: 17, isPointer: true)]
+        [TableViewModelColumn(displayOrder: 17, isPointer: true, displayGroup: "Main")]
         public int OffsetPal1 {
             get => Data.GetDouble(offsetPal1Address);
             set => Data.SetDouble(offsetPal1Address, value);
         }
 
         [BulkCopy]
-        [TableViewModelColumn(displayOrder: 18, isPointer: true)]
+        [TableViewModelColumn(displayOrder: 18, isPointer: true, displayGroup: "Main")]
         public int OffsetPal2 {
             get => Data.GetDouble(offsetPal2Address);
             set => Data.SetDouble(offsetPal2Address, value);
         }
 
         [BulkCopy]
-        [TableViewModelColumn(displayName: nameof(OffsetPal3) + " (Scn3+)", displayOrder: 19, isPointer: true, visibilityProperty: nameof(HasPalette3))]
+        [TableViewModelColumn(displayName: nameof(OffsetPal3) + " (Scn3+)", displayOrder: 19, isPointer: true, visibilityProperty: nameof(HasPalette3), displayGroup: "Main")]
         public int OffsetPal3 {
             get => HasPalette3 ? Data.GetDouble(offsetPal3Address) : 0;
             set {
@@ -457,7 +524,7 @@ namespace SF3.Models.Structs.MPD {
         }
 
         [BulkCopy]
-        [TableViewModelColumn(displayName: nameof(OffsetIndexedTextures) + " (Scn3+)", displayOrder: 19.5f, isPointer: true, visibilityProperty: nameof(HasIndexedTextures))]
+        [TableViewModelColumn(displayName: nameof(OffsetIndexedTextures) + " (Scn3+)", displayOrder: 19.5f, isPointer: true, visibilityProperty: nameof(HasIndexedTextures), displayGroup: "Main")]
         public int OffsetIndexedTextures {
             get => HasIndexedTextures ? Data.GetDouble(offsetIndexedTextures) : 0;
             set {
@@ -467,48 +534,48 @@ namespace SF3.Models.Structs.MPD {
         }
 
         [BulkCopy]
-        [TableViewModelColumn(displayOrder: 20)]
+        [TableViewModelColumn(displayOrder: 20, displayGroup: "Main")]
         public short GroundX {
             get => (short) Data.GetWord(groundXAddress);
             set => Data.SetWord(groundXAddress, value);
         }
 
         [BulkCopy]
-        [TableViewModelColumn(displayOrder: 20.5f)]
+        [TableViewModelColumn(displayOrder: 20.5f, displayGroup: "Main")]
         public short GroundY {
             get => (short) Data.GetWord(groundYAddress);
             set => Data.SetWord(groundYAddress, value);
         }
         [BulkCopy]
-        [TableViewModelColumn(displayOrder: 21)]
+        [TableViewModelColumn(displayOrder: 21, displayGroup: "Main")]
         public short GroundZ {
             get => (short) Data.GetWord(groundZAddress);
             set => Data.SetWord(groundZAddress, value);
         }
 
         [BulkCopy]
-        [TableViewModelColumn(displayOrder: 21.5f)]
+        [TableViewModelColumn(displayOrder: 21.5f, displayGroup: "Main")]
         public float GroundAngle {
             get => Data.GetWeirdCompressedFIXED(groundAngleAddress).Float;
             set => Data.SetWeirdCompressedFIXED(groundAngleAddress, new CompressedFIXED(value, 0));
         }
 
         [BulkCopy]
-        [TableViewModelColumn(displayOrder: 22)]
+        [TableViewModelColumn(displayOrder: 22, displayGroup: "Main")]
         public short Unknown1 {
             get => (short) Data.GetWord(unknown1Address);
             set => Data.SetWord(unknown1Address, value);
         }
 
         [BulkCopy]
-        [TableViewModelColumn(displayOrder: 22.5f)]
+        [TableViewModelColumn(displayOrder: 22.5f, displayGroup: "Main")]
         public short BackgroundX {
             get => (short) Data.GetWord(backgroundXAddress);
             set => Data.SetWord(backgroundXAddress, value);
         }
 
         [BulkCopy]
-        [TableViewModelColumn(displayOrder: 23)]
+        [TableViewModelColumn(displayOrder: 23, displayGroup: "Main")]
         public short BackgroundY {
             get => (short) Data.GetWord(backgroundYAddress);
             set => Data.SetWord(backgroundYAddress, value);
@@ -521,7 +588,7 @@ namespace SF3.Models.Structs.MPD {
         }
 
         [BulkCopy]
-        [TableViewModelColumn(displayOrder: 24, isPointer: true)]
+        [TableViewModelColumn(displayOrder: 24, isPointer: true, displayGroup: "Main")]
         public int OffsetBoundaries {
             get => Data.GetDouble(offsetBoundariesAddress);
             set => Data.SetDouble(offsetBoundariesAddress, value);

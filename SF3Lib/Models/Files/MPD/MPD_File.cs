@@ -346,7 +346,7 @@ namespace SF3.Models.Files.MPD {
 
             // Sky boxes
             var skyBoxChunks = new List<IChunkData>();
-            if (MPDHeader.HasSkyBox) {
+            if (MPDHeader.HasAnySkyBox) {
                 if (chunks[SkyBoxChunk1Index].Exists)
                     skyBoxChunks.Add(_ = MakeChunkData(SkyBoxChunk1Index, ChunkType.Palette2Image, CompressionType.Compressed));
                 if (chunks[SkyBoxChunk2Index].Exists)
