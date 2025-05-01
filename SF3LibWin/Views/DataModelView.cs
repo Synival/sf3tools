@@ -14,8 +14,9 @@ namespace SF3.Win.Views {
     public class DataModelView : ViewBase {
         private static int s_controlIndex = 1;
 
-        public DataModelView(string name, object model, INameGetterContext nameGetterContext, Type modelType = null)
+        public DataModelView(string name, object model, INameGetterContext nameGetterContext, Type modelType = null, string[] displayGroups = null)
         : base(name) {
+            DisplayGroups = displayGroups;
             Model = model;
             NameGetterContext = nameGetterContext;
             ModelType = modelType ?? ((model == null) ? null : model.GetType()!);
@@ -37,7 +38,7 @@ namespace SF3.Win.Views {
         }
 
         private string GetCacheKey()
-            => "ModelView_" + ModelType.FullName + "_" + NameGetterContext.Name;
+            => "ModelView_" + ModelType.FullName + "_" + NameGetterContext.Name + "_" + (DisplayGroups != null ? ("_" + string.Join("_", DisplayGroups)) : "");
 
         private EnhancedObjectListView PopCachedOLV()
             => EnhancedObjectListView.PopCachedOLV(GetCacheKey());
@@ -217,6 +218,7 @@ namespace SF3.Win.Views {
                     _modelProperties = vm.Properties
                         .Where(x => x.Value.DisplayOrder >= 0 || (x.Key.Name == "Address" && (int) x.Key.GetValue(value) >= 0))
                         .Where(x => x.Value.GetVisibility(value))
+                        .Where(x => DisplayGroups == null || DisplayGroups.Contains(x.Value.DisplayGroup))
                         .Select((x, i) => new ModelProperty(value, x.Key, x.Value, i + 1)).ToList();
                 }
 
@@ -235,5 +237,6 @@ namespace SF3.Win.Views {
         public Type ModelType { get; }
         public INameGetterContext NameGetterContext { get; }
         public EnhancedObjectListView OLVControl { get; private set; } = null;
+        public string[] DisplayGroups { get; }
     }
 }
