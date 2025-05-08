@@ -11,7 +11,8 @@ namespace SF3.Models.Structs.X1.Town {
         private readonly int _yPosAddr;
         private readonly int _zPosAddr;
         private readonly int _directionAddr;
-        private readonly int _unusedDirection0x16Addr;
+        private readonly int _interactDirectionBehaviorAddr;
+        private readonly int _paddingAddr;
 
         public Npc(IByteData data, int id, string name, int address)
         : base(data, id, name, address, 0x18) {
@@ -21,8 +22,9 @@ namespace SF3.Models.Structs.X1.Town {
             _xPosAddr          = Address + 0x08; // 4 bytes
             _yPosAddr          = Address + 0x0C; // 4 bytes
             _zPosAddr          = Address + 0x10; // 4 bytes
-            _directionAddr     = Address + 0x14; // 2 bytes (upper word)
-            _unusedDirection0x16Addr = Address + 0x016; // 2 bytes (lower word, not read)
+            _directionAddr     = Address + 0x14; // 2 bytes
+            _interactDirectionBehaviorAddr = Address + 0x16; // 1 byte
+            _paddingAddr       = Address + 0x17; // 1 byte
         }
 
         [TableViewModelColumn(displayOrder: 0, displayFormat: "X3", minWidth: 200)]
@@ -108,11 +110,18 @@ namespace SF3.Models.Structs.X1.Town {
             set => Data.SetWord(_directionAddr, value);
         }
 
-        [TableViewModelColumn(displayOrder: 10, displayName: "UnusedDirection (+0x16)", displayFormat: "X4")]
+        [TableViewModelColumn(displayOrder: 10, displayFormat: "X2")]
+        [NameGetter(NamedValueType.InteractDirectionBehavior)]
         [BulkCopy]
-        public int UnusedDirection0x16 {
-            get => Data.GetWord(_unusedDirection0x16Addr);
-            set => Data.SetWord(_unusedDirection0x16Addr, value);
+        public byte InteractDirectionBehavior {
+            get => (byte) Data.GetByte(_interactDirectionBehaviorAddr);
+            set => Data.SetByte(_interactDirectionBehaviorAddr, value);
+        }
+
+        [BulkCopy]
+        public byte Padding {
+            get => (byte) Data.GetByte(_paddingAddr);
+            set => Data.SetByte(_paddingAddr, value);
         }
 
         [TableViewModelColumn(displayOrder: 11, displayName: "Interactable Tie-in", displayFormat: "X2")]

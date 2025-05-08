@@ -52,6 +52,7 @@ namespace SF3.NamedValues {
                 { NamedValueType.FileIndex,           new SubMethods((o, p, v, a) => new NameAndInfo(v, ValueNames.FileIndexInfo.Info[Scenario])) },
                 { NamedValueType.FriendshipBonusType, new SubMethods((o, p, v, a) => new NameAndInfo(v, ValueNames.FriendshipBonusTypeInfo)) },
                 { NamedValueType.GameFlag,            new SubMethods((o, p, v, a) => new NameAndInfo(v, ValueNames.GameFlagInfo)) },
+                { NamedValueType.InteractDirectionBehavior, new SubMethods((o, p, v, a) => new NameAndInfo(v, ValueNames.InteractDirectionBehaviorInfo)) },
                 { NamedValueType.Item,                new SubMethods((o, p, v, a) => new NameAndInfo(v, ValueNames.ItemInfo.Info[Scenario])) },
                 { NamedValueType.Load,                new SubMethods((o, p, v, a) => new NameAndInfo(v, ValueNames.LoadInfo.Info[Scenario])) },
                 { NamedValueType.MagicBonus,          new SubMethods((o, p, v, a) => new NameAndInfo(v, ValueNames.MagicBonusInfo.Info[Scenario])) },

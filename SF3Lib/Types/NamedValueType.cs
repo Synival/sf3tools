@@ -18,6 +18,7 @@ namespace SF3.Types {
         FriendshipBonusType,
         GameFlag,
         Item,
+        InteractDirectionBehavior,
         Load,
         ModelDirection,
         Monster,

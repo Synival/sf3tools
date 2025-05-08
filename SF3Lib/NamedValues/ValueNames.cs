@@ -37,6 +37,8 @@ namespace SF3.NamedValues {
             = new NamedValueFromResourceInfo("FriendshipBonusTypeList.xml");
         public static readonly NamedValueFromResourceInfo GameFlagInfo
             = new NamedValueFromResourceInfo("GameFlags.xml");
+        public static readonly NamedValueFromEnum<InteractDirectionBehaviorType> InteractDirectionBehaviorInfo
+            = new NamedValueFromEnum<InteractDirectionBehaviorType>(maxValue: 0x0F);
         public static readonly NamedValueFromResourceForScenariosInfo ItemInfo
             = new NamedValueFromResourceForScenariosInfo("Items.xml");
         public static readonly NamedValueFromResourceForScenariosInfo LoadInfo
