@@ -6,29 +6,23 @@ namespace SF3.Models.Structs.X1.Town {
     public class Npc : Struct {
         private readonly int _spriteIDAddr;
         private readonly int _flagAddr;
-        private readonly int _movementTableAddr;
+        private readonly int _scriptOffsetAddr;
         private readonly int _xPosAddr;
+        private readonly int _yPosAddr;
         private readonly int _zPosAddr;
         private readonly int _directionAddr;
-        private readonly int _unknown0x0AAddr;
-        private readonly int _unknown0x0CAddr;
-        private readonly int _unknown0x0EAddr;
-        private readonly int _unknown0x12Addr;
-        private readonly int _unknown0x16Addr;
+        private readonly int _unusedDirection0x16Addr;
 
         public Npc(IByteData data, int id, string name, int address)
         : base(data, id, name, address, 0x18) {
             _spriteIDAddr      = Address + 0x00; // 2 bytes. how is searched. second by being 0x13 is a treasure. if this is 0xffff terminate 
             _flagAddr          = Address + 0x02; // 2 bytes
-            _movementTableAddr = Address + 0x04; // 2 bytes
-            _xPosAddr          = Address + 0x08; // 2 bytes
-            _unknown0x0AAddr   = Address + 0x0a; // 2 bytes
-            _unknown0x0CAddr   = Address + 0x0c; // 2 bytes
-            _unknown0x0EAddr   = Address + 0x0e; // 2 bytes
-            _zPosAddr          = Address + 0x10; // 2 bytes
-            _unknown0x12Addr   = Address + 0x12; // 2 bytes
-            _directionAddr     = Address + 0x14; // 2 bytes
-            _unknown0x16Addr   = Address + 0x16; // 2 bytes
+            _scriptOffsetAddr  = Address + 0x04; // 4 bytes
+            _xPosAddr          = Address + 0x08; // 4 bytes
+            _yPosAddr          = Address + 0x0C; // 4 bytes
+            _zPosAddr          = Address + 0x10; // 4 bytes
+            _directionAddr     = Address + 0x14; // 2 bytes (upper word)
+            _unusedDirection0x16Addr = Address + 0x016; // 2 bytes (lower word, not read)
         }
 
         [TableViewModelColumn(displayOrder: 0, displayFormat: "X3", minWidth: 200)]
@@ -49,62 +43,62 @@ namespace SF3.Models.Structs.X1.Town {
         [NameGetter(NamedValueType.GameFlag)]
         public int FlagChecked {
             get => FlagCheckedWithValue & 0x0FFF;
-            set => FlagCheckedWithValue = (FlagCheckedWithValue & ~0xFFF) | (value & 0x0FFF);
+            set => FlagCheckedWithValue = (value == 0xFFF ? 0xFFFF : (FlagCheckedWithValue & ~0xFFF) | (value & 0x0FFF));
         }
 
         [TableViewModelColumn(displayOrder: 1.1f)]
         public bool FlagExpectedValue {
             get => (FlagCheckedWithValue & 0x1000) != 0;
-            set => FlagCheckedWithValue = value ? (FlagCheckedWithValue | ~0x1000) : (FlagCheckedWithValue & ~0x1000);
+            set => FlagCheckedWithValue = (FlagCheckedWithValue == 0xFFFF ? 0xFFFF : (value ? (FlagCheckedWithValue | ~0x1000) : (FlagCheckedWithValue & ~0x1000)));
         }
 
-        [TableViewModelColumn(displayOrder: 2, displayName: "MovementTable?", isPointer: true)]
+        [TableViewModelColumn(displayOrder: 2, isPointer: true, minWidth: 120, displayFormat: "X8")]
         [BulkCopy]
-        public int MovementTable {
-            get => Data.GetDouble(_movementTableAddr);
-            set => Data.SetDouble(_movementTableAddr, value);
+        public int ScriptOffset {
+            get => Data.GetDouble(_scriptOffsetAddr);
+            set => Data.SetDouble(_scriptOffsetAddr, value);
         }
 
-        [TableViewModelColumn(displayOrder: 3, displayName: "xPos")]
+        [TableViewModelColumn(displayOrder: 3, displayName: "xPos", displayFormat: "X8")]
         [BulkCopy]
         public int XPos {
-            get => Data.GetWord(_xPosAddr);
-            set => Data.SetWord(_xPosAddr, value);
+            get => Data.GetDouble(_xPosAddr);
+            set => Data.SetDouble(_xPosAddr, value);
         }
 
-        [TableViewModelColumn(displayOrder: 4, displayName: "+0x0A", displayFormat: "X2")]
+        [TableViewModelColumn(displayOrder: 4, displayName: "yPos", displayFormat: "X8")]
         [BulkCopy]
-        public int Unknown0x0A {
-            get => Data.GetWord(_unknown0x0AAddr);
-            set => Data.SetWord(_unknown0x0AAddr, value);
+        public int YPos {
+            get => Data.GetDouble(_yPosAddr);
+            set => Data.SetDouble(_yPosAddr, value);
         }
 
-        [TableViewModelColumn(displayOrder: 5, displayName: "+0x0C", displayFormat: "X2")]
-        [BulkCopy]
-        public int Unknown0x0C {
-            get => Data.GetWord(_unknown0x0CAddr);
-            set => Data.SetWord(_unknown0x0CAddr, value);
-        }
-
-        [TableViewModelColumn(displayOrder: 6, displayName: "+0x0E", displayFormat: "X2")]
-        [BulkCopy]
-        public int Unknown0x0E {
-            get => Data.GetWord(_unknown0x0EAddr);
-            set => Data.SetWord(_unknown0x0EAddr, value);
-        }
-
-        [TableViewModelColumn(displayOrder: 7, displayName: "zPos")]
+        [TableViewModelColumn(displayOrder: 5, displayName: "zPos", displayFormat: "X8")]
         [BulkCopy]
         public int ZPos {
-            get => Data.GetWord(_zPosAddr);
-            set => Data.SetWord(_zPosAddr, value);
+            get => Data.GetDouble(_zPosAddr);
+            set => Data.SetDouble(_zPosAddr, value);
         }
 
-        [TableViewModelColumn(displayOrder: 8, displayName: "0x12", displayFormat: "X2")]
+        [TableViewModelColumn(displayOrder: 6, displayName: "xPos (dec)")]
         [BulkCopy]
-        public int Unknown0x12 {
-            get => Data.GetWord(_unknown0x12Addr);
-            set => Data.SetWord(_unknown0x12Addr, value);
+        public float XPosDec {
+            get => XPos / 65536.0f;
+            set => XPos = (int) value * 65536;
+        }
+
+        [TableViewModelColumn(displayOrder: 7, displayName: "yPos (dec)")]
+        [BulkCopy]
+        public float YPosDec {
+            get => YPos / 65536.0f;
+            set => YPos = (int) value * 65536;
+        }
+
+        [TableViewModelColumn(displayOrder: 8, displayName: "zPos (dec)")]
+        [BulkCopy]
+        public float ZPosDec {
+            get => ZPos / 65536.0f;
+            set => ZPos = (int) value * 65536;
         }
 
         [TableViewModelColumn(displayOrder: 9, displayName: "Direction", displayFormat: "X4")]
@@ -114,11 +108,11 @@ namespace SF3.Models.Structs.X1.Town {
             set => Data.SetWord(_directionAddr, value);
         }
 
-        [TableViewModelColumn(displayOrder: 10, displayName: "+0x16", displayFormat: "X2")]
+        [TableViewModelColumn(displayOrder: 10, displayName: "UnusedDirection (+0x16)", displayFormat: "X4")]
         [BulkCopy]
-        public int Unknown0x16 {
-            get => Data.GetWord(_unknown0x16Addr);
-            set => Data.SetWord(_unknown0x16Addr, value);
+        public int UnusedDirection0x16 {
+            get => Data.GetWord(_unusedDirection0x16Addr);
+            set => Data.SetWord(_unusedDirection0x16Addr, value);
         }
 
         [TableViewModelColumn(displayOrder: 11, displayName: "Interactable Tie-in", displayFormat: "X2")]
