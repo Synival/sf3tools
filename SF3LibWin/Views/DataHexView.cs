@@ -15,7 +15,7 @@ namespace SF3.Win.Views {
             if (rval == null)
                 return rval;
 
-            Control.Font = new Font("Courier New", 12.0f);
+            Control.Font = new Font("Courier New", 10.0f);
             Control.ReadOnly = true;
             Control.Multiline = true;
             Control.ScrollBars = ScrollBars.Both;
