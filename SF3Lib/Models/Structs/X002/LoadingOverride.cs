@@ -67,8 +67,9 @@ namespace SF3.Models.Structs.X002 {
             set => Data.SetByte(_julMusicAddr, (byte) value);
         }
 
-        [TableViewModelColumn(displayOrder: 4, displayFormat: "X2")]
+        [TableViewModelColumn(displayOrder: 4, displayFormat: "X2", minWidth: 210)]
         [BulkCopy]
+        [NameGetter(NamedValueType.Music)]
         public int ExtraMusic {
             get => Data.GetByte(_extraMusicAddr);
             set => Data.SetByte(_extraMusicAddr, (byte) value);
