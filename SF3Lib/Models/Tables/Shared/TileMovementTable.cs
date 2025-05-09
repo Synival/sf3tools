@@ -2,7 +2,7 @@ using System;
 using SF3.ByteData;
 using SF3.Models.Structs.Shared;
 using SF3.Types;
-using static CommonLib.Utils.Utils;
+using static CommonLib.Utils.EnumHelpers;
 
 namespace SF3.Models.Tables.Shared {
     public class TileMovementTable : FixedSizeTable<TileMovement> {
