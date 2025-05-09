@@ -240,14 +240,6 @@ namespace SF3.Win.Controls {
         public float Yaw { get; private set; }
         public float Pitch { get; private set; }
 
-        private float _rotX = 0f;
-        private float _rotY = 0f;
-        private float _rotZ = 0f;
-
-        private float _scaleX = 1f;
-        private float _scaleY = 1f;
-        private float _scaleZ = 1f;
-
         private float _minX = 0f;
         private float _minY = 0f;
         private float _minZ = 0f;
