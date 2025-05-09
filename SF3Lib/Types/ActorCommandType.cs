@@ -21,7 +21,7 @@ namespace SF3.Types {
         [ActorCommandParams("dist1", "dist2", "maxFromHome")] WanderWithCollision = 0x08,
         [ActorCommandParams("dist1", "dist2", "maxFromHome")] WnaderWithoutCollision = 0x09,
         [ActorCommandParams()] Unknown0x0A = 0x0A,
-        [ActorCommandParams()] Unknown0x0B = 0x0B,
+        [ActorCommandParams()] MoveTowardTargetActor = 0x0B,
         [ActorCommandParams("times", "scriptPosition/label")] GotoNTimes = 0x0C,
         [ActorCommandParams("scriptPosition")] Goto = 0x0D,
         [ActorCommandParams()] Unknown0x0E = 0x0E,

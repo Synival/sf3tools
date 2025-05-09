@@ -224,12 +224,12 @@ namespace SF3.Models.Files.X1 {
 
                             var param = commandParams.Select(x => ReadInt()).ToArray();
                             switch (command) {
-                                case 0x00: note = $"Wait {param[0]} frames"; break;
+                                case 0x00: note = $"Wait {param[0]} frame(s)"; break;
                                 case 0x01: note = "Wait until at move target"; break;
                                 case 0x03: note = $"Start moving to (0x{param[0]:X2}, 0x{param[1]:X2}, 0x{param[2]:X2})"; break;
                                 case 0x06: note = $"Start moving to relative angle 0x{(short) param[0]:X4}, ahead 0x{param[1]}"; break;
-                                case 0x08: note = $"Wander distance between 0x{param[0]:X2} and 0x{param[1]:X2}, max distance 0x{param[2]:X2}"; break;
-                                case 0x09: note = $"Wander distance (ignoring walls) between 0x{param[0]:X2} and 0x{param[1]:X2}, max distance 0x{param[2]:X2}"; break;
+                                case 0x08: note = $"Wander between 0x{param[0]:X2} and 0x{param[1]:X2} units, max distance 0x{param[2]:X2} from home"; break;
+                                case 0x09: note = $"Wander (ignoring walls) between 0x{param[0]:X2} and 0x{param[1]:X2} units, max distance 0x{param[2]:X2} from home"; break;
                                 case 0x0B: note = "Move towards target actor"; break;
 
                                 case 0x0C: {
