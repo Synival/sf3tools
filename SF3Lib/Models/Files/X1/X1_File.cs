@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using CommonLib.Attributes;
 using CommonLib.NamedValues;
+using CommonLib.Utils;
 using SF3.ByteData;
 using SF3.Models.Tables;
 using SF3.Models.Tables.Shared;
@@ -185,6 +186,101 @@ namespace SF3.Models.Files.X1 {
             if (tileMovementAddress >= 0)
                 tables.Add(TileMovementTable = TileMovementTable.Create(Data, "TileMovement", tileMovementAddress, true));
 
+            // TODO: this is all very temporary!! replace with objects!!
+            ScriptsByAddress = new Dictionary<uint, string>();
+            if (NpcTable != null) {
+                var scriptAddrs = NpcTable
+                    .Select(x => x.ScriptOffset - sub)
+                    .Where(x => x >= 0)
+                    .OrderBy(x => x)
+                    .Distinct();
+
+                foreach (var scriptAddr in scriptAddrs) {
+                    System.Diagnostics.Debug.WriteLine($"0x{(scriptAddr + sub):X8}:");
+
+                    var pos = 0;
+                    var scriptData = new List<uint>();
+
+                    uint ReadInt() {
+                        var addr = scriptAddr + pos * 4;
+                        var i = (addr + 3 >= Data.Length) ? 0xFFFFFFFFu : (uint) Data.GetDouble(addr);
+                        pos++;
+                        scriptData.Add(i);
+                        return i;
+                    };
+
+                    bool done = false;
+                    var script = "";
+
+                    while (!done && pos < 200) {
+                        int lastPos = pos;
+
+                        var command = ReadInt();
+                        string note = "???";
+
+                        if (Enum.IsDefined(typeof(ActorCommandType), (int) command)) {
+                            var commandType = (ActorCommandType) command;
+                            var commandParams = EnumHelpers.GetAttributeOfType<ActorCommandParams>(commandType).Params;
+
+                            var param = commandParams.Select(x => ReadInt()).ToArray();
+                            switch (command) {
+                                case 0x00: note = $"Wait {param[0]} frames"; break;
+                                case 0x01: note = "Wait until at move target"; break;
+                                case 0x03: note = $"Start moving to (0x{param[0]:X2}, 0x{param[1]:X2}, 0x{param[2]:X2})"; break;
+                                case 0x06: note = $"Start moving to relative angle 0x{(short) param[0]:X4}, ahead 0x{param[1]}"; break;
+                                case 0x08: note = $"Wander distance between 0x{param[0]:X2} and 0x{param[1]:X2}, max distance 0x{param[2]:X2}"; break;
+                                case 0x09: note = $"Wander distance (ignoring walls) between 0x{param[0]:X2} and 0x{param[1]:X2}, max distance 0x{param[2]:X2}"; break;
+                                case 0x0B: note = "Move towards target actor"; break;
+
+                                case 0x0C: {
+                                    done = (param[0] == 0xFFFF);
+                                    note = $"Goto 0x{param[1]:X2} " + (done ? "forever" : $"{param[0]} times");
+                                    break;
+                                }
+
+                                case 0x0D: {
+                                    done = (param[0] <= pos);
+                                    note = $"Goto 0x{param[0]:X2})";
+                                    break;
+                                }
+
+                                case 0x10: {
+                                    note = "Done";
+                                    done = true;
+                                    break;
+                                }
+
+                                case 0x15: note = $"Set param 0x{param[0]:X2} to 0x{param[1]:X8}"; break;
+                                case 0x16: note = $"Modify param 0x{param[0]:X2} by 0x{(int) param[1]:X4}"; break;
+                                case 0x1C:
+                                    note = $"Set animation to 0x{param[0]:X2}?";
+                                    break;
+
+                                case 0x1E: note = $"Play music/sound 0x${param[0]:X3}"; break;
+                                case 0x22: note = $"Execute function 0x{param[0]:X8}"; break;
+
+                                default:
+                                    break;
+                            }
+                        }
+                        else if (command >= 0x80000000u) {
+                            note = $"(label 0x{(command & 0x0FFFFFFF):X7})";
+                        }
+
+                        for (int i = lastPos; i < pos; i++) {
+                            script += (i == lastPos) ? "" : " ";
+                            script += $"{(scriptData[i]):X8}";
+                        }
+
+                        var paramCount = (pos - lastPos);
+                        var paramsMissing = (paramCount < 4) ? (4 - paramCount) : 0;
+                        script += new string(' ', paramsMissing * 9) + $" ; {note}\r\n";
+                    }
+
+                    ScriptsByAddress[(uint) (scriptAddr + sub)] = script;
+                }
+            }
+
             return tables;
         }
 
@@ -224,5 +320,7 @@ namespace SF3.Models.Files.X1 {
         public CharacterTargetPriorityTable[] CharacterTargetPriorityTables { get; private set; }
         [BulkCopyRecurse]
         public CharacterTargetUnknownTable[] CharacterTargetUnknownTables { get; private set; }
+
+        public Dictionary<uint, string> ScriptsByAddress { get; private set; }
     }
 }

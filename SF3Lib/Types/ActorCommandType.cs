@@ -1,0 +1,78 @@
+﻿using System;
+
+namespace SF3.Types {
+    public class ActorCommandParams : Attribute {
+        public ActorCommandParams(params string[] @params) {
+            Params = @params;
+        }
+
+        public string[] Params { get; }
+    }
+
+    public enum ActorCommandType {
+        [ActorCommandParams("frames")] Wait = 0x00,
+        [ActorCommandParams()] WaitUntilAtTargetPosition = 0x01,
+        [ActorCommandParams()] Unknown0x02 = 0x02,
+        [ActorCommandParams("xPos", "yPos", "zPos")] SetTargetPosition = 0x03,
+        [ActorCommandParams()] Unknown0x04 = 0x04,
+        [ActorCommandParams()] Unknown0x05 = 0x05,
+        [ActorCommandParams("relativeAngle", "distance")] SetTargetPositionAhead = 0x06,
+        [ActorCommandParams()] Unknown0x07 = 0x07,
+        [ActorCommandParams("dist1", "dist2", "maxFromHome")] WanderWithCollision = 0x08,
+        [ActorCommandParams("dist1", "dist2", "maxFromHome")] WnaderWithoutCollision = 0x09,
+        [ActorCommandParams()] Unknown0x0A = 0x0A,
+        [ActorCommandParams()] Unknown0x0B = 0x0B,
+        [ActorCommandParams("times", "scriptPosition/label")] GotoNTimes = 0x0C,
+        [ActorCommandParams("scriptPosition")] Goto = 0x0D,
+        [ActorCommandParams()] Unknown0x0E = 0x0E,
+        [ActorCommandParams()] Unknown0x0F = 0x0F,
+        [ActorCommandParams()] Done = 0x10,
+        [ActorCommandParams()] Unknown0x11 = 0x11,
+        [ActorCommandParams()] Unknown0x12 = 0x12,
+        [ActorCommandParams()] Unknown0x13 = 0x13,
+        [ActorCommandParams()] Unknown0x14 = 0x14,
+        [ActorCommandParams("property", "value")] SetProperty = 0x15,
+        [ActorCommandParams("property", "value")] ModifyProperty = 0x16,
+        [ActorCommandParams()] Unknown0x17 = 0x17,
+        [ActorCommandParams()] Unknown0x18 = 0x18,
+        [ActorCommandParams()] Unknown0x19 = 0x19,
+        [ActorCommandParams()] Unknown0x1A = 0x1A,
+        [ActorCommandParams()] Unknown0x1B = 0x1B,
+        [ActorCommandParams("animation")] SetSpriteAnimation = 0x1C,
+        [ActorCommandParams()] Unknown0x1D = 0x1D,
+        [ActorCommandParams("music/sound")] PlayMusicOrSound = 0x1E,
+        [ActorCommandParams()] Unknown0x1F = 0x1F,
+        [ActorCommandParams()] Unknown0x20 = 0x20,
+        [ActorCommandParams()] Unknown0x21 = 0x21,
+        [ActorCommandParams("functionAddr")] RunFunction = 0x22,
+        [ActorCommandParams()] Unknown0x23 = 0x23,
+        [ActorCommandParams()] Unknown0x24 = 0x24,
+        [ActorCommandParams()] Unknown0x25 = 0x25,
+        [ActorCommandParams()] Unknown0x26 = 0x26,
+        [ActorCommandParams()] Unknown0x27 = 0x27,
+        [ActorCommandParams()] Unknown0x28 = 0x28,
+        [ActorCommandParams()] Unknown0x29 = 0x29,
+        [ActorCommandParams()] Unknown0x2A = 0x2A,
+        [ActorCommandParams()] Unknown0x2B = 0x2B,
+        [ActorCommandParams()] Unknown0x2C = 0x2C,
+        [ActorCommandParams()] Unknown0x2D = 0x2D,
+        [ActorCommandParams()] Unknown0x2E = 0x2E,
+        [ActorCommandParams()] Unknown0x2F = 0x2F,
+        [ActorCommandParams()] Unknown0x30 = 0x30,
+        [ActorCommandParams()] Unknown0x31 = 0x31,
+        [ActorCommandParams()] Unknown0x32 = 0x32,
+        [ActorCommandParams()] Unknown0x33 = 0x33,
+        [ActorCommandParams()] Unknown0x34 = 0x34,
+        [ActorCommandParams()] Unknown0x35 = 0x35,
+        [ActorCommandParams()] Unknown0x36 = 0x36,
+        [ActorCommandParams()] Unknown0x37 = 0x37,
+        [ActorCommandParams()] Unknown0x38 = 0x38,
+        [ActorCommandParams()] Unknown0x39 = 0x39,
+        [ActorCommandParams()] Unknown0x3A = 0x3A,
+        [ActorCommandParams()] Unknown0x3B = 0x3B,
+        [ActorCommandParams()] Unknown0x3C = 0x3C,
+        [ActorCommandParams()] Unknown0x3D = 0x3D,
+        [ActorCommandParams()] Unknown0x3E = 0x3E,
+        [ActorCommandParams()] Unknown0x3F = 0x3F,
+    }
+}
