@@ -164,7 +164,7 @@ namespace X1_Analyzer {
                 if (i.IfFlagUnsetType != NamedValueType.GameFlag)
                     continue;
 
-                var warpStr = i.Name.PadLeft(19) + " | " + x1File.NameGetterContext.GetName(null, null, i.LoadID, [NamedValueType.Load]) + $" (0x{i.LoadID:X2}) Scene {i.SceneID}";
+                var warpStr = i.Name.PadLeft(19) + " | " + x1File.NameGetterContext.GetName(null, null, i.LoadID, [NamedValueType.Load]) + $" (0x{i.LoadID:X2}) Location {i.LocationID}";
 
                 var flagName = x1File.NameGetterContext.GetName(null, null, i.IfFlagUnset, [NamedValueType.GameFlag]) ?? "";
                 if (flagName != "")

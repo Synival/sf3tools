@@ -42,7 +42,7 @@ namespace SF3.Models.Structs.Shared {
 
         [TableViewModelColumn(displayOrder: 2, displayFormat: "X2")]
         [BulkCopy]
-        public byte SceneID {
+        public byte LocationID {
             // First 5 bits (F800,0000)
             get => (byte) ((RawData & 0xF800_0000u) >> 27);
             set => RawData = (RawData & ~0xF800_0000u) | ((uint) (value << 27) & 0xF800_0000u);

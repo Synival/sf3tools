@@ -24,7 +24,7 @@ namespace SF3.Tests.Models.Files {
             var file = TestCase.Create();
             var table = file.EnterTable;
 
-            Assert.AreEqual(0, table[0].SceneID);
+            Assert.AreEqual(0, table[0].LocationID);
             Assert.AreEqual(0, table[0].XPos);
             Assert.AreEqual(0, table[0].ZPos);
 
@@ -68,12 +68,12 @@ namespace SF3.Tests.Models.Files {
             var file = TestCase.Create();
             var table = file.WarpTable;
 
-            Assert.AreEqual(0, table[0].SceneID);
+            Assert.AreEqual(0, table[0].LocationID);
             Assert.AreEqual(0, table[0].IfFlagUnset);
             Assert.AreEqual(0, table[0].WarpTrigger);
             Assert.AreEqual(0, table[0].LoadID);
 
-            Assert.AreEqual(1, table[1].SceneID);
+            Assert.AreEqual(1, table[1].LocationID);
             Assert.AreEqual(0xFFF, table[1].IfFlagUnset);
             Assert.AreEqual(1, table[1].WarpTrigger);
             Assert.AreEqual(0, table[1].LoadID);

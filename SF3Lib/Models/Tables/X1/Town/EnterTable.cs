@@ -18,7 +18,7 @@ namespace SF3.Models.Tables.X1.Town {
         public override bool Load()
             => Load(
                 (id, address) => new Enter(Data, id, "Enter" + id.ToString("X2"), address),
-                (rows, models) => models.SceneID != 0xFFFF,
+                (rows, models) => models.LocationID != 0xFFFF,
                 false);
     }
 }

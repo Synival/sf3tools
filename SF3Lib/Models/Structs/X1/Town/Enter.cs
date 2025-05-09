@@ -27,7 +27,7 @@ namespace SF3.Models.Structs.X1.Town {
 
         [TableViewModelColumn(displayOrder: 0, displayFormat: "X2")]
         [BulkCopy]
-        public int SceneID {
+        public int LocationID {
             get => Data.GetWord(_sceneNumberAddr);
             set => Data.SetWord(_sceneNumberAddr, value);
         }
