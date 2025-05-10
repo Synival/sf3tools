@@ -315,8 +315,8 @@
     <item value="0x0138" name="" />
     <item value="0x0139" name="" />
     <item value="0x013A" name="" />
-    <item value="0x013B" name="Camera tilt when rotating" />
-    <item value="0x013C" name="Camera slow when rotating" />
+    <item value="0x013B" name="" />
+    <item value="0x013C" name="Apply matrices when rendering actors" />
     <item value="0x013D" name="" />
     <item value="0x013E" name="?" />
     <item value="0x013F" name="Something to do with Background Layer (i.e. reenables the boat model in Battle 301)" />
@@ -1132,10 +1132,10 @@
     <item value="0x0469" name="Zero brings orb to Medion" />
     <item value="0x046A" name="Horst Recruited" />
     <item value="0x046B" name="" />
-    <item value="0x046C" name="" />
-    <item value="0x046D" name="(Synchronicty point)" />
+    <item value="0x046C" name="Storich Cutscene Played" />
+    <item value="0x046D" name="Penn Recruited" />
     <item value="0x046E" name="" />
-    <item value="0x046F" name="(Synchronicty point)" />
+    <item value="0x046F" name="Penn Hatched" />
     <item value="0x0470" name="Far barrel on pier" />
     <item value="0x0471" name="Bottom barrel by monk" />
     <item value="0x0472" name="Top barrel by monk" />
@@ -1168,7 +1168,7 @@
     <item value="0x048D" name="" />
     <item value="0x048E" name="" />
     <item value="0x048F" name="" />
-    <item value="0x0490" name="" />
+    <item value="0x0490" name="Battle 117 Started" />
     <item value="0x0491" name="" />
     <item value="0x0492" name="" />
     <item value="0x0493" name="" />
