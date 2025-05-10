@@ -237,6 +237,13 @@ namespace SF3.Models.Files.X1 {
             var scriptDataByAddr = new Dictionary<uint, uint[]>();
             var accuracyByAddr = new Dictionary<uint, float>();
 
+            string HexStr(uint value, string format) {
+                if ((value & 0x80000000u) != 0)
+                    return "-0x" + (0x80000000u - (value & 0x7FFFFFFFu)).ToString(format);
+                else
+                    return "0x" + value.ToString(format);
+            }
+
             foreach (var scriptAddr in scriptAddrs) {
                 var pos = 0;
                 var scriptData = new List<uint>();
@@ -280,11 +287,11 @@ namespace SF3.Models.Files.X1 {
                             }
 
                             case 0x01: note = "Wait until at move target"; break;
-                            case 0x02: note = $"Set position to (0x{param[0]:X2}, 0x{param[1]:X2}, 0x{param[2]:X2})"; break;
-                            case 0x03: note = $"Start moving to (0x{param[0]:X2}, 0x{param[1]:X2}, 0x{param[2]:X2})"; break;
+                            case 0x02: note = $"Set position to ({HexStr(param[0], "X2")}, {HexStr(param[1], "X2")}, {HexStr(param[2], "X2")})"; break;
+                            case 0x03: note = $"Set target position to ({HexStr(param[0], "X2")}, {HexStr(param[1], "X2")}, {HexStr(param[2], "X2")})"; break;
 
                             case 0x04: {
-                                note = $"0x04 (p1=0x{param[0]:X8}, p2=0x{param[1]:X8}, p3=0x{param[2]:X8})";
+                                note = $"Modify target position by ({HexStr(param[0], "X2")}, {HexStr(param[1], "X2")}, {HexStr(param[2], "X2")})";
                                 if (param[2] == 0x10) // common false positive
                                     commandsKnown--;
                                 break;
@@ -312,8 +319,19 @@ namespace SF3.Models.Files.X1 {
                                 break;
                             }
 
-                            case 0x15: note = $"Set property 0x{param[0]:X2} to 0x{param[1]:X8}"; break;
-                            case 0x16: note = $"Modify property 0x{param[0]:X2} by 0x{(int) param[1]:X4}"; break;
+                            case 0x15: {
+                                var property = (ActorPropertyCommandType) param[0];
+                                var propertyName = EnumHelpers.EnumNameOr(property, p => $"Unknown0x{(int) p:X2}");
+                                note = $"Set {propertyName} to {HexStr(param[1], "X2")}";
+                                break;
+                            }
+
+                            case 0x16: {
+                                var property = (ActorPropertyCommandType) param[0];
+                                var propertyName = EnumHelpers.EnumNameOr(property, p => $"Unknown0x{(int) p:X2}");
+                                note = $"Modify {propertyName} by {HexStr(param[1], "X2")}"; break;
+                            }
+
                             case 0x1C:
                                 note = $"Set animation to 0x{param[0]:X2}";
                                 break;
