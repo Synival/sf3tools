@@ -186,100 +186,227 @@ namespace SF3.Models.Files.X1 {
             if (tileMovementAddress >= 0)
                 tables.Add(TileMovementTable = TileMovementTable.Create(Data, "TileMovement", tileMovementAddress, true));
 
-            // TODO: this is all very temporary!! replace with objects!!
             ScriptsByAddress = new Dictionary<uint, string>();
+
+            var scriptAddrs = new HashSet<uint>();
+            var knownScriptAddrs = new HashSet<uint>();
+            var maybeScriptAddrs = new HashSet<uint>();
+
+            // Add known references to scripts
             if (NpcTable != null) {
-                var scriptAddrs = NpcTable
-                    .Select(x => x.ScriptOffset - sub)
+                var addrs = NpcTable
+                    .Select(x => (uint) (x.ScriptOffset))
                     .Where(x => x >= 0)
                     .OrderBy(x => x)
-                    .Distinct();
+                    .Distinct()
+                    .ToArray();
 
-                foreach (var scriptAddr in scriptAddrs) {
-                    System.Diagnostics.Debug.WriteLine($"0x{(scriptAddr + sub):X8}:");
-
-                    var pos = 0;
-                    var scriptData = new List<uint>();
-
-                    uint ReadInt() {
-                        var addr = scriptAddr + pos * 4;
-                        var i = (addr + 3 >= Data.Length) ? 0xFFFFFFFFu : (uint) Data.GetDouble(addr);
-                        pos++;
-                        scriptData.Add(i);
-                        return i;
-                    };
-
-                    bool done = false;
-                    var script = "";
-
-                    while (!done && pos < 200) {
-                        int lastPos = pos;
-
-                        var command = ReadInt();
-                        string note = "???";
-
-                        if (Enum.IsDefined(typeof(ActorCommandType), (int) command)) {
-                            var commandType = (ActorCommandType) command;
-                            var commandParams = EnumHelpers.GetAttributeOfType<ActorCommandParams>(commandType).Params;
-
-                            var param = commandParams.Select(x => ReadInt()).ToArray();
-                            switch (command) {
-                                case 0x00: note = $"Wait {param[0]} frame(s)"; break;
-                                case 0x01: note = "Wait until at move target"; break;
-                                case 0x03: note = $"Start moving to (0x{param[0]:X2}, 0x{param[1]:X2}, 0x{param[2]:X2})"; break;
-                                case 0x06: note = $"Start moving to relative angle 0x{(short) param[0]:X4}, ahead 0x{param[1]}"; break;
-                                case 0x08: note = $"Wander between 0x{param[0]:X2} and 0x{param[1]:X2} units, max distance 0x{param[2]:X2} from home"; break;
-                                case 0x09: note = $"Wander (ignoring walls) between 0x{param[0]:X2} and 0x{param[1]:X2} units, max distance 0x{param[2]:X2} from home"; break;
-                                case 0x0B: note = "Move towards target actor"; break;
-
-                                case 0x0C: {
-                                    done = (param[0] == 0xFFFF);
-                                    note = $"Goto 0x{param[1]:X2} " + (done ? "forever" : $"{param[0]} times");
-                                    break;
-                                }
-
-                                case 0x0D: {
-                                    done = (param[0] <= pos);
-                                    note = $"Goto 0x{param[0]:X2})";
-                                    break;
-                                }
-
-                                case 0x10: {
-                                    note = "Done";
-                                    done = true;
-                                    break;
-                                }
-
-                                case 0x15: note = $"Set param 0x{param[0]:X2} to 0x{param[1]:X8}"; break;
-                                case 0x16: note = $"Modify param 0x{param[0]:X2} by 0x{(int) param[1]:X4}"; break;
-                                case 0x1C:
-                                    note = $"Set animation to 0x{param[0]:X2}?";
-                                    break;
-
-                                case 0x1E: note = $"Play music/sound 0x${param[0]:X3}"; break;
-                                case 0x22: note = $"Execute function 0x{param[0]:X8}"; break;
-
-                                default:
-                                    break;
-                            }
-                        }
-                        else if (command >= 0x80000000u) {
-                            note = $"(label 0x{(command & 0x0FFFFFFF):X7})";
-                        }
-
-                        for (int i = lastPos; i < pos; i++) {
-                            script += (i == lastPos) ? "" : " ";
-                            script += $"{(scriptData[i]):X8}";
-                        }
-
-                        var paramCount = (pos - lastPos);
-                        var paramsMissing = (paramCount < 4) ? (4 - paramCount) : 0;
-                        script += new string(' ', paramsMissing * 9) + $" ; {note}\r\n";
-                    }
-
-                    ScriptsByAddress[(uint) (scriptAddr + sub)] = script;
+                foreach (var addr in addrs) {
+                    scriptAddrs.Add(addr);
+                    knownScriptAddrs.Add(addr);
                 }
             }
+
+            // Look for anything that potentially could be a script (filter out obvious negatives)
+            var posMax = Data.Length - 3;
+            var ptrMax = sub + posMax;
+            for (uint pos = 0; pos < posMax; pos += 4) {
+                var ptr = (uint) (pos + sub);
+                if (knownScriptAddrs.Contains(ptr))
+                    continue;
+
+                var valuePos = (uint) (ptr - sub);
+                var value = (uint) Data.GetDouble((int) valuePos);
+                if (value >= 0x00000000 && value < 0x0000002E) {
+                    scriptAddrs.Add(ptr);
+                    maybeScriptAddrs.Add(ptr);
+                }
+                else if (value >= 0x80000000u && value < 0x80100000u) {
+                    valuePos += 4;
+                    if (valuePos < posMax) {
+                        value = (uint) Data.GetDouble((int) valuePos);
+                        if (value >= 0x00000000 && value < 0x0000002E) {
+                            scriptAddrs.Add(ptr);
+                            maybeScriptAddrs.Add(ptr);
+                        }
+                    }
+                }
+            }
+
+            // Start gathering script data, and measure their accuracy along the way.
+            var scriptDataByAddr = new Dictionary<uint, uint[]>();
+            var accuracyByAddr = new Dictionary<uint, float>();
+
+            foreach (var scriptAddr in scriptAddrs) {
+                var pos = 0;
+                var scriptData = new List<uint>();
+
+                uint ReadInt() {
+                    var addr = (int) (scriptAddr - sub + pos * 4);
+                    var i = (addr + 3 >= Data.Length) ? 0xFFFFFFFFu : (uint) Data.GetDouble(addr);
+                    pos++;
+                    scriptData.Add(i);
+                    return i;
+                };
+
+                bool done = false;
+                var script = "";
+                int commandsRead = 0;
+                int commandsKnown = 0;
+
+                // Reads commands until we can't anymore.
+                const int c_maxScriptLength = 0x200;
+                while (!done && pos < c_maxScriptLength) {
+                    int lastPos = pos;
+
+                    var command = ReadInt();
+                    commandsRead++;
+                    string note = "???";
+
+                    // Get known commands
+                    if (Enum.IsDefined(typeof(ActorCommandType), (int) command)) {
+                        var commandType = (ActorCommandType) command;
+                        var commandParams = EnumHelpers.GetAttributeOfType<ActorCommandParams>(commandType).Params;
+                        commandsKnown++;
+
+                        // Add commands for known commands.
+                        var param = commandParams.Select(x => ReadInt()).ToArray();
+                        switch (command) {
+                            case 0x00: {
+                                note = $"Wait {param[0]} frame(s)";
+                                if (param[0] == 0x0000 || param[0] >= 1000) // Waiting 0 or thousands of frames probably isn't a thing
+                                    commandsKnown--;
+                                break;
+                            }
+
+                            case 0x01: note = "Wait until at move target"; break;
+                            case 0x02: note = $"Set position to (0x{param[0]:X2}, 0x{param[1]:X2}, 0x{param[2]:X2})"; break;
+                            case 0x03: note = $"Start moving to (0x{param[0]:X2}, 0x{param[1]:X2}, 0x{param[2]:X2})"; break;
+
+                            case 0x04: {
+                                note = $"0x04 (p1=0x{param[0]:X8}, p2=0x{param[1]:X8}, p3=0x{param[2]:X8})";
+                                if (param[2] == 0x10) // common false positive
+                                    commandsKnown--;
+                                break;
+                            }
+                            case 0x06: note = $"Start moving to relative angle 0x{(short) param[0]:X4}, ahead 0x{param[1]}"; break;
+                            case 0x08: note = $"Wander between 0x{param[0]:X2} and 0x{param[1]:X2} units, max distance 0x{param[2]:X2} from home"; break;
+                            case 0x09: note = $"Wander (ignoring walls) between 0x{param[0]:X2} and 0x{param[1]:X2} units, max distance 0x{param[2]:X2} from home"; break;
+                            case 0x0B: note = "Move towards target actor"; break;
+
+                            case 0x0C: {
+                                done = (param[0] == 0xFFFF);
+                                note = $"Loop to 0x{param[1]:X2} " + (done ? "forever" : $"{param[0]} time(s)");
+                                break;
+                            }
+
+                            case 0x0D: {
+                                done = (param[0] <= pos);
+                                note = $"Goto 0x{param[0]:X2}";
+                                break;
+                            }
+
+                            case 0x10: {
+                                note = "Done";
+                                done = true;
+                                break;
+                            }
+
+                            case 0x15: note = $"Set property 0x{param[0]:X2} to 0x{param[1]:X8}"; break;
+                            case 0x16: note = $"Modify property 0x{param[0]:X2} by 0x{(int) param[1]:X4}"; break;
+                            case 0x1C:
+                                note = $"Set animation to 0x{param[0]:X2}";
+                                break;
+
+                            case 0x1E: note = $"Play music/sound 0x{param[0]:X3}"; break;
+                            case 0x22: note = $"Execute function 0x{param[0]:X8}"; break;
+
+                            default:
+                                commandsKnown--;
+                                break;
+                        }
+                    }
+                    // Get labels
+                    else if (command >= 0x80000000u && command <= 0x80100000u) {
+                        note = $"(label 0x{(command & 0x0FFFFFFF):X7})";
+                        commandsKnown++;
+                    }
+
+                    // Add text to the script
+                    for (int i = lastPos; i < pos; i++) {
+                        script += (i == lastPos) ? "" : " ";
+                        script += $"{(scriptData[i]):X8}";
+                    }
+
+                    var paramCount = (pos - lastPos);
+                    var paramsMissing = (paramCount < 4) ? (4 - paramCount) : 0;
+                    script += new string(' ', paramsMissing * 9) + $" ; {note}\r\n";
+                }
+
+                // Don't add scripts that overflowed.
+                if (pos >= c_maxScriptLength) {
+                    knownScriptAddrs.Remove(scriptAddr);
+                    maybeScriptAddrs.Remove(scriptAddr);
+                    scriptAddrs.Remove(scriptAddr);
+                    continue;
+                }
+
+                scriptDataByAddr[scriptAddr] = scriptData.ToArray();
+                ScriptsByAddress[scriptAddr] = script;
+                accuracyByAddr[scriptAddr] = (float) commandsKnown / commandsRead;
+            }
+
+            // Keep track of all the bytes known as scripts.
+            var dataScriptBytes = new bool[Data.Length / 4];
+            foreach (var addr in knownScriptAddrs) {
+                var pos = (uint) (addr - sub) / 4;
+                for (int i = 0; i < scriptDataByAddr[addr].Length; i++)
+                    dataScriptBytes[pos++] = true;
+            }
+
+            // Ugly brute-force method to keep adding the most accurate scripts to the bool and elimate overlapping ones
+            var overlappingScriptsByAddr = new HashSet<uint>();
+            var probablyScriptsByAddr = new HashSet<uint>();
+
+            while (maybeScriptAddrs.Count > 0) {
+                // Remove 'maybe' scripts that intersect with 'knowns'.
+                var maybeIterAddrs = new HashSet<uint>(maybeScriptAddrs);
+                foreach (var addr in maybeIterAddrs) {
+                    var pos = (uint) (addr - sub) / 4;
+                    for (int i = 0; i < scriptDataByAddr[addr].Length; i++) {
+                        if (dataScriptBytes[pos++]) {
+                            overlappingScriptsByAddr.Add(addr);
+                            maybeScriptAddrs.Remove(addr);
+                            break;
+                        }
+                    }
+                }
+
+                // Put the most accurate and longest maybe into the 'known' camp.
+                if (maybeScriptAddrs.Count > 0) {
+                    var mostAccurateMaybe = maybeScriptAddrs
+                        .OrderByDescending(x => accuracyByAddr[x])
+                        .ThenByDescending(x => scriptDataByAddr[x].Length)
+                        .First();
+
+                    maybeScriptAddrs.Remove(mostAccurateMaybe);
+                    probablyScriptsByAddr.Add(mostAccurateMaybe);
+
+                    var pos = (uint) (mostAccurateMaybe - sub) / 4;
+                    for (int i = 0; i < scriptDataByAddr[mostAccurateMaybe].Length; i++)
+                        dataScriptBytes[pos++] = true;
+                }
+            }
+
+            // Filter out all the ones we don't think are real
+            ScriptsByAddress = ScriptsByAddress
+                .Where(x => !overlappingScriptsByAddr.Contains(x.Key))
+                .OrderBy(x => x.Key)
+                .ToDictionary(x => x.Key, x => x.Value);
+
+            var scriptsWithQuestionMarks = ScriptsByAddress.Where(x => x.Value.Contains("???")).ToArray();
+            if (scriptsWithQuestionMarks.Length > 0)
+                ;
 
             return tables;
         }
