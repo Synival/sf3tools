@@ -5,6 +5,7 @@ using CommonLib.Attributes;
 using CommonLib.NamedValues;
 using CommonLib.Utils;
 using SF3.ByteData;
+using SF3.Data;
 using SF3.Models.Tables;
 using SF3.Models.Tables.Shared;
 using SF3.Models.Tables.X1;
@@ -445,9 +446,17 @@ namespace SF3.Models.Files.X1 {
                 .ThenBy(x => x.Key)
                 .ToDictionary(x => x.Key, x => x.Value);
 
-            var scriptsWithQuestionMarks = ScriptsByAddress.Where(x => x.Value.Contains("???")).ToArray();
-            if (scriptsWithQuestionMarks.Length > 0)
-                ;
+            // Add names to common scripts that have been identified
+            foreach (var addr in ScriptsByAddress.Keys) {
+                var data = scriptDataByAddr[addr];
+                var matchingData = KnownScripts.AllKnownScripts.Cast<KeyValuePair<string, uint[]>?>().FirstOrDefault(x => Enumerable.SequenceEqual(data, x.Value.Value));
+                if (matchingData != null) {
+                    if (!ScriptNameByAddress.ContainsKey(addr))
+                        ScriptNameByAddress[addr] = $"({matchingData.Value.Key})";
+                    else
+                        ScriptNameByAddress[addr] += $" ({matchingData.Value.Key})";
+                }
+            }
 
             return tables;
         }
