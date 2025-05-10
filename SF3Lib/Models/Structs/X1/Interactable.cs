@@ -442,7 +442,7 @@ namespace SF3.Models.Structs.X1 {
                                 Action = (uint) value;
                                 break;
                             default:
-                                Action = (uint) ((Action & ~0x00FF_FFFFu) | (value & 0x00FF_FFFF));
+                                Action = (uint) ((Action & ~0x00FF_FFFFu) | (value & 0x00FF_FFFFu));
                                 break;
                         }
                         break;
@@ -458,7 +458,7 @@ namespace SF3.Models.Structs.X1 {
                                         Action = (uint) value;
                                         break;
                                     default:
-                                        Action = (uint) ((Action & ~0x00FF_FFFFu) | (value & 0x00FF_FFFF));
+                                        Action = (uint) ((Action & ~0x00FF_FFFFu) | (value & 0x00FF_FFFFu));
                                         break;
                                 }
                                 break;
@@ -490,7 +490,7 @@ namespace SF3.Models.Structs.X1 {
                     case NamedValueType.EventActionInspect:
                         switch (ActionParam2Type) {
                             case NamedValueType.EventActionInspectFlags:
-                                Action = (uint) ((Action & ~0xFFFF) | (value & 0xFFFF));
+                                Action = (uint) ((Action & ~0xFFFF) | (value & 0xFFFFu));
                                 break;
                         }
                         break;
