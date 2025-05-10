@@ -22,8 +22,8 @@ namespace CommonLib.Utils {
         {
             var type = val.GetType();
             var memberInfo = type.GetMember(val.ToString());
-            var attributes = memberInfo[0].GetCustomAttributes(typeof(T), false);
-            return (attributes.Length > 0) ? (T) attributes[0] : null;
+            var attributes = (memberInfo.Length > 0) ? memberInfo[0].GetCustomAttributes(typeof(T), false) : null;
+            return (attributes?.Length > 0) ? (T) attributes[0] : null;
         }
     } 
 }

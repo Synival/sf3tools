@@ -12,6 +12,7 @@ using SF3.Models.Tables.X1.Battle;
 using SF3.Models.Tables.X1.Town;
 using SF3.Types;
 using static CommonLib.Utils.ResourceUtils;
+using static CommonLib.Utils.ValueUtils;
 
 namespace SF3.Models.Files.X1 {
     public class X1_File : ScenarioTableFile, IX1_File {
@@ -237,13 +238,6 @@ namespace SF3.Models.Files.X1 {
             var scriptDataByAddr = new Dictionary<uint, uint[]>();
             var accuracyByAddr = new Dictionary<uint, float>();
 
-            string HexStr(uint value, string format) {
-                if ((value & 0x80000000u) != 0)
-                    return "-0x" + (0x80000000u - (value & 0x7FFFFFFFu)).ToString(format);
-                else
-                    return "0x" + value.ToString(format);
-            }
-
             foreach (var scriptAddr in scriptAddrs) {
                 var pos = 0;
                 var scriptData = new List<uint>();
@@ -263,8 +257,10 @@ namespace SF3.Models.Files.X1 {
 
                 // Reads commands until we can't anymore.
                 const int c_maxScriptLength = 0x200;
+                bool exceeded = false;
+
                 while (!done && pos < c_maxScriptLength) {
-                    int lastPos = pos;
+                    int commandPos = pos;
 
                     var command = ReadInt();
                     commandsRead++;
@@ -287,11 +283,11 @@ namespace SF3.Models.Files.X1 {
                             }
 
                             case 0x01: note = "Wait until at move target"; break;
-                            case 0x02: note = $"Set position to ({HexStr(param[0], "X2")}, {HexStr(param[1], "X2")}, {HexStr(param[2], "X2")})"; break;
-                            case 0x03: note = $"Set target position to ({HexStr(param[0], "X2")}, {HexStr(param[1], "X2")}, {HexStr(param[2], "X2")})"; break;
+                            case 0x02: note = $"Set position to ({SignedHexStr(param[0], "X2")}, {SignedHexStr(param[1], "X2")}, {SignedHexStr(param[2], "X2")})"; break;
+                            case 0x03: note = $"Set target position to ({SignedHexStr(param[0], "X2")}, {SignedHexStr(param[1], "X2")}, {SignedHexStr(param[2], "X2")})"; break;
 
                             case 0x04: {
-                                note = $"Modify target position by ({HexStr(param[0], "X2")}, {HexStr(param[1], "X2")}, {HexStr(param[2], "X2")})";
+                                note = $"Modify target position by ({SignedHexStr(param[0], "X2")}, {SignedHexStr(param[1], "X2")}, {SignedHexStr(param[2], "X2")})";
                                 if (param[2] == 0x10) // common false positive
                                     commandsKnown--;
                                 break;
@@ -322,14 +318,14 @@ namespace SF3.Models.Files.X1 {
                             case 0x15: {
                                 var property = (ActorPropertyCommandType) param[0];
                                 var propertyName = EnumHelpers.EnumNameOr(property, p => $"Unknown0x{(int) p:X2}");
-                                note = $"Set {propertyName} to {HexStr(param[1], "X2")}";
+                                note = $"Set {propertyName} to {SignedHexStr(param[1], "X2")}";
                                 break;
                             }
 
                             case 0x16: {
                                 var property = (ActorPropertyCommandType) param[0];
                                 var propertyName = EnumHelpers.EnumNameOr(property, p => $"Unknown0x{(int) p:X2}");
-                                note = $"Modify {propertyName} by {HexStr(param[1], "X2")}"; break;
+                                note = $"Modify {propertyName} by {SignedHexStr(param[1], "X2")}"; break;
                             }
 
                             case 0x1C:
@@ -351,18 +347,23 @@ namespace SF3.Models.Files.X1 {
                     }
 
                     // Add text to the script
-                    for (int i = lastPos; i < pos; i++) {
-                        script += (i == lastPos) ? "" : " ";
+                    for (int i = commandPos; i < pos; i++) {
+                        script += (i == commandPos) ? "" : " ";
                         script += $"{(scriptData[i]):X8}";
                     }
 
-                    var paramCount = (pos - lastPos);
+                    var paramCount = (pos - commandPos);
                     var paramsMissing = (paramCount < 4) ? (4 - paramCount) : 0;
                     script += new string(' ', paramsMissing * 9) + $" ; {note}\r\n";
+
+                    if ((int) (scriptAddr - sub) + (pos * 4) - 1 >= Data.Length) {
+                        exceeded = true;
+                        break;
+                    }
                 }
 
                 // Don't add scripts that overflowed.
-                if (pos >= c_maxScriptLength) {
+                if (pos >= c_maxScriptLength || exceeded == true) {
                     knownScriptAddrs.Remove(scriptAddr);
                     maybeScriptAddrs.Remove(scriptAddr);
                     scriptAddrs.Remove(scriptAddr);

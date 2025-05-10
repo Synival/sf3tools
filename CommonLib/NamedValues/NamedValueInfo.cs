@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
-using static CommonLib.Utils.Utils;
+using static CommonLib.Utils.ValueUtils;
 
 namespace CommonLib.NamedValues {
     /// <summary>

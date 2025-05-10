@@ -4,7 +4,7 @@ using System.Linq;
 using System.Reflection;
 using CommonLib.Attributes;
 using CommonLib.NamedValues;
-using static CommonLib.Utils.Utils;
+using static CommonLib.Utils.ValueUtils;
 
 namespace CommonLib.Extensions {
     public static partial class ObjectExtensions {
