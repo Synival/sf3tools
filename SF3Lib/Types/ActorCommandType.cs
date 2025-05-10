@@ -12,9 +12,9 @@ namespace SF3.Types {
     public enum ActorCommandType {
         [ActorCommandParams("frames")] Wait = 0x00,
         [ActorCommandParams()] WaitUntilAtTargetPosition = 0x01,
-        [ActorCommandParams("xPos", "yPos", "zPos")] SetPosition = 0x02,
-        [ActorCommandParams("xPos", "yPos", "zPos")] SetTargetPosition = 0x03,
-        [ActorCommandParams("xPos", "yPos", "zPos")] ModifyTargetPosition = 0x04,
+        [ActorCommandParams("posX", "posY", "posZ")] SetPosition = 0x02,
+        [ActorCommandParams("posX", "posY", "posZ")] SetTargetPosition = 0x03,
+        [ActorCommandParams("posX", "posY", "posZ")] ModifyTargetPosition = 0x04,
         [ActorCommandParams("unknown1", "unknown2", "unknown3")] UnknownMovementCommand0x05 = 0x05,
         [ActorCommandParams("turnAngle", "distance")] SetTargetPositionAhead = 0x06,
         [ActorCommandParams("angle", "distance")] SetTargetPositionInDirection = 0x07,
