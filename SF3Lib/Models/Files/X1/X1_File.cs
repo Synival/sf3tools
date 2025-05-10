@@ -188,10 +188,13 @@ namespace SF3.Models.Files.X1 {
                 tables.Add(TileMovementTable = TileMovementTable.Create(Data, "TileMovement", tileMovementAddress, true));
 
             ScriptsByAddress = new Dictionary<uint, string>();
+            ScriptNameByAddress = new Dictionary<uint, string>();
 
             var scriptAddrs = new HashSet<uint>();
             var knownScriptAddrs = new HashSet<uint>();
             var maybeScriptAddrs = new HashSet<uint>();
+            var probablyScriptAddrs = new HashSet<uint>();
+            var pointers = new HashSet<uint>();
 
             // Add known references to scripts
             if (NpcTable != null) {
@@ -205,6 +208,7 @@ namespace SF3.Models.Files.X1 {
                 foreach (var addr in addrs) {
                     scriptAddrs.Add(addr);
                     knownScriptAddrs.Add(addr);
+                    ScriptNameByAddress.Add(addr, "NPC Script");
                 }
             }
 
@@ -212,26 +216,29 @@ namespace SF3.Models.Files.X1 {
             var posMax = Data.Length - 3;
             var ptrMax = sub + posMax;
             for (uint pos = 0; pos < posMax; pos += 4) {
-                var ptr = (uint) (pos + sub);
-                if (knownScriptAddrs.Contains(ptr))
+                var posAsPtr = (uint) (pos + sub);
+                if (knownScriptAddrs.Contains(posAsPtr))
                     continue;
 
-                var valuePos = (uint) (ptr - sub);
+                var valuePos = pos;
                 var value = (uint) Data.GetDouble((int) valuePos);
+
                 if (value >= 0x00000000 && value < 0x0000002E) {
-                    scriptAddrs.Add(ptr);
-                    maybeScriptAddrs.Add(ptr);
+                    scriptAddrs.Add(posAsPtr);
+                    maybeScriptAddrs.Add(posAsPtr);
                 }
                 else if (value >= 0x80000000u && value < 0x80100000u) {
                     valuePos += 4;
                     if (valuePos < posMax) {
                         value = (uint) Data.GetDouble((int) valuePos);
                         if (value >= 0x00000000 && value < 0x0000002E) {
-                            scriptAddrs.Add(ptr);
-                            maybeScriptAddrs.Add(ptr);
+                            scriptAddrs.Add(posAsPtr);
+                            maybeScriptAddrs.Add(posAsPtr);
                         }
                     }
                 }
+                else if (value >= sub && value < sub + Data.Length - 3)
+                    pointers.Add(value);
             }
 
             // Start gathering script data, and measure their accuracy along the way.
@@ -372,20 +379,34 @@ namespace SF3.Models.Files.X1 {
 
                 scriptDataByAddr[scriptAddr] = scriptData.ToArray();
                 ScriptsByAddress[scriptAddr] = script;
-                accuracyByAddr[scriptAddr] = (float) commandsKnown / commandsRead;
+
+                var accuracy = (float) commandsKnown / commandsRead;
+                accuracyByAddr[scriptAddr] = accuracy;
+
+                // If this is definitely a script, was originally thought to *maybe* be a script, and has a pointer to it somewhere,
+                // then let's just consider this a script. Move it to the correct set.
+                if (accuracy == 1.00f && pointers.Contains(scriptAddr) && maybeScriptAddrs.Contains(scriptAddr)) {
+                    maybeScriptAddrs.Remove(scriptAddr);
+                    probablyScriptAddrs.Add(scriptAddr);
+                    ScriptNameByAddress[scriptAddr] = "Has Pointer";
+                }
             }
 
-            // Keep track of all the bytes known as scripts.
             var dataScriptBytes = new bool[Data.Length / 4];
-            foreach (var addr in knownScriptAddrs) {
+            void MarkScriptBytes(uint addr) {
                 var pos = (uint) (addr - sub) / 4;
                 for (int i = 0; i < scriptDataByAddr[addr].Length; i++)
                     dataScriptBytes[pos++] = true;
             }
 
+            // Keep track of all the bytes known as scripts.
+            foreach (var addr in knownScriptAddrs)
+                MarkScriptBytes(addr);
+            foreach (var addr in probablyScriptAddrs)
+                MarkScriptBytes(addr);
+
             // Ugly brute-force method to keep adding the most accurate scripts to the bool and elimate overlapping ones
             var overlappingScriptsByAddr = new HashSet<uint>();
-            var probablyScriptsByAddr = new HashSet<uint>();
 
             while (maybeScriptAddrs.Count > 0) {
                 // Remove 'maybe' scripts that intersect with 'knowns'.
@@ -409,18 +430,19 @@ namespace SF3.Models.Files.X1 {
                         .First();
 
                     maybeScriptAddrs.Remove(mostAccurateMaybe);
-                    probablyScriptsByAddr.Add(mostAccurateMaybe);
+                    probablyScriptAddrs.Add(mostAccurateMaybe);
 
-                    var pos = (uint) (mostAccurateMaybe - sub) / 4;
-                    for (int i = 0; i < scriptDataByAddr[mostAccurateMaybe].Length; i++)
-                        dataScriptBytes[pos++] = true;
+                    MarkScriptBytes(mostAccurateMaybe);
+                    ScriptNameByAddress[mostAccurateMaybe] = "Looks Like Script";
                 }
             }
 
             // Filter out all the ones we don't think are real
             ScriptsByAddress = ScriptsByAddress
                 .Where(x => !overlappingScriptsByAddr.Contains(x.Key))
-                .OrderBy(x => x.Key)
+                .OrderByDescending(x => knownScriptAddrs.Contains(x.Key))
+                .ThenByDescending(x => pointers.Contains(x.Key))
+                .ThenBy(x => x.Key)
                 .ToDictionary(x => x.Key, x => x.Value);
 
             var scriptsWithQuestionMarks = ScriptsByAddress.Where(x => x.Value.Contains("???")).ToArray();
@@ -468,5 +490,6 @@ namespace SF3.Models.Files.X1 {
         public CharacterTargetUnknownTable[] CharacterTargetUnknownTables { get; private set; }
 
         public Dictionary<uint, string> ScriptsByAddress { get; private set; }
+        public Dictionary<uint, string> ScriptNameByAddress { get; private set; }
     }
 }

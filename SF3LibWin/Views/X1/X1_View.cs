@@ -32,8 +32,15 @@ namespace SF3.Win.Views.X1 {
                 CreateChild(new TableArrayView<CharacterTargetPriorityTable>("Character Target Priorities", Model.CharacterTargetPriorityTables, ngc));
             if (Model.CharacterTargetUnknownTables != null)
                 CreateChild(new TableArrayView<CharacterTargetUnknownTable>("Unknown 16 Tables", Model.CharacterTargetUnknownTables, ngc));
-            if (Model.ScriptsByAddress?.Count > 0)
-                CreateChild(new TextArrayView("Scripts", Model.ScriptsByAddress.ToDictionary(x => "0x" + x.Key.ToString("X8"), x => x.Value)));
+
+            if (Model.ScriptsByAddress?.Count > 0) {
+                CreateChild(new TextArrayView("Scripts",
+                    Model.ScriptsByAddress.ToDictionary(
+                        x => "0x" + x.Key.ToString("X8") + (Model.ScriptNameByAddress.ContainsKey(x.Key) ? $": {Model.ScriptNameByAddress[x.Key]}" : ""),
+                        x => x.Value
+                    )
+                ));
+            }
 
             if (Model.Battles != null) {
                 foreach (var battleKv in Model.Battles.Where(x => x.Value != null))
