@@ -17,9 +17,9 @@
         ScaleY = 0x0A,
         ScaleZ = 0x0B,
 
-        Unknown0x0C = 0x0C,
-        Unknown0x0D = 0x0D,
-        Unknown0x0E = 0x0E,
+        VelocityX = 0x0C,
+        VelocityY = 0x0D,
+        VelocityZ = 0x0E,
 
         MaxVelocity = 0x0F,
         Acceleration = 0x10,
