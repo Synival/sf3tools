@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace SF3.Data {
+namespace SF3.Actors {
     public class KnownScripts {
         public static Dictionary<string, uint[]> AllKnownScripts = new Dictionary<string, uint[]>() {
             { "Make Unpushable", new uint[] {
@@ -303,7 +303,7 @@ namespace SF3.Data {
                 0x00000016, 0x00000003, 0x00004000,             // Modify RotationY by 0x4000
                 0x00000000, 0x00000001,                         // Wait 1 frame(s)
                 0x0000000C, 0x00000008, 0xC0020000,             // Loop to 0xC0020000 8 time(s)
-                0x00000010, 
+                0x00000010,
             }},
             { "Teleport In (Quick)", new uint[] {
                 0x00000016, 0x00000006, 0xFF600000,             // Modify PositionY by -0xA00000

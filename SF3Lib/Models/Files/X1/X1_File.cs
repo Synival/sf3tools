@@ -5,7 +5,6 @@ using CommonLib.Attributes;
 using CommonLib.NamedValues;
 using CommonLib.Utils;
 using SF3.ByteData;
-using SF3.Data;
 using SF3.Models.Tables;
 using SF3.Models.Tables.Shared;
 using SF3.Models.Tables.X1;
@@ -14,6 +13,7 @@ using SF3.Models.Tables.X1.Town;
 using SF3.Types;
 using static CommonLib.Utils.ResourceUtils;
 using static CommonLib.Utils.ValueUtils;
+using SF3.Actors;
 
 namespace SF3.Models.Files.X1 {
     public class X1_File : ScenarioTableFile, IX1_File {
