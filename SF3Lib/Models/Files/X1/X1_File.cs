@@ -261,14 +261,11 @@ namespace SF3.Models.Files.X1 {
 
             foreach (var scriptAddr in scriptAddrs) {
                 var scriptReader = new ScriptReader(Data, (int) (scriptAddr - sub));
-
-                // Reads commands until we can't anymore.
-                while (scriptReader.Position < c_maxScriptLength && scriptReader.ReadCommand())
-                    { }
+                scriptReader.ReadUntilDoneDetected(c_maxScriptLength);
 
                 // Don't add scripts that overflowed. Also filter out for some very likely false-positives.
                 bool isJustTen = (scriptReader.CommandsRead == 1 && scriptReader.ScriptData[0] == 0x10);
-                var accuracy = (float) scriptReader.ValidCommands / scriptReader.CommandsRead;
+                var accuracy = scriptReader.PercentValidCommands;
                 if (scriptReader.Position >= c_maxScriptLength || scriptReader.Aborted == true || (maybeScriptAddrs.Contains(scriptAddr) && isJustTen) || accuracy < 0.75f) {
                     knownScriptAddrs.Remove(scriptAddr);
                     maybeScriptAddrs.Remove(scriptAddr);
