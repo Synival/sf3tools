@@ -266,9 +266,10 @@ namespace SF3.Models.Files.X1 {
                 // Reads commands until we can't anymore.
                 const int c_maxScriptLength = 0x200;
                 bool exceeded = false;
+                var labelPositions = new Dictionary<uint, int>();
 
                 while (!done && pos < c_maxScriptLength) {
-                    int commandPos = pos;
+                    var commandPos = pos;
 
                     var command = ReadInt();
                     commandsRead++;
@@ -308,7 +309,10 @@ namespace SF3.Models.Files.X1 {
                             case 0x0B: note = "Move towards target actor"; break;
 
                             case 0x0C: {
-                                done = (param[0] == 0xFFFF);
+                                var gotoLower = param[1] & ~0xF0000000u;
+                                var gotoPos = ((param[1] & 0xF0000000u) == 0xC0000000u && (labelPositions.ContainsKey(gotoLower))) ? labelPositions[gotoLower] : (int) param[1];
+
+                                done = (param[0] == 0xFFFF) && gotoPos <= pos;
                                 note = $"Loop to 0x{param[1]:X2} " + (done ? "forever" : $"{param[0]} time(s)");
                                 if (param[0] == 0) // don't trust loops with a count of zero
                                     commandsKnown--;
@@ -316,7 +320,9 @@ namespace SF3.Models.Files.X1 {
                             }
 
                             case 0x0D: {
-                                done = (param[0] <= pos);
+                                var gotoLower = param[0] & ~0xF0000000u;
+                                var gotoPos = ((param[0] & 0xF0000000u) == 0xC0000000u && (labelPositions.ContainsKey(gotoLower))) ? labelPositions[gotoLower] : (int) param[0];
+                                done = (gotoPos <= pos);
                                 note = $"Goto 0x{param[0]:X2}";
                                 break;
                             }
@@ -364,6 +370,7 @@ namespace SF3.Models.Files.X1 {
                         note = $"(label 0x{(command & 0x0FFFFFFF):X7})";
                         if (command != 0x80000000u) // this is unlikely; it's usually (or always?) 0x8001
                             commandsKnown++;
+                        labelPositions[command & ~0x80000000u] = commandPos;
                     }
 
                     // Add text to the script
