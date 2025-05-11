@@ -427,6 +427,14 @@ namespace SF3.Models.Files.X1 {
                     else
                         ScriptNameByAddress[addr] += $" ({name})";
                 }
+
+                // Dump unknown commands to the debug console
+                var scriptLines = ScriptsByAddress[addr].Split(new string[] { "\r\n" }, StringSplitOptions.None);
+                var scriptCommands = scriptLines.Where(x => x.Contains("// ")).Select(x => x.Substring(x.IndexOf("// ") + 3)).ToList();
+                if (scriptCommands.Any(x => x.StartsWith("Unknown"))) {
+                    System.Diagnostics.Debug.WriteLine($"Unknown command used at 0x{addr:X8}:");
+                    System.Diagnostics.Debug.WriteLine(ScriptsByAddress[addr]);
+                }
             }
         }
 
