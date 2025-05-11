@@ -287,6 +287,8 @@ namespace SF3.Models.Files.X1 {
                                 note = $"Wait {param[0]} frame(s)";
                                 if (param[0] == 0x0000 || param[0] >= 1000) // Waiting 0 or thousands of frames probably isn't a thing
                                     commandsKnown--;
+                                else if (commandsRead == 1) // don't trust scripts that script with a 'wait' command
+                                    commandsKnown--;
                                 break;
                             }
 
@@ -308,6 +310,8 @@ namespace SF3.Models.Files.X1 {
                             case 0x0C: {
                                 done = (param[0] == 0xFFFF);
                                 note = $"Loop to 0x{param[1]:X2} " + (done ? "forever" : $"{param[0]} time(s)");
+                                if (param[0] == 0) // don't trust loops with a count of zero
+                                    commandsKnown--;
                                 break;
                             }
 
@@ -336,33 +340,41 @@ namespace SF3.Models.Files.X1 {
                                 note = $"Modify {propertyName} by {SignedHexStr(param[1], "X2")}"; break;
                             }
 
+                            case 0x1B: note = "Delete Self"; break;
+
                             case 0x1C:
                                 note = $"Set animation to 0x{param[0]:X2}";
                                 break;
 
-                            case 0x1E: note = $"Play music/sound 0x{param[0]:X3}"; break;
+                            case 0x1E: {
+                                note = $"Play music/sound 0x{param[0]:X3}";
+                                if (param[0] >= 0x1000) // probably not actually this command
+                                    commandsKnown--;
+                                break;
+                            }
+
                             case 0x22: note = $"Execute function 0x{param[0]:X8}"; break;
 
                             default:
-                                commandsKnown--;
                                 break;
                         }
                     }
                     // Get labels
                     else if (command >= 0x80000000u && command <= 0x80100000u) {
                         note = $"(label 0x{(command & 0x0FFFFFFF):X7})";
-                        commandsKnown++;
+                        if (command != 0x80000000u) // this is unlikely; it's usually (or always?) 0x8001
+                            commandsKnown++;
                     }
 
                     // Add text to the script
                     for (int i = commandPos; i < pos; i++) {
                         script += (i == commandPos) ? "" : " ";
-                        script += $"{(scriptData[i]):X8}";
+                        script += $"0x{(scriptData[i]):X8},";
                     }
 
                     var paramCount = (pos - commandPos);
                     var paramsMissing = (paramCount < 4) ? (4 - paramCount) : 0;
-                    script += new string(' ', paramsMissing * 9) + $" ; {note}\r\n";
+                    script += new string(' ', paramsMissing * 12) + $" // {note}\r\n";
 
                     if ((int) (scriptAddr - sub) + (pos * 4) - 1 >= Data.Length) {
                         exceeded = true;
@@ -370,8 +382,10 @@ namespace SF3.Models.Files.X1 {
                     }
                 }
 
-                // Don't add scripts that overflowed.
-                if (pos >= c_maxScriptLength || exceeded == true) {
+                // Don't add scripts that overflowed. Also filter out for some very likely false-positives.
+                bool isJustTen = (commandsRead == 1 && scriptData[0] == 0x10);
+                var accuracy = (float) commandsKnown / commandsRead;
+                if (pos >= c_maxScriptLength || exceeded == true || (maybeScriptAddrs.Contains(scriptAddr) && isJustTen) || accuracy < 0.75f) {
                     knownScriptAddrs.Remove(scriptAddr);
                     maybeScriptAddrs.Remove(scriptAddr);
                     scriptAddrs.Remove(scriptAddr);
@@ -381,7 +395,6 @@ namespace SF3.Models.Files.X1 {
                 scriptDataByAddr[scriptAddr] = scriptData.ToArray();
                 ScriptsByAddress[scriptAddr] = script;
 
-                var accuracy = (float) commandsKnown / commandsRead;
                 accuracyByAddr[scriptAddr] = accuracy;
 
                 // If this is definitely a script, was originally thought to *maybe* be a script, and has a pointer to it somewhere,
@@ -450,11 +463,18 @@ namespace SF3.Models.Files.X1 {
             foreach (var addr in ScriptsByAddress.Keys) {
                 var data = scriptDataByAddr[addr];
                 var matchingData = KnownScripts.AllKnownScripts.Cast<KeyValuePair<string, uint[]>?>().FirstOrDefault(x => Enumerable.SequenceEqual(data, x.Value.Value));
-                if (matchingData != null) {
+
+                string name = null;
+                if (matchingData != null)
+                    name = matchingData.Value.Key;
+                else if (data.Length == 5 && data[0] == 0x22 && data[2] == 0x0C && data[3] == 0xFFFF && data[4] == 0)
+                    name = $"Run function 0x{data[1]:X8}";
+
+                if (name != null) {
                     if (!ScriptNameByAddress.ContainsKey(addr))
-                        ScriptNameByAddress[addr] = $"({matchingData.Value.Key})";
+                        ScriptNameByAddress[addr] = $"({name})";
                     else
-                        ScriptNameByAddress[addr] += $" ({matchingData.Value.Key})";
+                        ScriptNameByAddress[addr] += $" ({name})";
                 }
             }
 
