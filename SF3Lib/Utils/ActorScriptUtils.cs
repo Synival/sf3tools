@@ -102,13 +102,13 @@ namespace SF3.Utils {
             }
         }
 
-        public static bool CommandIsValid(ActorCommandType command, int commandsRead, uint[] param) {
+        public static bool CommandIsValid(ActorCommandType command, bool isFirstCommand, uint[] param) {
             // Check for command logic / validity
             switch ((int) command) {
                 case 0x00:
                     // Waiting 0 or thousands of frames probably isn't a thing
-                    // Don't trust scripts that script with a 'wait' command
-                    return param[0] != 0x0000 && param[0] < 1000 && commandsRead != 1;
+                    // Don't trust scripts that start with a 'wait' command
+                    return param[0] != 0x0000 && param[0] < 1000 && !isFirstCommand;
 
                 case 0x04:
                     // Common false positive
