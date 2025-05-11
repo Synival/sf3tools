@@ -195,6 +195,8 @@ namespace SF3.Models.Files.X1 {
         }
 
         private void PopulateScripts(uint sub) {
+            const int c_maxScriptLength = 0x1000;
+
             // ==================================================================
             // TODO: This is atrocious!!! Refactor this, like, 100 times, please.
             // ==================================================================
@@ -275,7 +277,6 @@ namespace SF3.Models.Files.X1 {
                 var validCommands = 0;
 
                 // Reads commands until we can't anymore.
-                const int c_maxScriptLength = 0x200;
                 bool aborted = false;
                 var labelPositions = new Dictionary<uint, int>();
 
@@ -287,7 +288,8 @@ namespace SF3.Models.Files.X1 {
                     string comment = "???";
 
                     // Get known commands
-                    if (Enum.IsDefined(typeof(ActorCommandType), (int) command)) {
+                    bool isRealCommand = Enum.IsDefined(typeof(ActorCommandType), (int) command);
+                    if (isRealCommand) {
                         var commandType = (ActorCommandType) command;
                         var commandParamNames = EnumHelpers.GetAttributeOfType<ActorCommandParams>(commandType).Params;
                         var commandParams = commandParamNames.Select(x => ReadInt()).ToArray();
@@ -305,8 +307,10 @@ namespace SF3.Models.Files.X1 {
                     // Get labels
                     else if (command >= 0x80000000u && command <= 0x80100000u) {
                         comment = $"(label 0x{(command & 0x0FFFFFFF):X7})";
-                        if (command != 0x80000000u) // this is unlikely; it's usually (or always?) 0x8001
+                        if (command != 0x80000000u) { // this is unlikely; it's usually (or always?) 0x8001
+                            isRealCommand = true;
                             validCommands++;
+                        }
                         labelPositions[command & ~0x80000000u] = commandPos;
                     }
 
@@ -325,9 +329,14 @@ namespace SF3.Models.Files.X1 {
                         aborted = true;
                         break;
                     }
-
                     // If this is the first command and it already looks bogus, just abort now.
-                    if (commandsRead == 1 && validCommands == 0) {
+                    // (there actually are some scripts that do this, though...)
+                    else if (commandsRead == 1 && validCommands == 0) {
+                        aborted = true;
+                        break;
+                    }
+                    // If this command was a bogus one, abort.
+                    else if (!isRealCommand) {
                         aborted = true;
                         break;
                     }
@@ -432,7 +441,7 @@ namespace SF3.Models.Files.X1 {
                 var scriptLines = ScriptsByAddress[addr].Split(new string[] { "\r\n" }, StringSplitOptions.None);
                 var scriptCommands = scriptLines.Where(x => x.Contains("// ")).Select(x => x.Substring(x.IndexOf("// ") + 3)).ToList();
                 if (scriptCommands.Any(x => x.StartsWith("Unknown"))) {
-                    System.Diagnostics.Debug.WriteLine($"Unknown command used at 0x{addr:X8}:");
+                    System.Diagnostics.Debug.WriteLine($"Unknown command used at 0x{addr:X8}" + (pointers.Contains(addr) ? " (has pointer):" : ":"));
                     System.Diagnostics.Debug.WriteLine(ScriptsByAddress[addr]);
                 }
             }
