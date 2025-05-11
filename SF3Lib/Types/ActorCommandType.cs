@@ -42,7 +42,7 @@ namespace SF3.Types {
         [ActorCommandParams("unknown")] Unknown0x1D = 0x1D,
         [ActorCommandParams("music/sound")] PlayMusicOrSound = 0x1E,
         [ActorCommandParams("scriptAddr")] SwitchToScript = 0x1F, /* does it continue running it? */
-        [ActorCommandParams()] Reserved0x20= 0x20,
+        [ActorCommandParams()] Reserved0x20 = 0x20,
         [ActorCommandParams()] Reserved0x21 = 0x21,
         [ActorCommandParams("functionAddr")] RunFunction = 0x22,
         [ActorCommandParams()] Reserved0x23 = 0x23,
