@@ -260,16 +260,7 @@ namespace SF3.Models.Files.X1 {
             var accuracyByAddr = new Dictionary<uint, float>();
 
             foreach (var scriptAddr in scriptAddrs) {
-                var pos = 0;
-                var scriptData = new List<uint>();
-
-                uint ReadInt() {
-                    var addr = (int) (scriptAddr - sub + pos * 4);
-                    var i = (addr + 3 >= Data.Length) ? 0xFFFFFFFFu : (uint) Data.GetDouble(addr);
-                    pos++;
-                    scriptData.Add(i);
-                    return i;
-                };
+                var scriptReader = new ScriptReader(Data, (int) (scriptAddr - sub));
 
                 bool done = false;
                 var script = "";
@@ -280,10 +271,10 @@ namespace SF3.Models.Files.X1 {
                 bool aborted = false;
                 var labelPositions = new Dictionary<uint, int>();
 
-                while (!done && pos < c_maxScriptLength) {
-                    var commandPos = pos;
+                while (!done && scriptReader.Position < c_maxScriptLength) {
+                    var commandPos = scriptReader.Position;
 
-                    var command = ReadInt();
+                    var command = scriptReader.ReadInt();
                     commandsRead++;
                     string comment = "???";
 
@@ -292,7 +283,7 @@ namespace SF3.Models.Files.X1 {
                     if (isRealCommand) {
                         var commandType = (ActorCommandType) command;
                         var commandParamNames = EnumHelpers.GetAttributeOfType<ActorCommandParams>(commandType).Params;
-                        var commandParams = commandParamNames.Select(x => ReadInt()).ToArray();
+                        var commandParams = commandParamNames.Select(x => scriptReader.ReadInt()).ToArray();
 
                         // Add comments for known commands
                         comment = ActorScriptUtils.GetCommentForCommand(commandType, commandParams);
@@ -315,17 +306,17 @@ namespace SF3.Models.Files.X1 {
                     }
 
                     // Add text to the script
-                    for (int i = commandPos; i < pos; i++) {
+                    for (int i = commandPos; i < scriptReader.Position; i++) {
                         script += (i == commandPos) ? "" : " ";
-                        script += $"0x{(scriptData[i]):X8},";
+                        script += $"0x{(scriptReader.ScriptData[i]):X8},";
                     }
 
-                    var paramCount = pos - commandPos;
+                    var paramCount = scriptReader.Position - commandPos;
                     var paramsMissing = (paramCount < 4) ? (4 - paramCount) : 0;
                     script += new string(' ', paramsMissing * 12) + $" // {comment}\r\n";
 
                     // Don't allow exceeding the file length.
-                    if ((int) (scriptAddr - sub) + (pos * 4) - 1 >= Data.Length) {
+                    if ((int) (scriptAddr - sub) + (scriptReader.Position * 4) - 1 >= Data.Length) {
                         aborted = true;
                         break;
                     }
@@ -343,16 +334,16 @@ namespace SF3.Models.Files.X1 {
                 }
 
                 // Don't add scripts that overflowed. Also filter out for some very likely false-positives.
-                bool isJustTen = (commandsRead == 1 && scriptData[0] == 0x10);
+                bool isJustTen = (commandsRead == 1 && scriptReader.ScriptData[0] == 0x10);
                 var accuracy = (float) validCommands / commandsRead;
-                if (pos >= c_maxScriptLength || aborted == true || (maybeScriptAddrs.Contains(scriptAddr) && isJustTen) || accuracy < 0.75f) {
+                if (scriptReader.Position >= c_maxScriptLength || aborted == true || (maybeScriptAddrs.Contains(scriptAddr) && isJustTen) || accuracy < 0.75f) {
                     knownScriptAddrs.Remove(scriptAddr);
                     maybeScriptAddrs.Remove(scriptAddr);
                     scriptAddrs.Remove(scriptAddr);
                     continue;
                 }
 
-                scriptDataByAddr[scriptAddr] = scriptData.ToArray();
+                scriptDataByAddr[scriptAddr] = scriptReader.ScriptData.ToArray();
                 ScriptsByAddress[scriptAddr] = script;
 
                 accuracyByAddr[scriptAddr] = accuracy;
