@@ -4,7 +4,6 @@ using System.Linq;
 using CommonLib.Utils;
 using SF3.ByteData;
 using SF3.Types;
-using SF3.Utils;
 
 namespace SF3.Actors {
     public class ScriptReader {
@@ -37,6 +36,7 @@ namespace SF3.Actors {
 
             // Build a command out of this data.
             var scriptCommand = new ScriptCommand(commandPos, data.ToArray(), LabelPositions);
+            Commands.Add(scriptCommand);
 
             // Update the state of the script based on the command.
             if (scriptCommand.Label.HasValue)
@@ -54,9 +54,11 @@ namespace SF3.Actors {
             return scriptCommand;
         }
 
-        public void ReadUntilDoneDetected(int? maxCommands = null) {
+        public ScriptCommand[] ReadUntilDoneDetected(int? maxCommands = null) {
+            var commands = new List<ScriptCommand>();
             while (!Done && (!maxCommands.HasValue || Position < maxCommands.Value))
-                _ = ReadCommand();
+                commands.Add(ReadCommand());
+            return commands.ToArray();
         }
 
         public IByteData Data { get; }
@@ -70,5 +72,6 @@ namespace SF3.Actors {
         public Dictionary<uint, int> LabelPositions { get; } = new Dictionary<uint, int>();
         public bool Aborted { get; private set; } = false;
         public float PercentValidCommands => (float) ValidCommands / CommandsRead;
+        public List<ScriptCommand> Commands { get; } = new List<ScriptCommand>();
     }
 }
