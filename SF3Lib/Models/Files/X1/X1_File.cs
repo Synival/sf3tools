@@ -12,8 +12,8 @@ using SF3.Models.Tables.X1.Battle;
 using SF3.Models.Tables.X1.Town;
 using SF3.Types;
 using static CommonLib.Utils.ResourceUtils;
-using static CommonLib.Utils.ValueUtils;
 using SF3.Actors;
+using SF3.Utils;
 
 namespace SF3.Models.Files.X1 {
     public class X1_File : ScenarioTableFile, IX1_File {
@@ -273,101 +273,66 @@ namespace SF3.Models.Files.X1 {
 
                     var command = ReadInt();
                     commandsRead++;
-                    string note = "???";
+                    string comment = "???";
 
                     // Get known commands
                     if (Enum.IsDefined(typeof(ActorCommandType), (int) command)) {
                         var commandType = (ActorCommandType) command;
-                        var commandParams = EnumHelpers.GetAttributeOfType<ActorCommandParams>(commandType).Params;
+                        var commandParamNames = EnumHelpers.GetAttributeOfType<ActorCommandParams>(commandType).Params;
+                        var commandParams = commandParamNames.Select(x => ReadInt()).ToArray();
                         commandsKnown++;
 
-                        // Add commands for known commands.
-                        var param = commandParams.Select(x => ReadInt()).ToArray();
+                        // Add comments for known commands
+                        comment = ActorScriptUtils.GetCommentForCommand(commandType, commandParams);
+
+                        // Check for command logic / validity
                         switch (command) {
                             case 0x00: {
-                                note = $"Wait {param[0]} frame(s)";
-                                if (param[0] == 0x0000 || param[0] >= 1000) // Waiting 0 or thousands of frames probably isn't a thing
+                                if (commandParams[0] == 0x0000 || commandParams[0] >= 1000) // Waiting 0 or thousands of frames probably isn't a thing
                                     commandsKnown--;
                                 else if (commandsRead == 1) // don't trust scripts that script with a 'wait' command
                                     commandsKnown--;
                                 break;
                             }
 
-                            case 0x01: note = "Wait until at move target"; break;
-                            case 0x02: note = $"Set position to ({SignedHexStr(param[0], "X2")}, {SignedHexStr(param[1], "X2")}, {SignedHexStr(param[2], "X2")})"; break;
-                            case 0x03: note = $"Set target position to ({SignedHexStr(param[0], "X2")}, {SignedHexStr(param[1], "X2")}, {SignedHexStr(param[2], "X2")})"; break;
-
                             case 0x04: {
-                                note = $"Modify target position by ({SignedHexStr(param[0], "X2")}, {SignedHexStr(param[1], "X2")}, {SignedHexStr(param[2], "X2")})";
-                                if (param[2] == 0x10) // common false positive
+                                if (commandParams[2] == 0x10) // common false positive
                                     commandsKnown--;
                                 break;
                             }
-                            case 0x06: note = $"Start moving to relative angle 0x{(short) param[0]:X4}, ahead 0x{param[1]}"; break;
-                            case 0x08: note = $"Wander between 0x{param[0]:X2} and 0x{param[1]:X2} units, max distance 0x{param[2]:X2} from home"; break;
-                            case 0x09: note = $"Wander (ignoring walls) between 0x{param[0]:X2} and 0x{param[1]:X2} units, max distance 0x{param[2]:X2} from home"; break;
-                            case 0x0B: note = "Move towards target actor"; break;
 
                             case 0x0C: {
-                                var gotoLower = param[1] & ~0xF0000000u;
-                                var gotoPos = ((param[1] & 0xF0000000u) == 0xC0000000u && (labelPositions.ContainsKey(gotoLower))) ? labelPositions[gotoLower] : (int) param[1];
+                                var gotoLower = commandParams[1] & ~0xF0000000u;
+                                var gotoPos = ((commandParams[1] & 0xF0000000u) == 0xC0000000u && (labelPositions.ContainsKey(gotoLower))) ? labelPositions[gotoLower] : (int) commandParams[1];
 
-                                done = (param[0] == 0xFFFF) && gotoPos <= pos;
-                                note = $"Loop to 0x{param[1]:X2} " + (done ? "forever" : $"{param[0]} time(s)");
-                                if (param[0] == 0) // don't trust loops with a count of zero
+                                done = (commandParams[0] == 0xFFFF) && gotoPos <= pos;
+                                if (commandParams[0] == 0) // don't trust loops with a count of zero
                                     commandsKnown--;
                                 break;
                             }
 
                             case 0x0D: {
-                                var gotoLower = param[0] & ~0xF0000000u;
-                                var gotoPos = ((param[0] & 0xF0000000u) == 0xC0000000u && (labelPositions.ContainsKey(gotoLower))) ? labelPositions[gotoLower] : (int) param[0];
+                                var gotoLower = commandParams[0] & ~0xF0000000u;
+                                var gotoPos = ((commandParams[0] & 0xF0000000u) == 0xC0000000u && (labelPositions.ContainsKey(gotoLower))) ? labelPositions[gotoLower] : (int) commandParams[0];
                                 done = (gotoPos <= pos);
-                                note = $"Goto 0x{param[0]:X2}";
                                 break;
                             }
 
                             case 0x10: {
-                                note = "Done";
                                 done = true;
                                 break;
                             }
 
-                            case 0x15: {
-                                var property = (ActorPropertyCommandType) param[0];
-                                var propertyName = EnumHelpers.EnumNameOr(property, p => $"Unknown0x{(int) p:X2}");
-                                note = $"Set {propertyName} to {SignedHexStr(param[1], "X2")}";
-                                break;
-                            }
-
-                            case 0x16: {
-                                var property = (ActorPropertyCommandType) param[0];
-                                var propertyName = EnumHelpers.EnumNameOr(property, p => $"Unknown0x{(int) p:X2}");
-                                note = $"Modify {propertyName} by {SignedHexStr(param[1], "X2")}"; break;
-                            }
-
-                            case 0x1B: note = "Delete Self"; break;
-
-                            case 0x1C:
-                                note = $"Set animation to 0x{param[0]:X2}";
-                                break;
-
                             case 0x1E: {
-                                note = $"Play music/sound 0x{param[0]:X3}";
-                                if (param[0] >= 0x1000) // probably not actually this command
+                                if (commandParams[0] >= 0x1000) // probably not actually this command
                                     commandsKnown--;
                                 break;
                             }
-
-                            case 0x22: note = $"Execute function 0x{param[0]:X8}"; break;
-
-                            default:
-                                break;
                         }
                     }
                     // Get labels
                     else if (command >= 0x80000000u && command <= 0x80100000u) {
-                        note = $"(label 0x{(command & 0x0FFFFFFF):X7})";
+                        comment = $"(label 0x{(command & 0x0FFFFFFF):X7})";
                         if (command != 0x80000000u) // this is unlikely; it's usually (or always?) 0x8001
                             commandsKnown++;
                         labelPositions[command & ~0x80000000u] = commandPos;
@@ -381,7 +346,7 @@ namespace SF3.Models.Files.X1 {
 
                     var paramCount = (pos - commandPos);
                     var paramsMissing = (paramCount < 4) ? (4 - paramCount) : 0;
-                    script += new string(' ', paramsMissing * 12) + $" // {note}\r\n";
+                    script += new string(' ', paramsMissing * 12) + $" // {comment}\r\n";
 
                     if ((int) (scriptAddr - sub) + (pos * 4) - 1 >= Data.Length) {
                         exceeded = true;
