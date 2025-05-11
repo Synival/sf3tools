@@ -188,6 +188,17 @@ namespace SF3.Models.Files.X1 {
             if (tileMovementAddress >= 0)
                 tables.Add(TileMovementTable = TileMovementTable.Create(Data, "TileMovement", tileMovementAddress, true));
 
+            // TODO: Lazy! Let's do something better.
+            PopulateScripts((uint) sub);
+
+            return tables;
+        }
+
+        private void PopulateScripts(uint sub) {
+            // ==================================================================
+            // TODO: This is atrocious!!! Refactor this, like, 100 times, please.
+            // ==================================================================
+
             ScriptsByAddress = new Dictionary<uint, string>();
             ScriptNameByAddress = new Dictionary<uint, string>();
 
@@ -217,7 +228,7 @@ namespace SF3.Models.Files.X1 {
             var posMax = Data.Length - 3;
             var ptrMax = sub + posMax;
             for (uint pos = 0; pos < posMax; pos += 4) {
-                var posAsPtr = (uint) (pos + sub);
+                var posAsPtr = pos + sub;
                 if (knownScriptAddrs.Contains(posAsPtr))
                     continue;
 
@@ -265,7 +276,7 @@ namespace SF3.Models.Files.X1 {
 
                 // Reads commands until we can't anymore.
                 const int c_maxScriptLength = 0x200;
-                bool exceeded = false;
+                bool aborted = false;
                 var labelPositions = new Dictionary<uint, int>();
 
                 while (!done && pos < c_maxScriptLength) {
@@ -305,12 +316,19 @@ namespace SF3.Models.Files.X1 {
                         script += $"0x{(scriptData[i]):X8},";
                     }
 
-                    var paramCount = (pos - commandPos);
+                    var paramCount = pos - commandPos;
                     var paramsMissing = (paramCount < 4) ? (4 - paramCount) : 0;
                     script += new string(' ', paramsMissing * 12) + $" // {comment}\r\n";
 
+                    // Don't allow exceeding the file length.
                     if ((int) (scriptAddr - sub) + (pos * 4) - 1 >= Data.Length) {
-                        exceeded = true;
+                        aborted = true;
+                        break;
+                    }
+
+                    // If this is the first command and it already looks bogus, just abort now.
+                    if (commandsRead == 1 && validCommands == 0) {
+                        aborted = true;
                         break;
                     }
                 }
@@ -318,7 +336,7 @@ namespace SF3.Models.Files.X1 {
                 // Don't add scripts that overflowed. Also filter out for some very likely false-positives.
                 bool isJustTen = (commandsRead == 1 && scriptData[0] == 0x10);
                 var accuracy = (float) validCommands / commandsRead;
-                if (pos >= c_maxScriptLength || exceeded == true || (maybeScriptAddrs.Contains(scriptAddr) && isJustTen) || accuracy < 0.75f) {
+                if (pos >= c_maxScriptLength || aborted == true || (maybeScriptAddrs.Contains(scriptAddr) && isJustTen) || accuracy < 0.75f) {
                     knownScriptAddrs.Remove(scriptAddr);
                     maybeScriptAddrs.Remove(scriptAddr);
                     scriptAddrs.Remove(scriptAddr);
@@ -359,7 +377,7 @@ namespace SF3.Models.Files.X1 {
                 // Remove 'maybe' scripts that intersect with 'knowns'.
                 var maybeIterAddrs = new HashSet<uint>(maybeScriptAddrs);
                 foreach (var addr in maybeIterAddrs) {
-                    var pos = (uint) (addr - sub) / 4;
+                    var pos = (addr - sub) / 4;
                     for (int i = 0; i < scriptDataByAddr[addr].Length; i++) {
                         if (dataScriptBytes[pos++]) {
                             overlappingScriptsByAddr.Add(addr);
@@ -410,8 +428,6 @@ namespace SF3.Models.Files.X1 {
                         ScriptNameByAddress[addr] += $" ({name})";
                 }
             }
-
-            return tables;
         }
 
         public override void Dispose() {
