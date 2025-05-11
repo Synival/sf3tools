@@ -262,81 +262,14 @@ namespace SF3.Models.Files.X1 {
             foreach (var scriptAddr in scriptAddrs) {
                 var scriptReader = new ScriptReader(Data, (int) (scriptAddr - sub));
 
-                bool done = false;
-                var script = "";
-                var commandsRead = 0;
-                var validCommands = 0;
-
                 // Reads commands until we can't anymore.
-                bool aborted = false;
-                var labelPositions = new Dictionary<uint, int>();
-
-                while (!done && scriptReader.Position < c_maxScriptLength) {
-                    var commandPos = scriptReader.Position;
-
-                    var command = scriptReader.ReadInt();
-                    commandsRead++;
-                    string comment = "???";
-
-                    // Get known commands
-                    bool isRealCommand = Enum.IsDefined(typeof(ActorCommandType), (int) command);
-                    if (isRealCommand) {
-                        var commandType = (ActorCommandType) command;
-                        var commandParamNames = EnumHelpers.GetAttributeOfType<ActorCommandParams>(commandType).Params;
-                        var commandParams = commandParamNames.Select(x => scriptReader.ReadInt()).ToArray();
-
-                        // Add comments for known commands
-                        comment = ActorScriptUtils.GetCommentForCommand(commandType, commandParams);
-
-                        // Does this command end the script?
-                        done = ActorScriptUtils.CommandEndsScript(commandType, commandParams, commandPos, labelPositions);
-
-                        // Does this command appear to be a valid one?
-                        if (ActorScriptUtils.CommandIsValid(commandType, commandsRead, commandParams))
-                            validCommands++;
-                    }
-                    // Get labels
-                    else if (command >= 0x80000000u && command <= 0x80100000u) {
-                        comment = $"(label 0x{(command & 0x0FFFFFFF):X7})";
-                        if (command != 0x80000000u) { // this is unlikely; it's usually (or always?) 0x8001
-                            isRealCommand = true;
-                            validCommands++;
-                        }
-                        labelPositions[command & ~0x80000000u] = commandPos;
-                    }
-
-                    // Add text to the script
-                    for (int i = commandPos; i < scriptReader.Position; i++) {
-                        script += (i == commandPos) ? "" : " ";
-                        script += $"0x{(scriptReader.ScriptData[i]):X8},";
-                    }
-
-                    var paramCount = scriptReader.Position - commandPos;
-                    var paramsMissing = (paramCount < 4) ? (4 - paramCount) : 0;
-                    script += new string(' ', paramsMissing * 12) + $" // {comment}\r\n";
-
-                    // Don't allow exceeding the file length.
-                    if ((int) (scriptAddr - sub) + (scriptReader.Position * 4) - 1 >= Data.Length) {
-                        aborted = true;
-                        break;
-                    }
-                    // If this is the first command and it already looks bogus, just abort now.
-                    // (there actually are some scripts that do this, though...)
-                    else if (commandsRead == 1 && validCommands == 0) {
-                        aborted = true;
-                        break;
-                    }
-                    // If this command was a bogus one, abort.
-                    else if (!isRealCommand) {
-                        aborted = true;
-                        break;
-                    }
-                }
+                while (scriptReader.Position < c_maxScriptLength && scriptReader.ReadCommand())
+                    { }
 
                 // Don't add scripts that overflowed. Also filter out for some very likely false-positives.
-                bool isJustTen = (commandsRead == 1 && scriptReader.ScriptData[0] == 0x10);
-                var accuracy = (float) validCommands / commandsRead;
-                if (scriptReader.Position >= c_maxScriptLength || aborted == true || (maybeScriptAddrs.Contains(scriptAddr) && isJustTen) || accuracy < 0.75f) {
+                bool isJustTen = (scriptReader.CommandsRead == 1 && scriptReader.ScriptData[0] == 0x10);
+                var accuracy = (float) scriptReader.ValidCommands / scriptReader.CommandsRead;
+                if (scriptReader.Position >= c_maxScriptLength || scriptReader.Aborted == true || (maybeScriptAddrs.Contains(scriptAddr) && isJustTen) || accuracy < 0.75f) {
                     knownScriptAddrs.Remove(scriptAddr);
                     maybeScriptAddrs.Remove(scriptAddr);
                     scriptAddrs.Remove(scriptAddr);
@@ -344,7 +277,7 @@ namespace SF3.Models.Files.X1 {
                 }
 
                 scriptDataByAddr[scriptAddr] = scriptReader.ScriptData.ToArray();
-                ScriptsByAddress[scriptAddr] = script;
+                ScriptsByAddress[scriptAddr] = scriptReader.Text;
 
                 accuracyByAddr[scriptAddr] = accuracy;
 
