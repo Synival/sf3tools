@@ -1,4 +1,5 @@
-﻿using SF3.Types;
+﻿using System.Collections.Generic;
+using SF3.Types;
 using static CommonLib.Utils.EnumHelpers;
 using static CommonLib.Utils.ValueUtils;
 
@@ -38,6 +39,53 @@ namespace SF3.Utils {
 
                 default:
                     return "??? (" + EnumNameOr(command, c => $"Command_0x{(int) command:X2}");
+            }
+        }
+
+        public static bool CommandEndsScript(ActorCommandType command, uint[] param, int commandPos, Dictionary<uint, int> labelPositions) {
+            switch ((int) command) {
+                case 0x0C: {
+                    var gotoLower = param[1] & ~0xF0000000u;
+                    var gotoPos = ((param[1] & 0xF0000000u) == 0xC0000000u && (labelPositions.ContainsKey(gotoLower))) ? labelPositions[gotoLower] : (int) param[1];
+                    return (param[0] == 0xFFFF) && gotoPos <= commandPos;
+                }
+
+                case 0x0D: {
+                    var gotoLower = param[0] & ~0xF0000000u;
+                    var gotoPos = ((param[0] & 0xF0000000u) == 0xC0000000u && (labelPositions.ContainsKey(gotoLower))) ? labelPositions[gotoLower] : (int) param[0];
+                    return gotoPos <= commandPos;
+                }
+
+                case 0x10:
+                    return true;
+
+                default:
+                    return false;
+            }
+        }
+
+        public static bool CommandIsValid(ActorCommandType command, int commandsRead, uint[] param) {
+            // Check for command logic / validity
+            switch ((int) command) {
+                case 0x00:
+                    // Waiting 0 or thousands of frames probably isn't a thing
+                    // Don't trust scripts that script with a 'wait' command
+                    return param[0] != 0x0000 && param[0] < 1000 && commandsRead != 1;
+
+                case 0x04:
+                    // Common false positive
+                    return param[2] != 0x10;
+
+                case 0x0C:
+                    // Don't trust loops with a count of zero
+                    return param[0] != 0;
+
+                case 0x1E:
+                    // Probably not actually this command
+                    return param[0] < 0x1000;
+
+                default:
+                    return true;
             }
         }
     }

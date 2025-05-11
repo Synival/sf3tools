@@ -260,8 +260,8 @@ namespace SF3.Models.Files.X1 {
 
                 bool done = false;
                 var script = "";
-                int commandsRead = 0;
-                int commandsKnown = 0;
+                var commandsRead = 0;
+                var validCommands = 0;
 
                 // Reads commands until we can't anymore.
                 const int c_maxScriptLength = 0x200;
@@ -280,61 +280,22 @@ namespace SF3.Models.Files.X1 {
                         var commandType = (ActorCommandType) command;
                         var commandParamNames = EnumHelpers.GetAttributeOfType<ActorCommandParams>(commandType).Params;
                         var commandParams = commandParamNames.Select(x => ReadInt()).ToArray();
-                        commandsKnown++;
 
                         // Add comments for known commands
                         comment = ActorScriptUtils.GetCommentForCommand(commandType, commandParams);
 
-                        // Check for command logic / validity
-                        switch (command) {
-                            case 0x00: {
-                                if (commandParams[0] == 0x0000 || commandParams[0] >= 1000) // Waiting 0 or thousands of frames probably isn't a thing
-                                    commandsKnown--;
-                                else if (commandsRead == 1) // don't trust scripts that script with a 'wait' command
-                                    commandsKnown--;
-                                break;
-                            }
+                        // Does this command end the script?
+                        done = ActorScriptUtils.CommandEndsScript(commandType, commandParams, commandPos, labelPositions);
 
-                            case 0x04: {
-                                if (commandParams[2] == 0x10) // common false positive
-                                    commandsKnown--;
-                                break;
-                            }
-
-                            case 0x0C: {
-                                var gotoLower = commandParams[1] & ~0xF0000000u;
-                                var gotoPos = ((commandParams[1] & 0xF0000000u) == 0xC0000000u && (labelPositions.ContainsKey(gotoLower))) ? labelPositions[gotoLower] : (int) commandParams[1];
-
-                                done = (commandParams[0] == 0xFFFF) && gotoPos <= pos;
-                                if (commandParams[0] == 0) // don't trust loops with a count of zero
-                                    commandsKnown--;
-                                break;
-                            }
-
-                            case 0x0D: {
-                                var gotoLower = commandParams[0] & ~0xF0000000u;
-                                var gotoPos = ((commandParams[0] & 0xF0000000u) == 0xC0000000u && (labelPositions.ContainsKey(gotoLower))) ? labelPositions[gotoLower] : (int) commandParams[0];
-                                done = (gotoPos <= pos);
-                                break;
-                            }
-
-                            case 0x10: {
-                                done = true;
-                                break;
-                            }
-
-                            case 0x1E: {
-                                if (commandParams[0] >= 0x1000) // probably not actually this command
-                                    commandsKnown--;
-                                break;
-                            }
-                        }
+                        // Does this command appear to be a valid one?
+                        if (ActorScriptUtils.CommandIsValid(commandType, commandsRead, commandParams))
+                            validCommands++;
                     }
                     // Get labels
                     else if (command >= 0x80000000u && command <= 0x80100000u) {
                         comment = $"(label 0x{(command & 0x0FFFFFFF):X7})";
                         if (command != 0x80000000u) // this is unlikely; it's usually (or always?) 0x8001
-                            commandsKnown++;
+                            validCommands++;
                         labelPositions[command & ~0x80000000u] = commandPos;
                     }
 
@@ -356,7 +317,7 @@ namespace SF3.Models.Files.X1 {
 
                 // Don't add scripts that overflowed. Also filter out for some very likely false-positives.
                 bool isJustTen = (commandsRead == 1 && scriptData[0] == 0x10);
-                var accuracy = (float) commandsKnown / commandsRead;
+                var accuracy = (float) validCommands / commandsRead;
                 if (pos >= c_maxScriptLength || exceeded == true || (maybeScriptAddrs.Contains(scriptAddr) && isJustTen) || accuracy < 0.75f) {
                     knownScriptAddrs.Remove(scriptAddr);
                     maybeScriptAddrs.Remove(scriptAddr);
