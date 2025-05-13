@@ -220,8 +220,8 @@ namespace SF3.Models.Files.X1 {
                     .ToArray();
 
                 foreach (var addr in addrs) {
-                    scriptAddrs.Add(addr);
-                    knownScriptAddrs.Add(addr);
+                    _ = scriptAddrs.Add(addr);
+                    _ = knownScriptAddrs.Add(addr);
                     ScriptNameByAddress.Add(addr, "NPC Script");
                 }
             }
@@ -238,16 +238,16 @@ namespace SF3.Models.Files.X1 {
                 var value = (uint) Data.GetDouble((int) valuePos);
 
                 if (value >= 0x00000000 && value < 0x0000002E) {
-                    scriptAddrs.Add(posAsPtr);
-                    maybeScriptAddrs.Add(posAsPtr);
+                    _ = scriptAddrs.Add(posAsPtr);
+                    _ = maybeScriptAddrs.Add(posAsPtr);
                 }
                 else if (value >= 0x80000000u && value < 0x80100000u) {
                     valuePos += 4;
                     if (valuePos < posMax) {
                         value = (uint) Data.GetDouble((int) valuePos);
                         if (value >= 0x00000000 && value < 0x0000002E) {
-                            scriptAddrs.Add(posAsPtr);
-                            maybeScriptAddrs.Add(posAsPtr);
+                            _ = scriptAddrs.Add(posAsPtr);
+                            _ = maybeScriptAddrs.Add(posAsPtr);
                         }
                     }
                 }
@@ -261,15 +261,15 @@ namespace SF3.Models.Files.X1 {
 
             foreach (var scriptAddr in scriptAddrs) {
                 var scriptReader = new ScriptReader(Data, (int) (scriptAddr - sub));
-                scriptReader.ReadUntilDoneDetected(c_maxScriptLength);
+                _ = scriptReader.ReadUntilDoneDetected(c_maxScriptLength);
 
                 // Don't add scripts that overflowed. Also filter out for some very likely false-positives.
                 bool isJustTen = (scriptReader.CommandsRead == 1 && scriptReader.ScriptData[0] == 0x10);
                 var accuracy = scriptReader.PercentValidCommands;
                 if (scriptReader.Position >= c_maxScriptLength || scriptReader.Aborted == true || (maybeScriptAddrs.Contains(scriptAddr) && isJustTen) || accuracy < 0.75f) {
-                    knownScriptAddrs.Remove(scriptAddr);
-                    maybeScriptAddrs.Remove(scriptAddr);
-                    scriptAddrs.Remove(scriptAddr);
+                    _ = knownScriptAddrs.Remove(scriptAddr);
+                    _ = maybeScriptAddrs.Remove(scriptAddr);
+                    _ = scriptAddrs.Remove(scriptAddr);
                     continue;
                 }
 
@@ -281,8 +281,8 @@ namespace SF3.Models.Files.X1 {
                 // If this is definitely a script, was originally thought to *maybe* be a script, and has a pointer to it somewhere,
                 // then let's just consider this a script. Move it to the correct set.
                 if (accuracy == 1.00f && pointers.Contains(scriptAddr) && maybeScriptAddrs.Contains(scriptAddr)) {
-                    maybeScriptAddrs.Remove(scriptAddr);
-                    probablyScriptAddrs.Add(scriptAddr);
+                    _ = maybeScriptAddrs.Remove(scriptAddr);
+                    _ = probablyScriptAddrs.Add(scriptAddr);
                     ScriptNameByAddress[scriptAddr] = "Has Pointer";
                 }
             }
@@ -310,8 +310,8 @@ namespace SF3.Models.Files.X1 {
                     var pos = (addr - sub) / 4;
                     for (int i = 0; i < scriptDataByAddr[addr].Length; i++) {
                         if (dataScriptBytes[pos++]) {
-                            overlappingScriptsByAddr.Add(addr);
-                            maybeScriptAddrs.Remove(addr);
+                            _ = overlappingScriptsByAddr.Add(addr);
+                            _ = maybeScriptAddrs.Remove(addr);
                             break;
                         }
                     }
@@ -324,8 +324,8 @@ namespace SF3.Models.Files.X1 {
                         .ThenByDescending(x => scriptDataByAddr[x].Length)
                         .First();
 
-                    maybeScriptAddrs.Remove(mostAccurateMaybe);
-                    probablyScriptAddrs.Add(mostAccurateMaybe);
+                    _ = maybeScriptAddrs.Remove(mostAccurateMaybe);
+                    _ = probablyScriptAddrs.Add(mostAccurateMaybe);
 
                     MarkScriptBytes(mostAccurateMaybe);
                     ScriptNameByAddress[mostAccurateMaybe] = "Looks Like Script";
