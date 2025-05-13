@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using CommonLib.Attributes;
 using CommonLib.NamedValues;
-using CommonLib.Utils;
 using SF3.ByteData;
 using SF3.Models.Tables;
 using SF3.Models.Tables.Shared;
@@ -13,7 +12,7 @@ using SF3.Models.Tables.X1.Town;
 using SF3.Types;
 using static CommonLib.Utils.ResourceUtils;
 using SF3.Actors;
-using SF3.Utils;
+using SF3.Models.Structs.Shared;
 
 namespace SF3.Models.Files.X1 {
     public class X1_File : ScenarioTableFile, IX1_File {
@@ -201,8 +200,8 @@ namespace SF3.Models.Files.X1 {
             // TODO: This is atrocious!!! Refactor this, like, 100 times, please.
             // ==================================================================
 
-            ScriptsByAddress = new Dictionary<uint, string>();
-            ScriptNameByAddress = new Dictionary<uint, string>();
+            ScriptsByAddress = new Dictionary<uint, ActorScript>();
+            var scriptNameByAddress = new Dictionary<uint, string>();
 
             var scriptAddrs = new HashSet<uint>();
             var knownScriptAddrs = new HashSet<uint>();
@@ -222,7 +221,7 @@ namespace SF3.Models.Files.X1 {
                 foreach (var addr in addrs) {
                     _ = scriptAddrs.Add(addr);
                     _ = knownScriptAddrs.Add(addr);
-                    ScriptNameByAddress.Add(addr, "NPC Script");
+                    scriptNameByAddress.Add(addr, "NPC Script");
                 }
             }
 
@@ -256,9 +255,9 @@ namespace SF3.Models.Files.X1 {
             }
 
             // Start gathering script data, and measure their accuracy along the way.
-            var scriptDataByAddr = new Dictionary<uint, uint[]>();
             var accuracyByAddr = new Dictionary<uint, float>();
 
+            int nextScriptId = 0;
             foreach (var scriptAddr in scriptAddrs) {
                 var scriptReader = new ScriptReader(Data, (int) (scriptAddr - sub));
                 _ = scriptReader.ReadUntilDoneDetected(c_maxScriptLength);
@@ -273,9 +272,8 @@ namespace SF3.Models.Files.X1 {
                     continue;
                 }
 
-                scriptDataByAddr[scriptAddr] = scriptReader.ScriptData.ToArray();
-                ScriptsByAddress[scriptAddr] = scriptReader.Text;
-
+                ScriptsByAddress[scriptAddr] = new ActorScript(Data, nextScriptId, $"Script_{nextScriptId:D2}", (int) (scriptAddr - sub), scriptReader.ScriptData.Count * 4, "");
+                nextScriptId++;
                 accuracyByAddr[scriptAddr] = accuracy;
 
                 // If this is definitely a script, was originally thought to *maybe* be a script, and has a pointer to it somewhere,
@@ -283,14 +281,14 @@ namespace SF3.Models.Files.X1 {
                 if (accuracy == 1.00f && pointers.Contains(scriptAddr) && maybeScriptAddrs.Contains(scriptAddr)) {
                     _ = maybeScriptAddrs.Remove(scriptAddr);
                     _ = probablyScriptAddrs.Add(scriptAddr);
-                    ScriptNameByAddress[scriptAddr] = "Has Pointer";
+                    scriptNameByAddress[scriptAddr] = "Has Pointer";
                 }
             }
 
             var dataScriptBytes = new bool[Data.Length / 4];
             void MarkScriptBytes(uint addr) {
                 var pos = (uint) (addr - sub) / 4;
-                for (int i = 0; i < scriptDataByAddr[addr].Length; i++)
+                for (int i = 0; i < ScriptsByAddress[addr].ScriptLength; i++)
                     dataScriptBytes[pos++] = true;
             }
 
@@ -308,7 +306,7 @@ namespace SF3.Models.Files.X1 {
                 var maybeIterAddrs = new HashSet<uint>(maybeScriptAddrs);
                 foreach (var addr in maybeIterAddrs) {
                     var pos = (addr - sub) / 4;
-                    for (int i = 0; i < scriptDataByAddr[addr].Length; i++) {
+                    for (int i = 0; i < ScriptsByAddress[addr].ScriptLength; i++) {
                         if (dataScriptBytes[pos++]) {
                             _ = overlappingScriptsByAddr.Add(addr);
                             _ = maybeScriptAddrs.Remove(addr);
@@ -321,14 +319,14 @@ namespace SF3.Models.Files.X1 {
                 if (maybeScriptAddrs.Count > 0) {
                     var mostAccurateMaybe = maybeScriptAddrs
                         .OrderByDescending(x => accuracyByAddr[x])
-                        .ThenByDescending(x => scriptDataByAddr[x].Length)
+                        .ThenByDescending(x => ScriptsByAddress[x].Size)
                         .First();
 
                     _ = maybeScriptAddrs.Remove(mostAccurateMaybe);
                     _ = probablyScriptAddrs.Add(mostAccurateMaybe);
 
                     MarkScriptBytes(mostAccurateMaybe);
-                    ScriptNameByAddress[mostAccurateMaybe] = "Looks Like Script";
+                    scriptNameByAddress[mostAccurateMaybe] = "Looks Like Script";
                 }
             }
 
@@ -342,7 +340,7 @@ namespace SF3.Models.Files.X1 {
 
             // Add names to common scripts that have been identified
             foreach (var addr in ScriptsByAddress.Keys) {
-                var data = scriptDataByAddr[addr];
+                var data = ScriptsByAddress[addr].GetScriptDataCopy();
                 var matchingData = KnownScripts.AllKnownScripts.Cast<KeyValuePair<string, uint[]>?>().FirstOrDefault(x => Enumerable.SequenceEqual(data, x.Value.Value));
 
                 string name = null;
@@ -352,14 +350,16 @@ namespace SF3.Models.Files.X1 {
                     name = $"Run function 0x{data[1]:X8}";
 
                 if (name != null) {
-                    if (!ScriptNameByAddress.ContainsKey(addr))
-                        ScriptNameByAddress[addr] = $"({name})";
+                    if (!scriptNameByAddress.ContainsKey(addr))
+                        scriptNameByAddress[addr] = $"({name})";
                     else
-                        ScriptNameByAddress[addr] += $" ({name})";
+                        scriptNameByAddress[addr] += $" ({name})";
                 }
 
+                ScriptsByAddress[addr].ScriptName = name;
+
                 // Dump unknown commands to the debug console
-                var scriptLines = ScriptsByAddress[addr].Split(new string[] { "\r\n" }, StringSplitOptions.None);
+                var scriptLines = ScriptsByAddress[addr].Text.Split(new string[] { "\r\n" }, StringSplitOptions.None);
                 var scriptCommands = scriptLines.Where(x => x.Contains("// ")).Select(x => x.Substring(x.IndexOf("// ") + 3)).ToList();
                 if (scriptCommands.Any(x => x.StartsWith("Unknown"))) {
                     System.Diagnostics.Debug.WriteLine($"Unknown command used at 0x{addr:X8}" + (pointers.Contains(addr) ? " (has pointer):" : ":"));
@@ -405,7 +405,7 @@ namespace SF3.Models.Files.X1 {
         [BulkCopyRecurse]
         public CharacterTargetUnknownTable[] CharacterTargetUnknownTables { get; private set; }
 
-        public Dictionary<uint, string> ScriptsByAddress { get; private set; }
-        public Dictionary<uint, string> ScriptNameByAddress { get; private set; }
+        [BulkCopyRecurse]
+        public Dictionary<uint, ActorScript> ScriptsByAddress { get; private set; }
     }
 }

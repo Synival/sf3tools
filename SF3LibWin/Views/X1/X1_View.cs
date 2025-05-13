@@ -36,8 +36,8 @@ namespace SF3.Win.Views.X1 {
             if (Model.ScriptsByAddress?.Count > 0) {
                 CreateChild(new TextArrayView("Scripts",
                     Model.ScriptsByAddress.ToDictionary(
-                        x => "0x" + x.Key.ToString("X8") + (Model.ScriptNameByAddress.ContainsKey(x.Key) ? $": {Model.ScriptNameByAddress[x.Key]}" : ""),
-                        x => x.Value
+                        x => "0x" + x.Key.ToString("X8") + (Model.ScriptsByAddress.ContainsKey(x.Key) ? $": {Model.ScriptsByAddress[x.Key].ScriptName}" : ""),
+                        x => x.Value.Text
                     )
                 ));
             }

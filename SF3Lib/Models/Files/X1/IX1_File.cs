@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using SF3.Models.Structs.Shared;
 using SF3.Models.Tables.Shared;
 using SF3.Models.Tables.X1;
 using SF3.Models.Tables.X1.Battle;
@@ -24,7 +25,6 @@ namespace SF3.Models.Files.X1 {
         CharacterTargetPriorityTable[] CharacterTargetPriorityTables { get; }
         CharacterTargetUnknownTable[] CharacterTargetUnknownTables { get; }
 
-        Dictionary<uint, string> ScriptsByAddress { get; }
-        Dictionary<uint, string> ScriptNameByAddress { get; }
+        Dictionary<uint, ActorScript> ScriptsByAddress { get; }
     }
 }
