@@ -4,13 +4,12 @@ using SF3.ByteData;
 
 namespace SF3.Models.Structs.Shared {
     public class ActorScript : Struct {
-        public ActorScript(IByteData data, int id, string name, int address, int sizeInBytes, string scriptName)
+        public ActorScript(IByteData data, int id, string name, int address, int sizeInBytes)
         : base(data, id, name, address, sizeInBytes) {
             if (sizeInBytes % 4 != 0)
                 throw new ArgumentException($"{nameof(sizeInBytes)} must be divisible by 4");
 
             ScriptLength = sizeInBytes / 4;
-            ScriptName = scriptName;
 
             var scriptReader = new ScriptReader(data, address);
             // TODO: truncate commands that exceed ScriptLength
@@ -27,6 +26,12 @@ namespace SF3.Models.Structs.Shared {
         public string ScriptName {
             get => _scriptName;
             set => _scriptName = value ?? "";
+        }
+
+        private string _scriptNote = "";
+        public string ScriptNote {
+            get => _scriptNote;
+            set => _scriptNote = value ?? "";
         }
 
         public uint[] GetScriptDataCopy() {

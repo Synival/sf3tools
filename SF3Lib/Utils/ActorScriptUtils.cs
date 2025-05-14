@@ -1,4 +1,7 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
+using SF3.Actors;
+using SF3.Models.Structs.Shared;
 using SF3.Types;
 using static CommonLib.Utils.EnumHelpers;
 using static CommonLib.Utils.ValueUtils;
@@ -153,6 +156,21 @@ namespace SF3.Utils {
                 default:
                     return true;
             }
+        }
+
+        public static string FindKnownScriptName(uint[] data) {
+            var matchingData = KnownScripts.AllKnownScripts.Cast<KeyValuePair<string, uint[]>?>().FirstOrDefault(x => Enumerable.SequenceEqual(data, x.Value.Value));
+            return matchingData?.Key;
+        }
+
+        public static string DetermineScriptName(ActorScript actorScript) {
+            var data = actorScript.GetScriptDataCopy();
+
+            var name = FindKnownScriptName(data);
+            if (name == null && data.Length == 5 && data[0] == 0x22 && data[2] == 0x0C && data[3] == 0xFFFF && data[4] == 0)
+                name = $"Run function 0x{data[1]:X8}";
+
+            return name ?? "";
         }
     }
 }

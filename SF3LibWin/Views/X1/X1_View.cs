@@ -37,7 +37,12 @@ namespace SF3.Win.Views.X1 {
                 CreateChild(new TextArrayView("Scripts",
                     Model.ScriptsByAddress.ToDictionary(
                         x => "0x" + x.Key.ToString("X8") + (Model.ScriptsByAddress.ContainsKey(x.Key) ? $": {Model.ScriptsByAddress[x.Key].ScriptName}" : ""),
-                        x => x.Value.Text
+                        x =>
+                            "// " + (x.Value.ScriptName == "" ? "(Unnamed Script)" : x.Value.ScriptName) + "\r\n" +
+                            "// -------------------------------------------\r\n" +
+                            string.Join("\r\n", x.Value.ScriptNote.Split("\r\n").Where(y => y != "").Select(y => "// " + y)) +
+                            "\r\n\r\n" +
+                            x.Value.Text
                     )
                 ));
             }
