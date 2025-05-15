@@ -17,6 +17,7 @@ namespace SF3.Win.Views {
             Control.Multiline = true;
             Control.ScrollBars = ScrollBars.Both;
             Control.WordWrap = false;
+            Control.BackColor = SystemColors.Window;
 
             UpdateData();
             return rval;
