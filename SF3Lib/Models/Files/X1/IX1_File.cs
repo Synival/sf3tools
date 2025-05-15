@@ -8,8 +8,8 @@ using SF3.Types;
 
 namespace SF3.Models.Files.X1 {
     public interface IX1_File : IScenarioTableFile {
+        uint RamAddress { get; }
         bool IsBTL99 { get; }
-
         bool IsBattle { get; }
 
         InteractableTable InteractableTable { get; }

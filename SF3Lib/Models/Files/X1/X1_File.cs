@@ -49,6 +49,8 @@ namespace SF3.Models.Files.X1 {
             var battlePointersPointerPointerAddress = isScn1OrBTL99 ? 0x0018 : 0x0024;
             sub = IsBTL99 ? 0x06060000 : Scenario == ScenarioType.Scenario1 ? 0x0605f000 : 0x0605e000;
 
+            RamAddress = (uint) sub;
+
             battlePointersPointerAddress = Data.GetDouble(battlePointersPointerPointerAddress) - sub;
             battlePointersAddress = Data.GetDouble(battlePointersPointerAddress);
 
@@ -377,8 +379,8 @@ namespace SF3.Models.Files.X1 {
 
         public override string Title => base.Title + " Type: " + (IsBTL99 ? "BTL99" : IsBattle == true ? "Battle" : "Town");
 
+        public uint RamAddress { get; private set; }
         public bool IsBTL99 { get; }
-
         public bool IsBattle { get; private set; }
 
         [BulkCopyRecurse]
