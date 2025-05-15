@@ -31,5 +31,22 @@ namespace CommonLib.Utils {
             }
             return -1;
         }
+
+        public static unsafe byte[] ToByteArray(this ushort[] src) {
+            var output = new byte[src.Length * 2];
+            fixed (ushort* srcPtrStart = &src[0])
+            fixed (byte* outputPtrStart = &output[0]) {
+                ushort* srcPtr = srcPtrStart;
+                byte* outputPtr = outputPtrStart;
+
+                for (int i = 0; i < src.Length; i++) {
+                    ushort srcValue = *(srcPtr++);
+                    *(outputPtr++) = (byte) (srcValue >> 8);
+                    *(outputPtr++) = (byte) (srcValue);
+                }
+            }
+
+            return output;
+        }
     }
 }

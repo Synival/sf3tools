@@ -74,5 +74,14 @@ namespace CommonLib.Tests.Utils {
             var index = DataUtils.IndexOfSubset(dataSet, _testSubset);
             Assert.AreEqual(-1, index);
         }
+
+        [TestMethod]
+        public void ToByteArray_WithUShortArray_ReturnsExpectedByteArray() {
+            ushort[] ushortArray = [ 0xDEAD, 0xBEEF, 0xFEED, 0xDAD0 ];
+            byte[] expectedByteArray = [ 0xDE, 0xAD, 0xBE, 0xEF, 0xFE, 0xED, 0xDA, 0xD0 ];
+
+            var byteArray = ushortArray.ToByteArray();
+            Assert.IsTrue(Enumerable.SequenceEqual(byteArray, expectedByteArray));
+        }
     }
 }
