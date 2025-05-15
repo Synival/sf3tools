@@ -83,5 +83,14 @@ namespace CommonLib.Tests.Utils {
             var byteArray = ushortArray.ToByteArray();
             Assert.IsTrue(Enumerable.SequenceEqual(byteArray, expectedByteArray));
         }
+
+        [TestMethod]
+        public void ToByteArray_WithUIntArray_ReturnsExpectedByteArray() {
+            uint[] uintArray = [ 0xDEADBEEF, 0xFEEDDAD0 ];
+            byte[] expectedByteArray = [ 0xDE, 0xAD, 0xBE, 0xEF, 0xFE, 0xED, 0xDA, 0xD0 ];
+
+            var byteArray = uintArray.ToByteArray();
+            Assert.IsTrue(Enumerable.SequenceEqual(byteArray, expectedByteArray));
+        }
     }
 }
