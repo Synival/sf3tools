@@ -26,5 +26,6 @@ namespace SF3.Models.Files.X1 {
         CharacterTargetUnknownTable[] CharacterTargetUnknownTables { get; }
 
         Dictionary<uint, ActorScript> ScriptsByAddress { get; }
+        Dictionary<uint, string> KnownDataByAddress { get; }
     }
 }

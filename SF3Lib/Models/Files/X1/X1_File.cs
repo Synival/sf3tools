@@ -14,6 +14,7 @@ using static CommonLib.Utils.ResourceUtils;
 using SF3.Actors;
 using SF3.Models.Structs.Shared;
 using SF3.Utils;
+using CommonLib.Utils;
 
 namespace SF3.Models.Files.X1 {
     public class X1_File : ScenarioTableFile, IX1_File {
@@ -192,6 +193,35 @@ namespace SF3.Models.Files.X1 {
 
             // TODO: Lazy! Let's do something better.
             PopulateScripts((uint) sub);
+
+            // Locate difficult-to-find common functions/data that are shared between X1 files.
+            var x1Data = Data.GetDataCopy();
+            KnownDataByAddress =
+                KnownX1Functions.AllKnownFunctions
+                    .Select(x => new { Name = x.Key, Index = x1Data.IndexOfSubset(x.Value.ToByteArray()) })
+                    .Where(x => x.Index >= 0)
+                    .ToDictionary(x => (uint) x.Index + RamAddress, x => x.Name);
+
+            // Look for references to that function.
+            var instantiateModelsAddr = KnownDataByAddress.Where(x => x.Value == "InstantiateModels(ModelMatrixInit &initTable)").Select(x => (uint?) x.Key).FirstOrDefault();
+            if (instantiateModelsAddr.HasValue) {
+                var addrAsBytes = instantiateModelsAddr.Value.ToByteArray();
+                var indexOfAddr = x1Data.IndexOfSubset(addrAsBytes);
+                if (indexOfAddr >= 0) {
+                    KnownDataByAddress[(uint) (indexOfAddr + sub)] = $"Pointer to InstantiateModels() (0x{instantiateModelsAddr.Value:X8})";
+
+                    var preAddr = indexOfAddr - 4;
+                    var preAddrValue = (x1Data[preAddr + 0] << 24) |
+                                       (x1Data[preAddr + 1] << 16) |
+                                       (x1Data[preAddr + 2] <<  8) |
+                                       (x1Data[preAddr + 3] <<  0);
+
+                    if (preAddrValue >= sub && preAddrValue < sub + x1Data.Length) {
+                        KnownDataByAddress[(uint) (preAddr + sub)] = $"Pointer to ModelMatrixIndex[] (0x{preAddrValue:X8})";
+                        // TODO: start adding lots of tables!
+                    }
+                }
+            }
 
             return tables;
         }
@@ -408,5 +438,7 @@ namespace SF3.Models.Files.X1 {
 
         [BulkCopyRecurse]
         public Dictionary<uint, ActorScript> ScriptsByAddress { get; private set; }
+
+        public Dictionary<uint, string> KnownDataByAddress { get; private set; }
     }
 }
