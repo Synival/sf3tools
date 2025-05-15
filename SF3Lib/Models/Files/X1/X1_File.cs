@@ -202,6 +202,8 @@ namespace SF3.Models.Files.X1 {
                     .Where(x => x.Index >= 0)
                     .ToDictionary(x => (uint) x.Index + RamAddress, x => x.Name);
 
+            int modelMatrixInitTableAddr = -1;
+
             // Look for references to that function.
             var instantiateModelsAddr = KnownDataByAddress.Where(x => x.Value == "InstantiateModels(ModelMatrixInit &initTable)").Select(x => (uint?) x.Key).FirstOrDefault();
             if (instantiateModelsAddr.HasValue) {
@@ -218,10 +220,13 @@ namespace SF3.Models.Files.X1 {
 
                     if (preAddrValue >= sub && preAddrValue < sub + x1Data.Length) {
                         KnownDataByAddress[(uint) (preAddr + sub)] = $"Pointer to ModelMatrixIndex[] (0x{preAddrValue:X8})";
-                        // TODO: start adding lots of tables!
+                        modelMatrixInitTableAddr = preAddrValue - sub;
                     }
                 }
             }
+
+            if (modelMatrixInitTableAddr >= 0)
+                tables.Add(ModelMatrixInitTable = ModelMatrixGroupTable.Create(Data, "ModelMatrixInit", modelMatrixInitTableAddr, addEndModel: false));
 
             return tables;
         }
@@ -435,6 +440,9 @@ namespace SF3.Models.Files.X1 {
         public CharacterTargetPriorityTable[] CharacterTargetPriorityTables { get; private set; }
         [BulkCopyRecurse]
         public CharacterTargetUnknownTable[] CharacterTargetUnknownTables { get; private set; }
+
+        [BulkCopyRecurse]
+        public ModelMatrixGroupTable ModelMatrixInitTable { get; private set; }
 
         [BulkCopyRecurse]
         public Dictionary<uint, ActorScript> ScriptsByAddress { get; private set; }
