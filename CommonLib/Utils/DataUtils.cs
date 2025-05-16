@@ -1,21 +1,52 @@
+using System.Collections.Generic;
+
 namespace CommonLib.Utils {
     public static class DataUtils {
-        public static unsafe int IndexOfSubset(this byte[] src, byte[] subset, int startPos = 0) {
-            // Get some easy failure cases out of the way.
-            if (src == null || subset == null || src.Length == 0 || subset.Length == 0 || subset.Length - startPos > src.Length || startPos >= src.Length || startPos < 0)
+        public static int[] IndicesOfSubset(this byte[] src, byte[] subset, int startPos = 0, int alignment = 1) {
+            var indices = new List<int>();
+            while (true) {
+                var index = IndexOfSubset(src, subset, startPos, alignment);
+                if (index < 0)
+                    break;
+                startPos = index + alignment;
+                indices.Add(index);
+            }
+            return indices.ToArray();
+        }
+
+        public static unsafe int IndexOfSubset(this byte[] src, byte[] subset, int startPos = 0, int alignment = 1) {
+            // Check for invalid values.
+            if (src == null || subset == null || startPos < 0 || alignment < 1)
                 return -1;
 
+            // Make sure 'startPos' is in increments of 'alignment'.
+            if (startPos % alignment != 0)
+                startPos = ((startPos / alignment) + 1) * alignment;
+
+            // Make sure we're not trying to search beyond the length of 'src'.
+            if (startPos >= src.Length)
+                return -1;
+
+            // Searching for 0 bytes is easy, it's right there!
+            if (subset.Length == 0)
+                return startPos;
+
+            // Bail early if what we're searching for is too large for the search area.
             var searchLen = src.Length - subset.Length + 1;
+            if (startPos >= searchLen)
+                return -1;
 
             fixed (byte* srcPtrStart = &src[0])
             fixed (byte* subsetPtrStart = &subset[0]) {
                 byte* srcPtr = srcPtrStart + startPos;
 
-                for (int i = startPos; i < searchLen; i++) {
-                    if (*(srcPtr++) != *(subsetPtrStart))
+                for (int i = startPos; i < searchLen; i += alignment) {
+                    var equal = *srcPtr == *subsetPtrStart;
+                    srcPtr += alignment;
+                    if (!equal)
                         continue;
 
-                    byte* srcSearchPtr = srcPtr;
+                    byte* srcSearchPtr = srcPtr - alignment + 1;
                     byte* subsetSearchPtr = subsetPtrStart + 1;
 
                     int j = 1;
