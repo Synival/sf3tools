@@ -32,8 +32,10 @@ namespace SF3.Win.Views.X1 {
                 CreateChild(new TableArrayView<CharacterTargetPriorityTable>("Character Target Priorities", Model.CharacterTargetPriorityTables, ngc));
             if (Model.CharacterTargetUnknownTables != null)
                 CreateChild(new TableArrayView<CharacterTargetUnknownTable>("Unknown 16 Tables", Model.CharacterTargetUnknownTables, ngc));
-           if (Model.ModelMatrixInitTable != null)
-                CreateChild(new TableView("Model + Matrix Groups", Model.ModelMatrixInitTable, ngc));
+            if (Model.ModelMatrixGroupTable != null)
+                CreateChild(new TableView("Models+Matrix Groups", Model.ModelMatrixGroupTable, ngc));
+            if (Model.ModelMatrixGroupLinkTablesByAddress?.Count > 0)
+                CreateChild(new TableArrayView<ModelMatrixGroupLinkTable>("Model+Matrix Group Links", Model.ModelMatrixGroupLinkTablesByAddress.Values.ToArray(), ngc));
 
             if (Model.ScriptsByAddress?.Count > 0) {
                 CreateChild(new TextArrayView("Scripts",

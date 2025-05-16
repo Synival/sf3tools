@@ -191,9 +191,6 @@ namespace SF3.Models.Files.X1 {
             if (tileMovementAddress >= 0)
                 tables.Add(TileMovementTable = TileMovementTable.Create(Data, "TileMovement", tileMovementAddress, true));
 
-            // TODO: Lazy! Let's do something better.
-            PopulateScripts((uint) sub);
-
             // Locate difficult-to-find common functions/data that are shared between X1 files.
             var x1Data = Data.GetDataCopy();
             KnownDataByAddress =
@@ -225,8 +222,18 @@ namespace SF3.Models.Files.X1 {
                 }
             }
 
-            if (modelMatrixInitTableAddr >= 0)
-                tables.Add(ModelMatrixInitTable = ModelMatrixGroupTable.Create(Data, "ModelMatrixInit", modelMatrixInitTableAddr, addEndModel: false));
+            if (modelMatrixInitTableAddr >= 0) {
+                tables.Add(ModelMatrixGroupTable = ModelMatrixGroupTable.Create(Data, "ModelMatrixGroups", modelMatrixInitTableAddr, addEndModel: false));
+
+                ModelMatrixGroupLinkTablesByAddress = new Dictionary<uint, ModelMatrixGroupLinkTable>();
+                var modelGroupAddresses = ModelMatrixGroupTable.Select(x => x.ModelMatrixGroupLinkTablePtr).Distinct().OrderBy(x => x).ToArray();
+                int index = 0;
+                foreach (var addr in modelGroupAddresses)
+                    ModelMatrixGroupLinkTablesByAddress[addr] = ModelMatrixGroupLinkTable.Create(Data, $"ModelMatrixGroupLinks{index++:X2}", (int) (addr - sub), false);
+            }
+
+            // TODO: Lazy! Let's do something better.
+            PopulateScripts((uint) sub);
 
             return tables;
         }
@@ -269,6 +276,21 @@ namespace SF3.Models.Files.X1 {
                     _ = scriptAddrs.Add(addr);
                     _ = knownScriptAddrs.Add(addr);
                     AddScriptInfo(addr, "Referenced in NPC Table", prepend: true);
+                }
+            }
+
+            // Add known references to scripts
+            if (ModelMatrixGroupLinkTablesByAddress != null) {
+                var addrs = ModelMatrixGroupLinkTablesByAddress.SelectMany(x => x.Value.Select(y => y.ScriptAddr))
+                    .Where(x => x >= 0)
+                    .OrderBy(x => x)
+                    .Distinct()
+                    .ToArray();
+
+                foreach (var addr in addrs) {
+                    _ = scriptAddrs.Add(addr);
+                    _ = knownScriptAddrs.Add(addr);
+                    AddScriptInfo(addr, "Referenced in ModelMatrixLink Table", prepend: true);
                 }
             }
 
@@ -442,7 +464,9 @@ namespace SF3.Models.Files.X1 {
         public CharacterTargetUnknownTable[] CharacterTargetUnknownTables { get; private set; }
 
         [BulkCopyRecurse]
-        public ModelMatrixGroupTable ModelMatrixInitTable { get; private set; }
+        public ModelMatrixGroupTable ModelMatrixGroupTable { get; private set; }
+        [BulkCopyRecurse]
+        public Dictionary<uint, ModelMatrixGroupLinkTable> ModelMatrixGroupLinkTablesByAddress { get; private set; }
 
         [BulkCopyRecurse]
         public Dictionary<uint, ActorScript> ScriptsByAddress { get; private set; }
