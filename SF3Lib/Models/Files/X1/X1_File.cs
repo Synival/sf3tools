@@ -199,14 +199,15 @@ namespace SF3.Models.Files.X1 {
                     .Where(x => x.Index >= 0)
                     .ToDictionary(x => (uint) x.Index + RamAddress, x => x.Name);
 
-            int modelMatrixInitTableAddr = -1;
+            var modelMatrixGroupTableAddrs = new List<uint>();
 
             // Look for references to that function.
             var instantiateModelsAddr = KnownDataByAddress.Where(x => x.Value == "InstantiateModels(ModelMatrixInit &initTable)").Select(x => (uint?) x.Key).FirstOrDefault();
             if (instantiateModelsAddr.HasValue) {
                 var addrAsBytes = instantiateModelsAddr.Value.ToByteArray();
-                var indexOfAddr = x1Data.IndexOfSubset(addrAsBytes);
-                if (indexOfAddr >= 0) {
+                var indicesOfAddr = x1Data.IndicesOfSubset(addrAsBytes, alignment: 4);
+
+                foreach (var indexOfAddr in indicesOfAddr) {
                     KnownDataByAddress[(uint) (indexOfAddr + sub)] = $"Pointer to InstantiateModels() (0x{instantiateModelsAddr.Value:X8})";
 
                     var preAddr = indexOfAddr - 4;
@@ -216,21 +217,27 @@ namespace SF3.Models.Files.X1 {
                                        (x1Data[preAddr + 3] <<  0);
 
                     if (preAddrValue >= sub && preAddrValue < sub + x1Data.Length) {
-                        KnownDataByAddress[(uint) (preAddr + sub)] = $"Pointer to ModelMatrixIndex[] (0x{preAddrValue:X8})";
-                        modelMatrixInitTableAddr = preAddrValue - sub;
+                        KnownDataByAddress[(uint) (preAddr + sub)] = $"Pointer to ModelMatrixGroup[] (0x{preAddrValue:X8})";
+                        modelMatrixGroupTableAddrs.Add((uint) preAddrValue);
                     }
                 }
             }
 
-            if (modelMatrixInitTableAddr >= 0) {
-                tables.Add(ModelMatrixGroupTable = ModelMatrixGroupTable.Create(Data, "ModelMatrixGroups", modelMatrixInitTableAddr, addEndModel: false));
+            ModelMatrixGroupTablesByAddress = new Dictionary<uint, ModelMatrixGroupTable>();
+            modelMatrixGroupTableAddrs = modelMatrixGroupTableAddrs.OrderBy(x => x).Distinct().ToList();
+            int groupIndex = 0;
+            foreach (var addr in modelMatrixGroupTableAddrs)
+                tables.Add(ModelMatrixGroupTablesByAddress[addr] = ModelMatrixGroupTable.Create(Data, $"ModelMatrixGroups_{groupIndex++:X2}", (int) (addr - sub), addEndModel: false));
 
-                ModelMatrixGroupLinkTablesByAddress = new Dictionary<uint, ModelMatrixGroupLinkTable>();
-                var modelGroupAddresses = ModelMatrixGroupTable.Select(x => x.ModelMatrixGroupLinkTablePtr).Distinct().OrderBy(x => x).ToArray();
-                int index = 0;
-                foreach (var addr in modelGroupAddresses)
-                    ModelMatrixGroupLinkTablesByAddress[addr] = ModelMatrixGroupLinkTable.Create(Data, $"ModelMatrixGroupLinks{index++:X2}", (int) (addr - sub), false);
-            }
+            ModelMatrixGroupLinkTablesByAddress = new Dictionary<uint, ModelMatrixGroupLinkTable>();
+            var modelMatrixGroupLinkTableAddrs = ModelMatrixGroupTablesByAddress.Values
+                .SelectMany(x => x.Select(y => y.ModelMatrixGroupLinkTablePtr))
+                .OrderBy(x => x)
+                .Distinct()
+                .ToArray();
+            int groupLinkIndex = 0;
+            foreach (var addr in modelMatrixGroupLinkTableAddrs)
+                ModelMatrixGroupLinkTablesByAddress[addr] = ModelMatrixGroupLinkTable.Create(Data, $"ModelMatrixGroupLinks_{groupLinkIndex++:X2}", (int) (addr - sub), false);
 
             // TODO: Lazy! Let's do something better.
             PopulateScripts((uint) sub);
@@ -464,7 +471,7 @@ namespace SF3.Models.Files.X1 {
         public CharacterTargetUnknownTable[] CharacterTargetUnknownTables { get; private set; }
 
         [BulkCopyRecurse]
-        public ModelMatrixGroupTable ModelMatrixGroupTable { get; private set; }
+        public Dictionary<uint, ModelMatrixGroupTable> ModelMatrixGroupTablesByAddress { get; private set; }
         [BulkCopyRecurse]
         public Dictionary<uint, ModelMatrixGroupLinkTable> ModelMatrixGroupLinkTablesByAddress { get; private set; }
 

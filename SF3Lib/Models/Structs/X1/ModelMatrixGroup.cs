@@ -2,14 +2,14 @@ using CommonLib.Attributes;
 using SF3.ByteData;
 
 namespace SF3.Models.Structs.X1 {
-    public class ModelMatrixSetupGroup : Struct {
+    public class ModelMatrixGroup : Struct {
         private readonly int _modelMatrixGroupLinkTablePtrAddr;
         private readonly int _matrixTablePtrAddr;
         private readonly int _posXAddr;
         private readonly int _posYAddr;
         private readonly int _posZAddr;
 
-        public ModelMatrixSetupGroup(IByteData data, int id, string name, int address)
+        public ModelMatrixGroup(IByteData data, int id, string name, int address)
         : base(data, id, name, address, 0x14) {
             _modelMatrixGroupLinkTablePtrAddr = Address + 0x00; // 4 bytes
             _matrixTablePtrAddr               = Address + 0x04; // 4 bytes

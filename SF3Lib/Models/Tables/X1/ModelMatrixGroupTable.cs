@@ -3,7 +3,7 @@ using SF3.ByteData;
 using SF3.Models.Structs.X1;
 
 namespace SF3.Models.Tables.X1 {
-    public class ModelMatrixGroupTable : TerminatedTable<ModelMatrixSetupGroup> {
+    public class ModelMatrixGroupTable : TerminatedTable<ModelMatrixGroup> {
         protected ModelMatrixGroupTable(IByteData data, string name, int address, bool addEndModel = true) : base(data, name, address, 4, null) {
             AddEndModel = addEndModel;
         }
@@ -16,7 +16,7 @@ namespace SF3.Models.Tables.X1 {
         }
 
         public override bool Load()
-            => Load((id, address) => new ModelMatrixSetupGroup(Data, id, $"ModelMatrixGroup_{id}", address),
+            => Load((id, address) => new ModelMatrixGroup(Data, id, $"ModelMatrixGroup_{id}", address),
                 (rows, newModel) => newModel.ModelMatrixGroupLinkTablePtr != 0,
                 addEndModel: AddEndModel);
 

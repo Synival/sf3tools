@@ -24,7 +24,7 @@ namespace SF3.Models.Files.X1 {
         TileMovementTable TileMovementTable { get; }
         CharacterTargetPriorityTable[] CharacterTargetPriorityTables { get; }
         CharacterTargetUnknownTable[] CharacterTargetUnknownTables { get; }
-        ModelMatrixGroupTable ModelMatrixGroupTable { get; }
+        Dictionary<uint, ModelMatrixGroupTable> ModelMatrixGroupTablesByAddress { get; }
         Dictionary<uint, ModelMatrixGroupLinkTable> ModelMatrixGroupLinkTablesByAddress { get; }
 
         Dictionary<uint, ActorScript> ScriptsByAddress { get; }
