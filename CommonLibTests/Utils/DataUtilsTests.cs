@@ -6,6 +6,32 @@ namespace CommonLib.Tests.Utils {
         private static byte[] _testSubset = [0xDE, 0xAD, 0xBE, 0xEF];
 
         [TestMethod]
+        public void IndicesOfSubset_WithMultipleMatches_ReturnsAllExpectedIndices() {
+            byte[] dataSet = [
+                0xDE, 0xAD, 0xBE, 0xEF,  4,  5,  6,  7,
+                0xDE, 0xAD, 0xBE, 0xEF, 12, 13, 14, 15,
+                0xDE, 0xAD, 0xBE, 0xEF, 20, 21, 22, 23,
+                0xDE, 0xAD, 0xBE, 0xEF
+            ];
+
+            var indices = DataUtils.IndicesOfSubset(dataSet, _testSubset);
+            Assert.IsTrue(Enumerable.SequenceEqual(indices, [0, 8, 16, 24]));
+        }
+
+        [TestMethod]
+        public void IndicesOfSubset_WithMultipleMatches_WithAlignment_DoesntMatchUnalignedResults() {
+            byte[] dataSet = [
+                0xDE, 0xAD, 0xBE, 0xEF,  4,  5,  6,  7,
+                0xDE, 0xAD, 0xBE, 0xEF, 12, 13, 14, 15,
+                0xDE, 0xAD, 0xBE, 0xEF, 20, 21, 0xDE, 0xAD,
+                0xBE, 0xEF, 26, 27
+            ];
+
+            var indices = DataUtils.IndicesOfSubset(dataSet, _testSubset, alignment: 4);
+            Assert.IsTrue(Enumerable.SequenceEqual(indices, [0, 8, 16]));
+        }
+
+        [TestMethod]
         public void IndexOfSubset_WithTestSubsetInTheMiddle_ReturnsExpectedIndex() {
             byte[] dataSet = [0, 1, 2, 3, 0xDE, 0xAD, 0xBE, 0xEF, 8, 9, 10, 11];
             var index = DataUtils.IndexOfSubset(dataSet, _testSubset);
