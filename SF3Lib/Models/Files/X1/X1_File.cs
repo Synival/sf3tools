@@ -202,13 +202,19 @@ namespace SF3.Models.Files.X1 {
             var modelMatrixGroupTableAddrs = new List<uint>();
 
             // Look for references to that function.
-            var instantiateModelsAddr = KnownDataByAddress.Where(x => x.Value == "InstantiateModels(ModelMatrixInit &initTable)").Select(x => (uint?) x.Key).FirstOrDefault();
+            var instantiateModelsFuncs = KnownDataByAddress
+                .Where(x => x.Value.StartsWith("InstantiateModels"))
+                .ToDictionary(x => x.Key, x => x.Value);
+
+            var instantiateModelsAddr = instantiateModelsFuncs.Count > 0 ? instantiateModelsFuncs.First().Key : (uint?) null;
+            var instantiateModelsFuncName = instantiateModelsFuncs.Count > 0 ? instantiateModelsFuncs.First().Value : null;
+
             if (instantiateModelsAddr.HasValue) {
                 var addrAsBytes = instantiateModelsAddr.Value.ToByteArray();
                 var indicesOfAddr = x1Data.IndicesOfSubset(addrAsBytes, alignment: 4);
 
                 foreach (var indexOfAddr in indicesOfAddr) {
-                    KnownDataByAddress[(uint) (indexOfAddr + sub)] = $"Pointer to InstantiateModels() (0x{instantiateModelsAddr.Value:X8})";
+                    KnownDataByAddress[(uint) (indexOfAddr + sub)] = $"Pointer to {instantiateModelsFuncName}() (0x{instantiateModelsAddr.Value:X8})";
 
                     var preAddr = indexOfAddr - 4;
                     var preAddrValue = (x1Data[preAddr + 0] << 24) |

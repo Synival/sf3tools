@@ -54,7 +54,7 @@ namespace SF3.Win.Views.X1 {
             if (Model.KnownDataByAddress.Count > 0) {
                 var strings = Model.KnownDataByAddress.Select(x => $"0x{x.Key - Model.RamAddress:X4} / 0x{x.Key:X8}: {x.Value}").ToArray();
                 var text = string.Join("\r\n", strings);
-                CreateChild(new TextView("Functions Found", text));
+                CreateChild(new TextView("Data/Functions Found", text));
             }
 
             if (Model.Battles != null) {
