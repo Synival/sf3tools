@@ -3,6 +3,7 @@ namespace SF3.Types {
     /// List of named values for SF3.
     /// </summary>
     public enum NamedValueType {
+        ActorScript,
         Character,
         CharacterClass,
         Droprate,

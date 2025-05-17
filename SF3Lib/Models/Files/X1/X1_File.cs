@@ -154,7 +154,7 @@ namespace SF3.Models.Files.X1 {
             if (battlePointersAddress >= 0)
                 tables.Add(BattlePointersTable);
             if (npcAddress >= 0)
-                tables.Add(NpcTable = NpcTable.Create(Data, "NPCs", npcAddress));
+                tables.Add(NpcTable = NpcTable.Create(Data, "NPCs", npcAddress, null));
             if (treasureAddress >= 0)
                 tables.Add(InteractableTable = InteractableTable.Create(Data, "Interactables", treasureAddress, NameGetterContext, NpcTable));
             if (enterAddress >= 0)
@@ -243,10 +243,19 @@ namespace SF3.Models.Files.X1 {
                 .ToArray();
             int groupLinkIndex = 0;
             foreach (var addr in modelMatrixGroupLinkTableAddrs)
-                ModelMatrixGroupLinkTablesByAddress[addr] = ModelMatrixGroupLinkTable.Create(Data, $"ModelMatrixGroupLinks_{groupLinkIndex++:X2}", (int) (addr - sub), false);
+                ModelMatrixGroupLinkTablesByAddress[addr] = ModelMatrixGroupLinkTable.Create(Data, $"ModelMatrixGroupLinks_{groupLinkIndex++:X2}", (int) (addr - sub), null, addEndModel: false);
 
             // TODO: Lazy! Let's do something better.
             PopulateScripts((uint) sub);
+
+            // Add references to the scripts for several tables so we can have a nice dropdown.
+            if (NpcTable != null)
+                foreach (var npc in NpcTable)
+                    npc.ActorScripts = ScriptsByAddress;
+
+            if (ModelMatrixGroupLinkTablesByAddress != null)
+                foreach (var table in ModelMatrixGroupLinkTablesByAddress.Values)
+                    table.ActorScripts = ScriptsByAddress;
 
             return tables;
         }

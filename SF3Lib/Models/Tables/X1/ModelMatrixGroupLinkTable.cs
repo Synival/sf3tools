@@ -1,24 +1,40 @@
 using System;
+using System.Collections.Generic;
 using SF3.ByteData;
+using SF3.Models.Structs.Shared;
 using SF3.Models.Structs.X1;
 
 namespace SF3.Models.Tables.X1 {
     public class ModelMatrixGroupLinkTable : TerminatedTable<ModelMatrixGroupLink> {
-        protected ModelMatrixGroupLinkTable(IByteData data, string name, int address, bool addEndModel = true) : base(data, name, address, 2, null) {
+        protected ModelMatrixGroupLinkTable(IByteData data, string name, int address, Dictionary<uint, ActorScript> actorScripts, bool addEndModel = true)
+        : base(data, name, address, 2, null) {
+            _actorScripts = actorScripts;
             AddEndModel = addEndModel;
         }
 
-        public static ModelMatrixGroupLinkTable Create(IByteData data, string name, int address, bool addEndModel = true) {
-            var newTable = new ModelMatrixGroupLinkTable(data, name, address, addEndModel: addEndModel);
+        public static ModelMatrixGroupLinkTable Create(IByteData data, string name, int address, Dictionary<uint, ActorScript> actorScripts, bool addEndModel = true) {
+            var newTable = new ModelMatrixGroupLinkTable(data, name, address, actorScripts, addEndModel: addEndModel);
             if (!newTable.Load())
                 throw new InvalidOperationException("Couldn't initialize table");
             return newTable;
         }
 
         public override bool Load()
-            => Load((id, address) => new ModelMatrixGroupLink(Data, id, $"ModelMatrixLink_{id}", address),
+            => Load((id, address) => new ModelMatrixGroupLink(Data, id, $"ModelMatrixLink_{id}", address, ActorScripts),
                 (rows, newModel) => newModel.ModelID != -1,
                 addEndModel: AddEndModel);
+
+        private Dictionary<uint, ActorScript> _actorScripts;
+        public Dictionary<uint, ActorScript> ActorScripts {
+            get => _actorScripts;
+            set {
+                if (value != _actorScripts) {
+                    _actorScripts = value;
+                    foreach (var row in this)
+                        row.ActorScripts = value;
+                }
+            }
+        }
 
         public bool AddEndModel { get; }
     }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using CommonLib.NamedValues;
+using SF3.Models.Structs.Shared;
 using SF3.Types;
 
 namespace SF3.NamedValues {
@@ -35,6 +36,13 @@ namespace SF3.NamedValues {
             Scenario = scenario;
 
             _nameGetters = new Dictionary<NamedValueType, SubMethods>() {
+                { NamedValueType.ActorScript,
+                    new SubMethods(
+                        (o, p, v, a) => GetActorScriptNameAndInfo(o, p, v, a),
+                        AlwaysCanGetName,
+                        AlwaysCanGetInfo
+                    ) },
+
                 { NamedValueType.Character,           new SubMethods((o, p, v, a) => new NameAndInfo(v, ValueNames.CharacterInfo.Info[Scenario])) },
                 { NamedValueType.CharacterClass,      new SubMethods((o, p, v, a) => new NameAndInfo(v, ValueNames.CharacterClassInfo)) },
                 { NamedValueType.Droprate,            new SubMethods((o, p, v, a) => new NameAndInfo(v, ValueNames.DroprateInfo)) },
@@ -96,6 +104,7 @@ namespace SF3.NamedValues {
 
         public string GetName(object obj, PropertyInfo property, object value, params object[] parameters)
             => _nameGetters[(NamedValueType) parameters[0]].GetNameAndInfo(obj, property, Convert.ToInt32(value), parameters).Name;
+
         public INamedValueInfo GetInfo(object obj, PropertyInfo property, params object[] parameters)
             => _nameGetters[(NamedValueType) parameters[0]].GetNameAndInfo(obj, property, 0, parameters).Info;
 
@@ -106,7 +115,7 @@ namespace SF3.NamedValues {
             => (parameters.Length > index) ? (T?) parameters[index] : null;
 
         private PropertyInfo GetParameterReferencedProperty(object obj, object[] parameters, int index)
-            => (parameters.Length > index) ? obj.GetType().GetProperty((string) parameters[index]) : null;
+            => (parameters.Length > index) ? obj.GetType().GetProperty((string) parameters[index], BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance) : null;
 
         private object GetReferencedPropertyValue(object obj, object[] parameters, int index, object defaultValue = null)
             => GetParameterReferencedProperty(obj, parameters, index)?.GetValue(obj) ?? defaultValue;
@@ -156,6 +165,16 @@ namespace SF3.NamedValues {
             if (!_nameGetters.ContainsKey((NamedValueType) parameters[0]))
                 return false;
             return _nameGetters[valueType].CanGetInfo(obj, property, parameters);
+        }
+
+        private NameAndInfo GetActorScriptNameAndInfo(object obj, PropertyInfo property, int value, object[] parameters) {
+            var scripts = GetReferencedPropertyValueAsT<Dictionary<uint, ActorScript>>(obj, parameters, 1);
+
+            // TODO: this is really aggressive!! cache it somehow???
+            var possibleValues = scripts.ToDictionary(x => (int) x.Key, x => (x.Value.ScriptName == "") ? "(unnamed)" : x.Value.ScriptName);
+            var namedValueInfo = new NamedValueInfo(0, 0, "X8", possibleValues);
+
+            return new NameAndInfo(value, namedValueInfo);
         }
 
         private (NamedValueType, object[]) GetConditionalTypeAndParameters(object obj, object[] parameters) {

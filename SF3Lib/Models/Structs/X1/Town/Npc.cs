@@ -1,5 +1,7 @@
+using System.Collections.Generic;
 using CommonLib.Attributes;
 using SF3.ByteData;
+using SF3.Models.Structs.Shared;
 using SF3.Types;
 
 namespace SF3.Models.Structs.X1.Town {
@@ -14,8 +16,10 @@ namespace SF3.Models.Structs.X1.Town {
         private readonly int _interactDirectionBehaviorAddr;
         private readonly int _paddingAddr;
 
-        public Npc(IByteData data, int id, string name, int address)
+        public Npc(IByteData data, int id, string name, int address, Dictionary<uint, ActorScript> actorScripts)
         : base(data, id, name, address, 0x18) {
+            ActorScripts = actorScripts;
+
             _spriteIDAddr      = Address + 0x00; // 2 bytes. how is searched. second by being 0x13 is a treasure. if this is 0xffff terminate 
             _flagAddr          = Address + 0x02; // 2 bytes
             _scriptOffsetAddr  = Address + 0x04; // 4 bytes
@@ -26,6 +30,8 @@ namespace SF3.Models.Structs.X1.Town {
             _interactDirectionBehaviorAddr = Address + 0x16; // 1 byte
             _paddingAddr       = Address + 0x17; // 1 byte
         }
+
+        public Dictionary<uint, ActorScript> ActorScripts { get; set; }
 
         [TableViewModelColumn(displayOrder: 0, displayFormat: "X3", minWidth: 200)]
         [BulkCopy]
@@ -54,7 +60,8 @@ namespace SF3.Models.Structs.X1.Town {
             set => FlagCheckedWithValue = (FlagCheckedWithValue == 0xFFFF ? 0xFFFF : (value ? (FlagCheckedWithValue | ~0x1000) : (FlagCheckedWithValue & ~0x1000)));
         }
 
-        [TableViewModelColumn(displayOrder: 2, isPointer: true, minWidth: 120, displayFormat: "X8")]
+        [TableViewModelColumn(displayOrder: 2, isPointer: true, minWidth: 300, displayFormat: "X8")]
+        [NameGetter(NamedValueType.ActorScript, nameof(ActorScripts))]
         [BulkCopy]
         public int ScriptOffset {
             get => Data.GetDouble(_scriptOffsetAddr);
