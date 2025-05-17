@@ -40,21 +40,17 @@ namespace SF3.Win.Views.X1 {
             if (Model.ScriptsByAddress?.Count > 0) {
                 CreateChild(new TextArrayView("Scripts",
                     Model.ScriptsByAddress.ToDictionary(
-                        x => "0x" + x.Key.ToString("X8") + (Model.ScriptsByAddress.ContainsKey(x.Key) ? $": {Model.ScriptsByAddress[x.Key].ScriptName}" : ""),
                         x =>
-                            "// " + (x.Value.ScriptName == "" ? "(Unnamed Script)" : x.Value.ScriptName) + "\r\n" +
+                            $"0x{x.Key.ToString("X8")}" +
+                            (Model.ScriptsByAddress.ContainsKey(x.Key) ? $": {(Model.ScriptsByAddress[x.Key].ScriptName == "" ? "(unnamed)" : Model.ScriptsByAddress[x.Key].ScriptName)}" : ""),
+                        x =>
+                            "// " + (x.Value.ScriptName == "" ? "(unnamed)" : x.Value.ScriptName) + "\r\n" +
                             "// -------------------------------------------\r\n" +
                             string.Join("\r\n", x.Value.ScriptNote.Split("\r\n").Where(y => y != "").Select(y => "// " + y)) +
                             "\r\n\r\n" +
                             x.Value.Text
                     )
                 ));
-            }
-
-            if (Model.KnownDataByAddress.Count > 0) {
-                var strings = Model.KnownDataByAddress.Select(x => $"0x{x.Key - Model.RamAddress:X4} / 0x{x.Key:X8}: {x.Value}").ToArray();
-                var text = string.Join("\r\n", strings);
-                CreateChild(new TextView("Data/Functions Found", text));
             }
 
             if (Model.Battles != null) {
