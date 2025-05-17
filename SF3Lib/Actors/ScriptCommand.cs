@@ -7,7 +7,8 @@ using SF3.Utils;
 
 namespace SF3.Actors {
     public class ScriptCommand {
-        public ScriptCommand(int position, uint[] data, Dictionary<uint, int> labelPositions) {
+        public ScriptCommand(int id, int position, uint[] data, Dictionary<uint, int> labelPositions) {
+            Id       = id;
             Position = position;
             Data     = data;
 
@@ -44,6 +45,7 @@ namespace SF3.Actors {
             FullLine = DataString + new string(' ', paramsMissing * 12) + $" // {Comment}";
         }
 
+        public int Id { get; }
         public int Position { get; }
         public uint[] Data { get; }
         public string DataString { get; }

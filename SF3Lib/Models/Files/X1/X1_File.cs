@@ -333,7 +333,6 @@ namespace SF3.Models.Files.X1 {
             var maybeScriptRamAddrs    = new HashSet<uint>();
             var probablyScriptRamAddrs = new HashSet<uint>();
             var pointerValues          = new HashSet<uint>();
-            var pointerValuesByRamAddr = new Dictionary<uint, uint>();
 
             // Adds a line of text to a list of info for a confirmed or potential script by RAM address.
             void AddScriptInfo(uint ramAddr, string info, bool prepend) {
@@ -366,7 +365,6 @@ namespace SF3.Models.Files.X1 {
                 // This could be a script: add some info.
                 AddScriptInfo(potentialScriptRamAddr, $"Referenced at 0x{addr:X4} / 0x{ramAddr:X8}", prepend: false);
                 _ = pointerValues.Add(potentialScriptRamAddr);
-                pointerValuesByRamAddr[ramAddr] = potentialScriptRamAddr;
             }
 
             // Add known references to scripts from the NpcTable
@@ -408,31 +406,16 @@ namespace SF3.Models.Files.X1 {
                 var ramAddr = addr + RamAddress;
                 if (discoveredPointersByRamAddr.ContainsKey(ramAddr) || knownScriptRamAddrs.Contains(ramAddr))
                     continue;
-
-                // Does this look like a script command?
-                var value = (uint) Data.GetDouble((int) addr);
-                if (value >= 0x00000000 && value < 0x0000002E) {
+                if (ActorScriptUtils.DataLooksLikeBeginningOfScript(Data, addr)) {
                     _ = scriptRamAddrs.Add(ramAddr);
                     _ = maybeScriptRamAddrs.Add(ramAddr);
-                }
-                // Does this look like a script label?
-                else if (value >= 0x80010000u && value < 0x80100000u) {
-                    // It does, but does a script command follow?
-                    var nextAddr = addr + 4;
-                    if (nextAddr < addrMax) {
-                        value = (uint) Data.GetDouble((int) nextAddr);
-                        if (value >= 0x00000000 && value < 0x0000002E) {
-                            // Looks like we found a label with a script command. Let's add this to the 'maybe' pile.
-                            _ = scriptRamAddrs.Add(ramAddr);
-                            _ = maybeScriptRamAddrs.Add(ramAddr);
-                        }
-                    }
                 }
             }
 
             // Start gathering script data, and measure their accuracy along the way.
             var accuracyByAddr = new Dictionary<uint, float>();
 
+            // Read all scripts in their entirety.
             int nextScriptId = 0;
             foreach (var scriptAddr in scriptRamAddrs) {
                 var scriptReader = new ScriptReader(Data, (int) (scriptAddr - RamAddress));
@@ -448,6 +431,7 @@ namespace SF3.Models.Files.X1 {
                     continue;
                 }
 
+                // This script looks valid enough -- add it.
                 ScriptsByAddress[scriptAddr] = new ActorScript(Data, nextScriptId, $"Script_{nextScriptId:D2}", (int) (scriptAddr - RamAddress), scriptReader.ScriptData.Count * 4);
                 nextScriptId++;
                 accuracyByAddr[scriptAddr] = accuracy;
@@ -461,6 +445,7 @@ namespace SF3.Models.Files.X1 {
                 }
             }
 
+            // We're going to start removing overlapping scripts, prioritizing known scripts and large scripts.
             var dataScriptBytes = new bool[Data.Length / 4];
             void MarkScriptBytes(uint addr) {
                 var pos = (uint) (addr - RamAddress) / 4;
@@ -506,7 +491,7 @@ namespace SF3.Models.Files.X1 {
                 }
             }
 
-            // Filter out all the ones we don't think are real
+            // Filter out all the ones we don't think are real.
             ScriptsByAddress = ScriptsByAddress
                 .Where(x => !overlappingScriptsByAddr.Contains(x.Key))
                 .OrderByDescending(x => knownScriptRamAddrs.Contains(x.Key))
@@ -514,21 +499,7 @@ namespace SF3.Models.Files.X1 {
                 .ThenBy(x => x.Key)
                 .ToDictionary(x => x.Key, x => x.Value);
 
-            // Mark scripts as discovered.
-            foreach (var kv in ScriptsByAddress) {
-                var scriptRamAddr = kv.Key;
-                var scriptAddr = scriptRamAddr - RamAddress;
-                var script = kv.Value;
-
-                DiscoveredDataByAddress[scriptRamAddr] = new DiscoveredData((int) scriptAddr, script.Size, DiscoveredDataType.Array, $"{nameof(ActorScript)}Command[]");
-                var ramAddrsOfPointersToScript = pointerValuesByRamAddr.Where(x => x.Value == scriptRamAddr).Select(x => x.Key).ToArray();
-                foreach (var pointerRamAddr in ramAddrsOfPointersToScript) {
-                    var pointerAddr = pointerRamAddr - RamAddress;
-                    DiscoveredDataByAddress[pointerRamAddr] = new DiscoveredData((int) pointerAddr, 4, DiscoveredDataType.Pointer, $"{nameof(ActorScript)}Command*");
-                }
-            }
-
-            // Add names to common scripts that have been identified
+            // Add names to common scripts that have been identified.
             foreach (var addr in ScriptsByAddress.Keys) {
                 ScriptsByAddress[addr].ScriptName = ActorScriptUtils.DetermineScriptName(ScriptsByAddress[addr]);
                 if (scriptInfoByRamAddr.ContainsKey(addr))
@@ -543,22 +514,58 @@ namespace SF3.Models.Files.X1 {
                 }
             }
 
-            // Some of these scripts call functions. If we don't know what these pointers are, mark them as functions.
-            foreach (var script in ScriptsByAddress.Values) {
+            // Mark scripts as discovered.
+            MarkScriptDiscoveries();
+        }
+
+        private Dictionary<uint, DiscoveredData[]> GetUnidentifiedDiscoveredPointerAddressesByValue() {
+            return DiscoveredDataByAddress
+                .Where(x => x.Value.Type == DiscoveredDataType.Pointer && x.Value.Name == "void*")
+                .Select(x => x.Value)
+                .GroupBy(x => (uint) Data.GetDouble(x.Address))
+                .ToDictionary(x => x.Key, x => x.ToArray());
+        }
+
+        private void MarkScriptDiscoveries() {
+            // Get void pointers that we can identify.
+            var voidPointers = GetUnidentifiedDiscoveredPointerAddressesByValue();
+
+            void AddScriptFunction(string funcName, uint funcRamAddr) {
+                // Mark all pointers to this discovered function.
+                if (voidPointers.ContainsKey(funcRamAddr))
+                    foreach (var desc in voidPointers[funcRamAddr])
+                        desc.Name = $"{funcName}()*";
+
+                // Add an entry for the function itself.
+                if (!DiscoveredDataByAddress.ContainsKey(funcRamAddr))
+                    DiscoveredDataByAddress[funcRamAddr] = new DiscoveredData((int) (funcRamAddr - RamAddress), null, DiscoveredDataType.Function, $"{funcName}(???)");
+            }
+
+            // Mark discovered scripts, unidentified pointers to them, and any functions they may contain.
+            foreach (var kv in ScriptsByAddress) {
+                var scriptRamAddr = kv.Key;
+                var scriptAddr = scriptRamAddr - RamAddress;
+                var script = kv.Value;
+
+                DiscoveredDataByAddress[scriptRamAddr] = new DiscoveredData((int) scriptAddr, script.Size, DiscoveredDataType.Array, $"{nameof(ActorScript)}Command[]");
+                if (voidPointers.ContainsKey(scriptRamAddr))
+                    foreach (var desc in voidPointers[scriptRamAddr])
+                        desc.Name = $"{nameof(ActorScript)}Command*";
+
+                var scriptName = (script.ScriptName == "") ? $"unnamed_0x{script.Address + RamAddress:X8}" : script.ScriptName;
+                var scriptFuncNameBase = string.Join("", scriptName.Split(' ').Where(x => x.Length >= 1).Select(x => Char.ToUpper(x[0]) + x.Substring(1)));
+
+                // Looks for 'RunFunction' commands.
                 var scriptReader = new ScriptReader(Data, script.Address);
                 // TODO: truncate commands that exceed ScriptLength
                 while (scriptReader.Position < script.ScriptLength) {
                     var command = scriptReader.ReadCommand();
                     var commandData = command.Data;
-                    if (commandData[0] == (uint) ActorCommandType.RunFunction) {
-                        var funcPtrRamAddr = (uint) (script.Address + (scriptReader.Position - 1) * 4) + RamAddress;
-                        if (DiscoveredDataByAddress.TryGetValue(funcPtrRamAddr, out var disc) && disc.Name == "void*")
-                            disc.Name = "scriptFunction()*";
 
-                        var funcRamAddr = commandData[1];
-                        if (!DiscoveredDataByAddress.ContainsKey(funcRamAddr))
-                            DiscoveredDataByAddress[funcRamAddr] = new DiscoveredData((int) (funcRamAddr - RamAddress), null, DiscoveredDataType.Function, "scriptFunction(???)");
-                    }
+                    if (commandData[0] == (uint) ActorCommandType.RunFunction)
+                        AddScriptFunction($"ScriptRunFunction_{scriptFuncNameBase}_CmdId{command.Id}", commandData[1]);
+                    else if (commandData[0] == (uint) ActorCommandType.SetProperty && commandData[1] == (uint) ActorPropertyCommandType.ThinkFunction)
+                        AddScriptFunction($"ScriptThinkFunction_{scriptFuncNameBase}_CmdId{command.Id}", commandData[2]);
                 }
             }
         }

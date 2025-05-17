@@ -1,6 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using SF3.Actors;
+using SF3.ByteData;
 using SF3.Models.Structs.Shared;
 using SF3.Types;
 using static CommonLib.Utils.EnumHelpers;
@@ -176,6 +178,27 @@ namespace SF3.Utils {
                 name = $"Run function 0x{data[1]:X8}";
 
             return name ?? "";
+        }
+
+        public static bool DataLooksLikeBeginningOfScript(IByteData data, uint addr) {
+            // Does this look like a script command?
+            var value = (uint) data.GetDouble((int) addr);
+            if (value >= 0x00000000 && value < 0x0000002E)
+                return true;
+
+            // Does this look like a script label?
+            if (value >= 0x80010000u && value < 0x80100000u) {
+                // It does, but does a script command follow?
+                var nextAddr = addr + 4;
+                if (nextAddr < data.Length - 3) {
+                    value = (uint) data.GetDouble((int) nextAddr);
+                    if (value >= 0x00000000 && value < 0x0000002E)
+                        return true;
+                }
+            }
+
+            // Doesn't look like a script.
+            return false;
         }
     }
 }

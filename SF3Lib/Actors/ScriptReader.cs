@@ -35,7 +35,7 @@ namespace SF3.Actors {
             }
 
             // Build a command out of this data.
-            var scriptCommand = new ScriptCommand(commandPos, data.ToArray(), LabelPositions);
+            var scriptCommand = new ScriptCommand(CommandsRead, commandPos, data.ToArray(), LabelPositions);
             Commands.Add(scriptCommand);
 
             // Update the state of the script based on the command.
