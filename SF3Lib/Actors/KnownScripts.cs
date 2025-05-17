@@ -3,7 +3,7 @@
 namespace SF3.Actors {
     public class KnownScripts {
         public static Dictionary<string, uint[]> AllKnownScripts = new Dictionary<string, uint[]>() {
-            { "Make Unpushable", new uint[] {
+            { "Make Solid Unpushable", new uint[] {
                 0x00000015, 0x0000001E, 0x00000001,             // Set InteractFlags to 0x01
                 0x00000010                                      // Done
             }},
@@ -325,7 +325,7 @@ namespace SF3.Actors {
                 0x00000000, 0x00000001,                         // Wait 1 frame(s)
                 0x00000010,                                     // Done
             }},
-            { "Teleport Out (Stretch then Delete)", new uint[] {
+            { "Teleport Out (Stretch then Delete) (v1)", new uint[] {
                 0x00000016, 0x0000000A, 0x00010000,             // Modify ScaleY by 0x10000
                 0x00000000, 0x00000001,                         // Wait 1 frame(s)
                 0x0000000C, 0x00000004, 0x00000000,             // Loop to 0x00 4 time(s)
@@ -337,11 +337,40 @@ namespace SF3.Actors {
                 0x0000001B,                                     // Delete Self
                 0x00000010,                                     // Done
             }},
-            { "Teleport Out (Stretch+Get thin then Move to Out-of-Bounds)", new uint[] {
+            { "Teleport Out (Stretch then Delete) (v2)", new uint[] {
+                0x00000016, 0x0000000A, 0x00010000,             // Modify ScaleY by 0x10000
+                0x00000000, 0x00000001,                         // Wait 1 frame(s)
+                0x0000000C, 0x00000004, 0x00000000,             // Loop to 0x00 4 time(s)
+                0x80010000,                                     // (label 0x0010000)
+                0x00000016, 0x0000000A, 0xFFFF0000,             // Modify ScaleY by -0x10000
+                0x00000016, 0x00000006, 0xFFCE0000,             // Modify PositionY by -0x320000
+                0x00000015, 0x00000012, 0x80000000,             // Set TargetPositionY to -0x80000000
+                0x00000000, 0x00000001,                         // Wait 1 frame(s)
+                0x0000000C, 0x00000004, 0xC0010000,             // Loop to 0xC0010000 4 time(s)
+                0x0000001B,                                     // Delete Self
+                0x00000010,                                     // Done
+            }},
+            { "Teleport Out (Stretch+Get thin then Move to Out-of-Bounds) (v1)", new uint[] {
                 0x00000016, 0x00000006, 0xFFF00000,             // Modify PositionY by -0x100000
                 0x00000016, 0x00000009, 0xFFFFE667,             // Modify ScaleX by -0x1999
                 0x00000016, 0x0000000A, 0x00010000,             // Modify ScaleY by 0x10000
                 0x00000016, 0x0000000B, 0xFFFFE667,             // Modify ScaleZ by -0x1999
+                0x00000000, 0x00000001,                         // Wait 1 frame(s)
+                0x0000000C, 0x00000009, 0x00000000,             // Loop to 0x00 9 time(s)
+                0x00000015, 0x00000005, 0x10000000,             // Set PositionX to 0x10000000
+                0x00000015, 0x00000006, 0x10000000,             // Set PositionY to 0x10000000
+                0x00000015, 0x00000007, 0x10000000,             // Set PositionZ to 0x10000000
+                0x00000015, 0x00000011, 0x80000000,             // Set TargetPositionX to -0x80000000
+                0x00000015, 0x00000012, 0x80000000,             // Set TargetPositionY to -0x80000000
+                0x00000015, 0x00000013, 0x80000000,             // Set TargetPositionZ to -0x80000000
+                0x00000010,                                     // Done
+            }},
+            { "Teleport Out (Stretch+Get thin then Move to Out-of-Bounds) (v2)", new uint[] {
+                0x00000016, 0x00000006, 0xFFF00000,             // Modify PositionY by -0x100000
+                0x00000016, 0x00000009, 0xFFFFE667,             // Modify ScaleX by -0x1999
+                0x00000016, 0x0000000A, 0x00010000,             // Modify ScaleY by 0x10000
+                0x00000016, 0x0000000B, 0xFFFFE667,             // Modify ScaleZ by -0x1999
+                0x00000015, 0x00000012, 0x80000000,             // Set TargetPositionY to -0x80000000
                 0x00000000, 0x00000001,                         // Wait 1 frame(s)
                 0x0000000C, 0x00000009, 0x00000000,             // Loop to 0x00 9 time(s)
                 0x00000015, 0x00000005, 0x10000000,             // Set PositionX to 0x10000000
