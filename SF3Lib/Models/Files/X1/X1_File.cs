@@ -15,6 +15,7 @@ using SF3.Actors;
 using SF3.Models.Structs.Shared;
 using SF3.Utils;
 using CommonLib.Utils;
+using SF3.Models.Structs.X1;
 
 namespace SF3.Models.Files.X1 {
     public class X1_File : ScenarioTableFile, IX1_File {
@@ -192,48 +193,77 @@ namespace SF3.Models.Files.X1 {
                 tables.Add(TileMovementTable = TileMovementTable.Create(Data, "TileMovement", tileMovementAddress, true));
 
             // Locate difficult-to-find common functions/data that are shared between X1 files.
-            var x1Data = Data.GetDataCopy();
-            KnownDataByAddress =
-                KnownX1Functions.AllKnownFunctions
-                    .Select(x => new { Name = x.Key, Index = x1Data.IndexOfSubset(x.Value.ToByteArray()) })
-                    .Where(x => x.Index >= 0)
-                    .ToDictionary(x => (uint) x.Index + RamAddress, x => x.Name);
+            DiscoveredDataByAddress = new Dictionary<uint, DiscoveredData>();
+            var searchData = Data.GetDataCopy();
+            DiscoverFunctions(searchData);
+            DiscoverData(searchData);
 
-            var modelMatrixGroupTableAddrs = new List<uint>();
+            // Now that we've discovered some data, let's populate some tables.
+            tables.AddRange(PopulateModelMatrixGroupTables());
+            PopulateScripts();
 
-            // Look for references to that function.
-            var instantiateModelsFuncs = KnownDataByAddress
-                .Where(x => x.Value.StartsWith("InstantiateModels"))
-                .ToDictionary(x => x.Key, x => x.Value);
+            // Add references to the scripts for several tables so we can have nice dropdowns.
+            AssociateScriptsWithRelevantTables();
 
-            var instantiateModelsAddr = instantiateModelsFuncs.Count > 0 ? instantiateModelsFuncs.First().Key : (uint?) null;
-            var instantiateModelsFuncName = instantiateModelsFuncs.Count > 0 ? instantiateModelsFuncs.First().Value : null;
+            return tables;
+        }
 
-            if (instantiateModelsAddr.HasValue) {
-                var addrAsBytes = instantiateModelsAddr.Value.ToByteArray();
-                var indicesOfAddr = x1Data.IndicesOfSubset(addrAsBytes, alignment: 4);
+        private void DiscoverFunctions(byte[] data) {
+            // Look for known functions and create corresponding DiscoveredData() entries.
+            var funcDictionary = KnownX1Functions.AllKnownFunctions
+                .Select(x => new { Name = x.Key, Size = x.Value.Length * 2, Index = data.IndexOfSubset(x.Value.ToByteArray()) })
+                .Where(x => x.Index >= 0)
+                .ToDictionary(x => (uint) x.Index, x => new DiscoveredData(x.Index, x.Size, DiscoveredDataType.Function, x.Name));
 
-                foreach (var indexOfAddr in indicesOfAddr) {
-                    KnownDataByAddress[(uint) (indexOfAddr + sub)] = $"Pointer to {instantiateModelsFuncName}() (0x{instantiateModelsAddr.Value:X8})";
+            foreach (var kv in funcDictionary)
+                DiscoveredDataByAddress[kv.Key] = kv.Value;
+        }
 
-                    var preAddr = indexOfAddr - 4;
-                    var preAddrValue = (x1Data[preAddr + 0] << 24) |
-                                       (x1Data[preAddr + 1] << 16) |
-                                       (x1Data[preAddr + 2] <<  8) |
-                                       (x1Data[preAddr + 3] <<  0);
+        private void DiscoverData(byte[] data) {
+            // Look for references to that function. There are many variants of this function, so look for all of them.
+            var instantiateModelsFuncs = DiscoveredDataByAddress
+                .Where(x => x.Value.Type == DiscoveredDataType.Function && x.Value.Name.StartsWith("InstantiateModels"))
+                .Select(x => x.Value)
+                .ToArray();
 
-                    if (preAddrValue >= sub && preAddrValue < sub + x1Data.Length) {
-                        KnownDataByAddress[(uint) (preAddr + sub)] = $"Pointer to ModelMatrixGroup[] (0x{preAddrValue:X8})";
-                        modelMatrixGroupTableAddrs.Add((uint) preAddrValue);
+            // On the off chance that multiple versions of this function exist (which never seems to be the case),
+            // look for usages of all of them.
+            foreach (var func in instantiateModelsFuncs) {
+                // Get all pointers to this function.
+                var addrAsBytes = ((uint) (func.Address + RamAddress)).ToByteArray();
+                var funcPtrAddrs = data.IndicesOfSubset(addrAsBytes, alignment: 4);
+
+                // For each function pointer, look at the pointer before it. This should be the parameter loaded in,
+                // which is a pointer to a table we want to load.
+                foreach (var funcPtrAddr in funcPtrAddrs) {
+                    var funcPtrRamAddr = (uint) (funcPtrAddr + RamAddress);
+                    DiscoveredDataByAddress[funcPtrRamAddr] = new DiscoveredData(funcPtrAddr, 4, DiscoveredDataType.Pointer, $"{func.Name}()*");
+
+                    // Get the address of the previous pointer...
+                    var modelsPtrAddr = (uint) (funcPtrAddr - 4);
+                    var modelsPtrRamAddr = modelsPtrAddr + RamAddress;
+
+                    // ...and the pointer itself. If it looks like a pointer, we're in business.
+                    var modelsRamAddr = data.GetUInt((int) modelsPtrAddr);
+                    if (modelsRamAddr >= RamAddress && modelsRamAddr < RamAddress + data.Length) {
+                        var modelsAddr = modelsRamAddr - RamAddress;
+                        DiscoveredDataByAddress[modelsPtrRamAddr] = new DiscoveredData((int) modelsPtrAddr, 4, DiscoveredDataType.Pointer, nameof(ModelMatrixGroup) + "*");
+                        DiscoveredDataByAddress[modelsRamAddr]    = new DiscoveredData((int) modelsAddr, null, DiscoveredDataType.Table, nameof(ModelMatrixGroup) + "[]");
                     }
                 }
             }
+        }
+
+        private ITable[] PopulateModelMatrixGroupTables() {
+            var tables = new List<ITable>();
 
             ModelMatrixGroupTablesByAddress = new Dictionary<uint, ModelMatrixGroupTable>();
-            modelMatrixGroupTableAddrs = modelMatrixGroupTableAddrs.OrderBy(x => x).Distinct().ToList();
+            var modelMatrixGroupTables = DiscoveredDataByAddress.Values.Where(x => x.Type == DiscoveredDataType.Table && x.Name == nameof(ModelMatrixGroup) + "[]").ToArray();
+
+            var modelMatrixGroupTableAddrs = modelMatrixGroupTables.Select(x => x.Address).OrderBy(x => x).Distinct().ToList();
             int groupIndex = 0;
             foreach (var addr in modelMatrixGroupTableAddrs)
-                tables.Add(ModelMatrixGroupTablesByAddress[addr] = ModelMatrixGroupTable.Create(Data, $"ModelMatrixGroups_{groupIndex++:X2}", (int) (addr - sub), addEndModel: false));
+                tables.Add(ModelMatrixGroupTablesByAddress[(uint) (addr + RamAddress)] = ModelMatrixGroupTable.Create(Data, $"ModelMatrixGroups_{groupIndex++:X2}", addr, addEndModel: false));
 
             ModelMatrixGroupLinkTablesByAddress = new Dictionary<uint, ModelMatrixGroupLinkTable>();
             var modelMatrixGroupLinkTableAddrs = ModelMatrixGroupTablesByAddress.Values
@@ -241,26 +271,15 @@ namespace SF3.Models.Files.X1 {
                 .OrderBy(x => x)
                 .Distinct()
                 .ToArray();
+
             int groupLinkIndex = 0;
             foreach (var addr in modelMatrixGroupLinkTableAddrs)
-                ModelMatrixGroupLinkTablesByAddress[addr] = ModelMatrixGroupLinkTable.Create(Data, $"ModelMatrixGroupLinks_{groupLinkIndex++:X2}", (int) (addr - sub), null, addEndModel: false);
+                tables.Add(ModelMatrixGroupLinkTablesByAddress[addr] = ModelMatrixGroupLinkTable.Create(Data, $"ModelMatrixGroupLinks_{groupLinkIndex++:X2}", (int) (addr - RamAddress), null, addEndModel: false));
 
-            // TODO: Lazy! Let's do something better.
-            PopulateScripts((uint) sub);
-
-            // Add references to the scripts for several tables so we can have a nice dropdown.
-            if (NpcTable != null)
-                foreach (var npc in NpcTable)
-                    npc.ActorScripts = ScriptsByAddress;
-
-            if (ModelMatrixGroupLinkTablesByAddress != null)
-                foreach (var table in ModelMatrixGroupLinkTablesByAddress.Values)
-                    table.ActorScripts = ScriptsByAddress;
-
-            return tables;
+            return tables.ToArray();
         }
 
-        private void PopulateScripts(uint sub) {
+        private void PopulateScripts() {
             const int c_maxScriptLength = 0x1000;
 
             // ==================================================================
@@ -318,14 +337,14 @@ namespace SF3.Models.Files.X1 {
 
             // Look for anything that potentially could be a script (filter out obvious negatives)
             var posMax = Data.Length - 3;
-            var ptrMax = sub + posMax;
+            var ptrMax = RamAddress + posMax;
             for (uint pos = 0; pos < posMax; pos += 4) {
-                var posAsPtr = pos + sub;
+                var posAsPtr = pos + RamAddress;
                 var valuePos = pos;
                 var value = (uint) Data.GetDouble((int) valuePos);
 
                 if (knownScriptAddrs.Contains(posAsPtr)) {
-                    AddScriptInfo(value, $"Referenced at 0x{posAsPtr:X8} (RAM), 0x{posAsPtr - sub:X2} (file)", prepend: false);
+                    AddScriptInfo(value, $"Referenced at 0x{posAsPtr:X8} (RAM), 0x{posAsPtr - RamAddress:X2} (file)", prepend: false);
                     _ = pointers.Add(value);
                 }
                 else if (value >= 0x00000000 && value < 0x0000002E) {
@@ -342,8 +361,8 @@ namespace SF3.Models.Files.X1 {
                         }
                     }
                 }
-                else if (value >= sub && value < sub + Data.Length - 3) {
-                    AddScriptInfo(value, $"Referenced at 0x{posAsPtr:X8} (RAM), 0x{posAsPtr - sub:X2} (file)", prepend: false);
+                else if (value >= RamAddress && value < RamAddress + Data.Length - 3) {
+                    AddScriptInfo(value, $"Referenced at 0x{posAsPtr:X8} (RAM), 0x{posAsPtr - RamAddress:X2} (file)", prepend: false);
                     _ = pointers.Add(value);
                 }
             }
@@ -353,7 +372,7 @@ namespace SF3.Models.Files.X1 {
 
             int nextScriptId = 0;
             foreach (var scriptAddr in scriptAddrs) {
-                var scriptReader = new ScriptReader(Data, (int) (scriptAddr - sub));
+                var scriptReader = new ScriptReader(Data, (int) (scriptAddr - RamAddress));
                 _ = scriptReader.ReadUntilDoneDetected(c_maxScriptLength);
 
                 // Don't add scripts that overflowed. Also filter out for some very likely false-positives.
@@ -366,7 +385,7 @@ namespace SF3.Models.Files.X1 {
                     continue;
                 }
 
-                ScriptsByAddress[scriptAddr] = new ActorScript(Data, nextScriptId, $"Script_{nextScriptId:D2}", (int) (scriptAddr - sub), scriptReader.ScriptData.Count * 4);
+                ScriptsByAddress[scriptAddr] = new ActorScript(Data, nextScriptId, $"Script_{nextScriptId:D2}", (int) (scriptAddr - RamAddress), scriptReader.ScriptData.Count * 4);
                 nextScriptId++;
                 accuracyByAddr[scriptAddr] = accuracy;
 
@@ -381,7 +400,7 @@ namespace SF3.Models.Files.X1 {
 
             var dataScriptBytes = new bool[Data.Length / 4];
             void MarkScriptBytes(uint addr) {
-                var pos = (uint) (addr - sub) / 4;
+                var pos = (uint) (addr - RamAddress) / 4;
                 for (int i = 0; i < ScriptsByAddress[addr].ScriptLength; i++)
                     dataScriptBytes[pos++] = true;
             }
@@ -399,7 +418,7 @@ namespace SF3.Models.Files.X1 {
                 // Remove 'maybe' scripts that intersect with 'knowns'.
                 var maybeIterAddrs = new HashSet<uint>(maybeScriptAddrs);
                 foreach (var addr in maybeIterAddrs) {
-                    var pos = (addr - sub) / 4;
+                    var pos = (addr - RamAddress) / 4;
                     for (int i = 0; i < ScriptsByAddress[addr].ScriptLength; i++) {
                         if (dataScriptBytes[pos++]) {
                             _ = overlappingScriptsByAddr.Add(addr);
@@ -448,6 +467,16 @@ namespace SF3.Models.Files.X1 {
             }
         }
 
+        private void AssociateScriptsWithRelevantTables() {
+            if (NpcTable != null)
+                foreach (var npc in NpcTable)
+                    npc.ActorScripts = ScriptsByAddress;
+
+            if (ModelMatrixGroupLinkTablesByAddress != null)
+                foreach (var table in ModelMatrixGroupLinkTablesByAddress.Values)
+                    table.ActorScripts = ScriptsByAddress;
+        }
+
         public override void Dispose() {
             if (Battles != null) {
                 foreach (var b in Battles.Where(x => x.Value != null))
@@ -493,6 +522,6 @@ namespace SF3.Models.Files.X1 {
         [BulkCopyRecurse]
         public Dictionary<uint, ActorScript> ScriptsByAddress { get; private set; }
 
-        public Dictionary<uint, string> KnownDataByAddress { get; private set; }
+        public Dictionary<uint, DiscoveredData> DiscoveredDataByAddress { get; private set; }
     }
 }

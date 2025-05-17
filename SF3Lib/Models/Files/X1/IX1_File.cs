@@ -28,6 +28,6 @@ namespace SF3.Models.Files.X1 {
         Dictionary<uint, ModelMatrixGroupLinkTable> ModelMatrixGroupLinkTablesByAddress { get; }
 
         Dictionary<uint, ActorScript> ScriptsByAddress { get; }
-        Dictionary<uint, string> KnownDataByAddress { get; }
+        Dictionary<uint, DiscoveredData> DiscoveredDataByAddress { get; }
     }
 }

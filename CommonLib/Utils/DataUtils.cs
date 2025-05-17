@@ -104,5 +104,12 @@ namespace CommonLib.Utils {
 
             return output;
         }
+
+        public static uint GetUInt(this byte[] data, int offset) {
+            return (uint) ((data[offset + 0] << 24) |
+                           (data[offset + 1] << 16) |
+                           (data[offset + 2] <<  8) |
+                           (data[offset + 3] <<  0));
+        }
     }
 }
