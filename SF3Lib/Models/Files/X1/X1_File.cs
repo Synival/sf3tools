@@ -21,6 +21,7 @@ namespace SF3.Models.Files.X1 {
     public class X1_File : ScenarioTableFile, IX1_File {
         protected X1_File(IByteData data, INameGetterContext nameContext, ScenarioType scenario, bool isBTL99) : base(data, nameContext, scenario) {
             IsBTL99 = isBTL99;
+            RamAddress = IsBTL99 ? 0x06060000u : Scenario == ScenarioType.Scenario1 ? 0x0605f000u : 0x0605e000u;
         }
 
         public static X1_File Create(IByteData data, INameGetterContext nameContext, ScenarioType scenario, bool isBTL99) {
@@ -33,8 +34,6 @@ namespace SF3.Models.Files.X1 {
         public override IEnumerable<ITable> MakeTables() {
             // TODO: this does soooo much work! Let's try to break it up into subroutines.
             var isScn1OrBTL99 = Scenario == ScenarioType.Scenario1 || IsBTL99;
-
-            int sub;
             bool hasLargeEnemyTable;
 
             int treasureAddress;
@@ -49,17 +48,14 @@ namespace SF3.Models.Files.X1 {
             int characterTargetPriorityTablesAddresses;
 
             var battlePointersPointerPointerAddress = isScn1OrBTL99 ? 0x0018 : 0x0024;
-            sub = IsBTL99 ? 0x06060000 : Scenario == ScenarioType.Scenario1 ? 0x0605f000 : 0x0605e000;
 
-            RamAddress = (uint) sub;
-
-            battlePointersPointerAddress = Data.GetDouble(battlePointersPointerPointerAddress) - sub;
+            battlePointersPointerAddress = Data.GetDouble(battlePointersPointerPointerAddress) - (int) RamAddress;
             battlePointersAddress = Data.GetDouble(battlePointersPointerAddress);
 
             // A value higher means a pointer is on the address, meaning we are in a battle. If it is not a
             // pointer we are at our destination so we know a town is loaded.
             if (Scenario == ScenarioType.Scenario1 && battlePointersAddress > 0x0605F000 || battlePointersAddress > 0x0605e000) {
-                battlePointersAddress -= sub;
+                battlePointersAddress -= (int) RamAddress;
                 IsBattle = true;
             }
             else {
@@ -68,23 +64,23 @@ namespace SF3.Models.Files.X1 {
             }
 
             // The "Treasure" table is the only table present in all X1 files regardless of scenario or town/battle status.
-            treasureAddress = Data.GetDouble(0x000c) - sub;
+            treasureAddress = Data.GetDouble(0x000c) - (int) RamAddress;
 
             if (isScn1OrBTL99) {
                 hasLargeEnemyTable = true;
 
                 warpAddress          = -1; // X002 file has Scenario1 WarpTable, and provides the address itself.
                 npcAddress           = IsBattle == true ? -1 : battlePointersPointerAddress; // same address
-                enterAddress         = Data.GetDouble(0x0024) - sub;
+                enterAddress         = Data.GetDouble(0x0024) - (int) RamAddress;
                 arrowAddress         = -1; // Not present in Scenario1
             }
             else {
                 hasLargeEnemyTable = false;
 
-                warpAddress          = Data.GetDouble(0x0018) - sub;
+                warpAddress          = Data.GetDouble(0x0018) - (int) RamAddress;
                 npcAddress           = IsBattle == true ? -1 : battlePointersPointerAddress; // same address
-                enterAddress         = IsBattle == true ? -1 : Data.GetDouble(0x0030) - sub;
-                arrowAddress         = IsBattle == true ? -1 : Data.GetDouble(0x0060) - sub;
+                enterAddress         = IsBattle == true ? -1 : Data.GetDouble(0x0030) - (int) RamAddress;
+                arrowAddress         = IsBattle == true ? -1 : Data.GetDouble(0x0060) - (int) RamAddress;
             }
 
             // If this is a battle, we need to get the addresses for a lot of battle-specific stuff.
@@ -99,7 +95,7 @@ namespace SF3.Models.Files.X1 {
                     var mapIndex = (int) mapLeader;
                     var battleTableAddress = BattlePointersTable[mapIndex].Pointer;
                     if (battleTableAddress != 0) {
-                        lastBattle = Battle.Create(Data, NameGetterContext, mapLeader, battleTableAddress - sub, hasLargeEnemyTable, Scenario, lastBattle);
+                        lastBattle = Battle.Create(Data, NameGetterContext, mapLeader, battleTableAddress - (int) RamAddress, hasLargeEnemyTable, Scenario, lastBattle);
                         Battles.Add(mapLeader, lastBattle);
                     }
                 }
@@ -109,30 +105,30 @@ namespace SF3.Models.Files.X1 {
                 if (!isScn1OrBTL99) {
                     // First, look inside a function for its address.
                     // The value we want is 0xac bytes later always (except for X1BTL330-339 and X1BTLP05)
-                    var tileMovementAddressPointer = Data.GetDouble(0x000001c4) - sub + 0x00ac;
+                    var tileMovementAddressPointer = Data.GetDouble(0x000001c4) - (int) RamAddress + 0x00ac;
 
                     var priorityTablesOffset =
                         (Scenario == ScenarioType.Scenario2) ? 0x78 :
                         (Scenario == ScenarioType.Scenario3) ? 0x5c :
                                   /*ScenarioType.PremiumDisk*/ 0x5c;
 
-                    var funcAddr = Data.GetDouble(0x01DC) - sub;
-                    characterTargetPriorityTablesAddresses = Data.GetDouble(funcAddr + priorityTablesOffset) - sub;
+                    var funcAddr = Data.GetDouble(0x01DC) - (int) RamAddress;
+                    characterTargetPriorityTablesAddresses = Data.GetDouble(funcAddr + priorityTablesOffset) - (int) RamAddress;
 
                     // No problems with this method in Scenario 2.
                     if (Scenario == ScenarioType.Scenario2)
-                        tileMovementAddress = Data.GetDouble(tileMovementAddressPointer) - sub;
+                        tileMovementAddress = Data.GetDouble(tileMovementAddressPointer) - (int) RamAddress;
                     else {
                         tileMovementAddress = Data.GetDouble(tileMovementAddressPointer);
 
                         // Is this a valid pointer to memory?
                         if (tileMovementAddress < 0x06070000 && tileMovementAddress > 0)
-                            tileMovementAddress -= sub;
+                            tileMovementAddress -= (int) RamAddress;
                         // If not, emply the workaround for X1BTL330-339 and X1BTLP05 not being consistant with everything else
                         // and locate the table directly.
                         // TODO: does this pointer exist in other X1BTL* files?
                         else
-                            tileMovementAddress = Data.GetDouble(0x0024) - sub + 0x14;
+                            tileMovementAddress = Data.GetDouble(0x0024) - (int) RamAddress + 0x14;
                     }
                 }
                 else {
@@ -167,7 +163,7 @@ namespace SF3.Models.Files.X1 {
                 CharacterTargetPriorityTables = new CharacterTargetPriorityTable[16];
                 int tablePointerAddr = characterTargetPriorityTablesAddresses;
                 for (int i = 0; i < 16; i++) {
-                    var tableAddr = Data.GetDouble(tablePointerAddr) - sub;
+                    var tableAddr = Data.GetDouble(tablePointerAddr) - (int) RamAddress;
                     var tableName = "CharacterTargetPriorities 0x" + i.ToString("X") + ": " + NameGetterContext.GetName(null, null, i, new object[] { NamedValueType.MovementType });
                     tables.Add(CharacterTargetPriorityTables[i] = CharacterTargetPriorityTable.Create(Data, tableName, tableAddr));
                     tablePointerAddr += 0x04;
@@ -176,7 +172,7 @@ namespace SF3.Models.Files.X1 {
                 CharacterTargetUnknownTables = new CharacterTargetUnknownTable[16];
                 tablePointerAddr = characterTargetPriorityTablesAddresses + 0x140;
                 for (int i = 0; i < 16; i++) {
-                    var tableAddr = Data.GetDouble(tablePointerAddr) - sub;
+                    var tableAddr = Data.GetDouble(tablePointerAddr) - (int) RamAddress;
                     var tableName = "UnknownTableAfterTargetPriorities 0x" + i.ToString("X") + ": " + NameGetterContext.GetName(null, null, i, new object[] { NamedValueType.MovementType });
                     tables.Add(CharacterTargetUnknownTables[i] = CharacterTargetUnknownTable.Create(Data, tableName, tableAddr));
                     tablePointerAddr += 0x04;
@@ -487,7 +483,7 @@ namespace SF3.Models.Files.X1 {
 
         public override string Title => base.Title + " Type: " + (IsBTL99 ? "BTL99" : IsBattle == true ? "Battle" : "Town");
 
-        public uint RamAddress { get; private set; }
+        public uint RamAddress { get; }
         public bool IsBTL99 { get; }
         public bool IsBattle { get; private set; }
 
