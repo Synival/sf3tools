@@ -118,8 +118,13 @@ namespace SF3.Utils {
                     return param[2] != 0x10;
 
                 case 0x0C:
-                    // Don't trust loops with a count of zero
-                    return param[0] != 0;
+                    // Don't trust loops with a count of zero.
+                    // Only expect reasonable positions and labels.
+                    return param[0] != 0 && (param[1] < 0x1000 || (param[1] >= 0xC0000000 && param[1] < 0xD0000000));
+
+                case 0x0D:
+                    // Only expect reasonable positions and labels.
+                    return param[0] < 0x1000 || (param[0] >= 0xC0000000 && param[0] < 0xD0000000);
 
                 case 0x11:
                 case 0x12:
