@@ -2,30 +2,30 @@ using CommonLib.Attributes;
 using SF3.ByteData;
 
 namespace SF3.Models.Structs.X1 {
-    public class ModelMatrixGroup : Struct {
-        private readonly int _modelMatrixGroupLinkTablePtrAddr;
+    public class ModelInstanceGroup : Struct {
+        private readonly int _modelIstanceTablePtr;
         private readonly int _matrixTablePtrAddr;
         private readonly int _posXAddr;
         private readonly int _posYAddr;
         private readonly int _posZAddr;
 
-        public ModelMatrixGroup(IByteData data, int id, string name, int address)
+        public ModelInstanceGroup(IByteData data, int id, string name, int address)
         : base(data, id, name, address, 0x14) {
-            _modelMatrixGroupLinkTablePtrAddr = Address + 0x00; // 4 bytes
-            _matrixTablePtrAddr               = Address + 0x04; // 4 bytes
-            _posXAddr                         = Address + 0x08; // 4 bytes
-            _posYAddr                         = Address + 0x0C; // 4 bytes
-            _posZAddr                         = Address + 0x10; // 4 bytes
+            _modelIstanceTablePtr = Address + 0x00; // 4 bytes
+            _matrixTablePtrAddr   = Address + 0x04; // 4 bytes
+            _posXAddr             = Address + 0x08; // 4 bytes
+            _posYAddr             = Address + 0x0C; // 4 bytes
+            _posZAddr             = Address + 0x10; // 4 bytes
         }
 
-        [TableViewModelColumn(displayOrder: 0, displayName: "ModelTablePtr", isPointer: true)]
+        [TableViewModelColumn(displayOrder: 0, displayName: "ModelsPtr", isPointer: true)]
         [BulkCopy]
-        public uint ModelMatrixGroupLinkTablePtr {
-            get => (uint) Data.GetDouble(_modelMatrixGroupLinkTablePtrAddr);
-            set => Data.SetDouble(_modelMatrixGroupLinkTablePtrAddr, (int) value);
+        public uint ModelInstanceTablePtr {
+            get => (uint) Data.GetDouble(_modelIstanceTablePtr);
+            set => Data.SetDouble(_modelIstanceTablePtr, (int) value);
         }
 
-        [TableViewModelColumn(displayOrder: 1, isPointer: true)]
+        [TableViewModelColumn(displayOrder: 1, displayName: "MatricesPtr", isPointer: true)]
         [BulkCopy]
         public uint MatrixTablePtr {
             get => (uint) Data.GetDouble(_matrixTablePtrAddr);

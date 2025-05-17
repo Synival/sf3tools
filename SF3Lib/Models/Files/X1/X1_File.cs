@@ -195,7 +195,7 @@ namespace SF3.Models.Files.X1 {
             DiscoverData(searchData);
 
             // Now that we've discovered some data, let's populate some tables.
-            tables.AddRange(PopulateModelMatrixGroupTables());
+            tables.AddRange(PopulateModelInstanceTables());
             PopulateScripts();
 
             // Add references to the scripts for several tables so we can have nice dropdowns.
@@ -243,34 +243,34 @@ namespace SF3.Models.Files.X1 {
                     var modelsRamAddr = data.GetUInt((int) modelsPtrAddr);
                     if (modelsRamAddr >= RamAddress && modelsRamAddr < RamAddress + data.Length) {
                         var modelsAddr = modelsRamAddr - RamAddress;
-                        DiscoveredDataByAddress[modelsPtrRamAddr] = new DiscoveredData((int) modelsPtrAddr, 4, DiscoveredDataType.Pointer, nameof(ModelMatrixGroup) + "*");
-                        DiscoveredDataByAddress[modelsRamAddr]    = new DiscoveredData((int) modelsAddr, null, DiscoveredDataType.Table, nameof(ModelMatrixGroup) + "[]");
+                        DiscoveredDataByAddress[modelsPtrRamAddr] = new DiscoveredData((int) modelsPtrAddr, 4, DiscoveredDataType.Pointer, nameof(ModelInstanceGroup) + "*");
+                        DiscoveredDataByAddress[modelsRamAddr]    = new DiscoveredData((int) modelsAddr, null, DiscoveredDataType.Table, nameof(ModelInstanceGroup) + "[]");
                     }
                 }
             }
         }
 
-        private ITable[] PopulateModelMatrixGroupTables() {
+        private ITable[] PopulateModelInstanceTables() {
             var tables = new List<ITable>();
 
-            ModelMatrixGroupTablesByAddress = new Dictionary<uint, ModelMatrixGroupTable>();
-            var modelMatrixGroupTables = DiscoveredDataByAddress.Values.Where(x => x.Type == DiscoveredDataType.Table && x.Name == nameof(ModelMatrixGroup) + "[]").ToArray();
+            ModelInstanceGroupTablesByAddress = new Dictionary<uint, ModelInstanceGroupTable>();
+            var modelMatrixGroupTables = DiscoveredDataByAddress.Values.Where(x => x.Type == DiscoveredDataType.Table && x.Name == nameof(ModelInstanceGroup) + "[]").ToArray();
 
             var modelMatrixGroupTableAddrs = modelMatrixGroupTables.Select(x => x.Address).OrderBy(x => x).Distinct().ToList();
             int groupIndex = 0;
             foreach (var addr in modelMatrixGroupTableAddrs)
-                tables.Add(ModelMatrixGroupTablesByAddress[(uint) (addr + RamAddress)] = ModelMatrixGroupTable.Create(Data, $"ModelMatrixGroups_{groupIndex++:X2}", addr, addEndModel: false));
+                tables.Add(ModelInstanceGroupTablesByAddress[(uint) (addr + RamAddress)] = ModelInstanceGroupTable.Create(Data, $"{nameof(ModelInstanceGroup)}s_{groupIndex++:D2}", addr, addEndModel: false));
 
-            ModelMatrixGroupLinkTablesByAddress = new Dictionary<uint, ModelMatrixGroupLinkTable>();
-            var modelMatrixGroupLinkTableAddrs = ModelMatrixGroupTablesByAddress.Values
-                .SelectMany(x => x.Select(y => y.ModelMatrixGroupLinkTablePtr))
+            ModelInstanceTablesByAddress = new Dictionary<uint, ModelInstanceTable>();
+            var modelMatrixGroupLinkTableAddrs = ModelInstanceGroupTablesByAddress.Values
+                .SelectMany(x => x.Select(y => y.ModelInstanceTablePtr))
                 .OrderBy(x => x)
                 .Distinct()
                 .ToArray();
 
             int groupLinkIndex = 0;
             foreach (var addr in modelMatrixGroupLinkTableAddrs)
-                tables.Add(ModelMatrixGroupLinkTablesByAddress[addr] = ModelMatrixGroupLinkTable.Create(Data, $"ModelMatrixGroupLinks_{groupLinkIndex++:X2}", (int) (addr - RamAddress), null, addEndModel: false));
+                tables.Add(ModelInstanceTablesByAddress[addr] = ModelInstanceTable.Create(Data, $"{nameof(ModelInstance)}s_{groupLinkIndex++:D2}", (int) (addr - RamAddress), null, addEndModel: false));
 
             return tables.ToArray();
         }
@@ -312,13 +312,13 @@ namespace SF3.Models.Files.X1 {
                 foreach (var addr in addrs) {
                     _ = scriptAddrs.Add(addr);
                     _ = knownScriptAddrs.Add(addr);
-                    AddScriptInfo(addr, "Referenced in NPC Table", prepend: true);
+                    AddScriptInfo(addr, $"Referenced in {nameof(Models.Tables.X1.Town.NpcTable)}", prepend: true);
                 }
             }
 
             // Add known references to scripts
-            if (ModelMatrixGroupLinkTablesByAddress != null) {
-                var addrs = ModelMatrixGroupLinkTablesByAddress.SelectMany(x => x.Value.Select(y => y.ScriptAddr))
+            if (ModelInstanceTablesByAddress != null) {
+                var addrs = ModelInstanceTablesByAddress.SelectMany(x => x.Value.Select(y => y.ScriptAddr))
                     .Where(x => x >= 0)
                     .OrderBy(x => x)
                     .Distinct()
@@ -327,7 +327,7 @@ namespace SF3.Models.Files.X1 {
                 foreach (var addr in addrs) {
                     _ = scriptAddrs.Add(addr);
                     _ = knownScriptAddrs.Add(addr);
-                    AddScriptInfo(addr, "Referenced in ModelMatrixGroupLink Table", prepend: true);
+                    AddScriptInfo(addr, $"Referenced in {nameof(ModelInstanceGroupTable)}", prepend: true);
                 }
             }
 
@@ -468,8 +468,8 @@ namespace SF3.Models.Files.X1 {
                 foreach (var npc in NpcTable)
                     npc.ActorScripts = ScriptsByAddress;
 
-            if (ModelMatrixGroupLinkTablesByAddress != null)
-                foreach (var table in ModelMatrixGroupLinkTablesByAddress.Values)
+            if (ModelInstanceTablesByAddress != null)
+                foreach (var table in ModelInstanceTablesByAddress.Values)
                     table.ActorScripts = ScriptsByAddress;
         }
 
@@ -511,9 +511,9 @@ namespace SF3.Models.Files.X1 {
         public CharacterTargetUnknownTable[] CharacterTargetUnknownTables { get; private set; }
 
         [BulkCopyRecurse]
-        public Dictionary<uint, ModelMatrixGroupTable> ModelMatrixGroupTablesByAddress { get; private set; }
+        public Dictionary<uint, ModelInstanceGroupTable> ModelInstanceGroupTablesByAddress { get; private set; }
         [BulkCopyRecurse]
-        public Dictionary<uint, ModelMatrixGroupLinkTable> ModelMatrixGroupLinkTablesByAddress { get; private set; }
+        public Dictionary<uint, ModelInstanceTable> ModelInstanceTablesByAddress { get; private set; }
 
         [BulkCopyRecurse]
         public Dictionary<uint, ActorScript> ScriptsByAddress { get; private set; }

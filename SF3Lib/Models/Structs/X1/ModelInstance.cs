@@ -5,13 +5,13 @@ using SF3.Models.Structs.Shared;
 using SF3.Types;
 
 namespace SF3.Models.Structs.X1 {
-    public class ModelMatrixGroupLink : Struct {
+    public class ModelInstance : Struct {
         private readonly int _modelIdAddr;
         private readonly int _matrixBasisAddr;
         private readonly int _typeAddr;
         private readonly int _scriptAddr;
 
-        public ModelMatrixGroupLink(IByteData data, int id, string name, int address, Dictionary<uint, ActorScript> actorScripts)
+        public ModelInstance(IByteData data, int id, string name, int address, Dictionary<uint, ActorScript> actorScripts)
         : base(data, id, name, address, 0x08) {
             ActorScripts = actorScripts;
 

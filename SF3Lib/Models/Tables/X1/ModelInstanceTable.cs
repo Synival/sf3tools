@@ -5,22 +5,22 @@ using SF3.Models.Structs.Shared;
 using SF3.Models.Structs.X1;
 
 namespace SF3.Models.Tables.X1 {
-    public class ModelMatrixGroupLinkTable : TerminatedTable<ModelMatrixGroupLink> {
-        protected ModelMatrixGroupLinkTable(IByteData data, string name, int address, Dictionary<uint, ActorScript> actorScripts, bool addEndModel = true)
+    public class ModelInstanceTable : TerminatedTable<ModelInstance> {
+        protected ModelInstanceTable(IByteData data, string name, int address, Dictionary<uint, ActorScript> actorScripts, bool addEndModel = true)
         : base(data, name, address, 2, null) {
             _actorScripts = actorScripts;
             AddEndModel = addEndModel;
         }
 
-        public static ModelMatrixGroupLinkTable Create(IByteData data, string name, int address, Dictionary<uint, ActorScript> actorScripts, bool addEndModel = true) {
-            var newTable = new ModelMatrixGroupLinkTable(data, name, address, actorScripts, addEndModel: addEndModel);
+        public static ModelInstanceTable Create(IByteData data, string name, int address, Dictionary<uint, ActorScript> actorScripts, bool addEndModel = true) {
+            var newTable = new ModelInstanceTable(data, name, address, actorScripts, addEndModel: addEndModel);
             if (!newTable.Load())
                 throw new InvalidOperationException("Couldn't initialize table");
             return newTable;
         }
 
         public override bool Load()
-            => Load((id, address) => new ModelMatrixGroupLink(Data, id, $"ModelMatrixLink_{id}", address, ActorScripts),
+            => Load((id, address) => new ModelInstance(Data, id, $"{nameof(ModelInstance)}_{id:D2}", address, ActorScripts),
                 (rows, newModel) => newModel.ModelID != -1,
                 addEndModel: AddEndModel);
 

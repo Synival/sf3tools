@@ -3,7 +3,7 @@
 namespace SF3.Models.Files.X1 {
     public static class KnownX1Functions {
         public static Dictionary<string, ushort[]> AllKnownFunctions = new Dictionary<string, ushort[]>() {
-            { "InstantiateModelsScn1(ModelMatrixInit &initTable)", new ushort[] {
+            { "InstantiateModelsScn1(ModelInstance *modelTable)", new ushort[] {
                 0x2F86, 0x2F96, 0x4F22, 0xD213, 0xE100, 0x2210, 0xD112, 0x6112,
                 0x6010, 0xC980, 0x2008, 0x8903, 0xD210, 0xD111, 0xA003, 0x2212,
                 0xD20E, 0xD110, 0x2212, 0xD110, 0x2142, 0x6142, 0x2118, 0x8D0D,
@@ -12,7 +12,7 @@ namespace SF3.Models.Files.X1 {
                 0x000B, 0x68F6
             }},
 
-            { "InstantiateModelsScn2(ModelMatrixInit &initTable)", new ushort[] {
+            { "InstantiateModelsScn2(ModelInstance *modelTable)", new ushort[] {
                 0x2F86, 0x2F96, 0x4F22, 0xD218, 0xE100, 0x2210, 0xD117, 0x6112,
                 0x6010, 0xE102, 0x2109, 0x2118, 0x8D07, 0xC980, 0x2008, 0x8B04,
                 0xD213, 0xD114, 0x2212, 0xA004, 0x71FC, 0xD211, 0xD112, 0x2212,
@@ -22,7 +22,7 @@ namespace SF3.Models.Files.X1 {
                 0x69F6, 0x000B, 0x68F6
             }},
 
-            { "InstantiateModelsX1BTL128(ModelMatrixInit &initTable)", new ushort[] {
+            { "InstantiateModelsX1BTL128(ModelInstance *modelTable)", new ushort[] {
                 0x2F86, 0x2F96, 0x4F22, 0xD112, 0x6112, 0x6010, 0xC980, 0x2008,
                 0x8903, 0xD210, 0xD110, 0xA003, 0x2212, 0xD20E, 0xD10F, 0x2212,
                 0xD10F, 0x2142, 0x6142, 0x2118, 0x8D0D, 0x6843, 0xD90D, 0x5783,
@@ -30,7 +30,7 @@ namespace SF3.Models.Files.X1 {
                 0x2118, 0x8FF4, 0x7F04, 0x4F26, 0x69F6, 0x000B, 0x68F6
             }},
 
-            { "InstantiateModelsX1BTL206(ModelMatrixInit &initTable)", new ushort[] {
+            { "InstantiateModelsX1BTL206(ModelInstance *modelTable)", new ushort[] {
                 0x2F86, 0x2F96, 0x2FA6, 0x2FB6, 0x2FC6, 0x4F22, 0xD225, 0xE100,
                 0x2210, 0xD125, 0x6112, 0x6010, 0xE102, 0x2109, 0x2118, 0x8D08,
                 0x6C43, 0xC980, 0x2008, 0x8B04, 0xD220, 0xD121, 0x2212, 0xA004,
@@ -44,7 +44,7 @@ namespace SF3.Models.Files.X1 {
                 0x000B, 0x68F6
             }},
 
-            { "InstantiateModelsX1BTL228(ModelMatrixInit &initTable)", new ushort[] {
+            { "InstantiateModelsX1BTL228(ModelInstance *modelTable)", new ushort[] {
                 0x2F86, 0x2F96, 0x4F22, 0xD219, 0xE100, 0x2210, 0xD118, 0x6112,
                 0x6010, 0xE102, 0x2109, 0x2118, 0x8D07, 0xC980, 0x2008, 0x8B04,
                 0xD214, 0xD115, 0x2212, 0xA004, 0x71FC, 0xD212, 0xD113, 0x2212,
