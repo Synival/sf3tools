@@ -312,7 +312,7 @@ namespace SF3.Models.Files.X1 {
                 foreach (var addr in addrs) {
                     _ = scriptAddrs.Add(addr);
                     _ = knownScriptAddrs.Add(addr);
-                    AddScriptInfo(addr, "Referenced in ModelMatrixLink Table", prepend: true);
+                    AddScriptInfo(addr, "Referenced in ModelMatrixGroupLink Table", prepend: true);
                 }
             }
 
