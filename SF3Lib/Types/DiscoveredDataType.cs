@@ -2,7 +2,7 @@
     public enum DiscoveredDataType {
         Pointer  = 0,
         Struct   = 1,
-        Table    = 2,
+        Array    = 2,
         Function = 3,
     }
 }

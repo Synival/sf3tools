@@ -191,6 +191,7 @@ namespace SF3.Models.Files.X1 {
             // Locate difficult-to-find common functions/data that are shared between X1 files.
             DiscoveredDataByAddress = new Dictionary<uint, DiscoveredData>();
             var searchData = Data.GetDataCopy();
+            DiscoverPointers();
             DiscoverFunctions(searchData);
             DiscoverData(searchData);
 
@@ -213,6 +214,20 @@ namespace SF3.Models.Files.X1 {
 
             foreach (var kv in funcDictionary)
                 DiscoveredDataByAddress[kv.Key] = kv.Value;
+        }
+
+        private void DiscoverPointers() {
+            var pointers = new HashSet<uint>();
+
+            // Look for anything that potentially could be a script (filter out obvious negatives)
+            var addrMax = Data.Length - 3;
+            var ramAddrMax = addrMax + RamAddress;
+            for (uint addr = 0; addr < addrMax; addr += 4) {
+                var ramAddr = addr + RamAddress;
+                var value = (uint) Data.GetDouble((int) addr);
+                if (value >= RamAddress && value < ramAddrMax)
+                    DiscoveredDataByAddress[ramAddr] = new DiscoveredData((int) addr, 4, DiscoveredDataType.Pointer, "void*");
+            }
         }
 
         private void DiscoverData(byte[] data) {
@@ -244,7 +259,7 @@ namespace SF3.Models.Files.X1 {
                     if (modelsRamAddr >= RamAddress && modelsRamAddr < RamAddress + data.Length) {
                         var modelsAddr = modelsRamAddr - RamAddress;
                         DiscoveredDataByAddress[modelsPtrRamAddr] = new DiscoveredData((int) modelsPtrAddr, 4, DiscoveredDataType.Pointer, nameof(ModelInstanceGroup) + "*");
-                        DiscoveredDataByAddress[modelsRamAddr]    = new DiscoveredData((int) modelsAddr, null, DiscoveredDataType.Table, nameof(ModelInstanceGroup) + "[]");
+                        DiscoveredDataByAddress[modelsRamAddr]    = new DiscoveredData((int) modelsAddr, null, DiscoveredDataType.Array, nameof(ModelInstanceGroup) + "[]");
                     }
                 }
             }
@@ -253,24 +268,53 @@ namespace SF3.Models.Files.X1 {
         private ITable[] PopulateModelInstanceTables() {
             var tables = new List<ITable>();
 
+            // Look for all arrays discovered as 'ModelInstanceGroup[]'.
             ModelInstanceGroupTablesByAddress = new Dictionary<uint, ModelInstanceGroupTable>();
-            var modelMatrixGroupTables = DiscoveredDataByAddress.Values.Where(x => x.Type == DiscoveredDataType.Table && x.Name == nameof(ModelInstanceGroup) + "[]").ToArray();
+            var modelMatrixGroupTables = DiscoveredDataByAddress.Values
+                .Where(x => x.Type == DiscoveredDataType.Array && x.Name == nameof(ModelInstanceGroup) + "[]")
+                .ToArray();
 
+            // Create corresponding tables for all the discovered data.
             var modelMatrixGroupTableAddrs = modelMatrixGroupTables.Select(x => x.Address).OrderBy(x => x).Distinct().ToList();
             int groupIndex = 0;
             foreach (var addr in modelMatrixGroupTableAddrs)
                 tables.Add(ModelInstanceGroupTablesByAddress[(uint) (addr + RamAddress)] = ModelInstanceGroupTable.Create(Data, $"{nameof(ModelInstanceGroup)}s_{groupIndex++:D2}", addr, addEndModel: false));
 
-            ModelInstanceTablesByAddress = new Dictionary<uint, ModelInstanceTable>();
-            var modelMatrixGroupLinkTableAddrs = ModelInstanceGroupTablesByAddress.Values
-                .SelectMany(x => x.Select(y => y.ModelInstanceTablePtr))
-                .OrderBy(x => x)
+            // Re-fetch all those new tables, ordered by address.
+            var modelInstanceGroups = ModelInstanceGroupTablesByAddress.Values
+                .SelectMany(x => x.Select(y => y))
+                .OrderBy(x => x.Address)
                 .Distinct()
                 .ToArray();
 
+            // Create sub-tables and mark them as 'Discovered'.
             int groupLinkIndex = 0;
-            foreach (var addr in modelMatrixGroupLinkTableAddrs)
-                tables.Add(ModelInstanceTablesByAddress[addr] = ModelInstanceTable.Create(Data, $"{nameof(ModelInstance)}s_{groupLinkIndex++:D2}", (int) (addr - RamAddress), null, addEndModel: false));
+            ModelInstanceTablesByAddress = new Dictionary<uint, ModelInstanceTable>();
+            foreach (var group in modelInstanceGroups) {
+                var modelsRamAddr = group.ModelInstanceTablePtr;
+                var modelsAddr    = modelsRamAddr - RamAddress;
+
+                // Create the ModelInstance sub-table.
+                var newTable = ModelInstanceTablesByAddress[modelsRamAddr] = ModelInstanceTable.Create(Data, $"{nameof(ModelInstance)}s_{groupLinkIndex++:D2}", (int) modelsAddr, null, addEndModel: false);
+                tables.Add(newTable);
+
+                // Mark the sub-table and its pointer as 'Discovered'.
+                // Because this starts the 'ModelInstanceGroup[]' table, don't just replace the name with 'ModelInstance*', but append it.
+                // TODO: this is contrary to reality!! We need to mark something at an address as *multiple* types of data.
+                DiscoveredDataByAddress[modelsRamAddr] = new DiscoveredData((int) modelsAddr, ModelInstanceTablesByAddress[modelsRamAddr].SizeInBytes, DiscoveredDataType.Array, nameof(ModelInstance) + "[]");
+                var prevDiscoveredModelPtr = DiscoveredDataByAddress[(uint) group.Address + RamAddress];
+                if (prevDiscoveredModelPtr.Name == "void*")
+                    prevDiscoveredModelPtr.Name = $"{nameof(ModelInstance)}*";
+                else
+                    prevDiscoveredModelPtr.Name += $" / {nameof(ModelInstance)}*";
+
+                // The second parameter is a pointer to a 'ModelMatrix*'. It should be outside the bounds of the file, but try to mark it in case its not.
+                var matricesRamPtr = group.MatrixTablePtr;
+                var matricesPtr = matricesRamPtr - RamAddress;
+                if (matricesPtr >= 0 && matricesPtr < Data.Length - 3)
+                    DiscoveredDataByAddress[matricesRamPtr] = new DiscoveredData((int) matricesPtr, 0x38 * newTable.Length, DiscoveredDataType.Array, "ModelMatrix[]");
+                DiscoveredDataByAddress[(uint) group.Address + RamAddress + 4] = new DiscoveredData(group.Address + 4, 4, DiscoveredDataType.Pointer, "ModelMatrix*");
+            }
 
             return tables.ToArray();
         }
@@ -283,83 +327,106 @@ namespace SF3.Models.Files.X1 {
             // ==================================================================
 
             ScriptsByAddress = new Dictionary<uint, ActorScript>();
-            var scriptInfoByAddress = new Dictionary<uint, List<string>>();
+            var scriptInfoByRamAddr    = new Dictionary<uint, List<string>>();
+            var scriptRamAddrs         = new HashSet<uint>();
+            var knownScriptRamAddrs    = new HashSet<uint>();
+            var maybeScriptRamAddrs    = new HashSet<uint>();
+            var probablyScriptRamAddrs = new HashSet<uint>();
+            var pointerValues          = new HashSet<uint>();
+            var pointerValuesByRamAddr = new Dictionary<uint, uint>();
 
-            var scriptAddrs = new HashSet<uint>();
-            var knownScriptAddrs = new HashSet<uint>();
-            var maybeScriptAddrs = new HashSet<uint>();
-            var probablyScriptAddrs = new HashSet<uint>();
-            var pointers = new HashSet<uint>();
-
-            void AddScriptInfo(uint addr, string info, bool prepend) {
-                if (!scriptInfoByAddress.ContainsKey(addr))
-                    scriptInfoByAddress[addr] = new List<string>() { info };
+            // Adds a line of text to a list of info for a confirmed or potential script by RAM address.
+            void AddScriptInfo(uint ramAddr, string info, bool prepend) {
+                if (!scriptInfoByRamAddr.ContainsKey(ramAddr))
+                    scriptInfoByRamAddr[ramAddr] = new List<string>() { info };
                 else if (prepend)
-                    scriptInfoByAddress[addr].Insert(0, info);
+                    scriptInfoByRamAddr[ramAddr].Insert(0, info);
                 else
-                    scriptInfoByAddress[addr].Add(info);
+                    scriptInfoByRamAddr[ramAddr].Add(info);
             }
 
-            // Add known references to scripts
+            // On the off chance that we've discovered script pointers already, mark them as "known".
+            var discoveredPointersByRamAddr = DiscoveredDataByAddress.Values
+                .Where(x => x.Type == DiscoveredDataType.Pointer)
+                .ToDictionary(x => (uint) (x.Address + RamAddress), x => x);
+
+            foreach (var disc in discoveredPointersByRamAddr) {
+                var addr = (uint) disc.Value.Address;
+                var ramAddr = disc.Key;
+                var potentialScriptRamAddr = (uint) Data.GetDouble((int) addr);
+                var potentialScriptAddr = potentialScriptRamAddr - RamAddress;
+
+                // On the off chance that this was already discovered, add it.
+                if (disc.Value.Name == $"{nameof(ActorScript)}Command*")
+                    AddScriptInfo(potentialScriptRamAddr, "Previously Discovered", prepend: true);
+                // If this isn't a 'void*', it's something else and not a potential script.
+                else if (disc.Value.Name != "void*")
+                    continue;
+
+                // This could be a script: add some info.
+                AddScriptInfo(potentialScriptRamAddr, $"Referenced at 0x{addr:X4} / 0x{ramAddr:X8}", prepend: false);
+                _ = pointerValues.Add(potentialScriptRamAddr);
+                pointerValuesByRamAddr[ramAddr] = potentialScriptRamAddr;
+            }
+
+            // Add known references to scripts from the NpcTable
             if (NpcTable != null) {
-                var addrs = NpcTable
+                var ramAddrs = NpcTable
                     .Select(x => (uint) (x.ScriptOffset))
                     .Where(x => x >= 0)
                     .OrderBy(x => x)
                     .Distinct()
                     .ToArray();
 
-                foreach (var addr in addrs) {
-                    _ = scriptAddrs.Add(addr);
-                    _ = knownScriptAddrs.Add(addr);
-                    AddScriptInfo(addr, $"Referenced in {nameof(Models.Tables.X1.Town.NpcTable)}", prepend: true);
+                foreach (var ramAddr in ramAddrs) {
+                    _ = scriptRamAddrs.Add(ramAddr);
+                    _ = knownScriptRamAddrs.Add(ramAddr);
+                    AddScriptInfo(ramAddr, $"Referenced in {nameof(Models.Tables.X1.Town.NpcTable)}", prepend: true);
                 }
             }
 
-            // Add known references to scripts
+            // Add known references to scripts from any ModelInstanceTables
             if (ModelInstanceTablesByAddress != null) {
-                var addrs = ModelInstanceTablesByAddress.SelectMany(x => x.Value.Select(y => y.ScriptAddr))
+                var ramAddrs = ModelInstanceTablesByAddress
+                    .SelectMany(x => x.Value.Select(y => y.ScriptAddr))
                     .Where(x => x >= 0)
                     .OrderBy(x => x)
                     .Distinct()
                     .ToArray();
 
-                foreach (var addr in addrs) {
-                    _ = scriptAddrs.Add(addr);
-                    _ = knownScriptAddrs.Add(addr);
-                    AddScriptInfo(addr, $"Referenced in {nameof(ModelInstanceGroupTable)}", prepend: true);
+                foreach (var ramAddr in ramAddrs) {
+                    _ = scriptRamAddrs.Add(ramAddr);
+                    _ = knownScriptRamAddrs.Add(ramAddr);
+                    AddScriptInfo(ramAddr, $"Referenced in {nameof(ModelInstanceGroupTable)}", prepend: true);
                 }
             }
 
             // Look for anything that potentially could be a script (filter out obvious negatives)
-            var posMax = Data.Length - 3;
-            var ptrMax = RamAddress + posMax;
-            for (uint pos = 0; pos < posMax; pos += 4) {
-                var posAsPtr = pos + RamAddress;
-                var valuePos = pos;
-                var value = (uint) Data.GetDouble((int) valuePos);
+            var addrMax = Data.Length - 3;
+            for (uint addr = 0; addr < addrMax; addr += 4) {
+                // If this is an actual pointer here, it can't possibly be a script.
+                var ramAddr = addr + RamAddress;
+                if (discoveredPointersByRamAddr.ContainsKey(ramAddr) || knownScriptRamAddrs.Contains(ramAddr))
+                    continue;
 
-                if (knownScriptAddrs.Contains(posAsPtr)) {
-                    AddScriptInfo(value, $"Referenced at 0x{posAsPtr:X8} (RAM), 0x{posAsPtr - RamAddress:X2} (file)", prepend: false);
-                    _ = pointers.Add(value);
+                // Does this look like a script command?
+                var value = (uint) Data.GetDouble((int) addr);
+                if (value >= 0x00000000 && value < 0x0000002E) {
+                    _ = scriptRamAddrs.Add(ramAddr);
+                    _ = maybeScriptRamAddrs.Add(ramAddr);
                 }
-                else if (value >= 0x00000000 && value < 0x0000002E) {
-                    _ = scriptAddrs.Add(posAsPtr);
-                    _ = maybeScriptAddrs.Add(posAsPtr);
-                }
-                else if (value >= 0x80000000u && value < 0x80100000u) {
-                    valuePos += 4;
-                    if (valuePos < posMax) {
-                        value = (uint) Data.GetDouble((int) valuePos);
+                // Does this look like a script label?
+                else if (value >= 0x80010000u && value < 0x80100000u) {
+                    // It does, but does a script command follow?
+                    var nextAddr = addr + 4;
+                    if (nextAddr < addrMax) {
+                        value = (uint) Data.GetDouble((int) nextAddr);
                         if (value >= 0x00000000 && value < 0x0000002E) {
-                            _ = scriptAddrs.Add(posAsPtr);
-                            _ = maybeScriptAddrs.Add(posAsPtr);
+                            // Looks like we found a label with a script command. Let's add this to the 'maybe' pile.
+                            _ = scriptRamAddrs.Add(ramAddr);
+                            _ = maybeScriptRamAddrs.Add(ramAddr);
                         }
                     }
-                }
-                else if (value >= RamAddress && value < RamAddress + Data.Length - 3) {
-                    AddScriptInfo(value, $"Referenced at 0x{posAsPtr:X8} (RAM), 0x{posAsPtr - RamAddress:X2} (file)", prepend: false);
-                    _ = pointers.Add(value);
                 }
             }
 
@@ -367,17 +434,17 @@ namespace SF3.Models.Files.X1 {
             var accuracyByAddr = new Dictionary<uint, float>();
 
             int nextScriptId = 0;
-            foreach (var scriptAddr in scriptAddrs) {
+            foreach (var scriptAddr in scriptRamAddrs) {
                 var scriptReader = new ScriptReader(Data, (int) (scriptAddr - RamAddress));
                 _ = scriptReader.ReadUntilDoneDetected(c_maxScriptLength);
 
                 // Don't add scripts that overflowed. Also filter out for some very likely false-positives.
                 bool isJustTen = (scriptReader.CommandsRead == 1 && scriptReader.ScriptData[0] == 0x10);
                 var accuracy = scriptReader.PercentValidCommands;
-                if (scriptReader.Position >= c_maxScriptLength || scriptReader.Aborted == true || (maybeScriptAddrs.Contains(scriptAddr) && isJustTen) || accuracy < 0.75f) {
-                    _ = knownScriptAddrs.Remove(scriptAddr);
-                    _ = maybeScriptAddrs.Remove(scriptAddr);
-                    _ = scriptAddrs.Remove(scriptAddr);
+                if (scriptReader.Position >= c_maxScriptLength || scriptReader.Aborted == true || (maybeScriptRamAddrs.Contains(scriptAddr) && isJustTen) || accuracy < 0.75f) {
+                    _ = knownScriptRamAddrs.Remove(scriptAddr);
+                    _ = maybeScriptRamAddrs.Remove(scriptAddr);
+                    _ = scriptRamAddrs.Remove(scriptAddr);
                     continue;
                 }
 
@@ -387,9 +454,9 @@ namespace SF3.Models.Files.X1 {
 
                 // If this is definitely a script, was originally thought to *maybe* be a script, and has a pointer to it somewhere,
                 // then let's just consider this a script. Move it to the correct set.
-                if (accuracy == 1.00f && pointers.Contains(scriptAddr) && maybeScriptAddrs.Contains(scriptAddr) && !knownScriptAddrs.Contains(scriptAddr)) {
-                    _ = maybeScriptAddrs.Remove(scriptAddr);
-                    _ = probablyScriptAddrs.Add(scriptAddr);
+                if (accuracy == 1.00f && pointerValues.Contains(scriptAddr) && maybeScriptRamAddrs.Contains(scriptAddr) && !knownScriptRamAddrs.Contains(scriptAddr)) {
+                    _ = maybeScriptRamAddrs.Remove(scriptAddr);
+                    _ = probablyScriptRamAddrs.Add(scriptAddr);
                     AddScriptInfo(scriptAddr, "Looks like a referenced script", prepend: true);
                 }
             }
@@ -402,37 +469,37 @@ namespace SF3.Models.Files.X1 {
             }
 
             // Keep track of all the bytes known as scripts.
-            foreach (var addr in knownScriptAddrs)
+            foreach (var addr in knownScriptRamAddrs)
                 MarkScriptBytes(addr);
-            foreach (var addr in probablyScriptAddrs)
+            foreach (var addr in probablyScriptRamAddrs)
                 MarkScriptBytes(addr);
 
             // Ugly brute-force method to keep adding the most accurate scripts to the bool and elimate overlapping ones
             var overlappingScriptsByAddr = new HashSet<uint>();
 
-            while (maybeScriptAddrs.Count > 0) {
+            while (maybeScriptRamAddrs.Count > 0) {
                 // Remove 'maybe' scripts that intersect with 'knowns'.
-                var maybeIterAddrs = new HashSet<uint>(maybeScriptAddrs);
+                var maybeIterAddrs = new HashSet<uint>(maybeScriptRamAddrs);
                 foreach (var addr in maybeIterAddrs) {
                     var pos = (addr - RamAddress) / 4;
                     for (int i = 0; i < ScriptsByAddress[addr].ScriptLength; i++) {
                         if (dataScriptBytes[pos++]) {
                             _ = overlappingScriptsByAddr.Add(addr);
-                            _ = maybeScriptAddrs.Remove(addr);
+                            _ = maybeScriptRamAddrs.Remove(addr);
                             break;
                         }
                     }
                 }
 
                 // Put the most accurate and longest maybe into the 'known' camp.
-                if (maybeScriptAddrs.Count > 0) {
-                    var mostAccurateMaybe = maybeScriptAddrs
+                if (maybeScriptRamAddrs.Count > 0) {
+                    var mostAccurateMaybe = maybeScriptRamAddrs
                         .OrderByDescending(x => accuracyByAddr[x])
                         .ThenByDescending(x => ScriptsByAddress[x].Size)
                         .First();
 
-                    _ = maybeScriptAddrs.Remove(mostAccurateMaybe);
-                    _ = probablyScriptAddrs.Add(mostAccurateMaybe);
+                    _ = maybeScriptRamAddrs.Remove(mostAccurateMaybe);
+                    _ = probablyScriptRamAddrs.Add(mostAccurateMaybe);
 
                     MarkScriptBytes(mostAccurateMaybe);
                     AddScriptInfo(mostAccurateMaybe, "Looks like an unreferenced script", prepend: true);
@@ -442,23 +509,56 @@ namespace SF3.Models.Files.X1 {
             // Filter out all the ones we don't think are real
             ScriptsByAddress = ScriptsByAddress
                 .Where(x => !overlappingScriptsByAddr.Contains(x.Key))
-                .OrderByDescending(x => knownScriptAddrs.Contains(x.Key))
-                .ThenByDescending(x => pointers.Contains(x.Key))
+                .OrderByDescending(x => knownScriptRamAddrs.Contains(x.Key))
+                .ThenByDescending(x => pointerValues.Contains(x.Key))
                 .ThenBy(x => x.Key)
                 .ToDictionary(x => x.Key, x => x.Value);
+
+            // Mark scripts as discovered.
+            foreach (var kv in ScriptsByAddress) {
+                var scriptRamAddr = kv.Key;
+                var scriptAddr = scriptRamAddr - RamAddress;
+                var script = kv.Value;
+
+                DiscoveredDataByAddress[scriptRamAddr] = new DiscoveredData((int) scriptAddr, script.Size, DiscoveredDataType.Array, $"{nameof(ActorScript)}Command[]");
+                var ramAddrsOfPointersToScript = pointerValuesByRamAddr.Where(x => x.Value == scriptRamAddr).Select(x => x.Key).ToArray();
+                foreach (var pointerRamAddr in ramAddrsOfPointersToScript) {
+                    var pointerAddr = pointerRamAddr - RamAddress;
+                    DiscoveredDataByAddress[pointerRamAddr] = new DiscoveredData((int) pointerAddr, 4, DiscoveredDataType.Pointer, $"{nameof(ActorScript)}Command*");
+                }
+            }
 
             // Add names to common scripts that have been identified
             foreach (var addr in ScriptsByAddress.Keys) {
                 ScriptsByAddress[addr].ScriptName = ActorScriptUtils.DetermineScriptName(ScriptsByAddress[addr]);
-                if (scriptInfoByAddress.ContainsKey(addr))
-                    ScriptsByAddress[addr].ScriptNote = string.Join("\r\n", scriptInfoByAddress[addr]);
+                if (scriptInfoByRamAddr.ContainsKey(addr))
+                    ScriptsByAddress[addr].ScriptNote = string.Join("\r\n", scriptInfoByRamAddr[addr]);
 
                 // Dump unknown commands to the debug console
                 var scriptLines = ScriptsByAddress[addr].Text.Split(new string[] { "\r\n" }, StringSplitOptions.None);
                 var scriptCommands = scriptLines.Where(x => x.Contains("// ")).Select(x => x.Substring(x.IndexOf("// ") + 3)).ToList();
                 if (scriptCommands.Any(x => x.StartsWith("Unknown"))) {
-                    System.Diagnostics.Debug.WriteLine($"Unknown command used at 0x{addr:X8}" + (pointers.Contains(addr) ? " (has pointer):" : ":"));
+                    System.Diagnostics.Debug.WriteLine($"Unknown command used at 0x{addr:X8}" + (pointerValues.Contains(addr) ? " (has pointer):" : ":"));
                     System.Diagnostics.Debug.WriteLine(ScriptsByAddress[addr]);
+                }
+            }
+
+            // Some of these scripts call functions. If we don't know what these pointers are, mark them as functions.
+            foreach (var script in ScriptsByAddress.Values) {
+                var scriptReader = new ScriptReader(Data, script.Address);
+                // TODO: truncate commands that exceed ScriptLength
+                while (scriptReader.Position < script.ScriptLength) {
+                    var command = scriptReader.ReadCommand();
+                    var commandData = command.Data;
+                    if (commandData[0] == (uint) ActorCommandType.RunFunction) {
+                        var funcPtrRamAddr = (uint) (script.Address + (scriptReader.Position - 1) * 4) + RamAddress;
+                        if (DiscoveredDataByAddress.TryGetValue(funcPtrRamAddr, out var disc) && disc.Name == "void*")
+                            disc.Name = "scriptFunction()*";
+
+                        var funcRamAddr = commandData[1];
+                        if (!DiscoveredDataByAddress.ContainsKey(funcRamAddr))
+                            DiscoveredDataByAddress[funcRamAddr] = new DiscoveredData((int) (funcRamAddr - RamAddress), null, DiscoveredDataType.Function, "scriptFunction(???)");
+                    }
                 }
             }
         }
