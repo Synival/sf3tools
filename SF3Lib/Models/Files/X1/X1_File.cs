@@ -534,11 +534,11 @@ namespace SF3.Models.Files.X1 {
                 // Mark all pointers to this discovered function.
                 if (voidPointers.ContainsKey(funcRamAddr))
                     foreach (var desc in voidPointers[funcRamAddr])
-                        desc.Name = $"{funcName}()*";
+                        desc.Name = $"ScriptFunc()* {funcName}";
 
                 // Add an entry for the function itself.
                 if (!DiscoveredDataByAddress.ContainsKey(funcRamAddr))
-                    DiscoveredDataByAddress[funcRamAddr] = new DiscoveredData((int) (funcRamAddr - RamAddress), null, DiscoveredDataType.Function, $"{funcName}(???)");
+                    DiscoveredDataByAddress[funcRamAddr] = new DiscoveredData((int) (funcRamAddr - RamAddress), null, DiscoveredDataType.Function, $"ScriptFunc {funcName}(???)");
             }
 
             // Mark discovered scripts, unidentified pointers to them, and any functions they may contain.
@@ -547,13 +547,14 @@ namespace SF3.Models.Files.X1 {
                 var scriptAddr = scriptRamAddr - RamAddress;
                 var script = kv.Value;
 
-                DiscoveredDataByAddress[scriptRamAddr] = new DiscoveredData((int) scriptAddr, script.Size, DiscoveredDataType.Array, $"{nameof(ActorScript)}Command[]");
+                var scriptName = (script.ScriptName == "") ? $"Unnamed_0x{script.Address + RamAddress:X8}" : script.ScriptName;
+                // TODO: separate function for this, with a beautiful regex
+                var scriptCodeNameBase = string.Join("", scriptName.Replace("(", "").Replace(")", "").Replace("-", "").Split(' ').Where(x => x.Length >= 1).Select(x => Char.ToUpper(x[0]) + x.Substring(1)));
+
+                DiscoveredDataByAddress[scriptRamAddr] = new DiscoveredData((int) scriptAddr, script.Size, DiscoveredDataType.Array, $"{nameof(ActorScript)}Command[] script_{scriptCodeNameBase}");
                 if (voidPointers.ContainsKey(scriptRamAddr))
                     foreach (var desc in voidPointers[scriptRamAddr])
-                        desc.Name = $"{nameof(ActorScript)}Command*";
-
-                var scriptName = (script.ScriptName == "") ? $"unnamed_0x{script.Address + RamAddress:X8}" : script.ScriptName;
-                var scriptFuncNameBase = string.Join("", scriptName.Split(' ').Where(x => x.Length >= 1).Select(x => Char.ToUpper(x[0]) + x.Substring(1)));
+                        desc.Name = $"{nameof(ActorScript)}Command* scriptPtr_{scriptCodeNameBase}";
 
                 // Looks for 'RunFunction' commands.
                 var scriptReader = new ScriptReader(Data, script.Address);
@@ -563,9 +564,9 @@ namespace SF3.Models.Files.X1 {
                     var commandData = command.Data;
 
                     if (commandData[0] == (uint) ActorCommandType.RunFunction)
-                        AddScriptFunction($"ScriptRunFunction_{scriptFuncNameBase}_CmdId{command.Id}", commandData[1]);
+                        AddScriptFunction($"scriptRunFunc_cmdId{command.Id}_{scriptCodeNameBase}", commandData[1]);
                     else if (commandData[0] == (uint) ActorCommandType.SetProperty && commandData[1] == (uint) ActorPropertyCommandType.ThinkFunction)
-                        AddScriptFunction($"ScriptThinkFunction_{scriptFuncNameBase}_CmdId{command.Id}", commandData[2]);
+                        AddScriptFunction($"scriptThinkFunc_cmdId{command.Id}_{scriptCodeNameBase}", commandData[2]);
                 }
             }
         }

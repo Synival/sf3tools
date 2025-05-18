@@ -193,7 +193,7 @@ namespace SF3.Actors {
                 0x00000000, 0x00000014,                         // Wait 20 frame(s)
                 0x0000000C, 0x0000FFFF, 0xC0010000,             // Loop to 0xC0010000 forever
             }},
-            { "Reset Scale (Sprite)", new uint[] {
+            { "Reset Scale XY", new uint[] {
                 0x00000015, 0x00000009, 0x00010000,             // Set ScaleX to 0x10000
                 0x00000015, 0x0000000A, 0x00010000,             // Set ScaleY to 0x10000
                 0x00000010,                                     // Done
