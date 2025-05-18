@@ -192,8 +192,8 @@ namespace SF3.Models.Files.X1 {
 
             // Locate difficult-to-find common functions/data that are shared between X1 files.
             var searchData = Data.GetDataCopy();
-            Discoveries = new DiscoveryContext(searchData);
-            DiscoverPointers();
+            Discoveries = new DiscoveryContext(searchData, RamAddress);
+            Discoveries.DiscoverUnknownPointersWithinValueRange(RamAddress, (uint) (RamAddress + Data.Length - 3));
             DiscoverFunctions(searchData);
             DiscoverData(searchData);
 
@@ -212,24 +212,10 @@ namespace SF3.Models.Files.X1 {
             var funcDictionary = KnownX1Functions.AllKnownFunctions
                 .Select(x => new { Name = x.Key, Size = x.Value.Length * 2, Index = data.IndexOfSubset(x.Value.ToByteArray()) })
                 .Where(x => x.Index >= 0)
-                .ToDictionary(x => (uint) x.Index, x => new DiscoveredData((uint) x.Index, x.Size, DiscoveredDataType.Function, x.Name));
+                .ToDictionary(x => (uint) x.Index + RamAddress, x => new DiscoveredData((uint) x.Index + RamAddress, x.Size, DiscoveredDataType.Function, x.Name));
 
             foreach (var kv in funcDictionary)
                 Discoveries.DiscoveredDataByAddress[kv.Key] = kv.Value;
-        }
-
-        private void DiscoverPointers() {
-            var pointers = new HashSet<uint>();
-
-            // Look for anything that potentially could be a script (filter out obvious negatives)
-            var addrMax = Data.Length - 3;
-            var ramAddrMax = addrMax + RamAddress;
-            for (uint addr = 0; addr < addrMax; addr += 4) {
-                var ramAddr = addr + RamAddress;
-                var value = (uint) Data.GetDouble((int) addr);
-                if (value >= RamAddress && value < ramAddrMax)
-                    Discoveries.AddUnknownPointer(addr);
-            }
         }
 
         private void DiscoverData(byte[] data) {
@@ -250,7 +236,7 @@ namespace SF3.Models.Files.X1 {
                 // which is a pointer to a table we want to load.
                 foreach (var funcPtrAddr in funcPtrAddrs) {
                     var funcPtrRamAddr = (uint) (funcPtrAddr + RamAddress);
-                    Discoveries.DiscoveredDataByAddress[funcPtrRamAddr] = new DiscoveredData((uint) funcPtrAddr, 4, DiscoveredDataType.Pointer, $"{func.Name}()*");
+                    Discoveries.DiscoveredDataByAddress[funcPtrRamAddr] = new DiscoveredData(funcPtrRamAddr, 4, DiscoveredDataType.Pointer, $"{func.Name}()*");
 
                     // Get the address of the previous pointer...
                     var modelsPtrAddr = (uint) (funcPtrAddr - 4);
@@ -260,8 +246,8 @@ namespace SF3.Models.Files.X1 {
                     var modelsRamAddr = data.GetUInt((int) modelsPtrAddr);
                     if (modelsRamAddr >= RamAddress && modelsRamAddr < RamAddress + data.Length) {
                         var modelsAddr = modelsRamAddr - RamAddress;
-                        Discoveries.DiscoveredDataByAddress[modelsPtrRamAddr] = new DiscoveredData(modelsPtrAddr, 4, DiscoveredDataType.Pointer, nameof(ModelInstanceGroup) + "*");
-                        Discoveries.DiscoveredDataByAddress[modelsRamAddr]    = new DiscoveredData(modelsAddr, null, DiscoveredDataType.Array, nameof(ModelInstanceGroup) + "[]");
+                        Discoveries.DiscoveredDataByAddress[modelsPtrRamAddr] = new DiscoveredData(modelsPtrRamAddr, 4, DiscoveredDataType.Pointer, nameof(ModelInstanceGroup) + "*");
+                        Discoveries.DiscoveredDataByAddress[modelsRamAddr]    = new DiscoveredData(modelsRamAddr, null, DiscoveredDataType.Array, nameof(ModelInstanceGroup) + "[]");
                     }
                 }
             }
@@ -303,7 +289,7 @@ namespace SF3.Models.Files.X1 {
                 // Mark the sub-table and its pointer as 'Discovered'.
                 // Because this starts the 'ModelInstanceGroup[]' table, don't just replace the name with 'ModelInstance*', but append it.
                 // TODO: this is contrary to reality!! We need to mark something at an address as *multiple* types of data.
-                Discoveries.DiscoveredDataByAddress[modelsRamAddr] = new DiscoveredData(modelsAddr, ModelInstanceTablesByAddress[modelsRamAddr].SizeInBytes, DiscoveredDataType.Array, nameof(ModelInstance) + "[]");
+                Discoveries.DiscoveredDataByAddress[modelsRamAddr] = new DiscoveredData(modelsRamAddr, ModelInstanceTablesByAddress[modelsRamAddr].SizeInBytes, DiscoveredDataType.Array, nameof(ModelInstance) + "[]");
                 var prevDiscoveredModelPtr = Discoveries.DiscoveredDataByAddress[(uint) group.Address + RamAddress];
                 if (prevDiscoveredModelPtr.Name == "void*")
                     prevDiscoveredModelPtr.Name = $"{nameof(ModelInstance)}*";
@@ -314,8 +300,8 @@ namespace SF3.Models.Files.X1 {
                 var matricesRamPtr = group.MatrixTablePtr;
                 var matricesPtr = matricesRamPtr - RamAddress;
                 if (matricesPtr >= 0 && matricesPtr < Data.Length - 3)
-                    Discoveries.DiscoveredDataByAddress[matricesRamPtr] = new DiscoveredData(matricesPtr, 0x38 * newTable.Length, DiscoveredDataType.Array, "ModelMatrix[]");
-                Discoveries.DiscoveredDataByAddress[(uint) group.Address + RamAddress + 4] = new DiscoveredData((uint) group.Address + 4, 4, DiscoveredDataType.Pointer, "ModelMatrix*");
+                    Discoveries.DiscoveredDataByAddress[matricesRamPtr] = new DiscoveredData(matricesRamPtr, 0x38 * newTable.Length, DiscoveredDataType.Array, "ModelMatrix[]");
+                Discoveries.DiscoveredDataByAddress[(uint) group.Address + RamAddress + 4] = new DiscoveredData((uint) group.Address + RamAddress + 4, 4, DiscoveredDataType.Pointer, "ModelMatrix*");
             }
 
             return tables.ToArray();
@@ -354,7 +340,7 @@ namespace SF3.Models.Files.X1 {
             foreach (var disc in discoveredPointersByRamAddr) {
                 var addr = (uint) disc.Value.Address;
                 var ramAddr = disc.Key;
-                var potentialScriptRamAddr = (uint) Data.GetDouble((int) addr);
+                var potentialScriptRamAddr = (uint) Data.GetDouble((int) (addr - RamAddress));
                 var potentialScriptAddr = potentialScriptRamAddr - RamAddress;
 
                 // On the off chance that this was already discovered, add it.
@@ -524,7 +510,7 @@ namespace SF3.Models.Files.X1 {
             return Discoveries.DiscoveredDataByAddress
                 .Where(x => x.Value.Type == DiscoveredDataType.Pointer && x.Value.Name == "void*")
                 .Select(x => x.Value)
-                .GroupBy(x => (uint) Data.GetDouble((int) x.Address))
+                .GroupBy(x => (uint) Data.GetDouble((int) (x.Address - RamAddress)))
                 .ToDictionary(x => x.Key, x => x.ToArray());
         }
 
@@ -540,7 +526,7 @@ namespace SF3.Models.Files.X1 {
 
                 // Add an entry for the function itself.
                 if (!Discoveries.DiscoveredDataByAddress.ContainsKey(funcRamAddr))
-                    Discoveries.DiscoveredDataByAddress[funcRamAddr] = new DiscoveredData((funcRamAddr - RamAddress), null, DiscoveredDataType.Function, $"ScriptFunc {funcName}(???)");
+                    Discoveries.DiscoveredDataByAddress[funcRamAddr] = new DiscoveredData(funcRamAddr, null, DiscoveredDataType.Function, $"ScriptFunc {funcName}(???)");
             }
 
             // Mark discovered scripts, unidentified pointers to them, and any functions they may contain.
@@ -553,7 +539,7 @@ namespace SF3.Models.Files.X1 {
                 // TODO: separate function for this, with a beautiful regex
                 var scriptCodeNameBase = string.Join("", scriptName.Replace("(", "").Replace(")", "").Replace("-", "").Split(' ').Where(x => x.Length >= 1).Select(x => Char.ToUpper(x[0]) + x.Substring(1)));
 
-                Discoveries.DiscoveredDataByAddress[scriptRamAddr] = new DiscoveredData(scriptAddr, script.Size, DiscoveredDataType.Array, $"{nameof(ActorScript)}Command[] script_{scriptCodeNameBase}");
+                Discoveries.DiscoveredDataByAddress[scriptRamAddr] = new DiscoveredData(scriptRamAddr, script.Size, DiscoveredDataType.Array, $"{nameof(ActorScript)}Command[] script_{scriptCodeNameBase}");
                 if (voidPointers.ContainsKey(scriptRamAddr))
                     foreach (var desc in voidPointers[scriptRamAddr])
                         desc.Name = $"{nameof(ActorScript)}Command* scriptPtr_{scriptCodeNameBase}";
