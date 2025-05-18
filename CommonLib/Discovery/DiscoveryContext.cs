@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using CommonLib.Types;
 using CommonLib.Utils;
 
 namespace CommonLib.Discovery {
@@ -31,16 +32,63 @@ namespace CommonLib.Discovery {
             if (addr % 4 != 0)
                 throw new ArgumentException(nameof(addr) + " must have an alignment of 4");
 
-            // TODO: what if a pointer is already there?
-            DiscoveredDataByAddress[addr] = new DiscoveredData(addr, 4, Types.DiscoveredDataType.Pointer, "*");
+            // TODO: what if a something is already there?
+            DiscoveredDataByAddress[addr] = new DiscoveredData(addr, 4, DiscoveredDataType.Pointer, "*");
+        }
+
+        public DiscoveredData AddFunction(uint addr, string name, int? size) {
+            if (addr % 2 != 0)
+                throw new ArgumentException(nameof(addr) + " must have an alignment of 2");
+
+            // TODO: what if a something is already there?
+            // TODO: parameters?
+            var newData = DiscoveredDataByAddress[addr] = new DiscoveredData(addr, size, DiscoveredDataType.Function, $"{name}(...)");
+            UpdatePointersToDiscoveredData(DiscoveredDataByAddress[addr]);
+            return newData;
+        }
+
+        public DiscoveredData AddArray(uint addr, string name, int? size) {
+            if (addr % 4 != 0)
+                throw new ArgumentException(nameof(addr) + " must have an alignment of 4");
+
+            // TODO: what if a something is already there?
+            var newData = DiscoveredDataByAddress[addr] = new DiscoveredData(addr, size, DiscoveredDataType.Array, $"{name}[]");
+            UpdatePointersToDiscoveredData(DiscoveredDataByAddress[addr]);
+            return newData;
         }
 
         public Dictionary<uint, DiscoveredData[]> GetUnidentifiedPointersByValue() {
-            return DiscoveredDataByAddress
-                .Where(x => x.Value.IsUnidentifiedPointer)
-                .Select(x => x.Value)
+            return DiscoveredDataByAddress.Values
+                .Where(x => x.IsUnidentifiedPointer)
                 .GroupBy(x => Data.GetUInt((int) (x.Address - Address)))
                 .ToDictionary(x => x.Key, x => x.ToArray());
+        }
+
+        public Dictionary<uint, DiscoveredData[]> GetPointersByValue() {
+            return DiscoveredDataByAddress.Values
+                .Where(x => x.Type == DiscoveredDataType.Pointer)
+                .GroupBy(x => Data.GetUInt((int) (x.Address - Address)))
+                .ToDictionary(x => x.Key, x => x.ToArray());
+        }
+
+        public DiscoveredData[] GetUnidentifiedPointersByValue(uint ptrValue) {
+            return DiscoveredDataByAddress.Values
+                .Where(x => x.IsUnidentifiedPointer && Data.GetUInt((int) (x.Address - Address)) == ptrValue)
+                .ToArray();
+        }
+
+        public DiscoveredData[] GetPointersByValue(uint ptrValue) {
+            return DiscoveredDataByAddress.Values
+                .Where(x => x.Type == DiscoveredDataType.Pointer && Data.GetUInt((int) (x.Address - Address)) == ptrValue)
+                .ToArray();
+        }
+
+        public int UpdatePointersToDiscoveredData(DiscoveredData data) {
+            var pointers = GetUnidentifiedPointersByValue(data.Address);
+            var newName = data.Name + "*";
+            foreach (var pointer in pointers)
+                pointer.Name = newName;
+            return pointers.Length;
         }
 
         public byte[] Data { get; }
