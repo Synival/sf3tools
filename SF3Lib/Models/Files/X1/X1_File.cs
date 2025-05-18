@@ -16,6 +16,8 @@ using SF3.Models.Structs.Shared;
 using SF3.Utils;
 using CommonLib.Utils;
 using SF3.Models.Structs.X1;
+using CommonLib.Discovery;
+using CommonLib.Types;
 
 namespace SF3.Models.Files.X1 {
     public class X1_File : ScenarioTableFile, IX1_File {

@@ -1,4 +1,4 @@
-﻿namespace SF3.Types {
+﻿namespace CommonLib.Types {
     public enum DiscoveredDataType {
         Pointer  = 0,
         Struct   = 1,

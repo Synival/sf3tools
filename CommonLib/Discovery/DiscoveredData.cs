@@ -1,6 +1,6 @@
-﻿using SF3.Types;
+﻿using CommonLib.Types;
 
-namespace SF3 {
+namespace CommonLib.Discovery {
     public class DiscoveredData {
         public DiscoveredData(int address, int? size, DiscoveredDataType type, string name) {
             Address = address;
