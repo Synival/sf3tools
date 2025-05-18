@@ -14,6 +14,6 @@ namespace CommonLib.Discovery {
         public DiscoveredDataType Type { get; set; }
         public string Name { get; set; }
 
-        public bool IsUnidentifiedPointer => Type == DiscoveredDataType.Pointer && Name == "void*";
+        public bool IsUnidentifiedPointer => Type == DiscoveredDataType.Pointer && Name == "*";
     }
 }

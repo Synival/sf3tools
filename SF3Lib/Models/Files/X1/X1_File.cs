@@ -291,7 +291,7 @@ namespace SF3.Models.Files.X1 {
                 // TODO: this is contrary to reality!! We need to mark something at an address as *multiple* types of data.
                 Discoveries.DiscoveredDataByAddress[modelsRamAddr] = new DiscoveredData(modelsRamAddr, ModelInstanceTablesByAddress[modelsRamAddr].SizeInBytes, DiscoveredDataType.Array, nameof(ModelInstance) + "[]");
                 var prevDiscoveredModelPtr = Discoveries.DiscoveredDataByAddress[(uint) group.Address + RamAddress];
-                if (prevDiscoveredModelPtr.Name == "void*")
+                if (prevDiscoveredModelPtr.IsUnidentifiedPointer)
                     prevDiscoveredModelPtr.Name = $"{nameof(ModelInstance)}*";
                 else
                     prevDiscoveredModelPtr.Name += $" / {nameof(ModelInstance)}*";
@@ -346,8 +346,8 @@ namespace SF3.Models.Files.X1 {
                 // On the off chance that this was already discovered, add it.
                 if (disc.Value.Name == $"{nameof(ActorScript)}Command*")
                     AddScriptInfo(potentialScriptRamAddr, "Previously Discovered", prepend: true);
-                // If this isn't a 'void*', it's something else and not a potential script.
-                else if (disc.Value.Name != "void*")
+                // If this isn't an identified pointer, it's something else and not a potential script.
+                else if (disc.Value.IsUnidentifiedPointer)
                     continue;
 
                 // This could be a script: add some info.
