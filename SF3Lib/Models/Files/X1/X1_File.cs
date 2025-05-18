@@ -220,9 +220,8 @@ namespace SF3.Models.Files.X1 {
 
         private void DiscoverData(byte[] data) {
             // Look for references to that function. There are many variants of this function, so look for all of them.
-            var instantiateModelsFuncs = Discoveries.DiscoveredDataByAddress
-                .Where(x => x.Value.Type == DiscoveredDataType.Function && x.Value.Name.StartsWith("InstantiateModels"))
-                .Select(x => x.Value)
+            var instantiateModelsFuncs = Discoveries.GetFunctions()
+                .Where(x => x.Name.StartsWith("InstantiateModels"))
                 .ToArray();
 
             // On the off chance that multiple versions of this function exist (which never seems to be the case),
@@ -251,8 +250,8 @@ namespace SF3.Models.Files.X1 {
 
             // Look for all arrays discovered as 'ModelInstanceGroup[]'.
             ModelInstanceGroupTablesByAddress = new Dictionary<uint, ModelInstanceGroupTable>();
-            var modelMatrixGroupTables = Discoveries.DiscoveredDataByAddress.Values
-                .Where(x => x.Type == DiscoveredDataType.Array && x.Name == nameof(ModelInstanceGroup) + "[]")
+            var modelMatrixGroupTables = Discoveries.GetArrays()
+                .Where(x => x.Name == nameof(ModelInstanceGroup) + "[]")
                 .ToArray();
 
             // Create corresponding tables for all the discovered data.
@@ -319,9 +318,8 @@ namespace SF3.Models.Files.X1 {
             }
 
             // On the off chance that we've discovered script pointers already, mark them as "known".
-            var discoveredPointersByRamAddr = Discoveries.DiscoveredDataByAddress.Values
-                .Where(x => x.Type == DiscoveredDataType.Pointer)
-                .ToDictionary(x => (x.Address + RamAddress), x => x);
+            var discoveredPointersByRamAddr = Discoveries.GetPointers()
+                .ToDictionary(x => x.Address, x => x);
 
             foreach (var disc in discoveredPointersByRamAddr) {
                 var addr = disc.Value.Address;

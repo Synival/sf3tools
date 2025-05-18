@@ -58,8 +58,9 @@ namespace SF3.Win.Views.X1 {
                     CreateChild(new BattleView($"Battle ({battleKv.Key})", battleKv.Value));
             }
 
-            if (Model.Discoveries.DiscoveredDataByAddress?.Count > 0) {
-                var text = string.Join("\r\n", Model.Discoveries.DiscoveredDataByAddress.Values
+            var discoveries = Model.Discoveries?.GetAll();
+            if (discoveries?.Length > 0) {
+                var text = string.Join("\r\n", discoveries
                     .OrderBy(x => x.Address)
                     .Select(x =>
                         ((x.Address < Model.RamAddress || x.Address >= Model.RamAddress + ((X1_File) Model).Data.Length) ? "(Outside) " : "")

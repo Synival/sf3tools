@@ -57,6 +57,9 @@ namespace CommonLib.Discovery {
             return newData;
         }
 
+        public DiscoveredData[] GetAll()
+            => DiscoveredDataByAddress.Values.ToArray();
+
         public Dictionary<uint, DiscoveredData[]> GetUnidentifiedPointersByValue() {
             return DiscoveredDataByAddress.Values
                 .Where(x => x.IsUnidentifiedPointer)
@@ -77,9 +80,27 @@ namespace CommonLib.Discovery {
                 .ToArray();
         }
 
+        public DiscoveredData[] GetPointers() {
+            return DiscoveredDataByAddress.Values
+                .Where(x => x.Type == DiscoveredDataType.Pointer)
+                .ToArray();
+        }
+
         public DiscoveredData[] GetPointersByValue(uint ptrValue) {
             return DiscoveredDataByAddress.Values
                 .Where(x => x.Type == DiscoveredDataType.Pointer && Data.GetUInt((int) (x.Address - Address)) == ptrValue)
+                .ToArray();
+        }
+
+        public DiscoveredData[] GetFunctions() {
+            return DiscoveredDataByAddress.Values
+                .Where(x => x.Type == DiscoveredDataType.Function)
+                .ToArray();
+        }
+
+        public DiscoveredData[] GetArrays() {
+            return DiscoveredDataByAddress.Values
+                .Where(x => x.Type == DiscoveredDataType.Array)
                 .ToArray();
         }
 
@@ -93,6 +114,7 @@ namespace CommonLib.Discovery {
 
         public byte[] Data { get; }
         public uint Address { get; }
-        public Dictionary<uint, DiscoveredData> DiscoveredDataByAddress = new Dictionary<uint, DiscoveredData>();
+
+        private Dictionary<uint, DiscoveredData> DiscoveredDataByAddress = new Dictionary<uint, DiscoveredData>();
     }
 }
