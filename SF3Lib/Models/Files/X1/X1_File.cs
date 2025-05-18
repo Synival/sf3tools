@@ -506,17 +506,9 @@ namespace SF3.Models.Files.X1 {
             MarkScriptDiscoveries();
         }
 
-        private Dictionary<uint, DiscoveredData[]> GetUnidentifiedDiscoveredPointerAddressesByValue() {
-            return Discoveries.DiscoveredDataByAddress
-                .Where(x => x.Value.Type == DiscoveredDataType.Pointer && x.Value.Name == "void*")
-                .Select(x => x.Value)
-                .GroupBy(x => (uint) Data.GetDouble((int) (x.Address - RamAddress)))
-                .ToDictionary(x => x.Key, x => x.ToArray());
-        }
-
         private void MarkScriptDiscoveries() {
             // Get void pointers that we can identify.
-            var voidPointers = GetUnidentifiedDiscoveredPointerAddressesByValue();
+            var voidPointers = Discoveries.GetUnidentifiedPointersByValue();
 
             void AddScriptFunction(string funcName, uint funcRamAddr) {
                 // Mark all pointers to this discovered function.

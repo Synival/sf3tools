@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using CommonLib.Utils;
 
 namespace CommonLib.Discovery {
@@ -32,6 +33,14 @@ namespace CommonLib.Discovery {
 
             // TODO: what if a pointer is already there?
             DiscoveredDataByAddress[addr] = new DiscoveredData(addr, 4, Types.DiscoveredDataType.Pointer, "void*");
+        }
+
+        public Dictionary<uint, DiscoveredData[]> GetUnidentifiedPointersByValue() {
+            return DiscoveredDataByAddress
+                .Where(x => x.Value.IsUnidentifiedPointer)
+                .Select(x => x.Value)
+                .GroupBy(x => Data.GetUInt((int) (x.Address - Address)))
+                .ToDictionary(x => x.Key, x => x.ToArray());
         }
 
         public byte[] Data { get; }
