@@ -58,8 +58,8 @@ namespace SF3.Win.Views.X1 {
                     CreateChild(new BattleView($"Battle ({battleKv.Key})", battleKv.Value));
             }
 
-            if (Model.DiscoveredDataByAddress?.Count > 0) {
-                var text = string.Join("\r\n", Model.DiscoveredDataByAddress.Values
+            if (Model.Discoveries.DiscoveredDataByAddress?.Count > 0) {
+                var text = string.Join("\r\n", Model.Discoveries.DiscoveredDataByAddress.Values
                     .OrderBy(x => x.Address)
                     .Select(x => $"0x{x.Address:X4} / 0x{x.Address + Model.RamAddress:X8} | {x.Type, -8} | {x.Name}"));
                 CreateChild(new TextView("Discovered Data", text));

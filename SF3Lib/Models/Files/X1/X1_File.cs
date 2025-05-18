@@ -191,8 +191,8 @@ namespace SF3.Models.Files.X1 {
                 tables.Add(TileMovementTable = TileMovementTable.Create(Data, "TileMovement", tileMovementAddress, true));
 
             // Locate difficult-to-find common functions/data that are shared between X1 files.
-            DiscoveredDataByAddress = new Dictionary<uint, DiscoveredData>();
             var searchData = Data.GetDataCopy();
+            Discoveries = new DiscoveryContext(searchData);
             DiscoverPointers();
             DiscoverFunctions(searchData);
             DiscoverData(searchData);
@@ -215,7 +215,7 @@ namespace SF3.Models.Files.X1 {
                 .ToDictionary(x => (uint) x.Index, x => new DiscoveredData(x.Index, x.Size, DiscoveredDataType.Function, x.Name));
 
             foreach (var kv in funcDictionary)
-                DiscoveredDataByAddress[kv.Key] = kv.Value;
+                Discoveries.DiscoveredDataByAddress[kv.Key] = kv.Value;
         }
 
         private void DiscoverPointers() {
@@ -228,13 +228,13 @@ namespace SF3.Models.Files.X1 {
                 var ramAddr = addr + RamAddress;
                 var value = (uint) Data.GetDouble((int) addr);
                 if (value >= RamAddress && value < ramAddrMax)
-                    DiscoveredDataByAddress[ramAddr] = new DiscoveredData((int) addr, 4, DiscoveredDataType.Pointer, "void*");
+                    Discoveries.DiscoveredDataByAddress[ramAddr] = new DiscoveredData((int) addr, 4, DiscoveredDataType.Pointer, "void*");
             }
         }
 
         private void DiscoverData(byte[] data) {
             // Look for references to that function. There are many variants of this function, so look for all of them.
-            var instantiateModelsFuncs = DiscoveredDataByAddress
+            var instantiateModelsFuncs = Discoveries.DiscoveredDataByAddress
                 .Where(x => x.Value.Type == DiscoveredDataType.Function && x.Value.Name.StartsWith("InstantiateModels"))
                 .Select(x => x.Value)
                 .ToArray();
@@ -250,7 +250,7 @@ namespace SF3.Models.Files.X1 {
                 // which is a pointer to a table we want to load.
                 foreach (var funcPtrAddr in funcPtrAddrs) {
                     var funcPtrRamAddr = (uint) (funcPtrAddr + RamAddress);
-                    DiscoveredDataByAddress[funcPtrRamAddr] = new DiscoveredData(funcPtrAddr, 4, DiscoveredDataType.Pointer, $"{func.Name}()*");
+                    Discoveries.DiscoveredDataByAddress[funcPtrRamAddr] = new DiscoveredData(funcPtrAddr, 4, DiscoveredDataType.Pointer, $"{func.Name}()*");
 
                     // Get the address of the previous pointer...
                     var modelsPtrAddr = (uint) (funcPtrAddr - 4);
@@ -260,8 +260,8 @@ namespace SF3.Models.Files.X1 {
                     var modelsRamAddr = data.GetUInt((int) modelsPtrAddr);
                     if (modelsRamAddr >= RamAddress && modelsRamAddr < RamAddress + data.Length) {
                         var modelsAddr = modelsRamAddr - RamAddress;
-                        DiscoveredDataByAddress[modelsPtrRamAddr] = new DiscoveredData((int) modelsPtrAddr, 4, DiscoveredDataType.Pointer, nameof(ModelInstanceGroup) + "*");
-                        DiscoveredDataByAddress[modelsRamAddr]    = new DiscoveredData((int) modelsAddr, null, DiscoveredDataType.Array, nameof(ModelInstanceGroup) + "[]");
+                        Discoveries.DiscoveredDataByAddress[modelsPtrRamAddr] = new DiscoveredData((int) modelsPtrAddr, 4, DiscoveredDataType.Pointer, nameof(ModelInstanceGroup) + "*");
+                        Discoveries.DiscoveredDataByAddress[modelsRamAddr]    = new DiscoveredData((int) modelsAddr, null, DiscoveredDataType.Array, nameof(ModelInstanceGroup) + "[]");
                     }
                 }
             }
@@ -272,7 +272,7 @@ namespace SF3.Models.Files.X1 {
 
             // Look for all arrays discovered as 'ModelInstanceGroup[]'.
             ModelInstanceGroupTablesByAddress = new Dictionary<uint, ModelInstanceGroupTable>();
-            var modelMatrixGroupTables = DiscoveredDataByAddress.Values
+            var modelMatrixGroupTables = Discoveries.DiscoveredDataByAddress.Values
                 .Where(x => x.Type == DiscoveredDataType.Array && x.Name == nameof(ModelInstanceGroup) + "[]")
                 .ToArray();
 
@@ -303,8 +303,8 @@ namespace SF3.Models.Files.X1 {
                 // Mark the sub-table and its pointer as 'Discovered'.
                 // Because this starts the 'ModelInstanceGroup[]' table, don't just replace the name with 'ModelInstance*', but append it.
                 // TODO: this is contrary to reality!! We need to mark something at an address as *multiple* types of data.
-                DiscoveredDataByAddress[modelsRamAddr] = new DiscoveredData((int) modelsAddr, ModelInstanceTablesByAddress[modelsRamAddr].SizeInBytes, DiscoveredDataType.Array, nameof(ModelInstance) + "[]");
-                var prevDiscoveredModelPtr = DiscoveredDataByAddress[(uint) group.Address + RamAddress];
+                Discoveries.DiscoveredDataByAddress[modelsRamAddr] = new DiscoveredData((int) modelsAddr, ModelInstanceTablesByAddress[modelsRamAddr].SizeInBytes, DiscoveredDataType.Array, nameof(ModelInstance) + "[]");
+                var prevDiscoveredModelPtr = Discoveries.DiscoveredDataByAddress[(uint) group.Address + RamAddress];
                 if (prevDiscoveredModelPtr.Name == "void*")
                     prevDiscoveredModelPtr.Name = $"{nameof(ModelInstance)}*";
                 else
@@ -314,8 +314,8 @@ namespace SF3.Models.Files.X1 {
                 var matricesRamPtr = group.MatrixTablePtr;
                 var matricesPtr = matricesRamPtr - RamAddress;
                 if (matricesPtr >= 0 && matricesPtr < Data.Length - 3)
-                    DiscoveredDataByAddress[matricesRamPtr] = new DiscoveredData((int) matricesPtr, 0x38 * newTable.Length, DiscoveredDataType.Array, "ModelMatrix[]");
-                DiscoveredDataByAddress[(uint) group.Address + RamAddress + 4] = new DiscoveredData(group.Address + 4, 4, DiscoveredDataType.Pointer, "ModelMatrix*");
+                    Discoveries.DiscoveredDataByAddress[matricesRamPtr] = new DiscoveredData((int) matricesPtr, 0x38 * newTable.Length, DiscoveredDataType.Array, "ModelMatrix[]");
+                Discoveries.DiscoveredDataByAddress[(uint) group.Address + RamAddress + 4] = new DiscoveredData(group.Address + 4, 4, DiscoveredDataType.Pointer, "ModelMatrix*");
             }
 
             return tables.ToArray();
@@ -347,7 +347,7 @@ namespace SF3.Models.Files.X1 {
             }
 
             // On the off chance that we've discovered script pointers already, mark them as "known".
-            var discoveredPointersByRamAddr = DiscoveredDataByAddress.Values
+            var discoveredPointersByRamAddr = Discoveries.DiscoveredDataByAddress.Values
                 .Where(x => x.Type == DiscoveredDataType.Pointer)
                 .ToDictionary(x => (uint) (x.Address + RamAddress), x => x);
 
@@ -521,7 +521,7 @@ namespace SF3.Models.Files.X1 {
         }
 
         private Dictionary<uint, DiscoveredData[]> GetUnidentifiedDiscoveredPointerAddressesByValue() {
-            return DiscoveredDataByAddress
+            return Discoveries.DiscoveredDataByAddress
                 .Where(x => x.Value.Type == DiscoveredDataType.Pointer && x.Value.Name == "void*")
                 .Select(x => x.Value)
                 .GroupBy(x => (uint) Data.GetDouble(x.Address))
@@ -539,8 +539,8 @@ namespace SF3.Models.Files.X1 {
                         desc.Name = $"ScriptFunc()* {funcName}";
 
                 // Add an entry for the function itself.
-                if (!DiscoveredDataByAddress.ContainsKey(funcRamAddr))
-                    DiscoveredDataByAddress[funcRamAddr] = new DiscoveredData((int) (funcRamAddr - RamAddress), null, DiscoveredDataType.Function, $"ScriptFunc {funcName}(???)");
+                if (!Discoveries.DiscoveredDataByAddress.ContainsKey(funcRamAddr))
+                    Discoveries.DiscoveredDataByAddress[funcRamAddr] = new DiscoveredData((int) (funcRamAddr - RamAddress), null, DiscoveredDataType.Function, $"ScriptFunc {funcName}(???)");
             }
 
             // Mark discovered scripts, unidentified pointers to them, and any functions they may contain.
@@ -553,7 +553,7 @@ namespace SF3.Models.Files.X1 {
                 // TODO: separate function for this, with a beautiful regex
                 var scriptCodeNameBase = string.Join("", scriptName.Replace("(", "").Replace(")", "").Replace("-", "").Split(' ').Where(x => x.Length >= 1).Select(x => Char.ToUpper(x[0]) + x.Substring(1)));
 
-                DiscoveredDataByAddress[scriptRamAddr] = new DiscoveredData((int) scriptAddr, script.Size, DiscoveredDataType.Array, $"{nameof(ActorScript)}Command[] script_{scriptCodeNameBase}");
+                Discoveries.DiscoveredDataByAddress[scriptRamAddr] = new DiscoveredData((int) scriptAddr, script.Size, DiscoveredDataType.Array, $"{nameof(ActorScript)}Command[] script_{scriptCodeNameBase}");
                 if (voidPointers.ContainsKey(scriptRamAddr))
                     foreach (var desc in voidPointers[scriptRamAddr])
                         desc.Name = $"{nameof(ActorScript)}Command* scriptPtr_{scriptCodeNameBase}";
@@ -628,6 +628,6 @@ namespace SF3.Models.Files.X1 {
         [BulkCopyRecurse]
         public Dictionary<uint, ActorScript> ScriptsByAddress { get; private set; }
 
-        public Dictionary<uint, DiscoveredData> DiscoveredDataByAddress { get; private set; }
+        public DiscoveryContext Discoveries { get; private set; }
     }
 }

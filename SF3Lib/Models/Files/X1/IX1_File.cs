@@ -27,8 +27,8 @@ namespace SF3.Models.Files.X1 {
         CharacterTargetUnknownTable[] CharacterTargetUnknownTables { get; }
         Dictionary<uint, ModelInstanceGroupTable> ModelInstanceGroupTablesByAddress { get; }
         Dictionary<uint, ModelInstanceTable> ModelInstanceTablesByAddress { get; }
-
         Dictionary<uint, ActorScript> ScriptsByAddress { get; }
-        Dictionary<uint, DiscoveredData> DiscoveredDataByAddress { get; }
+
+        DiscoveryContext Discoveries { get; }
     }
 }
