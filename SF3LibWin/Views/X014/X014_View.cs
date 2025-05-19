@@ -14,6 +14,8 @@ namespace SF3.Win.Views.X014 {
                 return null;
 
             var ngc = Model.NameGetterContext;
+            if (Model.CharacterBattleModelTable != null)
+                CreateChild(new TableView("Character Models", Model.CharacterBattleModelTable, ngc));
             if (Model.MPDBattleSceneInfoTable != null)
                 CreateChild(new TableView("MPD Battle Scene Info", Model.MPDBattleSceneInfoTable, ngc));
             if (Model.TerrainBasedBattleSceneTablesByRamAddress != null)
