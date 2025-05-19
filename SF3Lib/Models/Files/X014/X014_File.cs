@@ -32,7 +32,6 @@ namespace SF3.Models.Files.X014 {
         }
 
         // TODO: scenario 1 character models at 0xF5A8?
-        // TODO: scenario 3 character models at 0x12A00?
         // TODO: premium disk?
 
         private uint GetCharacterBattleModelSc2TableAddr() {
@@ -43,6 +42,11 @@ namespace SF3.Models.Files.X014 {
                 return 0;
             }
         }
+
+        // TODO: scenario 3 character models at 0x12A00?
+
+        private uint GetCharacterBattleModelSc3TableAddr()
+            => (Scenario == ScenarioType.Scenario3) ? 0x12A00u : 0;
 
         private uint GetMPDBattleSceneInfoTableAddr() {
             switch (Scenario) {
@@ -60,10 +64,12 @@ namespace SF3.Models.Files.X014 {
 
         public override IEnumerable<ITable> MakeTables() {
             var characterBattleModelSc2Addr = GetCharacterBattleModelSc2TableAddr();
+            var characterBattleModelSc3Addr = GetCharacterBattleModelSc3TableAddr();
             var mpdBattleSceneAddr          = GetMPDBattleSceneInfoTableAddr();
 
             var tables = new List<ITable>() {
                 (CharacterBattleModelSc2Table = (characterBattleModelSc2Addr == 0) ? null : CharacterBattleModelSc2Table.Create(Data, nameof(CharacterBattleModelSc2Table), ResourceFileForScenario(Scenario, "ClassEquip.xml"), (int) characterBattleModelSc2Addr)),
+                (CharacterBattleModelSc3Table = (characterBattleModelSc3Addr == 0) ? null : CharacterBattleModelSc3Table.Create(Data, nameof(CharacterBattleModelSc3Table), ResourceFileForScenario(Scenario, "ClassEquip.xml"), (int) characterBattleModelSc3Addr)),
                 (MPDBattleSceneInfoTable      = (mpdBattleSceneAddr          == 0) ? null : MPDBattleSceneInfoTable.Create     (Data, nameof(MPDBattleSceneInfoTable), (int) mpdBattleSceneAddr))
             }.Where(x => x != null).ToList();
 
@@ -89,6 +95,7 @@ namespace SF3.Models.Files.X014 {
         public bool IsScn2V2 { get; }
 
         public CharacterBattleModelSc2Table CharacterBattleModelSc2Table { get; private set; } = null;
+        public CharacterBattleModelSc3Table CharacterBattleModelSc3Table { get; private set; } = null;
         public MPDBattleSceneInfoTable MPDBattleSceneInfoTable { get; private set; } = null;
         public Dictionary<int, TerrainBasedBattleSceneTable> TerrainBasedBattleSceneTablesByRamAddress { get; private set; } = null;
     }
