@@ -28,31 +28,43 @@ namespace CommonLib.Discovery {
             return count;
         }
 
-        public void AddUnidentifiedPointer(uint addr) {
+        public DiscoveredData AddUnidentifiedPointer(uint addr) {
             if (addr % 4 != 0)
                 throw new ArgumentException(nameof(addr) + " must have an alignment of 4");
 
             // TODO: what if a something is already there?
-            DiscoveredDataByAddress[addr] = new DiscoveredData(addr, 4, DiscoveredDataType.Pointer, "*");
+            var newData = DiscoveredDataByAddress[addr] = new DiscoveredData(addr, 4, DiscoveredDataType.Pointer, "void*", "");
+            UpdatePointersToDiscoveredData(DiscoveredDataByAddress[addr]);
+            return newData;
         }
 
-        public DiscoveredData AddFunction(uint addr, string name, int? size) {
+        public DiscoveredData AddPointer(uint addr, string typeName, string name) {
+            if (addr % 4 != 0)
+                throw new ArgumentException(nameof(addr) + " must have an alignment of 4");
+
+            // TODO: what if a something is already there?
+            var newData = DiscoveredDataByAddress[addr] = new DiscoveredData(addr, 4, DiscoveredDataType.Pointer, typeName, name);
+            UpdatePointersToDiscoveredData(DiscoveredDataByAddress[addr]);
+            return newData;
+        }
+
+        public DiscoveredData AddFunction(uint addr, string typeName, string name, int? size) {
             if (addr % 2 != 0)
                 throw new ArgumentException(nameof(addr) + " must have an alignment of 2");
 
             // TODO: what if a something is already there?
             // TODO: parameters?
-            var newData = DiscoveredDataByAddress[addr] = new DiscoveredData(addr, size, DiscoveredDataType.Function, $"{name}(...)");
+            var newData = DiscoveredDataByAddress[addr] = new DiscoveredData(addr, size, DiscoveredDataType.Function, typeName, name);
             UpdatePointersToDiscoveredData(DiscoveredDataByAddress[addr]);
             return newData;
         }
 
-        public DiscoveredData AddArray(uint addr, string name, int? size) {
+        public DiscoveredData AddArray(uint addr, string typeName, string name, int? size) {
             if (addr % 4 != 0)
                 throw new ArgumentException(nameof(addr) + " must have an alignment of 4");
 
             // TODO: what if a something is already there?
-            var newData = DiscoveredDataByAddress[addr] = new DiscoveredData(addr, size, DiscoveredDataType.Array, $"{name}[]");
+            var newData = DiscoveredDataByAddress[addr] = new DiscoveredData(addr, size, DiscoveredDataType.Array, typeName, name);
             UpdatePointersToDiscoveredData(DiscoveredDataByAddress[addr]);
             return newData;
         }
@@ -106,9 +118,13 @@ namespace CommonLib.Discovery {
 
         public int UpdatePointersToDiscoveredData(DiscoveredData data) {
             var pointers = GetUnidentifiedPointersByValue(data.Address);
-            var newName = data.Name + "*";
-            foreach (var pointer in pointers)
+            var newType = data.TypeName + "*";
+            var newName = data.Name;
+            foreach (var pointer in pointers) {
+                pointer.TypeName = newType;
                 pointer.Name = newName;
+                UpdatePointersToDiscoveredData(pointer);
+            }
             return pointers.Length;
         }
 

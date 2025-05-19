@@ -64,7 +64,7 @@ namespace SF3.Win.Views.X1 {
                     .OrderBy(x => x.Address)
                     .Select(x =>
                         ((x.Address < Model.RamAddress || x.Address >= Model.RamAddress + ((X1_File) Model).Data.Length) ? "(Outside) " : "")
-                        + $"0x{x.Address:X8} / 0x{x.Address - Model.RamAddress:X4} | {x.Type, -8} | {x.Name}"
+                        + $"0x{x.Address:X8} / 0x{x.Address - Model.RamAddress:X4} | {x.Type, -8} | {x.DisplayName}"
                     ));
                 CreateChild(new TextView("Discovered Data", text));
             }

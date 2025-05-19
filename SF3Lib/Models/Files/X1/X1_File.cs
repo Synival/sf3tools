@@ -210,22 +210,23 @@ namespace SF3.Models.Files.X1 {
         private void DiscoverFunctions(byte[] data) {
             // Look for known functions and create corresponding DiscoveredData() entries.
             var funcs = KnownX1Functions.AllKnownFunctions
-                .Select(x => new { Name = x.Key, Size = x.Value.Length * 2, Index = data.IndexOfSubset(x.Value.ToByteArray()) })
+                .Select(x => new { Info = x.Key, Size = x.Value.Length * 2, Index = data.IndexOfSubset(x.Value.ToByteArray()) })
                 .Where(x => x.Index >= 0)
                 .ToArray();
 
             foreach (var func in funcs)
-                _ = Discoveries.AddFunction((uint) func.Index + RamAddress, func.Name, func.Size);
+                _ = Discoveries.AddFunction((uint) func.Index + RamAddress, func.Info.TypeName, func.Info.Name, func.Size);
         }
 
         private void DiscoverData(byte[] data) {
             // Look for references to that function. There are many variants of this function, so look for all of them.
             var instantiateModelsFuncs = Discoveries.GetFunctions()
-                .Where(x => x.Name.StartsWith("InstantiateModels"))
+                .Where(x => x.TypeName == "InstantiateModelsFunc")
                 .ToArray();
 
             // On the off chance that multiple versions of this function exist (which never seems to be the case),
             // look for usages of all of them.
+            int instanceGroupId = 0;
             foreach (var func in instantiateModelsFuncs) {
                 // Get all pointers to this function.
                 var funcPtrs = Discoveries.GetPointersByValue(func.Address);
@@ -240,7 +241,7 @@ namespace SF3.Models.Files.X1 {
                     // ...and the pointer itself. If it looks like a pointer, we're in business.
                     var modelsRamAddr = data.GetUInt((int) modelsPtrAddr);
                     if (modelsRamAddr >= RamAddress && modelsRamAddr < RamAddress + data.Length)
-                        Discoveries.AddArray(modelsRamAddr, nameof(ModelInstanceGroup), null);
+                        Discoveries.AddArray(modelsRamAddr, nameof(ModelInstanceGroup) + "[]", $"modelInstanceGroup{instanceGroupId++:D2}", null);
                 }
             }
         }
@@ -251,7 +252,7 @@ namespace SF3.Models.Files.X1 {
             // Look for all arrays discovered as 'ModelInstanceGroup[]'.
             ModelInstanceGroupTablesByAddress = new Dictionary<uint, ModelInstanceGroupTable>();
             var modelMatrixGroupTables = Discoveries.GetArrays()
-                .Where(x => x.Name == nameof(ModelInstanceGroup) + "[]")
+                .Where(x => x.Type == DiscoveredDataType.Array && x.TypeName == nameof(ModelInstanceGroup) + "[]")
                 .ToArray();
 
             // Create corresponding tables for all the discovered data.
@@ -275,18 +276,20 @@ namespace SF3.Models.Files.X1 {
                 var modelsAddr    = modelsRamAddr - RamAddress;
 
                 // Create the ModelInstance sub-table.
-                var newTable = ModelInstanceTablesByAddress[modelsRamAddr] = ModelInstanceTable.Create(Data, $"{nameof(ModelInstance)}s_{groupLinkIndex++:D2}", (int) modelsAddr, null, addEndModel: false);
+                var newTable = ModelInstanceTablesByAddress[modelsRamAddr] = ModelInstanceTable.Create(Data, $"{nameof(ModelInstance)}s_{groupLinkIndex:D2}", (int) modelsAddr, null, addEndModel: false);
                 tables.Add(newTable);
 
                 // Mark the sub-table and its pointer as 'Discovered'.
                 // TODO: Because this starts the 'ModelInstanceGroup[]' table, don't just replace the name with 'ModelInstance*', but append it.
                 // TODO: ...but this is contrary to reality!! We need to mark something at an address as *multiple* types of data.
-                Discoveries.AddArray(modelsRamAddr, nameof(ModelInstance), newTable.SizeInBytes);
+                Discoveries.AddArray(modelsRamAddr, $"{nameof(ModelInstance)}[]", $"modelInstances{groupLinkIndex:D2}", newTable.SizeInBytes);
 
                 // The second parameter is a pointer to a 'ModelMatrix*'. It should be outside the bounds of the file, but try to mark it in case its not.
                 var matricesRamPtr = group.MatrixTablePtr;
-                Discoveries.AddArray(matricesRamPtr, "ModelMatrix", 0x38 * newTable.Length);
+                Discoveries.AddArray(matricesRamPtr, "ModelMatrix[]", $"modelMatrices{groupLinkIndex:D2}", 0x38 * newTable.Length);
                 // TODO: it's not adding pointers because they're outside the file.
+
+                groupLinkIndex++;
             }
 
             return tables.ToArray();
@@ -501,7 +504,7 @@ namespace SF3.Models.Files.X1 {
                 // TODO: separate function for this, with a beautiful regex
                 var scriptCodeNameBase = string.Join("", scriptName.Replace("(", "").Replace(")", "").Replace("-", "").Split(' ').Where(x => x.Length >= 1).Select(x => Char.ToUpper(x[0]) + x.Substring(1)));
 
-                Discoveries.AddArray(scriptRamAddr, $"{nameof(ActorScript)}Command script_{scriptCodeNameBase}", script.Size);
+                Discoveries.AddArray(scriptRamAddr, $"{nameof(ActorScript)}Command[]", $"script_{scriptCodeNameBase}", script.Size);
 
                 // Looks for 'RunFunction' commands.
                 var scriptReader = new ScriptReader(Data, script.Address);
@@ -511,9 +514,9 @@ namespace SF3.Models.Files.X1 {
                     var commandData = command.Data;
 
                     if (commandData[0] == (uint) ActorCommandType.RunFunction)
-                        Discoveries.AddFunction(commandData[1], $"scriptRunFunc_cmdId{command.Id}_{scriptCodeNameBase}", null);
+                        Discoveries.AddFunction(commandData[1], "ScriptFunc", $"scriptRunFunc_cmdId{command.Id}_{scriptCodeNameBase}", null);
                     else if (commandData[0] == (uint) ActorCommandType.SetProperty && commandData[1] == (uint) ActorPropertyCommandType.ThinkFunction)
-                        Discoveries.AddFunction(commandData[2], $"scriptThinkFunc_cmdId{command.Id}_{scriptCodeNameBase}", null);
+                        Discoveries.AddFunction(commandData[2], "ScriptFunc", $"scriptThinkFunc_cmdId{command.Id}_{scriptCodeNameBase}", null);
                 }
             }
         }
