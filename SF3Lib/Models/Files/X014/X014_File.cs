@@ -37,8 +37,13 @@ namespace SF3.Models.Files.X014 {
         private uint GetCharacterBattleModelSc2TableAddr()
             => (Scenario == ScenarioType.Scenario2) ? (IsScn2V2 ? 0x125C4u: 0x1261Cu) : 0;
 
-        private uint GetCharacterBattleModelSc3TableAddr()
-            => (Scenario == ScenarioType.Scenario3) ? 0x12A00u : 0;
+        private uint GetCharacterBattleModelSc3TableAddr() {
+            switch (Scenario) {
+                case ScenarioType.Scenario3:   return 0x12A00u;
+                case ScenarioType.PremiumDisk: return 0x12AB4u;
+                default:                       return 0;
+            }
+        }
 
         private uint GetMPDBattleSceneInfoTableAddr() {
             switch (Scenario) {
