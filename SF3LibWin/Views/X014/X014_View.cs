@@ -20,8 +20,16 @@ namespace SF3.Win.Views.X014 {
                 CreateChild(new TableView("Character Battle Models (Scn2)", Model.CharacterBattleModelsSc2Table, ngc));
             if (Model.CharacterBattleModelsSc3Table != null)
                 CreateChild(new TableView("Character Battle Models (Scn3+)", Model.CharacterBattleModelsSc3Table, ngc));
+            if (Model.MPDBattleSceneIdTable != null)
+                CreateChild(new TableView("MPD Battle Scene IDs (Scn1)", Model.MPDBattleSceneIdTable, ngc));
+            if (Model.BattleScenesByMapTable != null)
+                CreateChild(new TableView("Battle Scenes by Battle (Scn1)", Model.BattleScenesByMapTable, ngc));
+            if (Model.BattleScenesByTerrainTable != null)
+                CreateChild(new TableView("Battle Scenes by Terrain (Scn1)", Model.BattleScenesByTerrainTable, ngc));
+            if (Model.BattleScenesOtherTable != null)
+                CreateChild(new TableView("Other Battle Scenes (Scn1)", Model.BattleScenesOtherTable, ngc));
             if (Model.MPDBattleSceneInfoTable != null)
-                CreateChild(new TableView("MPD Battle Scene Info", Model.MPDBattleSceneInfoTable, ngc));
+                CreateChild(new TableView("MPD Battle Scene Info (Scn2+)", Model.MPDBattleSceneInfoTable, ngc));
             if (Model.TerrainBasedBattleSceneTablesByRamAddress != null)
                 CreateChild(new TableArrayView<TerrainBasedBattleSceneTable>("Terrain-Based Battle Scenes", Model.TerrainBasedBattleSceneTablesByRamAddress.Values.ToArray(), ngc));
 

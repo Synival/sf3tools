@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<items>
+    <item value="0x00" name="No Entry (Dirt)" />
+    <item value="0x01" name="Air (Dirt)" />
+    <item value="0x02" name="Grassland" />
+    <item value="0x03" name="Dirt" />
+    <item value="0x04" name="Dark Grass" />
+    <item value="0x05" name="Forest" />
+    <item value="0x06" name="Brown Mountain" />
+    <item value="0x07" name="Desert" />
+    <item value="0x08" name="Grey Mountain" />
+    <item value="0x09" name="Water" />
+    <item value="0x0A" name="Can't Stay (None)" />
+    <item value="0x0B" name="Sand (None)" />
+    <item value="0x0C" name="Enemy Only (None)" />
+    <item value="0x0D" name="Player Only (None)" />
+    <item value="0x0E" name="Unknown 0xE (Rock?)" />
+</items>

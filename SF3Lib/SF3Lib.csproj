@@ -15,7 +15,10 @@
     <None Remove="Resources\GameFlags.xml" />
     <None Remove="Resources\PD\Music.xml" />
     <None Remove="Resources\PD\Sprites.xml" />
+    <None Remove="Resources\S1\BattleScenesByBattle.xml" />
+    <None Remove="Resources\S1\BattleScenesByTerrain.xml" />
     <None Remove="Resources\S1\Music.xml" />
+    <None Remove="Resources\S1\OtherBattleScenes.xml" />
     <None Remove="Resources\S1\Sprites.xml" />
     <None Remove="Resources\S2\Music.xml" />
     <None Remove="Resources\S2\Sprites.xml" />
@@ -40,6 +43,15 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\PD\Sprites.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\S1\OtherBattleScenes.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\S1\BattleScenesByTerrain.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\S1\BattleScenesByBattle.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\S1\Music.xml">

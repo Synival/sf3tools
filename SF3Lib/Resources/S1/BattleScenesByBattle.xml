@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<items>
+    <item value="0x00" name="Battle 00 (Unused, Small Stones)" />
+    <item value="0x01" name="Battle 01 (Saraband)" />
+    <item value="0x02" name="Battle 02 (Saraband Docks)" />
+    <item value="0x03" name="Battle 03 (Unused, Big Stones)" />
+    <item value="0x04" name="Battle 04 (Dwarf Hill)" />
+    <item value="0x05" name="Battle 05 (Unused, Small Stones)" />
+    <item value="0x06" name="Battle 06 (Train Cargo)" />
+    <item value="0x07" name="Battle 07 (Unused, Small Stones)" />
+    <item value="0x08" name="Battle 08 (Switching Point)" />
+    <item value="0x09" name="Battle 09 (Inside Train Car)" />
+    <item value="0x0A" name="Battle 10 (Atop Steel Train Car)" />
+    <item value="0x0B" name="Battle 11 (Graveyard)" />
+    <item value="0x0C" name="Battle 12 (Vandal Mansion)" />
+    <item value="0x0D" name="Battle 13 (Unused, Small Stones)" />
+    <item value="0x0E" name="Battle 14 (Unused, Small Stones)" />
+    <item value="0x0F" name="Battle 15 (Barrand Falls)" />
+    <item value="0x10" name="Battle 16 (Unused, Small Stones)" />
+    <item value="0x11" name="Battle 17 (Unused, Small Stones)" />
+    <item value="0x12" name="Battle 18 (Volcano Cave)" />
+    <item value="0x13" name="Battle 19 (Unused, Small Stones)" />
+    <item value="0x14" name="Battle 20 (Flagard Castle)" />
+    <item value="0x15" name="Battle 21 (Unused, Small Stones)" />
+    <item value="0x16" name="Battle 22 (Lookover Tower)" />
+    <item value="0x17" name="Battle 23 (Great Wall)" />
+    <item value="0x18" name="Battle 24 (Unused, Small Stones)" />
+    <item value="0x19" name="Battle 25 (Malorie Courtyard)" />
+    <item value="0x1A" name="Battle 26 (Unused, Small Stones)" />
+    <item value="0x1B" name="Battle 27 (Aspia Catacombs)" />
+    <item value="0x1C" name="Battle 28 (Aspia Bridge)" />
+    <item value="0x1D" name="Battle 29 (Dam)" />
+</items>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<items>
+    <item value="0x00" name="Ruins 1" />
+    <item value="0x01" name="Train Cargo" />
+    <item value="0x02" name="Ruins 2" />
+    <item value="0x03" name="Ruins 3" />
+    <item value="0x04" name="Ruins 4" />
+    <item value="0x05" name="Ruins 5" />
+    <item value="0x06" name="Ruins 6" />
+    <item value="0x07" name="Hero's Test" />
+    <item value="0x08" name="(Empty 1)" />
+    <item value="0x09" name="(Empty 2)" />
+    <item value="0x0A" name="Atop Steel Train Car" />
+    <item value="0x0B" name="Atop Wooden Train Car" />
+    <item value="0x0C" name="Black (Unused)" />
+</items>

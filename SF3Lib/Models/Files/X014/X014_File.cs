@@ -63,13 +63,18 @@ namespace SF3.Models.Files.X014 {
             var characterBattleModelSc1Addr = GetCharacterBattleModelSc1TableAddr();
             var characterBattleModelSc2Addr = GetCharacterBattleModelSc2TableAddr();
             var characterBattleModelSc3Addr = GetCharacterBattleModelSc3TableAddr();
+            var mpdBattleSceneIdsAddr       = (Scenario == ScenarioType.Scenario1) ? 0xFA8Cu : 0;
             var mpdBattleSceneAddr          = GetMPDBattleSceneInfoTableAddr();
 
             var tables = new List<ITable>() {
                 (CharacterBattleModelsSc1Table = (characterBattleModelSc1Addr == 0) ? null : CharacterBattleModelsSc1Table.Create(Data, nameof(CharacterBattleModelsSc1Table), ResourceFileForScenario(Scenario, "ClassEquip.xml"), (int) characterBattleModelSc1Addr)),
                 (CharacterBattleModelsSc2Table = (characterBattleModelSc2Addr == 0) ? null : CharacterBattleModelsSc2Table.Create(Data, nameof(CharacterBattleModelsSc2Table), ResourceFileForScenario(Scenario, "ClassEquip.xml"), (int) characterBattleModelSc2Addr)),
                 (CharacterBattleModelsSc3Table = (characterBattleModelSc3Addr == 0) ? null : CharacterBattleModelsSc3Table.Create(Data, nameof(CharacterBattleModelsSc3Table), ResourceFileForScenario(Scenario, "ClassEquip.xml"), (int) characterBattleModelSc3Addr)),
-                (MPDBattleSceneInfoTable       = (mpdBattleSceneAddr          == 0) ? null : MPDBattleSceneInfoTable.Create     (Data, nameof(MPDBattleSceneInfoTable), (int) mpdBattleSceneAddr))
+                (MPDBattleSceneIdTable         = (mpdBattleSceneIdsAddr       == 0) ? null : MPDBattleSceneIdTable        .Create(Data, nameof(MPDBattleSceneIdTable), (int) mpdBattleSceneIdsAddr)),
+                (BattleScenesByMapTable        = (Scenario != ScenarioType.Scenario1) ? null : Sc1BattleSceneFileIdTable.Create(Data, nameof(BattleScenesByMapTable), ResourceFileForScenario(ScenarioType.Scenario1, "BattleScenesByBattle.xml"),  0xFBB0, 30, 0x000)),
+                (BattleScenesByTerrainTable    = (Scenario != ScenarioType.Scenario1) ? null : Sc1BattleSceneFileIdTable.Create(Data, nameof(BattleScenesByMapTable), ResourceFileForScenario(ScenarioType.Scenario1, "BattleScenesByTerrain.xml"), 0xFC28, 15, null)),
+                (BattleScenesOtherTable        = (Scenario != ScenarioType.Scenario1) ? null : Sc1BattleSceneFileIdTable.Create(Data, nameof(BattleScenesByMapTable), ResourceFileForScenario(ScenarioType.Scenario1, "OtherBattleScenes.xml"),     0xFC64, 13, 0x100)),
+                (MPDBattleSceneInfoTable       = (mpdBattleSceneAddr          == 0) ? null : MPDBattleSceneInfoTable      .Create(Data, nameof(MPDBattleSceneInfoTable), (int) mpdBattleSceneAddr))
             }.Where(x => x != null).ToList();
 
             if (MPDBattleSceneInfoTable != null) {
@@ -96,7 +101,11 @@ namespace SF3.Models.Files.X014 {
         public CharacterBattleModelsSc1Table CharacterBattleModelsSc1Table { get; private set; } = null;
         public CharacterBattleModelsSc2Table CharacterBattleModelsSc2Table { get; private set; } = null;
         public CharacterBattleModelsSc3Table CharacterBattleModelsSc3Table { get; private set; } = null;
+        public MPDBattleSceneIdTable MPDBattleSceneIdTable { get; private set; } = null;
         public MPDBattleSceneInfoTable MPDBattleSceneInfoTable { get; private set; } = null;
         public Dictionary<int, TerrainBasedBattleSceneTable> TerrainBasedBattleSceneTablesByRamAddress { get; private set; } = null;
+        public Sc1BattleSceneFileIdTable BattleScenesByMapTable { get; private set; } = null;
+        public Sc1BattleSceneFileIdTable BattleScenesByTerrainTable { get; private set; } = null;
+        public Sc1BattleSceneFileIdTable BattleScenesOtherTable { get; private set; } = null;
     }
 }
