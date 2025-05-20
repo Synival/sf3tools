@@ -465,6 +465,27 @@ namespace Randomizer {
                 for (var i = 0; i < 8; i++)
                     unpromotedClass.StatGainData.ElementRes[i] = sgd.ElementRes[i] * 2 - sgd2.ElementRes[i];
 
+                Console.WriteLine($"{unpromotedClass.Name}:");
+
+                Console.WriteLine("   Growth curves:");
+                foreach (var curve in unpromotedClass.StatGainData.Curves)
+                    Console.WriteLine($"     HP={curve.HP,5:F2}, MP={curve.MP,5:F2}, ATK={curve.Atk,5:F2}, DEF={curve.Def,5:F2}, AGI={curve.Agi,5:F2}");
+
+                Console.WriteLine("   Other Stats:");
+                Console.WriteLine($"      Luck: {unpromotedClass.Luck:F2}");
+                Console.WriteLine($"      Move: {unpromotedClass.Move:F2}");
+                Console.WriteLine($"      Movement Type: 0x{unpromotedClass.MovementType:X2}");
+
+                Console.WriteLine("   Equipment / Attacks:");
+                Console.WriteLine($"      Accessories: (WIP)"); // it's there, it just needs to be logged
+                Console.WriteLine($"      Weapon Count: {unpromotedClass.WeaponCount}");
+                Console.WriteLine($"      Weapons + Specials: (WIP)"); // it's there, it just needs to be logged
+
+                // TODO: resistances
+                // TODO: magicId
+
+                Console.WriteLine();
+
                 // (Old code that assigns actual stats. This won't be used as-is, but I don't want to type all this again, so I'm keeping it around)
 #if false
                 stats.HPCurve1  = (int) Math.Round(sgd.Curves[0].HP  * sgdMult.Curves[0].HP);
