@@ -3,6 +3,8 @@ using SF3.Types;
 
 namespace SF3.NamedValues {
     public static class ValueNames {
+        public static readonly BattleSceneByIdInfo BattleSceneByIdInfo
+            = new BattleSceneByIdInfo();
         public static readonly NamedValueFromResourceForScenariosInfo CharacterInfo
             = new NamedValueFromResourceForScenariosInfo("Characters.xml");
         public static readonly NamedValueFromResourceInfo CharacterClassInfo

@@ -20,7 +20,8 @@ namespace SF3.Models.Structs.X014 {
             set => Data.SetDouble(_mpdFileIdAddr, value);
         }
 
-        [TableViewModelColumn(displayOrder: 1, displayFormat: "X2")]
+        [TableViewModelColumn(displayOrder: 1, displayFormat: "X2", minWidth: 240)]
+        [NameGetter(NamedValueType.BattleSceneById)]
         [BulkCopy]
         public int BattleSceneID {
             get => Data.GetDouble(_battleSceneIdAddr);

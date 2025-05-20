@@ -43,6 +43,7 @@ namespace SF3.NamedValues {
                         AlwaysCanGetInfo
                     ) },
 
+                { NamedValueType.BattleSceneById,     new SubMethods((o, p, v, a) => new NameAndInfo(v, ValueNames.BattleSceneByIdInfo)) },
                 { NamedValueType.Character,           new SubMethods((o, p, v, a) => new NameAndInfo(v, ValueNames.CharacterInfo.Info[Scenario])) },
                 { NamedValueType.CharacterClass,      new SubMethods((o, p, v, a) => new NameAndInfo(v, ValueNames.CharacterClassInfo)) },
                 { NamedValueType.Droprate,            new SubMethods((o, p, v, a) => new NameAndInfo(v, ValueNames.DroprateInfo)) },
