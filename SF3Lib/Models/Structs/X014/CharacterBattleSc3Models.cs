@@ -3,12 +3,12 @@ using SF3.ByteData;
 using SF3.Types;
 
 namespace SF3.Models.Structs.X014 {
-    public class CharacterBattleSc3Model : Struct {
+    public class CharacterBattleSc3Models : Struct {
         private readonly int _modelFileIdAddr;
         private readonly int _modelFileUnknownHeaderAddrAddr;
         private readonly int _modelIndicesAvailableAddr;
 
-        public CharacterBattleSc3Model(IByteData data, int id, string name, int address) : base(data, id, name, address, 0x0C) {
+        public CharacterBattleSc3Models(IByteData data, int id, string name, int address) : base(data, id, name, address, 0x0C) {
             _modelFileIdAddr                = Address + 0x00; // 4 bytes
             _modelFileUnknownHeaderAddrAddr = Address + 0x04; // 4 bytes
             _modelIndicesAvailableAddr      = Address + 0x08; // 4 bytes

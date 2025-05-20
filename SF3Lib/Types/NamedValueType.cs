@@ -16,6 +16,7 @@ namespace SF3.Types {
         EventTriggerInspectType,
         EventTriggerType,
         FileIndex,
+        FileIndexWithFFFFFFFF,
         FriendshipBonusType,
         GameFlag,
         Item,

@@ -58,6 +58,7 @@ namespace SF3.NamedValues {
                 { NamedValueType.EventTriggerUseItemType, new SubMethods((o, p, v, a) => new NameAndInfo(v, ValueNames.EventTriggerUseItemTypeInfo)) },
                 { NamedValueType.EventTriggerWarpSound, new SubMethods((o, p, v, a) => new NameAndInfo(v, ValueNames.EventTriggerWarpSoundInfo)) },
                 { NamedValueType.FileIndex,           new SubMethods((o, p, v, a) => new NameAndInfo(v, ValueNames.FileIndexInfo.Info[Scenario])) },
+                { NamedValueType.FileIndexWithFFFFFFFF, new SubMethods((o, p, v, a) => new NameAndInfo(v, ValueNames.FileIndexWithFFFFFFFFInfo.Info[Scenario])) },
                 { NamedValueType.FriendshipBonusType, new SubMethods((o, p, v, a) => new NameAndInfo(v, ValueNames.FriendshipBonusTypeInfo)) },
                 { NamedValueType.GameFlag,            new SubMethods((o, p, v, a) => new NameAndInfo(v, ValueNames.GameFlagInfo)) },
                 { NamedValueType.InteractDirectionBehavior, new SubMethods((o, p, v, a) => new NameAndInfo(v, ValueNames.InteractDirectionBehaviorInfo)) },
