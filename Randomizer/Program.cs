@@ -481,7 +481,16 @@ namespace Randomizer {
                 Console.WriteLine($"      Weapon Count: {unpromotedClass.WeaponCount}");
                 Console.WriteLine($"      Weapons + Specials: (WIP)"); // it's there, it just needs to be logged
 
-                // TODO: resistances
+                Console.WriteLine("   Elemental Resistance:");
+                Console.WriteLine($"      Earth:  {unpromotedClass.StatGainData.ElementRes[0],6:F2}%");
+                Console.WriteLine($"      Fire:   {unpromotedClass.StatGainData.ElementRes[1],6:F2}%");
+                Console.WriteLine($"      Ice:    {unpromotedClass.StatGainData.ElementRes[2],6:F2}%");
+                Console.WriteLine($"      Spark:  {unpromotedClass.StatGainData.ElementRes[3],6:F2}%");
+                Console.WriteLine($"      Wind:   {unpromotedClass.StatGainData.ElementRes[4],6:F2}%");
+                Console.WriteLine($"      Light:  {unpromotedClass.StatGainData.ElementRes[5],6:F2}%");
+                Console.WriteLine($"      Dark:   {unpromotedClass.StatGainData.ElementRes[6],6:F2}%");
+                Console.WriteLine($"      Unused: {unpromotedClass.StatGainData.ElementRes[7],6:F2}%");
+
                 // TODO: magicId
 
                 Console.WriteLine();
