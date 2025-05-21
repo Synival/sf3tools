@@ -64,14 +64,15 @@ namespace CommonLib.Discovery {
                 throw new ArgumentException(nameof(addr) + " must have an alignment of 4");
 
             // TODO: what if a something is already there?
-            var newData = DiscoveredDataByAddress[addr] = new DiscoveredData(addr, size, DiscoveredDataType.Array, typeName, name);
-            UpdatePointersToDiscoveredData(DiscoveredDataByAddress[addr]);
+            var newData = DiscoveredArraysByAddress[addr] = new DiscoveredData(addr, size, DiscoveredDataType.Array, typeName, name);
+            UpdatePointersToDiscoveredData(DiscoveredArraysByAddress[addr]);
             return newData;
         }
 
         public DiscoveredData[] GetAll() {
             var discoveredList = new List<DiscoveredData>();
             discoveredList.AddRange(DiscoveredDataByAddress.Values);
+            discoveredList.AddRange(DiscoveredArraysByAddress.Values);
             discoveredList.AddRange(DiscoveredStructsByAddress.Values);
             discoveredList.AddRange(DiscoveredPointersByAddress.Values);
             return discoveredList.OrderBy(x => x.Address).ThenBy(x => x.Type).ToArray();
@@ -112,11 +113,8 @@ namespace CommonLib.Discovery {
                 .ToArray();
         }
 
-        public DiscoveredData[] GetArrays() {
-            return DiscoveredDataByAddress.Values
-                .Where(x => x.Type == DiscoveredDataType.Array)
-                .ToArray();
-        }
+        public DiscoveredData[] GetArrays()
+            => DiscoveredArraysByAddress.Values.ToArray();
 
         public DiscoveredData[] GetStructs()
             => DiscoveredStructsByAddress.Values.ToArray();
@@ -137,8 +135,9 @@ namespace CommonLib.Discovery {
         public byte[] Data { get; }
         public uint Address { get; }
 
-        private Dictionary<uint, DiscoveredData> DiscoveredStructsByAddress = new Dictionary<uint, DiscoveredData>();
+        private Dictionary<uint, DiscoveredData> DiscoveredArraysByAddress   = new Dictionary<uint, DiscoveredData>();
+        private Dictionary<uint, DiscoveredData> DiscoveredStructsByAddress  = new Dictionary<uint, DiscoveredData>();
         private Dictionary<uint, DiscoveredData> DiscoveredPointersByAddress = new Dictionary<uint, DiscoveredData>();
-        private Dictionary<uint, DiscoveredData> DiscoveredDataByAddress = new Dictionary<uint, DiscoveredData>();
+        private Dictionary<uint, DiscoveredData> DiscoveredDataByAddress     = new Dictionary<uint, DiscoveredData>();
     }
 }
