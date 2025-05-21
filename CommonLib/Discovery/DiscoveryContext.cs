@@ -54,8 +54,8 @@ namespace CommonLib.Discovery {
 
             // TODO: what if a something is already there?
             // TODO: parameters?
-            var newData = DiscoveredDataByAddress[addr] = new DiscoveredData(addr, size, DiscoveredDataType.Function, typeName, name);
-            UpdatePointersToDiscoveredData(DiscoveredDataByAddress[addr]);
+            var newData = DiscoveredFunctionsByAddress[addr] = new DiscoveredData(addr, size, DiscoveredDataType.Function, typeName, name);
+            UpdatePointersToDiscoveredData(DiscoveredFunctionsByAddress[addr]);
             return newData;
         }
 
@@ -71,7 +71,7 @@ namespace CommonLib.Discovery {
 
         public DiscoveredData[] GetAll() {
             var discoveredList = new List<DiscoveredData>();
-            discoveredList.AddRange(DiscoveredDataByAddress.Values);
+            discoveredList.AddRange(DiscoveredFunctionsByAddress.Values);
             discoveredList.AddRange(DiscoveredArraysByAddress.Values);
             discoveredList.AddRange(DiscoveredStructsByAddress.Values);
             discoveredList.AddRange(DiscoveredPointersByAddress.Values);
@@ -107,11 +107,8 @@ namespace CommonLib.Discovery {
                 .ToArray();
         }
 
-        public DiscoveredData[] GetFunctions() {
-            return DiscoveredDataByAddress.Values
-                .Where(x => x.Type == DiscoveredDataType.Function)
-                .ToArray();
-        }
+        public DiscoveredData[] GetFunctions()
+            => DiscoveredFunctionsByAddress.Values.ToArray();
 
         public DiscoveredData[] GetArrays()
             => DiscoveredArraysByAddress.Values.ToArray();
@@ -135,9 +132,9 @@ namespace CommonLib.Discovery {
         public byte[] Data { get; }
         public uint Address { get; }
 
-        private Dictionary<uint, DiscoveredData> DiscoveredArraysByAddress   = new Dictionary<uint, DiscoveredData>();
-        private Dictionary<uint, DiscoveredData> DiscoveredStructsByAddress  = new Dictionary<uint, DiscoveredData>();
-        private Dictionary<uint, DiscoveredData> DiscoveredPointersByAddress = new Dictionary<uint, DiscoveredData>();
-        private Dictionary<uint, DiscoveredData> DiscoveredDataByAddress     = new Dictionary<uint, DiscoveredData>();
+        private Dictionary<uint, DiscoveredData> DiscoveredFunctionsByAddress = new Dictionary<uint, DiscoveredData>();
+        private Dictionary<uint, DiscoveredData> DiscoveredArraysByAddress    = new Dictionary<uint, DiscoveredData>();
+        private Dictionary<uint, DiscoveredData> DiscoveredStructsByAddress   = new Dictionary<uint, DiscoveredData>();
+        private Dictionary<uint, DiscoveredData> DiscoveredPointersByAddress  = new Dictionary<uint, DiscoveredData>();
     }
 }
