@@ -129,8 +129,20 @@ namespace CommonLib.Discovery {
             return updates;
         }
 
+        public string CreateReport() {
+            var discoveries = GetAll();
+            var text = string.Join("\r\n", discoveries
+                .OrderBy(x => x.Address)
+                .Select(x =>
+                    ((x.Address < Address || x.Address >= Address + Data.Length) ? "(Outside) " : "")
+                    + $"0x{x.Address:X8} / 0x{x.Address - Address:X4} | {x.Type, -8} | {x.DisplayName}"
+                ));
+            return text;
+        }
+
         public byte[] Data { get; }
         public uint Address { get; }
+        public bool HasDiscoveries => DiscoveredFunctionsByAddress.Count > 0 || DiscoveredArraysByAddress.Count > 0 || DiscoveredStructsByAddress.Count > 0 || DiscoveredPointersByAddress.Count > 0;
 
         private Dictionary<uint, DiscoveredData> DiscoveredFunctionsByAddress = new Dictionary<uint, DiscoveredData>();
         private Dictionary<uint, DiscoveredData> DiscoveredArraysByAddress    = new Dictionary<uint, DiscoveredData>();

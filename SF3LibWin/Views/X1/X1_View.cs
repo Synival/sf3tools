@@ -58,16 +58,8 @@ namespace SF3.Win.Views.X1 {
                     CreateChild(new BattleView($"Battle ({battleKv.Key})", battleKv.Value));
             }
 
-            var discoveries = Model.Discoveries?.GetAll();
-            if (discoveries?.Length > 0) {
-                var text = string.Join("\r\n", discoveries
-                    .OrderBy(x => x.Address)
-                    .Select(x =>
-                        ((x.Address < Model.RamAddress || x.Address >= Model.RamAddress + ((X1_File) Model).Data.Length) ? "(Outside) " : "")
-                        + $"0x{x.Address:X8} / 0x{x.Address - Model.RamAddress:X4} | {x.Type, -8} | {x.DisplayName}"
-                    ));
-                CreateChild(new TextView("Discovered Data", text));
-            }
+            if (Model.Discoveries?.HasDiscoveries == true)
+                CreateChild(new TextView("Discovered Data", Model.Discoveries.CreateReport()));
 
             return Control;
         }
