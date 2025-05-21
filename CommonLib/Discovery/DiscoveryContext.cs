@@ -72,6 +72,7 @@ namespace CommonLib.Discovery {
         public DiscoveredData[] GetAll() {
             var discoveredList = new List<DiscoveredData>();
             discoveredList.AddRange(DiscoveredDataByAddress.Values);
+            discoveredList.AddRange(DiscoveredStructsByAddress.Values);
             discoveredList.AddRange(DiscoveredPointersByAddress.Values);
             return discoveredList.OrderBy(x => x.Address).ThenBy(x => x.Type).ToArray();
         }
@@ -117,6 +118,9 @@ namespace CommonLib.Discovery {
                 .ToArray();
         }
 
+        public DiscoveredData[] GetStructs()
+            => DiscoveredStructsByAddress.Values.ToArray();
+
         public int UpdatePointersToDiscoveredData(DiscoveredData data) {
             var pointers = GetUnidentifiedPointersByValue(data.Address);
             var newType = data.TypeName + "*";
@@ -133,6 +137,7 @@ namespace CommonLib.Discovery {
         public byte[] Data { get; }
         public uint Address { get; }
 
+        private Dictionary<uint, DiscoveredData> DiscoveredStructsByAddress = new Dictionary<uint, DiscoveredData>();
         private Dictionary<uint, DiscoveredData> DiscoveredPointersByAddress = new Dictionary<uint, DiscoveredData>();
         private Dictionary<uint, DiscoveredData> DiscoveredDataByAddress = new Dictionary<uint, DiscoveredData>();
     }
