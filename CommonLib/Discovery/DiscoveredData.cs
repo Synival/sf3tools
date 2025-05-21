@@ -54,5 +54,6 @@ namespace CommonLib.Discovery {
         public string DisplayName => _displayName;
 
         public bool IsUnidentifiedPointer => Type == DiscoveredDataType.Pointer && Name == "";
+        public bool HasNestedData => Size.HasValue && (Type == DiscoveredDataType.Function || Type == DiscoveredDataType.Array || Type == DiscoveredDataType.Struct);
     }
 }

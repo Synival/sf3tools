@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using CommonLib.Types;
 using CommonLib.Utils;
 
@@ -69,7 +70,7 @@ namespace CommonLib.Discovery {
             return newData;
         }
 
-        public DiscoveredData[] GetAll() {
+        public DiscoveredData[] GetAllOrdered() {
             var discoveredList = new List<DiscoveredData>();
             discoveredList.AddRange(DiscoveredFunctionsByAddress.Values);
             discoveredList.AddRange(DiscoveredArraysByAddress.Values);
@@ -129,15 +130,51 @@ namespace CommonLib.Discovery {
             return updates;
         }
 
+        private class CreateReportRow {
+            public int Indentation;
+            public DiscoveredData Data;
+        }
+
         public string CreateReport() {
-            var discoveries = GetAll();
-            var text = string.Join("\r\n", discoveries
-                .OrderBy(x => x.Address)
-                .Select(x =>
-                    ((x.Address < Address || x.Address >= Address + Data.Length) ? "(Outside) " : "")
-                    + $"0x{x.Address:X8} / 0x{x.Address - Address:X4} | {x.Type, -8} | {x.DisplayName}"
-                ));
-            return text;
+            var discoveries = GetAllOrdered().Select(x => new CreateReportRow { Indentation = 0, Data = x }).ToArray();
+
+            for (int i = 0; i < discoveries.Length; i++) {
+                var d = discoveries[i];
+                var data = d.Data;
+                if (data.HasNestedData) {
+                    var endAddr = data.Address + data.Size.Value;
+                    for (int j = i + 1; j < discoveries.Length; j++) {
+                        var d2 = discoveries[j];
+                        if (d2.Data.Address < endAddr)
+                            d2.Indentation++;
+                        else
+                            break;
+                    }
+                }
+            }
+
+            var sb = new StringBuilder();
+
+            for (int i = 0; i < discoveries.Length; i++) {
+                var d = discoveries[i];
+                var data = d.Data;
+                var hasNestedData = data.HasNestedData;
+                var nextD = (i + 1 < discoveries.Length) ? discoveries[i + 1] : null;
+                var nextIndentation = nextD?.Indentation ?? 0;
+                var autoCloseBrace = hasNestedData && nextIndentation <= d.Indentation;
+                var targetIndentation = (hasNestedData && !autoCloseBrace) ? d.Indentation + 1 : d.Indentation;
+
+                var addr =
+                    ((data.Address < Address || data.Address >= Address + Data.Length) ? "!" : " ")
+                    + $"0x{data.Address:X8} / 0x{data.Address - Address:X4} | {data.Type, -8}";
+                var code = new string(' ', d.Indentation * 3) + data.DisplayName + (hasNestedData ? (autoCloseBrace ? " {}" : " {") : "");
+
+                sb.AppendLine($"{addr} | {code}");
+                while (targetIndentation > nextIndentation)
+                    sb.AppendLine($"                     |          | {new string(' ', --targetIndentation * 3)}}}");
+            }
+
+            return sb.ToString();
         }
 
         public byte[] Data { get; }
