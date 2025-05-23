@@ -193,7 +193,7 @@ namespace SF3.Models.Files.X1 {
             // Locate difficult-to-find common functions/data that are shared between X1 files.
             var searchData = Data.GetDataCopy();
             Discoveries = new DiscoveryContext(searchData, RamAddress);
-            Discoveries.DiscoverUnknownPointersWithinValueRange(RamAddress, (uint) (RamAddress + Data.Length - 3));
+            Discoveries.DiscoverUnknownPointersToValueRange(RamAddress, (uint) (RamAddress + Data.Length - 3));
             DiscoverFunctions(searchData);
             DiscoverData(searchData);
 

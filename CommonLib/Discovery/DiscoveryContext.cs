@@ -12,7 +12,7 @@ namespace CommonLib.Discovery {
             Address = address;
         }
 
-        public int DiscoverUnknownPointersWithinValueRange(uint min, uint max) {
+        public int DiscoverUnknownPointersToValueRange(uint min, uint max) {
             int count = 0;
 
             // Look for anything that potentially could be a script (filter out obvious negatives)
@@ -33,7 +33,10 @@ namespace CommonLib.Discovery {
             if (addr % 4 != 0)
                 throw new ArgumentException(nameof(addr) + " must have an alignment of 4");
 
-            // TODO: what if a something is already there?
+            // Don't re-discover existing pointers.
+            if (DiscoveredPointersByAddress.TryGetValue(addr, out var oldData))
+                return oldData;
+
             var newData = DiscoveredPointersByAddress[addr] = new DiscoveredData(addr, 4, DiscoveredDataType.Pointer, "void*", "");
             UpdatePointersToDiscoveredData(DiscoveredPointersByAddress[addr]);
             return newData;
@@ -118,6 +121,9 @@ namespace CommonLib.Discovery {
             => DiscoveredStructsByAddress.Values.ToArray();
 
         public int UpdatePointersToDiscoveredData(DiscoveredData data) {
+            if (data.Address < Address || data.Address >= Address + Data.Length)
+                DiscoverUnknownPointersToValueRange(data.Address, data.Address + 4);
+
             var pointers = GetUnidentifiedPointersByValue(data.Address);
             var newType = data.TypeName + "*";
             var newName = data.Name;
