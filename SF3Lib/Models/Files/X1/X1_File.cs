@@ -218,6 +218,27 @@ namespace SF3.Models.Files.X1 {
                 _ = Discoveries.AddFunction((uint) func.Index + RamAddress, func.Info.TypeName, func.Info.Name, func.Size);
         }
 
+        private uint? GetSetRenderThinkFuncsAddr() {
+            switch (Scenario) {
+                // Function at +0x24 in X006.BIN
+                case ScenarioType.Scenario1:   return 0x06046024;
+                case ScenarioType.Scenario2:   return 0x06044824;
+                case ScenarioType.Scenario3:   return 0x06043D24;
+                case ScenarioType.PremiumDisk: return 0x06043D24;
+                default: return null;
+            }
+        }
+
+        private uint? getSetGroundPlanePositionViaJump() {
+            switch (Scenario) {
+                case ScenarioType.Scenario1:   return 0x06046114;
+                case ScenarioType.Scenario2:   return 0x06044920;
+                case ScenarioType.Scenario3:   return 0x06043E44;
+                case ScenarioType.PremiumDisk: return 0x06043E44; // assumed
+                default: return null;
+            }
+        }
+
         private void DiscoverData(byte[] data) {
             // Look for references to that function. There are many variants of this function, so look for all of them.
             var instantiateModelsFuncs = Discoveries.GetFunctions()
@@ -242,6 +263,36 @@ namespace SF3.Models.Files.X1 {
                     var modelsRamAddr = data.GetUInt((int) modelsPtrAddr);
                     if (modelsRamAddr >= RamAddress && modelsRamAddr < RamAddress + data.Length)
                         Discoveries.AddArray(modelsRamAddr, nameof(ModelInstanceGroup) + "[]", $"modelInstanceGroup{instanceGroupId++:D2}", null);
+                }
+            }
+
+            // Look for references to some handy functions.
+            var setRenderThinkFuncsAddr    = GetSetRenderThinkFuncsAddr();
+            if (setRenderThinkFuncsAddr.HasValue)
+                Discoveries.AddFunction(setRenderThinkFuncsAddr.Value, "Function", "setRenderThinkFuncsViaJump(UpdateFuncSetup[]* funcs)", null);
+
+            var setGroundPlanePositionAddr = getSetGroundPlanePositionViaJump();
+            if (setGroundPlanePositionAddr.HasValue)
+                Discoveries.AddFunction(setGroundPlanePositionAddr.Value, "Function", "setGroundPlanePositionViaJump(int x, int y, int z)", null);
+
+            if (setRenderThinkFuncsAddr.HasValue) {
+                var pointers = Discoveries.GetPointersByValue(setRenderThinkFuncsAddr.Value);
+                foreach (var ptr in pointers) {
+                    var tableAddr = (uint) Data.GetDouble((int) (ptr.Address - 0x04 - RamAddress));
+                    Discoveries.AddArray(tableAddr, "UpdateFuncSetup[]", "updateFuncSetupTable", null);
+
+                    // TODO: acatually add the table maybe?
+                    while (true) {
+                        var value1 = (uint) Data.GetDouble((int) (tableAddr - RamAddress + 0x00));
+                        if (value1 == 0xFFFFFFFF)
+                            break;
+
+                        var value2 = (uint) Data.GetDouble((int) (tableAddr - RamAddress + 0x04));
+                        if (!Discoveries.GetFunctions().Any(x => x.Address == value2))
+                            Discoveries.AddFunction(value2, $"Update{value1}Func", $"update{value1}", null);
+
+                        tableAddr += 0x08;
+                    }
                 }
             }
         }
