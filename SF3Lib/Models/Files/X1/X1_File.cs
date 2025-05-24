@@ -268,9 +268,9 @@ namespace SF3.Models.Files.X1 {
             }
 
             // Look for references to some handy functions.
-            var setRenderThinkFuncsAddr    = GetSetRenderThinkFuncsAddr();
+            var setRenderThinkFuncsAddr = GetSetRenderThinkFuncsAddr();
             if (setRenderThinkFuncsAddr.HasValue)
-                Discoveries.AddFunction(setRenderThinkFuncsAddr.Value, "Function", "setRenderThinkFuncsViaJump(UpdateFuncSetup[]* funcs)", null);
+                Discoveries.AddFunction(setRenderThinkFuncsAddr.Value, "Function", $"assignMapUpdateFuncsViaJump({nameof(MapUpdateFunc)}[]* funcs)", null);
 
             var setGroundPlanePositionAddr = getSetGroundPlanePositionViaJump();
             if (setGroundPlanePositionAddr.HasValue)
@@ -280,7 +280,7 @@ namespace SF3.Models.Files.X1 {
                 var pointers = Discoveries.GetPointersByValue(setRenderThinkFuncsAddr.Value);
                 foreach (var ptr in pointers) {
                     var tableAddr = (uint) Data.GetDouble((int) (ptr.Address - 0x04 - RamAddress));
-                    Discoveries.AddArray(tableAddr, "UpdateFuncSetup[]", "updateFuncSetupTable", null);
+                    Discoveries.AddArray(tableAddr, nameof(MapUpdateFunc) + "[]", "updateFuncTable", null);
 
                     // TODO: acatually add the table maybe?
                     while (true) {
@@ -302,6 +302,18 @@ namespace SF3.Models.Files.X1 {
             var tables = new List<ITable>();
 
             // TODO: actually fetch it!
+            var updateFuncTableAddresses = Discoveries.GetArrays()
+                .Where(x => x.TypeName == nameof(MapUpdateFunc) + "[]")
+                .ToArray();
+
+            // TODO: what to do in this case?
+            if (updateFuncTableAddresses.Length > 1)
+                ;
+
+            if (updateFuncTableAddresses.Length > 0) {
+                var address = updateFuncTableAddresses[0].Address - RamAddress;
+                tables.Add(MapUpdateFuncTable = MapUpdateFuncTable.Create(Data, nameof(MapUpdateFuncTable), (int) address, addEndModel: false));
+            }
 
             return tables.ToArray();
         }
@@ -312,7 +324,7 @@ namespace SF3.Models.Files.X1 {
             // Look for all arrays discovered as 'ModelInstanceGroup[]'.
             ModelInstanceGroupTablesByAddress = new Dictionary<uint, ModelInstanceGroupTable>();
             var modelMatrixGroupTables = Discoveries.GetArrays()
-                .Where(x => x.Type == DiscoveredDataType.Array && x.TypeName == nameof(ModelInstanceGroup) + "[]")
+                .Where(x => x.TypeName == nameof(ModelInstanceGroup) + "[]")
                 .ToArray();
 
             // Create corresponding tables for all the discovered data.
