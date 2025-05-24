@@ -66,6 +66,7 @@ namespace SF3.NamedValues {
                 { NamedValueType.Item,                new SubMethods((o, p, v, a) => new NameAndInfo(v, ValueNames.ItemInfo.Info[Scenario])) },
                 { NamedValueType.Load,                new SubMethods((o, p, v, a) => new NameAndInfo(v, ValueNames.LoadInfo.Info[Scenario])) },
                 { NamedValueType.MagicBonus,          new SubMethods((o, p, v, a) => new NameAndInfo(v, ValueNames.MagicBonusInfo.Info[Scenario])) },
+                { NamedValueType.MapUpdateFunc,       new SubMethods((o, p, v, a) => new NameAndInfo(v, ValueNames.MapUpdateFuncInfo)) },
                 { NamedValueType.ModelDirection,      new SubMethods((o, p, v, a) => new NameAndInfo(v, ValueNames.ModelDirection)) },
                 { NamedValueType.Monster,             new SubMethods((o, p, v, a) => new NameAndInfo(v, ValueNames.MonsterInfo.Info[Scenario])) },
                 { NamedValueType.MonsterForSlot,      new SubMethods((o, p, v, a) => new NameAndInfo(v, ValueNames.MonsterForSlotInfo.Info[Scenario])) },

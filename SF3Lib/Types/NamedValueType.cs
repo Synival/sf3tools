@@ -30,6 +30,7 @@ namespace SF3.Types {
         EventTriggerUseItemType,
         EventTriggerWarpSound,
         MagicBonus,
+        MapUpdateFunc,
         MovementType,
         Music,
         Sex,
@@ -45,6 +46,6 @@ namespace SF3.Types {
         WeaponType,
 
         // Special Types
-        ConditionalType
+        ConditionalType,
     };
 }
