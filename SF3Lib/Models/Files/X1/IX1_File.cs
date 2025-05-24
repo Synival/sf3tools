@@ -28,6 +28,7 @@ namespace SF3.Models.Files.X1 {
         Dictionary<uint, ModelInstanceGroupTable> ModelInstanceGroupTablesByAddress { get; }
         Dictionary<uint, ModelInstanceTable> ModelInstanceTablesByAddress { get; }
         Dictionary<uint, ActorScript> ScriptsByAddress { get; }
+        MapUpdateFuncTable MapUpdateFuncTable { get; }
 
         DiscoveryContext Discoveries { get; }
     }

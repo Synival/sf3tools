@@ -198,6 +198,7 @@ namespace SF3.Models.Files.X1 {
             DiscoverData(searchData);
 
             // Now that we've discovered some data, let's populate some tables.
+            tables.AddRange(PopulateMapUpdateFuncTables());
             tables.AddRange(PopulateModelInstanceTables());
             PopulateScripts();
 
@@ -295,6 +296,14 @@ namespace SF3.Models.Files.X1 {
                     }
                 }
             }
+        }
+
+        private ITable[] PopulateMapUpdateFuncTables() {
+            var tables = new List<ITable>();
+
+            // TODO: actually fetch it!
+
+            return tables.ToArray();
         }
 
         private ITable[] PopulateModelInstanceTables() {
@@ -626,6 +635,8 @@ namespace SF3.Models.Files.X1 {
 
         [BulkCopyRecurse]
         public Dictionary<uint, ActorScript> ScriptsByAddress { get; private set; }
+        [BulkCopyRecurse]
+        public MapUpdateFuncTable MapUpdateFuncTable { get; private set; }
 
         public DiscoveryContext Discoveries { get; private set; }
     }

@@ -36,6 +36,8 @@ namespace SF3.Win.Views.X1 {
                 CreateChild(new TableArrayView<ModelInstanceGroupTable>("Model Instance Groups", Model.ModelInstanceGroupTablesByAddress.Values.ToArray(), ngc));
             if (Model.ModelInstanceTablesByAddress?.Count > 0)
                 CreateChild(new TableArrayView<ModelInstanceTable>("Model Instances", Model.ModelInstanceTablesByAddress.Values.ToArray(), ngc));
+            if (Model.MapUpdateFuncTable != null)
+                CreateChild(new TableView("Map Update Functions", Model.MapUpdateFuncTable, ngc));
 
             if (Model.ScriptsByAddress?.Count > 0) {
                 CreateChild(new TextArrayView("Scripts",
@@ -58,8 +60,15 @@ namespace SF3.Win.Views.X1 {
                     CreateChild(new BattleView($"Battle ({battleKv.Key})", battleKv.Value));
             }
 
-            if (Model.Discoveries?.HasDiscoveries == true)
-                CreateChild(new TextView("Discovered Data", Model.Discoveries.CreateReport()));
+            if (Model.Discoveries?.HasDiscoveries == true) {
+                var foundFunctions = string.Join("\r\n", Model.Discoveries
+                    .GetFunctions()
+                    .OrderBy(x => x.Address)
+                    .Select(x => $" 0x{x.Address:X8} / 0x{x.Address - Model.Discoveries.Address:X4} | {x.DisplayName}"));
+                var report = Model.Discoveries.CreateReport();
+
+                CreateChild(new TextView("Discovered Data", foundFunctions + "\r\n\r\n" + report));
+            }
 
             return Control;
         }
