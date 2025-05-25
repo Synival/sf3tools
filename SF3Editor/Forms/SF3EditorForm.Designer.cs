@@ -82,12 +82,15 @@ namespace SF3.Editor.Forms {
             tsmiView_MPD_ShowHelp = new System.Windows.Forms.ToolStripMenuItem();
             tsmiView_MPD_Sep3 = new System.Windows.Forms.ToolStripSeparator();
             tsmiView_MPD_EnableBlankFieldV2Controls = new System.Windows.Forms.ToolStripMenuItem();
-            tsmi_Tools = new System.Windows.Forms.ToolStripMenuItem();
+            tsmiTools = new System.Windows.Forms.ToolStripMenuItem();
             tsmiTools_ImportTable = new System.Windows.Forms.ToolStripMenuItem();
             tsmiTools_ExportTable = new System.Windows.Forms.ToolStripMenuItem();
             tsmiTools_Sep1 = new System.Windows.Forms.ToolStripSeparator();
             tsmiTools_ApplyDFR = new System.Windows.Forms.ToolStripMenuItem();
             tsmiTools_CreateDFR = new System.Windows.Forms.ToolStripMenuItem();
+            tsmiX1 = new System.Windows.Forms.ToolStripMenuItem();
+            tsmiX1_MovePostEOFPointers = new System.Windows.Forms.ToolStripMenuItem();
+            tsmiX1_AddZeroes = new System.Windows.Forms.ToolStripMenuItem();
             tsmiX019 = new System.Windows.Forms.ToolStripMenuItem();
             tsmiX019_UnapplyMonsterEq = new System.Windows.Forms.ToolStripMenuItem();
             tsmiX019_ApplyMonsterEq = new System.Windows.Forms.ToolStripMenuItem();
@@ -122,7 +125,7 @@ namespace SF3.Editor.Forms {
             // 
             // menuStrip1
             // 
-            menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { tsmiFile, tsmiView, tsmi_Tools, tsmiX019, tsmiMPD, tsmiSettings, tsmiHelp });
+            menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { tsmiFile, tsmiView, tsmiTools, tsmiX1, tsmiX019, tsmiMPD, tsmiSettings, tsmiHelp });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
             menuStrip1.Size = new Size(891, 24);
@@ -521,12 +524,12 @@ namespace SF3.Editor.Forms {
             tsmiView_MPD_EnableBlankFieldV2Controls.Text = "E&XPERIMENTAL: Enable tile controls for BlankField_V2.MPD";
             tsmiView_MPD_EnableBlankFieldV2Controls.Click += tsmiView_MPD_EnableBlankFieldV2Controls_Click;
             // 
-            // tsmi_Tools
+            // tsmiTools
             // 
-            tsmi_Tools.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { tsmiTools_ImportTable, tsmiTools_ExportTable, tsmiTools_Sep1, tsmiTools_ApplyDFR, tsmiTools_CreateDFR });
-            tsmi_Tools.Name = "tsmi_Tools";
-            tsmi_Tools.Size = new Size(47, 20);
-            tsmi_Tools.Text = "&Tools";
+            tsmiTools.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { tsmiTools_ImportTable, tsmiTools_ExportTable, tsmiTools_Sep1, tsmiTools_ApplyDFR, tsmiTools_CreateDFR });
+            tsmiTools.Name = "tsmiTools";
+            tsmiTools.Size = new Size(47, 20);
+            tsmiTools.Text = "&Tools";
             // 
             // tsmiTools_ImportTable
             // 
@@ -564,6 +567,31 @@ namespace SF3.Editor.Forms {
             tsmiTools_CreateDFR.Size = new Size(178, 22);
             tsmiTools_CreateDFR.Text = "&Create DFR File...";
             tsmiTools_CreateDFR.Click += tsmiTools_CreateDFR_Click;
+            // 
+            // tsmiX1
+            // 
+            tsmiX1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { tsmiX1_MovePostEOFPointers, tsmiX1_AddZeroes });
+            tsmiX1.Enabled = false;
+            tsmiX1.Name = "tsmiX1";
+            tsmiX1.Size = new Size(32, 20);
+            tsmiX1.Text = "&X1";
+            tsmiX1.Visible = false;
+            // 
+            // tsmiX1_MovePostEOFPointers
+            // 
+            tsmiX1_MovePostEOFPointers.Enabled = false;
+            tsmiX1_MovePostEOFPointers.Name = "tsmiX1_MovePostEOFPointers";
+            tsmiX1_MovePostEOFPointers.Size = new Size(227, 22);
+            tsmiX1_MovePostEOFPointers.Text = "&Move Post-EOF X1 Pointers...";
+            tsmiX1_MovePostEOFPointers.Click += tsmiX1_MovePostEOFPointers_Click;
+            // 
+            // tsmiX1_AddZeroes
+            // 
+            tsmiX1_AddZeroes.Enabled = false;
+            tsmiX1_AddZeroes.Name = "tsmiX1_AddZeroes";
+            tsmiX1_AddZeroes.Size = new Size(227, 22);
+            tsmiX1_AddZeroes.Text = "Add &Zeroes...";
+            tsmiX1_AddZeroes.Click += tsmiX1_AddZeroes_Click;
             // 
             // tsmiX019
             // 
@@ -805,7 +833,7 @@ namespace SF3.Editor.Forms {
         private System.Windows.Forms.ToolStripMenuItem tsmiHelp_About;
         private System.Windows.Forms.ToolStripMenuItem tsmiSettings;
         private System.Windows.Forms.ToolStripMenuItem tsmiSettings_UseDropdowns;
-        private System.Windows.Forms.ToolStripMenuItem tsmi_Tools;
+        private System.Windows.Forms.ToolStripMenuItem tsmiTools;
         private System.Windows.Forms.ToolStripMenuItem tsmiTools_ApplyDFR;
         private System.Windows.Forms.ToolStripMenuItem tsmiTools_CreateDFR;
         private System.Windows.Forms.ToolStripSeparator tsmiTools_Sep1;
@@ -876,5 +904,8 @@ namespace SF3.Editor.Forms {
         private System.Windows.Forms.ToolStripMenuItem tsmiX019;
         private System.Windows.Forms.ToolStripMenuItem tsmiX019_UnapplyMonsterEq;
         private System.Windows.Forms.ToolStripMenuItem tsmiX019_ApplyMonsterEq;
+        private System.Windows.Forms.ToolStripMenuItem tsmiX1;
+        private System.Windows.Forms.ToolStripMenuItem tsmiX1_MovePostEOFPointers;
+        private System.Windows.Forms.ToolStripMenuItem tsmiX1_AddZeroes;
     }
 }

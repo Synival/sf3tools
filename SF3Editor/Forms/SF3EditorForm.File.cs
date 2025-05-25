@@ -372,6 +372,7 @@ namespace SF3.Editor.Forms {
             Text = file == null ? _versionTitle : file.Loader.ModelTitle(_versionTitle);
 
             var fileType = file?.FileType;
+            tsmiX1.Visible   = tsmiX1.Enabled   = hasFile && (fileType == SF3FileType.X1);
             tsmiX019.Visible = tsmiX019.Enabled = hasFile && (fileType == SF3FileType.X019 || fileType == SF3FileType.X044);
             tsmiMPD.Visible  = tsmiMPD.Enabled  = hasFile && (fileType == SF3FileType.MPD);
 
