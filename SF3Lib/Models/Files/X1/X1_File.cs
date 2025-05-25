@@ -17,7 +17,6 @@ using SF3.Utils;
 using CommonLib.Utils;
 using SF3.Models.Structs.X1;
 using CommonLib.Discovery;
-using CommonLib.Types;
 
 namespace SF3.Models.Files.X1 {
     public class X1_File : ScenarioTableFile, IX1_File {
@@ -211,18 +210,20 @@ namespace SF3.Models.Files.X1 {
         private void DiscoverFunctions(byte[] data) {
             // Look for known functions and create corresponding DiscoveredData() entries.
             var funcs = KnownX1Functions.AllKnownFunctions
-                .Select(x => new { Info = x.Key, Size = x.Value.Length * 2, Index = data.IndexOfSubset(x.Value.ToByteArray()) })
-                .Where(x => x.Index >= 0)
+                .Select(x => new { Info = x.Key, Size = x.Value.Length * 2, Indices = data.IndicesOfSubset(x.Value.ToByteArray()) })
                 .ToArray();
 
-            foreach (var func in funcs)
-                _ = Discoveries.AddFunction((uint) func.Index + RamAddress, func.Info.TypeName, func.Info.Name, func.Size);
+            foreach (var func in funcs) {
+                for (int i = 0; i < func.Indices.Length; i++)
+                    _ = Discoveries.AddFunction((uint) func.Indices[i] + RamAddress, func.Info.TypeName, (i == 0 ? "" : $"DUP{i}_") + func.Info.Name, func.Size);
+            }
         }
 
         private uint? GetSetRenderThinkFuncsAddr() {
             switch (Scenario) {
                 // Function at +0x24 in X006.BIN
                 case ScenarioType.Scenario1:   return 0x06046024;
+                // TODO: not so in v1!!! 
                 case ScenarioType.Scenario2:   return 0x06044824;
                 case ScenarioType.Scenario3:   return 0x06043D24;
                 case ScenarioType.PremiumDisk: return 0x06043D24;
@@ -230,7 +231,7 @@ namespace SF3.Models.Files.X1 {
             }
         }
 
-        private uint? getSetGroundPlanePositionViaJump() {
+        private uint? GetSetGroundPlanePositionViaJump() {
             switch (Scenario) {
                 case ScenarioType.Scenario1:   return 0x06046114;
                 case ScenarioType.Scenario2:   return 0x06044920;
@@ -272,7 +273,7 @@ namespace SF3.Models.Files.X1 {
             if (setRenderThinkFuncsAddr.HasValue)
                 Discoveries.AddFunction(setRenderThinkFuncsAddr.Value, "Function", $"assignMapUpdateFuncsViaJump({nameof(MapUpdateFunc)}[]* funcs)", null);
 
-            var setGroundPlanePositionAddr = getSetGroundPlanePositionViaJump();
+            var setGroundPlanePositionAddr = GetSetGroundPlanePositionViaJump();
             if (setGroundPlanePositionAddr.HasValue)
                 Discoveries.AddFunction(setGroundPlanePositionAddr.Value, "Function", "setGroundPlanePositionViaJump(int x, int y, int z)", null);
 

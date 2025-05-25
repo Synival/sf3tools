@@ -183,6 +183,9 @@ namespace CommonLib.Discovery {
             return sb.ToString();
         }
 
+        public bool HasDiscoveryAt(uint addr)
+            => DiscoveredFunctionsByAddress.ContainsKey(addr) || DiscoveredArraysByAddress.ContainsKey(addr) || DiscoveredStructsByAddress.ContainsKey(addr) || DiscoveredPointersByAddress.ContainsKey(addr);
+
         public byte[] Data { get; }
         public uint Address { get; }
         public bool HasDiscoveries => DiscoveredFunctionsByAddress.Count > 0 || DiscoveredArraysByAddress.Count > 0 || DiscoveredStructsByAddress.Count > 0 || DiscoveredPointersByAddress.Count > 0;
