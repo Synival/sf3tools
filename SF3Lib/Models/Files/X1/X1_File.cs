@@ -290,8 +290,10 @@ namespace SF3.Models.Files.X1 {
                             break;
 
                         var value2 = (uint) Data.GetDouble((int) (tableAddr - RamAddress + 0x04));
-                        if (!Discoveries.GetFunctions().Any(x => x.Address == value2))
-                            Discoveries.AddFunction(value2, $"Update{value1}Func", $"update{value1}", null);
+                        if (!Discoveries.GetFunctions().Any(x => x.Address == value2)) {
+                            var funcType = (value1 == 0x03) ? "GroundPlaneTickFunc" : $"Update{value1}Func";
+                            Discoveries.AddFunction(value2, funcType, $"unknown{funcType}", null);
+                        }
 
                         tableAddr += 0x08;
                     }
