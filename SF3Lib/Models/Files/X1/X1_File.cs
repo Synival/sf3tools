@@ -217,6 +217,23 @@ namespace SF3.Models.Files.X1 {
                 for (int i = 0; i < func.Indices.Length; i++)
                     _ = Discoveries.AddFunction((uint) func.Indices[i] + RamAddress, func.Info.TypeName, (i == 0 ? "" : $"DUP{i}_") + func.Info.Name, func.Size);
             }
+
+            // Add functions in the interactable table.
+            if (InteractableTable != null) {
+                var iFuncs = InteractableTable
+                    .Where(x => x.Action >= RamAddress && x.Action < RamAddress + Data.Length - 3)
+                    .GroupBy(x => x.Action)
+                    .ToDictionary(x => x.Key, x => x.ToArray());
+
+                var ngc = NameGetterContext;
+                foreach (var kv in iFuncs) {
+                    var funcPtr = kv.Key;
+                    if (!Discoveries.HasDiscoveryAt(funcPtr)) {
+                        var ids = string.Join("_", kv.Value.Select(x => ngc.GetName(x, null, x.TriggerType, new object[] { NamedValueType.EventTriggerType }) + x.ID.ToString("X2")));
+                        Discoveries.AddFunction(funcPtr, "InteractableFunction", $"interactableFuncFor{ids}()", null);
+                    }
+                }
+            }
         }
 
         private uint? GetSetRenderThinkFuncsAddr() {
