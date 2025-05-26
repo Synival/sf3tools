@@ -240,7 +240,6 @@ namespace SF3.Models.Files.X1 {
             switch (Scenario) {
                 // Function at +0x24 in X006.BIN
                 case ScenarioType.Scenario1:   return 0x06046024;
-                // TODO: not so in v1!!! 
                 case ScenarioType.Scenario2:   return 0x06044824;
                 case ScenarioType.Scenario3:   return 0x06043D24;
                 case ScenarioType.PremiumDisk: return 0x06043D24;
