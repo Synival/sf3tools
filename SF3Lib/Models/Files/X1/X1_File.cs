@@ -258,6 +258,11 @@ namespace SF3.Models.Files.X1 {
         }
 
         private void DiscoverData(byte[] data) {
+            DiscoverModelInstantiateData(data);
+            DiscoverRenderThinkFuncsData(data);
+        }
+
+        private void DiscoverModelInstantiateData(byte[] data) {
             // Look for references to that function. There are many variants of this function, so look for all of them.
             var instantiateModelsFuncs = Discoveries.GetFunctions()
                 .Where(x => x.TypeName == "InstantiateModelsFunc")
@@ -283,7 +288,9 @@ namespace SF3.Models.Files.X1 {
                         Discoveries.AddArray(modelsRamAddr, nameof(ModelInstanceGroup) + "[]", $"modelInstanceGroup{instanceGroupId++:D2}", null);
                 }
             }
+        }
 
+        private void DiscoverRenderThinkFuncsData(byte[] data) {
             // Look for references to some handy functions.
             var setRenderThinkFuncsAddr = GetSetRenderThinkFuncsAddr();
             if (setRenderThinkFuncsAddr.HasValue)
