@@ -21,6 +21,8 @@ namespace CommonLib.Discovery {
                 var addr = dataAddr + Address;
                 var value = Data.GetUInt((int) dataAddr);
                 if (value >= min && value < max) {
+                    if (value >= dataAddrMax + Address)
+                        ;
                     AddUnidentifiedPointer(addr);
                     count++;
                 }
@@ -37,6 +39,9 @@ namespace CommonLib.Discovery {
             if (DiscoveredPointersByAddress.TryGetValue(addr, out var oldData))
                 return oldData;
 
+            AddUnknownAtPointerValue(addr);
+            RemoveUnknownsAt(addr);
+            // TODO: add the value?
             var newData = DiscoveredPointersByAddress[addr] = new DiscoveredData(addr, 4, DiscoveredDataType.Pointer, "void*", "");
             UpdatePointersToDiscoveredData(DiscoveredPointersByAddress[addr]);
             return newData;
@@ -46,10 +51,22 @@ namespace CommonLib.Discovery {
             if (addr % 4 != 0)
                 throw new ArgumentException(nameof(addr) + " must have an alignment of 4");
 
+            AddUnknownAtPointerValue(addr);
+            RemoveUnknownsAt(addr);
             // TODO: what if a something is already there?
+            // TODO: add the value?
             var newData = DiscoveredPointersByAddress[addr] = new DiscoveredData(addr, 4, DiscoveredDataType.Pointer, typeName, name);
             UpdatePointersToDiscoveredData(DiscoveredPointersByAddress[addr]);
             return newData;
+        }
+
+        private void AddUnknownAtPointerValue(uint addr) {
+            if (addr > Address && addr < Address + Data.Length - 3) {
+                var value = Data.GetUInt((int) (addr - Address));
+                if (!HasDiscoveryAt(value))
+                    // TODO: track what's pointing to it?
+                    DiscoveredUnknownsByAddress[value] = new DiscoveredData(value, null, DiscoveredDataType.Unknown, "Unknown", "unknown");
+            }
         }
 
         public DiscoveredData AddFunction(uint addr, string typeName, string name, int? size) {
@@ -58,6 +75,7 @@ namespace CommonLib.Discovery {
 
             // TODO: what if a something is already there?
             // TODO: parameters?
+            RemoveUnknownsAt(addr);
             var newData = DiscoveredFunctionsByAddress[addr] = new DiscoveredData(addr, size, DiscoveredDataType.Function, typeName, name);
             UpdatePointersToDiscoveredData(DiscoveredFunctionsByAddress[addr]);
             return newData;
@@ -69,6 +87,7 @@ namespace CommonLib.Discovery {
 
             // TODO: what if a something is already there?
             var newData = DiscoveredArraysByAddress[addr] = new DiscoveredData(addr, size, DiscoveredDataType.Array, typeName, name);
+            RemoveUnknownsAt(addr);
             UpdatePointersToDiscoveredData(DiscoveredArraysByAddress[addr]);
             return newData;
         }
@@ -79,6 +98,7 @@ namespace CommonLib.Discovery {
             discoveredList.AddRange(DiscoveredArraysByAddress.Values);
             discoveredList.AddRange(DiscoveredStructsByAddress.Values);
             discoveredList.AddRange(DiscoveredPointersByAddress.Values);
+            discoveredList.AddRange(DiscoveredUnknownsByAddress.Values);
             return discoveredList.OrderBy(x => x.Address).ThenBy(x => x.Type).ToArray();
         }
 
@@ -120,6 +140,9 @@ namespace CommonLib.Discovery {
         public DiscoveredData[] GetStructs()
             => DiscoveredStructsByAddress.Values.ToArray();
 
+        public DiscoveredData[] GetUnknowns()
+            => DiscoveredUnknownsByAddress.Values.ToArray();
+
         public int UpdatePointersToDiscoveredData(DiscoveredData data) {
             if (data.Address < Address || data.Address >= Address + Data.Length)
                 DiscoverUnknownPointersToValueRange(data.Address, data.Address + 4);
@@ -129,6 +152,7 @@ namespace CommonLib.Discovery {
             var newName = data.Name;
             var updates = pointers.Length;
             foreach (var pointer in pointers) {
+                RemoveUnknownsAt(pointer.Address);
                 pointer.TypeName = newType;
                 pointer.Name = newName;
                 updates += UpdatePointersToDiscoveredData(pointer);
@@ -136,13 +160,25 @@ namespace CommonLib.Discovery {
             return updates;
         }
 
+        public void RemoveUnknownsAt(uint addr) {
+            if (DiscoveredUnknownsByAddress.ContainsKey(addr))
+                DiscoveredUnknownsByAddress.Remove(addr);
+        }
+
         private class CreateReportRow {
             public int Indentation;
             public DiscoveredData Data;
         }
 
-        public string CreateReport() {
-            var discoveries = GetAllOrdered().Select(x => new CreateReportRow { Indentation = 0, Data = x }).ToArray();
+        public string CreateReport()
+            => CreateReport(GetAllOrdered(), true);
+
+        public string CreateReport(DiscoveredData[] dataSet, bool withType) {
+            var discoveries = dataSet
+                .OrderBy(x => x.Address)
+                .ThenBy(x => x.Type)
+                .Select(x => new CreateReportRow { Indentation = 0, Data = x })
+                .ToArray();
 
             for (int i = 0; i < discoveries.Length; i++) {
                 var d = discoveries[i];
@@ -170,21 +206,29 @@ namespace CommonLib.Discovery {
                 var autoCloseBrace = hasNestedData && nextIndentation <= d.Indentation;
                 var targetIndentation = (hasNestedData && !autoCloseBrace) ? d.Indentation + 1 : d.Indentation;
 
+                var addrWithSign = ValueUtils.SignedHexStr(data.Address - Address, "X4");
+                var typeStr = withType ? $" | {data.Type,-8}" : "";
                 var addr =
                     ((data.Address < Address || data.Address >= Address + Data.Length) ? "!" : " ")
-                    + $"0x{data.Address:X8} / 0x{data.Address - Address:X4} | {data.Type, -8}";
+                    + $"0x{data.Address:X8} /{addrWithSign,8}{typeStr}";
                 var code = new string(' ', d.Indentation * 3) + data.DisplayName + (hasNestedData ? (autoCloseBrace ? " {}" : " {") : "");
 
                 sb.AppendLine($"{addr} | {code}");
                 while (targetIndentation > nextIndentation)
-                    sb.AppendLine($"                     |          | {new string(' ', --targetIndentation * 3)}}}");
+                    sb.AppendLine($"                      |          | {new string(' ', --targetIndentation * 3)}}}");
             }
 
             return sb.ToString();
         }
 
-        public bool HasDiscoveryAt(uint addr)
-            => DiscoveredFunctionsByAddress.ContainsKey(addr) || DiscoveredArraysByAddress.ContainsKey(addr) || DiscoveredStructsByAddress.ContainsKey(addr) || DiscoveredPointersByAddress.ContainsKey(addr);
+        public bool HasDiscoveryAt(uint addr) {
+            return
+                DiscoveredFunctionsByAddress.ContainsKey(addr) ||
+                DiscoveredArraysByAddress.ContainsKey(addr)    ||
+                DiscoveredStructsByAddress.ContainsKey(addr)   ||
+                DiscoveredPointersByAddress.ContainsKey(addr)  ||
+                DiscoveredUnknownsByAddress.ContainsKey(addr);
+        }
 
         public byte[] Data { get; }
         public uint Address { get; }
@@ -194,5 +238,6 @@ namespace CommonLib.Discovery {
         private Dictionary<uint, DiscoveredData> DiscoveredArraysByAddress    = new Dictionary<uint, DiscoveredData>();
         private Dictionary<uint, DiscoveredData> DiscoveredStructsByAddress   = new Dictionary<uint, DiscoveredData>();
         private Dictionary<uint, DiscoveredData> DiscoveredPointersByAddress  = new Dictionary<uint, DiscoveredData>();
+        private Dictionary<uint, DiscoveredData> DiscoveredUnknownsByAddress  = new Dictionary<uint, DiscoveredData>();
     }
 }

@@ -20,6 +20,8 @@ using CommonLib.Discovery;
 
 namespace SF3.Models.Files.X1 {
     public class X1_File : ScenarioTableFile, IX1_File {
+        private const uint c_ramUpperLimit = 0x06067FFF;
+
         protected X1_File(IByteData data, INameGetterContext nameContext, ScenarioType scenario, bool isBTL99) : base(data, nameContext, scenario) {
             IsBTL99 = isBTL99;
             RamAddress = IsBTL99 ? 0x06060000u : Scenario == ScenarioType.Scenario1 ? 0x0605f000u : 0x0605e000u;
@@ -192,7 +194,7 @@ namespace SF3.Models.Files.X1 {
             // Locate difficult-to-find common functions/data that are shared between X1 files.
             var searchData = Data.GetDataCopy();
             Discoveries = new DiscoveryContext(searchData, RamAddress);
-            Discoveries.DiscoverUnknownPointersToValueRange(RamAddress, (uint) (RamAddress + Data.Length - 3));
+            Discoveries.DiscoverUnknownPointersToValueRange(RamAddress, c_ramUpperLimit - 1);
             DiscoverFunctions(searchData);
             DiscoverData(searchData);
 

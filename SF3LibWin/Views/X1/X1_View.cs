@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using System.Windows.Forms;
+using CommonLib.Types;
 using SF3.Models.Files.X1;
 using SF3.Models.Tables.X1;
 
@@ -61,13 +62,35 @@ namespace SF3.Win.Views.X1 {
             }
 
             if (Model.Discoveries?.HasDiscoveries == true) {
-                var foundFunctions = string.Join("\r\n", Model.Discoveries
-                    .GetFunctions()
-                    .OrderBy(x => x.Address)
-                    .Select(x => $" 0x{x.Address:X8} / 0x{x.Address - Model.Discoveries.Address:X4} | {x.DisplayName}"));
-                var report = Model.Discoveries.CreateReport();
+                var allDiscoveries = Model.Discoveries.GetAllOrdered();
+ 
+                var report =
+                    "=====================\r\n" +
+                    "Functions          \r\n" +
+                    "=====================\r\n" +
+                    Model.Discoveries.CreateReport(allDiscoveries.Where(x => x.Type == DiscoveredDataType.Function).ToArray(), false) + "\r\n" +
+                    "=====================\r\n" +
+                    "Arrays             \r\n" +
+                    "=====================\r\n" +
+                    Model.Discoveries.CreateReport(allDiscoveries.Where(x => x.Type == DiscoveredDataType.Array).ToArray(), false) + "\r\n" +
+                    "=====================\r\n" +
+                    "Identified Pointers\r\n" +
+                    "=====================\r\n" +
+                    Model.Discoveries.CreateReport(allDiscoveries.Where(x => x.Type == DiscoveredDataType.Pointer && !x.IsUnidentifiedPointer).ToArray(), false) + "\r\n" +
+                    "=====================\r\n" +
+                    "Unidentified Pointers\r\n" +
+                    "=====================\r\n" +
+                    Model.Discoveries.CreateReport(allDiscoveries.Where(x => x.Type == DiscoveredDataType.Pointer && x.IsUnidentifiedPointer).ToArray(), false) + "\r\n" +
+                    "=====================\r\n" +
+                    "Unknowns             \r\n" +
+                    "=====================\r\n" +
+                    Model.Discoveries.CreateReport(allDiscoveries.Where(x => x.Type == DiscoveredDataType.Unknown).ToArray(), false) + "\r\n" +
+                    "=====================\r\n" +
+                    "Everything         \r\n" +
+                    "=====================\r\n" +
+                    Model.Discoveries.CreateReport(allDiscoveries, true);
 
-                CreateChild(new TextView("Discovered Data", foundFunctions + "\r\n\r\n" + report));
+                CreateChild(new TextView("Discovered Data", report));
             }
 
             return Control;
