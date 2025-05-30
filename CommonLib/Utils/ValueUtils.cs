@@ -31,21 +31,24 @@ namespace CommonLib.Utils {
         /// </summary>
         /// <param name="value">The value to convert to a signed hex value string.</param>
         /// <param name="format">GetString() format of the string after the '0x' porition. Should probably be something like "X2".</param>
+        /// <param name="withPrefix">When true, "0x" is prepended</param>
         /// <returns>A string starting with a sign (if negative), '0x', then the value formatted according to 'format'.</returns>
-        public static string SignedHexStr(int value, string format)
-            => SignedHexStr((uint) value, format);
+        public static string SignedHexStr(int value, string format, bool withPrefix = true)
+            => SignedHexStr((uint) value, format, withPrefix);
 
         /// <summary>
         /// Returns a string in the format "0xXXXX" or "-0xXXXX" depending on the signedness of the value.
         /// </summary>
         /// <param name="value">The value to convert to a signed hex value string.</param>
+        /// <param name="withPrefix">When true, "0x" is prepended</param>
         /// <param name="format">GetString() format of the string after the '0x' porition. Should probably be something like "X2".</param>
         /// <returns>A string starting with a sign (if negative), '0x', then the value formatted according to 'format'.</returns>
-        public static string SignedHexStr(uint value, string format) {
+        public static string SignedHexStr(uint value, string format, bool withPrefix = true) {
+            var prepend = withPrefix ? "0x" : "";
             if ((value & 0x80000000u) != 0)
-                return "-0x" + (0x80000000u - (value & 0x7FFFFFFFu)).ToString(format);
+                return "-" + prepend + (0x80000000u - (value & 0x7FFFFFFFu)).ToString(format);
             else
-                return "0x" + value.ToString(format);
+                return prepend + value.ToString(format);
         }
     }
 }
