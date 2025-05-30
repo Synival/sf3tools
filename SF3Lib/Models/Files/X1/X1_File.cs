@@ -20,7 +20,7 @@ using CommonLib.Discovery;
 
 namespace SF3.Models.Files.X1 {
     public class X1_File : ScenarioTableFile, IX1_File {
-        private const uint c_ramUpperLimit = 0x06067FFF;
+        public const uint X1RamUpperLimit = 0x06068000;
 
         protected X1_File(IByteData data, INameGetterContext nameContext, ScenarioType scenario, bool isBTL99) : base(data, nameContext, scenario) {
             IsBTL99 = isBTL99;
@@ -194,7 +194,7 @@ namespace SF3.Models.Files.X1 {
             // Locate difficult-to-find common functions/data that are shared between X1 files.
             var searchData = Data.GetDataCopy();
             Discoveries = new DiscoveryContext(searchData, RamAddress);
-            Discoveries.DiscoverUnknownPointersToValueRange(RamAddress, c_ramUpperLimit - 1);
+            Discoveries.DiscoverUnknownPointersToValueRange(RamAddress, X1RamUpperLimit - 1);
             DiscoverFunctions(searchData);
             DiscoverData(searchData);
 
@@ -387,7 +387,6 @@ namespace SF3.Models.Files.X1 {
                 // The second parameter is a pointer to a 'ModelMatrix*'. It should be outside the bounds of the file, but try to mark it in case its not.
                 var matricesRamPtr = group.MatrixTablePtr;
                 Discoveries.AddArray(matricesRamPtr, "ModelMatrix[]", $"modelMatrices{groupLinkIndex:D2}", 0x38 * newTable.Length);
-                // TODO: it's not adding pointers because they're outside the file.
 
                 groupLinkIndex++;
             }
@@ -468,9 +467,11 @@ namespace SF3.Models.Files.X1 {
                     .ToArray();
 
                 foreach (var ramAddr in ramAddrs) {
-                    _ = scriptRamAddrs.Add(ramAddr);
-                    _ = knownScriptRamAddrs.Add(ramAddr);
-                    AddScriptInfo(ramAddr, $"Referenced in {nameof(ModelInstanceGroupTable)}", prepend: true);
+                    if (ramAddr >= RamAddress && ramAddr < RamAddress + Data.Length - 3) {
+                        _ = scriptRamAddrs.Add(ramAddr);
+                        _ = knownScriptRamAddrs.Add(ramAddr);
+                        AddScriptInfo(ramAddr, $"Referenced in {nameof(ModelInstanceGroupTable)}", prepend: true);
+                    }
                 }
             }
 
