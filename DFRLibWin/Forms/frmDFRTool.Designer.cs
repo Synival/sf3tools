@@ -113,6 +113,7 @@ namespace DFRLib.Win.Forms
             MaximumSize = new Size(2797, 295);
             MinimumSize = new Size(604, 295);
             Name = "frmDFRTool";
+            StartPosition = FormStartPosition.CenterParent;
             Text = "DFRTool v1.1.1 (Compatible with 25.1 patcher)";
             tabCommand.ResumeLayout(false);
             tabCommand_Apply.ResumeLayout(false);
