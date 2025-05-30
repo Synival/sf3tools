@@ -120,6 +120,7 @@
             Controls.Add(labelSelectAChunk);
             Controls.Add(btnAction);
             Controls.Add(btnCancel);
+            FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             MaximizeBox = false;
             MinimizeBox = false;
             Name = "ManipulateChunkDialog";
