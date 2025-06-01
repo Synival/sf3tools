@@ -1,5 +1,5 @@
 ﻿namespace SF3.Editor.Forms {
-    partial class MovePostEOFPointersDialog {
+    partial class MovePostEOFX1DataDialog {
         /// <summary>
         /// Required designer variable.
         /// </summary>
@@ -56,17 +56,17 @@
             // 
             labelMoveBy.Anchor =  System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
             labelMoveBy.AutoSize = true;
-            labelMoveBy.Location = new System.Drawing.Point(108, 39);
+            labelMoveBy.Location = new System.Drawing.Point(125, 39);
             labelMoveBy.Name = "labelMoveBy";
-            labelMoveBy.Size = new System.Drawing.Size(102, 15);
+            labelMoveBy.Size = new System.Drawing.Size(82, 15);
             labelMoveBy.TabIndex = 9;
-            labelMoveBy.Text = "Move pointers by:";
+            labelMoveBy.Text = "Move data by:";
             labelMoveBy.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // btnCancel
             // 
             btnCancel.Anchor =  System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right;
-            btnCancel.Location = new System.Drawing.Point(260, 453);
+            btnCancel.Location = new System.Drawing.Point(260, 437);
             btnCancel.Name = "btnCancel";
             btnCancel.Size = new System.Drawing.Size(75, 23);
             btnCancel.TabIndex = 12;
@@ -77,7 +77,7 @@
             // btnMove
             // 
             btnMove.Anchor =  System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right;
-            btnMove.Location = new System.Drawing.Point(179, 453);
+            btnMove.Location = new System.Drawing.Point(179, 437);
             btnMove.Name = "btnMove";
             btnMove.Size = new System.Drawing.Size(75, 23);
             btnMove.TabIndex = 11;
@@ -108,7 +108,7 @@
             labelFirstAddrRAM.Text = "First post-EOF data address (RAM):";
             labelFirstAddrRAM.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // labelLastAddrRam
+            // labelLastAddrRAM
             // 
             labelLastAddrRAM.Anchor =  System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
             labelLastAddrRAM.AutoSize = true;
@@ -193,35 +193,35 @@
             // 
             labelFileEndRam.Anchor =  System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
             labelFileEndRam.AutoSize = true;
-            labelFileEndRam.Location = new System.Drawing.Point(122, 247);
+            labelFileEndRam.Location = new System.Drawing.Point(122, 353);
             labelFileEndRam.Name = "labelFileEndRam";
             labelFileEndRam.Size = new System.Drawing.Size(88, 15);
             labelFileEndRam.TabIndex = 14;
             labelFileEndRam.Text = "File end (RAM):";
             labelFileEndRam.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // tbFileEndRam
+            // tbFileEndRAM
             // 
             tbFileEndRAM.Anchor =  System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
-            tbFileEndRAM.BackColor = System.Drawing.SystemColors.Window;
+            tbFileEndRAM.BackColor = System.Drawing.SystemColors.Control;
+            tbFileEndRAM.Enabled = false;
             tbFileEndRAM.Font = new System.Drawing.Font("Courier New", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point,  0);
-            tbFileEndRAM.Location = new System.Drawing.Point(216, 244);
+            tbFileEndRAM.Location = new System.Drawing.Point(216, 350);
             tbFileEndRAM.MaxLength = 9;
-            tbFileEndRAM.Name = "tbFileEndRam";
+            tbFileEndRAM.Name = "tbFileEndRAM";
             tbFileEndRAM.Size = new System.Drawing.Size(119, 21);
-            tbFileEndRAM.TabIndex = 6;
+            tbFileEndRAM.TabIndex = 8;
             tbFileEndRAM.Text = "0";
-            tbFileEndRAM.TextChanged += tbFileEndRAM_TextChanged;
             // 
             // tbFreeSpaceBeforePostEOFData
             // 
             tbFreeSpaceBeforePostEOFData.Anchor =  System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
             tbFreeSpaceBeforePostEOFData.Font = new System.Drawing.Font("Courier New", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point,  0);
-            tbFreeSpaceBeforePostEOFData.Location = new System.Drawing.Point(216, 310);
+            tbFreeSpaceBeforePostEOFData.Location = new System.Drawing.Point(216, 204);
             tbFreeSpaceBeforePostEOFData.MaxLength = 9;
             tbFreeSpaceBeforePostEOFData.Name = "tbFreeSpaceBeforePostEOFData";
             tbFreeSpaceBeforePostEOFData.Size = new System.Drawing.Size(119, 21);
-            tbFreeSpaceBeforePostEOFData.TabIndex = 8;
+            tbFreeSpaceBeforePostEOFData.TabIndex = 5;
             tbFreeSpaceBeforePostEOFData.Text = "0";
             tbFreeSpaceBeforePostEOFData.TextChanged += tbFreeSpaceBeforePostEOFData_TextChanged;
             // 
@@ -229,7 +229,7 @@
             // 
             labelFreeSpace.Anchor =  System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
             labelFreeSpace.AutoSize = true;
-            labelFreeSpace.Location = new System.Drawing.Point(85, 305);
+            labelFreeSpace.Location = new System.Drawing.Point(85, 199);
             labelFreeSpace.Name = "labelFreeSpace";
             labelFreeSpace.Size = new System.Drawing.Size(122, 30);
             labelFreeSpace.TabIndex = 15;
@@ -249,21 +249,21 @@
             // tbFileEndFile
             // 
             tbFileEndFile.Anchor =  System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
-            tbFileEndFile.BackColor = System.Drawing.SystemColors.Window;
+            tbFileEndFile.BackColor = System.Drawing.SystemColors.Control;
+            tbFileEndFile.Enabled = false;
             tbFileEndFile.Font = new System.Drawing.Font("Courier New", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point,  0);
-            tbFileEndFile.Location = new System.Drawing.Point(216, 271);
+            tbFileEndFile.Location = new System.Drawing.Point(216, 377);
             tbFileEndFile.MaxLength = 9;
             tbFileEndFile.Name = "tbFileEndFile";
             tbFileEndFile.Size = new System.Drawing.Size(119, 21);
-            tbFileEndFile.TabIndex = 7;
+            tbFileEndFile.TabIndex = 9;
             tbFileEndFile.Text = "0";
-            tbFileEndFile.TextChanged += tbFileEndFile_TextChanged;
             // 
             // labelFileEndFile
             // 
             labelFileEndFile.Anchor =  System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
             labelFileEndFile.AutoSize = true;
-            labelFileEndFile.Location = new System.Drawing.Point(174, 274);
+            labelFileEndFile.Location = new System.Drawing.Point(174, 380);
             labelFileEndFile.Name = "labelFileEndFile";
             labelFileEndFile.Size = new System.Drawing.Size(36, 15);
             labelFileEndFile.TabIndex = 18;
@@ -276,18 +276,18 @@
             tbFileStartRam.BackColor = System.Drawing.SystemColors.Control;
             tbFileStartRam.Enabled = false;
             tbFileStartRam.Font = new System.Drawing.Font("Courier New", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point,  0);
-            tbFileStartRam.Location = new System.Drawing.Point(216, 217);
+            tbFileStartRam.Location = new System.Drawing.Point(216, 323);
             tbFileStartRam.MaxLength = 9;
             tbFileStartRam.Name = "tbFileStartRam";
             tbFileStartRam.Size = new System.Drawing.Size(119, 21);
-            tbFileStartRam.TabIndex = 5;
+            tbFileStartRam.TabIndex = 7;
             tbFileStartRam.Text = "0";
             // 
             // label1
             // 
             label1.Anchor =  System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
             label1.AutoSize = true;
-            label1.Location = new System.Drawing.Point(119, 220);
+            label1.Location = new System.Drawing.Point(119, 326);
             label1.Name = "label1";
             label1.Size = new System.Drawing.Size(91, 15);
             label1.TabIndex = 20;
@@ -311,7 +311,7 @@
             tbLimitRAM.BackColor = System.Drawing.SystemColors.Control;
             tbLimitRAM.Enabled = false;
             tbLimitRAM.Font = new System.Drawing.Font("Courier New", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point,  0);
-            tbLimitRAM.Location = new System.Drawing.Point(216, 421);
+            tbLimitRAM.Location = new System.Drawing.Point(216, 403);
             tbLimitRAM.MaxLength = 9;
             tbLimitRAM.Name = "tbLimitRAM";
             tbLimitRAM.Size = new System.Drawing.Size(119, 21);
@@ -322,7 +322,7 @@
             // 
             labelX1Limit.Anchor =  System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
             labelX1Limit.AutoSize = true;
-            labelX1Limit.Location = new System.Drawing.Point(28, 424);
+            labelX1Limit.Location = new System.Drawing.Point(31, 406);
             labelX1Limit.Name = "labelX1Limit";
             labelX1Limit.Size = new System.Drawing.Size(179, 15);
             labelX1Limit.TabIndex = 23;
@@ -333,11 +333,11 @@
             // 
             tbFreeSpaceBeforeLimit.Anchor =  System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
             tbFreeSpaceBeforeLimit.Font = new System.Drawing.Font("Courier New", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point,  0);
-            tbFreeSpaceBeforeLimit.Location = new System.Drawing.Point(216, 349);
+            tbFreeSpaceBeforeLimit.Location = new System.Drawing.Point(216, 243);
             tbFreeSpaceBeforeLimit.MaxLength = 9;
             tbFreeSpaceBeforeLimit.Name = "tbFreeSpaceBeforeLimit";
             tbFreeSpaceBeforeLimit.Size = new System.Drawing.Size(119, 21);
-            tbFreeSpaceBeforeLimit.TabIndex = 9;
+            tbFreeSpaceBeforeLimit.TabIndex = 6;
             tbFreeSpaceBeforeLimit.Text = "0";
             tbFreeSpaceBeforeLimit.TextChanged += tbFreeSpaceBeforeLimit_TextChanged;
             // 
@@ -345,11 +345,11 @@
             // 
             labelFreeSpaceBeforeLimit.Anchor =  System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
             labelFreeSpaceBeforeLimit.AutoSize = true;
-            labelFreeSpaceBeforeLimit.Location = new System.Drawing.Point(22, 344);
+            labelFreeSpaceBeforeLimit.Location = new System.Drawing.Point(22, 238);
             labelFreeSpaceBeforeLimit.Name = "labelFreeSpaceBeforeLimit";
             labelFreeSpaceBeforeLimit.Size = new System.Drawing.Size(188, 30);
             labelFreeSpaceBeforeLimit.TabIndex = 25;
-            labelFreeSpaceBeforeLimit.Text = "Free space after last post-EOF data\r\nbefore X1 limit / start of next file:*";
+            labelFreeSpaceBeforeLimit.Text = "Free space after last post-EOF data\r\nbefore X1 limit / start of next file*:";
             labelFreeSpaceBeforeLimit.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // label2
@@ -357,20 +357,20 @@
             label2.Anchor =  System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
             label2.AutoSize = true;
             label2.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            label2.Location = new System.Drawing.Point(12, 382);
+            label2.Location = new System.Drawing.Point(40, 278);
             label2.Name = "label2";
             label2.Size = new System.Drawing.Size(275, 30);
             label2.TabIndex = 26;
             label2.Text = "(* doesn't account for length of last post-EOF data,\r\n  which is unknown)";
             label2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // MovePostEOFPointersDialog
+            // MovePostEOFX1DataDialog
             // 
             AcceptButton = btnMove;
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             CancelButton = btnCancel;
-            ClientSize = new System.Drawing.Size(347, 488);
+            ClientSize = new System.Drawing.Size(347, 472);
             Controls.Add(label2);
             Controls.Add(labelFreeSpaceBeforeLimit);
             Controls.Add(tbFreeSpaceBeforeLimit);
@@ -401,9 +401,9 @@
             FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             MaximizeBox = false;
             MinimizeBox = false;
-            Name = "MovePostEOFPointersDialog";
+            Name = "MovePostEOFX1DataDialog";
             StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            Text = "Move Post-EOF X1 Pointers";
+            Text = "Move Post-EOF X1 Data";
             ResumeLayout(false);
             PerformLayout();
         }
@@ -411,7 +411,6 @@
         #endregion
 
         private System.Windows.Forms.Label labelMoveBy;
-        private System.Windows.Forms.Label labelRamAddress;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Button btnMove;
         private System.Windows.Forms.TextBox tbMoveBy;

@@ -580,15 +580,15 @@ namespace SF3.Editor.Forms {
             // tsmiX1_MovePostEOFPointers
             // 
             tsmiX1_MovePostEOFPointers.Name = "tsmiX1_MovePostEOFPointers";
-            tsmiX1_MovePostEOFPointers.Size = new Size(227, 22);
-            tsmiX1_MovePostEOFPointers.Text = "&Move Post-EOF X1 Pointers...";
+            tsmiX1_MovePostEOFPointers.Size = new Size(208, 22);
+            tsmiX1_MovePostEOFPointers.Text = "&Move Post-EOF X1 Data...";
             tsmiX1_MovePostEOFPointers.Click += tsmiX1_MovePostEOFPointers_Click;
             // 
             // tsmiX1_AddZeroes
             // 
             tsmiX1_AddZeroes.Enabled = false;
             tsmiX1_AddZeroes.Name = "tsmiX1_AddZeroes";
-            tsmiX1_AddZeroes.Size = new Size(227, 22);
+            tsmiX1_AddZeroes.Size = new Size(208, 22);
             tsmiX1_AddZeroes.Text = "Add &Zeroes...";
             tsmiX1_AddZeroes.Click += tsmiX1_AddZeroes_Click;
             // 
