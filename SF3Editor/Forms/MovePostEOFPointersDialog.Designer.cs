@@ -26,18 +26,18 @@
             labelMoveBy = new System.Windows.Forms.Label();
             btnCancel = new System.Windows.Forms.Button();
             btnMove = new System.Windows.Forms.Button();
-            tbMoveByHex = new System.Windows.Forms.TextBox();
-            labelFirstAddrRam = new System.Windows.Forms.Label();
-            labelLastAddrRam = new System.Windows.Forms.Label();
-            tbFirstAddrRam = new System.Windows.Forms.TextBox();
-            tbLastAddrRam = new System.Windows.Forms.TextBox();
+            tbMoveBy = new System.Windows.Forms.TextBox();
+            labelFirstAddrRAM = new System.Windows.Forms.Label();
+            labelLastAddrRAM = new System.Windows.Forms.Label();
+            tbFirstAddrRAM = new System.Windows.Forms.TextBox();
+            tbLastAddrRAM = new System.Windows.Forms.TextBox();
             tbFirstAddrFile = new System.Windows.Forms.TextBox();
             tbLastAddrFile = new System.Windows.Forms.TextBox();
             labelLastAddrFile = new System.Windows.Forms.Label();
             labelFirstAddrFile = new System.Windows.Forms.Label();
             labelFileEndRam = new System.Windows.Forms.Label();
-            tbFileEndRam = new System.Windows.Forms.TextBox();
-            tbFreeSpace = new System.Windows.Forms.TextBox();
+            tbFileEndRAM = new System.Windows.Forms.TextBox();
+            tbFreeSpaceBeforePostEOFData = new System.Windows.Forms.TextBox();
             labelFreeSpace = new System.Windows.Forms.Label();
             labelValuesInHex = new System.Windows.Forms.Label();
             tbFileEndFile = new System.Windows.Forms.TextBox();
@@ -45,7 +45,7 @@
             tbFileStartRam = new System.Windows.Forms.TextBox();
             label1 = new System.Windows.Forms.Label();
             labelChangeAnyValue = new System.Windows.Forms.Label();
-            tbX1Limit = new System.Windows.Forms.TextBox();
+            tbLimitRAM = new System.Windows.Forms.TextBox();
             labelX1Limit = new System.Windows.Forms.Label();
             tbFreeSpaceBeforeLimit = new System.Windows.Forms.TextBox();
             labelFreeSpaceBeforeLimit = new System.Windows.Forms.Label();
@@ -85,63 +85,63 @@
             btnMove.UseVisualStyleBackColor = true;
             btnMove.Click += btnMove_Click;
             // 
-            // tbMoveByHex
+            // tbMoveBy
             // 
-            tbMoveByHex.Anchor =  System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
-            tbMoveByHex.Font = new System.Drawing.Font("Courier New", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point,  0);
-            tbMoveByHex.Location = new System.Drawing.Point(216, 36);
-            tbMoveByHex.MaxLength = 9;
-            tbMoveByHex.Name = "tbMoveByHex";
-            tbMoveByHex.Size = new System.Drawing.Size(119, 21);
-            tbMoveByHex.TabIndex = 0;
-            tbMoveByHex.Text = "0";
-            tbMoveByHex.TextChanged += tbMoveByHex_TextChanged;
+            tbMoveBy.Anchor =  System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
+            tbMoveBy.Font = new System.Drawing.Font("Courier New", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point,  0);
+            tbMoveBy.Location = new System.Drawing.Point(216, 36);
+            tbMoveBy.MaxLength = 9;
+            tbMoveBy.Name = "tbMoveBy";
+            tbMoveBy.Size = new System.Drawing.Size(119, 21);
+            tbMoveBy.TabIndex = 0;
+            tbMoveBy.Text = "0";
+            tbMoveBy.TextChanged += tbMoveBy_TextChanged;
             // 
-            // labelFirstAddrRam
+            // labelFirstAddrRAM
             // 
-            labelFirstAddrRam.Anchor =  System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
-            labelFirstAddrRam.AutoSize = true;
-            labelFirstAddrRam.Location = new System.Drawing.Point(20, 81);
-            labelFirstAddrRam.Name = "labelFirstAddrRam";
-            labelFirstAddrRam.Size = new System.Drawing.Size(190, 15);
-            labelFirstAddrRam.TabIndex = 10;
-            labelFirstAddrRam.Text = "First post-EOF data address (RAM):";
-            labelFirstAddrRam.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            labelFirstAddrRAM.Anchor =  System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
+            labelFirstAddrRAM.AutoSize = true;
+            labelFirstAddrRAM.Location = new System.Drawing.Point(20, 81);
+            labelFirstAddrRAM.Name = "labelFirstAddrRAM";
+            labelFirstAddrRAM.Size = new System.Drawing.Size(190, 15);
+            labelFirstAddrRAM.TabIndex = 10;
+            labelFirstAddrRAM.Text = "First post-EOF data address (RAM):";
+            labelFirstAddrRAM.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // labelLastAddrRam
             // 
-            labelLastAddrRam.Anchor =  System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
-            labelLastAddrRam.AutoSize = true;
-            labelLastAddrRam.Location = new System.Drawing.Point(18, 151);
-            labelLastAddrRam.Name = "labelLastAddrRam";
-            labelLastAddrRam.Size = new System.Drawing.Size(189, 15);
-            labelLastAddrRam.TabIndex = 12;
-            labelLastAddrRam.Text = "Last post-EOF data address (RAM):";
-            labelLastAddrRam.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            labelLastAddrRAM.Anchor =  System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
+            labelLastAddrRAM.AutoSize = true;
+            labelLastAddrRAM.Location = new System.Drawing.Point(18, 151);
+            labelLastAddrRAM.Name = "labelLastAddrRAM";
+            labelLastAddrRAM.Size = new System.Drawing.Size(189, 15);
+            labelLastAddrRAM.TabIndex = 12;
+            labelLastAddrRAM.Text = "Last post-EOF data address (RAM):";
+            labelLastAddrRAM.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // tbFirstAddrRam
+            // tbFirstAddrRAM
             // 
-            tbFirstAddrRam.Anchor =  System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
-            tbFirstAddrRam.Font = new System.Drawing.Font("Courier New", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point,  0);
-            tbFirstAddrRam.Location = new System.Drawing.Point(216, 78);
-            tbFirstAddrRam.MaxLength = 9;
-            tbFirstAddrRam.Name = "tbFirstAddrRam";
-            tbFirstAddrRam.Size = new System.Drawing.Size(119, 21);
-            tbFirstAddrRam.TabIndex = 1;
-            tbFirstAddrRam.Text = "0";
-            tbFirstAddrRam.TextChanged += tbFirstAddrRam_TextChanged;
+            tbFirstAddrRAM.Anchor =  System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
+            tbFirstAddrRAM.Font = new System.Drawing.Font("Courier New", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point,  0);
+            tbFirstAddrRAM.Location = new System.Drawing.Point(216, 78);
+            tbFirstAddrRAM.MaxLength = 9;
+            tbFirstAddrRAM.Name = "tbFirstAddrRAM";
+            tbFirstAddrRAM.Size = new System.Drawing.Size(119, 21);
+            tbFirstAddrRAM.TabIndex = 1;
+            tbFirstAddrRAM.Text = "0";
+            tbFirstAddrRAM.TextChanged += tbFirstAddrRAM_TextChanged;
             // 
-            // tbLastAddrRam
+            // tbLastAddrRAM
             // 
-            tbLastAddrRam.Anchor =  System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
-            tbLastAddrRam.Font = new System.Drawing.Font("Courier New", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point,  0);
-            tbLastAddrRam.Location = new System.Drawing.Point(216, 148);
-            tbLastAddrRam.MaxLength = 9;
-            tbLastAddrRam.Name = "tbLastAddrRam";
-            tbLastAddrRam.Size = new System.Drawing.Size(119, 21);
-            tbLastAddrRam.TabIndex = 3;
-            tbLastAddrRam.Text = "0";
-            tbLastAddrRam.TextChanged += tbLastAddrRam_TextChanged;
+            tbLastAddrRAM.Anchor =  System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
+            tbLastAddrRAM.Font = new System.Drawing.Font("Courier New", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point,  0);
+            tbLastAddrRAM.Location = new System.Drawing.Point(216, 148);
+            tbLastAddrRAM.MaxLength = 9;
+            tbLastAddrRAM.Name = "tbLastAddrRAM";
+            tbLastAddrRAM.Size = new System.Drawing.Size(119, 21);
+            tbLastAddrRAM.TabIndex = 3;
+            tbLastAddrRAM.Text = "0";
+            tbLastAddrRAM.TextChanged += tbLastAddrRAM_TextChanged;
             // 
             // tbFirstAddrFile
             // 
@@ -202,28 +202,28 @@
             // 
             // tbFileEndRam
             // 
-            tbFileEndRam.Anchor =  System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
-            tbFileEndRam.BackColor = System.Drawing.SystemColors.Window;
-            tbFileEndRam.Font = new System.Drawing.Font("Courier New", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point,  0);
-            tbFileEndRam.Location = new System.Drawing.Point(216, 244);
-            tbFileEndRam.MaxLength = 9;
-            tbFileEndRam.Name = "tbFileEndRam";
-            tbFileEndRam.Size = new System.Drawing.Size(119, 21);
-            tbFileEndRam.TabIndex = 6;
-            tbFileEndRam.Text = "0";
-            tbFileEndRam.TextChanged += tbFileEndRam_TextChanged;
+            tbFileEndRAM.Anchor =  System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
+            tbFileEndRAM.BackColor = System.Drawing.SystemColors.Window;
+            tbFileEndRAM.Font = new System.Drawing.Font("Courier New", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point,  0);
+            tbFileEndRAM.Location = new System.Drawing.Point(216, 244);
+            tbFileEndRAM.MaxLength = 9;
+            tbFileEndRAM.Name = "tbFileEndRam";
+            tbFileEndRAM.Size = new System.Drawing.Size(119, 21);
+            tbFileEndRAM.TabIndex = 6;
+            tbFileEndRAM.Text = "0";
+            tbFileEndRAM.TextChanged += tbFileEndRAM_TextChanged;
             // 
-            // tbFreeSpace
+            // tbFreeSpaceBeforePostEOFData
             // 
-            tbFreeSpace.Anchor =  System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
-            tbFreeSpace.Font = new System.Drawing.Font("Courier New", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point,  0);
-            tbFreeSpace.Location = new System.Drawing.Point(216, 310);
-            tbFreeSpace.MaxLength = 9;
-            tbFreeSpace.Name = "tbFreeSpace";
-            tbFreeSpace.Size = new System.Drawing.Size(119, 21);
-            tbFreeSpace.TabIndex = 8;
-            tbFreeSpace.Text = "0";
-            tbFreeSpace.TextChanged += tbFreeSpace_TextChanged;
+            tbFreeSpaceBeforePostEOFData.Anchor =  System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
+            tbFreeSpaceBeforePostEOFData.Font = new System.Drawing.Font("Courier New", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point,  0);
+            tbFreeSpaceBeforePostEOFData.Location = new System.Drawing.Point(216, 310);
+            tbFreeSpaceBeforePostEOFData.MaxLength = 9;
+            tbFreeSpaceBeforePostEOFData.Name = "tbFreeSpaceBeforePostEOFData";
+            tbFreeSpaceBeforePostEOFData.Size = new System.Drawing.Size(119, 21);
+            tbFreeSpaceBeforePostEOFData.TabIndex = 8;
+            tbFreeSpaceBeforePostEOFData.Text = "0";
+            tbFreeSpaceBeforePostEOFData.TextChanged += tbFreeSpaceBeforePostEOFData_TextChanged;
             // 
             // labelFreeSpace
             // 
@@ -305,18 +305,18 @@
             labelChangeAnyValue.TabIndex = 21;
             labelChangeAnyValue.Text = "(Changing one field updates all)";
             // 
-            // tbX1Limit
+            // tbLimitRAM
             // 
-            tbX1Limit.Anchor =  System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
-            tbX1Limit.BackColor = System.Drawing.SystemColors.Control;
-            tbX1Limit.Enabled = false;
-            tbX1Limit.Font = new System.Drawing.Font("Courier New", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point,  0);
-            tbX1Limit.Location = new System.Drawing.Point(216, 421);
-            tbX1Limit.MaxLength = 9;
-            tbX1Limit.Name = "tbX1Limit";
-            tbX1Limit.Size = new System.Drawing.Size(119, 21);
-            tbX1Limit.TabIndex = 10;
-            tbX1Limit.Text = "0";
+            tbLimitRAM.Anchor =  System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
+            tbLimitRAM.BackColor = System.Drawing.SystemColors.Control;
+            tbLimitRAM.Enabled = false;
+            tbLimitRAM.Font = new System.Drawing.Font("Courier New", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point,  0);
+            tbLimitRAM.Location = new System.Drawing.Point(216, 421);
+            tbLimitRAM.MaxLength = 9;
+            tbLimitRAM.Name = "tbLimitRAM";
+            tbLimitRAM.Size = new System.Drawing.Size(119, 21);
+            tbLimitRAM.TabIndex = 10;
+            tbLimitRAM.Text = "0";
             // 
             // labelX1Limit
             // 
@@ -375,7 +375,7 @@
             Controls.Add(labelFreeSpaceBeforeLimit);
             Controls.Add(tbFreeSpaceBeforeLimit);
             Controls.Add(labelX1Limit);
-            Controls.Add(tbX1Limit);
+            Controls.Add(tbLimitRAM);
             Controls.Add(labelChangeAnyValue);
             Controls.Add(tbFileStartRam);
             Controls.Add(label1);
@@ -383,18 +383,18 @@
             Controls.Add(labelFileEndFile);
             Controls.Add(labelValuesInHex);
             Controls.Add(labelFreeSpace);
-            Controls.Add(tbFreeSpace);
-            Controls.Add(tbFileEndRam);
+            Controls.Add(tbFreeSpaceBeforePostEOFData);
+            Controls.Add(tbFileEndRAM);
             Controls.Add(labelFileEndRam);
             Controls.Add(labelFirstAddrFile);
             Controls.Add(labelLastAddrFile);
             Controls.Add(tbLastAddrFile);
             Controls.Add(tbFirstAddrFile);
-            Controls.Add(tbLastAddrRam);
-            Controls.Add(tbFirstAddrRam);
-            Controls.Add(labelLastAddrRam);
-            Controls.Add(labelFirstAddrRam);
-            Controls.Add(tbMoveByHex);
+            Controls.Add(tbLastAddrRAM);
+            Controls.Add(tbFirstAddrRAM);
+            Controls.Add(labelLastAddrRAM);
+            Controls.Add(labelFirstAddrRAM);
+            Controls.Add(tbMoveBy);
             Controls.Add(btnMove);
             Controls.Add(btnCancel);
             Controls.Add(labelMoveBy);
@@ -414,18 +414,18 @@
         private System.Windows.Forms.Label labelRamAddress;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Button btnMove;
-        private System.Windows.Forms.TextBox tbMoveByHex;
-        private System.Windows.Forms.Label labelFirstAddrRam;
-        private System.Windows.Forms.Label labelLastAddrRam;
-        private System.Windows.Forms.TextBox tbFirstAddrRam;
-        private System.Windows.Forms.TextBox tbLastAddrRam;
+        private System.Windows.Forms.TextBox tbMoveBy;
+        private System.Windows.Forms.Label labelFirstAddrRAM;
+        private System.Windows.Forms.Label labelLastAddrRAM;
+        private System.Windows.Forms.TextBox tbFirstAddrRAM;
+        private System.Windows.Forms.TextBox tbLastAddrRAM;
         private System.Windows.Forms.TextBox tbFirstAddrFile;
         private System.Windows.Forms.TextBox tbLastAddrFile;
         private System.Windows.Forms.Label labelLastAddrFile;
         private System.Windows.Forms.Label labelFirstAddrFile;
         private System.Windows.Forms.Label labelFileEndRam;
-        private System.Windows.Forms.TextBox tbFileEndRam;
-        private System.Windows.Forms.TextBox tbFreeSpace;
+        private System.Windows.Forms.TextBox tbFileEndRAM;
+        private System.Windows.Forms.TextBox tbFreeSpaceBeforePostEOFData;
         private System.Windows.Forms.Label labelFreeSpace;
         private System.Windows.Forms.Label labelValuesInHex;
         private System.Windows.Forms.TextBox tbFileEndFile;
@@ -433,7 +433,7 @@
         private System.Windows.Forms.TextBox tbFileStartRam;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label labelChangeAnyValue;
-        private System.Windows.Forms.TextBox tbX1Limit;
+        private System.Windows.Forms.TextBox tbLimitRAM;
         private System.Windows.Forms.Label labelX1Limit;
         private System.Windows.Forms.TextBox tbFreeSpaceBeforeLimit;
         private System.Windows.Forms.Label labelFreeSpaceBeforeLimit;
