@@ -56,11 +56,11 @@
             // 
             labelMoveBy.Anchor =  System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
             labelMoveBy.AutoSize = true;
-            labelMoveBy.Location = new System.Drawing.Point(125, 39);
+            labelMoveBy.Location = new System.Drawing.Point(54, 36);
             labelMoveBy.Name = "labelMoveBy";
-            labelMoveBy.Size = new System.Drawing.Size(82, 15);
+            labelMoveBy.Size = new System.Drawing.Size(156, 30);
             labelMoveBy.TabIndex = 9;
-            labelMoveBy.Text = "Move data by:";
+            labelMoveBy.Text = "Move data by:\r\n(must be in increments of 4)";
             labelMoveBy.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // btnCancel

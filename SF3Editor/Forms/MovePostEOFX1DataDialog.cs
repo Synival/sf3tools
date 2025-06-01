@@ -3,6 +3,7 @@ using System.Drawing;
 using System.Globalization;
 using System.Windows.Forms;
 using CommonLib.Discovery;
+using CommonLib.Win.Utils;
 using SF3.Models.Files.X1;
 using static CommonLib.Utils.ValueUtils;
 
@@ -44,8 +45,10 @@ namespace SF3.Editor.Forms {
         }
 
         private void btnMove_Click(object sender, EventArgs e) {
-            if (HasErrors)
+            if (HasErrors) {
+                MessageUtils.WarningMessage("Some fields have errors. Please correct them and try again."); 
                 return;
+            }
 
             DialogResult = DialogResult.OK;
             Close();
@@ -63,11 +66,11 @@ namespace SF3.Editor.Forms {
         private void UpdateTextBoxes() {
             bool hasErrors = false;
 
-            void UpdateTextBox(TextBox tb, int addr, int? min, int? max) {
+            void UpdateTextBox(TextBox tb, int addr, int? min, int? max, bool enforceAlignment = false) {
                 if (!tb.Focused)
                     tb.Text = SignedHexStr(addr, "X", withPrefix: false);
 
-                if ((min.HasValue && addr < min.Value) || (max.HasValue && addr > max)) {
+                if ((min.HasValue && addr < min.Value) || (max.HasValue && addr > max) || enforceAlignment && (addr & 0x03) != 0) {
                     tb.ForeColor = Color.Red;
                     hasErrors = true;
                 }
@@ -77,7 +80,7 @@ namespace SF3.Editor.Forms {
 
             var moveBy = MoveBy;
 
-            UpdateTextBox(tbMoveBy,                     moveBy, null, null);
+            UpdateTextBox(tbMoveBy,                     moveBy, null, null, enforceAlignment: true);
             UpdateTextBox(tbFirstAddrRAM,               FirstAddrRAM + moveBy, FileEndRAM, LimitRAM);
             UpdateTextBox(tbFirstAddrFile,              FirstAddrFile + moveBy, FileEndFile, LimitFile);
             UpdateTextBox(tbLastAddrRAM,                LastAddrRAM + moveBy, FileEndRAM, LimitRAM);
