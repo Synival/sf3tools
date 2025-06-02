@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using SF3.Models.Tables.Shared;
 using SF3.Models.Tables.X014;
 
 namespace SF3.Models.Files.X014 {
@@ -6,6 +7,9 @@ namespace SF3.Models.Files.X014 {
         CharacterBattleModelsSc1Table CharacterBattleModelsSc1Table { get; }
         CharacterBattleModelsSc2Table CharacterBattleModelsSc2Table { get; }
         CharacterBattleModelsSc3Table CharacterBattleModelsSc3Table { get; }
+        FileIdTable EnemyBattleModelSc1Table { get; }
+        FileIdTable SpellAnimationSc1Table { get; }
+        FileIdTable SpecialAnimationSc1Table { get; }
         MPDBattleSceneIdTable MPDBattleSceneIdTable { get; }
         MPDBattleSceneInfoTable MPDBattleSceneInfoTable { get; }
         Dictionary<int, TerrainBasedBattleSceneTable> TerrainBasedBattleSceneTablesByRamAddress { get; }

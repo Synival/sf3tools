@@ -3,11 +3,11 @@ using SF3.ByteData;
 using SF3.Types;
 
 namespace SF3.Models.Structs.X014 {
-    public class CharacterBattleSc2Models : Struct {
+    public class CharacterBattleModelsSc2 : Struct {
         private readonly int _modelFileIdAddr;
         private readonly int _modelIndicesAddr;
 
-        public CharacterBattleSc2Models(IByteData data, int id, string name, int address) : base(data, id, name, address, 0x08) {
+        public CharacterBattleModelsSc2(IByteData data, int id, string name, int address) : base(data, id, name, address, 0x08) {
             _modelFileIdAddr  = Address + 0x00; // 4 bytes
             _modelIndicesAddr = Address + 0x04; // 4 bytes (8 "nibbles")
         }

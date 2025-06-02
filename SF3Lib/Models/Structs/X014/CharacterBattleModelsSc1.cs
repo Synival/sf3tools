@@ -3,7 +3,7 @@ using SF3.ByteData;
 using SF3.Types;
 
 namespace SF3.Models.Structs.X014 {
-    public class CharacterBattleSc1Models : Struct {
+    public class CharacterBattleModelsSc1 : Struct {
         private readonly int _modelUWp1FileIdAddr;
         private readonly int _modelUWp2FileIdAddr;
         private readonly int _modelUWp3FileIdAddr;
@@ -13,7 +13,7 @@ namespace SF3.Models.Structs.X014 {
         private readonly int _modelPWp3FileIdAddr;
         private readonly int _modelPWp4FileIdAddr;
 
-        public CharacterBattleSc1Models(IByteData data, int id, string name, int address) : base(data, id, name, address, 0x20) {
+        public CharacterBattleModelsSc1(IByteData data, int id, string name, int address) : base(data, id, name, address, 0x20) {
             _modelUWp1FileIdAddr = Address + 0x00; // 4 bytes
             _modelUWp2FileIdAddr = Address + 0x04; // 4 bytes
             _modelUWp3FileIdAddr = Address + 0x08; // 4 bytes

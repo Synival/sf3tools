@@ -3,7 +3,7 @@ using SF3.ByteData;
 using SF3.Models.Structs.X014;
 
 namespace SF3.Models.Tables.X014 {
-    public class CharacterBattleModelsSc2Table : ResourceTable<CharacterBattleSc2Models> {
+    public class CharacterBattleModelsSc2Table : ResourceTable<CharacterBattleModelsSc2> {
         protected CharacterBattleModelsSc2Table(IByteData data, string name, string resourceFile, int address) : base(data, name, resourceFile, address, 0x100) {
         }
 
@@ -15,6 +15,6 @@ namespace SF3.Models.Tables.X014 {
         }
 
         public override bool Load()
-            => Load((id, name, address) => new CharacterBattleSc2Models(Data, id, name, address));
+            => Load((id, name, address) => new CharacterBattleModelsSc2(Data, id, name, address));
     }
 }
