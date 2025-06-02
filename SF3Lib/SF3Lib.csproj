@@ -28,6 +28,8 @@
     <None Remove="Resources\S2\SpellAnimations.xml" />
     <None Remove="Resources\S2\Sprites.xml" />
     <None Remove="Resources\S3\Music.xml" />
+    <None Remove="Resources\S3\SpecialAnimations.xml" />
+    <None Remove="Resources\S3\SpellAnimations.xml" />
     <None Remove="Resources\S3\Sprites.xml" />
     <None Remove="Resources\SpellTargets.xml" />
   </ItemGroup>
@@ -87,6 +89,12 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\S3\Music.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\S3\SpecialAnimations.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\S3\SpellAnimations.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\S3\Sprites.xml">
