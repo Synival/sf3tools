@@ -24,6 +24,8 @@
     <None Remove="Resources\S1\SpellAnimations.xml" />
     <None Remove="Resources\S1\Sprites.xml" />
     <None Remove="Resources\S2\Music.xml" />
+    <None Remove="Resources\S2\SpecialAnimations.xml" />
+    <None Remove="Resources\S2\SpellAnimations.xml" />
     <None Remove="Resources\S2\Sprites.xml" />
     <None Remove="Resources\S3\Music.xml" />
     <None Remove="Resources\S3\Sprites.xml" />
@@ -73,6 +75,12 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\S2\Music.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\S2\SpecialAnimations.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\S2\SpellAnimations.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\S2\Sprites.xml">

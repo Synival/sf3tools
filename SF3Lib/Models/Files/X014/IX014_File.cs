@@ -8,8 +8,8 @@ namespace SF3.Models.Files.X014 {
         CharacterBattleModelsSc2Table CharacterBattleModelsSc2Table { get; }
         CharacterBattleModelsSc3Table CharacterBattleModelsSc3Table { get; }
         FileIdTable EnemyBattleModelSc1Table { get; }
-        FileIdTable SpellAnimationSc1Table { get; }
-        FileIdTable SpecialAnimationSc1Table { get; }
+        FileIdTable SpellAnimationTable { get; }
+        FileIdTable SpecialAnimationTable { get; }
         MPDBattleSceneIdTable MPDBattleSceneIdTable { get; }
         MPDBattleSceneInfoTable MPDBattleSceneInfoTable { get; }
         Dictionary<int, TerrainBasedBattleSceneTable> TerrainBasedBattleSceneTablesByRamAddress { get; }
