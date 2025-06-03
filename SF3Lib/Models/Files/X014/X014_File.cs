@@ -48,8 +48,9 @@ namespace SF3.Models.Files.X014 {
 
         private uint GetSpellAnimationSc3TableAddr() {
             switch (Scenario) {
-                case ScenarioType.Scenario3: return 0x130D0u;
-                default:                     return 0;
+                case ScenarioType.Scenario3:   return 0x130D0u;
+                case ScenarioType.PremiumDisk: return 0x131B0u;
+                default:                       return 0;
             }
         }
 
@@ -63,8 +64,9 @@ namespace SF3.Models.Files.X014 {
 
         private uint GetSpecialAnimationSc3TableAddr() {
             switch (Scenario) {
-                case ScenarioType.Scenario3: return 0x13164u;
-                default:                     return 0;
+                case ScenarioType.Scenario3:   return 0x13164u;
+                case ScenarioType.PremiumDisk: return 0x1324Cu;
+                default:                       return 0;
             }
         }
 
@@ -82,14 +84,10 @@ namespace SF3.Models.Files.X014 {
         private uint GetMPDBattleSceneInfoTableAddr() {
             switch (Scenario) {
             // These tables work differently (worse) in Scenario 1
-            case ScenarioType.Scenario2:
-                return IsScn2V2 ? 0x119A0u : 0x11A00u;
-            case ScenarioType.Scenario3:
-                return 0x11EDC;
-            case ScenarioType.PremiumDisk:
-                return 0x12110;
-            default:
-                return 0;
+            case ScenarioType.Scenario2:   return IsScn2V2 ? 0x119A0u : 0x11A00u;
+            case ScenarioType.Scenario3:   return 0x11EDC;
+            case ScenarioType.PremiumDisk: return 0x12110;
+            default:                       return 0;
             }
         }
 

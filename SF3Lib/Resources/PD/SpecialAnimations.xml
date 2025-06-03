@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<items>
+    <item value="0x00" name="SpecialAnimation00" />
+    <item value="0x01" name="SpecialAnimation01" />
+    <item value="0x02" name="SpecialAnimation02" />
+    <item value="0x03" name="SpecialAnimation03" />
+    <item value="0x04" name="SpecialAnimation04" />
+    <item value="0x05" name="SpecialAnimation05" />
+    <item value="0x06" name="SpecialAnimation06" />
+    <item value="0x07" name="SpecialAnimation07" />
+    <item value="0x08" name="SpecialAnimation08" />
+    <item value="0x09" name="SpecialAnimation09" />
+    <item value="0x0A" name="SpecialAnimation10" />
+    <item value="0x0B" name="SpecialAnimation11" />
+    <item value="0x0C" name="SpecialAnimation12" />
+    <item value="0x0D" name="SpecialAnimation13" />
+    <item value="0x0E" name="SpecialAnimation14" />
+    <item value="0x0F" name="SpecialAnimation15" />
+    <item value="0x10" name="SpecialAnimation16" />
+    <item value="0x11" name="SpecialAnimation17" />
+    <item value="0x12" name="SpecialAnimation18" />
+    <item value="0x13" name="SpecialAnimation19" />
+    <item value="0x14" name="SpecialAnimation20" />
+    <item value="0x15" name="SpecialAnimation21" />
+    <item value="0x16" name="SpecialAnimation22" />
+    <item value="0x17" name="SpecialAnimation23" />
+    <item value="0x18" name="SpecialAnimation24" />
+    <item value="0x19" name="SpecialAnimation25" />
+    <item value="0x1A" name="SpecialAnimation26" />
+    <item value="0x1B" name="SpecialAnimation27" />
+    <item value="0x1C" name="SpecialAnimation28" />
+    <item value="0x1D" name="SpecialAnimation29" />
+    <item value="0x1E" name="SpecialAnimation30" />
+    <item value="0x1F" name="SpecialAnimation31" />
+    <item value="0x20" name="SpecialAnimation32" />
+    <item value="0x21" name="SpecialAnimation33" />
+    <item value="0x22" name="SpecialAnimation34" />
+    <item value="0x23" name="SpecialAnimation35" />
+    <item value="0x24" name="SpecialAnimation36" />
+    <item value="0x25" name="SpecialAnimation37" />
+</items>

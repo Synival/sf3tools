@@ -14,6 +14,8 @@
     <None Remove="Resources\FriendshipBonusTypeList.xml" />
     <None Remove="Resources\GameFlags.xml" />
     <None Remove="Resources\PD\Music.xml" />
+    <None Remove="Resources\PD\SpecialAnimations.xml" />
+    <None Remove="Resources\PD\SpellAnimations.xml" />
     <None Remove="Resources\PD\Sprites.xml" />
     <None Remove="Resources\S1\BattleScenesByBattle.xml" />
     <None Remove="Resources\S1\BattleScenesByTerrain.xml" />
@@ -47,6 +49,12 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\PD\Music.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\PD\SpecialAnimations.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\PD\SpellAnimations.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\PD\Sprites.xml">
