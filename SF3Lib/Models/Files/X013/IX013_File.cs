@@ -5,7 +5,7 @@ namespace SF3.Models.Files.X013 {
     public interface IX013_File : IScenarioTableFile {
         SignificantValues SignificantValues { get; }
         SpecialTable SpecialsTable { get; }
-        SpecialEffectTable SpecialEffectTable { get; }
+        SpecialStatusEffectTable SpecialStatusEffectTable { get; }
         SupportTypeTable SupportTypeTable { get; }
         SupportStatsTable SupportStatsTable { get; }
         SoulmateTable SoulmateTable { get; }

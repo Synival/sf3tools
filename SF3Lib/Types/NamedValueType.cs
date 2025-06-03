@@ -36,7 +36,7 @@ namespace SF3.Types {
         Sex,
         SpawnType,
         Special,
-        SpecialEffect,
+        SpecialStatusEffect,
         SpecialType,
         Spell,
         SpellTarget,

@@ -16,8 +16,8 @@ namespace SF3.Win.Views.X013 {
                 CreateChild(new DataModelView("Significant Values", Model.SignificantValues, ngc));
             if (Model.SpecialsTable != null)
                 CreateChild(new TableView("Specials", Model.SpecialsTable, ngc));
-            if (Model.SpecialEffectTable != null)
-                CreateChild(new TableView("Special Status Effects (Scn3+)", Model.SpecialEffectTable, ngc));
+            if (Model.SpecialStatusEffectTable != null)
+                CreateChild(new TableView("Special Status Effects (Scn3+)", Model.SpecialStatusEffectTable, ngc));
             if (Model.SoulmateTable != null)
                 CreateChild(new TableView("Soulmate Chances", Model.SoulmateTable, ngc));
             if (Model.SupportTypeTable != null)

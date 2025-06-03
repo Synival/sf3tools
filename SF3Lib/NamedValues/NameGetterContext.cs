@@ -75,7 +75,7 @@ namespace SF3.NamedValues {
                 { NamedValueType.Sex,                 new SubMethods((o, p, v, a) => new NameAndInfo(v, ValueNames.SexInfo)) },
                 { NamedValueType.SpawnType,           new SubMethods((o, p, v, a) => new NameAndInfo(v, ValueNames.SpawnTypeInfo)) },
                 { NamedValueType.Special,             new SubMethods((o, p, v, a) => new NameAndInfo(v, ValueNames.SpecialInfo.Info[Scenario])) },
-                { NamedValueType.SpecialEffect,       new SubMethods((o, p, v, a) => new NameAndInfo(v, ValueNames.SpecialEffectInfo)) },
+                { NamedValueType.SpecialStatusEffect, new SubMethods((o, p, v, a) => new NameAndInfo(v, ValueNames.SpecialStatusEffectInfo)) },
                 { NamedValueType.SpecialType,         new SubMethods((o, p, v, a) => new NameAndInfo(v, ValueNames.SpecialTypeInfo)) },
                 { NamedValueType.Spell,               new SubMethods((o, p, v, a) => new NameAndInfo(v, ValueNames.SpellInfo.Info[Scenario])) },
                 { NamedValueType.SpellTarget,         new SubMethods((o, p, v, a) => new NameAndInfo(v, ValueNames.SpellTargetInfo)) },

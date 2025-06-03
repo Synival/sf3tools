@@ -317,7 +317,7 @@
     <None Update="Resources\SpecialTypes.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Resources\SpecialEffects.xml">
+    <None Update="Resources\SpecialStatusEffects.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>

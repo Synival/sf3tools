@@ -146,7 +146,7 @@ namespace SF3.Models.Files.X013 {
             };
 
             if (specialEffectAddress >= 0)
-                tables.Add(SpecialEffectTable = SpecialEffectTable.Create(Data, "SpecialEffects", ResourceFile("SpecialEffects.xml"), specialEffectAddress));
+                tables.Add(SpecialStatusEffectTable = SpecialStatusEffectTable.Create(Data, nameof(SpecialStatusEffectTable), ResourceFile("SpecialStatusEffects.xml"), specialEffectAddress));
 
             SignificantValues = new SignificantValues(Data, 0, "SignificantValues",
                 critModAddress, specialChanceAddress, expLimitAddress, friendshipExpAddress, healExpAddress, soulFailAddress,
@@ -161,7 +161,7 @@ namespace SF3.Models.Files.X013 {
         [BulkCopyRecurse]
         public SpecialTable SpecialsTable { get; private set; }
         [BulkCopyRecurse]
-        public SpecialEffectTable SpecialEffectTable { get; private set; }
+        public SpecialStatusEffectTable SpecialStatusEffectTable { get; private set; }
         [BulkCopyRecurse]
         public SupportTypeTable SupportTypeTable { get; private set; }
         [BulkCopyRecurse]
