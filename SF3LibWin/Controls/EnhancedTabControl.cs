@@ -34,7 +34,9 @@ namespace SF3.Win.Controls {
             // Draw the background, the text, and a focus rectangle.
             // TODO: there is quite a lot of flickering here that needs to be removed!!
             e.Graphics.FillRectangle(backBrush, bounds);
-            e.Graphics.DrawString(tabPage.Text, e.Font, foreBrush, bounds, stringFlags);
+
+            var font = (Alignment == TabAlignment.Left || Alignment == TabAlignment.Right) ? new Font(e.Font.FontFamily, e.Font.Size * 0.85f, e.Font.Style) : e.Font;
+            e.Graphics.DrawString(tabPage.Text, font, foreBrush, bounds, stringFlags);
             if (e.State == DrawItemState.Selected)
                 e.DrawFocusRectangle();
         }

@@ -2,59 +2,59 @@
 <items>
     <item value="0x00" name="Antidote" />
     <item value="0x01" name="Buff/Debuff" />
-    <item value="0x02" name="Effect02" />
-    <item value="0x03" name="Effect03" />
-    <item value="0x04" name="Effect04" />
-    <item value="0x05" name="Effect05" />
+    <item value="0x02" name="Giant Weapon" />
+    <item value="0x03" name="Fire" />
+    <item value="0x04" name="Light Blue Particles" />
+    <item value="0x05" name="Fireworks" />
     <item value="0x06" name="Blaze" />
-    <item value="0x07" name="Effect07" />
-    <item value="0x08" name="???" />
+    <item value="0x07" name="Shockwaves" />
+    <item value="0x08" name="Titan Attack" />
     <item value="0x09" name="Bubble Spray" />
-    <item value="0x0A" name="Effect10" />
-    <item value="0x0B" name="???" />
-    <item value="0x0C" name="Effect12" />
+    <item value="0x0A" name="Twin Image" />
+    <item value="0x0B" name="Butterflies" />
+    <item value="0x0C" name="Lance Charge" />
     <item value="0x0D" name="Charm" />
-    <item value="0x0E" name="Effect14" />
-    <item value="0x0F" name="Effect15" />
-    <item value="0x10" name="Effect16" />
-    <item value="0x11" name="Effect17" />
+    <item value="0x0E" name="Combo" />
+    <item value="0x0F" name="Vortex Kick / Wild Rush" />
+    <item value="0x10" name="(Unfinished Drain-like Effect)" />
+    <item value="0x11" name="Fall Apart" />
     <item value="0x12" name="Shake Ground" />
     <item value="0x13" name="Phoenix" />
     <item value="0x14" name="Wendigo" />
     <item value="0x15" name="Tiamat/Helldragon" />
-    <item value="0x16" name="Thor" />
-    <item value="0x17" name="Zephyrus" />
-    <item value="0x18" name="Effect24" />
-    <item value="0x19" name="Effect25" />
-    <item value="0x1A" name="Effect26" />
+    <item value="0x16" name="Thanatos" />
+    <item value="0x17" name="Thor" />
+    <item value="0x18" name="Zephyrus" />
+    <item value="0x19" name="Fiery Shockwave" />
+    <item value="0x1A" name="Fire/Mist Bomb" />
     <item value="0x1B" name="Fire/Ice/Water/Acid Breath" />
     <item value="0x1C" name="Freeze" />
-    <item value="0x1D" name="Effect29" />
-    <item value="0x1E" name="Effect30" />
-    <item value="0x1F" name="Effect31" />
+    <item value="0x1D" name="Skewer" />
+    <item value="0x1E" name="Golem" />
+    <item value="0x1F" name="Light" />
     <item value="0x20" name="Healing" />
     <item value="0x21" name="Tornado" />
     <item value="0x22" name="Elbesem Orb" />
     <item value="0x23" name="Titan Punch" />
-    <item value="0x24" name="Effect37" />
+    <item value="0x24" name="Ice Breaker/Arrow" />
     <item value="0x25" name="Inferno" />
     <item value="0x26" name="Item" />
     <item value="0x27" name="Laser" />
-    <item value="0x28" name="Effect41" />
-    <item value="0x29" name="Effect42" />
+    <item value="0x28" name="??? (0x28)" />
+    <item value="0x29" name="Dominion Ray / Nine Gate" />
     <item value="0x2A" name="Panic/Confuse" />
-    <item value="0x2B" name="Effect44" />
-    <item value="0x2C" name="Effect45" />
+    <item value="0x2B" name="Smack" />
+    <item value="0x2C" name="Wave Attack" />
     <item value="0x2D" name="Sleep" />
     <item value="0x2E" name="Soul Steal" />
-    <item value="0x2F" name="Drain" />
+    <item value="0x2F" name="Drain / Soul Blast" />
     <item value="0x30" name="Spark/Lightning" />
-    <item value="0x31" name="Effect50" />
-    <item value="0x32" name="Effect51" />
-    <item value="0x33" name="Effect52" />
-    <item value="0x34" name="Effect53" />
-    <item value="0x35" name="Effect54" />
-    <item value="0x36" name="Effect55" />
+    <item value="0x31" name="Spiral" />
+    <item value="0x32" name="Flashing / Spirit" />
+    <item value="0x33" name="Change Enemy Texture" />
+    <item value="0x34" name="??? (0x34)" />
+    <item value="0x35" name="Lightning" />
+    <item value="0x36" name="Tornado" />
     <item value="0x37" name="Final Hero Weapon" />
     <item value="0x38" name="Chaos Gate/Conjure Chaos" />
     <item value="0x39" name="Demon King" />
@@ -62,22 +62,22 @@
     <item value="0x3B" name="Summon Penn/Penko" />
     <item value="0x3C" name="Demon Breath" />
     <item value="0x3D" name="Walcuray Laser" />
-    <item value="0x3E" name="Effect63" />
-    <item value="0x3F" name="Effect64" />
+    <item value="0x3E" name="Change Dragon/Virgo" />
+    <item value="0x3F" name="Shatter" />
     <item value="0x40" name="Cannon" />
     <item value="0x41" name="Shining" />
     <item value="0x42" name="Boulder" />
     <item value="0x43" name="Thunder Breath" />
-    <item value="0x44" name="Effect69" />
-    <item value="0x45" name="Effect70" />
-    <item value="0x46" name="Effect71" />
-    <item value="0x47" name="Effect72" />
-    <item value="0x48" name="Effect73" />
-    <item value="0x49" name="Effect74" />
-    <item value="0x4A" name="Effect75" />
-    <item value="0x4B" name="Effect76" />
-    <item value="0x4C" name="Effect77" />
-    <item value="0x4D" name="Effect78" />
-    <item value="0x4E" name="Effect79" />
-    <item value="0x4F" name="Effect80" />
+    <item value="0x44" name="Wormhole" />
+    <item value="0x45" name="??? (0x45)" />
+    <item value="0x46" name="??? (0x46)" />
+    <item value="0x47" name="??? (0x47)" />
+    <item value="0x48" name="??? (0x48)" />
+    <item value="0x49" name="??? (0x49)" />
+    <item value="0x4A" name="??? (0x4A)" />
+    <item value="0x4B" name="??? (0x4B)" />
+    <item value="0x4C" name="??? (0x4C)" />
+    <item value="0x4D" name="??? (0x4D)" />
+    <item value="0x4E" name="??? (0x4E)" />
+    <item value="0x4F" name="??? (0x4F)" />
 </items>

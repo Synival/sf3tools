@@ -6,13 +6,13 @@ namespace SF3.Models.Structs.X013 {
     public class SpecialAnimationAssignment : Struct {
         private readonly int _specialIdAddr;
         private readonly int _modelIndexAddr;
-        private readonly int _effectIdAddr;
+        private readonly int _animationIdAddr;
 
         public SpecialAnimationAssignment(IByteData data, int id, string name, int address)
         : base(data, id, name, address, 0x04) {
             _specialIdAddr  = Address + 0x00; // 2 bytes
             _modelIndexAddr = Address + 0x02; // 1 byte
-            _effectIdAddr   = Address + 0x03; // 1 byte
+            _animationIdAddr   = Address + 0x03; // 1 byte
         }
 
         [TableViewModelColumn(displayOrder: 0, minWidth: 150, displayFormat: "X2")]
@@ -33,8 +33,8 @@ namespace SF3.Models.Structs.X013 {
         [TableViewModelColumn(displayOrder: 2, minWidth: 200, displayFormat: "X2")]
         [NameGetter(NamedValueType.SpecialAnimation)]
         [BulkCopy]
-        public int EffectId {
-            get => Data.GetByte(_effectIdAddr);
+        public int AnimationId {
+            get => Data.GetByte(_animationIdAddr);
             set => Data.SetByte(_modelIndexAddr, (byte) value);
         }
     }

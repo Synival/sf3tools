@@ -4,18 +4,18 @@
     <item value="0x01" name="Combo" />
     <item value="0x02" name="Flashing / Spirit" />
     <item value="0x03" name="Vortex Kick / Wild Rush" />
-    <item value="0x04" name="??? (COMBI2)" />
-    <item value="0x05" name="??? (COMBI3)" />
+    <item value="0x04" name="??? (0x04, COMBI2)" />
+    <item value="0x05" name="??? (0x05, COMBI3)" />
     <item value="0x06" name="Shockwaves" />
     <item value="0x07" name="Light" />
     <item value="0x08" name="Fire" />
     <item value="0x09" name="Tornado" />
     <item value="0x0A" name="Lightning" />
-    <item value="0x0B" name="??? (SPIRI3)" />
+    <item value="0x0B" name="??? (0x0B, SPIRI3)" />
     <item value="0x0C" name="Lance Charge" />
     <item value="0x0D" name="Laser" />
-    <item value="0x0E" name="Ball / Light Blue Particles" />
-    <item value="0x0F" name="Breath / Soul Blast" />
+    <item value="0x0E" name="Light Blue Particles" />
+    <item value="0x0F" name="Drain / Soul Blast" />
     <item value="0x10" name="Spiral" />
     <item value="0x11" name="Fireworks" />
     <item value="0x12" name="Ice Breaker/Arrow" />
@@ -26,6 +26,6 @@
     <item value="0x17" name="Change Enemy Texture" />
     <item value="0x18" name="Smack" />
     <item value="0x19" name="Dominion Ray / Nine Gate" />
-    <item value="0x1A" name="Explosive Shockwave" />
+    <item value="0x1A" name="Fiery Shockwave" />
     <item value="0x1B" name="Skewer" />
 </items>

@@ -36,16 +36,10 @@ namespace SF3.Win.Views.X014 {
                 CreateChild(new TableView("MPD Battle Scene Info (Scn2+)", Model.MPDBattleSceneInfoTable, ngc));
             if (Model.TerrainBasedBattleSceneTablesByRamAddress != null)
                 CreateChild(new TableArrayView<TerrainBasedBattleSceneTable>("Terrain-Based Battle Scenes", Model.TerrainBasedBattleSceneTablesByRamAddress.Values.ToArray(), ngc));
-
-            if (Model.SpellAnimationTable != null)
-                CreateChild(new TableView("Spell Animations", Model.SpellAnimationTable, ngc));
-            if (Model.SpellAnimationSc3Table != null)
-                CreateChild(new TableView("Spell Animations (Scn3+)", Model.SpellAnimationSc3Table, ngc));
-
-            if (Model.SpecialAnimationTable != null)
-                CreateChild(new TableView("Special Animations", Model.SpecialAnimationTable, ngc));
-            if (Model.SpecialAnimationSc3Table != null)
-                CreateChild(new TableView("Special Animations (Scn3+)", Model.SpecialAnimationSc3Table, ngc));
+            if (Model.SpellAnimationLocationTable != null)
+                CreateChild(new TableView("Spell Animation Locations", Model.SpellAnimationLocationTable, ngc));
+            if (Model.SpecialAnimationLocationTable != null)
+                CreateChild(new TableView("Special Animation Locations", Model.SpecialAnimationLocationTable, ngc));
 
             return Control;
         }
