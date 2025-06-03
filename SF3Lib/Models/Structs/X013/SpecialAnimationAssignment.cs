@@ -35,7 +35,7 @@ namespace SF3.Models.Structs.X013 {
         [BulkCopy]
         public int AnimationId {
             get => Data.GetByte(_animationIdAddr);
-            set => Data.SetByte(_modelIndexAddr, (byte) value);
+            set => Data.SetByte(_animationIdAddr, (byte) value);
         }
     }
 }
