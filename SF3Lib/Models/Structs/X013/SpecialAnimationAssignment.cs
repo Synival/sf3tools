@@ -18,8 +18,8 @@ namespace SF3.Models.Structs.X013 {
         [TableViewModelColumn(displayOrder: 0, minWidth: 150, displayFormat: "X2")]
         [BulkCopy]
         [NameGetter(NamedValueType.Special)]
-        public ushort SpecialId {
-            get => (ushort) Data.GetWord(_specialIdAddr);
+        public int SpecialId {
+            get => Data.GetWord(_specialIdAddr);
             set => Data.SetWord(_specialIdAddr, value);
         }
 
@@ -33,9 +33,9 @@ namespace SF3.Models.Structs.X013 {
         [TableViewModelColumn(displayOrder: 2, minWidth: 200, displayFormat: "X2")]
         [NameGetter(NamedValueType.SpecialAnimation)]
         [BulkCopy]
-        public byte EffectId {
-            get => (byte) Data.GetByte(_effectIdAddr);
-            set => Data.SetByte(_modelIndexAddr, value);
+        public int EffectId {
+            get => Data.GetByte(_effectIdAddr);
+            set => Data.SetByte(_modelIndexAddr, (byte) value);
         }
     }
 }
