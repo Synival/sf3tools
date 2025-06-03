@@ -2,21 +2,21 @@
 <items>
     <item value="0x00" name="Antidote" />
     <item value="0x01" name="Buff/Debuff" />
-    <item value="0x02" name="Giant Weapon" />
-    <item value="0x03" name="Fire" />
+    <item value="0x02" name="Giant/Flaming Weapon" />
+    <item value="0x03" name="Flame on Projectile or Weapon" />
     <item value="0x04" name="Light Blue Particles" />
-    <item value="0x05" name="Fireworks" />
+    <item value="0x05" name="Spark Projectiles/Fireworks" />
     <item value="0x06" name="Blaze" />
-    <item value="0x07" name="Shockwaves" />
+    <item value="0x07" name="Shockwaves on Hit" />
     <item value="0x08" name="Titan Attack" />
     <item value="0x09" name="Bubble Spray" />
     <item value="0x0A" name="Twin Image" />
     <item value="0x0B" name="Butterflies" />
     <item value="0x0C" name="Lance Charge" />
     <item value="0x0D" name="Charm" />
-    <item value="0x0E" name="Combo" />
-    <item value="0x0F" name="Vortex Kick / Wild Rush" />
-    <item value="0x10" name="(Unfinished Drain-like Effect)" />
+    <item value="0x0E" name="Hit While Suspended" />
+    <item value="0x0F" name="Knock Higher and Higher" />
+    <item value="0x10" name="Geyser (Unused, Unfinished)" />
     <item value="0x11" name="Fall Apart" />
     <item value="0x12" name="Shake Ground" />
     <item value="0x13" name="Phoenix" />
@@ -25,13 +25,13 @@
     <item value="0x16" name="Thanatos" />
     <item value="0x17" name="Thor" />
     <item value="0x18" name="Zephyrus" />
-    <item value="0x19" name="Fiery Shockwave" />
+    <item value="0x19" name="Flaming Shockwave" />
     <item value="0x1A" name="Fire/Mist Bomb" />
-    <item value="0x1B" name="Fire/Ice/Water/Acid Breath" />
+    <item value="0x1B" name="Elemental Breath" />
     <item value="0x1C" name="Freeze" />
-    <item value="0x1D" name="Skewer" />
+    <item value="0x1D" name="Various Random Attacks" />
     <item value="0x1E" name="Golem" />
-    <item value="0x1F" name="Light" />
+    <item value="0x1F" name="Blinking Light" />
     <item value="0x20" name="Healing" />
     <item value="0x21" name="Tornado" />
     <item value="0x22" name="Elbesem Orb" />
@@ -40,22 +40,22 @@
     <item value="0x25" name="Inferno" />
     <item value="0x26" name="Item" />
     <item value="0x27" name="Laser" />
-    <item value="0x28" name="??? (0x28)" />
-    <item value="0x29" name="Dominion Ray / Nine Gate" />
-    <item value="0x2A" name="Panic/Confuse" />
-    <item value="0x2B" name="Smack" />
+    <item value="0x28" name="Chaotic Lightning (Unused)" />
+    <item value="0x29" name="Dominion Ray/Nine Gate" />
+    <item value="0x2A" name="Panic" />
+    <item value="0x2B" name="Bullets" />
     <item value="0x2C" name="Wave Attack" />
     <item value="0x2D" name="Sleep" />
     <item value="0x2E" name="Soul Steal" />
-    <item value="0x2F" name="Drain / Soul Blast" />
+    <item value="0x2F" name="Drain/Breath Attacks" />
     <item value="0x30" name="Spark/Lightning" />
-    <item value="0x31" name="Spiral" />
-    <item value="0x32" name="Flashing / Spirit" />
-    <item value="0x33" name="Change Enemy Texture" />
-    <item value="0x34" name="??? (0x34)" />
+    <item value="0x31" name="Spiral Projectile" />
+    <item value="0x32" name="Various Physical Attacks" />
+    <item value="0x33" name="Various Elemental Attacks" />
+    <item value="0x34" name="(CRASH)" />
     <item value="0x35" name="Lightning" />
     <item value="0x36" name="Tornado" />
-    <item value="0x37" name="Final Hero Weapon" />
+    <item value="0x37" name="Epic Background" />
     <item value="0x38" name="Chaos Gate/Conjure Chaos" />
     <item value="0x39" name="Demon King" />
     <item value="0x3A" name="Proserpina" />

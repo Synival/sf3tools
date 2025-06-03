@@ -1,41 +1,41 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <items>
     <item value="0x00" name="Wave Attack" />
-    <item value="0x01" name="Combo" />
-    <item value="0x02" name="Flashing / Spirit" />
-    <item value="0x03" name="Vortex Kick / Wild Rush" />
+    <item value="0x01" name="Hit While Suspended" />
+    <item value="0x02" name="Various Physical Attacks" />
+    <item value="0x03" name="Knock Higher and Higher" />
     <item value="0x04" name="??? (0x04, COMBI2)" />
     <item value="0x05" name="??? (0x05, COMBI3)" />
-    <item value="0x06" name="Shockwaves" />
-    <item value="0x07" name="Light" />
-    <item value="0x08" name="Fire" />
+    <item value="0x06" name="Shockwaves on Hit" />
+    <item value="0x07" name="Blinking Light" />
+    <item value="0x08" name="Flame on Projectile or Weapon" />
     <item value="0x09" name="Tornado" />
     <item value="0x0A" name="Lightning" />
     <item value="0x0B" name="??? (0x0B, SPIRI3)" />
     <item value="0x0C" name="Lance Charge" />
     <item value="0x0D" name="Laser" />
     <item value="0x0E" name="Light Blue Particles" />
-    <item value="0x0F" name="Drain / Soul Blast" />
-    <item value="0x10" name="Spiral" />
-    <item value="0x11" name="Fireworks" />
+    <item value="0x0F" name="Drain/Breath Attacks" />
+    <item value="0x10" name="Spiral Projectile" />
+    <item value="0x11" name="Spark Projectiles/Fireworks" />
     <item value="0x12" name="Ice Breaker/Arrow" />
     <item value="0x13" name="Fire/Mist Bomb" />
     <item value="0x14" name="Twin Image" />
     <item value="0x15" name="Butterflies" />
-    <item value="0x16" name="Giant Weapon" />
-    <item value="0x17" name="Change Enemy Texture" />
-    <item value="0x18" name="Smack" />
-    <item value="0x19" name="Dominion Ray / Nine Gate" />
-    <item value="0x1A" name="Fiery Shockwave" />
-    <item value="0x1B" name="Skewer" />
+    <item value="0x16" name="Giant/Flaming Weapon" />
+    <item value="0x17" name="Various Elemental Attacks" />
+    <item value="0x18" name="Bullets" />
+    <item value="0x19" name="Dominion Ray/Nine Gate" />
+    <item value="0x1A" name="Flaming Shockwave" />
+    <item value="0x1B" name="Various Random Attacks" />
     <item value="0x1C" name="Fall Apart" />
-    <item value="0x1D" name="Fire/Ice/Water/Acid Breath" />
-    <item value="0x1E" name="Panic/Confuse" />
+    <item value="0x1D" name="Elemental Breath" />
+    <item value="0x1E" name="Panic" />
     <item value="0x1F" name="Change Dragon/Virgo" />
     <item value="0x20" name="Shatter" />
-    <item value="0x21" name="Dragon Wave" />
+    <item value="0x21" name="Shining" />
     <item value="0x22" name="Thunder Breath" />
     <item value="0x23" name="Wormhole" />
-    <item value="0x24" name="Final Hero Weapon" />
+    <item value="0x24" name="Epic Background" />
     <item value="0x25" name="Antidote" />
 </items>
