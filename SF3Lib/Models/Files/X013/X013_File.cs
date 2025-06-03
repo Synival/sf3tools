@@ -38,6 +38,8 @@ namespace SF3.Models.Files.X013 {
             int supportStatsAddress;
             int supportTypeAddress;
             int weaponSpellRankAddress;
+            int specialAnimationAssignmentAddress;
+            int specialAnimations = 10;
 
             var checkVersion2 = Data.GetByte(0x000A);
 
@@ -58,6 +60,8 @@ namespace SF3.Models.Files.X013 {
                     supportStatsAddress    = 0x74b5;
                     supportTypeAddress     = 0x7484;
                     weaponSpellRankAddress = 0x70F0;
+                    specialAnimationAssignmentAddress = 0x7C54;
+                    specialAnimations = 155;
 
                     if (checkVersion2 == 0x0A) { //original jp
                         critModAddress         -= 0x70;
@@ -74,6 +78,7 @@ namespace SF3.Models.Files.X013 {
                         supportStatsAddress    -= 0x0C;
                         supportTypeAddress     -= 0x0C;
                         weaponSpellRankAddress -= 0x0C;
+                        specialAnimationAssignmentAddress -= 0x0C;
                     }
                     break;
 
@@ -93,6 +98,8 @@ namespace SF3.Models.Files.X013 {
                     supportStatsAddress    = 0x7409;
                     supportTypeAddress     = 0x7390;
                     weaponSpellRankAddress = 0x6FC8;
+                    specialAnimationAssignmentAddress = 0x7BCC;
+                    specialAnimations = 167;
                     break;
 
                 case ScenarioType.Scenario3:
@@ -111,7 +118,10 @@ namespace SF3.Models.Files.X013 {
                     supportStatsAddress    = 0x72f1;
                     supportTypeAddress     = 0x7278;
                     weaponSpellRankAddress = 0x6D04;
+                    specialAnimationAssignmentAddress = 0x7B0C;
+                    specialAnimations = 216;
                     break;
+
                 case ScenarioType.PremiumDisk:
                     critModAddress         = 0x2d78;
                     critrateAddress        = 0x70b8;
@@ -128,6 +138,8 @@ namespace SF3.Models.Files.X013 {
                     supportStatsAddress    = 0x71cd;
                     supportTypeAddress     = 0x7154;
                     weaponSpellRankAddress = 0x6BE0;
+                    specialAnimationAssignmentAddress = 0x79F8;
+                    specialAnimations = 216;
                     break;
 
                 default:
@@ -143,6 +155,7 @@ namespace SF3.Models.Files.X013 {
                 (CritrateTable        = CritrateTable.Create       (Data, "CritRates",        ResourceFile("CritrateList.xml"), critrateAddress)),
                 (WeaponSpellRankTable = WeaponSpellRankTable.Create(Data, "WeaponSpellRanks", ResourceFile("WeaponSpellRankList.xml"), weaponSpellRankAddress)),
                 (StatusEffectTable    = StatusEffectTable.Create   (Data, "StatusEffects",    ResourceFile("StatusGroupList.xml"), statusEffectAddress)),
+                (SpecialAnimationAssignmentTable = SpecialAnimationAssignmentTable.Create(Data, nameof(SpecialAnimationAssignmentTable), specialAnimationAssignmentAddress, specialAnimations)),
             };
 
             if (specialEffectAddress >= 0)
@@ -176,5 +189,7 @@ namespace SF3.Models.Files.X013 {
         public WeaponSpellRankTable WeaponSpellRankTable { get; private set; }
         [BulkCopyRecurse]
         public StatusEffectTable StatusEffectTable { get; private set; }
+        [BulkCopyRecurse]
+        public SpecialAnimationAssignmentTable SpecialAnimationAssignmentTable { get; private set; }
     }
 }

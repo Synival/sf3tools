@@ -11,6 +11,8 @@ namespace SF3.NamedValues {
             = new NamedValueFromResourceInfo("CharacterClasses.xml");
         public static readonly NamedValueFromResourceInfo DroprateInfo
             = new NamedValueFromResourceInfo("DroprateList.xml");
+        public static readonly NamedValueFromResourceForScenariosInfo EffectFileIndexesInfo
+            = new NamedValueFromResourceForScenariosInfo("EffectFileIndexes.xml");
         public static readonly NamedValueFromResourceInfo EffectiveTypeInfo
             = new NamedValueFromResourceInfo("EffectiveTypes.xml");
         public static readonly NamedValueFromResourceInfo ElementInfo
@@ -71,6 +73,8 @@ namespace SF3.NamedValues {
             = new NamedValueFromResourceInfo("SpecialTypes.xml");
         public static readonly NamedValueFromResourceForScenariosInfo SpecialInfo
             = new NamedValueFromResourceForScenariosInfo("Specials.xml");
+        public static readonly NamedValueFromResourceForScenariosInfo SpecialAnimationInfo
+            = new NamedValueFromResourceForScenariosInfo("SpecialAnimations.xml");
         public static readonly NamedValueFromResourceForScenariosInfo SpellInfo
             = new NamedValueFromResourceForScenariosInfo("Spells.xml");
         public static readonly NamedValueFromResourceInfo SpellTargetInfo

@@ -32,6 +32,8 @@ namespace SF3.Win.Views.X013 {
                 CreateChild(new TableView("Weapon Rank Magic Bonuses", Model.WeaponSpellRankTable, ngc));
             if (Model.StatusEffectTable != null)
                 CreateChild(new TableView("Status Effect Chances", Model.StatusEffectTable, ngc));
+            if (Model.SpecialAnimationAssignmentTable != null)
+                CreateChild(new TableView("Special Animations", Model.SpecialAnimationAssignmentTable, ngc));
 
             return Control;
         }
