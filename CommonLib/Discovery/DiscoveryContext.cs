@@ -41,8 +41,7 @@ namespace CommonLib.Discovery {
 
             AddUnknownAtPointerValue(addr);
             RemoveUnknownsAt(addr);
-            // TODO: add the value?
-            var newData = DiscoveredPointersByAddress[addr] = new DiscoveredData(addr, 4, DiscoveredDataType.Pointer, "void*", "");
+            var newData = DiscoveredPointersByAddress[addr] = new DiscoveredData(this, addr, 4, DiscoveredDataType.Pointer, "void*", "", Data.GetUInt((int) (addr - Address)));
             UpdatePointersToDiscoveredData(DiscoveredPointersByAddress[addr]);
             return newData;
         }
@@ -54,8 +53,7 @@ namespace CommonLib.Discovery {
             AddUnknownAtPointerValue(addr);
             RemoveUnknownsAt(addr);
             // TODO: what if a something is already there?
-            // TODO: add the value?
-            var newData = DiscoveredPointersByAddress[addr] = new DiscoveredData(addr, 4, DiscoveredDataType.Pointer, typeName, name);
+            var newData = DiscoveredPointersByAddress[addr] = new DiscoveredData(this, addr, 4, DiscoveredDataType.Pointer, typeName, name, Data.GetUInt((int) (addr - Address)));
             UpdatePointersToDiscoveredData(DiscoveredPointersByAddress[addr]);
             return newData;
         }
@@ -65,7 +63,7 @@ namespace CommonLib.Discovery {
                 var value = Data.GetUInt((int) (addr - Address));
                 if (!HasDiscoveryAt(value))
                     // TODO: track what's pointing to it?
-                    DiscoveredUnknownsByAddress[value] = new DiscoveredData(value, null, DiscoveredDataType.Unknown, "Unknown", "unknown");
+                    DiscoveredUnknownsByAddress[value] = new DiscoveredData(this, value, null, DiscoveredDataType.Unknown, "Unknown", "unknown", null);
             }
         }
 
@@ -76,7 +74,7 @@ namespace CommonLib.Discovery {
             // TODO: what if a something is already there?
             // TODO: parameters?
             RemoveUnknownsAt(addr);
-            var newData = DiscoveredFunctionsByAddress[addr] = new DiscoveredData(addr, size, DiscoveredDataType.Function, typeName, name);
+            var newData = DiscoveredFunctionsByAddress[addr] = new DiscoveredData(this, addr, size, DiscoveredDataType.Function, typeName, name, null);
             UpdatePointersToDiscoveredData(DiscoveredFunctionsByAddress[addr]);
             return newData;
         }
@@ -86,7 +84,7 @@ namespace CommonLib.Discovery {
                 throw new ArgumentException(nameof(addr) + " must have an alignment of 4");
 
             // TODO: what if a something is already there?
-            var newData = DiscoveredArraysByAddress[addr] = new DiscoveredData(addr, size, DiscoveredDataType.Array, typeName, name);
+            var newData = DiscoveredArraysByAddress[addr] = new DiscoveredData(this, addr, size, DiscoveredDataType.Array, typeName, name, null);
             RemoveUnknownsAt(addr);
             UpdatePointersToDiscoveredData(DiscoveredArraysByAddress[addr]);
             return newData;
@@ -149,7 +147,7 @@ namespace CommonLib.Discovery {
 
             var pointers = GetUnidentifiedPointersByValue(data.Address);
             var newType = data.TypeName + "*";
-            var newName = data.Name;
+            var newName = $"ptr_{(data.Name == "" ? null : data.Name) ?? "unnamed"}";
             var updates = pointers.Length;
             foreach (var pointer in pointers) {
                 RemoveUnknownsAt(pointer.Address);
@@ -219,6 +217,21 @@ namespace CommonLib.Discovery {
             }
 
             return sb.ToString();
+        }
+
+        public DiscoveredData GetDiscoveryAt(uint addr) {
+            DiscoveredData d;
+            if (DiscoveredFunctionsByAddress.TryGetValue(addr, out d))
+                return d;
+            if (DiscoveredArraysByAddress.TryGetValue(addr, out d))
+                return d;
+            if (DiscoveredStructsByAddress.TryGetValue(addr, out d))
+                return d;
+            if (DiscoveredPointersByAddress.TryGetValue(addr, out d))
+                return d;
+            if (DiscoveredUnknownsByAddress.TryGetValue(addr, out d))
+                return d;
+            return null;
         }
 
         public bool HasDiscoveryAt(uint addr) {
