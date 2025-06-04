@@ -17,6 +17,7 @@ using SF3.Utils;
 using CommonLib.Utils;
 using SF3.Models.Structs.X1;
 using CommonLib.Discovery;
+using CommonLib.Types;
 
 namespace SF3.Models.Files.X1 {
     public class X1_File : ScenarioTableFile, IX1_File {
@@ -196,7 +197,7 @@ namespace SF3.Models.Files.X1 {
             Discoveries = new DiscoveryContext(searchData, RamAddress);
             Discoveries.DiscoverUnknownPointersToValueRange(RamAddress, X1RamUpperLimit - 1);
             DiscoverFunctions(searchData);
-            DiscoverData(searchData);
+            DiscoverData(tables, searchData);
 
             // Now that we've discovered some data, let's populate some tables.
             tables.AddRange(PopulateMapUpdateFuncTables());
@@ -210,6 +211,8 @@ namespace SF3.Models.Files.X1 {
         }
 
         private void DiscoverFunctions(byte[] data) {
+            Discoveries.AddFunction((uint) Data.GetDouble(0x08), "X1InitFunc", "x1Init()", null);
+
             // Look for known functions and create corresponding DiscoveredData() entries.
             var funcs = KnownX1Functions.AllKnownFunctions
                 .Select(x => new { Info = x.Key, Size = x.Value.Length * 2, Indices = data.IndicesOfSubset(x.Value.ToByteArray()) })
@@ -260,7 +263,15 @@ namespace SF3.Models.Files.X1 {
             }
         }
 
-        private void DiscoverData(byte[] data) {
+        private void DiscoverData(IEnumerable<ITable> table, byte[] data) {
+            foreach (var t in table) {
+                if (t.IsContiguous) {
+                    var type = t.GetType();
+                    var typeName = (type.BaseType != null && type.BaseType.IsGenericType) ? $"{type.BaseType.GetGenericArguments()[0].Name}[]" : type.Name;
+                    Discoveries.AddArray((uint) (t.Address + RamAddress), typeName, t.Name, t.SizeInBytesPlusTerminator);
+                }
+            }
+
             DiscoverModelInstantiateData(data);
             DiscoverRenderThinkFuncsData(data);
         }
@@ -318,7 +329,7 @@ namespace SF3.Models.Files.X1 {
                         var value2 = (uint) Data.GetDouble((int) (tableAddr - RamAddress + 0x04));
                         if (!Discoveries.GetFunctions().Any(x => x.Address == value2)) {
                             var funcType = (value1 == 0x03) ? "GroundPlaneTickFunc" : $"Update{value1}Func";
-                            Discoveries.AddFunction(value2, funcType, $"unknown{funcType}", null);
+                            Discoveries.AddFunction(value2, funcType, $"unknown{funcType}()", null);
                         }
 
                         tableAddr += 0x08;
@@ -616,9 +627,9 @@ namespace SF3.Models.Files.X1 {
                     var commandData = command.Data;
 
                     if (commandData[0] == (uint) ActorCommandType.RunFunction)
-                        Discoveries.AddFunction(commandData[1], "ScriptFunc", $"scriptRunFunc_cmdId{command.Id}_{scriptCodeNameBase}", null);
+                        Discoveries.AddFunction(commandData[1], "ScriptFunc", $"scriptRunFunc_cmdId{command.Id}_{scriptCodeNameBase}()", null);
                     else if (commandData[0] == (uint) ActorCommandType.SetProperty && commandData[1] == (uint) ActorPropertyCommandType.ThinkFunction)
-                        Discoveries.AddFunction(commandData[2], "ScriptFunc", $"scriptThinkFunc_cmdId{command.Id}_{scriptCodeNameBase}", null);
+                        Discoveries.AddFunction(commandData[2], "ScriptFunc", $"scriptThinkFunc_cmdId{command.Id}_{scriptCodeNameBase}()", null);
                 }
             }
         }

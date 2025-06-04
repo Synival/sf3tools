@@ -80,8 +80,8 @@ namespace CommonLib.Discovery {
         }
 
         public DiscoveredData AddArray(uint addr, string typeName, string name, int? size) {
-            if (addr % 4 != 0)
-                throw new ArgumentException(nameof(addr) + " must have an alignment of 4");
+            if (addr % 2 != 0)
+                throw new ArgumentException(nameof(addr) + " must have an alignment of 2");
 
             // TODO: what if a something is already there?
             var newData = DiscoveredArraysByAddress[addr] = new DiscoveredData(this, addr, size, DiscoveredDataType.Array, typeName, name, null);
