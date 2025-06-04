@@ -236,7 +236,17 @@ namespace X1_Analyzer {
                         var isBTL99 = filename == "X1BTL99";
                         using (var x1File = X1_File.Create(byteData, nameGetterContexts[scenario], scenario, isBTL99)) {
                             // Condition for match checks here
-                            var match = X1_Match_Func(filename, x1File);
+                            var discoveries = x1File.Discoveries.GetAllOrdered()
+                                .Where(x =>
+                                    x.Type == CommonLib.Types.DiscoveredDataType.Function &&
+                                    x1File.MapUpdateFuncTable?.Any(y => y.UpdateSlot == 0x04 && y.Function == x.Address) == true
+                                )
+                                .ToList();
+
+                            foreach (var d in discoveries)
+                                s_matchReports.Add($"0x{d.Address:X8} | {d.DisplayName}");
+
+                            var match = discoveries.Any() ? true : (bool?) null;
 
                             // If the match is 'null', that means we're just skipping this file completely.
                             if (match == null) {
@@ -246,10 +256,11 @@ namespace X1_Analyzer {
 
                             // List the file and any report we may have from X1_Match_Func().
                             var fileStr = GetFileString(scenario, file, x1File);
-                            Console.WriteLine(fileStr + " | " + (match == true ? "Match  " : "NoMatch"));
+                            Console.Write(fileStr + " | ");
                             foreach (var mr in s_matchReports)
                                 Console.WriteLine("    " + mr);
-                            Console.WriteLine();
+                            if (s_matchReports.Count == 0)
+                                Console.WriteLine();
                             s_matchReports.Clear();
 
                             if (match == true)

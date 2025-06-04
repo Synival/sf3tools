@@ -230,7 +230,8 @@ namespace SF3.Models.Files.X1 {
                 var ngc = NameGetterContext;
                 foreach (var kv in iFuncs) {
                     var funcPtr = kv.Key;
-                    if (!Discoveries.HasDiscoveryAt(funcPtr)) {
+                    var d = Discoveries.GetDiscoveryAt(funcPtr);
+                    if (d == null || d.Type == DiscoveredDataType.Unknown) {
                         var ids = string.Join("_", kv.Value.Select(x => ngc.GetName(x, null, x.TriggerType, new object[] { NamedValueType.EventTriggerType }) + x.ID.ToString("X2")));
                         Discoveries.AddFunction(funcPtr, "InteractableFunction", $"interactableFuncFor{ids}()", null);
                     }
