@@ -37,11 +37,12 @@ namespace SF3.Models.Structs.X1 {
             set => Data.SetByte(_matrixBasisAddr, value);
         }
 
-        [TableViewModelColumn(displayOrder: 2, displayFormat: "X2")]
+        [TableViewModelColumn(displayOrder: 2, minWidth: 100, displayFormat: "X2")]
+        [NameGetter(NamedValueType.ModelInstanceType)]
         [BulkCopy]
-        public byte Type {
-            get => (byte) Data.GetByte(_typeAddr);
-            set => Data.SetByte(_typeAddr, value);
+        public int Type {
+            get => Data.GetByte(_typeAddr);
+            set => Data.SetByte(_typeAddr, (byte) value);
         }
 
         [TableViewModelColumn(displayOrder: 3, isPointer: true, minWidth: 300)]

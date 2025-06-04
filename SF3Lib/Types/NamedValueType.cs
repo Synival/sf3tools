@@ -25,6 +25,7 @@ namespace SF3.Types {
         InteractDirectionBehavior,
         Load,
         ModelDirection,
+        ModelInstanceType,
         Monster,
         MonsterForSlot,
         EventTriggerMoveOnTileType,
