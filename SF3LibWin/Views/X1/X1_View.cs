@@ -61,37 +61,7 @@ namespace SF3.Win.Views.X1 {
                     CreateChild(new BattleView($"Battle ({battleKv.Key})", battleKv.Value));
             }
 
-            if (Model.Discoveries?.HasDiscoveries == true) {
-                var allDiscoveries = Model.Discoveries.GetAllOrdered();
- 
-                var report =
-                    "=====================\r\n" +
-                    "Functions          \r\n" +
-                    "=====================\r\n" +
-                    Model.Discoveries.CreateReport(allDiscoveries.Where(x => x.Type == DiscoveredDataType.Function).ToArray(), false) + "\r\n" +
-                    "=====================\r\n" +
-                    "Arrays             \r\n" +
-                    "=====================\r\n" +
-                    Model.Discoveries.CreateReport(allDiscoveries.Where(x => x.Type == DiscoveredDataType.Array).ToArray(), false) + "\r\n" +
-                    "=====================\r\n" +
-                    "Identified Pointers\r\n" +
-                    "=====================\r\n" +
-                    Model.Discoveries.CreateReport(allDiscoveries.Where(x => x.Type == DiscoveredDataType.Pointer && !x.IsUnidentifiedPointer).ToArray(), false) + "\r\n" +
-                    "=====================\r\n" +
-                    "Unidentified Pointers\r\n" +
-                    "=====================\r\n" +
-                    Model.Discoveries.CreateReport(allDiscoveries.Where(x => x.Type == DiscoveredDataType.Pointer && x.IsUnidentifiedPointer).ToArray(), false) + "\r\n" +
-                    "=====================\r\n" +
-                    "Unknowns             \r\n" +
-                    "=====================\r\n" +
-                    Model.Discoveries.CreateReport(allDiscoveries.Where(x => x.Type == DiscoveredDataType.Unknown).ToArray(), false) + "\r\n" +
-                    "=====================\r\n" +
-                    "Everything         \r\n" +
-                    "=====================\r\n" +
-                    Model.Discoveries.CreateReport(allDiscoveries, true);
-
-                CreateChild(new TextView("Discovered Data", report));
-            }
+            CreateChild(new TechnicalView("Technical Info", Model));
 
             return Control;
         }
