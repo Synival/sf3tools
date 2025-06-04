@@ -1,3 +1,4 @@
+using System;
 using System.Reflection;
 using System.Windows.Forms;
 
@@ -23,6 +24,14 @@ namespace CommonLib.Win.Utils {
         /// <param name="message">The error messsage to display.</param>
         public static void ErrorMessage(string message)
             => MessageBox.Show(message, MessageTitle(), MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+        /// <summary>
+        /// Shows an error MessageBox with the correct title, buttons, and icon.
+        /// </summary>
+        /// <param name="message">The error messsage to display.</param>
+        /// <param name="e">An exception to display.</param>
+        public static void ErrorMessage(string message, Exception e)
+            => MessageBox.Show($"{message}:\r\n\r\n{e.GetType().Name}: {e.Message}", MessageTitle(), MessageBoxButtons.OK, MessageBoxIcon.Error);
 
         /// <summary>
         /// Shows a warning MessageBox with the correct title, buttons, and icon.
