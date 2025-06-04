@@ -15,7 +15,10 @@ namespace SF3.Win.Views.X1 {
 
             var ngc = Model.NameGetterContext;
             if (Model.Discoveries?.HasDiscoveries == true) {
-                var allDiscoveries = Model.Discoveries.GetAllOrdered();
+                var allDiscoveries = Model.Discoveries.GetAllOrdered()
+                    .Where(x => x.Address >= Model.RamAddress && x.Address < X1_File.X1RamUpperLimit)
+                    .ToArray();
+
                 CreateChild(new TextView("All Discovered Data", Model.Discoveries.CreateReport(allDiscoveries, true)));
  
                 var functions = allDiscoveries.Where(x => x.Type == DiscoveredDataType.Function).ToArray();
