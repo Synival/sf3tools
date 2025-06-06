@@ -4,6 +4,7 @@ namespace SF3.Types {
     /// </summary>
     public enum NamedValueType {
         ActorScript,
+        AITargetType,
         BattleSceneById,
         Character,
         CharacterClass,

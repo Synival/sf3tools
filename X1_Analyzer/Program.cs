@@ -51,31 +51,31 @@ namespace X1_Analyzer {
                             Name = x1File.NameGetterContext.GetName(null, null, y.EnemyID, [NamedValueType.MonsterForSlot]),
 
                             AITags = new int[] {
-                                y.AITag1,
-                                y.AITag2,
-                                y.AITag3,
-                                y.AITag4,
+                                y.AI1Tag,
+                                y.AI2Tag,
+                                y.AI3Tag,
+                                y.AI4Tag,
                             },
 
                             AITypes = new int[] {
-                                y.AIType1,
-                                y.AIType2,
-                                y.AIType3,
-                                y.AIType4,
+                                y.AI1Type,
+                                y.AI2Type,
+                                y.AI3Type,
+                                y.AI4Type,
                             },
 
                             AIAggrs = new int[] {
-                                y.AIAggr1,
-                                y.AIAggr2,
-                                y.AIAggr3,
-                                y.AIAggr4,
+                                y.AI1Aggr,
+                                y.AI2Aggr,
+                                y.AI3Aggr,
+                                y.AI4Aggr,
                             },
 
                             AI = new int[] {
-                                (y.AITag1 << 16) | (y.AIType1 << 8) | (y.AIAggr1),
-                                (y.AITag2 << 16) | (y.AIType2 << 8) | (y.AIAggr2),
-                                (y.AITag3 << 16) | (y.AIType3 << 8) | (y.AIAggr3),
-                                (y.AITag4 << 16) | (y.AIType4 << 8) | (y.AIAggr4),
+                                (y.AI1Tag << 16) | (y.AI1Type << 8) | (y.AI1Aggr),
+                                (y.AI2Tag << 16) | (y.AI2Type << 8) | (y.AI2Aggr),
+                                (y.AI3Tag << 16) | (y.AI3Type << 8) | (y.AI3Aggr),
+                                (y.AI4Tag << 16) | (y.AI4Type << 8) | (y.AI4Aggr),
                             },
 
                             AIAddrs = new int[] {
@@ -100,17 +100,30 @@ namespace X1_Analyzer {
             s_allSpawnTypes.AddRange(allEnemies.Select(x => (int) x.SpawnType));
             s_allUnknown0x0Es.AddRange(allEnemies.Select(x => x.Unknown0x0E));
 
-#if false
+#if true
             // Match enemies with any non-default AI.
-            var enemiesWithNonDefaultAI = enemiesWithAI
+            var enemiesWithNonDefaultAI = allEnemies
                 .Where(x => x.AITags.Any(y => y != 0xFF) || x.AITypes.Any(y => y != 0xFF) || x.AIAggrs.Any(y => y != 0xFF))
                 .ToArray();
             foreach (var enemy in enemiesWithNonDefaultAI) {
                 var aiTypesStr = string.Join(", ", enemy.AITypes.Select(x => x.ToString("X2")));
                 var enemyStr = $"{enemy.SlotName}, {enemy.Name} (0x{enemy.EnemyID:X2}): SpawnType={enemy.SpawnType:X2}, Unknown0x0E={enemy.Unknown0x0E:X2}";
-                for (int i = 0; i < 4; i++)
-                    if (enemy.AITags[i] != 0xFF || enemy.AITags[i] != 0xFF || enemy.AIAggrs[i] != 0x00)
-                        s_matchReports.Add($"Tags={enemy.AITags[i]:X2}, Type={enemy.AITypes[i]:X2}, Aggr={enemy.AIAggrs[i]:X2} | AI[{i}] | {enemyStr}");
+                for (int i = 0; i < 4; i++) {
+                    if (!(enemy.AITags[i] != 0xFF || enemy.AITags[i] != 0xFF || enemy.AIAggrs[i] != 0x00))
+                        continue;
+
+                    var tag  = enemy.AITags[i];
+                    var type = enemy.AITypes[i];
+
+                    if (tag >= 0x32 && tag < 0x80)
+                        s_matchReports.Add($"Tag=Location | Type={type:X2} | Func AI[{i}] | {enemyStr}");
+                    else if (tag >= 0x80 && tag < 0xC0)
+                        s_matchReports.Add($"Tag=Enemy    | Type={type:X2} | Func AI[{i}] | {enemyStr}");
+                    else if (tag >= 0xC0 && tag < 0xFF)
+                        s_matchReports.Add($"Tag=Path     | Type={type:X2} | Func AI[{i}] | {enemyStr}");
+                    else
+                        s_matchReports.Add($"Tag=0x{tag:X2}     | Type={type:X2} | Func AI[{i}] | {enemyStr}");
+                }
             }
 #elif false
             return (x1File.ArrowTable != null && x1File.ArrowTable.Any(x => x.IfFlagOff != 0xFFFF)) ? true : null;
@@ -235,18 +248,7 @@ namespace X1_Analyzer {
                     try {
                         var isBTL99 = filename == "X1BTL99";
                         using (var x1File = X1_File.Create(byteData, nameGetterContexts[scenario], scenario, isBTL99)) {
-                            // Condition for match checks here
-                            var discoveries = x1File.Discoveries.GetAllOrdered()
-                                .Where(x =>
-                                    x.Type == CommonLib.Types.DiscoveredDataType.Function &&
-                                    x1File.MapUpdateFuncTable?.Any(y => y.UpdateSlot == 0x04 && y.Function == x.Address) == true
-                                )
-                                .ToList();
-
-                            foreach (var d in discoveries)
-                                s_matchReports.Add($"0x{d.Address:X8} | {d.DisplayName}");
-
-                            var match = discoveries.Any() ? true : (bool?) null;
+                            var match = X1_Match_Func(filename, x1File);
 
                             // If the match is 'null', that means we're just skipping this file completely.
                             if (match == null) {
@@ -256,11 +258,9 @@ namespace X1_Analyzer {
 
                             // List the file and any report we may have from X1_Match_Func().
                             var fileStr = GetFileString(scenario, file, x1File);
-                            Console.Write(fileStr + " | ");
+                            Console.WriteLine(fileStr + " | ");
                             foreach (var mr in s_matchReports)
                                 Console.WriteLine("    " + mr);
-                            if (s_matchReports.Count == 0)
-                                Console.WriteLine();
                             s_matchReports.Clear();
 
                             if (match == true)

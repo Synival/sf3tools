@@ -69,7 +69,6 @@ namespace SF3.Tests.Models.Files {
             var battle = file.Battles[MapLeaderType.Synbios];
             var header = battle.BattleHeader;
 
-            Assert.AreEqual(0, header.Unknown0x00);
             Assert.AreEqual(16, header.NumSlots);
         }
 
@@ -96,19 +95,20 @@ namespace SF3.Tests.Models.Files {
             var battle = file.Battles[MapLeaderType.Synbios];
             var table = battle.SpawnZoneTable;
 
-            Assert.AreEqual(0x00, table[0].Unknown0x00);
-            Assert.AreEqual(0x00, table[0].BottomLeftX);
-            Assert.AreEqual(0x3F, table[0].BottomLeftZ);
-            Assert.AreEqual(0x00, table[0].TopLeftX);
-            Assert.AreEqual(0x3F, table[0].TopLeftZ);
-            Assert.AreEqual(0x00, table[0].TopRightX);
+            Assert.AreEqual(0x00, table[0].NumPoints);
+            Assert.AreEqual(0x00, table[0].Padding0x02);
+            Assert.AreEqual(0x00, table[0].X1);
+            Assert.AreEqual(0x3F, table[0].Z1);
+            Assert.AreEqual(0x00, table[0].X2);
+            Assert.AreEqual(0x3F, table[0].Z2);
+            Assert.AreEqual(0x00, table[0].X3);
 
-            Assert.AreEqual(0x00, table[1].Unknown0x00);
-            Assert.AreEqual(0x00, table[1].BottomLeftX);
-            Assert.AreEqual(0x3F, table[1].BottomLeftZ);
-            Assert.AreEqual(0x00, table[1].TopLeftX);
-            Assert.AreEqual(0x3F, table[1].TopLeftZ);
-            Assert.AreEqual(0x00, table[1].TopRightX);
+            Assert.AreEqual(0x00, table[1].NumPoints);
+            Assert.AreEqual(0x00, table[1].Padding0x02);
+            Assert.AreEqual(0x3F, table[1].Z1);
+            Assert.AreEqual(0x00, table[1].X2);
+            Assert.AreEqual(0x3F, table[1].Z2);
+            Assert.AreEqual(0x00, table[1].X3);
 
             Assert.AreEqual(16, table.Length);
         }

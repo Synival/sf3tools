@@ -43,6 +43,7 @@ namespace SF3.NamedValues {
                         AlwaysCanGetInfo
                     ) },
 
+                { NamedValueType.AITargetType,        new SubMethods((o, p, v, a) => new NameAndInfo(v, ValueNames.AITargetTypeInfo)) },
                 { NamedValueType.BattleSceneById,     new SubMethods((o, p, v, a) => new NameAndInfo(v, ValueNames.BattleSceneByIdInfo)) },
                 { NamedValueType.Character,           new SubMethods((o, p, v, a) => new NameAndInfo(v, ValueNames.CharacterInfo.Info[Scenario])) },
                 { NamedValueType.CharacterClass,      new SubMethods((o, p, v, a) => new NameAndInfo(v, ValueNames.CharacterClassInfo)) },

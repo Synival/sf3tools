@@ -127,7 +127,7 @@ namespace SF3.Models.Structs.X1.Battle {
         // Page 1
         // ------------------------------------------------------------------------------------------------------------
 
-        [TableViewModelColumn(displayOrder: 0, minWidth: 150, displayFormat: "X2", displayGroup: "Page1")]
+        [TableViewModelColumn(displayOrder: 0, minWidth: 150, displayFormat: "X2", displayGroup: "Metadata")]
         [BulkCopy]
         [NameGetter(NamedValueType.MonsterForSlot)]
         public int EnemyID {
@@ -144,14 +144,14 @@ namespace SF3.Models.Structs.X1.Battle {
         public int BattleID =>
             IsEnemy ? BattleIDEnemyCounter : (EnemyID == 0x5B) ? CharacterPlus : -1;
 
-        [TableViewModelColumn(displayOrder: 0.7f, displayName: "Battle ID", displayGroup: "Page1", displayFormat: "X2")]
+        [TableViewModelColumn(displayOrder: 0.7f, displayName: "Battle ID", displayGroup: "Metadata", displayFormat: "X2")]
         public string BattleIDStr =>
             (BattleID < 0) ? "--" : BattleID.ToString("X2");
 
         public int BattleAddress =>
             (BattleID < 0) ? 0 : (BattleID - 0x80) * 0xB0 + _battleAddrBase;
 
-        [TableViewModelColumn(displayOrder: 0.8f, displayName: "Battle Address", displayGroup: "Page1", isPointer: true)]
+        [TableViewModelColumn(displayOrder: 0.8f, displayName: "Battle Address", displayGroup: "Metadata", isPointer: true)]
         public string BattleAddressStr =>
             (BattleID < 0) ? "--" : BattleAddress.ToString("X6");
 
@@ -281,112 +281,112 @@ namespace SF3.Models.Structs.X1.Battle {
 
         [TableViewModelColumn(displayOrder: 15, displayFormat: "X2", displayGroup: "Page3")]
         [BulkCopy]
-        public int Condition1Zone {
+        public int Cond1Zone {
             get => Data.GetByte(_condition1ZoneAddr);
             set => Data.SetByte(_condition1ZoneAddr, (byte) value);
         }
 
-        [TableViewModelColumn(displayOrder: 16, displayName: "Condition1Movement?", displayFormat: "X2", displayGroup: "Page3")]
+        [TableViewModelColumn(displayOrder: 16, displayFormat: "X2", displayGroup: "Page3")]
         [BulkCopy]
-        public int Condition1Movement {
+        public int Cond1Mvmt {
             get => Data.GetByte(_condition1MovementAddr);
             set => Data.SetByte(_condition1MovementAddr, (byte) value);
         }
 
         [TableViewModelColumn(displayOrder: 17, displayFormat: "X2", displayGroup: "Page3")]
         [BulkCopy]
-        public int Condition1Unknown {
+        public int Cond1Unknown {
             get => Data.GetByte(_condition1UnknownAddr);
             set => Data.SetByte(_condition1UnknownAddr, (byte) value);
         }
 
         [TableViewModelColumn(displayOrder: 18, displayFormat: "X2", displayGroup: "Page3")]
         [BulkCopy]
-        public int Condition1AIIndex {
+        public int Cond1AIIndex {
             get => Data.GetByte(_condition1AIIndexAddr);
             set => Data.SetByte(_condition1AIIndexAddr, (byte) value);
         }
 
         [TableViewModelColumn(displayOrder: 19, displayFormat: "X2", displayGroup: "Page3")]
         [BulkCopy]
-        public int Condition2Zone {
+        public int Cond2Zone {
             get => Data.GetByte(_condition2ZoneAddr);
             set => Data.SetByte(_condition2ZoneAddr, (byte) value);
         }
 
-        [TableViewModelColumn(displayOrder: 20, displayName: "Condition2Movement?", displayFormat: "X2", displayGroup: "Page3")]
+        [TableViewModelColumn(displayOrder: 20, displayFormat: "X2", displayGroup: "Page3")]
         [BulkCopy]
-        public int Condition2Movement {
+        public int Cond2Mvmt {
             get => Data.GetByte(_condition2MovementAddr);
             set => Data.SetByte(_condition2MovementAddr, (byte) value);
         }
 
         [TableViewModelColumn(displayOrder: 21, displayFormat: "X2", displayGroup: "Page3")]
         [BulkCopy]
-        public int Condition2Unknown {
+        public int Cond2Unknown {
             get => Data.GetByte(_condition2UnknownAddr);
             set => Data.SetByte(_condition2UnknownAddr, (byte) value);
         }
 
         [TableViewModelColumn(displayOrder: 22, displayFormat: "X2", displayGroup: "Page3")]
         [BulkCopy]
-        public int Condition2AIIndex {
+        public int Cond2AIIndex {
             get => Data.GetByte(_condition2AIIndexAddr);
             set => Data.SetByte(_condition2AIIndexAddr, (byte) value);
         }
 
         [TableViewModelColumn(displayOrder: 23, displayFormat: "X2", displayGroup: "Page3")]
         [BulkCopy]
-        public int Condition3Zone {
+        public int Cond3Zone {
             get => Data.GetByte(_condition3ZoneAddr);
             set => Data.SetByte(_condition3ZoneAddr, (byte) value);
         }
 
-        [TableViewModelColumn(displayOrder: 24, displayName: "Condition3Movement?", displayFormat: "X2", displayGroup: "Page3")]
+        [TableViewModelColumn(displayOrder: 24, displayFormat: "X2", displayGroup: "Page3")]
         [BulkCopy]
-        public int Condition3Movement {
+        public int Cond3Mvmt {
             get => Data.GetByte(_condition3MovementAddr);
             set => Data.SetByte(_condition3MovementAddr, (byte) value);
         }
 
         [TableViewModelColumn(displayOrder: 25, displayFormat: "X2", displayGroup: "Page3")]
         [BulkCopy]
-        public int Condition3Unknown {
+        public int Cond3Unknown {
             get => Data.GetByte(_condition3UnknownAddr);
             set => Data.SetByte(_condition3UnknownAddr, (byte) value);
         }
 
         [TableViewModelColumn(displayOrder: 26, displayFormat: "X2", displayGroup: "Page3")]
         [BulkCopy]
-        public int Condition3AIIndex {
+        public int Cond3AIIndex {
             get => Data.GetByte(_condition3AIIndexAddr);
             set => Data.SetByte(_condition3AIIndexAddr, (byte) value);
         }
 
         [TableViewModelColumn(displayOrder: 27, displayFormat: "X2", displayGroup: "Page3")]
         [BulkCopy]
-        public int Condition4Zone {
+        public int Cond4Zone {
             get => Data.GetByte(_condition4ZoneAddr);
             set => Data.SetByte(_condition4ZoneAddr, (byte) value);
         }
 
-        [TableViewModelColumn(displayOrder: 28, displayName: "Condition4Movement?", displayFormat: "X2", displayGroup: "Page3")]
+        [TableViewModelColumn(displayOrder: 28, displayFormat: "X2", displayGroup: "Page3")]
         [BulkCopy]
-        public int Condition4Movement {
+        public int Cond4Mvmt {
             get => Data.GetByte(_condition4MovementAddr);
             set => Data.SetByte(_condition4MovementAddr, (byte) value);
         }
 
         [TableViewModelColumn(displayOrder: 29, displayFormat: "X2", displayGroup: "Page3")]
         [BulkCopy]
-        public int Condition4Unknown {
+        public int Cond4Unknown {
             get => Data.GetByte(_condition4UnknownAddr);
             set => Data.SetByte(_condition4UnknownAddr, (byte) value);
         }
 
         [TableViewModelColumn(displayOrder: 30, displayFormat: "X2", displayGroup: "Page3")]
         [BulkCopy]
-        public int Condition4AIIndex {
+        public int Cond4AIIndex {
             get => Data.GetByte(_condition4AIIndex);
             set => Data.SetByte(_condition4AIIndex, (byte) value);
         }
@@ -395,86 +395,90 @@ namespace SF3.Models.Structs.X1.Battle {
         // Page 4
         // ------------------------------------------------------------------------------------------------------------
 
-        [TableViewModelColumn(displayOrder: 31, displayFormat: "X2", displayGroup: "Page4")]
+        [TableViewModelColumn(displayOrder: 31, displayFormat: "X2", displayGroup: "Page4", minWidth: 100)]
+        [NameGetter(NamedValueType.AITargetType)]
         [BulkCopy]
-        public int AITag1 {
+        public int AI1Tag {
             get => Data.GetByte(_aiTag1Addr);
             set => Data.SetByte(_aiTag1Addr, (byte) value);
         }
 
         [TableViewModelColumn(displayOrder: 32, displayFormat: "X2", displayGroup: "Page4")]
         [BulkCopy]
-        public int AIType1 {
+        public int AI1Type {
             get => Data.GetByte(_aiType1Addr);
             set => Data.SetByte(_aiType1Addr, (byte) value);
         }
 
         [TableViewModelColumn(displayOrder: 33, displayFormat: "X2", displayGroup: "Page4")]
         [BulkCopy]
-        public int AIAggr1 {
+        public int AI1Aggr {
             get => Data.GetByte(_aiAggr1Addr);
             set => Data.SetByte(_aiAggr1Addr, (byte) value);
         }
 
-        [TableViewModelColumn(displayOrder: 34, displayFormat: "X2", displayGroup: "Page4")]
+        [TableViewModelColumn(displayOrder: 34, displayFormat: "X2", displayGroup: "Page4", minWidth: 100)]
+        [NameGetter(NamedValueType.AITargetType)]
         [BulkCopy]
-        public int AITag2 {
+        public int AI2Tag {
             get => Data.GetByte(_aiTag2Addr);
             set => Data.SetByte(_aiTag2Addr, (byte) value);
         }
 
         [TableViewModelColumn(displayOrder: 35, displayFormat: "X2", displayGroup: "Page4")]
         [BulkCopy]
-        public int AIType2 {
+        public int AI2Type {
             get => Data.GetByte(_aiType2Addr);
             set => Data.SetByte(_aiType2Addr, (byte) value);
         }
 
         [TableViewModelColumn(displayOrder: 36, displayFormat: "X2", displayGroup: "Page4")]
         [BulkCopy]
-        public int AIAggr2 {
+        public int AI2Aggr {
             get => Data.GetByte(_aiAggr2Addr);
             set => Data.SetByte(_aiAggr2Addr, (byte) value);
         }
 
-        [TableViewModelColumn(displayOrder: 37, displayFormat: "X2", displayGroup: "Page4")]
+        [TableViewModelColumn(displayOrder: 37, displayFormat: "X2", displayGroup: "Page4", minWidth: 100)]
+        [NameGetter(NamedValueType.AITargetType)]
         [BulkCopy]
-        public int AITag3 {
+        public int AI3Tag {
             get => Data.GetByte(_aiTag3Addr);
             set => Data.SetByte(_aiTag3Addr, (byte) value);
         }
 
         [TableViewModelColumn(displayOrder: 38, displayFormat: "X2", displayGroup: "Page4")]
         [BulkCopy]
-        public int AIType3 {
+        public int AI3Type {
             get => Data.GetByte(_aiType3Addr);
             set => Data.SetByte(_aiType3Addr, (byte) value);
         }
 
         [TableViewModelColumn(displayOrder: 39, displayFormat: "X2", displayGroup: "Page4")]
         [BulkCopy]
-        public int AIAggr3 {
+        public int AI3Aggr {
             get => Data.GetByte(_aiAggr3Addr);
             set => Data.SetByte(_aiAggr3Addr, (byte) value);
         }
 
-        [TableViewModelColumn(displayOrder: 40, displayFormat: "X2", displayGroup: "Page4")]
+        [TableViewModelColumn(displayOrder: 40, displayFormat: "X2", displayGroup: "Page4", minWidth: 100)]
+        [NameGetter(NamedValueType.AITargetType)]
         [BulkCopy]
-        public int AITag4 {
+        public int AI4Tag {
             get => Data.GetByte(_aiTag4Addr);
             set => Data.SetByte(_aiTag4Addr, (byte) value);
         }
 
         [TableViewModelColumn(displayOrder: 41, displayFormat: "X2", displayGroup: "Page4")]
         [BulkCopy]
-        public int AIType4 {
+        public int AI4Type {
             get => Data.GetByte(_aiType4Addr);
             set => Data.SetByte(_aiType4Addr, (byte) value);
         }
 
         [TableViewModelColumn(displayOrder: 42, displayFormat: "X2", displayGroup: "Page4")]
         [BulkCopy]
-        public int AIAggr4 {
+        public int AI4Aggr {
             get => Data.GetByte(_aiAggr4Addr);
             set => Data.SetByte(_aiAggr4Addr, (byte) value);
         }

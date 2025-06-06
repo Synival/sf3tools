@@ -3,90 +3,98 @@ using SF3.ByteData;
 
 namespace SF3.Models.Structs.X1.Battle {
     public class SpawnZone : Struct {
-        private readonly int _unknown0x00Addr;
-        private readonly int _bottomLeftXAddr;
-        private readonly int _bottomLeftZAddr;
-        private readonly int _topLeftXAddr;
-        private readonly int _topLeftZAddr;
-        private readonly int _topRightXAddr;
-        private readonly int _topRightZAddr;
-        private readonly int _bottomRightXAddr;
-        private readonly int _bottomRightZAddr;
+        private readonly int _numPointsAddr;
+        private readonly int _padding0x02Addr;
+        private readonly int _x1Addr;
+        private readonly int _z1Addr;
+        private readonly int _x2Addr;
+        private readonly int _z2Addr;
+        private readonly int _x3Addr;
+        private readonly int _z3Addr;
+        private readonly int _x4Addr;
+        private readonly int _z4Addr;
 
         public SpawnZone(IByteData data, int id, string name, int address)
         : base(data, id, name, address, 0x12) {
-            _unknown0x00Addr  = Address + 0x00; // 2 bytes  
-            _bottomLeftXAddr  = Address + 0x02; // 2 bytes
-            _bottomLeftZAddr  = Address + 0x04; // 2 bytes
-            _topLeftXAddr     = Address + 0x06; // 2 bytes
-            _topLeftZAddr     = Address + 0x08; // 2 bytes
-            _topRightXAddr    = Address + 0x0a; // 2 bytes
-            _topRightZAddr    = Address + 0x0c; // 2 bytes
-            _bottomRightXAddr = Address + 0x0e; // 2 bytes
-            _bottomRightZAddr = Address + 0x10; // 2 bytes
+            _numPointsAddr   = Address + 0x00; // 1 byte
+            _padding0x02Addr = Address + 0x01; // 1 byte
+            _x1Addr          = Address + 0x02; // 2 bytes
+            _z1Addr          = Address + 0x04; // 2 bytes
+            _x2Addr          = Address + 0x06; // 2 bytes
+            _z2Addr          = Address + 0x08; // 2 bytes
+            _x3Addr          = Address + 0x0a; // 2 bytes
+            _z3Addr          = Address + 0x0c; // 2 bytes
+            _x4Addr          = Address + 0x0e; // 2 bytes
+            _z4Addr          = Address + 0x10; // 2 bytes
         }
 
-        [TableViewModelColumn(displayOrder: 0, displayName: "+0x00", displayFormat: "X2")]
+        [TableViewModelColumn(displayOrder: 0, displayFormat: "X2")]
         [BulkCopy]
-        public int Unknown0x00 {
-            get => Data.GetWord(_unknown0x00Addr);
-            set => Data.SetWord(_unknown0x00Addr, value);
+        public byte NumPoints {
+            get => (byte) Data.GetByte(_numPointsAddr);
+            set => Data.SetByte(_numPointsAddr, value);
+        }
+
+        [BulkCopy]
+        public byte Padding0x02 {
+            get => (byte) Data.GetByte(_padding0x02Addr);
+            set => Data.SetByte(_padding0x02Addr, value);
         }
 
         [TableViewModelColumn(displayOrder: 1)]
         [BulkCopy]
-        public int BottomLeftX {
-            get => Data.GetWord(_bottomLeftXAddr);
-            set => Data.SetWord(_bottomLeftXAddr, value);
+        public int X1 {
+            get => Data.GetWord(_x1Addr);
+            set => Data.SetWord(_x1Addr, value);
         }
 
         [TableViewModelColumn(displayOrder: 2)]
         [BulkCopy]
-        public int BottomLeftZ {
-            get => Data.GetWord(_bottomLeftZAddr);
-            set => Data.SetWord(_bottomLeftZAddr, value);
+        public int Z1 {
+            get => Data.GetWord(_z1Addr);
+            set => Data.SetWord(_z1Addr, value);
         }
 
         [TableViewModelColumn(displayOrder: 3)]
         [BulkCopy]
-        public int TopLeftX {
-            get => Data.GetWord(_topLeftXAddr);
-            set => Data.SetWord(_topLeftXAddr, value);
+        public int X2 {
+            get => Data.GetWord(_x2Addr);
+            set => Data.SetWord(_x2Addr, value);
         }
 
         [TableViewModelColumn(displayOrder: 4)]
         [BulkCopy]
-        public int TopLeftZ {
-            get => Data.GetWord(_topLeftZAddr);
-            set => Data.SetWord(_topLeftZAddr, value);
+        public int Z2 {
+            get => Data.GetWord(_z2Addr);
+            set => Data.SetWord(_z2Addr, value);
         }
 
         [TableViewModelColumn(displayOrder: 5)]
         [BulkCopy]
-        public int TopRightX {
-            get => Data.GetWord(_topRightXAddr);
-            set => Data.SetWord(_topRightXAddr, value);
+        public int X3 {
+            get => Data.GetWord(_x3Addr);
+            set => Data.SetWord(_x3Addr, value);
         }
 
         [TableViewModelColumn(displayOrder: 6)]
         [BulkCopy]
-        public int TopRightZ {
-            get => Data.GetWord(_topRightZAddr);
-            set => Data.SetWord(_topRightZAddr, value);
+        public int Z3 {
+            get => Data.GetWord(_z3Addr);
+            set => Data.SetWord(_z3Addr, value);
         }
 
         [TableViewModelColumn(displayOrder: 7)]
         [BulkCopy]
-        public int BottomRightX {
-            get => Data.GetWord(_bottomRightXAddr);
-            set => Data.SetWord(_bottomRightXAddr, value);
+        public int X4 {
+            get => Data.GetWord(_x4Addr);
+            set => Data.SetWord(_x4Addr, value);
         }
 
         [TableViewModelColumn(displayOrder: 8)]
         [BulkCopy]
-        public int BottomRightZ {
-            get => Data.GetWord(_bottomRightZAddr);
-            set => Data.SetWord(_bottomRightZAddr, value);
+        public int Z4 {
+            get => Data.GetWord(_z4Addr);
+            set => Data.SetWord(_z4Addr, value);
         }
     }
 }
