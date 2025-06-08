@@ -1,7 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Reflection;
 using System.Windows.Forms;
 using BrightIdeasSoftware;
+using CommonLib.Attributes;
+using CommonLib.ViewModels;
+using SF3.Models.Structs;
 using SF3.Win.Extensions;
 
 namespace SF3.Win.Controls {
@@ -38,6 +42,46 @@ namespace SF3.Win.Controls {
             _timer.Interval = 100;
             _timer.Tick += CheckForVisibility;
             _timer.Start();
+            this.CellToolTipGetter = GetCellTooltip;
+        }
+
+        private string GetCellTooltip(OLVColumn column, object modelObject) {
+            Type modelType = modelObject.GetType();
+            Struct modelStruct = modelObject as Struct;
+
+            // Get the property. Allow for failure in case there is any ambiguity. If the property doesn't exist,
+            // fail silently.
+            PropertyInfo modelProp = null;
+            TableViewModelColumn propAttr = null;
+            try {
+                modelProp = modelType.GetProperty(column.AspectName);
+
+                var attrs = modelProp?.GetCustomAttributes(typeof(TableViewModelColumnAttribute), true) ?? [];
+                if (attrs != null && attrs.Length == 1)
+                    propAttr = ((TableViewModelColumnAttribute) attrs[0]).Column;
+            }
+            catch {
+            }
+
+            // We can build a tooltip. Make a list of lines to add, starting with the property name.
+            var fieldName = (modelStruct != null ? $"{modelStruct.Name}." : "") + (propAttr != null ? propAttr.DisplayName ?? column.AspectName : column.AspectName) + ":";
+            var lines = new List<string>() { fieldName };
+
+            if (modelStruct != null)
+                lines.Add($"  Row File Address: 0x{modelStruct.Address:X4}");
+
+            // Add addresses.
+            if (propAttr?.AddressField != null) {
+                var field = modelType.GetField(propAttr.AddressField, BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.GetField);
+                if (field != null) {
+                    var value = (int) field.GetValue(modelObject);
+                    if (modelStruct != null)
+                        lines.Add($"  Property Offset in Row: 0x{value - modelStruct.Address:X2}");
+                    lines.Add($"  Property File Address: 0x{value:X4}");
+                }
+            }
+
+            return string.Join("\r\n", lines);
         }
 
         protected override void OnVisibleChanged(EventArgs e) {

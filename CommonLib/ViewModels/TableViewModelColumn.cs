@@ -14,7 +14,7 @@ namespace CommonLib.ViewModels {
             string visibilityProperty,
             string displayGroup
         ) {
-            AddressProperty = addressField;
+            AddressField  = addressField;
             DisplayName   = displayName;
             DisplayOrder  = displayOrder;
             DisplayFormat = displayFormat;
@@ -25,7 +25,7 @@ namespace CommonLib.ViewModels {
             DisplayGroup  = displayGroup;
         }
 
-        public string AddressProperty { get; }
+        public string AddressField { get; }
         public string DisplayName { get; }
         public float DisplayOrder { get; }
         public string DisplayFormat { get; }
