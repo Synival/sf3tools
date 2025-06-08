@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
 using System.Windows.Forms;
 using BrightIdeasSoftware;
 using CommonLib.NamedValues;
-using CommonLib.ViewModels;
 using SF3.Win.Controls;
 using SF3.Win.Extensions;
 using static CommonLib.Extensions.TypeExtensions;
@@ -170,40 +168,6 @@ namespace SF3.Win.Views {
 
             OLVControl.RefreshAllItems();
         }
-
-        /// <summary>
-        /// Item row representing an individual property with its own view model.
-        /// </summary>
-        private class ModelProperty {
-            public ModelProperty(object model, PropertyInfo propertyInfo, TableViewModelColumn vmColumn, int index) {
-                Model                = model;
-                PropertyInfo         = propertyInfo;
-                VMColumn             = vmColumn;
-                Index                = index;
-                IsReadOnly           = !vmColumn.GetColumnIsEditable(propertyInfo);
-                Name                 = vmColumn.GetColumnText(propertyInfo);
-                AspectToStringFormat = vmColumn.GetColumnAspectToStringFormat();
-                Width                = vmColumn.GetColumnWidth();
-            }
-
-            public object Model { get; }
-            public PropertyInfo PropertyInfo { get; }
-            public TableViewModelColumn VMColumn { get; }
-            public int Index { get; }
-
-            public bool IsReadOnly { get; }
-            public string Name { get; }
-            public string AspectToStringFormat { get; }
-            public int Width { get; }
-
-            public object Value {
-                get => PropertyInfo.GetValue(Model, null);
-                set {
-                    if (!IsReadOnly)
-                        PropertyInfo.SetValue(Model, value);
-                }
-            }
-        };
 
         private object _model = null;
 

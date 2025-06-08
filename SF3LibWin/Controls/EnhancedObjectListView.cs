@@ -7,6 +7,7 @@ using CommonLib.Attributes;
 using CommonLib.ViewModels;
 using SF3.Models.Structs;
 using SF3.Win.Extensions;
+using SF3.Win.Views;
 
 namespace SF3.Win.Controls {
 
@@ -48,40 +49,64 @@ namespace SF3.Win.Controls {
         private string GetCellTooltip(OLVColumn column, object modelObject) {
             Type modelType = modelObject.GetType();
             Struct modelStruct = modelObject as Struct;
-
-            // Get the property. Allow for failure in case there is any ambiguity. If the property doesn't exist,
-            // fail silently.
             PropertyInfo modelProp = null;
             TableViewModelColumn propAttr = null;
-            try {
-                modelProp = modelType.GetProperty(column.AspectName);
+            string propName = column.AspectName;
 
-                var attrs = modelProp?.GetCustomAttributes(typeof(TableViewModelColumnAttribute), true) ?? [];
-                if (attrs != null && attrs.Length == 1)
-                    propAttr = ((TableViewModelColumnAttribute) attrs[0]).Column;
+            // For data tables, the model is an abstraction of the property as a row, not a column.
+            // Fetch the data directly from the 'ModelProperty'.
+            if (modelObject is ModelProperty modelProperty) {
+                modelObject = modelProperty.Model;
+                modelType   = modelObject.GetType();
+                modelStruct = modelObject as Struct;
+                modelProp   = modelProperty.PropertyInfo;
+                propAttr    = modelProperty.VMColumn;
+                propName    = modelProperty.Name;
             }
-            catch {
-            }
+            // Otherwise, assume 'modelObject' really is the model. Fetch the property and its metadata.
+            else {
+                // Get the property. Allow for failure in case there is any ambiguity. If the property doesn't exist,
+                // fail silently.
+                try {
+                    modelProp = modelType.GetProperty(column.AspectName);
 
-            // We can build a tooltip. Make a list of lines to add, starting with the property name.
-            var fieldName = (modelStruct != null ? $"{modelStruct.Name}." : "") + (propAttr != null ? propAttr.DisplayName ?? column.AspectName : column.AspectName) + ":";
-            var lines = new List<string>() { fieldName };
-
-            if (modelStruct != null)
-                lines.Add($"  Row File Address: 0x{modelStruct.Address:X4}");
-
-            // Add addresses.
-            if (propAttr?.AddressField != null) {
-                var field = modelType.GetField(propAttr.AddressField, BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.GetField);
-                if (field != null) {
-                    var value = (int) field.GetValue(modelObject);
-                    if (modelStruct != null)
-                        lines.Add($"  Property Offset in Row: 0x{value - modelStruct.Address:X2}");
-                    lines.Add($"  Property File Address: 0x{value:X4}");
+                    var attrs = modelProp?.GetCustomAttributes(typeof(TableViewModelColumnAttribute), true) ?? [];
+                    if (attrs != null && attrs.Length == 1)
+                        propAttr = ((TableViewModelColumnAttribute) attrs[0]).Column;
+                }
+                catch {
                 }
             }
 
-            return string.Join("\r\n", lines);
+            // If there's no property, let's not bother showing anything.
+            if (modelStruct == null)
+                return null;
+
+            // We can build a tooltip. Make a list of lines to add, starting with the property name.
+            var fieldName = (modelStruct != null ? $"{modelStruct.Name}." : "") + (propAttr != null ? propAttr.DisplayName ?? propName : propName) + "";
+            var lines = new List<string>() { fieldName };
+
+            if (modelStruct != null) {
+                lines.Add("Row Info:");
+                lines.Add($"  ID: 0x{modelStruct.ID:X2}");
+                lines.Add($"  File Address: 0x{modelStruct.Address:X4}");
+            }
+
+            // Add addresses.
+            if (modelProp != null) {
+                if (propAttr?.AddressField != null) {
+                    var field = modelType.GetField(propAttr.AddressField, BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.GetField);
+                    if (field != null) {
+                        lines.Add("Property Info:");
+                        var value = (int) field.GetValue(modelObject);
+                        if (modelStruct != null)
+                            lines.Add($"  Offset in Row: 0x{value - modelStruct.Address:X2}");
+                        lines.Add($"  File Address: 0x{value:X4}");
+                    }
+                }
+            }
+
+            return string.Join("\n", lines);
         }
 
         protected override void OnVisibleChanged(EventArgs e) {
