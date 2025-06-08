@@ -10,7 +10,7 @@ namespace SF3.Models.Structs.Shared {
             _fileIdAddr = Address + 0x00; // 4 bytes
         }
 
-        [TableViewModelColumn(displayOrder: 0, displayFormat: "X3", minWidth: 120)]
+        [TableViewModelColumn(addressField: nameof(_fileIdAddr), displayOrder: 0, displayFormat: "X3", minWidth: 120)]
         [NameGetter(NamedValueType.FileIndex)]
         [BulkCopy]
         public int FileId {

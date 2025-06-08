@@ -19,7 +19,7 @@ namespace CommonLib.Extensions {
 
             var columnProperties = type
                 .GetProperties()
-                // TODO: this should actually order by inheriency chain, not "is this me?"
+                // TODO: this should actually order by inherency chain, not "is this me?"
                 .OrderBy(x => x.DeclaringType == type ? 1 : 0)
                 .ToList();
 

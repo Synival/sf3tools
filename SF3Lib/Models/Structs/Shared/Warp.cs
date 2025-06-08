@@ -35,12 +35,13 @@ namespace SF3.Models.Structs.Shared {
             }
         }
 
+        [TableViewModelColumn(addressField: nameof(Address), displayOrder: 0, displayFormat: "X8")]
         private uint RawData {
             get => (uint) Data.GetDouble(Address);
             set => Data.SetDouble(Address, (int) value);
         }
 
-        [TableViewModelColumn(displayOrder: 2, displayFormat: "X2")]
+        [TableViewModelColumn(addressField: null, displayOrder: 1, displayFormat: "X2")]
         [BulkCopy]
         public byte LocationID {
             // First 5 bits (F800,0000)
@@ -50,7 +51,7 @@ namespace SF3.Models.Structs.Shared {
 
         public NamedValueType? IfFlagUnsetType => (WarpTrigger != 0 && LoadID != 0x1FF) ? NamedValueType.GameFlag : (NamedValueType?) null;
 
-        [TableViewModelColumn(displayOrder: 2, displayFormat: "X2", minWidth: 200)]
+        [TableViewModelColumn(addressField: null, displayOrder: 2, displayFormat: "X2", minWidth: 200)]
         [BulkCopy]
         [NameGetter(NamedValueType.ConditionalType, nameof(IfFlagUnsetType))]
         public int IfFlagUnset {
@@ -59,7 +60,7 @@ namespace SF3.Models.Structs.Shared {
             set => RawData = (RawData & ~0x07FF_8000u) | ((uint) (value << 15) & 0x07FF_8000u);
         }
 
-        [TableViewModelColumn(displayOrder: 3, displayFormat: "X2")]
+        [TableViewModelColumn(addressField: null, displayOrder: 3, displayFormat: "X2")]
         [BulkCopy]
         public byte WarpTrigger {
             // Next 6 bits (0000,7E00)
@@ -67,10 +68,10 @@ namespace SF3.Models.Structs.Shared {
             set => RawData = (RawData & ~0x0000_7E00u) | ((uint) (value << 9) & 0x0000_7E00u);
         }
 
-        [TableViewModelColumn(displayOrder: 3.5f, visibilityProperty: nameof(IsBattle))]
+        [TableViewModelColumn(addressField: null, displayOrder: 3.5f, visibilityProperty: nameof(IsBattle))]
         public BattleWarpType? BattleWarpTrigger => (IsBattle && Enum.IsDefined(typeof(BattleWarpType), (int) WarpTrigger)) ? (BattleWarpType?) (int) WarpTrigger : null;
 
-        [TableViewModelColumn(displayOrder: 4, minWidth: 120, displayFormat: "X3")]
+        [TableViewModelColumn(addressField: null, displayOrder: 4, minWidth: 120, displayFormat: "X3")]
         [BulkCopy]
         [NameGetter(NamedValueType.Load)]
         public int LoadID {
@@ -79,7 +80,7 @@ namespace SF3.Models.Structs.Shared {
             set => RawData = (uint) ((RawData & ~0x0000_01FFu) | (value & 0x0000_01FFu));
         }
 
-        [TableViewModelColumn(displayOrder: 4, displayName: "MPD Tie-In", displayFormat: "X2")]
+        [TableViewModelColumn(addressField: null, displayOrder: 4, displayName: "MPD Tie-In", displayFormat: "X2")]
         public byte? MPDTieIn {
             get {
                 var warpId = WarpTrigger;

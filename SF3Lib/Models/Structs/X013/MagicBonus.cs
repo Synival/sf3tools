@@ -40,7 +40,7 @@ namespace SF3.Models.Structs.X013 {
 
         public bool Has32BitValues { get; }
 
-        [TableViewModelColumn(displayOrder: 0)]
+        [TableViewModelColumn(addressField: nameof(_earthBonusAddr), displayOrder: 0)]
         [BulkCopy]
         public int EarthBonus {
             get => Has32BitValues ? Data.GetDouble(_earthBonusAddr) : (sbyte) Data.GetByte(_earthBonusAddr);
@@ -52,7 +52,7 @@ namespace SF3.Models.Structs.X013 {
             }
         }
 
-        [TableViewModelColumn(displayOrder: 1)]
+        [TableViewModelColumn(addressField: nameof(_fireBonusAddr), displayOrder: 1)]
         [BulkCopy]
         public int FireBonus {
             get => Has32BitValues ? Data.GetDouble(_fireBonusAddr) : (sbyte) Data.GetByte(_fireBonusAddr);
@@ -64,7 +64,7 @@ namespace SF3.Models.Structs.X013 {
             }
         }
 
-        [TableViewModelColumn(displayOrder: 2)]
+        [TableViewModelColumn(addressField: nameof(_iceBonusAddr), displayOrder: 2)]
         [BulkCopy]
         public int IceBonus {
             get => Has32BitValues ? Data.GetDouble(_iceBonusAddr) : (sbyte) Data.GetByte(_iceBonusAddr);
@@ -76,7 +76,7 @@ namespace SF3.Models.Structs.X013 {
             }
         }
 
-        [TableViewModelColumn(displayOrder: 3)]
+        [TableViewModelColumn(addressField: nameof(_sparkBonusAddr), displayOrder: 3)]
         [BulkCopy]
         public int SparkBonus {
             get => Has32BitValues ? Data.GetDouble(_sparkBonusAddr) : (sbyte) Data.GetByte(_sparkBonusAddr);
@@ -88,7 +88,7 @@ namespace SF3.Models.Structs.X013 {
             }
         }
 
-        [TableViewModelColumn(displayOrder: 4)]
+        [TableViewModelColumn(addressField: nameof(_windBonusAddr), displayOrder: 4)]
         [BulkCopy]
         public int WindBonus {
             get => Has32BitValues ? Data.GetDouble(_windBonusAddr) : (sbyte) Data.GetByte(_windBonusAddr);
@@ -100,7 +100,7 @@ namespace SF3.Models.Structs.X013 {
             }
         }
 
-        [TableViewModelColumn(displayOrder: 5)]
+        [TableViewModelColumn(addressField: nameof(_lightBonusAddr), displayOrder: 5)]
         [BulkCopy]
         public int LightBonus {
             get => Has32BitValues ? Data.GetDouble(_lightBonusAddr) : (sbyte) Data.GetByte(_lightBonusAddr);
@@ -112,7 +112,7 @@ namespace SF3.Models.Structs.X013 {
             }
         }
 
-        [TableViewModelColumn(displayOrder: 6)]
+        [TableViewModelColumn(addressField: nameof(_darkBonusAddr), displayOrder: 6)]
         [BulkCopy]
         public int DarkBonus {
             get => Has32BitValues ? Data.GetDouble(_darkBonusAddr) : (sbyte) Data.GetByte(_darkBonusAddr);
@@ -124,7 +124,7 @@ namespace SF3.Models.Structs.X013 {
             }
         }
 
-        [TableViewModelColumn(displayOrder: 7)]
+        [TableViewModelColumn(addressField: nameof(_unknownBonusAddr), displayOrder: 7)]
         [BulkCopy]
         public int UnknownBonus {
             get => Has32BitValues ? Data.GetDouble(_unknownBonusAddr) : (sbyte) Data.GetByte(_unknownBonusAddr);

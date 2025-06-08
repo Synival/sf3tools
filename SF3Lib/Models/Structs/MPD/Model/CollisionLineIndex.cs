@@ -6,7 +6,7 @@ namespace SF3.Models.Structs.MPD.Model {
         public CollisionLineIndex(IByteData data, int id, string name, int address) : base(data, id, name, address, 0x02) {
         }
 
-        [TableViewModelColumn(displayOrder: 0, displayFormat: "X2")]
+        [TableViewModelColumn(addressField: nameof(Address), displayOrder: 0, displayFormat: "X2")]
         [BulkCopy]
         public ushort LineIndex {
             get => (ushort) Data.GetWord(Address);

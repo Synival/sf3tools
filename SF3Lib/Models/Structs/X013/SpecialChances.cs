@@ -30,42 +30,42 @@ namespace SF3.Models.Structs.X013 {
             }
         }
 
-        [TableViewModelColumn(displayOrder: 0)]
+        [TableViewModelColumn(addressField: nameof(_twoSpecials2Addr), displayOrder: 0)]
         [BulkCopy]
         public int TwoSpecials2 {
             get => Data.GetByte(_twoSpecials2Addr);
             set => Data.SetByte(_twoSpecials2Addr, (byte) value);
         }
 
-        [TableViewModelColumn(displayOrder: 1)]
+        [TableViewModelColumn(addressField: nameof(_threeSpecials3Addr), displayOrder: 1)]
         [BulkCopy]
         public int ThreeSpecials3 {
             get => Data.GetByte(_threeSpecials3Addr);
             set => Data.SetByte(_threeSpecials3Addr, (byte) value);
         }
 
-        [TableViewModelColumn(displayOrder: 2)]
+        [TableViewModelColumn(addressField: nameof(_threeSpecials2Addr), displayOrder: 2)]
         [BulkCopy]
         public int ThreeSpecials2 {
             get => Data.GetByte(_threeSpecials2Addr);
             set => Data.SetByte(_threeSpecials2Addr, (byte) value);
         }
 
-        [TableViewModelColumn(displayOrder: 3)]
+        [TableViewModelColumn(addressField: nameof(_fourSpecials4Addr), displayOrder: 3)]
         [BulkCopy]
         public int FourSpecials4 {
             get => Data.GetByte(_fourSpecials4Addr);
             set => Data.SetByte(_fourSpecials4Addr, (byte) value);
         }
 
-        [TableViewModelColumn(displayOrder: 4)]
+        [TableViewModelColumn(addressField: nameof(_fourSpecials3Addr), displayOrder: 4)]
         [BulkCopy]
         public int FourSpecials3 {
             get => Data.GetByte(_fourSpecials3Addr);
             set => Data.SetByte(_fourSpecials3Addr, (byte) value);
         }
 
-        [TableViewModelColumn(displayOrder: 5)]
+        [TableViewModelColumn(addressField: nameof(_fourSpecials2Addr), displayOrder: 5)]
         [BulkCopy]
         public int FourSpecials2 {
             get => Data.GetByte(_fourSpecials2Addr);

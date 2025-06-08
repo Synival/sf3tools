@@ -23,49 +23,49 @@ namespace SF3.Models.Structs.MPD.Model {
         }
 
         [BulkCopy]
-        [TableViewModelColumn(displayOrder: 0, minWidth: 75)]
+        [TableViewModelColumn(addressField: nameof(_normalXAddr), displayOrder: 0, minWidth: 75)]
         public float NormalX {
             get => Data.GetFIXED(_normalXAddr).Float;
             set => Data.SetFIXED(_normalXAddr, new FIXED(value, 0));
         }
 
         [BulkCopy]
-        [TableViewModelColumn(displayOrder: 1, minWidth: 75)]
+        [TableViewModelColumn(addressField: nameof(_normalYAddr), displayOrder: 1, minWidth: 75)]
         public float NormalY {
             get => Data.GetFIXED(_normalYAddr).Float;
             set => Data.SetFIXED(_normalYAddr, new FIXED(value, 0));
         }
 
         [BulkCopy]
-        [TableViewModelColumn(displayOrder: 2, minWidth: 75)]
+        [TableViewModelColumn(addressField: nameof(_normalZAddr), displayOrder: 2, minWidth: 75)]
         public float NormalZ {
             get => Data.GetFIXED(_normalZAddr).Float;
             set => Data.SetFIXED(_normalZAddr, new FIXED(value, 0));
         }
 
         [BulkCopy]
-        [TableViewModelColumn(displayOrder: 3, displayFormat: "X4")]
+        [TableViewModelColumn(addressField: nameof(_vertex1Addr), displayOrder: 3, displayFormat: "X4")]
         public ushort Vertex1 {
             get => (ushort) Data.GetWord(_vertex1Addr);
             set => Data.SetWord(_vertex1Addr, value);
         }
 
         [BulkCopy]
-        [TableViewModelColumn(displayOrder: 4, displayFormat: "X4")]
+        [TableViewModelColumn(addressField: nameof(_vertex2Addr), displayOrder: 4, displayFormat: "X4")]
         public ushort Vertex2 {
             get => (ushort) Data.GetWord(_vertex2Addr);
             set => Data.SetWord(_vertex2Addr, value);
         }
 
         [BulkCopy]
-        [TableViewModelColumn(displayOrder: 5, displayFormat: "X4")]
+        [TableViewModelColumn(addressField: nameof(_vertex3Addr), displayOrder: 5, displayFormat: "X4")]
         public ushort Vertex3 {
             get => (ushort) Data.GetWord(_vertex3Addr);
             set => Data.SetWord(_vertex3Addr, value);
         }
 
         [BulkCopy]
-        [TableViewModelColumn(displayOrder: 6, displayFormat: "X4")]
+        [TableViewModelColumn(addressField: nameof(_vertex4Addr), displayOrder: 6, displayFormat: "X4")]
         public ushort Vertex4 {
             get => (ushort) Data.GetWord(_vertex4Addr);
             set => Data.SetWord(_vertex4Addr, value);

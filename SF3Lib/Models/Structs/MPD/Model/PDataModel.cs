@@ -25,51 +25,51 @@ namespace SF3.Models.Structs.MPD.Model {
             _attributesOffsetAddr = Address + 0x10; // 4 bytes
         }
 
-        [TableViewModelColumn(displayOrder: -2.66f, displayName: "Collection", minWidth: 110)]
+        [TableViewModelColumn(addressField: null, displayOrder: -2.66f, displayName: "Collection", minWidth: 110)]
         public ModelCollectionType Collection { get; }
 
-        [TableViewModelColumn(displayOrder: -2.33f, displayName: "Chunk #")]
+        [TableViewModelColumn(addressField: null, displayOrder: -2.33f, displayName: "Chunk #")]
         public int? ChunkIndex { get; }
 
-        [TableViewModelColumn(displayOrder: -2.15f, displayName: "Index")]
+        [TableViewModelColumn(addressField: null, displayOrder: -2.15f, displayName: "Index")]
         public int Index { get; }
 
-        [TableViewModelColumn(displayOrder: 0)]
+        [TableViewModelColumn(addressField: null, displayOrder: 0)]
         public int Refs { get; }
 
-        [TableViewModelColumn(displayOrder: 0.25f, isPointer: true, isReadOnly: true)]
+        [TableViewModelColumn(addressField: null, displayOrder: 0.25f, isPointer: true, isReadOnly: true)]
         public uint RamAddress { get; set; }
 
         [BulkCopy]
-        [TableViewModelColumn(displayOrder: 0.5f, isPointer: true)]
+        [TableViewModelColumn(addressField: nameof(_verticesOffsetAddr), displayOrder: 0.5f, isPointer: true)]
         public uint VerticesOffset {
             get => (uint) Data.GetDouble(_verticesOffsetAddr);
             set => Data.SetDouble(_verticesOffsetAddr, (int) value);
         }
 
         [BulkCopy]
-        [TableViewModelColumn(displayOrder: 1)]
+        [TableViewModelColumn(addressField: nameof(_vertexCountAddr), displayOrder: 1)]
         public int VertexCount {
             get => Data.GetDouble(_vertexCountAddr);
             set => Data.SetDouble(_vertexCountAddr, value);
         }
 
         [BulkCopy]
-        [TableViewModelColumn(displayOrder: 2, isPointer: true)]
+        [TableViewModelColumn(addressField: nameof(_polygonsOffsetAddr), displayOrder: 2, isPointer: true)]
         public uint PolygonsOffset {
             get => (uint) Data.GetDouble(_polygonsOffsetAddr);
             set => Data.SetDouble(_polygonsOffsetAddr, (int) value);
         }
 
         [BulkCopy]
-        [TableViewModelColumn(displayOrder: 3)]
+        [TableViewModelColumn(addressField: nameof(_polygonCountAddr), displayOrder: 3)]
         public int PolygonCount {
             get => Data.GetDouble(_polygonCountAddr);
             set => Data.SetDouble(_polygonCountAddr, value);
         }
 
         [BulkCopy]
-        [TableViewModelColumn(displayOrder: 4, isPointer: true)]
+        [TableViewModelColumn(addressField: nameof(_attributesOffsetAddr), displayOrder: 4, isPointer: true)]
         public uint AttributesOffset {
             get => (uint) Data.GetDouble(_attributesOffsetAddr);
             set => Data.SetDouble(_attributesOffsetAddr, (int) value);

@@ -9,12 +9,12 @@ namespace SF3.Models.Structs.X014 {
             GlobalId = globalId;
         }
 
-        [TableViewModelColumn(displayOrder: 0, displayFormat: "X2")]
+        [TableViewModelColumn(addressField: null, displayOrder: 0, displayFormat: "X2")]
         public int? GlobalId { get; }
 
         [BulkCopy]
         [NameGetter(NamedValueType.FileIndexWithFFFFFFFF)]
-        [TableViewModelColumn(displayOrder: 1, displayFormat: "X3", minWidth: 120)]
+        [TableViewModelColumn(addressField: nameof(Address), displayOrder: 1, displayFormat: "X3", minWidth: 120)]
         public int FileId {
             get => Data.GetDouble(Address);
             set => Data.SetDouble(Address, value);

@@ -12,14 +12,14 @@ namespace SF3.Models.Structs.X013 {
             _disadvantageAddr = Address + 0x11; // 1 byte
         }
 
-        [TableViewModelColumn(displayOrder: 0)]
+        [TableViewModelColumn(addressField: nameof(_advantageAddr), displayOrder: 0)]
         [BulkCopy]
         public int Advantage {
             get => (sbyte) Data.GetByte(_advantageAddr);
             set => Data.SetByte(_advantageAddr, (byte) value);
         }
 
-        [TableViewModelColumn(displayOrder: 1)]
+        [TableViewModelColumn(addressField: nameof(_disadvantageAddr), displayOrder: 1)]
         [BulkCopy]
         public int Disadvantage {
             get => (sbyte) Data.GetByte(_disadvantageAddr);

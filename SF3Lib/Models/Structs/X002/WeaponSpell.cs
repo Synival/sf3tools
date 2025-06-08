@@ -4,55 +4,55 @@ using SF3.Types;
 
 namespace SF3.Models.Structs.X002 {
     public class WeaponSpell : Struct {
-        private readonly int spell;
-        private readonly int weaponLv0;
-        private readonly int weaponLv1;
-        private readonly int weaponLv2;
-        private readonly int weaponLv3;
+        private readonly int _spellAddr;
+        private readonly int _weaponLv0Addr;
+        private readonly int _weaponLv1Addr;
+        private readonly int _weaponLv2Addr;
+        private readonly int _weaponLv3Addr;
 
         public WeaponSpell(IByteData data, int id, string name, int address)
         : base(data, id, name, address, 0x05) {
-            spell     = Address;     // 2 bytes
-            weaponLv0 = Address + 1; // 1 byte
-            weaponLv1 = Address + 2; // 1 byte
-            weaponLv2 = Address + 3; // 1 byte
-            weaponLv3 = Address + 4; // 1 byte
+            _spellAddr     = Address;     // 1 byte
+            _weaponLv0Addr = Address + 1; // 1 byte
+            _weaponLv1Addr = Address + 2; // 1 byte
+            _weaponLv2Addr = Address + 3; // 1 byte
+            _weaponLv3Addr = Address + 4; // 1 byte
         }
 
-        [TableViewModelColumn(displayOrder: 0, displayName: "Spell", minWidth: 100, displayFormat: "X2")]
+        [TableViewModelColumn(addressField: nameof(_spellAddr), displayOrder: 0, minWidth: 100, displayFormat: "X2")]
         [BulkCopy]
         [NameGetter(NamedValueType.Spell)]
-        public int SpellID2 {
-            get => Data.GetByte(spell);
-            set => Data.SetByte(spell, (byte) value);
+        public int Spell {
+            get => Data.GetByte(_spellAddr);
+            set => Data.SetByte(_spellAddr, (byte) value);
         }
 
-        [TableViewModelColumn(displayOrder: 1, displayName: "WeaponLv0")]
+        [TableViewModelColumn(addressField: nameof(_weaponLv0Addr), displayOrder: 1)]
         [BulkCopy]
-        public int Weapon0 {
-            get => Data.GetByte(weaponLv0);
-            set => Data.SetByte(weaponLv0, (byte) value);
+        public int WeaponLv0 {
+            get => Data.GetByte(_weaponLv0Addr);
+            set => Data.SetByte(_weaponLv0Addr, (byte) value);
         }
 
-        [TableViewModelColumn(displayOrder: 2, displayName: "WeaponLv1")]
+        [TableViewModelColumn(addressField: nameof(_weaponLv1Addr), displayOrder: 2)]
         [BulkCopy]
-        public int Weapon1 {
-            get => Data.GetByte(weaponLv1);
-            set => Data.SetByte(weaponLv1, (byte) value);
+        public int WeaponLv1 {
+            get => Data.GetByte(_weaponLv1Addr);
+            set => Data.SetByte(_weaponLv1Addr, (byte) value);
         }
 
-        [TableViewModelColumn(displayOrder: 3, displayName: "WeaponLv2")]
+        [TableViewModelColumn(addressField: nameof(_weaponLv2Addr), displayOrder: 3)]
         [BulkCopy]
-        public int Weapon2 {
-            get => Data.GetByte(weaponLv2);
-            set => Data.SetByte(weaponLv2, (byte) value);
+        public int WeaponLv2 {
+            get => Data.GetByte(_weaponLv2Addr);
+            set => Data.SetByte(_weaponLv2Addr, (byte) value);
         }
 
-        [TableViewModelColumn(displayOrder: 4, displayName: "WeaponLv3")]
+        [TableViewModelColumn(addressField: nameof(_weaponLv3Addr), displayOrder: 4)]
         [BulkCopy]
-        public int Weapon3 {
-            get => Data.GetByte(weaponLv3);
-            set => Data.SetByte(weaponLv3, (byte) value);
+        public int WeaponLv3 {
+            get => Data.GetByte(_weaponLv3Addr);
+            set => Data.SetByte(_weaponLv3Addr, (byte) value);
         }
     }
 }

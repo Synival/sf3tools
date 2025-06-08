@@ -12,14 +12,14 @@ namespace SF3.Models.Structs.MPD.Model {
         }
 
         [BulkCopy]
-        [TableViewModelColumn(displayOrder: 0, minWidth: 40)]
+        [TableViewModelColumn(addressField: nameof(_xAddr), displayOrder: 0, minWidth: 40)]
         public short X {
             get => (short) Data.GetWord(_xAddr);
             set => Data.SetWord(_xAddr, value);
         }
 
         [BulkCopy]
-        [TableViewModelColumn(displayOrder: 1, minWidth: 40)]
+        [TableViewModelColumn(addressField: nameof(_yAddr), displayOrder: 1, minWidth: 40)]
         public short Y {
             get => (short) Data.GetWord(_yAddr);
             set => Data.SetWord(_yAddr, value);

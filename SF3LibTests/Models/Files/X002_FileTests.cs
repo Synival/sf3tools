@@ -108,23 +108,23 @@ namespace SF3.Tests.Models.Files {
                 var file = testCase.Create();
                 var table = file.WeaponSpellTable;
 
-                Assert.AreEqual(0, table[0].SpellID2);
-                Assert.AreEqual(0, table[0].Weapon0);
-                Assert.AreEqual(0, table[0].Weapon1);
-                Assert.AreEqual(0, table[0].Weapon2);
-                Assert.AreEqual(0, table[0].Weapon3);
+                Assert.AreEqual(0, table[0].Spell);
+                Assert.AreEqual(0, table[0].WeaponLv0);
+                Assert.AreEqual(0, table[0].WeaponLv1);
+                Assert.AreEqual(0, table[0].WeaponLv2);
+                Assert.AreEqual(0, table[0].WeaponLv3);
 
-                Assert.AreEqual(0x27, table[1].SpellID2);
-                Assert.AreEqual(1, table[1].Weapon0);
-                Assert.AreEqual(1, table[1].Weapon1);
-                Assert.AreEqual(1, table[1].Weapon2);
-                Assert.AreEqual(2, table[1].Weapon3);
+                Assert.AreEqual(0x27, table[1].Spell);
+                Assert.AreEqual(1, table[1].WeaponLv0);
+                Assert.AreEqual(1, table[1].WeaponLv1);
+                Assert.AreEqual(1, table[1].WeaponLv2);
+                Assert.AreEqual(2, table[1].WeaponLv3);
 
-                Assert.AreEqual(0x12, table[2].SpellID2);
-                Assert.AreEqual(1, table[2].Weapon0);
-                Assert.AreEqual(1, table[2].Weapon1);
-                Assert.AreEqual(2, table[2].Weapon2);
-                Assert.AreEqual(2, table[2].Weapon3);
+                Assert.AreEqual(0x12, table[2].Spell);
+                Assert.AreEqual(1, table[2].WeaponLv0);
+                Assert.AreEqual(1, table[2].WeaponLv1);
+                Assert.AreEqual(2, table[2].WeaponLv2);
+                Assert.AreEqual(2, table[2].WeaponLv3);
 
                 Assert.AreEqual(testCase.ExpectedWeaponSpells, table.Length);
             });

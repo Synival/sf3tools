@@ -3,18 +3,18 @@ using SF3.ByteData;
 
 namespace SF3.Models.Structs.X002 {
     public class StatBoost : Struct {
-        private readonly int stat;
+        private readonly int _statAddr;
 
         public StatBoost(IByteData data, int id, string name, int address)
         : base(data, id, name, address, 0x01) {
-            stat = Address; // 1 byte
+            _statAddr = Address; // 1 byte
         }
 
-        [TableViewModelColumn(displayOrder: 0, displayName: "Stat Value")]
+        [TableViewModelColumn(addressField: nameof(_statAddr), displayOrder: 0, displayName: "Stat Value")]
         [BulkCopy]
         public int Stat {
-            get => Data.GetByte(stat);
-            set => Data.SetByte(stat, (byte) value);
+            get => Data.GetByte(_statAddr);
+            set => Data.SetByte(_statAddr, (byte) value);
         }
     }
 }

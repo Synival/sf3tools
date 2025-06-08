@@ -4,6 +4,7 @@ using CommonLib.ViewModels;
 namespace CommonLib.Attributes {
     public class TableViewModelColumnAttribute : Attribute {
         public TableViewModelColumnAttribute(
+            string addressField  = null,
             string displayName   = null,
             float  displayOrder  = 0f,
             string displayFormat = null,
@@ -14,6 +15,7 @@ namespace CommonLib.Attributes {
             string displayGroup  = null
         ) {
             Column = new TableViewModelColumn(
+                addressField:  addressField,
                 displayName:   displayName,
                 displayOrder:  displayOrder,
                 displayFormat: displayFormat,

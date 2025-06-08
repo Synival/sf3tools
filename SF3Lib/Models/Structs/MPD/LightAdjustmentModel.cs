@@ -30,28 +30,28 @@ namespace SF3.Models.Structs.MPD {
         public bool HasPalette3Transparency => Scenario >= ScenarioType.Scenario3;
 
         [BulkCopy]
-        [TableViewModelColumn(displayOrder: 0, displayName: "R +/-")]
+        [TableViewModelColumn(addressField: nameof(_rAdjustAddr), displayOrder: 0, displayName: "R +/-")]
         public short RAdjustment {
             get => (short) Data.GetWord(_rAdjustAddr);
             set => Data.SetWord(_rAdjustAddr, value);
         }
 
         [BulkCopy]
-        [TableViewModelColumn(displayOrder: 1, displayName: "G +/-")]
+        [TableViewModelColumn(addressField: nameof(_gAdjustAddr), displayOrder: 1, displayName: "G +/-")]
         public short GAdjustment {
             get => (short) Data.GetWord(_gAdjustAddr);
             set => Data.SetWord(_gAdjustAddr, value);
         }
 
         [BulkCopy]
-        [TableViewModelColumn(displayOrder: 2, displayName: "B +/-")]
+        [TableViewModelColumn(addressField: nameof(_bAdjustAddr), displayOrder: 2, displayName: "B +/-")]
         public short BAdjustment {
             get => (short) Data.GetWord(_bAdjustAddr);
             set => Data.SetWord(_bAdjustAddr, value);
         }
 
         [BulkCopy]
-        [TableViewModelColumn(displayOrder: 3, displayName: "Ground R +/- (Scn3+)", visibilityProperty: nameof(HasGroundAdjust))]
+        [TableViewModelColumn(addressField: nameof(_groundRAdjustAddr), displayOrder: 3, displayName: "Ground R +/- (Scn3+)", visibilityProperty: nameof(HasGroundAdjust))]
         public short GroundRAdjustment {
             get => HasGroundAdjust ? (short) Data.GetWord(_groundRAdjustAddr) : (short) 0;
             set {
@@ -61,7 +61,7 @@ namespace SF3.Models.Structs.MPD {
         }
 
         [BulkCopy]
-        [TableViewModelColumn(displayOrder: 4, displayName: "Ground G +/- (Scn3+)", visibilityProperty: nameof(HasGroundAdjust))]
+        [TableViewModelColumn(addressField: nameof(_groundGAdjustAddr), displayOrder: 4, displayName: "Ground G +/- (Scn3+)", visibilityProperty: nameof(HasGroundAdjust))]
         public short GroundGAdjustment {
             get => HasGroundAdjust ? (short) Data.GetWord(_groundGAdjustAddr) : (short) 0;
             set {
@@ -71,7 +71,7 @@ namespace SF3.Models.Structs.MPD {
         }
 
         [BulkCopy]
-        [TableViewModelColumn(displayOrder: 5, displayName: "Ground B +/- (Scn3+)", visibilityProperty: nameof(HasGroundAdjust))]
+        [TableViewModelColumn(addressField: nameof(_groundBAdjustAddr), displayOrder: 5, displayName: "Ground B +/- (Scn3+)", visibilityProperty: nameof(HasGroundAdjust))]
         public short GroundBAdjustment {
             get => HasGroundAdjust ? (short) Data.GetWord(_groundBAdjustAddr) : (short) 0;
             set {
@@ -81,7 +81,7 @@ namespace SF3.Models.Structs.MPD {
         }
 
         [BulkCopy]
-        [TableViewModelColumn(displayOrder: 6, displayFormat: "X2", displayName: "Palette3 Transparency (Scn3+)", visibilityProperty: nameof(HasPalette3Transparency))]
+        [TableViewModelColumn(addressField: nameof(_palette3TransparencyAddr), displayOrder: 6, displayFormat: "X2", displayName: "Palette3 Transparency (Scn3+)", visibilityProperty: nameof(HasPalette3Transparency))]
         public ushort Palette3Transparency {
             get => HasPalette3Transparency ? (ushort) Data.GetWord(_palette3TransparencyAddr) : (ushort) 0;
             set {

@@ -9,9 +9,9 @@ using SF3.Types;
 
 namespace SF3.Models.Structs.MPD.TextureChunk {
     public class TextureModel : Struct {
-        private readonly int widthAddress;
-        private readonly int heightAddress;
-        private readonly int imageDataOffsetAddress;
+        private readonly int _widthAddr;
+        private readonly int _heightAddr;
+        private readonly int _imageDataOffsetAddr;
 
         public TextureModel(
             IByteData data, TextureCollectionType collection, int id, string name, int address,
@@ -21,9 +21,9 @@ namespace SF3.Models.Structs.MPD.TextureChunk {
             ChunkIndex       = chunkIndex;
             ImportExportName = "Texture_" + ((collection == TextureCollectionType.PrimaryTextures) ? "" : $"{collection}_") + $"{id:X2}";
 
-            widthAddress           = Address;     // 1 byte
-            heightAddress          = Address + 1; // 1 byte
-            imageDataOffsetAddress = Address + 2; // 2 bytes
+            _widthAddr           = Address;     // 1 byte
+            _heightAddr          = Address + 1; // 1 byte
+            _imageDataOffsetAddr = Address + 2; // 2 bytes
 
             if (pixelFormat != TexturePixelFormat.Unknown) {
                 PixelFormatKnown = true;
@@ -78,59 +78,59 @@ namespace SF3.Models.Structs.MPD.TextureChunk {
             }
         }
 
-        [TableViewModelColumn(displayOrder: -2.66f, displayName: "Collection", minWidth: 110)]
+        [TableViewModelColumn(addressField: null, displayOrder: -2.66f, displayName: "Collection", minWidth: 110)]
         public TextureCollectionType Collection { get; }
 
-        [TableViewModelColumn(displayOrder: -2.33f, displayName: "Chunk #")]
+        [TableViewModelColumn(addressField: null, displayOrder: -2.33f, displayName: "Chunk #")]
         public int? ChunkIndex { get; }
 
         [BulkCopy]
-        [TableViewModelColumn(displayOrder: 0)]
+        [TableViewModelColumn(addressField: nameof(_widthAddr), displayOrder: 0)]
         public int Width {
-            get => Data.GetByte(widthAddress);
+            get => Data.GetByte(_widthAddr);
             set {
-                Data.SetByte(widthAddress, (byte) value);
+                Data.SetByte(_widthAddr, (byte) value);
                 FetchAndCacheTexture(Texture?.Tags);
             }
         }
 
         [BulkCopy]
-        [TableViewModelColumn(displayOrder: 1)]
+        [TableViewModelColumn(addressField: nameof(_heightAddr), displayOrder: 1)]
         public int Height {
-            get => Data.GetByte(heightAddress);
+            get => Data.GetByte(_heightAddr);
             set {
-                Data.SetByte(heightAddress, (byte) value);
+                Data.SetByte(_heightAddr, (byte) value);
                 FetchAndCacheTexture(Texture?.Tags);
             }
         }
 
         [BulkCopy]
-        [TableViewModelColumn(displayOrder: 2, displayFormat: "X4")]
+        [TableViewModelColumn(addressField: nameof(_imageDataOffsetAddr), displayOrder: 2, displayFormat: "X4")]
         public int ImageDataOffset {
-            get => Data.GetWord(imageDataOffsetAddress);
+            get => Data.GetWord(_imageDataOffsetAddr);
             set {
-                Data.SetWord(imageDataOffsetAddress, value);
+                Data.SetWord(_imageDataOffsetAddr, value);
                 FetchAndCacheTexture(Texture?.Tags);
             }
         }
 
-        [TableViewModelColumn(displayOrder: 2.1f, displayFormat: "X4")]
+        [TableViewModelColumn(addressField: null, displayOrder: 2.1f, displayFormat: "X4")]
         public int ImageDataSize => Width * Height * BytesPerPixel;
 
-        [TableViewModelColumn(displayName: "Pixel Format Known", displayOrder: 2.5f)]
+        [TableViewModelColumn(addressField: null, displayName: "Pixel Format Known", displayOrder: 2.5f)]
         public bool PixelFormatKnown { get; }
 
-        [TableViewModelColumn(displayName: "Pixel Format", displayOrder: 3)]
+        [TableViewModelColumn(addressField: null, displayName: "Pixel Format", displayOrder: 3)]
         public TexturePixelFormat PixelFormat { get; }
 
         public int BytesPerPixel { get; }
 
         public Palette Palette { get; }
 
-        [TableViewModelColumn(displayName: "Internal Hash", displayOrder: 4, minWidth: 225)]
+        [TableViewModelColumn(addressField: null, displayName: "Internal Hash", displayOrder: 4, minWidth: 225)]
         public string Hash => Texture?.Hash ?? "";
 
-        [TableViewModelColumn(displayName: "Tags", displayOrder: 5, minWidth: 200)]
+        [TableViewModelColumn(addressField: null, displayName: "Tags", displayOrder: 5, minWidth: 200)]
         public string Tags => (Texture.Tags == null) ? "" : string.Join(", ", Texture.Tags.Select(x => x.Key + "|" + x.Value));
 
         public bool TextureIsLoaded => Texture != null;

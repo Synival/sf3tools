@@ -33,102 +33,102 @@ namespace SF3.Models.Structs.MPD {
         }
 
         [BulkCopy]
-        [TableViewModelColumn(displayOrder: 0, displayFormat: "X2")]
+        [TableViewModelColumn(addressField: nameof(_startPositionAddr), displayOrder: 0, displayFormat: "X2")]
         public ushort StartPosition {
             get => (ushort) Data.GetWord(_startPositionAddr);
             set => Data.SetWord(_startPositionAddr, value);
         }
 
         [BulkCopy]
-        [TableViewModelColumn(displayOrder: 1, displayFormat: "X2")]
+        [TableViewModelColumn(addressField: nameof(_stopPositionAddr), displayOrder: 1, displayFormat: "X2")]
         public ushort StopPosition {
             get => (ushort) Data.GetWord(_stopPositionAddr);
             set => Data.SetWord(_stopPositionAddr, value);
         }
 
         [BulkCopy]
-        [TableViewModelColumn(displayOrder: 2, displayFormat: "X2")]
+        [TableViewModelColumn(addressField: nameof(_startRAddr), displayOrder: 2, displayFormat: "X2")]
         public ushort StartR {
             get => (ushort) Data.GetWord(_startRAddr);
             set => Data.SetWord(_startRAddr, value);
         }
 
         [BulkCopy]
-        [TableViewModelColumn(displayOrder: 3, displayFormat: "X2")]
+        [TableViewModelColumn(addressField: nameof(_startGAddr), displayOrder: 3, displayFormat: "X2")]
         public ushort StartG {
             get => (ushort) Data.GetWord(_startGAddr);
             set => Data.SetWord(_startGAddr, value);
         }
 
         [BulkCopy]
-        [TableViewModelColumn(displayOrder: 4, displayFormat: "X2")]
+        [TableViewModelColumn(addressField: nameof(_startBAddr), displayOrder: 4, displayFormat: "X2")]
         public ushort StartB {
             get => (ushort) Data.GetWord(_startBAddr);
             set => Data.SetWord(_startBAddr, value);
         }
 
         [BulkCopy]
-        [TableViewModelColumn(displayOrder: 5, displayFormat: "X2")]
+        [TableViewModelColumn(addressField: nameof(_stopRAddr), displayOrder: 5, displayFormat: "X2")]
         public ushort StopR {
             get => (ushort) Data.GetWord(_stopRAddr);
             set => Data.SetWord(_stopRAddr, value);
         }
 
         [BulkCopy]
-        [TableViewModelColumn(displayOrder: 6, displayFormat: "X2")]
+        [TableViewModelColumn(addressField: nameof(_stopGAddr), displayOrder: 6, displayFormat: "X2")]
         public ushort StopG {
             get => (ushort) Data.GetWord(_stopGAddr);
             set => Data.SetWord(_stopGAddr, value);
         }
 
         [BulkCopy]
-        [TableViewModelColumn(displayOrder: 7, displayFormat: "X2")]
+        [TableViewModelColumn(addressField: nameof(_stopBAddr), displayOrder: 7, displayFormat: "X2")]
         public ushort StopB {
             get => (ushort) Data.GetWord(_stopBAddr);
             set => Data.SetWord(_stopBAddr, value);
         }
 
         [BulkCopy]
-        [TableViewModelColumn(displayOrder: 8, displayFormat: "X1")]
+        [TableViewModelColumn(addressField: nameof(_partsAffectedBitsAddr), displayOrder: 8, displayFormat: "X1")]
         public ushort PartsAffectedBits {
             get => (ushort) Data.GetWord(_partsAffectedBitsAddr);
             set => Data.SetWord(_partsAffectedBitsAddr, value);
         }
 
-        [TableViewModelColumn(displayOrder: 8.1f)]
+        [TableViewModelColumn(addressField: null, displayOrder: 8.1f)]
         public bool AffectsGround {
             get => (PartsAffectedBits & 0x01) == 0x01;
             set => PartsAffectedBits = (ushort) ((PartsAffectedBits & ~0x01) | (value ? 0x01 : 0x00));
         }
 
-        [TableViewModelColumn(displayOrder: 8.2f)]
+        [TableViewModelColumn(addressField: null, displayOrder: 8.2f)]
         public bool AffectsSkyBox {
             get => (PartsAffectedBits & 0x02) == 0x02;
             set => PartsAffectedBits = (ushort) ((PartsAffectedBits & ~0x02) | (value ? 0x02 : 0x00));
         }
 
-        [TableViewModelColumn(displayOrder: 8.3f)]
+        [TableViewModelColumn(addressField: null, displayOrder: 8.3f)]
         public bool AffectsModelsAndTiles {
             get => (PartsAffectedBits & 0x04) == 0x04;
             set => PartsAffectedBits = (ushort) ((PartsAffectedBits & ~0x04) | (value ? 0x04 : 0x00));
         }
 
         [BulkCopy]
-        [TableViewModelColumn(displayOrder: 9, displayFormat: "X2")]
+        [TableViewModelColumn(addressField: nameof(_groundOpacityAddr), displayOrder: 9, displayFormat: "X2")]
         public ushort GroundOpacity {
             get => (ushort) Data.GetWord(_groundOpacityAddr);
             set => Data.SetWord(_groundOpacityAddr, value);
         }
 
         [BulkCopy]
-        [TableViewModelColumn(displayOrder: 10, displayFormat: "X2")]
+        [TableViewModelColumn(addressField: nameof(_skyBoxOpacityAddr), displayOrder: 10, displayFormat: "X2")]
         public ushort SkyBoxOpacity {
             get => (ushort) Data.GetWord(_skyBoxOpacityAddr);
             set => Data.SetWord(_skyBoxOpacityAddr, value);
         }
 
         [BulkCopy]
-        [TableViewModelColumn(displayOrder: 11, displayFormat: "X2")]
+        [TableViewModelColumn(addressField: nameof(_modelsAndTilesOpacityAddr), displayOrder: 11, displayFormat: "X2")]
         public ushort ModelsAndTilesOpacity {
             get => (ushort) Data.GetWord(_modelsAndTilesOpacityAddr);
             set => Data.SetWord(_modelsAndTilesOpacityAddr, value);

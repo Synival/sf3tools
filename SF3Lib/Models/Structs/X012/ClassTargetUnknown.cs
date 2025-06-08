@@ -12,7 +12,7 @@ namespace SF3.Models.Structs.X012 {
             _unknownAddr = Address + 0x01; // 1 byte
         }
 
-        [TableViewModelColumn(displayOrder: 0, displayFormat: "X2", minWidth: 150)]
+        [TableViewModelColumn(addressField: nameof(_classIdAddr), displayOrder: 0, displayFormat: "X2", minWidth: 150)]
         [NameGetter(NamedValueType.CharacterClass)]
         [BulkCopy]
         public byte ClassID {
@@ -20,7 +20,7 @@ namespace SF3.Models.Structs.X012 {
             set => Data.SetByte(_classIdAddr, value);
         }
 
-        [TableViewModelColumn(displayOrder: 1, displayFormat: "X2")]
+        [TableViewModelColumn(addressField: nameof(_unknownAddr), displayOrder: 1, displayFormat: "X2")]
         [BulkCopy]
         public byte Unknown {
             get => (byte) Data.GetByte(_unknownAddr);

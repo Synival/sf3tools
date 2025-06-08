@@ -6,24 +6,24 @@ using SF3.Models.Tables.MPD.TextureAnimation;
 
 namespace SF3.Models.Structs.MPD {
     public class TextureAnimationModel : Struct {
-        private readonly int _textureIdAddress;
-        private readonly int _widthAddress;
-        private readonly int _heightAddress;
-        private readonly int _frameTimerStartAddress;
+        private readonly int _textureIdAddr;
+        private readonly int _widthAddr;
+        private readonly int _heightAddr;
+        private readonly int _frameTimerStartAddr;
 
         public TextureAnimationModel(IByteData data, int id, string name, int address, bool is32Bit)
         : base(data, id, name, address, 0x0A) {
             Is32Bit = is32Bit;
 
-            _bytesPerProperty = Is32Bit ? 0x04 : 0x02;
-            _textureEndId     = Is32Bit ? 0xFFFF_FFFF : 0xFFFF;
-            _frameEndOffset   = Is32Bit ? 0xFFFF_FFFE : 0xFFFE;
+            _bytesPerProperty    = Is32Bit ? 0x04 : 0x02;
+            _textureEndId        = Is32Bit ? 0xFFFF_FFFF : 0xFFFF;
+            _frameEndOffset      = Is32Bit ? 0xFFFF_FFFE : 0xFFFE;
 
-            _textureIdAddress = Address + 0x00 * _bytesPerProperty;
-            _widthAddress     = Address + 0x01 * _bytesPerProperty;
-            _heightAddress    = Address + 0x02 * _bytesPerProperty;
-            _frameTimerStartAddress = Address + 0x03 * _bytesPerProperty;
-            FramesAddress     = Address + 0x04 * _bytesPerProperty; // variable sizes
+            _textureIdAddr       = Address + 0x00 * _bytesPerProperty;
+            _widthAddr           = Address + 0x01 * _bytesPerProperty;
+            _heightAddr          = Address + 0x02 * _bytesPerProperty;
+            _frameTimerStartAddr = Address + 0x03 * _bytesPerProperty;
+            FramesAddress        = Address + 0x04 * _bytesPerProperty; // variable sizes
 
             // Determine the number of frames. That will determine the size of this animation.
             var pos = FramesAddress;
@@ -45,35 +45,35 @@ namespace SF3.Models.Structs.MPD {
         public int FramesAddress { get; }
 
         [BulkCopy]
-        [TableViewModelColumn(displayName: "Texture ID", displayOrder: 0, displayFormat: "X2")]
+        [TableViewModelColumn(addressField: nameof(_textureIdAddr), displayName: "Texture ID", displayOrder: 0, displayFormat: "X2")]
         public uint TextureID {
-            get => Data.GetData(_textureIdAddress, _bytesPerProperty);
-            set => Data.SetData(_textureIdAddress, value, _bytesPerProperty);
+            get => Data.GetData(_textureIdAddr, _bytesPerProperty);
+            set => Data.SetData(_textureIdAddr, value, _bytesPerProperty);
         }
 
         [BulkCopy]
-        [TableViewModelColumn(displayName: "Width", displayOrder: 1)]
+        [TableViewModelColumn(addressField: nameof(_widthAddr), displayName: "Width", displayOrder: 1)]
         public uint Width {
-            get => Data.GetData(_widthAddress, _bytesPerProperty);
-            set => Data.SetData(_widthAddress, value, _bytesPerProperty);
+            get => Data.GetData(_widthAddr, _bytesPerProperty);
+            set => Data.SetData(_widthAddr, value, _bytesPerProperty);
         }
 
         [BulkCopy]
-        [TableViewModelColumn(displayName: "Height", displayOrder: 2)]
+        [TableViewModelColumn(addressField: nameof(_heightAddr), displayName: "Height", displayOrder: 2)]
         public uint Height {
-            get => Data.GetData(_heightAddress, _bytesPerProperty);
-            set => Data.SetData(_heightAddress, value, _bytesPerProperty);
+            get => Data.GetData(_heightAddr, _bytesPerProperty);
+            set => Data.SetData(_heightAddr, value, _bytesPerProperty);
         }
 
         [BulkCopy]
-        [TableViewModelColumn(displayName: "Frame Timer Start", displayOrder: 3)]
+        [TableViewModelColumn(addressField: nameof(_frameTimerStartAddr), displayName: "Frame Timer Start", displayOrder: 3)]
         public int FrameTimerStart {
-            get => (int) Data.GetData(_frameTimerStartAddress, _bytesPerProperty);
-            set => Data.SetData(_frameTimerStartAddress, (uint) value, _bytesPerProperty);
+            get => (int) Data.GetData(_frameTimerStartAddr, _bytesPerProperty);
+            set => Data.SetData(_frameTimerStartAddr, (uint) value, _bytesPerProperty);
         }
 
         [BulkCopy]
-        [TableViewModelColumn(displayName: "# Frames", displayOrder: 4, isReadOnly: true)]
+        [TableViewModelColumn(addressField: null, displayName: "# Frames", displayOrder: 4, isReadOnly: true)]
         public int NumFrames => FrameTable?.Length ?? 0;
 
         [BulkCopyRecurse]

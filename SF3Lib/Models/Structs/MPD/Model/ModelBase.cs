@@ -32,74 +32,74 @@ namespace SF3.Models.Structs.MPD.Model {
             _scaleZAddress      = Address + positionXOffset + 0x14; // 4 bytes
         }
 
-        [TableViewModelColumn(displayOrder: -0.5f, minWidth: 120)]
+        [TableViewModelColumn(addressField: null, displayOrder: -0.5f, minWidth: 120)]
         public ModelCollectionType CollectionType { get; }
 
         [BulkCopy]
-        [TableViewModelColumn(displayOrder: 0, displayName: "PDATA*[0]", isPointer: true)]
+        [TableViewModelColumn(addressField: nameof(_pdata0Address), displayOrder: 0, displayName: "PDATA*[0]", isPointer: true)]
         public uint PData0 {
             get => (uint) Data.GetDouble(_pdata0Address);
             set => Data.SetDouble(_pdata0Address, (int) value);
         }
 
         [BulkCopy]
-        [TableViewModelColumn(displayOrder: 8)]
+        [TableViewModelColumn(addressField: nameof(_positionXAddress), displayOrder: 8)]
         public short PositionX {
             get => (short) Data.GetWord(_positionXAddress);
             set => Data.SetWord(_positionXAddress, value);
         }
 
         [BulkCopy]
-        [TableViewModelColumn(displayOrder: 9)]
+        [TableViewModelColumn(addressField: nameof(_positionYAddress), displayOrder: 9)]
         public short PositionY {
             get => (short) Data.GetWord(_positionYAddress);
             set => Data.SetWord(_positionYAddress, value);
         }
 
         [BulkCopy]
-        [TableViewModelColumn(displayOrder: 10)]
+        [TableViewModelColumn(addressField: nameof(_positionZAddress), displayOrder: 10)]
         public short PositionZ {
             get => (short) Data.GetWord(_positionZAddress);
             set => Data.SetWord(_positionZAddress, value);
         }
 
         [BulkCopy]
-        [TableViewModelColumn(displayOrder: 11)]
+        [TableViewModelColumn(addressField: nameof(_angleXAddress), displayOrder: 11)]
         public float AngleX {
             get => Data.GetCompressedFIXED(_angleXAddress).Float;
             set => Data.SetCompressedFIXED(_angleXAddress, new CompressedFIXED(value, 0));
         }
 
         [BulkCopy]
-        [TableViewModelColumn(displayOrder: 12)]
+        [TableViewModelColumn(addressField: nameof(_angleYAddress), displayOrder: 12)]
         public float AngleY {
             get => Data.GetCompressedFIXED(_angleYAddress).Float;
             set => Data.SetCompressedFIXED(_angleYAddress, new CompressedFIXED(value, 0));
         }
 
         [BulkCopy]
-        [TableViewModelColumn(displayOrder: 13)]
+        [TableViewModelColumn(addressField: nameof(_angleZAddress), displayOrder: 13)]
         public float AngleZ {
             get => Data.GetCompressedFIXED(_angleZAddress).Float;
             set => Data.SetCompressedFIXED(_angleZAddress, new CompressedFIXED(value, 0));
         }
 
         [BulkCopy]
-        [TableViewModelColumn(displayOrder: 14)]
+        [TableViewModelColumn(addressField: nameof(_scaleXAddress), displayOrder: 14)]
         public float ScaleX {
             get => Data.GetFIXED(_scaleXAddress).Float;
             set => Data.SetFIXED(_scaleXAddress, new FIXED(value, 0));
         }
 
         [BulkCopy]
-        [TableViewModelColumn(displayOrder: 15)]
+        [TableViewModelColumn(addressField: nameof(_scaleYAddress), displayOrder: 15)]
         public float ScaleY {
             get => Data.GetFIXED(_scaleYAddress).Float;
             set => Data.SetFIXED(_scaleYAddress, new FIXED(value, 0));
         }
 
         [BulkCopy]
-        [TableViewModelColumn(displayOrder: 16)]
+        [TableViewModelColumn(addressField: nameof(_scaleZAddress), displayOrder: 16)]
         public float ScaleZ {
             get => Data.GetFIXED(_scaleZAddress).Float;
             set => Data.SetFIXED(_scaleZAddress, new FIXED(value, 0));

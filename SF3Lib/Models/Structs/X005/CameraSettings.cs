@@ -61,62 +61,62 @@ namespace SF3.Models.Structs.X005 {
             }
         }
 
-        [TableViewModelColumn(displayOrder: 0, displayFormat: "X4")]
+        [TableViewModelColumn(addressField: nameof(_setting1DistAddr), displayOrder: 0, displayFormat: "X4")]
         [BulkCopy]
         public ushort Setting1Dist {
             get => (ushort) Data.GetWord(_setting1DistAddr);
             set => Data.SetWord(_setting1DistAddr, value);
         }
 
-        [TableViewModelColumn(displayOrder: 1, displayFormat: "X4")]
+        [TableViewModelColumn(addressField: nameof(_setting2DistAddr), displayOrder: 1, displayFormat: "X4")]
         [BulkCopy]
         public ushort Setting2Dist {
             get => (ushort) Data.GetWord(_setting2DistAddr);
             set => Data.SetWord(_setting2DistAddr, value);
         }
 
-        [TableViewModelColumn(displayOrder: 2, displayFormat: "X4")]
+        [TableViewModelColumn(addressField: nameof(_setting3DistAddr), displayOrder: 2, displayFormat: "X4")]
         [BulkCopy]
         public ushort Setting3Dist {
             get => (ushort) Data.GetWord(_setting3DistAddr);
             set => Data.SetWord(_setting3DistAddr, value);
         }
 
-        [TableViewModelColumn(displayOrder: 3, displayFormat: "X4")]
+        [TableViewModelColumn(addressField: nameof(_setting1AngleAddr), displayOrder: 3, displayFormat: "X4")]
         [BulkCopy]
         public ushort Setting1Angle {
             get => (ushort) Data.GetWord(_setting1AngleAddr);
             set => Data.SetWord(_setting1AngleAddr, value);
         }
 
-        [TableViewModelColumn(displayOrder: 4, displayFormat: "X4")]
+        [TableViewModelColumn(addressField: nameof(_setting2AngleAdjustAddr), displayOrder: 4, displayFormat: "X4")]
         [BulkCopy]
         public ushort Setting2AngleAdjust {
             get => (ushort) Data.GetWord(_setting2AngleAdjustAddr);
             set => Data.SetWord(_setting2AngleAdjustAddr, value);
         }
 
-        [TableViewModelColumn(displayOrder: 5, displayFormat: "X4")]
+        [TableViewModelColumn(addressField: nameof(_setting3AngleAdjustAddr), displayOrder: 5, displayFormat: "X4")]
         [BulkCopy]
         public ushort Setting3AngleAdjust {
             get => (ushort) Data.GetWord(_setting3AngleAdjustAddr);
             set => Data.SetWord(_setting3AngleAdjustAddr, value);
         }
 
-        [TableViewModelColumn(displayOrder: 6, displayFormat: "X4")]
+        [TableViewModelColumn(addressField: nameof(_verticalOffsetAddr), displayOrder: 6, displayFormat: "X4")]
         [BulkCopy]
         public ushort VerticalOffset {
             get => (ushort) Data.GetWord(_verticalOffsetAddr);
             set => Data.SetWord(_verticalOffsetAddr, value);
         }
 
-        [TableViewModelColumn(displayOrder: 3.1f, displayName: nameof(Setting2Angle) + " (calc'd)", displayFormat: "X4")]
+        [TableViewModelColumn(addressField: null, displayOrder: 3.1f, displayName: nameof(Setting2Angle) + " (calc'd)", displayFormat: "X4")]
         public ushort Setting2Angle {
             get => (ushort) ((short) Setting1Angle + (short) Setting2AngleAdjust);
             set => Setting2AngleAdjust = (ushort) ((short) value - (short) Setting1Angle);
         }
 
-        [TableViewModelColumn(displayOrder: 3.2f, displayName: nameof(Setting3Angle) + " (calc'd)", displayFormat: "X4")]
+        [TableViewModelColumn(addressField: null, displayOrder: 3.2f, displayName: nameof(Setting3Angle) + " (calc'd)", displayFormat: "X4")]
         public ushort Setting3Angle {
             get => (ushort) ((short) Setting1Angle + (short) Setting3AngleAdjust);
             set => Setting3AngleAdjust = (ushort) ((short) value - (short) Setting1Angle);

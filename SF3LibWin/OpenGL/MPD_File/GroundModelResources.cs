@@ -105,8 +105,8 @@ namespace SF3.Win.OpenGL.MPD_File {
             float centerX = 0.0f;
             float centerZ = 0.0f;
             try {
-                centerX = (cameraBoundaries.X1 + cameraBoundaries.X2) / 2.0f / 32.0f - 32.0f;
-                centerZ = -((cameraBoundaries.Y1 + cameraBoundaries.Y2) / 2.0f / 32.0f - 32.0f);
+                centerX =   (cameraBoundaries.X1 + cameraBoundaries.X2) / 2.0f / 32.0f - 32.0f;
+                centerZ = -((cameraBoundaries.Z1 + cameraBoundaries.Z2) / 2.0f / 32.0f - 32.0f);
             }
             catch {
                 // TODO: some error when reading camera bounds. What to do here???

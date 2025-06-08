@@ -18,7 +18,7 @@ namespace SF3.Models.Structs.MPD {
         }
 
         [BulkCopy]
-        [TableViewModelColumn(displayOrder: 0, displayFormat: "X3", minWidth: 200)]
+        [TableViewModelColumn(addressField: nameof(_flagAddr), displayOrder: 0, displayFormat: "X3", minWidth: 200)]
         [NameGetter(NamedValueType.GameFlag)]
         public int Flag {
             get => Data.GetDouble(_flagAddr);
@@ -26,27 +26,27 @@ namespace SF3.Models.Structs.MPD {
         }
 
         [BulkCopy]
-        [TableViewModelColumn(displayOrder: 1, displayName: "Visible Models (Flag Off)", isPointer: true)]
+        [TableViewModelColumn(addressField: nameof(_visibleModelsWhenFlagOffOffsetAddr), displayOrder: 1, displayName: "Visible Models (Flag Off)", isPointer: true)]
         public uint VisibleModelsWhenFlagOffOffset {
             get => (uint) Data.GetDouble(_visibleModelsWhenFlagOffOffsetAddr);
             set => Data.SetDouble(_visibleModelsWhenFlagOffOffsetAddr, (int) value);
         }
 
         [BulkCopy]
-        [TableViewModelColumn(displayOrder: 2, displayName: "Visible Models (Flag On)", isPointer: true)]
+        [TableViewModelColumn(addressField: nameof(_visibleModelsWhenFlagOnOffsetAddr), displayOrder: 2, displayName: "Visible Models (Flag On)", isPointer: true)]
         public uint VisibleModelsWhenFlagOnOffset {
             get => (uint) Data.GetDouble(_visibleModelsWhenFlagOnOffsetAddr);
             set => Data.SetDouble(_visibleModelsWhenFlagOnOffsetAddr, (int) value);
         }
 
         [BulkCopy]
-        [TableViewModelColumn(displayOrder: 3, displayName: "State (set in-game)", displayFormat: "X2")]
+        [TableViewModelColumn(addressField: nameof(_stateAddr), displayOrder: 3, displayName: "State (set in-game)", displayFormat: "X2")]
         public uint State {
             get => (uint) Data.GetDouble(_stateAddr);
             set => Data.SetDouble(_stateAddr, (int) value);
         }
 
-        [TableViewModelColumn(displayOrder: 4, displayName: "State (in editor)")]
+        [TableViewModelColumn(addressField: null, displayOrder: 4, displayName: "State (in editor)")]
         public bool StateInEditor { get; set; }
     }
 }

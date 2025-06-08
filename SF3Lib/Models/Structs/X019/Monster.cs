@@ -6,144 +6,144 @@ using SF3.Types;
 
 namespace SF3.Models.Structs.X019 {
     public class Monster : Struct {
-        private readonly int maxHP;
-        private readonly int maxMP;
-        private readonly int level;
-        private readonly int attack;
-        private readonly int defense;
-        private readonly int agility;
-        private readonly int mov;
-        private readonly int luck;
-        private readonly int turns;
-        private readonly int hpRegen;
-        private readonly int mpRegen;
-        private readonly int earthRes;
-        private readonly int fireRes;
-        private readonly int iceRes;
-        private readonly int sparkRes;
-        private readonly int windRes;
-        private readonly int lightRes;
-        private readonly int darkRes;
-        private readonly int unusedRes;
-        private readonly int spell1;
-        private readonly int spell1Level;
-        private readonly int spell2;
-        private readonly int spell2Level;
-        private readonly int spell3;
-        private readonly int spell3Level;
-        private readonly int spell4;
-        private readonly int spell4Level;
-        private readonly int equippedWeapon;
-        private readonly int equippedAccessory;
-        private readonly int itemSlot1;
-        private readonly int itemSlot2;
-        private readonly int itemSlot3;
-        private readonly int itemSlot4;
-        private readonly int enemySpecial1;
-        private readonly int enemySpecial2;
-        private readonly int enemySpecial3;
-        private readonly int enemySpecial4; //?
-        private readonly int enemySpecial5; //?
-        private readonly int enemySpecial6; //?
-        private readonly int enemySpecial7; //?
-        private readonly int enemySpecial8; //?
-        private readonly int enemySpecial9; //?
-        private readonly int enemySpecial10; //?
-        private readonly int unknown1;
-        private readonly int unknown2;
-        private readonly int unknown3;
-        private readonly int protections;
-        private readonly int expIs5;
-        private readonly int unknown6;
-        private readonly int gold;
-        private readonly int drop;
-        private readonly int unknown7;
-        private readonly int droprate;
-        private readonly int slowPlus;
-        private readonly int supportPlus;
-        private readonly int magicType;
-        private readonly int movementType;
-        private readonly int unknown11;
-        private readonly int unknown12;
-        private readonly int unknown13;
-        private readonly int unknown14;
-        private readonly int unknown15;
-        private readonly int unknown16;
-        private readonly int unknown17;
-        private readonly int unknown18;
-        private readonly int unknown19;
-        private readonly int unknown20;
+        private readonly int _maxHPAddr;
+        private readonly int _maxMPAddr;
+        private readonly int _levelAddr;
+        private readonly int _attackAddr;
+        private readonly int _defenseAddr;
+        private readonly int _agilityAddr;
+        private readonly int _movAddr;
+        private readonly int _luckAddr;
+        private readonly int _turnsAddr;
+        private readonly int _hpRegenAddr;
+        private readonly int _mpRegenAddr;
+        private readonly int _earthResAddr;
+        private readonly int _fireResAddr;
+        private readonly int _iceResAddr;
+        private readonly int _sparkResAddr;
+        private readonly int _windResAddr;
+        private readonly int _lightResAddr;
+        private readonly int _darkResAddr;
+        private readonly int _unusedResAddr;
+        private readonly int _spell1Addr;
+        private readonly int _spell1LevelAddr;
+        private readonly int _spell2Addr;
+        private readonly int _spell2LevelAddr;
+        private readonly int _spell3Addr;
+        private readonly int _spell3LevelAddr;
+        private readonly int _spell4Addr;
+        private readonly int _spell4LevelAddr;
+        private readonly int _weaponAddr;
+        private readonly int _accessoryAddr;
+        private readonly int _itemSlot1Addr;
+        private readonly int _itemSlot2Addr;
+        private readonly int _itemSlot3Addr;
+        private readonly int _itemSlot4Addr;
+        private readonly int _special1Addr;
+        private readonly int _special2Addr;
+        private readonly int _special3Addr;
+        private readonly int _special4Addr; //?
+        private readonly int _special5Addr; //?
+        private readonly int _special6Addr; //?
+        private readonly int _special7Addr; //?
+        private readonly int _special8Addr; //?
+        private readonly int _special9Addr; //?
+        private readonly int _special10Addr; //?
+        private readonly int _unknown0x32Addr;
+        private readonly int _unknown0x33Addr;
+        private readonly int _unknown0x34Addr;
+        private readonly int _protectionsAddr;
+        private readonly int _expIs5Addr;
+        private readonly int _unknown0x37Addr;
+        private readonly int _goldAddr;
+        private readonly int _dropAddr;
+        private readonly int _unknown0x3CAddr;
+        private readonly int _droprateAddr;
+        private readonly int _slowPlusAddr;
+        private readonly int _supportPlusAddr;
+        private readonly int _magicBonusIdAddr;
+        private readonly int _movementTypeAddr;
+        private readonly int _unknown0x42Addr;
+        private readonly int _unknown0x43Addr;
+        private readonly int _spellChancePlus1Addr;
+        private readonly int _spellChancePlus2Addr;
+        private readonly int _spellChancePlus3Addr;
+        private readonly int _spellChancePlus4Addr;
+        private readonly int _spellChancePlus5Addr;
+        private readonly int _spellChancePlus6Addr;
+        private readonly int _unknown0x4AAddr;
+        private readonly int _unknown0x4BAddr;
 
         public Monster(IByteData data, int id, string name, int address)
         : base(data, id, name, address, 0x4C) {
-            maxHP             = Address; // 2 bytes
-            maxMP             = Address + 2;
-            level             = Address + 3;
-            attack            = Address + 4;
-            defense           = Address + 5;
-            agility           = Address + 6;
-            mov               = Address + 7;
-            luck              = Address + 8;
-            turns             = Address + 9;
-            hpRegen           = Address + 10;
-            mpRegen           = Address + 11;
-            earthRes          = Address + 12;
-            fireRes           = Address + 13;
-            iceRes            = Address + 14;
-            sparkRes          = Address + 15;
-            windRes           = Address + 16;
-            lightRes          = Address + 17;
-            darkRes           = Address + 18;
-            unusedRes         = Address + 19;
-            spell1            = Address + 20;
-            spell1Level       = Address + 21;
-            spell2            = Address + 22;
-            spell2Level       = Address + 23;
-            spell3            = Address + 24;
-            spell3Level       = Address + 25;
-            spell4            = Address + 26;
-            spell4Level       = Address + 27;
-            equippedWeapon    = Address + 28; // 2 byte
-            equippedAccessory = Address + 30; // 2 byte
-            itemSlot1         = Address + 32; // 2 byte
-            itemSlot2         = Address + 34; // 2 byte
-            itemSlot3         = Address + 36; // 2 byte
-            itemSlot4         = Address + 38; // 2 byte
-            enemySpecial1     = Address + 40;
-            enemySpecial2     = Address + 41;
-            enemySpecial3     = Address + 42;
-            enemySpecial4     = Address + 43; // ?
-            enemySpecial5     = Address + 44; // ?
-            enemySpecial6     = Address + 45; // ?
-            enemySpecial7     = Address + 46; // ?
-            enemySpecial8     = Address + 47; // ?
-            enemySpecial9     = Address + 48; // ?
-            enemySpecial10    = Address + 49; // ?
-            unknown1          = Address + 50;
-            unknown2          = Address + 51;
-            unknown3          = Address + 52;
-            protections       = Address + 53; // protections? 8 = no crit? 0a = damage immunity?
-            expIs5            = Address + 54; // exp = 5
-            unknown6          = Address + 55;
-            gold              = Address + 56; // 2 byte
-            drop              = Address + 58; // 2 byte
-            unknown7          = Address + 60;
-            droprate          = Address + 61; // droprate/drops items when attacked. Set E for thief rules
-            slowPlus          = Address + 62; // slow bonus?
-            supportPlus       = Address + 63; // support bonus?
-            magicType         = Address + 64;
-            movementType      = Address + 65;
-            unknown11         = Address + 66; // heal when damaged when set?
-            unknown12         = Address + 67;
-            unknown13         = Address + 68; // what to do on turn1?. 0 = atk. 1 = spell. 4 = use weapon?
-            unknown14         = Address + 69; // what to do on turn2?
-            unknown15         = Address + 70; // what to do on turn3?
-            unknown16         = Address + 71; // what to do on turn4?
-            unknown17         = Address + 72; // what to do on turn5?
-            unknown18         = Address + 73; // what to do on turn6?
-            unknown19         = Address + 74;
-            unknown20         = Address + 75;
-            SpriteID          = id + 200;
+            _maxHPAddr             = Address + 0x00; // 2 bytes
+            _maxMPAddr             = Address + 0x02;
+            _levelAddr             = Address + 0x03;
+            _attackAddr            = Address + 0x04;
+            _defenseAddr           = Address + 0x05;
+            _agilityAddr           = Address + 0x06;
+            _movAddr               = Address + 0x07;
+            _luckAddr              = Address + 0x08;
+            _turnsAddr             = Address + 0x09;
+            _hpRegenAddr           = Address + 0x0A;
+            _mpRegenAddr           = Address + 0x0B;
+            _earthResAddr          = Address + 0x0C;
+            _fireResAddr           = Address + 0x0D;
+            _iceResAddr            = Address + 0x0E;
+            _sparkResAddr          = Address + 0x0F;
+            _windResAddr           = Address + 0x10;
+            _lightResAddr          = Address + 0x11;
+            _darkResAddr           = Address + 0x12;
+            _unusedResAddr         = Address + 0x13;
+            _spell1Addr            = Address + 0x14;
+            _spell1LevelAddr       = Address + 0x15;
+            _spell2Addr            = Address + 0x16;
+            _spell2LevelAddr       = Address + 0x17;
+            _spell3Addr            = Address + 0x18;
+            _spell3LevelAddr       = Address + 0x19;
+            _spell4Addr            = Address + 0x1A;
+            _spell4LevelAddr       = Address + 0x1B;
+            _weaponAddr    = Address + 0x1C; // 2 bytes
+            _accessoryAddr = Address + 0x1E; // 2 bytes
+            _itemSlot1Addr         = Address + 0x20; // 2 bytes
+            _itemSlot2Addr         = Address + 0x22; // 2 bytes
+            _itemSlot3Addr         = Address + 0x24; // 2 bytes
+            _itemSlot4Addr         = Address + 0x26; // 2 bytes
+            _special1Addr     = Address + 0x28;
+            _special2Addr     = Address + 0x29;
+            _special3Addr     = Address + 0x2A;
+            _special4Addr     = Address + 0x2B; // ?
+            _special5Addr     = Address + 0x2C; // ?
+            _special6Addr     = Address + 0x2D; // ?
+            _special7Addr     = Address + 0x2E; // ?
+            _special8Addr     = Address + 0x2F; // ?
+            _special9Addr     = Address + 0x30; // ?
+            _special10Addr    = Address + 0x31; // ?
+            _unknown0x32Addr       = Address + 0x32;
+            _unknown0x33Addr       = Address + 0x33;
+            _unknown0x34Addr       = Address + 0x34;
+            _protectionsAddr       = Address + 0x35; // protections? 8 = no crit? 0a = damage immunity?
+            _expIs5Addr            = Address + 0x36;
+            _unknown0x37Addr       = Address + 0x37;
+            _goldAddr              = Address + 0x38; // 2 bytes
+            _dropAddr              = Address + 0x3A; // 2 bytes
+            _unknown0x3CAddr       = Address + 0x3C;
+            _droprateAddr          = Address + 0x3D; // droprate/drops items when attacked. Set E for thief rules
+            _slowPlusAddr          = Address + 0x3E;
+            _supportPlusAddr       = Address + 0x3F;
+            _magicBonusIdAddr         = Address + 0x40;
+            _movementTypeAddr      = Address + 0x41;
+            _unknown0x42Addr       = Address + 0x42; // heal when damaged when set?
+            _unknown0x43Addr       = Address + 0x43;
+            _spellChancePlus1Addr       = Address + 0x44; // what to do on turn1?. 0 = atk. 1 = spell. 4 = use weapon?
+            _spellChancePlus2Addr       = Address + 0x45; // what to do on turn2?
+            _spellChancePlus3Addr       = Address + 0x46; // what to do on turn3?
+            _spellChancePlus4Addr       = Address + 0x47; // what to do on turn4?
+            _spellChancePlus5Addr       = Address + 0x48; // what to do on turn5?
+            _spellChancePlus6Addr       = Address + 0x49; // what to do on turn6?
+            _unknown0x4AAddr       = Address + 0x4A;
+            _unknown0x4BAddr       = Address + 0x4B;
+            SpriteID               = id + 200;
         }
 
         /// <summary>
@@ -182,506 +182,506 @@ namespace SF3.Models.Structs.X019 {
             Defense += item.Defense * statMult;
         }
 
-        [TableViewModelColumn(displayOrder: -0.5f, displayFormat: "X2", displayGroup: "Stats1")]
+        [TableViewModelColumn(addressField: null, displayOrder: -0.5f, displayFormat: "X2", displayGroup: "Stats1")]
         public int SpriteID { get; }
 
-        [TableViewModelColumn(displayOrder: 0, displayGroup: "Stats1")]
+        [TableViewModelColumn(addressField: nameof(_maxHPAddr), displayOrder: 0, displayGroup: "Stats1")]
         [BulkCopy]
         public int MaxHP {
-            get => Data.GetWord(maxHP);
-            set => Data.SetWord(maxHP, value);
+            get => Data.GetWord(_maxHPAddr);
+            set => Data.SetWord(_maxHPAddr, value);
         }
 
-        [TableViewModelColumn(displayOrder: 1, displayGroup: "Stats1")]
+        [TableViewModelColumn(addressField: nameof(_maxMPAddr), displayOrder: 1, displayGroup: "Stats1")]
         [BulkCopy]
         public int MaxMP {
-            get => Data.GetByte(maxMP);
-            set => Data.SetByte(maxMP, (byte) value);
+            get => Data.GetByte(_maxMPAddr);
+            set => Data.SetByte(_maxMPAddr, (byte) value);
         }
 
-        [TableViewModelColumn(displayOrder: 2, displayGroup: "Stats1")]
+        [TableViewModelColumn(addressField: nameof(_levelAddr), displayOrder: 2, displayGroup: "Stats1")]
         [BulkCopy]
         public int Level {
-            get => Data.GetByte(level);
-            set => Data.SetByte(level, (byte) value);
+            get => Data.GetByte(_levelAddr);
+            set => Data.SetByte(_levelAddr, (byte) value);
         }
 
-        [TableViewModelColumn(displayOrder: 3, displayGroup: "Stats1")]
+        [TableViewModelColumn(addressField: nameof(_attackAddr), displayOrder: 3, displayGroup: "Stats1")]
         [BulkCopy]
         public int Attack {
-            get => Data.GetByte(attack);
-            set => Data.SetByte(attack, (byte) value);
+            get => Data.GetByte(_attackAddr);
+            set => Data.SetByte(_attackAddr, (byte) value);
         }
 
-        [TableViewModelColumn(displayOrder: 4, displayGroup: "Stats1")]
+        [TableViewModelColumn(addressField: nameof(_defenseAddr), displayOrder: 4, displayGroup: "Stats1")]
         [BulkCopy]
         public int Defense {
-            get => Data.GetByte(defense);
-            set => Data.SetByte(defense, (byte) value);
+            get => Data.GetByte(_defenseAddr);
+            set => Data.SetByte(_defenseAddr, (byte) value);
         }
 
-        [TableViewModelColumn(displayOrder: 5, displayGroup: "Stats1")]
+        [TableViewModelColumn(addressField: nameof(_agilityAddr), displayOrder: 5, displayGroup: "Stats1")]
         [BulkCopy]
         public int Agility {
-            get => Data.GetByte(agility);
-            set => Data.SetByte(agility, (byte) value);
+            get => Data.GetByte(_agilityAddr);
+            set => Data.SetByte(_agilityAddr, (byte) value);
         }
 
-        [TableViewModelColumn(displayOrder: 6, displayGroup: "Stats1")]
+        [TableViewModelColumn(addressField: nameof(_movAddr), displayOrder: 6, displayGroup: "Stats1")]
         [BulkCopy]
         public int Mov {
-            get => Data.GetByte(mov);
-            set => Data.SetByte(mov, (byte) value);
+            get => Data.GetByte(_movAddr);
+            set => Data.SetByte(_movAddr, (byte) value);
         }
 
-        [TableViewModelColumn(displayOrder: 7, displayGroup: "Stats1")]
+        [TableViewModelColumn(addressField: nameof(_luckAddr), displayOrder: 7, displayGroup: "Stats1")]
         [BulkCopy]
         public int Luck {
-            get => Data.GetByte(luck);
-            set => Data.SetByte(luck, (byte) value);
+            get => Data.GetByte(_luckAddr);
+            set => Data.SetByte(_luckAddr, (byte) value);
         }
 
-        [TableViewModelColumn(displayOrder: 8, displayGroup: "Stats1")]
+        [TableViewModelColumn(addressField: nameof(_turnsAddr), displayOrder: 8, displayGroup: "Stats1")]
         [BulkCopy]
         public int Turns {
-            get => Data.GetByte(turns);
-            set => Data.SetByte(turns, (byte) value);
+            get => Data.GetByte(_turnsAddr);
+            set => Data.SetByte(_turnsAddr, (byte) value);
         }
 
-        [TableViewModelColumn(displayOrder: 9, displayGroup: "Stats1")]
+        [TableViewModelColumn(addressField: nameof(_hpRegenAddr), displayOrder: 9, displayGroup: "Stats1")]
         [BulkCopy]
         public int HPRegen {
-            get => Data.GetByte(hpRegen);
-            set => Data.SetByte(hpRegen, (byte) value);
+            get => Data.GetByte(_hpRegenAddr);
+            set => Data.SetByte(_hpRegenAddr, (byte) value);
         }
 
-        [TableViewModelColumn(displayOrder: 10, displayGroup: "Stats1")]
+        [TableViewModelColumn(addressField: nameof(_mpRegenAddr), displayOrder: 10, displayGroup: "Stats1")]
         [BulkCopy]
         public int MPRegen {
-            get => Data.GetByte(mpRegen);
-            set => Data.SetByte(mpRegen, (byte) value);
+            get => Data.GetByte(_mpRegenAddr);
+            set => Data.SetByte(_mpRegenAddr, (byte) value);
         }
 
-        [TableViewModelColumn(displayOrder: 11, displayGroup: "MagicRes")]
+        [TableViewModelColumn(addressField: nameof(_earthResAddr), displayOrder: 11, displayGroup: "MagicRes")]
         [BulkCopy]
         public int EarthRes {
-            get => (sbyte) Data.GetByte(earthRes);
-            set => Data.SetByte(earthRes, (byte) value);
+            get => (sbyte) Data.GetByte(_earthResAddr);
+            set => Data.SetByte(_earthResAddr, (byte) value);
         }
 
-        [TableViewModelColumn(displayOrder: 12, displayGroup: "MagicRes")]
+        [TableViewModelColumn(addressField: nameof(_fireResAddr), displayOrder: 12, displayGroup: "MagicRes")]
         [BulkCopy]
         public int FireRes {
-            get => (sbyte) Data.GetByte(fireRes);
-            set => Data.SetByte(fireRes, (byte) value);
+            get => (sbyte) Data.GetByte(_fireResAddr);
+            set => Data.SetByte(_fireResAddr, (byte) value);
         }
 
-        [TableViewModelColumn(displayOrder: 13, displayGroup: "MagicRes")]
+        [TableViewModelColumn(addressField: nameof(_iceResAddr), displayOrder: 13, displayGroup: "MagicRes")]
         [BulkCopy]
         public int IceRes {
-            get => (sbyte) Data.GetByte(iceRes);
-            set => Data.SetByte(iceRes, (byte) value);
+            get => (sbyte) Data.GetByte(_iceResAddr);
+            set => Data.SetByte(_iceResAddr, (byte) value);
         }
 
-        [TableViewModelColumn(displayOrder: 14, displayGroup: "MagicRes")]
+        [TableViewModelColumn(addressField: nameof(_sparkResAddr), displayOrder: 14, displayGroup: "MagicRes")]
         [BulkCopy]
         public int SparkRes {
-            get => (sbyte) Data.GetByte(sparkRes);
-            set => Data.SetByte(sparkRes, (byte) value);
+            get => (sbyte) Data.GetByte(_sparkResAddr);
+            set => Data.SetByte(_sparkResAddr, (byte) value);
         }
 
-        [TableViewModelColumn(displayOrder: 15, displayGroup: "MagicRes")]
+        [TableViewModelColumn(addressField: nameof(_windResAddr), displayOrder: 15, displayGroup: "MagicRes")]
         [BulkCopy]
         public int WindRes {
-            get => (sbyte) Data.GetByte(windRes);
-            set => Data.SetByte(windRes, (byte) value);
+            get => (sbyte) Data.GetByte(_windResAddr);
+            set => Data.SetByte(_windResAddr, (byte) value);
         }
 
-        [TableViewModelColumn(displayOrder: 16, displayGroup: "MagicRes")]
+        [TableViewModelColumn(addressField: nameof(_lightResAddr), displayOrder: 16, displayGroup: "MagicRes")]
         [BulkCopy]
         public int LightRes {
-            get => (sbyte) Data.GetByte(lightRes);
-            set => Data.SetByte(lightRes, (byte) value);
+            get => (sbyte) Data.GetByte(_lightResAddr);
+            set => Data.SetByte(_lightResAddr, (byte) value);
         }
 
-        [TableViewModelColumn(displayOrder: 17, displayGroup: "MagicRes")]
+        [TableViewModelColumn(addressField: nameof(_darkResAddr), displayOrder: 17, displayGroup: "MagicRes")]
         [BulkCopy]
         public int DarkRes {
-            get => (sbyte) Data.GetByte(darkRes);
-            set => Data.SetByte(darkRes, (byte) value);
+            get => (sbyte) Data.GetByte(_darkResAddr);
+            set => Data.SetByte(_darkResAddr, (byte) value);
         }
 
-        [TableViewModelColumn(displayOrder: 18, displayGroup: "MagicRes")]
+        [TableViewModelColumn(addressField: nameof(_unusedResAddr), displayOrder: 18, displayGroup: "MagicRes")]
         [BulkCopy]
         public int UnusedRes {
-            get => (sbyte) Data.GetByte(unusedRes);
-            set => Data.SetByte(unusedRes, (byte) value);
+            get => (sbyte) Data.GetByte(_unusedResAddr);
+            set => Data.SetByte(_unusedResAddr, (byte) value);
         }
 
-        [TableViewModelColumn(displayOrder: 19, displayGroup: "Spells", minWidth: 120, displayFormat: "X2")]
+        [TableViewModelColumn(addressField: nameof(_spell1Addr), displayOrder: 19, displayGroup: "Spells", minWidth: 120, displayFormat: "X2")]
         [BulkCopy]
         [NameGetter(NamedValueType.Spell)]
         public int Spell1 {
-            get => Data.GetByte(spell1);
-            set => Data.SetByte(spell1, (byte) value);
+            get => Data.GetByte(_spell1Addr);
+            set => Data.SetByte(_spell1Addr, (byte) value);
         }
 
-        [TableViewModelColumn(displayOrder: 20, displayGroup: "Spells")]
+        [TableViewModelColumn(addressField: nameof(_spell1LevelAddr), displayOrder: 20, displayGroup: "Spells")]
         [BulkCopy]
         public int Spell1Level {
-            get => Data.GetByte(spell1Level);
-            set => Data.SetByte(spell1Level, (byte) value);
+            get => Data.GetByte(_spell1LevelAddr);
+            set => Data.SetByte(_spell1LevelAddr, (byte) value);
         }
 
-        [TableViewModelColumn(displayOrder: 21, displayGroup: "Spells", minWidth: 120, displayFormat: "X2")]
+        [TableViewModelColumn(addressField: nameof(_spell2Addr), displayOrder: 21, displayGroup: "Spells", minWidth: 120, displayFormat: "X2")]
         [BulkCopy]
         [NameGetter(NamedValueType.Spell)]
         public int Spell2 {
-            get => Data.GetByte(spell2);
-            set => Data.SetByte(spell2, (byte) value);
+            get => Data.GetByte(_spell2Addr);
+            set => Data.SetByte(_spell2Addr, (byte) value);
         }
 
-        [TableViewModelColumn(displayOrder: 22, displayGroup: "Spells")]
+        [TableViewModelColumn(addressField: nameof(_spell2LevelAddr), displayOrder: 22, displayGroup: "Spells")]
         [BulkCopy]
         public int Spell2Level {
-            get => Data.GetByte(spell2Level);
-            set => Data.SetByte(spell2Level, (byte) value);
+            get => Data.GetByte(_spell2LevelAddr);
+            set => Data.SetByte(_spell2LevelAddr, (byte) value);
         }
 
-        [TableViewModelColumn(displayOrder: 23, displayGroup: "Spells", minWidth: 120, displayFormat: "X2")]
+        [TableViewModelColumn(addressField: nameof(_spell3Addr), displayOrder: 23, displayGroup: "Spells", minWidth: 120, displayFormat: "X2")]
         [BulkCopy]
         [NameGetter(NamedValueType.Spell)]
         public int Spell3 {
-            get => Data.GetByte(spell3);
-            set => Data.SetByte(spell3, (byte) value);
+            get => Data.GetByte(_spell3Addr);
+            set => Data.SetByte(_spell3Addr, (byte) value);
         }
 
-        [TableViewModelColumn(displayOrder: 24, displayGroup: "Spells")]
+        [TableViewModelColumn(addressField: nameof(_spell3LevelAddr), displayOrder: 24, displayGroup: "Spells")]
         [BulkCopy]
         public int Spell3Level {
-            get => Data.GetByte(spell3Level);
-            set => Data.SetByte(spell3Level, (byte) value);
+            get => Data.GetByte(_spell3LevelAddr);
+            set => Data.SetByte(_spell3LevelAddr, (byte) value);
         }
 
-        [TableViewModelColumn(displayOrder: 25, displayGroup: "Spells", minWidth: 120, displayFormat: "X2")]
+        [TableViewModelColumn(addressField: nameof(_spell4Addr), displayOrder: 25, displayGroup: "Spells", minWidth: 120, displayFormat: "X2")]
         [BulkCopy]
         [NameGetter(NamedValueType.Spell)]
         public int Spell4 {
-            get => Data.GetByte(spell4);
-            set => Data.SetByte(spell4, (byte) value);
+            get => Data.GetByte(_spell4Addr);
+            set => Data.SetByte(_spell4Addr, (byte) value);
         }
 
-        [TableViewModelColumn(displayOrder: 26, displayGroup: "Spells")]
+        [TableViewModelColumn(addressField: nameof(_spell4LevelAddr), displayOrder: 26, displayGroup: "Spells")]
         [BulkCopy]
         public int Spell4Level {
-            get => Data.GetByte(spell4Level);
-            set => Data.SetByte(spell4Level, (byte) value);
+            get => Data.GetByte(_spell4LevelAddr);
+            set => Data.SetByte(_spell4LevelAddr, (byte) value);
         }
 
-        [TableViewModelColumn(displayOrder: 27, displayGroup: "Items", minWidth: 120, displayFormat: "X2")]
+        [TableViewModelColumn(addressField: nameof(_weaponAddr), displayOrder: 27, displayGroup: "Items", minWidth: 120, displayFormat: "X2")]
         [BulkCopy]
         [NameGetter(NamedValueType.Item)]
         public int Weapon {
-            get => Data.GetWord(equippedWeapon);
-            set => Data.SetWord(equippedWeapon, value);
+            get => Data.GetWord(_weaponAddr);
+            set => Data.SetWord(_weaponAddr, value);
         }
 
-        [TableViewModelColumn(displayOrder: 27, displayGroup: "Items", minWidth: 120, displayFormat: "X2")]
+        [TableViewModelColumn(addressField: nameof(_accessoryAddr), displayOrder: 27, displayGroup: "Items", minWidth: 120, displayFormat: "X2")]
         [BulkCopy]
         [NameGetter(NamedValueType.Item)]
         public int Accessory {
-            get => Data.GetWord(equippedAccessory);
-            set => Data.SetWord(equippedAccessory, value);
+            get => Data.GetWord(_accessoryAddr);
+            set => Data.SetWord(_accessoryAddr, value);
         }
 
-        [TableViewModelColumn(displayOrder: 28, displayGroup: "Items", minWidth: 120, displayFormat: "X2")]
+        [TableViewModelColumn(addressField: nameof(_itemSlot1Addr), displayOrder: 28, displayGroup: "Items", minWidth: 120, displayFormat: "X2")]
         [BulkCopy]
         [NameGetter(NamedValueType.Item)]
         public int ItemSlot1 {
-            get => Data.GetWord(itemSlot1);
-            set => Data.SetWord(itemSlot1, value);
+            get => Data.GetWord(_itemSlot1Addr);
+            set => Data.SetWord(_itemSlot1Addr, value);
         }
 
-        [TableViewModelColumn(displayOrder: 29, displayGroup: "Items", minWidth: 120, displayFormat: "X2")]
+        [TableViewModelColumn(addressField: nameof(_itemSlot2Addr), displayOrder: 29, displayGroup: "Items", minWidth: 120, displayFormat: "X2")]
         [BulkCopy]
         [NameGetter(NamedValueType.Item)]
         public int ItemSlot2 {
-            get => Data.GetWord(itemSlot2);
-            set => Data.SetWord(itemSlot2, value);
+            get => Data.GetWord(_itemSlot2Addr);
+            set => Data.SetWord(_itemSlot2Addr, value);
         }
 
-        [TableViewModelColumn(displayOrder: 30, displayGroup: "Items", minWidth: 120, displayFormat: "X2")]
+        [TableViewModelColumn(addressField: nameof(_itemSlot3Addr), displayOrder: 30, displayGroup: "Items", minWidth: 120, displayFormat: "X2")]
         [BulkCopy]
         [NameGetter(NamedValueType.Item)]
         public int ItemSlot3 {
-            get => Data.GetWord(itemSlot3);
-            set => Data.SetWord(itemSlot3, value);
+            get => Data.GetWord(_itemSlot3Addr);
+            set => Data.SetWord(_itemSlot3Addr, value);
         }
 
-        [TableViewModelColumn(displayOrder: 31, displayGroup: "Items", minWidth: 120, displayFormat: "X2")]
+        [TableViewModelColumn(addressField: nameof(_itemSlot4Addr), displayOrder: 31, displayGroup: "Items", minWidth: 120, displayFormat: "X2")]
         [BulkCopy]
         [NameGetter(NamedValueType.Item)]
         public int ItemSlot4 {
-            get => Data.GetWord(itemSlot4);
-            set => Data.SetWord(itemSlot4, value);
+            get => Data.GetWord(_itemSlot4Addr);
+            set => Data.SetWord(_itemSlot4Addr, value);
         }
 
-        [TableViewModelColumn(displayOrder: 32, displayGroup: "Specials", minWidth: 120, displayFormat: "X2")]
+        [TableViewModelColumn(addressField: nameof(_special1Addr), displayOrder: 32, displayGroup: "Specials", minWidth: 120, displayFormat: "X2")]
         [BulkCopy]
         [NameGetter(NamedValueType.Special)]
         public int Special1 {
-            get => Data.GetByte(enemySpecial1);
-            set => Data.SetByte(enemySpecial1, (byte) value);
+            get => Data.GetByte(_special1Addr);
+            set => Data.SetByte(_special1Addr, (byte) value);
         }
 
-        [TableViewModelColumn(displayOrder: 33, displayGroup: "Specials", minWidth: 120, displayFormat: "X2")]
+        [TableViewModelColumn(addressField: nameof(_special2Addr), displayOrder: 33, displayGroup: "Specials", minWidth: 120, displayFormat: "X2")]
         [BulkCopy]
         [NameGetter(NamedValueType.Special)]
         public int Special2 {
-            get => Data.GetByte(enemySpecial2);
-            set => Data.SetByte(enemySpecial2, (byte) value);
+            get => Data.GetByte(_special2Addr);
+            set => Data.SetByte(_special2Addr, (byte) value);
         }
 
-        [TableViewModelColumn(displayOrder: 34, displayGroup: "Specials", minWidth: 120, displayFormat: "X2")]
+        [TableViewModelColumn(addressField: nameof(_special3Addr), displayOrder: 34, displayGroup: "Specials", minWidth: 120, displayFormat: "X2")]
         [BulkCopy]
         [NameGetter(NamedValueType.Special)]
         public int Special3 {
-            get => Data.GetByte(enemySpecial3);
-            set => Data.SetByte(enemySpecial3, (byte) value);
+            get => Data.GetByte(_special3Addr);
+            set => Data.SetByte(_special3Addr, (byte) value);
         }
 
-        [TableViewModelColumn(displayOrder: 35, displayGroup: "Specials", minWidth: 120, displayFormat: "X2")]
+        [TableViewModelColumn(addressField: nameof(_special4Addr), displayOrder: 35, displayGroup: "Specials", minWidth: 120, displayFormat: "X2")]
         [BulkCopy]
         [NameGetter(NamedValueType.Special)]
         public int Special4 {
-            get => Data.GetByte(enemySpecial4);
-            set => Data.SetByte(enemySpecial4, (byte) value);
+            get => Data.GetByte(_special4Addr);
+            set => Data.SetByte(_special4Addr, (byte) value);
         }
 
-        [TableViewModelColumn(displayOrder: 36, displayGroup: "Specials", minWidth: 120, displayFormat: "X2")]
+        [TableViewModelColumn(addressField: nameof(_special5Addr), displayOrder: 36, displayGroup: "Specials", minWidth: 120, displayFormat: "X2")]
         [BulkCopy]
         [NameGetter(NamedValueType.Special)]
         public int Special5 {
-            get => Data.GetByte(enemySpecial5);
-            set => Data.SetByte(enemySpecial5, (byte) value);
+            get => Data.GetByte(_special5Addr);
+            set => Data.SetByte(_special5Addr, (byte) value);
         }
 
-        [TableViewModelColumn(displayOrder: 37, displayGroup: "Specials", minWidth: 120, displayFormat: "X2")]
+        [TableViewModelColumn(addressField: nameof(_special6Addr), displayOrder: 37, displayGroup: "Specials", minWidth: 120, displayFormat: "X2")]
         [BulkCopy]
         [NameGetter(NamedValueType.Special)]
         public int Special6 {
-            get => Data.GetByte(enemySpecial6);
-            set => Data.SetByte(enemySpecial6, (byte) value);
+            get => Data.GetByte(_special6Addr);
+            set => Data.SetByte(_special6Addr, (byte) value);
         }
 
-        [TableViewModelColumn(displayOrder: 38, displayGroup: "Specials", minWidth: 120, displayFormat: "X2")]
+        [TableViewModelColumn(addressField: nameof(_special7Addr), displayOrder: 38, displayGroup: "Specials", minWidth: 120, displayFormat: "X2")]
         [BulkCopy]
         [NameGetter(NamedValueType.Special)]
         public int Special7 {
-            get => Data.GetByte(enemySpecial7);
-            set => Data.SetByte(enemySpecial7, (byte) value);
+            get => Data.GetByte(_special7Addr);
+            set => Data.SetByte(_special7Addr, (byte) value);
         }
 
-        [TableViewModelColumn(displayOrder: 39, displayGroup: "Specials", minWidth: 120, displayFormat: "X2")]
+        [TableViewModelColumn(addressField: nameof(_special8Addr), displayOrder: 39, displayGroup: "Specials", minWidth: 120, displayFormat: "X2")]
         [BulkCopy]
         [NameGetter(NamedValueType.Special)]
         public int Special8 {
-            get => Data.GetByte(enemySpecial8);
-            set => Data.SetByte(enemySpecial8, (byte) value);
+            get => Data.GetByte(_special8Addr);
+            set => Data.SetByte(_special8Addr, (byte) value);
         }
 
-        [TableViewModelColumn(displayOrder: 40, displayGroup: "Specials", minWidth: 120, displayFormat: "X2")]
+        [TableViewModelColumn(addressField: nameof(_special9Addr), displayOrder: 40, displayGroup: "Specials", minWidth: 120, displayFormat: "X2")]
         [BulkCopy]
         [NameGetter(NamedValueType.Special)]
         public int Special9 {
-            get => Data.GetByte(enemySpecial9);
-            set => Data.SetByte(enemySpecial9, (byte) value);
+            get => Data.GetByte(_special9Addr);
+            set => Data.SetByte(_special9Addr, (byte) value);
         }
 
-        [TableViewModelColumn(displayOrder: 41, displayGroup: "Specials", minWidth: 120, displayFormat: "X2")]
+        [TableViewModelColumn(addressField: nameof(_special10Addr), displayOrder: 41, displayGroup: "Specials", minWidth: 120, displayFormat: "X2")]
         [BulkCopy]
         [NameGetter(NamedValueType.Special)]
         public int Special10 {
-            get => Data.GetByte(enemySpecial10);
-            set => Data.SetByte(enemySpecial10, (byte) value);
+            get => Data.GetByte(_special10Addr);
+            set => Data.SetByte(_special10Addr, (byte) value);
         }
 
-        [TableViewModelColumn(displayOrder: 42, displayGroup: "Unknown", displayFormat: "X2")]
+        [TableViewModelColumn(addressField: nameof(_unknown0x32Addr), displayOrder: 42, displayGroup: "Unknown", displayFormat: "X2")]
         [BulkCopy]
-        public int Unknown1 {
-            get => Data.GetByte(unknown1);
-            set => Data.SetByte(unknown1, (byte) value);
+        public int Unknown0x32 {
+            get => Data.GetByte(_unknown0x32Addr);
+            set => Data.SetByte(_unknown0x32Addr, (byte) value);
         }
 
-        [TableViewModelColumn(displayOrder: 43, displayGroup: "Unknown", displayFormat: "X2")]
+        [TableViewModelColumn(addressField: nameof(_unknown0x33Addr), displayOrder: 43, displayGroup: "Unknown", displayFormat: "X2")]
         [BulkCopy]
-        public int Unknown2 {
-            get => Data.GetByte(unknown2);
-            set => Data.SetByte(unknown2, (byte) value);
+        public int Unknown0x33 {
+            get => Data.GetByte(_unknown0x33Addr);
+            set => Data.SetByte(_unknown0x33Addr, (byte) value);
         }
 
-        [TableViewModelColumn(displayOrder: 44, displayGroup: "Unknown", displayFormat: "X2")]
+        [TableViewModelColumn(addressField: nameof(_unknown0x34Addr), displayOrder: 44, displayGroup: "Unknown", displayFormat: "X2")]
         [BulkCopy]
-        public int Unknown3 {
-            get => Data.GetByte(unknown3);
-            set => Data.SetByte(unknown3, (byte) value);
+        public int Unknown0x34 {
+            get => Data.GetByte(_unknown0x34Addr);
+            set => Data.SetByte(_unknown0x34Addr, (byte) value);
         }
 
-        [TableViewModelColumn(displayOrder: 45, displayGroup: "Unknown", displayFormat: "X2")]
+        [TableViewModelColumn(addressField: nameof(_protectionsAddr), displayOrder: 45, displayGroup: "Unknown", displayFormat: "X2")]
         [BulkCopy]
         public int Protections {
-            get => Data.GetByte(protections);
-            set => Data.SetByte(protections, (byte) value);
+            get => Data.GetByte(_protectionsAddr);
+            set => Data.SetByte(_protectionsAddr, (byte) value);
         }
 
-        [TableViewModelColumn(displayOrder: 46, displayGroup: "Unknown")]
+        [TableViewModelColumn(addressField: nameof(_protectionsAddr), displayOrder: 46, displayGroup: "Unknown")]
         public bool CantSeeStatus {
-            get => Data.GetBit(protections, 4);
-            set => Data.SetBit(protections, 4, value);
+            get => Data.GetBit(_protectionsAddr, 4);
+            set => Data.SetBit(_protectionsAddr, 4, value);
         }
 
-        [TableViewModelColumn(displayOrder: 47, displayGroup: "Unknown", displayFormat: "X2")]
+        [TableViewModelColumn(addressField: nameof(_expIs5Addr), displayOrder: 47, displayGroup: "Unknown", displayFormat: "X2")]
         [BulkCopy]
         public int ExpIs5 {
-            get => Data.GetByte(expIs5);
-            set => Data.SetByte(expIs5, (byte) value);
+            get => Data.GetByte(_expIs5Addr);
+            set => Data.SetByte(_expIs5Addr, (byte) value);
         }
 
-        [TableViewModelColumn(displayOrder: 48, displayGroup: "Unknown", displayFormat: "X2")]
+        [TableViewModelColumn(addressField: nameof(_unknown0x37Addr), displayOrder: 48, displayGroup: "Unknown", displayFormat: "X2")]
         [BulkCopy]
-        public int Unknown6 {
-            get => Data.GetByte(unknown6);
-            set => Data.SetByte(unknown6, (byte) value);
+        public int Unknown0x37 {
+            get => Data.GetByte(_unknown0x37Addr);
+            set => Data.SetByte(_unknown0x37Addr, (byte) value);
         }
 
-        [TableViewModelColumn(displayOrder: 49, displayGroup: "Stats2")]
+        [TableViewModelColumn(addressField: nameof(_goldAddr), displayOrder: 49, displayGroup: "Stats2")]
         [BulkCopy]
         public int Gold {
-            get => Data.GetWord(gold);
-            set => Data.SetWord(gold, value);
+            get => Data.GetWord(_goldAddr);
+            set => Data.SetWord(_goldAddr, value);
         }
 
-        [TableViewModelColumn(displayOrder: 50, displayGroup: "Stats2", minWidth: 120, displayFormat: "X2")]
+        [TableViewModelColumn(addressField: nameof(_dropAddr), displayOrder: 50, displayGroup: "Stats2", minWidth: 120, displayFormat: "X2")]
         [BulkCopy]
         [NameGetter(NamedValueType.Item)]
         public int Drop {
-            get => Data.GetWord(drop);
-            set => Data.SetWord(drop, value);
+            get => Data.GetWord(_dropAddr);
+            set => Data.SetWord(_dropAddr, value);
         }
 
-        [TableViewModelColumn(displayOrder: 51, displayGroup: "Stats2", displayFormat: "X2")]
+        [TableViewModelColumn(addressField: nameof(_unknown0x3CAddr), displayOrder: 51, displayGroup: "Stats2", displayFormat: "X2")]
         [BulkCopy]
-        public int Unknown7 {
-            get => Data.GetByte(unknown7);
-            set => Data.SetByte(unknown7, (byte) value);
+        public int Unknown0x3C {
+            get => Data.GetByte(_unknown0x3CAddr);
+            set => Data.SetByte(_unknown0x3CAddr, (byte) value);
         }
 
-        [TableViewModelColumn(displayOrder: 52, displayGroup: "Stats2", minWidth: 100, displayFormat: "X2")]
+        [TableViewModelColumn(addressField: nameof(_droprateAddr), displayOrder: 52, displayGroup: "Stats2", minWidth: 100, displayFormat: "X2")]
         [BulkCopy]
         [NameGetter(NamedValueType.Droprate)]
         public int Droprate {
-            get => Data.GetByte(droprate);
-            set => Data.SetByte(droprate, (byte) value);
+            get => Data.GetByte(_droprateAddr);
+            set => Data.SetByte(_droprateAddr, (byte) value);
         }
 
-        [TableViewModelColumn(displayOrder: 53, displayGroup: "Stats2")]
+        [TableViewModelColumn(addressField: nameof(_slowPlusAddr), displayOrder: 53, displayGroup: "Stats2")]
         [BulkCopy]
         public int SlowPlus {
-            get => Data.GetByte(slowPlus);
-            set => Data.SetByte(slowPlus, (byte) value);
+            get => Data.GetByte(_slowPlusAddr);
+            set => Data.SetByte(_slowPlusAddr, (byte) value);
         }
 
-        [TableViewModelColumn(displayOrder: 54, displayGroup: "Stats2")]
+        [TableViewModelColumn(addressField: nameof(_supportPlusAddr), displayOrder: 54, displayGroup: "Stats2")]
         [BulkCopy]
         public int SupportPlus {
-            get => Data.GetByte(supportPlus);
-            set => Data.SetByte(supportPlus, (byte) value);
+            get => Data.GetByte(_supportPlusAddr);
+            set => Data.SetByte(_supportPlusAddr, (byte) value);
         }
 
-        [TableViewModelColumn(displayOrder: 55, displayGroup: "Stats2", displayFormat: "X2", minWidth: 120)]
+        [TableViewModelColumn(addressField: nameof(_magicBonusIdAddr), displayOrder: 55, displayGroup: "Stats2", displayFormat: "X2", minWidth: 120)]
         [BulkCopy]
         [NameGetter(NamedValueType.MagicBonus)]
         public int MagicBonusID {
-            get => Data.GetByte(magicType);
-            set => Data.SetByte(magicType, (byte) value);
+            get => Data.GetByte(_magicBonusIdAddr);
+            set => Data.SetByte(_magicBonusIdAddr, (byte) value);
         }
 
-        [TableViewModelColumn(displayOrder: 56, displayGroup: "Stats2", displayFormat: "X2", minWidth: 100)]
+        [TableViewModelColumn(addressField: nameof(_movementTypeAddr), displayOrder: 56, displayGroup: "Stats2", displayFormat: "X2", minWidth: 100)]
         [BulkCopy]
         [NameGetter(NamedValueType.MovementType)]
         public int MovementType {
-            get => Data.GetByte(movementType);
-            set => Data.SetByte(movementType, (byte) value);
+            get => Data.GetByte(_movementTypeAddr);
+            set => Data.SetByte(_movementTypeAddr, (byte) value);
         }
 
-        [TableViewModelColumn(displayOrder: 56.5f, displayName: "CanHeal", displayGroup: "LastPage")]
+        [TableViewModelColumn(addressField: nameof(_unknown0x42Addr), displayOrder: 56.5f, displayName: "CanHeal", displayGroup: "LastPage")]
         [BulkCopy]
-        public int Unknown11 {
-            get => Data.GetByte(unknown11);
-            set => Data.SetByte(unknown11, (byte) value);
+        public int Unknown0x42 {
+            get => Data.GetByte(_unknown0x42Addr);
+            set => Data.SetByte(_unknown0x42Addr, (byte) value);
         }
 
-        [TableViewModelColumn(displayOrder: 57, displayGroup: "LastPage", displayFormat: "X2")]
+        [TableViewModelColumn(addressField: nameof(_unknown0x43Addr), displayOrder: 57, displayGroup: "LastPage", displayFormat: "X2")]
         [BulkCopy]
-        public int Unknown12 {
-            get => Data.GetByte(unknown12);
-            set => Data.SetByte(unknown12, (byte) value);
+        public int Unknown0x43 {
+            get => Data.GetByte(_unknown0x43Addr);
+            set => Data.SetByte(_unknown0x43Addr, (byte) value);
         }
 
-        [TableViewModelColumn(displayOrder: 58, displayName: "+SpellChance1", displayGroup: "LastPage", displayFormat: "X2")]
+        [TableViewModelColumn(addressField: nameof(_spellChancePlus1Addr), displayOrder: 58, displayName: "+SpellChance1", displayGroup: "LastPage", displayFormat: "X2")]
         [BulkCopy]
-        public int Unknown13 {
-            get => Data.GetByte(unknown13);
-            set => Data.SetByte(unknown13, (byte) value);
+        public int SpellChancePlus1 {
+            get => Data.GetByte(_spellChancePlus1Addr);
+            set => Data.SetByte(_spellChancePlus1Addr, (byte) value);
         }
 
-        [TableViewModelColumn(displayOrder: 59, displayName: "+SpellChance2", displayGroup: "LastPage", displayFormat: "X2")]
+        [TableViewModelColumn(addressField: nameof(_spellChancePlus2Addr), displayOrder: 59, displayName: "+SpellChance2", displayGroup: "LastPage", displayFormat: "X2")]
         [BulkCopy]
-        public int Unknown14 {
-            get => Data.GetByte(unknown14);
-            set => Data.SetByte(unknown14, (byte) value);
+        public int SpellChancePlus2 {
+            get => Data.GetByte(_spellChancePlus2Addr);
+            set => Data.SetByte(_spellChancePlus2Addr, (byte) value);
         }
 
-        [TableViewModelColumn(displayOrder: 60, displayName: "+SpellChance3", displayGroup: "LastPage", displayFormat: "X2")]
+        [TableViewModelColumn(addressField: nameof(_spellChancePlus3Addr), displayOrder: 60, displayName: "+SpellChance3", displayGroup: "LastPage", displayFormat: "X2")]
         [BulkCopy]
-        public int Unknown15 {
-            get => Data.GetByte(unknown15);
-            set => Data.SetByte(unknown15, (byte) value);
+        public int SpellChancePlus3 {
+            get => Data.GetByte(_spellChancePlus3Addr);
+            set => Data.SetByte(_spellChancePlus3Addr, (byte) value);
         }
 
-        [TableViewModelColumn(displayOrder: 61, displayName: "+SpellChance4", displayGroup: "LastPage", displayFormat: "X2")]
+        [TableViewModelColumn(addressField: nameof(_spellChancePlus4Addr), displayOrder: 61, displayName: "+SpellChance4", displayGroup: "LastPage", displayFormat: "X2")]
         [BulkCopy]
-        public int Unknown16 {
-            get => Data.GetByte(unknown16);
-            set => Data.SetByte(unknown16, (byte) value);
+        public int SpellChancePlus4 {
+            get => Data.GetByte(_spellChancePlus4Addr);
+            set => Data.SetByte(_spellChancePlus4Addr, (byte) value);
         }
 
-        [TableViewModelColumn(displayOrder: 62, displayName: "+SpellChance5", displayGroup: "LastPage", displayFormat: "X2")]
+        [TableViewModelColumn(addressField: nameof(_spellChancePlus5Addr), displayOrder: 62, displayName: "+SpellChance5", displayGroup: "LastPage", displayFormat: "X2")]
         [BulkCopy]
-        public int Unknown17 {
-            get => Data.GetByte(unknown17);
-            set => Data.SetByte(unknown17, (byte) value);
+        public int SpellChancePlus5 {
+            get => Data.GetByte(_spellChancePlus5Addr);
+            set => Data.SetByte(_spellChancePlus5Addr, (byte) value);
         }
 
-        [TableViewModelColumn(displayOrder: 63, displayName: "+SpellChance6", displayGroup: "LastPage", displayFormat: "X2")]
+        [TableViewModelColumn(addressField: nameof(_spellChancePlus6Addr), displayOrder: 63, displayName: "+SpellChance6", displayGroup: "LastPage", displayFormat: "X2")]
         [BulkCopy]
-        public int Unknown18 {
-            get => Data.GetByte(unknown18);
-            set => Data.SetByte(unknown18, (byte) value);
+        public int SpellChancePlus6 {
+            get => Data.GetByte(_spellChancePlus6Addr);
+            set => Data.SetByte(_spellChancePlus6Addr, (byte) value);
         }
 
-        [TableViewModelColumn(displayOrder: 64, displayGroup: "LastPage", displayFormat: "X2")]
+        [TableViewModelColumn(addressField: nameof(_unknown0x4AAddr), displayOrder: 64, displayGroup: "LastPage", displayFormat: "X2")]
         [BulkCopy]
-        public int Unknown19 {
-            get => Data.GetByte(unknown19);
-            set => Data.SetByte(unknown19, (byte) value);
+        public int Unknown0x4A {
+            get => Data.GetByte(_unknown0x4AAddr);
+            set => Data.SetByte(_unknown0x4AAddr, (byte) value);
         }
 
-        [TableViewModelColumn(displayOrder: 65, displayGroup: "LastPage", displayFormat: "X2")]
+        [TableViewModelColumn(addressField: nameof(_unknown0x4BAddr), displayOrder: 65, displayGroup: "LastPage", displayFormat: "X2")]
         [BulkCopy]
-        public int Unknown20 {
-            get => Data.GetByte(unknown20);
-            set => Data.SetByte(unknown20, (byte) value);
+        public int Unknown0x4B {
+            get => Data.GetByte(_unknown0x4BAddr);
+            set => Data.SetByte(_unknown0x4BAddr, (byte) value);
         }
     }
 }

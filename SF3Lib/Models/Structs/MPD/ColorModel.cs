@@ -10,13 +10,13 @@ namespace SF3.Models.Structs.MPD {
         }
 
         [BulkCopy]
-        [TableViewModelColumn(displayName: "Color (ABGR1555)", displayOrder: 0, displayFormat: "X4")]
+        [TableViewModelColumn(addressField: nameof(Address), displayName: "Color (ABGR1555)", displayOrder: 0, displayFormat: "X4")]
         public ushort ColorABGR1555 {
             get => (ushort) Data.GetWord(Address);
             set => Data.SetWord(Address, value);
         }
 
-        [TableViewModelColumn(displayName: "HTML Color", displayOrder: 1, displayFormat: "X", minWidth: 80)]
+        [TableViewModelColumn(addressField: nameof(Address), displayName: "HTML Color", displayOrder: 1, displayFormat: "X", minWidth: 80)]
         public string HtmlColor {
             get => ABGR1555toChannels((ushort) Data.GetWord(Address)).ToHtmlColor();
             set {

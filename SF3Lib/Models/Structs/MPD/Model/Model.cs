@@ -33,49 +33,49 @@ namespace SF3.Models.Structs.MPD.Model {
         }
 
         [BulkCopy]
-        [TableViewModelColumn(displayOrder: 0.1f, displayName: "PDATA*[1]", isPointer: true)]
+        [TableViewModelColumn(addressField: nameof(_pdata1Address), displayOrder: 0.1f, displayName: "PDATA*[1]", isPointer: true)]
         public uint PData1 {
             get => (uint) Data.GetDouble(_pdata1Address);
             set => Data.SetDouble(_pdata1Address, (int) value);
         }
 
         [BulkCopy]
-        [TableViewModelColumn(displayOrder: 0.2f, displayName: "PDATA*[2]", isPointer: true)]
+        [TableViewModelColumn(addressField: nameof(_pdata2Address), displayOrder: 0.2f, displayName: "PDATA*[2]", isPointer: true)]
         public uint PData2 {
             get => (uint) Data.GetDouble(_pdata2Address);
             set => Data.SetDouble(_pdata2Address, (int) value);
         }
 
         [BulkCopy]
-        [TableViewModelColumn(displayOrder: 0.3f, displayName: "PDATA*[3]", isPointer: true)]
+        [TableViewModelColumn(addressField: nameof(_pdata3Address), displayOrder: 0.3f, displayName: "PDATA*[3]", isPointer: true)]
         public uint PData3 {
             get => (uint) Data.GetDouble(_pdata3Address);
             set => Data.SetDouble(_pdata3Address, (int) value);
         }
 
         [BulkCopy]
-        [TableViewModelColumn(displayOrder: 0.4f, displayName: "PDATA*[4]", isPointer: true)]
+        [TableViewModelColumn(addressField: nameof(_pdata4Address), displayOrder: 0.4f, displayName: "PDATA*[4]", isPointer: true)]
         public uint PData4 {
             get => (uint) Data.GetDouble(_pdata4Address);
             set => Data.SetDouble(_pdata4Address, (int) value);
         }
 
         [BulkCopy]
-        [TableViewModelColumn(displayOrder: 0.5f, displayName: "PDATA*[5]", isPointer: true)]
+        [TableViewModelColumn(addressField: nameof(_pdata5Address), displayOrder: 0.5f, displayName: "PDATA*[5]", isPointer: true)]
         public uint PData5 {
             get => (uint) Data.GetDouble(_pdata5Address);
             set => Data.SetDouble(_pdata5Address, (int) value);
         }
 
         [BulkCopy]
-        [TableViewModelColumn(displayOrder: 0.6f, displayName: "PDATA*[6]", isPointer: true)]
+        [TableViewModelColumn(addressField: nameof(_pdata6Address), displayOrder: 0.6f, displayName: "PDATA*[6]", isPointer: true)]
         public uint PData6 {
             get => (uint) Data.GetDouble(_pdata6Address);
             set => Data.SetDouble(_pdata6Address, (int) value);
         }
 
         [BulkCopy]
-        [TableViewModelColumn(displayOrder: 0.7f, displayName: "PDATA*[7]", isPointer: true)]
+        [TableViewModelColumn(addressField: nameof(_pdata7Address), displayOrder: 0.7f, displayName: "PDATA*[7]", isPointer: true)]
         public uint PData7 {
             get => (uint) Data.GetDouble(_pdata7Address);
             set => Data.SetDouble(_pdata7Address, (int) value);
@@ -127,7 +127,7 @@ namespace SF3.Models.Structs.MPD.Model {
         public bool HasTagsAndFlags { get; }
 
         [BulkCopy]
-        [TableViewModelColumn(displayOrder: 17)]
+        [TableViewModelColumn(addressField: nameof(_modelIdAddress), displayOrder: 17)]
         public ushort Tag {
             get => HasTagsAndFlags ? (ushort) Data.GetWord(_modelIdAddress) : (ushort) 0;
             set {
@@ -137,7 +137,7 @@ namespace SF3.Models.Structs.MPD.Model {
         }
 
         [BulkCopy]
-        [TableViewModelColumn(displayOrder: 18, displayFormat: "X4")]
+        [TableViewModelColumn(addressField: nameof(_flagsAddress), displayOrder: 18, displayFormat: "X4")]
         public ushort Flags {
             get => HasTagsAndFlags ? (ushort) Data.GetWord(_flagsAddress) : (ushort) 0;
             set {
@@ -146,13 +146,13 @@ namespace SF3.Models.Structs.MPD.Model {
             }
         }
 
-        [TableViewModelColumn(displayOrder: 18.1f)]
+        [TableViewModelColumn(addressField: null, displayOrder: 18.1f)]
         public override bool AlwaysFacesCamera {
             get => (Flags & 0x08) == 0x08;
             set => Flags = (ushort) ((Flags & ~0x08) | (value ? 0x08 : 0x00));
         }
 
-        [TableViewModelColumn(displayOrder: 18.2f, minWidth: 100)]
+        [TableViewModelColumn(addressField: null, displayOrder: 18.2f, minWidth: 100)]
         public override ModelDirectionType OnlyVisibleFromDirection {
             get => ((Flags & 0x10) == 0x10) ? (ModelDirectionType) (Flags & 0x07) : ModelDirectionType.Unset;
             set => Flags = (ushort) ((Flags & 0x07) | (((((short) value) & 0x07) == (short) ModelDirectionType.Unset) ? 0 : (((ushort) value) & 0x07)));

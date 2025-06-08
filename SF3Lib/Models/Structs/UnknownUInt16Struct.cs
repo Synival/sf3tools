@@ -9,7 +9,7 @@ namespace SF3.Models.Structs {
         }
 
         [BulkCopy]
-        [TableViewModelColumn(displayName: "UInt16 Value", displayFormat: "X4")]
+        [TableViewModelColumn(addressField: nameof(Address), displayName: "UInt16 Value", displayFormat: "X4")]
         public ushort Value {
             get => (ushort) Data.GetWord(Address);
             set => Data.SetWord(Address, value);

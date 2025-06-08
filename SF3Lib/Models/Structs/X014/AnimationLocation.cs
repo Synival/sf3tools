@@ -16,7 +16,7 @@ namespace SF3.Models.Structs.Shared {
         public bool IsEffectFileIndexes { get; }
         public NamedValueType LocationType { get; }
 
-        [TableViewModelColumn(displayOrder: 1, minWidth: 200, displayFormat: "X2")]
+        [TableViewModelColumn(addressField: nameof(_locationAddr), displayOrder: 1, minWidth: 200, displayFormat: "X2")]
         [NameGetter(NamedValueType.ConditionalType, nameof(LocationType))]
         [BulkCopy]
         public int Location {

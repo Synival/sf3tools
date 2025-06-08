@@ -167,7 +167,7 @@ namespace SF3.Win.Controls {
 
         private CameraRefs CreateCameraRefs() {
             float width   = 64.0f;
-            float height  = 64.0f;
+            float depth   = 64.0f;
             float centerX = 0.0f;
             float groundY = 0.0f;
             float centerZ = 0.0f;
@@ -175,20 +175,20 @@ namespace SF3.Win.Controls {
             if (MPD_File?.BoundariesTable?.Length >= 2) {
                 var bounds = MPD_File.BoundariesTable;
                 var x1 = bounds.Min(x => x.X1);
-                var y1 = bounds.Min(x => x.Y1);
+                var z1 = bounds.Min(x => x.Z1);
                 var x2 = bounds.Max(x => x.X2);
-                var y2 = bounds.Max(x => x.Y2);
+                var z2 = bounds.Max(x => x.Z2);
 
                 width   = (x2 - x1) / 32.00f;
-                height  = (y2 - y1) / 32.00f;
+                depth   = (z2 - z1) / 32.00f;
                 centerX = (x1 + x2) / 2.0f /  32.00f + GeneralResources.ModelOffsetX;
-                centerZ = (y1 + y2) / 2.0f / -32.00f + GeneralResources.ModelOffsetZ + 64.00f;
+                centerZ = (z1 + z2) / 2.0f / -32.00f + GeneralResources.ModelOffsetZ + 64.00f;
                 groundY = (MPD_File?.MPDHeader?.GroundY ?? 0) / -32.0f;
             }
 
             return new CameraRefs {
                 Width  = width,
-                Height = height,
+                Height = depth,
                 Center = new Vector3(centerX, groundY, centerZ)
             };
         }

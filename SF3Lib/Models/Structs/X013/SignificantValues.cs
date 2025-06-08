@@ -28,119 +28,136 @@ namespace SF3.Models.Structs.X013 {
         private HealExp HealExp { get; }
         private SoulFail SoulFail { get; }
 
-        [TableViewModelColumn(displayOrder: 0, displayName: "Attack Advantage Crit% Mod")]
+        // TODO: get address!
+        [TableViewModelColumn(addressField: null, displayOrder: 0, displayName: "Attack Advantage Crit% Mod")]
         [BulkCopy]
         public int AttackAdvantageCritMod {
             get => CritMod.Advantage;
             set => CritMod.Advantage = value;
         }
 
-        [TableViewModelColumn(displayOrder: 1, displayName: "Attack Disadvantage Crit% Mod")]
+        // TODO: get address!
+        [TableViewModelColumn(addressField: null, displayOrder: 1, displayName: "Attack Disadvantage Crit% Mod")]
         [BulkCopy]
         public int AttackDisadvantageCritMod {
             get => CritMod.Disadvantage;
             set => CritMod.Disadvantage = value;
         }
 
-        [TableViewModelColumn(displayOrder: 2, displayName: "Max Exp Checked Value")]
+        // TODO: get address!
+        [TableViewModelColumn(addressField: null, displayOrder: 2, displayName: "Max Exp Checked Value")]
         [BulkCopy]
         public int MaxExpCheckedValue {
             get => ExpLimit.ExpCheck;
             set => ExpLimit.ExpCheck = value;
         }
 
-        [TableViewModelColumn(displayOrder: 3, displayName: "Max Exp Replacement Value")]
+        // TODO: get address!
+        [TableViewModelColumn(addressField: null, displayOrder: 3, displayName: "Max Exp Replacement Value")]
         [BulkCopy]
         public int MaxExpReplacementValue {
             get => ExpLimit.ExpReplacement;
             set => ExpLimit.ExpReplacement = value;
         }
 
-        [TableViewModelColumn(displayOrder: 4, displayName: "Heal Bonus Exp")]
+        // TODO: get address!
+        [TableViewModelColumn(addressField: null, displayOrder: 4, displayName: "Heal Bonus Exp")]
         [BulkCopy]
         public int HealBonusExp {
             get => HealExp.HealBonus;
             set => HealExp.HealBonus = value;
         }
 
-        [TableViewModelColumn(displayOrder: 5, displayName: "Friendship Exp Required for Ally")]
+        // TODO: get address!
+        [TableViewModelColumn(addressField: null, displayOrder: 5, displayName: "Friendship Exp Required for Ally")]
         [BulkCopy]
         public int FriendshipExp_Lvl0_Ally {
             get => FriendshipExp.SLvl0_Ally;
             set => FriendshipExp.SLvl0_Ally = value;
         }
 
-        [TableViewModelColumn(displayOrder: 6, displayName: "Friendship Exp Required for Partner")]
+        // TODO: get address!
+        [TableViewModelColumn(addressField: null, displayOrder: 6, displayName: "Friendship Exp Required for Partner")]
         [BulkCopy]
         public int FriendshipExp_Lvl1_Partner {
             get => FriendshipExp.SLvl1_Partner;
             set => FriendshipExp.SLvl1_Partner = value;
         }
 
-        [TableViewModelColumn(displayOrder: 7, displayName: "Friendship Exp Required for Friend")]
+        // TODO: get address!
+        [TableViewModelColumn(addressField: null, displayOrder: 7, displayName: "Friendship Exp Required for Friend")]
         [BulkCopy]
         public int FriendshipExp_Lvl2_Friend {
             get => FriendshipExp.SLvl2_Friend;
             set => FriendshipExp.SLvl2_Friend = value;
         }
 
-        [TableViewModelColumn(displayOrder: 8, displayName: "Friendship Exp Required for Trusted")]
+        // TODO: get address!
+        [TableViewModelColumn(addressField: null, displayOrder: 8, displayName: "Friendship Exp Required for Trusted")]
         [BulkCopy]
         public int FriendshipExp_Lvl3_Trusted {
             get => FriendshipExp.SLvl3_Trusted;
             set => FriendshipExp.SLvl3_Trusted = value;
         }
 
-        [TableViewModelColumn(displayOrder: 9, displayName: "Friendship Exp Required for Soulmate")]
+        // TODO: get address!
+        [TableViewModelColumn(addressField: null, displayOrder: 9, displayName: "Friendship Exp Required for Soulmate")]
         [BulkCopy]
         public int FriendshipExp_Lvl4_Soulmate {
             get => FriendshipExp.SLvl4_Soulmate;
             set => FriendshipExp.SLvl4_Soulmate = value;
         }
 
-        [TableViewModelColumn(displayOrder: 10, displayName: "Soulmate Fail Exp Mod")]
+        // TODO: get address!
+        [TableViewModelColumn(addressField: null, displayOrder: 10, displayName: "Soulmate Fail Exp Mod")]
         [BulkCopy]
         public int SoulmateFailExpMod {
             get => SoulFail.ExpLost;
             set => SoulFail.ExpLost = value;
         }
 
-        [TableViewModelColumn(displayOrder: 11, displayName: "Special Chances for 2 Specials 2")]
+        // TODO: get address!
+        [TableViewModelColumn(addressField: null, displayOrder: 11, displayName: "Special Chances for 2 Specials 2")]
         [BulkCopy]
         public int SpecialChances2Specials2 {
             get => SpecialChances.TwoSpecials2;
             set => SpecialChances.TwoSpecials2 = value;
         }
 
-        [TableViewModelColumn(displayOrder: 12, displayName: "Special Chances for 3 Specials 3")]
+        // TODO: get address!
+        [TableViewModelColumn(addressField: null, displayOrder: 12, displayName: "Special Chances for 3 Specials 3")]
         [BulkCopy]
         public int SpecialChances3Specials3 {
             get => SpecialChances.ThreeSpecials3;
             set => SpecialChances.ThreeSpecials3 = value;
         }
 
-        [TableViewModelColumn(displayOrder: 13, displayName: "Special Chances for 3 Specials 2")]
+        // TODO: get address!
+        [TableViewModelColumn(addressField: null, displayOrder: 13, displayName: "Special Chances for 3 Specials 2")]
         [BulkCopy]
         public int SpecialChances3Specials2 {
             get => SpecialChances.ThreeSpecials2;
             set => SpecialChances.ThreeSpecials2 = value;
         }
 
-        [TableViewModelColumn(displayOrder: 14, displayName: "Special Chances for 4 Specials 4")]
+        // TODO: get address!
+        [TableViewModelColumn(addressField: null, displayOrder: 14, displayName: "Special Chances for 4 Specials 4")]
         [BulkCopy]
         public int SpecialChances4Specials4 {
             get => SpecialChances.FourSpecials4;
             set => SpecialChances.FourSpecials4 = value;
         }
 
-        [TableViewModelColumn(displayOrder: 15, displayName: "Special Chances for 4 Specials 4")]
+        // TODO: get address!
+        [TableViewModelColumn(addressField: null, displayOrder: 15, displayName: "Special Chances for 4 Specials 4")]
         [BulkCopy]
         public int SpecialChances4Specials3 {
             get => SpecialChances.FourSpecials3;
             set => SpecialChances.FourSpecials3 = value;
         }
 
-        [TableViewModelColumn(displayOrder: 16, displayName: "Special Chances for 4 Specials 2")]
+        // TODO: get address!
+        [TableViewModelColumn(addressField: null, displayOrder: 16, displayName: "Special Chances for 4 Specials 2")]
         [BulkCopy]
         public int SpecialChances4Specials2 {
             get => SpecialChances.FourSpecials2;

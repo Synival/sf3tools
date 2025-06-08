@@ -19,42 +19,42 @@ namespace SF3.Models.Structs.MPD.Model {
         }
 
         [BulkCopy]
-        [TableViewModelColumn(displayOrder: 0, displayFormat: "X2")]
+        [TableViewModelColumn(addressField: nameof(_point1Addr), displayOrder: 0, displayFormat: "X2")]
         public ushort Point1Index {
             get => (ushort) Data.GetWord(_point1Addr);
             set => Data.SetWord(_point1Addr, value);
         }
 
         [BulkCopy]
-        [TableViewModelColumn(displayOrder: 1, displayFormat: "X2")]
+        [TableViewModelColumn(addressField: nameof(_point2Addr), displayOrder: 1, displayFormat: "X2")]
         public ushort Point2Index {
             get => (ushort) Data.GetWord(_point2Addr);
             set => Data.SetWord(_point2Addr, value);
         }
 
         [BulkCopy]
-        [TableViewModelColumn(displayOrder: 2, displayFormat: "X4")]
+        [TableViewModelColumn(addressField: nameof(_angleAddr), displayOrder: 2, displayFormat: "X4")]
         public ushort Angle {
             get => (ushort) Data.GetWord(_angleAddr);
             set => Data.SetWord(_angleAddr, value);
         }
 
         [BulkCopy]
-        [TableViewModelColumn(displayOrder: 3, displayName: "+0x06 (Order?)", displayFormat: "X2")]
+        [TableViewModelColumn(addressField: nameof(_unknown0x06Addr), displayOrder: 3, displayName: "+0x06 (Order?)", displayFormat: "X2")]
         public byte Unknown0x06 {
             get => (byte) Data.GetByte(_unknown0x06Addr);
             set => Data.SetByte(_unknown0x06Addr, value);
         }
 
         [BulkCopy]
-        [TableViewModelColumn(displayOrder: 4, displayFormat: "X2")]
+        [TableViewModelColumn(addressField: nameof(_ifFlag2XXOffAddr), displayOrder: 4, displayFormat: "X2")]
         public byte IfFlagIn2XXOff {
             get => (byte) Data.GetByte(_ifFlag2XXOffAddr);
             set => Data.SetByte(_ifFlag2XXOffAddr, value);
         }
 
         [BulkCopy]
-        [TableViewModelColumn(displayOrder: 4.1f, displayFormat: "X3")]
+        [TableViewModelColumn(addressField: null, displayOrder: 4.1f, displayFormat: "X3")]
         [NameGetter(NamedValueType.GameFlag)]
         public int? IfFlagOff {
             get {

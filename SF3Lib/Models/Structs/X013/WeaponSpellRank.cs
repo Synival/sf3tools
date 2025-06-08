@@ -3,54 +3,54 @@ using SF3.ByteData;
 
 namespace SF3.Models.Structs.X013 {
     public class WeaponSpellRank : Struct {
-        private readonly int rankNone;
-        private readonly int rankC;
-        private readonly int rankB;
-        private readonly int rankA;
-        private readonly int rankS;
+        private readonly int _rankNoneAddr;
+        private readonly int _rankCAddr;
+        private readonly int _rankBAddr;
+        private readonly int _rankAAddr;
+        private readonly int _rankSAddr;
 
         public WeaponSpellRank(IByteData data, int id, string name, int address)
         : base(data, id, name, address, 0x05) {
-            rankNone = Address;     // 1 byte
-            rankC    = Address + 1; // 1 byte
-            rankB    = Address + 2; // 1 byte
-            rankA    = Address + 3; // 1 byte
-            rankS    = Address + 4; // 1 byte
+            _rankNoneAddr = Address;     // 1 byte
+            _rankCAddr    = Address + 1; // 1 byte
+            _rankBAddr    = Address + 2; // 1 byte
+            _rankAAddr    = Address + 3; // 1 byte
+            _rankSAddr    = Address + 4; // 1 byte
         }
 
-        [TableViewModelColumn(displayOrder: 0)]
+        [TableViewModelColumn(addressField: nameof(_rankNoneAddr), displayOrder: 0)]
         [BulkCopy]
         public int RankNone {
-            get => Data.GetByte(rankNone);
-            set => Data.SetByte(rankNone, (byte) value);
+            get => Data.GetByte(_rankNoneAddr);
+            set => Data.SetByte(_rankNoneAddr, (byte) value);
         }
 
-        [TableViewModelColumn(displayOrder: 0)]
+        [TableViewModelColumn(addressField: nameof(_rankCAddr), displayOrder: 0)]
         [BulkCopy]
         public int RankC {
-            get => Data.GetByte(rankC);
-            set => Data.SetByte(rankC, (byte) value);
+            get => Data.GetByte(_rankCAddr);
+            set => Data.SetByte(_rankCAddr, (byte) value);
         }
 
-        [TableViewModelColumn(displayOrder: 1)]
+        [TableViewModelColumn(addressField: nameof(_rankBAddr), displayOrder: 1)]
         [BulkCopy]
         public int RankB {
-            get => Data.GetByte(rankB);
-            set => Data.SetByte(rankB, (byte) value);
+            get => Data.GetByte(_rankBAddr);
+            set => Data.SetByte(_rankBAddr, (byte) value);
         }
 
-        [TableViewModelColumn(displayOrder: 2)]
+        [TableViewModelColumn(addressField: nameof(_rankAAddr), displayOrder: 2)]
         [BulkCopy]
         public int RankA {
-            get => Data.GetByte(rankA);
-            set => Data.SetByte(rankA, (byte) value);
+            get => Data.GetByte(_rankAAddr);
+            set => Data.SetByte(_rankAAddr, (byte) value);
         }
 
-        [TableViewModelColumn(displayOrder: 3)]
+        [TableViewModelColumn(addressField: nameof(_rankSAddr), displayOrder: 3)]
         [BulkCopy]
         public int RankS {
-            get => Data.GetByte(rankS);
-            set => Data.SetByte(rankS, (byte) value);
+            get => Data.GetByte(_rankSAddr);
+            set => Data.SetByte(_rankSAddr, (byte) value);
         }
     }
 }

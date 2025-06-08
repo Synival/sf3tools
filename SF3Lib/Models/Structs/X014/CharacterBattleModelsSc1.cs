@@ -24,7 +24,7 @@ namespace SF3.Models.Structs.X014 {
             _modelPWp4FileIdAddr = Address + 0x1C; // 4 bytes
         }
 
-        [TableViewModelColumn(displayOrder: 0, displayFormat: "X3", minWidth: 120)]
+        [TableViewModelColumn(addressField: nameof(_modelUWp1FileIdAddr), displayOrder: 0, displayFormat: "X3", minWidth: 120)]
         [NameGetter(NamedValueType.FileIndexWithFFFFFFFF)]
         [BulkCopy]
         public int UWp1FileId {
@@ -32,7 +32,7 @@ namespace SF3.Models.Structs.X014 {
             set => Data.SetDouble(_modelUWp1FileIdAddr, value);
         }
 
-        [TableViewModelColumn(displayOrder: 1, displayFormat: "X3", minWidth: 120)]
+        [TableViewModelColumn(addressField: nameof(_modelUWp2FileIdAddr), displayOrder: 1, displayFormat: "X3", minWidth: 120)]
         [NameGetter(NamedValueType.FileIndexWithFFFFFFFF)]
         [BulkCopy]
         public int UWp2FileId {
@@ -40,7 +40,7 @@ namespace SF3.Models.Structs.X014 {
             set => Data.SetDouble(_modelUWp2FileIdAddr, value);
         }
 
-        [TableViewModelColumn(displayOrder: 2, displayFormat: "X3", minWidth: 120)]
+        [TableViewModelColumn(addressField: nameof(_modelUWp3FileIdAddr), displayOrder: 2, displayFormat: "X3", minWidth: 120)]
         [NameGetter(NamedValueType.FileIndexWithFFFFFFFF)]
         [BulkCopy]
         public int UWp3FileId {
@@ -48,7 +48,7 @@ namespace SF3.Models.Structs.X014 {
             set => Data.SetDouble(_modelUWp3FileIdAddr, value);
         }
 
-        [TableViewModelColumn(displayOrder: 3, displayFormat: "X3", minWidth: 120)]
+        [TableViewModelColumn(addressField: nameof(_modelUWp4FileIdAddr), displayOrder: 3, displayFormat: "X3", minWidth: 120)]
         [NameGetter(NamedValueType.FileIndexWithFFFFFFFF)]
         [BulkCopy]
         public int UWp4FileId {
@@ -56,7 +56,7 @@ namespace SF3.Models.Structs.X014 {
             set => Data.SetDouble(_modelUWp4FileIdAddr, value);
         }
 
-        [TableViewModelColumn(displayOrder: 4, displayFormat: "X3", minWidth: 120)]
+        [TableViewModelColumn(addressField: nameof(_modelPWp1FileIdAddr), displayOrder: 4, displayFormat: "X3", minWidth: 120)]
         [NameGetter(NamedValueType.FileIndexWithFFFFFFFF)]
         [BulkCopy]
         public int PWp1FileId {
@@ -64,7 +64,7 @@ namespace SF3.Models.Structs.X014 {
             set => Data.SetDouble(_modelPWp1FileIdAddr, value);
         }
 
-        [TableViewModelColumn(displayOrder: 5, displayFormat: "X3", minWidth: 120)]
+        [TableViewModelColumn(addressField: nameof(_modelPWp2FileIdAddr), displayOrder: 5, displayFormat: "X3", minWidth: 120)]
         [NameGetter(NamedValueType.FileIndexWithFFFFFFFF)]
         [BulkCopy]
         public int PWp2FileId {
@@ -72,7 +72,7 @@ namespace SF3.Models.Structs.X014 {
             set => Data.SetDouble(_modelPWp2FileIdAddr, value);
         }
 
-        [TableViewModelColumn(displayOrder: 6, displayFormat: "X3", minWidth: 120)]
+        [TableViewModelColumn(addressField: nameof(_modelPWp3FileIdAddr), displayOrder: 6, displayFormat: "X3", minWidth: 120)]
         [NameGetter(NamedValueType.FileIndexWithFFFFFFFF)]
         [BulkCopy]
         public int PWp3FileId {
@@ -80,7 +80,7 @@ namespace SF3.Models.Structs.X014 {
             set => Data.SetDouble(_modelPWp3FileIdAddr, value);
         }
 
-        [TableViewModelColumn(displayOrder: 7, displayFormat: "X3", minWidth: 120)]
+        [TableViewModelColumn(addressField: nameof(_modelPWp4FileIdAddr), displayOrder: 7, displayFormat: "X3", minWidth: 120)]
         [NameGetter(NamedValueType.FileIndexWithFFFFFFFF)]
         [BulkCopy]
         public int PWp4FileId {

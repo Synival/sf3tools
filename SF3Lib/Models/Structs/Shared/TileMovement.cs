@@ -3,153 +3,153 @@ using SF3.ByteData;
 
 namespace SF3.Models.Structs.Shared {
     public class TileMovement : Struct {
-        private readonly int noEntry;
-        private readonly int air;
-        private readonly int grassland;
-        private readonly int dirt;
-        private readonly int darkGrass;
-        private readonly int forest;
-        private readonly int brownMountain;
-        private readonly int desert;
-        private readonly int greyMountain;
-        private readonly int water;
-        private readonly int cantStay;
-        private readonly int sand;
-        private readonly int enemyOnly;
-        private readonly int playerOnly;
-        private readonly int unknown0e;
-        private readonly int unknown0f;
+        private readonly int _noEntryAddr;
+        private readonly int _airAddr;
+        private readonly int _grasslandAddr;
+        private readonly int _dirtAddr;
+        private readonly int _darkGrassAddr;
+        private readonly int _forestAddr;
+        private readonly int _brownMountainAddr;
+        private readonly int _desertAddr;
+        private readonly int _greyMountainAddr;
+        private readonly int _waterAddr;
+        private readonly int _cantStayAddr;
+        private readonly int _sandAddr;
+        private readonly int _enemyOnlyAddr;
+        private readonly int _playerOnlyAddr;
+        private readonly int _unknown0eAddr;
+        private readonly int _unknown0fAddr;
 
         public TileMovement(IByteData data, int id, string name, int address)
         : base(data, id, name, address, 0x10) {
-            noEntry       = Address;
-            air     = Address + 0x01;
-            grassland     = Address + 0x02;
-            dirt          = Address + 0x03;
-            darkGrass     = Address + 0x04;
-            forest        = Address + 0x05;
-            brownMountain = Address + 0x06;
-            desert        = Address + 0x07;
-            greyMountain  = Address + 0x08;
-            water         = Address + 0x09;
-            cantStay      = Address + 0x0a;
-            sand          = Address + 0x0b;
-            enemyOnly     = Address + 0x0c;
-            playerOnly    = Address + 0x0d;
-            unknown0e     = Address + 0x0e;
-            unknown0f     = Address + 0x0f;
+            _noEntryAddr       = Address;
+            _airAddr           = Address + 0x01;
+            _grasslandAddr     = Address + 0x02;
+            _dirtAddr          = Address + 0x03;
+            _darkGrassAddr     = Address + 0x04;
+            _forestAddr        = Address + 0x05;
+            _brownMountainAddr = Address + 0x06;
+            _desertAddr        = Address + 0x07;
+            _greyMountainAddr  = Address + 0x08;
+            _waterAddr         = Address + 0x09;
+            _cantStayAddr      = Address + 0x0a;
+            _sandAddr          = Address + 0x0b;
+            _enemyOnlyAddr     = Address + 0x0c;
+            _playerOnlyAddr    = Address + 0x0d;
+            _unknown0eAddr     = Address + 0x0e;
+            _unknown0fAddr     = Address + 0x0f;
         }
 
-        [TableViewModelColumn(displayOrder: 0, displayFormat: "X2")]
+        [TableViewModelColumn(addressField: nameof(_noEntryAddr), displayOrder: 0, displayFormat: "X2")]
         [BulkCopy]
         public int NoEntry {
-            get => Data.GetByte(noEntry);
-            set => Data.SetByte(noEntry, (byte) value);
+            get => Data.GetByte(_noEntryAddr);
+            set => Data.SetByte(_noEntryAddr, (byte) value);
         }
 
-        [TableViewModelColumn(displayOrder: 1, displayFormat: "X2")]
+        [TableViewModelColumn(addressField: nameof(_airAddr), displayOrder: 1, displayFormat: "X2")]
         [BulkCopy]
         public int Air {
-            get => Data.GetByte(air);
-            set => Data.SetByte(air, (byte) value);
+            get => Data.GetByte(_airAddr);
+            set => Data.SetByte(_airAddr, (byte) value);
         }
 
-        [TableViewModelColumn(displayOrder: 2, displayFormat: "X2")]
+        [TableViewModelColumn(addressField: nameof(_grasslandAddr), displayOrder: 2, displayFormat: "X2")]
         [BulkCopy]
         public int Grassland {
-            get => Data.GetByte(grassland);
-            set => Data.SetByte(grassland, (byte) value);
+            get => Data.GetByte(_grasslandAddr);
+            set => Data.SetByte(_grasslandAddr, (byte) value);
         }
 
-        [TableViewModelColumn(displayOrder: 3, displayFormat: "X2")]
+        [TableViewModelColumn(addressField: nameof(_dirtAddr), displayOrder: 3, displayFormat: "X2")]
         [BulkCopy]
         public int Dirt {
-            get => Data.GetByte(dirt);
-            set => Data.SetByte(dirt, (byte) value);
+            get => Data.GetByte(_dirtAddr);
+            set => Data.SetByte(_dirtAddr, (byte) value);
         }
 
-        [TableViewModelColumn(displayOrder: 4, displayFormat: "X2")]
+        [TableViewModelColumn(addressField: nameof(_darkGrassAddr), displayOrder: 4, displayFormat: "X2")]
         [BulkCopy]
         public int DarkGrass {
-            get => Data.GetByte(darkGrass);
-            set => Data.SetByte(darkGrass, (byte) value);
+            get => Data.GetByte(_darkGrassAddr);
+            set => Data.SetByte(_darkGrassAddr, (byte) value);
         }
 
-        [TableViewModelColumn(displayOrder: 5, displayFormat: "X2")]
+        [TableViewModelColumn(addressField: nameof(_forestAddr), displayOrder: 5, displayFormat: "X2")]
         [BulkCopy]
         public int Forest {
-            get => Data.GetByte(forest);
-            set => Data.SetByte(forest, (byte) value);
+            get => Data.GetByte(_forestAddr);
+            set => Data.SetByte(_forestAddr, (byte) value);
         }
 
-        [TableViewModelColumn(displayOrder: 6, displayFormat: "X2")]
+        [TableViewModelColumn(addressField: nameof(_brownMountainAddr), displayOrder: 6, displayFormat: "X2")]
         [BulkCopy]
         public int BrownMountain {
-            get => Data.GetByte(brownMountain);
-            set => Data.SetByte(brownMountain, (byte) value);
+            get => Data.GetByte(_brownMountainAddr);
+            set => Data.SetByte(_brownMountainAddr, (byte) value);
         }
 
-        [TableViewModelColumn(displayOrder: 7, displayFormat: "X2")]
+        [TableViewModelColumn(addressField: nameof(_desertAddr), displayOrder: 7, displayFormat: "X2")]
         [BulkCopy]
         public int Desert {
-            get => Data.GetByte(desert);
-            set => Data.SetByte(desert, (byte) value);
+            get => Data.GetByte(_desertAddr);
+            set => Data.SetByte(_desertAddr, (byte) value);
         }
 
-        [TableViewModelColumn(displayOrder: 8, displayFormat: "X2")]
+        [TableViewModelColumn(addressField: nameof(_greyMountainAddr), displayOrder: 8, displayFormat: "X2")]
         [BulkCopy]
         public int GreyMountain {
-            get => Data.GetByte(greyMountain);
-            set => Data.SetByte(greyMountain, (byte) value);
+            get => Data.GetByte(_greyMountainAddr);
+            set => Data.SetByte(_greyMountainAddr, (byte) value);
         }
 
-        [TableViewModelColumn(displayOrder: 9, displayFormat: "X2")]
+        [TableViewModelColumn(addressField: nameof(_waterAddr), displayOrder: 9, displayFormat: "X2")]
         [BulkCopy]
         public int Water {
-            get => Data.GetByte(water);
-            set => Data.SetByte(water, (byte) value);
+            get => Data.GetByte(_waterAddr);
+            set => Data.SetByte(_waterAddr, (byte) value);
         }
 
-        [TableViewModelColumn(displayOrder: 10, displayFormat: "X2")]
+        [TableViewModelColumn(addressField: nameof(_cantStayAddr), displayOrder: 10, displayFormat: "X2")]
         [BulkCopy]
         public int CantStay {
-            get => Data.GetByte(cantStay);
-            set => Data.SetByte(cantStay, (byte) value);
+            get => Data.GetByte(_cantStayAddr);
+            set => Data.SetByte(_cantStayAddr, (byte) value);
         }
 
-        [TableViewModelColumn(displayOrder: 11, displayFormat: "X2")]
+        [TableViewModelColumn(addressField: nameof(_sandAddr), displayOrder: 11, displayFormat: "X2")]
         [BulkCopy]
         public int Sand {
-            get => Data.GetByte(sand);
-            set => Data.SetByte(sand, (byte) value);
+            get => Data.GetByte(_sandAddr);
+            set => Data.SetByte(_sandAddr, (byte) value);
         }
 
-        [TableViewModelColumn(displayOrder: 12, displayFormat: "X2")]
+        [TableViewModelColumn(addressField: nameof(_enemyOnlyAddr), displayOrder: 12, displayFormat: "X2")]
         [BulkCopy]
         public int EnemyOnly {
-            get => Data.GetByte(enemyOnly);
-            set => Data.SetByte(enemyOnly, (byte) value);
+            get => Data.GetByte(_enemyOnlyAddr);
+            set => Data.SetByte(_enemyOnlyAddr, (byte) value);
         }
 
-        [TableViewModelColumn(displayOrder: 13, displayFormat: "X2")]
+        [TableViewModelColumn(addressField: nameof(_playerOnlyAddr), displayOrder: 13, displayFormat: "X2")]
         [BulkCopy]
         public int PlayerOnly {
-            get => Data.GetByte(playerOnly);
-            set => Data.SetByte(playerOnly, (byte) value);
+            get => Data.GetByte(_playerOnlyAddr);
+            set => Data.SetByte(_playerOnlyAddr, (byte) value);
         }
 
-        [TableViewModelColumn(displayOrder: 14, displayFormat: "X2")]
+        [TableViewModelColumn(addressField: nameof(_unknown0eAddr), displayOrder: 14, displayFormat: "X2")]
         [BulkCopy]
         public int UnknownE {
-            get => Data.GetByte(unknown0e);
-            set => Data.SetByte(unknown0e, (byte) value);
+            get => Data.GetByte(_unknown0eAddr);
+            set => Data.SetByte(_unknown0eAddr, (byte) value);
         }
 
-        [TableViewModelColumn(displayOrder: 15, displayFormat: "X2")]
+        [TableViewModelColumn(addressField: nameof(_unknown0fAddr), displayOrder: 15, displayFormat: "X2")]
         [BulkCopy]
         public int UnknownF {
-            get => Data.GetByte(unknown0f);
-            set => Data.SetByte(unknown0f, (byte) value);
+            get => Data.GetByte(_unknown0fAddr);
+            set => Data.SetByte(_unknown0fAddr, (byte) value);
         }
     }
 }

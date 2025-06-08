@@ -4,6 +4,7 @@ using System.Reflection;
 namespace CommonLib.ViewModels {
     public class TableViewModelColumn {
         public TableViewModelColumn(
+            string addressField,
             string displayName,
             float displayOrder,
             string displayFormat,
@@ -13,6 +14,7 @@ namespace CommonLib.ViewModels {
             string visibilityProperty,
             string displayGroup
         ) {
+            AddressProperty = addressField;
             DisplayName   = displayName;
             DisplayOrder  = displayOrder;
             DisplayFormat = displayFormat;
@@ -23,6 +25,7 @@ namespace CommonLib.ViewModels {
             DisplayGroup  = displayGroup;
         }
 
+        public string AddressProperty { get; }
         public string DisplayName { get; }
         public float DisplayOrder { get; }
         public string DisplayFormat { get; }

@@ -20,7 +20,7 @@ namespace SF3.Models.Structs.X014 {
             _ffffAddr              = Address + 0x0E;
         }
 
-        [TableViewModelColumn(displayOrder: 0, displayFormat: "X3", minWidth: 120)]
+        [TableViewModelColumn(addressField: nameof(_mpdFileIdAddr), displayOrder: 0, displayFormat: "X3", minWidth: 120)]
         [NameGetter(NamedValueType.FileIndex)]
         [BulkCopy]
         public int MPDFileID {
@@ -28,7 +28,7 @@ namespace SF3.Models.Structs.X014 {
             set => Data.SetDouble(_mpdFileIdAddr, value);
         }
 
-        [TableViewModelColumn(displayOrder: 1, displayFormat: "X3", minWidth: 120)]
+        [TableViewModelColumn(addressField: nameof(_battleSceneFileIdAddr), displayOrder: 1, displayFormat: "X3", minWidth: 120)]
         [NameGetter(NamedValueType.FileIndex)]
         [BulkCopy]
         public int BattleSceneFileID {
@@ -36,28 +36,28 @@ namespace SF3.Models.Structs.X014 {
             set => Data.SetDouble(_battleSceneFileIdAddr, value);
         }
 
-        [TableViewModelColumn(displayOrder: 2, displayFormat: "X2")]
+        [TableViewModelColumn(addressField: nameof(_skyBoxIdAddr), displayOrder: 2, displayFormat: "X2")]
         [BulkCopy]
         public ushort SkyBoxID {
             get => (ushort) Data.GetWord(_skyBoxIdAddr);
             set => Data.SetWord(_skyBoxIdAddr, value);
         }
 
-        [TableViewModelColumn(displayOrder: 3, minWidth: 150)]
+        [TableViewModelColumn(addressField: nameof(_lightingStyleAddr), displayOrder: 3, minWidth: 150)]
         [BulkCopy]
         public LightingStyleType LightingStyle {
             get => (LightingStyleType) Data.GetWord(_lightingStyleAddr);
             set => Data.SetWord(_lightingStyleAddr, (ushort) value);
         }
 
-        [TableViewModelColumn(displayOrder: 4, minWidth: 100)]
+        [TableViewModelColumn(addressField: nameof(_fogStyleAddr), displayOrder: 4, minWidth: 100)]
         [BulkCopy]
         public FogStyleType FogStyle {
             get => (FogStyleType) Data.GetWord(_fogStyleAddr);
             set => Data.SetWord(_fogStyleAddr, (ushort) value);
         }
 
-        [TableViewModelColumn(displayOrder: 5, displayFormat: "X2")]
+        [TableViewModelColumn(addressField: nameof(_ffffAddr), displayOrder: 5, displayFormat: "X2")]
         [BulkCopy]
         public ushort FFFF {
             get => (ushort) Data.GetWord(_ffffAddr);

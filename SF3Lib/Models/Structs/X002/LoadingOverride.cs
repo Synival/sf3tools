@@ -35,7 +35,7 @@ namespace SF3.Models.Structs.X002 {
             _extraCHRAddr   = Address + 0x22; // 4 bytes chr extra?
         }
 
-        [TableViewModelColumn(displayOrder: 0, displayFormat: "X2", minWidth: 120)]
+        [TableViewModelColumn(addressField: nameof(_mapIDAddr), displayOrder: 0, displayFormat: "X2", minWidth: 120)]
         [BulkCopy]
         [NameGetter(NamedValueType.Load)]
         public int MapID {
@@ -43,7 +43,7 @@ namespace SF3.Models.Structs.X002 {
             set => Data.SetWord(_mapIDAddr, value);
         }
 
-        [TableViewModelColumn(displayOrder: 1, displayFormat: "X2", minWidth: 210)]
+        [TableViewModelColumn(addressField: nameof(_synMusicAddr), displayOrder: 1, displayFormat: "X2", minWidth: 210)]
         [BulkCopy]
         [NameGetter(NamedValueType.Music)]
         public int SynMusic {
@@ -51,7 +51,7 @@ namespace SF3.Models.Structs.X002 {
             set => Data.SetByte(_synMusicAddr, (byte) value);
         }
 
-        [TableViewModelColumn(displayOrder: 2, displayFormat: "X2", minWidth: 210)]
+        [TableViewModelColumn(addressField: nameof(_medMusicAddr), displayOrder: 2, displayFormat: "X2", minWidth: 210)]
         [BulkCopy]
         [NameGetter(NamedValueType.Music)]
         public int MedMusic {
@@ -59,7 +59,7 @@ namespace SF3.Models.Structs.X002 {
             set => Data.SetByte(_medMusicAddr, (byte) value);
         }
 
-        [TableViewModelColumn(displayOrder: 3, displayFormat: "X2", minWidth: 210)]
+        [TableViewModelColumn(addressField: nameof(_julMusicAddr), displayOrder: 3, displayFormat: "X2", minWidth: 210)]
         [BulkCopy]
         [NameGetter(NamedValueType.Music)]
         public int JulMusic {
@@ -67,7 +67,7 @@ namespace SF3.Models.Structs.X002 {
             set => Data.SetByte(_julMusicAddr, (byte) value);
         }
 
-        [TableViewModelColumn(displayOrder: 4, displayFormat: "X2", minWidth: 210)]
+        [TableViewModelColumn(addressField: nameof(_extraMusicAddr), displayOrder: 4, displayFormat: "X2", minWidth: 210)]
         [BulkCopy]
         [NameGetter(NamedValueType.Music)]
         public int ExtraMusic {
@@ -75,7 +75,7 @@ namespace SF3.Models.Structs.X002 {
             set => Data.SetByte(_extraMusicAddr, (byte) value);
         }
 
-        [TableViewModelColumn(displayOrder: 5, displayFormat: "X3", minWidth: 140)]
+        [TableViewModelColumn(addressField: nameof(_synMpdAddr), displayOrder: 5, displayFormat: "X3", minWidth: 140)]
         [BulkCopy]
         [NameGetter(NamedValueType.FileIndex)]
         public int SynMPD {
@@ -83,7 +83,7 @@ namespace SF3.Models.Structs.X002 {
             set => Data.SetDouble(_synMpdAddr, value);
         }
 
-        [TableViewModelColumn(displayOrder: 6, displayFormat: "X3", minWidth: 140)]
+        [TableViewModelColumn(addressField: nameof(_medMPDAddr), displayOrder: 6, displayFormat: "X3", minWidth: 140)]
         [BulkCopy]
         [NameGetter(NamedValueType.FileIndex)]
         public int MedMPD {
@@ -91,7 +91,7 @@ namespace SF3.Models.Structs.X002 {
             set => Data.SetDouble(_medMPDAddr, value);
         }
 
-        [TableViewModelColumn(displayOrder: 7, displayFormat: "X3", minWidth: 140)]
+        [TableViewModelColumn(addressField: nameof(_julMPDAddr), displayOrder: 7, displayFormat: "X3", minWidth: 140)]
         [BulkCopy]
         [NameGetter(NamedValueType.FileIndex)]
         public int JulMPD {
@@ -99,7 +99,7 @@ namespace SF3.Models.Structs.X002 {
             set => Data.SetDouble(_julMPDAddr, value);
         }
 
-        [TableViewModelColumn(displayOrder: 8, displayFormat: "X3", minWidth: 140)]
+        [TableViewModelColumn(addressField: nameof(_extraMPDAddr), displayOrder: 8, displayFormat: "X3", minWidth: 140)]
         [BulkCopy]
         [NameGetter(NamedValueType.FileIndex)]
         public int ExtraMPD {
@@ -107,7 +107,7 @@ namespace SF3.Models.Structs.X002 {
             set => Data.SetDouble(_extraMPDAddr, value);
         }
 
-        [TableViewModelColumn(displayOrder: 9, displayFormat: "X3", minWidth: 140)]
+        [TableViewModelColumn(addressField: nameof(_synCHRAddr), displayOrder: 9, displayFormat: "X3", minWidth: 140)]
         [BulkCopy]
         [NameGetter(NamedValueType.FileIndex)]
         public int SynCHR {
@@ -115,7 +115,7 @@ namespace SF3.Models.Structs.X002 {
             set => Data.SetDouble(_synCHRAddr, value);
         }
 
-        [TableViewModelColumn(displayOrder: 10, displayFormat: "X3", minWidth: 140)]
+        [TableViewModelColumn(addressField: nameof(_medCHRAddr), displayOrder: 10, displayFormat: "X3", minWidth: 140)]
         [BulkCopy]
         [NameGetter(NamedValueType.FileIndex)]
         public int MedCHR {
@@ -123,7 +123,7 @@ namespace SF3.Models.Structs.X002 {
             set => Data.SetDouble(_medCHRAddr, value);
         }
 
-        [TableViewModelColumn(displayOrder: 11, displayFormat: "X3", minWidth: 140)]
+        [TableViewModelColumn(addressField: nameof(_julCHRAddr), displayOrder: 11, displayFormat: "X3", minWidth: 140)]
         [BulkCopy]
         [NameGetter(NamedValueType.FileIndex)]
         public int JulCHR {
@@ -131,7 +131,7 @@ namespace SF3.Models.Structs.X002 {
             set => Data.SetDouble(_julCHRAddr, value);
         }
 
-        [TableViewModelColumn(displayOrder: 12, displayFormat: "X3", minWidth: 140)]
+        [TableViewModelColumn(addressField: nameof(_extraCHRAddr), displayOrder: 12, displayFormat: "X3", minWidth: 140)]
         [BulkCopy]
         [NameGetter(NamedValueType.FileIndex)]
         public int ExtraCHR {

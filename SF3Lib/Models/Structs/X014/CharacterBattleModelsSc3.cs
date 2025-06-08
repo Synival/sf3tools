@@ -20,7 +20,7 @@ namespace SF3.Models.Structs.X014 {
         private void SetModelIndexAvailable(int promotionWeaponIndex, bool value)
             => Data.SetDouble(_modelIndicesAvailableAddr, value ? (Data.GetDouble(_modelIndicesAvailableAddr) | (0x01 << promotionWeaponIndex)) : (Data.GetDouble(_modelIndicesAvailableAddr) & ~(0x01 << promotionWeaponIndex)));
 
-        [TableViewModelColumn(displayOrder: 0, displayFormat: "X3", minWidth: 120)]
+        [TableViewModelColumn(addressField: nameof(_modelFileIdAddr), displayOrder: 0, displayFormat: "X3", minWidth: 120)]
         [NameGetter(NamedValueType.FileIndex)]
         [BulkCopy]
         public int ModelFileID {
@@ -28,91 +28,91 @@ namespace SF3.Models.Structs.X014 {
             set => Data.SetDouble(_modelFileIdAddr, value);
         }
 
-        [TableViewModelColumn(displayOrder: 1, displayFormat: "X8", minWidth: 75)]
+        [TableViewModelColumn(addressField: nameof(_modelFileUnknownHeaderAddrAddr), displayOrder: 1, displayFormat: "X8", minWidth: 75)]
         [BulkCopy]
         public uint ModelFileUnknownHeaderAddr {
             get => (uint) Data.GetDouble(_modelFileUnknownHeaderAddrAddr);
             set => Data.SetDouble(_modelFileUnknownHeaderAddrAddr, (int) value);
         }
 
-        [TableViewModelColumn(displayOrder: 2)]
+        [TableViewModelColumn(addressField: nameof(_modelIndicesAvailableAddr), displayOrder: 2)]
         [BulkCopy]
         public bool UWp1 {
             get => GetModelIndexAvailable(0);
             set => SetModelIndexAvailable(0, value);
         }
 
-        [TableViewModelColumn(displayOrder: 3)]
+        [TableViewModelColumn(addressField: nameof(_modelIndicesAvailableAddr), displayOrder: 3)]
         [BulkCopy]
         public bool UWp2 {
             get => GetModelIndexAvailable(1);
             set => SetModelIndexAvailable(1, value);
         }
 
-        [TableViewModelColumn(displayOrder: 4)]
+        [TableViewModelColumn(addressField: nameof(_modelIndicesAvailableAddr), displayOrder: 4)]
         [BulkCopy]
         public bool UWp3 {
             get => GetModelIndexAvailable(2);
             set => SetModelIndexAvailable(2, value);
         }
 
-        [TableViewModelColumn(displayOrder: 5)]
+        [TableViewModelColumn(addressField: nameof(_modelIndicesAvailableAddr), displayOrder: 5)]
         [BulkCopy]
         public bool UWp4 {
             get => GetModelIndexAvailable(3);
             set => SetModelIndexAvailable(3, value);
         }
 
-        [TableViewModelColumn(displayOrder: 6)]
+        [TableViewModelColumn(addressField: nameof(_modelIndicesAvailableAddr), displayOrder: 6)]
         [BulkCopy]
         public bool P1Wp1 {
             get => GetModelIndexAvailable(4);
             set => SetModelIndexAvailable(4, value);
         }
 
-        [TableViewModelColumn(displayOrder: 7)]
+        [TableViewModelColumn(addressField: nameof(_modelIndicesAvailableAddr), displayOrder: 7)]
         [BulkCopy]
         public bool P1Wp2 {
             get => GetModelIndexAvailable(5);
             set => SetModelIndexAvailable(5, value);
         }
 
-        [TableViewModelColumn(displayOrder: 8)]
+        [TableViewModelColumn(addressField: nameof(_modelIndicesAvailableAddr), displayOrder: 8)]
         [BulkCopy]
         public bool P1Wp3 {
             get => GetModelIndexAvailable(6);
             set => SetModelIndexAvailable(6, value);
         }
 
-        [TableViewModelColumn(displayOrder: 9)]
+        [TableViewModelColumn(addressField: nameof(_modelIndicesAvailableAddr), displayOrder: 9)]
         [BulkCopy]
         public bool P1Wp4 {
             get => GetModelIndexAvailable(7);
             set => SetModelIndexAvailable(7, value);
         }
 
-        [TableViewModelColumn(displayOrder: 10)]
+        [TableViewModelColumn(addressField: nameof(_modelIndicesAvailableAddr), displayOrder: 10)]
         [BulkCopy]
         public bool P2Wp1 {
             get => GetModelIndexAvailable(8);
             set => SetModelIndexAvailable(8, value);
         }
 
-        [TableViewModelColumn(displayOrder: 11)]
+        [TableViewModelColumn(addressField: nameof(_modelIndicesAvailableAddr), displayOrder: 11)]
         [BulkCopy]
         public bool P2Wp2 {
             get => GetModelIndexAvailable(9);
             set => SetModelIndexAvailable(9, value);
         }
 
-        [TableViewModelColumn(displayOrder: 12)]
+        [TableViewModelColumn(addressField: nameof(_modelIndicesAvailableAddr), displayOrder: 12)]
         [BulkCopy]
         public bool P2Wp3 {
             get => GetModelIndexAvailable(10);
             set => SetModelIndexAvailable(10, value);
         }
 
-        [TableViewModelColumn(displayOrder: 13)]
+        [TableViewModelColumn(addressField: nameof(_modelIndicesAvailableAddr), displayOrder: 13)]
         [BulkCopy]
         public bool P2Wp4 {
             get => GetModelIndexAvailable(11);

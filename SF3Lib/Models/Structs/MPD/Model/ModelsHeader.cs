@@ -16,21 +16,21 @@ namespace SF3.Models.Structs.MPD.Model {
         }
 
         [BulkCopy]
-        [TableViewModelColumn(displayOrder: 0, isPointer: true, minWidth: 80)]
+        [TableViewModelColumn(addressField: nameof(_collisionLinesHeaderOffsetAddr), displayOrder: 0, isPointer: true, minWidth: 80)]
         public uint CollisionLinesHeaderOffset {
             get => (uint) Data.GetDouble(_collisionLinesHeaderOffsetAddr);
             set => Data.SetDouble(_collisionLinesHeaderOffsetAddr, (int) value);
         }
 
         [BulkCopy]
-        [TableViewModelColumn(displayOrder: 1, isPointer: true, minWidth: 80)]
+        [TableViewModelColumn(addressField: nameof(_collisionBlocksOffsetAddr), displayOrder: 1, isPointer: true, minWidth: 80)]
         public uint CollisionBlocksOffset {
             get => (uint) Data.GetDouble(_collisionBlocksOffsetAddr);
             set => Data.SetDouble(_collisionBlocksOffsetAddr, (int) value);
         }
 
         [BulkCopy]
-        [TableViewModelColumn(displayOrder: 2)]
+        [TableViewModelColumn(addressField: nameof(_numModelsAddress), displayOrder: 2)]
         public int NumModels {
             get => Data.GetWord(_numModelsAddress);
             set => Data.SetWord(_numModelsAddress, value);

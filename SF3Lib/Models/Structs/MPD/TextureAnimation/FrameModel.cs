@@ -8,8 +8,8 @@ using SF3.Types;
 
 namespace SF3.Models.Structs.MPD.TextureAnimation {
     public class FrameModel : Struct {
-        private readonly int _compressedTextureOffsetAddress;
-        private readonly int _unknownAddress;
+        private readonly int _compressedTextureOffsetAddr;
+        private readonly int _durationAddr;
 
         public FrameModel(
             IByteData data, int id, string name, int address, bool is32Bit, int texId, int width, int height, int texAnimId, int frameNum
@@ -24,8 +24,8 @@ namespace SF3.Models.Structs.MPD.TextureAnimation {
 
             _bytesPerProperty = is32Bit ? 0x04 : 0x02;
 
-            _compressedTextureOffsetAddress = Address + 0 * _bytesPerProperty;
-            _unknownAddress                 = Address + 1 * _bytesPerProperty;
+            _compressedTextureOffsetAddr = Address + 0 * _bytesPerProperty;
+            _durationAddr                = Address + 1 * _bytesPerProperty;
         }
 
         public void FetchAndCacheTexture(IByteData data, TexturePixelFormat pixelFormat, Palette palette, ITexture referenceTexture) {
@@ -89,47 +89,47 @@ namespace SF3.Models.Structs.MPD.TextureAnimation {
 
         public bool TextureIsLoaded => Texture != null;
 
-        [TableViewModelColumn(displayName: "Texture ID", displayOrder: 0, displayFormat: "X2")]
+        [TableViewModelColumn(addressField: null, displayName: "Texture ID", displayOrder: 0, displayFormat: "X2")]
         public int TextureID { get; }
 
-        [TableViewModelColumn(displayName: "Width", displayOrder: 1)]
+        [TableViewModelColumn(addressField: null, displayName: "Width", displayOrder: 1)]
         public int Width { get; }
 
-        [TableViewModelColumn(displayName: "Height", displayOrder: 2)]
+        [TableViewModelColumn(addressField: null, displayName: "Height", displayOrder: 2)]
         public int Height { get; }
 
-        [TableViewModelColumn(displayName: "Tex. Anim ID", displayOrder: 3, displayFormat: "X2")]
+        [TableViewModelColumn(addressField: null, displayName: "Tex. Anim ID", displayOrder: 3, displayFormat: "X2")]
         public int texAnimID { get; }
 
         public int FrameNum { get; }
 
-        [TableViewModelColumn(displayName: "Frame #", displayOrder: 4)]
+        [TableViewModelColumn(addressField: null, displayName: "Frame #", displayOrder: 4)]
         public string FrameNumStr => FrameNum == 0 ? "" : FrameNum.ToString();
 
         [BulkCopy]
-        [TableViewModelColumn(displayOrder: 5, displayFormat: "X4")]
+        [TableViewModelColumn(addressField: nameof(_compressedTextureOffsetAddr), displayOrder: 5, displayFormat: "X4")]
         public uint CompressedImageDataOffset {
-            get => Data.GetData(_compressedTextureOffsetAddress, _bytesPerProperty);
-            set => Data.SetData(_compressedTextureOffsetAddress, value, _bytesPerProperty);
+            get => Data.GetData(_compressedTextureOffsetAddr, _bytesPerProperty);
+            set => Data.SetData(_compressedTextureOffsetAddr, value, _bytesPerProperty);
         }
 
-        [TableViewModelColumn(displayOrder: 5.5f, displayFormat: "X4")]
+        [TableViewModelColumn(addressField: null, displayOrder: 5.5f, displayFormat: "X4")]
         public int UncompressedImageDataSize => Width * Height * PixelFormat.BytesPerPixel();
 
-        [TableViewModelColumn(displayOrder: 5.6f)]
+        [TableViewModelColumn(addressField: null, displayOrder: 5.6f)]
         public TexturePixelFormat PixelFormat { get; private set; } = TexturePixelFormat.Unknown;
 
         [BulkCopy]
-        [TableViewModelColumn(displayName: "Duration (30fps)", displayOrder: 6)]
+        [TableViewModelColumn(addressField: nameof(_durationAddr), displayName: "Duration (30fps)", displayOrder: 6)]
         public uint Duration {
-            get => Data.GetData(_unknownAddress, _bytesPerProperty);
-            set => Data.SetData(_unknownAddress, value, _bytesPerProperty);
+            get => Data.GetData(_durationAddr, _bytesPerProperty);
+            set => Data.SetData(_durationAddr, value, _bytesPerProperty);
         }
 
-        [TableViewModelColumn(displayName: "Internal Hash", displayOrder: 7, minWidth: 450)]
+        [TableViewModelColumn(addressField: null, displayName: "Internal Hash", displayOrder: 7, minWidth: 450)]
         public string Hash => Texture?.Hash ?? "";
 
-        [TableViewModelColumn(displayName: "Tags", displayOrder: 8, minWidth: 200)]
+        [TableViewModelColumn(addressField: null, displayName: "Tags", displayOrder: 8, minWidth: 200)]
         public string Tags => (Texture?.Tags == null) ? "" : string.Join(", ", Texture.Tags.Select(x => x.Key + "|" + x.Value));
 
         private readonly int _bytesPerProperty;

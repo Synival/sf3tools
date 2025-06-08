@@ -7,7 +7,7 @@ namespace SF3.Models.Structs.X012 {
         public ClassTargetPriority(IByteData data, int id, string name, int address) : base(data, id, name, address, 0x01) {
         }
 
-        [TableViewModelColumn(displayOrder: 0, displayFormat: "X2", minWidth: 150)]
+        [TableViewModelColumn(addressField: nameof(Address), displayOrder: 0, displayFormat: "X2", minWidth: 150)]
         [NameGetter(NamedValueType.CharacterClass)]
         [BulkCopy]
         public byte ClassID {

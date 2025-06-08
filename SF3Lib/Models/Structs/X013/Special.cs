@@ -17,7 +17,7 @@ namespace SF3.Models.Structs.X013 {
             _highPowAddr = Address + 0x03; // 1 byte
         }
 
-        [TableViewModelColumn(displayOrder: 0, displayFormat: "X2", minWidth: 100)]
+        [TableViewModelColumn(addressField: nameof(_typeAddr), displayOrder: 0, displayFormat: "X2", minWidth: 100)]
         [BulkCopy]
         [NameGetter(NamedValueType.SpecialType)]
         public int Type {
@@ -25,7 +25,7 @@ namespace SF3.Models.Structs.X013 {
             set => Data.SetByte(_typeAddr, (byte) value);
         }
 
-        [TableViewModelColumn(displayOrder: 1)]
+        [TableViewModelColumn(addressField: nameof(_lowPowAddr), displayOrder: 1)]
         [BulkCopy]
         public int LowPow {
             get => Data.GetByte(_lowPowAddr);
@@ -35,7 +35,7 @@ namespace SF3.Models.Structs.X013 {
         public NamedValueType? MidPowType
             => (LowPow == 100) ? NamedValueType.Element : (NamedValueType?) null;
 
-        [TableViewModelColumn(displayOrder: 2, minWidth: 100, displayFormat: "X2")]
+        [TableViewModelColumn(addressField: nameof(_midPowAddr), displayOrder: 2, minWidth: 100, displayFormat: "X2")]
         [BulkCopy]
         [NameGetter(NamedValueType.ConditionalType, nameof(MidPowType))]
         public int MidPow {
@@ -43,7 +43,7 @@ namespace SF3.Models.Structs.X013 {
             set => Data.SetByte(_midPowAddr, (byte) value);
         }
 
-        [TableViewModelColumn(displayOrder: 3)]
+        [TableViewModelColumn(addressField: nameof(_highPowAddr), displayOrder: 3)]
         [BulkCopy]
         public int MaxPow {
             get => Data.GetByte(_highPowAddr);
@@ -117,20 +117,20 @@ namespace SF3.Models.Structs.X013 {
         public int DamageRoll(int rng)
             => (LowPow == 100) ? MaxPow : ((rng < 8) ? lowerRngFunc(rng) : upperRngFunc(rng));
 
-        [TableViewModelColumn(displayName: "RNG0",  displayOrder: 3.10f)] public int DamageRoll0 => DamageRoll(0);
-        [TableViewModelColumn(displayName: "RNG1",  displayOrder: 3.11f)] public int DamageRoll1 => DamageRoll(1);
-        [TableViewModelColumn(displayName: "RNG2",  displayOrder: 3.12f)] public int DamageRoll2 => DamageRoll(2);
-        [TableViewModelColumn(displayName: "RNG3",  displayOrder: 3.13f)] public int DamageRoll3 => DamageRoll(3);
-        [TableViewModelColumn(displayName: "RNG4",  displayOrder: 3.14f)] public int DamageRoll4 => DamageRoll(4);
-        [TableViewModelColumn(displayName: "RNG5",  displayOrder: 3.15f)] public int DamageRoll5 => DamageRoll(5);
-        [TableViewModelColumn(displayName: "RNG6",  displayOrder: 3.16f)] public int DamageRoll6 => DamageRoll(6);
-        [TableViewModelColumn(displayName: "RNG7",  displayOrder: 3.17f)] public int DamageRoll7 => DamageRoll(7);
-        [TableViewModelColumn(displayName: "RNG8",  displayOrder: 3.18f)] public int DamageRoll8 => DamageRoll(8);
-        [TableViewModelColumn(displayName: "RNG9",  displayOrder: 3.19f)] public int DamageRoll9 => DamageRoll(9);
-        [TableViewModelColumn(displayName: "RNG10", displayOrder: 3.20f)] public int DamageRoll10 => DamageRoll(10);
-        [TableViewModelColumn(displayName: "RNG11", displayOrder: 3.21f)] public int DamageRoll11 => DamageRoll(11);
-        [TableViewModelColumn(displayName: "RNG12", displayOrder: 3.22f)] public int DamageRoll12 => DamageRoll(12);
-        [TableViewModelColumn(displayName: "RNG13", displayOrder: 3.23f)] public int DamageRoll13 => DamageRoll(13);
-        [TableViewModelColumn(displayName: "RNG14", displayOrder: 3.24f)] public int DamageRoll14 => DamageRoll(14);
+        [TableViewModelColumn(addressField: null, displayName: "RNG0",  displayOrder: 3.10f)] public int DamageRoll0 => DamageRoll(0);
+        [TableViewModelColumn(addressField: null, displayName: "RNG1",  displayOrder: 3.11f)] public int DamageRoll1 => DamageRoll(1);
+        [TableViewModelColumn(addressField: null, displayName: "RNG2",  displayOrder: 3.12f)] public int DamageRoll2 => DamageRoll(2);
+        [TableViewModelColumn(addressField: null, displayName: "RNG3",  displayOrder: 3.13f)] public int DamageRoll3 => DamageRoll(3);
+        [TableViewModelColumn(addressField: null, displayName: "RNG4",  displayOrder: 3.14f)] public int DamageRoll4 => DamageRoll(4);
+        [TableViewModelColumn(addressField: null, displayName: "RNG5",  displayOrder: 3.15f)] public int DamageRoll5 => DamageRoll(5);
+        [TableViewModelColumn(addressField: null, displayName: "RNG6",  displayOrder: 3.16f)] public int DamageRoll6 => DamageRoll(6);
+        [TableViewModelColumn(addressField: null, displayName: "RNG7",  displayOrder: 3.17f)] public int DamageRoll7 => DamageRoll(7);
+        [TableViewModelColumn(addressField: null, displayName: "RNG8",  displayOrder: 3.18f)] public int DamageRoll8 => DamageRoll(8);
+        [TableViewModelColumn(addressField: null, displayName: "RNG9",  displayOrder: 3.19f)] public int DamageRoll9 => DamageRoll(9);
+        [TableViewModelColumn(addressField: null, displayName: "RNG10", displayOrder: 3.20f)] public int DamageRoll10 => DamageRoll(10);
+        [TableViewModelColumn(addressField: null, displayName: "RNG11", displayOrder: 3.21f)] public int DamageRoll11 => DamageRoll(11);
+        [TableViewModelColumn(addressField: null, displayName: "RNG12", displayOrder: 3.22f)] public int DamageRoll12 => DamageRoll(12);
+        [TableViewModelColumn(addressField: null, displayName: "RNG13", displayOrder: 3.23f)] public int DamageRoll13 => DamageRoll(13);
+        [TableViewModelColumn(addressField: null, displayName: "RNG14", displayOrder: 3.24f)] public int DamageRoll14 => DamageRoll(14);
     }
 }

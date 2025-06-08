@@ -8,7 +8,7 @@ namespace SF3.Models.Structs {
         }
 
         [BulkCopy]
-        [TableViewModelColumn(displayName: "UInt8 Value", displayFormat: "X2")]
+        [TableViewModelColumn(addressField: nameof(Address), displayName: "UInt8 Value", displayFormat: "X2")]
         public byte Value {
             get => (byte) Data.GetByte(Address);
             set => Data.SetByte(Address, value);

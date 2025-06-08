@@ -8,7 +8,7 @@ namespace SF3.Models.Structs {
         }
 
         [BulkCopy]
-        [TableViewModelColumn(displayName: "Int16 Value")]
+        [TableViewModelColumn(addressField: nameof(Address), displayName: "Int16 Value")]
         public short Value {
             get => (short) Data.GetWord(Address);
             set => Data.SetWord(Address, value);

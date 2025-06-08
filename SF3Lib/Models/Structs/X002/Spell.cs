@@ -4,191 +4,191 @@ using SF3.Types;
 
 namespace SF3.Models.Structs.X002 {
     public class Spell : Struct {
-        private readonly int targetType;
-        private readonly int damageType;
-        private readonly int element;
-        private readonly int unknown2; //actually, iconHidden
-        private readonly int lv1Distance;
-        private readonly int lv1Targets;
-        private readonly int lv1Cost;
-        private readonly int lv1Damage;
-        private readonly int lv2Distance;
-        private readonly int lv2Targets;
-        private readonly int lv2Cost;
-        private readonly int lv2Damage;
-        private readonly int lv3Distance;
-        private readonly int lv3Targets;
-        private readonly int lv3Cost;
-        private readonly int lv3Damage;
-        private readonly int lv4Distance;
-        private readonly int lv4Targets;
-        private readonly int lv4Cost;
-        private readonly int lv4Damage;
+        private readonly int _spellTargetAddr;
+        private readonly int _spellTypeAddr;
+        private readonly int _elementAddr;
+        private readonly int _iconHiddenAddr;
+        private readonly int _lv1DistanceAddr;
+        private readonly int _lv1TargetsAddr;
+        private readonly int _lv1CostAddr;
+        private readonly int _lv1DamageAddr;
+        private readonly int _lv2DistanceAddr;
+        private readonly int _lv2TargetsAddr;
+        private readonly int _lv2CostAddr;
+        private readonly int _lv2DamageAddr;
+        private readonly int _lv3DistanceAddr;
+        private readonly int _lv3TargetsAddr;
+        private readonly int _lv3CostAddr;
+        private readonly int _lv3DamageAddr;
+        private readonly int _lv4DistanceAddr;
+        private readonly int _lv4TargetsAddr;
+        private readonly int _lv4CostAddr;
+        private readonly int _lv4DamageAddr;
 
         public Spell(IByteData data, int id, string name, int address)
         : base(data, id, name, address, 0x14) {
-            targetType  = Address;
-            damageType  = Address + 1;
-            element     = Address + 2;
-            unknown2    = Address + 3;
-            lv1Distance = Address + 4;
-            lv1Targets  = Address + 5;
-            lv1Cost     = Address + 6;
-            lv1Damage   = Address + 7;
-            lv2Distance = Address + 8;
-            lv2Targets  = Address + 9;
-            lv2Cost     = Address + 10;
-            lv2Damage   = Address + 11;
-            lv3Distance = Address + 12;
-            lv3Targets  = Address + 13;
-            lv3Cost     = Address + 14;
-            lv3Damage   = Address + 15;
-            lv4Distance = Address + 16;
-            lv4Targets  = Address + 17;
-            lv4Cost     = Address + 18;
-            lv4Damage   = Address + 19;
+            _spellTargetAddr = Address;
+            _spellTypeAddr   = Address + 1;
+            _elementAddr     = Address + 2;
+            _iconHiddenAddr  = Address + 3;
+            _lv1DistanceAddr = Address + 4;
+            _lv1TargetsAddr  = Address + 5;
+            _lv1CostAddr     = Address + 6;
+            _lv1DamageAddr   = Address + 7;
+            _lv2DistanceAddr = Address + 8;
+            _lv2TargetsAddr  = Address + 9;
+            _lv2CostAddr     = Address + 10;
+            _lv2DamageAddr   = Address + 11;
+            _lv3DistanceAddr = Address + 12;
+            _lv3TargetsAddr  = Address + 13;
+            _lv3CostAddr     = Address + 14;
+            _lv3DamageAddr   = Address + 15;
+            _lv4DistanceAddr = Address + 16;
+            _lv4TargetsAddr  = Address + 17;
+            _lv4CostAddr     = Address + 18;
+            _lv4DamageAddr   = Address + 19;
         }
 
-        [TableViewModelColumn(displayOrder: 0, minWidth: 100, displayFormat: "X2")]
+        [TableViewModelColumn(addressField: nameof(_spellTargetAddr), displayOrder: 0, minWidth: 100, displayFormat: "X2")]
         [BulkCopy]
         [NameGetter(NamedValueType.SpellTarget)]
         public int SpellTarget {
-            get => Data.GetByte(targetType);
-            set => Data.SetByte(targetType, (byte) value);
+            get => Data.GetByte(_spellTargetAddr);
+            set => Data.SetByte(_spellTargetAddr, (byte) value);
         }
 
-        [TableViewModelColumn(displayOrder: 1, displayFormat: "X2")]
+        [TableViewModelColumn(addressField: nameof(_spellTypeAddr), displayOrder: 1, displayFormat: "X2")]
         [BulkCopy]
         public int SpellType {
-            get => Data.GetByte(damageType);
-            set => Data.SetByte(damageType, (byte) value);
+            get => Data.GetByte(_spellTypeAddr);
+            set => Data.SetByte(_spellTypeAddr, (byte) value);
         }
 
-        [TableViewModelColumn(displayOrder: 2, minWidth: 100, displayFormat: "X2")]
+        [TableViewModelColumn(addressField: nameof(_elementAddr), displayOrder: 2, minWidth: 100, displayFormat: "X2")]
         [BulkCopy]
         [NameGetter(NamedValueType.Element)]
         public int Element {
-            get => Data.GetByte(element);
-            set => Data.SetByte(element, (byte) value);
+            get => Data.GetByte(_elementAddr);
+            set => Data.SetByte(_elementAddr, (byte) value);
         }
 
-        [TableViewModelColumn(displayOrder: 3, displayName: "IconHidden")]
+        [TableViewModelColumn(addressField: nameof(_iconHiddenAddr), displayOrder: 3)]
         [BulkCopy]
-        public int SpellUnknown2 {
-            get => Data.GetByte(unknown2);
-            set => Data.SetByte(unknown2, (byte) value);
+        public int IconHidden {
+            get => Data.GetByte(_iconHiddenAddr);
+            set => Data.SetByte(_iconHiddenAddr, (byte) value);
         }
 
-        [TableViewModelColumn(displayOrder: 4, displayFormat: "X2")]
+        [TableViewModelColumn(addressField: nameof(_lv1DistanceAddr), displayOrder: 4, displayFormat: "X2")]
         [BulkCopy]
         public int Lv1Distance {
-            get => Data.GetByte(lv1Distance);
-            set => Data.SetByte(lv1Distance, (byte) value);
+            get => Data.GetByte(_lv1DistanceAddr);
+            set => Data.SetByte(_lv1DistanceAddr, (byte) value);
         }
 
-        [TableViewModelColumn(displayOrder: 5, displayFormat: "X2")]
+        [TableViewModelColumn(addressField: nameof(_lv1TargetsAddr), displayOrder: 5, displayFormat: "X2")]
         [BulkCopy]
         public int Lv1Targets {
-            get => Data.GetByte(lv1Targets);
-            set => Data.SetByte(lv1Targets, (byte) value);
+            get => Data.GetByte(_lv1TargetsAddr);
+            set => Data.SetByte(_lv1TargetsAddr, (byte) value);
         }
 
-        [TableViewModelColumn(displayOrder: 6)]
+        [TableViewModelColumn(addressField: nameof(_lv1CostAddr), displayOrder: 6)]
         [BulkCopy]
         public int Lv1Cost {
-            get => Data.GetByte(lv1Cost);
-            set => Data.SetByte(lv1Cost, (byte) value);
+            get => Data.GetByte(_lv1CostAddr);
+            set => Data.SetByte(_lv1CostAddr, (byte) value);
         }
 
-        [TableViewModelColumn(displayOrder: 7)]
+        [TableViewModelColumn(addressField: nameof(_lv1DamageAddr), displayOrder: 7)]
         [BulkCopy]
         public int Lv1Damage {
-            get => Data.GetByte(lv1Damage);
-            set => Data.SetByte(lv1Damage, (byte) value);
+            get => Data.GetByte(_lv1DamageAddr);
+            set => Data.SetByte(_lv1DamageAddr, (byte) value);
         }
 
-        [TableViewModelColumn(displayOrder: 8, displayFormat: "X2")]
+        [TableViewModelColumn(addressField: nameof(_lv2DistanceAddr), displayOrder: 8, displayFormat: "X2")]
         [BulkCopy]
         public int Lv2Distance {
-            get => Data.GetByte(lv2Distance);
-            set => Data.SetByte(lv2Distance, (byte) value);
+            get => Data.GetByte(_lv2DistanceAddr);
+            set => Data.SetByte(_lv2DistanceAddr, (byte) value);
         }
 
-        [TableViewModelColumn(displayOrder: 9, displayFormat: "X2")]
+        [TableViewModelColumn(addressField: nameof(_lv2TargetsAddr), displayOrder: 9, displayFormat: "X2")]
         [BulkCopy]
         public int Lv2Targets {
-            get => Data.GetByte(lv2Targets);
-            set => Data.SetByte(lv2Targets, (byte) value);
+            get => Data.GetByte(_lv2TargetsAddr);
+            set => Data.SetByte(_lv2TargetsAddr, (byte) value);
         }
 
-        [TableViewModelColumn(displayOrder: 10)]
+        [TableViewModelColumn(addressField: nameof(_lv2CostAddr), displayOrder: 10)]
         [BulkCopy]
         public int Lv2Cost {
-            get => Data.GetByte(lv2Cost);
-            set => Data.SetByte(lv2Cost, (byte) value);
+            get => Data.GetByte(_lv2CostAddr);
+            set => Data.SetByte(_lv2CostAddr, (byte) value);
         }
 
-        [TableViewModelColumn(displayOrder: 11)]
+        [TableViewModelColumn(addressField: nameof(_lv2DamageAddr), displayOrder: 11)]
         [BulkCopy]
         public int Lv2Damage {
-            get => Data.GetByte(lv2Damage);
-            set => Data.SetByte(lv2Damage, (byte) value);
+            get => Data.GetByte(_lv2DamageAddr);
+            set => Data.SetByte(_lv2DamageAddr, (byte) value);
         }
 
-        [TableViewModelColumn(displayOrder: 12, displayFormat: "X2")]
+        [TableViewModelColumn(addressField: nameof(_lv3DistanceAddr), displayOrder: 12, displayFormat: "X2")]
         [BulkCopy]
         public int Lv3Distance {
-            get => Data.GetByte(lv3Distance);
-            set => Data.SetByte(lv3Distance, (byte) value);
+            get => Data.GetByte(_lv3DistanceAddr);
+            set => Data.SetByte(_lv3DistanceAddr, (byte) value);
         }
 
-        [TableViewModelColumn(displayOrder: 13, displayFormat: "X2")]
+        [TableViewModelColumn(addressField: nameof(_lv3TargetsAddr), displayOrder: 13, displayFormat: "X2")]
         [BulkCopy]
         public int Lv3Targets {
-            get => Data.GetByte(lv3Targets);
-            set => Data.SetByte(lv3Targets, (byte) value);
+            get => Data.GetByte(_lv3TargetsAddr);
+            set => Data.SetByte(_lv3TargetsAddr, (byte) value);
         }
 
-        [TableViewModelColumn(displayOrder: 14)]
+        [TableViewModelColumn(addressField: nameof(_lv3CostAddr), displayOrder: 14)]
         [BulkCopy]
         public int Lv3Cost {
-            get => Data.GetByte(lv3Cost);
-            set => Data.SetByte(lv3Cost, (byte) value);
+            get => Data.GetByte(_lv3CostAddr);
+            set => Data.SetByte(_lv3CostAddr, (byte) value);
         }
 
-        [TableViewModelColumn(displayOrder: 15)]
+        [TableViewModelColumn(addressField: nameof(_lv3DamageAddr), displayOrder: 15)]
         [BulkCopy]
         public int Lv3Damage {
-            get => Data.GetByte(lv3Damage);
-            set => Data.SetByte(lv3Damage, (byte) value);
+            get => Data.GetByte(_lv3DamageAddr);
+            set => Data.SetByte(_lv3DamageAddr, (byte) value);
         }
 
-        [TableViewModelColumn(displayOrder: 16, displayFormat: "X2")]
+        [TableViewModelColumn(addressField: nameof(_lv4DistanceAddr), displayOrder: 16, displayFormat: "X2")]
         [BulkCopy]
         public int Lv4Distance {
-            get => Data.GetByte(lv4Distance);
-            set => Data.SetByte(lv4Distance, (byte) value);
+            get => Data.GetByte(_lv4DistanceAddr);
+            set => Data.SetByte(_lv4DistanceAddr, (byte) value);
         }
 
-        [TableViewModelColumn(displayOrder: 17, displayFormat: "X2")]
+        [TableViewModelColumn(addressField: nameof(_lv4TargetsAddr), displayOrder: 17, displayFormat: "X2")]
         [BulkCopy]
         public int Lv4Targets {
-            get => Data.GetByte(lv4Targets);
-            set => Data.SetByte(lv4Targets, (byte) value);
+            get => Data.GetByte(_lv4TargetsAddr);
+            set => Data.SetByte(_lv4TargetsAddr, (byte) value);
         }
 
-        [TableViewModelColumn(displayOrder: 18)]
+        [TableViewModelColumn(addressField: nameof(_lv4CostAddr), displayOrder: 18)]
         [BulkCopy]
         public int Lv4Cost {
-            get => Data.GetByte(lv4Cost);
-            set => Data.SetByte(lv4Cost, (byte) value);
+            get => Data.GetByte(_lv4CostAddr);
+            set => Data.SetByte(_lv4CostAddr, (byte) value);
         }
 
-        [TableViewModelColumn(displayOrder: 19)]
+        [TableViewModelColumn(addressField: nameof(_lv4DamageAddr), displayOrder: 19)]
         [BulkCopy]
         public int Lv4Damage {
-            get => Data.GetByte(lv4Damage);
-            set => Data.SetByte(lv4Damage, (byte) value);
+            get => Data.GetByte(_lv4DamageAddr);
+            set => Data.SetByte(_lv4DamageAddr, (byte) value);
         }
     }
 }
