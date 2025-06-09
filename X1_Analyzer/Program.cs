@@ -85,7 +85,7 @@ namespace X1_Analyzer {
                                 y.Address + 0x2C,
                             },
 
-                            y.EnemyFlags,
+                            y.Flags,
                             y.FlagOrBattleID,
                         }
                     )

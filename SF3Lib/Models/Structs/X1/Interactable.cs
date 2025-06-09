@@ -30,14 +30,14 @@ namespace SF3.Models.Structs.X1 {
         public INameGetterContext NameGetterContext { get; }
         public NpcTable NpcTable { get; }
 
-        [TableViewModelColumn(displayOrder: 0, displayFormat: "X4")]
+        [TableViewModelColumn(addressField: nameof(_triggerAddr), displayOrder: 0, displayFormat: "X4")]
         [BulkCopy]
         public ushort Trigger {
             get => (ushort) Data.GetWord(_triggerAddr);
             set => Data.SetWord(_triggerAddr, value);
         }
 
-        [TableViewModelColumn(displayOrder: 0.1f, minWidth: 60, displayFormat: "X1")]
+        [TableViewModelColumn(addressField: nameof(_triggerAddr), displayOrder: 0.1f, minWidth: 60, displayFormat: "X1")]
         [NameGetter(NamedValueType.EventTriggerType)]
         public int TriggerType {
             get => Trigger & 0x000F;
@@ -76,7 +76,7 @@ namespace SF3.Models.Structs.X1 {
             }
         }
 
-        [TableViewModelColumn(displayOrder: 0.3f, displayFormat: "X2", minWidth: 150)]
+        [TableViewModelColumn(addressField: nameof(_triggerAddr), displayOrder: 0.3f, displayFormat: "X2", minWidth: 150)]
         [NameGetter(NamedValueType.ConditionalType, nameof(TriggerParam1Type))]
         public int? TriggerParam1 {
             get {
@@ -133,7 +133,7 @@ namespace SF3.Models.Structs.X1 {
             }
         }
 
-        [TableViewModelColumn(displayOrder: 0.31f, displayFormat: "X2", minWidth: 150)]
+        [TableViewModelColumn(addressField: nameof(_triggerAddr), displayOrder: 0.31f, displayFormat: "X2", minWidth: 150)]
         [NameGetter(NamedValueType.ConditionalType, nameof(TriggerParam2Type))]
         public int? TriggerParam2 {
             get {
@@ -204,21 +204,21 @@ namespace SF3.Models.Structs.X1 {
             }
         }
 
-        [TableViewModelColumn(displayOrder: 1, displayFormat: "X2")]
+        [TableViewModelColumn(addressField: nameof(_triggerFlagsAddr), displayOrder: 1, displayFormat: "X2")]
         [BulkCopy]
         public byte TriggerFlags {
             get => (byte) Data.GetByte(_triggerFlagsAddr);
             set => Data.SetByte(_triggerFlagsAddr, value);
         }
 
-        [TableViewModelColumn(displayOrder: 1.1f, displayFormat: "X2")]
+        [TableViewModelColumn(addressField: nameof(_triggerTargetIdAddr), displayOrder: 1.1f, displayFormat: "X2")]
         [BulkCopy]
         public byte TriggerTargetID {
             get => (byte) Data.GetByte(_triggerTargetIdAddr);
             set => Data.SetByte(_triggerTargetIdAddr, value);
         }
 
-        [TableViewModelColumn(displayOrder: 1.2f, displayName: "Trigger MPD Tie-In", isReadOnly: true, displayFormat: "X2")]
+        [TableViewModelColumn(addressField: null, displayOrder: 1.2f, displayName: "Trigger MPD Tie-In", isReadOnly: true, displayFormat: "X2")]
         [BulkCopy]
         public byte? TriggerMPDTieIn {
             get {
@@ -243,7 +243,7 @@ namespace SF3.Models.Structs.X1 {
             return npcName;
         }
 
-        [TableViewModelColumn(displayOrder: 1.3f, minWidth: 350)]
+        [TableViewModelColumn(addressField: null, displayOrder: 1.3f, minWidth: 350)]
         public string TriggerDescription {
             get {
                 switch ((EventTriggerType) TriggerType) {
@@ -310,14 +310,14 @@ namespace SF3.Models.Structs.X1 {
             set => Data.SetWord(_flagCheckedAddr, value);
         }
 
-        [TableViewModelColumn(displayOrder: 2.0f, displayFormat: "X3", minWidth: 200)]
+        [TableViewModelColumn(addressField: nameof(_flagCheckedAddr), displayOrder: 2.0f, displayFormat: "X3", minWidth: 200)]
         [NameGetter(NamedValueType.GameFlag)]
         public int FlagChecked {
             get => FlagCheckedWthExpectedValue & 0x0FFF;
             set => FlagCheckedWthExpectedValue = (FlagCheckedWthExpectedValue & ~0xFFF) | (value & 0x0FFF);
         }
 
-        [TableViewModelColumn(displayOrder: 2.1f)]
+        [TableViewModelColumn(addressField: nameof(_flagCheckedAddr), displayOrder: 2.1f)]
         public bool FlagExpectedValue {
             get => (FlagCheckedWthExpectedValue & 0x1000) != 0;
             set => FlagCheckedWthExpectedValue = value ? (FlagCheckedWthExpectedValue | ~0x1000) : (FlagCheckedWthExpectedValue & ~0x1000);
@@ -329,7 +329,7 @@ namespace SF3.Models.Structs.X1 {
             set => Data.SetWord(_padding0x06, value);
         }
 
-        [TableViewModelColumn(displayOrder: 4, displayFormat: "X8")]
+        [TableViewModelColumn(addressField: nameof(_actionAddr), displayOrder: 4, displayFormat: "X8")]
         [BulkCopy]
         public uint Action {
             get => (uint) Data.GetDouble(_actionAddr);
@@ -377,7 +377,7 @@ namespace SF3.Models.Structs.X1 {
             }
         }
 
-        [TableViewModelColumn(displayOrder: 4.4f, displayFormat: "X2", minWidth: 150)]
+        [TableViewModelColumn(addressField: nameof(_actionAddr), displayOrder: 4.4f, displayFormat: "X2", minWidth: 150)]
         [BulkCopy]
         [NameGetter(NamedValueType.ConditionalType, nameof(ActionParam1Type))]
         public int? ActionParam1 {
@@ -403,7 +403,7 @@ namespace SF3.Models.Structs.X1 {
             }
         }
 
-        [TableViewModelColumn(displayOrder: 4.5f, displayFormat: "X2", minWidth: 150)]
+        [TableViewModelColumn(addressField: nameof(_actionAddr), displayOrder: 4.5f, displayFormat: "X2", minWidth: 150)]
         [BulkCopy]
         [NameGetter(NamedValueType.ConditionalType, nameof(ActionParam2Type))]
         public int? ActionParam2 {
@@ -468,7 +468,7 @@ namespace SF3.Models.Structs.X1 {
             }
         }
 
-        [TableViewModelColumn(displayOrder: 4.6f, displayFormat: "X2", minWidth: 150)]
+        [TableViewModelColumn(addressField: nameof(_actionAddr), displayOrder: 4.6f, displayFormat: "X2", minWidth: 150)]
         [BulkCopy]
         [NameGetter(NamedValueType.ConditionalType, nameof(ActionParam3Type))]
         public int? ActionParam3 {
@@ -498,7 +498,7 @@ namespace SF3.Models.Structs.X1 {
             }
         }
 
-        [TableViewModelColumn(displayOrder: 5, minWidth: 350)]
+        [TableViewModelColumn(addressField: null, displayOrder: 5, minWidth: 350)]
         public string ActionDescription {
             get {
                 // TODO: way better!!

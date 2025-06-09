@@ -21,21 +21,21 @@ namespace SF3.Models.Structs.X1.Town {
             _unknown0x0AAddr    = Address + 0x0a; // 2 bytes
         }
 
-        [TableViewModelColumn(displayOrder: 0, displayName: "+0x00", displayFormat: "X2")]
+        [TableViewModelColumn(addressField: nameof(_unknown0x00Addr), displayOrder: 0, displayName: "+0x00", displayFormat: "X2")]
         [BulkCopy]
         public int Unknown0x00 {
             get => Data.GetWord(_unknown0x00Addr);
             set => Data.SetWord(_unknown0x00Addr, value);
         }
 
-        [TableViewModelColumn(displayOrder: 1, displayFormat: "X4")]
+        [TableViewModelColumn(addressField: nameof(_textIDAddr), displayOrder: 1, displayFormat: "X4")]
         [BulkCopy]
         public int TextID {
             get => Data.GetWord(_textIDAddr);
             set => Data.SetWord(_textIDAddr, value);
         }
 
-        [TableViewModelColumn(displayOrder: 2, displayFormat: "X3")]
+        [TableViewModelColumn(addressField: nameof(_ifFlagOffAddr), displayOrder: 2, displayFormat: "X3")]
         [BulkCopy]
         [NameGetter(NamedValueType.GameFlag)]
         public int IfFlagOff {
@@ -43,21 +43,21 @@ namespace SF3.Models.Structs.X1.Town {
             set => Data.SetWord(_ifFlagOffAddr, value);
         }
 
-        [TableViewModelColumn(displayOrder: 3, displayFormat: "X2")]
+        [TableViewModelColumn(addressField: nameof(_pointToWarpMPDAddr), displayOrder: 3, displayFormat: "X2")]
         [BulkCopy]
         public int PointToWarpMPD {
             get => Data.GetWord(_pointToWarpMPDAddr);
             set => Data.SetWord(_pointToWarpMPDAddr, value);
         }
 
-        [TableViewModelColumn(displayOrder: 4, displayName: "+0x08", displayFormat: "X2")]
+        [TableViewModelColumn(addressField: nameof(_unknown0x08Addr), displayOrder: 4, displayName: "+0x08", displayFormat: "X2")]
         [BulkCopy]
         public int Unknown0x08 {
             get => Data.GetWord(_unknown0x08Addr);
             set => Data.SetWord(_unknown0x08Addr, value);
         }
 
-        [TableViewModelColumn(displayOrder: 5, displayName: "+0x0A", displayFormat: "X2")]
+        [TableViewModelColumn(addressField: nameof(_unknown0x0AAddr), displayOrder: 5, displayName: "+0x0A", displayFormat: "X2")]
         [BulkCopy]
         public int Unknown0x0A {
             get => Data.GetWord(_unknown0x0AAddr);

@@ -26,10 +26,10 @@ namespace SF3.Tests.Models.Files {
             var table = battle.AITargetPositionTable;
 
             Assert.AreEqual(30, table[0].TargetX);
-            Assert.AreEqual(24, table[0].TargetY);
+            Assert.AreEqual(24, table[0].TargetZ);
 
             Assert.AreEqual(21, table[1].TargetX);
-            Assert.AreEqual(21, table[1].TargetY);
+            Assert.AreEqual(21, table[1].TargetZ);
 
             Assert.AreEqual(32, table.Length);
         }
@@ -78,12 +78,12 @@ namespace SF3.Tests.Models.Files {
             var table = battle.SlotTable;
 
             Assert.AreEqual(0xFFFF, table[0].EnemyID);
-            Assert.AreEqual(22, table[0].EnemyX);
-            Assert.AreEqual(8, table[0].EnemyY);
+            Assert.AreEqual(22, table[0].X);
+            Assert.AreEqual(8, table[0].Z);
 
             Assert.AreEqual(0x45, table[12].EnemyID);
-            Assert.AreEqual(26, table[12].EnemyX);
-            Assert.AreEqual(23, table[12].EnemyY);
+            Assert.AreEqual(26, table[12].X);
+            Assert.AreEqual(23, table[12].Z);
 
             Assert.AreEqual(52, table.Length);
         }

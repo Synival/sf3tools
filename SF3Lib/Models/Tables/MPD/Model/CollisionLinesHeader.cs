@@ -12,14 +12,14 @@ namespace SF3.Models.Tables.MPD.Model {
             _linesOffsetAddr  = Address + 0x04; // 4 bytes
         }
 
-        [TableViewModelColumn(displayOrder: 0, isPointer: true, minWidth: 80)]
+        [TableViewModelColumn(addressField: nameof(_pointsOffsetAddr), displayOrder: 0, isPointer: true, minWidth: 80)]
         [BulkCopy]
         public uint PointsOffset {
             get => (uint) Data.GetDouble(_pointsOffsetAddr);
             set => Data.SetDouble(_pointsOffsetAddr, (int) value);
         }
 
-        [TableViewModelColumn(displayOrder: 0, isPointer: true, minWidth: 80)]
+        [TableViewModelColumn(addressField: nameof(_linesOffsetAddr), displayOrder: 0, isPointer: true, minWidth: 80)]
         [BulkCopy]
         public uint LinesOffset {
             get => (uint) Data.GetDouble(_linesOffsetAddr);

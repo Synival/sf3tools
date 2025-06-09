@@ -10,7 +10,7 @@ namespace SF3.Models.Structs.X1.Battle {
             _pointerAddr = Address; // 2 bytes 
         }
 
-        [TableViewModelColumn(displayOrder: 0, displayName: "Pointer", isPointer: true)]
+        [TableViewModelColumn(addressField: nameof(_pointerAddr), displayOrder: 0, displayName: "Pointer", isPointer: true)]
         [BulkCopy]
         public int Pointer {
             get => Data.GetDouble(_pointerAddr);

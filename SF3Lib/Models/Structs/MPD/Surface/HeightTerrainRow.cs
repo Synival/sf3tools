@@ -33,7 +33,8 @@ namespace SF3.Models.Structs.MPD.Surface {
             => this[x] = (this[x] & 0xFF0F) + (byte) ((byte) flags & 0xF0);
 
         private class TileMetadataAttribute : TableViewModelColumnAttribute {
-            public TileMetadataAttribute(int x) : base(displayName: "X" + x.ToString("D2"), displayOrder: x, displayFormat: "X4", minWidth: 50) { }
+            // TODO: address!
+            public TileMetadataAttribute(int x) : base(addressField: null, displayName: "X" + x.ToString("D2"), displayOrder: x, displayFormat: "X4", minWidth: 50) { }
         }
 
         // This is NUTs, but the ObjectListView is excrutiatingly slow with array indexing, so we're stuck

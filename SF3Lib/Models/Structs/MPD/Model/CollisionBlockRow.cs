@@ -14,7 +14,8 @@ namespace SF3.Models.Structs.MPD.Model {
         public int Length => 16;
 
         private class TileMetadataAttribute : TableViewModelColumnAttribute {
-            public TileMetadataAttribute(int x) : base(displayName: "X" + x.ToString("D2") + "Offset", displayOrder: x, isPointer: true) { }
+            // TODO: address!
+            public TileMetadataAttribute(int x) : base(addressField: null, displayName: "X" + x.ToString("D2") + "Offset", displayOrder: x, isPointer: true) { }
         }
 
         [TileMetadata(0)]  public uint X0Offset  { get => (uint) Data.GetDouble(Address + 0x00); set => Data.SetDouble(Address + 0x00, (int) value); }

@@ -23,21 +23,21 @@ namespace SF3.Models.Structs.X1 {
 
         public Dictionary<uint, ActorScript> ActorScripts { get; set; }
 
-        [TableViewModelColumn(displayOrder: 0, displayFormat: "X2")]
+        [TableViewModelColumn(addressField: nameof(_modelIdAddr), displayOrder: 0, displayFormat: "X2")]
         [BulkCopy]
         public short ModelID {
             get => (short) Data.GetWord(_modelIdAddr);
             set => Data.SetWord(_modelIdAddr, value);
         }
 
-        [TableViewModelColumn(displayOrder: 1, displayFormat: "X2")]
+        [TableViewModelColumn(addressField: nameof(_matrixBasisAddr), displayOrder: 1, displayFormat: "X2")]
         [BulkCopy]
         public byte MatrixBasis {
             get => (byte) Data.GetByte(_matrixBasisAddr);
             set => Data.SetByte(_matrixBasisAddr, value);
         }
 
-        [TableViewModelColumn(displayOrder: 2, minWidth: 100, displayFormat: "X2")]
+        [TableViewModelColumn(addressField: nameof(_typeAddr), displayOrder: 2, minWidth: 100, displayFormat: "X2")]
         [NameGetter(NamedValueType.ModelInstanceType)]
         [BulkCopy]
         public int Type {
@@ -45,7 +45,7 @@ namespace SF3.Models.Structs.X1 {
             set => Data.SetByte(_typeAddr, (byte) value);
         }
 
-        [TableViewModelColumn(displayOrder: 3, isPointer: true, minWidth: 300)]
+        [TableViewModelColumn(addressField: nameof(_scriptAddr), displayOrder: 3, isPointer: true, minWidth: 300)]
         [NameGetter(NamedValueType.ActorScript, nameof(ActorScripts))]
         [BulkCopy]
         public uint ScriptAddr {

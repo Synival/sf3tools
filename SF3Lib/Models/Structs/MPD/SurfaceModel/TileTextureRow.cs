@@ -61,7 +61,8 @@ namespace SF3.Models.Structs.MPD.SurfaceModel {
         public bool HasRotation { get; }
 
         private class TileMetadataAttribute : TableViewModelColumnAttribute {
-            public TileMetadataAttribute(int x) : base(displayName: "X" + x.ToString("D2"), displayOrder: x, displayFormat: "X4", minWidth: 50) { }
+            // TODO: null
+            public TileMetadataAttribute(int x) : base(addressField: null, displayName: "X" + x.ToString("D2"), displayOrder: x, displayFormat: "X4", minWidth: 50) { }
         }
 
         // This is NUTs, but the ObjectListView is excrutiatingly slow with array indexing, so we're stuck
