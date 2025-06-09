@@ -4,15 +4,18 @@ using SF3.Types;
 
 namespace SF3.Models.Structs {
     public class UnknownUInt16Struct : Struct {
+        private readonly int _valueAddr;
+
         public UnknownUInt16Struct(IByteData data, int id, string name, int address)
         : base(data, id, name, address, 0x02) {
+            _valueAddr = Address + 0x02; // 2 bytes
         }
 
         [BulkCopy]
-        [TableViewModelColumn(addressField: nameof(Address), displayName: "UInt16 Value", displayFormat: "X4")]
+        [TableViewModelColumn(addressField: nameof(_valueAddr), displayName: "UInt16 Value", displayFormat: "X4")]
         public ushort Value {
-            get => (ushort) Data.GetWord(Address);
-            set => Data.SetWord(Address, value);
+            get => (ushort) Data.GetWord(_valueAddr);
+            set => Data.SetWord(_valueAddr, value);
         }
     }
 }
