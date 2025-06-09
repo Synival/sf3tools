@@ -52,10 +52,12 @@ namespace SF3.Win.Controls {
             PropertyInfo modelProp = null;
             TableViewModelColumn propAttr = null;
             string propName = column.AspectName;
+            bool isMultiRow = true;
 
             // For data tables, the model is an abstraction of the property as a row, not a column.
             // Fetch the data directly from the 'ModelProperty'.
             if (modelObject is ModelProperty modelProperty) {
+                isMultiRow  = false;
                 modelObject = modelProperty.Model;
                 modelType   = modelObject.GetType();
                 modelStruct = modelObject as Struct;
@@ -86,7 +88,7 @@ namespace SF3.Win.Controls {
             var fieldName = (modelStruct != null ? $"{modelStruct.Name}." : "") + (propAttr != null ? propAttr.DisplayName ?? propName : propName) + "";
             var lines = new List<string>() { fieldName };
 
-            if (modelStruct != null) {
+            if (isMultiRow && modelStruct != null) {
                 lines.Add("Row Info:");
                 lines.Add($"  ID: 0x{modelStruct.ID:X2}");
                 lines.Add($"  File Address: 0x{modelStruct.Address:X4}");
@@ -99,7 +101,7 @@ namespace SF3.Win.Controls {
                     if (field != null) {
                         lines.Add("Property Info:");
                         var value = (int) field.GetValue(modelObject);
-                        if (modelStruct != null)
+                        if (isMultiRow && modelStruct != null)
                             lines.Add($"  Offset in Row: 0x{value - modelStruct.Address:X2}");
                         lines.Add($"  File Address: 0x{value:X4}");
                     }

@@ -15,6 +15,11 @@ namespace SF3.Win.Views {
             Name                 = vmColumn.GetColumnText(propertyInfo);
             AspectToStringFormat = vmColumn.GetColumnAspectToStringFormat();
             Width                = vmColumn.GetColumnWidth();
+
+            var addressField = (vmColumn.AddressField != null) ? model.GetType().GetField(vmColumn.AddressField,
+                BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.GetField) : null;
+
+            Address = (addressField != null) ? (int) addressField.GetValue(model) : null;
         }
 
         public object Model { get; }
@@ -34,5 +39,7 @@ namespace SF3.Win.Views {
                     PropertyInfo.SetValue(Model, value);
             }
         }
+
+        public int? Address { get; }
     };
 }

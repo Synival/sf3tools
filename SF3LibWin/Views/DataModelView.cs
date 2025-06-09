@@ -73,6 +73,15 @@ namespace SF3.Win.Views {
                     lvcColumns.Add(lvc);
                 }
 
+                // "Address" column
+                {
+                    var lvc = new OLVColumn(lvcNameBase + "Address", "Address");
+                    lvc.IsEditable = false;
+                    lvc.Text       = "Address";
+                    lvc.AspectToStringFormat = "{0:X4}";
+                    lvcColumns.Add(lvc);
+                }
+
                 // "Is Read-Only" column
                 {
                     var lvc = new OLVColumn(lvcNameBase + "IsReadOnly", "IsReadOnly");
@@ -86,7 +95,7 @@ namespace SF3.Win.Views {
                     var lvc = new OLVColumn(lvcNameBase + "Value", "Value");
                     lvc.IsEditable = true;
                     lvc.Text       = "Value";
-                    lvc.Width      = _modelProperties.Max(x => x.Width);
+                    lvc.Width      = Math.Max(200, _modelProperties.Max(x => x.Width));
 
                     // AspectToStringFormat is used after fetching fetching the aspect with AspectGetter().
                     // We can take advantage of that by setting the AspectToStringFormat for the specific value.
@@ -180,7 +189,7 @@ namespace SF3.Win.Views {
                 if (value != null) {
                     var vm = value.GetType().GetTableViewModel();
                     _modelProperties = vm.Properties
-                        .Where(x => x.Value.DisplayOrder >= 0 || (x.Key.Name == "Address" && (int) x.Key.GetValue(value) >= 0))
+                        .Where(x => x.Value.DisplayOrder >= 0)
                         .Where(x => x.Value.GetVisibility(value))
                         .Where(x => DisplayGroups == null || DisplayGroups.Contains(x.Value.DisplayGroup))
                         .Select((x, i) => new ModelProperty(value, x.Key, x.Value, i + 1)).ToList();
