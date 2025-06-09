@@ -59,6 +59,15 @@ namespace SF3.Win.Views {
                     lvcColumns.Add(lvc);
                 }
 
+                // "Address" column
+                {
+                    var lvc = new OLVColumn(lvcNameBase + "Address", "Address");
+                    lvc.IsEditable = false;
+                    lvc.Text       = "Address";
+                    lvc.AspectToStringFormat = "{0:X4}";
+                    lvcColumns.Add(lvc);
+                }
+
                 // "Name" column
                 {
                     var lvc = new OLVColumn(lvcNameBase + "Name", "Name");
@@ -70,15 +79,6 @@ namespace SF3.Win.Views {
                         maxWidth = Math.Max(maxWidth, TextRenderer.MeasureText(mp.Name, lvc.HeaderFont).Width + 8);
                     lvc.Width = (int) (maxWidth * 0.85);
 
-                    lvcColumns.Add(lvc);
-                }
-
-                // "Address" column
-                {
-                    var lvc = new OLVColumn(lvcNameBase + "Address", "Address");
-                    lvc.IsEditable = false;
-                    lvc.Text       = "Address";
-                    lvc.AspectToStringFormat = "{0:X4}";
                     lvcColumns.Add(lvc);
                 }
 
