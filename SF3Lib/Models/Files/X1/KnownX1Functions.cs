@@ -245,6 +245,16 @@ namespace SF3.Models.Files.X1 {
                 0x910B, 0x3917, 0x8FF2, 0x7A04, 0x4F26, 0x6EF6, 0x6DF6, 0x6CF6,
                 0x6BF6, 0x6AF6, 0x69F6, 0x000B, 0x68F6
             }},
+
+            // Blacksmith data pointer is +0x48 from start
+            { new FuncInfo("BlacksmithFunctionBranch", "blacksmithRelatedBranchScn1"), new ushort[] {
+                0xD211, 0x6121, 0x2118, 0x8D0C, 0xE300, 0xD710, 0x6121, 0x3140
+            }},
+
+            // Blacksmith data pointer is +0x4C from start
+            { new FuncInfo("BlacksmithFunctionBranch", "blacksmithRelatedBranchScn2+"), new ushort[] {
+                0xD112, 0x6011, 0x88FF, 0x8D0D, 0xE300, 0xD711, 0x6213, 0x6121
+            }},
         };
     }
 }

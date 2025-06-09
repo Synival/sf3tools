@@ -38,6 +38,8 @@ namespace SF3.Win.Views.X1 {
                 CreateChild(new TableArrayView<ModelInstanceTable>("Model Instances", Model.ModelInstanceTablesByAddress.Values.ToArray(), ngc));
             if (Model.MapUpdateFuncTable != null)
                 CreateChild(new TableView("Map Update Functions", Model.MapUpdateFuncTable, ngc));
+            if (Model.BlacksmithTable != null)
+                CreateChild(new TableView("Blacksmith", Model.BlacksmithTable, ngc));
 
             if (Model.ScriptsByAddress?.Count > 0) {
                 CreateChild(new TextArrayView("Scripts",

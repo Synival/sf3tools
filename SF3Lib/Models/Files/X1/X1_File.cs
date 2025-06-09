@@ -197,7 +197,7 @@ namespace SF3.Models.Files.X1 {
             Discoveries = new DiscoveryContext(searchData, RamAddress);
             Discoveries.DiscoverUnknownPointersToValueRange(RamAddress, X1RamUpperLimit - 1);
             DiscoverFunctions(searchData);
-            DiscoverData(tables, searchData);
+            tables.AddRange(DiscoverData(tables, searchData));
 
             // Now that we've discovered some data, let's populate some tables.
             tables.AddRange(PopulateMapUpdateFuncTables());
@@ -263,7 +263,7 @@ namespace SF3.Models.Files.X1 {
             }
         }
 
-        private void DiscoverData(IEnumerable<ITable> table, byte[] data) {
+        private ITable[] DiscoverData(IEnumerable<ITable> table, byte[] data) {
             foreach (var t in table) {
                 if (t.IsContiguous) {
                     var type = t.GetType();
@@ -274,6 +274,7 @@ namespace SF3.Models.Files.X1 {
 
             DiscoverModelInstantiateData(data);
             DiscoverRenderThinkFuncsData(data);
+            return DiscoverBlacksmithData(data);
         }
 
         private void DiscoverModelInstantiateData(byte[] data) {
@@ -336,6 +337,25 @@ namespace SF3.Models.Files.X1 {
                     }
                 }
             }
+        }
+
+        private ITable[] DiscoverBlacksmithData(byte[] data) {
+            // The blacksmith functions are too huge to look for, so let's just look for small branches in them.
+            var blacksmithBranches = Discoveries.GetFunctions()
+                .Where(x => x.TypeName == "BlacksmithFunctionBranch")
+                .ToArray();
+
+            if (blacksmithBranches.Length == 0)
+                return new ITable[0];
+
+            var disc = blacksmithBranches[0];
+            var offset = disc.Name == "blacksmithRelatedBranchScn1" ? 0x48 : 0x4C;
+            var blacksmithTablePtrFileAddr = disc.Address + offset - RamAddress;
+            var blacksmithTableFileAddr = data.GetUInt((int) blacksmithTablePtrFileAddr) - RamAddress;
+
+            return new ITable[] {
+                (BlacksmithTable = BlacksmithTable.Create(Data, nameof(BlacksmithTable), (int) blacksmithTableFileAddr))
+            };
         }
 
         private ITable[] PopulateMapUpdateFuncTables() {
@@ -690,6 +710,9 @@ namespace SF3.Models.Files.X1 {
         public Dictionary<uint, ActorScript> ScriptsByAddress { get; private set; }
         [BulkCopyRecurse]
         public MapUpdateFuncTable MapUpdateFuncTable { get; private set; }
+
+        [BulkCopyRecurse]
+        public BlacksmithTable BlacksmithTable { get; private set; }
 
         public DiscoveryContext Discoveries { get; private set; }
     }
