@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Reflection;
 using System.Windows.Forms;
 using BrightIdeasSoftware;
@@ -7,6 +8,7 @@ using CommonLib.Attributes;
 using CommonLib.ViewModels;
 using SF3.Models.Structs;
 using SF3.Win.Extensions;
+using SF3.Win.Utils;
 using SF3.Win.Views;
 
 namespace SF3.Win.Controls {
@@ -40,10 +42,13 @@ namespace SF3.Win.Controls {
         private static Dictionary<string, Stack<EnhancedObjectListView>> _cachedOLVControls = new Dictionary<string, Stack<EnhancedObjectListView>>();
 
         public EnhancedObjectListView() {
+            CellToolTipGetter = GetCellTooltip;
+            HighlightBackgroundColor = SystemColors.Highlight;
+            UnfocusedHighlightBackgroundColor = MathHelpers.Lerp(HighlightBackgroundColor, SystemColors.Window, 0.50f);
+
             _timer.Interval = 100;
             _timer.Tick += CheckForVisibility;
             _timer.Start();
-            this.CellToolTipGetter = GetCellTooltip;
         }
 
         private string GetCellTooltip(OLVColumn column, object modelObject) {

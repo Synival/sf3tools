@@ -28,5 +28,15 @@ namespace CommonLib.Utils {
         public static int    Clamp(int    value, int    min, int    max) => Math.Min(max, Math.Max(min, value));
         public static float  Clamp(float  value, float  min, float  max) => Math.Min(max, Math.Max(min, value));
         public static double Clamp(double value, double min, double max) => Math.Min(max, Math.Max(min, value));
+
+        /// <summary>
+        /// Performs linear interpolation of values 'a' and 'b' with amount 't'.
+        /// </summary>
+        /// <param name="a">First value.</param>
+        /// <param name="b">Second value.</param>
+        /// <param name="t">Amount between values 'a' and 'b', from 0.00 (a) to 1.00 (b).</param>
+        /// <returns>A linearly-interpolated value.</returns>
+        public static byte Lerp(byte a, byte b, float t)
+            => (byte) ((a * (1.00f - t)) + b * t);
     }
 }
