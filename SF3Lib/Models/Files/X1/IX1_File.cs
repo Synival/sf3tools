@@ -29,7 +29,7 @@ namespace SF3.Models.Files.X1 {
         Dictionary<uint, ModelInstanceTable> ModelInstanceTablesByAddress { get; }
         Dictionary<uint, ActorScript> ScriptsByAddress { get; }
         MapUpdateFuncTable MapUpdateFuncTable { get; }
-        BlacksmithTable BlacksmithTable { get; }
+        BlacksmithTable[] BlacksmithTables { get; }
 
         DiscoveryContext Discoveries { get; }
     }

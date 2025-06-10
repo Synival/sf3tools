@@ -255,6 +255,19 @@ namespace SF3.Models.Files.X1 {
             { new FuncInfo("BlacksmithFunctionBranch", "blacksmithRelatedBranchScn2+"), new ushort[] {
                 0xD112, 0x6011, 0x88FF, 0x8D0D, 0xE300, 0xD711, 0x6213, 0x6121
             }},
+
+            // Blacksmith Scn2 func
+            { new FuncInfo("BlacksmithFunction", "blacksmithRelatedFunctionScn2+"), new ushort[] {
+                0x2F86, 0x2F96, 0x2FA6, 0x4F22, 0x6A43, 0xD810, 0xE60A, 0x480B,
+                0xE514, 0xD90F, 0xE60B, 0x6491, 0x480B, 0xE514, 0x6091, 0x88FF,
+                0x8D0D, 0xE300, 0xD70B, 0x6293, 0x6121, 0x31A0, 0x8F03, 0x7228,
+                0x2732, 0xA005, 0xE002, 0x6021, 0x88FF, 0x8FF5, 0x7301, 0xE000,
+                0x4F26, 0x6AF6, 0x69F6, 0x000B, 0x68F6
+            }},
+
+/*
+                2F86 2F96 2FA6 4F22 6A43 D810 E60A 480B E514 D90F E60B 6491 480B E514 6091 88FF 8D0D E300 D70B 6293 6121 31A0 8F03 7228 2732 A005 E002 6021 88FF 8FF5 7301 E000 4F26 6AF6 69F6 000B 68F6
+*/
         };
     }
 }

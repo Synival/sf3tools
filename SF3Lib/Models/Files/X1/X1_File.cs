@@ -342,20 +342,43 @@ namespace SF3.Models.Files.X1 {
         private ITable[] DiscoverBlacksmithData(byte[] data) {
             // The blacksmith functions are too huge to look for, so let's just look for small branches in them.
             var blacksmithBranches = Discoveries.GetFunctions()
-                .Where(x => x.TypeName == "BlacksmithFunctionBranch")
+                .Where(x => x.TypeName.StartsWith("BlacksmithFunction"))
                 .ToArray();
 
             if (blacksmithBranches.Length == 0)
                 return new ITable[0];
 
-            var disc = blacksmithBranches[0];
-            var offset = disc.Name == "blacksmithRelatedBranchScn1" ? 0x48 : 0x4C;
-            var blacksmithTablePtrFileAddr = disc.Address + offset - RamAddress;
-            var blacksmithTableFileAddr = data.GetUInt((int) blacksmithTablePtrFileAddr) - RamAddress;
+            int GetFuncOffset(string name) {
+                switch (name) {
+                    case "blacksmithRelatedBranchScn1":
+                        return 0x48;
+                    case "blacksmithRelatedBranchScn2+":
+                        return 0x4C;
+                    case "blacksmithRelatedFunctionScn2+":
+                        return 0x50;
+                    default:
+                        return 0;
+                }
+            }
 
-            return new ITable[] {
-                (BlacksmithTable = BlacksmithTable.Create(Data, nameof(BlacksmithTable), (int) blacksmithTableFileAddr))
-            };
+            var addresses = new HashSet<int>();
+
+            foreach (var disc in blacksmithBranches) {
+                var offset = GetFuncOffset(disc.Name);
+                if (offset == 0)
+                    continue;
+
+                var blacksmithTablePtrFileAddr = disc.Address + offset - RamAddress;
+                var blacksmithTableFileAddr = data.GetUInt((int) blacksmithTablePtrFileAddr) - RamAddress;
+                addresses.Add((int) blacksmithTableFileAddr);
+            }
+
+            BlacksmithTables = addresses
+                .OrderBy(x => x)
+                .Select((x, i) => BlacksmithTable.Create(Data, $"{nameof(BlacksmithTable)}{i + 1:D2} (@0x{x + RamAddress:X8})", x))
+                .ToArray();
+
+            return BlacksmithTables;
         }
 
         private ITable[] PopulateMapUpdateFuncTables() {
@@ -710,9 +733,8 @@ namespace SF3.Models.Files.X1 {
         public Dictionary<uint, ActorScript> ScriptsByAddress { get; private set; }
         [BulkCopyRecurse]
         public MapUpdateFuncTable MapUpdateFuncTable { get; private set; }
-
         [BulkCopyRecurse]
-        public BlacksmithTable BlacksmithTable { get; private set; }
+        public BlacksmithTable[] BlacksmithTables { get; private set; }
 
         public DiscoveryContext Discoveries { get; private set; }
     }
