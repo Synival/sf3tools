@@ -50,6 +50,7 @@ namespace SF3.Models.Files.X1 {
             int battlePointersAddress;
             int tileMovementAddress;
             int characterTargetPriorityTablesAddresses;
+            int battleTalkAddress;
 
             var battlePointersPointerPointerAddress = isScn1OrBTL99 ? 0x0018 : 0x0024;
 
@@ -104,6 +105,11 @@ namespace SF3.Models.Files.X1 {
                     }
                 }
 
+                // Get battle talk functions.
+                var talkPtrAddr = isScn1OrBTL99 ? 0xF0 : 0xFC;
+                var talkPtrValue = (uint) Data.GetDouble(talkPtrAddr);
+                battleTalkAddress = (talkPtrValue != 0xFFFFFFFF) ? (int) (talkPtrValue - RamAddress) : -1;
+
                 // Determine the location of the TileMovementTable, which isn't so straight-forward.
                 // This table is not present in Scenario 1.
                 if (!isScn1OrBTL99) {
@@ -146,6 +152,7 @@ namespace SF3.Models.Files.X1 {
                 Battles = null;
                 tileMovementAddress = -1;
                 characterTargetPriorityTablesAddresses = -1;
+                battleTalkAddress = -1;
             }
 
             // Add tables present outside of the battle tables.
@@ -188,7 +195,8 @@ namespace SF3.Models.Files.X1 {
                 var battles = Battles.Select(x => x.Value).Where(x => x != null).ToList();
                 tables.AddRange(battles.SelectMany(x => x.Tables));
             }
-
+            if (battleTalkAddress >= 0)
+                tables.Add(BattleTalkTable = BattleTalkTable.Create(Data, nameof(BattleTalkTable), battleTalkAddress));
             if (tileMovementAddress >= 0)
                 tables.Add(TileMovementTable = TileMovementTable.Create(Data, "TileMovement", tileMovementAddress, true));
 
@@ -735,6 +743,8 @@ namespace SF3.Models.Files.X1 {
         public MapUpdateFuncTable MapUpdateFuncTable { get; private set; }
         [BulkCopyRecurse]
         public BlacksmithTable[] BlacksmithTables { get; private set; }
+        [BulkCopyRecurse]
+        public BattleTalkTable BattleTalkTable { get; private set; }
 
         public DiscoveryContext Discoveries { get; private set; }
     }

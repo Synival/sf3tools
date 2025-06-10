@@ -54,7 +54,7 @@ namespace SF3.Models.Structs.MPD.Model {
         }
 
         [BulkCopy]
-        [TableViewModelColumn(addressField: null, displayOrder: 4.1f, displayFormat: "X3")]
+        [TableViewModelColumn(addressField: null, displayOrder: 4.1f, displayFormat: "X3", minWidth: 200)]
         [NameGetter(NamedValueType.GameFlag)]
         public int? IfFlagOff {
             get {
