@@ -11,7 +11,7 @@ using static SF3.Utils.ResourceUtils;
 
 namespace SF3.Models.Files.X014 {
     public class X014_File : ScenarioTableFile, IX014_File {
-        public readonly int c_ramOffset = 0x06088000;
+        public int RamAddress => 0x06088000;
 
         protected X014_File(IByteData data, INameGetterContext nameContext, ScenarioType scenario) : base(data, nameContext, scenario) {
             if (Scenario == ScenarioType.Scenario2) {
@@ -111,11 +111,11 @@ namespace SF3.Models.Files.X014 {
                     .ToList();
 
                 // The Premium Disk has this, but it's unreferenced. Add if it doesn't exist.
-                if (Scenario == ScenarioType.PremiumDisk && !addresses.Contains(0x120D0 + c_ramOffset))
-                    addresses.Add(0x120D0 + c_ramOffset);
+                if (Scenario == ScenarioType.PremiumDisk && !addresses.Contains(0x120D0 + RamAddress))
+                    addresses.Add(0x120D0 + RamAddress);
 
                 TerrainBasedBattleSceneTablesByRamAddress = addresses
-                    .ToDictionary(x => x, x => TerrainBasedBattleSceneTable.Create(Data, "TerrainBasedBattleSceneTable @" + x.ToString("X"), (x - c_ramOffset)));
+                    .ToDictionary(x => x, x => TerrainBasedBattleSceneTable.Create(Data, "TerrainBasedBattleSceneTable @" + x.ToString("X"), (x - RamAddress)));
                 tables.AddRange(TerrainBasedBattleSceneTablesByRamAddress.Values);
             }
 

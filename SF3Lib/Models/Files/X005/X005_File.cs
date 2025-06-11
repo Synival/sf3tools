@@ -13,7 +13,7 @@ namespace SF3.Models.Files.X005 {
         public static int GetRamOffset(ScenarioType scenario) {
             switch (scenario) {
                 case ScenarioType.Scenario1:   return 0x0603DC00;
-                case ScenarioType.Scenario2:   return 0x0603C100; // TODO: versions?
+                case ScenarioType.Scenario2:   return 0x0603C100;
                 case ScenarioType.Scenario3:   return 0x0603C900;
                 case ScenarioType.PremiumDisk: return 0x0603C900;
 

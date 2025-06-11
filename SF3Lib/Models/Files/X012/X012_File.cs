@@ -10,7 +10,7 @@ using SF3.Types;
 
 namespace SF3.Models.Files.X012 {
     public class X012_File : ScenarioTableFile, IX012_File {
-        public readonly int c_ramOffset = 0x06070000;
+        public int RamAddress => 0x06070000;
 
         protected X012_File(IByteData data, INameGetterContext nameContext, ScenarioType scenario) : base(data, nameContext, scenario) {
         }
@@ -32,7 +32,7 @@ namespace SF3.Models.Files.X012 {
                 ClassTargetPriorityTables = new ClassTargetPriorityTable[16];
                 var tablePointerAddr = 0xB7AC;
                 for (int i = 0; i < 16; i++) {
-                    var tableAddr = Data.GetDouble(tablePointerAddr) - c_ramOffset;
+                    var tableAddr = Data.GetDouble(tablePointerAddr) - RamAddress;
                     var tableName = "CharacterTargetPriorityTable 0x" + i.ToString("X") + ": " + NameGetterContext.GetName(null, null, i, new object[] { NamedValueType.MovementType });
                     tables.Add(ClassTargetPriorityTables[i] = ClassTargetPriorityTable.Create(Data, tableName, tableAddr));
                     tablePointerAddr += 0x04;
@@ -41,7 +41,7 @@ namespace SF3.Models.Files.X012 {
                 ClassTargetUnknownTables = new ClassTargetUnknownTable[16];
                 tablePointerAddr = 0xB8DC;
                 for (int i = 0; i < 16; i++) {
-                    var tableAddr = Data.GetDouble(tablePointerAddr) - c_ramOffset;
+                    var tableAddr = Data.GetDouble(tablePointerAddr) - RamAddress;
                     var tableName = "UnknownTable 0x" + i.ToString("X") + ": " + NameGetterContext.GetName(null, null, i, new object[] { NamedValueType.MovementType });
                     tables.Add(ClassTargetUnknownTables[i] = ClassTargetUnknownTable.Create(Data, tableName, tableAddr));
                     tablePointerAddr += 0x04;
