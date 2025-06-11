@@ -8,6 +8,8 @@ using SF3.Types;
 
 namespace SF3.Models.Files.X023 {
     public class X023_File : ScenarioTableFile, IX023_File {
+        public int RamAddress => 0x06078000;
+
         protected X023_File(IByteData data, INameGetterContext nameContext, ScenarioType scenario) : base(data, nameContext, scenario) {
         }
 
@@ -20,9 +22,9 @@ namespace SF3.Models.Files.X023 {
 
         private int GetBlacksmithTableAddr() {
             switch (Scenario) {
-                case ScenarioType.Scenario2:   return 0x5620; // Same in both versions
-                case ScenarioType.Scenario3:   return 0x5968;
-                case ScenarioType.PremiumDisk: return 0x5970;
+                case ScenarioType.Scenario2:   return Data.GetDouble(0x4cb4) - RamAddress; // Same in both versions
+                case ScenarioType.Scenario3:   return Data.GetDouble(0x4e24) - RamAddress;
+                case ScenarioType.PremiumDisk: return Data.GetDouble(0x4e2c) - RamAddress;
                 default: return 0;
             }
         }

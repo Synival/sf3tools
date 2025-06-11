@@ -8,6 +8,8 @@ using SF3.Types;
 
 namespace SF3.Models.Files.X027 {
     public class X027_File : ScenarioTableFile, IX027_File {
+        public int RamAddress => 0x06078000;
+
         protected X027_File(IByteData data, INameGetterContext nameContext, ScenarioType scenario) : base(data, nameContext, scenario) {
         }
 
@@ -20,8 +22,20 @@ namespace SF3.Models.Files.X027 {
 
         private int[] GetBlacksmithTableAddrs() {
             switch (Scenario) {
-                case ScenarioType.Scenario3:   return new int[] { 0x4ee4, 0x5830 };
-                case ScenarioType.PremiumDisk: return new int[] { 0x4eec, 0x5838 };
+                case ScenarioType.Scenario3: {
+                    return new int[] {
+                        Data.GetDouble(0x34f0) - RamAddress,
+                        Data.GetDouble(0x3e58) - RamAddress
+                    };
+                }
+
+                case ScenarioType.PremiumDisk: {
+                    return new int[] {
+                        Data.GetDouble(0x34f8) - RamAddress,
+                        Data.GetDouble(0x3e60) - RamAddress
+                    };
+                }
+
                 default: return new int[] {};
             }
         }
@@ -32,7 +46,7 @@ namespace SF3.Models.Files.X027 {
             var blacksmithAddrs = GetBlacksmithTableAddrs();
             var blacksmithTables = new List<BlacksmithTable>();
             foreach (var addr in blacksmithAddrs)
-                blacksmithTables.Add(BlacksmithTable.Create(Data, $"{nameof(BlacksmithTable)}{blacksmithTables.Count + 1:D2} (@0x{addr:X4})", addr));
+                blacksmithTables.Add(BlacksmithTable.Create(Data, $"{nameof(BlacksmithTable)}{blacksmithTables.Count + 1:D2} (@0x{addr + RamAddress:X4})", addr));
             BlacksmithTables = blacksmithTables.ToArray();
 
             tables.AddRange(blacksmithTables);
