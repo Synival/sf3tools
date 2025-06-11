@@ -16,7 +16,7 @@ namespace SF3.Models.Tables.X1.Battle {
 
         public override bool Load()
             => Load((id, address) => new BattleTalk(Data, id, $"{nameof(BattleTalk)}{id:D2}", address),
-                (rows, model) => (uint) model.Unknown0x00 != 0xFFFFFFFF,
+                (rows, model) => (uint) model.CharacterID != 0xFFFFFFFF,
                 false);
     }
 }

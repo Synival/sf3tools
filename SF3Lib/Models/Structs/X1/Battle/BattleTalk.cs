@@ -4,27 +4,29 @@ using SF3.Types;
 
 namespace SF3.Models.Structs.X1.Battle {
     public class BattleTalk : Struct {
-        private readonly int _unknown0x00Addr;
+        private readonly int _characterId;
         private readonly int _battleIdAddr;
         private readonly int _gameFlagAddr;
         private readonly int _functionAddr;
 
         public BattleTalk(IByteData data, int id, string name, int address)
         : base(data, id, name, address, 0x10) {
-            _unknown0x00Addr = Address + 0x00; // 4 bytes
-            _battleIdAddr    = Address + 0x04; // 4 bytes
-            _gameFlagAddr    = Address + 0x08; // 4 bytes
-            _functionAddr    = Address + 0x0C; // 4 bytes
+            _characterId  = Address + 0x00; // 4 bytes
+            _battleIdAddr = Address + 0x04; // 4 bytes
+            _gameFlagAddr = Address + 0x08; // 4 bytes
+            _functionAddr = Address + 0x0C; // 4 bytes
         }
 
-        [TableViewModelColumn(addressField: nameof(_unknown0x00Addr), displayOrder: 0, displayFormat: "X2")]
+        [TableViewModelColumn(addressField: nameof(_characterId), displayOrder: 0, displayFormat: "X2")]
+        [NameGetter(NamedValueType.Character)]
         [BulkCopy]
-        public int Unknown0x00 {
-            get => Data.GetDouble(_unknown0x00Addr);
-            set => Data.SetDouble(_unknown0x00Addr, value);
+        public int CharacterID {
+            get => Data.GetDouble(_characterId);
+            set => Data.SetDouble(_characterId, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_battleIdAddr), displayOrder: 1, displayFormat: "X2")]
+        [NameGetter(NamedValueType.Character)]
         [BulkCopy]
         public int BattleID {
             get => Data.GetDouble(_battleIdAddr);
