@@ -13,6 +13,9 @@ using SF3.Models.Files.X012;
 using SF3.Models.Files.X013;
 using SF3.Models.Files.X014;
 using SF3.Models.Files.X019;
+using SF3.Models.Files.X023;
+using SF3.Models.Files.X024;
+using SF3.Models.Files.X027;
 using SF3.Models.Files.X033_X031;
 using SF3.Models.Files.X1;
 using SF3.Types;
@@ -76,8 +79,14 @@ namespace SF3.Utils {
                     return SF3FileType.X019;
                 else if (preExtension.Contains("X021"))
                     return SF3FileType.X021;
+                else if (preExtension.Contains("X023"))
+                    return SF3FileType.X023;
+                else if (preExtension.Contains("X024"))
+                    return SF3FileType.X024;
                 else if (preExtension.Contains("X026"))
                     return SF3FileType.X026;
+                else if (preExtension.Contains("X027"))
+                    return SF3FileType.X027;
                 else if (preExtension.Contains("X031"))
                     return SF3FileType.X031;
                 else if (preExtension.Contains("X033"))
@@ -173,6 +182,12 @@ namespace SF3.Utils {
                 case SF3FileType.X021:
                 case SF3FileType.X026:
                     return IconPointerFile.Create(byteData, ngc, scenario);
+                case SF3FileType.X023:
+                    return X023_File.Create(byteData, ngc, scenario);
+                case SF3FileType.X024:
+                    return X024_File.Create(byteData, ngc, scenario);
+                case SF3FileType.X027:
+                    return X027_File.Create(byteData, ngc, scenario);
                 case SF3FileType.X012:
                     return X012_File.Create(byteData, ngc, scenario);
                 case SF3FileType.X013:
@@ -215,6 +230,12 @@ namespace SF3.Utils {
                 case SF3FileType.X019:
                 case SF3FileType.X044:
                     return "Monster Files";
+                case SF3FileType.X023:
+                    return "X023 File";
+                case SF3FileType.X024:
+                    return "X024 File";
+                case SF3FileType.X027:
+                    return "X027 File";
                 case SF3FileType.X031:
                 case SF3FileType.X033:
                     return "X031/X033 File";
@@ -242,12 +263,18 @@ namespace SF3.Utils {
                 case SF3FileType.X012:
                     return "*X012*.BIN";
                 case SF3FileType.X013:
-                    return "X013*.BIN";
+                    return "*X013*.BIN";
                 case SF3FileType.X014:
                     return "*X014*.BIN";
                 case SF3FileType.X019:
                 case SF3FileType.X044:
                     return "*X019*.BIN;X044*.BIN";
+                case SF3FileType.X023:
+                    return "*X023*.BIN";
+                case SF3FileType.X024:
+                    return "*X024*.BIN";
+                case SF3FileType.X027:
+                    return "*X027*.BIN";
                 case SF3FileType.X031:
                 case SF3FileType.X033:
                     return "*X031*.BIN;*X033*.BIN";
@@ -278,6 +305,12 @@ namespace SF3.Utils {
                     return new SF3FileType[] { SF3FileType.X014 };
                 case "*X019*.BIN;X044*.BIN":
                     return new SF3FileType[] { SF3FileType.X019, SF3FileType.X044 };
+                case "*X023*.BIN":
+                    return new SF3FileType[] { SF3FileType.X023 };
+                case "*X024*.BIN":
+                    return new SF3FileType[] { SF3FileType.X024 };
+                case "*X027*.BIN":
+                    return new SF3FileType[] { SF3FileType.X027 };
                 case "*X031*.BIN;*X033*.BIN":
                     return new SF3FileType[] { SF3FileType.X031, SF3FileType.X033 };
                 case "*.MPD":

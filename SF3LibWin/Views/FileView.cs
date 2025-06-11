@@ -8,6 +8,9 @@ using SF3.Models.Files.X012;
 using SF3.Models.Files.X013;
 using SF3.Models.Files.X014;
 using SF3.Models.Files.X019;
+using SF3.Models.Files.X023;
+using SF3.Models.Files.X024;
+using SF3.Models.Files.X027;
 using SF3.Models.Files.X033_X031;
 using SF3.Models.Files.X1;
 using SF3.Win.Views.IconPointer;
@@ -18,6 +21,9 @@ using SF3.Win.Views.X012;
 using SF3.Win.Views.X013;
 using SF3.Win.Views.X014;
 using SF3.Win.Views.X019;
+using SF3.Win.Views.X023;
+using SF3.Win.Views.X024;
+using SF3.Win.Views.X027;
 using SF3.Win.Views.X033_X031;
 using SF3.Win.Views.X1;
 
@@ -55,6 +61,12 @@ namespace SF3.Win.Views {
                     return new X014_View("X014_File", file);
                 case IX019_File file:
                     return new X019_View("X019_File", file);
+                case IX023_File file:
+                    return new X023_View("X023_File", file);
+                case IX024_File file:
+                    return new X024_View("X024_File", file);
+                case IX027_File file:
+                    return new X027_View("X027_File", file);
                 case IX033_X031_File file:
                     return new X033_X031_View("X033_X031_File", file);
                 case IMPD_File file:
