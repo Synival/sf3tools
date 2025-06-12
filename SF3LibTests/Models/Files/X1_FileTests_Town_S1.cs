@@ -42,12 +42,12 @@ namespace SF3.Tests.Models.Files {
             var table = file.NpcTable;
 
             Assert.AreEqual(0x42, table[0].SpriteID);
-            Assert.AreEqual(1592, table[0].XPos);
-            Assert.AreEqual(544, table[0].ZPos);
+            Assert.AreEqual(1592, table[0].XPosDec);
+            Assert.AreEqual(544, table[0].ZPosDec);
 
             Assert.AreEqual(0x3E, table[1].SpriteID);
-            Assert.AreEqual(1568, table[1].XPos);
-            Assert.AreEqual(448, table[1].ZPos);
+            Assert.AreEqual(1568, table[1].XPosDec);
+            Assert.AreEqual(448, table[1].ZPosDec);
 
             Assert.AreEqual(24, table.Length);
         }
@@ -57,8 +57,9 @@ namespace SF3.Tests.Models.Files {
             var file = TestCase.Create();
             var table = file.InteractableTable;
 
-            // TODO: redo all of the data checks!
-            Assert.IsFalse(true);
+            Assert.AreEqual(    0xc302,  table[0].Trigger);
+            Assert.AreEqual(      0x00,  table[0].TriggerFlags);
+            Assert.AreEqual(0x0605f2d0u, table[0].Action);
 
             Assert.AreEqual(31, table.Length);
         }

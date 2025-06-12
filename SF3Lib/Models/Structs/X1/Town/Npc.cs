@@ -70,44 +70,44 @@ namespace SF3.Models.Structs.X1.Town {
 
         [TableViewModelColumn(addressField: nameof(_xPosAddr), displayOrder: 3, displayName: "xPos", displayFormat: "X8")]
         [BulkCopy]
-        public int XPos {
-            get => Data.GetDouble(_xPosAddr);
-            set => Data.SetDouble(_xPosAddr, value);
+        public uint XPos {
+            get => (uint) Data.GetDouble(_xPosAddr);
+            set => Data.SetDouble(_xPosAddr, (int) value);
         }
 
         [TableViewModelColumn(addressField: nameof(_yPosAddr), displayOrder: 4, displayName: "yPos", displayFormat: "X8")]
         [BulkCopy]
-        public int YPos {
-            get => Data.GetDouble(_yPosAddr);
-            set => Data.SetDouble(_yPosAddr, value);
+        public uint YPos {
+            get => (uint) Data.GetDouble(_yPosAddr);
+            set => Data.SetDouble(_yPosAddr, (int) value);
         }
 
         [TableViewModelColumn(addressField: nameof(_zPosAddr), displayOrder: 5, displayName: "zPos", displayFormat: "X8")]
         [BulkCopy]
-        public int ZPos {
-            get => Data.GetDouble(_zPosAddr);
-            set => Data.SetDouble(_zPosAddr, value);
+        public uint ZPos {
+            get => (uint) Data.GetDouble(_zPosAddr);
+            set => Data.SetDouble(_zPosAddr, (int) value);
         }
 
         [TableViewModelColumn(addressField: nameof(_xPosAddr), displayOrder: 6, displayName: "xPos (dec)")]
         [BulkCopy]
         public float XPosDec {
             get => XPos / 65536.0f;
-            set => XPos = (int) value * 65536;
+            set => XPos = (uint) value * 65536;
         }
 
         [TableViewModelColumn(addressField: nameof(_yPosAddr), displayOrder: 7, displayName: "yPos (dec)")]
         [BulkCopy]
         public float YPosDec {
             get => YPos / 65536.0f;
-            set => YPos = (int) value * 65536;
+            set => YPos = (uint) value * 65536;
         }
 
         [TableViewModelColumn(addressField: nameof(_zPosAddr), displayOrder: 8, displayName: "zPos (dec)")]
         [BulkCopy]
         public float ZPosDec {
             get => ZPos / 65536.0f;
-            set => ZPos = (int) value * 65536;
+            set => ZPos = (uint) value * 65536;
         }
 
         [TableViewModelColumn(addressField: nameof(_directionAddr), displayOrder: 9, displayName: "Direction", displayFormat: "X4")]

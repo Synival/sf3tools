@@ -16,10 +16,10 @@ namespace SF3.Tests.Models.Files {
                 int expectedLoads,
                 int expectedLoadedOverrides)
             : base(scenario, filename) {
-                ExpectedItems   = expectedItems;
-                ExpectedSpells  = expectedSpells;
-                ExpectedWeaponSpells = expectedWeaponSpells;
-                ExpectedLoads   = expectedLoads;
+                ExpectedItems           = expectedItems;
+                ExpectedSpells          = expectedSpells;
+                ExpectedWeaponSpells    = expectedWeaponSpells;
+                ExpectedLoads           = expectedLoads;
                 ExpectedLoadedOverrides = expectedLoadedOverrides;
             }
 

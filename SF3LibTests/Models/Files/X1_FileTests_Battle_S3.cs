@@ -119,8 +119,9 @@ namespace SF3.Tests.Models.Files {
             var file = TestCase2.Create();
             var table = file.InteractableTable;
 
-            // TODO: redo all of the data checks!
-            Assert.IsFalse(true);
+            Assert.AreEqual(    0x0013,  table[0].Trigger);
+            Assert.AreEqual(      0x00,  table[0].TriggerFlags);
+            Assert.AreEqual(0x010000eau, table[0].Action);
 
             Assert.AreEqual(3, table.Length);
         }

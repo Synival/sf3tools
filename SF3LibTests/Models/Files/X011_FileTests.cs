@@ -23,9 +23,9 @@ namespace SF3.Tests.Models.Files {
         }
 
         private static readonly List<X011_FileTestCase> TestCases = [
-            new(ScenarioType.Scenario1, "X011.BIN", 256, 51, 65422),
-            new(ScenarioType.Scenario2, "X011.BIN", 256, 61, 64646),
-            new(ScenarioType.Scenario3, "X011.BIN", 300, 91, 76360),
+            new(ScenarioType.Scenario1,   "X011.BIN", 256, 51, 65422),
+            new(ScenarioType.Scenario2,   "X011.BIN", 256, 61, 64646),
+            new(ScenarioType.Scenario3,   "X011.BIN", 300, 91, 76360),
             new(ScenarioType.PremiumDisk, "X011.BIN", 300, 93, 76338),
         ];
 
