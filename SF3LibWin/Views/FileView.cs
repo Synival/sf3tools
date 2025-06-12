@@ -15,6 +15,7 @@ using SF3.Models.Files.X026;
 using SF3.Models.Files.X027;
 using SF3.Models.Files.X031;
 using SF3.Models.Files.X033;
+using SF3.Models.Files.X044;
 using SF3.Models.Files.X1;
 using SF3.Win.Views.MPD;
 using SF3.Win.Views.X002;
@@ -31,6 +32,7 @@ using SF3.Win.Views.X026;
 using SF3.Win.Views.X027;
 using SF3.Win.Views.X031;
 using SF3.Win.Views.X033;
+using SF3.Win.Views.X044;
 using SF3.Win.Views.X1;
 
 namespace SF3.Win.Views {
@@ -66,6 +68,7 @@ namespace SF3.Win.Views {
                 case IX027_File file: return new X027_View("X027_File", file);
                 case IX031_File file: return new X031_View("X031_File", file);
                 case IX033_File file: return new X033_View("X033_File", file);
+                case IX044_File file: return new X044_View("X044_File", file);
                 case IMPD_File  file: return new MPD_View ("MPD_File",  file);
                 default:
                     return null;

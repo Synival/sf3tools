@@ -3,7 +3,7 @@ using SF3.ByteData;
 using SF3.Models.Structs.X019;
 using SF3.Models.Tables.X002;
 
-namespace SF3.Models.Tables.X019 {
+namespace SF3.Models.Tables.Shared {
     public class MonsterTable : ResourceTable<Monster> {
         protected MonsterTable(IByteData data, string name, string resourceFile, int address) : base(data, name, resourceFile, address, 256) {
         }
@@ -30,7 +30,7 @@ namespace SF3.Models.Tables.X019 {
             foreach (var monster in Rows) {
                 var items = monster.ApplyEquipmentStats(itemTable, apply);
                 totalItems += items;
-                totalMonsters += (items > 0) ? 1 : 0;
+                totalMonsters += items > 0 ? 1 : 0;
             }
             return (totalMonsters, totalItems);
         }

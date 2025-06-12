@@ -4,7 +4,7 @@ using System.Windows.Forms;
 using CommonLib.Arrays;
 using SF3.Models.Files.X002;
 using SF3.Models.Files.X019;
-using SF3.Models.Tables.X019;
+using SF3.Models.Tables.Shared;
 using SF3.NamedValues;
 using SF3.Types;
 using SF3.Utils;
