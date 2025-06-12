@@ -11,12 +11,12 @@ namespace SF3.Models.Structs.X023 {
             _itemAddr = Address + 0x00; // 4 bytes
         }
 
-        [TableViewModelColumn(addressField: nameof(_itemAddr), displayName: "Item", minWidth: 150)]
+        [TableViewModelColumn(addressField: nameof(_itemAddr), minWidth: 150)]
         [NameGetter(NamedValueType.Item)]
         [BulkCopy]
-        public uint Item {
-            get => (uint) Data.GetDouble(_itemAddr);
-            set => Data.SetDouble(_itemAddr, (int) value);
+        public int Item {
+            get => Data.GetDouble(_itemAddr);
+            set => Data.SetDouble(_itemAddr, value);
         }
     }
 }
