@@ -5,7 +5,7 @@ using System.Linq;
 using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
 using CommonLib.Statistics;
-using SF3.Models.Tables.X033_X031;
+using SF3.Models.Tables.Shared;
 using SF3.Statistics;
 using SF3.Types;
 

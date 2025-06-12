@@ -5,7 +5,7 @@ using SF3.ByteData;
 using SF3.Statistics;
 using SF3.Types;
 
-namespace SF3.Models.Structs.X033_X031 {
+namespace SF3.Models.Structs.Shared {
     public class Stats : Struct {
         /// <summary>
         /// When enabled, GetAverageStatGrowthPerLevelAsPercent() will show the "growthValue" in its output

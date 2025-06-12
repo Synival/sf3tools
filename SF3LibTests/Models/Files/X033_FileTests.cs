@@ -1,13 +1,13 @@
 using CommonLib.Arrays;
-using SF3.Models.Files.X033_X031;
+using SF3.Models.Files.X033;
 using SF3.NamedValues;
 using SF3.Types;
 
 namespace SF3.Tests.Models.Files {
     [TestClass]
-    public class X033_X031_FileTests {
-        private class X033_X031_TestCase : TestCase {
-            public X033_X031_TestCase(
+    public class X033_FileTests {
+        private class X033_TestCase : TestCase {
+            public X033_TestCase(
                 ScenarioType scenario,
                 string filename,
                 int expectedStatsRows,
@@ -18,14 +18,14 @@ namespace SF3.Tests.Models.Files {
                 ExpectedInitialInfoRows = expectedInitialInfoRows;
             }
 
-            public X033_X031_File Create()
-                => X033_X031_File.Create(new SF3.ByteData.ByteData(new ByteArray(File.ReadAllBytes(Filename))), new NameGetterContext(Scenario), Scenario);
+            public X033_File Create()
+                => X033_File.Create(new SF3.ByteData.ByteData(new ByteArray(File.ReadAllBytes(Filename))), new NameGetterContext(Scenario), Scenario);
 
             public int ExpectedStatsRows { get; }
             public int ExpectedInitialInfoRows { get; }
         }
 
-        private static readonly List<X033_X031_TestCase> TestCases = [
+        private static readonly List<X033_TestCase> TestCases = [
             new(ScenarioType.Scenario1, "X033.BIN", 33, 22),
             new(ScenarioType.Scenario1, "X031.BIN", 33, 22),
             new(ScenarioType.Scenario2, "X033.BIN", 66, 41),

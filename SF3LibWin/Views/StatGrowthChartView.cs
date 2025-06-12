@@ -1,8 +1,8 @@
 ﻿using System.Windows.Forms;
-using SF3.Models.Tables.X033_X031;
+using SF3.Models.Tables.Shared;
 using SF3.Win.Controls;
 
-namespace SF3.Win.Views.X033_X031 {
+namespace SF3.Win.Views {
     public class StatGrowthChartView : ControlView<StatGrowthChartControl> {
         public StatGrowthChartView(string name, StatsTable statsTable) : base(name) {
             StatsTable = statsTable;

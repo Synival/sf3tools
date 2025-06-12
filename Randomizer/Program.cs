@@ -1,7 +1,9 @@
 ﻿using CommonLib.Arrays;
 using SF3.ByteData;
-using SF3.Models.Files.X033_X031;
-using SF3.Models.Structs.X033_X031;
+using SF3.Models.Files.X031;
+using SF3.Models.Files.X033;
+using SF3.Models.Structs.Shared;
+using SF3.Models.Tables.Shared;
 using SF3.NamedValues;
 using SF3.Types;
 
@@ -625,13 +627,13 @@ namespace Randomizer {
         /// <summary>
         /// Applies an action on both X033 and X031 files to avoid redundant code.
         /// </summary>
-        private static void OnX033_X031(Action<IX033_X031_File> action) {
-            action(s_x031);
-            action(s_x033);
+        private static void OnX033_X031(Action<StatsTable, InitialInfoTable> action) {
+            action(s_x031.StatsTable, s_x031.InitialInfoTable);
+            action(s_x033.StatsTable, s_x033.InitialInfoTable);
         }
 
         private static NameGetterContext s_ngc = new NameGetterContext(c_scenario);
-        private static IX033_X031_File s_x033 = X033_X031_File.Create(new ByteData(new ByteArray(File.ReadAllBytes(c_filePath + "X033.BIN"))), s_ngc, c_scenario);
-        private static IX033_X031_File s_x031 = X033_X031_File.Create(new ByteData(new ByteArray(File.ReadAllBytes(c_filePath + "X031.BIN"))), s_ngc, c_scenario);
+        private static IX031_File s_x033 = X031_File.Create(new ByteData(new ByteArray(File.ReadAllBytes(c_filePath + "X033.BIN"))), s_ngc, c_scenario);
+        private static IX033_File s_x031 = X033_File.Create(new ByteData(new ByteArray(File.ReadAllBytes(c_filePath + "X031.BIN"))), s_ngc, c_scenario);
     }
 }

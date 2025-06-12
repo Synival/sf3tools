@@ -1,8 +1,8 @@
 using System;
 using SF3.ByteData;
-using SF3.Models.Structs.X033_X031;
+using SF3.Models.Structs.Shared;
 
-namespace SF3.Models.Tables.X033_X031 {
+namespace SF3.Models.Tables.Shared {
     public class StatsTable : ResourceTable<Stats> {
         protected StatsTable(IByteData data, string name, string resourceFile, int address) : base(data, name, resourceFile, address, 300) {
         }

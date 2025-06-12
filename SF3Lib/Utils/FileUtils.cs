@@ -16,7 +16,8 @@ using SF3.Models.Files.X019;
 using SF3.Models.Files.X023;
 using SF3.Models.Files.X024;
 using SF3.Models.Files.X027;
-using SF3.Models.Files.X033_X031;
+using SF3.Models.Files.X031;
+using SF3.Models.Files.X033;
 using SF3.Models.Files.X1;
 using SF3.Types;
 
@@ -198,8 +199,9 @@ namespace SF3.Utils {
                 case SF3FileType.X044:
                     return X019_File.Create(byteData, ngc, scenario);
                 case SF3FileType.X031:
+                    return X031_File.Create(byteData, ngc, scenario);
                 case SF3FileType.X033:
-                    return X033_X031_File.Create(byteData, ngc, scenario);
+                    return X033_File.Create(byteData, ngc, scenario);
                 case SF3FileType.MPD:
                     return MPD_File.Create(byteData, nameGetterContexts);
                 default:
@@ -237,8 +239,9 @@ namespace SF3.Utils {
                 case SF3FileType.X027:
                     return "X027 File";
                 case SF3FileType.X031:
+                    return "X031 File";
                 case SF3FileType.X033:
-                    return "X031/X033 File";
+                    return "X033 File";
                 case SF3FileType.MPD:
                     return "MPD Files";
                 default:
@@ -276,8 +279,9 @@ namespace SF3.Utils {
                 case SF3FileType.X027:
                     return "*X027*.BIN";
                 case SF3FileType.X031:
+                    return "*X031*.BIN";
                 case SF3FileType.X033:
-                    return "*X031*.BIN;*X033*.BIN";
+                    return "*X033*.BIN";
                 case SF3FileType.MPD:
                     return "*.MPD";
                 default:
@@ -311,8 +315,10 @@ namespace SF3.Utils {
                     return new SF3FileType[] { SF3FileType.X024 };
                 case "*X027*.BIN":
                     return new SF3FileType[] { SF3FileType.X027 };
-                case "*X031*.BIN;*X033*.BIN":
-                    return new SF3FileType[] { SF3FileType.X031, SF3FileType.X033 };
+                case "*X031*.BIN":
+                    return new SF3FileType[] { SF3FileType.X031 };
+                case "*X033*.BIN":
+                    return new SF3FileType[] { SF3FileType.X033 };
                 case "*.MPD":
                     return new SF3FileType[] { SF3FileType.MPD };
                 default:

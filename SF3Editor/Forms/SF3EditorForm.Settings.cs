@@ -1,5 +1,5 @@
 ﻿using System;
-using SF3.Models.Structs.X033_X031;
+using SF3.Models.Structs.Shared;
 
 namespace SF3.Editor.Forms {
     public partial class SF3EditorForm {

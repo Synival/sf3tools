@@ -2,7 +2,7 @@ using CommonLib.Attributes;
 using SF3.ByteData;
 using SF3.Types;
 
-namespace SF3.Models.Structs.X033_X031 {
+namespace SF3.Models.Structs.Shared {
     public class InitialInfo : Struct {
         //starting equipment table
         private readonly int _characterIdAddr;
