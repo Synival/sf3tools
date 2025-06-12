@@ -63,40 +63,23 @@ namespace SF3.Utils {
             if (filenameUpper.Contains(".MPD"))
                 return SF3FileType.MPD;
             else if (filenameUpper.Contains(".BIN")) {
-                if (preExtension.Contains("X1BTL99"))
-                    return SF3FileType.X1BTL99;
-                else if (preExtension.Contains("X1"))
-                    return SF3FileType.X1;
-                else if (preExtension.Contains("X002"))
-                    return SF3FileType.X002;
-                else if (preExtension.Contains("X005"))
-                    return SF3FileType.X005;
-                else if (preExtension.Contains("X011"))
-                    return SF3FileType.X011;
-                else if (preExtension.Contains("X012"))
-                    return SF3FileType.X012;
-                else if (preExtension.Contains("X013"))
-                    return SF3FileType.X013;
-                else if (preExtension.Contains("X014"))
-                    return SF3FileType.X014;
-                else if (preExtension.Contains("X019"))
-                    return SF3FileType.X019;
-                else if (preExtension.Contains("X021"))
-                    return SF3FileType.X021;
-                else if (preExtension.Contains("X023"))
-                    return SF3FileType.X023;
-                else if (preExtension.Contains("X024"))
-                    return SF3FileType.X024;
-                else if (preExtension.Contains("X026"))
-                    return SF3FileType.X026;
-                else if (preExtension.Contains("X027"))
-                    return SF3FileType.X027;
-                else if (preExtension.Contains("X031"))
-                    return SF3FileType.X031;
-                else if (preExtension.Contains("X033"))
-                    return SF3FileType.X033;
-                else if (preExtension.Contains("X044"))
-                    return SF3FileType.X044;
+                     if (preExtension.Contains("X1BTL99")) return SF3FileType.X1BTL99;
+                else if (preExtension.Contains("X1"))      return SF3FileType.X1;
+                else if (preExtension.Contains("X002"))    return SF3FileType.X002;
+                else if (preExtension.Contains("X005"))    return SF3FileType.X005;
+                else if (preExtension.Contains("X011"))    return SF3FileType.X011;
+                else if (preExtension.Contains("X012"))    return SF3FileType.X012;
+                else if (preExtension.Contains("X013"))    return SF3FileType.X013;
+                else if (preExtension.Contains("X014"))    return SF3FileType.X014;
+                else if (preExtension.Contains("X019"))    return SF3FileType.X019;
+                else if (preExtension.Contains("X021"))    return SF3FileType.X021;
+                else if (preExtension.Contains("X023"))    return SF3FileType.X023;
+                else if (preExtension.Contains("X024"))    return SF3FileType.X024;
+                else if (preExtension.Contains("X026"))    return SF3FileType.X026;
+                else if (preExtension.Contains("X027"))    return SF3FileType.X027;
+                else if (preExtension.Contains("X031"))    return SF3FileType.X031;
+                else if (preExtension.Contains("X033"))    return SF3FileType.X033;
+                else if (preExtension.Contains("X044"))    return SF3FileType.X044;
             }
 
             // Couldn't figure it out; it's unknown.
@@ -174,42 +157,24 @@ namespace SF3.Utils {
         public static IBaseFile CreateFile(IByteData byteData, SF3FileType fileType, Dictionary<ScenarioType, INameGetterContext> nameGetterContexts, ScenarioType scenario) {
             var ngc = nameGetterContexts[scenario];
             switch (fileType) {
-                case SF3FileType.X1:
-                    return X1_File.Create(byteData, ngc, scenario, false);
-                case SF3FileType.X1BTL99:
-                    return X1_File.Create(byteData, ngc, scenario, true);
-                case SF3FileType.X002:
-                    return X002_File.Create(byteData, ngc, scenario);
-                case SF3FileType.X005:
-                    return X005_File.Create(byteData, ngc, scenario);
-                case SF3FileType.X011:
-                    return X011_File.Create(byteData, ngc, scenario);
-                case SF3FileType.X021:
-                    return X021_File.Create(byteData, ngc, scenario);
-                case SF3FileType.X023:
-                    return X023_File.Create(byteData, ngc, scenario);
-                case SF3FileType.X024:
-                    return X024_File.Create(byteData, ngc, scenario);
-                case SF3FileType.X026:
-                    return X026_File.Create(byteData, ngc, scenario);
-                case SF3FileType.X027:
-                    return X027_File.Create(byteData, ngc, scenario);
-                case SF3FileType.X012:
-                    return X012_File.Create(byteData, ngc, scenario);
-                case SF3FileType.X013:
-                    return X013_File.Create(byteData, ngc, scenario);
-                case SF3FileType.X014:
-                    return X014_File.Create(byteData, ngc, scenario);
-                case SF3FileType.X019:
-                    return X019_File.Create(byteData, ngc, scenario);
-                case SF3FileType.X031:
-                    return X031_File.Create(byteData, ngc, scenario);
-                case SF3FileType.X033:
-                    return X033_File.Create(byteData, ngc, scenario);
-                case SF3FileType.X044:
-                    return X044_File.Create(byteData, ngc, scenario);
-                case SF3FileType.MPD:
-                    return MPD_File.Create(byteData, nameGetterContexts);
+                case SF3FileType.X1:      return X1_File  .Create(byteData, ngc, scenario, false);
+                case SF3FileType.X1BTL99: return X1_File  .Create(byteData, ngc, scenario, true);
+                case SF3FileType.X002:    return X002_File.Create(byteData, ngc, scenario);
+                case SF3FileType.X005:    return X005_File.Create(byteData, ngc, scenario);
+                case SF3FileType.X011:    return X011_File.Create(byteData, ngc, scenario);
+                case SF3FileType.X021:    return X021_File.Create(byteData, ngc, scenario);
+                case SF3FileType.X023:    return X023_File.Create(byteData, ngc, scenario);
+                case SF3FileType.X024:    return X024_File.Create(byteData, ngc, scenario);
+                case SF3FileType.X026:    return X026_File.Create(byteData, ngc, scenario);
+                case SF3FileType.X027:    return X027_File.Create(byteData, ngc, scenario);
+                case SF3FileType.X012:    return X012_File.Create(byteData, ngc, scenario);
+                case SF3FileType.X013:    return X013_File.Create(byteData, ngc, scenario);
+                case SF3FileType.X014:    return X014_File.Create(byteData, ngc, scenario);
+                case SF3FileType.X019:    return X019_File.Create(byteData, ngc, scenario);
+                case SF3FileType.X031:    return X031_File.Create(byteData, ngc, scenario);
+                case SF3FileType.X033:    return X033_File.Create(byteData, ngc, scenario);
+                case SF3FileType.X044:    return X044_File.Create(byteData, ngc, scenario);
+                case SF3FileType.MPD:     return MPD_File .Create(byteData, nameGetterContexts);
                 default:
                     throw new InvalidOperationException($"Unhandled file type '{fileType}'");
             }
@@ -217,42 +182,24 @@ namespace SF3.Utils {
 
         public static string GetFileFilterNameForFileType(SF3FileType type) {
             switch (type) {
-                case SF3FileType.X1:
-                    return "X1 Files";
-                case SF3FileType.X1BTL99:
-                    return "X1BTL99 File";
-                case SF3FileType.X002:
-                    return "X002 File";
-                case SF3FileType.X005:
-                    return "X005 File";
-                case SF3FileType.X011:
-                    return "X011 File";
-                case SF3FileType.X012:
-                    return "X012 File";
-                case SF3FileType.X013:
-                    return "X013 File";
-                case SF3FileType.X014:
-                    return "X014 File";
-                case SF3FileType.X019:
-                    return "X019 File";
-                case SF3FileType.X021:
-                    return "X021 File";
-                case SF3FileType.X023:
-                    return "X023 File";
-                case SF3FileType.X024:
-                    return "X024 File";
-                case SF3FileType.X026:
-                    return "X026 File";
-                case SF3FileType.X027:
-                    return "X027 File";
-                case SF3FileType.X031:
-                    return "X031 File";
-                case SF3FileType.X033:
-                    return "X033 File";
-                case SF3FileType.X044:
-                    return "X044 File";
-                case SF3FileType.MPD:
-                    return "MPD Files";
+                case SF3FileType.X1:      return "X1 Files";
+                case SF3FileType.X1BTL99: return "X1BTL99 File";
+                case SF3FileType.X002:    return "X002 File";
+                case SF3FileType.X005:    return "X005 File";
+                case SF3FileType.X011:    return "X011 File";
+                case SF3FileType.X012:    return "X012 File";
+                case SF3FileType.X013:    return "X013 File";
+                case SF3FileType.X014:    return "X014 File";
+                case SF3FileType.X019:    return "X019 File";
+                case SF3FileType.X021:    return "X021 File";
+                case SF3FileType.X023:    return "X023 File";
+                case SF3FileType.X024:    return "X024 File";
+                case SF3FileType.X026:    return "X026 File";
+                case SF3FileType.X027:    return "X027 File";
+                case SF3FileType.X031:    return "X031 File";
+                case SF3FileType.X033:    return "X033 File";
+                case SF3FileType.X044:    return "X044 File";
+                case SF3FileType.MPD:     return "MPD Files";
                 default:
                     throw new ArgumentException($"Unhandled value '{type}' for '{nameof(type)}'");
             }
@@ -260,42 +207,24 @@ namespace SF3.Utils {
 
         public static string GetFileFilterForFileType(SF3FileType type) {
             switch (type) {
-                case SF3FileType.X1:
-                    return "*X1*.BIN";
-                case SF3FileType.X1BTL99:
-                    return "*X1BTL99*.BIN";
-                case SF3FileType.X002:
-                    return "*X002*.BIN";
-                case SF3FileType.X005:
-                    return "*X005*.BIN";
-                case SF3FileType.X011:
-                    return "*X011*.BIN";
-                case SF3FileType.X012:
-                    return "*X012*.BIN";
-                case SF3FileType.X013:
-                    return "*X013*.BIN";
-                case SF3FileType.X014:
-                    return "*X014*.BIN";
-                case SF3FileType.X019:
-                    return "*X019*.BIN";
-                case SF3FileType.X021:
-                    return "*X021*.BIN";
-                case SF3FileType.X023:
-                    return "*X023*.BIN";
-                case SF3FileType.X024:
-                    return "*X024*.BIN";
-                case SF3FileType.X026:
-                    return "*X026*.BIN";
-                case SF3FileType.X027:
-                    return "*X027*.BIN";
-                case SF3FileType.X031:
-                    return "*X031*.BIN";
-                case SF3FileType.X033:
-                    return "*X033*.BIN";
-                case SF3FileType.X044:
-                    return "*X044*.BIN";
-                case SF3FileType.MPD:
-                    return "*.MPD";
+                case SF3FileType.X1:      return "*X1*.BIN";
+                case SF3FileType.X1BTL99: return "*X1BTL99*.BIN";
+                case SF3FileType.X002:    return "*X002*.BIN";
+                case SF3FileType.X005:    return "*X005*.BIN";
+                case SF3FileType.X011:    return "*X011*.BIN";
+                case SF3FileType.X012:    return "*X012*.BIN";
+                case SF3FileType.X013:    return "*X013*.BIN";
+                case SF3FileType.X014:    return "*X014*.BIN";
+                case SF3FileType.X019:    return "*X019*.BIN";
+                case SF3FileType.X021:    return "*X021*.BIN";
+                case SF3FileType.X023:    return "*X023*.BIN";
+                case SF3FileType.X024:    return "*X024*.BIN";
+                case SF3FileType.X026:    return "*X026*.BIN";
+                case SF3FileType.X027:    return "*X027*.BIN";
+                case SF3FileType.X031:    return "*X031*.BIN";
+                case SF3FileType.X033:    return "*X033*.BIN";
+                case SF3FileType.X044:    return "*X044*.BIN";
+                case SF3FileType.MPD:     return "*.MPD";
                 default:
                     throw new ArgumentException($"Unhandled value '{type}' for '{nameof(type)}'");
             }
@@ -303,42 +232,24 @@ namespace SF3.Utils {
 
         public static SF3FileType[] GetFileTypesForFileFilter(string filter) {
             switch (filter) {
-                case "*X1BTL99*.BIN":
-                    return new SF3FileType[] { SF3FileType.X1BTL99 };
-                case "*X1*.BIN":
-                    return new SF3FileType[] { SF3FileType.X1 };
-                case "*X002*.BIN":
-                    return new SF3FileType[] { SF3FileType.X002 };
-                case "*X005*.BIN":
-                    return new SF3FileType[] { SF3FileType.X005 };
-                case "*X011*.BIN":
-                    return new SF3FileType[] { SF3FileType.X011 };
-                case "*X012*.BIN":
-                    return new SF3FileType[] { SF3FileType.X012 };
-                case "*X013*.BIN":
-                    return new SF3FileType[] { SF3FileType.X013 };
-                case "*X014*.BIN":
-                    return new SF3FileType[] { SF3FileType.X014 };
-                case "*X019*.BIN":
-                    return new SF3FileType[] { SF3FileType.X019 };
-                case "*X021*.BIN":
-                    return new SF3FileType[] { SF3FileType.X021 };
-                case "*X023*.BIN":
-                    return new SF3FileType[] { SF3FileType.X023 };
-                case "*X024*.BIN":
-                    return new SF3FileType[] { SF3FileType.X024 };
-                case "*X026*.BIN":
-                    return new SF3FileType[] { SF3FileType.X026 };
-                case "*X027*.BIN":
-                    return new SF3FileType[] { SF3FileType.X027 };
-                case "*X031*.BIN":
-                    return new SF3FileType[] { SF3FileType.X031 };
-                case "*X033*.BIN":
-                    return new SF3FileType[] { SF3FileType.X033 };
-                case "*X044*.BIN":
-                    return new SF3FileType[] { SF3FileType.X044 };
-                case "*.MPD":
-                    return new SF3FileType[] { SF3FileType.MPD };
+                case "*X1BTL99*.BIN": return new SF3FileType[] { SF3FileType.X1BTL99 };
+                case "*X1*.BIN":      return new SF3FileType[] { SF3FileType.X1 };
+                case "*X002*.BIN":    return new SF3FileType[] { SF3FileType.X002 };
+                case "*X005*.BIN":    return new SF3FileType[] { SF3FileType.X005 };
+                case "*X011*.BIN":    return new SF3FileType[] { SF3FileType.X011 };
+                case "*X012*.BIN":    return new SF3FileType[] { SF3FileType.X012 };
+                case "*X013*.BIN":    return new SF3FileType[] { SF3FileType.X013 };
+                case "*X014*.BIN":    return new SF3FileType[] { SF3FileType.X014 };
+                case "*X019*.BIN":    return new SF3FileType[] { SF3FileType.X019 };
+                case "*X021*.BIN":    return new SF3FileType[] { SF3FileType.X021 };
+                case "*X023*.BIN":    return new SF3FileType[] { SF3FileType.X023 };
+                case "*X024*.BIN":    return new SF3FileType[] { SF3FileType.X024 };
+                case "*X026*.BIN":    return new SF3FileType[] { SF3FileType.X026 };
+                case "*X027*.BIN":    return new SF3FileType[] { SF3FileType.X027 };
+                case "*X031*.BIN":    return new SF3FileType[] { SF3FileType.X031 };
+                case "*X033*.BIN":    return new SF3FileType[] { SF3FileType.X033 };
+                case "*X044*.BIN":    return new SF3FileType[] { SF3FileType.X044 };
+                case "*.MPD":         return new SF3FileType[] { SF3FileType.MPD };
                 default:
                     return new SF3FileType[] {};
             }
