@@ -5,10 +5,10 @@ using System.Reflection;
 using System.Windows.Forms;
 using BrightIdeasSoftware;
 using CommonLib.Attributes;
+using CommonLib.Utils;
 using CommonLib.ViewModels;
 using SF3.Models.Structs;
 using SF3.Win.Extensions;
-using SF3.Win.Utils;
 using SF3.Win.Views;
 
 namespace SF3.Win.Controls {
@@ -44,7 +44,7 @@ namespace SF3.Win.Controls {
         public EnhancedObjectListView() {
             CellToolTipGetter = GetCellTooltip;
             HighlightBackgroundColor = SystemColors.Highlight;
-            UnfocusedHighlightBackgroundColor = MathHelpers.Lerp(HighlightBackgroundColor, SystemColors.Window, 0.50f);
+            UnfocusedHighlightBackgroundColor = Utils.MathHelpers.Lerp(HighlightBackgroundColor, SystemColors.Window, 0.50f);
 
             _timer.Interval = 100;
             _timer.Tick += CheckForVisibility;
@@ -104,11 +104,14 @@ namespace SF3.Win.Controls {
                 if (propAttr?.AddressField != null) {
                     var field = modelType.GetField(propAttr.AddressField, BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.GetField);
                     if (field != null) {
-                        lines.Add("Property Info:");
-                        var value = (int) field.GetValue(modelObject);
-                        if (isMultiRow && modelStruct != null)
-                            lines.Add($"  Offset in Row: 0x{value - modelStruct.Address:X2}");
-                        lines.Add($"  File Address: 0x{value:X4}");
+                        var valueObj = field.GetValue(modelObject);
+                        if (valueObj != null) {
+                            var value = Convert.ToInt32(valueObj);
+                            lines.Add("Property Info:");
+                            if (isMultiRow && modelStruct != null)
+                                lines.Add($"  Offset in Row: {ValueUtils.SignedHexStr(value - modelStruct.Address, "X2")}");
+                            lines.Add($"  File Address: 0x{value:X4}");
+                        }
                     }
                 }
             }
