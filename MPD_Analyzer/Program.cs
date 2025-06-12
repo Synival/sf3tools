@@ -114,8 +114,6 @@ namespace MPD_Analyzer {
                                 reports.Add(filename.PadLeft(8) + " | 0x" + msg.ID.ToString("X2") + " | Flag 0x" + msg.Flag.ToString("X3") + " " + flagName);
                             }
                             bool match = reports.Count > 0;
-                            if (!match)
-                                continue;
 
                             var fileStr = GetFileString(scenario, file, mpdFile);
                             Console.WriteLine(fileStr + " | " + (match ? "Match  " : "NoMatch"));
@@ -349,6 +347,17 @@ namespace MPD_Analyzer {
             if (shouldHaveChunk20_21 != hasChunk21)
                 errors.Add("Chunk[21] problem! ShouldHave=" + shouldHaveChunk20_21 + ", DoesHave=" + hasChunk21);
 
+            // Make sure the header indicates the correct chunks.
+            var mpdHeader = mpdFile.MPDHeader;
+            if (mpdHeader.Chunk1IsModels && chunkHeaders[1].ChunkType != ChunkType.Models)
+                errors.Add($"Chunk[1] should be 'Models', but is {chunkHeaders[1].ChunkType}");
+            if (mpdHeader.Chunk2IsSurfaceModel && chunkHeaders[2].ChunkType != ChunkType.SurfaceModel)
+                errors.Add($"Chunk[2] should be 'SurfaceModel', but is {chunkHeaders[2].ChunkType}");
+            if (mpdHeader.Chunk20IsModels && chunkHeaders[20].ChunkType != ChunkType.Models)
+                errors.Add($"Chunk[20] should be 'Models', but is {chunkHeaders[20].ChunkType}");
+            if (mpdHeader.Chunk20IsSurfaceModel && chunkHeaders[20].ChunkType != ChunkType.SurfaceModel)
+                errors.Add($"Chunk[20] should be 'SurfaceModel', but is {chunkHeaders[20].ChunkType}");
+
             return errors.ToArray();
         }
 
@@ -383,8 +392,14 @@ namespace MPD_Analyzer {
             var mc20 = mpdFile.ModelCollections.FirstOrDefault(x => x.ChunkIndex == 20);
 
             if (mc1 != null) {
-                var expectedHmm = header.Chunk1IsLoadedToHighMemory;
+                var expectedLmm = header.Chunk1IsLoadedFromLowMemory;
+                var expectedHmm = header.Chunk1IsLoadedFromHighMemory;
                 var actualHmm   = HasHighMemoryModels(mc1) == true;
+
+                if (expectedLmm && expectedHmm)
+                    errors.Add("Chunk[1] is somehow expected to be both in high and low memory! Bug?");
+                else if (!expectedLmm && !expectedHmm)
+                    errors.Add("Chunk[1] is somehow expected to be neither in high and low memory! Bug?");
 
                 if (expectedHmm && !actualHmm)
                     errors.Add("Chunk[1] models have low memory, but they should be high memory");
