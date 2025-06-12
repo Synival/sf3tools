@@ -1,3 +1,43 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <items>
+    <item value="0x00" name="(Test Weapon Shop)" />
+    <item value="0x01" name="Flagship 1 Weapons" />
+    <item value="0x02" name="Destonia Port 1 Weapons" />
+    <item value="0x03" name="Destonia Port 2 Weapons" />
+    <item value="0x04" name="Foothill Weapons" />
+    <item value="0x05" name="Guarder Weapons" />
+    <item value="0x06" name="Baersol Weapons" />
+    <item value="0x07" name="Aspia Weapons" />
+    <item value="0x08" name="Aural Weapons" />
+    <item value="0x09" name="Maya Weapons" />
+    <item value="0x0A" name="Bowlet Weapons" />
+    <item value="0x0B" name="Bormant Weapons" />
+    <item value="0x0C" name="Flagship 2 Weapons" />
+    <item value="0x0D" name="Remotest Weapons" />
+    <item value="0x0E" name="(0x0E)" />
+    <item value="0x0F" name="(0x0F)" />
+    <item value="0x10" name="(0x10)" />
+    <item value="0x11" name="(0x11)" />
+    <item value="0x12" name="(0x12)" />
+    <item value="0x13" name="(0x13)" />
+    <item value="0x14" name="(0x14)" />
+    <item value="0x15" name="Flagship 1 Items" />
+    <item value="0x16" name="Destonia Port 1 Items" />
+    <item value="0x17" name="Destonia Port 2 Items" />
+    <item value="0x18" name="Foothill Items" />
+    <item value="0x19" name="Guarder Items" />
+    <item value="0x1A" name="Baersol Items" />
+    <item value="0x1B" name="Aspia Items" />
+    <item value="0x1C" name="Aural Items" />
+    <item value="0x1D" name="Maya Items" />
+    <item value="0x1E" name="Bowlet Items" />
+    <item value="0x1F" name="Bormant Items" />
+    <item value="0x20" name="Flagship 2 Items" />
+    <item value="0x21" name="Remotest Items" />
+    <item value="0x22" name="(0x22)" />
+    <item value="0x23" name="(0x23)" />
+    <item value="0x24" name="(0x24)" />
+    <item value="0x25" name="(0x25)" />
+    <item value="0x26" name="(0x26)" />
+    <item value="0x27" name="(0x27)" />
 </items>

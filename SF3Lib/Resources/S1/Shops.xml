@@ -1,3 +1,43 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <items>
+    <item value="0x00" name="(Test Weapon Shop)" />
+    <item value="0x01" name="Saraband Weapons" />
+    <item value="0x02" name="Balsamo Weapons" />
+    <item value="0x03" name="Railhead Weapons" />
+    <item value="0x04" name="4th Car Weapons" />
+    <item value="0x05" name="Quonos Weapons" />
+    <item value="0x06" name="Vagaband 1 Weapons" />
+    <item value="0x07" name="Aspia Weapons" />
+    <item value="0x08" name="Storich Weapons" />
+    <item value="0x09" name="Flagard Weapons" />
+    <item value="0x0A" name="Lookover Weapons" />
+    <item value="0x0B" name="Vagaband 2 Weapons" />
+    <item value="0x0C" name="Malorie Weapons" />
+    <item value="0x0D" name="(Unknown Weapons 1)" />
+    <item value="0x0E" name="(Unknown Weapons 2)" />
+    <item value="0x0F" name="(0x0F)" />
+    <item value="0x10" name="(0x10)" />
+    <item value="0x11" name="(0x11)" />
+    <item value="0x12" name="(0x12)" />
+    <item value="0x13" name="(0x13)" />
+    <item value="0x14" name="(0x14)" />
+    <item value="0x15" name="Saraband Items" />
+    <item value="0x16" name="Balsamo Items" />
+    <item value="0x17" name="Railhead Items" />
+    <item value="0x18" name="4th Car Items" />
+    <item value="0x19" name="Quonos Items" />
+    <item value="0x1A" name="Vagaband 1 Items" />
+    <item value="0x1B" name="Aspia Items" />
+    <item value="0x1C" name="Storich Items" />
+    <item value="0x1D" name="Flagard Items" />
+    <item value="0x1E" name="Lookover Items" />
+    <item value="0x1F" name="Vagaband 2 Items" />
+    <item value="0x20" name="Malorie Items" />
+    <item value="0x21" name="Quonus Accessories" />
+    <item value="0x22" name="Flagard Accessories" />
+    <item value="0x23" name="(0x23)" />
+    <item value="0x24" name="(0x24)" />
+    <item value="0x25" name="(0x25)" />
+    <item value="0x26" name="(0x26)" />
+    <item value="0x27" name="(0x27)" />
 </items>

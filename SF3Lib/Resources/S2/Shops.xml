@@ -1,3 +1,43 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <items>
+    <item value="0x00" name="(Test Weapon Shop)" />
+    <item value="0x01" name="Saraband 1 Weapons" />
+    <item value="0x02" name="Balsamo Weapons" />
+    <item value="0x03" name="Dusty Weapons" />
+    <item value="0x04" name="Anafect Weapons" />
+    <item value="0x05" name="Rhineside Weapons" />
+    <item value="0x06" name="Stump Weapons" />
+    <item value="0x07" name="Barrand Weapons" />
+    <item value="0x08" name="Elbesem Weapons" />
+    <item value="0x09" name="Seagate Weapons" />
+    <item value="0x0A" name="Saraband 2 Weapons" />
+    <item value="0x0B" name="Airo Weapons" />
+    <item value="0x0C" name="Swampland Weapons" />
+    <item value="0x0D" name="Storich Weapons" />
+    <item value="0x0E" name="(Storich Outside Wall Weapons?)" />
+    <item value="0x0F" name="(0x0F)" />
+    <item value="0x10" name="(0x10)" />
+    <item value="0x11" name="(0x11)" />
+    <item value="0x12" name="(0x12)" />
+    <item value="0x13" name="(0x13)" />
+    <item value="0x14" name="(0x14)" />
+    <item value="0x15" name="Saraband 1 Items" />
+    <item value="0x16" name="Balsamo Items" />
+    <item value="0x17" name="Dusty Items" />
+    <item value="0x18" name="Anafect Items" />
+    <item value="0x19" name="Rhineside Items" />
+    <item value="0x1A" name="Stump Items" />
+    <item value="0x1B" name="Barrand Items" />
+    <item value="0x1C" name="Elbesem Items" />
+    <item value="0x1D" name="Seagate Items" />
+    <item value="0x1E" name="Saraband 2 Items" />
+    <item value="0x1F" name="Airo Items" />
+    <item value="0x20" name="Swampland Items" />
+    <item value="0x21" name="Storich Items" />
+    <item value="0x22" name="Unknown Accessory Shop 1" />
+    <item value="0x23" name="Unknown Accessory Shop 2" />
+    <item value="0x24" name="(0x24)" />
+    <item value="0x25" name="(0x25)" />
+    <item value="0x26" name="(0x26)" />
+    <item value="0x27" name="(0x27)" />
 </items>
