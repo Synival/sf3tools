@@ -1,9 +1,11 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using CommonLib.NamedValues;
 using SF3.ByteData;
 using SF3.Models.Tables;
 using SF3.Models.Tables.Shared;
+using SF3.Models.Tables.X023;
 using SF3.Types;
 
 namespace SF3.Models.Files.X023 {
@@ -20,6 +22,16 @@ namespace SF3.Models.Files.X023 {
             return newFile;
         }
 
+        private int GetShopPointersAddr() {
+            switch (Scenario) {
+                case ScenarioType.Scenario1:   return Data.GetDouble(0x2c5c) - RamAddress;
+                case ScenarioType.Scenario2:   return Data.GetDouble(0x2dc0) - RamAddress;
+                case ScenarioType.Scenario3:   return Data.GetDouble(0x2f70) - RamAddress;
+                case ScenarioType.PremiumDisk: return Data.GetDouble(0x2f78) - RamAddress;
+                default: return 0;
+            }
+        }
+
         private int GetBlacksmithTableAddr() {
             switch (Scenario) {
                 case ScenarioType.Scenario2:   return Data.GetDouble(0x4cb4) - RamAddress; // Same in both versions
@@ -32,6 +44,18 @@ namespace SF3.Models.Files.X023 {
         public override IEnumerable<ITable> MakeTables() {            
             var tables = new List<ITable>();
 
+            var shopPtrsAddr = GetShopPointersAddr();
+            if (shopPtrsAddr > 0) {
+                tables.Add(ShopPointerTable = ShopPointerTable.Create(Data, nameof(ShopPointerTable), shopPtrsAddr));
+                ShopItemTablesByAddress = ShopPointerTable
+                    .Select(x => x.Shop)
+                    .Distinct()
+                    .OrderBy(x => x)
+                    .Select((x, i) => ShopItemTable.Create(Data, $"{nameof(ShopItemTable)}{i:D2} (@0x{x:X8})", (int) x - RamAddress))
+                    .ToDictionary(x => x.Address + RamAddress, x => x);
+                tables.AddRange(ShopItemTablesByAddress.Values);
+            }
+
             var blacksmithAddr = GetBlacksmithTableAddr();
             if (blacksmithAddr > 0)
                 tables.Add(BlacksmithTable = BlacksmithTable.Create(Data, nameof(BlacksmithTable), blacksmithAddr));
@@ -39,6 +63,8 @@ namespace SF3.Models.Files.X023 {
             return tables;
         }
 
+        public ShopPointerTable ShopPointerTable { get; private set; }
+        public Dictionary<int, ShopItemTable> ShopItemTablesByAddress { get; private set; }
         public BlacksmithTable BlacksmithTable { get; private set; }
     }
 }
