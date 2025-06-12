@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<items>
+    <item value="0x00" name="(Test Shop)" />
+    <item value="0x01" name="Saraband" />
+    <item value="0x02" name="Balsamo" />
+    <item value="0x03" name="Railhead" />
+    <item value="0x04" name="4th Car" />
+    <item value="0x05" name="Quonus" />
+    <item value="0x06" name="Vagabond 1" />
+    <item value="0x07" name="Aspia" />
+    <item value="0x08" name="Storich" />
+    <item value="0x09" name="Flaggard" />
+    <item value="0x0A" name="Lookover" />
+    <item value="0x0B" name="Vagabond 2" />
+    <item value="0x0C" name="Malorie" />
+</items>

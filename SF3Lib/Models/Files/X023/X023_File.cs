@@ -7,6 +7,7 @@ using SF3.Models.Tables;
 using SF3.Models.Tables.Shared;
 using SF3.Models.Tables.X023;
 using SF3.Types;
+using static SF3.Utils.ResourceUtils;
 
 namespace SF3.Models.Files.X023 {
     public class X023_File : ScenarioTableFile, IX023_File {
@@ -42,7 +43,7 @@ namespace SF3.Models.Files.X023 {
             }
         }
 
-        private int GetShopDealPointersAddr() {
+        private int GetShopHagglePointersAddr() {
             switch (Scenario) {
                 case ScenarioType.Scenario1:   return Data.GetDouble(0x1024) - RamAddress;
                 case ScenarioType.Scenario2:   return Data.GetDouble(0x103c) - RamAddress; // Same in both versions
@@ -66,7 +67,7 @@ namespace SF3.Models.Files.X023 {
 
             var shopItemPtrsAddr = GetShopItemPointersAddr();
             if (shopItemPtrsAddr > 0) {
-                tables.Add(ShopItemsPointerTable = ShopItemsPointerTable.Create(Data, nameof(ShopItemsPointerTable), shopItemPtrsAddr));
+                tables.Add(ShopItemsPointerTable = ShopItemsPointerTable.Create(Data, nameof(ShopItemsPointerTable), ResourceFileForScenario(Scenario, "Shops.xml"), shopItemPtrsAddr));
                 ShopItemTablesByAddress = ShopItemsPointerTable
                     .Select(x => x.ShopItems)
                     .Distinct()
@@ -79,7 +80,7 @@ namespace SF3.Models.Files.X023 {
             var shopAutoDealPtrsAddr = GetShopAutoDealPointersAddr();
             if (shopAutoDealPtrsAddr > 0) {
                 var flagOffset = (Scenario >= ScenarioType.Scenario3) ? RamAddress : (int?) null;
-                tables.Add(ShopAutoDealsPointerTable = ShopAutoDealsPointerTable.Create(Data, nameof(ShopAutoDealsPointerTable), shopAutoDealPtrsAddr, flagOffset));
+                tables.Add(ShopAutoDealsPointerTable = ShopAutoDealsPointerTable.Create(Data, nameof(ShopAutoDealsPointerTable), ResourceFileForScenario(Scenario, "ShopDeals.xml"), shopAutoDealPtrsAddr, flagOffset));
                 ShopAutoDealTablesByAddress = ShopAutoDealsPointerTable
                     .Select(x => x.ShopAutoDeals)
                     .Distinct()
@@ -89,21 +90,16 @@ namespace SF3.Models.Files.X023 {
                 tables.AddRange(ShopAutoDealTablesByAddress.Values);
             }
 
-            var shopDealPtrsAddr = GetShopDealPointersAddr();
-            if (shopDealPtrsAddr > 0) {
-                // For some reason, there's always a normal shop in this list... Let's filter it out.
-                var shopPtrs = ShopItemsPointerTable?.Select(x => x.ShopItems)?.Distinct()?.ToArray() ?? new uint[] {};
-                var shopPtrSet = new HashSet<uint>(shopPtrs);
-
-                tables.Add(ShopDealsPointerTable = ShopDealsPointerTable.Create(Data, nameof(ShopDealsPointerTable), shopDealPtrsAddr));
-                ShopDealTablesByAddress = ShopDealsPointerTable
-                    .Select(x => x.ShopDeals)
-                    .Where(x => !shopPtrSet.Contains(x))
+            var shopHagglePtrsAddr = GetShopHagglePointersAddr();
+            if (shopHagglePtrsAddr > 0) {
+                tables.Add(ShopHagglesPointerTable = ShopHagglesPointerTable.Create(Data, nameof(ShopHagglesPointerTable), ResourceFileForScenario(Scenario, "ShopDeals.xml"), shopHagglePtrsAddr));
+                ShopHaggleTablesByAddress = ShopHagglesPointerTable
+                    .Select(x => x.ShopHaggles)
                     .Distinct()
                     .OrderBy(x => x)
-                    .Select((x, i) => ShopDealTable.Create(Data, $"{nameof(ShopDealTable)}{i:D2} (@0x{x:X8})", (int) x - RamAddress))
+                    .Select((x, i) => ShopHaggleTable.Create(Data, $"{nameof(ShopHaggleTable)}{i:D2} (@0x{x:X8})", (int) x - RamAddress))
                     .ToDictionary(x => x.Address + RamAddress, x => x);
-                tables.AddRange(ShopDealTablesByAddress.Values);
+                tables.AddRange(ShopHaggleTablesByAddress.Values);
             }
 
             var blacksmithAddr = GetBlacksmithTableAddr();
@@ -117,8 +113,8 @@ namespace SF3.Models.Files.X023 {
         public Dictionary<int, ShopItemTable> ShopItemTablesByAddress { get; private set; }
         public ShopAutoDealsPointerTable ShopAutoDealsPointerTable { get; private set; }
         public Dictionary<int, ShopAutoDealTable> ShopAutoDealTablesByAddress { get; private set; }
-        public ShopDealsPointerTable ShopDealsPointerTable { get; private set; }
-        public Dictionary<int, ShopDealTable> ShopDealTablesByAddress { get; private set; }
+        public ShopHagglesPointerTable ShopHagglesPointerTable { get; private set; }
+        public Dictionary<int, ShopHaggleTable> ShopHaggleTablesByAddress { get; private set; }
         public BlacksmithTable BlacksmithTable { get; private set; }
     }
 }

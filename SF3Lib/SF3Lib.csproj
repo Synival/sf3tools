@@ -20,6 +20,8 @@
     <None Remove="Resources\GameFlags.xml" />
     <None Remove="Resources\PD\EffectFileIndexes.xml" />
     <None Remove="Resources\PD\Music.xml" />
+    <None Remove="Resources\PD\ShopDeals.xml" />
+    <None Remove="Resources\PD\Shops.xml" />
     <None Remove="Resources\PD\SpecialAnimations.xml" />
     <None Remove="Resources\PD\SpellAnimations.xml" />
     <None Remove="Resources\PD\Sprites.xml" />
@@ -29,16 +31,22 @@
     <None Remove="Resources\S1\EnemyModels.xml" />
     <None Remove="Resources\S1\Music.xml" />
     <None Remove="Resources\S1\OtherBattleScenes.xml" />
+    <None Remove="Resources\S1\ShopDeals.xml" />
+    <None Remove="Resources\S1\Shops.xml" />
     <None Remove="Resources\S1\SpecialAnimations.xml" />
     <None Remove="Resources\S1\SpellAnimations.xml" />
     <None Remove="Resources\S1\Sprites.xml" />
     <None Remove="Resources\S2\EffectFileIndexes.xml" />
     <None Remove="Resources\S2\Music.xml" />
+    <None Remove="Resources\S2\ShopDeals.xml" />
+    <None Remove="Resources\S2\Shops.xml" />
     <None Remove="Resources\S2\SpecialAnimations.xml" />
     <None Remove="Resources\S2\SpellAnimations.xml" />
     <None Remove="Resources\S2\Sprites.xml" />
     <None Remove="Resources\S3\EffectFileIndexes.xml" />
     <None Remove="Resources\S3\Music.xml" />
+    <None Remove="Resources\S3\ShopDeals.xml" />
+    <None Remove="Resources\S3\Shops.xml" />
     <None Remove="Resources\S3\SpecialAnimations.xml" />
     <None Remove="Resources\S3\SpellAnimations.xml" />
     <None Remove="Resources\S3\Sprites.xml" />
@@ -63,6 +71,12 @@
     <Content Include="Resources\PD\Music.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\PD\ShopDeals.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\PD\Shops.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\PD\SpecialAnimations.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -73,6 +87,12 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\S1\EffectFileIndexes.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\S1\ShopDeals.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\S1\Shops.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\S1\SpecialAnimations.xml">
@@ -105,6 +125,12 @@
     <Content Include="Resources\S2\Music.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\S2\ShopDeals.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\S2\Shops.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\S2\SpecialAnimations.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -118,6 +144,12 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\S3\EffectFileIndexes.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\S3\ShopDeals.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\S3\Shops.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\S3\SpecialAnimations.xml">

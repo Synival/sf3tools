@@ -3,11 +3,11 @@ using SF3.ByteData;
 using SF3.Types;
 
 namespace SF3.Models.Structs.X023 {
-    public class ShopDeal : Struct {
+    public class ShopHaggle : Struct {
         private readonly int _itemAddr;
         private readonly int _flagAddr;
 
-        public ShopDeal(IByteData data, int id, string name, int address)
+        public ShopHaggle(IByteData data, int id, string name, int address)
         : base(data, id, name, address, 0x08) {
             _itemAddr = Address + 0x00; // 4 bytes
             _flagAddr = Address + 0x04; // 4 bytes

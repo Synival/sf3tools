@@ -17,18 +17,18 @@ namespace SF3.Win.Views.X023 {
             var ngc = Model.NameGetterContext;
 
             if (Model.ShopItemsPointerTable != null)
-                CreateChild(new TableView("Shop Pointers", Model.ShopItemsPointerTable, ngc));
+                CreateChild(new TableView("Shop Item Pointers", Model.ShopItemsPointerTable, ngc));
             if (Model.ShopAutoDealsPointerTable != null)
-                CreateChild(new TableView("Shop Auto Deal Pointers" + (Model.Scenario >= ScenarioType.Scenario3 ? " + Flag" : ""), Model.ShopAutoDealsPointerTable, ngc));
-            if (Model.ShopDealsPointerTable != null)
-                CreateChild(new TableView("Shop Deal Pointers", Model.ShopDealsPointerTable, ngc));
+                CreateChild(new TableView("Shop Auto Deal Pointers" + (Model.Scenario >= ScenarioType.Scenario3 ? " + Flags" : ""), Model.ShopAutoDealsPointerTable, ngc));
+            if (Model.ShopHagglesPointerTable != null)
+                CreateChild(new TableView("Shop Haggle Pointers", Model.ShopHagglesPointerTable, ngc));
 
             if (Model.ShopItemTablesByAddress?.Count > 0)
                 CreateChild(new TableArrayView<ShopItemTable>("Shop Items", Model.ShopItemTablesByAddress.Values.ToArray(), ngc));
             if (Model.ShopAutoDealTablesByAddress?.Count > 0)
                 CreateChild(new TableArrayView<ShopAutoDealTable>("Shop Auto Deals", Model.ShopAutoDealTablesByAddress.Values.ToArray(), ngc));
-            if (Model.ShopDealTablesByAddress?.Count > 0)
-                CreateChild(new TableArrayView<ShopDealTable>("Shop Deals", Model.ShopDealTablesByAddress.Values.ToArray(), ngc));
+            if (Model.ShopHaggleTablesByAddress?.Count > 0)
+                CreateChild(new TableArrayView<ShopHaggleTable>("Shop Haggles", Model.ShopHaggleTablesByAddress.Values.ToArray(), ngc));
 
             if (Model.BlacksmithTable != null)
                 CreateChild(new TableView("Blacksmith", Model.BlacksmithTable, ngc));

@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<items>
+    <item value="0x00" name="(Test Shop)" />
+    <item value="0x01" name="Flagship 1" />
+    <item value="0x02" name="Destonia Port 1" />
+    <item value="0x03" name="Destonia Port 2" />
+    <item value="0x04" name="Foothill" />
+    <item value="0x05" name="Guarder" />
+    <item value="0x06" name="Baersol" />
+    <item value="0x07" name="Aspia" />
+    <item value="0x08" name="Aural" />
+    <item value="0x09" name="Maya" />
+    <item value="0x0A" name="Bowlet" />
+    <item value="0x0B" name="Dormant" />
+    <item value="0x0C" name="Flagship 2" />
+    <item value="0x0D" name="Remotest" />
+</items>

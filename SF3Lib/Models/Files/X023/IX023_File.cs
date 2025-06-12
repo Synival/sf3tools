@@ -8,8 +8,8 @@ namespace SF3.Models.Files.X023 {
         Dictionary<int, ShopItemTable> ShopItemTablesByAddress { get; }
         ShopAutoDealsPointerTable ShopAutoDealsPointerTable { get; }
         Dictionary<int, ShopAutoDealTable> ShopAutoDealTablesByAddress { get; }
-        ShopDealsPointerTable ShopDealsPointerTable { get; }
-        Dictionary<int, ShopDealTable> ShopDealTablesByAddress { get; }
+        ShopHagglesPointerTable ShopHagglesPointerTable { get; }
+        Dictionary<int, ShopHaggleTable> ShopHaggleTablesByAddress { get; }
         BlacksmithTable BlacksmithTable { get; }
     }
 }

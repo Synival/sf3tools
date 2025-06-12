@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<items>
+    <item value="0x00" name="(Test Shop)" />
+    <item value="0x01" name="Saraband 1" />
+    <item value="0x02" name="Balsamo" />
+    <item value="0x03" name="Dusty" />
+    <item value="0x04" name="Anafect" />
+    <item value="0x05" name="Rhineside" />
+    <item value="0x06" name="Stump" />
+    <item value="0x07" name="Barrand" />
+    <item value="0x08" name="Elbesem" />
+    <item value="0x09" name="Seagate" />
+    <item value="0x0A" name="Saraband 2" />
+    <item value="0x0B" name="Airo" />
+    <item value="0x0C" name="Swampland" />
+    <item value="0x0D" name="Storich 1" />
+</items>
