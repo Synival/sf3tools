@@ -1,9 +1,9 @@
 ﻿using System.Windows.Forms;
-using SF3.Models.Files.IconPointer;
+using SF3.Models.Files.X026;
 
-namespace SF3.Win.Views.IconPointer {
-    public class IconPointerView : TabView {
-        public IconPointerView(string name, IIconPointerFile model) : base(name) {
+namespace SF3.Win.Views.X026 {
+    public class X026_View : TabView {
+        public X026_View(string name, IX026_File model) : base(name) {
             Model = model;
         }
 
@@ -17,6 +17,6 @@ namespace SF3.Win.Views.IconPointer {
             return Control;
         }
 
-        public IIconPointerFile Model { get; }
+        public IX026_File Model { get; }
     }
 }

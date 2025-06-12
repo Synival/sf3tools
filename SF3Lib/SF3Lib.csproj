@@ -9,6 +9,11 @@
     <FileVersion>0.1.1</FileVersion>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Remove="Models\Files\IconPointer\**" />
+    <EmbeddedResource Remove="Models\Files\IconPointer\**" />
+    <None Remove="Models\Files\IconPointer\**" />
+  </ItemGroup>
+  <ItemGroup>
     <None Remove="Resources\BoundaryList.xml" />
     <None Remove="Resources\Elements.xml" />
     <None Remove="Resources\FriendshipBonusTypeList.xml" />

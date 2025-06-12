@@ -5,16 +5,18 @@ using System.Linq;
 using CommonLib.NamedValues;
 using SF3.ByteData;
 using SF3.Models.Files;
-using SF3.Models.Files.IconPointer;
 using SF3.Models.Files.MPD;
 using SF3.Models.Files.X002;
 using SF3.Models.Files.X005;
+using SF3.Models.Files.X011;
 using SF3.Models.Files.X012;
 using SF3.Models.Files.X013;
 using SF3.Models.Files.X014;
 using SF3.Models.Files.X019;
+using SF3.Models.Files.X021;
 using SF3.Models.Files.X023;
 using SF3.Models.Files.X024;
+using SF3.Models.Files.X026;
 using SF3.Models.Files.X027;
 using SF3.Models.Files.X031;
 using SF3.Models.Files.X033;
@@ -180,13 +182,15 @@ namespace SF3.Utils {
                 case SF3FileType.X005:
                     return X005_File.Create(byteData, ngc, scenario);
                 case SF3FileType.X011:
+                    return X011_File.Create(byteData, ngc, scenario);
                 case SF3FileType.X021:
-                case SF3FileType.X026:
-                    return IconPointerFile.Create(byteData, ngc, scenario);
+                    return X021_File.Create(byteData, ngc, scenario);
                 case SF3FileType.X023:
                     return X023_File.Create(byteData, ngc, scenario);
                 case SF3FileType.X024:
                     return X024_File.Create(byteData, ngc, scenario);
+                case SF3FileType.X026:
+                    return X026_File.Create(byteData, ngc, scenario);
                 case SF3FileType.X027:
                     return X027_File.Create(byteData, ngc, scenario);
                 case SF3FileType.X012:
@@ -211,10 +215,6 @@ namespace SF3.Utils {
 
         public static string GetFileFilterNameForFileType(SF3FileType type) {
             switch (type) {
-                case SF3FileType.X011:
-                case SF3FileType.X021:
-                case SF3FileType.X026:
-                    return "IconPointer Files";
                 case SF3FileType.X1:
                     return "X1 Files";
                 case SF3FileType.X1BTL99:
@@ -223,6 +223,8 @@ namespace SF3.Utils {
                     return "X002 File";
                 case SF3FileType.X005:
                     return "X005 File";
+                case SF3FileType.X011:
+                    return "X011 File";
                 case SF3FileType.X012:
                     return "X012 File";
                 case SF3FileType.X013:
@@ -232,10 +234,14 @@ namespace SF3.Utils {
                 case SF3FileType.X019:
                 case SF3FileType.X044:
                     return "Monster Files";
+                case SF3FileType.X021:
+                    return "X021 File";
                 case SF3FileType.X023:
                     return "X023 File";
                 case SF3FileType.X024:
                     return "X024 File";
+                case SF3FileType.X026:
+                    return "X026 File";
                 case SF3FileType.X027:
                     return "X027 File";
                 case SF3FileType.X031:
@@ -251,10 +257,6 @@ namespace SF3.Utils {
 
         public static string GetFileFilterForFileType(SF3FileType type) {
             switch (type) {
-                case SF3FileType.X011:
-                case SF3FileType.X021:
-                case SF3FileType.X026:
-                    return "*X011*.BIN;*X021*.BIN;*X026*.BIN";
                 case SF3FileType.X1:
                     return "*X1*.BIN";
                 case SF3FileType.X1BTL99:
@@ -263,6 +265,8 @@ namespace SF3.Utils {
                     return "*X002*.BIN";
                 case SF3FileType.X005:
                     return "*X005*.BIN";
+                case SF3FileType.X011:
+                    return "*X011*.BIN";
                 case SF3FileType.X012:
                     return "*X012*.BIN";
                 case SF3FileType.X013:
@@ -272,10 +276,14 @@ namespace SF3.Utils {
                 case SF3FileType.X019:
                 case SF3FileType.X044:
                     return "*X019*.BIN;X044*.BIN";
+                case SF3FileType.X021:
+                    return "*X021*.BIN";
                 case SF3FileType.X023:
                     return "*X023*.BIN";
                 case SF3FileType.X024:
                     return "*X024*.BIN";
+                case SF3FileType.X026:
+                    return "*X026*.BIN";
                 case SF3FileType.X027:
                     return "*X027*.BIN";
                 case SF3FileType.X031:
@@ -291,8 +299,6 @@ namespace SF3.Utils {
 
         public static SF3FileType[] GetFileTypesForFileFilter(string filter) {
             switch (filter) {
-                case "*X011*.BIN;*X021*.BIN;*X026*.BIN":
-                    return new SF3FileType[] { SF3FileType.X011, SF3FileType.X021, SF3FileType.X026 };
                 case "*X1BTL99*.BIN":
                     return new SF3FileType[] { SF3FileType.X1BTL99 };
                 case "*X1*.BIN":
@@ -301,6 +307,8 @@ namespace SF3.Utils {
                     return new SF3FileType[] { SF3FileType.X002 };
                 case "*X005*.BIN":
                     return new SF3FileType[] { SF3FileType.X005 };
+                case "*X011*.BIN":
+                    return new SF3FileType[] { SF3FileType.X011 };
                 case "*X012*.BIN":
                     return new SF3FileType[] { SF3FileType.X012 };
                 case "*X013*.BIN":
@@ -309,10 +317,14 @@ namespace SF3.Utils {
                     return new SF3FileType[] { SF3FileType.X014 };
                 case "*X019*.BIN;X044*.BIN":
                     return new SF3FileType[] { SF3FileType.X019, SF3FileType.X044 };
+                case "*X021*.BIN":
+                    return new SF3FileType[] { SF3FileType.X021 };
                 case "*X023*.BIN":
                     return new SF3FileType[] { SF3FileType.X023 };
                 case "*X024*.BIN":
                     return new SF3FileType[] { SF3FileType.X024 };
+                case "*X026*.BIN":
+                    return new SF3FileType[] { SF3FileType.X026 };
                 case "*X027*.BIN":
                     return new SF3FileType[] { SF3FileType.X027 };
                 case "*X031*.BIN":

@@ -1,43 +1,32 @@
 using CommonLib.Arrays;
-using SF3.Models.Files.IconPointer;
+using SF3.Models.Files.X011;
 using SF3.NamedValues;
 using SF3.Types;
 
 namespace SF3.Tests.Models.Files {
     [TestClass]
-    public class IconPointerFileTests {
-        private class IPETestCase : TestCase {
-            public IPETestCase(ScenarioType scenario, string filename, int itemIconRows, int spellIconRows, int spellRealOffsetStart)
+    public class X011_FileTests {
+        private class X011_FileTestCase : TestCase {
+            public X011_FileTestCase(ScenarioType scenario, string filename, int itemIconRows, int spellIconRows, int spellRealOffsetStart)
             : base(scenario, filename) {
                 ExpectedItemIconRows = itemIconRows;
                 ExpectedSpellIconRows = spellIconRows;
                 ExpectedSpellRealOffsetStart = spellRealOffsetStart;
             }
 
-            public IconPointerFile Create()
-                => IconPointerFile.Create(new SF3.ByteData.ByteData(new ByteArray(File.ReadAllBytes(Filename))), new NameGetterContext(Scenario), Scenario);
+            public X011_File Create()
+                => X011_File.Create(new SF3.ByteData.ByteData(new ByteArray(File.ReadAllBytes(Filename))), new NameGetterContext(Scenario), Scenario);
 
             public int ExpectedItemIconRows { get; }
             public int ExpectedSpellIconRows { get; }
             public int ExpectedSpellRealOffsetStart { get; }
         }
 
-        private static readonly List<IPETestCase> TestCases = [
+        private static readonly List<X011_FileTestCase> TestCases = [
             new(ScenarioType.Scenario1, "X011.BIN", 256, 51, 65422),
-            new(ScenarioType.Scenario1, "X021.BIN", 256, 51, 65422),
-            new(ScenarioType.Scenario1, "X026.BIN", 256, 51, 65422),
-
             new(ScenarioType.Scenario2, "X011.BIN", 256, 61, 64646),
-            new(ScenarioType.Scenario2, "X021.BIN", 256, 61, 64646),
-            new(ScenarioType.Scenario2, "X026.BIN", 256, 61, 64646),
-
             new(ScenarioType.Scenario3, "X011.BIN", 300, 91, 76360),
-            new(ScenarioType.Scenario3, "X021.BIN", 300, 91, 76360),
-            new(ScenarioType.Scenario3, "X026.BIN", 300, 91, 76360),
-
             new(ScenarioType.PremiumDisk, "X011.BIN", 300, 93, 76338),
-            new(ScenarioType.PremiumDisk, "X021.BIN", 300, 93, 76338),
-            new(ScenarioType.PremiumDisk, "X026.BIN", 300, 93, 76338)
         ];
 
         [TestMethod]
