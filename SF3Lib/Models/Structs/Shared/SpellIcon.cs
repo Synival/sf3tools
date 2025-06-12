@@ -2,7 +2,7 @@ using CommonLib.Attributes;
 using SF3.ByteData;
 using SF3.Types;
 
-namespace SF3.Models.Structs.IconPointer {
+namespace SF3.Models.Structs.Shared {
     public class SpellIcon : Struct {
         //SPELLS
         private readonly int _theSpellIconAddr;

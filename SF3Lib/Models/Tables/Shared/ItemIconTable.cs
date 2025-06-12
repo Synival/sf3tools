@@ -1,8 +1,8 @@
 using System;
 using SF3.ByteData;
-using SF3.Models.Structs.IconPointer;
+using SF3.Models.Structs.Shared;
 
-namespace SF3.Models.Tables.IconPointer {
+namespace SF3.Models.Tables.Shared {
     public class ItemIconTable : ResourceTable<ItemIcon> {
         protected ItemIconTable(IByteData data, string name, string resourceFile, int address, bool has16BitIconAddr)
         : base(data, name, resourceFile, address, 300) {

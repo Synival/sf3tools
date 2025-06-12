@@ -1,7 +1,7 @@
 using CommonLib.Attributes;
 using SF3.ByteData;
 
-namespace SF3.Models.Structs.IconPointer {
+namespace SF3.Models.Structs.Shared {
     public class ItemIcon : Struct {
         private readonly int _theItemIconAddr;
 
