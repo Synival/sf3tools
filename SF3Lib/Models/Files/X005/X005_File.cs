@@ -8,7 +8,7 @@ using SF3.Types;
 
 namespace SF3.Models.Files.X005 {
     public class X005_File : ScenarioTableFile, IX005_File {
-        public int RamAddress { get; }
+        public override int RamAddress { get; }
 
         public static int GetRamOffset(ScenarioType scenario) {
             switch (scenario) {

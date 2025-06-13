@@ -21,11 +21,12 @@ using CommonLib.Types;
 
 namespace SF3.Models.Files.X1 {
     public class X1_File : ScenarioTableFile, IX1_File {
+        public override int RamAddress { get; }
         public const uint X1RamUpperLimit = 0x06068000;
 
         protected X1_File(IByteData data, INameGetterContext nameContext, ScenarioType scenario, bool isBTL99) : base(data, nameContext, scenario) {
             IsBTL99 = isBTL99;
-            RamAddress = IsBTL99 ? 0x06060000u : Scenario == ScenarioType.Scenario1 ? 0x0605f000u : 0x0605e000u;
+            RamAddress = IsBTL99 ? 0x06060000 : Scenario == ScenarioType.Scenario1 ? 0x0605f000 : 0x0605e000;
         }
 
         public static X1_File Create(IByteData data, INameGetterContext nameContext, ScenarioType scenario, bool isBTL99) {
@@ -202,8 +203,8 @@ namespace SF3.Models.Files.X1 {
 
             // Locate difficult-to-find common functions/data that are shared between X1 files.
             var searchData = Data.GetDataCopy();
-            Discoveries = new DiscoveryContext(searchData, RamAddress);
-            Discoveries.DiscoverUnknownPointersToValueRange(RamAddress, X1RamUpperLimit - 1);
+            Discoveries = new DiscoveryContext(searchData, (uint) RamAddress);
+            Discoveries.DiscoverUnknownPointersToValueRange((uint) RamAddress, X1RamUpperLimit - 1);
             DiscoverFunctions(searchData);
             tables.AddRange(DiscoverData(tables, searchData));
 
@@ -228,7 +229,7 @@ namespace SF3.Models.Files.X1 {
 
             foreach (var func in funcs) {
                 for (int i = 0; i < func.Indices.Length; i++)
-                    _ = Discoveries.AddFunction((uint) func.Indices[i] + RamAddress, func.Info.TypeName, (i == 0 ? "" : $"DUP{i}_") + func.Info.Name, func.Size);
+                    _ = Discoveries.AddFunction((uint) (func.Indices[i] + RamAddress), func.Info.TypeName, (i == 0 ? "" : $"DUP{i}_") + func.Info.Name, func.Size);
             }
 
             // Add functions in the interactable table.
@@ -542,7 +543,7 @@ namespace SF3.Models.Files.X1 {
             var addrMax = Data.Length - 3;
             for (uint addr = 0; addr < addrMax; addr += 4) {
                 // If this is an actual pointer here, it can't possibly be a script.
-                var ramAddr = addr + RamAddress;
+                var ramAddr = addr + (uint) RamAddress;
                 if (discoveredPointersByRamAddr.ContainsKey(ramAddr) || knownScriptRamAddrs.Contains(ramAddr))
                     continue;
                 if (ActorScriptUtils.DataLooksLikeBeginningOfScript(Data, addr)) {
@@ -705,7 +706,6 @@ namespace SF3.Models.Files.X1 {
 
         public override string Title => base.Title + " Type: " + (IsBTL99 ? "BTL99" : IsBattle == true ? "Battle" : "Town");
 
-        public uint RamAddress { get; }
         public bool IsBTL99 { get; }
         public bool IsBattle { get; private set; }
 

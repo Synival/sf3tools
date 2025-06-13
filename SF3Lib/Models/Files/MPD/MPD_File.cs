@@ -21,7 +21,8 @@ using static CommonLib.Imaging.PixelConversion;
 
 namespace SF3.Models.Files.MPD {
     public class MPD_File : ScenarioTableFile, IMPD_File {
-        private const int c_RamOffset = 0x290000;
+        public override int RamAddress => c_RamAddress;
+        private const int c_RamAddress = 0x00290000;
         private const int c_SurfaceModelChunkSize = 0xCF00;
 
         protected MPD_File(IByteData data, Dictionary<ScenarioType, INameGetterContext> nameContexts) : base(data, nameContexts?[DetectScenario(data)], DetectScenario(data)) {
@@ -63,8 +64,8 @@ namespace SF3.Models.Files.MPD {
 
         public static ScenarioType DetectScenario(IByteData data) {
             // Get addresses we need to check.
-            var headerAddrPtr = data.GetDouble(0x0000) - c_RamOffset;
-            var headerAddr    = data.GetDouble(headerAddrPtr) - c_RamOffset;
+            var headerAddrPtr = data.GetDouble(0x0000) - c_RamAddress;
+            var headerAddr    = data.GetDouble(headerAddrPtr) - c_RamAddress;
 
             var chunk18Addr   = data.GetDouble(0x2090);
             var chunk19Addr   = data.GetDouble(0x2098);
@@ -118,8 +119,8 @@ namespace SF3.Models.Files.MPD {
         }
 
         private MPDHeaderModel MakeHeader() {
-            var headerAddrPtr = Data.GetDouble(0x0000) - c_RamOffset;
-            var headerAddr = Data.GetDouble(headerAddrPtr) - c_RamOffset;
+            var headerAddrPtr = Data.GetDouble(0x0000) - RamAddress;
+            var headerAddr = Data.GetDouble(headerAddrPtr) - RamAddress;
             return (MPDHeader = new MPDHeaderModel(Data, 0, "MPDHeader", headerAddr, Scenario));
         }
 
@@ -129,7 +130,7 @@ namespace SF3.Models.Files.MPD {
             tables.AddRange(MakeLightingTables(header));
             tables.AddRange(MakeTexturePaletteTables(header));
             tables.AddRange(MakeTextureAnimationTables(header, areAnimatedTextures32Bit));
-            tables.Add(BoundariesTable = BoundaryTable.Create(Data, "Boundaries", ResourceFile("BoundaryList.xml"), header.OffsetBoundaries - c_RamOffset));
+            tables.Add(BoundariesTable = BoundaryTable.Create(Data, "Boundaries", ResourceFile("BoundaryList.xml"), header.OffsetBoundaries - RamAddress));
             tables.AddRange(MakeMovableModelCollections(header));
             tables.AddRange(MakeUnknownTables(header));
 
@@ -141,17 +142,17 @@ namespace SF3.Models.Files.MPD {
 
         private ITable[] MakeTexturePaletteTables(MPDHeaderModel header) {
             PaletteTables = new ColorTable[3];
-            var headerRamAddr = header.Address + c_RamOffset;
+            var headerRamAddr = header.Address + RamAddress;
 
             // Sometimes palette addresses are placed in an odd place at or just before the header actually begins.
             // This is most likely an error in the MPD file; it results in garbage data.
             // Don't load the palettes in these cases.
-            if (header.OffsetPal1 >= c_RamOffset && (headerRamAddr - header.OffsetPal1) / 2 >= 256)
-                PaletteTables[0] = ColorTable.Create(Data, "TexturePalette1", header.OffsetPal1 - c_RamOffset, 256);
-            if (header.OffsetPal2 >= c_RamOffset && (headerRamAddr - header.OffsetPal2) / 2 >= 256)
-                PaletteTables[1] = ColorTable.Create(Data, "TexturePalette2", header.OffsetPal2 - c_RamOffset, 256);
-            if (Scenario >= ScenarioType.Scenario3 && header.OffsetPal3 >= c_RamOffset && (headerRamAddr - header.OffsetPal3) / 2 >= 256)
-                PaletteTables[2] = ColorTable.Create(Data, "TexturePalette3", header.OffsetPal3 - c_RamOffset, 256);
+            if (header.OffsetPal1 >= RamAddress && (headerRamAddr - header.OffsetPal1) / 2 >= 256)
+                PaletteTables[0] = ColorTable.Create(Data, "TexturePalette1", header.OffsetPal1 - RamAddress, 256);
+            if (header.OffsetPal2 >= RamAddress && (headerRamAddr - header.OffsetPal2) / 2 >= 256)
+                PaletteTables[1] = ColorTable.Create(Data, "TexturePalette2", header.OffsetPal2 - RamAddress, 256);
+            if (Scenario >= ScenarioType.Scenario3 && header.OffsetPal3 >= RamAddress && (headerRamAddr - header.OffsetPal3) / 2 >= 256)
+                PaletteTables[2] = ColorTable.Create(Data, "TexturePalette3", header.OffsetPal3 - RamAddress, 256);
 
             return PaletteTables.Where(x => x != null).ToArray();
         }
@@ -160,14 +161,14 @@ namespace SF3.Models.Files.MPD {
             var tables = new List<ITable>();
 
             if (header.OffsetLightPalette != 0)
-                tables.Add(LightPalette = ColorTable.Create(Data, "LightPalette", header.OffsetLightPalette - c_RamOffset, 32));
+                tables.Add(LightPalette = ColorTable.Create(Data, "LightPalette", header.OffsetLightPalette - RamAddress, 32));
             if (header.OffsetLightPosition != 0)
-                LightPosition = new LightPosition(Data, 0, "LightPositions", header.OffsetLightPosition - c_RamOffset);
+                LightPosition = new LightPosition(Data, 0, "LightPositions", header.OffsetLightPosition - RamAddress);
             if (header.OffsetLightAdjustment != 0)
-                LightAdjustment = new LightAdjustmentModel(Data, 0, "LightAdjustment", header.OffsetLightAdjustment - c_RamOffset, Scenario);
+                LightAdjustment = new LightAdjustmentModel(Data, 0, "LightAdjustment", header.OffsetLightAdjustment - RamAddress, Scenario);
 
             if (header.OffsetGradient != 0)
-                tables.Add(GradientTable = GradientTable.Create(Data, "Gradients", header.OffsetGradient - c_RamOffset));
+                tables.Add(GradientTable = GradientTable.Create(Data, "Gradients", header.OffsetGradient - RamAddress));
 
             return tables.ToArray();
         }
@@ -177,7 +178,7 @@ namespace SF3.Models.Files.MPD {
 
             if (header.OffsetTextureAnimations != 0) {
                 try {
-                    tables.Add(TextureAnimations = TextureAnimationTable.Create(Data, "TextureAnimations", header.OffsetTextureAnimations - c_RamOffset, areAnimatedTextures32Bit));
+                    tables.Add(TextureAnimations = TextureAnimationTable.Create(Data, "TextureAnimations", header.OffsetTextureAnimations - RamAddress, areAnimatedTextures32Bit));
                 }
                 catch {
                     // TODO: what to do here??
@@ -186,7 +187,7 @@ namespace SF3.Models.Files.MPD {
 
             if (header.OffsetTextureAnimAlt != 0) {
                 try {
-                    tables.Add(TextureAnimationsAlt = TextureIDTable.Create(Data, "TextureAnimationsAlt", header.OffsetTextureAnimAlt - c_RamOffset, 2, 0x100));
+                    tables.Add(TextureAnimationsAlt = TextureIDTable.Create(Data, "TextureAnimationsAlt", header.OffsetTextureAnimAlt - RamAddress, 2, 0x100));
                 }
                 catch {
                     // TODO: what to do here??
@@ -209,7 +210,7 @@ namespace SF3.Models.Files.MPD {
                 if (offset == 0)
                     continue;
 
-                var newModel = ModelCollection.Create(Data, NameGetterContext, offset - c_RamOffset, "MovableModels" + (i + 1), i);
+                var newModel = ModelCollection.Create(Data, NameGetterContext, offset - RamAddress, "MovableModels" + (i + 1), i);
                 modelsList.Add(newModel);
                 tables.AddRange(newModel.Tables);
             }
@@ -224,20 +225,20 @@ namespace SF3.Models.Files.MPD {
 
             // TODO: put somewhere else!!
             if (header.OffsetModelSwitchGroups != 0) {
-                tables.Add(ModelSwitchGroupsTable = ModelSwitchGroupsTable.Create(Data, "ModelSwitchGroups", header.OffsetModelSwitchGroups - c_RamOffset));
+                tables.Add(ModelSwitchGroupsTable = ModelSwitchGroupsTable.Create(Data, "ModelSwitchGroups", header.OffsetModelSwitchGroups - RamAddress));
 
                 VisibleModelsWhenFlagOffByAddr = ModelSwitchGroupsTable
                     .Where(x => x.VisibleModelsWhenFlagOffOffset > 0)
                     .ToDictionary(
                         x => (int) x.VisibleModelsWhenFlagOffOffset,
-                        x => ModelIDTable.Create(Data, x.Name + "_FlagOffIDs (0x" + x.VisibleModelsWhenFlagOffOffset.ToString("X") + ")", (int) x.VisibleModelsWhenFlagOffOffset - c_RamOffset)
+                        x => ModelIDTable.Create(Data, x.Name + "_FlagOffIDs (0x" + x.VisibleModelsWhenFlagOffOffset.ToString("X") + ")", (int) x.VisibleModelsWhenFlagOffOffset - RamAddress)
                     );
 
                 VisibleModelsWhenFlagOnByAddr = ModelSwitchGroupsTable
                     .Where(x => x.VisibleModelsWhenFlagOnOffset > 0)
                     .ToDictionary(
                         x => (int) x.VisibleModelsWhenFlagOnOffset,
-                        x => ModelIDTable.Create(Data, x.Name + "_FlagOnIDs (0x" + x.VisibleModelsWhenFlagOnOffset.ToString("X") + ")", (int) x.VisibleModelsWhenFlagOnOffset - c_RamOffset)
+                        x => ModelIDTable.Create(Data, x.Name + "_FlagOnIDs (0x" + x.VisibleModelsWhenFlagOnOffset.ToString("X") + ")", (int) x.VisibleModelsWhenFlagOnOffset - RamAddress)
                     );
 
                 tables.AddRange(VisibleModelsWhenFlagOffByAddr.Values);
@@ -246,11 +247,11 @@ namespace SF3.Models.Files.MPD {
 
             // TODO: put somewhere else!!
             if (header.OffsetGroundAnimation != 0)
-                tables.Add(GroundAnimationTable = UnknownUInt8Table.Create(Data, "ScrollScreenAnimations", header.OffsetGroundAnimation - c_RamOffset, null, 0xFF));
+                tables.Add(GroundAnimationTable = UnknownUInt8Table.Create(Data, "ScrollScreenAnimations", header.OffsetGroundAnimation - RamAddress, null, 0xFF));
 
             // TODO: put somewhere else!!
             if (header.OffsetIndexedTextures != 0)
-                tables.Add(IndexedTextureTable = TextureIDTable.Create(Data, "IndexedTextures", header.OffsetIndexedTextures - c_RamOffset, 4, 0x100));
+                tables.Add(IndexedTextureTable = TextureIDTable.Create(Data, "IndexedTextures", header.OffsetIndexedTextures - RamAddress, 4, 0x100));
 
             // This table is only present before Scenario 2 and is always 32 bytes if it exists.
             if (header.OffsetUnknown1 != 0) {
@@ -277,11 +278,11 @@ namespace SF3.Models.Files.MPD {
                 var size = Math.Min(32, lengthInBytes / 2);
 
                 if (size > 0)
-                    tables.Add(Unknown1Table = UnknownUInt16Table.Create(Data, "Unknown1", header.OffsetUnknown1 - c_RamOffset, size, null));
+                    tables.Add(Unknown1Table = UnknownUInt16Table.Create(Data, "Unknown1", header.OffsetUnknown1 - RamAddress, size, null));
             }
 
             if (header.OffsetUnknown2 != 0)
-                tables.Add(Unknown2Table = UnknownUInt16Table.Create(Data, "Unknown2", header.OffsetUnknown2 - c_RamOffset, 32, 0xFFFF));
+                tables.Add(Unknown2Table = UnknownUInt16Table.Create(Data, "Unknown2", header.OffsetUnknown2 - RamAddress, 32, 0xFFFF));
 
             return tables.ToArray();
         }
@@ -399,7 +400,7 @@ namespace SF3.Models.Files.MPD {
             ChunkData chunkData = null;
 
             try {
-                byteArraySegment = new ByteArraySegment(Data.Data, ChunkLocations[chunkIndex].ChunkRAMAddress - c_RamOffset, ChunkLocations[chunkIndex].ChunkSize);
+                byteArraySegment = new ByteArraySegment(Data.Data, ChunkLocations[chunkIndex].ChunkRAMAddress - RamAddress, ChunkLocations[chunkIndex].ChunkSize);
                 chunkData = new ChunkData(byteArraySegment, isCompressed, chunkIndex);
             }
             catch {
@@ -418,14 +419,14 @@ namespace SF3.Models.Files.MPD {
                 var chunkName = chunkLocations.Name;
                 if (a.Moved) {
                     // Figure out how much the offset has changed.
-                    var oldOffset = chunkLocations.ChunkRAMAddress - c_RamOffset;
+                    var oldOffset = chunkLocations.ChunkRAMAddress - RamAddress;
                     var newOffset = byteArraySegment.Offset;
                     var offsetDelta = newOffset - oldOffset;
                     if (offsetDelta == 0)
                         return;
 
                     // Update the address in the chunk table.
-                    chunkLocations.ChunkRAMAddress = newOffset + c_RamOffset;
+                    chunkLocations.ChunkRAMAddress = newOffset + RamAddress;
 
                     // Chunks after this one with something assigned to ChunkData[] will have their
                     // ChunkAddress updated automatically. For chunks without a ChunkData[] after this one

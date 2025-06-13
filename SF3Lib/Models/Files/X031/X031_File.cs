@@ -11,7 +11,10 @@ using static SF3.Utils.ResourceUtils;
 
 namespace SF3.Models.Files.X031 {
     public class X031_File : ScenarioTableFile, IX031_File {
+        public override int RamAddress { get; }
+
         protected X031_File(IByteData data, INameGetterContext nameContext, ScenarioType scenario) : base(data, nameContext, scenario) {
+            RamAddress = (Scenario >= ScenarioType.Scenario2) ? 0x0604C800 : 0x06053000;
         }
 
         public static X031_File Create(IByteData data, INameGetterContext nameContext, ScenarioType scenario) {

@@ -8,7 +8,7 @@ using SF3.Types;
 
 namespace SF3.Models.Files.X027 {
     public class X027_File : ScenarioTableFile, IX027_File {
-        public int RamAddress => 0x06078000;
+        public override int RamAddress => 0x06078000;
 
         protected X027_File(IByteData data, INameGetterContext nameContext, ScenarioType scenario) : base(data, nameContext, scenario) {
         }

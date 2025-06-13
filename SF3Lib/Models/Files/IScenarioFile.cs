@@ -9,5 +9,10 @@ namespace SF3.Models.Files {
         /// The scenario/disc/file to edit.
         /// </summary>
         ScenarioType Scenario { get; }
+
+        /// <summary>
+        /// Address in RAM in to which this file is loaded.
+        /// </summary>
+        int RamAddress { get; }
     }
 }

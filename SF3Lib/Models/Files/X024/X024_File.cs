@@ -8,7 +8,7 @@ using SF3.Types;
 
 namespace SF3.Models.Files.X024 {
     public class X024_File : ScenarioTableFile, IX024_File {
-        public int RamAddress { get; }
+        public override int RamAddress { get; }
 
         protected X024_File(IByteData data, INameGetterContext nameContext, ScenarioType scenario) : base(data, nameContext, scenario) {
             RamAddress = GetRamAddress();
