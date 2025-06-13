@@ -1082,7 +1082,7 @@
     <item value="0x0437" name="Quonos Mansion checked" />
     <item value="0x0438" name="Tables moved Quonos" />
     <item value="0x0439" name="Boxes moved Quonos" />
-    <item value="0x043A" name="Doors moved quonos" />
+    <item value="0x043A" name="Doors moved Quonos" />
     <item value="0x043B" name="" />
     <item value="0x043C" name="" />
     <item value="0x043D" name="Kyon-shi died (Weapon Shop)" />
@@ -1180,9 +1180,9 @@
     <item value="0x0499" name="Battle 121 Ending Cutscene" />
     <item value="0x049A" name="" />
     <item value="0x049B" name="" />
-    <item value="0x049C" name="Quonus mansion barrel" />
-    <item value="0x049D" name="Quonus mansion barrel with healing drop" />
-    <item value="0x049E" name="Quonus mansion barrel" />
+    <item value="0x049C" name="Quonos mansion barrel" />
+    <item value="0x049D" name="Quonos mansion barrel with healing drop" />
+    <item value="0x049E" name="Quonos mansion barrel" />
     <item value="0x049F" name="Battle 114 barrel" />
     <item value="0x04A0" name="" />
     <item value="0x04A1" name="" />
@@ -1536,134 +1536,134 @@
     <item value="0x05FD" name="" />
     <item value="0x05FE" name="" />
     <item value="0x05FF" name="" />
-    <item value="0x0600" name="Scn1 autodeal unknown shop no item" />
-    <item value="0x0601" name="Scn1 autodeal saraband no item" />
-    <item value="0x0602" name="Scn1 autodeal balsamo no item" />
-    <item value="0x0603" name="Scn1 Railhead Auto Deal (Power Ankh)" />
-    <item value="0x0604" name="Scn1 autodeal 4th car no item" />
-    <item value="0x0605" name="Scn1 Quonos Auto Deal (Bronze Rod)" />
-    <item value="0x0606" name="Scn1 Vagabond 1 Auto Deal (Magic Wand)" />
-    <item value="0x0607" name="Scn1 Aspia Auto Deal (Saint Ankh)" />
-    <item value="0x0608" name="Scn1 autodeal storich no item" />
-    <item value="0x0609" name="Scn1 Flagard Auto Deal (Talisman Rod)" />
-    <item value="0x060A" name="Scn1 Lookover Auto Deal (Angel Wand)" />
-    <item value="0x060B" name="Scn1 Vagabond 2 Auto Deal (Misty Ankh)" />
-    <item value="0x060C" name="Scn1 autodeal Malorie no item" />
+    <item value="0x0600" name="Scn1 Auto Deal Unknown Shop (no item)" />
+    <item value="0x0601" name="Scn1 Auto Deal Saraband (no item)" />
+    <item value="0x0602" name="Scn1 Auto Deal Balsamo (no item)" />
+    <item value="0x0603" name="Scn1 Auto Deal Railhead (Power Ankh)" />
+    <item value="0x0604" name="Scn1 Auto Deal 4th Car (no item)" />
+    <item value="0x0605" name="Scn1 Auto Deal Quonos (Bronze Rod)" />
+    <item value="0x0606" name="Scn1 Auto Deal Vagabond 1 (Magic Wand)" />
+    <item value="0x0607" name="Scn1 Auto Deal Aspia (Saint Ankh)" />
+    <item value="0x0608" name="Scn1 Auto Deal Storich (no item)" />
+    <item value="0x0609" name="Scn1 Auto Deal Flagard (Talisman Rod)" />
+    <item value="0x060A" name="Scn1 Auto Deal Lookover (Angel Wand)" />
+    <item value="0x060B" name="Scn1 Auto Deal Vagabond 2 (Misty Ankh)" />
+    <item value="0x060C" name="Scn1 Auto Deal Malorie (no item)" />
     <item value="0x060D" name="Free space?" />
     <item value="0x060E" name="Free space?" />
     <item value="0x060F" name="Free space?" />
-    <item value="0x0610" name="Scn2 auto deal unknown shop no item" />
-    <item value="0x0611" name="Scn2 autodeal saraband1 no item" />
-    <item value="0x0612" name="Scn2 autodeal balsamo no item" />
-    <item value="0x0613" name="Scn2 autodeal dusty no item" />
-    <item value="0x0614" name="Scn2 autodeal anafect (Power Ankh)" />
-    <item value="0x0615" name="Scn2 autodeal rhineside no item" />
-    <item value="0x0616" name="Scn2 autodeal stump village (Bronze Rod)" />
-    <item value="0x0617" name="Scn2 auto deal barrand" />
-    <item value="0x0618" name="Scn2 autodeal elblesem" />
-    <item value="0x0619" name="Scn2 autodeal seagate no item" />
-    <item value="0x061A" name="Scn2 auto deal saraband2" />
-    <item value="0x061B" name="Scn2 auto deal airo" />
-    <item value="0x061C" name="Scn2 auto deal swampland" />
-    <item value="0x061D" name="Scn2 auto deal storich1 no item" />
-    <item value="0x061E" name="Scn2 auto deal storich2 no item" />
+    <item value="0x0610" name="Scn2 Auto Deal Unknown Shop (no item)" />
+    <item value="0x0611" name="Scn2 Auto Deal Saraband 1 (no item)" />
+    <item value="0x0612" name="Scn2 Auto Deal Balsamo (no item)" />
+    <item value="0x0613" name="Scn2 Auto Deal Dusty (no item)" />
+    <item value="0x0614" name="Scn2 Auto Deal Anafect (Power Ankh)" />
+    <item value="0x0615" name="Scn2 Auto Deal Rhineside (no item)" />
+    <item value="0x0616" name="Scn2 Auto Deal Stump Village (Bronze Rod)" />
+    <item value="0x0617" name="Scn2 Auto Deal Barrand" />
+    <item value="0x0618" name="Scn2 Auto Deal Elbesem" />
+    <item value="0x0619" name="Scn2 Auto Deal Seagate (no item)" />
+    <item value="0x061A" name="Scn2 Auto Deal Saraband 2" />
+    <item value="0x061B" name="Scn2 Auto Deal Airo" />
+    <item value="0x061C" name="Scn2 Auto Deal Swampland" />
+    <item value="0x061D" name="Scn2 Auto Deal Storich 1 (no item)" />
+    <item value="0x061E" name="Scn2 Auto Deal Storich 2 (no item)" />
     <item value="0x061F" name="Free space?" />
-    <item value="0x0620" name="Scn3 haggle flagship" />
-    <item value="0x0621" name="Scn3 haggle port of destonia" />
-    <item value="0x0622" name="Scn3 haggle port of destonia revisit" />
-    <item value="0x0623" name="Scn3 haggle foothill" />
-    <item value="0x0624" name="Scn3 haggle guarder" />
-    <item value="0x0625" name="Scn3 haggle baersol item 1" />
-    <item value="0x0626" name="Scn3 haggle baersol item 2" />
-    <item value="0x0627" name="Scn3 haggle aspia item 1" />
-    <item value="0x0628" name="Scn3 haggle aspia item 2" />
-    <item value="0x0629" name="Scn3 haggle aural item 1" />
-    <item value="0x062A" name="Scn3 haggle aural item 2" />
-    <item value="0x062B" name="Scn3 haggle maya item 1" />
-    <item value="0x062C" name="Scn3 haggle maya item 2" />
-    <item value="0x062D" name="Scn3 haggle bowlet item 1" />
-    <item value="0x062E" name="Scn3 haggle bowlet item 2" />
-    <item value="0x062F" name="Scn3 haggle dormant item 1" />
-    <item value="0x0630" name="Scn3 haggle dormant item 2" />
-    <item value="0x0631" name="Scn3  haggle dormant item 3" />
-    <item value="0x0632" name="Scn3 haggle dormant item 4" />
-    <item value="0x0633" name="Scn3 haggle flagship2 item 1" />
-    <item value="0x0634" name="Scn3 haggle flagship2 item 2" />
-    <item value="0x0635" name="Scn3 haggle flagship2 item 3" />
-    <item value="0x0636" name="Scn3 haggle flagship2 item 4" />
-    <item value="0x0637" name="Scn3 haggle flagship2 item 5" />
-    <item value="0x0638" name="Scn3 haggle remotest item 1" />
-    <item value="0x0639" name="Scn3 haggle remotest item 2" />
-    <item value="0x063A" name="Scn3 haggle remotest item 3" />
-    <item value="0x063B" name="Scn3 haggle remotest item 4" />
-    <item value="0x063C" name="Scn3 haggle remotest item 5" />
+    <item value="0x0620" name="Scn3 Haggle Flagship" />
+    <item value="0x0621" name="Scn3 Haggle Port of Destonia" />
+    <item value="0x0622" name="Scn3 Haggle Port of Destonia Revisit" />
+    <item value="0x0623" name="Scn3 Haggle Foothill" />
+    <item value="0x0624" name="Scn3 Haggle Guarder" />
+    <item value="0x0625" name="Scn3 Haggle Baersol Item 1" />
+    <item value="0x0626" name="Scn3 Haggle Baersol Item 2" />
+    <item value="0x0627" name="Scn3 Haggle Aspia Item 1" />
+    <item value="0x0628" name="Scn3 Haggle Aspia Item 2" />
+    <item value="0x0629" name="Scn3 Haggle Aural Item 1" />
+    <item value="0x062A" name="Scn3 Haggle Aural Item 2" />
+    <item value="0x062B" name="Scn3 Haggle Maya Item 1" />
+    <item value="0x062C" name="Scn3 Haggle Maya Item 2" />
+    <item value="0x062D" name="Scn3 Haggle Bowlet Item 1" />
+    <item value="0x062E" name="Scn3 Haggle Bowlet Item 2" />
+    <item value="0x062F" name="Scn3 Haggle Dormant Item 1" />
+    <item value="0x0630" name="Scn3 Haggle Dormant Item 2" />
+    <item value="0x0631" name="Scn3 Haggle Dormant Item 3" />
+    <item value="0x0632" name="Scn3 Haggle Dormant Item 4" />
+    <item value="0x0633" name="Scn3 Haggle Flagship 2 Item 1" />
+    <item value="0x0634" name="Scn3 Haggle Flagship 2 Item 2" />
+    <item value="0x0635" name="Scn3 Haggle Flagship 2 Item 3" />
+    <item value="0x0636" name="Scn3 Haggle Flagship 2 Item 4" />
+    <item value="0x0637" name="Scn3 Haggle Flagship 2 Item 5" />
+    <item value="0x0638" name="Scn3 Haggle Remotest Item 1" />
+    <item value="0x0639" name="Scn3 Haggle Remotest Item 2" />
+    <item value="0x063A" name="Scn3 Haggle Remotest Item 3" />
+    <item value="0x063B" name="Scn3 Haggle Remotest Item 4" />
+    <item value="0x063C" name="Scn3 Haggle Remotest Item 5" />
     <item value="0x063D" name="Free space?" />
     <item value="0x063E" name="Free space?" />
     <item value="0x063F" name="Free space?" />
-    <item value="0x0640" name="Scn1 Balsamo Haggle Deal Potion" />
-    <item value="0x0641" name="Scn1 Balsamo Haggle Deal Goddess tear" />
-    <item value="0x0642" name="Scn1 Railhead Haggle Loin Cloth" />
-    <item value="0x0643" name="Scn1 Railhead Haggle Potion" />
-    <item value="0x0644" name="Scn1 haggle 4th car" />
-    <item value="0x0645" name="Scn1 haggle quonos item 1" />
-    <item value="0x0646" name="Scn1 haggle quonos item 2" />
-    <item value="0x0647" name="Scn1 haggle vagabond1" />
-    <item value="0x0648" name="Scn1 haggle aspia" />
-    <item value="0x0649" name="Scn1 haggle storich item 1" />
-    <item value="0x064A" name="Scn1 haggle storich item 2" />
-    <item value="0x064B" name="Scn1 haggle flagard item 1" />
-    <item value="0x064C" name="Scn1 haggle flagard item 2" />
-    <item value="0x064D" name="Scn1 haggle lookover item 1" />
-    <item value="0x064E" name="Scn1 haggle lookover item 2" />
-    <item value="0x064F" name="Scn1 haggle lookover item 3" />
-    <item value="0x0650" name="Scn1 haggle lookover item 4" />
-    <item value="0x0651" name="Scn1 haggle vagabond2 item 1" />
-    <item value="0x0652" name="Scn1 haggle vagabond2 item 2" />
-    <item value="0x0653" name="Scn1 haggle malorie item 1" />
-    <item value="0x0654" name="Scn1 haggle malorie item 2" />
-    <item value="0x0655" name="Scn1 haggle malorie item 3" />
-    <item value="0x0656" name="Scn1 haggle malorie item 4" />
-    <item value="0x0657" name="Scn1 haggle malorie item 5" />
-    <item value="0x0658" name="Scn2 haggles balsamo item 1" />
-    <item value="0x0659" name="Scn2 haggles balsamo item 2" />
-    <item value="0x065A" name="Scn2 haggles dusty item 1" />
-    <item value="0x065B" name="Scn2 haggles dusty item 2" />
-    <item value="0x065C" name="Scn2 haggles anafect item 1" />
-    <item value="0x065D" name="Scn2 haggles anafect item 2" />
-    <item value="0x065E" name="Scn2 haggles rhineside" />
-    <item value="0x065F" name="Scn2 haggles stump village item 1" />
-    <item value="0x0660" name="Scn2 haggles stump village item 2" />
-    <item value="0x0661" name="Scn2 haggles barrand" />
-    <item value="0x0662" name="Scn2 haggles elblesem" />
-    <item value="0x0663" name="Scn2 haggles seagate" />
-    <item value="0x0664" name="Scn2 haggles saraband2 item 1" />
-    <item value="0x0665" name="Scn2 haggles saraband2 item 2" />
-    <item value="0x0666" name="Scn2 haggles saraband2 item 3" />
-    <item value="0x0667" name="Scn2 haggles saraband2 item 4" />
-    <item value="0x0668" name="Scn2 haggles saraband2 item 5" />
-    <item value="0x0669" name="Scn2 haggles airo item 1" />
-    <item value="0x066A" name="Scn2 haggles airo item 2" />
-    <item value="0x066B" name="Scn2 haggles airo item 3" />
-    <item value="0x066C" name="Scn2 haggles swampland item 1" />
-    <item value="0x066D" name="Scn2 haggles swampland item 2" />
-    <item value="0x066E" name="Scn2 haggles swampland item 3" />
-    <item value="0x066F" name="Scn2 haggles storich item 1" />
-    <item value="0x0670" name="Scn2 haggles storich item 2" />
-    <item value="0x0671" name="Scn2 haggles storich item 3" />
-    <item value="0x0672" name="Scn2 haggles storich item 4" />
-    <item value="0x0673" name="Scn2 haggles storich item 5" />
-    <item value="0x0674" name="Scn3 autodeals port of destonia" />
-    <item value="0x0675" name="Scn3 autodeals port of destonia revisit" />
-    <item value="0x0676" name="Scn3 autodeals foothill" />
-    <item value="0x0677" name="Scn3 autodeals gaurder" />
-    <item value="0x0678" name="Scn3 autodeals baersol" />
-    <item value="0x0679" name="Scn3 autodeals aspia no item" />
-    <item value="0x067A" name="Scn3 autodeals aural no item" />
-    <item value="0x067B" name="Scn3 autodeals maya" />
-    <item value="0x067C" name="Scn3 autodeals bowlet" />
-    <item value="0x067D" name="Scn3 autodeals dormant" />
-    <item value="0x067E" name="Scn3 autodeals flagship2" />
-    <item value="0x067F" name="Scn3 autodeals remotest" />
+    <item value="0x0640" name="Scn1 Haggle Balsamo Potion" />
+    <item value="0x0641" name="Scn1 Haggle Balsamo Goddess Tear" />
+    <item value="0x0642" name="Scn1 Haggle Railhead Loincloth" />
+    <item value="0x0643" name="Scn1 Haggle Railhead Potion" />
+    <item value="0x0644" name="Scn1 Haggle 4th Car" />
+    <item value="0x0645" name="Scn1 Haggle Quonos Item 1" />
+    <item value="0x0646" name="Scn1 Haggle Quonos Item 2" />
+    <item value="0x0647" name="Scn1 Haggle Vagabond 1" />
+    <item value="0x0648" name="Scn1 Haggle Aspia" />
+    <item value="0x0649" name="Scn1 Haggle Storich Item 1" />
+    <item value="0x064A" name="Scn1 Haggle Storich iIem 2" />
+    <item value="0x064B" name="Scn1 Haggle Flagard Item 1" />
+    <item value="0x064C" name="Scn1 Haggle Flagard Item 2" />
+    <item value="0x064D" name="Scn1 Haggle Lookover Item 1" />
+    <item value="0x064E" name="Scn1 Haggle Lookover Item 2" />
+    <item value="0x064F" name="Scn1 Haggle Lookover Item 3" />
+    <item value="0x0650" name="Scn1 Haggle Lookover Item 4" />
+    <item value="0x0651" name="Scn1 Haggle Vagabond 2 Item 1" />
+    <item value="0x0652" name="Scn1 Haggle Vagabond 2 Item 2" />
+    <item value="0x0653" name="Scn1 Haggle Malorie Item 1" />
+    <item value="0x0654" name="Scn1 Haggle Malorie Item 2" />
+    <item value="0x0655" name="Scn1 Haggle Malorie Item 3" />
+    <item value="0x0656" name="Scn1 Haggle Malorie Item 4" />
+    <item value="0x0657" name="Scn1 Haggle Malorie Item 5" />
+    <item value="0x0658" name="Scn2 Haggle Balsamo Item 1" />
+    <item value="0x0659" name="Scn2 Haggle Balsamo Item 2" />
+    <item value="0x065A" name="Scn2 Haggle Dusty Item 1" />
+    <item value="0x065B" name="Scn2 Haggle Dusty Item 2" />
+    <item value="0x065C" name="Scn2 Haggle Anafect Item 1" />
+    <item value="0x065D" name="Scn2 Haggle Anafect Item 2" />
+    <item value="0x065E" name="Scn2 Haggle Rhineside" />
+    <item value="0x065F" name="Scn2 Haggle Stump Village Item 1" />
+    <item value="0x0660" name="Scn2 Haggle Stump Village Item 2" />
+    <item value="0x0661" name="Scn2 Haggle Barrand" />
+    <item value="0x0662" name="Scn2 Haggle Elbesem" />
+    <item value="0x0663" name="Scn2 Haggle Seagate" />
+    <item value="0x0664" name="Scn2 Haggle Saraband 2 Item 1" />
+    <item value="0x0665" name="Scn2 Haggle Saraband 2 Item 2" />
+    <item value="0x0666" name="Scn2 Haggle Saraband 2 Item 3" />
+    <item value="0x0667" name="Scn2 Haggle Saraband 2 Item 4" />
+    <item value="0x0668" name="Scn2 Haggle Saraband 2 Item 5" />
+    <item value="0x0669" name="Scn2 Haggle Airo Item 1" />
+    <item value="0x066A" name="Scn2 Haggle Airo Item 2" />
+    <item value="0x066B" name="Scn2 Haggle Airo Item 3" />
+    <item value="0x066C" name="Scn2 Haggle Swampland Item 1" />
+    <item value="0x066D" name="Scn2 Haggle Swampland Item 2" />
+    <item value="0x066E" name="Scn2 Haggle Swampland Item 3" />
+    <item value="0x066F" name="Scn2 Haggle Storich Item 1" />
+    <item value="0x0670" name="Scn2 Haggle Storich Item 2" />
+    <item value="0x0671" name="Scn2 Haggle Storich Item 3" />
+    <item value="0x0672" name="Scn2 Haggle Storich Item 4" />
+    <item value="0x0673" name="Scn2 Haggle Storich Item 5" />
+    <item value="0x0674" name="Scn3 Auto Deals Port of Destonia" />
+    <item value="0x0675" name="Scn3 Auto Deals Port of Destonia Revisit" />
+    <item value="0x0676" name="Scn3 Auto Deals Foothill" />
+    <item value="0x0677" name="Scn3 Auto Deals Guarder" />
+    <item value="0x0678" name="Scn3 Auto Deals Baersol" />
+    <item value="0x0679" name="Scn3 Auto Deals Aspia (no item)" />
+    <item value="0x067A" name="Scn3 Auto Deals Aural (no item)" />
+    <item value="0x067B" name="Scn3 Auto Deals Maya" />
+    <item value="0x067C" name="Scn3 Auto Deals Bowlet" />
+    <item value="0x067D" name="Scn3 Auto Deals Dormant" />
+    <item value="0x067E" name="Scn3 Auto Deals Flagship 2" />
+    <item value="0x067F" name="Scn3 Auto Deals Remotest" />
     <item value="0x0680" name="" />
     <item value="0x0681" name="" />
     <item value="0x0682" name="" />
@@ -2047,7 +2047,7 @@
     <item value="0x07FC" name="" />
     <item value="0x07FD" name="" />
     <item value="0x07FE" name="" />
-    <item value="0x07FF" name="All 5 locked aspia castle chests" />
+    <item value="0x07FF" name="All 5 Locked Aspia Castle Chests" />
     <item value="0x0800" name="Met w/ Synbios in Saraband" />
     <item value="0x0801" name="Unlocks Saraband Imperial Command?, Cutscene part 1" />
     <item value="0x0802" name="Imperial Command Cutscene Part 2" />
