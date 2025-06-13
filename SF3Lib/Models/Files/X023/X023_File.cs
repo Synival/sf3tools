@@ -68,11 +68,13 @@ namespace SF3.Models.Files.X023 {
             var shopItemPtrsAddr = GetShopItemPointersAddr();
             if (shopItemPtrsAddr > 0) {
                 tables.Add(ShopItemsPointerTable = ShopItemsPointerTable.Create(Data, nameof(ShopItemsPointerTable), ResourceFileForScenario(Scenario, "Shops.xml"), shopItemPtrsAddr));
-                ShopItemTablesByAddress = ShopItemsPointerTable
-                    .Select(x => x.ShopItems)
-                    .Distinct()
-                    .OrderBy(x => x)
-                    .Select((x, i) => ShopItemTable.Create(Data, $"{nameof(ShopItemTable)}{i:D2} (@0x{x:X8})", (int) x - RamAddress))
+                var namesByAddr = ShopItemsPointerTable
+                    .GroupBy(x => x.ShopItems)
+                    .ToDictionary(x => x.Key, x => string.Join(", ", x.OrderBy(y => y.ID).Select(y => y.Name)));
+
+                ShopItemTablesByAddress = namesByAddr
+                    .Select(x => x.Key)
+                    .Select((x, i) => ShopItemTable.Create(Data, $"0x{x:X8}: {namesByAddr[x]}", (int) x - RamAddress))
                     .ToDictionary(x => x.Address + RamAddress, x => x);
                 tables.AddRange(ShopItemTablesByAddress.Values);
             }
@@ -81,11 +83,13 @@ namespace SF3.Models.Files.X023 {
             if (shopAutoDealPtrsAddr > 0) {
                 var flagOffset = (Scenario >= ScenarioType.Scenario3) ? RamAddress : (int?) null;
                 tables.Add(ShopAutoDealsPointerTable = ShopAutoDealsPointerTable.Create(Data, nameof(ShopAutoDealsPointerTable), ResourceFileForScenario(Scenario, "ShopDeals.xml"), shopAutoDealPtrsAddr, flagOffset));
-                ShopAutoDealTablesByAddress = ShopAutoDealsPointerTable
-                    .Select(x => x.ShopAutoDeals)
-                    .Distinct()
-                    .OrderBy(x => x)
-                    .Select((x, i) => ShopAutoDealTable.Create(Data, $"{nameof(ShopAutoDealTable)}{i:D2} (@0x{x:X8})", (int) x - RamAddress + (flagOffset.HasValue ? 0x04 : 0x00), !flagOffset.HasValue))
+                var namesByAddr = ShopAutoDealsPointerTable
+                    .GroupBy(x => x.ShopAutoDeals)
+                    .ToDictionary(x => x.Key, x => string.Join(", ", x.OrderBy(y => y.ID).Select(y => y.Name)));
+
+                ShopAutoDealTablesByAddress = namesByAddr
+                    .Select(x => x.Key)
+                    .Select((x, i) => ShopAutoDealTable.Create(Data, $"0x{x:X8}: {namesByAddr[x]}", (int) x - RamAddress + (flagOffset.HasValue ? 0x04 : 0x00), !flagOffset.HasValue))
                     .ToDictionary(x => x.Address + RamAddress, x => x);
                 tables.AddRange(ShopAutoDealTablesByAddress.Values);
             }
@@ -93,11 +97,13 @@ namespace SF3.Models.Files.X023 {
             var shopHagglePtrsAddr = GetShopHagglePointersAddr();
             if (shopHagglePtrsAddr > 0) {
                 tables.Add(ShopHagglesPointerTable = ShopHagglesPointerTable.Create(Data, nameof(ShopHagglesPointerTable), ResourceFileForScenario(Scenario, "ShopDeals.xml"), shopHagglePtrsAddr));
-                ShopHaggleTablesByAddress = ShopHagglesPointerTable
-                    .Select(x => x.ShopHaggles)
-                    .Distinct()
-                    .OrderBy(x => x)
-                    .Select((x, i) => ShopHaggleTable.Create(Data, $"{nameof(ShopHaggleTable)}{i:D2} (@0x{x:X8})", (int) x - RamAddress))
+                var namesByAddr = ShopHagglesPointerTable
+                    .GroupBy(x => x.ShopHaggles)
+                    .ToDictionary(x => x.Key, x => string.Join(", ", x.OrderBy(y => y.ID).Select(y => y.Name)));
+
+                ShopHaggleTablesByAddress = namesByAddr
+                    .Select(x => x.Key)
+                    .Select((x, i) => ShopHaggleTable.Create(Data, $"0x{x:X8}: {namesByAddr[x]}", (int) x - RamAddress))
                     .ToDictionary(x => x.Address + RamAddress, x => x);
                 tables.AddRange(ShopHaggleTablesByAddress.Values);
             }
