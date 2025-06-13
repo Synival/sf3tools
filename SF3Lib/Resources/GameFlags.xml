@@ -1548,7 +1548,7 @@
     <item value="0x0609" name="Scn1 Flagard Auto Deal (Talisman Rod)" />
     <item value="0x060A" name="Scn1 Lookover Auto Deal (Angel Wand)" />
     <item value="0x060B" name="Scn1 Vagabond 2 Auto Deal (Misty Ankh)" />
-    <item value="0x060C" name="Scn1 autodeal Mallory no item" />
+    <item value="0x060C" name="Scn1 autodeal Malorie no item" />
     <item value="0x060D" name="Free space?" />
     <item value="0x060E" name="Free space?" />
     <item value="0x060F" name="Free space?" />
@@ -1557,13 +1557,13 @@
     <item value="0x0612" name="Scn2 autodeal balsamo no item" />
     <item value="0x0613" name="Scn2 autodeal dusty no item" />
     <item value="0x0614" name="Scn2 autodeal anafect (Power Ankh)" />
-    <item value="0x0615" name="Scn2 autodeal lineside no item" />
+    <item value="0x0615" name="Scn2 autodeal rhineside no item" />
     <item value="0x0616" name="Scn2 autodeal stump village (Bronze Rod)" />
-    <item value="0x0617" name="Scn2 auto deal barrad" />
+    <item value="0x0617" name="Scn2 auto deal barrand" />
     <item value="0x0618" name="Scn2 autodeal elblesem" />
     <item value="0x0619" name="Scn2 autodeal seagate no item" />
     <item value="0x061A" name="Scn2 auto deal saraband2" />
-    <item value="0x061B" name="Scn2 auto deal iro" />
+    <item value="0x061B" name="Scn2 auto deal airo" />
     <item value="0x061C" name="Scn2 auto deal swampland" />
     <item value="0x061D" name="Scn2 auto deal storich1 no item" />
     <item value="0x061E" name="Scn2 auto deal storich2 no item" />
@@ -1609,49 +1609,49 @@
     <item value="0x0646" name="Scn1 haggle quonos item 2" />
     <item value="0x0647" name="Scn1 haggle vagabond1" />
     <item value="0x0648" name="Scn1 haggle aspia" />
-    <item value="0x0649" name="Scn1 haggle storich item1" />
-    <item value="0x064A" name="Scn1 haggle storich item2" />
-    <item value="0x064B" name="Scn1 haggle flaggard item1" />
-    <item value="0x064C" name="Scn1 haggle flaggard item2" />
-    <item value="0x064D" name="Scn1 haggle lookover item1" />
-    <item value="0x064E" name="Scn1 haggle lookover item2" />
-    <item value="0x064F" name="Scn1 haggle lookover item3" />
-    <item value="0x0650" name="Scn1 haggle lookover item4" />
-    <item value="0x0651" name="Scn1 haggle vagabond2 item1" />
-    <item value="0x0652" name="Scn1 haggle vagabond2 item2" />
-    <item value="0x0653" name="Scn1 haggle Mallory item 1" />
-    <item value="0x0654" name="Scn1 haggle Mallory item2" />
-    <item value="0x0655" name="Scn1 haggle Mallory item 3" />
-    <item value="0x0656" name="Scn1 haggle Mallory item 4" />
-    <item value="0x0657" name="Scn1 haggle Mallory item5" />
-    <item value="0x0658" name="Scn2 haggles balsumo item 1" />
-    <item value="0x0659" name="Scn2 haggles balsumo item 2" />
-    <item value="0x065A" name="Scn2 haggles dusty item1" />
-    <item value="0x065B" name="Scn2 haggles dusty item2" />
-    <item value="0x065C" name="Scn2 haggles anafect item1" />
-    <item value="0x065D" name="Scn2 haggles anafect item2" />
-    <item value="0x065E" name="Scn2 haggles lineside" />
-    <item value="0x065F" name="Scn2 haggles stump village item1" />
-    <item value="0x0660" name="Scn2 haggles stump village item2" />
-    <item value="0x0661" name="Scn2 haggles barrad" />
-    <item value="0x0662" name="Scn2 haggles elblessem" />
+    <item value="0x0649" name="Scn1 haggle storich item 1" />
+    <item value="0x064A" name="Scn1 haggle storich item 2" />
+    <item value="0x064B" name="Scn1 haggle flagard item 1" />
+    <item value="0x064C" name="Scn1 haggle flagard item 2" />
+    <item value="0x064D" name="Scn1 haggle lookover item 1" />
+    <item value="0x064E" name="Scn1 haggle lookover item 2" />
+    <item value="0x064F" name="Scn1 haggle lookover item 3" />
+    <item value="0x0650" name="Scn1 haggle lookover item 4" />
+    <item value="0x0651" name="Scn1 haggle vagabond2 item 1" />
+    <item value="0x0652" name="Scn1 haggle vagabond2 item 2" />
+    <item value="0x0653" name="Scn1 haggle malorie item 1" />
+    <item value="0x0654" name="Scn1 haggle malorie item 2" />
+    <item value="0x0655" name="Scn1 haggle malorie item 3" />
+    <item value="0x0656" name="Scn1 haggle malorie item 4" />
+    <item value="0x0657" name="Scn1 haggle malorie item 5" />
+    <item value="0x0658" name="Scn2 haggles balsamo item 1" />
+    <item value="0x0659" name="Scn2 haggles balsamo item 2" />
+    <item value="0x065A" name="Scn2 haggles dusty item 1" />
+    <item value="0x065B" name="Scn2 haggles dusty item 2" />
+    <item value="0x065C" name="Scn2 haggles anafect item 1" />
+    <item value="0x065D" name="Scn2 haggles anafect item 2" />
+    <item value="0x065E" name="Scn2 haggles rhineside" />
+    <item value="0x065F" name="Scn2 haggles stump village item 1" />
+    <item value="0x0660" name="Scn2 haggles stump village item 2" />
+    <item value="0x0661" name="Scn2 haggles barrand" />
+    <item value="0x0662" name="Scn2 haggles elblesem" />
     <item value="0x0663" name="Scn2 haggles seagate" />
-    <item value="0x0664" name="Scn2 haggles saraband2 item1" />
-    <item value="0x0665" name="Scn2 haggles saraband2 item2" />
-    <item value="0x0666" name="Scn2 haggles saraband2 item3" />
-    <item value="0x0667" name="Scn2 haggles saraband2 item4" />
-    <item value="0x0668" name="Scn2 haggles saraband2 item5" />
-    <item value="0x0669" name="Scn2 haggles iro item1" />
-    <item value="0x066A" name="Scn2 haggles iro item2" />
-    <item value="0x066B" name="Scn2 haggles iro item3" />
+    <item value="0x0664" name="Scn2 haggles saraband2 item 1" />
+    <item value="0x0665" name="Scn2 haggles saraband2 item 2" />
+    <item value="0x0666" name="Scn2 haggles saraband2 item 3" />
+    <item value="0x0667" name="Scn2 haggles saraband2 item 4" />
+    <item value="0x0668" name="Scn2 haggles saraband2 item 5" />
+    <item value="0x0669" name="Scn2 haggles airo item 1" />
+    <item value="0x066A" name="Scn2 haggles airo item 2" />
+    <item value="0x066B" name="Scn2 haggles airo item 3" />
     <item value="0x066C" name="Scn2 haggles swampland item 1" />
     <item value="0x066D" name="Scn2 haggles swampland item 2" />
     <item value="0x066E" name="Scn2 haggles swampland item 3" />
-    <item value="0x066F" name="Scn2 haggles storich item1" />
-    <item value="0x0670" name="Scn2 haggles storich item2" />
-    <item value="0x0671" name="Scn2 haggles storich item3" />
-    <item value="0x0672" name="Scn2 haggles storich item4" />
-    <item value="0x0673" name="Scn2 haggles storich item5" />
+    <item value="0x066F" name="Scn2 haggles storich item 1" />
+    <item value="0x0670" name="Scn2 haggles storich item 2" />
+    <item value="0x0671" name="Scn2 haggles storich item 3" />
+    <item value="0x0672" name="Scn2 haggles storich item 4" />
+    <item value="0x0673" name="Scn2 haggles storich item 5" />
     <item value="0x0674" name="Scn3 autodeals port of destonia" />
     <item value="0x0675" name="Scn3 autodeals port of destonia revisit" />
     <item value="0x0676" name="Scn3 autodeals foothill" />
@@ -1882,10 +1882,10 @@
     <item value="0x0757" name="Battle 118. volcano large mithril" />
     <item value="0x0758" name="Battle 118. volcano dark matter" />
     <item value="0x0759" name="Battle 118. volcano mithril dirk" />
-    <item value="0x075A" name="Flaggard. well next to hq" />
-    <item value="0x075B" name="Flaggard. well with large mithril" />
-    <item value="0x075C" name="Flaggard. chest with large mithril in front of church" />
-    <item value="0x075D" name="Flaggard. small mithril in fireplace" />
+    <item value="0x075A" name="Flagard. well next to hq" />
+    <item value="0x075B" name="Flagard. well with large mithril" />
+    <item value="0x075C" name="Flagard. chest with large mithril in front of church" />
+    <item value="0x075D" name="Flagard. small mithril in fireplace" />
     <item value="0x075E" name="Flagard inside chest (Potion)" />
     <item value="0x075F" name="Flagard inside barrel 1 (Small Mithril)" />
     <item value="0x0760" name="Flagard castle (Phoenix Sword)" />
@@ -1963,7 +1963,7 @@
     <item value="0x07A8" name="Aspia town. 5 gold on shelf in house next to 2 scholar house" />
     <item value="0x07A9" name="Aspia town. 40 gold on shelf in couple's house" />
     <item value="0x07AA" name="Storich. 50 gold on shelf in old couple's home" />
-    <item value="0x07AB" name="1000G Flaggard Castle" />
+    <item value="0x07AB" name="1000G Flagard Castle" />
     <item value="0x07AC" name="1500G Lookover" />
     <item value="0x07AD" name="2000G Malorie" />
     <item value="0x07AE" name="3000G Malorie Castle" />
