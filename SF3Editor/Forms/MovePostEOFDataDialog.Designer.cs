@@ -46,7 +46,7 @@
             label1 = new System.Windows.Forms.Label();
             labelChangeAnyValue = new System.Windows.Forms.Label();
             tbLimitRAM = new System.Windows.Forms.TextBox();
-            labelX1Limit = new System.Windows.Forms.Label();
+            labelLimit = new System.Windows.Forms.Label();
             tbFreeSpaceBeforeLimit = new System.Windows.Forms.TextBox();
             labelFreeSpaceBeforeLimit = new System.Windows.Forms.Label();
             label2 = new System.Windows.Forms.Label();
@@ -318,16 +318,16 @@
             tbLimitRAM.TabIndex = 10;
             tbLimitRAM.Text = "0";
             // 
-            // labelX1Limit
+            // labelLimit
             // 
-            labelX1Limit.Anchor =  System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
-            labelX1Limit.AutoSize = true;
-            labelX1Limit.Location = new System.Drawing.Point(31, 406);
-            labelX1Limit.Name = "labelX1Limit";
-            labelX1Limit.Size = new System.Drawing.Size(179, 15);
-            labelX1Limit.TabIndex = 23;
-            labelX1Limit.Text = "X1 limit / start of next file (RAM):";
-            labelX1Limit.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            labelLimit.Anchor =  System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
+            labelLimit.AutoSize = true;
+            labelLimit.Location = new System.Drawing.Point(44, 406);
+            labelLimit.Name = "labelLimit";
+            labelLimit.Size = new System.Drawing.Size(166, 15);
+            labelLimit.TabIndex = 23;
+            labelLimit.Text = "Limit / start of next file (RAM):";
+            labelLimit.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // tbFreeSpaceBeforeLimit
             // 
@@ -349,7 +349,7 @@
             labelFreeSpaceBeforeLimit.Name = "labelFreeSpaceBeforeLimit";
             labelFreeSpaceBeforeLimit.Size = new System.Drawing.Size(188, 30);
             labelFreeSpaceBeforeLimit.TabIndex = 25;
-            labelFreeSpaceBeforeLimit.Text = "Free space after last post-EOF data\r\nbefore X1 limit / start of next file*:";
+            labelFreeSpaceBeforeLimit.Text = "Free space after last post-EOF data\r\nbefore limit / start of next file*:";
             labelFreeSpaceBeforeLimit.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // label2
@@ -374,7 +374,7 @@
             Controls.Add(label2);
             Controls.Add(labelFreeSpaceBeforeLimit);
             Controls.Add(tbFreeSpaceBeforeLimit);
-            Controls.Add(labelX1Limit);
+            Controls.Add(labelLimit);
             Controls.Add(tbLimitRAM);
             Controls.Add(labelChangeAnyValue);
             Controls.Add(tbFileStartRam);
@@ -433,7 +433,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label labelChangeAnyValue;
         private System.Windows.Forms.TextBox tbLimitRAM;
-        private System.Windows.Forms.Label labelX1Limit;
+        private System.Windows.Forms.Label labelLimit;
         private System.Windows.Forms.TextBox tbFreeSpaceBeforeLimit;
         private System.Windows.Forms.Label labelFreeSpaceBeforeLimit;
         private System.Windows.Forms.Label label2;
