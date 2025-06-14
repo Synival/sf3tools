@@ -1,19 +1,18 @@
 ﻿using System;
 using System.Drawing;
 using System.Globalization;
+using System.Linq;
 using System.Windows.Forms;
-using CommonLib.Discovery;
 using CommonLib.Win.Utils;
 using SF3.Models.Files;
 using static CommonLib.Utils.ValueUtils;
 
 namespace SF3.Editor.Forms {
     public partial class InsertDataDialog : Form {
-        public InsertDataDialog(ScenarioTableFile file, DiscoveredData[] discoveriesAfterEOF) {
+        public InsertDataDialog(ScenarioTableFile file) {
             if (file == null)
                 throw new ArgumentNullException(nameof(file));
-            if (discoveriesAfterEOF == null || discoveriesAfterEOF.Length == 0)
-                throw new ArgumentException(nameof(discoveriesAfterEOF));
+            var discoveries = file.Discoveries?.GetAllOrdered() ?? [];
 
             File = file;
 
@@ -26,6 +25,9 @@ namespace SF3.Editor.Forms {
             LimitRAM     = File.RamAddressLimit;
             LimitFile    = LimitRAM - FileStartRAM;
 
+            var discoveriesAfterEOF = discoveries.Where(x => x.Address >= FileEndRAM).ToArray();
+
+            // TODO: what if there aren't any??? It will crash!!
             var firstDiscoveryAfterEOF = discoveriesAfterEOF[0];
             var lastDiscoveryAfterEOF  = discoveriesAfterEOF[discoveriesAfterEOF.Length - 1];
 

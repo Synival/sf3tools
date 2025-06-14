@@ -35,9 +35,6 @@
     <Compile Update="Forms\SF3EditorForm.Tools.cs">
       <DependentUpon>SF3EditorForm.cs</DependentUpon>
     </Compile>
-    <Compile Update="Forms\SF3EditorForm.X1.cs">
-      <DependentUpon>SF3EditorForm.cs</DependentUpon>
-    </Compile>
     <Compile Update="Forms\SF3EditorForm.X019.cs">
       <DependentUpon>SF3EditorForm.cs</DependentUpon>
     </Compile>

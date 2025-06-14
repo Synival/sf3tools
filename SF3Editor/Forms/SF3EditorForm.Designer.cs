@@ -90,8 +90,7 @@ namespace SF3.Editor.Forms {
             tsmiTools_CreateDFR = new System.Windows.Forms.ToolStripMenuItem();
             tsmiTools_Sep2 = new System.Windows.Forms.ToolStripSeparator();
             tsmiTools_MovePostEOFData = new System.Windows.Forms.ToolStripMenuItem();
-            tsmiX1 = new System.Windows.Forms.ToolStripMenuItem();
-            tsmiX1_AddZeroes = new System.Windows.Forms.ToolStripMenuItem();
+            tsmiTools_InsertData = new System.Windows.Forms.ToolStripMenuItem();
             tsmiX019 = new System.Windows.Forms.ToolStripMenuItem();
             tsmiX019_UnapplyMonsterEq = new System.Windows.Forms.ToolStripMenuItem();
             tsmiX019_ApplyMonsterEq = new System.Windows.Forms.ToolStripMenuItem();
@@ -126,7 +125,7 @@ namespace SF3.Editor.Forms {
             // 
             // menuStrip1
             // 
-            menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { tsmiFile, tsmiView, tsmiTools, tsmiX1, tsmiX019, tsmiMPD, tsmiSettings, tsmiHelp });
+            menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { tsmiFile, tsmiView, tsmiTools, tsmiX019, tsmiMPD, tsmiSettings, tsmiHelp });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
             menuStrip1.Size = new Size(891, 24);
@@ -527,7 +526,7 @@ namespace SF3.Editor.Forms {
             // 
             // tsmiTools
             // 
-            tsmiTools.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { tsmiTools_ImportTable, tsmiTools_ExportTable, tsmiTools_Sep1, tsmiTools_ApplyDFR, tsmiTools_CreateDFR, tsmiTools_Sep2, tsmiTools_MovePostEOFData });
+            tsmiTools.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { tsmiTools_ImportTable, tsmiTools_ExportTable, tsmiTools_Sep1, tsmiTools_ApplyDFR, tsmiTools_CreateDFR, tsmiTools_Sep2, tsmiTools_MovePostEOFData, tsmiTools_InsertData });
             tsmiTools.Name = "tsmiTools";
             tsmiTools.Size = new Size(47, 20);
             tsmiTools.Text = "&Tools";
@@ -582,22 +581,13 @@ namespace SF3.Editor.Forms {
             tsmiTools_MovePostEOFData.Text = "&Move Post-EOF Data...";
             tsmiTools_MovePostEOFData.Click += tsmiTools_MovePostEOFData_Click;
             // 
-            // tsmiX1
+            // tsmiTools_InsertData
             // 
-            tsmiX1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { tsmiX1_AddZeroes });
-            tsmiX1.Enabled = false;
-            tsmiX1.Name = "tsmiX1";
-            tsmiX1.Size = new Size(32, 20);
-            tsmiX1.Text = "&X1";
-            tsmiX1.Visible = false;
-            // 
-            // tsmiX1_AddZeroes
-            // 
-            tsmiX1_AddZeroes.Enabled = false;
-            tsmiX1_AddZeroes.Name = "tsmiX1_AddZeroes";
-            tsmiX1_AddZeroes.Size = new Size(180, 22);
-            tsmiX1_AddZeroes.Text = "Add &Zeroes...";
-            tsmiX1_AddZeroes.Click += tsmiX1_AddZeroes_Click;
+            tsmiTools_InsertData.Enabled = false;
+            tsmiTools_InsertData.Name = "tsmiTools_InsertData";
+            tsmiTools_InsertData.Size = new Size(192, 22);
+            tsmiTools_InsertData.Text = "&Insert Data...";
+            tsmiTools_InsertData.Click += tsmiTools_InsertData_Click;
             // 
             // tsmiX019
             // 
@@ -910,9 +900,8 @@ namespace SF3.Editor.Forms {
         private System.Windows.Forms.ToolStripMenuItem tsmiX019;
         private System.Windows.Forms.ToolStripMenuItem tsmiX019_UnapplyMonsterEq;
         private System.Windows.Forms.ToolStripMenuItem tsmiX019_ApplyMonsterEq;
-        private System.Windows.Forms.ToolStripMenuItem tsmiX1;
-        private System.Windows.Forms.ToolStripMenuItem tsmiX1_AddZeroes;
         private System.Windows.Forms.ToolStripSeparator tsmiTools_Sep2;
         private System.Windows.Forms.ToolStripMenuItem tsmiTools_MovePostEOFData;
+        private System.Windows.Forms.ToolStripMenuItem tsmiTools_InsertData;
     }
 }

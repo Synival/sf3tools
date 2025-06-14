@@ -371,12 +371,12 @@ namespace SF3.Editor.Forms {
             tsmiTools_ImportTable.Enabled = hasFile;
             tsmiTools_ExportTable.Enabled = hasFile;
             tsmiTools_MovePostEOFData.Enabled = hasFile && scenarioTableFile?.Discoveries != null;
+            tsmiTools_InsertData.Enabled  = tsmiTools_MovePostEOFData.Enabled;
 
             SelectedFile = file;
             Text = file == null ? _versionTitle : file.Loader.ModelTitle(_versionTitle);
 
             var fileType = file?.FileType;
-            tsmiX1.Visible   = tsmiX1.Enabled   = hasFile && (fileType == SF3FileType.X1);
             tsmiX019.Visible = tsmiX019.Enabled = hasFile && (fileType == SF3FileType.X019 || fileType == SF3FileType.X044);
             tsmiMPD.Visible  = tsmiMPD.Enabled  = hasFile && (fileType == SF3FileType.MPD);
 

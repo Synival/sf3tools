@@ -249,6 +249,16 @@ namespace SF3.Editor.Forms {
             }
         }
 
+        private void RunInsertDataDialog(LoadedFile loadedFile, ScenarioTableFile file) {
+            var dialog = new InsertDataDialog(file);
+            var result = dialog.ShowDialog();
+
+            if (result != DialogResult.OK || dialog.MoveBy == 0)
+                return;
+
+            // TODO: do it!
+        }
+
         private void tsmiTools_ApplyDFR_Click(object sender, EventArgs e) {
             if (SelectedFile != null)
                 ApplyDFRDialog(SelectedFile);
@@ -282,6 +292,12 @@ namespace SF3.Editor.Forms {
                 RunMovePostEOFPointersDialog(SelectedFile, file, discoveriesAfterEOF);
             else
                 InfoMessage("No pointers to data after EOF; there is nothing to move.");
+        }
+
+        private void tsmiTools_InsertData_Click(object sender, EventArgs e) {
+            var file = SelectedFile?.Loader?.Model as ScenarioTableFile;
+            if (SelectedFile != null && file != null)
+                RunInsertDataDialog(SelectedFile, file);
         }
     }
 }
