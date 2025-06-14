@@ -197,21 +197,55 @@ namespace SF3.Editor.Forms {
         private void RunMovePostEOFPointersDialog(LoadedFile loadedFile, ScenarioTableFile file, DiscoveredData[] postEOFData) {
             var dialog = new MovePostEOFDataDialog(file, postEOFData);
             var result = dialog.ShowDialog();
-
             if (result != DialogResult.OK || dialog.MoveBy == 0)
                 return;
 
-            var moveBy   = dialog.MoveBy;
+            var count = MovePointersToAddressRange(file, file.RamAddress + file.Data.Length, file.RamAddressLimit, dialog.MoveBy);
+            InfoMessage($"{count} pointer(s) updated.");
+
+            ReloadFile(loadedFile, file.Data.GetDataCopy());
+        }
+
+        private void RunInsertDataDialog(LoadedFile loadedFile, ScenarioTableFile file) {
+            var dialog = new InsertDataDialog(file);
+            var result = dialog.ShowDialog();
+
+            if (result != DialogResult.OK || dialog.InsertAddrFile == 0)
+                return;
+
+            var insertAddrFile = dialog.InsertAddrFile;
+            var dataToInsert = dialog.DataToInsert;
+
+            var count = MovePointersToAddressRange(file, file.RamAddress + dialog.InsertAddrFile, file.RamAddressLimit, dataToInsert.Length);
+            InfoMessage($"{count} pointer(s) updated.");
+
+            var newLen = file.Data.Length + dataToInsert.Length;
+            var newData = new byte[newLen];
+            var data = file.Data.GetDataCopy();
+
+            // Rebuild our data, with the new data inserted at the desired location.
+            // TODO: We don't need to copy this in C# like sniveling cowards, let's use memcpy() like champions
+            int pos = 0;
+            for (int i = 0; i < insertAddrFile; ++i)
+                newData[pos++] = data[i];
+            for (int i = 0; i < dataToInsert.Length; ++i)
+                newData[pos++] = dataToInsert[i];
+            for (int i = insertAddrFile; i < data.Length; ++i)
+                newData[pos++] = data[i];
+
+            ReloadFile(loadedFile, newData);
+        }
+
+        private int MovePointersToAddressRange(ScenarioTableFile file, int ptrValueFrom, int ptrValueTo, int moveBy) {
             var fileFrom = file.RamAddress;
             var fileTo   = fileFrom + file.Data.Length;
-
-            var eofDataFrom = fileTo;
-            var eofDataTo   = file.RamAddressLimit;
 
             var pointersToUpdate = file.Discoveries.GetAllOrdered()
                 .Where(x => x.Type == DiscoveredDataType.Pointer && x.Address >= fileFrom && x.Address < fileTo)
                 .Select(x => new { Pointer = x, Value = file.Data.GetDouble((int) (x.Address - fileFrom)) })
-                .Where(x => x.Value >= eofDataFrom && x.Value < eofDataTo)
+                .GroupBy(x => x.Pointer.Address)
+                .Select(x => x.First())
+                .Where(x => x.Value >= ptrValueFrom && x.Value < ptrValueTo)
                 .ToArray();
 
             int count = 0;
@@ -221,9 +255,10 @@ namespace SF3.Editor.Forms {
                 count++;
             }
 
-            InfoMessage($"{count} pointer(s) updated.");
+            return count;
+        }
 
-            var newBytes = file.Data.GetDataCopy();
+        private void ReloadFile(LoadedFile loadedFile, byte[] newBytes) {
             var scenario = loadedFile.Scenario;
             var filename = loadedFile.Loader.Filename;
             var fileType = loadedFile.FileType;
@@ -247,16 +282,6 @@ namespace SF3.Editor.Forms {
             catch (Exception e) {
                 ErrorMessage("Error: Exception thrown", e);
             }
-        }
-
-        private void RunInsertDataDialog(LoadedFile loadedFile, ScenarioTableFile file) {
-            var dialog = new InsertDataDialog(file);
-            var result = dialog.ShowDialog();
-
-            if (result != DialogResult.OK || dialog.InsertAddrFile == 0)
-                return;
-
-            // TODO: do it!
         }
 
         private void tsmiTools_ApplyDFR_Click(object sender, EventArgs e) {
