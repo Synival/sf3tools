@@ -204,11 +204,11 @@
             // 
             tbFileEndRAM.Anchor =  System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
             tbFileEndRAM.BackColor = System.Drawing.SystemColors.Control;
-            tbFileEndRAM.Enabled = false;
             tbFileEndRAM.Font = new System.Drawing.Font("Courier New", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point,  0);
             tbFileEndRAM.Location = new System.Drawing.Point(208, 252);
             tbFileEndRAM.MaxLength = 9;
             tbFileEndRAM.Name = "tbFileEndRAM";
+            tbFileEndRAM.ReadOnly = true;
             tbFileEndRAM.Size = new System.Drawing.Size(119, 21);
             tbFileEndRAM.TabIndex = 8;
             tbFileEndRAM.Text = "0";
@@ -250,11 +250,11 @@
             // 
             tbFileEndFile.Anchor =  System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
             tbFileEndFile.BackColor = System.Drawing.SystemColors.Control;
-            tbFileEndFile.Enabled = false;
             tbFileEndFile.Font = new System.Drawing.Font("Courier New", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point,  0);
             tbFileEndFile.Location = new System.Drawing.Point(382, 252);
             tbFileEndFile.MaxLength = 9;
             tbFileEndFile.Name = "tbFileEndFile";
+            tbFileEndFile.ReadOnly = true;
             tbFileEndFile.Size = new System.Drawing.Size(119, 21);
             tbFileEndFile.TabIndex = 9;
             tbFileEndFile.Text = "0";
@@ -274,11 +274,11 @@
             // 
             tbFileStartRam.Anchor =  System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
             tbFileStartRam.BackColor = System.Drawing.SystemColors.Control;
-            tbFileStartRam.Enabled = false;
             tbFileStartRam.Font = new System.Drawing.Font("Courier New", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point,  0);
             tbFileStartRam.Location = new System.Drawing.Point(208, 225);
             tbFileStartRam.MaxLength = 9;
             tbFileStartRam.Name = "tbFileStartRam";
+            tbFileStartRam.ReadOnly = true;
             tbFileStartRam.Size = new System.Drawing.Size(119, 21);
             tbFileStartRam.TabIndex = 7;
             tbFileStartRam.Text = "0";
@@ -308,11 +308,11 @@
             // 
             tbLimitRAM.Anchor =  System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
             tbLimitRAM.BackColor = System.Drawing.SystemColors.Control;
-            tbLimitRAM.Enabled = false;
             tbLimitRAM.Font = new System.Drawing.Font("Courier New", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point,  0);
             tbLimitRAM.Location = new System.Drawing.Point(208, 279);
             tbLimitRAM.MaxLength = 9;
             tbLimitRAM.Name = "tbLimitRAM";
+            tbLimitRAM.ReadOnly = true;
             tbLimitRAM.Size = new System.Drawing.Size(119, 21);
             tbLimitRAM.TabIndex = 10;
             tbLimitRAM.Text = "0";

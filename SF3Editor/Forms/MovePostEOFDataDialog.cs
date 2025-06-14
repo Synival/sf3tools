@@ -70,7 +70,7 @@ namespace SF3.Editor.Forms {
                 if (!tb.Focused)
                     tb.Text = SignedHexStr(addr, "X", withPrefix: false);
 
-                if ((min.HasValue && addr < min.Value) || (max.HasValue && addr > max) || enforceAlignment && (addr & 0x03) != 0) {
+                if ((min.HasValue && addr < min.Value) || (max.HasValue && addr > max) || (enforceAlignment && (addr & 0x03) != 0)) {
                     tb.ForeColor = Color.Red;
                     hasErrors = true;
                 }

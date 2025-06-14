@@ -53,7 +53,24 @@ namespace SF3.Editor.Forms {
             }
 
             DialogResult = DialogResult.OK;
+            DataToInsert = HexStrToByteArray(GetDataHexStr()!);
+
             Close();
+        }
+
+        public static byte[] HexStrToByteArray(string hex) {
+            int GetHexVal(char ch) => ch - (ch < 58 ? 48 : (ch < 97 ? 55 : 87));
+
+            var len = hex.Length / 2;
+            byte[] bytes = new byte[len];
+
+            int strPos = 0;
+            for (int i = 0; i < len; ++i) {
+                bytes[i] = (byte)((GetHexVal(hex[strPos]) * 0x10) + GetHexVal(hex[strPos + 1]));
+                strPos += 2;
+            }
+        
+            return bytes;
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
@@ -68,7 +85,7 @@ namespace SF3.Editor.Forms {
         private bool UpdateTextBox(TextBox tb, int? value, int? min, int? max, bool enforceAlignment = false) {
             if (!value.HasValue) {
                 tb.Text = "";
-                tb.Enabled = false;
+                tb.ReadOnly = true;
                 tb.BackColor = SystemColors.Control;
                 return true;
             }
@@ -76,7 +93,7 @@ namespace SF3.Editor.Forms {
                 if (!tb.Focused)
                     tb.Text = SignedHexStr(value.Value, "X", withPrefix: false);
 
-                if ((min.HasValue && value < min.Value) || (max.HasValue && value > max) || enforceAlignment && (value & 0x03) != 0) {
+                if ((min.HasValue && value < min.Value) || (max.HasValue && value > max) || (enforceAlignment && (value & 0x03) != 0)) {
                     tb.ForeColor = Color.Red;
                     return false;
                 }
@@ -87,15 +104,19 @@ namespace SF3.Editor.Forms {
             }
         }
 
-        private bool TryGetDataHexStr(out string hexStr) {
+        private bool TryGetDataHexStr(out string result) {
+            var outResult = GetDataHexStr();
+            result = outResult ?? "";
+            return outResult != null;
+        }
+
+        private string? GetDataHexStr() {
             var text = tbData.Text;
             var sb = new StringBuilder();
 
             // No half-bytes allowed!
-            if (text.Length % 2 == 1) {
-                hexStr = "";
-                return false;
-            }
+            if (text.Length % 2 == 1)
+                return null;
 
             // Allow only whitespace and hex chars.
             foreach (var t in text) {
@@ -104,15 +125,12 @@ namespace SF3.Editor.Forms {
                     sb.Append(t);
                 else if (t == ' ' || t == '\n' || t == '\r')
                     ; // do nothing
-                else {
-                    hexStr = "";
-                    return false;
-                }
+                else
+                    return null;
 #pragma warning restore CS0642 // Possible mistaken empty statement
             }
 
-            hexStr = sb.ToString();
-            return true;
+            return sb.ToString();
         }
 
         private bool ValidateData() {
@@ -140,8 +158,10 @@ namespace SF3.Editor.Forms {
             SizeHasErrors |= !UpdateTextBox(tbFirstAddrFile, FirstEOFAddrFile.HasValue ? (FirstEOFAddrFile.Value + insertSize) : null, FileEndFile, LimitFile);
             SizeHasErrors |= !UpdateTextBox(tbLastAddrRAM, LastEOFAddrRAM.HasValue ? (LastEOFAddrRAM.Value + insertSize) : null, FileEndRAM, LimitRAM);
             SizeHasErrors |= !UpdateTextBox(tbLastAddrFile, LastEOFAddrFile.HasValue ? (LastEOFAddrFile.Value + insertSize) : null, FileEndFile, LimitFile);
-            SizeHasErrors |= !UpdateTextBox(tbFreeSpaceBeforePostEOFData, FreeSpaceBeforePostEOFData.HasValue ? (FreeSpaceBeforePostEOFData.Value + insertSize) : null, 0, null);
+            SizeHasErrors |= !UpdateTextBox(tbFreeSpaceBeforePostEOFData, FreeSpaceBeforePostEOFData, 0, null);
             SizeHasErrors |= !UpdateTextBox(tbFreeSpaceBeforeLimit, FreeSpaceBeforeLimit - insertSize, 0, null);
+            SizeHasErrors |= !UpdateTextBox(tbFileEndRAM, FileEndRAM + insertSize, null, null);
+            SizeHasErrors |= !UpdateTextBox(tbFileEndFile, FileEndFile + insertSize, null, null);
         }
 
         private void UpdateTextBoxes() {
@@ -220,7 +240,7 @@ namespace SF3.Editor.Forms {
         }
 
         private void tbData_TextChanged(object sender, EventArgs e) {
-            DataHasErrors = ValidateData();
+            DataHasErrors = !ValidateData();
             if (!DataHasErrors)
                 UpdateSizeTextBoxes();
         }
@@ -238,6 +258,8 @@ namespace SF3.Editor.Forms {
                 }
             }
         }
+
+        public byte[] DataToInsert = [];
 
         public bool InsertAddrHasErrors { get; private set; }
         public bool DataHasErrors { get; private set; }
