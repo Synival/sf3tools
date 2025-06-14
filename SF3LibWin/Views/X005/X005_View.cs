@@ -1,5 +1,6 @@
 ﻿using System.Windows.Forms;
 using SF3.Models.Files.X005;
+using SF3.Win.Views.X1;
 
 namespace SF3.Win.Views.X005 {
     public class X005_View : TabView {
@@ -14,6 +15,8 @@ namespace SF3.Win.Views.X005 {
             var ngc = Model.NameGetterContext;
             if (Model.CameraSettings != null)
                 CreateChild(new DataModelView("Camera Settings", Model.CameraSettings, ngc));
+
+            CreateChild(new TechnicalView("Technical Info", Model));
 
             return Control;
         }

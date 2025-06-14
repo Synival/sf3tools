@@ -1,5 +1,6 @@
 ﻿using System.Windows.Forms;
 using SF3.Models.Files.X033;
+using SF3.Win.Views.X1;
 
 namespace SF3.Win.Views.X033 {
     public class X033_View : TabView {
@@ -21,6 +22,8 @@ namespace SF3.Win.Views.X033 {
                 CreateChild(new TableView("Initial Info", Model.InitialInfoTable, ngc));
             if (Model.WeaponLevelExp != null)
                 CreateChild(new DataModelView("Weapon Level Exp", Model.WeaponLevelExp, ngc));
+
+            CreateChild(new TechnicalView("Technical Info", Model));
 
             return Control;
         }

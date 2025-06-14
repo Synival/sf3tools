@@ -2,6 +2,7 @@
 using System.Windows.Forms;
 using SF3.Models.Files.X014;
 using SF3.Models.Tables.X014;
+using SF3.Win.Views.X1;
 
 namespace SF3.Win.Views.X014 {
     public class X014_View : TabView {
@@ -40,6 +41,8 @@ namespace SF3.Win.Views.X014 {
                 CreateChild(new TableView("Spell Animation Locations", Model.SpellAnimationLocationTable, ngc));
             if (Model.SpecialAnimationLocationTable != null)
                 CreateChild(new TableView("Special Animation Locations", Model.SpecialAnimationLocationTable, ngc));
+
+            CreateChild(new TechnicalView("Technical Info", Model));
 
             return Control;
         }

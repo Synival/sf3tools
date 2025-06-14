@@ -1,12 +1,16 @@
 ﻿using System;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Windows.Forms;
+using CommonLib.Discovery;
 using CommonLib.Extensions;
 using CommonLib.NamedValues;
+using CommonLib.Types;
 using DFRLib.Types;
 using DFRLib.Win.Forms;
 using SF3.ModelLoaders;
+using SF3.Models.Files;
 using static CommonLib.Win.Utils.MessageUtils;
 using static SF3.Utils.FileUtils;
 
@@ -190,6 +194,61 @@ namespace SF3.Editor.Forms {
             }
         }
 
+        private void RunMovePostEOFPointersDialog(LoadedFile loadedFile, ScenarioTableFile file, DiscoveredData[] postEOFData) {
+            var dialog = new MovePostEOFDataDialog(file, postEOFData);
+            var result = dialog.ShowDialog();
+
+            if (result != DialogResult.OK || dialog.MoveBy == 0)
+                return;
+
+            var moveBy   = dialog.MoveBy;
+            var fileFrom = file.RamAddress;
+            var fileTo   = fileFrom + file.Data.Length;
+
+            var eofDataFrom = fileTo;
+            var eofDataTo   = file.RamAddressLimit;
+
+            var pointersToUpdate = file.Discoveries.GetAllOrdered()
+                .Where(x => x.Type == DiscoveredDataType.Pointer && x.Address >= fileFrom && x.Address < fileTo)
+                .Select(x => new { Pointer = x, Value = file.Data.GetDouble((int) (x.Address - fileFrom)) })
+                .Where(x => x.Value >= eofDataFrom && x.Value < eofDataTo)
+                .ToArray();
+
+            int count = 0;
+            foreach (var pointerValue in pointersToUpdate) {
+                var addr = (int) (pointerValue.Pointer.Address - fileFrom);
+                file.Data.SetDouble(addr, pointerValue.Value + moveBy);
+                count++;
+            }
+
+            InfoMessage($"{count} pointer(s) updated.");
+
+            var newBytes = file.Data.GetDataCopy();
+            var scenario = loadedFile.Scenario;
+            var filename = loadedFile.Loader.Filename;
+            var fileType = loadedFile.FileType;
+
+            try {
+                if (!CloseFile(loadedFile, true)) {
+                    ErrorMessage("Error: Couldn't close file");
+                    return;
+                }
+
+                LoadedFile? newFile = null;
+                using (var newBytesStream = new MemoryStream(newBytes)) {
+                    if ((newFile = LoadFile(filename, scenario, fileType, newBytesStream, false)) == null) {
+                        ErrorMessage("Error: Couldn't open updated file.");
+                        return;
+                    }
+                }
+
+                newFile.Loader.IsModified = true;
+            }
+            catch (Exception e) {
+                ErrorMessage("Error: Exception thrown", e);
+            }
+        }
+
         private void tsmiTools_ApplyDFR_Click(object sender, EventArgs e) {
             if (SelectedFile != null)
                 ApplyDFRDialog(SelectedFile);
@@ -208,6 +267,21 @@ namespace SF3.Editor.Forms {
         private void tsmiTools_ExportTable_Click(object sender, EventArgs e) {
             if (SelectedFile != null)
                 CopyTablesTo(SelectedFile);
+        }
+
+        private void tsmiTools_MovePostEOFData_Click(object sender, EventArgs e) {
+            var file = SelectedFile?.Loader?.Model as ScenarioTableFile;
+            if (SelectedFile == null || file == null)
+                return;
+
+            var discoveriesAfterEOF = file.Discoveries.GetAllOrdered()
+                .Where(x => x.Address >= file.RamAddress + file.Data.Length && x.Address < file.RamAddressLimit)
+                .ToArray();
+
+            if (discoveriesAfterEOF.Length > 0)
+                RunMovePostEOFPointersDialog(SelectedFile, file, discoveriesAfterEOF);
+            else
+                InfoMessage("No pointers to data after EOF; there is nothing to move.");
         }
     }
 }

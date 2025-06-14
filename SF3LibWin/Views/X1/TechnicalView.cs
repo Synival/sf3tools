@@ -1,11 +1,11 @@
 using System.Linq;
 using System.Windows.Forms;
 using CommonLib.Types;
-using SF3.Models.Files.X1;
+using SF3.Models.Files;
 
 namespace SF3.Win.Views.X1 {
     public class TechnicalView : TabView {
-        public TechnicalView(string name, IX1_File model) : base(name) {
+        public TechnicalView(string name, IScenarioTableFile model) : base(name) {
             Model = model;
         }
 
@@ -16,7 +16,7 @@ namespace SF3.Win.Views.X1 {
             var ngc = Model.NameGetterContext;
             if (Model.Discoveries?.HasDiscoveries == true) {
                 var allDiscoveries = Model.Discoveries.GetAllOrdered()
-                    .Where(x => x.Address >= Model.RamAddress && x.Address < X1_File.X1RamUpperLimit)
+                    .Where(x => x.Address >= Model.RamAddress && x.Address < Model.RamAddressLimit)
                     .ToArray();
 
                 CreateChild(new TextView("All Discovered Data", Model.Discoveries.CreateReport(allDiscoveries, true)));
@@ -50,6 +50,6 @@ namespace SF3.Win.Views.X1 {
             return Control;
         }
 
-        public IX1_File Model { get; }
+        public IScenarioTableFile Model { get; }
     }
 }

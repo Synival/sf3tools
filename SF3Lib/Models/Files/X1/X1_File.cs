@@ -10,14 +10,14 @@ using SF3.Models.Tables.X1;
 using SF3.Models.Tables.X1.Battle;
 using SF3.Models.Tables.X1.Town;
 using SF3.Types;
-using static CommonLib.Utils.ResourceUtils;
 using SF3.Actors;
 using SF3.Models.Structs.Shared;
 using SF3.Utils;
-using CommonLib.Utils;
 using SF3.Models.Structs.X1;
-using CommonLib.Discovery;
 using CommonLib.Types;
+using CommonLib.Utils;
+using static CommonLib.Utils.ResourceUtils;
+using CommonLib.Discovery;
 
 namespace SF3.Models.Files.X1 {
     public class X1_File : ScenarioTableFile, IX1_File {
@@ -28,6 +28,9 @@ namespace SF3.Models.Files.X1 {
         protected X1_File(IByteData data, INameGetterContext nameContext, ScenarioType scenario, bool isBTL99) : base(data, nameContext, scenario) {
             IsBTL99 = isBTL99;
             RamAddress = IsBTL99 ? 0x06060000 : Scenario == ScenarioType.Scenario1 ? 0x0605f000 : 0x0605e000;
+
+            Discoveries = new DiscoveryContext(Data.GetDataCopy(), (uint) RamAddress);
+            Discoveries.DiscoverUnknownPointersToValueRange((uint) RamAddress, (uint) RamAddressLimit - 1);
         }
 
         public static X1_File Create(IByteData data, INameGetterContext nameContext, ScenarioType scenario, bool isBTL99) {
@@ -204,12 +207,8 @@ namespace SF3.Models.Files.X1 {
 
             // Locate difficult-to-find common functions/data that are shared between X1 files.
             var searchData = Data.GetDataCopy();
-            Discoveries = new DiscoveryContext(searchData, (uint) RamAddress);
-            Discoveries.DiscoverUnknownPointersToValueRange((uint) RamAddress, X1RamUpperLimit - 1);
             DiscoverFunctions(searchData);
             tables.AddRange(DiscoverData(tables, searchData));
-
-            // Now that we've discovered some data, let's populate some tables.
             tables.AddRange(PopulateMapUpdateFuncTables());
             tables.AddRange(PopulateModelInstanceTables());
             PopulateScripts();
@@ -746,7 +745,5 @@ namespace SF3.Models.Files.X1 {
         public BlacksmithTable[] BlacksmithTables { get; private set; }
         [BulkCopyRecurse]
         public BattleTalkTable BattleTalkTable { get; private set; }
-
-        public DiscoveryContext Discoveries { get; private set; }
     }
 }

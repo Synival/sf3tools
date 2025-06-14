@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using CommonLib.Attributes;
+using CommonLib.Discovery;
 using CommonLib.NamedValues;
 using SF3.ByteData;
 using SF3.Models.Structs.Shared;
@@ -17,6 +18,9 @@ namespace SF3.Models.Files.X031 {
         protected X031_File(IByteData data, INameGetterContext nameContext, ScenarioType scenario) : base(data, nameContext, scenario) {
             RamAddress = (Scenario >= ScenarioType.Scenario2) ? 0x0604C800 : 0x06053000;
             RamAddressLimit = GetRamAddressLimit();
+
+            Discoveries = new DiscoveryContext(Data.GetDataCopy(), (uint) RamAddress);
+            Discoveries.DiscoverUnknownPointersToValueRange((uint) RamAddress, (uint) RamAddressLimit - 1);
         }
 
         private int GetRamAddressLimit() {

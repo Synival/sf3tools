@@ -1,3 +1,4 @@
+using CommonLib.Discovery;
 using SF3.Types;
 
 namespace SF3.Models.Files {
@@ -19,5 +20,10 @@ namespace SF3.Models.Files {
         /// Limit at which the file should no longer load into RAM.
         /// </summary>
         int RamAddressLimit { get; }
+
+        /// <summary>
+        /// Container for discoveries of pointers, functions, tables, etc. in the file.
+        /// </summary>
+        DiscoveryContext Discoveries { get; }
     }
 }

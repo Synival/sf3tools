@@ -1,5 +1,5 @@
 ﻿namespace SF3.Editor.Forms {
-    partial class MovePostEOFX1DataDialog {
+    partial class MovePostEOFDataDialog {
         /// <summary>
         /// Required designer variable.
         /// </summary>
@@ -364,7 +364,7 @@
             label2.Text = "(* doesn't account for length of last post-EOF data,\r\n  which is unknown)";
             label2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // MovePostEOFX1DataDialog
+            // MovePostEOFDataDialog
             // 
             AcceptButton = btnMove;
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -401,9 +401,9 @@
             FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             MaximizeBox = false;
             MinimizeBox = false;
-            Name = "MovePostEOFX1DataDialog";
+            Name = "MovePostEOFDataDialog";
             StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            Text = "Move Post-EOF X1 Data";
+            Text = "Move Post-EOF Data";
             ResumeLayout(false);
             PerformLayout();
         }

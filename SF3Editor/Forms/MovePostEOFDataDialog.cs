@@ -4,27 +4,27 @@ using System.Globalization;
 using System.Windows.Forms;
 using CommonLib.Discovery;
 using CommonLib.Win.Utils;
-using SF3.Models.Files.X1;
+using SF3.Models.Files;
 using static CommonLib.Utils.ValueUtils;
 
 namespace SF3.Editor.Forms {
-    public partial class MovePostEOFX1DataDialog : Form {
-        public MovePostEOFX1DataDialog(X1_File x1File, DiscoveredData[] discoveriesAfterEOF) {
-            if (x1File == null)
-                throw new ArgumentNullException(nameof(x1File));
+    public partial class MovePostEOFDataDialog : Form {
+        public MovePostEOFDataDialog(ScenarioTableFile file, DiscoveredData[] discoveriesAfterEOF) {
+            if (file == null)
+                throw new ArgumentNullException(nameof(file));
             if (discoveriesAfterEOF == null || discoveriesAfterEOF.Length == 0)
                 throw new ArgumentException(nameof(discoveriesAfterEOF));
 
-            X1_File = x1File;
+            File = file;
 
             InitializeComponent();
             DialogResult = DialogResult.None;
 
-            FileEndFile   = X1_File.Data.Length;
-            FileStartRAM  = (int) X1_File.RamAddress;
-            FileEndRAM    = FileStartRAM + FileEndFile;
-            LimitRAM      = (int) X1_File.X1RamUpperLimit;
-            LimitFile     = LimitRAM - FileStartRAM;
+            FileEndFile  = File.Data.Length;
+            FileStartRAM = File.RamAddress;
+            FileEndRAM   = FileStartRAM + FileEndFile;
+            LimitRAM     = File.RamAddressLimit;
+            LimitFile    = LimitRAM - FileStartRAM;
 
             var firstDiscoveryAfterEOF = discoveriesAfterEOF[0];
             var lastDiscoveryAfterEOF  = discoveriesAfterEOF[discoveriesAfterEOF.Length - 1];
@@ -172,7 +172,7 @@ namespace SF3.Editor.Forms {
                 MoveBy = FreeSpaceBeforeLimit - value;
         }
 
-        public X1_File X1_File { get; }
+        public ScenarioTableFile File { get; }
 
         private int _moveBy = 0;
 

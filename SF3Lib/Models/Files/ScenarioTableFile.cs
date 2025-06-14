@@ -1,3 +1,4 @@
+using CommonLib.Discovery;
 using CommonLib.NamedValues;
 using SF3.ByteData;
 using SF3.Types;
@@ -16,5 +17,6 @@ namespace SF3.Models.Files {
         public abstract int RamAddress { get; }
         public abstract int RamAddressLimit { get; }
         public override string Title => base.Title + Scenario.ToString();
+        public DiscoveryContext Discoveries { get; protected set; }
     }
 }

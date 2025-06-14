@@ -1,5 +1,6 @@
 ﻿using System.Windows.Forms;
 using SF3.Models.Files.X013;
+using SF3.Win.Views.X1;
 
 namespace SF3.Win.Views.X013 {
     public class X013_View : TabView {
@@ -34,6 +35,8 @@ namespace SF3.Win.Views.X013 {
                 CreateChild(new TableView("Status Effect Chances", Model.StatusEffectTable, ngc));
             if (Model.SpecialAnimationAssignmentTable != null)
                 CreateChild(new TableView("Special Animations", Model.SpecialAnimationAssignmentTable, ngc));
+
+            CreateChild(new TechnicalView("Technical Info", Model));
 
             return Control;
         }

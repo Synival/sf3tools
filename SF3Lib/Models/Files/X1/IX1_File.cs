@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using CommonLib.Discovery;
 using SF3.Models.Structs.Shared;
 using SF3.Models.Tables.Shared;
 using SF3.Models.Tables.X1;
@@ -30,7 +29,5 @@ namespace SF3.Models.Files.X1 {
         MapUpdateFuncTable MapUpdateFuncTable { get; }
         BlacksmithTable[] BlacksmithTables { get; }
         BattleTalkTable BattleTalkTable { get; }
-
-        DiscoveryContext Discoveries { get; }
     }
 }

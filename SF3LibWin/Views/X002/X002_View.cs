@@ -1,5 +1,6 @@
 ﻿using System.Windows.Forms;
 using SF3.Models.Files.X002;
+using SF3.Win.Views.X1;
 
 namespace SF3.Win.Views.X002 {
     public class X002_View : TabView {
@@ -30,6 +31,8 @@ namespace SF3.Win.Views.X002 {
                 CreateChild(new DataModelView("Attack/Resist", Model.AttackResist, ngc));
             if (Model.WarpTable != null)
                 CreateChild(new TableView("Warps (Scn1)", Model.WarpTable, ngc));
+
+            CreateChild(new TechnicalView("Technical Info", Model));
 
             return Control;
         }

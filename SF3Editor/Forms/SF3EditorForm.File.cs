@@ -9,6 +9,7 @@ using SF3.ModelLoaders;
 using SF3.Win.Views;
 using SF3.Win;
 using SF3.Models.Files.MPD;
+using SF3.Models.Files;
 
 namespace SF3.Editor.Forms {
     public partial class SF3EditorForm {
@@ -355,6 +356,8 @@ namespace SF3.Editor.Forms {
                 return;
 
             var hasFile = file != null;
+            var scenarioTableFile = file?.Loader?.Model as ScenarioTableFile;
+
             tsmiFile_Save.Enabled         = hasFile;
             tsmiFile_SaveAs.Enabled       = hasFile;
             tsmiFile_SaveAll.Enabled      = hasFile;
@@ -367,6 +370,7 @@ namespace SF3.Editor.Forms {
             tsmiTools_CreateDFR.Enabled   = hasFile;
             tsmiTools_ImportTable.Enabled = hasFile;
             tsmiTools_ExportTable.Enabled = hasFile;
+            tsmiTools_MovePostEOFData.Enabled = hasFile && scenarioTableFile?.Discoveries != null;
 
             SelectedFile = file;
             Text = file == null ? _versionTitle : file.Loader.ModelTitle(_versionTitle);

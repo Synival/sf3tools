@@ -1,6 +1,7 @@
 ﻿using System.Windows.Forms;
 using SF3.Models.Files.X012;
 using SF3.Models.Tables.X012;
+using SF3.Win.Views.X1;
 
 namespace SF3.Win.Views.X012 {
     public class X012_View : TabView {
@@ -19,6 +20,8 @@ namespace SF3.Win.Views.X012 {
                 CreateChild(new TableArrayView<ClassTargetPriorityTable>("Class Target Priorities", Model.ClassTargetPriorityTables, ngc));
             if (Model.ClassTargetUnknownTables != null)
                 CreateChild(new TableArrayView<ClassTargetUnknownTable>("Class Unknown Tables", Model.ClassTargetUnknownTables, ngc));
+
+            CreateChild(new TechnicalView("Technical Info", Model));
 
             return Control;
         }
