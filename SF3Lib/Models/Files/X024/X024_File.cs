@@ -9,9 +9,11 @@ using SF3.Types;
 namespace SF3.Models.Files.X024 {
     public class X024_File : ScenarioTableFile, IX024_File {
         public override int RamAddress { get; }
+        public override int RamAddressLimit { get; }
 
         protected X024_File(IByteData data, INameGetterContext nameContext, ScenarioType scenario) : base(data, nameContext, scenario) {
             RamAddress = GetRamAddress();
+            RamAddressLimit = GetRamAddressLimit();
         }
 
         private int GetRamAddress() {
@@ -22,6 +24,20 @@ namespace SF3.Models.Files.X024 {
                 case ScenarioType.Scenario3:
                 case ScenarioType.PremiumDisk:
                     return 0x0028C000;
+
+                default:
+                    throw new ArgumentException("Unhandled '" + nameof(Scenario) + "': " + Scenario.ToString());
+            }
+        }
+
+        private int GetRamAddressLimit() {
+            switch (Scenario) {
+                case ScenarioType.Scenario1:
+                    return 0x06080000;
+                case ScenarioType.Scenario2:
+                case ScenarioType.Scenario3:
+                case ScenarioType.PremiumDisk:
+                    return 0x00290000;
 
                 default:
                     throw new ArgumentException("Unhandled '" + nameof(Scenario) + "': " + Scenario.ToString());

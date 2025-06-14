@@ -14,9 +14,22 @@ using static SF3.Utils.ResourceUtils;
 namespace SF3.Models.Files.X002 {
     public class X002_File : ScenarioTableFile, IX002_File {
         public override int RamAddress { get; }
+        public override int RamAddressLimit { get; }
 
         protected X002_File(IByteData data, INameGetterContext nameContext, ScenarioType scenario) : base(data, nameContext, scenario) {
             RamAddress = (Scenario >= ScenarioType.Scenario2) ? 0x0602A000 : 0x06028800;
+            RamAddressLimit = GetRamAddressLimit();
+        }
+
+        private int GetRamAddressLimit() {
+            switch (Scenario) {
+                case ScenarioType.Scenario1:   return 0x06034B00;
+                case ScenarioType.Scenario2:   return 0x06036000;
+                case ScenarioType.Scenario3:   return 0x06036800;
+                case ScenarioType.PremiumDisk: return 0x06036800;
+                default:
+                    throw new ArgumentException("Unhandled '" + nameof(Scenario) + "': " + Scenario.ToString());
+            }
         }
 
         public static X002_File Create(IByteData data, INameGetterContext nameContext, ScenarioType scenario) {

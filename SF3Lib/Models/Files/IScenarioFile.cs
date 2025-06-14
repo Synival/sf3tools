@@ -14,5 +14,10 @@ namespace SF3.Models.Files {
         /// Address in RAM in to which this file is loaded.
         /// </summary>
         int RamAddress { get; }
+
+        /// <summary>
+        /// Limit at which the file should no longer load into RAM.
+        /// </summary>
+        int RamAddressLimit { get; }
     }
 }

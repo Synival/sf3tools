@@ -11,6 +11,7 @@ using static SF3.Utils.ResourceUtils;
 namespace SF3.Models.Files.X011 {
     public class X011_File : ScenarioTableFile, IX011_File {
         public override int RamAddress => 0x06068000;
+        public override int RamAddressLimit => 0x06070000;
 
         protected X011_File(IByteData data, INameGetterContext nameContext, ScenarioType scenario) : base(data, nameContext, scenario) {
         }

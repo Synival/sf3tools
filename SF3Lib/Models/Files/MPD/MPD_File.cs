@@ -22,6 +22,8 @@ using static CommonLib.Imaging.PixelConversion;
 namespace SF3.Models.Files.MPD {
     public class MPD_File : ScenarioTableFile, IMPD_File {
         public override int RamAddress => c_RamAddress;
+        public override int RamAddressLimit => 0x002D0000;
+
         private const int c_RamAddress = 0x00290000;
         private const int c_SurfaceModelChunkSize = 0xCF00;
 

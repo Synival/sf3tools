@@ -14,6 +14,7 @@ namespace SF3.Models.Files {
 
         public ScenarioType Scenario { get; }
         public abstract int RamAddress { get; }
+        public abstract int RamAddressLimit { get; }
         public override string Title => base.Title + Scenario.ToString();
     }
 }

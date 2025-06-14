@@ -9,21 +9,33 @@ using SF3.Types;
 namespace SF3.Models.Files.X005 {
     public class X005_File : ScenarioTableFile, IX005_File {
         public override int RamAddress { get; }
+        public override int RamAddressLimit { get; }
 
-        public static int GetRamOffset(ScenarioType scenario) {
-            switch (scenario) {
+        protected X005_File(IByteData data, INameGetterContext nameContext, ScenarioType scenario) : base(data, nameContext, scenario) {
+            RamAddress = GetRamAddress();
+            RamAddressLimit = GetRamAddressLimit();
+        }
+
+        public int GetRamAddress() {
+            switch (Scenario) {
                 case ScenarioType.Scenario1:   return 0x0603DC00;
                 case ScenarioType.Scenario2:   return 0x0603C100;
                 case ScenarioType.Scenario3:   return 0x0603C900;
                 case ScenarioType.PremiumDisk: return 0x0603C900;
-
                 default:
-                    throw new ArgumentException("Unhandled '" + nameof(scenario) + "': " + scenario.ToString());
+                    throw new ArgumentException("Unhandled '" + nameof(Scenario) + "': " + Scenario.ToString());
             }
         }
 
-        protected X005_File(IByteData data, INameGetterContext nameContext, ScenarioType scenario) : base(data, nameContext, scenario) {
-            RamAddress = GetRamOffset(scenario);
+        public int GetRamAddressLimit() {
+            switch (Scenario) {
+                case ScenarioType.Scenario1:   return 0x06046000;
+                case ScenarioType.Scenario2:   return 0x06044800;
+                case ScenarioType.Scenario3:   return 0x06043D00;
+                case ScenarioType.PremiumDisk: return 0x06043D00;
+                default:
+                    throw new ArgumentException("Unhandled '" + nameof(Scenario) + "': " + Scenario.ToString());
+            }
         }
 
         public static X005_File Create(IByteData data, INameGetterContext nameContext, ScenarioType scenario) {

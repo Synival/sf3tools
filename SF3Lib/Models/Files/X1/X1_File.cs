@@ -22,6 +22,7 @@ using CommonLib.Types;
 namespace SF3.Models.Files.X1 {
     public class X1_File : ScenarioTableFile, IX1_File {
         public override int RamAddress { get; }
+        public override int RamAddressLimit => (int) X1RamUpperLimit;
         public const uint X1RamUpperLimit = 0x06068000;
 
         protected X1_File(IByteData data, INameGetterContext nameContext, ScenarioType scenario, bool isBTL99) : base(data, nameContext, scenario) {
