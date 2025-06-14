@@ -2,6 +2,7 @@
 using System.Drawing;
 using System.Globalization;
 using System.Linq;
+using System.Text;
 using System.Windows.Forms;
 using CommonLib.Win.Utils;
 using SF3.Models.Files;
@@ -45,7 +46,7 @@ namespace SF3.Editor.Forms {
             UpdateTextBoxes();
         }
 
-        private void btnMove_Click(object sender, EventArgs e) {
+        private void btnInsert_Click(object sender, EventArgs e) {
             if (HasErrors) {
                 MessageUtils.WarningMessage("Some fields have errors. Please correct them and try again.");
                 return;
@@ -64,39 +65,88 @@ namespace SF3.Editor.Forms {
                 DialogResult = DialogResult.Cancel;
         }
 
-        private void UpdateTextBoxes() {
-            bool hasErrors = false;
+        private bool UpdateTextBox(TextBox tb, int? value, int? min, int? max, bool enforceAlignment = false) {
+            if (!value.HasValue) {
+                tb.Text = "";
+                tb.Enabled = false;
+                tb.BackColor = SystemColors.Control;
+                return true;
+            }
+            else {
+                if (!tb.Focused)
+                    tb.Text = SignedHexStr(value.Value, "X", withPrefix: false);
 
-            void UpdateTextBox(TextBox tb, int? addr, int? min, int? max, bool enforceAlignment = false) {
-                if (!addr.HasValue) {
-                    tb.Text = "";
-                    tb.Enabled = false;
-                    tb.BackColor = SystemColors.Control;
+                if ((min.HasValue && value < min.Value) || (max.HasValue && value > max) || enforceAlignment && (value & 0x03) != 0) {
+                    tb.ForeColor = Color.Red;
+                    return false;
                 }
                 else {
-                    if (!tb.Focused)
-                        tb.Text = SignedHexStr(addr.Value, "X", withPrefix: false);
-
-                    if ((min.HasValue && addr < min.Value) || (max.HasValue && addr > max) || enforceAlignment && (addr & 0x03) != 0) {
-                        tb.ForeColor = Color.Red;
-                        hasErrors = true;
-                    }
-                    else
-                        tb.ForeColor = Color.Black;
+                    tb.ForeColor = Color.Black;
+                    return true;
                 }
             }
+        }
 
-            var moveBy = MoveBy;
+        private bool TryGetDataHexStr(out string hexStr) {
+            var text = tbData.Text;
+            var sb = new StringBuilder();
 
-            UpdateTextBox(tbInsertAddressRAM, moveBy, null, null, enforceAlignment: true);
-            UpdateTextBox(tbFirstAddrRAM, FirstEOFAddrRAM + moveBy, FileEndRAM, LimitRAM);
-            UpdateTextBox(tbFirstAddrFile, FirstEOFAddrFile + moveBy, FileEndFile, LimitFile);
-            UpdateTextBox(tbLastAddrRAM, LastEOFAddrRAM + moveBy, FileEndRAM, LimitRAM);
-            UpdateTextBox(tbLastAddrFile, LastEOFAddrFile + moveBy, FileEndFile, LimitFile);
-            UpdateTextBox(tbFreeSpaceBeforePostEOFData, FreeSpaceBeforePostEOFData + moveBy, 0, null);
-            UpdateTextBox(tbFreeSpaceBeforeLimit, FreeSpaceBeforeLimit - moveBy, 0, null);
+            // No half-bytes allowed!
+            if (text.Length % 2 == 1) {
+                hexStr = "";
+                return false;
+            }
 
-            HasErrors = hasErrors;
+            // Allow only whitespace and hex chars.
+            foreach (var t in text) {
+#pragma warning disable CS0642 // Possible mistaken empty statement
+                if ((t >= '0' && t <= '9') || (t >= 'a' && t <= 'f') || (t >= 'A' && t <= 'F'))
+                    sb.Append(t);
+                else if (t == ' ' || t == '\n' || t == '\r')
+                    ; // do nothing
+                else {
+                    hexStr = "";
+                    return false;
+                }
+#pragma warning restore CS0642 // Possible mistaken empty statement
+            }
+
+            hexStr = sb.ToString();
+            return true;
+        }
+
+        private bool ValidateData() {
+            string text;
+            if (!TryGetDataHexStr(out text)) {
+                tbData.ForeColor = Color.Red;
+                return false;
+            }
+            tbData.ForeColor = Color.Black;
+            return UpdateTextBox(tbDataLength, text.Length / 2, 0, null, enforceAlignment: true);
+        }
+
+        private void UpdateInsertAddrTextBoxes() {
+            var insertAddr = InsertAddrFile;
+
+            InsertAddrHasErrors  = !UpdateTextBox(tbInsertAddressRAM, FileStartRAM + insertAddr, FileStartRAM, FileEndRAM);
+            InsertAddrHasErrors |= !UpdateTextBox(tbInsertAddressFile, insertAddr, 0, FileEndFile);
+        }
+
+        private void UpdateSizeTextBoxes() {
+            var insertAddr = InsertAddrFile;
+            var insertSize = FromSignedHexString(tbDataLength.Text);
+
+            SizeHasErrors  = !UpdateTextBox(tbFirstAddrRAM, FirstEOFAddrRAM.HasValue ? (FirstEOFAddrRAM.Value + insertSize) : null, FileEndRAM, LimitRAM);
+            SizeHasErrors |= !UpdateTextBox(tbFirstAddrFile, FirstEOFAddrFile.HasValue ? (FirstEOFAddrFile.Value + insertSize) : null, FileEndFile, LimitFile);
+            SizeHasErrors |= !UpdateTextBox(tbLastAddrRAM, LastEOFAddrRAM.HasValue ? (LastEOFAddrRAM.Value + insertSize) : null, FileEndRAM, LimitRAM);
+            SizeHasErrors |= !UpdateTextBox(tbLastAddrFile, LastEOFAddrFile.HasValue ? (LastEOFAddrFile.Value + insertSize) : null, FileEndFile, LimitFile);
+            SizeHasErrors |= !UpdateTextBox(tbFreeSpaceBeforePostEOFData, FreeSpaceBeforePostEOFData.HasValue ? (FreeSpaceBeforePostEOFData.Value + insertSize) : null, 0, null);
+            SizeHasErrors |= !UpdateTextBox(tbFreeSpaceBeforeLimit, FreeSpaceBeforeLimit - insertSize, 0, null);
+        }
+
+        private void UpdateTextBoxes() {
+            UpdateInsertAddrTextBoxes();
+            UpdateSizeTextBoxes();
         }
 
         private bool TryFromSignedHexString(string text, out int result) {
@@ -145,56 +195,54 @@ namespace SF3.Editor.Forms {
             }
         }
 
-        private void tbMoveBy_TextChanged(object sender, EventArgs e) {
-            if (tbInsertAddressRAM.Focused && TryFromSignedHexString(tbInsertAddressRAM.Text, out var value))
-                MoveBy = value;
+        private void tbInsertAddressRAM_TextChanged(object sender, EventArgs e) {
+            if (tbInsertAddressRAM.Focused) {
+                InsertAddrHasErrors = !TryFromSignedHexString(tbInsertAddressRAM.Text, out var value);
+                if (InsertAddrHasErrors)
+                    tbInsertAddressRAM.ForeColor = Color.Red;
+                else {
+                    InsertAddrFile = value - FileStartRAM;
+                    UpdateInsertAddrTextBoxes();
+                }
+            }
         }
 
-        private void tbFirstAddrRAM_TextChanged(object sender, EventArgs e) {
-            if (FirstEOFAddrRAM.HasValue && tbFirstAddrRAM.Focused && TryFromSignedHexString(tbFirstAddrRAM.Text, out var value))
-                MoveBy = value - FirstEOFAddrRAM.Value;
+        private void tbInsertAddressFile_TextChanged(object sender, EventArgs e) {
+            if (tbInsertAddressFile.Focused) {
+                InsertAddrHasErrors = !TryFromSignedHexString(tbInsertAddressFile.Text, out var value);
+                if (InsertAddrHasErrors)
+                    tbInsertAddressFile.ForeColor = Color.Red;
+                else {
+                    InsertAddrFile = value;
+                    UpdateInsertAddrTextBoxes();
+                }
+            }
         }
 
-        private void tbFirstAddrFile_TextChanged(object sender, EventArgs e) {
-            if (FirstEOFAddrFile.HasValue && tbFirstAddrFile.Focused && TryFromSignedHexString(tbFirstAddrFile.Text, out var value))
-                MoveBy = value - FirstEOFAddrFile.Value;
-        }
-
-        private void tbLastAddrRAM_TextChanged(object sender, EventArgs e) {
-            if (LastEOFAddrRAM.HasValue && tbLastAddrRAM.Focused && TryFromSignedHexString(tbLastAddrRAM.Text, out var value))
-                MoveBy = value - LastEOFAddrRAM.Value;
-        }
-
-        private void tbLastAddrFile_TextChanged(object sender, EventArgs e) {
-            if (LastEOFAddrFile.HasValue && tbLastAddrFile.Focused && TryFromSignedHexString(tbLastAddrFile.Text, out var value))
-                MoveBy = value - LastEOFAddrFile.Value;
-        }
-
-        private void tbFreeSpaceBeforePostEOFData_TextChanged(object sender, EventArgs e) {
-            if (FreeSpaceBeforePostEOFData.HasValue && tbFreeSpaceBeforePostEOFData.Focused && TryFromSignedHexString(tbFreeSpaceBeforePostEOFData.Text, out var value))
-                MoveBy = value - FreeSpaceBeforePostEOFData.Value;
-        }
-
-        private void tbFreeSpaceBeforeLimit_TextChanged(object sender, EventArgs e) {
-            if (tbFreeSpaceBeforeLimit.Focused && TryFromSignedHexString(tbFreeSpaceBeforeLimit.Text, out var value))
-                MoveBy = FreeSpaceBeforeLimit - value;
+        private void tbData_TextChanged(object sender, EventArgs e) {
+            DataHasErrors = ValidateData();
+            if (!DataHasErrors)
+                UpdateSizeTextBoxes();
         }
 
         public ScenarioTableFile File { get; }
 
-        private int _moveBy = 0;
+        private int _insertAddrFile = 0;
 
-        public int MoveBy {
-            get => _moveBy;
+        public int InsertAddrFile {
+            get => _insertAddrFile;
             set {
-                if (_moveBy != value) {
-                    _moveBy = value;
+                if (_insertAddrFile != value) {
+                    _insertAddrFile = value;
                     UpdateTextBoxes();
                 }
             }
         }
 
-        public bool HasErrors { get; private set; }
+        public bool InsertAddrHasErrors { get; private set; }
+        public bool DataHasErrors { get; private set; }
+        public bool SizeHasErrors { get; private set; }
+        public bool HasErrors => DataHasErrors || SizeHasErrors;
 
         public int FileEndFile { get; }
         public int FileStartRAM { get; }

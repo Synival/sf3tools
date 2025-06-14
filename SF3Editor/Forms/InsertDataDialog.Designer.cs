@@ -88,7 +88,7 @@
             btnInsert.TabIndex = 4;
             btnInsert.Text = "Insert";
             btnInsert.UseVisualStyleBackColor = true;
-            btnInsert.Click += btnMove_Click;
+            btnInsert.Click += btnInsert_Click;
             // 
             // tbInsertAddressRAM
             // 
@@ -100,7 +100,7 @@
             tbInsertAddressRAM.Size = new System.Drawing.Size(119, 21);
             tbInsertAddressRAM.TabIndex = 0;
             tbInsertAddressRAM.Text = "0";
-            tbInsertAddressRAM.TextChanged += tbMoveBy_TextChanged;
+            tbInsertAddressRAM.TextChanged += tbInsertAddressRAM_TextChanged;
             // 
             // labelFirstAddrRAM
             // 
@@ -136,7 +136,6 @@
             tbFirstAddrRAM.Size = new System.Drawing.Size(119, 21);
             tbFirstAddrRAM.TabIndex = 1;
             tbFirstAddrRAM.Text = "0";
-            tbFirstAddrRAM.TextChanged += tbFirstAddrRAM_TextChanged;
             // 
             // tbLastAddrRAM
             // 
@@ -150,7 +149,6 @@
             tbLastAddrRAM.Size = new System.Drawing.Size(119, 21);
             tbLastAddrRAM.TabIndex = 3;
             tbLastAddrRAM.Text = "0";
-            tbLastAddrRAM.TextChanged += tbLastAddrRAM_TextChanged;
             // 
             // tbFirstAddrFile
             // 
@@ -164,7 +162,6 @@
             tbFirstAddrFile.Size = new System.Drawing.Size(119, 21);
             tbFirstAddrFile.TabIndex = 2;
             tbFirstAddrFile.Text = "0";
-            tbFirstAddrFile.TextChanged += tbFirstAddrFile_TextChanged;
             // 
             // tbLastAddrFile
             // 
@@ -178,7 +175,6 @@
             tbLastAddrFile.Size = new System.Drawing.Size(119, 21);
             tbLastAddrFile.TabIndex = 4;
             tbLastAddrFile.Text = "0";
-            tbLastAddrFile.TextChanged += tbLastAddrFile_TextChanged;
             // 
             // labelLastAddrFile
             // 
@@ -238,7 +234,6 @@
             tbFreeSpaceBeforePostEOFData.Size = new System.Drawing.Size(119, 21);
             tbFreeSpaceBeforePostEOFData.TabIndex = 5;
             tbFreeSpaceBeforePostEOFData.Text = "0";
-            tbFreeSpaceBeforePostEOFData.TextChanged += tbFreeSpaceBeforePostEOFData_TextChanged;
             // 
             // labelFreeSpace
             // 
@@ -345,7 +340,6 @@
             tbFreeSpaceBeforeLimit.Size = new System.Drawing.Size(119, 21);
             tbFreeSpaceBeforeLimit.TabIndex = 6;
             tbFreeSpaceBeforeLimit.Text = "0";
-            tbFreeSpaceBeforeLimit.TextChanged += tbFreeSpaceBeforeLimit_TextChanged;
             // 
             // labelFreeSpaceBeforeLimit
             // 
@@ -380,6 +374,7 @@
             tbInsertAddressFile.Size = new System.Drawing.Size(119, 21);
             tbInsertAddressFile.TabIndex = 1;
             tbInsertAddressFile.Text = "0";
+            tbInsertAddressFile.TextChanged += tbInsertAddressFile_TextChanged;
             // 
             // labelInsertAddressFile
             // 
@@ -397,9 +392,9 @@
             labelData.AutoSize = true;
             labelData.Location = new System.Drawing.Point(12, 63);
             labelData.Name = "labelData";
-            labelData.Size = new System.Drawing.Size(196, 15);
+            labelData.Size = new System.Drawing.Size(249, 15);
             labelData.TabIndex = 29;
-            labelData.Text = "Data (length must be divisible by 4):";
+            labelData.Text = "Data (number of bytes must be divisible by 4):";
             labelData.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // tbData
@@ -411,11 +406,14 @@
             tbData.Name = "tbData";
             tbData.Size = new System.Drawing.Size(489, 51);
             tbData.TabIndex = 2;
-            tbData.Text = "0000";
+            tbData.Text = "00000000";
+            tbData.TextChanged += tbData_TextChanged;
             // 
             // tbDataLength
             // 
             tbDataLength.Anchor =  System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
+            tbDataLength.BackColor = System.Drawing.SystemColors.Control;
+            tbDataLength.Enabled = false;
             tbDataLength.Font = new System.Drawing.Font("Courier New", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point,  0);
             tbDataLength.Location = new System.Drawing.Point(382, 138);
             tbDataLength.MaxLength = 5;

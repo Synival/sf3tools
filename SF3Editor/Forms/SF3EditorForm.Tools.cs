@@ -253,7 +253,7 @@ namespace SF3.Editor.Forms {
             var dialog = new InsertDataDialog(file);
             var result = dialog.ShowDialog();
 
-            if (result != DialogResult.OK || dialog.MoveBy == 0)
+            if (result != DialogResult.OK || dialog.InsertAddrFile == 0)
                 return;
 
             // TODO: do it!
