@@ -27,16 +27,15 @@ namespace SF3.Editor.Forms {
 
             var discoveriesAfterEOF = discoveries.Where(x => x.Address >= FileEndRAM).ToArray();
 
-            // TODO: what if there aren't any??? It will crash!!
-            var firstDiscoveryAfterEOF = discoveriesAfterEOF[0];
-            var lastDiscoveryAfterEOF  = discoveriesAfterEOF[discoveriesAfterEOF.Length - 1];
+            var firstDiscoveryAfterEOF = (discoveriesAfterEOF.Length >= 1) ? discoveriesAfterEOF[0] : null;
+            var lastDiscoveryAfterEOF  = (discoveriesAfterEOF.Length >= 1) ? discoveriesAfterEOF[discoveriesAfterEOF.Length - 1] : null;
 
-            FirstAddrRAM               = (int) firstDiscoveryAfterEOF.Address;
-            FirstAddrFile              = FirstAddrRAM - FileStartRAM;
-            LastAddrRAM                = (int) lastDiscoveryAfterEOF.Address;
-            LastAddrFile               = LastAddrRAM - FileStartRAM;
-            FreeSpaceBeforePostEOFData = FirstAddrRAM - FileEndRAM;
-            FreeSpaceBeforeLimit       = LimitRAM - LastAddrRAM;
+            FirstEOFAddrRAM            = (int?) firstDiscoveryAfterEOF?.Address;
+            FirstEOFAddrFile           = FirstEOFAddrRAM.HasValue ? (FirstEOFAddrRAM.Value - FileStartRAM) : null;
+            LastEOFAddrRAM             = (int?) lastDiscoveryAfterEOF?.Address;
+            LastEOFAddrFile            = LastEOFAddrRAM.HasValue ? (LastEOFAddrRAM.Value - FileStartRAM) : null;
+            FreeSpaceBeforePostEOFData = FirstEOFAddrRAM.HasValue ? (FirstEOFAddrRAM - FileEndRAM) : null;
+            FreeSpaceBeforeLimit       = LimitRAM - (LastEOFAddrRAM ?? FileEndRAM);
 
             tbFileStartRam.Text = SignedHexStr(FileStartRAM, "X", withPrefix: false);
             tbFileEndRAM.Text   = SignedHexStr(FileEndRAM, "X", withPrefix: false);
@@ -68,25 +67,32 @@ namespace SF3.Editor.Forms {
         private void UpdateTextBoxes() {
             bool hasErrors = false;
 
-            void UpdateTextBox(TextBox tb, int addr, int? min, int? max, bool enforceAlignment = false) {
-                if (!tb.Focused)
-                    tb.Text = SignedHexStr(addr, "X", withPrefix: false);
-
-                if ((min.HasValue && addr < min.Value) || (max.HasValue && addr > max) || enforceAlignment && (addr & 0x03) != 0) {
-                    tb.ForeColor = Color.Red;
-                    hasErrors = true;
+            void UpdateTextBox(TextBox tb, int? addr, int? min, int? max, bool enforceAlignment = false) {
+                if (!addr.HasValue) {
+                    tb.Text = "";
+                    tb.Enabled = false;
+                    tb.BackColor = SystemColors.Control;
                 }
-                else
-                    tb.ForeColor = Color.Black;
+                else {
+                    if (!tb.Focused)
+                        tb.Text = SignedHexStr(addr.Value, "X", withPrefix: false);
+
+                    if ((min.HasValue && addr < min.Value) || (max.HasValue && addr > max) || enforceAlignment && (addr & 0x03) != 0) {
+                        tb.ForeColor = Color.Red;
+                        hasErrors = true;
+                    }
+                    else
+                        tb.ForeColor = Color.Black;
+                }
             }
 
             var moveBy = MoveBy;
 
             UpdateTextBox(tbInsertAddressRAM, moveBy, null, null, enforceAlignment: true);
-            UpdateTextBox(tbFirstAddrRAM, FirstAddrRAM + moveBy, FileEndRAM, LimitRAM);
-            UpdateTextBox(tbFirstAddrFile, FirstAddrFile + moveBy, FileEndFile, LimitFile);
-            UpdateTextBox(tbLastAddrRAM, LastAddrRAM + moveBy, FileEndRAM, LimitRAM);
-            UpdateTextBox(tbLastAddrFile, LastAddrFile + moveBy, FileEndFile, LimitFile);
+            UpdateTextBox(tbFirstAddrRAM, FirstEOFAddrRAM + moveBy, FileEndRAM, LimitRAM);
+            UpdateTextBox(tbFirstAddrFile, FirstEOFAddrFile + moveBy, FileEndFile, LimitFile);
+            UpdateTextBox(tbLastAddrRAM, LastEOFAddrRAM + moveBy, FileEndRAM, LimitRAM);
+            UpdateTextBox(tbLastAddrFile, LastEOFAddrFile + moveBy, FileEndFile, LimitFile);
             UpdateTextBox(tbFreeSpaceBeforePostEOFData, FreeSpaceBeforePostEOFData + moveBy, 0, null);
             UpdateTextBox(tbFreeSpaceBeforeLimit, FreeSpaceBeforeLimit - moveBy, 0, null);
 
@@ -145,28 +151,28 @@ namespace SF3.Editor.Forms {
         }
 
         private void tbFirstAddrRAM_TextChanged(object sender, EventArgs e) {
-            if (tbFirstAddrRAM.Focused && TryFromSignedHexString(tbFirstAddrRAM.Text, out var value))
-                MoveBy = value - FirstAddrRAM;
+            if (FirstEOFAddrRAM.HasValue && tbFirstAddrRAM.Focused && TryFromSignedHexString(tbFirstAddrRAM.Text, out var value))
+                MoveBy = value - FirstEOFAddrRAM.Value;
         }
 
         private void tbFirstAddrFile_TextChanged(object sender, EventArgs e) {
-            if (tbFirstAddrFile.Focused && TryFromSignedHexString(tbFirstAddrFile.Text, out var value))
-                MoveBy = value - FirstAddrFile;
+            if (FirstEOFAddrFile.HasValue && tbFirstAddrFile.Focused && TryFromSignedHexString(tbFirstAddrFile.Text, out var value))
+                MoveBy = value - FirstEOFAddrFile.Value;
         }
 
         private void tbLastAddrRAM_TextChanged(object sender, EventArgs e) {
-            if (tbLastAddrRAM.Focused && TryFromSignedHexString(tbLastAddrRAM.Text, out var value))
-                MoveBy = value - LastAddrRAM;
+            if (LastEOFAddrRAM.HasValue && tbLastAddrRAM.Focused && TryFromSignedHexString(tbLastAddrRAM.Text, out var value))
+                MoveBy = value - LastEOFAddrRAM.Value;
         }
 
         private void tbLastAddrFile_TextChanged(object sender, EventArgs e) {
-            if (tbLastAddrFile.Focused && TryFromSignedHexString(tbLastAddrFile.Text, out var value))
-                MoveBy = value - LastAddrFile;
+            if (LastEOFAddrFile.HasValue && tbLastAddrFile.Focused && TryFromSignedHexString(tbLastAddrFile.Text, out var value))
+                MoveBy = value - LastEOFAddrFile.Value;
         }
 
         private void tbFreeSpaceBeforePostEOFData_TextChanged(object sender, EventArgs e) {
-            if (tbFreeSpaceBeforePostEOFData.Focused && TryFromSignedHexString(tbFreeSpaceBeforePostEOFData.Text, out var value))
-                MoveBy = value - FreeSpaceBeforePostEOFData;
+            if (FreeSpaceBeforePostEOFData.HasValue && tbFreeSpaceBeforePostEOFData.Focused && TryFromSignedHexString(tbFreeSpaceBeforePostEOFData.Text, out var value))
+                MoveBy = value - FreeSpaceBeforePostEOFData.Value;
         }
 
         private void tbFreeSpaceBeforeLimit_TextChanged(object sender, EventArgs e) {
@@ -195,11 +201,11 @@ namespace SF3.Editor.Forms {
         public int FileEndRAM { get; }
         public int LimitRAM { get; }
         public int LimitFile { get; }
-        public int FirstAddrRAM { get; }
-        public int FirstAddrFile { get; }
-        public int LastAddrRAM { get; }
-        public int LastAddrFile { get; }
-        public int FreeSpaceBeforePostEOFData { get; }
+        public int? FirstEOFAddrRAM { get; }
+        public int? FirstEOFAddrFile { get; }
+        public int? LastEOFAddrRAM { get; }
+        public int? LastEOFAddrFile { get; }
+        public int? FreeSpaceBeforePostEOFData { get; }
         public int FreeSpaceBeforeLimit { get; }
     }
 }

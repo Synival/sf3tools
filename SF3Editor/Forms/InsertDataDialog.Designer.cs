@@ -52,7 +52,7 @@
             tbInsertAddressFile = new System.Windows.Forms.TextBox();
             labelInsertAddressFile = new System.Windows.Forms.Label();
             labelData = new System.Windows.Forms.Label();
-            textBox1 = new System.Windows.Forms.TextBox();
+            tbData = new System.Windows.Forms.TextBox();
             tbDataLength = new System.Windows.Forms.TextBox();
             labelDataLength = new System.Windows.Forms.Label();
             SuspendLayout();
@@ -402,38 +402,37 @@
             labelData.Text = "Data (length must be divisible by 4):";
             labelData.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // textBox1
+            // tbData
             // 
-            textBox1.Anchor =  System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            textBox1.Font = new System.Drawing.Font("Courier New", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point,  0);
-            textBox1.Location = new System.Drawing.Point(12, 81);
-            textBox1.MaxLength = 9;
-            textBox1.Multiline = true;
-            textBox1.Name = "textBox1";
-            textBox1.Size = new System.Drawing.Size(489, 51);
-            textBox1.TabIndex = 2;
-            textBox1.Text = "0000";
+            tbData.Anchor =  System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            tbData.Font = new System.Drawing.Font("Courier New", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point,  0);
+            tbData.Location = new System.Drawing.Point(12, 81);
+            tbData.Multiline = true;
+            tbData.Name = "tbData";
+            tbData.Size = new System.Drawing.Size(489, 51);
+            tbData.TabIndex = 2;
+            tbData.Text = "0000";
             // 
             // tbDataLength
             // 
             tbDataLength.Anchor =  System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
             tbDataLength.Font = new System.Drawing.Font("Courier New", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point,  0);
             tbDataLength.Location = new System.Drawing.Point(382, 138);
-            tbDataLength.MaxLength = 9;
+            tbDataLength.MaxLength = 5;
             tbDataLength.Name = "tbDataLength";
             tbDataLength.Size = new System.Drawing.Size(119, 21);
             tbDataLength.TabIndex = 3;
-            tbDataLength.Text = "0";
+            tbDataLength.Text = "4";
             // 
             // labelDataLength
             // 
             labelDataLength.Anchor =  System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
             labelDataLength.AutoSize = true;
-            labelDataLength.Location = new System.Drawing.Point(305, 141);
+            labelDataLength.Location = new System.Drawing.Point(180, 141);
             labelDataLength.Name = "labelDataLength";
-            labelDataLength.Size = new System.Drawing.Size(71, 15);
+            labelDataLength.Size = new System.Drawing.Size(196, 15);
             labelDataLength.TabIndex = 32;
-            labelDataLength.Text = "Data length:";
+            labelDataLength.Text = "Data length (must be divisible by 4):";
             labelDataLength.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // InsertDataDialog
@@ -445,7 +444,7 @@
             ClientSize = new System.Drawing.Size(513, 454);
             Controls.Add(labelDataLength);
             Controls.Add(tbDataLength);
-            Controls.Add(textBox1);
+            Controls.Add(tbData);
             Controls.Add(labelData);
             Controls.Add(labelInsertAddressFile);
             Controls.Add(tbInsertAddressFile);
@@ -516,7 +515,7 @@
         private System.Windows.Forms.TextBox tbInsertAddressFile;
         private System.Windows.Forms.Label labelInsertAddressFile;
         private System.Windows.Forms.Label labelData;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox tbData;
         private System.Windows.Forms.TextBox tbDataLength;
         private System.Windows.Forms.Label labelDataLength;
     }

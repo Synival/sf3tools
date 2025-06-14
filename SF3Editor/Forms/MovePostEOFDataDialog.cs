@@ -29,12 +29,12 @@ namespace SF3.Editor.Forms {
             var firstDiscoveryAfterEOF = discoveriesAfterEOF[0];
             var lastDiscoveryAfterEOF  = discoveriesAfterEOF[discoveriesAfterEOF.Length - 1];
 
-            FirstAddrRAM               = (int) firstDiscoveryAfterEOF.Address;
-            FirstAddrFile              = FirstAddrRAM - FileStartRAM;
-            LastAddrRAM                = (int) lastDiscoveryAfterEOF.Address;
-            LastAddrFile               = LastAddrRAM - FileStartRAM;
-            FreeSpaceBeforePostEOFData = FirstAddrRAM - FileEndRAM;
-            FreeSpaceBeforeLimit       = LimitRAM - LastAddrRAM;
+            FirstEOFAddrRAM            = (int) firstDiscoveryAfterEOF.Address;
+            FirstEOFAddrFile           = FirstEOFAddrRAM - FileStartRAM;
+            LastEOFAddrRAM             = (int) lastDiscoveryAfterEOF.Address;
+            LastEOFAddrFile            = LastEOFAddrRAM - FileStartRAM;
+            FreeSpaceBeforePostEOFData = FirstEOFAddrRAM - FileEndRAM;
+            FreeSpaceBeforeLimit       = LimitRAM - LastEOFAddrRAM;
 
             tbFileStartRam.Text = SignedHexStr(FileStartRAM, "X", withPrefix: false);
             tbFileEndRAM.Text   = SignedHexStr(FileEndRAM,   "X", withPrefix: false);
@@ -81,10 +81,10 @@ namespace SF3.Editor.Forms {
             var moveBy = MoveBy;
 
             UpdateTextBox(tbMoveBy,                     moveBy, null, null, enforceAlignment: true);
-            UpdateTextBox(tbFirstAddrRAM,               FirstAddrRAM + moveBy, FileEndRAM, LimitRAM);
-            UpdateTextBox(tbFirstAddrFile,              FirstAddrFile + moveBy, FileEndFile, LimitFile);
-            UpdateTextBox(tbLastAddrRAM,                LastAddrRAM + moveBy, FileEndRAM, LimitRAM);
-            UpdateTextBox(tbLastAddrFile,               LastAddrFile + moveBy, FileEndFile, LimitFile);
+            UpdateTextBox(tbFirstAddrRAM,               FirstEOFAddrRAM + moveBy, FileEndRAM, LimitRAM);
+            UpdateTextBox(tbFirstAddrFile,              FirstEOFAddrFile + moveBy, FileEndFile, LimitFile);
+            UpdateTextBox(tbLastAddrRAM,                LastEOFAddrRAM + moveBy, FileEndRAM, LimitRAM);
+            UpdateTextBox(tbLastAddrFile,               LastEOFAddrFile + moveBy, FileEndFile, LimitFile);
             UpdateTextBox(tbFreeSpaceBeforePostEOFData, FreeSpaceBeforePostEOFData + moveBy, 0, null);
             UpdateTextBox(tbFreeSpaceBeforeLimit,       FreeSpaceBeforeLimit - moveBy, 0, null);
 
@@ -144,22 +144,22 @@ namespace SF3.Editor.Forms {
 
         private void tbFirstAddrRAM_TextChanged(object sender, EventArgs e) {
             if (tbFirstAddrRAM.Focused && TryFromSignedHexString(tbFirstAddrRAM.Text, out var value))
-                MoveBy = value - FirstAddrRAM;
+                MoveBy = value - FirstEOFAddrRAM;
         }
 
         private void tbFirstAddrFile_TextChanged(object sender, EventArgs e) {
             if (tbFirstAddrFile.Focused && TryFromSignedHexString(tbFirstAddrFile.Text, out var value))
-                MoveBy = value - FirstAddrFile;
+                MoveBy = value - FirstEOFAddrFile;
         }
 
         private void tbLastAddrRAM_TextChanged(object sender, EventArgs e) {
             if (tbLastAddrRAM.Focused && TryFromSignedHexString(tbLastAddrRAM.Text, out var value))
-                MoveBy = value - LastAddrRAM;
+                MoveBy = value - LastEOFAddrRAM;
         }
 
         private void tbLastAddrFile_TextChanged(object sender, EventArgs e) {
             if (tbLastAddrFile.Focused && TryFromSignedHexString(tbLastAddrFile.Text, out var value))
-                MoveBy = value - LastAddrFile;
+                MoveBy = value - LastEOFAddrFile;
         }
 
         private void tbFreeSpaceBeforePostEOFData_TextChanged(object sender, EventArgs e) {
@@ -193,10 +193,10 @@ namespace SF3.Editor.Forms {
         public int FileEndRAM { get; }
         public int LimitRAM { get; }
         public int LimitFile { get; }
-        public int FirstAddrRAM { get; }
-        public int FirstAddrFile { get; }
-        public int LastAddrRAM { get; }
-        public int LastAddrFile { get; }
+        public int FirstEOFAddrRAM { get; }
+        public int FirstEOFAddrFile { get; }
+        public int LastEOFAddrRAM { get; }
+        public int LastEOFAddrFile { get; }
         public int FreeSpaceBeforePostEOFData { get; }
         public int FreeSpaceBeforeLimit { get; }
     }
