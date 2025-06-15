@@ -1,5 +1,4 @@
 using System;
-using CommonLib.NamedValues;
 using SF3.ByteData;
 using SF3.Models.Structs.Shared;
 
@@ -23,8 +22,5 @@ namespace SF3.Models.Tables.Shared {
                 false
             );
         }
-
-        public bool IsBattle { get; }
-        public INameGetterContext NameGetterContext { get; }
     }
 }
