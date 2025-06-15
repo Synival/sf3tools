@@ -11,11 +11,12 @@ namespace SF3.Models.Files.CHR {
         public override int RamAddress => 0; // TODO: where is this loaded? is it even relevant?
         public override int RamAddressLimit => 0; // TODO: where is this loaded? is it even relevant?
 
-        protected CHR_File(IByteData data, INameGetterContext nameContext, ScenarioType scenario) : base(data, nameContext, scenario) {
+        protected CHR_File(IByteData data, INameGetterContext nameContext, ScenarioType scenario, bool isCHP) : base(data, nameContext, scenario) {
+            IsCHP = isCHP;
         }
 
-        public static CHR_File Create(IByteData data, INameGetterContext nameContext, ScenarioType scenario) {
-            var newFile = new CHR_File(data, nameContext, scenario);
+        public static CHR_File Create(IByteData data, INameGetterContext nameContext, ScenarioType scenario, bool isCHP) {
+            var newFile = new CHR_File(data, nameContext, scenario, isCHP);
             if (!newFile.Init())
                 throw new InvalidOperationException("Couldn't initialize tables");
             return newFile;
@@ -23,10 +24,11 @@ namespace SF3.Models.Files.CHR {
 
         public override IEnumerable<ITable> MakeTables() {
             return new List<ITable>() {
-                (SpriteTable = SpriteTable.Create(Data, nameof(SpriteTable), 0x00))
+                (SpriteTable = SpriteTable.Create(Data, nameof(SpriteTable), 0x00, IsCHP))
             };
         }
 
+        public bool IsCHP { get; }
         public SpriteTable SpriteTable { get; private set; }
     }
 }

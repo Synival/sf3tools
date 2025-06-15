@@ -19,5 +19,6 @@ namespace SF3.Types {
         X044,
         MPD,
         CHR,
+        CHP,
     }
 }
