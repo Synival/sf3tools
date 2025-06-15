@@ -63,7 +63,7 @@ namespace SF3.Utils {
             var preExtension = Path.GetFileNameWithoutExtension(filenameUpper);
             if (filenameUpper.Contains(".MPD"))
                 return SF3FileType.MPD;
-            else if (filenameUpper.Contains(".CHR"))
+            else if (filenameUpper.Contains(".CHR") || filenameUpper.Contains(".CHP"))
                 return SF3FileType.CHR;
             else if (filenameUpper.Contains(".BIN")) {
                      if (preExtension.Contains("X1BTL99")) return SF3FileType.X1BTL99;
@@ -204,7 +204,7 @@ namespace SF3.Utils {
                 case SF3FileType.X033:    return "X033 File";
                 case SF3FileType.X044:    return "X044 File";
                 case SF3FileType.MPD:     return "MPD Files";
-                case SF3FileType.CHR:     return "CHR Files";
+                case SF3FileType.CHR:     return "CHR/CHP Files";
                 default:
                     throw new ArgumentException($"Unhandled value '{type}' for '{nameof(type)}'");
             }
@@ -230,7 +230,7 @@ namespace SF3.Utils {
                 case SF3FileType.X033:    return "*X033*.BIN";
                 case SF3FileType.X044:    return "*X044*.BIN";
                 case SF3FileType.MPD:     return "*.MPD";
-                case SF3FileType.CHR:     return "*.CHR";
+                case SF3FileType.CHR:     return "*.CHR;*.CHP";
                 default:
                     throw new ArgumentException($"Unhandled value '{type}' for '{nameof(type)}'");
             }
@@ -256,7 +256,7 @@ namespace SF3.Utils {
                 case "*X033*.BIN":    return new SF3FileType[] { SF3FileType.X033 };
                 case "*X044*.BIN":    return new SF3FileType[] { SF3FileType.X044 };
                 case "*.MPD":         return new SF3FileType[] { SF3FileType.MPD };
-                case "*.CHR":         return new SF3FileType[] { SF3FileType.CHR };
+                case "*.CHR;*.CHP":   return new SF3FileType[] { SF3FileType.CHR };
                 default:
                     return new SF3FileType[] {};
             }

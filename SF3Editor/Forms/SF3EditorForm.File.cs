@@ -446,10 +446,10 @@ namespace SF3.Editor.Forms {
             if (filterSplit?.Length != 2)
                 return [];
 
-            var filter = filterSplit[1];
+            var filters = filterSplit[1].Split(';');
 
             // If we don't know the scenario, we can't load it.
-            return Directory.GetFiles(path, filter)
+            return filters.SelectMany(x => Directory.GetFiles(path, x))
                 .OrderBy(x => x)
                 .Select(x => {
                     var fileType = DetermineFileType(x, null);
