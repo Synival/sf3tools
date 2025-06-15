@@ -5,6 +5,7 @@ using System.Linq;
 using CommonLib.NamedValues;
 using SF3.ByteData;
 using SF3.Models.Files;
+using SF3.Models.Files.CHR;
 using SF3.Models.Files.MPD;
 using SF3.Models.Files.X002;
 using SF3.Models.Files.X005;
@@ -62,6 +63,8 @@ namespace SF3.Utils {
             var preExtension = Path.GetFileNameWithoutExtension(filenameUpper);
             if (filenameUpper.Contains(".MPD"))
                 return SF3FileType.MPD;
+            else if (filenameUpper.Contains(".CHR"))
+                return SF3FileType.CHR;
             else if (filenameUpper.Contains(".BIN")) {
                      if (preExtension.Contains("X1BTL99")) return SF3FileType.X1BTL99;
                 else if (preExtension.Contains("X1"))      return SF3FileType.X1;
@@ -175,6 +178,7 @@ namespace SF3.Utils {
                 case SF3FileType.X033:    return X033_File.Create(byteData, ngc, scenario);
                 case SF3FileType.X044:    return X044_File.Create(byteData, ngc, scenario);
                 case SF3FileType.MPD:     return MPD_File .Create(byteData, nameGetterContexts);
+                case SF3FileType.CHR:     return CHR_File .Create(byteData, ngc, scenario);
                 default:
                     throw new InvalidOperationException($"Unhandled file type '{fileType}'");
             }
@@ -200,6 +204,7 @@ namespace SF3.Utils {
                 case SF3FileType.X033:    return "X033 File";
                 case SF3FileType.X044:    return "X044 File";
                 case SF3FileType.MPD:     return "MPD Files";
+                case SF3FileType.CHR:     return "CHR Files";
                 default:
                     throw new ArgumentException($"Unhandled value '{type}' for '{nameof(type)}'");
             }
@@ -225,6 +230,7 @@ namespace SF3.Utils {
                 case SF3FileType.X033:    return "*X033*.BIN";
                 case SF3FileType.X044:    return "*X044*.BIN";
                 case SF3FileType.MPD:     return "*.MPD";
+                case SF3FileType.CHR:     return "*.CHR";
                 default:
                     throw new ArgumentException($"Unhandled value '{type}' for '{nameof(type)}'");
             }
@@ -250,6 +256,7 @@ namespace SF3.Utils {
                 case "*X033*.BIN":    return new SF3FileType[] { SF3FileType.X033 };
                 case "*X044*.BIN":    return new SF3FileType[] { SF3FileType.X044 };
                 case "*.MPD":         return new SF3FileType[] { SF3FileType.MPD };
+                case "*.CHR":         return new SF3FileType[] { SF3FileType.CHR };
                 default:
                     return new SF3FileType[] {};
             }
