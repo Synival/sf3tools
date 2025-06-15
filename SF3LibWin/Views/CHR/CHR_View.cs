@@ -12,7 +12,8 @@ namespace SF3.Win.Views.CHR {
                 return null;
 
             var ngc = Model.NameGetterContext;
-            // TODO: actually add!
+            if (Model.SpriteTable != null)
+                CreateChild(new TableView("Sprites", Model.SpriteTable, ngc));
 
             return Control;
         }

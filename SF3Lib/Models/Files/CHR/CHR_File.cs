@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using CommonLib.NamedValues;
 using SF3.ByteData;
 using SF3.Models.Tables;
+using SF3.Models.Tables.CHR;
 using SF3.Types;
 
 namespace SF3.Models.Files.CHR {
@@ -21,7 +22,11 @@ namespace SF3.Models.Files.CHR {
         }
 
         public override IEnumerable<ITable> MakeTables() {
-            return new List<ITable>();
+            return new List<ITable>() {
+                (SpriteTable = SpriteTable.Create(Data, nameof(SpriteTable), 0x00))
+            };
         }
+
+        public SpriteTable SpriteTable { get; private set; }
     }
 }
