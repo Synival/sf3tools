@@ -46,7 +46,8 @@ namespace SF3.Models.Files.CHR {
                     (int) (x.DataOffset + x.FrameTableOffset),
                     x.DataOffset, x.Width, x.Height,
                     $"Sprite{x.ID:D2}_",
-                    x.SpriteID))
+                    x.SpriteID,
+                    x.Directions))
                 .ToDictionary(x => x.Address, x => x);
 
             AnimationOffsetsTable = AnimationOffsetsTable.Create(Data, nameof(AnimationOffsetsTable),

@@ -172,7 +172,7 @@ namespace CommonLib.Utils {
         /// <param name="data">Data which contains the compressed data (e.g, a CHR/CHP file).</param>
         /// <param name="offset">Offset to the chunk of data pointed to by an offset in the FrameTable of a Sprite.</param>
         /// <returns></returns>
-        public static ushort[] DecompressedSpriteData(byte[] data, uint offset) {
+        public static ushort[] DecompressSpriteData(byte[] data, uint offset) {
             var decompressedData = new List<ushort>();
             var dataPos = offset + 0x04u;
             var dataEnd = offset + data.GetUInt32((int) offset);

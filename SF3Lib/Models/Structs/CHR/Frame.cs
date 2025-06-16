@@ -9,11 +9,12 @@ namespace SF3.Models.Structs.CHR {
         private readonly int _textureOffsetAddr;
         private int _compressedTextureSizeAddr;
 
-        public Frame(IByteData data, int id, string name, int address, uint dataOffset, int width, int height, int spriteId) : base(data, id, name, address, 0x04) {
+        public Frame(IByteData data, int id, string name, int address, uint dataOffset, int width, int height, int spriteId, SpriteFrameDirection direction) : base(data, id, name, address, 0x04) {
             DataOffset = dataOffset;
             Width      = width;
             Height     = height;
             SpriteID   = spriteId;
+            Direction  = direction;
 
             _textureOffsetAddr = Address + 0x00; // 4 bytes
             _compressedTextureSizeAddr = (TextureOffset != 0) ? (int) (TextureOffset + DataOffset) : 0;
@@ -25,6 +26,9 @@ namespace SF3.Models.Structs.CHR {
         [TableViewModelColumn(addressField: null, displayOrder: -0.3f, displayFormat: "X2", minWidth: 200)]
         [NameGetter(NamedValueType.Sprite)]
         public int SpriteID { get; }
+
+        [TableViewModelColumn(addressField: null, displayOrder: -0.25f)]
+        public SpriteFrameDirection Direction { get; }
 
         [TableViewModelColumn(displayOrder: -0.2f)]
         public int Width { get; }
@@ -53,7 +57,7 @@ namespace SF3.Models.Structs.CHR {
 
         private ushort[,] GetUncompressedTextureData() {
             try {
-                var decompressedData = Compression.DecompressedSpriteData(Data.Data.GetDataCopyOrReference(), (uint) _compressedTextureSizeAddr);
+                var decompressedData = Compression.DecompressSpriteData(Data.Data.GetDataCopyOrReference(), (uint) _compressedTextureSizeAddr);
                 if (decompressedData.Length != Width * Height)
                     return decompressedData.To2DArrayColumnMajor(1, decompressedData.Length);
                 else
