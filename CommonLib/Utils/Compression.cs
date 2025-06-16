@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace CommonLib.Utils {
@@ -161,6 +162,90 @@ namespace CommonLib.Utils {
 
             AppendClose();
             return compressedBytes.Take(currentOutputLocation).ToArray();
+        }
+
+        /// <summary>
+        /// Takes an array of bytes compressed with an algorithm specific to ABGR1555 sprites and returns the recompressed color data.
+        /// Algorithm is based on decompiled 'getDecompressedSpriteData()' by Ryudo:
+        /// https://github.com/RyudoSynbios/game-tools-collection/blob/82d807ded40d5d4320f1f1b3e90970c18fc2db0f/src/lib/templates/shining-force-3-saturn/romEditor/utils/image.ts
+        /// </summary>
+        /// <param name="data">Data which contains the compressed data (e.g, a CHR/CHP file).</param>
+        /// <param name="offset">Offset to the chunk of data pointed to by an offset in the FrameTable of a Sprite.</param>
+        /// <returns></returns>
+        public static ushort[] DecompressedSpriteData(byte[] data, uint offset) {
+            var decompressedData = new List<ushort>();
+            var dataPos = offset + 0x04u;
+            var dataEnd = offset + data.GetUInt32((int) offset);
+
+            // The 'feed' is the last set of bytes read in the upper byte, with a single bit following it, like a marker for the end.
+            // Every time a bit is read from the feed, it's left-shifted to the right.
+            // When the value is exactly 0x8000, that means the end of the feed has been reached, and it must be replenished.
+            // Use this value to start, so the first read will replenish the feed.
+            ushort feed = 0x8000;
+            var feedPos = dataEnd;
+
+            // Functions for the feed.
+            void ReplenishFeed()
+                => feed = (ushort) ((data[feedPos++] << 8) | 0x0080);
+
+            bool PopTopBitInFeed() {
+                var bit = (feed & 0x8000) != 0;
+                feed <<= 1;
+                return bit;
+            }
+
+            bool GetNextBitInFeed() {
+                if (feed == 0x8000)
+                    ReplenishFeed();
+                return PopTopBitInFeed();
+            }
+
+            // This is a buffer used for previously-seen values that can be added again. It effectively cuts the number of bytes per
+            // commonly-used color in half. It has some special values at the end that are never replaced.
+            var buffer = new ushort[0x80];
+            var bufferPos = 0;
+            buffer[0x7D] = 0x0000;
+            buffer[0x7E] = 0x8000;
+            buffer[0x7F] = 0x7fff;
+
+            // Read data until we've reached the end.
+            while (dataPos < dataEnd) {
+                var bufferLookupOrUpperByte = data[dataPos++];
+                ushort value;
+
+                // This algorithm is specifically catered towards ABGR1555. The only colors read and added to the
+                // buffer have their alpha bit on (0x8000). If the alpha bit is *not* on, this value is a lookup
+                // of a value read previously from the buffer. (Values 7D, 7E, and 7F are special reserved values)
+                if ((bufferLookupOrUpperByte & 0x80) == 0)
+                    value = buffer[bufferLookupOrUpperByte];
+                // Otherwise, it's a new value. Add it to the buffer, minding not to erase values at 7D, 7E, and 7F.
+                else {
+                    value = (ushort) ((bufferLookupOrUpperByte << 0x08) | data[dataPos++]);
+                    buffer[bufferPos++] = value;
+                    bufferPos %= 0x7D;
+                }
+
+                // Determine how many times to add this value.
+                // First, read the number of bits used for the 'count' value.
+                // (The highest bit is always '1', so this bit does not need to be stored.)
+                var bitsForCount = 1;
+                while (GetNextBitInFeed())
+                    bitsForCount++;
+
+                // Read a binary number from the bit feed, left-shifting for each bit.
+                // (Start with '1' for the automatically-provided highest bit)
+                var count = 1;
+                while (bitsForCount > 1) {
+                    count = (count << 1) | (GetNextBitInFeed() ? 1 : 0);
+                    bitsForCount--;
+                }
+
+                // We have the value, and the count -- add it.
+                for (int i = 0; i < count; i++)
+                    decompressedData.Add(value);
+            }
+
+            return decompressedData.ToArray();
         }
     }
 }
