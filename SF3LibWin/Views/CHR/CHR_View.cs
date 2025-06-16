@@ -14,6 +14,10 @@ namespace SF3.Win.Views.CHR {
             var ngc = Model.NameGetterContext;
             if (Model.SpriteTable != null)
                 CreateChild(new TableView("Sprites", Model.SpriteTable, ngc));
+            if (Model.SpriteOffset1SetTable != null)
+                CreateChild(new TableView("Sprite Offset 1 Tables", Model.SpriteOffset1SetTable, ngc));
+            if (Model.SpriteOffset2SetTable != null)
+                CreateChild(new TableView("Sprite Offset 2 Tables", Model.SpriteOffset2SetTable, ngc));
 
             return Control;
         }

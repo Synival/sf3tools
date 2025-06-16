@@ -17,22 +17,24 @@ namespace SF3.Models.Tables.CHR {
         }
 
         public override bool Load() {
+            int currentDataOffset = Address;
             int nextAddr = IsCHP ? 0 : Address;
             bool keepGoing = true;
 
             bool isValidSprite(Sprite spr)
                 => spr.SpriteId != 0xFFFF && spr.SpriteId < 0x0800 && spr.Width < 0x0200 && spr.Height < 0x0200 && spr.Width > 0 && spr.Height > 0 &&
-                   spr.AnimationDataOffset < 0x80000 && spr.SpriteDataOffset < 0x80000;
+                   spr.Offset1 < 0x80000 && spr.Offset2 < 0x80000 && spr.Scale > 0x0500 && spr.Scale < 0x30000 && spr.Directions > 0;
 
             return Load(
                 (id, addr) => {
-                    var spr = new Sprite(Data, id, nameof(Sprite) + id.ToString("D2"), IsCHP ? nextAddr : addr);
+                    var spr = new Sprite(Data, id, nameof(Sprite) + id.ToString("D2"), IsCHP ? nextAddr : addr, currentDataOffset);
                     nextAddr += spr.Size;
 
                     if (IsCHP) {
                         while (nextAddr < Data.Length - 0x18 && !isValidSprite(spr)) {
                             nextAddr = (nextAddr & 0x7FFFF800) + 0x800;
-                            spr = new Sprite(Data, id, nameof(Sprite) + id.ToString("D2"), nextAddr);
+                            currentDataOffset = nextAddr;
+                            spr = new Sprite(Data, id, nameof(Sprite) + id.ToString("D2"), nextAddr, currentDataOffset);
                         }
                         nextAddr += 0x18;
                         if (nextAddr >= Data.Length - 0x18)
