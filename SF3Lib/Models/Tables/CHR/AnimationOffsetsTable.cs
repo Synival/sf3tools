@@ -18,7 +18,7 @@ namespace SF3.Models.Tables.CHR {
 
         public override bool Load() {
             return Load(
-                (id, addr) => new AnimationOffsets(Data, id, $"{nameof(AnimationOffsets)}{id:D2}", addr, DataOffsets[id])
+                (id, addr) => new AnimationOffsets(Data, id, $"Sprite_AnimationOffsets{id:D2}", addr, DataOffsets[id])
             );
         }
 

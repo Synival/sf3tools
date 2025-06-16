@@ -3,7 +3,7 @@ using SF3.ByteData;
 using SF3.Types;
 
 namespace SF3.Models.Structs.CHR {
-    public class Sprite : Struct {
+    public class SpriteHeader : Struct {
         private readonly int _spriteIdAddr;
         private readonly int _widthAddr;
         private readonly int _heightAddr;
@@ -17,7 +17,7 @@ namespace SF3.Models.Structs.CHR {
         private readonly int _frameTableOffsetAddr;
         private readonly int _animationTableOffsetAddr;
 
-        public Sprite(IByteData data, int id, string name, int address, uint dataOffset) : base(data, id, name, address, 0x18) {
+        public SpriteHeader(IByteData data, int id, string name, int address, uint dataOffset) : base(data, id, name, address, 0x18) {
             DataOffset = dataOffset;
 
             _spriteIdAddr                = Address + 0x00; // 2 bytes

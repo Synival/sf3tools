@@ -14,8 +14,8 @@ namespace SF3.Win.Views.CHR {
                 return null;
 
             var ngc = Model.NameGetterContext;
-            if (Model.SpriteTable != null)
-                CreateChild(new TableView("Sprite Headers", Model.SpriteTable, ngc));
+            if (Model.SpriteHeaderTable != null)
+                CreateChild(new TableView("Sprite Headers", Model.SpriteHeaderTable, ngc));
             if (Model.FrameDataOffsetsTable != null)
                 CreateChild(new TableView("Frame Data Offsets", Model.FrameDataOffsetsTable, ngc));
             if (Model.FrameTablesByFileAddr?.Count > 0)

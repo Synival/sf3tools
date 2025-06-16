@@ -24,31 +24,40 @@ namespace SF3.Models.Files.CHR {
         }
 
         public override IEnumerable<ITable> MakeTables() {
-            int[] GetFrameTableOffsets(SpriteTable st)
+            int[] GetFrameTableOffsets(SpriteHeaderTable st)
                 => st.Select(x => (int) (x.DataOffset + x.FrameTableOffset)).ToArray();
-            int[] GetAnimationTableOffsets(SpriteTable st)
+            int[] GetAnimationTableOffsets(SpriteHeaderTable st)
                 => st.Select(x => (int) (x.DataOffset + x.AnimationTableOffset)).ToArray();
-            uint[] GetDataOffsets(SpriteTable st)
+            uint[] GetDataOffsets(SpriteHeaderTable st)
                 => st.Select(x => x.DataOffset).ToArray();
 
-            SpriteTable = SpriteTable.Create(Data, nameof(SpriteTable), 0x00, IsCHP);
+            SpriteHeaderTable = SpriteHeaderTable.Create(Data, nameof(SpriteHeaderTable), 0x00, IsCHP);
 
             FrameDataOffsetsTable = FrameDataOffsetsTable.Create(Data, nameof(FrameDataOffsetsTable),
-                GetFrameTableOffsets(SpriteTable), GetDataOffsets(SpriteTable));
-            FrameTablesByFileAddr = SpriteTable
-                .Select(x => FrameTable.Create(Data, $"{nameof(FrameTable)}_{x.ID:D2}", (int) (x.DataOffset + x.FrameTableOffset), x.DataOffset, x.Width, x.Height))
+                GetFrameTableOffsets(SpriteHeaderTable), GetDataOffsets(SpriteHeaderTable));
+            FrameTablesByFileAddr = SpriteHeaderTable
+                .Select(x => FrameTable.Create(
+                    Data,
+                    $"Sprite{x.ID:D2}_Frames",
+                    (int) (x.DataOffset + x.FrameTableOffset),
+                    x.DataOffset, x.Width, x.Height,
+                    $"Sprite{x.ID:D2}_"))
                 .ToDictionary(x => x.Address, x => x);
 
             AnimationOffsetsTable = AnimationOffsetsTable.Create(Data, nameof(AnimationOffsetsTable),
-                GetAnimationTableOffsets(SpriteTable), GetDataOffsets(SpriteTable));
+                GetAnimationTableOffsets(SpriteHeaderTable), GetDataOffsets(SpriteHeaderTable));
             AnimationFrameTablesByAddr = AnimationOffsetsTable
-                .SelectMany(x => x.Select((y, i) => new { SpriteOff2 = x, FileAddr = (int) (y + x.DataOffset), Index = i, Offset = y }))
+                .SelectMany(x => x.Select((y, i) => new { AnimOffsets = x, FileAddr = (int) (y + x.DataOffset), Index = i, Offset = y }))
                 .Where(x => x.Offset != 0)
-                .Select(x => AnimationFrameTable.Create(Data, x.SpriteOff2.Name + $"_{x.Index:D2}", x.FileAddr))
+                .Select(x => AnimationFrameTable.Create(
+                    Data,
+                    $"Sprite{x.AnimOffsets.ID:D2}_Animation{x.Index:D2}",
+                    x.FileAddr,
+                    $"Sprite{x.AnimOffsets.ID:D2}_Animation{x.Index:D2}_"))
                 .ToDictionary(x => x.Address, x => x);
 
             var tables = new List<ITable>() {
-                SpriteTable,
+                SpriteHeaderTable,
                 FrameDataOffsetsTable,
                 AnimationOffsetsTable
             };
@@ -59,7 +68,7 @@ namespace SF3.Models.Files.CHR {
         }
 
         public bool IsCHP { get; }
-        public SpriteTable SpriteTable { get; private set; }
+        public SpriteHeaderTable SpriteHeaderTable { get; private set; }
         public FrameDataOffsetsTable FrameDataOffsetsTable { get; private set; }
         public Dictionary<int, FrameTable> FrameTablesByFileAddr { get; private set; }
         public AnimationOffsetsTable AnimationOffsetsTable { get; private set; }
