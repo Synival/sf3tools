@@ -19,7 +19,7 @@ namespace CommonLib.Discovery {
             var dataAddrMax = Data.Length - 3;
             for (uint dataAddr = 0; dataAddr < dataAddrMax; dataAddr += 4) {
                 var addr = dataAddr + Address;
-                var value = Data.GetUInt((int) dataAddr);
+                var value = Data.GetUInt32((int) dataAddr);
                 if (value >= min && value < max) {
                     if (value >= dataAddrMax + Address)
                         ;
@@ -41,7 +41,7 @@ namespace CommonLib.Discovery {
 
             AddUnknownAtPointerValue(addr);
             RemoveUnknownsAt(addr);
-            var newData = DiscoveredPointersByAddress[addr] = new DiscoveredData(this, addr, 4, DiscoveredDataType.Pointer, "void*", "", Data.GetUInt((int) (addr - Address)));
+            var newData = DiscoveredPointersByAddress[addr] = new DiscoveredData(this, addr, 4, DiscoveredDataType.Pointer, "void*", "", Data.GetUInt32((int) (addr - Address)));
             UpdatePointersToDiscoveredData(DiscoveredPointersByAddress[addr]);
             return newData;
         }
@@ -53,14 +53,14 @@ namespace CommonLib.Discovery {
             AddUnknownAtPointerValue(addr);
             RemoveUnknownsAt(addr);
             // TODO: what if a something is already there?
-            var newData = DiscoveredPointersByAddress[addr] = new DiscoveredData(this, addr, 4, DiscoveredDataType.Pointer, typeName, name, Data.GetUInt((int) (addr - Address)));
+            var newData = DiscoveredPointersByAddress[addr] = new DiscoveredData(this, addr, 4, DiscoveredDataType.Pointer, typeName, name, Data.GetUInt32((int) (addr - Address)));
             UpdatePointersToDiscoveredData(DiscoveredPointersByAddress[addr]);
             return newData;
         }
 
         private void AddUnknownAtPointerValue(uint addr) {
             if (addr > Address && addr < Address + Data.Length - 3) {
-                var value = Data.GetUInt((int) (addr - Address));
+                var value = Data.GetUInt32((int) (addr - Address));
                 if (!HasDiscoveryAt(value))
                     // TODO: track what's pointing to it?
                     DiscoveredUnknownsByAddress[value] = new DiscoveredData(this, value, null, DiscoveredDataType.Unknown, "Unknown", "unknown", null);
@@ -103,20 +103,20 @@ namespace CommonLib.Discovery {
         public Dictionary<uint, DiscoveredData[]> GetUnidentifiedPointersByValue() {
             return DiscoveredPointersByAddress.Values
                 .Where(x => x.IsUnidentifiedPointer)
-                .GroupBy(x => Data.GetUInt((int) (x.Address - Address)))
+                .GroupBy(x => Data.GetUInt32((int) (x.Address - Address)))
                 .ToDictionary(x => x.Key, x => x.ToArray());
         }
 
         public Dictionary<uint, DiscoveredData[]> GetPointersByValue() {
             return DiscoveredPointersByAddress.Values
                 .Where(x => x.Type == DiscoveredDataType.Pointer)
-                .GroupBy(x => Data.GetUInt((int) (x.Address - Address)))
+                .GroupBy(x => Data.GetUInt32((int) (x.Address - Address)))
                 .ToDictionary(x => x.Key, x => x.ToArray());
         }
 
         public DiscoveredData[] GetUnidentifiedPointersByValue(uint ptrValue) {
             return DiscoveredPointersByAddress.Values
-                .Where(x => x.IsUnidentifiedPointer && Data.GetUInt((int) (x.Address - Address)) == ptrValue)
+                .Where(x => x.IsUnidentifiedPointer && Data.GetUInt32((int) (x.Address - Address)) == ptrValue)
                 .ToArray();
         }
 
@@ -125,7 +125,7 @@ namespace CommonLib.Discovery {
 
         public DiscoveredData[] GetPointersByValue(uint ptrValue) {
             return DiscoveredPointersByAddress.Values
-                .Where(x => Data.GetUInt((int) (x.Address - Address)) == ptrValue)
+                .Where(x => Data.GetUInt32((int) (x.Address - Address)) == ptrValue)
                 .ToArray();
         }
 

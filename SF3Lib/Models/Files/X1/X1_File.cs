@@ -307,7 +307,7 @@ namespace SF3.Models.Files.X1 {
                     var modelsPtrAddr = modelsPtrRamAddr - RamAddress;
 
                     // ...and the pointer itself. If it looks like a pointer, we're in business.
-                    var modelsRamAddr = data.GetUInt((int) modelsPtrAddr);
+                    var modelsRamAddr = data.GetUInt32((int) modelsPtrAddr);
                     if (modelsRamAddr >= RamAddress && modelsRamAddr < RamAddress + data.Length)
                         Discoveries.AddArray(modelsRamAddr, nameof(ModelInstanceGroup) + "[]", $"modelInstanceGroup{instanceGroupId++:D2}", null);
                 }
@@ -378,7 +378,7 @@ namespace SF3.Models.Files.X1 {
                     continue;
 
                 var blacksmithTablePtrFileAddr = disc.Address + offset - RamAddress;
-                var blacksmithTableFileAddr = data.GetUInt((int) blacksmithTablePtrFileAddr) - RamAddress;
+                var blacksmithTableFileAddr = data.GetUInt32((int) blacksmithTablePtrFileAddr) - RamAddress;
                 addresses.Add((int) blacksmithTableFileAddr);
             }
 
