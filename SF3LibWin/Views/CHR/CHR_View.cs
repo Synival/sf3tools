@@ -1,5 +1,7 @@
-﻿using System.Windows.Forms;
+﻿using System.Linq;
+using System.Windows.Forms;
 using SF3.Models.Files.CHR;
+using SF3.Models.Tables.CHR;
 
 namespace SF3.Win.Views.CHR {
     public class CHR_View : TabView {
@@ -18,6 +20,8 @@ namespace SF3.Win.Views.CHR {
                 CreateChild(new TableView("Sprite Offset 1 Tables", Model.SpriteOffset1SetTable, ngc));
             if (Model.SpriteOffset2SetTable != null)
                 CreateChild(new TableView("Sprite Offset 2 Tables", Model.SpriteOffset2SetTable, ngc));
+            if (Model.SpriteOffset2SubTablesByFileAddr?.Count > 0)
+                CreateChild(new TableArrayView<SpriteOffset2SubTable>("Sprite Offset 2 Sub-Tables", Model.SpriteOffset2SubTablesByFileAddr.Values.ToArray(), ngc));
 
             return Control;
         }

@@ -23,6 +23,5 @@ namespace SF3.Models.Tables.CHR {
         }
 
         public int[] DataOffsets { get; }
-
     }
 }

@@ -1,9 +1,12 @@
-﻿using CommonLib.Attributes;
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using CommonLib.Attributes;
 using SF3.ByteData;
-using SF3.Types;
 
 namespace SF3.Models.Structs.CHR {
-    public class SpriteOffset2Set : Struct {
+    public class SpriteOffset2Set : Struct, IEnumerable<int> {
         private readonly int _offset01Addr;
         private readonly int _offset02Addr;
         private readonly int _offset03Addr;
@@ -43,6 +46,26 @@ namespace SF3.Models.Structs.CHR {
         }
 
         public int DataOffset { get; }
+
+        public int this[int index] {
+            get => (index >= 0 && index < 16) ? Data.GetDouble(Address + index * 0x04) : throw new ArgumentOutOfRangeException(nameof(index));
+            set {
+                if (index >= 0 && index < 16)
+                    Data.SetDouble(Address + index * 0x04, value);
+                else
+                    throw new ArgumentOutOfRangeException(nameof(index));
+            }
+        }
+
+        public IEnumerable<int> GetOffsets() {
+            var offsets = new int[16];
+            for (int i = 0; i < offsets.Length; i++)
+                offsets[i] = Data.GetDouble(Address + i * 0x04);
+            return offsets;
+        }
+
+        public IEnumerator<int> GetEnumerator() => GetOffsets().GetEnumerator();
+        IEnumerator IEnumerable.GetEnumerator() => GetOffsets().GetEnumerator();
 
         [TableViewModelColumn(addressField: nameof(_offset01Addr), displayOrder: 0, isPointer: true)]
         [BulkCopy]

@@ -1,9 +1,12 @@
-﻿using CommonLib.Attributes;
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using CommonLib.Attributes;
 using SF3.ByteData;
 
 namespace SF3.Models.Structs.CHR {
-    public class SpriteOffset1Set : Struct {
-        public SpriteOffset1Set(IByteData data, int id, string name, int address, int dataOffset) : base(data, id, name, address, 0x40) {
+    public class SpriteOffset1Set : Struct, IEnumerable<int> {
+        public SpriteOffset1Set(IByteData data, int id, string name, int address, int dataOffset) : base(data, id, name, address, 0x00) {
             DataOffset = dataOffset;
 
             int length = 0;
@@ -11,6 +14,7 @@ namespace SF3.Models.Structs.CHR {
                 length++;
 
             Length = length;
+            Size = length * 0x04;
         }
 
         public int DataOffset { get; }
@@ -24,6 +28,26 @@ namespace SF3.Models.Structs.CHR {
         void SetOffset(int index, int? value) {
             if (value.HasValue && index >= 0 && index < Length)
                 SetOffset(0, value);
+        }
+
+        public IEnumerable<int> GetOffsets() {
+            var offsets = new int[Length];
+            for (int i = 0; i < offsets.Length; i++)
+                offsets[i] = Data.GetDouble(Address + i * 0x04);
+            return offsets;
+        }
+
+        public IEnumerator<int> GetEnumerator() => GetOffsets().GetEnumerator();
+        IEnumerator IEnumerable.GetEnumerator() => GetOffsets().GetEnumerator();
+
+        public int this[int index] {
+            get => (index >= 0 && index < Length) ? GetOffset(index).Value : throw new ArgumentOutOfRangeException(nameof(index));
+            set {
+                if (index >= 0 && index < Length)
+                    SetOffset(index, value);
+                else
+                    throw new ArgumentOutOfRangeException(nameof(index));
+            }
         }
 
         // Gigantic table of properties so it's visible to the ObjectListView (eeeeew)

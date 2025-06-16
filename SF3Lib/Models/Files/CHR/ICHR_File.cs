@@ -7,5 +7,6 @@ namespace SF3.Models.Files.CHR {
         SpriteTable SpriteTable { get; }
         SpriteOffset1SetTable SpriteOffset1SetTable { get; }
         SpriteOffset2SetTable SpriteOffset2SetTable { get; }
+        Dictionary<int, SpriteOffset2SubTable> SpriteOffset2SubTablesByFileAddr { get; }
     }
 }
