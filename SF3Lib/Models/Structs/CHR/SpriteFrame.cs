@@ -1,10 +1,12 @@
 ﻿using CommonLib.Attributes;
+using CommonLib.Extensions;
+using CommonLib.Utils;
 using SF3.ByteData;
 
 namespace SF3.Models.Structs.CHR {
     public class SpriteFrame : Struct {
         private readonly int _textureOffsetAddr;
-        private int _textureSizeAddr;
+        private int _compressedTextureSizeAddr;
 
         public SpriteFrame(IByteData data, int id, string name, int address, uint dataOffset, int width, int height) : base(data, id, name, address, 0x04) {
             DataOffset = dataOffset;
@@ -12,9 +14,8 @@ namespace SF3.Models.Structs.CHR {
             Height     = height;
 
             _textureOffsetAddr = Address + 0x00; // 4 bytes
-            _textureSizeAddr = (int) (TextureOffset + DataOffset);
-
-            Texture = new TextureABGR1555(0, 0, 0, GetUncompressedTextureData());
+            _compressedTextureSizeAddr = (TextureOffset != 0) ? (int) (TextureOffset + DataOffset) : 0;
+            Texture =_compressedTextureSizeAddr != 0 ?  new TextureABGR1555(0, 0, 0, GetUncompressedTextureData()) : (ITexture) null;
         }
 
         public uint DataOffset { get; }
@@ -31,22 +32,30 @@ namespace SF3.Models.Structs.CHR {
             get => (uint) Data.GetDouble(_textureOffsetAddr);
             set {
                 Data.SetDouble(_textureOffsetAddr, (int) value);
-                _textureSizeAddr = (int) (TextureOffset + DataOffset);
+                _compressedTextureSizeAddr = (int) (TextureOffset + DataOffset);
             }
         }
 
-        [TableViewModelColumn(displayOrder: 1, addressField: nameof(_textureSizeAddr), displayFormat: "X2")]
+        [TableViewModelColumn(displayOrder: 1, addressField: nameof(_compressedTextureSizeAddr), displayFormat: "X2")]
         [BulkCopy]
-        public uint TextureSize {
-            get => (uint) Data.GetDouble(_textureSizeAddr);
-            set => Data.SetDouble(_textureSizeAddr, (int) value);
+        public uint CompressedTextureSize {
+            get => (uint) Data.GetDouble(_compressedTextureSizeAddr);
+            set => Data.SetDouble(_compressedTextureSizeAddr, (int) value);
         }
 
         public ITexture Texture { get; private set; }
 
         private ushort[,] GetUncompressedTextureData() {
-            // TODO: populate with data!
-            return new ushort[Width, Height];
+            try {
+                var decompressedData = Compression.DecompressedSpriteData(Data.Data.GetDataCopyOrReference(), (uint) _compressedTextureSizeAddr);
+                if (decompressedData.Length != Width * Height)
+                    return decompressedData.To2DArrayColumnMajor(1, decompressedData.Length);
+                else
+                    return decompressedData.To2DArrayColumnMajor(Width, Height);
+            }
+            catch {
+                return new ushort[0, 0];
+            }
         }
     }
 }
