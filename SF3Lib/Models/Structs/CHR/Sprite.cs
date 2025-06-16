@@ -17,7 +17,7 @@ namespace SF3.Models.Structs.CHR {
         private readonly int _offset1Addr;
         private readonly int _offset2Addr;
 
-        public Sprite(IByteData data, int id, string name, int address, int dataOffset) : base(data, id, name, address, 0x18) {
+        public Sprite(IByteData data, int id, string name, int address, uint dataOffset) : base(data, id, name, address, 0x18) {
             DataOffset = dataOffset;
 
             _spriteIdAddr                = Address + 0x00; // 2 bytes
@@ -34,7 +34,7 @@ namespace SF3.Models.Structs.CHR {
             _offset2Addr        = Address + 0x14; // 4 bytes
         }
 
-        public int DataOffset { get; }
+        public uint DataOffset { get; }
 
         [TableViewModelColumn(addressField: nameof(_spriteIdAddr), displayOrder: 0, displayFormat: "X2", minWidth: 200)]
         [NameGetter(NamedValueType.Sprite)]

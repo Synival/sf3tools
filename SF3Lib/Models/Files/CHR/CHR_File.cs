@@ -28,17 +28,21 @@ namespace SF3.Models.Files.CHR {
                 => st.Select(x => (int) (x.DataOffset + x.Offset1)).ToArray();
             int[] GetOffset2Addresses(SpriteTable st)
                 => st.Select(x => (int) (x.DataOffset + x.Offset2)).ToArray();
-            int[] GetOffsetTable(SpriteTable st)
+            uint[] GetDataOffsets(SpriteTable st)
                 => st.Select(x => x.DataOffset).ToArray();
 
             SpriteTable = SpriteTable.Create(Data, nameof(SpriteTable), 0x00, IsCHP);
-            SpriteOffset1SetTable = SpriteOffset1SetTable.Create(Data, nameof(SpriteOffset1SetTable),
-                GetOffset1Addresses(SpriteTable), GetOffsetTable(SpriteTable));
-            SpriteOffset2SetTable = SpriteOffset2SetTable.Create(Data, nameof(SpriteOffset2SetTable),
-                GetOffset2Addresses(SpriteTable), GetOffsetTable(SpriteTable));
 
+            SpriteOffset1SetTable = SpriteOffset1SetTable.Create(Data, nameof(SpriteOffset1SetTable),
+                GetOffset1Addresses(SpriteTable), GetDataOffsets(SpriteTable));
+            SpriteFrameTablesByFileAddr = SpriteTable
+                .Select(x => SpriteFrameTable.Create(Data, $"{nameof(SpriteFrameTable)}_{x.ID:D2}", (int) (x.DataOffset + x.Offset1), x.DataOffset))
+                .ToDictionary(x => x.Address, x => x);
+
+            SpriteOffset2SetTable = SpriteOffset2SetTable.Create(Data, nameof(SpriteOffset2SetTable),
+                GetOffset2Addresses(SpriteTable), GetDataOffsets(SpriteTable));
             SpriteOffset2SubTablesByFileAddr = SpriteOffset2SetTable
-                .SelectMany(x => x.Select((y, i) => new { SpriteOff2 = x, FileAddr = y + x.DataOffset, Index = i, Offset = y }))
+                .SelectMany(x => x.Select((y, i) => new { SpriteOff2 = x, FileAddr = (int) (y + x.DataOffset), Index = i, Offset = y }))
                 .Where(x => x.Offset != 0)
                 .Select(x => SpriteOffset2SubTable.Create(Data, x.SpriteOff2.Name + $"_{x.Index:D2}", x.FileAddr))
                 .ToDictionary(x => x.Address, x => x);
@@ -48,6 +52,7 @@ namespace SF3.Models.Files.CHR {
                 SpriteOffset1SetTable,
                 SpriteOffset2SetTable
             };
+            tables.AddRange(SpriteFrameTablesByFileAddr.Values);
             tables.AddRange(SpriteOffset2SubTablesByFileAddr.Values);
 
             return tables;
@@ -56,6 +61,7 @@ namespace SF3.Models.Files.CHR {
         public bool IsCHP { get; }
         public SpriteTable SpriteTable { get; private set; }
         public SpriteOffset1SetTable SpriteOffset1SetTable { get; private set; }
+        public Dictionary<int, SpriteFrameTable> SpriteFrameTablesByFileAddr { get; private set; }
         public SpriteOffset2SetTable SpriteOffset2SetTable { get; private set; }
         public Dictionary<int, SpriteOffset2SubTable> SpriteOffset2SubTablesByFileAddr { get; private set; }
     }

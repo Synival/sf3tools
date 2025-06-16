@@ -4,12 +4,12 @@ using SF3.Models.Structs.CHR;
 
 namespace SF3.Models.Tables.CHR {
     public class SpriteOffset2SetTable : AddressedTable<SpriteOffset2Set> {
-        protected SpriteOffset2SetTable(IByteData data, string name, int[] addresses, int[] dataOffsets)
+        protected SpriteOffset2SetTable(IByteData data, string name, int[] addresses, uint[] dataOffsets)
         : base(data, name, addresses) {
             DataOffsets = dataOffsets;
         }
 
-        public static SpriteOffset2SetTable Create(IByteData data, string name, int[] addresses, int[] dataOffsets) {
+        public static SpriteOffset2SetTable Create(IByteData data, string name, int[] addresses, uint[] dataOffsets) {
             var newTable = new SpriteOffset2SetTable(data, name, addresses, dataOffsets);
             if (!newTable.Load())
                 throw new InvalidOperationException("Couldn't initialize table");
@@ -22,6 +22,6 @@ namespace SF3.Models.Tables.CHR {
             );
         }
 
-        public int[] DataOffsets { get; }
+        public uint[] DataOffsets { get; }
     }
 }

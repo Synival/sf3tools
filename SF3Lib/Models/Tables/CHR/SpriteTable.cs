@@ -17,8 +17,8 @@ namespace SF3.Models.Tables.CHR {
         }
 
         public override bool Load() {
-            int currentDataOffset = Address;
-            int nextAddr = IsCHP ? 0 : Address;
+            uint currentDataOffset = (uint) Address;
+            uint nextAddr = IsCHP ? 0 : currentDataOffset;
             bool keepGoing = true;
 
             bool isValidSprite(Sprite spr)
@@ -27,14 +27,14 @@ namespace SF3.Models.Tables.CHR {
 
             return Load(
                 (id, addr) => {
-                    var spr = new Sprite(Data, id, nameof(Sprite) + id.ToString("D2"), IsCHP ? nextAddr : addr, currentDataOffset);
-                    nextAddr += spr.Size;
+                    var spr = new Sprite(Data, id, nameof(Sprite) + id.ToString("D2"), IsCHP ? (int) nextAddr : addr, currentDataOffset);
+                    nextAddr += (uint) spr.Size;
 
                     if (IsCHP) {
                         while (nextAddr < Data.Length - 0x18 && !isValidSprite(spr)) {
                             nextAddr = (nextAddr & 0x7FFFF800) + 0x800;
                             currentDataOffset = nextAddr;
-                            spr = new Sprite(Data, id, nameof(Sprite) + id.ToString("D2"), nextAddr, currentDataOffset);
+                            spr = new Sprite(Data, id, nameof(Sprite) + id.ToString("D2"), (int) nextAddr, currentDataOffset);
                         }
                         nextAddr += 0x18;
                         if (nextAddr >= Data.Length - 0x18)
