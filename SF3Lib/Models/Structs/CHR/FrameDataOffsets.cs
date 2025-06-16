@@ -5,8 +5,8 @@ using CommonLib.Attributes;
 using SF3.ByteData;
 
 namespace SF3.Models.Structs.CHR {
-    public class SpriteOffset1Set : Struct, IEnumerable<uint> {
-        public SpriteOffset1Set(IByteData data, int id, string name, int address, uint dataOffset) : base(data, id, name, address, 0x00) {
+    public class FrameDataOffsets : Struct, IEnumerable<uint> {
+        public FrameDataOffsets(IByteData data, int id, string name, int address, uint dataOffset) : base(data, id, name, address, 0x00) {
             DataOffset = dataOffset;
 
             int length = 0;

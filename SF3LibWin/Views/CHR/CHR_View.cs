@@ -15,15 +15,15 @@ namespace SF3.Win.Views.CHR {
 
             var ngc = Model.NameGetterContext;
             if (Model.SpriteTable != null)
-                CreateChild(new TableView("Sprites", Model.SpriteTable, ngc));
-            if (Model.SpriteOffset1SetTable != null)
-                CreateChild(new TableView("Sprite Frame Pointers", Model.SpriteOffset1SetTable, ngc));
-            if (Model.SpriteFrameTablesByFileAddr?.Count > 0)
-                CreateChild(new SpriteFramesArrayView("Sprite Frames", Model.SpriteFrameTablesByFileAddr.Values.ToArray(), ngc));
-            if (Model.SpriteOffset2SetTable != null)
-                CreateChild(new TableView("Sprite Offset 2 Tables", Model.SpriteOffset2SetTable, ngc));
-            if (Model.SpriteOffset2SubTablesByFileAddr?.Count > 0)
-                CreateChild(new TableArrayView<SpriteOffset2SubTable>("Sprite Offset 2 Sub-Tables", Model.SpriteOffset2SubTablesByFileAddr.Values.ToArray(), ngc));
+                CreateChild(new TableView("Sprite Headers", Model.SpriteTable, ngc));
+            if (Model.FrameDataOffsetsTable != null)
+                CreateChild(new TableView("Frame Data Offsets", Model.FrameDataOffsetsTable, ngc));
+            if (Model.FrameTablesByFileAddr?.Count > 0)
+                CreateChild(new SpriteFramesArrayView("Frames", Model.FrameTablesByFileAddr.Values.ToArray(), ngc));
+            if (Model.AnimationOffsetsTable != null)
+                CreateChild(new TableView("Animation Offsets", Model.AnimationOffsetsTable, ngc));
+            if (Model.AnimationFrameTablesByAddr?.Count > 0)
+                CreateChild(new TableArrayView<AnimationFrameTable>("Animations", Model.AnimationFrameTablesByAddr.Values.ToArray(), ngc));
 
             return Control;
         }

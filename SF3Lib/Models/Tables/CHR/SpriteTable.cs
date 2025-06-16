@@ -23,7 +23,7 @@ namespace SF3.Models.Tables.CHR {
 
             bool isValidSprite(Sprite spr)
                 => spr.SpriteId != 0xFFFF && spr.SpriteId < 0x0800 && spr.Width < 0x0200 && spr.Height < 0x0200 && spr.Width > 0 && spr.Height > 0 &&
-                   spr.Offset1 < 0x80000 && spr.Offset2 < 0x80000 && spr.Scale > 0x0500 && spr.Scale < 0x30000 && spr.Directions > 0;
+                   spr.FrameTableOffset < 0x80000 && spr.AnimationTableOffset < 0x80000 && spr.Scale > 0x0500 && spr.Scale < 0x30000 && spr.Directions > 0;
 
             return Load(
                 (id, addr) => {

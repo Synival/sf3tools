@@ -4,11 +4,11 @@ using CommonLib.Utils;
 using SF3.ByteData;
 
 namespace SF3.Models.Structs.CHR {
-    public class SpriteFrame : Struct {
+    public class Frame : Struct {
         private readonly int _textureOffsetAddr;
         private int _compressedTextureSizeAddr;
 
-        public SpriteFrame(IByteData data, int id, string name, int address, uint dataOffset, int width, int height) : base(data, id, name, address, 0x04) {
+        public Frame(IByteData data, int id, string name, int address, uint dataOffset, int width, int height) : base(data, id, name, address, 0x04) {
             DataOffset = dataOffset;
             Width      = width;
             Height     = height;

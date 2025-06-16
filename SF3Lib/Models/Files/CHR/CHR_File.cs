@@ -24,45 +24,45 @@ namespace SF3.Models.Files.CHR {
         }
 
         public override IEnumerable<ITable> MakeTables() {
-            int[] GetOffset1Addresses(SpriteTable st)
-                => st.Select(x => (int) (x.DataOffset + x.Offset1)).ToArray();
-            int[] GetOffset2Addresses(SpriteTable st)
-                => st.Select(x => (int) (x.DataOffset + x.Offset2)).ToArray();
+            int[] GetFrameTableOffsets(SpriteTable st)
+                => st.Select(x => (int) (x.DataOffset + x.FrameTableOffset)).ToArray();
+            int[] GetAnimationTableOffsets(SpriteTable st)
+                => st.Select(x => (int) (x.DataOffset + x.AnimationTableOffset)).ToArray();
             uint[] GetDataOffsets(SpriteTable st)
                 => st.Select(x => x.DataOffset).ToArray();
 
             SpriteTable = SpriteTable.Create(Data, nameof(SpriteTable), 0x00, IsCHP);
 
-            SpriteOffset1SetTable = SpriteOffset1SetTable.Create(Data, nameof(SpriteOffset1SetTable),
-                GetOffset1Addresses(SpriteTable), GetDataOffsets(SpriteTable));
-            SpriteFrameTablesByFileAddr = SpriteTable
-                .Select(x => SpriteFrameTable.Create(Data, $"{nameof(SpriteFrameTable)}_{x.ID:D2}", (int) (x.DataOffset + x.Offset1), x.DataOffset, x.Width, x.Height))
+            FrameDataOffsetsTable = FrameDataOffsetsTable.Create(Data, nameof(FrameDataOffsetsTable),
+                GetFrameTableOffsets(SpriteTable), GetDataOffsets(SpriteTable));
+            FrameTablesByFileAddr = SpriteTable
+                .Select(x => FrameTable.Create(Data, $"{nameof(FrameTable)}_{x.ID:D2}", (int) (x.DataOffset + x.FrameTableOffset), x.DataOffset, x.Width, x.Height))
                 .ToDictionary(x => x.Address, x => x);
 
-            SpriteOffset2SetTable = SpriteOffset2SetTable.Create(Data, nameof(SpriteOffset2SetTable),
-                GetOffset2Addresses(SpriteTable), GetDataOffsets(SpriteTable));
-            SpriteOffset2SubTablesByFileAddr = SpriteOffset2SetTable
+            AnimationOffsetsTable = AnimationOffsetsTable.Create(Data, nameof(AnimationOffsetsTable),
+                GetAnimationTableOffsets(SpriteTable), GetDataOffsets(SpriteTable));
+            AnimationFrameTablesByAddr = AnimationOffsetsTable
                 .SelectMany(x => x.Select((y, i) => new { SpriteOff2 = x, FileAddr = (int) (y + x.DataOffset), Index = i, Offset = y }))
                 .Where(x => x.Offset != 0)
-                .Select(x => SpriteOffset2SubTable.Create(Data, x.SpriteOff2.Name + $"_{x.Index:D2}", x.FileAddr))
+                .Select(x => AnimationFrameTable.Create(Data, x.SpriteOff2.Name + $"_{x.Index:D2}", x.FileAddr))
                 .ToDictionary(x => x.Address, x => x);
 
             var tables = new List<ITable>() {
                 SpriteTable,
-                SpriteOffset1SetTable,
-                SpriteOffset2SetTable
+                FrameDataOffsetsTable,
+                AnimationOffsetsTable
             };
-            tables.AddRange(SpriteFrameTablesByFileAddr.Values);
-            tables.AddRange(SpriteOffset2SubTablesByFileAddr.Values);
+            tables.AddRange(FrameTablesByFileAddr.Values);
+            tables.AddRange(AnimationFrameTablesByAddr.Values);
 
             return tables;
         }
 
         public bool IsCHP { get; }
         public SpriteTable SpriteTable { get; private set; }
-        public SpriteOffset1SetTable SpriteOffset1SetTable { get; private set; }
-        public Dictionary<int, SpriteFrameTable> SpriteFrameTablesByFileAddr { get; private set; }
-        public SpriteOffset2SetTable SpriteOffset2SetTable { get; private set; }
-        public Dictionary<int, SpriteOffset2SubTable> SpriteOffset2SubTablesByFileAddr { get; private set; }
+        public FrameDataOffsetsTable FrameDataOffsetsTable { get; private set; }
+        public Dictionary<int, FrameTable> FrameTablesByFileAddr { get; private set; }
+        public AnimationOffsetsTable AnimationOffsetsTable { get; private set; }
+        public Dictionary<int, AnimationFrameTable> AnimationFrameTablesByAddr { get; private set; }
     }
 }

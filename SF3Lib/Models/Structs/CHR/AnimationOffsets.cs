@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using CommonLib.Attributes;
 using SF3.ByteData;
 
 namespace SF3.Models.Structs.CHR {
-    public class SpriteOffset2Set : Struct, IEnumerable<uint> {
+    public class AnimationOffsets : Struct, IEnumerable<uint> {
         private readonly int _offset01Addr;
         private readonly int _offset02Addr;
         private readonly int _offset03Addr;
@@ -24,7 +23,7 @@ namespace SF3.Models.Structs.CHR {
         private readonly int _offset15Addr;
         private readonly int _offset16Addr;
 
-        public SpriteOffset2Set(IByteData data, int id, string name, int address, uint dataOffset) : base(data, id, name, address, 0x40) {
+        public AnimationOffsets(IByteData data, int id, string name, int address, uint dataOffset) : base(data, id, name, address, 0x40) {
             DataOffset = dataOffset;
 
             _offset01Addr = Address + 0x00; // 4 bytes

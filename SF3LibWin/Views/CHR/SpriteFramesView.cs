@@ -8,9 +8,9 @@ using SF3.Win.Extensions;
 
 namespace SF3.Win.Views.CHR {
     public class SpriteFramesView : ControlSpaceView {
-        public SpriteFramesView(string name, SpriteFrameTable model, INameGetterContext nameGetterContext) : base(name) {
+        public SpriteFramesView(string name, FrameTable model, INameGetterContext nameGetterContext) : base(name) {
             Model       = model;
-            TableView   = new TableView("Frames", model, nameGetterContext, typeof(SpriteFrame));
+            TableView   = new TableView("Frames", model, nameGetterContext, typeof(Frame));
             TextureView = new ImageView("Texture");
         }
 
@@ -29,7 +29,7 @@ namespace SF3.Win.Views.CHR {
 
         public void UpdateTexture() {
             var item = (OLVListItem) TableView.OLVControl.SelectedItem;
-            var frame = (SpriteFrame) item?.RowObject;
+            var frame = (Frame) item?.RowObject;
             TextureView.Image = frame?.Texture?.CreateBitmapARGB1555();
         }
 
@@ -48,7 +48,7 @@ namespace SF3.Win.Views.CHR {
             base.Destroy();
         }
 
-        public SpriteFrameTable Model { get; }
+        public FrameTable Model { get; }
         public TableView TableView { get; private set; }
         public ImageView TextureView { get; private set; }
     }

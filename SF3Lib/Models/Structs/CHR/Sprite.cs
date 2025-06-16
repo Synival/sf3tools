@@ -14,8 +14,8 @@ namespace SF3.Models.Structs.CHR {
         private readonly int _promotionLevelAddr;
         private readonly int _paddingAddr;
         private readonly int _scaleAddr;
-        private readonly int _offset1Addr;
-        private readonly int _offset2Addr;
+        private readonly int _frameTableOffsetAddr;
+        private readonly int _animationTableOffsetAddr;
 
         public Sprite(IByteData data, int id, string name, int address, uint dataOffset) : base(data, id, name, address, 0x18) {
             DataOffset = dataOffset;
@@ -30,8 +30,8 @@ namespace SF3.Models.Structs.CHR {
             _promotionLevelAddr          = Address + 0x0A; // 1 byte
             _paddingAddr                 = Address + 0x0B; // 1 byte
             _scaleAddr                   = Address + 0x0C; // 4 bytes
-            _offset1Addr     = Address + 0x10; // 4 bytes
-            _offset2Addr        = Address + 0x14; // 4 bytes
+            _frameTableOffsetAddr        = Address + 0x10; // 4 bytes
+            _animationTableOffsetAddr    = Address + 0x14; // 4 bytes
         }
 
         public uint DataOffset { get; }
@@ -107,18 +107,18 @@ namespace SF3.Models.Structs.CHR {
             set => Data.SetDouble(_scaleAddr, (int) value);
         }
 
-        [TableViewModelColumn(addressField: nameof(_offset1Addr), displayOrder: 10, displayFormat: "X2")]
+        [TableViewModelColumn(addressField: nameof(_frameTableOffsetAddr), displayOrder: 10, displayFormat: "X2")]
         [BulkCopy]
-        public uint Offset1 {
-            get => (uint) Data.GetDouble(_offset1Addr);
-            set => Data.SetDouble(_offset1Addr, (int) value);
+        public uint FrameTableOffset {
+            get => (uint) Data.GetDouble(_frameTableOffsetAddr);
+            set => Data.SetDouble(_frameTableOffsetAddr, (int) value);
         }
 
-        [TableViewModelColumn(addressField: nameof(_offset2Addr), displayOrder: 11, displayFormat: "X2")]
+        [TableViewModelColumn(addressField: nameof(_animationTableOffsetAddr), displayOrder: 11, displayFormat: "X2")]
         [BulkCopy]
-        public uint Offset2 {
-            get => (uint) Data.GetDouble(_offset2Addr);
-            set => Data.SetDouble(_offset2Addr, (int) value);
+        public uint AnimationTableOffset {
+            get => (uint) Data.GetDouble(_animationTableOffsetAddr);
+            set => Data.SetDouble(_animationTableOffsetAddr, (int) value);
         }
     }
 }
