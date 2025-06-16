@@ -3,11 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 using CommonLib.Attributes;
 using SF3.ByteData;
+using SF3.Types;
 
 namespace SF3.Models.Structs.CHR {
     public class FrameDataOffsets : Struct, IEnumerable<uint> {
-        public FrameDataOffsets(IByteData data, int id, string name, int address, uint dataOffset) : base(data, id, name, address, 0x00) {
+        public FrameDataOffsets(IByteData data, int id, string name, int address, uint dataOffset, int spriteId) : base(data, id, name, address, 0x00) {
             DataOffset = dataOffset;
+            SpriteID = spriteId;
 
             int length = 0;
             while (Data.GetDouble(address + length * 0x04) != 0x0000)
@@ -18,6 +20,10 @@ namespace SF3.Models.Structs.CHR {
         }
 
         public uint DataOffset { get; }
+
+        [TableViewModelColumn(addressField: null, displayOrder: -0.2f, displayFormat: "X2", minWidth: 200)]
+        [NameGetter(NamedValueType.Sprite)]
+        public int SpriteID { get; }
 
         [TableViewModelColumn(addressField: null, displayOrder: -0.1f)]
         public int Length { get; }

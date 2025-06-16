@@ -2,16 +2,18 @@
 using CommonLib.Extensions;
 using CommonLib.Utils;
 using SF3.ByteData;
+using SF3.Types;
 
 namespace SF3.Models.Structs.CHR {
     public class Frame : Struct {
         private readonly int _textureOffsetAddr;
         private int _compressedTextureSizeAddr;
 
-        public Frame(IByteData data, int id, string name, int address, uint dataOffset, int width, int height) : base(data, id, name, address, 0x04) {
+        public Frame(IByteData data, int id, string name, int address, uint dataOffset, int width, int height, int spriteId) : base(data, id, name, address, 0x04) {
             DataOffset = dataOffset;
             Width      = width;
             Height     = height;
+            SpriteID   = spriteId;
 
             _textureOffsetAddr = Address + 0x00; // 4 bytes
             _compressedTextureSizeAddr = (TextureOffset != 0) ? (int) (TextureOffset + DataOffset) : 0;
@@ -19,6 +21,10 @@ namespace SF3.Models.Structs.CHR {
         }
 
         public uint DataOffset { get; }
+
+        [TableViewModelColumn(addressField: null, displayOrder: -0.3f, displayFormat: "X2", minWidth: 200)]
+        [NameGetter(NamedValueType.Sprite)]
+        public int SpriteID { get; }
 
         [TableViewModelColumn(displayOrder: -0.2f)]
         public int Width { get; }

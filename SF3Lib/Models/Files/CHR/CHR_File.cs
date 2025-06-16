@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using CommonLib.NamedValues;
 using SF3.ByteData;
+using SF3.Models.Structs.CHR;
 using SF3.Models.Tables;
 using SF3.Models.Tables.CHR;
 using SF3.Types;
@@ -32,28 +33,36 @@ namespace SF3.Models.Files.CHR {
                 => st.Select(x => x.DataOffset).ToArray();
 
             SpriteHeaderTable = SpriteHeaderTable.Create(Data, nameof(SpriteHeaderTable), 0x00, IsCHP);
+            var spriteIdPropInfo = typeof(SpriteHeader).GetProperty(nameof(SpriteHeader.SpriteID));
+            var spriteIds = SpriteHeaderTable.Select(x => x.SpriteID).ToArray();
+            var spriteNames = SpriteHeaderTable.Select(x => NameGetterContext.GetName(x, spriteIdPropInfo, x.SpriteID, new object[] { NamedValueType.Sprite })).ToArray();
 
             FrameDataOffsetsTable = FrameDataOffsetsTable.Create(Data, nameof(FrameDataOffsetsTable),
-                GetFrameTableOffsets(SpriteHeaderTable), GetDataOffsets(SpriteHeaderTable));
+                GetFrameTableOffsets(SpriteHeaderTable), GetDataOffsets(SpriteHeaderTable), spriteIds);
             FrameTablesByFileAddr = SpriteHeaderTable
                 .Select(x => FrameTable.Create(
                     Data,
-                    $"Sprite{x.ID:D2}_Frames",
+                    $"Sprite{x.ID:D2}_Frames ({spriteNames[x.ID]})",
                     (int) (x.DataOffset + x.FrameTableOffset),
                     x.DataOffset, x.Width, x.Height,
-                    $"Sprite{x.ID:D2}_"))
+                    $"Sprite{x.ID:D2}_",
+                    x.SpriteID))
                 .ToDictionary(x => x.Address, x => x);
 
             AnimationOffsetsTable = AnimationOffsetsTable.Create(Data, nameof(AnimationOffsetsTable),
-                GetAnimationTableOffsets(SpriteHeaderTable), GetDataOffsets(SpriteHeaderTable));
+                GetAnimationTableOffsets(SpriteHeaderTable), GetDataOffsets(SpriteHeaderTable), spriteIds);
             AnimationFrameTablesByAddr = AnimationOffsetsTable
-                .SelectMany(x => x.Select((y, i) => new { AnimOffsets = x, FileAddr = (int) (y + x.DataOffset), Index = i, Offset = y }))
-                .Where(x => x.Offset != 0)
+                .SelectMany(x => x.Select((y, i) => new {
+                    AnimOffsets = x, FileAddr = (int) (y + x.DataOffset), Index = i, Offset = y })
+                    .Where(y => y.Offset != 0)
+                )
                 .Select(x => AnimationFrameTable.Create(
                     Data,
-                    $"Sprite{x.AnimOffsets.ID:D2}_Animation{x.Index:D2}",
+                    $"Sprite{x.AnimOffsets.ID:D2}_Animation{x.Index:D2} ({spriteNames[x.AnimOffsets.ID]})",
                     x.FileAddr,
-                    $"Sprite{x.AnimOffsets.ID:D2}_Animation{x.Index:D2}_"))
+                    $"Sprite{x.AnimOffsets.ID:D2}_Animation{x.Index:D2}_",
+                    x.AnimOffsets.SpriteID,
+                    x.Index))
                 .ToDictionary(x => x.Address, x => x);
 
             var tables = new List<ITable>() {

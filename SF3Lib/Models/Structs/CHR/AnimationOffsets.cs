@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using CommonLib.Attributes;
 using SF3.ByteData;
+using SF3.Types;
 
 namespace SF3.Models.Structs.CHR {
     public class AnimationOffsets : Struct, IEnumerable<uint> {
@@ -23,8 +24,9 @@ namespace SF3.Models.Structs.CHR {
         private readonly int _offset15Addr;
         private readonly int _offset16Addr;
 
-        public AnimationOffsets(IByteData data, int id, string name, int address, uint dataOffset) : base(data, id, name, address, 0x40) {
+        public AnimationOffsets(IByteData data, int id, string name, int address, uint dataOffset, int spriteId) : base(data, id, name, address, 0x40) {
             DataOffset = dataOffset;
+            SpriteID = spriteId;
 
             _offset01Addr = Address + 0x00; // 4 bytes
             _offset02Addr = Address + 0x04; // 4 bytes
@@ -45,6 +47,10 @@ namespace SF3.Models.Structs.CHR {
         }
 
         public uint DataOffset { get; }
+
+        [TableViewModelColumn(addressField: null, displayOrder: -0.2f, displayFormat: "X2", minWidth: 200)]
+        [NameGetter(NamedValueType.Sprite)]
+        public int SpriteID { get; }
 
         public uint this[int index] {
             get => (index >= 0 && index < 16) ? (uint) Data.GetDouble(Address + index * 0x04) : throw new ArgumentOutOfRangeException(nameof(index));

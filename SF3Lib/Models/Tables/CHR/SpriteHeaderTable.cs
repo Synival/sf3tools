@@ -22,7 +22,7 @@ namespace SF3.Models.Tables.CHR {
             bool keepGoing = true;
 
             bool isValidSprite(SpriteHeader spr)
-                => spr.SpriteId != 0xFFFF && spr.SpriteId < 0x0800 && spr.Width < 0x0200 && spr.Height < 0x0200 && spr.Width > 0 && spr.Height > 0 &&
+                => spr.SpriteID != 0xFFFF && spr.SpriteID < 0x0800 && spr.Width < 0x0200 && spr.Height < 0x0200 && spr.Width > 0 && spr.Height > 0 &&
                    spr.FrameTableOffset < 0x80000 && spr.AnimationTableOffset < 0x80000 && spr.Scale > 0x0500 && spr.Scale < 0x30000 && spr.Directions > 0;
 
             return Load(
@@ -43,7 +43,7 @@ namespace SF3.Models.Tables.CHR {
 
                     return spr;
                 },
-                (rows, prevRow) => IsCHP ? keepGoing : prevRow.SpriteId != 0xFFFF,
+                (rows, prevRow) => IsCHP ? keepGoing : prevRow.SpriteID != 0xFFFF,
                 false
             );
         }

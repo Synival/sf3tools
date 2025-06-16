@@ -4,13 +4,14 @@ using SF3.Models.Structs.CHR;
 
 namespace SF3.Models.Tables.CHR {
     public class FrameDataOffsetsTable : AddressedTable<FrameDataOffsets> {
-        protected FrameDataOffsetsTable(IByteData data, string name, int[] addresses, uint[] dataOffsets)
+        protected FrameDataOffsetsTable(IByteData data, string name, int[] addresses, uint[] dataOffsets, int[] spriteIds)
         : base(data, name, addresses) {
             DataOffsets = dataOffsets;
+            SpriteIDs   = spriteIds;
         }
 
-        public static FrameDataOffsetsTable Create(IByteData data, string name, int[] addresses, uint[] dataOffsets) {
-            var newTable = new FrameDataOffsetsTable(data, name, addresses, dataOffsets);
+        public static FrameDataOffsetsTable Create(IByteData data, string name, int[] addresses, uint[] dataOffsets, int[] spriteIds) {
+            var newTable = new FrameDataOffsetsTable(data, name, addresses, dataOffsets, spriteIds);
             if (!newTable.Load())
                 throw new InvalidOperationException("Couldn't initialize table");
             return newTable;
@@ -18,10 +19,11 @@ namespace SF3.Models.Tables.CHR {
 
         public override bool Load() {
             return Load(
-                (id, addr) => new FrameDataOffsets(Data, id, $"Sprite_FrameDataOffsets{id:D2}", addr, DataOffsets[id])
+                (id, addr) => new FrameDataOffsets(Data, id, $"Sprite_FrameDataOffsets{id:D2}", addr, DataOffsets[id], SpriteIDs[id])
             );
         }
 
         public uint[] DataOffsets { get; }
+        public int[] SpriteIDs { get; }
     }
 }
