@@ -314,20 +314,40 @@
     <item value="0x230" name="Harold's Tank" />
     <item value="0x231" name="Steel" />
     <item value="0x232" name="Turk (Ogre)" />
-    
+
+    <item value="0x234" name="Oneanera" />
+
     <item value="0x236" name="Penn's Shell" />
     <item value="0x237" name="Penko's Shell" />
+    <item value="0x238" name="Maya Woman in Green Dress, Pink+White" />
     <item value="0x239" name="Guide Statue Beyond The Wall" />
 
-    <item value="0x23D" name="Woman Bathing in Hot Spring" />
+    <item value="0x23B" name="Maya Woman in Grey Dress, Green+Gold" />
+    <item value="0x23C" name="Maya Man in Gold+Blue" />
+    <item value="0x23D" name="Maya Woman in Dark Blue Dress, Blue+White / Woman Bathing in Hot Spring" />
+    <item value="0x23E" name="Maya Man in Gold+Turquoise" />
+    <item value="0x23F" name="Maya Man in Blue+White" />
 
+    <item value="0x240" name="Maya Boy in Blue+Yellow" />
+    <item value="0x241" name="Maya Girl in Green+Pink with Orange Pigtails" />
+    <item value="0x242" name="Maya Old Woman in Dark Purple Dress, Green+Purple" />
+    <item value="0x243" name="Maya Old Man in Dark Purple Robe, Red+White" />
+    <item value="0x244" name="Ishahakat" />
+    <item value="0x245" name="Burly Shirtless Male Masked Monk" />
     <item value="0x246" name="Woman with Turquoise+Red Dress and Brown Hair" />
     <item value="0x247" name="Blue Priest (Female)" />
-
+    <item value="0x248" name="Female Masked Monk (Grey+Green Dress)" />
+    <item value="0x249" name="Large Male Masked Monk with Brown Shirt, Blue Hood" />
     <item value="0x24A" name="Blue Priest (Masked Monk)" />
-
-    <item value="0x24D" name="Male Masked Monk Townsperson (Light Blue Hood)" />
-    <item value="0x24E" name="Female Masked Monk Townsperson (Purple Dress, Checkered Hood)" />
+    <item value="0x24B" name="Old Man Masked Monk with Green Robe, Cane, Grey Hood" />
+    <item value="0x24C" name="Female Masked Monk with Blue Robe, Apron, Striped Hood" />
+    <item value="0x24D" name="Male Masked Monk with Pink+Green Shirt, Light Blue Hood" />
+    <item value="0x24E" name="Female Masked Monk with Purple Dress, Checkered Hood" />
+    <item value="0x24F" name="Boy Masked Monk with Blue Shirt, Yellow+Blue Spotted Hood" />
+    <item value="0x250" name="Girl Masked Monk with Red Dress, Red+Pink Spotted Hood" />
+    <item value="0x251" name="Masked Monk Item Dealer" />
+    <item value="0x252" name="Masked Monk Weapon Dealer" />
+    <item value="0x253" name="Masked Monk Blacksmith" />
 
     <item value="0x255" name="Keeper" />
 </items>
