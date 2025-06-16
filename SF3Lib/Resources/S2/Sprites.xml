@@ -165,7 +165,7 @@
     <item value="0x18E" name="Popping Bubble" />
     <item value="0x18F" name="Small Torch Flame" />
 
-    <item value="0x190" name="Red/Yellow/White Sphere(?)" />
+    <item value="0x190" name="Light atop Boat at Night" />
     <item value="0x191" name="" />
     <item value="0x192" name="" />
     <item value="0x193" name="" />
@@ -268,7 +268,7 @@
     <item value="0x1FF" name="" />
 
     <item value="0x200" name="Sleeping Train Conductor (Face Up)" />
-    <item value="0x201" name="Yellow Staff of Besen / Sleeping(?) Train Conductor (Face Down)" />
+    <item value="0x201" name="Yellow Staff of Besem / Sleeping(?) Train Conductor (Face Down)" />
     <item value="0x202" name="Staff of Besem" />
     <item value="0x203" name="Brown Bird" />
     <item value="0x204" name="Freeze Ball Pedestal" />
