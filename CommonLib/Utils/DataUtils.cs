@@ -105,7 +105,11 @@ namespace CommonLib.Utils {
             return output;
         }
 
-        public static uint GetUInt(this byte[] data, int offset) {
+        public static ushort GetUInt16(this byte[] data, int offset) {
+            return (ushort) ((data[offset + 0] <<  8) |
+                             (data[offset + 1] <<  0));
+        }
+
         public static uint GetUInt32(this byte[] data, int offset) {
             return (uint) ((data[offset + 0] << 24) |
                            (data[offset + 1] << 16) |
