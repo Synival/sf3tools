@@ -5,20 +5,20 @@
 <items>
     <!-- 0x00 through 0x3B are characters -->
 
-    <item value="0x3C" name="!Priest in Blue Robe (Church Priest) / Rock Thrown by Kid" />
-    <item value="0x3D" name="!Woman Carrying Rice (Item Dealer)" />
+    <item value="0x3C" name="Priest in Blue Robe (Church Priest)" />
+    <item value="0x3D" name="Woman Carrying Rice" />
     <item value="0x3E" name="Burly Man with Black Hair (Weapon Dealer)" />
-    <item value="0x3F" name="!Woman with Brown Ponytail" />
+    <item value="0x3F" name="Woman with Brown Ponytail" />
 
-    <item value="0x40" name="!Monk with Orange Robe" />
-    <item value="0x41" name="!Girl with Red Parted Hair" />
+    <item value="0x40" name="Monk with Orange Robe" />
+    <item value="0x41" name="Girl with Red Parted Hair" />
     <item value="0x42" name="Woman with Green Dress" />
     <item value="0x43" name="" />
     <item value="0x44" name="Businessman with Blonde Hair, Mustache, Coat" />
     <item value="0x45" name="Bald Shirtless Burly Man" />
-    <item value="0x46" name="!Messenger Soldier" />
-    <item value="0x47" name="!Elf Woman who Doesn't Like to be Pushed" />
-    <item value="0x48" name="!Man with Grey Shirt, Brown Pants, and Blonde Hair" />
+    <item value="0x46" name="Messenger Soldier" />
+    <item value="0x47" name="Elf Woman who Doesn't Like to be Pushed" />
+    <item value="0x48" name="Man with Grey Shirt, Brown Pants, and Blonde Hair" />
     <item value="0x49" name="Old Man" />
     <item value="0x4A" name="!Dwarf Man with White Beard (Duncan)" />
     <item value="0x4B" name="Girl with Green+Yellow Dress" />
@@ -40,7 +40,7 @@
     <item value="0x5A" name="Nobleman with Red Coat and Brown Hair" />
     <item value="0x5B" name="!Noblewoman with Green Dress and Blonde Hair" />
     <item value="0x5C" name="!Girl with Pink Dress" />
-    <item value="0x5D" name="!Dove" />
+    <item value="0x5D" name="Dove" />
     <item value="0x5E" name="!Boy with Blue Shirt and Blue Shoes" />
     <item value="0x5F" name="Burly Worker" />
 
@@ -69,7 +69,7 @@
     <item value="0x75" name="Goriate" />
     <item value="0x76" name="!Grey Birdman" />
     <item value="0x77" name="Maid" />
-    <item value="0x78" name="!Galm / Medion Kneeling" />
+    <item value="0x78" name="Galm" />
     <item value="0x79" name="!Fairy (Cursed Quonus Church Priest) / !Campbell Kneeling" />
     <item value="0x7A" name="Chef" />
     <item value="0x7B" name="Scholar with White Wig" />
@@ -81,17 +81,17 @@
     <item value="0x80" name="Grantack" />
     <item value="0x81" name="!Dying Abdark / !David Kneeling" />
     <item value="0x82" name="!Crewart" />
-    <item value="0x83" name="Yasha / Praying Gracia" />
+    <item value="0x83" name="Yasha / Gracia Praying" />
     <item value="0x84" name="Donhort Knocked Over" />
-    <item value="0x85" name="!Birdgirl / !Tied-up Bernard" />
+    <item value="0x85" name="Yasha Defeated" />
     <item value="0x86" name="!Birdboy" />
     <item value="0x87" name="Nobleman with Black Suit and White Hair" />
     <item value="0x88" name="!Tristus" />
     <item value="0x89" name="!Margaret / !Dying Jade" />
     <item value="0x8A" name="!Nobleman with Purple Hair" />
-    <item value="0x8B" name="!Fiderit" />
+    <item value="0x8B" name="Fiderit" />
     <item value="0x8C" name="Bald Burly Man with Purple Shirt (Blacksmith)" />
-    <item value="0x8D" name="!Cat with White and Brown Fur / Dying Wolf Baron" />
+    <item value="0x8D" name="Cat with White and Brown Fur" />
     <item value="0x8E" name="Large Man with Turquoise Shirt" />
     <item value="0x8F" name="Old Woman with Purple Robe" />
 
@@ -102,12 +102,12 @@
     <item value="0x94" name="Girl with Red Dress" />
     <item value="0x95" name="Man with Orange and Green Shirt" />
     <item value="0x96" name="Woman with Green+Blue Dress and Blonde Hair" />
-    <item value="0x97" name="!Flowers on Conrad's Grave / !Dog with White Fur and Black Ears" />
+    <item value="0x97" name="Dog with White Fur and Black Ears" />
     <item value="0x98" name="!Synbios Mourning (Promoted)" />
-    <item value="0x99" name="!Unpromoted Garosh / Sea Gull" />
-    <item value="0x9A" name="!Pig" />
+    <item value="0x99" name="Sea Gull" />
+    <item value="0x9A" name="Pig" />
     <item value="0x9B" name="!Hazuki Kneeling / Frozen Galm / Syntesis Stretching (Unpromoted) / Resting Bald Shirtless Burly Man" />
-    <item value="0x9C" name="!Hazuki Somersaulting / Syntesis Waving (Unpromoted) / Resting Blacksmith" />
+    <item value="0x9C" name="Dying Marky" />
     <item value="0x9D" name="Dying Enemy (Blue Masked Monk, Yellow Masked Mage, etc.)" />
     <item value="0x9E" name="Gracia" />
     <item value="0x9F" name="!Wounded Imperial Guard / Gracia Tortured / Fiale on Masked Pegasus" />
@@ -273,8 +273,8 @@
 
     <item value="0x200" name="Dying Enemy (Defenda, Black Knight, Masked Monk, Rainblood, etc.)" />
     <item value="0x201" name="Brute (With Upward Cannon Firing)" />
-    <item value="0x202" name="!Staff of Besem" />
-    <item value="0x203" name="!Brown Bird" />
+    <item value="0x202" name="Staff of Besem" />
+    <item value="0x203" name="Brown Bird" />
     <item value="0x204" name="!Freeze Ball Pedestal" />
     <item value="0x205" name="!Woman with Brown Dress and White Apron Sweeping with Broom" />
     <item value="0x206" name="Man with Blue/Yellow Shirt and Black/Grey Hair" />
@@ -291,7 +291,7 @@
     <item value="0x210" name="Bresby" />
     <item value="0x211" name="!Garvin" />
     <item value="0x212" name="Jane" />
-    <item value="0x213" name="!Unoma Sitting with Ramen" />
+    <item value="0x213" name="Unoma Sitting with Ramen" />
     <item value="0x214" name="!Man with White Pants and Pipe" />
     <item value="0x215" name="Balding Old Man with Red Cloak and Cane" />
     <item value="0x216" name="Man with Cyan Shirt and Brown Ponytail" />
@@ -304,7 +304,15 @@
 
     <item value="0x220" name="Woman with Grey+Purple Dress and Bun" />
     <item value="0x221" name="Scruffy Man with Short Black Hair and Beard" />
-
+    <item value="0x222" name="Man with White Shirt and Dark Skin" />
+    <item value="0x223" name="Rabbit" />
+    <item value="0x224" name="" />
+    <item value="0x225" name="" />
+    <item value="0x226" name="Bear with Fish" />
+    <item value="0x227" name="Sheep" />
+    <item value="0x228" name="Squirrel" />
+    <item value="0x229" name="Cow" />
+    <item value="0x22A" name="" />
     <item value="0x22B" name="Scholar" />
     <item value="0x22C" name="Resting Old Woman" />
     <item value="0x22D" name="Dark Staff" />
@@ -314,14 +322,14 @@
     <item value="0x230" name="Harold's Tank" />
     <item value="0x231" name="Steel" />
     <item value="0x232" name="Turk (Ogre)" />
-
+    <item value="0x233" name="" />
     <item value="0x234" name="Oneanera" />
-
+    <item value="0x235" name="Ice Crystal" />
     <item value="0x236" name="Penn's Shell" />
     <item value="0x237" name="Penko's Shell" />
     <item value="0x238" name="Maya Woman in Green Dress, Pink+White" />
     <item value="0x239" name="Guide Statue Beyond The Wall" />
-
+    <item value="0x23A" name="Ark Hill Priest" />
     <item value="0x23B" name="Maya Woman in Grey Dress, Green+Gold" />
     <item value="0x23C" name="Maya Man in Gold+Blue" />
     <item value="0x23D" name="Maya Woman in Dark Blue Dress, Blue+White / Woman Bathing in Hot Spring" />
@@ -344,10 +352,17 @@
     <item value="0x24D" name="Male Masked Monk with Pink+Green Shirt, Light Blue Hood" />
     <item value="0x24E" name="Female Masked Monk with Purple Dress, Checkered Hood" />
     <item value="0x24F" name="Boy Masked Monk with Blue Shirt, Yellow+Blue Spotted Hood" />
+
     <item value="0x250" name="Girl Masked Monk with Red Dress, Red+Pink Spotted Hood" />
     <item value="0x251" name="Masked Monk Item Dealer" />
     <item value="0x252" name="Masked Monk Weapon Dealer" />
     <item value="0x253" name="Masked Monk Blacksmith" />
-
+    <item value="0x254" name="Baby Penn: Blue Shorts, Yellow Shell up Top" />
     <item value="0x255" name="Keeper" />
+    <item value="0x256" name="Baby Penn: Cyan, Organge Shell, Glasses" />
+    <item value="0x257" name="Baby Penn: Blue, Green Shell on Top and Bottom" />
+    <item value="0x258" name="Baby Penn: Full Pink Shell with Purple Braids" />
+    <item value="0x259" name="Baby Penn: Purple with Green Shell" />
+    <item value="0x25A" name="Baby Penn: Sea Green with Blue Suit, Bowtie, and Hat" />
+    <item value="0x25B" name="Baby Penn: Light Pink with Yellow Hair and Light Pink Braids" />
 </items>
