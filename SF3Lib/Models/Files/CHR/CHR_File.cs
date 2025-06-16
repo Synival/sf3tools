@@ -36,7 +36,7 @@ namespace SF3.Models.Files.CHR {
             SpriteOffset1SetTable = SpriteOffset1SetTable.Create(Data, nameof(SpriteOffset1SetTable),
                 GetOffset1Addresses(SpriteTable), GetDataOffsets(SpriteTable));
             SpriteFrameTablesByFileAddr = SpriteTable
-                .Select(x => SpriteFrameTable.Create(Data, $"{nameof(SpriteFrameTable)}_{x.ID:D2}", (int) (x.DataOffset + x.Offset1), x.DataOffset))
+                .Select(x => SpriteFrameTable.Create(Data, $"{nameof(SpriteFrameTable)}_{x.ID:D2}", (int) (x.DataOffset + x.Offset1), x.DataOffset, x.Width, x.Height))
                 .ToDictionary(x => x.Address, x => x);
 
             SpriteOffset2SetTable = SpriteOffset2SetTable.Create(Data, nameof(SpriteOffset2SetTable),

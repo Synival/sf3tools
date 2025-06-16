@@ -17,7 +17,9 @@ namespace SF3.Win.Views.CHR {
             if (Model.SpriteTable != null)
                 CreateChild(new TableView("Sprites", Model.SpriteTable, ngc));
             if (Model.SpriteOffset1SetTable != null)
-                CreateChild(new TableView("Sprite Offset 1 Tables", Model.SpriteOffset1SetTable, ngc));
+                CreateChild(new TableView("Sprite Frame Pointers", Model.SpriteOffset1SetTable, ngc));
+            if (Model.SpriteFrameTablesByFileAddr?.Count > 0)
+                CreateChild(new TableArrayView<SpriteFrameTable>("Sprite Frames", Model.SpriteFrameTablesByFileAddr.Values.ToArray(), ngc));
             if (Model.SpriteOffset2SetTable != null)
                 CreateChild(new TableView("Sprite Offset 2 Tables", Model.SpriteOffset2SetTable, ngc));
             if (Model.SpriteOffset2SubTablesByFileAddr?.Count > 0)
