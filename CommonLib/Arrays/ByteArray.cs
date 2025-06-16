@@ -146,6 +146,8 @@ namespace CommonLib.Arrays {
             return bytes;
         }
 
+        public byte[] GetDataCopyOrReference() => Bytes;
+
         public void SetDataTo(byte[] data)
             => SetDataAtTo(0, Bytes.Length, data);
 

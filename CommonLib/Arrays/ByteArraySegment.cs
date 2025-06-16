@@ -153,6 +153,8 @@ namespace CommonLib.Arrays {
             return ParentArray.GetDataCopyAt(Offset + offset, length);
         }
 
+        public byte[] GetDataCopyOrReference() => ParentArray.GetDataCopyAt(Offset, Length);
+
         public void Resize(int size) {
             using (var insideIncr = InsideIncr())
                 ParentArray.ResizeAt(Offset, Length, size);

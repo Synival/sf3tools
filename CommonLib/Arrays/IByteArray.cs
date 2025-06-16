@@ -53,6 +53,13 @@ namespace CommonLib.Arrays {
         byte[] GetDataCopy();
 
         /// <summary>
+        /// Gets a reference of the data (if available), and a copy if not.
+        /// The only reason this exists is for efficient reading without copies. Only use for reading, and keep the references short-lived!
+        /// </summary>
+        /// <returns>A reference to the underlying byte[] data or a copy if no reference is available.</returns>
+        byte[] GetDataCopyOrReference();
+
+        /// <summary>
         /// Gets a copy of all data in a specific range.
         /// </summary>
         /// <param name="offset">The start of the data to get.</param>
