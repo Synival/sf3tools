@@ -151,9 +151,11 @@
     <item value="0xC5" name="Blacksmith" />
     <item value="0xC6" name="Church Priest" />
     <item value="0xC7" name="STHA Treasure Chest" />
-    <item value="0xC8" name="Isabella Riding Donhort / Gracia Raising Staff" />
 
-    <!-- 0xC9 through 0x185 are monsters -->
+    <!-- 0xC8 through 0x185 are monsters (but Scenario 3 makes some substitions for unused ones -->
+    <item value="0xC8" name="Isabella Riding Donhort / Gracia Raising Staff" />
+    <item value="0x171" name="Masked Monk Riding Pegasus" />
+    <!-- no more monsters -->
 
     <item value="0x186" name="Explosion / Small Fey" />
     <item value="0x187" name="Small Icons / Small Fey Wings" />

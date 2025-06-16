@@ -83,19 +83,7 @@ namespace SF3.NamedValues {
                 { NamedValueType.SpecialType,         new SubMethods((o, p, v, a) => new NameAndInfo(v, ValueNames.SpecialTypeInfo)) },
                 { NamedValueType.Spell,               new SubMethods((o, p, v, a) => new NameAndInfo(v, ValueNames.SpellInfo.Info[Scenario])) },
                 { NamedValueType.SpellTarget,         new SubMethods((o, p, v, a) => new NameAndInfo(v, ValueNames.SpellTargetInfo)) },
-
-                { NamedValueType.Sprite,
-                    new SubMethods((o, p, v, a) => {
-                        return
-                            // Characters
-                            (v < 0x3C) ? _nameGetters[NamedValueType.Character].GetNameAndInfo(o, p, v, a) :
-                            // Enemies
-                            (v >= 0xC8 && v < 0x186) ? _nameGetters[NamedValueType.Monster].GetNameAndInfo(o, p, v - 0xC8, a) :
-                            // Sprites
-                            new NameAndInfo(v, ValueNames.SpriteInfo.Info[Scenario]);
-                    })
-                },
-
+                { NamedValueType.Sprite,              new SubMethods((o, p, v, a) => new NameAndInfo(v, ValueNames.SpriteCharacterMonsterInfo.Info[Scenario])) },
                 { NamedValueType.StatType,            new SubMethods((o, p, v, a) => new NameAndInfo(v, ValueNames.StatTypeInfo)) },
                 { NamedValueType.WeaponSpell,         new SubMethods((o, p, v, a) => new NameAndInfo(v, ValueNames.WeaponSpellInfo.Info[Scenario])) },
                 { NamedValueType.WeaponType,          new SubMethods((o, p, v, a) => new NameAndInfo(v, ValueNames.WeaponTypeInfo)) },
