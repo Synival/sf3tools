@@ -5,7 +5,7 @@ using SF3.Models.Structs.CHR;
 namespace SF3.Models.Tables.CHR {
     public class SpriteHeaderTable : TerminatedTable<SpriteHeader> {
         protected SpriteHeaderTable(IByteData data, string name, int address, bool isCHP)
-        : base(data, name, address, terminatedBytes: isCHP ? 0 : 4, maxSize: 100) {
+        : base(data, name, address, terminatedBytes: isCHP ? 0 : 4, maxSize: 300) {
             IsCHP = isCHP;
         }
 
