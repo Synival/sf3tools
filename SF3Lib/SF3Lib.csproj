@@ -51,6 +51,7 @@
     <None Remove="Resources\S3\SpellAnimations.xml" />
     <None Remove="Resources\S3\Sprites.xml" />
     <None Remove="Resources\SpellTargets.xml" />
+    <None Remove="Resources\SpriteFramesByHash.xml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Resources\BoundaryList.xml">
@@ -168,6 +169,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\BattlePointersList.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\SpriteFramesByHash.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\WeaponTypes.xml">
