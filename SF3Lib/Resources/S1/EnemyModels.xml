@@ -82,7 +82,7 @@
     <item value="0x4F" name="Dark Mage" />
     <item value="0x50" name="Masked Monk (Weakest Blue)" />
     <item value="0x51" name="Masked Monk (Brown)" />
-    <item value="0x52" name="Masked Monk (Purple/Wand)" />
+    <item value="0x52" name="Masked Monk (Purple/Sceptre)" />
     <item value="0x53" name="Masked Priest (Red/Ankh)" />
     <item value="0x54" name="Spiriel1" />
     <item value="0x55" name="Abdark" />
@@ -119,7 +119,7 @@
     <item value="0x74" name="Braff" />
     <item value="0x75" name="Basanda2" />
     <item value="0x76" name="Masked Monk (Blue 15)" />
-    <item value="0x77" name="Masked Mage (Purple/Wand 17)" />
+    <item value="0x77" name="Masked Mage (Purple/Sceptre 17)" />
     <item value="0x78" name="Masked Priest (Red/Ankh 17)" />
     <item value="0x79" name="Aspinia Mage" />
     <item value="0x7A" name="Arrawnt" />
