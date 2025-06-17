@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <items>
-    <!-- 0x00 through 0x3B are characters -->
+    <!-- 0x00 through 0x3B are characters, but some are missing -->
+    <item value="0x39" name="Zero (Misplaced)" />
+    <item value="0x3B" name="Ratchet's Suit (Misplaced)" />
+    <!-- Done with characters -->
 
     <item value="0x3C" name="Priest in Blue Robe (Church Priest)" />
     <item value="0x3D" name="Woman Carrying Rice (Item Dealer)" />
@@ -47,7 +50,7 @@
     <item value="0x63" name="Flower Girl" />
     <item value="0x64" name="Waitress" />
     <item value="0x65" name="Bartender" />
-    <item value="0x66" name="Woman with Blue Dress and Black Hair" />
+    <item value="0x66" name="Woman with Blue+Yellow Dress and Black Hair" />
     <item value="0x67" name="Boy with Grey Shirt (Toby)" />
     <item value="0x68" name="Arthur (Out of Armor)" />
     <item value="0x69" name="Dead Republic Soldier" />
@@ -88,8 +91,8 @@
     <item value="0x8A" name="Nobleman with Purple Hair" />
     <item value="0x8B" name="Fiderit" />
     <item value="0x8C" name="" />
-    <item value="0x8D" name="" />
-    <item value="0x8E" name="" />
+    <item value="0x8D" name="Black Cat" />
+    <item value="0x8E" name="Large Man with Turquoise Shirt" />
     <item value="0x8F" name="" />
 
     <item value="0x90" name="" />
@@ -131,9 +134,9 @@
     <item value="0xB2" name="" />
     <item value="0xB3" name="" />
     <item value="0xB4" name="Zero" />
-    <item value="0xB5" name="" />
-    <item value="0xB6" name="" />
-    <item value="0xB7" name="Blue Ninja (Hagane)" />
+    <item value="0xB5" name="Murasame Standing, Throwing Bomb" />
+    <item value="0xB6" name="Murasame Flipping" />
+    <item value="0xB7" name="Hagane" />
     <item value="0xB8" name="" />
     <item value="0xB9" name="" />
     <item value="0xBA" name="" />
@@ -157,5 +160,6 @@
     <item value="0x186" name="Explosion / Small Fey" />
     <item value="0x187" name="Small Icons / Small Fey Wings" />
     <item value="0x189" name="Big Fey" />
+    <item value="0x18A" name="Bomb" />
     <item value="0x18B" name="Big Fey Wings" />
 </items>

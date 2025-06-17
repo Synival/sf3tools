@@ -47,7 +47,7 @@
     <item value="0x63" name="Flower Girl" />
     <item value="0x64" name="Waitress" />
     <item value="0x65" name="Bartender" />
-    <item value="0x66" name="Woman with Blue/Yellow Dress and Black Hair" />
+    <item value="0x66" name="Woman with Blue+Yellow Dress and Black Hair" />
     <item value="0x67" name="Boy with Grey Shirt (Toby)" />
     <item value="0x68" name="Arthur (Out of Armor)" />
     <item value="0x69" name="Dead Republic Soldier" />
@@ -131,9 +131,9 @@
     <item value="0xB2" name="Elf Woman with Brown Dress and Hair" />
     <item value="0xB3" name="Elf Woman with White Apron / Domaric" />
     <item value="0xB4" name="Blue Monk Getting Zapped" />
-    <item value="0xB5" name="" />
-    <item value="0xB6" name="" />
-    <item value="0xB7" name="" />
+    <item value="0xB5" name="Murasame Standing, Throwing Bomb" />
+    <item value="0xB6" name="Murasame Flipping" />
+    <item value="0xB7" name="Hagane" />
     <item value="0xB8" name="Dying Tybalt" />
     <item value="0xB9" name="" />
     <item value="0xBA" name="" />
@@ -158,7 +158,7 @@
     <item value="0x187" name="Small Icons / Small Fey Wings" />
     <item value="0x188" name="Smoke / Firey Poof" />
     <item value="0x189" name="Lightning Bolt / Big Fey" />
-    <item value="0x18A" name="" />
+    <item value="0x18A" name="Bomb" />
     <item value="0x18B" name="Cannon Ball / Big Fey Wings" />
     <item value="0x18C" name="Small Poof of Smoke" />
     <item value="0x18D" name="Cannon Ball Splash" />
@@ -289,4 +289,19 @@
     <item value="0x212" name="Jane" />
     <item value="0x213" name="Unoma Sitting with Ramen" />
     <item value="0x214" name="Man with White Pants and Pipe" />
+    <item value="0x215" name="Balding Old Man with Red Cloak and Cane" />
+    <item value="0x216" name="" />
+    <item value="0x217" name="" />
+    <item value="0x218" name="" />
+    <item value="0x219" name="" />
+    <item value="0x21A" name="Old Woman with Green+Yellow Dress and Dark Skin" />
+    <item value="0x21B" name="" />
+    <item value="0x21C" name="" />
+    <item value="0x21D" name="Woman with Baby and Red Dress" />
+    <item value="0x21E" name="" />
+    <item value="0x21F" name="" />
+
+    <item value="0x220" name="" />
+    <item value="0x221" name="" />
+    <item value="0x222" name="Two Kids Holding Hands" />
 </items>
