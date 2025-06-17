@@ -66,6 +66,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "X1_Analyzer", "X1_Analyzer\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MPD_DataSearcher", "MPD_DataSearcher\MPD_DataSearcher.csproj", "{3413F58A-6EE3-4486-91AB-9C8807DC0328}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CHR_Analyzer", "CHR_Analyzer\CHR_Analyzer.csproj", "{383FDA72-1219-423B-A468-106324985091}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -152,6 +154,10 @@ Global
 		{3413F58A-6EE3-4486-91AB-9C8807DC0328}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3413F58A-6EE3-4486-91AB-9C8807DC0328}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3413F58A-6EE3-4486-91AB-9C8807DC0328}.Release|Any CPU.Build.0 = Release|Any CPU
+		{383FDA72-1219-423B-A468-106324985091}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{383FDA72-1219-423B-A468-106324985091}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{383FDA72-1219-423B-A468-106324985091}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{383FDA72-1219-423B-A468-106324985091}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -183,6 +189,7 @@ Global
 		{9EFB5BD3-9C21-482C-B307-C1D72B37740B} = {937D14A0-1E8B-4E10-B344-BB5D61E18AF2}
 		{DBB71C4F-F873-4EFE-BA41-0D03E09C8CB5} = {9EFB5BD3-9C21-482C-B307-C1D72B37740B}
 		{3413F58A-6EE3-4486-91AB-9C8807DC0328} = {9EFB5BD3-9C21-482C-B307-C1D72B37740B}
+		{383FDA72-1219-423B-A468-106324985091} = {9EFB5BD3-9C21-482C-B307-C1D72B37740B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {A670A182-55F0-4C8C-A7B1-076126D32B1C}
