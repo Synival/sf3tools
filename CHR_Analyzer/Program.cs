@@ -1,7 +1,11 @@
-﻿using CommonLib.Arrays;
+﻿using System.Drawing;
+using System.Drawing.Imaging;
+using System.Runtime.InteropServices;
+using CommonLib.Arrays;
 using CommonLib.NamedValues;
 using SF3.ByteData;
 using SF3.Models.Files.CHR;
+using SF3.Models.Structs.CHR;
 using SF3.NamedValues;
 using SF3.Types;
 
@@ -16,11 +20,47 @@ namespace CHR_Analyzer {
             { ScenarioType.PremiumDisk, "G:/" },
         };
 
-        private static List<string> s_matchReports = new List<string>();
+        private const string c_pathOut = "../../../Private";
 
-        private static bool? CHR_Match_Func(string filename, ICHR_File chrFile) {
-            // TODO: matching!
-            return true;
+        private class TextureInfo {
+            public string SpriteNames = "";
+            public List<FrameInfo> Frames = [];
+        }
+
+        private class FrameInfo {
+            public FrameInfo(ScenarioType scenario, string filename, Frame frame) {
+                Scenario = scenario;
+                Filename = filename;
+                Frame    = frame;
+            }
+
+            public ScenarioType Scenario;
+            public string Filename;
+            public Frame Frame;
+        }
+
+        private static Dictionary<string, TextureInfo> s_framesByHash = [];
+
+        private static void AddFrame(ScenarioType scenario, string filename, Frame frame) {
+            var hash = frame.Texture.Hash;
+            if (!s_framesByHash.ContainsKey(hash))
+                s_framesByHash.Add(hash, new TextureInfo());
+            s_framesByHash[hash].Frames.Add(new FrameInfo(scenario, filename, frame));
+        }
+
+        private static List<string> s_matchReports = [];
+
+        private static bool? CHR_MatchFunc(string filename, ICHR_File chrFile, INameGetterContext ngc) {
+            if (chrFile.FrameTablesByFileAddr.Values.All(x => x.All(y => y.ErrorWhileDecompressing == null)))
+                return null;
+
+            foreach (var sprite in chrFile.SpriteHeaderTable) {
+                var name = ngc.GetName(sprite, null, sprite.SpriteID, [NamedValueType.Sprite]) ?? "";
+                if (name == "")
+                    s_matchReports.Add(sprite.SpriteID.ToString());
+            }
+
+            return s_matchReports.Count > 0;
         }
 
         public static void Main(string[] args) {
@@ -55,9 +95,8 @@ namespace CHR_Analyzer {
 
                     // Create an MPD file that works with our new ByteData.
                     try {
-                        var isBTL99 = filename == "X1BTL99";
                         using (var chrFile = CHR_File.Create(byteData, nameGetterContexts[scenario], scenario, file.EndsWith(".CHP"))) {
-                            var match = CHR_Match_Func(filename, chrFile);
+                            var match = CHR_MatchFunc(filename, chrFile, nameGetterContexts[scenario]);
 
                             // If the match is 'null', that means we're just skipping this file completely.
                             if (match == null) {
@@ -65,9 +104,9 @@ namespace CHR_Analyzer {
                                 continue;
                             }
 
-                            // List the file and any report we may have from CHR_Match_Func().
+                            // List the file and any report we may have from CHR_MatchFunc().
                             var fileStr = GetFileString(scenario, file, chrFile);
-                            Console.WriteLine(fileStr + " | ");
+                            Console.WriteLine(fileStr + " |");
                             foreach (var mr in s_matchReports)
                                 Console.WriteLine("    " + mr);
                             s_matchReports.Clear();
@@ -78,6 +117,11 @@ namespace CHR_Analyzer {
                                 nomatchSet.Add(fileStr);
 
                             ScanForErrorsAndReport(scenario, chrFile);
+
+                            // Build a table of all textures.
+                            foreach (var frameTable in chrFile.FrameTablesByFileAddr)
+                                foreach (var frame in frameTable.Value.Where(x => x.ErrorWhileDecompressing != null))
+                                    AddFrame(chrFile.Scenario, filename, frame);
                         }
                     }
                     catch (Exception e) {
@@ -101,6 +145,59 @@ namespace CHR_Analyzer {
             Console.WriteLine($"NoMatch: {nomatchSet.Count}/{totalCount}");
             foreach (var str in nomatchSet)
                 Console.WriteLine("  " + str);
+
+            Console.WriteLine("");
+            Console.WriteLine("===================================================");
+            Console.WriteLine("| BY HASH                                         |");
+            Console.WriteLine("===================================================");
+            Console.WriteLine("");
+
+            Directory.CreateDirectory("SpriteDump");
+
+            _ = Directory.CreateDirectory(c_pathOut);
+            foreach (var kv in s_framesByHash) {
+                var infos = kv.Value;
+                var spriteNames = infos.Frames
+                    .Select(x =>
+                        string.Join("", nameGetterContexts[x.Scenario].GetName(x.Frame, null, x.Frame.SpriteID, [NamedValueType.Sprite])
+                            .Split(' ')
+                            .Where(y => y.Length > 0)
+                            .Select(y => y.Substring(0, 1).ToUpper() + y.Substring(1))
+                        )
+                        .Replace(" ", "")
+                        .Replace(",", "_")
+                        .Replace("?", "X")
+                        .Replace("-", "_")
+                        .Replace(":", "_")
+                        .Replace("/", "_")
+                    )
+                    .OrderBy(x => x)
+                    .GroupBy(x => x)
+                    .Select(x => $"{x.Key}")
+                    .OrderBy(x => x.Count())
+                    .ToArray();
+                infos.SpriteNames = string.Join(", ", spriteNames);
+
+                var tex = kv.Value.Frames[0].Frame.Texture;
+
+                var path = Path.Combine(c_pathOut, infos.SpriteNames);
+                _ = Directory.CreateDirectory(path);
+
+                var outputPath = Path.Combine(path, kv.Key + ".BMP");
+                Console.WriteLine("Writing: " + outputPath);
+#pragma warning disable CA1416 // Validate platform compatibility
+                using (var bitmap = new Bitmap(tex.Width, tex.Height, PixelFormat.Format16bppArgb1555)) {
+                    var imageData = tex.BitmapDataARGB1555;
+                    var bmpData = bitmap.LockBits(new Rectangle(0, 0, bitmap.Width, bitmap.Height), ImageLockMode.WriteOnly, bitmap.PixelFormat);
+                    Marshal.Copy(imageData, 0, bmpData.Scan0, imageData.Length);
+                    bitmap.UnlockBits(bmpData);
+                    try {
+                        bitmap.Save(outputPath);
+                    }
+                    catch { }
+                }
+#pragma warning restore CA1416 // Validate platform compatibility
+            }
         }
 
         private static string BitString(uint bits) {

@@ -4,9 +4,12 @@ using CommonLib.Extensions;
 using CommonLib.Utils;
 using SF3.ByteData;
 using SF3.Types;
+using SF3.Utils;
 
 namespace SF3.Models.Structs.CHR {
     public class Frame : Struct {
+        // There are four specific images in Scenario 2 that aren't read correctly for some reason.
+        // They're listed at 40x40, but they're actually 48x40.
         private static readonly HashSet<string> s_brokenTybaltHashes = new HashSet<string>() {
             "19711da96a96d8a92d866ba15b252d1f",
             "b1c69203445eb35716c46f31085ecc32",
@@ -24,12 +27,21 @@ namespace SF3.Models.Structs.CHR {
             Direction  = direction;
 
             _textureOffsetAddr = Address + 0x00; // 4 bytes
-            var texData = TextureOffset != 0 ? GetUncompressedTextureData() : null;
-            Texture = TextureOffset != 0 ?  new TextureABGR1555(0, 0, 0, texData) : (ITexture) null;
 
-            // There's one specific Tybalt sprite with some problems.
-            if (texData != null && ErrorWhileDecompressing != null && s_brokenTybaltHashes.Contains(Texture.Hash))
-                Texture = new TextureABGR1555(0, 0, 0, texData.To1DArrayTransposed().To2DArrayColumnMajor(48, 40));
+            if (TextureOffset != 0) {
+                var texData = GetUncompressedTextureData();
+                Texture = new TextureABGR1555(0, 0, 0, texData);
+                var hash = Texture.Hash.ToLower();
+
+                // There's one specific Tybalt sprite with some problems.
+                if (ErrorWhileDecompressing != null && s_brokenTybaltHashes.Contains(hash))
+                    Texture = new TextureABGR1555(0, 0, 0, texData.To1DArrayTransposed().To2DArrayColumnMajor(48, 40));
+
+                var frameTextureInfo = SpriteFrameTextueUtils.GetFrameTextureInfoByHash(hash);
+                TextureHash   = hash;
+                SpriteName    = frameTextureInfo.SpriteName;
+                AnimationName = frameTextureInfo.AnimationName;
+            }
         }
 
         public uint DataOffset { get; }
@@ -56,14 +68,11 @@ namespace SF3.Models.Structs.CHR {
 
         public ITexture Texture { get; private set; }
 
-        [TableViewModelColumn(displayOrder: 1)]
-        public string ErrorWhileDecompressing { get; private set; } = null;
-
         private ushort[,] GetUncompressedTextureData() {
             try {
                 var decompressedData = Compression.DecompressSpriteData(Data.Data.GetDataCopyOrReference(), TextureOffset + DataOffset);
                 if (decompressedData.Length != Width * Height) {
-                    ErrorWhileDecompressing = $"Length {decompressedData.Length} != {Width * Height} ({Width}x{Height})";
+                    ErrorWhileDecompressing = $"decompressedData.Length ({decompressedData.Length}) != {Width * Height} ({Width}x{Height})";
 
                     if (decompressedData.Length % Width == 0)
                         return decompressedData.To2DArrayColumnMajor(Width, decompressedData.Length / Width);
@@ -79,5 +88,17 @@ namespace SF3.Models.Structs.CHR {
                 return new ushort[0, 0];
             }
         }
+
+        [TableViewModelColumn(displayOrder: 1, minWidth: 200)]
+        public string TextureHash { get; }
+
+        [TableViewModelColumn(displayOrder: 2, minWidth: 150)]
+        public string SpriteName { get; }
+
+        [TableViewModelColumn(displayOrder: 3)]
+        public string AnimationName { get; }
+
+        [TableViewModelColumn(displayOrder: 4, minWidth: 200)]
+        public string ErrorWhileDecompressing { get; private set; } = null;
     }
 }
