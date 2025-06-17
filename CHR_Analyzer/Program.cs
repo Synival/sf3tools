@@ -1,7 +1,4 @@
-﻿using System.Drawing;
-using System.Drawing.Imaging;
-using System.Runtime.InteropServices;
-using CommonLib.Arrays;
+﻿using CommonLib.Arrays;
 using CommonLib.NamedValues;
 using SF3.ByteData;
 using SF3.Models.Files.CHR;
@@ -51,16 +48,20 @@ namespace CHR_Analyzer {
         private static List<string> s_matchReports = [];
 
         private static bool? CHR_MatchFunc(string filename, ICHR_File chrFile, INameGetterContext ngc) {
-            if (chrFile.FrameTablesByFileAddr.Values.All(x => x.All(y => y.ErrorWhileDecompressing == null)))
+            var mixedFrameTables = chrFile.FrameTablesByFileAddr
+                .Where(x => x.Value.SpriteID != 0x187)
+                .Select(x => new { Table = x.Value, Frames = x.Value.ToArray() })
+                .Where(x => x.Frames.Where(y => !y.SpriteName.StartsWith("Transparent Frame")).GroupBy(y => y.SpriteName).Count() != 1)
+                .Select(x => x.Table)
+                .ToArray();
+
+            if (mixedFrameTables.Length == 0)
                 return null;
 
-            foreach (var sprite in chrFile.SpriteHeaderTable) {
-                var name = ngc.GetName(sprite, null, sprite.SpriteID, [NamedValueType.Sprite]) ?? "";
-                if (name == "")
-                    s_matchReports.Add(sprite.SpriteID.ToString());
-            }
+            foreach (var frameTable in mixedFrameTables)
+                s_matchReports.Add($"{frameTable.Name} (SpriteID: 0x{frameTable.SpriteID:X3})");
 
-            return s_matchReports.Count > 0;
+            return true;
         }
 
         public static void Main(string[] args) {
@@ -118,10 +119,12 @@ namespace CHR_Analyzer {
 
                             ScanForErrorsAndReport(scenario, chrFile);
 
+#if false
                             // Build a table of all textures.
                             foreach (var frameTable in chrFile.FrameTablesByFileAddr)
-                                foreach (var frame in frameTable.Value.Where(x => x.ErrorWhileDecompressing != null))
+                                foreach (var frame in frameTable.Value.Where(x => x.SpriteName == "Unknown"))
                                     AddFrame(chrFile.Scenario, filename, frame);
+#endif
                         }
                     }
                     catch (Exception e) {
@@ -146,6 +149,7 @@ namespace CHR_Analyzer {
             foreach (var str in nomatchSet)
                 Console.WriteLine("  " + str);
 
+#if false
             Console.WriteLine("");
             Console.WriteLine("===================================================");
             Console.WriteLine("| BY HASH                                         |");
@@ -198,6 +202,7 @@ namespace CHR_Analyzer {
                 }
 #pragma warning restore CA1416 // Validate platform compatibility
             }
+#endif
         }
 
         private static string BitString(uint bits) {

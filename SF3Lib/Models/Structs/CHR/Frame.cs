@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using CommonLib.Attributes;
 using CommonLib.Extensions;
 using CommonLib.Utils;
@@ -71,18 +72,27 @@ namespace SF3.Models.Structs.CHR {
         private ushort[,] GetUncompressedTextureData() {
             try {
                 var decompressedData = Compression.DecompressSpriteData(Data.Data.GetDataCopyOrReference(), TextureOffset + DataOffset);
+
+                // If the correct size couldn't be determined, make some educated guesses.
+                // (There are errors in the CHR files from time to time)
                 if (decompressedData.Length != Width * Height) {
                     ErrorWhileDecompressing = $"decompressedData.Length ({decompressedData.Length}) != {Width * Height} ({Width}x{Height})";
 
                     if (decompressedData.Length % Width == 0)
                         return decompressedData.To2DArrayColumnMajor(Width, decompressedData.Length / Width);
-                    else
-                        return decompressedData.To2DArrayColumnMajor(1, decompressedData.Length);
+                    if (decompressedData.Length % Height == 0)
+                        return decompressedData.To2DArrayColumnMajor(decompressedData.Length / Height, Height);
+
+                    var lengthRoot2 = Math.Sqrt(decompressedData.Length);
+                    if (lengthRoot2 == (int) lengthRoot2)
+                        return decompressedData.To2DArrayColumnMajor((int) lengthRoot2, (int) lengthRoot2);
+
+                    return decompressedData.To2DArrayColumnMajor(1, decompressedData.Length);
                 }
-                else {
-                    ErrorWhileDecompressing = null;
-                    return decompressedData.To2DArrayColumnMajor(Width, Height);
-                }
+
+                // No errors -- decompress normally.
+                ErrorWhileDecompressing = null;
+                return decompressedData.To2DArrayColumnMajor(Width, Height);
             }
             catch {
                 return new ushort[0, 0];
@@ -92,7 +102,7 @@ namespace SF3.Models.Structs.CHR {
         [TableViewModelColumn(displayOrder: 1, minWidth: 200)]
         public string TextureHash { get; }
 
-        [TableViewModelColumn(displayOrder: 2, minWidth: 150)]
+        [TableViewModelColumn(displayOrder: 2, minWidth: 175)]
         public string SpriteName { get; }
 
         [TableViewModelColumn(displayOrder: 3)]

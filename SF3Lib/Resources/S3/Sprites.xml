@@ -153,7 +153,7 @@
     <item value="0xC7" name="STHA Treasure Chest" />
 
     <!-- 0xC8 through 0x185 are monsters (but Scenario 3 makes some substitions for unused ones -->
-    <item value="0xC8" name="Isabella Riding Donhort / Gracia Raising Staff" />
+    <item value="0xC8" name="Isabella Riding Donhort / Gracia Raising Staff / Dying Dark Priest (Red)" />
     <item value="0x171" name="Masked Monk Riding Pegasus" />
     <!-- no more monsters -->
 
@@ -168,7 +168,7 @@
     <item value="0x18E" name="Popping Bubble" />
     <item value="0x18F" name="Small Torch Flame" />
 
-    <item value="0x190" name="Light atop Boat at Night" />
+    <item value="0x190" name="Flashing Yellow/Red Light" />
     <item value="0x191" name="Sphere of Light around Jane" />
     <item value="0x192" name="Light Blue Torch Flame" />
     <item value="0x193" name="Large Orange Explosion" />

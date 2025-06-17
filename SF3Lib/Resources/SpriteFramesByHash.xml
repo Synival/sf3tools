@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <items>
+    <item hash="f09f35a5637839458e462e6350ecbce4" sprite="Transparent Frame (8x8)" animation="" />
+    <item hash="fd9a62f71778de82628430c658349d91" sprite="Transparent Frame (16x16)" animation="" />
+    <item hash="7470b797563079a7f474e66996238818" sprite="Transparent Frame (16x32)" animation="" />
+    <item hash="d33e04f92840fa8d80d642441797bafe" sprite="Transparent Frame (48x48)" animation="" />
+    <item hash="b1e27aa018409de6bfd73f8afb883a65" sprite="Transparent Frame (48x48)" animation="" />
+    <item hash="03ac62ba3da04a0bcca0ea6f6d6ce4b2" sprite="Transparent Frame (64x64)" animation="" />
     <item hash="08ad1ea28944e4360552ec081d8aa95d" sprite="Abdark" animation="" />
     <item hash="13ba87e99f310738115aef469218024c" sprite="Abdark" animation="" />
     <item hash="14e2cdedc0c4ba1a302cdbc2cde8ffff" sprite="Abdark" animation="" />
@@ -1321,7 +1327,6 @@
     <item hash="19c5522655c37d09abc88e9598678815" sprite="Bernard" animation="" />
     <item hash="1a99fd4d78106ea466508bcc4716911a" sprite="Bernard" animation="" />
     <item hash="1b26744a1bab6be7a293f0539a6af197" sprite="Bernard" animation="" />
-    <item hash="1b8690e9290289a1cc0cbdd08cb4fa2d" sprite="Bernard" animation="" />
     <item hash="1d1d582e2211b1f1d744145ec50c67e3" sprite="Bernard" animation="" />
     <item hash="1dc5b08af36d2ee6b540d51943b999f4" sprite="Bernard" animation="" />
     <item hash="1e07e70302bb5be3109d93ae5c2fbd3f" sprite="Bernard" animation="" />
@@ -1330,13 +1335,11 @@
     <item hash="1eeac7079db49e50607436d4bcfa64a3" sprite="Bernard" animation="" />
     <item hash="1f87b92ce013bb0c919b84578a3629ac" sprite="Bernard" animation="" />
     <item hash="214366623b949b31a9a54cd2defb940e" sprite="Bernard" animation="" />
-    <item hash="2297afe6dcf742234629eaa5bc04b29f" sprite="Bernard" animation="" />
     <item hash="23d88aebab5fabad5f290bce13e5deb3" sprite="Bernard" animation="" />
     <item hash="240632235fc1fc22c3f41a6ffa63065e" sprite="Bernard" animation="" />
     <item hash="2525e465891c6d02da8dda8d48c84e69" sprite="Bernard" animation="" />
     <item hash="27341fa4d00e3a3f435ae40b7729ff1b" sprite="Bernard" animation="" />
     <item hash="2979bad7b3276ff92234382e76d51bfa" sprite="Bernard" animation="" />
-    <item hash="2a6a73d6b69ed7ec42be6401c852a7c7" sprite="Bernard" animation="" />
     <item hash="2be90bc127b74fec95ac59a732e24028" sprite="Bernard" animation="" />
     <item hash="2d05a538cb0768dd456666fec4352848" sprite="Bernard" animation="" />
     <item hash="2e29c1fc5218ab72d8385b43dd985d2d" sprite="Bernard" animation="" />
@@ -1384,7 +1387,6 @@
     <item hash="53b96c8d1d6af4922189b4f484dabe66" sprite="Bernard" animation="" />
     <item hash="545397b088dca7c32907903fb6d5785c" sprite="Bernard" animation="" />
     <item hash="54c7d2986b9834d9f854d61c459af7c2" sprite="Bernard" animation="" />
-    <item hash="551a8441cffa4fd8345024aa7f658fe3" sprite="Bernard" animation="" />
     <item hash="55b1c2a65cbdaf334fbbbc30ff7f6560" sprite="Bernard" animation="" />
     <item hash="575f5b157ae6aa28310cfb4113e9556f" sprite="Bernard" animation="" />
     <item hash="5885356a2b637201042498bb43e2ec84" sprite="Bernard" animation="" />
@@ -1416,7 +1418,6 @@
     <item hash="70ab3b6253465a93180977fefa2565a5" sprite="Bernard" animation="" />
     <item hash="72ab421eb89e3d5fd8232623ae6d4ec9" sprite="Bernard" animation="" />
     <item hash="73c97e27e6bab4b80f17e9e9b34ec5b6" sprite="Bernard" animation="" />
-    <item hash="752888232fc211dc9d03fd6c55e200a4" sprite="Bernard" animation="" />
     <item hash="752bebda9341f3c167131499b6ca4486" sprite="Bernard" animation="" />
     <item hash="75b2e95798a86fc28f243add5cea5b85" sprite="Bernard" animation="" />
     <item hash="76ab880b891908abddbdb29d6e210cbc" sprite="Bernard" animation="" />
@@ -1443,7 +1444,6 @@
     <item hash="8c1104f6b1e1635306342968df0d7947" sprite="Bernard" animation="" />
     <item hash="9210c9a044babfc073b2065f5846ba06" sprite="Bernard" animation="" />
     <item hash="927b19cd008497cf36326bf50fce7abe" sprite="Bernard" animation="" />
-    <item hash="9470d04382cad5ccf3c63d2bcd5fcea1" sprite="Bernard" animation="" />
     <item hash="94b58a392a91bc2b2b20abf1fefded16" sprite="Bernard" animation="" />
     <item hash="96103eb4d29f05af2e6f78a5209cd074" sprite="Bernard" animation="" />
     <item hash="97035fab3d7f7db286bdccabc142af1b" sprite="Bernard" animation="" />
@@ -1510,10 +1510,8 @@
     <item hash="de541de3677a7829a0145fd35b39ca08" sprite="Bernard" animation="" />
     <item hash="dea1019bdacdc9667ce55d0ee9b924cf" sprite="Bernard" animation="" />
     <item hash="e010d79868898456117db8ec5c7bc429" sprite="Bernard" animation="" />
-    <item hash="e104924225bf4a79e69f738c3cbeeb28" sprite="Bernard" animation="" />
     <item hash="e1143a5a56a07bad8b0879e32353d0bd" sprite="Bernard" animation="" />
     <item hash="e2d9c42a27207606a840b631563f700f" sprite="Bernard" animation="" />
-    <item hash="e36e06fd6d7b68943b4145a229e58504" sprite="Bernard" animation="" />
     <item hash="e3eefeef973141649a579dff0d7ba168" sprite="Bernard" animation="" />
     <item hash="e4a53beba20ee0a897c317495587070c" sprite="Bernard" animation="" />
     <item hash="e4c25c6d90cf2e954020fc7f2ad78d0b" sprite="Bernard" animation="" />
@@ -1743,11 +1741,6 @@
     <item hash="cff1028ebb5842fa3f56aa0eb7aaebeb" sprite="Blacksmith" animation="Resting" />
     <item hash="ed25bbb1a494e5dc42d66dca026bce6f" sprite="Blacksmith" animation="Resting" />
     <item hash="f1ed0decf6dcf3a2036a7f88206a4688" sprite="Blacksmith" animation="Resting" />
-    <item hash="b1e27aa018409de6bfd73f8afb883a65" sprite="Black Square" animation="" />
-    <item hash="d33e04f92840fa8d80d642441797bafe" sprite="Black Square" animation="" />
-    <item hash="03ac62ba3da04a0bcca0ea6f6d6ce4b2" sprite="Black Square 2" animation="" />
-    <item hash="fd9a62f71778de82628430c658349d91" sprite="Black Square 3" animation="" />
-    <item hash="7470b797563079a7f474e66996238818" sprite="Black Square 4" animation="" />
     <item hash="0248648dbc851a5ca1313e863e243838" sprite="Blood Born" animation="" />
     <item hash="065a5e9540edc04704eb16ed36886da6" sprite="Blood Born" animation="" />
     <item hash="06b03f9603cf69135a4e63aa89e0e086" sprite="Blood Born" animation="" />
@@ -3468,6 +3461,10 @@
     <item hash="fa04ba29c4c0594085a4adc850c3e028" sprite="Church Priest" animation="" />
     <item hash="ff0d125162c0a7255f5dc4973db66070" sprite="Church Priest" animation="" />
     <item hash="ffc84e10056cae5dea2c4d0cd3b1e73d" sprite="Church Priest" animation="" />
+    <item hash="b768aad1d9f910d8b8f2b5617c11b6ef" sprite="Church Priest" animation="" />
+    <item hash="c4cc302781d4a5d57b7aa00de8c4fa5c" sprite="Church Priest" animation="" />
+    <item hash="48cd61dfa671ff84f42ce13b8d242b0d" sprite="Church Priest" animation="" />
+    <item hash="5a53fccd47e4fb33c0c3a739aceba2fe" sprite="Church Priest" animation="" />
     <item hash="02a19dcb69a4430fffe2942780dce6d7" sprite="Church Priest (Female)" animation="" />
     <item hash="0843f9ab2f05a54e18bdb94d6a5f2ffc" sprite="Church Priest (Female)" animation="" />
     <item hash="093cf54024a6ef0ba7b63f75e950d85b" sprite="Church Priest (Female)" animation="" />
@@ -4432,46 +4429,46 @@
     <item hash="fcb93c492747b02d7977402296a2eaa8" sprite="Dantares" animation="" />
     <item hash="fd0178ef24e4e997f66bb2210eb3713b" sprite="Dantares" animation="" />
     <item hash="fe6925d700988e1980dc9d2e86bfd1a2" sprite="Dantares" animation="" />
-    <item hash="02476c7f936277dc4ba83a76c784c8bf" sprite="Dark Dragon1" animation="" />
-    <item hash="04a204393f5bfa2617b8a3c15519d19f" sprite="Dark Dragon1" animation="" />
-    <item hash="0812800e4efbab411ac4fea7cbf04100" sprite="Dark Dragon1" animation="" />
-    <item hash="09a55b6106d26b1726d334f61d75d5e0" sprite="Dark Dragon1" animation="" />
-    <item hash="15118ab3e41bba579e372b02035868b3" sprite="Dark Dragon1" animation="" />
-    <item hash="1ebb66410435685bb8372e3e37980e69" sprite="Dark Dragon1" animation="" />
-    <item hash="245b15689bc021452147636e891da6f3" sprite="Dark Dragon1" animation="" />
-    <item hash="2bcfa6ff40b13e9ef9c1341d9f4a1ad6" sprite="Dark Dragon1" animation="" />
-    <item hash="362b328414957f34b804a9e17246bc31" sprite="Dark Dragon1" animation="" />
-    <item hash="3a33088595550dc9059fb6dbb51bdf22" sprite="Dark Dragon1" animation="" />
-    <item hash="3cbea8c46bee7b35a37d6b4e4f118672" sprite="Dark Dragon1" animation="" />
-    <item hash="42f928d73f6bace68a2894343615ad43" sprite="Dark Dragon1" animation="" />
-    <item hash="4425e41beb045701fb39ef6c11738f4e" sprite="Dark Dragon1" animation="" />
-    <item hash="563943f53a7ec2a268c281ee654a5b37" sprite="Dark Dragon1" animation="" />
-    <item hash="571ec1e8d9e4b8241a4516bb9b391d4a" sprite="Dark Dragon1" animation="" />
-    <item hash="58bf16ab2bf3cbe8d49ec1a0020fe349" sprite="Dark Dragon1" animation="" />
-    <item hash="5cf8c1ad1033cc7b2389415da5f9b91a" sprite="Dark Dragon1" animation="" />
-    <item hash="5feb58feb577d91218a445fb3b629fab" sprite="Dark Dragon1" animation="" />
-    <item hash="67ebcab6ca8ec36c141991b56973e081" sprite="Dark Dragon1" animation="" />
-    <item hash="77e5a63972c7cc6dc875f423abc68c1b" sprite="Dark Dragon1" animation="" />
-    <item hash="87f942ac857fdc78b3467445c3b84360" sprite="Dark Dragon1" animation="" />
-    <item hash="8b04ffeb2744ab5db3fc3318f613229a" sprite="Dark Dragon1" animation="" />
-    <item hash="a0321ef7266574b2bb14f5aaf66186ed" sprite="Dark Dragon1" animation="" />
-    <item hash="b74b710f01369bca48c9b3584fe1f1f9" sprite="Dark Dragon1" animation="" />
-    <item hash="b82750d292ef95704886189c5001696b" sprite="Dark Dragon1" animation="" />
-    <item hash="bab945551f1f79b3c30aeac46216c8ac" sprite="Dark Dragon1" animation="" />
-    <item hash="befb3db071e56dda1d46774ec40d443d" sprite="Dark Dragon1" animation="" />
-    <item hash="c5aa056ea033fd2968340bd63ad9e751" sprite="Dark Dragon1" animation="" />
-    <item hash="cfec5256e029fd15855ef48cbeddc35b" sprite="Dark Dragon1" animation="" />
-    <item hash="d3797e2ca93f8d85d092c8672fe84b09" sprite="Dark Dragon1" animation="" />
-    <item hash="e228f5ba93f8ad434c45bafe55a928be" sprite="Dark Dragon1" animation="" />
-    <item hash="ec66312f2a2edb5de0662c9a95c26350" sprite="Dark Dragon1" animation="" />
-    <item hash="ed7709b008b46c6edeafd461859d6dbb" sprite="Dark Dragon1" animation="" />
-    <item hash="ed7b6c4583d84ac601e8fac4b8311aad" sprite="Dark Dragon1" animation="" />
-    <item hash="f0977f23b7511f25fd7a985ab32bdeaf" sprite="Dark Dragon1" animation="" />
-    <item hash="f20c3aa53020424a71b88805cf4a4735" sprite="Dark Dragon1" animation="" />
-    <item hash="f81f561a0aa76c53cae17f96d0c8980d" sprite="Dark Dragon1" animation="" />
-    <item hash="f9bef83b0049f201dcf0b395dee0eae6" sprite="Dark Dragon1" animation="" />
-    <item hash="fa96879ee03860287a823d3c08077751" sprite="Dark Dragon1" animation="" />
-    <item hash="ff7572f03010f179c569b56bd82a62b9" sprite="Dark Dragon1" animation="" />
+    <item hash="02476c7f936277dc4ba83a76c784c8bf" sprite="Dark Dragon" animation="" />
+    <item hash="04a204393f5bfa2617b8a3c15519d19f" sprite="Dark Dragon" animation="" />
+    <item hash="0812800e4efbab411ac4fea7cbf04100" sprite="Dark Dragon" animation="" />
+    <item hash="09a55b6106d26b1726d334f61d75d5e0" sprite="Dark Dragon" animation="" />
+    <item hash="15118ab3e41bba579e372b02035868b3" sprite="Dark Dragon" animation="" />
+    <item hash="1ebb66410435685bb8372e3e37980e69" sprite="Dark Dragon" animation="" />
+    <item hash="245b15689bc021452147636e891da6f3" sprite="Dark Dragon" animation="" />
+    <item hash="2bcfa6ff40b13e9ef9c1341d9f4a1ad6" sprite="Dark Dragon" animation="" />
+    <item hash="362b328414957f34b804a9e17246bc31" sprite="Dark Dragon" animation="" />
+    <item hash="3a33088595550dc9059fb6dbb51bdf22" sprite="Dark Dragon" animation="" />
+    <item hash="3cbea8c46bee7b35a37d6b4e4f118672" sprite="Dark Dragon" animation="" />
+    <item hash="42f928d73f6bace68a2894343615ad43" sprite="Dark Dragon" animation="" />
+    <item hash="4425e41beb045701fb39ef6c11738f4e" sprite="Dark Dragon" animation="" />
+    <item hash="563943f53a7ec2a268c281ee654a5b37" sprite="Dark Dragon" animation="" />
+    <item hash="571ec1e8d9e4b8241a4516bb9b391d4a" sprite="Dark Dragon" animation="" />
+    <item hash="58bf16ab2bf3cbe8d49ec1a0020fe349" sprite="Dark Dragon" animation="" />
+    <item hash="5cf8c1ad1033cc7b2389415da5f9b91a" sprite="Dark Dragon" animation="" />
+    <item hash="5feb58feb577d91218a445fb3b629fab" sprite="Dark Dragon" animation="" />
+    <item hash="67ebcab6ca8ec36c141991b56973e081" sprite="Dark Dragon" animation="" />
+    <item hash="77e5a63972c7cc6dc875f423abc68c1b" sprite="Dark Dragon" animation="" />
+    <item hash="87f942ac857fdc78b3467445c3b84360" sprite="Dark Dragon" animation="" />
+    <item hash="8b04ffeb2744ab5db3fc3318f613229a" sprite="Dark Dragon" animation="" />
+    <item hash="a0321ef7266574b2bb14f5aaf66186ed" sprite="Dark Dragon" animation="" />
+    <item hash="b74b710f01369bca48c9b3584fe1f1f9" sprite="Dark Dragon" animation="" />
+    <item hash="b82750d292ef95704886189c5001696b" sprite="Dark Dragon" animation="" />
+    <item hash="bab945551f1f79b3c30aeac46216c8ac" sprite="Dark Dragon" animation="" />
+    <item hash="befb3db071e56dda1d46774ec40d443d" sprite="Dark Dragon" animation="" />
+    <item hash="c5aa056ea033fd2968340bd63ad9e751" sprite="Dark Dragon" animation="" />
+    <item hash="cfec5256e029fd15855ef48cbeddc35b" sprite="Dark Dragon" animation="" />
+    <item hash="d3797e2ca93f8d85d092c8672fe84b09" sprite="Dark Dragon" animation="" />
+    <item hash="e228f5ba93f8ad434c45bafe55a928be" sprite="Dark Dragon" animation="" />
+    <item hash="ec66312f2a2edb5de0662c9a95c26350" sprite="Dark Dragon" animation="" />
+    <item hash="ed7709b008b46c6edeafd461859d6dbb" sprite="Dark Dragon" animation="" />
+    <item hash="ed7b6c4583d84ac601e8fac4b8311aad" sprite="Dark Dragon" animation="" />
+    <item hash="f0977f23b7511f25fd7a985ab32bdeaf" sprite="Dark Dragon" animation="" />
+    <item hash="f20c3aa53020424a71b88805cf4a4735" sprite="Dark Dragon" animation="" />
+    <item hash="f81f561a0aa76c53cae17f96d0c8980d" sprite="Dark Dragon" animation="" />
+    <item hash="f9bef83b0049f201dcf0b395dee0eae6" sprite="Dark Dragon" animation="" />
+    <item hash="fa96879ee03860287a823d3c08077751" sprite="Dark Dragon" animation="" />
+    <item hash="ff7572f03010f179c569b56bd82a62b9" sprite="Dark Dragon" animation="" />
     <item hash="0b60010814a08363a5d01a30f0e495f4" sprite="Dark Gunner" animation="" />
     <item hash="108e2c90e62a41469a4196f35ae0f6c0" sprite="Dark Gunner" animation="" />
     <item hash="17c64d79f25ac0440e2644a23746d1fd" sprite="Dark Gunner" animation="" />
@@ -4600,7 +4597,6 @@
     <item hash="d3892e62c9a6830fdb2f65498d293204" sprite="Dark Priest (Purple)" animation="" />
     <item hash="f31ed66a53633162156864b0c5a4185f" sprite="Dark Priest (Purple)" animation="" />
     <item hash="fe7e56dad080f0ffeea5bc3f35b1c099" sprite="Dark Priest (Purple)" animation="" />
-    <item hash="bdb88976a82c51fdb36f6f2b4d053378" sprite="Dark Priest (Purple)" animation="Dying" />
     <item hash="17d9981ac3e87ece9553429fb7aaa21a" sprite="Dark Priest (Red)" animation="" />
     <item hash="27507e5b762e30beb7a0f6532711dd3d" sprite="Dark Priest (Red)" animation="" />
     <item hash="2f0b5f94ec0b2a2d781b674b85695000" sprite="Dark Priest (Red)" animation="" />
@@ -4638,6 +4634,7 @@
     <item hash="f7d4d4f8065d4352fcf5cf30ed552872" sprite="Dark Priest (Red)" animation="" />
     <item hash="fee07d791c3dbf182cd0f663d0f04e4a" sprite="Dark Priest (Red)" animation="" />
     <item hash="8914912e7f50c95b34f2baf1fd55ad48" sprite="Dark Priest (Red)" animation="Dying" />
+    <item hash="bdb88976a82c51fdb36f6f2b4d053378" sprite="Dark Priest (Red)" animation="Dying" />
     <item hash="0019277abd717cf398a550731ff8c39f" sprite="Darksol" animation="" />
     <item hash="024619b4aee13603ac77cbeefb5320cd" sprite="Darksol" animation="" />
     <item hash="1ab1303c08f0e7b7148881e2be0057d6" sprite="Darksol" animation="" />
@@ -5215,7 +5212,6 @@
     <item hash="8d0e5c8657fafec9edad3e5f753c6dd8" sprite="Destonia Soldier w/ Crutch" animation="" />
     <item hash="a3ae3d1a3e4113b3b9495da2a9f90d25" sprite="Destonia Soldier w/ Crutch" animation="" />
     <item hash="d7f98757602dec2e36a1e13aeed6a709" sprite="Destonia Soldier w/ Crutch" animation="" />
-    <item hash="e16e3c0b65a901240c9df05d789829f8" sprite="Destonia Soldier w/ Crutch" animation="" />
     <item hash="e26e631e227925006d394f331cdeb2ec" sprite="Destonia Soldier w/ Crutch" animation="" />
     <item hash="e3fa60c9ae7f2b5b226c409afaf6d487" sprite="Destonia Soldier w/ Crutch" animation="" />
     <item hash="f695f237c1889a6c52bfdf872cbf6545" sprite="Destonia Soldier w/ Crutch" animation="" />
@@ -5332,6 +5328,7 @@
     <item hash="b357694605b2b90b88c025d8ff583a7c" sprite="Domaric" animation="" />
     <item hash="b622b52e401e3aa735740789978a151a" sprite="Domaric" animation="" />
     <item hash="b738b25e88c6c2cedfa700cb99c154d2" sprite="Domaric" animation="" />
+    <item hash="b497974c9795dcbbef130b2d8f561b4b" sprite="Domaric" animation="" />
     <item hash="bba0b0c0726e3520672da3283a829a7f" sprite="Domaric" animation="" />
     <item hash="bdfc11ec0eae871c3b549353e1fc8780" sprite="Domaric" animation="" />
     <item hash="bec6e539548af40264d807570d677f78" sprite="Domaric" animation="" />
@@ -5403,7 +5400,6 @@
     <item hash="23bc45ffe8691e1738853d8d85fa1719" sprite="Donhort" animation="" />
     <item hash="243bc98fcdd47bec3a1bc397bf6a96dd" sprite="Donhort" animation="" />
     <item hash="29a58d0306206cee665752595df5ed23" sprite="Donhort" animation="" />
-    <item hash="2b2a1092bf41585cd83a69d3298a4f0d" sprite="Donhort" animation="" />
     <item hash="2e0cc8085509c2cb912846cd3e82185e" sprite="Donhort" animation="" />
     <item hash="2e7562158f0ed1ce928ab4da74cc9564" sprite="Donhort" animation="" />
     <item hash="2f7b489f23dec5e19903fbab5d190085" sprite="Donhort" animation="" />
@@ -6427,7 +6423,6 @@
     <item hash="9c0ab16bb768296d91641107766531dd" sprite="Elf Woman w/ White Apron" animation="" />
     <item hash="9f187ce377a49def7d067bf4461617b0" sprite="Elf Woman w/ White Apron" animation="" />
     <item hash="b225fca4b31726d74e30410819ae12c0" sprite="Elf Woman w/ White Apron" animation="" />
-    <item hash="b497974c9795dcbbef130b2d8f561b4b" sprite="Elf Woman w/ White Apron" animation="" />
     <item hash="b714fa2bd4cdcf05d1bda3692332b2aa" sprite="Elf Woman w/ White Apron" animation="" />
     <item hash="cca610e49ae6f5a8956af7dac59ac6b2" sprite="Elf Woman w/ White Apron" animation="" />
     <item hash="d433e2d24811b513d999d10accbd1054" sprite="Elf Woman w/ White Apron" animation="" />
@@ -6499,42 +6494,44 @@
     <item hash="eb20a6f7a1e1ffaf0cc82caa484ffe0f" sprite="Fafhard" animation="" />
     <item hash="f5ea89a3d1c34b7263a031583c12140f" sprite="Fafhard" animation="" />
     <item hash="fe5238baa8282f7cc98b00bc98effaec" sprite="Fafhard" animation="" />
-    <item hash="5237741579f93dc11570c17ba7faf443" sprite="Fafhard" animation="Dying" />
-    <item hash="9333d0382bb100d26a5b231ee4e4df9a" sprite="Fafhard" animation="Dying" />
-    <item hash="b88a803a8f989bee128aedd7a77c6bb1" sprite="Fafhard" animation="Dying" />
-    <item hash="e3345eba31879d4bf0e7ab600b8dfefe" sprite="Fafhard" animation="Dying" />
-    <item hash="006023033c9851a85c5a5a8014f938aa" sprite="Fafhard" animation="Getting Up" />
-    <item hash="01136c86171f18f0ce488970ef12c839" sprite="Fafhard" animation="Getting Up" />
-    <item hash="2903f3250da6721aaaf6597f3b12af29" sprite="Fafhard" animation="Getting Up" />
-    <item hash="2cb537e2724b8f8bd520fbad0f87f805" sprite="Fafhard" animation="Getting Up" />
-    <item hash="3991c1f500c34b0986abb6975672f5e9" sprite="Fafhard" animation="Getting Up" />
-    <item hash="3cb9e3359c65c6be117179db67adafe8" sprite="Fafhard" animation="Getting Up" />
-    <item hash="4068099417f1b1d4097dd9d4020178a4" sprite="Fafhard" animation="Getting Up" />
-    <item hash="652d25ac9879d5353444a9dd77b048ce" sprite="Fafhard" animation="Getting Up" />
-    <item hash="6bff040a849c3f8eb18ee185cf1f2bfd" sprite="Fafhard" animation="Getting Up" />
-    <item hash="6db451521a204acc6483d17e453854e4" sprite="Fafhard" animation="Getting Up" />
-    <item hash="741b8f20d53f8c3ab43295b5c70f3d81" sprite="Fafhard" animation="Getting Up" />
-    <item hash="75e186bca4e6d2ec75ed01fa3b578eca" sprite="Fafhard" animation="Getting Up" />
-    <item hash="7638bfa6d15332594180b628bfec456b" sprite="Fafhard" animation="Getting Up" />
-    <item hash="76e0f6c2f3e62bcb28d9f95a9bf84a34" sprite="Fafhard" animation="Getting Up" />
-    <item hash="7a9c408b13260fe4e675f52b5736a9ee" sprite="Fafhard" animation="Getting Up" />
-    <item hash="8703bb03bfd7b7a13197ddff7208142f" sprite="Fafhard" animation="Getting Up" />
-    <item hash="8a83892f4ee5d3500c4da3f07ae7588c" sprite="Fafhard" animation="Getting Up" />
-    <item hash="9b1e7747c3fd040fc89a3e172c116e27" sprite="Fafhard" animation="Getting Up" />
-    <item hash="a3bec9220b95a9b8f5cd5fc434ab2fb6" sprite="Fafhard" animation="Getting Up" />
-    <item hash="b323bb986df6560dad17658686f96eb4" sprite="Fafhard" animation="Getting Up" />
-    <item hash="b8e8b0b2bcb69881808ee6b291fc4042" sprite="Fafhard" animation="Getting Up" />
-    <item hash="b8f6489cc8e9dd6048026c87acbba508" sprite="Fafhard" animation="Getting Up" />
-    <item hash="ba4db3513526b297f490bf3b32642f7a" sprite="Fafhard" animation="Getting Up" />
-    <item hash="c21b113c88cd405ac07803a3bac078cf" sprite="Fafhard" animation="Getting Up" />
-    <item hash="c860b47d5c74e3fbaea29d68cfd2903e" sprite="Fafhard" animation="Getting Up" />
-    <item hash="dec59c53f7aa578736a011a51d96e223" sprite="Fafhard" animation="Getting Up" />
-    <item hash="e939075e9d5d27bfd1be188d39492898" sprite="Fafhard" animation="Getting Up" />
-    <item hash="f0e1a03935d738e9fef766e4e0b49d42" sprite="Fafhard" animation="Getting Up" />
+    <item hash="5237741579f93dc11570c17ba7faf443" sprite="Fafhard w/ Helmet" animation="Dying" />
+    <item hash="9333d0382bb100d26a5b231ee4e4df9a" sprite="Fafhard w/ Helmet" animation="Dying" />
+    <item hash="b88a803a8f989bee128aedd7a77c6bb1" sprite="Fafhard w/ Helmet" animation="Dying" />
+    <item hash="e3345eba31879d4bf0e7ab600b8dfefe" sprite="Fafhard w/ Helmet" animation="Dying" />
+    <item hash="006023033c9851a85c5a5a8014f938aa" sprite="Fafhard w/ Helmet" animation="Getting Up" />
+    <item hash="01136c86171f18f0ce488970ef12c839" sprite="Fafhard w/ Helmet" animation="Getting Up" />
+    <item hash="2903f3250da6721aaaf6597f3b12af29" sprite="Fafhard w/ Helmet" animation="Getting Up" />
+    <item hash="2cb537e2724b8f8bd520fbad0f87f805" sprite="Fafhard w/ Helmet" animation="Getting Up" />
+    <item hash="3991c1f500c34b0986abb6975672f5e9" sprite="Fafhard w/ Helmet" animation="Getting Up" />
+    <item hash="3cb9e3359c65c6be117179db67adafe8" sprite="Fafhard w/ Helmet" animation="Getting Up" />
+    <item hash="4068099417f1b1d4097dd9d4020178a4" sprite="Fafhard w/ Helmet" animation="Getting Up" />
+    <item hash="652d25ac9879d5353444a9dd77b048ce" sprite="Fafhard w/ Helmet" animation="Getting Up" />
+    <item hash="6bff040a849c3f8eb18ee185cf1f2bfd" sprite="Fafhard w/ Helmet" animation="Getting Up" />
+    <item hash="6db451521a204acc6483d17e453854e4" sprite="Fafhard w/ Helmet" animation="Getting Up" />
+    <item hash="741b8f20d53f8c3ab43295b5c70f3d81" sprite="Fafhard w/ Helmet" animation="Getting Up" />
+    <item hash="75e186bca4e6d2ec75ed01fa3b578eca" sprite="Fafhard w/ Helmet" animation="Getting Up" />
+    <item hash="7638bfa6d15332594180b628bfec456b" sprite="Fafhard w/ Helmet" animation="Getting Up" />
+    <item hash="76e0f6c2f3e62bcb28d9f95a9bf84a34" sprite="Fafhard w/ Helmet" animation="Getting Up" />
+    <item hash="7a9c408b13260fe4e675f52b5736a9ee" sprite="Fafhard w/ Helmet" animation="Getting Up" />
+    <item hash="8703bb03bfd7b7a13197ddff7208142f" sprite="Fafhard w/ Helmet" animation="Getting Up" />
+    <item hash="8a83892f4ee5d3500c4da3f07ae7588c" sprite="Fafhard w/ Helmet" animation="Getting Up" />
+    <item hash="9b1e7747c3fd040fc89a3e172c116e27" sprite="Fafhard w/ Helmet" animation="Getting Up" />
+    <item hash="a3bec9220b95a9b8f5cd5fc434ab2fb6" sprite="Fafhard w/ Helmet" animation="Getting Up" />
+    <item hash="b323bb986df6560dad17658686f96eb4" sprite="Fafhard w/ Helmet" animation="Getting Up" />
+    <item hash="b8e8b0b2bcb69881808ee6b291fc4042" sprite="Fafhard w/ Helmet" animation="Getting Up" />
+    <item hash="b8f6489cc8e9dd6048026c87acbba508" sprite="Fafhard w/ Helmet" animation="Getting Up" />
+    <item hash="ba4db3513526b297f490bf3b32642f7a" sprite="Fafhard w/ Helmet" animation="Getting Up" />
+    <item hash="c21b113c88cd405ac07803a3bac078cf" sprite="Fafhard w/ Helmet" animation="Getting Up" />
+    <item hash="c860b47d5c74e3fbaea29d68cfd2903e" sprite="Fafhard w/ Helmet" animation="Getting Up" />
+    <item hash="dec59c53f7aa578736a011a51d96e223" sprite="Fafhard w/ Helmet" animation="Getting Up" />
+    <item hash="e939075e9d5d27bfd1be188d39492898" sprite="Fafhard w/ Helmet" animation="Getting Up" />
+    <item hash="f0e1a03935d738e9fef766e4e0b49d42" sprite="Fafhard w/ Helmet" animation="Getting Up" />
+    <item hash="0dd22a431a7cf81ada5cbea1592b1714" sprite="Fafhard w/ Helmet" animation="Getting Up" />
+    <item hash="56b2946ca527d4f53fc0373b3208eae8" sprite="Fafhard w/ Helmet" animation="Getting Up" />
+    <item hash="067f4f79e9ce6cf76c0f574ce4396688" sprite="Fafhard w/ Helmet" animation="Getting Up" />
+    <item hash="d8cb10d0c2dccf2135a1df63702c565b" sprite="Fafhard w/ Helmet" animation="Getting Up" />
     <item hash="00ff69ccfd66015286356e3ad5a7d386" sprite="Fafhard w/ Helmet" animation="" />
-    <item hash="067f4f79e9ce6cf76c0f574ce4396688" sprite="Fafhard w/ Helmet" animation="" />
     <item hash="073a1f533b167abd8c924f330dbb886c" sprite="Fafhard w/ Helmet" animation="" />
-    <item hash="0dd22a431a7cf81ada5cbea1592b1714" sprite="Fafhard w/ Helmet" animation="" />
     <item hash="0f032e48bd284f382239f4575183ae02" sprite="Fafhard w/ Helmet" animation="" />
     <item hash="23c7c0200459fe3888692b5707fb2f98" sprite="Fafhard w/ Helmet" animation="" />
     <item hash="2f3dc9c6b2dc18ce1cb00c16af661e2b" sprite="Fafhard w/ Helmet" animation="" />
@@ -6548,7 +6545,6 @@
     <item hash="4c9e36fd3b99c2a25e6217d5a139579c" sprite="Fafhard w/ Helmet" animation="" />
     <item hash="4c9f4133eb0ed13e21084d4a5f1d44f0" sprite="Fafhard w/ Helmet" animation="" />
     <item hash="5198b86f3bae82bb9f28cf1f63ae85d0" sprite="Fafhard w/ Helmet" animation="" />
-    <item hash="56b2946ca527d4f53fc0373b3208eae8" sprite="Fafhard w/ Helmet" animation="" />
     <item hash="598d057be7c018d333d98d5abcc5c889" sprite="Fafhard w/ Helmet" animation="" />
     <item hash="5dce94430991a17b63ee0883ee589bb9" sprite="Fafhard w/ Helmet" animation="" />
     <item hash="622697f2f48400cdb5dabdee88dd6539" sprite="Fafhard w/ Helmet" animation="" />
@@ -6588,7 +6584,6 @@
     <item hash="cd8efc800aa6b9a3aee38e4a43731415" sprite="Fafhard w/ Helmet" animation="" />
     <item hash="cf83ba4f8e7dd7270e9602590636612d" sprite="Fafhard w/ Helmet" animation="" />
     <item hash="d203eb9e90d8435e30050d0f779b212a" sprite="Fafhard w/ Helmet" animation="" />
-    <item hash="d8cb10d0c2dccf2135a1df63702c565b" sprite="Fafhard w/ Helmet" animation="" />
     <item hash="da9f53991ee138be3cd09ca51ac9f640" sprite="Fafhard w/ Helmet" animation="" />
     <item hash="db1013fa774676faa8884c5ce69c2cae" sprite="Fafhard w/ Helmet" animation="" />
     <item hash="dc0b96ff15f45a3145d9bff6bad060a8" sprite="Fafhard w/ Helmet" animation="" />
@@ -7178,6 +7173,7 @@
     <item hash="e091e2a3634173e0149249093bd3acbb" sprite="Franz" animation="" />
     <item hash="e1603c8cdc24af37ecd0d4c188e99d8b" sprite="Franz" animation="" />
     <item hash="e80f8818b307219fd1c6e66514e10269" sprite="Franz" animation="" />
+    <item hash="fb822d010c060c937dc1fd04355078ed" sprite="Franz" animation="" />
     <item hash="fe5261c8efd7ace84a24f332fb0c691b" sprite="Franz" animation="" />
     <item hash="0dd5f38964eb3150c0cca6f7bfde5962" sprite="Franz w/ Helmet" animation="" />
     <item hash="259c8d01eb35220b4f2b6c502bf1a3cf" sprite="Franz w/ Helmet" animation="" />
@@ -7206,7 +7202,6 @@
     <item hash="c4873238b96af7a84ceca0162a3e991d" sprite="Franz w/ Helmet" animation="" />
     <item hash="e343cd5b6b159a629bb4336f2530db98" sprite="Franz w/ Helmet" animation="" />
     <item hash="e5d2e701a336af2991ed7391adf71cb4" sprite="Franz w/ Helmet" animation="" />
-    <item hash="fb822d010c060c937dc1fd04355078ed" sprite="Franz w/ Helmet" animation="" />
     <item hash="ff1e0d47ab2531b1bec7076fdee7e54a" sprite="Franz w/ Helmet" animation="" />
     <item hash="1dac71484f78a8109b693459d13a7319" sprite="Freeze Ball Pedestal" animation="" />
     <item hash="70f1556fa8fce78043f885410dbd0a60" sprite="Freeze Ball Pedestal" animation="" />
@@ -7746,7 +7741,6 @@
     <item hash="e1a4cb97812fd4cdf2f9dca280dc9b42" sprite="Garzel" animation="" />
     <item hash="f5e9f114261dc71b097b64dea8e4876b" sprite="Garzel" animation="" />
     <item hash="f68d4e510d78828aaafcc4ec500bec9b" sprite="Garzel" animation="" />
-    <item hash="f8a48dd81d842e54135840f0b9afa6e4" sprite="Garzel" animation="" />
     <item hash="043d03f1c63aa58e80ba8eaaa2eeb9b6" sprite="Garzel w/ Helmet" animation="" />
     <item hash="0f5411065e16cb3f7d4537ce03cbb699" sprite="Garzel w/ Helmet" animation="" />
     <item hash="10fd7d923241ff2911223b0f26c87026" sprite="Garzel w/ Helmet" animation="" />
@@ -7778,6 +7772,7 @@
     <item hash="e4c1d8906de7a9af1e62333f2043900f" sprite="Garzel w/ Helmet" animation="" />
     <item hash="e72c7f7c5e438320669e02e22a8f666b" sprite="Garzel w/ Helmet" animation="" />
     <item hash="f7da48d47d6e8c80b89c1fc2b231c7ff" sprite="Garzel w/ Helmet" animation="" />
+    <item hash="f8a48dd81d842e54135840f0b9afa6e4" sprite="Garzel w/ Helmet" animation="" />
     <item hash="144e1e3e06e67d7c41d70f45c95e5a9b" sprite="Ghoul" animation="" />
     <item hash="18d022e9b70d2878952d4de210d77562" sprite="Ghoul" animation="" />
     <item hash="21434943176bd8afdf6405806541fe41" sprite="Ghoul" animation="" />
@@ -8782,6 +8777,7 @@
     <item hash="e0037a609b0571c38f2db170c29d7241" sprite="Gracia" animation="Tortured" />
     <item hash="e1dca9377e0cdedd330487ccd596814b" sprite="Gracia" animation="Tortured" />
     <item hash="eabe030776aa416fc63f79747b22ac4d" sprite="Gracia" animation="Tortured" />
+    <item hash="e16e3c0b65a901240c9df05d789829f8" sprite="Gracia" animation="Tortured" />
     <item hash="0a900bab73a1542e60c0695677db73e1" sprite="Gracia" animation="Unsealing Staff" />
     <item hash="1014de9b4fc357f3bf2963864aac1a3a" sprite="Gracia" animation="Unsealing Staff" />
     <item hash="134bb9d5b66f70da2a5333afd8351ba5" sprite="Gracia" animation="Unsealing Staff" />
@@ -10739,46 +10735,46 @@
     <item hash="fedcf2f368218201ecc79afd261c6a0c" sprite="Honesty" animation="" />
     <item hash="ff0edb8069faaec761db98d09d9bff33" sprite="Honesty" animation="" />
     <item hash="fff49e369a4815300caa13af09d20093" sprite="Honesty" animation="" />
-    <item hash="08a85dba4b39e414ae876062ff095b4c" sprite="Honesty Carrying Synbios" animation="" />
-    <item hash="0b7a01fa1c3395dfae5e6d7624af588b" sprite="Honesty Carrying Synbios" animation="" />
-    <item hash="0cd22091ab4ea3a929630c0018a874cf" sprite="Honesty Carrying Synbios" animation="" />
-    <item hash="0f3185c94fbeefc92c07f8d585b06b1b" sprite="Honesty Carrying Synbios" animation="" />
-    <item hash="2140718e8314dba4776c05196b2f014e" sprite="Honesty Carrying Synbios" animation="" />
-    <item hash="21b4c2b05f250c6f57f279d6326f6a87" sprite="Honesty Carrying Synbios" animation="" />
-    <item hash="2af68170ab0447846c55f43ca4a7b8d6" sprite="Honesty Carrying Synbios" animation="" />
-    <item hash="2c7110f29b961effca7ce696d79db218" sprite="Honesty Carrying Synbios" animation="" />
-    <item hash="3b9fa3de10850e444a8aa8bc4a163265" sprite="Honesty Carrying Synbios" animation="" />
-    <item hash="3d532dbe3762d0ae5eac343b87c9c758" sprite="Honesty Carrying Synbios" animation="" />
-    <item hash="3de73ee986f11116cc37983c02f858de" sprite="Honesty Carrying Synbios" animation="" />
-    <item hash="43d559f696059f4d881485113c8aed16" sprite="Honesty Carrying Synbios" animation="" />
-    <item hash="4562d06d9e218a034fa5be10bf93101c" sprite="Honesty Carrying Synbios" animation="" />
-    <item hash="5076dd301f146aed4cedd0ed6123e77b" sprite="Honesty Carrying Synbios" animation="" />
-    <item hash="521709109449262553cdfbc35cb3ca1f" sprite="Honesty Carrying Synbios" animation="" />
-    <item hash="52581622152cd7321bf9090b8f991ed7" sprite="Honesty Carrying Synbios" animation="" />
-    <item hash="55dd5d4f17ae058b2257bdd5b3c04b10" sprite="Honesty Carrying Synbios" animation="" />
-    <item hash="567360cf0e6074f3ec67de3caf845492" sprite="Honesty Carrying Synbios" animation="" />
-    <item hash="5d6cb59b9066bf8294b90027b86b67ef" sprite="Honesty Carrying Synbios" animation="" />
-    <item hash="5dbfe79ad5c3f30b12a31a96175061cb" sprite="Honesty Carrying Synbios" animation="" />
-    <item hash="61dea533708c0eaa89eebdc093ce5c08" sprite="Honesty Carrying Synbios" animation="" />
-    <item hash="64e7506fb3bc6a1dda7465e7aa22a1a0" sprite="Honesty Carrying Synbios" animation="" />
-    <item hash="65f2c0df5804f4cdb119a25681dc4650" sprite="Honesty Carrying Synbios" animation="" />
-    <item hash="6743f68ed12bdf8a17bc32432499759f" sprite="Honesty Carrying Synbios" animation="" />
-    <item hash="7cfb8763bdcfdffb7a3fe9102cd391e6" sprite="Honesty Carrying Synbios" animation="" />
-    <item hash="7d89783c4d7dc616b43abdcab69cc621" sprite="Honesty Carrying Synbios" animation="" />
-    <item hash="81ae12a67b05f275ea55678d1203956f" sprite="Honesty Carrying Synbios" animation="" />
-    <item hash="8536d58baf9a78a3139b8143400bb551" sprite="Honesty Carrying Synbios" animation="" />
-    <item hash="869d0b6f704cc9a287081722d5115d1b" sprite="Honesty Carrying Synbios" animation="" />
-    <item hash="8c643a3e294ce66a4948ce974f4ddd2d" sprite="Honesty Carrying Synbios" animation="" />
-    <item hash="92fc15b44c5104a8c0aab109b8f37905" sprite="Honesty Carrying Synbios" animation="" />
-    <item hash="9c6885f42a92ca0c7d06635b55da2b82" sprite="Honesty Carrying Synbios" animation="" />
-    <item hash="aa0b2aae02f595902e24b82f257975eb" sprite="Honesty Carrying Synbios" animation="" />
-    <item hash="b347349c90dc5132b878e6111df9e399" sprite="Honesty Carrying Synbios" animation="" />
-    <item hash="b67e77f796d7c4e7379a98e1c46568b8" sprite="Honesty Carrying Synbios" animation="" />
-    <item hash="b7198a501439dc3aae95dbb95ed2effa" sprite="Honesty Carrying Synbios" animation="" />
-    <item hash="ce312d445e2b1ce77717cb0ff1a4bb12" sprite="Honesty Carrying Synbios" animation="" />
-    <item hash="e8ae9938a3e1ed7b686b525957842578" sprite="Honesty Carrying Synbios" animation="" />
-    <item hash="f0335d35d1fc5e5a5cbf91a53f461762" sprite="Honesty Carrying Synbios" animation="" />
-    <item hash="f691b10dd0f6723a4a2fea96387c4643" sprite="Honesty Carrying Synbios" animation="" />
+    <item hash="08a85dba4b39e414ae876062ff095b4c" sprite="Honesty" animation="Carrying Synbios" />
+    <item hash="0b7a01fa1c3395dfae5e6d7624af588b" sprite="Honesty" animation="Carrying Synbios" />
+    <item hash="0cd22091ab4ea3a929630c0018a874cf" sprite="Honesty" animation="Carrying Synbios" />
+    <item hash="0f3185c94fbeefc92c07f8d585b06b1b" sprite="Honesty" animation="Carrying Synbios" />
+    <item hash="2140718e8314dba4776c05196b2f014e" sprite="Honesty" animation="Carrying Synbios" />
+    <item hash="21b4c2b05f250c6f57f279d6326f6a87" sprite="Honesty" animation="Carrying Synbios" />
+    <item hash="2af68170ab0447846c55f43ca4a7b8d6" sprite="Honesty" animation="Carrying Synbios" />
+    <item hash="2c7110f29b961effca7ce696d79db218" sprite="Honesty" animation="Carrying Synbios" />
+    <item hash="3b9fa3de10850e444a8aa8bc4a163265" sprite="Honesty" animation="Carrying Synbios" />
+    <item hash="3d532dbe3762d0ae5eac343b87c9c758" sprite="Honesty" animation="Carrying Synbios" />
+    <item hash="3de73ee986f11116cc37983c02f858de" sprite="Honesty" animation="Carrying Synbios" />
+    <item hash="43d559f696059f4d881485113c8aed16" sprite="Honesty" animation="Carrying Synbios" />
+    <item hash="4562d06d9e218a034fa5be10bf93101c" sprite="Honesty" animation="Carrying Synbios" />
+    <item hash="5076dd301f146aed4cedd0ed6123e77b" sprite="Honesty" animation="Carrying Synbios" />
+    <item hash="521709109449262553cdfbc35cb3ca1f" sprite="Honesty" animation="Carrying Synbios" />
+    <item hash="52581622152cd7321bf9090b8f991ed7" sprite="Honesty" animation="Carrying Synbios" />
+    <item hash="55dd5d4f17ae058b2257bdd5b3c04b10" sprite="Honesty" animation="Carrying Synbios" />
+    <item hash="567360cf0e6074f3ec67de3caf845492" sprite="Honesty" animation="Carrying Synbios" />
+    <item hash="5d6cb59b9066bf8294b90027b86b67ef" sprite="Honesty" animation="Carrying Synbios" />
+    <item hash="5dbfe79ad5c3f30b12a31a96175061cb" sprite="Honesty" animation="Carrying Synbios" />
+    <item hash="61dea533708c0eaa89eebdc093ce5c08" sprite="Honesty" animation="Carrying Synbios" />
+    <item hash="64e7506fb3bc6a1dda7465e7aa22a1a0" sprite="Honesty" animation="Carrying Synbios" />
+    <item hash="65f2c0df5804f4cdb119a25681dc4650" sprite="Honesty" animation="Carrying Synbios" />
+    <item hash="6743f68ed12bdf8a17bc32432499759f" sprite="Honesty" animation="Carrying Synbios" />
+    <item hash="7cfb8763bdcfdffb7a3fe9102cd391e6" sprite="Honesty" animation="Carrying Synbios" />
+    <item hash="7d89783c4d7dc616b43abdcab69cc621" sprite="Honesty" animation="Carrying Synbios" />
+    <item hash="81ae12a67b05f275ea55678d1203956f" sprite="Honesty" animation="Carrying Synbios" />
+    <item hash="8536d58baf9a78a3139b8143400bb551" sprite="Honesty" animation="Carrying Synbios" />
+    <item hash="869d0b6f704cc9a287081722d5115d1b" sprite="Honesty" animation="Carrying Synbios" />
+    <item hash="8c643a3e294ce66a4948ce974f4ddd2d" sprite="Honesty" animation="Carrying Synbios" />
+    <item hash="92fc15b44c5104a8c0aab109b8f37905" sprite="Honesty" animation="Carrying Synbios" />
+    <item hash="9c6885f42a92ca0c7d06635b55da2b82" sprite="Honesty" animation="Carrying Synbios" />
+    <item hash="aa0b2aae02f595902e24b82f257975eb" sprite="Honesty" animation="Carrying Synbios" />
+    <item hash="b347349c90dc5132b878e6111df9e399" sprite="Honesty" animation="Carrying Synbios" />
+    <item hash="b67e77f796d7c4e7379a98e1c46568b8" sprite="Honesty" animation="Carrying Synbios" />
+    <item hash="b7198a501439dc3aae95dbb95ed2effa" sprite="Honesty" animation="Carrying Synbios" />
+    <item hash="ce312d445e2b1ce77717cb0ff1a4bb12" sprite="Honesty" animation="Carrying Synbios" />
+    <item hash="e8ae9938a3e1ed7b686b525957842578" sprite="Honesty" animation="Carrying Synbios" />
+    <item hash="f0335d35d1fc5e5a5cbf91a53f461762" sprite="Honesty" animation="Carrying Synbios" />
+    <item hash="f691b10dd0f6723a4a2fea96387c4643" sprite="Honesty" animation="Carrying Synbios" />
     <item hash="015f15ada4178ffd5a6bfb3a03c5c630" sprite="Horst" animation="" />
     <item hash="02404a1238ea3e385a7995e1f97a03e2" sprite="Horst" animation="" />
     <item hash="0243a452cd630921ba39337ca8bf8396" sprite="Horst" animation="" />
@@ -13304,7 +13300,6 @@
     <item hash="4419bf54ef8ea50775829839052b0bee" sprite="Kaiser Guard" animation="" />
     <item hash="442580cd580485a756e0c4065b1d985a" sprite="Kaiser Guard" animation="" />
     <item hash="44741f98fc5ad23874132647e8f64b80" sprite="Kaiser Guard" animation="" />
-    <item hash="4f4a29146c372f5b28e0a8fe3582f3ad" sprite="Kaiser Guard" animation="" />
     <item hash="4fe3144d7ef7a2374340e6d48286166c" sprite="Kaiser Guard" animation="" />
     <item hash="5015f61a5e02f9b0d5455a0caab9c835" sprite="Kaiser Guard" animation="" />
     <item hash="505ed08899712121a64b494b76a05f29" sprite="Kaiser Guard" animation="" />
@@ -13314,8 +13309,6 @@
     <item hash="5e503e617b81b7ee869e72e6cd9b2e21" sprite="Kaiser Guard" animation="" />
     <item hash="6103d0e43667dbd26cec3df721d068c1" sprite="Kaiser Guard" animation="" />
     <item hash="6444f5323adfc50d56c52d078272d907" sprite="Kaiser Guard" animation="" />
-    <item hash="65a6f69e71c5c3bd430ed8c3e7086866" sprite="Kaiser Guard" animation="" />
-    <item hash="6cb056a7887ebf1a1358d72b481b3c91" sprite="Kaiser Guard" animation="" />
     <item hash="73961474b04c771e59daa50738de67e0" sprite="Kaiser Guard" animation="" />
     <item hash="7a6ff208c65603fddfb189aa82ba248f" sprite="Kaiser Guard" animation="" />
     <item hash="7aa2736140b670f5856ac02fcfa3a91b" sprite="Kaiser Guard" animation="" />
@@ -13323,7 +13316,6 @@
     <item hash="856bd2052877b2e452005f79869b1152" sprite="Kaiser Guard" animation="" />
     <item hash="8da39546b6d5f21e2d8bbf82f4431e2b" sprite="Kaiser Guard" animation="" />
     <item hash="8f26d18a27e4570ab04adec94395c55b" sprite="Kaiser Guard" animation="" />
-    <item hash="8fe6506eb598ec241e41e745b54004a2" sprite="Kaiser Guard" animation="" />
     <item hash="932dd5316902129d1c0d272f15e8d6e0" sprite="Kaiser Guard" animation="" />
     <item hash="982ee019d427964bdf67327e04c635bf" sprite="Kaiser Guard" animation="" />
     <item hash="9cc468b92c8cd1c4ab193e29158920d3" sprite="Kaiser Guard" animation="" />
@@ -13342,6 +13334,10 @@
     <item hash="f801dd0a0310e5bd69cccd1d33e359a7" sprite="Kaiser Guard" animation="" />
     <item hash="fa1718e94f260f658b49fbd0705af51e" sprite="Kaiser Guard" animation="" />
     <item hash="ff142244022493bd28a50529a0f53853" sprite="Kaiser Guard" animation="" />
+    <item hash="4f4a29146c372f5b28e0a8fe3582f3ad" sprite="Kaiser Guard w/ Cape" animation="" />
+    <item hash="65a6f69e71c5c3bd430ed8c3e7086866" sprite="Kaiser Guard w/ Cape" animation="" />
+    <item hash="6cb056a7887ebf1a1358d72b481b3c91" sprite="Kaiser Guard w/ Cape" animation="" />
+    <item hash="8fe6506eb598ec241e41e745b54004a2" sprite="Kaiser Guard w/ Cape" animation="" />
     <item hash="02f9fcf4e257983931872141f518ff9e" sprite="Kaiser Guard w/ Cape" animation="" />
     <item hash="0fdf8bbe2ccb787de480570ea6f9ed58" sprite="Kaiser Guard w/ Cape" animation="" />
     <item hash="15343080899ee1efc17647d58541e995" sprite="Kaiser Guard w/ Cape" animation="" />
@@ -13962,9 +13958,9 @@
     <item hash="eff5bbedc1090e441142adad7d3ed29d" sprite="Lich" animation="" />
     <item hash="ff3209814845f8b5e50b8d5ff63e295a" sprite="Lich" animation="" />
     <item hash="ffbe11d167656ff1ff187471088442bf" sprite="Lich" animation="" />
-    <item hash="341f6923dce4d2c47657cea215309e2f" sprite="Light Atop Boat At Night" animation="" />
-    <item hash="6dfac0e77e7d180847d3ab5529271bde" sprite="Light Atop Boat At Night" animation="" />
-    <item hash="76cf50f7f0dc3a846b5137c6a7b782dc" sprite="Light Atop Boat At Night" animation="" />
+    <item hash="341f6923dce4d2c47657cea215309e2f" sprite="Flashing Yellow/Red Light" animation="" />
+    <item hash="6dfac0e77e7d180847d3ab5529271bde" sprite="Flashing Yellow/Red Light" animation="" />
+    <item hash="76cf50f7f0dc3a846b5137c6a7b782dc" sprite="Flashing Yellow/Red Light" animation="" />
     <item hash="37d05ff433ec9bf93ec165728c797a10" sprite="Light Blue Torch Flame" animation="" />
     <item hash="71ff04ccf9c8873323deaa8f95f7d16a" sprite="Light Blue Torch Flame" animation="" />
     <item hash="83cba58577a5706b0645b6f02a0aeacc" sprite="Light Blue Torch Flame" animation="" />
@@ -14390,6 +14386,7 @@
     <item hash="cd0895612476bedb374bfb2384e11284" sprite="Man w/ Purple Shirt and Short Black Curly Hair" animation="" />
     <item hash="d92004035b49d866780ac5f8ec2ad9d8" sprite="Man w/ Purple Shirt and Short Black Curly Hair" animation="" />
     <item hash="f4e260ca57743f1f8d452359b7397163" sprite="Man w/ Purple Shirt and Short Black Curly Hair" animation="" />
+    <item hash="2b2a1092bf41585cd83a69d3298a4f0d" sprite="Man w/ Purple Shirt and Short Black Curly Hair" animation="" />
     <item hash="06222a881ec347c4abd813b2751231ca" sprite="Man w/ Red Bandana and No Shirt Hammering Wall" animation="" />
     <item hash="1cb6322a74992843544eb58510b88062" sprite="Man w/ Red Bandana and No Shirt Hammering Wall" animation="" />
     <item hash="256863b6cae93a94b96e450b7a17272b" sprite="Man w/ Red Bandana and No Shirt Hammering Wall" animation="" />
@@ -20452,70 +20449,70 @@
     <item hash="fa6b94743546e7c27785ec5c62c2e2a8" sprite="Rollie" animation="" />
     <item hash="fad30de9035e1281e2114f3acaaeefdc" sprite="Rollie" animation="" />
     <item hash="ff7e9a17fbffd8ae005c88e6af953a76" sprite="Rollie" animation="" />
-    <item hash="084873902d8dd4f63818beab91b756bd" sprite="Royal Guard w/ Spear or Mace" animation="" />
-    <item hash="086de8d29d349de841012f48dd8010d6" sprite="Royal Guard w/ Spear or Mace" animation="" />
-    <item hash="0b97a3eeaa6bc3bb4e3bffc00ab6d437" sprite="Royal Guard w/ Spear or Mace" animation="" />
-    <item hash="0bd35e87daa7b10d7963fc119a9e647c" sprite="Royal Guard w/ Spear or Mace" animation="" />
-    <item hash="12e5e91106c9276628699c4d99c9afa2" sprite="Royal Guard w/ Spear or Mace" animation="" />
-    <item hash="135cf888e477feb410088363314c0c01" sprite="Royal Guard w/ Spear or Mace" animation="" />
-    <item hash="14b3d1e361f4e3284bb9c95dcac74554" sprite="Royal Guard w/ Spear or Mace" animation="" />
-    <item hash="182b199dafbd524890735a896d34315d" sprite="Royal Guard w/ Spear or Mace" animation="" />
-    <item hash="1ecce13861692dbb266915c6c67ec9ae" sprite="Royal Guard w/ Spear or Mace" animation="" />
-    <item hash="205ff760e584048ad743ab4f1d1ed71c" sprite="Royal Guard w/ Spear or Mace" animation="" />
-    <item hash="215724f3263ac2713af9c9b4d6f7dc5e" sprite="Royal Guard w/ Spear or Mace" animation="" />
-    <item hash="22a9b2a57546a112fcc310d98814809c" sprite="Royal Guard w/ Spear or Mace" animation="" />
-    <item hash="2eb872626aaf90bbf62a5636dd326cd2" sprite="Royal Guard w/ Spear or Mace" animation="" />
-    <item hash="309f4273d68fe1f4e399c09291b4d5de" sprite="Royal Guard w/ Spear or Mace" animation="" />
-    <item hash="3430f9f948f92792358887ee291f6a63" sprite="Royal Guard w/ Spear or Mace" animation="" />
-    <item hash="3566df0d0bce5fbf62730018ad87f8ca" sprite="Royal Guard w/ Spear or Mace" animation="" />
-    <item hash="3aa3a92b7c7dbe7162ce0386af63deda" sprite="Royal Guard w/ Spear or Mace" animation="" />
-    <item hash="3d54ed2f2c1e14cfcaa8f1abf8fd85e2" sprite="Royal Guard w/ Spear or Mace" animation="" />
-    <item hash="465d475c83eef8292f446c2eec83f758" sprite="Royal Guard w/ Spear or Mace" animation="" />
-    <item hash="4a8293bea6c74cc5d3a81d2d678f1eb4" sprite="Royal Guard w/ Spear or Mace" animation="" />
-    <item hash="5419fccc4706597bc44c7d084b544a81" sprite="Royal Guard w/ Spear or Mace" animation="" />
-    <item hash="5c643f2a82940f7b99371624e10f802a" sprite="Royal Guard w/ Spear or Mace" animation="" />
-    <item hash="5de1a67556d92efe60bf22f039054259" sprite="Royal Guard w/ Spear or Mace" animation="" />
-    <item hash="607541d799832f292568aa093d7ed503" sprite="Royal Guard w/ Spear or Mace" animation="" />
-    <item hash="61cbcc1bb1a5639289cfa45f2ffd46a0" sprite="Royal Guard w/ Spear or Mace" animation="" />
-    <item hash="636333462fb0636e18830aaad3366cc7" sprite="Royal Guard w/ Spear or Mace" animation="" />
-    <item hash="6bf89c029d683116d33d8865746e5dd4" sprite="Royal Guard w/ Spear or Mace" animation="" />
-    <item hash="6ca11538746a964d9838d060d86e2005" sprite="Royal Guard w/ Spear or Mace" animation="" />
-    <item hash="701d211ced6e563b7073015e1e507bf4" sprite="Royal Guard w/ Spear or Mace" animation="" />
-    <item hash="78104b05d8dc804c21cd498e215e470c" sprite="Royal Guard w/ Spear or Mace" animation="" />
-    <item hash="7b68241b67c549de5b1c90aaa8383d3b" sprite="Royal Guard w/ Spear or Mace" animation="" />
-    <item hash="7f1143bbb96b909a8728bc7735d5c395" sprite="Royal Guard w/ Spear or Mace" animation="" />
-    <item hash="802d3b065e97c4484d4412b8c579e62f" sprite="Royal Guard w/ Spear or Mace" animation="" />
-    <item hash="81320e75199f7a3b4b1dab2e28b444e9" sprite="Royal Guard w/ Spear or Mace" animation="" />
-    <item hash="8487bb53fdc32310f776ac3601c3b4af" sprite="Royal Guard w/ Spear or Mace" animation="" />
-    <item hash="84f8e9e21bf144d296a20df6fe9c6298" sprite="Royal Guard w/ Spear or Mace" animation="" />
-    <item hash="866f99cef083224f02617d8d38bb8af2" sprite="Royal Guard w/ Spear or Mace" animation="" />
-    <item hash="94b39ef77bb3bab01e605ecae91b9ecd" sprite="Royal Guard w/ Spear or Mace" animation="" />
-    <item hash="a3891b0bbf48fb594c475176ac0c8f31" sprite="Royal Guard w/ Spear or Mace" animation="" />
-    <item hash="a44a6f342da68f0d12787fefc65b4a75" sprite="Royal Guard w/ Spear or Mace" animation="" />
-    <item hash="a48c6f631366574c50e5cfb226b0535c" sprite="Royal Guard w/ Spear or Mace" animation="" />
-    <item hash="a802ad42f1ed6580bc32c9363f3c5a27" sprite="Royal Guard w/ Spear or Mace" animation="" />
-    <item hash="a8ffac7bf3a0022d272b6ab8d5253499" sprite="Royal Guard w/ Spear or Mace" animation="" />
-    <item hash="a975dd78c6ad281ded576388913f59fc" sprite="Royal Guard w/ Spear or Mace" animation="" />
-    <item hash="aad698ec98d556a81dd9ed4310c60f4f" sprite="Royal Guard w/ Spear or Mace" animation="" />
-    <item hash="ae8786d04e16c8cb03d982b2ff622b87" sprite="Royal Guard w/ Spear or Mace" animation="" />
-    <item hash="b8f1cb8984b70a04f8f6ce1112a2199b" sprite="Royal Guard w/ Spear or Mace" animation="" />
-    <item hash="bf9afb7b740ecee65ccb1763435986c2" sprite="Royal Guard w/ Spear or Mace" animation="" />
-    <item hash="c37c88191810b2c8ef6f0126f794d008" sprite="Royal Guard w/ Spear or Mace" animation="" />
-    <item hash="c8bf871c2b71279b4a7edca894bb2786" sprite="Royal Guard w/ Spear or Mace" animation="" />
-    <item hash="ca6b3ffcdbd222bcd11ecac504dfc10b" sprite="Royal Guard w/ Spear or Mace" animation="" />
-    <item hash="d3ba35d22fd5aa7a790dd9897dc852e1" sprite="Royal Guard w/ Spear or Mace" animation="" />
-    <item hash="d546ac95215f7f76191052de2ffae103" sprite="Royal Guard w/ Spear or Mace" animation="" />
-    <item hash="d857c7e3c79ef255606b58dc1a19bd96" sprite="Royal Guard w/ Spear or Mace" animation="" />
-    <item hash="dcb8f730f6f90d0bfc2d0a023440226c" sprite="Royal Guard w/ Spear or Mace" animation="" />
-    <item hash="e0a60dbddf2dd4e7836039c58a68597f" sprite="Royal Guard w/ Spear or Mace" animation="" />
-    <item hash="e326e4a09854ce68484c47f7378f825e" sprite="Royal Guard w/ Spear or Mace" animation="" />
-    <item hash="e5354f2681a0084c4a894353ddc35a99" sprite="Royal Guard w/ Spear or Mace" animation="" />
-    <item hash="e9986691bfa3ca599d4d0cc570c8b308" sprite="Royal Guard w/ Spear or Mace" animation="" />
-    <item hash="ed7d7387b5d156a6864f9db9e7eabc7b" sprite="Royal Guard w/ Spear or Mace" animation="" />
-    <item hash="f05f6599f1133d069d8e6e7dd9d1def1" sprite="Royal Guard w/ Spear or Mace" animation="" />
-    <item hash="f714bf9f33c407ddda6899138bed3005" sprite="Royal Guard w/ Spear or Mace" animation="" />
-    <item hash="f80739e9d5d1127900c87b57d3cb9611" sprite="Royal Guard w/ Spear or Mace" animation="" />
-    <item hash="fac71149a738a47b202f84a824f67159" sprite="Royal Guard w/ Spear or Mace" animation="" />
+    <item hash="1ecce13861692dbb266915c6c67ec9ae" sprite="Royal Guard w/ Spear" animation="" />
+    <item hash="22a9b2a57546a112fcc310d98814809c" sprite="Royal Guard w/ Spear" animation="" />
+    <item hash="2eb872626aaf90bbf62a5636dd326cd2" sprite="Royal Guard w/ Spear" animation="" />
+    <item hash="3d54ed2f2c1e14cfcaa8f1abf8fd85e2" sprite="Royal Guard w/ Spear" animation="" />
+    <item hash="61cbcc1bb1a5639289cfa45f2ffd46a0" sprite="Royal Guard w/ Spear" animation="" />
+    <item hash="7b68241b67c549de5b1c90aaa8383d3b" sprite="Royal Guard w/ Spear" animation="" />
+    <item hash="81320e75199f7a3b4b1dab2e28b444e9" sprite="Royal Guard w/ Spear" animation="" />
+    <item hash="b8f1cb8984b70a04f8f6ce1112a2199b" sprite="Royal Guard w/ Spear" animation="" />
+    <item hash="bf9afb7b740ecee65ccb1763435986c2" sprite="Royal Guard w/ Spear" animation="" />
+    <item hash="d3ba35d22fd5aa7a790dd9897dc852e1" sprite="Royal Guard w/ Spear" animation="" />
+    <item hash="f714bf9f33c407ddda6899138bed3005" sprite="Royal Guard w/ Spear" animation="" />
+    <item hash="fac71149a738a47b202f84a824f67159" sprite="Royal Guard w/ Spear" animation="" />
+    <item hash="084873902d8dd4f63818beab91b756bd" sprite="Royal Guard w/ Spear" animation="" />
+    <item hash="182b199dafbd524890735a896d34315d" sprite="Royal Guard w/ Spear" animation="" />
+    <item hash="3566df0d0bce5fbf62730018ad87f8ca" sprite="Royal Guard w/ Spear" animation="" />
+    <item hash="4a8293bea6c74cc5d3a81d2d678f1eb4" sprite="Royal Guard w/ Spear" animation="" />
+    <item hash="5419fccc4706597bc44c7d084b544a81" sprite="Royal Guard w/ Spear" animation="" />
+    <item hash="607541d799832f292568aa093d7ed503" sprite="Royal Guard w/ Spear" animation="" />
+    <item hash="636333462fb0636e18830aaad3366cc7" sprite="Royal Guard w/ Spear" animation="" />
+    <item hash="701d211ced6e563b7073015e1e507bf4" sprite="Royal Guard w/ Spear" animation="" />
+    <item hash="8487bb53fdc32310f776ac3601c3b4af" sprite="Royal Guard w/ Spear" animation="" />
+    <item hash="84f8e9e21bf144d296a20df6fe9c6298" sprite="Royal Guard w/ Spear" animation="" />
+    <item hash="a3891b0bbf48fb594c475176ac0c8f31" sprite="Royal Guard w/ Spear" animation="" />
+    <item hash="a44a6f342da68f0d12787fefc65b4a75" sprite="Royal Guard w/ Spear" animation="" />
+    <item hash="a48c6f631366574c50e5cfb226b0535c" sprite="Royal Guard w/ Spear" animation="" />
+    <item hash="ae8786d04e16c8cb03d982b2ff622b87" sprite="Royal Guard w/ Spear" animation="" />
+    <item hash="c37c88191810b2c8ef6f0126f794d008" sprite="Royal Guard w/ Spear" animation="" />
+    <item hash="d857c7e3c79ef255606b58dc1a19bd96" sprite="Royal Guard w/ Spear" animation="" />
+    <item hash="e0a60dbddf2dd4e7836039c58a68597f" sprite="Royal Guard w/ Spear" animation="" />
+    <item hash="ed7d7387b5d156a6864f9db9e7eabc7b" sprite="Royal Guard w/ Spear" animation="" />
+    <item hash="f05f6599f1133d069d8e6e7dd9d1def1" sprite="Royal Guard w/ Spear" animation="" />
+    <item hash="f80739e9d5d1127900c87b57d3cb9611" sprite="Royal Guard w/ Spear" animation="" />
+    <item hash="086de8d29d349de841012f48dd8010d6" sprite="Royal Guard w/ Mace" animation="" />
+    <item hash="0b97a3eeaa6bc3bb4e3bffc00ab6d437" sprite="Royal Guard w/ Mace" animation="" />
+    <item hash="0bd35e87daa7b10d7963fc119a9e647c" sprite="Royal Guard w/ Mace" animation="" />
+    <item hash="12e5e91106c9276628699c4d99c9afa2" sprite="Royal Guard w/ Mace" animation="" />
+    <item hash="135cf888e477feb410088363314c0c01" sprite="Royal Guard w/ Mace" animation="" />
+    <item hash="14b3d1e361f4e3284bb9c95dcac74554" sprite="Royal Guard w/ Mace" animation="" />
+    <item hash="205ff760e584048ad743ab4f1d1ed71c" sprite="Royal Guard w/ Mace" animation="" />
+    <item hash="215724f3263ac2713af9c9b4d6f7dc5e" sprite="Royal Guard w/ Mace" animation="" />
+    <item hash="309f4273d68fe1f4e399c09291b4d5de" sprite="Royal Guard w/ Mace" animation="" />
+    <item hash="3430f9f948f92792358887ee291f6a63" sprite="Royal Guard w/ Mace" animation="" />
+    <item hash="3aa3a92b7c7dbe7162ce0386af63deda" sprite="Royal Guard w/ Mace" animation="" />
+    <item hash="465d475c83eef8292f446c2eec83f758" sprite="Royal Guard w/ Mace" animation="" />
+    <item hash="5c643f2a82940f7b99371624e10f802a" sprite="Royal Guard w/ Mace" animation="" />
+    <item hash="5de1a67556d92efe60bf22f039054259" sprite="Royal Guard w/ Mace" animation="" />
+    <item hash="6bf89c029d683116d33d8865746e5dd4" sprite="Royal Guard w/ Mace" animation="" />
+    <item hash="6ca11538746a964d9838d060d86e2005" sprite="Royal Guard w/ Mace" animation="" />
+    <item hash="78104b05d8dc804c21cd498e215e470c" sprite="Royal Guard w/ Mace" animation="" />
+    <item hash="7f1143bbb96b909a8728bc7735d5c395" sprite="Royal Guard w/ Mace" animation="" />
+    <item hash="802d3b065e97c4484d4412b8c579e62f" sprite="Royal Guard w/ Mace" animation="" />
+    <item hash="866f99cef083224f02617d8d38bb8af2" sprite="Royal Guard w/ Mace" animation="" />
+    <item hash="94b39ef77bb3bab01e605ecae91b9ecd" sprite="Royal Guard w/ Mace" animation="" />
+    <item hash="a802ad42f1ed6580bc32c9363f3c5a27" sprite="Royal Guard w/ Mace" animation="" />
+    <item hash="a8ffac7bf3a0022d272b6ab8d5253499" sprite="Royal Guard w/ Mace" animation="" />
+    <item hash="a975dd78c6ad281ded576388913f59fc" sprite="Royal Guard w/ Mace" animation="" />
+    <item hash="aad698ec98d556a81dd9ed4310c60f4f" sprite="Royal Guard w/ Mace" animation="" />
+    <item hash="c8bf871c2b71279b4a7edca894bb2786" sprite="Royal Guard w/ Mace" animation="" />
+    <item hash="ca6b3ffcdbd222bcd11ecac504dfc10b" sprite="Royal Guard w/ Mace" animation="" />
+    <item hash="d546ac95215f7f76191052de2ffae103" sprite="Royal Guard w/ Mace" animation="" />
+    <item hash="dcb8f730f6f90d0bfc2d0a023440226c" sprite="Royal Guard w/ Mace" animation="" />
+    <item hash="e326e4a09854ce68484c47f7378f825e" sprite="Royal Guard w/ Mace" animation="" />
+    <item hash="e5354f2681a0084c4a894353ddc35a99" sprite="Royal Guard w/ Mace" animation="" />
+    <item hash="e9986691bfa3ca599d4d0cc570c8b308" sprite="Royal Guard w/ Mace" animation="" />
     <item hash="0a308b59dfa32413f8aeca44dfc2d56e" sprite="Sailor" animation="" />
     <item hash="0c250797abe14f8f9d0b8eb758c413eb" sprite="Sailor" animation="" />
     <item hash="10f7a0c69b9a29b7c58466adfd83d93e" sprite="Sailor" animation="" />
@@ -21016,6 +21013,14 @@
     <item hash="c131fc5ae25c9709957d8b7d0d55694f" sprite="Seven Dwarves (2/7)" animation="" />
     <item hash="f914103b9321ee09623421be9ab3ee0f" sprite="Seven Dwarves (2/7)" animation="" />
     <item hash="fcff49754be589f708456007aae1ca2b" sprite="Seven Dwarves (2/7)" animation="" />
+    <item hash="b8b3119140316c7e9d74a4e4c64037cd" sprite="Seven Dwarves (2/7)" animation="" />
+    <item hash="d01c41d1239432054e7a0198669ddcb4" sprite="Seven Dwarves (2/7)" animation="" />
+    <item hash="e2ef60b5d8b20d25dfc58ccd33a8549d" sprite="Seven Dwarves (2/7)" animation="" />
+    <item hash="36826ad882ab04e43b0cec645afed379" sprite="Seven Dwarves (2/7)" animation="" />
+    <item hash="012af6f172070fb4bded77f9b3c8bb3d" sprite="Seven Dwarves (2/7)" animation="" />
+    <item hash="a0854f3bb0fcb03da2c2ceba3cbbd76c" sprite="Seven Dwarves (2/7)" animation="" />
+    <item hash="a7e5952cfb4c9e421ebcfe92d0859a69" sprite="Seven Dwarves (2/7)" animation="" />
+    <item hash="ab68c7b05787a4e74f3a9061ce620b1d" sprite="Seven Dwarves (2/7)" animation="" />
     <item hash="17d6ea4fe47cf5ac2102da247cf5e215" sprite="Seven Dwarves (3/7)" animation="" />
     <item hash="18e7d8c2549b3aad537213214dfd8664" sprite="Seven Dwarves (3/7)" animation="" />
     <item hash="1dc19b9b841a48e5cdb3925999a46e7e" sprite="Seven Dwarves (3/7)" animation="" />
@@ -21043,6 +21048,7 @@
     <item hash="e24df864b4949cef58a72e50601cc7e8" sprite="Seven Dwarves (3/7)" animation="" />
     <item hash="e549da23970928c3a51a5f71647f06c8" sprite="Seven Dwarves (3/7)" animation="" />
     <item hash="f05297ddb02cf84b47d1de355ec82cb5" sprite="Seven Dwarves (3/7)" animation="" />
+    <item hash="0dddc93bae96b24c15e652660f31597c" sprite="Seven Dwarves (3/7)" animation="" />
     <item hash="00ad34e8e1dc972d1d22490eedf92741" sprite="Seven Dwarves (4/7)" animation="" />
     <item hash="04d81b05b014055c16c820373ec7c3bb" sprite="Seven Dwarves (4/7)" animation="" />
     <item hash="05eef23c2609ad4633fd85169d7cad45" sprite="Seven Dwarves (4/7)" animation="" />
@@ -21091,6 +21097,14 @@
     <item hash="e030708ac041aada99fa7110317c4358" sprite="Seven Dwarves (5/7)" animation="" />
     <item hash="e2075d66645963a478d8c2aa6b386746" sprite="Seven Dwarves (5/7)" animation="" />
     <item hash="f199cc3d1e8da6f458f637406af58498" sprite="Seven Dwarves (5/7)" animation="" />
+    <item hash="1b8690e9290289a1cc0cbdd08cb4fa2d" sprite="Seven Dwarves (5/7)" animation="" />
+    <item hash="2297afe6dcf742234629eaa5bc04b29f" sprite="Seven Dwarves (5/7)" animation="" />
+    <item hash="2a6a73d6b69ed7ec42be6401c852a7c7" sprite="Seven Dwarves (5/7)" animation="" />
+    <item hash="551a8441cffa4fd8345024aa7f658fe3" sprite="Seven Dwarves (5/7)" animation="" />
+    <item hash="752888232fc211dc9d03fd6c55e200a4" sprite="Seven Dwarves (5/7)" animation="" />
+    <item hash="9470d04382cad5ccf3c63d2bcd5fcea1" sprite="Seven Dwarves (5/7)" animation="" />
+    <item hash="e104924225bf4a79e69f738c3cbeeb28" sprite="Seven Dwarves (5/7)" animation="" />
+    <item hash="e36e06fd6d7b68943b4145a229e58504" sprite="Seven Dwarves (5/7)" animation="" />
     <item hash="130f60bc85338669f07f5d95a92d8706" sprite="Seven Dwarves (6/7)" animation="" />
     <item hash="19fb396bbe5298efe23d083eef260453" sprite="Seven Dwarves (6/7)" animation="" />
     <item hash="268c964f79ebfc4c843792beba883e93" sprite="Seven Dwarves (6/7)" animation="" />
@@ -21421,27 +21435,27 @@
     <item hash="f10bc450836577686d0e487a002850a9" sprite="Slash Bat" animation="" />
     <item hash="3a964726ddf49af8343c0851ccf885a2" sprite="Small Black Box" animation="" />
     <item hash="01a0053a764c0b46d0eac73b62dd34e2" sprite="Small Icons" animation="" />
-    <item hash="22a5fb949e50b3c414acb4ec058c2bd6" sprite="Small Icons" animation="" />
-    <item hash="31b6792b69bfa3443728310feb9a523c" sprite="Small Icons" animation="" />
-    <item hash="3423a1885adc98bb2978ad723de6196b" sprite="Small Icons" animation="" />
     <item hash="380805239fe47bd851ebb8053752e729" sprite="Small Icons" animation="" />
-    <item hash="3a704d3d95575f3c452ef6125b459c9f" sprite="Small Icons" animation="" />
-    <item hash="407aca38b311ed86f6b84ca39b646ad4" sprite="Small Icons" animation="" />
-    <item hash="5092f4cf33632bb6ea20942322fdbc57" sprite="Small Icons" animation="" />
-    <item hash="5af7b36f7352d858820d3c3bfb4178e7" sprite="Small Icons" animation="" />
-    <item hash="82e0b34942ffcdb9aa874d547a3b9d7c" sprite="Small Icons" animation="" />
-    <item hash="9704f396c6236b19383fbf59957650a1" sprite="Small Icons" animation="" />
-    <item hash="a2dd2e742467d56762a51b7e4aa0b019" sprite="Small Icons" animation="" />
-    <item hash="aa8e61fc7878d2c26e4870d13480a47d" sprite="Small Icons" animation="" />
-    <item hash="b9e1fa956409cdc3ac13d30aa1cbd40b" sprite="Small Icons" animation="" />
-    <item hash="c283599cb6ce3fbc1f0e066af8d5081e" sprite="Small Icons" animation="" />
-    <item hash="c7059e750bf0fda8104e5c54aa0df10b" sprite="Small Icons" animation="" />
-    <item hash="c8c209bb1adf2911a7eec429aa202f8a" sprite="Small Icons" animation="" />
-    <item hash="dd7955490635785bd5e7a55c8c23ecdf" sprite="Small Icons" animation="" />
-    <item hash="e5c866070bce9e06893035b6c66fed66" sprite="Small Icons" animation="" />
-    <item hash="f759a7510147d0c94c7fd67c6923c526" sprite="Small Icons" animation="" />
-    <item hash="faa6c9f255309bf8cb86d6c66e9282d0" sprite="Small Icons" animation="" />
-    <item hash="fc597e6f1e5974e4055882c6373472a4" sprite="Small Icons" animation="" />
+    <item hash="22a5fb949e50b3c414acb4ec058c2bd6" sprite="Small Icons (Scn1 Alt)" animation="" />
+    <item hash="407aca38b311ed86f6b84ca39b646ad4" sprite="Small Icons (Scn1 Alt)" animation="" />
+    <item hash="aa8e61fc7878d2c26e4870d13480a47d" sprite="Small Icons (Scn1 Alt)" animation="" />
+    <item hash="e5c866070bce9e06893035b6c66fed66" sprite="Small Icons (Scn1 Alt)" animation="" />
+    <item hash="31b6792b69bfa3443728310feb9a523c" sprite="Small Icons (Scn1)" animation="" />
+    <item hash="c283599cb6ce3fbc1f0e066af8d5081e" sprite="Small Icons (Scn1)" animation="" />
+    <item hash="c8c209bb1adf2911a7eec429aa202f8a" sprite="Small Icons (Scn1)" animation="" />
+    <item hash="dd7955490635785bd5e7a55c8c23ecdf" sprite="Small Icons (Scn1)" animation="" />
+    <item hash="3423a1885adc98bb2978ad723de6196b" sprite="Small Icons (Scn1+)" animation="" />
+    <item hash="3a704d3d95575f3c452ef6125b459c9f" sprite="Small Icons (Scn1+)" animation="" />
+    <item hash="c7059e750bf0fda8104e5c54aa0df10b" sprite="Small Icons (Scn1+)" animation="" />
+    <item hash="5092f4cf33632bb6ea20942322fdbc57" sprite="Small Icons (Scn2+)" animation="" />
+    <item hash="82e0b34942ffcdb9aa874d547a3b9d7c" sprite="Small Icons (Scn2+)" animation="" />
+    <item hash="9704f396c6236b19383fbf59957650a1" sprite="Small Icons (Scn2+)" animation="" />
+    <item hash="b9e1fa956409cdc3ac13d30aa1cbd40b" sprite="Small Icons (Scn2+)" animation="" />
+    <item hash="f759a7510147d0c94c7fd67c6923c526" sprite="Small Icons (Scn2+)" animation="" />
+    <item hash="faa6c9f255309bf8cb86d6c66e9282d0" sprite="Small Icons (Scn2+)" animation="" />
+    <item hash="fc597e6f1e5974e4055882c6373472a4" sprite="Small Icons (Scn2+)" animation="" />
+    <item hash="5af7b36f7352d858820d3c3bfb4178e7" sprite="Small Icons (Scn3+)" animation="" />
+    <item hash="a2dd2e742467d56762a51b7e4aa0b019" sprite="Small Icons (Scn3+)" animation="" />
     <item hash="0f7cd4c76a8a56d9df50549f7618af03" sprite="Small Poof of Brown Smoke" animation="" />
     <item hash="27800a5a5d4d7d49004d104a8490781f" sprite="Small Poof of Brown Smoke" animation="" />
     <item hash="2fcf677cc24f226f74febc14821e620d" sprite="Small Poof of Brown Smoke" animation="" />
@@ -22145,7 +22159,6 @@
     <item hash="2bedcf23a1d40c258b6933c1a24ee1fb" sprite="Synbios" animation="" />
     <item hash="2d93920fd8fc047141a415485feee87d" sprite="Synbios" animation="" />
     <item hash="2ebf870e46f0456186155c5722bcd267" sprite="Synbios" animation="" />
-    <item hash="30c4982fcefb48d7c46583f0dfaeae4f" sprite="Synbios" animation="" />
     <item hash="30e75d25fb442c8685b300968e053f15" sprite="Synbios" animation="" />
     <item hash="3112fd8ef226f72330bc11dfb6fff39e" sprite="Synbios" animation="" />
     <item hash="31d97d2ad5d7fa0bf17548c75664e5f5" sprite="Synbios" animation="" />
@@ -22191,9 +22204,7 @@
     <item hash="4d0a9e593dc8b42a825449d79f8687f7" sprite="Synbios" animation="" />
     <item hash="4d1e11f269b44b0f7b4ec36516d29698" sprite="Synbios" animation="" />
     <item hash="4d3251d63ea293ec81b1a50099c83fc0" sprite="Synbios" animation="" />
-    <item hash="4d85398a1483c0367ea82617826cf024" sprite="Synbios" animation="" />
     <item hash="4d8a06c44868b6fd1e1bb70e2b187a3a" sprite="Synbios" animation="" />
-    <item hash="4df0924084ee3f37428fd8c1a30e69d4" sprite="Synbios" animation="" />
     <item hash="4e6a1087974c99160d4f97d9a998a079" sprite="Synbios" animation="" />
     <item hash="4ee372c114467d9473bef531f43a50b1" sprite="Synbios" animation="" />
     <item hash="4f267df09df6f2b358b8ead25a4c1fa4" sprite="Synbios" animation="" />
@@ -22259,7 +22270,6 @@
     <item hash="75b60d75ebc2d83a689fb92f03fb138a" sprite="Synbios" animation="" />
     <item hash="76c1a7739859a3aa7a8abf4abdfa58a3" sprite="Synbios" animation="" />
     <item hash="77a09e3c4e81ebff785ab694c261fc24" sprite="Synbios" animation="" />
-    <item hash="77ea5ff4d97b8911bf521b9e821fb323" sprite="Synbios" animation="" />
     <item hash="79909faabc4e5cbffc37b057c4082ea1" sprite="Synbios" animation="" />
     <item hash="79c212745c27111d022cfecadb7603de" sprite="Synbios" animation="" />
     <item hash="7a1617df6413d6bd85e88b0e1a43352d" sprite="Synbios" animation="" />
@@ -22348,7 +22358,6 @@
     <item hash="b1a39e19d0cd6323cad6e54c9e2671fb" sprite="Synbios" animation="" />
     <item hash="b1ef38f90b686e079d4965cedf163a3b" sprite="Synbios" animation="" />
     <item hash="b28d27dba814750c52189e0af8442282" sprite="Synbios" animation="" />
-    <item hash="b3ce5784c62c66a69c51097ede1d882b" sprite="Synbios" animation="" />
     <item hash="b3eab7648b40395b7594538acc8e0374" sprite="Synbios" animation="" />
     <item hash="b48596a2d4cba0a30211074b8be8c483" sprite="Synbios" animation="" />
     <item hash="b58c8eacd220bcab8226a6432207e3bb" sprite="Synbios" animation="" />
@@ -22431,7 +22440,6 @@
     <item hash="eba20b7a95518c2048261a01397aa2b9" sprite="Synbios" animation="" />
     <item hash="ec9544a4cf2f1d1aea19cdfc9c50d826" sprite="Synbios" animation="" />
     <item hash="f199c6dec7ff4fec12e53fc8a42a1f58" sprite="Synbios" animation="" />
-    <item hash="f19a62d562231d2076aea77b5aed075d" sprite="Synbios" animation="" />
     <item hash="f23517ff4e510f8878bbf34a3ea6e873" sprite="Synbios" animation="" />
     <item hash="f35df96177f79853863862480c19b1e8" sprite="Synbios" animation="" />
     <item hash="f55656e217cfeb4b07f29c8afadf4183" sprite="Synbios" animation="" />
@@ -22452,6 +22460,12 @@
     <item hash="980d962d977729a44b009340bba7d668" sprite="Synbios (Frozen)" animation="" />
     <item hash="c78a0498e31eb47a22e9ef843bbed4b5" sprite="Synbios (Frozen)" animation="" />
     <item hash="f8e3e0a617b6744101acf63fb673ea48" sprite="Synbios (Frozen)" animation="" />
+    <item hash="4df0924084ee3f37428fd8c1a30e69d4" sprite="Synbios (Frozen)" animation="Thawed" />
+    <item hash="4d85398a1483c0367ea82617826cf024" sprite="Synbios (Frozen)" animation="Thawed" />
+    <item hash="77ea5ff4d97b8911bf521b9e821fb323" sprite="Synbios (Frozen)" animation="Thawed" />
+    <item hash="b3ce5784c62c66a69c51097ede1d882b" sprite="Synbios (Frozen)" animation="Thawed" />
+    <item hash="f19a62d562231d2076aea77b5aed075d" sprite="Synbios (Frozen)" animation="Thawed" />
+    <item hash="30c4982fcefb48d7c46583f0dfaeae4f" sprite="Synbios (Frozen)" animation="Thawed" />
     <item hash="09ec5e72bc175ecfeb8be3c084af7287" sprite="Synbios (In Hot Springs)" animation="" />
     <item hash="18afaeca6abfbfb8b55192313a0c3563" sprite="Synbios (In Hot Springs)" animation="" />
     <item hash="2b05fc9eb455e390f8b63edbffd7c740" sprite="Synbios (In Hot Springs)" animation="" />
@@ -22958,26 +22972,26 @@
     <item hash="379cfb9da7a21b33aa769d38acd26f70" sprite="Tied Up Domaric" animation="" />
     <item hash="b86973f641328a0f2612627a175da64a" sprite="Tied Up Domaric" animation="" />
     <item hash="f5024bd6684c3a3980a6f96f53618276" sprite="Tied Up Domaric" animation="" />
-    <item hash="08608f94f8152cb94f123846fe9a8c3f" sprite="Tied Up Domaric w/ Masked" animation="" />
-    <item hash="13fd7ea90f01656b918c6f454b4e1173" sprite="Tied Up Domaric w/ Masked" animation="" />
-    <item hash="1b45a27dd24c9f058a44678d7d77ffa4" sprite="Tied Up Domaric w/ Masked" animation="" />
-    <item hash="1fd3c7ed7d10108aa41301ac517fbff6" sprite="Tied Up Domaric w/ Masked" animation="" />
-    <item hash="29eab3586e346da73a2565104d9af5fa" sprite="Tied Up Domaric w/ Masked" animation="" />
-    <item hash="2cbb988a05e879451f4fcc02a1265d10" sprite="Tied Up Domaric w/ Masked" animation="" />
-    <item hash="311ae75daf0f800443290ffa186a013e" sprite="Tied Up Domaric w/ Masked" animation="" />
-    <item hash="36ae0de697dfa2e3dfc23f9092421dd6" sprite="Tied Up Domaric w/ Masked" animation="" />
-    <item hash="40abba5e567e0d81ce7510095d659d86" sprite="Tied Up Domaric w/ Masked" animation="" />
-    <item hash="4da12ad0e37aae9c06984d8742904a56" sprite="Tied Up Domaric w/ Masked" animation="" />
-    <item hash="55ad0514e7a9a4877e9e9b7b76edeb28" sprite="Tied Up Domaric w/ Masked" animation="" />
-    <item hash="5e92c0bc78435eae79491b690ffe68d0" sprite="Tied Up Domaric w/ Masked" animation="" />
-    <item hash="91050a34f8c4336f722081df0d4bbbe8" sprite="Tied Up Domaric w/ Masked" animation="" />
-    <item hash="a5a65da06b9e0a2e7c1f12b2dd189f5f" sprite="Tied Up Domaric w/ Masked" animation="" />
-    <item hash="af65b80302eea087ad50421344872ce3" sprite="Tied Up Domaric w/ Masked" animation="" />
-    <item hash="c049602f8bb6636b3fe19f13cf5af5a1" sprite="Tied Up Domaric w/ Masked" animation="" />
-    <item hash="c47a4c9072ae6d195702c9a25aadafa9" sprite="Tied Up Domaric w/ Masked" animation="" />
-    <item hash="d7d516f5ef10c046d4d02eb593b041e9" sprite="Tied Up Domaric w/ Masked" animation="" />
-    <item hash="ea9d4aa5e32aead79e63e4b65d588958" sprite="Tied Up Domaric w/ Masked" animation="" />
-    <item hash="fed8c96e6c9b2aba0a899d55aa93ced6" sprite="Tied Up Domaric w/ Masked" animation="" />
+    <item hash="08608f94f8152cb94f123846fe9a8c3f" sprite="Tied Up Domaric" animation="Masked" />
+    <item hash="13fd7ea90f01656b918c6f454b4e1173" sprite="Tied Up Domaric" animation="Masked" />
+    <item hash="1b45a27dd24c9f058a44678d7d77ffa4" sprite="Tied Up Domaric" animation="Masked" />
+    <item hash="1fd3c7ed7d10108aa41301ac517fbff6" sprite="Tied Up Domaric" animation="Masked" />
+    <item hash="29eab3586e346da73a2565104d9af5fa" sprite="Tied Up Domaric" animation="Masked" />
+    <item hash="2cbb988a05e879451f4fcc02a1265d10" sprite="Tied Up Domaric" animation="Masked" />
+    <item hash="311ae75daf0f800443290ffa186a013e" sprite="Tied Up Domaric" animation="Masked" />
+    <item hash="36ae0de697dfa2e3dfc23f9092421dd6" sprite="Tied Up Domaric" animation="Masked" />
+    <item hash="40abba5e567e0d81ce7510095d659d86" sprite="Tied Up Domaric" animation="Masked" />
+    <item hash="4da12ad0e37aae9c06984d8742904a56" sprite="Tied Up Domaric" animation="Masked" />
+    <item hash="55ad0514e7a9a4877e9e9b7b76edeb28" sprite="Tied Up Domaric" animation="Masked" />
+    <item hash="5e92c0bc78435eae79491b690ffe68d0" sprite="Tied Up Domaric" animation="Masked" />
+    <item hash="91050a34f8c4336f722081df0d4bbbe8" sprite="Tied Up Domaric" animation="Masked" />
+    <item hash="a5a65da06b9e0a2e7c1f12b2dd189f5f" sprite="Tied Up Domaric" animation="Masked" />
+    <item hash="af65b80302eea087ad50421344872ce3" sprite="Tied Up Domaric" animation="Masked" />
+    <item hash="c049602f8bb6636b3fe19f13cf5af5a1" sprite="Tied Up Domaric" animation="Masked" />
+    <item hash="c47a4c9072ae6d195702c9a25aadafa9" sprite="Tied Up Domaric" animation="Masked" />
+    <item hash="d7d516f5ef10c046d4d02eb593b041e9" sprite="Tied Up Domaric" animation="Masked" />
+    <item hash="ea9d4aa5e32aead79e63e4b65d588958" sprite="Tied Up Domaric" animation="Masked" />
+    <item hash="fed8c96e6c9b2aba0a899d55aa93ced6" sprite="Tied Up Domaric" animation="Masked" />
     <item hash="97253c6ad9362a521b4b16069da9f352" sprite="Tied Up Domaric Mask" animation="" />
     <item hash="0533431ebb07bae9f5710957100f2cbb" sprite="Train Conductor" animation="" />
     <item hash="2515926e4258c20ce2583c743e1f0e47" sprite="Train Conductor" animation="" />
@@ -23411,7 +23425,6 @@
     <item hash="b1c69203445eb35716c46f31085ecc32" sprite="Tybalt (Dying)" animation="" />
     <item hash="df4a1a48135b5a38302b697b3f6f61af" sprite="Tybalt (Dying)" animation="" />
     <item hash="ff47e55687d5524c138c75f5f4e61c5c" sprite="Tybalt (Dying)" animation="" />
-    <item hash="f09f35a5637839458e462e6350ecbce4" sprite="Unknown Tall Vertical Thing 2" animation="" />
     <item hash="00b6d6c8bcbe584938df40ef031c83cf" sprite="Unoma" animation="" />
     <item hash="018cffdb1c9d479b676f5b9696d2d354" sprite="Unoma" animation="" />
     <item hash="02541a81ad951c6549e92eba94650314" sprite="Unoma" animation="" />
@@ -23628,7 +23641,6 @@
     <item hash="f3c9011506e4440c5fa8881f1e9ba6f4" sprite="Unoma" animation="Eating Ramen" />
     <item hash="f4f0e4be863c438d65283a78ea51b54f" sprite="Unoma" animation="Eating Ramen" />
     <item hash="fd08a821418b17bf368cc06e7cf09ebd" sprite="Unoma" animation="Eating Ramen" />
-    <item hash="012af6f172070fb4bded77f9b3c8bb3d" sprite="Uryudo" animation="" />
     <item hash="023453f97ef11ab46096139e5382622c" sprite="Uryudo" animation="" />
     <item hash="02cf6384adad866ca697fb0cadd18534" sprite="Uryudo" animation="" />
     <item hash="03584a4e9a3b388a0058b0804f19b5f4" sprite="Uryudo" animation="" />
@@ -23687,7 +23699,6 @@
     <item hash="33da57962d020136d92476e1dbe15420" sprite="Uryudo" animation="" />
     <item hash="3440929a6054dff1fe64bb93b1c891c9" sprite="Uryudo" animation="" />
     <item hash="3527b0f45761ed645ed40cb8ce931ecf" sprite="Uryudo" animation="" />
-    <item hash="36826ad882ab04e43b0cec645afed379" sprite="Uryudo" animation="" />
     <item hash="37854ea803208e2506d522b4b9b07bdf" sprite="Uryudo" animation="" />
     <item hash="38958d89c06d34d071026731f1fe7fc1" sprite="Uryudo" animation="" />
     <item hash="38b826d77ec9f5934081b51e8f541cc4" sprite="Uryudo" animation="" />
@@ -23804,7 +23815,6 @@
     <item hash="9ebdbb5649e5d431dfa9fc03a77c1c63" sprite="Uryudo" animation="" />
     <item hash="9f2e2a8180b22f8124df978f0b37c307" sprite="Uryudo" animation="" />
     <item hash="9fd4d2a880f93e0508468144d6c49b33" sprite="Uryudo" animation="" />
-    <item hash="a0854f3bb0fcb03da2c2ceba3cbbd76c" sprite="Uryudo" animation="" />
     <item hash="a09050cf9d22a0c16b98b59d2c24daa1" sprite="Uryudo" animation="" />
     <item hash="a2aaa720268a23db29382ea2b8c6bf95" sprite="Uryudo" animation="" />
     <item hash="a2c895360d70e0ab34b5088956b4bc7a" sprite="Uryudo" animation="" />
@@ -23813,9 +23823,7 @@
     <item hash="a5163e14b25f093138658ff24a2f77bb" sprite="Uryudo" animation="" />
     <item hash="a5ed0f169d0570879d1d3dbba838f901" sprite="Uryudo" animation="" />
     <item hash="a6845c9b335f2e882ccf3a5fc747f661" sprite="Uryudo" animation="" />
-    <item hash="a7e5952cfb4c9e421ebcfe92d0859a69" sprite="Uryudo" animation="" />
     <item hash="ab5c674989013c733507b61dedf77b57" sprite="Uryudo" animation="" />
-    <item hash="ab68c7b05787a4e74f3a9061ce620b1d" sprite="Uryudo" animation="" />
     <item hash="abadb762b2b67550a943ceb5f2345f5d" sprite="Uryudo" animation="" />
     <item hash="ac2228aa92c4128c96b909133c3f45ac" sprite="Uryudo" animation="" />
     <item hash="acf94a37b73bea924d5044c68ef097a9" sprite="Uryudo" animation="" />
@@ -23840,7 +23848,6 @@
     <item hash="b696632b896da40ab2effcec3518dce2" sprite="Uryudo" animation="" />
     <item hash="b7a1079b9753f1545549f51e25d95bc9" sprite="Uryudo" animation="" />
     <item hash="b7f14123571fef2399fe0b21ddfd5faf" sprite="Uryudo" animation="" />
-    <item hash="b8b3119140316c7e9d74a4e4c64037cd" sprite="Uryudo" animation="" />
     <item hash="ba005b5da82e6eafed3be5c462d046f5" sprite="Uryudo" animation="" />
     <item hash="bee84c0dde519e60cd27c0c708c442de" sprite="Uryudo" animation="" />
     <item hash="bf82f01cf21517ceee3f1cb4576baa05" sprite="Uryudo" animation="" />
@@ -23859,7 +23866,6 @@
     <item hash="cf66fa5e1c4bca3595bd13fb8e771af6" sprite="Uryudo" animation="" />
     <item hash="cfb4409b2cacccc83137710e2c1ba73b" sprite="Uryudo" animation="" />
     <item hash="cfd5741325cdac48183b14431909abed" sprite="Uryudo" animation="" />
-    <item hash="d01c41d1239432054e7a0198669ddcb4" sprite="Uryudo" animation="" />
     <item hash="d1548b0164a2d6c123281b9197078e4f" sprite="Uryudo" animation="" />
     <item hash="d1fad6b9ddece4f1d1e81815adf738e9" sprite="Uryudo" animation="" />
     <item hash="d2b1dc3852817841c698bcf760827312" sprite="Uryudo" animation="" />
@@ -23885,7 +23891,6 @@
     <item hash="dfeeacfd1ad443a60d384cfb54b32f60" sprite="Uryudo" animation="" />
     <item hash="e019f2f3486a3d7d41699f68a84835a5" sprite="Uryudo" animation="" />
     <item hash="e171b6d105751ca4f61c3944e3794aa2" sprite="Uryudo" animation="" />
-    <item hash="e2ef60b5d8b20d25dfc58ccd33a8549d" sprite="Uryudo" animation="" />
     <item hash="e34ce72cb9b6bde60af8ddc82ef8bf9b" sprite="Uryudo" animation="" />
     <item hash="e3e2405c7b3f00c4d0854b18486b45b9" sprite="Uryudo" animation="" />
     <item hash="e4900dd496a10f4774e45c4e78998234" sprite="Uryudo" animation="" />
@@ -24181,7 +24186,6 @@
     <item hash="08f70f12a40272834ac220516a2790ea" sprite="Waltz" animation="" />
     <item hash="0b903e5cbcda215b09b1d9ef0f36b141" sprite="Waltz" animation="" />
     <item hash="0dba8703ec78635e1273fd5388b7c935" sprite="Waltz" animation="" />
-    <item hash="0dddc93bae96b24c15e652660f31597c" sprite="Waltz" animation="" />
     <item hash="14366d390a4bea75794bf3c88de2c1cd" sprite="Waltz" animation="" />
     <item hash="1503a61f61092743619f6e64e1b71408" sprite="Waltz" animation="" />
     <item hash="15468817d73c2500118f6f1fac1a1010" sprite="Waltz" animation="" />
@@ -24555,10 +24559,10 @@
     <item hash="f37974d24c8987c4d4e8418379d4094c" sprite="Wilmer" animation="" />
     <item hash="f66dba4100c16f567d12a155e714495a" sprite="Wilmer" animation="" />
     <item hash="fb433ef807f383897111879c44671357" sprite="Wilmer" animation="" />
-    <item hash="538a2e5ea93e310c2ebfe655d85863f7" sprite="Wilmer" animation="Dying" />
-    <item hash="6a0a09411942af7ef80b661022f3d64e" sprite="Wilmer" animation="Dying" />
-    <item hash="7f5d6494c9eab0f6f79a9dfc1e6aa249" sprite="Wilmer" animation="Dying" />
-    <item hash="d6f1dacabcb7e28655c8fe767186bf66" sprite="Wilmer" animation="Dying" />
+    <item hash="538a2e5ea93e310c2ebfe655d85863f7" sprite="Wilmer w/ Helmet" animation="Dying" />
+    <item hash="6a0a09411942af7ef80b661022f3d64e" sprite="Wilmer w/ Helmet" animation="Dying" />
+    <item hash="7f5d6494c9eab0f6f79a9dfc1e6aa249" sprite="Wilmer w/ Helmet" animation="Dying" />
+    <item hash="d6f1dacabcb7e28655c8fe767186bf66" sprite="Wilmer w/ Helmet" animation="Dying" />
     <item hash="0b25fd951d0067b614650811f5299e44" sprite="Wilmer w/ Helmet" animation="" />
     <item hash="0dea3a895f6e3283d1582c707c4c4ec5" sprite="Wilmer w/ Helmet" animation="" />
     <item hash="182ecfba3d9082363585f6d9017a2509" sprite="Wilmer w/ Helmet" animation="" />
