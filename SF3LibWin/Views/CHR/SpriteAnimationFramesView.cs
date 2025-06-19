@@ -1,0 +1,106 @@
+using System;
+using System.Linq;
+using System.Windows.Forms;
+using BrightIdeasSoftware;
+using CommonLib.NamedValues;
+using SF3.Models.Structs.CHR;
+using SF3.Models.Tables.CHR;
+using SF3.Win.Extensions;
+
+namespace SF3.Win.Views.CHR {
+    public class SpriteAnimationWithFrames {
+        public SpriteAnimationWithFrames(AnimationFrameTable animationFrameTable, FrameTable frameTable) {
+            AnimationFrameTable = animationFrameTable;
+            FrameTable          = frameTable;
+        }
+
+        public AnimationFrameTable AnimationFrameTable;
+        public FrameTable FrameTable;
+        public string Name => AnimationFrameTable.Name;
+    }
+
+    public class SpriteAnimationFramesView : ControlSpaceView {
+        public SpriteAnimationFramesView(string name, SpriteAnimationWithFrames tables, INameGetterContext nameGetterContext) : base(name) {
+            Model       = tables?.AnimationFrameTable;
+            FrameTable  = tables?.FrameTable;
+            TableView   = new TableView("Frames", Model, nameGetterContext, typeof(AnimationFrame));
+            TextureView = new ImageView("Texture", textureScale: 2);
+        }
+
+        public override Control Create() {
+            if (base.Create() == null)
+                return null;
+
+            CreateChild(TableView, (c) => ((ObjectListView) c).ItemSelectionChanged += OnTextureChanged);
+            CreateChild(TextureView, (c) => c.Dock = DockStyle.Right, autoFill: false);
+
+            return Control;
+        }
+
+        private void OnTextureChanged(object sender, EventArgs e)
+            => UpdateTexture();
+
+        public void UpdateTexture() {
+            var item = (OLVListItem) TableView.OLVControl.SelectedItem;
+            var animationFrame = (AnimationFrame) item?.RowObject;
+
+            if (animationFrame == null || animationFrame.FrameID < 0 || animationFrame.FrameID >= FrameTable.Length)
+                TextureView.Image = null;
+            else {
+                var frameMin = animationFrame.FrameID;
+                var frameMax = frameMin + animationFrame.Directions;
+                var frameDatas = FrameTable
+                    .Where(x => x.ID >= frameMin && x.ID < frameMax)
+                    .Select(x => x.Texture.ImageData16Bit)
+                    .ToArray();
+
+                if (frameDatas.Length == 0)
+                    TextureView.Image = null;
+                else {
+                    var allData = new ushort[frameDatas.Max(x => x.GetLength(0)), frameDatas.Sum(x => x.GetLength(1))];
+
+                    // TODO: memcpy(), row by row!
+                    int row = 0;
+                    foreach (var data in frameDatas) {
+                        for (int y = 0; y < data.GetLength(1); y++, row++)
+                            for (int x = 0; x < data.GetLength(0); x++)
+                                allData[x, row] = data[x, y];
+                    }
+
+                    var texture = new TextureABGR1555(0, 0, 0, allData);
+                    TextureView.Image = texture.CreateBitmapARGB1555();
+                }
+            }
+        }
+
+        public override void Destroy() {
+            if (!IsCreated)
+                return;
+
+            Control?.Hide();
+
+            if (TableView.OLVControl != null)
+                TableView.OLVControl.ItemSelectionChanged -= OnTextureChanged;
+
+            TableView.Destroy();
+            TextureView.Destroy();
+
+            base.Destroy();
+        }
+
+        AnimationFrameTable _model = null;
+        public AnimationFrameTable Model {
+            get => _model;
+            set {
+                if (_model != value) {
+                    _model = value;
+                    TableView.Table = value;
+                }
+            }
+        }
+
+        public FrameTable FrameTable { get; set; }
+        public TableView TableView { get; private set; }
+        public ImageView TextureView { get; private set; }
+    }
+}

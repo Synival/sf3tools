@@ -1,10 +1,15 @@
-﻿using CommonLib.Arrays;
+﻿using System.Drawing;
+using System.Drawing.Imaging;
+using System.Runtime.InteropServices;
+using CommonLib.Arrays;
 using CommonLib.NamedValues;
+using SF3;
 using SF3.ByteData;
 using SF3.Models.Files.CHR;
 using SF3.Models.Structs.CHR;
 using SF3.NamedValues;
 using SF3.Types;
+using SF3.Utils;
 
 namespace CHR_Analyzer {
     public class Program {
@@ -20,20 +25,22 @@ namespace CHR_Analyzer {
         private const string c_pathOut = "../../../Private";
 
         private class TextureInfo {
-            public string SpriteNames = "";
-            public List<FrameInfo> Frames = [];
+            public TextureInfo(ITexture texture) {
+                Texture = texture;
+            }
+
+            public ITexture Texture { get; }
+            public List<TextureFileInfo> Files { get; } = new List<TextureFileInfo>();
         }
 
-        private class FrameInfo {
-            public FrameInfo(ScenarioType scenario, string filename, Frame frame) {
+        private class TextureFileInfo {
+            public TextureFileInfo(ScenarioType scenario, string filename) {
                 Scenario = scenario;
                 Filename = filename;
-                Frame    = frame;
             }
 
             public ScenarioType Scenario;
             public string Filename;
-            public Frame Frame;
         }
 
         private static Dictionary<string, TextureInfo> s_framesByHash = [];
@@ -41,8 +48,8 @@ namespace CHR_Analyzer {
         private static void AddFrame(ScenarioType scenario, string filename, Frame frame) {
             var hash = frame.Texture.Hash;
             if (!s_framesByHash.ContainsKey(hash))
-                s_framesByHash.Add(hash, new TextureInfo());
-            s_framesByHash[hash].Frames.Add(new FrameInfo(scenario, filename, frame));
+                s_framesByHash.Add(hash, new TextureInfo(frame.Texture));
+            s_framesByHash[hash].Files.Add(new TextureFileInfo(scenario, filename));
         }
 
         private static List<string> s_matchReports = [];
@@ -97,7 +104,7 @@ namespace CHR_Analyzer {
                     // Create an MPD file that works with our new ByteData.
                     try {
                         using (var chrFile = CHR_File.Create(byteData, nameGetterContexts[scenario], scenario, file.EndsWith(".CHP"))) {
-                            var match = CHR_MatchFunc(filename, chrFile, nameGetterContexts[scenario]);
+                            var match = true; // CHR_MatchFunc(filename, chrFile, nameGetterContexts[scenario]);
 
                             // If the match is 'null', that means we're just skipping this file completely.
                             if (match == null) {
@@ -119,12 +126,10 @@ namespace CHR_Analyzer {
 
                             ScanForErrorsAndReport(scenario, chrFile);
 
-#if false
                             // Build a table of all textures.
                             foreach (var frameTable in chrFile.FrameTablesByFileAddr)
-                                foreach (var frame in frameTable.Value.Where(x => x.SpriteName == "Unknown"))
+                                foreach (var frame in frameTable.Value)
                                     AddFrame(chrFile.Scenario, filename, frame);
-#endif
                         }
                     }
                     catch (Exception e) {
@@ -149,7 +154,6 @@ namespace CHR_Analyzer {
             foreach (var str in nomatchSet)
                 Console.WriteLine("  " + str);
 
-#if false
             Console.WriteLine("");
             Console.WriteLine("===================================================");
             Console.WriteLine("| BY HASH                                         |");
@@ -160,34 +164,27 @@ namespace CHR_Analyzer {
 
             _ = Directory.CreateDirectory(c_pathOut);
             foreach (var kv in s_framesByHash) {
-                var infos = kv.Value;
-                var spriteNames = infos.Frames
-                    .Select(x =>
-                        string.Join("", nameGetterContexts[x.Scenario].GetName(x.Frame, null, x.Frame.SpriteID, [NamedValueType.Sprite])
-                            .Split(' ')
-                            .Where(y => y.Length > 0)
-                            .Select(y => y.Substring(0, 1).ToUpper() + y.Substring(1))
-                        )
-                        .Replace(" ", "")
-                        .Replace(",", "_")
-                        .Replace("?", "X")
-                        .Replace("-", "_")
-                        .Replace(":", "_")
-                        .Replace("/", "_")
-                    )
-                    .OrderBy(x => x)
-                    .GroupBy(x => x)
-                    .Select(x => $"{x.Key}")
-                    .OrderBy(x => x.Count())
-                    .ToArray();
-                infos.SpriteNames = string.Join(", ", spriteNames);
+                var textureInfo = kv.Value;
+                var tex = textureInfo.Texture;
+                var frameTextureInfo = SpriteFrameTextueUtils.GetFrameTextureInfoByHash(kv.Key);
 
-                var tex = kv.Value.Frames[0].Frame.Texture;
+                var directions = frameTextureInfo.DirectionCounts!;
+                if (directions.Count != 1)
+                    continue;
 
-                var path = Path.Combine(c_pathOut, infos.SpriteNames);
+                var spriteFileString = frameTextureInfo.SpriteName
+                    .Replace("?", "X")
+                    .Replace("-", "_")
+                    .Replace(":", "_")
+                    .Replace("/", "_");
+
+                var mostCommonDirection = directions.OrderByDescending(x => x.Value).First().Key;
+
+                var path = c_pathOut; // Path.Combine(c_pathOut, infos.SpriteNames);
                 _ = Directory.CreateDirectory(path);
 
-                var outputPath = Path.Combine(path, kv.Key + ".BMP");
+                var directionsStr = string.Join(",", directions);
+                var outputPath = Path.Combine(path, $"{mostCommonDirection} - {spriteFileString} - {frameTextureInfo.DirectionsString} - {kv.Key}.BMP");
                 Console.WriteLine("Writing: " + outputPath);
 #pragma warning disable CA1416 // Validate platform compatibility
                 using (var bitmap = new Bitmap(tex.Width, tex.Height, PixelFormat.Format16bppArgb1555)) {
@@ -202,7 +199,6 @@ namespace CHR_Analyzer {
                 }
 #pragma warning restore CA1416 // Validate platform compatibility
             }
-#endif
         }
 
         private static string BitString(uint bits) {

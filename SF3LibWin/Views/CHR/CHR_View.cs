@@ -23,7 +23,14 @@ namespace SF3.Win.Views.CHR {
             if (Model.AnimationOffsetsTable != null)
                 CreateChild(new TableView("Animation Offsets", Model.AnimationOffsetsTable, ngc));
             if (Model.AnimationFrameTablesByAddr?.Count > 0)
-                CreateChild(new TableArrayView<AnimationFrameTable>("Animation Frames", Model.AnimationFrameTablesByAddr.Values.ToArray(), ngc));
+                CreateChild(
+                    new SpriteAnimationFramesArrayView("Animation Frames", Model.AnimationFrameTablesByAddr.Values
+                        .Select(x => new SpriteAnimationWithFrames(x, Model.FrameTablesByFileAddr
+                            .Select(y => y.Value)
+                            .First(y => y.SpriteIndex == x.SpriteIndex))
+                        )
+                        .ToArray(),
+                    ngc));
 
             return Control;
         }

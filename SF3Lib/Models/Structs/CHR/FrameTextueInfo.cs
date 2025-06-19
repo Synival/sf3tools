@@ -1,4 +1,7 @@
-﻿namespace SF3.Models.Structs.CHR {
+﻿using System.Collections.Generic;
+using System.Linq;
+
+namespace SF3.Models.Structs.CHR {
     /// <summary>
     /// Information about a particular texture read from a sprite.
     /// 
@@ -13,5 +16,7 @@
         public string TextureHash { get; }
         public string SpriteName { get; }
         public string AnimationName { get; }
+        public Dictionary<string, int> DirectionCounts { get; } = new Dictionary<string, int>();
+        public string DirectionsString => string.Join(", ", DirectionCounts.OrderByDescending(x => x.Value).Select(x => $"{x.Key} (x{x.Value})"));
     }
 }

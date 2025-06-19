@@ -7,17 +7,26 @@ namespace SF3.Models.Structs.CHR {
         private readonly int _frameIdAddr;
         private readonly int _durationAddr;
 
-        public AnimationFrame(IByteData data, int id, string name, int address, int spriteId, int animIndex) : base(data, id, name, address, 0x4) {
-            SpriteID = spriteId;
-            AnimIndex = animIndex;
+        public AnimationFrame(IByteData data, int id, string name, int address, int spriteIndex, int spriteId, int directions, int animIndex)
+        : base(data, id, name, address, 0x4) {
+            SpriteIndex = spriteIndex;
+            SpriteID    = spriteId;
+            Directions  = directions;
+            AnimIndex   = animIndex;
 
             _frameIdAddr  = Address + 0x00; // 2 bytes
             _durationAddr = Address + 0x02; // 2 bytes
         }
 
-        [TableViewModelColumn(addressField: null, displayOrder: -0.2f, displayFormat: "X2", minWidth: 200)]
+        [TableViewModelColumn(addressField: null, displayOrder: -0.4f, displayFormat: "X2")]
+        public int SpriteIndex { get; }
+
+        [TableViewModelColumn(addressField: null, displayOrder: -0.3f, displayFormat: "X2", minWidth: 200)]
         [NameGetter(NamedValueType.Sprite)]
         public int SpriteID { get; }
+
+        [TableViewModelColumn(addressField: null, displayOrder: -0.2f)]
+        public int Directions { get; }
 
         [TableViewModelColumn(addressField: null, displayOrder: -0.1f, displayFormat: "X2")]
         public int AnimIndex { get; }

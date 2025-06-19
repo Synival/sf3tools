@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using CommonLib.Attributes;
 using CommonLib.Extensions;
 using CommonLib.Utils;
@@ -20,10 +21,11 @@ namespace SF3.Models.Structs.CHR {
 
         private readonly int _textureOffsetAddr;
 
-        public Frame(IByteData data, int id, string name, int address, uint dataOffset, int width, int height, int spriteId, SpriteFrameDirection direction) : base(data, id, name, address, 0x04) {
+        public Frame(IByteData data, int id, string name, int address, uint dataOffset, int width, int height, int spriteIndex, int spriteId, SpriteFrameDirection direction) : base(data, id, name, address, 0x04) {
             DataOffset = dataOffset;
             Width      = width;
             Height     = height;
+            SpriteIndex = spriteIndex;
             SpriteID   = spriteId;
             Direction  = direction;
 
@@ -38,14 +40,20 @@ namespace SF3.Models.Structs.CHR {
                 if (ErrorWhileDecompressing != null && s_brokenTybaltHashes.Contains(hash))
                     Texture = new TextureABGR1555(0, 0, 0, texData.To1DArrayTransposed().To2DArrayColumnMajor(48, 40));
 
-                var frameTextureInfo = SpriteFrameTextueUtils.GetFrameTextureInfoByHash(hash);
-                TextureHash   = hash;
-                SpriteName    = frameTextureInfo.SpriteName;
-                AnimationName = frameTextureInfo.AnimationName;
+                FrameInfo = SpriteFrameTextueUtils.GetFrameTextureInfoByHash(hash);
+
+                if (Direction != SpriteFrameDirection.None) {
+                    var ds = Direction.ToString();
+                    var dc = FrameInfo.DirectionCounts;
+                    dc[ds] = dc.ContainsKey(ds) ? dc[ds] + 1 : 1;
+                }
             }
         }
 
         public uint DataOffset { get; }
+
+        [TableViewModelColumn(addressField: null, displayOrder: -0.4f, displayFormat: "X2")]
+        public int SpriteIndex { get; }
 
         [TableViewModelColumn(addressField: null, displayOrder: -0.3f, displayFormat: "X2", minWidth: 200)]
         [NameGetter(NamedValueType.Sprite)]
@@ -99,16 +107,21 @@ namespace SF3.Models.Structs.CHR {
             }
         }
 
+        public FrameTextueInfo FrameInfo { get; }
+ 
         [TableViewModelColumn(displayOrder: 1, minWidth: 200)]
-        public string TextureHash { get; }
+        public string TextureHash => Texture?.Hash;
 
         [TableViewModelColumn(displayOrder: 2, minWidth: 175)]
-        public string SpriteName { get; }
+        public string SpriteName => FrameInfo?.SpriteName;
 
         [TableViewModelColumn(displayOrder: 3)]
-        public string AnimationName { get; }
+        public string AnimationName => FrameInfo?.AnimationName;
 
-        [TableViewModelColumn(displayOrder: 4, minWidth: 200)]
+        [TableViewModelColumn(displayOrder: 4)]
+        public string Directions => FrameInfo?.DirectionsString;
+
+        [TableViewModelColumn(displayOrder: 5, minWidth: 200)]
         public string ErrorWhileDecompressing { get; private set; } = null;
     }
 }

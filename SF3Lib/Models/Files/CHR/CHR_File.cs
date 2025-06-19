@@ -46,6 +46,7 @@ namespace SF3.Models.Files.CHR {
                     (int) (x.DataOffset + x.FrameTableOffset),
                     x.DataOffset, x.Width, x.Height,
                     $"Sprite{x.ID:D2}_",
+                    x.ID,
                     x.SpriteID,
                     x.Directions))
                 .ToDictionary(x => x.Address, x => x);
@@ -62,7 +63,9 @@ namespace SF3.Models.Files.CHR {
                     $"Sprite{x.AnimOffsets.ID:D2}_Animation{x.Index:D2} ({spriteNames[x.AnimOffsets.ID]})",
                     x.FileAddr,
                     $"Sprite{x.AnimOffsets.ID:D2}_Animation{x.Index:D2}_",
+                    x.AnimOffsets.ID,
                     x.AnimOffsets.SpriteID,
+                    SpriteHeaderTable[x.AnimOffsets.ID].Directions,
                     x.Index))
                 .ToDictionary(x => x.Address, x => x);
 
