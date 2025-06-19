@@ -6704,6 +6704,18 @@
     <item id="f1d219f9227c8346295f72bfcfd18c3c" sprite="Fey (Small)" animation="" />
     <item id="fc39e9f22c09f235a584b5232ad191b2" sprite="Fey (Small)" animation="" />
     <item id="ff622bd8f48d6d888c208be9e87dba60" sprite="Fey (Small)" animation="" />
+    <item id="224a34ecd4375fbeb0b4ff2ff95d018e" sprite="Fey (Quonus Priest)" animation="" />
+    <item id="3a71e86181f67d70ce46215ec0478f6e" sprite="Fey (Quonus Priest)" animation="" />
+    <item id="4683abfe098bc5590f38a07f3107cbbd" sprite="Fey (Quonus Priest)" animation="" />
+    <item id="560f8d4fb3e1026aa57ad08cac47ddc8" sprite="Fey (Quonus Priest)" animation="" />
+    <item id="5a51973fd54fde772e4540c1120e3df7" sprite="Fey (Quonus Priest)" animation="" />
+    <item id="6960e0f60d6337d2e8081092362e77f0" sprite="Fey (Quonus Priest)" animation="" />
+    <item id="865a13076cf6382647e12cf79894fbe8" sprite="Fey (Quonus Priest)" animation="" />
+    <item id="8973c7cb814b785c0164ab2bc829a4eb" sprite="Fey (Quonus Priest)" animation="" />
+    <item id="c227dd2c9680cd82d1f2df2ccd832587" sprite="Fey (Quonus Priest)" animation="" />
+    <item id="cf0bf2fcc1a0a59dd446d8e5c2cb1a5c" sprite="Fey (Quonus Priest)" animation="" />
+    <item id="d6e79c92da94a8dd3861a57f03cc565f" sprite="Fey (Quonus Priest)" animation="" />
+    <item id="e103dbd9fb539f0c271a07935b5bb929" sprite="Fey (Quonus Priest)" animation="" />
     <item id="263969042813f0f27555866455f68715" sprite="Fey Wings (Big)" animation="" />
     <item id="f98c1a8b4218e3c6f51d58154268d404" sprite="Fey Wings (Big)" animation="" />
     <item id="06778ee51cf4c508597ae79163edd0b7" sprite="Fey Wings (Small)" animation="" />
@@ -23395,26 +23407,10 @@
     <item id="ec6997273150b9c4d1372e6ac75aa151" sprite="Tybalt" animation="" />
     <item id="f67b6bd594f29711d4492178b734e35b" sprite="Tybalt" animation="" />
     <item id="fd86e36790e1f562fe87b57895e8ff1f" sprite="Tybalt" animation="" />
-    <item id="19711da96a96d8a92d866ba15b252d1f" sprite="Unknown Tall Vertical Thing 1 (Quonus Fairy)" animation="" />
-    <item id="224a34ecd4375fbeb0b4ff2ff95d018e" sprite="Unknown Tall Vertical Thing 1 (Quonus Fairy)" animation="" />
-    <item id="3a71e86181f67d70ce46215ec0478f6e" sprite="Unknown Tall Vertical Thing 1 (Quonus Fairy)" animation="" />
-    <item id="4683abfe098bc5590f38a07f3107cbbd" sprite="Unknown Tall Vertical Thing 1 (Quonus Fairy)" animation="" />
-    <item id="560f8d4fb3e1026aa57ad08cac47ddc8" sprite="Unknown Tall Vertical Thing 1 (Quonus Fairy)" animation="" />
-    <item id="5a51973fd54fde772e4540c1120e3df7" sprite="Unknown Tall Vertical Thing 1 (Quonus Fairy)" animation="" />
-    <item id="67ac9b50d4a0d8a02eaf7e5ef024e9a0" sprite="Unknown Tall Vertical Thing 1 (Quonus Fairy)" animation="" />
-    <item id="6960e0f60d6337d2e8081092362e77f0" sprite="Unknown Tall Vertical Thing 1 (Quonus Fairy)" animation="" />
-    <item id="865a13076cf6382647e12cf79894fbe8" sprite="Unknown Tall Vertical Thing 1 (Quonus Fairy)" animation="" />
-    <item id="8973c7cb814b785c0164ab2bc829a4eb" sprite="Unknown Tall Vertical Thing 1 (Quonus Fairy)" animation="" />
-    <item id="b1c69203445eb35716c46f31085ecc32" sprite="Unknown Tall Vertical Thing 1 (Quonus Fairy)" animation="" />
-    <item id="b6482baef1f1e8e30a74c44e43234b93" sprite="Unknown Tall Vertical Thing 1 (Quonus Fairy)" animation="" />
-    <item id="c227dd2c9680cd82d1f2df2ccd832587" sprite="Unknown Tall Vertical Thing 1 (Quonus Fairy)" animation="" />
-    <item id="cf0bf2fcc1a0a59dd446d8e5c2cb1a5c" sprite="Unknown Tall Vertical Thing 1 (Quonus Fairy)" animation="" />
-    <item id="d6e79c92da94a8dd3861a57f03cc565f" sprite="Unknown Tall Vertical Thing 1 (Quonus Fairy)" animation="" />
-    <item id="d9a55fd43914c6e86cd3a043ae641966" sprite="Unknown Tall Vertical Thing 1 (Quonus Fairy)" animation="" />
-    <item id="df4a1a48135b5a38302b697b3f6f61af" sprite="Unknown Tall Vertical Thing 1 (Quonus Fairy)" animation="" />
-    <item id="e103dbd9fb539f0c271a07935b5bb929" sprite="Unknown Tall Vertical Thing 1 (Quonus Fairy)" animation="" />
-    <item id="e1d9904a0d317cef37549faa2f729797" sprite="Unknown Tall Vertical Thing 1 (Quonus Fairy)" animation="" />
-    <item id="ff47e55687d5524c138c75f5f4e61c5c" sprite="Unknown Tall Vertical Thing 1 (Quonus Fairy)" animation="" />
+    <item id="19711da96a96d8a92d866ba15b252d1f" sprite="Tybalt (Dying)" animation="" />
+    <item id="b1c69203445eb35716c46f31085ecc32" sprite="Tybalt (Dying)" animation="" />
+    <item id="df4a1a48135b5a38302b697b3f6f61af" sprite="Tybalt (Dying)" animation="" />
+    <item id="ff47e55687d5524c138c75f5f4e61c5c" sprite="Tybalt (Dying)" animation="" />
     <item id="f09f35a5637839458e462e6350ecbce4" sprite="Unknown Tall Vertical Thing 2" animation="" />
     <item id="00b6d6c8bcbe584938df40ef031c83cf" sprite="Unoma" animation="" />
     <item id="018cffdb1c9d479b676f5b9696d2d354" sprite="Unoma" animation="" />
@@ -25545,6 +25541,10 @@
     <item id="fbedc7722164b58dd7f1aae77196f5fb" sprite="Zero" animation="" />
     <item id="fcf8183b6dc450c13f098939e3c0b1ee" sprite="Zero" animation="" />
     <item id="fdd2249f7778838dcf4872160d169104" sprite="Zero" animation="" />
+    <item id="67ac9b50d4a0d8a02eaf7e5ef024e9a0" sprite="Zero (Knocked Out)" animation="" />
+    <item id="b6482baef1f1e8e30a74c44e43234b93" sprite="Zero (Knocked Out)" animation="" />
+    <item id="d9a55fd43914c6e86cd3a043ae641966" sprite="Zero (Knocked Out)" animation="" />
+    <item id="e1d9904a0d317cef37549faa2f729797" sprite="Zero (Knocked Out)" animation="" />
     <item id="077672635c349baafc1b4c66735c5d66" sprite="Zombie" animation="" />
     <item id="0a34088f71f12c318191c8b12fdfea83" sprite="Zombie" animation="" />
     <item id="10ea5ba1f6c720209034647953f46f44" sprite="Zombie" animation="" />
