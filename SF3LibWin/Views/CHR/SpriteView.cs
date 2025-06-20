@@ -4,7 +4,7 @@ using SF3.Models.Structs.CHR;
 namespace SF3.Win.Views.CHR {
     public class SpriteView : TabView {
 
-        public SpriteView(string name, Sprite model) : base(name) {
+        public SpriteView(string name, Sprite model, TabAlignment tabAlignment) : base(name, tabAlignment: tabAlignment) {
             Model = model;
         }
 
@@ -16,15 +16,13 @@ namespace SF3.Win.Views.CHR {
             if (Model.Header != null) {
                 if (Model.Header != null)
                     CreateChild(new DataModelView("Header", Model.Header, ngc));
-#if false
-                if (Model.FrameDataOffsetsTable != null)
-                    CreateChild(new TableView("Frame Data Offsets", Model.FrameDataOffsetsTable, ngc));
-#endif
+                if (Model.FrameOffsetTable != null)
+                    CreateChild(new TableView("Frame Offsets", Model.FrameOffsetTable, ngc));
+                if (Model.AnimationOffsetTable != null)
+                    CreateChild(new TableView("Animation Offsets", Model.AnimationOffsetTable, ngc));
                 if (Model.FrameTable != null)
                     CreateChild(new SpriteFramesView("Frames", Model.FrameTable, ngc));
 #if false
-                if (Model.AnimationOffsetsTable != null)
-                    CreateChild(new TableView("Animation Offsets", Model.AnimationOffsetsTable, ngc));
                 if (Model.AnimationFrameTablesByAddr?.Count > 0)
                     CreateChild(
                         new SpriteAnimationFramesArrayView("Animation Frames", Model.AnimationFrameTablesByAddr.Values

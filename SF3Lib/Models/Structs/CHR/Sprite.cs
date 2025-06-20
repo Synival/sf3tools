@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using CommonLib.NamedValues;
+﻿using CommonLib.NamedValues;
 using SF3.ByteData;
 using SF3.Models.Tables.CHR;
 using SF3.Types;
@@ -34,10 +33,8 @@ namespace SF3.Models.Structs.CHR {
                 + (Header.PromotionLevel > 0 ? $" (P{Header.PromotionLevel})" : "")
                 ;
 
-/*
-            FrameDataOffsetsTable = FrameDataOffsetsTable.Create(Data, nameof(FrameDataOffsetsTable),
-                GetFrameTableOffsets(SpriteHeaderTable), GetDataOffsets(SpriteHeaderTable), spriteIds);
-*/
+            FrameOffsetTable     = FrameOffsetTable.Create(Data, nameof(FrameOffsetTable), Address + (int) Header.FrameTableOffset);
+            AnimationOffsetTable = AnimationOffsetTable.Create(Data, nameof(AnimationOffsetTable), Address + (int) Header.AnimationTableOffset);
 
             FrameTable = FrameTable.Create(
                 Data,
@@ -50,8 +47,6 @@ namespace SF3.Models.Structs.CHR {
                 Header.Directions);
 
 /*
-            AnimationOffsetsTable = AnimationOffsetsTable.Create(Data, nameof(AnimationOffsetsTable),
-                GetAnimationTableOffsets(SpriteHeaderTable), GetDataOffsets(SpriteHeaderTable), spriteIds);
             AnimationFrameTablesByAddr = AnimationOffsetsTable
                 .SelectMany(x => x.Select((y, i) => new {
                     AnimOffsets = x, FileAddr = (int) (y + x.DataOffset), Index = i, Offset = y })
@@ -67,14 +62,6 @@ namespace SF3.Models.Structs.CHR {
                     SpriteHeaderTable[x.AnimOffsets.ID].Directions,
                     x.Index))
                 .ToDictionary(x => x.Address, x => x);
-
-            var tables = new List<ITable>() {
-                SpriteHeaderTable,
-                FrameDataOffsetsTable,
-                AnimationOffsetsTable
-            };
-            tables.AddRange(FrameTablesByFileAddr.Values);
-            tables.AddRange(AnimationFrameTablesByAddr.Values);
 */
         }
 
@@ -84,12 +71,10 @@ namespace SF3.Models.Structs.CHR {
         public string DropdownName { get; }
 
         public SpriteHeader Header { get; }
-/*
-        public FrameDataOffsetsTable FrameDataOffsetsTable { get; }
-*/
+        public FrameOffsetTable FrameOffsetTable { get; }
+        public AnimationOffsetTable AnimationOffsetTable { get; }
         public FrameTable FrameTable { get; }
 /*
-        public AnimationOffsetsTable AnimationOffsetsTable { get; }
         public Dictionary<int, AnimationFrameTable> AnimationFrameTablesByAddr { get; }
 */
     }

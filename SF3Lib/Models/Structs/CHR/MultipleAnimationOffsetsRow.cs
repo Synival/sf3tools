@@ -6,7 +6,7 @@ using SF3.ByteData;
 using SF3.Types;
 
 namespace SF3.Models.Structs.CHR {
-    public class AnimationOffsets : Struct, IEnumerable<uint> {
+    public class MultipleAnimationOffsetsRow : Struct, IEnumerable<uint> {
         private readonly int _offset01Addr;
         private readonly int _offset02Addr;
         private readonly int _offset03Addr;
@@ -24,7 +24,7 @@ namespace SF3.Models.Structs.CHR {
         private readonly int _offset15Addr;
         private readonly int _offset16Addr;
 
-        public AnimationOffsets(IByteData data, int id, string name, int address, uint dataOffset, int spriteId) : base(data, id, name, address, 0x40) {
+        public MultipleAnimationOffsetsRow(IByteData data, int id, string name, int address, uint dataOffset, int spriteId) : base(data, id, name, address, 0x40) {
             DataOffset = dataOffset;
             SpriteID = spriteId;
 

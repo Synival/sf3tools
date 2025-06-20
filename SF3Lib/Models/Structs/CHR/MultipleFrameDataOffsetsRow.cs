@@ -6,8 +6,8 @@ using SF3.ByteData;
 using SF3.Types;
 
 namespace SF3.Models.Structs.CHR {
-    public class FrameDataOffsets : Struct, IEnumerable<uint> {
-        public FrameDataOffsets(IByteData data, int id, string name, int address, uint dataOffset, int spriteId) : base(data, id, name, address, 0x00) {
+    public class MultipleFrameDataOffsetsRow : Struct, IEnumerable<uint> {
+        public MultipleFrameDataOffsetsRow(IByteData data, int id, string name, int address, uint dataOffset, int spriteId) : base(data, id, name, address, 0x00) {
             DataOffset = dataOffset;
             SpriteID = spriteId;
 
