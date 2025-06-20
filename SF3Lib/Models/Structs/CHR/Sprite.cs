@@ -1,4 +1,6 @@
-﻿using CommonLib.NamedValues;
+﻿using System.Collections.Generic;
+using System.Linq;
+using CommonLib.NamedValues;
 using SF3.ByteData;
 using SF3.Models.Tables.CHR;
 using SF3.Types;
@@ -33,12 +35,12 @@ namespace SF3.Models.Structs.CHR {
                 + (Header.PromotionLevel > 0 ? $" (P{Header.PromotionLevel})" : "")
                 ;
 
-            FrameOffsetTable     = FrameOffsetTable.Create(Data, nameof(FrameOffsetTable), Address + (int) Header.FrameTableOffset);
-            AnimationOffsetTable = AnimationOffsetTable.Create(Data, nameof(AnimationOffsetTable), Address + (int) Header.AnimationTableOffset);
+            FrameOffsetTable     = FrameOffsetTable.Create(Data, nameof(FrameOffsetTable), (int) (DataOffset + Header.FrameTableOffset));
+            AnimationOffsetTable = AnimationOffsetTable.Create(Data, nameof(AnimationOffsetTable), (int) (DataOffset + Header.AnimationTableOffset));
 
             FrameTable = FrameTable.Create(
                 Data,
-                $"Sprite{ID:D2}_Frames ({SpriteName})",
+                $"Sprite{ID:D2}_Frames",
                 (int) (DataOffset + Header.FrameTableOffset),
                 DataOffset, Header.Width, Header.Height,
                 $"Sprite{ID:D2}_",
@@ -46,23 +48,18 @@ namespace SF3.Models.Structs.CHR {
                 Header.SpriteID,
                 Header.Directions);
 
-/*
-            AnimationFrameTablesByAddr = AnimationOffsetsTable
-                .SelectMany(x => x.Select((y, i) => new {
-                    AnimOffsets = x, FileAddr = (int) (y + x.DataOffset), Index = i, Offset = y })
-                    .Where(y => y.Offset != 0)
-                )
+            AnimationFrameTablesByIndex = AnimationOffsetTable
+                .Where(x => x.Offset != 0)
                 .Select(x => AnimationFrameTable.Create(
                     Data,
-                    $"Sprite{x.AnimOffsets.ID:D2}_Animation{x.Index:D2} ({spriteNames[x.AnimOffsets.ID]})",
-                    x.FileAddr,
-                    $"Sprite{x.AnimOffsets.ID:D2}_Animation{x.Index:D2}_",
-                    x.AnimOffsets.ID,
-                    x.AnimOffsets.SpriteID,
-                    SpriteHeaderTable[x.AnimOffsets.ID].Directions,
-                    x.Index))
-                .ToDictionary(x => x.Address, x => x);
-*/
+                    $"Sprite{ID:D2}_Animation{x.ID:D2}",
+                    (int) (DataOffset + x.Offset),
+                    $"Sprite{ID:D2}_Animation{x.ID:D2}_",
+                    ID,
+                    Header.SpriteID,
+                    Header.Directions,
+                    x.ID))
+                .ToDictionary(x => x.AnimIndex, x => x);
         }
 
         public uint DataOffset { get; }
@@ -74,8 +71,6 @@ namespace SF3.Models.Structs.CHR {
         public FrameOffsetTable FrameOffsetTable { get; }
         public AnimationOffsetTable AnimationOffsetTable { get; }
         public FrameTable FrameTable { get; }
-/*
-        public Dictionary<int, AnimationFrameTable> AnimationFrameTablesByAddr { get; }
-*/
+        public Dictionary<int, AnimationFrameTable> AnimationFrameTablesByIndex { get; }
     }
 }

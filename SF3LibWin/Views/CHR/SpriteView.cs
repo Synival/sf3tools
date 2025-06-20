@@ -1,4 +1,5 @@
-﻿using System.Windows.Forms;
+﻿using System.Linq;
+using System.Windows.Forms;
 using SF3.Models.Structs.CHR;
 
 namespace SF3.Win.Views.CHR {
@@ -22,17 +23,13 @@ namespace SF3.Win.Views.CHR {
                     CreateChild(new TableView("Animation Offsets", Model.AnimationOffsetTable, ngc));
                 if (Model.FrameTable != null)
                     CreateChild(new SpriteFramesView("Frames", Model.FrameTable, ngc));
-#if false
-                if (Model.AnimationFrameTablesByAddr?.Count > 0)
+                if (Model.AnimationFrameTablesByIndex?.Count > 0) {
                     CreateChild(
-                        new SpriteAnimationFramesArrayView("Animation Frames", Model.AnimationFrameTablesByAddr.Values
-                            .Select(x => new SpriteAnimationWithFrames(x, Model.FrameTablesByFileAddr
-                                .Select(y => y.Value)
-                                .First(y => y.SpriteIndex == x.SpriteIndex))
-                            )
+                        new SpriteAnimationFramesArrayView("Animation Frames", Model.AnimationFrameTablesByIndex.Values
+                            .Select(x => new SpriteAnimationWithFrames(x, Model.FrameTable))
                             .ToArray(),
                         ngc));
-#endif
+                }
             }
 
             return Control;
