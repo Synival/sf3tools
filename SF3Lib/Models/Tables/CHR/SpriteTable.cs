@@ -23,30 +23,19 @@ namespace SF3.Models.Tables.CHR {
             uint nextAddr = IsCHP ? 0 : currentDataOffset;
             bool keepGoing = true;
 
-            bool isValidSprite(Sprite sprite) {
-                var header = sprite.Header;
-                return header.SpriteID != 0xFFFF &&
-                       header.SpriteID  < 0x0800 &&
-                       header.Width  < 0x0200 &&
-                       header.Height < 0x0200 &&
-                       header.Width  >      0 &&
-                       header.Height >      0 &&
-                       header.FrameTableOffset < 0x80000 &&
-                       header.AnimationTableOffset < 0x80000 &&
-                       header.Scale > 0x00500 &&
-                       header.Scale < 0x30000 &&
-                       header.Directions > 0;
-            }
-
             return Load(
                 (id, addr) => {
                     var spr = new Sprite(Data, id, $"{nameof(Sprite)}{id:D2}", IsCHP ? (int) nextAddr : addr, currentDataOffset, NameGetterContext);
                     nextAddr += (uint) spr.Size;
 
                     if (IsCHP) {
-                        while (nextAddr < Data.Length - 0x18 && !isValidSprite(spr)) {
+                        while (nextAddr < Data.Length - 0x18 && !spr.Header.IsValid()) {
                             nextAddr = (nextAddr & 0x7FFFF800) + 0x800;
                             currentDataOffset = nextAddr;
+                            if (currentDataOffset >= Data.Length - 0x18) {
+                                keepGoing = false;
+                                return null;
+                            }
                             spr = new Sprite(Data, id, $"{nameof(Sprite)}{id:D2}", (int) nextAddr, currentDataOffset, NameGetterContext);
                         }
                         nextAddr += 0x18;

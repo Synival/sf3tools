@@ -13,6 +13,10 @@ namespace SF3.Models.Structs.CHR {
 
             Header = new SpriteHeader(data, 0, $"{nameof(Header)}{ID:D2}", address, dataOffset);
 
+            // We're often reading invalid headers when looking at CHP files. If this doesn't look like a valid header, abort reading here.
+            if (!Header.IsValid())
+                return;
+
 /*
             var frameTableOffsets = .DataOffset + x.FrameTableOffset)).ToArray();
             int[] GetAnimationTableOffsets(SpriteHeaderTable st)

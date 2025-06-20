@@ -34,6 +34,21 @@ namespace SF3.Models.Structs.CHR {
             _animationTableOffsetAddr    = Address + 0x14; // 4 bytes
         }
 
+        public bool IsValid() {
+            return SpriteID != 0xFFFF &&
+                   SpriteID  < 0x0800 &&
+                   Width  < 0x0200 &&
+                   Height < 0x0200 &&
+                   Width  >      0 &&
+                   Height >      0 &&
+                   FrameTableOffset < 0x80000 &&
+                   AnimationTableOffset < 0x80000 &&
+                   Scale > 0x00500 &&
+                   Scale < 0x30000 &&
+                   Directions > 0;
+        }
+
+
         public uint DataOffset { get; }
 
         [TableViewModelColumn(addressField: nameof(_spriteIdAddr), displayOrder: 0, displayFormat: "X2", minWidth: 200)]
