@@ -14,13 +14,15 @@ namespace SF3.Win.Views.CHR {
 
             var ngc = Model.NameGetterContext;
             if (Model.Header != null) {
-                CreateChild(new DataModelView("Header", Model.Header, ngc));
-
+                if (Model.Header != null)
+                    CreateChild(new DataModelView("Header", Model.Header, ngc));
 #if false
                 if (Model.FrameDataOffsetsTable != null)
                     CreateChild(new TableView("Frame Data Offsets", Model.FrameDataOffsetsTable, ngc));
-                if (Model.FrameTablesByFileAddr?.Count > 0)
-                    CreateChild(new SpriteFramesArrayView("Frames", Model.FrameTablesByFileAddr.Values.ToArray(), ngc));
+#endif
+                if (Model.FrameTable != null)
+                    CreateChild(new SpriteFramesView("Frames", Model.FrameTable, ngc));
+#if false
                 if (Model.AnimationOffsetsTable != null)
                     CreateChild(new TableView("Animation Offsets", Model.AnimationOffsetsTable, ngc));
                 if (Model.AnimationFrameTablesByAddr?.Count > 0)
