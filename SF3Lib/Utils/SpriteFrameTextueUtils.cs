@@ -5,19 +5,19 @@ using SF3.Models.Structs.CHR;
 
 namespace SF3.Utils {
     public static class SpriteFrameTextueUtils {
-        private static Dictionary<string, FrameTextueInfo> s_frameTextureInfosByHash = null;
+        private static Dictionary<string, FrameTextureInfo> s_frameTextureInfosByHash = null;
 
-        public static FrameTextueInfo GetFrameTextureInfoByHash(string hash) {
+        public static FrameTextureInfo GetFrameTextureInfoByHash(string hash) {
             LoadFramesByHashTable();
             if (!s_frameTextureInfosByHash.ContainsKey(hash.ToLower()))
-                s_frameTextureInfosByHash[hash] = new FrameTextueInfo(hash, "Unknown", "Unknown");
+                s_frameTextureInfosByHash[hash] = new FrameTextureInfo(hash, "Unknown", "Unknown");
             return s_frameTextureInfosByHash[hash];
         }
 
         private static void LoadFramesByHashTable() {
             if (s_frameTextureInfosByHash != null)
                 return;
-            s_frameTextureInfosByHash = new Dictionary<string, FrameTextueInfo>();
+            s_frameTextureInfosByHash = new Dictionary<string, FrameTextureInfo>();
 
             using (var stream = new FileStream(CommonLib.Utils.ResourceUtils.ResourceFile("SpriteFramesByHash.xml"), FileMode.Open, FileAccess.Read)) {
                 var settings = new XmlReaderSettings {
@@ -37,7 +37,7 @@ namespace SF3.Utils {
                         var animation = xml.GetAttribute("animation");
 
                         if (hash != null && sprite != null && animation != null)
-                            s_frameTextureInfosByHash.Add(hash.ToLower(), new FrameTextueInfo(hash, sprite, animation));
+                            s_frameTextureInfosByHash.Add(hash.ToLower(), new FrameTextureInfo(hash, sprite, animation));
                     }
                 }
             }

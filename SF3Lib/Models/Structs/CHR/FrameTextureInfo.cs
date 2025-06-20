@@ -6,8 +6,8 @@ namespace SF3.Models.Structs.CHR {
     /// Information about a particular texture read from a sprite.
     /// 
     /// </summary>
-    public class FrameTextueInfo {
-        public FrameTextueInfo(string textureHash, string spriteName, string animationName) {
+    public class FrameTextureInfo {
+        public FrameTextureInfo(string textureHash, string spriteName, string animationName) {
             TextureHash   = textureHash;
             SpriteName    = spriteName;
             AnimationName = animationName;
