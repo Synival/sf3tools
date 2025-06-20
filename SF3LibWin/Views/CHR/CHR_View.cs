@@ -1,7 +1,5 @@
-﻿using System.Linq;
-using System.Windows.Forms;
+﻿using System.Windows.Forms;
 using SF3.Models.Files.CHR;
-using SF3.Models.Tables.CHR;
 
 namespace SF3.Win.Views.CHR {
     public class CHR_View : TabView {
@@ -14,23 +12,9 @@ namespace SF3.Win.Views.CHR {
                 return null;
 
             var ngc = Model.NameGetterContext;
-            if (Model.SpriteHeaderTable != null)
-                CreateChild(new TableView("Sprite Headers", Model.SpriteHeaderTable, ngc));
-            if (Model.FrameDataOffsetsTable != null)
-                CreateChild(new TableView("Frame Data Offsets", Model.FrameDataOffsetsTable, ngc));
-            if (Model.FrameTablesByFileAddr?.Count > 0)
-                CreateChild(new SpriteFramesArrayView("Frames", Model.FrameTablesByFileAddr.Values.ToArray(), ngc));
-            if (Model.AnimationOffsetsTable != null)
-                CreateChild(new TableView("Animation Offsets", Model.AnimationOffsetsTable, ngc));
-            if (Model.AnimationFrameTablesByAddr?.Count > 0)
-                CreateChild(
-                    new SpriteAnimationFramesArrayView("Animation Frames", Model.AnimationFrameTablesByAddr.Values
-                        .Select(x => new SpriteAnimationWithFrames(x, Model.FrameTablesByFileAddr
-                            .Select(y => y.Value)
-                            .First(y => y.SpriteIndex == x.SpriteIndex))
-                        )
-                        .ToArray(),
-                    ngc));
+            if (Model.SpriteTable != null)
+                foreach (var sprite in Model.SpriteTable)
+                    CreateChild(new SpriteView(sprite.SpriteName, sprite));
 
             return Control;
         }

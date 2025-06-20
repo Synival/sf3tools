@@ -55,6 +55,8 @@ namespace CHR_Analyzer {
         private static List<string> s_matchReports = [];
 
         private static bool? CHR_MatchFunc(string filename, ICHR_File chrFile, INameGetterContext ngc) {
+            return null;
+/*
             var mixedFrameTables = chrFile.FrameTablesByFileAddr
                 .Where(x => x.Value.SpriteID != 0x187)
                 .Select(x => new { Table = x.Value, Frames = x.Value.ToArray() })
@@ -69,6 +71,7 @@ namespace CHR_Analyzer {
                 s_matchReports.Add($"{frameTable.Name} (SpriteID: 0x{frameTable.SpriteID:X3})");
 
             return true;
+*/
         }
 
         public static void Main(string[] args) {
@@ -127,9 +130,11 @@ namespace CHR_Analyzer {
                             ScanForErrorsAndReport(scenario, chrFile);
 
                             // Build a table of all textures.
+/*
                             foreach (var frameTable in chrFile.FrameTablesByFileAddr)
                                 foreach (var frame in frameTable.Value)
                                     AddFrame(chrFile.Scenario, filename, frame);
+*/
                         }
                     }
                     catch (Exception e) {
