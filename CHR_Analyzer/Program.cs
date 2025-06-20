@@ -55,23 +55,20 @@ namespace CHR_Analyzer {
         private static List<string> s_matchReports = [];
 
         private static bool? CHR_MatchFunc(string filename, ICHR_File chrFile, INameGetterContext ngc) {
-            return null;
-/*
-            var mixedFrameTables = chrFile.FrameTablesByFileAddr
-                .Where(x => x.Value.SpriteID != 0x187)
-                .Select(x => new { Table = x.Value, Frames = x.Value.ToArray() })
-                .Where(x => x.Frames.Where(y => !y.SpriteName.StartsWith("Transparent Frame")).GroupBy(y => y.SpriteName).Count() != 1)
+            var mixedSprites = chrFile.SpriteTable
+                .Where(x => x.Header.SpriteID != 0x187)
+                .Select(x => new { Table = x, Frames = x.FrameTable.ToArray() })
+                .Where(x => x.Frames.Where(y => !y.SpriteName.StartsWith("Transparent Frame")).GroupBy(y => y.SpriteName).Count() > 1)
                 .Select(x => x.Table)
                 .ToArray();
 
-            if (mixedFrameTables.Length == 0)
+            if (mixedSprites.Length == 0)
                 return null;
 
-            foreach (var frameTable in mixedFrameTables)
-                s_matchReports.Add($"{frameTable.Name} (SpriteID: 0x{frameTable.SpriteID:X3})");
+            foreach (var sprite in mixedSprites)
+                s_matchReports.Add($"{sprite.SpriteName} (SpriteID: 0x{sprite.Header.SpriteID:X3}) - Images from multiple sprites");
 
             return true;
-*/
         }
 
         public static void Main(string[] args) {
@@ -107,7 +104,7 @@ namespace CHR_Analyzer {
                     // Create an MPD file that works with our new ByteData.
                     try {
                         using (var chrFile = CHR_File.Create(byteData, nameGetterContexts[scenario], scenario, file.EndsWith(".CHP"))) {
-                            var match = true; // CHR_MatchFunc(filename, chrFile, nameGetterContexts[scenario]);
+                            var match = CHR_MatchFunc(filename, chrFile, nameGetterContexts[scenario]);
 
                             // If the match is 'null', that means we're just skipping this file completely.
                             if (match == null) {
@@ -130,11 +127,9 @@ namespace CHR_Analyzer {
                             ScanForErrorsAndReport(scenario, chrFile);
 
                             // Build a table of all textures.
-/*
-                            foreach (var frameTable in chrFile.FrameTablesByFileAddr)
-                                foreach (var frame in frameTable.Value)
+                            foreach (var sprite in chrFile.SpriteTable)
+                                foreach (var frame in sprite.FrameTable)
                                     AddFrame(chrFile.Scenario, filename, frame);
-*/
                         }
                     }
                     catch (Exception e) {
