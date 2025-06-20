@@ -26,7 +26,10 @@ namespace SF3.Models.Structs.CHR {
 */
 
             var spriteIdPropInfo = typeof(SpriteHeader).GetProperty(nameof(Header.SpriteID));
-            SpriteName = NameGetterContext.GetName(Header, spriteIdPropInfo, Header.SpriteID, new object[] { NamedValueType.Sprite })
+            SpriteName = NameGetterContext.GetName(Header, spriteIdPropInfo, Header.SpriteID, new object[] { NamedValueType.Sprite });
+
+            DropdownName = Name + " - "
+                + SpriteName
                 + $" ({Header.Width}x{Header.Height}x{Header.Directions})"
                 + (Header.PromotionLevel > 0 ? $" (P{Header.PromotionLevel})" : "")
                 ;
@@ -77,6 +80,7 @@ namespace SF3.Models.Structs.CHR {
         public uint DataOffset { get; }
         public INameGetterContext NameGetterContext { get; }
         public string SpriteName { get; }
+        public string DropdownName { get; }
 
         public SpriteHeader Header { get; }
 /*

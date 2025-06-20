@@ -17,18 +17,24 @@ namespace SF3.Win.Views {
             return Control;
         }
 
-        public override void Destroy() {
-            if (!IsCreated)
+        public void DestroyChildViews() {
+            if (!IsCreated || _childViews == null || _childViews.Count == 0)
                 return;
-
-            Control?.Hide();
 
             if (_childViews != null) {
                 foreach (var c in _childViews)
                     c.Destroy();
                 _childViews.Clear();
-                _childViews = null;
             }
+        }
+
+        public override void Destroy() {
+            if (!IsCreated)
+                return;
+
+            Control?.Hide();
+            DestroyChildViews();
+            _childViews = null;
 
             base.Destroy();
         }

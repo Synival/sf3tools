@@ -1,5 +1,4 @@
 ﻿using System.Windows.Forms;
-using SF3.Models.Files.CHR;
 using SF3.Models.Structs.CHR;
 
 namespace SF3.Win.Views.CHR {
