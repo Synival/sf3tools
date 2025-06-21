@@ -1,21 +1,22 @@
 using System;
 using SF3.ByteData;
 using SF3.Models.Structs.CHR;
+using SF3.Types;
 
 namespace SF3.Models.Tables.CHR {
     public class AnimationFrameTable : TerminatedTable<AnimationFrame> {
-        protected AnimationFrameTable(IByteData data, string name, int address, string rowPrefix, int spriteIndex, int spriteId, int directions, int animIndex, FrameTable frameTable)
+        protected AnimationFrameTable(IByteData data, string name, int address, string rowPrefix, int spriteIndex, int spriteId, int directions, AnimationType animationType, FrameTable frameTable)
         : base(data, name, address, 0x00, 100) {
             RowPrefix   = rowPrefix ?? "";
             SpriteIndex = spriteIndex;
             SpriteID    = spriteId;
             Directions  = directions;
-            AnimIndex   = animIndex;
+            AnimationType = animationType;
             FrameTable  = frameTable;
         }
 
-        public static AnimationFrameTable Create(IByteData data, string name, int address, string rowPrefix, int spriteIndex, int spriteId, int directions, int animIndex, FrameTable frameTable) {
-            var newTable = new AnimationFrameTable(data, name, address, rowPrefix, spriteIndex, spriteId, directions, animIndex, frameTable);
+        public static AnimationFrameTable Create(IByteData data, string name, int address, string rowPrefix, int spriteIndex, int spriteId, int directions, AnimationType animationType, FrameTable frameTable) {
+            var newTable = new AnimationFrameTable(data, name, address, rowPrefix, spriteIndex, spriteId, directions, animationType, frameTable);
             if (!newTable.Load())
                 throw new InvalidOperationException("Couldn't initialize table");
             return newTable;
@@ -23,7 +24,7 @@ namespace SF3.Models.Tables.CHR {
 
         public override bool Load() {
             return Load(
-                (id, addr) => new AnimationFrame(Data, id, $"{RowPrefix}{nameof(AnimationFrame)}{id:D2}", addr, SpriteIndex, SpriteID, Directions, AnimIndex, FrameTable),
+                (id, addr) => new AnimationFrame(Data, id, $"{RowPrefix}{nameof(AnimationFrame)}{id:D2}", addr, SpriteIndex, SpriteID, Directions, AnimationType, FrameTable),
                 (rows, prevRow) => ((sbyte) prevRow.FrameID) >= 0,
                 addEndModel: true // This last row has important data; we always want to include it
             );
@@ -33,7 +34,7 @@ namespace SF3.Models.Tables.CHR {
         public string RowPrefix { get; }
         public int SpriteID { get; }
         public int Directions { get; }
-        public int AnimIndex { get; }
+        public AnimationType AnimationType { get; }
         public FrameTable FrameTable { get; }
     }
 }

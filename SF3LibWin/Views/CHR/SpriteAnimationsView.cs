@@ -5,12 +5,13 @@ using BrightIdeasSoftware;
 using CommonLib.NamedValues;
 using SF3.Models.Structs.CHR;
 using SF3.Models.Tables.CHR;
+using SF3.Types;
 
 namespace SF3.Win.Views.CHR {
     public class SpriteAnimationsView : ControlSpaceView {
-        public SpriteAnimationsView(string name, AnimationTable model, Dictionary<int, AnimationFrameTable> animationFramesByIndex, INameGetterContext nameGetterContext) : base(name) {
+        public SpriteAnimationsView(string name, AnimationTable model, Dictionary<AnimationType, AnimationFrameTable> animationFramesByIndex, INameGetterContext nameGetterContext) : base(name) {
             Model = model;
-            AnimationFramesByIndex = animationFramesByIndex;
+            AnimationFramesByType = animationFramesByIndex;
 
             TableView   = new TableView("Frames", model, nameGetterContext, typeof(Animation));
             TextureView = new SpriteAnimationTextureView("Texture", textureScale: 2);
@@ -33,8 +34,8 @@ namespace SF3.Win.Views.CHR {
             if (animation == null)
                 TextureView.ClearAnimation();
             else {
-                var index = animation.AnimIndex;
-                var frames = AnimationFramesByIndex.ContainsKey(index) ? AnimationFramesByIndex[index] : null;
+                var type = animation.AnimationType;
+                var frames = AnimationFramesByType.ContainsKey(type) ? AnimationFramesByType[type] : null;
                 TextureView.StartAnimation(frames);
             }
         }
@@ -55,7 +56,7 @@ namespace SF3.Win.Views.CHR {
         }
 
         public AnimationTable Model { get; }
-        public Dictionary<int, AnimationFrameTable> AnimationFramesByIndex { get; }
+        public Dictionary<AnimationType, AnimationFrameTable> AnimationFramesByType { get; }
         public TableView TableView { get; private set; }
         public SpriteAnimationTextureView TextureView { get; private set; }
     }

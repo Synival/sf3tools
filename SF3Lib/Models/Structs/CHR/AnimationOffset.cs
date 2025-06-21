@@ -1,5 +1,6 @@
 ﻿using CommonLib.Attributes;
 using SF3.ByteData;
+using SF3.Types;
 
 namespace SF3.Models.Structs.CHR {
     public class AnimationOffset : Struct {
@@ -9,6 +10,9 @@ namespace SF3.Models.Structs.CHR {
         : base(data, id, name, address, 0x04) {
             _offsetAddr = Address;
         }
+
+        [TableViewModelColumn(addressField: null, displayOrder: -0.1f)]
+        public AnimationType AnimationType => (AnimationType) ID;
 
         [TableViewModelColumn(addressField: nameof(_offsetAddr), displayOrder: 0, displayFormat: "X2")]
         [BulkCopy]

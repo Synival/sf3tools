@@ -20,7 +20,7 @@ namespace SF3.Models.Tables.CHR {
 
         public override bool Load() {
             return Load(
-                (id, addr) => new Animation(Data, id, $"{RowPrefix}{nameof(Animation)}{id:D2}", addr, AnimationFrameTables[id].AnimIndex)
+                (id, addr) => new Animation(Data, id, $"{RowPrefix}{nameof(Animation)}{id:D2}", addr, AnimationFrameTables[id].AnimationType)
             );
         }
 

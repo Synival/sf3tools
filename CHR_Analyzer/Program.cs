@@ -55,18 +55,17 @@ namespace CHR_Analyzer {
         private static List<string> s_matchReports = [];
 
         private static bool? CHR_MatchFunc(string filename, ICHR_File chrFile, INameGetterContext ngc) {
-            var mixedSprites = chrFile.SpriteTable
-                .Where(x => x.Header.SpriteID != 0x187)
-                .Select(x => new { Table = x, Frames = x.FrameTable.ToArray() })
-                .Where(x => x.Frames.Where(y => !y.SpriteName.StartsWith("Transparent Frame")).GroupBy(y => y.SpriteName).Count() > 1)
-                .Select(x => x.Table)
+            var nonStandardAnimations = chrFile.SpriteTable
+                .Where(x => !x.SpriteName.Contains("Small Icons"))
+                .SelectMany(x => x.AnimationFrameTablesByIndex.Values.Select(y => new { Sprite = x, Animation = y }))
+                .Where(x => x.Animation.AnimationType >= AnimationType.Animation5)
                 .ToArray();
 
-            if (mixedSprites.Length == 0)
+            if (nonStandardAnimations.Length == 0)
                 return null;
 
-            foreach (var sprite in mixedSprites)
-                s_matchReports.Add($"{sprite.SpriteName} (SpriteID: 0x{sprite.Header.SpriteID:X3}) - Images from multiple sprites");
+            foreach (var anim in nonStandardAnimations)
+                s_matchReports.Add($"{anim.Sprite.SpriteName} (SpriteID: 0x{anim.Sprite.Header.SpriteID:X3}) - {anim.Animation.AnimationType}");
 
             return true;
         }
@@ -101,7 +100,7 @@ namespace CHR_Analyzer {
                     // Get a byte data editing context for the file.
                     var byteData = new ByteData(new ByteArray(File.ReadAllBytes(file)));
 
-                    // Create an MPD file that works with our new ByteData.
+                    // Create a CHR file that works with our new ByteData.
                     try {
                         using (var chrFile = CHR_File.Create(byteData, nameGetterContexts[scenario], scenario, file.EndsWith(".CHP"))) {
                             var match = CHR_MatchFunc(filename, chrFile, nameGetterContexts[scenario]);
@@ -153,6 +152,8 @@ namespace CHR_Analyzer {
             Console.WriteLine($"NoMatch: {nomatchSet.Count}/{totalCount}");
             foreach (var str in nomatchSet)
                 Console.WriteLine("  " + str);
+
+            return;
 
             Console.WriteLine("");
             Console.WriteLine("===================================================");
@@ -226,7 +227,7 @@ namespace CHR_Analyzer {
             return inputScenario.ToString().PadLeft(11) + ": " + Path.GetFileName(filename).PadLeft(12) + " | " + typeStr;
         }
 
-        private static void ScanForErrorsAndReport(ScenarioType inputScenario, ICHR_File mpdFile) {
+        private static void ScanForErrorsAndReport(ScenarioType inputScenario, ICHR_File chrFile) {
             var totalErrors = new List<string>();
 
             // TODO: scan for errors
