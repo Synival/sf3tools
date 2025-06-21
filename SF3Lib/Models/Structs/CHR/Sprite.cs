@@ -50,7 +50,8 @@ namespace SF3.Models.Structs.CHR {
                     ID,
                     Header.SpriteID,
                     Header.Directions,
-                    x.ID))
+                    x.ID,
+                    FrameTable))
                 .ToDictionary(x => x.AnimIndex, x => x);
 
             AnimationTable = AnimationTable.Create(Data, $"Sprite{ID:D2}_{nameof(AnimationTable)}", AnimationFrameTablesByIndex.Values.ToArray(),

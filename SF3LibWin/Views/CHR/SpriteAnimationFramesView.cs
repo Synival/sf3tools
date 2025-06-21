@@ -44,19 +44,7 @@ namespace SF3.Win.Views.CHR {
         public void UpdateTexture() {
             var item = (OLVListItem) TableView.OLVControl.SelectedItem;
             var animationFrame = (AnimationFrame) item?.RowObject;
-
-            if (animationFrame == null || animationFrame.FrameID < 0 || animationFrame.FrameID >= FrameTable.Length)
-                TextureView.Image = null;
-            else {
-                var frameMin = animationFrame.FrameID;
-                var frameMax = frameMin + animationFrame.Directions;
-                var frames = FrameTable
-                    .Where(x => x.ID >= frameMin && x.ID < frameMax)
-                    .Select(x => x.Texture)
-                    .ToArray();
-
-                TextureView.Image = (frames.Length != 0) ? TextureUtils.StackTextures(0, 0, 0, frames).CreateBitmapARGB1555() : null;
-            }
+            TextureView.Image = animationFrame?.Texture?.CreateBitmapARGB1555();
         }
 
         public override void Destroy() {

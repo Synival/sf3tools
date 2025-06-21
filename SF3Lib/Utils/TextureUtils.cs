@@ -6,7 +6,7 @@ namespace SF3.Utils {
     public static class TextureUtils {
         public static ITexture StackTextures(int id, int frame, int duration, ITexture[] textures) {
             if (textures.Length == 0)
-                return new TextureABGR1555(id, frame, duration, new ushort[0,0]);
+                return null;
 
             var expectedFormat = textures[0].PixelFormat;
             if (!textures.All(x => x.PixelFormat == expectedFormat))
