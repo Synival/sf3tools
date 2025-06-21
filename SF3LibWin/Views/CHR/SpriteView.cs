@@ -30,6 +30,8 @@ namespace SF3.Win.Views.CHR {
                             .ToArray(),
                         ngc));
                 }
+                if (Model.AnimationTable != null)
+                    CreateChild(new SpriteAnimationsView("Animations", Model.AnimationTable, ngc));
             }
 
             return Control;

@@ -5,6 +5,7 @@ using BrightIdeasSoftware;
 using CommonLib.NamedValues;
 using SF3.Models.Structs.CHR;
 using SF3.Models.Tables.CHR;
+using SF3.Utils;
 using SF3.Win.Extensions;
 
 namespace SF3.Win.Views.CHR {
@@ -49,27 +50,12 @@ namespace SF3.Win.Views.CHR {
             else {
                 var frameMin = animationFrame.FrameID;
                 var frameMax = frameMin + animationFrame.Directions;
-                var frameDatas = FrameTable
+                var frames = FrameTable
                     .Where(x => x.ID >= frameMin && x.ID < frameMax)
-                    .Select(x => x.Texture.ImageData16Bit)
+                    .Select(x => x.Texture)
                     .ToArray();
 
-                if (frameDatas.Length == 0)
-                    TextureView.Image = null;
-                else {
-                    var allData = new ushort[frameDatas.Max(x => x.GetLength(0)), frameDatas.Sum(x => x.GetLength(1))];
-
-                    // TODO: memcpy(), row by row!
-                    int row = 0;
-                    foreach (var data in frameDatas) {
-                        for (int y = 0; y < data.GetLength(1); y++, row++)
-                            for (int x = 0; x < data.GetLength(0); x++)
-                                allData[x, row] = data[x, y];
-                    }
-
-                    var texture = new TextureABGR1555(0, 0, 0, allData);
-                    TextureView.Image = texture.CreateBitmapARGB1555();
-                }
+                TextureView.Image = (frames.Length != 0) ? TextureUtils.StackTextures(0, 0, 0, frames).CreateBitmapARGB1555() : null;
             }
         }
 

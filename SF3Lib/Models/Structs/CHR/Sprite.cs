@@ -18,14 +18,6 @@ namespace SF3.Models.Structs.CHR {
             if (!Header.IsValid())
                 return;
 
-/*
-            var frameTableOffsets = .DataOffset + x.FrameTableOffset)).ToArray();
-            int[] GetAnimationTableOffsets(SpriteHeaderTable st)
-                => st.Select(x => (int) (x.DataOffset + x.AnimationTableOffset)).ToArray();
-            uint[] GetDataOffsets(SpriteHeaderTable st)
-                => st.Select(x => x.DataOffset).ToArray();
-*/
-
             var spriteIdPropInfo = typeof(SpriteHeader).GetProperty(nameof(Header.SpriteID));
             SpriteName = NameGetterContext.GetName(Header, spriteIdPropInfo, Header.SpriteID, new object[] { NamedValueType.Sprite });
 
@@ -60,6 +52,9 @@ namespace SF3.Models.Structs.CHR {
                     Header.Directions,
                     x.ID))
                 .ToDictionary(x => x.AnimIndex, x => x);
+
+            AnimationTable = AnimationTable.Create(Data, $"Sprite{ID:D2}_{nameof(AnimationTable)}", AnimationFrameTablesByIndex.Values.ToArray(),
+                $"Sprite{ID:D2}_");
         }
 
         public uint DataOffset { get; }
@@ -72,5 +67,6 @@ namespace SF3.Models.Structs.CHR {
         public AnimationOffsetTable AnimationOffsetTable { get; }
         public FrameTable FrameTable { get; }
         public Dictionary<int, AnimationFrameTable> AnimationFrameTablesByIndex { get; }
+        public AnimationTable AnimationTable { get; }
     }
 }
