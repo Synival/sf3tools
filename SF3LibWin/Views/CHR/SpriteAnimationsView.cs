@@ -26,17 +26,17 @@ namespace SF3.Win.Views.CHR {
             return Control;
         }
 
-        private void OnAnimationChanged(object sender, EventArgs e)
-            => UpdateTexture();
-
-        public void UpdateTexture() {
+        private void OnAnimationChanged(object sender, EventArgs e) {
             var item = (OLVListItem) TableView.OLVControl.SelectedItem;
             var animation = (Animation) item?.RowObject;
 
             if (animation == null)
-                TextureView.Image = null;
-            else
-                StartAnimation(animation.AnimIndex);
+                TextureView.ClearAnimation();
+            else {
+                var index = animation.AnimIndex;
+                var frames = AnimationFramesByIndex.ContainsKey(index) ? AnimationFramesByIndex[index] : null;
+                TextureView.StartAnimation(frames);
+            }
         }
 
         public override void Destroy() {
@@ -54,17 +54,9 @@ namespace SF3.Win.Views.CHR {
             base.Destroy();
         }
 
-        private void StartAnimation(int index) {
-            var frames = AnimationFramesByIndex.ContainsKey(index) ? AnimationFramesByIndex[index] : null;
-            var firstFrame = frames?.Length > 0 ? frames[0] : null;
-            var texture = firstFrame?.Texture;
-
-            TextureView.Image = texture;
-        }
-
         public AnimationTable Model { get; }
         public Dictionary<int, AnimationFrameTable> AnimationFramesByIndex { get; }
         public TableView TableView { get; private set; }
-        public AnimatedTextureView TextureView { get; private set; }
+        public SpriteAnimationTextureView TextureView { get; private set; }
     }
 }

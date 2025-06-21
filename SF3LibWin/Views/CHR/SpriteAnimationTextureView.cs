@@ -1,9 +1,33 @@
 ﻿using System;
+using SF3.Models.Tables.CHR;
 
 namespace SF3.Win.Views.CHR {
     public class SpriteAnimationTextureView : AnimatedTextureView {
         public SpriteAnimationTextureView(string name, float textureScale = 0) : base(name, textureScale) {}
         public SpriteAnimationTextureView(string name, ITexture firstTexture, float textureScale = 0) : base(name, firstTexture, textureScale) {}
-        protected override void OnAdvanceFrame(object sender, EventArgs e) {}
+
+        public void StartAnimation(AnimationFrameTable frames) {
+            _frames = frames;
+            if (_frames == null || _frames.Length == 0 || ((sbyte) _frames[0].FrameID) < 0)
+                ClearAnimation();
+            else {
+                var frame = _frames[0];
+                SetFrame(frame.Texture, 0, frame.Duration);
+            }
+        }
+
+        protected override void OnFrameCompleted() {
+            var nextFrameIndex = (FrameIndex + 1) % _frames.Length;
+            var nextFrame = _frames[nextFrameIndex];
+
+            // TODO: There are some special codes here. How do they work?
+            if ((sbyte) (nextFrame.FrameID) < 0)
+                nextFrame = _frames[0];
+
+            SetFrame(nextFrame.Texture, nextFrame.ID, nextFrame.Duration);
+        }
+
+        private AnimationFrameTable _frames = null;
+
     }
 }
