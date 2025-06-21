@@ -25,7 +25,7 @@ namespace SF3.Models.Tables.CHR {
         public override bool Load() {
             return Load(
                 (id, addr) => new AnimationFrame(Data, id, $"{RowPrefix}{nameof(AnimationFrame)}{id:D2}", addr, SpriteIndex, SpriteID, Directions, AnimationType, FrameTable),
-                (rows, prevRow) => ((sbyte) prevRow.FrameID) >= 0,
+                (rows, prevRow) => !prevRow.IsEndingFrame,
                 addEndModel: true // This last row has important data; we always want to include it
             );
         }

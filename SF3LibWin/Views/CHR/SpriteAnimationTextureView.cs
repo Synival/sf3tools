@@ -8,11 +8,11 @@ namespace SF3.Win.Views.CHR {
 
         public void StartAnimation(AnimationFrameTable frames) {
             _frames = frames;
-            if (_frames == null || _frames.Length == 0 || ((sbyte) _frames[0].FrameID) < 0)
+            if (_frames == null || _frames.Length == 0 || _frames[0].IsEndingFrame)
                 ClearAnimation();
             else {
                 var frame = _frames[0];
-                SetFrame(frame.Texture, 0, frame.Duration);
+                SetFrame(frame.Texture, 0, (frame.FrameID >= 0xF0) ? 0 : frame.Duration);
             }
         }
 
@@ -21,10 +21,10 @@ namespace SF3.Win.Views.CHR {
             var nextFrame = _frames[nextFrameIndex];
 
             // TODO: There are some special codes here. How do they work?
-            if ((sbyte) (nextFrame.FrameID) < 0)
+            if (nextFrame.IsEndingFrame)
                 nextFrame = _frames[0];
 
-            SetFrame(nextFrame.Texture, nextFrame.ID, nextFrame.Duration);
+            SetFrame(nextFrame.Texture, nextFrame.ID, (nextFrame.FrameID >= 0xF0) ? 0 : nextFrame.Duration);
         }
 
         private AnimationFrameTable _frames = null;

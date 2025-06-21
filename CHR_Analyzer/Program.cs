@@ -57,15 +57,15 @@ namespace CHR_Analyzer {
         private static bool? CHR_MatchFunc(string filename, ICHR_File chrFile, INameGetterContext ngc) {
             var nonStandardAnimations = chrFile.SpriteTable
                 .Where(x => !x.SpriteName.Contains("Small Icons"))
-                .SelectMany(x => x.AnimationFrameTablesByIndex.Values.Select(y => new { Sprite = x, Animation = y }))
-                .Where(x => x.Animation.AnimationType >= AnimationType.Animation5)
+                .SelectMany(x => x.AnimationFrameTablesByIndex.Values.Select(y => new { Sprite = x, LastFrame = y.Last() }))
+                .Where(x => x.LastFrame.FrameID == 0xF2 && x.LastFrame.Duration != 0x00)
                 .ToArray();
 
             if (nonStandardAnimations.Length == 0)
                 return null;
 
             foreach (var anim in nonStandardAnimations)
-                s_matchReports.Add($"{anim.Sprite.SpriteName} (SpriteID: 0x{anim.Sprite.Header.SpriteID:X3}) - {anim.Animation.AnimationType}");
+                s_matchReports.Add($"{anim.Sprite.DropdownName}: {anim.LastFrame.Name} = {anim.LastFrame.FrameID:X2},{anim.LastFrame.Duration:X2}");
 
             return true;
         }

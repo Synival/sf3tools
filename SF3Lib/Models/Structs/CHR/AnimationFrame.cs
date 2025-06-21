@@ -51,6 +51,9 @@ namespace SF3.Models.Structs.CHR {
             set => Data.SetWord(_durationAddr, value);
         }
 
+        [TableViewModelColumn(displayOrder: 2)]
+        public bool IsEndingFrame => FrameID >= 0xF0 && FrameID != 0xF1;
+
         private bool _textureLoaded = false;
         private ITexture _texture = null;
         public ITexture Texture {
