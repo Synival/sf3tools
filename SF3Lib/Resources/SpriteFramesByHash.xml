@@ -1295,14 +1295,6 @@
     <item hash="2ec203191c0f5424e4f7d0a69608ca03" sprite="Benetram" width="48" height="40" animation="" />
     <item hash="5e2a81b74c53b972dcb4ebcea6b0decb" sprite="Benetram" width="48" height="40" animation="" />
     <item hash="98d4adee3a149ac44f7c818a7acc0127" sprite="Benetram" width="48" height="40" animation="" />
-    <item hash="0e97835a791e942f608c20cd0931b689" sprite="Bernard" width="40" height="40" animation="" />
-    <item hash="2ee66b4d7964399d1e4bad46b6c719ca" sprite="Bernard" width="40" height="40" animation="" />
-    <item hash="86f239891f5ab3a5fb320eafc8ef30a4" sprite="Bernard" width="40" height="40" animation="" />
-    <item hash="927b19cd008497cf36326bf50fce7abe" sprite="Bernard" width="40" height="40" animation="" />
-    <item hash="d3af3b54057387c5ad83fc1e3d88696c" sprite="Bernard" width="40" height="40" animation="" />
-    <item hash="d92d97c9c15d238a5655dad1abf88ad7" sprite="Bernard" width="40" height="40" animation="" />
-    <item hash="ed7716f7cf0ff90ac493effd860a227e" sprite="Bernard" width="40" height="40" animation="" />
-    <item hash="fd075a5ddf51226c501ff04278fec2e3" sprite="Bernard" width="40" height="40" animation="" />
     <item hash="35cf61048811071473541bd697f25f07" sprite="Bernard" width="48" height="40" animation="Knocked Out" />
     <item hash="3b3b37c4a65fdb2ab464e1484c9dc4f9" sprite="Bernard" width="48" height="40" animation="Knocked Out" />
     <item hash="4538978e383dfdd25ddc8f9e928cf4f0" sprite="Bernard" width="48" height="40" animation="Knocked Out" />
@@ -1459,6 +1451,7 @@
     <item hash="0149b9035792efdf7516d201e1fe2017" sprite="Bernard (U)" width="40" height="40" animation="" />
     <item hash="0228ab1b5c4fb12d33e8659adbc319f3" sprite="Bernard (U)" width="40" height="40" animation="" />
     <item hash="0e54c681abd960e04b14f98ae236935c" sprite="Bernard (U)" width="40" height="40" animation="" />
+    <item hash="0e97835a791e942f608c20cd0931b689" sprite="Bernard (U)" width="40" height="40" animation="" />
     <item hash="15d5903121b3a642367efc8b67cf3b38" sprite="Bernard (U)" width="40" height="40" animation="" />
     <item hash="16df29fd2ea26158caa25707065554d6" sprite="Bernard (U)" width="40" height="40" animation="" />
     <item hash="19c5522655c37d09abc88e9598678815" sprite="Bernard (U)" width="40" height="40" animation="" />
@@ -1466,6 +1459,7 @@
     <item hash="1eeac7079db49e50607436d4bcfa64a3" sprite="Bernard (U)" width="40" height="40" animation="" />
     <item hash="214366623b949b31a9a54cd2defb940e" sprite="Bernard (U)" width="40" height="40" animation="" />
     <item hash="27341fa4d00e3a3f435ae40b7729ff1b" sprite="Bernard (U)" width="40" height="40" animation="" />
+    <item hash="2ee66b4d7964399d1e4bad46b6c719ca" sprite="Bernard (U)" width="40" height="40" animation="" />
     <item hash="31326dc5b9cf38cbea3fcd4485897482" sprite="Bernard (U)" width="40" height="40" animation="" />
     <item hash="359263ddc6355657f5ee3a0f6c72e59e" sprite="Bernard (U)" width="40" height="40" animation="" />
     <item hash="381249f1b91a20bc0765391c0ab8cdba" sprite="Bernard (U)" width="40" height="40" animation="" />
@@ -1497,8 +1491,10 @@
     <item hash="7f30fa66f4e3ce2abdcffd806aee42db" sprite="Bernard (U)" width="40" height="40" animation="" />
     <item hash="8386a16daac3882de184e6386ba853c6" sprite="Bernard (U)" width="40" height="40" animation="" />
     <item hash="866fcf48da6bb130bdfff4670e578ac9" sprite="Bernard (U)" width="40" height="40" animation="" />
+    <item hash="86f239891f5ab3a5fb320eafc8ef30a4" sprite="Bernard (U)" width="40" height="40" animation="" />
     <item hash="873014ae7df8c35e70ba27702ca76f01" sprite="Bernard (U)" width="40" height="40" animation="" />
     <item hash="8797a8f1f3e7ad6f77bcc09aba69fe7c" sprite="Bernard (U)" width="40" height="40" animation="" />
+    <item hash="927b19cd008497cf36326bf50fce7abe" sprite="Bernard (U)" width="40" height="40" animation="" />
     <item hash="94b58a392a91bc2b2b20abf1fefded16" sprite="Bernard (U)" width="40" height="40" animation="" />
     <item hash="97035fab3d7f7db286bdccabc142af1b" sprite="Bernard (U)" width="40" height="40" animation="" />
     <item hash="979f6c51fee369849f0b684751560976" sprite="Bernard (U)" width="40" height="40" animation="" />
@@ -1518,17 +1514,21 @@
     <item hash="b3a4ac0e2ee50df0a18efaee832e92ee" sprite="Bernard (U)" width="40" height="40" animation="" />
     <item hash="bcb49fae80c0eb359e0e8d5d75b590de" sprite="Bernard (U)" width="40" height="40" animation="" />
     <item hash="bdeae7179ff0c40b4911d6fbd2d8799c" sprite="Bernard (U)" width="40" height="40" animation="" />
+    <item hash="d3af3b54057387c5ad83fc1e3d88696c" sprite="Bernard (U)" width="40" height="40" animation="" />
     <item hash="d42c04f7684de0b4c9214183b9542d65" sprite="Bernard (U)" width="40" height="40" animation="" />
     <item hash="d4e44e8a26f9e2d3aa9c6faa203892c0" sprite="Bernard (U)" width="40" height="40" animation="" />
     <item hash="d68b791f49be2d91b275c79a4afb43cb" sprite="Bernard (U)" width="40" height="40" animation="" />
+    <item hash="d92d97c9c15d238a5655dad1abf88ad7" sprite="Bernard (U)" width="40" height="40" animation="" />
     <item hash="d964a0a3f64cf4eab4eb7e4ac64b3dc7" sprite="Bernard (U)" width="40" height="40" animation="" />
     <item hash="de541de3677a7829a0145fd35b39ca08" sprite="Bernard (U)" width="40" height="40" animation="" />
     <item hash="eb0571fd467233accd69b56fddc7d39e" sprite="Bernard (U)" width="40" height="40" animation="" />
+    <item hash="ed7716f7cf0ff90ac493effd860a227e" sprite="Bernard (U)" width="40" height="40" animation="" />
     <item hash="f0a3d8eb7ba12f84332325b53bd4e635" sprite="Bernard (U)" width="40" height="40" animation="" />
     <item hash="f16db3c54e9b5d2ed6462193a6d95b7c" sprite="Bernard (U)" width="40" height="40" animation="" />
     <item hash="f2dadf8f22b6654f6ea7ae54b12c4546" sprite="Bernard (U)" width="40" height="40" animation="" />
     <item hash="f9d2b96b0d4c9e30e6a89372356b00ae" sprite="Bernard (U)" width="40" height="40" animation="" />
     <item hash="fb41c2e12426b270090b9f31ad2d8c65" sprite="Bernard (U)" width="40" height="40" animation="" />
+    <item hash="fd075a5ddf51226c501ff04278fec2e3" sprite="Bernard (U)" width="40" height="40" animation="" />
     <item hash="fee920a7639feebc6753b5c3ffa21ad1" sprite="Bernard (U)" width="40" height="40" animation="" />
     <item hash="ff5272732f667f684556b0b7a39edbd0" sprite="Bernard (U)" width="40" height="40" animation="" />
     <item hash="03d1c1d251b6b6b2757d2fd37368fef7" sprite="Bernard (U)" width="48" height="40" animation="Tied-Up" />
@@ -16112,55 +16112,11 @@
     <item hash="c55008cc1a69187fbc2a9bd1517a91a4" sprite="Maya Woman in Grey Dress and Green+Gold Cloak" width="40" height="40" animation="" />
     <item hash="eecf583ba2d33c2731d90ca343f177f2" sprite="Maya Woman in Grey Dress and Green+Gold Cloak" width="40" height="40" animation="" />
     <item hash="f37b024af1fe759f8df5fee3dcd44930" sprite="Maya Woman in Grey Dress and Green+Gold Cloak" width="40" height="40" animation="" />
-    <item hash="01db1b505a37849051a2e98fd69276aa" sprite="Medion" width="40" height="40" animation="" />
     <item hash="07aa2577e1f8185379a1ef4b561a9668" sprite="Medion" width="40" height="40" animation="" />
-    <item hash="094dea66c92a0ee3f868770c1dc54991" sprite="Medion" width="40" height="40" animation="" />
     <item hash="0a4311f069072521a24436f1528d5a86" sprite="Medion" width="40" height="40" animation="" />
-    <item hash="1072da5e97ffb9015dea96823c636987" sprite="Medion" width="40" height="40" animation="" />
     <item hash="17fccb0ca0758c690af082410af4343a" sprite="Medion" width="40" height="40" animation="" />
-    <item hash="191dac835ef1da3c7866498fb634b5c5" sprite="Medion" width="40" height="40" animation="" />
-    <item hash="1d1cd10fc62b737fd052f0eb1c11fe44" sprite="Medion" width="40" height="40" animation="" />
-    <item hash="26e86dbde48d7dca756b74e5714ba24e" sprite="Medion" width="40" height="40" animation="" />
-    <item hash="2ab93f217afd84059dfc7b93c6619a35" sprite="Medion" width="40" height="40" animation="" />
-    <item hash="2e1bcaf0f3db5c23aa21df8b18329687" sprite="Medion" width="40" height="40" animation="" />
-    <item hash="342d089048e149920715d4fc20980f8b" sprite="Medion" width="40" height="40" animation="" />
-    <item hash="3bb1a3d8bde1d356eb199e1266885dc8" sprite="Medion" width="40" height="40" animation="" />
-    <item hash="4176bde1fe06685ac7bd652088ae52e3" sprite="Medion" width="40" height="40" animation="" />
-    <item hash="4274016f9a67902409a7636eb3b247a5" sprite="Medion" width="40" height="40" animation="" />
-    <item hash="42fb0f31ac4a7f5e415c62608d63fb73" sprite="Medion" width="40" height="40" animation="" />
-    <item hash="4b96f120dae4cceb5debada45040ea32" sprite="Medion" width="40" height="40" animation="" />
-    <item hash="4b983f9df65b2e6c1f9a727c97f700f9" sprite="Medion" width="40" height="40" animation="" />
     <item hash="4cc6a6cb84bfba0ee3c8936564707b7b" sprite="Medion" width="40" height="40" animation="" />
-    <item hash="4e61e6125d794f467189ea3248961edd" sprite="Medion" width="40" height="40" animation="" />
-    <item hash="5f618265f3aa794f95b57c1f8fdfbfeb" sprite="Medion" width="40" height="40" animation="" />
-    <item hash="65035fe9f9070845a76a73f942b0699d" sprite="Medion" width="40" height="40" animation="" />
-    <item hash="6dd315125ddc5845c465901830884ae6" sprite="Medion" width="40" height="40" animation="" />
-    <item hash="780dd62f9faa0c238eb801e94137a9ba" sprite="Medion" width="40" height="40" animation="" />
-    <item hash="78590eee46d02d3895be91712db411b6" sprite="Medion" width="40" height="40" animation="" />
-    <item hash="7b520b1e90ff91cc18d0baca0325022e" sprite="Medion" width="40" height="40" animation="" />
     <item hash="817a5b8cf155b844bfa60fee90258ea9" sprite="Medion" width="40" height="40" animation="" />
-    <item hash="82e84b9e7d164f09f6ab7bdd0f2a0611" sprite="Medion" width="40" height="40" animation="" />
-    <item hash="85225a5756b2ba2cd3c2c6aad825d2ea" sprite="Medion" width="40" height="40" animation="" />
-    <item hash="89ffd2bcc70e2678888d81d6bcd672c8" sprite="Medion" width="40" height="40" animation="" />
-    <item hash="957d1554d411e948481247462620eca6" sprite="Medion" width="40" height="40" animation="" />
-    <item hash="9972e75995251cd972901c46102ae30e" sprite="Medion" width="40" height="40" animation="" />
-    <item hash="9bec198b6917a9b2598b4173c1312595" sprite="Medion" width="40" height="40" animation="" />
-    <item hash="9e4d9cdf7874a15a486f265b3f83cd95" sprite="Medion" width="40" height="40" animation="" />
-    <item hash="9ec03382489ba984888a7360fa816f57" sprite="Medion" width="40" height="40" animation="" />
-    <item hash="a91f62eac97505df8a50ce6fc8b0d55a" sprite="Medion" width="40" height="40" animation="" />
-    <item hash="ac2604c59b865b5550b9df8e5b6238fb" sprite="Medion" width="40" height="40" animation="" />
-    <item hash="bbf8dee0184dc1712040e5465ee54669" sprite="Medion" width="40" height="40" animation="" />
-    <item hash="be45829dff738ed95169cf4cbf08a2b7" sprite="Medion" width="40" height="40" animation="" />
-    <item hash="c9275586def3ba7180852881147006e9" sprite="Medion" width="40" height="40" animation="" />
-    <item hash="cc8a4addc77fcb5a3c7b5a4b1f6efa79" sprite="Medion" width="40" height="40" animation="" />
-    <item hash="cd8ad4d4fbfede0681750448aa7a414a" sprite="Medion" width="40" height="40" animation="" />
-    <item hash="cec0624a5c9fd35dbcbc0ac1f3d5e999" sprite="Medion" width="40" height="40" animation="" />
-    <item hash="dc9a846c2425259ea6335d2063dfab67" sprite="Medion" width="40" height="40" animation="" />
-    <item hash="e04776e761befff4ab44288abb282d27" sprite="Medion" width="40" height="40" animation="" />
-    <item hash="e9cee1ee88a46b78a99502394167cead" sprite="Medion" width="40" height="40" animation="" />
-    <item hash="f1936b32696830e360327e7bf61009d0" sprite="Medion" width="40" height="40" animation="" />
-    <item hash="f195799b2cecca9bea7ffd78e2a5ec1b" sprite="Medion" width="40" height="40" animation="" />
-    <item hash="f9f615ea9baf009654744981129dfdd1" sprite="Medion" width="40" height="40" animation="" />
     <item hash="21a40cbfd3a0aea2957feb26697604ec" sprite="Medion" width="40" height="40" animation="Getting Up" />
     <item hash="3309fcc0dfda42cd9a98f95f7de42861" sprite="Medion" width="40" height="40" animation="Getting Up" />
     <item hash="3e63b5d33f5315b4a36a6ac24f17cc0d" sprite="Medion" width="40" height="40" animation="Getting Up" />
@@ -16226,15 +16182,18 @@
     <item hash="bed59ec3cf11f6e457e188b746dfc5cb" sprite="Medion (Big)" width="64" height="64" animation="" />
     <item hash="c4444ba1faca741fcc830cae1436ca36" sprite="Medion (Big)" width="64" height="64" animation="" />
     <item hash="d8922603c6075d86e0dc758a15e6682b" sprite="Medion (Big)" width="64" height="64" animation="" />
+    <item hash="01db1b505a37849051a2e98fd69276aa" sprite="Medion (P1)" width="40" height="40" animation="" />
     <item hash="04036b5f1054926f6584947dd3d3bcc4" sprite="Medion (P1)" width="40" height="40" animation="" />
     <item hash="05202a481301058adba7aca5bdc481d8" sprite="Medion (P1)" width="40" height="40" animation="" />
     <item hash="1263f02c5e69fa2e7d7f4f58dbc08712" sprite="Medion (P1)" width="40" height="40" animation="" />
     <item hash="126671f473c92bb10a75edc5f32f1a12" sprite="Medion (P1)" width="40" height="40" animation="" />
     <item hash="16a673f81ddc04c8c094a59abf725b10" sprite="Medion (P1)" width="40" height="40" animation="" />
+    <item hash="191dac835ef1da3c7866498fb634b5c5" sprite="Medion (P1)" width="40" height="40" animation="" />
     <item hash="1ce53eb20e9d2824be7ee69b96a2f7b8" sprite="Medion (P1)" width="40" height="40" animation="" />
     <item hash="1dc4d99be07a4f4fa1103557e54c2c70" sprite="Medion (P1)" width="40" height="40" animation="" />
     <item hash="2324d076282eb5d7fedd338e1008e612" sprite="Medion (P1)" width="40" height="40" animation="" />
     <item hash="25dc3f8a5623f59354a6a91deaecdef9" sprite="Medion (P1)" width="40" height="40" animation="" />
+    <item hash="26e86dbde48d7dca756b74e5714ba24e" sprite="Medion (P1)" width="40" height="40" animation="" />
     <item hash="279c0640994ff5ec21c19d53645f3b5a" sprite="Medion (P1)" width="40" height="40" animation="" />
     <item hash="28127dadf997ba011801e8147eb30c3f" sprite="Medion (P1)" width="40" height="40" animation="" />
     <item hash="2907c47bab9657023c0d5effe7f3ca37" sprite="Medion (P1)" width="40" height="40" animation="" />
@@ -16243,17 +16202,21 @@
     <item hash="3294bf6c56fca54e0e92b270a25c1ed6" sprite="Medion (P1)" width="40" height="40" animation="" />
     <item hash="338364efc3aec8093334c230c3c280bb" sprite="Medion (P1)" width="40" height="40" animation="" />
     <item hash="33aa2a6d7143f0dd3f2591e6aed7950c" sprite="Medion (P1)" width="40" height="40" animation="" />
+    <item hash="342d089048e149920715d4fc20980f8b" sprite="Medion (P1)" width="40" height="40" animation="" />
     <item hash="34636e7c7d8a98cc5cb91e1de8fd8205" sprite="Medion (P1)" width="40" height="40" animation="" />
     <item hash="3752f1995c17bb960f91ef410f2fde53" sprite="Medion (P1)" width="40" height="40" animation="" />
     <item hash="384cba99da8fde8fc07ca6a3248604b6" sprite="Medion (P1)" width="40" height="40" animation="" />
     <item hash="38f460ce7fac7989fe0b68ab560f2071" sprite="Medion (P1)" width="40" height="40" animation="" />
     <item hash="393dafade0e9aa8fd67a19bca4373026" sprite="Medion (P1)" width="40" height="40" animation="" />
     <item hash="3a5642e40d93160f0f77618b87d40423" sprite="Medion (P1)" width="40" height="40" animation="" />
+    <item hash="4274016f9a67902409a7636eb3b247a5" sprite="Medion (P1)" width="40" height="40" animation="" />
+    <item hash="42fb0f31ac4a7f5e415c62608d63fb73" sprite="Medion (P1)" width="40" height="40" animation="" />
     <item hash="436a2a43729a031648321a7880427348" sprite="Medion (P1)" width="40" height="40" animation="" />
     <item hash="46b185e9b9f042dd49d0299457820136" sprite="Medion (P1)" width="40" height="40" animation="" />
     <item hash="4a4aa944ed35d657ff6f9f17a315ec55" sprite="Medion (P1)" width="40" height="40" animation="" />
     <item hash="4c06fb7199858876463e0f1094bcb33b" sprite="Medion (P1)" width="40" height="40" animation="" />
     <item hash="4c8e8b605ea54372293eeb354079bdf5" sprite="Medion (P1)" width="40" height="40" animation="" />
+    <item hash="4e61e6125d794f467189ea3248961edd" sprite="Medion (P1)" width="40" height="40" animation="" />
     <item hash="5013f0f0ffc0558ec38b3ab4b6f572e5" sprite="Medion (P1)" width="40" height="40" animation="" />
     <item hash="50f1ec64b8a95687be6f133b3ad00594" sprite="Medion (P1)" width="40" height="40" animation="" />
     <item hash="5699725f980f405e233f71ac03d15815" sprite="Medion (P1)" width="40" height="40" animation="" />
@@ -16265,10 +16228,13 @@
     <item hash="64241f8ac29345aa14aa66f1f5f97d4a" sprite="Medion (P1)" width="40" height="40" animation="" />
     <item hash="6a0ca194758b4be0cb61df382c3d3ea9" sprite="Medion (P1)" width="40" height="40" animation="" />
     <item hash="6a13733271713d0dabed9c41bed0f8eb" sprite="Medion (P1)" width="40" height="40" animation="" />
+    <item hash="6dd315125ddc5845c465901830884ae6" sprite="Medion (P1)" width="40" height="40" animation="" />
     <item hash="726f0f7d6e3b0a240e4b1560bb0f73b7" sprite="Medion (P1)" width="40" height="40" animation="" />
     <item hash="736bc226de15f19ec40f23adaa1a5016" sprite="Medion (P1)" width="40" height="40" animation="" />
     <item hash="7645c9a6ceea0f8e1408d7118a9059f9" sprite="Medion (P1)" width="40" height="40" animation="" />
+    <item hash="780dd62f9faa0c238eb801e94137a9ba" sprite="Medion (P1)" width="40" height="40" animation="" />
     <item hash="78341a09e3bce820ab216b06cb1100a1" sprite="Medion (P1)" width="40" height="40" animation="" />
+    <item hash="7b520b1e90ff91cc18d0baca0325022e" sprite="Medion (P1)" width="40" height="40" animation="" />
     <item hash="8924510391442086337218fb30c666c4" sprite="Medion (P1)" width="40" height="40" animation="" />
     <item hash="8c2752b4c76235e0837456068d4be76d" sprite="Medion (P1)" width="40" height="40" animation="" />
     <item hash="8cee28e526622b5c30f9855875bbeafd" sprite="Medion (P1)" width="40" height="40" animation="" />
@@ -16278,24 +16244,32 @@
     <item hash="9a86d0633673276dd686399c1e992738" sprite="Medion (P1)" width="40" height="40" animation="" />
     <item hash="9cfb74ffbbd56db383f4fd23c25d53b0" sprite="Medion (P1)" width="40" height="40" animation="" />
     <item hash="9d325c23830264c3257eabb669f4da75" sprite="Medion (P1)" width="40" height="40" animation="" />
+    <item hash="9e4d9cdf7874a15a486f265b3f83cd95" sprite="Medion (P1)" width="40" height="40" animation="" />
     <item hash="9e980e25438d6db7b627342fd5628f96" sprite="Medion (P1)" width="40" height="40" animation="" />
+    <item hash="9ec03382489ba984888a7360fa816f57" sprite="Medion (P1)" width="40" height="40" animation="" />
     <item hash="9f6f8a93b02ec7c4cf695955fb563361" sprite="Medion (P1)" width="40" height="40" animation="" />
     <item hash="a52bb216cb89726621c3a1d14cfbfad8" sprite="Medion (P1)" width="40" height="40" animation="" />
     <item hash="a6c62a21220bcae2c6404fad7d10f8f7" sprite="Medion (P1)" width="40" height="40" animation="" />
     <item hash="a7bdf5ea7f4d0b526cc68d58c075fdbd" sprite="Medion (P1)" width="40" height="40" animation="" />
+    <item hash="a91f62eac97505df8a50ce6fc8b0d55a" sprite="Medion (P1)" width="40" height="40" animation="" />
     <item hash="ae7a34ec84e7821706c84f6e9685bbc4" sprite="Medion (P1)" width="40" height="40" animation="" />
     <item hash="af158afdc7d9bd98bb836c0d50e37bf6" sprite="Medion (P1)" width="40" height="40" animation="" />
     <item hash="b563e865af3d2dbbfd77018b35ba27bb" sprite="Medion (P1)" width="40" height="40" animation="" />
     <item hash="b5f1ce6c6efbc38c6fa134aba4710b16" sprite="Medion (P1)" width="40" height="40" animation="" />
     <item hash="b962035a9a44b0108ee37bc78c8868f1" sprite="Medion (P1)" width="40" height="40" animation="" />
     <item hash="bb2b189b902d8ed489bb6f62d7c1cb1e" sprite="Medion (P1)" width="40" height="40" animation="" />
+    <item hash="bbf8dee0184dc1712040e5465ee54669" sprite="Medion (P1)" width="40" height="40" animation="" />
     <item hash="be19dbe4c7d4c6ff19e3911fc8c67314" sprite="Medion (P1)" width="40" height="40" animation="" />
     <item hash="beb3bfd260d45513517e6a3dca4f2dc1" sprite="Medion (P1)" width="40" height="40" animation="" />
     <item hash="bef73d79b5d72faf961d0aad6df563db" sprite="Medion (P1)" width="40" height="40" animation="" />
     <item hash="bf9d284b8e25c486c8c32d822f1abfb8" sprite="Medion (P1)" width="40" height="40" animation="" />
     <item hash="c1630625eb2f2eb24a84c069e5e8f177" sprite="Medion (P1)" width="40" height="40" animation="" />
     <item hash="c2714e483a2f08d303eddad58815d47a" sprite="Medion (P1)" width="40" height="40" animation="" />
+    <item hash="c9275586def3ba7180852881147006e9" sprite="Medion (P1)" width="40" height="40" animation="" />
     <item hash="c95457fece64f6bc0dbff15ae0f18e16" sprite="Medion (P1)" width="40" height="40" animation="" />
+    <item hash="cc8a4addc77fcb5a3c7b5a4b1f6efa79" sprite="Medion (P1)" width="40" height="40" animation="" />
+    <item hash="cd8ad4d4fbfede0681750448aa7a414a" sprite="Medion (P1)" width="40" height="40" animation="" />
+    <item hash="cec0624a5c9fd35dbcbc0ac1f3d5e999" sprite="Medion (P1)" width="40" height="40" animation="" />
     <item hash="d1b44d5938a9d85c9f83e68ceb88a3d7" sprite="Medion (P1)" width="40" height="40" animation="" />
     <item hash="d35e9ab0c9e334a9712b5c3040794765" sprite="Medion (P1)" width="40" height="40" animation="" />
     <item hash="d6b489e0b1d212b494932550670fd440" sprite="Medion (P1)" width="40" height="40" animation="" />
@@ -16303,6 +16277,7 @@
     <item hash="da0c4287f07c8f08c2f2d57fedceb7cc" sprite="Medion (P1)" width="40" height="40" animation="" />
     <item hash="da1a23aa156b2a9be3a12445db769d12" sprite="Medion (P1)" width="40" height="40" animation="" />
     <item hash="da3e39bb4bfbbf47766b970dc66fac39" sprite="Medion (P1)" width="40" height="40" animation="" />
+    <item hash="dc9a846c2425259ea6335d2063dfab67" sprite="Medion (P1)" width="40" height="40" animation="" />
     <item hash="e2fd672c73cf1a551697491b85f13213" sprite="Medion (P1)" width="40" height="40" animation="" />
     <item hash="e4ea2884b7192004266173e40ff7f4d6" sprite="Medion (P1)" width="40" height="40" animation="" />
     <item hash="e67cbc2d8b706918a363ec8240e54650" sprite="Medion (P1)" width="40" height="40" animation="" />
@@ -16313,9 +16288,12 @@
     <item hash="ed968e30543b1c6e44844f2b61a0148b" sprite="Medion (P1)" width="40" height="40" animation="" />
     <item hash="edbcc26be4bcc9938acb624cb05b4a87" sprite="Medion (P1)" width="40" height="40" animation="" />
     <item hash="f05b95341a70eee2cd8a5d3c3a3b2a2f" sprite="Medion (P1)" width="40" height="40" animation="" />
+    <item hash="f1936b32696830e360327e7bf61009d0" sprite="Medion (P1)" width="40" height="40" animation="" />
+    <item hash="f195799b2cecca9bea7ffd78e2a5ec1b" sprite="Medion (P1)" width="40" height="40" animation="" />
     <item hash="f285367af3cb9d0446246054841e72bf" sprite="Medion (P1)" width="40" height="40" animation="" />
     <item hash="f7fa55b1ad5552678b0ecd7f2f18f947" sprite="Medion (P1)" width="40" height="40" animation="" />
     <item hash="f930ca9517e90b5ab5786c7f74bc1540" sprite="Medion (P1)" width="40" height="40" animation="" />
+    <item hash="f9f615ea9baf009654744981129dfdd1" sprite="Medion (P1)" width="40" height="40" animation="" />
     <item hash="fa69fe6ee03e036cead2307d6dcbb255" sprite="Medion (P1)" width="40" height="40" animation="" />
     <item hash="fe5b503f87cf4ee13088ac137c787c56" sprite="Medion (P1)" width="40" height="40" animation="" />
     <item hash="01dcd98d93654f2ceaa76dce2d3ab224" sprite="Medion (P2)" width="40" height="40" animation="" />
@@ -16438,31 +16416,42 @@
     <item hash="04c3d693ceec19edffd94b52bfce352e" sprite="Medion (U)" width="40" height="40" animation="" />
     <item hash="08580ed1925b368774355135d66af354" sprite="Medion (U)" width="40" height="40" animation="" />
     <item hash="0879536f8d7123e3cbd28536f14106d0" sprite="Medion (U)" width="40" height="40" animation="" />
+    <item hash="094dea66c92a0ee3f868770c1dc54991" sprite="Medion (U)" width="40" height="40" animation="" />
     <item hash="0a29b5905d531261f78796a1ca6ec3b6" sprite="Medion (U)" width="40" height="40" animation="" />
     <item hash="0b8a71d46d3b64109f6e7051ea4754b1" sprite="Medion (U)" width="40" height="40" animation="" />
     <item hash="0de4223d3b6b54adbce5b3657f9dafdc" sprite="Medion (U)" width="40" height="40" animation="" />
+    <item hash="1072da5e97ffb9015dea96823c636987" sprite="Medion (U)" width="40" height="40" animation="" />
     <item hash="13b1c02320c0ab569506791157e3da5a" sprite="Medion (U)" width="40" height="40" animation="" />
     <item hash="16381871f918c38bb93cfb5c5a6bf90a" sprite="Medion (U)" width="40" height="40" animation="" />
     <item hash="1cbfadbfd1b5f8eeddb6622b5016b11f" sprite="Medion (U)" width="40" height="40" animation="" />
+    <item hash="1d1cd10fc62b737fd052f0eb1c11fe44" sprite="Medion (U)" width="40" height="40" animation="" />
     <item hash="217cbaca75d1f976de6bae8e3655c0e0" sprite="Medion (U)" width="40" height="40" animation="" />
     <item hash="23bd5b9a9f3ff5dc4c09a9dd66ec9a17" sprite="Medion (U)" width="40" height="40" animation="" />
     <item hash="23eea9d062adb646fc4d3f399c1300f2" sprite="Medion (U)" width="40" height="40" animation="" />
     <item hash="2642640ba8dc61c3247e13c9d5719da4" sprite="Medion (U)" width="40" height="40" animation="" />
     <item hash="29179ef564f649b1b3c31c972868cb5a" sprite="Medion (U)" width="40" height="40" animation="" />
+    <item hash="2ab93f217afd84059dfc7b93c6619a35" sprite="Medion (U)" width="40" height="40" animation="" />
     <item hash="2d1b67d253601b5df4b95e6705a21980" sprite="Medion (U)" width="40" height="40" animation="" />
+    <item hash="2e1bcaf0f3db5c23aa21df8b18329687" sprite="Medion (U)" width="40" height="40" animation="" />
     <item hash="2f54c922fa6b6e0b96d3dfdfb143a1c2" sprite="Medion (U)" width="40" height="40" animation="" />
     <item hash="30f4f85b06440d69ed1cb5c6cfdd054a" sprite="Medion (U)" width="40" height="40" animation="" />
     <item hash="3479079350b40a2d5eaedf8f4b345fe3" sprite="Medion (U)" width="40" height="40" animation="" />
     <item hash="3a2705d047321cdff853e97709b430c8" sprite="Medion (U)" width="40" height="40" animation="" />
+    <item hash="3bb1a3d8bde1d356eb199e1266885dc8" sprite="Medion (U)" width="40" height="40" animation="" />
     <item hash="3d14ce9f4369f6883bc33baabfd50cf0" sprite="Medion (U)" width="40" height="40" animation="" />
     <item hash="3d623dd254da74835c608171392d1d0a" sprite="Medion (U)" width="40" height="40" animation="" />
     <item hash="3d642e79bcd1519bbaab7f27a4151d72" sprite="Medion (U)" width="40" height="40" animation="" />
     <item hash="3e291020d734d8b1af34581b05343739" sprite="Medion (U)" width="40" height="40" animation="" />
+    <item hash="4176bde1fe06685ac7bd652088ae52e3" sprite="Medion (U)" width="40" height="40" animation="" />
     <item hash="4756d01c0f1e27487cadabdc4733d9a5" sprite="Medion (U)" width="40" height="40" animation="" />
     <item hash="4b25763438840b7b3187d74f1da24192" sprite="Medion (U)" width="40" height="40" animation="" />
+    <item hash="4b96f120dae4cceb5debada45040ea32" sprite="Medion (U)" width="40" height="40" animation="" />
+    <item hash="4b983f9df65b2e6c1f9a727c97f700f9" sprite="Medion (U)" width="40" height="40" animation="" />
     <item hash="510d42e5d12a6dc00c248e7884650687" sprite="Medion (U)" width="40" height="40" animation="" />
     <item hash="555853a7a8598a134942d034fbbf6c23" sprite="Medion (U)" width="40" height="40" animation="" />
     <item hash="58ca21732140c20773d442225a757402" sprite="Medion (U)" width="40" height="40" animation="" />
+    <item hash="5f618265f3aa794f95b57c1f8fdfbfeb" sprite="Medion (U)" width="40" height="40" animation="" />
+    <item hash="65035fe9f9070845a76a73f942b0699d" sprite="Medion (U)" width="40" height="40" animation="" />
     <item hash="69a1c7363d658517dc5ca925be3f3ff9" sprite="Medion (U)" width="40" height="40" animation="" />
     <item hash="6f3be95be4bd2148be7c0daf513335ac" sprite="Medion (U)" width="40" height="40" animation="" />
     <item hash="706a759c5c916245c7e1d70c9feaa437" sprite="Medion (U)" width="40" height="40" animation="" />
@@ -16471,25 +16460,33 @@
     <item hash="76a7ba4ed9390718b4951fc3fcf7d3a6" sprite="Medion (U)" width="40" height="40" animation="" />
     <item hash="76d3516602e80a473c8bce1295b74efe" sprite="Medion (U)" width="40" height="40" animation="" />
     <item hash="78579ca629a2f1b597577bda2e373774" sprite="Medion (U)" width="40" height="40" animation="" />
+    <item hash="78590eee46d02d3895be91712db411b6" sprite="Medion (U)" width="40" height="40" animation="" />
     <item hash="7977d94cea8f5cd9810ad6b0366caa36" sprite="Medion (U)" width="40" height="40" animation="" />
     <item hash="7a86eac600689c8704efac2ec4033b3c" sprite="Medion (U)" width="40" height="40" animation="" />
     <item hash="7afb95d25711077a4eb1101ec1337dc8" sprite="Medion (U)" width="40" height="40" animation="" />
     <item hash="7f3e495d5e794066d579a153bee75627" sprite="Medion (U)" width="40" height="40" animation="" />
     <item hash="81207a089a20b49ff60ea358e8c79235" sprite="Medion (U)" width="40" height="40" animation="" />
+    <item hash="82e84b9e7d164f09f6ab7bdd0f2a0611" sprite="Medion (U)" width="40" height="40" animation="" />
+    <item hash="85225a5756b2ba2cd3c2c6aad825d2ea" sprite="Medion (U)" width="40" height="40" animation="" />
     <item hash="85554efe5048d36dd9a283b5ea9d0b6e" sprite="Medion (U)" width="40" height="40" animation="" />
     <item hash="85a0ea7d9a07ebb8b596e7fae6bf6bb6" sprite="Medion (U)" width="40" height="40" animation="" />
     <item hash="85d1ce7bb2fad2bd7a018b93b8795286" sprite="Medion (U)" width="40" height="40" animation="" />
+    <item hash="89ffd2bcc70e2678888d81d6bcd672c8" sprite="Medion (U)" width="40" height="40" animation="" />
     <item hash="8c96cc0d13e329c0e0f0ea87de215d0f" sprite="Medion (U)" width="40" height="40" animation="" />
     <item hash="8e8d8d758c733a7df30b6d49baf7a9de" sprite="Medion (U)" width="40" height="40" animation="" />
     <item hash="934b7745d0423667d779610bab4215fd" sprite="Medion (U)" width="40" height="40" animation="" />
     <item hash="9421270b08c2d2d189e86972720bee02" sprite="Medion (U)" width="40" height="40" animation="" />
     <item hash="9423c37c006c6886aec05489b6fd5142" sprite="Medion (U)" width="40" height="40" animation="" />
     <item hash="9530c55b68cb1affcae13d41c215aba5" sprite="Medion (U)" width="40" height="40" animation="" />
+    <item hash="957d1554d411e948481247462620eca6" sprite="Medion (U)" width="40" height="40" animation="" />
+    <item hash="9972e75995251cd972901c46102ae30e" sprite="Medion (U)" width="40" height="40" animation="" />
     <item hash="9a840d6f14d85bc1562a374e3548c790" sprite="Medion (U)" width="40" height="40" animation="" />
+    <item hash="9bec198b6917a9b2598b4173c1312595" sprite="Medion (U)" width="40" height="40" animation="" />
     <item hash="9fe973249b3cc018060dd93759389c7c" sprite="Medion (U)" width="40" height="40" animation="" />
     <item hash="a2f4d94a2afd1601f47b92604a3b9443" sprite="Medion (U)" width="40" height="40" animation="" />
     <item hash="a423a1f53b7641fc6105504698f5a814" sprite="Medion (U)" width="40" height="40" animation="" />
     <item hash="a7505a95881cd87954fd4e8f5b4a542e" sprite="Medion (U)" width="40" height="40" animation="" />
+    <item hash="ac2604c59b865b5550b9df8e5b6238fb" sprite="Medion (U)" width="40" height="40" animation="" />
     <item hash="aca59170a4f7b7a2906939f40a417f06" sprite="Medion (U)" width="40" height="40" animation="" />
     <item hash="b184693aa46f438de5fd81a981d2c301" sprite="Medion (U)" width="40" height="40" animation="" />
     <item hash="b3ca542ffb5ef19cf50e24c541dc1b08" sprite="Medion (U)" width="40" height="40" animation="" />
@@ -16500,6 +16497,7 @@
     <item hash="b95409f3488f462543aa5edac2bc090d" sprite="Medion (U)" width="40" height="40" animation="" />
     <item hash="bbed610ac22bfae2bfbbcb392a924ac9" sprite="Medion (U)" width="40" height="40" animation="" />
     <item hash="be17e3932ce509c6930cceb610dc8a6c" sprite="Medion (U)" width="40" height="40" animation="" />
+    <item hash="be45829dff738ed95169cf4cbf08a2b7" sprite="Medion (U)" width="40" height="40" animation="" />
     <item hash="c41f147518d296502f4c2b12554fc9a5" sprite="Medion (U)" width="40" height="40" animation="" />
     <item hash="cb4d6a1a8dd0e3dcc34599bf348df1c8" sprite="Medion (U)" width="40" height="40" animation="" />
     <item hash="cea06aefebe16e2d5c6bf7c1cf950f95" sprite="Medion (U)" width="40" height="40" animation="" />
@@ -16511,6 +16509,7 @@
     <item hash="de5189ceed2f7aad0c3a2b66f62935af" sprite="Medion (U)" width="40" height="40" animation="" />
     <item hash="de62de514ccdc025b63bdea2602878c4" sprite="Medion (U)" width="40" height="40" animation="" />
     <item hash="df1c3e94c2836b90098a72e7eb8a617a" sprite="Medion (U)" width="40" height="40" animation="" />
+    <item hash="e04776e761befff4ab44288abb282d27" sprite="Medion (U)" width="40" height="40" animation="" />
     <item hash="e0922ce69706783f3c429553273f8e91" sprite="Medion (U)" width="40" height="40" animation="" />
     <item hash="e13ac4c9d47fee637d93761680aa99a4" sprite="Medion (U)" width="40" height="40" animation="" />
     <item hash="e17328fc8a37c392ddf052a87b4489c1" sprite="Medion (U)" width="40" height="40" animation="" />
@@ -16518,6 +16517,7 @@
     <item hash="e38f97e36bd6b2f4a68cdc4aad2b0515" sprite="Medion (U)" width="40" height="40" animation="" />
     <item hash="e404a2a049888e3a661eec03751f2bad" sprite="Medion (U)" width="40" height="40" animation="" />
     <item hash="e7877e1880660b19f6c4f1b0d72ed59d" sprite="Medion (U)" width="40" height="40" animation="" />
+    <item hash="e9cee1ee88a46b78a99502394167cead" sprite="Medion (U)" width="40" height="40" animation="" />
     <item hash="ebd4768138d9696e260638698a94f6bf" sprite="Medion (U)" width="40" height="40" animation="" />
     <item hash="ed7940752241c4ce09e89ab720d685a3" sprite="Medion (U)" width="40" height="40" animation="" />
     <item hash="f393a3bfd07cbf4a9ed50f99c34dd904" sprite="Medion (U)" width="40" height="40" animation="" />
@@ -24216,22 +24216,10 @@
     <item hash="e74a6427bd7ae58d021437a26b76574d" sprite="Waitress w/ Black Hair" width="40" height="40" animation="" />
     <item hash="fb5e61763837a0632b37b52f1fcbdebb" sprite="Waitress w/ Black Hair" width="40" height="40" animation="" />
     <item hash="0280fbab99f08eed8682649bee76893c" sprite="Waltz" width="48" height="40" animation="" />
-    <item hash="1cbd272dd842603dc43e5f9ba29c7a77" sprite="Waltz" width="48" height="40" animation="" />
     <item hash="1f5c8f1ca660ef4d5035849d19c9f66e" sprite="Waltz" width="48" height="40" animation="" />
-    <item hash="27904a8161678c5d8093ce640d197af9" sprite="Waltz" width="48" height="40" animation="" />
-    <item hash="2bcfc7b169c0a0907b828ce83bff4cff" sprite="Waltz" width="48" height="40" animation="" />
-    <item hash="2cce25207284f36ded6c5261cf45aeca" sprite="Waltz" width="48" height="40" animation="" />
-    <item hash="32e4d69487ad75396b856134d0ed2091" sprite="Waltz" width="48" height="40" animation="" />
     <item hash="33bd0c710afabcc66bac069a98544563" sprite="Waltz" width="48" height="40" animation="" />
-    <item hash="4991198b679827e62dd36a76983242f5" sprite="Waltz" width="48" height="40" animation="" />
-    <item hash="65079fc3aacd8ff6b56c606e2de78a44" sprite="Waltz" width="48" height="40" animation="" />
-    <item hash="6d440603c064acfe639d2479d52baf9d" sprite="Waltz" width="48" height="40" animation="" />
-    <item hash="6ee528293be7f86c81286f7e6a44abca" sprite="Waltz" width="48" height="40" animation="" />
-    <item hash="7582680f9370e126b7cbee5b9f7161bd" sprite="Waltz" width="48" height="40" animation="" />
     <item hash="9c2431dbe5ce9634aabb946b08399930" sprite="Waltz" width="48" height="40" animation="" />
     <item hash="c1b7b22649dcc75f902c0d2f242a7476" sprite="Waltz" width="48" height="40" animation="" />
-    <item hash="c332fe933c171475a7bfeaf18557dbdb" sprite="Waltz" width="48" height="40" animation="" />
-    <item hash="c6af8187e09da0eece41850bd314fc7c" sprite="Waltz" width="48" height="40" animation="" />
     <item hash="d6decc9c9891161ba45248b37e147221" sprite="Waltz" width="48" height="40" animation="" />
     <item hash="efc0051263c106023f729e8960115f81" sprite="Waltz" width="48" height="40" animation="" />
     <item hash="f69e8247c89d1bf08632214e1a571097" sprite="Waltz" width="48" height="40" animation="" />
@@ -24380,14 +24368,19 @@
     <item hash="17610f8fefde0a7816b2af7c7e24e038" sprite="Waltz (U)" width="48" height="40" animation="" />
     <item hash="1c8acf6896752fffc1dc702b182922af" sprite="Waltz (U)" width="48" height="40" animation="" />
     <item hash="1cb535376f063b4c4a7708f2a23fa5f3" sprite="Waltz (U)" width="48" height="40" animation="" />
+    <item hash="1cbd272dd842603dc43e5f9ba29c7a77" sprite="Waltz (U)" width="48" height="40" animation="" />
     <item hash="1e14581381243fbfdcb16b7771ba6d31" sprite="Waltz (U)" width="48" height="40" animation="" />
     <item hash="22731d396fc14cab92294e75435de4b6" sprite="Waltz (U)" width="48" height="40" animation="" />
     <item hash="23d2253db7475fe0e153d2fb56ed0ab5" sprite="Waltz (U)" width="48" height="40" animation="" />
+    <item hash="27904a8161678c5d8093ce640d197af9" sprite="Waltz (U)" width="48" height="40" animation="" />
     <item hash="27a342119ff22f5417834ee9d6772b2b" sprite="Waltz (U)" width="48" height="40" animation="" />
     <item hash="2900c188a52ac264d3a988444b34677e" sprite="Waltz (U)" width="48" height="40" animation="" />
     <item hash="2b2279b81e368d44c8aab2d24eafc867" sprite="Waltz (U)" width="48" height="40" animation="" />
+    <item hash="2bcfc7b169c0a0907b828ce83bff4cff" sprite="Waltz (U)" width="48" height="40" animation="" />
     <item hash="2c7ee85eae12432660a7f6946523af6b" sprite="Waltz (U)" width="48" height="40" animation="" />
+    <item hash="2cce25207284f36ded6c5261cf45aeca" sprite="Waltz (U)" width="48" height="40" animation="" />
     <item hash="30364777b07107aac0e674b06e3157f7" sprite="Waltz (U)" width="48" height="40" animation="" />
+    <item hash="32e4d69487ad75396b856134d0ed2091" sprite="Waltz (U)" width="48" height="40" animation="" />
     <item hash="343e31ea41216f77f56600345a01a828" sprite="Waltz (U)" width="48" height="40" animation="" />
     <item hash="356bd1f5e7c92c841ea70744cd17efbe" sprite="Waltz (U)" width="48" height="40" animation="" />
     <item hash="3584d3fde6612f4e4aed4172baaa3f6f" sprite="Waltz (U)" width="48" height="40" animation="" />
@@ -24402,6 +24395,7 @@
     <item hash="45ba2aa9717a21d6e86aa27d7bebe925" sprite="Waltz (U)" width="48" height="40" animation="" />
     <item hash="46f870b306a745fe3f3190f1f25fb894" sprite="Waltz (U)" width="48" height="40" animation="" />
     <item hash="47510d28352c83ea99303408fa46ad9b" sprite="Waltz (U)" width="48" height="40" animation="" />
+    <item hash="4991198b679827e62dd36a76983242f5" sprite="Waltz (U)" width="48" height="40" animation="" />
     <item hash="4fec73e3562106962502aaf7ae898e05" sprite="Waltz (U)" width="48" height="40" animation="" />
     <item hash="54796c4a4082eaf99a5a553f4d007682" sprite="Waltz (U)" width="48" height="40" animation="" />
     <item hash="556e4d8d7b92430fa6429764233454cc" sprite="Waltz (U)" width="48" height="40" animation="" />
@@ -24410,10 +24404,14 @@
     <item hash="5c9d1fa0f5558a39a74edf03552d7f86" sprite="Waltz (U)" width="48" height="40" animation="" />
     <item hash="5e080242a8f9a09d51cf790841d0979c" sprite="Waltz (U)" width="48" height="40" animation="" />
     <item hash="5fabe40c567c02197da6904b35942076" sprite="Waltz (U)" width="48" height="40" animation="" />
+    <item hash="65079fc3aacd8ff6b56c606e2de78a44" sprite="Waltz (U)" width="48" height="40" animation="" />
     <item hash="6ab58513e079e68846001f2c097557d3" sprite="Waltz (U)" width="48" height="40" animation="" />
     <item hash="6ccf7e610e0eb06569e1e98b650a4346" sprite="Waltz (U)" width="48" height="40" animation="" />
+    <item hash="6d440603c064acfe639d2479d52baf9d" sprite="Waltz (U)" width="48" height="40" animation="" />
+    <item hash="6ee528293be7f86c81286f7e6a44abca" sprite="Waltz (U)" width="48" height="40" animation="" />
     <item hash="72020aff1fcdb25c82642a36125432e5" sprite="Waltz (U)" width="48" height="40" animation="" />
     <item hash="7456d18562cc9b9349086ad073313ee9" sprite="Waltz (U)" width="48" height="40" animation="" />
+    <item hash="7582680f9370e126b7cbee5b9f7161bd" sprite="Waltz (U)" width="48" height="40" animation="" />
     <item hash="7860308bdf68cd0120fc6635b19a7337" sprite="Waltz (U)" width="48" height="40" animation="" />
     <item hash="7ecccf8a4db283a61091f5b68afedda3" sprite="Waltz (U)" width="48" height="40" animation="" />
     <item hash="7eef3f9bea1e45145083a221971e45bc" sprite="Waltz (U)" width="48" height="40" animation="" />
@@ -24439,7 +24437,9 @@
     <item hash="b988f583ba25e177f6d1014cda43d8f5" sprite="Waltz (U)" width="48" height="40" animation="" />
     <item hash="c05b049920e1f98f17e1c712428b3e2f" sprite="Waltz (U)" width="48" height="40" animation="" />
     <item hash="c06c9d4ab9df9d8745d35293b9d1e8e8" sprite="Waltz (U)" width="48" height="40" animation="" />
+    <item hash="c332fe933c171475a7bfeaf18557dbdb" sprite="Waltz (U)" width="48" height="40" animation="" />
     <item hash="c4a0fc0ab5754b03f3601d47b44b06e6" sprite="Waltz (U)" width="48" height="40" animation="" />
+    <item hash="c6af8187e09da0eece41850bd314fc7c" sprite="Waltz (U)" width="48" height="40" animation="" />
     <item hash="c75a12517b91a15de8bc33956680fb69" sprite="Waltz (U)" width="48" height="40" animation="" />
     <item hash="c871f5bffff2f190902525ce7cb97c51" sprite="Waltz (U)" width="48" height="40" animation="" />
     <item hash="d0df7d4744caba64ab2cce12a666497a" sprite="Waltz (U)" width="48" height="40" animation="" />
