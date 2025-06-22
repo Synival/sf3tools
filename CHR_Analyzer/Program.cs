@@ -9,6 +9,7 @@ using SF3.Models.Files.CHR;
 using SF3.Models.Structs.CHR;
 using SF3.NamedValues;
 using SF3.Types;
+using SF3.Utils;
 
 namespace CHR_Analyzer {
     public class Program {
@@ -173,26 +174,10 @@ namespace CHR_Analyzer {
             }
 
             Console.WriteLine("Writing new 'SpriteFramesByHash.xml'...");
-            var texInfos = s_framesByHash.Values
-                .OrderBy(x => x.FrameInfo.SpriteName)
-                .ThenBy(x => x.FrameInfo.Width)
-                .ThenBy(x => x.FrameInfo.Height)
-                .ThenBy(x => x.FrameInfo.AnimationName)
-                .ThenBy(x => x.FrameInfo.TextureHash)
-                .ToArray();
-
             _ = Directory.CreateDirectory(c_pathOut);
-            using (var file = File.OpenWrite(Path.Combine(c_pathOut, "SpriteFramesByHash.xml"))) {
-                using (var stream = new StreamWriter(file)) {
-                    stream.WriteLine("<?xml version=\"1.0\" encoding=\"utf-8\" ?>");
-                    stream.WriteLine("<items>");
-                    foreach (var ti in texInfos) {
-                        var fi = ti.FrameInfo;
-                        stream.WriteLine($"    <item hash=\"{fi.TextureHash}\" sprite=\"{fi.SpriteName}\" width=\"{fi.Width}\" height=\"{fi.Height}\" animation=\"{fi.AnimationName}\" />");
-                    }
-                    stream.WriteLine("</items>");
-                }
-            }
+            using (var file = File.OpenWrite(Path.Combine(c_pathOut, "SpriteFramesByHash.xml")))
+                using (var stream = new StreamWriter(file))
+                    SpriteFrameTextueUtils.WriteSpriteFramesByHashXML(stream);
 
             var totalCount = matchSet.Count + nomatchSet.Count;
 
@@ -215,6 +200,14 @@ namespace CHR_Analyzer {
             Console.WriteLine("| DUMPING IMAGES                                  |");
             Console.WriteLine("===================================================");
             Console.WriteLine("");
+
+            var texInfos = s_framesByHash.Values
+                .OrderBy(x => x.FrameInfo.SpriteName)
+                .ThenBy(x => x.FrameInfo.Width)
+                .ThenBy(x => x.FrameInfo.Height)
+                .ThenBy(x => x.FrameInfo.AnimationName)
+                .ThenBy(x => x.FrameInfo.TextureHash)
+                .ToArray();
 
             _ = Directory.CreateDirectory(c_pathOut);
             foreach (var texInfo in texInfos) {

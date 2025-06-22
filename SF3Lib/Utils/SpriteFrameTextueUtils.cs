@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Xml;
 using SF3.Models.Structs.CHR;
 
@@ -49,6 +50,23 @@ namespace SF3.Utils {
                     }
                 }
             }
+        }
+
+        public static void WriteSpriteFramesByHashXML(StreamWriter stream) {
+            var frameInfos = s_frameTextureInfosByHash.Values
+                .OrderBy(x => x.SpriteName)
+                .ThenBy(x => x.Width)
+                .ThenBy(x => x.Height)
+                .ThenBy(x => x.AnimationName)
+                .ThenBy(x => x.TextureHash)
+                .ToArray();
+
+            stream.NewLine = "\n";
+            stream.WriteLine("<?xml version=\"1.0\" encoding=\"utf-8\" ?>");
+            stream.WriteLine("<items>");
+            foreach (var fi in frameInfos)
+                stream.WriteLine($"    <item hash=\"{fi.TextureHash}\" sprite=\"{fi.SpriteName}\" width=\"{fi.Width}\" height=\"{fi.Height}\" animation=\"{fi.AnimationName}\" />");
+            stream.WriteLine("</items>");
         }
     }
 }

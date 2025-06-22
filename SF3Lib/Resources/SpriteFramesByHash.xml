@@ -11004,9 +11004,6 @@
     <item hash="2cc2db4d2d61e132702faaee3fc37092" sprite="Imperial Knight" width="48" height="40" animation="" />
     <item hash="37410017467ef022eba787bb55dc2e86" sprite="Imperial Knight" width="48" height="40" animation="" />
     <item hash="374c26420e1d22479e59f1db819d6fd3" sprite="Imperial Knight" width="48" height="40" animation="" />
-    <item hash="3ba9e6c9c157e95470d4a2864dba2674" sprite="Imperial Knight" width="48" height="40" animation="" />
-    <item hash="3ffa83d978db7f7b4f4eefd2ecf81d4a" sprite="Imperial Knight" width="48" height="40" animation="" />
-    <item hash="4cdba96ef462a24cdd43a31678d0cb73" sprite="Imperial Knight" width="48" height="40" animation="" />
     <item hash="51bfd4ad0f562df58e51d1c70bd448a2" sprite="Imperial Knight" width="48" height="40" animation="" />
     <item hash="599cae9b537f01567e16ba95478d0d9b" sprite="Imperial Knight" width="48" height="40" animation="" />
     <item hash="61a2601cc1dc5591d54f295f6a359d70" sprite="Imperial Knight" width="48" height="40" animation="" />
@@ -11014,20 +11011,23 @@
     <item hash="6e32f97f19ed678c075629a851dd1df7" sprite="Imperial Knight" width="48" height="40" animation="" />
     <item hash="732ca4fc386a71d92042ec1adadb625e" sprite="Imperial Knight" width="48" height="40" animation="" />
     <item hash="7bdac6ce0b20ee78d7fc4c40769cb6b2" sprite="Imperial Knight" width="48" height="40" animation="" />
-    <item hash="7cce2f3e8e0e865b7a224fa9934a886b" sprite="Imperial Knight" width="48" height="40" animation="" />
-    <item hash="8cffdbe3e3a1522019c6855836c6df2d" sprite="Imperial Knight" width="48" height="40" animation="" />
     <item hash="997ff5f7c44c5d220ee37263e1ddf429" sprite="Imperial Knight" width="48" height="40" animation="" />
     <item hash="9ae535b8963528694f549e8b593fa4e2" sprite="Imperial Knight" width="48" height="40" animation="" />
     <item hash="9c1dea507fdf8bdd37b8a9cbef4f0dab" sprite="Imperial Knight" width="48" height="40" animation="" />
     <item hash="b619fbecd6d5a8ff36b82a1c46d0e6ae" sprite="Imperial Knight" width="48" height="40" animation="" />
     <item hash="b6648446bba2a31cdbfc7fbc3a3b0cc2" sprite="Imperial Knight" width="48" height="40" animation="" />
     <item hash="c03e7445e4c44e071fdd7fe6445738f8" sprite="Imperial Knight" width="48" height="40" animation="" />
-    <item hash="d578ec18d75723d6d986c321793cde0f" sprite="Imperial Knight" width="48" height="40" animation="" />
     <item hash="e03fb29542d617a293b33634296c7f2f" sprite="Imperial Knight" width="48" height="40" animation="" />
     <item hash="e44248a4eff1bff8a9472c1d4b49d755" sprite="Imperial Knight" width="48" height="40" animation="" />
-    <item hash="e6eceb56297344b557643c9139ffe8eb" sprite="Imperial Knight" width="48" height="40" animation="" />
     <item hash="fa1965f0c7c70ae5b63521b92a4a733e" sprite="Imperial Knight" width="48" height="40" animation="" />
     <item hash="ff7b50baf58c54180fd3a434c8e8a9dd" sprite="Imperial Knight" width="48" height="40" animation="" />
+    <item hash="3ba9e6c9c157e95470d4a2864dba2674" sprite="Imperial Knight" width="48" height="40" animation="Idle" />
+    <item hash="d578ec18d75723d6d986c321793cde0f" sprite="Imperial Knight" width="48" height="40" animation="Idle" />
+    <item hash="3ffa83d978db7f7b4f4eefd2ecf81d4a" sprite="Imperial Knight" width="48" height="40" animation="Idle|Walking" />
+    <item hash="4cdba96ef462a24cdd43a31678d0cb73" sprite="Imperial Knight" width="48" height="40" animation="Walking" />
+    <item hash="7cce2f3e8e0e865b7a224fa9934a886b" sprite="Imperial Knight" width="48" height="40" animation="Walking" />
+    <item hash="8cffdbe3e3a1522019c6855836c6df2d" sprite="Imperial Knight" width="48" height="40" animation="Walking" />
+    <item hash="e6eceb56297344b557643c9139ffe8eb" sprite="Imperial Knight" width="48" height="40" animation="Walking" />
     <item hash="0ccf6229dff2ccd780d0e2763ad6e4bb" sprite="Imperial Mage" width="40" height="40" animation="" />
     <item hash="0f042d24ad6c98a30356fa0f7809ac88" sprite="Imperial Mage" width="40" height="40" animation="" />
     <item hash="198080efaf903f8c1dcbac796f4fc6ae" sprite="Imperial Mage" width="40" height="40" animation="" />
@@ -16580,25 +16580,17 @@
     <item hash="4ff96df672b4023bc8498d94f4422f25" sprite="Mercenary" width="40" height="40" animation="" />
     <item hash="504af8a8f753dcaf3192a8ea78e55dcf" sprite="Mercenary" width="40" height="40" animation="" />
     <item hash="52630aa044c2dc11fb7d40ffa270bb24" sprite="Mercenary" width="40" height="40" animation="" />
-    <item hash="563e3f5ad6d6c7b296a04eacd7e20fe5" sprite="Mercenary" width="40" height="40" animation="" />
     <item hash="5e0f581b383fb539ab46ba084525159e" sprite="Mercenary" width="40" height="40" animation="" />
     <item hash="61340fe1eb665862ec7226fcd4cd97bb" sprite="Mercenary" width="40" height="40" animation="" />
-    <item hash="64ec6293c2eb9055e70e1c11e1ddea2c" sprite="Mercenary" width="40" height="40" animation="" />
     <item hash="717f604d68539b4532aaa5c380a95c75" sprite="Mercenary" width="40" height="40" animation="" />
     <item hash="733ab739f5428433d3e5d52b0c2e3cd2" sprite="Mercenary" width="40" height="40" animation="" />
     <item hash="7628bc4455156f1c62e56d4f6bfe4eaf" sprite="Mercenary" width="40" height="40" animation="" />
-    <item hash="8674ad2034306bf217836f49df1cbe1c" sprite="Mercenary" width="40" height="40" animation="" />
     <item hash="867bbeab5c85630b9ac0f28133dbd57d" sprite="Mercenary" width="40" height="40" animation="" />
     <item hash="890193f08b3bb30b9a210a2f2fc251e4" sprite="Mercenary" width="40" height="40" animation="" />
     <item hash="8fc782524280e0b815704fe430f9cc83" sprite="Mercenary" width="40" height="40" animation="" />
-    <item hash="96e5c9c5162c6bfd20edf4cfbb311991" sprite="Mercenary" width="40" height="40" animation="" />
     <item hash="99baa7ede6b691ff52e64a19ac4f8207" sprite="Mercenary" width="40" height="40" animation="" />
     <item hash="a0892e4d5d83997dc28e9bd50956f5e8" sprite="Mercenary" width="40" height="40" animation="" />
-    <item hash="a5ebdd787d97ad71904bda24224f041a" sprite="Mercenary" width="40" height="40" animation="" />
-    <item hash="ad80251ea3975966e40aa14045d40b53" sprite="Mercenary" width="40" height="40" animation="" />
     <item hash="b92cbbe94bc17523a76ee45d8844b064" sprite="Mercenary" width="40" height="40" animation="" />
-    <item hash="bad910deb267630bdf296c69f11ffe4d" sprite="Mercenary" width="40" height="40" animation="" />
-    <item hash="c080404cc0ab631e9eba6ff917889790" sprite="Mercenary" width="40" height="40" animation="" />
     <item hash="c310bf36b574e50f83380bd1793bfb26" sprite="Mercenary" width="40" height="40" animation="" />
     <item hash="c5a3d56215791b1fae5b57e6e6da23bb" sprite="Mercenary" width="40" height="40" animation="" />
     <item hash="cfcb55d793c500f3be10a0759138377f" sprite="Mercenary" width="40" height="40" animation="" />
@@ -16606,6 +16598,14 @@
     <item hash="dcd17c2ea7ce0d8e34028628f132adb2" sprite="Mercenary" width="40" height="40" animation="" />
     <item hash="deee7ac7fb9281582814c7a19c2c7b1d" sprite="Mercenary" width="40" height="40" animation="" />
     <item hash="ecd7beaf1973a782c3234827f3b5ce6e" sprite="Mercenary" width="40" height="40" animation="" />
+    <item hash="96e5c9c5162c6bfd20edf4cfbb311991" sprite="Mercenary" width="40" height="40" animation="Idle" />
+    <item hash="ad80251ea3975966e40aa14045d40b53" sprite="Mercenary" width="40" height="40" animation="Idle" />
+    <item hash="bad910deb267630bdf296c69f11ffe4d" sprite="Mercenary" width="40" height="40" animation="Idle" />
+    <item hash="563e3f5ad6d6c7b296a04eacd7e20fe5" sprite="Mercenary" width="40" height="40" animation="Walking" />
+    <item hash="64ec6293c2eb9055e70e1c11e1ddea2c" sprite="Mercenary" width="40" height="40" animation="Walking" />
+    <item hash="8674ad2034306bf217836f49df1cbe1c" sprite="Mercenary" width="40" height="40" animation="Walking" />
+    <item hash="a5ebdd787d97ad71904bda24224f041a" sprite="Mercenary" width="40" height="40" animation="Walking" />
+    <item hash="c080404cc0ab631e9eba6ff917889790" sprite="Mercenary" width="40" height="40" animation="Walking" />
     <item hash="05e9c4ef3a21cc27d722c49279c6dba7" sprite="Messenger Soldier" width="40" height="40" animation="" />
     <item hash="096f76485303c91ad88a16e5739b39b1" sprite="Messenger Soldier" width="40" height="40" animation="" />
     <item hash="0d2a1664d42d49f834e7f60ef357ca84" sprite="Messenger Soldier" width="40" height="40" animation="" />
@@ -20686,13 +20686,11 @@
     <item hash="36a69eced9f4b9545b44fbcbd0d82488" sprite="Saraband Guard" width="40" height="40" animation="" />
     <item hash="41b7ab94ce30813b1cac5b75a899b0ff" sprite="Saraband Guard" width="40" height="40" animation="" />
     <item hash="45ec207f5d2270d95f769708687e2be6" sprite="Saraband Guard" width="40" height="40" animation="" />
-    <item hash="4b9b30d0b44da76c0633db4b2231d957" sprite="Saraband Guard" width="40" height="40" animation="" />
     <item hash="598109c2bb8e9f7be4ef1ab3c777c954" sprite="Saraband Guard" width="40" height="40" animation="" />
     <item hash="5f7405fe1678e82731848211993c1005" sprite="Saraband Guard" width="40" height="40" animation="" />
     <item hash="623d7c4b93761265f85c779a28b868b1" sprite="Saraband Guard" width="40" height="40" animation="" />
     <item hash="65d5bbfa52513dcda7bc098da700c401" sprite="Saraband Guard" width="40" height="40" animation="" />
     <item hash="6881ca8e82da286f3fe92c8d97efb9b2" sprite="Saraband Guard" width="40" height="40" animation="" />
-    <item hash="70cafd2f5406512c2ae28b9e9c813221" sprite="Saraband Guard" width="40" height="40" animation="" />
     <item hash="7817c05ae69767d910807ee1104135b2" sprite="Saraband Guard" width="40" height="40" animation="" />
     <item hash="794373c4cc7377d5be1d0292f846edfc" sprite="Saraband Guard" width="40" height="40" animation="" />
     <item hash="7f46fee47805421a85e7f910a4a570de" sprite="Saraband Guard" width="40" height="40" animation="" />
@@ -20700,11 +20698,9 @@
     <item hash="827b04cad9a7df16648b496918fe3332" sprite="Saraband Guard" width="40" height="40" animation="" />
     <item hash="868826f51894723d368b821846fe9e76" sprite="Saraband Guard" width="40" height="40" animation="" />
     <item hash="87a7e01f4e426b3cff51454717a59498" sprite="Saraband Guard" width="40" height="40" animation="" />
-    <item hash="92cd40db34e737800d54f9ce09107f5f" sprite="Saraband Guard" width="40" height="40" animation="" />
     <item hash="947ed82005efd3ff5dec9a497ec7df7d" sprite="Saraband Guard" width="40" height="40" animation="" />
     <item hash="991f3cd8a9643803bfc565dc66fc3fa0" sprite="Saraband Guard" width="40" height="40" animation="" />
     <item hash="993df7c70a52b6323dbbb5e01bb42fd8" sprite="Saraband Guard" width="40" height="40" animation="" />
-    <item hash="9e0655ead8052e6a658219288fc34b4c" sprite="Saraband Guard" width="40" height="40" animation="" />
     <item hash="a38cdaccf4dd51b8fb7ebd07870a42b5" sprite="Saraband Guard" width="40" height="40" animation="" />
     <item hash="a9feb7dda2c97ec2c87bfc7c6a6553bc" sprite="Saraband Guard" width="40" height="40" animation="" />
     <item hash="b5bf21b2de6b96857b2faec8d94150f1" sprite="Saraband Guard" width="40" height="40" animation="" />
@@ -20718,14 +20714,13 @@
     <item hash="cc7f9ae87fcf2a7fbbea4e1557bcc410" sprite="Saraband Guard" width="40" height="40" animation="" />
     <item hash="cd9de3c248f1082f64e5df99f47cacae" sprite="Saraband Guard" width="40" height="40" animation="" />
     <item hash="d0f8b76ee7451876ba84f963c5d13d4a" sprite="Saraband Guard" width="40" height="40" animation="" />
-    <item hash="d7aa306209bd3a1da9865650593f9c20" sprite="Saraband Guard" width="40" height="40" animation="" />
-    <item hash="dd7212dac1fef17fb165a3dfe8b1fd9d" sprite="Saraband Guard" width="40" height="40" animation="" />
     <item hash="e4bb59f4828c872938c64149650e23fb" sprite="Saraband Guard" width="40" height="40" animation="" />
     <item hash="e880f07a418f6ce8e06faba111fa09c0" sprite="Saraband Guard" width="40" height="40" animation="" />
     <item hash="e89e23dcd58e3bb29df833cf9fcc2cf8" sprite="Saraband Guard" width="40" height="40" animation="" />
-    <item hash="ea3a8fa1a2eee7aa187c9192b07bf41c" sprite="Saraband Guard" width="40" height="40" animation="" />
-    <item hash="f1c6b31a7cc5ca648c75bd208298ffb8" sprite="Saraband Guard" width="40" height="40" animation="" />
     <item hash="fa1436e7fc2f2e78c9a45d41445eb2ef" sprite="Saraband Guard" width="40" height="40" animation="" />
+    <item hash="92cd40db34e737800d54f9ce09107f5f" sprite="Saraband Guard" width="40" height="40" animation="Idle" />
+    <item hash="9e0655ead8052e6a658219288fc34b4c" sprite="Saraband Guard" width="40" height="40" animation="Idle" />
+    <item hash="ea3a8fa1a2eee7aa187c9192b07bf41c" sprite="Saraband Guard" width="40" height="40" animation="Idle" />
     <item hash="00c6d0a50f4effadc1388dd8d4a54d42" sprite="Saraband Guard" width="40" height="40" animation="In Chair" />
     <item hash="498703ff0f713de8a7a6a4f7c5661757" sprite="Saraband Guard" width="40" height="40" animation="In Chair" />
     <item hash="58b2d04a84f7347aec90bf2643a4ebc8" sprite="Saraband Guard" width="40" height="40" animation="In Chair" />
@@ -20738,6 +20733,11 @@
     <item hash="bb8617be65bb6c4aee202f1a81e4bd19" sprite="Saraband Guard" width="40" height="40" animation="In Chair" />
     <item hash="d9acb0e7c99128b9cd3653d58012a886" sprite="Saraband Guard" width="40" height="40" animation="In Chair" />
     <item hash="fdd13e0b9982d859df78adbc25c78623" sprite="Saraband Guard" width="40" height="40" animation="In Chair" />
+    <item hash="4b9b30d0b44da76c0633db4b2231d957" sprite="Saraband Guard" width="40" height="40" animation="Walking" />
+    <item hash="70cafd2f5406512c2ae28b9e9c813221" sprite="Saraband Guard" width="40" height="40" animation="Walking" />
+    <item hash="d7aa306209bd3a1da9865650593f9c20" sprite="Saraband Guard" width="40" height="40" animation="Walking" />
+    <item hash="dd7212dac1fef17fb165a3dfe8b1fd9d" sprite="Saraband Guard" width="40" height="40" animation="Walking" />
+    <item hash="f1c6b31a7cc5ca648c75bd208298ffb8" sprite="Saraband Guard" width="40" height="40" animation="Walking" />
     <item hash="02debfa171d941ce4d13704d8883c51f" sprite="Saraband Guard" width="48" height="40" animation="Dead w/ Arrows in Back" />
     <item hash="2004ffe2c92a78a9a2233d2900edf717" sprite="Saraband Guard" width="48" height="40" animation="Dead w/ Arrows in Back" />
     <item hash="6ed7854507ced4d643efd70ea40f45c7" sprite="Saraband Guard" width="48" height="40" animation="Dead w/ Arrows in Back" />
@@ -21248,16 +21248,13 @@
     <item hash="5662acdca6b11a0f86801d716a9c1232" sprite="Shiraf" width="48" height="40" animation="Dying" />
     <item hash="e09d6047bc3b2824811645fbd856fadb" sprite="Shiraf" width="48" height="40" animation="Dying" />
     <item hash="03fd8b3410789a0950687ee80d00bb02" sprite="Silver Knight" width="48" height="40" animation="" />
-    <item hash="06242bae1a66d7931d7eabd5c930eb62" sprite="Silver Knight" width="48" height="40" animation="" />
     <item hash="09b9f3be1861f424155448531263f5cd" sprite="Silver Knight" width="48" height="40" animation="" />
-    <item hash="0d68c692470c01a40c446ee2c4ba03bd" sprite="Silver Knight" width="48" height="40" animation="" />
     <item hash="112889d54bc995ba46dd8a835c91da65" sprite="Silver Knight" width="48" height="40" animation="" />
     <item hash="1dbb7fde3d2e36c29ad4de61fefeb14e" sprite="Silver Knight" width="48" height="40" animation="" />
     <item hash="1e8994a4bdf181180129b3ca2e80b65f" sprite="Silver Knight" width="48" height="40" animation="" />
     <item hash="235489deafe76f09ce4c614ade5bb154" sprite="Silver Knight" width="48" height="40" animation="" />
     <item hash="2770c3ab3468be2b66e64e90fe7e2076" sprite="Silver Knight" width="48" height="40" animation="" />
     <item hash="27b40ba7e437b5665feeeb48582340f2" sprite="Silver Knight" width="48" height="40" animation="" />
-    <item hash="4c55d4c577329bba174c0111b083b003" sprite="Silver Knight" width="48" height="40" animation="" />
     <item hash="51ae8924f72375d75948b325532ca573" sprite="Silver Knight" width="48" height="40" animation="" />
     <item hash="5487dc9c377acef0fb923ec5fd272835" sprite="Silver Knight" width="48" height="40" animation="" />
     <item hash="54a799207847f38b6c575d352a9a6085" sprite="Silver Knight" width="48" height="40" animation="" />
@@ -21273,20 +21270,23 @@
     <item hash="ad6613d9abace2ee570102b1931d27c0" sprite="Silver Knight" width="48" height="40" animation="" />
     <item hash="af0a1e5bcdc40f2054edf463b7fbe65e" sprite="Silver Knight" width="48" height="40" animation="" />
     <item hash="b920862e6975498e9e80300046ef6225" sprite="Silver Knight" width="48" height="40" animation="" />
-    <item hash="c8ff08fa280cc5c1d10f389c50048e7e" sprite="Silver Knight" width="48" height="40" animation="" />
-    <item hash="cc1cf91be15e5ce35a30d3e053e29f9b" sprite="Silver Knight" width="48" height="40" animation="" />
     <item hash="cd6f1504c9c47d9268dc49238008a472" sprite="Silver Knight" width="48" height="40" animation="" />
-    <item hash="ce121dbcde1ef0452f72b3af4f4146a8" sprite="Silver Knight" width="48" height="40" animation="" />
     <item hash="cec3a640f430bf16314132ce6478bbc8" sprite="Silver Knight" width="48" height="40" animation="" />
     <item hash="d0c11f7675a822e70413f7b975f8b1d9" sprite="Silver Knight" width="48" height="40" animation="" />
     <item hash="db24614a9357280a2128bea96e9f4651" sprite="Silver Knight" width="48" height="40" animation="" />
     <item hash="e25554172b3ebfa0660a2fbec46268c1" sprite="Silver Knight" width="48" height="40" animation="" />
     <item hash="e34104f856dc2b412e01d589be019f6c" sprite="Silver Knight" width="48" height="40" animation="" />
     <item hash="e506ff293a7694f6bc5891fdc621aa77" sprite="Silver Knight" width="48" height="40" animation="" />
-    <item hash="e85d7dc38e4527147e2822bc7bd79376" sprite="Silver Knight" width="48" height="40" animation="" />
     <item hash="eba2db945f505f177de694df2a97bf7a" sprite="Silver Knight" width="48" height="40" animation="" />
     <item hash="f19184403765a87252ae338d2b5d0b20" sprite="Silver Knight" width="48" height="40" animation="" />
     <item hash="f4f9f3cf05914167f0c84396b01a1d3c" sprite="Silver Knight" width="48" height="40" animation="" />
+    <item hash="06242bae1a66d7931d7eabd5c930eb62" sprite="Silver Knight" width="48" height="40" animation="Idle" />
+    <item hash="e85d7dc38e4527147e2822bc7bd79376" sprite="Silver Knight" width="48" height="40" animation="Idle" />
+    <item hash="0d68c692470c01a40c446ee2c4ba03bd" sprite="Silver Knight" width="48" height="40" animation="Idle|Walking" />
+    <item hash="4c55d4c577329bba174c0111b083b003" sprite="Silver Knight" width="48" height="40" animation="Walking" />
+    <item hash="c8ff08fa280cc5c1d10f389c50048e7e" sprite="Silver Knight" width="48" height="40" animation="Walking" />
+    <item hash="cc1cf91be15e5ce35a30d3e053e29f9b" sprite="Silver Knight" width="48" height="40" animation="Walking" />
+    <item hash="ce121dbcde1ef0452f72b3af4f4146a8" sprite="Silver Knight" width="48" height="40" animation="Walking" />
     <item hash="081c842401d025459d80f2e248b91502" sprite="Skeleton" width="40" height="40" animation="" />
     <item hash="0f5df0896a4d624d37237a31434451ea" sprite="Skeleton" width="40" height="40" animation="" />
     <item hash="1f32c7b76ae392ba574b78d2a102f296" sprite="Skeleton" width="40" height="40" animation="" />

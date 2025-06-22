@@ -16,7 +16,7 @@ namespace SF3.Models.Structs.CHR {
 
         public string TextureHash { get; }
         public string SpriteName { get; }
-        public string AnimationName { get; }
+        public string AnimationName { get; set; }
         public int Width { get; }
         public int Height { get; }
         public Dictionary<string, int> DirectionCounts { get; } = new Dictionary<string, int>();
