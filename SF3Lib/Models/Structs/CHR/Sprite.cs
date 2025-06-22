@@ -27,8 +27,11 @@ namespace SF3.Models.Structs.CHR {
                 + (Header.PromotionLevel > 0 ? $" (P{Header.PromotionLevel})" : "")
                 ;
 
-            FrameOffsetTable     = FrameOffsetTable.Create(Data, nameof(FrameOffsetTable), (int) (DataOffset + Header.FrameTableOffset));
-            AnimationOffsetTable = AnimationOffsetTable.Create(Data, nameof(AnimationOffsetTable), (int) (DataOffset + Header.AnimationTableOffset));
+            FrameOffsetTable = FrameOffsetTable.Create(Data, nameof(FrameOffsetTable), (int) (DataOffset + Header.FrameTableOffset));
+
+            // It seems that this CHR and *only* this CHR has a bigger animation table than the rest.
+            bool isXOP101_Masqurin = FrameOffsetTable.Length == 144;
+            AnimationOffsetTable = AnimationOffsetTable.Create(Data, nameof(AnimationOffsetTable), (int) (DataOffset + Header.AnimationTableOffset), isXOP101_Masqurin);
 
             FrameTable = FrameTable.Create(
                 Data,

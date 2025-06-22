@@ -6,7 +6,7 @@ using SF3.Types;
 namespace SF3.Models.Tables.CHR {
     public class FrameTable : TerminatedTable<Frame> {
         protected FrameTable(IByteData data, string name, int address, uint dataOffset, int width, int height, string rowPrefix, int spriteIndex, int spriteId, int directions)
-        : base(data, name, address, 0x04, 100) {
+        : base(data, name, address, 0x04, 0xF0) {
             DataOffset = dataOffset;
             Width      = width;
             Height     = height;

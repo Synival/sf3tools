@@ -4,7 +4,7 @@ using SF3.Models.Structs.CHR;
 
 namespace SF3.Models.Tables.CHR {
     public class FrameOffsetTable : TerminatedTable<FrameOffset> {
-        protected FrameOffsetTable(IByteData data, string name, int address) : base(data, name, address, 4, 100) {}
+        protected FrameOffsetTable(IByteData data, string name, int address) : base(data, name, address, 4, 0xF0) {}
 
         public static FrameOffsetTable Create(IByteData data, string name, int address) {
             var newTable = new FrameOffsetTable(data, name, address);
