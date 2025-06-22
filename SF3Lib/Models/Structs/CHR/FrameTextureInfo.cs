@@ -15,7 +15,7 @@ namespace SF3.Models.Structs.CHR {
         }
 
         public string TextureHash { get; }
-        public string SpriteName { get; }
+        public string SpriteName { get; set; }
         public string AnimationName { get; set; }
         public int Width { get; }
         public int Height { get; }
