@@ -220,7 +220,7 @@ namespace CHR_Analyzer {
                     .Replace(":", "_")
                     .Replace("/", "_");
 
-                var path = Path.Combine(c_pathOut, spriteFileString, $"{fi.Width}x{fi.Height}", (fi.AnimationName == "") ? "Uncategorized" : fi.AnimationName);
+                var path = Path.Combine(c_pathOut, spriteFileString, $"{fi.Width}x{fi.Height}", (fi.AnimationName == "") ? "Uncategorized" : fi.AnimationName.Replace('|', '_'));
                 _ = Directory.CreateDirectory(path);
 
                 var outputPath = Path.Combine(path, $"{fi.TextureHash}.BMP");
