@@ -17,12 +17,10 @@ namespace SF3.Win.Views.CHR {
             if (Model.Header != null) {
                 if (Model.Header != null)
                     CreateChild(new DataModelView("Header", Model.Header, ngc));
-                if (Model.FrameOffsetTable != null)
-                    CreateChild(new TableView("Frame Offsets", Model.FrameOffsetTable, ngc));
-                if (Model.AnimationOffsetTable != null)
-                    CreateChild(new TableView("Animation Offsets", Model.AnimationOffsetTable, ngc));
                 if (Model.FrameTable != null)
                     CreateChild(new SpriteFramesView("Frames", Model.FrameTable, ngc));
+                if (Model.AnimationOffsetTable != null)
+                    CreateChild(new TableView("Animation Offsets", Model.AnimationOffsetTable, ngc));
                 if (Model.AnimationFrameTablesByIndex?.Count > 0) {
                     CreateChild(
                         new SpriteAnimationFramesArrayView("Animation Frames", Model.AnimationFrameTablesByIndex.Values

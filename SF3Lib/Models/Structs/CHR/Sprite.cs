@@ -27,12 +27,6 @@ namespace SF3.Models.Structs.CHR {
                 + (Header.PromotionLevel > 0 ? $" (P{Header.PromotionLevel})" : "")
                 ;
 
-            FrameOffsetTable = FrameOffsetTable.Create(Data, nameof(FrameOffsetTable), (int) (DataOffset + Header.FrameTableOffset));
-
-            // It seems that this CHR and *only* this CHR has a bigger animation table than the rest.
-            bool isXOP101_Masqurin = FrameOffsetTable.Length == 144;
-            AnimationOffsetTable = AnimationOffsetTable.Create(Data, nameof(AnimationOffsetTable), (int) (DataOffset + Header.AnimationTableOffset), isXOP101_Masqurin);
-
             FrameTable = FrameTable.Create(
                 Data,
                 $"Sprite{ID:D2}_Frames",
@@ -42,6 +36,10 @@ namespace SF3.Models.Structs.CHR {
                 ID,
                 Header.SpriteID,
                 Header.Directions);
+
+            // It seems that this CHR and *only* this CHR has a bigger animation table than the rest.
+            bool isXOP101_Masqurin = FrameTable.Length == 144;
+            AnimationOffsetTable = AnimationOffsetTable.Create(Data, nameof(AnimationOffsetTable), (int) (DataOffset + Header.AnimationTableOffset), isXOP101_Masqurin);
 
             AnimationFrameTablesByIndex = AnimationOffsetTable
                 .Where(x => x.Offset != 0)
@@ -67,7 +65,6 @@ namespace SF3.Models.Structs.CHR {
         public string DropdownName { get; }
 
         public SpriteHeader Header { get; }
-        public FrameOffsetTable FrameOffsetTable { get; }
         public AnimationOffsetTable AnimationOffsetTable { get; }
         public FrameTable FrameTable { get; }
         public Dictionary<AnimationType, AnimationFrameTable> AnimationFrameTablesByIndex { get; }
