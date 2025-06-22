@@ -7,10 +7,10 @@ namespace SF3.Utils {
     public static class SpriteFrameTextueUtils {
         private static Dictionary<string, FrameTextureInfo> s_frameTextureInfosByHash = null;
 
-        public static FrameTextureInfo GetFrameTextureInfoByHash(string hash) {
+        public static FrameTextureInfo GetFrameTextureInfoByHash(string hash, int width, int height) {
             LoadFramesByHashTable();
             if (!s_frameTextureInfosByHash.ContainsKey(hash.ToLower()))
-                s_frameTextureInfosByHash[hash] = new FrameTextureInfo(hash, "Unknown", "Unknown");
+                s_frameTextureInfosByHash[hash] = new FrameTextureInfo(hash, "Unknown", width, height, "Unknown");
             return s_frameTextureInfosByHash[hash];
         }
 
@@ -32,12 +32,20 @@ namespace SF3.Utils {
                 while (!xml.EOF) {
                     _ = xml.Read();
                     if (xml.HasAttributes) {
-                        var hash      = xml.GetAttribute("hash");
-                        var sprite    = xml.GetAttribute("sprite");
-                        var animation = xml.GetAttribute("animation");
+                        var hash       = xml.GetAttribute("hash");
+                        var sprite     = xml.GetAttribute("sprite");
+                        var widthAttr  = xml.GetAttribute("width");
+                        var heightAttr = xml.GetAttribute("height");
 
-                        if (hash != null && sprite != null && animation != null)
-                            s_frameTextureInfosByHash.Add(hash.ToLower(), new FrameTextureInfo(hash, sprite, animation));
+                        if (hash == null || sprite == null || widthAttr == null || heightAttr == null)
+                            continue;
+
+                        int width, height;
+                        if (!int.TryParse(widthAttr, out width) || !int.TryParse(heightAttr, out height))
+                            continue;
+
+                        var animation = xml.GetAttribute("animation") ?? "";
+                        s_frameTextureInfosByHash.Add(hash.ToLower(), new FrameTextureInfo(hash, sprite, width, height, animation));
                     }
                 }
             }
