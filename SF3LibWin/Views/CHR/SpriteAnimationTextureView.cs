@@ -1,4 +1,5 @@
 ﻿using System;
+using SF3.Models.Structs.CHR;
 using SF3.Models.Tables.CHR;
 
 namespace SF3.Win.Views.CHR {
@@ -12,7 +13,7 @@ namespace SF3.Win.Views.CHR {
                 ClearAnimation();
             else {
                 var frame = _frames[0];
-                SetFrame(frame.Texture, 0, (frame.FrameID >= 0xF0) ? 0 : frame.Duration);
+                SetFrame(frame);
             }
         }
 
@@ -24,10 +25,19 @@ namespace SF3.Win.Views.CHR {
             if (nextFrame.IsEndingFrame)
                 nextFrame = _frames[0];
 
-            SetFrame(nextFrame.Texture, nextFrame.ID, (nextFrame.FrameID >= 0xF0) ? 0 : nextFrame.Duration);
+            SetFrame(nextFrame);
         }
 
-        private AnimationFrameTable _frames = null;
+        private void SetFrame(AnimationFrame frame) {
+            var hash = frame.Texture?.Hash;
+            var tex = (hash == _lastTextureHash) ? _lastTexture : frame.Texture;
+            _lastTextureHash = hash;
+            _lastTexture = tex;
+            SetFrame(frame.Texture, frame.ID, (frame.FrameID >= 0xF0) ? 0 : frame.Duration);
+        }
 
+        private string _lastTextureHash = null;
+        public ITexture _lastTexture = null;
+        private AnimationFrameTable _frames = null;
     }
 }
