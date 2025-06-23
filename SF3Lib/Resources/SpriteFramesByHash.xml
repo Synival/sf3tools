@@ -5826,7 +5826,6 @@
     <item hash="175115d412a3c23d699571470ce875a0" sprite="Edmund" width="40" height="40" animation="" />
     <item hash="18ed01615532426249a68f0b09a4a16e" sprite="Edmund" width="40" height="40" animation="" />
     <item hash="20827eec819825bb2bd014e8dc025a16" sprite="Edmund" width="40" height="40" animation="" />
-    <item hash="238e624de134771b4b593670d0a5df49" sprite="Edmund" width="40" height="40" animation="" />
     <item hash="242619757745d8bdcec45c963dea76b1" sprite="Edmund" width="40" height="40" animation="" />
     <item hash="25288093cfc3b2bc8c0f721872b656ab" sprite="Edmund" width="40" height="40" animation="" />
     <item hash="255a026f662d7006fa92aa0e0b6356ba" sprite="Edmund" width="40" height="40" animation="" />
@@ -5839,7 +5838,6 @@
     <item hash="2c98382452dfcd7c78e7f9374d9e7e37" sprite="Edmund" width="40" height="40" animation="" />
     <item hash="2c9bcbeb5e8459feaa473d3df80bace4" sprite="Edmund" width="40" height="40" animation="" />
     <item hash="2d1a01072a4b96a0b7796d34da728c46" sprite="Edmund" width="40" height="40" animation="" />
-    <item hash="336c847b172ba13a7cee84cb1c9aee66" sprite="Edmund" width="40" height="40" animation="" />
     <item hash="3551ef7af7360f8f5392e77ddadefb5b" sprite="Edmund" width="40" height="40" animation="" />
     <item hash="35d8c5846e0bd39d7b3e90b02014aac4" sprite="Edmund" width="40" height="40" animation="" />
     <item hash="38497b08950c8c4515e4c63db87c0569" sprite="Edmund" width="40" height="40" animation="" />
@@ -5911,7 +5909,6 @@
     <item hash="cb0dcd91cc6b675097835e2625a95f2e" sprite="Edmund" width="40" height="40" animation="" />
     <item hash="cb8d7085cd877c787c259224e0cb15d9" sprite="Edmund" width="40" height="40" animation="" />
     <item hash="cf90cc7d2b7cfc36b13738de141e851c" sprite="Edmund" width="40" height="40" animation="" />
-    <item hash="d04b98bc2c186808d6dbda4d6b903dd5" sprite="Edmund" width="40" height="40" animation="" />
     <item hash="d102cae7278b396eddfd7cdc735e2146" sprite="Edmund" width="40" height="40" animation="" />
     <item hash="d5332fbd02926438a41cc8ca9929aac6" sprite="Edmund" width="40" height="40" animation="" />
     <item hash="d53bb90207270adff5bbab07c7effdb8" sprite="Edmund" width="40" height="40" animation="" />
@@ -5927,7 +5924,6 @@
     <item hash="eaffec0a0667b00c6556bd99aad21a94" sprite="Edmund" width="40" height="40" animation="" />
     <item hash="f2d5ec234318a4d93e3edcf9d43fefb2" sprite="Edmund" width="40" height="40" animation="" />
     <item hash="f303fcdc4b78e0e28998d776a69868af" sprite="Edmund" width="40" height="40" animation="" />
-    <item hash="fb08831fb096e21b9967965035195841" sprite="Edmund" width="40" height="40" animation="" />
     <item hash="fb40741d8e9d4cd8dc8a8646f3f9172b" sprite="Edmund" width="40" height="40" animation="" />
     <item hash="fc6dd09eef89fb64cee4c09a7bb165d5" sprite="Edmund" width="40" height="40" animation="" />
     <item hash="fd518cb68e98ebf23f8628fa0c48b10c" sprite="Edmund" width="40" height="40" animation="" />
@@ -5945,11 +5941,13 @@
     <item hash="20278257c6f556bbae92e9acab05122e" sprite="Edmund (P1)" width="40" height="40" animation="" />
     <item hash="2159f834f8f33e867b57304b8b8ac71a" sprite="Edmund (P1)" width="40" height="40" animation="" />
     <item hash="21951eaa59f5e741f10edf8db79f5154" sprite="Edmund (P1)" width="40" height="40" animation="" />
+    <item hash="238e624de134771b4b593670d0a5df49" sprite="Edmund (P1)" width="40" height="40" animation="" />
     <item hash="26e3ac7ed50947d57c141ff61f99658b" sprite="Edmund (P1)" width="40" height="40" animation="" />
     <item hash="27ecbcb0e110032d35f9e511ca55e260" sprite="Edmund (P1)" width="40" height="40" animation="" />
     <item hash="2c4db838ab8d1446bb3124fc5a6923e8" sprite="Edmund (P1)" width="40" height="40" animation="" />
     <item hash="2e6bf7eff12b77e8d7a442f570b7242e" sprite="Edmund (P1)" width="40" height="40" animation="" />
     <item hash="2fc39c3b291db7f4dbfa7d7e0cec9825" sprite="Edmund (P1)" width="40" height="40" animation="" />
+    <item hash="336c847b172ba13a7cee84cb1c9aee66" sprite="Edmund (P1)" width="40" height="40" animation="" />
     <item hash="339481189fbbe59ac629c2a4de137036" sprite="Edmund (P1)" width="40" height="40" animation="" />
     <item hash="39827ef05192ca564838ddca5943f50d" sprite="Edmund (P1)" width="40" height="40" animation="" />
     <item hash="3e8c1151706d157ae1c05ae2817bcb7f" sprite="Edmund (P1)" width="40" height="40" animation="" />
@@ -5998,6 +5996,7 @@
     <item hash="c8e875e1a42b8025f25d532663e3ab89" sprite="Edmund (P1)" width="40" height="40" animation="" />
     <item hash="c9b2f1247ace908dbf7ddf75cc7fdf99" sprite="Edmund (P1)" width="40" height="40" animation="" />
     <item hash="cd687d8847873386503f502a22fac392" sprite="Edmund (P1)" width="40" height="40" animation="" />
+    <item hash="d04b98bc2c186808d6dbda4d6b903dd5" sprite="Edmund (P1)" width="40" height="40" animation="" />
     <item hash="d07591ded0a327033387235975f7def0" sprite="Edmund (P1)" width="40" height="40" animation="" />
     <item hash="d5297e5ec93a8ef0cc7f77eaffe7daee" sprite="Edmund (P1)" width="40" height="40" animation="" />
     <item hash="dbe60643caeb33ed9a384bf6267cdace" sprite="Edmund (P1)" width="40" height="40" animation="" />
@@ -6011,6 +6010,7 @@
     <item hash="ec3c896fd18806e77b89f1bd8baca0e5" sprite="Edmund (P1)" width="40" height="40" animation="" />
     <item hash="f191cba36a2e2e1309995d80c4b2fb1a" sprite="Edmund (P1)" width="40" height="40" animation="" />
     <item hash="f3f468ddf8af716699abff0a9614555e" sprite="Edmund (P1)" width="40" height="40" animation="" />
+    <item hash="fb08831fb096e21b9967965035195841" sprite="Edmund (P1)" width="40" height="40" animation="" />
     <item hash="fd259fb1b16752467c93eadd2736b538" sprite="Edmund (P1)" width="40" height="40" animation="" />
     <item hash="ffc0e41e5b07a2d282686645ebd001ed" sprite="Edmund (P1)" width="40" height="40" animation="" />
     <item hash="1c847e6acc7773bd337b6ba1b3d8bc91" sprite="Edmund (P1)" width="48" height="40" animation="Dying" />
@@ -8519,29 +8519,6 @@
     <item hash="6465b06b1a530d6d5bba7b66d81244af" sprite="Gracia" width="40" height="40" animation="Blown Back" />
     <item hash="a85ddaaf4b03cddf18840bc669f5b53a" sprite="Gracia" width="40" height="40" animation="Blown Back" />
     <item hash="b8ad4676f16b1af5d3454a3205282bed" sprite="Gracia" width="40" height="40" animation="Blown Back" />
-    <item hash="e114b759777c75e5e27b9971a51c7179" sprite="Gracia" width="40" height="40" animation="Unsealing Staff" />
-    <item hash="ee76541ce27966d1e67694a2938723a8" sprite="Gracia" width="40" height="40" animation="Unsealing Staff" />
-    <item hash="1dd8bdbd87e1c22d85f6e15f85843bc8" sprite="Gracia" width="48" height="40" animation="Tortured" />
-    <item hash="4ffbc966148bdaa6601550b759470720" sprite="Gracia" width="48" height="40" animation="Tortured" />
-    <item hash="66891dd7821258cdb3f2f768b590f7ef" sprite="Gracia" width="48" height="40" animation="Tortured" />
-    <item hash="6a64b6db45ce2982f2e9756992895250" sprite="Gracia" width="48" height="40" animation="Tortured" />
-    <item hash="7d66d94f968c29487125a129eeeb4513" sprite="Gracia" width="48" height="40" animation="Tortured" />
-    <item hash="a0c10d5d2e12560089b76b8e90d51a4b" sprite="Gracia" width="48" height="40" animation="Tortured" />
-    <item hash="c19a57445cca20912d44060b69fd095e" sprite="Gracia" width="48" height="40" animation="Tortured" />
-    <item hash="e16e3c0b65a901240c9df05d789829f8" sprite="Gracia" width="48" height="40" animation="Tortured" />
-    <item hash="eabe030776aa416fc63f79747b22ac4d" sprite="Gracia" width="48" height="40" animation="Tortured" />
-    <item hash="1014de9b4fc357f3bf2963864aac1a3a" sprite="Gracia" width="48" height="40" animation="Unsealing Staff" />
-    <item hash="1614fa00d2fef8269d9d40c71a75f625" sprite="Gracia" width="48" height="40" animation="Unsealing Staff" />
-    <item hash="246f0724585f75a959ab9b88493e935a" sprite="Gracia" width="48" height="40" animation="Unsealing Staff" />
-    <item hash="2d70fe13084af95f9e1db9aef361ea6f" sprite="Gracia" width="48" height="40" animation="Unsealing Staff" />
-    <item hash="349e0d6505d1854aa3632ea52840d661" sprite="Gracia" width="48" height="40" animation="Unsealing Staff" />
-    <item hash="69427052bf0305206f8e57aef7a4d853" sprite="Gracia" width="48" height="40" animation="Unsealing Staff" />
-    <item hash="6a9413d71f92fe67ecdd686128e39972" sprite="Gracia" width="48" height="40" animation="Unsealing Staff" />
-    <item hash="6e623b1280f865970cbf696f52dc950e" sprite="Gracia" width="48" height="40" animation="Unsealing Staff" />
-    <item hash="a3d824b0f360da73dc08ad0a629e1720" sprite="Gracia" width="48" height="40" animation="Unsealing Staff" />
-    <item hash="c1d66b1eb959df9fa1a3eed5c9f7ec71" sprite="Gracia" width="48" height="40" animation="Unsealing Staff" />
-    <item hash="f7c2582f99ceba965d6a06c39896d09a" sprite="Gracia" width="48" height="40" animation="Unsealing Staff" />
-    <item hash="f8b15c99fa0390577d6d0803fe9baad3" sprite="Gracia" width="48" height="40" animation="Unsealing Staff" />
     <item hash="1ee2c566e0281cfd81d41ff61f06d676" sprite="Gracia" width="64" height="58" animation="Raising Staff" />
     <item hash="245983f28e35a3e718a961585c91d1a3" sprite="Gracia" width="64" height="58" animation="Raising Staff" />
     <item hash="4ee4ababcd96309ae72f114d6569d7b0" sprite="Gracia" width="64" height="58" animation="Raising Staff" />
@@ -8688,17 +8665,40 @@
     <item hash="c13e4308dfc2270a749f1f6b6ab25022" sprite="Gracia (P1)" width="40" height="40" animation="Unsealing Staff" />
     <item hash="c2eaed6ac1c070d7da9dcd22804c55aa" sprite="Gracia (P1)" width="40" height="40" animation="Unsealing Staff" />
     <item hash="e0c1433e7750cd209f727dd8b17e3edd" sprite="Gracia (P1)" width="40" height="40" animation="Unsealing Staff" />
+    <item hash="e114b759777c75e5e27b9971a51c7179" sprite="Gracia (P1)" width="40" height="40" animation="Unsealing Staff" />
+    <item hash="ee76541ce27966d1e67694a2938723a8" sprite="Gracia (P1)" width="40" height="40" animation="Unsealing Staff" />
     <item hash="eed87e3fd5169e735b98c7ca1b91bfb6" sprite="Gracia (P1)" width="40" height="40" animation="Unsealing Staff" />
     <item hash="f0bd080112a3a7332e83202b32dd3d13" sprite="Gracia (P1)" width="40" height="40" animation="Unsealing Staff" />
     <item hash="f7ede683135aab739bff1dd4f879dc0a" sprite="Gracia (P1)" width="40" height="40" animation="Unsealing Staff" />
+    <item hash="1dd8bdbd87e1c22d85f6e15f85843bc8" sprite="Gracia (P1)" width="48" height="40" animation="Tortured" />
     <item hash="41877c5ac255721d51e053a327a5a214" sprite="Gracia (P1)" width="48" height="40" animation="Tortured" />
     <item hash="482c801e880b0118bb02b763cc27b4b0" sprite="Gracia (P1)" width="48" height="40" animation="Tortured" />
     <item hash="49299f0a80918f0d9a76063b7745ec28" sprite="Gracia (P1)" width="48" height="40" animation="Tortured" />
+    <item hash="4ffbc966148bdaa6601550b759470720" sprite="Gracia (P1)" width="48" height="40" animation="Tortured" />
     <item hash="51d4341f8c155490f28c494fa65ac010" sprite="Gracia (P1)" width="48" height="40" animation="Tortured" />
+    <item hash="66891dd7821258cdb3f2f768b590f7ef" sprite="Gracia (P1)" width="48" height="40" animation="Tortured" />
+    <item hash="6a64b6db45ce2982f2e9756992895250" sprite="Gracia (P1)" width="48" height="40" animation="Tortured" />
     <item hash="78ecb6873d366134876a85990c3ace2c" sprite="Gracia (P1)" width="48" height="40" animation="Tortured" />
+    <item hash="7d66d94f968c29487125a129eeeb4513" sprite="Gracia (P1)" width="48" height="40" animation="Tortured" />
+    <item hash="a0c10d5d2e12560089b76b8e90d51a4b" sprite="Gracia (P1)" width="48" height="40" animation="Tortured" />
+    <item hash="c19a57445cca20912d44060b69fd095e" sprite="Gracia (P1)" width="48" height="40" animation="Tortured" />
     <item hash="c98cdff354d61bca614359366c818b08" sprite="Gracia (P1)" width="48" height="40" animation="Tortured" />
     <item hash="e0037a609b0571c38f2db170c29d7241" sprite="Gracia (P1)" width="48" height="40" animation="Tortured" />
+    <item hash="e16e3c0b65a901240c9df05d789829f8" sprite="Gracia (P1)" width="48" height="40" animation="Tortured" />
     <item hash="e1dca9377e0cdedd330487ccd596814b" sprite="Gracia (P1)" width="48" height="40" animation="Tortured" />
+    <item hash="eabe030776aa416fc63f79747b22ac4d" sprite="Gracia (P1)" width="48" height="40" animation="Tortured" />
+    <item hash="1014de9b4fc357f3bf2963864aac1a3a" sprite="Gracia (P1)" width="48" height="40" animation="Unsealing Staff" />
+    <item hash="1614fa00d2fef8269d9d40c71a75f625" sprite="Gracia (P1)" width="48" height="40" animation="Unsealing Staff" />
+    <item hash="246f0724585f75a959ab9b88493e935a" sprite="Gracia (P1)" width="48" height="40" animation="Unsealing Staff" />
+    <item hash="2d70fe13084af95f9e1db9aef361ea6f" sprite="Gracia (P1)" width="48" height="40" animation="Unsealing Staff" />
+    <item hash="349e0d6505d1854aa3632ea52840d661" sprite="Gracia (P1)" width="48" height="40" animation="Unsealing Staff" />
+    <item hash="69427052bf0305206f8e57aef7a4d853" sprite="Gracia (P1)" width="48" height="40" animation="Unsealing Staff" />
+    <item hash="6a9413d71f92fe67ecdd686128e39972" sprite="Gracia (P1)" width="48" height="40" animation="Unsealing Staff" />
+    <item hash="6e623b1280f865970cbf696f52dc950e" sprite="Gracia (P1)" width="48" height="40" animation="Unsealing Staff" />
+    <item hash="a3d824b0f360da73dc08ad0a629e1720" sprite="Gracia (P1)" width="48" height="40" animation="Unsealing Staff" />
+    <item hash="c1d66b1eb959df9fa1a3eed5c9f7ec71" sprite="Gracia (P1)" width="48" height="40" animation="Unsealing Staff" />
+    <item hash="f7c2582f99ceba965d6a06c39896d09a" sprite="Gracia (P1)" width="48" height="40" animation="Unsealing Staff" />
+    <item hash="f8b15c99fa0390577d6d0803fe9baad3" sprite="Gracia (P1)" width="48" height="40" animation="Unsealing Staff" />
     <item hash="06636c444c6a9418e83a10201cb341ba" sprite="Gracia (P2)" width="40" height="40" animation="" />
     <item hash="075d8c8253a7f88e15b76191cd249976" sprite="Gracia (P2)" width="40" height="40" animation="" />
     <item hash="080eb88c9ad59ec8bdbf754d266c672e" sprite="Gracia (P2)" width="40" height="40" animation="" />
@@ -10648,21 +10648,14 @@
     <item hash="091c5389c976e6c190cd55bdba8edf90" sprite="Honesty" width="48" height="40" animation="" />
     <item hash="0b099ad7fb913898a645a3cd119ff9e1" sprite="Honesty" width="48" height="40" animation="" />
     <item hash="0f4e9c3d7eb0ccfe94192c19c50e1600" sprite="Honesty" width="48" height="40" animation="" />
-    <item hash="10ba26b00a7c8fb734b47f1954147e2a" sprite="Honesty" width="48" height="40" animation="" />
     <item hash="10e508fce05ff05dad4eebf1f60f5c92" sprite="Honesty" width="48" height="40" animation="" />
     <item hash="11451816bce47c2e62fefe80d39a5c3b" sprite="Honesty" width="48" height="40" animation="" />
-    <item hash="1372456d31e667ef795289f629bab008" sprite="Honesty" width="48" height="40" animation="" />
-    <item hash="16c33b519e30364703cf969ece90cd09" sprite="Honesty" width="48" height="40" animation="" />
     <item hash="16c963da3903c11bd68ced326b82d7b5" sprite="Honesty" width="48" height="40" animation="" />
     <item hash="191b9c1fb772a732df2c28c4db3b3297" sprite="Honesty" width="48" height="40" animation="" />
     <item hash="1f39df3387fa053ea8ad97cd729c488c" sprite="Honesty" width="48" height="40" animation="" />
-    <item hash="23b406f5bc5707f235cc2167dc4f8e3b" sprite="Honesty" width="48" height="40" animation="" />
     <item hash="24e9246b61b2d2416b51fa2c8e3751a5" sprite="Honesty" width="48" height="40" animation="" />
-    <item hash="2a597c56c6056f047b6a2c858619de5b" sprite="Honesty" width="48" height="40" animation="" />
     <item hash="2ce468faa7df2737a055d2bc9ec15468" sprite="Honesty" width="48" height="40" animation="" />
-    <item hash="2e9fe0f58f1c9c7833e09d9b773c56f8" sprite="Honesty" width="48" height="40" animation="" />
     <item hash="3eb52335920dda175fea03dadb61f31d" sprite="Honesty" width="48" height="40" animation="" />
-    <item hash="44e627e0ce3d531172b26f83e7143cf8" sprite="Honesty" width="48" height="40" animation="" />
     <item hash="4c5e3617f35e0b9ad910cce22a57da67" sprite="Honesty" width="48" height="40" animation="" />
     <item hash="4ddc02d39b691d10e25cd04b36682038" sprite="Honesty" width="48" height="40" animation="" />
     <item hash="4e728e84283e831ebccb8267a1f22466" sprite="Honesty" width="48" height="40" animation="" />
@@ -10675,21 +10668,15 @@
     <item hash="746bff2e6cd0734f582a428cd2db0aa2" sprite="Honesty" width="48" height="40" animation="" />
     <item hash="750cfdc0bd8305b3d9e54f8a4c102033" sprite="Honesty" width="48" height="40" animation="" />
     <item hash="78a3078e7bf71f9fd44b79de9aa798b4" sprite="Honesty" width="48" height="40" animation="" />
-    <item hash="7de2e381bd3dfba0fa710ce3bf9d63f7" sprite="Honesty" width="48" height="40" animation="" />
     <item hash="7e6966a3c50cf26b7156836ed3693aed" sprite="Honesty" width="48" height="40" animation="" />
-    <item hash="84d74fefa29a10ad22664a8be9737dfc" sprite="Honesty" width="48" height="40" animation="" />
-    <item hash="8ca77ec42a761c594a1d0249aced9cde" sprite="Honesty" width="48" height="40" animation="" />
     <item hash="8ff42e1b2eefc6c9507626741a238aab" sprite="Honesty" width="48" height="40" animation="" />
     <item hash="901f0cb678f84fc23c82fc46dcaedb79" sprite="Honesty" width="48" height="40" animation="" />
-    <item hash="9143dd811b8771c05da6ea41c9530137" sprite="Honesty" width="48" height="40" animation="" />
     <item hash="922fda2bcb7b30e957a366410e237b7a" sprite="Honesty" width="48" height="40" animation="" />
     <item hash="9240d7c094d7636fca353b2ae52c95f7" sprite="Honesty" width="48" height="40" animation="" />
     <item hash="98bfb84012f6498daadc8e0393ffcfb9" sprite="Honesty" width="48" height="40" animation="" />
     <item hash="9bbff4693cb28a4934bdc368bf15b3f4" sprite="Honesty" width="48" height="40" animation="" />
     <item hash="9f3e1058286fae668668103b28f57e4b" sprite="Honesty" width="48" height="40" animation="" />
-    <item hash="a431bc5b91c24cf19e3d4c2a2f1c3adc" sprite="Honesty" width="48" height="40" animation="" />
     <item hash="a505a95a3899c18891e0d6a4d3571563" sprite="Honesty" width="48" height="40" animation="" />
-    <item hash="af5b1078eee1fc7beaae917e0b7955e5" sprite="Honesty" width="48" height="40" animation="" />
     <item hash="b1196763cb669644a0d91aa0d06989f1" sprite="Honesty" width="48" height="40" animation="" />
     <item hash="b40b3a4953ea80c3e4459bf51fa6ec91" sprite="Honesty" width="48" height="40" animation="" />
     <item hash="baf3a51fabc6eb3b755ca1ec46a0d402" sprite="Honesty" width="48" height="40" animation="" />
@@ -10702,12 +10689,9 @@
     <item hash="d689f22b2efffec74a02e437d9c6cc39" sprite="Honesty" width="48" height="40" animation="" />
     <item hash="df79a06c70810c3908e224e96a7d2651" sprite="Honesty" width="48" height="40" animation="" />
     <item hash="df8b70d82fbf3c789f01aa5f2e2585b8" sprite="Honesty" width="48" height="40" animation="" />
-    <item hash="e672e2fb9720525bf6420861d49925b5" sprite="Honesty" width="48" height="40" animation="" />
-    <item hash="e7800696809b726f91ac7d4d9acfbf99" sprite="Honesty" width="48" height="40" animation="" />
     <item hash="ec6fa69b98035018f331c92809ff3b23" sprite="Honesty" width="48" height="40" animation="" />
     <item hash="ecb45a90378b6c185ef2c073cbb65b40" sprite="Honesty" width="48" height="40" animation="" />
     <item hash="ef185daaa6771653738a596b24ca7f95" sprite="Honesty" width="48" height="40" animation="" />
-    <item hash="f4575816e9df7de0dbc9b8a45121c6e0" sprite="Honesty" width="48" height="40" animation="" />
     <item hash="f50f3fdc8cc43ca172150a480f608e32" sprite="Honesty" width="48" height="40" animation="" />
     <item hash="fedcf2f368218201ecc79afd261c6a0c" sprite="Honesty" width="48" height="40" animation="" />
     <item hash="ff0edb8069faaec761db98d09d9bff33" sprite="Honesty" width="48" height="40" animation="" />
@@ -10753,24 +10737,40 @@
     <item hash="f0335d35d1fc5e5a5cbf91a53f461762" sprite="Honesty" width="48" height="40" animation="Carrying Synbios" />
     <item hash="f691b10dd0f6723a4a2fea96387c4643" sprite="Honesty" width="48" height="40" animation="Carrying Synbios" />
     <item hash="0fc280d6005e68e6c0c415cf638b6b4a" sprite="Honesty (P1)" width="48" height="40" animation="" />
+    <item hash="10ba26b00a7c8fb734b47f1954147e2a" sprite="Honesty (P1)" width="48" height="40" animation="" />
+    <item hash="1372456d31e667ef795289f629bab008" sprite="Honesty (P1)" width="48" height="40" animation="" />
     <item hash="1682ecff2bd8a1c3f85c8b5afe1d4e57" sprite="Honesty (P1)" width="48" height="40" animation="" />
+    <item hash="16c33b519e30364703cf969ece90cd09" sprite="Honesty (P1)" width="48" height="40" animation="" />
     <item hash="1e511860b2f665d237354c1e335d4b44" sprite="Honesty (P1)" width="48" height="40" animation="" />
     <item hash="1f1ba55ce4dae7aa9183b0abf8992ee6" sprite="Honesty (P1)" width="48" height="40" animation="" />
     <item hash="2294d9b30fc4eb2aa83edff97c1bbad6" sprite="Honesty (P1)" width="48" height="40" animation="" />
+    <item hash="23b406f5bc5707f235cc2167dc4f8e3b" sprite="Honesty (P1)" width="48" height="40" animation="" />
+    <item hash="2a597c56c6056f047b6a2c858619de5b" sprite="Honesty (P1)" width="48" height="40" animation="" />
+    <item hash="2e9fe0f58f1c9c7833e09d9b773c56f8" sprite="Honesty (P1)" width="48" height="40" animation="" />
     <item hash="331b7a7fa9bcf24ae38725d5f1568875" sprite="Honesty (P1)" width="48" height="40" animation="" />
     <item hash="3da9bd19fd996b2c1129df63b7e4bff2" sprite="Honesty (P1)" width="48" height="40" animation="" />
+    <item hash="44e627e0ce3d531172b26f83e7143cf8" sprite="Honesty (P1)" width="48" height="40" animation="" />
     <item hash="4c2c54e7e2f11f6025ae89fcb4bd08d7" sprite="Honesty (P1)" width="48" height="40" animation="" />
     <item hash="57b9e76af1f53213d70978feb75f448e" sprite="Honesty (P1)" width="48" height="40" animation="" />
     <item hash="5ad765d6e14fbf0371977ae4678aef3b" sprite="Honesty (P1)" width="48" height="40" animation="" />
     <item hash="63d92c800dd4745e6562a56c2823f674" sprite="Honesty (P1)" width="48" height="40" animation="" />
     <item hash="6e1acb2f720d475be4e2f6213456be30" sprite="Honesty (P1)" width="48" height="40" animation="" />
     <item hash="752d7b809f9360b90cb7af97728910fe" sprite="Honesty (P1)" width="48" height="40" animation="" />
+    <item hash="7de2e381bd3dfba0fa710ce3bf9d63f7" sprite="Honesty (P1)" width="48" height="40" animation="" />
+    <item hash="84d74fefa29a10ad22664a8be9737dfc" sprite="Honesty (P1)" width="48" height="40" animation="" />
+    <item hash="8ca77ec42a761c594a1d0249aced9cde" sprite="Honesty (P1)" width="48" height="40" animation="" />
+    <item hash="9143dd811b8771c05da6ea41c9530137" sprite="Honesty (P1)" width="48" height="40" animation="" />
     <item hash="983033c34243cfe13455102fa39f2b1c" sprite="Honesty (P1)" width="48" height="40" animation="" />
     <item hash="9f5872e5663e722be52cb110d7a2d337" sprite="Honesty (P1)" width="48" height="40" animation="" />
+    <item hash="a431bc5b91c24cf19e3d4c2a2f1c3adc" sprite="Honesty (P1)" width="48" height="40" animation="" />
+    <item hash="af5b1078eee1fc7beaae917e0b7955e5" sprite="Honesty (P1)" width="48" height="40" animation="" />
     <item hash="c18aed283dcaef613ca88fdda0c8822c" sprite="Honesty (P1)" width="48" height="40" animation="" />
     <item hash="d3c6a3311bd27d0569c0b49df1321744" sprite="Honesty (P1)" width="48" height="40" animation="" />
     <item hash="e164c2a4861d9fc01368f8eda47530b9" sprite="Honesty (P1)" width="48" height="40" animation="" />
     <item hash="e57922cd4523567f127137e593d4c3cd" sprite="Honesty (P1)" width="48" height="40" animation="" />
+    <item hash="e672e2fb9720525bf6420861d49925b5" sprite="Honesty (P1)" width="48" height="40" animation="" />
+    <item hash="e7800696809b726f91ac7d4d9acfbf99" sprite="Honesty (P1)" width="48" height="40" animation="" />
+    <item hash="f4575816e9df7de0dbc9b8a45121c6e0" sprite="Honesty (P1)" width="48" height="40" animation="" />
     <item hash="fecb44bb4ddd9062b4b7d4b7c51decf4" sprite="Honesty (P1)" width="48" height="40" animation="" />
     <item hash="0673b01bc6661d6e0d1414b443e866aa" sprite="Horst (P1)" width="40" height="40" animation="" />
     <item hash="08aed5c09531ffa205515750f334848b" sprite="Horst (P1)" width="40" height="40" animation="" />
@@ -19017,15 +19017,12 @@
     <item hash="fbb3a820b2beac6aa8cc8a31371280ee" sprite="Primula" width="48" height="48" animation="" />
     <item hash="fed3f7a024f186064ce882679bf14484" sprite="Primula" width="48" height="48" animation="" />
     <item hash="ffd2477286b342b3611dea9a022ae038" sprite="Primula" width="48" height="48" animation="" />
-    <item hash="0016e3e7b7cfc30a5b7aad5c64d4715b" sprite="Produn" width="40" height="40" animation="" />
     <item hash="00ef6765b03c88810c0915ceabd10c45" sprite="Produn" width="40" height="40" animation="" />
     <item hash="06bc459f256668a49702a8b0e959be31" sprite="Produn" width="40" height="40" animation="" />
     <item hash="086c534899912165c129dae463d02842" sprite="Produn" width="40" height="40" animation="" />
     <item hash="095022dd22e5cc82b5f5c3d2e9cadfe5" sprite="Produn" width="40" height="40" animation="" />
-    <item hash="09cf8e490335ee54a8cfc361e88ee81d" sprite="Produn" width="40" height="40" animation="" />
     <item hash="0a122d4e77a427ac0d86bab74d682c37" sprite="Produn" width="40" height="40" animation="" />
     <item hash="0abfa9af1d8e07ef84cca7fb7ee51a91" sprite="Produn" width="40" height="40" animation="" />
-    <item hash="0acce206256d09d8fd0c50b2fb74b2d1" sprite="Produn" width="40" height="40" animation="" />
     <item hash="0ae8bcd9dbc670294f77ed33d0354a75" sprite="Produn" width="40" height="40" animation="" />
     <item hash="0c9678ead02b45432a72f79d48769429" sprite="Produn" width="40" height="40" animation="" />
     <item hash="0cbdbf4a45797edba9bb8c07a2b2f8bf" sprite="Produn" width="40" height="40" animation="" />
@@ -19033,224 +19030,227 @@
     <item hash="0d1b896dd2b9c016b8884a65b61ca5e7" sprite="Produn" width="40" height="40" animation="" />
     <item hash="0eeea6b617c5600dd1f4d762cf117785" sprite="Produn" width="40" height="40" animation="" />
     <item hash="106ab946467b280af8ed09329be8df92" sprite="Produn" width="40" height="40" animation="" />
-    <item hash="12ac62ca4ef5ac3b2f2e6a2e40a5c378" sprite="Produn" width="40" height="40" animation="" />
-    <item hash="14b750b625d98c5208e089c57b8dfe78" sprite="Produn" width="40" height="40" animation="" />
     <item hash="14d07ed9df7b7ad781fdf44b61cf5805" sprite="Produn" width="40" height="40" animation="" />
     <item hash="159dbb1c71d1ef53cef2ab9a1526d94c" sprite="Produn" width="40" height="40" animation="" />
-    <item hash="17826860f36f049314dfcd3d82fb4dba" sprite="Produn" width="40" height="40" animation="" />
     <item hash="19178eccb3cc58a1dc2e6d31fa0a9772" sprite="Produn" width="40" height="40" animation="" />
-    <item hash="19ad8474e8038e439b05df94b6d367ed" sprite="Produn" width="40" height="40" animation="" />
-    <item hash="19b0097d9427243efc480ad27c487f12" sprite="Produn" width="40" height="40" animation="" />
-    <item hash="1b2a2fcd24b473c03234b6328e2c3db6" sprite="Produn" width="40" height="40" animation="" />
-    <item hash="1c427f3ad31c579557603814de232f84" sprite="Produn" width="40" height="40" animation="" />
     <item hash="1ca1806f333fac951a82c85db00ede18" sprite="Produn" width="40" height="40" animation="" />
     <item hash="1d1edb8ded9e127b5d210ad21aabdb20" sprite="Produn" width="40" height="40" animation="" />
     <item hash="1ef4316e8eea874ca84168d5a7c8e80a" sprite="Produn" width="40" height="40" animation="" />
-    <item hash="1fb3456b330ef726ee4ce7c8f1b6bcb9" sprite="Produn" width="40" height="40" animation="" />
     <item hash="1ff1c02f9b0967895d4cf455a8da040b" sprite="Produn" width="40" height="40" animation="" />
     <item hash="1ff5085b84cab8cc972a6fca351c9281" sprite="Produn" width="40" height="40" animation="" />
     <item hash="2084662e593105161ad332bdfe2fe11e" sprite="Produn" width="40" height="40" animation="" />
-    <item hash="210dbdcfaff12c1294dd30c27b4a33ff" sprite="Produn" width="40" height="40" animation="" />
     <item hash="21242c65655caf3e60083573aaa6c108" sprite="Produn" width="40" height="40" animation="" />
-    <item hash="21e3a32697530396528deb8963c70d29" sprite="Produn" width="40" height="40" animation="" />
-    <item hash="21ed87d4da9a786d5c4bf1fc83c9bc6b" sprite="Produn" width="40" height="40" animation="" />
-    <item hash="246251029eac6335468f065e64ff74e4" sprite="Produn" width="40" height="40" animation="" />
     <item hash="24be09b0d53de6494d334239eb41ad20" sprite="Produn" width="40" height="40" animation="" />
-    <item hash="250e91c8648b84c30dcb9330513b6314" sprite="Produn" width="40" height="40" animation="" />
     <item hash="2599d4078d7504643db562dda5422556" sprite="Produn" width="40" height="40" animation="" />
-    <item hash="2666645d434b90d917552544f219e828" sprite="Produn" width="40" height="40" animation="" />
     <item hash="27a02644f6f2229232a04066a150da2b" sprite="Produn" width="40" height="40" animation="" />
     <item hash="28b496a2c9ebc7338aacf520fd6d3312" sprite="Produn" width="40" height="40" animation="" />
-    <item hash="2a3fa3e5185c98d08271a19c00fc01e4" sprite="Produn" width="40" height="40" animation="" />
     <item hash="2b5c78416dfbcf863472197e7976640f" sprite="Produn" width="40" height="40" animation="" />
-    <item hash="2ce34b7f5a1adb6804c87d769e6599e0" sprite="Produn" width="40" height="40" animation="" />
-    <item hash="2d39c84755a7bda93605643dbe12a910" sprite="Produn" width="40" height="40" animation="" />
-    <item hash="2da71c71a8ce2b5b178ddf7588e9526f" sprite="Produn" width="40" height="40" animation="" />
-    <item hash="2f14778100b96b4d35902faab4d72a2d" sprite="Produn" width="40" height="40" animation="" />
     <item hash="2f21bf0183cb30a740f4a3b7fba54b6b" sprite="Produn" width="40" height="40" animation="" />
-    <item hash="2f8f4e5b6021bd6e35e7b40584c16636" sprite="Produn" width="40" height="40" animation="" />
     <item hash="30e4e19289f3542acfb29a9b56416355" sprite="Produn" width="40" height="40" animation="" />
-    <item hash="31f1f4b21020d961979d202fbe48d5d1" sprite="Produn" width="40" height="40" animation="" />
-    <item hash="34ab2aa50e850b93fdd3fbefc23a59c8" sprite="Produn" width="40" height="40" animation="" />
-    <item hash="34de25c33fef8d2a039bee51ef79dd21" sprite="Produn" width="40" height="40" animation="" />
-    <item hash="365391c1c5be8a583e227253ab9b2b00" sprite="Produn" width="40" height="40" animation="" />
-    <item hash="37091e3ede4c23ec36d5579e53b706b3" sprite="Produn" width="40" height="40" animation="" />
     <item hash="3b2919732e84ab8095db6819e7164d6f" sprite="Produn" width="40" height="40" animation="" />
-    <item hash="3e17820d033164f8c02dce60a113c7e3" sprite="Produn" width="40" height="40" animation="" />
     <item hash="3eb7cbbffc3bc0f7362213cc3ae027ff" sprite="Produn" width="40" height="40" animation="" />
-    <item hash="3ecf6e3523d40a180b43a5f2e55f1a5f" sprite="Produn" width="40" height="40" animation="" />
-    <item hash="405a5b34f3bed270d0e93943726a9ec1" sprite="Produn" width="40" height="40" animation="" />
-    <item hash="4066b235c76f595cd369d829180305af" sprite="Produn" width="40" height="40" animation="" />
     <item hash="41673343c9b3ce3d3c6f667e77ce2415" sprite="Produn" width="40" height="40" animation="" />
     <item hash="43b23f59665a0fc1cb2199e7452a936a" sprite="Produn" width="40" height="40" animation="" />
-    <item hash="45fd7496ee25a43a9fc1503c0a9c9fb0" sprite="Produn" width="40" height="40" animation="" />
-    <item hash="47134398eaa24e4dc2af02faedcbdd3b" sprite="Produn" width="40" height="40" animation="" />
     <item hash="47a124c083bd6e5e2c665c09503e0648" sprite="Produn" width="40" height="40" animation="" />
-    <item hash="483083e7882b5c0725d9cba4332eab31" sprite="Produn" width="40" height="40" animation="" />
     <item hash="4840a83de267e0fab29354a53bb3e767" sprite="Produn" width="40" height="40" animation="" />
-    <item hash="486505b6b79f2b94696ac5350bbeca72" sprite="Produn" width="40" height="40" animation="" />
     <item hash="4a3803de2bd8a871a2aad8f8012acd76" sprite="Produn" width="40" height="40" animation="" />
-    <item hash="4a47a8d4677d5d78430da0e7956d9be2" sprite="Produn" width="40" height="40" animation="" />
-    <item hash="4d2457e1dfc46dd7a5cfade462b344a9" sprite="Produn" width="40" height="40" animation="" />
-    <item hash="4ea3cdefe03f8005667ba7fda736488c" sprite="Produn" width="40" height="40" animation="" />
     <item hash="4ebd2b6657ba06bf9c1ed22faef3bd9c" sprite="Produn" width="40" height="40" animation="" />
     <item hash="4eda906c046729e112caf5efb4e23a3f" sprite="Produn" width="40" height="40" animation="" />
     <item hash="4ee67a16b44182fce5eee9ce051608f4" sprite="Produn" width="40" height="40" animation="" />
-    <item hash="4f61de4deb8ec0a6634783fc24c70df3" sprite="Produn" width="40" height="40" animation="" />
-    <item hash="4fa4c8b9144fc4f882916e5a343bf098" sprite="Produn" width="40" height="40" animation="" />
     <item hash="5132a28d75171f9ba3937dc1eac510c9" sprite="Produn" width="40" height="40" animation="" />
-    <item hash="52a85e6c81ca107c37ea48d79c885e98" sprite="Produn" width="40" height="40" animation="" />
     <item hash="5470201da949003fb889777be4c94da0" sprite="Produn" width="40" height="40" animation="" />
-    <item hash="568fd60ed8ff75586a4846c72c4762c2" sprite="Produn" width="40" height="40" animation="" />
     <item hash="59aa6fed74a0bca712a3d2c4a7cb6593" sprite="Produn" width="40" height="40" animation="" />
-    <item hash="5a9aa4a136d3964a9330e6522fb42e15" sprite="Produn" width="40" height="40" animation="" />
     <item hash="5b72beb4e71a8f49ca473140b419a748" sprite="Produn" width="40" height="40" animation="" />
     <item hash="5cf92d257302d7e619b6efa255001c04" sprite="Produn" width="40" height="40" animation="" />
-    <item hash="5ef3e33e5ed14943549d79ded16343b7" sprite="Produn" width="40" height="40" animation="" />
-    <item hash="5f17fd0e404d384000ab3098a9d78719" sprite="Produn" width="40" height="40" animation="" />
-    <item hash="5f42211efe76b308650ec1cc0c6e3e0f" sprite="Produn" width="40" height="40" animation="" />
-    <item hash="5f7f9f084f915acf1c925ad92f066072" sprite="Produn" width="40" height="40" animation="" />
     <item hash="62d877ddb1c15fd2e5534b66cf95a773" sprite="Produn" width="40" height="40" animation="" />
     <item hash="6466237f920c3ecf304fab62b491024c" sprite="Produn" width="40" height="40" animation="" />
-    <item hash="6670c75736ae3ec6f5eeff186a85a20a" sprite="Produn" width="40" height="40" animation="" />
     <item hash="6751b1a8b1e4941ee719b03e765177c5" sprite="Produn" width="40" height="40" animation="" />
-    <item hash="675d689f9c4a7fb585866cf9702243d7" sprite="Produn" width="40" height="40" animation="" />
-    <item hash="681b11e083d2e5749bb23ecccd7da27d" sprite="Produn" width="40" height="40" animation="" />
     <item hash="68beffa448de177fe76d46b4a2a47dbd" sprite="Produn" width="40" height="40" animation="" />
     <item hash="69f07e2e8af472c093297582a417d2f2" sprite="Produn" width="40" height="40" animation="" />
     <item hash="6a3010eef4ca786c9f273d0ef447a77b" sprite="Produn" width="40" height="40" animation="" />
-    <item hash="6ac4a9b1d139b2138653a5a0abbdc2c2" sprite="Produn" width="40" height="40" animation="" />
-    <item hash="6b922402626f16ac98231cfe17daeb51" sprite="Produn" width="40" height="40" animation="" />
     <item hash="6bbe9e25fe30b669d0c0ffc9582ebc4f" sprite="Produn" width="40" height="40" animation="" />
-    <item hash="6be510d8d4332dd9711abe15c0d25c68" sprite="Produn" width="40" height="40" animation="" />
-    <item hash="6c42f88e57fa2a15c83f923e999bdae7" sprite="Produn" width="40" height="40" animation="" />
     <item hash="6d837c6ea98dc6950de6c8b07edae94f" sprite="Produn" width="40" height="40" animation="" />
-    <item hash="6dc71225d99811068ed0e0e1df4d4f0f" sprite="Produn" width="40" height="40" animation="" />
     <item hash="6ef8fb152bd62fd10105a19be5e73c85" sprite="Produn" width="40" height="40" animation="" />
     <item hash="7084c07a303ae9f12ac16458cc6498c3" sprite="Produn" width="40" height="40" animation="" />
-    <item hash="70a149c5849b4784c73725ae39526adb" sprite="Produn" width="40" height="40" animation="" />
     <item hash="71a4ee09dbdc24921017c98f9bdcdde2" sprite="Produn" width="40" height="40" animation="" />
     <item hash="737cd590c838161d085f6b455cc81928" sprite="Produn" width="40" height="40" animation="" />
     <item hash="7676300e92cd9369576017c2be3c08e2" sprite="Produn" width="40" height="40" animation="" />
     <item hash="779165211bbfa1d5de3a3b7478e27937" sprite="Produn" width="40" height="40" animation="" />
-    <item hash="7a560687511cf0a7566a93c2d3f036d1" sprite="Produn" width="40" height="40" animation="" />
-    <item hash="7ca49ea6ba07afb99f838b1d5cc6f0db" sprite="Produn" width="40" height="40" animation="" />
-    <item hash="7e064ebde4c3123a90a2d0f5a52a71bb" sprite="Produn" width="40" height="40" animation="" />
-    <item hash="8178bbb1d253502de25f5a4fa3ed1025" sprite="Produn" width="40" height="40" animation="" />
-    <item hash="81c151268b4eb8ea38b300566b75aa96" sprite="Produn" width="40" height="40" animation="" />
     <item hash="82255d37d0d82e37693d5feeb3b6e628" sprite="Produn" width="40" height="40" animation="" />
     <item hash="82f11c6f5afb6f0c48dd75241e09051e" sprite="Produn" width="40" height="40" animation="" />
-    <item hash="83906b829fd306e98ffe58f3a61867ca" sprite="Produn" width="40" height="40" animation="" />
     <item hash="83b6da4f07b79f9b0befa39376f77775" sprite="Produn" width="40" height="40" animation="" />
     <item hash="83e63d79cab775b2e4a221d05b57598d" sprite="Produn" width="40" height="40" animation="" />
-    <item hash="88cde79c8b0e14a2f79f9484000fd27f" sprite="Produn" width="40" height="40" animation="" />
-    <item hash="89098ff53204256abfc1a3ebb0a80c4e" sprite="Produn" width="40" height="40" animation="" />
-    <item hash="89fc32fb7299a0ff02ac7df4a0bef7a3" sprite="Produn" width="40" height="40" animation="" />
-    <item hash="8c4779e004737d3f9e86ca24ed5f5202" sprite="Produn" width="40" height="40" animation="" />
-    <item hash="8c5bcd038cf89a9d685a57738277dbc9" sprite="Produn" width="40" height="40" animation="" />
-    <item hash="8ca62da36348347a5f1426d579e0ecb4" sprite="Produn" width="40" height="40" animation="" />
-    <item hash="8d325d4685cf43e27de06d377479d38d" sprite="Produn" width="40" height="40" animation="" />
-    <item hash="8ed76da28a12779606c72b68cdd90457" sprite="Produn" width="40" height="40" animation="" />
-    <item hash="8fa6162ba124b7e1103bfb8e9ff36931" sprite="Produn" width="40" height="40" animation="" />
     <item hash="8fc3d430691daae5a416aac0b1a701c3" sprite="Produn" width="40" height="40" animation="" />
-    <item hash="906d009cc5a040de272cb2c84c896b4b" sprite="Produn" width="40" height="40" animation="" />
-    <item hash="90c9db6a59588ba39c49d4a6d387b221" sprite="Produn" width="40" height="40" animation="" />
-    <item hash="911aabbd5f8673feadf08475406773b4" sprite="Produn" width="40" height="40" animation="" />
-    <item hash="933a0f0c3931cb924676102fa6c43408" sprite="Produn" width="40" height="40" animation="" />
-    <item hash="93bb3fb48629e86157012d720f32230f" sprite="Produn" width="40" height="40" animation="" />
-    <item hash="94d3601ca957a1aa2963b33970c79a0e" sprite="Produn" width="40" height="40" animation="" />
-    <item hash="95dc8f9e59d74a83324f852ffff6f0f5" sprite="Produn" width="40" height="40" animation="" />
-    <item hash="9a1e27b77f1409806b40fc69d3ac2504" sprite="Produn" width="40" height="40" animation="" />
     <item hash="9a8c733aa6d075badd93651ce03087ac" sprite="Produn" width="40" height="40" animation="" />
     <item hash="9b7650b70c965e71c4bd0322dd9466ec" sprite="Produn" width="40" height="40" animation="" />
     <item hash="9cdfe01f076a66470d31f7dd96695606" sprite="Produn" width="40" height="40" animation="" />
     <item hash="9eb714a4089f55cb9f6adca2498fc9eb" sprite="Produn" width="40" height="40" animation="" />
     <item hash="a143b841daf61f9b3895ca0fadb679a6" sprite="Produn" width="40" height="40" animation="" />
-    <item hash="a1f959452a3e5c49356eb34090795c62" sprite="Produn" width="40" height="40" animation="" />
     <item hash="a4293d8434d90b38aa7588194810182c" sprite="Produn" width="40" height="40" animation="" />
     <item hash="a45358301d186464e00eb8dc7f2ab746" sprite="Produn" width="40" height="40" animation="" />
     <item hash="a5f7db538b83b84d1cb4bc5db6b8843b" sprite="Produn" width="40" height="40" animation="" />
     <item hash="a608423020a143e38011bc993d186192" sprite="Produn" width="40" height="40" animation="" />
-    <item hash="a6958e704f898d60c4b760e3a0b8f22a" sprite="Produn" width="40" height="40" animation="" />
-    <item hash="a8551b4df5549cffbdda5b5c6a7a6923" sprite="Produn" width="40" height="40" animation="" />
-    <item hash="aa7d1ec81e2fadf123db0a222227ab79" sprite="Produn" width="40" height="40" animation="" />
-    <item hash="ab0241438adbaee0309f49c2dc51de8d" sprite="Produn" width="40" height="40" animation="" />
-    <item hash="ad5106c6760c62d9fe6b0d9a891d6a10" sprite="Produn" width="40" height="40" animation="" />
-    <item hash="af411a819d06369faa9dfc6e4191ec4e" sprite="Produn" width="40" height="40" animation="" />
-    <item hash="b015c90e8a3f575c9d03d2484b19db56" sprite="Produn" width="40" height="40" animation="" />
     <item hash="b0b0aba84f573ab74cda104ef2a1689c" sprite="Produn" width="40" height="40" animation="" />
-    <item hash="b1d9b704d94cb6e77be874b3cfa887b8" sprite="Produn" width="40" height="40" animation="" />
     <item hash="b1e484e0e433294d6ecd0d31ed9aadc8" sprite="Produn" width="40" height="40" animation="" />
     <item hash="b34abc9003a119e557e83b4a0fd11304" sprite="Produn" width="40" height="40" animation="" />
     <item hash="b76bdf4a28209c12836935e08cc330b8" sprite="Produn" width="40" height="40" animation="" />
-    <item hash="bb254b80f83038e359c749f0eccb9c4e" sprite="Produn" width="40" height="40" animation="" />
     <item hash="bd36fb12bdbbb5d19e7a75ba76859130" sprite="Produn" width="40" height="40" animation="" />
-    <item hash="bdaf94ee6694c1d74f6dfbec16663a01" sprite="Produn" width="40" height="40" animation="" />
     <item hash="beafb74c1f4799bf74360d2465d894e4" sprite="Produn" width="40" height="40" animation="" />
-    <item hash="bfff8a3d13d0428962c69a25cf448e1a" sprite="Produn" width="40" height="40" animation="" />
-    <item hash="c170f5fc8e425f8ea7476e17b5b88a8c" sprite="Produn" width="40" height="40" animation="" />
-    <item hash="c201b84042cd50980c5b1b85cd520623" sprite="Produn" width="40" height="40" animation="" />
     <item hash="c26cd6d6632d9406a25686c3467e6f4c" sprite="Produn" width="40" height="40" animation="" />
     <item hash="c3c87b606db9cbd807650c7fec112d60" sprite="Produn" width="40" height="40" animation="" />
     <item hash="c5d4b3d70ad1fb9def5d38217f7b3f5b" sprite="Produn" width="40" height="40" animation="" />
-    <item hash="c5d693518a9a76f8d8c1ccd17ee3c1b4" sprite="Produn" width="40" height="40" animation="" />
     <item hash="c5e00b19baf4b7552a01c9e59873ed45" sprite="Produn" width="40" height="40" animation="" />
     <item hash="c68a83bb441b40ae01e0bde3ac3ba749" sprite="Produn" width="40" height="40" animation="" />
     <item hash="c7d2cd4be102dd3836639bccba745cfc" sprite="Produn" width="40" height="40" animation="" />
-    <item hash="caafad0e47a4908c354282dbd5cb6a86" sprite="Produn" width="40" height="40" animation="" />
     <item hash="cb5845f30f9fd51914b0dfa0289eb7a2" sprite="Produn" width="40" height="40" animation="" />
     <item hash="cb7c9236fdcf6c749612e8f40ddb4dce" sprite="Produn" width="40" height="40" animation="" />
-    <item hash="ccebe8a9a185b696777d984c788fafa3" sprite="Produn" width="40" height="40" animation="" />
-    <item hash="cd540d48e171d6e02ac1ddc76a0a9104" sprite="Produn" width="40" height="40" animation="" />
-    <item hash="ceec75867d3b6274b854ef10c2eb7a5d" sprite="Produn" width="40" height="40" animation="" />
-    <item hash="cf49e1fb4fdac8587766fbdba318f20f" sprite="Produn" width="40" height="40" animation="" />
     <item hash="cfb2adc4c9561d54f3a0921d31a71e4e" sprite="Produn" width="40" height="40" animation="" />
     <item hash="cff2ce79b58bf28a7da537374a6fdfbc" sprite="Produn" width="40" height="40" animation="" />
-    <item hash="d0b3aec0762537b86e518380f292303a" sprite="Produn" width="40" height="40" animation="" />
-    <item hash="d1d079ff8d0f1b5cef5d27cbd512f80b" sprite="Produn" width="40" height="40" animation="" />
     <item hash="d2d8b2421abc89535c9616d20a04126b" sprite="Produn" width="40" height="40" animation="" />
     <item hash="d36fb158cd414b931cbfa2d7a2c9854e" sprite="Produn" width="40" height="40" animation="" />
     <item hash="d3bc54fcc7980178c038cebf35447afd" sprite="Produn" width="40" height="40" animation="" />
     <item hash="d49cc2f435d7d370eec4df314c58d2cf" sprite="Produn" width="40" height="40" animation="" />
     <item hash="d503e86f092e5773c455e51cde8f702a" sprite="Produn" width="40" height="40" animation="" />
     <item hash="d59b3deee32e6ca43fee40db85337cea" sprite="Produn" width="40" height="40" animation="" />
-    <item hash="d67c18e350f85a9b8b0bad7fe7b430b2" sprite="Produn" width="40" height="40" animation="" />
-    <item hash="d7f21e30d2979e14fc907af4e3b2dd51" sprite="Produn" width="40" height="40" animation="" />
-    <item hash="d83b6c2aaf8b6e3eee7b1c6c792eadee" sprite="Produn" width="40" height="40" animation="" />
     <item hash="d91b060fbc9a1bc2a659bcc6d7527eaa" sprite="Produn" width="40" height="40" animation="" />
-    <item hash="daf046887ecbfc0d26a77bd143c55320" sprite="Produn" width="40" height="40" animation="" />
-    <item hash="dbb68bedea58d2ba857232693040302a" sprite="Produn" width="40" height="40" animation="" />
     <item hash="dc190e85da5ebc52a6a98ffec7a8f5e3" sprite="Produn" width="40" height="40" animation="" />
-    <item hash="dc4b3e51574d61753ae5a13020dadc1a" sprite="Produn" width="40" height="40" animation="" />
-    <item hash="dd58daa31957f4a99e196975815c87cd" sprite="Produn" width="40" height="40" animation="" />
     <item hash="e1095565c092b26d511752ad49ff6473" sprite="Produn" width="40" height="40" animation="" />
     <item hash="e2bc641cccb8d01131b6986cd143e559" sprite="Produn" width="40" height="40" animation="" />
     <item hash="e429e9f6dd4e47cd6e6ed2ebbb2d2286" sprite="Produn" width="40" height="40" animation="" />
-    <item hash="e586f0b179af3dc4d7a7925e1dabc36f" sprite="Produn" width="40" height="40" animation="" />
-    <item hash="e5b7f6124179ec2ae7a38e78e0e8994a" sprite="Produn" width="40" height="40" animation="" />
-    <item hash="e84eaded7d7572abd0633a58209f7daf" sprite="Produn" width="40" height="40" animation="" />
     <item hash="e8760aa8c2d89327c13d30d628ce7d72" sprite="Produn" width="40" height="40" animation="" />
-    <item hash="e8b1ce416212e3a13a724bfdc5da8846" sprite="Produn" width="40" height="40" animation="" />
     <item hash="e8f5fb53e8a98469037668928612692a" sprite="Produn" width="40" height="40" animation="" />
     <item hash="e973553a6c47f70bd2419bd1f7e925b4" sprite="Produn" width="40" height="40" animation="" />
-    <item hash="e9f78371b2780f31e21252b22be77c81" sprite="Produn" width="40" height="40" animation="" />
     <item hash="ebd16e6fdf479b18d12a7bc343b12eb2" sprite="Produn" width="40" height="40" animation="" />
     <item hash="ec42f99048f027f2558a0ad7bdac157c" sprite="Produn" width="40" height="40" animation="" />
-    <item hash="ee358b5b219524a191add9ae9da24050" sprite="Produn" width="40" height="40" animation="" />
-    <item hash="eebaad447650cb8343881abe7f709375" sprite="Produn" width="40" height="40" animation="" />
-    <item hash="ef06b23b172667ee2620ebe5461ac3d0" sprite="Produn" width="40" height="40" animation="" />
-    <item hash="f0a2b4003d72535527b580008c1f9317" sprite="Produn" width="40" height="40" animation="" />
     <item hash="f1213203394355540431fc2478560155" sprite="Produn" width="40" height="40" animation="" />
-    <item hash="f208fcf27451924eb69dc3defb191a5f" sprite="Produn" width="40" height="40" animation="" />
     <item hash="f5843496e9ae4ae5f87dc56b22a8a1b4" sprite="Produn" width="40" height="40" animation="" />
     <item hash="f6489bcced3ec9e7f1a33907a15a2a42" sprite="Produn" width="40" height="40" animation="" />
     <item hash="f78bfa8095aee5be4e1a4a1f618f42a0" sprite="Produn" width="40" height="40" animation="" />
-    <item hash="fa6f269f07918fc523df958305d76e42" sprite="Produn" width="40" height="40" animation="" />
     <item hash="fb5f39d9a1006421e7a3a051ad9fa735" sprite="Produn" width="40" height="40" animation="" />
     <item hash="fd832e2a055ff232defe1d25cebf87b4" sprite="Produn" width="40" height="40" animation="" />
     <item hash="fe7ad3bd20eaeb263ba4416c738dfd65" sprite="Produn" width="40" height="40" animation="" />
-    <item hash="ffc934837e165c3626a16329eea9a044" sprite="Produn" width="40" height="40" animation="" />
-    <item hash="34d3f7a6656fef1c1a013661a68040f4" sprite="Produn" width="48" height="40" animation="Dying" />
+    <item hash="0016e3e7b7cfc30a5b7aad5c64d4715b" sprite="Produn (P1)" width="40" height="40" animation="" />
+    <item hash="09cf8e490335ee54a8cfc361e88ee81d" sprite="Produn (P1)" width="40" height="40" animation="" />
+    <item hash="0acce206256d09d8fd0c50b2fb74b2d1" sprite="Produn (P1)" width="40" height="40" animation="" />
+    <item hash="12ac62ca4ef5ac3b2f2e6a2e40a5c378" sprite="Produn (P1)" width="40" height="40" animation="" />
+    <item hash="14b750b625d98c5208e089c57b8dfe78" sprite="Produn (P1)" width="40" height="40" animation="" />
+    <item hash="17826860f36f049314dfcd3d82fb4dba" sprite="Produn (P1)" width="40" height="40" animation="" />
+    <item hash="19ad8474e8038e439b05df94b6d367ed" sprite="Produn (P1)" width="40" height="40" animation="" />
+    <item hash="19b0097d9427243efc480ad27c487f12" sprite="Produn (P1)" width="40" height="40" animation="" />
+    <item hash="1b2a2fcd24b473c03234b6328e2c3db6" sprite="Produn (P1)" width="40" height="40" animation="" />
+    <item hash="1c427f3ad31c579557603814de232f84" sprite="Produn (P1)" width="40" height="40" animation="" />
+    <item hash="1fb3456b330ef726ee4ce7c8f1b6bcb9" sprite="Produn (P1)" width="40" height="40" animation="" />
+    <item hash="210dbdcfaff12c1294dd30c27b4a33ff" sprite="Produn (P1)" width="40" height="40" animation="" />
+    <item hash="21e3a32697530396528deb8963c70d29" sprite="Produn (P1)" width="40" height="40" animation="" />
+    <item hash="21ed87d4da9a786d5c4bf1fc83c9bc6b" sprite="Produn (P1)" width="40" height="40" animation="" />
+    <item hash="246251029eac6335468f065e64ff74e4" sprite="Produn (P1)" width="40" height="40" animation="" />
+    <item hash="250e91c8648b84c30dcb9330513b6314" sprite="Produn (P1)" width="40" height="40" animation="" />
+    <item hash="2666645d434b90d917552544f219e828" sprite="Produn (P1)" width="40" height="40" animation="" />
+    <item hash="2a3fa3e5185c98d08271a19c00fc01e4" sprite="Produn (P1)" width="40" height="40" animation="" />
+    <item hash="2ce34b7f5a1adb6804c87d769e6599e0" sprite="Produn (P1)" width="40" height="40" animation="" />
+    <item hash="2d39c84755a7bda93605643dbe12a910" sprite="Produn (P1)" width="40" height="40" animation="" />
+    <item hash="2da71c71a8ce2b5b178ddf7588e9526f" sprite="Produn (P1)" width="40" height="40" animation="" />
+    <item hash="2f14778100b96b4d35902faab4d72a2d" sprite="Produn (P1)" width="40" height="40" animation="" />
+    <item hash="2f8f4e5b6021bd6e35e7b40584c16636" sprite="Produn (P1)" width="40" height="40" animation="" />
+    <item hash="31f1f4b21020d961979d202fbe48d5d1" sprite="Produn (P1)" width="40" height="40" animation="" />
+    <item hash="34ab2aa50e850b93fdd3fbefc23a59c8" sprite="Produn (P1)" width="40" height="40" animation="" />
+    <item hash="34de25c33fef8d2a039bee51ef79dd21" sprite="Produn (P1)" width="40" height="40" animation="" />
+    <item hash="365391c1c5be8a583e227253ab9b2b00" sprite="Produn (P1)" width="40" height="40" animation="" />
+    <item hash="37091e3ede4c23ec36d5579e53b706b3" sprite="Produn (P1)" width="40" height="40" animation="" />
+    <item hash="3e17820d033164f8c02dce60a113c7e3" sprite="Produn (P1)" width="40" height="40" animation="" />
+    <item hash="3ecf6e3523d40a180b43a5f2e55f1a5f" sprite="Produn (P1)" width="40" height="40" animation="" />
+    <item hash="405a5b34f3bed270d0e93943726a9ec1" sprite="Produn (P1)" width="40" height="40" animation="" />
+    <item hash="4066b235c76f595cd369d829180305af" sprite="Produn (P1)" width="40" height="40" animation="" />
+    <item hash="45fd7496ee25a43a9fc1503c0a9c9fb0" sprite="Produn (P1)" width="40" height="40" animation="" />
+    <item hash="47134398eaa24e4dc2af02faedcbdd3b" sprite="Produn (P1)" width="40" height="40" animation="" />
+    <item hash="483083e7882b5c0725d9cba4332eab31" sprite="Produn (P1)" width="40" height="40" animation="" />
+    <item hash="486505b6b79f2b94696ac5350bbeca72" sprite="Produn (P1)" width="40" height="40" animation="" />
+    <item hash="4a47a8d4677d5d78430da0e7956d9be2" sprite="Produn (P1)" width="40" height="40" animation="" />
+    <item hash="4d2457e1dfc46dd7a5cfade462b344a9" sprite="Produn (P1)" width="40" height="40" animation="" />
+    <item hash="4ea3cdefe03f8005667ba7fda736488c" sprite="Produn (P1)" width="40" height="40" animation="" />
+    <item hash="4f61de4deb8ec0a6634783fc24c70df3" sprite="Produn (P1)" width="40" height="40" animation="" />
+    <item hash="4fa4c8b9144fc4f882916e5a343bf098" sprite="Produn (P1)" width="40" height="40" animation="" />
+    <item hash="52a85e6c81ca107c37ea48d79c885e98" sprite="Produn (P1)" width="40" height="40" animation="" />
+    <item hash="568fd60ed8ff75586a4846c72c4762c2" sprite="Produn (P1)" width="40" height="40" animation="" />
+    <item hash="5a9aa4a136d3964a9330e6522fb42e15" sprite="Produn (P1)" width="40" height="40" animation="" />
+    <item hash="5ef3e33e5ed14943549d79ded16343b7" sprite="Produn (P1)" width="40" height="40" animation="" />
+    <item hash="5f17fd0e404d384000ab3098a9d78719" sprite="Produn (P1)" width="40" height="40" animation="" />
+    <item hash="5f42211efe76b308650ec1cc0c6e3e0f" sprite="Produn (P1)" width="40" height="40" animation="" />
+    <item hash="5f7f9f084f915acf1c925ad92f066072" sprite="Produn (P1)" width="40" height="40" animation="" />
+    <item hash="6670c75736ae3ec6f5eeff186a85a20a" sprite="Produn (P1)" width="40" height="40" animation="" />
+    <item hash="675d689f9c4a7fb585866cf9702243d7" sprite="Produn (P1)" width="40" height="40" animation="" />
+    <item hash="681b11e083d2e5749bb23ecccd7da27d" sprite="Produn (P1)" width="40" height="40" animation="" />
+    <item hash="6ac4a9b1d139b2138653a5a0abbdc2c2" sprite="Produn (P1)" width="40" height="40" animation="" />
+    <item hash="6b922402626f16ac98231cfe17daeb51" sprite="Produn (P1)" width="40" height="40" animation="" />
+    <item hash="6be510d8d4332dd9711abe15c0d25c68" sprite="Produn (P1)" width="40" height="40" animation="" />
+    <item hash="6c42f88e57fa2a15c83f923e999bdae7" sprite="Produn (P1)" width="40" height="40" animation="" />
+    <item hash="6dc71225d99811068ed0e0e1df4d4f0f" sprite="Produn (P1)" width="40" height="40" animation="" />
+    <item hash="70a149c5849b4784c73725ae39526adb" sprite="Produn (P1)" width="40" height="40" animation="" />
+    <item hash="7a560687511cf0a7566a93c2d3f036d1" sprite="Produn (P1)" width="40" height="40" animation="" />
+    <item hash="7ca49ea6ba07afb99f838b1d5cc6f0db" sprite="Produn (P1)" width="40" height="40" animation="" />
+    <item hash="7e064ebde4c3123a90a2d0f5a52a71bb" sprite="Produn (P1)" width="40" height="40" animation="" />
+    <item hash="8178bbb1d253502de25f5a4fa3ed1025" sprite="Produn (P1)" width="40" height="40" animation="" />
+    <item hash="81c151268b4eb8ea38b300566b75aa96" sprite="Produn (P1)" width="40" height="40" animation="" />
+    <item hash="83906b829fd306e98ffe58f3a61867ca" sprite="Produn (P1)" width="40" height="40" animation="" />
+    <item hash="88cde79c8b0e14a2f79f9484000fd27f" sprite="Produn (P1)" width="40" height="40" animation="" />
+    <item hash="89098ff53204256abfc1a3ebb0a80c4e" sprite="Produn (P1)" width="40" height="40" animation="" />
+    <item hash="89fc32fb7299a0ff02ac7df4a0bef7a3" sprite="Produn (P1)" width="40" height="40" animation="" />
+    <item hash="8c4779e004737d3f9e86ca24ed5f5202" sprite="Produn (P1)" width="40" height="40" animation="" />
+    <item hash="8c5bcd038cf89a9d685a57738277dbc9" sprite="Produn (P1)" width="40" height="40" animation="" />
+    <item hash="8ca62da36348347a5f1426d579e0ecb4" sprite="Produn (P1)" width="40" height="40" animation="" />
+    <item hash="8d325d4685cf43e27de06d377479d38d" sprite="Produn (P1)" width="40" height="40" animation="" />
+    <item hash="8ed76da28a12779606c72b68cdd90457" sprite="Produn (P1)" width="40" height="40" animation="" />
+    <item hash="8fa6162ba124b7e1103bfb8e9ff36931" sprite="Produn (P1)" width="40" height="40" animation="" />
+    <item hash="906d009cc5a040de272cb2c84c896b4b" sprite="Produn (P1)" width="40" height="40" animation="" />
+    <item hash="90c9db6a59588ba39c49d4a6d387b221" sprite="Produn (P1)" width="40" height="40" animation="" />
+    <item hash="911aabbd5f8673feadf08475406773b4" sprite="Produn (P1)" width="40" height="40" animation="" />
+    <item hash="933a0f0c3931cb924676102fa6c43408" sprite="Produn (P1)" width="40" height="40" animation="" />
+    <item hash="93bb3fb48629e86157012d720f32230f" sprite="Produn (P1)" width="40" height="40" animation="" />
+    <item hash="94d3601ca957a1aa2963b33970c79a0e" sprite="Produn (P1)" width="40" height="40" animation="" />
+    <item hash="95dc8f9e59d74a83324f852ffff6f0f5" sprite="Produn (P1)" width="40" height="40" animation="" />
+    <item hash="9a1e27b77f1409806b40fc69d3ac2504" sprite="Produn (P1)" width="40" height="40" animation="" />
+    <item hash="a1f959452a3e5c49356eb34090795c62" sprite="Produn (P1)" width="40" height="40" animation="" />
+    <item hash="a6958e704f898d60c4b760e3a0b8f22a" sprite="Produn (P1)" width="40" height="40" animation="" />
+    <item hash="a8551b4df5549cffbdda5b5c6a7a6923" sprite="Produn (P1)" width="40" height="40" animation="" />
+    <item hash="aa7d1ec81e2fadf123db0a222227ab79" sprite="Produn (P1)" width="40" height="40" animation="" />
+    <item hash="ab0241438adbaee0309f49c2dc51de8d" sprite="Produn (P1)" width="40" height="40" animation="" />
+    <item hash="ad5106c6760c62d9fe6b0d9a891d6a10" sprite="Produn (P1)" width="40" height="40" animation="" />
+    <item hash="af411a819d06369faa9dfc6e4191ec4e" sprite="Produn (P1)" width="40" height="40" animation="" />
+    <item hash="b015c90e8a3f575c9d03d2484b19db56" sprite="Produn (P1)" width="40" height="40" animation="" />
+    <item hash="b1d9b704d94cb6e77be874b3cfa887b8" sprite="Produn (P1)" width="40" height="40" animation="" />
+    <item hash="bb254b80f83038e359c749f0eccb9c4e" sprite="Produn (P1)" width="40" height="40" animation="" />
+    <item hash="bdaf94ee6694c1d74f6dfbec16663a01" sprite="Produn (P1)" width="40" height="40" animation="" />
+    <item hash="bfff8a3d13d0428962c69a25cf448e1a" sprite="Produn (P1)" width="40" height="40" animation="" />
+    <item hash="c170f5fc8e425f8ea7476e17b5b88a8c" sprite="Produn (P1)" width="40" height="40" animation="" />
+    <item hash="c201b84042cd50980c5b1b85cd520623" sprite="Produn (P1)" width="40" height="40" animation="" />
+    <item hash="c5d693518a9a76f8d8c1ccd17ee3c1b4" sprite="Produn (P1)" width="40" height="40" animation="" />
+    <item hash="caafad0e47a4908c354282dbd5cb6a86" sprite="Produn (P1)" width="40" height="40" animation="" />
+    <item hash="ccebe8a9a185b696777d984c788fafa3" sprite="Produn (P1)" width="40" height="40" animation="" />
+    <item hash="cd540d48e171d6e02ac1ddc76a0a9104" sprite="Produn (P1)" width="40" height="40" animation="" />
+    <item hash="ceec75867d3b6274b854ef10c2eb7a5d" sprite="Produn (P1)" width="40" height="40" animation="" />
+    <item hash="cf49e1fb4fdac8587766fbdba318f20f" sprite="Produn (P1)" width="40" height="40" animation="" />
+    <item hash="d0b3aec0762537b86e518380f292303a" sprite="Produn (P1)" width="40" height="40" animation="" />
+    <item hash="d1d079ff8d0f1b5cef5d27cbd512f80b" sprite="Produn (P1)" width="40" height="40" animation="" />
+    <item hash="d67c18e350f85a9b8b0bad7fe7b430b2" sprite="Produn (P1)" width="40" height="40" animation="" />
+    <item hash="d7f21e30d2979e14fc907af4e3b2dd51" sprite="Produn (P1)" width="40" height="40" animation="" />
+    <item hash="d83b6c2aaf8b6e3eee7b1c6c792eadee" sprite="Produn (P1)" width="40" height="40" animation="" />
+    <item hash="daf046887ecbfc0d26a77bd143c55320" sprite="Produn (P1)" width="40" height="40" animation="" />
+    <item hash="dbb68bedea58d2ba857232693040302a" sprite="Produn (P1)" width="40" height="40" animation="" />
+    <item hash="dc4b3e51574d61753ae5a13020dadc1a" sprite="Produn (P1)" width="40" height="40" animation="" />
+    <item hash="dd58daa31957f4a99e196975815c87cd" sprite="Produn (P1)" width="40" height="40" animation="" />
+    <item hash="e586f0b179af3dc4d7a7925e1dabc36f" sprite="Produn (P1)" width="40" height="40" animation="" />
+    <item hash="e5b7f6124179ec2ae7a38e78e0e8994a" sprite="Produn (P1)" width="40" height="40" animation="" />
+    <item hash="e84eaded7d7572abd0633a58209f7daf" sprite="Produn (P1)" width="40" height="40" animation="" />
+    <item hash="e8b1ce416212e3a13a724bfdc5da8846" sprite="Produn (P1)" width="40" height="40" animation="" />
+    <item hash="e9f78371b2780f31e21252b22be77c81" sprite="Produn (P1)" width="40" height="40" animation="" />
+    <item hash="ee358b5b219524a191add9ae9da24050" sprite="Produn (P1)" width="40" height="40" animation="" />
+    <item hash="eebaad447650cb8343881abe7f709375" sprite="Produn (P1)" width="40" height="40" animation="" />
+    <item hash="ef06b23b172667ee2620ebe5461ac3d0" sprite="Produn (P1)" width="40" height="40" animation="" />
+    <item hash="f0a2b4003d72535527b580008c1f9317" sprite="Produn (P1)" width="40" height="40" animation="" />
+    <item hash="f208fcf27451924eb69dc3defb191a5f" sprite="Produn (P1)" width="40" height="40" animation="" />
+    <item hash="fa6f269f07918fc523df958305d76e42" sprite="Produn (P1)" width="40" height="40" animation="" />
+    <item hash="ffc934837e165c3626a16329eea9a044" sprite="Produn (P1)" width="40" height="40" animation="" />
+    <item hash="34d3f7a6656fef1c1a013661a68040f4" sprite="Produn (P1)" width="48" height="40" animation="Dying" />
     <item hash="0ea6bf2ce6852268b229b633777c6fc2" sprite="Queen Worm" width="48" height="32" animation="" />
     <item hash="10b4d5e81da3bcf9def93ea08e05d08f" sprite="Queen Worm" width="48" height="32" animation="" />
     <item hash="17994adf7b382da54daa513d2b96105f" sprite="Queen Worm" width="48" height="32" animation="" />
@@ -20287,90 +20287,90 @@
     <item hash="40dd138b5c7b2a9b561e0743fd6035bb" sprite="Rock (U)" width="48" height="40" animation="" />
     <item hash="8f9cdc01d800e7c50c7d3e7a2af3e751" sprite="Rock (U)" width="48" height="40" animation="" />
     <item hash="37ae9d5b7cacbe694c0ddd825be47ac7" sprite="Rock Thrown By Kid" width="32" height="32" animation="" />
-    <item hash="00b88222e67fdf957c505138f155c513" sprite="Rogan" width="40" height="40" animation="" />
-    <item hash="0a5cb979f5620e0f025070acc603d5a9" sprite="Rogan" width="40" height="40" animation="" />
-    <item hash="0a9274d1967d82b585b87d87eda2c9e8" sprite="Rogan" width="40" height="40" animation="" />
-    <item hash="0f008ec290b8abc36fef4bc7f94d06e8" sprite="Rogan" width="40" height="40" animation="" />
-    <item hash="1044dbecb8205b9a9fd36e693927e45d" sprite="Rogan" width="40" height="40" animation="" />
-    <item hash="13a42726eab062c02ccd4996b8263156" sprite="Rogan" width="40" height="40" animation="" />
-    <item hash="18415f9b827fe43cadd1d5a66e286662" sprite="Rogan" width="40" height="40" animation="" />
-    <item hash="18a1c8002ced0a5aecd9450bfc38f819" sprite="Rogan" width="40" height="40" animation="" />
-    <item hash="1bf277a4beec6138abe74d9339738fd9" sprite="Rogan" width="40" height="40" animation="" />
-    <item hash="1f5e9572521258398284add98c1209a4" sprite="Rogan" width="40" height="40" animation="" />
-    <item hash="221041714ee0bc126c5fc701e061c9ae" sprite="Rogan" width="40" height="40" animation="" />
-    <item hash="25ede3edf2130ac87e39ef1b70f1c00b" sprite="Rogan" width="40" height="40" animation="" />
-    <item hash="2961bf000f3e67c6f84aa6e8776384e5" sprite="Rogan" width="40" height="40" animation="" />
-    <item hash="2c7cfd241c66ba5b60308cad7af7c609" sprite="Rogan" width="40" height="40" animation="" />
-    <item hash="2f0576b1a0f9d9809fa54c6c239c40dc" sprite="Rogan" width="40" height="40" animation="" />
-    <item hash="301e69d41c68184e14f4d3b2dc0b2a59" sprite="Rogan" width="40" height="40" animation="" />
-    <item hash="33ed5b802201f238c658c5fc43770611" sprite="Rogan" width="40" height="40" animation="" />
-    <item hash="391b4a0bedbff8c65f6816e5556be520" sprite="Rogan" width="40" height="40" animation="" />
-    <item hash="3a7efca9105157d4157421416cb5a7b0" sprite="Rogan" width="40" height="40" animation="" />
-    <item hash="3bf0e43c691850b2cd3e0daf2331db5c" sprite="Rogan" width="40" height="40" animation="" />
-    <item hash="3d388f29ccc58dc056bdedccad6ae2de" sprite="Rogan" width="40" height="40" animation="" />
-    <item hash="4590fb2db83b250cb8cd91bf0034b632" sprite="Rogan" width="40" height="40" animation="" />
-    <item hash="47db5a6986ccfb547f89b73dc0ae1d7a" sprite="Rogan" width="40" height="40" animation="" />
-    <item hash="48ae8655985e59e32a9d26d0bfd50f9a" sprite="Rogan" width="40" height="40" animation="" />
-    <item hash="4e8bb7a9cd0c63ef67bb928e82c731f5" sprite="Rogan" width="40" height="40" animation="" />
-    <item hash="4f2d1fe11bef4dc34ea00c97dc2fadfe" sprite="Rogan" width="40" height="40" animation="" />
-    <item hash="4f2f3ce46e0ab704878c2ecb41c8ecae" sprite="Rogan" width="40" height="40" animation="" />
-    <item hash="55dc859498b872dff22cdffb258a2817" sprite="Rogan" width="40" height="40" animation="" />
-    <item hash="58936b6df6e0e09401ab550317713b81" sprite="Rogan" width="40" height="40" animation="" />
-    <item hash="5c665ce1939ce783dceb09a5121bdc03" sprite="Rogan" width="40" height="40" animation="" />
-    <item hash="5f36aa5b8a07e76442b15528417d1e9c" sprite="Rogan" width="40" height="40" animation="" />
-    <item hash="5fa22b3ed7c74e0a144966db4f207ede" sprite="Rogan" width="40" height="40" animation="" />
-    <item hash="625ffaa2dfebe7ce9c29cce0ec8a4e75" sprite="Rogan" width="40" height="40" animation="" />
-    <item hash="6286ed1c293899548956154173086f8c" sprite="Rogan" width="40" height="40" animation="" />
-    <item hash="63364ab98c1962b4dc72b5cccf08df6b" sprite="Rogan" width="40" height="40" animation="" />
-    <item hash="6368bdbdac4c938c27e640c7c6c99a47" sprite="Rogan" width="40" height="40" animation="" />
-    <item hash="6a612ab1cdfdaa9068aa2fca6dcc7bbb" sprite="Rogan" width="40" height="40" animation="" />
-    <item hash="6ef7511b295c649e55ca0acf29e4cf27" sprite="Rogan" width="40" height="40" animation="" />
-    <item hash="7142100026b80b05e8602c5455606224" sprite="Rogan" width="40" height="40" animation="" />
-    <item hash="7525c13c5e2ea4b9c7cc1d2be8332bea" sprite="Rogan" width="40" height="40" animation="" />
-    <item hash="78edbdbeca1be73cdc919b7146aa69cd" sprite="Rogan" width="40" height="40" animation="" />
-    <item hash="79729c558406c0fb32120ef528753e50" sprite="Rogan" width="40" height="40" animation="" />
-    <item hash="7aad65b2cf0131a1a97f858c325f9fc8" sprite="Rogan" width="40" height="40" animation="" />
-    <item hash="7b135b12e524dc2f5af8b77563f44eca" sprite="Rogan" width="40" height="40" animation="" />
-    <item hash="7d654543c7e0fef1d31c1875c9923a79" sprite="Rogan" width="40" height="40" animation="" />
-    <item hash="7dbf91ba29e86e790e8d86efd286d227" sprite="Rogan" width="40" height="40" animation="" />
-    <item hash="7dead52d6c0d8e683c1fc45062b832e0" sprite="Rogan" width="40" height="40" animation="" />
-    <item hash="85f93781e5f306f37879693f3df62e07" sprite="Rogan" width="40" height="40" animation="" />
-    <item hash="87406b4f58eb0ef0aa3418ab6c169a26" sprite="Rogan" width="40" height="40" animation="" />
-    <item hash="8b448c951fcef7d776aaf82fa6ad44b6" sprite="Rogan" width="40" height="40" animation="" />
-    <item hash="8b5219729c767221e7c422c032a7289d" sprite="Rogan" width="40" height="40" animation="" />
-    <item hash="915df0408ff9e4ccedf9db76e4cfcf70" sprite="Rogan" width="40" height="40" animation="" />
-    <item hash="9494d8421048ebad958afe8578962b81" sprite="Rogan" width="40" height="40" animation="" />
-    <item hash="95a8d76d72e0cd0e8794e2153c739308" sprite="Rogan" width="40" height="40" animation="" />
-    <item hash="9651fb73b55006b016b755583ce88fec" sprite="Rogan" width="40" height="40" animation="" />
-    <item hash="99a900f4a3e0ba3ef6075facd57a2ae2" sprite="Rogan" width="40" height="40" animation="" />
-    <item hash="9ada1307338c18b354a211d8b59b6307" sprite="Rogan" width="40" height="40" animation="" />
-    <item hash="9c5dc8652cc069f5b30b3458c1923098" sprite="Rogan" width="40" height="40" animation="" />
-    <item hash="9fd4d2fd8e47382230e483feb5890e7c" sprite="Rogan" width="40" height="40" animation="" />
-    <item hash="ad29c19ec850dfc32c07d4fbda1cbfd3" sprite="Rogan" width="40" height="40" animation="" />
-    <item hash="b11b2564b1553295277f2eae9f06e3fe" sprite="Rogan" width="40" height="40" animation="" />
-    <item hash="b38c95c4645a7dd71671f43d0d8f559b" sprite="Rogan" width="40" height="40" animation="" />
-    <item hash="b92ae81b81620576643d253c3dc7dc83" sprite="Rogan" width="40" height="40" animation="" />
-    <item hash="ba5f1259e5c1e2070827e812542fe5d8" sprite="Rogan" width="40" height="40" animation="" />
-    <item hash="c400e1d2dba6cce8538a14851294f872" sprite="Rogan" width="40" height="40" animation="" />
-    <item hash="c94aa03d6adb50b189b4275ebbc48a91" sprite="Rogan" width="40" height="40" animation="" />
-    <item hash="cace84e479a6234a1f3e9844093db6cf" sprite="Rogan" width="40" height="40" animation="" />
-    <item hash="cb0bfa1c8a1d49cbf593af9b0ae52625" sprite="Rogan" width="40" height="40" animation="" />
-    <item hash="d0d16a65de4c257c197440f165199e7a" sprite="Rogan" width="40" height="40" animation="" />
-    <item hash="d2c968729e493b468d179811d8898f00" sprite="Rogan" width="40" height="40" animation="" />
-    <item hash="de9426e068b7b1f00a77012a3137734e" sprite="Rogan" width="40" height="40" animation="" />
-    <item hash="ef3df2920bf690ef038b6e65bf7f297d" sprite="Rogan" width="40" height="40" animation="" />
-    <item hash="f0101b70394d790b9862934b8067d26c" sprite="Rogan" width="40" height="40" animation="" />
-    <item hash="f028fdb40da16c39f630eb0097f5b45c" sprite="Rogan" width="40" height="40" animation="" />
-    <item hash="f043045b8e5765a60a1686779b36750c" sprite="Rogan" width="40" height="40" animation="" />
-    <item hash="f10809ac73139686601e05fd43fe030d" sprite="Rogan" width="40" height="40" animation="" />
-    <item hash="f1c71d282558a8f1d744207c5a42ba55" sprite="Rogan" width="40" height="40" animation="" />
-    <item hash="f3ce452ec11b86b4d35e7c0515aba48d" sprite="Rogan" width="40" height="40" animation="" />
-    <item hash="f4c396534744ca9a6617e68c8022731a" sprite="Rogan" width="40" height="40" animation="" />
-    <item hash="f628b158c641645f958afb054ebf863d" sprite="Rogan" width="40" height="40" animation="" />
-    <item hash="f7eb0784f0f19bd773a5653ffdb3e594" sprite="Rogan" width="40" height="40" animation="" />
-    <item hash="fb03846c69475f523688c0d52135e113" sprite="Rogan" width="40" height="40" animation="" />
-    <item hash="fe76ccc24a82202d96d720f6123ab6be" sprite="Rogan" width="40" height="40" animation="" />
-    <item hash="ffeddec9d7dfd8c92a11de2a97bfccb3" sprite="Rogan" width="40" height="40" animation="" />
+    <item hash="25ede3edf2130ac87e39ef1b70f1c00b" sprite="Rogan (Alt)" width="40" height="40" animation="" />
+    <item hash="301e69d41c68184e14f4d3b2dc0b2a59" sprite="Rogan (Alt)" width="40" height="40" animation="" />
+    <item hash="48ae8655985e59e32a9d26d0bfd50f9a" sprite="Rogan (Alt)" width="40" height="40" animation="" />
+    <item hash="58936b6df6e0e09401ab550317713b81" sprite="Rogan (Alt)" width="40" height="40" animation="" />
+    <item hash="7142100026b80b05e8602c5455606224" sprite="Rogan (Alt)" width="40" height="40" animation="" />
+    <item hash="79729c558406c0fb32120ef528753e50" sprite="Rogan (Alt)" width="40" height="40" animation="" />
+    <item hash="8b448c951fcef7d776aaf82fa6ad44b6" sprite="Rogan (Alt)" width="40" height="40" animation="" />
+    <item hash="915df0408ff9e4ccedf9db76e4cfcf70" sprite="Rogan (Alt)" width="40" height="40" animation="" />
+    <item hash="b38c95c4645a7dd71671f43d0d8f559b" sprite="Rogan (Alt)" width="40" height="40" animation="" />
+    <item hash="b92ae81b81620576643d253c3dc7dc83" sprite="Rogan (Alt)" width="40" height="40" animation="" />
+    <item hash="cace84e479a6234a1f3e9844093db6cf" sprite="Rogan (Alt)" width="40" height="40" animation="" />
+    <item hash="fb03846c69475f523688c0d52135e113" sprite="Rogan (Alt)" width="40" height="40" animation="" />
+    <item hash="00b88222e67fdf957c505138f155c513" sprite="Rogan (P1)" width="40" height="40" animation="" />
+    <item hash="0a5cb979f5620e0f025070acc603d5a9" sprite="Rogan (P1)" width="40" height="40" animation="" />
+    <item hash="0a9274d1967d82b585b87d87eda2c9e8" sprite="Rogan (P1)" width="40" height="40" animation="" />
+    <item hash="0f008ec290b8abc36fef4bc7f94d06e8" sprite="Rogan (P1)" width="40" height="40" animation="" />
+    <item hash="1044dbecb8205b9a9fd36e693927e45d" sprite="Rogan (P1)" width="40" height="40" animation="" />
+    <item hash="13a42726eab062c02ccd4996b8263156" sprite="Rogan (P1)" width="40" height="40" animation="" />
+    <item hash="18415f9b827fe43cadd1d5a66e286662" sprite="Rogan (P1)" width="40" height="40" animation="" />
+    <item hash="18a1c8002ced0a5aecd9450bfc38f819" sprite="Rogan (P1)" width="40" height="40" animation="" />
+    <item hash="1bf277a4beec6138abe74d9339738fd9" sprite="Rogan (P1)" width="40" height="40" animation="" />
+    <item hash="1f5e9572521258398284add98c1209a4" sprite="Rogan (P1)" width="40" height="40" animation="" />
+    <item hash="221041714ee0bc126c5fc701e061c9ae" sprite="Rogan (P1)" width="40" height="40" animation="" />
+    <item hash="2961bf000f3e67c6f84aa6e8776384e5" sprite="Rogan (P1)" width="40" height="40" animation="" />
+    <item hash="2c7cfd241c66ba5b60308cad7af7c609" sprite="Rogan (P1)" width="40" height="40" animation="" />
+    <item hash="2f0576b1a0f9d9809fa54c6c239c40dc" sprite="Rogan (P1)" width="40" height="40" animation="" />
+    <item hash="33ed5b802201f238c658c5fc43770611" sprite="Rogan (P1)" width="40" height="40" animation="" />
+    <item hash="391b4a0bedbff8c65f6816e5556be520" sprite="Rogan (P1)" width="40" height="40" animation="" />
+    <item hash="3a7efca9105157d4157421416cb5a7b0" sprite="Rogan (P1)" width="40" height="40" animation="" />
+    <item hash="3bf0e43c691850b2cd3e0daf2331db5c" sprite="Rogan (P1)" width="40" height="40" animation="" />
+    <item hash="3d388f29ccc58dc056bdedccad6ae2de" sprite="Rogan (P1)" width="40" height="40" animation="" />
+    <item hash="4590fb2db83b250cb8cd91bf0034b632" sprite="Rogan (P1)" width="40" height="40" animation="" />
+    <item hash="47db5a6986ccfb547f89b73dc0ae1d7a" sprite="Rogan (P1)" width="40" height="40" animation="" />
+    <item hash="4e8bb7a9cd0c63ef67bb928e82c731f5" sprite="Rogan (P1)" width="40" height="40" animation="" />
+    <item hash="4f2d1fe11bef4dc34ea00c97dc2fadfe" sprite="Rogan (P1)" width="40" height="40" animation="" />
+    <item hash="4f2f3ce46e0ab704878c2ecb41c8ecae" sprite="Rogan (P1)" width="40" height="40" animation="" />
+    <item hash="55dc859498b872dff22cdffb258a2817" sprite="Rogan (P1)" width="40" height="40" animation="" />
+    <item hash="5c665ce1939ce783dceb09a5121bdc03" sprite="Rogan (P1)" width="40" height="40" animation="" />
+    <item hash="5f36aa5b8a07e76442b15528417d1e9c" sprite="Rogan (P1)" width="40" height="40" animation="" />
+    <item hash="5fa22b3ed7c74e0a144966db4f207ede" sprite="Rogan (P1)" width="40" height="40" animation="" />
+    <item hash="625ffaa2dfebe7ce9c29cce0ec8a4e75" sprite="Rogan (P1)" width="40" height="40" animation="" />
+    <item hash="6286ed1c293899548956154173086f8c" sprite="Rogan (P1)" width="40" height="40" animation="" />
+    <item hash="63364ab98c1962b4dc72b5cccf08df6b" sprite="Rogan (P1)" width="40" height="40" animation="" />
+    <item hash="6368bdbdac4c938c27e640c7c6c99a47" sprite="Rogan (P1)" width="40" height="40" animation="" />
+    <item hash="6a612ab1cdfdaa9068aa2fca6dcc7bbb" sprite="Rogan (P1)" width="40" height="40" animation="" />
+    <item hash="6ef7511b295c649e55ca0acf29e4cf27" sprite="Rogan (P1)" width="40" height="40" animation="" />
+    <item hash="7525c13c5e2ea4b9c7cc1d2be8332bea" sprite="Rogan (P1)" width="40" height="40" animation="" />
+    <item hash="78edbdbeca1be73cdc919b7146aa69cd" sprite="Rogan (P1)" width="40" height="40" animation="" />
+    <item hash="7aad65b2cf0131a1a97f858c325f9fc8" sprite="Rogan (P1)" width="40" height="40" animation="" />
+    <item hash="7b135b12e524dc2f5af8b77563f44eca" sprite="Rogan (P1)" width="40" height="40" animation="" />
+    <item hash="7d654543c7e0fef1d31c1875c9923a79" sprite="Rogan (P1)" width="40" height="40" animation="" />
+    <item hash="7dbf91ba29e86e790e8d86efd286d227" sprite="Rogan (P1)" width="40" height="40" animation="" />
+    <item hash="7dead52d6c0d8e683c1fc45062b832e0" sprite="Rogan (P1)" width="40" height="40" animation="" />
+    <item hash="85f93781e5f306f37879693f3df62e07" sprite="Rogan (P1)" width="40" height="40" animation="" />
+    <item hash="87406b4f58eb0ef0aa3418ab6c169a26" sprite="Rogan (P1)" width="40" height="40" animation="" />
+    <item hash="8b5219729c767221e7c422c032a7289d" sprite="Rogan (P1)" width="40" height="40" animation="" />
+    <item hash="9494d8421048ebad958afe8578962b81" sprite="Rogan (P1)" width="40" height="40" animation="" />
+    <item hash="95a8d76d72e0cd0e8794e2153c739308" sprite="Rogan (P1)" width="40" height="40" animation="" />
+    <item hash="9651fb73b55006b016b755583ce88fec" sprite="Rogan (P1)" width="40" height="40" animation="" />
+    <item hash="99a900f4a3e0ba3ef6075facd57a2ae2" sprite="Rogan (P1)" width="40" height="40" animation="" />
+    <item hash="9ada1307338c18b354a211d8b59b6307" sprite="Rogan (P1)" width="40" height="40" animation="" />
+    <item hash="9c5dc8652cc069f5b30b3458c1923098" sprite="Rogan (P1)" width="40" height="40" animation="" />
+    <item hash="9fd4d2fd8e47382230e483feb5890e7c" sprite="Rogan (P1)" width="40" height="40" animation="" />
+    <item hash="ad29c19ec850dfc32c07d4fbda1cbfd3" sprite="Rogan (P1)" width="40" height="40" animation="" />
+    <item hash="b11b2564b1553295277f2eae9f06e3fe" sprite="Rogan (P1)" width="40" height="40" animation="" />
+    <item hash="ba5f1259e5c1e2070827e812542fe5d8" sprite="Rogan (P1)" width="40" height="40" animation="" />
+    <item hash="c400e1d2dba6cce8538a14851294f872" sprite="Rogan (P1)" width="40" height="40" animation="" />
+    <item hash="c94aa03d6adb50b189b4275ebbc48a91" sprite="Rogan (P1)" width="40" height="40" animation="" />
+    <item hash="cb0bfa1c8a1d49cbf593af9b0ae52625" sprite="Rogan (P1)" width="40" height="40" animation="" />
+    <item hash="d0d16a65de4c257c197440f165199e7a" sprite="Rogan (P1)" width="40" height="40" animation="" />
+    <item hash="d2c968729e493b468d179811d8898f00" sprite="Rogan (P1)" width="40" height="40" animation="" />
+    <item hash="de9426e068b7b1f00a77012a3137734e" sprite="Rogan (P1)" width="40" height="40" animation="" />
+    <item hash="ef3df2920bf690ef038b6e65bf7f297d" sprite="Rogan (P1)" width="40" height="40" animation="" />
+    <item hash="f0101b70394d790b9862934b8067d26c" sprite="Rogan (P1)" width="40" height="40" animation="" />
+    <item hash="f028fdb40da16c39f630eb0097f5b45c" sprite="Rogan (P1)" width="40" height="40" animation="" />
+    <item hash="f043045b8e5765a60a1686779b36750c" sprite="Rogan (P1)" width="40" height="40" animation="" />
+    <item hash="f10809ac73139686601e05fd43fe030d" sprite="Rogan (P1)" width="40" height="40" animation="" />
+    <item hash="f1c71d282558a8f1d744207c5a42ba55" sprite="Rogan (P1)" width="40" height="40" animation="" />
+    <item hash="f3ce452ec11b86b4d35e7c0515aba48d" sprite="Rogan (P1)" width="40" height="40" animation="" />
+    <item hash="f4c396534744ca9a6617e68c8022731a" sprite="Rogan (P1)" width="40" height="40" animation="" />
+    <item hash="f628b158c641645f958afb054ebf863d" sprite="Rogan (P1)" width="40" height="40" animation="" />
+    <item hash="f7eb0784f0f19bd773a5653ffdb3e594" sprite="Rogan (P1)" width="40" height="40" animation="" />
+    <item hash="fe76ccc24a82202d96d720f6123ab6be" sprite="Rogan (P1)" width="40" height="40" animation="" />
+    <item hash="ffeddec9d7dfd8c92a11de2a97bfccb3" sprite="Rogan (P1)" width="40" height="40" animation="" />
     <item hash="04f731579af88c6a4dd90f1d974c1be6" sprite="Rollie" width="48" height="40" animation="" />
     <item hash="05a892be62b3ebefbacc9f79f304b692" sprite="Rollie" width="48" height="40" animation="" />
     <item hash="073c9896a3f873a2d73aa30c5bcb6f30" sprite="Rollie" width="48" height="40" animation="" />
@@ -21657,10 +21657,7 @@
     <item hash="0aa774b6ad6b41b8362c40600f278960" sprite="Spiriel" width="40" height="40" animation="" />
     <item hash="0b49077f8e9ab88d74be0318cdb2b2b0" sprite="Spiriel" width="40" height="40" animation="" />
     <item hash="137d9db45f39eb7333f9c27cf8bedc4f" sprite="Spiriel" width="40" height="40" animation="" />
-    <item hash="13ddba9d8cd4f5e11173cf5179c9fd3a" sprite="Spiriel" width="40" height="40" animation="" />
     <item hash="148652e440b872eb637e60902753f50f" sprite="Spiriel" width="40" height="40" animation="" />
-    <item hash="1539c6fbccb61e72699b518059a58e03" sprite="Spiriel" width="40" height="40" animation="" />
-    <item hash="1676afdaebfc81c58bf6e977927c69db" sprite="Spiriel" width="40" height="40" animation="" />
     <item hash="176ccb7a0f1baa320ae5500b1929c362" sprite="Spiriel" width="40" height="40" animation="" />
     <item hash="183afc3b2e13a042787621d049f6fadb" sprite="Spiriel" width="40" height="40" animation="" />
     <item hash="1a40a52ff62495829f6d6e5247391baa" sprite="Spiriel" width="40" height="40" animation="" />
@@ -21681,7 +21678,6 @@
     <item hash="31c8003245821ed5362ad2a79a1985fd" sprite="Spiriel" width="40" height="40" animation="" />
     <item hash="3335941c29a3f9f27f49238578da1fda" sprite="Spiriel" width="40" height="40" animation="" />
     <item hash="33cfb7bcca5d61825735086dec9b57a0" sprite="Spiriel" width="40" height="40" animation="" />
-    <item hash="35732853ec6c3f1953d2f9dd91a616b5" sprite="Spiriel" width="40" height="40" animation="" />
     <item hash="383d7a93ae1b5bf670ba479253920f69" sprite="Spiriel" width="40" height="40" animation="" />
     <item hash="3ad56020ee8880c770820a92a8d651a8" sprite="Spiriel" width="40" height="40" animation="" />
     <item hash="3af3c6ad5f609ff98626fab1e0346618" sprite="Spiriel" width="40" height="40" animation="" />
@@ -21695,7 +21691,6 @@
     <item hash="486f42f6f0c51925ba294b94a10ba244" sprite="Spiriel" width="40" height="40" animation="" />
     <item hash="49399128e6237a5b3458d272a476344a" sprite="Spiriel" width="40" height="40" animation="" />
     <item hash="4ae9ac809e0581306cc9bff539d093bf" sprite="Spiriel" width="40" height="40" animation="" />
-    <item hash="4d290b218e0ba86c7ffa4ce2e1318c27" sprite="Spiriel" width="40" height="40" animation="" />
     <item hash="4e57a6cab5f6f12c8ecadfdf2bc9974d" sprite="Spiriel" width="40" height="40" animation="" />
     <item hash="4e9745ddfb5e97732067b7b54ee0d864" sprite="Spiriel" width="40" height="40" animation="" />
     <item hash="50eac778994d48f4136057f22ea9c2b9" sprite="Spiriel" width="40" height="40" animation="" />
@@ -21733,7 +21728,6 @@
     <item hash="7fb3a8a357ad9d166330f754eaffa10f" sprite="Spiriel" width="40" height="40" animation="" />
     <item hash="88d728434c912cba7beac6a3c51fbc1c" sprite="Spiriel" width="40" height="40" animation="" />
     <item hash="8972a015266352ee248dea618b7e8dc6" sprite="Spiriel" width="40" height="40" animation="" />
-    <item hash="8a8b2e2b7768180e56f9f7c18003c6fc" sprite="Spiriel" width="40" height="40" animation="" />
     <item hash="90538c445d445dcda829909cbe866de9" sprite="Spiriel" width="40" height="40" animation="" />
     <item hash="91167e290cd7207acd7cb71d745e5ace" sprite="Spiriel" width="40" height="40" animation="" />
     <item hash="9190d49c30080e2bc04165e81d145ae1" sprite="Spiriel" width="40" height="40" animation="" />
@@ -21751,17 +21745,13 @@
     <item hash="a2f3ca6b4b819fbc4975b3a272429e8d" sprite="Spiriel" width="40" height="40" animation="" />
     <item hash="a34e64661dc982123dd3066d881d13cc" sprite="Spiriel" width="40" height="40" animation="" />
     <item hash="a3f1bd9add55c33bca63e4a581fe1a95" sprite="Spiriel" width="40" height="40" animation="" />
-    <item hash="a74bcaa2e5bcb233477d4e7bdfb6427f" sprite="Spiriel" width="40" height="40" animation="" />
     <item hash="a95b57ee4bba74f47b3bd39d17ee9b44" sprite="Spiriel" width="40" height="40" animation="" />
-    <item hash="aa3db4b0c8731dd950e706b96db40b64" sprite="Spiriel" width="40" height="40" animation="" />
     <item hash="ab459033480e23104f3d014c0f2861af" sprite="Spiriel" width="40" height="40" animation="" />
     <item hash="ab8320a89c5e9266f0edd41c2ab99ad8" sprite="Spiriel" width="40" height="40" animation="" />
     <item hash="ade254e3b477f65aabcef87474a0ea2b" sprite="Spiriel" width="40" height="40" animation="" />
     <item hash="ae3d550d96835d67c4c6ffb50f8f271f" sprite="Spiriel" width="40" height="40" animation="" />
     <item hash="afb820550cbadf9c781072278bbf9cb8" sprite="Spiriel" width="40" height="40" animation="" />
     <item hash="afeda6dbde3bcfa14bdec4f6bb67631b" sprite="Spiriel" width="40" height="40" animation="" />
-    <item hash="b25ad0827b6272cf54d864021bff8915" sprite="Spiriel" width="40" height="40" animation="" />
-    <item hash="b47caeaf6e50fa01e2131c2d7d679f9a" sprite="Spiriel" width="40" height="40" animation="" />
     <item hash="b4ff5d13d14aa142532224a4261e7a07" sprite="Spiriel" width="40" height="40" animation="" />
     <item hash="b51177919abe482a5567ee74069bd38a" sprite="Spiriel" width="40" height="40" animation="" />
     <item hash="bbcc1da0b9e10a11c1a6078025216ff6" sprite="Spiriel" width="40" height="40" animation="" />
@@ -21789,7 +21779,6 @@
     <item hash="e359dc7a238f193724637a40127ba34b" sprite="Spiriel" width="40" height="40" animation="" />
     <item hash="e3b16db18f352994330a9462447c33bf" sprite="Spiriel" width="40" height="40" animation="" />
     <item hash="e7539bae2d5a309d4f650e4bd64fa63b" sprite="Spiriel" width="40" height="40" animation="" />
-    <item hash="e84cc9b16bec2555998e405bf3f12760" sprite="Spiriel" width="40" height="40" animation="" />
     <item hash="e9758aa6f20e979f74f7f3f84b4f8138" sprite="Spiriel" width="40" height="40" animation="" />
     <item hash="eb0974f2aeb418904e6d612dccf37dcd" sprite="Spiriel" width="40" height="40" animation="" />
     <item hash="eb2bb8aedd8386329d202158a476da5c" sprite="Spiriel" width="40" height="40" animation="" />
@@ -21802,11 +21791,13 @@
     <item hash="f211ce7918bf20fa2ace02d93f2a2c93" sprite="Spiriel" width="40" height="40" animation="" />
     <item hash="f4eb149b899538a3df6e5124eb4b4c9b" sprite="Spiriel" width="40" height="40" animation="" />
     <item hash="f72903a76d5218de00db7fb125714598" sprite="Spiriel" width="40" height="40" animation="" />
-    <item hash="fb446a5d1685f46ce8a09f07bf53c477" sprite="Spiriel" width="40" height="40" animation="" />
     <item hash="fed74cbec43e4722073874fefc4d418d" sprite="Spiriel" width="40" height="40" animation="" />
     <item hash="0078cde0c52e9325910c17c3b7200a12" sprite="Spiriel (P1)" width="40" height="40" animation="" />
     <item hash="0f1b5771a95faaa1dd2679e4e09db42a" sprite="Spiriel (P1)" width="40" height="40" animation="" />
     <item hash="122fffd6c71556fbad115eb481170370" sprite="Spiriel (P1)" width="40" height="40" animation="" />
+    <item hash="13ddba9d8cd4f5e11173cf5179c9fd3a" sprite="Spiriel (P1)" width="40" height="40" animation="" />
+    <item hash="1539c6fbccb61e72699b518059a58e03" sprite="Spiriel (P1)" width="40" height="40" animation="" />
+    <item hash="1676afdaebfc81c58bf6e977927c69db" sprite="Spiriel (P1)" width="40" height="40" animation="" />
     <item hash="188dc50bbca1c789d6e1f5c4c3caffdd" sprite="Spiriel (P1)" width="40" height="40" animation="" />
     <item hash="1e5380bc1eba755283b8b8b524d6ea4e" sprite="Spiriel (P1)" width="40" height="40" animation="" />
     <item hash="244fa24c7ec4f6014bf1c28be65f8c80" sprite="Spiriel (P1)" width="40" height="40" animation="" />
@@ -21816,9 +21807,11 @@
     <item hash="2ebd3c96f7d8834e41e656c92e11664c" sprite="Spiriel (P1)" width="40" height="40" animation="" />
     <item hash="2fe1d0e1ceebff35033491f28ceb8de8" sprite="Spiriel (P1)" width="40" height="40" animation="" />
     <item hash="311d199ec5da6394b79d30bfae43c570" sprite="Spiriel (P1)" width="40" height="40" animation="" />
+    <item hash="35732853ec6c3f1953d2f9dd91a616b5" sprite="Spiriel (P1)" width="40" height="40" animation="" />
     <item hash="3cd9751a7c2443ec139970b35702fed4" sprite="Spiriel (P1)" width="40" height="40" animation="" />
     <item hash="3f02a747556d7176b60042043a868c97" sprite="Spiriel (P1)" width="40" height="40" animation="" />
     <item hash="44d6fcc487ee1a2b2a9dbed2362c1eff" sprite="Spiriel (P1)" width="40" height="40" animation="" />
+    <item hash="4d290b218e0ba86c7ffa4ce2e1318c27" sprite="Spiriel (P1)" width="40" height="40" animation="" />
     <item hash="5a734da9d7fd69dff00dd61022d24871" sprite="Spiriel (P1)" width="40" height="40" animation="" />
     <item hash="65745c42c0b585755531e3e26c6eb7da" sprite="Spiriel (P1)" width="40" height="40" animation="" />
     <item hash="6de77e0d93e17d4347ae4487d7c6c72f" sprite="Spiriel (P1)" width="40" height="40" animation="" />
@@ -21829,14 +21822,19 @@
     <item hash="84cc83bdac6de7659a1dc7821d035a78" sprite="Spiriel (P1)" width="40" height="40" animation="" />
     <item hash="86ed7fdd0206dade2d646dd15420f146" sprite="Spiriel (P1)" width="40" height="40" animation="" />
     <item hash="8a0074579fc48f9fd28016a1517612f0" sprite="Spiriel (P1)" width="40" height="40" animation="" />
+    <item hash="8a8b2e2b7768180e56f9f7c18003c6fc" sprite="Spiriel (P1)" width="40" height="40" animation="" />
     <item hash="8daf75ac3527acafe0d04faaa8b04bf9" sprite="Spiriel (P1)" width="40" height="40" animation="" />
     <item hash="8e5b756c3972022a785768726f1b501c" sprite="Spiriel (P1)" width="40" height="40" animation="" />
     <item hash="97e5078e4747075e3630070c5c9149d8" sprite="Spiriel (P1)" width="40" height="40" animation="" />
+    <item hash="a74bcaa2e5bcb233477d4e7bdfb6427f" sprite="Spiriel (P1)" width="40" height="40" animation="" />
     <item hash="a8103999f9ff72aeb8d754e7fa256eb9" sprite="Spiriel (P1)" width="40" height="40" animation="" />
     <item hash="a8303d1fe93b4bc45a267e42f19f4fdf" sprite="Spiriel (P1)" width="40" height="40" animation="" />
     <item hash="a849ecfaa946a2c67c679b60040be536" sprite="Spiriel (P1)" width="40" height="40" animation="" />
     <item hash="a94786ce7ebd9ab2dc003da9f12456f6" sprite="Spiriel (P1)" width="40" height="40" animation="" />
+    <item hash="aa3db4b0c8731dd950e706b96db40b64" sprite="Spiriel (P1)" width="40" height="40" animation="" />
     <item hash="af26a36f04e1d0f977a03bad21c839ed" sprite="Spiriel (P1)" width="40" height="40" animation="" />
+    <item hash="b25ad0827b6272cf54d864021bff8915" sprite="Spiriel (P1)" width="40" height="40" animation="" />
+    <item hash="b47caeaf6e50fa01e2131c2d7d679f9a" sprite="Spiriel (P1)" width="40" height="40" animation="" />
     <item hash="b5146cfeaa244b2ba354c0509eb21f76" sprite="Spiriel (P1)" width="40" height="40" animation="" />
     <item hash="b79bab328f48bba111c4ef51aa29faa3" sprite="Spiriel (P1)" width="40" height="40" animation="" />
     <item hash="bffe17df7575aa1eb15a20ced5573016" sprite="Spiriel (P1)" width="40" height="40" animation="" />
@@ -21847,10 +21845,12 @@
     <item hash="cee2c995a369e51ebea741a4dc718feb" sprite="Spiriel (P1)" width="40" height="40" animation="" />
     <item hash="dd3553fbf5cf98a913268a89d3345f6e" sprite="Spiriel (P1)" width="40" height="40" animation="" />
     <item hash="e2245a162a2579c21b9cb90ca731f94d" sprite="Spiriel (P1)" width="40" height="40" animation="" />
+    <item hash="e84cc9b16bec2555998e405bf3f12760" sprite="Spiriel (P1)" width="40" height="40" animation="" />
     <item hash="e9d972cd2ed8eee0591e93280949ab81" sprite="Spiriel (P1)" width="40" height="40" animation="" />
     <item hash="e9e0d1e43880726a5be3005d3e02fa67" sprite="Spiriel (P1)" width="40" height="40" animation="" />
     <item hash="eba585bbec810e505e463d5a0ca48ac1" sprite="Spiriel (P1)" width="40" height="40" animation="" />
     <item hash="f240d912a6370104f050a5ce6a0b713c" sprite="Spiriel (P1)" width="40" height="40" animation="" />
+    <item hash="fb446a5d1685f46ce8a09f07bf53c477" sprite="Spiriel (P1)" width="40" height="40" animation="" />
     <item hash="fdfeb0aa431aa5cac36d4de5100e8433" sprite="Spiriel (P1)" width="40" height="40" animation="" />
     <item hash="09e98261774f55452b3250afbdb58845" sprite="Spiriel (P1)" width="48" height="40" animation="" />
     <item hash="10dbbfc4119cc4aa64e937273533c589" sprite="Spiriel (P1)" width="48" height="40" animation="" />
@@ -23615,67 +23615,43 @@
     <item hash="ff9d9866b07fe367628a6d51f1640dc1" sprite="Unoma" width="40" height="40" animation="" />
     <item hash="52e21888f56b087d7fcce1afc8ca501c" sprite="Unoma" width="48" height="32" animation="" />
     <item hash="a74fa99bb7254c0513124b736e780ab3" sprite="Unoma" width="48" height="32" animation="" />
-    <item hash="038aed4c41b4dbbe434c084c9a77da3c" sprite="Unoma" width="48" height="32" animation="Eating Ramen" />
-    <item hash="07e152f8485e110f7b4e839502db8015" sprite="Unoma" width="48" height="32" animation="Eating Ramen" />
-    <item hash="083940be122d9649beaa57491956c21a" sprite="Unoma" width="48" height="32" animation="Eating Ramen" />
     <item hash="091b8309809cd0d9f561b1881a9a3832" sprite="Unoma" width="48" height="32" animation="Eating Ramen" />
     <item hash="0ef98ec680e7057b49b1f7138464ed43" sprite="Unoma" width="48" height="32" animation="Eating Ramen" />
     <item hash="1e2f942ab8446d255dc0f50897f79603" sprite="Unoma" width="48" height="32" animation="Eating Ramen" />
     <item hash="2061aa786978149bfb91e1047f5ab7a0" sprite="Unoma" width="48" height="32" animation="Eating Ramen" />
-    <item hash="213555094dd17937977201a3ac526ccf" sprite="Unoma" width="48" height="32" animation="Eating Ramen" />
     <item hash="2185e4a22b209d8c5cd61448e6bf740a" sprite="Unoma" width="48" height="32" animation="Eating Ramen" />
-    <item hash="223e93a965718e1ef751f4d9ab271262" sprite="Unoma" width="48" height="32" animation="Eating Ramen" />
     <item hash="29104dfa0bedbb4853ca14ff7c499593" sprite="Unoma" width="48" height="32" animation="Eating Ramen" />
     <item hash="2ca69dc02b0ecc11ccda661428e55d81" sprite="Unoma" width="48" height="32" animation="Eating Ramen" />
     <item hash="2e4961ac872d73186ebe3af030ff7246" sprite="Unoma" width="48" height="32" animation="Eating Ramen" />
-    <item hash="314a0de382cf39f759767025d13f31d5" sprite="Unoma" width="48" height="32" animation="Eating Ramen" />
-    <item hash="3298e1a946780c8601e918156c9c65ec" sprite="Unoma" width="48" height="32" animation="Eating Ramen" />
     <item hash="32d2b7ea23013020a44463851d84f26a" sprite="Unoma" width="48" height="32" animation="Eating Ramen" />
     <item hash="34119577fad5bc7b0e9daf71da367637" sprite="Unoma" width="48" height="32" animation="Eating Ramen" />
     <item hash="3690dea40ecec937b6fa2e4330c01118" sprite="Unoma" width="48" height="32" animation="Eating Ramen" />
     <item hash="37c2f9a7244b5b1a7c4f2ff81dcdbeb6" sprite="Unoma" width="48" height="32" animation="Eating Ramen" />
     <item hash="3a817d8f9fbe5ac682d2738e1fad92d8" sprite="Unoma" width="48" height="32" animation="Eating Ramen" />
-    <item hash="3c3b0d80955fd3222db8b99199b5e007" sprite="Unoma" width="48" height="32" animation="Eating Ramen" />
     <item hash="453d570a264ad27d3f058f6c5b16d420" sprite="Unoma" width="48" height="32" animation="Eating Ramen" />
-    <item hash="4e6810367574a1106d7fc12bebd2bdd7" sprite="Unoma" width="48" height="32" animation="Eating Ramen" />
     <item hash="58353c8d0fe638493bbb199ff63a1fac" sprite="Unoma" width="48" height="32" animation="Eating Ramen" />
     <item hash="5b0c7e60e6cdb948992d8d7453648a73" sprite="Unoma" width="48" height="32" animation="Eating Ramen" />
     <item hash="5e9defde395c0d4075b2bd601f2b603d" sprite="Unoma" width="48" height="32" animation="Eating Ramen" />
     <item hash="5f2aefaec9084f2aec5d7d4a986f3093" sprite="Unoma" width="48" height="32" animation="Eating Ramen" />
     <item hash="630cf2b646bc2911ee78761318650ad3" sprite="Unoma" width="48" height="32" animation="Eating Ramen" />
     <item hash="6a58854649b558d2422bd7b4e5da756d" sprite="Unoma" width="48" height="32" animation="Eating Ramen" />
-    <item hash="6a6b7161c64d8406db7b759fa1c63a7a" sprite="Unoma" width="48" height="32" animation="Eating Ramen" />
     <item hash="6f2cce07d9e126f5530f8a4aeae761d7" sprite="Unoma" width="48" height="32" animation="Eating Ramen" />
     <item hash="6f396605c544f38593919de2f14f6668" sprite="Unoma" width="48" height="32" animation="Eating Ramen" />
-    <item hash="706b7f9f8a74715adba6c15fdf6f28b2" sprite="Unoma" width="48" height="32" animation="Eating Ramen" />
-    <item hash="73ccd5d7775add3c329b4c3fe76c7abe" sprite="Unoma" width="48" height="32" animation="Eating Ramen" />
     <item hash="7913c0c0eb08af40ca3ceb9b8649e2a4" sprite="Unoma" width="48" height="32" animation="Eating Ramen" />
-    <item hash="803ca030405b9f9ee5abfe78d36b6c32" sprite="Unoma" width="48" height="32" animation="Eating Ramen" />
     <item hash="832472596f350481e9cf9e3faebd72c3" sprite="Unoma" width="48" height="32" animation="Eating Ramen" />
     <item hash="86937bdacb37a00059ea2f5850a16d6e" sprite="Unoma" width="48" height="32" animation="Eating Ramen" />
     <item hash="8cab8977a51e68179e0dc1ee6114c041" sprite="Unoma" width="48" height="32" animation="Eating Ramen" />
     <item hash="8d3ab7d7643c73b1d09787e7e6ab543e" sprite="Unoma" width="48" height="32" animation="Eating Ramen" />
-    <item hash="8e600122b1874980857067edc7a779d9" sprite="Unoma" width="48" height="32" animation="Eating Ramen" />
     <item hash="924703fa0c2aebcc3db3d00ea2b47cb7" sprite="Unoma" width="48" height="32" animation="Eating Ramen" />
-    <item hash="9669e7e820676ec1d1484a2e94df095e" sprite="Unoma" width="48" height="32" animation="Eating Ramen" />
     <item hash="9a61ca6ec88ab8d142a43940d0e1fc7e" sprite="Unoma" width="48" height="32" animation="Eating Ramen" />
-    <item hash="9f5ea68605e9a0bb89e7d89dbd954fde" sprite="Unoma" width="48" height="32" animation="Eating Ramen" />
-    <item hash="a02ebe822fe7e108d740b1948adec504" sprite="Unoma" width="48" height="32" animation="Eating Ramen" />
     <item hash="a03b5545291ce63c3dbf121de83ef06a" sprite="Unoma" width="48" height="32" animation="Eating Ramen" />
     <item hash="a05c6c93717c589066dd095ab947b9ce" sprite="Unoma" width="48" height="32" animation="Eating Ramen" />
     <item hash="a68a4f706db87e6bd05cdcff1d87763a" sprite="Unoma" width="48" height="32" animation="Eating Ramen" />
     <item hash="a760f92fb1d7e510a8af693a494a6192" sprite="Unoma" width="48" height="32" animation="Eating Ramen" />
     <item hash="abea9cfd8b3aefaa58a946af58aa631f" sprite="Unoma" width="48" height="32" animation="Eating Ramen" />
     <item hash="b6d568f258c5816117faac2f14b839c9" sprite="Unoma" width="48" height="32" animation="Eating Ramen" />
-    <item hash="b81f033c3a1ba194dd521b04438f3cd9" sprite="Unoma" width="48" height="32" animation="Eating Ramen" />
     <item hash="be05959c0e723d3338d98e4a68f9a17f" sprite="Unoma" width="48" height="32" animation="Eating Ramen" />
-    <item hash="bfe97c696291193e7fe89d0029288f87" sprite="Unoma" width="48" height="32" animation="Eating Ramen" />
-    <item hash="c899fa9929a39c4056c3a40244c5742b" sprite="Unoma" width="48" height="32" animation="Eating Ramen" />
-    <item hash="ca77aa56fbe5adc1a2ba484fc10bd729" sprite="Unoma" width="48" height="32" animation="Eating Ramen" />
-    <item hash="caa3d9a3bd62048b3c92ac0a91d5721f" sprite="Unoma" width="48" height="32" animation="Eating Ramen" />
-    <item hash="cc3465a4e592d981625a4688641d1a83" sprite="Unoma" width="48" height="32" animation="Eating Ramen" />
     <item hash="d114cd07c101d93c3789826929deac06" sprite="Unoma" width="48" height="32" animation="Eating Ramen" />
-    <item hash="d135a0811faed5d449513b179b018fb7" sprite="Unoma" width="48" height="32" animation="Eating Ramen" />
     <item hash="d13a2c75546cb4b05c2db99505e3cfc6" sprite="Unoma" width="48" height="32" animation="Eating Ramen" />
     <item hash="d7d7a8f0308bd71dee8eee4c11132d74" sprite="Unoma" width="48" height="32" animation="Eating Ramen" />
     <item hash="d92d07ccc4590523ced2a1524487cf4f" sprite="Unoma" width="48" height="32" animation="Eating Ramen" />
@@ -23685,6 +23661,30 @@
     <item hash="f3c9011506e4440c5fa8881f1e9ba6f4" sprite="Unoma" width="48" height="32" animation="Eating Ramen" />
     <item hash="f4f0e4be863c438d65283a78ea51b54f" sprite="Unoma" width="48" height="32" animation="Eating Ramen" />
     <item hash="fd08a821418b17bf368cc06e7cf09ebd" sprite="Unoma" width="48" height="32" animation="Eating Ramen" />
+    <item hash="038aed4c41b4dbbe434c084c9a77da3c" sprite="Unoma (P1)" width="48" height="32" animation="Eating Ramen" />
+    <item hash="07e152f8485e110f7b4e839502db8015" sprite="Unoma (P1)" width="48" height="32" animation="Eating Ramen" />
+    <item hash="083940be122d9649beaa57491956c21a" sprite="Unoma (P1)" width="48" height="32" animation="Eating Ramen" />
+    <item hash="213555094dd17937977201a3ac526ccf" sprite="Unoma (P1)" width="48" height="32" animation="Eating Ramen" />
+    <item hash="223e93a965718e1ef751f4d9ab271262" sprite="Unoma (P1)" width="48" height="32" animation="Eating Ramen" />
+    <item hash="314a0de382cf39f759767025d13f31d5" sprite="Unoma (P1)" width="48" height="32" animation="Eating Ramen" />
+    <item hash="3298e1a946780c8601e918156c9c65ec" sprite="Unoma (P1)" width="48" height="32" animation="Eating Ramen" />
+    <item hash="3c3b0d80955fd3222db8b99199b5e007" sprite="Unoma (P1)" width="48" height="32" animation="Eating Ramen" />
+    <item hash="4e6810367574a1106d7fc12bebd2bdd7" sprite="Unoma (P1)" width="48" height="32" animation="Eating Ramen" />
+    <item hash="6a6b7161c64d8406db7b759fa1c63a7a" sprite="Unoma (P1)" width="48" height="32" animation="Eating Ramen" />
+    <item hash="706b7f9f8a74715adba6c15fdf6f28b2" sprite="Unoma (P1)" width="48" height="32" animation="Eating Ramen" />
+    <item hash="73ccd5d7775add3c329b4c3fe76c7abe" sprite="Unoma (P1)" width="48" height="32" animation="Eating Ramen" />
+    <item hash="803ca030405b9f9ee5abfe78d36b6c32" sprite="Unoma (P1)" width="48" height="32" animation="Eating Ramen" />
+    <item hash="8e600122b1874980857067edc7a779d9" sprite="Unoma (P1)" width="48" height="32" animation="Eating Ramen" />
+    <item hash="9669e7e820676ec1d1484a2e94df095e" sprite="Unoma (P1)" width="48" height="32" animation="Eating Ramen" />
+    <item hash="9f5ea68605e9a0bb89e7d89dbd954fde" sprite="Unoma (P1)" width="48" height="32" animation="Eating Ramen" />
+    <item hash="a02ebe822fe7e108d740b1948adec504" sprite="Unoma (P1)" width="48" height="32" animation="Eating Ramen" />
+    <item hash="b81f033c3a1ba194dd521b04438f3cd9" sprite="Unoma (P1)" width="48" height="32" animation="Eating Ramen" />
+    <item hash="bfe97c696291193e7fe89d0029288f87" sprite="Unoma (P1)" width="48" height="32" animation="Eating Ramen" />
+    <item hash="c899fa9929a39c4056c3a40244c5742b" sprite="Unoma (P1)" width="48" height="32" animation="Eating Ramen" />
+    <item hash="ca77aa56fbe5adc1a2ba484fc10bd729" sprite="Unoma (P1)" width="48" height="32" animation="Eating Ramen" />
+    <item hash="caa3d9a3bd62048b3c92ac0a91d5721f" sprite="Unoma (P1)" width="48" height="32" animation="Eating Ramen" />
+    <item hash="cc3465a4e592d981625a4688641d1a83" sprite="Unoma (P1)" width="48" height="32" animation="Eating Ramen" />
+    <item hash="d135a0811faed5d449513b179b018fb7" sprite="Unoma (P1)" width="48" height="32" animation="Eating Ramen" />
     <item hash="03584a4e9a3b388a0058b0804f19b5f4" sprite="Uryudo (Old)" width="40" height="40" animation="" />
     <item hash="0cfab43413f75b887d9007b0f15d618d" sprite="Uryudo (Old)" width="40" height="40" animation="" />
     <item hash="0e325903e739346264c979cdf60d5cbb" sprite="Uryudo (Old)" width="40" height="40" animation="" />
