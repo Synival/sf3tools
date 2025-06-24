@@ -4,9 +4,10 @@ using SF3.Models.Tables.CHR;
 
 namespace SF3.Win.Views.CHR {
     public class SpriteAnimationTextureView : AnimatedTextureView {
-        public SpriteAnimationTextureView(string name, AnimationFrameTable[] animationFrames, float textureScale = 0)
+        public SpriteAnimationTextureView(string name, int spriteDirections, AnimationFrameTable[] animationFrames, float textureScale = 0)
         : base(name, textureScale) {
-            AnimationFrames = animationFrames;
+            SpriteDirections = spriteDirections;
+            AnimationFrames  = animationFrames;
         }
 
         public void StartAnimation(int index) {
@@ -14,10 +15,12 @@ namespace SF3.Win.Views.CHR {
                 ClearAnimation();
 
             _frames = AnimationFrames[index];
-            if (_frames == null || _frames.Length == 0 || _frames[0].IsEndingFrame)
+            if (_frames == null || _frames.Length == 0 || _frames[0].IsFinalFrame)
                 ClearAnimation();
-            else
+            else {
+                _currentDirections = SpriteDirections;
                 GotoFrame(null, 0);
+            }
         }
 
         protected override void OnFrameCompleted()
@@ -45,12 +48,10 @@ namespace SF3.Win.Views.CHR {
                 }
                 framesSeen.Add(nextFrame);
 
-                var frameID  = nextFrame.FrameID;
-                var duration = nextFrame.Duration;
-
-                // Normal frame.
-                if (frameID < 0xF1) {
-                    nextImage = nextFrame.Texture;
+                // Normal frame with texture.
+                if (nextFrame.HasTexture) {
+                    nextImage = nextFrame.GetTexture(_currentDirections);
+                    var duration = nextFrame.Duration;
                     if (duration > 0) {
                         SetFrame(nextImage, nextFrameIndex, duration);
                         return;
@@ -58,11 +59,15 @@ namespace SF3.Win.Views.CHR {
                     else
                         nextFrameIndex++;
                 }
+                // Special commands.
                 else {
-                    switch (frameID) {
+                    var cmd   = nextFrame.FrameID;
+                    var param = nextFrame.Duration;
+
+                    switch (cmd) {
                         // Set number of directions
                         case 0xF1:
-                            // TODO: this should effect the texture
+                            _currentDirections = param;
                             nextFrameIndex++;
                             break;
 
@@ -71,11 +76,10 @@ namespace SF3.Win.Views.CHR {
                             PauseAnimation();
                             return;
 
-                        // Set duration, and unknown that also sets duration:
+                        // Set duration
                         case 0xF6:
-                        case 0xFC:
-                            if (duration > 0) {
-                                SetFrame(nextImage, nextFrameIndex, duration);
+                            if (param > 0) {
+                                SetFrame(nextImage, nextFrameIndex, param);
                                 return;
                             }
                             nextFrameIndex++;
@@ -93,12 +97,12 @@ namespace SF3.Win.Views.CHR {
 
                         // Jump to animation
                         case 0xFF:
-                            if (duration < 0 || duration >= AnimationFrames.Length) {
+                            if (param < 0 || param >= AnimationFrames.Length) {
                                 PauseAnimation();
                                 return;
                             }
 
-                            _frames = AnimationFrames[duration];
+                            _frames = AnimationFrames[param];
                             nextFrameIndex = 0;
                             break;
 
@@ -111,10 +115,10 @@ namespace SF3.Win.Views.CHR {
             }
         }
 
+        public int SpriteDirections { get; }
         public AnimationFrameTable[] AnimationFrames { get; }
 
-        private string _lastTextureHash = null;
-        public ITexture _lastTexture = null;
         private AnimationFrameTable _frames = null;
+        private int _currentDirections = 0;
     }
 }

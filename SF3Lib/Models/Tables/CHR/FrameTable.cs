@@ -5,19 +5,19 @@ using SF3.Types;
 
 namespace SF3.Models.Tables.CHR {
     public class FrameTable : TerminatedTable<Frame> {
-        protected FrameTable(IByteData data, string name, int address, uint dataOffset, int width, int height, string rowPrefix, int spriteIndex, int spriteId, int directions)
+        protected FrameTable(IByteData data, string name, int address, uint dataOffset, int width, int height, string rowPrefix, int spriteIndex, int spriteId, int spriteDirections)
         : base(data, name, address, 0x04, 0xF0) {
-            DataOffset = dataOffset;
-            Width      = width;
-            Height     = height;
-            RowPrefix  = rowPrefix ?? "";
-            SpriteIndex = spriteIndex;
-            SpriteID   = spriteId;
-            Directions = directions;
+            DataOffset       = dataOffset;
+            Width            = width;
+            Height           = height;
+            RowPrefix        = rowPrefix ?? "";
+            SpriteIndex      = spriteIndex;
+            SpriteID         = spriteId;
+            SpriteDirections = spriteDirections;
         }
 
-        public static FrameTable Create(IByteData data, string name, int address, uint dataOffset, int width, int height, string rowPrefix, int spriteIndex, int spriteId, int directions) {
-            var newTable = new FrameTable(data, name, address, dataOffset, width, height, rowPrefix, spriteIndex, spriteId, directions);
+        public static FrameTable Create(IByteData data, string name, int address, uint dataOffset, int width, int height, string rowPrefix, int spriteIndex, int spriteId, int spriteDirections) {
+            var newTable = new FrameTable(data, name, address, dataOffset, width, height, rowPrefix, spriteIndex, spriteId, spriteDirections);
             if (!newTable.Load())
                 throw new InvalidOperationException("Couldn't initialize table");
             return newTable;
@@ -31,8 +31,9 @@ namespace SF3.Models.Tables.CHR {
             );
         }
 
+        // TODO: not really how this works!
         private SpriteFrameDirection IdToDirection(int id) {
-            switch (Directions) {
+            switch (SpriteDirections) {
                 case 1:
                     return SpriteFrameDirection.None;
 
@@ -80,7 +81,7 @@ namespace SF3.Models.Tables.CHR {
 
                 // No known cases of any other directions
                 default:
-                    return (SpriteFrameDirection) (id % Directions);
+                    return (SpriteFrameDirection) (id % SpriteDirections);
             }
         }
 
@@ -90,6 +91,6 @@ namespace SF3.Models.Tables.CHR {
         public string RowPrefix { get; }
         public int SpriteIndex { get; }
         public int SpriteID { get; }
-        public int Directions { get; }
+        public int SpriteDirections { get; }
     }
 }

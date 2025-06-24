@@ -1,6 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Security.Cryptography;
+using System.Text;
 using CommonLib.Attributes;
 using SF3.ByteData;
 using SF3.Models.Tables.CHR;
@@ -11,7 +14,7 @@ namespace SF3.Models.Structs.CHR {
     public class Animation : Struct {
         public Animation(IByteData data, int id, string name, int address, AnimationFrameTable animationFrames) : base(data, id, name, address, 0 /* abstract */) {
             AnimationFrames = animationFrames;
-            var directions = animationFrames.Directions;
+            var directions = animationFrames.SpriteDirections;
 
             _firstAnimationFrame = animationFrames?.FirstOrDefault(x => x.FrameID < 0xF0);
             _frameTable = _firstAnimationFrame?.FrameTable;
@@ -53,6 +56,7 @@ namespace SF3.Models.Structs.CHR {
             }
         }
 
+/*
         [TableViewModelColumn(displayOrder: 1, minWidth: 300)]
         public string AnimationName {
             get {
@@ -75,6 +79,34 @@ namespace SF3.Models.Structs.CHR {
                 using (var file = File.OpenWrite(resourcePath))
                     using (var writer = new StreamWriter(file))
                         SpriteFrameTextueUtils.WriteSpriteFramesByHashXML(writer);
+            }
+        }
+*/
+
+        private string _hash = null;
+        [TableViewModelColumn(displayOrder: 2, minWidth: 300)]
+        public string Hash {
+            get {
+                if (_hash == null) {
+                    // Build a unique hash string for this animation.
+                    var hashStr = "";
+                    foreach (var aniFrame in AnimationFrames) {
+                        if (aniFrame.IsFinalFrame)
+                            break;
+
+                        hashStr += (hashStr == "" ? "" : "_") + $"{aniFrame.Duration:X2}";
+                        // TODO: don't make assumptions about how many frames this is!
+                        var tex = (!aniFrame.HasTexture && aniFrame.FrameID != 0xF1) ? aniFrame.GetTexture(aniFrame.Directions) : null;
+                        if (tex != null)
+                            hashStr += $"_{tex.Hash}";
+                        else
+                            hashStr += $"_{aniFrame.FrameID:X2}";
+                    }
+
+                    using (var md5 = MD5.Create())
+                        _hash = BitConverter.ToString(md5.ComputeHash(Encoding.ASCII.GetBytes(hashStr))).Replace("-", "").ToLower();
+                }
+                return _hash;
             }
         }
     }

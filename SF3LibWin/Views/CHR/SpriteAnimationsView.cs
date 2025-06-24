@@ -10,12 +10,13 @@ using SF3.Types;
 
 namespace SF3.Win.Views.CHR {
     public class SpriteAnimationsView : ControlSpaceView {
-        public SpriteAnimationsView(string name, AnimationTable model, Dictionary<AnimationType, AnimationFrameTable> animationFramesByIndex, INameGetterContext nameGetterContext) : base(name) {
-            Model = model;
+        public SpriteAnimationsView(string name, int spriteDirections, AnimationTable model, Dictionary<AnimationType, AnimationFrameTable> animationFramesByIndex, INameGetterContext nameGetterContext) : base(name) {
+            Model                 = model;
+            SpriteDirections      = spriteDirections;
             AnimationFramesByType = animationFramesByIndex;
 
             TableView   = new TableView("Frames", model, nameGetterContext, typeof(Animation));
-            TextureView = new SpriteAnimationTextureView("Texture", animationFramesByIndex.Values.ToArray(), textureScale: 2);
+            TextureView = new SpriteAnimationTextureView("Texture", spriteDirections, animationFramesByIndex.Values.ToArray(), textureScale: 2);
         }
 
         public override Control Create() {
@@ -54,6 +55,7 @@ namespace SF3.Win.Views.CHR {
         }
 
         public AnimationTable Model { get; }
+        public int SpriteDirections { get; }
         public Dictionary<AnimationType, AnimationFrameTable> AnimationFramesByType { get; }
         public TableView TableView { get; private set; }
         public SpriteAnimationTextureView TextureView { get; private set; }

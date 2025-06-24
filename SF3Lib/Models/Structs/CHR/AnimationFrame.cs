@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using CommonLib.Attributes;
 using SF3.ByteData;
 using SF3.Models.Tables.CHR;
@@ -12,14 +14,16 @@ namespace SF3.Models.Structs.CHR {
 
         public AnimationFrame(IByteData data, int id, string name, int address, int spriteIndex, int spriteId, int directions, AnimationType animationType, FrameTable frameTable)
         : base(data, id, name, address, 0x4) {
-            SpriteIndex = spriteIndex;
-            SpriteID    = spriteId;
-            Directions  = directions;
+            SpriteIndex   = spriteIndex;
+            SpriteID      = spriteId;
             AnimationType = animationType;
-            FrameTable  = frameTable;
+            FrameTable    = frameTable;
 
             _frameIdAddr  = Address + 0x00; // 2 bytes
             _durationAddr = Address + 0x02; // 2 bytes
+
+            // Number of directions changes with the 0xF1 command.
+            Directions = FrameID == 0xF1 ? Duration : directions;
         }
 
         [TableViewModelColumn(addressField: null, displayOrder: -0.4f, displayFormat: "X2")]
@@ -28,9 +32,6 @@ namespace SF3.Models.Structs.CHR {
         [TableViewModelColumn(addressField: null, displayOrder: -0.3f, displayFormat: "X2", minWidth: 200)]
         [NameGetter(NamedValueType.Sprite)]
         public int SpriteID { get; }
-
-        [TableViewModelColumn(addressField: null, displayOrder: -0.2f)]
-        public int Directions { get; }
 
         [TableViewModelColumn(addressField: null, displayOrder: -0.1f)]
         public AnimationType AnimationType { get; }
@@ -51,39 +52,56 @@ namespace SF3.Models.Structs.CHR {
             set => Data.SetWord(_durationAddr, value);
         }
 
-        [TableViewModelColumn(displayOrder: 2)]
-        public bool IsEndingFrame {
+        [TableViewModelColumn(addressField: null, displayOrder: 2, displayFormat: "X2")]
+        public int Directions { get; }
+
+        [TableViewModelColumn(displayOrder: 3)]
+        public bool IsFinalFrame {
             get {
                 var cmd = FrameID;
                 return (cmd == 0xF2 || (cmd == 0xFE && Duration < (ID * 2 + 2)) || cmd == 0xFF);
             }
         }
 
-        private bool _textureLoaded = false;
-        private ITexture _texture = null;
-        public ITexture Texture {
+        [TableViewModelColumn(displayOrder: 4)]
+        public bool HasTexture {
             get {
-                LoadTextureIfNecessary();
-                return _texture;
+                var cmd = FrameID;
+                // (NOTE: Command 0xFC is a special command, but it's broken and sets the frame to 0xFC with a duration. Stupid, huh?)
+                return cmd < 0xF1 || cmd == 0xF4 || cmd == 0xF5 || (cmd >= 0xF7 && cmd <= 0xFC);
             }
         }
 
-        private void LoadTextureIfNecessary() {
-            if (_textureLoaded)
-                return;
-            _textureLoaded = true;
+        private readonly Dictionary<int, ITexture> _texturesByFrameCount = new Dictionary<int, ITexture>();
+        public ITexture GetTexture(int directions) {
+            if (FrameTable == null)
+                return null;
 
-            if (FrameTable == null || _texture != null)
-                return;
+            int frameCount = DirectionsToFrameCount(directions);
+            if (_texturesByFrameCount.TryGetValue(frameCount, out var tex))
+                return tex;
 
             var frameMin = FrameID;
-            var frameMax = frameMin + Directions;
+            var frameMax = frameMin + frameCount;
             var frames = FrameTable
                 .Where(x => x.ID >= frameMin && x.ID < frameMax)
                 .Select(x => x.Texture)
                 .ToArray();
 
-            _texture = TextureUtils.StackTextures(0, 0, 0, frames);
+            tex = TextureUtils.StackTextures(0, 0, 0, frames);
+            _texturesByFrameCount[frameCount] = tex;
+            return tex;
+        }
+
+        public static int DirectionsToFrameCount(int directions) {
+            switch (directions) {
+                case 2:  return 2;
+                case 4:  return 4;
+                case 5:  return 5;
+                case 6:  return 6;
+                case 8:  return 8;
+                default: return 1;
+            }
         }
     }
 }

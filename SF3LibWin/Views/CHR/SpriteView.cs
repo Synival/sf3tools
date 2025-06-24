@@ -15,6 +15,8 @@ namespace SF3.Win.Views.CHR {
 
             var ngc = Model.NameGetterContext;
             if (Model.Header != null) {
+                if (Model.AnimationTable != null)
+                    CreateChild(new SpriteAnimationsView("Animations", Model.Header.Directions, Model.AnimationTable, Model.AnimationFrameTablesByIndex, ngc));
                 if (Model.Header != null)
                     CreateChild(new DataModelView("Header", Model.Header, ngc));
                 if (Model.FrameTable != null)
@@ -23,13 +25,11 @@ namespace SF3.Win.Views.CHR {
                     CreateChild(new TableView("Animation Offsets", Model.AnimationOffsetTable, ngc));
                 if (Model.AnimationFrameTablesByIndex?.Count > 0) {
                     CreateChild(
-                        new SpriteAnimationFramesArrayView("Animation Frames", Model.AnimationFrameTablesByIndex.Values
+                        new SpriteAnimationFramesArrayView("Animation Frames", Model.Header.Directions, Model.AnimationFrameTablesByIndex.Values
                             .Select(x => new SpriteAnimationWithFrames(x, Model.FrameTable))
                             .ToArray(),
                         ngc));
                 }
-                if (Model.AnimationTable != null)
-                    CreateChild(new SpriteAnimationsView("Animations", Model.AnimationTable, Model.AnimationFrameTablesByIndex, ngc));
             }
 
             return Control;
