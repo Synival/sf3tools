@@ -1,11 +1,9 @@
 using System;
-using System.Linq;
 using System.Windows.Forms;
 using BrightIdeasSoftware;
 using CommonLib.NamedValues;
 using SF3.Models.Structs.CHR;
 using SF3.Models.Tables.CHR;
-using SF3.Utils;
 using SF3.Win.Extensions;
 
 namespace SF3.Win.Views.CHR {

@@ -52,7 +52,12 @@ namespace SF3.Models.Structs.CHR {
         }
 
         [TableViewModelColumn(displayOrder: 2)]
-        public bool IsEndingFrame => FrameID >= 0xF0 && FrameID != 0xF1;
+        public bool IsEndingFrame {
+            get {
+                var cmd = FrameID;
+                return (cmd == 0xF2 || (cmd == 0xFE && Duration < (ID * 2 + 2)) || cmd == 0xFF);
+            }
+        }
 
         private bool _textureLoaded = false;
         private ITexture _texture = null;

@@ -34,6 +34,8 @@ namespace SF3.Win.Views {
                 _timer.Tick += OnTick;
                 _timer.Start();
             }
+            if (Paused)
+                ResumeAnimation();
 
             Image        = texture;
             FrameIndex   = index;
@@ -43,6 +45,9 @@ namespace SF3.Win.Views {
                 OnFrameCompleted();
         }
 
+        public void PauseAnimation() => _timer?.Stop();
+        public void ResumeAnimation() => _timer?.Start();
+
         protected abstract void OnFrameCompleted();
 
         public override void Destroy() {
@@ -51,6 +56,7 @@ namespace SF3.Win.Views {
         }
 
         public bool Animating => _timer != null;
+        public bool Paused => _timer?.Enabled == false;
         public int FrameIndex { get; private set; } = 0;
         public int FrameCounter { get; private set; } = 0;
         private Timer _timer = null;

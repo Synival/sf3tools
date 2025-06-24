@@ -1,6 +1,4 @@
-﻿using System;
-using SF3.Models.Structs.CHR;
-using SF3.Models.Tables.CHR;
+﻿using SF3.Models.Tables.CHR;
 
 namespace SF3.Win.Views.CHR {
     public class SpriteAnimationTextureView : AnimatedTextureView {
@@ -13,27 +11,76 @@ namespace SF3.Win.Views.CHR {
                 ClearAnimation();
             else {
                 var frame = _frames[0];
-                SetFrame(frame);
+                SetFrame(frame.Texture, 0, frame.Duration);
             }
         }
 
         protected override void OnFrameCompleted() {
-            var nextFrameIndex = (FrameIndex + 1) % _frames.Length;
-            var nextFrame = _frames[nextFrameIndex];
+            var startingFrame  = FrameIndex;
+            var nextFrameIndex = startingFrame + 1;
+            var frameCount     = _frames.Length;
+            var nextImage      = Image;
 
-            // TODO: There are some special codes here. How do they work?
-            if (nextFrame.IsEndingFrame)
-                nextFrame = _frames[0];
+            while (true) {
+                if (nextFrameIndex == startingFrame || nextFrameIndex >= frameCount) {
+                    PauseAnimation();
+                    return;
+                }
 
-            SetFrame(nextFrame);
-        }
+                var nextFrame = _frames[nextFrameIndex];
+                var frameID  = nextFrame.FrameID;
+                var duration = nextFrame.Duration;
 
-        private void SetFrame(AnimationFrame frame) {
-            var hash = frame.Texture?.Hash;
-            var tex = (hash == _lastTextureHash) ? _lastTexture : frame.Texture;
-            _lastTextureHash = hash;
-            _lastTexture = tex;
-            SetFrame(frame.Texture, frame.ID, (frame.FrameID >= 0xF0) ? 0 : frame.Duration);
+                // Normal frame.
+                if (frameID < 0xF1) {
+                    nextImage = nextFrame.Texture;
+                    if (duration > 0) {
+                        SetFrame(nextImage, nextFrameIndex, duration);
+                        return;
+                    }
+                    else
+                        nextFrameIndex++;
+                }
+                else {
+                    switch (frameID) {
+                        // Pause
+                        case 0xF2:
+                            PauseAnimation();
+                            return;
+
+                        // Set duration, and unknown that also sets duration:
+                        case 0xF6:
+                        case 0xFC:
+                            if (duration > 0) {
+                                SetFrame(nextImage, nextFrameIndex, duration);
+                                return;
+                            }
+                            nextFrameIndex++;
+                            break;
+
+                        // Jump to frame
+                        case 0xFE:
+                            var isValidFrame = (nextFrame.Duration % 2 == 0 && (nextFrame.Duration / 2) < _frames.Length);
+                            if (!isValidFrame) {
+                                PauseAnimation();
+                                return;
+                            }
+                            nextFrameIndex = nextFrame.Duration / 2;
+                            break;
+
+                        // Jump to animation
+                        case 0xFF:
+                            // TODO: actually jump to the animation!
+                            PauseAnimation();
+                            return;
+
+                        // All other commands are skipped.
+                        default:
+                            nextFrameIndex++;
+                            break;
+                    }
+                }
+            }
         }
 
         private string _lastTextureHash = null;
