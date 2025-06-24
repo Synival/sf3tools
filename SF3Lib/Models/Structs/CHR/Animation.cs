@@ -61,32 +61,17 @@ namespace SF3.Models.Structs.CHR {
             }
         }
 
-/*
         [TableViewModelColumn(displayOrder: 1, minWidth: 300)]
         public string AnimationName {
-            get {
-                return string.Join(", ", _frames.Select(x => $"[{x.FrameInfo.AnimationName}]").Distinct().OrderBy(x => x));
-            }
+            get => AnimationInfo.AnimationName;
             set {
-                foreach (var frame in _frames) {
-                    if (frame.FrameInfo.AnimationName == "")
-                        frame.FrameInfo.AnimationName = value;
-                    else {
-                        var tokens = frame.FrameInfo.AnimationName.Split('|').ToList();
-                        if (!tokens.Contains(value)) {
-                            tokens.Add(value);
-                            frame.FrameInfo.AnimationName = string.Join("|", tokens.OrderBy(x => x));
-                        }
-                    }
-                }
-
-                var resourcePath = Path.Combine("..", "..", "..", "..", "SF3Lib", CommonLib.Utils.ResourceUtils.ResourceFile("SpriteFramesByHash.xml"));
+                AnimationInfo.AnimationName = value;
+                var resourcePath = Path.Combine("..", "..", "..", "..", "SF3Lib", CommonLib.Utils.ResourceUtils.ResourceFile("SpriteAnimationsByHash.xml"));
                 using (var file = File.OpenWrite(resourcePath))
                     using (var writer = new StreamWriter(file))
-                        SpriteFrameTextueUtils.WriteSpriteFramesByHashXML(writer);
+                        CHRUtils.WriteUniqueAnimationsByHashXML(writer);
             }
         }
-*/
 
         [TableViewModelColumn(displayOrder: 2)]
         public int TotalFramesMissing => AnimationFrames.Sum(x => x.FramesMissing);

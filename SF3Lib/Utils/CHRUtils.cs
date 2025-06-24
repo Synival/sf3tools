@@ -101,7 +101,7 @@ namespace SF3.Utils {
                         if (!int.TryParse(widthAttr, out width) || !int.TryParse(heightAttr, out height) || !int.TryParse(directionsAttr, out directions) || !int.TryParse(framesAttr, out frames))
                             continue;
 
-                        int missingFrames = int.TryParse(missingAttr , out var missingFramesOut) ? missingFramesOut : 1;
+                        int missingFrames = int.TryParse(missingAttr , out var missingFramesOut) ? missingFramesOut : 0;
                         s_uniqueAnimationsByHash.Add(hash.ToLower(), new UniqueAnimationInfo(hash, sprite, animation, width, height, directions, frames, missingFrames));
                     }
                 }
