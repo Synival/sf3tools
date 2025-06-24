@@ -48,9 +48,11 @@ namespace CHR_Analyzer {
         }
 
         private class AnimationInfo {
-            public AnimationInfo() {
+            public AnimationInfo(UniqueAnimationInfo animationInfo) {
+                AnimInfo = animationInfo;
             }
 
+            public UniqueAnimationInfo AnimInfo { get; }
             public List<AnimationFileSprite> Sprites { get; } = new List<AnimationFileSprite>();
         }
 
@@ -83,7 +85,7 @@ namespace CHR_Analyzer {
         private static void AddAnimation(ScenarioType scenario, string filename, int spriteIndex, Animation animation) {
             var hash = animation.Hash;
             if (!s_animationsByHash.ContainsKey(hash))
-                s_animationsByHash.Add(hash, new AnimationInfo());
+                s_animationsByHash.Add(hash, new AnimationInfo(animation.AnimationInfo));
 
             var lastFrame = animation.AnimationFrames.Last();
             var lastFrameWord = (lastFrame.FrameID << 8) | lastFrame.Duration;
@@ -251,6 +253,8 @@ namespace CHR_Analyzer {
             Console.WriteLine("");
 
             Console.WriteLine($"There are {s_animationsByHash.Count} unique animations.");
+            var unidentifiedAnimationCount = s_animationsByHash.Values.Where(x => x.AnimInfo.AnimationName == "").Count();
+            Console.WriteLine($"{unidentifiedAnimationCount} are unidentified.");
             var avgUsagesPerAnimation = s_animationsByHash.Sum(x => x.Value.Sprites.Count) / (float) s_animationsByHash.Count;
             Console.WriteLine($"Each animation is used {avgUsagesPerAnimation} times on average.");
 
