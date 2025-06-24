@@ -14997,142 +14997,66 @@
     <item hash="3d51ee465df44f2be27d81516fa7d74e" sprite="Masked Mage (Yellow)" width="48" height="40" animation="Dying" />
     <item hash="c49580ecf5c0da894335b88641cbb1c7" sprite="Masked Mage (Yellow)" width="48" height="40" animation="Dying" />
     <item hash="ff1805a051adf09819d1b48e2958767d" sprite="Masked Mage (Yellow)" width="48" height="40" animation="Dying" />
-    <item hash="00dd5ed76773d51aa751f2adbc033dd3" sprite="Masked Monk (Blue)" width="40" height="40" animation="" />
     <item hash="0117fbfe66c645aa997aebaf32d26259" sprite="Masked Monk (Blue)" width="40" height="40" animation="" />
-    <item hash="013a2b585fbb71411a78b7f451079b40" sprite="Masked Monk (Blue)" width="40" height="40" animation="" />
     <item hash="02534f1c5ce72253c9fdf61405f10e4d" sprite="Masked Monk (Blue)" width="40" height="40" animation="" />
-    <item hash="0cd79be4e47f1557a387363e4a740681" sprite="Masked Monk (Blue)" width="40" height="40" animation="" />
     <item hash="111672eb11abb0ea7e967414371d9d39" sprite="Masked Monk (Blue)" width="40" height="40" animation="" />
-    <item hash="135974b6cbf652a4b852f33991377a76" sprite="Masked Monk (Blue)" width="40" height="40" animation="" />
     <item hash="165d9ba52ece25582b3993d8c80ddcd8" sprite="Masked Monk (Blue)" width="40" height="40" animation="" />
     <item hash="1791f518ab7bd3d706f52a7736dba621" sprite="Masked Monk (Blue)" width="40" height="40" animation="" />
-    <item hash="1853243a04190a3147271efde9383dd2" sprite="Masked Monk (Blue)" width="40" height="40" animation="" />
     <item hash="1dd2d60983f232abae19a61ec029c883" sprite="Masked Monk (Blue)" width="40" height="40" animation="" />
-    <item hash="1e93f7cc931f9141a19d7062f672cb63" sprite="Masked Monk (Blue)" width="40" height="40" animation="" />
     <item hash="246b5337235a4fc9894c8791a46d0ea1" sprite="Masked Monk (Blue)" width="40" height="40" animation="" />
-    <item hash="293bf19aa4f1c7a587d822de63b8f32c" sprite="Masked Monk (Blue)" width="40" height="40" animation="" />
     <item hash="2be2a3c2e33af04586fb636c75333b68" sprite="Masked Monk (Blue)" width="40" height="40" animation="" />
-    <item hash="2de0ec47bdc1d706d92cfe0b4af8ccdd" sprite="Masked Monk (Blue)" width="40" height="40" animation="" />
-    <item hash="2f24086b82574eff3824c609e38f5021" sprite="Masked Monk (Blue)" width="40" height="40" animation="" />
     <item hash="2fc57b48a334b10c57b6d6a5c936cc07" sprite="Masked Monk (Blue)" width="40" height="40" animation="" />
-    <item hash="33a60c7318f1e55929ceb2cec8611791" sprite="Masked Monk (Blue)" width="40" height="40" animation="" />
-    <item hash="33b0c75962233bf49f1fbcb9594a5e4f" sprite="Masked Monk (Blue)" width="40" height="40" animation="" />
     <item hash="34b26a31860ce610a7cf02de0c132619" sprite="Masked Monk (Blue)" width="40" height="40" animation="" />
-    <item hash="371ea9e4fae0d5385226e5eb8cbc5468" sprite="Masked Monk (Blue)" width="40" height="40" animation="" />
     <item hash="3929c8fbec5bd21db1008465820f3222" sprite="Masked Monk (Blue)" width="40" height="40" animation="" />
-    <item hash="3a5997c164b539739c3d85482199f6e8" sprite="Masked Monk (Blue)" width="40" height="40" animation="" />
     <item hash="3ab95248a8dff632745e6af258da1143" sprite="Masked Monk (Blue)" width="40" height="40" animation="" />
     <item hash="40687867482b17b5284cfdce01f7cdb8" sprite="Masked Monk (Blue)" width="40" height="40" animation="" />
-    <item hash="41e1dd26d0e234f56b5fae4ba278491a" sprite="Masked Monk (Blue)" width="40" height="40" animation="" />
-    <item hash="41ed46c954d423dc9967541d68f3eb16" sprite="Masked Monk (Blue)" width="40" height="40" animation="" />
-    <item hash="4431e9dab7958f2dca49ff10ac06ce24" sprite="Masked Monk (Blue)" width="40" height="40" animation="" />
     <item hash="455891f3a047c2c19ee11966687e6195" sprite="Masked Monk (Blue)" width="40" height="40" animation="" />
-    <item hash="476b02d895e631b138a549995c3df354" sprite="Masked Monk (Blue)" width="40" height="40" animation="" />
-    <item hash="48b0960a2c5ea732c63a561b9b7baf3d" sprite="Masked Monk (Blue)" width="40" height="40" animation="" />
-    <item hash="4b897bc9645cfa1a31e6d2ce8bea81e2" sprite="Masked Monk (Blue)" width="40" height="40" animation="" />
     <item hash="4fb7d2836e38f1aba0b78113473b1363" sprite="Masked Monk (Blue)" width="40" height="40" animation="" />
     <item hash="50eae4dc1a9fa4725f69afb0e89fa776" sprite="Masked Monk (Blue)" width="40" height="40" animation="" />
-    <item hash="510e871e1ce12d638509bb9c915505b3" sprite="Masked Monk (Blue)" width="40" height="40" animation="" />
-    <item hash="5957f419d11c43b2d25cc21b5f22424e" sprite="Masked Monk (Blue)" width="40" height="40" animation="" />
-    <item hash="5971688cd132c94226ce3bbc722b30ef" sprite="Masked Monk (Blue)" width="40" height="40" animation="" />
     <item hash="5975a1a8783ee019c60e68ca604edb2c" sprite="Masked Monk (Blue)" width="40" height="40" animation="" />
     <item hash="5b74c7784ae67c692b0c44c947e9595c" sprite="Masked Monk (Blue)" width="40" height="40" animation="" />
-    <item hash="5e37419fefaba192995c9165909921ec" sprite="Masked Monk (Blue)" width="40" height="40" animation="" />
-    <item hash="5e3e74801198cffdade5160ca7b64c4b" sprite="Masked Monk (Blue)" width="40" height="40" animation="" />
     <item hash="5f90ebc3b1c7e9de1949b87559b122c6" sprite="Masked Monk (Blue)" width="40" height="40" animation="" />
-    <item hash="60c77ce2b411a5a4835887c111b47970" sprite="Masked Monk (Blue)" width="40" height="40" animation="" />
-    <item hash="60ccab3ed872afd295a8642c5715a47a" sprite="Masked Monk (Blue)" width="40" height="40" animation="" />
     <item hash="6164cc3f7a233d946b4804518ae590b1" sprite="Masked Monk (Blue)" width="40" height="40" animation="" />
-    <item hash="6449f9cdf849f8346ed868f81cfd487b" sprite="Masked Monk (Blue)" width="40" height="40" animation="" />
     <item hash="658ab860ef93963c31c8fec1197f5ad9" sprite="Masked Monk (Blue)" width="40" height="40" animation="" />
-    <item hash="65a6e8c7a1e9d0694aedb91c0b345603" sprite="Masked Monk (Blue)" width="40" height="40" animation="" />
-    <item hash="664f9ddb3ca2e33d34ab0d6a0e907478" sprite="Masked Monk (Blue)" width="40" height="40" animation="" />
-    <item hash="67149f06e3f15e4b67c1be15c1e6515f" sprite="Masked Monk (Blue)" width="40" height="40" animation="" />
-    <item hash="6838588f18105e9413cd7d76e789fefd" sprite="Masked Monk (Blue)" width="40" height="40" animation="" />
     <item hash="6c6c28b4eb022784d84fa5cae4bdba1f" sprite="Masked Monk (Blue)" width="40" height="40" animation="" />
-    <item hash="6df64a0a26823b03a6c335468867c32c" sprite="Masked Monk (Blue)" width="40" height="40" animation="" />
     <item hash="6e6e7e92d1546d0ebf81f15ea6d5ccb5" sprite="Masked Monk (Blue)" width="40" height="40" animation="" />
     <item hash="6f98ad0e335624a16551b2dea284aa74" sprite="Masked Monk (Blue)" width="40" height="40" animation="" />
     <item hash="7009c1f5adbfddde845bdcab661095e2" sprite="Masked Monk (Blue)" width="40" height="40" animation="" />
-    <item hash="777a533f91b8c9e89e1c053bca58dba9" sprite="Masked Monk (Blue)" width="40" height="40" animation="" />
     <item hash="7abae0b391a1ce643c3d7bbcf728222f" sprite="Masked Monk (Blue)" width="40" height="40" animation="" />
     <item hash="7cde351ea310bd8291bc658e591635cd" sprite="Masked Monk (Blue)" width="40" height="40" animation="" />
-    <item hash="7d24600c6710c5744b5483cf1083e5db" sprite="Masked Monk (Blue)" width="40" height="40" animation="" />
-    <item hash="7da5f8a6c238e9789efe20ea0e4d1d64" sprite="Masked Monk (Blue)" width="40" height="40" animation="" />
-    <item hash="7dbdd0ff9facd4ada0b1fe00ccd3b08a" sprite="Masked Monk (Blue)" width="40" height="40" animation="" />
-    <item hash="8132dd3ee58379ced421a284c58f0ba8" sprite="Masked Monk (Blue)" width="40" height="40" animation="" />
     <item hash="81da771d561517377a808d23ca550803" sprite="Masked Monk (Blue)" width="40" height="40" animation="" />
     <item hash="83d079815b2c83254cc963261ec6dd3f" sprite="Masked Monk (Blue)" width="40" height="40" animation="" />
-    <item hash="85cc3b2369fbbde18e3872fb1c61181b" sprite="Masked Monk (Blue)" width="40" height="40" animation="" />
     <item hash="86e1d86061d55b78102063cd26273364" sprite="Masked Monk (Blue)" width="40" height="40" animation="" />
     <item hash="86f6b69727ca2e0a397ff18a6dc41cb6" sprite="Masked Monk (Blue)" width="40" height="40" animation="" />
-    <item hash="891e8055d312a8fde29ac618365fb51d" sprite="Masked Monk (Blue)" width="40" height="40" animation="" />
-    <item hash="8a5fa32a2d10d0592d0377947723ec3e" sprite="Masked Monk (Blue)" width="40" height="40" animation="" />
     <item hash="8bd8fab4b898d108063eb15c181f3f41" sprite="Masked Monk (Blue)" width="40" height="40" animation="" />
     <item hash="8cdd93a60e65d7cba90a928339467331" sprite="Masked Monk (Blue)" width="40" height="40" animation="" />
     <item hash="8e46d34d06e920eb33d8ee5593a2ddba" sprite="Masked Monk (Blue)" width="40" height="40" animation="" />
-    <item hash="8f04395d61f5075a02dacda7ba43d7a3" sprite="Masked Monk (Blue)" width="40" height="40" animation="" />
-    <item hash="90bf0be803874c1353624b8f6bc4f0a8" sprite="Masked Monk (Blue)" width="40" height="40" animation="" />
     <item hash="96d22a920d9f2dccb3b006d65971c726" sprite="Masked Monk (Blue)" width="40" height="40" animation="" />
-    <item hash="9763407d22c4431e79a0036e7d5b859d" sprite="Masked Monk (Blue)" width="40" height="40" animation="" />
-    <item hash="98bc6fe556d4ce60939e54ffb57e3ff6" sprite="Masked Monk (Blue)" width="40" height="40" animation="" />
-    <item hash="99b0dc088e88105a751cc4b63356bec6" sprite="Masked Monk (Blue)" width="40" height="40" animation="" />
     <item hash="9a43c89d5d4f54a599da4bdd16ca1a82" sprite="Masked Monk (Blue)" width="40" height="40" animation="" />
-    <item hash="9bd1ca0c3c11718a438d84ec50888cad" sprite="Masked Monk (Blue)" width="40" height="40" animation="" />
     <item hash="9c7425a3f9452725af2fdfed801d2b47" sprite="Masked Monk (Blue)" width="40" height="40" animation="" />
-    <item hash="9cf5854f6047d80c4e2781e25dec061c" sprite="Masked Monk (Blue)" width="40" height="40" animation="" />
-    <item hash="9e56e31642b3417564db2d9e363cfd44" sprite="Masked Monk (Blue)" width="40" height="40" animation="" />
     <item hash="a0a4de1f6b941c0f831b96b2be04a44e" sprite="Masked Monk (Blue)" width="40" height="40" animation="" />
     <item hash="a2e5373624c0f67ca166f0a9ead70fe6" sprite="Masked Monk (Blue)" width="40" height="40" animation="" />
     <item hash="a455eaa84ee5c59d23809c281380cf4b" sprite="Masked Monk (Blue)" width="40" height="40" animation="" />
-    <item hash="a4f1658b2574270b7aebad4d4e179c2f" sprite="Masked Monk (Blue)" width="40" height="40" animation="" />
-    <item hash="a79a7bce8964f891888089938bebe3be" sprite="Masked Monk (Blue)" width="40" height="40" animation="" />
     <item hash="a975e5ccf2c9f9db85bf0ee2ed1608da" sprite="Masked Monk (Blue)" width="40" height="40" animation="" />
     <item hash="aa7e69506cce39899db29188af239c01" sprite="Masked Monk (Blue)" width="40" height="40" animation="" />
     <item hash="ab9451f91c00782b8d26623c50fc4982" sprite="Masked Monk (Blue)" width="40" height="40" animation="" />
-    <item hash="afae6a2a67037afe5a1ef6478703a22c" sprite="Masked Monk (Blue)" width="40" height="40" animation="" />
-    <item hash="b0736dab3e0861e5b327f149a70e2299" sprite="Masked Monk (Blue)" width="40" height="40" animation="" />
-    <item hash="b0b06b3199e75a3b34e687c608882710" sprite="Masked Monk (Blue)" width="40" height="40" animation="" />
     <item hash="b109b22c92f2f06ff64f1b699334f15f" sprite="Masked Monk (Blue)" width="40" height="40" animation="" />
-    <item hash="b1841ff3129cd95dd47c9d7b2728fe34" sprite="Masked Monk (Blue)" width="40" height="40" animation="" />
     <item hash="b27672ad38be34594cc80bdf0bd5ad1b" sprite="Masked Monk (Blue)" width="40" height="40" animation="" />
-    <item hash="b2ff1ec62e209c8d9c83b0424524193b" sprite="Masked Monk (Blue)" width="40" height="40" animation="" />
-    <item hash="b586afbfa85393753d028821bc80f6ef" sprite="Masked Monk (Blue)" width="40" height="40" animation="" />
-    <item hash="b639c377efc91e44ba97045d262a8c46" sprite="Masked Monk (Blue)" width="40" height="40" animation="" />
-    <item hash="b7abeb0b505685ee7bf93d0c9edd730b" sprite="Masked Monk (Blue)" width="40" height="40" animation="" />
     <item hash="b82a057827bfb304eb59d9e448ec5cb1" sprite="Masked Monk (Blue)" width="40" height="40" animation="" />
-    <item hash="be487df1630332ce7300790c4bcfb8e3" sprite="Masked Monk (Blue)" width="40" height="40" animation="" />
     <item hash="bea148052432104a533c7044d085640d" sprite="Masked Monk (Blue)" width="40" height="40" animation="" />
-    <item hash="bf4dddd8759e6ffc7906a71600f48926" sprite="Masked Monk (Blue)" width="40" height="40" animation="" />
-    <item hash="c299a1707e744aa125aa9160616efb39" sprite="Masked Monk (Blue)" width="40" height="40" animation="" />
-    <item hash="c62eefbd747994513eb741acfb0790ec" sprite="Masked Monk (Blue)" width="40" height="40" animation="" />
-    <item hash="c6441a5bdfa824fbf2ccf318747f5e5b" sprite="Masked Monk (Blue)" width="40" height="40" animation="" />
     <item hash="c67469b930e3038bfa24af1d2bee93c0" sprite="Masked Monk (Blue)" width="40" height="40" animation="" />
     <item hash="c6923fc243e26ab8f092bc863a8efa5c" sprite="Masked Monk (Blue)" width="40" height="40" animation="" />
-    <item hash="c7a30949311c25168a184a95c9dc86d8" sprite="Masked Monk (Blue)" width="40" height="40" animation="" />
     <item hash="c8904acc3cc00fb978bb05229dda7d75" sprite="Masked Monk (Blue)" width="40" height="40" animation="" />
-    <item hash="cc612d6693529d6160b1ca72648813a6" sprite="Masked Monk (Blue)" width="40" height="40" animation="" />
     <item hash="ce68d7d70dce21d1e088abd6e19cac18" sprite="Masked Monk (Blue)" width="40" height="40" animation="" />
     <item hash="cf544e8ee27ef39c5ed5fe6bc97a1921" sprite="Masked Monk (Blue)" width="40" height="40" animation="" />
     <item hash="cffe3e49f5adf7a8c518c9467a99bad7" sprite="Masked Monk (Blue)" width="40" height="40" animation="" />
-    <item hash="d64cfe5a35f340e451aab3146ba6dedb" sprite="Masked Monk (Blue)" width="40" height="40" animation="" />
-    <item hash="d845ce325d2d809fcd6c8d9ffd679a75" sprite="Masked Monk (Blue)" width="40" height="40" animation="" />
     <item hash="d93c73c70b43137fccc4645ecf4e544a" sprite="Masked Monk (Blue)" width="40" height="40" animation="" />
-    <item hash="db8231d1dc73549349ce2a846fa3541d" sprite="Masked Monk (Blue)" width="40" height="40" animation="" />
     <item hash="dbd9e68101e915a551016cfb423f2afd" sprite="Masked Monk (Blue)" width="40" height="40" animation="" />
     <item hash="dde49c7fe35b352911928c35b0aac77c" sprite="Masked Monk (Blue)" width="40" height="40" animation="" />
-    <item hash="de835c6beb7e1cbdfc810602ee02061e" sprite="Masked Monk (Blue)" width="40" height="40" animation="" />
     <item hash="e48efa35f82e868be8b63adc69849313" sprite="Masked Monk (Blue)" width="40" height="40" animation="" />
-    <item hash="e6095d4879de853c206236645aa3895a" sprite="Masked Monk (Blue)" width="40" height="40" animation="" />
     <item hash="e8365353524e83a2df333487092985a4" sprite="Masked Monk (Blue)" width="40" height="40" animation="" />
-    <item hash="ebcc2e0af4886f04968bfd9a4fab7826" sprite="Masked Monk (Blue)" width="40" height="40" animation="" />
     <item hash="ec4026b6298bd5de5d776fb943ae4b91" sprite="Masked Monk (Blue)" width="40" height="40" animation="" />
-    <item hash="f5af798a644fd09c25e9df892235d516" sprite="Masked Monk (Blue)" width="40" height="40" animation="" />
     <item hash="f62480e56593125accc3a3860fa24e1c" sprite="Masked Monk (Blue)" width="40" height="40" animation="" />
-    <item hash="f6f4a13cf71e8da2c33e6ca18b60f5c8" sprite="Masked Monk (Blue)" width="40" height="40" animation="" />
-    <item hash="fa1784c205853be21d6ba4172f41aba7" sprite="Masked Monk (Blue)" width="40" height="40" animation="" />
-    <item hash="fa7128617c606454bd363cb29286e0ba" sprite="Masked Monk (Blue)" width="40" height="40" animation="" />
-    <item hash="fdda219a2cfeda8e462670e45079a57e" sprite="Masked Monk (Blue)" width="40" height="40" animation="" />
     <item hash="44e547110413133a7b929d33282c33c1" sprite="Masked Monk (Blue)" width="40" height="40" animation="Getting Zapped" />
     <item hash="4c3e4c031932bbdc0176cc61f09b3473" sprite="Masked Monk (Blue)" width="40" height="40" animation="Getting Zapped" />
     <item hash="a6fb9da04159382ba99e8d42577a3bab" sprite="Masked Monk (Blue)" width="48" height="40" animation="Dying" />
@@ -15159,6 +15083,82 @@
     <item hash="dbe41aa5eac51c077bd51de671f0ff3f" sprite="Masked Monk (Blue) (Sceptre)" width="40" height="40" animation="" />
     <item hash="e179e63eea4faf5cd7d4375f2b4bd090" sprite="Masked Monk (Blue) (Sceptre)" width="40" height="40" animation="" />
     <item hash="fd3b843305c67fbc2fb99d77e4435072" sprite="Masked Monk (Blue) (Sceptre)" width="40" height="40" animation="" />
+    <item hash="00dd5ed76773d51aa751f2adbc033dd3" sprite="Masked Monk (Blue) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="013a2b585fbb71411a78b7f451079b40" sprite="Masked Monk (Blue) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="0cd79be4e47f1557a387363e4a740681" sprite="Masked Monk (Blue) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="135974b6cbf652a4b852f33991377a76" sprite="Masked Monk (Blue) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="1853243a04190a3147271efde9383dd2" sprite="Masked Monk (Blue) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="1e93f7cc931f9141a19d7062f672cb63" sprite="Masked Monk (Blue) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="293bf19aa4f1c7a587d822de63b8f32c" sprite="Masked Monk (Blue) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="2de0ec47bdc1d706d92cfe0b4af8ccdd" sprite="Masked Monk (Blue) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="2f24086b82574eff3824c609e38f5021" sprite="Masked Monk (Blue) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="33a60c7318f1e55929ceb2cec8611791" sprite="Masked Monk (Blue) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="33b0c75962233bf49f1fbcb9594a5e4f" sprite="Masked Monk (Blue) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="371ea9e4fae0d5385226e5eb8cbc5468" sprite="Masked Monk (Blue) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="3a5997c164b539739c3d85482199f6e8" sprite="Masked Monk (Blue) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="41e1dd26d0e234f56b5fae4ba278491a" sprite="Masked Monk (Blue) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="41ed46c954d423dc9967541d68f3eb16" sprite="Masked Monk (Blue) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="4431e9dab7958f2dca49ff10ac06ce24" sprite="Masked Monk (Blue) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="476b02d895e631b138a549995c3df354" sprite="Masked Monk (Blue) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="48b0960a2c5ea732c63a561b9b7baf3d" sprite="Masked Monk (Blue) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="4b897bc9645cfa1a31e6d2ce8bea81e2" sprite="Masked Monk (Blue) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="510e871e1ce12d638509bb9c915505b3" sprite="Masked Monk (Blue) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="5957f419d11c43b2d25cc21b5f22424e" sprite="Masked Monk (Blue) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="5971688cd132c94226ce3bbc722b30ef" sprite="Masked Monk (Blue) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="5e37419fefaba192995c9165909921ec" sprite="Masked Monk (Blue) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="5e3e74801198cffdade5160ca7b64c4b" sprite="Masked Monk (Blue) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="60c77ce2b411a5a4835887c111b47970" sprite="Masked Monk (Blue) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="60ccab3ed872afd295a8642c5715a47a" sprite="Masked Monk (Blue) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="6449f9cdf849f8346ed868f81cfd487b" sprite="Masked Monk (Blue) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="65a6e8c7a1e9d0694aedb91c0b345603" sprite="Masked Monk (Blue) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="664f9ddb3ca2e33d34ab0d6a0e907478" sprite="Masked Monk (Blue) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="67149f06e3f15e4b67c1be15c1e6515f" sprite="Masked Monk (Blue) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="6838588f18105e9413cd7d76e789fefd" sprite="Masked Monk (Blue) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="6df64a0a26823b03a6c335468867c32c" sprite="Masked Monk (Blue) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="777a533f91b8c9e89e1c053bca58dba9" sprite="Masked Monk (Blue) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="7d24600c6710c5744b5483cf1083e5db" sprite="Masked Monk (Blue) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="7da5f8a6c238e9789efe20ea0e4d1d64" sprite="Masked Monk (Blue) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="7dbdd0ff9facd4ada0b1fe00ccd3b08a" sprite="Masked Monk (Blue) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="8132dd3ee58379ced421a284c58f0ba8" sprite="Masked Monk (Blue) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="85cc3b2369fbbde18e3872fb1c61181b" sprite="Masked Monk (Blue) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="891e8055d312a8fde29ac618365fb51d" sprite="Masked Monk (Blue) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="8a5fa32a2d10d0592d0377947723ec3e" sprite="Masked Monk (Blue) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="8f04395d61f5075a02dacda7ba43d7a3" sprite="Masked Monk (Blue) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="90bf0be803874c1353624b8f6bc4f0a8" sprite="Masked Monk (Blue) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="9763407d22c4431e79a0036e7d5b859d" sprite="Masked Monk (Blue) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="98bc6fe556d4ce60939e54ffb57e3ff6" sprite="Masked Monk (Blue) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="99b0dc088e88105a751cc4b63356bec6" sprite="Masked Monk (Blue) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="9bd1ca0c3c11718a438d84ec50888cad" sprite="Masked Monk (Blue) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="9cf5854f6047d80c4e2781e25dec061c" sprite="Masked Monk (Blue) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="9e56e31642b3417564db2d9e363cfd44" sprite="Masked Monk (Blue) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="a4f1658b2574270b7aebad4d4e179c2f" sprite="Masked Monk (Blue) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="a79a7bce8964f891888089938bebe3be" sprite="Masked Monk (Blue) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="afae6a2a67037afe5a1ef6478703a22c" sprite="Masked Monk (Blue) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="b0736dab3e0861e5b327f149a70e2299" sprite="Masked Monk (Blue) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="b0b06b3199e75a3b34e687c608882710" sprite="Masked Monk (Blue) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="b1841ff3129cd95dd47c9d7b2728fe34" sprite="Masked Monk (Blue) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="b2ff1ec62e209c8d9c83b0424524193b" sprite="Masked Monk (Blue) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="b586afbfa85393753d028821bc80f6ef" sprite="Masked Monk (Blue) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="b639c377efc91e44ba97045d262a8c46" sprite="Masked Monk (Blue) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="b7abeb0b505685ee7bf93d0c9edd730b" sprite="Masked Monk (Blue) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="be487df1630332ce7300790c4bcfb8e3" sprite="Masked Monk (Blue) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="bf4dddd8759e6ffc7906a71600f48926" sprite="Masked Monk (Blue) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="c299a1707e744aa125aa9160616efb39" sprite="Masked Monk (Blue) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="c62eefbd747994513eb741acfb0790ec" sprite="Masked Monk (Blue) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="c6441a5bdfa824fbf2ccf318747f5e5b" sprite="Masked Monk (Blue) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="c7a30949311c25168a184a95c9dc86d8" sprite="Masked Monk (Blue) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="cc612d6693529d6160b1ca72648813a6" sprite="Masked Monk (Blue) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="d64cfe5a35f340e451aab3146ba6dedb" sprite="Masked Monk (Blue) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="d845ce325d2d809fcd6c8d9ffd679a75" sprite="Masked Monk (Blue) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="db8231d1dc73549349ce2a846fa3541d" sprite="Masked Monk (Blue) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="de835c6beb7e1cbdfc810602ee02061e" sprite="Masked Monk (Blue) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="e6095d4879de853c206236645aa3895a" sprite="Masked Monk (Blue) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="ebcc2e0af4886f04968bfd9a4fab7826" sprite="Masked Monk (Blue) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="f5af798a644fd09c25e9df892235d516" sprite="Masked Monk (Blue) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="f6f4a13cf71e8da2c33e6ca18b60f5c8" sprite="Masked Monk (Blue) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="fa1784c205853be21d6ba4172f41aba7" sprite="Masked Monk (Blue) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="fa7128617c606454bd363cb29286e0ba" sprite="Masked Monk (Blue) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="fdda219a2cfeda8e462670e45079a57e" sprite="Masked Monk (Blue) (Weaponless)" width="40" height="40" animation="" />
     <item hash="0a35e5f8b4cbc87961bfdec1a8e836aa" sprite="Masked Monk (Brown)" width="40" height="40" animation="" />
     <item hash="0b5c19d2ae38ae7421e48ad52394c21e" sprite="Masked Monk (Brown)" width="40" height="40" animation="" />
     <item hash="0fff112180b30dc78fb845c5778e935b" sprite="Masked Monk (Brown)" width="40" height="40" animation="" />
