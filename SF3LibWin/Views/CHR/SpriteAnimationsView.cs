@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Forms;
 using BrightIdeasSoftware;
 using CommonLib.NamedValues;
@@ -14,7 +15,7 @@ namespace SF3.Win.Views.CHR {
             AnimationFramesByType = animationFramesByIndex;
 
             TableView   = new TableView("Frames", model, nameGetterContext, typeof(Animation));
-            TextureView = new SpriteAnimationTextureView("Texture", textureScale: 2);
+            TextureView = new SpriteAnimationTextureView("Texture", animationFramesByIndex.Values.ToArray(), textureScale: 2);
         }
 
         public override Control Create() {
@@ -31,13 +32,10 @@ namespace SF3.Win.Views.CHR {
             var item = (OLVListItem) TableView.OLVControl.SelectedItem;
             var animation = (Animation) item?.RowObject;
 
-            if (animation == null)
+            if (animation == null || !AnimationFramesByType.ContainsKey(animation.AnimationType))
                 TextureView.ClearAnimation();
-            else {
-                var type = animation.AnimationType;
-                var frames = AnimationFramesByType.ContainsKey(type) ? AnimationFramesByType[type] : null;
-                TextureView.StartAnimation(frames);
-            }
+            else
+                TextureView.StartAnimation((int) animation.AnimationType);
         }
 
         public override void Destroy() {

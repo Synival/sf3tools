@@ -1,33 +1,50 @@
-﻿using SF3.Models.Tables.CHR;
+﻿using System.Collections.Generic;
+using SF3.Models.Structs.CHR;
+using SF3.Models.Tables.CHR;
 
 namespace SF3.Win.Views.CHR {
     public class SpriteAnimationTextureView : AnimatedTextureView {
-        public SpriteAnimationTextureView(string name, float textureScale = 0) : base(name, textureScale) {}
-        public SpriteAnimationTextureView(string name, ITexture firstTexture, float textureScale = 0) : base(name, firstTexture, textureScale) {}
-
-        public void StartAnimation(AnimationFrameTable frames) {
-            _frames = frames;
-            if (_frames == null || _frames.Length == 0 || _frames[0].IsEndingFrame)
-                ClearAnimation();
-            else {
-                var frame = _frames[0];
-                SetFrame(frame.Texture, 0, frame.Duration);
-            }
+        public SpriteAnimationTextureView(string name, AnimationFrameTable[] animationFrames, float textureScale = 0)
+        : base(name, textureScale) {
+            AnimationFrames = animationFrames;
         }
 
-        protected override void OnFrameCompleted() {
-            var startingFrame  = FrameIndex;
-            var nextFrameIndex = startingFrame + 1;
-            var frameCount     = _frames.Length;
-            var nextImage      = Image;
+        public void StartAnimation(int index) {
+            if (index < 0 || index >= AnimationFrames.Length)
+                ClearAnimation();
+
+            _frames = AnimationFrames[index];
+            if (_frames == null || _frames.Length == 0 || _frames[0].IsEndingFrame)
+                ClearAnimation();
+            else
+                GotoFrame(null, 0);
+        }
+
+        protected override void OnFrameCompleted()
+            => GotoFrame(FrameIndex, FrameIndex + 1);
+
+        private void GotoFrame(int? lastFrameIndex, int nextFrameIndex) {
+            var framesSeen = new List<AnimationFrame>();
+            if (lastFrameIndex.HasValue && lastFrameIndex >= 0 && lastFrameIndex < _frames.Length)
+                framesSeen.Add(_frames[lastFrameIndex.Value]);
+
+            var frameCount = _frames.Length;
+            var nextImage  = Image;
 
             while (true) {
-                if (nextFrameIndex == startingFrame || nextFrameIndex >= frameCount) {
+                if (nextFrameIndex >= frameCount) {
                     PauseAnimation();
                     return;
                 }
 
+                // If we've gone in a loop, abort.
                 var nextFrame = _frames[nextFrameIndex];
+                if (framesSeen.Contains(nextFrame)) {
+                    PauseAnimation();
+                    return;
+                }
+                framesSeen.Add(nextFrame);
+
                 var frameID  = nextFrame.FrameID;
                 var duration = nextFrame.Duration;
 
@@ -43,6 +60,12 @@ namespace SF3.Win.Views.CHR {
                 }
                 else {
                     switch (frameID) {
+                        // Set number of directions
+                        case 0xF1:
+                            // TODO: this should effect the texture
+                            nextFrameIndex++;
+                            break;
+
                         // Pause
                         case 0xF2:
                             PauseAnimation();
@@ -70,9 +93,14 @@ namespace SF3.Win.Views.CHR {
 
                         // Jump to animation
                         case 0xFF:
-                            // TODO: actually jump to the animation!
-                            PauseAnimation();
-                            return;
+                            if (duration < 0 || duration >= AnimationFrames.Length) {
+                                PauseAnimation();
+                                return;
+                            }
+
+                            _frames = AnimationFrames[duration];
+                            nextFrameIndex = 0;
+                            break;
 
                         // All other commands are skipped.
                         default:
@@ -82,6 +110,8 @@ namespace SF3.Win.Views.CHR {
                 }
             }
         }
+
+        public AnimationFrameTable[] AnimationFrames { get; }
 
         private string _lastTextureHash = null;
         public ITexture _lastTexture = null;
