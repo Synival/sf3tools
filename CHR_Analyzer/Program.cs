@@ -192,6 +192,7 @@ namespace CHR_Analyzer {
                 .OrderBy(x => x.Key)
                 .ToDictionary(x => x.Key, x => x.Value);
 
+            Console.WriteLine();
             Console.WriteLine("Sprites with multiple sizes in their frames:");
             foreach (var textureKv in texturesWithMultipleSizes) {
                 var sizes = textureKv.Value
@@ -214,13 +215,18 @@ namespace CHR_Analyzer {
                     Console.WriteLine($"    {tex.FrameInfo.TextureHash} ({tex.Texture.Width}x{tex.Texture.Height})");
             }
 
-/*
+            Console.WriteLine();
             Console.WriteLine("Writing new 'SpriteFramesByHash.xml'...");
             _ = Directory.CreateDirectory(c_pathOut);
             using (var file = File.OpenWrite(Path.Combine(c_pathOut, "SpriteFramesByHash.xml")))
                 using (var stream = new StreamWriter(file))
-                    SpriteFrameTextueUtils.WriteSpriteFramesByHashXML(stream);
-*/
+                    CHRUtils.WriteUniqueFramesByHashXML(stream);
+
+            Console.WriteLine("Writing new 'SpriteAnimationsByHash.xml'...");
+            _ = Directory.CreateDirectory(c_pathOut);
+            using (var file = File.OpenWrite(Path.Combine(c_pathOut, "SpriteAnimationsByHash.xml")))
+                using (var stream = new StreamWriter(file))
+                    CHRUtils.WriteUniqueAnimationsByHashXML(stream);
 
             var totalCount = matchSet.Count + nomatchSet.Count;
 

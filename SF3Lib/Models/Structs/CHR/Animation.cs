@@ -18,24 +18,29 @@ namespace SF3.Models.Structs.CHR {
 
             _firstAnimationFrame = animationFrames?.FirstOrDefault(x => x.FrameID < 0xF0);
             _frameTable = _firstAnimationFrame?.FrameTable;
-            _frames = AnimationFrames
-                .Where(x => x.FrameID < 0xF0)
+            _framesWithTextures = AnimationFrames
+                .Where(x => x.HasTexture)
                 .SelectMany(x => {
                     var frames = new List<int>();
                     var frameID = x.FrameID;
-                    for (int i = 0; i < directions; i++)
+                    for (int i = 0; i < x.Directions; i++)
                         if (frameID + i < _frameTable.Length)
                             frames.Add(frameID + i);
                     return frames;
                 })
                 .Select(x => _frameTable[x])
                 .ToArray();
+
+            var width  = _framesWithTextures.Length > 0 ? _framesWithTextures[0].Width  : 0;
+            var height = _framesWithTextures.Length > 0 ? _framesWithTextures[0].Height : 0;
+
+            AnimationInfo = CHRUtils.GetUniqueAnimationInfoByHash(Hash, width, height, _firstAnimationFrame?.Directions ?? 1);
         }
 
         public AnimationFrameTable AnimationFrames { get; }
         private readonly AnimationFrame _firstAnimationFrame;
         private readonly FrameTable _frameTable;
-        private readonly Frame[] _frames;
+        private readonly Frame[] _framesWithTextures;
 
         [TableViewModelColumn(displayOrder: 0)]
         public AnimationType AnimationType => AnimationFrames.AnimationType;
@@ -43,16 +48,16 @@ namespace SF3.Models.Structs.CHR {
         [TableViewModelColumn(displayOrder: 0.5f, minWidth: 200)]
         public string SpriteName {
             get {
-                return string.Join(", ", _frames.Select(x => $"{x.FrameInfo.SpriteName}").Distinct().OrderBy(x => x));
+                return string.Join(", ", _framesWithTextures.Select(x => $"{x.FrameInfo.SpriteName}").Distinct().OrderBy(x => x));
             }
             set {
-                foreach (var frame in _frames)
+                foreach (var frame in _framesWithTextures)
                     frame.FrameInfo.SpriteName = value;
 
                 var resourcePath = Path.Combine("..", "..", "..", "..", "SF3Lib", CommonLib.Utils.ResourceUtils.ResourceFile("SpriteFramesByHash.xml"));
                 using (var file = File.OpenWrite(resourcePath))
                     using (var writer = new StreamWriter(file))
-                        CHRUtils.WriteSpriteFramesByHashXML(writer);
+                        CHRUtils.WriteUniqueFramesByHashXML(writer);
             }
         }
 
@@ -126,5 +131,7 @@ namespace SF3.Models.Structs.CHR {
                 return _hash;
             }
         }
+
+        public UniqueAnimationInfo AnimationInfo { get; }
     }
 }
