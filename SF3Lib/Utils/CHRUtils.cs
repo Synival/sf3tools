@@ -101,6 +101,9 @@ namespace SF3.Utils {
                         if (!int.TryParse(widthAttr, out width) || !int.TryParse(heightAttr, out height) || !int.TryParse(directionsAttr, out directions) || !int.TryParse(framesAttr, out frames))
                             continue;
 
+                        if (sprite == "")
+                            sprite = "None";
+
                         int missingFrames = int.TryParse(missingAttr , out var missingFramesOut) ? missingFramesOut : 0;
                         s_uniqueAnimationsByHash.Add(hash.ToLower(), new UniqueAnimationInfo(hash, sprite, animation, width, height, directions, frames, missingFrames));
                     }
@@ -140,8 +143,10 @@ namespace SF3.Utils {
             stream.WriteLine("<?xml version=\"1.0\" encoding=\"utf-8\" ?>");
             stream.WriteLine("<items>");
             foreach (var ai in animationInfos) {
+                var spriteName = (ai.SpriteName == "") ? "None" : ai.SpriteName;
+
                 var missingFramesStr = (ai.MissingFrames == 0) ? "" : $" missingFrames=\"{ai.MissingFrames}\"";
-                stream.WriteLine($"    <item hash=\"{ai.AnimationHash}\" sprite=\"{ai.SpriteName}\" animation=\"{ai.AnimationName}\" width=\"{ai.Width}\" height=\"{ai.Height}\" directions=\"{ai.Directions}\" frames=\"{ai.Frames}\"{missingFramesStr} />");
+                stream.WriteLine($"    <item hash=\"{ai.AnimationHash}\" sprite=\"{spriteName}\" animation=\"{ai.AnimationName}\" width=\"{ai.Width}\" height=\"{ai.Height}\" directions=\"{ai.Directions}\" frames=\"{ai.Frames}\"{missingFramesStr} />");
             }
             stream.WriteLine("</items>");
         }

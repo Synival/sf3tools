@@ -49,7 +49,10 @@ namespace SF3.Models.Structs.CHR {
         [TableViewModelColumn(displayOrder: 0.5f, minWidth: 200)]
         public string SpriteName {
             get {
-                return string.Join(", ", _framesWithTextures.Select(x => $"{x.FrameInfo.SpriteName}").Distinct().OrderBy(x => x));
+                if (_framesWithTextures.Length == 0)
+                    return "None";
+                else
+                    return string.Join(", ", _framesWithTextures.Select(x => $"{x.FrameInfo.SpriteName}").Distinct().OrderBy(x => x));
             }
             set {
                 var lastSpriteName = SpriteName;
