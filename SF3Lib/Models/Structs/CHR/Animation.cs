@@ -94,9 +94,6 @@ namespace SF3.Models.Structs.CHR {
                     // Build a unique hash string for this animation.
                     var hashStr = "";
                     foreach (var aniFrame in AnimationFrames) {
-                        if (hashStr != "")
-                            hashStr += "_";
-
                         // If this is the last frame (a command), filter out some commands that could prevent detection of uniqueness.
                         if (aniFrame.IsFinalFrame) {
                             var cmd   = aniFrame.FrameID;
@@ -110,18 +107,17 @@ namespace SF3.Models.Structs.CHR {
                                 break;
                             // If jumping to another animation, we don't care which one -- just add FF and be done.
                             else if (cmd == 0xFF) {
-                                hashStr += "_FF";
+                                hashStr += "_ff";
                                 break;
                             }
                             // Add the frame as normal.
                         }
 
-                        // TODO: don't make assumptions about how many frames this is!
+                        if (hashStr != "")
+                            hashStr += "_";
+
                         var tex = aniFrame.HasTexture ? aniFrame.GetTexture(aniFrame.Directions) : null;
-                        if (tex != null)
-                            hashStr += $"{tex.Hash}_{aniFrame.Duration:X2}";
-                        else
-                            hashStr += $"_{aniFrame.FrameID:X2}{aniFrame.Duration:X2}";
+                        hashStr += (tex != null) ? $"{tex.Hash}_{aniFrame.Duration:x2}" : $"{aniFrame.FrameID:x2}{aniFrame.Duration:x2}";
                     }
 
                     using (var md5 = MD5.Create())
