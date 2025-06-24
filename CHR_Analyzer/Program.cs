@@ -25,12 +25,12 @@ namespace CHR_Analyzer {
         private const string c_pathOut = "../../../Private";
 
         private class TextureInfo {
-            public TextureInfo(FrameTextureInfo frameInfo, ITexture texture) {
+            public TextureInfo(UniqueFrameInfo frameInfo, ITexture texture) {
                 FrameInfo = frameInfo;
                 Texture = texture;
             }
 
-            public FrameTextureInfo FrameInfo { get; }
+            public UniqueFrameInfo FrameInfo { get; }
             public ITexture Texture { get; }
             public List<TextureSpriteInfo> Sprites { get; } = new List<TextureSpriteInfo>();
         }

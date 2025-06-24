@@ -52,7 +52,7 @@ namespace SF3.Models.Structs.CHR {
                 var resourcePath = Path.Combine("..", "..", "..", "..", "SF3Lib", CommonLib.Utils.ResourceUtils.ResourceFile("SpriteFramesByHash.xml"));
                 using (var file = File.OpenWrite(resourcePath))
                     using (var writer = new StreamWriter(file))
-                        SpriteFrameTextueUtils.WriteSpriteFramesByHashXML(writer);
+                        CHRUtils.WriteSpriteFramesByHashXML(writer);
             }
         }
 

@@ -40,7 +40,7 @@ namespace SF3.Models.Structs.CHR {
                 if (ErrorWhileDecompressing != null && s_brokenTybaltHashes.Contains(hash))
                     Texture = new TextureABGR1555(0, 0, 0, texData.To1DArrayTransposed().To2DArrayColumnMajor(48, 40));
 
-                FrameInfo = SpriteFrameTextueUtils.GetFrameTextureInfoByHash(hash, Texture.Width, Texture.Height);
+                FrameInfo = CHRUtils.GetUniqueFrameInfoByHash(hash, Texture.Width, Texture.Height);
 
                 if (Direction != SpriteFrameDirection.None) {
                     var ds = Direction.ToString();
@@ -107,7 +107,7 @@ namespace SF3.Models.Structs.CHR {
             }
         }
 
-        public FrameTextureInfo FrameInfo { get; }
+        public UniqueFrameInfo FrameInfo { get; }
  
         [TableViewModelColumn(displayOrder: 1, minWidth: 200)]
         public string TextureHash => Texture?.Hash;

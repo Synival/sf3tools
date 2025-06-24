@@ -5,20 +5,21 @@ using System.Xml;
 using SF3.Models.Structs.CHR;
 
 namespace SF3.Utils {
-    public static class SpriteFrameTextueUtils {
-        private static Dictionary<string, FrameTextureInfo> s_frameTextureInfosByHash = null;
+    public static class CHRUtils {
+        private static Dictionary<string, UniqueFrameInfo> s_uniqueFrameInfosByHash = null;
+        private static Dictionary<string, UniqueAnimationInfo> s_uniqueAnimationInfosByHash = null;
 
-        public static FrameTextureInfo GetFrameTextureInfoByHash(string hash, int width, int height) {
+        public static UniqueFrameInfo GetUniqueFrameInfoByHash(string hash, int width, int height) {
             LoadFramesByHashTable();
-            if (!s_frameTextureInfosByHash.ContainsKey(hash.ToLower()))
-                s_frameTextureInfosByHash[hash] = new FrameTextureInfo(hash, "Unknown", width, height, "Unknown");
-            return s_frameTextureInfosByHash[hash];
+            if (!s_uniqueFrameInfosByHash.ContainsKey(hash.ToLower()))
+                s_uniqueFrameInfosByHash[hash] = new UniqueFrameInfo(hash, "Unknown", width, height, "Unknown");
+            return s_uniqueFrameInfosByHash[hash];
         }
 
         private static void LoadFramesByHashTable() {
-            if (s_frameTextureInfosByHash != null)
+            if (s_uniqueFrameInfosByHash != null)
                 return;
-            s_frameTextureInfosByHash = new Dictionary<string, FrameTextureInfo>();
+            s_uniqueFrameInfosByHash = new Dictionary<string, UniqueFrameInfo>();
 
             using (var stream = new FileStream(CommonLib.Utils.ResourceUtils.ResourceFile("SpriteFramesByHash.xml"), FileMode.Open, FileAccess.Read)) {
                 var settings = new XmlReaderSettings {
@@ -46,14 +47,14 @@ namespace SF3.Utils {
                             continue;
 
                         var animation = xml.GetAttribute("animation") ?? "";
-                        s_frameTextureInfosByHash.Add(hash.ToLower(), new FrameTextureInfo(hash, sprite, width, height, animation));
+                        s_uniqueFrameInfosByHash.Add(hash.ToLower(), new UniqueFrameInfo(hash, sprite, width, height, animation));
                     }
                 }
             }
         }
 
         public static void WriteSpriteFramesByHashXML(StreamWriter stream) {
-            var frameInfos = s_frameTextureInfosByHash.Values
+            var frameInfos = s_uniqueFrameInfosByHash.Values
                 .OrderBy(x => x.SpriteName)
                 .ThenBy(x => x.Width)
                 .ThenBy(x => x.Height)
