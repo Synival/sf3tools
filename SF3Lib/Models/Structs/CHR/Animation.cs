@@ -35,6 +35,7 @@ namespace SF3.Models.Structs.CHR {
             var height = _framesWithTextures.Length > 0 ? _framesWithTextures[0].Height : 0;
 
             AnimationInfo = CHRUtils.GetUniqueAnimationInfoByHash(Hash, width, height, _firstAnimationFrame?.Directions ?? 1);
+            AnimationInfo.SpriteName = SpriteName;
         }
 
         public AnimationFrameTable AnimationFrames { get; }
@@ -51,6 +52,7 @@ namespace SF3.Models.Structs.CHR {
                 return string.Join(", ", _framesWithTextures.Select(x => $"{x.FrameInfo.SpriteName}").Distinct().OrderBy(x => x));
             }
             set {
+                var lastSpriteName = SpriteName;
                 foreach (var frame in _framesWithTextures)
                     frame.FrameInfo.SpriteName = value;
 
@@ -58,6 +60,15 @@ namespace SF3.Models.Structs.CHR {
                 using (var file = File.OpenWrite(resourcePath))
                     using (var writer = new StreamWriter(file))
                         CHRUtils.WriteUniqueFramesByHashXML(writer);
+
+                var newSpriteName = SpriteName;
+                if (lastSpriteName != newSpriteName) {
+                    AnimationInfo.SpriteName = SpriteName;
+                    var animPath = Path.Combine("..", "..", "..", "..", "SF3Lib", CommonLib.Utils.ResourceUtils.ResourceFile("SpriteAnimationsByHash.xml"));
+                    using (var file = File.OpenWrite(animPath))
+                        using (var writer = new StreamWriter(file))
+                            CHRUtils.WriteUniqueAnimationsByHashXML(writer);
+                }
             }
         }
 

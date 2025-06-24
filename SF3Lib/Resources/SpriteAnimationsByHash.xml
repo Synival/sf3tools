@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <items>
+    <item hash="93af4b42630c98424b14efb37b60fe48" sprite="" animation="Nothing1" width="0" height="0" directions="1" frames="1" />
+    <item hash="d41d8cd98f00b204e9800998ecf8427e" sprite="" animation="Nothing2" width="0" height="0" directions="1" frames="1" />
     <item hash="0cf9b31025853f707ef41f9caa6df5bd" sprite="Abdark" animation="" width="40" height="40" directions="4" frames="2" />
     <item hash="bf61bca00dcb9340f6993cf295946e8f" sprite="Abdark" animation="" width="40" height="40" directions="4" frames="9" />
     <item hash="8ef31fb057b0a4bddf84d8fb46a561be" sprite="Abdark" animation="" width="40" height="40" directions="4" frames="9" />
@@ -2746,8 +2748,6 @@
     <item hash="186037e76c56be7bbda25a4c981ec8ec" sprite="Nobleman w/ Red Coat and Brown Hair" animation="" width="40" height="40" directions="4" frames="7" />
     <item hash="455abd4c7ebb0cd1d50accad977a3282" sprite="Noblewoman w/ Green Dress and Blonde Hair" animation="" width="40" height="40" directions="4" frames="2" />
     <item hash="72a4503e0daadf310be8b22017acdc89" sprite="Noblewoman w/ Green Dress and Blonde Hair" animation="" width="40" height="40" directions="4" frames="7" />
-    <item hash="93af4b42630c98424b14efb37b60fe48" sprite="None" animation="Nothing1" width="0" height="0" directions="1" frames="1" />
-    <item hash="d41d8cd98f00b204e9800998ecf8427e" sprite="None" animation="Nothing2" width="0" height="0" directions="1" frames="1" />
     <item hash="ac60abd99d0a990fa01fd4168ea46708" sprite="Noon (P1)" animation="" width="40" height="40" directions="4" frames="2" />
     <item hash="1a515f29f8fd466bfb42abf810fab2bd" sprite="Noon (P1)" animation="" width="40" height="40" directions="4" frames="2" />
     <item hash="75a9aa9c3d84fc908bc6f79c1c2d2a35" sprite="Noon (P1)" animation="" width="40" height="40" directions="4" frames="5" />
@@ -3545,33 +3545,33 @@
     <item hash="027efab579869ba7a5a42f84279a71bd" sprite="Synbios (In Hot Springs)" animation="" width="40" height="40" directions="4" frames="4" />
     <item hash="4e53826dc1ff564aa81d0b1591cc6363" sprite="Synbios (In Hot Springs)" animation="" width="40" height="40" directions="4" frames="5" />
     <item hash="1316f6a1cba93df33d9b7a421fe33ef1" sprite="Synbios (In Hot Springs)" animation="" width="40" height="40" directions="4" frames="13" />
-    <item hash="0ede1d4ea1a3fa44ef70e4d35cfbc199" sprite="Synbios (P1)" animation="" width="40" height="40" directions="1" frames="2" />
-    <item hash="cc10546bb2f7208345947bd70c6df95d" sprite="Synbios (P1)" animation="" width="40" height="40" directions="1" frames="4" />
-    <item hash="7a76e9be2a71615a9695d85f2aa7ea4d" sprite="Synbios (P1)" animation="" width="40" height="40" directions="1" frames="4" />
-    <item hash="78e957b582e06807563765a5dbb53e52" sprite="Synbios (P1)" animation="" width="40" height="40" directions="1" frames="5" />
     <item hash="a7517bb04131c2ee343daf7aaa87c53c" sprite="Synbios (P1)" animation="" width="40" height="40" directions="4" frames="3" />
     <item hash="afda6054a3d8208490ce83379558cf0c" sprite="Synbios (P1)" animation="" width="40" height="40" directions="4" frames="3" />
     <item hash="c0d4be36e66dc148780cd9ea44ff6d54" sprite="Synbios (P1)" animation="" width="40" height="40" directions="4" frames="5" />
     <item hash="6cc321f9b68d26c44d415a7219f49f49" sprite="Synbios (P1)" animation="" width="40" height="40" directions="4" frames="5" />
     <item hash="412e03f8e482bf3a6ae8a276e39c8aa9" sprite="Synbios (P1)" animation="" width="40" height="40" directions="17" frames="4" />
-    <item hash="5ab1b40aafacaca8bdaaf54976902e59" sprite="Synbios (P1)" animation="GettingUpFromPrayer" width="40" height="40" directions="4" frames="5" />
-    <item hash="98460a45481ff248b98e3079b24798a7" sprite="Synbios (P1)" animation="Idle" width="40" height="40" directions="4" frames="5" />
     <item hash="a10be278d682ef497a29a023af586391" sprite="Synbios (P1)" animation="Idle" width="40" height="40" directions="4" frames="5" />
     <item hash="12c2e2b531b037f8bb9537af65922d5c" sprite="Synbios (P1)" animation="Idle" width="40" height="40" directions="4" frames="5" />
     <item hash="08bc4ad981cf6b2915fbc2f63e2168de" sprite="Synbios (P1)" animation="Idle" width="40" height="40" directions="6" frames="5" />
     <item hash="40d24a86ed30a4302eee4d8dbf581fa7" sprite="Synbios (P1)" animation="Idle" width="40" height="40" directions="6" frames="5" />
     <item hash="435cc7427c7d0628a34371a21797f59a" sprite="Synbios (P1)" animation="Nodding" width="40" height="40" directions="4" frames="4" />
     <item hash="c3ab5ca43f9a57d5e0ae8c5d9c5264fc" sprite="Synbios (P1)" animation="Nodding" width="40" height="40" directions="6" frames="4" />
-    <item hash="50bca9669aaf4fa8af41028022eb8829" sprite="Synbios (P1)" animation="PrayingStillFrame" width="40" height="40" directions="4" frames="2" />
     <item hash="894828245cdd0907b9551fdf224a5830" sprite="Synbios (P1)" animation="ShakingHead" width="40" height="40" directions="4" frames="7" />
     <item hash="53deac437a5904ba4c7b9b7146fbc8e7" sprite="Synbios (P1)" animation="ShakingHead" width="40" height="40" directions="6" frames="7" />
-    <item hash="372fd5fefc80afa9bcfe3be93acf478d" sprite="Synbios (P1)" animation="StillFrame" width="40" height="40" directions="4" frames="2" />
     <item hash="40f9b3306d5dfa51abf8d7bc11f32bff" sprite="Synbios (P1)" animation="StillFrame" width="40" height="40" directions="4" frames="2" />
     <item hash="a4ee505f5ef098c1dd9e890e7f38cbf9" sprite="Synbios (P1)" animation="StillFrame" width="40" height="40" directions="4" frames="2" />
     <item hash="6f4a19dd8ac1b875f844042fc9e4bcaa" sprite="Synbios (P1)" animation="StillFrame" width="40" height="40" directions="6" frames="2" />
-    <item hash="77c0f654a7b84d6e5b1092e8e6283d7c" sprite="Synbios (P1)" animation="Walking" width="40" height="40" directions="4" frames="7" />
     <item hash="4316c88afe561ca754d051145cf1924d" sprite="Synbios (P1)" animation="Walking" width="40" height="40" directions="4" frames="7" />
     <item hash="cc7a521fbb4aced9a0ebc2f900a1dac4" sprite="Synbios (P1)" animation="Walking" width="40" height="40" directions="6" frames="7" />
+    <item hash="0ede1d4ea1a3fa44ef70e4d35cfbc199" sprite="Synbios (P1) (Weaponless)" animation="" width="40" height="40" directions="1" frames="2" />
+    <item hash="78e957b582e06807563765a5dbb53e52" sprite="Synbios (P1) (Weaponless)" animation="" width="40" height="40" directions="1" frames="5" />
+    <item hash="5ab1b40aafacaca8bdaaf54976902e59" sprite="Synbios (P1) (Weaponless)" animation="GettingUpFromPrayer" width="40" height="40" directions="4" frames="5" />
+    <item hash="98460a45481ff248b98e3079b24798a7" sprite="Synbios (P1) (Weaponless)" animation="Idle" width="40" height="40" directions="4" frames="5" />
+    <item hash="50bca9669aaf4fa8af41028022eb8829" sprite="Synbios (P1) (Weaponless)" animation="PrayingStillFrame" width="40" height="40" directions="4" frames="2" />
+    <item hash="372fd5fefc80afa9bcfe3be93acf478d" sprite="Synbios (P1) (Weaponless)" animation="StillFrame" width="40" height="40" directions="4" frames="2" />
+    <item hash="77c0f654a7b84d6e5b1092e8e6283d7c" sprite="Synbios (P1) (Weaponless)" animation="Walking" width="40" height="40" directions="4" frames="7" />
+    <item hash="cc10546bb2f7208345947bd70c6df95d" sprite="Synbios (P1), Synbios (P1) (Weaponless)" animation="" width="40" height="40" directions="1" frames="4" />
+    <item hash="7a76e9be2a71615a9695d85f2aa7ea4d" sprite="Synbios (P1), Synbios (P1) (Weaponless)" animation="" width="40" height="40" directions="1" frames="4" />
     <item hash="ece67d91cec6c79eef5d28fff21faf0d" sprite="Synbios (P2)" animation="Idle" width="40" height="40" directions="4" frames="5" />
     <item hash="b506a5587ebe3264d7f7c556d55a33ee" sprite="Synbios (P2)" animation="Idle" width="40" height="40" directions="6" frames="5" />
     <item hash="9d21e691aaa11c523ce7f6d917f2a61c" sprite="Synbios (P2)" animation="StillFrame" width="40" height="40" directions="4" frames="2" />
@@ -3772,14 +3772,14 @@
     <item hash="f2e0ca8f02dc8a78b3546c98fb9fd2b1" sprite="Tybalt" animation="" width="40" height="40" directions="4" frames="5" />
     <item hash="f73cfa921d2240823a12c87aae4d83c2" sprite="Tybalt" animation="" width="40" height="40" directions="4" frames="7" />
     <item hash="2f56e177e0fff0e3df926546aca0af17" sprite="Tybalt" animation="" width="40" height="40" directions="4" frames="9" />
-    <item hash="00a6a9861e98c037ca40792a6a3e3580" sprite="Tybalt" animation="Idle" width="40" height="40" directions="4" frames="5" />
-    <item hash="87272620c34cff4b183f8d6561e2a0bb" sprite="Tybalt" animation="Nodding" width="40" height="40" directions="4" frames="4" />
-    <item hash="ba9b2806ea3a997c0bb3e70e5a487804" sprite="Tybalt" animation="ShakingHead" width="40" height="40" directions="4" frames="9" />
-    <item hash="507e713806af70d642601e49f1a0877a" sprite="Tybalt" animation="StillFrame" width="40" height="40" directions="4" frames="2" />
-    <item hash="92755b0058d6f73179f8cbc6f5585a2a" sprite="Tybalt" animation="Walking" width="40" height="40" directions="4" frames="7" />
     <item hash="261a04d28fb3d3c9bc3444f70625bdb7" sprite="Tybalt" animation="" width="48" height="40" directions="4" frames="2" />
     <item hash="5c3eff8aae11b65d73227635699ad235" sprite="Tybalt" animation="" width="48" height="40" directions="4" frames="2" />
     <item hash="3a8def2bac38ab7b03e43ee263eb0410" sprite="Tybalt" animation="" width="48" height="40" directions="4" frames="2" />
+    <item hash="00a6a9861e98c037ca40792a6a3e3580" sprite="Tybalt (Weaponless)" animation="Idle" width="40" height="40" directions="4" frames="5" />
+    <item hash="87272620c34cff4b183f8d6561e2a0bb" sprite="Tybalt (Weaponless)" animation="Nodding" width="40" height="40" directions="4" frames="4" />
+    <item hash="ba9b2806ea3a997c0bb3e70e5a487804" sprite="Tybalt (Weaponless)" animation="ShakingHead" width="40" height="40" directions="4" frames="9" />
+    <item hash="507e713806af70d642601e49f1a0877a" sprite="Tybalt (Weaponless)" animation="StillFrame" width="40" height="40" directions="4" frames="2" />
+    <item hash="92755b0058d6f73179f8cbc6f5585a2a" sprite="Tybalt (Weaponless)" animation="Walking" width="40" height="40" directions="4" frames="7" />
     <item hash="65679647fe55905f3bfefb4bb9c85566" sprite="Unoma (P1)" animation="" width="40" height="40" directions="4" frames="2" />
     <item hash="fc102228317a725525b7eca4264c532b" sprite="Unoma (P1)" animation="" width="40" height="40" directions="4" frames="2" />
     <item hash="2aeda91cc8f403b6d3a1a0aa7ad7daef" sprite="Unoma (P1)" animation="" width="40" height="40" directions="4" frames="5" />
