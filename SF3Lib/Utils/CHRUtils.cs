@@ -150,6 +150,5 @@ namespace SF3.Utils {
             }
             stream.WriteLine("</items>");
         }
-
     }
 }
