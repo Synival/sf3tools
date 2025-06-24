@@ -83,8 +83,11 @@ namespace SF3.Models.Structs.CHR {
         }
 */
 
+        [TableViewModelColumn(displayOrder: 2)]
+        public int TotalFramesMissing => AnimationFrames.Sum(x => x.FramesMissing);
+
         private string _hash = null;
-        [TableViewModelColumn(displayOrder: 2, minWidth: 300)]
+        [TableViewModelColumn(displayOrder: 3, minWidth: 300)]
         public string Hash {
             get {
                 if (_hash == null) {

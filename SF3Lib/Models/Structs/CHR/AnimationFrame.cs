@@ -55,6 +55,9 @@ namespace SF3.Models.Structs.CHR {
         [TableViewModelColumn(addressField: null, displayOrder: 2, displayFormat: "X2")]
         public int Directions { get; }
 
+        [TableViewModelColumn(addressField: null, displayOrder: 2.5f)]
+        public int FramesMissing => HasTexture ? (DirectionsToFrameCount(Directions) - GetFrameCount(Directions)) : 0;
+
         [TableViewModelColumn(displayOrder: 3)]
         public bool IsFinalFrame {
             get {
@@ -70,6 +73,14 @@ namespace SF3.Models.Structs.CHR {
                 // (NOTE: Command 0xFC is a special command, but it's broken and sets the frame to 0xFC with a duration. Stupid, huh?)
                 return cmd < 0xF1 || cmd == 0xF4 || cmd == 0xF5 || (cmd >= 0xF7 && cmd <= 0xFC);
             }
+        }
+
+        public int GetFrameCount(int directions) {
+            if (FrameTable == null || !HasTexture)
+                return 0;
+
+            int expectedFrameCount = DirectionsToFrameCount(directions);
+            return Math.Max(0, Math.Min(FrameTable.Length - FrameID, expectedFrameCount));
         }
 
         private readonly Dictionary<int, ITexture> _texturesByFrameCount = new Dictionary<int, ITexture>();
