@@ -32,43 +32,75 @@ namespace CHR_Analyzer {
 
             public FrameTextureInfo FrameInfo { get; }
             public ITexture Texture { get; }
-            public List<TextureFileInfo> Files { get; } = new List<TextureFileInfo>();
+            public List<TextureSpriteInfo> Sprites { get; } = new List<TextureSpriteInfo>();
         }
 
-        private class TextureFileInfo {
-            public TextureFileInfo(ScenarioType scenario, string filename) {
+        private class TextureSpriteInfo {
+            public TextureSpriteInfo(ScenarioType scenario, string filename, int spriteId) {
                 Scenario = scenario;
                 Filename = filename;
+                SpriteID = spriteId;
             }
 
-            public ScenarioType Scenario;
-            public string Filename;
+            public readonly ScenarioType Scenario;
+            public readonly string Filename;
+            public readonly int SpriteID;
+        }
+
+        private class AnimationInfo {
+            public AnimationInfo() {
+            }
+
+            public List<AnimationFileSprite> Sprites { get; } = new List<AnimationFileSprite>();
+        }
+
+        private class AnimationFileSprite {
+            public AnimationFileSprite(ScenarioType scenario, string filename, int spriteIndex, int animIndex, int lastFrameWord) {
+                Scenario      = scenario;
+                Filename      = filename;
+                SpriteIndex   = spriteIndex;
+                AnimIndex     = animIndex;
+                LastFrameWord = lastFrameWord;
+            }
+
+            public readonly ScenarioType Scenario;
+            public readonly string Filename;
+            public readonly int SpriteIndex;
+            public readonly int AnimIndex;
+            public readonly int LastFrameWord;
         }
 
         private static Dictionary<string, TextureInfo> s_framesByHash = [];
+        private static Dictionary<string, AnimationInfo> s_animationsByHash = [];
 
-        private static void AddFrame(ScenarioType scenario, string filename, Frame frame) {
+        private static void AddFrame(ScenarioType scenario, string filename, int spriteId, Frame frame) {
             var hash = frame.Texture.Hash;
             if (!s_framesByHash.ContainsKey(hash))
                 s_framesByHash.Add(hash, new TextureInfo(frame.FrameInfo, frame.Texture));
-            s_framesByHash[hash].Files.Add(new TextureFileInfo(scenario, filename));
+            s_framesByHash[hash].Sprites.Add(new TextureSpriteInfo(scenario, filename, spriteId));
+        }
+
+        private static void AddAnimation(ScenarioType scenario, string filename, int spriteIndex, Animation animation) {
+            var hash = animation.Hash;
+            if (!s_animationsByHash.ContainsKey(hash))
+                s_animationsByHash.Add(hash, new AnimationInfo());
+
+            var lastFrame = animation.AnimationFrames.Last();
+            var lastFrameWord = (lastFrame.FrameID << 8) | lastFrame.Duration;
+
+            s_animationsByHash[hash].Sprites.Add(new AnimationFileSprite(scenario, filename, spriteIndex, animation.ID, lastFrameWord));
         }
 
         private static List<string> s_matchReports = [];
 
+        private static HashSet<string> scn1List = new HashSet<string>() {
+            "Eldar (P2)",
+        };
+
         private static bool? CHR_MatchFunc(string filename, ICHR_File chrFile, INameGetterContext ngc) {
-            var nonStandardAnimations = chrFile.SpriteTable
-                .Where(x => !x.SpriteName.Contains("Small Icons"))
-                .SelectMany(x => x.AnimationFrameTablesByIndex.Values.Select(y => new { Sprite = x, LastFrame = y.Last() }))
-                .Where(x => x.LastFrame.FrameID == 0xF2 && x.LastFrame.Duration != 0x00)
-                .ToArray();
-
-            if (nonStandardAnimations.Length == 0)
-                return false;
-
-            foreach (var anim in nonStandardAnimations)
-                s_matchReports.Add($"{anim.Sprite.DropdownName}: {anim.LastFrame.Name} = {anim.LastFrame.FrameID:X2},{anim.LastFrame.Duration:X2}");
-
+            var animationsWithMissingFrames = chrFile.SpriteTable.SelectMany(x => x.AnimationTable.Where(y => y.TotalFramesMissing > 0)).ToArray();
+            foreach (var x in animationsWithMissingFrames)
+                s_matchReports.Add($"{x.TotalFramesMissing} missing frames | {x.SpriteName}, {x.Name}");
             return s_matchReports.Count > 0;
         }
 
@@ -93,6 +125,8 @@ namespace CHR_Analyzer {
             var matchSet   = new List<string>();
             var nomatchSet = new List<string>();
 
+            var frameWordSet = new HashSet<uint>();
+
             foreach (var filesKv in allFiles) {
                 var scenario = filesKv.Key;
                 var nameGetter = nameGetterContexts[scenario];
@@ -116,7 +150,7 @@ namespace CHR_Analyzer {
 
                             // List the file and any report we may have from CHR_MatchFunc().
                             var fileStr = GetFileString(scenario, file, chrFile);
-                            Console.WriteLine(fileStr + " |");
+                            Console.WriteLine($"{fileStr} | {match}");
                             foreach (var mr in s_matchReports)
                                 Console.WriteLine("    " + mr);
                             s_matchReports.Clear();
@@ -129,9 +163,16 @@ namespace CHR_Analyzer {
                             ScanForErrorsAndReport(scenario, chrFile);
 
                             // Build a table of all textures.
-                            foreach (var sprite in chrFile.SpriteTable)
+                            foreach (var sprite in chrFile.SpriteTable) {
                                 foreach (var frame in sprite.FrameTable)
-                                    AddFrame(chrFile.Scenario, filename, frame);
+                                    AddFrame(chrFile.Scenario, filename, sprite.ID, frame);
+                                foreach (var animation in sprite.AnimationTable) {
+                                    AddAnimation(chrFile.Scenario, filename, sprite.ID, animation);
+                                    foreach (var animFrame in animation.AnimationFrames)
+                                        if (animFrame.FrameID >= 0xF0)
+                                            frameWordSet.Add((uint) ((animFrame.FrameID << 16) | animFrame.Duration));
+                                }
+                            }
                         }
                     }
                     catch (Exception e) {
@@ -173,11 +214,13 @@ namespace CHR_Analyzer {
                     Console.WriteLine($"    {tex.FrameInfo.TextureHash} ({tex.Texture.Width}x{tex.Texture.Height})");
             }
 
+/*
             Console.WriteLine("Writing new 'SpriteFramesByHash.xml'...");
             _ = Directory.CreateDirectory(c_pathOut);
             using (var file = File.OpenWrite(Path.Combine(c_pathOut, "SpriteFramesByHash.xml")))
                 using (var stream = new StreamWriter(file))
                     SpriteFrameTextueUtils.WriteSpriteFramesByHashXML(stream);
+*/
 
             var totalCount = matchSet.Count + nomatchSet.Count;
 
@@ -194,6 +237,18 @@ namespace CHR_Analyzer {
             Console.WriteLine($"NoMatch: {nomatchSet.Count}/{totalCount}");
             foreach (var str in nomatchSet)
                 Console.WriteLine("  " + str);
+
+            Console.WriteLine("");
+            Console.WriteLine("===================================================");
+            Console.WriteLine("| ANIMATIONS                                      |");
+            Console.WriteLine("===================================================");
+            Console.WriteLine("");
+
+            Console.WriteLine($"There are {s_animationsByHash.Count} unique animations.");
+            var avgUsagesPerAnimation = s_animationsByHash.Sum(x => x.Value.Sprites.Count) / (float) s_animationsByHash.Count;
+            Console.WriteLine($"Each animation is used {avgUsagesPerAnimation} times on average.");
+
+            return;
 
             Console.WriteLine("");
             Console.WriteLine("===================================================");

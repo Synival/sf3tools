@@ -94,16 +94,34 @@ namespace SF3.Models.Structs.CHR {
                     // Build a unique hash string for this animation.
                     var hashStr = "";
                     foreach (var aniFrame in AnimationFrames) {
-                        if (aniFrame.IsFinalFrame)
-                            break;
+                        if (hashStr != "")
+                            hashStr += "_";
 
-                        hashStr += (hashStr == "" ? "" : "_") + $"{aniFrame.Duration:X2}";
+                        // If this is the last frame (a command), filter out some commands that could prevent detection of uniqueness.
+                        if (aniFrame.IsFinalFrame) {
+                            var cmd   = aniFrame.FrameID;
+                            var param = aniFrame.Duration;
+
+                            // Don't bother appending stops.
+                            if (cmd == 0xF2)
+                                break;
+                            // If jumping back to the first frame is the same as stopping, don't add this either.
+                            else if (cmd == 0xFE && param == 0 && AnimationFrames.Length <= 2)
+                                break;
+                            // If jumping to another animation, we don't care which one -- just add FF and be done.
+                            else if (cmd == 0xFF) {
+                                hashStr += "_FF";
+                                break;
+                            }
+                            // Add the frame as normal.
+                        }
+
                         // TODO: don't make assumptions about how many frames this is!
-                        var tex = (!aniFrame.HasTexture && aniFrame.FrameID != 0xF1) ? aniFrame.GetTexture(aniFrame.Directions) : null;
+                        var tex = aniFrame.HasTexture ? aniFrame.GetTexture(aniFrame.Directions) : null;
                         if (tex != null)
-                            hashStr += $"_{tex.Hash}";
+                            hashStr += $"{tex.Hash}_{aniFrame.Duration:X2}";
                         else
-                            hashStr += $"_{aniFrame.FrameID:X2}";
+                            hashStr += $"_{aniFrame.FrameID:X2}{aniFrame.Duration:X2}";
                     }
 
                     using (var md5 = MD5.Create())
