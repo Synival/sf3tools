@@ -1934,36 +1934,36 @@
     <item hash="fcb5e82a80fb32fbc1a90003e48bab04" sprite="Bow Knight" width="48" height="40" animation="" />
     <item hash="18c5cf3cb682a6022da2a09966efe160" sprite="Bow Knight (Unused)" width="48" height="40" animation="" />
     <item hash="1967e25e2d48b8dccd489972cde5bf63" sprite="Bow Knight (Unused)" width="48" height="40" animation="" />
-    <item hash="24d58704dc99b7fcddf04229a5401641" sprite="Bow Knight (Unused)" width="48" height="40" animation="" />
     <item hash="286ce14548e38a0d70ba2fef88a4ed17" sprite="Bow Knight (Unused)" width="48" height="40" animation="" />
-    <item hash="31581d5df253a81c9479aadc8af81e8a" sprite="Bow Knight (Unused)" width="48" height="40" animation="" />
-    <item hash="36b4766cbf8e3416502db6edb5dc41bd" sprite="Bow Knight (Unused)" width="48" height="40" animation="" />
-    <item hash="46c5e6e3986fbea51ef927f032af8ec5" sprite="Bow Knight (Unused)" width="48" height="40" animation="" />
     <item hash="49c2630cb5580c868636d7b2d8cd1f03" sprite="Bow Knight (Unused)" width="48" height="40" animation="" />
-    <item hash="57d5799486452d0d1d10a2a36f995575" sprite="Bow Knight (Unused)" width="48" height="40" animation="" />
     <item hash="691019ba29b98fff23f3aebae5489464" sprite="Bow Knight (Unused)" width="48" height="40" animation="" />
     <item hash="6dd1ed32160470a4c9ee0c1d0d6be30f" sprite="Bow Knight (Unused)" width="48" height="40" animation="" />
     <item hash="79f713fde368571264ab1a4af0951589" sprite="Bow Knight (Unused)" width="48" height="40" animation="" />
-    <item hash="7c58a13b4d251a0096b02f522d671d45" sprite="Bow Knight (Unused)" width="48" height="40" animation="" />
-    <item hash="83dd3c2f91612fb626986f13d6290e46" sprite="Bow Knight (Unused)" width="48" height="40" animation="" />
-    <item hash="94b1be6ed8a5809dd1de1b93defc4d81" sprite="Bow Knight (Unused)" width="48" height="40" animation="" />
-    <item hash="99dab0a5b6ffdc82f4365b199ee02869" sprite="Bow Knight (Unused)" width="48" height="40" animation="" />
     <item hash="9f638d510518abf1929f1cb4c471e233" sprite="Bow Knight (Unused)" width="48" height="40" animation="" />
     <item hash="a2a01caccf03450e0748d80e7652bdab" sprite="Bow Knight (Unused)" width="48" height="40" animation="" />
     <item hash="a96ec4103eb6cf3e9604f75304125014" sprite="Bow Knight (Unused)" width="48" height="40" animation="" />
     <item hash="b22e52b6eb2cafa25e252093cf431349" sprite="Bow Knight (Unused)" width="48" height="40" animation="" />
-    <item hash="b4ce26bfdd9daa64d6f182192d4eb51b" sprite="Bow Knight (Unused)" width="48" height="40" animation="" />
-    <item hash="cbbb513319fa9663d70a49e090bec852" sprite="Bow Knight (Unused)" width="48" height="40" animation="" />
-    <item hash="ccde9602a7a2718cde3fcec9e1f67d0c" sprite="Bow Knight (Unused)" width="48" height="40" animation="" />
-    <item hash="d3dc32ab90bf7c1ee8c0dc5b9ff4410a" sprite="Bow Knight (Unused)" width="48" height="40" animation="" />
     <item hash="d6b4969ef3ad9494844f3839f2166fd9" sprite="Bow Knight (Unused)" width="48" height="40" animation="" />
-    <item hash="db9863f474649823ec636a0dff8c0247" sprite="Bow Knight (Unused)" width="48" height="40" animation="" />
     <item hash="e35a7f2579f353dbbbc16d7e7f590891" sprite="Bow Knight (Unused)" width="48" height="40" animation="" />
-    <item hash="ec249061a3a61b8e85aa0d589c73b0e1" sprite="Bow Knight (Unused)" width="48" height="40" animation="" />
     <item hash="f39c32f3ec3cfd01c3992ab487299ec9" sprite="Bow Knight (Unused)" width="48" height="40" animation="" />
     <item hash="f5478f13517c43f6474fd19c93d2496f" sprite="Bow Knight (Unused)" width="48" height="40" animation="" />
-    <item hash="fb1cbced4425105768c27221fe6f0eb6" sprite="Bow Knight (Unused)" width="48" height="40" animation="" />
     <item hash="fb8ef46e82ca52c68f09a20d9e6dc750" sprite="Bow Knight (Unused)" width="48" height="40" animation="" />
+    <item hash="24d58704dc99b7fcddf04229a5401641" sprite="Bow Knight (Waltz Placeholder)" width="48" height="40" animation="" />
+    <item hash="31581d5df253a81c9479aadc8af81e8a" sprite="Bow Knight (Waltz Placeholder)" width="48" height="40" animation="" />
+    <item hash="36b4766cbf8e3416502db6edb5dc41bd" sprite="Bow Knight (Waltz Placeholder)" width="48" height="40" animation="" />
+    <item hash="46c5e6e3986fbea51ef927f032af8ec5" sprite="Bow Knight (Waltz Placeholder)" width="48" height="40" animation="" />
+    <item hash="57d5799486452d0d1d10a2a36f995575" sprite="Bow Knight (Waltz Placeholder)" width="48" height="40" animation="" />
+    <item hash="7c58a13b4d251a0096b02f522d671d45" sprite="Bow Knight (Waltz Placeholder)" width="48" height="40" animation="" />
+    <item hash="83dd3c2f91612fb626986f13d6290e46" sprite="Bow Knight (Waltz Placeholder)" width="48" height="40" animation="" />
+    <item hash="94b1be6ed8a5809dd1de1b93defc4d81" sprite="Bow Knight (Waltz Placeholder)" width="48" height="40" animation="" />
+    <item hash="99dab0a5b6ffdc82f4365b199ee02869" sprite="Bow Knight (Waltz Placeholder)" width="48" height="40" animation="" />
+    <item hash="b4ce26bfdd9daa64d6f182192d4eb51b" sprite="Bow Knight (Waltz Placeholder)" width="48" height="40" animation="" />
+    <item hash="cbbb513319fa9663d70a49e090bec852" sprite="Bow Knight (Waltz Placeholder)" width="48" height="40" animation="" />
+    <item hash="ccde9602a7a2718cde3fcec9e1f67d0c" sprite="Bow Knight (Waltz Placeholder)" width="48" height="40" animation="" />
+    <item hash="d3dc32ab90bf7c1ee8c0dc5b9ff4410a" sprite="Bow Knight (Waltz Placeholder)" width="48" height="40" animation="" />
+    <item hash="db9863f474649823ec636a0dff8c0247" sprite="Bow Knight (Waltz Placeholder)" width="48" height="40" animation="" />
+    <item hash="ec249061a3a61b8e85aa0d589c73b0e1" sprite="Bow Knight (Waltz Placeholder)" width="48" height="40" animation="" />
+    <item hash="fb1cbced4425105768c27221fe6f0eb6" sprite="Bow Knight (Waltz Placeholder)" width="48" height="40" animation="" />
     <item hash="0790682b2176bf90ff3d133fd55535df" sprite="Boy Masked Monk w/ Blue Shirt and Yellow+Blue Spotted Hood" width="40" height="40" animation="" />
     <item hash="2b2a7c01444d1250098f239d0c3db7f6" sprite="Boy Masked Monk w/ Blue Shirt and Yellow+Blue Spotted Hood" width="40" height="40" animation="" />
     <item hash="3a50bdc275004bf13042a1792c6c5a72" sprite="Boy Masked Monk w/ Blue Shirt and Yellow+Blue Spotted Hood" width="40" height="40" animation="" />
@@ -3071,7 +3071,6 @@
     <item hash="29092b5f0a918536b82e46c1148abead" sprite="Campbell (U)" width="48" height="40" animation="" />
     <item hash="29b69a743870fe944aa595f6e2f8a9ef" sprite="Campbell (U)" width="48" height="40" animation="" />
     <item hash="2ca804b65acd02c3c583fa280388965a" sprite="Campbell (U)" width="48" height="40" animation="" />
-    <item hash="30cfc3c6ed32d9d20a5404d160f3b7f5" sprite="Campbell (U)" width="48" height="40" animation="" />
     <item hash="32215e192fa677e88f9d82a71b3fb1cb" sprite="Campbell (U)" width="48" height="40" animation="" />
     <item hash="32c4e4a4c0dc326ed31e885ce5536478" sprite="Campbell (U)" width="48" height="40" animation="" />
     <item hash="349e1421dd9990c0f04df4cac839ba5d" sprite="Campbell (U)" width="48" height="40" animation="" />
@@ -3094,23 +3093,19 @@
     <item hash="6ca6d56a83b8c2bb0190c9ad6995ff11" sprite="Campbell (U)" width="48" height="40" animation="" />
     <item hash="6f930858d275bf783500f14df284836d" sprite="Campbell (U)" width="48" height="40" animation="" />
     <item hash="747e40a0b82934a9d84e6a2885ccaba0" sprite="Campbell (U)" width="48" height="40" animation="" />
-    <item hash="76dc60204684721ce99c47d21bccc751" sprite="Campbell (U)" width="48" height="40" animation="" />
     <item hash="7785e2432e499a8271eceda5e6a07d02" sprite="Campbell (U)" width="48" height="40" animation="" />
     <item hash="799059f006142154acbd98436ffbe266" sprite="Campbell (U)" width="48" height="40" animation="" />
     <item hash="7d84cc88cc12db2aae68295262c4f0b6" sprite="Campbell (U)" width="48" height="40" animation="" />
-    <item hash="7e528ac2ab4c99ac57a6553bc20e525d" sprite="Campbell (U)" width="48" height="40" animation="" />
     <item hash="81d8e57f3401410345391b80d123223e" sprite="Campbell (U)" width="48" height="40" animation="" />
     <item hash="870eeaac3e57e1bb5d20aebfc7437e81" sprite="Campbell (U)" width="48" height="40" animation="" />
     <item hash="8921f3c41ef1c772b3151e0676ee9822" sprite="Campbell (U)" width="48" height="40" animation="" />
     <item hash="8ad19a9bc50783ff5b0a865958932caf" sprite="Campbell (U)" width="48" height="40" animation="" />
     <item hash="8aea1ecfedddedf5e495bb29394c1260" sprite="Campbell (U)" width="48" height="40" animation="" />
     <item hash="914112ecba5fe82b13bee907090a86c8" sprite="Campbell (U)" width="48" height="40" animation="" />
-    <item hash="94436750d175d68987ce22f3f250d5f2" sprite="Campbell (U)" width="48" height="40" animation="" />
     <item hash="9818c8773f36cf5740b96143994c1a82" sprite="Campbell (U)" width="48" height="40" animation="" />
     <item hash="9a932010a0cf484193e6ab7267018b05" sprite="Campbell (U)" width="48" height="40" animation="" />
     <item hash="9d53a59613646b4476120018e19aa060" sprite="Campbell (U)" width="48" height="40" animation="" />
     <item hash="9f7a5677183dd98ff13ca3a8bb917f24" sprite="Campbell (U)" width="48" height="40" animation="" />
-    <item hash="a1577f2bbc423ed30368971ad49ff042" sprite="Campbell (U)" width="48" height="40" animation="" />
     <item hash="a18c54e4feedbf6c76ab923589839971" sprite="Campbell (U)" width="48" height="40" animation="" />
     <item hash="a56f77e2609e872958c5185f1b0b7e94" sprite="Campbell (U)" width="48" height="40" animation="" />
     <item hash="a6f314d93cb5e40b7e6d7be01f11cf88" sprite="Campbell (U)" width="48" height="40" animation="" />
@@ -3118,7 +3113,6 @@
     <item hash="a853de69e2dcfbdc6ab5b4483e75db1e" sprite="Campbell (U)" width="48" height="40" animation="" />
     <item hash="a8ad399f14f283e18ef0da9bec2f3929" sprite="Campbell (U)" width="48" height="40" animation="" />
     <item hash="a953480ac1acc1bcf7189d7b3341e48c" sprite="Campbell (U)" width="48" height="40" animation="" />
-    <item hash="a99c77545825ae9aac8a08189a0db508" sprite="Campbell (U)" width="48" height="40" animation="" />
     <item hash="aa099dab0166bdb0830b1923fda9fe07" sprite="Campbell (U)" width="48" height="40" animation="" />
     <item hash="af3778a0bbed42d042f5a7960dd799e2" sprite="Campbell (U)" width="48" height="40" animation="" />
     <item hash="b00e140cc7b83fbd32b2f82c6c7cfec5" sprite="Campbell (U)" width="48" height="40" animation="" />
@@ -3130,19 +3124,13 @@
     <item hash="b9e19df20038dd2d23f97ee5cdab2c4a" sprite="Campbell (U)" width="48" height="40" animation="" />
     <item hash="bf29d96e53068610336d795787d103b6" sprite="Campbell (U)" width="48" height="40" animation="" />
     <item hash="c236ddc222f92c614c7f0b32607590c7" sprite="Campbell (U)" width="48" height="40" animation="" />
-    <item hash="c390ae25e0e1aa56402de166d83bfcf5" sprite="Campbell (U)" width="48" height="40" animation="" />
     <item hash="c47421cf956c58eafa5c79d42f756875" sprite="Campbell (U)" width="48" height="40" animation="" />
     <item hash="c86c380b749ba685acac84fbbaedaabf" sprite="Campbell (U)" width="48" height="40" animation="" />
-    <item hash="c93ad59f0ecb5750ccd16b4159aa242e" sprite="Campbell (U)" width="48" height="40" animation="" />
-    <item hash="cac8d833770b7decd4cf5dd136d7ce8e" sprite="Campbell (U)" width="48" height="40" animation="" />
     <item hash="cc600acb51d6e1ce340d8c31139ac8b6" sprite="Campbell (U)" width="48" height="40" animation="" />
-    <item hash="d015a8ab396384ca4b43150f6ffc0d51" sprite="Campbell (U)" width="48" height="40" animation="" />
     <item hash="d108ad281e704d37302dbb63c377ecbd" sprite="Campbell (U)" width="48" height="40" animation="" />
     <item hash="d12c8ce85f01b7da6fe5c979ff1b6aac" sprite="Campbell (U)" width="48" height="40" animation="" />
     <item hash="d58259e27670be82194e512909f9f68f" sprite="Campbell (U)" width="48" height="40" animation="" />
-    <item hash="d80a6e94e68d9e0008df92de7883876c" sprite="Campbell (U)" width="48" height="40" animation="" />
     <item hash="d863b48e90791a431d0cc5081315c000" sprite="Campbell (U)" width="48" height="40" animation="" />
-    <item hash="ee2831511075a4cd29249fccec47d0c1" sprite="Campbell (U)" width="48" height="40" animation="" />
     <item hash="f2b9c1abf3b8c747a50d1f8fb205f7f9" sprite="Campbell (U)" width="48" height="40" animation="" />
     <item hash="f2c2bceedc3d04150f9d81ce8c066955" sprite="Campbell (U)" width="48" height="40" animation="" />
     <item hash="f3052ddb7b0c0127a6dc6a8ece35485f" sprite="Campbell (U)" width="48" height="40" animation="" />
@@ -3162,6 +3150,7 @@
     <item hash="2e13963fb000d094956327b060a08aa1" sprite="Campbell (U) (Weaponless)" width="48" height="40" animation="" />
     <item hash="2f6c1a3d71063b4fc1384542945f3350" sprite="Campbell (U) (Weaponless)" width="48" height="40" animation="" />
     <item hash="303dbc7b6c6563045e08771c0ec3b379" sprite="Campbell (U) (Weaponless)" width="48" height="40" animation="" />
+    <item hash="30cfc3c6ed32d9d20a5404d160f3b7f5" sprite="Campbell (U) (Weaponless)" width="48" height="40" animation="" />
     <item hash="337132d9f592280dbe222000844cb67c" sprite="Campbell (U) (Weaponless)" width="48" height="40" animation="" />
     <item hash="3ae4fe467ffe275892f27bf41725f7b3" sprite="Campbell (U) (Weaponless)" width="48" height="40" animation="" />
     <item hash="3c8e987cb962877cf182b13f01b906a6" sprite="Campbell (U) (Weaponless)" width="48" height="40" animation="" />
@@ -3176,18 +3165,23 @@
     <item hash="6d50f37af6a6f79e0a247bb0376e3a09" sprite="Campbell (U) (Weaponless)" width="48" height="40" animation="" />
     <item hash="72c9c63c382c77126766546edafe1efc" sprite="Campbell (U) (Weaponless)" width="48" height="40" animation="" />
     <item hash="76969a6b6787fa13057bf7a660d0802c" sprite="Campbell (U) (Weaponless)" width="48" height="40" animation="" />
+    <item hash="76dc60204684721ce99c47d21bccc751" sprite="Campbell (U) (Weaponless)" width="48" height="40" animation="" />
+    <item hash="7e528ac2ab4c99ac57a6553bc20e525d" sprite="Campbell (U) (Weaponless)" width="48" height="40" animation="" />
     <item hash="8726e469ca4b96cfc079f5fce149ed13" sprite="Campbell (U) (Weaponless)" width="48" height="40" animation="" />
     <item hash="889c970efd036b324f6ee368ea7749c1" sprite="Campbell (U) (Weaponless)" width="48" height="40" animation="" />
     <item hash="89f19bdd038c28cf3f411487da996a90" sprite="Campbell (U) (Weaponless)" width="48" height="40" animation="" />
     <item hash="91c04e82e73e220b3e274522883d24e9" sprite="Campbell (U) (Weaponless)" width="48" height="40" animation="" />
+    <item hash="94436750d175d68987ce22f3f250d5f2" sprite="Campbell (U) (Weaponless)" width="48" height="40" animation="" />
     <item hash="96279d7deb34950040fe7f61151c2eaf" sprite="Campbell (U) (Weaponless)" width="48" height="40" animation="" />
     <item hash="97c86e49613161890fe22b63fc0ea82c" sprite="Campbell (U) (Weaponless)" width="48" height="40" animation="" />
     <item hash="9a59722ceff91ba59faca1c74ba60293" sprite="Campbell (U) (Weaponless)" width="48" height="40" animation="" />
     <item hash="9b7aec168d5e21b4d0ed171a07b646b1" sprite="Campbell (U) (Weaponless)" width="48" height="40" animation="" />
     <item hash="9ec2e2cdb3152c947e813b1ef3c6df9f" sprite="Campbell (U) (Weaponless)" width="48" height="40" animation="" />
     <item hash="a0f285152af8be0d2504a8184cd25449" sprite="Campbell (U) (Weaponless)" width="48" height="40" animation="" />
+    <item hash="a1577f2bbc423ed30368971ad49ff042" sprite="Campbell (U) (Weaponless)" width="48" height="40" animation="" />
     <item hash="a68e61f58ea252afb9d0a1e5e5278819" sprite="Campbell (U) (Weaponless)" width="48" height="40" animation="" />
     <item hash="a96da38752713b870f2a69a6a6eb213c" sprite="Campbell (U) (Weaponless)" width="48" height="40" animation="" />
+    <item hash="a99c77545825ae9aac8a08189a0db508" sprite="Campbell (U) (Weaponless)" width="48" height="40" animation="" />
     <item hash="ab675a86c54cc87b495fa0c6c0c56b43" sprite="Campbell (U) (Weaponless)" width="48" height="40" animation="" />
     <item hash="aefdbab1756ac2ec876c826d65a87bcc" sprite="Campbell (U) (Weaponless)" width="48" height="40" animation="" />
     <item hash="af63a2d21af9e502ea06ac2b172887ff" sprite="Campbell (U) (Weaponless)" width="48" height="40" animation="" />
@@ -3197,16 +3191,22 @@
     <item hash="ba8369a15c504aa17c9c89e7c62830a2" sprite="Campbell (U) (Weaponless)" width="48" height="40" animation="" />
     <item hash="be9bb7d4726f7f5fca34e75c29095aa9" sprite="Campbell (U) (Weaponless)" width="48" height="40" animation="" />
     <item hash="c0c4d96ff30dc2b8a7b35a18fa45e7bb" sprite="Campbell (U) (Weaponless)" width="48" height="40" animation="" />
+    <item hash="c390ae25e0e1aa56402de166d83bfcf5" sprite="Campbell (U) (Weaponless)" width="48" height="40" animation="" />
+    <item hash="c93ad59f0ecb5750ccd16b4159aa242e" sprite="Campbell (U) (Weaponless)" width="48" height="40" animation="" />
     <item hash="ca3d6091d0f75796d6e259589596ef38" sprite="Campbell (U) (Weaponless)" width="48" height="40" animation="" />
+    <item hash="cac8d833770b7decd4cf5dd136d7ce8e" sprite="Campbell (U) (Weaponless)" width="48" height="40" animation="" />
     <item hash="cc476d5182f7c767195d7c56dd64dd85" sprite="Campbell (U) (Weaponless)" width="48" height="40" animation="" />
     <item hash="cd8656616e40fa6b18c6bad0082f5bc0" sprite="Campbell (U) (Weaponless)" width="48" height="40" animation="" />
     <item hash="cf7ca8b421e64238c07860c6250bc1f7" sprite="Campbell (U) (Weaponless)" width="48" height="40" animation="" />
+    <item hash="d015a8ab396384ca4b43150f6ffc0d51" sprite="Campbell (U) (Weaponless)" width="48" height="40" animation="" />
     <item hash="d14585666ad8add31cbfbf5b061c7786" sprite="Campbell (U) (Weaponless)" width="48" height="40" animation="" />
     <item hash="d1c95c5dcd8fb22bca9ec0f19fb9daea" sprite="Campbell (U) (Weaponless)" width="48" height="40" animation="" />
     <item hash="d6f4128ce77cf70437767c0c56a353a9" sprite="Campbell (U) (Weaponless)" width="48" height="40" animation="" />
+    <item hash="d80a6e94e68d9e0008df92de7883876c" sprite="Campbell (U) (Weaponless)" width="48" height="40" animation="" />
     <item hash="daa9cbdc3841e3a0e0b186312031c769" sprite="Campbell (U) (Weaponless)" width="48" height="40" animation="" />
     <item hash="de82c472ce0fa1f9c4fd0b47163022dd" sprite="Campbell (U) (Weaponless)" width="48" height="40" animation="" />
     <item hash="e5f3ef68fd50d800367359945568e61c" sprite="Campbell (U) (Weaponless)" width="48" height="40" animation="" />
+    <item hash="ee2831511075a4cd29249fccec47d0c1" sprite="Campbell (U) (Weaponless)" width="48" height="40" animation="" />
     <item hash="f09b349ad0f88dec9c3df658c4a08902" sprite="Campbell (U) (Weaponless)" width="48" height="40" animation="" />
     <item hash="f24484c4c6450be2863759c3625f2fda" sprite="Campbell (U) (Weaponless)" width="48" height="40" animation="" />
     <item hash="46e4e4e7b65d62fbd320c26210f185ce" sprite="Cannon Ball" width="48" height="48" animation="" />
@@ -24463,22 +24463,22 @@
     <item hash="fd39f342b236f7c072e8ac02979b9bf8" sprite="Waltz (U)" width="48" height="40" animation="" />
     <item hash="fe3310bf387116c718947b045e9dd3aa" sprite="Waltz (U)" width="48" height="40" animation="" />
     <item hash="ff17d23f03c14d300e360260986ad2b0" sprite="Waltz (U)" width="48" height="40" animation="" />
-    <item hash="020d03d69c4be4cc3a585ca96632eac6" sprite="Warrior Unused" width="40" height="40" animation="" />
-    <item hash="0a69659301154134c719437fcd3177bf" sprite="Warrior Unused" width="40" height="40" animation="" />
-    <item hash="0b2ee2823ddf0083ff7569cc7aa74ddc" sprite="Warrior Unused" width="40" height="40" animation="" />
-    <item hash="1e984d98e4f365bf04834d1fc80b4386" sprite="Warrior Unused" width="40" height="40" animation="" />
-    <item hash="2267ecf405916fa4452791a539e9d372" sprite="Warrior Unused" width="40" height="40" animation="" />
-    <item hash="2e9ffa4acf526d6b2c42a10a346f26cc" sprite="Warrior Unused" width="40" height="40" animation="" />
-    <item hash="3c8900b7f8cacb691384217f4880f96c" sprite="Warrior Unused" width="40" height="40" animation="" />
-    <item hash="437380f231d584ee5566e12e961821b6" sprite="Warrior Unused" width="40" height="40" animation="" />
-    <item hash="7912398e0245b7e7c0ada7174471a940" sprite="Warrior Unused" width="40" height="40" animation="" />
-    <item hash="9e8a07041967a882872bb4cfe6d93d6e" sprite="Warrior Unused" width="40" height="40" animation="" />
-    <item hash="b66438261a96b749893227d37e9a1ccd" sprite="Warrior Unused" width="40" height="40" animation="" />
-    <item hash="d15fae39ac3661641d9589beca23d941" sprite="Warrior Unused" width="40" height="40" animation="" />
-    <item hash="d3a499e8aa57a0f6965b05148075f6a2" sprite="Warrior Unused" width="40" height="40" animation="" />
-    <item hash="ee3213d494fee0f900635c8c5c404768" sprite="Warrior Unused" width="40" height="40" animation="" />
-    <item hash="f116b5e8f5c792a9c87e4b09aa76573c" sprite="Warrior Unused" width="40" height="40" animation="" />
-    <item hash="f12e0490d3041568477b70abe42c2745" sprite="Warrior Unused" width="40" height="40" animation="" />
+    <item hash="020d03d69c4be4cc3a585ca96632eac6" sprite="Warrior (Rock Placeholder)" width="40" height="40" animation="" />
+    <item hash="0a69659301154134c719437fcd3177bf" sprite="Warrior (Rock Placeholder)" width="40" height="40" animation="" />
+    <item hash="0b2ee2823ddf0083ff7569cc7aa74ddc" sprite="Warrior (Rock Placeholder)" width="40" height="40" animation="" />
+    <item hash="1e984d98e4f365bf04834d1fc80b4386" sprite="Warrior (Rock Placeholder)" width="40" height="40" animation="" />
+    <item hash="2267ecf405916fa4452791a539e9d372" sprite="Warrior (Rock Placeholder)" width="40" height="40" animation="" />
+    <item hash="2e9ffa4acf526d6b2c42a10a346f26cc" sprite="Warrior (Rock Placeholder)" width="40" height="40" animation="" />
+    <item hash="3c8900b7f8cacb691384217f4880f96c" sprite="Warrior (Rock Placeholder)" width="40" height="40" animation="" />
+    <item hash="437380f231d584ee5566e12e961821b6" sprite="Warrior (Rock Placeholder)" width="40" height="40" animation="" />
+    <item hash="7912398e0245b7e7c0ada7174471a940" sprite="Warrior (Rock Placeholder)" width="40" height="40" animation="" />
+    <item hash="9e8a07041967a882872bb4cfe6d93d6e" sprite="Warrior (Rock Placeholder)" width="40" height="40" animation="" />
+    <item hash="b66438261a96b749893227d37e9a1ccd" sprite="Warrior (Rock Placeholder)" width="40" height="40" animation="" />
+    <item hash="d15fae39ac3661641d9589beca23d941" sprite="Warrior (Rock Placeholder)" width="40" height="40" animation="" />
+    <item hash="d3a499e8aa57a0f6965b05148075f6a2" sprite="Warrior (Rock Placeholder)" width="40" height="40" animation="" />
+    <item hash="ee3213d494fee0f900635c8c5c404768" sprite="Warrior (Rock Placeholder)" width="40" height="40" animation="" />
+    <item hash="f116b5e8f5c792a9c87e4b09aa76573c" sprite="Warrior (Rock Placeholder)" width="40" height="40" animation="" />
+    <item hash="f12e0490d3041568477b70abe42c2745" sprite="Warrior (Rock Placeholder)" width="40" height="40" animation="" />
     <item hash="02252d206fda84e0175cb41f87367a59" sprite="Weapon Dealer" width="40" height="40" animation="" />
     <item hash="07656b98f3333b99af6141222c43e1d9" sprite="Weapon Dealer" width="40" height="40" animation="" />
     <item hash="119d2ae9902b52eccbf87103d9224f39" sprite="Weapon Dealer" width="40" height="40" animation="" />
