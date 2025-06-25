@@ -5889,6 +5889,8 @@
     <item hash="b746ab4dd4073133feb23b6569f44196" sprite="Edmund (P1)" width="48" height="40" animation="Dying" />
     <item hash="eb234e9ca246845c64795e5613bdda18" sprite="Edmund (P1)" width="48" height="40" animation="Dying" />
     <item hash="f263b63b5daac1f6ba08b418ecb43b29" sprite="Edmund (P1)" width="48" height="40" animation="Dying" />
+    <item hash="39827ef05192ca564838ddca5943f50d" sprite="Edmund (P1) (Sword/Weaponless)" width="40" height="40" animation="" />
+    <item hash="cd687d8847873386503f502a22fac392" sprite="Edmund (P1) (Sword/Weaponless)" width="40" height="40" animation="" />
     <item hash="13c223a1973084add6dba459c2679ed6" sprite="Edmund (P1) (Weaponless)" width="40" height="40" animation="" />
     <item hash="14438f8d618db24bc9d2fd2bbf33c61f" sprite="Edmund (P1) (Weaponless)" width="40" height="40" animation="" />
     <item hash="1c0be15bf7eaa83580af4066e6576d17" sprite="Edmund (P1) (Weaponless)" width="40" height="40" animation="" />
@@ -5898,7 +5900,6 @@
     <item hash="27ecbcb0e110032d35f9e511ca55e260" sprite="Edmund (P1) (Weaponless)" width="40" height="40" animation="" />
     <item hash="2c4db838ab8d1446bb3124fc5a6923e8" sprite="Edmund (P1) (Weaponless)" width="40" height="40" animation="" />
     <item hash="339481189fbbe59ac629c2a4de137036" sprite="Edmund (P1) (Weaponless)" width="40" height="40" animation="" />
-    <item hash="39827ef05192ca564838ddca5943f50d" sprite="Edmund (P1) (Weaponless)" width="40" height="40" animation="" />
     <item hash="3e8c1151706d157ae1c05ae2817bcb7f" sprite="Edmund (P1) (Weaponless)" width="40" height="40" animation="" />
     <item hash="415d280fadb3b200fc895bc1d912b34e" sprite="Edmund (P1) (Weaponless)" width="40" height="40" animation="" />
     <item hash="562205ea92412c0279a99fbf0408ef3c" sprite="Edmund (P1) (Weaponless)" width="40" height="40" animation="" />
@@ -5928,7 +5929,6 @@
     <item hash="c3977f5e6443300653eb62493311a3cd" sprite="Edmund (P1) (Weaponless)" width="40" height="40" animation="" />
     <item hash="c623458c870319b15817bc08752c457e" sprite="Edmund (P1) (Weaponless)" width="40" height="40" animation="" />
     <item hash="c8140608e15331e89154190dcfd7f77f" sprite="Edmund (P1) (Weaponless)" width="40" height="40" animation="" />
-    <item hash="cd687d8847873386503f502a22fac392" sprite="Edmund (P1) (Weaponless)" width="40" height="40" animation="" />
     <item hash="dbe60643caeb33ed9a384bf6267cdace" sprite="Edmund (P1) (Weaponless)" width="40" height="40" animation="" />
     <item hash="e15ccd7650b9aecc36ea3556d57c3063" sprite="Edmund (P1) (Weaponless)" width="40" height="40" animation="" />
     <item hash="e2597c2a5fd7039f166db705aaa26437" sprite="Edmund (P1) (Weaponless)" width="40" height="40" animation="" />
