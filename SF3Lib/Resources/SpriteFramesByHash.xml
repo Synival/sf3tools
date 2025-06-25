@@ -1531,18 +1531,18 @@
     <item hash="4538978e383dfdd25ddc8f9e928cf4f0" sprite="Bernard (U)" width="48" height="40" animation="Knocked Out" />
     <item hash="517424cd1534cd3827629dd5359059f9" sprite="Bernard (U)" width="48" height="40" animation="Knocked Out" />
     <item hash="c40fa7220614c546dfd824fd7b48139c" sprite="Bernard (U)" width="48" height="40" animation="Knocked Out" />
-    <item hash="03d1c1d251b6b6b2757d2fd37368fef7" sprite="Bernard (U)" width="48" height="40" animation="Tied-Up" />
-    <item hash="14f39dd44f109265b9475cf2c582e3e1" sprite="Bernard (U)" width="48" height="40" animation="Tied-Up" />
-    <item hash="4a30a69f72669dbd91130437358aac03" sprite="Bernard (U)" width="48" height="40" animation="Tied-Up" />
-    <item hash="5367f90090bd5b09c2a4ac4324ef859f" sprite="Bernard (U)" width="48" height="40" animation="Tied-Up" />
-    <item hash="6df30c983e69a4a70cf3d14f613f3284" sprite="Bernard (U)" width="48" height="40" animation="Tied-Up" />
-    <item hash="6e950ea8e42526b9a32a74f769d96790" sprite="Bernard (U)" width="48" height="40" animation="Tied-Up" />
-    <item hash="70b3513cf4d421918857b02454fce2fd" sprite="Bernard (U)" width="48" height="40" animation="Tied-Up" />
-    <item hash="7499ef6403fa3f3d7ee625a423ba9f6a" sprite="Bernard (U)" width="48" height="40" animation="Tied-Up" />
-    <item hash="c090767793298f5e366656c210208bf5" sprite="Bernard (U)" width="48" height="40" animation="Tied-Up" />
-    <item hash="e23c826ac69843ea3bcf5fd6f6bb978f" sprite="Bernard (U)" width="48" height="40" animation="Tied-Up" />
-    <item hash="ec713c3677193b2bc27be968ab1122e3" sprite="Bernard (U)" width="48" height="40" animation="Tied-Up" />
-    <item hash="f2a1b81f632e5b6c69d495cc4df2740c" sprite="Bernard (U)" width="48" height="40" animation="Tied-Up" />
+    <item hash="03d1c1d251b6b6b2757d2fd37368fef7" sprite="Bernard (U) (Tied-Up)" width="48" height="40" animation="Tied-Up" />
+    <item hash="14f39dd44f109265b9475cf2c582e3e1" sprite="Bernard (U) (Tied-Up)" width="48" height="40" animation="Tied-Up" />
+    <item hash="4a30a69f72669dbd91130437358aac03" sprite="Bernard (U) (Tied-Up)" width="48" height="40" animation="Tied-Up" />
+    <item hash="5367f90090bd5b09c2a4ac4324ef859f" sprite="Bernard (U) (Tied-Up)" width="48" height="40" animation="Tied-Up" />
+    <item hash="6df30c983e69a4a70cf3d14f613f3284" sprite="Bernard (U) (Tied-Up)" width="48" height="40" animation="Tied-Up" />
+    <item hash="6e950ea8e42526b9a32a74f769d96790" sprite="Bernard (U) (Tied-Up)" width="48" height="40" animation="Tied-Up" />
+    <item hash="70b3513cf4d421918857b02454fce2fd" sprite="Bernard (U) (Tied-Up)" width="48" height="40" animation="Tied-Up" />
+    <item hash="7499ef6403fa3f3d7ee625a423ba9f6a" sprite="Bernard (U) (Tied-Up)" width="48" height="40" animation="Tied-Up" />
+    <item hash="c090767793298f5e366656c210208bf5" sprite="Bernard (U) (Tied-Up)" width="48" height="40" animation="Tied-Up" />
+    <item hash="e23c826ac69843ea3bcf5fd6f6bb978f" sprite="Bernard (U) (Tied-Up)" width="48" height="40" animation="Tied-Up" />
+    <item hash="ec713c3677193b2bc27be968ab1122e3" sprite="Bernard (U) (Tied-Up)" width="48" height="40" animation="Tied-Up" />
+    <item hash="f2a1b81f632e5b6c69d495cc4df2740c" sprite="Bernard (U) (Tied-Up)" width="48" height="40" animation="Tied-Up" />
     <item hash="04dd6351a4eae8f6ceb2ebc43613c832" sprite="Birdboy" width="48" height="40" animation="" />
     <item hash="2372f7ab5cf248fff8decaefe66571cd" sprite="Birdboy" width="48" height="40" animation="" />
     <item hash="250cca9c4123150ddb118b438f67d562" sprite="Birdboy" width="48" height="40" animation="" />
