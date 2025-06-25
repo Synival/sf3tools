@@ -2831,6 +2831,10 @@
     <item hash="f3622d878359fffb5445e462630e33f9" sprite="Burly Worker" width="40" height="40" animation="" />
     <item hash="fafb709b456960978013123fc9f34249" sprite="Burly Worker" width="40" height="40" animation="" />
     <item hash="fb9c7229540d92c22fca1b1c74ec8469" sprite="Burly Worker" width="40" height="40" animation="" />
+    <item hash="7b4e672e7ac82b49759c903e2087565f" sprite="Burly Worker" width="48" height="40" animation="" />
+    <item hash="987f54d18eaaabdbf66e68d6a6293963" sprite="Burly Worker" width="48" height="40" animation="" />
+    <item hash="c921195772cfb633f0c181b1232e1b23" sprite="Burly Worker" width="48" height="40" animation="" />
+    <item hash="dfcf7e23844e18c520ac2dd91d571f17" sprite="Burly Worker" width="48" height="40" animation="" />
     <item hash="03c875418f1f76c8696d1125a1921de4" sprite="Burly Worker w/ Shovel" width="48" height="40" animation="" />
     <item hash="0f46fb52f71b3f3c78b27497f555d864" sprite="Burly Worker w/ Shovel" width="48" height="40" animation="" />
     <item hash="181ab812d31a98ffdc3896c00ce27e3e" sprite="Burly Worker w/ Shovel" width="48" height="40" animation="" />
@@ -5833,7 +5837,6 @@
     <item hash="2e6bf7eff12b77e8d7a442f570b7242e" sprite="Edmund (P1)" width="40" height="40" animation="" />
     <item hash="2fc39c3b291db7f4dbfa7d7e0cec9825" sprite="Edmund (P1)" width="40" height="40" animation="" />
     <item hash="336c847b172ba13a7cee84cb1c9aee66" sprite="Edmund (P1)" width="40" height="40" animation="" />
-    <item hash="39827ef05192ca564838ddca5943f50d" sprite="Edmund (P1)" width="40" height="40" animation="" />
     <item hash="43795cba1d3369873325483ecda5eadc" sprite="Edmund (P1)" width="40" height="40" animation="" />
     <item hash="4599e273dc02bfa20f0aafcbbe058065" sprite="Edmund (P1)" width="40" height="40" animation="" />
     <item hash="4660393c32a8cae4a1ca930b3ddab148" sprite="Edmund (P1)" width="40" height="40" animation="" />
@@ -5864,7 +5867,6 @@
     <item hash="c8e875e1a42b8025f25d532663e3ab89" sprite="Edmund (P1)" width="40" height="40" animation="" />
     <item hash="c9b2f1247ace908dbf7ddf75cc7fdf99" sprite="Edmund (P1)" width="40" height="40" animation="" />
     <item hash="cb8d7085cd877c787c259224e0cb15d9" sprite="Edmund (P1)" width="40" height="40" animation="" />
-    <item hash="cd687d8847873386503f502a22fac392" sprite="Edmund (P1)" width="40" height="40" animation="" />
     <item hash="d04b98bc2c186808d6dbda4d6b903dd5" sprite="Edmund (P1)" width="40" height="40" animation="" />
     <item hash="d07591ded0a327033387235975f7def0" sprite="Edmund (P1)" width="40" height="40" animation="" />
     <item hash="d5297e5ec93a8ef0cc7f77eaffe7daee" sprite="Edmund (P1)" width="40" height="40" animation="" />
@@ -5896,6 +5898,7 @@
     <item hash="27ecbcb0e110032d35f9e511ca55e260" sprite="Edmund (P1) (Weaponless)" width="40" height="40" animation="" />
     <item hash="2c4db838ab8d1446bb3124fc5a6923e8" sprite="Edmund (P1) (Weaponless)" width="40" height="40" animation="" />
     <item hash="339481189fbbe59ac629c2a4de137036" sprite="Edmund (P1) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="39827ef05192ca564838ddca5943f50d" sprite="Edmund (P1) (Weaponless)" width="40" height="40" animation="" />
     <item hash="3e8c1151706d157ae1c05ae2817bcb7f" sprite="Edmund (P1) (Weaponless)" width="40" height="40" animation="" />
     <item hash="415d280fadb3b200fc895bc1d912b34e" sprite="Edmund (P1) (Weaponless)" width="40" height="40" animation="" />
     <item hash="562205ea92412c0279a99fbf0408ef3c" sprite="Edmund (P1) (Weaponless)" width="40" height="40" animation="" />
@@ -5925,6 +5928,7 @@
     <item hash="c3977f5e6443300653eb62493311a3cd" sprite="Edmund (P1) (Weaponless)" width="40" height="40" animation="" />
     <item hash="c623458c870319b15817bc08752c457e" sprite="Edmund (P1) (Weaponless)" width="40" height="40" animation="" />
     <item hash="c8140608e15331e89154190dcfd7f77f" sprite="Edmund (P1) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="cd687d8847873386503f502a22fac392" sprite="Edmund (P1) (Weaponless)" width="40" height="40" animation="" />
     <item hash="dbe60643caeb33ed9a384bf6267cdace" sprite="Edmund (P1) (Weaponless)" width="40" height="40" animation="" />
     <item hash="e15ccd7650b9aecc36ea3556d57c3063" sprite="Edmund (P1) (Weaponless)" width="40" height="40" animation="" />
     <item hash="e2597c2a5fd7039f166db705aaa26437" sprite="Edmund (P1) (Weaponless)" width="40" height="40" animation="" />
@@ -6906,90 +6910,90 @@
     <item hash="72d193274bb2d1139f774dd9390799b8" sprite="Flower Bouquet" width="40" height="40" animation="" />
     <item hash="928983c7cbe546f9b98dfedebcf96b06" sprite="Flower Bouquet" width="40" height="40" animation="" />
     <item hash="a2ea2fbbb9e7da3e3324e2490ff191ff" sprite="Flower Bouquet" width="40" height="40" animation="" />
-    <item hash="086c4ba9ac1a9fe17f68b11b20957a0a" sprite="Flower Girl" width="40" height="40" animation="" />
-    <item hash="090b406922505c9df2162b1cad12dc13" sprite="Flower Girl" width="40" height="40" animation="" />
     <item hash="094871548569b8846fca89f78d563922" sprite="Flower Girl" width="40" height="40" animation="" />
-    <item hash="0b601719737f20ea26fa440d8c759d1f" sprite="Flower Girl" width="40" height="40" animation="" />
     <item hash="0eb7d6c85139117ce965ceadb13e3323" sprite="Flower Girl" width="40" height="40" animation="" />
     <item hash="10bdacfedc456a426b6bfed41f57f688" sprite="Flower Girl" width="40" height="40" animation="" />
     <item hash="1a6701ce495f04c4ac66b79a8260122e" sprite="Flower Girl" width="40" height="40" animation="" />
-    <item hash="2008a43517677d7b88abd98a02a71af1" sprite="Flower Girl" width="40" height="40" animation="" />
-    <item hash="2076a767b9bc13688c6ab12f6cae4696" sprite="Flower Girl" width="40" height="40" animation="" />
     <item hash="22b71eb13e196d6cf6fb09f7cc539753" sprite="Flower Girl" width="40" height="40" animation="" />
     <item hash="249b90b52840032f134556b4ff9c063f" sprite="Flower Girl" width="40" height="40" animation="" />
-    <item hash="26d48d8de2e66e4fd521b0007bc6b095" sprite="Flower Girl" width="40" height="40" animation="" />
     <item hash="29584bc6c53327e0920f6dca14d6e967" sprite="Flower Girl" width="40" height="40" animation="" />
     <item hash="2d754734a98e470463d1a5098da3f402" sprite="Flower Girl" width="40" height="40" animation="" />
-    <item hash="2e0a65a7e0d41d8d05d168b00bce0466" sprite="Flower Girl" width="40" height="40" animation="" />
     <item hash="3778dc9a6cf0fa476be095d5f564a75e" sprite="Flower Girl" width="40" height="40" animation="" />
-    <item hash="38021244527f2d557f993c76f003215f" sprite="Flower Girl" width="40" height="40" animation="" />
-    <item hash="3b5746a408dd330e8a8465879b4cd0f7" sprite="Flower Girl" width="40" height="40" animation="" />
     <item hash="3f56f65cd814db592ef5c76622f46f09" sprite="Flower Girl" width="40" height="40" animation="" />
-    <item hash="43e3ce088ff0d2a395dbc7221a928c17" sprite="Flower Girl" width="40" height="40" animation="" />
-    <item hash="4c8af3cc605f79230dcfee6fc87278a5" sprite="Flower Girl" width="40" height="40" animation="" />
     <item hash="4e947648aa0d50d25afda11625dfe88a" sprite="Flower Girl" width="40" height="40" animation="" />
-    <item hash="4f9dc815a09ff044eb7a3b99a982e30a" sprite="Flower Girl" width="40" height="40" animation="" />
     <item hash="5133445f6098f73990d213f9790ed271" sprite="Flower Girl" width="40" height="40" animation="" />
     <item hash="56f0425aeb1af0b61d03459ba1f66394" sprite="Flower Girl" width="40" height="40" animation="" />
     <item hash="581dfb4504b567c972791e607f9e84ad" sprite="Flower Girl" width="40" height="40" animation="" />
     <item hash="584582ad21da2e4b216f58af2b448f15" sprite="Flower Girl" width="40" height="40" animation="" />
     <item hash="618e9d6f01067b895491918ec2eef486" sprite="Flower Girl" width="40" height="40" animation="" />
     <item hash="644c1db98e4d4af899dec4fb93e200d3" sprite="Flower Girl" width="40" height="40" animation="" />
-    <item hash="644c8384a33a42e59ad41a437f77fe3c" sprite="Flower Girl" width="40" height="40" animation="" />
-    <item hash="6a4138cd75f9d4892c4ad6cb2c5b27bc" sprite="Flower Girl" width="40" height="40" animation="" />
     <item hash="6b41eedcf7ef759e01ce7e9295985ec7" sprite="Flower Girl" width="40" height="40" animation="" />
-    <item hash="6fda94a77b6e2d286bf796bf92fbc88b" sprite="Flower Girl" width="40" height="40" animation="" />
-    <item hash="72365ec2a726bc60f03df528af2c8114" sprite="Flower Girl" width="40" height="40" animation="" />
     <item hash="72a3e8792de4ca460ae874ee54965256" sprite="Flower Girl" width="40" height="40" animation="" />
-    <item hash="72b9e7d9890aabbf0c90830664d35544" sprite="Flower Girl" width="40" height="40" animation="" />
     <item hash="7d67bac515535979bebed1e09233df67" sprite="Flower Girl" width="40" height="40" animation="" />
     <item hash="7da445f26ec5c94bd0a1222de3a3d73a" sprite="Flower Girl" width="40" height="40" animation="" />
     <item hash="7eb7f969b17f3e94a2a237b9a84b837d" sprite="Flower Girl" width="40" height="40" animation="" />
-    <item hash="868144cc0b128711a9f305e831a27db1" sprite="Flower Girl" width="40" height="40" animation="" />
     <item hash="8a38d0740561d5164b59ed1bb52f69c4" sprite="Flower Girl" width="40" height="40" animation="" />
-    <item hash="8fe3759e6f481800949c548dee1e67df" sprite="Flower Girl" width="40" height="40" animation="" />
-    <item hash="92dbd59ccb2b4234b0f58580232e6656" sprite="Flower Girl" width="40" height="40" animation="" />
     <item hash="94650d6defa800b875c17a112e33875f" sprite="Flower Girl" width="40" height="40" animation="" />
-    <item hash="99c1b7d7dea1addc1e2a3892d79c9aa2" sprite="Flower Girl" width="40" height="40" animation="" />
     <item hash="9a20754c823527e670b5da4236cdc80e" sprite="Flower Girl" width="40" height="40" animation="" />
-    <item hash="9a6902a385071de11c4297847785a22b" sprite="Flower Girl" width="40" height="40" animation="" />
-    <item hash="9aa0c948e9ef5a3d808fc0e8a7931466" sprite="Flower Girl" width="40" height="40" animation="" />
     <item hash="9cd2e9382469d1d332e5978c6026b7b2" sprite="Flower Girl" width="40" height="40" animation="" />
     <item hash="9eeec1075a70d15ea1634572996cc3b0" sprite="Flower Girl" width="40" height="40" animation="" />
     <item hash="a4884c6d195f2fea3b2afc66af89891f" sprite="Flower Girl" width="40" height="40" animation="" />
     <item hash="a692992ecff28c65d285f33eaec205ca" sprite="Flower Girl" width="40" height="40" animation="" />
     <item hash="a712b219c888347b8218724de32ff6ea" sprite="Flower Girl" width="40" height="40" animation="" />
     <item hash="b2776ad2cca34d2dfb52e64de188f096" sprite="Flower Girl" width="40" height="40" animation="" />
-    <item hash="b3ebab4a848f1d7c91d6530bc413b872" sprite="Flower Girl" width="40" height="40" animation="" />
     <item hash="b514ebb39ed9c11e14a0e05811eea949" sprite="Flower Girl" width="40" height="40" animation="" />
     <item hash="b8acd967eb8dee8d4eafb7989a161d37" sprite="Flower Girl" width="40" height="40" animation="" />
-    <item hash="b8d264b4a5a2d1d2a6a582df2eb8c0c4" sprite="Flower Girl" width="40" height="40" animation="" />
-    <item hash="ba22787502109005eb35ccbee3a6c21d" sprite="Flower Girl" width="40" height="40" animation="" />
     <item hash="be8c1e91b43552b36cc16265bb3d08eb" sprite="Flower Girl" width="40" height="40" animation="" />
-    <item hash="c08c8fe53e01d689ce88cd3c5851b58c" sprite="Flower Girl" width="40" height="40" animation="" />
     <item hash="c1f8ba99395e7687524587fb36eeda08" sprite="Flower Girl" width="40" height="40" animation="" />
     <item hash="c438cfaf95f34c4c145439211d9ad472" sprite="Flower Girl" width="40" height="40" animation="" />
-    <item hash="cad916026c90165126df2ce26c2009df" sprite="Flower Girl" width="40" height="40" animation="" />
     <item hash="cd0088cbfa1f993211a891d67ec71f69" sprite="Flower Girl" width="40" height="40" animation="" />
-    <item hash="ceffc13e75113a9884b6d81a122f95ed" sprite="Flower Girl" width="40" height="40" animation="" />
     <item hash="d0f33e61e2c91406ccb13b07986a352b" sprite="Flower Girl" width="40" height="40" animation="" />
-    <item hash="d23afe7f051be7fd9ef45d0d081b834d" sprite="Flower Girl" width="40" height="40" animation="" />
     <item hash="d43e668fa24b1a33a0ea765b1d93b015" sprite="Flower Girl" width="40" height="40" animation="" />
     <item hash="d52155b5520689bd28394665d2d7bb7b" sprite="Flower Girl" width="40" height="40" animation="" />
     <item hash="d69fd26d5248d665c83547fb5c1a4b3d" sprite="Flower Girl" width="40" height="40" animation="" />
     <item hash="db8b3f949d3777cb19625479bf76e495" sprite="Flower Girl" width="40" height="40" animation="" />
-    <item hash="dc1ce64e581aec398d882131f69753d9" sprite="Flower Girl" width="40" height="40" animation="" />
     <item hash="dc42de992167843998a689171eb047ff" sprite="Flower Girl" width="40" height="40" animation="" />
     <item hash="e42ba096ff13117a6a1cb9797507832d" sprite="Flower Girl" width="40" height="40" animation="" />
-    <item hash="eb09eb0f073c5fd6c6752c97e5dc7ebd" sprite="Flower Girl" width="40" height="40" animation="" />
-    <item hash="eb385aaf0798028f2b84758fbc9439d7" sprite="Flower Girl" width="40" height="40" animation="" />
-    <item hash="ed99ff5c7832b568d789f9b2f323bd6b" sprite="Flower Girl" width="40" height="40" animation="" />
-    <item hash="f731776ba490cd5e5870a6587c7cbc33" sprite="Flower Girl" width="40" height="40" animation="" />
     <item hash="f773536a10e42d0e88f654a09d01bf25" sprite="Flower Girl" width="40" height="40" animation="" />
     <item hash="f84c12eabe780e6c6d8d18d5b7892634" sprite="Flower Girl" width="40" height="40" animation="" />
     <item hash="f909d9b655e954d53850f86bd8623890" sprite="Flower Girl" width="40" height="40" animation="" />
     <item hash="fafab4e62ff361fd74e84a7b1a5921ff" sprite="Flower Girl" width="40" height="40" animation="" />
-    <item hash="ff96157fd71c8ae8557eaf3ca1cdbb5a" sprite="Flower Girl" width="40" height="40" animation="" />
+    <item hash="086c4ba9ac1a9fe17f68b11b20957a0a" sprite="Flower Girl (With Flowers)" width="40" height="40" animation="" />
+    <item hash="090b406922505c9df2162b1cad12dc13" sprite="Flower Girl (With Flowers)" width="40" height="40" animation="" />
+    <item hash="0b601719737f20ea26fa440d8c759d1f" sprite="Flower Girl (With Flowers)" width="40" height="40" animation="" />
+    <item hash="2008a43517677d7b88abd98a02a71af1" sprite="Flower Girl (With Flowers)" width="40" height="40" animation="" />
+    <item hash="2076a767b9bc13688c6ab12f6cae4696" sprite="Flower Girl (With Flowers)" width="40" height="40" animation="" />
+    <item hash="26d48d8de2e66e4fd521b0007bc6b095" sprite="Flower Girl (With Flowers)" width="40" height="40" animation="" />
+    <item hash="2e0a65a7e0d41d8d05d168b00bce0466" sprite="Flower Girl (With Flowers)" width="40" height="40" animation="" />
+    <item hash="38021244527f2d557f993c76f003215f" sprite="Flower Girl (With Flowers)" width="40" height="40" animation="" />
+    <item hash="3b5746a408dd330e8a8465879b4cd0f7" sprite="Flower Girl (With Flowers)" width="40" height="40" animation="" />
+    <item hash="43e3ce088ff0d2a395dbc7221a928c17" sprite="Flower Girl (With Flowers)" width="40" height="40" animation="" />
+    <item hash="4c8af3cc605f79230dcfee6fc87278a5" sprite="Flower Girl (With Flowers)" width="40" height="40" animation="" />
+    <item hash="4f9dc815a09ff044eb7a3b99a982e30a" sprite="Flower Girl (With Flowers)" width="40" height="40" animation="" />
+    <item hash="644c8384a33a42e59ad41a437f77fe3c" sprite="Flower Girl (With Flowers)" width="40" height="40" animation="" />
+    <item hash="6a4138cd75f9d4892c4ad6cb2c5b27bc" sprite="Flower Girl (With Flowers)" width="40" height="40" animation="" />
+    <item hash="6fda94a77b6e2d286bf796bf92fbc88b" sprite="Flower Girl (With Flowers)" width="40" height="40" animation="" />
+    <item hash="72365ec2a726bc60f03df528af2c8114" sprite="Flower Girl (With Flowers)" width="40" height="40" animation="" />
+    <item hash="72b9e7d9890aabbf0c90830664d35544" sprite="Flower Girl (With Flowers)" width="40" height="40" animation="" />
+    <item hash="868144cc0b128711a9f305e831a27db1" sprite="Flower Girl (With Flowers)" width="40" height="40" animation="" />
+    <item hash="8fe3759e6f481800949c548dee1e67df" sprite="Flower Girl (With Flowers)" width="40" height="40" animation="" />
+    <item hash="92dbd59ccb2b4234b0f58580232e6656" sprite="Flower Girl (With Flowers)" width="40" height="40" animation="" />
+    <item hash="99c1b7d7dea1addc1e2a3892d79c9aa2" sprite="Flower Girl (With Flowers)" width="40" height="40" animation="" />
+    <item hash="9a6902a385071de11c4297847785a22b" sprite="Flower Girl (With Flowers)" width="40" height="40" animation="" />
+    <item hash="9aa0c948e9ef5a3d808fc0e8a7931466" sprite="Flower Girl (With Flowers)" width="40" height="40" animation="" />
+    <item hash="b3ebab4a848f1d7c91d6530bc413b872" sprite="Flower Girl (With Flowers)" width="40" height="40" animation="" />
+    <item hash="b8d264b4a5a2d1d2a6a582df2eb8c0c4" sprite="Flower Girl (With Flowers)" width="40" height="40" animation="" />
+    <item hash="ba22787502109005eb35ccbee3a6c21d" sprite="Flower Girl (With Flowers)" width="40" height="40" animation="" />
+    <item hash="c08c8fe53e01d689ce88cd3c5851b58c" sprite="Flower Girl (With Flowers)" width="40" height="40" animation="" />
+    <item hash="cad916026c90165126df2ce26c2009df" sprite="Flower Girl (With Flowers)" width="40" height="40" animation="" />
+    <item hash="ceffc13e75113a9884b6d81a122f95ed" sprite="Flower Girl (With Flowers)" width="40" height="40" animation="" />
+    <item hash="d23afe7f051be7fd9ef45d0d081b834d" sprite="Flower Girl (With Flowers)" width="40" height="40" animation="" />
+    <item hash="dc1ce64e581aec398d882131f69753d9" sprite="Flower Girl (With Flowers)" width="40" height="40" animation="" />
+    <item hash="eb09eb0f073c5fd6c6752c97e5dc7ebd" sprite="Flower Girl (With Flowers)" width="40" height="40" animation="" />
+    <item hash="eb385aaf0798028f2b84758fbc9439d7" sprite="Flower Girl (With Flowers)" width="40" height="40" animation="" />
+    <item hash="ed99ff5c7832b568d789f9b2f323bd6b" sprite="Flower Girl (With Flowers)" width="40" height="40" animation="" />
+    <item hash="f731776ba490cd5e5870a6587c7cbc33" sprite="Flower Girl (With Flowers)" width="40" height="40" animation="" />
+    <item hash="ff96157fd71c8ae8557eaf3ca1cdbb5a" sprite="Flower Girl (With Flowers)" width="40" height="40" animation="" />
     <item hash="06aecf7f66c2ae97c8c486b3d88d5f9f" sprite="Foothill Village Chief/Sage" width="40" height="40" animation="" />
     <item hash="08868efe1c53492272d5b27c6f7ff3c2" sprite="Foothill Village Chief/Sage" width="40" height="40" animation="" />
     <item hash="0ccb888debb37dd5993341522856fc93" sprite="Foothill Village Chief/Sage" width="40" height="40" animation="" />
@@ -12574,7 +12578,6 @@
     <item hash="09ce7f98926e2ae60066d34c5e7f0489" sprite="Julian (U)" width="40" height="40" animation="" />
     <item hash="0b1f9248f72684639d8d8926c57af26f" sprite="Julian (U)" width="40" height="40" animation="" />
     <item hash="0b45ade889039d1d049e569e10b86f26" sprite="Julian (U)" width="40" height="40" animation="" />
-    <item hash="0c032b289bc6c4583dab807ffb9db7be" sprite="Julian (U)" width="40" height="40" animation="" />
     <item hash="0ca64bcd9a239739b213afe294a383c2" sprite="Julian (U)" width="40" height="40" animation="" />
     <item hash="0e588d59f4ff00ce23054eb32a6aaf1f" sprite="Julian (U)" width="40" height="40" animation="" />
     <item hash="0f28c7a1147df15731d85b4da2f0845b" sprite="Julian (U)" width="40" height="40" animation="" />
@@ -12588,7 +12591,6 @@
     <item hash="1bda4c641f9b472b2329e890aa05705a" sprite="Julian (U)" width="40" height="40" animation="" />
     <item hash="1efc5c8c95604d034325914ca10fbab4" sprite="Julian (U)" width="40" height="40" animation="" />
     <item hash="1f3fb52f149075cc6070e7d597a3db98" sprite="Julian (U)" width="40" height="40" animation="" />
-    <item hash="21e500826ba932201c92fb20834cda54" sprite="Julian (U)" width="40" height="40" animation="" />
     <item hash="22b148df333b890d475d741b931f568e" sprite="Julian (U)" width="40" height="40" animation="" />
     <item hash="244e29f5861151ea0627381a4fbfc882" sprite="Julian (U)" width="40" height="40" animation="" />
     <item hash="26bf5b0f13929a46528164d94da8b1fb" sprite="Julian (U)" width="40" height="40" animation="" />
@@ -12596,7 +12598,6 @@
     <item hash="2b6d747509a3eaafac855e78b971f6ea" sprite="Julian (U)" width="40" height="40" animation="" />
     <item hash="2b74a30713afe8b680b5b457be6b2535" sprite="Julian (U)" width="40" height="40" animation="" />
     <item hash="2d2944aaf35930a6f46f7c9f898886f0" sprite="Julian (U)" width="40" height="40" animation="" />
-    <item hash="2dd583edca9ec78825db23017e331854" sprite="Julian (U)" width="40" height="40" animation="" />
     <item hash="2f10f3d6b6fd388a1324ff1138cdf799" sprite="Julian (U)" width="40" height="40" animation="" />
     <item hash="2fa94e5e0bc4509be759cba21e75f452" sprite="Julian (U)" width="40" height="40" animation="" />
     <item hash="3048026279feb044d2931524c010f946" sprite="Julian (U)" width="40" height="40" animation="" />
@@ -12608,7 +12609,6 @@
     <item hash="3e061bfeb8fd643fc66753b752b7eda1" sprite="Julian (U)" width="40" height="40" animation="" />
     <item hash="3f5308e9ed2a6c22d8e296ea0c3e4fba" sprite="Julian (U)" width="40" height="40" animation="" />
     <item hash="40689b521a761f0da1e2cfd3ddc34129" sprite="Julian (U)" width="40" height="40" animation="" />
-    <item hash="41f0abc0cd35e2a2af649e55f245541e" sprite="Julian (U)" width="40" height="40" animation="" />
     <item hash="420fa06780e40a012ad118cba55d41fa" sprite="Julian (U)" width="40" height="40" animation="" />
     <item hash="443b41825966d42a11d8d0581a88f915" sprite="Julian (U)" width="40" height="40" animation="" />
     <item hash="4a94872dcb1860475b8512600649feb5" sprite="Julian (U)" width="40" height="40" animation="" />
@@ -12625,9 +12625,7 @@
     <item hash="5cd9f6e03117f5f25760ae641790d68f" sprite="Julian (U)" width="40" height="40" animation="" />
     <item hash="5f153e7ed5f20a1c9421fda36aebb25b" sprite="Julian (U)" width="40" height="40" animation="" />
     <item hash="605e340be36f1a8dc6b5016eaf97494b" sprite="Julian (U)" width="40" height="40" animation="" />
-    <item hash="62658d20e5a994e90b08027c65e2e94e" sprite="Julian (U)" width="40" height="40" animation="" />
     <item hash="662409e5745405d95ca62b2c29f4dbfd" sprite="Julian (U)" width="40" height="40" animation="" />
-    <item hash="684f73495a6824ee8edbd42bb31a1ddb" sprite="Julian (U)" width="40" height="40" animation="" />
     <item hash="6926193a31304a68621422e0b9dcd264" sprite="Julian (U)" width="40" height="40" animation="" />
     <item hash="6953dd6087d8da20b491c4c0ebe21da7" sprite="Julian (U)" width="40" height="40" animation="" />
     <item hash="712a15e1e742c6d654c06ea5e55cdc76" sprite="Julian (U)" width="40" height="40" animation="" />
@@ -12643,7 +12641,6 @@
     <item hash="81198787e583bef25fccd58311b88015" sprite="Julian (U)" width="40" height="40" animation="" />
     <item hash="86c81bfc2a7b18aa70a168616f74ea73" sprite="Julian (U)" width="40" height="40" animation="" />
     <item hash="8887f1b2e0fae782544b4bee08e00602" sprite="Julian (U)" width="40" height="40" animation="" />
-    <item hash="890f681ea4213e4084ff1e73b24657fa" sprite="Julian (U)" width="40" height="40" animation="" />
     <item hash="8c6682161b21347ac739f71f6a2995fe" sprite="Julian (U)" width="40" height="40" animation="" />
     <item hash="8d63fc167ba2f49af817c6bd94b734a7" sprite="Julian (U)" width="40" height="40" animation="" />
     <item hash="8db8f674ce6c5371887f03457b2a4088" sprite="Julian (U)" width="40" height="40" animation="" />
@@ -12666,7 +12663,6 @@
     <item hash="a1a539a7fb60879c006d93ff8a14f2fc" sprite="Julian (U)" width="40" height="40" animation="" />
     <item hash="a21ad86215695220db90bea8fa067131" sprite="Julian (U)" width="40" height="40" animation="" />
     <item hash="a320932dca4eb0aeff0201a9c93b1042" sprite="Julian (U)" width="40" height="40" animation="" />
-    <item hash="a767adfbcc3fb7f529f8550d7d76da0d" sprite="Julian (U)" width="40" height="40" animation="" />
     <item hash="a806ad05b5b5d4c7f9690784f7fc5540" sprite="Julian (U)" width="40" height="40" animation="" />
     <item hash="a8eb7739b1ce59515564578ff7b28f65" sprite="Julian (U)" width="40" height="40" animation="" />
     <item hash="a99eae5a7f24895cc3f105148ca95156" sprite="Julian (U)" width="40" height="40" animation="" />
@@ -12674,7 +12670,6 @@
     <item hash="ac524da41949df9664a4db319c2e1dea" sprite="Julian (U)" width="40" height="40" animation="" />
     <item hash="ade10a06365931cf1969cf66d5659c7d" sprite="Julian (U)" width="40" height="40" animation="" />
     <item hash="b04d9f6d909ad1cce32ac062227e5c9c" sprite="Julian (U)" width="40" height="40" animation="" />
-    <item hash="b0c4bd8123ce91242437df138a83360f" sprite="Julian (U)" width="40" height="40" animation="" />
     <item hash="b1e4044b5d3030e0ac8564853fbe9e47" sprite="Julian (U)" width="40" height="40" animation="" />
     <item hash="b5983ff9c30ea19c496b3ba0016064cc" sprite="Julian (U)" width="40" height="40" animation="" />
     <item hash="b7f2b018895a1f1976e5026f6173024e" sprite="Julian (U)" width="40" height="40" animation="" />
@@ -12688,11 +12683,9 @@
     <item hash="beb9d3abd5316b10e9c88ca26d440974" sprite="Julian (U)" width="40" height="40" animation="" />
     <item hash="c0ec2c80046e06e8098b44310e817754" sprite="Julian (U)" width="40" height="40" animation="" />
     <item hash="c14fa7165fe1477dbf97ff63a442c239" sprite="Julian (U)" width="40" height="40" animation="" />
-    <item hash="c3882f4d4c2524459a9546ef647cc084" sprite="Julian (U)" width="40" height="40" animation="" />
     <item hash="c516921610892d999b5096adb183b7ab" sprite="Julian (U)" width="40" height="40" animation="" />
     <item hash="c6396e05a70db462852549895fd46b2a" sprite="Julian (U)" width="40" height="40" animation="" />
     <item hash="cad1801c121f1c7ba833297956107a8f" sprite="Julian (U)" width="40" height="40" animation="" />
-    <item hash="cb6211ad1be97b57224b2cbe9293a220" sprite="Julian (U)" width="40" height="40" animation="" />
     <item hash="cc055f7ab404ef26554e363da3c5ed8e" sprite="Julian (U)" width="40" height="40" animation="" />
     <item hash="ccb5306ba6bdcd3e2ec4f246244e59ec" sprite="Julian (U)" width="40" height="40" animation="" />
     <item hash="cf1316194d412fe1abd6c257acf548ad" sprite="Julian (U)" width="40" height="40" animation="" />
@@ -12712,7 +12705,6 @@
     <item hash="e3d8dc2e2f12288e51736433aba9c7ed" sprite="Julian (U)" width="40" height="40" animation="" />
     <item hash="e3f11fae7decf491fd7d0206ac014761" sprite="Julian (U)" width="40" height="40" animation="" />
     <item hash="e4e1ca3ad96098ab33fffc82f7631c2e" sprite="Julian (U)" width="40" height="40" animation="" />
-    <item hash="e4e77bf7a59cc67743fd5aed2b58d184" sprite="Julian (U)" width="40" height="40" animation="" />
     <item hash="e63ff18e1d9a08f748e19d6070e5a122" sprite="Julian (U)" width="40" height="40" animation="" />
     <item hash="e8e9eb51a21f08eae798b1370f6c2665" sprite="Julian (U)" width="40" height="40" animation="" />
     <item hash="eb5d7f5ab542ef02f9c045fe0baa552c" sprite="Julian (U)" width="40" height="40" animation="" />
@@ -12879,6 +12871,18 @@
     <item hash="f45e58b89d52d1609d7e109ab0337649" sprite="Julian (U) (Weaponless)" width="40" height="40" animation="" />
     <item hash="f7b483ccbc374ed807fbfad2e1bb0d15" sprite="Julian (U) (Weaponless)" width="40" height="40" animation="" />
     <item hash="fe55501f44d6f5843cf1c4f32663bf4b" sprite="Julian (U) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="0c032b289bc6c4583dab807ffb9db7be" sprite="Julian (U) (With Beer)" width="40" height="40" animation="" />
+    <item hash="21e500826ba932201c92fb20834cda54" sprite="Julian (U) (With Beer)" width="40" height="40" animation="" />
+    <item hash="2dd583edca9ec78825db23017e331854" sprite="Julian (U) (With Beer)" width="40" height="40" animation="" />
+    <item hash="41f0abc0cd35e2a2af649e55f245541e" sprite="Julian (U) (With Beer)" width="40" height="40" animation="" />
+    <item hash="62658d20e5a994e90b08027c65e2e94e" sprite="Julian (U) (With Beer)" width="40" height="40" animation="" />
+    <item hash="684f73495a6824ee8edbd42bb31a1ddb" sprite="Julian (U) (With Beer)" width="40" height="40" animation="" />
+    <item hash="890f681ea4213e4084ff1e73b24657fa" sprite="Julian (U) (With Beer)" width="40" height="40" animation="" />
+    <item hash="a767adfbcc3fb7f529f8550d7d76da0d" sprite="Julian (U) (With Beer)" width="40" height="40" animation="" />
+    <item hash="b0c4bd8123ce91242437df138a83360f" sprite="Julian (U) (With Beer)" width="40" height="40" animation="" />
+    <item hash="c3882f4d4c2524459a9546ef647cc084" sprite="Julian (U) (With Beer)" width="40" height="40" animation="" />
+    <item hash="cb6211ad1be97b57224b2cbe9293a220" sprite="Julian (U) (With Beer)" width="40" height="40" animation="" />
+    <item hash="e4e77bf7a59cc67743fd5aed2b58d184" sprite="Julian (U) (With Beer)" width="40" height="40" animation="" />
     <item hash="00102edc2fade675926d2f224f9fa818" sprite="Justin (P1)" width="48" height="40" animation="" />
     <item hash="07a2b17865df03e1df8934e0a15bef72" sprite="Justin (P1)" width="48" height="40" animation="" />
     <item hash="0a01800b6d06e256ffff252ddd4cd274" sprite="Justin (P1)" width="48" height="40" animation="" />
@@ -14865,66 +14869,66 @@
     <item hash="64158ae79cf2a3866bcdecb3928be4c5" sprite="Masked Mage (Purple)" width="48" height="32" animation="Dying" />
     <item hash="a73ac16899cf0c0f4c737044278de42a" sprite="Masked Mage (Purple)" width="48" height="32" animation="Dying" />
     <item hash="ec58da29e70229eba1367089a59ddaba" sprite="Masked Mage (Purple)" width="48" height="32" animation="Dying" />
-    <item hash="023d7fe651f61ca3b9d02a5bdeced9a5" sprite="Masked Mage (Purple) (Maskless)" width="40" height="40" animation="" />
-    <item hash="0e41a8009212d1eadc26bdfe74e19d10" sprite="Masked Mage (Purple) (Maskless)" width="40" height="40" animation="" />
     <item hash="12dd67298c099f15e7fe80368987f270" sprite="Masked Mage (Purple) (Maskless)" width="40" height="40" animation="" />
     <item hash="1bd51d2e48b00d37b3616a5fc9a8270d" sprite="Masked Mage (Purple) (Maskless)" width="40" height="40" animation="" />
-    <item hash="1c667b12de0c72bd8abea252197f61c6" sprite="Masked Mage (Purple) (Maskless)" width="40" height="40" animation="" />
     <item hash="1f6dfbee24c845d7ecd23f6d8449de7d" sprite="Masked Mage (Purple) (Maskless)" width="40" height="40" animation="" />
-    <item hash="2d3844c5128c1a7eb2fc976b21db2ac6" sprite="Masked Mage (Purple) (Maskless)" width="40" height="40" animation="" />
-    <item hash="2e20b1b23c21dd039a1a2099b620fee5" sprite="Masked Mage (Purple) (Maskless)" width="40" height="40" animation="" />
-    <item hash="2fb74d8cdce92ba79f3e5ec1847a4976" sprite="Masked Mage (Purple) (Maskless)" width="40" height="40" animation="" />
     <item hash="33e34913d21f055c66e24085b9136b38" sprite="Masked Mage (Purple) (Maskless)" width="40" height="40" animation="" />
-    <item hash="34d6589984a21455b809b9509a3411f0" sprite="Masked Mage (Purple) (Maskless)" width="40" height="40" animation="" />
     <item hash="37559aa9651f6be9b8c64c7baf2506ba" sprite="Masked Mage (Purple) (Maskless)" width="40" height="40" animation="" />
-    <item hash="3b4d5412208fd16cc7df76f4c608d170" sprite="Masked Mage (Purple) (Maskless)" width="40" height="40" animation="" />
     <item hash="3bba97ebbb59afdcd53fa5076a5eba64" sprite="Masked Mage (Purple) (Maskless)" width="40" height="40" animation="" />
     <item hash="490bbf62c5d3cef5dd9d9bfc0fe71174" sprite="Masked Mage (Purple) (Maskless)" width="40" height="40" animation="" />
     <item hash="4adde32fe1627cdd33f39f9da8a7eac2" sprite="Masked Mage (Purple) (Maskless)" width="40" height="40" animation="" />
-    <item hash="5503240e58267e7630563ddaaaee37b7" sprite="Masked Mage (Purple) (Maskless)" width="40" height="40" animation="" />
     <item hash="55b8a07f820258c654ff63c8c30a7b72" sprite="Masked Mage (Purple) (Maskless)" width="40" height="40" animation="" />
     <item hash="5bb71188493d8a898124829a7d0a2997" sprite="Masked Mage (Purple) (Maskless)" width="40" height="40" animation="" />
     <item hash="5c3b102019fd4f1c1903c8e9f4373b2c" sprite="Masked Mage (Purple) (Maskless)" width="40" height="40" animation="" />
     <item hash="5c3f756beefde67a22500bdea40f4acc" sprite="Masked Mage (Purple) (Maskless)" width="40" height="40" animation="" />
     <item hash="648b0483191a25d9b35e3550c7108b6f" sprite="Masked Mage (Purple) (Maskless)" width="40" height="40" animation="" />
-    <item hash="67fdabf2039fe16ed934c19ed8c7488f" sprite="Masked Mage (Purple) (Maskless)" width="40" height="40" animation="" />
-    <item hash="6ad59688ef9b887c9be7482e4ce78b25" sprite="Masked Mage (Purple) (Maskless)" width="40" height="40" animation="" />
-    <item hash="6f555cfee6f8149899e14824ab41b7b8" sprite="Masked Mage (Purple) (Maskless)" width="40" height="40" animation="" />
     <item hash="75bc55d31bfa788d0f38137abd2e887b" sprite="Masked Mage (Purple) (Maskless)" width="40" height="40" animation="" />
     <item hash="7738911125a2274367dd1cde9a36b1e7" sprite="Masked Mage (Purple) (Maskless)" width="40" height="40" animation="" />
-    <item hash="77e9cd51b9ea9d725c8adbf10dfd50ab" sprite="Masked Mage (Purple) (Maskless)" width="40" height="40" animation="" />
-    <item hash="7bc4a8e7a2df514ab6ae177e44b4d91d" sprite="Masked Mage (Purple) (Maskless)" width="40" height="40" animation="" />
-    <item hash="812322318b033ba0a51745e248d8472e" sprite="Masked Mage (Purple) (Maskless)" width="40" height="40" animation="" />
     <item hash="83e24bf33efc2f31ed1210f09ab53649" sprite="Masked Mage (Purple) (Maskless)" width="40" height="40" animation="" />
-    <item hash="88e02a57776fc5d44a62e623880bddbf" sprite="Masked Mage (Purple) (Maskless)" width="40" height="40" animation="" />
-    <item hash="8bd4d0b91b8e700ff060128c530ddd52" sprite="Masked Mage (Purple) (Maskless)" width="40" height="40" animation="" />
-    <item hash="9be0dd34cb62e7a0282dbf9a8032eddd" sprite="Masked Mage (Purple) (Maskless)" width="40" height="40" animation="" />
-    <item hash="9c247cd0dc5a953e34eefc4647e594bd" sprite="Masked Mage (Purple) (Maskless)" width="40" height="40" animation="" />
-    <item hash="9f41cc63a2bac68971c3c5c430b539a0" sprite="Masked Mage (Purple) (Maskless)" width="40" height="40" animation="" />
     <item hash="aafce91937170f7d3ade779bd805ed6c" sprite="Masked Mage (Purple) (Maskless)" width="40" height="40" animation="" />
     <item hash="ab85cc046e7181032ea815280d07e123" sprite="Masked Mage (Purple) (Maskless)" width="40" height="40" animation="" />
-    <item hash="b05c8b26a6308b85548d973187b37feb" sprite="Masked Mage (Purple) (Maskless)" width="40" height="40" animation="" />
-    <item hash="b40cb1ddc0d15f57732f295299b4738c" sprite="Masked Mage (Purple) (Maskless)" width="40" height="40" animation="" />
-    <item hash="b5e2edc51ce3667eaadad7b42007bdcb" sprite="Masked Mage (Purple) (Maskless)" width="40" height="40" animation="" />
-    <item hash="b6cef9df21ada5a2734f2c8a4eff2993" sprite="Masked Mage (Purple) (Maskless)" width="40" height="40" animation="" />
     <item hash="ba7121d54e375afa87b5bc6217d43a5f" sprite="Masked Mage (Purple) (Maskless)" width="40" height="40" animation="" />
     <item hash="bad045116dade5e5102bf6bae82a4bcd" sprite="Masked Mage (Purple) (Maskless)" width="40" height="40" animation="" />
     <item hash="bf9562e53a59d9ad12a5405882aa8a86" sprite="Masked Mage (Purple) (Maskless)" width="40" height="40" animation="" />
-    <item hash="c202b734c25c3b123e0017ba5465f993" sprite="Masked Mage (Purple) (Maskless)" width="40" height="40" animation="" />
-    <item hash="c77ec05bf7cbc804ff540077625bbb6b" sprite="Masked Mage (Purple) (Maskless)" width="40" height="40" animation="" />
-    <item hash="c93955850cd539faed2f8d7813b79edc" sprite="Masked Mage (Purple) (Maskless)" width="40" height="40" animation="" />
-    <item hash="cec37d52940bb0efad6466a60d79a1ad" sprite="Masked Mage (Purple) (Maskless)" width="40" height="40" animation="" />
-    <item hash="d196f9d5600a5ebeb5ece954679069b0" sprite="Masked Mage (Purple) (Maskless)" width="40" height="40" animation="" />
     <item hash="d5b61f48fe2819e7df2aae8a0fc7817e" sprite="Masked Mage (Purple) (Maskless)" width="40" height="40" animation="" />
     <item hash="d9c2ac6d318c38dda1f4dc2d8cc873e0" sprite="Masked Mage (Purple) (Maskless)" width="40" height="40" animation="" />
-    <item hash="da3aceea026deabb6ac59580b7580342" sprite="Masked Mage (Purple) (Maskless)" width="40" height="40" animation="" />
     <item hash="df6a6450ba7a71876eeddf7fd4ada3d1" sprite="Masked Mage (Purple) (Maskless)" width="40" height="40" animation="" />
-    <item hash="e0d41bb0d815754c6b7eceba16e3943e" sprite="Masked Mage (Purple) (Maskless)" width="40" height="40" animation="" />
-    <item hash="e81c03b6f9c0db4c1ea7bfe6c013e4f8" sprite="Masked Mage (Purple) (Maskless)" width="40" height="40" animation="" />
     <item hash="ede017f5af372157eb80c7f57e959f73" sprite="Masked Mage (Purple) (Maskless)" width="40" height="40" animation="" />
     <item hash="f3ac426b1d8ef2100e8b69aa137ee583" sprite="Masked Mage (Purple) (Maskless)" width="40" height="40" animation="" />
     <item hash="f95da5cd92669cbd53fb105fa210b026" sprite="Masked Mage (Purple) (Maskless)" width="40" height="40" animation="" />
     <item hash="faf02ae5cd322acb1aa883ad039f1af4" sprite="Masked Mage (Purple) (Maskless)" width="40" height="40" animation="" />
+    <item hash="023d7fe651f61ca3b9d02a5bdeced9a5" sprite="Masked Mage (Purple) (Maskless) (With Flowers)" width="40" height="40" animation="" />
+    <item hash="0e41a8009212d1eadc26bdfe74e19d10" sprite="Masked Mage (Purple) (Maskless) (With Flowers)" width="40" height="40" animation="" />
+    <item hash="1c667b12de0c72bd8abea252197f61c6" sprite="Masked Mage (Purple) (Maskless) (With Flowers)" width="40" height="40" animation="" />
+    <item hash="2d3844c5128c1a7eb2fc976b21db2ac6" sprite="Masked Mage (Purple) (Maskless) (With Flowers)" width="40" height="40" animation="" />
+    <item hash="2e20b1b23c21dd039a1a2099b620fee5" sprite="Masked Mage (Purple) (Maskless) (With Flowers)" width="40" height="40" animation="" />
+    <item hash="2fb74d8cdce92ba79f3e5ec1847a4976" sprite="Masked Mage (Purple) (Maskless) (With Flowers)" width="40" height="40" animation="" />
+    <item hash="34d6589984a21455b809b9509a3411f0" sprite="Masked Mage (Purple) (Maskless) (With Flowers)" width="40" height="40" animation="" />
+    <item hash="3b4d5412208fd16cc7df76f4c608d170" sprite="Masked Mage (Purple) (Maskless) (With Flowers)" width="40" height="40" animation="" />
+    <item hash="5503240e58267e7630563ddaaaee37b7" sprite="Masked Mage (Purple) (Maskless) (With Flowers)" width="40" height="40" animation="" />
+    <item hash="67fdabf2039fe16ed934c19ed8c7488f" sprite="Masked Mage (Purple) (Maskless) (With Flowers)" width="40" height="40" animation="" />
+    <item hash="6ad59688ef9b887c9be7482e4ce78b25" sprite="Masked Mage (Purple) (Maskless) (With Flowers)" width="40" height="40" animation="" />
+    <item hash="6f555cfee6f8149899e14824ab41b7b8" sprite="Masked Mage (Purple) (Maskless) (With Flowers)" width="40" height="40" animation="" />
+    <item hash="77e9cd51b9ea9d725c8adbf10dfd50ab" sprite="Masked Mage (Purple) (Maskless) (With Flowers)" width="40" height="40" animation="" />
+    <item hash="7bc4a8e7a2df514ab6ae177e44b4d91d" sprite="Masked Mage (Purple) (Maskless) (With Flowers)" width="40" height="40" animation="" />
+    <item hash="812322318b033ba0a51745e248d8472e" sprite="Masked Mage (Purple) (Maskless) (With Flowers)" width="40" height="40" animation="" />
+    <item hash="88e02a57776fc5d44a62e623880bddbf" sprite="Masked Mage (Purple) (Maskless) (With Flowers)" width="40" height="40" animation="" />
+    <item hash="8bd4d0b91b8e700ff060128c530ddd52" sprite="Masked Mage (Purple) (Maskless) (With Flowers)" width="40" height="40" animation="" />
+    <item hash="9be0dd34cb62e7a0282dbf9a8032eddd" sprite="Masked Mage (Purple) (Maskless) (With Flowers)" width="40" height="40" animation="" />
+    <item hash="9c247cd0dc5a953e34eefc4647e594bd" sprite="Masked Mage (Purple) (Maskless) (With Flowers)" width="40" height="40" animation="" />
+    <item hash="9f41cc63a2bac68971c3c5c430b539a0" sprite="Masked Mage (Purple) (Maskless) (With Flowers)" width="40" height="40" animation="" />
+    <item hash="b05c8b26a6308b85548d973187b37feb" sprite="Masked Mage (Purple) (Maskless) (With Flowers)" width="40" height="40" animation="" />
+    <item hash="b40cb1ddc0d15f57732f295299b4738c" sprite="Masked Mage (Purple) (Maskless) (With Flowers)" width="40" height="40" animation="" />
+    <item hash="b5e2edc51ce3667eaadad7b42007bdcb" sprite="Masked Mage (Purple) (Maskless) (With Flowers)" width="40" height="40" animation="" />
+    <item hash="b6cef9df21ada5a2734f2c8a4eff2993" sprite="Masked Mage (Purple) (Maskless) (With Flowers)" width="40" height="40" animation="" />
+    <item hash="c202b734c25c3b123e0017ba5465f993" sprite="Masked Mage (Purple) (Maskless) (With Flowers)" width="40" height="40" animation="" />
+    <item hash="c77ec05bf7cbc804ff540077625bbb6b" sprite="Masked Mage (Purple) (Maskless) (With Flowers)" width="40" height="40" animation="" />
+    <item hash="c93955850cd539faed2f8d7813b79edc" sprite="Masked Mage (Purple) (Maskless) (With Flowers)" width="40" height="40" animation="" />
+    <item hash="cec37d52940bb0efad6466a60d79a1ad" sprite="Masked Mage (Purple) (Maskless) (With Flowers)" width="40" height="40" animation="" />
+    <item hash="d196f9d5600a5ebeb5ece954679069b0" sprite="Masked Mage (Purple) (Maskless) (With Flowers)" width="40" height="40" animation="" />
+    <item hash="da3aceea026deabb6ac59580b7580342" sprite="Masked Mage (Purple) (Maskless) (With Flowers)" width="40" height="40" animation="" />
+    <item hash="e0d41bb0d815754c6b7eceba16e3943e" sprite="Masked Mage (Purple) (Maskless) (With Flowers)" width="40" height="40" animation="" />
+    <item hash="e81c03b6f9c0db4c1ea7bfe6c013e4f8" sprite="Masked Mage (Purple) (Maskless) (With Flowers)" width="40" height="40" animation="" />
     <item hash="05298076f4b51cc0a02024bd0e8d3c0b" sprite="Masked Mage (Yellow)" width="40" height="40" animation="" />
     <item hash="059c4e3b77d15d7efc987f76dd0f68cb" sprite="Masked Mage (Yellow)" width="40" height="40" animation="" />
     <item hash="05d9f73f23ac38c8bc9d58c787b49cd3" sprite="Masked Mage (Yellow)" width="40" height="40" animation="" />
@@ -15694,7 +15698,6 @@
     <item hash="032d75b27fc3b46c14a13f34759b336b" sprite="Masqurin (U)" width="40" height="40" animation="" />
     <item hash="038e1025eacfc662d6cae7a711659826" sprite="Masqurin (U)" width="40" height="40" animation="" />
     <item hash="04947b8007b3fbfad999cd2674f88353" sprite="Masqurin (U)" width="40" height="40" animation="" />
-    <item hash="05e0ae35ea2c628ea5fd7d75dd989dfb" sprite="Masqurin (U)" width="40" height="40" animation="" />
     <item hash="065c2f15ad38287ab452fb34adb90a84" sprite="Masqurin (U)" width="40" height="40" animation="" />
     <item hash="079bc85145a1ff1fa6b9a9e3ecc5d3b7" sprite="Masqurin (U)" width="40" height="40" animation="" />
     <item hash="091c96783744a64175e6c909783f9ea5" sprite="Masqurin (U)" width="40" height="40" animation="" />
@@ -15703,52 +15706,35 @@
     <item hash="0dd89480ee2f3fd95f8615064ef305c6" sprite="Masqurin (U)" width="40" height="40" animation="" />
     <item hash="0ea232d438e3a2ea91aaa952e4fd20bb" sprite="Masqurin (U)" width="40" height="40" animation="" />
     <item hash="111bce3a114ca9a01dba2841a07f2820" sprite="Masqurin (U)" width="40" height="40" animation="" />
-    <item hash="1288e9b55e23cde2eb4c433d44244271" sprite="Masqurin (U)" width="40" height="40" animation="" />
-    <item hash="1326465676f3a6c6a6cc96a41e0943b4" sprite="Masqurin (U)" width="40" height="40" animation="" />
     <item hash="1467eec259621d6f1b4bf2541037682b" sprite="Masqurin (U)" width="40" height="40" animation="" />
     <item hash="152ba3bfd207e126a9733ba8de44f408" sprite="Masqurin (U)" width="40" height="40" animation="" />
     <item hash="1706692d3d65562d811a98aa55033d4f" sprite="Masqurin (U)" width="40" height="40" animation="" />
-    <item hash="188288932392b491bc7a606bf938c4e3" sprite="Masqurin (U)" width="40" height="40" animation="" />
     <item hash="1998cc4af18bd9262189c23fe7f5aed9" sprite="Masqurin (U)" width="40" height="40" animation="" />
     <item hash="19a0e3f6de5c5c80f77c7fd3d83e6321" sprite="Masqurin (U)" width="40" height="40" animation="" />
     <item hash="233a235fffc6e23014cca631610991f6" sprite="Masqurin (U)" width="40" height="40" animation="" />
     <item hash="241f7832b3cef40c85ac131a52a1e121" sprite="Masqurin (U)" width="40" height="40" animation="" />
     <item hash="254b157cbb4a891ace5c56ca95edd6eb" sprite="Masqurin (U)" width="40" height="40" animation="" />
-    <item hash="265c924f984a6a7d868947374997489f" sprite="Masqurin (U)" width="40" height="40" animation="" />
     <item hash="287780b0b9106bc8a96e8c28238c983c" sprite="Masqurin (U)" width="40" height="40" animation="" />
     <item hash="2a6686fad07be9eb34aa30771de8e764" sprite="Masqurin (U)" width="40" height="40" animation="" />
     <item hash="2ac159522a23fb3825c8ef5d7e4b032c" sprite="Masqurin (U)" width="40" height="40" animation="" />
     <item hash="2c77e1357fdf451d132b6995a1d0ad19" sprite="Masqurin (U)" width="40" height="40" animation="" />
-    <item hash="2ded9eb067c1c41c4f6c71088f34e133" sprite="Masqurin (U)" width="40" height="40" animation="" />
     <item hash="2e6330f2dd11acf4dbda5debba447034" sprite="Masqurin (U)" width="40" height="40" animation="" />
     <item hash="2f3176535e65d0af21a80613395a4465" sprite="Masqurin (U)" width="40" height="40" animation="" />
-    <item hash="2ffae31f3fdae742f4c50d347b1c5277" sprite="Masqurin (U)" width="40" height="40" animation="" />
-    <item hash="30e7a3d02fe0232f69d8ab6d1f8d16e4" sprite="Masqurin (U)" width="40" height="40" animation="" />
-    <item hash="312f1cce30ebdd7bee9fa1766ec77864" sprite="Masqurin (U)" width="40" height="40" animation="" />
     <item hash="3140e0de564414c3b7141b3fae8e9c0b" sprite="Masqurin (U)" width="40" height="40" animation="" />
-    <item hash="332560d9100208c300d49ea80e722574" sprite="Masqurin (U)" width="40" height="40" animation="" />
     <item hash="347d025af44e698b74e999fe680dda8d" sprite="Masqurin (U)" width="40" height="40" animation="" />
     <item hash="36121729bbd7c008566bcea8e731b53b" sprite="Masqurin (U)" width="40" height="40" animation="" />
     <item hash="372293f321afdd1a7f52c890d20a6cef" sprite="Masqurin (U)" width="40" height="40" animation="" />
     <item hash="37493b4a6789ed84062ace620686ec33" sprite="Masqurin (U)" width="40" height="40" animation="" />
     <item hash="387a11dd2d284230e91fac65f9e5bb8b" sprite="Masqurin (U)" width="40" height="40" animation="" />
-    <item hash="3881caeffe40ff3068b741204d826130" sprite="Masqurin (U)" width="40" height="40" animation="" />
     <item hash="39970a51b3008e2fa325d78163052bb7" sprite="Masqurin (U)" width="40" height="40" animation="" />
     <item hash="3a12638aad992780cf53414c0dc7acb8" sprite="Masqurin (U)" width="40" height="40" animation="" />
-    <item hash="3bb7946f606c9fe7b9c0dce94331b5d7" sprite="Masqurin (U)" width="40" height="40" animation="" />
-    <item hash="3cc5d675ac7942025b69e63a3b254432" sprite="Masqurin (U)" width="40" height="40" animation="" />
-    <item hash="3e9c22f21fb48b72256e957338c91a10" sprite="Masqurin (U)" width="40" height="40" animation="" />
     <item hash="3ed799b856fe52f60113589f9d6086de" sprite="Masqurin (U)" width="40" height="40" animation="" />
     <item hash="440cb24345ba526c26ab815565325516" sprite="Masqurin (U)" width="40" height="40" animation="" />
     <item hash="441f44835cacf21862f35670aed1fce3" sprite="Masqurin (U)" width="40" height="40" animation="" />
     <item hash="45f431924823f78078458c43813bcca7" sprite="Masqurin (U)" width="40" height="40" animation="" />
-    <item hash="45fc7a5888993def8fb5583aef8ec07e" sprite="Masqurin (U)" width="40" height="40" animation="" />
-    <item hash="4616eff93fb4edb96d96de05211d1180" sprite="Masqurin (U)" width="40" height="40" animation="" />
     <item hash="48c6d16c7605298f64d3ea27a40dba8a" sprite="Masqurin (U)" width="40" height="40" animation="" />
-    <item hash="496161f6b5e6b6439f6449549fb26b0c" sprite="Masqurin (U)" width="40" height="40" animation="" />
     <item hash="4a0fd86ada0a4c2e7072e35e5260ede2" sprite="Masqurin (U)" width="40" height="40" animation="" />
     <item hash="4c520a043983a5ce7ce8a7b262ecee3c" sprite="Masqurin (U)" width="40" height="40" animation="" />
-    <item hash="4c6911f6249a3693765181ec9782d061" sprite="Masqurin (U)" width="40" height="40" animation="" />
     <item hash="4ca0624f87fdb7ae75ba58985103bc97" sprite="Masqurin (U)" width="40" height="40" animation="" />
     <item hash="4d14b5ea2b63baa62417ad74c3289f40" sprite="Masqurin (U)" width="40" height="40" animation="" />
     <item hash="4e51da22c5b8f472f0c22c5e4006eb70" sprite="Masqurin (U)" width="40" height="40" animation="" />
@@ -15764,7 +15750,6 @@
     <item hash="612b584290eb48438e497bc12310ddb8" sprite="Masqurin (U)" width="40" height="40" animation="" />
     <item hash="6255607754b324ed19450fe8efe817f5" sprite="Masqurin (U)" width="40" height="40" animation="" />
     <item hash="6297e95fe1976d7c1716e4cc915d17d8" sprite="Masqurin (U)" width="40" height="40" animation="" />
-    <item hash="62f3e0c75b3642bb3c5124c8f2738ad0" sprite="Masqurin (U)" width="40" height="40" animation="" />
     <item hash="63d17f5fb59e370d97e737ed11851814" sprite="Masqurin (U)" width="40" height="40" animation="" />
     <item hash="645039dbf7469cb56273720ecaa892ae" sprite="Masqurin (U)" width="40" height="40" animation="" />
     <item hash="66e2be51ad1c2ee00f99fedff2f4b297" sprite="Masqurin (U)" width="40" height="40" animation="" />
@@ -15775,16 +15760,13 @@
     <item hash="6b9b6375704ca745ba45e9dcceff2199" sprite="Masqurin (U)" width="40" height="40" animation="" />
     <item hash="6c440474fcc341fcc7e38cccee5a6528" sprite="Masqurin (U)" width="40" height="40" animation="" />
     <item hash="6e941e8f58916af1610687255c63a2d6" sprite="Masqurin (U)" width="40" height="40" animation="" />
-    <item hash="704635f1cbfd1be5280abda5924767f8" sprite="Masqurin (U)" width="40" height="40" animation="" />
     <item hash="705b5e68f5478f74864ac20feb171aa0" sprite="Masqurin (U)" width="40" height="40" animation="" />
     <item hash="70eaf1cfdb317a368e365db905b7a3ca" sprite="Masqurin (U)" width="40" height="40" animation="" />
-    <item hash="72d41c5e6cd6bd5fccfa0aa0f7288c9a" sprite="Masqurin (U)" width="40" height="40" animation="" />
     <item hash="778714e0d7c67e4c0b9870e53655d31b" sprite="Masqurin (U)" width="40" height="40" animation="" />
     <item hash="7865888fa70b7114b1b84e64b8e86382" sprite="Masqurin (U)" width="40" height="40" animation="" />
     <item hash="792673af31f01f33e3e1da724a548b05" sprite="Masqurin (U)" width="40" height="40" animation="" />
     <item hash="7940c3f77c18dbaf2977483c044bb67c" sprite="Masqurin (U)" width="40" height="40" animation="" />
     <item hash="7988f9b3867f1703d3b7e8b1ae34f102" sprite="Masqurin (U)" width="40" height="40" animation="" />
-    <item hash="79cee69888fd4ba149827bfb6c59ff82" sprite="Masqurin (U)" width="40" height="40" animation="" />
     <item hash="7a87c9dd9ace708ab36219d7cb588a4c" sprite="Masqurin (U)" width="40" height="40" animation="" />
     <item hash="7b69a2289ac1cf3fdc5e93ae5ec5b8b8" sprite="Masqurin (U)" width="40" height="40" animation="" />
     <item hash="7bffa709e008929f0028fc980a8ddb45" sprite="Masqurin (U)" width="40" height="40" animation="" />
@@ -15793,7 +15775,6 @@
     <item hash="7da3a88c83e696b740ab321618a3730b" sprite="Masqurin (U)" width="40" height="40" animation="" />
     <item hash="7dc70313e65dc674e27073c6f82d4d26" sprite="Masqurin (U)" width="40" height="40" animation="" />
     <item hash="7fe19f3bb67f140f6f284309d774ca88" sprite="Masqurin (U)" width="40" height="40" animation="" />
-    <item hash="8035d71ce10e8189a50c38f5ddb684d1" sprite="Masqurin (U)" width="40" height="40" animation="" />
     <item hash="8054c028598cb08be1fde33b61c4fd1c" sprite="Masqurin (U)" width="40" height="40" animation="" />
     <item hash="82219447c3919ee12472fac8b85baf54" sprite="Masqurin (U)" width="40" height="40" animation="" />
     <item hash="84cf7032bbb42d6dd42bcc5972655106" sprite="Masqurin (U)" width="40" height="40" animation="" />
@@ -15804,27 +15785,19 @@
     <item hash="9a60bc2d5931964cf147c90db405478b" sprite="Masqurin (U)" width="40" height="40" animation="" />
     <item hash="9c1029580a0c8dbb4182298c8415047b" sprite="Masqurin (U)" width="40" height="40" animation="" />
     <item hash="9d4a0ce2ad4823cdd15a0f74ca6a5650" sprite="Masqurin (U)" width="40" height="40" animation="" />
-    <item hash="a1123df26c25c911654aa6c97d1ae40e" sprite="Masqurin (U)" width="40" height="40" animation="" />
     <item hash="a14d0055b909f446978b48c5b1dd2190" sprite="Masqurin (U)" width="40" height="40" animation="" />
     <item hash="a2e2ac2087e67166112a61c1aa4f9d96" sprite="Masqurin (U)" width="40" height="40" animation="" />
-    <item hash="a4b5a66a2352a22b718c573b0250a40b" sprite="Masqurin (U)" width="40" height="40" animation="" />
     <item hash="a65e7501a64b32b703846e657f43aea9" sprite="Masqurin (U)" width="40" height="40" animation="" />
-    <item hash="a701d83e6573c432ec932f0dc219ad6d" sprite="Masqurin (U)" width="40" height="40" animation="" />
     <item hash="a9760d7f66ec511072249e62100e7c02" sprite="Masqurin (U)" width="40" height="40" animation="" />
     <item hash="aa1bbad3e8c211c9f3d0e0620308e4f9" sprite="Masqurin (U)" width="40" height="40" animation="" />
-    <item hash="adaae23846c89f4510057d296a7df4e6" sprite="Masqurin (U)" width="40" height="40" animation="" />
     <item hash="ae07a04ef73163e51a35ac18b0ee681e" sprite="Masqurin (U)" width="40" height="40" animation="" />
-    <item hash="ae14e9942fa67f9bee285930da0c415f" sprite="Masqurin (U)" width="40" height="40" animation="" />
     <item hash="ae869400dc9c9bf1f5e64574ee31b400" sprite="Masqurin (U)" width="40" height="40" animation="" />
     <item hash="afb825c7033cc4548f0b317c6914b930" sprite="Masqurin (U)" width="40" height="40" animation="" />
     <item hash="afdd3858efc52a63b3b5ef35e0edba73" sprite="Masqurin (U)" width="40" height="40" animation="" />
     <item hash="b3a448f1383e37ccedba7f5c9d9299e1" sprite="Masqurin (U)" width="40" height="40" animation="" />
-    <item hash="b4920d7422e836422abc58e8b9a31392" sprite="Masqurin (U)" width="40" height="40" animation="" />
     <item hash="b5959d39b349cfbd96bb12da554dcf08" sprite="Masqurin (U)" width="40" height="40" animation="" />
     <item hash="b5da5ceb953759c886f4129242a3fd60" sprite="Masqurin (U)" width="40" height="40" animation="" />
-    <item hash="b8a14561c138a79ab66834aa9370b46d" sprite="Masqurin (U)" width="40" height="40" animation="" />
     <item hash="bc5b6b24b9a9ad4a6a5c79424a2e58cb" sprite="Masqurin (U)" width="40" height="40" animation="" />
-    <item hash="be0896d9357195345624fcb2ddb551c2" sprite="Masqurin (U)" width="40" height="40" animation="" />
     <item hash="bf7448f1bd3996887599a186a3ada6c3" sprite="Masqurin (U)" width="40" height="40" animation="" />
     <item hash="c0218469523c0e3f2a3872e0d57b8c0a" sprite="Masqurin (U)" width="40" height="40" animation="" />
     <item hash="c035939574c955078505050700f4bce2" sprite="Masqurin (U)" width="40" height="40" animation="" />
@@ -15833,18 +15806,14 @@
     <item hash="c39e612fef346d3b99b3262f6a2d1c48" sprite="Masqurin (U)" width="40" height="40" animation="" />
     <item hash="c44c117bfddcd2ff2a5ead4a2b19c5cf" sprite="Masqurin (U)" width="40" height="40" animation="" />
     <item hash="c4d7fb73787f94472e243a71840ea9fb" sprite="Masqurin (U)" width="40" height="40" animation="" />
-    <item hash="c63fb8c437b32feda5feb16654f60315" sprite="Masqurin (U)" width="40" height="40" animation="" />
-    <item hash="c7fab2677e50fa05ea600fd9b3ab2d1b" sprite="Masqurin (U)" width="40" height="40" animation="" />
     <item hash="c852a76f23d3b6f8953d1409cb757b15" sprite="Masqurin (U)" width="40" height="40" animation="" />
     <item hash="cf2bda4e4fe7ef1ba0a1028e0dc4e081" sprite="Masqurin (U)" width="40" height="40" animation="" />
     <item hash="cfa6638867872d2fbe0a363d3dd7965a" sprite="Masqurin (U)" width="40" height="40" animation="" />
     <item hash="d089a351d68f7fdc78a9e6e2f78e100d" sprite="Masqurin (U)" width="40" height="40" animation="" />
     <item hash="d099e3529e1b41815cadda14d5bb4120" sprite="Masqurin (U)" width="40" height="40" animation="" />
     <item hash="d2488663a11ca06f5ead0e8d7468892e" sprite="Masqurin (U)" width="40" height="40" animation="" />
-    <item hash="d5f5cff79fc3846e7b2919a922a0dc69" sprite="Masqurin (U)" width="40" height="40" animation="" />
     <item hash="d821addbb1f46f5eb5e94e12bc7a8885" sprite="Masqurin (U)" width="40" height="40" animation="" />
     <item hash="d99f5cb4d64d2bc42d1eb9bb1c44ecf2" sprite="Masqurin (U)" width="40" height="40" animation="" />
-    <item hash="da2447376b6592c2900923bdfe8b4269" sprite="Masqurin (U)" width="40" height="40" animation="" />
     <item hash="dba2e36d7911af8c6528bb58ef2a3f24" sprite="Masqurin (U)" width="40" height="40" animation="" />
     <item hash="dbb07ff94d2833b5dbca5a337ee2ae21" sprite="Masqurin (U)" width="40" height="40" animation="" />
     <item hash="dd1e91216c70840fc57c3bfc6b37faf5" sprite="Masqurin (U)" width="40" height="40" animation="" />
@@ -15868,7 +15837,6 @@
     <item hash="fbce45ec04523411a0f95d4eabbb24ef" sprite="Masqurin (U)" width="40" height="40" animation="" />
     <item hash="fd56e5b6afc3abc49ce29c141751f207" sprite="Masqurin (U)" width="40" height="40" animation="" />
     <item hash="fd922f25a4e60d59ec089187c5700ed4" sprite="Masqurin (U)" width="40" height="40" animation="" />
-    <item hash="fe7ccc22ecafb938201b0361051a8139" sprite="Masqurin (U)" width="40" height="40" animation="" />
     <item hash="fee9b43e9efd9a3509466dd28c0eb732" sprite="Masqurin (U)" width="40" height="40" animation="" />
     <item hash="ff1e68bc20c18651cc9404439862a778" sprite="Masqurin (U)" width="40" height="40" animation="" />
     <item hash="ffb5743bb2f904b4becf12e5af44e740" sprite="Masqurin (U)" width="40" height="40" animation="" />
@@ -15916,6 +15884,42 @@
     <item hash="defceb0d96fe1afe5a721cc0320249ce" sprite="Masqurin (U)" width="40" height="40" animation="Unknown" />
     <item hash="e905e7ba4f583abbd7d6f58f4a0bb1cb" sprite="Masqurin (U)" width="40" height="40" animation="Unknown" />
     <item hash="f2ad9ccb5003c283136d70d4a9019d69" sprite="Masqurin (U)" width="40" height="40" animation="Unknown" />
+    <item hash="05e0ae35ea2c628ea5fd7d75dd989dfb" sprite="Masqurin (U) (With Flowers)" width="40" height="40" animation="" />
+    <item hash="1288e9b55e23cde2eb4c433d44244271" sprite="Masqurin (U) (With Flowers)" width="40" height="40" animation="" />
+    <item hash="1326465676f3a6c6a6cc96a41e0943b4" sprite="Masqurin (U) (With Flowers)" width="40" height="40" animation="" />
+    <item hash="188288932392b491bc7a606bf938c4e3" sprite="Masqurin (U) (With Flowers)" width="40" height="40" animation="" />
+    <item hash="265c924f984a6a7d868947374997489f" sprite="Masqurin (U) (With Flowers)" width="40" height="40" animation="" />
+    <item hash="2ded9eb067c1c41c4f6c71088f34e133" sprite="Masqurin (U) (With Flowers)" width="40" height="40" animation="" />
+    <item hash="2ffae31f3fdae742f4c50d347b1c5277" sprite="Masqurin (U) (With Flowers)" width="40" height="40" animation="" />
+    <item hash="30e7a3d02fe0232f69d8ab6d1f8d16e4" sprite="Masqurin (U) (With Flowers)" width="40" height="40" animation="" />
+    <item hash="312f1cce30ebdd7bee9fa1766ec77864" sprite="Masqurin (U) (With Flowers)" width="40" height="40" animation="" />
+    <item hash="332560d9100208c300d49ea80e722574" sprite="Masqurin (U) (With Flowers)" width="40" height="40" animation="" />
+    <item hash="3881caeffe40ff3068b741204d826130" sprite="Masqurin (U) (With Flowers)" width="40" height="40" animation="" />
+    <item hash="3bb7946f606c9fe7b9c0dce94331b5d7" sprite="Masqurin (U) (With Flowers)" width="40" height="40" animation="" />
+    <item hash="3cc5d675ac7942025b69e63a3b254432" sprite="Masqurin (U) (With Flowers)" width="40" height="40" animation="" />
+    <item hash="3e9c22f21fb48b72256e957338c91a10" sprite="Masqurin (U) (With Flowers)" width="40" height="40" animation="" />
+    <item hash="45fc7a5888993def8fb5583aef8ec07e" sprite="Masqurin (U) (With Flowers)" width="40" height="40" animation="" />
+    <item hash="4616eff93fb4edb96d96de05211d1180" sprite="Masqurin (U) (With Flowers)" width="40" height="40" animation="" />
+    <item hash="496161f6b5e6b6439f6449549fb26b0c" sprite="Masqurin (U) (With Flowers)" width="40" height="40" animation="" />
+    <item hash="4c6911f6249a3693765181ec9782d061" sprite="Masqurin (U) (With Flowers)" width="40" height="40" animation="" />
+    <item hash="62f3e0c75b3642bb3c5124c8f2738ad0" sprite="Masqurin (U) (With Flowers)" width="40" height="40" animation="" />
+    <item hash="704635f1cbfd1be5280abda5924767f8" sprite="Masqurin (U) (With Flowers)" width="40" height="40" animation="" />
+    <item hash="72d41c5e6cd6bd5fccfa0aa0f7288c9a" sprite="Masqurin (U) (With Flowers)" width="40" height="40" animation="" />
+    <item hash="79cee69888fd4ba149827bfb6c59ff82" sprite="Masqurin (U) (With Flowers)" width="40" height="40" animation="" />
+    <item hash="8035d71ce10e8189a50c38f5ddb684d1" sprite="Masqurin (U) (With Flowers)" width="40" height="40" animation="" />
+    <item hash="a1123df26c25c911654aa6c97d1ae40e" sprite="Masqurin (U) (With Flowers)" width="40" height="40" animation="" />
+    <item hash="a4b5a66a2352a22b718c573b0250a40b" sprite="Masqurin (U) (With Flowers)" width="40" height="40" animation="" />
+    <item hash="a701d83e6573c432ec932f0dc219ad6d" sprite="Masqurin (U) (With Flowers)" width="40" height="40" animation="" />
+    <item hash="adaae23846c89f4510057d296a7df4e6" sprite="Masqurin (U) (With Flowers)" width="40" height="40" animation="" />
+    <item hash="ae14e9942fa67f9bee285930da0c415f" sprite="Masqurin (U) (With Flowers)" width="40" height="40" animation="" />
+    <item hash="b4920d7422e836422abc58e8b9a31392" sprite="Masqurin (U) (With Flowers)" width="40" height="40" animation="" />
+    <item hash="b8a14561c138a79ab66834aa9370b46d" sprite="Masqurin (U) (With Flowers)" width="40" height="40" animation="" />
+    <item hash="be0896d9357195345624fcb2ddb551c2" sprite="Masqurin (U) (With Flowers)" width="40" height="40" animation="" />
+    <item hash="c63fb8c437b32feda5feb16654f60315" sprite="Masqurin (U) (With Flowers)" width="40" height="40" animation="" />
+    <item hash="c7fab2677e50fa05ea600fd9b3ab2d1b" sprite="Masqurin (U) (With Flowers)" width="40" height="40" animation="" />
+    <item hash="d5f5cff79fc3846e7b2919a922a0dc69" sprite="Masqurin (U) (With Flowers)" width="40" height="40" animation="" />
+    <item hash="da2447376b6592c2900923bdfe8b4269" sprite="Masqurin (U) (With Flowers)" width="40" height="40" animation="" />
+    <item hash="fe7ccc22ecafb938201b0361051a8139" sprite="Masqurin (U) (With Flowers)" width="40" height="40" animation="" />
     <item hash="0b9d90a70db1498fcacfc621076d2c2f" sprite="Master Mage" width="40" height="40" animation="" />
     <item hash="1066cffa82803646df1bf953c6bd1787" sprite="Master Mage" width="40" height="40" animation="" />
     <item hash="1763bbb35177cbde26f63448f456edeb" sprite="Master Mage" width="40" height="40" animation="" />
@@ -16652,52 +16656,29 @@
     <item hash="ecd7beaf1973a782c3234827f3b5ce6e" sprite="Mercenary" width="40" height="40" animation="Walking" />
     <item hash="05e9c4ef3a21cc27d722c49279c6dba7" sprite="Messenger Soldier" width="40" height="40" animation="" />
     <item hash="096f76485303c91ad88a16e5739b39b1" sprite="Messenger Soldier" width="40" height="40" animation="" />
-    <item hash="0d2a1664d42d49f834e7f60ef357ca84" sprite="Messenger Soldier" width="40" height="40" animation="" />
     <item hash="12864881e7d7931d69e74801196ec978" sprite="Messenger Soldier" width="40" height="40" animation="" />
-    <item hash="1803397879d2f249013d9fc3f009cbb7" sprite="Messenger Soldier" width="40" height="40" animation="" />
     <item hash="1c38c8f4eb9b70766ee8c48410297f08" sprite="Messenger Soldier" width="40" height="40" animation="" />
-    <item hash="1d3461ae841c47d5fe317c6e33833c14" sprite="Messenger Soldier" width="40" height="40" animation="" />
-    <item hash="1e0b7a2bd5d6c41c68aad6be4f3b5f17" sprite="Messenger Soldier" width="40" height="40" animation="" />
-    <item hash="1fbc831a600e80ee79db312b11576b63" sprite="Messenger Soldier" width="40" height="40" animation="" />
-    <item hash="2075e8bd3865b23ce26e390d10730bbc" sprite="Messenger Soldier" width="40" height="40" animation="" />
     <item hash="25225a28e64584a2666268cca3af52c0" sprite="Messenger Soldier" width="40" height="40" animation="" />
     <item hash="2871f634529ea6ce0ccfed75bd3f4bb6" sprite="Messenger Soldier" width="40" height="40" animation="" />
     <item hash="2c690b97a817e1aec7eacdd210710bf8" sprite="Messenger Soldier" width="40" height="40" animation="" />
-    <item hash="3303b7ce611e4b1246b1490508090fa8" sprite="Messenger Soldier" width="40" height="40" animation="" />
-    <item hash="34df0994f1ac252a3b289747c0a2565a" sprite="Messenger Soldier" width="40" height="40" animation="" />
     <item hash="38a705b100153f71b12c32248447f3c5" sprite="Messenger Soldier" width="40" height="40" animation="" />
     <item hash="3d0ec39a494b31b1c12623e36d60530e" sprite="Messenger Soldier" width="40" height="40" animation="" />
-    <item hash="3e1c1554f70d984df0de7170474fee20" sprite="Messenger Soldier" width="40" height="40" animation="" />
-    <item hash="47529a01f991bcaa8c524517073414d9" sprite="Messenger Soldier" width="40" height="40" animation="" />
     <item hash="4d63ebeecb0f81c6009345fcd80dbfc3" sprite="Messenger Soldier" width="40" height="40" animation="" />
     <item hash="4ed4a6ae95f8580b55a6cd30eb8e6324" sprite="Messenger Soldier" width="40" height="40" animation="" />
     <item hash="52c58b1f6b3467717a3a5eab5391733c" sprite="Messenger Soldier" width="40" height="40" animation="" />
     <item hash="53abfa5cb68d6218e34fcbf66d2c2b81" sprite="Messenger Soldier" width="40" height="40" animation="" />
-    <item hash="5c3e9d00aadfd8a7cf228954a51a4302" sprite="Messenger Soldier" width="40" height="40" animation="" />
-    <item hash="64ea0d76c4e38ed66d5263ee687a8a30" sprite="Messenger Soldier" width="40" height="40" animation="" />
     <item hash="656cdf1a16cc9ed6ed8b5e9b534ff74f" sprite="Messenger Soldier" width="40" height="40" animation="" />
     <item hash="6a55b3890314030c72acadd9fd3421d1" sprite="Messenger Soldier" width="40" height="40" animation="" />
     <item hash="6c824189848ec4496c5172460f2bf486" sprite="Messenger Soldier" width="40" height="40" animation="" />
     <item hash="6d3f07bab7505cc90f3c696e990041ea" sprite="Messenger Soldier" width="40" height="40" animation="" />
     <item hash="6d4d8a0a0b5e88c1aeb2c38ffb376e7e" sprite="Messenger Soldier" width="40" height="40" animation="" />
-    <item hash="708ae868af2ca02493d28e613801969c" sprite="Messenger Soldier" width="40" height="40" animation="" />
-    <item hash="71ec9363360d39682de14e53396f6be9" sprite="Messenger Soldier" width="40" height="40" animation="" />
     <item hash="7346286418a25fdc971dd3a42cdc7f74" sprite="Messenger Soldier" width="40" height="40" animation="" />
-    <item hash="74a920b8ea9e18ba4019b4567ba86a8c" sprite="Messenger Soldier" width="40" height="40" animation="" />
-    <item hash="79a9f659ab4d3619789a37876e0d289e" sprite="Messenger Soldier" width="40" height="40" animation="" />
-    <item hash="7a8c62dd9c5fc1acec8bf899177deddc" sprite="Messenger Soldier" width="40" height="40" animation="" />
     <item hash="7fed1a446e2994d4691b2f403b0c9fb2" sprite="Messenger Soldier" width="40" height="40" animation="" />
-    <item hash="801364d9f0040ae4a6890e2495be066f" sprite="Messenger Soldier" width="40" height="40" animation="" />
-    <item hash="844450119c70262723532fb3ba1219f3" sprite="Messenger Soldier" width="40" height="40" animation="" />
     <item hash="84b9d487e687e46746bc905388749390" sprite="Messenger Soldier" width="40" height="40" animation="" />
-    <item hash="84bcb53de57f0906caac0f884cb66033" sprite="Messenger Soldier" width="40" height="40" animation="" />
     <item hash="867a779ae08ab22744e9bd8864f9a272" sprite="Messenger Soldier" width="40" height="40" animation="" />
     <item hash="8753b15ec05ba38ca57e0cca374a6055" sprite="Messenger Soldier" width="40" height="40" animation="" />
-    <item hash="8934205e3ae8addc476174689843ab3c" sprite="Messenger Soldier" width="40" height="40" animation="" />
     <item hash="8bb851940608956320476ca80fc23a16" sprite="Messenger Soldier" width="40" height="40" animation="" />
     <item hash="8dbf4f55adee9579b3ec05ce72d339d7" sprite="Messenger Soldier" width="40" height="40" animation="" />
-    <item hash="90f6c2cd0a16ed4a4eaf459f0ba1dc3b" sprite="Messenger Soldier" width="40" height="40" animation="" />
-    <item hash="916c1ef74fd072e596da9af1ac3a5a91" sprite="Messenger Soldier" width="40" height="40" animation="" />
     <item hash="94f6fd2c402367d0c0e3f1e9593110fe" sprite="Messenger Soldier" width="40" height="40" animation="" />
     <item hash="98209b1e57e79f76c9eae7b42ae388e7" sprite="Messenger Soldier" width="40" height="40" animation="" />
     <item hash="9920eb43f6fd248cbe14d440d2c36f6a" sprite="Messenger Soldier" width="40" height="40" animation="" />
@@ -16707,30 +16688,53 @@
     <item hash="a05bb73ef461d5426aa1ce708a439736" sprite="Messenger Soldier" width="40" height="40" animation="" />
     <item hash="a3c380cf95f10ca2dc294a5b5f7ff036" sprite="Messenger Soldier" width="40" height="40" animation="" />
     <item hash="a6d70776059b37f3e38448ee397398b4" sprite="Messenger Soldier" width="40" height="40" animation="" />
-    <item hash="a84af5bd7778bdcbe8b7867e34787a8e" sprite="Messenger Soldier" width="40" height="40" animation="" />
-    <item hash="ab84aa5259001a8aee7bad36aefee906" sprite="Messenger Soldier" width="40" height="40" animation="" />
     <item hash="aefc0e3ef57c3806289c93a4ec774ae1" sprite="Messenger Soldier" width="40" height="40" animation="" />
     <item hash="b211f25275ce7ccacb9503483f49aa9d" sprite="Messenger Soldier" width="40" height="40" animation="" />
-    <item hash="b660d2515d5ac77949afb0d552392e2b" sprite="Messenger Soldier" width="40" height="40" animation="" />
-    <item hash="b6a53006e04b4533d3a6b7a99c60a4f3" sprite="Messenger Soldier" width="40" height="40" animation="" />
-    <item hash="b98e2b913e39bd49d78502faf589cd75" sprite="Messenger Soldier" width="40" height="40" animation="" />
-    <item hash="bc1b587ca1e91fa836066314bff02448" sprite="Messenger Soldier" width="40" height="40" animation="" />
     <item hash="c0ce1bf8428a5dcf0e0dbe6b7828666d" sprite="Messenger Soldier" width="40" height="40" animation="" />
     <item hash="c4af5d2d7de5583f088de463a7790cd4" sprite="Messenger Soldier" width="40" height="40" animation="" />
-    <item hash="c6c091e1fd6787435a5ccf4096f7952d" sprite="Messenger Soldier" width="40" height="40" animation="" />
     <item hash="c6c739954466e151a2c8d98d3c1f0f20" sprite="Messenger Soldier" width="40" height="40" animation="" />
-    <item hash="ca341273794d4141d03fd386191242b4" sprite="Messenger Soldier" width="40" height="40" animation="" />
     <item hash="cff55368248a56a088a458297397e134" sprite="Messenger Soldier" width="40" height="40" animation="" />
     <item hash="d3df64abec3631c0aa8b68b377506f54" sprite="Messenger Soldier" width="40" height="40" animation="" />
-    <item hash="d5df4684d0c0629801ed1d86a2682f69" sprite="Messenger Soldier" width="40" height="40" animation="" />
     <item hash="d966f8a63cef1d152d287384ea49227c" sprite="Messenger Soldier" width="40" height="40" animation="" />
-    <item hash="dae39ff4dba61bdfdc15908b1651edc9" sprite="Messenger Soldier" width="40" height="40" animation="" />
-    <item hash="ddd82fcef437ead1d8bd6fe49e5b793c" sprite="Messenger Soldier" width="40" height="40" animation="" />
     <item hash="de06e53e7a764044ea05907449d1551f" sprite="Messenger Soldier" width="40" height="40" animation="" />
-    <item hash="ed5f379d0104a430642f7dd15f223b68" sprite="Messenger Soldier" width="40" height="40" animation="" />
-    <item hash="f7bce04e4440936bf68dacf0f6c6bb17" sprite="Messenger Soldier" width="40" height="40" animation="" />
     <item hash="f8783636e3d6fca119dc17c2837d8bf4" sprite="Messenger Soldier" width="40" height="40" animation="" />
     <item hash="fc6a7f05ea2233ed7de16427aa40cadc" sprite="Messenger Soldier" width="40" height="40" animation="" />
+    <item hash="0d2a1664d42d49f834e7f60ef357ca84" sprite="Messenger Soldier (With Flowers)" width="40" height="40" animation="" />
+    <item hash="1803397879d2f249013d9fc3f009cbb7" sprite="Messenger Soldier (With Flowers)" width="40" height="40" animation="" />
+    <item hash="1d3461ae841c47d5fe317c6e33833c14" sprite="Messenger Soldier (With Flowers)" width="40" height="40" animation="" />
+    <item hash="1e0b7a2bd5d6c41c68aad6be4f3b5f17" sprite="Messenger Soldier (With Flowers)" width="40" height="40" animation="" />
+    <item hash="1fbc831a600e80ee79db312b11576b63" sprite="Messenger Soldier (With Flowers)" width="40" height="40" animation="" />
+    <item hash="2075e8bd3865b23ce26e390d10730bbc" sprite="Messenger Soldier (With Flowers)" width="40" height="40" animation="" />
+    <item hash="3303b7ce611e4b1246b1490508090fa8" sprite="Messenger Soldier (With Flowers)" width="40" height="40" animation="" />
+    <item hash="34df0994f1ac252a3b289747c0a2565a" sprite="Messenger Soldier (With Flowers)" width="40" height="40" animation="" />
+    <item hash="3e1c1554f70d984df0de7170474fee20" sprite="Messenger Soldier (With Flowers)" width="40" height="40" animation="" />
+    <item hash="47529a01f991bcaa8c524517073414d9" sprite="Messenger Soldier (With Flowers)" width="40" height="40" animation="" />
+    <item hash="5c3e9d00aadfd8a7cf228954a51a4302" sprite="Messenger Soldier (With Flowers)" width="40" height="40" animation="" />
+    <item hash="64ea0d76c4e38ed66d5263ee687a8a30" sprite="Messenger Soldier (With Flowers)" width="40" height="40" animation="" />
+    <item hash="708ae868af2ca02493d28e613801969c" sprite="Messenger Soldier (With Flowers)" width="40" height="40" animation="" />
+    <item hash="71ec9363360d39682de14e53396f6be9" sprite="Messenger Soldier (With Flowers)" width="40" height="40" animation="" />
+    <item hash="74a920b8ea9e18ba4019b4567ba86a8c" sprite="Messenger Soldier (With Flowers)" width="40" height="40" animation="" />
+    <item hash="79a9f659ab4d3619789a37876e0d289e" sprite="Messenger Soldier (With Flowers)" width="40" height="40" animation="" />
+    <item hash="7a8c62dd9c5fc1acec8bf899177deddc" sprite="Messenger Soldier (With Flowers)" width="40" height="40" animation="" />
+    <item hash="801364d9f0040ae4a6890e2495be066f" sprite="Messenger Soldier (With Flowers)" width="40" height="40" animation="" />
+    <item hash="844450119c70262723532fb3ba1219f3" sprite="Messenger Soldier (With Flowers)" width="40" height="40" animation="" />
+    <item hash="84bcb53de57f0906caac0f884cb66033" sprite="Messenger Soldier (With Flowers)" width="40" height="40" animation="" />
+    <item hash="8934205e3ae8addc476174689843ab3c" sprite="Messenger Soldier (With Flowers)" width="40" height="40" animation="" />
+    <item hash="90f6c2cd0a16ed4a4eaf459f0ba1dc3b" sprite="Messenger Soldier (With Flowers)" width="40" height="40" animation="" />
+    <item hash="916c1ef74fd072e596da9af1ac3a5a91" sprite="Messenger Soldier (With Flowers)" width="40" height="40" animation="" />
+    <item hash="a84af5bd7778bdcbe8b7867e34787a8e" sprite="Messenger Soldier (With Flowers)" width="40" height="40" animation="" />
+    <item hash="ab84aa5259001a8aee7bad36aefee906" sprite="Messenger Soldier (With Flowers)" width="40" height="40" animation="" />
+    <item hash="b660d2515d5ac77949afb0d552392e2b" sprite="Messenger Soldier (With Flowers)" width="40" height="40" animation="" />
+    <item hash="b6a53006e04b4533d3a6b7a99c60a4f3" sprite="Messenger Soldier (With Flowers)" width="40" height="40" animation="" />
+    <item hash="b98e2b913e39bd49d78502faf589cd75" sprite="Messenger Soldier (With Flowers)" width="40" height="40" animation="" />
+    <item hash="bc1b587ca1e91fa836066314bff02448" sprite="Messenger Soldier (With Flowers)" width="40" height="40" animation="" />
+    <item hash="c6c091e1fd6787435a5ccf4096f7952d" sprite="Messenger Soldier (With Flowers)" width="40" height="40" animation="" />
+    <item hash="ca341273794d4141d03fd386191242b4" sprite="Messenger Soldier (With Flowers)" width="40" height="40" animation="" />
+    <item hash="d5df4684d0c0629801ed1d86a2682f69" sprite="Messenger Soldier (With Flowers)" width="40" height="40" animation="" />
+    <item hash="dae39ff4dba61bdfdc15908b1651edc9" sprite="Messenger Soldier (With Flowers)" width="40" height="40" animation="" />
+    <item hash="ddd82fcef437ead1d8bd6fe49e5b793c" sprite="Messenger Soldier (With Flowers)" width="40" height="40" animation="" />
+    <item hash="ed5f379d0104a430642f7dd15f223b68" sprite="Messenger Soldier (With Flowers)" width="40" height="40" animation="" />
+    <item hash="f7bce04e4440936bf68dacf0f6c6bb17" sprite="Messenger Soldier (With Flowers)" width="40" height="40" animation="" />
     <item hash="1f8428298d301f33317b088949d5db09" sprite="Metal Gunner" width="48" height="32" animation="" />
     <item hash="299663bb9e12b0799108215b079312c0" sprite="Metal Gunner" width="48" height="32" animation="" />
     <item hash="2bd148f49274b44b16c3b061c5263bef" sprite="Metal Gunner" width="48" height="32" animation="" />
@@ -19870,11 +19874,7 @@
     <item hash="0aba773cdcfffc3ff1dc20baac6ec445" sprite="Resting Burly Worker" width="48" height="40" animation="" />
     <item hash="47f1b4619d2e32531a2cf57ee1109241" sprite="Resting Burly Worker" width="48" height="40" animation="" />
     <item hash="529540f6d256f6b3c17b7b63ae0762b6" sprite="Resting Burly Worker" width="48" height="40" animation="" />
-    <item hash="7b4e672e7ac82b49759c903e2087565f" sprite="Resting Burly Worker" width="48" height="40" animation="" />
-    <item hash="987f54d18eaaabdbf66e68d6a6293963" sprite="Resting Burly Worker" width="48" height="40" animation="" />
     <item hash="a583f818e2d79c5927f741340e3ce1b0" sprite="Resting Burly Worker" width="48" height="40" animation="" />
-    <item hash="c921195772cfb633f0c181b1232e1b23" sprite="Resting Burly Worker" width="48" height="40" animation="" />
-    <item hash="dfcf7e23844e18c520ac2dd91d571f17" sprite="Resting Burly Worker" width="48" height="40" animation="" />
     <item hash="09011cb0d9dd42bc1f40cbbb0986a2ac" sprite="Resting Old Woman" width="48" height="40" animation="" />
     <item hash="0cd6c213d8fc9ba3d8405cf319444cb7" sprite="Resting Old Woman" width="48" height="40" animation="" />
     <item hash="67119f4f986b9aaaa839ccda82f4621b" sprite="Resting Old Woman" width="48" height="40" animation="" />
