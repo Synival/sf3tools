@@ -5367,14 +5367,8 @@
     <item hash="e080ec7a26bbb07a0486c48102793b5e" sprite="Domaric (Sword)" width="40" height="40" animation="" />
     <item hash="f2631b032339b50daa01798666f137aa" sprite="Domaric (Sword)" width="40" height="40" animation="" />
     <item hash="fd2c49b75dd3f69e189de110135f12cb" sprite="Domaric (Sword)" width="40" height="40" animation="" />
-    <item hash="03378c8c00a6deef1b6529086daf70ab" sprite="Donhort (P1)" width="48" height="40" animation="" />
     <item hash="03a5054f164036662f38e11559381864" sprite="Donhort (P1)" width="48" height="40" animation="" />
-    <item hash="04e2a99b3be96d1f3ac786737736cac8" sprite="Donhort (P1)" width="48" height="40" animation="" />
     <item hash="0531b6139099d08bc7240b26cb003894" sprite="Donhort (P1)" width="48" height="40" animation="" />
-    <item hash="0989c012a027a4499cbe659c18d7c4c7" sprite="Donhort (P1)" width="48" height="40" animation="" />
-    <item hash="099024346666c01bc647a323551a4415" sprite="Donhort (P1)" width="48" height="40" animation="" />
-    <item hash="0a35ccf341b0a7954bffc029eeea1760" sprite="Donhort (P1)" width="48" height="40" animation="" />
-    <item hash="0a4b4add3b874d847e0178483d31ca78" sprite="Donhort (P1)" width="48" height="40" animation="" />
     <item hash="0c92fa5df55ec56ceb8f510e09b45c5e" sprite="Donhort (P1)" width="48" height="40" animation="" />
     <item hash="0d438ca2f7683319fae727e38c6ba434" sprite="Donhort (P1)" width="48" height="40" animation="" />
     <item hash="0d8d003acc52246e01fe32f18d045d46" sprite="Donhort (P1)" width="48" height="40" animation="" />
@@ -5387,9 +5381,6 @@
     <item hash="21a6f9e77e17a2b5e6f1698393278c1c" sprite="Donhort (P1)" width="48" height="40" animation="" />
     <item hash="21fc60204b7699d32d8d198c2b7a042b" sprite="Donhort (P1)" width="48" height="40" animation="" />
     <item hash="23bc45ffe8691e1738853d8d85fa1719" sprite="Donhort (P1)" width="48" height="40" animation="" />
-    <item hash="243bc98fcdd47bec3a1bc397bf6a96dd" sprite="Donhort (P1)" width="48" height="40" animation="" />
-    <item hash="2e0cc8085509c2cb912846cd3e82185e" sprite="Donhort (P1)" width="48" height="40" animation="" />
-    <item hash="2f7b489f23dec5e19903fbab5d190085" sprite="Donhort (P1)" width="48" height="40" animation="" />
     <item hash="326e88651f841cdc5f4830bb6cf7255f" sprite="Donhort (P1)" width="48" height="40" animation="" />
     <item hash="33d1f8c269172f633a76b084ac8bb67a" sprite="Donhort (P1)" width="48" height="40" animation="" />
     <item hash="38cbfb297838fd6c30696b4a1b7c546a" sprite="Donhort (P1)" width="48" height="40" animation="" />
@@ -5399,68 +5390,40 @@
     <item hash="3fa4f8fc5f61762344a622df35c0ded7" sprite="Donhort (P1)" width="48" height="40" animation="" />
     <item hash="48d807a29a0197e6f2bda6ab63b763bd" sprite="Donhort (P1)" width="48" height="40" animation="" />
     <item hash="4c6fad3d73f7fce83487bf92338a3329" sprite="Donhort (P1)" width="48" height="40" animation="" />
-    <item hash="5384400b49f2e5769d605f01d090c1bc" sprite="Donhort (P1)" width="48" height="40" animation="" />
-    <item hash="54cdd4ca0f6a40a425da61f40f58db69" sprite="Donhort (P1)" width="48" height="40" animation="" />
     <item hash="5873ec203b71e2ec8c048e4c85023c87" sprite="Donhort (P1)" width="48" height="40" animation="" />
-    <item hash="588681778a95c6a916a814ea74bb4da6" sprite="Donhort (P1)" width="48" height="40" animation="" />
     <item hash="5be5c2174b668f4a57c2320a03049b8b" sprite="Donhort (P1)" width="48" height="40" animation="" />
-    <item hash="5c7bfd44510d6362cf5013b4cacbf2e9" sprite="Donhort (P1)" width="48" height="40" animation="" />
-    <item hash="67743f60cc95afb2dad42b35475fc7ac" sprite="Donhort (P1)" width="48" height="40" animation="" />
     <item hash="68a6aadc7f711d34e6ff8b7e3ec2e0e7" sprite="Donhort (P1)" width="48" height="40" animation="" />
-    <item hash="68c951aaa70ce3fd959133f45218f8eb" sprite="Donhort (P1)" width="48" height="40" animation="" />
     <item hash="6cb58ba7fb654bf386f0e276c43787f9" sprite="Donhort (P1)" width="48" height="40" animation="" />
     <item hash="6cc0cb83d1324e45dba3ebd57d766d23" sprite="Donhort (P1)" width="48" height="40" animation="" />
     <item hash="6fae21b964f9298d4e03771bef9680c2" sprite="Donhort (P1)" width="48" height="40" animation="" />
     <item hash="766fbc3a785f091719c4384da1cc9072" sprite="Donhort (P1)" width="48" height="40" animation="" />
     <item hash="77a59a8490026222a7f84203822e9c63" sprite="Donhort (P1)" width="48" height="40" animation="" />
-    <item hash="786de532375f4f9f6fb6e4df92fe2fa4" sprite="Donhort (P1)" width="48" height="40" animation="" />
     <item hash="7ba0966f8738f85532d5257a8c355656" sprite="Donhort (P1)" width="48" height="40" animation="" />
-    <item hash="7be4686bf813fa67a3b35aae4e2780db" sprite="Donhort (P1)" width="48" height="40" animation="" />
-    <item hash="7d420436da666e55de81430b8a8622f1" sprite="Donhort (P1)" width="48" height="40" animation="" />
     <item hash="7f0b2d89d35ccaa86ebb66538f209fe3" sprite="Donhort (P1)" width="48" height="40" animation="" />
-    <item hash="7f745f5d6cc9eb63ddf59c8ae7db7e09" sprite="Donhort (P1)" width="48" height="40" animation="" />
-    <item hash="801a2000204a3a66f41612db9a38233b" sprite="Donhort (P1)" width="48" height="40" animation="" />
     <item hash="805adf6de6bfa2d0b50903b915e01438" sprite="Donhort (P1)" width="48" height="40" animation="" />
     <item hash="80ecc8c1f18d067e25fa0a105b1b2d47" sprite="Donhort (P1)" width="48" height="40" animation="" />
-    <item hash="8191c8f5dcdc016d3dc0f51974e33bd8" sprite="Donhort (P1)" width="48" height="40" animation="" />
-    <item hash="845bfaef0c12e69a7a197cf2576452db" sprite="Donhort (P1)" width="48" height="40" animation="" />
-    <item hash="88e7a6a0f3ee950f78ee9bbdde89ac13" sprite="Donhort (P1)" width="48" height="40" animation="" />
     <item hash="8a66da31b528e9a938bc654160fa8e48" sprite="Donhort (P1)" width="48" height="40" animation="" />
     <item hash="8c333ce0010123be647baa9a5c062be4" sprite="Donhort (P1)" width="48" height="40" animation="" />
-    <item hash="8dbf2e93b61c30a4531b7f0e6b515a95" sprite="Donhort (P1)" width="48" height="40" animation="" />
     <item hash="8f0a85b93f6368a2888be5d413e06133" sprite="Donhort (P1)" width="48" height="40" animation="" />
-    <item hash="90db823577146742ff1529aada93f8f9" sprite="Donhort (P1)" width="48" height="40" animation="" />
     <item hash="924eb8a750e1a95a4460c217db78672b" sprite="Donhort (P1)" width="48" height="40" animation="" />
     <item hash="9261dab3c20a81bb0b877519cca25eea" sprite="Donhort (P1)" width="48" height="40" animation="" />
-    <item hash="937d0e7b3e1b0c1b7ff58ea471bc8dbe" sprite="Donhort (P1)" width="48" height="40" animation="" />
-    <item hash="9917ae8eee304c2e1dfb17b453d32ab2" sprite="Donhort (P1)" width="48" height="40" animation="" />
     <item hash="9ad248c2129976ea7afdf41a880eb104" sprite="Donhort (P1)" width="48" height="40" animation="" />
     <item hash="9b3a091b3a600ba28e2c8c28db33249f" sprite="Donhort (P1)" width="48" height="40" animation="" />
-    <item hash="9e33f5c708e511f1b08ed3aa9a68b76b" sprite="Donhort (P1)" width="48" height="40" animation="" />
     <item hash="9e65eeadf3535be1df96539f9ccf369e" sprite="Donhort (P1)" width="48" height="40" animation="" />
     <item hash="a021f3c1e9d5de3d7880b94f1bce9402" sprite="Donhort (P1)" width="48" height="40" animation="" />
     <item hash="aadf9cc3eb68c8b5a36d118c02d8f830" sprite="Donhort (P1)" width="48" height="40" animation="" />
     <item hash="ad4c532aa1a3a4632ebb5ebf52d60e7d" sprite="Donhort (P1)" width="48" height="40" animation="" />
     <item hash="b5868782c1fa674606f8e1ae07db0862" sprite="Donhort (P1)" width="48" height="40" animation="" />
     <item hash="b764938a1d0119a850eb213f6edb96bf" sprite="Donhort (P1)" width="48" height="40" animation="" />
-    <item hash="b7b4db0a7ef4903938db94c4f3df4275" sprite="Donhort (P1)" width="48" height="40" animation="" />
     <item hash="ba9aec5d0eb12c34f1091f1def859d63" sprite="Donhort (P1)" width="48" height="40" animation="" />
-    <item hash="bb9ddca7077be08a84068bdb09102ead" sprite="Donhort (P1)" width="48" height="40" animation="" />
-    <item hash="bc4bb9d2d625877109e462ad963f671b" sprite="Donhort (P1)" width="48" height="40" animation="" />
     <item hash="bec1591ccadb82ac5cc36eabb94f0776" sprite="Donhort (P1)" width="48" height="40" animation="" />
     <item hash="bf514312f72276caa2c31045214e8017" sprite="Donhort (P1)" width="48" height="40" animation="" />
-    <item hash="bf9f0eef2b54ac94bfd05c45825f9a1c" sprite="Donhort (P1)" width="48" height="40" animation="" />
-    <item hash="c638832146e111c2793fe37d20a236c3" sprite="Donhort (P1)" width="48" height="40" animation="" />
     <item hash="c7f6bc44e74f95ca5a79a97e4d1830e6" sprite="Donhort (P1)" width="48" height="40" animation="" />
     <item hash="ca9dc9e6da70d72d1e432c545e77e9ac" sprite="Donhort (P1)" width="48" height="40" animation="" />
     <item hash="cbeac63f3c23a44f29aa355f85ff1a8d" sprite="Donhort (P1)" width="48" height="40" animation="" />
     <item hash="cceebf9368ba32ffe7a327d842afab61" sprite="Donhort (P1)" width="48" height="40" animation="" />
     <item hash="cd70f8254cd0757c0163d84675664b57" sprite="Donhort (P1)" width="48" height="40" animation="" />
-    <item hash="cd9f14ea4ca81dc18f2b1289dc8db3e8" sprite="Donhort (P1)" width="48" height="40" animation="" />
-    <item hash="cffd1c73900bc56ca4330ecfc6bbc7a6" sprite="Donhort (P1)" width="48" height="40" animation="" />
     <item hash="d250af6a87a06a9801b555bcd75fd40a" sprite="Donhort (P1)" width="48" height="40" animation="" />
-    <item hash="d42c65c8cc60f33e09f92b64bb161c87" sprite="Donhort (P1)" width="48" height="40" animation="" />
-    <item hash="d709f10399724411ff063ff83f33a618" sprite="Donhort (P1)" width="48" height="40" animation="" />
     <item hash="d822a5110189faa9538b9abf6d385ec0" sprite="Donhort (P1)" width="48" height="40" animation="" />
     <item hash="e01b3fa37a6eee66b5df4c892bf83e74" sprite="Donhort (P1)" width="48" height="40" animation="" />
     <item hash="e155daa57e5e348c528050a0379c2185" sprite="Donhort (P1)" width="48" height="40" animation="" />
@@ -5468,18 +5431,11 @@
     <item hash="e2a5cf27d196fd7fc89fc88d94b54ed8" sprite="Donhort (P1)" width="48" height="40" animation="" />
     <item hash="eba60c29717f1256784bc6356fbd1b4b" sprite="Donhort (P1)" width="48" height="40" animation="" />
     <item hash="ecb83589ae1dd1b3b714b16122c51305" sprite="Donhort (P1)" width="48" height="40" animation="" />
-    <item hash="ede0f81408c40990d371a74151feec77" sprite="Donhort (P1)" width="48" height="40" animation="" />
     <item hash="f02a5de9f8206a94b06fc76e0eba1fde" sprite="Donhort (P1)" width="48" height="40" animation="" />
-    <item hash="f14a2cb7a73d896c569a72b9e7d74472" sprite="Donhort (P1)" width="48" height="40" animation="" />
-    <item hash="f1aa379f6d88e40d2dd4eaccf294efec" sprite="Donhort (P1)" width="48" height="40" animation="" />
-    <item hash="f1e77128a6875b9deb8f4e006693059f" sprite="Donhort (P1)" width="48" height="40" animation="" />
-    <item hash="f4812dedf87162a8fddea41a691f310b" sprite="Donhort (P1)" width="48" height="40" animation="" />
     <item hash="f4b9b4d6ca3c2ab5909a662f610f20c1" sprite="Donhort (P1)" width="48" height="40" animation="" />
-    <item hash="f57199a58b739a931dd75c66c9a96774" sprite="Donhort (P1)" width="48" height="40" animation="" />
     <item hash="f759f2c9f317922c90dc787bf815cc8b" sprite="Donhort (P1)" width="48" height="40" animation="" />
     <item hash="f7703b96371ad56cf52662936667b533" sprite="Donhort (P1)" width="48" height="40" animation="" />
     <item hash="fc34fbe3c9cd387a540c9227663e2ab2" sprite="Donhort (P1)" width="48" height="40" animation="" />
-    <item hash="fc89dfb85121aba5b863c0b91b88776d" sprite="Donhort (P1)" width="48" height="40" animation="" />
     <item hash="fd2a7d638270dd02cc03d4fe91baea63" sprite="Donhort (P1)" width="48" height="40" animation="" />
     <item hash="fe04dbacd59d639962d454800eb71c55" sprite="Donhort (P1)" width="48" height="40" animation="" />
     <item hash="ff0fce1a119464d88f11299e9a6f0198" sprite="Donhort (P1)" width="48" height="40" animation="" />
@@ -5488,18 +5444,62 @@
     <item hash="50511b8416a9dd92dd292bbf930357f5" sprite="Donhort (P1)" width="48" height="40" animation="Getting Up" />
     <item hash="61072d1cf58562e0e7281baa4e1dfd1c" sprite="Donhort (P1)" width="48" height="40" animation="Getting Up" />
     <item hash="cf0b1e4ae082cd8d3a2ace58e2e5f35d" sprite="Donhort (P1)" width="48" height="40" animation="Getting Up" />
-    <item hash="171ab350b8a19b7fcb2db8a8725cf598" sprite="Donhort (P1)" width="48" height="40" animation="Sleeping" />
-    <item hash="4462c7598560bcd832b94479ed535688" sprite="Donhort (P1)" width="48" height="40" animation="Sleeping" />
-    <item hash="57405c4049140bd0f112faaf46d92bbd" sprite="Donhort (P1)" width="48" height="40" animation="Sleeping" />
-    <item hash="5a821c4ccb56c1ce52d9229c126cb7c9" sprite="Donhort (P1)" width="48" height="40" animation="Sleeping" />
-    <item hash="73824eef69963dd1d284bc63ad2c6e16" sprite="Donhort (P1)" width="48" height="40" animation="Sleeping" />
-    <item hash="778a06a015be067eb5d3180a0237e542" sprite="Donhort (P1)" width="48" height="40" animation="Sleeping" />
-    <item hash="7c0d9551861e807bf72015047754fa49" sprite="Donhort (P1)" width="48" height="40" animation="Sleeping" />
-    <item hash="7cf5c4819e63d46c57a4a30f5afe50f1" sprite="Donhort (P1)" width="48" height="40" animation="Sleeping" />
-    <item hash="7f40f5ee54fdb94acb9c0813d2af6ec6" sprite="Donhort (P1)" width="48" height="40" animation="Sleeping" />
-    <item hash="951b895b7339d81834f4ce425ed1f7ae" sprite="Donhort (P1)" width="48" height="40" animation="Sleeping" />
-    <item hash="f8b19a2dea05e9208966076622087a49" sprite="Donhort (P1)" width="48" height="40" animation="Sleeping" />
-    <item hash="fb61c5f248a10d1cd5beb2a9f9cfb355" sprite="Donhort (P1)" width="48" height="40" animation="Sleeping" />
+    <item hash="03378c8c00a6deef1b6529086daf70ab" sprite="Donhort (P1) (Weaponless)" width="48" height="40" animation="" />
+    <item hash="04e2a99b3be96d1f3ac786737736cac8" sprite="Donhort (P1) (Weaponless)" width="48" height="40" animation="" />
+    <item hash="0989c012a027a4499cbe659c18d7c4c7" sprite="Donhort (P1) (Weaponless)" width="48" height="40" animation="" />
+    <item hash="099024346666c01bc647a323551a4415" sprite="Donhort (P1) (Weaponless)" width="48" height="40" animation="" />
+    <item hash="0a35ccf341b0a7954bffc029eeea1760" sprite="Donhort (P1) (Weaponless)" width="48" height="40" animation="" />
+    <item hash="0a4b4add3b874d847e0178483d31ca78" sprite="Donhort (P1) (Weaponless)" width="48" height="40" animation="" />
+    <item hash="243bc98fcdd47bec3a1bc397bf6a96dd" sprite="Donhort (P1) (Weaponless)" width="48" height="40" animation="" />
+    <item hash="2e0cc8085509c2cb912846cd3e82185e" sprite="Donhort (P1) (Weaponless)" width="48" height="40" animation="" />
+    <item hash="2f7b489f23dec5e19903fbab5d190085" sprite="Donhort (P1) (Weaponless)" width="48" height="40" animation="" />
+    <item hash="5384400b49f2e5769d605f01d090c1bc" sprite="Donhort (P1) (Weaponless)" width="48" height="40" animation="" />
+    <item hash="54cdd4ca0f6a40a425da61f40f58db69" sprite="Donhort (P1) (Weaponless)" width="48" height="40" animation="" />
+    <item hash="588681778a95c6a916a814ea74bb4da6" sprite="Donhort (P1) (Weaponless)" width="48" height="40" animation="" />
+    <item hash="5c7bfd44510d6362cf5013b4cacbf2e9" sprite="Donhort (P1) (Weaponless)" width="48" height="40" animation="" />
+    <item hash="67743f60cc95afb2dad42b35475fc7ac" sprite="Donhort (P1) (Weaponless)" width="48" height="40" animation="" />
+    <item hash="68c951aaa70ce3fd959133f45218f8eb" sprite="Donhort (P1) (Weaponless)" width="48" height="40" animation="" />
+    <item hash="786de532375f4f9f6fb6e4df92fe2fa4" sprite="Donhort (P1) (Weaponless)" width="48" height="40" animation="" />
+    <item hash="7be4686bf813fa67a3b35aae4e2780db" sprite="Donhort (P1) (Weaponless)" width="48" height="40" animation="" />
+    <item hash="7d420436da666e55de81430b8a8622f1" sprite="Donhort (P1) (Weaponless)" width="48" height="40" animation="" />
+    <item hash="7f745f5d6cc9eb63ddf59c8ae7db7e09" sprite="Donhort (P1) (Weaponless)" width="48" height="40" animation="" />
+    <item hash="801a2000204a3a66f41612db9a38233b" sprite="Donhort (P1) (Weaponless)" width="48" height="40" animation="" />
+    <item hash="8191c8f5dcdc016d3dc0f51974e33bd8" sprite="Donhort (P1) (Weaponless)" width="48" height="40" animation="" />
+    <item hash="845bfaef0c12e69a7a197cf2576452db" sprite="Donhort (P1) (Weaponless)" width="48" height="40" animation="" />
+    <item hash="88e7a6a0f3ee950f78ee9bbdde89ac13" sprite="Donhort (P1) (Weaponless)" width="48" height="40" animation="" />
+    <item hash="8dbf2e93b61c30a4531b7f0e6b515a95" sprite="Donhort (P1) (Weaponless)" width="48" height="40" animation="" />
+    <item hash="90db823577146742ff1529aada93f8f9" sprite="Donhort (P1) (Weaponless)" width="48" height="40" animation="" />
+    <item hash="937d0e7b3e1b0c1b7ff58ea471bc8dbe" sprite="Donhort (P1) (Weaponless)" width="48" height="40" animation="" />
+    <item hash="9917ae8eee304c2e1dfb17b453d32ab2" sprite="Donhort (P1) (Weaponless)" width="48" height="40" animation="" />
+    <item hash="9e33f5c708e511f1b08ed3aa9a68b76b" sprite="Donhort (P1) (Weaponless)" width="48" height="40" animation="" />
+    <item hash="b7b4db0a7ef4903938db94c4f3df4275" sprite="Donhort (P1) (Weaponless)" width="48" height="40" animation="" />
+    <item hash="bb9ddca7077be08a84068bdb09102ead" sprite="Donhort (P1) (Weaponless)" width="48" height="40" animation="" />
+    <item hash="bc4bb9d2d625877109e462ad963f671b" sprite="Donhort (P1) (Weaponless)" width="48" height="40" animation="" />
+    <item hash="bf9f0eef2b54ac94bfd05c45825f9a1c" sprite="Donhort (P1) (Weaponless)" width="48" height="40" animation="" />
+    <item hash="c638832146e111c2793fe37d20a236c3" sprite="Donhort (P1) (Weaponless)" width="48" height="40" animation="" />
+    <item hash="cd9f14ea4ca81dc18f2b1289dc8db3e8" sprite="Donhort (P1) (Weaponless)" width="48" height="40" animation="" />
+    <item hash="cffd1c73900bc56ca4330ecfc6bbc7a6" sprite="Donhort (P1) (Weaponless)" width="48" height="40" animation="" />
+    <item hash="d42c65c8cc60f33e09f92b64bb161c87" sprite="Donhort (P1) (Weaponless)" width="48" height="40" animation="" />
+    <item hash="d709f10399724411ff063ff83f33a618" sprite="Donhort (P1) (Weaponless)" width="48" height="40" animation="" />
+    <item hash="ede0f81408c40990d371a74151feec77" sprite="Donhort (P1) (Weaponless)" width="48" height="40" animation="" />
+    <item hash="f14a2cb7a73d896c569a72b9e7d74472" sprite="Donhort (P1) (Weaponless)" width="48" height="40" animation="" />
+    <item hash="f1aa379f6d88e40d2dd4eaccf294efec" sprite="Donhort (P1) (Weaponless)" width="48" height="40" animation="" />
+    <item hash="f1e77128a6875b9deb8f4e006693059f" sprite="Donhort (P1) (Weaponless)" width="48" height="40" animation="" />
+    <item hash="f4812dedf87162a8fddea41a691f310b" sprite="Donhort (P1) (Weaponless)" width="48" height="40" animation="" />
+    <item hash="f57199a58b739a931dd75c66c9a96774" sprite="Donhort (P1) (Weaponless)" width="48" height="40" animation="" />
+    <item hash="fc89dfb85121aba5b863c0b91b88776d" sprite="Donhort (P1) (Weaponless)" width="48" height="40" animation="" />
+    <item hash="171ab350b8a19b7fcb2db8a8725cf598" sprite="Donhort (P1) (Weaponless)" width="48" height="40" animation="Sleeping" />
+    <item hash="4462c7598560bcd832b94479ed535688" sprite="Donhort (P1) (Weaponless)" width="48" height="40" animation="Sleeping" />
+    <item hash="57405c4049140bd0f112faaf46d92bbd" sprite="Donhort (P1) (Weaponless)" width="48" height="40" animation="Sleeping" />
+    <item hash="5a821c4ccb56c1ce52d9229c126cb7c9" sprite="Donhort (P1) (Weaponless)" width="48" height="40" animation="Sleeping" />
+    <item hash="73824eef69963dd1d284bc63ad2c6e16" sprite="Donhort (P1) (Weaponless)" width="48" height="40" animation="Sleeping" />
+    <item hash="778a06a015be067eb5d3180a0237e542" sprite="Donhort (P1) (Weaponless)" width="48" height="40" animation="Sleeping" />
+    <item hash="7c0d9551861e807bf72015047754fa49" sprite="Donhort (P1) (Weaponless)" width="48" height="40" animation="Sleeping" />
+    <item hash="7cf5c4819e63d46c57a4a30f5afe50f1" sprite="Donhort (P1) (Weaponless)" width="48" height="40" animation="Sleeping" />
+    <item hash="7f40f5ee54fdb94acb9c0813d2af6ec6" sprite="Donhort (P1) (Weaponless)" width="48" height="40" animation="Sleeping" />
+    <item hash="951b895b7339d81834f4ce425ed1f7ae" sprite="Donhort (P1) (Weaponless)" width="48" height="40" animation="Sleeping" />
+    <item hash="f8b19a2dea05e9208966076622087a49" sprite="Donhort (P1) (Weaponless)" width="48" height="40" animation="Sleeping" />
+    <item hash="fb61c5f248a10d1cd5beb2a9f9cfb355" sprite="Donhort (P1) (Weaponless)" width="48" height="40" animation="Sleeping" />
     <item hash="065388557d012017a8743cded7037de7" sprite="Donhort (P2)" width="48" height="40" animation="" />
     <item hash="0eddc2e2fc991007ca74548c40db4e75" sprite="Donhort (P2)" width="48" height="40" animation="" />
     <item hash="1172d1ef0dd1ce124987e5d282dc2087" sprite="Donhort (P2)" width="48" height="40" animation="" />
@@ -22881,13 +22881,22 @@
     <item hash="f2da27e1c87c9095b90f6a14ac221f0e" sprite="Thief" width="40" height="40" animation="" />
     <item hash="f63e19c344e658c8af491ea946c90611" sprite="Thief" width="40" height="40" animation="" />
     <item hash="ff29f9ff32372bc3b94bae62bd6bb3b6" sprite="Thief" width="40" height="40" animation="" />
+    <item hash="148137b2a0b3485a70cbc6c7135e5274" sprite="Thief (Weaponless)" width="40" height="40" animation="" />
+    <item hash="1c950a4fec5276f474c9e09663f1a394" sprite="Thief (Weaponless)" width="40" height="40" animation="" />
+    <item hash="2d7643d16661df48636398d8f922aa07" sprite="Thief (Weaponless)" width="40" height="40" animation="" />
+    <item hash="7ba95b58c5b85b7c42e5c8bebb24ea2d" sprite="Thief (Weaponless)" width="40" height="40" animation="" />
+    <item hash="8251f0cdc10c4607541408b1a9478da3" sprite="Thief (Weaponless)" width="40" height="40" animation="" />
+    <item hash="84d1a5c50bbece7d0251fffdbd6d03d3" sprite="Thief (Weaponless)" width="40" height="40" animation="" />
+    <item hash="9255ee9c84c468800a7c50b0a6b63c23" sprite="Thief (Weaponless)" width="40" height="40" animation="" />
+    <item hash="9b5e5f9d5cebd547b2536963e92fa537" sprite="Thief (Weaponless)" width="40" height="40" animation="" />
+    <item hash="a3bb46eb7e6e851c62958dd63e9dade8" sprite="Thief (Weaponless)" width="40" height="40" animation="" />
+    <item hash="d595a5b75557e3eaf1ef1f300e85e26d" sprite="Thief (Weaponless)" width="40" height="40" animation="" />
+    <item hash="d68f463be7c8b2069a9c670ec9178630" sprite="Thief (Weaponless)" width="40" height="40" animation="" />
+    <item hash="fae266303dc92c52f3315a8a47ee18e2" sprite="Thief (Weaponless)" width="40" height="40" animation="" />
     <item hash="01ca5bda8a055479ab9c7947ea178aa8" sprite="Thief w/o Weapon" width="40" height="40" animation="" />
-    <item hash="148137b2a0b3485a70cbc6c7135e5274" sprite="Thief w/o Weapon" width="40" height="40" animation="" />
     <item hash="19cfe656804d1350e336cc93b360f825" sprite="Thief w/o Weapon" width="40" height="40" animation="" />
-    <item hash="1c950a4fec5276f474c9e09663f1a394" sprite="Thief w/o Weapon" width="40" height="40" animation="" />
     <item hash="238fe174f40f359ec3ee5f896057fb87" sprite="Thief w/o Weapon" width="40" height="40" animation="" />
     <item hash="2bf5f561f9af3d290c3ad42ad75bd45e" sprite="Thief w/o Weapon" width="40" height="40" animation="" />
-    <item hash="2d7643d16661df48636398d8f922aa07" sprite="Thief w/o Weapon" width="40" height="40" animation="" />
     <item hash="3449c267c4c52644cbd7a145a74f5d57" sprite="Thief w/o Weapon" width="40" height="40" animation="" />
     <item hash="4318ef6040364516f7e63124efba501c" sprite="Thief w/o Weapon" width="40" height="40" animation="" />
     <item hash="692154bd82d1fcc943af9ef998c9698d" sprite="Thief w/o Weapon" width="40" height="40" animation="" />
@@ -22895,24 +22904,15 @@
     <item hash="7502c74b72f58583be74664a78ee0ba7" sprite="Thief w/o Weapon" width="40" height="40" animation="" />
     <item hash="79b3195a2cca838fd3a0c30ba6128c23" sprite="Thief w/o Weapon" width="40" height="40" animation="" />
     <item hash="7ad58afd1c0de0dd78d6be2f8948c2aa" sprite="Thief w/o Weapon" width="40" height="40" animation="" />
-    <item hash="7ba95b58c5b85b7c42e5c8bebb24ea2d" sprite="Thief w/o Weapon" width="40" height="40" animation="" />
-    <item hash="8251f0cdc10c4607541408b1a9478da3" sprite="Thief w/o Weapon" width="40" height="40" animation="" />
-    <item hash="84d1a5c50bbece7d0251fffdbd6d03d3" sprite="Thief w/o Weapon" width="40" height="40" animation="" />
-    <item hash="9255ee9c84c468800a7c50b0a6b63c23" sprite="Thief w/o Weapon" width="40" height="40" animation="" />
-    <item hash="9b5e5f9d5cebd547b2536963e92fa537" sprite="Thief w/o Weapon" width="40" height="40" animation="" />
-    <item hash="a3bb46eb7e6e851c62958dd63e9dade8" sprite="Thief w/o Weapon" width="40" height="40" animation="" />
     <item hash="bf6f5d6b7b17308a383d49ff0cf86142" sprite="Thief w/o Weapon" width="40" height="40" animation="" />
     <item hash="c30c646606ca52b14a760a2559157553" sprite="Thief w/o Weapon" width="40" height="40" animation="" />
     <item hash="c63e62d16d9b8d4904dfae48f3c39912" sprite="Thief w/o Weapon" width="40" height="40" animation="" />
     <item hash="cd13a50d5f3fba1320dd3759fdb4e24b" sprite="Thief w/o Weapon" width="40" height="40" animation="" />
     <item hash="ce21af2176c722b7dc2be58a1a0ef760" sprite="Thief w/o Weapon" width="40" height="40" animation="" />
     <item hash="d371af016b6fa8a89e7da19af3781267" sprite="Thief w/o Weapon" width="40" height="40" animation="" />
-    <item hash="d595a5b75557e3eaf1ef1f300e85e26d" sprite="Thief w/o Weapon" width="40" height="40" animation="" />
-    <item hash="d68f463be7c8b2069a9c670ec9178630" sprite="Thief w/o Weapon" width="40" height="40" animation="" />
     <item hash="e989d343bd7d31ab103039e1cc53872d" sprite="Thief w/o Weapon" width="40" height="40" animation="" />
     <item hash="f26fd84e90c308e2a68f2ae4a9c6cd0f" sprite="Thief w/o Weapon" width="40" height="40" animation="" />
     <item hash="f99121efa0837e64597fbf73d976623c" sprite="Thief w/o Weapon" width="40" height="40" animation="" />
-    <item hash="fae266303dc92c52f3315a8a47ee18e2" sprite="Thief w/o Weapon" width="40" height="40" animation="" />
     <item hash="0267119edcebb6da662ede06dd6ea0d1" sprite="Thousand (P1)" width="56" height="40" animation="" />
     <item hash="0ee25e776d1de5245ea29fce45aa7993" sprite="Thousand (P1)" width="56" height="40" animation="" />
     <item hash="0f6166f97aac94f13ea204b64511f423" sprite="Thousand (P1)" width="56" height="40" animation="" />
@@ -25187,121 +25187,77 @@
     <item hash="e83f1da3001dc3003fa7584ba1a14258" sprite="Wyvern" width="48" height="32" animation="" />
     <item hash="fc891f277691cd9ae44259b5b1362239" sprite="Wyvern" width="48" height="32" animation="" />
     <item hash="fd61e8151f2643f8c3c643642f3d0aec" sprite="Wyvern" width="48" height="32" animation="" />
-    <item hash="057de9d92eb0a1667fe5d8ad9d306ea2" sprite="Yasha" width="40" height="40" animation="" />
     <item hash="05bda09198b66398300e6ae7e6054eed" sprite="Yasha" width="40" height="40" animation="" />
     <item hash="06a7d56fbd8eb230e1e1b0d7b4f45151" sprite="Yasha" width="40" height="40" animation="" />
     <item hash="08029048f007af662fa09be8f730d45d" sprite="Yasha" width="40" height="40" animation="" />
     <item hash="0847669f3722734e21b473a0eee95fd4" sprite="Yasha" width="40" height="40" animation="" />
     <item hash="0ab0b56cdcdf65cfa3e2af63cb8a6048" sprite="Yasha" width="40" height="40" animation="" />
-    <item hash="0fc6241947df85af93f68354a316cb4e" sprite="Yasha" width="40" height="40" animation="" />
-    <item hash="1646d3ff02e1a659d031aa74bfd606c1" sprite="Yasha" width="40" height="40" animation="" />
     <item hash="1763dcef21120b150e75b9b81b89c70e" sprite="Yasha" width="40" height="40" animation="" />
-    <item hash="186314631274efcc07bc0492eff11199" sprite="Yasha" width="40" height="40" animation="" />
     <item hash="1bb0ce33fd22cf8bdcc11367024f8f81" sprite="Yasha" width="40" height="40" animation="" />
-    <item hash="1c2bd9f62d025cbc0d5925be10f06db3" sprite="Yasha" width="40" height="40" animation="" />
     <item hash="1ca0aa5b642cd5eb604528b921594499" sprite="Yasha" width="40" height="40" animation="" />
-    <item hash="1e246f7b8539aa87560048aa5ce8d55a" sprite="Yasha" width="40" height="40" animation="" />
     <item hash="1f0b13ce451945fc8becbe52714746ee" sprite="Yasha" width="40" height="40" animation="" />
     <item hash="214269880e0dcdaede5420596d3b1d34" sprite="Yasha" width="40" height="40" animation="" />
-    <item hash="21b8426f8da2a321f0a8fb5099a5a594" sprite="Yasha" width="40" height="40" animation="" />
     <item hash="23cbae195d2e4d66647ffcf9b76f2618" sprite="Yasha" width="40" height="40" animation="" />
     <item hash="2479ff7ea2e14387fa5229f0e509decb" sprite="Yasha" width="40" height="40" animation="" />
     <item hash="258b0070d0e0f71a13a933faae4cf0cc" sprite="Yasha" width="40" height="40" animation="" />
     <item hash="27c93dfde87f111f39f9a064db0ef202" sprite="Yasha" width="40" height="40" animation="" />
     <item hash="27df8bebd779dbf2b8a8ebdc71636cbd" sprite="Yasha" width="40" height="40" animation="" />
     <item hash="281da7091aba190ecd67f879cea68ba5" sprite="Yasha" width="40" height="40" animation="" />
-    <item hash="298ae0a5ff55a9c8c63e1c1bc4219b01" sprite="Yasha" width="40" height="40" animation="" />
     <item hash="2b54b98d5c5e675238b3e72c8bc39ba9" sprite="Yasha" width="40" height="40" animation="" />
     <item hash="2d1fbb83fdd3d8f050103732a6b1011e" sprite="Yasha" width="40" height="40" animation="" />
     <item hash="310d09519bfcdc21b40e71a537335c93" sprite="Yasha" width="40" height="40" animation="" />
-    <item hash="3588a9f59e9fedf846b23ce242f2c265" sprite="Yasha" width="40" height="40" animation="" />
     <item hash="386fc99d41d63cd29b86ccb193ca61b8" sprite="Yasha" width="40" height="40" animation="" />
     <item hash="39e15753deedfafb46b6a45dd36592ef" sprite="Yasha" width="40" height="40" animation="" />
-    <item hash="3c3692370a8ee8563e1643763940e132" sprite="Yasha" width="40" height="40" animation="" />
     <item hash="3dae92face2be34740221e405814d44c" sprite="Yasha" width="40" height="40" animation="" />
-    <item hash="3daf50197ec7ecb400689ce87aba74e9" sprite="Yasha" width="40" height="40" animation="" />
-    <item hash="3eab92dd121c8566b10e706e3d254260" sprite="Yasha" width="40" height="40" animation="" />
     <item hash="3f7298f4e64313b1cf5dd13dca07f563" sprite="Yasha" width="40" height="40" animation="" />
-    <item hash="41c207d5eee4881a2d09c96a06a3f28e" sprite="Yasha" width="40" height="40" animation="" />
-    <item hash="44061ecf2bb1072c1438733f694e2b6f" sprite="Yasha" width="40" height="40" animation="" />
     <item hash="45d1699db64c17a04c48652bb957e9d7" sprite="Yasha" width="40" height="40" animation="" />
     <item hash="47a5945c9ac03626d393bf0c2b82b745" sprite="Yasha" width="40" height="40" animation="" />
     <item hash="487f1edb15c540a0a740b4eea77938da" sprite="Yasha" width="40" height="40" animation="" />
-    <item hash="48ee4ba7c05349fd49a80c715fbd8a80" sprite="Yasha" width="40" height="40" animation="" />
     <item hash="4b20be44d5f80e821ce6bcdbbeb203db" sprite="Yasha" width="40" height="40" animation="" />
     <item hash="4b82cca2860426d2d37c2d00577eda4d" sprite="Yasha" width="40" height="40" animation="" />
     <item hash="5045461187761bcad7a0935db0b42693" sprite="Yasha" width="40" height="40" animation="" />
-    <item hash="5132c1b00e30ae94ec52086d0a6748b7" sprite="Yasha" width="40" height="40" animation="" />
     <item hash="52ff38cf3800059e685dabe1150593e8" sprite="Yasha" width="40" height="40" animation="" />
-    <item hash="5568d55f4d43f3b5c3a725a5925fcec6" sprite="Yasha" width="40" height="40" animation="" />
     <item hash="5c1e621e2ac82aa52d4e96b39846d837" sprite="Yasha" width="40" height="40" animation="" />
     <item hash="5ebee7521ff3e873c533b867205ce565" sprite="Yasha" width="40" height="40" animation="" />
     <item hash="6065a37e2a0deb9df4b3b05d82fac65a" sprite="Yasha" width="40" height="40" animation="" />
-    <item hash="649b2cf5558b74902230da4efa29f48a" sprite="Yasha" width="40" height="40" animation="" />
-    <item hash="65fc0eb64446189d13f74e730e483a02" sprite="Yasha" width="40" height="40" animation="" />
     <item hash="66f3e094cb82035ea1b748fbe57a851d" sprite="Yasha" width="40" height="40" animation="" />
-    <item hash="6766138c66e4098078e1f127879e061d" sprite="Yasha" width="40" height="40" animation="" />
-    <item hash="693f92149501ee045335ae03cc154049" sprite="Yasha" width="40" height="40" animation="" />
     <item hash="6ac2b4b640ae2b241b0e2157e5bee7cb" sprite="Yasha" width="40" height="40" animation="" />
     <item hash="6cb2f1b1da4e041cab47c654e927d70c" sprite="Yasha" width="40" height="40" animation="" />
     <item hash="6e9be8db8b8769934a18c97b935b9154" sprite="Yasha" width="40" height="40" animation="" />
-    <item hash="6ed66e05ecc9b97960893fc3a0634994" sprite="Yasha" width="40" height="40" animation="" />
     <item hash="6f067c1d04307c4153393f1a1dd37e31" sprite="Yasha" width="40" height="40" animation="" />
     <item hash="75f021087c3a8c1888a654c72a2b5777" sprite="Yasha" width="40" height="40" animation="" />
-    <item hash="77ca8dd97c7612001e1f29d33143732f" sprite="Yasha" width="40" height="40" animation="" />
-    <item hash="7b4d3840ea34a2cc1658855f6e6bcb58" sprite="Yasha" width="40" height="40" animation="" />
-    <item hash="7c06b469111a05285c516c072214f2f9" sprite="Yasha" width="40" height="40" animation="" />
     <item hash="86ef1365f578d307df320cfb418faf5d" sprite="Yasha" width="40" height="40" animation="" />
     <item hash="87baf26e8238c15f1fb363a7b2112d18" sprite="Yasha" width="40" height="40" animation="" />
     <item hash="87bcc0d00faf35471bb2cae63ef15f91" sprite="Yasha" width="40" height="40" animation="" />
-    <item hash="8ca89037a2a12ed1d5ccd908db6ec3ea" sprite="Yasha" width="40" height="40" animation="" />
     <item hash="8da9a11f916e39c6f9b62bf06457092d" sprite="Yasha" width="40" height="40" animation="" />
-    <item hash="8f31d3f89b7507ceebb7636b3a78325a" sprite="Yasha" width="40" height="40" animation="" />
-    <item hash="903959611806b140809530a89952e726" sprite="Yasha" width="40" height="40" animation="" />
-    <item hash="95b1a40dd6006e67986a828e1ff0c16e" sprite="Yasha" width="40" height="40" animation="" />
-    <item hash="963191ca5402fab9a4b8174d571f944b" sprite="Yasha" width="40" height="40" animation="" />
     <item hash="9aca41c79893958360cdc8709cfd6888" sprite="Yasha" width="40" height="40" animation="" />
-    <item hash="9bfe77e589cc0c162ce0fe13ff098aae" sprite="Yasha" width="40" height="40" animation="" />
     <item hash="9c5002188bb2a6f58a06dec87f0d6b42" sprite="Yasha" width="40" height="40" animation="" />
     <item hash="9d6f79517dd000743485dd663bfa01bd" sprite="Yasha" width="40" height="40" animation="" />
-    <item hash="a0be75abfb4cc2c747de9848609f2f64" sprite="Yasha" width="40" height="40" animation="" />
-    <item hash="a0ffcba695d370e990ad591a9e4fcf1c" sprite="Yasha" width="40" height="40" animation="" />
     <item hash="a281c1809be1635fbb1e004de223a2a8" sprite="Yasha" width="40" height="40" animation="" />
     <item hash="a3ec6a6b0ff8c803e78d7633af9f9779" sprite="Yasha" width="40" height="40" animation="" />
     <item hash="a4ae5934c3d92f736d69be8e5b4183b0" sprite="Yasha" width="40" height="40" animation="" />
     <item hash="a95e5dabbe2a0db96b2846deb76a0407" sprite="Yasha" width="40" height="40" animation="" />
     <item hash="af180d0f2877d7f3545179784dc3e3de" sprite="Yasha" width="40" height="40" animation="" />
     <item hash="af8d3c7a650c7758022d17d09f90ef38" sprite="Yasha" width="40" height="40" animation="" />
-    <item hash="b03881b5e398824aed7d8847a88b099b" sprite="Yasha" width="40" height="40" animation="" />
     <item hash="b39af5b04319c333559056b8346b3f47" sprite="Yasha" width="40" height="40" animation="" />
     <item hash="b43b460267f65b43cbe12bcb38868aaf" sprite="Yasha" width="40" height="40" animation="" />
     <item hash="b5525e08d3eed5a24d978d30d9553060" sprite="Yasha" width="40" height="40" animation="" />
     <item hash="b61df25b5dd3713da1572f963d8b1e9a" sprite="Yasha" width="40" height="40" animation="" />
     <item hash="b6b6c153a65e3681c0e5536b0c6982dd" sprite="Yasha" width="40" height="40" animation="" />
-    <item hash="b70d991289b691beaf532484b571e790" sprite="Yasha" width="40" height="40" animation="" />
-    <item hash="b8c23e4b0d6722f73ef692dd8f20ddb9" sprite="Yasha" width="40" height="40" animation="" />
     <item hash="babf811e32a4449597ce60fab0cbc79b" sprite="Yasha" width="40" height="40" animation="" />
     <item hash="bddd7b7fc524c4f362a7e3786536a833" sprite="Yasha" width="40" height="40" animation="" />
-    <item hash="c1659ea83adefc9728423a982d9d86f8" sprite="Yasha" width="40" height="40" animation="" />
     <item hash="c4174cdfb8309297e7304f459a9a7171" sprite="Yasha" width="40" height="40" animation="" />
     <item hash="c5cc0a5f4d21962ac8cede02c7638eb3" sprite="Yasha" width="40" height="40" animation="" />
-    <item hash="c6d094f8fa18a85d4e5c2623ed90a82e" sprite="Yasha" width="40" height="40" animation="" />
     <item hash="ca7f97ee8e04eb1ae357060e1284212d" sprite="Yasha" width="40" height="40" animation="" />
     <item hash="cae7f2bc031479222631e7be6ea6c2cb" sprite="Yasha" width="40" height="40" animation="" />
-    <item hash="cb87ad5ab0890b8286c67e1455a97813" sprite="Yasha" width="40" height="40" animation="" />
     <item hash="cbe73940d842ae40a996e9df5371297b" sprite="Yasha" width="40" height="40" animation="" />
     <item hash="d57c4103340ee498e862c5002d3e8dbb" sprite="Yasha" width="40" height="40" animation="" />
     <item hash="df1f1e5a93d918b5a306bb381b96e865" sprite="Yasha" width="40" height="40" animation="" />
-    <item hash="e244cf65ff0297715e5ccdbca04f84e9" sprite="Yasha" width="40" height="40" animation="" />
     <item hash="e8f2411e4e9dd8b2d370b35e8ce07e5c" sprite="Yasha" width="40" height="40" animation="" />
     <item hash="ef7ccfbc51edaff44f0d2bdb052109a1" sprite="Yasha" width="40" height="40" animation="" />
     <item hash="f031ddbf9b8201a94d1ae6771a8ede1e" sprite="Yasha" width="40" height="40" animation="" />
-    <item hash="f099d1cf8ae8cdb64824f5d8c2c9ba81" sprite="Yasha" width="40" height="40" animation="" />
-    <item hash="f756e6615874c9855e307d7323ded0fb" sprite="Yasha" width="40" height="40" animation="" />
     <item hash="f85ae86d2279af7358ffe3a3982c215b" sprite="Yasha" width="40" height="40" animation="" />
-    <item hash="f9382de6bb17c7dc78bdf17b12eefc6d" sprite="Yasha" width="40" height="40" animation="" />
     <item hash="fbbd1f8301fccbfac65f48ad7a8b7cb5" sprite="Yasha" width="40" height="40" animation="" />
-    <item hash="fbe0307ac6562e9a90c23fb5172c78fc" sprite="Yasha" width="40" height="40" animation="" />
     <item hash="feed14760eae5342930cb8cb47c7ff16" sprite="Yasha" width="40" height="40" animation="" />
     <item hash="1b3519b7d52a8009b3d85e9c6dcf8707" sprite="Yasha" width="48" height="32" animation="Defeated" />
     <item hash="2028ffd4581b4ed3087b07657b00dbac" sprite="Yasha" width="48" height="32" animation="Defeated" />
@@ -25311,27 +25267,67 @@
     <item hash="969249a201cdd6a39e9d174cc2e98ec3" sprite="Yasha" width="48" height="32" animation="Defeated" />
     <item hash="9fb0995bd1e1b5b6f3b3903aa51b31d4" sprite="Yasha" width="48" height="32" animation="Defeated" />
     <item hash="cc0d806d0958e88c8f9a331c3a5d57eb" sprite="Yasha" width="48" height="32" animation="Defeated" />
+    <item hash="057de9d92eb0a1667fe5d8ad9d306ea2" sprite="Yasha (Tied-Up)" width="40" height="40" animation="" />
+    <item hash="0fc6241947df85af93f68354a316cb4e" sprite="Yasha (Tied-Up)" width="40" height="40" animation="" />
+    <item hash="186314631274efcc07bc0492eff11199" sprite="Yasha (Tied-Up)" width="40" height="40" animation="" />
+    <item hash="1c2bd9f62d025cbc0d5925be10f06db3" sprite="Yasha (Tied-Up)" width="40" height="40" animation="" />
+    <item hash="1e246f7b8539aa87560048aa5ce8d55a" sprite="Yasha (Tied-Up)" width="40" height="40" animation="" />
+    <item hash="3588a9f59e9fedf846b23ce242f2c265" sprite="Yasha (Tied-Up)" width="40" height="40" animation="" />
+    <item hash="3daf50197ec7ecb400689ce87aba74e9" sprite="Yasha (Tied-Up)" width="40" height="40" animation="" />
+    <item hash="3eab92dd121c8566b10e706e3d254260" sprite="Yasha (Tied-Up)" width="40" height="40" animation="" />
+    <item hash="44061ecf2bb1072c1438733f694e2b6f" sprite="Yasha (Tied-Up)" width="40" height="40" animation="" />
+    <item hash="48ee4ba7c05349fd49a80c715fbd8a80" sprite="Yasha (Tied-Up)" width="40" height="40" animation="" />
+    <item hash="5568d55f4d43f3b5c3a725a5925fcec6" sprite="Yasha (Tied-Up)" width="40" height="40" animation="" />
+    <item hash="649b2cf5558b74902230da4efa29f48a" sprite="Yasha (Tied-Up)" width="40" height="40" animation="" />
+    <item hash="65fc0eb64446189d13f74e730e483a02" sprite="Yasha (Tied-Up)" width="40" height="40" animation="" />
+    <item hash="6766138c66e4098078e1f127879e061d" sprite="Yasha (Tied-Up)" width="40" height="40" animation="" />
+    <item hash="693f92149501ee045335ae03cc154049" sprite="Yasha (Tied-Up)" width="40" height="40" animation="" />
+    <item hash="6ed66e05ecc9b97960893fc3a0634994" sprite="Yasha (Tied-Up)" width="40" height="40" animation="" />
+    <item hash="77ca8dd97c7612001e1f29d33143732f" sprite="Yasha (Tied-Up)" width="40" height="40" animation="" />
+    <item hash="8f31d3f89b7507ceebb7636b3a78325a" sprite="Yasha (Tied-Up)" width="40" height="40" animation="" />
+    <item hash="903959611806b140809530a89952e726" sprite="Yasha (Tied-Up)" width="40" height="40" animation="" />
+    <item hash="9bfe77e589cc0c162ce0fe13ff098aae" sprite="Yasha (Tied-Up)" width="40" height="40" animation="" />
+    <item hash="a0ffcba695d370e990ad591a9e4fcf1c" sprite="Yasha (Tied-Up)" width="40" height="40" animation="" />
+    <item hash="b03881b5e398824aed7d8847a88b099b" sprite="Yasha (Tied-Up)" width="40" height="40" animation="" />
+    <item hash="b70d991289b691beaf532484b571e790" sprite="Yasha (Tied-Up)" width="40" height="40" animation="" />
+    <item hash="b8c23e4b0d6722f73ef692dd8f20ddb9" sprite="Yasha (Tied-Up)" width="40" height="40" animation="" />
+    <item hash="c1659ea83adefc9728423a982d9d86f8" sprite="Yasha (Tied-Up)" width="40" height="40" animation="" />
+    <item hash="c6d094f8fa18a85d4e5c2623ed90a82e" sprite="Yasha (Tied-Up)" width="40" height="40" animation="" />
+    <item hash="e244cf65ff0297715e5ccdbca04f84e9" sprite="Yasha (Tied-Up)" width="40" height="40" animation="" />
+    <item hash="f9382de6bb17c7dc78bdf17b12eefc6d" sprite="Yasha (Tied-Up)" width="40" height="40" animation="" />
     <item hash="08d89cadc7e32a21a6efbfab6ba9d412" sprite="Yasha (Weaponless)" width="40" height="40" animation="" />
     <item hash="08f0b02c471ad8fb576464b1a5da1d11" sprite="Yasha (Weaponless)" width="40" height="40" animation="" />
+    <item hash="1646d3ff02e1a659d031aa74bfd606c1" sprite="Yasha (Weaponless)" width="40" height="40" animation="" />
     <item hash="18278f9b8808f0d75ebe1d5321924cc8" sprite="Yasha (Weaponless)" width="40" height="40" animation="" />
+    <item hash="21b8426f8da2a321f0a8fb5099a5a594" sprite="Yasha (Weaponless)" width="40" height="40" animation="" />
+    <item hash="298ae0a5ff55a9c8c63e1c1bc4219b01" sprite="Yasha (Weaponless)" width="40" height="40" animation="" />
     <item hash="380b36019fe135b645df1e12c634b665" sprite="Yasha (Weaponless)" width="40" height="40" animation="" />
+    <item hash="3c3692370a8ee8563e1643763940e132" sprite="Yasha (Weaponless)" width="40" height="40" animation="" />
+    <item hash="41c207d5eee4881a2d09c96a06a3f28e" sprite="Yasha (Weaponless)" width="40" height="40" animation="" />
     <item hash="4611f38baf201f64661934ebb56fad5c" sprite="Yasha (Weaponless)" width="40" height="40" animation="" />
     <item hash="4d16a4640895f47c6aa1a731ef213f1e" sprite="Yasha (Weaponless)" width="40" height="40" animation="" />
+    <item hash="5132c1b00e30ae94ec52086d0a6748b7" sprite="Yasha (Weaponless)" width="40" height="40" animation="" />
     <item hash="635fe1d92c2c5a26457ab8bfd393a478" sprite="Yasha (Weaponless)" width="40" height="40" animation="" />
     <item hash="67476d7f8730108deed2f92e0268d058" sprite="Yasha (Weaponless)" width="40" height="40" animation="" />
     <item hash="699c9f1bcfc320771bc7b7f20eca7201" sprite="Yasha (Weaponless)" width="40" height="40" animation="" />
     <item hash="72005ece9ab6d6c02bf14ed41f633aaf" sprite="Yasha (Weaponless)" width="40" height="40" animation="" />
     <item hash="75cda9dee5ddad05fb1fb5f8a648ec5c" sprite="Yasha (Weaponless)" width="40" height="40" animation="" />
     <item hash="77be45e12f915838eefb8f0c0392089c" sprite="Yasha (Weaponless)" width="40" height="40" animation="" />
+    <item hash="7b4d3840ea34a2cc1658855f6e6bcb58" sprite="Yasha (Weaponless)" width="40" height="40" animation="" />
+    <item hash="7c06b469111a05285c516c072214f2f9" sprite="Yasha (Weaponless)" width="40" height="40" animation="" />
     <item hash="86176a4912a2daf5699ee924fcf12a18" sprite="Yasha (Weaponless)" width="40" height="40" animation="" />
     <item hash="8c1a4cf44c92305aabc538ceae662641" sprite="Yasha (Weaponless)" width="40" height="40" animation="" />
+    <item hash="8ca89037a2a12ed1d5ccd908db6ec3ea" sprite="Yasha (Weaponless)" width="40" height="40" animation="" />
     <item hash="8cb4a046d10babd666ef2b2af855d50e" sprite="Yasha (Weaponless)" width="40" height="40" animation="" />
     <item hash="8f8dbc392657449ab76a9b922470e446" sprite="Yasha (Weaponless)" width="40" height="40" animation="" />
     <item hash="93f5c7806cad1684ad29bb7f231afb1c" sprite="Yasha (Weaponless)" width="40" height="40" animation="" />
+    <item hash="95b1a40dd6006e67986a828e1ff0c16e" sprite="Yasha (Weaponless)" width="40" height="40" animation="" />
+    <item hash="963191ca5402fab9a4b8174d571f944b" sprite="Yasha (Weaponless)" width="40" height="40" animation="" />
     <item hash="9abcfa0bc6ec40823146492330c14d3e" sprite="Yasha (Weaponless)" width="40" height="40" animation="" />
     <item hash="9ac0bd7713655401a4b477349d42ec3d" sprite="Yasha (Weaponless)" width="40" height="40" animation="" />
     <item hash="9da24d11a8b7f3f6e7418b9791f84e7b" sprite="Yasha (Weaponless)" width="40" height="40" animation="" />
     <item hash="9da8c8ad5bd3e3d98dd2d2230ddd6cad" sprite="Yasha (Weaponless)" width="40" height="40" animation="" />
+    <item hash="a0be75abfb4cc2c747de9848609f2f64" sprite="Yasha (Weaponless)" width="40" height="40" animation="" />
     <item hash="a23e642bc09929eb4fe8b873f48ce4d4" sprite="Yasha (Weaponless)" width="40" height="40" animation="" />
     <item hash="a2d3ff0c1993fe38e4391a483bbf8fa9" sprite="Yasha (Weaponless)" width="40" height="40" animation="" />
     <item hash="a6284beeecb9a9ea621daf37d04b6d6c" sprite="Yasha (Weaponless)" width="40" height="40" animation="" />
@@ -25343,13 +25339,17 @@
     <item hash="c2f0b5dd5f638ef173a0827fb589cb79" sprite="Yasha (Weaponless)" width="40" height="40" animation="" />
     <item hash="c3765d3178b308240489cdd5fe04e00e" sprite="Yasha (Weaponless)" width="40" height="40" animation="" />
     <item hash="ca56d2e3d4b112f396848e5428e32da7" sprite="Yasha (Weaponless)" width="40" height="40" animation="" />
+    <item hash="cb87ad5ab0890b8286c67e1455a97813" sprite="Yasha (Weaponless)" width="40" height="40" animation="" />
     <item hash="e0143de14a7fa74df69816686bf7870a" sprite="Yasha (Weaponless)" width="40" height="40" animation="" />
     <item hash="e115419bfc4de58ce8f9b75c9124120b" sprite="Yasha (Weaponless)" width="40" height="40" animation="" />
     <item hash="e307011a49a34ef4d74d71bda9f1700b" sprite="Yasha (Weaponless)" width="40" height="40" animation="" />
     <item hash="e581df405e4bc4be6ada38c24dd3c7db" sprite="Yasha (Weaponless)" width="40" height="40" animation="" />
     <item hash="e9563578d86c584cdfafbbb187f0684c" sprite="Yasha (Weaponless)" width="40" height="40" animation="" />
     <item hash="edf5cb3a71a12fe306ea7bb45acb24ee" sprite="Yasha (Weaponless)" width="40" height="40" animation="" />
+    <item hash="f099d1cf8ae8cdb64824f5d8c2c9ba81" sprite="Yasha (Weaponless)" width="40" height="40" animation="" />
     <item hash="f1b51c784f0422dd6956d03910e163d1" sprite="Yasha (Weaponless)" width="40" height="40" animation="" />
+    <item hash="f756e6615874c9855e307d7323ded0fb" sprite="Yasha (Weaponless)" width="40" height="40" animation="" />
+    <item hash="fbe0307ac6562e9a90c23fb5172c78fc" sprite="Yasha (Weaponless)" width="40" height="40" animation="" />
     <item hash="ff36446f75f2856b06e34f36f5f075b7" sprite="Yasha (Weaponless)" width="40" height="40" animation="" />
     <item hash="05fe5245c00e7d5fe5baf6bd27912816" sprite="Yeti" width="40" height="40" animation="" />
     <item hash="0d6ee2307906e17ff528eb95ece554c3" sprite="Yeti" width="40" height="40" animation="" />
