@@ -12,29 +12,30 @@ using SF3.Utils;
 
 namespace SF3.Models.Structs.CHR {
     public class Animation : Struct {
-        public Animation(IByteData data, int id, string name, int address, AnimationFrameTable animationFrames) : base(data, id, name, address, 0 /* abstract */) {
+        public Animation(IByteData data, int id, string name, int address, AnimationFrameTable animationFrames, FrameTable frameTable) : base(data, id, name, address, 0 /* abstract */) {
             AnimationFrames = animationFrames;
-            var directions = animationFrames.SpriteDirections;
+            FrameTable = frameTable;
 
-            _firstAnimationFrame = animationFrames?.FirstOrDefault(x => x.FrameID < 0xF0);
-            _frameTable = _firstAnimationFrame?.FrameTable;
+            _firstFrameWithTexture = animationFrames?.FirstOrDefault(x => x.HasTexture);
+
             _framesWithTextures = AnimationFrames
                 .Where(x => x.HasTexture)
                 .SelectMany(x => {
                     var frames = new List<int>();
                     var frameID = x.FrameID;
-                    for (int i = 0; i < x.Directions; i++)
-                        if (frameID + i < _frameTable.Length)
+                    for (int i = 0; i < AnimationFrame.DirectionsToFrameCount(x.Directions); i++)
+                        if (frameID + i < FrameTable.Length)
                             frames.Add(frameID + i);
                     return frames;
                 })
-                .Select(x => _frameTable[x])
+                .Select(x => FrameTable[x])
                 .ToArray();
 
             var width  = _framesWithTextures.Length > 0 ? _framesWithTextures[0].Width  : 0;
             var height = _framesWithTextures.Length > 0 ? _framesWithTextures[0].Height : 0;
 
-            AnimationInfo = CHRUtils.GetUniqueAnimationInfoByHash(Hash, width, height, _firstAnimationFrame?.Directions ?? 1);
+            var directions = (_firstFrameWithTexture == null) ? 1 : AnimationFrame.DirectionsToFrameCount(_firstFrameWithTexture.Directions);
+            AnimationInfo = CHRUtils.GetUniqueAnimationInfoByHash(Hash, width, height, directions);
             AnimationInfo.SpriteName = SpriteName;
 
             var uniqueFramesWithTextures = _framesWithTextures.Distinct().ToArray();
@@ -42,8 +43,9 @@ namespace SF3.Models.Structs.CHR {
         }
 
         public AnimationFrameTable AnimationFrames { get; }
-        private readonly AnimationFrame _firstAnimationFrame;
-        private readonly FrameTable _frameTable;
+        public FrameTable FrameTable { get; }
+
+        private readonly AnimationFrame _firstFrameWithTexture;
         private readonly Frame[] _framesWithTextures;
 
         [TableViewModelColumn(displayOrder: 0)]

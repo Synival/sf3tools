@@ -56,7 +56,7 @@ namespace SF3.Models.Structs.CHR {
                 .ToDictionary(x => x.AnimationType, x => x);
 
             AnimationTable = AnimationTable.Create(Data, $"Sprite{ID:D2}_{nameof(AnimationTable)}", AnimationFrameTablesByIndex.Values.ToArray(),
-                $"Sprite{ID:D2}_");
+                FrameTable, $"Sprite{ID:D2}_");
 
             TotalCompressedFramesSize = (uint) FrameTable.Sum(x => x.TextureCompressedSize);
 
