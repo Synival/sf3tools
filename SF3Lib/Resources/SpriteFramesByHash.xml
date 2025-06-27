@@ -4737,18 +4737,18 @@
     <item hash="fe979494d4bffe52238b0cc87c8bc7a0" sprite="David (P1)" width="40" height="40" animation="" />
     <item hash="cc6d198da7e1c264c3ccd632ea7b3e5a" sprite="David (P1)" width="40" height="40" animation="Kneeling" />
     <item hash="d167bd67f4411d82f9b9e3d6ef293d6d" sprite="David (P1)" width="40" height="40" animation="Kneeling" />
-    <item hash="2e9aa86d35a5a0a1194505e32058929b" sprite="David (P1)" width="40" height="40" animation="PumpingIron" />
-    <item hash="4eaa3c8ae7c632a62b4260ac363d3960" sprite="David (P1)" width="40" height="40" animation="PumpingIron" />
-    <item hash="5abd12186f7b55bdbbf2078e0b58302f" sprite="David (P1)" width="40" height="40" animation="PumpingIron" />
-    <item hash="66925c6bf342bb4b3c7b8d4d5baf2a3f" sprite="David (P1)" width="40" height="40" animation="PumpingIron" />
-    <item hash="79d9d8b50824e14356b247c04fa85162" sprite="David (P1)" width="40" height="40" animation="PumpingIron" />
-    <item hash="7de4c0ca8d4b8b5dbf836e584f7d93aa" sprite="David (P1)" width="40" height="40" animation="PumpingIron" />
-    <item hash="a8fbad387a7ee75b62b07f65a386e361" sprite="David (P1)" width="40" height="40" animation="PumpingIron" />
-    <item hash="ab3ba147d96dd56de90124c9840f8fac" sprite="David (P1)" width="40" height="40" animation="PumpingIron" />
-    <item hash="b2bf1c364fa502da109843fb1e62d049" sprite="David (P1)" width="40" height="40" animation="PumpingIron" />
-    <item hash="b505071059a65b8b4f0924d2b6d9e62f" sprite="David (P1)" width="40" height="40" animation="PumpingIron" />
-    <item hash="bda9a0ee0c4d001fb4ecf9e446375fc1" sprite="David (P1)" width="40" height="40" animation="PumpingIron" />
-    <item hash="fa04ef83964bb0bb3848642a5a3763ea" sprite="David (P1)" width="40" height="40" animation="PumpingIron" />
+    <item hash="2e9aa86d35a5a0a1194505e32058929b" sprite="David (P1) (With Weight)" width="40" height="40" animation="PumpingIron" />
+    <item hash="4eaa3c8ae7c632a62b4260ac363d3960" sprite="David (P1) (With Weight)" width="40" height="40" animation="PumpingIron" />
+    <item hash="5abd12186f7b55bdbbf2078e0b58302f" sprite="David (P1) (With Weight)" width="40" height="40" animation="PumpingIron" />
+    <item hash="66925c6bf342bb4b3c7b8d4d5baf2a3f" sprite="David (P1) (With Weight)" width="40" height="40" animation="PumpingIron" />
+    <item hash="79d9d8b50824e14356b247c04fa85162" sprite="David (P1) (With Weight)" width="40" height="40" animation="PumpingIron" />
+    <item hash="7de4c0ca8d4b8b5dbf836e584f7d93aa" sprite="David (P1) (With Weight)" width="40" height="40" animation="PumpingIron" />
+    <item hash="a8fbad387a7ee75b62b07f65a386e361" sprite="David (P1) (With Weight)" width="40" height="40" animation="PumpingIron" />
+    <item hash="ab3ba147d96dd56de90124c9840f8fac" sprite="David (P1) (With Weight)" width="40" height="40" animation="PumpingIron" />
+    <item hash="b2bf1c364fa502da109843fb1e62d049" sprite="David (P1) (With Weight)" width="40" height="40" animation="PumpingIron" />
+    <item hash="b505071059a65b8b4f0924d2b6d9e62f" sprite="David (P1) (With Weight)" width="40" height="40" animation="PumpingIron" />
+    <item hash="bda9a0ee0c4d001fb4ecf9e446375fc1" sprite="David (P1) (With Weight)" width="40" height="40" animation="PumpingIron" />
+    <item hash="fa04ef83964bb0bb3848642a5a3763ea" sprite="David (P1) (With Weight)" width="40" height="40" animation="PumpingIron" />
     <item hash="00f72562e60a8a380f8355dc3efd1f5d" sprite="David (P2)" width="40" height="40" animation="" />
     <item hash="0f2b23e98b9a0f586ee8931e7389d082" sprite="David (P2)" width="40" height="40" animation="" />
     <item hash="101b095099f6a3b61ab821859865c323" sprite="David (P2)" width="40" height="40" animation="" />
@@ -4925,18 +4925,18 @@
     <item hash="b7447e0826993b5377003558be67a000" sprite="David (U)" width="40" height="40" animation="Pointing or Thumbs Up" />
     <item hash="de904f370693eea186f60d21538d4fb9" sprite="David (U)" width="40" height="40" animation="Pointing or Thumbs Up" />
     <item hash="edb7f82c99bcba8af7435df5352099d9" sprite="David (U)" width="40" height="40" animation="Pointing or Thumbs Up" />
-    <item hash="12d2b359c857df5ffd983de6287f782b" sprite="David (U)" width="48" height="40" animation="PushUps" />
-    <item hash="28e384a4f4c0e6771679d3aa07beaff7" sprite="David (U)" width="48" height="40" animation="PushUps" />
-    <item hash="2a545407a591845ae9112190aae46bfd" sprite="David (U)" width="48" height="40" animation="PushUps" />
-    <item hash="365448b42168aff1d9450540bc51234d" sprite="David (U)" width="48" height="40" animation="PushUps" />
-    <item hash="4249141f76be5151a8c038eef94592e6" sprite="David (U)" width="48" height="40" animation="PushUps" />
-    <item hash="c91be9981f7537e943261b927417b157" sprite="David (U)" width="48" height="40" animation="PushUps" />
-    <item hash="e8dbb4887f146113553522c39527a893" sprite="David (U)" width="48" height="40" animation="PushUps" />
-    <item hash="ee6c77d3aefc9e465ca27412ac4c243a" sprite="David (U)" width="48" height="40" animation="PushUps" />
-    <item hash="f1d74603213cc79a03ab21a30bd389f6" sprite="David (U)" width="48" height="40" animation="PushUps" />
-    <item hash="f22436c1891f72399073ac5e639e83da" sprite="David (U)" width="48" height="40" animation="PushUps" />
-    <item hash="f4eeb054771680ad8feaf1f33fb0f4f0" sprite="David (U)" width="48" height="40" animation="PushUps" />
-    <item hash="fe28becb19934162b6f2dcade0e8709c" sprite="David (U)" width="48" height="40" animation="PushUps" />
+    <item hash="12d2b359c857df5ffd983de6287f782b" sprite="David (U) (Weaponless)" width="48" height="40" animation="PushUps" />
+    <item hash="28e384a4f4c0e6771679d3aa07beaff7" sprite="David (U) (Weaponless)" width="48" height="40" animation="PushUps" />
+    <item hash="2a545407a591845ae9112190aae46bfd" sprite="David (U) (Weaponless)" width="48" height="40" animation="PushUps" />
+    <item hash="365448b42168aff1d9450540bc51234d" sprite="David (U) (Weaponless)" width="48" height="40" animation="PushUps" />
+    <item hash="4249141f76be5151a8c038eef94592e6" sprite="David (U) (Weaponless)" width="48" height="40" animation="PushUps" />
+    <item hash="c91be9981f7537e943261b927417b157" sprite="David (U) (Weaponless)" width="48" height="40" animation="PushUps" />
+    <item hash="e8dbb4887f146113553522c39527a893" sprite="David (U) (Weaponless)" width="48" height="40" animation="PushUps" />
+    <item hash="ee6c77d3aefc9e465ca27412ac4c243a" sprite="David (U) (Weaponless)" width="48" height="40" animation="PushUps" />
+    <item hash="f1d74603213cc79a03ab21a30bd389f6" sprite="David (U) (Weaponless)" width="48" height="40" animation="PushUps" />
+    <item hash="f22436c1891f72399073ac5e639e83da" sprite="David (U) (Weaponless)" width="48" height="40" animation="PushUps" />
+    <item hash="f4eeb054771680ad8feaf1f33fb0f4f0" sprite="David (U) (Weaponless)" width="48" height="40" animation="PushUps" />
+    <item hash="fe28becb19934162b6f2dcade0e8709c" sprite="David (U) (Weaponless)" width="48" height="40" animation="PushUps" />
     <item hash="13ae0e7e9eb701af6489db1430cd1359" sprite="Defenda" width="40" height="40" animation="" />
     <item hash="16fd6d02f01acae9d4faf783d7ce0592" sprite="Defenda" width="40" height="40" animation="" />
     <item hash="1a9ab3d4f0d636fa61156c0cb521ada7" sprite="Defenda" width="40" height="40" animation="" />
@@ -7389,118 +7389,74 @@
     <item hash="df7e01984545706f822bb0b7424f7f5a" sprite="Gargoyle" width="48" height="40" animation="" />
     <item hash="f8b098bb9e40ea3263c42d2fa2e23a7d" sprite="Gargoyle" width="48" height="40" animation="" />
     <item hash="fb35ec78039b4e46f1287ebb3c577693" sprite="Gargoyle" width="48" height="40" animation="" />
-    <item hash="004f45c7c2bd3946e11825b1ae117f64" sprite="Garosh (P1)" width="40" height="40" animation="" />
     <item hash="0853602285d3f6a25895cc42d9fceb59" sprite="Garosh (P1)" width="40" height="40" animation="" />
     <item hash="0897d3e80ada897a55473c00b2636fb3" sprite="Garosh (P1)" width="40" height="40" animation="" />
     <item hash="08c0f003f3a2d3f0ac0563720e821050" sprite="Garosh (P1)" width="40" height="40" animation="" />
     <item hash="0bfcea5026ea255a8f5fc666b07bca09" sprite="Garosh (P1)" width="40" height="40" animation="" />
     <item hash="0cbd60f7fe0fc7d8f73b66227edef5ea" sprite="Garosh (P1)" width="40" height="40" animation="" />
-    <item hash="0dc65fe6eb8ecea361e26ce6360c0c7f" sprite="Garosh (P1)" width="40" height="40" animation="" />
     <item hash="0f5ba44ad134c2b2de710e3470e1495f" sprite="Garosh (P1)" width="40" height="40" animation="" />
-    <item hash="0f64eecd4ec094c232b2eb0bf8487b2a" sprite="Garosh (P1)" width="40" height="40" animation="" />
     <item hash="107b8df59258e8f81d58a84409ecbd46" sprite="Garosh (P1)" width="40" height="40" animation="" />
-    <item hash="10acfa1d7ac337d830a7cf140fc9f433" sprite="Garosh (P1)" width="40" height="40" animation="" />
     <item hash="10ba6cf33344c52d6d5b9eb2be0ad17b" sprite="Garosh (P1)" width="40" height="40" animation="" />
     <item hash="12abb3f3ae3fb648551fe3917dcf0a57" sprite="Garosh (P1)" width="40" height="40" animation="" />
     <item hash="1324686e7c3d8a5fada5b3de4403668b" sprite="Garosh (P1)" width="40" height="40" animation="" />
     <item hash="140709beb1ae75a0e8d9a33a000630b9" sprite="Garosh (P1)" width="40" height="40" animation="" />
     <item hash="17a6a500d5db03fe83d951861d4f3374" sprite="Garosh (P1)" width="40" height="40" animation="" />
-    <item hash="1886b42b27ac148a744ea5ab3f6aa899" sprite="Garosh (P1)" width="40" height="40" animation="" />
-    <item hash="1c4ad219afe9f928a2fec548376f7acc" sprite="Garosh (P1)" width="40" height="40" animation="" />
-    <item hash="1ebffbd4cfbda5107f63e40f30bb99fa" sprite="Garosh (P1)" width="40" height="40" animation="" />
-    <item hash="1f87e3fee537ef02570bc2498a4f582b" sprite="Garosh (P1)" width="40" height="40" animation="" />
     <item hash="2141a9400958711b13c90042800b0bb0" sprite="Garosh (P1)" width="40" height="40" animation="" />
     <item hash="222b98fc771fd33a73c834bf40a6b5b9" sprite="Garosh (P1)" width="40" height="40" animation="" />
     <item hash="22b0a789463002bb31cb5199b247d791" sprite="Garosh (P1)" width="40" height="40" animation="" />
     <item hash="25815e046c54fba1718db492595ad664" sprite="Garosh (P1)" width="40" height="40" animation="" />
-    <item hash="266f0eacec500841bec7760c5ca40862" sprite="Garosh (P1)" width="40" height="40" animation="" />
-    <item hash="28c2073789185c60d5994cf867a9859a" sprite="Garosh (P1)" width="40" height="40" animation="" />
     <item hash="2a3a3fd8987f47c407ea980936569941" sprite="Garosh (P1)" width="40" height="40" animation="" />
-    <item hash="2cb347ac6ebc40a84fe27c420d9c00f1" sprite="Garosh (P1)" width="40" height="40" animation="" />
     <item hash="2e4e21882464b3091ae900879510293e" sprite="Garosh (P1)" width="40" height="40" animation="" />
-    <item hash="304c0a538d04db87af59a75163a6dec1" sprite="Garosh (P1)" width="40" height="40" animation="" />
-    <item hash="35aca653cf7c8d22563de3e1fc0581df" sprite="Garosh (P1)" width="40" height="40" animation="" />
     <item hash="3765e7e1c70564f7e9f03dde739c8473" sprite="Garosh (P1)" width="40" height="40" animation="" />
     <item hash="377a02adcb21331bb07bbe91b7aa35e8" sprite="Garosh (P1)" width="40" height="40" animation="" />
-    <item hash="3b042be94ba4a54f56458f4d70fd8ae4" sprite="Garosh (P1)" width="40" height="40" animation="" />
     <item hash="3c16c607cff5a15d77fce2621908246a" sprite="Garosh (P1)" width="40" height="40" animation="" />
     <item hash="3d57d25d6bd002f24a01ad3e0cea3a7b" sprite="Garosh (P1)" width="40" height="40" animation="" />
-    <item hash="3f97528948cd3ec6beb0fc483b69ad9f" sprite="Garosh (P1)" width="40" height="40" animation="" />
     <item hash="42d0d107883a6fd846ac437e26740b4e" sprite="Garosh (P1)" width="40" height="40" animation="" />
     <item hash="4742e177ae829737d5fca57f45223a55" sprite="Garosh (P1)" width="40" height="40" animation="" />
     <item hash="4f4b610dd48eaf3ae8df7c6d86e127c3" sprite="Garosh (P1)" width="40" height="40" animation="" />
     <item hash="5528365e2ce27980f8df2e6acb63cd1b" sprite="Garosh (P1)" width="40" height="40" animation="" />
     <item hash="559be26a5d5963118ae7b3815a44b88d" sprite="Garosh (P1)" width="40" height="40" animation="" />
     <item hash="56540e40d98e797be4e52af278bd7edd" sprite="Garosh (P1)" width="40" height="40" animation="" />
-    <item hash="5791b9205df6efaf8657a200f83a1877" sprite="Garosh (P1)" width="40" height="40" animation="" />
     <item hash="58f5054928cbbba2a8a1cbf72c1443fe" sprite="Garosh (P1)" width="40" height="40" animation="" />
     <item hash="5dd2e2fa46952d41ed32a37be2558699" sprite="Garosh (P1)" width="40" height="40" animation="" />
     <item hash="5e06bcc92e61faf8dad110c8d83dace5" sprite="Garosh (P1)" width="40" height="40" animation="" />
-    <item hash="5f31b16a6396cb105780943af528935a" sprite="Garosh (P1)" width="40" height="40" animation="" />
     <item hash="5f9f2b1410650f076a55b34edb28c945" sprite="Garosh (P1)" width="40" height="40" animation="" />
     <item hash="6071eaf21f092e0e2d0ae4cbc322c4e9" sprite="Garosh (P1)" width="40" height="40" animation="" />
     <item hash="68e46885eedae2d1dbbe8ae9b8365df9" sprite="Garosh (P1)" width="40" height="40" animation="" />
     <item hash="6991ea0a444ec28849cd1ee89d087e82" sprite="Garosh (P1)" width="40" height="40" animation="" />
     <item hash="71481c9a89a94af808ed086e433c57f3" sprite="Garosh (P1)" width="40" height="40" animation="" />
     <item hash="7171e82dc6c4d5b447a4a9cd2c726b49" sprite="Garosh (P1)" width="40" height="40" animation="" />
-    <item hash="742c89dd7351eec9995e10772f326400" sprite="Garosh (P1)" width="40" height="40" animation="" />
-    <item hash="749308f62edfb1866ecba9edbbe47133" sprite="Garosh (P1)" width="40" height="40" animation="" />
     <item hash="75c4f3042dccdb4d344c12fbaff0692e" sprite="Garosh (P1)" width="40" height="40" animation="" />
-    <item hash="785a1c7d2b08a2304b06dfb7825ff02f" sprite="Garosh (P1)" width="40" height="40" animation="" />
     <item hash="78bf6eb980d657696fb7ca9208c244d8" sprite="Garosh (P1)" width="40" height="40" animation="" />
     <item hash="78ca4e0e0202a1e36a6ba2e79ae5c652" sprite="Garosh (P1)" width="40" height="40" animation="" />
-    <item hash="7af33674cd87ffd2aca466d4766de431" sprite="Garosh (P1)" width="40" height="40" animation="" />
     <item hash="7ca8557f3fb54f7381a4a1aab99fbe24" sprite="Garosh (P1)" width="40" height="40" animation="" />
-    <item hash="7cf9fd8f50f2e11095a63a9c0051f6e6" sprite="Garosh (P1)" width="40" height="40" animation="" />
     <item hash="7db63b3f135cf4f61ec6554ba3fcdcda" sprite="Garosh (P1)" width="40" height="40" animation="" />
-    <item hash="7fcc87d4dd4e52cf07ac1b30941cccb6" sprite="Garosh (P1)" width="40" height="40" animation="" />
-    <item hash="8682a3af18f088187cd2b59a126cd57f" sprite="Garosh (P1)" width="40" height="40" animation="" />
-    <item hash="86876d604472ede79550eccf3118561e" sprite="Garosh (P1)" width="40" height="40" animation="" />
     <item hash="86bab3caac4218e1860f33121bc38b7e" sprite="Garosh (P1)" width="40" height="40" animation="" />
     <item hash="87edede0293748275fff2e0bcf213b68" sprite="Garosh (P1)" width="40" height="40" animation="" />
     <item hash="8a9ff6a521cf78e41be673abd2b01a8c" sprite="Garosh (P1)" width="40" height="40" animation="" />
     <item hash="8d7df939879d9e745f9e3e27fe89f85f" sprite="Garosh (P1)" width="40" height="40" animation="" />
     <item hash="8edd6499757db3a8da52270530455e34" sprite="Garosh (P1)" width="40" height="40" animation="" />
     <item hash="9197db9285e271cc7480f087f43e39ce" sprite="Garosh (P1)" width="40" height="40" animation="" />
-    <item hash="92590f8dad2202086e589a312fabf8fc" sprite="Garosh (P1)" width="40" height="40" animation="" />
     <item hash="954bbcede0d523b283381cfe326912f3" sprite="Garosh (P1)" width="40" height="40" animation="" />
-    <item hash="95a2c5ec37cad26e3ef78ceb28d16b9e" sprite="Garosh (P1)" width="40" height="40" animation="" />
     <item hash="9f9ecbe6263b7f14a24126d6761a37be" sprite="Garosh (P1)" width="40" height="40" animation="" />
     <item hash="a2c4f62ce3da97d585bedb8877895604" sprite="Garosh (P1)" width="40" height="40" animation="" />
-    <item hash="a7c4b085a2d7b4ec989fa8ce516abec9" sprite="Garosh (P1)" width="40" height="40" animation="" />
     <item hash="a90d0dcc5c07955ae4e3f15365d78094" sprite="Garosh (P1)" width="40" height="40" animation="" />
-    <item hash="acb636dd4699afd754a57ff758c7bf19" sprite="Garosh (P1)" width="40" height="40" animation="" />
     <item hash="b454445102156a294fc8474dfb1402af" sprite="Garosh (P1)" width="40" height="40" animation="" />
     <item hash="b4692243d5f7b9b7f22ceac9835f0ac0" sprite="Garosh (P1)" width="40" height="40" animation="" />
-    <item hash="b5f60c023915d9f48facd23e60933dea" sprite="Garosh (P1)" width="40" height="40" animation="" />
-    <item hash="b8c7ebe214a4cca7bdcdecbb45009e2b" sprite="Garosh (P1)" width="40" height="40" animation="" />
-    <item hash="b9dde23846b5259f75b3bd55413550e2" sprite="Garosh (P1)" width="40" height="40" animation="" />
     <item hash="bf395d474747fa84f3900e56abe39992" sprite="Garosh (P1)" width="40" height="40" animation="" />
-    <item hash="c078501636abc30c66221ae3c0ababb3" sprite="Garosh (P1)" width="40" height="40" animation="" />
-    <item hash="c27baad7b242b4b3b20190763e768f23" sprite="Garosh (P1)" width="40" height="40" animation="" />
     <item hash="c5474470ce7585f1b02c2e2cdf3e705c" sprite="Garosh (P1)" width="40" height="40" animation="" />
     <item hash="c85276263329808dede194c8580e1f10" sprite="Garosh (P1)" width="40" height="40" animation="" />
-    <item hash="cf2c6f4814149ec66dca5347a9f916af" sprite="Garosh (P1)" width="40" height="40" animation="" />
     <item hash="cfc4e13b2f6d2a470e3cd67e0a31f526" sprite="Garosh (P1)" width="40" height="40" animation="" />
     <item hash="d0265e8dadae7f134d26e70800edba68" sprite="Garosh (P1)" width="40" height="40" animation="" />
-    <item hash="d04790c567b6ede44a01401c6028f208" sprite="Garosh (P1)" width="40" height="40" animation="" />
     <item hash="d4d410f6f70e24ac12786cd2cd6bc29a" sprite="Garosh (P1)" width="40" height="40" animation="" />
     <item hash="d4f15a21a21d0f7c0cf4d8ebf1f03927" sprite="Garosh (P1)" width="40" height="40" animation="" />
-    <item hash="d62c1cdda688a0659f5adef9099401a6" sprite="Garosh (P1)" width="40" height="40" animation="" />
     <item hash="d63730e9d7da2db76fa8a5d3b1844e8c" sprite="Garosh (P1)" width="40" height="40" animation="" />
-    <item hash="d732e2e4e38727dae07040ffb0d43641" sprite="Garosh (P1)" width="40" height="40" animation="" />
     <item hash="db596152c5a2ece13f514fbb4498cd0a" sprite="Garosh (P1)" width="40" height="40" animation="" />
-    <item hash="ddd1ee754a1903175d65c06242a2b632" sprite="Garosh (P1)" width="40" height="40" animation="" />
     <item hash="e02fe0a9b4c8b5be8996f631f0ce0758" sprite="Garosh (P1)" width="40" height="40" animation="" />
     <item hash="e0a216c4684fc5119c2e683be03895a1" sprite="Garosh (P1)" width="40" height="40" animation="" />
-    <item hash="e29de2cb277158b259e94d3ef241f68e" sprite="Garosh (P1)" width="40" height="40" animation="" />
-    <item hash="e49c053ac12bfebf4a83f6bf49ee9311" sprite="Garosh (P1)" width="40" height="40" animation="" />
-    <item hash="e58180753a234845a805ec3dd46ecf54" sprite="Garosh (P1)" width="40" height="40" animation="" />
     <item hash="e77e383423b657c922dd2b0a0207903d" sprite="Garosh (P1)" width="40" height="40" animation="" />
-    <item hash="e95c6d8caf354fe93262e9c4b7a2c99e" sprite="Garosh (P1)" width="40" height="40" animation="" />
     <item hash="ead3a8f8fcf731d040e13577f2641b97" sprite="Garosh (P1)" width="40" height="40" animation="" />
     <item hash="eb2ec482aedf50cd4e6526e31dceb1da" sprite="Garosh (P1)" width="40" height="40" animation="" />
-    <item hash="ec23c1278b5c6e4840801552a12df442" sprite="Garosh (P1)" width="40" height="40" animation="" />
     <item hash="f373937dff320de75d248cc05126e062" sprite="Garosh (P1)" width="40" height="40" animation="" />
     <item hash="f7bad07a773e41da72c5f8a17dc7554a" sprite="Garosh (P1)" width="40" height="40" animation="" />
     <item hash="fb08ec8317a596cf115e3c24c25cf112" sprite="Garosh (P1)" width="40" height="40" animation="" />
@@ -7509,6 +7465,50 @@
     <item hash="b06733e25349ce130f567b19a533419d" sprite="Garosh (P1)" width="48" height="40" animation="" />
     <item hash="dfc33a3e3f351de10052d28875dfa43d" sprite="Garosh (P1)" width="48" height="40" animation="" />
     <item hash="eb77b93d9c936daa6435343f9d548bf6" sprite="Garosh (P1)" width="48" height="40" animation="" />
+    <item hash="004f45c7c2bd3946e11825b1ae117f64" sprite="Garosh (P1) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="0dc65fe6eb8ecea361e26ce6360c0c7f" sprite="Garosh (P1) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="0f64eecd4ec094c232b2eb0bf8487b2a" sprite="Garosh (P1) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="10acfa1d7ac337d830a7cf140fc9f433" sprite="Garosh (P1) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="1886b42b27ac148a744ea5ab3f6aa899" sprite="Garosh (P1) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="1c4ad219afe9f928a2fec548376f7acc" sprite="Garosh (P1) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="1ebffbd4cfbda5107f63e40f30bb99fa" sprite="Garosh (P1) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="1f87e3fee537ef02570bc2498a4f582b" sprite="Garosh (P1) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="266f0eacec500841bec7760c5ca40862" sprite="Garosh (P1) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="28c2073789185c60d5994cf867a9859a" sprite="Garosh (P1) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="2cb347ac6ebc40a84fe27c420d9c00f1" sprite="Garosh (P1) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="304c0a538d04db87af59a75163a6dec1" sprite="Garosh (P1) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="35aca653cf7c8d22563de3e1fc0581df" sprite="Garosh (P1) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="3b042be94ba4a54f56458f4d70fd8ae4" sprite="Garosh (P1) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="3f97528948cd3ec6beb0fc483b69ad9f" sprite="Garosh (P1) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="5791b9205df6efaf8657a200f83a1877" sprite="Garosh (P1) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="5f31b16a6396cb105780943af528935a" sprite="Garosh (P1) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="742c89dd7351eec9995e10772f326400" sprite="Garosh (P1) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="749308f62edfb1866ecba9edbbe47133" sprite="Garosh (P1) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="785a1c7d2b08a2304b06dfb7825ff02f" sprite="Garosh (P1) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="7af33674cd87ffd2aca466d4766de431" sprite="Garosh (P1) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="7cf9fd8f50f2e11095a63a9c0051f6e6" sprite="Garosh (P1) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="7fcc87d4dd4e52cf07ac1b30941cccb6" sprite="Garosh (P1) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="8682a3af18f088187cd2b59a126cd57f" sprite="Garosh (P1) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="86876d604472ede79550eccf3118561e" sprite="Garosh (P1) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="92590f8dad2202086e589a312fabf8fc" sprite="Garosh (P1) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="95a2c5ec37cad26e3ef78ceb28d16b9e" sprite="Garosh (P1) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="a7c4b085a2d7b4ec989fa8ce516abec9" sprite="Garosh (P1) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="acb636dd4699afd754a57ff758c7bf19" sprite="Garosh (P1) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="b5f60c023915d9f48facd23e60933dea" sprite="Garosh (P1) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="b8c7ebe214a4cca7bdcdecbb45009e2b" sprite="Garosh (P1) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="b9dde23846b5259f75b3bd55413550e2" sprite="Garosh (P1) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="c078501636abc30c66221ae3c0ababb3" sprite="Garosh (P1) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="c27baad7b242b4b3b20190763e768f23" sprite="Garosh (P1) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="cf2c6f4814149ec66dca5347a9f916af" sprite="Garosh (P1) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="d04790c567b6ede44a01401c6028f208" sprite="Garosh (P1) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="d62c1cdda688a0659f5adef9099401a6" sprite="Garosh (P1) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="d732e2e4e38727dae07040ffb0d43641" sprite="Garosh (P1) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="ddd1ee754a1903175d65c06242a2b632" sprite="Garosh (P1) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="e29de2cb277158b259e94d3ef241f68e" sprite="Garosh (P1) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="e49c053ac12bfebf4a83f6bf49ee9311" sprite="Garosh (P1) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="e58180753a234845a805ec3dd46ecf54" sprite="Garosh (P1) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="e95c6d8caf354fe93262e9c4b7a2c99e" sprite="Garosh (P1) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="ec23c1278b5c6e4840801552a12df442" sprite="Garosh (P1) (Weaponless)" width="40" height="40" animation="" />
     <item hash="0180e844785e116986862016b6f3907b" sprite="Garosh (P2)" width="40" height="40" animation="" />
     <item hash="0204158be16b58a788b552d659334432" sprite="Garosh (P2)" width="40" height="40" animation="" />
     <item hash="0299e135f482cdcaf66179201b2ec22b" sprite="Garosh (P2)" width="40" height="40" animation="" />
@@ -9282,6 +9282,54 @@
     <item hash="f925e450818ec1b65fe34debce5dd91b" sprite="Harold (P1)" width="40" height="40" animation="" />
     <item hash="f962d90fd9ba1e4519b4ebb82f9e2055" sprite="Harold (P1)" width="40" height="40" animation="" />
     <item hash="facf8ea7b0aaa70bebde8123e1a6efa4" sprite="Harold (P1)" width="40" height="40" animation="" />
+    <item hash="03ecf01ee0d4600754a2da7501928137" sprite="Harold (P1) (Tank)" width="48" height="40" animation="" />
+    <item hash="03f93f286049efac5ad7a7d85a484ef4" sprite="Harold (P1) (Tank)" width="48" height="40" animation="" />
+    <item hash="0f51faf9183a5ab2008d497fb718510b" sprite="Harold (P1) (Tank)" width="48" height="40" animation="" />
+    <item hash="0f8cd806d46259aee2d5d7aa71629267" sprite="Harold (P1) (Tank)" width="48" height="40" animation="" />
+    <item hash="11fe8a3ab853c2473bad3b9fa8bfa177" sprite="Harold (P1) (Tank)" width="48" height="40" animation="" />
+    <item hash="205e53f9ceaadc3299ed55ce37d7ada4" sprite="Harold (P1) (Tank)" width="48" height="40" animation="" />
+    <item hash="24e0619cbb5278bfffa1b5622035b31d" sprite="Harold (P1) (Tank)" width="48" height="40" animation="" />
+    <item hash="3447d04e9078c7044287c1cdf0e46e67" sprite="Harold (P1) (Tank)" width="48" height="40" animation="" />
+    <item hash="345fcb4dbdb406948b2d4191a812dad4" sprite="Harold (P1) (Tank)" width="48" height="40" animation="" />
+    <item hash="3486883363553692ef41dc6431fe5489" sprite="Harold (P1) (Tank)" width="48" height="40" animation="" />
+    <item hash="3813b736bfa434f778ea1767dc7e7c9c" sprite="Harold (P1) (Tank)" width="48" height="40" animation="" />
+    <item hash="48c4541fcd17adb32a4bdbdf4efdd24e" sprite="Harold (P1) (Tank)" width="48" height="40" animation="" />
+    <item hash="4aff7c8e0fe407ce47bfb9dff7de027e" sprite="Harold (P1) (Tank)" width="48" height="40" animation="" />
+    <item hash="4e35ff1743f74ddb80baa8b27e34e1b1" sprite="Harold (P1) (Tank)" width="48" height="40" animation="" />
+    <item hash="513912a8c0a09f31ec0e5e1bcb4dccc7" sprite="Harold (P1) (Tank)" width="48" height="40" animation="" />
+    <item hash="5765426a488f7ec136b41ca91a327008" sprite="Harold (P1) (Tank)" width="48" height="40" animation="" />
+    <item hash="57c085387d058396e6a1bd3367a27fd1" sprite="Harold (P1) (Tank)" width="48" height="40" animation="" />
+    <item hash="72f9d4778962de4adb3daf9054d592a0" sprite="Harold (P1) (Tank)" width="48" height="40" animation="" />
+    <item hash="7a8278e5de6248e4c99ac95150c6b723" sprite="Harold (P1) (Tank)" width="48" height="40" animation="" />
+    <item hash="7c6786a9629d599d239173aed46fed56" sprite="Harold (P1) (Tank)" width="48" height="40" animation="" />
+    <item hash="7d34d557ac4fc1b753885b63d89fc0e8" sprite="Harold (P1) (Tank)" width="48" height="40" animation="" />
+    <item hash="80aa1df2e78392619b670aed53513fc3" sprite="Harold (P1) (Tank)" width="48" height="40" animation="" />
+    <item hash="814055c8ad9291bbb64d78011e3d97df" sprite="Harold (P1) (Tank)" width="48" height="40" animation="" />
+    <item hash="853e400ce83081e2da19484348253b4f" sprite="Harold (P1) (Tank)" width="48" height="40" animation="" />
+    <item hash="863dfe9a7083c93c57bd425e00342ece" sprite="Harold (P1) (Tank)" width="48" height="40" animation="" />
+    <item hash="89977d90b699cd96e8fe32c129450b31" sprite="Harold (P1) (Tank)" width="48" height="40" animation="" />
+    <item hash="8a5fdab584af1ae2ac5e996aa754642c" sprite="Harold (P1) (Tank)" width="48" height="40" animation="" />
+    <item hash="8e2f5941c8c6bdd9739352bafe83a8cf" sprite="Harold (P1) (Tank)" width="48" height="40" animation="" />
+    <item hash="a00941296a3bae352e070ac163443853" sprite="Harold (P1) (Tank)" width="48" height="40" animation="" />
+    <item hash="a5775bf6adc0c578a2991d8c49296d71" sprite="Harold (P1) (Tank)" width="48" height="40" animation="" />
+    <item hash="a63189e08bf9b47656f924667dccc289" sprite="Harold (P1) (Tank)" width="48" height="40" animation="" />
+    <item hash="a9f5fd96a22367bfa65f965ad50531f4" sprite="Harold (P1) (Tank)" width="48" height="40" animation="" />
+    <item hash="ae302d0f7e2bfa8fa08c034111c81725" sprite="Harold (P1) (Tank)" width="48" height="40" animation="" />
+    <item hash="b09bff97f6ebccafe348bd13a8bc03e4" sprite="Harold (P1) (Tank)" width="48" height="40" animation="" />
+    <item hash="b3464a337aa1283fa25168f36090a9ad" sprite="Harold (P1) (Tank)" width="48" height="40" animation="" />
+    <item hash="b5a2fa4e5740494015728e98084a7566" sprite="Harold (P1) (Tank)" width="48" height="40" animation="" />
+    <item hash="b667429e25baa5bb4995469107d6e3a3" sprite="Harold (P1) (Tank)" width="48" height="40" animation="" />
+    <item hash="bb78f953634035d79979b40db82e6ecb" sprite="Harold (P1) (Tank)" width="48" height="40" animation="" />
+    <item hash="d0f717863d38eb3aa4d34aaa38bb2b14" sprite="Harold (P1) (Tank)" width="48" height="40" animation="" />
+    <item hash="d3ccbb1238d924313828b02f646c1806" sprite="Harold (P1) (Tank)" width="48" height="40" animation="" />
+    <item hash="db3f11d5e6231299b8c602929be4b39d" sprite="Harold (P1) (Tank)" width="48" height="40" animation="" />
+    <item hash="e102bdf8ee2689ce88c5af49a7973e83" sprite="Harold (P1) (Tank)" width="48" height="40" animation="" />
+    <item hash="e10408b09c7d8d00680e55e9eb4f2bfe" sprite="Harold (P1) (Tank)" width="48" height="40" animation="" />
+    <item hash="e40843bb02a44554e2d6313d4b00fc5b" sprite="Harold (P1) (Tank)" width="48" height="40" animation="" />
+    <item hash="e40903cebfdccca03c6e0ad21cffe6b6" sprite="Harold (P1) (Tank)" width="48" height="40" animation="" />
+    <item hash="e448a80eab2755ff2f822e6b37200eb4" sprite="Harold (P1) (Tank)" width="48" height="40" animation="" />
+    <item hash="ecf143ab5777d8f6d73ae16f92f9258c" sprite="Harold (P1) (Tank)" width="48" height="40" animation="" />
+    <item hash="f5f7e030a36efe57074bfc8c9f243b09" sprite="Harold (P1) (Tank)" width="48" height="40" animation="" />
     <item hash="024c5e8d811fe0c1190ddc33e6a88c3c" sprite="Harold (P2)" width="40" height="40" animation="" />
     <item hash="0534784bbe10b889ae3d5ddea48db361" sprite="Harold (P2)" width="40" height="40" animation="" />
     <item hash="0807bf4949fcd7f6ca169dda3d16e469" sprite="Harold (P2)" width="40" height="40" animation="" />
@@ -9330,102 +9378,54 @@
     <item hash="edd2c924e66b28266102189c5e163c04" sprite="Harold (P2)" width="40" height="40" animation="" />
     <item hash="f158e0703766c25a53e2148fb0c28b7e" sprite="Harold (P2)" width="40" height="40" animation="" />
     <item hash="f405b5258b168f75d2cf82197ee19d6a" sprite="Harold (P2)" width="40" height="40" animation="" />
-    <item hash="03ecf01ee0d4600754a2da7501928137" sprite="Harold in Tank (P1)" width="48" height="40" animation="" />
-    <item hash="03f93f286049efac5ad7a7d85a484ef4" sprite="Harold in Tank (P1)" width="48" height="40" animation="" />
-    <item hash="0f51faf9183a5ab2008d497fb718510b" sprite="Harold in Tank (P1)" width="48" height="40" animation="" />
-    <item hash="0f8cd806d46259aee2d5d7aa71629267" sprite="Harold in Tank (P1)" width="48" height="40" animation="" />
-    <item hash="11fe8a3ab853c2473bad3b9fa8bfa177" sprite="Harold in Tank (P1)" width="48" height="40" animation="" />
-    <item hash="205e53f9ceaadc3299ed55ce37d7ada4" sprite="Harold in Tank (P1)" width="48" height="40" animation="" />
-    <item hash="24e0619cbb5278bfffa1b5622035b31d" sprite="Harold in Tank (P1)" width="48" height="40" animation="" />
-    <item hash="3447d04e9078c7044287c1cdf0e46e67" sprite="Harold in Tank (P1)" width="48" height="40" animation="" />
-    <item hash="345fcb4dbdb406948b2d4191a812dad4" sprite="Harold in Tank (P1)" width="48" height="40" animation="" />
-    <item hash="3486883363553692ef41dc6431fe5489" sprite="Harold in Tank (P1)" width="48" height="40" animation="" />
-    <item hash="3813b736bfa434f778ea1767dc7e7c9c" sprite="Harold in Tank (P1)" width="48" height="40" animation="" />
-    <item hash="48c4541fcd17adb32a4bdbdf4efdd24e" sprite="Harold in Tank (P1)" width="48" height="40" animation="" />
-    <item hash="4aff7c8e0fe407ce47bfb9dff7de027e" sprite="Harold in Tank (P1)" width="48" height="40" animation="" />
-    <item hash="4e35ff1743f74ddb80baa8b27e34e1b1" sprite="Harold in Tank (P1)" width="48" height="40" animation="" />
-    <item hash="513912a8c0a09f31ec0e5e1bcb4dccc7" sprite="Harold in Tank (P1)" width="48" height="40" animation="" />
-    <item hash="5765426a488f7ec136b41ca91a327008" sprite="Harold in Tank (P1)" width="48" height="40" animation="" />
-    <item hash="57c085387d058396e6a1bd3367a27fd1" sprite="Harold in Tank (P1)" width="48" height="40" animation="" />
-    <item hash="72f9d4778962de4adb3daf9054d592a0" sprite="Harold in Tank (P1)" width="48" height="40" animation="" />
-    <item hash="7a8278e5de6248e4c99ac95150c6b723" sprite="Harold in Tank (P1)" width="48" height="40" animation="" />
-    <item hash="7c6786a9629d599d239173aed46fed56" sprite="Harold in Tank (P1)" width="48" height="40" animation="" />
-    <item hash="7d34d557ac4fc1b753885b63d89fc0e8" sprite="Harold in Tank (P1)" width="48" height="40" animation="" />
-    <item hash="80aa1df2e78392619b670aed53513fc3" sprite="Harold in Tank (P1)" width="48" height="40" animation="" />
-    <item hash="814055c8ad9291bbb64d78011e3d97df" sprite="Harold in Tank (P1)" width="48" height="40" animation="" />
-    <item hash="853e400ce83081e2da19484348253b4f" sprite="Harold in Tank (P1)" width="48" height="40" animation="" />
-    <item hash="863dfe9a7083c93c57bd425e00342ece" sprite="Harold in Tank (P1)" width="48" height="40" animation="" />
-    <item hash="89977d90b699cd96e8fe32c129450b31" sprite="Harold in Tank (P1)" width="48" height="40" animation="" />
-    <item hash="8a5fdab584af1ae2ac5e996aa754642c" sprite="Harold in Tank (P1)" width="48" height="40" animation="" />
-    <item hash="8e2f5941c8c6bdd9739352bafe83a8cf" sprite="Harold in Tank (P1)" width="48" height="40" animation="" />
-    <item hash="a00941296a3bae352e070ac163443853" sprite="Harold in Tank (P1)" width="48" height="40" animation="" />
-    <item hash="a5775bf6adc0c578a2991d8c49296d71" sprite="Harold in Tank (P1)" width="48" height="40" animation="" />
-    <item hash="a63189e08bf9b47656f924667dccc289" sprite="Harold in Tank (P1)" width="48" height="40" animation="" />
-    <item hash="a9f5fd96a22367bfa65f965ad50531f4" sprite="Harold in Tank (P1)" width="48" height="40" animation="" />
-    <item hash="ae302d0f7e2bfa8fa08c034111c81725" sprite="Harold in Tank (P1)" width="48" height="40" animation="" />
-    <item hash="b09bff97f6ebccafe348bd13a8bc03e4" sprite="Harold in Tank (P1)" width="48" height="40" animation="" />
-    <item hash="b3464a337aa1283fa25168f36090a9ad" sprite="Harold in Tank (P1)" width="48" height="40" animation="" />
-    <item hash="b5a2fa4e5740494015728e98084a7566" sprite="Harold in Tank (P1)" width="48" height="40" animation="" />
-    <item hash="b667429e25baa5bb4995469107d6e3a3" sprite="Harold in Tank (P1)" width="48" height="40" animation="" />
-    <item hash="bb78f953634035d79979b40db82e6ecb" sprite="Harold in Tank (P1)" width="48" height="40" animation="" />
-    <item hash="d0f717863d38eb3aa4d34aaa38bb2b14" sprite="Harold in Tank (P1)" width="48" height="40" animation="" />
-    <item hash="d3ccbb1238d924313828b02f646c1806" sprite="Harold in Tank (P1)" width="48" height="40" animation="" />
-    <item hash="db3f11d5e6231299b8c602929be4b39d" sprite="Harold in Tank (P1)" width="48" height="40" animation="" />
-    <item hash="e102bdf8ee2689ce88c5af49a7973e83" sprite="Harold in Tank (P1)" width="48" height="40" animation="" />
-    <item hash="e10408b09c7d8d00680e55e9eb4f2bfe" sprite="Harold in Tank (P1)" width="48" height="40" animation="" />
-    <item hash="e40843bb02a44554e2d6313d4b00fc5b" sprite="Harold in Tank (P1)" width="48" height="40" animation="" />
-    <item hash="e40903cebfdccca03c6e0ad21cffe6b6" sprite="Harold in Tank (P1)" width="48" height="40" animation="" />
-    <item hash="e448a80eab2755ff2f822e6b37200eb4" sprite="Harold in Tank (P1)" width="48" height="40" animation="" />
-    <item hash="ecf143ab5777d8f6d73ae16f92f9258c" sprite="Harold in Tank (P1)" width="48" height="40" animation="" />
-    <item hash="f5f7e030a36efe57074bfc8c9f243b09" sprite="Harold in Tank (P1)" width="48" height="40" animation="" />
-    <item hash="025695d1c20b6f5e39a07e864ee71da5" sprite="Harold in Tank (P2)" width="48" height="40" animation="" />
-    <item hash="0ab188cf9365ccd36042739aed2464bb" sprite="Harold in Tank (P2)" width="48" height="40" animation="" />
-    <item hash="11d7753e3e1e421d96cf5a3007b9987e" sprite="Harold in Tank (P2)" width="48" height="40" animation="" />
-    <item hash="239c3cde9877e5f58c4ffc61a6b1b856" sprite="Harold in Tank (P2)" width="48" height="40" animation="" />
-    <item hash="2ae3325f37602f14704dd4b35cb2ffd5" sprite="Harold in Tank (P2)" width="48" height="40" animation="" />
-    <item hash="30c90742f56964e501c5b42cb9d37577" sprite="Harold in Tank (P2)" width="48" height="40" animation="" />
-    <item hash="362cebfdbe98c35776d91ac0f6b06d3f" sprite="Harold in Tank (P2)" width="48" height="40" animation="" />
-    <item hash="3be0335e28949a822a72990859950afc" sprite="Harold in Tank (P2)" width="48" height="40" animation="" />
-    <item hash="3cb75d41da6a1d6190057646a3a1a50b" sprite="Harold in Tank (P2)" width="48" height="40" animation="" />
-    <item hash="3ef641badb0a5f4a99e682ce24dfadf6" sprite="Harold in Tank (P2)" width="48" height="40" animation="" />
-    <item hash="3f1a83b100534cc342141e9897fa79f0" sprite="Harold in Tank (P2)" width="48" height="40" animation="" />
-    <item hash="3ff82b604074c7c1d23c4566caa2e877" sprite="Harold in Tank (P2)" width="48" height="40" animation="" />
-    <item hash="492733b8c93472c42da0261bb7d8d436" sprite="Harold in Tank (P2)" width="48" height="40" animation="" />
-    <item hash="4b5caac3bddac7ecb8bcfcca6a414d06" sprite="Harold in Tank (P2)" width="48" height="40" animation="" />
-    <item hash="5b4fe320aff0bf1c39edb769203ab60a" sprite="Harold in Tank (P2)" width="48" height="40" animation="" />
-    <item hash="5f23a18660c176e0680ca1075c51b27c" sprite="Harold in Tank (P2)" width="48" height="40" animation="" />
-    <item hash="5f9082e3d664131ec7ef22b033ce1080" sprite="Harold in Tank (P2)" width="48" height="40" animation="" />
-    <item hash="638aa0d2fd3903c9f67c1475f5e56e0a" sprite="Harold in Tank (P2)" width="48" height="40" animation="" />
-    <item hash="784c3eb553a6d7723562febd0ab525b9" sprite="Harold in Tank (P2)" width="48" height="40" animation="" />
-    <item hash="7c27442cbcfd12ed971d9aaddf0fd423" sprite="Harold in Tank (P2)" width="48" height="40" animation="" />
-    <item hash="82e8060c67442cf9704ea186c1f8996a" sprite="Harold in Tank (P2)" width="48" height="40" animation="" />
-    <item hash="9b87998cd73c5d74d76c52df8d2333af" sprite="Harold in Tank (P2)" width="48" height="40" animation="" />
-    <item hash="9cc83451bee45a312c00e00a1169608f" sprite="Harold in Tank (P2)" width="48" height="40" animation="" />
-    <item hash="9e7db50f09394892898aa60dac801ffe" sprite="Harold in Tank (P2)" width="48" height="40" animation="" />
-    <item hash="9ee1867a5e57c4d24dd07b90edda207a" sprite="Harold in Tank (P2)" width="48" height="40" animation="" />
-    <item hash="a2e34e77f90b723df1a01b2099dc3a58" sprite="Harold in Tank (P2)" width="48" height="40" animation="" />
-    <item hash="a386d9c340f1c8b336bf89ef196246ee" sprite="Harold in Tank (P2)" width="48" height="40" animation="" />
-    <item hash="a4a98ddd5abe37e3d778418b22f0462a" sprite="Harold in Tank (P2)" width="48" height="40" animation="" />
-    <item hash="a563b8f505ad40d8d0facd6d9a5f9580" sprite="Harold in Tank (P2)" width="48" height="40" animation="" />
-    <item hash="b2e45937cd86fafecc8991540b5f0e79" sprite="Harold in Tank (P2)" width="48" height="40" animation="" />
-    <item hash="b643fd419fa38ff508391f1a5bb5fc45" sprite="Harold in Tank (P2)" width="48" height="40" animation="" />
-    <item hash="bc37525d5bb4e469d4a0dff69c5fd6c2" sprite="Harold in Tank (P2)" width="48" height="40" animation="" />
-    <item hash="bff37b95b659dce1a4034e55b19a8cda" sprite="Harold in Tank (P2)" width="48" height="40" animation="" />
-    <item hash="c07fa467c722291bc918414f10079f43" sprite="Harold in Tank (P2)" width="48" height="40" animation="" />
-    <item hash="c1e403af92f6aa6649102f5efd63f550" sprite="Harold in Tank (P2)" width="48" height="40" animation="" />
-    <item hash="c22e918c5ac6d79210c2626e8caffd58" sprite="Harold in Tank (P2)" width="48" height="40" animation="" />
-    <item hash="c49cd0583701ffe43045057cd8fa93f3" sprite="Harold in Tank (P2)" width="48" height="40" animation="" />
-    <item hash="c8b72b04ee8a6003e06ee382c8bad74d" sprite="Harold in Tank (P2)" width="48" height="40" animation="" />
-    <item hash="c944edd9fa377647bea81da142ec4c1f" sprite="Harold in Tank (P2)" width="48" height="40" animation="" />
-    <item hash="cc43a2cb1d2b9ae47abd76b50e2ab7f1" sprite="Harold in Tank (P2)" width="48" height="40" animation="" />
-    <item hash="d6db3e352e018d9af194036f23b33a4d" sprite="Harold in Tank (P2)" width="48" height="40" animation="" />
-    <item hash="db5f57603117124615a7114e8840f5d2" sprite="Harold in Tank (P2)" width="48" height="40" animation="" />
-    <item hash="e328cde8a54bcf9528bcdb3ed9286fc9" sprite="Harold in Tank (P2)" width="48" height="40" animation="" />
-    <item hash="f322217acc0a852216c21ef7f83e65f6" sprite="Harold in Tank (P2)" width="48" height="40" animation="" />
-    <item hash="f3e1d5002d38eca1808804004e27d02a" sprite="Harold in Tank (P2)" width="48" height="40" animation="" />
-    <item hash="f9e89f8e9485f2de4ca99d30f5a7e4d4" sprite="Harold in Tank (P2)" width="48" height="40" animation="" />
-    <item hash="fb338e7c98dca59d3fc691513e15a76b" sprite="Harold in Tank (P2)" width="48" height="40" animation="" />
-    <item hash="ff3a5887cafa71434bf437c63e25bdef" sprite="Harold in Tank (P2)" width="48" height="40" animation="" />
+    <item hash="025695d1c20b6f5e39a07e864ee71da5" sprite="Harold (P2) (Tank)" width="48" height="40" animation="" />
+    <item hash="0ab188cf9365ccd36042739aed2464bb" sprite="Harold (P2) (Tank)" width="48" height="40" animation="" />
+    <item hash="11d7753e3e1e421d96cf5a3007b9987e" sprite="Harold (P2) (Tank)" width="48" height="40" animation="" />
+    <item hash="239c3cde9877e5f58c4ffc61a6b1b856" sprite="Harold (P2) (Tank)" width="48" height="40" animation="" />
+    <item hash="2ae3325f37602f14704dd4b35cb2ffd5" sprite="Harold (P2) (Tank)" width="48" height="40" animation="" />
+    <item hash="30c90742f56964e501c5b42cb9d37577" sprite="Harold (P2) (Tank)" width="48" height="40" animation="" />
+    <item hash="362cebfdbe98c35776d91ac0f6b06d3f" sprite="Harold (P2) (Tank)" width="48" height="40" animation="" />
+    <item hash="3be0335e28949a822a72990859950afc" sprite="Harold (P2) (Tank)" width="48" height="40" animation="" />
+    <item hash="3cb75d41da6a1d6190057646a3a1a50b" sprite="Harold (P2) (Tank)" width="48" height="40" animation="" />
+    <item hash="3ef641badb0a5f4a99e682ce24dfadf6" sprite="Harold (P2) (Tank)" width="48" height="40" animation="" />
+    <item hash="3f1a83b100534cc342141e9897fa79f0" sprite="Harold (P2) (Tank)" width="48" height="40" animation="" />
+    <item hash="3ff82b604074c7c1d23c4566caa2e877" sprite="Harold (P2) (Tank)" width="48" height="40" animation="" />
+    <item hash="492733b8c93472c42da0261bb7d8d436" sprite="Harold (P2) (Tank)" width="48" height="40" animation="" />
+    <item hash="4b5caac3bddac7ecb8bcfcca6a414d06" sprite="Harold (P2) (Tank)" width="48" height="40" animation="" />
+    <item hash="5b4fe320aff0bf1c39edb769203ab60a" sprite="Harold (P2) (Tank)" width="48" height="40" animation="" />
+    <item hash="5f23a18660c176e0680ca1075c51b27c" sprite="Harold (P2) (Tank)" width="48" height="40" animation="" />
+    <item hash="5f9082e3d664131ec7ef22b033ce1080" sprite="Harold (P2) (Tank)" width="48" height="40" animation="" />
+    <item hash="638aa0d2fd3903c9f67c1475f5e56e0a" sprite="Harold (P2) (Tank)" width="48" height="40" animation="" />
+    <item hash="784c3eb553a6d7723562febd0ab525b9" sprite="Harold (P2) (Tank)" width="48" height="40" animation="" />
+    <item hash="7c27442cbcfd12ed971d9aaddf0fd423" sprite="Harold (P2) (Tank)" width="48" height="40" animation="" />
+    <item hash="82e8060c67442cf9704ea186c1f8996a" sprite="Harold (P2) (Tank)" width="48" height="40" animation="" />
+    <item hash="9b87998cd73c5d74d76c52df8d2333af" sprite="Harold (P2) (Tank)" width="48" height="40" animation="" />
+    <item hash="9cc83451bee45a312c00e00a1169608f" sprite="Harold (P2) (Tank)" width="48" height="40" animation="" />
+    <item hash="9e7db50f09394892898aa60dac801ffe" sprite="Harold (P2) (Tank)" width="48" height="40" animation="" />
+    <item hash="9ee1867a5e57c4d24dd07b90edda207a" sprite="Harold (P2) (Tank)" width="48" height="40" animation="" />
+    <item hash="a2e34e77f90b723df1a01b2099dc3a58" sprite="Harold (P2) (Tank)" width="48" height="40" animation="" />
+    <item hash="a386d9c340f1c8b336bf89ef196246ee" sprite="Harold (P2) (Tank)" width="48" height="40" animation="" />
+    <item hash="a4a98ddd5abe37e3d778418b22f0462a" sprite="Harold (P2) (Tank)" width="48" height="40" animation="" />
+    <item hash="a563b8f505ad40d8d0facd6d9a5f9580" sprite="Harold (P2) (Tank)" width="48" height="40" animation="" />
+    <item hash="b2e45937cd86fafecc8991540b5f0e79" sprite="Harold (P2) (Tank)" width="48" height="40" animation="" />
+    <item hash="b643fd419fa38ff508391f1a5bb5fc45" sprite="Harold (P2) (Tank)" width="48" height="40" animation="" />
+    <item hash="bc37525d5bb4e469d4a0dff69c5fd6c2" sprite="Harold (P2) (Tank)" width="48" height="40" animation="" />
+    <item hash="bff37b95b659dce1a4034e55b19a8cda" sprite="Harold (P2) (Tank)" width="48" height="40" animation="" />
+    <item hash="c07fa467c722291bc918414f10079f43" sprite="Harold (P2) (Tank)" width="48" height="40" animation="" />
+    <item hash="c1e403af92f6aa6649102f5efd63f550" sprite="Harold (P2) (Tank)" width="48" height="40" animation="" />
+    <item hash="c22e918c5ac6d79210c2626e8caffd58" sprite="Harold (P2) (Tank)" width="48" height="40" animation="" />
+    <item hash="c49cd0583701ffe43045057cd8fa93f3" sprite="Harold (P2) (Tank)" width="48" height="40" animation="" />
+    <item hash="c8b72b04ee8a6003e06ee382c8bad74d" sprite="Harold (P2) (Tank)" width="48" height="40" animation="" />
+    <item hash="c944edd9fa377647bea81da142ec4c1f" sprite="Harold (P2) (Tank)" width="48" height="40" animation="" />
+    <item hash="cc43a2cb1d2b9ae47abd76b50e2ab7f1" sprite="Harold (P2) (Tank)" width="48" height="40" animation="" />
+    <item hash="d6db3e352e018d9af194036f23b33a4d" sprite="Harold (P2) (Tank)" width="48" height="40" animation="" />
+    <item hash="db5f57603117124615a7114e8840f5d2" sprite="Harold (P2) (Tank)" width="48" height="40" animation="" />
+    <item hash="e328cde8a54bcf9528bcdb3ed9286fc9" sprite="Harold (P2) (Tank)" width="48" height="40" animation="" />
+    <item hash="f322217acc0a852216c21ef7f83e65f6" sprite="Harold (P2) (Tank)" width="48" height="40" animation="" />
+    <item hash="f3e1d5002d38eca1808804004e27d02a" sprite="Harold (P2) (Tank)" width="48" height="40" animation="" />
+    <item hash="f9e89f8e9485f2de4ca99d30f5a7e4d4" sprite="Harold (P2) (Tank)" width="48" height="40" animation="" />
+    <item hash="fb338e7c98dca59d3fc691513e15a76b" sprite="Harold (P2) (Tank)" width="48" height="40" animation="" />
+    <item hash="ff3a5887cafa71434bf437c63e25bdef" sprite="Harold (P2) (Tank)" width="48" height="40" animation="" />
     <item hash="2927224d38241beeee4818f661fc7363" sprite="Harold's Tank (P1)" width="48" height="40" animation="" />
     <item hash="90ad34846fe13c2cb55ef8fa10348ada" sprite="Harold's Tank (P1)" width="48" height="40" animation="" />
     <item hash="a0a0a08ea9ee7f6773ff7e2aa8e65319" sprite="Harold's Tank (P1)" width="48" height="40" animation="" />
@@ -9706,82 +9706,82 @@
     <item hash="fa7519655c98a66c14dea6b1aade57bb" sprite="Hayward (U)" width="40" height="40" animation="" />
     <item hash="faf6670f7f83fa09e8df54cd94be72a5" sprite="Hayward (U)" width="40" height="40" animation="" />
     <item hash="fe625b8001e2b964448a2fd39fd51fcb" sprite="Hayward (U)" width="40" height="40" animation="" />
-    <item hash="000af4a75a55588bf4cf724fcb9f9d94" sprite="Hazuki (P1)" width="40" height="40" animation="" />
-    <item hash="0459040113c764fa8b7b2d938e361db3" sprite="Hazuki (P1)" width="40" height="40" animation="" />
-    <item hash="053f1e8674ec29dd75667054201d700c" sprite="Hazuki (P1)" width="40" height="40" animation="" />
-    <item hash="07ee4edd85b9fdeb4fff7a79135d1476" sprite="Hazuki (P1)" width="40" height="40" animation="" />
-    <item hash="0f995eedc970adee9e8ad1dc8c9611b7" sprite="Hazuki (P1)" width="40" height="40" animation="" />
     <item hash="133299f2292dde56cde17c8d4e5be814" sprite="Hazuki (P1)" width="40" height="40" animation="" />
-    <item hash="19a4ec1160b18914bd443fc0d5ad7460" sprite="Hazuki (P1)" width="40" height="40" animation="" />
-    <item hash="1e49aa6f56f702186ac01262a12bc150" sprite="Hazuki (P1)" width="40" height="40" animation="" />
     <item hash="1e9eaba6be43a5c7d781d47527403ce0" sprite="Hazuki (P1)" width="40" height="40" animation="" />
     <item hash="20ce3a7c1864a8bb3845a93eb05200c1" sprite="Hazuki (P1)" width="40" height="40" animation="" />
-    <item hash="2184fc6112dc4afc24a17c90b226fbf3" sprite="Hazuki (P1)" width="40" height="40" animation="" />
-    <item hash="24ef142a0663fcc1703709dc9681ad1f" sprite="Hazuki (P1)" width="40" height="40" animation="" />
     <item hash="28d9e74c833345b7d9e3149d56c94568" sprite="Hazuki (P1)" width="40" height="40" animation="" />
     <item hash="2abff134d14b0440fcb550de4b31ccee" sprite="Hazuki (P1)" width="40" height="40" animation="" />
-    <item hash="2be5ebca153afd7cb1add7b5d1e93651" sprite="Hazuki (P1)" width="40" height="40" animation="" />
-    <item hash="325ff56324eacd506805b81b7562673a" sprite="Hazuki (P1)" width="40" height="40" animation="" />
-    <item hash="34f643b6c689eb0558abbdd003d3572f" sprite="Hazuki (P1)" width="40" height="40" animation="" />
-    <item hash="3b49200f6d9cde6cd6d73ed569bbd54d" sprite="Hazuki (P1)" width="40" height="40" animation="" />
     <item hash="3c5af84b21bfe860627e400f4a0da53b" sprite="Hazuki (P1)" width="40" height="40" animation="" />
-    <item hash="3d27f49ae1ed68f9efa750366cbaa467" sprite="Hazuki (P1)" width="40" height="40" animation="" />
-    <item hash="4539e667545eb7af8edc74720affaeb1" sprite="Hazuki (P1)" width="40" height="40" animation="" />
-    <item hash="50951f6b45c451d70c95dd4bddab9841" sprite="Hazuki (P1)" width="40" height="40" animation="" />
     <item hash="50c5c3fba5b05626bfc258c9e77157cb" sprite="Hazuki (P1)" width="40" height="40" animation="" />
     <item hash="541a8b4eafa7bf3c07177bf96f58869e" sprite="Hazuki (P1)" width="40" height="40" animation="" />
-    <item hash="54bcaf842e0766abdbafa08bc262a4ff" sprite="Hazuki (P1)" width="40" height="40" animation="" />
     <item hash="5628d77cbc4a8dd7bb4908d05ca115c8" sprite="Hazuki (P1)" width="40" height="40" animation="" />
-    <item hash="5c2d6d1bb5b7785a878d8e813ababd33" sprite="Hazuki (P1)" width="40" height="40" animation="" />
-    <item hash="5c4e8e7e3839798abfef2016a29b27b3" sprite="Hazuki (P1)" width="40" height="40" animation="" />
     <item hash="5fdbe7911385a557333ae5c39f037481" sprite="Hazuki (P1)" width="40" height="40" animation="" />
-    <item hash="649d0f8c256d57d98564f345ad2c9b9a" sprite="Hazuki (P1)" width="40" height="40" animation="" />
-    <item hash="6739cfb98625d372fadd0dddca084c12" sprite="Hazuki (P1)" width="40" height="40" animation="" />
     <item hash="68184d4955bee474052d500551e65796" sprite="Hazuki (P1)" width="40" height="40" animation="" />
-    <item hash="751d779544c9f2fccc7c53a14c871c68" sprite="Hazuki (P1)" width="40" height="40" animation="" />
-    <item hash="75f0b72abe19a8e856cd20f399c405fb" sprite="Hazuki (P1)" width="40" height="40" animation="" />
-    <item hash="76d0ce74f36e515e0bfaebf1ed7af1d1" sprite="Hazuki (P1)" width="40" height="40" animation="" />
     <item hash="77f60d2fcef94b879b9838b0e66365c0" sprite="Hazuki (P1)" width="40" height="40" animation="" />
-    <item hash="7941b269639aa21fec6eace7a3b87724" sprite="Hazuki (P1)" width="40" height="40" animation="" />
-    <item hash="7df687ad5095a7b7d16b810793ae7abf" sprite="Hazuki (P1)" width="40" height="40" animation="" />
     <item hash="898ab7a3b6011c73059cba7cfd0c63f2" sprite="Hazuki (P1)" width="40" height="40" animation="" />
     <item hash="8a66ef14045e40d9df16553f22b59d04" sprite="Hazuki (P1)" width="40" height="40" animation="" />
     <item hash="8aeb99f64e6e14e22f6c7a94f448830a" sprite="Hazuki (P1)" width="40" height="40" animation="" />
-    <item hash="924fac6c1b6728d87f88895e8ccbc4f2" sprite="Hazuki (P1)" width="40" height="40" animation="" />
     <item hash="92f392fd82405c09acf66f81d9128893" sprite="Hazuki (P1)" width="40" height="40" animation="" />
-    <item hash="940f2500962cba4d7c9fa7529b3ccd78" sprite="Hazuki (P1)" width="40" height="40" animation="" />
-    <item hash="94409c2877fd739d643fa452a5ec7350" sprite="Hazuki (P1)" width="40" height="40" animation="" />
-    <item hash="9452c5e08db737e3cc27ed21f37b8ec7" sprite="Hazuki (P1)" width="40" height="40" animation="" />
     <item hash="a0851ff117ea379d6514d871e7151ecd" sprite="Hazuki (P1)" width="40" height="40" animation="" />
     <item hash="a4565f37b96966e31529d639b704e2ff" sprite="Hazuki (P1)" width="40" height="40" animation="" />
     <item hash="ac84890584bf2822e61f532275e6e529" sprite="Hazuki (P1)" width="40" height="40" animation="" />
     <item hash="adc995e8442c0e7d773d926f5357ae99" sprite="Hazuki (P1)" width="40" height="40" animation="" />
-    <item hash="b49ca45f884e0929d008983480792032" sprite="Hazuki (P1)" width="40" height="40" animation="" />
-    <item hash="be43d0da40f108c3aa0abde4647f774f" sprite="Hazuki (P1)" width="40" height="40" animation="" />
     <item hash="c06edc4f0e428f7aff7d85af8f04bb78" sprite="Hazuki (P1)" width="40" height="40" animation="" />
     <item hash="c0be80b087b1ca1b94e112cf6268fe37" sprite="Hazuki (P1)" width="40" height="40" animation="" />
-    <item hash="c5e943cbb70aceaccb1c093ebca6eefe" sprite="Hazuki (P1)" width="40" height="40" animation="" />
-    <item hash="d17b2234f238b8612d2dacf605b3f370" sprite="Hazuki (P1)" width="40" height="40" animation="" />
-    <item hash="d40f74af6bcaf42fa505858065bb5e82" sprite="Hazuki (P1)" width="40" height="40" animation="" />
     <item hash="d69879f47dca9d03cdfb7a737ed18d16" sprite="Hazuki (P1)" width="40" height="40" animation="" />
-    <item hash="dd4e7650a83cd27c36ba5ce6561758f1" sprite="Hazuki (P1)" width="40" height="40" animation="" />
     <item hash="df3256c91712bc24effdd3bcb1d52906" sprite="Hazuki (P1)" width="40" height="40" animation="" />
-    <item hash="e0ad3d4bf65ad502e3be1b6da8eab12a" sprite="Hazuki (P1)" width="40" height="40" animation="" />
     <item hash="e5de455d9dc8786caf6860f4713b8088" sprite="Hazuki (P1)" width="40" height="40" animation="" />
-    <item hash="e993a54ed75408177c94ebcace8aa1fd" sprite="Hazuki (P1)" width="40" height="40" animation="" />
-    <item hash="ea5ce6a3f4ca1ef5379bdef5d937d5cb" sprite="Hazuki (P1)" width="40" height="40" animation="" />
     <item hash="eb8a50c4ba38ef759b68b4870cef1083" sprite="Hazuki (P1)" width="40" height="40" animation="" />
-    <item hash="ee1940c98c637ac24e70aaa7eb4737a7" sprite="Hazuki (P1)" width="40" height="40" animation="" />
-    <item hash="f0445b00a0769632de06777965f42b59" sprite="Hazuki (P1)" width="40" height="40" animation="" />
-    <item hash="f06fcc1727a415b570affd2f6cf12257" sprite="Hazuki (P1)" width="40" height="40" animation="" />
     <item hash="f9c051f0ca7d277559341f68e6e9a2aa" sprite="Hazuki (P1)" width="40" height="40" animation="" />
     <item hash="faf8afb6e4e8dbc528839a48fa0dd636" sprite="Hazuki (P1)" width="40" height="40" animation="" />
-    <item hash="fc56145353fb1d0e13574d5a56d0830c" sprite="Hazuki (P1)" width="40" height="40" animation="" />
-    <item hash="feea4e590934d23d9bbe1c90ea8aebfe" sprite="Hazuki (P1)" width="40" height="40" animation="" />
     <item hash="2c07d63d5abf716592b361987c3ae380" sprite="Hazuki (P1)" width="48" height="40" animation="" />
     <item hash="31f502a96aa473a52d2ec4ff9c0eafaf" sprite="Hazuki (P1)" width="48" height="40" animation="" />
     <item hash="3605403a6d658e220302068ba2423836" sprite="Hazuki (P1)" width="48" height="40" animation="" />
     <item hash="5062ebb4e8c0dc7f16d899406e1870c7" sprite="Hazuki (P1)" width="48" height="40" animation="" />
+    <item hash="000af4a75a55588bf4cf724fcb9f9d94" sprite="Hazuki (P1) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="0459040113c764fa8b7b2d938e361db3" sprite="Hazuki (P1) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="053f1e8674ec29dd75667054201d700c" sprite="Hazuki (P1) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="07ee4edd85b9fdeb4fff7a79135d1476" sprite="Hazuki (P1) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="0f995eedc970adee9e8ad1dc8c9611b7" sprite="Hazuki (P1) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="19a4ec1160b18914bd443fc0d5ad7460" sprite="Hazuki (P1) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="1e49aa6f56f702186ac01262a12bc150" sprite="Hazuki (P1) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="2184fc6112dc4afc24a17c90b226fbf3" sprite="Hazuki (P1) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="24ef142a0663fcc1703709dc9681ad1f" sprite="Hazuki (P1) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="2be5ebca153afd7cb1add7b5d1e93651" sprite="Hazuki (P1) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="325ff56324eacd506805b81b7562673a" sprite="Hazuki (P1) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="34f643b6c689eb0558abbdd003d3572f" sprite="Hazuki (P1) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="3b49200f6d9cde6cd6d73ed569bbd54d" sprite="Hazuki (P1) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="3d27f49ae1ed68f9efa750366cbaa467" sprite="Hazuki (P1) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="4539e667545eb7af8edc74720affaeb1" sprite="Hazuki (P1) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="50951f6b45c451d70c95dd4bddab9841" sprite="Hazuki (P1) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="54bcaf842e0766abdbafa08bc262a4ff" sprite="Hazuki (P1) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="5c2d6d1bb5b7785a878d8e813ababd33" sprite="Hazuki (P1) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="5c4e8e7e3839798abfef2016a29b27b3" sprite="Hazuki (P1) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="649d0f8c256d57d98564f345ad2c9b9a" sprite="Hazuki (P1) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="6739cfb98625d372fadd0dddca084c12" sprite="Hazuki (P1) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="751d779544c9f2fccc7c53a14c871c68" sprite="Hazuki (P1) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="75f0b72abe19a8e856cd20f399c405fb" sprite="Hazuki (P1) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="76d0ce74f36e515e0bfaebf1ed7af1d1" sprite="Hazuki (P1) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="7941b269639aa21fec6eace7a3b87724" sprite="Hazuki (P1) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="7df687ad5095a7b7d16b810793ae7abf" sprite="Hazuki (P1) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="924fac6c1b6728d87f88895e8ccbc4f2" sprite="Hazuki (P1) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="940f2500962cba4d7c9fa7529b3ccd78" sprite="Hazuki (P1) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="94409c2877fd739d643fa452a5ec7350" sprite="Hazuki (P1) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="9452c5e08db737e3cc27ed21f37b8ec7" sprite="Hazuki (P1) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="b49ca45f884e0929d008983480792032" sprite="Hazuki (P1) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="be43d0da40f108c3aa0abde4647f774f" sprite="Hazuki (P1) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="c5e943cbb70aceaccb1c093ebca6eefe" sprite="Hazuki (P1) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="d17b2234f238b8612d2dacf605b3f370" sprite="Hazuki (P1) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="d40f74af6bcaf42fa505858065bb5e82" sprite="Hazuki (P1) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="dd4e7650a83cd27c36ba5ce6561758f1" sprite="Hazuki (P1) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="e0ad3d4bf65ad502e3be1b6da8eab12a" sprite="Hazuki (P1) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="e993a54ed75408177c94ebcace8aa1fd" sprite="Hazuki (P1) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="ea5ce6a3f4ca1ef5379bdef5d937d5cb" sprite="Hazuki (P1) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="ee1940c98c637ac24e70aaa7eb4737a7" sprite="Hazuki (P1) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="f0445b00a0769632de06777965f42b59" sprite="Hazuki (P1) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="f06fcc1727a415b570affd2f6cf12257" sprite="Hazuki (P1) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="fc56145353fb1d0e13574d5a56d0830c" sprite="Hazuki (P1) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="feea4e590934d23d9bbe1c90ea8aebfe" sprite="Hazuki (P1) (Weaponless)" width="40" height="40" animation="" />
     <item hash="0221ddc636cda41277a996b404fdd3c3" sprite="Hazuki (P2)" width="40" height="40" animation="" />
     <item hash="04c31069ca18241a98eea14c174e93fe" sprite="Hazuki (P2)" width="40" height="40" animation="" />
     <item hash="06db51e6336f5cef195d62c00f62359d" sprite="Hazuki (P2)" width="40" height="40" animation="" />
@@ -9855,77 +9855,33 @@
     <item hash="f7f821a0a8c6c8be36453922d5280666" sprite="Hazuki (P2)" width="40" height="40" animation="" />
     <item hash="ff1202b0a9f7b32ec466d924ebd0f69a" sprite="Hazuki (P2)" width="40" height="40" animation="" />
     <item hash="057d551dfd401b00034c04712adfe0a1" sprite="Hazuki (U)" width="40" height="40" animation="" />
-    <item hash="0656bae2612e72ae4d07ca707c67c835" sprite="Hazuki (U)" width="40" height="40" animation="" />
     <item hash="0a15953971ef1b30e1d8fe3ae76ef542" sprite="Hazuki (U)" width="40" height="40" animation="" />
-    <item hash="0ed172b110fdafa0b2275bef9f893aa7" sprite="Hazuki (U)" width="40" height="40" animation="" />
     <item hash="10ccc78bb9c60ed5fc6fc79f0e5b1057" sprite="Hazuki (U)" width="40" height="40" animation="" />
     <item hash="11f680b8f4477399683058facd8defe7" sprite="Hazuki (U)" width="40" height="40" animation="" />
-    <item hash="1c5ef52ef728464c8a8f83c0e21a6482" sprite="Hazuki (U)" width="40" height="40" animation="" />
-    <item hash="1c7079491c23f5f9465791c8ea5ae834" sprite="Hazuki (U)" width="40" height="40" animation="" />
-    <item hash="1d65ce088e4b45a558d83e5c8ecf99c7" sprite="Hazuki (U)" width="40" height="40" animation="" />
-    <item hash="1de179f30efb5c4c90192a947583c8cc" sprite="Hazuki (U)" width="40" height="40" animation="" />
-    <item hash="26c0ebbfe70a4566bbd88bbc68e4e443" sprite="Hazuki (U)" width="40" height="40" animation="" />
     <item hash="2844ea787d435b47a62467b0a783d2e4" sprite="Hazuki (U)" width="40" height="40" animation="" />
-    <item hash="336936c638bb9a9ad0f0fa2752b84253" sprite="Hazuki (U)" width="40" height="40" animation="" />
     <item hash="339a91e7ab9641de87de13d6513abef9" sprite="Hazuki (U)" width="40" height="40" animation="" />
     <item hash="3518748498a54869c3a140b6e254021b" sprite="Hazuki (U)" width="40" height="40" animation="" />
-    <item hash="359ab1efe73783df7d4be67a7636325f" sprite="Hazuki (U)" width="40" height="40" animation="" />
-    <item hash="35beb231dbf13fbfd142ac7b7d538911" sprite="Hazuki (U)" width="40" height="40" animation="" />
-    <item hash="3ae7d38eedb348fe40083d996aeef2f9" sprite="Hazuki (U)" width="40" height="40" animation="" />
-    <item hash="3b9aa56654ef8e25c0b41f2a44121c85" sprite="Hazuki (U)" width="40" height="40" animation="" />
     <item hash="3d45cd8964ef66a9a6bda0dcaf1bb78f" sprite="Hazuki (U)" width="40" height="40" animation="" />
     <item hash="418e9c6553a55ac98d397b15e346d639" sprite="Hazuki (U)" width="40" height="40" animation="" />
-    <item hash="482d0e0830b617617ea09cc8637ad09d" sprite="Hazuki (U)" width="40" height="40" animation="" />
     <item hash="494d498fc380739958745b9fe1509ad3" sprite="Hazuki (U)" width="40" height="40" animation="" />
-    <item hash="49f113ba7fcebf162a714d5c3f2a104d" sprite="Hazuki (U)" width="40" height="40" animation="" />
     <item hash="4e3633e690da0d5c900f0bb9d985f992" sprite="Hazuki (U)" width="40" height="40" animation="" />
     <item hash="507fd6c00b1092dd23337bfee0a2c942" sprite="Hazuki (U)" width="40" height="40" animation="" />
-    <item hash="50dff735f3b9e127921b5fad49493c4d" sprite="Hazuki (U)" width="40" height="40" animation="" />
-    <item hash="557b34208e043cdf5930b98d84fc0083" sprite="Hazuki (U)" width="40" height="40" animation="" />
     <item hash="5e34068211139aef1c91b2bb6ace8a32" sprite="Hazuki (U)" width="40" height="40" animation="" />
-    <item hash="5efc748ddc3606600e15e996625a81e8" sprite="Hazuki (U)" width="40" height="40" animation="" />
     <item hash="61f153c2408f98afdca1a5bc520cc66d" sprite="Hazuki (U)" width="40" height="40" animation="" />
-    <item hash="62f7b614cc98f0fa8d8ba27b6a2c3c1e" sprite="Hazuki (U)" width="40" height="40" animation="" />
-    <item hash="66b86d4ff33b898bfc058a92a8faf198" sprite="Hazuki (U)" width="40" height="40" animation="" />
     <item hash="67e147a37c7cffdffed9148efcf79734" sprite="Hazuki (U)" width="40" height="40" animation="" />
-    <item hash="6a0aab1ffae608a0cb23ae250a5e5951" sprite="Hazuki (U)" width="40" height="40" animation="" />
     <item hash="6d9c1ec36cb140cdc18f71d7806ea19f" sprite="Hazuki (U)" width="40" height="40" animation="" />
-    <item hash="724e14ee46b1b74f943c9cbeba612d22" sprite="Hazuki (U)" width="40" height="40" animation="" />
-    <item hash="726152e337c64ff237fc946a65c971c4" sprite="Hazuki (U)" width="40" height="40" animation="" />
-    <item hash="72b3346ffd0a33e56f9564bc256aaa3f" sprite="Hazuki (U)" width="40" height="40" animation="" />
-    <item hash="73af677ca27c2d4a59e39c3b2051bcd3" sprite="Hazuki (U)" width="40" height="40" animation="" />
-    <item hash="75a06286e3f885d43913971424d63e34" sprite="Hazuki (U)" width="40" height="40" animation="" />
     <item hash="772a32816d2f165a2c462d4d741b7d01" sprite="Hazuki (U)" width="40" height="40" animation="" />
-    <item hash="780d75a79e687b8c88d8db8ccf8df8aa" sprite="Hazuki (U)" width="40" height="40" animation="" />
-    <item hash="7dee7028be49db70ad10c83cf889050a" sprite="Hazuki (U)" width="40" height="40" animation="" />
     <item hash="82190af1017ca3e13967d43a55a1d804" sprite="Hazuki (U)" width="40" height="40" animation="" />
-    <item hash="8c80ec7fd4166c452ba7f617a17fdf7e" sprite="Hazuki (U)" width="40" height="40" animation="" />
     <item hash="8ea759813ebaaa2594fcbd067eaf2a39" sprite="Hazuki (U)" width="40" height="40" animation="" />
-    <item hash="903d5b0d983fe5aa252d668d53adb88f" sprite="Hazuki (U)" width="40" height="40" animation="" />
     <item hash="934410adaeb400af07fe77750e09ec75" sprite="Hazuki (U)" width="40" height="40" animation="" />
-    <item hash="962e7ef8f51671fcee9ddf9cc435ee93" sprite="Hazuki (U)" width="40" height="40" animation="" />
     <item hash="972e694f743bc271564074bc1b9e9e5e" sprite="Hazuki (U)" width="40" height="40" animation="" />
-    <item hash="9cc5a732a79ded72ed3ea7b7517e6e92" sprite="Hazuki (U)" width="40" height="40" animation="" />
-    <item hash="aa625c2db5f686bc71865093501e328e" sprite="Hazuki (U)" width="40" height="40" animation="" />
-    <item hash="aabb1dc5c6328a5793389a74278e0cc8" sprite="Hazuki (U)" width="40" height="40" animation="" />
-    <item hash="ac3a54d692a7ed016eedb2f33c1fa683" sprite="Hazuki (U)" width="40" height="40" animation="" />
     <item hash="b0ca0310163213bb6324eba680c890ba" sprite="Hazuki (U)" width="40" height="40" animation="" />
-    <item hash="b1b0c38dc5a69df26475f652e32bc761" sprite="Hazuki (U)" width="40" height="40" animation="" />
-    <item hash="b2f5c669ef95fbc753085b31a08547f3" sprite="Hazuki (U)" width="40" height="40" animation="" />
-    <item hash="b95825b2f2a27ecc425167153b70fbab" sprite="Hazuki (U)" width="40" height="40" animation="" />
     <item hash="bd1669d4559f0bc544a567ce53e83dcd" sprite="Hazuki (U)" width="40" height="40" animation="" />
     <item hash="c07a9282ad86a9b98c6715a244157435" sprite="Hazuki (U)" width="40" height="40" animation="" />
-    <item hash="c5d474fac6f893bb9510aa59ea38aefb" sprite="Hazuki (U)" width="40" height="40" animation="" />
-    <item hash="d7deff1feeee14acf6580bab06f0cdb4" sprite="Hazuki (U)" width="40" height="40" animation="" />
-    <item hash="db4eb7ea450c7d7c216234ce6f49370d" sprite="Hazuki (U)" width="40" height="40" animation="" />
-    <item hash="dc23db4a951b60bac8dcb5e5060a3679" sprite="Hazuki (U)" width="40" height="40" animation="" />
     <item hash="eae72a19758967783adbc8ce3f80555d" sprite="Hazuki (U)" width="40" height="40" animation="" />
-    <item hash="f0e0af433520a955813f917a9bd7e83b" sprite="Hazuki (U)" width="40" height="40" animation="" />
     <item hash="f9f51f0388b8ad64836de4d4c472d18d" sprite="Hazuki (U)" width="40" height="40" animation="" />
     <item hash="fcabac91135be344178aaaee12145059" sprite="Hazuki (U)" width="40" height="40" animation="" />
-    <item hash="feb997bab79678bcba32189668e6a2ab" sprite="Hazuki (U)" width="40" height="40" animation="" />
     <item hash="fedc0a7bac4efbc17590977de5ecab97" sprite="Hazuki (U)" width="40" height="40" animation="" />
-    <item hash="ffffa62e51a297552640dd06bbcbcc9f" sprite="Hazuki (U)" width="40" height="40" animation="" />
     <item hash="0bd2415d61744d9b73b8d48315d9c9e7" sprite="Hazuki (U)" width="40" height="40" animation="Jumping" />
     <item hash="28115f4664683b59f51f855a7b3ba8d2" sprite="Hazuki (U)" width="40" height="40" animation="Jumping" />
     <item hash="29064cfeb078db91ffa203b0582907b4" sprite="Hazuki (U)" width="40" height="40" animation="Jumping" />
@@ -9956,6 +9912,50 @@
     <item hash="e29467d91bbc7f6d8b9fb0711ecd91b5" sprite="Hazuki (U)" width="48" height="40" animation="Jumping" />
     <item hash="ec0351772ded499c64e090a5fa947549" sprite="Hazuki (U)" width="48" height="40" animation="Jumping" />
     <item hash="efc04835935182c60595819b059df1ea" sprite="Hazuki (U)" width="48" height="40" animation="Jumping" />
+    <item hash="0656bae2612e72ae4d07ca707c67c835" sprite="Hazuki (U) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="0ed172b110fdafa0b2275bef9f893aa7" sprite="Hazuki (U) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="1c5ef52ef728464c8a8f83c0e21a6482" sprite="Hazuki (U) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="1c7079491c23f5f9465791c8ea5ae834" sprite="Hazuki (U) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="1d65ce088e4b45a558d83e5c8ecf99c7" sprite="Hazuki (U) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="1de179f30efb5c4c90192a947583c8cc" sprite="Hazuki (U) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="26c0ebbfe70a4566bbd88bbc68e4e443" sprite="Hazuki (U) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="336936c638bb9a9ad0f0fa2752b84253" sprite="Hazuki (U) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="359ab1efe73783df7d4be67a7636325f" sprite="Hazuki (U) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="35beb231dbf13fbfd142ac7b7d538911" sprite="Hazuki (U) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="3ae7d38eedb348fe40083d996aeef2f9" sprite="Hazuki (U) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="3b9aa56654ef8e25c0b41f2a44121c85" sprite="Hazuki (U) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="482d0e0830b617617ea09cc8637ad09d" sprite="Hazuki (U) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="49f113ba7fcebf162a714d5c3f2a104d" sprite="Hazuki (U) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="50dff735f3b9e127921b5fad49493c4d" sprite="Hazuki (U) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="557b34208e043cdf5930b98d84fc0083" sprite="Hazuki (U) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="5efc748ddc3606600e15e996625a81e8" sprite="Hazuki (U) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="62f7b614cc98f0fa8d8ba27b6a2c3c1e" sprite="Hazuki (U) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="66b86d4ff33b898bfc058a92a8faf198" sprite="Hazuki (U) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="6a0aab1ffae608a0cb23ae250a5e5951" sprite="Hazuki (U) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="724e14ee46b1b74f943c9cbeba612d22" sprite="Hazuki (U) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="726152e337c64ff237fc946a65c971c4" sprite="Hazuki (U) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="72b3346ffd0a33e56f9564bc256aaa3f" sprite="Hazuki (U) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="73af677ca27c2d4a59e39c3b2051bcd3" sprite="Hazuki (U) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="75a06286e3f885d43913971424d63e34" sprite="Hazuki (U) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="780d75a79e687b8c88d8db8ccf8df8aa" sprite="Hazuki (U) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="7dee7028be49db70ad10c83cf889050a" sprite="Hazuki (U) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="8c80ec7fd4166c452ba7f617a17fdf7e" sprite="Hazuki (U) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="903d5b0d983fe5aa252d668d53adb88f" sprite="Hazuki (U) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="962e7ef8f51671fcee9ddf9cc435ee93" sprite="Hazuki (U) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="9cc5a732a79ded72ed3ea7b7517e6e92" sprite="Hazuki (U) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="aa625c2db5f686bc71865093501e328e" sprite="Hazuki (U) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="aabb1dc5c6328a5793389a74278e0cc8" sprite="Hazuki (U) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="ac3a54d692a7ed016eedb2f33c1fa683" sprite="Hazuki (U) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="b1b0c38dc5a69df26475f652e32bc761" sprite="Hazuki (U) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="b2f5c669ef95fbc753085b31a08547f3" sprite="Hazuki (U) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="b95825b2f2a27ecc425167153b70fbab" sprite="Hazuki (U) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="c5d474fac6f893bb9510aa59ea38aefb" sprite="Hazuki (U) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="d7deff1feeee14acf6580bab06f0cdb4" sprite="Hazuki (U) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="db4eb7ea450c7d7c216234ce6f49370d" sprite="Hazuki (U) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="dc23db4a951b60bac8dcb5e5060a3679" sprite="Hazuki (U) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="f0e0af433520a955813f917a9bd7e83b" sprite="Hazuki (U) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="feb997bab79678bcba32189668e6a2ab" sprite="Hazuki (U) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="ffffa62e51a297552640dd06bbcbcc9f" sprite="Hazuki (U) (Weaponless)" width="40" height="40" animation="" />
     <item hash="05c2674ce02f35d37c25244f43bb3421" sprite="Hazuki's Father" width="48" height="40" animation="Dying" />
     <item hash="08c94f4cfdc1a61af0e40bb3dfc314ac" sprite="Hazuki's Father" width="48" height="40" animation="Dying" />
     <item hash="14332746cdaff9f427c594eec9a00857" sprite="Hazuki's Father" width="48" height="40" animation="Dying" />
@@ -11691,7 +11691,6 @@
     <item hash="18d3b506d1d2acb1e7e4578a02397ddd" sprite="Jade (P1)" width="40" height="40" animation="" />
     <item hash="1fe39ea54b4dd9ac951933318751be4c" sprite="Jade (P1)" width="40" height="40" animation="" />
     <item hash="20b9084ae81d3aa316b0168f21fa65d4" sprite="Jade (P1)" width="40" height="40" animation="" />
-    <item hash="27bcec2c666cc10ad49746de47d74fe3" sprite="Jade (P1)" width="40" height="40" animation="" />
     <item hash="2cf7f54608e1b2f9428d71913a35c8d2" sprite="Jade (P1)" width="40" height="40" animation="" />
     <item hash="33b2d65490635d1aae3a3b3b33963e8f" sprite="Jade (P1)" width="40" height="40" animation="" />
     <item hash="3bf0f87b6fd33d18055736cb934064d8" sprite="Jade (P1)" width="40" height="40" animation="" />
@@ -11702,8 +11701,6 @@
     <item hash="538b0232985f8cee0040ced2431dafb7" sprite="Jade (P1)" width="40" height="40" animation="" />
     <item hash="5517d9e4e5cc5b50400625b2b1b5b13e" sprite="Jade (P1)" width="40" height="40" animation="" />
     <item hash="58454736b42a25ac15c0270e3cd6a014" sprite="Jade (P1)" width="40" height="40" animation="" />
-    <item hash="5b39cc4a3522bc6a512fad1e31c50ab5" sprite="Jade (P1)" width="40" height="40" animation="" />
-    <item hash="5dbe526e57845d18d29b3fdeaf4b99fc" sprite="Jade (P1)" width="40" height="40" animation="" />
     <item hash="5dcf2978e8853e0de1e05679a07c43b1" sprite="Jade (P1)" width="40" height="40" animation="" />
     <item hash="5e8cdaa68e80f86c9d96cdecba877c35" sprite="Jade (P1)" width="40" height="40" animation="" />
     <item hash="6599a62bbd8c4d06fc23d9bdeb0caff8" sprite="Jade (P1)" width="40" height="40" animation="" />
@@ -11713,7 +11710,6 @@
     <item hash="6fd14161e29bd24877dd6e86dfd09fed" sprite="Jade (P1)" width="40" height="40" animation="" />
     <item hash="72c0f316e1938c4401364c5a339a66d1" sprite="Jade (P1)" width="40" height="40" animation="" />
     <item hash="774eb8567ca31e16f703e66a1aea1c26" sprite="Jade (P1)" width="40" height="40" animation="" />
-    <item hash="79b90aad7b265152351a7d47dc131173" sprite="Jade (P1)" width="40" height="40" animation="" />
     <item hash="7f51f87186610a6d34cfb51da853403d" sprite="Jade (P1)" width="40" height="40" animation="" />
     <item hash="8358f088c4059ba42502b39dd661946e" sprite="Jade (P1)" width="40" height="40" animation="" />
     <item hash="8791a8db85ad44428d1944d028179384" sprite="Jade (P1)" width="40" height="40" animation="" />
@@ -11723,26 +11719,18 @@
     <item hash="935f512876afccd40fa06b824265d057" sprite="Jade (P1)" width="40" height="40" animation="" />
     <item hash="94a2221ba86185f45560a09b1dbd9632" sprite="Jade (P1)" width="40" height="40" animation="" />
     <item hash="9ab05f45e727e58a51f6125ba1772cc7" sprite="Jade (P1)" width="40" height="40" animation="" />
-    <item hash="9b19a1e14c999dfde607600e3892636b" sprite="Jade (P1)" width="40" height="40" animation="" />
-    <item hash="9c6a13b7c539630085dfed805a87bbe4" sprite="Jade (P1)" width="40" height="40" animation="" />
-    <item hash="9d586a78a8013a84c94b3238bc91af82" sprite="Jade (P1)" width="40" height="40" animation="" />
     <item hash="a414dd26616cbbca39c8315516f72363" sprite="Jade (P1)" width="40" height="40" animation="" />
-    <item hash="aa7e46d6e8a29ba8b3d1c0f2997f7c0a" sprite="Jade (P1)" width="40" height="40" animation="" />
     <item hash="b09252f47b0cf34b7576ce5dfce817d2" sprite="Jade (P1)" width="40" height="40" animation="" />
     <item hash="b909ca7e1ef1a6c63eb0e9fb36704dd1" sprite="Jade (P1)" width="40" height="40" animation="" />
     <item hash="bd23088f8076c53ed96eda42b70508f6" sprite="Jade (P1)" width="40" height="40" animation="" />
-    <item hash="c1660d32cabfe8f113afcceb6704995f" sprite="Jade (P1)" width="40" height="40" animation="" />
-    <item hash="c3b9bc3715c4f9da00315b79d7c9b285" sprite="Jade (P1)" width="40" height="40" animation="" />
     <item hash="c7f3b0647e8e13753d6cb6a537f896f8" sprite="Jade (P1)" width="40" height="40" animation="" />
     <item hash="c8cbbe04793d6594690a353a78270c1e" sprite="Jade (P1)" width="40" height="40" animation="" />
     <item hash="c94eaf9963e38d26a340d5327647c1b7" sprite="Jade (P1)" width="40" height="40" animation="" />
     <item hash="cb7f7c6e584c1d9709514ddd44826835" sprite="Jade (P1)" width="40" height="40" animation="" />
     <item hash="d42a0fc486d132c397a712596ab702fe" sprite="Jade (P1)" width="40" height="40" animation="" />
     <item hash="d4d4c77a458cb4c60e2582d227f66f13" sprite="Jade (P1)" width="40" height="40" animation="" />
-    <item hash="da469840e0837a8f87e648772d861655" sprite="Jade (P1)" width="40" height="40" animation="" />
     <item hash="de39ea9decd1968b0b66b8ec509355b8" sprite="Jade (P1)" width="40" height="40" animation="" />
     <item hash="e1890d92a3b640d20f2a074d104123bf" sprite="Jade (P1)" width="40" height="40" animation="" />
-    <item hash="e5ccd3180a7104b3d7155792320e9d96" sprite="Jade (P1)" width="40" height="40" animation="" />
     <item hash="eea6834b3ddce0589d864aab2fdca1c3" sprite="Jade (P1)" width="40" height="40" animation="" />
     <item hash="f11ab3b03932113558709d0180cb4925" sprite="Jade (P1)" width="40" height="40" animation="" />
     <item hash="f1a9cfddfc55a953433040698e86f00e" sprite="Jade (P1)" width="40" height="40" animation="" />
@@ -11754,172 +11742,184 @@
     <item hash="aa85c261ab24ec8c26a2b6ed6a93435a" sprite="Jade (P1)" width="48" height="40" animation="Dying" />
     <item hash="efbbf0951723ecd95d94ba41c1e23ed2" sprite="Jade (P1)" width="48" height="40" animation="Dying" />
     <item hash="f3cfe99d1568c19060c05e1a380d0006" sprite="Jade (P1)" width="48" height="40" animation="Dying" />
-    <item hash="0095400a38c3cb845751b7ec3f67ccc6" sprite="Jade (P2)" width="40" height="40" animation="" />
-    <item hash="0640a6e6b7bb7c3b254d30ce48bdbf74" sprite="Jade (P2)" width="40" height="40" animation="" />
-    <item hash="072ea01455aa3f6002314fcd7ff8e94d" sprite="Jade (P2)" width="40" height="40" animation="" />
-    <item hash="0c30c72cd8751028b35408d569ccad61" sprite="Jade (P2)" width="40" height="40" animation="" />
-    <item hash="0c386c8410aa210de73d4986518a7948" sprite="Jade (P2)" width="40" height="40" animation="" />
-    <item hash="0ec95f436de6cbeb21598d2fcdbffc2d" sprite="Jade (P2)" width="40" height="40" animation="" />
-    <item hash="12ac3362ebd3d71225da351aafcb7ad9" sprite="Jade (P2)" width="40" height="40" animation="" />
-    <item hash="1484c439372308f3a30c975fcad7fb03" sprite="Jade (P2)" width="40" height="40" animation="" />
-    <item hash="17873e0970f0228ae49c97fc5b3b69f3" sprite="Jade (P2)" width="40" height="40" animation="" />
-    <item hash="213f3c2b7147a43ecaf91c0fc1fefd95" sprite="Jade (P2)" width="40" height="40" animation="" />
-    <item hash="21ad5278a71954226440bbb316adaa11" sprite="Jade (P2)" width="40" height="40" animation="" />
-    <item hash="2da788aa4cc501edb1cbbf39624dbe86" sprite="Jade (P2)" width="40" height="40" animation="" />
-    <item hash="31668ac3743192590c4f7b9d981cad92" sprite="Jade (P2)" width="40" height="40" animation="" />
-    <item hash="318b75a6fa478ebc1a0c3ff3f10e54e6" sprite="Jade (P2)" width="40" height="40" animation="" />
-    <item hash="34e4f49a29d412860e35d6dd98bff57a" sprite="Jade (P2)" width="40" height="40" animation="" />
-    <item hash="363efae81c2d459df110b1202c135caa" sprite="Jade (P2)" width="40" height="40" animation="" />
-    <item hash="3b96587e36d772cea0633a2cdbba2c2c" sprite="Jade (P2)" width="40" height="40" animation="" />
-    <item hash="3d9840682cbdd5dbfcae0430bfbcb6ec" sprite="Jade (P2)" width="40" height="40" animation="" />
-    <item hash="42240ef7c83c9a2d4e278e5f00f8b156" sprite="Jade (P2)" width="40" height="40" animation="" />
-    <item hash="436273a381cc9df8f0659a734920994f" sprite="Jade (P2)" width="40" height="40" animation="" />
-    <item hash="43eefb3427b8ed930b5d67891900755a" sprite="Jade (P2)" width="40" height="40" animation="" />
-    <item hash="48840e4d29cb36259ba4c8d17bb56ada" sprite="Jade (P2)" width="40" height="40" animation="" />
-    <item hash="4d2007d86ac46304cf1df62a7631305e" sprite="Jade (P2)" width="40" height="40" animation="" />
-    <item hash="4ffbc1f824e09ca22de9aa47d624b0b7" sprite="Jade (P2)" width="40" height="40" animation="" />
-    <item hash="54dd0bedd0434ad6c02bce1eaec7b21a" sprite="Jade (P2)" width="40" height="40" animation="" />
-    <item hash="5d5730437ad1ac9098420455de24f98f" sprite="Jade (P2)" width="40" height="40" animation="" />
-    <item hash="63a12936e331929b1dc350bf98bb3122" sprite="Jade (P2)" width="40" height="40" animation="" />
-    <item hash="641f10d73224f70b1f1962009ec12408" sprite="Jade (P2)" width="40" height="40" animation="" />
-    <item hash="6b3b1d8f436e0fecf667e64651a970ae" sprite="Jade (P2)" width="40" height="40" animation="" />
-    <item hash="70033c2ff6ca2c9ec4f8a95a7e6ef64c" sprite="Jade (P2)" width="40" height="40" animation="" />
-    <item hash="767456e459f501ce4aa085ed19a8d0e9" sprite="Jade (P2)" width="40" height="40" animation="" />
-    <item hash="781c989379c7d94b87dfa8bc51c768a8" sprite="Jade (P2)" width="40" height="40" animation="" />
-    <item hash="797244971f1b3b88625352f5f5210ea8" sprite="Jade (P2)" width="40" height="40" animation="" />
-    <item hash="7cf35893d8fec2c31a42846c643a1441" sprite="Jade (P2)" width="40" height="40" animation="" />
-    <item hash="88d12c496241972f79638563a6fff7c6" sprite="Jade (P2)" width="40" height="40" animation="" />
-    <item hash="896420955654c96c70c4e4afba8ed52b" sprite="Jade (P2)" width="40" height="40" animation="" />
-    <item hash="8bdc9642ba27ca3782db15d10fa1630b" sprite="Jade (P2)" width="40" height="40" animation="" />
-    <item hash="8f53b5e50fedaa89f1fc43fec82930ec" sprite="Jade (P2)" width="40" height="40" animation="" />
-    <item hash="97c616379a9199a1bfb25cdc53e83d4a" sprite="Jade (P2)" width="40" height="40" animation="" />
-    <item hash="9b0e44aee2b6514f4453495545790033" sprite="Jade (P2)" width="40" height="40" animation="" />
-    <item hash="9f3d7a867d5587dc6bdab3ba0e4602a4" sprite="Jade (P2)" width="40" height="40" animation="" />
-    <item hash="a3cbe3d58c7880a482e2334ec90e9e87" sprite="Jade (P2)" width="40" height="40" animation="" />
-    <item hash="aab34c34057d32193fc2d006dd66889e" sprite="Jade (P2)" width="40" height="40" animation="" />
-    <item hash="aae126445146810009b8bae5ab30b251" sprite="Jade (P2)" width="40" height="40" animation="" />
-    <item hash="ab6b20686766d0e938b0660b854c4ef8" sprite="Jade (P2)" width="40" height="40" animation="" />
-    <item hash="af4c9621d8c413d0adad305140cbbe6e" sprite="Jade (P2)" width="40" height="40" animation="" />
-    <item hash="c1b4f8e5ab3280ea106065099d734154" sprite="Jade (P2)" width="40" height="40" animation="" />
-    <item hash="c4a4eef0c8509d3236c1c0cf449daec2" sprite="Jade (P2)" width="40" height="40" animation="" />
-    <item hash="c4b851dc9ac795f5d5a9ec0f1629979f" sprite="Jade (P2)" width="40" height="40" animation="" />
-    <item hash="c6cb8cf8644d0e81f95283525594ab88" sprite="Jade (P2)" width="40" height="40" animation="" />
-    <item hash="c74b8db308db82b974f58e72ff335259" sprite="Jade (P2)" width="40" height="40" animation="" />
-    <item hash="cea721cf4891035da3c6535047345b10" sprite="Jade (P2)" width="40" height="40" animation="" />
-    <item hash="d4a68cb8dbd802ea0dcb557afa044809" sprite="Jade (P2)" width="40" height="40" animation="" />
-    <item hash="d8178ba6dc4536747a8e719273addaca" sprite="Jade (P2)" width="40" height="40" animation="" />
-    <item hash="dae093cf7d57856e1b3f8f964175e779" sprite="Jade (P2)" width="40" height="40" animation="" />
-    <item hash="e010b7fefe4370a151289406ef3b61a8" sprite="Jade (P2)" width="40" height="40" animation="" />
-    <item hash="e1811db18074a5b462dd707060f28900" sprite="Jade (P2)" width="40" height="40" animation="" />
-    <item hash="e19c3b2bdca46c91028112257a204bba" sprite="Jade (P2)" width="40" height="40" animation="" />
-    <item hash="e4581d546f58c26e4c82182fdff71a0e" sprite="Jade (P2)" width="40" height="40" animation="" />
-    <item hash="e731eacb0cb8fbf49c50097b5f60ea42" sprite="Jade (P2)" width="40" height="40" animation="" />
-    <item hash="ec43a1d6ab1035ded16e4c756726edc2" sprite="Jade (P2)" width="40" height="40" animation="" />
-    <item hash="ef4724de9a287866393caef1333627e4" sprite="Jade (P2)" width="40" height="40" animation="" />
-    <item hash="efb771309e16522ca9821fe4fe8bd2a4" sprite="Jade (P2)" width="40" height="40" animation="" />
-    <item hash="f06f9775dbf05721866bfbe3b6b6d02c" sprite="Jade (P2)" width="40" height="40" animation="" />
-    <item hash="f4be493612495b5c76caecb828079b6f" sprite="Jade (P2)" width="40" height="40" animation="" />
-    <item hash="f608fd15c6c3da5e0eddda42a6ee1aea" sprite="Jade (P2)" width="40" height="40" animation="" />
-    <item hash="09818e9d95eb32fe1dba2a9a64973a7f" sprite="Jade in Tank (P1)" width="48" height="40" animation="" />
-    <item hash="0c0b69a3ce4dce2fc5adb0db0b7baf1b" sprite="Jade in Tank (P1)" width="48" height="40" animation="" />
-    <item hash="10e0974eea55ae8ac6113e7e2f16f502" sprite="Jade in Tank (P1)" width="48" height="40" animation="" />
-    <item hash="1251e045ae3e4095de3dea3d702c5f5b" sprite="Jade in Tank (P1)" width="48" height="40" animation="" />
-    <item hash="1527f317dee5ad3b33269782f64f5fef" sprite="Jade in Tank (P1)" width="48" height="40" animation="" />
-    <item hash="17f2d647072d8178d28df5b1f0e6d9a5" sprite="Jade in Tank (P1)" width="48" height="40" animation="" />
-    <item hash="1e13464ff7da6d6a4f20a5300ab9c2c0" sprite="Jade in Tank (P1)" width="48" height="40" animation="" />
-    <item hash="1e669350dfb8701e06e7da972d1fe2d3" sprite="Jade in Tank (P1)" width="48" height="40" animation="" />
-    <item hash="1ee493f0cd698bb760ba4df53d6a2044" sprite="Jade in Tank (P1)" width="48" height="40" animation="" />
-    <item hash="255474005c54c4b6188bba43620e4f0a" sprite="Jade in Tank (P1)" width="48" height="40" animation="" />
-    <item hash="2cf3f04abd5b7dedd58e0f663b40cb9b" sprite="Jade in Tank (P1)" width="48" height="40" animation="" />
-    <item hash="3840e0a1000eb80ab6077645940167e3" sprite="Jade in Tank (P1)" width="48" height="40" animation="" />
-    <item hash="3c77798679b9d42db1fdb869d08a170e" sprite="Jade in Tank (P1)" width="48" height="40" animation="" />
-    <item hash="3feb104337035711d87871615cc15834" sprite="Jade in Tank (P1)" width="48" height="40" animation="" />
-    <item hash="466370861e6aebcfdf42f3f4e4b84c96" sprite="Jade in Tank (P1)" width="48" height="40" animation="" />
-    <item hash="471932896262879f86ea50e8cb7086a2" sprite="Jade in Tank (P1)" width="48" height="40" animation="" />
-    <item hash="5484e81ef415469d9e3a2fc8306654f7" sprite="Jade in Tank (P1)" width="48" height="40" animation="" />
-    <item hash="564f8619afe8a45ca1a46f3e81a6af2b" sprite="Jade in Tank (P1)" width="48" height="40" animation="" />
-    <item hash="57f6323715b049ea3a70b8d6d3686625" sprite="Jade in Tank (P1)" width="48" height="40" animation="" />
-    <item hash="5c814f470cbdec63970e1b846e2ab134" sprite="Jade in Tank (P1)" width="48" height="40" animation="" />
-    <item hash="64a37dbab81e7a89905407dbea1d2143" sprite="Jade in Tank (P1)" width="48" height="40" animation="" />
-    <item hash="6eab7242d099079454485c16add192fb" sprite="Jade in Tank (P1)" width="48" height="40" animation="" />
-    <item hash="7135f9338702212da83710df240f7657" sprite="Jade in Tank (P1)" width="48" height="40" animation="" />
-    <item hash="73323c7df988b13d48c37f1653071162" sprite="Jade in Tank (P1)" width="48" height="40" animation="" />
-    <item hash="7f4f1397b19d6a9135a25755cc0e004b" sprite="Jade in Tank (P1)" width="48" height="40" animation="" />
-    <item hash="8026c0f1521c8c1a6cce7676392b9c6d" sprite="Jade in Tank (P1)" width="48" height="40" animation="" />
-    <item hash="8276369647a68f2109d93ac155b242f6" sprite="Jade in Tank (P1)" width="48" height="40" animation="" />
-    <item hash="8d2cf1c1db9a4266a14154558f95c255" sprite="Jade in Tank (P1)" width="48" height="40" animation="" />
-    <item hash="8d47af9084a62e1a1a37aeca9184ad1f" sprite="Jade in Tank (P1)" width="48" height="40" animation="" />
-    <item hash="9022838ba0edcce4071dbeb092413c87" sprite="Jade in Tank (P1)" width="48" height="40" animation="" />
-    <item hash="97f033d9d8a1b2eb91a30c9154e580fb" sprite="Jade in Tank (P1)" width="48" height="40" animation="" />
-    <item hash="9cf929ae117a654e9d6a5513c46d8e69" sprite="Jade in Tank (P1)" width="48" height="40" animation="" />
-    <item hash="9d3305350a9bd086b429ba8c2b21ffb2" sprite="Jade in Tank (P1)" width="48" height="40" animation="" />
-    <item hash="a3c4c51d276dfa4422ad6459669347a9" sprite="Jade in Tank (P1)" width="48" height="40" animation="" />
-    <item hash="a468beee3c8de3f0b18fa07860d25584" sprite="Jade in Tank (P1)" width="48" height="40" animation="" />
-    <item hash="a52dccd2ecd71d08f0ebb2252d437505" sprite="Jade in Tank (P1)" width="48" height="40" animation="" />
-    <item hash="a8b9b0fe9276481dc4cde4edefc5f070" sprite="Jade in Tank (P1)" width="48" height="40" animation="" />
-    <item hash="aa0f51b8c8116ea770546382551e9171" sprite="Jade in Tank (P1)" width="48" height="40" animation="" />
-    <item hash="aa988349c12f1dd404d07b28b7a708c5" sprite="Jade in Tank (P1)" width="48" height="40" animation="" />
-    <item hash="b6ec9f8677bf5a8e5da24a3cd4023436" sprite="Jade in Tank (P1)" width="48" height="40" animation="" />
-    <item hash="b76b4ef0e63692cba33a91d288fb5650" sprite="Jade in Tank (P1)" width="48" height="40" animation="" />
-    <item hash="baa29171ab4dae98aab1cec76fc453fa" sprite="Jade in Tank (P1)" width="48" height="40" animation="" />
-    <item hash="bd3bbfd2b5bfab0dc8da28ffcc5b39d4" sprite="Jade in Tank (P1)" width="48" height="40" animation="" />
-    <item hash="c4dead730cb67c790ccfc44a8248778f" sprite="Jade in Tank (P1)" width="48" height="40" animation="" />
-    <item hash="cb4a85a5ce4b5a91823edf38493b2ab3" sprite="Jade in Tank (P1)" width="48" height="40" animation="" />
-    <item hash="cebc63b84f8c42f4961b5db57a1217c2" sprite="Jade in Tank (P1)" width="48" height="40" animation="" />
-    <item hash="cf744d854f3f636ad5203a5387ddd5a6" sprite="Jade in Tank (P1)" width="48" height="40" animation="" />
-    <item hash="d28672c608db9b065eb634665e4c5952" sprite="Jade in Tank (P1)" width="48" height="40" animation="" />
-    <item hash="d4ea19c6007a4d2ff8fcb0439c035907" sprite="Jade in Tank (P1)" width="48" height="40" animation="" />
-    <item hash="d6bc3b015141896bc412ce91ddd9720e" sprite="Jade in Tank (P1)" width="48" height="40" animation="" />
-    <item hash="d7ba1ae53c21021f8e56d804f52338a0" sprite="Jade in Tank (P1)" width="48" height="40" animation="" />
-    <item hash="d7da26c0ef41846e40927375cc5957c5" sprite="Jade in Tank (P1)" width="48" height="40" animation="" />
-    <item hash="df7a16d52318059e509d723b22949e8e" sprite="Jade in Tank (P1)" width="48" height="40" animation="" />
-    <item hash="e6586abbb09f4781087f8efb52479b6b" sprite="Jade in Tank (P1)" width="48" height="40" animation="" />
-    <item hash="e710020ef3c3fba964e36f6dadec7fe6" sprite="Jade in Tank (P1)" width="48" height="40" animation="" />
-    <item hash="e7cb49a316a675d188025b507d84c087" sprite="Jade in Tank (P1)" width="48" height="40" animation="" />
-    <item hash="fcb4e59c8c8790a703cbb7791875d533" sprite="Jade in Tank (P1)" width="48" height="40" animation="" />
-    <item hash="fe59597642b4b1d6174f5170f74120e4" sprite="Jade in Tank (P1)" width="48" height="40" animation="" />
-    <item hash="02e0c06efb200779296e97f068c0c9a4" sprite="Jade in Tank (P2)" width="48" height="40" animation="" />
-    <item hash="07ec0797a6fe8d0ebe38a14ea923bc7e" sprite="Jade in Tank (P2)" width="48" height="40" animation="" />
-    <item hash="098da69192e04908d8b92099dd5c7832" sprite="Jade in Tank (P2)" width="48" height="40" animation="" />
-    <item hash="0bddf677c0994a390e8f842a16b657a2" sprite="Jade in Tank (P2)" width="48" height="40" animation="" />
-    <item hash="0d74f968278a7866c9b6aeb491a85723" sprite="Jade in Tank (P2)" width="48" height="40" animation="" />
-    <item hash="0dfb223784e916f3a0bb56e216800fc9" sprite="Jade in Tank (P2)" width="48" height="40" animation="" />
-    <item hash="1a91cca20849aeb4a65d5de37df67b5f" sprite="Jade in Tank (P2)" width="48" height="40" animation="" />
-    <item hash="1dbe924bd36bde7efaf1773bd95e94ca" sprite="Jade in Tank (P2)" width="48" height="40" animation="" />
-    <item hash="1e23e9baaa06fb43cc237297e7c64ba7" sprite="Jade in Tank (P2)" width="48" height="40" animation="" />
-    <item hash="2606f74b84f7606622190f5b06a69edd" sprite="Jade in Tank (P2)" width="48" height="40" animation="" />
-    <item hash="2902e148bb81c17ad30caa9e4bb7b112" sprite="Jade in Tank (P2)" width="48" height="40" animation="" />
-    <item hash="2a822399d20a1f34ff687c226d111dbc" sprite="Jade in Tank (P2)" width="48" height="40" animation="" />
-    <item hash="2c4fbede97c8696622f238230c6cb1f2" sprite="Jade in Tank (P2)" width="48" height="40" animation="" />
-    <item hash="3016bf44d46f709e561176236ca00c8a" sprite="Jade in Tank (P2)" width="48" height="40" animation="" />
-    <item hash="47d693aab9cf6af22a86f2e8c58cc5cc" sprite="Jade in Tank (P2)" width="48" height="40" animation="" />
-    <item hash="4c27a125d7da3f0ec691e5ead31f5f70" sprite="Jade in Tank (P2)" width="48" height="40" animation="" />
-    <item hash="53b62a8e0cf431e0f72047287b4b14d8" sprite="Jade in Tank (P2)" width="48" height="40" animation="" />
-    <item hash="5802bf80fbdf4ea97bea018236153048" sprite="Jade in Tank (P2)" width="48" height="40" animation="" />
-    <item hash="66b9fadc463716b43a580bacfbcbfb3b" sprite="Jade in Tank (P2)" width="48" height="40" animation="" />
-    <item hash="74d94c5b4259d395c4d62487ad6e5fad" sprite="Jade in Tank (P2)" width="48" height="40" animation="" />
-    <item hash="784fa3d301a3772e1a0d25a10bdffc02" sprite="Jade in Tank (P2)" width="48" height="40" animation="" />
-    <item hash="869a32746de67a0045f19520174c1e0f" sprite="Jade in Tank (P2)" width="48" height="40" animation="" />
-    <item hash="884079d45ac1e76b28629a1f880c1d1c" sprite="Jade in Tank (P2)" width="48" height="40" animation="" />
-    <item hash="88ab013f00823f06275a7d2cb22c1104" sprite="Jade in Tank (P2)" width="48" height="40" animation="" />
-    <item hash="a1756253f8916eefb8ba450561dc70d0" sprite="Jade in Tank (P2)" width="48" height="40" animation="" />
-    <item hash="a337d4dbf9128091bee284d969984f6f" sprite="Jade in Tank (P2)" width="48" height="40" animation="" />
-    <item hash="a41379794f67275bf11194109a87a069" sprite="Jade in Tank (P2)" width="48" height="40" animation="" />
-    <item hash="a8e4b3b51a62538101ecdc1efd916881" sprite="Jade in Tank (P2)" width="48" height="40" animation="" />
-    <item hash="aecac51eb916cca19bb2709d76b5f861" sprite="Jade in Tank (P2)" width="48" height="40" animation="" />
-    <item hash="b60f70f04d3155390e96db5ef9a62941" sprite="Jade in Tank (P2)" width="48" height="40" animation="" />
-    <item hash="c0413838b4607e77d29e1c0a38c6c0e6" sprite="Jade in Tank (P2)" width="48" height="40" animation="" />
-    <item hash="c38b3f0e753c6c46cb327b6d12b93658" sprite="Jade in Tank (P2)" width="48" height="40" animation="" />
-    <item hash="c6a52d3f12641afb02c7d28a17c02608" sprite="Jade in Tank (P2)" width="48" height="40" animation="" />
-    <item hash="c7ca9350463168b9a1546e5bf35f79d3" sprite="Jade in Tank (P2)" width="48" height="40" animation="" />
-    <item hash="ccde8cebd98ae9a150d82336cb188b33" sprite="Jade in Tank (P2)" width="48" height="40" animation="" />
-    <item hash="ce3bb6281121abc7aa38b3d356ca6028" sprite="Jade in Tank (P2)" width="48" height="40" animation="" />
-    <item hash="dfcbb1af0a6095fd1447670f2355c89a" sprite="Jade in Tank (P2)" width="48" height="40" animation="" />
-    <item hash="e444b4305aa985786bf58ed098577600" sprite="Jade in Tank (P2)" width="48" height="40" animation="" />
-    <item hash="e5101f890c00f851482af1848498573c" sprite="Jade in Tank (P2)" width="48" height="40" animation="" />
-    <item hash="f21e757fdb40e9a0ec963716034f6b1d" sprite="Jade in Tank (P2)" width="48" height="40" animation="" />
-    <item hash="f4b419c6f0146d0aa2cef982fa8a53ad" sprite="Jade in Tank (P2)" width="48" height="40" animation="" />
-    <item hash="fb3f8228d65fe4bd894b446124ffe450" sprite="Jade in Tank (P2)" width="48" height="40" animation="" />
+    <item hash="27bcec2c666cc10ad49746de47d74fe3" sprite="Jade (P1) (NoTank)" width="40" height="40" animation="" />
+    <item hash="5b39cc4a3522bc6a512fad1e31c50ab5" sprite="Jade (P1) (NoTank)" width="40" height="40" animation="" />
+    <item hash="5dbe526e57845d18d29b3fdeaf4b99fc" sprite="Jade (P1) (NoTank)" width="40" height="40" animation="" />
+    <item hash="79b90aad7b265152351a7d47dc131173" sprite="Jade (P1) (NoTank)" width="40" height="40" animation="" />
+    <item hash="9b19a1e14c999dfde607600e3892636b" sprite="Jade (P1) (NoTank)" width="40" height="40" animation="" />
+    <item hash="9c6a13b7c539630085dfed805a87bbe4" sprite="Jade (P1) (NoTank)" width="40" height="40" animation="" />
+    <item hash="9d586a78a8013a84c94b3238bc91af82" sprite="Jade (P1) (NoTank)" width="40" height="40" animation="" />
+    <item hash="aa7e46d6e8a29ba8b3d1c0f2997f7c0a" sprite="Jade (P1) (NoTank)" width="40" height="40" animation="" />
+    <item hash="c1660d32cabfe8f113afcceb6704995f" sprite="Jade (P1) (NoTank)" width="40" height="40" animation="" />
+    <item hash="c3b9bc3715c4f9da00315b79d7c9b285" sprite="Jade (P1) (NoTank)" width="40" height="40" animation="" />
+    <item hash="da469840e0837a8f87e648772d861655" sprite="Jade (P1) (NoTank)" width="40" height="40" animation="" />
+    <item hash="e5ccd3180a7104b3d7155792320e9d96" sprite="Jade (P1) (NoTank)" width="40" height="40" animation="" />
+    <item hash="09818e9d95eb32fe1dba2a9a64973a7f" sprite="Jade (P1) (Tank)" width="48" height="40" animation="" />
+    <item hash="0c0b69a3ce4dce2fc5adb0db0b7baf1b" sprite="Jade (P1) (Tank)" width="48" height="40" animation="" />
+    <item hash="10e0974eea55ae8ac6113e7e2f16f502" sprite="Jade (P1) (Tank)" width="48" height="40" animation="" />
+    <item hash="1251e045ae3e4095de3dea3d702c5f5b" sprite="Jade (P1) (Tank)" width="48" height="40" animation="" />
+    <item hash="1527f317dee5ad3b33269782f64f5fef" sprite="Jade (P1) (Tank)" width="48" height="40" animation="" />
+    <item hash="17f2d647072d8178d28df5b1f0e6d9a5" sprite="Jade (P1) (Tank)" width="48" height="40" animation="" />
+    <item hash="1e13464ff7da6d6a4f20a5300ab9c2c0" sprite="Jade (P1) (Tank)" width="48" height="40" animation="" />
+    <item hash="1e669350dfb8701e06e7da972d1fe2d3" sprite="Jade (P1) (Tank)" width="48" height="40" animation="" />
+    <item hash="1ee493f0cd698bb760ba4df53d6a2044" sprite="Jade (P1) (Tank)" width="48" height="40" animation="" />
+    <item hash="255474005c54c4b6188bba43620e4f0a" sprite="Jade (P1) (Tank)" width="48" height="40" animation="" />
+    <item hash="2cf3f04abd5b7dedd58e0f663b40cb9b" sprite="Jade (P1) (Tank)" width="48" height="40" animation="" />
+    <item hash="3840e0a1000eb80ab6077645940167e3" sprite="Jade (P1) (Tank)" width="48" height="40" animation="" />
+    <item hash="3c77798679b9d42db1fdb869d08a170e" sprite="Jade (P1) (Tank)" width="48" height="40" animation="" />
+    <item hash="3feb104337035711d87871615cc15834" sprite="Jade (P1) (Tank)" width="48" height="40" animation="" />
+    <item hash="466370861e6aebcfdf42f3f4e4b84c96" sprite="Jade (P1) (Tank)" width="48" height="40" animation="" />
+    <item hash="471932896262879f86ea50e8cb7086a2" sprite="Jade (P1) (Tank)" width="48" height="40" animation="" />
+    <item hash="5484e81ef415469d9e3a2fc8306654f7" sprite="Jade (P1) (Tank)" width="48" height="40" animation="" />
+    <item hash="564f8619afe8a45ca1a46f3e81a6af2b" sprite="Jade (P1) (Tank)" width="48" height="40" animation="" />
+    <item hash="57f6323715b049ea3a70b8d6d3686625" sprite="Jade (P1) (Tank)" width="48" height="40" animation="" />
+    <item hash="5c814f470cbdec63970e1b846e2ab134" sprite="Jade (P1) (Tank)" width="48" height="40" animation="" />
+    <item hash="64a37dbab81e7a89905407dbea1d2143" sprite="Jade (P1) (Tank)" width="48" height="40" animation="" />
+    <item hash="6eab7242d099079454485c16add192fb" sprite="Jade (P1) (Tank)" width="48" height="40" animation="" />
+    <item hash="7135f9338702212da83710df240f7657" sprite="Jade (P1) (Tank)" width="48" height="40" animation="" />
+    <item hash="73323c7df988b13d48c37f1653071162" sprite="Jade (P1) (Tank)" width="48" height="40" animation="" />
+    <item hash="7f4f1397b19d6a9135a25755cc0e004b" sprite="Jade (P1) (Tank)" width="48" height="40" animation="" />
+    <item hash="8026c0f1521c8c1a6cce7676392b9c6d" sprite="Jade (P1) (Tank)" width="48" height="40" animation="" />
+    <item hash="8276369647a68f2109d93ac155b242f6" sprite="Jade (P1) (Tank)" width="48" height="40" animation="" />
+    <item hash="8d2cf1c1db9a4266a14154558f95c255" sprite="Jade (P1) (Tank)" width="48" height="40" animation="" />
+    <item hash="8d47af9084a62e1a1a37aeca9184ad1f" sprite="Jade (P1) (Tank)" width="48" height="40" animation="" />
+    <item hash="9022838ba0edcce4071dbeb092413c87" sprite="Jade (P1) (Tank)" width="48" height="40" animation="" />
+    <item hash="97f033d9d8a1b2eb91a30c9154e580fb" sprite="Jade (P1) (Tank)" width="48" height="40" animation="" />
+    <item hash="9cf929ae117a654e9d6a5513c46d8e69" sprite="Jade (P1) (Tank)" width="48" height="40" animation="" />
+    <item hash="9d3305350a9bd086b429ba8c2b21ffb2" sprite="Jade (P1) (Tank)" width="48" height="40" animation="" />
+    <item hash="a3c4c51d276dfa4422ad6459669347a9" sprite="Jade (P1) (Tank)" width="48" height="40" animation="" />
+    <item hash="a468beee3c8de3f0b18fa07860d25584" sprite="Jade (P1) (Tank)" width="48" height="40" animation="" />
+    <item hash="a52dccd2ecd71d08f0ebb2252d437505" sprite="Jade (P1) (Tank)" width="48" height="40" animation="" />
+    <item hash="a8b9b0fe9276481dc4cde4edefc5f070" sprite="Jade (P1) (Tank)" width="48" height="40" animation="" />
+    <item hash="aa0f51b8c8116ea770546382551e9171" sprite="Jade (P1) (Tank)" width="48" height="40" animation="" />
+    <item hash="aa988349c12f1dd404d07b28b7a708c5" sprite="Jade (P1) (Tank)" width="48" height="40" animation="" />
+    <item hash="b6ec9f8677bf5a8e5da24a3cd4023436" sprite="Jade (P1) (Tank)" width="48" height="40" animation="" />
+    <item hash="b76b4ef0e63692cba33a91d288fb5650" sprite="Jade (P1) (Tank)" width="48" height="40" animation="" />
+    <item hash="baa29171ab4dae98aab1cec76fc453fa" sprite="Jade (P1) (Tank)" width="48" height="40" animation="" />
+    <item hash="bd3bbfd2b5bfab0dc8da28ffcc5b39d4" sprite="Jade (P1) (Tank)" width="48" height="40" animation="" />
+    <item hash="c4dead730cb67c790ccfc44a8248778f" sprite="Jade (P1) (Tank)" width="48" height="40" animation="" />
+    <item hash="cb4a85a5ce4b5a91823edf38493b2ab3" sprite="Jade (P1) (Tank)" width="48" height="40" animation="" />
+    <item hash="cebc63b84f8c42f4961b5db57a1217c2" sprite="Jade (P1) (Tank)" width="48" height="40" animation="" />
+    <item hash="cf744d854f3f636ad5203a5387ddd5a6" sprite="Jade (P1) (Tank)" width="48" height="40" animation="" />
+    <item hash="d28672c608db9b065eb634665e4c5952" sprite="Jade (P1) (Tank)" width="48" height="40" animation="" />
+    <item hash="d4ea19c6007a4d2ff8fcb0439c035907" sprite="Jade (P1) (Tank)" width="48" height="40" animation="" />
+    <item hash="d6bc3b015141896bc412ce91ddd9720e" sprite="Jade (P1) (Tank)" width="48" height="40" animation="" />
+    <item hash="d7ba1ae53c21021f8e56d804f52338a0" sprite="Jade (P1) (Tank)" width="48" height="40" animation="" />
+    <item hash="d7da26c0ef41846e40927375cc5957c5" sprite="Jade (P1) (Tank)" width="48" height="40" animation="" />
+    <item hash="df7a16d52318059e509d723b22949e8e" sprite="Jade (P1) (Tank)" width="48" height="40" animation="" />
+    <item hash="e6586abbb09f4781087f8efb52479b6b" sprite="Jade (P1) (Tank)" width="48" height="40" animation="" />
+    <item hash="e710020ef3c3fba964e36f6dadec7fe6" sprite="Jade (P1) (Tank)" width="48" height="40" animation="" />
+    <item hash="e7cb49a316a675d188025b507d84c087" sprite="Jade (P1) (Tank)" width="48" height="40" animation="" />
+    <item hash="fcb4e59c8c8790a703cbb7791875d533" sprite="Jade (P1) (Tank)" width="48" height="40" animation="" />
+    <item hash="fe59597642b4b1d6174f5170f74120e4" sprite="Jade (P1) (Tank)" width="48" height="40" animation="" />
+    <item hash="0095400a38c3cb845751b7ec3f67ccc6" sprite="Jade (P2) (NoTank)" width="40" height="40" animation="" />
+    <item hash="0640a6e6b7bb7c3b254d30ce48bdbf74" sprite="Jade (P2) (NoTank)" width="40" height="40" animation="" />
+    <item hash="072ea01455aa3f6002314fcd7ff8e94d" sprite="Jade (P2) (NoTank)" width="40" height="40" animation="" />
+    <item hash="0c30c72cd8751028b35408d569ccad61" sprite="Jade (P2) (NoTank)" width="40" height="40" animation="" />
+    <item hash="0c386c8410aa210de73d4986518a7948" sprite="Jade (P2) (NoTank)" width="40" height="40" animation="" />
+    <item hash="0ec95f436de6cbeb21598d2fcdbffc2d" sprite="Jade (P2) (NoTank)" width="40" height="40" animation="" />
+    <item hash="12ac3362ebd3d71225da351aafcb7ad9" sprite="Jade (P2) (NoTank)" width="40" height="40" animation="" />
+    <item hash="1484c439372308f3a30c975fcad7fb03" sprite="Jade (P2) (NoTank)" width="40" height="40" animation="" />
+    <item hash="17873e0970f0228ae49c97fc5b3b69f3" sprite="Jade (P2) (NoTank)" width="40" height="40" animation="" />
+    <item hash="213f3c2b7147a43ecaf91c0fc1fefd95" sprite="Jade (P2) (NoTank)" width="40" height="40" animation="" />
+    <item hash="21ad5278a71954226440bbb316adaa11" sprite="Jade (P2) (NoTank)" width="40" height="40" animation="" />
+    <item hash="2da788aa4cc501edb1cbbf39624dbe86" sprite="Jade (P2) (NoTank)" width="40" height="40" animation="" />
+    <item hash="31668ac3743192590c4f7b9d981cad92" sprite="Jade (P2) (NoTank)" width="40" height="40" animation="" />
+    <item hash="318b75a6fa478ebc1a0c3ff3f10e54e6" sprite="Jade (P2) (NoTank)" width="40" height="40" animation="" />
+    <item hash="34e4f49a29d412860e35d6dd98bff57a" sprite="Jade (P2) (NoTank)" width="40" height="40" animation="" />
+    <item hash="363efae81c2d459df110b1202c135caa" sprite="Jade (P2) (NoTank)" width="40" height="40" animation="" />
+    <item hash="3b96587e36d772cea0633a2cdbba2c2c" sprite="Jade (P2) (NoTank)" width="40" height="40" animation="" />
+    <item hash="3d9840682cbdd5dbfcae0430bfbcb6ec" sprite="Jade (P2) (NoTank)" width="40" height="40" animation="" />
+    <item hash="42240ef7c83c9a2d4e278e5f00f8b156" sprite="Jade (P2) (NoTank)" width="40" height="40" animation="" />
+    <item hash="436273a381cc9df8f0659a734920994f" sprite="Jade (P2) (NoTank)" width="40" height="40" animation="" />
+    <item hash="43eefb3427b8ed930b5d67891900755a" sprite="Jade (P2) (NoTank)" width="40" height="40" animation="" />
+    <item hash="48840e4d29cb36259ba4c8d17bb56ada" sprite="Jade (P2) (NoTank)" width="40" height="40" animation="" />
+    <item hash="4d2007d86ac46304cf1df62a7631305e" sprite="Jade (P2) (NoTank)" width="40" height="40" animation="" />
+    <item hash="4ffbc1f824e09ca22de9aa47d624b0b7" sprite="Jade (P2) (NoTank)" width="40" height="40" animation="" />
+    <item hash="54dd0bedd0434ad6c02bce1eaec7b21a" sprite="Jade (P2) (NoTank)" width="40" height="40" animation="" />
+    <item hash="5d5730437ad1ac9098420455de24f98f" sprite="Jade (P2) (NoTank)" width="40" height="40" animation="" />
+    <item hash="63a12936e331929b1dc350bf98bb3122" sprite="Jade (P2) (NoTank)" width="40" height="40" animation="" />
+    <item hash="641f10d73224f70b1f1962009ec12408" sprite="Jade (P2) (NoTank)" width="40" height="40" animation="" />
+    <item hash="6b3b1d8f436e0fecf667e64651a970ae" sprite="Jade (P2) (NoTank)" width="40" height="40" animation="" />
+    <item hash="70033c2ff6ca2c9ec4f8a95a7e6ef64c" sprite="Jade (P2) (NoTank)" width="40" height="40" animation="" />
+    <item hash="767456e459f501ce4aa085ed19a8d0e9" sprite="Jade (P2) (NoTank)" width="40" height="40" animation="" />
+    <item hash="781c989379c7d94b87dfa8bc51c768a8" sprite="Jade (P2) (NoTank)" width="40" height="40" animation="" />
+    <item hash="797244971f1b3b88625352f5f5210ea8" sprite="Jade (P2) (NoTank)" width="40" height="40" animation="" />
+    <item hash="7cf35893d8fec2c31a42846c643a1441" sprite="Jade (P2) (NoTank)" width="40" height="40" animation="" />
+    <item hash="88d12c496241972f79638563a6fff7c6" sprite="Jade (P2) (NoTank)" width="40" height="40" animation="" />
+    <item hash="896420955654c96c70c4e4afba8ed52b" sprite="Jade (P2) (NoTank)" width="40" height="40" animation="" />
+    <item hash="8bdc9642ba27ca3782db15d10fa1630b" sprite="Jade (P2) (NoTank)" width="40" height="40" animation="" />
+    <item hash="8f53b5e50fedaa89f1fc43fec82930ec" sprite="Jade (P2) (NoTank)" width="40" height="40" animation="" />
+    <item hash="97c616379a9199a1bfb25cdc53e83d4a" sprite="Jade (P2) (NoTank)" width="40" height="40" animation="" />
+    <item hash="9b0e44aee2b6514f4453495545790033" sprite="Jade (P2) (NoTank)" width="40" height="40" animation="" />
+    <item hash="9f3d7a867d5587dc6bdab3ba0e4602a4" sprite="Jade (P2) (NoTank)" width="40" height="40" animation="" />
+    <item hash="a3cbe3d58c7880a482e2334ec90e9e87" sprite="Jade (P2) (NoTank)" width="40" height="40" animation="" />
+    <item hash="aab34c34057d32193fc2d006dd66889e" sprite="Jade (P2) (NoTank)" width="40" height="40" animation="" />
+    <item hash="aae126445146810009b8bae5ab30b251" sprite="Jade (P2) (NoTank)" width="40" height="40" animation="" />
+    <item hash="ab6b20686766d0e938b0660b854c4ef8" sprite="Jade (P2) (NoTank)" width="40" height="40" animation="" />
+    <item hash="af4c9621d8c413d0adad305140cbbe6e" sprite="Jade (P2) (NoTank)" width="40" height="40" animation="" />
+    <item hash="c1b4f8e5ab3280ea106065099d734154" sprite="Jade (P2) (NoTank)" width="40" height="40" animation="" />
+    <item hash="c4a4eef0c8509d3236c1c0cf449daec2" sprite="Jade (P2) (NoTank)" width="40" height="40" animation="" />
+    <item hash="c4b851dc9ac795f5d5a9ec0f1629979f" sprite="Jade (P2) (NoTank)" width="40" height="40" animation="" />
+    <item hash="c6cb8cf8644d0e81f95283525594ab88" sprite="Jade (P2) (NoTank)" width="40" height="40" animation="" />
+    <item hash="c74b8db308db82b974f58e72ff335259" sprite="Jade (P2) (NoTank)" width="40" height="40" animation="" />
+    <item hash="cea721cf4891035da3c6535047345b10" sprite="Jade (P2) (NoTank)" width="40" height="40" animation="" />
+    <item hash="d4a68cb8dbd802ea0dcb557afa044809" sprite="Jade (P2) (NoTank)" width="40" height="40" animation="" />
+    <item hash="d8178ba6dc4536747a8e719273addaca" sprite="Jade (P2) (NoTank)" width="40" height="40" animation="" />
+    <item hash="dae093cf7d57856e1b3f8f964175e779" sprite="Jade (P2) (NoTank)" width="40" height="40" animation="" />
+    <item hash="e010b7fefe4370a151289406ef3b61a8" sprite="Jade (P2) (NoTank)" width="40" height="40" animation="" />
+    <item hash="e1811db18074a5b462dd707060f28900" sprite="Jade (P2) (NoTank)" width="40" height="40" animation="" />
+    <item hash="e19c3b2bdca46c91028112257a204bba" sprite="Jade (P2) (NoTank)" width="40" height="40" animation="" />
+    <item hash="e4581d546f58c26e4c82182fdff71a0e" sprite="Jade (P2) (NoTank)" width="40" height="40" animation="" />
+    <item hash="e731eacb0cb8fbf49c50097b5f60ea42" sprite="Jade (P2) (NoTank)" width="40" height="40" animation="" />
+    <item hash="ec43a1d6ab1035ded16e4c756726edc2" sprite="Jade (P2) (NoTank)" width="40" height="40" animation="" />
+    <item hash="ef4724de9a287866393caef1333627e4" sprite="Jade (P2) (NoTank)" width="40" height="40" animation="" />
+    <item hash="efb771309e16522ca9821fe4fe8bd2a4" sprite="Jade (P2) (NoTank)" width="40" height="40" animation="" />
+    <item hash="f06f9775dbf05721866bfbe3b6b6d02c" sprite="Jade (P2) (NoTank)" width="40" height="40" animation="" />
+    <item hash="f4be493612495b5c76caecb828079b6f" sprite="Jade (P2) (NoTank)" width="40" height="40" animation="" />
+    <item hash="f608fd15c6c3da5e0eddda42a6ee1aea" sprite="Jade (P2) (NoTank)" width="40" height="40" animation="" />
+    <item hash="02e0c06efb200779296e97f068c0c9a4" sprite="Jade (P2) (Tank)" width="48" height="40" animation="" />
+    <item hash="07ec0797a6fe8d0ebe38a14ea923bc7e" sprite="Jade (P2) (Tank)" width="48" height="40" animation="" />
+    <item hash="098da69192e04908d8b92099dd5c7832" sprite="Jade (P2) (Tank)" width="48" height="40" animation="" />
+    <item hash="0bddf677c0994a390e8f842a16b657a2" sprite="Jade (P2) (Tank)" width="48" height="40" animation="" />
+    <item hash="0d74f968278a7866c9b6aeb491a85723" sprite="Jade (P2) (Tank)" width="48" height="40" animation="" />
+    <item hash="0dfb223784e916f3a0bb56e216800fc9" sprite="Jade (P2) (Tank)" width="48" height="40" animation="" />
+    <item hash="1a91cca20849aeb4a65d5de37df67b5f" sprite="Jade (P2) (Tank)" width="48" height="40" animation="" />
+    <item hash="1dbe924bd36bde7efaf1773bd95e94ca" sprite="Jade (P2) (Tank)" width="48" height="40" animation="" />
+    <item hash="1e23e9baaa06fb43cc237297e7c64ba7" sprite="Jade (P2) (Tank)" width="48" height="40" animation="" />
+    <item hash="2606f74b84f7606622190f5b06a69edd" sprite="Jade (P2) (Tank)" width="48" height="40" animation="" />
+    <item hash="2902e148bb81c17ad30caa9e4bb7b112" sprite="Jade (P2) (Tank)" width="48" height="40" animation="" />
+    <item hash="2a822399d20a1f34ff687c226d111dbc" sprite="Jade (P2) (Tank)" width="48" height="40" animation="" />
+    <item hash="2c4fbede97c8696622f238230c6cb1f2" sprite="Jade (P2) (Tank)" width="48" height="40" animation="" />
+    <item hash="3016bf44d46f709e561176236ca00c8a" sprite="Jade (P2) (Tank)" width="48" height="40" animation="" />
+    <item hash="47d693aab9cf6af22a86f2e8c58cc5cc" sprite="Jade (P2) (Tank)" width="48" height="40" animation="" />
+    <item hash="4c27a125d7da3f0ec691e5ead31f5f70" sprite="Jade (P2) (Tank)" width="48" height="40" animation="" />
+    <item hash="53b62a8e0cf431e0f72047287b4b14d8" sprite="Jade (P2) (Tank)" width="48" height="40" animation="" />
+    <item hash="5802bf80fbdf4ea97bea018236153048" sprite="Jade (P2) (Tank)" width="48" height="40" animation="" />
+    <item hash="66b9fadc463716b43a580bacfbcbfb3b" sprite="Jade (P2) (Tank)" width="48" height="40" animation="" />
+    <item hash="74d94c5b4259d395c4d62487ad6e5fad" sprite="Jade (P2) (Tank)" width="48" height="40" animation="" />
+    <item hash="784fa3d301a3772e1a0d25a10bdffc02" sprite="Jade (P2) (Tank)" width="48" height="40" animation="" />
+    <item hash="869a32746de67a0045f19520174c1e0f" sprite="Jade (P2) (Tank)" width="48" height="40" animation="" />
+    <item hash="884079d45ac1e76b28629a1f880c1d1c" sprite="Jade (P2) (Tank)" width="48" height="40" animation="" />
+    <item hash="88ab013f00823f06275a7d2cb22c1104" sprite="Jade (P2) (Tank)" width="48" height="40" animation="" />
+    <item hash="a1756253f8916eefb8ba450561dc70d0" sprite="Jade (P2) (Tank)" width="48" height="40" animation="" />
+    <item hash="a337d4dbf9128091bee284d969984f6f" sprite="Jade (P2) (Tank)" width="48" height="40" animation="" />
+    <item hash="a41379794f67275bf11194109a87a069" sprite="Jade (P2) (Tank)" width="48" height="40" animation="" />
+    <item hash="a8e4b3b51a62538101ecdc1efd916881" sprite="Jade (P2) (Tank)" width="48" height="40" animation="" />
+    <item hash="aecac51eb916cca19bb2709d76b5f861" sprite="Jade (P2) (Tank)" width="48" height="40" animation="" />
+    <item hash="b60f70f04d3155390e96db5ef9a62941" sprite="Jade (P2) (Tank)" width="48" height="40" animation="" />
+    <item hash="c0413838b4607e77d29e1c0a38c6c0e6" sprite="Jade (P2) (Tank)" width="48" height="40" animation="" />
+    <item hash="c38b3f0e753c6c46cb327b6d12b93658" sprite="Jade (P2) (Tank)" width="48" height="40" animation="" />
+    <item hash="c6a52d3f12641afb02c7d28a17c02608" sprite="Jade (P2) (Tank)" width="48" height="40" animation="" />
+    <item hash="c7ca9350463168b9a1546e5bf35f79d3" sprite="Jade (P2) (Tank)" width="48" height="40" animation="" />
+    <item hash="ccde8cebd98ae9a150d82336cb188b33" sprite="Jade (P2) (Tank)" width="48" height="40" animation="" />
+    <item hash="ce3bb6281121abc7aa38b3d356ca6028" sprite="Jade (P2) (Tank)" width="48" height="40" animation="" />
+    <item hash="dfcbb1af0a6095fd1447670f2355c89a" sprite="Jade (P2) (Tank)" width="48" height="40" animation="" />
+    <item hash="e444b4305aa985786bf58ed098577600" sprite="Jade (P2) (Tank)" width="48" height="40" animation="" />
+    <item hash="e5101f890c00f851482af1848498573c" sprite="Jade (P2) (Tank)" width="48" height="40" animation="" />
+    <item hash="f21e757fdb40e9a0ec963716034f6b1d" sprite="Jade (P2) (Tank)" width="48" height="40" animation="" />
+    <item hash="f4b419c6f0146d0aa2cef982fa8a53ad" sprite="Jade (P2) (Tank)" width="48" height="40" animation="" />
+    <item hash="fb3f8228d65fe4bd894b446124ffe450" sprite="Jade (P2) (Tank)" width="48" height="40" animation="" />
     <item hash="4fafdda76558a3d13071d5e0e07a657a" sprite="Jade's Tank (P1)" width="48" height="40" animation="" />
     <item hash="5d31da53e9566c8bf826276daa08092c" sprite="Jade's Tank (P1)" width="48" height="40" animation="" />
     <item hash="963b686f22da577717fb7ca514f55ff2" sprite="Jade's Tank (P1)" width="48" height="40" animation="" />
@@ -24357,18 +24357,9 @@
     <item hash="ff6b051869e568b6ceec12754015365f" sprite="Waltz (P2)" width="48" height="40" animation="" />
     <item hash="001183c240cd90021e175bbfb5fd5135" sprite="Waltz (U)" width="48" height="40" animation="" />
     <item hash="0280fbab99f08eed8682649bee76893c" sprite="Waltz (U)" width="48" height="40" animation="" />
-    <item hash="046978530e077bcf2443bec8aa4b35cf" sprite="Waltz (U)" width="48" height="40" animation="" />
-    <item hash="0dba8703ec78635e1273fd5388b7c935" sprite="Waltz (U)" width="48" height="40" animation="" />
-    <item hash="14366d390a4bea75794bf3c88de2c1cd" sprite="Waltz (U)" width="48" height="40" animation="" />
-    <item hash="15a3a6312c223a85fad6f63a7ff1a4b8" sprite="Waltz (U)" width="48" height="40" animation="" />
-    <item hash="15c798bb034e74c542b2bec84b2799cc" sprite="Waltz (U)" width="48" height="40" animation="" />
     <item hash="17610f8fefde0a7816b2af7c7e24e038" sprite="Waltz (U)" width="48" height="40" animation="" />
-    <item hash="1c8acf6896752fffc1dc702b182922af" sprite="Waltz (U)" width="48" height="40" animation="" />
-    <item hash="1cb535376f063b4c4a7708f2a23fa5f3" sprite="Waltz (U)" width="48" height="40" animation="" />
     <item hash="1cbd272dd842603dc43e5f9ba29c7a77" sprite="Waltz (U)" width="48" height="40" animation="" />
-    <item hash="1e14581381243fbfdcb16b7771ba6d31" sprite="Waltz (U)" width="48" height="40" animation="" />
     <item hash="1f5c8f1ca660ef4d5035849d19c9f66e" sprite="Waltz (U)" width="48" height="40" animation="" />
-    <item hash="22731d396fc14cab92294e75435de4b6" sprite="Waltz (U)" width="48" height="40" animation="" />
     <item hash="23d2253db7475fe0e153d2fb56ed0ab5" sprite="Waltz (U)" width="48" height="40" animation="" />
     <item hash="27904a8161678c5d8093ce640d197af9" sprite="Waltz (U)" width="48" height="40" animation="" />
     <item hash="27a342119ff22f5417834ee9d6772b2b" sprite="Waltz (U)" width="48" height="40" animation="" />
@@ -24377,19 +24368,9 @@
     <item hash="2bcfc7b169c0a0907b828ce83bff4cff" sprite="Waltz (U)" width="48" height="40" animation="" />
     <item hash="2c7ee85eae12432660a7f6946523af6b" sprite="Waltz (U)" width="48" height="40" animation="" />
     <item hash="2cce25207284f36ded6c5261cf45aeca" sprite="Waltz (U)" width="48" height="40" animation="" />
-    <item hash="30364777b07107aac0e674b06e3157f7" sprite="Waltz (U)" width="48" height="40" animation="" />
     <item hash="32e4d69487ad75396b856134d0ed2091" sprite="Waltz (U)" width="48" height="40" animation="" />
     <item hash="343e31ea41216f77f56600345a01a828" sprite="Waltz (U)" width="48" height="40" animation="" />
-    <item hash="356bd1f5e7c92c841ea70744cd17efbe" sprite="Waltz (U)" width="48" height="40" animation="" />
-    <item hash="3584d3fde6612f4e4aed4172baaa3f6f" sprite="Waltz (U)" width="48" height="40" animation="" />
-    <item hash="35e9ec69c316e548140ac4c49c96dd56" sprite="Waltz (U)" width="48" height="40" animation="" />
-    <item hash="365ebc9b445667848bb00681c1c74853" sprite="Waltz (U)" width="48" height="40" animation="" />
     <item hash="36b243800341b20b0374edac5cf66a90" sprite="Waltz (U)" width="48" height="40" animation="" />
-    <item hash="3856b6219f503f52216fde32119b64e5" sprite="Waltz (U)" width="48" height="40" animation="" />
-    <item hash="3c686c91bc520c364fd69c34bac84cce" sprite="Waltz (U)" width="48" height="40" animation="" />
-    <item hash="4290f27ef8544618f7d6884458293f7b" sprite="Waltz (U)" width="48" height="40" animation="" />
-    <item hash="437a7a3c343ff826aa9e9adc0ed83da4" sprite="Waltz (U)" width="48" height="40" animation="" />
-    <item hash="4475326895c9c4f72eddfa9ce4680aa2" sprite="Waltz (U)" width="48" height="40" animation="" />
     <item hash="45ba2aa9717a21d6e86aa27d7bebe925" sprite="Waltz (U)" width="48" height="40" animation="" />
     <item hash="46f870b306a745fe3f3190f1f25fb894" sprite="Waltz (U)" width="48" height="40" animation="" />
     <item hash="47510d28352c83ea99303408fa46ad9b" sprite="Waltz (U)" width="48" height="40" animation="" />
@@ -24397,72 +24378,91 @@
     <item hash="4fec73e3562106962502aaf7ae898e05" sprite="Waltz (U)" width="48" height="40" animation="" />
     <item hash="54796c4a4082eaf99a5a553f4d007682" sprite="Waltz (U)" width="48" height="40" animation="" />
     <item hash="556e4d8d7b92430fa6429764233454cc" sprite="Waltz (U)" width="48" height="40" animation="" />
-    <item hash="586522f4ebd70c99c20bb1fae7f2c35c" sprite="Waltz (U)" width="48" height="40" animation="" />
-    <item hash="5ba176af812ca07c4943321fd579bfd7" sprite="Waltz (U)" width="48" height="40" animation="" />
     <item hash="5c9d1fa0f5558a39a74edf03552d7f86" sprite="Waltz (U)" width="48" height="40" animation="" />
-    <item hash="5e080242a8f9a09d51cf790841d0979c" sprite="Waltz (U)" width="48" height="40" animation="" />
     <item hash="5fabe40c567c02197da6904b35942076" sprite="Waltz (U)" width="48" height="40" animation="" />
     <item hash="65079fc3aacd8ff6b56c606e2de78a44" sprite="Waltz (U)" width="48" height="40" animation="" />
-    <item hash="6ab58513e079e68846001f2c097557d3" sprite="Waltz (U)" width="48" height="40" animation="" />
     <item hash="6ccf7e610e0eb06569e1e98b650a4346" sprite="Waltz (U)" width="48" height="40" animation="" />
     <item hash="6d440603c064acfe639d2479d52baf9d" sprite="Waltz (U)" width="48" height="40" animation="" />
     <item hash="6ee528293be7f86c81286f7e6a44abca" sprite="Waltz (U)" width="48" height="40" animation="" />
     <item hash="72020aff1fcdb25c82642a36125432e5" sprite="Waltz (U)" width="48" height="40" animation="" />
     <item hash="7456d18562cc9b9349086ad073313ee9" sprite="Waltz (U)" width="48" height="40" animation="" />
     <item hash="7582680f9370e126b7cbee5b9f7161bd" sprite="Waltz (U)" width="48" height="40" animation="" />
-    <item hash="7860308bdf68cd0120fc6635b19a7337" sprite="Waltz (U)" width="48" height="40" animation="" />
     <item hash="7ecccf8a4db283a61091f5b68afedda3" sprite="Waltz (U)" width="48" height="40" animation="" />
     <item hash="7eef3f9bea1e45145083a221971e45bc" sprite="Waltz (U)" width="48" height="40" animation="" />
-    <item hash="84377105a83f2e10d8227e0224410974" sprite="Waltz (U)" width="48" height="40" animation="" />
-    <item hash="84bf6402e3e581945178bd4cb7efff06" sprite="Waltz (U)" width="48" height="40" animation="" />
     <item hash="856252ff51e95af0c436ac24374f2988" sprite="Waltz (U)" width="48" height="40" animation="" />
-    <item hash="85b3b83e85b1ab035346a08e514f362f" sprite="Waltz (U)" width="48" height="40" animation="" />
     <item hash="86cf99fe17c1d647fa02c03658c3f66a" sprite="Waltz (U)" width="48" height="40" animation="" />
-    <item hash="874fc3ee0905f83931a833d9fbc132cc" sprite="Waltz (U)" width="48" height="40" animation="" />
-    <item hash="8b94df984fe1efbb08bc666c48129362" sprite="Waltz (U)" width="48" height="40" animation="" />
     <item hash="8f1210f95a2d1de05341702db8be1061" sprite="Waltz (U)" width="48" height="40" animation="" />
-    <item hash="9e8487ab553300d1f5a73415fff8c389" sprite="Waltz (U)" width="48" height="40" animation="" />
     <item hash="a3b538b2c9198a519b9dd8a221047582" sprite="Waltz (U)" width="48" height="40" animation="" />
-    <item hash="a49c35904c0b56fc2296b92b9be2eb29" sprite="Waltz (U)" width="48" height="40" animation="" />
     <item hash="a6e43f5ec6df679b372c3a5453db3ee2" sprite="Waltz (U)" width="48" height="40" animation="" />
     <item hash="ad26e0fc5cbcf0f339fe9a8d9f923de5" sprite="Waltz (U)" width="48" height="40" animation="" />
     <item hash="aee166b79393f4afcaf0d66f7cde5bcc" sprite="Waltz (U)" width="48" height="40" animation="" />
-    <item hash="b1316cf5043203085970e32428537027" sprite="Waltz (U)" width="48" height="40" animation="" />
     <item hash="b2a0875471994ce14ebc9e5f46801732" sprite="Waltz (U)" width="48" height="40" animation="" />
     <item hash="b3555da8b1c61c60753bf49e82a1ec2c" sprite="Waltz (U)" width="48" height="40" animation="" />
     <item hash="b4456ee3f904360a56935016a4d68d0e" sprite="Waltz (U)" width="48" height="40" animation="" />
     <item hash="b698d44c6f44a119b1675d8ec21533c1" sprite="Waltz (U)" width="48" height="40" animation="" />
     <item hash="b988f583ba25e177f6d1014cda43d8f5" sprite="Waltz (U)" width="48" height="40" animation="" />
     <item hash="c05b049920e1f98f17e1c712428b3e2f" sprite="Waltz (U)" width="48" height="40" animation="" />
-    <item hash="c06c9d4ab9df9d8745d35293b9d1e8e8" sprite="Waltz (U)" width="48" height="40" animation="" />
     <item hash="c1b7b22649dcc75f902c0d2f242a7476" sprite="Waltz (U)" width="48" height="40" animation="" />
     <item hash="c332fe933c171475a7bfeaf18557dbdb" sprite="Waltz (U)" width="48" height="40" animation="" />
     <item hash="c4a0fc0ab5754b03f3601d47b44b06e6" sprite="Waltz (U)" width="48" height="40" animation="" />
     <item hash="c6af8187e09da0eece41850bd314fc7c" sprite="Waltz (U)" width="48" height="40" animation="" />
     <item hash="c75a12517b91a15de8bc33956680fb69" sprite="Waltz (U)" width="48" height="40" animation="" />
     <item hash="c871f5bffff2f190902525ce7cb97c51" sprite="Waltz (U)" width="48" height="40" animation="" />
-    <item hash="d0df7d4744caba64ab2cce12a666497a" sprite="Waltz (U)" width="48" height="40" animation="" />
-    <item hash="d5766817131f8649990d64f0fc3d8027" sprite="Waltz (U)" width="48" height="40" animation="" />
     <item hash="d72602b181fe45002ae1fb0cc627ec05" sprite="Waltz (U)" width="48" height="40" animation="" />
     <item hash="e019f4e78d0b53ed7afdbe178600a4ba" sprite="Waltz (U)" width="48" height="40" animation="" />
-    <item hash="e2a914a7f1ddc9b6fd969aa0fb3b655d" sprite="Waltz (U)" width="48" height="40" animation="" />
     <item hash="e5dc3aeaf3a89f30399bad5fa8c9b477" sprite="Waltz (U)" width="48" height="40" animation="" />
-    <item hash="e6381912c70ae5164f3077a50987533a" sprite="Waltz (U)" width="48" height="40" animation="" />
-    <item hash="e6b70da4cb918d7bb6d4ee3d133844e6" sprite="Waltz (U)" width="48" height="40" animation="" />
-    <item hash="e9e4bbcde9b05aedd10a0c7536958601" sprite="Waltz (U)" width="48" height="40" animation="" />
     <item hash="eb32b70f865c253b477554cc51f6a763" sprite="Waltz (U)" width="48" height="40" animation="" />
     <item hash="edead31badcb655337a1b80fe86fb162" sprite="Waltz (U)" width="48" height="40" animation="" />
-    <item hash="f22b1ebaae5956a053ab81a1a54ba9fe" sprite="Waltz (U)" width="48" height="40" animation="" />
-    <item hash="f35d8d92362c67a2bb498a2277eafe42" sprite="Waltz (U)" width="48" height="40" animation="" />
-    <item hash="f3716698de0412833b28eb900048c119" sprite="Waltz (U)" width="48" height="40" animation="" />
-    <item hash="f603d72bcf158721d5ec9fe4a5f99fab" sprite="Waltz (U)" width="48" height="40" animation="" />
     <item hash="f653bd33c42259d0af848196708ad133" sprite="Waltz (U)" width="48" height="40" animation="" />
     <item hash="f69e8247c89d1bf08632214e1a571097" sprite="Waltz (U)" width="48" height="40" animation="" />
     <item hash="f736341ffb398521e9966936def4ae1f" sprite="Waltz (U)" width="48" height="40" animation="" />
-    <item hash="fb2ddacdd05a6b2ca82ace27aeedd101" sprite="Waltz (U)" width="48" height="40" animation="" />
     <item hash="fd39f342b236f7c072e8ac02979b9bf8" sprite="Waltz (U)" width="48" height="40" animation="" />
     <item hash="fe3310bf387116c718947b045e9dd3aa" sprite="Waltz (U)" width="48" height="40" animation="" />
     <item hash="ff17d23f03c14d300e360260986ad2b0" sprite="Waltz (U)" width="48" height="40" animation="" />
+    <item hash="046978530e077bcf2443bec8aa4b35cf" sprite="Waltz (U) (Weaponless)" width="48" height="40" animation="" />
+    <item hash="0dba8703ec78635e1273fd5388b7c935" sprite="Waltz (U) (Weaponless)" width="48" height="40" animation="" />
+    <item hash="14366d390a4bea75794bf3c88de2c1cd" sprite="Waltz (U) (Weaponless)" width="48" height="40" animation="" />
+    <item hash="15a3a6312c223a85fad6f63a7ff1a4b8" sprite="Waltz (U) (Weaponless)" width="48" height="40" animation="" />
+    <item hash="15c798bb034e74c542b2bec84b2799cc" sprite="Waltz (U) (Weaponless)" width="48" height="40" animation="" />
+    <item hash="1c8acf6896752fffc1dc702b182922af" sprite="Waltz (U) (Weaponless)" width="48" height="40" animation="" />
+    <item hash="1cb535376f063b4c4a7708f2a23fa5f3" sprite="Waltz (U) (Weaponless)" width="48" height="40" animation="" />
+    <item hash="1e14581381243fbfdcb16b7771ba6d31" sprite="Waltz (U) (Weaponless)" width="48" height="40" animation="" />
+    <item hash="22731d396fc14cab92294e75435de4b6" sprite="Waltz (U) (Weaponless)" width="48" height="40" animation="" />
+    <item hash="30364777b07107aac0e674b06e3157f7" sprite="Waltz (U) (Weaponless)" width="48" height="40" animation="" />
+    <item hash="356bd1f5e7c92c841ea70744cd17efbe" sprite="Waltz (U) (Weaponless)" width="48" height="40" animation="" />
+    <item hash="3584d3fde6612f4e4aed4172baaa3f6f" sprite="Waltz (U) (Weaponless)" width="48" height="40" animation="" />
+    <item hash="35e9ec69c316e548140ac4c49c96dd56" sprite="Waltz (U) (Weaponless)" width="48" height="40" animation="" />
+    <item hash="365ebc9b445667848bb00681c1c74853" sprite="Waltz (U) (Weaponless)" width="48" height="40" animation="" />
+    <item hash="3856b6219f503f52216fde32119b64e5" sprite="Waltz (U) (Weaponless)" width="48" height="40" animation="" />
+    <item hash="3c686c91bc520c364fd69c34bac84cce" sprite="Waltz (U) (Weaponless)" width="48" height="40" animation="" />
+    <item hash="4290f27ef8544618f7d6884458293f7b" sprite="Waltz (U) (Weaponless)" width="48" height="40" animation="" />
+    <item hash="437a7a3c343ff826aa9e9adc0ed83da4" sprite="Waltz (U) (Weaponless)" width="48" height="40" animation="" />
+    <item hash="4475326895c9c4f72eddfa9ce4680aa2" sprite="Waltz (U) (Weaponless)" width="48" height="40" animation="" />
+    <item hash="586522f4ebd70c99c20bb1fae7f2c35c" sprite="Waltz (U) (Weaponless)" width="48" height="40" animation="" />
+    <item hash="5ba176af812ca07c4943321fd579bfd7" sprite="Waltz (U) (Weaponless)" width="48" height="40" animation="" />
+    <item hash="5e080242a8f9a09d51cf790841d0979c" sprite="Waltz (U) (Weaponless)" width="48" height="40" animation="" />
+    <item hash="6ab58513e079e68846001f2c097557d3" sprite="Waltz (U) (Weaponless)" width="48" height="40" animation="" />
+    <item hash="7860308bdf68cd0120fc6635b19a7337" sprite="Waltz (U) (Weaponless)" width="48" height="40" animation="" />
+    <item hash="84377105a83f2e10d8227e0224410974" sprite="Waltz (U) (Weaponless)" width="48" height="40" animation="" />
+    <item hash="84bf6402e3e581945178bd4cb7efff06" sprite="Waltz (U) (Weaponless)" width="48" height="40" animation="" />
+    <item hash="85b3b83e85b1ab035346a08e514f362f" sprite="Waltz (U) (Weaponless)" width="48" height="40" animation="" />
+    <item hash="874fc3ee0905f83931a833d9fbc132cc" sprite="Waltz (U) (Weaponless)" width="48" height="40" animation="" />
+    <item hash="8b94df984fe1efbb08bc666c48129362" sprite="Waltz (U) (Weaponless)" width="48" height="40" animation="" />
+    <item hash="9e8487ab553300d1f5a73415fff8c389" sprite="Waltz (U) (Weaponless)" width="48" height="40" animation="" />
+    <item hash="a49c35904c0b56fc2296b92b9be2eb29" sprite="Waltz (U) (Weaponless)" width="48" height="40" animation="" />
+    <item hash="b1316cf5043203085970e32428537027" sprite="Waltz (U) (Weaponless)" width="48" height="40" animation="" />
+    <item hash="c06c9d4ab9df9d8745d35293b9d1e8e8" sprite="Waltz (U) (Weaponless)" width="48" height="40" animation="" />
+    <item hash="d0df7d4744caba64ab2cce12a666497a" sprite="Waltz (U) (Weaponless)" width="48" height="40" animation="" />
+    <item hash="d5766817131f8649990d64f0fc3d8027" sprite="Waltz (U) (Weaponless)" width="48" height="40" animation="" />
+    <item hash="e2a914a7f1ddc9b6fd969aa0fb3b655d" sprite="Waltz (U) (Weaponless)" width="48" height="40" animation="" />
+    <item hash="e6381912c70ae5164f3077a50987533a" sprite="Waltz (U) (Weaponless)" width="48" height="40" animation="" />
+    <item hash="e6b70da4cb918d7bb6d4ee3d133844e6" sprite="Waltz (U) (Weaponless)" width="48" height="40" animation="" />
+    <item hash="e9e4bbcde9b05aedd10a0c7536958601" sprite="Waltz (U) (Weaponless)" width="48" height="40" animation="" />
+    <item hash="f22b1ebaae5956a053ab81a1a54ba9fe" sprite="Waltz (U) (Weaponless)" width="48" height="40" animation="" />
+    <item hash="f35d8d92362c67a2bb498a2277eafe42" sprite="Waltz (U) (Weaponless)" width="48" height="40" animation="" />
+    <item hash="f3716698de0412833b28eb900048c119" sprite="Waltz (U) (Weaponless)" width="48" height="40" animation="" />
+    <item hash="f603d72bcf158721d5ec9fe4a5f99fab" sprite="Waltz (U) (Weaponless)" width="48" height="40" animation="" />
+    <item hash="fb2ddacdd05a6b2ca82ace27aeedd101" sprite="Waltz (U) (Weaponless)" width="48" height="40" animation="" />
     <item hash="020d03d69c4be4cc3a585ca96632eac6" sprite="Warrior (Rock Placeholder)" width="40" height="40" animation="" />
     <item hash="0a69659301154134c719437fcd3177bf" sprite="Warrior (Rock Placeholder)" width="40" height="40" animation="" />
     <item hash="0b2ee2823ddf0083ff7569cc7aa74ddc" sprite="Warrior (Rock Placeholder)" width="40" height="40" animation="" />
