@@ -22881,38 +22881,38 @@
     <item hash="f2da27e1c87c9095b90f6a14ac221f0e" sprite="Thief" width="40" height="40" animation="" />
     <item hash="f63e19c344e658c8af491ea946c90611" sprite="Thief" width="40" height="40" animation="" />
     <item hash="ff29f9ff32372bc3b94bae62bd6bb3b6" sprite="Thief" width="40" height="40" animation="" />
+    <item hash="01ca5bda8a055479ab9c7947ea178aa8" sprite="Thief (Weaponless)" width="40" height="40" animation="" />
     <item hash="148137b2a0b3485a70cbc6c7135e5274" sprite="Thief (Weaponless)" width="40" height="40" animation="" />
+    <item hash="19cfe656804d1350e336cc93b360f825" sprite="Thief (Weaponless)" width="40" height="40" animation="" />
     <item hash="1c950a4fec5276f474c9e09663f1a394" sprite="Thief (Weaponless)" width="40" height="40" animation="" />
+    <item hash="238fe174f40f359ec3ee5f896057fb87" sprite="Thief (Weaponless)" width="40" height="40" animation="" />
+    <item hash="2bf5f561f9af3d290c3ad42ad75bd45e" sprite="Thief (Weaponless)" width="40" height="40" animation="" />
     <item hash="2d7643d16661df48636398d8f922aa07" sprite="Thief (Weaponless)" width="40" height="40" animation="" />
+    <item hash="3449c267c4c52644cbd7a145a74f5d57" sprite="Thief (Weaponless)" width="40" height="40" animation="" />
+    <item hash="4318ef6040364516f7e63124efba501c" sprite="Thief (Weaponless)" width="40" height="40" animation="" />
+    <item hash="692154bd82d1fcc943af9ef998c9698d" sprite="Thief (Weaponless)" width="40" height="40" animation="" />
+    <item hash="70369fade874c6270fe63df4bccc7f03" sprite="Thief (Weaponless)" width="40" height="40" animation="" />
+    <item hash="7502c74b72f58583be74664a78ee0ba7" sprite="Thief (Weaponless)" width="40" height="40" animation="" />
+    <item hash="79b3195a2cca838fd3a0c30ba6128c23" sprite="Thief (Weaponless)" width="40" height="40" animation="" />
+    <item hash="7ad58afd1c0de0dd78d6be2f8948c2aa" sprite="Thief (Weaponless)" width="40" height="40" animation="" />
     <item hash="7ba95b58c5b85b7c42e5c8bebb24ea2d" sprite="Thief (Weaponless)" width="40" height="40" animation="" />
     <item hash="8251f0cdc10c4607541408b1a9478da3" sprite="Thief (Weaponless)" width="40" height="40" animation="" />
     <item hash="84d1a5c50bbece7d0251fffdbd6d03d3" sprite="Thief (Weaponless)" width="40" height="40" animation="" />
     <item hash="9255ee9c84c468800a7c50b0a6b63c23" sprite="Thief (Weaponless)" width="40" height="40" animation="" />
     <item hash="9b5e5f9d5cebd547b2536963e92fa537" sprite="Thief (Weaponless)" width="40" height="40" animation="" />
     <item hash="a3bb46eb7e6e851c62958dd63e9dade8" sprite="Thief (Weaponless)" width="40" height="40" animation="" />
+    <item hash="bf6f5d6b7b17308a383d49ff0cf86142" sprite="Thief (Weaponless)" width="40" height="40" animation="" />
+    <item hash="c30c646606ca52b14a760a2559157553" sprite="Thief (Weaponless)" width="40" height="40" animation="" />
+    <item hash="c63e62d16d9b8d4904dfae48f3c39912" sprite="Thief (Weaponless)" width="40" height="40" animation="" />
+    <item hash="cd13a50d5f3fba1320dd3759fdb4e24b" sprite="Thief (Weaponless)" width="40" height="40" animation="" />
+    <item hash="ce21af2176c722b7dc2be58a1a0ef760" sprite="Thief (Weaponless)" width="40" height="40" animation="" />
+    <item hash="d371af016b6fa8a89e7da19af3781267" sprite="Thief (Weaponless)" width="40" height="40" animation="" />
     <item hash="d595a5b75557e3eaf1ef1f300e85e26d" sprite="Thief (Weaponless)" width="40" height="40" animation="" />
     <item hash="d68f463be7c8b2069a9c670ec9178630" sprite="Thief (Weaponless)" width="40" height="40" animation="" />
+    <item hash="e989d343bd7d31ab103039e1cc53872d" sprite="Thief (Weaponless)" width="40" height="40" animation="" />
+    <item hash="f26fd84e90c308e2a68f2ae4a9c6cd0f" sprite="Thief (Weaponless)" width="40" height="40" animation="" />
+    <item hash="f99121efa0837e64597fbf73d976623c" sprite="Thief (Weaponless)" width="40" height="40" animation="" />
     <item hash="fae266303dc92c52f3315a8a47ee18e2" sprite="Thief (Weaponless)" width="40" height="40" animation="" />
-    <item hash="01ca5bda8a055479ab9c7947ea178aa8" sprite="Thief w/o Weapon" width="40" height="40" animation="" />
-    <item hash="19cfe656804d1350e336cc93b360f825" sprite="Thief w/o Weapon" width="40" height="40" animation="" />
-    <item hash="238fe174f40f359ec3ee5f896057fb87" sprite="Thief w/o Weapon" width="40" height="40" animation="" />
-    <item hash="2bf5f561f9af3d290c3ad42ad75bd45e" sprite="Thief w/o Weapon" width="40" height="40" animation="" />
-    <item hash="3449c267c4c52644cbd7a145a74f5d57" sprite="Thief w/o Weapon" width="40" height="40" animation="" />
-    <item hash="4318ef6040364516f7e63124efba501c" sprite="Thief w/o Weapon" width="40" height="40" animation="" />
-    <item hash="692154bd82d1fcc943af9ef998c9698d" sprite="Thief w/o Weapon" width="40" height="40" animation="" />
-    <item hash="70369fade874c6270fe63df4bccc7f03" sprite="Thief w/o Weapon" width="40" height="40" animation="" />
-    <item hash="7502c74b72f58583be74664a78ee0ba7" sprite="Thief w/o Weapon" width="40" height="40" animation="" />
-    <item hash="79b3195a2cca838fd3a0c30ba6128c23" sprite="Thief w/o Weapon" width="40" height="40" animation="" />
-    <item hash="7ad58afd1c0de0dd78d6be2f8948c2aa" sprite="Thief w/o Weapon" width="40" height="40" animation="" />
-    <item hash="bf6f5d6b7b17308a383d49ff0cf86142" sprite="Thief w/o Weapon" width="40" height="40" animation="" />
-    <item hash="c30c646606ca52b14a760a2559157553" sprite="Thief w/o Weapon" width="40" height="40" animation="" />
-    <item hash="c63e62d16d9b8d4904dfae48f3c39912" sprite="Thief w/o Weapon" width="40" height="40" animation="" />
-    <item hash="cd13a50d5f3fba1320dd3759fdb4e24b" sprite="Thief w/o Weapon" width="40" height="40" animation="" />
-    <item hash="ce21af2176c722b7dc2be58a1a0ef760" sprite="Thief w/o Weapon" width="40" height="40" animation="" />
-    <item hash="d371af016b6fa8a89e7da19af3781267" sprite="Thief w/o Weapon" width="40" height="40" animation="" />
-    <item hash="e989d343bd7d31ab103039e1cc53872d" sprite="Thief w/o Weapon" width="40" height="40" animation="" />
-    <item hash="f26fd84e90c308e2a68f2ae4a9c6cd0f" sprite="Thief w/o Weapon" width="40" height="40" animation="" />
-    <item hash="f99121efa0837e64597fbf73d976623c" sprite="Thief w/o Weapon" width="40" height="40" animation="" />
     <item hash="0267119edcebb6da662ede06dd6ea0d1" sprite="Thousand (P1)" width="56" height="40" animation="" />
     <item hash="0ee25e776d1de5245ea29fce45aa7993" sprite="Thousand (P1)" width="56" height="40" animation="" />
     <item hash="0f6166f97aac94f13ea204b64511f423" sprite="Thousand (P1)" width="56" height="40" animation="" />
