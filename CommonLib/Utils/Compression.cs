@@ -171,22 +171,27 @@ namespace CommonLib.Utils {
         /// </summary>
         /// <param name="data">Data which contains the compressed data (e.g, a CHR/CHP file).</param>
         /// <param name="offset">Offset to the chunk of data pointed to by an offset in the FrameTable of a Sprite.</param>
+        /// <param name="sizeOut">The amount of bytes read.</param>
         /// <returns></returns>
-        public static ushort[] DecompressSpriteData(byte[] data, uint offset) {
+        public static ushort[] DecompressSpriteData(byte[] data, uint offset, out uint sizeOut) {
             var decompressedData = new List<ushort>();
             var dataPos = offset + 0x04u;
-            var dataEnd = offset + data.GetUInt32((int) offset);
+            var nextFeedPos = data.GetUInt32((int) offset);
+            var dataEnd = offset + nextFeedPos;
 
             // The 'feed' is the last set of bytes read in the upper byte, with a single bit following it, like a marker for the end.
             // Every time a bit is read from the feed, it's left-shifted to the right.
             // When the value is exactly 0x8000, that means the end of the feed has been reached, and it must be replenished.
             // Use this value to start, so the first read will replenish the feed.
             ushort feed = 0x8000;
-            var feedPos = dataEnd;
+            var feedPos = 0u;
 
             // Functions for the feed.
-            void ReplenishFeed()
-                => feed = (ushort) ((data[feedPos++] << 8) | 0x0080);
+            void ReplenishFeed() {
+                feedPos = nextFeedPos;
+                nextFeedPos++;
+                feed = (ushort) ((data[offset + feedPos] << 8) | 0x0080);
+            }
 
             bool PopTopBitInFeed() {
                 var bit = (feed & 0x8000) != 0;
@@ -245,6 +250,7 @@ namespace CommonLib.Utils {
                     decompressedData.Add(value);
             }
 
+            sizeOut = nextFeedPos + (nextFeedPos % 2);
             return decompressedData.ToArray();
         }
     }

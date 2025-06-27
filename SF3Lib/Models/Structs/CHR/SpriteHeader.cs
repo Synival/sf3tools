@@ -48,7 +48,6 @@ namespace SF3.Models.Structs.CHR {
                    Directions > 0;
         }
 
-
         public uint DataOffset { get; }
 
         [TableViewModelColumn(addressField: nameof(_spriteIdAddr), displayOrder: 0, displayFormat: "X2", minWidth: 200)]
@@ -135,5 +134,9 @@ namespace SF3.Models.Structs.CHR {
             get => (uint) Data.GetDouble(_animationTableOffsetAddr);
             set => Data.SetDouble(_animationTableOffsetAddr, (int) value);
         }
+
+        // TODO: Not actually part of the header! Only here for views.
+        [TableViewModelColumn(displayOrder: 12, displayFormat: "X4", displayName: "TotalCompressedFramesSize (Derived)")]
+        public uint TotalCompressedFramesSize { get; set; }
     }
 }

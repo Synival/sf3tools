@@ -36,6 +36,9 @@ namespace SF3.Models.Structs.CHR {
 
             AnimationInfo = CHRUtils.GetUniqueAnimationInfoByHash(Hash, width, height, _firstAnimationFrame?.Directions ?? 1);
             AnimationInfo.SpriteName = SpriteName;
+
+            var uniqueFramesWithTextures = _framesWithTextures.Distinct().ToArray();
+            TotalCompressedFramesSize = (uint) uniqueFramesWithTextures.Sum(x => x.TextureCompressedSize);
         }
 
         public AnimationFrameTable AnimationFrames { get; }
@@ -132,5 +135,8 @@ namespace SF3.Models.Structs.CHR {
         }
 
         public UniqueAnimationInfo AnimationInfo { get; }
+
+        [TableViewModelColumn(displayOrder: 4, displayFormat: "X4")]
+        public uint TotalCompressedFramesSize { get; }
     }
 }

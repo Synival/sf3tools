@@ -74,11 +74,25 @@ namespace SF3.Models.Structs.CHR {
             set => Data.SetDouble(_textureOffsetAddr, (int) value);
         }
 
+        [TableViewModelColumn(displayOrder: 0.1f, displayFormat: "X4")]
+        public uint TextureBitstreamOffset => TextureOffset + (uint) Data.GetDouble((int) (TextureOffset + DataOffset));
+
+        [TableViewModelColumn(displayOrder: 0.2f, displayFormat: "X4")]
+        public uint TextureEndOffset => TextureOffset + TextureCompressedSize;
+
+        [TableViewModelColumn(displayOrder: 0.3f, displayFormat: "X2")]
+        public uint TextureCompressedSize { get; private set; } = 0;
+
+        [TableViewModelColumn(displayOrder: 0.4f, displayFormat: "X2")]
+        public uint TextureDecompressedSize { get; private set; } = 0;
+
         public ITexture Texture { get; private set; }
 
         private ushort[,] GetUncompressedTextureData() {
             try {
-                var decompressedData = Compression.DecompressSpriteData(Data.Data.GetDataCopyOrReference(), TextureOffset + DataOffset);
+                var decompressedData = Compression.DecompressSpriteData(Data.Data.GetDataCopyOrReference(), TextureOffset + DataOffset, out var size);
+                TextureCompressedSize = size;
+                TextureDecompressedSize = (uint) decompressedData.Length * 2;
 
                 // If the correct size couldn't be determined, make some educated guesses.
                 // (There are errors in the CHR files from time to time)

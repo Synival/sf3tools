@@ -57,6 +57,11 @@ namespace SF3.Models.Structs.CHR {
 
             AnimationTable = AnimationTable.Create(Data, $"Sprite{ID:D2}_{nameof(AnimationTable)}", AnimationFrameTablesByIndex.Values.ToArray(),
                 $"Sprite{ID:D2}_");
+
+            TotalCompressedFramesSize = (uint) FrameTable.Sum(x => x.TextureCompressedSize);
+
+            // TODO: shouldn't be here! We need a separate view for just the sprite.
+            Header.TotalCompressedFramesSize = TotalCompressedFramesSize;
         }
 
         public uint DataOffset { get; }
@@ -69,5 +74,8 @@ namespace SF3.Models.Structs.CHR {
         public FrameTable FrameTable { get; }
         public Dictionary<AnimationType, AnimationFrameTable> AnimationFrameTablesByIndex { get; }
         public AnimationTable AnimationTable { get; }
+
+        // TODO: show in a view
+        public uint TotalCompressedFramesSize { get; }
     }
 }
