@@ -7208,8 +7208,8 @@
     <item hash="70f1556fa8fce78043f885410dbd0a60" sprite="Freeze Ball Pedestal" width="48" height="64" animation="" />
     <item hash="9507600b69c62ac6ad04bce7e435b84c" sprite="Freeze Ball Pedestal" width="48" height="64" animation="" />
     <item hash="bc2c82635f95d2c9eca6f46f4f7ad257" sprite="Freeze Ball Pedestal" width="48" height="64" animation="" />
-    <item hash="c5812869da844945da70f6d8f3248bf9" sprite="Freeze Ball Pedestal" width="48" height="64" animation="" />
     <item hash="fa2c7cde3ec73a8288a0ffaa2be8dd75" sprite="Freeze Ball Pedestal" width="48" height="64" animation="" />
+    <item hash="c5812869da844945da70f6d8f3248bf9" sprite="Freeze Ball Pedestal (Orbless)" width="48" height="64" animation="" />
     <item hash="019cc26764bfcf20a6a76cd9e8f4de18" sprite="Fynnding (P1)" width="48" height="40" animation="" />
     <item hash="0b1de838ce7d305283fc4950c3491860" sprite="Fynnding (P1)" width="48" height="40" animation="" />
     <item hash="0f526ca4b4e14dd299ddd2a1a35508da" sprite="Fynnding (P1)" width="48" height="40" animation="" />
@@ -25195,23 +25195,18 @@
     <item hash="1763dcef21120b150e75b9b81b89c70e" sprite="Yasha" width="40" height="40" animation="" />
     <item hash="1bb0ce33fd22cf8bdcc11367024f8f81" sprite="Yasha" width="40" height="40" animation="" />
     <item hash="1ca0aa5b642cd5eb604528b921594499" sprite="Yasha" width="40" height="40" animation="" />
-    <item hash="1f0b13ce451945fc8becbe52714746ee" sprite="Yasha" width="40" height="40" animation="" />
     <item hash="214269880e0dcdaede5420596d3b1d34" sprite="Yasha" width="40" height="40" animation="" />
     <item hash="23cbae195d2e4d66647ffcf9b76f2618" sprite="Yasha" width="40" height="40" animation="" />
     <item hash="2479ff7ea2e14387fa5229f0e509decb" sprite="Yasha" width="40" height="40" animation="" />
-    <item hash="258b0070d0e0f71a13a933faae4cf0cc" sprite="Yasha" width="40" height="40" animation="" />
-    <item hash="27c93dfde87f111f39f9a064db0ef202" sprite="Yasha" width="40" height="40" animation="" />
     <item hash="27df8bebd779dbf2b8a8ebdc71636cbd" sprite="Yasha" width="40" height="40" animation="" />
     <item hash="281da7091aba190ecd67f879cea68ba5" sprite="Yasha" width="40" height="40" animation="" />
     <item hash="2b54b98d5c5e675238b3e72c8bc39ba9" sprite="Yasha" width="40" height="40" animation="" />
     <item hash="2d1fbb83fdd3d8f050103732a6b1011e" sprite="Yasha" width="40" height="40" animation="" />
-    <item hash="310d09519bfcdc21b40e71a537335c93" sprite="Yasha" width="40" height="40" animation="" />
     <item hash="386fc99d41d63cd29b86ccb193ca61b8" sprite="Yasha" width="40" height="40" animation="" />
     <item hash="39e15753deedfafb46b6a45dd36592ef" sprite="Yasha" width="40" height="40" animation="" />
     <item hash="3dae92face2be34740221e405814d44c" sprite="Yasha" width="40" height="40" animation="" />
     <item hash="3f7298f4e64313b1cf5dd13dca07f563" sprite="Yasha" width="40" height="40" animation="" />
     <item hash="45d1699db64c17a04c48652bb957e9d7" sprite="Yasha" width="40" height="40" animation="" />
-    <item hash="47a5945c9ac03626d393bf0c2b82b745" sprite="Yasha" width="40" height="40" animation="" />
     <item hash="487f1edb15c540a0a740b4eea77938da" sprite="Yasha" width="40" height="40" animation="" />
     <item hash="4b20be44d5f80e821ce6bcdbbeb203db" sprite="Yasha" width="40" height="40" animation="" />
     <item hash="4b82cca2860426d2d37c2d00577eda4d" sprite="Yasha" width="40" height="40" animation="" />
@@ -25225,7 +25220,6 @@
     <item hash="6cb2f1b1da4e041cab47c654e927d70c" sprite="Yasha" width="40" height="40" animation="" />
     <item hash="6e9be8db8b8769934a18c97b935b9154" sprite="Yasha" width="40" height="40" animation="" />
     <item hash="6f067c1d04307c4153393f1a1dd37e31" sprite="Yasha" width="40" height="40" animation="" />
-    <item hash="75f021087c3a8c1888a654c72a2b5777" sprite="Yasha" width="40" height="40" animation="" />
     <item hash="86ef1365f578d307df320cfb418faf5d" sprite="Yasha" width="40" height="40" animation="" />
     <item hash="87baf26e8238c15f1fb363a7b2112d18" sprite="Yasha" width="40" height="40" animation="" />
     <item hash="87bcc0d00faf35471bb2cae63ef15f91" sprite="Yasha" width="40" height="40" animation="" />
@@ -25233,32 +25227,26 @@
     <item hash="9aca41c79893958360cdc8709cfd6888" sprite="Yasha" width="40" height="40" animation="" />
     <item hash="9c5002188bb2a6f58a06dec87f0d6b42" sprite="Yasha" width="40" height="40" animation="" />
     <item hash="9d6f79517dd000743485dd663bfa01bd" sprite="Yasha" width="40" height="40" animation="" />
-    <item hash="a281c1809be1635fbb1e004de223a2a8" sprite="Yasha" width="40" height="40" animation="" />
     <item hash="a3ec6a6b0ff8c803e78d7633af9f9779" sprite="Yasha" width="40" height="40" animation="" />
     <item hash="a4ae5934c3d92f736d69be8e5b4183b0" sprite="Yasha" width="40" height="40" animation="" />
     <item hash="a95e5dabbe2a0db96b2846deb76a0407" sprite="Yasha" width="40" height="40" animation="" />
     <item hash="af180d0f2877d7f3545179784dc3e3de" sprite="Yasha" width="40" height="40" animation="" />
     <item hash="af8d3c7a650c7758022d17d09f90ef38" sprite="Yasha" width="40" height="40" animation="" />
-    <item hash="b39af5b04319c333559056b8346b3f47" sprite="Yasha" width="40" height="40" animation="" />
     <item hash="b43b460267f65b43cbe12bcb38868aaf" sprite="Yasha" width="40" height="40" animation="" />
-    <item hash="b5525e08d3eed5a24d978d30d9553060" sprite="Yasha" width="40" height="40" animation="" />
     <item hash="b61df25b5dd3713da1572f963d8b1e9a" sprite="Yasha" width="40" height="40" animation="" />
     <item hash="b6b6c153a65e3681c0e5536b0c6982dd" sprite="Yasha" width="40" height="40" animation="" />
     <item hash="babf811e32a4449597ce60fab0cbc79b" sprite="Yasha" width="40" height="40" animation="" />
     <item hash="bddd7b7fc524c4f362a7e3786536a833" sprite="Yasha" width="40" height="40" animation="" />
-    <item hash="c4174cdfb8309297e7304f459a9a7171" sprite="Yasha" width="40" height="40" animation="" />
     <item hash="c5cc0a5f4d21962ac8cede02c7638eb3" sprite="Yasha" width="40" height="40" animation="" />
     <item hash="ca7f97ee8e04eb1ae357060e1284212d" sprite="Yasha" width="40" height="40" animation="" />
     <item hash="cae7f2bc031479222631e7be6ea6c2cb" sprite="Yasha" width="40" height="40" animation="" />
     <item hash="cbe73940d842ae40a996e9df5371297b" sprite="Yasha" width="40" height="40" animation="" />
-    <item hash="d57c4103340ee498e862c5002d3e8dbb" sprite="Yasha" width="40" height="40" animation="" />
     <item hash="df1f1e5a93d918b5a306bb381b96e865" sprite="Yasha" width="40" height="40" animation="" />
     <item hash="e8f2411e4e9dd8b2d370b35e8ce07e5c" sprite="Yasha" width="40" height="40" animation="" />
     <item hash="ef7ccfbc51edaff44f0d2bdb052109a1" sprite="Yasha" width="40" height="40" animation="" />
     <item hash="f031ddbf9b8201a94d1ae6771a8ede1e" sprite="Yasha" width="40" height="40" animation="" />
     <item hash="f85ae86d2279af7358ffe3a3982c215b" sprite="Yasha" width="40" height="40" animation="" />
     <item hash="fbbd1f8301fccbfac65f48ad7a8b7cb5" sprite="Yasha" width="40" height="40" animation="" />
-    <item hash="feed14760eae5342930cb8cb47c7ff16" sprite="Yasha" width="40" height="40" animation="" />
     <item hash="1b3519b7d52a8009b3d85e9c6dcf8707" sprite="Yasha" width="48" height="32" animation="Defeated" />
     <item hash="2028ffd4581b4ed3087b07657b00dbac" sprite="Yasha" width="48" height="32" animation="Defeated" />
     <item hash="3933f00a3f1a9e36f7c18c06ebcbfecc" sprite="Yasha" width="48" height="32" animation="Defeated" />
@@ -25299,12 +25287,17 @@
     <item hash="08f0b02c471ad8fb576464b1a5da1d11" sprite="Yasha (Weaponless)" width="40" height="40" animation="" />
     <item hash="1646d3ff02e1a659d031aa74bfd606c1" sprite="Yasha (Weaponless)" width="40" height="40" animation="" />
     <item hash="18278f9b8808f0d75ebe1d5321924cc8" sprite="Yasha (Weaponless)" width="40" height="40" animation="" />
+    <item hash="1f0b13ce451945fc8becbe52714746ee" sprite="Yasha (Weaponless)" width="40" height="40" animation="" />
     <item hash="21b8426f8da2a321f0a8fb5099a5a594" sprite="Yasha (Weaponless)" width="40" height="40" animation="" />
+    <item hash="258b0070d0e0f71a13a933faae4cf0cc" sprite="Yasha (Weaponless)" width="40" height="40" animation="" />
+    <item hash="27c93dfde87f111f39f9a064db0ef202" sprite="Yasha (Weaponless)" width="40" height="40" animation="" />
     <item hash="298ae0a5ff55a9c8c63e1c1bc4219b01" sprite="Yasha (Weaponless)" width="40" height="40" animation="" />
+    <item hash="310d09519bfcdc21b40e71a537335c93" sprite="Yasha (Weaponless)" width="40" height="40" animation="" />
     <item hash="380b36019fe135b645df1e12c634b665" sprite="Yasha (Weaponless)" width="40" height="40" animation="" />
     <item hash="3c3692370a8ee8563e1643763940e132" sprite="Yasha (Weaponless)" width="40" height="40" animation="" />
     <item hash="41c207d5eee4881a2d09c96a06a3f28e" sprite="Yasha (Weaponless)" width="40" height="40" animation="" />
     <item hash="4611f38baf201f64661934ebb56fad5c" sprite="Yasha (Weaponless)" width="40" height="40" animation="" />
+    <item hash="47a5945c9ac03626d393bf0c2b82b745" sprite="Yasha (Weaponless)" width="40" height="40" animation="" />
     <item hash="4d16a4640895f47c6aa1a731ef213f1e" sprite="Yasha (Weaponless)" width="40" height="40" animation="" />
     <item hash="5132c1b00e30ae94ec52086d0a6748b7" sprite="Yasha (Weaponless)" width="40" height="40" animation="" />
     <item hash="635fe1d92c2c5a26457ab8bfd393a478" sprite="Yasha (Weaponless)" width="40" height="40" animation="" />
@@ -25312,6 +25305,7 @@
     <item hash="699c9f1bcfc320771bc7b7f20eca7201" sprite="Yasha (Weaponless)" width="40" height="40" animation="" />
     <item hash="72005ece9ab6d6c02bf14ed41f633aaf" sprite="Yasha (Weaponless)" width="40" height="40" animation="" />
     <item hash="75cda9dee5ddad05fb1fb5f8a648ec5c" sprite="Yasha (Weaponless)" width="40" height="40" animation="" />
+    <item hash="75f021087c3a8c1888a654c72a2b5777" sprite="Yasha (Weaponless)" width="40" height="40" animation="" />
     <item hash="77be45e12f915838eefb8f0c0392089c" sprite="Yasha (Weaponless)" width="40" height="40" animation="" />
     <item hash="7b4d3840ea34a2cc1658855f6e6bcb58" sprite="Yasha (Weaponless)" width="40" height="40" animation="" />
     <item hash="7c06b469111a05285c516c072214f2f9" sprite="Yasha (Weaponless)" width="40" height="40" animation="" />
@@ -25329,17 +25323,22 @@
     <item hash="9da8c8ad5bd3e3d98dd2d2230ddd6cad" sprite="Yasha (Weaponless)" width="40" height="40" animation="" />
     <item hash="a0be75abfb4cc2c747de9848609f2f64" sprite="Yasha (Weaponless)" width="40" height="40" animation="" />
     <item hash="a23e642bc09929eb4fe8b873f48ce4d4" sprite="Yasha (Weaponless)" width="40" height="40" animation="" />
+    <item hash="a281c1809be1635fbb1e004de223a2a8" sprite="Yasha (Weaponless)" width="40" height="40" animation="" />
     <item hash="a2d3ff0c1993fe38e4391a483bbf8fa9" sprite="Yasha (Weaponless)" width="40" height="40" animation="" />
     <item hash="a6284beeecb9a9ea621daf37d04b6d6c" sprite="Yasha (Weaponless)" width="40" height="40" animation="" />
     <item hash="b1fcb54d5d1ffa61b2994cbeaca62cc8" sprite="Yasha (Weaponless)" width="40" height="40" animation="" />
+    <item hash="b39af5b04319c333559056b8346b3f47" sprite="Yasha (Weaponless)" width="40" height="40" animation="" />
+    <item hash="b5525e08d3eed5a24d978d30d9553060" sprite="Yasha (Weaponless)" width="40" height="40" animation="" />
     <item hash="b5dce48840aa1b680f5b2e3604e81501" sprite="Yasha (Weaponless)" width="40" height="40" animation="" />
     <item hash="bf35d2d47a638bc99b3a66b99f65b1a8" sprite="Yasha (Weaponless)" width="40" height="40" animation="" />
     <item hash="bf3bd76e62165e61a17fbb3f53ad798b" sprite="Yasha (Weaponless)" width="40" height="40" animation="" />
     <item hash="c03ccad5bba6814b431248f5d471fa3d" sprite="Yasha (Weaponless)" width="40" height="40" animation="" />
     <item hash="c2f0b5dd5f638ef173a0827fb589cb79" sprite="Yasha (Weaponless)" width="40" height="40" animation="" />
     <item hash="c3765d3178b308240489cdd5fe04e00e" sprite="Yasha (Weaponless)" width="40" height="40" animation="" />
+    <item hash="c4174cdfb8309297e7304f459a9a7171" sprite="Yasha (Weaponless)" width="40" height="40" animation="" />
     <item hash="ca56d2e3d4b112f396848e5428e32da7" sprite="Yasha (Weaponless)" width="40" height="40" animation="" />
     <item hash="cb87ad5ab0890b8286c67e1455a97813" sprite="Yasha (Weaponless)" width="40" height="40" animation="" />
+    <item hash="d57c4103340ee498e862c5002d3e8dbb" sprite="Yasha (Weaponless)" width="40" height="40" animation="" />
     <item hash="e0143de14a7fa74df69816686bf7870a" sprite="Yasha (Weaponless)" width="40" height="40" animation="" />
     <item hash="e115419bfc4de58ce8f9b75c9124120b" sprite="Yasha (Weaponless)" width="40" height="40" animation="" />
     <item hash="e307011a49a34ef4d74d71bda9f1700b" sprite="Yasha (Weaponless)" width="40" height="40" animation="" />
@@ -25350,6 +25349,7 @@
     <item hash="f1b51c784f0422dd6956d03910e163d1" sprite="Yasha (Weaponless)" width="40" height="40" animation="" />
     <item hash="f756e6615874c9855e307d7323ded0fb" sprite="Yasha (Weaponless)" width="40" height="40" animation="" />
     <item hash="fbe0307ac6562e9a90c23fb5172c78fc" sprite="Yasha (Weaponless)" width="40" height="40" animation="" />
+    <item hash="feed14760eae5342930cb8cb47c7ff16" sprite="Yasha (Weaponless)" width="40" height="40" animation="" />
     <item hash="ff36446f75f2856b06e34f36f5f075b7" sprite="Yasha (Weaponless)" width="40" height="40" animation="" />
     <item hash="05fe5245c00e7d5fe5baf6bd27912816" sprite="Yeti" width="40" height="40" animation="" />
     <item hash="0d6ee2307906e17ff528eb95ece554c3" sprite="Yeti" width="40" height="40" animation="" />
