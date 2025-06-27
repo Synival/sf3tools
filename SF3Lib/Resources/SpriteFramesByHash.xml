@@ -9706,34 +9706,6 @@
     <item hash="fa7519655c98a66c14dea6b1aade57bb" sprite="Hayward (U)" width="40" height="40" animation="" />
     <item hash="faf6670f7f83fa09e8df54cd94be72a5" sprite="Hayward (U)" width="40" height="40" animation="" />
     <item hash="fe625b8001e2b964448a2fd39fd51fcb" sprite="Hayward (U)" width="40" height="40" animation="" />
-    <item hash="133299f2292dde56cde17c8d4e5be814" sprite="Hazuki (P1)" width="40" height="40" animation="" />
-    <item hash="1e9eaba6be43a5c7d781d47527403ce0" sprite="Hazuki (P1)" width="40" height="40" animation="" />
-    <item hash="20ce3a7c1864a8bb3845a93eb05200c1" sprite="Hazuki (P1)" width="40" height="40" animation="" />
-    <item hash="28d9e74c833345b7d9e3149d56c94568" sprite="Hazuki (P1)" width="40" height="40" animation="" />
-    <item hash="2abff134d14b0440fcb550de4b31ccee" sprite="Hazuki (P1)" width="40" height="40" animation="" />
-    <item hash="3c5af84b21bfe860627e400f4a0da53b" sprite="Hazuki (P1)" width="40" height="40" animation="" />
-    <item hash="50c5c3fba5b05626bfc258c9e77157cb" sprite="Hazuki (P1)" width="40" height="40" animation="" />
-    <item hash="541a8b4eafa7bf3c07177bf96f58869e" sprite="Hazuki (P1)" width="40" height="40" animation="" />
-    <item hash="5628d77cbc4a8dd7bb4908d05ca115c8" sprite="Hazuki (P1)" width="40" height="40" animation="" />
-    <item hash="5fdbe7911385a557333ae5c39f037481" sprite="Hazuki (P1)" width="40" height="40" animation="" />
-    <item hash="68184d4955bee474052d500551e65796" sprite="Hazuki (P1)" width="40" height="40" animation="" />
-    <item hash="77f60d2fcef94b879b9838b0e66365c0" sprite="Hazuki (P1)" width="40" height="40" animation="" />
-    <item hash="898ab7a3b6011c73059cba7cfd0c63f2" sprite="Hazuki (P1)" width="40" height="40" animation="" />
-    <item hash="8a66ef14045e40d9df16553f22b59d04" sprite="Hazuki (P1)" width="40" height="40" animation="" />
-    <item hash="8aeb99f64e6e14e22f6c7a94f448830a" sprite="Hazuki (P1)" width="40" height="40" animation="" />
-    <item hash="92f392fd82405c09acf66f81d9128893" sprite="Hazuki (P1)" width="40" height="40" animation="" />
-    <item hash="a0851ff117ea379d6514d871e7151ecd" sprite="Hazuki (P1)" width="40" height="40" animation="" />
-    <item hash="a4565f37b96966e31529d639b704e2ff" sprite="Hazuki (P1)" width="40" height="40" animation="" />
-    <item hash="ac84890584bf2822e61f532275e6e529" sprite="Hazuki (P1)" width="40" height="40" animation="" />
-    <item hash="adc995e8442c0e7d773d926f5357ae99" sprite="Hazuki (P1)" width="40" height="40" animation="" />
-    <item hash="c06edc4f0e428f7aff7d85af8f04bb78" sprite="Hazuki (P1)" width="40" height="40" animation="" />
-    <item hash="c0be80b087b1ca1b94e112cf6268fe37" sprite="Hazuki (P1)" width="40" height="40" animation="" />
-    <item hash="d69879f47dca9d03cdfb7a737ed18d16" sprite="Hazuki (P1)" width="40" height="40" animation="" />
-    <item hash="df3256c91712bc24effdd3bcb1d52906" sprite="Hazuki (P1)" width="40" height="40" animation="" />
-    <item hash="e5de455d9dc8786caf6860f4713b8088" sprite="Hazuki (P1)" width="40" height="40" animation="" />
-    <item hash="eb8a50c4ba38ef759b68b4870cef1083" sprite="Hazuki (P1)" width="40" height="40" animation="" />
-    <item hash="f9c051f0ca7d277559341f68e6e9a2aa" sprite="Hazuki (P1)" width="40" height="40" animation="" />
-    <item hash="faf8afb6e4e8dbc528839a48fa0dd636" sprite="Hazuki (P1)" width="40" height="40" animation="" />
     <item hash="2c07d63d5abf716592b361987c3ae380" sprite="Hazuki (P1)" width="48" height="40" animation="" />
     <item hash="31f502a96aa473a52d2ec4ff9c0eafaf" sprite="Hazuki (P1)" width="48" height="40" animation="" />
     <item hash="3605403a6d658e220302068ba2423836" sprite="Hazuki (P1)" width="48" height="40" animation="" />
@@ -9743,43 +9715,71 @@
     <item hash="053f1e8674ec29dd75667054201d700c" sprite="Hazuki (P1) (Weaponless)" width="40" height="40" animation="" />
     <item hash="07ee4edd85b9fdeb4fff7a79135d1476" sprite="Hazuki (P1) (Weaponless)" width="40" height="40" animation="" />
     <item hash="0f995eedc970adee9e8ad1dc8c9611b7" sprite="Hazuki (P1) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="133299f2292dde56cde17c8d4e5be814" sprite="Hazuki (P1) (Weaponless)" width="40" height="40" animation="" />
     <item hash="19a4ec1160b18914bd443fc0d5ad7460" sprite="Hazuki (P1) (Weaponless)" width="40" height="40" animation="" />
     <item hash="1e49aa6f56f702186ac01262a12bc150" sprite="Hazuki (P1) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="1e9eaba6be43a5c7d781d47527403ce0" sprite="Hazuki (P1) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="20ce3a7c1864a8bb3845a93eb05200c1" sprite="Hazuki (P1) (Weaponless)" width="40" height="40" animation="" />
     <item hash="2184fc6112dc4afc24a17c90b226fbf3" sprite="Hazuki (P1) (Weaponless)" width="40" height="40" animation="" />
     <item hash="24ef142a0663fcc1703709dc9681ad1f" sprite="Hazuki (P1) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="28d9e74c833345b7d9e3149d56c94568" sprite="Hazuki (P1) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="2abff134d14b0440fcb550de4b31ccee" sprite="Hazuki (P1) (Weaponless)" width="40" height="40" animation="" />
     <item hash="2be5ebca153afd7cb1add7b5d1e93651" sprite="Hazuki (P1) (Weaponless)" width="40" height="40" animation="" />
     <item hash="325ff56324eacd506805b81b7562673a" sprite="Hazuki (P1) (Weaponless)" width="40" height="40" animation="" />
     <item hash="34f643b6c689eb0558abbdd003d3572f" sprite="Hazuki (P1) (Weaponless)" width="40" height="40" animation="" />
     <item hash="3b49200f6d9cde6cd6d73ed569bbd54d" sprite="Hazuki (P1) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="3c5af84b21bfe860627e400f4a0da53b" sprite="Hazuki (P1) (Weaponless)" width="40" height="40" animation="" />
     <item hash="3d27f49ae1ed68f9efa750366cbaa467" sprite="Hazuki (P1) (Weaponless)" width="40" height="40" animation="" />
     <item hash="4539e667545eb7af8edc74720affaeb1" sprite="Hazuki (P1) (Weaponless)" width="40" height="40" animation="" />
     <item hash="50951f6b45c451d70c95dd4bddab9841" sprite="Hazuki (P1) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="50c5c3fba5b05626bfc258c9e77157cb" sprite="Hazuki (P1) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="541a8b4eafa7bf3c07177bf96f58869e" sprite="Hazuki (P1) (Weaponless)" width="40" height="40" animation="" />
     <item hash="54bcaf842e0766abdbafa08bc262a4ff" sprite="Hazuki (P1) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="5628d77cbc4a8dd7bb4908d05ca115c8" sprite="Hazuki (P1) (Weaponless)" width="40" height="40" animation="" />
     <item hash="5c2d6d1bb5b7785a878d8e813ababd33" sprite="Hazuki (P1) (Weaponless)" width="40" height="40" animation="" />
     <item hash="5c4e8e7e3839798abfef2016a29b27b3" sprite="Hazuki (P1) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="5fdbe7911385a557333ae5c39f037481" sprite="Hazuki (P1) (Weaponless)" width="40" height="40" animation="" />
     <item hash="649d0f8c256d57d98564f345ad2c9b9a" sprite="Hazuki (P1) (Weaponless)" width="40" height="40" animation="" />
     <item hash="6739cfb98625d372fadd0dddca084c12" sprite="Hazuki (P1) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="68184d4955bee474052d500551e65796" sprite="Hazuki (P1) (Weaponless)" width="40" height="40" animation="" />
     <item hash="751d779544c9f2fccc7c53a14c871c68" sprite="Hazuki (P1) (Weaponless)" width="40" height="40" animation="" />
     <item hash="75f0b72abe19a8e856cd20f399c405fb" sprite="Hazuki (P1) (Weaponless)" width="40" height="40" animation="" />
     <item hash="76d0ce74f36e515e0bfaebf1ed7af1d1" sprite="Hazuki (P1) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="77f60d2fcef94b879b9838b0e66365c0" sprite="Hazuki (P1) (Weaponless)" width="40" height="40" animation="" />
     <item hash="7941b269639aa21fec6eace7a3b87724" sprite="Hazuki (P1) (Weaponless)" width="40" height="40" animation="" />
     <item hash="7df687ad5095a7b7d16b810793ae7abf" sprite="Hazuki (P1) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="898ab7a3b6011c73059cba7cfd0c63f2" sprite="Hazuki (P1) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="8a66ef14045e40d9df16553f22b59d04" sprite="Hazuki (P1) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="8aeb99f64e6e14e22f6c7a94f448830a" sprite="Hazuki (P1) (Weaponless)" width="40" height="40" animation="" />
     <item hash="924fac6c1b6728d87f88895e8ccbc4f2" sprite="Hazuki (P1) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="92f392fd82405c09acf66f81d9128893" sprite="Hazuki (P1) (Weaponless)" width="40" height="40" animation="" />
     <item hash="940f2500962cba4d7c9fa7529b3ccd78" sprite="Hazuki (P1) (Weaponless)" width="40" height="40" animation="" />
     <item hash="94409c2877fd739d643fa452a5ec7350" sprite="Hazuki (P1) (Weaponless)" width="40" height="40" animation="" />
     <item hash="9452c5e08db737e3cc27ed21f37b8ec7" sprite="Hazuki (P1) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="a0851ff117ea379d6514d871e7151ecd" sprite="Hazuki (P1) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="a4565f37b96966e31529d639b704e2ff" sprite="Hazuki (P1) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="ac84890584bf2822e61f532275e6e529" sprite="Hazuki (P1) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="adc995e8442c0e7d773d926f5357ae99" sprite="Hazuki (P1) (Weaponless)" width="40" height="40" animation="" />
     <item hash="b49ca45f884e0929d008983480792032" sprite="Hazuki (P1) (Weaponless)" width="40" height="40" animation="" />
     <item hash="be43d0da40f108c3aa0abde4647f774f" sprite="Hazuki (P1) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="c06edc4f0e428f7aff7d85af8f04bb78" sprite="Hazuki (P1) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="c0be80b087b1ca1b94e112cf6268fe37" sprite="Hazuki (P1) (Weaponless)" width="40" height="40" animation="" />
     <item hash="c5e943cbb70aceaccb1c093ebca6eefe" sprite="Hazuki (P1) (Weaponless)" width="40" height="40" animation="" />
     <item hash="d17b2234f238b8612d2dacf605b3f370" sprite="Hazuki (P1) (Weaponless)" width="40" height="40" animation="" />
     <item hash="d40f74af6bcaf42fa505858065bb5e82" sprite="Hazuki (P1) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="d69879f47dca9d03cdfb7a737ed18d16" sprite="Hazuki (P1) (Weaponless)" width="40" height="40" animation="" />
     <item hash="dd4e7650a83cd27c36ba5ce6561758f1" sprite="Hazuki (P1) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="df3256c91712bc24effdd3bcb1d52906" sprite="Hazuki (P1) (Weaponless)" width="40" height="40" animation="" />
     <item hash="e0ad3d4bf65ad502e3be1b6da8eab12a" sprite="Hazuki (P1) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="e5de455d9dc8786caf6860f4713b8088" sprite="Hazuki (P1) (Weaponless)" width="40" height="40" animation="" />
     <item hash="e993a54ed75408177c94ebcace8aa1fd" sprite="Hazuki (P1) (Weaponless)" width="40" height="40" animation="" />
     <item hash="ea5ce6a3f4ca1ef5379bdef5d937d5cb" sprite="Hazuki (P1) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="eb8a50c4ba38ef759b68b4870cef1083" sprite="Hazuki (P1) (Weaponless)" width="40" height="40" animation="" />
     <item hash="ee1940c98c637ac24e70aaa7eb4737a7" sprite="Hazuki (P1) (Weaponless)" width="40" height="40" animation="" />
     <item hash="f0445b00a0769632de06777965f42b59" sprite="Hazuki (P1) (Weaponless)" width="40" height="40" animation="" />
     <item hash="f06fcc1727a415b570affd2f6cf12257" sprite="Hazuki (P1) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="f9c051f0ca7d277559341f68e6e9a2aa" sprite="Hazuki (P1) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="faf8afb6e4e8dbc528839a48fa0dd636" sprite="Hazuki (P1) (Weaponless)" width="40" height="40" animation="" />
     <item hash="fc56145353fb1d0e13574d5a56d0830c" sprite="Hazuki (P1) (Weaponless)" width="40" height="40" animation="" />
     <item hash="feea4e590934d23d9bbe1c90ea8aebfe" sprite="Hazuki (P1) (Weaponless)" width="40" height="40" animation="" />
     <item hash="0221ddc636cda41277a996b404fdd3c3" sprite="Hazuki (P2)" width="40" height="40" animation="" />
@@ -9854,34 +9854,6 @@
     <item hash="ed056ab6d2b3724e562cc3dff7a74555" sprite="Hazuki (P2)" width="40" height="40" animation="" />
     <item hash="f7f821a0a8c6c8be36453922d5280666" sprite="Hazuki (P2)" width="40" height="40" animation="" />
     <item hash="ff1202b0a9f7b32ec466d924ebd0f69a" sprite="Hazuki (P2)" width="40" height="40" animation="" />
-    <item hash="057d551dfd401b00034c04712adfe0a1" sprite="Hazuki (U)" width="40" height="40" animation="" />
-    <item hash="0a15953971ef1b30e1d8fe3ae76ef542" sprite="Hazuki (U)" width="40" height="40" animation="" />
-    <item hash="10ccc78bb9c60ed5fc6fc79f0e5b1057" sprite="Hazuki (U)" width="40" height="40" animation="" />
-    <item hash="11f680b8f4477399683058facd8defe7" sprite="Hazuki (U)" width="40" height="40" animation="" />
-    <item hash="2844ea787d435b47a62467b0a783d2e4" sprite="Hazuki (U)" width="40" height="40" animation="" />
-    <item hash="339a91e7ab9641de87de13d6513abef9" sprite="Hazuki (U)" width="40" height="40" animation="" />
-    <item hash="3518748498a54869c3a140b6e254021b" sprite="Hazuki (U)" width="40" height="40" animation="" />
-    <item hash="3d45cd8964ef66a9a6bda0dcaf1bb78f" sprite="Hazuki (U)" width="40" height="40" animation="" />
-    <item hash="418e9c6553a55ac98d397b15e346d639" sprite="Hazuki (U)" width="40" height="40" animation="" />
-    <item hash="494d498fc380739958745b9fe1509ad3" sprite="Hazuki (U)" width="40" height="40" animation="" />
-    <item hash="4e3633e690da0d5c900f0bb9d985f992" sprite="Hazuki (U)" width="40" height="40" animation="" />
-    <item hash="507fd6c00b1092dd23337bfee0a2c942" sprite="Hazuki (U)" width="40" height="40" animation="" />
-    <item hash="5e34068211139aef1c91b2bb6ace8a32" sprite="Hazuki (U)" width="40" height="40" animation="" />
-    <item hash="61f153c2408f98afdca1a5bc520cc66d" sprite="Hazuki (U)" width="40" height="40" animation="" />
-    <item hash="67e147a37c7cffdffed9148efcf79734" sprite="Hazuki (U)" width="40" height="40" animation="" />
-    <item hash="6d9c1ec36cb140cdc18f71d7806ea19f" sprite="Hazuki (U)" width="40" height="40" animation="" />
-    <item hash="772a32816d2f165a2c462d4d741b7d01" sprite="Hazuki (U)" width="40" height="40" animation="" />
-    <item hash="82190af1017ca3e13967d43a55a1d804" sprite="Hazuki (U)" width="40" height="40" animation="" />
-    <item hash="8ea759813ebaaa2594fcbd067eaf2a39" sprite="Hazuki (U)" width="40" height="40" animation="" />
-    <item hash="934410adaeb400af07fe77750e09ec75" sprite="Hazuki (U)" width="40" height="40" animation="" />
-    <item hash="972e694f743bc271564074bc1b9e9e5e" sprite="Hazuki (U)" width="40" height="40" animation="" />
-    <item hash="b0ca0310163213bb6324eba680c890ba" sprite="Hazuki (U)" width="40" height="40" animation="" />
-    <item hash="bd1669d4559f0bc544a567ce53e83dcd" sprite="Hazuki (U)" width="40" height="40" animation="" />
-    <item hash="c07a9282ad86a9b98c6715a244157435" sprite="Hazuki (U)" width="40" height="40" animation="" />
-    <item hash="eae72a19758967783adbc8ce3f80555d" sprite="Hazuki (U)" width="40" height="40" animation="" />
-    <item hash="f9f51f0388b8ad64836de4d4c472d18d" sprite="Hazuki (U)" width="40" height="40" animation="" />
-    <item hash="fcabac91135be344178aaaee12145059" sprite="Hazuki (U)" width="40" height="40" animation="" />
-    <item hash="fedc0a7bac4efbc17590977de5ecab97" sprite="Hazuki (U)" width="40" height="40" animation="" />
     <item hash="0bd2415d61744d9b73b8d48315d9c9e7" sprite="Hazuki (U)" width="40" height="40" animation="Jumping" />
     <item hash="28115f4664683b59f51f855a7b3ba8d2" sprite="Hazuki (U)" width="40" height="40" animation="Jumping" />
     <item hash="29064cfeb078db91ffa203b0582907b4" sprite="Hazuki (U)" width="40" height="40" animation="Jumping" />
@@ -9912,49 +9884,77 @@
     <item hash="e29467d91bbc7f6d8b9fb0711ecd91b5" sprite="Hazuki (U)" width="48" height="40" animation="Jumping" />
     <item hash="ec0351772ded499c64e090a5fa947549" sprite="Hazuki (U)" width="48" height="40" animation="Jumping" />
     <item hash="efc04835935182c60595819b059df1ea" sprite="Hazuki (U)" width="48" height="40" animation="Jumping" />
+    <item hash="057d551dfd401b00034c04712adfe0a1" sprite="Hazuki (U) (Weaponless)" width="40" height="40" animation="" />
     <item hash="0656bae2612e72ae4d07ca707c67c835" sprite="Hazuki (U) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="0a15953971ef1b30e1d8fe3ae76ef542" sprite="Hazuki (U) (Weaponless)" width="40" height="40" animation="" />
     <item hash="0ed172b110fdafa0b2275bef9f893aa7" sprite="Hazuki (U) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="10ccc78bb9c60ed5fc6fc79f0e5b1057" sprite="Hazuki (U) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="11f680b8f4477399683058facd8defe7" sprite="Hazuki (U) (Weaponless)" width="40" height="40" animation="" />
     <item hash="1c5ef52ef728464c8a8f83c0e21a6482" sprite="Hazuki (U) (Weaponless)" width="40" height="40" animation="" />
     <item hash="1c7079491c23f5f9465791c8ea5ae834" sprite="Hazuki (U) (Weaponless)" width="40" height="40" animation="" />
     <item hash="1d65ce088e4b45a558d83e5c8ecf99c7" sprite="Hazuki (U) (Weaponless)" width="40" height="40" animation="" />
     <item hash="1de179f30efb5c4c90192a947583c8cc" sprite="Hazuki (U) (Weaponless)" width="40" height="40" animation="" />
     <item hash="26c0ebbfe70a4566bbd88bbc68e4e443" sprite="Hazuki (U) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="2844ea787d435b47a62467b0a783d2e4" sprite="Hazuki (U) (Weaponless)" width="40" height="40" animation="" />
     <item hash="336936c638bb9a9ad0f0fa2752b84253" sprite="Hazuki (U) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="339a91e7ab9641de87de13d6513abef9" sprite="Hazuki (U) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="3518748498a54869c3a140b6e254021b" sprite="Hazuki (U) (Weaponless)" width="40" height="40" animation="" />
     <item hash="359ab1efe73783df7d4be67a7636325f" sprite="Hazuki (U) (Weaponless)" width="40" height="40" animation="" />
     <item hash="35beb231dbf13fbfd142ac7b7d538911" sprite="Hazuki (U) (Weaponless)" width="40" height="40" animation="" />
     <item hash="3ae7d38eedb348fe40083d996aeef2f9" sprite="Hazuki (U) (Weaponless)" width="40" height="40" animation="" />
     <item hash="3b9aa56654ef8e25c0b41f2a44121c85" sprite="Hazuki (U) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="3d45cd8964ef66a9a6bda0dcaf1bb78f" sprite="Hazuki (U) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="418e9c6553a55ac98d397b15e346d639" sprite="Hazuki (U) (Weaponless)" width="40" height="40" animation="" />
     <item hash="482d0e0830b617617ea09cc8637ad09d" sprite="Hazuki (U) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="494d498fc380739958745b9fe1509ad3" sprite="Hazuki (U) (Weaponless)" width="40" height="40" animation="" />
     <item hash="49f113ba7fcebf162a714d5c3f2a104d" sprite="Hazuki (U) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="4e3633e690da0d5c900f0bb9d985f992" sprite="Hazuki (U) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="507fd6c00b1092dd23337bfee0a2c942" sprite="Hazuki (U) (Weaponless)" width="40" height="40" animation="" />
     <item hash="50dff735f3b9e127921b5fad49493c4d" sprite="Hazuki (U) (Weaponless)" width="40" height="40" animation="" />
     <item hash="557b34208e043cdf5930b98d84fc0083" sprite="Hazuki (U) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="5e34068211139aef1c91b2bb6ace8a32" sprite="Hazuki (U) (Weaponless)" width="40" height="40" animation="" />
     <item hash="5efc748ddc3606600e15e996625a81e8" sprite="Hazuki (U) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="61f153c2408f98afdca1a5bc520cc66d" sprite="Hazuki (U) (Weaponless)" width="40" height="40" animation="" />
     <item hash="62f7b614cc98f0fa8d8ba27b6a2c3c1e" sprite="Hazuki (U) (Weaponless)" width="40" height="40" animation="" />
     <item hash="66b86d4ff33b898bfc058a92a8faf198" sprite="Hazuki (U) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="67e147a37c7cffdffed9148efcf79734" sprite="Hazuki (U) (Weaponless)" width="40" height="40" animation="" />
     <item hash="6a0aab1ffae608a0cb23ae250a5e5951" sprite="Hazuki (U) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="6d9c1ec36cb140cdc18f71d7806ea19f" sprite="Hazuki (U) (Weaponless)" width="40" height="40" animation="" />
     <item hash="724e14ee46b1b74f943c9cbeba612d22" sprite="Hazuki (U) (Weaponless)" width="40" height="40" animation="" />
     <item hash="726152e337c64ff237fc946a65c971c4" sprite="Hazuki (U) (Weaponless)" width="40" height="40" animation="" />
     <item hash="72b3346ffd0a33e56f9564bc256aaa3f" sprite="Hazuki (U) (Weaponless)" width="40" height="40" animation="" />
     <item hash="73af677ca27c2d4a59e39c3b2051bcd3" sprite="Hazuki (U) (Weaponless)" width="40" height="40" animation="" />
     <item hash="75a06286e3f885d43913971424d63e34" sprite="Hazuki (U) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="772a32816d2f165a2c462d4d741b7d01" sprite="Hazuki (U) (Weaponless)" width="40" height="40" animation="" />
     <item hash="780d75a79e687b8c88d8db8ccf8df8aa" sprite="Hazuki (U) (Weaponless)" width="40" height="40" animation="" />
     <item hash="7dee7028be49db70ad10c83cf889050a" sprite="Hazuki (U) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="82190af1017ca3e13967d43a55a1d804" sprite="Hazuki (U) (Weaponless)" width="40" height="40" animation="" />
     <item hash="8c80ec7fd4166c452ba7f617a17fdf7e" sprite="Hazuki (U) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="8ea759813ebaaa2594fcbd067eaf2a39" sprite="Hazuki (U) (Weaponless)" width="40" height="40" animation="" />
     <item hash="903d5b0d983fe5aa252d668d53adb88f" sprite="Hazuki (U) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="934410adaeb400af07fe77750e09ec75" sprite="Hazuki (U) (Weaponless)" width="40" height="40" animation="" />
     <item hash="962e7ef8f51671fcee9ddf9cc435ee93" sprite="Hazuki (U) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="972e694f743bc271564074bc1b9e9e5e" sprite="Hazuki (U) (Weaponless)" width="40" height="40" animation="" />
     <item hash="9cc5a732a79ded72ed3ea7b7517e6e92" sprite="Hazuki (U) (Weaponless)" width="40" height="40" animation="" />
     <item hash="aa625c2db5f686bc71865093501e328e" sprite="Hazuki (U) (Weaponless)" width="40" height="40" animation="" />
     <item hash="aabb1dc5c6328a5793389a74278e0cc8" sprite="Hazuki (U) (Weaponless)" width="40" height="40" animation="" />
     <item hash="ac3a54d692a7ed016eedb2f33c1fa683" sprite="Hazuki (U) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="b0ca0310163213bb6324eba680c890ba" sprite="Hazuki (U) (Weaponless)" width="40" height="40" animation="" />
     <item hash="b1b0c38dc5a69df26475f652e32bc761" sprite="Hazuki (U) (Weaponless)" width="40" height="40" animation="" />
     <item hash="b2f5c669ef95fbc753085b31a08547f3" sprite="Hazuki (U) (Weaponless)" width="40" height="40" animation="" />
     <item hash="b95825b2f2a27ecc425167153b70fbab" sprite="Hazuki (U) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="bd1669d4559f0bc544a567ce53e83dcd" sprite="Hazuki (U) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="c07a9282ad86a9b98c6715a244157435" sprite="Hazuki (U) (Weaponless)" width="40" height="40" animation="" />
     <item hash="c5d474fac6f893bb9510aa59ea38aefb" sprite="Hazuki (U) (Weaponless)" width="40" height="40" animation="" />
     <item hash="d7deff1feeee14acf6580bab06f0cdb4" sprite="Hazuki (U) (Weaponless)" width="40" height="40" animation="" />
     <item hash="db4eb7ea450c7d7c216234ce6f49370d" sprite="Hazuki (U) (Weaponless)" width="40" height="40" animation="" />
     <item hash="dc23db4a951b60bac8dcb5e5060a3679" sprite="Hazuki (U) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="eae72a19758967783adbc8ce3f80555d" sprite="Hazuki (U) (Weaponless)" width="40" height="40" animation="" />
     <item hash="f0e0af433520a955813f917a9bd7e83b" sprite="Hazuki (U) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="f9f51f0388b8ad64836de4d4c472d18d" sprite="Hazuki (U) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="fcabac91135be344178aaaee12145059" sprite="Hazuki (U) (Weaponless)" width="40" height="40" animation="" />
     <item hash="feb997bab79678bcba32189668e6a2ab" sprite="Hazuki (U) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="fedc0a7bac4efbc17590977de5ecab97" sprite="Hazuki (U) (Weaponless)" width="40" height="40" animation="" />
     <item hash="ffffa62e51a297552640dd06bbcbcc9f" sprite="Hazuki (U) (Weaponless)" width="40" height="40" animation="" />
     <item hash="05c2674ce02f35d37c25244f43bb3421" sprite="Hazuki's Father" width="48" height="40" animation="Dying" />
     <item hash="08c94f4cfdc1a61af0e40bb3dfc314ac" sprite="Hazuki's Father" width="48" height="40" animation="Dying" />
