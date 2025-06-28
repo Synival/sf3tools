@@ -22,10 +22,11 @@ namespace SF3.Models.Tables.CHR {
             uint currentDataOffset = (uint) Address;
             uint nextAddr = IsCHP ? 0 : currentDataOffset;
             bool keepGoing = true;
+            int nextIdInGroup = 0;
 
             return Load(
                 (id, addr) => {
-                    var spr = new Sprite(Data, id, $"{nameof(Sprite)}{id:D2}", IsCHP ? (int) nextAddr : addr, currentDataOffset, NameGetterContext);
+                    var spr = new Sprite(Data, id, nextIdInGroup++, $"{nameof(Sprite)}{id:D2}", IsCHP ? (int) nextAddr : addr, currentDataOffset, NameGetterContext);
                     nextAddr += (uint) spr.Size;
 
                     if (IsCHP) {
@@ -36,9 +37,10 @@ namespace SF3.Models.Tables.CHR {
                                 keepGoing = false;
                                 return null;
                             }
-                            spr = new Sprite(Data, id, $"{nameof(Sprite)}{id:D2}", (int) nextAddr, currentDataOffset, NameGetterContext);
+                            spr = new Sprite(Data, id, 0, $"{nameof(Sprite)}{id:D2}", (int) nextAddr, currentDataOffset, NameGetterContext);
                         }
                         nextAddr += 0x18;
+                        nextIdInGroup = 1;
                         if (nextAddr >= Data.Length - 0x18)
                             keepGoing = false;
                     }

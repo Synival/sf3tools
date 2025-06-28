@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using CommonLib.NamedValues;
 using SF3.ByteData;
@@ -7,8 +8,9 @@ using SF3.Types;
 
 namespace SF3.Models.Structs.CHR {
     public class Sprite : Struct {
-        public Sprite(IByteData data, int id, string name, int address, uint dataOffset, INameGetterContext ngc)
+        public Sprite(IByteData data, int id, int idInGroup, string name, int address, uint dataOffset, INameGetterContext ngc)
         : base(data, id, name, address, 0x18 /* just the header */) {
+            IDInGroup = idInGroup;
             DataOffset = dataOffset;
             NameGetterContext = ngc;
 
@@ -38,8 +40,22 @@ namespace SF3.Models.Structs.CHR {
                 Header.Directions);
 
             // It seems that this CHR and *only* this CHR has a bigger animation table than the rest.
+            var nextId = (uint) Data.GetWord(Address + 0x18);
+
+            // Determine the size of the animation table, which isn't always 16 (in XOP101.CHR, it's 21).
+            int nextAnimationTableOffset;
+            if (nextId != 0xFFFF)
+                nextAnimationTableOffset = Data.GetDouble((int) DataOffset + Data.GetDouble(Address + 0x18 + 0x14));
+            else {
+                var firstHeaderAddr = Address - 0x18 * IDInGroup;
+                var firstFrameTableOffset = Data.GetDouble(firstHeaderAddr + 0x10);
+                var firstFrameOffset = Data.GetDouble(firstFrameTableOffset + (int) DataOffset);
+                nextAnimationTableOffset = Math.Min(firstFrameTableOffset, firstFrameOffset);
+            }
+            var size = (nextAnimationTableOffset - (int) Header.AnimationTableOffset) / 4;
+
             bool isXOP101_Masqurin = FrameTable.Length == 144;
-            AnimationOffsetTable = AnimationOffsetTable.Create(Data, nameof(AnimationOffsetTable), (int) (DataOffset + Header.AnimationTableOffset), isXOP101_Masqurin);
+            AnimationOffsetTable = AnimationOffsetTable.Create(Data, nameof(AnimationOffsetTable), (int) (DataOffset + Header.AnimationTableOffset), size);
 
             AnimationFrameTablesByIndex = AnimationOffsetTable
                 .Where(x => x.Offset != 0)
@@ -64,6 +80,7 @@ namespace SF3.Models.Structs.CHR {
             Header.TotalCompressedFramesSize = TotalCompressedFramesSize;
         }
 
+        public int IDInGroup { get; }
         public uint DataOffset { get; }
         public INameGetterContext NameGetterContext { get; }
         public string SpriteName { get; }
