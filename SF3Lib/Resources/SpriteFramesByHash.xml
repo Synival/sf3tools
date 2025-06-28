@@ -21471,7 +21471,6 @@
     <item hash="ee6242bacadf320c06c7afab45cd8d80" sprite="Slash Bat" width="48" height="32" animation="" />
     <item hash="ef45d18921f3d9b1509e474a30c4f685" sprite="Slash Bat" width="48" height="32" animation="" />
     <item hash="f10bc450836577686d0e487a002850a9" sprite="Slash Bat" width="48" height="32" animation="" />
-    <item hash="3a964726ddf49af8343c0851ccf885a2" sprite="Small Black Box" width="8" height="8" animation="" />
     <item hash="01a0053a764c0b46d0eac73b62dd34e2" sprite="Small Icons" width="16" height="16" animation="" />
     <item hash="380805239fe47bd851ebb8053752e729" sprite="Small Icons" width="16" height="16" animation="" />
     <item hash="22a5fb949e50b3c414acb4ec058c2bd6" sprite="Small Icons (Scn1 Alt)" width="16" height="16" animation="" />
@@ -23127,6 +23126,7 @@
     <item hash="f29f9490737661693152bced76fac74b" sprite="Train Official w/ White Uniform" width="40" height="40" animation="" />
     <item hash="f66c5a82183dfddf3550ce506f0f0c2f" sprite="Train Official w/ White Uniform" width="40" height="40" animation="" />
     <item hash="f9666afba29068675b7a31eaf8e65889" sprite="Train Official w/ White Uniform" width="40" height="40" animation="" />
+    <item hash="3a964726ddf49af8343c0851ccf885a2" sprite="Transparency" width="8" height="8" animation="" />
     <item hash="f09f35a5637839458e462e6350ecbce4" sprite="Transparent Frame" width="8" height="8" animation="" />
     <item hash="fd9a62f71778de82628430c658349d91" sprite="Transparent Frame" width="16" height="16" animation="" />
     <item hash="7470b797563079a7f474e66996238818" sprite="Transparent Frame" width="16" height="32" animation="" />
