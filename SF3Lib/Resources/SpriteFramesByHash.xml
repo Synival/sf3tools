@@ -9706,10 +9706,6 @@
     <item hash="fa7519655c98a66c14dea6b1aade57bb" sprite="Hayward (U)" width="40" height="40" animation="" />
     <item hash="faf6670f7f83fa09e8df54cd94be72a5" sprite="Hayward (U)" width="40" height="40" animation="" />
     <item hash="fe625b8001e2b964448a2fd39fd51fcb" sprite="Hayward (U)" width="40" height="40" animation="" />
-    <item hash="2c07d63d5abf716592b361987c3ae380" sprite="Hazuki (P1)" width="48" height="40" animation="" />
-    <item hash="31f502a96aa473a52d2ec4ff9c0eafaf" sprite="Hazuki (P1)" width="48" height="40" animation="" />
-    <item hash="3605403a6d658e220302068ba2423836" sprite="Hazuki (P1)" width="48" height="40" animation="" />
-    <item hash="5062ebb4e8c0dc7f16d899406e1870c7" sprite="Hazuki (P1)" width="48" height="40" animation="" />
     <item hash="000af4a75a55588bf4cf724fcb9f9d94" sprite="Hazuki (P1)" width="40" height="40" animation="" />
     <item hash="0459040113c764fa8b7b2d938e361db3" sprite="Hazuki (P1)" width="40" height="40" animation="" />
     <item hash="053f1e8674ec29dd75667054201d700c" sprite="Hazuki (P1)" width="40" height="40" animation="" />
@@ -9782,6 +9778,10 @@
     <item hash="faf8afb6e4e8dbc528839a48fa0dd636" sprite="Hazuki (P1)" width="40" height="40" animation="" />
     <item hash="fc56145353fb1d0e13574d5a56d0830c" sprite="Hazuki (P1)" width="40" height="40" animation="" />
     <item hash="feea4e590934d23d9bbe1c90ea8aebfe" sprite="Hazuki (P1)" width="40" height="40" animation="" />
+    <item hash="2c07d63d5abf716592b361987c3ae380" sprite="Hazuki (P1)" width="48" height="40" animation="" />
+    <item hash="31f502a96aa473a52d2ec4ff9c0eafaf" sprite="Hazuki (P1)" width="48" height="40" animation="" />
+    <item hash="3605403a6d658e220302068ba2423836" sprite="Hazuki (P1)" width="48" height="40" animation="" />
+    <item hash="5062ebb4e8c0dc7f16d899406e1870c7" sprite="Hazuki (P1)" width="48" height="40" animation="" />
     <item hash="0221ddc636cda41277a996b404fdd3c3" sprite="Hazuki (P2)" width="40" height="40" animation="" />
     <item hash="04c31069ca18241a98eea14c174e93fe" sprite="Hazuki (P2)" width="40" height="40" animation="" />
     <item hash="06db51e6336f5cef195d62c00f62359d" sprite="Hazuki (P2)" width="40" height="40" animation="" />
@@ -9854,10 +9854,6 @@
     <item hash="ed056ab6d2b3724e562cc3dff7a74555" sprite="Hazuki (P2)" width="40" height="40" animation="" />
     <item hash="f7f821a0a8c6c8be36453922d5280666" sprite="Hazuki (P2)" width="40" height="40" animation="" />
     <item hash="ff1202b0a9f7b32ec466d924ebd0f69a" sprite="Hazuki (P2)" width="40" height="40" animation="" />
-    <item hash="74d232b1bf5efda2079ada7bddcd0eba" sprite="Hazuki (U)" width="48" height="40" animation="" />
-    <item hash="83cf96c537da6d57c5a51ed3647f6af0" sprite="Hazuki (U)" width="48" height="40" animation="" />
-    <item hash="bc8d281787c950675a214db2f36cb8a7" sprite="Hazuki (U)" width="48" height="40" animation="" />
-    <item hash="c0b15ffd44b8980994724097fc3a151e" sprite="Hazuki (U)" width="48" height="40" animation="" />
     <item hash="057d551dfd401b00034c04712adfe0a1" sprite="Hazuki (U)" width="40" height="40" animation="" />
     <item hash="0656bae2612e72ae4d07ca707c67c835" sprite="Hazuki (U)" width="40" height="40" animation="" />
     <item hash="0a15953971ef1b30e1d8fe3ae76ef542" sprite="Hazuki (U)" width="40" height="40" animation="" />
@@ -9946,6 +9942,10 @@
     <item hash="ed22234b30be92b3c71ef47bc8742d4c" sprite="Hazuki (U)" width="40" height="40" animation="Jumping" />
     <item hash="ef90617a3f4b0c7ae0220d34571ed684" sprite="Hazuki (U)" width="40" height="40" animation="Jumping" />
     <item hash="f4877a7b19e30ce50a91adfe9b672c84" sprite="Hazuki (U)" width="40" height="40" animation="Jumping" />
+    <item hash="74d232b1bf5efda2079ada7bddcd0eba" sprite="Hazuki (U)" width="48" height="40" animation="" />
+    <item hash="83cf96c537da6d57c5a51ed3647f6af0" sprite="Hazuki (U)" width="48" height="40" animation="" />
+    <item hash="bc8d281787c950675a214db2f36cb8a7" sprite="Hazuki (U)" width="48" height="40" animation="" />
+    <item hash="c0b15ffd44b8980994724097fc3a151e" sprite="Hazuki (U)" width="48" height="40" animation="" />
     <item hash="02fbb4b255cd6a5065df73ec6467f80c" sprite="Hazuki (U)" width="48" height="40" animation="Jumping" />
     <item hash="09435ee78c3a9f69a29e00ab7bf241fe" sprite="Hazuki (U)" width="48" height="40" animation="Jumping" />
     <item hash="21cfa2e3ff1140a5b1300198aab90d94" sprite="Hazuki (U)" width="48" height="40" animation="Jumping" />
