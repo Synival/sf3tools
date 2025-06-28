@@ -12,12 +12,12 @@ namespace SF3.Models.Structs.CHR {
         private readonly int _frameIdAddr;
         private readonly int _durationAddr;
 
-        public AnimationFrame(IByteData data, int id, string name, int address, int spriteIndex, int spriteId, int directions, AnimationType animationType, FrameTable frameTable)
+        public AnimationFrame(IByteData data, int id, string name, int address, int spriteIndex, int spriteId, int directions, int animationIndex, FrameTable frameTable)
         : base(data, id, name, address, 0x4) {
-            SpriteIndex   = spriteIndex;
-            SpriteID      = spriteId;
-            AnimationType = animationType;
-            FrameTable    = frameTable;
+            SpriteIndex    = spriteIndex;
+            SpriteID       = spriteId;
+            AnimationIndex = animationIndex;
+            FrameTable     = frameTable;
 
             _frameIdAddr  = Address + 0x00; // 2 bytes
             _durationAddr = Address + 0x02; // 2 bytes
@@ -33,8 +33,10 @@ namespace SF3.Models.Structs.CHR {
         [NameGetter(NamedValueType.Sprite)]
         public int SpriteID { get; }
 
+        [TableViewModelColumn(addressField: null, displayOrder: -0.2f)]
+        public int AnimationIndex { get; }
         [TableViewModelColumn(addressField: null, displayOrder: -0.1f)]
-        public AnimationType AnimationType { get; }
+        public AnimationType AnimationType => (AnimationType) AnimationIndex;
 
         public FrameTable FrameTable { get; }
 

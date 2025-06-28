@@ -49,7 +49,7 @@ namespace SF3.Models.Structs.CHR {
         private readonly Frame[] _framesWithTextures;
 
         [TableViewModelColumn(displayOrder: 0)]
-        public AnimationType AnimationType => AnimationFrames.AnimationType;
+        public AnimationType AnimationType => (AnimationType) ID;
 
         [TableViewModelColumn(displayOrder: 0.5f, minWidth: 200)]
         public string SpriteName {

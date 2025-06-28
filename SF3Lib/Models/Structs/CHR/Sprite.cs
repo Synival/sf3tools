@@ -51,9 +51,9 @@ namespace SF3.Models.Structs.CHR {
                     ID,
                     Header.SpriteID,
                     Header.Directions,
-                    x.AnimationType,
+                    x.ID,
                     FrameTable))
-                .ToDictionary(x => x.AnimationType, x => x);
+                .ToDictionary(x => x.AnimationIndex, x => x);
 
             AnimationTable = AnimationTable.Create(Data, $"Sprite{ID:D2}_{nameof(AnimationTable)}", AnimationFrameTablesByIndex.Values.ToArray(),
                 FrameTable, $"Sprite{ID:D2}_");
@@ -72,7 +72,7 @@ namespace SF3.Models.Structs.CHR {
         public SpriteHeader Header { get; }
         public AnimationOffsetTable AnimationOffsetTable { get; }
         public FrameTable FrameTable { get; }
-        public Dictionary<AnimationType, AnimationFrameTable> AnimationFrameTablesByIndex { get; }
+        public Dictionary<int, AnimationFrameTable> AnimationFrameTablesByIndex { get; }
         public AnimationTable AnimationTable { get; }
 
         // TODO: show in a view

@@ -10,10 +10,10 @@ using SF3.Types;
 
 namespace SF3.Win.Views.CHR {
     public class SpriteAnimationsView : ControlSpaceView {
-        public SpriteAnimationsView(string name, int spriteDirections, AnimationTable model, Dictionary<AnimationType, AnimationFrameTable> animationFramesByIndex, INameGetterContext nameGetterContext) : base(name) {
+        public SpriteAnimationsView(string name, int spriteDirections, AnimationTable model, Dictionary<int, AnimationFrameTable> animationFramesByIndex, INameGetterContext nameGetterContext) : base(name) {
             Model                 = model;
             SpriteDirections      = spriteDirections;
-            AnimationFramesByType = animationFramesByIndex;
+            AnimationFramesByIndex = animationFramesByIndex;
 
             TableView   = new TableView("Frames", model, nameGetterContext, typeof(Animation));
             TextureView = new SpriteAnimationTextureView("Texture", spriteDirections, animationFramesByIndex.Values.ToArray(), textureScale: 2);
@@ -33,10 +33,10 @@ namespace SF3.Win.Views.CHR {
             var item = (OLVListItem) TableView.OLVControl.SelectedItem;
             var animation = (Animation) item?.RowObject;
 
-            if (animation == null || !AnimationFramesByType.ContainsKey(animation.AnimationType))
+            if (animation == null || !AnimationFramesByIndex.ContainsKey(animation.ID))
                 TextureView.ClearAnimation();
             else
-                TextureView.StartAnimation((int) animation.AnimationType);
+                TextureView.StartAnimation(animation.ID);
         }
 
         public override void Destroy() {
@@ -56,7 +56,7 @@ namespace SF3.Win.Views.CHR {
 
         public AnimationTable Model { get; }
         public int SpriteDirections { get; }
-        public Dictionary<AnimationType, AnimationFrameTable> AnimationFramesByType { get; }
+        public Dictionary<int, AnimationFrameTable> AnimationFramesByIndex { get; }
         public TableView TableView { get; private set; }
         public SpriteAnimationTextureView TextureView { get; private set; }
     }

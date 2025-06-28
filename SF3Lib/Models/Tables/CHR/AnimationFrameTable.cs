@@ -5,18 +5,18 @@ using SF3.Types;
 
 namespace SF3.Models.Tables.CHR {
     public class AnimationFrameTable : TerminatedTable<AnimationFrame> {
-        protected AnimationFrameTable(IByteData data, string name, int address, string rowPrefix, int spriteIndex, int spriteId, int spriteDirections, AnimationType animationType, FrameTable frameTable)
+        protected AnimationFrameTable(IByteData data, string name, int address, string rowPrefix, int spriteIndex, int spriteId, int spriteDirections, int animationType, FrameTable frameTable)
         : base(data, name, address, 0x00, 100) {
             RowPrefix        = rowPrefix ?? "";
             SpriteIndex      = spriteIndex;
             SpriteID         = spriteId;
             SpriteDirections = spriteDirections;
-            AnimationType    = animationType;
+            AnimationIndex   = animationType;
             FrameTable       = frameTable;
         }
 
-        public static AnimationFrameTable Create(IByteData data, string name, int address, string rowPrefix, int spriteIndex, int spriteId, int spriteDirections, AnimationType animationType, FrameTable frameTable) {
-            var newTable = new AnimationFrameTable(data, name, address, rowPrefix, spriteIndex, spriteId, spriteDirections, animationType, frameTable);
+        public static AnimationFrameTable Create(IByteData data, string name, int address, string rowPrefix, int spriteIndex, int spriteId, int spriteDirections, int animationIndex, FrameTable frameTable) {
+            var newTable = new AnimationFrameTable(data, name, address, rowPrefix, spriteIndex, spriteId, spriteDirections, animationIndex, frameTable);
             if (!newTable.Load())
                 throw new InvalidOperationException("Couldn't initialize table");
             return newTable;
@@ -27,7 +27,7 @@ namespace SF3.Models.Tables.CHR {
             return Load(
                 (id, addr) => {
                     var directions = (prevFrame == null) ? SpriteDirections : prevFrame.Directions;
-                    prevFrame = new AnimationFrame(Data, id, $"{RowPrefix}{nameof(AnimationFrame)}{id:D2}", addr, SpriteIndex, SpriteID, directions, AnimationType, FrameTable);
+                    prevFrame = new AnimationFrame(Data, id, $"{RowPrefix}{nameof(AnimationFrame)}{id:D2}", addr, SpriteIndex, SpriteID, directions, AnimationIndex, FrameTable);
                     return prevFrame;
                 },
                 (rows, prevRow) => !prevRow.IsFinalFrame,
@@ -39,7 +39,7 @@ namespace SF3.Models.Tables.CHR {
         public string RowPrefix { get; }
         public int SpriteID { get; }
         public int SpriteDirections { get; }
-        public AnimationType AnimationType { get; }
+        public int AnimationIndex { get; }
         public FrameTable FrameTable { get; }
     }
 }
