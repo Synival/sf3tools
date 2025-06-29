@@ -12,9 +12,13 @@ using SF3.Utils;
 
 namespace SF3.Models.Structs.CHR {
     public class Animation : Struct {
-        public Animation(IByteData data, int id, string name, int address, AnimationFrameTable animationFrames, FrameTable frameTable) : base(data, id, name, address, 0 /* abstract */) {
+        public Animation(IByteData data, int id, string name, int address, int animationIndex, AnimationFrameTable animationFrames, FrameTable frameTable) : base(data, id, name, address, 0 /* abstract */) {
+            AnimationIndex = animationIndex;
             AnimationFrames = animationFrames;
             FrameTable = frameTable;
+
+            if (animationIndex != id)
+                ;
 
             _firstFrameWithTexture = animationFrames?.FirstOrDefault(x => x.HasTexture);
 
@@ -49,7 +53,10 @@ namespace SF3.Models.Structs.CHR {
         private readonly Frame[] _framesWithTextures;
 
         [TableViewModelColumn(displayOrder: 0)]
-        public AnimationType AnimationType => (AnimationType) ID;
+        public int AnimationIndex { get; }
+
+        [TableViewModelColumn(displayOrder: 0.1f)]
+        public AnimationType AnimationType => (AnimationType) AnimationIndex;
 
         [TableViewModelColumn(displayOrder: 0.5f, minWidth: 200)]
         public string SpriteName {
