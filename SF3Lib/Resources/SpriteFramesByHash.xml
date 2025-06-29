@@ -11925,31 +11925,19 @@
     <item hash="963b686f22da577717fb7ca514f55ff2" sprite="Jade's Tank (P1)" width="48" height="40" animation="" />
     <item hash="a68b4f3db5cc915b61c9f6699740cace" sprite="Jade's Tank (P1)" width="48" height="40" animation="" />
     <item hash="09f1079b41d0eb1d0b23c8c024b3e75b" sprite="Jane" width="40" height="40" animation="" />
-    <item hash="0a07b9e82c01a9ca0d69ec47e3f0fe4a" sprite="Jane" width="40" height="40" animation="" />
     <item hash="0f60ab68f19cd7b4e02696fb5427540c" sprite="Jane" width="40" height="40" animation="" />
-    <item hash="1b14ebae099412abd21736fe58b961f1" sprite="Jane" width="40" height="40" animation="" />
-    <item hash="1b763ad62c5e9137b773bd21718e0fde" sprite="Jane" width="40" height="40" animation="" />
-    <item hash="1ef98769203a374e8ee3dffe1a83292e" sprite="Jane" width="40" height="40" animation="" />
     <item hash="1f2fe2ef51e67eaadace9971203497a6" sprite="Jane" width="40" height="40" animation="" />
     <item hash="21c8c080265a4f66924d439fddb1a94e" sprite="Jane" width="40" height="40" animation="" />
     <item hash="2442e999355f2fdc4cb0546f1520d5c2" sprite="Jane" width="40" height="40" animation="" />
     <item hash="266f48a72a1678eca41e10457e593a6f" sprite="Jane" width="40" height="40" animation="" />
-    <item hash="267b0cc445ea1532007272c8fa0f86bf" sprite="Jane" width="40" height="40" animation="" />
     <item hash="2ef79904f554323aa9e57eb159264f78" sprite="Jane" width="40" height="40" animation="" />
     <item hash="3f17e27ea39033396fe7f4b96bb8f171" sprite="Jane" width="40" height="40" animation="" />
     <item hash="425d5a4ee273ce543bd6824661ae2245" sprite="Jane" width="40" height="40" animation="" />
     <item hash="4b1644e61c32175a412312bb650d51ed" sprite="Jane" width="40" height="40" animation="" />
     <item hash="4cbbbccd962f63e429682b6cd2d412dc" sprite="Jane" width="40" height="40" animation="" />
-    <item hash="56bfc02b1dc418f7eeb8b1a088dac6e2" sprite="Jane" width="40" height="40" animation="" />
-    <item hash="56ea1dcd01f2ddd7d5f8f36c024b0979" sprite="Jane" width="40" height="40" animation="" />
-    <item hash="5f065de9d279ec8893852ac684221477" sprite="Jane" width="40" height="40" animation="" />
     <item hash="6a3e9744259c5bddd14e3d6e8f486f85" sprite="Jane" width="40" height="40" animation="" />
-    <item hash="6a4da726ab74cf3172691bc8d5bd1c76" sprite="Jane" width="40" height="40" animation="" />
     <item hash="6b29e2088912db44e7a516161f996237" sprite="Jane" width="40" height="40" animation="" />
-    <item hash="76d428de504ef2419091d29c9c70687c" sprite="Jane" width="40" height="40" animation="" />
-    <item hash="7784d25abdca6ecb0480b20894830811" sprite="Jane" width="40" height="40" animation="" />
     <item hash="89484e7921ea19710b2b6a4f0200d7ec" sprite="Jane" width="40" height="40" animation="" />
-    <item hash="8ec92e362b750e8ea0917098944eca1c" sprite="Jane" width="40" height="40" animation="" />
     <item hash="97d19e7655499aaa36eafd5e5f3887f6" sprite="Jane" width="40" height="40" animation="" />
     <item hash="9d33cb3e24510f650a31ad89f64f8845" sprite="Jane" width="40" height="40" animation="" />
     <item hash="9e046192be62c3da465bdde8b0e897d8" sprite="Jane" width="40" height="40" animation="" />
@@ -11963,39 +11951,47 @@
     <item hash="c0f317906df870a0035d30fbe7f9c257" sprite="Jane" width="40" height="40" animation="" />
     <item hash="ca7180008724d1a4abbad66c65113c53" sprite="Jane" width="40" height="40" animation="" />
     <item hash="cce0d09136e90b72518e2dece2ffa098" sprite="Jane" width="40" height="40" animation="" />
-    <item hash="d6342c61bebd1fef6b10f0f0753444b3" sprite="Jane" width="40" height="40" animation="" />
-    <item hash="d790e4f532df6027b5647d954b272a42" sprite="Jane" width="40" height="40" animation="" />
     <item hash="d810bfb05c7d842a60b2c4e0eb0b6360" sprite="Jane" width="40" height="40" animation="" />
     <item hash="d954f81676e17e4d6b6f7eea5d77c052" sprite="Jane" width="40" height="40" animation="" />
-    <item hash="dda9f60d712dacf45494c9e569083e36" sprite="Jane" width="40" height="40" animation="" />
     <item hash="e1f47857f593afaabe54c50cc17aeb32" sprite="Jane" width="40" height="40" animation="" />
     <item hash="e9abc172980aa13a2dddcdbf69956f08" sprite="Jane" width="40" height="40" animation="" />
     <item hash="ee177bcd7fc27022e4d2a72da633421b" sprite="Jane" width="40" height="40" animation="" />
-    <item hash="fdb2071db7126ea999afb2f5df3f9ee7" sprite="Jane" width="40" height="40" animation="" />
     <item hash="00d09ed4bb102ed34cf4484a1870b604" sprite="Jane (Weaponless)" width="40" height="40" animation="" />
     <item hash="02c65a636339289b85a3f807649d44fd" sprite="Jane (Weaponless)" width="40" height="40" animation="" />
     <item hash="02e88e3508f739c1efa9d7f82cb58045" sprite="Jane (Weaponless)" width="40" height="40" animation="" />
     <item hash="06d99ede150ff21975e190e4c6ea0e09" sprite="Jane (Weaponless)" width="40" height="40" animation="" />
+    <item hash="0a07b9e82c01a9ca0d69ec47e3f0fe4a" sprite="Jane (Weaponless)" width="40" height="40" animation="" />
     <item hash="108c39bf183857f94bf1519213825ba9" sprite="Jane (Weaponless)" width="40" height="40" animation="" />
     <item hash="109e79a6ccfdbfa031c947b17e8786d1" sprite="Jane (Weaponless)" width="40" height="40" animation="" />
     <item hash="188d9d5457faa4df0034f030b082a621" sprite="Jane (Weaponless)" width="40" height="40" animation="" />
+    <item hash="1b14ebae099412abd21736fe58b961f1" sprite="Jane (Weaponless)" width="40" height="40" animation="" />
+    <item hash="1b763ad62c5e9137b773bd21718e0fde" sprite="Jane (Weaponless)" width="40" height="40" animation="" />
+    <item hash="1ef98769203a374e8ee3dffe1a83292e" sprite="Jane (Weaponless)" width="40" height="40" animation="" />
     <item hash="24f0a91cf2a1fd6c31cdf1b55e17138e" sprite="Jane (Weaponless)" width="40" height="40" animation="" />
+    <item hash="267b0cc445ea1532007272c8fa0f86bf" sprite="Jane (Weaponless)" width="40" height="40" animation="" />
     <item hash="2eabae0456af9745bcde8784080f2074" sprite="Jane (Weaponless)" width="40" height="40" animation="" />
     <item hash="32d301e885d53f4bc5560132623cc88c" sprite="Jane (Weaponless)" width="40" height="40" animation="" />
     <item hash="40431976c2706838a5447dc7330a7393" sprite="Jane (Weaponless)" width="40" height="40" animation="" />
     <item hash="4f72bab67e3af0b6a47f528c88f7e316" sprite="Jane (Weaponless)" width="40" height="40" animation="" />
     <item hash="5351f2d2bb06de23227a39b8f99ca76b" sprite="Jane (Weaponless)" width="40" height="40" animation="" />
+    <item hash="56bfc02b1dc418f7eeb8b1a088dac6e2" sprite="Jane (Weaponless)" width="40" height="40" animation="" />
+    <item hash="56ea1dcd01f2ddd7d5f8f36c024b0979" sprite="Jane (Weaponless)" width="40" height="40" animation="" />
+    <item hash="5f065de9d279ec8893852ac684221477" sprite="Jane (Weaponless)" width="40" height="40" animation="" />
     <item hash="626322c09e16b6d72fcfc15bc295474b" sprite="Jane (Weaponless)" width="40" height="40" animation="" />
     <item hash="696498ef60dd8190ce15840d7b85002f" sprite="Jane (Weaponless)" width="40" height="40" animation="" />
+    <item hash="6a4da726ab74cf3172691bc8d5bd1c76" sprite="Jane (Weaponless)" width="40" height="40" animation="" />
     <item hash="6d8a12d21ed4eb1439cedb461adcce3d" sprite="Jane (Weaponless)" width="40" height="40" animation="" />
     <item hash="6ffaca953e37448bd3a91e28d00f41cd" sprite="Jane (Weaponless)" width="40" height="40" animation="" />
     <item hash="73bbc17712f863bf3cf312238bbd2c37" sprite="Jane (Weaponless)" width="40" height="40" animation="" />
     <item hash="74b548090d37084a18d0b53f0efb8d5d" sprite="Jane (Weaponless)" width="40" height="40" animation="" />
+    <item hash="76d428de504ef2419091d29c9c70687c" sprite="Jane (Weaponless)" width="40" height="40" animation="" />
+    <item hash="7784d25abdca6ecb0480b20894830811" sprite="Jane (Weaponless)" width="40" height="40" animation="" />
     <item hash="7835857c58dc2b008d7c75b2ec47e562" sprite="Jane (Weaponless)" width="40" height="40" animation="" />
     <item hash="80a56e078c96139da0f386e2c2c8064d" sprite="Jane (Weaponless)" width="40" height="40" animation="" />
     <item hash="881ec7c935e8b3435a49e09deadd3dbf" sprite="Jane (Weaponless)" width="40" height="40" animation="" />
     <item hash="88f8105437c815a21f8604079975db8e" sprite="Jane (Weaponless)" width="40" height="40" animation="" />
     <item hash="89182875aad96d04edcac1dc9d703d93" sprite="Jane (Weaponless)" width="40" height="40" animation="" />
+    <item hash="8ec92e362b750e8ea0917098944eca1c" sprite="Jane (Weaponless)" width="40" height="40" animation="" />
     <item hash="93845e32ce38223c4e066ab5876004c9" sprite="Jane (Weaponless)" width="40" height="40" animation="" />
     <item hash="940f9ac7a2166d2f1a0846549fb68577" sprite="Jane (Weaponless)" width="40" height="40" animation="" />
     <item hash="958bb571f23e037e8554c458aad52f65" sprite="Jane (Weaponless)" width="40" height="40" animation="" />
@@ -12011,8 +12007,11 @@
     <item hash="c43a0d7db610e6f8d07fbf95a04ac22d" sprite="Jane (Weaponless)" width="40" height="40" animation="" />
     <item hash="cb1d34c64d473a77b3f36880d0ad6a8b" sprite="Jane (Weaponless)" width="40" height="40" animation="" />
     <item hash="d5f750d8165b59362056ce390abb838d" sprite="Jane (Weaponless)" width="40" height="40" animation="" />
+    <item hash="d6342c61bebd1fef6b10f0f0753444b3" sprite="Jane (Weaponless)" width="40" height="40" animation="" />
+    <item hash="d790e4f532df6027b5647d954b272a42" sprite="Jane (Weaponless)" width="40" height="40" animation="" />
     <item hash="da59e0f62e66119b9e102876195b64b8" sprite="Jane (Weaponless)" width="40" height="40" animation="" />
     <item hash="dae7f5f86c12c998ec7d06926ac1b6f3" sprite="Jane (Weaponless)" width="40" height="40" animation="" />
+    <item hash="dda9f60d712dacf45494c9e569083e36" sprite="Jane (Weaponless)" width="40" height="40" animation="" />
     <item hash="e1c4aba7d50217627452ca0092a6905c" sprite="Jane (Weaponless)" width="40" height="40" animation="" />
     <item hash="e5f7df8a744115bd5651dbba1c8ff4db" sprite="Jane (Weaponless)" width="40" height="40" animation="" />
     <item hash="e686eeccca88b44c79c3dda4add624d3" sprite="Jane (Weaponless)" width="40" height="40" animation="" />
@@ -12021,6 +12020,7 @@
     <item hash="efa78722b6bc9d25a7f9c9851c4d9fc2" sprite="Jane (Weaponless)" width="40" height="40" animation="" />
     <item hash="fb824884a124fd9229e285a55b4007fb" sprite="Jane (Weaponless)" width="40" height="40" animation="" />
     <item hash="fc88cb0c96bf43e60ab5fd4b29c9b376" sprite="Jane (Weaponless)" width="40" height="40" animation="" />
+    <item hash="fdb2071db7126ea999afb2f5df3f9ee7" sprite="Jane (Weaponless)" width="40" height="40" animation="" />
     <item hash="02f5e91bde1d13bcbdc1bd3705d9de6e" sprite="Jin Ninja (Green)" width="40" height="40" animation="" />
     <item hash="0483ee73e76063f12ade6eb41d6018de" sprite="Jin Ninja (Green)" width="40" height="40" animation="" />
     <item hash="0efc25dabf57369a198e7519e608e57a" sprite="Jin Ninja (Green)" width="40" height="40" animation="" />
@@ -16005,45 +16005,45 @@
     <item hash="e8d8c5fea9fa4e4b121b748610c97f94" sprite="Maya Man in Turquoise+Gold" width="40" height="40" animation="" />
     <item hash="f3862fa786caf3787d5977f0e60db0b4" sprite="Maya Man in Turquoise+Gold" width="40" height="40" animation="" />
     <item hash="01d8ceb9ca80cf031a09ad90d1550103" sprite="Maya Man in White+Blue" width="40" height="40" animation="" />
-    <item hash="06bf57fea2982989349cf33ad11ace68" sprite="Maya Man in White+Blue" width="40" height="40" animation="" />
-    <item hash="0bee26a8e7732c3a318c1f1458469a08" sprite="Maya Man in White+Blue" width="40" height="40" animation="" />
-    <item hash="0e1bcfc0adbb00067df3b5b50acf7017" sprite="Maya Man in White+Blue" width="40" height="40" animation="" />
-    <item hash="186d3548965fee13c47c7ace80ffc915" sprite="Maya Man in White+Blue" width="40" height="40" animation="" />
-    <item hash="1d1309a876fbc241bdfb94a862d836f1" sprite="Maya Man in White+Blue" width="40" height="40" animation="" />
-    <item hash="24a0372f14a7aaffe64c2c8630cc782c" sprite="Maya Man in White+Blue" width="40" height="40" animation="" />
-    <item hash="2554a0d68193a36ceb25efb944f6e62c" sprite="Maya Man in White+Blue" width="40" height="40" animation="" />
     <item hash="35454942f8f6c4337f4f2a6e63acd571" sprite="Maya Man in White+Blue" width="40" height="40" animation="" />
-    <item hash="37ba13ab217480b88a2060b6a3090439" sprite="Maya Man in White+Blue" width="40" height="40" animation="" />
     <item hash="431f7ba66c63f849ae88f09c0fc0ffd8" sprite="Maya Man in White+Blue" width="40" height="40" animation="" />
-    <item hash="43d2eaf1602b02c098bf0430aebe0558" sprite="Maya Man in White+Blue" width="40" height="40" animation="" />
-    <item hash="48b75d7ed209e369d8d561f8b53d5fcc" sprite="Maya Man in White+Blue" width="40" height="40" animation="" />
     <item hash="65f98f0c7fec43042aa1a20c470a3cb1" sprite="Maya Man in White+Blue" width="40" height="40" animation="" />
     <item hash="675c199cd3a769f38e918a34278fda16" sprite="Maya Man in White+Blue" width="40" height="40" animation="" />
-    <item hash="7229f390d09f8c325a5dbf1630e76a7a" sprite="Maya Man in White+Blue" width="40" height="40" animation="" />
-    <item hash="7a09ea269cc1487d6003686955d0e513" sprite="Maya Man in White+Blue" width="40" height="40" animation="" />
-    <item hash="7b9a7d8294c51e2f387a1c2e06edcaf1" sprite="Maya Man in White+Blue" width="40" height="40" animation="" />
-    <item hash="7be19c4c7c5901959a51b3c9440a3df9" sprite="Maya Man in White+Blue" width="40" height="40" animation="" />
-    <item hash="7d545d22a7ae24714556ad57471617aa" sprite="Maya Man in White+Blue" width="40" height="40" animation="" />
-    <item hash="7df4b1523cca6d8dbdf37169d5ea5c0b" sprite="Maya Man in White+Blue" width="40" height="40" animation="" />
     <item hash="7f13158622c9b667c097facd04882ff0" sprite="Maya Man in White+Blue" width="40" height="40" animation="" />
     <item hash="8e80e8475b11d11ba50f4e7425cba450" sprite="Maya Man in White+Blue" width="40" height="40" animation="" />
     <item hash="8f2b8b723c87d6c3d4d2e0f782eb4ace" sprite="Maya Man in White+Blue" width="40" height="40" animation="" />
-    <item hash="91a8cedc6493204fd04e1b61a04d1ca3" sprite="Maya Man in White+Blue" width="40" height="40" animation="" />
     <item hash="97bf9fc7d175b8c5651fe48c36003f31" sprite="Maya Man in White+Blue" width="40" height="40" animation="" />
-    <item hash="97c63ebd303d3ba18f00ffba4e1dd6b9" sprite="Maya Man in White+Blue" width="40" height="40" animation="" />
     <item hash="a2c29c14ae3533412c11960621fde6a4" sprite="Maya Man in White+Blue" width="40" height="40" animation="" />
     <item hash="b15d4c4b1466b88e93f9d215fbb66759" sprite="Maya Man in White+Blue" width="40" height="40" animation="" />
-    <item hash="ba3067a190100ffd508ddd787455da4b" sprite="Maya Man in White+Blue" width="40" height="40" animation="" />
-    <item hash="dffc793d0e2654bcbe2f507631421386" sprite="Maya Man in White+Blue" width="40" height="40" animation="" />
-    <item hash="e388312e4da2b3199d5eee1205e2949a" sprite="Maya Man in White+Blue" width="40" height="40" animation="" />
-    <item hash="e3bec2e82b6f9206cc5d91e897a59adb" sprite="Maya Man in White+Blue" width="40" height="40" animation="" />
-    <item hash="e504adbdfba2b46d5d095efab1352869" sprite="Maya Man in White+Blue" width="40" height="40" animation="" />
-    <item hash="ecfd0b9b5d997e468ce8cbbff7e41f2e" sprite="Maya Man in White+Blue" width="40" height="40" animation="" />
-    <item hash="ee3e89a4c12c56b93b28016259629498" sprite="Maya Man in White+Blue" width="40" height="40" animation="" />
-    <item hash="f35ad4c16df9c0edc703b822cb9088d1" sprite="Maya Man in White+Blue" width="40" height="40" animation="" />
-    <item hash="fab8cdb51f18a1be9ea463dc4f7a03fe" sprite="Maya Man in White+Blue" width="40" height="40" animation="" />
-    <item hash="fbda682b496a166e0ed996d55bf1af07" sprite="Maya Man in White+Blue" width="40" height="40" animation="" />
     <item hash="fdfc06375dd639f6d6337da75224cd16" sprite="Maya Man in White+Blue" width="40" height="40" animation="" />
+    <item hash="06bf57fea2982989349cf33ad11ace68" sprite="Maya Man in White+Blue (Beer)" width="40" height="40" animation="" />
+    <item hash="0bee26a8e7732c3a318c1f1458469a08" sprite="Maya Man in White+Blue (Beer)" width="40" height="40" animation="" />
+    <item hash="0e1bcfc0adbb00067df3b5b50acf7017" sprite="Maya Man in White+Blue (Beer)" width="40" height="40" animation="" />
+    <item hash="186d3548965fee13c47c7ace80ffc915" sprite="Maya Man in White+Blue (Beer)" width="40" height="40" animation="" />
+    <item hash="1d1309a876fbc241bdfb94a862d836f1" sprite="Maya Man in White+Blue (Beer)" width="40" height="40" animation="" />
+    <item hash="24a0372f14a7aaffe64c2c8630cc782c" sprite="Maya Man in White+Blue (Beer)" width="40" height="40" animation="" />
+    <item hash="2554a0d68193a36ceb25efb944f6e62c" sprite="Maya Man in White+Blue (Beer)" width="40" height="40" animation="" />
+    <item hash="37ba13ab217480b88a2060b6a3090439" sprite="Maya Man in White+Blue (Beer)" width="40" height="40" animation="" />
+    <item hash="43d2eaf1602b02c098bf0430aebe0558" sprite="Maya Man in White+Blue (Beer)" width="40" height="40" animation="" />
+    <item hash="48b75d7ed209e369d8d561f8b53d5fcc" sprite="Maya Man in White+Blue (Beer)" width="40" height="40" animation="" />
+    <item hash="7229f390d09f8c325a5dbf1630e76a7a" sprite="Maya Man in White+Blue (Beer)" width="40" height="40" animation="" />
+    <item hash="7a09ea269cc1487d6003686955d0e513" sprite="Maya Man in White+Blue (Beer)" width="40" height="40" animation="" />
+    <item hash="7b9a7d8294c51e2f387a1c2e06edcaf1" sprite="Maya Man in White+Blue (Beer)" width="40" height="40" animation="" />
+    <item hash="7be19c4c7c5901959a51b3c9440a3df9" sprite="Maya Man in White+Blue (Beer)" width="40" height="40" animation="" />
+    <item hash="7d545d22a7ae24714556ad57471617aa" sprite="Maya Man in White+Blue (Beer)" width="40" height="40" animation="" />
+    <item hash="7df4b1523cca6d8dbdf37169d5ea5c0b" sprite="Maya Man in White+Blue (Beer)" width="40" height="40" animation="" />
+    <item hash="91a8cedc6493204fd04e1b61a04d1ca3" sprite="Maya Man in White+Blue (Beer)" width="40" height="40" animation="" />
+    <item hash="97c63ebd303d3ba18f00ffba4e1dd6b9" sprite="Maya Man in White+Blue (Beer)" width="40" height="40" animation="" />
+    <item hash="ba3067a190100ffd508ddd787455da4b" sprite="Maya Man in White+Blue (Beer)" width="40" height="40" animation="" />
+    <item hash="dffc793d0e2654bcbe2f507631421386" sprite="Maya Man in White+Blue (Beer)" width="40" height="40" animation="" />
+    <item hash="e388312e4da2b3199d5eee1205e2949a" sprite="Maya Man in White+Blue (Beer)" width="40" height="40" animation="" />
+    <item hash="e3bec2e82b6f9206cc5d91e897a59adb" sprite="Maya Man in White+Blue (Beer)" width="40" height="40" animation="" />
+    <item hash="e504adbdfba2b46d5d095efab1352869" sprite="Maya Man in White+Blue (Beer)" width="40" height="40" animation="" />
+    <item hash="ecfd0b9b5d997e468ce8cbbff7e41f2e" sprite="Maya Man in White+Blue (Beer)" width="40" height="40" animation="" />
+    <item hash="ee3e89a4c12c56b93b28016259629498" sprite="Maya Man in White+Blue (Beer)" width="40" height="40" animation="" />
+    <item hash="f35ad4c16df9c0edc703b822cb9088d1" sprite="Maya Man in White+Blue (Beer)" width="40" height="40" animation="" />
+    <item hash="fab8cdb51f18a1be9ea463dc4f7a03fe" sprite="Maya Man in White+Blue (Beer)" width="40" height="40" animation="" />
+    <item hash="fbda682b496a166e0ed996d55bf1af07" sprite="Maya Man in White+Blue (Beer)" width="40" height="40" animation="" />
     <item hash="002bf5d99fdfa10386c1a2d8de2ac8f3" sprite="Maya Man in Yellow+Blue" width="40" height="40" animation="" />
     <item hash="08a5e43dfea0eadb64875c31f96c8dd0" sprite="Maya Man in Yellow+Blue" width="40" height="40" animation="" />
     <item hash="63a93dfd9aa431f4419fac1c94148569" sprite="Maya Man in Yellow+Blue" width="40" height="40" animation="" />
