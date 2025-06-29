@@ -12475,34 +12475,6 @@
     <item hash="e5ff561ba4f5aab8dafb6772fd0ad32c" sprite="Julian (P2)" width="40" height="40" animation="" />
     <item hash="e9cff2888981ebf8727b0ea424ffad56" sprite="Julian (P2)" width="40" height="40" animation="" />
     <item hash="f73aee7f4ef5339b29f6cea1cb238110" sprite="Julian (P2)" width="40" height="40" animation="" />
-    <item hash="4091b83d09e5521237b7d30d6e9a503c" sprite="Julian (P2)" width="40" height="40" animation="Blown Back" />
-    <item hash="0d3fda6dc700cdbe58d7ddf009156502" sprite="Julian (P2)" width="40" height="40" animation="Kneeling" />
-    <item hash="102d939e93d2db55c20f40b4ceec7401" sprite="Julian (P2)" width="40" height="40" animation="Kneeling" />
-    <item hash="2fbe49d2d37d770d453bf3c6d6bb2c42" sprite="Julian (P2)" width="40" height="40" animation="Kneeling" />
-    <item hash="5bce8429e20e517590435b14cf14a225" sprite="Julian (P2)" width="40" height="40" animation="Kneeling" />
-    <item hash="5cdc859eaea2e9fcf018bbf660193d3e" sprite="Julian (P2)" width="40" height="40" animation="Kneeling" />
-    <item hash="852fbcd67f7a429ec5bcc783f70fe4ab" sprite="Julian (P2)" width="40" height="40" animation="Kneeling" />
-    <item hash="8949681b31c385a798aa81b92f4964fb" sprite="Julian (P2)" width="40" height="40" animation="Kneeling" />
-    <item hash="8ecd981cae5b2346fa29c8f3d7fd18f0" sprite="Julian (P2)" width="40" height="40" animation="Kneeling" />
-    <item hash="9028352f34f4684e7e5e46c5338db924" sprite="Julian (P2)" width="40" height="40" animation="Kneeling" />
-    <item hash="9a001a4f676fab51bc1646bee20ec525" sprite="Julian (P2)" width="40" height="40" animation="Kneeling" />
-    <item hash="9f62b3e176cba72adee667f7c4ae80f3" sprite="Julian (P2)" width="40" height="40" animation="Kneeling" />
-    <item hash="a135e502dd58d9e1a24f2c3ae2b0bb8f" sprite="Julian (P2)" width="40" height="40" animation="Kneeling" />
-    <item hash="a1c995aac650b7ae7debb7621c097d78" sprite="Julian (P2)" width="40" height="40" animation="Kneeling" />
-    <item hash="ac67c355f8a23c1ce292f343892ef2ab" sprite="Julian (P2)" width="40" height="40" animation="Kneeling" />
-    <item hash="c2ea38601d51fd33e530854f6147af46" sprite="Julian (P2)" width="40" height="40" animation="Kneeling" />
-    <item hash="cae1a58069e69090897fc7d81366fb49" sprite="Julian (P2)" width="40" height="40" animation="Kneeling" />
-    <item hash="d5c9ac55ce47e213238f5ad3ab8ddc37" sprite="Julian (P2)" width="40" height="40" animation="Kneeling" />
-    <item hash="e160fdfbe01d387470516c0e350e71be" sprite="Julian (P2)" width="40" height="40" animation="Kneeling" />
-    <item hash="e5a23da815ed36430fe9d6ad348b5781" sprite="Julian (P2)" width="40" height="40" animation="Kneeling" />
-    <item hash="ec720847302bd1b6a35c724b0baccfc4" sprite="Julian (P2)" width="40" height="40" animation="Kneeling" />
-    <item hash="ee1d286504111a107350bd016e68ceff" sprite="Julian (P2)" width="40" height="40" animation="Kneeling" />
-    <item hash="f35bdf992cb8a00097427d48756c97e5" sprite="Julian (P2)" width="40" height="40" animation="Kneeling" />
-    <item hash="f74f8b4451e47cd8d0f43f5c3309071d" sprite="Julian (P2)" width="40" height="40" animation="Kneeling" />
-    <item hash="fea04a1ffe5eb8babf605c2f6019c223" sprite="Julian (P2)" width="40" height="40" animation="Kneeling" />
-    <item hash="7107a4caf1ab2eff65805a664f94ff93" sprite="Julian (P2)" width="48" height="40" animation="Getting Up" />
-    <item hash="97c30eb41b23bbdbd3292c5c5bb55b78" sprite="Julian (P2)" width="48" height="40" animation="Getting Up" />
-    <item hash="ea82bf75b3e6117a0fa850eca4c04a74" sprite="Julian (P2)" width="48" height="40" animation="Getting Up" />
     <item hash="016a9b6aa99b9c03c5eea02a2308d294" sprite="Julian (P2) (Weaponless)" width="40" height="40" animation="" />
     <item hash="03905a9a750356e526dfc24394669dcc" sprite="Julian (P2) (Weaponless)" width="40" height="40" animation="" />
     <item hash="0417611fbeb5e99e2920098264ccf030" sprite="Julian (P2) (Weaponless)" width="40" height="40" animation="" />
@@ -12569,6 +12541,34 @@
     <item hash="ed818a434ab9d374c9e14015a1ad86fe" sprite="Julian (P2) (Weaponless)" width="40" height="40" animation="" />
     <item hash="ee6db2b79d79885ae4b04a45ba0570e8" sprite="Julian (P2) (Weaponless)" width="40" height="40" animation="" />
     <item hash="fbded3fe52270cb6638fd83ff8d29259" sprite="Julian (P2) (Weaponless)" width="40" height="40" animation="" />
+    <item hash="4091b83d09e5521237b7d30d6e9a503c" sprite="Julian (P2) (Weaponless)" width="40" height="40" animation="Blown Back" />
+    <item hash="0d3fda6dc700cdbe58d7ddf009156502" sprite="Julian (P2) (Weaponless)" width="40" height="40" animation="Kneeling" />
+    <item hash="102d939e93d2db55c20f40b4ceec7401" sprite="Julian (P2) (Weaponless)" width="40" height="40" animation="Kneeling" />
+    <item hash="2fbe49d2d37d770d453bf3c6d6bb2c42" sprite="Julian (P2) (Weaponless)" width="40" height="40" animation="Kneeling" />
+    <item hash="5bce8429e20e517590435b14cf14a225" sprite="Julian (P2) (Weaponless)" width="40" height="40" animation="Kneeling" />
+    <item hash="5cdc859eaea2e9fcf018bbf660193d3e" sprite="Julian (P2) (Weaponless)" width="40" height="40" animation="Kneeling" />
+    <item hash="852fbcd67f7a429ec5bcc783f70fe4ab" sprite="Julian (P2) (Weaponless)" width="40" height="40" animation="Kneeling" />
+    <item hash="8949681b31c385a798aa81b92f4964fb" sprite="Julian (P2) (Weaponless)" width="40" height="40" animation="Kneeling" />
+    <item hash="8ecd981cae5b2346fa29c8f3d7fd18f0" sprite="Julian (P2) (Weaponless)" width="40" height="40" animation="Kneeling" />
+    <item hash="9028352f34f4684e7e5e46c5338db924" sprite="Julian (P2) (Weaponless)" width="40" height="40" animation="Kneeling" />
+    <item hash="9a001a4f676fab51bc1646bee20ec525" sprite="Julian (P2) (Weaponless)" width="40" height="40" animation="Kneeling" />
+    <item hash="9f62b3e176cba72adee667f7c4ae80f3" sprite="Julian (P2) (Weaponless)" width="40" height="40" animation="Kneeling" />
+    <item hash="a135e502dd58d9e1a24f2c3ae2b0bb8f" sprite="Julian (P2) (Weaponless)" width="40" height="40" animation="Kneeling" />
+    <item hash="a1c995aac650b7ae7debb7621c097d78" sprite="Julian (P2) (Weaponless)" width="40" height="40" animation="Kneeling" />
+    <item hash="ac67c355f8a23c1ce292f343892ef2ab" sprite="Julian (P2) (Weaponless)" width="40" height="40" animation="Kneeling" />
+    <item hash="c2ea38601d51fd33e530854f6147af46" sprite="Julian (P2) (Weaponless)" width="40" height="40" animation="Kneeling" />
+    <item hash="cae1a58069e69090897fc7d81366fb49" sprite="Julian (P2) (Weaponless)" width="40" height="40" animation="Kneeling" />
+    <item hash="d5c9ac55ce47e213238f5ad3ab8ddc37" sprite="Julian (P2) (Weaponless)" width="40" height="40" animation="Kneeling" />
+    <item hash="e160fdfbe01d387470516c0e350e71be" sprite="Julian (P2) (Weaponless)" width="40" height="40" animation="Kneeling" />
+    <item hash="e5a23da815ed36430fe9d6ad348b5781" sprite="Julian (P2) (Weaponless)" width="40" height="40" animation="Kneeling" />
+    <item hash="ec720847302bd1b6a35c724b0baccfc4" sprite="Julian (P2) (Weaponless)" width="40" height="40" animation="Kneeling" />
+    <item hash="ee1d286504111a107350bd016e68ceff" sprite="Julian (P2) (Weaponless)" width="40" height="40" animation="Kneeling" />
+    <item hash="f35bdf992cb8a00097427d48756c97e5" sprite="Julian (P2) (Weaponless)" width="40" height="40" animation="Kneeling" />
+    <item hash="f74f8b4451e47cd8d0f43f5c3309071d" sprite="Julian (P2) (Weaponless)" width="40" height="40" animation="Kneeling" />
+    <item hash="fea04a1ffe5eb8babf605c2f6019c223" sprite="Julian (P2) (Weaponless)" width="40" height="40" animation="Kneeling" />
+    <item hash="7107a4caf1ab2eff65805a664f94ff93" sprite="Julian (P2) (Weaponless)" width="48" height="40" animation="Getting Up" />
+    <item hash="97c30eb41b23bbdbd3292c5c5bb55b78" sprite="Julian (P2) (Weaponless)" width="48" height="40" animation="Getting Up" />
+    <item hash="ea82bf75b3e6117a0fa850eca4c04a74" sprite="Julian (P2) (Weaponless)" width="48" height="40" animation="Getting Up" />
     <item hash="007271cba09438a216be0e97b85218e1" sprite="Julian (U)" width="40" height="40" animation="" />
     <item hash="0403bc73f6d3b9294498f0c3f14cc281" sprite="Julian (U)" width="40" height="40" animation="" />
     <item hash="069083429c07f82ec7ce7ce334c80001" sprite="Julian (U)" width="40" height="40" animation="" />
@@ -16367,11 +16367,6 @@
     <item hash="f91012f79747f9a515a7b49f73616dd4" sprite="Medion (P2)" width="40" height="40" animation="" />
     <item hash="f9f0b56ff34cc2842f79f27595b2c99f" sprite="Medion (P2)" width="40" height="40" animation="" />
     <item hash="fa82d004b631d8f01d90ff40764c6cbf" sprite="Medion (P2)" width="40" height="40" animation="" />
-    <item hash="3309fcc0dfda42cd9a98f95f7de42861" sprite="Medion (P2)" width="40" height="40" animation="Getting Up" />
-    <item hash="ae95441c9dbd2a53ac170c165693a093" sprite="Medion (P2)" width="40" height="40" animation="Getting Up" />
-    <item hash="b8b3ebda97f6c5cc6ab7de83c350c4cc" sprite="Medion (P2)" width="40" height="40" animation="Getting Up" />
-    <item hash="cf4bcfa2fc1cbad559b796b8bbcd3252" sprite="Medion (P2)" width="40" height="40" animation="Getting Up" />
-    <item hash="d883c2346fef00707fc182228ef20b7c" sprite="Medion (P2)" width="40" height="40" animation="Getting Up" />
     <item hash="0254432426b5e002eac9a5c5a89361a8" sprite="Medion (P2)" width="48" height="40" animation="Getting Up" />
     <item hash="31631edb793c4a2a3d2d80a94ef4fa8e" sprite="Medion (P2)" width="48" height="40" animation="Getting Up" />
     <item hash="71404b097fa1924df0c730d3705d27e8" sprite="Medion (P2)" width="48" height="40" animation="Getting Up" />
@@ -16384,6 +16379,11 @@
     <item hash="db0bc740e62b915b3c5f213ef138ba6e" sprite="Medion (P2)" width="48" height="40" animation="Getting Up" />
     <item hash="e3cd09866a3373b98a9900a17b930db0" sprite="Medion (P2)" width="48" height="40" animation="Getting Up" />
     <item hash="fa084381142998f54b160896f614f82f" sprite="Medion (P2)" width="48" height="40" animation="Getting Up" />
+    <item hash="3309fcc0dfda42cd9a98f95f7de42861" sprite="Medion (P2) (Weaponless)" width="40" height="40" animation="Getting Up" />
+    <item hash="ae95441c9dbd2a53ac170c165693a093" sprite="Medion (P2) (Weaponless)" width="40" height="40" animation="Getting Up" />
+    <item hash="b8b3ebda97f6c5cc6ab7de83c350c4cc" sprite="Medion (P2) (Weaponless)" width="40" height="40" animation="Getting Up" />
+    <item hash="cf4bcfa2fc1cbad559b796b8bbcd3252" sprite="Medion (P2) (Weaponless)" width="40" height="40" animation="Getting Up" />
+    <item hash="d883c2346fef00707fc182228ef20b7c" sprite="Medion (P2) (Weaponless)" width="40" height="40" animation="Getting Up" />
     <item hash="01f2881037efe439604b98b3111d0200" sprite="Medion (U)" width="40" height="40" animation="" />
     <item hash="04c3d693ceec19edffd94b52bfce352e" sprite="Medion (U)" width="40" height="40" animation="" />
     <item hash="0b8a71d46d3b64109f6e7051ea4754b1" sprite="Medion (U)" width="40" height="40" animation="" />
@@ -22164,8 +22164,6 @@
     <item hash="ea0323eb9e824099a0b9cce4d11eb39e" sprite="Synbios (In Hot Springs)" width="40" height="40" animation="" />
     <item hash="66a373533faf94836ed684921c4ae154" sprite="Synbios (P1)" width="40" height="40" animation="Attacking" />
     <item hash="7b4aa18c411dbe95ecba1f0acafd9fc5" sprite="Synbios (P1)" width="40" height="40" animation="Attacking" />
-    <item hash="04dae1209064453bb3cbd6234073deda" sprite="Synbios (P1)" width="40" height="40" animation="GettingUp|Kneeling" />
-    <item hash="80e63c26b63d20576954c134881da8ee" sprite="Synbios (P1)" width="40" height="40" animation="GettingUp|Kneeling" />
     <item hash="0d23572675053461c217fc9f8e09e8ca" sprite="Synbios (P1)" width="40" height="40" animation="Idle" />
     <item hash="1dd6df258aa1f53f96c7d1de145bc10e" sprite="Synbios (P1)" width="40" height="40" animation="Idle" />
     <item hash="333ec4a4059b2603f30bcacf7b5f18b4" sprite="Synbios (P1)" width="40" height="40" animation="Idle" />
@@ -22266,6 +22264,8 @@
     <item hash="4a0c3cc711d5e533d942b55b4b0fab48" sprite="Synbios (P1) (Weaponless)" width="40" height="40" animation="GettingUp|IdleNoWeapon|WalkingNoWeapon" />
     <item hash="4d1e11f269b44b0f7b4ec36516d29698" sprite="Synbios (P1) (Weaponless)" width="40" height="40" animation="GettingUp|IdleNoWeapon|WalkingNoWeapon" />
     <item hash="69788a1f0bd1f5b2467a007d0f811dde" sprite="Synbios (P1) (Weaponless)" width="40" height="40" animation="GettingUp|IdleNoWeapon|WalkingNoWeapon" />
+    <item hash="04dae1209064453bb3cbd6234073deda" sprite="Synbios (P1) (Weaponless)" width="40" height="40" animation="GettingUp|Kneeling" />
+    <item hash="80e63c26b63d20576954c134881da8ee" sprite="Synbios (P1) (Weaponless)" width="40" height="40" animation="GettingUp|Kneeling" />
     <item hash="1374fbdc017f9b35f06d3fbe9a76f8bc" sprite="Synbios (P1) (Weaponless)" width="40" height="40" animation="IdleNoWeapon" />
     <item hash="4e6a1087974c99160d4f97d9a998a079" sprite="Synbios (P1) (Weaponless)" width="40" height="40" animation="IdleNoWeapon" />
     <item hash="8cf1dd8b8e3cf63ed9dc00303747cab8" sprite="Synbios (P1) (Weaponless)" width="40" height="40" animation="IdleNoWeapon" />
@@ -22290,8 +22290,6 @@
     <item hash="e89673ea1b3bacdb3e4080285d59c7ae" sprite="Synbios (P1) (Weaponless)" width="40" height="40" animation="WalkingNoWeapon" />
     <item hash="f55656e217cfeb4b07f29c8afadf4183" sprite="Synbios (P1) (Weaponless)" width="40" height="40" animation="WalkingNoWeapon" />
     <item hash="fe522e722447104365563e346c4e728c" sprite="Synbios (P1) (Weaponless)" width="40" height="40" animation="WalkingNoWeapon" />
-    <item hash="604a3d8912caa82c4270eb3d89ca5982" sprite="Synbios (P2)" width="40" height="40" animation="GettingUp|Kneeling" />
-    <item hash="bfaf0d0632977a5aa8af714bfd0d7aef" sprite="Synbios (P2)" width="40" height="40" animation="GettingUp|Kneeling" />
     <item hash="1d15229a2e5c36386a59250faef19af5" sprite="Synbios (P2)" width="40" height="40" animation="IdleCombat" />
     <item hash="294d71502321e39195361c43016db549" sprite="Synbios (P2)" width="40" height="40" animation="IdleCombat" />
     <item hash="3de814c77c79857cddab1efc45358a66" sprite="Synbios (P2)" width="40" height="40" animation="IdleCombat" />
@@ -22341,6 +22339,8 @@
     <item hash="f199c6dec7ff4fec12e53fc8a42a1f58" sprite="Synbios (P2)" width="40" height="40" animation="WalkingCombat" />
     <item hash="fa3fc46c89c32978df23b676eadfc800" sprite="Synbios (P2)" width="40" height="40" animation="WalkingCombat" />
     <item hash="87cdf6080d04c8356ff7563fae907a8f" sprite="Synbios (P2) (Weaponless)" width="40" height="40" animation="GettingUp|Idle|Nodding|ShakingHead|Walking" />
+    <item hash="604a3d8912caa82c4270eb3d89ca5982" sprite="Synbios (P2) (Weaponless)" width="40" height="40" animation="GettingUp|Kneeling" />
+    <item hash="bfaf0d0632977a5aa8af714bfd0d7aef" sprite="Synbios (P2) (Weaponless)" width="40" height="40" animation="GettingUp|Kneeling" />
     <item hash="07a1bbc9bb41694f00a390153c246b74" sprite="Synbios (P2) (Weaponless)" width="40" height="40" animation="Idle" />
     <item hash="2b8e8c66d0aff300fe65435651727416" sprite="Synbios (P2) (Weaponless)" width="40" height="40" animation="Idle" />
     <item hash="2ebf870e46f0456186155c5722bcd267" sprite="Synbios (P2) (Weaponless)" width="40" height="40" animation="Idle" />
@@ -22406,8 +22406,6 @@
     <item hash="d84699765853be8b01bf8af0945b5d79" sprite="Synbios (P2) (Weaponless)" width="40" height="40" animation="Walking" />
     <item hash="dbeb4ff3d2271bee8dba30e68c23dc06" sprite="Synbios (P2) (Weaponless)" width="40" height="40" animation="Walking" />
     <item hash="e3f4c379f4e4b31ee764b381a5adbe06" sprite="Synbios (P2) (Weaponless)" width="40" height="40" animation="Walking" />
-    <item hash="06f355a45e7c66e21838843f1d49d9d9" sprite="Synbios (U)" width="40" height="40" animation="GettingUp|Kneeling" />
-    <item hash="9c201ec5e7d2331879947d28fffea4b8" sprite="Synbios (U)" width="40" height="40" animation="GettingUp|Kneeling" />
     <item hash="1000f643fbccbe1317a9a5e9774755f8" sprite="Synbios (U)" width="40" height="40" animation="Idle" />
     <item hash="2302b9f3b2534f7fdf947e3f90f9afbc" sprite="Synbios (U)" width="40" height="40" animation="Idle" />
     <item hash="236afc96777295c5f342257fe604e07c" sprite="Synbios (U)" width="40" height="40" animation="Idle" />
@@ -22504,6 +22502,8 @@
     <item hash="aeeb59ec4273962fd51b13b6acdc4a24" sprite="Synbios (U) (Weaponless)" width="40" height="40" animation="GettingUp" />
     <item hash="cc16b2d708bdb1a9ea99b70c7dd74693" sprite="Synbios (U) (Weaponless)" width="40" height="40" animation="GettingUp" />
     <item hash="cead7533323d074fc7f44ff6d3e9e917" sprite="Synbios (U) (Weaponless)" width="40" height="40" animation="GettingUp" />
+    <item hash="06f355a45e7c66e21838843f1d49d9d9" sprite="Synbios (U) (Weaponless)" width="40" height="40" animation="GettingUp|Kneeling" />
+    <item hash="9c201ec5e7d2331879947d28fffea4b8" sprite="Synbios (U) (Weaponless)" width="40" height="40" animation="GettingUp|Kneeling" />
     <item hash="7dadd5756d1442b9a76cb04bc02af4e4" sprite="Synbios (U) (Weaponless)" width="40" height="40" animation="GettingUp|WalkingNoWeapon" />
     <item hash="92a5589c254da04acfbe85da68a36346" sprite="Synbios (U) (Weaponless)" width="40" height="40" animation="GettingUp|WalkingNoWeapon" />
     <item hash="bb98f82337505dedc35f72e4198d664a" sprite="Synbios (U) (Weaponless)" width="40" height="40" animation="GettingUp|WalkingNoWeapon" />
