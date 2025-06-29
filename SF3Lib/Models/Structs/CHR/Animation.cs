@@ -52,10 +52,10 @@ namespace SF3.Models.Structs.CHR {
         private readonly AnimationFrame _firstFrameWithTexture;
         private readonly Frame[] _framesWithTextures;
 
-        [TableViewModelColumn(displayOrder: 0)]
+        [TableViewModelColumn(displayOrder: 0, displayName: "Index")]
         public int AnimationIndex { get; }
 
-        [TableViewModelColumn(displayOrder: 0.1f)]
+        [TableViewModelColumn(displayOrder: 0.1f, displayName: "Type")]
         public AnimationType AnimationType => (AnimationType) AnimationIndex;
 
         [TableViewModelColumn(displayOrder: 0.5f, minWidth: 200)]

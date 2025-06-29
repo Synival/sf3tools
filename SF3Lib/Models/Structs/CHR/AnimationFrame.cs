@@ -33,9 +33,10 @@ namespace SF3.Models.Structs.CHR {
         [NameGetter(NamedValueType.Sprite)]
         public int SpriteID { get; }
 
-        [TableViewModelColumn(addressField: null, displayOrder: -0.2f)]
+        [TableViewModelColumn(addressField: null, displayOrder: -0.2f, displayName: "Index")]
         public int AnimationIndex { get; }
-        [TableViewModelColumn(addressField: null, displayOrder: -0.1f)]
+
+        [TableViewModelColumn(addressField: null, displayOrder: -0.1f, displayName: "Type")]
         public AnimationType AnimationType => (AnimationType) AnimationIndex;
 
         public FrameTable FrameTable { get; }
