@@ -34,7 +34,7 @@ namespace SF3.Win.Views.CHR {
             if (animation == null || !AnimationFramesByIndex.ContainsKey(animation.ID))
                 TextureView.ClearAnimation();
             else
-                TextureView.StartAnimation(animation.ID);
+                TextureView.StartAnimation(animation.AnimationIndex);
         }
 
         public override void Destroy() {
