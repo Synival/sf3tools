@@ -16,7 +16,7 @@ namespace SF3.Win.Views.CHR {
             var ngc = Model.NameGetterContext;
             if (Model.Header != null) {
                 if (Model.AnimationTable != null)
-                    CreateChild(new SpriteAnimationsView("Animations", Model.Header.Directions, Model.AnimationTable, Model.AnimationFrameTablesByIndex, ngc));
+                    CreateChild(new SpriteAnimationsView("Animations", new SpriteAnimationsViewContext(Model.Header.Directions, Model.AnimationTable, Model.AnimationFrameTablesByIndex, Model.FrameTable), ngc));
                 if (Model.Header != null)
                     CreateChild(new DataModelView("Header", Model.Header, ngc));
                 if (Model.FrameTable != null)
