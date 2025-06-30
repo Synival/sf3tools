@@ -13,6 +13,7 @@ namespace SF3.Win.Controls {
             if (Alignment == TabAlignment.Left || Alignment == TabAlignment.Right) {
                 SizeMode = TabSizeMode.Fixed;
                 ItemSize = new Size(40, 100);
+                _needsDisplayRectangleFix = true;
             }
             DrawMode = TabDrawMode.OwnerDrawFixed;
             DrawItem += EnhancedDraw;
@@ -40,5 +41,21 @@ namespace SF3.Win.Controls {
             if (e.State == DrawItemState.Selected)
                 e.DrawFocusRectangle();
         }
+
+        protected override void OnLayout(LayoutEventArgs levent) {
+            // This dumb hack is necessary to update the DisplayRectangle after an unknown trigger that fixes the
+            // positioning of the tabs. There's probably a better way to do this, but I have not found it...
+            if (_needsDisplayRectangleFix && Alignment == TabAlignment.Left && DisplayRectangle.X > ItemSize.Height + 4) {
+                var oldDisplayRectangleX = DisplayRectangle.X;
+                ClientSize = new Size(ClientSize.Width + 1, Height);
+                ClientSize = new Size(ClientSize.Width - 1, Height);
+                if (oldDisplayRectangleX != DisplayRectangle.X)
+                    _needsDisplayRectangleFix = false;
+            }
+
+            base.OnLayout(levent);
+        }
+
+        private bool _needsDisplayRectangleFix = false;
     }
 }
