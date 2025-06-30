@@ -24,7 +24,7 @@ namespace SF3.Win.Views.CHR {
 
             var selectedSprite = (Sprite) DropdownList.SelectedValue;
             foreach (var sprite in Model.SpriteTable) {
-                ElementView.CreateChild(new SpriteView(sprite.Name, sprite, TabAlignment.Left), (c) => {
+                ElementView.CreateChild(new SpriteView(sprite.Name, sprite, Model.NameGetterContext, TabAlignment.Left), (c) => {
                     if (sprite != selectedSprite)
                         c.Hide();
                 });
