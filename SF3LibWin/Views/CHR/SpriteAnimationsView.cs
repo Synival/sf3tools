@@ -1,12 +1,10 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Windows.Forms;
 using BrightIdeasSoftware;
 using CommonLib.NamedValues;
 using SF3.Models.Structs.CHR;
 using SF3.Models.Tables.CHR;
-using SF3.Types;
 
 namespace SF3.Win.Views.CHR {
     public class SpriteAnimationsView : ControlSpaceView {
@@ -16,7 +14,7 @@ namespace SF3.Win.Views.CHR {
             AnimationFramesByIndex = animationFramesByIndex;
 
             TableView   = new TableView("Frames", model, nameGetterContext, typeof(Animation));
-            TextureView = new SpriteAnimationTextureView("Texture", spriteDirections, animationFramesByIndex.Values.ToArray(), textureScale: 2);
+            TextureView = new SpriteAnimationTextureView("Texture", new SpriteAnimationTextureViewContext(spriteDirections, animationFramesByIndex, model.FrameTable), textureScale: 2);
         }
 
         public override Control Create() {

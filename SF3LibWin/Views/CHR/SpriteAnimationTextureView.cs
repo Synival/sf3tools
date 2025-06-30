@@ -3,24 +3,40 @@ using SF3.Models.Structs.CHR;
 using SF3.Models.Tables.CHR;
 
 namespace SF3.Win.Views.CHR {
+    public class SpriteAnimationTextureViewContext {
+        public SpriteAnimationTextureViewContext(int spriteDirections, Dictionary<int, AnimationFrameTable> animationFramesByIndex, FrameTable frameTable) {
+            SpriteDirections       = spriteDirections;
+            AnimationFramesByIndex = animationFramesByIndex;
+            FrameTable             = frameTable;
+        }
+
+        public readonly int SpriteDirections;
+        public readonly Dictionary<int, AnimationFrameTable> AnimationFramesByIndex;
+        public readonly FrameTable FrameTable;
+    }
+
     public class SpriteAnimationTextureView : AnimatedTextureView {
-        public SpriteAnimationTextureView(string name, int spriteDirections, AnimationFrameTable[] animationFrames, float textureScale = 0)
+        public SpriteAnimationTextureView(string name, SpriteAnimationTextureViewContext context, float textureScale = 0)
         : base(name, textureScale) {
-            SpriteDirections = spriteDirections;
-            AnimationFrames  = animationFrames;
+            _context = context;
         }
 
         public void StartAnimation(int index) {
-            if (index < 0 || index >= AnimationFrames.Length)
+            if (Context == null || Context.FrameTable == null || Context?.AnimationFramesByIndex?.ContainsKey(index) != true) {
                 ClearAnimation();
-
-            _frames = AnimationFrames[index];
-            if (_frames == null || _frames.Length == 0 || _frames[0].IsFinalFrame)
-                ClearAnimation();
-            else {
-                _currentDirections = SpriteDirections;
-                GotoFrame(null, 0);
+                _frames = null;
+                return;
             }
+
+            _frames = Context.AnimationFramesByIndex[index];
+            if (_frames == null || _frames.Length == 0 || _frames[0].IsFinalFrame) {
+                ClearAnimation();
+                _frames = null;
+                return;
+            }
+
+            _currentDirections = Context.SpriteDirections;
+            GotoFrame(null, 0);
         }
 
         protected override void OnFrameCompleted()
@@ -97,12 +113,12 @@ namespace SF3.Win.Views.CHR {
 
                         // Jump to animation
                         case 0xFF:
-                            if (param < 0 || param >= AnimationFrames.Length) {
+                            if (!Context.AnimationFramesByIndex.ContainsKey(param)) {
                                 PauseAnimation();
                                 return;
                             }
 
-                            _frames = AnimationFrames[param];
+                            _frames = Context.AnimationFramesByIndex[param];
                             nextFrameIndex = 0;
                             break;
 
@@ -115,8 +131,17 @@ namespace SF3.Win.Views.CHR {
             }
         }
 
-        public int SpriteDirections { get; }
-        public AnimationFrameTable[] AnimationFrames { get; }
+        SpriteAnimationTextureViewContext _context;
+        public SpriteAnimationTextureViewContext Context {
+            get => _context;
+            set {
+                if (_context != value) {
+                    _context = value;
+                    ClearAnimation();
+                    _frames = null;
+                }
+            }
+        }
 
         private AnimationFrameTable _frames = null;
         private int _currentDirections = 0;
