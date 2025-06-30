@@ -8,42 +8,19 @@ namespace SF3.Win.Views.CHR {
     /// <summary>
     /// TODO: This is very poorly written!!! We need some kind of a multiview that doesn't have tabs.
     /// </summary>
-    public class CHR_View : ArrayView<Sprite, ControlSpaceView> {
+    public class CHR_View : ArrayView<Sprite, SpriteView> {
         public CHR_View(string name, ICHR_File chrFile) : base(
             name,
             chrFile.SpriteTable.ToArray(),
             "DropdownName",
-            new ControlSpaceView("Sprites")
+            new SpriteView("Sprite", null, chrFile.NameGetterContext, TabAlignment.Left)
         ) {
             Model = chrFile;
         }
 
-        public override Control Create() {
-            if (base.Create() == null)
-                return null;
-
-            var selectedSprite = (Sprite) DropdownList.SelectedValue;
-            foreach (var sprite in Model.SpriteTable) {
-                ElementView.CreateChild(new SpriteView(sprite.Name, sprite, Model.NameGetterContext, TabAlignment.Left), (c) => {
-                    if (sprite != selectedSprite)
-                        c.Hide();
-                });
-            }
-
-            return Control;
-        }
-
         protected override void OnSelectValue(object sender, EventArgs args) {
             var selectedSprite = (Sprite) DropdownList.SelectedValue;
-            foreach (var viewObj in ElementView.ChildViews) {
-                var view = (SpriteView) viewObj;
-                if (view.Model == selectedSprite) {
-                    view.RefreshContent();
-                    view.Control.Show();
-                }
-                else
-                    view.Control.Hide();
-            }
+            ElementView.Model = selectedSprite;
         }
 
         public ICHR_File Model { get; }
