@@ -40,7 +40,21 @@ namespace SF3.Win.Views.CHR {
             return Control;
         }
 
-        public Sprite Model { get; }
+        private Sprite _model = null;
+        public Sprite Model {
+            get => _model;
+            set {
+                if (_model != value) {
+                    _model = value;
+
+                    HeaderView.Model = _model?.Header;
+                    FramesView.Table = _model?.FrameTable;
+                    AnimationOffsetsView.Table = _model?.AnimationOffsetTable;
+                    AnimationFramesArrayView.Elements = (Model?.AnimationFrameTablesByIndex?.Values?.Select(x => new SpriteAnimationFramesViewItem(x.SpriteDirections, x, Model.FrameTable))?.ToArray()) ?? [];
+                    AnimationsView.Context = new SpriteAnimationsViewContext(Model?.Header?.Directions ?? 1, Model?.AnimationTable, Model?.AnimationFrameTablesByIndex ?? [], Model?.FrameTable);
+                }
+            }
+        }
 
         public INameGetterContext NameGetterContext { get; }
         public DataModelView HeaderView { get; }
