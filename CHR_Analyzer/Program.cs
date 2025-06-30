@@ -5,6 +5,8 @@ using CommonLib.Arrays;
 using CommonLib.NamedValues;
 using SF3;
 using SF3.ByteData;
+using SF3.Models.Files;
+using SF3.Models.Files.CHP;
 using SF3.Models.Files.CHR;
 using SF3.Models.Structs.CHR;
 using SF3.NamedValues;
@@ -95,12 +97,8 @@ namespace CHR_Analyzer {
 
         private static List<string> s_matchReports = [];
 
-        private static HashSet<string> scn1List = new HashSet<string>() {
-            "Eldar (P2)",
-        };
-
-        private static bool? CHR_MatchFunc(string filename, ICHR_File chrFile, INameGetterContext ngc) {
-            var animationsWithMissingFrames = chrFile.SpriteTable.SelectMany(x => x.AnimationTable.Where(y => y.TotalFramesMissing > 0)).ToArray();
+        private static bool? CHR_MatchFunc(string filename, ICHR_File[] chrFiles, INameGetterContext ngc) {
+            var animationsWithMissingFrames = chrFiles.SelectMany(chr => chr.SpriteTable.SelectMany(x => x.AnimationTable.Where(y => y.TotalFramesMissing > 0))).ToArray();
             foreach (var x in animationsWithMissingFrames)
                 s_matchReports.Add($"{x.TotalFramesMissing} missing frames | {x.SpriteName}, {x.Name}");
             return s_matchReports.Count > 0;
@@ -141,8 +139,16 @@ namespace CHR_Analyzer {
 
                     // Create a CHR file that works with our new ByteData.
                     try {
-                        using (var chrFile = CHR_File.Create(byteData, nameGetterContexts[scenario], scenario, file.EndsWith(".CHP"))) {
-                            var match = CHR_MatchFunc(filename, chrFile, nameGetterContexts[scenario]);
+                        bool isChr = file.EndsWith(".CHR");
+                        using (ScenarioTableFile chrChpFile = isChr
+                            ? CHR_File.Create(byteData, nameGetterContexts[scenario], scenario)
+                            : CHP_File.Create(byteData, nameGetterContexts[scenario], scenario)
+                        ) {
+                            var chrFiles = isChr
+                                ? [(CHR_File) chrChpFile]
+                                : ((CHP_File) chrChpFile).CHR_EntriesByOffset.Values.ToArray();
+
+                            var match = CHR_MatchFunc(filename, chrFiles, nameGetterContexts[scenario]);
 
                             // If the match is 'null', that means we're just skipping this file completely.
                             if (match == null) {
@@ -151,8 +157,27 @@ namespace CHR_Analyzer {
                             }
 
                             // List the file and any report we may have from CHR_MatchFunc().
-                            var fileStr = GetFileString(scenario, file, chrFile);
+                            var fileStr = GetFileString(scenario, file, chrChpFile);
+
+#if false
+                            var spriteGroupSizes = chrFile.SpriteTable
+                                .GroupBy(x => x.DataOffset)
+                                .Select((x, i) => new { Sprites = x.ToArray(), Index = i })
+                                .Where(x => x.Index % 2 == 0)
+                                .Select(x => new { Promotion = x.Index / 2, Frames = x.Sprites.SelectMany(y => y.FrameTable) })
+                                .Where(x => x.Frames.Count() > 0)
+                                .Select(x => new { x.Promotion, Size = x.Frames.Max(y => y.TextureEndOffset) })
+                                .ToArray();
+
+                            var biggestSpriteGroup = spriteGroupSizes.OrderByDescending(x => x.Size).FirstOrDefault();
+
+                            if (biggestSpriteGroup != null)
+                                biggestCBPspriteByFile[filename + ".CHP"] = (biggestSpriteGroup.Promotion, biggestSpriteGroup.Size);
+                            var biggestSpriteGroupSize = biggestSpriteGroup?.Size ?? 0;
+#endif
+
                             Console.WriteLine($"{fileStr} | {match}");
+
                             foreach (var mr in s_matchReports)
                                 Console.WriteLine("    " + mr);
                             s_matchReports.Clear();
@@ -162,14 +187,14 @@ namespace CHR_Analyzer {
                             else
                                 nomatchSet.Add(fileStr);
 
-                            ScanForErrorsAndReport(scenario, chrFile);
+                            ScanForErrorsAndReport(scenario, chrChpFile);
 
                             // Build a table of all textures.
-                            foreach (var sprite in chrFile.SpriteTable) {
+                            foreach (var sprite in chrFiles.SelectMany(x => x.SpriteTable).ToArray()) {
                                 foreach (var frame in sprite.FrameTable)
-                                    AddFrame(chrFile.Scenario, filename, sprite.ID, frame);
+                                    AddFrame(scenario, filename, sprite.ID, frame);
                                 foreach (var animation in sprite.AnimationTable) {
-                                    AddAnimation(chrFile.Scenario, filename, sprite.ID, animation);
+                                    AddAnimation(scenario, filename, sprite.ID, animation);
                                     foreach (var animFrame in animation.AnimationFrames)
                                         if (animFrame.FrameID >= 0xF0)
                                             frameWordSet.Add((uint) ((animFrame.FrameID << 16) | animFrame.Duration));
@@ -181,6 +206,23 @@ namespace CHR_Analyzer {
                         Console.WriteLine("  !!! Exception for '" + filename + "': '" + e.Message + "'. Skipping!");
                     }
                 }
+
+#if false
+                uint roundSizeUp(uint size)
+                    => (size + (size % 0x10 == 0 ? 0 : 0x10 - (size % 0x10)));
+
+                var biggestTwelve = biggestCBPspriteByFile.OrderByDescending(x => x.Value.Item2).Take(12).ToDictionary(x => x.Key, x => x.Value);
+                Console.WriteLine();
+                Console.WriteLine("Biggest 12:");
+                foreach (var chp in biggestTwelve) {
+                    var charIndex = int.Parse(chp.Key.Substring(3, 2));
+                    var charName = nameGetter.GetName(null, null, charIndex, [NamedValueType.Character]);
+                    var promotion = (chp.Value.Item1 == 0) ? "U " : $"P{chp.Value.Item1}";
+                    Console.WriteLine($"   {chp.Key} | {charName,10} | {promotion} | {chp.Value.Item2:X4} --> {roundSizeUp(chp.Value.Item2):X4}");
+                }
+                Console.WriteLine($"Total size: {biggestTwelve.Sum(x => roundSizeUp(x.Value.Item2)):X5}");
+                Console.WriteLine();
+#endif
             }
             Console.WriteLine("Processing complete.");
 
@@ -218,6 +260,7 @@ namespace CHR_Analyzer {
             }
 
             Console.WriteLine();
+#if true
             Console.WriteLine("Writing new 'SpriteFramesByHash.xml'...");
             _ = Directory.CreateDirectory(c_pathOut);
             using (var file = File.OpenWrite(Path.Combine(c_pathOut, "SpriteFramesByHash.xml")))
@@ -229,9 +272,11 @@ namespace CHR_Analyzer {
             using (var file = File.OpenWrite(Path.Combine(c_pathOut, "SpriteAnimationsByHash.xml")))
                 using (var stream = new StreamWriter(file))
                     CHRUtils.WriteUniqueAnimationsByHashXML(stream);
+#endif
 
             var totalCount = matchSet.Count + nomatchSet.Count;
 
+#if false
             Console.WriteLine("");
             Console.WriteLine("===================================================");
             Console.WriteLine("| MATCH RESULTS                                   |");
@@ -245,6 +290,7 @@ namespace CHR_Analyzer {
             Console.WriteLine($"NoMatch: {nomatchSet.Count}/{totalCount}");
             foreach (var str in nomatchSet)
                 Console.WriteLine("  " + str);
+#endif
 
             Console.WriteLine("");
             Console.WriteLine("===================================================");
@@ -326,12 +372,12 @@ namespace CHR_Analyzer {
             return str;
         }
 
-        private static string GetFileString(ScenarioType inputScenario, string filename, ICHR_File chrFile) {
-            var typeStr = chrFile.IsCHP ? "CHP" : "CHR";
+        private static string GetFileString(ScenarioType inputScenario, string filename, ScenarioTableFile chrChpFile) {
+            var typeStr = (chrChpFile is ICHP_File) ? "CHP" : "CHR";
             return inputScenario.ToString().PadLeft(11) + ": " + Path.GetFileName(filename).PadLeft(12) + " | " + typeStr;
         }
 
-        private static void ScanForErrorsAndReport(ScenarioType inputScenario, ICHR_File chrFile) {
+        private static void ScanForErrorsAndReport(ScenarioType inputScenario, ScenarioTableFile chrChpFile) {
             var totalErrors = new List<string>();
 
             // TODO: scan for errors

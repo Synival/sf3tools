@@ -5,6 +5,7 @@ using System.Linq;
 using CommonLib.NamedValues;
 using SF3.ByteData;
 using SF3.Models.Files;
+using SF3.Models.Files.CHP;
 using SF3.Models.Files.CHR;
 using SF3.Models.Files.MPD;
 using SF3.Models.Files.X002;
@@ -180,8 +181,8 @@ namespace SF3.Utils {
                 case SF3FileType.X033:    return X033_File.Create(byteData, ngc, scenario);
                 case SF3FileType.X044:    return X044_File.Create(byteData, ngc, scenario);
                 case SF3FileType.MPD:     return MPD_File .Create(byteData, nameGetterContexts);
-                case SF3FileType.CHR:     return CHR_File .Create(byteData, ngc, scenario, 0, 0);
-                case SF3FileType.CHP:     return CHR_File .Create(byteData, ngc, scenario, true);
+                case SF3FileType.CHR:     return CHR_File .Create(byteData, ngc, scenario);
+                case SF3FileType.CHP:     return CHP_File .Create(byteData, ngc, scenario);
                 default:
                     throw new InvalidOperationException($"Unhandled file type '{fileType}'");
             }

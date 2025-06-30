@@ -2,18 +2,19 @@
 using System.Linq;
 using System.Windows.Forms;
 using CommonLib.NamedValues;
-using SF3.Models.Files.CHR;
+using SF3.Models.Files.CHP;
 using SF3.Models.Structs.CHR;
+using SF3.Win.Views.CHR;
 
-namespace SF3.Win.Views.CHR {
-    public class CHR_View : ArrayView<Sprite, SpriteView> {
-        public CHR_View(string name, ICHR_File chrFile, INameGetterContext nameGetterContext) : base(
+namespace SF3.Win.Views.CHP {
+    public class CHP_View : ArrayView<Sprite, SpriteView> {
+        public CHP_View(string name, ICHP_File chpFile, INameGetterContext nameGetterContext) : base(
             name,
-            chrFile?.SpriteTable?.ToArray() ?? [],
+            chpFile?.CHR_EntriesByOffset?.Values?.SelectMany(x => x.SpriteTable)?.ToArray() ?? [],
             "DropdownName",
             new SpriteView("Sprite", null, nameGetterContext, TabAlignment.Left)
         ) {
-            _model = chrFile;
+            _model = chpFile;
         }
 
         protected override void OnSelectValue(object sender, EventArgs args) {
@@ -21,13 +22,13 @@ namespace SF3.Win.Views.CHR {
             ElementView.Model = selectedSprite;
         }
 
-        private ICHR_File _model = null;
-        public ICHR_File Model {
+        private ICHP_File _model = null;
+        public ICHP_File Model {
             get => _model;
             set {
                 if (_model != value) {
                     _model = value;
-                    Elements = value?.SpriteTable?.ToArray() ?? [];
+                    Elements = value?.CHR_EntriesByOffset?.Values?.SelectMany(x => x.SpriteTable)?.ToArray() ?? [];
                 }
             }
         }
