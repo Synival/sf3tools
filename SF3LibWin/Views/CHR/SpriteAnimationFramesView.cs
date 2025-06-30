@@ -20,11 +20,10 @@ namespace SF3.Win.Views.CHR {
     }
 
     public class SpriteAnimationFramesView : ControlSpaceView {
-        public SpriteAnimationFramesView(string name, int spriteDirections, SpriteAnimationFramesViewItem tables, INameGetterContext nameGetterContext) : base(name) {
+        public SpriteAnimationFramesView(string name, int spriteDirections, SpriteAnimationFramesViewItem model, INameGetterContext nameGetterContext) : base(name) {
             SpriteDirections = spriteDirections;
-            Model       = tables?.AnimationFrameTable;
-            FrameTable  = tables?.FrameTable;
-            TableView   = new TableView("Frames", Model, nameGetterContext, typeof(AnimationFrame));
+            Model       = model;
+            TableView   = new TableView("Frames", Model?.AnimationFrameTable, nameGetterContext, typeof(AnimationFrame));
             TextureView = new ImageView("Texture", textureScale: 2);
         }
 
@@ -62,21 +61,19 @@ namespace SF3.Win.Views.CHR {
             base.Destroy();
         }
 
-        AnimationFrameTable _model = null;
-
         public int SpriteDirections { get; }
 
-        public AnimationFrameTable Model {
+        private SpriteAnimationFramesViewItem _model = null;
+        public SpriteAnimationFramesViewItem Model {
             get => _model;
             set {
                 if (_model != value) {
                     _model = value;
-                    TableView.Table = value;
+                    TableView.Table = value?.AnimationFrameTable;
                 }
             }
         }
 
-        public FrameTable FrameTable { get; set; }
         public TableView TableView { get; private set; }
         public ImageView TextureView { get; private set; }
     }

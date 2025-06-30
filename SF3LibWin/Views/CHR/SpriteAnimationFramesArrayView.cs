@@ -9,8 +9,7 @@ namespace SF3.Win.Views.CHR {
 
         protected override void OnSelectValue(object sender, EventArgs args) {
             var selection = (SpriteAnimationFramesViewItem) DropdownList.SelectedValue;
-            ElementView.Model      = selection.AnimationFrameTable;
-            ElementView.FrameTable = selection.FrameTable;
+            ElementView.Model = selection;
             ElementView.UpdateTexture();
         }
     }
