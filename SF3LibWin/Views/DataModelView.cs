@@ -74,8 +74,8 @@ namespace SF3.Win.Views {
                     lvc.IsEditable = false;
                     lvc.Text       = "Name";
 
-                    var maxWidth = Math.Max(30, TextRenderer.MeasureText(lvc.Text, lvc.HeaderFont).Width + 8);
-                    foreach (var mp in _modelProperties)
+                    var maxWidth = Math.Max(200, TextRenderer.MeasureText(lvc.Text, lvc.HeaderFont).Width + 8);
+                    foreach (var mp in _modelProperties ?? [])
                         maxWidth = Math.Max(maxWidth, TextRenderer.MeasureText(mp.Name, lvc.HeaderFont).Width + 8);
                     lvc.Width = (int) (maxWidth * 0.85);
 
@@ -95,13 +95,13 @@ namespace SF3.Win.Views {
                     var lvc = new OLVColumn(lvcNameBase + "Value", "Value");
                     lvc.IsEditable = true;
                     lvc.Text       = "Value";
-                    lvc.Width      = Math.Max(200, _modelProperties.Max(x => x.Width));
+                    lvc.Width      = Math.Max(200, _modelProperties?.Max(x => x.Width) ?? 0);
 
                     // AspectToStringFormat is used after fetching fetching the aspect with AspectGetter().
                     // We can take advantage of that by setting the AspectToStringFormat for the specific value.
                     // (It would be nice if there was a string converter that took the actual row object, not just the value.)
                     lvc.AspectGetter = (row) => {
-                        lvc.AspectToStringFormat = ((ModelProperty) row).AspectToStringFormat;
+                        lvc.AspectToStringFormat = ((ModelProperty) row)?.AspectToStringFormat;
                         return lvc.GetAspectByName(row);
                     };
 
@@ -199,7 +199,7 @@ namespace SF3.Win.Views {
                     if (_model != null)
                         OLVControl.ClearObjects();
                     if (value != null)
-                        OLVControl.AddObject(_modelProperties);
+                        OLVControl.AddObjects(_modelProperties);
                 }
                 _model = value;
             }
