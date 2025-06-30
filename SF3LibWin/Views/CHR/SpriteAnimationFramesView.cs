@@ -7,8 +7,8 @@ using SF3.Models.Tables.CHR;
 using SF3.Win.Extensions;
 
 namespace SF3.Win.Views.CHR {
-    public class SpriteAnimationWithFrames {
-        public SpriteAnimationWithFrames(AnimationFrameTable animationFrameTable, FrameTable frameTable) {
+    public class SpriteAnimationFramesViewItem {
+        public SpriteAnimationFramesViewItem(AnimationFrameTable animationFrameTable, FrameTable frameTable) {
             AnimationFrameTable = animationFrameTable;
             FrameTable          = frameTable;
         }
@@ -20,7 +20,7 @@ namespace SF3.Win.Views.CHR {
     }
 
     public class SpriteAnimationFramesView : ControlSpaceView {
-        public SpriteAnimationFramesView(string name, int spriteDirections, SpriteAnimationWithFrames tables, INameGetterContext nameGetterContext) : base(name) {
+        public SpriteAnimationFramesView(string name, int spriteDirections, SpriteAnimationFramesViewItem tables, INameGetterContext nameGetterContext) : base(name) {
             SpriteDirections = spriteDirections;
             Model       = tables?.AnimationFrameTable;
             FrameTable  = tables?.FrameTable;

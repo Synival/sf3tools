@@ -26,7 +26,7 @@ namespace SF3.Win.Views.CHR {
                 if (Model.AnimationFrameTablesByIndex?.Count > 0) {
                     CreateChild(
                         new SpriteAnimationFramesArrayView("Animation Frames", Model.Header.Directions, Model.AnimationFrameTablesByIndex.Values
-                            .Select(x => new SpriteAnimationWithFrames(x, Model.FrameTable))
+                            .Select(x => new SpriteAnimationFramesViewItem(x, Model.FrameTable))
                             .ToArray(),
                         ngc));
                 }
