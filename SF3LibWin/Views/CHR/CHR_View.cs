@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Windows.Forms;
+using CommonLib.NamedValues;
 using SF3.Models.Files.CHR;
 using SF3.Models.Structs.CHR;
 
@@ -9,13 +10,13 @@ namespace SF3.Win.Views.CHR {
     /// TODO: This is very poorly written!!! We need some kind of a multiview that doesn't have tabs.
     /// </summary>
     public class CHR_View : ArrayView<Sprite, SpriteView> {
-        public CHR_View(string name, ICHR_File chrFile) : base(
+        public CHR_View(string name, ICHR_File chrFile, INameGetterContext nameGetterContext) : base(
             name,
-            chrFile.SpriteTable.ToArray(),
+            chrFile?.SpriteTable?.ToArray(),
             "DropdownName",
-            new SpriteView("Sprite", null, chrFile.NameGetterContext, TabAlignment.Left)
+            new SpriteView("Sprite", null, nameGetterContext, TabAlignment.Left)
         ) {
-            Model = chrFile;
+            _model = chrFile;
         }
 
         protected override void OnSelectValue(object sender, EventArgs args) {
@@ -23,6 +24,15 @@ namespace SF3.Win.Views.CHR {
             ElementView.Model = selectedSprite;
         }
 
-        public ICHR_File Model { get; }
+        private ICHR_File _model = null;
+        public ICHR_File Model {
+            get => _model;
+            set {
+                if (_model != value) {
+                    _model = value;
+                    Elements = value?.SpriteTable?.ToArray() ?? [];
+                }
+            }
+        }
     }
 }

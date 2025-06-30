@@ -180,7 +180,7 @@ namespace SF3.Utils {
                 case SF3FileType.X033:    return X033_File.Create(byteData, ngc, scenario);
                 case SF3FileType.X044:    return X044_File.Create(byteData, ngc, scenario);
                 case SF3FileType.MPD:     return MPD_File .Create(byteData, nameGetterContexts);
-                case SF3FileType.CHR:     return CHR_File .Create(byteData, ngc, scenario, false);
+                case SF3FileType.CHR:     return CHR_File .Create(byteData, ngc, scenario, 0, 0);
                 case SF3FileType.CHP:     return CHR_File .Create(byteData, ngc, scenario, true);
                 default:
                     throw new InvalidOperationException($"Unhandled file type '{fileType}'");
