@@ -55,7 +55,7 @@ namespace SF3.Models.Structs.CHR {
         [TableViewModelColumn(displayOrder: 0, displayName: "Index")]
         public int AnimationIndex { get; }
 
-        [TableViewModelColumn(displayOrder: 0.1f, displayName: "Type")]
+        [TableViewModelColumn(displayOrder: 0.1f, displayName: "Type", minWidth: 100)]
         public AnimationType AnimationType => (AnimationType) AnimationIndex;
 
         [TableViewModelColumn(displayOrder: 0.5f, minWidth: 200)]

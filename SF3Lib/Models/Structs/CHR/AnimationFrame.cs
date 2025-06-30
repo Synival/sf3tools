@@ -36,7 +36,7 @@ namespace SF3.Models.Structs.CHR {
         [TableViewModelColumn(addressField: null, displayOrder: -0.2f, displayName: "Index")]
         public int AnimationIndex { get; }
 
-        [TableViewModelColumn(addressField: null, displayOrder: -0.1f, displayName: "Type")]
+        [TableViewModelColumn(addressField: null, displayOrder: -0.1f, displayName: "Type", minWidth: 100)]
         public AnimationType AnimationType => (AnimationType) AnimationIndex;
 
         public FrameTable FrameTable { get; }
