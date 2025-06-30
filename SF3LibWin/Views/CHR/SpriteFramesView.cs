@@ -9,7 +9,6 @@ using SF3.Win.Extensions;
 namespace SF3.Win.Views.CHR {
     public class SpriteFramesView : ControlSpaceView {
         public SpriteFramesView(string name, FrameTable model, INameGetterContext nameGetterContext) : base(name) {
-            Model       = model;
             TableView   = new TableView("Frames", model, nameGetterContext, typeof(Frame));
             TextureView = new ImageView("Texture");
         }
@@ -48,7 +47,11 @@ namespace SF3.Win.Views.CHR {
             base.Destroy();
         }
 
-        public FrameTable Model { get; }
+        public FrameTable Table {
+            get => (FrameTable) TableView.Table;
+            set => TableView.Table = value;
+        }
+
         public TableView TableView { get; private set; }
         public ImageView TextureView { get; private set; }
     }
