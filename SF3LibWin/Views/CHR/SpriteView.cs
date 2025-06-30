@@ -25,8 +25,8 @@ namespace SF3.Win.Views.CHR {
                     CreateChild(new TableView("Animation Offsets", Model.AnimationOffsetTable, ngc));
                 if (Model.AnimationFrameTablesByIndex?.Count > 0) {
                     CreateChild(
-                        new SpriteAnimationFramesArrayView("Animation Frames", Model.Header.Directions, Model.AnimationFrameTablesByIndex.Values
-                            .Select(x => new SpriteAnimationFramesViewItem(x, Model.FrameTable))
+                        new SpriteAnimationFramesArrayView("Animation Frames", Model.AnimationFrameTablesByIndex.Values
+                            .Select(x => new SpriteAnimationFramesViewItem(Model.Header.Directions, x, Model.FrameTable))
                             .ToArray(),
                         ngc));
                 }

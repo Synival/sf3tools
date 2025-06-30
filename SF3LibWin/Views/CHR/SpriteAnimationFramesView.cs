@@ -8,7 +8,8 @@ using SF3.Win.Extensions;
 
 namespace SF3.Win.Views.CHR {
     public class SpriteAnimationFramesViewItem {
-        public SpriteAnimationFramesViewItem(AnimationFrameTable animationFrameTable, FrameTable frameTable) {
+        public SpriteAnimationFramesViewItem(int spriteDirections, AnimationFrameTable animationFrameTable, FrameTable frameTable) {
+            SpriteDirections    = spriteDirections;
             AnimationFrameTable = animationFrameTable;
             FrameTable          = frameTable;
         }
@@ -20,8 +21,7 @@ namespace SF3.Win.Views.CHR {
     }
 
     public class SpriteAnimationFramesView : ControlSpaceView {
-        public SpriteAnimationFramesView(string name, int spriteDirections, SpriteAnimationFramesViewItem model, INameGetterContext nameGetterContext) : base(name) {
-            SpriteDirections = spriteDirections;
+        public SpriteAnimationFramesView(string name, SpriteAnimationFramesViewItem model, INameGetterContext nameGetterContext) : base(name) {
             Model       = model;
             TableView   = new TableView("Frames", Model?.AnimationFrameTable, nameGetterContext, typeof(AnimationFrame));
             TextureView = new ImageView("Texture", textureScale: 2);
@@ -43,7 +43,7 @@ namespace SF3.Win.Views.CHR {
         public void UpdateTexture() {
             var item = (OLVListItem) TableView.OLVControl.SelectedItem;
             var animationFrame = (AnimationFrame) item?.RowObject;
-            TextureView.Image = animationFrame?.GetTexture(SpriteDirections)?.CreateBitmapARGB1555();
+            TextureView.Image = animationFrame?.GetTexture(Model?.SpriteDirections ?? 1)?.CreateBitmapARGB1555();
         }
 
         public override void Destroy() {
@@ -60,8 +60,6 @@ namespace SF3.Win.Views.CHR {
 
             base.Destroy();
         }
-
-        public int SpriteDirections { get; }
 
         private SpriteAnimationFramesViewItem _model = null;
         public SpriteAnimationFramesViewItem Model {
