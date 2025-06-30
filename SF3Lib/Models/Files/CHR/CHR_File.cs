@@ -8,8 +8,8 @@ using SF3.Types;
 
 namespace SF3.Models.Files.CHR {
     public class CHR_File : ScenarioTableFile, ICHR_File {
-        public override int RamAddress => 0; // TODO: where is this loaded? is it even relevant?
-        public override int RamAddressLimit => 0; // TODO: where is this loaded? is it even relevant?
+        public override int RamAddress => 0x00210000;
+        public override int RamAddressLimit => 0x00290000;
 
         protected CHR_File(IByteData data, INameGetterContext nameContext, ScenarioType scenario, bool isCHP) : base(data, nameContext, scenario) {
             IsCHP = isCHP;
