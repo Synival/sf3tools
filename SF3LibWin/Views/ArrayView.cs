@@ -4,7 +4,7 @@ using System.Windows.Forms;
 namespace SF3.Win.Views {
     public abstract class ArrayView<TElement, TView> : ControlSpaceView where TView : IView {
         public ArrayView(string name, TElement[] elements, string keyProperty, TView elementView) : base(name) {
-            Elements = elements;
+            _elements = elements;
             KeyProperty = keyProperty;
             ElementView = elementView;
         }
@@ -18,15 +18,15 @@ namespace SF3.Win.Views {
 
             DropdownList = new ComboBox();
             DropdownList.Width = 400;
-            DropdownList.DataSource = new BindingSource(Elements, null);
+            DropdownList.DataSource = new BindingSource(Elements ?? [], null);
             DropdownList.DisplayMember = KeyProperty;
             DropdownList.SelectedValueChanged += OnSelectValue;
             control.Controls.Add(DropdownList);
 
             CreateChild(ElementView, (c) => {}, autoFill: false);
             Control.Resize += (s, e) => {
-                var tableControl = ElementView.Control;
-                tableControl.SetBounds(0, DropdownList.Bottom + 8, Control.Width, Control.Height - DropdownList.Height - 8);
+                var elementControl = ElementView.Control;
+                elementControl.SetBounds(0, DropdownList.Bottom + 8, Control.Width, Control.Height - DropdownList.Height - 8);
             };
 
             return control;
@@ -38,7 +38,18 @@ namespace SF3.Win.Views {
             base.Destroy();
         }
 
-        public TElement[] Elements { get; }
+        private TElement[] _elements;
+        public TElement[] Elements {
+            get => _elements;
+            set {
+                if (_elements != value) {
+                    _elements = value;
+                    if (DropdownList != null)
+                        DropdownList.DataSource = new BindingSource(_elements, null);
+                }
+            }
+        }
+
         public string KeyProperty { get; }
         public TView ElementView { get; }
 
