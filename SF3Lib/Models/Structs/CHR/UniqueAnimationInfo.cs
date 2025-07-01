@@ -1,6 +1,6 @@
 ﻿namespace SF3.Models.Structs.CHR {
     public class UniqueAnimationInfo {
-        public UniqueAnimationInfo(string animationHash, string spriteName, string animationName, int width, int height, int directions, int frames, int missingFrames) {
+        public UniqueAnimationInfo(string animationHash, string spriteName, string animationName, int width, int height, int directions, int frames, int duration, int missingFrames) {
             AnimationHash = animationHash;
             SpriteName    = spriteName;
             AnimationName = animationName;
@@ -8,6 +8,7 @@
             Height        = height;
             Directions    = directions;
             Frames        = frames;
+            Duration      = duration;
             MissingFrames = missingFrames;
         }
 
@@ -18,6 +19,7 @@
         public int Height { get; }
         public int Directions { get; }
         public int Frames { get; }
+        public int Duration { get; set; }
         public int MissingFrames { get; }
     }
 }

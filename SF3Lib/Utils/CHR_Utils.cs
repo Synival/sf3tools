@@ -5,7 +5,7 @@ using System.Xml;
 using SF3.Models.Structs.CHR;
 
 namespace SF3.Utils {
-    public static class CHRUtils {
+    public static class CHR_Utils {
         private static Dictionary<string, UniqueFrameInfo> s_uniqueFramesByHash = null;
         private static Dictionary<string, UniqueAnimationInfo> s_uniqueAnimationsByHash = null;
 
@@ -16,17 +16,17 @@ namespace SF3.Utils {
             return s_uniqueFramesByHash[hash];
         }
 
-        public static UniqueAnimationInfo AddUniqueAnimationInfo(string hash, string spriteName, string animationName, int width, int height, int directions, int frames, int missingFrames) {
+        public static UniqueAnimationInfo AddUniqueAnimationInfo(string hash, string spriteName, string animationName, int width, int height, int directions, int frames, int duration, int missingFrames) {
             LoadUniqueAnimationsByHashTable();
             if (s_uniqueAnimationsByHash.TryGetValue(hash.ToLower(), out var val))
                 return val;
-            return s_uniqueAnimationsByHash[hash] = new UniqueAnimationInfo(hash, spriteName, animationName, width, height, directions, frames, missingFrames);
+            return s_uniqueAnimationsByHash[hash] = new UniqueAnimationInfo(hash, spriteName, animationName, width, height, directions, frames, duration, missingFrames);
         }
 
         public static UniqueAnimationInfo GetUniqueAnimationInfoByHash(string hash, int width, int height, int directions) {
             LoadUniqueAnimationsByHashTable();
             if (!s_uniqueAnimationsByHash.ContainsKey(hash.ToLower()))
-                s_uniqueAnimationsByHash[hash] = new UniqueAnimationInfo(hash, "Unknown", "Unknown", width, height, directions, 0, 0);
+                s_uniqueAnimationsByHash[hash] = new UniqueAnimationInfo(hash, "Unknown", "Unknown", width, height, directions, 0, 0, 0);
             return s_uniqueAnimationsByHash[hash];
         }
 
@@ -92,6 +92,7 @@ namespace SF3.Utils {
                         var heightAttr     = xml.GetAttribute("height");
                         var directionsAttr = xml.GetAttribute("directions");
                         var framesAttr     = xml.GetAttribute("frames");
+                        var durationAttr   = xml.GetAttribute("duration");
                         var missingAttr    = xml.GetAttribute("missingFrames");
 
                         if (hash == null || sprite == null || animation == null || widthAttr == null || heightAttr == null || directionsAttr == null)
@@ -104,8 +105,9 @@ namespace SF3.Utils {
                         if (sprite == "")
                             sprite = "None";
 
-                        int missingFrames = int.TryParse(missingAttr , out var missingFramesOut) ? missingFramesOut : 0;
-                        s_uniqueAnimationsByHash.Add(hash.ToLower(), new UniqueAnimationInfo(hash, sprite, animation, width, height, directions, frames, missingFrames));
+                        int missingFrames = int.TryParse(missingAttr, out var missingFramesOut) ? missingFramesOut : 0;
+                        int duration = int.TryParse(durationAttr, out var durationOut) ? durationOut : 0;
+                        s_uniqueAnimationsByHash.Add(hash.ToLower(), new UniqueAnimationInfo(hash, sprite, animation, width, height, directions, frames, duration, missingFrames));
                     }
                 }
             }
@@ -136,6 +138,7 @@ namespace SF3.Utils {
                 .ThenBy(x => x.AnimationName)
                 .ThenBy(x => x.Directions)
                 .ThenBy(x => x.Frames)
+                .ThenBy(x => x.Duration)
                 .ThenBy(x => x.MissingFrames)
                 .ThenBy(x => x.AnimationHash)
                 .ToArray();
@@ -147,7 +150,7 @@ namespace SF3.Utils {
                 var spriteName = (ai.SpriteName == "") ? "None" : ai.SpriteName;
 
                 var missingFramesStr = (ai.MissingFrames == 0) ? "" : $" missingFrames=\"{ai.MissingFrames}\"";
-                stream.WriteLine($"    <item hash=\"{ai.AnimationHash}\" sprite=\"{spriteName}\" animation=\"{ai.AnimationName}\" width=\"{ai.Width}\" height=\"{ai.Height}\" directions=\"{ai.Directions}\" frames=\"{ai.Frames}\"{missingFramesStr} />");
+                stream.WriteLine($"    <item hash=\"{ai.AnimationHash}\" sprite=\"{spriteName}\" animation=\"{ai.AnimationName}\" width=\"{ai.Width}\" height=\"{ai.Height}\" directions=\"{ai.Directions}\" frames=\"{ai.Frames}\" duration=\"{ai.Duration}\"{missingFramesStr} />");
             }
             stream.WriteLine("</items>");
         }

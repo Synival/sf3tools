@@ -39,8 +39,10 @@ namespace SF3.Models.Structs.CHR {
             var height = _framesWithTextures.Length > 0 ? _framesWithTextures[0].Height : 0;
 
             var directions = (_firstFrameWithTexture == null) ? 1 : AnimationFrame.DirectionsToFrameCount(_firstFrameWithTexture.Directions);
-            AnimationInfo = CHRUtils.GetUniqueAnimationInfoByHash(Hash, width, height, directions);
+            AnimationInfo = CHR_Utils.GetUniqueAnimationInfoByHash(Hash, width, height, directions);
+
             AnimationInfo.SpriteName = SpriteName;
+            AnimationInfo.Duration = Duration;
 
             var uniqueFramesWithTextures = _framesWithTextures.Distinct().ToArray();
             TotalCompressedFramesSize = (uint) uniqueFramesWithTextures.Sum(x => x.TextureCompressedSize);
@@ -74,7 +76,7 @@ namespace SF3.Models.Structs.CHR {
                 var resourcePath = Path.Combine("..", "..", "..", "..", "SF3Lib", CommonLib.Utils.ResourceUtils.ResourceFile("SpriteFramesByHash.xml"));
                 using (var file = File.OpenWrite(resourcePath))
                     using (var writer = new StreamWriter(file))
-                        CHRUtils.WriteUniqueFramesByHashXML(writer);
+                        CHR_Utils.WriteUniqueFramesByHashXML(writer);
 
                 var newSpriteName = SpriteName;
                 if (lastSpriteName != newSpriteName) {
@@ -82,7 +84,7 @@ namespace SF3.Models.Structs.CHR {
                     var animPath = Path.Combine("..", "..", "..", "..", "SF3Lib", CommonLib.Utils.ResourceUtils.ResourceFile("SpriteAnimationsByHash.xml"));
                     using (var file = File.OpenWrite(animPath))
                         using (var writer = new StreamWriter(file))
-                            CHRUtils.WriteUniqueAnimationsByHashXML(writer);
+                            CHR_Utils.WriteUniqueAnimationsByHashXML(writer);
                 }
             }
         }
@@ -95,9 +97,12 @@ namespace SF3.Models.Structs.CHR {
                 var resourcePath = Path.Combine("..", "..", "..", "..", "SF3Lib", CommonLib.Utils.ResourceUtils.ResourceFile("SpriteAnimationsByHash.xml"));
                 using (var file = File.OpenWrite(resourcePath))
                     using (var writer = new StreamWriter(file))
-                        CHRUtils.WriteUniqueAnimationsByHashXML(writer);
+                        CHR_Utils.WriteUniqueAnimationsByHashXML(writer);
             }
         }
+
+        [TableViewModelColumn(displayOrder: 2.5f)]
+        public int Duration => AnimationFrames.Sum(x => x.HasTexture ? x.Duration : 0);
 
         [TableViewModelColumn(displayOrder: 2)]
         public int TotalFramesMissing => AnimationFrames.Sum(x => x.FramesMissing);
