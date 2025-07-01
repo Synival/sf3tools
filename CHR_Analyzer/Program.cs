@@ -158,24 +158,6 @@ namespace CHR_Analyzer {
 
                             // List the file and any report we may have from CHR_MatchFunc().
                             var fileStr = GetFileString(scenario, file, chrChpFile);
-
-#if false
-                            var spriteGroupSizes = chrFile.SpriteTable
-                                .GroupBy(x => x.DataOffset)
-                                .Select((x, i) => new { Sprites = x.ToArray(), Index = i })
-                                .Where(x => x.Index % 2 == 0)
-                                .Select(x => new { Promotion = x.Index / 2, Frames = x.Sprites.SelectMany(y => y.FrameTable) })
-                                .Where(x => x.Frames.Count() > 0)
-                                .Select(x => new { x.Promotion, Size = x.Frames.Max(y => y.TextureEndOffset) })
-                                .ToArray();
-
-                            var biggestSpriteGroup = spriteGroupSizes.OrderByDescending(x => x.Size).FirstOrDefault();
-
-                            if (biggestSpriteGroup != null)
-                                biggestCBPspriteByFile[filename + ".CHP"] = (biggestSpriteGroup.Promotion, biggestSpriteGroup.Size);
-                            var biggestSpriteGroupSize = biggestSpriteGroup?.Size ?? 0;
-#endif
-
                             Console.WriteLine($"{fileStr} | {match}");
 
                             foreach (var mr in s_matchReports)
@@ -206,23 +188,6 @@ namespace CHR_Analyzer {
                         Console.WriteLine("  !!! Exception for '" + filename + "': '" + e.Message + "'. Skipping!");
                     }
                 }
-
-#if false
-                uint roundSizeUp(uint size)
-                    => (size + (size % 0x10 == 0 ? 0 : 0x10 - (size % 0x10)));
-
-                var biggestTwelve = biggestCBPspriteByFile.OrderByDescending(x => x.Value.Item2).Take(12).ToDictionary(x => x.Key, x => x.Value);
-                Console.WriteLine();
-                Console.WriteLine("Biggest 12:");
-                foreach (var chp in biggestTwelve) {
-                    var charIndex = int.Parse(chp.Key.Substring(3, 2));
-                    var charName = nameGetter.GetName(null, null, charIndex, [NamedValueType.Character]);
-                    var promotion = (chp.Value.Item1 == 0) ? "U " : $"P{chp.Value.Item1}";
-                    Console.WriteLine($"   {chp.Key} | {charName,10} | {promotion} | {chp.Value.Item2:X4} --> {roundSizeUp(chp.Value.Item2):X4}");
-                }
-                Console.WriteLine($"Total size: {biggestTwelve.Sum(x => roundSizeUp(x.Value.Item2)):X5}");
-                Console.WriteLine();
-#endif
             }
             Console.WriteLine("Processing complete.");
 
@@ -259,8 +224,8 @@ namespace CHR_Analyzer {
                     Console.WriteLine($"    {tex.FrameInfo.TextureHash} ({tex.Texture.Width}x{tex.Texture.Height})");
             }
 
+#if false
             Console.WriteLine();
-#if true
             Console.WriteLine("Writing new 'SpriteFramesByHash.xml'...");
             _ = Directory.CreateDirectory(c_pathOut);
             using (var file = File.OpenWrite(Path.Combine(c_pathOut, "SpriteFramesByHash.xml")))
@@ -276,7 +241,6 @@ namespace CHR_Analyzer {
 
             var totalCount = matchSet.Count + nomatchSet.Count;
 
-#if false
             Console.WriteLine("");
             Console.WriteLine("===================================================");
             Console.WriteLine("| MATCH RESULTS                                   |");
@@ -290,7 +254,6 @@ namespace CHR_Analyzer {
             Console.WriteLine($"NoMatch: {nomatchSet.Count}/{totalCount}");
             foreach (var str in nomatchSet)
                 Console.WriteLine("  " + str);
-#endif
 
             Console.WriteLine("");
             Console.WriteLine("===================================================");
@@ -304,43 +267,68 @@ namespace CHR_Analyzer {
             var avgUsagesPerAnimation = s_animationsByHash.Sum(x => x.Value.Sprites.Count) / (float) s_animationsByHash.Count;
             Console.WriteLine($"Each animation is used {avgUsagesPerAnimation} times on average.");
 
-            return;
-
             Console.WriteLine("");
             Console.WriteLine("===================================================");
             Console.WriteLine("| DUMPING IMAGES                                  |");
             Console.WriteLine("===================================================");
             Console.WriteLine("");
 
-            var texInfos = s_framesByHash.Values
+            var spriteSheets = s_framesByHash.Values
                 .OrderBy(x => x.FrameInfo.SpriteName)
                 .ThenBy(x => x.FrameInfo.Width)
                 .ThenBy(x => x.FrameInfo.Height)
                 .ThenBy(x => x.FrameInfo.AnimationName)
                 .ThenBy(x => x.FrameInfo.TextureHash)
-                .ToArray();
+                .GroupBy(x => $"{x.FrameInfo.SpriteName} ({x.FrameInfo.Width}x{x.FrameInfo.Height})")
+                .ToDictionary(x => x.Key, x => x.ToArray());
 
             _ = Directory.CreateDirectory(c_pathOut);
-            foreach (var texInfo in texInfos) {
-                var tex = texInfo.Texture;
-                var fi = texInfo.FrameInfo;
-
-                var spriteFileString = fi.SpriteName
+            foreach (var spriteSheetKv in spriteSheets) {
+                var filename = spriteSheetKv.Key
                     .Replace("?", "X")
                     .Replace("-", "_")
                     .Replace(":", "_")
-                    .Replace("/", "_");
+                    .Replace("/", "_") + ".BMP";
 
-                var path = Path.Combine(c_pathOut, spriteFileString, $"{fi.Width}x{fi.Height}", (fi.AnimationName == "") ? "Uncategorized" : fi.AnimationName.Replace('|', '_'));
-                _ = Directory.CreateDirectory(path);
-
-                var outputPath = Path.Combine(path, $"{fi.TextureHash}.BMP");
+                var outputPath = Path.Combine(c_pathOut, filename);
                 Console.WriteLine("Writing: " + outputPath);
+
+                var frames = spriteSheetKv.Value;
+
+                var frameWidthInPixels  = frames[0].FrameInfo.Width;
+                var frameHeightInPixels = frames[0].FrameInfo.Height;
+
+                var pixelsPerFrame = frameWidthInPixels * frameHeightInPixels;
+                var frameCount     = frames.Length;
+                var totalPixels    = pixelsPerFrame * frameCount;
+
+                var imageWidthInFrames = Math.Max(1, (int) (Math.Sqrt(totalPixels) / frameWidthInPixels));
+                var imageHeightInFrames = (int) Math.Ceiling(frameCount / (float) imageWidthInFrames);
+
+                var imageWidthInPixels = imageWidthInFrames * frameWidthInPixels;
+                var imageHeightInPixels = imageHeightInFrames * frameHeightInPixels;
+
+                var newData = new byte[imageWidthInPixels * imageHeightInPixels * 2];
+                for (int i = 0; i < frameCount; i++) {
+                    int x = (i % imageWidthInFrames) * frameWidthInPixels;
+                    int y = (i / imageWidthInFrames) * frameHeightInPixels;
+                    int pos = (y * imageWidthInPixels + x) * 2;
+
+                    var frame = frames[i];
+                    var frameData = frame.Texture.BitmapDataARGB1555;
+
+                    int frameDataPos = 0;
+                    for (int iy = 0; iy < frameHeightInPixels; iy++) {
+                        int ipos = pos + (iy * imageWidthInPixels) * 2;
+                        for (int ix = 0; ix < frameWidthInPixels * 2; ix++)
+                            newData[ipos++] = frameData[frameDataPos++];
+                    }
+                }
+
 #pragma warning disable CA1416 // Validate platform compatibility
-                using (var bitmap = new Bitmap(tex.Width, tex.Height, PixelFormat.Format16bppArgb1555)) {
-                    var imageData = tex.BitmapDataARGB1555;
+                using (var bitmap = new Bitmap(imageWidthInPixels, imageHeightInPixels, PixelFormat.Format16bppArgb1555)) {
                     var bmpData = bitmap.LockBits(new Rectangle(0, 0, bitmap.Width, bitmap.Height), ImageLockMode.WriteOnly, bitmap.PixelFormat);
-                    Marshal.Copy(imageData, 0, bmpData.Scan0, imageData.Length);
+                    Marshal.Copy(newData, 0, bmpData.Scan0, newData.Length);
                     bitmap.UnlockBits(bmpData);
                     try {
                         bitmap.Save(outputPath);
