@@ -110,30 +110,23 @@ namespace SF3.Models.Structs.CHR {
                     // Build a unique hash string for this animation.
                     var hashStr = "";
                     foreach (var aniFrame in AnimationFrames) {
-                        // If this is the last frame (a command), filter out some commands that could prevent detection of uniqueness.
-                        if (aniFrame.IsFinalFrame) {
+                        if (hashStr != "")
+                            hashStr += "_";
+
+                        if (!aniFrame.HasTexture) {
                             var cmd   = aniFrame.FrameID;
                             var param = aniFrame.Duration;
 
                             // Don't bother appending stops.
                             if (cmd == 0xF2)
-                                break;
-                            // If jumping back to the first frame is the same as stopping, don't add this either.
-                            else if (cmd == 0xFE && param == 0 && AnimationFrames.Length <= 2)
-                                break;
-                            // If jumping to another animation, we don't care which one -- just add FF and be done.
-                            else if (cmd == 0xFF) {
-                                hashStr += "_ff";
-                                break;
-                            }
-                            // Add the frame as normal.
+                                hashStr += "f2";
+                            else
+                                hashStr += $"{cmd:x2},{aniFrame.Duration:x2}";
                         }
-
-                        if (hashStr != "")
-                            hashStr += "_";
-
-                        var tex = aniFrame.HasTexture ? aniFrame.GetTexture(aniFrame.Directions) : null;
-                        hashStr += (tex != null) ? $"{tex.Hash}_{aniFrame.Duration:x2}" : $"{aniFrame.FrameID:x2}{aniFrame.Duration:x2}";
+                        else {
+                            var tex = aniFrame.HasTexture ? aniFrame.GetTexture(aniFrame.Directions) : null;
+                            hashStr += (tex != null) ? $"{tex.Hash}_{aniFrame.Duration:x2}" : $"{aniFrame.FrameID:x2},{aniFrame.Duration:x2}";
+                        }
                     }
 
                     using (var md5 = MD5.Create())

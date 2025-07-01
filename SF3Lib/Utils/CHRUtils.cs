@@ -137,6 +137,7 @@ namespace SF3.Utils {
                 .ThenBy(x => x.Directions)
                 .ThenBy(x => x.Frames)
                 .ThenBy(x => x.MissingFrames)
+                .ThenBy(x => x.AnimationHash)
                 .ToArray();
 
             stream.NewLine = "\n";
