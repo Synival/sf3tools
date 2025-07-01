@@ -7,8 +7,8 @@ using SF3.Models.Tables.CHR;
 using SF3.Win.Extensions;
 
 namespace SF3.Win.Views.CHR {
-    public class SpriteAnimationFramesViewItem {
-        public SpriteAnimationFramesViewItem(int spriteDirections, AnimationFrameTable animationFrameTable, FrameTable frameTable) {
+    public class SpriteAnimationFramesViewContext {
+        public SpriteAnimationFramesViewContext(int spriteDirections, AnimationFrameTable animationFrameTable, FrameTable frameTable) {
             SpriteDirections    = spriteDirections;
             AnimationFrameTable = animationFrameTable;
             FrameTable          = frameTable;
@@ -21,9 +21,9 @@ namespace SF3.Win.Views.CHR {
     }
 
     public class SpriteAnimationFramesView : ControlSpaceView {
-        public SpriteAnimationFramesView(string name, SpriteAnimationFramesViewItem model, INameGetterContext nameGetterContext) : base(name) {
-            Model       = model;
-            TableView   = new TableView("Frames", Model?.AnimationFrameTable, nameGetterContext, typeof(AnimationFrame));
+        public SpriteAnimationFramesView(string name, SpriteAnimationFramesViewContext model, INameGetterContext nameGetterContext) : base(name) {
+            Context       = model;
+            TableView   = new TableView("Frames", Context?.AnimationFrameTable, nameGetterContext, typeof(AnimationFrame));
             TextureView = new ImageView("Texture", textureScale: 2);
         }
 
@@ -43,7 +43,7 @@ namespace SF3.Win.Views.CHR {
         public void UpdateTexture() {
             var item = (OLVListItem) TableView.OLVControl.SelectedItem;
             var animationFrame = (AnimationFrame) item?.RowObject;
-            TextureView.Image = animationFrame?.GetTexture(Model?.SpriteDirections ?? 1)?.CreateBitmapARGB1555();
+            TextureView.Image = animationFrame?.GetTexture(Context?.SpriteDirections ?? 1)?.CreateBitmapARGB1555();
         }
 
         public override void Destroy() {
@@ -61,12 +61,12 @@ namespace SF3.Win.Views.CHR {
             base.Destroy();
         }
 
-        private SpriteAnimationFramesViewItem _model = null;
-        public SpriteAnimationFramesViewItem Model {
-            get => _model;
+        private SpriteAnimationFramesViewContext _context = null;
+        public SpriteAnimationFramesViewContext Context {
+            get => _context;
             set {
-                if (_model != value) {
-                    _model = value;
+                if (_context != value) {
+                    _context = value;
                     TableView.Table = value?.AnimationFrameTable;
                 }
             }

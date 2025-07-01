@@ -7,22 +7,22 @@ namespace SF3.Win.Views.CHR {
     public class SpriteView : TabView {
 
         public SpriteView(string name, Sprite model, INameGetterContext nameGetterContext, TabAlignment tabAlignment) : base(name, tabAlignment: tabAlignment) {
-            Model = model;
+            Sprite = model;
             NameGetterContext = nameGetterContext;
 
-            HeaderView = new DataModelView("Header", Model?.Header, nameGetterContext, typeof(SpriteHeader));
-            FramesView = new SpriteFramesView("Frames", Model?.FrameTable, nameGetterContext);
-            AnimationOffsetsView = new TableView("Animation Offsets", Model?.AnimationOffsetTable, nameGetterContext, typeof(AnimationOffset));
+            HeaderView = new DataModelView("Header", Sprite?.Header, nameGetterContext, typeof(SpriteHeader));
+            FramesView = new SpriteFramesView("Frames", Sprite?.FrameTable, nameGetterContext);
+            AnimationOffsetsView = new TableView("Animation Offsets", Sprite?.AnimationOffsetTable, nameGetterContext, typeof(AnimationOffset));
 
             AnimationFramesArrayView = new SpriteAnimationFramesArrayView(
                 "Animation Frames",
-                (Model?.AnimationFrameTablesByIndex?.Values?.Select(x => new SpriteAnimationFramesViewItem(Model.Header.Directions, x, Model.FrameTable))?.ToArray()) ?? [],
+                (Sprite?.AnimationFrameTablesByIndex?.Values?.Select(x => new SpriteAnimationFramesViewContext(Sprite.Header.Directions, x, Sprite.FrameTable))?.ToArray()) ?? [],
                 nameGetterContext
             );
 
             AnimationsView = new SpriteAnimationsView(
                 "Animations",
-                new SpriteAnimationsViewContext(Model?.Header?.Directions ?? 1, Model?.AnimationTable, Model?.AnimationFrameTablesByIndex ?? [], Model?.FrameTable),
+                new SpriteAnimationsViewContext(Sprite?.Header?.Directions ?? 1, Sprite?.AnimationTable, Sprite?.AnimationFrameTablesByIndex ?? [], Sprite?.FrameTable),
                 nameGetterContext
             );
         }
@@ -40,18 +40,18 @@ namespace SF3.Win.Views.CHR {
             return Control;
         }
 
-        private Sprite _model = null;
-        public Sprite Model {
-            get => _model;
+        private Sprite _sprite = null;
+        public Sprite Sprite {
+            get => _sprite;
             set {
-                if (_model != value) {
-                    _model = value;
+                if (_sprite != value) {
+                    _sprite = value;
 
-                    HeaderView.Model = _model?.Header;
-                    FramesView.Table = _model?.FrameTable;
-                    AnimationOffsetsView.Table = _model?.AnimationOffsetTable;
-                    AnimationFramesArrayView.Elements = (Model?.AnimationFrameTablesByIndex?.Values?.Select(x => new SpriteAnimationFramesViewItem(x.SpriteDirections, x, Model.FrameTable))?.ToArray()) ?? [];
-                    AnimationsView.Context = new SpriteAnimationsViewContext(Model?.Header?.Directions ?? 1, Model?.AnimationTable, Model?.AnimationFrameTablesByIndex ?? [], Model?.FrameTable);
+                    HeaderView.Model = _sprite?.Header;
+                    FramesView.Table = _sprite?.FrameTable;
+                    AnimationOffsetsView.Table = _sprite?.AnimationOffsetTable;
+                    AnimationFramesArrayView.Elements = (Sprite?.AnimationFrameTablesByIndex?.Values?.Select(x => new SpriteAnimationFramesViewContext(x.SpriteDirections, x, Sprite.FrameTable))?.ToArray()) ?? [];
+                    AnimationsView.Context = new SpriteAnimationsViewContext(Sprite?.Header?.Directions ?? 1, Sprite?.AnimationTable, Sprite?.AnimationFrameTablesByIndex ?? [], Sprite?.FrameTable);
                 }
             }
         }

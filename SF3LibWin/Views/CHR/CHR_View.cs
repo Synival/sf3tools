@@ -18,7 +18,7 @@ namespace SF3.Win.Views.CHR {
 
         protected override void OnSelectValue(object sender, EventArgs args) {
             var selectedSprite = (Sprite) DropdownList.SelectedValue;
-            ElementView.Model = selectedSprite;
+            ElementView.Sprite = selectedSprite;
         }
 
         private ICHR_File _model = null;
