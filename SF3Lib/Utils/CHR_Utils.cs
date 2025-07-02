@@ -152,36 +152,16 @@ namespace SF3.Utils {
             stream.WriteLine("</items>");
         }
 
+        public static UniqueSpriteAnimationCollectionDef[] GetAllUniqueSpriteAnimationDefs() {
+            return s_uniqueAnimationsByHash.Values
+                .GroupBy(x => x.SpriteName)
+                .Select(x => new UniqueSpriteAnimationCollectionDef(x.Key, x.ToArray()))
+                .ToArray();
+        }
+
         public static void WriteUniqueAnimationsByHashJSON(StreamWriter stream) {
             stream.NewLine = "\n";
-
-            var animationInfos = s_uniqueAnimationsByHash.Values
-                .GroupBy(x => x.SpriteName)
-                .Select(x => new UniqueSpriteAnimationCollectionDef {
-                    Name = x.Key,
-                    Variants = x
-                        .OrderBy(y => y.Width)
-                        .ThenBy(y => y.Height)
-                        .ThenBy(y => y.Directions)
-                        .GroupBy(y => ((y.Width & 0xFFFF) << 24) + ((y.Height & 0xFFFF) << 8) + (y.Directions & 0xFF))
-                        .Select(y => new UniqueSpriteAnimationCollectionDef.Variant() {
-                            Width      = (y.Key >> 24) & 0xFFFF,
-                            Height     = (y.Key >>  8) & 0xFFFF,
-                            Directions = (y.Key >>  0) & 0xFF,
-                            Animations = y
-                                .OrderBy(z => z.AnimationName)
-                                .ThenBy(z => z.AnimationHash)
-                                .Select(z => new UniqueSpriteAnimationCollectionDef.Variant.Animation() {
-                                    Name = z.AnimationName,
-                                    Hash = z.AnimationHash,
-                                    Frames = z.Frames
-                                })
-                                .ToArray()
-                        })
-                        .ToArray()
-                })
-                .ToArray();
-
+            var animationInfos = GetAllUniqueSpriteAnimationDefs();
             stream.Write(JsonConvert.SerializeObject(animationInfos, Newtonsoft.Json.Formatting.Indented));
         }
     }
