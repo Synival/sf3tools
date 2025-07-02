@@ -2,7 +2,9 @@
 using System.IO;
 using System.Linq;
 using System.Xml;
+using Newtonsoft.Json;
 using SF3.Models.Structs.CHR;
+using SF3.Sprites;
 
 namespace SF3.Utils {
     public static class CHR_Utils {
@@ -153,6 +155,38 @@ namespace SF3.Utils {
                 stream.WriteLine($"    <item hash=\"{ai.AnimationHash}\" sprite=\"{spriteName}\" animation=\"{ai.AnimationName}\" width=\"{ai.Width}\" height=\"{ai.Height}\" directions=\"{ai.Directions}\" frames=\"{ai.Frames}\" duration=\"{ai.Duration}\"{missingFramesStr} />");
             }
             stream.WriteLine("</items>");
+        }
+
+        public static void WriteUniqueAnimationsByHashJSON(StreamWriter stream) {
+            stream.NewLine = "\n";
+
+            var animationInfos = s_uniqueAnimationsByHash.Values
+                .GroupBy(x => x.SpriteName)
+                .Select(x => new UniqueSpriteAnimationCollectionDef {
+                    Name = x.Key,
+                    Variants = x
+                        .OrderBy(y => y.Width)
+                        .ThenBy(y => y.Height)
+                        .ThenBy(y => y.Directions)
+                        .GroupBy(y => ((y.Width & 0xFFFF) << 24) + ((y.Height & 0xFFFF) << 8) + (y.Directions & 0xFF))
+                        .Select(y => new UniqueSpriteAnimationCollectionDef.Variant() {
+                            Width      = (y.Key >> 24) & 0xFFFF,
+                            Height     = (y.Key >>  8) & 0xFFFF,
+                            Directions = (y.Key >>  0) & 0xFF,
+                            Animations = y
+                                .OrderBy(z => z.AnimationName)
+                                .ThenBy(z => z.AnimationHash)
+                                .Select(z => new UniqueSpriteAnimationCollectionDef.Variant.Animation() {
+                                    Name = z.AnimationName,
+                                    Hash = z.AnimationHash,
+                                })
+                                .ToArray()
+                        })
+                        .ToArray()
+                })
+                .ToArray();
+
+            stream.Write(JsonConvert.SerializeObject(animationInfos, Newtonsoft.Json.Formatting.Indented));
         }
     }
 }
