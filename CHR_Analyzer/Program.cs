@@ -100,7 +100,8 @@ namespace CHR_Analyzer {
         private static bool? CHR_MatchFunc(string filename, ICHR_File[] chrFiles, INameGetterContext ngc) {
             var animationsWithMissingFrames = chrFiles.SelectMany(chr => chr.SpriteTable.SelectMany(x => x.AnimationTable.Where(y => y.TotalFramesMissing > 0))).ToArray();
             foreach (var x in animationsWithMissingFrames)
-                s_matchReports.Add($"{x.TotalFramesMissing} missing frames | {x.SpriteName}, {x.Name}");
+                s_matchReports.Add($"{x.FrameTexturesMissing} missing frames | {x.SpriteName}, {x.Name}");
+
             return s_matchReports.Count > 0;
         }
 

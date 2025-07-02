@@ -3,7 +3,6 @@ using System.IO;
 using System.Linq;
 using System.Xml;
 using Newtonsoft.Json;
-using SF3.Models.Structs.CHR;
 using SF3.Sprites;
 
 namespace SF3.Utils {
@@ -18,17 +17,12 @@ namespace SF3.Utils {
             return s_uniqueFramesByHash[hash];
         }
 
-        public static UniqueAnimationInfo AddUniqueAnimationInfo(string hash, string spriteName, string animationName, int width, int height, int directions, int frames, int duration, int missingFrames) {
+        public static UniqueAnimationInfo GetUniqueAnimationInfoByHash(string hash) {
             LoadUniqueAnimationsByHashTable();
-            if (s_uniqueAnimationsByHash.TryGetValue(hash.ToLower(), out var val))
-                return val;
-            return s_uniqueAnimationsByHash[hash] = new UniqueAnimationInfo(hash, spriteName, animationName, width, height, directions, frames, duration, missingFrames);
-        }
-
-        public static UniqueAnimationInfo GetUniqueAnimationInfoByHash(string hash, int width, int height, int directions) {
-            LoadUniqueAnimationsByHashTable();
-            if (!s_uniqueAnimationsByHash.ContainsKey(hash.ToLower()))
-                s_uniqueAnimationsByHash[hash] = new UniqueAnimationInfo(hash, "Unknown", "Unknown", width, height, directions, 0, 0, 0);
+            if (!s_uniqueAnimationsByHash.ContainsKey(hash.ToLower())) {
+                s_uniqueAnimationsByHash[hash] = new UniqueAnimationInfo(hash, "Unknown", "Unknown", 0, 0, 0, 0, 0, 0,
+                    new UniqueSpriteAnimationCollectionDef.Variant.Animation.Frame[0]);
+            }
             return s_uniqueAnimationsByHash[hash];
         }
 
@@ -109,7 +103,8 @@ namespace SF3.Utils {
 
                         int missingFrames = int.TryParse(missingAttr, out var missingFramesOut) ? missingFramesOut : 0;
                         int duration = int.TryParse(durationAttr, out var durationOut) ? durationOut : 0;
-                        s_uniqueAnimationsByHash.Add(hash.ToLower(), new UniqueAnimationInfo(hash, sprite, animation, width, height, directions, frames, duration, missingFrames));
+                        s_uniqueAnimationsByHash.Add(hash.ToLower(), new UniqueAnimationInfo(hash, sprite, animation, width, height, directions, frames, duration, missingFrames,
+                            new UniqueSpriteAnimationCollectionDef.Variant.Animation.Frame[0]));
                     }
                 }
             }
@@ -139,9 +134,9 @@ namespace SF3.Utils {
                 .ThenBy(x => x.Height)
                 .ThenBy(x => x.AnimationName)
                 .ThenBy(x => x.Directions)
-                .ThenBy(x => x.Frames)
+                .ThenBy(x => x.FrameCommandCount)
                 .ThenBy(x => x.Duration)
-                .ThenBy(x => x.MissingFrames)
+                .ThenBy(x => x.FrameTexturesMissing)
                 .ThenBy(x => x.AnimationHash)
                 .ToArray();
 
@@ -151,8 +146,8 @@ namespace SF3.Utils {
             foreach (var ai in animationInfos) {
                 var spriteName = (ai.SpriteName == "") ? "None" : ai.SpriteName;
 
-                var missingFramesStr = (ai.MissingFrames == 0) ? "" : $" missingFrames=\"{ai.MissingFrames}\"";
-                stream.WriteLine($"    <item hash=\"{ai.AnimationHash}\" sprite=\"{spriteName}\" animation=\"{ai.AnimationName}\" width=\"{ai.Width}\" height=\"{ai.Height}\" directions=\"{ai.Directions}\" frames=\"{ai.Frames}\" duration=\"{ai.Duration}\"{missingFramesStr} />");
+                var missingFramesStr = (ai.FrameTexturesMissing == 0) ? "" : $" missingFrames=\"{ai.FrameTexturesMissing}\"";
+                stream.WriteLine($"    <item hash=\"{ai.AnimationHash}\" sprite=\"{spriteName}\" animation=\"{ai.AnimationName}\" width=\"{ai.Width}\" height=\"{ai.Height}\" directions=\"{ai.Directions}\" frames=\"{ai.FrameCommandCount}\" duration=\"{ai.Duration}\"{missingFramesStr} />");
             }
             stream.WriteLine("</items>");
         }
@@ -179,6 +174,7 @@ namespace SF3.Utils {
                                 .Select(z => new UniqueSpriteAnimationCollectionDef.Variant.Animation() {
                                     Name = z.AnimationName,
                                     Hash = z.AnimationHash,
+                                    Frames = z.Frames
                                 })
                                 .ToArray()
                         })

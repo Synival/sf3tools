@@ -7,6 +7,7 @@ using System.Text;
 using CommonLib.Attributes;
 using SF3.ByteData;
 using SF3.Models.Tables.CHR;
+using SF3.Sprites;
 using SF3.Types;
 using SF3.Utils;
 
@@ -35,14 +36,37 @@ namespace SF3.Models.Structs.CHR {
                 .Select(x => FrameTable[x])
                 .ToArray();
 
-            var width  = _framesWithTextures.Length > 0 ? _framesWithTextures[0].Width  : 0;
-            var height = _framesWithTextures.Length > 0 ? _framesWithTextures[0].Height : 0;
-
-            var directions = (_firstFrameWithTexture == null) ? 1 : AnimationFrame.DirectionsToFrameCount(_firstFrameWithTexture.Directions);
-            AnimationInfo = CHR_Utils.GetUniqueAnimationInfoByHash(Hash, width, height, directions);
+            AnimationInfo = CHR_Utils.GetUniqueAnimationInfoByHash(Hash);
 
             AnimationInfo.SpriteName = SpriteName;
-            AnimationInfo.Duration = Duration;
+            AnimationInfo.Width      = _framesWithTextures.Length > 0 ? _framesWithTextures[0].Width  : 0;
+            AnimationInfo.Height     = _framesWithTextures.Length > 0 ? _framesWithTextures[0].Height : 0;
+            AnimationInfo.Directions = (_firstFrameWithTexture == null) ? 1 : AnimationFrame.DirectionsToFrameCount(_firstFrameWithTexture.Directions);
+            AnimationInfo.FrameCommandCount = FrameCommandCount;
+            AnimationInfo.Duration   = Duration;
+            AnimationInfo.FrameTexturesMissing = FrameTexturesMissing;
+
+            string[] GetAnimationFrameHashes(AnimationFrame aniFrame) {
+                if (!aniFrame.HasTexture)
+                    return null;
+
+                var frameID = aniFrame.FrameID;
+                var dirs = aniFrame.Directions;
+                var hashes = new string[dirs];
+                var maxFrames = FrameTable.Length;
+                for (int i = 0; i < dirs; i++) {
+                    var frameIndex = aniFrame.FrameID + i;
+                    hashes[i] = (frameIndex < maxFrames) ? FrameTable[frameIndex].TextureHash : null;
+                }
+                return hashes;
+            }
+
+            AnimationInfo.Frames = AnimationFrames
+                .Select(x => new UniqueSpriteAnimationCollectionDef.Variant.Animation.Frame() {
+                    Command = x.FrameID,
+                    ParameterOrDuration = x.Duration,
+                    FrameHashes = GetAnimationFrameHashes(x)
+                }).ToArray();
 
             var uniqueFramesWithTextures = _framesWithTextures.Distinct().ToArray();
             TotalCompressedFramesSize = (uint) uniqueFramesWithTextures.Sum(x => x.TextureCompressedSize);
@@ -101,11 +125,14 @@ namespace SF3.Models.Structs.CHR {
             }
         }
 
+        [TableViewModelColumn(displayOrder: 2.25f, displayName: "Frames+Commands")]
+        public int FrameCommandCount => AnimationFrames.Count();
+
         [TableViewModelColumn(displayOrder: 2.5f)]
         public int Duration => AnimationFrames.Sum(x => x.HasTexture ? x.Duration : 0);
 
         [TableViewModelColumn(displayOrder: 2)]
-        public int TotalFramesMissing => AnimationFrames.Sum(x => x.FramesMissing);
+        public int FrameTexturesMissing => AnimationFrames.Sum(x => x.FramesMissing);
 
         private string _hash = null;
         [TableViewModelColumn(displayOrder: 3, minWidth: 300)]

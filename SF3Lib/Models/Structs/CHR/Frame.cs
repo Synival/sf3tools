@@ -4,6 +4,7 @@ using CommonLib.Attributes;
 using CommonLib.Extensions;
 using CommonLib.Utils;
 using SF3.ByteData;
+using SF3.Sprites;
 using SF3.Types;
 using SF3.Utils;
 

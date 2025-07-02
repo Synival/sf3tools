@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace SF3.Models.Structs.CHR {
+namespace SF3.Sprites {
     /// <summary>
     /// Information about a particular texture read from a sprite.
     /// </summary>
