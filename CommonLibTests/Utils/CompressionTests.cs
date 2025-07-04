@@ -174,5 +174,19 @@ namespace CommonLib.Tests.Utils {
             Assert.AreEqual(1600, decompressed.Length);
             Assert.IsTrue(Enumerable.SequenceEqual(c_testSpriteFrameUncompressed, decompressed));
         }
+
+        [TestMethod]
+        public void CompressSpriteData_ProducesExpectedDataForFrame() {
+            var compressed = CompressSpriteData(c_testSpriteFrameUncompressed, 0, c_testSpriteFrameUncompressed.Length);
+            Assert.AreEqual(0x572, compressed.Length);
+            Assert.IsTrue(Enumerable.SequenceEqual(c_testSpriteFrameCompressed, compressed));
+        }
+
+        [TestMethod]
+        public void CompressThenDecompressSpriteFrameProducesTheOriginalFrame() {
+            var compressed = CompressSpriteData(c_testSpriteFrameUncompressed, 0, c_testSpriteFrameUncompressed.Length);
+            var decompressed = DecompressSpriteData(compressed, 0, out _);
+            Assert.IsTrue(Enumerable.SequenceEqual(c_testSpriteFrameUncompressed, decompressed));
+        }
     }
 }

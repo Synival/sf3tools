@@ -253,5 +253,133 @@ namespace CommonLib.Utils {
             sizeOut = nextFeedPos + (nextFeedPos % 2);
             return decompressedData.ToArray();
         }
+
+        /// <summary>
+        /// Compresses a stream of ABGR1555 colors to a compression format used in Shining Force 3's CHR format.
+        /// </summary>
+        /// <param name="dataIn">Data input as a series of 16-bit color values.</param>
+        /// <param name="offset">Position of the data.</param>
+        /// <param name="sizeInShorts">Number of bytes to read from the data.</param>
+        /// <returns>An array of bytes in CHR frame compressed format.</returns>
+        public static byte[] CompressSpriteData(ushort[] dataIn, uint offset, int sizeInShorts) {
+            // Create buffers that shouldn't be larger than the incoming data.
+            var dataOut = new byte[sizeInShorts * 2 + 4];
+            var bitstreamOut = new byte[sizeInShorts + 0x10];
+
+            // As colors are read, new colors are stored in a lookup table of size 0x80.
+            // The last three elements are always assigned to colors 0x0000, 0x8000, and 0x7FFF.
+            var colorsStored = new ushort[0x80];
+            colorsStored[0x7D] = 0x0000;
+            colorsStored[0x7E] = 0x8000;
+            colorsStored[0x7F] = 0x7FFF;
+
+            // Maintain a dictionary of lookup indices for all colors used.
+            var colorLookupRef = new Dictionary<ushort, byte>();
+            colorLookupRef[0x0000] = 0x7D;
+            colorLookupRef[0x8000] = 0x7E;
+            colorLookupRef[0x7FFF] = 0x7F;
+
+            byte colorStoragePos = 0;
+            uint posDataOut = 4;
+            uint posBitstreamOut = 0;
+            byte posBitstreamBit = 0;
+
+            ushort currentColor = 0;
+            int currentColorCount = 0;
+
+            void ReadColor(ushort color) {
+                if (currentColorCount == 0)
+                    currentColor = color;
+                else if (color != currentColor) {
+                    WriteColor();
+                    currentColor = color;
+                }
+                currentColorCount++;
+            }
+
+            void WriteColor() {
+                if (currentColorCount == 0)
+                    return;
+
+                // If the color to write is already in the stored value table, just write the index byte.
+                if (colorLookupRef.ContainsKey(currentColor))
+                    dataOut[posDataOut++] = colorLookupRef[currentColor];
+                // Otherwise, we write the entire color (16 bits) and store the color.
+                else {
+                    // Write the color.
+                    dataOut[posDataOut++] = (byte) ((currentColor & 0xFF00) >> 8);
+                    dataOut[posDataOut++] = (byte)  (currentColor & 0x00FF);
+
+                    // If the desired storage position of this color already has a value (which is 0x0000 by default
+                    // and can never have that value naturally), remove the old color from the lookup dictionary.
+                    if (colorsStored[colorStoragePos] != 0x0000)
+                        colorLookupRef.Remove(colorsStored[colorStoragePos]);
+
+                    // Store the color.
+                    colorLookupRef[currentColor] = colorStoragePos;
+                    colorsStored[colorStoragePos] = currentColor;
+
+                    // Increment the storage position, and loop around before the permanent colors at 0x7D, 0x7E, and 0x7F.
+                    colorStoragePos = (byte) ((colorStoragePos + 1) % 0x7D);
+                }
+
+                // Before we write to the bitstream, we need to know how many bits are required to store 'currentColorCount'.
+                var countBits = 0;
+                var countTmp = currentColorCount;
+                while (countTmp > 0) {
+                    countBits++;
+                    countTmp >>= 1;
+                }
+
+                // For each bit required to store the size, write a 1. Then write a 0.
+                // Starts at 1 because the top-most bit is assumed to exist, therefore not written.
+                for (int i = 1; i < countBits; i++)
+                    WriteBit(true);
+                WriteBit(false);
+
+                // Write 'currentColorCount' in highest-first bit order, skipping the highest bit because it is always 1.
+                for (int i = 1; i < countBits; i++)
+                    WriteBit((currentColorCount & (1 << (countBits - i - 1))) != 0);
+
+                // Reset the 'current' values to indicate that there are no colors to write.
+                currentColor = 0;
+                currentColorCount = 0;
+            }
+
+            void WriteBit(bool bitOn) {
+                // Append a single bit to the bitstream.
+                if (bitOn)
+                    bitstreamOut[posBitstreamOut] |= (byte) (1 << (7 - posBitstreamBit));
+                posBitstreamBit++;
+                if (posBitstreamBit == 8) {
+                    posBitstreamBit = 0;
+                    posBitstreamOut++;
+                }
+            }
+
+            // Read all the data, writing along the way when the color changes.
+            for (var posIn = 0; posIn < dataIn.Length; posIn++)
+                ReadColor(dataIn[posIn + offset]);
+
+            // Write the final color.
+            WriteColor();
+
+            // If any bits were written to the current position, move it forward so it now marks the end properly.
+            if (posBitstreamBit > 0)
+                posBitstreamOut++;
+
+            // Must write an even number of bytes.
+            if ((posDataOut + posBitstreamOut) % 2 == 1)
+                bitstreamOut[posBitstreamOut++] = 0xFF;
+
+            // The first 4 bytes are the position of the bitstream.
+            dataOut[0] = (byte) ((posDataOut & 0xFF000000) >> 24);
+            dataOut[1] = (byte) ((posDataOut & 0x00FF0000) >> 16);
+            dataOut[2] = (byte) ((posDataOut & 0x0000FF00) >>  8);
+            dataOut[3] = (byte)  (posDataOut & 0x000000FF);
+
+            // Returned 'dataOut' and 'bitstreamOut' combined.
+            return dataOut.Take((int) posDataOut).Concat(bitstreamOut.Take((int) posBitstreamOut)).ToArray();
+        }
     }
 }
