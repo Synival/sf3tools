@@ -1,4 +1,7 @@
-﻿using CommonLib.Arrays;
+﻿using System.Drawing;
+using System.Drawing.Imaging;
+using System.Runtime.InteropServices;
+using CommonLib.Arrays;
 using CommonLib.NamedValues;
 using SF3;
 using SF3.ByteData;
@@ -95,16 +98,6 @@ namespace CHR_Analyzer {
             s_animationsByHash[hash].Sprites.Add(new AnimationFileSprite(scenario, filename, spriteIndex, animation.ID, lastFrameWord));
         }
 
-        private static List<string> s_matchReports = [];
-
-        private static bool? CHR_MatchFunc(string filename, ICHR_File[] chrFiles, INameGetterContext ngc) {
-            var animationsWithMissingFrames = chrFiles.SelectMany(chr => chr.SpriteTable.SelectMany(x => x.AnimationTable.Where(y => y.FrameTexturesMissing > 0))).ToArray();
-            foreach (var x in animationsWithMissingFrames)
-                s_matchReports.Add($"{x.FrameTexturesMissing} missing frames | {x.SpriteName}, {x.Name}");
-
-            return s_matchReports.Count > 0;
-        }
-
         public static void Main(string[] args) {
             Console.WriteLine("Processing all CHR and CHP files...");
 
@@ -121,9 +114,6 @@ namespace CHR_Analyzer {
                 .ToDictionary(x => x, x => (INameGetterContext) new NameGetterContext(x));
 
             // Open each file.
-            var matchSet   = new List<string>();
-            var nomatchSet = new List<string>();
-
             foreach (var filesKv in allFiles) {
                 var scenario = filesKv.Key;
                 var nameGetter = nameGetterContexts[scenario];
@@ -145,28 +135,9 @@ namespace CHR_Analyzer {
                                 ? [(CHR_File) chrChpFile]
                                 : ((CHP_File) chrChpFile).CHR_EntriesByOffset.Values.ToArray();
 
-                            var match = CHR_MatchFunc(filename, chrFiles, nameGetterContexts[scenario]);
-
-                            // If the match is 'null', that means we're just skipping this file completely.
-                            if (match == null) {
-                                s_matchReports.Clear();
-                                continue;
-                            }
-
                             // List the file and any report we may have from CHR_MatchFunc().
                             var fileStr = GetFileString(scenario, file, chrChpFile);
-                            Console.WriteLine($"{fileStr} | {match}");
-
-                            foreach (var mr in s_matchReports)
-                                Console.WriteLine("    " + mr);
-                            s_matchReports.Clear();
-
-                            if (match == true)
-                                matchSet.Add(fileStr);
-                            else
-                                nomatchSet.Add(fileStr);
-
-                            ScanForErrorsAndReport(scenario, chrChpFile);
+                            Console.WriteLine($"{fileStr}");
 
                             // Build a table of all textures.
                             foreach (var sprite in chrFiles.SelectMany(x => x.SpriteTable).ToArray()) {
@@ -186,77 +157,106 @@ namespace CHR_Analyzer {
 
             Console.WriteLine("");
             Console.WriteLine("===================================================");
-            Console.WriteLine("| MATCH RESULTS                                   |");
+            Console.WriteLine("| WRITING METADATA                                |");
             Console.WriteLine("===================================================");
 
-            Console.WriteLine("");
-            var totalCount = matchSet.Count + nomatchSet.Count;
-            Console.WriteLine($"Match: {matchSet.Count}/{totalCount}");
-            foreach (var str in matchSet)
-                Console.WriteLine("  " + str);
+            Console.WriteLine();
+            Console.WriteLine("Writing new 'SpriteFramesByHash.xml'...");
+            _ = Directory.CreateDirectory(c_pathOut);
+            using (var file = File.OpenWrite(Path.Combine(c_pathOut, "SpriteFramesByHash.xml")))
+                using (var stream = new StreamWriter(file))
+                    CHR_Utils.WriteUniqueFramesByHashXML(stream);
 
-            Console.WriteLine($"NoMatch: {nomatchSet.Count}/{totalCount}");
-            foreach (var str in nomatchSet)
-                Console.WriteLine("  " + str);
+            Console.WriteLine("Writing new 'SpriteAnimationsByHash.json'...");
+            _ = Directory.CreateDirectory(c_pathOut);
+            using (var file = File.Open(Path.Combine(c_pathOut, "SpriteAnimationsByHash.json"), FileMode.Create))
+                using (var stream = new StreamWriter(file))
+                    CHR_Utils.WriteUniqueAnimationsByHashJSON(stream);
 
             Console.WriteLine("");
             Console.WriteLine("===================================================");
-            Console.WriteLine("| STATISTICS                                      |");
+            Console.WriteLine("| CREATING SPRITESHEETS                           |");
             Console.WriteLine("===================================================");
             Console.WriteLine("");
 
-            // Report any sprite frames with mixed sizes.
-            var allTexturesByName = s_framesByHash.Values
+            var spriteSheets = s_framesByHash.Values
+                .OrderBy(x => x.FrameInfo.SpriteName)
+                .ThenBy(x => x.FrameInfo.Width)
+                .ThenBy(x => x.FrameInfo.Height)
+                .ThenBy(x => x.FrameInfo.FrameName)
+                .ThenBy(x => x.FrameInfo.Direction)
+                .ThenBy(x => x.FrameInfo.TextureHash)
                 .GroupBy(x => $"{x.FrameInfo.SpriteName} ({x.FrameInfo.Width}x{x.FrameInfo.Height})")
                 .ToDictionary(x => x.Key, x => x.ToArray());
 
-            var texturesWithMultipleSizes = allTexturesByName
-                .Where(x => !x.Value.All(y => y.Texture.Width == x.Value[0].Texture.Width && y.Texture.Height == x.Value[0].Texture.Height))
-                .OrderBy(x => x.Key)
-                .ToDictionary(x => x.Key, x => x.Value);
+            _ = Directory.CreateDirectory(c_pathOut);
+            foreach (var spriteSheetKv in spriteSheets) {
+                var spriteName = spriteSheetKv.Key;
+                var frames = spriteSheetKv.Value;
 
-            Console.WriteLine();
-            Console.WriteLine("Sprites with multiple sizes in their frames:");
-            foreach (var textureKv in texturesWithMultipleSizes) {
-                var sizes = textureKv.Value
-                    .Select(x => new { x.Texture.Width, x.Texture.Height })
-                    .GroupBy(x => x.Width * 0x1000 + x.Height)
-                    .OrderByDescending(x => x.Count())
-                    .ToDictionary(x => x.First(), x => x.Count());
+                var filename = spriteName
+                    .Replace("?", "X")
+                    .Replace("-", "_")
+                    .Replace(":", "_")
+                    .Replace("/", "_") + ".BMP";
 
-                Console.WriteLine("  " + textureKv.Key + ": " + string.Join(", ", sizes.Select(x => $"{x.Key.Width}x{x.Key.Height}[x{x.Value}]")));
-                var first = sizes.First().Key;
+                var outputPath = Path.Combine(c_pathOut, filename);
+                Console.WriteLine("Writing: " + outputPath);
 
-                var texturesToFix = textureKv.Value
-                    .Where(x => x.Texture.Width != first.Width || x.Texture.Height != first.Height)
-                    .OrderBy(x => x.Texture.Width)
-                    .ThenBy(x => x.Texture.Height)
-                    .ThenBy(x => x.FrameInfo.TextureHash)
-                    .ToArray();
+                var frameGroups = frames
+                    .GroupBy(x => x.FrameInfo.FrameName)
+                    .ToDictionary(x => x.Key, x => x.ToArray());
 
-                foreach (var tex in texturesToFix)
-                    Console.WriteLine($"    {tex.FrameInfo.TextureHash} ({tex.Texture.Width}x{tex.Texture.Height})");
+                var frameWidthInPixels  = frames[0].Texture.Width;
+                var frameHeightInPixels = frames[0].Texture.Height;
+
+                var pixelsPerFrame = frameWidthInPixels * frameHeightInPixels;
+                var frameCount     = frames.Length;
+                var totalPixels    = pixelsPerFrame * frameCount;
+
+                var imageWidthInFrames = frameGroups.Max(x => x.Value.Length);
+                var imageHeightInFrames = frameGroups.Count;
+
+                var imageWidthInPixels = imageWidthInFrames * frameWidthInPixels;
+                var imageHeightInPixels = imageHeightInFrames * frameHeightInPixels;
+
+                var newData = new byte[imageWidthInPixels * imageHeightInPixels * 2];
+
+                int y = 0;
+                foreach (var frameGroup in frameGroups) {
+                    int x = (imageWidthInFrames - frameGroup.Value.Length) * frameWidthInPixels / 2;
+                    foreach (var frame in frameGroup.Value) {
+                        int pos = (y * imageWidthInPixels + x) * 2;
+                        var frameData = frame.Texture.BitmapDataARGB1555;
+
+                        int frameDataPos = 0;
+                        for (int iy = 0; iy < frameHeightInPixels; iy++) {
+                            int ipos = pos + (iy * imageWidthInPixels) * 2;
+                            for (int ix = 0; ix < frameWidthInPixels * 2; ix++)
+                                newData[ipos++] = frameData[frameDataPos++];
+                        }
+                        x += frameWidthInPixels;
+                    }
+                    y += frameHeightInPixels;
+                }
+
+#pragma warning disable CA1416 // Validate platform compatibility
+                using (var bitmap = new Bitmap(imageWidthInPixels, imageHeightInPixels, PixelFormat.Format16bppArgb1555)) {
+                    var bmpData = bitmap.LockBits(new Rectangle(0, 0, bitmap.Width, bitmap.Height), ImageLockMode.WriteOnly, bitmap.PixelFormat);
+                    Marshal.Copy(newData, 0, bmpData.Scan0, newData.Length);
+                    bitmap.UnlockBits(bmpData);
+                    try {
+                        bitmap.Save(outputPath);
+                    }
+                    catch { }
+                }
+#pragma warning restore CA1416 // Validate platform compatibility
             }
-
-            Console.WriteLine();
-            Console.WriteLine($"There are {s_animationsByHash.Count} unique animations.");
-            var unidentifiedAnimationCount = s_animationsByHash.Values.Where(x => x.AnimInfo.AnimationName == "").Count();
-            Console.WriteLine($"{unidentifiedAnimationCount} are unidentified.");
-            var avgUsagesPerAnimation = s_animationsByHash.Sum(x => x.Value.Sprites.Count) / (float) s_animationsByHash.Count;
-            Console.WriteLine($"Each animation is used {avgUsagesPerAnimation} times on average.");
+            Console.WriteLine("Image dumping complete.");
         }
 
         private static string GetFileString(ScenarioType inputScenario, string filename, ScenarioTableFile chrChpFile) {
             return inputScenario.ToString().PadLeft(11) + ": " + Path.GetFileName(filename).PadLeft(12);
-        }
-
-        private static void ScanForErrorsAndReport(ScenarioType inputScenario, ScenarioTableFile chrChpFile) {
-            var totalErrors = new List<string>();
-
-            // TODO: scan for errors
-
-            foreach (var error in totalErrors)
-                Console.WriteLine("    !!! " + error);
         }
     }
 }
