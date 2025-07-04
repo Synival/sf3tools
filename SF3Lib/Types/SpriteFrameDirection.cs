@@ -1,42 +1,30 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace SF3.Types {
+﻿namespace SF3.Types {
     public enum SpriteFrameDirection {
-        First  = 0,
-        Second = 1,
-        Third  = 2,
-        Fourth = 3,
-        Fifth  = 4,
+        Unset = 0,
 
-        None   = 99,
+        // 1-2 sprite directions
+        First  = 1,
+        Second = 2,
 
-        SSE_4,
-        ESE_4,
-        ENE_4,
-        NNE_4,
+        // Four directions (standard)
+        SSE = 11,
+        ESE = 13,
+        ENE = 15,
+        NNE = 17,
 
-        S_5,
-        SE_5,
-        E_5,
-        NE_5,
-        N_5,
+        // Only if 6 directions
+        S = 10,
+        N = 18,
 
-        SSE_6,
-        ESE_6,
-        ENE_6,
-        NNE_6,
-        S_6,
-        N_6,
+        // Only if 8 directions
+        NNW = 19,
+        WNW = 21,
+        WSW = 23,
+        SSW = 25,
 
-        SSE_8,
-        ESE_8,
-        ENE_8,
-        NNE_8,
-        NNW_8,
-        WNW_8,
-        WSW_8,
-        SSW_8,
+        // Only if 5 directions (N,SE,E,NE,N)
+        SE = 12,
+        E  = 14,
+        NE = 16
     }
 }

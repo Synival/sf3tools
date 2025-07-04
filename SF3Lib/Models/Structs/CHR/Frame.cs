@@ -21,13 +21,12 @@ namespace SF3.Models.Structs.CHR {
 
         private readonly int _textureOffsetAddr;
 
-        public Frame(IByteData data, int id, string name, int address, uint dataOffset, int width, int height, int spriteIndex, int spriteId, SpriteFrameDirection direction) : base(data, id, name, address, 0x04) {
+        public Frame(IByteData data, int id, string name, int address, uint dataOffset, int width, int height, int spriteIndex, int spriteId) : base(data, id, name, address, 0x04) {
             DataOffset = dataOffset;
             Width      = width;
             Height     = height;
             SpriteIndex = spriteIndex;
             SpriteID   = spriteId;
-            Direction  = direction;
 
             _textureOffsetAddr = Address + 0x00; // 4 bytes
 
@@ -40,13 +39,9 @@ namespace SF3.Models.Structs.CHR {
                 if (ErrorWhileDecompressing != null && s_brokenTybaltHashes.Contains(hash))
                     Texture = new TextureABGR1555(0, 0, 0, texData.To1DArrayTransposed().To2DArrayColumnMajor(48, 40));
 
-                FrameInfo = CHR_Utils.GetUniqueFrameInfoByHash(hash, Texture.Width, Texture.Height);
-
-                if (Direction != SpriteFrameDirection.None) {
-                    var ds = Direction.ToString();
-                    var dc = FrameInfo.DirectionCounts;
-                    dc[ds] = dc.ContainsKey(ds) ? dc[ds] + 1 : 1;
-                }
+                FrameInfo = CHR_Utils.GetUniqueFrameInfoByHash(hash);
+                FrameInfo.Width = width;
+                FrameInfo.Height = height;
             }
         }
 
@@ -58,9 +53,6 @@ namespace SF3.Models.Structs.CHR {
         [TableViewModelColumn(addressField: null, displayOrder: -0.3f, displayFormat: "X2", minWidth: 200)]
         [NameGetter(NamedValueType.Sprite)]
         public int SpriteID { get; }
-
-        [TableViewModelColumn(addressField: null, displayOrder: -0.25f)]
-        public SpriteFrameDirection Direction { get; }
 
         [TableViewModelColumn(displayOrder: -0.2f)]
         public int Width { get; }
@@ -75,16 +67,22 @@ namespace SF3.Models.Structs.CHR {
             set => Data.SetDouble(_textureOffsetAddr, (int) value);
         }
 
-        [TableViewModelColumn(displayOrder: 0.1f, displayFormat: "X4")]
+        [TableViewModelColumn(displayOrder: 0.1f, minWidth: 200)]
+        public string FrameName => FrameInfo.FrameName;
+
+        [TableViewModelColumn(displayOrder: 0.2f)]
+        public SpriteFrameDirection Direction => FrameInfo.Direction;
+
+        [TableViewModelColumn(displayOrder: 0.5f, displayFormat: "X4")]
         public uint TextureBitstreamOffset => TextureOffset + (uint) Data.GetDouble((int) (TextureOffset + DataOffset));
 
-        [TableViewModelColumn(displayOrder: 0.2f, displayFormat: "X4")]
+        [TableViewModelColumn(displayOrder: 0.6f, displayFormat: "X4")]
         public uint TextureEndOffset => TextureOffset + TextureCompressedSize;
 
-        [TableViewModelColumn(displayOrder: 0.3f, displayFormat: "X2")]
+        [TableViewModelColumn(displayOrder: 0.7f, displayFormat: "X2")]
         public uint TextureCompressedSize { get; private set; } = 0;
 
-        [TableViewModelColumn(displayOrder: 0.4f, displayFormat: "X2")]
+        [TableViewModelColumn(displayOrder: 0.8f, displayFormat: "X2")]
         public uint TextureDecompressedSize { get; private set; } = 0;
 
         public ITexture Texture { get; private set; }
@@ -128,12 +126,6 @@ namespace SF3.Models.Structs.CHR {
 
         [TableViewModelColumn(displayOrder: 2, minWidth: 175)]
         public string SpriteName => FrameInfo?.SpriteName;
-
-        [TableViewModelColumn(displayOrder: 3)]
-        public string AnimationName => FrameInfo?.AnimationName;
-
-        [TableViewModelColumn(displayOrder: 4)]
-        public string Directions => FrameInfo?.DirectionsString;
 
         [TableViewModelColumn(displayOrder: 5, minWidth: 200)]
         public string ErrorWhileDecompressing { get; private set; } = null;

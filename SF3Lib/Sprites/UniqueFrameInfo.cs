@@ -1,25 +1,28 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using SF3.Types;
 
 namespace SF3.Sprites {
     /// <summary>
     /// Information about a particular texture read from a sprite.
     /// </summary>
     public class UniqueFrameInfo {
-        public UniqueFrameInfo(string textureHash, string spriteName, int width, int height, string animationName) {
-            TextureHash   = textureHash;
-            SpriteName    = spriteName;
-            AnimationName = animationName;
-            Width         = width;
-            Height        = height;
+        public UniqueFrameInfo(string textureHash, string spriteName, int width, int height, string frameName, SpriteFrameDirection direction) {
+            TextureHash = textureHash;
+            SpriteName  = spriteName;
+            Width       = width;
+            Height      = height;
+            FrameName   = frameName;
+            Direction   = direction;
         }
 
-        public string TextureHash { get; }
-        public string SpriteName { get; set; }
-        public string AnimationName { get; set; }
-        public int Width { get; }
-        public int Height { get; }
-        public Dictionary<string, int> DirectionCounts { get; } = new Dictionary<string, int>();
-        public string DirectionsString => string.Join(", ", DirectionCounts.OrderByDescending(x => x.Value).Select(x => $"{x.Key} (x{x.Value})"));
+        public string TextureHash;
+        public string SpriteName;
+        public int Width;
+        public int Height;
+        public string FrameName;
+        public SpriteFrameDirection Direction;
+        public HashSet<SpriteFrameDirection> Directions = new HashSet<SpriteFrameDirection>();
+        public HashSet<string> AnimationNames = new HashSet<string>();
     }
 }

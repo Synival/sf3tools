@@ -46,26 +46,85 @@ namespace SF3.Models.Structs.CHR {
             AnimationInfo.Duration   = Duration;
             AnimationInfo.FrameTexturesMissing = FrameTexturesMissing;
 
+            SpriteFrameDirection FrameNumberToSpriteDir(int dirs, int num) {
+                switch (dirs) {
+                    case 4:
+                    case 6:
+                        switch (num) {
+                            case 0:  return SpriteFrameDirection.SSE;
+                            case 1:  return SpriteFrameDirection.ESE;
+                            case 2:  return SpriteFrameDirection.ENE;
+                            case 3:  return SpriteFrameDirection.NNE;
+                            case 4:  return SpriteFrameDirection.S;
+                            default: return SpriteFrameDirection.N;
+                        }
+
+                    case 8:
+                        switch (num) {
+                            case 0:  return SpriteFrameDirection.SSE;
+                            case 1:  return SpriteFrameDirection.ESE;
+                            case 2:  return SpriteFrameDirection.ENE;
+                            case 3:  return SpriteFrameDirection.NNE;
+                            case 4:  return SpriteFrameDirection.NNW;
+                            case 5:  return SpriteFrameDirection.WNW;
+                            case 6:  return SpriteFrameDirection.WSW;
+                            default: return SpriteFrameDirection.SSW;
+                        }
+
+                    case 5:
+                        switch (num) {
+                            case 0:  return SpriteFrameDirection.S;
+                            case 1:  return SpriteFrameDirection.SE;
+                            case 2:  return SpriteFrameDirection.E;
+                            case 3:  return SpriteFrameDirection.NE;
+                            default: return SpriteFrameDirection.N;
+                        }
+
+                    default:
+                        return SpriteFrameDirection.First + num;
+                }
+            }
+
+            int texCount = 0;
+            var aniNameLower = AnimationName.ToLower();
             string[] GetAnimationFrameHashes(AnimationFrame aniFrame) {
                 if (!aniFrame.HasTexture)
                     return null;
 
                 var frameID = aniFrame.FrameID;
-                var dirs = aniFrame.Directions;
+                var dirs = AnimationFrame.DirectionsToFrameCount(aniFrame.Directions);
                 var hashes = new string[dirs];
                 var maxFrames = FrameTable.Length;
+
+                var shouldBeDirs = dirs;
+                if (aniNameLower == "should be 4 directions")
+                    shouldBeDirs = 4;
+                else if (aniNameLower == "should be 1 direction")
+                    shouldBeDirs = 1;
+
                 for (int i = 0; i < dirs; i++) {
-                    var frameIndex = aniFrame.FrameID + i;
-                    hashes[i] = (frameIndex < maxFrames) ? FrameTable[frameIndex].TextureHash : null;
+                    var num = aniFrame.FrameID + i;
+                    if (num < maxFrames) {
+                        hashes[i] = FrameTable[num].TextureHash;
+
+                        if (i < shouldBeDirs) {
+                            FrameTable[num].FrameInfo.Directions.Add(FrameNumberToSpriteDir(dirs, i));
+                            FrameTable[num].FrameInfo.AnimationNames.Add($"{AnimationName}{texCount,2}");
+                        }
+                    }
                 }
                 return hashes;
             }
 
             AnimationInfo.Frames = AnimationFrames
-                .Select(x => new UniqueSpriteAnimationCollectionDef.Variant.Animation.Frame() {
-                    Command = x.FrameID,
-                    ParameterOrDuration = x.Duration,
-                    FrameHashes = GetAnimationFrameHashes(x)
+                .Select(x => {
+                    if (x.HasTexture)
+                        texCount++;
+                    return new UniqueSpriteAnimationCollectionDef.Variant.Animation.Frame() {
+                        Command = x.FrameID,
+                        ParameterOrDuration = x.Duration,
+                        FrameHashes = GetAnimationFrameHashes(x)
+                    };
                 }).ToArray();
 
             var uniqueFramesWithTextures = _framesWithTextures.Distinct().ToArray();

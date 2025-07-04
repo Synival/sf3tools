@@ -10,6 +10,7 @@ using SF3.Models.Files.CHP;
 using SF3.Models.Files.CHR;
 using SF3.Models.Structs.CHR;
 using SF3.NamedValues;
+using SF3.Sprites;
 using SF3.Types;
 using SF3.Utils;
 
@@ -98,7 +99,7 @@ namespace CHR_Analyzer {
         private static List<string> s_matchReports = [];
 
         private static bool? CHR_MatchFunc(string filename, ICHR_File[] chrFiles, INameGetterContext ngc) {
-            var animationsWithMissingFrames = chrFiles.SelectMany(chr => chr.SpriteTable.SelectMany(x => x.AnimationTable.Where(y => y.TotalFramesMissing > 0))).ToArray();
+            var animationsWithMissingFrames = chrFiles.SelectMany(chr => chr.SpriteTable.SelectMany(x => x.AnimationTable.Where(y => y.FrameTexturesMissing > 0))).ToArray();
             foreach (var x in animationsWithMissingFrames)
                 s_matchReports.Add($"{x.FrameTexturesMissing} missing frames | {x.SpriteName}, {x.Name}");
 
@@ -225,20 +226,18 @@ namespace CHR_Analyzer {
                     Console.WriteLine($"    {tex.FrameInfo.TextureHash} ({tex.Texture.Width}x{tex.Texture.Height})");
             }
 
-#if false
             Console.WriteLine();
             Console.WriteLine("Writing new 'SpriteFramesByHash.xml'...");
             _ = Directory.CreateDirectory(c_pathOut);
             using (var file = File.OpenWrite(Path.Combine(c_pathOut, "SpriteFramesByHash.xml")))
                 using (var stream = new StreamWriter(file))
-                    CHRUtils.WriteUniqueFramesByHashXML(stream);
+                    CHR_Utils.WriteUniqueFramesByHashXML(stream);
 
-            Console.WriteLine("Writing new 'SpriteAnimationsByHash.xml'...");
+            Console.WriteLine("Writing new 'SpriteAnimationsByHash.json'...");
             _ = Directory.CreateDirectory(c_pathOut);
-            using (var file = File.OpenWrite(Path.Combine(c_pathOut, "SpriteAnimationsByHash.xml")))
+            using (var file = File.Open(Path.Combine(c_pathOut, "SpriteAnimationsByHash.json"), FileMode.Create))
                 using (var stream = new StreamWriter(file))
-                    CHRUtils.WriteUniqueAnimationsByHashXML(stream);
-#endif
+                    CHR_Utils.WriteUniqueAnimationsByHashJSON(stream);
 
             var totalCount = matchSet.Count + nomatchSet.Count;
 
@@ -278,14 +277,18 @@ namespace CHR_Analyzer {
                 .OrderBy(x => x.FrameInfo.SpriteName)
                 .ThenBy(x => x.FrameInfo.Width)
                 .ThenBy(x => x.FrameInfo.Height)
-                .ThenBy(x => x.FrameInfo.AnimationName)
+                .ThenBy(x => x.FrameInfo.FrameName)
+                .ThenBy(x => x.FrameInfo.Direction)
                 .ThenBy(x => x.FrameInfo.TextureHash)
                 .GroupBy(x => $"{x.FrameInfo.SpriteName} ({x.FrameInfo.Width}x{x.FrameInfo.Height})")
                 .ToDictionary(x => x.Key, x => x.ToArray());
 
             _ = Directory.CreateDirectory(c_pathOut);
             foreach (var spriteSheetKv in spriteSheets) {
-                var filename = spriteSheetKv.Key
+                var spriteName = spriteSheetKv.Key;
+                var frames = spriteSheetKv.Value;
+
+                var filename = spriteName
                     .Replace("?", "X")
                     .Replace("-", "_")
                     .Replace(":", "_")
@@ -293,8 +296,6 @@ namespace CHR_Analyzer {
 
                 var outputPath = Path.Combine(c_pathOut, filename);
                 Console.WriteLine("Writing: " + outputPath);
-
-                var frames = spriteSheetKv.Value;
 
                 var frameWidthInPixels  = frames[0].FrameInfo.Width;
                 var frameHeightInPixels = frames[0].FrameInfo.Height;
