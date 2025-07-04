@@ -2321,9 +2321,9 @@
     <item hash="34f2321fe1ceb7f6df3004f51183b78a" sprite="Bresby" width="40" height="40" frame="Idle (Fast) 2, Idle 2" direction="ESE" />
     <item hash="c4e1138c2dd7a771a8002a715c823718" sprite="Bresby" width="40" height="40" frame="Idle (Fast) 2, Idle 2" direction="ENE" />
     <item hash="65616bbf66b1aab7c668009f0a123563" sprite="Bresby" width="40" height="40" frame="Idle (Fast) 2, Idle 2" direction="NNE" />
-    <item hash="39faccc83538f686ba26c22a641eb740" sprite="Bresby" width="40" height="40" frame="Nodding (1 Frame) 1, Nodding 2, Nodding 3" direction="Unset" />
-    <item hash="a6401dd9c8b153b02a4cd603adb8084a" sprite="Bresby" width="40" height="40" frame="Nodding (1 Frame) 1, Nodding 2, Nodding 3" direction="Unset" />
-    <item hash="df2fdcedcd6a4578e0ddb7545195ca46" sprite="Bresby" width="40" height="40" frame="Nodding (1 Frame) 1, Nodding 2, Nodding 3" direction="Unset" />
+    <item hash="39faccc83538f686ba26c22a641eb740" sprite="Bresby" width="40" height="40" frame="Nodding (1 Frame) 1, Nodding 2, Nodding 3" direction="SSE" />
+    <item hash="a6401dd9c8b153b02a4cd603adb8084a" sprite="Bresby" width="40" height="40" frame="Nodding (1 Frame) 1, Nodding 2, Nodding 3" direction="ESE" />
+    <item hash="df2fdcedcd6a4578e0ddb7545195ca46" sprite="Bresby" width="40" height="40" frame="Nodding (1 Frame) 1, Nodding 2, Nodding 3" direction="ENE" />
     <item hash="de5a7ece5df300571a634788fc9d2ac1" sprite="Bresby" width="40" height="40" frame="Nodding (1 Frame) 1, Nodding 2, Nodding 3" direction="NNE" />
     <item hash="e1d05fe1b536694c6f82552cf918e2f3" sprite="Bresby" width="40" height="40" frame="Nodding 2" direction="SSE" />
     <item hash="9e82be999ad9f7dcc8cc10b646f0d799" sprite="Bresby" width="40" height="40" frame="Nodding 2" direction="ESE" />
@@ -6994,9 +6994,9 @@
     <item hash="644c8384a33a42e59ad41a437f77fe3c" sprite="Flower Girl (With Flowers)" width="40" height="40" frame="Walking 6" direction="ESE" />
     <item hash="8fe3759e6f481800949c548dee1e67df" sprite="Flower Girl (With Flowers)" width="40" height="40" frame="Walking 6" direction="ENE" />
     <item hash="ceffc13e75113a9884b6d81a122f95ed" sprite="Flower Girl (With Flowers)" width="40" height="40" frame="Walking 6" direction="NNE" />
-    <item hash="0ccb888debb37dd5993341522856fc93" sprite="Foothill Village Chief/Sage" width="40" height="40" frame="Idle 1" direction="Unset" />
-    <item hash="25882d5a4312c45a2a2309a8d217c806" sprite="Foothill Village Chief/Sage" width="40" height="40" frame="Idle 1" direction="Unset" />
-    <item hash="97dffa46417a106f685209ef06561476" sprite="Foothill Village Chief/Sage" width="40" height="40" frame="Idle 1" direction="Unset" />
+    <item hash="0ccb888debb37dd5993341522856fc93" sprite="Foothill Village Chief/Sage" width="40" height="40" frame="Idle 1" direction="SSE" />
+    <item hash="25882d5a4312c45a2a2309a8d217c806" sprite="Foothill Village Chief/Sage" width="40" height="40" frame="Idle 1" direction="ESE" />
+    <item hash="97dffa46417a106f685209ef06561476" sprite="Foothill Village Chief/Sage" width="40" height="40" frame="Idle 1" direction="ENE" />
     <item hash="d1241f797304dd3bf44535f5fd2900d8" sprite="Foothill Village Chief/Sage" width="40" height="40" frame="Idle 1" direction="NNE" />
     <item hash="4d46545649c6e78e38e78d5f8c6bdb0c" sprite="Foothill Village Chief/Sage" width="40" height="40" frame="Idle 2" direction="SSE" />
     <item hash="3e9be1aae70ff3d54ff272ab778bfbe2" sprite="Foothill Village Chief/Sage" width="40" height="40" frame="Idle 2" direction="ESE" />
@@ -7153,7 +7153,7 @@
     <item hash="a1525b42a001b7018df430c87465127b" sprite="Frank (P2)" width="40" height="40" frame="Walking 6" direction="ENE" />
     <item hash="ff6fbbfcc5d2cd23438ee8c1a8eccb51" sprite="Frank (P2)" width="40" height="40" frame="Walking 6" direction="NNE" />
     <item hash="b52175f11117ad6f3dc57ab2bb1562c2" sprite="Frank (P2)" width="40" height="40" frame="Walking 6" direction="N" />
-    <item hash="cce8d8093fab19fa20aa5074a720b036" sprite="Franz" width="48" height="40" frame="Idle (Should be Nodding/ShakingHead) 1" direction="Unset" />
+    <item hash="cce8d8093fab19fa20aa5074a720b036" sprite="Franz" width="48" height="40" frame="Idle (Should be Nodding/ShakingHead) 1" direction="SSE" />
     <item hash="272c95163c7528ca7d2be9c2bd941d96" sprite="Franz" width="48" height="40" frame="Idle (Should be Nodding/ShakingHead) 1" direction="ESE" />
     <item hash="081f05d2f04fd2389687b99929f85d84" sprite="Franz" width="48" height="40" frame="Idle (Should be Nodding/ShakingHead) 1" direction="ENE" />
     <item hash="b1c99b8fe6e995b98f676235dc2e902b" sprite="Franz" width="48" height="40" frame="Idle (Should be Nodding/ShakingHead) 1" direction="NNE" />
@@ -7165,8 +7165,8 @@
     <item hash="81966108d2ec4798e4a393fd568f05c7" sprite="Franz" width="48" height="40" frame="Idle (Should be Nodding/ShakingHead) 3" direction="ESE" />
     <item hash="e091e2a3634173e0149249093bd3acbb" sprite="Franz" width="48" height="40" frame="Idle (Should be Nodding/ShakingHead) 3" direction="ENE" />
     <item hash="a8ee08c0f60b7f2ee8cce1f23bca9bea" sprite="Franz" width="48" height="40" frame="Idle (Should be Nodding/ShakingHead) 3" direction="NNE" />
-    <item hash="e80f8818b307219fd1c6e66514e10269" sprite="Franz" width="48" height="40" frame="Walking (Has Broken/Missing Frames) 1" direction="Unset" />
     <item hash="ac7d9462369c49b991510a542898bd5b" sprite="Franz" width="48" height="40" frame="Walking (Has Broken/Missing Frames) 1" direction="SSE" />
+    <item hash="e80f8818b307219fd1c6e66514e10269" sprite="Franz" width="48" height="40" frame="Walking (Has Broken/Missing Frames) 1" direction="ENE" />
     <item hash="262b43b5707088a5b731da828ac58117" sprite="Franz" width="48" height="40" frame="Walking (Has Broken/Missing Frames) 1" direction="NNE" />
     <item hash="c4ff232e690789881eb9833bd512fd41" sprite="Franz" width="48" height="40" frame="Walking (Has Broken/Missing Frames) 3" direction="SSE" />
     <item hash="91ba2eac171f9e73748a62d374ff0ef8" sprite="Franz" width="48" height="40" frame="Walking (Has Broken/Missing Frames) 3" direction="ESE" />
@@ -10320,10 +10320,10 @@
     <item hash="e90821af21992b1cc0f536665bfee572" sprite="Hell Succubus" width="48" height="40" frame="Idle 1" direction="ESE" />
     <item hash="5a9f40897e9af9cdeb4b8ee8c10c2c29" sprite="Hell Succubus" width="48" height="40" frame="Idle 1" direction="ENE" />
     <item hash="36a7cb096639131261b90e484d2ed4bb" sprite="Hell Succubus" width="48" height="40" frame="Idle 1" direction="NNE" />
-    <item hash="1f408201e5e77eb4651ee3114dfeb036" sprite="Hell Succubus" width="48" height="40" frame="Idle 2" direction="Unset" />
     <item hash="718e28b3dc8d180085e615f106ca1c44" sprite="Hell Succubus" width="48" height="40" frame="Idle 2" direction="SSE" />
     <item hash="037ec7d7cfb52e2429e96ed163ca7711" sprite="Hell Succubus" width="48" height="40" frame="Idle 2" direction="ESE" />
     <item hash="2c2e3537cec5d6d15fdd212cf8bcfd23" sprite="Hell Succubus" width="48" height="40" frame="Idle 2" direction="ENE" />
+    <item hash="1f408201e5e77eb4651ee3114dfeb036" sprite="Hell Succubus" width="48" height="40" frame="Idle 2" direction="NNE" />
     <item hash="275a14dd413c6a79c5bfc94d081ba609" sprite="Hell Succubus" width="48" height="40" frame="Idle 3" direction="SSE" />
     <item hash="6550b11047a02ad8f39b738421204413" sprite="Hell Succubus" width="48" height="40" frame="Idle 3" direction="ESE" />
     <item hash="066f55df27ea047dc64c51d5261bf603" sprite="Hell Succubus" width="48" height="40" frame="Idle 3" direction="ENE" />
@@ -16887,7 +16887,7 @@
     <item hash="3960975fc915bda13f1701ec48ca7fac" sprite="Murasame (P1)" width="40" height="40" frame="Walking 6" direction="ENE" />
     <item hash="a024cfbc9ec0a2203ea97f8d417e901f" sprite="Murasame (P1)" width="40" height="40" frame="Walking 6" direction="NNE" />
     <item hash="4c334dbadb8026c436033a82f6c46cf4" sprite="Murasame (P1)" width="40" height="40" frame="Walking 6" direction="N" />
-    <item hash="6738c467a0197cf04f04d8c2269d4a71" sprite="Murasame (P1) (Weaponless)" width="40" height="40" frame="Casting 1, ShakingHead 4, ThrowingBomb 1" direction="Unset" />
+    <item hash="6738c467a0197cf04f04d8c2269d4a71" sprite="Murasame (P1) (Weaponless)" width="40" height="40" frame="Casting 1, ShakingHead 4, ThrowingBomb 1" direction="SSE" />
     <item hash="39f11dcc8bc4f97c5617721f7462100e" sprite="Murasame (P1) (Weaponless)" width="40" height="40" frame="Casting 1, ThrowingBomb 1" direction="ESE" />
     <item hash="1a79a34d2913af1a7ecfe6e84e6f33cf" sprite="Murasame (P1) (Weaponless)" width="40" height="40" frame="Casting 1, ThrowingBomb 1" direction="ENE" />
     <item hash="68815cb6e52d91a9222466cc320570af" sprite="Murasame (P1) (Weaponless)" width="40" height="40" frame="Casting 1, ThrowingBomb 1" direction="NNE" />
@@ -19606,10 +19606,10 @@
     <item hash="8655b64cae9d9b94c5121629cb675dd2" sprite="Rainblood Rook (Capeless)" width="40" height="40" frame="Idle 3" direction="ENE" />
     <item hash="dd5efd737a1ac0f4b4ab29a424a1678f" sprite="Rainblood Rook (Capeless)" width="40" height="40" frame="Idle 3" direction="NNE" />
     <item hash="ac4a44362715242690c9f861dd1751d2" sprite="Rainblood Rook (Capeless)" width="40" height="40" frame="Walking (Should be 1 Direction) 1, Walking 1" direction="SSE" />
-    <item hash="5cc15c2a58cdf482eda478c1848fa517" sprite="Rainblood Rook (Capeless)" width="40" height="40" frame="Walking (Should be 1 Direction) 1, Walking 2" direction="Unset" />
-    <item hash="8e5327eea0846c314e813312b63720fa" sprite="Rainblood Rook (Capeless)" width="40" height="40" frame="Walking (Should be 1 Direction) 1, Walking 3" direction="Unset" />
-    <item hash="de6770eb8438ab9df0963e156c659554" sprite="Rainblood Rook (Capeless)" width="40" height="40" frame="Walking (Should be 1 Direction) 1, Walking 6" direction="Unset" />
-    <item hash="800a34e2119444460f0e0816214bf5c2" sprite="Rainblood Rook (Capeless)" width="40" height="40" frame="Walking (Should be 1 Direction) 2, Walking 4" direction="Unset" />
+    <item hash="5cc15c2a58cdf482eda478c1848fa517" sprite="Rainblood Rook (Capeless)" width="40" height="40" frame="Walking (Should be 1 Direction) 1, Walking 2" direction="SSE" />
+    <item hash="8e5327eea0846c314e813312b63720fa" sprite="Rainblood Rook (Capeless)" width="40" height="40" frame="Walking (Should be 1 Direction) 1, Walking 3" direction="SSE" />
+    <item hash="de6770eb8438ab9df0963e156c659554" sprite="Rainblood Rook (Capeless)" width="40" height="40" frame="Walking (Should be 1 Direction) 1, Walking 6" direction="SSE" />
+    <item hash="800a34e2119444460f0e0816214bf5c2" sprite="Rainblood Rook (Capeless)" width="40" height="40" frame="Walking (Should be 1 Direction) 2, Walking 4" direction="SSE" />
     <item hash="9a3a78683f9d6162cbe53f1b203ba3d6" sprite="Rainblood Rook (Capeless)" width="40" height="40" frame="Walking 1" direction="ESE" />
     <item hash="546cd64d2f083839cd785493448334df" sprite="Rainblood Rook (Capeless)" width="40" height="40" frame="Walking 1" direction="ENE" />
     <item hash="160d97d84d878adf2ab45c921b4c0da1" sprite="Rainblood Rook (Capeless)" width="40" height="40" frame="Walking 1" direction="NNE" />
@@ -19625,14 +19625,14 @@
     <item hash="4529a62dac41ff398b4956fd0b81549f" sprite="Rainblood Rook (Capeless)" width="40" height="40" frame="Walking 6" direction="ESE" />
     <item hash="dc1f3c649d597c13f093c0b46ea4ec09" sprite="Rainblood Rook (Capeless)" width="40" height="40" frame="Walking 6" direction="ENE" />
     <item hash="3f8db8e236b517cbd3a8346bbce23c73" sprite="Rainblood Rook (Capeless)" width="40" height="40" frame="Walking 6" direction="NNE" />
-    <item hash="2ffa492808f6abc84fb1b9e35b6c8f9c" sprite="Ratchet in Suit (P1)" width="48" height="40" frame="Idle 1" direction="Unset" />
-    <item hash="6b2163ecff205f2e818962890c34b980" sprite="Ratchet in Suit (P1)" width="48" height="40" frame="Idle 1" direction="Unset" />
-    <item hash="8b61115afa7b1a1c8e529c0eeb19f4b7" sprite="Ratchet in Suit (P1)" width="48" height="40" frame="Idle 1" direction="Unset" />
     <item hash="8b8d1f5f56f31bfe65dbb0f846903033" sprite="Ratchet in Suit (P1)" width="48" height="40" frame="Idle 1" direction="S" />
     <item hash="ec1ca5509afebee91c7a60e17260dde7" sprite="Ratchet in Suit (P1)" width="48" height="40" frame="Idle 1" direction="SSE" />
+    <item hash="8b61115afa7b1a1c8e529c0eeb19f4b7" sprite="Ratchet in Suit (P1)" width="48" height="40" frame="Idle 1" direction="ESE" />
+    <item hash="6b2163ecff205f2e818962890c34b980" sprite="Ratchet in Suit (P1)" width="48" height="40" frame="Idle 1" direction="ENE" />
+    <item hash="2ffa492808f6abc84fb1b9e35b6c8f9c" sprite="Ratchet in Suit (P1)" width="48" height="40" frame="Idle 1" direction="NNE" />
     <item hash="02eb32fb9f73a0db5e00c5a2b6f66037" sprite="Ratchet in Suit (P1)" width="48" height="40" frame="Idle 1" direction="N" />
-    <item hash="4296913ffaf28682b80ddcfd9b72d4e6" sprite="Ratchet in Suit (P1)" width="48" height="40" frame="Idle 2" direction="Unset" />
     <item hash="4b0f75a26c24c194bfb6015dc7d009c2" sprite="Ratchet in Suit (P1)" width="48" height="40" frame="Idle 2" direction="S" />
+    <item hash="4296913ffaf28682b80ddcfd9b72d4e6" sprite="Ratchet in Suit (P1)" width="48" height="40" frame="Idle 2" direction="SSE" />
     <item hash="9f6e3d7ab2d86adc8d0a516258bafb3b" sprite="Ratchet in Suit (P1)" width="48" height="40" frame="Idle 2" direction="ESE" />
     <item hash="23b367f1a198bdd465943955e3b67ebc" sprite="Ratchet in Suit (P1)" width="48" height="40" frame="Idle 2" direction="ENE" />
     <item hash="47973a8fc149e8d827594cefd951d8de" sprite="Ratchet in Suit (P1)" width="48" height="40" frame="Idle 2" direction="NNE" />
@@ -21737,7 +21737,6 @@
     <item hash="e2fe239854876005f45d458789b02395" sprite="Spiriel (P1)" width="40" height="40" frame="ShakingHead 4" direction="ESE" />
     <item hash="e084ed04e1e805be8cd5c8cf6768b99a" sprite="Spiriel (P1)" width="40" height="40" frame="ShakingHead 4" direction="ENE" />
     <item hash="20e570eefaf63f73f602a5916b6bb064" sprite="Spiriel (P1)" width="40" height="40" frame="ShakingHead 4" direction="NNE" />
-    <item hash="cc3b55cb76d633bb8b96b4b608248fbf" sprite="Spiriel (P1)" width="40" height="40" frame="Walking 1" direction="Unset" />
     <item hash="1d760f13108baa73f36daf80c879ce4f" sprite="Spiriel (P1)" width="40" height="40" frame="Walking 1" direction="S" />
     <item hash="72deee6c96d0ffd7e766ee4e6bf2070b" sprite="Spiriel (P1)" width="40" height="40" frame="Walking 1" direction="SSE" />
     <item hash="eba585bbec810e505e463d5a0ca48ac1" sprite="Spiriel (P1)" width="40" height="40" frame="Walking 1" direction="SSE" />
@@ -21745,6 +21744,7 @@
     <item hash="a29bc71c3b782f8f947b162cbabb4f86" sprite="Spiriel (P1)" width="40" height="40" frame="Walking 1" direction="ESE" />
     <item hash="97e5078e4747075e3630070c5c9149d8" sprite="Spiriel (P1)" width="40" height="40" frame="Walking 1" direction="ENE" />
     <item hash="86ed7fdd0206dade2d646dd15420f146" sprite="Spiriel (P1)" width="40" height="40" frame="Walking 1" direction="NNE" />
+    <item hash="cc3b55cb76d633bb8b96b4b608248fbf" sprite="Spiriel (P1)" width="40" height="40" frame="Walking 1" direction="NNE" />
     <item hash="88d728434c912cba7beac6a3c51fbc1c" sprite="Spiriel (P1)" width="40" height="40" frame="Walking 1" direction="N" />
     <item hash="ae3d550d96835d67c4c6ffb50f8f271f" sprite="Spiriel (P1)" width="40" height="40" frame="Walking 2" direction="S" />
     <item hash="0078cde0c52e9325910c17c3b7200a12" sprite="Spiriel (P1)" width="40" height="40" frame="Walking 2" direction="SSE" />
@@ -21752,16 +21752,15 @@
     <item hash="e9d972cd2ed8eee0591e93280949ab81" sprite="Spiriel (P1)" width="40" height="40" frame="Walking 2" direction="ENE" />
     <item hash="311d199ec5da6394b79d30bfae43c570" sprite="Spiriel (P1)" width="40" height="40" frame="Walking 2" direction="NNE" />
     <item hash="999d664a31162c21fc1910a1c4300a2a" sprite="Spiriel (P1)" width="40" height="40" frame="Walking 2" direction="N" />
-    <item hash="2daf94b905485dbb9cd193bd8b883f94" sprite="Spiriel (P1)" width="40" height="40" frame="Walking 3" direction="Unset" />
     <item hash="6daf4bef68064b10e2ae2d66e64e35ab" sprite="Spiriel (P1)" width="40" height="40" frame="Walking 3" direction="S" />
     <item hash="25d3ece9ce38d599330563fde95fcc40" sprite="Spiriel (P1)" width="40" height="40" frame="Walking 3" direction="SSE" />
     <item hash="9c8c71e75d5bfd2d080f07d9c48dc313" sprite="Spiriel (P1)" width="40" height="40" frame="Walking 3" direction="SSE" />
     <item hash="1dd9ca9e0e938f3fdcf78d82675baca2" sprite="Spiriel (P1)" width="40" height="40" frame="Walking 3" direction="ESE" />
     <item hash="65745c42c0b585755531e3e26c6eb7da" sprite="Spiriel (P1)" width="40" height="40" frame="Walking 3" direction="ESE" />
     <item hash="28fb5552f00bbe9c84e5714ebc97e913" sprite="Spiriel (P1)" width="40" height="40" frame="Walking 3" direction="ENE" />
+    <item hash="2daf94b905485dbb9cd193bd8b883f94" sprite="Spiriel (P1)" width="40" height="40" frame="Walking 3" direction="NNE" />
     <item hash="83b4ca70c36448281ea4254ecd53a643" sprite="Spiriel (P1)" width="40" height="40" frame="Walking 3" direction="NNE" />
     <item hash="9190d49c30080e2bc04165e81d145ae1" sprite="Spiriel (P1)" width="40" height="40" frame="Walking 3" direction="N" />
-    <item hash="c7087d9a1c099dffefb902a5e30fda19" sprite="Spiriel (P1)" width="40" height="40" frame="Walking 4" direction="Unset" />
     <item hash="3e7360eb753d6085a4df007d25a896dd" sprite="Spiriel (P1)" width="40" height="40" frame="Walking 4" direction="S" />
     <item hash="50eac778994d48f4136057f22ea9c2b9" sprite="Spiriel (P1)" width="40" height="40" frame="Walking 4" direction="SSE" />
     <item hash="79eba8a5944db977e25d69cb9b057143" sprite="Spiriel (P1)" width="40" height="40" frame="Walking 4" direction="SSE" />
@@ -21769,8 +21768,8 @@
     <item hash="9b24cdfe4fd181919cd38a2d23e18fdd" sprite="Spiriel (P1)" width="40" height="40" frame="Walking 4" direction="ESE" />
     <item hash="6de77e0d93e17d4347ae4487d7c6c72f" sprite="Spiriel (P1)" width="40" height="40" frame="Walking 4" direction="ENE" />
     <item hash="b5146cfeaa244b2ba354c0509eb21f76" sprite="Spiriel (P1)" width="40" height="40" frame="Walking 4" direction="NNE" />
+    <item hash="c7087d9a1c099dffefb902a5e30fda19" sprite="Spiriel (P1)" width="40" height="40" frame="Walking 4" direction="NNE" />
     <item hash="6d62e93d2b62d3c1333bcc94b9d723d1" sprite="Spiriel (P1)" width="40" height="40" frame="Walking 4" direction="N" />
-    <item hash="473e17fe7809490e5ec29ae789f08447" sprite="Spiriel (P1)" width="40" height="40" frame="Walking 6" direction="Unset" />
     <item hash="7f9a9e0e73879c0f846c2e30fc7f0171" sprite="Spiriel (P1)" width="40" height="40" frame="Walking 6" direction="S" />
     <item hash="2ebd3c96f7d8834e41e656c92e11664c" sprite="Spiriel (P1)" width="40" height="40" frame="Walking 6" direction="SSE" />
     <item hash="3e68ed79d2597e76fae7f32bf25ea11d" sprite="Spiriel (P1)" width="40" height="40" frame="Walking 6" direction="SSE" />
@@ -21778,6 +21777,7 @@
     <item hash="a2dae83f3b53bc52ea1e87cfef485ccb" sprite="Spiriel (P1)" width="40" height="40" frame="Walking 6" direction="ESE" />
     <item hash="ceb400f13437a60d0dd5e0de3aef7141" sprite="Spiriel (P1)" width="40" height="40" frame="Walking 6" direction="ENE" />
     <item hash="2fe1d0e1ceebff35033491f28ceb8de8" sprite="Spiriel (P1)" width="40" height="40" frame="Walking 6" direction="NNE" />
+    <item hash="473e17fe7809490e5ec29ae789f08447" sprite="Spiriel (P1)" width="40" height="40" frame="Walking 6" direction="NNE" />
     <item hash="9f774d5d87e23e1b1b3f663a951543fe" sprite="Spiriel (P1)" width="40" height="40" frame="Walking 6" direction="N" />
     <item hash="1cb890775411930f03be24e39c17ddba" sprite="Spiriel (P1)" width="48" height="40" frame="Idle 1" direction="SSE" />
     <item hash="2deaef4fbe11655c1d4348bc65d658ac" sprite="Spiriel (P1)" width="48" height="40" frame="Idle 1" direction="ESE" />
@@ -21828,13 +21828,13 @@
     <item hash="80b694d9c45f1eb1f9a11829357a4f93" sprite="Spiriel (P1)" width="48" height="40" frame="StillFrame1 (OnGround) 1, StillFrame2 (OnGround) 1" direction="ENE" />
     <item hash="a3f0f623a564bd7f1059f404b29725ba" sprite="Spiriel (P1)" width="48" height="40" frame="StillFrame1 (OnGround) 1, StillFrame2 (OnGround) 1" direction="NNE" />
     <item hash="55e761856fd0fc6611ca60520bc397bb" sprite="Spiriel (P1)" width="48" height="40" frame="Walking (Should be 1 Frame) 1, Walking 1" direction="SSE" />
-    <item hash="5aa8aa40d31a8d4d58fc5f17ea07026a" sprite="Spiriel (P1)" width="48" height="40" frame="Walking (Should be 1 Frame) 1, Walking 2" direction="Unset" />
-    <item hash="5a78c96a5ad97e7f436f95cad67a4801" sprite="Spiriel (P1)" width="48" height="40" frame="Walking (Should be 1 Frame) 1, Walking 3" direction="Unset" />
-    <item hash="50cd1c09e3ff063d7df654e3ac1e140f" sprite="Spiriel (P1)" width="48" height="40" frame="Walking (Should be 1 Frame) 1, Walking 6" direction="Unset" />
-    <item hash="8bacb2ef9e807371be02f95fee00812b" sprite="Spiriel (P1)" width="48" height="40" frame="Walking (Should be 1 Frame) 2, Walking 1" direction="Unset" />
-    <item hash="64251082fc55d09a6681b9471ad5d1c2" sprite="Spiriel (P1)" width="48" height="40" frame="Walking (Should be 1 Frame) 2, Walking 4" direction="Unset" />
-    <item hash="36fe02b4f7157edc9cfc8634efc52b48" sprite="Spiriel (P1)" width="48" height="40" frame="Walking (Should be 1 Frame) 3, Walking 6" direction="Unset" />
-    <item hash="a42d4cef4db9cbac98a1fc3124e3ece2" sprite="Spiriel (P1)" width="48" height="40" frame="Walking (Should be 1 Frame) 4, Walking 2" direction="Unset" />
+    <item hash="5aa8aa40d31a8d4d58fc5f17ea07026a" sprite="Spiriel (P1)" width="48" height="40" frame="Walking (Should be 1 Frame) 1, Walking 2" direction="SSE" />
+    <item hash="5a78c96a5ad97e7f436f95cad67a4801" sprite="Spiriel (P1)" width="48" height="40" frame="Walking (Should be 1 Frame) 1, Walking 3" direction="SSE" />
+    <item hash="50cd1c09e3ff063d7df654e3ac1e140f" sprite="Spiriel (P1)" width="48" height="40" frame="Walking (Should be 1 Frame) 1, Walking 6" direction="SSE" />
+    <item hash="8bacb2ef9e807371be02f95fee00812b" sprite="Spiriel (P1)" width="48" height="40" frame="Walking (Should be 1 Frame) 2, Walking 1" direction="ESE" />
+    <item hash="64251082fc55d09a6681b9471ad5d1c2" sprite="Spiriel (P1)" width="48" height="40" frame="Walking (Should be 1 Frame) 2, Walking 4" direction="SSE" />
+    <item hash="36fe02b4f7157edc9cfc8634efc52b48" sprite="Spiriel (P1)" width="48" height="40" frame="Walking (Should be 1 Frame) 3, Walking 6" direction="ESE" />
+    <item hash="a42d4cef4db9cbac98a1fc3124e3ece2" sprite="Spiriel (P1)" width="48" height="40" frame="Walking (Should be 1 Frame) 4, Walking 2" direction="ESE" />
     <item hash="b374b4c1172be3c26507351520bb432a" sprite="Spiriel (P1)" width="48" height="40" frame="Walking 1" direction="ENE" />
     <item hash="263c4984d791a6c7a505ae939614d26f" sprite="Spiriel (P1)" width="48" height="40" frame="Walking 1" direction="NNE" />
     <item hash="e0fb616ae29de89c63e4f84aba1ba4ce" sprite="Spiriel (P1)" width="48" height="40" frame="Walking 2" direction="ENE" />
