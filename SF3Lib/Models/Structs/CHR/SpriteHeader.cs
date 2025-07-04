@@ -48,9 +48,10 @@ namespace SF3.Models.Structs.CHR {
                    Directions > 0;
         }
 
+        [TableViewModelColumn(displayOrder: 0, displayFormat: "X2")]
         public uint DataOffset { get; }
 
-        [TableViewModelColumn(addressField: nameof(_spriteIdAddr), displayOrder: 0, displayFormat: "X2", minWidth: 200)]
+        [TableViewModelColumn(addressField: nameof(_spriteIdAddr), displayOrder: 0.1f, displayFormat: "X2", minWidth: 200)]
         [NameGetter(NamedValueType.Sprite)]
         [BulkCopy]
         public int SpriteID {
