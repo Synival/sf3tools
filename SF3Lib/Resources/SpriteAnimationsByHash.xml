@@ -306,13 +306,13 @@
     <item hash="90adff6995299dd64c81d04a30b86311" sprite="Blue" animation="StillFrame" width="40" height="40" directions="4" frames="2" duration="10" />
     <item hash="c058c50f5fa935d29da8092e417ec38b" sprite="Blue" animation="StillFrame" width="40" height="40" directions="4" frames="2" duration="10" />
     <item hash="e62dbe51bbc1b754fc5a4c053a67e3e3" sprite="Blue" animation="Walking" width="40" height="40" directions="4" frames="7" duration="30" />
-    <item hash="fea4c26d3c2d093b133cb76a0a2c6ce2" sprite="Blue Dragon" animation="Flying" width="48" height="32" directions="4" frames="9" duration="26" />
-    <item hash="587a9d9231cc575edaf56456185494a1" sprite="Blue Dragon" animation="Flying (Slower than Idle)" width="48" height="32" directions="4" frames="9" duration="40" />
-    <item hash="bb691bcedb2ed29804836a0795b6efeb" sprite="Blue Dragon" animation="Idle" width="48" height="32" directions="4" frames="9" duration="21" />
-    <item hash="c8085a137b7f2f5c53659d39c9e2a70a" sprite="Blue Dragon" animation="Idle (Medium Speed)" width="48" height="32" directions="4" frames="5" duration="20" />
-    <item hash="20f5209027514645ad5ed89b139f8709" sprite="Blue Dragon" animation="Idle (Very Fast)" width="48" height="32" directions="4" frames="9" duration="16" />
-    <item hash="68779dc5717ed6395e966cafe1a23e91" sprite="Blue Dragon" animation="StillFrame" width="48" height="32" directions="4" frames="2" duration="10" />
+    <item hash="fea4c26d3c2d093b133cb76a0a2c6ce2" sprite="Blue Dragon" animation="Flying (Slow)" width="48" height="32" directions="4" frames="9" duration="26" />
+    <item hash="bb691bcedb2ed29804836a0795b6efeb" sprite="Blue Dragon" animation="Flying (Very Fast)" width="48" height="32" directions="4" frames="9" duration="21" />
     <item hash="dcf646d5de5afffd8640224364ce4e3d" sprite="Blue Dragon" animation="StillFrame" width="48" height="32" directions="4" frames="2" duration="10" />
+    <item hash="587a9d9231cc575edaf56456185494a1" sprite="Blue Dragon (SC3)" animation="Flying (Slow)" width="48" height="32" directions="4" frames="9" duration="40" />
+    <item hash="20f5209027514645ad5ed89b139f8709" sprite="Blue Dragon (SC3)" animation="Flying (Very Fast)" width="48" height="32" directions="4" frames="9" duration="16" />
+    <item hash="c8085a137b7f2f5c53659d39c9e2a70a" sprite="Blue Dragon (SC3)" animation="Flying (Medium)" width="48" height="32" directions="4" frames="5" duration="20" />
+    <item hash="68779dc5717ed6395e966cafe1a23e91" sprite="Blue Dragon (SC3)" animation="StillFrame" width="48" height="32" directions="4" frames="2" duration="10" />
     <item hash="69da4d1aff059b999111b5fd8785909b" sprite="Bomb" animation="StillFrame" width="16" height="16" directions="1" frames="2" duration="1" />
     <item hash="d512efc545544626ac626dca8d251f9d" sprite="Bow Knight" animation="Idle" width="48" height="40" directions="4" frames="5" duration="20" />
     <item hash="7d8e3817a93dea34528f0533c79ee5ec" sprite="Bow Knight" animation="Idle" width="48" height="40" directions="4" frames="5" duration="44" />

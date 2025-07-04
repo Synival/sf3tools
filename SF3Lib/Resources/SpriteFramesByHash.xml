@@ -1831,46 +1831,46 @@
     <item hash="ede361f700ff5a064c2ea38097463f91" sprite="Blue" width="40" height="40" frame="Walking 6" direction="ESE" />
     <item hash="7ec584fc7893f9f4462ca8d72937b32c" sprite="Blue" width="40" height="40" frame="Walking 6" direction="ENE" />
     <item hash="62d844d53e24fa12782b0cc9e600e0b8" sprite="Blue" width="40" height="40" frame="Walking 6" direction="NNE" />
-    <item hash="0e15ddd0ed959e9e167368bd37ec50f4" sprite="Blue Dragon" width="48" height="32" frame="Flying (Slower than Idle) 1, Idle (Very Fast) 1" direction="SSE" />
-    <item hash="a91c37f3fadc5df19442e5e673a5af40" sprite="Blue Dragon" width="48" height="32" frame="Flying (Slower than Idle) 1, Idle (Very Fast) 1" direction="ESE" />
-    <item hash="348baa32f83d9ada310683483080272d" sprite="Blue Dragon" width="48" height="32" frame="Flying (Slower than Idle) 1, Idle (Very Fast) 1" direction="ENE" />
-    <item hash="8dd43db144ffc6baaa2ac08838e181c0" sprite="Blue Dragon" width="48" height="32" frame="Flying (Slower than Idle) 1, Idle (Very Fast) 1" direction="NNE" />
-    <item hash="147ee3cad2b8189fccd510da04f056c4" sprite="Blue Dragon" width="48" height="32" frame="Flying (Slower than Idle) 2, Flying (Slower than Idle) 8, Idle (Medium Speed) 1, Idle (Very Fast) 2, Idle (Very Fast) 8" direction="SSE" />
-    <item hash="a8d782bcf95da4502d066363f4e92ff0" sprite="Blue Dragon" width="48" height="32" frame="Flying (Slower than Idle) 2, Flying (Slower than Idle) 8, Idle (Medium Speed) 1, Idle (Very Fast) 2, Idle (Very Fast) 8" direction="ESE" />
-    <item hash="4b61462ab44ca241eb70925215ca9816" sprite="Blue Dragon" width="48" height="32" frame="Flying (Slower than Idle) 2, Flying (Slower than Idle) 8, Idle (Medium Speed) 1, Idle (Very Fast) 2, Idle (Very Fast) 8" direction="ENE" />
-    <item hash="b5cac68c4bb3fdd6d65da9e1ad1ee588" sprite="Blue Dragon" width="48" height="32" frame="Flying (Slower than Idle) 2, Flying (Slower than Idle) 8, Idle (Medium Speed) 1, Idle (Very Fast) 2, Idle (Very Fast) 8" direction="NNE" />
-    <item hash="ec9ea28a1b6f7e41ba28c5bfa78755c8" sprite="Blue Dragon" width="48" height="32" frame="Flying (Slower than Idle) 3, Flying (Slower than Idle) 7, Idle (Medium Speed) 2, Idle (Medium Speed) 4, Idle (Very Fast) 3, Idle (Very Fast) 7, StillFrame 1" direction="SSE" />
-    <item hash="b28039a3880fb4729da68f8c1c2827d6" sprite="Blue Dragon" width="48" height="32" frame="Flying (Slower than Idle) 3, Flying (Slower than Idle) 7, Idle (Medium Speed) 2, Idle (Medium Speed) 4, Idle (Very Fast) 3, Idle (Very Fast) 7, StillFrame 1" direction="ESE" />
-    <item hash="4f3b1ac4b0f99d29305eedcf07b29ed3" sprite="Blue Dragon" width="48" height="32" frame="Flying (Slower than Idle) 3, Flying (Slower than Idle) 7, Idle (Medium Speed) 2, Idle (Medium Speed) 4, Idle (Very Fast) 3, Idle (Very Fast) 7, StillFrame 1" direction="ENE" />
-    <item hash="04630de4f97add5f61f4a6a033d5ee45" sprite="Blue Dragon" width="48" height="32" frame="Flying (Slower than Idle) 3, Flying (Slower than Idle) 7, Idle (Medium Speed) 2, Idle (Medium Speed) 4, Idle (Very Fast) 3, Idle (Very Fast) 7, StillFrame 1" direction="NNE" />
-    <item hash="62f24f862fa5ba4f112b5b93893878c4" sprite="Blue Dragon" width="48" height="32" frame="Flying (Slower than Idle) 4, Flying (Slower than Idle) 6, Idle (Medium Speed) 3, Idle (Very Fast) 4, Idle (Very Fast) 6" direction="SSE" />
-    <item hash="efc3063adbd2650fb8d5be71f527e10a" sprite="Blue Dragon" width="48" height="32" frame="Flying (Slower than Idle) 4, Flying (Slower than Idle) 6, Idle (Medium Speed) 3, Idle (Very Fast) 4, Idle (Very Fast) 6" direction="ESE" />
-    <item hash="2a20662a1c9980964608ce91a02770fb" sprite="Blue Dragon" width="48" height="32" frame="Flying (Slower than Idle) 4, Flying (Slower than Idle) 6, Idle (Medium Speed) 3, Idle (Very Fast) 4, Idle (Very Fast) 6" direction="ENE" />
-    <item hash="ab55ab2522b64d5fa7990cab239502fd" sprite="Blue Dragon" width="48" height="32" frame="Flying (Slower than Idle) 4, Flying (Slower than Idle) 6, Idle (Medium Speed) 3, Idle (Very Fast) 4, Idle (Very Fast) 6" direction="NNE" />
-    <item hash="15b7a64045943d59e01cec50a881d5e8" sprite="Blue Dragon" width="48" height="32" frame="Flying (Slower than Idle) 5, Idle (Very Fast) 5" direction="SSE" />
-    <item hash="4307eb78913abac7e729e4baaa97227a" sprite="Blue Dragon" width="48" height="32" frame="Flying (Slower than Idle) 5, Idle (Very Fast) 5" direction="ESE" />
-    <item hash="0ebd88b8f925b45b0e0cf6537f5793d1" sprite="Blue Dragon" width="48" height="32" frame="Flying (Slower than Idle) 5, Idle (Very Fast) 5" direction="ENE" />
-    <item hash="1b8412eb1514a67f0536f67b27be9734" sprite="Blue Dragon" width="48" height="32" frame="Flying (Slower than Idle) 5, Idle (Very Fast) 5" direction="NNE" />
-    <item hash="c686bc5a3b3d966083118d9383efc871" sprite="Blue Dragon" width="48" height="32" frame="Flying 1, Idle 1" direction="SSE" />
-    <item hash="62d3a0dee0c85d3b6b01fb26a1eba784" sprite="Blue Dragon" width="48" height="32" frame="Flying 1, Idle 1" direction="ESE" />
-    <item hash="167ade6402bc5c941262d0f2c96afca6" sprite="Blue Dragon" width="48" height="32" frame="Flying 1, Idle 1" direction="ENE" />
-    <item hash="b4d76522995b126ed949f13b1d5819a5" sprite="Blue Dragon" width="48" height="32" frame="Flying 1, Idle 1" direction="NNE" />
-    <item hash="2a5492f7a1ed948bb40aeaad796b8edf" sprite="Blue Dragon" width="48" height="32" frame="Flying 2, Flying 8, Idle 2, Idle 8" direction="SSE" />
-    <item hash="126904cd4d8775ae30df7b39481f5e9e" sprite="Blue Dragon" width="48" height="32" frame="Flying 2, Flying 8, Idle 2, Idle 8" direction="ESE" />
-    <item hash="d4995ff5501e673f30d93695bc761759" sprite="Blue Dragon" width="48" height="32" frame="Flying 2, Flying 8, Idle 2, Idle 8" direction="ENE" />
-    <item hash="716a5882239863587f307c3eae78236d" sprite="Blue Dragon" width="48" height="32" frame="Flying 2, Flying 8, Idle 2, Idle 8" direction="NNE" />
-    <item hash="21979e5f58bc1cc379eedd7fd1f200ef" sprite="Blue Dragon" width="48" height="32" frame="Flying 3, Flying 7, Idle 3, Idle 7, StillFrame 1" direction="SSE" />
-    <item hash="a1ec575abee9b7aa456e0afa30978d9a" sprite="Blue Dragon" width="48" height="32" frame="Flying 3, Flying 7, Idle 3, Idle 7, StillFrame 1" direction="ESE" />
-    <item hash="12bbeb6d8a46be1e9caabef73b72c468" sprite="Blue Dragon" width="48" height="32" frame="Flying 3, Flying 7, Idle 3, Idle 7, StillFrame 1" direction="ENE" />
-    <item hash="579e8bae38318b0d332fb933eaad802b" sprite="Blue Dragon" width="48" height="32" frame="Flying 3, Flying 7, Idle 3, Idle 7, StillFrame 1" direction="NNE" />
-    <item hash="bb81fad6a5a933280dbfe0b45f02e84d" sprite="Blue Dragon" width="48" height="32" frame="Flying 4, Flying 6, Idle 4, Idle 6" direction="SSE" />
-    <item hash="a486c5e1502b293776ccdc34ece9a2e9" sprite="Blue Dragon" width="48" height="32" frame="Flying 4, Flying 6, Idle 4, Idle 6" direction="ESE" />
-    <item hash="3fd3533255230b344514b0a928f11064" sprite="Blue Dragon" width="48" height="32" frame="Flying 4, Flying 6, Idle 4, Idle 6" direction="ENE" />
-    <item hash="29239625bfe98953f686d17641439a29" sprite="Blue Dragon" width="48" height="32" frame="Flying 4, Flying 6, Idle 4, Idle 6" direction="NNE" />
-    <item hash="a2ce687a29deee293e927b3fca06d52f" sprite="Blue Dragon" width="48" height="32" frame="Flying 5, Idle 5" direction="SSE" />
-    <item hash="c506eb90ff2c17c32818d03405d4fb16" sprite="Blue Dragon" width="48" height="32" frame="Flying 5, Idle 5" direction="ESE" />
-    <item hash="bfc98b324b9824eb3ba5f52886693499" sprite="Blue Dragon" width="48" height="32" frame="Flying 5, Idle 5" direction="ENE" />
-    <item hash="b6964b62cda1a8320a791b8ffa7644d1" sprite="Blue Dragon" width="48" height="32" frame="Flying 5, Idle 5" direction="NNE" />
+    <item hash="c686bc5a3b3d966083118d9383efc871" sprite="Blue Dragon" width="48" height="32" frame="Flying 1" direction="SSE" />
+    <item hash="62d3a0dee0c85d3b6b01fb26a1eba784" sprite="Blue Dragon" width="48" height="32" frame="Flying 1" direction="ESE" />
+    <item hash="167ade6402bc5c941262d0f2c96afca6" sprite="Blue Dragon" width="48" height="32" frame="Flying 1" direction="ENE" />
+    <item hash="b4d76522995b126ed949f13b1d5819a5" sprite="Blue Dragon" width="48" height="32" frame="Flying 1" direction="NNE" />
+    <item hash="2a5492f7a1ed948bb40aeaad796b8edf" sprite="Blue Dragon" width="48" height="32" frame="Flying 2" direction="SSE" />
+    <item hash="126904cd4d8775ae30df7b39481f5e9e" sprite="Blue Dragon" width="48" height="32" frame="Flying 2" direction="ESE" />
+    <item hash="d4995ff5501e673f30d93695bc761759" sprite="Blue Dragon" width="48" height="32" frame="Flying 2" direction="ENE" />
+    <item hash="716a5882239863587f307c3eae78236d" sprite="Blue Dragon" width="48" height="32" frame="Flying 2" direction="NNE" />
+    <item hash="21979e5f58bc1cc379eedd7fd1f200ef" sprite="Blue Dragon" width="48" height="32" frame="Flying 3" direction="SSE" />
+    <item hash="a1ec575abee9b7aa456e0afa30978d9a" sprite="Blue Dragon" width="48" height="32" frame="Flying 3" direction="ESE" />
+    <item hash="12bbeb6d8a46be1e9caabef73b72c468" sprite="Blue Dragon" width="48" height="32" frame="Flying 3" direction="ENE" />
+    <item hash="579e8bae38318b0d332fb933eaad802b" sprite="Blue Dragon" width="48" height="32" frame="Flying 3" direction="NNE" />
+    <item hash="bb81fad6a5a933280dbfe0b45f02e84d" sprite="Blue Dragon" width="48" height="32" frame="Flying 4" direction="SSE" />
+    <item hash="a486c5e1502b293776ccdc34ece9a2e9" sprite="Blue Dragon" width="48" height="32" frame="Flying 4" direction="ESE" />
+    <item hash="3fd3533255230b344514b0a928f11064" sprite="Blue Dragon" width="48" height="32" frame="Flying 4" direction="ENE" />
+    <item hash="29239625bfe98953f686d17641439a29" sprite="Blue Dragon" width="48" height="32" frame="Flying 4" direction="NNE" />
+    <item hash="a2ce687a29deee293e927b3fca06d52f" sprite="Blue Dragon" width="48" height="32" frame="Flying 5" direction="SSE" />
+    <item hash="c506eb90ff2c17c32818d03405d4fb16" sprite="Blue Dragon" width="48" height="32" frame="Flying 5" direction="ESE" />
+    <item hash="bfc98b324b9824eb3ba5f52886693499" sprite="Blue Dragon" width="48" height="32" frame="Flying 5" direction="ENE" />
+    <item hash="b6964b62cda1a8320a791b8ffa7644d1" sprite="Blue Dragon" width="48" height="32" frame="Flying 5" direction="NNE" />
+    <item hash="0e15ddd0ed959e9e167368bd37ec50f4" sprite="Blue Dragon (SC3)" width="48" height="32" frame="Flying 1" direction="SSE" />
+    <item hash="a91c37f3fadc5df19442e5e673a5af40" sprite="Blue Dragon (SC3)" width="48" height="32" frame="Flying 1" direction="ESE" />
+    <item hash="348baa32f83d9ada310683483080272d" sprite="Blue Dragon (SC3)" width="48" height="32" frame="Flying 1" direction="ENE" />
+    <item hash="8dd43db144ffc6baaa2ac08838e181c0" sprite="Blue Dragon (SC3)" width="48" height="32" frame="Flying 1" direction="NNE" />
+    <item hash="147ee3cad2b8189fccd510da04f056c4" sprite="Blue Dragon (SC3)" width="48" height="32" frame="Flying 2" direction="SSE" />
+    <item hash="a8d782bcf95da4502d066363f4e92ff0" sprite="Blue Dragon (SC3)" width="48" height="32" frame="Flying 2" direction="ESE" />
+    <item hash="4b61462ab44ca241eb70925215ca9816" sprite="Blue Dragon (SC3)" width="48" height="32" frame="Flying 2" direction="ENE" />
+    <item hash="b5cac68c4bb3fdd6d65da9e1ad1ee588" sprite="Blue Dragon (SC3)" width="48" height="32" frame="Flying 2" direction="NNE" />
+    <item hash="ec9ea28a1b6f7e41ba28c5bfa78755c8" sprite="Blue Dragon (SC3)" width="48" height="32" frame="Flying 3" direction="SSE" />
+    <item hash="b28039a3880fb4729da68f8c1c2827d6" sprite="Blue Dragon (SC3)" width="48" height="32" frame="Flying 3" direction="ESE" />
+    <item hash="4f3b1ac4b0f99d29305eedcf07b29ed3" sprite="Blue Dragon (SC3)" width="48" height="32" frame="Flying 3" direction="ENE" />
+    <item hash="04630de4f97add5f61f4a6a033d5ee45" sprite="Blue Dragon (SC3)" width="48" height="32" frame="Flying 3" direction="NNE" />
+    <item hash="62f24f862fa5ba4f112b5b93893878c4" sprite="Blue Dragon (SC3)" width="48" height="32" frame="Flying 4" direction="SSE" />
+    <item hash="efc3063adbd2650fb8d5be71f527e10a" sprite="Blue Dragon (SC3)" width="48" height="32" frame="Flying 4" direction="ESE" />
+    <item hash="2a20662a1c9980964608ce91a02770fb" sprite="Blue Dragon (SC3)" width="48" height="32" frame="Flying 4" direction="ENE" />
+    <item hash="ab55ab2522b64d5fa7990cab239502fd" sprite="Blue Dragon (SC3)" width="48" height="32" frame="Flying 4" direction="NNE" />
+    <item hash="15b7a64045943d59e01cec50a881d5e8" sprite="Blue Dragon (SC3)" width="48" height="32" frame="Flying 5" direction="SSE" />
+    <item hash="4307eb78913abac7e729e4baaa97227a" sprite="Blue Dragon (SC3)" width="48" height="32" frame="Flying 5" direction="ESE" />
+    <item hash="0ebd88b8f925b45b0e0cf6537f5793d1" sprite="Blue Dragon (SC3)" width="48" height="32" frame="Flying 5" direction="ENE" />
+    <item hash="1b8412eb1514a67f0536f67b27be9734" sprite="Blue Dragon (SC3)" width="48" height="32" frame="Flying 5" direction="NNE" />
     <item hash="48029a08b05f56f66a237b23bfd947da" sprite="Bomb" width="16" height="16" frame="StillFrame 1" direction="First" />
     <item hash="103e11df2c3ccf2b8d8ec7b91cc721aa" sprite="Bow Knight" width="48" height="40" frame="Idle (OffsetNeedsWork) 1, Idle 1, StillFrame 1, Walking 2, Walking 5" direction="SSE" />
     <item hash="cc265a8490769ebcc996d9444a2b4976" sprite="Bow Knight" width="48" height="40" frame="Idle (OffsetNeedsWork) 1, Idle 1, StillFrame 1, Walking 2, Walking 5" direction="ESE" />
