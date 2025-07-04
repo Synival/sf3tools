@@ -117,35 +117,32 @@ namespace SF3.Utils {
 
         public static void UpdateFrameNamesAndDirectionsBasedOnAnimations() {
             foreach (var fi in s_uniqueFramesByHash.Values) {
-                if (fi.AnimationNames.Count == 0) {
-                    fi.Direction = SpriteFrameDirection.Unset;
-                    fi.FrameName = "Unused";
-                }
-                else {
-                    var dirs = new HashSet<SpriteFrameDirection>(fi.Directions.Where(x => x != SpriteFrameDirection.Unset));
-                    var standardDirs = dirs.Where(x =>
-                        x == SpriteFrameDirection.SSE ||
-                        x == SpriteFrameDirection.ESE ||
-                        x == SpriteFrameDirection.ENE ||
-                        x == SpriteFrameDirection.NNE
-                    ).ToArray();
-                    if (standardDirs.Length == 1 && dirs.Count != 1)
-                        dirs = new HashSet<SpriteFrameDirection>() { standardDirs[0] };
+                if (fi.AnimationNames.Count == 0)
+                    continue;
 
-                    fi.Direction = dirs.Count == 1 ? dirs.First() : SpriteFrameDirection.Unset;
+                var dirs = new HashSet<SpriteFrameDirection>(fi.Directions.Where(x => x != SpriteFrameDirection.Unset));
+                var standardDirs = dirs.Where(x =>
+                    x == SpriteFrameDirection.SSE ||
+                    x == SpriteFrameDirection.ESE ||
+                    x == SpriteFrameDirection.ENE ||
+                    x == SpriteFrameDirection.NNE
+                ).ToArray();
+                if (standardDirs.Length == 1 && dirs.Count != 1)
+                    dirs = new HashSet<SpriteFrameDirection>() { standardDirs[0] };
 
-                    var aniNames = fi.AnimationNames;
-                    if (aniNames.Any(x => !x.ToLower().StartsWith("stillframe")))
-                        aniNames = new HashSet<string>(aniNames.Where(x => !x.ToLower().StartsWith("stillframe")));
-                    if (aniNames.Any(x => x.ToLower().StartsWith("idle")))
-                        aniNames = new HashSet<string>(aniNames.Where(x => x.ToLower().StartsWith("idle")));
-                    if (aniNames.Any(x => x.ToLower().StartsWith("walking")))
-                        aniNames = new HashSet<string>(aniNames.Where(x => x.ToLower().StartsWith("walking")));
-                    if (aniNames.Any(x => x.ToLower().StartsWith("flying")))
-                        aniNames = new HashSet<string>(aniNames.Where(x => x.ToLower().StartsWith("flying")));
+                fi.Direction = dirs.Count == 1 ? dirs.First() : SpriteFrameDirection.Unset;
 
-                    fi.FrameName = string.Join(", ", aniNames.OrderBy(x => x));
-                }
+                var aniNames = fi.AnimationNames;
+                if (aniNames.Any(x => !x.ToLower().StartsWith("stillframe")))
+                    aniNames = new HashSet<string>(aniNames.Where(x => !x.ToLower().StartsWith("stillframe")));
+                if (aniNames.Any(x => x.ToLower().StartsWith("idle")))
+                    aniNames = new HashSet<string>(aniNames.Where(x => x.ToLower().StartsWith("idle")));
+                if (aniNames.Any(x => x.ToLower().StartsWith("walking")))
+                    aniNames = new HashSet<string>(aniNames.Where(x => x.ToLower().StartsWith("walking")));
+                if (aniNames.Any(x => x.ToLower().StartsWith("flying")))
+                    aniNames = new HashSet<string>(aniNames.Where(x => x.ToLower().StartsWith("flying")));
+
+                fi.FrameName = string.Join(", ", aniNames.OrderBy(x => x));
             }
         }
 
