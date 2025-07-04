@@ -2309,34 +2309,34 @@
     <item hash="9bef1c16a1ba8124f62edc41caa79de7" sprite="Braff (SC3)" width="40" height="40" frame="Walking 6" direction="ESE" />
     <item hash="fc7a9e9f13de0d13d5c9ad243a5e7af8" sprite="Braff (SC3)" width="40" height="40" frame="Walking 6" direction="ENE" />
     <item hash="e0179e7c224d8290d8de0fa55d3be54d" sprite="Braff (SC3)" width="40" height="40" frame="Walking 6" direction="NNE" />
-    <item hash="dac8c3b5580554f18650b0198a9c5d43" sprite="Bresby" width="40" height="40" frame="Idle (2 Frames) 1, Idle (Fast) 1, Idle 1, Nodding 1, ShakingHead 1, ShakingHead 3, ShakingHead 5, ShakingHead 7, StillFrame 1" direction="SSE" />
-    <item hash="637d0c9c3c772ae915c6eaece044c0f0" sprite="Bresby" width="40" height="40" frame="Idle (2 Frames) 1, Idle (Fast) 1, Idle 1, Nodding 1, ShakingHead 1, ShakingHead 3, ShakingHead 5, ShakingHead 7, StillFrame 1" direction="ESE" />
-    <item hash="9d25fd09658057fc267aca2058eefc0a" sprite="Bresby" width="40" height="40" frame="Idle (2 Frames) 1, Idle (Fast) 1, Idle 1, Nodding 1, ShakingHead 1, ShakingHead 3, ShakingHead 5, ShakingHead 7, StillFrame 1" direction="ENE" />
-    <item hash="4c9658e813b0f82ebcecd7dea959ab9e" sprite="Bresby" width="40" height="40" frame="Idle (2 Frames) 1, Idle (Fast) 1, Idle 1, Nodding 1, ShakingHead 1, ShakingHead 3, ShakingHead 5, ShakingHead 7, StillFrame 1" direction="NNE" />
-    <item hash="329329bcf49ce8f02628ad46ea6634c1" sprite="Bresby" width="40" height="40" frame="Idle (2 Frames) 2, Idle (Fast) 3, Idle 3, StillFrame 1, StillFrame2 1" direction="SSE" />
-    <item hash="f40239b6d30d95585a4802c7aaa19fe9" sprite="Bresby" width="40" height="40" frame="Idle (2 Frames) 2, Idle (Fast) 3, Idle 3, StillFrame 1, StillFrame2 1" direction="ESE" />
-    <item hash="adf8142f5813a18d82ec56c81b4ded81" sprite="Bresby" width="40" height="40" frame="Idle (2 Frames) 2, Idle (Fast) 3, Idle 3, StillFrame 1, StillFrame2 1" direction="ENE" />
-    <item hash="c08c7bd1fc75a373833a4b055a3ee32f" sprite="Bresby" width="40" height="40" frame="Idle (2 Frames) 2, Idle (Fast) 3, Idle 3, StillFrame 1, StillFrame2 1" direction="NNE" />
-    <item hash="2c783f85e8ba6fe99b2cc6ecf90d2954" sprite="Bresby" width="40" height="40" frame="Idle (Fast) 2, Idle (Fast) 4, Idle 2, Idle 4, StillFrame2 1" direction="SSE" />
-    <item hash="34f2321fe1ceb7f6df3004f51183b78a" sprite="Bresby" width="40" height="40" frame="Idle (Fast) 2, Idle (Fast) 4, Idle 2, Idle 4, StillFrame2 1" direction="ESE" />
-    <item hash="c4e1138c2dd7a771a8002a715c823718" sprite="Bresby" width="40" height="40" frame="Idle (Fast) 2, Idle (Fast) 4, Idle 2, Idle 4, StillFrame2 1" direction="ENE" />
-    <item hash="65616bbf66b1aab7c668009f0a123563" sprite="Bresby" width="40" height="40" frame="Idle (Fast) 2, Idle (Fast) 4, Idle 2, Idle 4, StillFrame2 1" direction="NNE" />
-    <item hash="de5a7ece5df300571a634788fc9d2ac1" sprite="Bresby" width="40" height="40" frame="Nodding (1 Frame) 1, Nodding 2, Nodding 3" direction="NNE" />
-    <item hash="39faccc83538f686ba26c22a641eb740" sprite="Bresby" width="40" height="40" frame="Nodding (1 Frame) 1, Nodding 2, Nodding 3, StillFrame 1" direction="Unset" />
-    <item hash="a6401dd9c8b153b02a4cd603adb8084a" sprite="Bresby" width="40" height="40" frame="Nodding (1 Frame) 1, Nodding 2, Nodding 3, StillFrame 1" direction="Unset" />
-    <item hash="df2fdcedcd6a4578e0ddb7545195ca46" sprite="Bresby" width="40" height="40" frame="Nodding (1 Frame) 1, Nodding 2, Nodding 3, StillFrame 1" direction="Unset" />
-    <item hash="e1d05fe1b536694c6f82552cf918e2f3" sprite="Bresby" width="40" height="40" frame="Nodding 2, Nodding 4" direction="SSE" />
-    <item hash="9e82be999ad9f7dcc8cc10b646f0d799" sprite="Bresby" width="40" height="40" frame="Nodding 2, Nodding 4" direction="ESE" />
-    <item hash="1dfadcb82cbfe1dc625f3e48ad96d2b2" sprite="Bresby" width="40" height="40" frame="Nodding 2, Nodding 4" direction="ENE" />
-    <item hash="fe6f6dc8897a66e762ed274849fcefb7" sprite="Bresby" width="40" height="40" frame="Nodding 2, Nodding 4" direction="NNE" />
-    <item hash="0ceb213fa835260d1bf86fee4e153dd7" sprite="Bresby" width="40" height="40" frame="ShakingHead 2, ShakingHead 6" direction="SSE" />
-    <item hash="250174f48c814b9a1ac0c20c48f02228" sprite="Bresby" width="40" height="40" frame="ShakingHead 2, ShakingHead 6" direction="ESE" />
-    <item hash="bd1876c1610ec040dd5a63f3cefe7a21" sprite="Bresby" width="40" height="40" frame="ShakingHead 2, ShakingHead 6" direction="ENE" />
-    <item hash="89a3d3caa313f2c83752cd5a356c6ce4" sprite="Bresby" width="40" height="40" frame="ShakingHead 2, ShakingHead 6" direction="NNE" />
-    <item hash="b35a3c6244e9851f19b651d41a7cf0ba" sprite="Bresby" width="40" height="40" frame="ShakingHead 4, ShakingHead 8" direction="SSE" />
-    <item hash="8a271f5bf05189aca8f528f3c99c0d4b" sprite="Bresby" width="40" height="40" frame="ShakingHead 4, ShakingHead 8" direction="ESE" />
-    <item hash="b1f8e40e16204e3d94355488d2e89b4f" sprite="Bresby" width="40" height="40" frame="ShakingHead 4, ShakingHead 8" direction="ENE" />
-    <item hash="cdee85250d585fe6d861490434006fbc" sprite="Bresby" width="40" height="40" frame="ShakingHead 4, ShakingHead 8" direction="NNE" />
+    <item hash="dac8c3b5580554f18650b0198a9c5d43" sprite="Bresby" width="40" height="40" frame="Idle 1" direction="SSE" />
+    <item hash="637d0c9c3c772ae915c6eaece044c0f0" sprite="Bresby" width="40" height="40" frame="Idle 1" direction="ESE" />
+    <item hash="9d25fd09658057fc267aca2058eefc0a" sprite="Bresby" width="40" height="40" frame="Idle 1" direction="ENE" />
+    <item hash="4c9658e813b0f82ebcecd7dea959ab9e" sprite="Bresby" width="40" height="40" frame="Idle 1" direction="NNE" />
+    <item hash="2c783f85e8ba6fe99b2cc6ecf90d2954" sprite="Bresby" width="40" height="40" frame="Idle 2" direction="SSE" />
+    <item hash="34f2321fe1ceb7f6df3004f51183b78a" sprite="Bresby" width="40" height="40" frame="Idle 2" direction="ESE" />
+    <item hash="c4e1138c2dd7a771a8002a715c823718" sprite="Bresby" width="40" height="40" frame="Idle 2" direction="ENE" />
+    <item hash="65616bbf66b1aab7c668009f0a123563" sprite="Bresby" width="40" height="40" frame="Idle 2" direction="NNE" />
+    <item hash="329329bcf49ce8f02628ad46ea6634c1" sprite="Bresby" width="40" height="40" frame="Idle 3" direction="SSE" />
+    <item hash="f40239b6d30d95585a4802c7aaa19fe9" sprite="Bresby" width="40" height="40" frame="Idle 3" direction="ESE" />
+    <item hash="adf8142f5813a18d82ec56c81b4ded81" sprite="Bresby" width="40" height="40" frame="Idle 3" direction="ENE" />
+    <item hash="c08c7bd1fc75a373833a4b055a3ee32f" sprite="Bresby" width="40" height="40" frame="Idle 3" direction="NNE" />
+    <item hash="39faccc83538f686ba26c22a641eb740" sprite="Bresby" width="40" height="40" frame="Nodding 1" direction="SSE" />
+    <item hash="a6401dd9c8b153b02a4cd603adb8084a" sprite="Bresby" width="40" height="40" frame="Nodding 1" direction="ESE" />
+    <item hash="df2fdcedcd6a4578e0ddb7545195ca46" sprite="Bresby" width="40" height="40" frame="Nodding 1" direction="ENE" />
+    <item hash="de5a7ece5df300571a634788fc9d2ac1" sprite="Bresby" width="40" height="40" frame="Nodding 1" direction="NNE" />
+    <item hash="e1d05fe1b536694c6f82552cf918e2f3" sprite="Bresby" width="40" height="40" frame="Nodding 2" direction="SSE" />
+    <item hash="9e82be999ad9f7dcc8cc10b646f0d799" sprite="Bresby" width="40" height="40" frame="Nodding 2" direction="ESE" />
+    <item hash="1dfadcb82cbfe1dc625f3e48ad96d2b2" sprite="Bresby" width="40" height="40" frame="Nodding 2" direction="ENE" />
+    <item hash="fe6f6dc8897a66e762ed274849fcefb7" sprite="Bresby" width="40" height="40" frame="Nodding 2" direction="NNE" />
+    <item hash="0ceb213fa835260d1bf86fee4e153dd7" sprite="Bresby" width="40" height="40" frame="ShakingHead 1" direction="SSE" />
+    <item hash="250174f48c814b9a1ac0c20c48f02228" sprite="Bresby" width="40" height="40" frame="ShakingHead 1" direction="ESE" />
+    <item hash="bd1876c1610ec040dd5a63f3cefe7a21" sprite="Bresby" width="40" height="40" frame="ShakingHead 1" direction="ENE" />
+    <item hash="89a3d3caa313f2c83752cd5a356c6ce4" sprite="Bresby" width="40" height="40" frame="ShakingHead 1" direction="NNE" />
+    <item hash="b35a3c6244e9851f19b651d41a7cf0ba" sprite="Bresby" width="40" height="40" frame="ShakingHead 2" direction="SSE" />
+    <item hash="8a271f5bf05189aca8f528f3c99c0d4b" sprite="Bresby" width="40" height="40" frame="ShakingHead 2" direction="ESE" />
+    <item hash="b1f8e40e16204e3d94355488d2e89b4f" sprite="Bresby" width="40" height="40" frame="ShakingHead 2" direction="ENE" />
+    <item hash="cdee85250d585fe6d861490434006fbc" sprite="Bresby" width="40" height="40" frame="ShakingHead 2" direction="NNE" />
     <item hash="e97a856d74e23e89b9d0c77d7eb892fb" sprite="Bresby" width="40" height="40" frame="ShakingWithRage 1" direction="SSE" />
     <item hash="b171ce0bea9f4613da329a4d70879ef9" sprite="Bresby" width="40" height="40" frame="ShakingWithRage 1" direction="ESE" />
     <item hash="15706ba35ef2772ac018862d4d3fd8c6" sprite="Bresby" width="40" height="40" frame="ShakingWithRage 1" direction="ENE" />
@@ -2345,75 +2345,75 @@
     <item hash="290102761be67cce66d18a3f36e9df4d" sprite="Bresby" width="40" height="40" frame="ShakingWithRage 2" direction="ESE" />
     <item hash="24b65d7713ddf36677be33fc8e442b17" sprite="Bresby" width="40" height="40" frame="ShakingWithRage 2" direction="ENE" />
     <item hash="20f6add5a0961a1075dc6a66d8a769f5" sprite="Bresby" width="40" height="40" frame="ShakingWithRage 2" direction="NNE" />
-    <item hash="9062322849ce25a286c68e22c152b20c" sprite="Bresby" width="40" height="40" frame="StillFrame 1, Walking (Fast) 2, Walking (Fast) 4, Walking 3, Walking 7" direction="SSE" />
-    <item hash="b9772b39ed01457986078fd13c67cf90" sprite="Bresby" width="40" height="40" frame="StillFrame 1, Walking (Fast) 2, Walking (Fast) 4, Walking 3, Walking 7" direction="ESE" />
-    <item hash="808e361038c5160f8494d52c0ae133f3" sprite="Bresby" width="40" height="40" frame="StillFrame 1, Walking (Fast) 2, Walking (Fast) 4, Walking 3, Walking 7" direction="ENE" />
-    <item hash="94c08cf723adee41b353bf11f4468f37" sprite="Bresby" width="40" height="40" frame="StillFrame 1, Walking (Fast) 2, Walking (Fast) 4, Walking 3, Walking 7" direction="NNE" />
-    <item hash="aa4424f477b4bb5fdf01bdc160faad45" sprite="Bresby" width="40" height="40" frame="Walking (Fast) 1, Walking 1" direction="SSE" />
-    <item hash="4b045ecc09894b5fda677cf22adfe420" sprite="Bresby" width="40" height="40" frame="Walking (Fast) 1, Walking 1" direction="ESE" />
-    <item hash="8e91e08480ffb5e029e1dbc02525dec2" sprite="Bresby" width="40" height="40" frame="Walking (Fast) 1, Walking 1" direction="ENE" />
-    <item hash="d7caa9c9f00aaf8f80fb2d329eb94075" sprite="Bresby" width="40" height="40" frame="Walking (Fast) 1, Walking 1" direction="NNE" />
-    <item hash="969f596fa9325fe8035b0a0b45178881" sprite="Bresby" width="40" height="40" frame="Walking (Fast) 3, Walking 5" direction="SSE" />
-    <item hash="1bc0e1266e3ca2ff07eaf38b831f5bab" sprite="Bresby" width="40" height="40" frame="Walking (Fast) 3, Walking 5" direction="ESE" />
-    <item hash="7bf93d1c1aa6a371ba51bc4e227271cc" sprite="Bresby" width="40" height="40" frame="Walking (Fast) 3, Walking 5" direction="ENE" />
-    <item hash="0a2f848a321dbe6c97bb3275053a2dff" sprite="Bresby" width="40" height="40" frame="Walking (Fast) 3, Walking 5" direction="NNE" />
-    <item hash="464a47998fc67a0112fce4f401cf1806" sprite="Bresby" width="40" height="40" frame="Walking 2, Walking 8" direction="SSE" />
-    <item hash="f9e0d3d1a0d398659112935b24e93944" sprite="Bresby" width="40" height="40" frame="Walking 2, Walking 8" direction="ESE" />
-    <item hash="7012db381b3e2a1ff8aa6b7e58f5f3c2" sprite="Bresby" width="40" height="40" frame="Walking 2, Walking 8" direction="ENE" />
-    <item hash="1d2d2a20f68a1cc5b37e62a3ccb1617d" sprite="Bresby" width="40" height="40" frame="Walking 2, Walking 8" direction="NNE" />
-    <item hash="3933c44f3bfd692472a348e60bcb31e8" sprite="Bresby" width="40" height="40" frame="Walking 4, Walking 6" direction="SSE" />
-    <item hash="41a1044d05a9d1ff912d10eecddd3594" sprite="Bresby" width="40" height="40" frame="Walking 4, Walking 6" direction="ESE" />
-    <item hash="22a74a1e6fba0b4ffe7da71663b58149" sprite="Bresby" width="40" height="40" frame="Walking 4, Walking 6" direction="ENE" />
-    <item hash="77b9177191bde6334680a75937418a9a" sprite="Bresby" width="40" height="40" frame="Walking 4, Walking 6" direction="NNE" />
-    <item hash="e1aec27e0858ed6efb2bdc01678323e7" sprite="Bresby (Big)" width="64" height="64" frame="Idle 1, StillFrame 1" direction="First" />
-    <item hash="790b843cef1e360890e9c7060b2f7b9e" sprite="Bresby (Big)" width="64" height="64" frame="Idle 2, Idle 4" direction="First" />
+    <item hash="aa4424f477b4bb5fdf01bdc160faad45" sprite="Bresby" width="40" height="40" frame="Walking 1" direction="SSE" />
+    <item hash="4b045ecc09894b5fda677cf22adfe420" sprite="Bresby" width="40" height="40" frame="Walking 1" direction="ESE" />
+    <item hash="8e91e08480ffb5e029e1dbc02525dec2" sprite="Bresby" width="40" height="40" frame="Walking 1" direction="ENE" />
+    <item hash="d7caa9c9f00aaf8f80fb2d329eb94075" sprite="Bresby" width="40" height="40" frame="Walking 1" direction="NNE" />
+    <item hash="464a47998fc67a0112fce4f401cf1806" sprite="Bresby" width="40" height="40" frame="Walking 2" direction="SSE" />
+    <item hash="f9e0d3d1a0d398659112935b24e93944" sprite="Bresby" width="40" height="40" frame="Walking 2" direction="ESE" />
+    <item hash="7012db381b3e2a1ff8aa6b7e58f5f3c2" sprite="Bresby" width="40" height="40" frame="Walking 2" direction="ENE" />
+    <item hash="1d2d2a20f68a1cc5b37e62a3ccb1617d" sprite="Bresby" width="40" height="40" frame="Walking 2" direction="NNE" />
+    <item hash="9062322849ce25a286c68e22c152b20c" sprite="Bresby" width="40" height="40" frame="Walking 3" direction="SSE" />
+    <item hash="b9772b39ed01457986078fd13c67cf90" sprite="Bresby" width="40" height="40" frame="Walking 3" direction="ESE" />
+    <item hash="808e361038c5160f8494d52c0ae133f3" sprite="Bresby" width="40" height="40" frame="Walking 3" direction="ENE" />
+    <item hash="94c08cf723adee41b353bf11f4468f37" sprite="Bresby" width="40" height="40" frame="Walking 3" direction="NNE" />
+    <item hash="3933c44f3bfd692472a348e60bcb31e8" sprite="Bresby" width="40" height="40" frame="Walking 4" direction="SSE" />
+    <item hash="41a1044d05a9d1ff912d10eecddd3594" sprite="Bresby" width="40" height="40" frame="Walking 4" direction="ESE" />
+    <item hash="22a74a1e6fba0b4ffe7da71663b58149" sprite="Bresby" width="40" height="40" frame="Walking 4" direction="ENE" />
+    <item hash="77b9177191bde6334680a75937418a9a" sprite="Bresby" width="40" height="40" frame="Walking 4" direction="NNE" />
+    <item hash="969f596fa9325fe8035b0a0b45178881" sprite="Bresby" width="40" height="40" frame="Walking 5" direction="SSE" />
+    <item hash="1bc0e1266e3ca2ff07eaf38b831f5bab" sprite="Bresby" width="40" height="40" frame="Walking 5" direction="ESE" />
+    <item hash="7bf93d1c1aa6a371ba51bc4e227271cc" sprite="Bresby" width="40" height="40" frame="Walking 5" direction="ENE" />
+    <item hash="0a2f848a321dbe6c97bb3275053a2dff" sprite="Bresby" width="40" height="40" frame="Walking 5" direction="NNE" />
+    <item hash="e1aec27e0858ed6efb2bdc01678323e7" sprite="Bresby (Big)" width="64" height="64" frame="Idle 1" direction="First" />
+    <item hash="790b843cef1e360890e9c7060b2f7b9e" sprite="Bresby (Big)" width="64" height="64" frame="Idle 2" direction="First" />
     <item hash="245de4da9e50c4d1cf64c86c3fca9b23" sprite="Bresby (Big)" width="64" height="64" frame="Idle 3" direction="First" />
-    <item hash="b4bf8a0138c6d981025c60f3a27bcf1c" sprite="Bridget (P1)" width="40" height="40" frame="Idle 1, Nodding 1, ShakingHead 1, StillFrame 1" direction="SSE" />
-    <item hash="3a841232a095b894601d8c2fb56efd07" sprite="Bridget (P1)" width="40" height="40" frame="Idle 1, Nodding 1, ShakingHead 1, StillFrame 1" direction="ESE" />
-    <item hash="f8df9642338a95397e3bf2dbf8ac094e" sprite="Bridget (P1)" width="40" height="40" frame="Idle 1, Nodding 1, ShakingHead 1, StillFrame 1" direction="ENE" />
-    <item hash="68e8ffa467d1cbdb7829d59cef46904a" sprite="Bridget (P1)" width="40" height="40" frame="Idle 1, Nodding 1, ShakingHead 1, StillFrame 1" direction="NNE" />
-    <item hash="1eeb6bb6cb50a39cba48a3462756e0b4" sprite="Bridget (P1)" width="40" height="40" frame="Idle 1, StillFrame 1" direction="S" />
-    <item hash="5691be01e43c29ff79723939f7c39369" sprite="Bridget (P1)" width="40" height="40" frame="Idle 1, StillFrame 1" direction="N" />
-    <item hash="c0251b48327216f01762eaae67f7b7e4" sprite="Bridget (P1)" width="40" height="40" frame="Idle 2, Idle 4" direction="S" />
-    <item hash="9201b0324f4185948423300a01c230f4" sprite="Bridget (P1)" width="40" height="40" frame="Idle 2, Idle 4" direction="SSE" />
-    <item hash="da087c8b76e23b4409f6aec10a9d54ac" sprite="Bridget (P1)" width="40" height="40" frame="Idle 2, Idle 4" direction="ESE" />
-    <item hash="89d909400c25920cbe4698efb31d598b" sprite="Bridget (P1)" width="40" height="40" frame="Idle 2, Idle 4" direction="ENE" />
-    <item hash="76d02f7ff4851f7b5a561f345d959421" sprite="Bridget (P1)" width="40" height="40" frame="Idle 2, Idle 4" direction="NNE" />
-    <item hash="cd5c7ce87ebfcec57a3312a3bf2b8556" sprite="Bridget (P1)" width="40" height="40" frame="Idle 2, Idle 4" direction="N" />
+    <item hash="1eeb6bb6cb50a39cba48a3462756e0b4" sprite="Bridget (P1)" width="40" height="40" frame="Idle 1" direction="S" />
+    <item hash="b4bf8a0138c6d981025c60f3a27bcf1c" sprite="Bridget (P1)" width="40" height="40" frame="Idle 1" direction="SSE" />
+    <item hash="3a841232a095b894601d8c2fb56efd07" sprite="Bridget (P1)" width="40" height="40" frame="Idle 1" direction="ESE" />
+    <item hash="f8df9642338a95397e3bf2dbf8ac094e" sprite="Bridget (P1)" width="40" height="40" frame="Idle 1" direction="ENE" />
+    <item hash="68e8ffa467d1cbdb7829d59cef46904a" sprite="Bridget (P1)" width="40" height="40" frame="Idle 1" direction="NNE" />
+    <item hash="5691be01e43c29ff79723939f7c39369" sprite="Bridget (P1)" width="40" height="40" frame="Idle 1" direction="N" />
+    <item hash="c0251b48327216f01762eaae67f7b7e4" sprite="Bridget (P1)" width="40" height="40" frame="Idle 2" direction="S" />
+    <item hash="9201b0324f4185948423300a01c230f4" sprite="Bridget (P1)" width="40" height="40" frame="Idle 2" direction="SSE" />
+    <item hash="da087c8b76e23b4409f6aec10a9d54ac" sprite="Bridget (P1)" width="40" height="40" frame="Idle 2" direction="ESE" />
+    <item hash="89d909400c25920cbe4698efb31d598b" sprite="Bridget (P1)" width="40" height="40" frame="Idle 2" direction="ENE" />
+    <item hash="76d02f7ff4851f7b5a561f345d959421" sprite="Bridget (P1)" width="40" height="40" frame="Idle 2" direction="NNE" />
+    <item hash="cd5c7ce87ebfcec57a3312a3bf2b8556" sprite="Bridget (P1)" width="40" height="40" frame="Idle 2" direction="N" />
     <item hash="8db334548bec47ece905ca00463d49e3" sprite="Bridget (P1)" width="40" height="40" frame="Idle 3" direction="S" />
     <item hash="b08f419ed54dc5950b45ed25b3fc49cf" sprite="Bridget (P1)" width="40" height="40" frame="Idle 3" direction="SSE" />
     <item hash="7d04fe08a9f4c69ffc9da4e72c0264e5" sprite="Bridget (P1)" width="40" height="40" frame="Idle 3" direction="ESE" />
     <item hash="fa74ab81f15175d1dc54cbfc40344125" sprite="Bridget (P1)" width="40" height="40" frame="Idle 3" direction="ENE" />
     <item hash="4ce7bbe7289b7d39054e034faf7cbebe" sprite="Bridget (P1)" width="40" height="40" frame="Idle 3" direction="NNE" />
     <item hash="5d5cd8fbf96e048120736b323d178752" sprite="Bridget (P1)" width="40" height="40" frame="Idle 3" direction="N" />
-    <item hash="11ed086c9d6358f074d22b7a6b7c549d" sprite="Bridget (P1)" width="40" height="40" frame="Nodding 2, Nodding 4" direction="SSE" />
-    <item hash="d4748b06accde8bbeffb0edec4058777" sprite="Bridget (P1)" width="40" height="40" frame="Nodding 2, Nodding 4" direction="ESE" />
-    <item hash="9cf5535bf019255e9b2c8d7937ffe0c0" sprite="Bridget (P1)" width="40" height="40" frame="Nodding 2, Nodding 4" direction="ENE" />
-    <item hash="87f1ccb06ddc17b605899f302e7ded16" sprite="Bridget (P1)" width="40" height="40" frame="Nodding 2, Nodding 4" direction="NNE" />
-    <item hash="1fbf7c7d6c3d9713a7b99a3a806ba43b" sprite="Bridget (P1)" width="40" height="40" frame="Nodding 3, ShakingHead 3, ShakingHead 5, ShakingHead 7" direction="SSE" />
-    <item hash="4226d252d78a6059d7946704a57fc310" sprite="Bridget (P1)" width="40" height="40" frame="Nodding 3, ShakingHead 3, ShakingHead 5, ShakingHead 7" direction="ESE" />
-    <item hash="d3535eb8503906ec68ef05dab9534af2" sprite="Bridget (P1)" width="40" height="40" frame="Nodding 3, ShakingHead 3, ShakingHead 5, ShakingHead 7" direction="ENE" />
-    <item hash="4b95e4df6943759d94e2f4a0959a0f7f" sprite="Bridget (P1)" width="40" height="40" frame="Nodding 3, ShakingHead 3, ShakingHead 5, ShakingHead 7" direction="NNE" />
-    <item hash="79d7feeeaf5b34a45404d4579b719da0" sprite="Bridget (P1)" width="40" height="40" frame="ShakingHead 2, ShakingHead 6" direction="SSE" />
-    <item hash="213c230acb293f1d24eae3affcdfa7e3" sprite="Bridget (P1)" width="40" height="40" frame="ShakingHead 2, ShakingHead 6" direction="ESE" />
-    <item hash="6c59f155846df68a2be637025fbd8ef2" sprite="Bridget (P1)" width="40" height="40" frame="ShakingHead 2, ShakingHead 6" direction="ENE" />
-    <item hash="43395df3ec32a88ddb055dd3c4edd802" sprite="Bridget (P1)" width="40" height="40" frame="ShakingHead 2, ShakingHead 6" direction="NNE" />
-    <item hash="519ea8a27bb98e994b317d05dd3f94b5" sprite="Bridget (P1)" width="40" height="40" frame="ShakingHead 4, ShakingHead 8" direction="SSE" />
-    <item hash="4ec61874d323b81b2c7606aef47ba2c3" sprite="Bridget (P1)" width="40" height="40" frame="ShakingHead 4, ShakingHead 8" direction="ESE" />
-    <item hash="64c9dc3e1506b8410b387e6959448691" sprite="Bridget (P1)" width="40" height="40" frame="ShakingHead 4, ShakingHead 8" direction="ENE" />
-    <item hash="e824bc7b41f896203f5c0c0cbcfa06d5" sprite="Bridget (P1)" width="40" height="40" frame="ShakingHead 4, ShakingHead 8" direction="NNE" />
+    <item hash="11ed086c9d6358f074d22b7a6b7c549d" sprite="Bridget (P1)" width="40" height="40" frame="Nodding 1" direction="SSE" />
+    <item hash="d4748b06accde8bbeffb0edec4058777" sprite="Bridget (P1)" width="40" height="40" frame="Nodding 1" direction="ESE" />
+    <item hash="9cf5535bf019255e9b2c8d7937ffe0c0" sprite="Bridget (P1)" width="40" height="40" frame="Nodding 1" direction="ENE" />
+    <item hash="87f1ccb06ddc17b605899f302e7ded16" sprite="Bridget (P1)" width="40" height="40" frame="Nodding 1" direction="NNE" />
+    <item hash="1fbf7c7d6c3d9713a7b99a3a806ba43b" sprite="Bridget (P1)" width="40" height="40" frame="Nodding 2" direction="SSE" />
+    <item hash="4226d252d78a6059d7946704a57fc310" sprite="Bridget (P1)" width="40" height="40" frame="Nodding 2" direction="ESE" />
+    <item hash="d3535eb8503906ec68ef05dab9534af2" sprite="Bridget (P1)" width="40" height="40" frame="Nodding 2" direction="ENE" />
+    <item hash="4b95e4df6943759d94e2f4a0959a0f7f" sprite="Bridget (P1)" width="40" height="40" frame="Nodding 2" direction="NNE" />
+    <item hash="79d7feeeaf5b34a45404d4579b719da0" sprite="Bridget (P1)" width="40" height="40" frame="ShakingHead 1" direction="SSE" />
+    <item hash="213c230acb293f1d24eae3affcdfa7e3" sprite="Bridget (P1)" width="40" height="40" frame="ShakingHead 1" direction="ESE" />
+    <item hash="6c59f155846df68a2be637025fbd8ef2" sprite="Bridget (P1)" width="40" height="40" frame="ShakingHead 1" direction="ENE" />
+    <item hash="43395df3ec32a88ddb055dd3c4edd802" sprite="Bridget (P1)" width="40" height="40" frame="ShakingHead 1" direction="NNE" />
+    <item hash="519ea8a27bb98e994b317d05dd3f94b5" sprite="Bridget (P1)" width="40" height="40" frame="ShakingHead 2" direction="SSE" />
+    <item hash="4ec61874d323b81b2c7606aef47ba2c3" sprite="Bridget (P1)" width="40" height="40" frame="ShakingHead 2" direction="ESE" />
+    <item hash="64c9dc3e1506b8410b387e6959448691" sprite="Bridget (P1)" width="40" height="40" frame="ShakingHead 2" direction="ENE" />
+    <item hash="e824bc7b41f896203f5c0c0cbcfa06d5" sprite="Bridget (P1)" width="40" height="40" frame="ShakingHead 2" direction="NNE" />
     <item hash="d9cfffe425e0dfe73f81d9366d704190" sprite="Bridget (P1)" width="40" height="40" frame="Walking 1" direction="S" />
     <item hash="403c115e9a4473cf5cf4154fe4ac1a13" sprite="Bridget (P1)" width="40" height="40" frame="Walking 1" direction="SSE" />
     <item hash="eb0244889df327be61ca7fa28020c18b" sprite="Bridget (P1)" width="40" height="40" frame="Walking 1" direction="ESE" />
     <item hash="06bd4b5f72ea449d5665e1f39d528ad4" sprite="Bridget (P1)" width="40" height="40" frame="Walking 1" direction="ENE" />
     <item hash="1e88f8fb4aafa7d634a52e04574dc96d" sprite="Bridget (P1)" width="40" height="40" frame="Walking 1" direction="NNE" />
     <item hash="71a686494f39624d3cdb881c6f34eab2" sprite="Bridget (P1)" width="40" height="40" frame="Walking 1" direction="N" />
-    <item hash="bb294d19db3630900f32698d60e86fb2" sprite="Bridget (P1)" width="40" height="40" frame="Walking 2, Walking 5" direction="S" />
-    <item hash="2b2f18e9c7a35e992327a50f19d620ac" sprite="Bridget (P1)" width="40" height="40" frame="Walking 2, Walking 5" direction="SSE" />
-    <item hash="f250f09ada2d3dcc285fc3943c4247aa" sprite="Bridget (P1)" width="40" height="40" frame="Walking 2, Walking 5" direction="ESE" />
-    <item hash="567bedf784108898e6058bcb3685b712" sprite="Bridget (P1)" width="40" height="40" frame="Walking 2, Walking 5" direction="ENE" />
-    <item hash="915400f6b8dec7b840202a0ee94893b5" sprite="Bridget (P1)" width="40" height="40" frame="Walking 2, Walking 5" direction="NNE" />
-    <item hash="76c7a86c3226415f5009203f0262a2ae" sprite="Bridget (P1)" width="40" height="40" frame="Walking 2, Walking 5" direction="N" />
+    <item hash="bb294d19db3630900f32698d60e86fb2" sprite="Bridget (P1)" width="40" height="40" frame="Walking 2" direction="S" />
+    <item hash="2b2f18e9c7a35e992327a50f19d620ac" sprite="Bridget (P1)" width="40" height="40" frame="Walking 2" direction="SSE" />
+    <item hash="f250f09ada2d3dcc285fc3943c4247aa" sprite="Bridget (P1)" width="40" height="40" frame="Walking 2" direction="ESE" />
+    <item hash="567bedf784108898e6058bcb3685b712" sprite="Bridget (P1)" width="40" height="40" frame="Walking 2" direction="ENE" />
+    <item hash="915400f6b8dec7b840202a0ee94893b5" sprite="Bridget (P1)" width="40" height="40" frame="Walking 2" direction="NNE" />
+    <item hash="76c7a86c3226415f5009203f0262a2ae" sprite="Bridget (P1)" width="40" height="40" frame="Walking 2" direction="N" />
     <item hash="0daf80b76e806bce832303b9b804c1a4" sprite="Bridget (P1)" width="40" height="40" frame="Walking 3" direction="S" />
     <item hash="25e824a435dfc530acfaef21c4a5baf9" sprite="Bridget (P1)" width="40" height="40" frame="Walking 3" direction="SSE" />
     <item hash="bccaac6c43b0f4a3aefc379d1d68f52d" sprite="Bridget (P1)" width="40" height="40" frame="Walking 3" direction="ESE" />
