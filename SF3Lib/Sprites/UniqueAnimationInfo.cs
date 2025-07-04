@@ -10,7 +10,7 @@
             int frameCount,
             int duration,
             int missingFrames,
-            UniqueSpriteAnimationCollectionDef.Variant.Animation.Frame[] frames
+            UniqueSpriteAnimationCollectionDTO.Variant.Animation.Frame[] frames
         ) {
             AnimationHash        = animationHash;
             SpriteName           = spriteName;
@@ -33,6 +33,6 @@
         public int FrameCommandCount;
         public int Duration;
         public int FrameTexturesMissing;
-        public UniqueSpriteAnimationCollectionDef.Variant.Animation.Frame[] Frames;
+        public UniqueSpriteAnimationCollectionDTO.Variant.Animation.Frame[] Frames;
     }
 }

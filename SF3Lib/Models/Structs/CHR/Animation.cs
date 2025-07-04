@@ -124,7 +124,7 @@ namespace SF3.Models.Structs.CHR {
                 .Select(x => {
                     if (x.HasTexture)
                         texCount++;
-                    return new UniqueSpriteAnimationCollectionDef.Variant.Animation.Frame() {
+                    return new UniqueSpriteAnimationCollectionDTO.Variant.Animation.Frame() {
                         Command = x.FrameID,
                         ParameterOrDuration = x.Duration,
                         FrameHashes = GetAnimationFrameHashes(x)

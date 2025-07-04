@@ -4,10 +4,10 @@ namespace SF3.Sprites {
     /// <summary>
     /// Serializable defintion of animations by sprite family and variant
     /// </summary>
-    public class UniqueSpriteAnimationCollectionDef {
-        public UniqueSpriteAnimationCollectionDef() { }
+    public class UniqueSpriteAnimationCollectionDTO {
+        public UniqueSpriteAnimationCollectionDTO() { }
 
-        public UniqueSpriteAnimationCollectionDef(string spriteName, UniqueAnimationInfo[] allAnimationsForVariants) {
+        public UniqueSpriteAnimationCollectionDTO(string spriteName, UniqueAnimationInfo[] allAnimationsForVariants) {
             Name = spriteName;
             Variants = allAnimationsForVariants
                 .OrderBy(y => y.Width)

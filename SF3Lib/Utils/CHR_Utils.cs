@@ -23,7 +23,7 @@ namespace SF3.Utils {
             LoadUniqueAnimationsByHashTable();
             if (!s_uniqueAnimationsByHash.ContainsKey(hash.ToLower())) {
                 s_uniqueAnimationsByHash[hash] = new UniqueAnimationInfo(hash, "Unknown", "Unknown", 0, 0, 0, 0, 0, 0,
-                    new UniqueSpriteAnimationCollectionDef.Variant.Animation.Frame[0]);
+                    new UniqueSpriteAnimationCollectionDTO.Variant.Animation.Frame[0]);
             }
             return s_uniqueAnimationsByHash[hash];
         }
@@ -109,7 +109,7 @@ namespace SF3.Utils {
                         int missingFrames = int.TryParse(missingAttr, out var missingFramesOut) ? missingFramesOut : 0;
                         int duration = int.TryParse(durationAttr, out var durationOut) ? durationOut : 0;
                         s_uniqueAnimationsByHash.Add(hash.ToLower(), new UniqueAnimationInfo(hash, sprite, animation, width, height, directions, frames, duration, missingFrames,
-                            new UniqueSpriteAnimationCollectionDef.Variant.Animation.Frame[0]));
+                            new UniqueSpriteAnimationCollectionDTO.Variant.Animation.Frame[0]));
                     }
                 }
             }
@@ -189,10 +189,10 @@ namespace SF3.Utils {
             stream.WriteLine("</items>");
         }
 
-        public static UniqueSpriteAnimationCollectionDef[] GetAllUniqueSpriteAnimationDefs() {
+        public static UniqueSpriteAnimationCollectionDTO[] GetAllUniqueSpriteAnimationDefs() {
             return s_uniqueAnimationsByHash.Values
                 .GroupBy(x => x.SpriteName)
-                .Select(x => new UniqueSpriteAnimationCollectionDef(x.Key, x.ToArray()))
+                .Select(x => new UniqueSpriteAnimationCollectionDTO(x.Key, x.ToArray()))
                 .ToArray();
         }
 
