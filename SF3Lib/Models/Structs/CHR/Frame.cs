@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using CommonLib.Attributes;
 using CommonLib.Extensions;
 using CommonLib.Utils;
@@ -68,10 +69,32 @@ namespace SF3.Models.Structs.CHR {
         }
 
         [TableViewModelColumn(displayOrder: 0.1f, minWidth: 200)]
-        public string FrameName => FrameInfo.FrameName;
+        public string FrameName {
+            get => FrameInfo.FrameName;
+            set {
+                if (FrameInfo.FrameName != value) {
+                    FrameInfo.FrameName = value;
+                    var resourcePath = Path.Combine("..", "..", "..", "..", "SF3Lib", CommonLib.Utils.ResourceUtils.ResourceFile("SpriteFramesByHash.xml"));
+                    using (var file = File.OpenWrite(resourcePath))
+                        using (var writer = new StreamWriter(file))
+                            CHR_Utils.WriteUniqueFramesByHashXML(writer);
+                }
+            }
+        }
 
         [TableViewModelColumn(displayOrder: 0.2f)]
-        public SpriteFrameDirection Direction => FrameInfo.Direction;
+        public SpriteFrameDirection Direction {
+            get => FrameInfo.Direction;
+            set {
+                if (FrameInfo.Direction != value) {
+                    FrameInfo.Direction = value;
+                    var resourcePath = Path.Combine("..", "..", "..", "..", "SF3Lib", CommonLib.Utils.ResourceUtils.ResourceFile("SpriteFramesByHash.xml"));
+                    using (var file = File.OpenWrite(resourcePath))
+                        using (var writer = new StreamWriter(file))
+                            CHR_Utils.WriteUniqueFramesByHashXML(writer);
+                }
+            }
+        }
 
         [TableViewModelColumn(displayOrder: 0.5f, displayFormat: "X4")]
         public uint TextureBitstreamOffset => TextureOffset + (uint) Data.GetDouble((int) (TextureOffset + DataOffset));

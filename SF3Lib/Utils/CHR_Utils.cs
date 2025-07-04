@@ -115,22 +115,30 @@ namespace SF3.Utils {
             }
         }
 
-        public static void WriteUniqueFramesByHashXML(StreamWriter stream) {
+        public static void UpdateFrameNamesAndDirectionsBasedOnAnimations() {
             foreach (var fi in s_uniqueFramesByHash.Values) {
-                var dirs = new HashSet<SpriteFrameDirection>(fi.Directions.Where(x => x != SpriteFrameDirection.Unset));
-                var standardDirs = dirs.Where(x =>
-                    x == SpriteFrameDirection.SSE ||
-                    x == SpriteFrameDirection.ESE ||
-                    x == SpriteFrameDirection.ENE ||
-                    x == SpriteFrameDirection.NNE
-                ).ToArray();
-                if (standardDirs.Length == 1 && dirs.Count != 1)
-                    dirs = new HashSet<SpriteFrameDirection>() { standardDirs[0] };
+                if (fi.AnimationNames.Count == 0) {
+                    fi.Direction = SpriteFrameDirection.Unset;
+                    fi.FrameName = "Unused";
+                }
+                else {
+                    var dirs = new HashSet<SpriteFrameDirection>(fi.Directions.Where(x => x != SpriteFrameDirection.Unset));
+                    var standardDirs = dirs.Where(x =>
+                        x == SpriteFrameDirection.SSE ||
+                        x == SpriteFrameDirection.ESE ||
+                        x == SpriteFrameDirection.ENE ||
+                        x == SpriteFrameDirection.NNE
+                    ).ToArray();
+                    if (standardDirs.Length == 1 && dirs.Count != 1)
+                        dirs = new HashSet<SpriteFrameDirection>() { standardDirs[0] };
 
-                fi.Direction = dirs.Count == 1 ? dirs.First() : SpriteFrameDirection.Unset;
-                fi.FrameName = string.Join(", ", fi.AnimationNames.OrderBy(x => x));
+                    fi.Direction = dirs.Count == 1 ? dirs.First() : SpriteFrameDirection.Unset;
+                    fi.FrameName = string.Join(", ", fi.AnimationNames.OrderBy(x => x));
+                }
             }
+        }
 
+        public static void WriteUniqueFramesByHashXML(StreamWriter stream) {
             var frameInfos = s_uniqueFramesByHash.Values
                 .OrderBy(x => x.SpriteName)
                 .ThenBy(x => x.Width)
@@ -143,14 +151,8 @@ namespace SF3.Utils {
             stream.NewLine = "\n";
             stream.WriteLine("<?xml version=\"1.0\" encoding=\"utf-8\" ?>");
             stream.WriteLine("<items>");
-            foreach (var fi in frameInfos) {
-                if (fi.AnimationNames.Count == 0) {
-                    fi.Direction = SpriteFrameDirection.Unset;
-                    fi.FrameName = "Unused";
-                }
-
+            foreach (var fi in frameInfos)
                 stream.WriteLine($"    <item hash=\"{fi.TextureHash}\" sprite=\"{fi.SpriteName}\" width=\"{fi.Width}\" height=\"{fi.Height}\" frame=\"{fi.FrameName}\" direction=\"{fi.Direction}\" />");
-            }
 
             stream.WriteLine("</items>");
         }
@@ -173,7 +175,6 @@ namespace SF3.Utils {
             stream.WriteLine("<items>");
             foreach (var ai in animationInfos) {
                 var spriteName = (ai.SpriteName == "") ? "None" : ai.SpriteName;
-
                 var missingFramesStr = (ai.FrameTexturesMissing == 0) ? "" : $" missingFrames=\"{ai.FrameTexturesMissing}\"";
                 stream.WriteLine($"    <item hash=\"{ai.AnimationHash}\" sprite=\"{spriteName}\" animation=\"{ai.AnimationName}\" width=\"{ai.Width}\" height=\"{ai.Height}\" directions=\"{ai.Directions}\" frames=\"{ai.FrameCommandCount}\" duration=\"{ai.Duration}\"{missingFramesStr} />");
             }
