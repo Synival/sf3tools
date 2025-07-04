@@ -349,19 +349,12 @@
     <item hash="bcd866bfdb26f7f497c8522548aaf674" sprite="Boy w/ Grey Shirt / Toby" animation="StillFrame (Cowering, 1 Direction)" width="40" height="40" directions="17" frames="3" duration="10" />
     <item hash="2022eed8f83c73f7db30f1a4275773a6" sprite="Boy w/ Grey Shirt / Toby" animation="Walking" width="40" height="40" directions="4" frames="7" duration="24" />
     <item hash="944036bb78d43d3cb52bd8e5f65d9ba9" sprite="Braff" animation="DoneLookingBack" width="40" height="40" directions="4" frames="3" duration="8" />
-    <item hash="1096749a9473a7effd1206457a7c8c80" sprite="Braff" animation="Idle" width="40" height="40" directions="4" frames="5" duration="16" />
-    <item hash="79b6b0288474b6f217c181768b39056c" sprite="Braff" animation="Idle" width="40" height="40" directions="4" frames="5" duration="16" />
     <item hash="3acc4420b13111a4da453ba565acdd11" sprite="Braff" animation="Idle" width="40" height="40" directions="4" frames="5" duration="18" />
     <item hash="9963c5353b4af613176217b83f49812d" sprite="Braff" animation="Idle" width="40" height="40" directions="4" frames="5" duration="18" />
     <item hash="46d3af34c67c29996a8bd8c2bc75ad56" sprite="Braff" animation="LookingBack" width="40" height="40" directions="4" frames="4" duration="15" />
-    <item hash="edc1066d247a64eb63d3fe54a21fb79d" sprite="Braff" animation="Nodding" width="40" height="40" directions="4" frames="5" duration="16" />
     <item hash="065c4eefb833ca87f42b2668e4749832" sprite="Braff" animation="Nodding" width="40" height="40" directions="4" frames="5" duration="18" />
     <item hash="52a4449434eb6d86844a97320a751ccd" sprite="Braff" animation="ShakingHead" width="40" height="40" directions="4" frames="9" duration="30" />
-    <item hash="bbad14a3ac057e65062ea3de3d9ba23d" sprite="Braff" animation="ShakingHead" width="40" height="40" directions="4" frames="9" duration="30" />
-    <item hash="0035399d0fcb25ecae66e707756d0307" sprite="Braff" animation="StillFrame" width="40" height="40" directions="4" frames="2" duration="10" />
-    <item hash="040de62c45a59c551974fc09b88d2aef" sprite="Braff" animation="StillFrame" width="40" height="40" directions="4" frames="2" duration="10" />
     <item hash="fcb6590b978b07336b739daeb68ef0e3" sprite="Braff" animation="StillFrame" width="40" height="40" directions="4" frames="2" duration="10" />
-    <item hash="0063e156f0d7fff894a2d1903df66e0a" sprite="Braff" animation="Walking" width="40" height="40" directions="4" frames="7" duration="30" />
     <item hash="b97e056d6ed9969f3790f701c6479de2" sprite="Braff" animation="Walking" width="40" height="40" directions="4" frames="7" duration="30" />
     <item hash="d113466225fbef4db92f4c4960b11708" sprite="Braff (Helmet)" animation="Idle" width="40" height="40" directions="4" frames="5" duration="18" />
     <item hash="010a942df4f060f296193cff43944bda" sprite="Braff (Helmet)" animation="Nodding" width="40" height="40" directions="4" frames="5" duration="18" />
@@ -371,6 +364,13 @@
     <item hash="fd5278ebbda7e48be5cdc840bf9adbe7" sprite="Braff (Helmet)" animation="StillFrame1 (OnGround)" width="48" height="40" directions="4" frames="2" duration="10" />
     <item hash="e2bac01927bdb7bed22ae8f6cbf87006" sprite="Braff (Helmet)" animation="StillFrame2 (OnGround)" width="48" height="40" directions="4" frames="2" duration="6" />
     <item hash="67e02dbad7a6150abe4e68c1c8b50e08" sprite="Braff (Helmet)" animation="StillFrame3 (OnGround)" width="48" height="40" directions="4" frames="2" duration="5" />
+    <item hash="1096749a9473a7effd1206457a7c8c80" sprite="Braff (SC3)" animation="Idle" width="40" height="40" directions="4" frames="5" duration="16" />
+    <item hash="79b6b0288474b6f217c181768b39056c" sprite="Braff (SC3)" animation="Idle" width="40" height="40" directions="4" frames="5" duration="16" />
+    <item hash="edc1066d247a64eb63d3fe54a21fb79d" sprite="Braff (SC3)" animation="Nodding (Stops)" width="40" height="40" directions="4" frames="5" duration="16" />
+    <item hash="bbad14a3ac057e65062ea3de3d9ba23d" sprite="Braff (SC3)" animation="ShakingHead (Stops)" width="40" height="40" directions="4" frames="9" duration="30" />
+    <item hash="0035399d0fcb25ecae66e707756d0307" sprite="Braff (SC3)" animation="StillFrame" width="40" height="40" directions="4" frames="2" duration="10" />
+    <item hash="040de62c45a59c551974fc09b88d2aef" sprite="Braff (SC3)" animation="StillFrame" width="40" height="40" directions="4" frames="2" duration="10" />
+    <item hash="0063e156f0d7fff894a2d1903df66e0a" sprite="Braff (SC3)" animation="Walking" width="40" height="40" directions="4" frames="7" duration="30" />
     <item hash="aa1f1268e5bf543740c09384025461bc" sprite="Bresby" animation="Idle" width="40" height="40" directions="4" frames="5" duration="21" />
     <item hash="f394d29b09683b746918d59b8a88ae6a" sprite="Bresby" animation="Idle (2 Frames)" width="40" height="40" directions="4" frames="3" duration="14" />
     <item hash="85b0bc9303cfa5ae9b548eba94f2f10f" sprite="Bresby" animation="Idle (Fast)" width="40" height="40" directions="4" frames="5" duration="12" />
