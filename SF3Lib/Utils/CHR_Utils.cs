@@ -133,7 +133,18 @@ namespace SF3.Utils {
                         dirs = new HashSet<SpriteFrameDirection>() { standardDirs[0] };
 
                     fi.Direction = dirs.Count == 1 ? dirs.First() : SpriteFrameDirection.Unset;
-                    fi.FrameName = string.Join(", ", fi.AnimationNames.OrderBy(x => x));
+
+                    var aniNames = fi.AnimationNames;
+                    if (aniNames.Any(x => !x.ToLower().StartsWith("stillframe")))
+                        aniNames = new HashSet<string>(aniNames.Where(x => !x.ToLower().StartsWith("stillframe")));
+                    if (aniNames.Any(x => x.ToLower().StartsWith("idle")))
+                        aniNames = new HashSet<string>(aniNames.Where(x => x.ToLower().StartsWith("idle")));
+                    if (aniNames.Any(x => x.ToLower().StartsWith("walking")))
+                        aniNames = new HashSet<string>(aniNames.Where(x => x.ToLower().StartsWith("walking")));
+                    if (aniNames.Any(x => x.ToLower().StartsWith("flying")))
+                        aniNames = new HashSet<string>(aniNames.Where(x => x.ToLower().StartsWith("flying")));
+
+                    fi.FrameName = string.Join(", ", aniNames.OrderBy(x => x));
                 }
             }
         }

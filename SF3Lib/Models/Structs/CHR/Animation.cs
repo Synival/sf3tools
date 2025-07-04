@@ -87,6 +87,7 @@ namespace SF3.Models.Structs.CHR {
 
             int texCount = 0;
             var aniNameLower = AnimationName.ToLower();
+            var frameIdsModified = new HashSet<int>();
             string[] GetAnimationFrameHashes(AnimationFrame aniFrame) {
                 if (!aniFrame.HasTexture)
                     return null;
@@ -109,7 +110,10 @@ namespace SF3.Models.Structs.CHR {
 
                         if (i < shouldBeDirs) {
                             FrameTable[num].FrameInfo.Directions.Add(FrameNumberToSpriteDir(dirs, i));
-                            FrameTable[num].FrameInfo.AnimationNames.Add($"{AnimationName}{texCount,2}");
+                            if (!frameIdsModified.Contains(num)) {
+                                FrameTable[num].FrameInfo.AnimationNames.Add($"{AnimationName}{texCount,2}");
+                                frameIdsModified.Add(num);
+                            }
                         }
                     }
                 }

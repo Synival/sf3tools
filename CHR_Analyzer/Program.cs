@@ -193,6 +193,8 @@ namespace CHR_Analyzer {
             }
             Console.WriteLine("Processing complete.");
 
+            CHR_Utils.UpdateFrameNamesAndDirectionsBasedOnAnimations();
+
             // Report any sprite frames with mixed sizes.
             var allTexturesByName = s_framesByHash.Values
                 .GroupBy(x => $"{x.FrameInfo.SpriteName} ({x.FrameInfo.Width}x{x.FrameInfo.Height})")
@@ -297,34 +299,41 @@ namespace CHR_Analyzer {
                 var outputPath = Path.Combine(c_pathOut, filename);
                 Console.WriteLine("Writing: " + outputPath);
 
-                var frameWidthInPixels  = frames[0].FrameInfo.Width;
-                var frameHeightInPixels = frames[0].FrameInfo.Height;
+                var frameGroups = frames
+                    .GroupBy(x => x.FrameInfo.FrameName)
+                    .ToDictionary(x => x.Key, x => x.ToArray());
+
+                var frameWidthInPixels  = frames[0].Texture.Width;
+                var frameHeightInPixels = frames[0].Texture.Height;
 
                 var pixelsPerFrame = frameWidthInPixels * frameHeightInPixels;
                 var frameCount     = frames.Length;
                 var totalPixels    = pixelsPerFrame * frameCount;
 
-                var imageWidthInFrames = Math.Max(1, (int) (Math.Sqrt(totalPixels) / frameWidthInPixels));
-                var imageHeightInFrames = (int) Math.Ceiling(frameCount / (float) imageWidthInFrames);
+                var imageWidthInFrames = frameGroups.Max(x => x.Value.Length);
+                var imageHeightInFrames = frameGroups.Count;
 
                 var imageWidthInPixels = imageWidthInFrames * frameWidthInPixels;
                 var imageHeightInPixels = imageHeightInFrames * frameHeightInPixels;
 
                 var newData = new byte[imageWidthInPixels * imageHeightInPixels * 2];
-                for (int i = 0; i < frameCount; i++) {
-                    int x = (i % imageWidthInFrames) * frameWidthInPixels;
-                    int y = (i / imageWidthInFrames) * frameHeightInPixels;
-                    int pos = (y * imageWidthInPixels + x) * 2;
 
-                    var frame = frames[i];
-                    var frameData = frame.Texture.BitmapDataARGB1555;
+                int y = 0;
+                foreach (var frameGroup in frameGroups) {
+                    int x = (imageWidthInFrames - frameGroup.Value.Length) * frameWidthInPixels / 2;
+                    foreach (var frame in frameGroup.Value) {
+                        int pos = (y * imageWidthInPixels + x) * 2;
+                        var frameData = frame.Texture.BitmapDataARGB1555;
 
-                    int frameDataPos = 0;
-                    for (int iy = 0; iy < frameHeightInPixels; iy++) {
-                        int ipos = pos + (iy * imageWidthInPixels) * 2;
-                        for (int ix = 0; ix < frameWidthInPixels * 2; ix++)
-                            newData[ipos++] = frameData[frameDataPos++];
+                        int frameDataPos = 0;
+                        for (int iy = 0; iy < frameHeightInPixels; iy++) {
+                            int ipos = pos + (iy * imageWidthInPixels) * 2;
+                            for (int ix = 0; ix < frameWidthInPixels * 2; ix++)
+                                newData[ipos++] = frameData[frameDataPos++];
+                        }
+                        x += frameWidthInPixels;
                     }
+                    y += frameHeightInPixels;
                 }
 
 #pragma warning disable CA1416 // Validate platform compatibility
