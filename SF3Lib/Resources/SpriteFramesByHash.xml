@@ -2368,128 +2368,128 @@
     <item hash="e1aec27e0858ed6efb2bdc01678323e7" sprite="Bresby (Big)" width="64" height="64" frame="Idle 1" direction="First" />
     <item hash="790b843cef1e360890e9c7060b2f7b9e" sprite="Bresby (Big)" width="64" height="64" frame="Idle 2" direction="First" />
     <item hash="245de4da9e50c4d1cf64c86c3fca9b23" sprite="Bresby (Big)" width="64" height="64" frame="Idle 3" direction="First" />
-    <item hash="1eeb6bb6cb50a39cba48a3462756e0b4" sprite="Bridget (P1)" width="40" height="40" frame="Idle 1" direction="S" />
-    <item hash="b4bf8a0138c6d981025c60f3a27bcf1c" sprite="Bridget (P1)" width="40" height="40" frame="Idle 1" direction="SSE" />
-    <item hash="3a841232a095b894601d8c2fb56efd07" sprite="Bridget (P1)" width="40" height="40" frame="Idle 1" direction="ESE" />
-    <item hash="f8df9642338a95397e3bf2dbf8ac094e" sprite="Bridget (P1)" width="40" height="40" frame="Idle 1" direction="ENE" />
-    <item hash="68e8ffa467d1cbdb7829d59cef46904a" sprite="Bridget (P1)" width="40" height="40" frame="Idle 1" direction="NNE" />
-    <item hash="5691be01e43c29ff79723939f7c39369" sprite="Bridget (P1)" width="40" height="40" frame="Idle 1" direction="N" />
-    <item hash="c0251b48327216f01762eaae67f7b7e4" sprite="Bridget (P1)" width="40" height="40" frame="Idle 2" direction="S" />
-    <item hash="9201b0324f4185948423300a01c230f4" sprite="Bridget (P1)" width="40" height="40" frame="Idle 2" direction="SSE" />
-    <item hash="da087c8b76e23b4409f6aec10a9d54ac" sprite="Bridget (P1)" width="40" height="40" frame="Idle 2" direction="ESE" />
-    <item hash="89d909400c25920cbe4698efb31d598b" sprite="Bridget (P1)" width="40" height="40" frame="Idle 2" direction="ENE" />
-    <item hash="76d02f7ff4851f7b5a561f345d959421" sprite="Bridget (P1)" width="40" height="40" frame="Idle 2" direction="NNE" />
-    <item hash="cd5c7ce87ebfcec57a3312a3bf2b8556" sprite="Bridget (P1)" width="40" height="40" frame="Idle 2" direction="N" />
-    <item hash="8db334548bec47ece905ca00463d49e3" sprite="Bridget (P1)" width="40" height="40" frame="Idle 3" direction="S" />
-    <item hash="b08f419ed54dc5950b45ed25b3fc49cf" sprite="Bridget (P1)" width="40" height="40" frame="Idle 3" direction="SSE" />
-    <item hash="7d04fe08a9f4c69ffc9da4e72c0264e5" sprite="Bridget (P1)" width="40" height="40" frame="Idle 3" direction="ESE" />
-    <item hash="fa74ab81f15175d1dc54cbfc40344125" sprite="Bridget (P1)" width="40" height="40" frame="Idle 3" direction="ENE" />
-    <item hash="4ce7bbe7289b7d39054e034faf7cbebe" sprite="Bridget (P1)" width="40" height="40" frame="Idle 3" direction="NNE" />
-    <item hash="5d5cd8fbf96e048120736b323d178752" sprite="Bridget (P1)" width="40" height="40" frame="Idle 3" direction="N" />
-    <item hash="11ed086c9d6358f074d22b7a6b7c549d" sprite="Bridget (P1)" width="40" height="40" frame="Nodding 1" direction="SSE" />
-    <item hash="d4748b06accde8bbeffb0edec4058777" sprite="Bridget (P1)" width="40" height="40" frame="Nodding 1" direction="ESE" />
-    <item hash="9cf5535bf019255e9b2c8d7937ffe0c0" sprite="Bridget (P1)" width="40" height="40" frame="Nodding 1" direction="ENE" />
-    <item hash="87f1ccb06ddc17b605899f302e7ded16" sprite="Bridget (P1)" width="40" height="40" frame="Nodding 1" direction="NNE" />
-    <item hash="1fbf7c7d6c3d9713a7b99a3a806ba43b" sprite="Bridget (P1)" width="40" height="40" frame="Nodding 2" direction="SSE" />
-    <item hash="4226d252d78a6059d7946704a57fc310" sprite="Bridget (P1)" width="40" height="40" frame="Nodding 2" direction="ESE" />
-    <item hash="d3535eb8503906ec68ef05dab9534af2" sprite="Bridget (P1)" width="40" height="40" frame="Nodding 2" direction="ENE" />
-    <item hash="4b95e4df6943759d94e2f4a0959a0f7f" sprite="Bridget (P1)" width="40" height="40" frame="Nodding 2" direction="NNE" />
-    <item hash="79d7feeeaf5b34a45404d4579b719da0" sprite="Bridget (P1)" width="40" height="40" frame="ShakingHead 1" direction="SSE" />
-    <item hash="213c230acb293f1d24eae3affcdfa7e3" sprite="Bridget (P1)" width="40" height="40" frame="ShakingHead 1" direction="ESE" />
-    <item hash="6c59f155846df68a2be637025fbd8ef2" sprite="Bridget (P1)" width="40" height="40" frame="ShakingHead 1" direction="ENE" />
-    <item hash="43395df3ec32a88ddb055dd3c4edd802" sprite="Bridget (P1)" width="40" height="40" frame="ShakingHead 1" direction="NNE" />
-    <item hash="519ea8a27bb98e994b317d05dd3f94b5" sprite="Bridget (P1)" width="40" height="40" frame="ShakingHead 2" direction="SSE" />
-    <item hash="4ec61874d323b81b2c7606aef47ba2c3" sprite="Bridget (P1)" width="40" height="40" frame="ShakingHead 2" direction="ESE" />
-    <item hash="64c9dc3e1506b8410b387e6959448691" sprite="Bridget (P1)" width="40" height="40" frame="ShakingHead 2" direction="ENE" />
-    <item hash="e824bc7b41f896203f5c0c0cbcfa06d5" sprite="Bridget (P1)" width="40" height="40" frame="ShakingHead 2" direction="NNE" />
-    <item hash="d9cfffe425e0dfe73f81d9366d704190" sprite="Bridget (P1)" width="40" height="40" frame="Walking 1" direction="S" />
-    <item hash="403c115e9a4473cf5cf4154fe4ac1a13" sprite="Bridget (P1)" width="40" height="40" frame="Walking 1" direction="SSE" />
-    <item hash="eb0244889df327be61ca7fa28020c18b" sprite="Bridget (P1)" width="40" height="40" frame="Walking 1" direction="ESE" />
-    <item hash="06bd4b5f72ea449d5665e1f39d528ad4" sprite="Bridget (P1)" width="40" height="40" frame="Walking 1" direction="ENE" />
-    <item hash="1e88f8fb4aafa7d634a52e04574dc96d" sprite="Bridget (P1)" width="40" height="40" frame="Walking 1" direction="NNE" />
-    <item hash="71a686494f39624d3cdb881c6f34eab2" sprite="Bridget (P1)" width="40" height="40" frame="Walking 1" direction="N" />
-    <item hash="bb294d19db3630900f32698d60e86fb2" sprite="Bridget (P1)" width="40" height="40" frame="Walking 2" direction="S" />
-    <item hash="2b2f18e9c7a35e992327a50f19d620ac" sprite="Bridget (P1)" width="40" height="40" frame="Walking 2" direction="SSE" />
-    <item hash="f250f09ada2d3dcc285fc3943c4247aa" sprite="Bridget (P1)" width="40" height="40" frame="Walking 2" direction="ESE" />
-    <item hash="567bedf784108898e6058bcb3685b712" sprite="Bridget (P1)" width="40" height="40" frame="Walking 2" direction="ENE" />
-    <item hash="915400f6b8dec7b840202a0ee94893b5" sprite="Bridget (P1)" width="40" height="40" frame="Walking 2" direction="NNE" />
-    <item hash="76c7a86c3226415f5009203f0262a2ae" sprite="Bridget (P1)" width="40" height="40" frame="Walking 2" direction="N" />
-    <item hash="0daf80b76e806bce832303b9b804c1a4" sprite="Bridget (P1)" width="40" height="40" frame="Walking 3" direction="S" />
-    <item hash="25e824a435dfc530acfaef21c4a5baf9" sprite="Bridget (P1)" width="40" height="40" frame="Walking 3" direction="SSE" />
-    <item hash="bccaac6c43b0f4a3aefc379d1d68f52d" sprite="Bridget (P1)" width="40" height="40" frame="Walking 3" direction="ESE" />
-    <item hash="145c72e1f6652dd3c4ac5bddd446b764" sprite="Bridget (P1)" width="40" height="40" frame="Walking 3" direction="ENE" />
-    <item hash="426ba76b99d3d7279d03d382a4cbfd7c" sprite="Bridget (P1)" width="40" height="40" frame="Walking 3" direction="NNE" />
-    <item hash="6e5c60bd67be20bb3a779cfd58f13c9c" sprite="Bridget (P1)" width="40" height="40" frame="Walking 3" direction="N" />
-    <item hash="c527881bb01601827a2e4102ebf67093" sprite="Bridget (P1)" width="40" height="40" frame="Walking 4" direction="S" />
-    <item hash="55b10b487c00f67cc4e611ec58f66f78" sprite="Bridget (P1)" width="40" height="40" frame="Walking 4" direction="SSE" />
-    <item hash="ba2937b1e697e0d4beab89c546a05cdc" sprite="Bridget (P1)" width="40" height="40" frame="Walking 4" direction="ESE" />
-    <item hash="95446eaae3919fb83425f40c824d0478" sprite="Bridget (P1)" width="40" height="40" frame="Walking 4" direction="ENE" />
-    <item hash="ab8f57bc18da7bafec7049172d6b287d" sprite="Bridget (P1)" width="40" height="40" frame="Walking 4" direction="NNE" />
-    <item hash="89c2c101df0d0c5a925b94a93ced1eb6" sprite="Bridget (P1)" width="40" height="40" frame="Walking 4" direction="N" />
-    <item hash="685e6764d05913a97e01e71df61b8e04" sprite="Bridget (P1)" width="40" height="40" frame="Walking 6" direction="S" />
-    <item hash="f2945e4f78f4d0a2cf7c6da3816f1304" sprite="Bridget (P1)" width="40" height="40" frame="Walking 6" direction="SSE" />
-    <item hash="ff7c983586f53869dc6f2298b0732fcf" sprite="Bridget (P1)" width="40" height="40" frame="Walking 6" direction="ESE" />
-    <item hash="f8f36294225c1b88d1b8a67cd4d35d17" sprite="Bridget (P1)" width="40" height="40" frame="Walking 6" direction="ENE" />
-    <item hash="fa5030cb0cbb9d3a4a25e6b737427d73" sprite="Bridget (P1)" width="40" height="40" frame="Walking 6" direction="NNE" />
-    <item hash="139ec288797210ea89a17c8315a874f6" sprite="Bridget (P1)" width="40" height="40" frame="Walking 6" direction="N" />
-    <item hash="c8191826ecb39ff96b3c9a644693bccb" sprite="Bridget (P2)" width="40" height="40" frame="Idle 1, Nodding 1, ShakingHead 1, ShakingHead 3, ShakingHead 5, ShakingHead 7, StillFrame 1" direction="SSE" />
-    <item hash="e3c22b1de65512b849b6396c7ccfb640" sprite="Bridget (P2)" width="40" height="40" frame="Idle 1, Nodding 1, ShakingHead 1, ShakingHead 3, ShakingHead 5, ShakingHead 7, StillFrame 1" direction="ESE" />
-    <item hash="36a7126075180f9a2c0a657869834d91" sprite="Bridget (P2)" width="40" height="40" frame="Idle 1, Nodding 1, ShakingHead 1, ShakingHead 3, ShakingHead 5, ShakingHead 7, StillFrame 1" direction="ENE" />
-    <item hash="432fcca088d333c12f6f8e433f8de8a2" sprite="Bridget (P2)" width="40" height="40" frame="Idle 1, Nodding 1, ShakingHead 1, ShakingHead 3, ShakingHead 5, ShakingHead 7, StillFrame 1" direction="NNE" />
-    <item hash="2581249fe4f8a499229fedcc0edf3176" sprite="Bridget (P2)" width="40" height="40" frame="Idle 2, Idle 4" direction="SSE" />
-    <item hash="a511f44c2474bc57b9829738983cd899" sprite="Bridget (P2)" width="40" height="40" frame="Idle 2, Idle 4" direction="ESE" />
-    <item hash="ff318ca16c49d99814513622803b0569" sprite="Bridget (P2)" width="40" height="40" frame="Idle 2, Idle 4" direction="ENE" />
-    <item hash="a35f9ef3de76052c5e9fb9fa40349414" sprite="Bridget (P2)" width="40" height="40" frame="Idle 2, Idle 4" direction="NNE" />
-    <item hash="9c6276311c3a0207630c23f8ef0bcf98" sprite="Bridget (P2)" width="40" height="40" frame="Idle 3" direction="SSE" />
-    <item hash="89a9b9b0bdde3dbd54b3bf71fc4a5213" sprite="Bridget (P2)" width="40" height="40" frame="Idle 3" direction="ESE" />
-    <item hash="5f90b8999f936a5848ddc1c3ab53eff9" sprite="Bridget (P2)" width="40" height="40" frame="Idle 3" direction="ENE" />
-    <item hash="586705743ca7c46654992b7d4ab5edbd" sprite="Bridget (P2)" width="40" height="40" frame="Idle 3" direction="NNE" />
-    <item hash="8c3369fe61d2e0c134c329279f61dc4b" sprite="Bridget (P2)" width="40" height="40" frame="Nodding 2, Nodding 4" direction="SSE" />
-    <item hash="f297cac0a3d182bdfc7102749169466b" sprite="Bridget (P2)" width="40" height="40" frame="Nodding 2, Nodding 4" direction="ESE" />
-    <item hash="b3b8734cc27b3a395fe27274f46b6666" sprite="Bridget (P2)" width="40" height="40" frame="Nodding 2, Nodding 4" direction="ENE" />
-    <item hash="1b03e55a639ca67deeb659f8fca3a49d" sprite="Bridget (P2)" width="40" height="40" frame="Nodding 2, Nodding 4" direction="NNE" />
-    <item hash="1dc8c8948265f7cfe36094a32b5834e3" sprite="Bridget (P2)" width="40" height="40" frame="Nodding 3" direction="SSE" />
-    <item hash="57660dc1b6be76bd5eac447be55f5021" sprite="Bridget (P2)" width="40" height="40" frame="Nodding 3" direction="ESE" />
-    <item hash="0216e4fda05ca6707c3c074a2b939dae" sprite="Bridget (P2)" width="40" height="40" frame="Nodding 3" direction="ENE" />
-    <item hash="5a645a7706c2a76f9c2f504d38df7b77" sprite="Bridget (P2)" width="40" height="40" frame="Nodding 3" direction="NNE" />
-    <item hash="7519b0142d435ef1809da9b4c019a5d2" sprite="Bridget (P2)" width="40" height="40" frame="ShakingHead 2, ShakingHead 6" direction="SSE" />
-    <item hash="217634409dbbdc50b0fadcdb7bea7125" sprite="Bridget (P2)" width="40" height="40" frame="ShakingHead 2, ShakingHead 6" direction="ESE" />
-    <item hash="9ab2c5f5b8067233abeb795d9786467a" sprite="Bridget (P2)" width="40" height="40" frame="ShakingHead 2, ShakingHead 6" direction="ENE" />
-    <item hash="1146060bc1285f77e5ecaf0a1ffc5881" sprite="Bridget (P2)" width="40" height="40" frame="ShakingHead 2, ShakingHead 6" direction="NNE" />
-    <item hash="caa7ba2f26920aa2e81fec717907f2e8" sprite="Bridget (P2)" width="40" height="40" frame="ShakingHead 4, ShakingHead 8" direction="SSE" />
-    <item hash="4b9949f958fd7ae7d13231bd117cda43" sprite="Bridget (P2)" width="40" height="40" frame="ShakingHead 4, ShakingHead 8" direction="ESE" />
-    <item hash="039ea42081f23b9648b00833aa5c433b" sprite="Bridget (P2)" width="40" height="40" frame="ShakingHead 4, ShakingHead 8" direction="ENE" />
-    <item hash="33e5a5be22dfd70cb2b382630077024b" sprite="Bridget (P2)" width="40" height="40" frame="ShakingHead 4, ShakingHead 8" direction="NNE" />
-    <item hash="075bd95a54ed81c772faa50c9ebcacd8" sprite="Bridget (P2)" width="40" height="40" frame="StillFrame 1, StillFrame2 (Should be Idle) 1, Walking 2, Walking 5" direction="S" />
-    <item hash="9f4cc2ed43baa1b111d6af697632ec39" sprite="Bridget (P2)" width="40" height="40" frame="StillFrame 1, StillFrame2 (Should be Idle) 1, Walking 2, Walking 5" direction="SSE" />
-    <item hash="b0721a17f94549f1e02227239c1464ec" sprite="Bridget (P2)" width="40" height="40" frame="StillFrame 1, StillFrame2 (Should be Idle) 1, Walking 2, Walking 5" direction="ESE" />
-    <item hash="1721fc577c70c28cfde65b64129f836a" sprite="Bridget (P2)" width="40" height="40" frame="StillFrame 1, StillFrame2 (Should be Idle) 1, Walking 2, Walking 5" direction="ENE" />
-    <item hash="124af6478ea40f1920a47ef19b06be05" sprite="Bridget (P2)" width="40" height="40" frame="StillFrame 1, StillFrame2 (Should be Idle) 1, Walking 2, Walking 5" direction="NNE" />
-    <item hash="9828a3012441fb04a74608017465417a" sprite="Bridget (P2)" width="40" height="40" frame="StillFrame 1, StillFrame2 (Should be Idle) 1, Walking 2, Walking 5" direction="N" />
-    <item hash="ad6251d350439f3bb0d3e742bdc4a701" sprite="Bridget (P2)" width="40" height="40" frame="Walking 1" direction="S" />
-    <item hash="cdc1a186ee3b3a52cfe223286951492d" sprite="Bridget (P2)" width="40" height="40" frame="Walking 1" direction="SSE" />
-    <item hash="9c0e45945f847026e03ae7bf2fafa173" sprite="Bridget (P2)" width="40" height="40" frame="Walking 1" direction="ESE" />
-    <item hash="7a57c9dbe2cf36aa2d7080836cb4e7f1" sprite="Bridget (P2)" width="40" height="40" frame="Walking 1" direction="ENE" />
-    <item hash="58c0c72ec4b2b04483d6d7b25b771989" sprite="Bridget (P2)" width="40" height="40" frame="Walking 1" direction="NNE" />
-    <item hash="babd9644fc846e47cc08ac288b04e09a" sprite="Bridget (P2)" width="40" height="40" frame="Walking 1" direction="N" />
-    <item hash="075274f6cfdf93c22fba17c105f38bac" sprite="Bridget (P2)" width="40" height="40" frame="Walking 3" direction="S" />
-    <item hash="0ab8ebe13da130b71811dbb932c69111" sprite="Bridget (P2)" width="40" height="40" frame="Walking 3" direction="SSE" />
-    <item hash="f5ef9bbd3aed7c005c34dc3dc780ea85" sprite="Bridget (P2)" width="40" height="40" frame="Walking 3" direction="ESE" />
-    <item hash="2b1b1f622359dff1e9d28c2f0dc77253" sprite="Bridget (P2)" width="40" height="40" frame="Walking 3" direction="ENE" />
-    <item hash="7922edb8b1cb92e2b0f2bf27a5aba567" sprite="Bridget (P2)" width="40" height="40" frame="Walking 3" direction="NNE" />
-    <item hash="5a1074ed02737f4df4e3a4df5621f3f9" sprite="Bridget (P2)" width="40" height="40" frame="Walking 3" direction="N" />
-    <item hash="957662fde7f5da8dbbe9800db14a206b" sprite="Bridget (P2)" width="40" height="40" frame="Walking 4" direction="S" />
-    <item hash="cbddb3aa39f3589ae97ea23224f61448" sprite="Bridget (P2)" width="40" height="40" frame="Walking 4" direction="SSE" />
-    <item hash="5d328484c817794e80b71b7e820ab6b3" sprite="Bridget (P2)" width="40" height="40" frame="Walking 4" direction="ESE" />
-    <item hash="ab892a1721a3bcd4443b5735a3a1bc3a" sprite="Bridget (P2)" width="40" height="40" frame="Walking 4" direction="ENE" />
-    <item hash="363edce27bee9c3dcf2a02ab34d4209d" sprite="Bridget (P2)" width="40" height="40" frame="Walking 4" direction="NNE" />
-    <item hash="69d26fd0a29386e78796f8d6870d13aa" sprite="Bridget (P2)" width="40" height="40" frame="Walking 4" direction="N" />
-    <item hash="99ccbcf102094c4d193700d12ee31059" sprite="Bridget (P2)" width="40" height="40" frame="Walking 6" direction="S" />
-    <item hash="82782d921d9dc71d90363e84f151ea07" sprite="Bridget (P2)" width="40" height="40" frame="Walking 6" direction="SSE" />
-    <item hash="b796f8275239bb69ab019e97155606bf" sprite="Bridget (P2)" width="40" height="40" frame="Walking 6" direction="ESE" />
-    <item hash="fff5fbb2eaf5f90722289335bcc721be" sprite="Bridget (P2)" width="40" height="40" frame="Walking 6" direction="ENE" />
-    <item hash="237a95f89bf930759ebf99fb5109faf9" sprite="Bridget (P2)" width="40" height="40" frame="Walking 6" direction="NNE" />
-    <item hash="5e99949c2549b3803488ff9ba4557b8c" sprite="Bridget (P2)" width="40" height="40" frame="Walking 6" direction="N" />
+    <item hash="1eeb6bb6cb50a39cba48a3462756e0b4" sprite="Brigit (P1)" width="40" height="40" frame="Idle 1" direction="S" />
+    <item hash="b4bf8a0138c6d981025c60f3a27bcf1c" sprite="Brigit (P1)" width="40" height="40" frame="Idle 1" direction="SSE" />
+    <item hash="3a841232a095b894601d8c2fb56efd07" sprite="Brigit (P1)" width="40" height="40" frame="Idle 1" direction="ESE" />
+    <item hash="f8df9642338a95397e3bf2dbf8ac094e" sprite="Brigit (P1)" width="40" height="40" frame="Idle 1" direction="ENE" />
+    <item hash="68e8ffa467d1cbdb7829d59cef46904a" sprite="Brigit (P1)" width="40" height="40" frame="Idle 1" direction="NNE" />
+    <item hash="5691be01e43c29ff79723939f7c39369" sprite="Brigit (P1)" width="40" height="40" frame="Idle 1" direction="N" />
+    <item hash="c0251b48327216f01762eaae67f7b7e4" sprite="Brigit (P1)" width="40" height="40" frame="Idle 2" direction="S" />
+    <item hash="9201b0324f4185948423300a01c230f4" sprite="Brigit (P1)" width="40" height="40" frame="Idle 2" direction="SSE" />
+    <item hash="da087c8b76e23b4409f6aec10a9d54ac" sprite="Brigit (P1)" width="40" height="40" frame="Idle 2" direction="ESE" />
+    <item hash="89d909400c25920cbe4698efb31d598b" sprite="Brigit (P1)" width="40" height="40" frame="Idle 2" direction="ENE" />
+    <item hash="76d02f7ff4851f7b5a561f345d959421" sprite="Brigit (P1)" width="40" height="40" frame="Idle 2" direction="NNE" />
+    <item hash="cd5c7ce87ebfcec57a3312a3bf2b8556" sprite="Brigit (P1)" width="40" height="40" frame="Idle 2" direction="N" />
+    <item hash="8db334548bec47ece905ca00463d49e3" sprite="Brigit (P1)" width="40" height="40" frame="Idle 3" direction="S" />
+    <item hash="b08f419ed54dc5950b45ed25b3fc49cf" sprite="Brigit (P1)" width="40" height="40" frame="Idle 3" direction="SSE" />
+    <item hash="7d04fe08a9f4c69ffc9da4e72c0264e5" sprite="Brigit (P1)" width="40" height="40" frame="Idle 3" direction="ESE" />
+    <item hash="fa74ab81f15175d1dc54cbfc40344125" sprite="Brigit (P1)" width="40" height="40" frame="Idle 3" direction="ENE" />
+    <item hash="4ce7bbe7289b7d39054e034faf7cbebe" sprite="Brigit (P1)" width="40" height="40" frame="Idle 3" direction="NNE" />
+    <item hash="5d5cd8fbf96e048120736b323d178752" sprite="Brigit (P1)" width="40" height="40" frame="Idle 3" direction="N" />
+    <item hash="11ed086c9d6358f074d22b7a6b7c549d" sprite="Brigit (P1)" width="40" height="40" frame="Nodding 1" direction="SSE" />
+    <item hash="d4748b06accde8bbeffb0edec4058777" sprite="Brigit (P1)" width="40" height="40" frame="Nodding 1" direction="ESE" />
+    <item hash="9cf5535bf019255e9b2c8d7937ffe0c0" sprite="Brigit (P1)" width="40" height="40" frame="Nodding 1" direction="ENE" />
+    <item hash="87f1ccb06ddc17b605899f302e7ded16" sprite="Brigit (P1)" width="40" height="40" frame="Nodding 1" direction="NNE" />
+    <item hash="1fbf7c7d6c3d9713a7b99a3a806ba43b" sprite="Brigit (P1)" width="40" height="40" frame="Nodding 2" direction="SSE" />
+    <item hash="4226d252d78a6059d7946704a57fc310" sprite="Brigit (P1)" width="40" height="40" frame="Nodding 2" direction="ESE" />
+    <item hash="d3535eb8503906ec68ef05dab9534af2" sprite="Brigit (P1)" width="40" height="40" frame="Nodding 2" direction="ENE" />
+    <item hash="4b95e4df6943759d94e2f4a0959a0f7f" sprite="Brigit (P1)" width="40" height="40" frame="Nodding 2" direction="NNE" />
+    <item hash="79d7feeeaf5b34a45404d4579b719da0" sprite="Brigit (P1)" width="40" height="40" frame="ShakingHead 1" direction="SSE" />
+    <item hash="213c230acb293f1d24eae3affcdfa7e3" sprite="Brigit (P1)" width="40" height="40" frame="ShakingHead 1" direction="ESE" />
+    <item hash="6c59f155846df68a2be637025fbd8ef2" sprite="Brigit (P1)" width="40" height="40" frame="ShakingHead 1" direction="ENE" />
+    <item hash="43395df3ec32a88ddb055dd3c4edd802" sprite="Brigit (P1)" width="40" height="40" frame="ShakingHead 1" direction="NNE" />
+    <item hash="519ea8a27bb98e994b317d05dd3f94b5" sprite="Brigit (P1)" width="40" height="40" frame="ShakingHead 2" direction="SSE" />
+    <item hash="4ec61874d323b81b2c7606aef47ba2c3" sprite="Brigit (P1)" width="40" height="40" frame="ShakingHead 2" direction="ESE" />
+    <item hash="64c9dc3e1506b8410b387e6959448691" sprite="Brigit (P1)" width="40" height="40" frame="ShakingHead 2" direction="ENE" />
+    <item hash="e824bc7b41f896203f5c0c0cbcfa06d5" sprite="Brigit (P1)" width="40" height="40" frame="ShakingHead 2" direction="NNE" />
+    <item hash="d9cfffe425e0dfe73f81d9366d704190" sprite="Brigit (P1)" width="40" height="40" frame="Walking 1" direction="S" />
+    <item hash="403c115e9a4473cf5cf4154fe4ac1a13" sprite="Brigit (P1)" width="40" height="40" frame="Walking 1" direction="SSE" />
+    <item hash="eb0244889df327be61ca7fa28020c18b" sprite="Brigit (P1)" width="40" height="40" frame="Walking 1" direction="ESE" />
+    <item hash="06bd4b5f72ea449d5665e1f39d528ad4" sprite="Brigit (P1)" width="40" height="40" frame="Walking 1" direction="ENE" />
+    <item hash="1e88f8fb4aafa7d634a52e04574dc96d" sprite="Brigit (P1)" width="40" height="40" frame="Walking 1" direction="NNE" />
+    <item hash="71a686494f39624d3cdb881c6f34eab2" sprite="Brigit (P1)" width="40" height="40" frame="Walking 1" direction="N" />
+    <item hash="bb294d19db3630900f32698d60e86fb2" sprite="Brigit (P1)" width="40" height="40" frame="Walking 2" direction="S" />
+    <item hash="2b2f18e9c7a35e992327a50f19d620ac" sprite="Brigit (P1)" width="40" height="40" frame="Walking 2" direction="SSE" />
+    <item hash="f250f09ada2d3dcc285fc3943c4247aa" sprite="Brigit (P1)" width="40" height="40" frame="Walking 2" direction="ESE" />
+    <item hash="567bedf784108898e6058bcb3685b712" sprite="Brigit (P1)" width="40" height="40" frame="Walking 2" direction="ENE" />
+    <item hash="915400f6b8dec7b840202a0ee94893b5" sprite="Brigit (P1)" width="40" height="40" frame="Walking 2" direction="NNE" />
+    <item hash="76c7a86c3226415f5009203f0262a2ae" sprite="Brigit (P1)" width="40" height="40" frame="Walking 2" direction="N" />
+    <item hash="0daf80b76e806bce832303b9b804c1a4" sprite="Brigit (P1)" width="40" height="40" frame="Walking 3" direction="S" />
+    <item hash="25e824a435dfc530acfaef21c4a5baf9" sprite="Brigit (P1)" width="40" height="40" frame="Walking 3" direction="SSE" />
+    <item hash="bccaac6c43b0f4a3aefc379d1d68f52d" sprite="Brigit (P1)" width="40" height="40" frame="Walking 3" direction="ESE" />
+    <item hash="145c72e1f6652dd3c4ac5bddd446b764" sprite="Brigit (P1)" width="40" height="40" frame="Walking 3" direction="ENE" />
+    <item hash="426ba76b99d3d7279d03d382a4cbfd7c" sprite="Brigit (P1)" width="40" height="40" frame="Walking 3" direction="NNE" />
+    <item hash="6e5c60bd67be20bb3a779cfd58f13c9c" sprite="Brigit (P1)" width="40" height="40" frame="Walking 3" direction="N" />
+    <item hash="c527881bb01601827a2e4102ebf67093" sprite="Brigit (P1)" width="40" height="40" frame="Walking 4" direction="S" />
+    <item hash="55b10b487c00f67cc4e611ec58f66f78" sprite="Brigit (P1)" width="40" height="40" frame="Walking 4" direction="SSE" />
+    <item hash="ba2937b1e697e0d4beab89c546a05cdc" sprite="Brigit (P1)" width="40" height="40" frame="Walking 4" direction="ESE" />
+    <item hash="95446eaae3919fb83425f40c824d0478" sprite="Brigit (P1)" width="40" height="40" frame="Walking 4" direction="ENE" />
+    <item hash="ab8f57bc18da7bafec7049172d6b287d" sprite="Brigit (P1)" width="40" height="40" frame="Walking 4" direction="NNE" />
+    <item hash="89c2c101df0d0c5a925b94a93ced1eb6" sprite="Brigit (P1)" width="40" height="40" frame="Walking 4" direction="N" />
+    <item hash="685e6764d05913a97e01e71df61b8e04" sprite="Brigit (P1)" width="40" height="40" frame="Walking 6" direction="S" />
+    <item hash="f2945e4f78f4d0a2cf7c6da3816f1304" sprite="Brigit (P1)" width="40" height="40" frame="Walking 6" direction="SSE" />
+    <item hash="ff7c983586f53869dc6f2298b0732fcf" sprite="Brigit (P1)" width="40" height="40" frame="Walking 6" direction="ESE" />
+    <item hash="f8f36294225c1b88d1b8a67cd4d35d17" sprite="Brigit (P1)" width="40" height="40" frame="Walking 6" direction="ENE" />
+    <item hash="fa5030cb0cbb9d3a4a25e6b737427d73" sprite="Brigit (P1)" width="40" height="40" frame="Walking 6" direction="NNE" />
+    <item hash="139ec288797210ea89a17c8315a874f6" sprite="Brigit (P1)" width="40" height="40" frame="Walking 6" direction="N" />
+    <item hash="c8191826ecb39ff96b3c9a644693bccb" sprite="Brigit (P2)" width="40" height="40" frame="Idle 1, Nodding 1, ShakingHead 1, ShakingHead 3, ShakingHead 5, ShakingHead 7, StillFrame 1" direction="SSE" />
+    <item hash="e3c22b1de65512b849b6396c7ccfb640" sprite="Brigit (P2)" width="40" height="40" frame="Idle 1, Nodding 1, ShakingHead 1, ShakingHead 3, ShakingHead 5, ShakingHead 7, StillFrame 1" direction="ESE" />
+    <item hash="36a7126075180f9a2c0a657869834d91" sprite="Brigit (P2)" width="40" height="40" frame="Idle 1, Nodding 1, ShakingHead 1, ShakingHead 3, ShakingHead 5, ShakingHead 7, StillFrame 1" direction="ENE" />
+    <item hash="432fcca088d333c12f6f8e433f8de8a2" sprite="Brigit (P2)" width="40" height="40" frame="Idle 1, Nodding 1, ShakingHead 1, ShakingHead 3, ShakingHead 5, ShakingHead 7, StillFrame 1" direction="NNE" />
+    <item hash="2581249fe4f8a499229fedcc0edf3176" sprite="Brigit (P2)" width="40" height="40" frame="Idle 2, Idle 4" direction="SSE" />
+    <item hash="a511f44c2474bc57b9829738983cd899" sprite="Brigit (P2)" width="40" height="40" frame="Idle 2, Idle 4" direction="ESE" />
+    <item hash="ff318ca16c49d99814513622803b0569" sprite="Brigit (P2)" width="40" height="40" frame="Idle 2, Idle 4" direction="ENE" />
+    <item hash="a35f9ef3de76052c5e9fb9fa40349414" sprite="Brigit (P2)" width="40" height="40" frame="Idle 2, Idle 4" direction="NNE" />
+    <item hash="9c6276311c3a0207630c23f8ef0bcf98" sprite="Brigit (P2)" width="40" height="40" frame="Idle 3" direction="SSE" />
+    <item hash="89a9b9b0bdde3dbd54b3bf71fc4a5213" sprite="Brigit (P2)" width="40" height="40" frame="Idle 3" direction="ESE" />
+    <item hash="5f90b8999f936a5848ddc1c3ab53eff9" sprite="Brigit (P2)" width="40" height="40" frame="Idle 3" direction="ENE" />
+    <item hash="586705743ca7c46654992b7d4ab5edbd" sprite="Brigit (P2)" width="40" height="40" frame="Idle 3" direction="NNE" />
+    <item hash="8c3369fe61d2e0c134c329279f61dc4b" sprite="Brigit (P2)" width="40" height="40" frame="Nodding 2, Nodding 4" direction="SSE" />
+    <item hash="f297cac0a3d182bdfc7102749169466b" sprite="Brigit (P2)" width="40" height="40" frame="Nodding 2, Nodding 4" direction="ESE" />
+    <item hash="b3b8734cc27b3a395fe27274f46b6666" sprite="Brigit (P2)" width="40" height="40" frame="Nodding 2, Nodding 4" direction="ENE" />
+    <item hash="1b03e55a639ca67deeb659f8fca3a49d" sprite="Brigit (P2)" width="40" height="40" frame="Nodding 2, Nodding 4" direction="NNE" />
+    <item hash="1dc8c8948265f7cfe36094a32b5834e3" sprite="Brigit (P2)" width="40" height="40" frame="Nodding 3" direction="SSE" />
+    <item hash="57660dc1b6be76bd5eac447be55f5021" sprite="Brigit (P2)" width="40" height="40" frame="Nodding 3" direction="ESE" />
+    <item hash="0216e4fda05ca6707c3c074a2b939dae" sprite="Brigit (P2)" width="40" height="40" frame="Nodding 3" direction="ENE" />
+    <item hash="5a645a7706c2a76f9c2f504d38df7b77" sprite="Brigit (P2)" width="40" height="40" frame="Nodding 3" direction="NNE" />
+    <item hash="7519b0142d435ef1809da9b4c019a5d2" sprite="Brigit (P2)" width="40" height="40" frame="ShakingHead 2, ShakingHead 6" direction="SSE" />
+    <item hash="217634409dbbdc50b0fadcdb7bea7125" sprite="Brigit (P2)" width="40" height="40" frame="ShakingHead 2, ShakingHead 6" direction="ESE" />
+    <item hash="9ab2c5f5b8067233abeb795d9786467a" sprite="Brigit (P2)" width="40" height="40" frame="ShakingHead 2, ShakingHead 6" direction="ENE" />
+    <item hash="1146060bc1285f77e5ecaf0a1ffc5881" sprite="Brigit (P2)" width="40" height="40" frame="ShakingHead 2, ShakingHead 6" direction="NNE" />
+    <item hash="caa7ba2f26920aa2e81fec717907f2e8" sprite="Brigit (P2)" width="40" height="40" frame="ShakingHead 4, ShakingHead 8" direction="SSE" />
+    <item hash="4b9949f958fd7ae7d13231bd117cda43" sprite="Brigit (P2)" width="40" height="40" frame="ShakingHead 4, ShakingHead 8" direction="ESE" />
+    <item hash="039ea42081f23b9648b00833aa5c433b" sprite="Brigit (P2)" width="40" height="40" frame="ShakingHead 4, ShakingHead 8" direction="ENE" />
+    <item hash="33e5a5be22dfd70cb2b382630077024b" sprite="Brigit (P2)" width="40" height="40" frame="ShakingHead 4, ShakingHead 8" direction="NNE" />
+    <item hash="075bd95a54ed81c772faa50c9ebcacd8" sprite="Brigit (P2)" width="40" height="40" frame="StillFrame 1, StillFrame2 (Should be Idle) 1, Walking 2, Walking 5" direction="S" />
+    <item hash="9f4cc2ed43baa1b111d6af697632ec39" sprite="Brigit (P2)" width="40" height="40" frame="StillFrame 1, StillFrame2 (Should be Idle) 1, Walking 2, Walking 5" direction="SSE" />
+    <item hash="b0721a17f94549f1e02227239c1464ec" sprite="Brigit (P2)" width="40" height="40" frame="StillFrame 1, StillFrame2 (Should be Idle) 1, Walking 2, Walking 5" direction="ESE" />
+    <item hash="1721fc577c70c28cfde65b64129f836a" sprite="Brigit (P2)" width="40" height="40" frame="StillFrame 1, StillFrame2 (Should be Idle) 1, Walking 2, Walking 5" direction="ENE" />
+    <item hash="124af6478ea40f1920a47ef19b06be05" sprite="Brigit (P2)" width="40" height="40" frame="StillFrame 1, StillFrame2 (Should be Idle) 1, Walking 2, Walking 5" direction="NNE" />
+    <item hash="9828a3012441fb04a74608017465417a" sprite="Brigit (P2)" width="40" height="40" frame="StillFrame 1, StillFrame2 (Should be Idle) 1, Walking 2, Walking 5" direction="N" />
+    <item hash="ad6251d350439f3bb0d3e742bdc4a701" sprite="Brigit (P2)" width="40" height="40" frame="Walking 1" direction="S" />
+    <item hash="cdc1a186ee3b3a52cfe223286951492d" sprite="Brigit (P2)" width="40" height="40" frame="Walking 1" direction="SSE" />
+    <item hash="9c0e45945f847026e03ae7bf2fafa173" sprite="Brigit (P2)" width="40" height="40" frame="Walking 1" direction="ESE" />
+    <item hash="7a57c9dbe2cf36aa2d7080836cb4e7f1" sprite="Brigit (P2)" width="40" height="40" frame="Walking 1" direction="ENE" />
+    <item hash="58c0c72ec4b2b04483d6d7b25b771989" sprite="Brigit (P2)" width="40" height="40" frame="Walking 1" direction="NNE" />
+    <item hash="babd9644fc846e47cc08ac288b04e09a" sprite="Brigit (P2)" width="40" height="40" frame="Walking 1" direction="N" />
+    <item hash="075274f6cfdf93c22fba17c105f38bac" sprite="Brigit (P2)" width="40" height="40" frame="Walking 3" direction="S" />
+    <item hash="0ab8ebe13da130b71811dbb932c69111" sprite="Brigit (P2)" width="40" height="40" frame="Walking 3" direction="SSE" />
+    <item hash="f5ef9bbd3aed7c005c34dc3dc780ea85" sprite="Brigit (P2)" width="40" height="40" frame="Walking 3" direction="ESE" />
+    <item hash="2b1b1f622359dff1e9d28c2f0dc77253" sprite="Brigit (P2)" width="40" height="40" frame="Walking 3" direction="ENE" />
+    <item hash="7922edb8b1cb92e2b0f2bf27a5aba567" sprite="Brigit (P2)" width="40" height="40" frame="Walking 3" direction="NNE" />
+    <item hash="5a1074ed02737f4df4e3a4df5621f3f9" sprite="Brigit (P2)" width="40" height="40" frame="Walking 3" direction="N" />
+    <item hash="957662fde7f5da8dbbe9800db14a206b" sprite="Brigit (P2)" width="40" height="40" frame="Walking 4" direction="S" />
+    <item hash="cbddb3aa39f3589ae97ea23224f61448" sprite="Brigit (P2)" width="40" height="40" frame="Walking 4" direction="SSE" />
+    <item hash="5d328484c817794e80b71b7e820ab6b3" sprite="Brigit (P2)" width="40" height="40" frame="Walking 4" direction="ESE" />
+    <item hash="ab892a1721a3bcd4443b5735a3a1bc3a" sprite="Brigit (P2)" width="40" height="40" frame="Walking 4" direction="ENE" />
+    <item hash="363edce27bee9c3dcf2a02ab34d4209d" sprite="Brigit (P2)" width="40" height="40" frame="Walking 4" direction="NNE" />
+    <item hash="69d26fd0a29386e78796f8d6870d13aa" sprite="Brigit (P2)" width="40" height="40" frame="Walking 4" direction="N" />
+    <item hash="99ccbcf102094c4d193700d12ee31059" sprite="Brigit (P2)" width="40" height="40" frame="Walking 6" direction="S" />
+    <item hash="82782d921d9dc71d90363e84f151ea07" sprite="Brigit (P2)" width="40" height="40" frame="Walking 6" direction="SSE" />
+    <item hash="b796f8275239bb69ab019e97155606bf" sprite="Brigit (P2)" width="40" height="40" frame="Walking 6" direction="ESE" />
+    <item hash="fff5fbb2eaf5f90722289335bcc721be" sprite="Brigit (P2)" width="40" height="40" frame="Walking 6" direction="ENE" />
+    <item hash="237a95f89bf930759ebf99fb5109faf9" sprite="Brigit (P2)" width="40" height="40" frame="Walking 6" direction="NNE" />
+    <item hash="5e99949c2549b3803488ff9ba4557b8c" sprite="Brigit (P2)" width="40" height="40" frame="Walking 6" direction="N" />
     <item hash="21babfff443bf75e6c374d4dc2be7bf4" sprite="Brown Bird" width="48" height="32" frame="Flying (Flapping Quickly) 1, StillFrame 1" direction="SSE" />
     <item hash="1ea4d108b4422839fd972d1d4abaa649" sprite="Brown Bird" width="48" height="32" frame="Flying (Flapping Quickly) 1, StillFrame 1" direction="ESE" />
     <item hash="dfb659eb8f0e6f666bbd0b2c3e1f3e24" sprite="Brown Bird" width="48" height="32" frame="Flying (Flapping Quickly) 1, StillFrame 1" direction="ENE" />

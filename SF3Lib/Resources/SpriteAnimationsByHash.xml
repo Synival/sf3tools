@@ -390,22 +390,22 @@
     <item hash="a323858d04b9e26b0a073a8adb28e8ea" sprite="Bresby" animation="Walking (Fast)" width="40" height="40" directions="4" frames="5" duration="16" />
     <item hash="d5d05596f9feb2e3254fbbf811560b13" sprite="Bresby (Big)" animation="Idle" width="64" height="64" directions="1" frames="5" duration="21" />
     <item hash="10ff676dee29a6766b07f0c3394075ee" sprite="Bresby (Big)" animation="StillFrame" width="64" height="64" directions="1" frames="2" duration="10" />
-    <item hash="9ce7a264622640219dd5034421741592" sprite="Bridget (P1)" animation="Idle" width="40" height="40" directions="4" frames="5" duration="20" />
-    <item hash="64de444eea81c87dceae2ad5fc7a1a46" sprite="Bridget (P1)" animation="Idle" width="40" height="40" directions="6" frames="5" duration="20" />
-    <item hash="96040a11b15fbc276a8d3e459e2c5557" sprite="Bridget (P1)" animation="Nodding" width="40" height="40" directions="4" frames="5" duration="18" />
-    <item hash="b778b42a544d4f2f637f47ce92d6364d" sprite="Bridget (P1)" animation="ShakingHead" width="40" height="40" directions="4" frames="9" duration="28" />
-    <item hash="6c86499a5a0ba7bd6c668dee90144a2d" sprite="Bridget (P1)" animation="StillFrame" width="40" height="40" directions="4" frames="2" duration="10" />
-    <item hash="483e0fb72ea838acf015211c600a2067" sprite="Bridget (P1)" animation="StillFrame" width="40" height="40" directions="6" frames="2" duration="10" />
-    <item hash="1c769360c1de9c8c58b8f065165e2bb8" sprite="Bridget (P1)" animation="Walking" width="40" height="40" directions="4" frames="7" duration="24" />
-    <item hash="dc5a1e7dd9556a11077110ef44b2dc96" sprite="Bridget (P1)" animation="Walking" width="40" height="40" directions="6" frames="7" duration="24" />
-    <item hash="76f8a5711bb3404e1805b8eebdc6c725" sprite="Bridget (P2)" animation="Idle" width="40" height="40" directions="4" frames="5" duration="20" />
-    <item hash="18b039e0f29e05d450efb9e3357941ba" sprite="Bridget (P2)" animation="Nodding" width="40" height="40" directions="4" frames="5" duration="18" />
-    <item hash="80a1133c5323f45e2933fbc8a2321619" sprite="Bridget (P2)" animation="ShakingHead" width="40" height="40" directions="4" frames="9" duration="28" />
-    <item hash="f148c403ae287a8375542388fba21281" sprite="Bridget (P2)" animation="StillFrame" width="40" height="40" directions="4" frames="2" duration="10" />
-    <item hash="e8f31a63281ffea4de9be100b566dad7" sprite="Bridget (P2)" animation="StillFrame" width="40" height="40" directions="6" frames="2" duration="10" />
-    <item hash="8640f2698c4ada56ddb29d80e1c02908" sprite="Bridget (P2)" animation="StillFrame2 (Should be Idle)" width="40" height="40" directions="6" frames="2" duration="4" />
-    <item hash="ed60ab378b20709e24f51234a581d678" sprite="Bridget (P2)" animation="Walking" width="40" height="40" directions="4" frames="7" duration="24" />
-    <item hash="bd3b6833f0c3a0abd676b9d98c38055b" sprite="Bridget (P2)" animation="Walking" width="40" height="40" directions="6" frames="7" duration="24" />
+    <item hash="9ce7a264622640219dd5034421741592" sprite="Brigit (P1)" animation="Idle" width="40" height="40" directions="4" frames="5" duration="20" />
+    <item hash="64de444eea81c87dceae2ad5fc7a1a46" sprite="Brigit (P1)" animation="Idle" width="40" height="40" directions="6" frames="5" duration="20" />
+    <item hash="96040a11b15fbc276a8d3e459e2c5557" sprite="Brigit (P1)" animation="Nodding" width="40" height="40" directions="4" frames="5" duration="18" />
+    <item hash="b778b42a544d4f2f637f47ce92d6364d" sprite="Brigit (P1)" animation="ShakingHead" width="40" height="40" directions="4" frames="9" duration="28" />
+    <item hash="6c86499a5a0ba7bd6c668dee90144a2d" sprite="Brigit (P1)" animation="StillFrame" width="40" height="40" directions="4" frames="2" duration="10" />
+    <item hash="483e0fb72ea838acf015211c600a2067" sprite="Brigit (P1)" animation="StillFrame" width="40" height="40" directions="6" frames="2" duration="10" />
+    <item hash="1c769360c1de9c8c58b8f065165e2bb8" sprite="Brigit (P1)" animation="Walking" width="40" height="40" directions="4" frames="7" duration="24" />
+    <item hash="dc5a1e7dd9556a11077110ef44b2dc96" sprite="Brigit (P1)" animation="Walking" width="40" height="40" directions="6" frames="7" duration="24" />
+    <item hash="76f8a5711bb3404e1805b8eebdc6c725" sprite="Brigit (P2)" animation="Idle" width="40" height="40" directions="4" frames="5" duration="20" />
+    <item hash="18b039e0f29e05d450efb9e3357941ba" sprite="Brigit (P2)" animation="Nodding" width="40" height="40" directions="4" frames="5" duration="18" />
+    <item hash="80a1133c5323f45e2933fbc8a2321619" sprite="Brigit (P2)" animation="ShakingHead" width="40" height="40" directions="4" frames="9" duration="28" />
+    <item hash="f148c403ae287a8375542388fba21281" sprite="Brigit (P2)" animation="StillFrame" width="40" height="40" directions="4" frames="2" duration="10" />
+    <item hash="e8f31a63281ffea4de9be100b566dad7" sprite="Brigit (P2)" animation="StillFrame" width="40" height="40" directions="6" frames="2" duration="10" />
+    <item hash="8640f2698c4ada56ddb29d80e1c02908" sprite="Brigit (P2)" animation="StillFrame2 (Should be Idle)" width="40" height="40" directions="6" frames="2" duration="4" />
+    <item hash="ed60ab378b20709e24f51234a581d678" sprite="Brigit (P2)" animation="Walking" width="40" height="40" directions="4" frames="7" duration="24" />
+    <item hash="bd3b6833f0c3a0abd676b9d98c38055b" sprite="Brigit (P2)" animation="Walking" width="40" height="40" directions="6" frames="7" duration="24" />
     <item hash="f5d870892d8511daa97bd7279d15fe79" sprite="Brown Bird" animation="Flying (Flapping Quickly)" width="48" height="32" directions="4" frames="5" duration="4" />
     <item hash="4119a42f7d4d3b72c6a0b95c128f0103" sprite="Brown Bird" animation="HoppingAround" width="48" height="32" directions="4" frames="6" duration="10" />
     <item hash="8fcbc81d4e4b754a14fea3e7f8b2cd95" sprite="Brown Bird" animation="StillFrame" width="48" height="32" directions="4" frames="2" duration="1" />
