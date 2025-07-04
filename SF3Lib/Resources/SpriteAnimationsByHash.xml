@@ -309,9 +309,9 @@
     <item hash="fea4c26d3c2d093b133cb76a0a2c6ce2" sprite="Blue Dragon" animation="Flying (Slow)" width="48" height="32" directions="4" frames="9" duration="26" />
     <item hash="bb691bcedb2ed29804836a0795b6efeb" sprite="Blue Dragon" animation="Flying (Very Fast)" width="48" height="32" directions="4" frames="9" duration="21" />
     <item hash="dcf646d5de5afffd8640224364ce4e3d" sprite="Blue Dragon" animation="StillFrame" width="48" height="32" directions="4" frames="2" duration="10" />
+    <item hash="c8085a137b7f2f5c53659d39c9e2a70a" sprite="Blue Dragon (SC3)" animation="Flying (Medium)" width="48" height="32" directions="4" frames="5" duration="20" />
     <item hash="587a9d9231cc575edaf56456185494a1" sprite="Blue Dragon (SC3)" animation="Flying (Slow)" width="48" height="32" directions="4" frames="9" duration="40" />
     <item hash="20f5209027514645ad5ed89b139f8709" sprite="Blue Dragon (SC3)" animation="Flying (Very Fast)" width="48" height="32" directions="4" frames="9" duration="16" />
-    <item hash="c8085a137b7f2f5c53659d39c9e2a70a" sprite="Blue Dragon (SC3)" animation="Flying (Medium)" width="48" height="32" directions="4" frames="5" duration="20" />
     <item hash="68779dc5717ed6395e966cafe1a23e91" sprite="Blue Dragon (SC3)" animation="StillFrame" width="48" height="32" directions="4" frames="2" duration="10" />
     <item hash="69da4d1aff059b999111b5fd8785909b" sprite="Bomb" animation="StillFrame" width="16" height="16" directions="1" frames="2" duration="1" />
     <item hash="d512efc545544626ac626dca8d251f9d" sprite="Bow Knight" animation="Idle" width="48" height="40" directions="4" frames="5" duration="20" />
@@ -2006,8 +2006,6 @@
     <item hash="e0233d2762b80e4463609feaf75a16eb" sprite="Jubei (P2)" animation="StillFrame" width="40" height="40" directions="6" frames="2" duration="10" />
     <item hash="ab4932db2a2ab53d86ceb2d9a0933af9" sprite="Jubei (P2)" animation="Walking" width="40" height="40" directions="4" frames="7" duration="24" />
     <item hash="c30337b4c0331d12017095edae3893a3" sprite="Jubei (P2)" animation="Walking" width="40" height="40" directions="6" frames="7" duration="24" />
-    <item hash="4d74c4a43ddb52a1079261f69cb75162" sprite="Julian (Big)" animation="Idle" width="64" height="64" directions="1" frames="5" duration="18" />
-    <item hash="ec97e1830c2231f5f5c709dcc61a0a4f" sprite="Julian (Big)" animation="Idle" width="64" height="64" directions="1" frames="5" duration="18" />
     <item hash="20057ad54e3b0678866c87b0a876e41c" sprite="Julian (Big)" animation="StillFrame" width="64" height="64" directions="1" frames="2" duration="10" />
     <item hash="842edee8c304ff5dbb1240656556c938" sprite="Julian (Big)" animation="StillFrame" width="64" height="64" directions="1" frames="2" duration="10" />
     <item hash="28b3484c23ddb08b9a19c2bbcde69929" sprite="Julian (P1)" animation="Idle" width="40" height="40" directions="4" frames="5" duration="18" />
@@ -2023,6 +2021,7 @@
     <item hash="d68c8301c92cba8f656d017e4b646e60" sprite="Julian (P1)" animation="StillFrame (Falling)" width="40" height="40" directions="4" frames="2" duration="5" />
     <item hash="2ed020cb507991c946604d700bcbabfc" sprite="Julian (P1)" animation="Walking" width="40" height="40" directions="4" frames="7" duration="30" />
     <item hash="b8491af6b7c09e2b33f280432db39a87" sprite="Julian (P1)" animation="Walking" width="40" height="40" directions="6" frames="7" duration="30" />
+    <item hash="ec97e1830c2231f5f5c709dcc61a0a4f" sprite="Julian (P1) (Big)" animation="Idle" width="64" height="64" directions="1" frames="5" duration="18" />
     <item hash="863856cf334b5b5a7a59101343443e52" sprite="Julian (P1) (Weaponless)" animation="FinishingLookingBack" width="40" height="40" directions="4" frames="2" duration="6" />
     <item hash="0be141f499c1f7430dfbb11bd92c7da0" sprite="Julian (P1) (Weaponless)" animation="Idle" width="40" height="40" directions="4" frames="5" duration="18" />
     <item hash="d5ef3bd984b4afda96856fb124b6b9a2" sprite="Julian (P1) (Weaponless)" animation="Idle" width="40" height="40" directions="6" frames="5" duration="18" />
@@ -2059,49 +2058,50 @@
     <item hash="ca8a3f49beadf82767bcd9efef946920" sprite="Julian (P2) (Weaponless)" animation="GettingUpFromGround" width="48" height="40" directions="1" frames="4" duration="16" />
     <item hash="7f13da21563f1df1c66357108ef2b4af" sprite="Julian (P2) (Weaponless)" animation="StillFrame (OnGround)" width="48" height="40" directions="1" frames="2" duration="10" />
     <item hash="02879a9470ceb8ffd15fd1a1388a5061" sprite="Julian (U)" animation="Idle" width="40" height="40" directions="4" frames="5" duration="18" />
-    <item hash="13fe47222612622f2822b07f7c6b50bc" sprite="Julian (U)" animation="Idle" width="40" height="40" directions="4" frames="5" duration="18" />
-    <item hash="748c36654dd1bba94fd88a7cf102ca10" sprite="Julian (U)" animation="Idle" width="40" height="40" directions="4" frames="5" duration="18" />
     <item hash="1b3cf637dcde62f66263956d748b1923" sprite="Julian (U)" animation="Idle" width="40" height="40" directions="6" frames="5" duration="18" />
-    <item hash="9cd06e82b360df45183214b2925ce78e" sprite="Julian (U)" animation="Idle" width="40" height="40" directions="6" frames="5" duration="18" />
     <item hash="f7e8f7d662ccad8c8ed16e522060cd24" sprite="Julian (U)" animation="Idle" width="40" height="40" directions="6" frames="5" duration="18" />
-    <item hash="7bf5a8f063af86c761495b9d3a01c277" sprite="Julian (U)" animation="Nodding" width="40" height="40" directions="4" frames="5" duration="18" />
     <item hash="04d318f214e409a6bbcfe1688bbc01c8" sprite="Julian (U)" animation="Nodding" width="40" height="40" directions="6" frames="5" duration="18" />
     <item hash="55dfe19579075613f1f573927805c4d2" sprite="Julian (U)" animation="ShakingHead" width="40" height="40" directions="6" frames="9" duration="32" />
     <item hash="017d71b492f0c47bdc5335947cb2b6bd" sprite="Julian (U)" animation="StillFrame" width="40" height="40" directions="4" frames="2" duration="10" />
     <item hash="1d13d573e5f9b0cd4adde7f478922089" sprite="Julian (U)" animation="StillFrame" width="40" height="40" directions="4" frames="2" duration="10" />
     <item hash="54360731b6be964b97ef1607df37f4e2" sprite="Julian (U)" animation="StillFrame" width="40" height="40" directions="4" frames="2" duration="10" />
     <item hash="1417077443afb1681ac587a0bafce1bf" sprite="Julian (U)" animation="StillFrame" width="40" height="40" directions="6" frames="2" duration="10" />
-    <item hash="1d29ed359f7050d03fbecd084d8b935f" sprite="Julian (U)" animation="StillFrame" width="40" height="40" directions="6" frames="2" duration="10" />
-    <item hash="32627cfc130f160ca036ec9461f13c2f" sprite="Julian (U)" animation="StillFrame (Falling)" width="40" height="40" directions="4" frames="2" duration="5" />
-    <item hash="777cac0ff4424f6a83cb22990bed2ae1" sprite="Julian (U)" animation="Walking" width="40" height="40" directions="4" frames="7" duration="30" />
-    <item hash="1490263a7fd785bfb92defebc737a823" sprite="Julian (U)" animation="Walking" width="40" height="40" directions="6" frames="7" duration="30" />
     <item hash="b08f161d9b2cba7fbfa7c33a919d808b" sprite="Julian (U)" animation="Walking" width="40" height="40" directions="6" frames="7" duration="30" />
+    <item hash="f60911aa318bcf37430bf1f7b4759350" sprite="Julian (U) (Beer)" animation="Drinking" width="40" height="40" directions="4" frames="5" duration="31" />
+    <item hash="42e4d3e594d4881007b2af279a34c323" sprite="Julian (U) (Beer)" animation="StillFrame" width="40" height="40" directions="4" frames="2" duration="10" />
+    <item hash="4d74c4a43ddb52a1079261f69cb75162" sprite="Julian (U) (Big)" animation="Idle" width="64" height="64" directions="1" frames="5" duration="18" />
+    <item hash="13fe47222612622f2822b07f7c6b50bc" sprite="Julian (U) (Shield)" animation="Idle" width="40" height="40" directions="4" frames="5" duration="18" />
+    <item hash="748c36654dd1bba94fd88a7cf102ca10" sprite="Julian (U) (Shield)" animation="Idle" width="40" height="40" directions="4" frames="5" duration="18" />
+    <item hash="9cd06e82b360df45183214b2925ce78e" sprite="Julian (U) (Shield)" animation="Idle" width="40" height="40" directions="6" frames="5" duration="18" />
+    <item hash="7bf5a8f063af86c761495b9d3a01c277" sprite="Julian (U) (Shield)" animation="Nodding" width="40" height="40" directions="4" frames="5" duration="18" />
+    <item hash="1d29ed359f7050d03fbecd084d8b935f" sprite="Julian (U) (Shield)" animation="StillFrame" width="40" height="40" directions="6" frames="2" duration="10" />
+    <item hash="32627cfc130f160ca036ec9461f13c2f" sprite="Julian (U) (Shield)" animation="StillFrame (Falling)" width="40" height="40" directions="4" frames="2" duration="5" />
+    <item hash="777cac0ff4424f6a83cb22990bed2ae1" sprite="Julian (U) (Shield)" animation="Walking" width="40" height="40" directions="4" frames="7" duration="30" />
+    <item hash="1490263a7fd785bfb92defebc737a823" sprite="Julian (U) (Shield)" animation="Walking" width="40" height="40" directions="6" frames="7" duration="30" />
+    <item hash="682523dc4e5fea98ba84cdcfb241e2e5" sprite="Julian (U) (Shield) (Weaponless)" animation="Idle" width="40" height="40" directions="4" frames="5" duration="18" />
+    <item hash="b2e5885031b5e0e516333f8df72f2ee8" sprite="Julian (U) (Shield) (Weaponless)" animation="Idle" width="40" height="40" directions="6" frames="5" duration="18" />
+    <item hash="bfc4b74082e8aa32ca70369e63bb6ad6" sprite="Julian (U) (Shield) (Weaponless)" animation="LookingBack" width="40" height="40" directions="4" frames="5" duration="21" />
+    <item hash="7cdf048fc567ea051d9fd18bf3a45d9f" sprite="Julian (U) (Shield) (Weaponless)" animation="LookingBackThenToIdle" width="40" height="40" directions="6" frames="6" duration="24" />
+    <item hash="82c255bdfbda2a3532fbe834a95c817f" sprite="Julian (U) (Shield) (Weaponless)" animation="Nodding" width="40" height="40" directions="4" frames="5" duration="18" />
+    <item hash="1f844726539bd5291b8ab488696dde28" sprite="Julian (U) (Shield) (Weaponless)" animation="Nodding" width="40" height="40" directions="6" frames="5" duration="18" />
+    <item hash="3de67827163c5254861a3efad41ec8af" sprite="Julian (U) (Shield) (Weaponless)" animation="ShakingHead" width="40" height="40" directions="4" frames="9" duration="32" />
+    <item hash="40e7320ba2f1f591747c52e961af7ef8" sprite="Julian (U) (Shield) (Weaponless)" animation="ShakingHead" width="40" height="40" directions="6" frames="9" duration="32" />
+    <item hash="979ee1469807e5cf30c38c2ab27a5eac" sprite="Julian (U) (Shield) (Weaponless)" animation="StillFrame1" width="40" height="40" directions="4" frames="2" duration="10" />
+    <item hash="c3ca425d909f7c7280ecb1e18f7221eb" sprite="Julian (U) (Shield) (Weaponless)" animation="StillFrame2" width="40" height="40" directions="4" frames="2" duration="5" />
+    <item hash="7576cb6c368e8313ef11a535c2a1dcc0" sprite="Julian (U) (Shield) (Weaponless)" animation="Walking" width="40" height="40" directions="4" frames="7" duration="30" />
+    <item hash="d2c4fcc7cf9096b0d4a0a3989dcde6e6" sprite="Julian (U) (Shield) (Weaponless)" animation="Walking" width="40" height="40" directions="6" frames="7" duration="30" />
+    <item hash="f753056576268510c0e715ce395f9984" sprite="Julian (U) (Shield) (Weaponless), Julian (U) (Weaponless)" animation="StillFrame" width="40" height="40" directions="6" frames="2" duration="10" />
     <item hash="c22335647e154385d31684f3f9a6353c" sprite="Julian (U) (Weaponless)" animation="FinishingLookingBack" width="40" height="40" directions="4" frames="2" duration="3" />
-    <item hash="682523dc4e5fea98ba84cdcfb241e2e5" sprite="Julian (U) (Weaponless)" animation="Idle" width="40" height="40" directions="4" frames="5" duration="18" />
     <item hash="6959a3c907a826a1ede23e04f82ba547" sprite="Julian (U) (Weaponless)" animation="Idle" width="40" height="40" directions="4" frames="5" duration="18" />
     <item hash="3a1f95ae0db86d53cb053de58071e9da" sprite="Julian (U) (Weaponless)" animation="Idle" width="40" height="40" directions="6" frames="5" duration="18" />
-    <item hash="b2e5885031b5e0e516333f8df72f2ee8" sprite="Julian (U) (Weaponless)" animation="Idle" width="40" height="40" directions="6" frames="5" duration="18" />
-    <item hash="bfc4b74082e8aa32ca70369e63bb6ad6" sprite="Julian (U) (Weaponless)" animation="LookingBack" width="40" height="40" directions="4" frames="5" duration="21" />
-    <item hash="7cdf048fc567ea051d9fd18bf3a45d9f" sprite="Julian (U) (Weaponless)" animation="LookingBackThenToIdle" width="40" height="40" directions="6" frames="6" duration="24" />
     <item hash="658051a5163a6493f8c75bbe46f1eca9" sprite="Julian (U) (Weaponless)" animation="Nodding" width="40" height="40" directions="4" frames="5" duration="18" />
-    <item hash="82c255bdfbda2a3532fbe834a95c817f" sprite="Julian (U) (Weaponless)" animation="Nodding" width="40" height="40" directions="4" frames="5" duration="18" />
     <item hash="13b99e37063611699abfc09fb1c363a3" sprite="Julian (U) (Weaponless)" animation="Nodding" width="40" height="40" directions="6" frames="5" duration="18" />
-    <item hash="1f844726539bd5291b8ab488696dde28" sprite="Julian (U) (Weaponless)" animation="Nodding" width="40" height="40" directions="6" frames="5" duration="18" />
     <item hash="22296df9d0c28c6038a5be6cf4453665" sprite="Julian (U) (Weaponless)" animation="ShakingHead" width="40" height="40" directions="4" frames="9" duration="32" />
-    <item hash="3de67827163c5254861a3efad41ec8af" sprite="Julian (U) (Weaponless)" animation="ShakingHead" width="40" height="40" directions="4" frames="9" duration="32" />
-    <item hash="40e7320ba2f1f591747c52e961af7ef8" sprite="Julian (U) (Weaponless)" animation="ShakingHead" width="40" height="40" directions="6" frames="9" duration="32" />
     <item hash="fb57b5f558f22ba1ed3e1428c922bf8e" sprite="Julian (U) (Weaponless)" animation="ShakingHead" width="40" height="40" directions="6" frames="9" duration="32" />
     <item hash="50ad3f53ca987fde38b5982ad0b3633f" sprite="Julian (U) (Weaponless)" animation="StillFrame" width="40" height="40" directions="4" frames="2" duration="10" />
     <item hash="e1d7f4d98488abf8664e606ab6460d83" sprite="Julian (U) (Weaponless)" animation="StillFrame" width="40" height="40" directions="6" frames="2" duration="10" />
-    <item hash="f753056576268510c0e715ce395f9984" sprite="Julian (U) (Weaponless)" animation="StillFrame" width="40" height="40" directions="6" frames="2" duration="10" />
-    <item hash="979ee1469807e5cf30c38c2ab27a5eac" sprite="Julian (U) (Weaponless)" animation="StillFrame1" width="40" height="40" directions="4" frames="2" duration="10" />
-    <item hash="c3ca425d909f7c7280ecb1e18f7221eb" sprite="Julian (U) (Weaponless)" animation="StillFrame2" width="40" height="40" directions="4" frames="2" duration="5" />
-    <item hash="7576cb6c368e8313ef11a535c2a1dcc0" sprite="Julian (U) (Weaponless)" animation="Walking" width="40" height="40" directions="4" frames="7" duration="30" />
     <item hash="9dbe421f32eeee49ff0be2cfc33deb2d" sprite="Julian (U) (Weaponless)" animation="Walking" width="40" height="40" directions="4" frames="7" duration="30" />
     <item hash="65f4b3177ebc2cd1742fba9980cd00b7" sprite="Julian (U) (Weaponless)" animation="Walking" width="40" height="40" directions="6" frames="7" duration="30" />
-    <item hash="d2c4fcc7cf9096b0d4a0a3989dcde6e6" sprite="Julian (U) (Weaponless)" animation="Walking" width="40" height="40" directions="6" frames="7" duration="30" />
-    <item hash="f60911aa318bcf37430bf1f7b4759350" sprite="Julian (U) (With Beer)" animation="Drinking" width="40" height="40" directions="4" frames="5" duration="31" />
-    <item hash="42e4d3e594d4881007b2af279a34c323" sprite="Julian (U) (With Beer)" animation="StillFrame" width="40" height="40" directions="4" frames="2" duration="10" />
     <item hash="482f7e7abaf93a067ac36c0c55fba7c5" sprite="Justin (P1)" animation="Idle" width="48" height="40" directions="4" frames="5" duration="18" />
     <item hash="e55c0a327908cffaf20e02146385c2e6" sprite="Justin (P1)" animation="Idle" width="48" height="40" directions="6" frames="5" duration="18" />
     <item hash="6a6a5c7cc69887859080a4d0904624dd" sprite="Justin (P1)" animation="Nodding" width="48" height="40" directions="4" frames="5" duration="8" />

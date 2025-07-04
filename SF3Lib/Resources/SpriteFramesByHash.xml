@@ -153,26 +153,26 @@
     <item hash="4cbab575da7a16bd9e52ff8ed79608aa" sprite="Arch Demon" width="40" height="40" frame="Walking 6" direction="ESE" />
     <item hash="c9b91ac38b48db96195275e37f093923" sprite="Arch Demon" width="40" height="40" frame="Walking 6" direction="ENE" />
     <item hash="dca7471c1504269b307baa593ecb4470" sprite="Arch Demon" width="40" height="40" frame="Walking 6" direction="NNE" />
-    <item hash="91f17f5ac52018f2087439c869adc1ac" sprite="Arch Dragon" width="48" height="32" frame="Flying 1" direction="SSE" />
-    <item hash="4062adfbc158d317ec11c5f0d7ec0dda" sprite="Arch Dragon" width="48" height="32" frame="Flying 1" direction="ESE" />
-    <item hash="7d90243e4e688565c35997d84e51db01" sprite="Arch Dragon" width="48" height="32" frame="Flying 1" direction="ENE" />
-    <item hash="7ea704c0fdcbe30aba4ebaa254a35d75" sprite="Arch Dragon" width="48" height="32" frame="Flying 1" direction="NNE" />
-    <item hash="adca4d9e83e7796b54d0372ae94b60e4" sprite="Arch Dragon" width="48" height="32" frame="Flying 2" direction="SSE" />
-    <item hash="aefeade6bbeb10aa55c0250427a60450" sprite="Arch Dragon" width="48" height="32" frame="Flying 2" direction="ESE" />
-    <item hash="546427b64ca93023e24ae09acb24349c" sprite="Arch Dragon" width="48" height="32" frame="Flying 2" direction="ENE" />
-    <item hash="3894b44721e87e9d6d90f55d981a8f7c" sprite="Arch Dragon" width="48" height="32" frame="Flying 2" direction="NNE" />
-    <item hash="294c9cfddbbf28ffeb1aa8cdb0c003ca" sprite="Arch Dragon" width="48" height="32" frame="Flying 3" direction="SSE" />
-    <item hash="c171addd7edd11d74ba4cf0d6823008a" sprite="Arch Dragon" width="48" height="32" frame="Flying 3" direction="ESE" />
-    <item hash="55845c18e3cfcf43ea1172c1d8046ce6" sprite="Arch Dragon" width="48" height="32" frame="Flying 3" direction="ENE" />
-    <item hash="c0ea539d3b60ccfe496f2d70390c493f" sprite="Arch Dragon" width="48" height="32" frame="Flying 3" direction="NNE" />
-    <item hash="3a28d30fb9b618b0251a57633dd8133b" sprite="Arch Dragon" width="48" height="32" frame="Flying 4" direction="SSE" />
-    <item hash="14378ba5e8e50ed22739f90c09aed4c6" sprite="Arch Dragon" width="48" height="32" frame="Flying 4" direction="ESE" />
-    <item hash="dc511570fbee5b40e973fa2fd4a1a94d" sprite="Arch Dragon" width="48" height="32" frame="Flying 4" direction="ENE" />
-    <item hash="31d0b0bfbcc51c9ef311a5cbb41c3672" sprite="Arch Dragon" width="48" height="32" frame="Flying 4" direction="NNE" />
-    <item hash="1e1782b7085a8f05dde6d70b9a1bc809" sprite="Arch Dragon" width="48" height="32" frame="Flying 5" direction="SSE" />
-    <item hash="30b95f37bd4235ff004fbc782b5f778f" sprite="Arch Dragon" width="48" height="32" frame="Flying 5" direction="ESE" />
-    <item hash="1580b665174eb41e5f154baf278c7f5e" sprite="Arch Dragon" width="48" height="32" frame="Flying 5" direction="ENE" />
-    <item hash="e67305978224277229514a85eb5e051b" sprite="Arch Dragon" width="48" height="32" frame="Flying 5" direction="NNE" />
+    <item hash="91f17f5ac52018f2087439c869adc1ac" sprite="Arch Dragon" width="48" height="32" frame="Idle (Similar to Flying) 1" direction="SSE" />
+    <item hash="4062adfbc158d317ec11c5f0d7ec0dda" sprite="Arch Dragon" width="48" height="32" frame="Idle (Similar to Flying) 1" direction="ESE" />
+    <item hash="7d90243e4e688565c35997d84e51db01" sprite="Arch Dragon" width="48" height="32" frame="Idle (Similar to Flying) 1" direction="ENE" />
+    <item hash="7ea704c0fdcbe30aba4ebaa254a35d75" sprite="Arch Dragon" width="48" height="32" frame="Idle (Similar to Flying) 1" direction="NNE" />
+    <item hash="adca4d9e83e7796b54d0372ae94b60e4" sprite="Arch Dragon" width="48" height="32" frame="Idle (Similar to Flying) 2" direction="SSE" />
+    <item hash="aefeade6bbeb10aa55c0250427a60450" sprite="Arch Dragon" width="48" height="32" frame="Idle (Similar to Flying) 2" direction="ESE" />
+    <item hash="546427b64ca93023e24ae09acb24349c" sprite="Arch Dragon" width="48" height="32" frame="Idle (Similar to Flying) 2" direction="ENE" />
+    <item hash="3894b44721e87e9d6d90f55d981a8f7c" sprite="Arch Dragon" width="48" height="32" frame="Idle (Similar to Flying) 2" direction="NNE" />
+    <item hash="294c9cfddbbf28ffeb1aa8cdb0c003ca" sprite="Arch Dragon" width="48" height="32" frame="Idle (Similar to Flying) 3" direction="SSE" />
+    <item hash="c171addd7edd11d74ba4cf0d6823008a" sprite="Arch Dragon" width="48" height="32" frame="Idle (Similar to Flying) 3" direction="ESE" />
+    <item hash="55845c18e3cfcf43ea1172c1d8046ce6" sprite="Arch Dragon" width="48" height="32" frame="Idle (Similar to Flying) 3" direction="ENE" />
+    <item hash="c0ea539d3b60ccfe496f2d70390c493f" sprite="Arch Dragon" width="48" height="32" frame="Idle (Similar to Flying) 3" direction="NNE" />
+    <item hash="3a28d30fb9b618b0251a57633dd8133b" sprite="Arch Dragon" width="48" height="32" frame="Idle (Similar to Flying) 4" direction="SSE" />
+    <item hash="14378ba5e8e50ed22739f90c09aed4c6" sprite="Arch Dragon" width="48" height="32" frame="Idle (Similar to Flying) 4" direction="ESE" />
+    <item hash="dc511570fbee5b40e973fa2fd4a1a94d" sprite="Arch Dragon" width="48" height="32" frame="Idle (Similar to Flying) 4" direction="ENE" />
+    <item hash="31d0b0bfbcc51c9ef311a5cbb41c3672" sprite="Arch Dragon" width="48" height="32" frame="Idle (Similar to Flying) 4" direction="NNE" />
+    <item hash="1e1782b7085a8f05dde6d70b9a1bc809" sprite="Arch Dragon" width="48" height="32" frame="Idle (Similar to Flying) 5" direction="SSE" />
+    <item hash="30b95f37bd4235ff004fbc782b5f778f" sprite="Arch Dragon" width="48" height="32" frame="Idle (Similar to Flying) 5" direction="ESE" />
+    <item hash="1580b665174eb41e5f154baf278c7f5e" sprite="Arch Dragon" width="48" height="32" frame="Idle (Similar to Flying) 5" direction="ENE" />
+    <item hash="e67305978224277229514a85eb5e051b" sprite="Arch Dragon" width="48" height="32" frame="Idle (Similar to Flying) 5" direction="NNE" />
     <item hash="b913ff7bbfb28a3ca62c3d0cf00aab25" sprite="Ark Hill Priest" width="40" height="48" frame="HoldUpHand (1 Direction) 2" direction="First" />
     <item hash="7fb501b2389236d5c7da104eb9de8b8d" sprite="Ark Hill Priest" width="40" height="48" frame="HoldUpHand (1 Direction) 3" direction="First" />
     <item hash="8304d87ef54bd3145a2f2fe4f123ed86" sprite="Ark Hill Priest" width="40" height="48" frame="Idle 1" direction="SSE" />
@@ -1944,6 +1944,10 @@
     <item hash="46c5e6e3986fbea51ef927f032af8ec5" sprite="Bow Knight (Waltz Placeholder)" width="48" height="40" frame="Idle 3" direction="ESE" />
     <item hash="fb1cbced4425105768c27221fe6f0eb6" sprite="Bow Knight (Waltz Placeholder)" width="48" height="40" frame="Idle 3" direction="ENE" />
     <item hash="94b1be6ed8a5809dd1de1b93defc4d81" sprite="Bow Knight (Waltz Placeholder)" width="48" height="40" frame="Idle 3" direction="NNE" />
+    <item hash="83dd3c2f91612fb626986f13d6290e46" sprite="Bow Knight (Waltz Placeholder)" width="48" height="40" frame="StillFrame 1" direction="SSE" />
+    <item hash="b4ce26bfdd9daa64d6f182192d4eb51b" sprite="Bow Knight (Waltz Placeholder)" width="48" height="40" frame="StillFrame 1" direction="ESE" />
+    <item hash="ec249061a3a61b8e85aa0d589c73b0e1" sprite="Bow Knight (Waltz Placeholder)" width="48" height="40" frame="StillFrame 1" direction="ENE" />
+    <item hash="36b4766cbf8e3416502db6edb5dc41bd" sprite="Bow Knight (Waltz Placeholder)" width="48" height="40" frame="StillFrame 1" direction="NNE" />
     <item hash="49c2630cb5580c868636d7b2d8cd1f03" sprite="Bow Knight (Waltz Placeholder)" width="48" height="40" frame="Walking 1" direction="SSE" />
     <item hash="fb8ef46e82ca52c68f09a20d9e6dc750" sprite="Bow Knight (Waltz Placeholder)" width="48" height="40" frame="Walking 1" direction="ESE" />
     <item hash="18c5cf3cb682a6022da2a09966efe160" sprite="Bow Knight (Waltz Placeholder)" width="48" height="40" frame="Walking 1" direction="ENE" />
@@ -1952,10 +1956,6 @@
     <item hash="e35a7f2579f353dbbbc16d7e7f590891" sprite="Bow Knight (Waltz Placeholder)" width="48" height="40" frame="Walking 2" direction="ESE" />
     <item hash="d6b4969ef3ad9494844f3839f2166fd9" sprite="Bow Knight (Waltz Placeholder)" width="48" height="40" frame="Walking 2" direction="ENE" />
     <item hash="691019ba29b98fff23f3aebae5489464" sprite="Bow Knight (Waltz Placeholder)" width="48" height="40" frame="Walking 2" direction="NNE" />
-    <item hash="83dd3c2f91612fb626986f13d6290e46" sprite="Bow Knight (Waltz Placeholder)" width="48" height="40" frame="Walking 3" direction="SSE" />
-    <item hash="b4ce26bfdd9daa64d6f182192d4eb51b" sprite="Bow Knight (Waltz Placeholder)" width="48" height="40" frame="Walking 3" direction="ESE" />
-    <item hash="ec249061a3a61b8e85aa0d589c73b0e1" sprite="Bow Knight (Waltz Placeholder)" width="48" height="40" frame="Walking 3" direction="ENE" />
-    <item hash="36b4766cbf8e3416502db6edb5dc41bd" sprite="Bow Knight (Waltz Placeholder)" width="48" height="40" frame="Walking 3" direction="NNE" />
     <item hash="a96ec4103eb6cf3e9604f75304125014" sprite="Bow Knight (Waltz Placeholder)" width="48" height="40" frame="Walking 4" direction="SSE" />
     <item hash="f5478f13517c43f6474fd19c93d2496f" sprite="Bow Knight (Waltz Placeholder)" width="48" height="40" frame="Walking 4" direction="ESE" />
     <item hash="9f638d510518abf1929f1cb4c471e233" sprite="Bow Knight (Waltz Placeholder)" width="48" height="40" frame="Walking 4" direction="ENE" />
@@ -12249,12 +12249,6 @@
     <item hash="85b585167cfdc35a51f80adb994754f0" sprite="Jubei (P2)" width="40" height="40" frame="Walking 6" direction="NNE" />
     <item hash="bff1ee33aa1395b54584e8785f7d73c5" sprite="Jubei (P2)" width="40" height="40" frame="Walking 6" direction="NNE" />
     <item hash="9b51b020bf7779bea34ef0ab7204766c" sprite="Jubei (P2)" width="40" height="40" frame="Walking 6" direction="N" />
-    <item hash="1257ea636e789fc04df178c7a43c9ec3" sprite="Julian (Big)" width="64" height="64" frame="Idle 1" direction="First" />
-    <item hash="4d2aa7187a8224071cc1bb63ddc489ac" sprite="Julian (Big)" width="64" height="64" frame="Idle 1" direction="First" />
-    <item hash="2fb8bdefac06bf47ba839b7090c22a59" sprite="Julian (Big)" width="64" height="64" frame="Idle 2" direction="First" />
-    <item hash="8fb3349551792556bb73d1117d085b7a" sprite="Julian (Big)" width="64" height="64" frame="Idle 2" direction="First" />
-    <item hash="31a21dbb8339aab847de06f016bb2506" sprite="Julian (Big)" width="64" height="64" frame="Idle 3" direction="First" />
-    <item hash="6f4d3b68fbb2c410f9e17d3fb65cc95c" sprite="Julian (Big)" width="64" height="64" frame="Idle 3" direction="First" />
     <item hash="d01a285d41b5631c06a9622fbae683b5" sprite="Julian (P1)" width="40" height="40" frame="Idle 1" direction="S" />
     <item hash="e41ed4c8c88ea2037960e4d8afffe061" sprite="Julian (P1)" width="40" height="40" frame="Idle 1" direction="S" />
     <item hash="0fe9815ee20b3e3892f534ef51feac81" sprite="Julian (P1)" width="40" height="40" frame="Idle 1" direction="SSE" />
@@ -12343,6 +12337,9 @@
     <item hash="f0dab230cdf0b71e69f3462cd5067e36" sprite="Julian (P1)" width="40" height="40" frame="Walking 6" direction="ENE" />
     <item hash="3402065ecb9601dfcc1e3af7f448342d" sprite="Julian (P1)" width="40" height="40" frame="Walking 6" direction="NNE" />
     <item hash="2b5e3389edd48d100cd9fb459bc9ab99" sprite="Julian (P1)" width="40" height="40" frame="Walking 6" direction="N" />
+    <item hash="1257ea636e789fc04df178c7a43c9ec3" sprite="Julian (P1) (Big)" width="64" height="64" frame="Idle 1" direction="First" />
+    <item hash="8fb3349551792556bb73d1117d085b7a" sprite="Julian (P1) (Big)" width="64" height="64" frame="Idle 2" direction="First" />
+    <item hash="31a21dbb8339aab847de06f016bb2506" sprite="Julian (P1) (Big)" width="64" height="64" frame="Idle 3" direction="First" />
     <item hash="6bcccbf950f79a3ff61a2330bdd40da0" sprite="Julian (P1) (Weaponless)" width="40" height="40" frame="Idle 1" direction="S" />
     <item hash="48766c3d1d1ddd77e8b60dde45744a2e" sprite="Julian (P1) (Weaponless)" width="40" height="40" frame="Idle 1" direction="SSE" />
     <item hash="23f02dd3098f068a112b498f02789216" sprite="Julian (P1) (Weaponless)" width="40" height="40" frame="Idle 1" direction="ESE" />
@@ -12569,90 +12566,52 @@
     <item hash="7107a4caf1ab2eff65805a664f94ff93" sprite="Julian (P2) (Weaponless)" width="48" height="40" frame="GettingUpFromGround 1" direction="First" />
     <item hash="97c30eb41b23bbdbd3292c5c5bb55b78" sprite="Julian (P2) (Weaponless)" width="48" height="40" frame="GettingUpFromGround 2" direction="First" />
     <item hash="ea82bf75b3e6117a0fa850eca4c04a74" sprite="Julian (P2) (Weaponless)" width="48" height="40" frame="GettingUpFromGround 3" direction="First" />
-    <item hash="50ceae32bc5d180eb27361e711498c93" sprite="Julian (U)" width="40" height="40" frame="Idle 1" direction="S" />
     <item hash="95d9cae1eac15e6e6405cef86060ae88" sprite="Julian (U)" width="40" height="40" frame="Idle 1" direction="S" />
     <item hash="b5983ff9c30ea19c496b3ba0016064cc" sprite="Julian (U)" width="40" height="40" frame="Idle 1" direction="S" />
-    <item hash="712a15e1e742c6d654c06ea5e55cdc76" sprite="Julian (U)" width="40" height="40" frame="Idle 1" direction="SSE" />
-    <item hash="9578c8a0d3dad8c674214531a979f1f4" sprite="Julian (U)" width="40" height="40" frame="Idle 1" direction="SSE" />
     <item hash="e4e1ca3ad96098ab33fffc82f7631c2e" sprite="Julian (U)" width="40" height="40" frame="Idle 1" direction="SSE" />
     <item hash="fc1a27c934949926b2cf0f737a978b2e" sprite="Julian (U)" width="40" height="40" frame="Idle 1" direction="SSE" />
     <item hash="5f153e7ed5f20a1c9421fda36aebb25b" sprite="Julian (U)" width="40" height="40" frame="Idle 1" direction="ESE" />
-    <item hash="74fd1358a34c565d77933bd18d8c4397" sprite="Julian (U)" width="40" height="40" frame="Idle 1" direction="ESE" />
-    <item hash="755dc64b4a954bbca89a64c1882f801b" sprite="Julian (U)" width="40" height="40" frame="Idle 1" direction="ESE" />
     <item hash="e8e9eb51a21f08eae798b1370f6c2665" sprite="Julian (U)" width="40" height="40" frame="Idle 1" direction="ESE" />
-    <item hash="363811a13a161aa0b2db97f93c6f08ae" sprite="Julian (U)" width="40" height="40" frame="Idle 1" direction="ENE" />
-    <item hash="3f5308e9ed2a6c22d8e296ea0c3e4fba" sprite="Julian (U)" width="40" height="40" frame="Idle 1" direction="ENE" />
     <item hash="a07d2f762b0f89dadf9948cd4079b8b5" sprite="Julian (U)" width="40" height="40" frame="Idle 1" direction="ENE" />
     <item hash="cf1316194d412fe1abd6c257acf548ad" sprite="Julian (U)" width="40" height="40" frame="Idle 1" direction="ENE" />
-    <item hash="132e9f9d7abcff19e2dead7b9cafc106" sprite="Julian (U)" width="40" height="40" frame="Idle 1" direction="NNE" />
     <item hash="75bae7ed09ccd6af71ae6955354d1d4a" sprite="Julian (U)" width="40" height="40" frame="Idle 1" direction="NNE" />
-    <item hash="7ef2f3ed3ea402163661710a0519165b" sprite="Julian (U)" width="40" height="40" frame="Idle 1" direction="NNE" />
     <item hash="d31592cc1c8faa66ae6348414cae2ff0" sprite="Julian (U)" width="40" height="40" frame="Idle 1" direction="NNE" />
-    <item hash="1efc5c8c95604d034325914ca10fbab4" sprite="Julian (U)" width="40" height="40" frame="Idle 1" direction="N" />
     <item hash="2f10f3d6b6fd388a1324ff1138cdf799" sprite="Julian (U)" width="40" height="40" frame="Idle 1" direction="N" />
     <item hash="f2a34e83aff82823fee3b50ababa2e95" sprite="Julian (U)" width="40" height="40" frame="Idle 1" direction="N" />
-    <item hash="7f529523a0db199df71ba80f831ab300" sprite="Julian (U)" width="40" height="40" frame="Idle 2" direction="S" />
     <item hash="c14fa7165fe1477dbf97ff63a442c239" sprite="Julian (U)" width="40" height="40" frame="Idle 2" direction="S" />
     <item hash="dfbb43306f9ee1e100db9da0a4893324" sprite="Julian (U)" width="40" height="40" frame="Idle 2" direction="S" />
-    <item hash="0f28c7a1147df15731d85b4da2f0845b" sprite="Julian (U)" width="40" height="40" frame="Idle 2" direction="SSE" />
     <item hash="797c8fa71422ef64b121a5026359ab9d" sprite="Julian (U)" width="40" height="40" frame="Idle 2" direction="SSE" />
     <item hash="b9a4931fb61df12aeb676bd6109b03d0" sprite="Julian (U)" width="40" height="40" frame="Idle 2" direction="SSE" />
-    <item hash="bd9c7281093a0443e101f0d7b05b6498" sprite="Julian (U)" width="40" height="40" frame="Idle 2" direction="SSE" />
-    <item hash="8887f1b2e0fae782544b4bee08e00602" sprite="Julian (U)" width="40" height="40" frame="Idle 2" direction="ESE" />
-    <item hash="9a78ac5938043d6ded0ecc0a7997ff07" sprite="Julian (U)" width="40" height="40" frame="Idle 2" direction="ESE" />
     <item hash="b7f2b018895a1f1976e5026f6173024e" sprite="Julian (U)" width="40" height="40" frame="Idle 2" direction="ESE" />
     <item hash="d858afcb6b8cf564a7442f41ba326bdc" sprite="Julian (U)" width="40" height="40" frame="Idle 2" direction="ESE" />
-    <item hash="372828bab946d535794f3dbbfdc43f1c" sprite="Julian (U)" width="40" height="40" frame="Idle 2" direction="ENE" />
     <item hash="4e47b78bdb4a1d6d6e768de0ab3205de" sprite="Julian (U)" width="40" height="40" frame="Idle 2" direction="ENE" />
-    <item hash="8e260be9d7366b2a43aac2abcc392e8e" sprite="Julian (U)" width="40" height="40" frame="Idle 2" direction="ENE" />
     <item hash="dc890e8ad2dde146f3f381382eec723a" sprite="Julian (U)" width="40" height="40" frame="Idle 2" direction="ENE" />
     <item hash="a320932dca4eb0aeff0201a9c93b1042" sprite="Julian (U)" width="40" height="40" frame="Idle 2" direction="NNE" />
     <item hash="a806ad05b5b5d4c7f9690784f7fc5540" sprite="Julian (U)" width="40" height="40" frame="Idle 2" direction="NNE" />
-    <item hash="dad4125b793d463e19f80029ffbc7831" sprite="Julian (U)" width="40" height="40" frame="Idle 2" direction="NNE" />
-    <item hash="fdbe8c91ecfdc698451b810cbc2eb694" sprite="Julian (U)" width="40" height="40" frame="Idle 2" direction="NNE" />
-    <item hash="420fa06780e40a012ad118cba55d41fa" sprite="Julian (U)" width="40" height="40" frame="Idle 2" direction="N" />
     <item hash="55455512234422adb200bb7efcd3f28e" sprite="Julian (U)" width="40" height="40" frame="Idle 2" direction="N" />
     <item hash="765d795f593cc4269b443be4007cbfde" sprite="Julian (U)" width="40" height="40" frame="Idle 2" direction="N" />
     <item hash="105b07f027e56c8ce19c168e9d8eac92" sprite="Julian (U)" width="40" height="40" frame="Idle 3" direction="S" />
-    <item hash="9f6a23cec97428623e96f3e0ee77c1cc" sprite="Julian (U)" width="40" height="40" frame="Idle 3" direction="S" />
     <item hash="ac524da41949df9664a4db319c2e1dea" sprite="Julian (U)" width="40" height="40" frame="Idle 3" direction="S" />
-    <item hash="3b54e4449e76c892e9584994d6fbf11f" sprite="Julian (U)" width="40" height="40" frame="Idle 3" direction="SSE" />
-    <item hash="a126087110fd0056d90cca8e7db20894" sprite="Julian (U)" width="40" height="40" frame="Idle 3" direction="SSE" />
     <item hash="c516921610892d999b5096adb183b7ab" sprite="Julian (U)" width="40" height="40" frame="Idle 3" direction="SSE" />
     <item hash="eb5d7f5ab542ef02f9c045fe0baa552c" sprite="Julian (U)" width="40" height="40" frame="Idle 3" direction="SSE" />
-    <item hash="069083429c07f82ec7ce7ce334c80001" sprite="Julian (U)" width="40" height="40" frame="Idle 3" direction="ESE" />
     <item hash="40689b521a761f0da1e2cfd3ddc34129" sprite="Julian (U)" width="40" height="40" frame="Idle 3" direction="ESE" />
-    <item hash="97fe33fb52ed79268278576f9c05d8fb" sprite="Julian (U)" width="40" height="40" frame="Idle 3" direction="ESE" />
     <item hash="bea9aee59e7786ef596c8a7a2b0cd176" sprite="Julian (U)" width="40" height="40" frame="Idle 3" direction="ESE" />
-    <item hash="4d0d18c04b57946abd699bf35b00d1e5" sprite="Julian (U)" width="40" height="40" frame="Idle 3" direction="ENE" />
     <item hash="8d63fc167ba2f49af817c6bd94b734a7" sprite="Julian (U)" width="40" height="40" frame="Idle 3" direction="ENE" />
-    <item hash="ade10a06365931cf1969cf66d5659c7d" sprite="Julian (U)" width="40" height="40" frame="Idle 3" direction="ENE" />
     <item hash="f294745e999181f29677b9d6da5bf684" sprite="Julian (U)" width="40" height="40" frame="Idle 3" direction="ENE" />
-    <item hash="6953dd6087d8da20b491c4c0ebe21da7" sprite="Julian (U)" width="40" height="40" frame="Idle 3" direction="NNE" />
     <item hash="81198787e583bef25fccd58311b88015" sprite="Julian (U)" width="40" height="40" frame="Idle 3" direction="NNE" />
     <item hash="b85a2c0d5b5550513c6d74387ae8ae1f" sprite="Julian (U)" width="40" height="40" frame="Idle 3" direction="NNE" />
-    <item hash="eba43e17c25c66883a016c586e98511c" sprite="Julian (U)" width="40" height="40" frame="Idle 3" direction="NNE" />
     <item hash="a8eb7739b1ce59515564578ff7b28f65" sprite="Julian (U)" width="40" height="40" frame="Idle 3" direction="N" />
     <item hash="bea846e573aa0a11e4a89a738ef37f1d" sprite="Julian (U)" width="40" height="40" frame="Idle 3" direction="N" />
-    <item hash="e3f11fae7decf491fd7d0206ac014761" sprite="Julian (U)" width="40" height="40" frame="Idle 3" direction="N" />
     <item hash="a99eae5a7f24895cc3f105148ca95156" sprite="Julian (U)" width="40" height="40" frame="Nodding 2" direction="S" />
-    <item hash="e32302e46203fecb8e4dd44c0c819062" sprite="Julian (U)" width="40" height="40" frame="Nodding 2" direction="SSE" />
     <item hash="f7c36a20df47726161d1a2da08951a06" sprite="Julian (U)" width="40" height="40" frame="Nodding 2" direction="SSE" />
-    <item hash="0ca64bcd9a239739b213afe294a383c2" sprite="Julian (U)" width="40" height="40" frame="Nodding 2" direction="ESE" />
     <item hash="3048026279feb044d2931524c010f946" sprite="Julian (U)" width="40" height="40" frame="Nodding 2" direction="ESE" />
-    <item hash="d951e987c114950d1e1cd03b39409275" sprite="Julian (U)" width="40" height="40" frame="Nodding 2" direction="ENE" />
     <item hash="fb82a0b2c21c4f2a9570d3b7524aac72" sprite="Julian (U)" width="40" height="40" frame="Nodding 2" direction="ENE" />
-    <item hash="949fbd43c570b3eb2829f173a07bb6a0" sprite="Julian (U)" width="40" height="40" frame="Nodding 2" direction="NNE" />
     <item hash="df2138e4e88177c23edfa96e92b2c8cf" sprite="Julian (U)" width="40" height="40" frame="Nodding 2" direction="NNE" />
     <item hash="22b148df333b890d475d741b931f568e" sprite="Julian (U)" width="40" height="40" frame="Nodding 2" direction="N" />
     <item hash="605e340be36f1a8dc6b5016eaf97494b" sprite="Julian (U)" width="40" height="40" frame="Nodding 3" direction="S" />
-    <item hash="06d4785619fc9c3de06f8238ef8c157c" sprite="Julian (U)" width="40" height="40" frame="Nodding 3" direction="SSE" />
     <item hash="e26c0d2c466289b48884a31455c63cb0" sprite="Julian (U)" width="40" height="40" frame="Nodding 3" direction="SSE" />
     <item hash="1047f9422df629d798e8f5f1ee146265" sprite="Julian (U)" width="40" height="40" frame="Nodding 3" direction="ESE" />
-    <item hash="518a84362bac3d0963d1cd7cd432e5e2" sprite="Julian (U)" width="40" height="40" frame="Nodding 3" direction="ESE" />
-    <item hash="26bf5b0f13929a46528164d94da8b1fb" sprite="Julian (U)" width="40" height="40" frame="Nodding 3" direction="ENE" />
     <item hash="2fa94e5e0bc4509be759cba21e75f452" sprite="Julian (U)" width="40" height="40" frame="Nodding 3" direction="ENE" />
-    <item hash="78c389cd7fccf1788cb106d3e2123c9f" sprite="Julian (U)" width="40" height="40" frame="Nodding 3" direction="NNE" />
     <item hash="f179ef23d257f2dd7b3798798a54d742" sprite="Julian (U)" width="40" height="40" frame="Nodding 3" direction="NNE" />
     <item hash="95d431161f72072a07783fe9b5ed900b" sprite="Julian (U)" width="40" height="40" frame="Nodding 3" direction="N" />
     <item hash="3d492e95dd187febcf47fa35e91d0e93" sprite="Julian (U)" width="40" height="40" frame="ShakingHead 2" direction="S" />
@@ -12667,222 +12626,263 @@
     <item hash="beb9d3abd5316b10e9c88ca26d440974" sprite="Julian (U)" width="40" height="40" frame="ShakingHead 4" direction="ENE" />
     <item hash="16086bf26a6bc8a5392af6bec4470571" sprite="Julian (U)" width="40" height="40" frame="ShakingHead 4" direction="NNE" />
     <item hash="f15c5c806e52437c57595501e42f32c2" sprite="Julian (U)" width="40" height="40" frame="ShakingHead 4" direction="N" />
-    <item hash="2b74a30713afe8b680b5b457be6b2535" sprite="Julian (U)" width="40" height="40" frame="StillFrame (Falling) 1" direction="SSE" />
-    <item hash="72a35481ed7a550cf4fd4846e58394d2" sprite="Julian (U)" width="40" height="40" frame="StillFrame (Falling) 1" direction="ESE" />
-    <item hash="1f3fb52f149075cc6070e7d597a3db98" sprite="Julian (U)" width="40" height="40" frame="StillFrame (Falling) 1" direction="ENE" />
-    <item hash="923611f7783091bef3bbfd5a047a0b6d" sprite="Julian (U)" width="40" height="40" frame="StillFrame (Falling) 1" direction="NNE" />
     <item hash="3e061bfeb8fd643fc66753b752b7eda1" sprite="Julian (U)" width="40" height="40" frame="Walking 1" direction="S" />
-    <item hash="8c6682161b21347ac739f71f6a2995fe" sprite="Julian (U)" width="40" height="40" frame="Walking 1" direction="S" />
     <item hash="33b4c2f5cb46bd20e823de3d2caac615" sprite="Julian (U)" width="40" height="40" frame="Walking 1" direction="SSE" />
-    <item hash="ccb5306ba6bdcd3e2ec4f246244e59ec" sprite="Julian (U)" width="40" height="40" frame="Walking 1" direction="SSE" />
     <item hash="07ac61088e91b1a9f9c5de4119f648b4" sprite="Julian (U)" width="40" height="40" frame="Walking 1" direction="ESE" />
-    <item hash="2ae44fea7f30ede214ecb580684effe4" sprite="Julian (U)" width="40" height="40" frame="Walking 1" direction="ESE" />
     <item hash="4a94872dcb1860475b8512600649feb5" sprite="Julian (U)" width="40" height="40" frame="Walking 1" direction="ENE" />
-    <item hash="5997616542557e6b1730c79e1df7682b" sprite="Julian (U)" width="40" height="40" frame="Walking 1" direction="ENE" />
     <item hash="0843b8c40a71ae2cc54443d738989b66" sprite="Julian (U)" width="40" height="40" frame="Walking 1" direction="NNE" />
-    <item hash="f8e7a39e423611384550a879126c1547" sprite="Julian (U)" width="40" height="40" frame="Walking 1" direction="NNE" />
     <item hash="98822dc4110721180d23af1c2a9ca1a5" sprite="Julian (U)" width="40" height="40" frame="Walking 1" direction="N" />
-    <item hash="ab32f8983423750d773dcbfdab698429" sprite="Julian (U)" width="40" height="40" frame="Walking 1" direction="N" />
-    <item hash="5cd9f6e03117f5f25760ae641790d68f" sprite="Julian (U)" width="40" height="40" frame="Walking 2" direction="S" />
-    <item hash="244e29f5861151ea0627381a4fbfc882" sprite="Julian (U)" width="40" height="40" frame="Walking 2" direction="N" />
     <item hash="50f555b415a346f761696235f975e075" sprite="Julian (U)" width="40" height="40" frame="Walking 3" direction="S" />
-    <item hash="f964f9c5f860bec94d3a2f50fb4e27cb" sprite="Julian (U)" width="40" height="40" frame="Walking 3" direction="S" />
     <item hash="b1e4044b5d3030e0ac8564853fbe9e47" sprite="Julian (U)" width="40" height="40" frame="Walking 3" direction="SSE" />
-    <item hash="f34d6bb2cd9f3eb144d916e2703b6a8b" sprite="Julian (U)" width="40" height="40" frame="Walking 3" direction="SSE" />
     <item hash="2d2944aaf35930a6f46f7c9f898886f0" sprite="Julian (U)" width="40" height="40" frame="Walking 3" direction="ESE" />
-    <item hash="a21ad86215695220db90bea8fa067131" sprite="Julian (U)" width="40" height="40" frame="Walking 3" direction="ESE" />
     <item hash="19f9047cf68ca9033257adbb85e8a735" sprite="Julian (U)" width="40" height="40" frame="Walking 3" direction="ENE" />
-    <item hash="b85a0ab24a88a99e4cbded919218da6b" sprite="Julian (U)" width="40" height="40" frame="Walking 3" direction="ENE" />
     <item hash="9c324416794bdde2906b7c11af7459e9" sprite="Julian (U)" width="40" height="40" frame="Walking 3" direction="NNE" />
-    <item hash="e1fb2844e82bec488da930fdc46c05da" sprite="Julian (U)" width="40" height="40" frame="Walking 3" direction="NNE" />
     <item hash="16b818acccaaf45ca8d62cf51d3fc4de" sprite="Julian (U)" width="40" height="40" frame="Walking 3" direction="N" />
-    <item hash="4e2440bfaf1d563d06ca613a879bbe8a" sprite="Julian (U)" width="40" height="40" frame="Walking 3" direction="N" />
     <item hash="90adfe22bdb4ff861dc66b1a4ed79e04" sprite="Julian (U)" width="40" height="40" frame="Walking 4" direction="S" />
-    <item hash="9d213d6326d99405340d5b2191eb07e2" sprite="Julian (U)" width="40" height="40" frame="Walking 4" direction="S" />
-    <item hash="c6396e05a70db462852549895fd46b2a" sprite="Julian (U)" width="40" height="40" frame="Walking 4" direction="SSE" />
     <item hash="e3d8dc2e2f12288e51736433aba9c7ed" sprite="Julian (U)" width="40" height="40" frame="Walking 4" direction="SSE" />
     <item hash="cc055f7ab404ef26554e363da3c5ed8e" sprite="Julian (U)" width="40" height="40" frame="Walking 4" direction="ESE" />
-    <item hash="e0078e0e32322468b32dfcf9c976a90a" sprite="Julian (U)" width="40" height="40" frame="Walking 4" direction="ESE" />
-    <item hash="0403bc73f6d3b9294498f0c3f14cc281" sprite="Julian (U)" width="40" height="40" frame="Walking 4" direction="ENE" />
     <item hash="662409e5745405d95ca62b2c29f4dbfd" sprite="Julian (U)" width="40" height="40" frame="Walking 4" direction="ENE" />
-    <item hash="6926193a31304a68621422e0b9dcd264" sprite="Julian (U)" width="40" height="40" frame="Walking 4" direction="NNE" />
     <item hash="d0a88c9ea6c2dfed0f9c28868923146d" sprite="Julian (U)" width="40" height="40" frame="Walking 4" direction="NNE" />
-    <item hash="0e588d59f4ff00ce23054eb32a6aaf1f" sprite="Julian (U)" width="40" height="40" frame="Walking 4" direction="N" />
     <item hash="95003f7086b3f86d14e283be79166b67" sprite="Julian (U)" width="40" height="40" frame="Walking 4" direction="N" />
     <item hash="09ce7f98926e2ae60066d34c5e7f0489" sprite="Julian (U)" width="40" height="40" frame="Walking 6" direction="S" />
-    <item hash="b04d9f6d909ad1cce32ac062227e5c9c" sprite="Julian (U)" width="40" height="40" frame="Walking 6" direction="S" />
     <item hash="4b8affbb406a363e269560b8482c8d1c" sprite="Julian (U)" width="40" height="40" frame="Walking 6" direction="SSE" />
-    <item hash="8db8f674ce6c5371887f03457b2a4088" sprite="Julian (U)" width="40" height="40" frame="Walking 6" direction="SSE" />
     <item hash="0b45ade889039d1d049e569e10b86f26" sprite="Julian (U)" width="40" height="40" frame="Walking 6" direction="ESE" />
-    <item hash="1bda4c641f9b472b2329e890aa05705a" sprite="Julian (U)" width="40" height="40" frame="Walking 6" direction="ESE" />
-    <item hash="0b1f9248f72684639d8d8926c57af26f" sprite="Julian (U)" width="40" height="40" frame="Walking 6" direction="ENE" />
     <item hash="443b41825966d42a11d8d0581a88f915" sprite="Julian (U)" width="40" height="40" frame="Walking 6" direction="ENE" />
-    <item hash="a1a539a7fb60879c006d93ff8a14f2fc" sprite="Julian (U)" width="40" height="40" frame="Walking 6" direction="NNE" />
     <item hash="eff6031e7e8cf7bf8a483bb16f018b00" sprite="Julian (U)" width="40" height="40" frame="Walking 6" direction="NNE" />
-    <item hash="1978aa4c9f9ebd64107272f5d8b836bd" sprite="Julian (U)" width="40" height="40" frame="Walking 6" direction="N" />
     <item hash="c0ec2c80046e06e8098b44310e817754" sprite="Julian (U)" width="40" height="40" frame="Walking 6" direction="N" />
-    <item hash="a94d54aa0042adbd9b83d90619619378" sprite="Julian (U) (Weaponless)" width="40" height="40" frame="FinishingLookingBack 1, LookingBack 2, LookingBackThenToIdle 2" direction="SSE" />
-    <item hash="d50ac2c0a2f6bd23002632c547460f74" sprite="Julian (U) (Weaponless)" width="40" height="40" frame="FinishingLookingBack 1, LookingBack 2, LookingBackThenToIdle 2" direction="ESE" />
-    <item hash="813b145322fdeaa940b8dbc13f289980" sprite="Julian (U) (Weaponless)" width="40" height="40" frame="FinishingLookingBack 1, LookingBack 2, LookingBackThenToIdle 2" direction="ENE" />
-    <item hash="1a3b35bb6e6a9e8ec8c8d18c3a8c9891" sprite="Julian (U) (Weaponless)" width="40" height="40" frame="FinishingLookingBack 1, LookingBack 2, LookingBackThenToIdle 2" direction="NNE" />
-    <item hash="1c3afb63c0f321da6e44e10cee1ca736" sprite="Julian (U) (Weaponless)" width="40" height="40" frame="Idle 1" direction="S" />
+    <item hash="cb6211ad1be97b57224b2cbe9293a220" sprite="Julian (U) (Beer)" width="40" height="40" frame="Drinking 1" direction="SSE" />
+    <item hash="b0c4bd8123ce91242437df138a83360f" sprite="Julian (U) (Beer)" width="40" height="40" frame="Drinking 1" direction="ESE" />
+    <item hash="a767adfbcc3fb7f529f8550d7d76da0d" sprite="Julian (U) (Beer)" width="40" height="40" frame="Drinking 1" direction="ENE" />
+    <item hash="684f73495a6824ee8edbd42bb31a1ddb" sprite="Julian (U) (Beer)" width="40" height="40" frame="Drinking 1" direction="NNE" />
+    <item hash="0c032b289bc6c4583dab807ffb9db7be" sprite="Julian (U) (Beer)" width="40" height="40" frame="Drinking 2" direction="SSE" />
+    <item hash="62658d20e5a994e90b08027c65e2e94e" sprite="Julian (U) (Beer)" width="40" height="40" frame="Drinking 2" direction="ESE" />
+    <item hash="e4e77bf7a59cc67743fd5aed2b58d184" sprite="Julian (U) (Beer)" width="40" height="40" frame="Drinking 2" direction="ENE" />
+    <item hash="41f0abc0cd35e2a2af649e55f245541e" sprite="Julian (U) (Beer)" width="40" height="40" frame="Drinking 2" direction="NNE" />
+    <item hash="2dd583edca9ec78825db23017e331854" sprite="Julian (U) (Beer)" width="40" height="40" frame="Drinking 3" direction="SSE" />
+    <item hash="21e500826ba932201c92fb20834cda54" sprite="Julian (U) (Beer)" width="40" height="40" frame="Drinking 3" direction="ESE" />
+    <item hash="c3882f4d4c2524459a9546ef647cc084" sprite="Julian (U) (Beer)" width="40" height="40" frame="Drinking 3" direction="ENE" />
+    <item hash="890f681ea4213e4084ff1e73b24657fa" sprite="Julian (U) (Beer)" width="40" height="40" frame="Drinking 3" direction="NNE" />
+    <item hash="4d2aa7187a8224071cc1bb63ddc489ac" sprite="Julian (U) (Big)" width="64" height="64" frame="Idle 1" direction="First" />
+    <item hash="2fb8bdefac06bf47ba839b7090c22a59" sprite="Julian (U) (Big)" width="64" height="64" frame="Idle 2" direction="First" />
+    <item hash="6f4d3b68fbb2c410f9e17d3fb65cc95c" sprite="Julian (U) (Big)" width="64" height="64" frame="Idle 3" direction="First" />
+    <item hash="50ceae32bc5d180eb27361e711498c93" sprite="Julian (U) (Shield)" width="40" height="40" frame="Idle 1" direction="S" />
+    <item hash="712a15e1e742c6d654c06ea5e55cdc76" sprite="Julian (U) (Shield)" width="40" height="40" frame="Idle 1" direction="SSE" />
+    <item hash="9578c8a0d3dad8c674214531a979f1f4" sprite="Julian (U) (Shield)" width="40" height="40" frame="Idle 1" direction="SSE" />
+    <item hash="74fd1358a34c565d77933bd18d8c4397" sprite="Julian (U) (Shield)" width="40" height="40" frame="Idle 1" direction="ESE" />
+    <item hash="755dc64b4a954bbca89a64c1882f801b" sprite="Julian (U) (Shield)" width="40" height="40" frame="Idle 1" direction="ESE" />
+    <item hash="363811a13a161aa0b2db97f93c6f08ae" sprite="Julian (U) (Shield)" width="40" height="40" frame="Idle 1" direction="ENE" />
+    <item hash="3f5308e9ed2a6c22d8e296ea0c3e4fba" sprite="Julian (U) (Shield)" width="40" height="40" frame="Idle 1" direction="ENE" />
+    <item hash="132e9f9d7abcff19e2dead7b9cafc106" sprite="Julian (U) (Shield)" width="40" height="40" frame="Idle 1" direction="NNE" />
+    <item hash="7ef2f3ed3ea402163661710a0519165b" sprite="Julian (U) (Shield)" width="40" height="40" frame="Idle 1" direction="NNE" />
+    <item hash="1efc5c8c95604d034325914ca10fbab4" sprite="Julian (U) (Shield)" width="40" height="40" frame="Idle 1" direction="N" />
+    <item hash="7f529523a0db199df71ba80f831ab300" sprite="Julian (U) (Shield)" width="40" height="40" frame="Idle 2" direction="S" />
+    <item hash="0f28c7a1147df15731d85b4da2f0845b" sprite="Julian (U) (Shield)" width="40" height="40" frame="Idle 2" direction="SSE" />
+    <item hash="bd9c7281093a0443e101f0d7b05b6498" sprite="Julian (U) (Shield)" width="40" height="40" frame="Idle 2" direction="SSE" />
+    <item hash="8887f1b2e0fae782544b4bee08e00602" sprite="Julian (U) (Shield)" width="40" height="40" frame="Idle 2" direction="ESE" />
+    <item hash="9a78ac5938043d6ded0ecc0a7997ff07" sprite="Julian (U) (Shield)" width="40" height="40" frame="Idle 2" direction="ESE" />
+    <item hash="372828bab946d535794f3dbbfdc43f1c" sprite="Julian (U) (Shield)" width="40" height="40" frame="Idle 2" direction="ENE" />
+    <item hash="8e260be9d7366b2a43aac2abcc392e8e" sprite="Julian (U) (Shield)" width="40" height="40" frame="Idle 2" direction="ENE" />
+    <item hash="dad4125b793d463e19f80029ffbc7831" sprite="Julian (U) (Shield)" width="40" height="40" frame="Idle 2" direction="NNE" />
+    <item hash="fdbe8c91ecfdc698451b810cbc2eb694" sprite="Julian (U) (Shield)" width="40" height="40" frame="Idle 2" direction="NNE" />
+    <item hash="420fa06780e40a012ad118cba55d41fa" sprite="Julian (U) (Shield)" width="40" height="40" frame="Idle 2" direction="N" />
+    <item hash="9f6a23cec97428623e96f3e0ee77c1cc" sprite="Julian (U) (Shield)" width="40" height="40" frame="Idle 3" direction="S" />
+    <item hash="3b54e4449e76c892e9584994d6fbf11f" sprite="Julian (U) (Shield)" width="40" height="40" frame="Idle 3" direction="SSE" />
+    <item hash="a126087110fd0056d90cca8e7db20894" sprite="Julian (U) (Shield)" width="40" height="40" frame="Idle 3" direction="SSE" />
+    <item hash="069083429c07f82ec7ce7ce334c80001" sprite="Julian (U) (Shield)" width="40" height="40" frame="Idle 3" direction="ESE" />
+    <item hash="97fe33fb52ed79268278576f9c05d8fb" sprite="Julian (U) (Shield)" width="40" height="40" frame="Idle 3" direction="ESE" />
+    <item hash="4d0d18c04b57946abd699bf35b00d1e5" sprite="Julian (U) (Shield)" width="40" height="40" frame="Idle 3" direction="ENE" />
+    <item hash="ade10a06365931cf1969cf66d5659c7d" sprite="Julian (U) (Shield)" width="40" height="40" frame="Idle 3" direction="ENE" />
+    <item hash="6953dd6087d8da20b491c4c0ebe21da7" sprite="Julian (U) (Shield)" width="40" height="40" frame="Idle 3" direction="NNE" />
+    <item hash="eba43e17c25c66883a016c586e98511c" sprite="Julian (U) (Shield)" width="40" height="40" frame="Idle 3" direction="NNE" />
+    <item hash="e3f11fae7decf491fd7d0206ac014761" sprite="Julian (U) (Shield)" width="40" height="40" frame="Idle 3" direction="N" />
+    <item hash="e32302e46203fecb8e4dd44c0c819062" sprite="Julian (U) (Shield)" width="40" height="40" frame="Nodding 2" direction="SSE" />
+    <item hash="0ca64bcd9a239739b213afe294a383c2" sprite="Julian (U) (Shield)" width="40" height="40" frame="Nodding 2" direction="ESE" />
+    <item hash="d951e987c114950d1e1cd03b39409275" sprite="Julian (U) (Shield)" width="40" height="40" frame="Nodding 2" direction="ENE" />
+    <item hash="949fbd43c570b3eb2829f173a07bb6a0" sprite="Julian (U) (Shield)" width="40" height="40" frame="Nodding 2" direction="NNE" />
+    <item hash="06d4785619fc9c3de06f8238ef8c157c" sprite="Julian (U) (Shield)" width="40" height="40" frame="Nodding 3" direction="SSE" />
+    <item hash="518a84362bac3d0963d1cd7cd432e5e2" sprite="Julian (U) (Shield)" width="40" height="40" frame="Nodding 3" direction="ESE" />
+    <item hash="26bf5b0f13929a46528164d94da8b1fb" sprite="Julian (U) (Shield)" width="40" height="40" frame="Nodding 3" direction="ENE" />
+    <item hash="78c389cd7fccf1788cb106d3e2123c9f" sprite="Julian (U) (Shield)" width="40" height="40" frame="Nodding 3" direction="NNE" />
+    <item hash="2b74a30713afe8b680b5b457be6b2535" sprite="Julian (U) (Shield)" width="40" height="40" frame="StillFrame (Falling) 1" direction="SSE" />
+    <item hash="72a35481ed7a550cf4fd4846e58394d2" sprite="Julian (U) (Shield)" width="40" height="40" frame="StillFrame (Falling) 1" direction="ESE" />
+    <item hash="1f3fb52f149075cc6070e7d597a3db98" sprite="Julian (U) (Shield)" width="40" height="40" frame="StillFrame (Falling) 1" direction="ENE" />
+    <item hash="923611f7783091bef3bbfd5a047a0b6d" sprite="Julian (U) (Shield)" width="40" height="40" frame="StillFrame (Falling) 1" direction="NNE" />
+    <item hash="8c6682161b21347ac739f71f6a2995fe" sprite="Julian (U) (Shield)" width="40" height="40" frame="Walking 1" direction="S" />
+    <item hash="ccb5306ba6bdcd3e2ec4f246244e59ec" sprite="Julian (U) (Shield)" width="40" height="40" frame="Walking 1" direction="SSE" />
+    <item hash="2ae44fea7f30ede214ecb580684effe4" sprite="Julian (U) (Shield)" width="40" height="40" frame="Walking 1" direction="ESE" />
+    <item hash="5997616542557e6b1730c79e1df7682b" sprite="Julian (U) (Shield)" width="40" height="40" frame="Walking 1" direction="ENE" />
+    <item hash="f8e7a39e423611384550a879126c1547" sprite="Julian (U) (Shield)" width="40" height="40" frame="Walking 1" direction="NNE" />
+    <item hash="ab32f8983423750d773dcbfdab698429" sprite="Julian (U) (Shield)" width="40" height="40" frame="Walking 1" direction="N" />
+    <item hash="5cd9f6e03117f5f25760ae641790d68f" sprite="Julian (U) (Shield)" width="40" height="40" frame="Walking 2" direction="S" />
+    <item hash="244e29f5861151ea0627381a4fbfc882" sprite="Julian (U) (Shield)" width="40" height="40" frame="Walking 2" direction="N" />
+    <item hash="f964f9c5f860bec94d3a2f50fb4e27cb" sprite="Julian (U) (Shield)" width="40" height="40" frame="Walking 3" direction="S" />
+    <item hash="f34d6bb2cd9f3eb144d916e2703b6a8b" sprite="Julian (U) (Shield)" width="40" height="40" frame="Walking 3" direction="SSE" />
+    <item hash="a21ad86215695220db90bea8fa067131" sprite="Julian (U) (Shield)" width="40" height="40" frame="Walking 3" direction="ESE" />
+    <item hash="b85a0ab24a88a99e4cbded919218da6b" sprite="Julian (U) (Shield)" width="40" height="40" frame="Walking 3" direction="ENE" />
+    <item hash="e1fb2844e82bec488da930fdc46c05da" sprite="Julian (U) (Shield)" width="40" height="40" frame="Walking 3" direction="NNE" />
+    <item hash="4e2440bfaf1d563d06ca613a879bbe8a" sprite="Julian (U) (Shield)" width="40" height="40" frame="Walking 3" direction="N" />
+    <item hash="9d213d6326d99405340d5b2191eb07e2" sprite="Julian (U) (Shield)" width="40" height="40" frame="Walking 4" direction="S" />
+    <item hash="c6396e05a70db462852549895fd46b2a" sprite="Julian (U) (Shield)" width="40" height="40" frame="Walking 4" direction="SSE" />
+    <item hash="e0078e0e32322468b32dfcf9c976a90a" sprite="Julian (U) (Shield)" width="40" height="40" frame="Walking 4" direction="ESE" />
+    <item hash="0403bc73f6d3b9294498f0c3f14cc281" sprite="Julian (U) (Shield)" width="40" height="40" frame="Walking 4" direction="ENE" />
+    <item hash="6926193a31304a68621422e0b9dcd264" sprite="Julian (U) (Shield)" width="40" height="40" frame="Walking 4" direction="NNE" />
+    <item hash="0e588d59f4ff00ce23054eb32a6aaf1f" sprite="Julian (U) (Shield)" width="40" height="40" frame="Walking 4" direction="N" />
+    <item hash="b04d9f6d909ad1cce32ac062227e5c9c" sprite="Julian (U) (Shield)" width="40" height="40" frame="Walking 6" direction="S" />
+    <item hash="8db8f674ce6c5371887f03457b2a4088" sprite="Julian (U) (Shield)" width="40" height="40" frame="Walking 6" direction="SSE" />
+    <item hash="1bda4c641f9b472b2329e890aa05705a" sprite="Julian (U) (Shield)" width="40" height="40" frame="Walking 6" direction="ESE" />
+    <item hash="0b1f9248f72684639d8d8926c57af26f" sprite="Julian (U) (Shield)" width="40" height="40" frame="Walking 6" direction="ENE" />
+    <item hash="a1a539a7fb60879c006d93ff8a14f2fc" sprite="Julian (U) (Shield)" width="40" height="40" frame="Walking 6" direction="NNE" />
+    <item hash="1978aa4c9f9ebd64107272f5d8b836bd" sprite="Julian (U) (Shield)" width="40" height="40" frame="Walking 6" direction="N" />
+    <item hash="a94d54aa0042adbd9b83d90619619378" sprite="Julian (U) (Shield) (Weaponless)" width="40" height="40" frame="FinishingLookingBack 1, LookingBack 2, LookingBackThenToIdle 2" direction="SSE" />
+    <item hash="d50ac2c0a2f6bd23002632c547460f74" sprite="Julian (U) (Shield) (Weaponless)" width="40" height="40" frame="FinishingLookingBack 1, LookingBack 2, LookingBackThenToIdle 2" direction="ESE" />
+    <item hash="813b145322fdeaa940b8dbc13f289980" sprite="Julian (U) (Shield) (Weaponless)" width="40" height="40" frame="FinishingLookingBack 1, LookingBack 2, LookingBackThenToIdle 2" direction="ENE" />
+    <item hash="1a3b35bb6e6a9e8ec8c8d18c3a8c9891" sprite="Julian (U) (Shield) (Weaponless)" width="40" height="40" frame="FinishingLookingBack 1, LookingBack 2, LookingBackThenToIdle 2" direction="NNE" />
+    <item hash="1c3afb63c0f321da6e44e10cee1ca736" sprite="Julian (U) (Shield) (Weaponless)" width="40" height="40" frame="Idle 1" direction="S" />
+    <item hash="0f1260cb4f524c2e9ba999c496b6b82e" sprite="Julian (U) (Shield) (Weaponless)" width="40" height="40" frame="Idle 1" direction="SSE" />
+    <item hash="064490561f59e5b72a2ff1cc96722217" sprite="Julian (U) (Shield) (Weaponless)" width="40" height="40" frame="Idle 1" direction="ESE" />
+    <item hash="8321738aed18d46111f5f362475fc024" sprite="Julian (U) (Shield) (Weaponless)" width="40" height="40" frame="Idle 1" direction="ENE" />
+    <item hash="baf23cdbad7ba75723b763fbfe577332" sprite="Julian (U) (Shield) (Weaponless)" width="40" height="40" frame="Idle 1" direction="NNE" />
+    <item hash="b949027fa2c7eb4c215565ebe690140b" sprite="Julian (U) (Shield) (Weaponless)" width="40" height="40" frame="Idle 1" direction="N" />
+    <item hash="112866051d61714cf234d80bb29dc491" sprite="Julian (U) (Shield) (Weaponless)" width="40" height="40" frame="Idle 2" direction="S" />
+    <item hash="8feee3fa323e0456840c62055f5e2349" sprite="Julian (U) (Shield) (Weaponless)" width="40" height="40" frame="Idle 2" direction="SSE" />
+    <item hash="979381dab5e74749d83cb062a21364f2" sprite="Julian (U) (Shield) (Weaponless)" width="40" height="40" frame="Idle 2" direction="ESE" />
+    <item hash="bbd83b43547dcf85e43fa4b37edbc90f" sprite="Julian (U) (Shield) (Weaponless)" width="40" height="40" frame="Idle 2" direction="ENE" />
+    <item hash="53ecfa0bbda6ba5918f8ecba7cfea5c2" sprite="Julian (U) (Shield) (Weaponless)" width="40" height="40" frame="Idle 2" direction="NNE" />
+    <item hash="87e85351355b3288be91b1defcf74fe3" sprite="Julian (U) (Shield) (Weaponless)" width="40" height="40" frame="Idle 2" direction="N" />
+    <item hash="3842ff5c22bc1c81eb1f77333e398b44" sprite="Julian (U) (Shield) (Weaponless)" width="40" height="40" frame="Idle 3" direction="S" />
+    <item hash="a5e6d7146131f0b2c1dad176a2ade739" sprite="Julian (U) (Shield) (Weaponless)" width="40" height="40" frame="Idle 3" direction="SSE" />
+    <item hash="5b3a798feb159477c208cc912792c776" sprite="Julian (U) (Shield) (Weaponless)" width="40" height="40" frame="Idle 3" direction="ESE" />
+    <item hash="4f593ccd4d76c33a379391c96f48006d" sprite="Julian (U) (Shield) (Weaponless)" width="40" height="40" frame="Idle 3" direction="ENE" />
+    <item hash="922e547fa5a15da997e712288df896db" sprite="Julian (U) (Shield) (Weaponless)" width="40" height="40" frame="Idle 3" direction="NNE" />
+    <item hash="65129275866c272bbcc7a96c804ee39a" sprite="Julian (U) (Shield) (Weaponless)" width="40" height="40" frame="Idle 3" direction="N" />
+    <item hash="9a52d46197e940a7926fae235ff3da6b" sprite="Julian (U) (Shield) (Weaponless)" width="40" height="40" frame="LookingBack 3, LookingBackThenToIdle 3" direction="SSE" />
+    <item hash="d17adc2dc444a77cf4a6d2cd683bbfca" sprite="Julian (U) (Shield) (Weaponless)" width="40" height="40" frame="LookingBack 3, LookingBackThenToIdle 3" direction="ESE" />
+    <item hash="708746af2faf913e3f22428eba915636" sprite="Julian (U) (Shield) (Weaponless)" width="40" height="40" frame="LookingBack 3, LookingBackThenToIdle 3" direction="ENE" />
+    <item hash="81c033c381400f932860f2f3ace24982" sprite="Julian (U) (Shield) (Weaponless)" width="40" height="40" frame="LookingBack 3, LookingBackThenToIdle 3" direction="NNE" />
+    <item hash="3d6d5ef3049e759492c7800c8fad2efd" sprite="Julian (U) (Shield) (Weaponless)" width="40" height="40" frame="LookingBack 4, LookingBackThenToIdle 4" direction="SSE" />
+    <item hash="3ff257605685f3131feeff980295f162" sprite="Julian (U) (Shield) (Weaponless)" width="40" height="40" frame="LookingBack 4, LookingBackThenToIdle 4" direction="ESE" />
+    <item hash="f45e58b89d52d1609d7e109ab0337649" sprite="Julian (U) (Shield) (Weaponless)" width="40" height="40" frame="LookingBack 4, LookingBackThenToIdle 4" direction="ENE" />
+    <item hash="86409d8f8d08d511aee0bb43296ca8c8" sprite="Julian (U) (Shield) (Weaponless)" width="40" height="40" frame="LookingBack 4, LookingBackThenToIdle 4" direction="NNE" />
+    <item hash="308407c76171e7582b9b2023f6dead40" sprite="Julian (U) (Shield) (Weaponless)" width="40" height="40" frame="LookingBackThenToIdle 2" direction="S" />
+    <item hash="e472a4b038a91bd7a43b475d329ec85c" sprite="Julian (U) (Shield) (Weaponless)" width="40" height="40" frame="LookingBackThenToIdle 2" direction="N" />
+    <item hash="ba3e8ec3d1cc014901a978061ddab1a8" sprite="Julian (U) (Shield) (Weaponless)" width="40" height="40" frame="LookingBackThenToIdle 3" direction="S" />
+    <item hash="2090ea047452304c9e365cac0ad6c06e" sprite="Julian (U) (Shield) (Weaponless)" width="40" height="40" frame="LookingBackThenToIdle 3" direction="N" />
+    <item hash="f240072023424f3a55cf6ee054f626d5" sprite="Julian (U) (Shield) (Weaponless)" width="40" height="40" frame="LookingBackThenToIdle 4" direction="S" />
+    <item hash="a4c70062a2c448c1ed6a0687e743088f" sprite="Julian (U) (Shield) (Weaponless)" width="40" height="40" frame="LookingBackThenToIdle 4" direction="N" />
+    <item hash="65ef6510eab962e6bcd8659625d5b61a" sprite="Julian (U) (Shield) (Weaponless)" width="40" height="40" frame="Nodding 2" direction="S" />
+    <item hash="1e7d72f9ae481f68e1f76c73b60ef199" sprite="Julian (U) (Shield) (Weaponless)" width="40" height="40" frame="Nodding 2" direction="SSE" />
+    <item hash="6bbb54a20bd2a3920fd21056b0e629ea" sprite="Julian (U) (Shield) (Weaponless)" width="40" height="40" frame="Nodding 2" direction="ESE" />
+    <item hash="a86f9643ccbb395317aa538ff3ead1d9" sprite="Julian (U) (Shield) (Weaponless)" width="40" height="40" frame="Nodding 2" direction="ENE" />
+    <item hash="6d4308e2fb40d08167604293285743fb" sprite="Julian (U) (Shield) (Weaponless)" width="40" height="40" frame="Nodding 2" direction="NNE" />
+    <item hash="c263bd8711d95c24b98b13f2a6612eea" sprite="Julian (U) (Shield) (Weaponless)" width="40" height="40" frame="Nodding 2" direction="N" />
+    <item hash="30e1891b87799e04b38f82d7f534da9b" sprite="Julian (U) (Shield) (Weaponless)" width="40" height="40" frame="Nodding 3" direction="S" />
+    <item hash="93cf70ab61457bc53aaf4ff69a916141" sprite="Julian (U) (Shield) (Weaponless)" width="40" height="40" frame="Nodding 3" direction="SSE" />
+    <item hash="b95314c4ff1699560c08289517e5281a" sprite="Julian (U) (Shield) (Weaponless)" width="40" height="40" frame="Nodding 3" direction="ESE" />
+    <item hash="fe55501f44d6f5843cf1c4f32663bf4b" sprite="Julian (U) (Shield) (Weaponless)" width="40" height="40" frame="Nodding 3" direction="ENE" />
+    <item hash="9ce4ff07e8d05251dd555469c0b03fa8" sprite="Julian (U) (Shield) (Weaponless)" width="40" height="40" frame="Nodding 3" direction="NNE" />
+    <item hash="98fb2d4f202befc36e34afbefc0671f9" sprite="Julian (U) (Shield) (Weaponless)" width="40" height="40" frame="Nodding 3" direction="N" />
+    <item hash="62e77f89351d0e9f0f4e0394745dc783" sprite="Julian (U) (Shield) (Weaponless)" width="40" height="40" frame="ShakingHead 2" direction="S" />
+    <item hash="125ea1bcd8ff6e4bb2f4271dbf00926e" sprite="Julian (U) (Shield) (Weaponless)" width="40" height="40" frame="ShakingHead 2" direction="SSE" />
+    <item hash="5dbb1cbcd40983d28fb8f4fd02d8a3bf" sprite="Julian (U) (Shield) (Weaponless)" width="40" height="40" frame="ShakingHead 2" direction="ESE" />
+    <item hash="a1a627f591ed8b8be752b15a28d681f2" sprite="Julian (U) (Shield) (Weaponless)" width="40" height="40" frame="ShakingHead 2" direction="ENE" />
+    <item hash="8d27ca5d57123dc97853bae47379988b" sprite="Julian (U) (Shield) (Weaponless)" width="40" height="40" frame="ShakingHead 2" direction="NNE" />
+    <item hash="4b01d0c8e2de8760771a8efcca26595a" sprite="Julian (U) (Shield) (Weaponless)" width="40" height="40" frame="ShakingHead 2" direction="N" />
+    <item hash="612f880de8380982ddc55f52d6e6cf35" sprite="Julian (U) (Shield) (Weaponless)" width="40" height="40" frame="ShakingHead 4" direction="S" />
+    <item hash="6e2df2e95160f79a9462e386c38cddd6" sprite="Julian (U) (Shield) (Weaponless)" width="40" height="40" frame="ShakingHead 4" direction="SSE" />
+    <item hash="ca9cb9be621499e1f6b4e52cac37368c" sprite="Julian (U) (Shield) (Weaponless)" width="40" height="40" frame="ShakingHead 4" direction="ESE" />
+    <item hash="5f89234f595a6ee3d6c706baa11be4e5" sprite="Julian (U) (Shield) (Weaponless)" width="40" height="40" frame="ShakingHead 4" direction="ENE" />
+    <item hash="541536731058bbe63edb0d80e0699400" sprite="Julian (U) (Shield) (Weaponless)" width="40" height="40" frame="ShakingHead 4" direction="NNE" />
+    <item hash="84ba7fc179c1b2e62535cb1944634f8d" sprite="Julian (U) (Shield) (Weaponless)" width="40" height="40" frame="ShakingHead 4" direction="N" />
+    <item hash="e4ce322d3053a57b82bc796a22702020" sprite="Julian (U) (Shield) (Weaponless)" width="40" height="40" frame="Walking 1" direction="S" />
+    <item hash="13a2acd6a4997e70899f22be705ba65f" sprite="Julian (U) (Shield) (Weaponless)" width="40" height="40" frame="Walking 1" direction="SSE" />
+    <item hash="42cee6111419730dbf4000ee9441b306" sprite="Julian (U) (Shield) (Weaponless)" width="40" height="40" frame="Walking 1" direction="ESE" />
+    <item hash="db7770ac15bee0f63e7aae27ea27adcf" sprite="Julian (U) (Shield) (Weaponless)" width="40" height="40" frame="Walking 1" direction="ENE" />
+    <item hash="de3119fa193b0ee419970d6de836a39a" sprite="Julian (U) (Shield) (Weaponless)" width="40" height="40" frame="Walking 1" direction="NNE" />
+    <item hash="8ed763999701afb58c5b4c44c18df8b7" sprite="Julian (U) (Shield) (Weaponless)" width="40" height="40" frame="Walking 1" direction="N" />
+    <item hash="29994757f2914a55637f09d28e73c325" sprite="Julian (U) (Shield) (Weaponless)" width="40" height="40" frame="Walking 3" direction="S" />
+    <item hash="8098267459aa0094fadbae5a0146d879" sprite="Julian (U) (Shield) (Weaponless)" width="40" height="40" frame="Walking 3" direction="SSE" />
+    <item hash="a58f724997b5e124c6567c87b085451a" sprite="Julian (U) (Shield) (Weaponless)" width="40" height="40" frame="Walking 3" direction="ESE" />
+    <item hash="19023fb5361224b1390f48617f84bf73" sprite="Julian (U) (Shield) (Weaponless)" width="40" height="40" frame="Walking 3" direction="ENE" />
+    <item hash="2a676730363c90966f02aff2fc8b18a2" sprite="Julian (U) (Shield) (Weaponless)" width="40" height="40" frame="Walking 3" direction="NNE" />
+    <item hash="ae86b117aa2ac72d03eca2bcf14b91ff" sprite="Julian (U) (Shield) (Weaponless)" width="40" height="40" frame="Walking 3" direction="N" />
+    <item hash="9834800fc3fd89a5770ee750f9710624" sprite="Julian (U) (Shield) (Weaponless)" width="40" height="40" frame="Walking 4" direction="S" />
+    <item hash="5455a7db8f556d142101e0c0afda9074" sprite="Julian (U) (Shield) (Weaponless)" width="40" height="40" frame="Walking 4" direction="SSE" />
+    <item hash="d6509733d4160073657ba2571c36b933" sprite="Julian (U) (Shield) (Weaponless)" width="40" height="40" frame="Walking 4" direction="ESE" />
+    <item hash="d7c942cbb08bcf16fcead64b854ec21d" sprite="Julian (U) (Shield) (Weaponless)" width="40" height="40" frame="Walking 4" direction="ENE" />
+    <item hash="9500762b24674eb033458075fd12b41b" sprite="Julian (U) (Shield) (Weaponless)" width="40" height="40" frame="Walking 4" direction="NNE" />
+    <item hash="affde73b6ecf39d4e1ea4157282590ac" sprite="Julian (U) (Shield) (Weaponless)" width="40" height="40" frame="Walking 4" direction="N" />
+    <item hash="18e99f75880d91b299a3659108c363c2" sprite="Julian (U) (Shield) (Weaponless)" width="40" height="40" frame="Walking 6" direction="S" />
+    <item hash="7b4512d6de9bc4dd7878f6dc575c563f" sprite="Julian (U) (Shield) (Weaponless)" width="40" height="40" frame="Walking 6" direction="SSE" />
+    <item hash="2b4f301a90c6a3588d92b02d0ce8c703" sprite="Julian (U) (Shield) (Weaponless)" width="40" height="40" frame="Walking 6" direction="ESE" />
+    <item hash="ce91c9e5717071ce82c3479f16ad626b" sprite="Julian (U) (Shield) (Weaponless)" width="40" height="40" frame="Walking 6" direction="ENE" />
+    <item hash="72cd6b37b9680457611502fe39ed74d6" sprite="Julian (U) (Shield) (Weaponless)" width="40" height="40" frame="Walking 6" direction="NNE" />
+    <item hash="b47dbbc5c221260e50595d6a49800b1d" sprite="Julian (U) (Shield) (Weaponless)" width="40" height="40" frame="Walking 6" direction="N" />
     <item hash="832a9903c3c40c272447b541c8bcbceb" sprite="Julian (U) (Weaponless)" width="40" height="40" frame="Idle 1" direction="S" />
-    <item hash="0f1260cb4f524c2e9ba999c496b6b82e" sprite="Julian (U) (Weaponless)" width="40" height="40" frame="Idle 1" direction="SSE" />
     <item hash="80183d8332a244da2188a67a0247af69" sprite="Julian (U) (Weaponless)" width="40" height="40" frame="Idle 1" direction="SSE" />
-    <item hash="064490561f59e5b72a2ff1cc96722217" sprite="Julian (U) (Weaponless)" width="40" height="40" frame="Idle 1" direction="ESE" />
     <item hash="9754af2f68e0e1967f60c3d511b53d09" sprite="Julian (U) (Weaponless)" width="40" height="40" frame="Idle 1" direction="ESE" />
-    <item hash="8321738aed18d46111f5f362475fc024" sprite="Julian (U) (Weaponless)" width="40" height="40" frame="Idle 1" direction="ENE" />
     <item hash="c3fe1b593f4368dd47aca41c91510020" sprite="Julian (U) (Weaponless)" width="40" height="40" frame="Idle 1" direction="ENE" />
-    <item hash="baf23cdbad7ba75723b763fbfe577332" sprite="Julian (U) (Weaponless)" width="40" height="40" frame="Idle 1" direction="NNE" />
     <item hash="d49c7eb343c64e0aee159f0f983d2a88" sprite="Julian (U) (Weaponless)" width="40" height="40" frame="Idle 1" direction="NNE" />
     <item hash="0d9dfe2fd89c2b8ba98a05187cd1aca3" sprite="Julian (U) (Weaponless)" width="40" height="40" frame="Idle 1" direction="N" />
-    <item hash="b949027fa2c7eb4c215565ebe690140b" sprite="Julian (U) (Weaponless)" width="40" height="40" frame="Idle 1" direction="N" />
-    <item hash="112866051d61714cf234d80bb29dc491" sprite="Julian (U) (Weaponless)" width="40" height="40" frame="Idle 2" direction="S" />
     <item hash="ebbfd9cdb245d914d3be936c2164a85a" sprite="Julian (U) (Weaponless)" width="40" height="40" frame="Idle 2" direction="S" />
     <item hash="1b688de881595333ff12267d0254468d" sprite="Julian (U) (Weaponless)" width="40" height="40" frame="Idle 2" direction="SSE" />
-    <item hash="8feee3fa323e0456840c62055f5e2349" sprite="Julian (U) (Weaponless)" width="40" height="40" frame="Idle 2" direction="SSE" />
     <item hash="54e467dd6904d5220ff7eb944b8bc699" sprite="Julian (U) (Weaponless)" width="40" height="40" frame="Idle 2" direction="ESE" />
-    <item hash="979381dab5e74749d83cb062a21364f2" sprite="Julian (U) (Weaponless)" width="40" height="40" frame="Idle 2" direction="ESE" />
-    <item hash="bbd83b43547dcf85e43fa4b37edbc90f" sprite="Julian (U) (Weaponless)" width="40" height="40" frame="Idle 2" direction="ENE" />
     <item hash="d7981a296fb22e4b071fc33efd94a7e7" sprite="Julian (U) (Weaponless)" width="40" height="40" frame="Idle 2" direction="ENE" />
-    <item hash="53ecfa0bbda6ba5918f8ecba7cfea5c2" sprite="Julian (U) (Weaponless)" width="40" height="40" frame="Idle 2" direction="NNE" />
     <item hash="a14540690c378fd3db21bdcbe4a1302a" sprite="Julian (U) (Weaponless)" width="40" height="40" frame="Idle 2" direction="NNE" />
     <item hash="2e812bc003b02fe811cb70ff365ffe6a" sprite="Julian (U) (Weaponless)" width="40" height="40" frame="Idle 2" direction="N" />
-    <item hash="87e85351355b3288be91b1defcf74fe3" sprite="Julian (U) (Weaponless)" width="40" height="40" frame="Idle 2" direction="N" />
-    <item hash="3842ff5c22bc1c81eb1f77333e398b44" sprite="Julian (U) (Weaponless)" width="40" height="40" frame="Idle 3" direction="S" />
     <item hash="d84ad2c7de7f62487237e1ce29464fc9" sprite="Julian (U) (Weaponless)" width="40" height="40" frame="Idle 3" direction="S" />
     <item hash="33aca6e09a9222a86d8db2128a6fb8fb" sprite="Julian (U) (Weaponless)" width="40" height="40" frame="Idle 3" direction="SSE" />
-    <item hash="a5e6d7146131f0b2c1dad176a2ade739" sprite="Julian (U) (Weaponless)" width="40" height="40" frame="Idle 3" direction="SSE" />
-    <item hash="5b3a798feb159477c208cc912792c776" sprite="Julian (U) (Weaponless)" width="40" height="40" frame="Idle 3" direction="ESE" />
     <item hash="668ee4a22ee0f797bc2391c6065065fd" sprite="Julian (U) (Weaponless)" width="40" height="40" frame="Idle 3" direction="ESE" />
-    <item hash="4f593ccd4d76c33a379391c96f48006d" sprite="Julian (U) (Weaponless)" width="40" height="40" frame="Idle 3" direction="ENE" />
     <item hash="f06eff5eab0f93546c7d12eb10edacf7" sprite="Julian (U) (Weaponless)" width="40" height="40" frame="Idle 3" direction="ENE" />
-    <item hash="922e547fa5a15da997e712288df896db" sprite="Julian (U) (Weaponless)" width="40" height="40" frame="Idle 3" direction="NNE" />
     <item hash="997955e30b8250dc4db7630d94f60419" sprite="Julian (U) (Weaponless)" width="40" height="40" frame="Idle 3" direction="NNE" />
-    <item hash="65129275866c272bbcc7a96c804ee39a" sprite="Julian (U) (Weaponless)" width="40" height="40" frame="Idle 3" direction="N" />
     <item hash="e2a04e13a029e6ada77e6ba5b6a91ce6" sprite="Julian (U) (Weaponless)" width="40" height="40" frame="Idle 3" direction="N" />
-    <item hash="9a52d46197e940a7926fae235ff3da6b" sprite="Julian (U) (Weaponless)" width="40" height="40" frame="LookingBack 3, LookingBackThenToIdle 3" direction="SSE" />
-    <item hash="d17adc2dc444a77cf4a6d2cd683bbfca" sprite="Julian (U) (Weaponless)" width="40" height="40" frame="LookingBack 3, LookingBackThenToIdle 3" direction="ESE" />
-    <item hash="708746af2faf913e3f22428eba915636" sprite="Julian (U) (Weaponless)" width="40" height="40" frame="LookingBack 3, LookingBackThenToIdle 3" direction="ENE" />
-    <item hash="81c033c381400f932860f2f3ace24982" sprite="Julian (U) (Weaponless)" width="40" height="40" frame="LookingBack 3, LookingBackThenToIdle 3" direction="NNE" />
-    <item hash="3d6d5ef3049e759492c7800c8fad2efd" sprite="Julian (U) (Weaponless)" width="40" height="40" frame="LookingBack 4, LookingBackThenToIdle 4" direction="SSE" />
-    <item hash="3ff257605685f3131feeff980295f162" sprite="Julian (U) (Weaponless)" width="40" height="40" frame="LookingBack 4, LookingBackThenToIdle 4" direction="ESE" />
-    <item hash="f45e58b89d52d1609d7e109ab0337649" sprite="Julian (U) (Weaponless)" width="40" height="40" frame="LookingBack 4, LookingBackThenToIdle 4" direction="ENE" />
-    <item hash="86409d8f8d08d511aee0bb43296ca8c8" sprite="Julian (U) (Weaponless)" width="40" height="40" frame="LookingBack 4, LookingBackThenToIdle 4" direction="NNE" />
-    <item hash="308407c76171e7582b9b2023f6dead40" sprite="Julian (U) (Weaponless)" width="40" height="40" frame="LookingBackThenToIdle 2" direction="S" />
-    <item hash="e472a4b038a91bd7a43b475d329ec85c" sprite="Julian (U) (Weaponless)" width="40" height="40" frame="LookingBackThenToIdle 2" direction="N" />
-    <item hash="ba3e8ec3d1cc014901a978061ddab1a8" sprite="Julian (U) (Weaponless)" width="40" height="40" frame="LookingBackThenToIdle 3" direction="S" />
-    <item hash="2090ea047452304c9e365cac0ad6c06e" sprite="Julian (U) (Weaponless)" width="40" height="40" frame="LookingBackThenToIdle 3" direction="N" />
-    <item hash="f240072023424f3a55cf6ee054f626d5" sprite="Julian (U) (Weaponless)" width="40" height="40" frame="LookingBackThenToIdle 4" direction="S" />
-    <item hash="a4c70062a2c448c1ed6a0687e743088f" sprite="Julian (U) (Weaponless)" width="40" height="40" frame="LookingBackThenToIdle 4" direction="N" />
-    <item hash="65ef6510eab962e6bcd8659625d5b61a" sprite="Julian (U) (Weaponless)" width="40" height="40" frame="Nodding 2" direction="S" />
     <item hash="d18069855cebefdb36961f0d47b0adda" sprite="Julian (U) (Weaponless)" width="40" height="40" frame="Nodding 2" direction="S" />
-    <item hash="1e7d72f9ae481f68e1f76c73b60ef199" sprite="Julian (U) (Weaponless)" width="40" height="40" frame="Nodding 2" direction="SSE" />
     <item hash="e871921f8186194ddd1f94d66c826759" sprite="Julian (U) (Weaponless)" width="40" height="40" frame="Nodding 2" direction="SSE" />
-    <item hash="6bbb54a20bd2a3920fd21056b0e629ea" sprite="Julian (U) (Weaponless)" width="40" height="40" frame="Nodding 2" direction="ESE" />
     <item hash="ecc16e817fe1f60625e734fb68125166" sprite="Julian (U) (Weaponless)" width="40" height="40" frame="Nodding 2" direction="ESE" />
-    <item hash="a86f9643ccbb395317aa538ff3ead1d9" sprite="Julian (U) (Weaponless)" width="40" height="40" frame="Nodding 2" direction="ENE" />
     <item hash="b4642265aece13ce1145d18b03f926ff" sprite="Julian (U) (Weaponless)" width="40" height="40" frame="Nodding 2" direction="ENE" />
-    <item hash="6d4308e2fb40d08167604293285743fb" sprite="Julian (U) (Weaponless)" width="40" height="40" frame="Nodding 2" direction="NNE" />
     <item hash="e57390ded37bd4a16824ae30c5971de6" sprite="Julian (U) (Weaponless)" width="40" height="40" frame="Nodding 2" direction="NNE" />
     <item hash="6a6a4517839cfedbefa2c773c3287586" sprite="Julian (U) (Weaponless)" width="40" height="40" frame="Nodding 2" direction="N" />
-    <item hash="c263bd8711d95c24b98b13f2a6612eea" sprite="Julian (U) (Weaponless)" width="40" height="40" frame="Nodding 2" direction="N" />
-    <item hash="30e1891b87799e04b38f82d7f534da9b" sprite="Julian (U) (Weaponless)" width="40" height="40" frame="Nodding 3" direction="S" />
     <item hash="76f2a458d67dad9bda416adb86640425" sprite="Julian (U) (Weaponless)" width="40" height="40" frame="Nodding 3" direction="S" />
-    <item hash="93cf70ab61457bc53aaf4ff69a916141" sprite="Julian (U) (Weaponless)" width="40" height="40" frame="Nodding 3" direction="SSE" />
     <item hash="b14065f3a405708b9142b3e6f91d0c0f" sprite="Julian (U) (Weaponless)" width="40" height="40" frame="Nodding 3" direction="SSE" />
     <item hash="2b98f12fe20a43a7d4ea74532fb93e20" sprite="Julian (U) (Weaponless)" width="40" height="40" frame="Nodding 3" direction="ESE" />
-    <item hash="b95314c4ff1699560c08289517e5281a" sprite="Julian (U) (Weaponless)" width="40" height="40" frame="Nodding 3" direction="ESE" />
     <item hash="3f507d725c75ad7e3fd72fd65cca4aa5" sprite="Julian (U) (Weaponless)" width="40" height="40" frame="Nodding 3" direction="ENE" />
-    <item hash="fe55501f44d6f5843cf1c4f32663bf4b" sprite="Julian (U) (Weaponless)" width="40" height="40" frame="Nodding 3" direction="ENE" />
     <item hash="6df323468818f274a0de20d19929f281" sprite="Julian (U) (Weaponless)" width="40" height="40" frame="Nodding 3" direction="NNE" />
-    <item hash="9ce4ff07e8d05251dd555469c0b03fa8" sprite="Julian (U) (Weaponless)" width="40" height="40" frame="Nodding 3" direction="NNE" />
-    <item hash="98fb2d4f202befc36e34afbefc0671f9" sprite="Julian (U) (Weaponless)" width="40" height="40" frame="Nodding 3" direction="N" />
     <item hash="f175d09113f6726f138ea9de3b03598c" sprite="Julian (U) (Weaponless)" width="40" height="40" frame="Nodding 3" direction="N" />
     <item hash="3fd3febd3c1fbbb9638b2a35aaa6ba4b" sprite="Julian (U) (Weaponless)" width="40" height="40" frame="ShakingHead 2" direction="S" />
-    <item hash="62e77f89351d0e9f0f4e0394745dc783" sprite="Julian (U) (Weaponless)" width="40" height="40" frame="ShakingHead 2" direction="S" />
-    <item hash="125ea1bcd8ff6e4bb2f4271dbf00926e" sprite="Julian (U) (Weaponless)" width="40" height="40" frame="ShakingHead 2" direction="SSE" />
     <item hash="422f1f31d2de4b43bdbbc875a1a18002" sprite="Julian (U) (Weaponless)" width="40" height="40" frame="ShakingHead 2" direction="SSE" />
-    <item hash="5dbb1cbcd40983d28fb8f4fd02d8a3bf" sprite="Julian (U) (Weaponless)" width="40" height="40" frame="ShakingHead 2" direction="ESE" />
     <item hash="e858f45b6dcff00c8f54baca09f2d12e" sprite="Julian (U) (Weaponless)" width="40" height="40" frame="ShakingHead 2" direction="ESE" />
     <item hash="3d74209741b0d258097f67bbafd29200" sprite="Julian (U) (Weaponless)" width="40" height="40" frame="ShakingHead 2" direction="ENE" />
-    <item hash="a1a627f591ed8b8be752b15a28d681f2" sprite="Julian (U) (Weaponless)" width="40" height="40" frame="ShakingHead 2" direction="ENE" />
     <item hash="7437896f37ea14b5f226a3a5c6062171" sprite="Julian (U) (Weaponless)" width="40" height="40" frame="ShakingHead 2" direction="NNE" />
-    <item hash="8d27ca5d57123dc97853bae47379988b" sprite="Julian (U) (Weaponless)" width="40" height="40" frame="ShakingHead 2" direction="NNE" />
-    <item hash="4b01d0c8e2de8760771a8efcca26595a" sprite="Julian (U) (Weaponless)" width="40" height="40" frame="ShakingHead 2" direction="N" />
     <item hash="b2b880301ae76b6233eaaf3e8b2f5531" sprite="Julian (U) (Weaponless)" width="40" height="40" frame="ShakingHead 2" direction="N" />
     <item hash="45b4821afc4148bfe4878253060367c0" sprite="Julian (U) (Weaponless)" width="40" height="40" frame="ShakingHead 4" direction="S" />
-    <item hash="612f880de8380982ddc55f52d6e6cf35" sprite="Julian (U) (Weaponless)" width="40" height="40" frame="ShakingHead 4" direction="S" />
-    <item hash="6e2df2e95160f79a9462e386c38cddd6" sprite="Julian (U) (Weaponless)" width="40" height="40" frame="ShakingHead 4" direction="SSE" />
     <item hash="8f6222202d44181c8f3c2d5d1802bcdc" sprite="Julian (U) (Weaponless)" width="40" height="40" frame="ShakingHead 4" direction="SSE" />
     <item hash="06f403b7ff3492a7c1f337088501147e" sprite="Julian (U) (Weaponless)" width="40" height="40" frame="ShakingHead 4" direction="ESE" />
-    <item hash="ca9cb9be621499e1f6b4e52cac37368c" sprite="Julian (U) (Weaponless)" width="40" height="40" frame="ShakingHead 4" direction="ESE" />
     <item hash="3a6bd5102498485bcbf1ab8c8543a588" sprite="Julian (U) (Weaponless)" width="40" height="40" frame="ShakingHead 4" direction="ENE" />
-    <item hash="5f89234f595a6ee3d6c706baa11be4e5" sprite="Julian (U) (Weaponless)" width="40" height="40" frame="ShakingHead 4" direction="ENE" />
-    <item hash="541536731058bbe63edb0d80e0699400" sprite="Julian (U) (Weaponless)" width="40" height="40" frame="ShakingHead 4" direction="NNE" />
     <item hash="d7cbc8e1252df1c4a8598f3e3032c035" sprite="Julian (U) (Weaponless)" width="40" height="40" frame="ShakingHead 4" direction="NNE" />
-    <item hash="84ba7fc179c1b2e62535cb1944634f8d" sprite="Julian (U) (Weaponless)" width="40" height="40" frame="ShakingHead 4" direction="N" />
     <item hash="afe5bb12907832961983e803d371371e" sprite="Julian (U) (Weaponless)" width="40" height="40" frame="ShakingHead 4" direction="N" />
     <item hash="2c8fcef2f03f4c6e7df4919fe7a6e0eb" sprite="Julian (U) (Weaponless)" width="40" height="40" frame="Walking 1" direction="S" />
-    <item hash="e4ce322d3053a57b82bc796a22702020" sprite="Julian (U) (Weaponless)" width="40" height="40" frame="Walking 1" direction="S" />
-    <item hash="13a2acd6a4997e70899f22be705ba65f" sprite="Julian (U) (Weaponless)" width="40" height="40" frame="Walking 1" direction="SSE" />
     <item hash="e9c7452d50e0ff7e51b3ecbe186ac250" sprite="Julian (U) (Weaponless)" width="40" height="40" frame="Walking 1" direction="SSE" />
     <item hash="369be9b9d7675d600026b96e5e958d94" sprite="Julian (U) (Weaponless)" width="40" height="40" frame="Walking 1" direction="ESE" />
-    <item hash="42cee6111419730dbf4000ee9441b306" sprite="Julian (U) (Weaponless)" width="40" height="40" frame="Walking 1" direction="ESE" />
     <item hash="2fae7ce5524d2bdb682327a73f8eeedd" sprite="Julian (U) (Weaponless)" width="40" height="40" frame="Walking 1" direction="ENE" />
-    <item hash="db7770ac15bee0f63e7aae27ea27adcf" sprite="Julian (U) (Weaponless)" width="40" height="40" frame="Walking 1" direction="ENE" />
-    <item hash="de3119fa193b0ee419970d6de836a39a" sprite="Julian (U) (Weaponless)" width="40" height="40" frame="Walking 1" direction="NNE" />
     <item hash="f433d03ac363d13b4e1ef16101c9451f" sprite="Julian (U) (Weaponless)" width="40" height="40" frame="Walking 1" direction="NNE" />
     <item hash="6459ee430c3830678802abee90d45e06" sprite="Julian (U) (Weaponless)" width="40" height="40" frame="Walking 1" direction="N" />
-    <item hash="8ed763999701afb58c5b4c44c18df8b7" sprite="Julian (U) (Weaponless)" width="40" height="40" frame="Walking 1" direction="N" />
-    <item hash="29994757f2914a55637f09d28e73c325" sprite="Julian (U) (Weaponless)" width="40" height="40" frame="Walking 3" direction="S" />
     <item hash="580b95a3e94903ca43cf98db228799b8" sprite="Julian (U) (Weaponless)" width="40" height="40" frame="Walking 3" direction="S" />
-    <item hash="8098267459aa0094fadbae5a0146d879" sprite="Julian (U) (Weaponless)" width="40" height="40" frame="Walking 3" direction="SSE" />
     <item hash="b6eb83f54c718358978a8bb3f9d0857c" sprite="Julian (U) (Weaponless)" width="40" height="40" frame="Walking 3" direction="SSE" />
     <item hash="984257f93c0face09bb247ae695397c3" sprite="Julian (U) (Weaponless)" width="40" height="40" frame="Walking 3" direction="ESE" />
-    <item hash="a58f724997b5e124c6567c87b085451a" sprite="Julian (U) (Weaponless)" width="40" height="40" frame="Walking 3" direction="ESE" />
-    <item hash="19023fb5361224b1390f48617f84bf73" sprite="Julian (U) (Weaponless)" width="40" height="40" frame="Walking 3" direction="ENE" />
     <item hash="f7b483ccbc374ed807fbfad2e1bb0d15" sprite="Julian (U) (Weaponless)" width="40" height="40" frame="Walking 3" direction="ENE" />
     <item hash="1b10d12673c5a08e933967e87c8e96bc" sprite="Julian (U) (Weaponless)" width="40" height="40" frame="Walking 3" direction="NNE" />
-    <item hash="2a676730363c90966f02aff2fc8b18a2" sprite="Julian (U) (Weaponless)" width="40" height="40" frame="Walking 3" direction="NNE" />
-    <item hash="ae86b117aa2ac72d03eca2bcf14b91ff" sprite="Julian (U) (Weaponless)" width="40" height="40" frame="Walking 3" direction="N" />
     <item hash="ba1a2ba17272d71651e97bcd1f3362e1" sprite="Julian (U) (Weaponless)" width="40" height="40" frame="Walking 3" direction="N" />
-    <item hash="9834800fc3fd89a5770ee750f9710624" sprite="Julian (U) (Weaponless)" width="40" height="40" frame="Walking 4" direction="S" />
     <item hash="cd9d8d4108375196544af9da00f867e6" sprite="Julian (U) (Weaponless)" width="40" height="40" frame="Walking 4" direction="S" />
     <item hash="4697a5e0b33774a5a967005929382de3" sprite="Julian (U) (Weaponless)" width="40" height="40" frame="Walking 4" direction="SSE" />
-    <item hash="5455a7db8f556d142101e0c0afda9074" sprite="Julian (U) (Weaponless)" width="40" height="40" frame="Walking 4" direction="SSE" />
     <item hash="36a61b416d3bd91cc1f31f6823b74172" sprite="Julian (U) (Weaponless)" width="40" height="40" frame="Walking 4" direction="ESE" />
-    <item hash="d6509733d4160073657ba2571c36b933" sprite="Julian (U) (Weaponless)" width="40" height="40" frame="Walking 4" direction="ESE" />
     <item hash="cde7c1e1bb01ada1031ebe04d0934310" sprite="Julian (U) (Weaponless)" width="40" height="40" frame="Walking 4" direction="ENE" />
-    <item hash="d7c942cbb08bcf16fcead64b854ec21d" sprite="Julian (U) (Weaponless)" width="40" height="40" frame="Walking 4" direction="ENE" />
     <item hash="569b9aacb40a493f32fb2a1f22ecd2ef" sprite="Julian (U) (Weaponless)" width="40" height="40" frame="Walking 4" direction="NNE" />
-    <item hash="9500762b24674eb033458075fd12b41b" sprite="Julian (U) (Weaponless)" width="40" height="40" frame="Walking 4" direction="NNE" />
     <item hash="03db32d400ed4cfc9222eb599001d327" sprite="Julian (U) (Weaponless)" width="40" height="40" frame="Walking 4" direction="N" />
-    <item hash="affde73b6ecf39d4e1ea4157282590ac" sprite="Julian (U) (Weaponless)" width="40" height="40" frame="Walking 4" direction="N" />
-    <item hash="18e99f75880d91b299a3659108c363c2" sprite="Julian (U) (Weaponless)" width="40" height="40" frame="Walking 6" direction="S" />
     <item hash="407e8f0efef5b346b269f1b8fa940bb5" sprite="Julian (U) (Weaponless)" width="40" height="40" frame="Walking 6" direction="S" />
     <item hash="44700d1d487ce90b8f696960d447b969" sprite="Julian (U) (Weaponless)" width="40" height="40" frame="Walking 6" direction="SSE" />
-    <item hash="7b4512d6de9bc4dd7878f6dc575c563f" sprite="Julian (U) (Weaponless)" width="40" height="40" frame="Walking 6" direction="SSE" />
-    <item hash="2b4f301a90c6a3588d92b02d0ce8c703" sprite="Julian (U) (Weaponless)" width="40" height="40" frame="Walking 6" direction="ESE" />
     <item hash="b1d232cbed022a00d4a57a52f9d885c2" sprite="Julian (U) (Weaponless)" width="40" height="40" frame="Walking 6" direction="ESE" />
     <item hash="006086a032c84ebbc8e90c79f1cdf150" sprite="Julian (U) (Weaponless)" width="40" height="40" frame="Walking 6" direction="ENE" />
-    <item hash="ce91c9e5717071ce82c3479f16ad626b" sprite="Julian (U) (Weaponless)" width="40" height="40" frame="Walking 6" direction="ENE" />
-    <item hash="72cd6b37b9680457611502fe39ed74d6" sprite="Julian (U) (Weaponless)" width="40" height="40" frame="Walking 6" direction="NNE" />
     <item hash="f0593c4dc70bcb1c0534dec855f35b5c" sprite="Julian (U) (Weaponless)" width="40" height="40" frame="Walking 6" direction="NNE" />
     <item hash="aa6a48cbb07de8eea08acb72c6144ebf" sprite="Julian (U) (Weaponless)" width="40" height="40" frame="Walking 6" direction="N" />
-    <item hash="b47dbbc5c221260e50595d6a49800b1d" sprite="Julian (U) (Weaponless)" width="40" height="40" frame="Walking 6" direction="N" />
-    <item hash="cb6211ad1be97b57224b2cbe9293a220" sprite="Julian (U) (With Beer)" width="40" height="40" frame="Drinking 1" direction="SSE" />
-    <item hash="b0c4bd8123ce91242437df138a83360f" sprite="Julian (U) (With Beer)" width="40" height="40" frame="Drinking 1" direction="ESE" />
-    <item hash="a767adfbcc3fb7f529f8550d7d76da0d" sprite="Julian (U) (With Beer)" width="40" height="40" frame="Drinking 1" direction="ENE" />
-    <item hash="684f73495a6824ee8edbd42bb31a1ddb" sprite="Julian (U) (With Beer)" width="40" height="40" frame="Drinking 1" direction="NNE" />
-    <item hash="0c032b289bc6c4583dab807ffb9db7be" sprite="Julian (U) (With Beer)" width="40" height="40" frame="Drinking 2" direction="SSE" />
-    <item hash="62658d20e5a994e90b08027c65e2e94e" sprite="Julian (U) (With Beer)" width="40" height="40" frame="Drinking 2" direction="ESE" />
-    <item hash="e4e77bf7a59cc67743fd5aed2b58d184" sprite="Julian (U) (With Beer)" width="40" height="40" frame="Drinking 2" direction="ENE" />
-    <item hash="41f0abc0cd35e2a2af649e55f245541e" sprite="Julian (U) (With Beer)" width="40" height="40" frame="Drinking 2" direction="NNE" />
-    <item hash="2dd583edca9ec78825db23017e331854" sprite="Julian (U) (With Beer)" width="40" height="40" frame="Drinking 3" direction="SSE" />
-    <item hash="21e500826ba932201c92fb20834cda54" sprite="Julian (U) (With Beer)" width="40" height="40" frame="Drinking 3" direction="ESE" />
-    <item hash="c3882f4d4c2524459a9546ef647cc084" sprite="Julian (U) (With Beer)" width="40" height="40" frame="Drinking 3" direction="ENE" />
-    <item hash="890f681ea4213e4084ff1e73b24657fa" sprite="Julian (U) (With Beer)" width="40" height="40" frame="Drinking 3" direction="NNE" />
     <item hash="4ada68503020f8fa520fe01d1bcba223" sprite="Justin (P1)" width="48" height="40" frame="Idle 1" direction="S" />
     <item hash="d5b865246f769f8cf874acd2e58d0aab" sprite="Justin (P1)" width="48" height="40" frame="Idle 1" direction="SSE" />
     <item hash="4646893ad0432aadc5a87756b89bb3dc" sprite="Justin (P1)" width="48" height="40" frame="Idle 1" direction="ESE" />
