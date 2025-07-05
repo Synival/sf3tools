@@ -46,45 +46,6 @@ namespace SF3.Models.Structs.CHR {
             AnimationInfo.Duration   = Duration;
             AnimationInfo.FrameTexturesMissing = FrameTexturesMissing;
 
-            SpriteFrameDirection FrameNumberToSpriteDir(int dirs, int num) {
-                switch (dirs) {
-                    case 4:
-                    case 6:
-                        switch (num) {
-                            case 0:  return SpriteFrameDirection.SSE;
-                            case 1:  return SpriteFrameDirection.ESE;
-                            case 2:  return SpriteFrameDirection.ENE;
-                            case 3:  return SpriteFrameDirection.NNE;
-                            case 4:  return SpriteFrameDirection.S;
-                            default: return SpriteFrameDirection.N;
-                        }
-
-                    case 8:
-                        switch (num) {
-                            case 0:  return SpriteFrameDirection.SSE;
-                            case 1:  return SpriteFrameDirection.ESE;
-                            case 2:  return SpriteFrameDirection.ENE;
-                            case 3:  return SpriteFrameDirection.NNE;
-                            case 4:  return SpriteFrameDirection.NNW;
-                            case 5:  return SpriteFrameDirection.WNW;
-                            case 6:  return SpriteFrameDirection.WSW;
-                            default: return SpriteFrameDirection.SSW;
-                        }
-
-                    case 5:
-                        switch (num) {
-                            case 0:  return SpriteFrameDirection.S;
-                            case 1:  return SpriteFrameDirection.SE;
-                            case 2:  return SpriteFrameDirection.E;
-                            case 3:  return SpriteFrameDirection.NE;
-                            default: return SpriteFrameDirection.N;
-                        }
-
-                    default:
-                        return SpriteFrameDirection.First + num;
-                }
-            }
-
             int texCount = 0;
             var aniNameLower = AnimationName.ToLower();
             var frameIdsModified = new HashSet<int>();
