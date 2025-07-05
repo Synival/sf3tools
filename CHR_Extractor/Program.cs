@@ -227,13 +227,19 @@ namespace CHR_Analyzer {
                     if (frames.Length == 0)
                         continue;
 
+                    var frameDirections = frames.Select(x => x.FrameInfo.Direction).Distinct().ToHashSet();
+                    var frameDirectionToIndex = frameDirections
+                        .Select((x, i) => new { Direction = x, Index = i })
+                        .OrderBy(x => x.Direction)
+                        .ToDictionary(x => x.Direction, x => x.Index);
+
                     var filename = FilesystemString(spriteName) + ".BMP";
                     var outputPath = Path.Combine(spritePath, filename);
                     Console.WriteLine($"Writing '{outputPath}'...");
 
                     var frameGroups = frames
                         .GroupBy(x => x.FrameInfo.FrameName)
-                        .ToDictionary(x => x.Key, x => x.ToArray());
+                        .ToDictionary(x => x.Key, x => x.OrderBy(y => y.FrameInfo.Direction).ThenBy(y => y.FrameInfo.TextureHash).ToArray());
 
                     var frameWidthInPixels  = frames[0].Texture.Width;
                     var frameHeightInPixels = frames[0].Texture.Height;
@@ -242,7 +248,7 @@ namespace CHR_Analyzer {
                     var frameCount     = frames.Length;
                     var totalPixels    = pixelsPerFrame * frameCount;
 
-                    var imageWidthInFrames  = frameGroups.Max(x => x.Value.Length);
+                    var imageWidthInFrames  = Math.Max(frameDirections.Count, frameGroups.Max(x => x.Value.Length));
                     var imageHeightInFrames = frameGroups.Count;
 
                     var imageWidthInPixels  = imageWidthInFrames * frameWidthInPixels;
@@ -252,18 +258,76 @@ namespace CHR_Analyzer {
 
                     int y = 0;
                     foreach (var frameGroup in frameGroups) {
-                        int x = (imageWidthInFrames - frameGroup.Value.Length) * frameWidthInPixels / 2;
+                        // Normally, frames' X positions are set according to their direction.
+                        // But if a frame group had multiple directions -- which, unfortunately, can happen --
+                        // set the frames' X position to their index.
+                        bool hasDuplicateDirections = frameGroup.Value
+                            .GroupBy(x => x.FrameInfo.Direction)
+                            .Any(x => x.Count() != 1);
+
+                        // Determine if this is a valid set of frames.
+                        var frameGroupDirs = frameGroup.Value.Select(x => x.FrameInfo.Direction).Distinct().ToHashSet();
+
+                        var hasFirst  = frameGroupDirs.Contains(SpriteFrameDirection.First);
+                        var hasSecond = frameGroupDirs.Contains(SpriteFrameDirection.Second);
+
+                        var hasS   = frameGroupDirs.Contains(SpriteFrameDirection.S);
+                        var hasSSE = frameGroupDirs.Contains(SpriteFrameDirection.SSE);
+                        var hasSE  = frameGroupDirs.Contains(SpriteFrameDirection.SE);
+                        var hasESE = frameGroupDirs.Contains(SpriteFrameDirection.ESE);
+                        var hasE   = frameGroupDirs.Contains(SpriteFrameDirection.E);
+                        var hasENE = frameGroupDirs.Contains(SpriteFrameDirection.ENE);
+                        var hasNE  = frameGroupDirs.Contains(SpriteFrameDirection.NE);
+                        var hasNNE = frameGroupDirs.Contains(SpriteFrameDirection.NNE);
+                        var hasN   = frameGroupDirs.Contains(SpriteFrameDirection.N);
+                        var hasNNW = frameGroupDirs.Contains(SpriteFrameDirection.NNW);
+                        var hasWNW = frameGroupDirs.Contains(SpriteFrameDirection.WNW);
+                        var hasWSW = frameGroupDirs.Contains(SpriteFrameDirection.WSW);
+                        var hasSSW = frameGroupDirs.Contains(SpriteFrameDirection.SSW);
+
+                        var has1Dir  = frameGroupDirs.Count == 1 && hasFirst;
+                        var has2Dirs = frameGroupDirs.Count == 2 && hasFirst && hasSecond;
+                        var has4Dirs = frameGroupDirs.Count == 4         && hasSSE && hasESE && hasENE && hasNNE;
+                        var has5Dirs = frameGroupDirs.Count == 5 && hasS      && hasSE  && hasE   && hasNE       && hasN;
+                        var has6Dirs = frameGroupDirs.Count == 6 && hasS && hasSSE && hasESE && hasENE && hasNNE && hasN;
+                        var has8Dirs = frameGroupDirs.Count == 8         && hasSSE && hasESE && hasENE && hasNNE         && hasNNW && hasWNW && hasWSW && hasSSW;
+                        var has9Dirs = frameGroupDirs.Count == 9 && hasS && hasSSE && hasSE && hasESE && hasE && hasENE && hasNE && hasNNE && hasN;
+
+                        var hasBogusDirs = !(has1Dir || has2Dirs || has4Dirs || has5Dirs || has6Dirs || has8Dirs || has9Dirs);
+
+                        int frameIndex = 0;
                         foreach (var frame in frameGroup.Value) {
+                            int x = ((hasDuplicateDirections) ? frameIndex : frameDirectionToIndex[frame.FrameInfo.Direction]) * frameWidthInPixels;
+
                             int pos = (y * imageWidthInPixels + x) * 2;
                             var frameData = frame.Texture.BitmapDataARGB1555;
 
                             int frameDataPos = 0;
                             for (int iy = 0; iy < frameHeightInPixels; iy++) {
                                 int ipos = pos + (iy * imageWidthInPixels) * 2;
-                                for (int ix = 0; ix < frameWidthInPixels * 2; ix++)
-                                    newData[ipos++] = frameData[frameDataPos++];
+
+                                // If there are errors with this frame group, colorize them with a background color.
+                                if (hasDuplicateDirections || hasBogusDirs) {
+                                    for (int ix = 0; ix < frameWidthInPixels; ix++) {
+                                        var argb1555 = (ushort) ((frameData[frameDataPos + 1] << 8) + frameData[frameDataPos]);
+                                        if (argb1555 < 0x8000u) {
+                                            newData[ipos++] = (byte) (hasBogusDirs ? 0x1F : 0x00);
+                                            newData[ipos++] = (byte) (0x80 | (hasDuplicateDirections ? 0x7C : 0x00));
+                                            frameDataPos += 2;
+                                        }
+                                        else {
+                                            newData[ipos++] = frameData[frameDataPos++];
+                                            newData[ipos++] = frameData[frameDataPos++];
+                                        }
+                                    }
+                                }
+                                else {
+                                    for (int ix = 0; ix < frameWidthInPixels * 2; ix++)
+                                        newData[ipos++] = frameData[frameDataPos++];
+                                }
                             }
-                            x += frameWidthInPixels;
+
+                            frameIndex++;
                         }
                         y += frameHeightInPixels;
                     }
