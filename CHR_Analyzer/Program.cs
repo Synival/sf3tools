@@ -97,11 +97,52 @@ namespace CHR_Analyzer {
         private static List<string> s_matchReports = [];
 
         private static bool? CHR_MatchFunc(string filename, ICHR_File[] chrFiles, INameGetterContext ngc) {
+            foreach (var chr in chrFiles) {
+                foreach (var sprite in chr.SpriteTable) {
+                    foreach (var frame in sprite.FrameTable) {
+                        // Skip sprites that actually have 'First' or 'Second' directions.
+                        if (frame.SpriteName.StartsWith("Small Icons") ||
+                            frame.SpriteName.StartsWith("Explosion")   ||
+                            frame.SpriteName.StartsWith("Fey Wings")   ||
+                            frame.SpriteName == "Transparent Frame"    ||
+                            frame.SpriteName == "Transparency"         ||
+                            frame.SpriteName == "Lightning Bolt"       ||
+                            frame.SpriteName == "Bulzome Lightning Strike" ||
+                            frame.SpriteName.EndsWith(" Egg")          ||
+                            frame.SpriteName == "Bomb"                 ||
+                            frame.SpriteName == "Cannon Ball"          ||
+                            frame.SpriteName == "Cannon Ball Splash"   ||
+                            frame.SpriteName == "Popping Bubble"       ||
+                            frame.SpriteName == "Key"                  ||
+                            frame.SpriteName.StartsWith("Freeze Ball Pedestal") ||
+                            frame.SpriteName == "Firey Poof"           ||
+                            frame.SpriteName == "Flashing Yellow/Red Light" ||
+                            frame.SpriteName == "Small Torch Flame"    ||
+                            frame.SpriteName.Contains("Poof")          ||
+                            frame.SpriteName.StartsWith("Rock Thrown") ||
+                            frame.SpriteName == "Sphere of Darkness"   ||
+                            frame.SpriteName == "Sphere of Light Around Jane" ||
+                            frame.SpriteName == "Light Blue Torch Flame" ||
+                            frame.SpriteName == "Strange Yellow Light" ||
+                            frame.SpriteName == "Large Orange Explosion" ||
+                            frame.SpriteName == "Light From Staff of Besem"
+                        ) {
+                            continue;
+                        }
+
+                        if (frame.Direction <= SpriteFrameDirection.Second)
+                            s_matchReports.Add($"{sprite.Name}.{frame.ID:X2}: {frame.SpriteName}.{frame.FrameName}");
+                    }
+                }
+            }
+
+/*
             var animationsWithMissingFrames = chrFiles.SelectMany(chr => chr.SpriteTable.SelectMany(x => x.AnimationTable.Where(y => y.FrameTexturesMissing > 0))).ToArray();
             foreach (var x in animationsWithMissingFrames)
                 s_matchReports.Add($"{x.FrameTexturesMissing} missing frames | {x.SpriteName}, {x.Name}");
+*/
 
-            return s_matchReports.Count > 0;
+            return s_matchReports.Count > 0 ? true : null;
         }
 
         public static void Main(string[] args) {
