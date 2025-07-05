@@ -16816,15 +16816,15 @@
     <item hash="d17d155b5d951a359c5eb90e8bb2d1f6" sprite="Monk w/ Orange Robe" width="40" height="40" frame="Idle (Similar to Walking) 6" direction="ENE" />
     <item hash="643f404fca836100c2d90c7b452c1e8c" sprite="Monk w/ Orange Robe" width="40" height="40" frame="Idle (Similar to Walking) 6" direction="NNE" />
     <item hash="3eb561b7dffa1fedf59b8f424a89f7dd" sprite="Murasame (P1)" width="40" height="40" frame="Idle 1" direction="S" />
+    <item hash="9a6181173af90c4afc6886585f8f4a17" sprite="Murasame (P1)" width="40" height="40" frame="Idle 1" direction="SSE" />
     <item hash="dbaba249d74237d1b359c3446c564bb1" sprite="Murasame (P1)" width="40" height="40" frame="Idle 1" direction="SSE" />
     <item hash="1c04b859bf161cc172704d999d6e1152" sprite="Murasame (P1)" width="40" height="40" frame="Idle 1" direction="ESE" />
+    <item hash="3d80b1f3257653436db6d462bca52c72" sprite="Murasame (P1)" width="40" height="40" frame="Idle 1" direction="ESE" />
+    <item hash="c5a6aa7d40328bc841ab33226082e5f5" sprite="Murasame (P1)" width="40" height="40" frame="Idle 1" direction="ENE" />
     <item hash="ec98c553b3f13aa32f76b665865f7b4d" sprite="Murasame (P1)" width="40" height="40" frame="Idle 1" direction="ENE" />
     <item hash="4ad1eba096100df0358eee5b8012d4f7" sprite="Murasame (P1)" width="40" height="40" frame="Idle 1" direction="NNE" />
+    <item hash="dd9b85273e580d6975482f10be924206" sprite="Murasame (P1)" width="40" height="40" frame="Idle 1" direction="NNE" />
     <item hash="7266eda046e32f883ce9ce355e28d755" sprite="Murasame (P1)" width="40" height="40" frame="Idle 1" direction="N" />
-    <item hash="9a6181173af90c4afc6886585f8f4a17" sprite="Murasame (P1)" width="40" height="40" frame="Idle 1, Idle 3" direction="SSE" />
-    <item hash="3d80b1f3257653436db6d462bca52c72" sprite="Murasame (P1)" width="40" height="40" frame="Idle 1, Idle 3" direction="ESE" />
-    <item hash="c5a6aa7d40328bc841ab33226082e5f5" sprite="Murasame (P1)" width="40" height="40" frame="Idle 1, Idle 3" direction="ENE" />
-    <item hash="dd9b85273e580d6975482f10be924206" sprite="Murasame (P1)" width="40" height="40" frame="Idle 1, Idle 3" direction="NNE" />
     <item hash="f613d28d1881ffbabc692881ed110c13" sprite="Murasame (P1)" width="40" height="40" frame="Idle 2" direction="S" />
     <item hash="750800c25bb287c8bd8e22f1f1263114" sprite="Murasame (P1)" width="40" height="40" frame="Idle 2" direction="SSE" />
     <item hash="14f6863fbbe814f48e59cf15c1a0cb6d" sprite="Murasame (P1)" width="40" height="40" frame="Idle 2" direction="ESE" />
@@ -16833,30 +16833,6 @@
     <item hash="dd03aba072c35e234ee1e23107a7d057" sprite="Murasame (P1)" width="40" height="40" frame="Idle 2" direction="N" />
     <item hash="66f7aea01de3784d4e1cebe03fdaf542" sprite="Murasame (P1)" width="40" height="40" frame="Idle 3" direction="S" />
     <item hash="3e50744153e6b5694adfd17c1f6b4fcb" sprite="Murasame (P1)" width="40" height="40" frame="Idle 3" direction="N" />
-    <item hash="b38913d3db3da3f502c27341cb4467f2" sprite="Murasame (P1)" width="40" height="40" frame="ThrowingBomb 2" direction="SSE" />
-    <item hash="6234bfd461a233ac10523ce325f6da11" sprite="Murasame (P1)" width="40" height="40" frame="ThrowingBomb 2" direction="ESE" />
-    <item hash="bbb43e58323bd050f5a4f3481b250331" sprite="Murasame (P1)" width="40" height="40" frame="ThrowingBomb 2" direction="ENE" />
-    <item hash="a6666ae112bb6367334eed4d65838990" sprite="Murasame (P1)" width="40" height="40" frame="ThrowingBomb 2" direction="NNE" />
-    <item hash="34c7bea57737ac23491d441d975eb4d0" sprite="Murasame (P1)" width="40" height="40" frame="ThrowingBomb 3" direction="SSE" />
-    <item hash="b838f24db029a5b9110b4cc569d121d9" sprite="Murasame (P1)" width="40" height="40" frame="ThrowingBomb 3" direction="ESE" />
-    <item hash="2041f2a8b09e7a1739793b3911ba3f84" sprite="Murasame (P1)" width="40" height="40" frame="ThrowingBomb 3" direction="ENE" />
-    <item hash="802de540add2168301cefa4dcc594718" sprite="Murasame (P1)" width="40" height="40" frame="ThrowingBomb 3" direction="NNE" />
-    <item hash="2eaa108e5fdfbbcfad482eccecc708c7" sprite="Murasame (P1)" width="40" height="40" frame="ThrowingBomb 4" direction="SSE" />
-    <item hash="40824ee69b1fcaa1041045d6e8ea982a" sprite="Murasame (P1)" width="40" height="40" frame="ThrowingBomb 4" direction="ESE" />
-    <item hash="2e45959d5dc4e717400314d4c89d4b98" sprite="Murasame (P1)" width="40" height="40" frame="ThrowingBomb 4" direction="ENE" />
-    <item hash="f0dbc132ef3173c2e6fe7ffa529279be" sprite="Murasame (P1)" width="40" height="40" frame="ThrowingBomb 4" direction="NNE" />
-    <item hash="0d8d141f4cf0b1107438db0f79a10168" sprite="Murasame (P1)" width="40" height="40" frame="ThrowingBomb 5" direction="SSE" />
-    <item hash="251ec6d8e4eda8c7518157894a8fbe87" sprite="Murasame (P1)" width="40" height="40" frame="ThrowingBomb 5" direction="ESE" />
-    <item hash="4cbc745ccdd9c99d260eed772981d193" sprite="Murasame (P1)" width="40" height="40" frame="ThrowingBomb 5" direction="ENE" />
-    <item hash="5fca251ccd750a5f7be07c86ef04287e" sprite="Murasame (P1)" width="40" height="40" frame="ThrowingBomb 5" direction="NNE" />
-    <item hash="b7013adb7311ed2c02df03296f303222" sprite="Murasame (P1)" width="40" height="40" frame="ThrowingBomb 6" direction="SSE" />
-    <item hash="0e2358f363d11272547c40eb48689959" sprite="Murasame (P1)" width="40" height="40" frame="ThrowingBomb 6" direction="ESE" />
-    <item hash="14c68f922b79125a826a71b9234db585" sprite="Murasame (P1)" width="40" height="40" frame="ThrowingBomb 6" direction="ENE" />
-    <item hash="ce60ab277c3a4b35c3c5b702ad04d452" sprite="Murasame (P1)" width="40" height="40" frame="ThrowingBomb 6" direction="NNE" />
-    <item hash="153dc49c6797c97d36d0fe08a372be6b" sprite="Murasame (P1)" width="40" height="40" frame="ThrowingBomb 7" direction="SSE" />
-    <item hash="351bc9a88a63cd082c81db8023a7a5b9" sprite="Murasame (P1)" width="40" height="40" frame="ThrowingBomb 7" direction="ESE" />
-    <item hash="b3f4604f1ea7b070fd9185305cd08cbf" sprite="Murasame (P1)" width="40" height="40" frame="ThrowingBomb 7" direction="ENE" />
-    <item hash="ebb42b8ad450a2d2c1e70bfceeda593c" sprite="Murasame (P1)" width="40" height="40" frame="ThrowingBomb 7" direction="NNE" />
     <item hash="41664af188d39ea70a268f5085ce7a1f" sprite="Murasame (P1)" width="40" height="40" frame="Walking 1" direction="S" />
     <item hash="92ebad072b4902346eba6c9efbdb5487" sprite="Murasame (P1)" width="40" height="40" frame="Walking 1" direction="SSE" />
     <item hash="72e4091eb3f0674235bc6d6fd0f59ad2" sprite="Murasame (P1)" width="40" height="40" frame="Walking 1" direction="ESE" />
@@ -16887,7 +16863,7 @@
     <item hash="3960975fc915bda13f1701ec48ca7fac" sprite="Murasame (P1)" width="40" height="40" frame="Walking 6" direction="ENE" />
     <item hash="a024cfbc9ec0a2203ea97f8d417e901f" sprite="Murasame (P1)" width="40" height="40" frame="Walking 6" direction="NNE" />
     <item hash="4c334dbadb8026c436033a82f6c46cf4" sprite="Murasame (P1)" width="40" height="40" frame="Walking 6" direction="N" />
-    <item hash="6738c467a0197cf04f04d8c2269d4a71" sprite="Murasame (P1) (Weaponless)" width="40" height="40" frame="Casting 1, ShakingHead 4, ThrowingBomb 1" direction="SSE" />
+    <item hash="6738c467a0197cf04f04d8c2269d4a71" sprite="Murasame (P1) (Weaponless)" width="40" height="40" frame="Casting 1, ThrowingBomb 1" direction="SSE" />
     <item hash="39f11dcc8bc4f97c5617721f7462100e" sprite="Murasame (P1) (Weaponless)" width="40" height="40" frame="Casting 1, ThrowingBomb 1" direction="ESE" />
     <item hash="1a79a34d2913af1a7ecfe6e84e6f33cf" sprite="Murasame (P1) (Weaponless)" width="40" height="40" frame="Casting 1, ThrowingBomb 1" direction="ENE" />
     <item hash="68815cb6e52d91a9222466cc320570af" sprite="Murasame (P1) (Weaponless)" width="40" height="40" frame="Casting 1, ThrowingBomb 1" direction="NNE" />
@@ -16919,23 +16895,47 @@
     <item hash="5be04c5b706f6bed389bc7c81ea9079f" sprite="Murasame (P1) (Weaponless)" width="40" height="40" frame="Idle 3" direction="ESE" />
     <item hash="a738f04cc4781900d04f204eaf81ae16" sprite="Murasame (P1) (Weaponless)" width="40" height="40" frame="Idle 3" direction="ENE" />
     <item hash="afaec1e7dddda22a55d3a78661266c5c" sprite="Murasame (P1) (Weaponless)" width="40" height="40" frame="Idle 3" direction="NNE" />
-    <item hash="6435253706983a8ba65853305367d6a5" sprite="Murasame (P1) (Weaponless)" width="40" height="40" frame="Nodding (Weapon Disappears) 2, Nodding 3" direction="SSE" />
-    <item hash="c8f2ea332f813be6d36667520efab236" sprite="Murasame (P1) (Weaponless)" width="40" height="40" frame="Nodding (Weapon Disappears) 2, Nodding 3" direction="ESE" />
-    <item hash="da43f81c86b23710d965d38646220bcb" sprite="Murasame (P1) (Weaponless)" width="40" height="40" frame="Nodding (Weapon Disappears) 2, Nodding 3" direction="ENE" />
-    <item hash="83f8871fbf7eff0fdf90592f288ff2dd" sprite="Murasame (P1) (Weaponless)" width="40" height="40" frame="Nodding (Weapon Disappears) 2, Nodding 3" direction="NNE" />
-    <item hash="3996090494731758df693ed302c5e6dc" sprite="Murasame (P1) (Weaponless)" width="40" height="40" frame="Nodding 2" direction="SSE" />
-    <item hash="a0e402005eb5c12e17d0a9cea24dcffc" sprite="Murasame (P1) (Weaponless)" width="40" height="40" frame="Nodding 2" direction="ESE" />
-    <item hash="974a0ff2ee3e9f72d8906670f64104df" sprite="Murasame (P1) (Weaponless)" width="40" height="40" frame="Nodding 2" direction="ENE" />
-    <item hash="1d8a74411e6b3a6bb3274e0a33015f8e" sprite="Murasame (P1) (Weaponless)" width="40" height="40" frame="Nodding 2" direction="NNE" />
-    <item hash="1775c3e62b666260aa56c8b7dbc28657" sprite="Murasame (P1) (Weaponless)" width="40" height="40" frame="ShakingHead (Weapon Disappears) 2, ShakingHead 2" direction="SSE" />
-    <item hash="1a699b3d2010a2431bda1da6702f0a2a" sprite="Murasame (P1) (Weaponless)" width="40" height="40" frame="ShakingHead (Weapon Disappears) 2, ShakingHead 2" direction="ESE" />
-    <item hash="ef24efab5459d4e6f28c74e9c3d572f9" sprite="Murasame (P1) (Weaponless)" width="40" height="40" frame="ShakingHead (Weapon Disappears) 2, ShakingHead 2" direction="ENE" />
-    <item hash="9f5d571cf3863086fc0764b0a2a50a9c" sprite="Murasame (P1) (Weaponless)" width="40" height="40" frame="ShakingHead (Weapon Disappears) 2, ShakingHead 2" direction="NNE" />
-    <item hash="3d607c240092ee65fa5477d374aa81fe" sprite="Murasame (P1) (Weaponless)" width="40" height="40" frame="ShakingHead (Weapon Disappears) 4, ShakingHead 4" direction="SSE" />
-    <item hash="b23aa2dd6ce9034733e0191253f6420a" sprite="Murasame (P1) (Weaponless)" width="40" height="40" frame="ShakingHead (Weapon Disappears) 4, ShakingHead 4" direction="ESE" />
-    <item hash="e884430806eb8f0674ac914c5c1a869d" sprite="Murasame (P1) (Weaponless)" width="40" height="40" frame="ShakingHead (Weapon Disappears) 4, ShakingHead 4" direction="ENE" />
-    <item hash="ea899f09df61d9d5740eec177e2e006c" sprite="Murasame (P1) (Weaponless)" width="40" height="40" frame="ShakingHead (Weapon Disappears) 4, ShakingHead 4" direction="NNE" />
+    <item hash="3996090494731758df693ed302c5e6dc" sprite="Murasame (P1) (Weaponless)" width="40" height="40" frame="Nodding 1" direction="SSE" />
+    <item hash="a0e402005eb5c12e17d0a9cea24dcffc" sprite="Murasame (P1) (Weaponless)" width="40" height="40" frame="Nodding 1" direction="ESE" />
+    <item hash="974a0ff2ee3e9f72d8906670f64104df" sprite="Murasame (P1) (Weaponless)" width="40" height="40" frame="Nodding 1" direction="ENE" />
+    <item hash="1d8a74411e6b3a6bb3274e0a33015f8e" sprite="Murasame (P1) (Weaponless)" width="40" height="40" frame="Nodding 1" direction="NNE" />
+    <item hash="6435253706983a8ba65853305367d6a5" sprite="Murasame (P1) (Weaponless)" width="40" height="40" frame="Nodding 2" direction="SSE" />
+    <item hash="c8f2ea332f813be6d36667520efab236" sprite="Murasame (P1) (Weaponless)" width="40" height="40" frame="Nodding 2" direction="ESE" />
+    <item hash="da43f81c86b23710d965d38646220bcb" sprite="Murasame (P1) (Weaponless)" width="40" height="40" frame="Nodding 2" direction="ENE" />
+    <item hash="83f8871fbf7eff0fdf90592f288ff2dd" sprite="Murasame (P1) (Weaponless)" width="40" height="40" frame="Nodding 2" direction="NNE" />
+    <item hash="1775c3e62b666260aa56c8b7dbc28657" sprite="Murasame (P1) (Weaponless)" width="40" height="40" frame="ShakingHead 1" direction="SSE" />
+    <item hash="1a699b3d2010a2431bda1da6702f0a2a" sprite="Murasame (P1) (Weaponless)" width="40" height="40" frame="ShakingHead 1" direction="ESE" />
+    <item hash="ef24efab5459d4e6f28c74e9c3d572f9" sprite="Murasame (P1) (Weaponless)" width="40" height="40" frame="ShakingHead 1" direction="ENE" />
+    <item hash="9f5d571cf3863086fc0764b0a2a50a9c" sprite="Murasame (P1) (Weaponless)" width="40" height="40" frame="ShakingHead 1" direction="NNE" />
+    <item hash="3d607c240092ee65fa5477d374aa81fe" sprite="Murasame (P1) (Weaponless)" width="40" height="40" frame="ShakingHead 2" direction="SSE" />
+    <item hash="b23aa2dd6ce9034733e0191253f6420a" sprite="Murasame (P1) (Weaponless)" width="40" height="40" frame="ShakingHead 2" direction="ESE" />
+    <item hash="e884430806eb8f0674ac914c5c1a869d" sprite="Murasame (P1) (Weaponless)" width="40" height="40" frame="ShakingHead 2" direction="ENE" />
+    <item hash="ea899f09df61d9d5740eec177e2e006c" sprite="Murasame (P1) (Weaponless)" width="40" height="40" frame="ShakingHead 2" direction="NNE" />
     <item hash="6700ff995518ce3518524b8f3650d95d" sprite="Murasame (P1) (Weaponless)" width="40" height="40" frame="StillFrame (OnGround) 1" direction="First" />
+    <item hash="b38913d3db3da3f502c27341cb4467f2" sprite="Murasame (P1) (Weaponless)" width="40" height="40" frame="ThrowingBomb 2" direction="SSE" />
+    <item hash="6234bfd461a233ac10523ce325f6da11" sprite="Murasame (P1) (Weaponless)" width="40" height="40" frame="ThrowingBomb 2" direction="ESE" />
+    <item hash="bbb43e58323bd050f5a4f3481b250331" sprite="Murasame (P1) (Weaponless)" width="40" height="40" frame="ThrowingBomb 2" direction="ENE" />
+    <item hash="a6666ae112bb6367334eed4d65838990" sprite="Murasame (P1) (Weaponless)" width="40" height="40" frame="ThrowingBomb 2" direction="NNE" />
+    <item hash="34c7bea57737ac23491d441d975eb4d0" sprite="Murasame (P1) (Weaponless)" width="40" height="40" frame="ThrowingBomb 3" direction="SSE" />
+    <item hash="b838f24db029a5b9110b4cc569d121d9" sprite="Murasame (P1) (Weaponless)" width="40" height="40" frame="ThrowingBomb 3" direction="ESE" />
+    <item hash="2041f2a8b09e7a1739793b3911ba3f84" sprite="Murasame (P1) (Weaponless)" width="40" height="40" frame="ThrowingBomb 3" direction="ENE" />
+    <item hash="802de540add2168301cefa4dcc594718" sprite="Murasame (P1) (Weaponless)" width="40" height="40" frame="ThrowingBomb 3" direction="NNE" />
+    <item hash="2eaa108e5fdfbbcfad482eccecc708c7" sprite="Murasame (P1) (Weaponless)" width="40" height="40" frame="ThrowingBomb 4" direction="SSE" />
+    <item hash="40824ee69b1fcaa1041045d6e8ea982a" sprite="Murasame (P1) (Weaponless)" width="40" height="40" frame="ThrowingBomb 4" direction="ESE" />
+    <item hash="2e45959d5dc4e717400314d4c89d4b98" sprite="Murasame (P1) (Weaponless)" width="40" height="40" frame="ThrowingBomb 4" direction="ENE" />
+    <item hash="f0dbc132ef3173c2e6fe7ffa529279be" sprite="Murasame (P1) (Weaponless)" width="40" height="40" frame="ThrowingBomb 4" direction="NNE" />
+    <item hash="0d8d141f4cf0b1107438db0f79a10168" sprite="Murasame (P1) (Weaponless)" width="40" height="40" frame="ThrowingBomb 5" direction="SSE" />
+    <item hash="251ec6d8e4eda8c7518157894a8fbe87" sprite="Murasame (P1) (Weaponless)" width="40" height="40" frame="ThrowingBomb 5" direction="ESE" />
+    <item hash="4cbc745ccdd9c99d260eed772981d193" sprite="Murasame (P1) (Weaponless)" width="40" height="40" frame="ThrowingBomb 5" direction="ENE" />
+    <item hash="5fca251ccd750a5f7be07c86ef04287e" sprite="Murasame (P1) (Weaponless)" width="40" height="40" frame="ThrowingBomb 5" direction="NNE" />
+    <item hash="b7013adb7311ed2c02df03296f303222" sprite="Murasame (P1) (Weaponless)" width="40" height="40" frame="ThrowingBomb 6" direction="SSE" />
+    <item hash="0e2358f363d11272547c40eb48689959" sprite="Murasame (P1) (Weaponless)" width="40" height="40" frame="ThrowingBomb 6" direction="ESE" />
+    <item hash="14c68f922b79125a826a71b9234db585" sprite="Murasame (P1) (Weaponless)" width="40" height="40" frame="ThrowingBomb 6" direction="ENE" />
+    <item hash="ce60ab277c3a4b35c3c5b702ad04d452" sprite="Murasame (P1) (Weaponless)" width="40" height="40" frame="ThrowingBomb 6" direction="NNE" />
+    <item hash="153dc49c6797c97d36d0fe08a372be6b" sprite="Murasame (P1) (Weaponless)" width="40" height="40" frame="ThrowingBomb 7" direction="SSE" />
+    <item hash="351bc9a88a63cd082c81db8023a7a5b9" sprite="Murasame (P1) (Weaponless)" width="40" height="40" frame="ThrowingBomb 7" direction="ESE" />
+    <item hash="b3f4604f1ea7b070fd9185305cd08cbf" sprite="Murasame (P1) (Weaponless)" width="40" height="40" frame="ThrowingBomb 7" direction="ENE" />
+    <item hash="ebb42b8ad450a2d2c1e70bfceeda593c" sprite="Murasame (P1) (Weaponless)" width="40" height="40" frame="ThrowingBomb 7" direction="NNE" />
     <item hash="c036126448c2b4438ef3fbd71f620aac" sprite="Murasame (P1) (Weaponless)" width="40" height="40" frame="Walking 1" direction="SSE" />
     <item hash="3eaaa17b78f9873a20c12db84f900c33" sprite="Murasame (P1) (Weaponless)" width="40" height="40" frame="Walking 1" direction="ESE" />
     <item hash="2eb653a8bcbf4291cdf02c214b3c86e1" sprite="Murasame (P1) (Weaponless)" width="40" height="40" frame="Walking 1" direction="ENE" />
@@ -21471,8 +21471,6 @@
     <item hash="5784d632d2e988df6444cc6725fed14c" sprite="Slash Bat" width="48" height="32" frame="Flying (Medium) 5, Flying (Slow) 5" direction="ESE" />
     <item hash="b6ad06654f225857d6175f347015cea0" sprite="Slash Bat" width="48" height="32" frame="Flying (Medium) 5, Flying (Slow) 5" direction="ENE" />
     <item hash="87949986f54fffe086c78244d3f7f636" sprite="Slash Bat" width="48" height="32" frame="Flying (Medium) 5, Flying (Slow) 5" direction="NNE" />
-    <item hash="380805239fe47bd851ebb8053752e729" sprite="Small Icons" width="16" height="16" frame="Sweat (Growing Larger) 1" direction="First" />
-    <item hash="01a0053a764c0b46d0eac73b62dd34e2" sprite="Small Icons" width="16" height="16" frame="Sweat (Growing Larger) 2" direction="First" />
     <item hash="22a5fb949e50b3c414acb4ec058c2bd6" sprite="Small Icons (Scn1 Alt)" width="16" height="16" frame="Angry 1" direction="First" />
     <item hash="407aca38b311ed86f6b84ca39b646ad4" sprite="Small Icons (Scn1 Alt)" width="16" height="16" frame="Flag 1" direction="First" />
     <item hash="e5c866070bce9e06893035b6c66fed66" sprite="Small Icons (Scn1 Alt)" width="16" height="16" frame="Heart 1" direction="First" />
@@ -21489,6 +21487,8 @@
     <item hash="b9e1fa956409cdc3ac13d30aa1cbd40b" sprite="Small Icons (Scn2+)" width="16" height="16" frame="Idea 1" direction="First" />
     <item hash="fc597e6f1e5974e4055882c6373472a4" sprite="Small Icons (Scn2+)" width="16" height="16" frame="Shield 1" direction="First" />
     <item hash="5092f4cf33632bb6ea20942322fdbc57" sprite="Small Icons (Scn2+)" width="16" height="16" frame="Silent 1" direction="First" />
+    <item hash="380805239fe47bd851ebb8053752e729" sprite="Small Icons (Scn2+)" width="16" height="16" frame="Sweat (Growing Larger) 1" direction="First" />
+    <item hash="01a0053a764c0b46d0eac73b62dd34e2" sprite="Small Icons (Scn2+)" width="16" height="16" frame="Sweat (Growing Larger) 2" direction="First" />
     <item hash="f759a7510147d0c94c7fd67c6923c526" sprite="Small Icons (Scn2+)" width="16" height="16" frame="Sweat (Growing Larger) 3, Sweat 1" direction="First" />
     <item hash="82e0b34942ffcdb9aa874d547a3b9d7c" sprite="Small Icons (Scn2+)" width="16" height="16" frame="Sword 1" direction="First" />
     <item hash="5af7b36f7352d858820d3c3bfb4178e7" sprite="Small Icons (Scn3+)" width="16" height="16" frame="Complaining 1" direction="First" />
@@ -24217,8 +24217,12 @@
     <item hash="d0317cba09d19f52aee73b67084cfe9c" sprite="Waitress w/ Black Hair" width="40" height="40" frame="Walking 6" direction="NNE" />
     <item hash="b0d58faef23782a816c4623ec5df06d6" sprite="Waltz (P1)" width="48" height="40" frame="Idle 1" direction="S" />
     <item hash="1da6efc44e8cb3e78c2003e0e901aa64" sprite="Waltz (P1)" width="48" height="40" frame="Idle 1" direction="SSE" />
+    <item hash="6302e4bce7787c468bb27b2eeea9e723" sprite="Waltz (P1)" width="48" height="40" frame="Idle 1" direction="SSE" />
+    <item hash="58fb22d99f0fdce0c95bc8b2d537d882" sprite="Waltz (P1)" width="48" height="40" frame="Idle 1" direction="ESE" />
     <item hash="bab2ef05005cca449fe6f155176439b0" sprite="Waltz (P1)" width="48" height="40" frame="Idle 1" direction="ESE" />
+    <item hash="d72ac70ad5d4c7ddfa493572923ac83e" sprite="Waltz (P1)" width="48" height="40" frame="Idle 1" direction="ENE" />
     <item hash="dfb8065a15fec64cb1550739e26f3952" sprite="Waltz (P1)" width="48" height="40" frame="Idle 1" direction="ENE" />
+    <item hash="02761ec9aa74d67bed5d90a9298299c0" sprite="Waltz (P1)" width="48" height="40" frame="Idle 1" direction="NNE" />
     <item hash="68c2133b778e1a1825f2415601574737" sprite="Waltz (P1)" width="48" height="40" frame="Idle 1" direction="NNE" />
     <item hash="c8fe23e815bd9a1ccc66a4c18986ee25" sprite="Waltz (P1)" width="48" height="40" frame="Idle 1" direction="N" />
     <item hash="30ad5dac4664b2311d350efc5020ea9e" sprite="Waltz (P1)" width="48" height="40" frame="Idle 1, IdleNoddingShakingHead (Looped) 1" direction="SSE" />
@@ -24226,10 +24230,14 @@
     <item hash="c9a34e671d70943138f11529de114cb5" sprite="Waltz (P1)" width="48" height="40" frame="Idle 1, IdleNoddingShakingHead (Looped) 1" direction="ENE" />
     <item hash="33928ed3b80bc7fd1d5106cb8315d80b" sprite="Waltz (P1)" width="48" height="40" frame="Idle 1, IdleNoddingShakingHead (Looped) 1" direction="NNE" />
     <item hash="4db76f2ded5b2adf6aa48ef41b5ee934" sprite="Waltz (P1)" width="48" height="40" frame="Idle 2" direction="S" />
+    <item hash="e9a6e5c15b5cb1d3d2274734b4822c0d" sprite="Waltz (P1)" width="48" height="40" frame="Idle 2" direction="SSE" />
     <item hash="fbf33d54592a6e8a65a685cd77e2c99d" sprite="Waltz (P1)" width="48" height="40" frame="Idle 2" direction="SSE" />
+    <item hash="7186234887d37d1deea9dd0ec92f6dc7" sprite="Waltz (P1)" width="48" height="40" frame="Idle 2" direction="ESE" />
     <item hash="a9819ea0f1e2b7e41937c0d087e91b96" sprite="Waltz (P1)" width="48" height="40" frame="Idle 2" direction="ESE" />
+    <item hash="7b23c83989a2439ef52329dad25998a8" sprite="Waltz (P1)" width="48" height="40" frame="Idle 2" direction="ENE" />
     <item hash="93960295def30ef127bb20227df18f63" sprite="Waltz (P1)" width="48" height="40" frame="Idle 2" direction="ENE" />
     <item hash="1c74cba9df6c13d4be3a7bc1bc4b68ce" sprite="Waltz (P1)" width="48" height="40" frame="Idle 2" direction="NNE" />
+    <item hash="b22eb22cac326cf79e493d24dbb456dd" sprite="Waltz (P1)" width="48" height="40" frame="Idle 2" direction="NNE" />
     <item hash="00db72243c36216f296a451f1ed5ac7d" sprite="Waltz (P1)" width="48" height="40" frame="Idle 2" direction="N" />
     <item hash="aa04d996ebd525bd6fe072ecd4a8bd8f" sprite="Waltz (P1)" width="48" height="40" frame="Idle 2, IdleNoddingShakingHead (Looped) 2" direction="SSE" />
     <item hash="bc661535b87364a9c6c10879d9225ae7" sprite="Waltz (P1)" width="48" height="40" frame="Idle 2, IdleNoddingShakingHead (Looped) 2" direction="ESE" />
@@ -24283,14 +24291,6 @@
     <item hash="3ff655aeca065c3b94a122fed4a77afe" sprite="Waltz (P1)" width="48" height="40" frame="Walking 4" direction="N" />
     <item hash="2b90e1d854a1a07d0faeae0540e68b2c" sprite="Waltz (P1)" width="48" height="40" frame="Walking 6" direction="S" />
     <item hash="3b400f8242954512a4f48f3ec2626c66" sprite="Waltz (P1)" width="48" height="40" frame="Walking 6" direction="N" />
-    <item hash="6302e4bce7787c468bb27b2eeea9e723" sprite="Waltz (P1) (Weaponless)" width="48" height="40" frame="Idle 1" direction="SSE" />
-    <item hash="58fb22d99f0fdce0c95bc8b2d537d882" sprite="Waltz (P1) (Weaponless)" width="48" height="40" frame="Idle 1" direction="ESE" />
-    <item hash="d72ac70ad5d4c7ddfa493572923ac83e" sprite="Waltz (P1) (Weaponless)" width="48" height="40" frame="Idle 1" direction="ENE" />
-    <item hash="02761ec9aa74d67bed5d90a9298299c0" sprite="Waltz (P1) (Weaponless)" width="48" height="40" frame="Idle 1" direction="NNE" />
-    <item hash="e9a6e5c15b5cb1d3d2274734b4822c0d" sprite="Waltz (P1) (Weaponless)" width="48" height="40" frame="Idle 2" direction="SSE" />
-    <item hash="7186234887d37d1deea9dd0ec92f6dc7" sprite="Waltz (P1) (Weaponless)" width="48" height="40" frame="Idle 2" direction="ESE" />
-    <item hash="7b23c83989a2439ef52329dad25998a8" sprite="Waltz (P1) (Weaponless)" width="48" height="40" frame="Idle 2" direction="ENE" />
-    <item hash="b22eb22cac326cf79e493d24dbb456dd" sprite="Waltz (P1) (Weaponless)" width="48" height="40" frame="Idle 2" direction="NNE" />
     <item hash="ecffaadbde8a9ef5e6b429bf33f82f23" sprite="Waltz (P2)" width="48" height="40" frame="Idle 1" direction="S" />
     <item hash="3579c1d71a79938b46b7369e6f45e081" sprite="Waltz (P2)" width="48" height="40" frame="Idle 1" direction="SSE" />
     <item hash="0b903e5cbcda215b09b1d9ef0f36b141" sprite="Waltz (P2)" width="48" height="40" frame="Idle 1" direction="ESE" />
