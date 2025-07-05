@@ -1287,12 +1287,12 @@
     <item hash="b8ffe6f7bfd83d3d1dd84b3bc150cae3" sprite="Giant Ant" animation="Idle" width="48" height="32" directions="4" frames="5" duration="20" />
     <item hash="b9068a316e541a82d41af33163398f2f" sprite="Giant Ant" animation="StillFrame" width="48" height="32" directions="4" frames="2" duration="10" />
     <item hash="b5302da2f655e636102b49a3979a77ca" sprite="Giant Ant" animation="Walking" width="48" height="32" directions="4" frames="7" duration="12" />
-    <item hash="6a70e7a6aae8be9bcfd27939936acb58" sprite="Giant Armour" animation="Idle" width="40" height="40" directions="4" frames="5" duration="18" />
-    <item hash="90526aefddd56f8439231e13fd045adf" sprite="Giant Armour" animation="StillFrame" width="40" height="40" directions="4" frames="2" duration="10" />
-    <item hash="9d844c52f3283976ae9df838431b87ab" sprite="Giant Armour" animation="StillFrame" width="40" height="40" directions="4" frames="2" duration="10" />
-    <item hash="ddb2fd63875ff418dae785be63589b37" sprite="Giant Armour" animation="Walking" width="40" height="40" directions="4" frames="7" duration="30" />
-    <item hash="ae4c36c1182464de046812dfa3691ea2" sprite="Giant Armour" animation="StillFrame1 (OnGround)" width="48" height="40" directions="4" frames="2" duration="10" />
-    <item hash="f023c683d3a788cd9957e4d0bad0e27c" sprite="Giant Armour" animation="StillFrame2 (OnGround)" width="48" height="40" directions="4" frames="2" duration="6" />
+    <item hash="6a70e7a6aae8be9bcfd27939936acb58" sprite="Giant Armor" animation="Idle" width="40" height="40" directions="4" frames="5" duration="18" />
+    <item hash="90526aefddd56f8439231e13fd045adf" sprite="Giant Armor" animation="StillFrame" width="40" height="40" directions="4" frames="2" duration="10" />
+    <item hash="9d844c52f3283976ae9df838431b87ab" sprite="Giant Armor" animation="StillFrame" width="40" height="40" directions="4" frames="2" duration="10" />
+    <item hash="ddb2fd63875ff418dae785be63589b37" sprite="Giant Armor" animation="Walking" width="40" height="40" directions="4" frames="7" duration="30" />
+    <item hash="ae4c36c1182464de046812dfa3691ea2" sprite="Giant Armor" animation="StillFrame1 (OnGround)" width="48" height="40" directions="4" frames="2" duration="10" />
+    <item hash="f023c683d3a788cd9957e4d0bad0e27c" sprite="Giant Armor" animation="StillFrame2 (OnGround)" width="48" height="40" directions="4" frames="2" duration="6" />
     <item hash="cad112cffa4eae2e992f5f2d1d2b2732" sprite="Giga Breaker" animation="Idle" width="40" height="40" directions="4" frames="5" duration="24" />
     <item hash="06b24fdd7c5558e4a93ecc807c9069c5" sprite="Giga Breaker" animation="Nodding (NoStop)" width="40" height="40" directions="4" frames="5" duration="8" />
     <item hash="6f62068ec7742d2ff6bf6a3ffa7b873f" sprite="Giga Breaker" animation="ShakingHead (NoStop)" width="40" height="40" directions="4" frames="9" duration="16" />

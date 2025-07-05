@@ -14,7 +14,7 @@
     <item value="0x0B" name="White Knight" />
     <item value="0x0C" name="Saint" />
     <item value="0x0D" name="Commander" />
-    <item value="0x0E" name="Giant Armour (unused)" />
+    <item value="0x0E" name="Giant Armor (unused)" />
     <item value="0x0F" name="Lizardman" />
     <item value="0x10" name="Dragonewt (unused)" />
     <item value="0x11" name="Hell Hound" />
@@ -129,7 +129,7 @@
     <item value="0x7E" name="Thief (Chapter 5)" />
     <item value="0x7F" name="Thief (Chapter 6)" />
     <item value="0x80" name="Spiriel2" />
-    <item value="0x81" name="Giant Armour" />
+    <item value="0x81" name="Giant Armor" />
     <item value="0x82" name="Basanda1" />
     <item value="0x83" name="Force Commander" />
     <item value="0x84" name="High Wizard" />

@@ -7830,42 +7830,42 @@
     <item hash="7049b01d3e2879dfb1863e53bb94dd08" sprite="Giant Ant" width="48" height="32" frame="Walking 6" direction="ESE" />
     <item hash="d535a39f6eb36f726c6184984da30e0f" sprite="Giant Ant" width="48" height="32" frame="Walking 6" direction="ENE" />
     <item hash="1afb8d3ead1c51a0c6acd45b98ffed9f" sprite="Giant Ant" width="48" height="32" frame="Walking 6" direction="NNE" />
-    <item hash="1c3ed3e3ad4f541ef4731ddb071bb63d" sprite="Giant Armour" width="40" height="40" frame="Idle 1" direction="SSE" />
-    <item hash="469f5b12ba863b396bb2cbb6204da431" sprite="Giant Armour" width="40" height="40" frame="Idle 1" direction="ESE" />
-    <item hash="7b2395c9d916689ef55e963a3a1a5e40" sprite="Giant Armour" width="40" height="40" frame="Idle 1" direction="ENE" />
-    <item hash="e0e52962264e5561725d5093f60098c7" sprite="Giant Armour" width="40" height="40" frame="Idle 1" direction="NNE" />
-    <item hash="5f105a77251cde7bdbd27378d5969008" sprite="Giant Armour" width="40" height="40" frame="Idle 2" direction="SSE" />
-    <item hash="f99a29352d7ff32ecfd88dc07f4fb1bd" sprite="Giant Armour" width="40" height="40" frame="Idle 2" direction="ESE" />
-    <item hash="8a97e220ebc3ac3cb3fe0a399c7451ba" sprite="Giant Armour" width="40" height="40" frame="Idle 2" direction="ENE" />
-    <item hash="23fc7ffae2cbe828463fffc595696167" sprite="Giant Armour" width="40" height="40" frame="Idle 2" direction="NNE" />
-    <item hash="265569ad12001fba41b47cb7c5299574" sprite="Giant Armour" width="40" height="40" frame="Idle 3" direction="SSE" />
-    <item hash="1555fd31c99371d7291d4d1ea10143b6" sprite="Giant Armour" width="40" height="40" frame="Idle 3" direction="ESE" />
-    <item hash="27ed4266e08943ded6e92c8eef19aa15" sprite="Giant Armour" width="40" height="40" frame="Idle 3" direction="ENE" />
-    <item hash="2d879e24d9f4ccd42fd1a1d661780ed0" sprite="Giant Armour" width="40" height="40" frame="Idle 3" direction="NNE" />
-    <item hash="b547b7fd5771eb28a7df41182b7aed7f" sprite="Giant Armour" width="40" height="40" frame="Walking 1" direction="SSE" />
-    <item hash="7c937b457292fc49605e05895938290f" sprite="Giant Armour" width="40" height="40" frame="Walking 1" direction="ESE" />
-    <item hash="8d149d08aaf0a392f834c5272ae43ad4" sprite="Giant Armour" width="40" height="40" frame="Walking 1" direction="ENE" />
-    <item hash="4f3233e4b186daeb94390cc82766ef1f" sprite="Giant Armour" width="40" height="40" frame="Walking 1" direction="NNE" />
-    <item hash="ab614a21ee710e43f92e903642b61135" sprite="Giant Armour" width="40" height="40" frame="Walking 2" direction="SSE" />
-    <item hash="28a42342b92e1c41e5d995c156db58d3" sprite="Giant Armour" width="40" height="40" frame="Walking 2" direction="ESE" />
-    <item hash="c8bfefc7ca61863f4ba6983b10aeb4c5" sprite="Giant Armour" width="40" height="40" frame="Walking 2" direction="ENE" />
-    <item hash="9fde9614dffee924496a72292a240c55" sprite="Giant Armour" width="40" height="40" frame="Walking 2" direction="NNE" />
-    <item hash="8d817ad67916387525ef4b174655fc43" sprite="Giant Armour" width="40" height="40" frame="Walking 3" direction="SSE" />
-    <item hash="b78d0a8c84f9840b12fab0b5eedf5264" sprite="Giant Armour" width="40" height="40" frame="Walking 3" direction="ESE" />
-    <item hash="75eada31792e345dc4805c4b5d9590d5" sprite="Giant Armour" width="40" height="40" frame="Walking 3" direction="ENE" />
-    <item hash="7362df6c81a1c4dbaee2d65a440480c6" sprite="Giant Armour" width="40" height="40" frame="Walking 3" direction="NNE" />
-    <item hash="aac9772cfaf06e483c3e0b8d4f8d4efb" sprite="Giant Armour" width="40" height="40" frame="Walking 4" direction="SSE" />
-    <item hash="68311e46bb285fc253c40294523eb246" sprite="Giant Armour" width="40" height="40" frame="Walking 4" direction="ESE" />
-    <item hash="b2201bcd5df5ae1dbdb41236529deab0" sprite="Giant Armour" width="40" height="40" frame="Walking 4" direction="ENE" />
-    <item hash="e8ff2fccfc5316fc11f21d95d768364b" sprite="Giant Armour" width="40" height="40" frame="Walking 4" direction="NNE" />
-    <item hash="feaa0974eb9ae8ac9d3feb2aea21dee5" sprite="Giant Armour" width="40" height="40" frame="Walking 6" direction="SSE" />
-    <item hash="aaac7a4e25ac71931b3b6d53d0e915af" sprite="Giant Armour" width="40" height="40" frame="Walking 6" direction="ESE" />
-    <item hash="29338252a04e208f039e92295d3e431f" sprite="Giant Armour" width="40" height="40" frame="Walking 6" direction="ENE" />
-    <item hash="92a23478a45d8c94067158eecd3f6753" sprite="Giant Armour" width="40" height="40" frame="Walking 6" direction="NNE" />
-    <item hash="80769be42be18cf4dda45c2dbb06df96" sprite="Giant Armour" width="48" height="40" frame="StillFrame1 (OnGround) 1, StillFrame2 (OnGround) 1" direction="SSE" />
-    <item hash="921a78d2cd22470672f82911c3bb24e0" sprite="Giant Armour" width="48" height="40" frame="StillFrame1 (OnGround) 1, StillFrame2 (OnGround) 1" direction="ESE" />
-    <item hash="b935c574e1cdeedd35afeff669f18e3b" sprite="Giant Armour" width="48" height="40" frame="StillFrame1 (OnGround) 1, StillFrame2 (OnGround) 1" direction="ENE" />
-    <item hash="a2271ad789364671b4f39d1c7bbdd858" sprite="Giant Armour" width="48" height="40" frame="StillFrame1 (OnGround) 1, StillFrame2 (OnGround) 1" direction="NNE" />
+    <item hash="1c3ed3e3ad4f541ef4731ddb071bb63d" sprite="Giant Armor" width="40" height="40" frame="Idle 1" direction="SSE" />
+    <item hash="469f5b12ba863b396bb2cbb6204da431" sprite="Giant Armor" width="40" height="40" frame="Idle 1" direction="ESE" />
+    <item hash="7b2395c9d916689ef55e963a3a1a5e40" sprite="Giant Armor" width="40" height="40" frame="Idle 1" direction="ENE" />
+    <item hash="e0e52962264e5561725d5093f60098c7" sprite="Giant Armor" width="40" height="40" frame="Idle 1" direction="NNE" />
+    <item hash="5f105a77251cde7bdbd27378d5969008" sprite="Giant Armor" width="40" height="40" frame="Idle 2" direction="SSE" />
+    <item hash="f99a29352d7ff32ecfd88dc07f4fb1bd" sprite="Giant Armor" width="40" height="40" frame="Idle 2" direction="ESE" />
+    <item hash="8a97e220ebc3ac3cb3fe0a399c7451ba" sprite="Giant Armor" width="40" height="40" frame="Idle 2" direction="ENE" />
+    <item hash="23fc7ffae2cbe828463fffc595696167" sprite="Giant Armor" width="40" height="40" frame="Idle 2" direction="NNE" />
+    <item hash="265569ad12001fba41b47cb7c5299574" sprite="Giant Armor" width="40" height="40" frame="Idle 3" direction="SSE" />
+    <item hash="1555fd31c99371d7291d4d1ea10143b6" sprite="Giant Armor" width="40" height="40" frame="Idle 3" direction="ESE" />
+    <item hash="27ed4266e08943ded6e92c8eef19aa15" sprite="Giant Armor" width="40" height="40" frame="Idle 3" direction="ENE" />
+    <item hash="2d879e24d9f4ccd42fd1a1d661780ed0" sprite="Giant Armor" width="40" height="40" frame="Idle 3" direction="NNE" />
+    <item hash="b547b7fd5771eb28a7df41182b7aed7f" sprite="Giant Armor" width="40" height="40" frame="Walking 1" direction="SSE" />
+    <item hash="7c937b457292fc49605e05895938290f" sprite="Giant Armor" width="40" height="40" frame="Walking 1" direction="ESE" />
+    <item hash="8d149d08aaf0a392f834c5272ae43ad4" sprite="Giant Armor" width="40" height="40" frame="Walking 1" direction="ENE" />
+    <item hash="4f3233e4b186daeb94390cc82766ef1f" sprite="Giant Armor" width="40" height="40" frame="Walking 1" direction="NNE" />
+    <item hash="ab614a21ee710e43f92e903642b61135" sprite="Giant Armor" width="40" height="40" frame="Walking 2" direction="SSE" />
+    <item hash="28a42342b92e1c41e5d995c156db58d3" sprite="Giant Armor" width="40" height="40" frame="Walking 2" direction="ESE" />
+    <item hash="c8bfefc7ca61863f4ba6983b10aeb4c5" sprite="Giant Armor" width="40" height="40" frame="Walking 2" direction="ENE" />
+    <item hash="9fde9614dffee924496a72292a240c55" sprite="Giant Armor" width="40" height="40" frame="Walking 2" direction="NNE" />
+    <item hash="8d817ad67916387525ef4b174655fc43" sprite="Giant Armor" width="40" height="40" frame="Walking 3" direction="SSE" />
+    <item hash="b78d0a8c84f9840b12fab0b5eedf5264" sprite="Giant Armor" width="40" height="40" frame="Walking 3" direction="ESE" />
+    <item hash="75eada31792e345dc4805c4b5d9590d5" sprite="Giant Armor" width="40" height="40" frame="Walking 3" direction="ENE" />
+    <item hash="7362df6c81a1c4dbaee2d65a440480c6" sprite="Giant Armor" width="40" height="40" frame="Walking 3" direction="NNE" />
+    <item hash="aac9772cfaf06e483c3e0b8d4f8d4efb" sprite="Giant Armor" width="40" height="40" frame="Walking 4" direction="SSE" />
+    <item hash="68311e46bb285fc253c40294523eb246" sprite="Giant Armor" width="40" height="40" frame="Walking 4" direction="ESE" />
+    <item hash="b2201bcd5df5ae1dbdb41236529deab0" sprite="Giant Armor" width="40" height="40" frame="Walking 4" direction="ENE" />
+    <item hash="e8ff2fccfc5316fc11f21d95d768364b" sprite="Giant Armor" width="40" height="40" frame="Walking 4" direction="NNE" />
+    <item hash="feaa0974eb9ae8ac9d3feb2aea21dee5" sprite="Giant Armor" width="40" height="40" frame="Walking 6" direction="SSE" />
+    <item hash="aaac7a4e25ac71931b3b6d53d0e915af" sprite="Giant Armor" width="40" height="40" frame="Walking 6" direction="ESE" />
+    <item hash="29338252a04e208f039e92295d3e431f" sprite="Giant Armor" width="40" height="40" frame="Walking 6" direction="ENE" />
+    <item hash="92a23478a45d8c94067158eecd3f6753" sprite="Giant Armor" width="40" height="40" frame="Walking 6" direction="NNE" />
+    <item hash="80769be42be18cf4dda45c2dbb06df96" sprite="Giant Armor" width="48" height="40" frame="StillFrame1 (OnGround) 1, StillFrame2 (OnGround) 1" direction="SSE" />
+    <item hash="921a78d2cd22470672f82911c3bb24e0" sprite="Giant Armor" width="48" height="40" frame="StillFrame1 (OnGround) 1, StillFrame2 (OnGround) 1" direction="ESE" />
+    <item hash="b935c574e1cdeedd35afeff669f18e3b" sprite="Giant Armor" width="48" height="40" frame="StillFrame1 (OnGround) 1, StillFrame2 (OnGround) 1" direction="ENE" />
+    <item hash="a2271ad789364671b4f39d1c7bbdd858" sprite="Giant Armor" width="48" height="40" frame="StillFrame1 (OnGround) 1, StillFrame2 (OnGround) 1" direction="NNE" />
     <item hash="3a962fd07eb7d33f4a228c93a9177bd1" sprite="Giga Breaker" width="40" height="40" frame="Idle 1" direction="SSE" />
     <item hash="2701975a5e0a4002096ad2b382fe66e2" sprite="Giga Breaker" width="40" height="40" frame="Idle 1" direction="ESE" />
     <item hash="674e8b6fd472ad828c26c57c7adef208" sprite="Giga Breaker" width="40" height="40" frame="Idle 1" direction="ENE" />

@@ -13,7 +13,7 @@
     <item value="0x0A" name="Black Knight" />
     <item value="0x0B" name="Royal Guard" />
     <item value="0x0C" name="Saint" />
-    <item value="0x0D" name="Giant Armour" />
+    <item value="0x0D" name="Giant Armor" />
     <item value="0x0E" name="Hill Giant" />
     <item value="0x0F" name="Lizardman" />
     <item value="0x10" name="Baby Dragon" />
@@ -129,7 +129,7 @@
     <item value="0x7E" name="Thief (Chapter 5)" />
     <item value="0x7F" name="Thief (Chapter 6)" />
     <item value="0x80" name="? (0x80)" />
-    <item value="0x81" name="Giant Armour" />
+    <item value="0x81" name="Giant Armor" />
     <item value="0x82" name="? (0x82)" />
     <item value="0x83" name="Royal Guard" />
     <item value="0x84" name="High Wizard" />
