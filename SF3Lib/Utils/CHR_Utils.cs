@@ -158,7 +158,7 @@ namespace SF3.Utils {
             stream.WriteLine("</items>");
         }
 
-        public static SpriteDef[] GetAllUniqueSpriteAnimationDefs() {
+        public static SpriteDef[] GetAllSpriteDefs() {
             string[] FixedFrameNames(string spriteName) {
                 // Edmund's P1 sprites are special because some frames are shared with and without a weapon.
                 // (His cape is so big, the rendered frames are the same when his back is turned)
@@ -195,7 +195,7 @@ namespace SF3.Utils {
 
         public static void WriteUniqueAnimationsByHashJSON(StreamWriter stream) {
             stream.NewLine = "\n";
-            var animationInfos = GetAllUniqueSpriteAnimationDefs();
+            var animationInfos = GetAllSpriteDefs();
             stream.Write(JsonConvert.SerializeObject(animationInfos, Newtonsoft.Json.Formatting.Indented));
         }
 

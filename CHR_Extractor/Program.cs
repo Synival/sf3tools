@@ -156,7 +156,27 @@ namespace CHR_Analyzer {
             }
 
             Console.WriteLine("Processing complete.");
+
             _ = Directory.CreateDirectory(c_pathOut);
+            var spriteDefs = CHR_Utils.GetAllSpriteDefs();
+            foreach (var spriteDef in spriteDefs)
+                _ = Directory.CreateDirectory(Path.Combine(c_pathOut, FilesystemString(spriteDef.Name)));
+
+            Console.WriteLine();
+            Console.WriteLine("===================================================");
+            Console.WriteLine("| WRITING EDITOR RESOURCES                        |");
+            Console.WriteLine("===================================================");
+            Console.WriteLine();
+
+            Console.WriteLine("Writing new 'SpriteFramesByHash.xml'...");
+            using (var file = File.Open(Path.Combine(c_pathOut, "SpriteFramesByHash.xml"), FileMode.Create))
+                using (var stream = new StreamWriter(file))
+                    CHR_Utils.WriteUniqueFramesByHashXML(stream);
+
+            Console.WriteLine("Writing new 'SpriteAnimationsByHash.xml'...");
+            using (var file = File.Open(Path.Combine(c_pathOut, "SpriteAnimationsByHash.xml"), FileMode.Create))
+                using (var stream = new StreamWriter(file))
+                    CHR_Utils.WriteUniqueAnimationsByHashXML(stream);
 
             Console.WriteLine();
             Console.WriteLine("===================================================");
@@ -164,17 +184,9 @@ namespace CHR_Analyzer {
             Console.WriteLine("===================================================");
             Console.WriteLine();
 
-/*
-            Console.WriteLine("Writing new 'SpriteFramesByHash.xml'...");
-            _ = Directory.CreateDirectory(c_pathOut);
-            using (var file = File.OpenWrite(Path.Combine(c_pathOut, "SpriteFramesByHash.xml")))
-                using (var stream = new StreamWriter(file))
-                    CHR_Utils.WriteUniqueFramesByHashXML(stream);
-*/
-
-            var spriteDefs = CHR_Utils.GetAllUniqueSpriteAnimationDefs();
             foreach (var spriteDef in spriteDefs) {
-                var spriteDefPath = Path.Combine(c_pathOut, FilesystemString(spriteDef.Name) + ".json");
+                var spritePath = Path.Combine(c_pathOut, FilesystemString(spriteDef.Name));
+                var spriteDefPath = Path.Combine(spritePath, FilesystemString(spriteDef.Name) + ".json");
                 Console.WriteLine($"Writing '{spriteDefPath}'...");
 
                 using (var file = File.Open(spriteDefPath, FileMode.Create)) {
@@ -192,70 +204,80 @@ namespace CHR_Analyzer {
             Console.WriteLine("===================================================");
             Console.WriteLine();
 
-            var spriteSheets = s_framesByHash.Values
-                .OrderBy(x => x.FrameInfo.SpriteName)
-                .ThenBy(x => x.FrameInfo.Width)
-                .ThenBy(x => x.FrameInfo.Height)
-                .ThenBy(x => x.FrameInfo.FrameName)
-                .ThenBy(x => x.FrameInfo.Direction)
-                .ThenBy(x => x.FrameInfo.TextureHash)
-                .GroupBy(x => $"{x.FrameInfo.SpriteName} ({x.FrameInfo.Width}x{x.FrameInfo.Height})")
-                .ToDictionary(x => x.Key, x => x.ToArray());
+            foreach (var spriteDef in spriteDefs) {
+                var spritePath = Path.Combine(c_pathOut, FilesystemString(spriteDef.Name));
+                var spriteSheetVariants = spriteDef.Variants
+                    .GroupBy(x => (x.Width << 16) + x.Height)
+                    .Select(x => x.First())
+                    .ToArray();
 
-            foreach (var spriteSheetKv in spriteSheets) {
-                var spriteName = spriteSheetKv.Key;
-                var frames = spriteSheetKv.Value;
+                foreach (var variantDef in spriteSheetVariants) {
+                    var spriteName = $"{spriteDef.Name} ({variantDef.Width}x{variantDef.Height})";
 
-                var filename = FilesystemString(spriteName) + ".BMP";
-                var outputPath = Path.Combine(c_pathOut, filename);
-                Console.WriteLine($"Writing '{outputPath}'...");
+                    var frames = spriteDef.Frames
+                        .Where(x => x.Width == variantDef.Width && x.Height == variantDef.Height)
+                        .Select(x => s_framesByHash[x.Hash])
+                        .OrderBy(x => x.FrameInfo.Width)
+                        .ThenBy(x => x.FrameInfo.Height)
+                        .ThenBy(x => x.FrameInfo.FrameName)
+                        .ThenBy(x => x.FrameInfo.Direction)
+                        .ThenBy(x => x.FrameInfo.TextureHash)
+                        .ToArray();
 
-                var frameGroups = frames
-                    .GroupBy(x => x.FrameInfo.FrameName)
-                    .ToDictionary(x => x.Key, x => x.ToArray());
+                    if (frames.Length == 0)
+                        continue;
 
-                var frameWidthInPixels  = frames[0].Texture.Width;
-                var frameHeightInPixels = frames[0].Texture.Height;
+                    var filename = FilesystemString(spriteName) + ".BMP";
+                    var outputPath = Path.Combine(spritePath, filename);
+                    Console.WriteLine($"Writing '{outputPath}'...");
 
-                var pixelsPerFrame = frameWidthInPixels * frameHeightInPixels;
-                var frameCount     = frames.Length;
-                var totalPixels    = pixelsPerFrame * frameCount;
+                    var frameGroups = frames
+                        .GroupBy(x => x.FrameInfo.FrameName)
+                        .ToDictionary(x => x.Key, x => x.ToArray());
 
-                var imageWidthInFrames = frameGroups.Max(x => x.Value.Length);
-                var imageHeightInFrames = frameGroups.Count;
+                    var frameWidthInPixels  = frames[0].Texture.Width;
+                    var frameHeightInPixels = frames[0].Texture.Height;
 
-                var imageWidthInPixels = imageWidthInFrames * frameWidthInPixels;
-                var imageHeightInPixels = imageHeightInFrames * frameHeightInPixels;
+                    var pixelsPerFrame = frameWidthInPixels * frameHeightInPixels;
+                    var frameCount     = frames.Length;
+                    var totalPixels    = pixelsPerFrame * frameCount;
 
-                var newData = new byte[imageWidthInPixels * imageHeightInPixels * 2];
+                    var imageWidthInFrames  = frameGroups.Max(x => x.Value.Length);
+                    var imageHeightInFrames = frameGroups.Count;
 
-                int y = 0;
-                foreach (var frameGroup in frameGroups) {
-                    int x = (imageWidthInFrames - frameGroup.Value.Length) * frameWidthInPixels / 2;
-                    foreach (var frame in frameGroup.Value) {
-                        int pos = (y * imageWidthInPixels + x) * 2;
-                        var frameData = frame.Texture.BitmapDataARGB1555;
+                    var imageWidthInPixels  = imageWidthInFrames * frameWidthInPixels;
+                    var imageHeightInPixels = imageHeightInFrames * frameHeightInPixels;
 
-                        int frameDataPos = 0;
-                        for (int iy = 0; iy < frameHeightInPixels; iy++) {
-                            int ipos = pos + (iy * imageWidthInPixels) * 2;
-                            for (int ix = 0; ix < frameWidthInPixels * 2; ix++)
-                                newData[ipos++] = frameData[frameDataPos++];
+                    var newData = new byte[imageWidthInPixels * imageHeightInPixels * 2];
+
+                    int y = 0;
+                    foreach (var frameGroup in frameGroups) {
+                        int x = (imageWidthInFrames - frameGroup.Value.Length) * frameWidthInPixels / 2;
+                        foreach (var frame in frameGroup.Value) {
+                            int pos = (y * imageWidthInPixels + x) * 2;
+                            var frameData = frame.Texture.BitmapDataARGB1555;
+
+                            int frameDataPos = 0;
+                            for (int iy = 0; iy < frameHeightInPixels; iy++) {
+                                int ipos = pos + (iy * imageWidthInPixels) * 2;
+                                for (int ix = 0; ix < frameWidthInPixels * 2; ix++)
+                                    newData[ipos++] = frameData[frameDataPos++];
+                            }
+                            x += frameWidthInPixels;
                         }
-                        x += frameWidthInPixels;
+                        y += frameHeightInPixels;
                     }
-                    y += frameHeightInPixels;
-                }
 
 #pragma warning disable CA1416 // Validate platform compatibility
-                using (var bitmap = new Bitmap(imageWidthInPixels, imageHeightInPixels, PixelFormat.Format16bppArgb1555)) {
-                    var bmpData = bitmap.LockBits(new Rectangle(0, 0, bitmap.Width, bitmap.Height), ImageLockMode.WriteOnly, bitmap.PixelFormat);
-                    Marshal.Copy(newData, 0, bmpData.Scan0, newData.Length);
-                    bitmap.UnlockBits(bmpData);
-                    try {
-                        bitmap.Save(outputPath);
+                    using (var bitmap = new Bitmap(imageWidthInPixels, imageHeightInPixels, PixelFormat.Format16bppArgb1555)) {
+                        var bmpData = bitmap.LockBits(new Rectangle(0, 0, bitmap.Width, bitmap.Height), ImageLockMode.WriteOnly, bitmap.PixelFormat);
+                        Marshal.Copy(newData, 0, bmpData.Scan0, newData.Length);
+                        bitmap.UnlockBits(bmpData);
+                        try {
+                            bitmap.Save(outputPath);
+                        }
+                        catch { }
                     }
-                    catch { }
                 }
 #pragma warning restore CA1416 // Validate platform compatibility
             }
@@ -268,6 +290,8 @@ namespace CHR_Analyzer {
 
         private static string FilesystemString(string str) {
             return str
+                .Replace(" | ", ", ")
+                .Replace("|", ",")
                 .Replace("?", "X")
                 .Replace("-", "_")
                 .Replace(":", "_")
