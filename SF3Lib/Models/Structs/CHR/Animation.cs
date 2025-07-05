@@ -105,8 +105,30 @@ namespace SF3.Models.Structs.CHR {
             get {
                 if (_framesWithTextures.Length == 0)
                     return "None";
-                else
-                    return string.Join(", ", _framesWithTextures.Select(x => $"{x.FrameInfo.SpriteName}").Distinct().OrderBy(x => x));
+
+                var distinctNames = _framesWithTextures. Select(x => $"{x.FrameInfo.SpriteName}").Distinct().OrderBy(x => x).ToArray();
+                if (distinctNames.Length == 1)
+                    return distinctNames[0];
+
+                // Murasame has some animations where his weapon is there, then suddenly not there.
+                // They're bugs, so place them in a special "(Weapon Disappears)" sprite category.
+                if (distinctNames.Length == 2 && distinctNames[0] == "Murasame (P1)" && distinctNames[1] == "Murasame (P1) (Weaponless)")
+                    return "Murasame (P1) (Weapon Disappears)";
+
+                // Edmund's P1 sprites are special because some frames are shared with and without a weapon.
+                // (His cape is so big, the rendered frames are the same when his back is turned)
+                // Make some very specific corrections to include the duplicated frames in both sprite
+                // definitions.
+                if (distinctNames.Length == 2 && distinctNames[0] == "Edmund (P1)" && distinctNames[1] == "Edmund (P1) (Sword/Weaponless)")
+                    return "Edmund (P1)";
+                if (distinctNames.Length == 2 && distinctNames[0] == "Edmund (P1) (Sword/Weaponless)" && distinctNames[1] == "Edmund (P1) (Weaponless)")
+                    return "Edmund (P1) (Weaponless)";
+
+                // Explosions have transparent frames sometimes.
+                if (distinctNames.Length == 2 && distinctNames[0] == "Explosion" && distinctNames[1] == "Transparent Frame")
+                    return "Explosion";
+
+                return string.Join(" | ", distinctNames);
             }
             set {
                 var lastSpriteName = SpriteName;
