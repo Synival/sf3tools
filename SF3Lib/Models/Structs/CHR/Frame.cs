@@ -154,7 +154,7 @@ namespace SF3.Models.Structs.CHR {
             }
         }
 
-        public UniqueFrameInfo FrameInfo { get; }
+        public UniqueFrameDef FrameInfo { get; }
  
         [TableViewModelColumn(displayOrder: 1, minWidth: 200)]
         public string TextureHash => Texture?.Hash;

@@ -88,6 +88,7 @@ namespace SF3.Models.Structs.CHR {
             int texCount = 0;
             var aniNameLower = AnimationName.ToLower();
             var frameIdsModified = new HashSet<int>();
+
             string[] GetAnimationFrameHashes(AnimationFrame aniFrame) {
                 if (!aniFrame.HasTexture)
                     return null;
@@ -105,26 +106,17 @@ namespace SF3.Models.Structs.CHR {
 
                 for (int i = 0; i < dirs; i++) {
                     var num = aniFrame.FrameID + i;
-                    if (num < maxFrames) {
+                    if (num < maxFrames)
                         hashes[i] = FrameTable[num].TextureHash;
-
-                        if (i < shouldBeDirs) {
-                            FrameTable[num].FrameInfo.Directions.Add(FrameNumberToSpriteDir(dirs, i));
-                            if (!frameIdsModified.Contains(num)) {
-                                FrameTable[num].FrameInfo.AnimationNames.Add($"{AnimationName}{texCount,2}");
-                                frameIdsModified.Add(num);
-                            }
-                        }
-                    }
                 }
                 return hashes;
             }
 
-            AnimationInfo.Frames = AnimationFrames
+            AnimationInfo.AnimationFrames = AnimationFrames
                 .Select(x => {
                     if (x.HasTexture)
                         texCount++;
-                    return new UniqueSpriteAnimationCollectionDTO.Variant.Animation.Frame() {
+                    return new AnimationFrameDef() {
                         Command = x.FrameID,
                         ParameterOrDuration = x.Duration,
                         FrameHashes = GetAnimationFrameHashes(x)
@@ -231,7 +223,7 @@ namespace SF3.Models.Structs.CHR {
             }
         }
 
-        public UniqueAnimationInfo AnimationInfo { get; }
+        public UniqueAnimationDef AnimationInfo { get; }
 
         [TableViewModelColumn(displayOrder: 4, displayFormat: "X4")]
         public uint TotalCompressedFramesSize { get; }

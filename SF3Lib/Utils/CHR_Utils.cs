@@ -9,21 +9,21 @@ using SF3.Types;
 
 namespace SF3.Utils {
     public static class CHR_Utils {
-        private static Dictionary<string, UniqueFrameInfo> s_uniqueFramesByHash = null;
-        private static Dictionary<string, UniqueAnimationInfo> s_uniqueAnimationsByHash = null;
+        private static Dictionary<string, UniqueFrameDef> s_uniqueFramesByHash = null;
+        private static Dictionary<string, UniqueAnimationDef> s_uniqueAnimationsByHash = null;
 
-        public static UniqueFrameInfo GetUniqueFrameInfoByHash(string hash) {
+        public static UniqueFrameDef GetUniqueFrameInfoByHash(string hash) {
             LoadUniqueFramesByHashTable();
             if (!s_uniqueFramesByHash.ContainsKey(hash.ToLower()))
-                s_uniqueFramesByHash[hash] = new UniqueFrameInfo(hash, "Unknown", 0, 0, "Unknown", SpriteFrameDirection.Unset);
+                s_uniqueFramesByHash[hash] = new UniqueFrameDef(hash, "Unknown", 0, 0, "Unknown", SpriteFrameDirection.Unset);
             return s_uniqueFramesByHash[hash];
         }
 
-        public static UniqueAnimationInfo GetUniqueAnimationInfoByHash(string hash) {
+        public static UniqueAnimationDef GetUniqueAnimationInfoByHash(string hash) {
             LoadUniqueAnimationsByHashTable();
             if (!s_uniqueAnimationsByHash.ContainsKey(hash.ToLower())) {
-                s_uniqueAnimationsByHash[hash] = new UniqueAnimationInfo(hash, "Unknown", "Unknown", 0, 0, 0, 0, 0, 0,
-                    new UniqueSpriteAnimationCollectionDTO.Variant.Animation.Frame[0]);
+                s_uniqueAnimationsByHash[hash] = new UniqueAnimationDef(hash, "Unknown", "Unknown", 0, 0, 0, 0, 0, 0,
+                    new AnimationFrameDef[0]);
             }
             return s_uniqueAnimationsByHash[hash];
         }
@@ -31,7 +31,7 @@ namespace SF3.Utils {
         private static void LoadUniqueFramesByHashTable() {
             if (s_uniqueFramesByHash != null)
                 return;
-            s_uniqueFramesByHash = new Dictionary<string, UniqueFrameInfo>();
+            s_uniqueFramesByHash = new Dictionary<string, UniqueFrameDef>();
 
             using (var stream = new FileStream(CommonLib.Utils.ResourceUtils.ResourceFile("SpriteFramesByHash.xml"), FileMode.Open, FileAccess.Read)) {
                 var settings = new XmlReaderSettings {
@@ -62,7 +62,7 @@ namespace SF3.Utils {
 
                         var frame = frameAttr ?? "";
                         var direction = Enum.TryParse<SpriteFrameDirection>(directionAttr, out var directionOut) ? directionOut : SpriteFrameDirection.Unset;
-                        s_uniqueFramesByHash.Add(hash.ToLower(), new UniqueFrameInfo(hash, sprite, width, height, frame, direction));
+                        s_uniqueFramesByHash.Add(hash.ToLower(), new UniqueFrameDef(hash, sprite, width, height, frame, direction));
                     }
                 }
             }
@@ -71,7 +71,7 @@ namespace SF3.Utils {
         private static void LoadUniqueAnimationsByHashTable() {
             if (s_uniqueAnimationsByHash != null)
                 return;
-            s_uniqueAnimationsByHash = new Dictionary<string, UniqueAnimationInfo>();
+            s_uniqueAnimationsByHash = new Dictionary<string, UniqueAnimationDef>();
 
             using (var stream = new FileStream(CommonLib.Utils.ResourceUtils.ResourceFile("SpriteAnimationsByHash.xml"), FileMode.Open, FileAccess.Read)) {
                 var settings = new XmlReaderSettings {
@@ -108,41 +108,10 @@ namespace SF3.Utils {
 
                         int missingFrames = int.TryParse(missingAttr, out var missingFramesOut) ? missingFramesOut : 0;
                         int duration = int.TryParse(durationAttr, out var durationOut) ? durationOut : 0;
-                        s_uniqueAnimationsByHash.Add(hash.ToLower(), new UniqueAnimationInfo(hash, sprite, animation, width, height, directions, frames, duration, missingFrames,
-                            new UniqueSpriteAnimationCollectionDTO.Variant.Animation.Frame[0]));
+                        s_uniqueAnimationsByHash.Add(hash.ToLower(), new UniqueAnimationDef(hash, sprite, animation, width, height, directions, frames, duration, missingFrames,
+                            new AnimationFrameDef[0]));
                     }
                 }
-            }
-        }
-
-        public static void UpdateFrameNamesAndDirectionsBasedOnAnimations() {
-            foreach (var fi in s_uniqueFramesByHash.Values) {
-                if (fi.AnimationNames.Count == 0)
-                    continue;
-
-                var dirs = new HashSet<SpriteFrameDirection>(fi.Directions.Where(x => x != SpriteFrameDirection.Unset));
-                var standardDirs = dirs.Where(x =>
-                    x == SpriteFrameDirection.SSE ||
-                    x == SpriteFrameDirection.ESE ||
-                    x == SpriteFrameDirection.ENE ||
-                    x == SpriteFrameDirection.NNE
-                ).ToArray();
-                if (standardDirs.Length == 1 && dirs.Count != 1)
-                    dirs = new HashSet<SpriteFrameDirection>() { standardDirs[0] };
-
-                fi.Direction = dirs.Count == 1 ? dirs.First() : SpriteFrameDirection.Unset;
-
-                var aniNames = fi.AnimationNames;
-                if (aniNames.Any(x => !x.ToLower().StartsWith("stillframe")))
-                    aniNames = new HashSet<string>(aniNames.Where(x => !x.ToLower().StartsWith("stillframe")));
-                if (aniNames.Any(x => x.ToLower().StartsWith("idle")))
-                    aniNames = new HashSet<string>(aniNames.Where(x => x.ToLower().StartsWith("idle")));
-                if (aniNames.Any(x => x.ToLower().StartsWith("walking")))
-                    aniNames = new HashSet<string>(aniNames.Where(x => x.ToLower().StartsWith("walking")));
-                if (aniNames.Any(x => x.ToLower().StartsWith("flying")))
-                    aniNames = new HashSet<string>(aniNames.Where(x => x.ToLower().StartsWith("flying")));
-
-                fi.FrameName = string.Join(", ", aniNames.OrderBy(x => x));
             }
         }
 
@@ -189,10 +158,10 @@ namespace SF3.Utils {
             stream.WriteLine("</items>");
         }
 
-        public static UniqueSpriteAnimationCollectionDTO[] GetAllUniqueSpriteAnimationDefs() {
+        public static SpriteDef[] GetAllUniqueSpriteAnimationDefs() {
             return s_uniqueAnimationsByHash.Values
                 .GroupBy(x => x.SpriteName)
-                .Select(x => new UniqueSpriteAnimationCollectionDTO(x.Key, x.ToArray()))
+                .Select(x => new SpriteDef(x.Key, x.ToArray()))
                 .ToArray();
         }
 

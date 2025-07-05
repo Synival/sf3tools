@@ -9,7 +9,6 @@ using SF3.Models.Structs.CHR;
 using SF3.NamedValues;
 using SF3.Sprites;
 using SF3.Types;
-using SF3.Utils;
 
 namespace CHR_Analyzer {
     public class Program {
@@ -25,12 +24,12 @@ namespace CHR_Analyzer {
         private const string c_pathOut = "../../../Private";
 
         private class TextureInfo {
-            public TextureInfo(UniqueFrameInfo frameInfo, ITexture texture) {
+            public TextureInfo(UniqueFrameDef frameInfo, ITexture texture) {
                 FrameInfo = frameInfo;
                 Texture = texture;
             }
 
-            public UniqueFrameInfo FrameInfo { get; }
+            public UniqueFrameDef FrameInfo { get; }
             public ITexture Texture { get; }
             public List<TextureSpriteInfo> Sprites { get; } = new List<TextureSpriteInfo>();
         }
@@ -48,11 +47,11 @@ namespace CHR_Analyzer {
         }
 
         private class AnimationInfo {
-            public AnimationInfo(UniqueAnimationInfo animationInfo) {
+            public AnimationInfo(UniqueAnimationDef animationInfo) {
                 AnimInfo = animationInfo;
             }
 
-            public UniqueAnimationInfo AnimInfo { get; }
+            public UniqueAnimationDef AnimInfo { get; }
             public List<AnimationFileSprite> Sprites { get; } = new List<AnimationFileSprite>();
         }
 

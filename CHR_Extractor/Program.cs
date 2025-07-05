@@ -3,6 +3,7 @@ using System.Drawing.Imaging;
 using System.Runtime.InteropServices;
 using CommonLib.Arrays;
 using CommonLib.NamedValues;
+using Newtonsoft.Json;
 using SF3;
 using SF3.ByteData;
 using SF3.Models.Files;
@@ -28,12 +29,12 @@ namespace CHR_Analyzer {
         private const string c_pathOut = "../../../Private";
 
         private class TextureInfo {
-            public TextureInfo(UniqueFrameInfo frameInfo, ITexture texture) {
+            public TextureInfo(UniqueFrameDef frameInfo, ITexture texture) {
                 FrameInfo = frameInfo;
                 Texture = texture;
             }
 
-            public UniqueFrameInfo FrameInfo { get; }
+            public UniqueFrameDef FrameInfo { get; }
             public ITexture Texture { get; }
             public List<TextureSpriteInfo> Sprites { get; } = new List<TextureSpriteInfo>();
         }
@@ -51,11 +52,11 @@ namespace CHR_Analyzer {
         }
 
         private class AnimationInfo {
-            public AnimationInfo(UniqueAnimationInfo animationInfo) {
+            public AnimationInfo(UniqueAnimationDef animationInfo) {
                 AnimInfo = animationInfo;
             }
 
-            public UniqueAnimationInfo AnimInfo { get; }
+            public UniqueAnimationDef AnimInfo { get; }
             public List<AnimationFileSprite> Sprites { get; } = new List<AnimationFileSprite>();
         }
 
@@ -153,31 +154,43 @@ namespace CHR_Analyzer {
                     }
                 }
             }
-            Console.WriteLine("Processing complete.");
 
-            Console.WriteLine("");
-            Console.WriteLine("===================================================");
-            Console.WriteLine("| WRITING METADATA                                |");
-            Console.WriteLine("===================================================");
+            Console.WriteLine("Processing complete.");
+            _ = Directory.CreateDirectory(c_pathOut);
 
             Console.WriteLine();
+            Console.WriteLine("===================================================");
+            Console.WriteLine("| CREATING SPRITE DEFS                            |");
+            Console.WriteLine("===================================================");
+            Console.WriteLine();
+
+/*
             Console.WriteLine("Writing new 'SpriteFramesByHash.xml'...");
             _ = Directory.CreateDirectory(c_pathOut);
             using (var file = File.OpenWrite(Path.Combine(c_pathOut, "SpriteFramesByHash.xml")))
                 using (var stream = new StreamWriter(file))
                     CHR_Utils.WriteUniqueFramesByHashXML(stream);
+*/
 
-            Console.WriteLine("Writing new 'SpriteAnimationsByHash.json'...");
-            _ = Directory.CreateDirectory(c_pathOut);
-            using (var file = File.Open(Path.Combine(c_pathOut, "SpriteAnimationsByHash.json"), FileMode.Create))
-                using (var stream = new StreamWriter(file))
-                    CHR_Utils.WriteUniqueAnimationsByHashJSON(stream);
+            var spriteDefs = CHR_Utils.GetAllUniqueSpriteAnimationDefs();
+            foreach (var spriteDef in spriteDefs) {
+                var spriteDefPath = Path.Combine(c_pathOut, FilesystemString(spriteDef.Name) + ".json");
+                Console.WriteLine($"Writing '{spriteDefPath}'...");
 
-            Console.WriteLine("");
+                using (var file = File.Open(spriteDefPath, FileMode.Create)) {
+                    using (var stream = new StreamWriter(file)) {
+                        stream.NewLine = "\n";
+                        stream.Write(JsonConvert.SerializeObject(spriteDef, Formatting.Indented));
+                    }
+                }
+            }
+            Console.WriteLine("Sprite def writing complete.");
+
+            Console.WriteLine();
             Console.WriteLine("===================================================");
             Console.WriteLine("| CREATING SPRITESHEETS                           |");
             Console.WriteLine("===================================================");
-            Console.WriteLine("");
+            Console.WriteLine();
 
             var spriteSheets = s_framesByHash.Values
                 .OrderBy(x => x.FrameInfo.SpriteName)
@@ -189,19 +202,13 @@ namespace CHR_Analyzer {
                 .GroupBy(x => $"{x.FrameInfo.SpriteName} ({x.FrameInfo.Width}x{x.FrameInfo.Height})")
                 .ToDictionary(x => x.Key, x => x.ToArray());
 
-            _ = Directory.CreateDirectory(c_pathOut);
             foreach (var spriteSheetKv in spriteSheets) {
                 var spriteName = spriteSheetKv.Key;
                 var frames = spriteSheetKv.Value;
 
-                var filename = spriteName
-                    .Replace("?", "X")
-                    .Replace("-", "_")
-                    .Replace(":", "_")
-                    .Replace("/", "_") + ".BMP";
-
+                var filename = FilesystemString(spriteName) + ".BMP";
                 var outputPath = Path.Combine(c_pathOut, filename);
-                Console.WriteLine("Writing: " + outputPath);
+                Console.WriteLine($"Writing '{outputPath}'...");
 
                 var frameGroups = frames
                     .GroupBy(x => x.FrameInfo.FrameName)
@@ -252,11 +259,19 @@ namespace CHR_Analyzer {
                 }
 #pragma warning restore CA1416 // Validate platform compatibility
             }
-            Console.WriteLine("Image dumping complete.");
+            Console.WriteLine("Spritesheet writing complete.");
         }
 
         private static string GetFileString(ScenarioType inputScenario, string filename, ScenarioTableFile chrChpFile) {
             return inputScenario.ToString().PadLeft(11) + ": " + Path.GetFileName(filename).PadLeft(12);
+        }
+
+        private static string FilesystemString(string str) {
+            return str
+                .Replace("?", "X")
+                .Replace("-", "_")
+                .Replace(":", "_")
+                .Replace("/", "_");
         }
     }
 }
