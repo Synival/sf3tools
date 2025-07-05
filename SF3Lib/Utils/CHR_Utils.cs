@@ -159,9 +159,37 @@ namespace SF3.Utils {
         }
 
         public static SpriteDef[] GetAllUniqueSpriteAnimationDefs() {
+            string[] FixedFrameNames(string spriteName) {
+                // Edmund's P1 sprites are special because some frames are shared with and without a weapon.
+                // (His cape is so big, the rendered frames are the same when his back is turned)
+                // Make some very specific corrections to include the duplicated frames in both sprite
+                // definitions.
+                if (spriteName == "Edmund (P1)")
+                    return new string[] { "Edmund (P1)", "Edmund (P1) (Sword/Weaponless)" };
+                else if (spriteName == "Edmund (P1) (Weaponless)")
+                    return new string[] { "Edmund (P1) (Weaponless)", "Edmund (P1) (Sword/Weaponless)" };
+                // Explosions have a transparent frame with them.
+                else if (spriteName == "Explosion")
+                    return new string[] { "Explosion", "Transparent Frame" };
+                else
+                    return spriteName.Split('|').Select(x => x.Trim()).ToArray();
+            }
+
             return s_uniqueAnimationsByHash.Values
                 .GroupBy(x => x.SpriteName)
-                .Select(x => new SpriteDef(x.Key, x.ToArray()))
+                .Select(x => {
+                    var frameNames = FixedFrameNames(x.Key);
+                    var frames = s_uniqueFramesByHash
+                        .Where(y => frameNames.Contains(y.Value.SpriteName))
+                        .Select(y => new FrameDef(y.Value))
+                        .OrderBy(y => y.Width)
+                        .OrderBy(y => y.Height)
+                        .OrderBy(y => y.Name)
+                        .OrderBy(y => y.Direction)
+                        .OrderBy(y => y.Hash)
+                        .ToArray();
+                    return new SpriteDef(x.Key, frames, x.ToArray());
+                })
                 .ToArray();
         }
 

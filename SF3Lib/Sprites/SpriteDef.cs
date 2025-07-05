@@ -4,9 +4,10 @@ namespace SF3.Sprites {
     public class SpriteDef {
         public SpriteDef() { }
 
-        public SpriteDef(string spriteName, UniqueAnimationDef[] allAnimationsForVariants) {
-            Name = spriteName;
-            Variants = allAnimationsForVariants
+        public SpriteDef(string name, FrameDef[] frames, UniqueAnimationDef[] animations) {
+            Name = name;
+            Frames = frames;
+            Variants = animations
                 .OrderBy(y => y.Width)
                 .ThenBy(y => y.Height)
                 .ThenBy(y => y.Directions)
@@ -19,6 +20,7 @@ namespace SF3.Sprites {
         }
 
         public string Name;
+        public FrameDef[] Frames;
         public SpriteVariantDef[] Variants;
     }
 }
