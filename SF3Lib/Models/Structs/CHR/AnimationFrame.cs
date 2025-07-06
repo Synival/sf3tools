@@ -117,5 +117,8 @@ namespace SF3.Models.Structs.CHR {
                 default: return 1;
             }
         }
+
+        [TableViewModelColumn(displayOrder: 5, minWidth: 200)]
+        public string TextureHash => GetTexture(Directions)?.Hash;
     }
 }
