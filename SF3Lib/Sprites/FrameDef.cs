@@ -10,6 +10,8 @@ namespace SF3.Sprites {
             Width     = uniqueFrameDef.Width;
             Height    = uniqueFrameDef.Height;
             Direction = uniqueFrameDef.Direction;
+            SpriteSheetX = -1;
+            SpriteSheetY = -1;
         }
 
         public string Name;
@@ -17,5 +19,7 @@ namespace SF3.Sprites {
         public int Width;
         public int Height;
         public SpriteFrameDirection Direction;
+        public int SpriteSheetX;
+        public int SpriteSheetY;
     }
 }

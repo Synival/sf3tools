@@ -180,26 +180,6 @@ namespace CHR_Analyzer {
 
             Console.WriteLine();
             Console.WriteLine("===================================================");
-            Console.WriteLine("| CREATING SPRITE DEFS                            |");
-            Console.WriteLine("===================================================");
-            Console.WriteLine();
-
-            foreach (var spriteDef in spriteDefs) {
-                var spritePath = Path.Combine(c_pathOut, FilesystemString(spriteDef.Name));
-                var spriteDefPath = Path.Combine(spritePath, FilesystemString(spriteDef.Name) + ".json");
-                Console.WriteLine($"Writing '{spriteDefPath}'...");
-
-                using (var file = File.Open(spriteDefPath, FileMode.Create)) {
-                    using (var stream = new StreamWriter(file)) {
-                        stream.NewLine = "\n";
-                        stream.Write(JsonConvert.SerializeObject(spriteDef, Formatting.Indented));
-                    }
-                }
-            }
-            Console.WriteLine("Sprite def writing complete.");
-
-            Console.WriteLine();
-            Console.WriteLine("===================================================");
             Console.WriteLine("| CREATING SPRITESHEETS                           |");
             Console.WriteLine("===================================================");
             Console.WriteLine();
@@ -216,7 +196,7 @@ namespace CHR_Analyzer {
 
                     var frames = spriteDef.Frames
                         .Where(x => x.Width == variantDef.Width && x.Height == variantDef.Height)
-                        .Select(x => s_framesByHash[x.Hash])
+                        .Select(x => new { SpriteDefFrame = x, s_framesByHash[x.Hash].Texture, s_framesByHash[x.Hash].FrameInfo })
                         .OrderBy(x => x.FrameInfo.Width)
                         .ThenBy(x => x.FrameInfo.Height)
                         .ThenBy(x => x.FrameInfo.FrameName)
@@ -298,6 +278,8 @@ namespace CHR_Analyzer {
                         int frameIndex = 0;
                         foreach (var frame in frameGroup.Value) {
                             int x = ((hasDuplicateDirections) ? frameIndex : frameDirectionToIndex[frame.FrameInfo.Direction]) * frameWidthInPixels;
+                            frame.SpriteDefFrame.SpriteSheetX = x;
+                            frame.SpriteDefFrame.SpriteSheetY = y;
 
                             int pos = (y * imageWidthInPixels + x) * 2;
                             var frameData = frame.Texture.BitmapDataARGB1555;
@@ -346,6 +328,31 @@ namespace CHR_Analyzer {
 #pragma warning restore CA1416 // Validate platform compatibility
             }
             Console.WriteLine("Spritesheet writing complete.");
+
+            Console.WriteLine();
+            Console.WriteLine("===================================================");
+            Console.WriteLine("| CREATING SPRITE DEFS                            |");
+            Console.WriteLine("===================================================");
+            Console.WriteLine();
+
+            foreach (var spriteDef in spriteDefs) {
+                spriteDef.Frames = spriteDef.Frames
+                    .OrderBy(x => x.SpriteSheetY)
+                    .ThenBy(x => x.SpriteSheetX)
+                    .ToArray();
+
+                var spritePath = Path.Combine(c_pathOut, FilesystemString(spriteDef.Name));
+                var spriteDefPath = Path.Combine(spritePath, FilesystemString(spriteDef.Name) + ".json");
+                Console.WriteLine($"Writing '{spriteDefPath}'...");
+
+                using (var file = File.Open(spriteDefPath, FileMode.Create)) {
+                    using (var stream = new StreamWriter(file)) {
+                        stream.NewLine = "\n";
+                        stream.Write(JsonConvert.SerializeObject(spriteDef, Formatting.Indented));
+                    }
+                }
+            }
+            Console.WriteLine("Sprite def writing complete.");
         }
 
         private static string GetFileString(ScenarioType inputScenario, string filename, ScenarioTableFile chrChpFile) {
