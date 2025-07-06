@@ -98,6 +98,22 @@ namespace CHR_Analyzer {
 
         private static bool? CHR_MatchFunc(string filename, ICHR_File[] chrFiles, INameGetterContext ngc) {
             foreach (var chr in chrFiles) {
+#if false
+                var duplicateFramesByHash = chr.SpriteTable
+                    .SelectMany(x => x.FrameTable.Select(y => new { Sprite = x, Frame = y }))
+                    .GroupBy(x => x.Frame.TextureOffset)
+                    .Select(x => x.First())
+                    .GroupBy(x => x.Frame.FrameInfo.TextureHash)
+                    .Where(x => x.Count() > 1)
+                    .ToArray();
+
+                foreach (var duplicateFrame in duplicateFramesByHash) {
+                    var frameInfo = duplicateFrame.First().Frame.FrameInfo;
+                    s_matchReports.Add($"{frameInfo.SpriteName}.{frameInfo.FrameName}.{frameInfo.Direction} ({frameInfo.TextureHash}):");
+                    foreach (var frame in duplicateFrame)
+                        s_matchReports.Add($"    {frame.Sprite.Name}: {frame.Frame.Name} (0x{frame.Frame.TextureOffset:X5})");
+                }
+#else
                 foreach (var sprite in chr.SpriteTable) {
                     foreach (var frame in sprite.FrameTable) {
                         // Skip sprites that actually have 'First' or 'Second' directions.
@@ -134,6 +150,7 @@ namespace CHR_Analyzer {
                             s_matchReports.Add($"{sprite.Name}.{frame.ID:X2}: {frame.SpriteName}.{frame.FrameName}");
                     }
                 }
+#endif
             }
 
 /*
