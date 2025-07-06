@@ -459,8 +459,8 @@ namespace SF3.Editor.Forms {
                         Scenario = DetermineScenario(x, fileType)
                     };
                 })
-                .Where(x => x.FileType.HasValue && x.Scenario.HasValue && x.FileType == file.FileType)
-                .Select(x => new FileInDirectory { Filename = x.Filename, FileType = x.FileType!.Value, Scenario = x.Scenario!.Value })
+                .Where(x => x.FileType.HasValue && x.FileType == file.FileType)
+                .Select(x => new FileInDirectory { Filename = x.Filename, FileType = x.FileType!.Value, Scenario = x.Scenario ?? file.Scenario })
                 .ToArray();
         }
 
