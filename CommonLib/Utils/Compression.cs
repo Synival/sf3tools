@@ -288,6 +288,10 @@ namespace CommonLib.Utils {
             int currentColorCount = 0;
 
             void ReadColor(ushort color) {
+                // Transparent colors other than 0x0000 and 0x7FFF cannot be compressed. Replace them with 0x0000.
+                if (color > 0x0000 && color < 0x7FFF)
+                    color = 0x0000;
+
                 if (currentColorCount == 0)
                     currentColor = color;
                 else if (color != currentColor) {
