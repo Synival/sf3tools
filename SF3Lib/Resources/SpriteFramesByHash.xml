@@ -69,18 +69,6 @@
     <item hash="e5aaeeb6327f7a07d96590ecb1ebab0e" sprite="Accessory Dealer" width="40" height="40" frame="Nodding 3" direction="ESE" />
     <item hash="e17a79fc03eb1ac0d2899bc4fe821db0" sprite="Accessory Dealer" width="40" height="40" frame="Nodding 3" direction="ENE" />
     <item hash="2a65938dd745988968ca3c490c0c1833" sprite="Accessory Dealer" width="40" height="40" frame="Nodding 3" direction="NNE" />
-    <item hash="7bfbd1e28f891cb5785ca7f1b9013f35" sprite="Algernon" width="40" height="40" frame="Idle (Dangling) 1" direction="SSE" />
-    <item hash="0f53d8852da408e1725636c45c4586e5" sprite="Algernon" width="40" height="40" frame="Idle (Dangling) 1" direction="ESE" />
-    <item hash="1318c83de4b270a7a9162e342cf1db91" sprite="Algernon" width="40" height="40" frame="Idle (Dangling) 1" direction="ENE" />
-    <item hash="bda00cf8ac5b293e0dc196f08a869aaf" sprite="Algernon" width="40" height="40" frame="Idle (Dangling) 1" direction="NNE" />
-    <item hash="081f426c88dd48d052a4ce32dba19966" sprite="Algernon" width="40" height="40" frame="Idle (Dangling) 2" direction="SSE" />
-    <item hash="5fe5e4ef229a3cba95ce1686c89d8163" sprite="Algernon" width="40" height="40" frame="Idle (Dangling) 2" direction="ESE" />
-    <item hash="9a6a25e40793aba8c3519ac48c8d3c56" sprite="Algernon" width="40" height="40" frame="Idle (Dangling) 2" direction="ENE" />
-    <item hash="4dbdec545826661f5e945192d73f0c68" sprite="Algernon" width="40" height="40" frame="Idle (Dangling) 2" direction="NNE" />
-    <item hash="268571b9d48dcf0d7ecd1e247082577a" sprite="Algernon" width="40" height="40" frame="Idle (Dangling) 3" direction="SSE" />
-    <item hash="6123a6c55771b206184e3d0c034bc101" sprite="Algernon" width="40" height="40" frame="Idle (Dangling) 3" direction="ESE" />
-    <item hash="8e2a5aca684446119739f8eda0da8da7" sprite="Algernon" width="40" height="40" frame="Idle (Dangling) 3" direction="ENE" />
-    <item hash="dc4bca850b271a30d7a600bbdb72c801" sprite="Algernon" width="40" height="40" frame="Idle (Dangling) 3" direction="NNE" />
     <item hash="14763e677e67b746cb069aee63164cb1" sprite="Algernon" width="40" height="40" frame="Idle 1" direction="SSE" />
     <item hash="747916ba701ce6117acccca45359af21" sprite="Algernon" width="40" height="40" frame="Idle 1" direction="ESE" />
     <item hash="ddcc0ee1145aa244586f3463c279d282" sprite="Algernon" width="40" height="40" frame="Idle 1" direction="ENE" />
@@ -121,6 +109,18 @@
     <item hash="f271821f640f9ba1849993704d4c81f9" sprite="Algernon" width="40" height="40" frame="Walking 6" direction="ESE" />
     <item hash="fa63017ca6610a065454ba425a220dd3" sprite="Algernon" width="40" height="40" frame="Walking 6" direction="ENE" />
     <item hash="b474729df48bba2ff0a1d6e6a30be1e8" sprite="Algernon" width="40" height="40" frame="Walking 6" direction="NNE" />
+    <item hash="7bfbd1e28f891cb5785ca7f1b9013f35" sprite="Algernon (Tied-Up)" width="40" height="40" frame="Idle (Dangling) 1" direction="SSE" />
+    <item hash="0f53d8852da408e1725636c45c4586e5" sprite="Algernon (Tied-Up)" width="40" height="40" frame="Idle (Dangling) 1" direction="ESE" />
+    <item hash="1318c83de4b270a7a9162e342cf1db91" sprite="Algernon (Tied-Up)" width="40" height="40" frame="Idle (Dangling) 1" direction="ENE" />
+    <item hash="bda00cf8ac5b293e0dc196f08a869aaf" sprite="Algernon (Tied-Up)" width="40" height="40" frame="Idle (Dangling) 1" direction="NNE" />
+    <item hash="081f426c88dd48d052a4ce32dba19966" sprite="Algernon (Tied-Up)" width="40" height="40" frame="Idle (Dangling) 2" direction="SSE" />
+    <item hash="5fe5e4ef229a3cba95ce1686c89d8163" sprite="Algernon (Tied-Up)" width="40" height="40" frame="Idle (Dangling) 2" direction="ESE" />
+    <item hash="9a6a25e40793aba8c3519ac48c8d3c56" sprite="Algernon (Tied-Up)" width="40" height="40" frame="Idle (Dangling) 2" direction="ENE" />
+    <item hash="4dbdec545826661f5e945192d73f0c68" sprite="Algernon (Tied-Up)" width="40" height="40" frame="Idle (Dangling) 2" direction="NNE" />
+    <item hash="268571b9d48dcf0d7ecd1e247082577a" sprite="Algernon (Tied-Up)" width="40" height="40" frame="Idle (Dangling) 3" direction="SSE" />
+    <item hash="6123a6c55771b206184e3d0c034bc101" sprite="Algernon (Tied-Up)" width="40" height="40" frame="Idle (Dangling) 3" direction="ESE" />
+    <item hash="8e2a5aca684446119739f8eda0da8da7" sprite="Algernon (Tied-Up)" width="40" height="40" frame="Idle (Dangling) 3" direction="ENE" />
+    <item hash="dc4bca850b271a30d7a600bbdb72c801" sprite="Algernon (Tied-Up)" width="40" height="40" frame="Idle (Dangling) 3" direction="NNE" />
     <item hash="9985a852386443c480f68b1861d3d050" sprite="Arch Demon" width="40" height="40" frame="Idle 1" direction="SSE" />
     <item hash="60485df73020090bcf952f63869cb283" sprite="Arch Demon" width="40" height="40" frame="Idle 1" direction="ESE" />
     <item hash="f00b5196c50109c7e158ea3a5701d07a" sprite="Arch Demon" width="40" height="40" frame="Idle 1" direction="ENE" />
