@@ -6663,18 +6663,30 @@
     <item hash="1d2088a2f48151ef3e254f07500243c4" sprite="Fey (Big)" width="128" height="128" frame="Shushing 3" direction="S" />
     <item hash="30b6fd0738438affe085b2bc255818e5" sprite="Fey (Big)" width="128" height="128" frame="ShushingBackToIdle 1" direction="S" />
     <item hash="f25e400b93bf23217667d46c761df327" sprite="Fey (Big)" width="128" height="128" frame="ShushingBackToIdle 2" direction="S" />
-    <item hash="e103dbd9fb539f0c271a07935b5bb929" sprite="Fey (Quonus Priest)" width="40" height="40" frame="Idle/Walking 1" direction="SSE" />
-    <item hash="cf0bf2fcc1a0a59dd446d8e5c2cb1a5c" sprite="Fey (Quonus Priest)" width="40" height="40" frame="Idle/Walking 1" direction="ESE" />
-    <item hash="8973c7cb814b785c0164ab2bc829a4eb" sprite="Fey (Quonus Priest)" width="40" height="40" frame="Idle/Walking 1" direction="ENE" />
-    <item hash="d6e79c92da94a8dd3861a57f03cc565f" sprite="Fey (Quonus Priest)" width="40" height="40" frame="Idle/Walking 1" direction="NNE" />
-    <item hash="3a71e86181f67d70ce46215ec0478f6e" sprite="Fey (Quonus Priest)" width="40" height="40" frame="Idle/Walking 2" direction="SSE" />
-    <item hash="560f8d4fb3e1026aa57ad08cac47ddc8" sprite="Fey (Quonus Priest)" width="40" height="40" frame="Idle/Walking 2" direction="ESE" />
-    <item hash="4683abfe098bc5590f38a07f3107cbbd" sprite="Fey (Quonus Priest)" width="40" height="40" frame="Idle/Walking 2" direction="ENE" />
-    <item hash="865a13076cf6382647e12cf79894fbe8" sprite="Fey (Quonus Priest)" width="40" height="40" frame="Idle/Walking 2" direction="NNE" />
-    <item hash="5a51973fd54fde772e4540c1120e3df7" sprite="Fey (Quonus Priest)" width="40" height="40" frame="Idle/Walking 3" direction="SSE" />
-    <item hash="224a34ecd4375fbeb0b4ff2ff95d018e" sprite="Fey (Quonus Priest)" width="40" height="40" frame="Idle/Walking 3" direction="ESE" />
-    <item hash="6960e0f60d6337d2e8081092362e77f0" sprite="Fey (Quonus Priest)" width="40" height="40" frame="Idle/Walking 3" direction="ENE" />
-    <item hash="c227dd2c9680cd82d1f2df2ccd832587" sprite="Fey (Quonus Priest)" width="40" height="40" frame="Idle/Walking 3" direction="NNE" />
+    <item hash="e103dbd9fb539f0c271a07935b5bb929" sprite="Fey (Quonus Priest, Fixed Height)" width="40" height="48" frame="Idle/Walking 1" direction="SSE" />
+    <item hash="cf0bf2fcc1a0a59dd446d8e5c2cb1a5c" sprite="Fey (Quonus Priest, Fixed Height)" width="40" height="48" frame="Idle/Walking 1" direction="ESE" />
+    <item hash="8973c7cb814b785c0164ab2bc829a4eb" sprite="Fey (Quonus Priest, Fixed Height)" width="40" height="48" frame="Idle/Walking 1" direction="ENE" />
+    <item hash="d6e79c92da94a8dd3861a57f03cc565f" sprite="Fey (Quonus Priest, Fixed Height)" width="40" height="48" frame="Idle/Walking 1" direction="NNE" />
+    <item hash="3a71e86181f67d70ce46215ec0478f6e" sprite="Fey (Quonus Priest, Fixed Height)" width="40" height="48" frame="Idle/Walking 2" direction="SSE" />
+    <item hash="560f8d4fb3e1026aa57ad08cac47ddc8" sprite="Fey (Quonus Priest, Fixed Height)" width="40" height="48" frame="Idle/Walking 2" direction="ESE" />
+    <item hash="4683abfe098bc5590f38a07f3107cbbd" sprite="Fey (Quonus Priest, Fixed Height)" width="40" height="48" frame="Idle/Walking 2" direction="ENE" />
+    <item hash="865a13076cf6382647e12cf79894fbe8" sprite="Fey (Quonus Priest, Fixed Height)" width="40" height="48" frame="Idle/Walking 2" direction="NNE" />
+    <item hash="5a51973fd54fde772e4540c1120e3df7" sprite="Fey (Quonus Priest, Fixed Height)" width="40" height="48" frame="Idle/Walking 3" direction="SSE" />
+    <item hash="224a34ecd4375fbeb0b4ff2ff95d018e" sprite="Fey (Quonus Priest, Fixed Height)" width="40" height="48" frame="Idle/Walking 3" direction="ESE" />
+    <item hash="6960e0f60d6337d2e8081092362e77f0" sprite="Fey (Quonus Priest, Fixed Height)" width="40" height="48" frame="Idle/Walking 3" direction="ENE" />
+    <item hash="c227dd2c9680cd82d1f2df2ccd832587" sprite="Fey (Quonus Priest, Fixed Height)" width="40" height="48" frame="Idle/Walking 3" direction="NNE" />
+    <item hash="07a096d2d597be64a7b2f1be49b20909" sprite="Fey (Quonus Priest, Wrong Height)" width="40" height="40" frame="Unknown" direction="Unset" />
+    <item hash="21ca0854e474df7caeb41c5467161d6a" sprite="Fey (Quonus Priest, Wrong Height)" width="40" height="40" frame="Unknown" direction="Unset" />
+    <item hash="42b689310347432877ce99be5dbd6c6c" sprite="Fey (Quonus Priest, Wrong Height)" width="40" height="40" frame="Unknown" direction="Unset" />
+    <item hash="5a99458d93c72a984e34d6b81e7bc92a" sprite="Fey (Quonus Priest, Wrong Height)" width="40" height="40" frame="Unknown" direction="Unset" />
+    <item hash="79536c6bac83813883a2e7200cbeba76" sprite="Fey (Quonus Priest, Wrong Height)" width="40" height="40" frame="Unknown" direction="Unset" />
+    <item hash="8919b768a9224ef2e412e3992b4dc040" sprite="Fey (Quonus Priest, Wrong Height)" width="40" height="40" frame="Unknown" direction="Unset" />
+    <item hash="8f709ba7164d99c6a7cc0f83d44ece4a" sprite="Fey (Quonus Priest, Wrong Height)" width="40" height="40" frame="Unknown" direction="Unset" />
+    <item hash="963565a91896bfacf503989af25b4f6c" sprite="Fey (Quonus Priest, Wrong Height)" width="40" height="40" frame="Unknown" direction="Unset" />
+    <item hash="c3612896abcb57b03c2cf0974b2c431e" sprite="Fey (Quonus Priest, Wrong Height)" width="40" height="40" frame="Unknown" direction="Unset" />
+    <item hash="d524b279de6f30a11ea05a5ecd51778a" sprite="Fey (Quonus Priest, Wrong Height)" width="40" height="40" frame="Unknown" direction="Unset" />
+    <item hash="ebcf05fcf2666b1b89b34e1da65b876c" sprite="Fey (Quonus Priest, Wrong Height)" width="40" height="40" frame="Unknown" direction="Unset" />
+    <item hash="ff41eb00b02163d71f5cb387c5b178a8" sprite="Fey (Quonus Priest, Wrong Height)" width="40" height="40" frame="Unknown" direction="Unset" />
     <item hash="60fe44dfc4cbdd780a3c6bf91ee3d282" sprite="Fey (Small)" width="64" height="64" frame="Giggle 1" direction="S" />
     <item hash="2dab9eeb3c9225eb3fe5ffcddec1dde5" sprite="Fey (Small)" width="64" height="64" frame="Giggle 2" direction="S" />
     <item hash="c0fb7e8a7cec951630e74afce54f144b" sprite="Fey (Small)" width="64" height="64" frame="Giggle 3" direction="S" />

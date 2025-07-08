@@ -1075,18 +1075,20 @@
     <item hash="59bc16c571965b680c1d799a12a82c6b" sprite="Fafhard (Helmet)" animation="Walking" width="40" height="40" directions="4" frames="7" duration="30" />
     <item hash="cdaa89bdfeb6c7743cfb2d092f5100fc" sprite="Fafhard (Helmet)" animation="StillFrame1 (OnGround)" width="48" height="40" directions="4" frames="2" duration="10" />
     <item hash="bd76d897a80b6522f37c2a1a481a3af9" sprite="Fafhard (Helmet)" animation="StillFrame2 (OnGround, Repeat)" width="48" height="40" directions="4" frames="2" duration="6" />
-    <item hash="5c5c39c8163a34f83fe5357ed538be56" sprite="Female Masked Monk w/ Blue Robe, Apron, and Striped Hood" animation="Idle/Walking" width="40" height="40" directions="4" frames="9" duration="32" />
     <item hash="3456333c42d735179bc9147a5b652489" sprite="Female Masked Monk w/ Blue Robe, Apron, and Striped Hood" animation="StillFrame" width="40" height="40" directions="4" frames="2" duration="10" />
-    <item hash="790c6af9c81519142f7abddb4111f54c" sprite="Female Masked Monk w/ Grey+Green Dress" animation="Idle/Walking" width="40" height="40" directions="4" frames="7" duration="30" />
+    <item hash="5c5c39c8163a34f83fe5357ed538be56" sprite="Female Masked Monk w/ Blue Robe, Apron, and Striped Hood" animation="Walking" width="40" height="40" directions="4" frames="9" duration="32" />
     <item hash="9b5161d9ca33d1f788898e27bdd00587" sprite="Female Masked Monk w/ Grey+Green Dress" animation="StillFrame" width="40" height="40" directions="4" frames="2" duration="10" />
-    <item hash="021346a33187b1a0c58cfbd45bef079d" sprite="Female Masked Monk w/ Purple Dress and Checkered Hood" animation="Idle/Walking" width="40" height="40" directions="4" frames="7" duration="30" />
+    <item hash="790c6af9c81519142f7abddb4111f54c" sprite="Female Masked Monk w/ Grey+Green Dress" animation="Walking" width="40" height="40" directions="4" frames="7" duration="30" />
     <item hash="e9e81820f9352d146cd99b3c97e25706" sprite="Female Masked Monk w/ Purple Dress and Checkered Hood" animation="StillFrame" width="40" height="40" directions="4" frames="2" duration="10" />
+    <item hash="021346a33187b1a0c58cfbd45bef079d" sprite="Female Masked Monk w/ Purple Dress and Checkered Hood" animation="Walking" width="40" height="40" directions="4" frames="7" duration="30" />
     <item hash="0d2f4883d3bb33393b1c44f9926dbf34" sprite="Fey (Big)" animation="Idle" width="128" height="128" directions="1" frames="3" duration="6" />
     <item hash="b60bc298d2bb1519d68382e4433d875e" sprite="Fey (Big)" animation="Shushing" width="128" height="128" directions="1" frames="5" duration="28" />
     <item hash="56bcdf360dba6d771080646981b32d05" sprite="Fey (Big)" animation="ShushingBackToIdle" width="128" height="128" directions="1" frames="3" duration="6" />
     <item hash="97cb75f2880dd3c6612b6b82d17c3ef3" sprite="Fey (Big)" animation="StillFrame" width="128" height="128" directions="1" frames="2" duration="10" />
-    <item hash="d4818ccabf217349319cbcc15d6bc58c" sprite="Fey (Quonus Priest)" animation="Idle/Walking" width="40" height="40" directions="4" frames="5" duration="16" />
-    <item hash="a7788d31b45e8e14c2a751260a88dcee" sprite="Fey (Quonus Priest)" animation="StillFrame" width="40" height="40" directions="4" frames="2" duration="10" />
+    <item hash="d4818ccabf217349319cbcc15d6bc58c" sprite="Fey (Quonus Priest, Fixed Height)" animation="Idle" width="40" height="48" directions="4" frames="5" duration="16" />
+    <item hash="a7788d31b45e8e14c2a751260a88dcee" sprite="Fey (Quonus Priest, Fixed Height)" animation="StillFrame" width="40" height="48" directions="4" frames="2" duration="10" />
+    <item hash="b9c7f44ab5c7e7cf18b80af23cf797a4" sprite="Fey (Quonus Priest, Wrong Height)" animation="Idle" width="40" height="40" directions="4" frames="5" duration="16" />
+    <item hash="e23cb5a041dc842080e57b88c9fea76c" sprite="Fey (Quonus Priest, Wrong Height)" animation="StillFrame" width="40" height="40" directions="4" frames="2" duration="10" />
     <item hash="f37d5e1f06a4fd101eccfb3a3fd03857" sprite="Fey (Small)" animation="Giggle" width="64" height="64" directions="1" frames="12" duration="22" />
     <item hash="aaf4a43657053af3a01d5ddbec7de8cf" sprite="Fey (Small)" animation="Idle" width="64" height="64" directions="1" frames="5" duration="28" />
     <item hash="508cd52a9d0e69314678e98b65c8e357" sprite="Fey (Small)" animation="SlapIshahakat" width="64" height="64" directions="1" frames="13" duration="44" />
