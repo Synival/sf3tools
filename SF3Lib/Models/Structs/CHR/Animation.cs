@@ -28,7 +28,7 @@ namespace SF3.Models.Structs.CHR {
                 .SelectMany(x => {
                     var frames = new List<int>();
                     var frameID = x.FrameID;
-                    for (int i = 0; i < AnimationFrame.DirectionsToFrameCount(x.Directions); i++)
+                    for (int i = 0; i < CHR_Utils.DirectionsToFrameCount(x.Directions); i++)
                         if (frameID + i < FrameTable.Length)
                             frames.Add(frameID + i);
                     return frames;
@@ -41,7 +41,7 @@ namespace SF3.Models.Structs.CHR {
             AnimationInfo.SpriteName = SpriteName;
             AnimationInfo.Width      = _framesWithTextures.Length > 0 ? _framesWithTextures[0].Width  : 0;
             AnimationInfo.Height     = _framesWithTextures.Length > 0 ? _framesWithTextures[0].Height : 0;
-            AnimationInfo.Directions = (_firstFrameWithTexture == null) ? 1 : AnimationFrame.DirectionsToFrameCount(_firstFrameWithTexture.Directions);
+            AnimationInfo.Directions = (_firstFrameWithTexture == null) ? 1 : _firstFrameWithTexture.Directions;
             AnimationInfo.FrameCommandCount = FrameCommandCount;
             AnimationInfo.Duration   = Duration;
             AnimationInfo.FrameTexturesMissing = FrameTexturesMissing;
@@ -55,7 +55,7 @@ namespace SF3.Models.Structs.CHR {
                     return null;
 
                 var frameID = aniFrame.FrameID;
-                var dirs = AnimationFrame.DirectionsToFrameCount(aniFrame.Directions);
+                var dirs = CHR_Utils.DirectionsToFrameCount(aniFrame.Directions);
                 var hashes = new string[dirs];
                 var maxFrames = FrameTable.Length;
 

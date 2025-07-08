@@ -190,6 +190,7 @@ namespace SF3.Utils {
                         .ToArray();
                     return new SpriteDef(x.Key, frames, x.ToArray());
                 })
+                .Where(x => x.Frames.Length > 0)
                 .ToArray();
         }
 
@@ -235,6 +236,17 @@ namespace SF3.Utils {
 
                 default:
                     return SpriteFrameDirection.First + num;
+            }
+        }
+
+        public static int DirectionsToFrameCount(int directions) {
+            switch (directions) {
+                case 2:  return 2;
+                case 4:  return 4;
+                case 5:  return 5;
+                case 6:  return 6;
+                case 8:  return 8;
+                default: return 1;
             }
         }
     }

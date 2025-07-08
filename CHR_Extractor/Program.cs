@@ -191,6 +191,7 @@ namespace CHR_Analyzer {
                     .Select(x => x.First())
                     .ToArray();
 
+                List<FrameDef> framesFound = [];
                 foreach (var variantDef in spriteSheetVariants) {
                     var spriteName = $"{spriteDef.Name} ({variantDef.Width}x{variantDef.Height})";
 
@@ -206,6 +207,8 @@ namespace CHR_Analyzer {
 
                     if (frames.Length == 0)
                         continue;
+
+                    framesFound.AddRange(frames.Select(x => x.SpriteDefFrame));
 
                     var frameDirections = frames.Select(x => x.FrameInfo.Direction)
                         .Distinct()
@@ -330,6 +333,32 @@ namespace CHR_Analyzer {
                     }
                 }
 #pragma warning restore CA1416 // Validate platform compatibility
+
+                // Filter out frames that don't have image data that made it to a sprite sheet.
+                framesFound = framesFound
+                    .Distinct()
+                    .OrderBy(x => x.Name)
+                    .ThenBy(x => x.Direction)
+                    .ThenBy(x => x.Hash)
+                    .ToList();
+                spriteDef.Frames = framesFound.ToArray();
+                var framesFoundHashSet = spriteDef.Frames.Select(x => x.Hash).ToHashSet();
+
+                // Filter out variants that have no frames.
+                var validVariants = spriteDef.Variants
+                    .Where(x => spriteDef.Frames.Any(y => x.Width == y.Width && x.Height == y.Height))
+                    .ToArray();
+                spriteDef.Variants = validVariants;
+
+                // Filter out animations that have missing frames.
+                foreach (var variant in spriteDef.Variants) {
+                    var validAnimations = variant.Animations
+                        .Where(x => x.AnimationFrames
+                            .All(y => y.FrameHashes == null || y.FrameHashes.All(z => z == null || framesFoundHashSet.Contains(z)))
+                        )
+                        .ToArray();
+                    variant.Animations = validAnimations;
+                }
             }
             Console.WriteLine("Spritesheet writing complete.");
 
@@ -348,6 +377,11 @@ namespace CHR_Analyzer {
                 var spritePath = Path.Combine(c_pathOut, FilesystemString(spriteDef.Name));
                 var spriteDefPath = Path.Combine(spritePath, FilesystemString(spriteDef.Name) + ".json");
                 Console.WriteLine($"Writing '{spriteDefPath}'...");
+
+                if (spriteDef.Frames.Length == 0) {
+                    Console.WriteLine($"    Skipping -- contains no frames");
+                    continue;
+                }
 
                 using (var file = File.Open(spriteDefPath, FileMode.Create)) {
                     using (var stream = new StreamWriter(file)) {

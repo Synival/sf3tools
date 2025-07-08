@@ -37,8 +37,11 @@ namespace SF3.Models.Structs.CHR {
                 var hash = Texture.Hash.ToLower();
 
                 // There's one specific Tybalt sprite with some problems.
-                if (ErrorWhileDecompressing != null && s_brokenTybaltHashes.Contains(hash))
+                if (ErrorWhileDecompressing != null && s_brokenTybaltHashes.Contains(hash)) {
                     Texture = new TextureABGR1555(0, 0, 0, texData.To1DArrayTransposed().To2DArrayColumnMajor(48, 40));
+                    Width  = Texture.Width;
+                    Height = Texture.Height;
+                }
 
                 FrameInfo = CHR_Utils.GetUniqueFrameInfoByHash(hash);
                 FrameInfo.Width  = Texture.Width;

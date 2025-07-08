@@ -59,7 +59,7 @@ namespace SF3.Models.Structs.CHR {
         public int Directions { get; }
 
         [TableViewModelColumn(addressField: null, displayOrder: 2.5f)]
-        public int FramesMissing => HasTexture ? (DirectionsToFrameCount(Directions) - GetFrameCount(Directions)) : 0;
+        public int FramesMissing => HasTexture ? (CHR_Utils.DirectionsToFrameCount(Directions) - GetFrameCount(Directions)) : 0;
 
         [TableViewModelColumn(displayOrder: 3)]
         public bool IsFinalFrame {
@@ -82,7 +82,7 @@ namespace SF3.Models.Structs.CHR {
             if (FrameTable == null || !HasTexture)
                 return 0;
 
-            int expectedFrameCount = DirectionsToFrameCount(directions);
+            int expectedFrameCount = CHR_Utils.DirectionsToFrameCount(directions);
             return Math.Max(0, Math.Min(FrameTable.Length - FrameID, expectedFrameCount));
         }
 
@@ -91,7 +91,7 @@ namespace SF3.Models.Structs.CHR {
             if (FrameTable == null)
                 return null;
 
-            int frameCount = DirectionsToFrameCount(directions);
+            int frameCount = CHR_Utils.DirectionsToFrameCount(directions);
             if (_texturesByFrameCount.TryGetValue(frameCount, out var tex))
                 return tex;
 
@@ -105,17 +105,6 @@ namespace SF3.Models.Structs.CHR {
             tex = TextureUtils.StackTextures(0, 0, 0, frames);
             _texturesByFrameCount[frameCount] = tex;
             return tex;
-        }
-
-        public static int DirectionsToFrameCount(int directions) {
-            switch (directions) {
-                case 2:  return 2;
-                case 4:  return 4;
-                case 5:  return 5;
-                case 6:  return 6;
-                case 8:  return 8;
-                default: return 1;
-            }
         }
 
         [TableViewModelColumn(displayOrder: 5, minWidth: 200)]
