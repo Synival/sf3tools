@@ -25531,6 +25531,10 @@
     <item hash="b6482baef1f1e8e30a74c44e43234b93" sprite="Zero (U)" width="48" height="24" frame="StillFrame (OnGround) 1" direction="ESE" />
     <item hash="e1d9904a0d317cef37549faa2f729797" sprite="Zero (U)" width="48" height="24" frame="StillFrame (OnGround) 1" direction="ENE" />
     <item hash="d9a55fd43914c6e86cd3a043ae641966" sprite="Zero (U)" width="48" height="24" frame="StillFrame (OnGround) 1" direction="NNE" />
+    <item hash="1f302dcae9e03b0f3c1374553c996a96" sprite="Zero (U)" width="48" height="24" frame="Unknown" direction="Unset" />
+    <item hash="462ab7f6d13f58f2529efcbcda29cbbd" sprite="Zero (U)" width="48" height="24" frame="Unknown" direction="Unset" />
+    <item hash="a87f2f03b032d5f724c274733c9a9cb6" sprite="Zero (U)" width="48" height="24" frame="Unknown" direction="Unset" />
+    <item hash="c90751ac2939a573ad4ce9b0a1590c7e" sprite="Zero (U)" width="48" height="24" frame="Unknown" direction="Unset" />
     <item hash="fcf8183b6dc450c13f098939e3c0b1ee" sprite="Zero (U)" width="48" height="40" frame="Idle (Similar to Flying) 1" direction="S" />
     <item hash="7cef7bb8d50d8346113cab2cb452b257" sprite="Zero (U)" width="48" height="40" frame="Idle (Similar to Flying) 1" direction="N" />
     <item hash="1801a98b60146334641f5cc44e5d9a73" sprite="Zero (U)" width="48" height="40" frame="Idle (Similar to Flying) 1, Idle 1" direction="SSE" />
