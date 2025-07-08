@@ -19,7 +19,6 @@ namespace CHR_Builder {
                 .ToArray();
 
             var spriteDefsWithPaths = spriteDefFiles
-                //.Take(1) // TODO: temporary!! we're gonna do em all real soon!!
                 // TODO: check for invalid objects!
                 .Select(x => new { Path = x, SpriteDef = JsonConvert.DeserializeObject<SpriteDef>(File.ReadAllText(x))! })
                 .ToArray();
@@ -135,16 +134,12 @@ namespace CHR_Builder {
                             .Select((zz, zzi) => new CompressedFrameDataInfo(variantIndex: xi, animationIndex: yi, animationFrameIndex: zi, animationFrameSubIndex: zzi, hash: zz)))
                         )
                     )
-                .OrderBy(x => x.VariantIndex)
-                .ThenBy(x => x.AnimationIndex)
-                .ThenBy(x => x.AnimationFrameIndex)
-                .ThenBy(x => x.AnimationFrameSubIndex)
-                .ToArray();
+                .ToList();
 
             var frames = frameInfos
                 .Where(x => framesByHash.ContainsKey(x.Hash))
                 .Select(x => framesByHash[x.Hash])
-                .ToArray();
+                .ToList();
 
             var uniqueFramesByHash = frames
                 .GroupBy(x => x.Hash)
@@ -152,8 +147,24 @@ namespace CHR_Builder {
 
             var uniqueFrameHashesFromAnimations = uniqueFramesByHash.Keys.ToHashSet();
             var framesNotUsedInAnimations = spriteDef.Frames.Where(x => !uniqueFrameHashesFromAnimations.Contains(x.Hash)).ToArray();
-            foreach (var f in framesNotUsedInAnimations)
+            foreach (var f in framesNotUsedInAnimations) {
+                var variant = spriteDef.Variants
+                    .Select((x, i) => (Variant : (SpriteVariantDef?) x, Index : i))
+                    .FirstOrDefault(x => x.Variant?.Width == f.Width && x.Variant?.Height == f.Height);
+                if (variant.Variant == null)
+                    continue;
+
+                frameInfos.Add(new CompressedFrameDataInfo(variant.Index, -1, -1, -1, f.Hash));
+                frames.Add(f);
                 uniqueFramesByHash[f.Hash] = f;
+            }
+
+            frameInfos = frameInfos
+                .OrderBy(x => x.VariantIndex)
+                .ThenBy(x => x.AnimationIndex)
+                .ThenBy(x => x.AnimationFrameIndex)
+                .ThenBy(x => x.AnimationFrameSubIndex)
+                .ToList();
 
             var compressedFrameDataByHash = uniqueFramesByHash.Values
                 .Select((x, i) => new { Index = i, FrameDef = x })
@@ -168,21 +179,18 @@ namespace CHR_Builder {
 
             var compressedFrameData = compressedFrameDataByHash.Select(x => x.Value.Data).ToArray();
 
-            var variantFrameIndex = 0;
             var frameIndex = 0;
-            var lastVariantIndex = 0;
+            var variantFrameIndices = new Dictionary<int, int>();
             foreach (var frameInfo in frameInfos) {
-                if (lastVariantIndex != frameInfo.VariantIndex) {
-                    variantFrameIndex = 0;
-                    lastVariantIndex = frameInfo.VariantIndex;
-                }
+                if (!variantFrameIndices.ContainsKey(frameInfo.VariantIndex))
+                    variantFrameIndices[frameInfo.VariantIndex] = 0;
 
                 frameInfo.FrameIndex = frameIndex++;
-                frameInfo.VariantFrameIndex = variantFrameIndex++;
+                frameInfo.VariantFrameIndex = variantFrameIndices[frameInfo.VariantIndex]++;
                 frameInfo.CompressedDataIndex = compressedFrameDataByHash.ContainsKey(frameInfo.Hash) ? compressedFrameDataByHash[frameInfo.Hash].Index : -1;
             }
 
-            return new CompressedFrameData(frameInfos, compressedFrameData);
+            return new CompressedFrameData(frameInfos.ToArray(), compressedFrameData);
         }
 
         private static void WriteSpriteHeaderTable(FileStream fileOut, SpriteDef spriteDef, out int[] frameTableOffsetAddrs, out int[] animationTableOffsetAddrs) {
@@ -238,7 +246,13 @@ namespace CHR_Builder {
                 var variantFrames = (variantIndex < frameInfosByVariant?.Length) ? frameInfosByVariant[variantIndex] : [];
                 var aniFrameTableOffsets = new int[variant.Animations.Length];
                 int aniIndex = 0;
-                foreach (var animation in variant.Animations) {
+
+                var animations = variant.Animations
+                    .Where(x => x.AnimationFrames
+                    .All(y => y.FrameHashes == null || y.FrameHashes.All(z => z != null)))
+                    .ToArray();
+
+                foreach (var animation in animations) {
                     aniFrameTableOffsets[aniIndex] = (int) fileOut.Position;
                     foreach (var aniFrame in animation.AnimationFrames) {
                         if (aniFrame.Command < 0xF1) {
@@ -263,9 +277,9 @@ namespace CHR_Builder {
                 fileOut.Write(byteData.Data.GetDataCopyOrReference());
                 fileOut.Position = oldPos;
 
-                var animationCount = Math.Max(0x10, variant.Animations.Length);
+                var animationCount = Math.Max(0x10, animations.Length);
                 for (int i = 0; i < animationCount; i++) {
-                    var aniFrameTableOffset = (i < variant.Animations.Length) ? aniFrameTableOffsets[i] : 0;
+                    var aniFrameTableOffset = (i < animations.Length) ? aniFrameTableOffsets[i] : 0;
                     byteData.SetDouble(0, aniFrameTableOffset);
                     fileOut.Write(byteData.Data.GetDataCopyOrReference());
                 }
