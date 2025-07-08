@@ -4427,46 +4427,46 @@
     <item hash="8d0f037580560b275aaab8846dac31d9" sprite="Dantares (U)" width="48" height="40" frame="Walking 6" direction="ENE" />
     <item hash="4e1e242e647883bd92c4072ec1d0a1a1" sprite="Dantares (U)" width="48" height="40" frame="Walking 6" direction="NNE" />
     <item hash="f2147e745370c8532ef140bf0c026390" sprite="Dantares (U)" width="48" height="40" frame="Walking 6" direction="N" />
-    <item hash="67ebcab6ca8ec36c141991b56973e081" sprite="Dark Dragon (Big)" width="80" height="48" frame="Idle 1" direction="SSE" />
-    <item hash="2bcfa6ff40b13e9ef9c1341d9f4a1ad6" sprite="Dark Dragon (Big)" width="80" height="48" frame="Idle 1" direction="ESE" />
-    <item hash="58bf16ab2bf3cbe8d49ec1a0020fe349" sprite="Dark Dragon (Big)" width="80" height="48" frame="Idle 1" direction="ENE" />
-    <item hash="87f942ac857fdc78b3467445c3b84360" sprite="Dark Dragon (Big)" width="80" height="48" frame="Idle 1" direction="NNE" />
-    <item hash="d3797e2ca93f8d85d092c8672fe84b09" sprite="Dark Dragon (Big)" width="80" height="48" frame="Idle 2" direction="SSE" />
-    <item hash="bab945551f1f79b3c30aeac46216c8ac" sprite="Dark Dragon (Big)" width="80" height="48" frame="Idle 2" direction="ESE" />
-    <item hash="09a55b6106d26b1726d334f61d75d5e0" sprite="Dark Dragon (Big)" width="80" height="48" frame="Idle 2" direction="ENE" />
-    <item hash="1ebb66410435685bb8372e3e37980e69" sprite="Dark Dragon (Big)" width="80" height="48" frame="Idle 2" direction="NNE" />
-    <item hash="42f928d73f6bace68a2894343615ad43" sprite="Dark Dragon (Big)" width="80" height="48" frame="Idle 3" direction="SSE" />
-    <item hash="563943f53a7ec2a268c281ee654a5b37" sprite="Dark Dragon (Big)" width="80" height="48" frame="Idle 3" direction="ESE" />
-    <item hash="f20c3aa53020424a71b88805cf4a4735" sprite="Dark Dragon (Big)" width="80" height="48" frame="Idle 3" direction="ENE" />
-    <item hash="ec66312f2a2edb5de0662c9a95c26350" sprite="Dark Dragon (Big)" width="80" height="48" frame="Idle 3" direction="NNE" />
-    <item hash="b82750d292ef95704886189c5001696b" sprite="Dark Dragon (Big)" width="80" height="48" frame="Idle 4" direction="SSE" />
-    <item hash="ed7b6c4583d84ac601e8fac4b8311aad" sprite="Dark Dragon (Big)" width="80" height="48" frame="Idle 4" direction="ESE" />
-    <item hash="04a204393f5bfa2617b8a3c15519d19f" sprite="Dark Dragon (Big)" width="80" height="48" frame="Idle 4" direction="ENE" />
-    <item hash="c5aa056ea033fd2968340bd63ad9e751" sprite="Dark Dragon (Big)" width="80" height="48" frame="Idle 4" direction="NNE" />
-    <item hash="a0321ef7266574b2bb14f5aaf66186ed" sprite="Dark Dragon (Big)" width="80" height="48" frame="Idle32" direction="SSE" />
-    <item hash="571ec1e8d9e4b8241a4516bb9b391d4a" sprite="Dark Dragon (Big)" width="80" height="48" frame="Idle32" direction="ESE" />
-    <item hash="f81f561a0aa76c53cae17f96d0c8980d" sprite="Dark Dragon (Big)" width="80" height="48" frame="Idle32" direction="ENE" />
-    <item hash="ed7709b008b46c6edeafd461859d6dbb" sprite="Dark Dragon (Big)" width="80" height="48" frame="Idle32" direction="NNE" />
-    <item hash="3cbea8c46bee7b35a37d6b4e4f118672" sprite="Dark Dragon (Big)" width="80" height="48" frame="Idle33" direction="SSE" />
-    <item hash="e228f5ba93f8ad434c45bafe55a928be" sprite="Dark Dragon (Big)" width="80" height="48" frame="Idle33" direction="ESE" />
-    <item hash="77e5a63972c7cc6dc875f423abc68c1b" sprite="Dark Dragon (Big)" width="80" height="48" frame="Idle33" direction="ENE" />
-    <item hash="befb3db071e56dda1d46774ec40d443d" sprite="Dark Dragon (Big)" width="80" height="48" frame="Idle33" direction="NNE" />
-    <item hash="02476c7f936277dc4ba83a76c784c8bf" sprite="Dark Dragon (Small)" width="72" height="48" frame="Idle 1" direction="SSE" />
-    <item hash="362b328414957f34b804a9e17246bc31" sprite="Dark Dragon (Small)" width="72" height="48" frame="Idle 1" direction="ESE" />
-    <item hash="f9bef83b0049f201dcf0b395dee0eae6" sprite="Dark Dragon (Small)" width="72" height="48" frame="Idle 1" direction="ENE" />
-    <item hash="4425e41beb045701fb39ef6c11738f4e" sprite="Dark Dragon (Small)" width="72" height="48" frame="Idle 1" direction="NNE" />
-    <item hash="15118ab3e41bba579e372b02035868b3" sprite="Dark Dragon (Small)" width="72" height="48" frame="Idle 2" direction="SSE" />
-    <item hash="3a33088595550dc9059fb6dbb51bdf22" sprite="Dark Dragon (Small)" width="72" height="48" frame="Idle 2" direction="ESE" />
-    <item hash="0812800e4efbab411ac4fea7cbf04100" sprite="Dark Dragon (Small)" width="72" height="48" frame="Idle 2" direction="ENE" />
-    <item hash="8b04ffeb2744ab5db3fc3318f613229a" sprite="Dark Dragon (Small)" width="72" height="48" frame="Idle 2" direction="NNE" />
-    <item hash="5feb58feb577d91218a445fb3b629fab" sprite="Dark Dragon (Small)" width="72" height="48" frame="Idle 3" direction="SSE" />
-    <item hash="b74b710f01369bca48c9b3584fe1f1f9" sprite="Dark Dragon (Small)" width="72" height="48" frame="Idle 3" direction="ESE" />
-    <item hash="5cf8c1ad1033cc7b2389415da5f9b91a" sprite="Dark Dragon (Small)" width="72" height="48" frame="Idle 3" direction="ENE" />
-    <item hash="f0977f23b7511f25fd7a985ab32bdeaf" sprite="Dark Dragon (Small)" width="72" height="48" frame="Idle 3" direction="NNE" />
-    <item hash="245b15689bc021452147636e891da6f3" sprite="Dark Dragon (Small)" width="72" height="48" frame="Idle 4" direction="SSE" />
-    <item hash="cfec5256e029fd15855ef48cbeddc35b" sprite="Dark Dragon (Small)" width="72" height="48" frame="Idle 4" direction="ESE" />
-    <item hash="fa96879ee03860287a823d3c08077751" sprite="Dark Dragon (Small)" width="72" height="48" frame="Idle 4" direction="ENE" />
-    <item hash="ff7572f03010f179c569b56bd82a62b9" sprite="Dark Dragon (Small)" width="72" height="48" frame="Idle 4" direction="NNE" />
+    <item hash="02476c7f936277dc4ba83a76c784c8bf" sprite="Dark Dragon (Head High)" width="72" height="48" frame="Idle 1" direction="SSE" />
+    <item hash="362b328414957f34b804a9e17246bc31" sprite="Dark Dragon (Head High)" width="72" height="48" frame="Idle 1" direction="ESE" />
+    <item hash="f9bef83b0049f201dcf0b395dee0eae6" sprite="Dark Dragon (Head High)" width="72" height="48" frame="Idle 1" direction="ENE" />
+    <item hash="4425e41beb045701fb39ef6c11738f4e" sprite="Dark Dragon (Head High)" width="72" height="48" frame="Idle 1" direction="NNE" />
+    <item hash="15118ab3e41bba579e372b02035868b3" sprite="Dark Dragon (Head High)" width="72" height="48" frame="Idle 2" direction="SSE" />
+    <item hash="3a33088595550dc9059fb6dbb51bdf22" sprite="Dark Dragon (Head High)" width="72" height="48" frame="Idle 2" direction="ESE" />
+    <item hash="0812800e4efbab411ac4fea7cbf04100" sprite="Dark Dragon (Head High)" width="72" height="48" frame="Idle 2" direction="ENE" />
+    <item hash="8b04ffeb2744ab5db3fc3318f613229a" sprite="Dark Dragon (Head High)" width="72" height="48" frame="Idle 2" direction="NNE" />
+    <item hash="5feb58feb577d91218a445fb3b629fab" sprite="Dark Dragon (Head High)" width="72" height="48" frame="Idle 3" direction="SSE" />
+    <item hash="b74b710f01369bca48c9b3584fe1f1f9" sprite="Dark Dragon (Head High)" width="72" height="48" frame="Idle 3" direction="ESE" />
+    <item hash="5cf8c1ad1033cc7b2389415da5f9b91a" sprite="Dark Dragon (Head High)" width="72" height="48" frame="Idle 3" direction="ENE" />
+    <item hash="f0977f23b7511f25fd7a985ab32bdeaf" sprite="Dark Dragon (Head High)" width="72" height="48" frame="Idle 3" direction="NNE" />
+    <item hash="245b15689bc021452147636e891da6f3" sprite="Dark Dragon (Head High)" width="72" height="48" frame="Idle 4" direction="SSE" />
+    <item hash="cfec5256e029fd15855ef48cbeddc35b" sprite="Dark Dragon (Head High)" width="72" height="48" frame="Idle 4" direction="ESE" />
+    <item hash="fa96879ee03860287a823d3c08077751" sprite="Dark Dragon (Head High)" width="72" height="48" frame="Idle 4" direction="ENE" />
+    <item hash="ff7572f03010f179c569b56bd82a62b9" sprite="Dark Dragon (Head High)" width="72" height="48" frame="Idle 4" direction="NNE" />
+    <item hash="67ebcab6ca8ec36c141991b56973e081" sprite="Dark Dragon (Head Low)" width="80" height="48" frame="Idle 1" direction="SSE" />
+    <item hash="2bcfa6ff40b13e9ef9c1341d9f4a1ad6" sprite="Dark Dragon (Head Low)" width="80" height="48" frame="Idle 1" direction="ESE" />
+    <item hash="58bf16ab2bf3cbe8d49ec1a0020fe349" sprite="Dark Dragon (Head Low)" width="80" height="48" frame="Idle 1" direction="ENE" />
+    <item hash="87f942ac857fdc78b3467445c3b84360" sprite="Dark Dragon (Head Low)" width="80" height="48" frame="Idle 1" direction="NNE" />
+    <item hash="d3797e2ca93f8d85d092c8672fe84b09" sprite="Dark Dragon (Head Low)" width="80" height="48" frame="Idle 2" direction="SSE" />
+    <item hash="bab945551f1f79b3c30aeac46216c8ac" sprite="Dark Dragon (Head Low)" width="80" height="48" frame="Idle 2" direction="ESE" />
+    <item hash="09a55b6106d26b1726d334f61d75d5e0" sprite="Dark Dragon (Head Low)" width="80" height="48" frame="Idle 2" direction="ENE" />
+    <item hash="1ebb66410435685bb8372e3e37980e69" sprite="Dark Dragon (Head Low)" width="80" height="48" frame="Idle 2" direction="NNE" />
+    <item hash="42f928d73f6bace68a2894343615ad43" sprite="Dark Dragon (Head Low)" width="80" height="48" frame="Idle 3" direction="SSE" />
+    <item hash="563943f53a7ec2a268c281ee654a5b37" sprite="Dark Dragon (Head Low)" width="80" height="48" frame="Idle 3" direction="ESE" />
+    <item hash="f20c3aa53020424a71b88805cf4a4735" sprite="Dark Dragon (Head Low)" width="80" height="48" frame="Idle 3" direction="ENE" />
+    <item hash="ec66312f2a2edb5de0662c9a95c26350" sprite="Dark Dragon (Head Low)" width="80" height="48" frame="Idle 3" direction="NNE" />
+    <item hash="b82750d292ef95704886189c5001696b" sprite="Dark Dragon (Head Low)" width="80" height="48" frame="Idle 4" direction="SSE" />
+    <item hash="ed7b6c4583d84ac601e8fac4b8311aad" sprite="Dark Dragon (Head Low)" width="80" height="48" frame="Idle 4" direction="ESE" />
+    <item hash="04a204393f5bfa2617b8a3c15519d19f" sprite="Dark Dragon (Head Low)" width="80" height="48" frame="Idle 4" direction="ENE" />
+    <item hash="c5aa056ea033fd2968340bd63ad9e751" sprite="Dark Dragon (Head Low)" width="80" height="48" frame="Idle 4" direction="NNE" />
+    <item hash="a0321ef7266574b2bb14f5aaf66186ed" sprite="Dark Dragon (Head Low)" width="80" height="48" frame="Idle32" direction="SSE" />
+    <item hash="571ec1e8d9e4b8241a4516bb9b391d4a" sprite="Dark Dragon (Head Low)" width="80" height="48" frame="Idle32" direction="ESE" />
+    <item hash="f81f561a0aa76c53cae17f96d0c8980d" sprite="Dark Dragon (Head Low)" width="80" height="48" frame="Idle32" direction="ENE" />
+    <item hash="ed7709b008b46c6edeafd461859d6dbb" sprite="Dark Dragon (Head Low)" width="80" height="48" frame="Idle32" direction="NNE" />
+    <item hash="3cbea8c46bee7b35a37d6b4e4f118672" sprite="Dark Dragon (Head Low)" width="80" height="48" frame="Idle33" direction="SSE" />
+    <item hash="e228f5ba93f8ad434c45bafe55a928be" sprite="Dark Dragon (Head Low)" width="80" height="48" frame="Idle33" direction="ESE" />
+    <item hash="77e5a63972c7cc6dc875f423abc68c1b" sprite="Dark Dragon (Head Low)" width="80" height="48" frame="Idle33" direction="ENE" />
+    <item hash="befb3db071e56dda1d46774ec40d443d" sprite="Dark Dragon (Head Low)" width="80" height="48" frame="Idle33" direction="NNE" />
     <item hash="871c3ec0f1e725a9c78c511b597a9f51" sprite="Dark Gunner" width="48" height="32" frame="Idle 1" direction="SSE" />
     <item hash="fb91f411e9b0c2a7004c20515da9c927" sprite="Dark Gunner" width="48" height="32" frame="Idle 1" direction="ESE" />
     <item hash="24ed1939d8636f0ea2907db7a8b99289" sprite="Dark Gunner" width="48" height="32" frame="Idle 1" direction="ENE" />
@@ -4749,18 +4749,6 @@
     <item hash="bda9a0ee0c4d001fb4ecf9e446375fc1" sprite="David (P1) (With Weight)" width="40" height="40" frame="LiftingWeight 3" direction="ESE" />
     <item hash="5abd12186f7b55bdbbf2078e0b58302f" sprite="David (P1) (With Weight)" width="40" height="40" frame="LiftingWeight 3" direction="ENE" />
     <item hash="4eaa3c8ae7c632a62b4260ac363d3960" sprite="David (P1) (With Weight)" width="40" height="40" frame="LiftingWeight 3" direction="NNE" />
-    <item hash="580adfdbb864c3d46e054a2c872a90af" sprite="David (P2)" width="40" height="40" frame="Idle (Posing Buff) 1" direction="SSE" />
-    <item hash="f133b4cc947fee1311c1d122a29e13a6" sprite="David (P2)" width="40" height="40" frame="Idle (Posing Buff) 1" direction="ESE" />
-    <item hash="32d70734458e8ffee5558250d844280e" sprite="David (P2)" width="40" height="40" frame="Idle (Posing Buff) 1" direction="ENE" />
-    <item hash="78f57f30b2df6b6ee5cb4e9525e01a9c" sprite="David (P2)" width="40" height="40" frame="Idle (Posing Buff) 1" direction="NNE" />
-    <item hash="0dd3e547962dc0c1524e2122b691b95b" sprite="David (P2)" width="40" height="40" frame="Idle (Posing Buff) 2" direction="SSE" />
-    <item hash="ea503e2c7f1ef31d78e6283dc0bf6d43" sprite="David (P2)" width="40" height="40" frame="Idle (Posing Buff) 2" direction="ESE" />
-    <item hash="6a4662683217b126f66cce07be9340ae" sprite="David (P2)" width="40" height="40" frame="Idle (Posing Buff) 2" direction="ENE" />
-    <item hash="af31f20f53dba36922b90dd863575ef2" sprite="David (P2)" width="40" height="40" frame="Idle (Posing Buff) 2" direction="NNE" />
-    <item hash="ce50baab52b752d5f5ae3b81464b0f36" sprite="David (P2)" width="40" height="40" frame="Idle (Posing Buff) 3" direction="SSE" />
-    <item hash="15d73d09d33434af5e28966aafe09ad8" sprite="David (P2)" width="40" height="40" frame="Idle (Posing Buff) 3" direction="ESE" />
-    <item hash="3cf6056c39ee7c88197f9868134bfa33" sprite="David (P2)" width="40" height="40" frame="Idle (Posing Buff) 3" direction="ENE" />
-    <item hash="ac382c82248af27248e173dbfbb8c526" sprite="David (P2)" width="40" height="40" frame="Idle (Posing Buff) 3" direction="NNE" />
     <item hash="6cb6328028cf2af221fe6272aab167ef" sprite="David (P2)" width="40" height="40" frame="Idle 1" direction="S" />
     <item hash="633d546d16399cfeea7d36abac6a05c8" sprite="David (P2)" width="40" height="40" frame="Idle 1" direction="SSE" />
     <item hash="69fff629cb710fdf432dbb625b17da03" sprite="David (P2)" width="40" height="40" frame="Idle 1" direction="SSE" />
@@ -4833,6 +4821,18 @@
     <item hash="a44e66627d5f8eddfebeb92c7bfe072a" sprite="David (P2)" width="40" height="40" frame="Walking 6" direction="ENE" />
     <item hash="bd24b01179da496083f06ddbb96fe363" sprite="David (P2)" width="40" height="40" frame="Walking 6" direction="NNE" />
     <item hash="101b095099f6a3b61ab821859865c323" sprite="David (P2)" width="40" height="40" frame="Walking 6" direction="N" />
+    <item hash="580adfdbb864c3d46e054a2c872a90af" sprite="David (P2) (Speedo)" width="40" height="40" frame="Idle (Posing Buff) 1" direction="SSE" />
+    <item hash="f133b4cc947fee1311c1d122a29e13a6" sprite="David (P2) (Speedo)" width="40" height="40" frame="Idle (Posing Buff) 1" direction="ESE" />
+    <item hash="32d70734458e8ffee5558250d844280e" sprite="David (P2) (Speedo)" width="40" height="40" frame="Idle (Posing Buff) 1" direction="ENE" />
+    <item hash="78f57f30b2df6b6ee5cb4e9525e01a9c" sprite="David (P2) (Speedo)" width="40" height="40" frame="Idle (Posing Buff) 1" direction="NNE" />
+    <item hash="0dd3e547962dc0c1524e2122b691b95b" sprite="David (P2) (Speedo)" width="40" height="40" frame="Idle (Posing Buff) 2" direction="SSE" />
+    <item hash="ea503e2c7f1ef31d78e6283dc0bf6d43" sprite="David (P2) (Speedo)" width="40" height="40" frame="Idle (Posing Buff) 2" direction="ESE" />
+    <item hash="6a4662683217b126f66cce07be9340ae" sprite="David (P2) (Speedo)" width="40" height="40" frame="Idle (Posing Buff) 2" direction="ENE" />
+    <item hash="af31f20f53dba36922b90dd863575ef2" sprite="David (P2) (Speedo)" width="40" height="40" frame="Idle (Posing Buff) 2" direction="NNE" />
+    <item hash="ce50baab52b752d5f5ae3b81464b0f36" sprite="David (P2) (Speedo)" width="40" height="40" frame="Idle (Posing Buff) 3" direction="SSE" />
+    <item hash="15d73d09d33434af5e28966aafe09ad8" sprite="David (P2) (Speedo)" width="40" height="40" frame="Idle (Posing Buff) 3" direction="ESE" />
+    <item hash="3cf6056c39ee7c88197f9868134bfa33" sprite="David (P2) (Speedo)" width="40" height="40" frame="Idle (Posing Buff) 3" direction="ENE" />
+    <item hash="ac382c82248af27248e173dbfbb8c526" sprite="David (P2) (Speedo)" width="40" height="40" frame="Idle (Posing Buff) 3" direction="NNE" />
     <item hash="6f1a6d02ca63aa054a2930eaeb9b89fa" sprite="David (U)" width="40" height="40" frame="GivingThumbsUp (ENE) 1" direction="ENE" />
     <item hash="edb7f82c99bcba8af7435df5352099d9" sprite="David (U)" width="40" height="40" frame="GivingThumbsUp (ENE) 2" direction="ENE" />
     <item hash="2e3306ad2ce039462f8f66facd910b0d" sprite="David (U)" width="40" height="40" frame="GivingThumbsUp (ENE) 3" direction="ENE" />
@@ -5751,26 +5751,26 @@
     <item hash="14ea1e852e9370fb34c5e3d4c4476f1c" sprite="Dwarf" width="40" height="40" frame="Walking 6" direction="ESE" />
     <item hash="c274ab4e2242513ada091fb30b9f61a0" sprite="Dwarf" width="40" height="40" frame="Walking 6" direction="ENE" />
     <item hash="6daa39f21ae1fafb29985e990c61778e" sprite="Dwarf" width="40" height="40" frame="Walking 6" direction="NNE" />
-    <item hash="616359e0573cdc8480af8b7e3ec7dddf" sprite="Dwarf Man w/ White Beard / Duncan" width="40" height="40" frame="Idle (NESW) (Similar to Walking) 1" direction="SSE" />
-    <item hash="6a1458d48a2458d5509a15b0de05683a" sprite="Dwarf Man w/ White Beard / Duncan" width="40" height="40" frame="Idle (NESW) (Similar to Walking) 1" direction="ESE" />
-    <item hash="0da4c8aafb5fc94f168f33c3b5b040b8" sprite="Dwarf Man w/ White Beard / Duncan" width="40" height="40" frame="Idle (NESW) (Similar to Walking) 1" direction="ENE" />
-    <item hash="9e891719215f39e5093903daf8592ece" sprite="Dwarf Man w/ White Beard / Duncan" width="40" height="40" frame="Idle (NESW) (Similar to Walking) 1" direction="NNE" />
-    <item hash="5b999f0cc9ec5d46f7d308bb280dc6f5" sprite="Dwarf Man w/ White Beard / Duncan" width="40" height="40" frame="Idle (NESW) (Similar to Walking) 2" direction="SSE" />
-    <item hash="b173a176b8dac3096e7bd28357a809ee" sprite="Dwarf Man w/ White Beard / Duncan" width="40" height="40" frame="Idle (NESW) (Similar to Walking) 2" direction="ESE" />
-    <item hash="61ce39030bfa2ea1ab2c0f6cc0f083e5" sprite="Dwarf Man w/ White Beard / Duncan" width="40" height="40" frame="Idle (NESW) (Similar to Walking) 2" direction="ENE" />
-    <item hash="ad457dafa52679fde8fe7ba55a3443f2" sprite="Dwarf Man w/ White Beard / Duncan" width="40" height="40" frame="Idle (NESW) (Similar to Walking) 2" direction="NNE" />
-    <item hash="05acb78ae5a01b87cac61b731111adcc" sprite="Dwarf Man w/ White Beard / Duncan" width="40" height="40" frame="Idle (NESW) (Similar to Walking) 3" direction="SSE" />
-    <item hash="b8a110a70a8d2b371b718d9138958d4f" sprite="Dwarf Man w/ White Beard / Duncan" width="40" height="40" frame="Idle (NESW) (Similar to Walking) 3" direction="ESE" />
-    <item hash="61e5a371419b66f870b70fc98e931359" sprite="Dwarf Man w/ White Beard / Duncan" width="40" height="40" frame="Idle (NESW) (Similar to Walking) 3" direction="ENE" />
-    <item hash="c7dfcdfa9e92f91b3f61aa95daf72cf6" sprite="Dwarf Man w/ White Beard / Duncan" width="40" height="40" frame="Idle (NESW) (Similar to Walking) 3" direction="NNE" />
-    <item hash="e0efee85a23b9ccd33baebd98cf29183" sprite="Dwarf Man w/ White Beard / Duncan" width="40" height="40" frame="Idle (NESW) (Similar to Walking) 4" direction="SSE" />
-    <item hash="35fad0352df5551ba41cff402e0706ee" sprite="Dwarf Man w/ White Beard / Duncan" width="40" height="40" frame="Idle (NESW) (Similar to Walking) 4" direction="ESE" />
-    <item hash="4d444249edda3526b715d776abe6408c" sprite="Dwarf Man w/ White Beard / Duncan" width="40" height="40" frame="Idle (NESW) (Similar to Walking) 4" direction="ENE" />
-    <item hash="f237dd2eb5e1feb28a1ddd1a18091c4c" sprite="Dwarf Man w/ White Beard / Duncan" width="40" height="40" frame="Idle (NESW) (Similar to Walking) 4" direction="NNE" />
-    <item hash="0ff101d5707275648d64df065731da21" sprite="Dwarf Man w/ White Beard / Duncan" width="40" height="40" frame="Idle (NESW) (Similar to Walking) 6" direction="SSE" />
-    <item hash="f25e600f843fe5867fcb82b2416b36c1" sprite="Dwarf Man w/ White Beard / Duncan" width="40" height="40" frame="Idle (NESW) (Similar to Walking) 6" direction="ESE" />
-    <item hash="f6c4a659a2d18e8e6484224989ec0564" sprite="Dwarf Man w/ White Beard / Duncan" width="40" height="40" frame="Idle (NESW) (Similar to Walking) 6" direction="ENE" />
-    <item hash="bfabb61f0ad50a91b1ec7e85dcc03a4f" sprite="Dwarf Man w/ White Beard / Duncan" width="40" height="40" frame="Idle (NESW) (Similar to Walking) 6" direction="NNE" />
+    <item hash="616359e0573cdc8480af8b7e3ec7dddf" sprite="Dwarf Man w/ White Beard / Duncan" width="40" height="40" frame="Idle (NESW) (Similar to Walking) 1" direction="S" />
+    <item hash="6a1458d48a2458d5509a15b0de05683a" sprite="Dwarf Man w/ White Beard / Duncan" width="40" height="40" frame="Idle (NESW) (Similar to Walking) 1" direction="SE" />
+    <item hash="0da4c8aafb5fc94f168f33c3b5b040b8" sprite="Dwarf Man w/ White Beard / Duncan" width="40" height="40" frame="Idle (NESW) (Similar to Walking) 1" direction="E" />
+    <item hash="9e891719215f39e5093903daf8592ece" sprite="Dwarf Man w/ White Beard / Duncan" width="40" height="40" frame="Idle (NESW) (Similar to Walking) 1" direction="NE" />
+    <item hash="5b999f0cc9ec5d46f7d308bb280dc6f5" sprite="Dwarf Man w/ White Beard / Duncan" width="40" height="40" frame="Idle (NESW) (Similar to Walking) 2" direction="S" />
+    <item hash="b173a176b8dac3096e7bd28357a809ee" sprite="Dwarf Man w/ White Beard / Duncan" width="40" height="40" frame="Idle (NESW) (Similar to Walking) 2" direction="SE" />
+    <item hash="61ce39030bfa2ea1ab2c0f6cc0f083e5" sprite="Dwarf Man w/ White Beard / Duncan" width="40" height="40" frame="Idle (NESW) (Similar to Walking) 2" direction="E" />
+    <item hash="ad457dafa52679fde8fe7ba55a3443f2" sprite="Dwarf Man w/ White Beard / Duncan" width="40" height="40" frame="Idle (NESW) (Similar to Walking) 2" direction="NE" />
+    <item hash="05acb78ae5a01b87cac61b731111adcc" sprite="Dwarf Man w/ White Beard / Duncan" width="40" height="40" frame="Idle (NESW) (Similar to Walking) 3" direction="S" />
+    <item hash="b8a110a70a8d2b371b718d9138958d4f" sprite="Dwarf Man w/ White Beard / Duncan" width="40" height="40" frame="Idle (NESW) (Similar to Walking) 3" direction="SE" />
+    <item hash="61e5a371419b66f870b70fc98e931359" sprite="Dwarf Man w/ White Beard / Duncan" width="40" height="40" frame="Idle (NESW) (Similar to Walking) 3" direction="E" />
+    <item hash="c7dfcdfa9e92f91b3f61aa95daf72cf6" sprite="Dwarf Man w/ White Beard / Duncan" width="40" height="40" frame="Idle (NESW) (Similar to Walking) 3" direction="NE" />
+    <item hash="e0efee85a23b9ccd33baebd98cf29183" sprite="Dwarf Man w/ White Beard / Duncan" width="40" height="40" frame="Idle (NESW) (Similar to Walking) 4" direction="S" />
+    <item hash="35fad0352df5551ba41cff402e0706ee" sprite="Dwarf Man w/ White Beard / Duncan" width="40" height="40" frame="Idle (NESW) (Similar to Walking) 4" direction="SE" />
+    <item hash="4d444249edda3526b715d776abe6408c" sprite="Dwarf Man w/ White Beard / Duncan" width="40" height="40" frame="Idle (NESW) (Similar to Walking) 4" direction="E" />
+    <item hash="f237dd2eb5e1feb28a1ddd1a18091c4c" sprite="Dwarf Man w/ White Beard / Duncan" width="40" height="40" frame="Idle (NESW) (Similar to Walking) 4" direction="NE" />
+    <item hash="0ff101d5707275648d64df065731da21" sprite="Dwarf Man w/ White Beard / Duncan" width="40" height="40" frame="Idle (NESW) (Similar to Walking) 6" direction="S" />
+    <item hash="f25e600f843fe5867fcb82b2416b36c1" sprite="Dwarf Man w/ White Beard / Duncan" width="40" height="40" frame="Idle (NESW) (Similar to Walking) 6" direction="SE" />
+    <item hash="f6c4a659a2d18e8e6484224989ec0564" sprite="Dwarf Man w/ White Beard / Duncan" width="40" height="40" frame="Idle (NESW) (Similar to Walking) 6" direction="E" />
+    <item hash="bfabb61f0ad50a91b1ec7e85dcc03a4f" sprite="Dwarf Man w/ White Beard / Duncan" width="40" height="40" frame="Idle (NESW) (Similar to Walking) 6" direction="NE" />
     <item hash="aa30a354e51ed8c47ffefb6b177931f5" sprite="Dwarf Man w/ White Beard / Duncan" width="40" height="40" frame="Nodding 2" direction="SSE" />
     <item hash="a796150817a5b44b77d735f9defc55d8" sprite="Dwarf Man w/ White Beard / Duncan" width="40" height="40" frame="Nodding 2" direction="ESE" />
     <item hash="6f07f2db714330e95bf1709bdd06aba6" sprite="Dwarf Man w/ White Beard / Duncan" width="40" height="40" frame="Nodding 2" direction="ENE" />
