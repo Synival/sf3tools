@@ -188,11 +188,11 @@
     <item hash="ba781d9eac5babbd448d8db7addbbf5a" sprite="Bear w/ Fish" animation="StillFrame" width="48" height="32" directions="4" frames="2" duration="10" />
     <item hash="0b256e1da09bf24abb1c49793afe7f90" sprite="Bear w/ Fish" animation="Walking" width="48" height="32" directions="4" frames="7" duration="30" />
     <item hash="3dc9ea41d4405340a9bd22014f6607b8" sprite="Benetram" animation="Broken" width="40" height="40" directions="4" frames="7" duration="20" missingFrames="2" />
+    <item hash="4684fb793717fb52c82ee7a84bc3d5b0" sprite="Benetram" animation="Idle" width="40" height="40" directions="4" frames="5" duration="20" />
     <item hash="5b8c90cfa72aed87119be66bd8b4574d" sprite="Benetram" animation="Idle (2 Frames, Faster)" width="40" height="40" directions="4" frames="5" duration="20" />
     <item hash="a01f632ac7e5f08a559692a9feb58754" sprite="Benetram" animation="Idle (2 Frames, Slower)" width="40" height="40" directions="4" frames="5" duration="24" />
     <item hash="b51c5339a562e38d175c07eb7216ab94" sprite="Benetram" animation="Idle (2 Frames)" width="40" height="40" directions="1" frames="4" duration="20" />
-    <item hash="4684fb793717fb52c82ee7a84bc3d5b0" sprite="Benetram" animation="Idle (Render 1)" width="40" height="40" directions="4" frames="5" duration="20" />
-    <item hash="f7873b9ba175bac424aec2b7a51154c0" sprite="Benetram" animation="Idle (Render 2)" width="40" height="40" directions="4" frames="5" duration="20" />
+    <item hash="f7873b9ba175bac424aec2b7a51154c0" sprite="Benetram" animation="Idle (Imposter?)" width="40" height="40" directions="4" frames="5" duration="20" />
     <item hash="d7ea55f7e4db775382639143bab87170" sprite="Benetram" animation="Idle (Should be Nodding)" width="40" height="40" directions="1" frames="3" duration="5" />
     <item hash="8fb611a6660b545211f6119412992a1e" sprite="Benetram" animation="Nodding" width="40" height="40" directions="4" frames="5" duration="20" />
     <item hash="643d2d1e3058cf423d93b774b8ba1947" sprite="Benetram" animation="Nodding (Reduced, Double, First Frame Cape High)" width="40" height="40" directions="4" frames="5" duration="20" />
@@ -3355,11 +3355,11 @@
     <item hash="bbd3cb761a328c03f91c3f13b6d66c57" sprite="Saraband Guard" animation="StillFrame" width="40" height="40" directions="4" frames="2" duration="10" />
     <item hash="42b45c478e23f43f314fead6bc4962a8" sprite="Saraband Guard" animation="Walking" width="40" height="40" directions="4" frames="7" duration="24" />
     <item hash="a94408ac2b91fc826d153c3c9a4b89bc" sprite="Saraband Guard" animation="Walking" width="40" height="40" directions="4" frames="7" duration="30" />
-    <item hash="b74a0647b7282da805c1ee699146d400" sprite="Saraband Guard" animation="StillFrame1" width="48" height="40" directions="1" frames="2" duration="10" />
+    <item hash="b74a0647b7282da805c1ee699146d400" sprite="Saraband Guard" animation="StillFrame" width="48" height="40" directions="1" frames="2" duration="10" />
+    <item hash="3ccfce44781ce2dd24a4274c23754ef6" sprite="Saraband Guard" animation="StillFrame (Repeat 1)" width="48" height="40" directions="1" frames="2" duration="4" />
+    <item hash="5d729775584204da133c0bfc9564e15b" sprite="Saraband Guard" animation="StillFrame (Repeat 2)" width="48" height="40" directions="1" frames="2" duration="5" />
     <item hash="852742d7fa67f11595ea38368c9b260e" sprite="Saraband Guard" animation="StillFrame1" width="48" height="40" directions="4" frames="2" duration="10" />
-    <item hash="3ccfce44781ce2dd24a4274c23754ef6" sprite="Saraband Guard" animation="StillFrame2" width="48" height="40" directions="1" frames="2" duration="4" />
     <item hash="e3e8c3e07c56f63a88f1a45be05c45eb" sprite="Saraband Guard" animation="StillFrame2" width="48" height="40" directions="4" frames="2" duration="4" />
-    <item hash="5d729775584204da133c0bfc9564e15b" sprite="Saraband Guard" animation="StillFrame3" width="48" height="40" directions="1" frames="2" duration="5" />
     <item hash="c6b27a29c24de733b935a2fd06b8611f" sprite="Saraband Guard" animation="StillFrame3" width="48" height="40" directions="4" frames="2" duration="5" />
     <item hash="de82548f193160a2f98693c32bd94cd7" sprite="Saraband Guard (In Chair)" animation="Sitting/Panting (Fast)" width="40" height="40" directions="4" frames="5" duration="16" />
     <item hash="272a01ea6f25c52a5f5648576d5489cf" sprite="Saraband Guard (In Chair)" animation="Sitting/Panting (Slow)" width="40" height="40" directions="4" frames="5" duration="20" />
