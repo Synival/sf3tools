@@ -166,6 +166,19 @@ namespace SF3.Models.Structs.CHR {
         [TableViewModelColumn(displayOrder: 2.25f, displayName: "Frames+Commands")]
         public int FrameCommandCount => AnimationFrames.Count();
 
+        [TableViewModelColumn(displayOrder: 2.3f, displayName: "Image Frames")]
+        public int ImageFrameCount => AnimationFrames.Count(x => x.HasTexture);
+
+        [TableViewModelColumn(displayOrder: 2.4f)]
+        public string FinalFrame {
+            get {
+                var lastFrame = AnimationFrames.LastOrDefault();
+                if (lastFrame == null)
+                    return null;
+                return $"{lastFrame.FrameID:X2},{lastFrame.Duration:X2}";
+            }
+        }
+
         [TableViewModelColumn(displayOrder: 2.5f)]
         public int Duration => AnimationFrames.Sum(x => x.HasTexture ? x.Duration : 0);
 
