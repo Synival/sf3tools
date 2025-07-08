@@ -1,12 +1,11 @@
 using System;
 using SF3.ByteData;
 using SF3.Models.Structs.CHR;
-using SF3.Types;
 
 namespace SF3.Models.Tables.CHR {
     public class FrameTable : TerminatedTable<Frame> {
         protected FrameTable(IByteData data, string name, int address, uint dataOffset, int width, int height, string rowPrefix, int spriteIndex, int spriteId, int spriteDirections)
-        : base(data, name, address, 0x04, 0xF0) {
+        : base(data, name, address, 0x04, 0xF1) {
             DataOffset       = dataOffset;
             Width            = width;
             Height           = height;
