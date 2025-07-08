@@ -195,7 +195,7 @@ namespace CHR_Analyzer {
                     var spriteName = $"{spriteDef.Name} ({variantDef.Width}x{variantDef.Height})";
 
                     var frames = spriteDef.Frames
-                        .Where(x => x.Width == variantDef.Width && x.Height == variantDef.Height)
+                        .Where(x => x.Width == variantDef.Width && x.Height == variantDef.Height && s_framesByHash.ContainsKey(x.Hash))
                         .Select(x => new { SpriteDefFrame = x, s_framesByHash[x.Hash].Texture, s_framesByHash[x.Hash].FrameInfo })
                         .OrderBy(x => x.FrameInfo.Width)
                         .ThenBy(x => x.FrameInfo.Height)
@@ -207,8 +207,12 @@ namespace CHR_Analyzer {
                     if (frames.Length == 0)
                         continue;
 
-                    var frameDirections = frames.Select(x => x.FrameInfo.Direction).Distinct().ToHashSet();
+                    var frameDirections = frames.Select(x => x.FrameInfo.Direction)
+                        .Distinct()
+                        .ToHashSet();
+
                     var frameDirectionToIndex = frameDirections
+                        .OrderBy(x => x)
                         .Select((x, i) => new { Direction = x, Index = i })
                         .OrderBy(x => x.Direction)
                         .ToDictionary(x => x.Direction, x => x.Index);

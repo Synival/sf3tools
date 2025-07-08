@@ -180,7 +180,7 @@ namespace SF3.Utils {
                 .Select(x => {
                     var frameNames = FixedFrameNames(x.Key);
                     var frames = s_uniqueFramesByHash
-                        .Where(y => frameNames.Contains(y.Value.SpriteName))
+                        .Where(y => y.Value.TextureHash != null && frameNames.Contains(y.Value.SpriteName))
                         .Select(y => new FrameDef(y.Value))
                         .OrderBy(y => y.Width)
                         .OrderBy(y => y.Height)

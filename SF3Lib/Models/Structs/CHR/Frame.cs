@@ -41,8 +41,8 @@ namespace SF3.Models.Structs.CHR {
                     Texture = new TextureABGR1555(0, 0, 0, texData.To1DArrayTransposed().To2DArrayColumnMajor(48, 40));
 
                 FrameInfo = CHR_Utils.GetUniqueFrameInfoByHash(hash);
-                FrameInfo.Width = width;
-                FrameInfo.Height = height;
+                FrameInfo.Width  = Texture.Width;
+                FrameInfo.Height = Texture.Height;
             }
         }
 
@@ -74,10 +74,10 @@ namespace SF3.Models.Structs.CHR {
         }
 
         [TableViewModelColumn(displayOrder: -0.2f)]
-        public int Width { get; }
+        public int Width { get; private set; }
 
         [TableViewModelColumn(displayOrder: -0.1f)]
-        public int Height { get; }
+        public int Height { get; private set; }
 
         [TableViewModelColumn(displayOrder: 0, minWidth: 200)]
         public string FrameName {
@@ -133,20 +133,27 @@ namespace SF3.Models.Structs.CHR {
                 if (decompressedData.Length != Width * Height) {
                     ErrorWhileDecompressing = $"decompressedData.Length ({decompressedData.Length}) != {Width * Height} ({Width}x{Height})";
 
+                    // Perform width/height corrections to this frame.
                     if (decompressedData.Length % Width == 0)
-                        return decompressedData.To2DArrayColumnMajor(Width, decompressedData.Length / Width);
-                    if (decompressedData.Length % Height == 0)
-                        return decompressedData.To2DArrayColumnMajor(decompressedData.Length / Height, Height);
-
-                    var lengthRoot2 = Math.Sqrt(decompressedData.Length);
-                    if (lengthRoot2 == (int) lengthRoot2)
-                        return decompressedData.To2DArrayColumnMajor((int) lengthRoot2, (int) lengthRoot2);
-
-                    return decompressedData.To2DArrayColumnMajor(1, decompressedData.Length);
+                        Height = decompressedData.Length / Width;
+                    else if (decompressedData.Length % Height == 0)
+                        Width = decompressedData.Length / Height;
+                    else {
+                        var lengthRoot2 = Math.Sqrt(decompressedData.Length);
+                        if (lengthRoot2 == (int) lengthRoot2) {
+                            Width = (int) lengthRoot2;
+                            Height = (int) lengthRoot2;
+                        }
+                        else {
+                            Width = 1;
+                            Height = decompressedData.Length;
+                        }
+                    }
                 }
-
                 // No errors -- decompress normally.
-                ErrorWhileDecompressing = null;
+                else
+                    ErrorWhileDecompressing = null;
+
                 return decompressedData.To2DArrayColumnMajor(Width, Height);
             }
             catch {
