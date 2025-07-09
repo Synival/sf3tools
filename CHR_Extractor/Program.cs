@@ -350,10 +350,10 @@ namespace CHR_Analyzer {
                     .ToArray();
                 spriteDef.Variants = validVariants;
 
-                // Filter out animations that have missing frames.
+                // Filter out animations that have missing frames or no frames at all.
                 foreach (var variant in spriteDef.Variants) {
                     var validAnimations = variant.Animations
-                        .Where(x => x.AnimationFrames
+                        .Where(x => x.AnimationFrames.Length > 0 && x.AnimationFrames
                             .All(y => y.FrameHashes == null || y.FrameHashes.All(z => z == null || framesFoundHashSet.Contains(z)))
                         )
                         .ToArray();
