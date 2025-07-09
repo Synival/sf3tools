@@ -126,11 +126,23 @@ namespace CHR_Builder {
 
             var framesByHash = spriteDef.Frames.ToDictionary(x => x.Hash, x => x);
 
+            var uniqueAnimationFramesByVariant = spriteDef
+                .Variants
+                .Select(x => (Variant: x, UniqueAnimationFrames: x.Animations
+                    .SelectMany(y => y.AnimationFrames)
+                    .Where(y => y != null && y.FrameHashes != null)
+                    .GroupBy(y => y.FrameHashes.Aggregate((a, b) => a + ((b == null) ? "_" : b)))
+                    .Select(y => y.First())
+                    .ToHashSet()
+                ))
+                .ToDictionary(x => x.Variant, x => x.UniqueAnimationFrames);
+
             var frameInfos = spriteDef.Variants
                 .SelectMany((x, xi) => (x.Animations ?? [])
                     .SelectMany((y, yi) => (y.AnimationFrames ?? [])
+                        .Where(z => uniqueAnimationFramesByVariant[x].Contains(z))
                         .SelectMany((z, zi) => (z.FrameHashes ?? [])
-                            .Where(x => x != null)
+                            .Where(zz => zz != null)
                             .Select((zz, zzi) => new CompressedFrameDataInfo(variantIndex: xi, animationIndex: yi, animationFrameIndex: zi, animationFrameSubIndex: zzi, hash: zz)))
                         )
                     )
@@ -224,21 +236,21 @@ namespace CHR_Builder {
             fileOut.Write(new byte[0x16]);
         }
 
+        private static int GetFrameIdForHashes(CompressedFrameDataInfo[] frames, string[] hashes) {
+            bool PositionHasHashes(int pos, int index) {
+                return (index == hashes.Length) || (pos < frames.Length && frames[pos].Hash == hashes[index] && PositionHasHashes(pos + 1, index + 1));
+            }
+            for (int i = 0; i < frames.Length; i++)
+                if (PositionHasHashes(i, 0))
+                    return i;
+            return -1;
+        }
+
         private static void WriteSpriteAnimationTables(FileStream fileOut, SpriteDef spriteDef, CompressedFrameData compressedFrameData, int[] animationTableOffsetAddrs) {
             var frameInfosByVariant = compressedFrameData.Info
                 .GroupBy(x => x.VariantIndex)
                 .Select(x => x.ToArray())
                 .ToArray();
-
-            int GetFrameIdForHashes(CompressedFrameDataInfo[] frames, string[] hashes) {
-                bool PositionHasHashes(int pos, int index) {
-                    return (index == hashes.Length) || (pos < frames.Length && frames[pos].Hash == hashes[index] && PositionHasHashes(pos + 1, index + 1));
-                }
-                for (int i = 0; i < frames.Length; i++)
-                    if (PositionHasHashes(i, 0))
-                        return i;
-                return -1;
-            }
 
             var byteData = new ByteData(new ByteArray(4));
             int variantIndex = 0;
@@ -253,10 +265,26 @@ namespace CHR_Builder {
                     .ToArray();
 
                 foreach (var animation in animations) {
+                    if (animation.AnimationFrames.Length == 0)
+                        continue;
+                    var lastCmd = animation.AnimationFrames[animation.AnimationFrames.Length - 1].Command;
+                    if (lastCmd != 0xF2 && lastCmd != 0xFE && lastCmd != 0xFF)
+                        continue;
+
+                    var aniFrameFrameIds = animation.AnimationFrames
+                        .Select((x, i) => (
+                            FrameID: x.FrameHashes == null ? (int?) null : GetFrameIdForHashes(variantFrames, x.FrameHashes.Where(x => x != null).ToArray()),
+                            Index: i)
+                        )
+                        .ToArray();
+                    if (aniFrameFrameIds.Any(x => x.FrameID == -1))
+                        continue;
+
                     aniFrameTableOffsets[aniIndex] = (int) fileOut.Position;
+                    var aniFrameIndex = 0;
                     foreach (var aniFrame in animation.AnimationFrames) {
                         if (aniFrame.Command < 0xF1) {
-                            byteData.SetWord(0x00, GetFrameIdForHashes(variantFrames, (aniFrame.FrameHashes ?? []).Where(x => x != null).ToArray()));
+                            byteData.SetWord(0x00, aniFrameFrameIds[aniFrameIndex].FrameID.Value);
                             byteData.SetWord(0x02, aniFrame.ParameterOrDuration);
                         }
                         else {
@@ -267,6 +295,7 @@ namespace CHR_Builder {
                         }
 
                         fileOut.Write(byteData.Data.GetDataCopyOrReference());
+                        aniFrameIndex++;
                     }
                     aniIndex++;
                 }
