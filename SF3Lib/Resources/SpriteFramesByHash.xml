@@ -11678,10 +11678,6 @@
     <item hash="ee9c6baab1868a6bc39f49f64788ad70" sprite="Item Dealer" width="40" height="40" frame="Nodding 3" direction="ESE" />
     <item hash="4fc08871a69382745bea5cbb55cb6bc7" sprite="Item Dealer" width="40" height="40" frame="Nodding 3" direction="ENE" />
     <item hash="6e91377646bda37a99aeb4cb2ad5a3b0" sprite="Item Dealer" width="40" height="40" frame="Nodding 3" direction="NNE" />
-    <item hash="3f98b878cd04e0855c203aceecc659ac" sprite="Jade (P1)" width="48" height="40" frame="StillFrame (OnGround) 1" direction="SSE" />
-    <item hash="aa85c261ab24ec8c26a2b6ed6a93435a" sprite="Jade (P1)" width="48" height="40" frame="StillFrame (OnGround) 1" direction="ESE" />
-    <item hash="efbbf0951723ecd95d94ba41c1e23ed2" sprite="Jade (P1)" width="48" height="40" frame="StillFrame (OnGround) 1" direction="ENE" />
-    <item hash="f3cfe99d1568c19060c05e1a380d0006" sprite="Jade (P1)" width="48" height="40" frame="StillFrame (OnGround) 1" direction="NNE" />
     <item hash="a414dd26616cbbca39c8315516f72363" sprite="Jade (P1) (No Tank)" width="40" height="40" frame="Idle 1" direction="S" />
     <item hash="aa7e46d6e8a29ba8b3d1c0f2997f7c0a" sprite="Jade (P1) (No Tank)" width="40" height="40" frame="Idle 1" direction="SSE" />
     <item hash="79b90aad7b265152351a7d47dc131173" sprite="Jade (P1) (No Tank)" width="40" height="40" frame="Idle 1" direction="ESE" />
@@ -11746,6 +11742,10 @@
     <item hash="5dcf2978e8853e0de1e05679a07c43b1" sprite="Jade (P1) (No Tank)" width="40" height="40" frame="Walking 6" direction="ENE" />
     <item hash="fe580b9b2e9dd975c0353f04820e8d16" sprite="Jade (P1) (No Tank)" width="40" height="40" frame="Walking 6" direction="NNE" />
     <item hash="c94eaf9963e38d26a340d5327647c1b7" sprite="Jade (P1) (No Tank)" width="40" height="40" frame="Walking 6" direction="N" />
+    <item hash="3f98b878cd04e0855c203aceecc659ac" sprite="Jade (P1) (No Tank)" width="48" height="40" frame="StillFrame (OnGround) 1" direction="SSE" />
+    <item hash="aa85c261ab24ec8c26a2b6ed6a93435a" sprite="Jade (P1) (No Tank)" width="48" height="40" frame="StillFrame (OnGround) 1" direction="ESE" />
+    <item hash="efbbf0951723ecd95d94ba41c1e23ed2" sprite="Jade (P1) (No Tank)" width="48" height="40" frame="StillFrame (OnGround) 1" direction="ENE" />
+    <item hash="f3cfe99d1568c19060c05e1a380d0006" sprite="Jade (P1) (No Tank)" width="48" height="40" frame="StillFrame (OnGround) 1" direction="NNE" />
     <item hash="564f8619afe8a45ca1a46f3e81a6af2b" sprite="Jade (P1) (Tank)" width="48" height="40" frame="Idle 1" direction="S" />
     <item hash="3840e0a1000eb80ab6077645940167e3" sprite="Jade (P1) (Tank)" width="48" height="40" frame="Idle 1" direction="SSE" />
     <item hash="bd3bbfd2b5bfab0dc8da28ffcc5b39d4" sprite="Jade (P1) (Tank)" width="48" height="40" frame="Idle 1" direction="SSE" />
