@@ -9226,54 +9226,54 @@
     <item hash="61ca9f10827f544edc525bc753c7c694" sprite="Hagane (P2)" width="40" height="40" frame="Walking 6" direction="ENE" />
     <item hash="cf88de82bd545bf9bf2d9a5087888455" sprite="Hagane (P2)" width="40" height="40" frame="Walking 6" direction="NNE" />
     <item hash="01577411efd5a0d024f3b62f7e5e432a" sprite="Hagane (P2)" width="40" height="40" frame="Walking 6" direction="N" />
-    <item hash="c0e79d3d74911d8e06db1a0a6b6ed2ad" sprite="Harold (P1) (NoTank)" width="40" height="40" frame="Nodding 1, ShakingHead 1, TappingFoot 1" direction="SSE" />
-    <item hash="49c27b2aaf6a629ac31d35bc79168c74" sprite="Harold (P1) (NoTank)" width="40" height="40" frame="Nodding 1, ShakingHead 1, TappingFoot 1" direction="ESE" />
-    <item hash="f3af1bb216753ada6497c8177ce26b3d" sprite="Harold (P1) (NoTank)" width="40" height="40" frame="Nodding 1, ShakingHead 1, TappingFoot 1" direction="ENE" />
-    <item hash="9df5986e6092c670dd4521955290d0fe" sprite="Harold (P1) (NoTank)" width="40" height="40" frame="Nodding 1, ShakingHead 1, TappingFoot 1" direction="NNE" />
-    <item hash="1151e0f4f118724ac1b7b923f3414412" sprite="Harold (P1) (NoTank)" width="40" height="40" frame="Nodding 2" direction="SSE" />
-    <item hash="4b15343189f344b6d1248f5338242ea1" sprite="Harold (P1) (NoTank)" width="40" height="40" frame="Nodding 2" direction="ESE" />
-    <item hash="b059b608c526a79d3b834313342bef20" sprite="Harold (P1) (NoTank)" width="40" height="40" frame="Nodding 2" direction="ENE" />
-    <item hash="f925e450818ec1b65fe34debce5dd91b" sprite="Harold (P1) (NoTank)" width="40" height="40" frame="Nodding 2" direction="NNE" />
-    <item hash="8de16047d619e52478f2643b07c91a6b" sprite="Harold (P1) (NoTank)" width="40" height="40" frame="Nodding 3" direction="SSE" />
-    <item hash="9e2b4cc8f866ab4aec9b03f4b0bd0ef7" sprite="Harold (P1) (NoTank)" width="40" height="40" frame="Nodding 3" direction="ESE" />
-    <item hash="8a5a141b5540c71edeb239a64ab3c0b6" sprite="Harold (P1) (NoTank)" width="40" height="40" frame="Nodding 3" direction="ENE" />
-    <item hash="9b17fcdce37df0601f3a6fcdb14a0303" sprite="Harold (P1) (NoTank)" width="40" height="40" frame="Nodding 3" direction="NNE" />
-    <item hash="6d6fc9e912aba3fe4b34f41f58c1420b" sprite="Harold (P1) (NoTank)" width="40" height="40" frame="ShakingHead 2" direction="SSE" />
-    <item hash="a6b29f2eae958c4fdc619ced56374c9f" sprite="Harold (P1) (NoTank)" width="40" height="40" frame="ShakingHead 2" direction="ESE" />
-    <item hash="1990304b7636ab7ac39cf72ec629f4a8" sprite="Harold (P1) (NoTank)" width="40" height="40" frame="ShakingHead 2" direction="ENE" />
-    <item hash="1209571e44344146484f7777c5831188" sprite="Harold (P1) (NoTank)" width="40" height="40" frame="ShakingHead 2" direction="NNE" />
-    <item hash="042aa37eba923790e82934da858eeb04" sprite="Harold (P1) (NoTank)" width="40" height="40" frame="ShakingHead 4" direction="SSE" />
-    <item hash="228c95d2d86d25d8968d9e489d3df032" sprite="Harold (P1) (NoTank)" width="40" height="40" frame="ShakingHead 4" direction="ESE" />
-    <item hash="0c62eb5ae50ce190ef1a3647b3482b24" sprite="Harold (P1) (NoTank)" width="40" height="40" frame="ShakingHead 4" direction="ENE" />
-    <item hash="35033132606c597cca04edf1ca9252b4" sprite="Harold (P1) (NoTank)" width="40" height="40" frame="ShakingHead 4" direction="NNE" />
-    <item hash="e9dd0eef967e0dcdb770ffd26b622f06" sprite="Harold (P1) (NoTank)" width="40" height="40" frame="TappingFoot 2" direction="SSE" />
-    <item hash="605a91b7abddf4ac3b80f982b41a3413" sprite="Harold (P1) (NoTank)" width="40" height="40" frame="TappingFoot 2" direction="ESE" />
-    <item hash="c28a935e77d7d59bce591bd9b4965575" sprite="Harold (P1) (NoTank)" width="40" height="40" frame="TappingFoot 2" direction="ENE" />
-    <item hash="4c36f66612cc9f2cc5437838653d912a" sprite="Harold (P1) (NoTank)" width="40" height="40" frame="TappingFoot 2" direction="NNE" />
-    <item hash="8b2b1e0335e879871ccf2923e4764231" sprite="Harold (P1) (NoTank)" width="40" height="40" frame="TappingFoot 3" direction="SSE" />
-    <item hash="690c56d4c27aefda197a6f5d22ed7e6e" sprite="Harold (P1) (NoTank)" width="40" height="40" frame="TappingFoot 3" direction="ESE" />
-    <item hash="24e099c5b2326704cfc38a73b3d8bf47" sprite="Harold (P1) (NoTank)" width="40" height="40" frame="TappingFoot 3" direction="ENE" />
-    <item hash="facf8ea7b0aaa70bebde8123e1a6efa4" sprite="Harold (P1) (NoTank)" width="40" height="40" frame="TappingFoot 3" direction="NNE" />
-    <item hash="5e84699ff9b0eb7428185fbce34f4113" sprite="Harold (P1) (NoTank)" width="40" height="40" frame="Walking 1" direction="SSE" />
-    <item hash="698a1196aac52c431d01eabf5bff5f58" sprite="Harold (P1) (NoTank)" width="40" height="40" frame="Walking 1" direction="ESE" />
-    <item hash="f87f0ee64778008c3aa3132619ea1338" sprite="Harold (P1) (NoTank)" width="40" height="40" frame="Walking 1" direction="ENE" />
-    <item hash="f962d90fd9ba1e4519b4ebb82f9e2055" sprite="Harold (P1) (NoTank)" width="40" height="40" frame="Walking 1" direction="NNE" />
-    <item hash="7fbc44766c86a0da2141b85d9f867e05" sprite="Harold (P1) (NoTank)" width="40" height="40" frame="Walking 2" direction="SSE" />
-    <item hash="2848e3b967286a0a6f8acf85ccdbf579" sprite="Harold (P1) (NoTank)" width="40" height="40" frame="Walking 2" direction="ESE" />
-    <item hash="81bfa47db0f873cf959d4b65c0c3b1e9" sprite="Harold (P1) (NoTank)" width="40" height="40" frame="Walking 2" direction="ENE" />
-    <item hash="988d0dfa82746f408125b417a0781951" sprite="Harold (P1) (NoTank)" width="40" height="40" frame="Walking 2" direction="NNE" />
-    <item hash="68017665a46caddcca6f013f9ada39a3" sprite="Harold (P1) (NoTank)" width="40" height="40" frame="Walking 3" direction="SSE" />
-    <item hash="509d2c95e28d010528d059c49e3bf6a7" sprite="Harold (P1) (NoTank)" width="40" height="40" frame="Walking 3" direction="ESE" />
-    <item hash="669af495011d04928531bec5688dd718" sprite="Harold (P1) (NoTank)" width="40" height="40" frame="Walking 3" direction="ENE" />
-    <item hash="69344baa2bde223437cd554536fe19fb" sprite="Harold (P1) (NoTank)" width="40" height="40" frame="Walking 3" direction="NNE" />
-    <item hash="0de068100b7f2b64aff0a2af61c491dd" sprite="Harold (P1) (NoTank)" width="40" height="40" frame="Walking 4" direction="SSE" />
-    <item hash="b8aa6eec06439cee1b5da5a8a2d14b8e" sprite="Harold (P1) (NoTank)" width="40" height="40" frame="Walking 4" direction="ESE" />
-    <item hash="dfeda46a26ebaf510daf23b0ca2fbadb" sprite="Harold (P1) (NoTank)" width="40" height="40" frame="Walking 4" direction="ENE" />
-    <item hash="01717d3526871b604a4840fff7694827" sprite="Harold (P1) (NoTank)" width="40" height="40" frame="Walking 4" direction="NNE" />
-    <item hash="7cea73033b743646ce18799727e3f445" sprite="Harold (P1) (NoTank)" width="40" height="40" frame="Walking 6" direction="SSE" />
-    <item hash="8190bb2c020a167a128568ba769a4d5f" sprite="Harold (P1) (NoTank)" width="40" height="40" frame="Walking 6" direction="ESE" />
-    <item hash="2ab24c7e5e973903edcf09aa4fd6f739" sprite="Harold (P1) (NoTank)" width="40" height="40" frame="Walking 6" direction="ENE" />
-    <item hash="32b2df2095dd7a0ed5b5763f4b47a70c" sprite="Harold (P1) (NoTank)" width="40" height="40" frame="Walking 6" direction="NNE" />
+    <item hash="c0e79d3d74911d8e06db1a0a6b6ed2ad" sprite="Harold (P1) (No Tank)" width="40" height="40" frame="Nodding 1, ShakingHead 1, TappingFoot 1" direction="SSE" />
+    <item hash="49c27b2aaf6a629ac31d35bc79168c74" sprite="Harold (P1) (No Tank)" width="40" height="40" frame="Nodding 1, ShakingHead 1, TappingFoot 1" direction="ESE" />
+    <item hash="f3af1bb216753ada6497c8177ce26b3d" sprite="Harold (P1) (No Tank)" width="40" height="40" frame="Nodding 1, ShakingHead 1, TappingFoot 1" direction="ENE" />
+    <item hash="9df5986e6092c670dd4521955290d0fe" sprite="Harold (P1) (No Tank)" width="40" height="40" frame="Nodding 1, ShakingHead 1, TappingFoot 1" direction="NNE" />
+    <item hash="1151e0f4f118724ac1b7b923f3414412" sprite="Harold (P1) (No Tank)" width="40" height="40" frame="Nodding 2" direction="SSE" />
+    <item hash="4b15343189f344b6d1248f5338242ea1" sprite="Harold (P1) (No Tank)" width="40" height="40" frame="Nodding 2" direction="ESE" />
+    <item hash="b059b608c526a79d3b834313342bef20" sprite="Harold (P1) (No Tank)" width="40" height="40" frame="Nodding 2" direction="ENE" />
+    <item hash="f925e450818ec1b65fe34debce5dd91b" sprite="Harold (P1) (No Tank)" width="40" height="40" frame="Nodding 2" direction="NNE" />
+    <item hash="8de16047d619e52478f2643b07c91a6b" sprite="Harold (P1) (No Tank)" width="40" height="40" frame="Nodding 3" direction="SSE" />
+    <item hash="9e2b4cc8f866ab4aec9b03f4b0bd0ef7" sprite="Harold (P1) (No Tank)" width="40" height="40" frame="Nodding 3" direction="ESE" />
+    <item hash="8a5a141b5540c71edeb239a64ab3c0b6" sprite="Harold (P1) (No Tank)" width="40" height="40" frame="Nodding 3" direction="ENE" />
+    <item hash="9b17fcdce37df0601f3a6fcdb14a0303" sprite="Harold (P1) (No Tank)" width="40" height="40" frame="Nodding 3" direction="NNE" />
+    <item hash="6d6fc9e912aba3fe4b34f41f58c1420b" sprite="Harold (P1) (No Tank)" width="40" height="40" frame="ShakingHead 2" direction="SSE" />
+    <item hash="a6b29f2eae958c4fdc619ced56374c9f" sprite="Harold (P1) (No Tank)" width="40" height="40" frame="ShakingHead 2" direction="ESE" />
+    <item hash="1990304b7636ab7ac39cf72ec629f4a8" sprite="Harold (P1) (No Tank)" width="40" height="40" frame="ShakingHead 2" direction="ENE" />
+    <item hash="1209571e44344146484f7777c5831188" sprite="Harold (P1) (No Tank)" width="40" height="40" frame="ShakingHead 2" direction="NNE" />
+    <item hash="042aa37eba923790e82934da858eeb04" sprite="Harold (P1) (No Tank)" width="40" height="40" frame="ShakingHead 4" direction="SSE" />
+    <item hash="228c95d2d86d25d8968d9e489d3df032" sprite="Harold (P1) (No Tank)" width="40" height="40" frame="ShakingHead 4" direction="ESE" />
+    <item hash="0c62eb5ae50ce190ef1a3647b3482b24" sprite="Harold (P1) (No Tank)" width="40" height="40" frame="ShakingHead 4" direction="ENE" />
+    <item hash="35033132606c597cca04edf1ca9252b4" sprite="Harold (P1) (No Tank)" width="40" height="40" frame="ShakingHead 4" direction="NNE" />
+    <item hash="e9dd0eef967e0dcdb770ffd26b622f06" sprite="Harold (P1) (No Tank)" width="40" height="40" frame="TappingFoot 2" direction="SSE" />
+    <item hash="605a91b7abddf4ac3b80f982b41a3413" sprite="Harold (P1) (No Tank)" width="40" height="40" frame="TappingFoot 2" direction="ESE" />
+    <item hash="c28a935e77d7d59bce591bd9b4965575" sprite="Harold (P1) (No Tank)" width="40" height="40" frame="TappingFoot 2" direction="ENE" />
+    <item hash="4c36f66612cc9f2cc5437838653d912a" sprite="Harold (P1) (No Tank)" width="40" height="40" frame="TappingFoot 2" direction="NNE" />
+    <item hash="8b2b1e0335e879871ccf2923e4764231" sprite="Harold (P1) (No Tank)" width="40" height="40" frame="TappingFoot 3" direction="SSE" />
+    <item hash="690c56d4c27aefda197a6f5d22ed7e6e" sprite="Harold (P1) (No Tank)" width="40" height="40" frame="TappingFoot 3" direction="ESE" />
+    <item hash="24e099c5b2326704cfc38a73b3d8bf47" sprite="Harold (P1) (No Tank)" width="40" height="40" frame="TappingFoot 3" direction="ENE" />
+    <item hash="facf8ea7b0aaa70bebde8123e1a6efa4" sprite="Harold (P1) (No Tank)" width="40" height="40" frame="TappingFoot 3" direction="NNE" />
+    <item hash="5e84699ff9b0eb7428185fbce34f4113" sprite="Harold (P1) (No Tank)" width="40" height="40" frame="Walking 1" direction="SSE" />
+    <item hash="698a1196aac52c431d01eabf5bff5f58" sprite="Harold (P1) (No Tank)" width="40" height="40" frame="Walking 1" direction="ESE" />
+    <item hash="f87f0ee64778008c3aa3132619ea1338" sprite="Harold (P1) (No Tank)" width="40" height="40" frame="Walking 1" direction="ENE" />
+    <item hash="f962d90fd9ba1e4519b4ebb82f9e2055" sprite="Harold (P1) (No Tank)" width="40" height="40" frame="Walking 1" direction="NNE" />
+    <item hash="7fbc44766c86a0da2141b85d9f867e05" sprite="Harold (P1) (No Tank)" width="40" height="40" frame="Walking 2" direction="SSE" />
+    <item hash="2848e3b967286a0a6f8acf85ccdbf579" sprite="Harold (P1) (No Tank)" width="40" height="40" frame="Walking 2" direction="ESE" />
+    <item hash="81bfa47db0f873cf959d4b65c0c3b1e9" sprite="Harold (P1) (No Tank)" width="40" height="40" frame="Walking 2" direction="ENE" />
+    <item hash="988d0dfa82746f408125b417a0781951" sprite="Harold (P1) (No Tank)" width="40" height="40" frame="Walking 2" direction="NNE" />
+    <item hash="68017665a46caddcca6f013f9ada39a3" sprite="Harold (P1) (No Tank)" width="40" height="40" frame="Walking 3" direction="SSE" />
+    <item hash="509d2c95e28d010528d059c49e3bf6a7" sprite="Harold (P1) (No Tank)" width="40" height="40" frame="Walking 3" direction="ESE" />
+    <item hash="669af495011d04928531bec5688dd718" sprite="Harold (P1) (No Tank)" width="40" height="40" frame="Walking 3" direction="ENE" />
+    <item hash="69344baa2bde223437cd554536fe19fb" sprite="Harold (P1) (No Tank)" width="40" height="40" frame="Walking 3" direction="NNE" />
+    <item hash="0de068100b7f2b64aff0a2af61c491dd" sprite="Harold (P1) (No Tank)" width="40" height="40" frame="Walking 4" direction="SSE" />
+    <item hash="b8aa6eec06439cee1b5da5a8a2d14b8e" sprite="Harold (P1) (No Tank)" width="40" height="40" frame="Walking 4" direction="ESE" />
+    <item hash="dfeda46a26ebaf510daf23b0ca2fbadb" sprite="Harold (P1) (No Tank)" width="40" height="40" frame="Walking 4" direction="ENE" />
+    <item hash="01717d3526871b604a4840fff7694827" sprite="Harold (P1) (No Tank)" width="40" height="40" frame="Walking 4" direction="NNE" />
+    <item hash="7cea73033b743646ce18799727e3f445" sprite="Harold (P1) (No Tank)" width="40" height="40" frame="Walking 6" direction="SSE" />
+    <item hash="8190bb2c020a167a128568ba769a4d5f" sprite="Harold (P1) (No Tank)" width="40" height="40" frame="Walking 6" direction="ESE" />
+    <item hash="2ab24c7e5e973903edcf09aa4fd6f739" sprite="Harold (P1) (No Tank)" width="40" height="40" frame="Walking 6" direction="ENE" />
+    <item hash="32b2df2095dd7a0ed5b5763f4b47a70c" sprite="Harold (P1) (No Tank)" width="40" height="40" frame="Walking 6" direction="NNE" />
     <item hash="3813b736bfa434f778ea1767dc7e7c9c" sprite="Harold (P1) (Tank)" width="48" height="40" frame="Idle 1" direction="S" />
     <item hash="d3ccbb1238d924313828b02f646c1806" sprite="Harold (P1) (Tank)" width="48" height="40" frame="Idle 1" direction="SSE" />
     <item hash="e10408b09c7d8d00680e55e9eb4f2bfe" sprite="Harold (P1) (Tank)" width="48" height="40" frame="Idle 1" direction="ESE" />
@@ -9322,54 +9322,54 @@
     <item hash="5765426a488f7ec136b41ca91a327008" sprite="Harold (P1) (Tank)" width="48" height="40" frame="Walking 5" direction="ENE" />
     <item hash="853e400ce83081e2da19484348253b4f" sprite="Harold (P1) (Tank)" width="48" height="40" frame="Walking 5" direction="NNE" />
     <item hash="24e0619cbb5278bfffa1b5622035b31d" sprite="Harold (P1) (Tank)" width="48" height="40" frame="Walking 5" direction="N" />
-    <item hash="8e14103d83f488560eebb9d84600f3a3" sprite="Harold (P2)" width="40" height="40" frame="Nodding 1, ShakingHead 1, TappingFoot 1" direction="SSE" />
-    <item hash="670e1c7dac8c1a2bbddb7550ad724f07" sprite="Harold (P2)" width="40" height="40" frame="Nodding 1, ShakingHead 1, TappingFoot 1" direction="ESE" />
-    <item hash="8537c8ce7bee88eb71a2e8f1e3a84031" sprite="Harold (P2)" width="40" height="40" frame="Nodding 1, ShakingHead 1, TappingFoot 1" direction="ENE" />
-    <item hash="46996f205c0e46babd87b62c4c732972" sprite="Harold (P2)" width="40" height="40" frame="Nodding 1, ShakingHead 1, TappingFoot 1" direction="NNE" />
-    <item hash="203957df2aa73be6f4894e2d8b076743" sprite="Harold (P2)" width="40" height="40" frame="Nodding 2" direction="SSE" />
-    <item hash="bdf05f5f14985854b1693c355c12d17b" sprite="Harold (P2)" width="40" height="40" frame="Nodding 2" direction="ESE" />
-    <item hash="08c3a9f310e2168528341a83a0edbe58" sprite="Harold (P2)" width="40" height="40" frame="Nodding 2" direction="ENE" />
-    <item hash="e2118b5be0084ccf0b1cef7a45c0e7c0" sprite="Harold (P2)" width="40" height="40" frame="Nodding 2" direction="NNE" />
-    <item hash="31077db5b4217673935f0c5109ddf983" sprite="Harold (P2)" width="40" height="40" frame="Nodding 3" direction="SSE" />
-    <item hash="a3a6fd51cdd4c2e35b93151af4d45938" sprite="Harold (P2)" width="40" height="40" frame="Nodding 3" direction="ESE" />
-    <item hash="bc9064cc4d3255eb0383362bd185900b" sprite="Harold (P2)" width="40" height="40" frame="Nodding 3" direction="ENE" />
-    <item hash="dd828ee0126fb2fc449f0691b787d955" sprite="Harold (P2)" width="40" height="40" frame="Nodding 3" direction="NNE" />
-    <item hash="c86d1a4ce82bc8d53e6916d2a8846af1" sprite="Harold (P2)" width="40" height="40" frame="ShakingHead 2" direction="SSE" />
-    <item hash="7070c556175a49ae115618c74f3a0e47" sprite="Harold (P2)" width="40" height="40" frame="ShakingHead 2" direction="ESE" />
-    <item hash="1a583357e9655c1688459932fff62661" sprite="Harold (P2)" width="40" height="40" frame="ShakingHead 2" direction="ENE" />
-    <item hash="3168ac176284e2d1897ce3270cafbce3" sprite="Harold (P2)" width="40" height="40" frame="ShakingHead 2" direction="NNE" />
-    <item hash="461d6f55fc5e39d23aa04bcc1e133bea" sprite="Harold (P2)" width="40" height="40" frame="ShakingHead 4" direction="SSE" />
-    <item hash="9a2f8571c2ce26bea48f49c151908472" sprite="Harold (P2)" width="40" height="40" frame="ShakingHead 4" direction="ESE" />
-    <item hash="edd2c924e66b28266102189c5e163c04" sprite="Harold (P2)" width="40" height="40" frame="ShakingHead 4" direction="ENE" />
-    <item hash="f405b5258b168f75d2cf82197ee19d6a" sprite="Harold (P2)" width="40" height="40" frame="ShakingHead 4" direction="NNE" />
-    <item hash="a736126b4c6ae9d914d31133cd60cf51" sprite="Harold (P2)" width="40" height="40" frame="TappingFoot 2" direction="SSE" />
-    <item hash="5537d6a614088989e256fa08ca918c0c" sprite="Harold (P2)" width="40" height="40" frame="TappingFoot 2" direction="ESE" />
-    <item hash="5cc2694ef26c88a32fd3ce7fe74cefc0" sprite="Harold (P2)" width="40" height="40" frame="TappingFoot 2" direction="ENE" />
-    <item hash="814a6025238839941135f3a892d8b19f" sprite="Harold (P2)" width="40" height="40" frame="TappingFoot 2" direction="NNE" />
-    <item hash="8155dddf1caea5068905262cf6e1b3a6" sprite="Harold (P2)" width="40" height="40" frame="TappingFoot 3" direction="SSE" />
-    <item hash="024c5e8d811fe0c1190ddc33e6a88c3c" sprite="Harold (P2)" width="40" height="40" frame="TappingFoot 3" direction="ESE" />
-    <item hash="bcdb73704f8e10e2889cc58daa1708d9" sprite="Harold (P2)" width="40" height="40" frame="TappingFoot 3" direction="ENE" />
-    <item hash="56fe83e83739979cd253bda8cc40692a" sprite="Harold (P2)" width="40" height="40" frame="TappingFoot 3" direction="NNE" />
-    <item hash="0807bf4949fcd7f6ca169dda3d16e469" sprite="Harold (P2)" width="40" height="40" frame="Walking 1" direction="SSE" />
-    <item hash="252b42fae266b71b1650806dba8cc513" sprite="Harold (P2)" width="40" height="40" frame="Walking 1" direction="ESE" />
-    <item hash="db77356ec063e9f147359d683bad0b97" sprite="Harold (P2)" width="40" height="40" frame="Walking 1" direction="ENE" />
-    <item hash="2cebc0bd7afe0b3a565be6a3a9e3aa19" sprite="Harold (P2)" width="40" height="40" frame="Walking 1" direction="NNE" />
-    <item hash="a189773de81f801c231d201dae8283bc" sprite="Harold (P2)" width="40" height="40" frame="Walking 2" direction="SSE" />
-    <item hash="3e2b4501dc12a69c2b0d96bc04c0f5a3" sprite="Harold (P2)" width="40" height="40" frame="Walking 2" direction="ESE" />
-    <item hash="b8206527b4852d0879dcd3bf4671d7e1" sprite="Harold (P2)" width="40" height="40" frame="Walking 2" direction="ENE" />
-    <item hash="45b47cf98ae36d468ed597d2fd88e735" sprite="Harold (P2)" width="40" height="40" frame="Walking 2" direction="NNE" />
-    <item hash="0f5b6490ee5b63392ed7b12da993ba5f" sprite="Harold (P2)" width="40" height="40" frame="Walking 3" direction="SSE" />
-    <item hash="cabaca74c417d86a47f17df4dea67488" sprite="Harold (P2)" width="40" height="40" frame="Walking 3" direction="ESE" />
-    <item hash="dc74732f2f6a8a374a4a0fa1261c9c88" sprite="Harold (P2)" width="40" height="40" frame="Walking 3" direction="ENE" />
-    <item hash="a525d832be050a416ce9f32f16ea598a" sprite="Harold (P2)" width="40" height="40" frame="Walking 3" direction="NNE" />
-    <item hash="31524ea40c9329dd98c4f0629401ce05" sprite="Harold (P2)" width="40" height="40" frame="Walking 4" direction="SSE" />
-    <item hash="0be7c512a4d40e476cf2ca282d014d5d" sprite="Harold (P2)" width="40" height="40" frame="Walking 4" direction="ESE" />
-    <item hash="c9c19f9c35d70f843cc98f4ced24888d" sprite="Harold (P2)" width="40" height="40" frame="Walking 4" direction="ENE" />
-    <item hash="e30219c9d6e6a51b0c9a8a717cb0d1e8" sprite="Harold (P2)" width="40" height="40" frame="Walking 4" direction="NNE" />
-    <item hash="0534784bbe10b889ae3d5ddea48db361" sprite="Harold (P2)" width="40" height="40" frame="Walking 6" direction="SSE" />
-    <item hash="0dbdb41de6fbb34db74ab36fe76c0d9e" sprite="Harold (P2)" width="40" height="40" frame="Walking 6" direction="ESE" />
-    <item hash="21b89a94e1e5624a3c4a0f2417397ffa" sprite="Harold (P2)" width="40" height="40" frame="Walking 6" direction="ENE" />
-    <item hash="f158e0703766c25a53e2148fb0c28b7e" sprite="Harold (P2)" width="40" height="40" frame="Walking 6" direction="NNE" />
+    <item hash="8e14103d83f488560eebb9d84600f3a3" sprite="Harold (P2) (No Tank)" width="40" height="40" frame="Nodding 1, ShakingHead 1, TappingFoot 1" direction="SSE" />
+    <item hash="670e1c7dac8c1a2bbddb7550ad724f07" sprite="Harold (P2) (No Tank)" width="40" height="40" frame="Nodding 1, ShakingHead 1, TappingFoot 1" direction="ESE" />
+    <item hash="8537c8ce7bee88eb71a2e8f1e3a84031" sprite="Harold (P2) (No Tank)" width="40" height="40" frame="Nodding 1, ShakingHead 1, TappingFoot 1" direction="ENE" />
+    <item hash="46996f205c0e46babd87b62c4c732972" sprite="Harold (P2) (No Tank)" width="40" height="40" frame="Nodding 1, ShakingHead 1, TappingFoot 1" direction="NNE" />
+    <item hash="203957df2aa73be6f4894e2d8b076743" sprite="Harold (P2) (No Tank)" width="40" height="40" frame="Nodding 2" direction="SSE" />
+    <item hash="bdf05f5f14985854b1693c355c12d17b" sprite="Harold (P2) (No Tank)" width="40" height="40" frame="Nodding 2" direction="ESE" />
+    <item hash="08c3a9f310e2168528341a83a0edbe58" sprite="Harold (P2) (No Tank)" width="40" height="40" frame="Nodding 2" direction="ENE" />
+    <item hash="e2118b5be0084ccf0b1cef7a45c0e7c0" sprite="Harold (P2) (No Tank)" width="40" height="40" frame="Nodding 2" direction="NNE" />
+    <item hash="31077db5b4217673935f0c5109ddf983" sprite="Harold (P2) (No Tank)" width="40" height="40" frame="Nodding 3" direction="SSE" />
+    <item hash="a3a6fd51cdd4c2e35b93151af4d45938" sprite="Harold (P2) (No Tank)" width="40" height="40" frame="Nodding 3" direction="ESE" />
+    <item hash="bc9064cc4d3255eb0383362bd185900b" sprite="Harold (P2) (No Tank)" width="40" height="40" frame="Nodding 3" direction="ENE" />
+    <item hash="dd828ee0126fb2fc449f0691b787d955" sprite="Harold (P2) (No Tank)" width="40" height="40" frame="Nodding 3" direction="NNE" />
+    <item hash="c86d1a4ce82bc8d53e6916d2a8846af1" sprite="Harold (P2) (No Tank)" width="40" height="40" frame="ShakingHead 2" direction="SSE" />
+    <item hash="7070c556175a49ae115618c74f3a0e47" sprite="Harold (P2) (No Tank)" width="40" height="40" frame="ShakingHead 2" direction="ESE" />
+    <item hash="1a583357e9655c1688459932fff62661" sprite="Harold (P2) (No Tank)" width="40" height="40" frame="ShakingHead 2" direction="ENE" />
+    <item hash="3168ac176284e2d1897ce3270cafbce3" sprite="Harold (P2) (No Tank)" width="40" height="40" frame="ShakingHead 2" direction="NNE" />
+    <item hash="461d6f55fc5e39d23aa04bcc1e133bea" sprite="Harold (P2) (No Tank)" width="40" height="40" frame="ShakingHead 4" direction="SSE" />
+    <item hash="9a2f8571c2ce26bea48f49c151908472" sprite="Harold (P2) (No Tank)" width="40" height="40" frame="ShakingHead 4" direction="ESE" />
+    <item hash="edd2c924e66b28266102189c5e163c04" sprite="Harold (P2) (No Tank)" width="40" height="40" frame="ShakingHead 4" direction="ENE" />
+    <item hash="f405b5258b168f75d2cf82197ee19d6a" sprite="Harold (P2) (No Tank)" width="40" height="40" frame="ShakingHead 4" direction="NNE" />
+    <item hash="a736126b4c6ae9d914d31133cd60cf51" sprite="Harold (P2) (No Tank)" width="40" height="40" frame="TappingFoot 2" direction="SSE" />
+    <item hash="5537d6a614088989e256fa08ca918c0c" sprite="Harold (P2) (No Tank)" width="40" height="40" frame="TappingFoot 2" direction="ESE" />
+    <item hash="5cc2694ef26c88a32fd3ce7fe74cefc0" sprite="Harold (P2) (No Tank)" width="40" height="40" frame="TappingFoot 2" direction="ENE" />
+    <item hash="814a6025238839941135f3a892d8b19f" sprite="Harold (P2) (No Tank)" width="40" height="40" frame="TappingFoot 2" direction="NNE" />
+    <item hash="8155dddf1caea5068905262cf6e1b3a6" sprite="Harold (P2) (No Tank)" width="40" height="40" frame="TappingFoot 3" direction="SSE" />
+    <item hash="024c5e8d811fe0c1190ddc33e6a88c3c" sprite="Harold (P2) (No Tank)" width="40" height="40" frame="TappingFoot 3" direction="ESE" />
+    <item hash="bcdb73704f8e10e2889cc58daa1708d9" sprite="Harold (P2) (No Tank)" width="40" height="40" frame="TappingFoot 3" direction="ENE" />
+    <item hash="56fe83e83739979cd253bda8cc40692a" sprite="Harold (P2) (No Tank)" width="40" height="40" frame="TappingFoot 3" direction="NNE" />
+    <item hash="0807bf4949fcd7f6ca169dda3d16e469" sprite="Harold (P2) (No Tank)" width="40" height="40" frame="Walking 1" direction="SSE" />
+    <item hash="252b42fae266b71b1650806dba8cc513" sprite="Harold (P2) (No Tank)" width="40" height="40" frame="Walking 1" direction="ESE" />
+    <item hash="db77356ec063e9f147359d683bad0b97" sprite="Harold (P2) (No Tank)" width="40" height="40" frame="Walking 1" direction="ENE" />
+    <item hash="2cebc0bd7afe0b3a565be6a3a9e3aa19" sprite="Harold (P2) (No Tank)" width="40" height="40" frame="Walking 1" direction="NNE" />
+    <item hash="a189773de81f801c231d201dae8283bc" sprite="Harold (P2) (No Tank)" width="40" height="40" frame="Walking 2" direction="SSE" />
+    <item hash="3e2b4501dc12a69c2b0d96bc04c0f5a3" sprite="Harold (P2) (No Tank)" width="40" height="40" frame="Walking 2" direction="ESE" />
+    <item hash="b8206527b4852d0879dcd3bf4671d7e1" sprite="Harold (P2) (No Tank)" width="40" height="40" frame="Walking 2" direction="ENE" />
+    <item hash="45b47cf98ae36d468ed597d2fd88e735" sprite="Harold (P2) (No Tank)" width="40" height="40" frame="Walking 2" direction="NNE" />
+    <item hash="0f5b6490ee5b63392ed7b12da993ba5f" sprite="Harold (P2) (No Tank)" width="40" height="40" frame="Walking 3" direction="SSE" />
+    <item hash="cabaca74c417d86a47f17df4dea67488" sprite="Harold (P2) (No Tank)" width="40" height="40" frame="Walking 3" direction="ESE" />
+    <item hash="dc74732f2f6a8a374a4a0fa1261c9c88" sprite="Harold (P2) (No Tank)" width="40" height="40" frame="Walking 3" direction="ENE" />
+    <item hash="a525d832be050a416ce9f32f16ea598a" sprite="Harold (P2) (No Tank)" width="40" height="40" frame="Walking 3" direction="NNE" />
+    <item hash="31524ea40c9329dd98c4f0629401ce05" sprite="Harold (P2) (No Tank)" width="40" height="40" frame="Walking 4" direction="SSE" />
+    <item hash="0be7c512a4d40e476cf2ca282d014d5d" sprite="Harold (P2) (No Tank)" width="40" height="40" frame="Walking 4" direction="ESE" />
+    <item hash="c9c19f9c35d70f843cc98f4ced24888d" sprite="Harold (P2) (No Tank)" width="40" height="40" frame="Walking 4" direction="ENE" />
+    <item hash="e30219c9d6e6a51b0c9a8a717cb0d1e8" sprite="Harold (P2) (No Tank)" width="40" height="40" frame="Walking 4" direction="NNE" />
+    <item hash="0534784bbe10b889ae3d5ddea48db361" sprite="Harold (P2) (No Tank)" width="40" height="40" frame="Walking 6" direction="SSE" />
+    <item hash="0dbdb41de6fbb34db74ab36fe76c0d9e" sprite="Harold (P2) (No Tank)" width="40" height="40" frame="Walking 6" direction="ESE" />
+    <item hash="21b89a94e1e5624a3c4a0f2417397ffa" sprite="Harold (P2) (No Tank)" width="40" height="40" frame="Walking 6" direction="ENE" />
+    <item hash="f158e0703766c25a53e2148fb0c28b7e" sprite="Harold (P2) (No Tank)" width="40" height="40" frame="Walking 6" direction="NNE" />
     <item hash="db5f57603117124615a7114e8840f5d2" sprite="Harold (P2) (Tank)" width="48" height="40" frame="Idle 1" direction="S" />
     <item hash="bc37525d5bb4e469d4a0dff69c5fd6c2" sprite="Harold (P2) (Tank)" width="48" height="40" frame="Idle 1" direction="SSE" />
     <item hash="b643fd419fa38ff508391f1a5bb5fc45" sprite="Harold (P2) (Tank)" width="48" height="40" frame="Idle 1" direction="ESE" />
@@ -11682,70 +11682,70 @@
     <item hash="aa85c261ab24ec8c26a2b6ed6a93435a" sprite="Jade (P1)" width="48" height="40" frame="StillFrame (OnGround) 1" direction="ESE" />
     <item hash="efbbf0951723ecd95d94ba41c1e23ed2" sprite="Jade (P1)" width="48" height="40" frame="StillFrame (OnGround) 1" direction="ENE" />
     <item hash="f3cfe99d1568c19060c05e1a380d0006" sprite="Jade (P1)" width="48" height="40" frame="StillFrame (OnGround) 1" direction="NNE" />
-    <item hash="a414dd26616cbbca39c8315516f72363" sprite="Jade (P1) (NoTank)" width="40" height="40" frame="Idle 1" direction="S" />
-    <item hash="aa7e46d6e8a29ba8b3d1c0f2997f7c0a" sprite="Jade (P1) (NoTank)" width="40" height="40" frame="Idle 1" direction="SSE" />
-    <item hash="79b90aad7b265152351a7d47dc131173" sprite="Jade (P1) (NoTank)" width="40" height="40" frame="Idle 1" direction="ESE" />
-    <item hash="e5ccd3180a7104b3d7155792320e9d96" sprite="Jade (P1) (NoTank)" width="40" height="40" frame="Idle 1" direction="ENE" />
-    <item hash="da469840e0837a8f87e648772d861655" sprite="Jade (P1) (NoTank)" width="40" height="40" frame="Idle 1" direction="NNE" />
-    <item hash="3bf0f87b6fd33d18055736cb934064d8" sprite="Jade (P1) (NoTank)" width="40" height="40" frame="Idle 1" direction="N" />
-    <item hash="9ab05f45e727e58a51f6125ba1772cc7" sprite="Jade (P1) (NoTank)" width="40" height="40" frame="Idle 2" direction="S" />
-    <item hash="9d586a78a8013a84c94b3238bc91af82" sprite="Jade (P1) (NoTank)" width="40" height="40" frame="Idle 2" direction="SSE" />
-    <item hash="9b19a1e14c999dfde607600e3892636b" sprite="Jade (P1) (NoTank)" width="40" height="40" frame="Idle 2" direction="ESE" />
-    <item hash="5b39cc4a3522bc6a512fad1e31c50ab5" sprite="Jade (P1) (NoTank)" width="40" height="40" frame="Idle 2" direction="ENE" />
-    <item hash="c1660d32cabfe8f113afcceb6704995f" sprite="Jade (P1) (NoTank)" width="40" height="40" frame="Idle 2" direction="NNE" />
-    <item hash="c8cbbe04793d6594690a353a78270c1e" sprite="Jade (P1) (NoTank)" width="40" height="40" frame="Idle 2" direction="N" />
-    <item hash="27bcec2c666cc10ad49746de47d74fe3" sprite="Jade (P1) (NoTank)" width="40" height="40" frame="Idle 3" direction="SSE" />
-    <item hash="9c6a13b7c539630085dfed805a87bbe4" sprite="Jade (P1) (NoTank)" width="40" height="40" frame="Idle 3" direction="ESE" />
-    <item hash="c3b9bc3715c4f9da00315b79d7c9b285" sprite="Jade (P1) (NoTank)" width="40" height="40" frame="Idle 3" direction="ENE" />
-    <item hash="5dbe526e57845d18d29b3fdeaf4b99fc" sprite="Jade (P1) (NoTank)" width="40" height="40" frame="Idle 3" direction="NNE" />
-    <item hash="fd27c9bc0666f85290e8d631ff717942" sprite="Jade (P1) (NoTank)" width="40" height="40" frame="Nodding 2" direction="S" />
-    <item hash="eea6834b3ddce0589d864aab2fdca1c3" sprite="Jade (P1) (NoTank)" width="40" height="40" frame="Nodding 2" direction="SSE" />
-    <item hash="94a2221ba86185f45560a09b1dbd9632" sprite="Jade (P1) (NoTank)" width="40" height="40" frame="Nodding 2" direction="ESE" />
-    <item hash="5517d9e4e5cc5b50400625b2b1b5b13e" sprite="Jade (P1) (NoTank)" width="40" height="40" frame="Nodding 2" direction="ENE" />
-    <item hash="de39ea9decd1968b0b66b8ec509355b8" sprite="Jade (P1) (NoTank)" width="40" height="40" frame="Nodding 2" direction="NNE" />
-    <item hash="5e8cdaa68e80f86c9d96cdecba877c35" sprite="Jade (P1) (NoTank)" width="40" height="40" frame="Nodding 2" direction="N" />
-    <item hash="1fe39ea54b4dd9ac951933318751be4c" sprite="Jade (P1) (NoTank)" width="40" height="40" frame="Nodding 3" direction="S" />
-    <item hash="b09252f47b0cf34b7576ce5dfce817d2" sprite="Jade (P1) (NoTank)" width="40" height="40" frame="Nodding 3" direction="SSE" />
-    <item hash="774eb8567ca31e16f703e66a1aea1c26" sprite="Jade (P1) (NoTank)" width="40" height="40" frame="Nodding 3" direction="ESE" />
-    <item hash="c7f3b0647e8e13753d6cb6a537f896f8" sprite="Jade (P1) (NoTank)" width="40" height="40" frame="Nodding 3" direction="ENE" />
-    <item hash="6935f115144562825314bdd162725264" sprite="Jade (P1) (NoTank)" width="40" height="40" frame="Nodding 3" direction="NNE" />
-    <item hash="688f037866aeee840b228723549d57f0" sprite="Jade (P1) (NoTank)" width="40" height="40" frame="Nodding 3" direction="N" />
-    <item hash="f11ab3b03932113558709d0180cb4925" sprite="Jade (P1) (NoTank)" width="40" height="40" frame="ShakingHead 2" direction="S" />
-    <item hash="5333f63427da82fefbf2e19da59edc88" sprite="Jade (P1) (NoTank)" width="40" height="40" frame="ShakingHead 2" direction="SSE" />
-    <item hash="fe743b2484db4683dcd29377945fd405" sprite="Jade (P1) (NoTank)" width="40" height="40" frame="ShakingHead 2" direction="ESE" />
-    <item hash="8791a8db85ad44428d1944d028179384" sprite="Jade (P1) (NoTank)" width="40" height="40" frame="ShakingHead 2" direction="ENE" />
-    <item hash="d4d4c77a458cb4c60e2582d227f66f13" sprite="Jade (P1) (NoTank)" width="40" height="40" frame="ShakingHead 2" direction="NNE" />
-    <item hash="538b0232985f8cee0040ced2431dafb7" sprite="Jade (P1) (NoTank)" width="40" height="40" frame="ShakingHead 2" direction="N" />
-    <item hash="33b2d65490635d1aae3a3b3b33963e8f" sprite="Jade (P1) (NoTank)" width="40" height="40" frame="ShakingHead 4" direction="S" />
-    <item hash="6fd14161e29bd24877dd6e86dfd09fed" sprite="Jade (P1) (NoTank)" width="40" height="40" frame="ShakingHead 4" direction="SSE" />
-    <item hash="8358f088c4059ba42502b39dd661946e" sprite="Jade (P1) (NoTank)" width="40" height="40" frame="ShakingHead 4" direction="ESE" />
-    <item hash="fcdb04c123e601f6af399c3bd381aa64" sprite="Jade (P1) (NoTank)" width="40" height="40" frame="ShakingHead 4" direction="ENE" />
-    <item hash="935f512876afccd40fa06b824265d057" sprite="Jade (P1) (NoTank)" width="40" height="40" frame="ShakingHead 4" direction="NNE" />
-    <item hash="11edea524dc052a50411ba50c5bf4349" sprite="Jade (P1) (NoTank)" width="40" height="40" frame="ShakingHead 4" direction="N" />
-    <item hash="e1890d92a3b640d20f2a074d104123bf" sprite="Jade (P1) (NoTank)" width="40" height="40" frame="Walking 1" direction="S" />
-    <item hash="18d3b506d1d2acb1e7e4578a02397ddd" sprite="Jade (P1) (NoTank)" width="40" height="40" frame="Walking 1" direction="SSE" />
-    <item hash="cb7f7c6e584c1d9709514ddd44826835" sprite="Jade (P1) (NoTank)" width="40" height="40" frame="Walking 1" direction="ESE" />
-    <item hash="47b7c67c982838b72b999dbdd0ad228b" sprite="Jade (P1) (NoTank)" width="40" height="40" frame="Walking 1" direction="ENE" />
-    <item hash="bd23088f8076c53ed96eda42b70508f6" sprite="Jade (P1) (NoTank)" width="40" height="40" frame="Walking 1" direction="NNE" />
-    <item hash="58454736b42a25ac15c0270e3cd6a014" sprite="Jade (P1) (NoTank)" width="40" height="40" frame="Walking 1" direction="N" />
-    <item hash="d42a0fc486d132c397a712596ab702fe" sprite="Jade (P1) (NoTank)" width="40" height="40" frame="Walking 3" direction="S" />
-    <item hash="011b7b16e4c9b5066b6ae6223c9a1030" sprite="Jade (P1) (NoTank)" width="40" height="40" frame="Walking 3" direction="SSE" />
-    <item hash="924cf374d2a9adbf7f55fa8ad13637fe" sprite="Jade (P1) (NoTank)" width="40" height="40" frame="Walking 3" direction="ESE" />
-    <item hash="8cae6dd9dd235bc09f9e98fd820f3c6c" sprite="Jade (P1) (NoTank)" width="40" height="40" frame="Walking 3" direction="ENE" />
-    <item hash="20b9084ae81d3aa316b0168f21fa65d4" sprite="Jade (P1) (NoTank)" width="40" height="40" frame="Walking 3" direction="NNE" />
-    <item hash="6599a62bbd8c4d06fc23d9bdeb0caff8" sprite="Jade (P1) (NoTank)" width="40" height="40" frame="Walking 3" direction="N" />
-    <item hash="6c44243c82d9fbc67a532538605f7434" sprite="Jade (P1) (NoTank)" width="40" height="40" frame="Walking 4" direction="S" />
-    <item hash="7f51f87186610a6d34cfb51da853403d" sprite="Jade (P1) (NoTank)" width="40" height="40" frame="Walking 4" direction="SSE" />
-    <item hash="4e4552e20e125719c86dafe17b1d523d" sprite="Jade (P1) (NoTank)" width="40" height="40" frame="Walking 4" direction="ESE" />
-    <item hash="2cf7f54608e1b2f9428d71913a35c8d2" sprite="Jade (P1) (NoTank)" width="40" height="40" frame="Walking 4" direction="ENE" />
-    <item hash="90fe853ed5fc9fb6052788d64b53f63d" sprite="Jade (P1) (NoTank)" width="40" height="40" frame="Walking 4" direction="NNE" />
-    <item hash="b909ca7e1ef1a6c63eb0e9fb36704dd1" sprite="Jade (P1) (NoTank)" width="40" height="40" frame="Walking 4" direction="N" />
-    <item hash="4b45ad51dc1c0de9ba51662bf3897df5" sprite="Jade (P1) (NoTank)" width="40" height="40" frame="Walking 6" direction="S" />
-    <item hash="72c0f316e1938c4401364c5a339a66d1" sprite="Jade (P1) (NoTank)" width="40" height="40" frame="Walking 6" direction="SSE" />
-    <item hash="f1a9cfddfc55a953433040698e86f00e" sprite="Jade (P1) (NoTank)" width="40" height="40" frame="Walking 6" direction="ESE" />
-    <item hash="5dcf2978e8853e0de1e05679a07c43b1" sprite="Jade (P1) (NoTank)" width="40" height="40" frame="Walking 6" direction="ENE" />
-    <item hash="fe580b9b2e9dd975c0353f04820e8d16" sprite="Jade (P1) (NoTank)" width="40" height="40" frame="Walking 6" direction="NNE" />
-    <item hash="c94eaf9963e38d26a340d5327647c1b7" sprite="Jade (P1) (NoTank)" width="40" height="40" frame="Walking 6" direction="N" />
+    <item hash="a414dd26616cbbca39c8315516f72363" sprite="Jade (P1) (No Tank)" width="40" height="40" frame="Idle 1" direction="S" />
+    <item hash="aa7e46d6e8a29ba8b3d1c0f2997f7c0a" sprite="Jade (P1) (No Tank)" width="40" height="40" frame="Idle 1" direction="SSE" />
+    <item hash="79b90aad7b265152351a7d47dc131173" sprite="Jade (P1) (No Tank)" width="40" height="40" frame="Idle 1" direction="ESE" />
+    <item hash="e5ccd3180a7104b3d7155792320e9d96" sprite="Jade (P1) (No Tank)" width="40" height="40" frame="Idle 1" direction="ENE" />
+    <item hash="da469840e0837a8f87e648772d861655" sprite="Jade (P1) (No Tank)" width="40" height="40" frame="Idle 1" direction="NNE" />
+    <item hash="3bf0f87b6fd33d18055736cb934064d8" sprite="Jade (P1) (No Tank)" width="40" height="40" frame="Idle 1" direction="N" />
+    <item hash="9ab05f45e727e58a51f6125ba1772cc7" sprite="Jade (P1) (No Tank)" width="40" height="40" frame="Idle 2" direction="S" />
+    <item hash="9d586a78a8013a84c94b3238bc91af82" sprite="Jade (P1) (No Tank)" width="40" height="40" frame="Idle 2" direction="SSE" />
+    <item hash="9b19a1e14c999dfde607600e3892636b" sprite="Jade (P1) (No Tank)" width="40" height="40" frame="Idle 2" direction="ESE" />
+    <item hash="5b39cc4a3522bc6a512fad1e31c50ab5" sprite="Jade (P1) (No Tank)" width="40" height="40" frame="Idle 2" direction="ENE" />
+    <item hash="c1660d32cabfe8f113afcceb6704995f" sprite="Jade (P1) (No Tank)" width="40" height="40" frame="Idle 2" direction="NNE" />
+    <item hash="c8cbbe04793d6594690a353a78270c1e" sprite="Jade (P1) (No Tank)" width="40" height="40" frame="Idle 2" direction="N" />
+    <item hash="27bcec2c666cc10ad49746de47d74fe3" sprite="Jade (P1) (No Tank)" width="40" height="40" frame="Idle 3" direction="SSE" />
+    <item hash="9c6a13b7c539630085dfed805a87bbe4" sprite="Jade (P1) (No Tank)" width="40" height="40" frame="Idle 3" direction="ESE" />
+    <item hash="c3b9bc3715c4f9da00315b79d7c9b285" sprite="Jade (P1) (No Tank)" width="40" height="40" frame="Idle 3" direction="ENE" />
+    <item hash="5dbe526e57845d18d29b3fdeaf4b99fc" sprite="Jade (P1) (No Tank)" width="40" height="40" frame="Idle 3" direction="NNE" />
+    <item hash="fd27c9bc0666f85290e8d631ff717942" sprite="Jade (P1) (No Tank)" width="40" height="40" frame="Nodding 2" direction="S" />
+    <item hash="eea6834b3ddce0589d864aab2fdca1c3" sprite="Jade (P1) (No Tank)" width="40" height="40" frame="Nodding 2" direction="SSE" />
+    <item hash="94a2221ba86185f45560a09b1dbd9632" sprite="Jade (P1) (No Tank)" width="40" height="40" frame="Nodding 2" direction="ESE" />
+    <item hash="5517d9e4e5cc5b50400625b2b1b5b13e" sprite="Jade (P1) (No Tank)" width="40" height="40" frame="Nodding 2" direction="ENE" />
+    <item hash="de39ea9decd1968b0b66b8ec509355b8" sprite="Jade (P1) (No Tank)" width="40" height="40" frame="Nodding 2" direction="NNE" />
+    <item hash="5e8cdaa68e80f86c9d96cdecba877c35" sprite="Jade (P1) (No Tank)" width="40" height="40" frame="Nodding 2" direction="N" />
+    <item hash="1fe39ea54b4dd9ac951933318751be4c" sprite="Jade (P1) (No Tank)" width="40" height="40" frame="Nodding 3" direction="S" />
+    <item hash="b09252f47b0cf34b7576ce5dfce817d2" sprite="Jade (P1) (No Tank)" width="40" height="40" frame="Nodding 3" direction="SSE" />
+    <item hash="774eb8567ca31e16f703e66a1aea1c26" sprite="Jade (P1) (No Tank)" width="40" height="40" frame="Nodding 3" direction="ESE" />
+    <item hash="c7f3b0647e8e13753d6cb6a537f896f8" sprite="Jade (P1) (No Tank)" width="40" height="40" frame="Nodding 3" direction="ENE" />
+    <item hash="6935f115144562825314bdd162725264" sprite="Jade (P1) (No Tank)" width="40" height="40" frame="Nodding 3" direction="NNE" />
+    <item hash="688f037866aeee840b228723549d57f0" sprite="Jade (P1) (No Tank)" width="40" height="40" frame="Nodding 3" direction="N" />
+    <item hash="f11ab3b03932113558709d0180cb4925" sprite="Jade (P1) (No Tank)" width="40" height="40" frame="ShakingHead 2" direction="S" />
+    <item hash="5333f63427da82fefbf2e19da59edc88" sprite="Jade (P1) (No Tank)" width="40" height="40" frame="ShakingHead 2" direction="SSE" />
+    <item hash="fe743b2484db4683dcd29377945fd405" sprite="Jade (P1) (No Tank)" width="40" height="40" frame="ShakingHead 2" direction="ESE" />
+    <item hash="8791a8db85ad44428d1944d028179384" sprite="Jade (P1) (No Tank)" width="40" height="40" frame="ShakingHead 2" direction="ENE" />
+    <item hash="d4d4c77a458cb4c60e2582d227f66f13" sprite="Jade (P1) (No Tank)" width="40" height="40" frame="ShakingHead 2" direction="NNE" />
+    <item hash="538b0232985f8cee0040ced2431dafb7" sprite="Jade (P1) (No Tank)" width="40" height="40" frame="ShakingHead 2" direction="N" />
+    <item hash="33b2d65490635d1aae3a3b3b33963e8f" sprite="Jade (P1) (No Tank)" width="40" height="40" frame="ShakingHead 4" direction="S" />
+    <item hash="6fd14161e29bd24877dd6e86dfd09fed" sprite="Jade (P1) (No Tank)" width="40" height="40" frame="ShakingHead 4" direction="SSE" />
+    <item hash="8358f088c4059ba42502b39dd661946e" sprite="Jade (P1) (No Tank)" width="40" height="40" frame="ShakingHead 4" direction="ESE" />
+    <item hash="fcdb04c123e601f6af399c3bd381aa64" sprite="Jade (P1) (No Tank)" width="40" height="40" frame="ShakingHead 4" direction="ENE" />
+    <item hash="935f512876afccd40fa06b824265d057" sprite="Jade (P1) (No Tank)" width="40" height="40" frame="ShakingHead 4" direction="NNE" />
+    <item hash="11edea524dc052a50411ba50c5bf4349" sprite="Jade (P1) (No Tank)" width="40" height="40" frame="ShakingHead 4" direction="N" />
+    <item hash="e1890d92a3b640d20f2a074d104123bf" sprite="Jade (P1) (No Tank)" width="40" height="40" frame="Walking 1" direction="S" />
+    <item hash="18d3b506d1d2acb1e7e4578a02397ddd" sprite="Jade (P1) (No Tank)" width="40" height="40" frame="Walking 1" direction="SSE" />
+    <item hash="cb7f7c6e584c1d9709514ddd44826835" sprite="Jade (P1) (No Tank)" width="40" height="40" frame="Walking 1" direction="ESE" />
+    <item hash="47b7c67c982838b72b999dbdd0ad228b" sprite="Jade (P1) (No Tank)" width="40" height="40" frame="Walking 1" direction="ENE" />
+    <item hash="bd23088f8076c53ed96eda42b70508f6" sprite="Jade (P1) (No Tank)" width="40" height="40" frame="Walking 1" direction="NNE" />
+    <item hash="58454736b42a25ac15c0270e3cd6a014" sprite="Jade (P1) (No Tank)" width="40" height="40" frame="Walking 1" direction="N" />
+    <item hash="d42a0fc486d132c397a712596ab702fe" sprite="Jade (P1) (No Tank)" width="40" height="40" frame="Walking 3" direction="S" />
+    <item hash="011b7b16e4c9b5066b6ae6223c9a1030" sprite="Jade (P1) (No Tank)" width="40" height="40" frame="Walking 3" direction="SSE" />
+    <item hash="924cf374d2a9adbf7f55fa8ad13637fe" sprite="Jade (P1) (No Tank)" width="40" height="40" frame="Walking 3" direction="ESE" />
+    <item hash="8cae6dd9dd235bc09f9e98fd820f3c6c" sprite="Jade (P1) (No Tank)" width="40" height="40" frame="Walking 3" direction="ENE" />
+    <item hash="20b9084ae81d3aa316b0168f21fa65d4" sprite="Jade (P1) (No Tank)" width="40" height="40" frame="Walking 3" direction="NNE" />
+    <item hash="6599a62bbd8c4d06fc23d9bdeb0caff8" sprite="Jade (P1) (No Tank)" width="40" height="40" frame="Walking 3" direction="N" />
+    <item hash="6c44243c82d9fbc67a532538605f7434" sprite="Jade (P1) (No Tank)" width="40" height="40" frame="Walking 4" direction="S" />
+    <item hash="7f51f87186610a6d34cfb51da853403d" sprite="Jade (P1) (No Tank)" width="40" height="40" frame="Walking 4" direction="SSE" />
+    <item hash="4e4552e20e125719c86dafe17b1d523d" sprite="Jade (P1) (No Tank)" width="40" height="40" frame="Walking 4" direction="ESE" />
+    <item hash="2cf7f54608e1b2f9428d71913a35c8d2" sprite="Jade (P1) (No Tank)" width="40" height="40" frame="Walking 4" direction="ENE" />
+    <item hash="90fe853ed5fc9fb6052788d64b53f63d" sprite="Jade (P1) (No Tank)" width="40" height="40" frame="Walking 4" direction="NNE" />
+    <item hash="b909ca7e1ef1a6c63eb0e9fb36704dd1" sprite="Jade (P1) (No Tank)" width="40" height="40" frame="Walking 4" direction="N" />
+    <item hash="4b45ad51dc1c0de9ba51662bf3897df5" sprite="Jade (P1) (No Tank)" width="40" height="40" frame="Walking 6" direction="S" />
+    <item hash="72c0f316e1938c4401364c5a339a66d1" sprite="Jade (P1) (No Tank)" width="40" height="40" frame="Walking 6" direction="SSE" />
+    <item hash="f1a9cfddfc55a953433040698e86f00e" sprite="Jade (P1) (No Tank)" width="40" height="40" frame="Walking 6" direction="ESE" />
+    <item hash="5dcf2978e8853e0de1e05679a07c43b1" sprite="Jade (P1) (No Tank)" width="40" height="40" frame="Walking 6" direction="ENE" />
+    <item hash="fe580b9b2e9dd975c0353f04820e8d16" sprite="Jade (P1) (No Tank)" width="40" height="40" frame="Walking 6" direction="NNE" />
+    <item hash="c94eaf9963e38d26a340d5327647c1b7" sprite="Jade (P1) (No Tank)" width="40" height="40" frame="Walking 6" direction="N" />
     <item hash="564f8619afe8a45ca1a46f3e81a6af2b" sprite="Jade (P1) (Tank)" width="48" height="40" frame="Idle 1" direction="S" />
     <item hash="3840e0a1000eb80ab6077645940167e3" sprite="Jade (P1) (Tank)" width="48" height="40" frame="Idle 1" direction="SSE" />
     <item hash="bd3bbfd2b5bfab0dc8da28ffcc5b39d4" sprite="Jade (P1) (Tank)" width="48" height="40" frame="Idle 1" direction="SSE" />
@@ -11804,72 +11804,72 @@
     <item hash="1527f317dee5ad3b33269782f64f5fef" sprite="Jade (P1) (Tank)" width="48" height="40" frame="Walking 5" direction="ENE" />
     <item hash="cf744d854f3f636ad5203a5387ddd5a6" sprite="Jade (P1) (Tank)" width="48" height="40" frame="Walking 5" direction="NNE" />
     <item hash="fcb4e59c8c8790a703cbb7791875d533" sprite="Jade (P1) (Tank)" width="48" height="40" frame="Walking 5" direction="N" />
-    <item hash="8bdc9642ba27ca3782db15d10fa1630b" sprite="Jade (P2) (NoTank)" width="40" height="40" frame="Idle 1" direction="S" />
-    <item hash="3d9840682cbdd5dbfcae0430bfbcb6ec" sprite="Jade (P2) (NoTank)" width="40" height="40" frame="Idle 1" direction="SSE" />
-    <item hash="318b75a6fa478ebc1a0c3ff3f10e54e6" sprite="Jade (P2) (NoTank)" width="40" height="40" frame="Idle 1" direction="ESE" />
-    <item hash="781c989379c7d94b87dfa8bc51c768a8" sprite="Jade (P2) (NoTank)" width="40" height="40" frame="Idle 1" direction="ENE" />
-    <item hash="c6cb8cf8644d0e81f95283525594ab88" sprite="Jade (P2) (NoTank)" width="40" height="40" frame="Idle 1" direction="NNE" />
-    <item hash="6b3b1d8f436e0fecf667e64651a970ae" sprite="Jade (P2) (NoTank)" width="40" height="40" frame="Idle 1" direction="N" />
-    <item hash="f608fd15c6c3da5e0eddda42a6ee1aea" sprite="Jade (P2) (NoTank)" width="40" height="40" frame="Idle 2" direction="S" />
-    <item hash="70033c2ff6ca2c9ec4f8a95a7e6ef64c" sprite="Jade (P2) (NoTank)" width="40" height="40" frame="Idle 2" direction="SSE" />
-    <item hash="0640a6e6b7bb7c3b254d30ce48bdbf74" sprite="Jade (P2) (NoTank)" width="40" height="40" frame="Idle 2" direction="ESE" />
-    <item hash="a3cbe3d58c7880a482e2334ec90e9e87" sprite="Jade (P2) (NoTank)" width="40" height="40" frame="Idle 2" direction="ENE" />
-    <item hash="34e4f49a29d412860e35d6dd98bff57a" sprite="Jade (P2) (NoTank)" width="40" height="40" frame="Idle 2" direction="NNE" />
-    <item hash="63a12936e331929b1dc350bf98bb3122" sprite="Jade (P2) (NoTank)" width="40" height="40" frame="Idle 2" direction="N" />
-    <item hash="7cf35893d8fec2c31a42846c643a1441" sprite="Jade (P2) (NoTank)" width="40" height="40" frame="Idle 3" direction="S" />
-    <item hash="dae093cf7d57856e1b3f8f964175e779" sprite="Jade (P2) (NoTank)" width="40" height="40" frame="Idle 3" direction="SSE" />
-    <item hash="4d2007d86ac46304cf1df62a7631305e" sprite="Jade (P2) (NoTank)" width="40" height="40" frame="Idle 3" direction="ESE" />
-    <item hash="4ffbc1f824e09ca22de9aa47d624b0b7" sprite="Jade (P2) (NoTank)" width="40" height="40" frame="Idle 3" direction="ENE" />
-    <item hash="cea721cf4891035da3c6535047345b10" sprite="Jade (P2) (NoTank)" width="40" height="40" frame="Idle 3" direction="NNE" />
-    <item hash="e19c3b2bdca46c91028112257a204bba" sprite="Jade (P2) (NoTank)" width="40" height="40" frame="Idle 3" direction="N" />
-    <item hash="0c386c8410aa210de73d4986518a7948" sprite="Jade (P2) (NoTank)" width="40" height="40" frame="Nodding 2" direction="S" />
-    <item hash="0c30c72cd8751028b35408d569ccad61" sprite="Jade (P2) (NoTank)" width="40" height="40" frame="Nodding 2" direction="SSE" />
-    <item hash="e731eacb0cb8fbf49c50097b5f60ea42" sprite="Jade (P2) (NoTank)" width="40" height="40" frame="Nodding 2" direction="ESE" />
-    <item hash="436273a381cc9df8f0659a734920994f" sprite="Jade (P2) (NoTank)" width="40" height="40" frame="Nodding 2" direction="ENE" />
-    <item hash="d4a68cb8dbd802ea0dcb557afa044809" sprite="Jade (P2) (NoTank)" width="40" height="40" frame="Nodding 2" direction="NNE" />
-    <item hash="0095400a38c3cb845751b7ec3f67ccc6" sprite="Jade (P2) (NoTank)" width="40" height="40" frame="Nodding 2" direction="N" />
-    <item hash="c1b4f8e5ab3280ea106065099d734154" sprite="Jade (P2) (NoTank)" width="40" height="40" frame="Nodding 3" direction="S" />
-    <item hash="797244971f1b3b88625352f5f5210ea8" sprite="Jade (P2) (NoTank)" width="40" height="40" frame="Nodding 3" direction="SSE" />
-    <item hash="1484c439372308f3a30c975fcad7fb03" sprite="Jade (P2) (NoTank)" width="40" height="40" frame="Nodding 3" direction="ESE" />
-    <item hash="54dd0bedd0434ad6c02bce1eaec7b21a" sprite="Jade (P2) (NoTank)" width="40" height="40" frame="Nodding 3" direction="ENE" />
-    <item hash="767456e459f501ce4aa085ed19a8d0e9" sprite="Jade (P2) (NoTank)" width="40" height="40" frame="Nodding 3" direction="NNE" />
-    <item hash="aab34c34057d32193fc2d006dd66889e" sprite="Jade (P2) (NoTank)" width="40" height="40" frame="Nodding 3" direction="N" />
-    <item hash="213f3c2b7147a43ecaf91c0fc1fefd95" sprite="Jade (P2) (NoTank)" width="40" height="40" frame="ShakingHead 2" direction="S" />
-    <item hash="641f10d73224f70b1f1962009ec12408" sprite="Jade (P2) (NoTank)" width="40" height="40" frame="ShakingHead 2" direction="SSE" />
-    <item hash="072ea01455aa3f6002314fcd7ff8e94d" sprite="Jade (P2) (NoTank)" width="40" height="40" frame="ShakingHead 2" direction="ESE" />
-    <item hash="e010b7fefe4370a151289406ef3b61a8" sprite="Jade (P2) (NoTank)" width="40" height="40" frame="ShakingHead 2" direction="ENE" />
-    <item hash="896420955654c96c70c4e4afba8ed52b" sprite="Jade (P2) (NoTank)" width="40" height="40" frame="ShakingHead 2" direction="NNE" />
-    <item hash="17873e0970f0228ae49c97fc5b3b69f3" sprite="Jade (P2) (NoTank)" width="40" height="40" frame="ShakingHead 2" direction="N" />
-    <item hash="48840e4d29cb36259ba4c8d17bb56ada" sprite="Jade (P2) (NoTank)" width="40" height="40" frame="ShakingHead 4" direction="S" />
-    <item hash="c4b851dc9ac795f5d5a9ec0f1629979f" sprite="Jade (P2) (NoTank)" width="40" height="40" frame="ShakingHead 4" direction="SSE" />
-    <item hash="8f53b5e50fedaa89f1fc43fec82930ec" sprite="Jade (P2) (NoTank)" width="40" height="40" frame="ShakingHead 4" direction="ESE" />
-    <item hash="21ad5278a71954226440bbb316adaa11" sprite="Jade (P2) (NoTank)" width="40" height="40" frame="ShakingHead 4" direction="ENE" />
-    <item hash="3b96587e36d772cea0633a2cdbba2c2c" sprite="Jade (P2) (NoTank)" width="40" height="40" frame="ShakingHead 4" direction="NNE" />
-    <item hash="42240ef7c83c9a2d4e278e5f00f8b156" sprite="Jade (P2) (NoTank)" width="40" height="40" frame="ShakingHead 4" direction="N" />
-    <item hash="ec43a1d6ab1035ded16e4c756726edc2" sprite="Jade (P2) (NoTank)" width="40" height="40" frame="Walking 1" direction="S" />
-    <item hash="9b0e44aee2b6514f4453495545790033" sprite="Jade (P2) (NoTank)" width="40" height="40" frame="Walking 1" direction="SSE" />
-    <item hash="ab6b20686766d0e938b0660b854c4ef8" sprite="Jade (P2) (NoTank)" width="40" height="40" frame="Walking 1" direction="ESE" />
-    <item hash="2da788aa4cc501edb1cbbf39624dbe86" sprite="Jade (P2) (NoTank)" width="40" height="40" frame="Walking 1" direction="ENE" />
-    <item hash="0ec95f436de6cbeb21598d2fcdbffc2d" sprite="Jade (P2) (NoTank)" width="40" height="40" frame="Walking 1" direction="NNE" />
-    <item hash="c4a4eef0c8509d3236c1c0cf449daec2" sprite="Jade (P2) (NoTank)" width="40" height="40" frame="Walking 1" direction="N" />
-    <item hash="f06f9775dbf05721866bfbe3b6b6d02c" sprite="Jade (P2) (NoTank)" width="40" height="40" frame="Walking 3" direction="S" />
-    <item hash="31668ac3743192590c4f7b9d981cad92" sprite="Jade (P2) (NoTank)" width="40" height="40" frame="Walking 3" direction="SSE" />
-    <item hash="efb771309e16522ca9821fe4fe8bd2a4" sprite="Jade (P2) (NoTank)" width="40" height="40" frame="Walking 3" direction="ESE" />
-    <item hash="12ac3362ebd3d71225da351aafcb7ad9" sprite="Jade (P2) (NoTank)" width="40" height="40" frame="Walking 3" direction="ENE" />
-    <item hash="af4c9621d8c413d0adad305140cbbe6e" sprite="Jade (P2) (NoTank)" width="40" height="40" frame="Walking 3" direction="NNE" />
-    <item hash="363efae81c2d459df110b1202c135caa" sprite="Jade (P2) (NoTank)" width="40" height="40" frame="Walking 3" direction="N" />
-    <item hash="f4be493612495b5c76caecb828079b6f" sprite="Jade (P2) (NoTank)" width="40" height="40" frame="Walking 4" direction="S" />
-    <item hash="d8178ba6dc4536747a8e719273addaca" sprite="Jade (P2) (NoTank)" width="40" height="40" frame="Walking 4" direction="SSE" />
-    <item hash="43eefb3427b8ed930b5d67891900755a" sprite="Jade (P2) (NoTank)" width="40" height="40" frame="Walking 4" direction="ESE" />
-    <item hash="aae126445146810009b8bae5ab30b251" sprite="Jade (P2) (NoTank)" width="40" height="40" frame="Walking 4" direction="ENE" />
-    <item hash="5d5730437ad1ac9098420455de24f98f" sprite="Jade (P2) (NoTank)" width="40" height="40" frame="Walking 4" direction="NNE" />
-    <item hash="e1811db18074a5b462dd707060f28900" sprite="Jade (P2) (NoTank)" width="40" height="40" frame="Walking 4" direction="N" />
-    <item hash="ef4724de9a287866393caef1333627e4" sprite="Jade (P2) (NoTank)" width="40" height="40" frame="Walking 6" direction="S" />
-    <item hash="e4581d546f58c26e4c82182fdff71a0e" sprite="Jade (P2) (NoTank)" width="40" height="40" frame="Walking 6" direction="SSE" />
-    <item hash="c74b8db308db82b974f58e72ff335259" sprite="Jade (P2) (NoTank)" width="40" height="40" frame="Walking 6" direction="ESE" />
-    <item hash="88d12c496241972f79638563a6fff7c6" sprite="Jade (P2) (NoTank)" width="40" height="40" frame="Walking 6" direction="ENE" />
-    <item hash="97c616379a9199a1bfb25cdc53e83d4a" sprite="Jade (P2) (NoTank)" width="40" height="40" frame="Walking 6" direction="NNE" />
-    <item hash="9f3d7a867d5587dc6bdab3ba0e4602a4" sprite="Jade (P2) (NoTank)" width="40" height="40" frame="Walking 6" direction="N" />
+    <item hash="8bdc9642ba27ca3782db15d10fa1630b" sprite="Jade (P2) (No Tank)" width="40" height="40" frame="Idle 1" direction="S" />
+    <item hash="3d9840682cbdd5dbfcae0430bfbcb6ec" sprite="Jade (P2) (No Tank)" width="40" height="40" frame="Idle 1" direction="SSE" />
+    <item hash="318b75a6fa478ebc1a0c3ff3f10e54e6" sprite="Jade (P2) (No Tank)" width="40" height="40" frame="Idle 1" direction="ESE" />
+    <item hash="781c989379c7d94b87dfa8bc51c768a8" sprite="Jade (P2) (No Tank)" width="40" height="40" frame="Idle 1" direction="ENE" />
+    <item hash="c6cb8cf8644d0e81f95283525594ab88" sprite="Jade (P2) (No Tank)" width="40" height="40" frame="Idle 1" direction="NNE" />
+    <item hash="6b3b1d8f436e0fecf667e64651a970ae" sprite="Jade (P2) (No Tank)" width="40" height="40" frame="Idle 1" direction="N" />
+    <item hash="f608fd15c6c3da5e0eddda42a6ee1aea" sprite="Jade (P2) (No Tank)" width="40" height="40" frame="Idle 2" direction="S" />
+    <item hash="70033c2ff6ca2c9ec4f8a95a7e6ef64c" sprite="Jade (P2) (No Tank)" width="40" height="40" frame="Idle 2" direction="SSE" />
+    <item hash="0640a6e6b7bb7c3b254d30ce48bdbf74" sprite="Jade (P2) (No Tank)" width="40" height="40" frame="Idle 2" direction="ESE" />
+    <item hash="a3cbe3d58c7880a482e2334ec90e9e87" sprite="Jade (P2) (No Tank)" width="40" height="40" frame="Idle 2" direction="ENE" />
+    <item hash="34e4f49a29d412860e35d6dd98bff57a" sprite="Jade (P2) (No Tank)" width="40" height="40" frame="Idle 2" direction="NNE" />
+    <item hash="63a12936e331929b1dc350bf98bb3122" sprite="Jade (P2) (No Tank)" width="40" height="40" frame="Idle 2" direction="N" />
+    <item hash="7cf35893d8fec2c31a42846c643a1441" sprite="Jade (P2) (No Tank)" width="40" height="40" frame="Idle 3" direction="S" />
+    <item hash="dae093cf7d57856e1b3f8f964175e779" sprite="Jade (P2) (No Tank)" width="40" height="40" frame="Idle 3" direction="SSE" />
+    <item hash="4d2007d86ac46304cf1df62a7631305e" sprite="Jade (P2) (No Tank)" width="40" height="40" frame="Idle 3" direction="ESE" />
+    <item hash="4ffbc1f824e09ca22de9aa47d624b0b7" sprite="Jade (P2) (No Tank)" width="40" height="40" frame="Idle 3" direction="ENE" />
+    <item hash="cea721cf4891035da3c6535047345b10" sprite="Jade (P2) (No Tank)" width="40" height="40" frame="Idle 3" direction="NNE" />
+    <item hash="e19c3b2bdca46c91028112257a204bba" sprite="Jade (P2) (No Tank)" width="40" height="40" frame="Idle 3" direction="N" />
+    <item hash="0c386c8410aa210de73d4986518a7948" sprite="Jade (P2) (No Tank)" width="40" height="40" frame="Nodding 2" direction="S" />
+    <item hash="0c30c72cd8751028b35408d569ccad61" sprite="Jade (P2) (No Tank)" width="40" height="40" frame="Nodding 2" direction="SSE" />
+    <item hash="e731eacb0cb8fbf49c50097b5f60ea42" sprite="Jade (P2) (No Tank)" width="40" height="40" frame="Nodding 2" direction="ESE" />
+    <item hash="436273a381cc9df8f0659a734920994f" sprite="Jade (P2) (No Tank)" width="40" height="40" frame="Nodding 2" direction="ENE" />
+    <item hash="d4a68cb8dbd802ea0dcb557afa044809" sprite="Jade (P2) (No Tank)" width="40" height="40" frame="Nodding 2" direction="NNE" />
+    <item hash="0095400a38c3cb845751b7ec3f67ccc6" sprite="Jade (P2) (No Tank)" width="40" height="40" frame="Nodding 2" direction="N" />
+    <item hash="c1b4f8e5ab3280ea106065099d734154" sprite="Jade (P2) (No Tank)" width="40" height="40" frame="Nodding 3" direction="S" />
+    <item hash="797244971f1b3b88625352f5f5210ea8" sprite="Jade (P2) (No Tank)" width="40" height="40" frame="Nodding 3" direction="SSE" />
+    <item hash="1484c439372308f3a30c975fcad7fb03" sprite="Jade (P2) (No Tank)" width="40" height="40" frame="Nodding 3" direction="ESE" />
+    <item hash="54dd0bedd0434ad6c02bce1eaec7b21a" sprite="Jade (P2) (No Tank)" width="40" height="40" frame="Nodding 3" direction="ENE" />
+    <item hash="767456e459f501ce4aa085ed19a8d0e9" sprite="Jade (P2) (No Tank)" width="40" height="40" frame="Nodding 3" direction="NNE" />
+    <item hash="aab34c34057d32193fc2d006dd66889e" sprite="Jade (P2) (No Tank)" width="40" height="40" frame="Nodding 3" direction="N" />
+    <item hash="213f3c2b7147a43ecaf91c0fc1fefd95" sprite="Jade (P2) (No Tank)" width="40" height="40" frame="ShakingHead 2" direction="S" />
+    <item hash="641f10d73224f70b1f1962009ec12408" sprite="Jade (P2) (No Tank)" width="40" height="40" frame="ShakingHead 2" direction="SSE" />
+    <item hash="072ea01455aa3f6002314fcd7ff8e94d" sprite="Jade (P2) (No Tank)" width="40" height="40" frame="ShakingHead 2" direction="ESE" />
+    <item hash="e010b7fefe4370a151289406ef3b61a8" sprite="Jade (P2) (No Tank)" width="40" height="40" frame="ShakingHead 2" direction="ENE" />
+    <item hash="896420955654c96c70c4e4afba8ed52b" sprite="Jade (P2) (No Tank)" width="40" height="40" frame="ShakingHead 2" direction="NNE" />
+    <item hash="17873e0970f0228ae49c97fc5b3b69f3" sprite="Jade (P2) (No Tank)" width="40" height="40" frame="ShakingHead 2" direction="N" />
+    <item hash="48840e4d29cb36259ba4c8d17bb56ada" sprite="Jade (P2) (No Tank)" width="40" height="40" frame="ShakingHead 4" direction="S" />
+    <item hash="c4b851dc9ac795f5d5a9ec0f1629979f" sprite="Jade (P2) (No Tank)" width="40" height="40" frame="ShakingHead 4" direction="SSE" />
+    <item hash="8f53b5e50fedaa89f1fc43fec82930ec" sprite="Jade (P2) (No Tank)" width="40" height="40" frame="ShakingHead 4" direction="ESE" />
+    <item hash="21ad5278a71954226440bbb316adaa11" sprite="Jade (P2) (No Tank)" width="40" height="40" frame="ShakingHead 4" direction="ENE" />
+    <item hash="3b96587e36d772cea0633a2cdbba2c2c" sprite="Jade (P2) (No Tank)" width="40" height="40" frame="ShakingHead 4" direction="NNE" />
+    <item hash="42240ef7c83c9a2d4e278e5f00f8b156" sprite="Jade (P2) (No Tank)" width="40" height="40" frame="ShakingHead 4" direction="N" />
+    <item hash="ec43a1d6ab1035ded16e4c756726edc2" sprite="Jade (P2) (No Tank)" width="40" height="40" frame="Walking 1" direction="S" />
+    <item hash="9b0e44aee2b6514f4453495545790033" sprite="Jade (P2) (No Tank)" width="40" height="40" frame="Walking 1" direction="SSE" />
+    <item hash="ab6b20686766d0e938b0660b854c4ef8" sprite="Jade (P2) (No Tank)" width="40" height="40" frame="Walking 1" direction="ESE" />
+    <item hash="2da788aa4cc501edb1cbbf39624dbe86" sprite="Jade (P2) (No Tank)" width="40" height="40" frame="Walking 1" direction="ENE" />
+    <item hash="0ec95f436de6cbeb21598d2fcdbffc2d" sprite="Jade (P2) (No Tank)" width="40" height="40" frame="Walking 1" direction="NNE" />
+    <item hash="c4a4eef0c8509d3236c1c0cf449daec2" sprite="Jade (P2) (No Tank)" width="40" height="40" frame="Walking 1" direction="N" />
+    <item hash="f06f9775dbf05721866bfbe3b6b6d02c" sprite="Jade (P2) (No Tank)" width="40" height="40" frame="Walking 3" direction="S" />
+    <item hash="31668ac3743192590c4f7b9d981cad92" sprite="Jade (P2) (No Tank)" width="40" height="40" frame="Walking 3" direction="SSE" />
+    <item hash="efb771309e16522ca9821fe4fe8bd2a4" sprite="Jade (P2) (No Tank)" width="40" height="40" frame="Walking 3" direction="ESE" />
+    <item hash="12ac3362ebd3d71225da351aafcb7ad9" sprite="Jade (P2) (No Tank)" width="40" height="40" frame="Walking 3" direction="ENE" />
+    <item hash="af4c9621d8c413d0adad305140cbbe6e" sprite="Jade (P2) (No Tank)" width="40" height="40" frame="Walking 3" direction="NNE" />
+    <item hash="363efae81c2d459df110b1202c135caa" sprite="Jade (P2) (No Tank)" width="40" height="40" frame="Walking 3" direction="N" />
+    <item hash="f4be493612495b5c76caecb828079b6f" sprite="Jade (P2) (No Tank)" width="40" height="40" frame="Walking 4" direction="S" />
+    <item hash="d8178ba6dc4536747a8e719273addaca" sprite="Jade (P2) (No Tank)" width="40" height="40" frame="Walking 4" direction="SSE" />
+    <item hash="43eefb3427b8ed930b5d67891900755a" sprite="Jade (P2) (No Tank)" width="40" height="40" frame="Walking 4" direction="ESE" />
+    <item hash="aae126445146810009b8bae5ab30b251" sprite="Jade (P2) (No Tank)" width="40" height="40" frame="Walking 4" direction="ENE" />
+    <item hash="5d5730437ad1ac9098420455de24f98f" sprite="Jade (P2) (No Tank)" width="40" height="40" frame="Walking 4" direction="NNE" />
+    <item hash="e1811db18074a5b462dd707060f28900" sprite="Jade (P2) (No Tank)" width="40" height="40" frame="Walking 4" direction="N" />
+    <item hash="ef4724de9a287866393caef1333627e4" sprite="Jade (P2) (No Tank)" width="40" height="40" frame="Walking 6" direction="S" />
+    <item hash="e4581d546f58c26e4c82182fdff71a0e" sprite="Jade (P2) (No Tank)" width="40" height="40" frame="Walking 6" direction="SSE" />
+    <item hash="c74b8db308db82b974f58e72ff335259" sprite="Jade (P2) (No Tank)" width="40" height="40" frame="Walking 6" direction="ESE" />
+    <item hash="88d12c496241972f79638563a6fff7c6" sprite="Jade (P2) (No Tank)" width="40" height="40" frame="Walking 6" direction="ENE" />
+    <item hash="97c616379a9199a1bfb25cdc53e83d4a" sprite="Jade (P2) (No Tank)" width="40" height="40" frame="Walking 6" direction="NNE" />
+    <item hash="9f3d7a867d5587dc6bdab3ba0e4602a4" sprite="Jade (P2) (No Tank)" width="40" height="40" frame="Walking 6" direction="N" />
     <item hash="2a822399d20a1f34ff687c226d111dbc" sprite="Jade (P2) (Tank)" width="48" height="40" frame="Idle 1" direction="S" />
     <item hash="53b62a8e0cf431e0f72047287b4b14d8" sprite="Jade (P2) (Tank)" width="48" height="40" frame="Idle 1" direction="SSE" />
     <item hash="2c4fbede97c8696622f238230c6cb1f2" sprite="Jade (P2) (Tank)" width="48" height="40" frame="Idle 1" direction="ESE" />
