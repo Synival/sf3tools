@@ -181,6 +181,8 @@ namespace SF3.Utils {
                     var frameNames = FixedFrameNames(x.Key);
                     var frames = s_uniqueFramesByHash
                         .Where(y => y.Value.TextureHash != null && frameNames.Contains(y.Value.SpriteName))
+                        .GroupBy(y => y.Value.TextureHash)
+                        .Select(y => y.First())
                         .Select(y => new FrameDef(y.Value))
                         .OrderBy(y => y.Width)
                         .OrderBy(y => y.Height)
@@ -188,7 +190,10 @@ namespace SF3.Utils {
                         .OrderBy(y => y.Direction)
                         .OrderBy(y => y.Hash)
                         .ToArray();
-                    return new SpriteDef(x.Key, frames, x.ToArray());
+                    return new SpriteDef(x.Key, frames, x
+                        .GroupBy(y => y.AnimationHash)
+                        .Select(y => y.First())
+                        .ToArray());
                 })
                 .Where(x => x.Frames.Length > 0)
                 .ToArray();

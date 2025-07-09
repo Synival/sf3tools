@@ -8,6 +8,7 @@ namespace SF3.Sprites {
             Name = name;
             Frames = frames;
             Variants = animations
+                .Where(y => y.AnimationFrames != null && y.AnimationFrames.Length > 0)
                 .OrderBy(y => y.Width)
                 .ThenBy(y => y.Height)
                 .ThenBy(y => y.Directions)
