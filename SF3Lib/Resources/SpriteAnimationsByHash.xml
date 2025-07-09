@@ -1841,23 +1841,23 @@
     <item hash="a3a91c678376c0c3ad462e839aac22f4" sprite="Imperial Knight" animation="StillFrame" width="48" height="40" directions="4" frames="2" duration="10" />
     <item hash="9e3cb8b6d52910d6698073b836e242db" sprite="Imperial Knight" animation="Walking" width="48" height="40" directions="4" frames="7" duration="30" />
     <item hash="eafd9957d8125497ff05576ff0f2a644" sprite="Imperial Mage" animation="Idle" width="40" height="40" directions="4" frames="5" duration="40" />
-    <item hash="5c9f9037325d1dc60cad37c58dafe4cb" sprite="Imperial Mage" animation="StillFrame" width="40" height="40" directions="4" frames="2" duration="10" />
-    <item hash="800efe8b67f4a36bde13cf9b5783d8e7" sprite="Imperial Mage" animation="StillFrame" width="40" height="40" directions="4" frames="2" duration="10" />
+    <item hash="800efe8b67f4a36bde13cf9b5783d8e7" sprite="Imperial Mage" animation="StillFrame (Idle)" width="40" height="40" directions="4" frames="2" duration="10" />
+    <item hash="5c9f9037325d1dc60cad37c58dafe4cb" sprite="Imperial Mage" animation="StillFrame (Walking)" width="40" height="40" directions="4" frames="2" duration="10" />
     <item hash="0f1cc90c8e34eaaa36790c9f34882909" sprite="Imperial Mage" animation="Walking" width="40" height="40" directions="4" frames="7" duration="30" />
     <item hash="2758814ff1301270d993450e88d5d4c4" sprite="Iom Body" animation="Idle" width="72" height="56" directions="4" frames="5" duration="42" />
     <item hash="9a70f3c68bbef4cfb2f085a26f3e6df1" sprite="Iom Body" animation="StillFrame" width="72" height="56" directions="4" frames="2" duration="10" />
     <item hash="edc2aacee89303471dcd07858bf47d84" sprite="Iom Serpent" animation="Idle" width="40" height="48" directions="4" frames="7" duration="39" />
     <item hash="58f64688b663f5c59974b3f5fc807fb5" sprite="Iom Serpent" animation="StillFrame" width="40" height="48" directions="4" frames="2" duration="10" />
-    <item hash="8d24cd43e78eb2f689d45ce7f6df6365" sprite="Irene (P1)" animation="Idle" width="40" height="40" directions="4" frames="5" duration="24" />
-    <item hash="919abe3291c78ba7d8079ab072123f7d" sprite="Irene (P1)" animation="Idle" width="40" height="40" directions="6" frames="5" duration="24" />
-    <item hash="aa067a049d0b239c8960ea5384f7eaf4" sprite="Irene (P1)" animation="Nodding" width="40" height="40" directions="4" frames="5" duration="8" />
-    <item hash="2f1a6d2ef491ffb7745580b386039373" sprite="Irene (P1)" animation="Nodding" width="40" height="40" directions="4" frames="5" duration="12" />
-    <item hash="8d08598185ea867dc89fac7da6e7ac58" sprite="Irene (P1)" animation="ShakingHead" width="40" height="40" directions="4" frames="9" duration="16" />
-    <item hash="dcda18a5845080c8c61570b4c7225446" sprite="Irene (P1)" animation="ShakingHead" width="40" height="40" directions="4" frames="10" duration="27" />
-    <item hash="559e9da379c6bf8db2c9c6a3784bbe19" sprite="Irene (P1)" animation="StillFrame" width="40" height="40" directions="4" frames="2" duration="4" />
-    <item hash="80742b1fbfba0223b236d10a92973fd8" sprite="Irene (P1)" animation="StillFrame" width="40" height="40" directions="4" frames="2" duration="10" />
-    <item hash="a3916af9d870e8cc496805f32b56860a" sprite="Irene (P1)" animation="StillFrame" width="40" height="40" directions="4" frames="2" duration="10" />
-    <item hash="6588a47cba3d87954038c2d357b1c693" sprite="Irene (P1)" animation="StillFrame" width="40" height="40" directions="6" frames="2" duration="10" />
+    <item hash="8d24cd43e78eb2f689d45ce7f6df6365" sprite="Irene (P1)" animation="Idle (Battle)" width="40" height="40" directions="4" frames="5" duration="24" />
+    <item hash="919abe3291c78ba7d8079ab072123f7d" sprite="Irene (P1)" animation="Idle (Battle)" width="40" height="40" directions="6" frames="5" duration="24" />
+    <item hash="2f1a6d2ef491ffb7745580b386039373" sprite="Irene (P1)" animation="Nodding (Battle)" width="40" height="40" directions="4" frames="5" duration="12" />
+    <item hash="aa067a049d0b239c8960ea5384f7eaf4" sprite="Irene (P1)" animation="Nodding (Field)" width="40" height="40" directions="4" frames="5" duration="8" />
+    <item hash="dcda18a5845080c8c61570b4c7225446" sprite="Irene (P1)" animation="ShakingHead (Battle)" width="40" height="40" directions="4" frames="10" duration="27" />
+    <item hash="8d08598185ea867dc89fac7da6e7ac58" sprite="Irene (P1)" animation="ShakingHead (Field)" width="40" height="40" directions="4" frames="9" duration="16" />
+    <item hash="80742b1fbfba0223b236d10a92973fd8" sprite="Irene (P1)" animation="StillFrame (Battle)" width="40" height="40" directions="4" frames="2" duration="10" />
+    <item hash="559e9da379c6bf8db2c9c6a3784bbe19" sprite="Irene (P1)" animation="StillFrame (Field, Repeat)" width="40" height="40" directions="4" frames="2" duration="4" />
+    <item hash="a3916af9d870e8cc496805f32b56860a" sprite="Irene (P1)" animation="StillFrame (Field)" width="40" height="40" directions="4" frames="2" duration="10" />
+    <item hash="6588a47cba3d87954038c2d357b1c693" sprite="Irene (P1)" animation="StillFrame (Walking)" width="40" height="40" directions="6" frames="2" duration="10" />
     <item hash="e1f6cc188f2e8f51560276ca3a58849e" sprite="Irene (P1)" animation="Walking" width="40" height="40" directions="4" frames="7" duration="24" />
     <item hash="8ed3272062d1431725e556f26f5b5d06" sprite="Irene (P1)" animation="Walking" width="40" height="40" directions="6" frames="7" duration="24" />
     <item hash="b967c8609b4bf1df25339e84851453fd" sprite="Irene (P2)" animation="Idle" width="40" height="40" directions="4" frames="5" duration="24" />
@@ -1869,26 +1869,26 @@
     <item hash="d3fafb1eb01fe083c128a5b44194a129" sprite="Irene (P2)" animation="Walking" width="40" height="40" directions="4" frames="7" duration="24" />
     <item hash="faf9ab5972364bf2d19f91a76535e92f" sprite="Irene (P2)" animation="Walking" width="40" height="40" directions="6" frames="7" duration="24" />
     <item hash="c7c0302eecf287dc416886e7114a4a06" sprite="Irene (U)" animation="FinishingJumpKick" width="40" height="40" directions="4" frames="6" duration="16" />
-    <item hash="02de4d963db7992e37a1bd301235b1f0" sprite="Irene (U)" animation="Idle" width="40" height="40" directions="4" frames="5" duration="24" />
-    <item hash="63a9a850ebce0ecd642c725c573f4445" sprite="Irene (U)" animation="Idle" width="40" height="40" directions="6" frames="5" duration="24" />
-    <item hash="2dfdc6ef170d17ca5b1b9d696340f944" sprite="Irene (U)" animation="Nodding" width="40" height="40" directions="4" frames="5" duration="8" />
-    <item hash="07dd2160f5b2c425ff975198ffd1925f" sprite="Irene (U)" animation="Nodding" width="40" height="40" directions="4" frames="5" duration="12" />
-    <item hash="f88888d6a03e9ea4dd199a712bf9fb70" sprite="Irene (U)" animation="ShakingHead" width="40" height="40" directions="4" frames="9" duration="16" />
-    <item hash="92c67b3668e3ff77742861170c2f4b77" sprite="Irene (U)" animation="ShakingHead" width="40" height="40" directions="4" frames="10" duration="27" />
-    <item hash="4078cb3d45631a0565656682b5ceea68" sprite="Irene (U)" animation="SittingOnFloor" width="40" height="40" directions="4" frames="2" duration="10" />
+    <item hash="02de4d963db7992e37a1bd301235b1f0" sprite="Irene (U)" animation="Idle (Battle)" width="40" height="40" directions="4" frames="5" duration="24" />
+    <item hash="63a9a850ebce0ecd642c725c573f4445" sprite="Irene (U)" animation="Idle (Battle)" width="40" height="40" directions="6" frames="5" duration="24" />
+    <item hash="07dd2160f5b2c425ff975198ffd1925f" sprite="Irene (U)" animation="Nodding (Battle)" width="40" height="40" directions="4" frames="5" duration="12" />
+    <item hash="2dfdc6ef170d17ca5b1b9d696340f944" sprite="Irene (U)" animation="Nodding (Field)" width="40" height="40" directions="4" frames="5" duration="8" />
+    <item hash="92c67b3668e3ff77742861170c2f4b77" sprite="Irene (U)" animation="ShakingHead (Battle)" width="40" height="40" directions="4" frames="10" duration="27" />
+    <item hash="f88888d6a03e9ea4dd199a712bf9fb70" sprite="Irene (U)" animation="ShakingHead (Field)" width="40" height="40" directions="4" frames="9" duration="16" />
     <item hash="6e8bd6560bbed0dccbd4cc30e0ea1200" sprite="Irene (U)" animation="StandingUpFromSitting" width="40" height="40" directions="4" frames="4" duration="23" />
     <item hash="4cb6a7eef43df01e36a22ed86e8c5f74" sprite="Irene (U)" animation="StartingJumpKick" width="40" height="40" directions="4" frames="5" duration="13" />
-    <item hash="b9cbbbf2a0c4beed948e454aac30284f" sprite="Irene (U)" animation="StillFrame" width="40" height="40" directions="4" frames="2" duration="4" />
-    <item hash="58bcda171fd605dfa616275b9cd1de89" sprite="Irene (U)" animation="StillFrame" width="40" height="40" directions="4" frames="2" duration="10" />
-    <item hash="ced6ac8582166bf81ddd812b95307a8b" sprite="Irene (U)" animation="StillFrame" width="40" height="40" directions="4" frames="2" duration="10" />
-    <item hash="ca735afdabf71ee94eecb782d17eb435" sprite="Irene (U)" animation="StillFrame" width="40" height="40" directions="6" frames="2" duration="10" />
+    <item hash="58bcda171fd605dfa616275b9cd1de89" sprite="Irene (U)" animation="StillFrame (Battle)" width="40" height="40" directions="4" frames="2" duration="10" />
+    <item hash="b9cbbbf2a0c4beed948e454aac30284f" sprite="Irene (U)" animation="StillFrame (Field, Repeat)" width="40" height="40" directions="4" frames="2" duration="4" />
+    <item hash="ced6ac8582166bf81ddd812b95307a8b" sprite="Irene (U)" animation="StillFrame (Field)" width="40" height="40" directions="4" frames="2" duration="10" />
     <item hash="d50156afb44133cd0825769d329e066b" sprite="Irene (U)" animation="StillFrame (JumpKick)" width="40" height="40" directions="4" frames="2" duration="10" />
+    <item hash="4078cb3d45631a0565656682b5ceea68" sprite="Irene (U)" animation="StillFrame (Sitting on Floor)" width="40" height="40" directions="4" frames="2" duration="10" />
+    <item hash="ca735afdabf71ee94eecb782d17eb435" sprite="Irene (U)" animation="StillFrame (Walking)" width="40" height="40" directions="6" frames="2" duration="10" />
     <item hash="82e9e5a59382ba2fa1166dc3504ab00e" sprite="Irene (U)" animation="Walking" width="40" height="40" directions="4" frames="7" duration="24" />
     <item hash="d5dc573fcb27405745d6dc5de4c7e3a6" sprite="Irene (U)" animation="Walking" width="40" height="40" directions="6" frames="7" duration="24" />
     <item hash="c9307b43644a36b801d05ac3282d36a9" sprite="Iria" animation="Idle" width="40" height="40" directions="4" frames="5" duration="16" />
     <item hash="462e10fb86f519482f74c90602a0818c" sprite="Iria" animation="Nodding" width="40" height="40" directions="4" frames="5" duration="12" />
     <item hash="81095b50dae1f655454c232636014f3a" sprite="Iria" animation="ShakingHead" width="40" height="40" directions="4" frames="9" duration="23" />
-    <item hash="97d0a51135c4e9cc4a9b593c94689c1b" sprite="Iria" animation="ShakingHead (Forever)" width="40" height="40" directions="4" frames="5" duration="11" />
+    <item hash="97d0a51135c4e9cc4a9b593c94689c1b" sprite="Iria" animation="ShakingHead (Repeat)" width="40" height="40" directions="4" frames="5" duration="11" />
     <item hash="98f7535eb4215cee95447ad39f408058" sprite="Iria" animation="StillFrame" width="40" height="40" directions="4" frames="2" duration="10" />
     <item hash="fe68f36509c51f286fdd4ac2afcabaab" sprite="Iria" animation="Walking" width="40" height="40" directions="4" frames="7" duration="24" />
     <item hash="f8ed4359d6936193ca7f206a77f505b4" sprite="Iria's Boy" animation="Idle" width="40" height="40" directions="4" frames="5" duration="16" />
@@ -1906,11 +1906,11 @@
     <item hash="a67a977392e24d8b1da6f87351521862" sprite="Isabella (P1)" animation="Idle (2 Frames)" width="40" height="40" directions="4" frames="3" duration="16" />
     <item hash="ff417b10c0b0280b8fe0313e815d9007" sprite="Isabella (P1)" animation="Nodding" width="40" height="40" directions="4" frames="5" duration="12" />
     <item hash="ad9ae7fe68f67405f704709171ae6acc" sprite="Isabella (P1)" animation="ShakingHead" width="40" height="40" directions="4" frames="9" duration="23" />
-    <item hash="05fb4c4c1cefa187c116d9ca0efedd54" sprite="Isabella (P1)" animation="StillFrame" width="40" height="40" directions="4" frames="2" duration="10" />
-    <item hash="3521333cd4be3b5012116befe61c21e8" sprite="Isabella (P1)" animation="StillFrame" width="40" height="40" directions="4" frames="2" duration="10" />
-    <item hash="ba8ed89bc9846f720ab1e75df9c750e7" sprite="Isabella (P1)" animation="StillFrame" width="40" height="40" directions="4" frames="2" duration="10" />
-    <item hash="c0effa2eae067d72624fbc658e86574d" sprite="Isabella (P1)" animation="StillFrame" width="40" height="40" directions="6" frames="2" duration="10" />
-    <item hash="93935e68130ac72cc16103fca649e78b" sprite="Isabella (P1)" animation="StillFrame2" width="40" height="40" directions="4" frames="2" duration="4" />
+    <item hash="05fb4c4c1cefa187c116d9ca0efedd54" sprite="Isabella (P1)" animation="StillFrame (Idle 1)" width="40" height="40" directions="4" frames="2" duration="10" />
+    <item hash="93935e68130ac72cc16103fca649e78b" sprite="Isabella (P1)" animation="StillFrame (Idle 2, Repeat)" width="40" height="40" directions="4" frames="2" duration="4" />
+    <item hash="ba8ed89bc9846f720ab1e75df9c750e7" sprite="Isabella (P1)" animation="StillFrame (Idle 2)" width="40" height="40" directions="4" frames="2" duration="10" />
+    <item hash="3521333cd4be3b5012116befe61c21e8" sprite="Isabella (P1)" animation="StillFrame (Walking)" width="40" height="40" directions="4" frames="2" duration="10" />
+    <item hash="c0effa2eae067d72624fbc658e86574d" sprite="Isabella (P1)" animation="StillFrame (Walking)" width="40" height="40" directions="6" frames="2" duration="10" />
     <item hash="41007ef68109814df5012ce94ed50377" sprite="Isabella (P1)" animation="Walking" width="40" height="40" directions="4" frames="7" duration="24" />
     <item hash="5e3589ca1ee3497b525017b0c3a8f91d" sprite="Isabella (P1)" animation="Walking" width="40" height="40" directions="6" frames="7" duration="30" />
     <item hash="9424317f5b9c1fd77305c279ccc1b913" sprite="Isabella (P1)" animation="GettingUpFromGround" width="48" height="40" directions="1" frames="4" duration="20" />
@@ -1919,13 +1919,13 @@
     <item hash="573703e1fc9cc756cb3171b74d4cd3a4" sprite="Isabella (P2)" animation="Idle" width="40" height="40" directions="6" frames="5" duration="16" />
     <item hash="a93b310d4341d822df41927471f8230b" sprite="Isabella (P2)" animation="Nodding" width="40" height="40" directions="4" frames="5" duration="12" />
     <item hash="2165d28d5bf45c14e157dd6d49de9b07" sprite="Isabella (P2)" animation="ShakingHead" width="40" height="40" directions="4" frames="9" duration="23" />
-    <item hash="08599c7abe3ad0bf372a99ee508bcec2" sprite="Isabella (P2)" animation="StillFrame" width="40" height="40" directions="4" frames="2" duration="10" />
-    <item hash="1518369af71efc6b373acf35dcb1e2da" sprite="Isabella (P2)" animation="StillFrame" width="40" height="40" directions="4" frames="2" duration="10" />
-    <item hash="3b5bbb198dad1249bd18ad8c5bd9c0dc" sprite="Isabella (P2)" animation="StillFrame" width="40" height="40" directions="6" frames="2" duration="10" />
+    <item hash="08599c7abe3ad0bf372a99ee508bcec2" sprite="Isabella (P2)" animation="StillFrame (Idle)" width="40" height="40" directions="4" frames="2" duration="10" />
+    <item hash="1518369af71efc6b373acf35dcb1e2da" sprite="Isabella (P2)" animation="StillFrame (Walking)" width="40" height="40" directions="4" frames="2" duration="10" />
+    <item hash="3b5bbb198dad1249bd18ad8c5bd9c0dc" sprite="Isabella (P2)" animation="StillFrame (Walking)" width="40" height="40" directions="6" frames="2" duration="10" />
     <item hash="780be104cd188af177bd7786f7ec79df" sprite="Isabella (P2)" animation="Walking" width="40" height="40" directions="4" frames="7" duration="24" />
     <item hash="5935daec911ac570f62f49d3b196ff4a" sprite="Isabella (P2)" animation="Walking" width="40" height="40" directions="6" frames="7" duration="30" />
     <item hash="fa7185fedd6f4df0819f60f794b6dbaa" sprite="Isabella (P2)" animation="GettingUpFromGround" width="48" height="40" directions="1" frames="4" duration="20" />
-    <item hash="641cf21413117377d3980d37eb8fcac2" sprite="Isabella (P2)" animation="StillFrame" width="48" height="40" directions="1" frames="2" duration="10" />
+    <item hash="641cf21413117377d3980d37eb8fcac2" sprite="Isabella (P2)" animation="StillFrame (OnGround)" width="48" height="40" directions="1" frames="2" duration="10" />
     <item hash="d7e912c8b4d6699ac08aa73a3268b85e" sprite="Ishahakat" animation="Broken (Should be Walking)" width="40" height="48" directions="4" frames="18" duration="3286" />
     <item hash="015010e92586d23b9957cf8a01516742" sprite="Ishahakat" animation="Idle" width="40" height="48" directions="4" frames="5" duration="24" />
     <item hash="76ee884a279275ea77d275de30068b93" sprite="Ishahakat" animation="Nodding" width="40" height="48" directions="4" frames="5" duration="18" />
@@ -1933,11 +1933,11 @@
     <item hash="20b92782ef612c027555ba422c46329b" sprite="Ishahakat" animation="StillFrame" width="40" height="48" directions="4" frames="2" duration="10" />
     <item hash="c38dd2491af54fa42a75d8ddfffe36a2" sprite="Ishahakat" animation="Walking" width="40" height="48" directions="4" frames="7" duration="30" />
     <item hash="2911dc871130d9f00ca3852342351a83" sprite="Item Dealer" animation="Idle" width="40" height="40" directions="4" frames="5" duration="16" />
-    <item hash="54b624ab9f26259100b7bd91b29292e9" sprite="Item Dealer" animation="Idle (Similar to Walking)" width="40" height="40" directions="4" frames="7" duration="24" />
-    <item hash="2885ed7c0cec3725e7bf51c44aa4a78e" sprite="Item Dealer" animation="Idle/Walking" width="40" height="40" directions="4" frames="5" duration="20" />
     <item hash="2e855e733f30faf0a438072e7ef21995" sprite="Item Dealer" animation="Nodding" width="40" height="40" directions="4" frames="5" duration="20" />
     <item hash="490e973d520c7db4c8ffb04d6502e40b" sprite="Item Dealer" animation="StillFrame" width="40" height="40" directions="4" frames="2" duration="10" />
-    <item hash="5c9216e22df36d6b5c0988b40220dc75" sprite="Item Dealer" animation="Walking (Similar to Idle)" width="40" height="40" directions="4" frames="7" duration="30" />
+    <item hash="54b624ab9f26259100b7bd91b29292e9" sprite="Item Dealer" animation="Walking (Faster)" width="40" height="40" directions="4" frames="7" duration="24" />
+    <item hash="2885ed7c0cec3725e7bf51c44aa4a78e" sprite="Item Dealer" animation="Walking (Reduced)" width="40" height="40" directions="4" frames="5" duration="20" />
+    <item hash="5c9216e22df36d6b5c0988b40220dc75" sprite="Item Dealer" animation="Walking (Slower)" width="40" height="40" directions="4" frames="7" duration="30" />
     <item hash="1333869537987dd4e0f49244b868c459" sprite="Jade (P1)" animation="StillFrame (OnGround)" width="48" height="40" directions="4" frames="2" duration="10" />
     <item hash="7ee6f30b9c09f26a5b24c978bd537e7c" sprite="Jade (P1)" animation="StillFrame (OnGround)" width="48" height="40" directions="4" frames="2" duration="10" />
     <item hash="4723bdee6208b98f3cbed74777a04d22" sprite="Jade (P1) (No Tank)" animation="Idle" width="40" height="40" directions="4" frames="4" duration="13" />
