@@ -6321,6 +6321,26 @@
     <item hash="5674d57f45cd8eba7ca21a621028b0d7" sprite="Elf Man w/ Pink Shirt and Balding Brown Hair" width="40" height="40" frame="Idle/Walking 6" direction="ESE" />
     <item hash="aec23087fb76228fa933b64694fbc8a7" sprite="Elf Man w/ Pink Shirt and Balding Brown Hair" width="40" height="40" frame="Idle/Walking 6" direction="ENE" />
     <item hash="773e610837169d937ccf1a1bf6e75104" sprite="Elf Man w/ Pink Shirt and Balding Brown Hair" width="40" height="40" frame="Idle/Walking 6" direction="NNE" />
+    <item hash="103c8f7b91e47886707395b62e7e235f" sprite="Elf Woman in Bikini Who Doesn't Like To Be Pushed" width="40" height="40" frame="Idle (Similar to Walking) 1" direction="SSE" />
+    <item hash="73b34e24fd21c802ff8c1684ef1d5777" sprite="Elf Woman in Bikini Who Doesn't Like To Be Pushed" width="40" height="40" frame="Idle (Similar to Walking) 1" direction="ESE" />
+    <item hash="1c6a9da93ddb076a1358c2b32dc646bc" sprite="Elf Woman in Bikini Who Doesn't Like To Be Pushed" width="40" height="40" frame="Idle (Similar to Walking) 1" direction="ENE" />
+    <item hash="9c109a27999b1639bc4c2493bd78e906" sprite="Elf Woman in Bikini Who Doesn't Like To Be Pushed" width="40" height="40" frame="Idle (Similar to Walking) 1" direction="NNE" />
+    <item hash="e221311492378cd2193fbab0516c85bb" sprite="Elf Woman in Bikini Who Doesn't Like To Be Pushed" width="40" height="40" frame="Idle (Similar to Walking) 2" direction="SSE" />
+    <item hash="856ab52ece765ebfa7612a707a003755" sprite="Elf Woman in Bikini Who Doesn't Like To Be Pushed" width="40" height="40" frame="Idle (Similar to Walking) 2" direction="ESE" />
+    <item hash="44b8deb5ddb775757d9b2385fb347219" sprite="Elf Woman in Bikini Who Doesn't Like To Be Pushed" width="40" height="40" frame="Idle (Similar to Walking) 2" direction="ENE" />
+    <item hash="6c98d0662c4fff8ab493b257d9ade574" sprite="Elf Woman in Bikini Who Doesn't Like To Be Pushed" width="40" height="40" frame="Idle (Similar to Walking) 2" direction="NNE" />
+    <item hash="be42439e1ac755ef81a1514726d7366e" sprite="Elf Woman in Bikini Who Doesn't Like To Be Pushed" width="40" height="40" frame="Idle (Similar to Walking) 3" direction="SSE" />
+    <item hash="6fabcbebc2f991ee0c95bdcb98809dd0" sprite="Elf Woman in Bikini Who Doesn't Like To Be Pushed" width="40" height="40" frame="Idle (Similar to Walking) 3" direction="ESE" />
+    <item hash="6b7ae76174db2e45665e86ac2b84bed9" sprite="Elf Woman in Bikini Who Doesn't Like To Be Pushed" width="40" height="40" frame="Idle (Similar to Walking) 3" direction="ENE" />
+    <item hash="8702ca8772a96d370a4fae2e2aa7071c" sprite="Elf Woman in Bikini Who Doesn't Like To Be Pushed" width="40" height="40" frame="Idle (Similar to Walking) 3" direction="NNE" />
+    <item hash="6c788609d74a074094d6456a9acafc61" sprite="Elf Woman in Bikini Who Doesn't Like To Be Pushed" width="40" height="40" frame="Idle (Similar to Walking) 4" direction="SSE" />
+    <item hash="5f8c5d5a1805e4f6322aa2319dc62b33" sprite="Elf Woman in Bikini Who Doesn't Like To Be Pushed" width="40" height="40" frame="Idle (Similar to Walking) 4" direction="ESE" />
+    <item hash="50f134ba6b5e363fa9240e6c44b9bab2" sprite="Elf Woman in Bikini Who Doesn't Like To Be Pushed" width="40" height="40" frame="Idle (Similar to Walking) 4" direction="ENE" />
+    <item hash="4c8bd4c6eb94eed19a069c606e230923" sprite="Elf Woman in Bikini Who Doesn't Like To Be Pushed" width="40" height="40" frame="Idle (Similar to Walking) 4" direction="NNE" />
+    <item hash="29396a7c41ae3ab7fbb8530962928408" sprite="Elf Woman in Bikini Who Doesn't Like To Be Pushed" width="40" height="40" frame="Idle (Similar to Walking) 6" direction="SSE" />
+    <item hash="d58f14153de4c637a4033d6924075b65" sprite="Elf Woman in Bikini Who Doesn't Like To Be Pushed" width="40" height="40" frame="Idle (Similar to Walking) 6" direction="ESE" />
+    <item hash="ef4ba1000d781b60994a769eb620b5ce" sprite="Elf Woman in Bikini Who Doesn't Like To Be Pushed" width="40" height="40" frame="Idle (Similar to Walking) 6" direction="ENE" />
+    <item hash="fd562609bbf87a382e17e1ff0f53f40a" sprite="Elf Woman in Bikini Who Doesn't Like To Be Pushed" width="40" height="40" frame="Idle (Similar to Walking) 6" direction="NNE" />
     <item hash="628ffdb0db5aba93788256fdaca36390" sprite="Elf Woman w/ Brown Dress and Hair" width="40" height="40" frame="Idle/Walking 1" direction="SSE" />
     <item hash="65bf5ffe42180d1734b6c2eacab5c7f8" sprite="Elf Woman w/ Brown Dress and Hair" width="40" height="40" frame="Idle/Walking 1" direction="ESE" />
     <item hash="c5fec389f681e1891d3cc006b12368fd" sprite="Elf Woman w/ Brown Dress and Hair" width="40" height="40" frame="Idle/Walking 1" direction="ENE" />
@@ -6405,26 +6425,6 @@
     <item hash="9c0ab16bb768296d91641107766531dd" sprite="Elf Woman w/ White Apron" width="40" height="40" frame="Idle/Walking 6" direction="ESE" />
     <item hash="cca610e49ae6f5a8956af7dac59ac6b2" sprite="Elf Woman w/ White Apron" width="40" height="40" frame="Idle/Walking 6" direction="ENE" />
     <item hash="264999c63243313ee94588a62058eb80" sprite="Elf Woman w/ White Apron" width="40" height="40" frame="Idle/Walking 6" direction="NNE" />
-    <item hash="103c8f7b91e47886707395b62e7e235f" sprite="Elf Woman Who Doesn't Like To Be Pushed" width="40" height="40" frame="Idle (Similar to Walking) 1" direction="SSE" />
-    <item hash="73b34e24fd21c802ff8c1684ef1d5777" sprite="Elf Woman Who Doesn't Like To Be Pushed" width="40" height="40" frame="Idle (Similar to Walking) 1" direction="ESE" />
-    <item hash="1c6a9da93ddb076a1358c2b32dc646bc" sprite="Elf Woman Who Doesn't Like To Be Pushed" width="40" height="40" frame="Idle (Similar to Walking) 1" direction="ENE" />
-    <item hash="9c109a27999b1639bc4c2493bd78e906" sprite="Elf Woman Who Doesn't Like To Be Pushed" width="40" height="40" frame="Idle (Similar to Walking) 1" direction="NNE" />
-    <item hash="e221311492378cd2193fbab0516c85bb" sprite="Elf Woman Who Doesn't Like To Be Pushed" width="40" height="40" frame="Idle (Similar to Walking) 2" direction="SSE" />
-    <item hash="856ab52ece765ebfa7612a707a003755" sprite="Elf Woman Who Doesn't Like To Be Pushed" width="40" height="40" frame="Idle (Similar to Walking) 2" direction="ESE" />
-    <item hash="44b8deb5ddb775757d9b2385fb347219" sprite="Elf Woman Who Doesn't Like To Be Pushed" width="40" height="40" frame="Idle (Similar to Walking) 2" direction="ENE" />
-    <item hash="6c98d0662c4fff8ab493b257d9ade574" sprite="Elf Woman Who Doesn't Like To Be Pushed" width="40" height="40" frame="Idle (Similar to Walking) 2" direction="NNE" />
-    <item hash="be42439e1ac755ef81a1514726d7366e" sprite="Elf Woman Who Doesn't Like To Be Pushed" width="40" height="40" frame="Idle (Similar to Walking) 3" direction="SSE" />
-    <item hash="6fabcbebc2f991ee0c95bdcb98809dd0" sprite="Elf Woman Who Doesn't Like To Be Pushed" width="40" height="40" frame="Idle (Similar to Walking) 3" direction="ESE" />
-    <item hash="6b7ae76174db2e45665e86ac2b84bed9" sprite="Elf Woman Who Doesn't Like To Be Pushed" width="40" height="40" frame="Idle (Similar to Walking) 3" direction="ENE" />
-    <item hash="8702ca8772a96d370a4fae2e2aa7071c" sprite="Elf Woman Who Doesn't Like To Be Pushed" width="40" height="40" frame="Idle (Similar to Walking) 3" direction="NNE" />
-    <item hash="6c788609d74a074094d6456a9acafc61" sprite="Elf Woman Who Doesn't Like To Be Pushed" width="40" height="40" frame="Idle (Similar to Walking) 4" direction="SSE" />
-    <item hash="5f8c5d5a1805e4f6322aa2319dc62b33" sprite="Elf Woman Who Doesn't Like To Be Pushed" width="40" height="40" frame="Idle (Similar to Walking) 4" direction="ESE" />
-    <item hash="50f134ba6b5e363fa9240e6c44b9bab2" sprite="Elf Woman Who Doesn't Like To Be Pushed" width="40" height="40" frame="Idle (Similar to Walking) 4" direction="ENE" />
-    <item hash="4c8bd4c6eb94eed19a069c606e230923" sprite="Elf Woman Who Doesn't Like To Be Pushed" width="40" height="40" frame="Idle (Similar to Walking) 4" direction="NNE" />
-    <item hash="29396a7c41ae3ab7fbb8530962928408" sprite="Elf Woman Who Doesn't Like To Be Pushed" width="40" height="40" frame="Idle (Similar to Walking) 6" direction="SSE" />
-    <item hash="d58f14153de4c637a4033d6924075b65" sprite="Elf Woman Who Doesn't Like To Be Pushed" width="40" height="40" frame="Idle (Similar to Walking) 6" direction="ESE" />
-    <item hash="ef4ba1000d781b60994a769eb620b5ce" sprite="Elf Woman Who Doesn't Like To Be Pushed" width="40" height="40" frame="Idle (Similar to Walking) 6" direction="ENE" />
-    <item hash="fd562609bbf87a382e17e1ff0f53f40a" sprite="Elf Woman Who Doesn't Like To Be Pushed" width="40" height="40" frame="Idle (Similar to Walking) 6" direction="NNE" />
     <item hash="2fd9a28985332d874fb9bc9ab560bb25" sprite="Explosion" width="48" height="48" frame="Explode 1, Unexplode 9" direction="First" />
     <item hash="ce9d4b10bbe61a11012533f4470bd243" sprite="Explosion" width="48" height="48" frame="Explode 1, Unexplode 9" direction="First" />
     <item hash="99bce0ee8e86b8b0ebb3613d5c2b278b" sprite="Explosion" width="48" height="48" frame="Explode 2, Unexplode 8" direction="First" />
@@ -8050,26 +8050,6 @@
     <item hash="94677c225126d61ea51e14206c846fec" sprite="Girl w/ Red Dress" width="40" height="40" frame="ShakingHead 4" direction="ESE" />
     <item hash="96a1f274189e3bdf7dd342528fa1db2a" sprite="Girl w/ Red Dress" width="40" height="40" frame="ShakingHead 4" direction="ENE" />
     <item hash="e0e148d5d62143de84e2097dcf34893a" sprite="Girl w/ Red Dress" width="40" height="40" frame="ShakingHead 4" direction="NNE" />
-    <item hash="816fdf66d609af0acc833cc4d686d707" sprite="Girl w/ Red Parted Hair" width="40" height="40" frame="Idle (Similar to Walking) 1" direction="SSE" />
-    <item hash="af6791d5f0a65791dfeb6149cf5c7d60" sprite="Girl w/ Red Parted Hair" width="40" height="40" frame="Idle (Similar to Walking) 1" direction="ESE" />
-    <item hash="5ef72cdf754fe397bfaba3565f6772c4" sprite="Girl w/ Red Parted Hair" width="40" height="40" frame="Idle (Similar to Walking) 1" direction="ENE" />
-    <item hash="43cc38639f68850158117dafe68687ac" sprite="Girl w/ Red Parted Hair" width="40" height="40" frame="Idle (Similar to Walking) 1" direction="NNE" />
-    <item hash="c0696eec4f8a804ccbe0032e4c169388" sprite="Girl w/ Red Parted Hair" width="40" height="40" frame="Idle (Similar to Walking) 2" direction="SSE" />
-    <item hash="830c82bfa30107f160980d185a10fc0c" sprite="Girl w/ Red Parted Hair" width="40" height="40" frame="Idle (Similar to Walking) 2" direction="ESE" />
-    <item hash="0ac0e216fbd59883d873e716ef4633f4" sprite="Girl w/ Red Parted Hair" width="40" height="40" frame="Idle (Similar to Walking) 2" direction="ENE" />
-    <item hash="60342fadd06cde816fe846c0fc6f369a" sprite="Girl w/ Red Parted Hair" width="40" height="40" frame="Idle (Similar to Walking) 2" direction="NNE" />
-    <item hash="14eb95f4d91291559590f44c6586a5ff" sprite="Girl w/ Red Parted Hair" width="40" height="40" frame="Idle (Similar to Walking) 3" direction="SSE" />
-    <item hash="c28dbf3c873eaa5703695e54920624d5" sprite="Girl w/ Red Parted Hair" width="40" height="40" frame="Idle (Similar to Walking) 3" direction="ESE" />
-    <item hash="bac520b1fbf66d703889f38f1aabc646" sprite="Girl w/ Red Parted Hair" width="40" height="40" frame="Idle (Similar to Walking) 3" direction="ENE" />
-    <item hash="c6d0cc79783760f74b9a7a63515d7b66" sprite="Girl w/ Red Parted Hair" width="40" height="40" frame="Idle (Similar to Walking) 3" direction="NNE" />
-    <item hash="ef70751d5002697d40b32742a116bdb4" sprite="Girl w/ Red Parted Hair" width="40" height="40" frame="Idle (Similar to Walking) 4" direction="SSE" />
-    <item hash="2264ace9633b1234389d4cfef8ef5750" sprite="Girl w/ Red Parted Hair" width="40" height="40" frame="Idle (Similar to Walking) 4" direction="ESE" />
-    <item hash="df201a5bd74d6508b8af708930f79184" sprite="Girl w/ Red Parted Hair" width="40" height="40" frame="Idle (Similar to Walking) 4" direction="ENE" />
-    <item hash="383e78e640cff048ffb17de833c4a15b" sprite="Girl w/ Red Parted Hair" width="40" height="40" frame="Idle (Similar to Walking) 4" direction="NNE" />
-    <item hash="55a6ddb67ed112ff0f094a6bc475d171" sprite="Girl w/ Red Parted Hair" width="40" height="40" frame="Idle (Similar to Walking) 6" direction="SSE" />
-    <item hash="e522b10f60deebe57935f8dbcd2e7642" sprite="Girl w/ Red Parted Hair" width="40" height="40" frame="Idle (Similar to Walking) 6" direction="ESE" />
-    <item hash="2d858a3bf8eb764ec4da2fbe8b090622" sprite="Girl w/ Red Parted Hair" width="40" height="40" frame="Idle (Similar to Walking) 6" direction="ENE" />
-    <item hash="acf3712d53a15d69936e1636ea17188b" sprite="Girl w/ Red Parted Hair" width="40" height="40" frame="Idle (Similar to Walking) 6" direction="NNE" />
     <item hash="9322a9398b11f0170add1b79ad7064c8" sprite="Goblin" width="40" height="40" frame="Idle 1" direction="SSE" />
     <item hash="7f3465b6b50e16e268dde5829ca2bd5f" sprite="Goblin" width="40" height="40" frame="Idle 1" direction="ESE" />
     <item hash="e541fd4fac86afb92dc0ee7adbb51cf6" sprite="Goblin" width="40" height="40" frame="Idle 1" direction="ENE" />
@@ -8836,38 +8816,26 @@
     <item hash="f792e1e610d61c3f8ec0333aea9f53f4" sprite="Grantack" width="40" height="40" frame="Idle (2 Frames) 2, Idle 2, Idle 3" direction="ENE" />
     <item hash="465e528bca0889d6ff46b76475efe820" sprite="Grantack" width="40" height="40" frame="Idle (2 Frames) 2, Idle 2, Idle 3" direction="NNE" />
     <item hash="127bba576247bc5421c40a95d646c003" sprite="Grantack" width="40" height="40" frame="Idle 1" direction="S" />
-    <item hash="11cab63689f1a2e4ef9d641852a1e629" sprite="Grantack" width="40" height="40" frame="Idle 1" direction="SSE" />
     <item hash="ece49fc2dcd80d8d66b0dec7e0580bbc" sprite="Grantack" width="40" height="40" frame="Idle 1" direction="SSE" />
-    <item hash="45e39d45520b1fdbba67e7f3ab485811" sprite="Grantack" width="40" height="40" frame="Idle 1" direction="ESE" />
     <item hash="81f572ef8992d1e9f77bcbddc33fd408" sprite="Grantack" width="40" height="40" frame="Idle 1" direction="ESE" />
     <item hash="78d7d72a3600e10744ad5cb3b602977c" sprite="Grantack" width="40" height="40" frame="Idle 1" direction="ENE" />
-    <item hash="c03f328bdfeaec15266fd07aa99f18af" sprite="Grantack" width="40" height="40" frame="Idle 1" direction="ENE" />
     <item hash="4b8c18a159e142b1e4292571c79e6fda" sprite="Grantack" width="40" height="40" frame="Idle 1" direction="NNE" />
-    <item hash="89a2024a571dd8388f2570fbb7bd41b8" sprite="Grantack" width="40" height="40" frame="Idle 1" direction="NNE" />
     <item hash="115a344519cf09c0451bd843eaea5822" sprite="Grantack" width="40" height="40" frame="Idle 1" direction="N" />
     <item hash="37bb6a746f9f7b166a2a68cd587691ae" sprite="Grantack" width="40" height="40" frame="Idle 2" direction="S" />
     <item hash="23fda50d9beb61f4bbd7d1ebff3c5646" sprite="Grantack" width="40" height="40" frame="Idle 2" direction="SSE" />
     <item hash="241996f9403b2acef54547abccc9f754" sprite="Grantack" width="40" height="40" frame="Idle 2" direction="SSE" />
-    <item hash="9353d70c49a9ea724652c814dc926fd9" sprite="Grantack" width="40" height="40" frame="Idle 2" direction="SSE" />
     <item hash="a580c5374a041988c25c9e7f00c83061" sprite="Grantack" width="40" height="40" frame="Idle 2" direction="ESE" />
-    <item hash="b3b20d39c27b02cbda8e7ef086d40952" sprite="Grantack" width="40" height="40" frame="Idle 2" direction="ESE" />
     <item hash="d53f50758be9777954339c4517195f96" sprite="Grantack" width="40" height="40" frame="Idle 2" direction="ESE" />
     <item hash="145b645fdf8a7f9fb7cb144b5ceb0d46" sprite="Grantack" width="40" height="40" frame="Idle 2" direction="ENE" />
     <item hash="210d5829d77b3616002a7be9a296d332" sprite="Grantack" width="40" height="40" frame="Idle 2" direction="ENE" />
-    <item hash="726fcfa15d4201d7caad765baa519f6f" sprite="Grantack" width="40" height="40" frame="Idle 2" direction="ENE" />
     <item hash="6f308add004876b89a009f39aca23fc8" sprite="Grantack" width="40" height="40" frame="Idle 2" direction="NNE" />
-    <item hash="705c44c88bf5bbcaeeb4352afcd355d2" sprite="Grantack" width="40" height="40" frame="Idle 2" direction="NNE" />
     <item hash="db2c16b08f1795d5b67089bd614f614a" sprite="Grantack" width="40" height="40" frame="Idle 2" direction="NNE" />
     <item hash="dfb19da0574311793756d4b809375ae2" sprite="Grantack" width="40" height="40" frame="Idle 2" direction="N" />
     <item hash="ebbe6e18eb66b6df90b0d5ffa9b8b121" sprite="Grantack" width="40" height="40" frame="Idle 3" direction="S" />
     <item hash="41dcc85538aa89f803d1aa62db37bd31" sprite="Grantack" width="40" height="40" frame="Idle 3" direction="SSE" />
-    <item hash="cd453076ca7be97dc842a6fa647d05c5" sprite="Grantack" width="40" height="40" frame="Idle 3" direction="SSE" />
     <item hash="7507e29c8295cdd4359478ad9b65dea2" sprite="Grantack" width="40" height="40" frame="Idle 3" direction="ESE" />
-    <item hash="93694b58f718b28eca6131cf2a7dab29" sprite="Grantack" width="40" height="40" frame="Idle 3" direction="ESE" />
     <item hash="6a82b73847eb8527fcaf7298dbaff9b2" sprite="Grantack" width="40" height="40" frame="Idle 3" direction="ENE" />
-    <item hash="c760d9a59c60d0dc9fd25bf89329e643" sprite="Grantack" width="40" height="40" frame="Idle 3" direction="ENE" />
     <item hash="024bc95906471420732089acd0d299d1" sprite="Grantack" width="40" height="40" frame="Idle 3" direction="NNE" />
-    <item hash="a7d9ff7104226c12c8d7fce1f6f8fd0c" sprite="Grantack" width="40" height="40" frame="Idle 3" direction="NNE" />
     <item hash="8d6b2715c85bf3dc43fe4510bf916bbb" sprite="Grantack" width="40" height="40" frame="Idle 3" direction="N" />
     <item hash="b9ce328dd050b14049daa7a84e3821d0" sprite="Grantack" width="40" height="40" frame="Idle/Walking 1" direction="SSE" />
     <item hash="2b0fa32fc96a5ee884a02b9e745e0910" sprite="Grantack" width="40" height="40" frame="Idle/Walking 1" direction="ESE" />
@@ -8887,24 +8855,16 @@
     <item hash="0a73f3b4c0537de87f4e010206002689" sprite="Grantack" width="40" height="40" frame="Nodding (Single Frame) 2, Nodding 3" direction="NNE" />
     <item hash="8c4eb1fa5a8acdf00fcc253466a7d23b" sprite="Grantack" width="40" height="40" frame="Nodding 2" direction="SSE" />
     <item hash="a8801a1bdd756cca2d6a3d5649e079a9" sprite="Grantack" width="40" height="40" frame="Nodding 2" direction="SSE" />
-    <item hash="c5c03869de69afca4714e5857c9925b6" sprite="Grantack" width="40" height="40" frame="Nodding 2" direction="SSE" />
     <item hash="aadd677896fd2fafaf5fe1b669b1762f" sprite="Grantack" width="40" height="40" frame="Nodding 2" direction="ESE" />
     <item hash="b72d478517ee167618344371a56216a5" sprite="Grantack" width="40" height="40" frame="Nodding 2" direction="ESE" />
-    <item hash="c015ab1979ec824244ad176fa6f50688" sprite="Grantack" width="40" height="40" frame="Nodding 2" direction="ESE" />
-    <item hash="2c3ed989624a66d32dffcc9bbcf80e74" sprite="Grantack" width="40" height="40" frame="Nodding 2" direction="ENE" />
     <item hash="66f3e7a4f07b249ea4f404ed4f32efb5" sprite="Grantack" width="40" height="40" frame="Nodding 2" direction="ENE" />
     <item hash="d21a4b0f8e51e1f0f93dd8a5f4f2b9e6" sprite="Grantack" width="40" height="40" frame="Nodding 2" direction="ENE" />
-    <item hash="c4e03f819b13fb232cbe4eb1a69a9913" sprite="Grantack" width="40" height="40" frame="Nodding 2" direction="NNE" />
     <item hash="c502f471f3093299c5ed4f0b00c83ef0" sprite="Grantack" width="40" height="40" frame="Nodding 2" direction="NNE" />
     <item hash="e8c749426628b39760866c0324624992" sprite="Grantack" width="40" height="40" frame="Nodding 2" direction="NNE" />
-    <item hash="442f9678e9590da06d9270580e7f1b21" sprite="Grantack" width="40" height="40" frame="Nodding 3" direction="SSE" />
     <item hash="751906acf3bcfb469915f6c79ebcbb73" sprite="Grantack" width="40" height="40" frame="Nodding 3" direction="SSE" />
     <item hash="1a6c6c019d043ae7e78815a17dd7f3f7" sprite="Grantack" width="40" height="40" frame="Nodding 3" direction="ESE" />
-    <item hash="ac172f3baf314e086640cdb35863060b" sprite="Grantack" width="40" height="40" frame="Nodding 3" direction="ESE" />
-    <item hash="7ef9de2b9bbf161410e17f72f903e813" sprite="Grantack" width="40" height="40" frame="Nodding 3" direction="ENE" />
     <item hash="d571028f16635271c832a3cd7fdc59c3" sprite="Grantack" width="40" height="40" frame="Nodding 3" direction="ENE" />
     <item hash="023051c837dfee29f9292a8d0b35e255" sprite="Grantack" width="40" height="40" frame="Nodding 3" direction="NNE" />
-    <item hash="145e2fca042473933cdc621518900d9a" sprite="Grantack" width="40" height="40" frame="Nodding 3" direction="NNE" />
     <item hash="acec09f94e039443b066793acecafb6e" sprite="Grantack" width="40" height="40" frame="Pointing 2" direction="SSE" />
     <item hash="aa0ff9d366fa3f781991c5ef0e2604c8" sprite="Grantack" width="40" height="40" frame="Pointing 2" direction="ESE" />
     <item hash="777f8402ed13574c3adac2b377466853" sprite="Grantack" width="40" height="40" frame="Pointing 2" direction="ENE" />
@@ -8922,17 +8882,9 @@
     <item hash="b10c5ac5a04c11cbc6434ef142930e69" sprite="Grantack" width="40" height="40" frame="ShakingHead (Fast) 3, ShakingHead (Fast) 4" direction="ENE" />
     <item hash="0d3c87b647555e54e0c958c2ad20797c" sprite="Grantack" width="40" height="40" frame="ShakingHead (Fast) 3, ShakingHead (Fast) 4" direction="NNE" />
     <item hash="3eb9b5eadb03d090f2cf73d2bb20a112" sprite="Grantack" width="40" height="40" frame="ShakingHead 2" direction="SSE" />
-    <item hash="a85c351038b14a76075ee7fefcff114d" sprite="Grantack" width="40" height="40" frame="ShakingHead 2" direction="SSE" />
     <item hash="6960c1ee7eb73d18711285a2f3823656" sprite="Grantack" width="40" height="40" frame="ShakingHead 2" direction="ESE" />
-    <item hash="9fefdc0e6a4c0bb947b43e76eb1cf1c6" sprite="Grantack" width="40" height="40" frame="ShakingHead 2" direction="ESE" />
-    <item hash="785e3f614a77a3afd64af4fccb3420d4" sprite="Grantack" width="40" height="40" frame="ShakingHead 2" direction="ENE" />
     <item hash="b1805d37c5bb4b26b373a7760c406af5" sprite="Grantack" width="40" height="40" frame="ShakingHead 2" direction="ENE" />
     <item hash="272549c441cc8296bf76817ab6fa8cb6" sprite="Grantack" width="40" height="40" frame="ShakingHead 2" direction="NNE" />
-    <item hash="2e0e4f30ea0880a157f0c5efbfe98c1b" sprite="Grantack" width="40" height="40" frame="ShakingHead 2" direction="NNE" />
-    <item hash="f593e39339ed05bfbfb4dc0e9f783a36" sprite="Grantack" width="40" height="40" frame="ShakingHead 3" direction="SSE" />
-    <item hash="1625013db22d963d75ecbb6558598b91" sprite="Grantack" width="40" height="40" frame="ShakingHead 3" direction="ESE" />
-    <item hash="f4bb107127742d13c0cc3f56531299f3" sprite="Grantack" width="40" height="40" frame="ShakingHead 3" direction="ENE" />
-    <item hash="ac904ed76db4e343cb98249066ab9b8d" sprite="Grantack" width="40" height="40" frame="ShakingHead 3" direction="NNE" />
     <item hash="2083d1b6a61736d7ca21a1014118dd40" sprite="Grantack" width="40" height="40" frame="ShakingHead 4" direction="SSE" />
     <item hash="0f2c859eda2184529f4d7dd5ad7c8bda" sprite="Grantack" width="40" height="40" frame="ShakingHead 4" direction="ESE" />
     <item hash="4a887503eecd2a19960ff9af5954fa58" sprite="Grantack" width="40" height="40" frame="ShakingHead 4" direction="ENE" />
@@ -8948,23 +8900,15 @@
     <item hash="e4c279683ccec4eea427f580959b9b02" sprite="Grantack" width="40" height="40" frame="Walking (Half) 2, Walking 2" direction="ENE" />
     <item hash="73b9fb9f162d26b09ea680c103b879d2" sprite="Grantack" width="40" height="40" frame="Walking (Half) 2, Walking 2" direction="NNE" />
     <item hash="a21a1097ca447ca85776017a2d5ae905" sprite="Grantack" width="40" height="40" frame="Walking 1" direction="S" />
-    <item hash="0747ba9c98d03e4e6a6fd1ed4419e693" sprite="Grantack" width="40" height="40" frame="Walking 1" direction="SSE" />
     <item hash="4412cd7774bb55ca67f0a7de7d804225" sprite="Grantack" width="40" height="40" frame="Walking 1" direction="SSE" />
-    <item hash="9d1c48e1907df9dc53c5cb18ea5122c9" sprite="Grantack" width="40" height="40" frame="Walking 1" direction="ESE" />
     <item hash="ffa66538b39f66919927f6aa62de6469" sprite="Grantack" width="40" height="40" frame="Walking 1" direction="ESE" />
     <item hash="59ac1a5854575036bd5e7960cfc5f2b9" sprite="Grantack" width="40" height="40" frame="Walking 1" direction="ENE" />
-    <item hash="9743d08cb0343574e0ac903bc1a20bee" sprite="Grantack" width="40" height="40" frame="Walking 1" direction="ENE" />
     <item hash="256a8e8f4c853681cce63273e596833c" sprite="Grantack" width="40" height="40" frame="Walking 1" direction="NNE" />
-    <item hash="a74a09a741af0c86bef96f1d1874a738" sprite="Grantack" width="40" height="40" frame="Walking 1" direction="NNE" />
     <item hash="9ff3a1779fff35dba8a3bcf2bac714bc" sprite="Grantack" width="40" height="40" frame="Walking 1" direction="N" />
     <item hash="12c9318dabb4c923483bf1c1291c295e" sprite="Grantack" width="40" height="40" frame="Walking 2" direction="S" />
-    <item hash="0bd77c1d331162b89b037153e9a563a5" sprite="Grantack" width="40" height="40" frame="Walking 2" direction="SSE" />
     <item hash="3ed51e5e236e13469111bb98bc35ac6c" sprite="Grantack" width="40" height="40" frame="Walking 2" direction="SSE" />
-    <item hash="56dbb6b745cd169e447eed9bf3205fec" sprite="Grantack" width="40" height="40" frame="Walking 2" direction="ESE" />
     <item hash="6725128cdd17f5a7889ed7f54605ec1b" sprite="Grantack" width="40" height="40" frame="Walking 2" direction="ESE" />
-    <item hash="544900635dfc6f07d6de9abd9fdbe86a" sprite="Grantack" width="40" height="40" frame="Walking 2" direction="ENE" />
     <item hash="f081982afb2a5374b9ccdbc8f8b4b36b" sprite="Grantack" width="40" height="40" frame="Walking 2" direction="ENE" />
-    <item hash="2eff6ac44cc8babb05378ef843a19abd" sprite="Grantack" width="40" height="40" frame="Walking 2" direction="NNE" />
     <item hash="73fece4025d57d55d8345481417a6723" sprite="Grantack" width="40" height="40" frame="Walking 2" direction="NNE" />
     <item hash="7de89c833a34a1a4bb216608dec501e3" sprite="Grantack" width="40" height="40" frame="Walking 2" direction="N" />
     <item hash="51b5c7a52978ac4bb502352b9c5ad103" sprite="Grantack" width="40" height="40" frame="Walking 3" direction="S" />
@@ -8974,29 +8918,65 @@
     <item hash="1b89cd6844dbd64df0e9235b2e9de8a5" sprite="Grantack" width="40" height="40" frame="Walking 3, Walking 5" direction="ENE" />
     <item hash="93be612b1433e0a6a7d7350c4b6ca842" sprite="Grantack" width="40" height="40" frame="Walking 3, Walking 5" direction="NNE" />
     <item hash="b2162ca7bae8065b5984a9f2e5d68820" sprite="Grantack" width="40" height="40" frame="Walking 4" direction="S" />
-    <item hash="1b9e105d8f9df8a9eba51d9eb2ccf2d4" sprite="Grantack" width="40" height="40" frame="Walking 4" direction="SSE" />
     <item hash="7e2b6d876e77c55d11e2d5953a585185" sprite="Grantack" width="40" height="40" frame="Walking 4" direction="SSE" />
     <item hash="cf38fe0d0e2ae4b3975b0441440caf19" sprite="Grantack" width="40" height="40" frame="Walking 4" direction="SSE" />
-    <item hash="6efc2ec417061f220adad8ab957ebccc" sprite="Grantack" width="40" height="40" frame="Walking 4" direction="ESE" />
     <item hash="81c6952c42fd063097d87ea50ebef33f" sprite="Grantack" width="40" height="40" frame="Walking 4" direction="ESE" />
     <item hash="f34a06914e2f7c87598525ed33214c56" sprite="Grantack" width="40" height="40" frame="Walking 4" direction="ESE" />
     <item hash="0ee3b613763bbe2eb74e797a80a7db46" sprite="Grantack" width="40" height="40" frame="Walking 4" direction="ENE" />
-    <item hash="52315d8166be1eff71098f5c0abd7df0" sprite="Grantack" width="40" height="40" frame="Walking 4" direction="ENE" />
     <item hash="8e463c315906b48aa13625def43bb9db" sprite="Grantack" width="40" height="40" frame="Walking 4" direction="ENE" />
     <item hash="125488c5f878ef0221b4ffc31938b60c" sprite="Grantack" width="40" height="40" frame="Walking 4" direction="NNE" />
     <item hash="a610bf9c7e4ed9237967a5641d74fd80" sprite="Grantack" width="40" height="40" frame="Walking 4" direction="NNE" />
-    <item hash="d900635cc9173259762c41ced22b1d93" sprite="Grantack" width="40" height="40" frame="Walking 4" direction="NNE" />
     <item hash="494260acf2ecdeef5b8dbe2d45a32e54" sprite="Grantack" width="40" height="40" frame="Walking 4" direction="N" />
     <item hash="0fbef3e358dcf87393cf0cbc6ad8902d" sprite="Grantack" width="40" height="40" frame="Walking 5" direction="S" />
-    <item hash="bb5941791a746b7792536eda19f6151e" sprite="Grantack" width="40" height="40" frame="Walking 5" direction="SSE" />
     <item hash="f9caa637c7de06545b148240f5efb33e" sprite="Grantack" width="40" height="40" frame="Walking 5" direction="SSE" />
     <item hash="68b311ed76b2de7711bf42f5da64678d" sprite="Grantack" width="40" height="40" frame="Walking 5" direction="ESE" />
-    <item hash="77d658d49a6e8c2044828c8a0bade7e3" sprite="Grantack" width="40" height="40" frame="Walking 5" direction="ESE" />
     <item hash="3b5fb113c8264d0b6e8cb99439b5bdf6" sprite="Grantack" width="40" height="40" frame="Walking 5" direction="ENE" />
-    <item hash="90f6430aaa2dc124321319503158d40f" sprite="Grantack" width="40" height="40" frame="Walking 5" direction="ENE" />
     <item hash="393072c5f98e6abbd2c9dd8c38003dd3" sprite="Grantack" width="40" height="40" frame="Walking 5" direction="NNE" />
-    <item hash="bee16fc33a43008770a0855c5807c583" sprite="Grantack" width="40" height="40" frame="Walking 5" direction="NNE" />
     <item hash="9a264b51188cb1069c0ce0cb234048d7" sprite="Grantack" width="40" height="40" frame="Walking 5" direction="N" />
+    <item hash="11cab63689f1a2e4ef9d641852a1e629" sprite="Grantack (Old)" width="40" height="40" frame="Idle 1" direction="SSE" />
+    <item hash="45e39d45520b1fdbba67e7f3ab485811" sprite="Grantack (Old)" width="40" height="40" frame="Idle 1" direction="ESE" />
+    <item hash="c03f328bdfeaec15266fd07aa99f18af" sprite="Grantack (Old)" width="40" height="40" frame="Idle 1" direction="ENE" />
+    <item hash="89a2024a571dd8388f2570fbb7bd41b8" sprite="Grantack (Old)" width="40" height="40" frame="Idle 1" direction="NNE" />
+    <item hash="9353d70c49a9ea724652c814dc926fd9" sprite="Grantack (Old)" width="40" height="40" frame="Idle 2" direction="SSE" />
+    <item hash="b3b20d39c27b02cbda8e7ef086d40952" sprite="Grantack (Old)" width="40" height="40" frame="Idle 2" direction="ESE" />
+    <item hash="726fcfa15d4201d7caad765baa519f6f" sprite="Grantack (Old)" width="40" height="40" frame="Idle 2" direction="ENE" />
+    <item hash="705c44c88bf5bbcaeeb4352afcd355d2" sprite="Grantack (Old)" width="40" height="40" frame="Idle 2" direction="NNE" />
+    <item hash="cd453076ca7be97dc842a6fa647d05c5" sprite="Grantack (Old)" width="40" height="40" frame="Idle 3" direction="SSE" />
+    <item hash="93694b58f718b28eca6131cf2a7dab29" sprite="Grantack (Old)" width="40" height="40" frame="Idle 3" direction="ESE" />
+    <item hash="c760d9a59c60d0dc9fd25bf89329e643" sprite="Grantack (Old)" width="40" height="40" frame="Idle 3" direction="ENE" />
+    <item hash="a7d9ff7104226c12c8d7fce1f6f8fd0c" sprite="Grantack (Old)" width="40" height="40" frame="Idle 3" direction="NNE" />
+    <item hash="c5c03869de69afca4714e5857c9925b6" sprite="Grantack (Old)" width="40" height="40" frame="Nodding 2" direction="SSE" />
+    <item hash="c015ab1979ec824244ad176fa6f50688" sprite="Grantack (Old)" width="40" height="40" frame="Nodding 2" direction="ESE" />
+    <item hash="2c3ed989624a66d32dffcc9bbcf80e74" sprite="Grantack (Old)" width="40" height="40" frame="Nodding 2" direction="ENE" />
+    <item hash="c4e03f819b13fb232cbe4eb1a69a9913" sprite="Grantack (Old)" width="40" height="40" frame="Nodding 2" direction="NNE" />
+    <item hash="442f9678e9590da06d9270580e7f1b21" sprite="Grantack (Old)" width="40" height="40" frame="Nodding 3" direction="SSE" />
+    <item hash="ac172f3baf314e086640cdb35863060b" sprite="Grantack (Old)" width="40" height="40" frame="Nodding 3" direction="ESE" />
+    <item hash="7ef9de2b9bbf161410e17f72f903e813" sprite="Grantack (Old)" width="40" height="40" frame="Nodding 3" direction="ENE" />
+    <item hash="145e2fca042473933cdc621518900d9a" sprite="Grantack (Old)" width="40" height="40" frame="Nodding 3" direction="NNE" />
+    <item hash="a85c351038b14a76075ee7fefcff114d" sprite="Grantack (Old)" width="40" height="40" frame="ShakingHead 2" direction="SSE" />
+    <item hash="9fefdc0e6a4c0bb947b43e76eb1cf1c6" sprite="Grantack (Old)" width="40" height="40" frame="ShakingHead 2" direction="ESE" />
+    <item hash="785e3f614a77a3afd64af4fccb3420d4" sprite="Grantack (Old)" width="40" height="40" frame="ShakingHead 2" direction="ENE" />
+    <item hash="2e0e4f30ea0880a157f0c5efbfe98c1b" sprite="Grantack (Old)" width="40" height="40" frame="ShakingHead 2" direction="NNE" />
+    <item hash="f593e39339ed05bfbfb4dc0e9f783a36" sprite="Grantack (Old)" width="40" height="40" frame="ShakingHead 3" direction="SSE" />
+    <item hash="1625013db22d963d75ecbb6558598b91" sprite="Grantack (Old)" width="40" height="40" frame="ShakingHead 3" direction="ESE" />
+    <item hash="f4bb107127742d13c0cc3f56531299f3" sprite="Grantack (Old)" width="40" height="40" frame="ShakingHead 3" direction="ENE" />
+    <item hash="ac904ed76db4e343cb98249066ab9b8d" sprite="Grantack (Old)" width="40" height="40" frame="ShakingHead 3" direction="NNE" />
+    <item hash="0747ba9c98d03e4e6a6fd1ed4419e693" sprite="Grantack (Old)" width="40" height="40" frame="Walking 1" direction="SSE" />
+    <item hash="9d1c48e1907df9dc53c5cb18ea5122c9" sprite="Grantack (Old)" width="40" height="40" frame="Walking 1" direction="ESE" />
+    <item hash="9743d08cb0343574e0ac903bc1a20bee" sprite="Grantack (Old)" width="40" height="40" frame="Walking 1" direction="ENE" />
+    <item hash="a74a09a741af0c86bef96f1d1874a738" sprite="Grantack (Old)" width="40" height="40" frame="Walking 1" direction="NNE" />
+    <item hash="0bd77c1d331162b89b037153e9a563a5" sprite="Grantack (Old)" width="40" height="40" frame="Walking 2" direction="SSE" />
+    <item hash="56dbb6b745cd169e447eed9bf3205fec" sprite="Grantack (Old)" width="40" height="40" frame="Walking 2" direction="ESE" />
+    <item hash="544900635dfc6f07d6de9abd9fdbe86a" sprite="Grantack (Old)" width="40" height="40" frame="Walking 2" direction="ENE" />
+    <item hash="2eff6ac44cc8babb05378ef843a19abd" sprite="Grantack (Old)" width="40" height="40" frame="Walking 2" direction="NNE" />
+    <item hash="1b9e105d8f9df8a9eba51d9eb2ccf2d4" sprite="Grantack (Old)" width="40" height="40" frame="Walking 4" direction="SSE" />
+    <item hash="6efc2ec417061f220adad8ab957ebccc" sprite="Grantack (Old)" width="40" height="40" frame="Walking 4" direction="ESE" />
+    <item hash="52315d8166be1eff71098f5c0abd7df0" sprite="Grantack (Old)" width="40" height="40" frame="Walking 4" direction="ENE" />
+    <item hash="d900635cc9173259762c41ced22b1d93" sprite="Grantack (Old)" width="40" height="40" frame="Walking 4" direction="NNE" />
+    <item hash="bb5941791a746b7792536eda19f6151e" sprite="Grantack (Old)" width="40" height="40" frame="Walking 5" direction="SSE" />
+    <item hash="77d658d49a6e8c2044828c8a0bade7e3" sprite="Grantack (Old)" width="40" height="40" frame="Walking 5" direction="ESE" />
+    <item hash="90f6430aaa2dc124321319503158d40f" sprite="Grantack (Old)" width="40" height="40" frame="Walking 5" direction="ENE" />
+    <item hash="bee16fc33a43008770a0855c5807c583" sprite="Grantack (Old)" width="40" height="40" frame="Walking 5" direction="NNE" />
     <item hash="f6df64ee422e415e8e6448c3fb12a887" sprite="Green Dragon" width="56" height="40" frame="Idle (Faster than Flying) 1" direction="SSE" />
     <item hash="b7aa2e6ef5321c469658c0121579d2dd" sprite="Green Dragon" width="56" height="40" frame="Idle (Faster than Flying) 1" direction="ESE" />
     <item hash="505f1a0c96a96b3bb26c5e54492a011b" sprite="Green Dragon" width="56" height="40" frame="Idle (Faster than Flying) 1" direction="ENE" />
@@ -24743,6 +24723,26 @@
     <item hash="ea99908251e6d37bd57d266a26937231" sprite="Woman Carrying Rice" width="40" height="40" frame="Idle (Similar to Walking) 5" direction="ESE" />
     <item hash="2faca3832d97f4b79401a0b37c01685f" sprite="Woman Carrying Rice" width="40" height="40" frame="Idle (Similar to Walking) 5" direction="ENE" />
     <item hash="baef01a931daa5477bd36a6bcb2189e7" sprite="Woman Carrying Rice" width="40" height="40" frame="Idle (Similar to Walking) 5" direction="NNE" />
+    <item hash="816fdf66d609af0acc833cc4d686d707" sprite="Woman in Bikini w/ Red Parted Hair" width="40" height="40" frame="Idle (Similar to Walking) 1" direction="SSE" />
+    <item hash="af6791d5f0a65791dfeb6149cf5c7d60" sprite="Woman in Bikini w/ Red Parted Hair" width="40" height="40" frame="Idle (Similar to Walking) 1" direction="ESE" />
+    <item hash="5ef72cdf754fe397bfaba3565f6772c4" sprite="Woman in Bikini w/ Red Parted Hair" width="40" height="40" frame="Idle (Similar to Walking) 1" direction="ENE" />
+    <item hash="43cc38639f68850158117dafe68687ac" sprite="Woman in Bikini w/ Red Parted Hair" width="40" height="40" frame="Idle (Similar to Walking) 1" direction="NNE" />
+    <item hash="c0696eec4f8a804ccbe0032e4c169388" sprite="Woman in Bikini w/ Red Parted Hair" width="40" height="40" frame="Idle (Similar to Walking) 2" direction="SSE" />
+    <item hash="830c82bfa30107f160980d185a10fc0c" sprite="Woman in Bikini w/ Red Parted Hair" width="40" height="40" frame="Idle (Similar to Walking) 2" direction="ESE" />
+    <item hash="0ac0e216fbd59883d873e716ef4633f4" sprite="Woman in Bikini w/ Red Parted Hair" width="40" height="40" frame="Idle (Similar to Walking) 2" direction="ENE" />
+    <item hash="60342fadd06cde816fe846c0fc6f369a" sprite="Woman in Bikini w/ Red Parted Hair" width="40" height="40" frame="Idle (Similar to Walking) 2" direction="NNE" />
+    <item hash="14eb95f4d91291559590f44c6586a5ff" sprite="Woman in Bikini w/ Red Parted Hair" width="40" height="40" frame="Idle (Similar to Walking) 3" direction="SSE" />
+    <item hash="c28dbf3c873eaa5703695e54920624d5" sprite="Woman in Bikini w/ Red Parted Hair" width="40" height="40" frame="Idle (Similar to Walking) 3" direction="ESE" />
+    <item hash="bac520b1fbf66d703889f38f1aabc646" sprite="Woman in Bikini w/ Red Parted Hair" width="40" height="40" frame="Idle (Similar to Walking) 3" direction="ENE" />
+    <item hash="c6d0cc79783760f74b9a7a63515d7b66" sprite="Woman in Bikini w/ Red Parted Hair" width="40" height="40" frame="Idle (Similar to Walking) 3" direction="NNE" />
+    <item hash="ef70751d5002697d40b32742a116bdb4" sprite="Woman in Bikini w/ Red Parted Hair" width="40" height="40" frame="Idle (Similar to Walking) 4" direction="SSE" />
+    <item hash="2264ace9633b1234389d4cfef8ef5750" sprite="Woman in Bikini w/ Red Parted Hair" width="40" height="40" frame="Idle (Similar to Walking) 4" direction="ESE" />
+    <item hash="df201a5bd74d6508b8af708930f79184" sprite="Woman in Bikini w/ Red Parted Hair" width="40" height="40" frame="Idle (Similar to Walking) 4" direction="ENE" />
+    <item hash="383e78e640cff048ffb17de833c4a15b" sprite="Woman in Bikini w/ Red Parted Hair" width="40" height="40" frame="Idle (Similar to Walking) 4" direction="NNE" />
+    <item hash="55a6ddb67ed112ff0f094a6bc475d171" sprite="Woman in Bikini w/ Red Parted Hair" width="40" height="40" frame="Idle (Similar to Walking) 6" direction="SSE" />
+    <item hash="e522b10f60deebe57935f8dbcd2e7642" sprite="Woman in Bikini w/ Red Parted Hair" width="40" height="40" frame="Idle (Similar to Walking) 6" direction="ESE" />
+    <item hash="2d858a3bf8eb764ec4da2fbe8b090622" sprite="Woman in Bikini w/ Red Parted Hair" width="40" height="40" frame="Idle (Similar to Walking) 6" direction="ENE" />
+    <item hash="acf3712d53a15d69936e1636ea17188b" sprite="Woman in Bikini w/ Red Parted Hair" width="40" height="40" frame="Idle (Similar to Walking) 6" direction="NNE" />
     <item hash="4fb777f09862af54ffd35fc3a3dbe33d" sprite="Woman w/ Baby and Red Dress" width="40" height="40" frame="Idle (Rocking Baby) 1" direction="SSE" />
     <item hash="7d25e30058ae113224332da36f46ce37" sprite="Woman w/ Baby and Red Dress" width="40" height="40" frame="Idle (Rocking Baby) 1" direction="ESE" />
     <item hash="58b6246fb6f95d3ef71b351436523ffa" sprite="Woman w/ Baby and Red Dress" width="40" height="40" frame="Idle (Rocking Baby) 1" direction="ENE" />
