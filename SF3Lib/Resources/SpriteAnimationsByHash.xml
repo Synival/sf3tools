@@ -3,8 +3,8 @@
     <item hash="ee91a9cfb55e5f054d9cc783b86b4142" sprite="Abdark" animation="Hovering (Fast)" width="40" height="40" directions="4" frames="9" duration="23" />
     <item hash="820ba888ad70db14ed1d60ffad546af9" sprite="Abdark" animation="Hovering (Slow)" width="40" height="40" directions="4" frames="9" duration="34" />
     <item hash="31c0a1e3104e4749ed82955f48ffe7ad" sprite="Abdark" animation="StillFrame" width="40" height="40" directions="4" frames="2" duration="10" />
-    <item hash="c419ba43b44c6caf0e0bfc79abca029c" sprite="Abdark" animation="StillFrame1 (OnGround)" width="48" height="40" directions="4" frames="2" duration="10" />
-    <item hash="2e6f405c7908b3d052d766e955e9d56b" sprite="Abdark" animation="StillFrame2 (OnGround)" width="48" height="40" directions="4" frames="2" duration="5" />
+    <item hash="2e6f405c7908b3d052d766e955e9d56b" sprite="Abdark" animation="StillFrame (OnGround, Repeat)" width="48" height="40" directions="4" frames="2" duration="5" />
+    <item hash="c419ba43b44c6caf0e0bfc79abca029c" sprite="Abdark" animation="StillFrame (OnGround)" width="48" height="40" directions="4" frames="2" duration="10" />
     <item hash="ca3e55e3bf62efefd08dde7382f6c6cd" sprite="Accessory Dealer" animation="Idle" width="40" height="40" directions="4" frames="5" duration="16" />
     <item hash="62876e7eb6db6c296c38c53c25cec0a6" sprite="Accessory Dealer" animation="Nodding" width="40" height="40" directions="4" frames="5" duration="20" />
     <item hash="4bc178979738d9e299de09e352273283" sprite="Accessory Dealer" animation="StillFrame (Walking)" width="40" height="40" directions="4" frames="2" duration="10" />
@@ -2184,7 +2184,7 @@
     <item hash="037d143b5b7066d0a42c7f77f42966ab" sprite="Kahn (U)" animation="StillFrame (Battle)" width="40" height="40" directions="4" frames="2" duration="10" />
     <item hash="411edfb95cac9d1eb1ac8c2c0760f5c2" sprite="Kahn (U)" animation="StillFrame (Field 1)" width="40" height="40" directions="4" frames="2" duration="10" />
     <item hash="a222e3a029048472826115ac68bd9815" sprite="Kahn (U)" animation="StillFrame (Field 2)" width="40" height="40" directions="4" frames="2" duration="10" />
-    <item hash="c03d77283abbfb0664f0cd14c1e326e8" sprite="Kahn (U)" animation="StillFrame (Walking)" width="40" height="40" directions="6" frames="2" duration="10" />
+    <item hash="c03d77283abbfb0664f0cd14c1e326e8" sprite="Kahn (U)" animation="StillFrame (Field)" width="40" height="40" directions="6" frames="2" duration="10" />
     <item hash="06f63894bdd82eaf034d4eae384bfa23" sprite="Kahn (U)" animation="Walking" width="40" height="40" directions="4" frames="7" duration="30" />
     <item hash="99f4a282ed4292c1bc690b285de14e08" sprite="Kahn (U)" animation="Walking" width="40" height="40" directions="6" frames="7" duration="30" />
     <item hash="5d37c301892f97beb9684fc9f63ecc58" sprite="Kaiser Guard" animation="Idle (Battle)" width="40" height="40" directions="4" frames="5" duration="18" />
@@ -3526,30 +3526,6 @@
     <item hash="49ab4a0a7bc63eee47a0a405c0a67176" sprite="Spiriel (P1)" animation="StillFrame (Field)" width="40" height="40" directions="4" frames="2" duration="10" />
     <item hash="24d9214d9047493e5c48c363e55044e5" sprite="Spiriel (P1)" animation="Walking (Bad ENE)" width="40" height="40" directions="4" frames="7" duration="24" />
     <item hash="2802a572ce159a92f8b4bf834ea95d1d" sprite="Spiriel (P1)" animation="Walking (Bad ENE)" width="40" height="40" directions="6" frames="7" duration="24" />
-    <item hash="5b2b7fc12b103d55f5c9df0052adf5ac" sprite="Spiriel (P1)" animation="StillFrame (KeeledOver)" width="48" height="40" directions="4" frames="2" duration="15" />
-    <item hash="12106b6eb332122f447b56e8cb29c9ab" sprite="Spiriel (P1)" animation="StillFrame (OnGround, Repeat)" width="48" height="40" directions="4" frames="2" duration="4" />
-    <item hash="f2345a1591825027b6dfd8cfbc0697b2" sprite="Spiriel (P1)" animation="StillFrame (OnGround)" width="48" height="40" directions="4" frames="2" duration="10" />
-    <item hash="0c1e0bc58aef159f075125fd3193e788" sprite="Spiriel (P1) (Sc1+2)" animation="Idle (Battle, Render 1)" width="40" height="40" directions="4" frames="5" duration="20" />
-    <item hash="2cb6b1d5f4378d649be7ede6acdec62a" sprite="Spiriel (P1) (Sc1+2)" animation="Idle (Battle, Render 2)" width="40" height="40" directions="4" frames="5" duration="20" />
-    <item hash="20f330066fa9f91a90fcf932e6196950" sprite="Spiriel (P1) (Sc1+2)" animation="Nodding (Fast)" width="40" height="40" directions="4" frames="5" duration="8" />
-    <item hash="6ae159b659fca2b588ebd44e3bfef729" sprite="Spiriel (P1) (Sc1+2)" animation="ShakingHead (Slanted, Fast)" width="40" height="40" directions="4" frames="9" duration="16" />
-    <item hash="bc0360001d9100bcfb00b15f80164184" sprite="Spiriel (P1) (Sc1+2)" animation="StillFrame (Battle 2)" width="40" height="40" directions="4" frames="2" duration="10" />
-    <item hash="91388003e32a410b76a2c07bcc3af87c" sprite="Spiriel (P1) (Sc1+2)" animation="StillFrame (Field)" width="40" height="40" directions="4" frames="2" duration="10" />
-    <item hash="15b181fd0f9660cd8ca40351c182ca69" sprite="Spiriel (P1) (Sc1+2)" animation="StillFrame (Pre-Sc3, Battle 1)" width="40" height="40" directions="4" frames="2" duration="10" />
-    <item hash="2c54f028660de2d4175ed3643edb8a41" sprite="Spiriel (P1) (Sc1+2)" animation="Walking (Bad ESE Offset)" width="40" height="40" directions="4" frames="7" duration="24" />
-    <item hash="4ab5f20e13c75ae68402f6d2087ed97c" sprite="Spiriel (P1) (Sc1+2)" animation="Idle (Battle)" width="48" height="40" directions="4" frames="5" duration="20" />
-    <item hash="946fa497e8c460fdcab1f7eb85921be9" sprite="Spiriel (P1) (Sc1+2)" animation="MovingToSittingCrossLegged" width="48" height="40" directions="4" frames="5" duration="19" />
-    <item hash="18a36c08ab6a55e065de3bba44f33fbb" sprite="Spiriel (P1) (Sc1+2)" animation="ShakingHead (Sitting Cross-Legged)" width="48" height="40" directions="4" frames="8" duration="14" />
-    <item hash="f5984ff1986dd4d71d69fe621d8afab5" sprite="Spiriel (P1) (Sc1+2)" animation="StandingUpFromSittingCrossLegged" width="48" height="40" directions="4" frames="5" duration="12" />
-    <item hash="3b45a14509eebbd431124c81e7b22fa0" sprite="Spiriel (P1) (Sc1+2)" animation="StandingUpFromSittingCrossLegged (Quick)" width="48" height="40" directions="4" frames="2" duration="2" />
-    <item hash="a07eb0da152405e2860c4b5cf0400f83" sprite="Spiriel (P1) (Sc1+2)" animation="StillFrame (Battle)" width="48" height="40" directions="4" frames="2" duration="10" />
-    <item hash="6b273b677078a4b7f4aaad81b6e4d770" sprite="Spiriel (P1) (Sc1+2)" animation="StillFrame (Field)" width="48" height="40" directions="4" frames="2" duration="10" />
-    <item hash="14a80c63d2a80ccf90da94bb65a7f2cc" sprite="Spiriel (P1) (Sc1+2)" animation="StillFrame (Sitting Cross-Legged, Changes Index)" width="48" height="40" directions="4" frames="2" duration="5" />
-    <item hash="f52f9d423c4419755f6de6c956e524c1" sprite="Spiriel (P1) (Sc1+2)" animation="StillFrame (Sitting Cross-Legged, Render 1)" width="48" height="40" directions="4" frames="2" duration="10" />
-    <item hash="0b3dd5949fa27d023d807d93ba98bbdb" sprite="Spiriel (P1) (Sc1+2)" animation="StillFrame (Sitting Cross-Legged, Render 2)" width="48" height="40" directions="4" frames="2" duration="15" />
-    <item hash="76c1380163403a3eb11c62ddf92d04fb" sprite="Spiriel (P1) (Sc1+2)" animation="Walking (Broken, Should be 1 Frame)" width="48" height="40" directions="4" frames="7" duration="24" />
-    <item hash="eb0113c1131ba83eed29c94856d30c81" sprite="Spiriel (P1) | Spiriel (P1) (Sc1+2)" animation="KeelingOverFromSittingCrossLegged" width="48" height="40" directions="4" frames="4" duration="24" />
-    <item hash="2c2548017fee92d25efb9f0433814120" sprite="Spiriel (P1) | Spiriel (P1) (Sc1+2)" animation="Walking" width="48" height="40" directions="4" frames="7" duration="24" />
     <item hash="022dd6ffbfd3d05eaee71037a1cb8f1d" sprite="Spiriel (P2)" animation="Idle (Battle)" width="40" height="40" directions="4" frames="5" duration="20" />
     <item hash="a7efc9ae24c1e132ae3bbcbde42b2a7a" sprite="Spiriel (P2)" animation="Idle (Battle)" width="40" height="40" directions="6" frames="5" duration="20" />
     <item hash="6c6931687140a30ba7f5ab127e07c8c5" sprite="Spiriel (P2)" animation="Idle (Field)" width="40" height="40" directions="4" frames="5" duration="20" />
@@ -3560,6 +3536,30 @@
     <item hash="39ee49e8c0c4d74eaab76725e4df13d3" sprite="Spiriel (P2)" animation="StillFrame (Field)" width="40" height="40" directions="4" frames="2" duration="10" />
     <item hash="cb6bbfb17619da72c28b88ac0cd7d129" sprite="Spiriel (P2)" animation="Walking" width="40" height="40" directions="4" frames="7" duration="24" />
     <item hash="0061b6994a024f3a0600536b0207e848" sprite="Spiriel (P2)" animation="Walking" width="40" height="40" directions="6" frames="7" duration="24" />
+    <item hash="0c1e0bc58aef159f075125fd3193e788" sprite="Spiriel (Sc1+2)" animation="Idle (Battle, Render 1)" width="40" height="40" directions="4" frames="5" duration="20" />
+    <item hash="2cb6b1d5f4378d649be7ede6acdec62a" sprite="Spiriel (Sc1+2)" animation="Idle (Battle, Render 2)" width="40" height="40" directions="4" frames="5" duration="20" />
+    <item hash="20f330066fa9f91a90fcf932e6196950" sprite="Spiriel (Sc1+2)" animation="Nodding (Fast)" width="40" height="40" directions="4" frames="5" duration="8" />
+    <item hash="6ae159b659fca2b588ebd44e3bfef729" sprite="Spiriel (Sc1+2)" animation="ShakingHead (Slanted, Fast)" width="40" height="40" directions="4" frames="9" duration="16" />
+    <item hash="bc0360001d9100bcfb00b15f80164184" sprite="Spiriel (Sc1+2)" animation="StillFrame (Battle 2)" width="40" height="40" directions="4" frames="2" duration="10" />
+    <item hash="91388003e32a410b76a2c07bcc3af87c" sprite="Spiriel (Sc1+2)" animation="StillFrame (Field)" width="40" height="40" directions="4" frames="2" duration="10" />
+    <item hash="15b181fd0f9660cd8ca40351c182ca69" sprite="Spiriel (Sc1+2)" animation="StillFrame (Pre-Sc3, Battle 1)" width="40" height="40" directions="4" frames="2" duration="10" />
+    <item hash="2c54f028660de2d4175ed3643edb8a41" sprite="Spiriel (Sc1+2)" animation="Walking (Bad ESE Offset)" width="40" height="40" directions="4" frames="7" duration="24" />
+    <item hash="4ab5f20e13c75ae68402f6d2087ed97c" sprite="Spiriel (Sc1+2)" animation="Idle (Battle)" width="48" height="40" directions="4" frames="5" duration="20" />
+    <item hash="eb0113c1131ba83eed29c94856d30c81" sprite="Spiriel (Sc1+2)" animation="KeelingOverFromSittingCrossLegged" width="48" height="40" directions="4" frames="4" duration="24" />
+    <item hash="946fa497e8c460fdcab1f7eb85921be9" sprite="Spiriel (Sc1+2)" animation="MovingToSittingCrossLegged" width="48" height="40" directions="4" frames="5" duration="19" />
+    <item hash="18a36c08ab6a55e065de3bba44f33fbb" sprite="Spiriel (Sc1+2)" animation="ShakingHead (Sitting Cross-Legged)" width="48" height="40" directions="4" frames="8" duration="14" />
+    <item hash="f5984ff1986dd4d71d69fe621d8afab5" sprite="Spiriel (Sc1+2)" animation="StandingUpFromSittingCrossLegged" width="48" height="40" directions="4" frames="5" duration="12" />
+    <item hash="3b45a14509eebbd431124c81e7b22fa0" sprite="Spiriel (Sc1+2)" animation="StandingUpFromSittingCrossLegged (Quick)" width="48" height="40" directions="4" frames="2" duration="2" />
+    <item hash="a07eb0da152405e2860c4b5cf0400f83" sprite="Spiriel (Sc1+2)" animation="StillFrame (Battle)" width="48" height="40" directions="4" frames="2" duration="10" />
+    <item hash="6b273b677078a4b7f4aaad81b6e4d770" sprite="Spiriel (Sc1+2)" animation="StillFrame (Field)" width="48" height="40" directions="4" frames="2" duration="10" />
+    <item hash="5b2b7fc12b103d55f5c9df0052adf5ac" sprite="Spiriel (Sc1+2)" animation="StillFrame (KeeledOver)" width="48" height="40" directions="4" frames="2" duration="15" />
+    <item hash="12106b6eb332122f447b56e8cb29c9ab" sprite="Spiriel (Sc1+2)" animation="StillFrame (OnGround, Repeat)" width="48" height="40" directions="4" frames="2" duration="4" />
+    <item hash="f2345a1591825027b6dfd8cfbc0697b2" sprite="Spiriel (Sc1+2)" animation="StillFrame (OnGround)" width="48" height="40" directions="4" frames="2" duration="10" />
+    <item hash="14a80c63d2a80ccf90da94bb65a7f2cc" sprite="Spiriel (Sc1+2)" animation="StillFrame (Sitting Cross-Legged, Changes Index)" width="48" height="40" directions="4" frames="2" duration="5" />
+    <item hash="f52f9d423c4419755f6de6c956e524c1" sprite="Spiriel (Sc1+2)" animation="StillFrame (Sitting Cross-Legged, Render 1)" width="48" height="40" directions="4" frames="2" duration="10" />
+    <item hash="0b3dd5949fa27d023d807d93ba98bbdb" sprite="Spiriel (Sc1+2)" animation="StillFrame (Sitting Cross-Legged, Render 2)" width="48" height="40" directions="4" frames="2" duration="15" />
+    <item hash="2c2548017fee92d25efb9f0433814120" sprite="Spiriel (Sc1+2)" animation="Walking" width="48" height="40" directions="4" frames="7" duration="24" />
+    <item hash="76c1380163403a3eb11c62ddf92d04fb" sprite="Spiriel (Sc1+2)" animation="Walking (Broken, Should be 1 Frame)" width="48" height="40" directions="4" frames="7" duration="24" />
     <item hash="36a978e7fdb66bd597a2a0199cc4ae4b" sprite="Squirrel" animation="Idle (Still then Nibbling)" width="48" height="32" directions="4" frames="21" duration="194" />
     <item hash="19b19c13076be4e3d3dda8fe58b61050" sprite="Squirrel" animation="Running" width="48" height="32" directions="4" frames="7" duration="6" />
     <item hash="a3e34783348ba958e6db89594f4108cd" sprite="Squirrel" animation="StillFrame (Down)" width="48" height="32" directions="4" frames="2" duration="10" />
