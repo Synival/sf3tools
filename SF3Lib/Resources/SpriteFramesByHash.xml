@@ -3138,38 +3138,18 @@
     <item hash="b6c1fb1be03164ab38c274b727ea11ba" sprite="Campbell (U)" width="48" height="40" frame="Walking 4" direction="ENE" />
     <item hash="1b3cf1af560d2e0f902bf27aca7b8c49" sprite="Campbell (U)" width="48" height="40" frame="Walking 4" direction="NNE" />
     <item hash="49b8c449c4f8f25f7f13d2df628a5db8" sprite="Campbell (U)" width="48" height="40" frame="Walking 4" direction="N" />
-    <item hash="a1577f2bbc423ed30368971ad49ff042" sprite="Campbell (U) (Weaponless)" width="48" height="40" frame="Idle 1" direction="SSE" />
     <item hash="c0c4d96ff30dc2b8a7b35a18fa45e7bb" sprite="Campbell (U) (Weaponless)" width="48" height="40" frame="Idle 1" direction="SSE" />
     <item hash="ba8369a15c504aa17c9c89e7c62830a2" sprite="Campbell (U) (Weaponless)" width="48" height="40" frame="Idle 1" direction="ESE" />
-    <item hash="cac8d833770b7decd4cf5dd136d7ce8e" sprite="Campbell (U) (Weaponless)" width="48" height="40" frame="Idle 1" direction="ESE" />
     <item hash="2e13963fb000d094956327b060a08aa1" sprite="Campbell (U) (Weaponless)" width="48" height="40" frame="Idle 1" direction="ENE" />
-    <item hash="c390ae25e0e1aa56402de166d83bfcf5" sprite="Campbell (U) (Weaponless)" width="48" height="40" frame="Idle 1" direction="ENE" />
-    <item hash="76dc60204684721ce99c47d21bccc751" sprite="Campbell (U) (Weaponless)" width="48" height="40" frame="Idle 1" direction="NNE" />
     <item hash="9b7aec168d5e21b4d0ed171a07b646b1" sprite="Campbell (U) (Weaponless)" width="48" height="40" frame="Idle 1" direction="NNE" />
     <item hash="303dbc7b6c6563045e08771c0ec3b379" sprite="Campbell (U) (Weaponless)" width="48" height="40" frame="Idle 2" direction="SSE" />
-    <item hash="d015a8ab396384ca4b43150f6ffc0d51" sprite="Campbell (U) (Weaponless)" width="48" height="40" frame="Idle 2" direction="SSE" />
-    <item hash="a99c77545825ae9aac8a08189a0db508" sprite="Campbell (U) (Weaponless)" width="48" height="40" frame="Idle 2" direction="ESE" />
     <item hash="f09b349ad0f88dec9c3df658c4a08902" sprite="Campbell (U) (Weaponless)" width="48" height="40" frame="Idle 2" direction="ESE" />
-    <item hash="94436750d175d68987ce22f3f250d5f2" sprite="Campbell (U) (Weaponless)" width="48" height="40" frame="Idle 2" direction="ENE" />
     <item hash="e5f3ef68fd50d800367359945568e61c" sprite="Campbell (U) (Weaponless)" width="48" height="40" frame="Idle 2" direction="ENE" />
-    <item hash="30cfc3c6ed32d9d20a5404d160f3b7f5" sprite="Campbell (U) (Weaponless)" width="48" height="40" frame="Idle 2" direction="NNE" />
     <item hash="76969a6b6787fa13057bf7a660d0802c" sprite="Campbell (U) (Weaponless)" width="48" height="40" frame="Idle 2" direction="NNE" />
     <item hash="cf7ca8b421e64238c07860c6250bc1f7" sprite="Campbell (U) (Weaponless)" width="48" height="40" frame="Idle 3" direction="SSE" />
-    <item hash="ee2831511075a4cd29249fccec47d0c1" sprite="Campbell (U) (Weaponless)" width="48" height="40" frame="Idle 3" direction="SSE" />
     <item hash="3c8e987cb962877cf182b13f01b906a6" sprite="Campbell (U) (Weaponless)" width="48" height="40" frame="Idle 3" direction="ESE" />
-    <item hash="7e528ac2ab4c99ac57a6553bc20e525d" sprite="Campbell (U) (Weaponless)" width="48" height="40" frame="Idle 3" direction="ESE" />
     <item hash="9ec2e2cdb3152c947e813b1ef3c6df9f" sprite="Campbell (U) (Weaponless)" width="48" height="40" frame="Idle 3" direction="ENE" />
-    <item hash="d80a6e94e68d9e0008df92de7883876c" sprite="Campbell (U) (Weaponless)" width="48" height="40" frame="Idle 3" direction="ENE" />
     <item hash="6d50f37af6a6f79e0a247bb0376e3a09" sprite="Campbell (U) (Weaponless)" width="48" height="40" frame="Idle 3" direction="NNE" />
-    <item hash="c93ad59f0ecb5750ccd16b4159aa242e" sprite="Campbell (U) (Weaponless)" width="48" height="40" frame="Idle 3" direction="NNE" />
-    <item hash="29092b5f0a918536b82e46c1148abead" sprite="Campbell (U) (Weaponless)" width="48" height="40" frame="Nodding (Stop) 2" direction="SSE" />
-    <item hash="8ad19a9bc50783ff5b0a865958932caf" sprite="Campbell (U) (Weaponless)" width="48" height="40" frame="Nodding (Stop) 2" direction="ESE" />
-    <item hash="9818c8773f36cf5740b96143994c1a82" sprite="Campbell (U) (Weaponless)" width="48" height="40" frame="Nodding (Stop) 2" direction="ENE" />
-    <item hash="81d8e57f3401410345391b80d123223e" sprite="Campbell (U) (Weaponless)" width="48" height="40" frame="Nodding (Stop) 2" direction="NNE" />
-    <item hash="2236394bdded7a988bacdaabeaa71ac4" sprite="Campbell (U) (Weaponless)" width="48" height="40" frame="Nodding (Stop) 3" direction="SSE" />
-    <item hash="4087fe95f73c583968eddffbfaec96a6" sprite="Campbell (U) (Weaponless)" width="48" height="40" frame="Nodding (Stop) 3" direction="ESE" />
-    <item hash="0d66186c11559749c14dbbb4cd4ef6aa" sprite="Campbell (U) (Weaponless)" width="48" height="40" frame="Nodding (Stop) 3" direction="ENE" />
-    <item hash="32c4e4a4c0dc326ed31e885ce5536478" sprite="Campbell (U) (Weaponless)" width="48" height="40" frame="Nodding (Stop) 3" direction="NNE" />
     <item hash="a0f285152af8be0d2504a8184cd25449" sprite="Campbell (U) (Weaponless)" width="48" height="40" frame="Nodding 1" direction="SSE" />
     <item hash="daa9cbdc3841e3a0e0b186312031c769" sprite="Campbell (U) (Weaponless)" width="48" height="40" frame="Nodding 1" direction="ESE" />
     <item hash="aefdbab1756ac2ec876c826d65a87bcc" sprite="Campbell (U) (Weaponless)" width="48" height="40" frame="Nodding 1" direction="ENE" />
@@ -3189,14 +3169,6 @@
     <item hash="ca3d6091d0f75796d6e259589596ef38" sprite="Campbell (U) (Weaponless)" width="48" height="40" frame="PullingOutLance (1 Direction)10" direction="First" />
     <item hash="06221dc1ddb251acb44da3580d3ba899" sprite="Campbell (U) (Weaponless)" width="48" height="40" frame="PullingOutLance (1 Direction)11" direction="First" />
     <item hash="42495bb257bb942779bdfc771c3409f4" sprite="Campbell (U) (Weaponless)" width="48" height="40" frame="PullingOutLance (1 Direction)12" direction="First" />
-    <item hash="747e40a0b82934a9d84e6a2885ccaba0" sprite="Campbell (U) (Weaponless)" width="48" height="40" frame="ShakingHead (Stop) 2" direction="SSE" />
-    <item hash="b9e19df20038dd2d23f97ee5cdab2c4a" sprite="Campbell (U) (Weaponless)" width="48" height="40" frame="ShakingHead (Stop) 2" direction="ESE" />
-    <item hash="370234f4b3007d19d05c1ea57a9ed06f" sprite="Campbell (U) (Weaponless)" width="48" height="40" frame="ShakingHead (Stop) 2" direction="ENE" />
-    <item hash="a76ef74c0cd1341a595d7077a1ae92b5" sprite="Campbell (U) (Weaponless)" width="48" height="40" frame="ShakingHead (Stop) 2" direction="NNE" />
-    <item hash="216a2abe68b9a8eb2121488c9d7b1f4f" sprite="Campbell (U) (Weaponless)" width="48" height="40" frame="ShakingHead (Stop) 3" direction="SSE" />
-    <item hash="1aa65e605a4c2aeff944214d8b50cca2" sprite="Campbell (U) (Weaponless)" width="48" height="40" frame="ShakingHead (Stop) 3" direction="ESE" />
-    <item hash="799059f006142154acbd98436ffbe266" sprite="Campbell (U) (Weaponless)" width="48" height="40" frame="ShakingHead (Stop) 3" direction="ENE" />
-    <item hash="1012425da7d802746caae4bef2337305" sprite="Campbell (U) (Weaponless)" width="48" height="40" frame="ShakingHead (Stop) 3" direction="NNE" />
     <item hash="2f6c1a3d71063b4fc1384542945f3350" sprite="Campbell (U) (Weaponless)" width="48" height="40" frame="ShakingHead 1" direction="SSE" />
     <item hash="72c9c63c382c77126766546edafe1efc" sprite="Campbell (U) (Weaponless)" width="48" height="40" frame="ShakingHead 1" direction="ESE" />
     <item hash="de82c472ce0fa1f9c4fd0b47163022dd" sprite="Campbell (U) (Weaponless)" width="48" height="40" frame="ShakingHead 1" direction="ENE" />
@@ -3206,45 +3178,73 @@
     <item hash="97c86e49613161890fe22b63fc0ea82c" sprite="Campbell (U) (Weaponless)" width="48" height="40" frame="ShakingHead 2" direction="ENE" />
     <item hash="67b3722138e514fca5470dd290a41514" sprite="Campbell (U) (Weaponless)" width="48" height="40" frame="ShakingHead 2" direction="NNE" />
     <item hash="4c4513a07ce4b4bbff4d2184e0ebf27f" sprite="Campbell (U) (Weaponless)" width="48" height="40" frame="Walking 1" direction="SSE" />
-    <item hash="c47421cf956c58eafa5c79d42f756875" sprite="Campbell (U) (Weaponless)" width="48" height="40" frame="Walking 1" direction="SSE" />
     <item hash="281527643fb2b3cd343d3328212c4f78" sprite="Campbell (U) (Weaponless)" width="48" height="40" frame="Walking 1" direction="ESE" />
-    <item hash="37f7f74d0b072ca5c882aeb807d1e5e3" sprite="Campbell (U) (Weaponless)" width="48" height="40" frame="Walking 1" direction="ESE" />
     <item hash="96279d7deb34950040fe7f61151c2eaf" sprite="Campbell (U) (Weaponless)" width="48" height="40" frame="Walking 1" direction="ENE" />
-    <item hash="a853de69e2dcfbdc6ab5b4483e75db1e" sprite="Campbell (U) (Weaponless)" width="48" height="40" frame="Walking 1" direction="ENE" />
     <item hash="be9bb7d4726f7f5fca34e75c29095aa9" sprite="Campbell (U) (Weaponless)" width="48" height="40" frame="Walking 1" direction="NNE" />
-    <item hash="d108ad281e704d37302dbb63c377ecbd" sprite="Campbell (U) (Weaponless)" width="48" height="40" frame="Walking 1" direction="NNE" />
     <item hash="1c963c9b735407ca844e5c1f421f918f" sprite="Campbell (U) (Weaponless)" width="48" height="40" frame="Walking 2" direction="SSE" />
-    <item hash="266501c7d5b56928dafba1613bfa2dda" sprite="Campbell (U) (Weaponless)" width="48" height="40" frame="Walking 2" direction="SSE" />
-    <item hash="a18c54e4feedbf6c76ab923589839971" sprite="Campbell (U) (Weaponless)" width="48" height="40" frame="Walking 2" direction="ESE" />
     <item hash="f24484c4c6450be2863759c3625f2fda" sprite="Campbell (U) (Weaponless)" width="48" height="40" frame="Walking 2" direction="ESE" />
-    <item hash="5a9ccf8d597f5b52a2730009774f83d8" sprite="Campbell (U) (Weaponless)" width="48" height="40" frame="Walking 2" direction="ENE" />
     <item hash="af63a2d21af9e502ea06ac2b172887ff" sprite="Campbell (U) (Weaponless)" width="48" height="40" frame="Walking 2" direction="ENE" />
-    <item hash="6ca6d56a83b8c2bb0190c9ad6995ff11" sprite="Campbell (U) (Weaponless)" width="48" height="40" frame="Walking 2" direction="NNE" />
     <item hash="cd8656616e40fa6b18c6bad0082f5bc0" sprite="Campbell (U) (Weaponless)" width="48" height="40" frame="Walking 2" direction="NNE" />
-    <item hash="48f6acf675744ff585c637cac600cf40" sprite="Campbell (U) (Weaponless)" width="48" height="40" frame="Walking 3" direction="SSE" />
     <item hash="654e5dc72304a51045277152488e2de4" sprite="Campbell (U) (Weaponless)" width="48" height="40" frame="Walking 3" direction="SSE" />
-    <item hash="53f63746f0cf98e9b4e66eda78b3058e" sprite="Campbell (U) (Weaponless)" width="48" height="40" frame="Walking 3" direction="ESE" />
     <item hash="ab675a86c54cc87b495fa0c6c0c56b43" sprite="Campbell (U) (Weaponless)" width="48" height="40" frame="Walking 3" direction="ESE" />
     <item hash="660d7c5d4b609d7d4530a93b2be8adde" sprite="Campbell (U) (Weaponless)" width="48" height="40" frame="Walking 3" direction="ENE" />
-    <item hash="9a932010a0cf484193e6ab7267018b05" sprite="Campbell (U) (Weaponless)" width="48" height="40" frame="Walking 3" direction="ENE" />
-    <item hash="064cd1e02fa4a7eb13b4049b18b341fc" sprite="Campbell (U) (Weaponless)" width="48" height="40" frame="Walking 3" direction="NNE" />
     <item hash="6af1353bd046869b40a000263ba685a9" sprite="Campbell (U) (Weaponless)" width="48" height="40" frame="Walking 3" direction="NNE" />
     <item hash="5f50772c085a6c02031787c055295dc4" sprite="Campbell (U) (Weaponless)" width="48" height="40" frame="Walking 4" direction="SSE" />
-    <item hash="c86c380b749ba685acac84fbbaedaabf" sprite="Campbell (U) (Weaponless)" width="48" height="40" frame="Walking 4" direction="SSE" />
     <item hash="b837a06370912d7673531a4a46a9926a" sprite="Campbell (U) (Weaponless)" width="48" height="40" frame="Walking 4" direction="ESE" />
-    <item hash="c236ddc222f92c614c7f0b32607590c7" sprite="Campbell (U) (Weaponless)" width="48" height="40" frame="Walking 4" direction="ESE" />
     <item hash="b9c4c6f8a05cfe7113d713bdf7299546" sprite="Campbell (U) (Weaponless)" width="48" height="40" frame="Walking 4" direction="ENE" />
-    <item hash="bf29d96e53068610336d795787d103b6" sprite="Campbell (U) (Weaponless)" width="48" height="40" frame="Walking 4" direction="ENE" />
     <item hash="889c970efd036b324f6ee368ea7749c1" sprite="Campbell (U) (Weaponless)" width="48" height="40" frame="Walking 4" direction="NNE" />
-    <item hash="8921f3c41ef1c772b3151e0676ee9822" sprite="Campbell (U) (Weaponless)" width="48" height="40" frame="Walking 4" direction="NNE" />
     <item hash="8726e469ca4b96cfc079f5fce149ed13" sprite="Campbell (U) (Weaponless)" width="48" height="40" frame="Walking 5" direction="SSE" />
     <item hash="2d7f61dca008342657707843a060f19f" sprite="Campbell (U) (Weaponless)" width="48" height="40" frame="Walking 5" direction="ESE" />
     <item hash="09e68f64f52447dd981deb5071a3dd43" sprite="Campbell (U) (Weaponless)" width="48" height="40" frame="Walking 5" direction="ENE" />
     <item hash="cc476d5182f7c767195d7c56dd64dd85" sprite="Campbell (U) (Weaponless)" width="48" height="40" frame="Walking 5" direction="NNE" />
-    <item hash="f2c2bceedc3d04150f9d81ce8c066955" sprite="Campbell (U) (Weaponless)" width="48" height="40" frame="Walking 6" direction="SSE" />
-    <item hash="187383ebd9947803b25b5a5b9e690f98" sprite="Campbell (U) (Weaponless)" width="48" height="40" frame="Walking 6" direction="ESE" />
-    <item hash="1db05bf507c50fdeeb4eef98c61e4566" sprite="Campbell (U) (Weaponless)" width="48" height="40" frame="Walking 6" direction="ENE" />
-    <item hash="b78bd598e93a0291b75d0b156bce8b18" sprite="Campbell (U) (Weaponless)" width="48" height="40" frame="Walking 6" direction="NNE" />
+    <item hash="a1577f2bbc423ed30368971ad49ff042" sprite="Campbell (U) (Weaponless) (Old)" width="48" height="40" frame="Idle 1" direction="SSE" />
+    <item hash="cac8d833770b7decd4cf5dd136d7ce8e" sprite="Campbell (U) (Weaponless) (Old)" width="48" height="40" frame="Idle 1" direction="ESE" />
+    <item hash="c390ae25e0e1aa56402de166d83bfcf5" sprite="Campbell (U) (Weaponless) (Old)" width="48" height="40" frame="Idle 1" direction="ENE" />
+    <item hash="76dc60204684721ce99c47d21bccc751" sprite="Campbell (U) (Weaponless) (Old)" width="48" height="40" frame="Idle 1" direction="NNE" />
+    <item hash="d015a8ab396384ca4b43150f6ffc0d51" sprite="Campbell (U) (Weaponless) (Old)" width="48" height="40" frame="Idle 2" direction="SSE" />
+    <item hash="a99c77545825ae9aac8a08189a0db508" sprite="Campbell (U) (Weaponless) (Old)" width="48" height="40" frame="Idle 2" direction="ESE" />
+    <item hash="94436750d175d68987ce22f3f250d5f2" sprite="Campbell (U) (Weaponless) (Old)" width="48" height="40" frame="Idle 2" direction="ENE" />
+    <item hash="30cfc3c6ed32d9d20a5404d160f3b7f5" sprite="Campbell (U) (Weaponless) (Old)" width="48" height="40" frame="Idle 2" direction="NNE" />
+    <item hash="ee2831511075a4cd29249fccec47d0c1" sprite="Campbell (U) (Weaponless) (Old)" width="48" height="40" frame="Idle 3" direction="SSE" />
+    <item hash="7e528ac2ab4c99ac57a6553bc20e525d" sprite="Campbell (U) (Weaponless) (Old)" width="48" height="40" frame="Idle 3" direction="ESE" />
+    <item hash="d80a6e94e68d9e0008df92de7883876c" sprite="Campbell (U) (Weaponless) (Old)" width="48" height="40" frame="Idle 3" direction="ENE" />
+    <item hash="c93ad59f0ecb5750ccd16b4159aa242e" sprite="Campbell (U) (Weaponless) (Old)" width="48" height="40" frame="Idle 3" direction="NNE" />
+    <item hash="29092b5f0a918536b82e46c1148abead" sprite="Campbell (U) (Weaponless) (Old)" width="48" height="40" frame="Nodding (Stop) 2" direction="SSE" />
+    <item hash="8ad19a9bc50783ff5b0a865958932caf" sprite="Campbell (U) (Weaponless) (Old)" width="48" height="40" frame="Nodding (Stop) 2" direction="ESE" />
+    <item hash="9818c8773f36cf5740b96143994c1a82" sprite="Campbell (U) (Weaponless) (Old)" width="48" height="40" frame="Nodding (Stop) 2" direction="ENE" />
+    <item hash="81d8e57f3401410345391b80d123223e" sprite="Campbell (U) (Weaponless) (Old)" width="48" height="40" frame="Nodding (Stop) 2" direction="NNE" />
+    <item hash="2236394bdded7a988bacdaabeaa71ac4" sprite="Campbell (U) (Weaponless) (Old)" width="48" height="40" frame="Nodding (Stop) 3" direction="SSE" />
+    <item hash="4087fe95f73c583968eddffbfaec96a6" sprite="Campbell (U) (Weaponless) (Old)" width="48" height="40" frame="Nodding (Stop) 3" direction="ESE" />
+    <item hash="0d66186c11559749c14dbbb4cd4ef6aa" sprite="Campbell (U) (Weaponless) (Old)" width="48" height="40" frame="Nodding (Stop) 3" direction="ENE" />
+    <item hash="32c4e4a4c0dc326ed31e885ce5536478" sprite="Campbell (U) (Weaponless) (Old)" width="48" height="40" frame="Nodding (Stop) 3" direction="NNE" />
+    <item hash="747e40a0b82934a9d84e6a2885ccaba0" sprite="Campbell (U) (Weaponless) (Old)" width="48" height="40" frame="ShakingHead (Stop) 2" direction="SSE" />
+    <item hash="b9e19df20038dd2d23f97ee5cdab2c4a" sprite="Campbell (U) (Weaponless) (Old)" width="48" height="40" frame="ShakingHead (Stop) 2" direction="ESE" />
+    <item hash="370234f4b3007d19d05c1ea57a9ed06f" sprite="Campbell (U) (Weaponless) (Old)" width="48" height="40" frame="ShakingHead (Stop) 2" direction="ENE" />
+    <item hash="a76ef74c0cd1341a595d7077a1ae92b5" sprite="Campbell (U) (Weaponless) (Old)" width="48" height="40" frame="ShakingHead (Stop) 2" direction="NNE" />
+    <item hash="216a2abe68b9a8eb2121488c9d7b1f4f" sprite="Campbell (U) (Weaponless) (Old)" width="48" height="40" frame="ShakingHead (Stop) 3" direction="SSE" />
+    <item hash="1aa65e605a4c2aeff944214d8b50cca2" sprite="Campbell (U) (Weaponless) (Old)" width="48" height="40" frame="ShakingHead (Stop) 3" direction="ESE" />
+    <item hash="799059f006142154acbd98436ffbe266" sprite="Campbell (U) (Weaponless) (Old)" width="48" height="40" frame="ShakingHead (Stop) 3" direction="ENE" />
+    <item hash="1012425da7d802746caae4bef2337305" sprite="Campbell (U) (Weaponless) (Old)" width="48" height="40" frame="ShakingHead (Stop) 3" direction="NNE" />
+    <item hash="c47421cf956c58eafa5c79d42f756875" sprite="Campbell (U) (Weaponless) (Old)" width="48" height="40" frame="Walking 1" direction="SSE" />
+    <item hash="37f7f74d0b072ca5c882aeb807d1e5e3" sprite="Campbell (U) (Weaponless) (Old)" width="48" height="40" frame="Walking 1" direction="ESE" />
+    <item hash="a853de69e2dcfbdc6ab5b4483e75db1e" sprite="Campbell (U) (Weaponless) (Old)" width="48" height="40" frame="Walking 1" direction="ENE" />
+    <item hash="d108ad281e704d37302dbb63c377ecbd" sprite="Campbell (U) (Weaponless) (Old)" width="48" height="40" frame="Walking 1" direction="NNE" />
+    <item hash="266501c7d5b56928dafba1613bfa2dda" sprite="Campbell (U) (Weaponless) (Old)" width="48" height="40" frame="Walking 2" direction="SSE" />
+    <item hash="a18c54e4feedbf6c76ab923589839971" sprite="Campbell (U) (Weaponless) (Old)" width="48" height="40" frame="Walking 2" direction="ESE" />
+    <item hash="5a9ccf8d597f5b52a2730009774f83d8" sprite="Campbell (U) (Weaponless) (Old)" width="48" height="40" frame="Walking 2" direction="ENE" />
+    <item hash="6ca6d56a83b8c2bb0190c9ad6995ff11" sprite="Campbell (U) (Weaponless) (Old)" width="48" height="40" frame="Walking 2" direction="NNE" />
+    <item hash="48f6acf675744ff585c637cac600cf40" sprite="Campbell (U) (Weaponless) (Old)" width="48" height="40" frame="Walking 3" direction="SSE" />
+    <item hash="53f63746f0cf98e9b4e66eda78b3058e" sprite="Campbell (U) (Weaponless) (Old)" width="48" height="40" frame="Walking 3" direction="ESE" />
+    <item hash="9a932010a0cf484193e6ab7267018b05" sprite="Campbell (U) (Weaponless) (Old)" width="48" height="40" frame="Walking 3" direction="ENE" />
+    <item hash="064cd1e02fa4a7eb13b4049b18b341fc" sprite="Campbell (U) (Weaponless) (Old)" width="48" height="40" frame="Walking 3" direction="NNE" />
+    <item hash="c86c380b749ba685acac84fbbaedaabf" sprite="Campbell (U) (Weaponless) (Old)" width="48" height="40" frame="Walking 4" direction="SSE" />
+    <item hash="c236ddc222f92c614c7f0b32607590c7" sprite="Campbell (U) (Weaponless) (Old)" width="48" height="40" frame="Walking 4" direction="ESE" />
+    <item hash="bf29d96e53068610336d795787d103b6" sprite="Campbell (U) (Weaponless) (Old)" width="48" height="40" frame="Walking 4" direction="ENE" />
+    <item hash="8921f3c41ef1c772b3151e0676ee9822" sprite="Campbell (U) (Weaponless) (Old)" width="48" height="40" frame="Walking 4" direction="NNE" />
+    <item hash="f2c2bceedc3d04150f9d81ce8c066955" sprite="Campbell (U) (Weaponless) (Old)" width="48" height="40" frame="Walking 5" direction="SSE" />
+    <item hash="187383ebd9947803b25b5a5b9e690f98" sprite="Campbell (U) (Weaponless) (Old)" width="48" height="40" frame="Walking 5" direction="ESE" />
+    <item hash="1db05bf507c50fdeeb4eef98c61e4566" sprite="Campbell (U) (Weaponless) (Old)" width="48" height="40" frame="Walking 5" direction="ENE" />
+    <item hash="b78bd598e93a0291b75d0b156bce8b18" sprite="Campbell (U) (Weaponless) (Old)" width="48" height="40" frame="Walking 5" direction="NNE" />
     <item hash="46e4e4e7b65d62fbd320c26210f185ce" sprite="Cannon Ball" width="48" height="48" frame="StillFrame1 1, StillFrame2 1" direction="First" />
     <item hash="2870bfc4eb226cf2f12e1ccfb0b003e1" sprite="Cannon Ball Splash" width="32" height="128" frame="Splash 1" direction="First" />
     <item hash="0f69b0d0aa821d3572b15b376b851495" sprite="Cannon Ball Splash" width="32" height="128" frame="Splash 2" direction="First" />

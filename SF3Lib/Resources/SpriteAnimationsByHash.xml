@@ -521,17 +521,24 @@
     <item hash="37ef6d35987b750aa1220f6eab7122f2" sprite="Campbell (U)" animation="Walking" width="48" height="40" directions="6" frames="7" duration="24" />
     <item hash="7ed8c437aef7d1dd5f67618584a1f9d2" sprite="Campbell (U) (Weaponless)" animation="Idle" width="48" height="40" directions="4" frames="5" duration="16" />
     <item hash="9d72ea5c38edb4d144e8bbca793ed03b" sprite="Campbell (U) (Weaponless)" animation="Idle (2 Frames)" width="48" height="40" directions="4" frames="3" duration="16" />
-    <item hash="6e5fdedb3b67bed462fdda9300198ec5" sprite="Campbell (U) (Weaponless)" animation="Idle (Sc1)" width="48" height="40" directions="4" frames="5" duration="16" />
     <item hash="118d79eb51c445f5ecba9275b3fee660" sprite="Campbell (U) (Weaponless)" animation="Nodding" width="48" height="40" directions="4" frames="5" duration="8" />
-    <item hash="07ddc5a91ad5ae99e52950556516870e" sprite="Campbell (U) (Weaponless)" animation="Nodding (Sc1, Stop)" width="48" height="40" directions="4" frames="5" duration="8" />
     <item hash="032e3b89a031f3404270fd3be45c2478" sprite="Campbell (U) (Weaponless)" animation="PullingOutLance (1 Direction)" width="48" height="40" directions="17" frames="14" duration="61" />
     <item hash="be9e36404a76ef9a24256f24d7591d98" sprite="Campbell (U) (Weaponless)" animation="ShakingHead" width="48" height="40" directions="4" frames="9" duration="16" />
-    <item hash="77afce3d60105b7f03817778b5172ba2" sprite="Campbell (U) (Weaponless)" animation="ShakingHead (Sc1, Stop)" width="48" height="40" directions="4" frames="9" duration="16" />
     <item hash="fa0c8a4e1d1459888ec4e24b9b741345" sprite="Campbell (U) (Weaponless)" animation="StillFrame" width="48" height="40" directions="4" frames="2" duration="10" />
-    <item hash="94eb0b9fa5a4fc0e4fc6730ffdcafa70" sprite="Campbell (U) (Weaponless)" animation="StillFrame (Sc1 1)" width="48" height="40" directions="4" frames="2" duration="10" />
-    <item hash="d3cd5b1c0a3010082f6eb389c1c978be" sprite="Campbell (U) (Weaponless)" animation="StillFrame (Sc1 2)" width="48" height="40" directions="4" frames="2" duration="10" />
     <item hash="ff4a7643a8914a644289c8adf73a91b3" sprite="Campbell (U) (Weaponless)" animation="Walking" width="48" height="40" directions="4" frames="7" duration="24" />
-    <item hash="1da92f8f52c5606848df66e21166a51d" sprite="Campbell (U) (Weaponless)" animation="Walking (Sc1)" width="48" height="40" directions="4" frames="7" duration="24" />
+    <item hash="6e5fdedb3b67bed462fdda9300198ec5" sprite="Campbell (U) (Weaponless) (Old)" animation="Idle" width="48" height="40" directions="4" frames="5" duration="16" />
+    <item hash="07ddc5a91ad5ae99e52950556516870e" sprite="Campbell (U) (Weaponless) (Old)" animation="Nodding (Stop)" width="48" height="40" directions="4" frames="5" duration="8" />
+    <item hash="77afce3d60105b7f03817778b5172ba2" sprite="Campbell (U) (Weaponless) (Old)" animation="ShakingHead (Stop)" width="48" height="40" directions="4" frames="9" duration="16" />
+    <item hash="94eb0b9fa5a4fc0e4fc6730ffdcafa70" sprite="Campbell (U) (Weaponless) (Old)" animation="StillFrame 1" width="48" height="40" directions="4" frames="2" duration="10" />
+    <item hash="d3cd5b1c0a3010082f6eb389c1c978be" sprite="Campbell (U) (Weaponless) (Old)" animation="StillFrame 2" width="48" height="40" directions="4" frames="2" duration="10" />
+    <item hash="1da92f8f52c5606848df66e21166a51d" sprite="Campbell (U) (Weaponless) (Old)" animation="Walking" width="48" height="40" directions="4" frames="7" duration="24" />
+    <item hash="f40a8210fa61b1c1226f6616334c3a52" sprite="Campbell (U) (Weaponless) (Old) | Unknown" animation="Unknown" width="48" height="40" directions="4" frames="5" duration="8" />
+    <item hash="4fa6fc8ae6148570d17ed3090922b4c8" sprite="Campbell (U) (Weaponless) (Old) | Unknown" animation="Unknown" width="48" height="40" directions="4" frames="7" duration="24" />
+    <item hash="d930268b94f82ec754615d42f6fa52c0" sprite="Campbell (U) (Weaponless) (Old) | Unknown" animation="Unknown" width="48" height="40" directions="4" frames="9" duration="16" />
+    <item hash="c855d229f9cc359b0d50adcdd9ebe84e" sprite="Campbell (U) (Weaponless) | Unknown" animation="Unknown" width="48" height="40" directions="4" frames="5" duration="8" />
+    <item hash="09c290eb6c193b1c28751ef14a6d9506" sprite="Campbell (U) (Weaponless) | Unknown" animation="Unknown" width="48" height="40" directions="4" frames="7" duration="24" />
+    <item hash="a1f6cc70b4a777494c015c78b9e57eb6" sprite="Campbell (U) (Weaponless) | Unknown" animation="Unknown" width="48" height="40" directions="4" frames="9" duration="16" />
+    <item hash="5997c3738dba5200b89d217b76b56aea" sprite="Campbell (U) (Weaponless) | Unknown" animation="Unknown" width="48" height="40" directions="17" frames="14" duration="61" />
     <item hash="7201832cbd6c7560a8835af96e3781f4" sprite="Cannon Ball" animation="StillFrame" width="48" height="48" directions="1" frames="2" duration="10" />
     <item hash="057a546433f4a031761c5e0e78420dc8" sprite="Cannon Ball" animation="StillFrame (Change to 1)" width="48" height="48" directions="1" frames="2" duration="10" />
     <item hash="a4078008a1c9a09e4e6d338ae69cd642" sprite="Cannon Ball" animation="StillFrame (Repeat)" width="48" height="48" directions="1" frames="2" duration="10" />
@@ -1049,13 +1056,13 @@
     <item hash="20c4b7ba22bc379de87ec9b16f4eaa5f" sprite="Elf Woman w/ White Apron" animation="StillFrame" width="40" height="40" directions="4" frames="2" duration="10" />
     <item hash="40589a97f8030bda1190d04ab5011ad4" sprite="Elf Woman w/ White Apron" animation="Walking" width="40" height="40" directions="4" frames="7" duration="24" />
     <item hash="2c02bab12612961ad5fde19f9a91f19f" sprite="Explosion" animation="Explode (Alt, w/o Transparent Frame)" width="48" height="48" directions="1" frames="10" duration="16" />
+    <item hash="224fde9577e14c1b63769f7306b12898" sprite="Explosion" animation="Explode (w/ Transparent Frame)" width="48" height="48" directions="1" frames="11" duration="26" />
     <item hash="3530ac0517c7dcaa1f266ce336faa8dc" sprite="Explosion" animation="Explode (w/o Transparent Frame)" width="48" height="48" directions="1" frames="10" duration="16" />
     <item hash="5592bfb3b710d8e5da1b86e80ef5bd42" sprite="Explosion" animation="Unexplode (Alt, w/o Transparent Frame)" width="48" height="48" directions="1" frames="10" duration="22" />
-    <item hash="0728b9edca26a8082da0b4d1dc8635f5" sprite="Explosion" animation="Unexplode (Very Incomplete, Broken)" width="48" height="48" directions="1" frames="5" duration="14" />
-    <item hash="2993cdee7e4091fa44e3e0b465dbc57e" sprite="Explosion" animation="Unexplode (w/o Transparent Frame)" width="48" height="48" directions="1" frames="10" duration="22" />
-    <item hash="224fde9577e14c1b63769f7306b12898" sprite="Explosion" animation="Explode (w/ Transparent Frame)" width="48" height="48" directions="1" frames="11" duration="26" />
     <item hash="5c1fb21f96588a24b87cb93113ea451d" sprite="Explosion" animation="Unexplode (Incomplete)" width="48" height="48" directions="1" frames="6" duration="24" />
+    <item hash="0728b9edca26a8082da0b4d1dc8635f5" sprite="Explosion" animation="Unexplode (Very Incomplete, Broken)" width="48" height="48" directions="1" frames="5" duration="14" />
     <item hash="2cd7bf02245c7cce1c74fe6a2138a2cd" sprite="Explosion" animation="Unexplode (w/ Transparent Frame)" width="48" height="48" directions="1" frames="11" duration="32" />
+    <item hash="2993cdee7e4091fa44e3e0b465dbc57e" sprite="Explosion" animation="Unexplode (w/o Transparent Frame)" width="48" height="48" directions="1" frames="10" duration="22" />
     <item hash="d986759fdb9fadce819849ea5f0b1f95" sprite="Explosion2" animation="Explosion (Very Fast)" width="48" height="48" directions="1" frames="6" duration="5" />
     <item hash="8e68fedf1d17a3b33757a5a82f854130" sprite="Fafhard" animation="Idle" width="40" height="40" directions="4" frames="5" duration="20" />
     <item hash="4f272ddd5a2f21e2db6abe25fc2b74f0" sprite="Fafhard" animation="Nodding" width="40" height="40" directions="4" frames="5" duration="20" />
