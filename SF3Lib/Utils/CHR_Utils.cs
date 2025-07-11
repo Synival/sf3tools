@@ -201,7 +201,7 @@ namespace SF3.Utils {
 
         public static void WriteUniqueAnimationsByHashJSON(StreamWriter stream) {
             stream.NewLine = "\n";
-            var animationInfos = GetAllSpriteDefs();
+            var animationInfos = CreateAllSpriteDefs();
             stream.Write(JsonConvert.SerializeObject(animationInfos, Newtonsoft.Json.Formatting.Indented));
         }
 

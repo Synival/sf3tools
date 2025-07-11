@@ -160,9 +160,147 @@ namespace CHR_Analyzer {
             }
 
             Console.WriteLine("Processing complete.");
-
             _ = Directory.CreateDirectory(c_pathOut);
-            var spriteDefs = CHR_Utils.GetAllSpriteDefs();
+
+            Console.WriteLine();
+            Console.WriteLine("===================================================");
+            Console.WriteLine("| NAMING FRAMES                                   |");
+            Console.WriteLine("===================================================");
+            Console.WriteLine();
+
+            var animFrameNamingPriorityByCategory = new Dictionary<string, string[]>() {
+                { "Idle (Field)", [
+                    "Idle (Field)",
+                ]},
+                { "Idle (Battle)", [
+                    "Idle (Battle)",
+                    "Idle (Battle 1)",
+                    "Idle (Battle 2)",
+                    "Idle (Battle, Render 1)",
+                    "Idle (Battle, Render 2)",
+                ]},
+                { "Idle", [
+                    "Idle",
+                    "Idle 1",
+                    "Idle 2",
+                    "Idle (Fast)",
+                    "Idle (Faster)",
+                ]},
+                { "Flying (Field)", [
+                    "Flying (Field)",
+                ]},
+                { "Flying (Battle)", [
+                    "Flying (Battle)",
+                    "Flying (Battle, Faster)",
+                    "Flying (Battle, Slower)",
+                ]},
+                { "Flying", [
+                    "Flying",
+                    "Flying (Normal)",
+                    "Flying (Fast)",
+                    "Flying (Faster)",
+                    "Flying (Medium)",
+                    "Flying (Slower)",
+                    "Flying (Slow)",
+                    "Flying (Slow 1)",
+                    "Flying (Slow 2)",
+                    "Flying (Slower 1)",
+                    "Flying (Slower 2)",
+                    "Flying (Very Fast)",
+                ]},
+                { "Hovering", [
+                    "Hovering",
+                    "Hovering (Fast)",
+                    "Hovering (Faster)",
+                    "Hovering (Slower)",
+                    "Hovering (Slow)",
+                ]},
+                { "Walking", [
+                    "Walking",
+                    "Walking (Faster)",
+                    "Walking (Slower)",
+                ]},
+                { "Moving", [
+                    "Moving",
+                    "Moving (Fast)",
+                    "Moving (Slow)",
+                ]},
+                { "Nodding", [
+                    "Nodding",
+                    "Nodding 1",
+                    "Nodding 2",
+                ]},
+                { "ShakingHead", [
+                    "ShakingHead",
+                ]},
+            };
+
+            var animNameToCategoryMap = animFrameNamingPriorityByCategory
+                .SelectMany(x => x.Value.Select(y => (Category: x.Key, Animation: y)))
+                .ToDictionary(x => x.Animation, x => x.Category);
+
+            var animFrameNamingPriority = animFrameNamingPriorityByCategory
+                .SelectMany(x => x.Value)
+                .ToArray();
+
+            var animFrameNamingPriorityOrder = animFrameNamingPriority
+                .Select((x, i) => (Index: i, Name: x))
+                .ToDictionary(x => x.Name, x => x.Index);
+
+            var animNamesNotCoverred = s_animationsByHash.Values
+                .Select(x => x.AnimInfo.AnimationName)
+                .Distinct()
+                .Where(x => !x.Contains("StillFrame") && !animFrameNamingPriority.Contains(x))
+                .OrderBy(x => x)
+                .ToArray();
+
+            var animsByFrameNamingPriorityBySpriteVariant = s_animationsByHash.Values
+                .GroupBy(x => x.AnimInfo.SpriteName + $" ({x.AnimInfo.Width}x{x.AnimInfo.Height})")
+                .ToDictionary(
+                    x => x.Key,
+                    x => x
+                        .Where(y => animFrameNamingPriority.Contains(y.AnimInfo.AnimationName))
+                        .OrderByDescending(y => CHR_Utils.DirectionsToFrameCount(y.AnimInfo.Directions))
+                        .ThenBy(y => animFrameNamingPriorityOrder[y.AnimInfo.AnimationName])
+                        .ToArray()
+                );
+
+            foreach (var frame in s_framesByHash.Values)
+                if (frame.FrameInfo.FrameName.StartsWith('_'))
+                    frame.FrameInfo.FrameName = frame.FrameInfo.FrameName.Substring(1);
+
+            foreach (var spriteVariant in animsByFrameNamingPriorityBySpriteVariant) {
+                if (spriteVariant.Key.StartsWith("Zero"))
+                    ;
+
+                var categoryIndicies = new Dictionary<string, int>();
+                foreach (var anim in spriteVariant.Value) {
+                    var categoryName = animNameToCategoryMap[anim.AnimInfo.AnimationName];
+                    if (!categoryIndicies.ContainsKey(categoryName))
+                        categoryIndicies[categoryName] = 1;
+
+                    foreach (var aniFrame in anim.AnimInfo.AnimationFrames) {
+                        if (aniFrame.FrameHashes != null) {
+                            var index = 0;
+                            foreach (var hash in aniFrame.FrameHashes) {
+                                if (s_framesByHash.TryGetValue(hash, out var frame) && !frame.FrameInfo.FrameName.StartsWith('_')) {
+                                    if (index == 0) {
+                                        index = categoryIndicies[categoryName];
+                                        categoryIndicies[categoryName]++;
+                                    }
+                                    frame.FrameInfo.FrameName = $"_{categoryName} {index}";
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            foreach (var frame in s_framesByHash.Values)
+                if (frame.FrameInfo.FrameName.StartsWith('_'))
+                    frame.FrameInfo.FrameName = frame.FrameInfo.FrameName.Substring(1);
+
+            var spriteDefs = CHR_Utils.CreateAllSpriteDefs();
             foreach (var spriteDef in spriteDefs)
                 _ = Directory.CreateDirectory(Path.Combine(c_pathOut, FilesystemString(spriteDef.Name)));
 
