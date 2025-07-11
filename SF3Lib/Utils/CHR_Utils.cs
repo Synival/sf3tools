@@ -158,7 +158,7 @@ namespace SF3.Utils {
             stream.WriteLine("</items>");
         }
 
-        public static SpriteDef[] GetAllSpriteDefs() {
+        public static SpriteDef[] CreateAllSpriteDefs() {
             string[] FixedFrameNames(string spriteName) {
                 // Edmund's P1 sprites are special because some frames are shared with and without a weapon.
                 // (His cape is so big, the rendered frames are the same when his back is turned)
@@ -170,7 +170,7 @@ namespace SF3.Utils {
                     return new string[] { "Edmund (P1) (Weaponless)", "Edmund (P1) (Sword/Weaponless)" };
                 // Explosions have a transparent frame with them.
                 else if (spriteName == "Explosion")
-                    return new string[] { "Explosion", "Transparent Frame" };
+                    return new string[] { "Explosion", "Transparent Frame", "Transparency" };
                 else
                     return spriteName.Split('|').Select(x => x.Trim()).ToArray();
             }
