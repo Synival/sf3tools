@@ -21643,132 +21643,72 @@
     <item hash="171397912030ceb69041e16717c73d04" sprite="Sphere of Darkness" width="64" height="64" frame="Pulsating 3" direction="First" />
     <item hash="20ca0d72613d2710a8f951e83bb379eb" sprite="Sphere of Darkness" width="64" height="64" frame="Pulsating 4" direction="First" />
     <item hash="f7c68a4d753deae32949e2e2ee75e517" sprite="Sphere of Light Around Jane" width="40" height="48" frame="StillFrame 1" direction="First" />
-    <item hash="6a41787c2eb3dcea36fad5ec2b8d7b35" sprite="Spiriel (P1)" width="40" height="40" frame="Idle 1" direction="S" />
-    <item hash="1676afdaebfc81c58bf6e977927c69db" sprite="Spiriel (P1)" width="40" height="40" frame="Idle 1" direction="SSE" />
-    <item hash="188dc50bbca1c789d6e1f5c4c3caffdd" sprite="Spiriel (P1)" width="40" height="40" frame="Idle 1" direction="SSE" />
-    <item hash="741a6070ac3787bd975c938eac2127be" sprite="Spiriel (P1)" width="40" height="40" frame="Idle 1" direction="SSE" />
-    <item hash="a95b57ee4bba74f47b3bd39d17ee9b44" sprite="Spiriel (P1)" width="40" height="40" frame="Idle 1" direction="SSE" />
-    <item hash="1539c6fbccb61e72699b518059a58e03" sprite="Spiriel (P1)" width="40" height="40" frame="Idle 1" direction="ESE" />
-    <item hash="a94786ce7ebd9ab2dc003da9f12456f6" sprite="Spiriel (P1)" width="40" height="40" frame="Idle 1" direction="ESE" />
-    <item hash="ab8320a89c5e9266f0edd41c2ab99ad8" sprite="Spiriel (P1)" width="40" height="40" frame="Idle 1" direction="ESE" />
-    <item hash="d83e03da069ac3ca5f0ba9276844a15b" sprite="Spiriel (P1)" width="40" height="40" frame="Idle 1" direction="ESE" />
-    <item hash="3ad56020ee8880c770820a92a8d651a8" sprite="Spiriel (P1)" width="40" height="40" frame="Idle 1" direction="ENE" />
-    <item hash="65c8efd256e2932920155778d1bf48fc" sprite="Spiriel (P1)" width="40" height="40" frame="Idle 1" direction="ENE" />
-    <item hash="8a8b2e2b7768180e56f9f7c18003c6fc" sprite="Spiriel (P1)" width="40" height="40" frame="Idle 1" direction="ENE" />
-    <item hash="a849ecfaa946a2c67c679b60040be536" sprite="Spiriel (P1)" width="40" height="40" frame="Idle 1" direction="ENE" />
-    <item hash="8daf75ac3527acafe0d04faaa8b04bf9" sprite="Spiriel (P1)" width="40" height="40" frame="Idle 1" direction="NNE" />
-    <item hash="b47caeaf6e50fa01e2131c2d7d679f9a" sprite="Spiriel (P1)" width="40" height="40" frame="Idle 1" direction="NNE" />
-    <item hash="de0a46da4be8e2d295e65fdfba3fd98c" sprite="Spiriel (P1)" width="40" height="40" frame="Idle 1" direction="NNE" />
-    <item hash="ed8538f489bd3e6efc00b74ce6f25b2e" sprite="Spiriel (P1)" width="40" height="40" frame="Idle 1" direction="NNE" />
-    <item hash="49399128e6237a5b3458d272a476344a" sprite="Spiriel (P1)" width="40" height="40" frame="Idle 1" direction="N" />
-    <item hash="9bb8a516113eedf578303cc90dd837a6" sprite="Spiriel (P1)" width="40" height="40" frame="Idle 2" direction="S" />
-    <item hash="13ddba9d8cd4f5e11173cf5179c9fd3a" sprite="Spiriel (P1)" width="40" height="40" frame="Idle 2" direction="SSE" />
-    <item hash="4679d7cd27bf92cf39b0888e6442f646" sprite="Spiriel (P1)" width="40" height="40" frame="Idle 2" direction="SSE" />
-    <item hash="bffe17df7575aa1eb15a20ced5573016" sprite="Spiriel (P1)" width="40" height="40" frame="Idle 2" direction="SSE" />
-    <item hash="c1cae123248a767acdad3fee354f5830" sprite="Spiriel (P1)" width="40" height="40" frame="Idle 2" direction="SSE" />
-    <item hash="2ec40ddc6eec53fcf67161e4fb2bf1ef" sprite="Spiriel (P1)" width="40" height="40" frame="Idle 2" direction="ESE" />
-    <item hash="35732853ec6c3f1953d2f9dd91a616b5" sprite="Spiriel (P1)" width="40" height="40" frame="Idle 2" direction="ESE" />
-    <item hash="6cec5e0b9bf5bd7417f8dcdc094af295" sprite="Spiriel (P1)" width="40" height="40" frame="Idle 2" direction="ESE" />
-    <item hash="fdfeb0aa431aa5cac36d4de5100e8433" sprite="Spiriel (P1)" width="40" height="40" frame="Idle 2" direction="ESE" />
-    <item hash="44d6fcc487ee1a2b2a9dbed2362c1eff" sprite="Spiriel (P1)" width="40" height="40" frame="Idle 2" direction="ENE" />
-    <item hash="4e9745ddfb5e97732067b7b54ee0d864" sprite="Spiriel (P1)" width="40" height="40" frame="Idle 2" direction="ENE" />
-    <item hash="aa3db4b0c8731dd950e706b96db40b64" sprite="Spiriel (P1)" width="40" height="40" frame="Idle 2" direction="ENE" />
-    <item hash="edcb6af0e600fc5ce9b9153bf8aa13e3" sprite="Spiriel (P1)" width="40" height="40" frame="Idle 2" direction="ENE" />
-    <item hash="122fffd6c71556fbad115eb481170370" sprite="Spiriel (P1)" width="40" height="40" frame="Idle 2" direction="NNE" />
-    <item hash="440faa41f56b24e496914dcaddd847ed" sprite="Spiriel (P1)" width="40" height="40" frame="Idle 2" direction="NNE" />
-    <item hash="4d290b218e0ba86c7ffa4ce2e1318c27" sprite="Spiriel (P1)" width="40" height="40" frame="Idle 2" direction="NNE" />
-    <item hash="565a105af7d4d546796b3f9d74711ec7" sprite="Spiriel (P1)" width="40" height="40" frame="Idle 2" direction="NNE" />
-    <item hash="2f8d0b4f1210ed3adb66d197c453634e" sprite="Spiriel (P1)" width="40" height="40" frame="Idle 2" direction="N" />
-    <item hash="058ec6abf89b2c074413b2eecb0ec4a0" sprite="Spiriel (P1)" width="40" height="40" frame="Idle 3" direction="S" />
-    <item hash="bfa29f9e1e2634cdc4c08dbaed346385" sprite="Spiriel (P1)" width="40" height="40" frame="Idle 3" direction="SSE" />
-    <item hash="c18babed69b266ddc467201ed75030df" sprite="Spiriel (P1)" width="40" height="40" frame="Idle 3" direction="SSE" />
-    <item hash="d2afba9e559e82d4c520ee5ae20f2530" sprite="Spiriel (P1)" width="40" height="40" frame="Idle 3" direction="SSE" />
-    <item hash="e84cc9b16bec2555998e405bf3f12760" sprite="Spiriel (P1)" width="40" height="40" frame="Idle 3" direction="SSE" />
-    <item hash="22a39f3212d76d9282e01163d6f2acce" sprite="Spiriel (P1)" width="40" height="40" frame="Idle 3" direction="ESE" />
-    <item hash="5d557e2add54da694d5e00bc11dcf827" sprite="Spiriel (P1)" width="40" height="40" frame="Idle 3" direction="ESE" />
-    <item hash="8e5b756c3972022a785768726f1b501c" sprite="Spiriel (P1)" width="40" height="40" frame="Idle 3" direction="ESE" />
-    <item hash="fb446a5d1685f46ce8a09f07bf53c477" sprite="Spiriel (P1)" width="40" height="40" frame="Idle 3" direction="ESE" />
-    <item hash="0f1b5771a95faaa1dd2679e4e09db42a" sprite="Spiriel (P1)" width="40" height="40" frame="Idle 3" direction="ENE" />
-    <item hash="afb820550cbadf9c781072278bbf9cb8" sprite="Spiriel (P1)" width="40" height="40" frame="Idle 3" direction="ENE" />
-    <item hash="b25ad0827b6272cf54d864021bff8915" sprite="Spiriel (P1)" width="40" height="40" frame="Idle 3" direction="ENE" />
-    <item hash="bf18baad56262699a0a80c0cc9c151f9" sprite="Spiriel (P1)" width="40" height="40" frame="Idle 3" direction="ENE" />
-    <item hash="1e5380bc1eba755283b8b8b524d6ea4e" sprite="Spiriel (P1)" width="40" height="40" frame="Idle 3" direction="NNE" />
-    <item hash="3af3c6ad5f609ff98626fab1e0346618" sprite="Spiriel (P1)" width="40" height="40" frame="Idle 3" direction="NNE" />
-    <item hash="a74bcaa2e5bcb233477d4e7bdfb6427f" sprite="Spiriel (P1)" width="40" height="40" frame="Idle 3" direction="NNE" />
-    <item hash="bbcc1da0b9e10a11c1a6078025216ff6" sprite="Spiriel (P1)" width="40" height="40" frame="Idle 3" direction="NNE" />
-    <item hash="528b317632de52c820a468fb0a5c2ccf" sprite="Spiriel (P1)" width="40" height="40" frame="Idle 3" direction="N" />
+    <item hash="6a41787c2eb3dcea36fad5ec2b8d7b35" sprite="Spiriel (P1)" width="40" height="40" frame="Idle (Battle) 1" direction="S" />
+    <item hash="741a6070ac3787bd975c938eac2127be" sprite="Spiriel (P1)" width="40" height="40" frame="Idle (Battle) 1" direction="SSE" />
+    <item hash="d83e03da069ac3ca5f0ba9276844a15b" sprite="Spiriel (P1)" width="40" height="40" frame="Idle (Battle) 1" direction="ESE" />
+    <item hash="3ad56020ee8880c770820a92a8d651a8" sprite="Spiriel (P1)" width="40" height="40" frame="Idle (Battle) 1" direction="ENE" />
+    <item hash="ed8538f489bd3e6efc00b74ce6f25b2e" sprite="Spiriel (P1)" width="40" height="40" frame="Idle (Battle) 1" direction="NNE" />
+    <item hash="49399128e6237a5b3458d272a476344a" sprite="Spiriel (P1)" width="40" height="40" frame="Idle (Battle) 1" direction="N" />
+    <item hash="9bb8a516113eedf578303cc90dd837a6" sprite="Spiriel (P1)" width="40" height="40" frame="Idle (Battle) 2" direction="S" />
+    <item hash="c1cae123248a767acdad3fee354f5830" sprite="Spiriel (P1)" width="40" height="40" frame="Idle (Battle) 2" direction="SSE" />
+    <item hash="6cec5e0b9bf5bd7417f8dcdc094af295" sprite="Spiriel (P1)" width="40" height="40" frame="Idle (Battle) 2" direction="ESE" />
+    <item hash="edcb6af0e600fc5ce9b9153bf8aa13e3" sprite="Spiriel (P1)" width="40" height="40" frame="Idle (Battle) 2" direction="ENE" />
+    <item hash="565a105af7d4d546796b3f9d74711ec7" sprite="Spiriel (P1)" width="40" height="40" frame="Idle (Battle) 2" direction="NNE" />
+    <item hash="2f8d0b4f1210ed3adb66d197c453634e" sprite="Spiriel (P1)" width="40" height="40" frame="Idle (Battle) 2" direction="N" />
+    <item hash="058ec6abf89b2c074413b2eecb0ec4a0" sprite="Spiriel (P1)" width="40" height="40" frame="Idle (Battle) 3" direction="S" />
+    <item hash="d2afba9e559e82d4c520ee5ae20f2530" sprite="Spiriel (P1)" width="40" height="40" frame="Idle (Battle) 3" direction="SSE" />
+    <item hash="22a39f3212d76d9282e01163d6f2acce" sprite="Spiriel (P1)" width="40" height="40" frame="Idle (Battle) 3" direction="ESE" />
+    <item hash="bf18baad56262699a0a80c0cc9c151f9" sprite="Spiriel (P1)" width="40" height="40" frame="Idle (Battle) 3" direction="ENE" />
+    <item hash="3af3c6ad5f609ff98626fab1e0346618" sprite="Spiriel (P1)" width="40" height="40" frame="Idle (Battle) 3" direction="NNE" />
+    <item hash="528b317632de52c820a468fb0a5c2ccf" sprite="Spiriel (P1)" width="40" height="40" frame="Idle (Battle) 3" direction="N" />
+    <item hash="a95b57ee4bba74f47b3bd39d17ee9b44" sprite="Spiriel (P1)" width="40" height="40" frame="Idle (Field) 1" direction="SSE" />
+    <item hash="ab8320a89c5e9266f0edd41c2ab99ad8" sprite="Spiriel (P1)" width="40" height="40" frame="Idle (Field) 1" direction="ESE" />
+    <item hash="65c8efd256e2932920155778d1bf48fc" sprite="Spiriel (P1)" width="40" height="40" frame="Idle (Field) 1" direction="ENE" />
+    <item hash="de0a46da4be8e2d295e65fdfba3fd98c" sprite="Spiriel (P1)" width="40" height="40" frame="Idle (Field) 1" direction="NNE" />
+    <item hash="4679d7cd27bf92cf39b0888e6442f646" sprite="Spiriel (P1)" width="40" height="40" frame="Idle (Field) 2" direction="SSE" />
+    <item hash="2ec40ddc6eec53fcf67161e4fb2bf1ef" sprite="Spiriel (P1)" width="40" height="40" frame="Idle (Field) 2" direction="ESE" />
+    <item hash="4e9745ddfb5e97732067b7b54ee0d864" sprite="Spiriel (P1)" width="40" height="40" frame="Idle (Field) 2" direction="ENE" />
+    <item hash="440faa41f56b24e496914dcaddd847ed" sprite="Spiriel (P1)" width="40" height="40" frame="Idle (Field) 2" direction="NNE" />
+    <item hash="bfa29f9e1e2634cdc4c08dbaed346385" sprite="Spiriel (P1)" width="40" height="40" frame="Idle (Field) 3" direction="SSE" />
+    <item hash="5d557e2add54da694d5e00bc11dcf827" sprite="Spiriel (P1)" width="40" height="40" frame="Idle (Field) 3" direction="ESE" />
+    <item hash="afb820550cbadf9c781072278bbf9cb8" sprite="Spiriel (P1)" width="40" height="40" frame="Idle (Field) 3" direction="ENE" />
+    <item hash="bbcc1da0b9e10a11c1a6078025216ff6" sprite="Spiriel (P1)" width="40" height="40" frame="Idle (Field) 3" direction="NNE" />
     <item hash="25af4fb695d7d56723e1e933b63da1d9" sprite="Spiriel (P1)" width="40" height="40" frame="Nodding 2" direction="SSE" />
-    <item hash="e9e0d1e43880726a5be3005d3e02fa67" sprite="Spiriel (P1)" width="40" height="40" frame="Nodding 2" direction="SSE" />
-    <item hash="2a8043a53a23924e349e1b1916ec3c70" sprite="Spiriel (P1)" width="40" height="40" frame="Nodding 2" direction="ESE" />
     <item hash="33cfb7bcca5d61825735086dec9b57a0" sprite="Spiriel (P1)" width="40" height="40" frame="Nodding 2" direction="ESE" />
-    <item hash="c23c520905b945e6f78e05ea7a53aed5" sprite="Spiriel (P1)" width="40" height="40" frame="Nodding 2" direction="ENE" />
     <item hash="e359dc7a238f193724637a40127ba34b" sprite="Spiriel (P1)" width="40" height="40" frame="Nodding 2" direction="ENE" />
-    <item hash="af26a36f04e1d0f977a03bad21c839ed" sprite="Spiriel (P1)" width="40" height="40" frame="Nodding 2" direction="NNE" />
     <item hash="b4ff5d13d14aa142532224a4261e7a07" sprite="Spiriel (P1)" width="40" height="40" frame="Nodding 2" direction="NNE" />
-    <item hash="e2245a162a2579c21b9cb90ca731f94d" sprite="Spiriel (P1)" width="40" height="40" frame="Nodding 3" direction="SSE" />
-    <item hash="a8103999f9ff72aeb8d754e7fa256eb9" sprite="Spiriel (P1)" width="40" height="40" frame="Nodding 3" direction="ESE" />
-    <item hash="5a734da9d7fd69dff00dd61022d24871" sprite="Spiriel (P1)" width="40" height="40" frame="Nodding 3" direction="ENE" />
-    <item hash="c036ce67c3fc5ea59aaa05303a7f998a" sprite="Spiriel (P1)" width="40" height="40" frame="Nodding 3" direction="NNE" />
     <item hash="fed74cbec43e4722073874fefc4d418d" sprite="Spiriel (P1)" width="40" height="40" frame="Nodding 3, ShakingHead 3" direction="SSE" />
     <item hash="7997e493d3f800e704a352724da71ea1" sprite="Spiriel (P1)" width="40" height="40" frame="Nodding 3, ShakingHead 3" direction="ESE" />
     <item hash="e7539bae2d5a309d4f650e4bd64fa63b" sprite="Spiriel (P1)" width="40" height="40" frame="Nodding 3, ShakingHead 3" direction="ENE" />
     <item hash="7a92aa39e23b12a0b13ad1c0cda934a0" sprite="Spiriel (P1)" width="40" height="40" frame="Nodding 3, ShakingHead 3" direction="NNE" />
-    <item hash="a8303d1fe93b4bc45a267e42f19f4fdf" sprite="Spiriel (P1)" width="40" height="40" frame="ShakingHead 2" direction="SSE" />
     <item hash="eb84b43b114e1f8fbc45ef7635808799" sprite="Spiriel (P1)" width="40" height="40" frame="ShakingHead 2" direction="SSE" />
-    <item hash="84cc83bdac6de7659a1dc7821d035a78" sprite="Spiriel (P1)" width="40" height="40" frame="ShakingHead 2" direction="ESE" />
     <item hash="cb6e3080e097f24be6b8acd2b7db46b2" sprite="Spiriel (P1)" width="40" height="40" frame="ShakingHead 2" direction="ESE" />
     <item hash="486f42f6f0c51925ba294b94a10ba244" sprite="Spiriel (P1)" width="40" height="40" frame="ShakingHead 2" direction="ENE" />
-    <item hash="cee2c995a369e51ebea741a4dc718feb" sprite="Spiriel (P1)" width="40" height="40" frame="ShakingHead 2" direction="ENE" />
-    <item hash="3cd9751a7c2443ec139970b35702fed4" sprite="Spiriel (P1)" width="40" height="40" frame="ShakingHead 2" direction="NNE" />
     <item hash="f211ce7918bf20fa2ace02d93f2a2c93" sprite="Spiriel (P1)" width="40" height="40" frame="ShakingHead 2" direction="NNE" />
-    <item hash="f240d912a6370104f050a5ce6a0b713c" sprite="Spiriel (P1)" width="40" height="40" frame="ShakingHead 3" direction="SSE" />
-    <item hash="b79bab328f48bba111c4ef51aa29faa3" sprite="Spiriel (P1)" width="40" height="40" frame="ShakingHead 3" direction="ESE" />
-    <item hash="7f9ac5c2e008403c28182bd740216409" sprite="Spiriel (P1)" width="40" height="40" frame="ShakingHead 3" direction="ENE" />
-    <item hash="dd3553fbf5cf98a913268a89d3345f6e" sprite="Spiriel (P1)" width="40" height="40" frame="ShakingHead 3" direction="NNE" />
     <item hash="2c6c97d7fff7e3bfc82a9a4312deab99" sprite="Spiriel (P1)" width="40" height="40" frame="ShakingHead 4" direction="SSE" />
     <item hash="e2fe239854876005f45d458789b02395" sprite="Spiriel (P1)" width="40" height="40" frame="ShakingHead 4" direction="ESE" />
     <item hash="e084ed04e1e805be8cd5c8cf6768b99a" sprite="Spiriel (P1)" width="40" height="40" frame="ShakingHead 4" direction="ENE" />
     <item hash="20e570eefaf63f73f602a5916b6bb064" sprite="Spiriel (P1)" width="40" height="40" frame="ShakingHead 4" direction="NNE" />
     <item hash="1d760f13108baa73f36daf80c879ce4f" sprite="Spiriel (P1)" width="40" height="40" frame="Walking 1" direction="S" />
     <item hash="72deee6c96d0ffd7e766ee4e6bf2070b" sprite="Spiriel (P1)" width="40" height="40" frame="Walking 1" direction="SSE" />
-    <item hash="eba585bbec810e505e463d5a0ca48ac1" sprite="Spiriel (P1)" width="40" height="40" frame="Walking 1" direction="SSE" />
-    <item hash="8a0074579fc48f9fd28016a1517612f0" sprite="Spiriel (P1)" width="40" height="40" frame="Walking 1" direction="ESE" />
     <item hash="a29bc71c3b782f8f947b162cbabb4f86" sprite="Spiriel (P1)" width="40" height="40" frame="Walking 1" direction="ESE" />
-    <item hash="97e5078e4747075e3630070c5c9149d8" sprite="Spiriel (P1)" width="40" height="40" frame="Walking 1" direction="ENE" />
-    <item hash="86ed7fdd0206dade2d646dd15420f146" sprite="Spiriel (P1)" width="40" height="40" frame="Walking 1" direction="NNE" />
     <item hash="cc3b55cb76d633bb8b96b4b608248fbf" sprite="Spiriel (P1)" width="40" height="40" frame="Walking 1" direction="NNE" />
     <item hash="88d728434c912cba7beac6a3c51fbc1c" sprite="Spiriel (P1)" width="40" height="40" frame="Walking 1" direction="N" />
     <item hash="ae3d550d96835d67c4c6ffb50f8f271f" sprite="Spiriel (P1)" width="40" height="40" frame="Walking 2" direction="S" />
-    <item hash="0078cde0c52e9325910c17c3b7200a12" sprite="Spiriel (P1)" width="40" height="40" frame="Walking 2" direction="SSE" />
-    <item hash="3f02a747556d7176b60042043a868c97" sprite="Spiriel (P1)" width="40" height="40" frame="Walking 2" direction="ESE" />
-    <item hash="e9d972cd2ed8eee0591e93280949ab81" sprite="Spiriel (P1)" width="40" height="40" frame="Walking 2" direction="ENE" />
-    <item hash="311d199ec5da6394b79d30bfae43c570" sprite="Spiriel (P1)" width="40" height="40" frame="Walking 2" direction="NNE" />
     <item hash="999d664a31162c21fc1910a1c4300a2a" sprite="Spiriel (P1)" width="40" height="40" frame="Walking 2" direction="N" />
     <item hash="6daf4bef68064b10e2ae2d66e64e35ab" sprite="Spiriel (P1)" width="40" height="40" frame="Walking 3" direction="S" />
-    <item hash="25d3ece9ce38d599330563fde95fcc40" sprite="Spiriel (P1)" width="40" height="40" frame="Walking 3" direction="SSE" />
     <item hash="9c8c71e75d5bfd2d080f07d9c48dc313" sprite="Spiriel (P1)" width="40" height="40" frame="Walking 3" direction="SSE" />
     <item hash="1dd9ca9e0e938f3fdcf78d82675baca2" sprite="Spiriel (P1)" width="40" height="40" frame="Walking 3" direction="ESE" />
-    <item hash="65745c42c0b585755531e3e26c6eb7da" sprite="Spiriel (P1)" width="40" height="40" frame="Walking 3" direction="ESE" />
-    <item hash="28fb5552f00bbe9c84e5714ebc97e913" sprite="Spiriel (P1)" width="40" height="40" frame="Walking 3" direction="ENE" />
     <item hash="2daf94b905485dbb9cd193bd8b883f94" sprite="Spiriel (P1)" width="40" height="40" frame="Walking 3" direction="NNE" />
-    <item hash="83b4ca70c36448281ea4254ecd53a643" sprite="Spiriel (P1)" width="40" height="40" frame="Walking 3" direction="NNE" />
     <item hash="9190d49c30080e2bc04165e81d145ae1" sprite="Spiriel (P1)" width="40" height="40" frame="Walking 3" direction="N" />
     <item hash="3e7360eb753d6085a4df007d25a896dd" sprite="Spiriel (P1)" width="40" height="40" frame="Walking 4" direction="S" />
     <item hash="50eac778994d48f4136057f22ea9c2b9" sprite="Spiriel (P1)" width="40" height="40" frame="Walking 4" direction="SSE" />
-    <item hash="79eba8a5944db977e25d69cb9b057143" sprite="Spiriel (P1)" width="40" height="40" frame="Walking 4" direction="SSE" />
-    <item hash="244fa24c7ec4f6014bf1c28be65f8c80" sprite="Spiriel (P1)" width="40" height="40" frame="Walking 4" direction="ESE" />
     <item hash="9b24cdfe4fd181919cd38a2d23e18fdd" sprite="Spiriel (P1)" width="40" height="40" frame="Walking 4" direction="ESE" />
-    <item hash="6de77e0d93e17d4347ae4487d7c6c72f" sprite="Spiriel (P1)" width="40" height="40" frame="Walking 4" direction="ENE" />
-    <item hash="b5146cfeaa244b2ba354c0509eb21f76" sprite="Spiriel (P1)" width="40" height="40" frame="Walking 4" direction="NNE" />
     <item hash="c7087d9a1c099dffefb902a5e30fda19" sprite="Spiriel (P1)" width="40" height="40" frame="Walking 4" direction="NNE" />
     <item hash="6d62e93d2b62d3c1333bcc94b9d723d1" sprite="Spiriel (P1)" width="40" height="40" frame="Walking 4" direction="N" />
     <item hash="7f9a9e0e73879c0f846c2e30fc7f0171" sprite="Spiriel (P1)" width="40" height="40" frame="Walking 6" direction="S" />
-    <item hash="2ebd3c96f7d8834e41e656c92e11664c" sprite="Spiriel (P1)" width="40" height="40" frame="Walking 6" direction="SSE" />
     <item hash="3e68ed79d2597e76fae7f32bf25ea11d" sprite="Spiriel (P1)" width="40" height="40" frame="Walking 6" direction="SSE" />
-    <item hash="7ba54c6a0881bef1b1805bd86d4994f4" sprite="Spiriel (P1)" width="40" height="40" frame="Walking 6" direction="ESE" />
     <item hash="a2dae83f3b53bc52ea1e87cfef485ccb" sprite="Spiriel (P1)" width="40" height="40" frame="Walking 6" direction="ESE" />
-    <item hash="ceb400f13437a60d0dd5e0de3aef7141" sprite="Spiriel (P1)" width="40" height="40" frame="Walking 6" direction="ENE" />
-    <item hash="2fe1d0e1ceebff35033491f28ceb8de8" sprite="Spiriel (P1)" width="40" height="40" frame="Walking 6" direction="NNE" />
     <item hash="473e17fe7809490e5ec29ae789f08447" sprite="Spiriel (P1)" width="40" height="40" frame="Walking 6" direction="NNE" />
     <item hash="9f774d5d87e23e1b1b3f663a951543fe" sprite="Spiriel (P1)" width="40" height="40" frame="Walking 6" direction="N" />
     <item hash="1cb890775411930f03be24e39c17ddba" sprite="Spiriel (P1)" width="48" height="40" frame="Idle (Battle) 1" direction="SSE" />
@@ -21839,6 +21779,66 @@
     <item hash="36fe02b4f7157edc9cfc8634efc52b48" sprite="Spiriel (P1)" width="48" height="40" frame="Walking 5" direction="ESE" />
     <item hash="7d434785a31d5c22efc299b0e72246a9" sprite="Spiriel (P1)" width="48" height="40" frame="Walking 5" direction="ENE" />
     <item hash="cc82e91af21534b906672f69b6ae492c" sprite="Spiriel (P1)" width="48" height="40" frame="Walking 5" direction="NNE" />
+    <item hash="188dc50bbca1c789d6e1f5c4c3caffdd" sprite="Spiriel (P1) (Sc1+2)" width="40" height="40" frame="Idle (Battle) 1" direction="SSE" />
+    <item hash="a94786ce7ebd9ab2dc003da9f12456f6" sprite="Spiriel (P1) (Sc1+2)" width="40" height="40" frame="Idle (Battle) 1" direction="ESE" />
+    <item hash="a849ecfaa946a2c67c679b60040be536" sprite="Spiriel (P1) (Sc1+2)" width="40" height="40" frame="Idle (Battle) 1" direction="ENE" />
+    <item hash="8daf75ac3527acafe0d04faaa8b04bf9" sprite="Spiriel (P1) (Sc1+2)" width="40" height="40" frame="Idle (Battle) 1" direction="NNE" />
+    <item hash="bffe17df7575aa1eb15a20ced5573016" sprite="Spiriel (P1) (Sc1+2)" width="40" height="40" frame="Idle (Battle) 2" direction="SSE" />
+    <item hash="fdfeb0aa431aa5cac36d4de5100e8433" sprite="Spiriel (P1) (Sc1+2)" width="40" height="40" frame="Idle (Battle) 2" direction="ESE" />
+    <item hash="44d6fcc487ee1a2b2a9dbed2362c1eff" sprite="Spiriel (P1) (Sc1+2)" width="40" height="40" frame="Idle (Battle) 2" direction="ENE" />
+    <item hash="122fffd6c71556fbad115eb481170370" sprite="Spiriel (P1) (Sc1+2)" width="40" height="40" frame="Idle (Battle) 2" direction="NNE" />
+    <item hash="c18babed69b266ddc467201ed75030df" sprite="Spiriel (P1) (Sc1+2)" width="40" height="40" frame="Idle (Battle) 3" direction="SSE" />
+    <item hash="8e5b756c3972022a785768726f1b501c" sprite="Spiriel (P1) (Sc1+2)" width="40" height="40" frame="Idle (Battle) 3" direction="ESE" />
+    <item hash="0f1b5771a95faaa1dd2679e4e09db42a" sprite="Spiriel (P1) (Sc1+2)" width="40" height="40" frame="Idle (Battle) 3" direction="ENE" />
+    <item hash="1e5380bc1eba755283b8b8b524d6ea4e" sprite="Spiriel (P1) (Sc1+2)" width="40" height="40" frame="Idle (Battle) 3" direction="NNE" />
+    <item hash="1676afdaebfc81c58bf6e977927c69db" sprite="Spiriel (P1) (Sc1+2)" width="40" height="40" frame="Idle (Battle) 4" direction="SSE" />
+    <item hash="1539c6fbccb61e72699b518059a58e03" sprite="Spiriel (P1) (Sc1+2)" width="40" height="40" frame="Idle (Battle) 4" direction="ESE" />
+    <item hash="8a8b2e2b7768180e56f9f7c18003c6fc" sprite="Spiriel (P1) (Sc1+2)" width="40" height="40" frame="Idle (Battle) 4" direction="ENE" />
+    <item hash="b47caeaf6e50fa01e2131c2d7d679f9a" sprite="Spiriel (P1) (Sc1+2)" width="40" height="40" frame="Idle (Battle) 4" direction="NNE" />
+    <item hash="13ddba9d8cd4f5e11173cf5179c9fd3a" sprite="Spiriel (P1) (Sc1+2)" width="40" height="40" frame="Idle (Battle) 5" direction="SSE" />
+    <item hash="35732853ec6c3f1953d2f9dd91a616b5" sprite="Spiriel (P1) (Sc1+2)" width="40" height="40" frame="Idle (Battle) 5" direction="ESE" />
+    <item hash="aa3db4b0c8731dd950e706b96db40b64" sprite="Spiriel (P1) (Sc1+2)" width="40" height="40" frame="Idle (Battle) 5" direction="ENE" />
+    <item hash="4d290b218e0ba86c7ffa4ce2e1318c27" sprite="Spiriel (P1) (Sc1+2)" width="40" height="40" frame="Idle (Battle) 5" direction="NNE" />
+    <item hash="e84cc9b16bec2555998e405bf3f12760" sprite="Spiriel (P1) (Sc1+2)" width="40" height="40" frame="Idle (Battle) 6" direction="SSE" />
+    <item hash="fb446a5d1685f46ce8a09f07bf53c477" sprite="Spiriel (P1) (Sc1+2)" width="40" height="40" frame="Idle (Battle) 6" direction="ESE" />
+    <item hash="b25ad0827b6272cf54d864021bff8915" sprite="Spiriel (P1) (Sc1+2)" width="40" height="40" frame="Idle (Battle) 6" direction="ENE" />
+    <item hash="a74bcaa2e5bcb233477d4e7bdfb6427f" sprite="Spiriel (P1) (Sc1+2)" width="40" height="40" frame="Idle (Battle) 6" direction="NNE" />
+    <item hash="e9e0d1e43880726a5be3005d3e02fa67" sprite="Spiriel (P1) (Sc1+2)" width="40" height="40" frame="Nodding 2" direction="SSE" />
+    <item hash="2a8043a53a23924e349e1b1916ec3c70" sprite="Spiriel (P1) (Sc1+2)" width="40" height="40" frame="Nodding 2" direction="ESE" />
+    <item hash="c23c520905b945e6f78e05ea7a53aed5" sprite="Spiriel (P1) (Sc1+2)" width="40" height="40" frame="Nodding 2" direction="ENE" />
+    <item hash="af26a36f04e1d0f977a03bad21c839ed" sprite="Spiriel (P1) (Sc1+2)" width="40" height="40" frame="Nodding 2" direction="NNE" />
+    <item hash="e2245a162a2579c21b9cb90ca731f94d" sprite="Spiriel (P1) (Sc1+2)" width="40" height="40" frame="Nodding 3" direction="SSE" />
+    <item hash="a8103999f9ff72aeb8d754e7fa256eb9" sprite="Spiriel (P1) (Sc1+2)" width="40" height="40" frame="Nodding 3" direction="ESE" />
+    <item hash="5a734da9d7fd69dff00dd61022d24871" sprite="Spiriel (P1) (Sc1+2)" width="40" height="40" frame="Nodding 3" direction="ENE" />
+    <item hash="c036ce67c3fc5ea59aaa05303a7f998a" sprite="Spiriel (P1) (Sc1+2)" width="40" height="40" frame="Nodding 3" direction="NNE" />
+    <item hash="a8303d1fe93b4bc45a267e42f19f4fdf" sprite="Spiriel (P1) (Sc1+2)" width="40" height="40" frame="ShakingHead 2" direction="SSE" />
+    <item hash="84cc83bdac6de7659a1dc7821d035a78" sprite="Spiriel (P1) (Sc1+2)" width="40" height="40" frame="ShakingHead 2" direction="ESE" />
+    <item hash="cee2c995a369e51ebea741a4dc718feb" sprite="Spiriel (P1) (Sc1+2)" width="40" height="40" frame="ShakingHead 2" direction="ENE" />
+    <item hash="3cd9751a7c2443ec139970b35702fed4" sprite="Spiriel (P1) (Sc1+2)" width="40" height="40" frame="ShakingHead 2" direction="NNE" />
+    <item hash="f240d912a6370104f050a5ce6a0b713c" sprite="Spiriel (P1) (Sc1+2)" width="40" height="40" frame="ShakingHead 3" direction="SSE" />
+    <item hash="b79bab328f48bba111c4ef51aa29faa3" sprite="Spiriel (P1) (Sc1+2)" width="40" height="40" frame="ShakingHead 3" direction="ESE" />
+    <item hash="7f9ac5c2e008403c28182bd740216409" sprite="Spiriel (P1) (Sc1+2)" width="40" height="40" frame="ShakingHead 3" direction="ENE" />
+    <item hash="dd3553fbf5cf98a913268a89d3345f6e" sprite="Spiriel (P1) (Sc1+2)" width="40" height="40" frame="ShakingHead 3" direction="NNE" />
+    <item hash="eba585bbec810e505e463d5a0ca48ac1" sprite="Spiriel (P1) (Sc1+2)" width="40" height="40" frame="Walking 1" direction="SSE" />
+    <item hash="8a0074579fc48f9fd28016a1517612f0" sprite="Spiriel (P1) (Sc1+2)" width="40" height="40" frame="Walking 1" direction="ESE" />
+    <item hash="97e5078e4747075e3630070c5c9149d8" sprite="Spiriel (P1) (Sc1+2)" width="40" height="40" frame="Walking 1" direction="ENE" />
+    <item hash="86ed7fdd0206dade2d646dd15420f146" sprite="Spiriel (P1) (Sc1+2)" width="40" height="40" frame="Walking 1" direction="NNE" />
+    <item hash="0078cde0c52e9325910c17c3b7200a12" sprite="Spiriel (P1) (Sc1+2)" width="40" height="40" frame="Walking 2" direction="SSE" />
+    <item hash="3f02a747556d7176b60042043a868c97" sprite="Spiriel (P1) (Sc1+2)" width="40" height="40" frame="Walking 2" direction="ESE" />
+    <item hash="e9d972cd2ed8eee0591e93280949ab81" sprite="Spiriel (P1) (Sc1+2)" width="40" height="40" frame="Walking 2" direction="ENE" />
+    <item hash="311d199ec5da6394b79d30bfae43c570" sprite="Spiriel (P1) (Sc1+2)" width="40" height="40" frame="Walking 2" direction="NNE" />
+    <item hash="25d3ece9ce38d599330563fde95fcc40" sprite="Spiriel (P1) (Sc1+2)" width="40" height="40" frame="Walking 3" direction="SSE" />
+    <item hash="65745c42c0b585755531e3e26c6eb7da" sprite="Spiriel (P1) (Sc1+2)" width="40" height="40" frame="Walking 3" direction="ESE" />
+    <item hash="28fb5552f00bbe9c84e5714ebc97e913" sprite="Spiriel (P1) (Sc1+2)" width="40" height="40" frame="Walking 3" direction="ENE" />
+    <item hash="83b4ca70c36448281ea4254ecd53a643" sprite="Spiriel (P1) (Sc1+2)" width="40" height="40" frame="Walking 3" direction="NNE" />
+    <item hash="79eba8a5944db977e25d69cb9b057143" sprite="Spiriel (P1) (Sc1+2)" width="40" height="40" frame="Walking 4" direction="SSE" />
+    <item hash="244fa24c7ec4f6014bf1c28be65f8c80" sprite="Spiriel (P1) (Sc1+2)" width="40" height="40" frame="Walking 4" direction="ESE" />
+    <item hash="6de77e0d93e17d4347ae4487d7c6c72f" sprite="Spiriel (P1) (Sc1+2)" width="40" height="40" frame="Walking 4" direction="ENE" />
+    <item hash="b5146cfeaa244b2ba354c0509eb21f76" sprite="Spiriel (P1) (Sc1+2)" width="40" height="40" frame="Walking 4" direction="NNE" />
+    <item hash="2ebd3c96f7d8834e41e656c92e11664c" sprite="Spiriel (P1) (Sc1+2)" width="40" height="40" frame="Walking 6" direction="SSE" />
+    <item hash="7ba54c6a0881bef1b1805bd86d4994f4" sprite="Spiriel (P1) (Sc1+2)" width="40" height="40" frame="Walking 6" direction="ESE" />
+    <item hash="ceb400f13437a60d0dd5e0de3aef7141" sprite="Spiriel (P1) (Sc1+2)" width="40" height="40" frame="Walking 6" direction="ENE" />
+    <item hash="2fe1d0e1ceebff35033491f28ceb8de8" sprite="Spiriel (P1) (Sc1+2)" width="40" height="40" frame="Walking 6" direction="NNE" />
     <item hash="f137534bef1511f7abb46eb6a41d1bb9" sprite="Spiriel (P2)" width="40" height="40" frame="Idle (Battle) 1" direction="S" />
     <item hash="eb2bb8aedd8386329d202158a476da5c" sprite="Spiriel (P2)" width="40" height="40" frame="Idle (Battle) 1" direction="SSE" />
     <item hash="383d7a93ae1b5bf670ba479253920f69" sprite="Spiriel (P2)" width="40" height="40" frame="Idle (Battle) 1" direction="ESE" />
