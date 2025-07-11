@@ -8,6 +8,8 @@
             AnimationFrames = aniInfo.AnimationFrames;
         }
 
+        public override string ToString() => Name;
+
         public string Name;
         public string Hash;
         public AnimationFrameDef[] AnimationFrames;

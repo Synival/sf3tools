@@ -16,6 +16,8 @@ namespace SF3.Sprites {
                 .ToArray();
         }
 
+        public override string ToString() => Name;
+
         public string Name;
         public int Width;
         public int Height;

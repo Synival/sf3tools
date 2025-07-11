@@ -14,6 +14,8 @@ namespace SF3.Sprites {
             SpriteSheetY = -1;
         }
 
+        public override string ToString() => Name;
+
         public string Name;
         public string Hash;
         public int Width;

@@ -20,6 +20,8 @@ namespace SF3.Sprites {
                 .ToArray();
         }
 
+        public override string ToString() => Name;
+
         public string Name;
         public FrameDef[] Frames;
         public SpriteVariantDef[] Variants;

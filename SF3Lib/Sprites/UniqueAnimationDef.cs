@@ -24,6 +24,8 @@
             AnimationFrames      = animationFrames;
         }
 
+        public override string ToString() => $"{SpriteName} ({Width}x{Height}x{Directions}).{AnimationName}";
+
         public string AnimationHash;
         public string SpriteName;
         public string AnimationName;

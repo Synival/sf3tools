@@ -11,6 +11,8 @@ namespace SF3.Sprites {
             Direction   = direction;
         }
 
+        public override string ToString() => $"{SpriteName} ({Width}x{Height}).{FrameName} ({Direction})";
+
         public string TextureHash;
         public string SpriteName;
         public int Width;
