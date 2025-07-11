@@ -34,6 +34,8 @@ namespace CHR_Analyzer {
                 Texture = texture;
             }
 
+            public override string ToString() => FrameInfo.ToString();
+
             public UniqueFrameDef FrameInfo { get; }
             public ITexture Texture { get; }
             public List<TextureSpriteInfo> Sprites { get; } = new List<TextureSpriteInfo>();
@@ -55,6 +57,8 @@ namespace CHR_Analyzer {
             public AnimationInfo(UniqueAnimationDef animationInfo) {
                 AnimInfo = animationInfo;
             }
+
+            public override string ToString() => AnimInfo.ToString();
 
             public UniqueAnimationDef AnimInfo { get; }
             public List<AnimationFileSprite> Sprites { get; } = new List<AnimationFileSprite>();
@@ -341,14 +345,16 @@ namespace CHR_Analyzer {
                     .ThenBy(x => x.Direction)
                     .ThenBy(x => x.Hash)
                     .ToList();
-                spriteDef.Frames = framesFound.ToArray();
+                spriteDef.Frames = framesFound.OrderBy(x => x.Name).ToArray();
                 var framesFoundHashSet = spriteDef.Frames.Select(x => x.Hash).ToHashSet();
 
                 // Filter out variants that have no frames.
                 var validVariants = spriteDef.Variants
                     .Where(x => spriteDef.Frames.Any(y => x.Width == y.Width && x.Height == y.Height))
                     .ToArray();
-                spriteDef.Variants = validVariants;
+                spriteDef.Variants = validVariants
+                    .OrderBy(x => x.Name)
+                    .ToArray();
 
                 // Filter out animations that have missing frames or no frames at all.
                 foreach (var variant in spriteDef.Variants) {
@@ -356,6 +362,7 @@ namespace CHR_Analyzer {
                         .Where(x => x.AnimationFrames.Length > 0 && x.AnimationFrames
                             .All(y => y.FrameHashes == null || y.FrameHashes.All(z => z == null || framesFoundHashSet.Contains(z)))
                         )
+                        .OrderBy(x => x.Name)
                         .ToArray();
                     variant.Animations = validAnimations;
                 }
