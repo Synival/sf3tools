@@ -125,7 +125,7 @@ namespace SF3.Models.Structs.CHR {
                     return "Edmund (P1) (Weaponless)";
 
                 // Explosions have transparent frames sometimes.
-                if (distinctNames.Length == 2 && distinctNames[0] == "Explosion" && distinctNames[1] == "Transparent Frame")
+                if (distinctNames.Length == 2 && distinctNames[0] == "Explosion" && distinctNames[1] == "Transparency")
                     return "Explosion";
 
                 return string.Join(" | ", distinctNames);
