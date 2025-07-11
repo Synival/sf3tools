@@ -136,7 +136,7 @@ namespace SF3.Models.Structs.CHR {
                     frame.FrameInfo.SpriteName = value;
 
                 var resourcePath = Path.Combine("..", "..", "..", "..", "SF3Lib", CommonLib.Utils.ResourceUtils.ResourceFile("SpriteFramesByHash.xml"));
-                using (var file = File.OpenWrite(resourcePath))
+                using (var file = File.Open(resourcePath, FileMode.Create))
                     using (var writer = new StreamWriter(file))
                         CHR_Utils.WriteUniqueFramesByHashXML(writer);
 
@@ -144,7 +144,7 @@ namespace SF3.Models.Structs.CHR {
                 if (lastSpriteName != newSpriteName) {
                     AnimationInfo.SpriteName = SpriteName;
                     var animPath = Path.Combine("..", "..", "..", "..", "SF3Lib", CommonLib.Utils.ResourceUtils.ResourceFile("SpriteAnimationsByHash.xml"));
-                    using (var file = File.OpenWrite(animPath))
+                    using (var file = File.Open(animPath, FileMode.Create))
                         using (var writer = new StreamWriter(file))
                             CHR_Utils.WriteUniqueAnimationsByHashXML(writer);
                 }
@@ -157,7 +157,7 @@ namespace SF3.Models.Structs.CHR {
             set {
                 AnimationInfo.AnimationName = value;
                 var resourcePath = Path.Combine("..", "..", "..", "..", "SF3Lib", CommonLib.Utils.ResourceUtils.ResourceFile("SpriteAnimationsByHash.xml"));
-                using (var file = File.OpenWrite(resourcePath))
+                using (var file = File.Open(resourcePath, FileMode.Create))
                     using (var writer = new StreamWriter(file))
                         CHR_Utils.WriteUniqueAnimationsByHashXML(writer);
             }

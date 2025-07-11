@@ -179,12 +179,28 @@ namespace CHR_Analyzer {
                     "Idle (Battle, Render 1)",
                     "Idle (Battle, Render 2)",
                 ]},
+                { "Idle (Upright)", [
+                    "Idle (Upright, Some Frames Offset)",
+                ]},
+                { "Idle (Resting)", [
+                    "Idle (Resting)",
+                ]},
+                { "Idle (Tipping)", [
+                    "Idle (Tipping)",
+                ]},
                 { "Idle", [
                     "Idle",
                     "Idle 1",
                     "Idle 2",
+                    "Idle (Render 1)",
+                    "Idle (Render 2)",
                     "Idle (Fast)",
                     "Idle (Faster)",
+                    "Idle (Dangling)",
+                    "Idle (2 Frames)",
+                ]},
+                { "Idle (Imposter?)", [
+                    "Idle (Imposter?)",
                 ]},
                 { "Flying (Field)", [
                     "Flying (Field)",
@@ -207,6 +223,11 @@ namespace CHR_Analyzer {
                     "Flying (Slower 1)",
                     "Flying (Slower 2)",
                     "Flying (Very Fast)",
+                    "Flying (Flapping Quickly)",
+                ]},
+                { "Flying (Bad)", [
+                    "Flying (Fast, Reduced)",
+                    "Flying (Bad Outline, Reduced, Redundant Frames)",
                 ]},
                 { "Hovering", [
                     "Hovering",
@@ -217,21 +238,147 @@ namespace CHR_Analyzer {
                 ]},
                 { "Walking", [
                     "Walking",
+                    "Walking (Render 1)",
+                    "Walking (Render 2)",
                     "Walking (Faster)",
                     "Walking (Slower)",
+                    "Walking (Very Fast)",
+                    "Walking (Reduced)",
+                    "Walking (Slow)",
+                    "Walking (Fast)",
+                    "Walking (1 Direction)",
+                    "Walking (Bad ENE)",
+                    "Walking (Bad ESE Offset)",
+                    "Walking (NESW, Faster)",
+                    "Walking (NESW, Slower)",
+                ]},
+                { "Running", [
+                    "Running",
                 ]},
                 { "Moving", [
                     "Moving",
                     "Moving (Fast)",
                     "Moving (Slow)",
                 ]},
+                { "Nodding (Field)", [
+                    "Nodding (Field)",
+                ]},
+                { "Nodding (Battle)", [
+                    "Nodding (Battle)",
+                ]},
                 { "Nodding", [
                     "Nodding",
                     "Nodding 1",
                     "Nodding 2",
+                    "Nodding (Slow)",
+                    "Nodding (Slower)",
+                    "Nodding (Repeat)",
+                    "Nodding (Change to 0)",
+                    "Nodding (Change to 1)",
+                    "Nodding (Stop)",
+                    "Nodding (Stop, Change to 0)",
+                    "Nodding (Stop, Change to 1)",
+                    "Nodding (Fast)",
+                    "Nodding (Fast, Idle)",
+                    "Nodding (Fast, Stop)",
+                    "Nodding (Walking)",
+                    "Nodding (Walking, Very Quick)",
+                    "Nodding (Walking, Short)",
+                    "Nodding (Some Frames Offset)",
+                    "Nodding (First Frame NESW)",
+                    "Nodding (Weird Angle)",
+                    "Nodding (Head Down)",
+                ]},
+                { "ShakingHead (Field)", [
+                    "ShakingHead (Field)",
+                    "ShakingHead (Field, Very Quick)",
+                ]},
+                { "ShakingHead (Battle)", [
+                    "ShakingHead (Battle)",
+                    "ShakingHead (Battle, Looking Down)",
                 ]},
                 { "ShakingHead", [
                     "ShakingHead",
+                    "ShakingHead (Some Frames Offset)",
+                    "ShakingHead (Repeat)",
+                    "ShakingHead (Stop)",
+                    "ShakingHead (Stop, Change to 0)",
+                    "ShakingHead (Stop, Change to 1)",
+                    "ShakingHead (Change to 0)",
+                    "ShakingHead (Change to 1)",
+                    "ShakingHead (Once)",
+                    "ShakingHead (Fast)",
+                    "ShakingHead (Faster)",
+                ]},
+                { "Kneeling", [
+                    "Kneeling",
+                    "Kneeling (1 Direction)",
+                ]},
+                { "GivingThumbsUp", [
+                    "GivingThumbsUp (ENE)",
+                    "GivingThumbsUp (NNE)",
+                ]},
+                { "BreathingFire", [
+                    "BreathingFire1",
+                    "BreathingFire2",
+                    "BreathingFire3",
+                    "BreathingFire4",
+                    "BreathingFire5",
+                ]},
+                { "Casting", [
+                    "Casting",
+                ]},
+                { "Attacking", [
+                    "Attacking (1 Direction)",
+                    "Attacking (Reduced, 1 Direction)",
+                ]},
+                { "Drinking", [
+                    "Drinking"
+                ]},
+                { "Exploding", [
+                    "Exploding (w/ Transparent Frame)",
+                    "Exploding (w/o Transparent Frame)",
+                    "Exploding (Slow then Fast)",
+                    "Exploding (Very Fast)",
+                ]},
+                { "Exploding (Alt)", [
+                    "Exploding (Alt, w/o Transparent Frame)",
+                ]},
+                { "Unexploding", [
+                    "Unexploding (w/ Transparent Frame)",
+                    "Unexploding (w/o Transparent Frame)",
+                ]},
+                { "Unexploding (Alt)", [
+                    "Unexploding (Alt, w/o Transparent Frame)",
+                ]},
+                { "Flickering", [
+                    "Flickering",
+                ]},
+                { "Flickering (Small)", [
+                    "Flickering (Small)",
+                ]},
+                { "Flickering (Large)", [
+                    "Flickering (Large)",
+                ]},
+                { "Zapping", [
+                    "Zapping (Slow)",
+                    "Zapping (Fast)",
+                    "Zapping (Reduced, Slow)",
+                ]},
+                { "Zapping (To the Left)", [
+                    "Zapping (Fast, To the Left)",
+                ]},
+                { "Poofing", [
+                    "Poofing",
+                    "Poofing (Slow, Slowing Down)",
+                    "Poofing (Fast, Slowing Down)",
+                    "Poofing (Very Fast)",
+                    "Poofing (Extremely Slow)",
+                    "SinglePoof",
+                ]},
+                { "Shimmering", [
+                    "Shimmering (Very Slow)",
+                    "Shimmering (Fast)",
                 ]},
             };
 
@@ -296,9 +443,33 @@ namespace CHR_Analyzer {
                 }
             }
 
-            foreach (var frame in s_framesByHash.Values)
-                if (frame.FrameInfo.FrameName.StartsWith('_'))
+            var animationsWithUnlabeledFrames = s_animationsByHash.Values
+                .Where(x => !x.AnimInfo.AnimationName.StartsWith("StillFrame"))
+                .SelectMany(x => x.AnimInfo.AnimationFrames.Select(y => (Anim: x, Frames: y)).ToArray())
+                .Where(x => x.Frames.FrameHashes != null)
+                .Where(x => x.Frames.FrameHashes.Any(y => {
+                    return y != null && !s_framesByHash[y].FrameInfo.FrameName.StartsWith('_');
+                }))
+                .Select(x => x.Anim.AnimInfo.AnimationName + " | " + x.Anim.ToString())
+                .Distinct()
+                .OrderBy(x => x)
+                .ToArray();
+
+            var labeledFrames = 0;
+            foreach (var frame in s_framesByHash.Values) {
+                if (frame.FrameInfo.FrameName.StartsWith('_')) {
                     frame.FrameInfo.FrameName = frame.FrameInfo.FrameName.Substring(1);
+                    labeledFrames++;
+                }
+            }
+
+            var framesLabeledPercent = labeledFrames * 100.0f / s_framesByHash.Count;
+            Console.WriteLine($"Labeled {labeledFrames}/{s_framesByHash.Count} frames ({framesLabeledPercent}%)");
+
+            Console.WriteLine("Animations unaccounted for:");
+            foreach (var anim in animationsWithUnlabeledFrames) {
+                Console.WriteLine($"    {anim}");
+            }
 
             var spriteDefs = CHR_Utils.CreateAllSpriteDefs();
             foreach (var spriteDef in spriteDefs)
@@ -438,7 +609,7 @@ namespace CHR_Analyzer {
                                 int ipos = pos + (iy * imageWidthInPixels) * 2;
 
                                 // If there are errors with this frame group, colorize them with a background color.
-                                if (hasDuplicateDirections || hasBogusDirs) {
+                                if (false /* hasDuplicateDirections || hasBogusDirs */) {
                                     for (int ix = 0; ix < frameWidthInPixels; ix++) {
                                         var argb1555 = (ushort) ((frameData[frameDataPos + 1] << 8) + frameData[frameDataPos]);
                                         if (argb1555 < 0x8000u) {
