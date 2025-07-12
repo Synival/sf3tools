@@ -477,6 +477,26 @@ namespace CHR_Analyzer {
                     "SittingAndEating",
                 ]},
 
+                { "SittingDownOrUpWithChair", [
+                    "SittingDownIntoChair",
+                    "SittingInChair",
+                    "StandingUpFromChair",
+                ]},
+
+                { "OnGround (Alt)", [
+                    "StillFrame (OnGround 2)",
+                    "StillFrame (OnGround 2, Repeat)",
+                ]},
+
+                { "OnGround", [
+                    "StillFrame (OnGround)",
+                    "StillFrame (OnGround, Repeat)",
+                    "StillFrame (OnGround, Repeat 1)",
+                    "StillFrame (OnGround, Repeat 2)",
+                    "StillFrame (OnGround 1)",
+                    "StillFrame (OnGround 1, Repeat)",
+                ]},
+
                 { "Idle (Bad Frames)", [
                     "Idle (Bad NNE Offset)",
                     "Idle (Faster, Bad Offset)",
@@ -500,7 +520,7 @@ namespace CHR_Analyzer {
             var animNamesNotCoverred = s_animationsByHash.Values
                 .Select(x => x.AnimInfo.AnimationName)
                 .Distinct()
-                .Where(x => !x.Contains("StillFrame") && !animFrameNamingPriority.Contains(x))
+                .Where(x => !animFrameNamingPriority.Contains(x))
                 .OrderBy(x => x)
                 .ToArray();
 
@@ -544,7 +564,6 @@ namespace CHR_Analyzer {
             }
 
             var animationsWithUnlabeledFrames = s_animationsByHash.Values
-                .Where(x => !x.AnimInfo.AnimationName.StartsWith("StillFrame"))
                 .SelectMany(x => x.AnimInfo.AnimationFrames.Select(y => (Anim: x, Frames: y)).ToArray())
                 .Where(x => x.Frames.FrameHashes != null)
                 .Where(x => x.Frames.FrameHashes.Any(y => {
