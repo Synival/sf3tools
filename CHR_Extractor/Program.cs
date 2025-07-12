@@ -277,19 +277,27 @@ namespace CHR_Analyzer {
                     "Walking (NESW, Faster)",
                     "Walking (NESW, Slower)",
                 ]},
-                { "Running", [
-                    "Running",
-                ]},
+
+                { "Walking (Fan Down)", ["Walking (Fan Down)"]},
+                { "Running", ["Running"]},
+                { "WalkingWithBox", ["WalkingWithBox"]},
+                { "Walking (Flowers Behind Back)", ["Walking (Flowers Behind Back)"]},
+                { "Walking (Hopping)", ["Walking (Hopping)"]},
+                { "Walking (Sideways)", ["Walking (Sideways)"]},
+
                 { "Moving", [
                     "Moving",
                     "Moving (Fast)",
                     "Moving (Slow)",
                 ]},
+
                 { "Nodding (Field)", [
                     "Nodding (Field)",
+                    "Nodding (Field, Short 2)",
                 ]},
                 { "Nodding (Battle)", [
                     "Nodding (Battle)",
+                    "Nodding (Battle, Short 1)",
                     "Nodding (Battle, Reduced)",
                 ]},
                 { "Nodding", [
@@ -298,12 +306,14 @@ namespace CHR_Analyzer {
                     "Nodding 2",
                     "Nodding (Slow)",
                     "Nodding (Slower)",
+                    "Nodding (Slower, Stop)",
                     "Nodding (Repeat)",
                     "Nodding (Change to 0)",
                     "Nodding (Change to 1)",
                     "Nodding (Stop)",
                     "Nodding (Stop, Change to 0)",
                     "Nodding (Stop, Change to 1)",
+                    "Nodding (Faster, Stop)",
                     "Nodding (Fast)",
                     "Nodding (Fast, Idle)",
                     "Nodding (Fast, Stop)",
@@ -314,10 +324,33 @@ namespace CHR_Analyzer {
                     "Nodding (First Frame NESW)",
                     "Nodding (Weird Angle)",
                     "Nodding (Head Down)",
+                    "Nodding (Fast, Walking)",
+                    "Nodding (Short)",
+                    "Nodding (Several, Quick)",
+                    "Nodding (Twice, Quick 1)",
+                    "Nodding (Twice, Quick 2)",
+                    "Nodding (Reduced, Double, First Frame Cape High)",
+                    "Nodding (Reduced, Double, First Frame Cape Low)",
                 ]},
+                { "Nodding (Fan Down)", [
+                    "Nodding (Quick, Fan Down)",
+                ]},
+                { "Nodding (Kneeling)", [
+                    "Nodding (Kneeling)",
+                    "Nodding (Kneeling, NoStop)",
+                ]},
+                { "Nodding (Sitting in Chair)", [
+                    "Nodding (Sitting in Chair)",
+                ]},
+                { "Nodding (OnGround)", [
+                    "Nodding (OnGround)",
+                ]},
+
                 { "ShakingHead (Field)", [
                     "ShakingHead (Field)",
                     "ShakingHead (Field, Very Quick)",
+                    "ShakingHead (Field, Weird Angle)",
+                    "ShakingHead (Field, Weird Angle, Short)",
                     "ShakingHead (Field, Skips Frame)",
                 ]},
                 { "ShakingHead (Battle)", [
@@ -333,11 +366,43 @@ namespace CHR_Analyzer {
                     "ShakingHead (Stop, Change to 1)",
                     "ShakingHead (Change to 0)",
                     "ShakingHead (Change to 1)",
+                    "ShakingHead (Slow)",
                     "ShakingHead (Once)",
                     "ShakingHead (Fast)",
+                    "ShakingHead (Quick)",
                     "ShakingHead (Faster)",
                     "ShakingHead (Super Fast, Idle)",
+                    "ShakingHead (Crazy Fast)",
+                    "ShakingHead (Weird Angle)",
+                    "ShakingHead (Fast, Weird, Walking with Idle Frame)",
+                    "ShakingHead (Head Down)",
+                    "ShakingHead (Leaning Forward)",
+                    "ShakingHead (Slanted, Fast)",
+                    "ShakingHead (To the Left, Stops)",
                 ]},
+                { "ShakingHead (Fan Down)", [
+                    "ShakingHead (Fan Down)",
+                ]},
+                { "ShakingHead (Kneeling)", [
+                    "ShakingHead (Kneeling)",
+                    "ShakingHead (Kneeling, NoStop)",
+                ]},
+                { "ShakingHead (On Knees)", [
+                    "ShakingHead (On Knees)",
+                ]},
+                { "ShakingHead (Sitting in Chair)", [
+                    "ShakingHead (Sitting in Chair)",
+                ]},
+                { "ShakingHead (Sitting)", [
+                    "ShakingHead (Sitting)",
+                ]},
+                { "ShakingHead (Sitting Cross-Legged)", [
+                    "ShakingHead (Sitting Cross-Legged)",
+                ]},
+                { "ShakingHead (OnGround)", [
+                    "ShakingHead (OnGround)",
+                ]},
+
                 { "Kneeling", [
                     "Kneeling",
                     "Kneeling (1 Direction)",
@@ -455,9 +520,6 @@ namespace CHR_Analyzer {
                     frame.FrameInfo.FrameName = frame.FrameInfo.FrameName.Substring(1);
 
             foreach (var spriteVariant in animsByFrameNamingPriorityBySpriteVariant) {
-                if (spriteVariant.Key.StartsWith("Zero"))
-                    ;
-
                 var categoryIndicies = new Dictionary<string, int>();
                 foreach (var anim in spriteVariant.Value) {
                     var categoryName = animNameToCategoryMap[anim.AnimInfo.AnimationName];
@@ -505,9 +567,8 @@ namespace CHR_Analyzer {
             Console.WriteLine($"Labeled {labeledFrames}/{s_framesByHash.Count} frames ({framesLabeledPercent}%)");
 
             Console.WriteLine("Animations unaccounted for:");
-            foreach (var anim in animationsWithUnlabeledFrames) {
+            foreach (var anim in animationsWithUnlabeledFrames)
                 Console.WriteLine($"    {anim}");
-            }
 
             var spriteDefs = CHR_Utils.CreateAllSpriteDefs();
 

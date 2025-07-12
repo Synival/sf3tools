@@ -1617,8 +1617,8 @@
     <item hash="977d295c943d357dcd990cb242c4172a" sprite="Hayward (U)" animation="Idle (Battle)" width="40" height="40" directions="6" frames="5" duration="20" />
     <item hash="c6c39b84fa9d227ea4916e2cce1ed4bf" sprite="Hayward (U)" animation="Idle (Field)" width="40" height="40" directions="4" frames="5" duration="24" />
     <item hash="986272f572421add1e912350e5b39f26" sprite="Hayward (U)" animation="Nodding (Battle)" width="40" height="40" directions="4" frames="5" duration="12" />
+    <item hash="81685b8f985e5244353854f9172ff278" sprite="Hayward (U)" animation="Nodding (Field)" width="40" height="40" directions="4" frames="5" duration="8" />
     <item hash="e8e175ae93de21128541e35b2209be4f" sprite="Hayward (U)" animation="Nodding (From Battle to Field)" width="40" height="40" directions="6" frames="5" duration="16" />
-    <item hash="81685b8f985e5244353854f9172ff278" sprite="Hayward (U)" animation="Nodding (IField)" width="40" height="40" directions="4" frames="5" duration="8" />
     <item hash="6343eb67f76ea2cb44b835bf621ea9b6" sprite="Hayward (U)" animation="ShakingHead (Battle)" width="40" height="40" directions="4" frames="9" duration="24" />
     <item hash="25a1f5a504cd6cc57f9ed798dd157d43" sprite="Hayward (U)" animation="ShakingHead (Field)" width="40" height="40" directions="4" frames="9" duration="16" />
     <item hash="df934e62d0b357ddbd519fdab1189e63" sprite="Hayward (U)" animation="ShakingHead (From Battle to Field)" width="40" height="40" directions="6" frames="5" duration="16" />
