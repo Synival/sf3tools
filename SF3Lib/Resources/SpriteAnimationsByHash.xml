@@ -315,14 +315,14 @@
     <item hash="587a9d9231cc575edaf56456185494a1" sprite="Blue Dragon (SC3)" animation="Flying (Slow)" width="48" height="32" directions="4" frames="9" duration="40" />
     <item hash="68779dc5717ed6395e966cafe1a23e91" sprite="Blue Dragon (SC3)" animation="StillFrame" width="48" height="32" directions="4" frames="2" duration="10" />
     <item hash="69da4d1aff059b999111b5fd8785909b" sprite="Bomb" animation="StillFrame" width="16" height="16" directions="1" frames="2" duration="1" />
-    <item hash="d512efc545544626ac626dca8d251f9d" sprite="Bow Knight" animation="Idle (Bow Down)" width="48" height="40" directions="4" frames="5" duration="20" />
-    <item hash="f81b16d73759819faa75f9e816e4d7b0" sprite="Bow Knight" animation="Idle (Bow Up, Broken NNE Offset)" width="48" height="40" directions="4" frames="5" duration="20" />
-    <item hash="7d8e3817a93dea34528f0533c79ee5ec" sprite="Bow Knight" animation="Idle (Bow Up, Reduced, Janky)" width="48" height="40" directions="4" frames="5" duration="44" />
-    <item hash="a9274a7ae45f7f4426fcddaac89c8665" sprite="Bow Knight" animation="StillFrame (Bow Down 1)" width="48" height="40" directions="4" frames="2" duration="10" />
-    <item hash="a9e5d9669fe7fa51d783c3a30bcffadc" sprite="Bow Knight" animation="StillFrame (Bow Down 2)" width="48" height="40" directions="4" frames="2" duration="10" />
-    <item hash="c5c4d9b528e3c756d3c006ffecc8f305" sprite="Bow Knight" animation="StillFrame (Bow Up)" width="48" height="40" directions="4" frames="2" duration="10" />
-    <item hash="c807d01fa424f12b28ad189cf3d7849b" sprite="Bow Knight" animation="Walking (Faster)" width="48" height="40" directions="4" frames="7" duration="24" />
-    <item hash="7edc22cf4af87c0639549395500cbd69" sprite="Bow Knight" animation="Walking (Slower)" width="48" height="40" directions="4" frames="7" duration="30" />
+    <item hash="f81b16d73759819faa75f9e816e4d7b0" sprite="Bow Knight (Bow)" animation="Idle (Bad NNE Offset)" width="48" height="40" directions="4" frames="5" duration="20" />
+    <item hash="7d8e3817a93dea34528f0533c79ee5ec" sprite="Bow Knight (Bow)" animation="Idle (Reduced, Janky)" width="48" height="40" directions="4" frames="5" duration="44" />
+    <item hash="a9274a7ae45f7f4426fcddaac89c8665" sprite="Bow Knight (Bow)" animation="StillFrame 1" width="48" height="40" directions="4" frames="2" duration="10" />
+    <item hash="a9e5d9669fe7fa51d783c3a30bcffadc" sprite="Bow Knight (Bow)" animation="StillFrame 2" width="48" height="40" directions="4" frames="2" duration="10" />
+    <item hash="c807d01fa424f12b28ad189cf3d7849b" sprite="Bow Knight (Bow)" animation="Walking" width="48" height="40" directions="4" frames="7" duration="24" />
+    <item hash="d512efc545544626ac626dca8d251f9d" sprite="Bow Knight (Crossbow)" animation="Idle" width="48" height="40" directions="4" frames="5" duration="20" />
+    <item hash="c5c4d9b528e3c756d3c006ffecc8f305" sprite="Bow Knight (Crossbow)" animation="StillFrame" width="48" height="40" directions="4" frames="2" duration="10" />
+    <item hash="7edc22cf4af87c0639549395500cbd69" sprite="Bow Knight (Crossbow)" animation="Walking" width="48" height="40" directions="4" frames="7" duration="30" />
     <item hash="598f3699895e052e46c6e50c0c1284f7" sprite="Bow Knight (Waltz Placeholder)" animation="Idle" width="48" height="40" directions="4" frames="5" duration="20" />
     <item hash="a23fde984cbccc82db4d7d9717036108" sprite="Bow Knight (Waltz Placeholder)" animation="StillFrame" width="48" height="40" directions="4" frames="2" duration="10" />
     <item hash="0a197754cde79a6671ae5cbe0f47d89e" sprite="Boy Masked Monk w/ Blue Shirt and Yellow+Blue Spotted Hood" animation="StillFrame" width="40" height="40" directions="4" frames="2" duration="10" />

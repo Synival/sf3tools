@@ -172,21 +172,19 @@ namespace CHR_Analyzer {
                 { "Idle (Field)", [
                     "Idle (Field)",
                 ]},
+                { "Idle (Field, Leaning Back)", [
+                    "Idle (Field, Leaning Back)",
+                ]},
                 { "Idle (Battle)", [
                     "Idle (Battle)",
                     "Idle (Battle 1)",
                     "Idle (Battle 2)",
                     "Idle (Battle, Render 1)",
                     "Idle (Battle, Render 2)",
+                    "Idle (Battle, Missing Last Down Frame)",
                 ]},
                 { "Idle (Upright)", [
                     "Idle (Upright, Some Frames Offset)",
-                ]},
-                { "Idle (Resting)", [
-                    "Idle (Resting)",
-                ]},
-                { "Idle (Tipping)", [
-                    "Idle (Tipping)",
                 ]},
                 { "Idle", [
                     "Idle",
@@ -196,12 +194,39 @@ namespace CHR_Analyzer {
                     "Idle (Render 2)",
                     "Idle (Fast)",
                     "Idle (Faster)",
-                    "Idle (Dangling)",
+                    "Idle (Steady)",
+                    "Idle (Pause at Top)",
+                    "Idle (ShakingFist)",
+                    "Idle (LiftingArms)",
                     "Idle (2 Frames)",
+                    "Idle (1 Direction, Facing NNE)",
                 ]},
-                { "Idle (Imposter?)", [
-                    "Idle (Imposter?)",
-                ]},
+
+                { "Idle (Very Still)", ["Idle (Very Still)"]},
+                { "Idle (Tussling Hair)", ["Idle (Tussling Hair)"]},
+                { "Idle (Imposter?)", ["Idle (Imposter?)"]},
+                { "Idle (Tapping Foot)", ["Idle (Tapping Foot)"]},
+                { "Idle (Tipping)", ["Idle (Tipping)"]},
+                { "Idle (Arms Crossed)", ["Idle (Arms Crossed)"]},
+                { "Idle (Rocking Baby)", ["Idle (Rocking Baby)"]},
+                { "Idle (Wind Blowing Hair)", ["Idle (Wind Blowing Hair)"]},
+                { "Idle (Winking)", ["Idle (Winking)"]},
+                { "Idle (Occasionally Raising Hand)", ["Idle (Occasionally Raising Hand)"]},
+                { "Idle (Occasionally Wipes Forehead)", ["Idle (Occasionally Wipes Forehead)"]},
+                { "Idle (Posing)", ["Idle (Posing)"]},
+                { "Idle (Snapping)", ["Idle (Snapping)"]},
+                { "Idle (Bobbing)", ["Idle (Bobbing)"]},
+                { "Idle (Grazing)", ["Idle (Grazing)"]},
+                { "Idle (Chewing)", ["Idle (Chewing)"]},
+                { "Idle (Roaring)", ["Idle (Roaring)"]},
+                { "Idle (Fish Quivering)", ["Idle (Fish Quivering)"]},
+                { "Idle (Still then Nibbling)", ["Idle (Still then Nibbling)"]},
+                { "Idle (Occasionally Looking Around)", ["Idle (Occasionally Looking Around)"]},
+                { "Idle (Resting)", ["Idle (Resting)"]},
+                { "Idle (Sitting)", ["Idle (Sitting)"]},
+                { "Idle (Kneeling)", ["Idle (Kneeling)"]},
+                { "Idle (Dangling)", ["Idle (Dangling)"]},
+
                 { "Flying (Field)", [
                     "Flying (Field)",
                 ]},
@@ -265,6 +290,7 @@ namespace CHR_Analyzer {
                 ]},
                 { "Nodding (Battle)", [
                     "Nodding (Battle)",
+                    "Nodding (Battle, Reduced)",
                 ]},
                 { "Nodding", [
                     "Nodding",
@@ -292,6 +318,7 @@ namespace CHR_Analyzer {
                 { "ShakingHead (Field)", [
                     "ShakingHead (Field)",
                     "ShakingHead (Field, Very Quick)",
+                    "ShakingHead (Field, Skips Frame)",
                 ]},
                 { "ShakingHead (Battle)", [
                     "ShakingHead (Battle)",
@@ -309,6 +336,7 @@ namespace CHR_Analyzer {
                     "ShakingHead (Once)",
                     "ShakingHead (Fast)",
                     "ShakingHead (Faster)",
+                    "ShakingHead (Super Fast, Idle)",
                 ]},
                 { "Kneeling", [
                     "Kneeling",
@@ -380,6 +408,16 @@ namespace CHR_Analyzer {
                     "Shimmering (Very Slow)",
                     "Shimmering (Fast)",
                 ]},
+                { "SittingAndEating", [
+                    "SittingAndEating",
+                ]},
+
+                { "Idle (Bad Frames)", [
+                    "Idle (Bad NNE Offset)",
+                    "Idle (Faster, Bad Offset)",
+                    "Idle (Offset)",
+                    "Idle (Reduced, Janky)",
+                ]},
             };
 
             var animNameToCategoryMap = animFrameNamingPriorityByCategory
@@ -430,7 +468,7 @@ namespace CHR_Analyzer {
                         if (aniFrame.FrameHashes != null) {
                             var index = 0;
                             foreach (var hash in aniFrame.FrameHashes) {
-                                if (s_framesByHash.TryGetValue(hash, out var frame) && !frame.FrameInfo.FrameName.StartsWith('_')) {
+                                if (s_framesByHash.TryGetValue(hash ?? "", out var frame) && !frame.FrameInfo.FrameName.StartsWith('_')) {
                                     if (index == 0) {
                                         index = categoryIndicies[categoryName];
                                         categoryIndicies[categoryName]++;
@@ -472,8 +510,6 @@ namespace CHR_Analyzer {
             }
 
             var spriteDefs = CHR_Utils.CreateAllSpriteDefs();
-            foreach (var spriteDef in spriteDefs)
-                _ = Directory.CreateDirectory(Path.Combine(c_pathOut, FilesystemString(spriteDef.Name)));
 
             Console.WriteLine();
             Console.WriteLine("===================================================");
@@ -497,6 +533,7 @@ namespace CHR_Analyzer {
             Console.WriteLine("===================================================");
             Console.WriteLine();
 
+            var spritesWithSpriteSheets = new HashSet<SpriteDef>();
             foreach (var spriteDef in spriteDefs) {
                 var spritePath = Path.Combine(c_pathOut, FilesystemString(spriteDef.Name));
                 var spriteSheetVariants = spriteDef.Variants
@@ -535,7 +572,6 @@ namespace CHR_Analyzer {
 
                     var filename = FilesystemString(spriteName) + ".BMP";
                     var outputPath = Path.Combine(spritePath, filename);
-                    Console.WriteLine($"Writing '{outputPath}'...");
 
                     var frameGroups = frames
                         .GroupBy(x => x.FrameInfo.FrameName)
@@ -557,6 +593,7 @@ namespace CHR_Analyzer {
                     var newData = new byte[imageWidthInPixels * imageHeightInPixels * 2];
 
                     int y = 0;
+                    bool hasErrors = false;
                     foreach (var frameGroup in frameGroups) {
                         // Normally, frames' X positions are set according to their direction.
                         // But if a frame group had multiple directions -- which, unfortunately, can happen --
@@ -594,6 +631,7 @@ namespace CHR_Analyzer {
                         var has9Dirs = frameGroupDirs.Count == 9 && hasS && hasSSE && hasSE && hasESE && hasE && hasENE && hasNE && hasNNE && hasN;
 
                         var hasBogusDirs = !(has1Dir || has2Dirs || has4Dirs || has5Dirs || has6Dirs || has8Dirs || has9Dirs);
+                        hasErrors |= hasDuplicateDirections;
 
                         int frameIndex = 0;
                         foreach (var frame in frameGroup.Value) {
@@ -635,12 +673,15 @@ namespace CHR_Analyzer {
                     }
 
 #pragma warning disable CA1416 // Validate platform compatibility
+                    Console.WriteLine($"Writing '{outputPath}'...");
                     using (var bitmap = new Bitmap(imageWidthInPixels, imageHeightInPixels, PixelFormat.Format16bppArgb1555)) {
                         var bmpData = bitmap.LockBits(new Rectangle(0, 0, bitmap.Width, bitmap.Height), ImageLockMode.WriteOnly, bitmap.PixelFormat);
                         Marshal.Copy(newData, 0, bmpData.Scan0, newData.Length);
                         bitmap.UnlockBits(bmpData);
                         try {
+                            _ = Directory.CreateDirectory(Path.Combine(c_pathOut, FilesystemString(spriteDef.Name)));
                             bitmap.Save(outputPath);
+                            spritesWithSpriteSheets.Add(spriteDef);
                         }
                         catch { }
                     }
@@ -685,6 +726,9 @@ namespace CHR_Analyzer {
             Console.WriteLine();
 
             foreach (var spriteDef in spriteDefs) {
+                if (!spritesWithSpriteSheets.Contains(spriteDef))
+                    continue;
+
                 spriteDef.Frames = spriteDef.Frames
                     .OrderBy(x => x.SpriteSheetY)
                     .ThenBy(x => x.SpriteSheetX)
