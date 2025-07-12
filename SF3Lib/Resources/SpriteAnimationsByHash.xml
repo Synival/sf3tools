@@ -198,7 +198,7 @@
     <item hash="643d2d1e3058cf423d93b774b8ba1947" sprite="Benetram" animation="Nodding (Reduced, Double, First Frame Cape High)" width="40" height="40" directions="4" frames="5" duration="20" />
     <item hash="122f31d730273c04e756990d14628d9e" sprite="Benetram" animation="Nodding (Reduced, Double, First Frame Cape Low)" width="40" height="40" directions="4" frames="5" duration="20" />
     <item hash="464cd710fcbf08c6354182c5f1550973" sprite="Benetram" animation="Nodding (Reduced)" width="40" height="40" directions="4" frames="3" duration="12" />
-    <item hash="c0a1ce5111e1b6c624be4c75979b2dde" sprite="Benetram" animation="Nodding (Sitting in Chair, 1 Direction, Broken)" width="40" height="40" directions="4" frames="6" duration="20" />
+    <item hash="c0a1ce5111e1b6c624be4c75979b2dde" sprite="Benetram" animation="Nodding (Sitting in Chair, Changes to 1 Direction)" width="40" height="40" directions="4" frames="6" duration="20" />
     <item hash="564736e2c2c8dbdf695eb17b7495fd1f" sprite="Benetram" animation="Nodding (Sitting in Chair)" width="40" height="40" directions="4" frames="5" duration="20" />
     <item hash="fbaff2d7008718360179c61c31923faa" sprite="Benetram" animation="ShakingHead" width="40" height="40" directions="4" frames="7" duration="27" />
     <item hash="2e9e15851cf772be3b125d1b6b41be24" sprite="Benetram" animation="ShakingHead" width="40" height="40" directions="17" frames="8" duration="27" />

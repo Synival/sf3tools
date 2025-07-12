@@ -331,6 +331,7 @@ namespace CHR_Analyzer {
                     "Nodding (Twice, Quick 2)",
                     "Nodding (Reduced, Double, First Frame Cape High)",
                     "Nodding (Reduced, Double, First Frame Cape Low)",
+                    "Nodding (Sitting in Chair, Changes to 1 Direction)",
                 ]},
                 { "Nodding (Fan Down)", [
                     "Nodding (Quick, Fan Down)",
@@ -392,6 +393,7 @@ namespace CHR_Analyzer {
                 ]},
                 { "ShakingHead (Sitting in Chair)", [
                     "ShakingHead (Sitting in Chair)",
+                    "ShakingHead (Sitting in Chair, Janky)",
                 ]},
                 { "ShakingHead (Sitting)", [
                     "ShakingHead (Sitting)",
@@ -406,6 +408,8 @@ namespace CHR_Analyzer {
                 { "Kneeling", [
                     "Kneeling",
                     "Kneeling (1 Direction)",
+                    "StillFrame (Kneeling 1, 1 Direction)",
+                    "StillFrame (Kneeling 2, 1 Direction)",
                 ]},
                 { "GivingThumbsUp", [
                     "GivingThumbsUp (ENE)",
@@ -483,11 +487,6 @@ namespace CHR_Analyzer {
                     "StandingUpFromChair",
                 ]},
 
-                { "OnGround (Alt)", [
-                    "StillFrame (OnGround 2)",
-                    "StillFrame (OnGround 2, Repeat)",
-                ]},
-
                 { "OnGround", [
                     "StillFrame (OnGround)",
                     "StillFrame (OnGround, Repeat)",
@@ -496,12 +495,28 @@ namespace CHR_Analyzer {
                     "StillFrame (OnGround 1)",
                     "StillFrame (OnGround 1, Repeat)",
                 ]},
+                { "OnGround (Alt)", [
+                    "StillFrame (OnGround 2)",
+                    "StillFrame (OnGround 2, Repeat)",
+                ]},
+                { "GettingUpFromGround", [
+                    "GettingUpFromGround",
+                ]},
+                { "GettingUpFromGround (Looks Silly)", [
+                    "GettingUpFromGround (Looks Silly)",
+                ]},
 
                 { "Idle (Bad Frames)", [
                     "Idle (Bad NNE Offset)",
                     "Idle (Faster, Bad Offset)",
                     "Idle (Offset)",
                     "Idle (Reduced, Janky)",
+                ]},
+                { "Nodding (Offset)", [
+                    "Nodding (Offset)",
+                ]},
+                { "Pointing (Offset)", [
+                    "Pointing (Offset)",
                 ]},
             };
 
