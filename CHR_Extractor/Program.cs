@@ -193,6 +193,7 @@ namespace CHR_Analyzer {
                     "Idle 2",
                     "Idle (Render 1)",
                     "Idle (Render 2)",
+                    "Idle (Slower)",
                     "Idle (Fast)",
                     "Idle (Faster)",
                     "Idle (Steady)",
@@ -223,7 +224,11 @@ namespace CHR_Analyzer {
                 { "Idle (Fish Quivering)", ["Idle (Fish Quivering)"]},
                 { "Idle (Still then Nibbling)", ["Idle (Still then Nibbling)"]},
                 { "Idle (Occasionally Looking Around)", ["Idle (Occasionally Looking Around)"]},
-                { "Idle (Resting)", ["Idle (Resting)"]},
+                { "Idle (Resting)", [
+                    "Idle (Resting)",
+                    "Resting (Absurdly Long Duration)",
+                    "Resting (Occassionally Scratches)",
+                ]},
                 { "Idle (Sitting)", ["Idle (Sitting)"]},
                 { "Idle (Kneeling)", ["Idle (Kneeling)"]},
                 { "Idle (Dangling)", ["Idle (Dangling)"]},
@@ -416,6 +421,10 @@ namespace CHR_Analyzer {
                     "StillFrame (Kneeling 1, 1 Direction)",
                     "StillFrame (Kneeling 2, 1 Direction)",
                 ]},
+                { "KneelingAndPraying", [
+                    "KneelingAndPraying",
+                    "KneelingAndPraying (Repeats after a while)",
+                ]},
                 { "GivingThumbsUp", [
                     "GivingThumbsUp (ENE)",
                     "GivingThumbsUp (NNE)",
@@ -438,9 +447,14 @@ namespace CHR_Analyzer {
                     "Drinking"
                 ]},
                 { "Pointing", [
+                    "Pointing",
+                    "Pointing (Slow)",
+                    "Pointing (Fast)",
+                    "Pointing (1 Direction)",
                     "StopPointing (Should be 1 Direction)",
                 ]},
                 { "Panting", [
+                    "Panting (1 Direction)",
                     "StillFrame (Panting, Should be 1 Direction)",
                 ]},
                 { "AdjustGlasses", [
@@ -503,14 +517,6 @@ namespace CHR_Analyzer {
                 { "Somersault", [
                     "Somersault",
                 ]},
-                { "Collapsing", [
-                    "Collapsing",
-                ]},
-                { "SittingDownOrUpWithChair", [
-                    "SittingDownIntoChair",
-                    "SittingInChair",
-                    "StandingUpFromChair",
-                ]},
                 { "GettingZapped", [
                     "GettingZapped (Slow)",
                     "GettingZapped (Fast)",
@@ -523,6 +529,65 @@ namespace CHR_Analyzer {
                 { "HoldingUpStaff", ["HoldingUpStaff"] },
                 { "HoldingUpCane", ["HoldingUpCane"] },
                 { "HoldingUpFan", ["HoldingUpFan"] },
+                { "RecitingScripture", [
+                    "RecitingScripture (1 Direction)",
+                    "DoneRecitingScripture (1 Direction)",
+                ]},
+                { "HoldingUpHand", [
+                    "HoldingUpHand (1 Direction)",
+                ]},
+                { "LeaningDownAndWaving", [
+                    "LeaningDownAndWaving",
+                    "LeaningDownAndWaving (Repeat)",
+                ]},
+                { "LeaningOnSword", [
+                    "LeaningOnSword (Slow)",
+                    "LeaningOnSword (Fast)",
+                ]},
+                { "LiftingHands", [
+                    "LiftingHands (1 Direction)",
+                ]},
+                { "GlowingWithRaisedHands", [
+                    "LiftingHands (Then Glowing)",
+                ]},
+                { "LookingAround (Sitting)", ["LookingAround (Sitting)"]},
+                { "LookingLeft (Kneeling)", ["LookingLeft (Kneeling)", "LookingForwardFromLeft (Kneeling)"]},
+                { "LookingRight (Kneeling)", ["LookingRight (Kneeling)", "LookingForwardFromRight (Kneeling)"]},
+                { "LookingAtUs (Kneeling)", ["LookingAtUs (Kneeling, 1 Direction)", "NoLongerLookingAtUs (Kneeling, 1 Direction)"]},
+                { "LookingBack", [
+                    "LookingBack",
+                    "LookingBackForward",
+                    "LookingBack (1 Direction)",
+                    "LookingBackForward (1 Direction)",
+                ]},
+                { "LookingDown", [
+                    "LookingDown (Slow)",
+                    "LookingDown (Fast)",
+                ]},
+                { "PullingOutLance", ["PullingOutLance (1 Direction)"] },
+                { "PullingOutSword", ["PullingOutSword (1 Direction)"] },
+                { "PullingOutTelescope", ["PullingOutTelescope (1 Direction)"] },
+                { "RaisingArms", [
+                    "RaisingArms (Duration 15)",
+                    "RaisingArms (Duration 14)",
+                ] },
+                { "Shoveling", [
+                    "Shoveling (Repeating Pattern)",
+                    "Shoveling (Repeating Single)",
+                ] },
+                { "Wincing", [
+                    "Wincing (Extremely Long Pause)",
+                    "Wincing (Very Long Pause)",
+                ] },
+                { "Stretching", [
+                    "Stretching",
+                    "Stretching (Repeat)",
+                    "Stretching (Change to 0)",
+                ] },
+                { "SpreadingOutArms", [
+                    "SpreadingOutArms",
+                    "SpreadingOutArms (Forever)",
+                ] },
 
                 { "OpeningAndClosing", [
                     "Opening",
@@ -541,6 +606,7 @@ namespace CHR_Analyzer {
                     "StillFrame (OnGround 2)",
                     "StillFrame (OnGround 2, Repeat)",
                 ]},
+                { "Twitching (OnGround)", ["Twitching (OnGround)"] },
 
                 { "GettingUpFromGround", ["GettingUpFromGround"] },
                 { "GettingUpFromGround (Looks Silly)", ["GettingUpFromGround (Looks Silly)"] },
@@ -552,6 +618,34 @@ namespace CHR_Analyzer {
                 { "GettingUpFromPrayer", ["GettingUpFromPrayer"] },
 
                 { "GoingBackDown", ["GoingBackDown (Slowly)"] },
+                { "LoweringStaff (OnGround)", ["LoweringStaff (OnGround)"] },
+                { "Sleeping", [
+                    "Sleeping",
+                    "Sleeping (Slow Snoring)",
+                    "Sleeping (Slow Breathing)",
+                    "Sleeping (Very Slow Breathing)",
+                    "Sleeping (Fast Snoring)",
+                ] },
+
+                { "Collapsing", [
+                    "Collapsing",
+                ]},
+                { "SittingDownOrUpWithChair", [
+                    "SittingDownIntoChair",
+                    "SittingInChair",
+                    "StandingUpFromChair",
+                    "StandingUpFromChair (Slow)",
+                    "StandingUpFromChair (Fast, Back into Chair?)",
+                ]},
+                { "StandingUpFromKneeling", ["StandingUpFromKneeling"] },
+                { "StandingUpFromSitting", ["StandingUpFromSitting"] },
+                { "StandingUpFromSittingCrossLegged", ["StandingUpFromSittingCrossLegged", "StandingUpFromSittingCrossLegged (Quick)"] },
+                { "StandingUprightFromLeaningForward", ["StandingUprightFromLeaningForward"] },
+
+                { "CollapsingFromPanting", [
+                    "CollapsingFromPanting (1 Direction)",
+                    "PantingFromCollapsed (1 Direction)",
+                ]},
 
                 { "Idle (Bad Frames)", [
                     "Idle (Bad NNE Offset)",
@@ -568,6 +662,7 @@ namespace CHR_Analyzer {
 
                 { "Alert", ["Alert"] },
                 { "Angry", ["Angry"] },
+                { "Complaining", ["Complaining"] },
                 { "Confused", ["Confused"] },
                 { "Embarassed", ["Embarassed"] },
                 { "Flag", ["Flag"] },
@@ -672,7 +767,7 @@ namespace CHR_Analyzer {
                 .Where(x => x.Frames.FrameHashes.Any(y => {
                     return y != null && !s_framesByHash[y].FrameInfo.FrameName.StartsWith('_');
                 }))
-                .Select(x => x.Anim.AnimInfo.AnimationName + " | " + x.Anim.ToString())
+                .Select(x => x.Anim.AnimInfo.AnimationName.PadRight(40) + " | " + x.Anim.ToString())
                 .Distinct()
                 .OrderBy(x => x)
                 .ToArray();
