@@ -171,6 +171,7 @@ namespace CHR_Analyzer {
             var animFrameNamingPriorityByCategory = new Dictionary<string, string[]>() {
                 { "Idle (Field)", [
                     "Idle (Field)",
+                    "Idle (Field, Should be 4 Directions)",
                 ]},
                 { "Idle (Field, Leaning Back)", [
                     "Idle (Field, Leaning Back)",
@@ -276,6 +277,8 @@ namespace CHR_Analyzer {
                     "Walking (Bad ESE Offset)",
                     "Walking (NESW, Faster)",
                     "Walking (NESW, Slower)",
+                    "Walking (Should be 1 Direction)",
+                    "Walking (Should be 4 Directions)",
                 ]},
 
                 { "Walking (Fan Down)", ["Walking (Fan Down)"]},
@@ -302,6 +305,7 @@ namespace CHR_Analyzer {
                 ]},
                 { "Nodding", [
                     "Nodding",
+                    "Nodding (Should be 4 Directions)",
                     "Nodding 1",
                     "Nodding 2",
                     "Nodding (Slow)",
@@ -360,6 +364,7 @@ namespace CHR_Analyzer {
                 ]},
                 { "ShakingHead", [
                     "ShakingHead",
+                    "ShakingHead (Should be 4 Directions)",
                     "ShakingHead (Some Frames Offset)",
                     "ShakingHead (Repeat)",
                     "ShakingHead (Stop)",
@@ -432,6 +437,16 @@ namespace CHR_Analyzer {
                 { "Drinking", [
                     "Drinking"
                 ]},
+                { "Pointing", [
+                    "StopPointing (Should be 1 Direction)",
+                ]},
+                { "Panting", [
+                    "StillFrame (Panting, Should be 1 Direction)",
+                ]},
+                { "AdjustGlasses", [
+                    "AdjustGlasses (Should be 4 Directions)",
+                ]},
+
                 { "Exploding", [
                     "Exploding (w/ Transparent Frame)",
                     "Exploding (w/o Transparent Frame)",
@@ -564,8 +579,37 @@ namespace CHR_Analyzer {
                     foreach (var aniFrame in anim.AnimInfo.AnimationFrames) {
                         if (aniFrame.FrameHashes != null) {
                             var index = 0;
-                            foreach (var hash in aniFrame.FrameHashes) {
-                                if (s_framesByHash.TryGetValue(hash ?? "", out var frame) && !frame.FrameInfo.FrameName.StartsWith('_')) {
+                            var hashCount = aniFrame.FrameHashes.Length;
+                            if (anim.AnimInfo.AnimationName.ToLower().Contains("should be 4 directions"))
+                                hashCount = 4;
+                            else if (anim.AnimInfo.AnimationName.ToLower().Contains("should be 1 direction"))
+                                hashCount = 1;
+
+                            var frameHashes = aniFrame.FrameHashes.Take(hashCount).ToArray();
+                            var frames = frameHashes
+                                .Select(x => (x != null) ? (s_framesByHash.TryGetValue(x ?? "", out var frameOut) ? frameOut : null) : null)
+                                .ToArray();
+
+                            // (Edmund has intentional duplicate frames / hash collisions, so don't try and look for frame groups with
+                            //  previously-used hashes to add frames to; it will just screw things up.)
+                            var firstNamedFrame = (!spriteVariant.Key.StartsWith("Edmund")) ? frames.FirstOrDefault(x => x != null && x.FrameInfo.FrameName.StartsWith('_'))?.FrameInfo : null;
+                            foreach (var frame in frames) {
+                                if (frame == null || frame.FrameInfo.FrameName.StartsWith('_'))
+                                    continue;
+
+                                // If this frame is a new direction for a frame that's already been discovered, use the same name.
+                                // This happens with Benard (P1)'s first idle frame, which gets N/S directions from the walking animation.
+                                // The Hell Succubus also has this issue with one frame.
+                                if (firstNamedFrame != null && !s_framesByHash.Values.Any(x => {
+                                    return
+                                        x.FrameInfo.FrameName  == firstNamedFrame.FrameName &&
+                                        x.FrameInfo.SpriteName == frame.FrameInfo.SpriteName &&
+                                        x.FrameInfo.Width      == frame.FrameInfo.Width &&
+                                        x.FrameInfo.Height     == frame.FrameInfo.Height &&
+                                        x.FrameInfo.Direction  == frame.FrameInfo.Direction;
+                                }))
+                                    frame.FrameInfo.FrameName = firstNamedFrame.FrameName;
+                                else {
                                     if (index == 0) {
                                         index = categoryIndicies[categoryName];
                                         categoryIndicies[categoryName]++;
