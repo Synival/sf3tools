@@ -1271,8 +1271,8 @@
     <item hash="d0e1a6258a2d393ca2f56db295f837b2" sprite="Garosh (P2)" animation="Walking" width="40" height="40" directions="6" frames="7" duration="18" />
     <item hash="eb9f5b607de21cd956d0866f8b2e7b27" sprite="Garosh (U)" animation="Idle (Battle)" width="40" height="40" directions="4" frames="5" duration="16" />
     <item hash="38b3430d83de752c0fdc399008cdff3d" sprite="Garosh (U)" animation="Idle (Field)" width="40" height="40" directions="4" frames="5" duration="16" />
-    <item hash="995676ec9120b1f302c07dff25f1ab47" sprite="Garosh (U)" animation="Nodding (From Battle to Field Idle)" width="40" height="40" directions="4" frames="5" duration="16" />
-    <item hash="e0a7a8b5a3472b21cb061ce93df774ba" sprite="Garosh (U)" animation="ShakingHead (From Battle to Field Idle)" width="40" height="40" directions="4" frames="5" duration="16" />
+    <item hash="995676ec9120b1f302c07dff25f1ab47" sprite="Garosh (U)" animation="Nodding (From Walking to Field)" width="40" height="40" directions="4" frames="5" duration="16" />
+    <item hash="e0a7a8b5a3472b21cb061ce93df774ba" sprite="Garosh (U)" animation="ShakingHead (From Walking to Field)" width="40" height="40" directions="4" frames="5" duration="16" />
     <item hash="b2e4f1773db43d3b1f54f334e6df1827" sprite="Garosh (U)" animation="StillFrame (Field)" width="40" height="40" directions="4" frames="2" duration="10" />
     <item hash="5377fe4121a55a369a449bc43d0f03ec" sprite="Garosh (U)" animation="StillFrame (Walking)" width="40" height="40" directions="4" frames="2" duration="10" />
     <item hash="952b20584fbffd36089b2d11309b73b7" sprite="Garosh (U)" animation="Walking" width="40" height="40" directions="4" frames="7" duration="24" />
@@ -2482,7 +2482,7 @@
     <item hash="277f178e379341e2d9916a81d2712be2" sprite="Masked Monk (Blue) (Weaponless)" animation="Laughing" width="40" height="40" directions="4" frames="9" duration="25" />
     <item hash="2a527edba3c6b257aa356fcb0c07181e" sprite="Masked Monk (Blue) (Weaponless)" animation="LookingDown (Fast)" width="40" height="40" directions="4" frames="3" duration="4" />
     <item hash="ad811b85b0cbf60e4af25c558fb11170" sprite="Masked Monk (Blue) (Weaponless)" animation="LookingDown (Slow)" width="40" height="40" directions="4" frames="3" duration="16" />
-    <item hash="5d32a019ef1a8e33d49bffae9dcbee04" sprite="Masked Monk (Blue) (Weaponless)" animation="LookingUpFromKneeling" width="40" height="40" directions="4" frames="4" duration="12" />
+    <item hash="5d32a019ef1a8e33d49bffae9dcbee04" sprite="Masked Monk (Blue) (Weaponless)" animation="LookingUp (Kneeling)" width="40" height="40" directions="4" frames="4" duration="12" />
     <item hash="6089fc4eadf680cdb78fcd059d315179" sprite="Masked Monk (Blue) (Weaponless)" animation="Running" width="40" height="40" directions="4" frames="7" duration="12" />
     <item hash="ea0b8806f0abb367f844f578c4722b92" sprite="Masked Monk (Blue) (Weaponless)" animation="ShakingHead" width="40" height="40" directions="4" frames="9" duration="23" />
     <item hash="3fac0cf71538eb4f5a1cb55feb95e402" sprite="Masked Monk (Blue) (Weaponless)" animation="StandingUpFromKneeling" width="40" height="40" directions="4" frames="4" duration="10" />
@@ -3128,7 +3128,7 @@
     <item hash="9c8af084fa7724bfefa294066f3662dc" sprite="Rainblood Bishop (Cape)" animation="StillFrame (KnockedOut, Repeat)" width="64" height="24" directions="17" frames="3" duration="4" />
     <item hash="f3e2f42ebc621ca4a23c6291e081e1b0" sprite="Rainblood Bishop (Cape)" animation="StillFrame (KnockedOut)" width="64" height="24" directions="17" frames="3" duration="10" />
     <item hash="613b3d223db75ba4f2d62c0885b9276b" sprite="Rainblood Bishop (Capeless)" animation="Idle" width="40" height="48" directions="4" frames="5" duration="21" />
-    <item hash="5848dfe8d1f7b74007b91e87ccdf9107" sprite="Rainblood Bishop (Capeless)" animation="KeeledOver" width="40" height="48" directions="4" frames="6" duration="28" />
+    <item hash="5848dfe8d1f7b74007b91e87ccdf9107" sprite="Rainblood Bishop (Capeless)" animation="Idle (KeeledOver)" width="40" height="48" directions="4" frames="6" duration="28" />
     <item hash="6958986325abe48e52c17fdfa493a264" sprite="Rainblood Bishop (Capeless)" animation="StillFrame (Idle)" width="40" height="48" directions="4" frames="2" duration="10" />
     <item hash="42a0ffa4da0441c614033f35c77c1a83" sprite="Rainblood Bishop (Capeless)" animation="Walking" width="40" height="48" directions="4" frames="7" duration="24" />
     <item hash="2d82f557dcb3151c7c0d702350dd0673" sprite="Rainblood Bishop (Capeless)" animation="Walking (Reduced)" width="40" height="48" directions="4" frames="5" duration="24" />

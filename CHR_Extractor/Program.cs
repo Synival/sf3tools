@@ -169,6 +169,9 @@ namespace CHR_Analyzer {
             Console.WriteLine();
 
             var animFrameNamingPriorityByCategory = new Dictionary<string, string[]>() {
+                // ----------------------------------
+                //  Idle (Specific for Field/Battle)
+                // ----------------------------------
                 { "Idle (Field)", [
                     "Idle (Field)",
                     "Idle (Field, Should be 4 Directions)",
@@ -204,6 +207,9 @@ namespace CHR_Analyzer {
                     "Idle (1 Direction, Facing NNE)",
                 ]},
 
+                // ---------------------------
+                //  Idle
+                // ---------------------------
                 { "Idle (Very Still)", ["Idle (Very Still)"]},
                 { "Idle (Tussling Hair)", ["Idle (Tussling Hair)"]},
                 { "Idle (Imposter?)", ["Idle (Imposter?)"]},
@@ -232,7 +238,43 @@ namespace CHR_Analyzer {
                 { "Idle (Sitting)", ["Idle (Sitting)"]},
                 { "Idle (Kneeling)", ["Idle (Kneeling)"]},
                 { "Idle (Dangling)", ["Idle (Dangling)"]},
+                { "Idle (KeeledOver)", ["Idle (KeeledOver)"]},
+                { "OnGround", [
+                    "StillFrame (OnGround)",
+                    "StillFrame (OnGround, Repeat)",
+                    "StillFrame (OnGround, Repeat 1)",
+                    "StillFrame (OnGround, Repeat 2)",
+                    "StillFrame (OnGround 1)",
+                    "StillFrame (OnGround 1, Repeat)",
+                ]},
+                { "OnGround (Alt)", [
+                    "StillFrame (OnGround 2)",
+                    "StillFrame (OnGround 2, Repeat)",
+                ]},
 
+                // ---------------------------
+                //  Walking or Similar
+                // ---------------------------
+                { "Walking", [
+                    "Walking",
+                    "Walking (Render 1)",
+                    "Walking (Render 2)",
+                    "Walking (Faster)",
+                    "Walking (Slower)",
+                    "Walking (Very Fast)",
+                    "Walking (Reduced)",
+                    "Walking (Slow)",
+                    "Walking (Fast)",
+                    "Walking (1 Direction)",
+                    "Walking (Bad ENE)",
+                    "Walking (Bad ESE Offset)",
+                    "Walking (NESW, Faster)",
+                    "Walking (NESW, Slower)",
+                    "Walking (Should be 1 Direction)",
+                    "Walking (Should be 4 Directions)",
+                ]},
+                { "Walking (Fan Down)", ["Walking (Fan Down)"]},
+                { "Running", ["Running"]},
                 { "Flying (Field)", [
                     "Flying (Field)",
                 ]},
@@ -267,38 +309,19 @@ namespace CHR_Analyzer {
                     "Hovering (Slower)",
                     "Hovering (Slow)",
                 ]},
-                { "Walking", [
-                    "Walking",
-                    "Walking (Render 1)",
-                    "Walking (Render 2)",
-                    "Walking (Faster)",
-                    "Walking (Slower)",
-                    "Walking (Very Fast)",
-                    "Walking (Reduced)",
-                    "Walking (Slow)",
-                    "Walking (Fast)",
-                    "Walking (1 Direction)",
-                    "Walking (Bad ENE)",
-                    "Walking (Bad ESE Offset)",
-                    "Walking (NESW, Faster)",
-                    "Walking (NESW, Slower)",
-                    "Walking (Should be 1 Direction)",
-                    "Walking (Should be 4 Directions)",
-                ]},
-
-                { "Walking (Fan Down)", ["Walking (Fan Down)"]},
-                { "Running", ["Running"]},
                 { "WalkingWithBox", ["WalkingWithBox"]},
                 { "Walking (Flowers Behind Back)", ["Walking (Flowers Behind Back)"]},
                 { "Walking (Hopping)", ["Walking (Hopping)"]},
                 { "Walking (Sideways)", ["Walking (Sideways)"]},
-
                 { "Moving", [
                     "Moving",
                     "Moving (Fast)",
                     "Moving (Slow)",
                 ]},
 
+                // ---------------------------
+                //  Nodding
+                // ---------------------------
                 { "Nodding (Field)", [
                     "Nodding (Field)",
                     "Nodding (Field, Short 2)",
@@ -356,6 +379,9 @@ namespace CHR_Analyzer {
                     "Nodding (OnGround)",
                 ]},
 
+                // ---------------------------
+                //  Shaking Head
+                // ---------------------------
                 { "ShakingHead (Field)", [
                     "ShakingHead (Field)",
                     "ShakingHead (Field, Very Quick)",
@@ -415,16 +441,9 @@ namespace CHR_Analyzer {
                     "ShakingHead (OnGround)",
                 ]},
 
-                { "Kneeling", [
-                    "Kneeling",
-                    "Kneeling (1 Direction)",
-                    "StillFrame (Kneeling 1, 1 Direction)",
-                    "StillFrame (Kneeling 2, 1 Direction)",
-                ]},
-                { "KneelingAndPraying", [
-                    "KneelingAndPraying",
-                    "KneelingAndPraying (Repeats after a while)",
-                ]},
+                // ---------------------------
+                //  Actions (Standing)
+                // ---------------------------
                 { "GivingThumbsUp", [
                     "GivingThumbsUp (ENE)",
                     "GivingThumbsUp (NNE)",
@@ -460,52 +479,93 @@ namespace CHR_Analyzer {
                 { "AdjustGlasses", [
                     "AdjustGlasses (Should be 4 Directions)",
                 ]},
-
-                { "Exploding", [
-                    "Exploding (w/ Transparent Frame)",
-                    "Exploding (w/o Transparent Frame)",
-                    "Exploding (Slow then Fast)",
-                    "Exploding (Very Fast)",
-                ]},
-                { "Exploding (Alt)", [
-                    "Exploding (Alt, w/o Transparent Frame)",
-                ]},
-                { "Unexploding", [
-                    "Unexploding (w/ Transparent Frame)",
-                    "Unexploding (w/o Transparent Frame)",
-                ]},
-                { "Unexploding (Alt)", [
-                    "Unexploding (Alt, w/o Transparent Frame)",
-                ]},
-                { "Flickering", [
-                    "Flickering",
-                ]},
-                { "Flickering (Small)", [
-                    "Flickering (Small)",
-                ]},
-                { "Flickering (Large)", [
-                    "Flickering (Large)",
-                ]},
-                { "Zapping", [
-                    "Zapping (Slow)",
-                    "Zapping (Fast)",
-                    "Zapping (Reduced, Slow)",
-                ]},
-                { "Zapping (To the Left)", [
-                    "Zapping (Fast, To the Left)",
-                ]},
-                { "Poofing", [
-                    "Poofing",
-                    "Poofing (Slow, Slowing Down)",
-                    "Poofing (Fast, Slowing Down)",
-                    "Poofing (Very Fast)",
-                    "Poofing (Extremely Slow)",
-                    "SinglePoof",
-                ]},
-                { "Shimmering", [
-                    "Shimmering (Very Slow)",
-                    "Shimmering (Fast)",
-                ]},
+                { "ShakingFist", ["ShakingFist"] },
+                { "StartOrStopShakingFist", [
+                    "StartShakingFist",
+                    "StopShakingFist (Changes to Nodding)",
+                ] },
+                { "Shushing", ["Shushing"] },
+                { "StartOrStopShushing", ["ShushingBackToIdle"] },
+                { "AimingCannonUpwards", ["AimingCannonUpwards"] },
+                { "Bathing", ["Bathing"] },
+                { "Bobbing", ["Bobbing"] },
+                { "BobbingSideToSide", ["BobbingSideToSide"] },
+                { "HoppingAround", ["HoppingAround"] },
+                { "CarriedAwayByBirdMen", ["CarriedAwayByBirdMen"] },
+                { "Clapping?", ["Clapping?"] },
+                { "Crying", ["Crying"] },
+                { "CuteLittleKick", ["CuteLittleKick"] },
+                { "CuttingRope", ["CuttingRope"] },
+                { "FinishingJumpKick", ["FinishingJumpKick"] },
+                { "Frustrated", ["Frustrated"] },
+                { "Giggle", ["Giggle"] },
+                { "Hammering", ["Hammering"] },
+                { "HoldingOutArms", ["HoldingOutArms"] },
+                { "HoldingOutHand", ["HoldingOutHand"] },
+                { "HurlingBoulder", ["HurlingBoulder"] },
+                { "InDespair", ["InDespair"] },
+                { "JumpingUp", ["JumpingUp"] },
+                { "Kissing", ["Kissing"] },
+                { "Kissing (Blushing)", ["Kissing (Blushing)"] },
+                { "Landing", ["Landing"] },
+                { "Laughing", ["Laughing"] },
+                { "LeaningAgainstWall", ["LeaningAgainstWall"] },
+                { "LeapingToDad", ["LeapingToDad"] },
+                { "LiftingBox", ["LiftingBox"] },
+                { "LiftingUpFlareGun", ["LiftingUpFlareGun"] },
+                { "LiftingWeight", ["LiftingWeight"] },
+                { "Limping", ["Limping"] },
+                { "LookingUp", ["LookingUp"] },
+                { "LoweringCannonSlowly", ["LoweringCannonSlowly"] },
+                { "MoveDownUpWhileFeyYawns", ["MoveDownUpWhileFeyYawns"] },
+                { "MovingRightWhileFeySlaps", ["MovingRightWhileFeySlaps"] },
+                { "OccasionallyDabbingFace", ["OccasionallyDabbingFace"] },
+                { "OccasionallyLookingUp", ["OccasionallyLookingUp"] },
+                { "OccasionallyTusslingHair", ["OccasionallyTusslingHair"] },
+                { "OccasionallyWipingForehead", ["OccasionallyWipingForehead"] },
+                { "OneHandedPushUps", ["OneHandedPushUps"] },
+                { "OpeningEyes (OnGround)", ["OpeningEyes (OnGround)"] },
+                { "OrbHovering", ["OrbHovering"] },
+                { "PantingOnGround", ["PantingOnGround"] },
+                { "PeekingThroughWindow", ["PeekingThroughWindow"] },
+                { "PointingToCrystal", ["PointingToCrystal"] },
+                { "Popping", ["Popping"] },
+                { "PoundingGround", ["PoundingGround"] },
+                { "PresentingFlowers", ["PresentingFlowers"] },
+                { "Pulsating", ["Pulsating"] },
+                { "PuttingBoxDown", ["PuttingBoxDown"] },
+                { "RaisingCane", ["RaisingCane"] },
+                { "RaisingHands", ["RaisingHands"] },
+                { "RaisingStaff", ["RaisingStaff"] },
+                { "RisingUp", ["RisingUp"] },
+                { "RollingBackward", ["RollingBackward"] },
+                { "Saluting", ["Saluting"] },
+                { "ShakingWithRage", ["ShakingWithRage"] },
+                { "ShieldingSelf", ["ShieldingSelf"] },
+                { "Signalling", ["Signalling"] },
+                { "SlapIshahakat", [
+                    "SlapIshahakat",
+                    "SlapIshahakat (Long, Change to 1)",
+                    "SlapIshahakat (Stop)",
+                ] },
+                { "SleepingWhileStanding", ["SleepingWhileStanding"] },
+                { "SlowlyGettingUpFromGround", ["SlowlyGettingUpFromGround"] },
+                { "SomersaultToStillMidAirPose", ["SomersaultToStillMidAirPose"] },
+                { "SpinUpToDown", ["SpinUpToDown"] },
+                { "SpinningUpToDown", ["SpinningUpToDown"] },
+                { "Splash", ["Splash"] },
+                { "StartingJumpKick", ["StartingJumpKick"] },
+                { "StopCrying", ["StopCrying"] },
+                { "Sweeping", ["Sweeping"] },
+                { "TappingChin?", ["TappingChin?"] },
+                { "ThrowingBomb", ["ThrowingBomb"] },
+                { "TouchingIshahakat", ["TouchingIshahakat"] },
+                { "TurningBack", ["TurningBack"] },
+                { "TurningTranslucent", ["TurningTranslucent"] },
+                { "UsingStaff", ["UsingStaff"] },
+                { "Waving", ["Waving"] },
+                { "WigglingOnGround", ["WigglingOnGround"] },
+                { "Yawning", ["Yawning"] },
                 { "SittingAndEating", [
                     "SittingAndEating",
                 ]},
@@ -589,25 +649,30 @@ namespace CHR_Analyzer {
                     "SpreadingOutArms (Forever)",
                 ] },
 
-                { "OpeningAndClosing", [
-                    "Opening",
-                    "Closing",
-                ]},
-
-                { "OnGround", [
-                    "StillFrame (OnGround)",
-                    "StillFrame (OnGround, Repeat)",
-                    "StillFrame (OnGround, Repeat 1)",
-                    "StillFrame (OnGround, Repeat 2)",
-                    "StillFrame (OnGround 1)",
-                    "StillFrame (OnGround 1, Repeat)",
-                ]},
-                { "OnGround (Alt)", [
-                    "StillFrame (OnGround 2)",
-                    "StillFrame (OnGround 2, Repeat)",
-                ]},
+                // ---------------------------
+                //  Actions on Ground
+                // ---------------------------
+                { "Sleeping", [
+                    "Sleeping",
+                    "Sleeping (Slow Snoring)",
+                    "Sleeping (Slow Breathing)",
+                    "Sleeping (Very Slow Breathing)",
+                    "Sleeping (Fast Snoring)",
+                ] },
                 { "Twitching (OnGround)", ["Twitching (OnGround)"] },
+                { "LoweringStaff (OnGround)", ["LoweringStaff (OnGround)"] },
 
+                // ---------------------------
+                //  Actions (Other Positions)
+                // ---------------------------
+                { "KneelingAndPraying", [
+                    "KneelingAndPraying",
+                    "KneelingAndPraying (Repeats after a while)",
+                ]},
+
+                // ---------------------------
+                //  Changing Positions
+                // ---------------------------
                 { "GettingUpFromGround", ["GettingUpFromGround"] },
                 { "GettingUpFromGround (Looks Silly)", ["GettingUpFromGround (Looks Silly)"] },
                 { "GettingUp", ["GettingUp (Slowly)"] },
@@ -616,17 +681,13 @@ namespace CHR_Analyzer {
                 { "GettingUpFromKneeling", ["GettingUpFromKneeling"] },
                 { "GettingUpFromPantingOnGround", ["GettingUpFromPantingOnGround"] },
                 { "GettingUpFromPrayer", ["GettingUpFromPrayer"] },
-
                 { "GoingBackDown", ["GoingBackDown (Slowly)"] },
-                { "LoweringStaff (OnGround)", ["LoweringStaff (OnGround)"] },
-                { "Sleeping", [
-                    "Sleeping",
-                    "Sleeping (Slow Snoring)",
-                    "Sleeping (Slow Breathing)",
-                    "Sleeping (Very Slow Breathing)",
-                    "Sleeping (Fast Snoring)",
-                ] },
-
+                { "Kneeling", [
+                    "Kneeling",
+                    "Kneeling (1 Direction)",
+                    "StillFrame (Kneeling 1, 1 Direction)",
+                    "StillFrame (Kneeling 2, 1 Direction)",
+                ]},
                 { "Collapsing", [
                     "Collapsing",
                 ]},
@@ -641,25 +702,63 @@ namespace CHR_Analyzer {
                 { "StandingUpFromSitting", ["StandingUpFromSitting"] },
                 { "StandingUpFromSittingCrossLegged", ["StandingUpFromSittingCrossLegged", "StandingUpFromSittingCrossLegged (Quick)"] },
                 { "StandingUprightFromLeaningForward", ["StandingUprightFromLeaningForward"] },
-
                 { "CollapsingFromPanting", [
                     "CollapsingFromPanting (1 Direction)",
                     "PantingFromCollapsed (1 Direction)",
                 ]},
 
-                { "Idle (Bad Frames)", [
-                    "Idle (Bad NNE Offset)",
-                    "Idle (Faster, Bad Offset)",
-                    "Idle (Offset)",
-                    "Idle (Reduced, Janky)",
+                // ---------------------------
+                //  Object Animations
+                // ---------------------------
+                { "Exploding", [
+                    "Exploding (w/ Transparent Frame)",
+                    "Exploding (w/o Transparent Frame)",
+                    "Exploding (Slow then Fast)",
+                    "Exploding (Very Fast)",
                 ]},
-                { "Nodding (Offset)", [
-                    "Nodding (Offset)",
+                { "Exploding (Alt)", [
+                    "Exploding (Alt, w/o Transparent Frame)",
                 ]},
-                { "Pointing (Offset)", [
-                    "Pointing (Offset)",
+                { "Unexploding", [
+                    "Unexploding (w/ Transparent Frame)",
+                    "Unexploding (w/o Transparent Frame)",
                 ]},
-
+                { "Unexploding (Alt)", [
+                    "Unexploding (Alt, w/o Transparent Frame)",
+                ]},
+                { "Flickering", [
+                    "Flickering",
+                ]},
+                { "Flickering (Small)", [
+                    "Flickering (Small)",
+                ]},
+                { "Flickering (Large)", [
+                    "Flickering (Large)",
+                ]},
+                { "Zapping", [
+                    "Zapping (Slow)",
+                    "Zapping (Fast)",
+                    "Zapping (Reduced, Slow)",
+                ]},
+                { "Zapping (To the Left)", [
+                    "Zapping (Fast, To the Left)",
+                ]},
+                { "Poofing", [
+                    "Poofing",
+                    "Poofing (Slow, Slowing Down)",
+                    "Poofing (Fast, Slowing Down)",
+                    "Poofing (Very Fast)",
+                    "Poofing (Extremely Slow)",
+                    "SinglePoof",
+                ]},
+                { "Shimmering", [
+                    "Shimmering (Very Slow)",
+                    "Shimmering (Fast)",
+                ]},
+                { "OpeningAndClosing", [
+                    "Opening",
+                    "Closing",
+                ]},
                 { "Alert", ["Alert"] },
                 { "Angry", ["Angry"] },
                 { "Complaining", ["Complaining"] },
@@ -672,6 +771,22 @@ namespace CHR_Analyzer {
                 { "Silent", ["Silent"] },
                 { "Sweat", ["Sweat (Growing Larger)", "Sweat"] },
                 { "Sword", ["Sword"] },
+
+                // ---------------------------
+                //  Bad Animation Group
+                // ---------------------------
+                { "Idle (Bad Frames)", [
+                    "Idle (Bad NNE Offset)",
+                    "Idle (Faster, Bad Offset)",
+                    "Idle (Offset)",
+                    "Idle (Reduced, Janky)",
+                ]},
+                { "Nodding (Bad Offsets)", [
+                    "Nodding (Offset)",
+                ]},
+                { "Pointing (Bad Offsets)", [
+                    "Pointing (Offset)",
+                ]},
             };
 
             var animNameToCategoryMap = animFrameNamingPriorityByCategory
