@@ -171,7 +171,7 @@
     <item hash="5b79149a7ad7ace6018c0546a534bd35" sprite="Basanda" animation="StillFrame (Battle)" width="40" height="40" directions="4" frames="2" duration="10" />
     <item hash="f4ce7ec4305483cb13bd740855f54c7c" sprite="Basanda" animation="StillFrame (Field)" width="40" height="40" directions="4" frames="2" duration="10" />
     <item hash="4bea43ddb8681fb15f28a882dc3f1db9" sprite="Basanda" animation="Walking" width="40" height="40" directions="4" frames="7" duration="24" />
-    <item hash="4573148c61ae3caa5b29d527bd4af611" sprite="Basanda (Staff)" animation="HoldingStaffUp" width="40" height="40" directions="4" frames="5" duration="25" />
+    <item hash="4573148c61ae3caa5b29d527bd4af611" sprite="Basanda (Staff)" animation="HoldingUpStaff" width="40" height="40" directions="4" frames="5" duration="25" />
     <item hash="ad29ab60706c20da0c24020bce7b0b05" sprite="Basanda (Staff)" animation="Idle (2 Frames)" width="40" height="40" directions="4" frames="4" duration="12" />
     <item hash="422eb47b4d3a9f798ab8bcf06d8b9c25" sprite="Basanda (Staff)" animation="Nodding" width="40" height="40" directions="4" frames="5" duration="8" />
     <item hash="09886538c974e4bc72f39b37ee59addf" sprite="Basanda (Staff)" animation="ShakingHead" width="40" height="40" directions="4" frames="9" duration="16" />
@@ -1655,8 +1655,6 @@
     <item hash="c8afba56303bbf785a5d51175944da7b" sprite="Hazuki (P2)" animation="StillFrame (Walking)" width="40" height="40" directions="6" frames="2" duration="10" />
     <item hash="c4e14db73ec788255a0e183b9adb844c" sprite="Hazuki (P2)" animation="Walking" width="40" height="40" directions="4" frames="7" duration="30" />
     <item hash="f5ebb688d0be0c864c30d1ffc2c02e01" sprite="Hazuki (P2)" animation="Walking" width="40" height="40" directions="6" frames="7" duration="30" />
-    <item hash="fc81d6422622cfb291b7f921cbaa6522" sprite="Hazuki (U)" animation="Flipping" width="40" height="40" directions="1" frames="11" duration="20" />
-    <item hash="0908e31faefd5ee002ffba54023de76b" sprite="Hazuki (U)" animation="FlippingToStillMidAirPose" width="40" height="40" directions="1" frames="9" duration="24" />
     <item hash="2480d67414cb376fe9069808924fa323" sprite="Hazuki (U)" animation="GettingUpFromKneeling" width="40" height="40" directions="1" frames="5" duration="18" />
     <item hash="6bd3f2437952618abc7fa12d787d6517" sprite="Hazuki (U)" animation="Idle (Battle)" width="40" height="40" directions="4" frames="5" duration="14" />
     <item hash="d2f8bd01d51d7d5f8484042b36c97f12" sprite="Hazuki (U)" animation="Idle (Battle)" width="40" height="40" directions="6" frames="5" duration="14" />
@@ -1665,6 +1663,8 @@
     <item hash="1a3fe96b10fdde112cc0af2a51c712d9" sprite="Hazuki (U)" animation="Landing" width="40" height="40" directions="1" frames="3" duration="12" />
     <item hash="5c4cee7aa4d42459c59c592dad7f44df" sprite="Hazuki (U)" animation="Nodding" width="40" height="40" directions="4" frames="5" duration="14" />
     <item hash="7c02b9a7a3b880f6b00e731f78c665e7" sprite="Hazuki (U)" animation="ShakingHead" width="40" height="40" directions="4" frames="9" duration="23" />
+    <item hash="fc81d6422622cfb291b7f921cbaa6522" sprite="Hazuki (U)" animation="Somersault" width="40" height="40" directions="1" frames="11" duration="20" />
+    <item hash="0908e31faefd5ee002ffba54023de76b" sprite="Hazuki (U)" animation="SomersaultToStillMidAirPose" width="40" height="40" directions="1" frames="9" duration="24" />
     <item hash="028404d4e1dc31b5da6e25a29f303a9e" sprite="Hazuki (U)" animation="StandingUpFromKneeling" width="40" height="40" directions="1" frames="3" duration="9" />
     <item hash="5319417fd47cad7daab7350a48a82b50" sprite="Hazuki (U)" animation="StillFrame" width="40" height="40" directions="1" frames="2" duration="10" />
     <item hash="1dbc948e58836d40e4d9f39e3ad43e9d" sprite="Hazuki (U)" animation="StillFrame (Battle)" width="40" height="40" directions="4" frames="2" duration="10" />
@@ -2303,7 +2303,7 @@
     <item hash="748319f7336e9a4d80f80e40f4feb3a8" sprite="Lizardman" animation="StillFrame (Walking)" width="40" height="40" directions="4" frames="2" duration="10" />
     <item hash="49e0cd8f2da21ce634fabbc37fb8eca1" sprite="Lizardman" animation="Walking" width="40" height="40" directions="4" frames="7" duration="30" />
     <item hash="9994a03b9863a1160a06180380d145c4" sprite="Mad Garvin" animation="Collapsing" width="48" height="48" directions="1" frames="5" duration="31" />
-    <item hash="c3326532696cb6700346ae5b42aef27a" sprite="Mad Garvin" animation="GettingUp" width="48" height="48" directions="1" frames="5" duration="112" />
+    <item hash="c3326532696cb6700346ae5b42aef27a" sprite="Mad Garvin" animation="GettingUpFromGround" width="48" height="48" directions="1" frames="5" duration="112" />
     <item hash="47b0bf86777863975b08abfb33605a51" sprite="Mad Garvin" animation="Idle (Battle 1)" width="48" height="48" directions="4" frames="5" duration="16" />
     <item hash="d6e7617ceeca7772ff40c76990fd0984" sprite="Mad Garvin" animation="Idle (Battle 2)" width="48" height="48" directions="4" frames="5" duration="16" />
     <item hash="0c7eec05912a97107058a969b1dbea16" sprite="Mad Garvin" animation="Idle (Field)" width="48" height="48" directions="4" frames="5" duration="16" />

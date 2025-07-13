@@ -495,11 +495,38 @@ namespace CHR_Analyzer {
                 { "SittingAndEating", [
                     "SittingAndEating",
                 ]},
-
+                { "Backflip", [
+                    "Backflip",
+                    "Backflip (Slow, Repeat)",
+                    "Backflip (Fast, 2x, Change to 0)",
+                ]},
+                { "Somersault", [
+                    "Somersault",
+                ]},
+                { "Collapsing", [
+                    "Collapsing",
+                ]},
                 { "SittingDownOrUpWithChair", [
                     "SittingDownIntoChair",
                     "SittingInChair",
                     "StandingUpFromChair",
+                ]},
+                { "GettingZapped", [
+                    "GettingZapped (Slow)",
+                    "GettingZapped (Fast)",
+                ]},
+                { "Glowing", [
+                    "Glowing",
+                    "Glowing (1 Direction)",
+                    "Glowing (1 Direction, Stop)",
+                ]},
+                { "HoldingUpStaff", ["HoldingUpStaff"] },
+                { "HoldingUpCane", ["HoldingUpCane"] },
+                { "HoldingUpFan", ["HoldingUpFan"] },
+
+                { "OpeningAndClosing", [
+                    "Opening",
+                    "Closing",
                 ]},
 
                 { "OnGround", [
@@ -514,12 +541,17 @@ namespace CHR_Analyzer {
                     "StillFrame (OnGround 2)",
                     "StillFrame (OnGround 2, Repeat)",
                 ]},
-                { "GettingUpFromGround", [
-                    "GettingUpFromGround",
-                ]},
-                { "GettingUpFromGround (Looks Silly)", [
-                    "GettingUpFromGround (Looks Silly)",
-                ]},
+
+                { "GettingUpFromGround", ["GettingUpFromGround"] },
+                { "GettingUpFromGround (Looks Silly)", ["GettingUpFromGround (Looks Silly)"] },
+                { "GettingUp", ["GettingUp (Slowly)"] },
+                { "GettingBackUp", ["GettingBackUp", "GettingBackUpSlowly"] },
+                { "GettingKnockedOut", ["GettingKnockedOut"] },
+                { "GettingUpFromKneeling", ["GettingUpFromKneeling"] },
+                { "GettingUpFromPantingOnGround", ["GettingUpFromPantingOnGround"] },
+                { "GettingUpFromPrayer", ["GettingUpFromPrayer"] },
+
+                { "GoingBackDown", ["GoingBackDown (Slowly)"] },
 
                 { "Idle (Bad Frames)", [
                     "Idle (Bad NNE Offset)",
@@ -533,6 +565,18 @@ namespace CHR_Analyzer {
                 { "Pointing (Offset)", [
                     "Pointing (Offset)",
                 ]},
+
+                { "Alert", ["Alert"] },
+                { "Angry", ["Angry"] },
+                { "Confused", ["Confused"] },
+                { "Embarassed", ["Embarassed"] },
+                { "Flag", ["Flag"] },
+                { "Idea", ["Idea"] },
+                { "Love", ["Love"] },
+                { "Shield", ["Shield"] },
+                { "Silent", ["Silent"] },
+                { "Sweat", ["Sweat (Growing Larger)", "Sweat"] },
+                { "Sword", ["Sword"] },
             };
 
             var animNameToCategoryMap = animFrameNamingPriorityByCategory
