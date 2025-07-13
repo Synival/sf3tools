@@ -230,15 +230,27 @@ namespace CHR_Analyzer {
                 { "Idle (Fish Quivering)", ["Idle (Fish Quivering)"]},
                 { "Idle (Still then Nibbling)", ["Idle (Still then Nibbling)"]},
                 { "Idle (Occasionally Looking Around)", ["Idle (Occasionally Looking Around)"]},
+                { "Idle (Hovering)", [
+                    "StillFrame (Hovering)",
+                    "StillFrame (Hovering, Change to 0)",
+                    "StillFrame (Hovering, Repeat)",
+                ]},
                 { "Idle (Resting)", [
                     "Idle (Resting)",
                     "Resting (Absurdly Long Duration)",
                     "Resting (Occassionally Scratches)",
+                    "Resting (Very Subtle Movement)",
+                    "StillFrame (Resting)",
+                    "StillFrame (Resting, Repeat)",
                 ]},
                 { "Idle (Sitting)", ["Idle (Sitting)"]},
                 { "Idle (Kneeling)", ["Idle (Kneeling)"]},
                 { "Idle (Dangling)", ["Idle (Dangling)"]},
                 { "Idle (KeeledOver)", ["Idle (KeeledOver)"]},
+                { "Idle (SittingInChair)", [
+                    "StillFrame (SittingInChair)",
+                    "StillFrame (SittingInChair, Repeat)",
+                ]},
                 { "OnGround", [
                     "StillFrame (OnGround)",
                     "StillFrame (OnGround, Repeat)",
@@ -471,6 +483,7 @@ namespace CHR_Analyzer {
                 ]},
                 { "Casting", [
                     "Casting",
+                    "StillFrame (Casting)",
                 ]},
                 { "Attacking", [
                     "Attacking (1 Direction)",
@@ -617,6 +630,7 @@ namespace CHR_Analyzer {
                 { "LeaningOnSword", [
                     "LeaningOnSword (Slow)",
                     "LeaningOnSword (Fast)",
+                    "StillFrame (LeaningOnSword)",
                 ]},
                 { "LiftingHands", [
                     "LiftingHands (1 Direction)",
@@ -833,11 +847,161 @@ namespace CHR_Analyzer {
                 { "Pointing (Bad Offsets)", [
                     "Pointing (Offset)",
                 ]},
+
+                // ---------------------------
+                //  Still Frames
+                // ---------------------------
+                { "Alt", [
+                    "StillFrame (Alt)",
+                ]},
+                { "Black", [
+                    "StillFrame (Black)",
+                    "StillFrame (Black, Repeat)",
+                ]},
+                { "Black+White", [
+                    "StillFrame (Black+White)",
+                    "StillFrame (Black+White, Change to 0)",
+                    "StillFrame (Black+White, Repeat, Duration 0)",
+                ]},
+                { "BlownBack", [
+                    "StillFrame (Blown Back)",
+                    "StillFrame (Blown Back, Repeat)",
+                ]},
+                { "Bomb", [
+                    "StillFrame (Bomb)",
+                ]},
+                { "CannonBall", [
+                    "StillFrame (CannonBall)",
+                    "StillFrame (CannonBall, Change to 1)",
+                    "StillFrame (CannonBall, Repeat)",
+                ]},
+                { "Cowering", [
+                    "StillFrame (Cowering, 1 Direction)",
+                ]},
+                { "Deactivated", [
+                    "StillFrame (Deactivated)",
+                    "StillFrame (Deactivated, Repeat)",
+                ]},
+                { "Dot", [
+                    "StillFrame (Dot)",
+                ]},
+                { "Egg", [
+                    "StillFrame (Egg)",
+                    "StillFrame (Egg, Repeat)",
+                ]},
+                { "Falling", [
+                    "StillFrame (Falling)",
+                    "StillFrame (Falling, Repeat)",
+                ]},
+                { " Field", [
+                    "StillFrame (Field)",
+                ]},
+                { "Fierce Pose", [
+                    "StillFrame (Fierce Pose)",
+                    "StillFrame (Fierce Pose, Repeat)",
+                ]},
+                { "Freezing", [
+                    "StillFrame (Freezing 1)",
+                    "StillFrame (Freezing 2)",
+                    "StillFrame (Freezing 3)",
+                ]},
+                { "Frozen", [
+                    "StillFrame (Frozen)",
+                    "StillFrame (Frozen, Repeat)",
+                ]},
+                { "Full", [
+                    "StillFrame (Full)",
+                    "StillFrame (Full, Repeat)",
+                ]},
+                { "Half", [
+                    "StillFrame (Half)",
+                    "StillFrame (Half, Repeat)",
+                ]},
+                { "Holding Out Flowers", [
+                    "StillFrame (Holding Out Flowers)",
+                ]},
+                { "Ice Cracking", [
+                    "StillFrame (Ice Cracking 1)",
+                    "StillFrame (Ice Cracking 2)",
+                    "StillFrame (Ice Cracking 3)",
+                ]},
+                { " Idle", [
+                    "StillFrame (Idle)",
+                    "StillFrame (Idle, Change to 1)",
+                    "StillFrame (Idle, Repeat)",
+                ]},
+                { "Jumping Up", [
+                    "StillFrame (Jumping Up)",
+                ]},
+                { "Key", [
+                    "StillFrame (Key)",
+                ]},
+                { " Idle (Kneeling)", [
+                    "StillFrame (Kneeling 1)",
+                    "StillFrame (Kneeling 2)",
+                ]},
+                { " Idle (KnockedOut)", [
+                    "StillFrame (KnockedOut)",
+                    "StillFrame (KnockedOut, Repeat)",
+                ]},
+                { "Light", [
+                    "StillFrame (Light)",
+                ]},
+                { "Lightning", [
+                    "StillFrame (Lightning)",
+                ]},
+                { " LookingUp", [
+                    "StillFrame (Looking Up)",
+                ]},
+                { "MaskOff", [
+                    "StillFrame (Mask Off)",
+                    "StillFrame (Mask Off, Repeat 1)",
+                    "StillFrame (Mask Off, Repeat 2)",
+                ]},
+                { "Mask", [
+                    "StillFrame (Mask)",
+                ]},
+                { " OnGround", [
+                    "StillFrame (OnGround, 1 Frame)",
+                ]},
+                { "Open", [
+                    "StillFrame (Open)",
+                    "StillFrame (Open, Repeat)",
+                ]},
+                { " Pointing", [
+                    "StillFrame (Pointing)",
+                    "StillFrame (Pointing, Repeat)",
+                ]},
+                { " Idle (Relaxing)", [
+                    "StillFrame (Relaxing)",
+                    "StillFrame (Relaxing, Repeat 1)",
+                    "StillFrame (Relaxing, Repeat 2)",
+                ]},
+                { "Rock", [
+                    "StillFrame (Rock)",
+                    "StillFrame (Rock, Repeat)",
+                ]},
+                { " Idle (Sitting)", [
+                    "StillFrame (Sitting)",
+                ]},
+                { "Sparkle", [
+                    "StillFrame (Sparkle)",
+                ]},
+                { "Transparent", [
+                    "StillFrame (Transparent)",
+                ]},
+                { "Unfrozen", [
+                    "StillFrame (Unfrozen)",
+                ]},
+                { " Walking", [
+                    "StillFrame (Walking 1)",
+                    "StillFrame (Walking, Should be 1 Direction)",
+                ]},
             };
 
             var animNameToCategoryMap = animFrameNamingPriorityByCategory
                 .SelectMany(x => x.Value.Select(y => (Category: x.Key, Animation: y)))
-                .ToDictionary(x => x.Animation, x => x.Category);
+                .ToDictionary(x => x.Animation, x => x.Category.Trim());
 
             var animFrameNamingPriority = animFrameNamingPriorityByCategory
                 .SelectMany(x => x.Value)
