@@ -325,11 +325,18 @@ namespace CHR_Analyzer {
                 { "Nodding (Field)", [
                     "Nodding (Field)",
                     "Nodding (Field, Short 2)",
+                    "Nodding (Field, Incomplete)",
+                    "Nodding (From Walking to Field)",
+                    "Nodding (From Battle to Field)",
+                    "Nodding (Quick, From Fan Down to Field)",
+                    "Nodding (Wrong First Frame)",
                 ]},
                 { "Nodding (Battle)", [
                     "Nodding (Battle)",
                     "Nodding (Battle, Short 1)",
                     "Nodding (Battle, Reduced)",
+                    "Nodding (Battle, Incomplete)",
+                    "Nodding (From Field to Battle, Very Quick)",
                 ]},
                 { "Nodding", [
                     "Nodding",
@@ -388,6 +395,8 @@ namespace CHR_Analyzer {
                     "ShakingHead (Field, Weird Angle)",
                     "ShakingHead (Field, Weird Angle, Short)",
                     "ShakingHead (Field, Skips Frame)",
+                    "ShakingHead (From Walking to Field)",
+                    "ShakingHead (From Battle to Field)",
                 ]},
                 { "ShakingHead (Battle)", [
                     "ShakingHead (Battle)",
@@ -444,6 +453,11 @@ namespace CHR_Analyzer {
                 // ---------------------------
                 //  Actions (Standing)
                 // ---------------------------
+                { "ShakingEntireBody", [
+                    "ShakingHead (WholeBody)",
+                    "ShakingHead (MovingWholeBody)",
+                    "ShakingEntireBody (Strange, Has Carried Away Frame)",
+                ] },
                 { "GivingThumbsUp", [
                     "GivingThumbsUp (ENE)",
                     "GivingThumbsUp (NNE)",
@@ -669,6 +683,7 @@ namespace CHR_Analyzer {
                     "KneelingAndPraying",
                     "KneelingAndPraying (Repeats after a while)",
                 ]},
+                { "LookingUp (Kneeling)", ["LookingUp (Kneeling)"] },
 
                 // ---------------------------
                 //  Changing Positions
@@ -679,6 +694,7 @@ namespace CHR_Analyzer {
                 { "GettingBackUp", ["GettingBackUp", "GettingBackUpSlowly"] },
                 { "GettingKnockedOut", ["GettingKnockedOut"] },
                 { "GettingUpFromKneeling", ["GettingUpFromKneeling"] },
+                { "GettingUpFromKeeledOver", ["GettingUpFromKeeledOver"] },
                 { "GettingUpFromPantingOnGround", ["GettingUpFromPantingOnGround"] },
                 { "GettingUpFromPrayer", ["GettingUpFromPrayer"] },
                 { "GoingBackDown", ["GoingBackDown (Slowly)"] },
@@ -706,6 +722,7 @@ namespace CHR_Analyzer {
                     "CollapsingFromPanting (1 Direction)",
                     "PantingFromCollapsed (1 Direction)",
                 ]},
+                { "KeelingOverFromSittingCrossLegged", ["KeelingOverFromSittingCrossLegged"] },
 
                 // ---------------------------
                 //  Object Animations
@@ -759,6 +776,13 @@ namespace CHR_Analyzer {
                     "Opening",
                     "Closing",
                 ]},
+                { "BlinkRedOnce", ["BlinkRedOnce"] },
+                { "BlinkWhiteOnce", ["BlinkWhiteOnce"] },
+                { "BlinkYellowOnce", ["BlinkYellowOnce"] },
+
+                // ---------------------------
+                //  Object Animations (Icons)
+                // ---------------------------
                 { "Alert", ["Alert"] },
                 { "Angry", ["Angry"] },
                 { "Complaining", ["Complaining"] },
@@ -773,16 +797,38 @@ namespace CHR_Analyzer {
                 { "Sword", ["Sword"] },
 
                 // ---------------------------
+                //  Combo Animations
+                // ---------------------------
+                { "LookingBackThenToIdle", ["LookingBackThenToIdle"] },
+                { "ShakingHeadAndFrustrated", ["ShakingHeadAndFrustrated"] },
+                { "Blushing, BobbingSideToSide", ["Blushing, BobbingSideToSide"] },
+                { "Hopping, Blushing, BobbingSideToSide", ["Hopping, Blushing, BobbingSideToSide"] },
+                { "RaisingFanAndPointing", ["RaisingFanAndPointing (1 Direction)"] },
+                { "IdleNoddingShakingHead", ["IdleNoddingShakingHead"] },
+
+                // ---------------------------
                 //  Bad Animation Group
                 // ---------------------------
-                { "Idle (Bad Frames)", [
+                { "Idle (Bad)", [
                     "Idle (Bad NNE Offset)",
                     "Idle (Faster, Bad Offset)",
                     "Idle (Offset)",
                     "Idle (Reduced, Janky)",
                 ]},
-                { "Nodding (Bad Offsets)", [
+                { "Walking (Bad)", [
+                    "Walking (Has Broken/Missing Frames)",
+                ]},
+                { "Nodding (Bad)", [
                     "Nodding (Offset)",
+                    "Nodding (Field, Misaligned)",
+                    "Nodding (Stops, Bad NNE Offsets)",
+                ]},
+                { "ShakingHead (Bad)", [
+                    "ShakingHead (Full, Janky, Stops)",
+                    "ShakingHead (Stops, Bad NNE Offsets)",
+                    "ShakingHead (Fast, Bad Offsets)",
+                    "ShakingHead (Fast, Bad Offsets, Stop)",
+                    "ShakingHead (Misaligned)",
                 ]},
                 { "Pointing (Bad Offsets)", [
                     "Pointing (Offset)",

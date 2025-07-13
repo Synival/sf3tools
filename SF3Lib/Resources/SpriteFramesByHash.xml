@@ -1872,18 +1872,18 @@
     <item hash="0ebd88b8f925b45b0e0cf6537f5793d1" sprite="Blue Dragon (SC3)" width="48" height="32" frame="Flying 5" direction="ENE" />
     <item hash="1b8412eb1514a67f0536f67b27be9734" sprite="Blue Dragon (SC3)" width="48" height="32" frame="Flying 5" direction="NNE" />
     <item hash="48029a08b05f56f66a237b23bfd947da" sprite="Bomb" width="16" height="16" frame="StillFrame 1" direction="First" />
-    <item hash="64ffb6f40186f71b3a65205a84e58fbe" sprite="Bow Knight (Bow)" width="48" height="40" frame="Idle (Bad Frames) 1" direction="SSE" />
-    <item hash="ea7288ffef95862fe8ea7147516d6d6a" sprite="Bow Knight (Bow)" width="48" height="40" frame="Idle (Bad Frames) 1" direction="ESE" />
-    <item hash="e55e5ddfc2514c9ed4531621387872ee" sprite="Bow Knight (Bow)" width="48" height="40" frame="Idle (Bad Frames) 1" direction="ENE" />
-    <item hash="50cf64a204ca4f0b824ab09e003f9335" sprite="Bow Knight (Bow)" width="48" height="40" frame="Idle (Bad Frames) 1" direction="NNE" />
-    <item hash="b604b03a6cb106dda99e9ee92aadbd77" sprite="Bow Knight (Bow)" width="48" height="40" frame="Idle (Bad Frames) 2" direction="SSE" />
-    <item hash="d21dd1357e4eb37c6f94594b6e592fdb" sprite="Bow Knight (Bow)" width="48" height="40" frame="Idle (Bad Frames) 2" direction="ESE" />
-    <item hash="8f7c6e846d022bede27caf691f49fc17" sprite="Bow Knight (Bow)" width="48" height="40" frame="Idle (Bad Frames) 2" direction="ENE" />
-    <item hash="cc2429ab230614f015209530fa0a8563" sprite="Bow Knight (Bow)" width="48" height="40" frame="Idle (Bad Frames) 2" direction="NNE" />
-    <item hash="444a51ae44c7c6df9075169931153997" sprite="Bow Knight (Bow)" width="48" height="40" frame="Idle (Bad Frames) 3" direction="SSE" />
-    <item hash="fcb5e82a80fb32fbc1a90003e48bab04" sprite="Bow Knight (Bow)" width="48" height="40" frame="Idle (Bad Frames) 3" direction="ESE" />
-    <item hash="14cf2df0d21f645273d06091cbc4249e" sprite="Bow Knight (Bow)" width="48" height="40" frame="Idle (Bad Frames) 3" direction="ENE" />
-    <item hash="6aa2d5c84ecff9bd7a6bb1aa239ef689" sprite="Bow Knight (Bow)" width="48" height="40" frame="Idle (Bad Frames) 3" direction="NNE" />
+    <item hash="64ffb6f40186f71b3a65205a84e58fbe" sprite="Bow Knight (Bow)" width="48" height="40" frame="Idle (Bad) 1" direction="SSE" />
+    <item hash="ea7288ffef95862fe8ea7147516d6d6a" sprite="Bow Knight (Bow)" width="48" height="40" frame="Idle (Bad) 1" direction="ESE" />
+    <item hash="e55e5ddfc2514c9ed4531621387872ee" sprite="Bow Knight (Bow)" width="48" height="40" frame="Idle (Bad) 1" direction="ENE" />
+    <item hash="50cf64a204ca4f0b824ab09e003f9335" sprite="Bow Knight (Bow)" width="48" height="40" frame="Idle (Bad) 1" direction="NNE" />
+    <item hash="b604b03a6cb106dda99e9ee92aadbd77" sprite="Bow Knight (Bow)" width="48" height="40" frame="Idle (Bad) 2" direction="SSE" />
+    <item hash="d21dd1357e4eb37c6f94594b6e592fdb" sprite="Bow Knight (Bow)" width="48" height="40" frame="Idle (Bad) 2" direction="ESE" />
+    <item hash="8f7c6e846d022bede27caf691f49fc17" sprite="Bow Knight (Bow)" width="48" height="40" frame="Idle (Bad) 2" direction="ENE" />
+    <item hash="cc2429ab230614f015209530fa0a8563" sprite="Bow Knight (Bow)" width="48" height="40" frame="Idle (Bad) 2" direction="NNE" />
+    <item hash="444a51ae44c7c6df9075169931153997" sprite="Bow Knight (Bow)" width="48" height="40" frame="Idle (Bad) 3" direction="SSE" />
+    <item hash="fcb5e82a80fb32fbc1a90003e48bab04" sprite="Bow Knight (Bow)" width="48" height="40" frame="Idle (Bad) 3" direction="ESE" />
+    <item hash="14cf2df0d21f645273d06091cbc4249e" sprite="Bow Knight (Bow)" width="48" height="40" frame="Idle (Bad) 3" direction="ENE" />
+    <item hash="6aa2d5c84ecff9bd7a6bb1aa239ef689" sprite="Bow Knight (Bow)" width="48" height="40" frame="Idle (Bad) 3" direction="NNE" />
     <item hash="c8e098d1c0d52cd6d544f6b90838b305" sprite="Bow Knight (Bow)" width="48" height="40" frame="Walking 1" direction="SSE" />
     <item hash="267ee6b002a9ca816347919176f2cf31" sprite="Bow Knight (Bow)" width="48" height="40" frame="Walking 1" direction="ESE" />
     <item hash="7e0d9460a0bc8a769a56fae8a199d8aa" sprite="Bow Knight (Bow)" width="48" height="40" frame="Walking 1" direction="ENE" />
@@ -2787,14 +2787,14 @@
     <item hash="95c7c3b40629bb9a3570e683537c0469" sprite="Burly Shirtless Male Masked Monk" width="40" height="40" frame="Walking 5" direction="ESE" />
     <item hash="ebd6d64d3514e5223e870a9815340f9e" sprite="Burly Shirtless Male Masked Monk" width="40" height="40" frame="Walking 5" direction="ENE" />
     <item hash="9877db12df191ab12b89b2b71c488814" sprite="Burly Shirtless Male Masked Monk" width="40" height="40" frame="Walking 5" direction="NNE" />
-    <item hash="d06fafeed2b970024734fb51cfe72347" sprite="Burly Worker" width="40" height="40" frame="IdleNoddingShakingHead 2" direction="SSE" />
-    <item hash="0e97fd8b060acfe51dcef56933647ecd" sprite="Burly Worker" width="40" height="40" frame="IdleNoddingShakingHead 2" direction="ESE" />
-    <item hash="39758d2e629797cee0f918e1826654d1" sprite="Burly Worker" width="40" height="40" frame="IdleNoddingShakingHead 2" direction="ENE" />
-    <item hash="1d86077ffb6140da828ad1ac6d516e46" sprite="Burly Worker" width="40" height="40" frame="IdleNoddingShakingHead 2" direction="NNE" />
-    <item hash="31a3ede59a9eee874109ebcf16c85875" sprite="Burly Worker" width="40" height="40" frame="IdleNoddingShakingHead 3" direction="SSE" />
-    <item hash="aaf3f7ef9322684403b6414d72d262d9" sprite="Burly Worker" width="40" height="40" frame="IdleNoddingShakingHead 3" direction="ESE" />
-    <item hash="0710a44e14a5f1e53a1605ca3bf10824" sprite="Burly Worker" width="40" height="40" frame="IdleNoddingShakingHead 3" direction="ENE" />
-    <item hash="e0745b1eba664cf53583541af0524fc4" sprite="Burly Worker" width="40" height="40" frame="IdleNoddingShakingHead 3" direction="NNE" />
+    <item hash="d06fafeed2b970024734fb51cfe72347" sprite="Burly Worker" width="40" height="40" frame="IdleNoddingShakingHead 1" direction="SSE" />
+    <item hash="0e97fd8b060acfe51dcef56933647ecd" sprite="Burly Worker" width="40" height="40" frame="IdleNoddingShakingHead 1" direction="ESE" />
+    <item hash="39758d2e629797cee0f918e1826654d1" sprite="Burly Worker" width="40" height="40" frame="IdleNoddingShakingHead 1" direction="ENE" />
+    <item hash="1d86077ffb6140da828ad1ac6d516e46" sprite="Burly Worker" width="40" height="40" frame="IdleNoddingShakingHead 1" direction="NNE" />
+    <item hash="31a3ede59a9eee874109ebcf16c85875" sprite="Burly Worker" width="40" height="40" frame="IdleNoddingShakingHead 2" direction="SSE" />
+    <item hash="aaf3f7ef9322684403b6414d72d262d9" sprite="Burly Worker" width="40" height="40" frame="IdleNoddingShakingHead 2" direction="ESE" />
+    <item hash="0710a44e14a5f1e53a1605ca3bf10824" sprite="Burly Worker" width="40" height="40" frame="IdleNoddingShakingHead 2" direction="ENE" />
+    <item hash="e0745b1eba664cf53583541af0524fc4" sprite="Burly Worker" width="40" height="40" frame="IdleNoddingShakingHead 2" direction="NNE" />
     <item hash="ca42c8f51cf9a88277aaab7ff8605f6a" sprite="Burly Worker" width="40" height="40" frame="Nodding 1" direction="SSE" />
     <item hash="0a3d4b59bfb22a5b63da48989f3457ff" sprite="Burly Worker" width="40" height="40" frame="Nodding 1" direction="ESE" />
     <item hash="1c1fd15d6eb79779c1c17ab4e3c49435" sprite="Burly Worker" width="40" height="40" frame="Nodding 1" direction="ENE" />
@@ -4250,10 +4250,10 @@
     <item hash="1a4de3ca69a694cc9640a5dc1a1ca771" sprite="Dantares (P1)" width="48" height="40" frame="Nodding (Field) 1" direction="ESE" />
     <item hash="9cccb6481edbf69a68f292f3e6606f10" sprite="Dantares (P1)" width="48" height="40" frame="Nodding (Field) 1" direction="ENE" />
     <item hash="e138b760c7f5641cd910831eeff7aa27" sprite="Dantares (P1)" width="48" height="40" frame="Nodding (Field) 1" direction="NNE" />
-    <item hash="f66cb580070be5d81f6f65dccba050dc" sprite="Dantares (P1)" width="48" height="40" frame="Nodding 2" direction="SSE" />
-    <item hash="f119406a6d4e26c0bc7959ec8d38ca3a" sprite="Dantares (P1)" width="48" height="40" frame="Nodding 2" direction="ESE" />
-    <item hash="4838c3b02482c00d16603b251f4b46d2" sprite="Dantares (P1)" width="48" height="40" frame="Nodding 2" direction="ENE" />
-    <item hash="df56ac6d7e3091c6874b2bd20328984c" sprite="Dantares (P1)" width="48" height="40" frame="Nodding 2" direction="NNE" />
+    <item hash="f66cb580070be5d81f6f65dccba050dc" sprite="Dantares (P1)" width="48" height="40" frame="Nodding (Field) 2" direction="SSE" />
+    <item hash="f119406a6d4e26c0bc7959ec8d38ca3a" sprite="Dantares (P1)" width="48" height="40" frame="Nodding (Field) 2" direction="ESE" />
+    <item hash="4838c3b02482c00d16603b251f4b46d2" sprite="Dantares (P1)" width="48" height="40" frame="Nodding (Field) 2" direction="ENE" />
+    <item hash="df56ac6d7e3091c6874b2bd20328984c" sprite="Dantares (P1)" width="48" height="40" frame="Nodding (Field) 2" direction="NNE" />
     <item hash="8684d537b7852dc59e8f00b6c494ad19" sprite="Dantares (P1)" width="48" height="40" frame="ShakingHead (Battle) 1" direction="SSE" />
     <item hash="70ef903e790ebffb8bcc447194d83ce0" sprite="Dantares (P1)" width="48" height="40" frame="ShakingHead (Battle) 1" direction="ESE" />
     <item hash="c5b8934f3c6ff991930efd6950ec2628" sprite="Dantares (P1)" width="48" height="40" frame="ShakingHead (Battle) 1" direction="ENE" />
@@ -6213,22 +6213,22 @@
     <item hash="0f765474c8e4b7e4404c7a98d2a8b300" sprite="Eldar (U)" width="48" height="40" frame="Flying 5" direction="ENE" />
     <item hash="a7f8e492c2b812c29b316f708d25c14c" sprite="Eldar (U)" width="48" height="40" frame="Flying 5" direction="NNE" />
     <item hash="bbcca8929c3072de96a2b7630d3dd7b2" sprite="Eldar (U)" width="48" height="40" frame="Flying 5" direction="N" />
-    <item hash="5988b0448979d16f64888d8b85f07c7f" sprite="Eldar (U)" width="48" height="40" frame="Nodding (Stops, Bad Alignment) 2" direction="SSE" />
-    <item hash="1b4faf438bed67f19e6a42b2c63ad76b" sprite="Eldar (U)" width="48" height="40" frame="Nodding (Stops, Bad Alignment) 2" direction="ESE" />
-    <item hash="0294569921a876985f4758b0cc423dd9" sprite="Eldar (U)" width="48" height="40" frame="Nodding (Stops, Bad Alignment) 2" direction="ENE" />
-    <item hash="9d281fa99e94c6031637ca9a7cafabfc" sprite="Eldar (U)" width="48" height="40" frame="Nodding (Stops, Bad Alignment) 2" direction="NNE" />
-    <item hash="e058914c91a1ca9d7475f6d00a42aff2" sprite="Eldar (U)" width="48" height="40" frame="Nodding (Stops, Bad Alignment) 3" direction="SSE" />
-    <item hash="2cb87c2f672690909b5368fdcbc29d7b" sprite="Eldar (U)" width="48" height="40" frame="Nodding (Stops, Bad Alignment) 3" direction="ESE" />
-    <item hash="87749cd82a759fc3f9fb2a9ad60660fe" sprite="Eldar (U)" width="48" height="40" frame="Nodding (Stops, Bad Alignment) 3" direction="ENE" />
-    <item hash="f5c767e629472603ed424e7dab1131aa" sprite="Eldar (U)" width="48" height="40" frame="Nodding (Stops, Bad Alignment) 3" direction="NNE" />
-    <item hash="6da58058d63e751857d30f404ff6c445" sprite="Eldar (U)" width="48" height="40" frame="ShakingHead (Stops, Bad Alignment) 2" direction="SSE" />
-    <item hash="1a50ee10b1a3d36e21993fa9ea7aff93" sprite="Eldar (U)" width="48" height="40" frame="ShakingHead (Stops, Bad Alignment) 2" direction="ESE" />
-    <item hash="5f95cef81e38298957146e024316a3b5" sprite="Eldar (U)" width="48" height="40" frame="ShakingHead (Stops, Bad Alignment) 2" direction="ENE" />
-    <item hash="af512506c95a67ddebb1b0597a2d8df4" sprite="Eldar (U)" width="48" height="40" frame="ShakingHead (Stops, Bad Alignment) 2" direction="NNE" />
-    <item hash="67111db4afdfde3f102041c1af063394" sprite="Eldar (U)" width="48" height="40" frame="ShakingHead (Stops, Bad Alignment) 3" direction="SSE" />
-    <item hash="d1fa7ab04da93947a56f2518a8f43dcf" sprite="Eldar (U)" width="48" height="40" frame="ShakingHead (Stops, Bad Alignment) 3" direction="ESE" />
-    <item hash="33762971197b5d3aa7295068bddca36a" sprite="Eldar (U)" width="48" height="40" frame="ShakingHead (Stops, Bad Alignment) 3" direction="ENE" />
-    <item hash="5d768ab74f8bef85ad645911e27b3ef5" sprite="Eldar (U)" width="48" height="40" frame="ShakingHead (Stops, Bad Alignment) 3" direction="NNE" />
+    <item hash="5988b0448979d16f64888d8b85f07c7f" sprite="Eldar (U)" width="48" height="40" frame="Nodding (Bad) 1" direction="SSE" />
+    <item hash="1b4faf438bed67f19e6a42b2c63ad76b" sprite="Eldar (U)" width="48" height="40" frame="Nodding (Bad) 1" direction="ESE" />
+    <item hash="0294569921a876985f4758b0cc423dd9" sprite="Eldar (U)" width="48" height="40" frame="Nodding (Bad) 1" direction="ENE" />
+    <item hash="9d281fa99e94c6031637ca9a7cafabfc" sprite="Eldar (U)" width="48" height="40" frame="Nodding (Bad) 1" direction="NNE" />
+    <item hash="e058914c91a1ca9d7475f6d00a42aff2" sprite="Eldar (U)" width="48" height="40" frame="Nodding (Bad) 2" direction="SSE" />
+    <item hash="2cb87c2f672690909b5368fdcbc29d7b" sprite="Eldar (U)" width="48" height="40" frame="Nodding (Bad) 2" direction="ESE" />
+    <item hash="87749cd82a759fc3f9fb2a9ad60660fe" sprite="Eldar (U)" width="48" height="40" frame="Nodding (Bad) 2" direction="ENE" />
+    <item hash="f5c767e629472603ed424e7dab1131aa" sprite="Eldar (U)" width="48" height="40" frame="Nodding (Bad) 2" direction="NNE" />
+    <item hash="6da58058d63e751857d30f404ff6c445" sprite="Eldar (U)" width="48" height="40" frame="ShakingHead (Bad) 1" direction="SSE" />
+    <item hash="1a50ee10b1a3d36e21993fa9ea7aff93" sprite="Eldar (U)" width="48" height="40" frame="ShakingHead (Bad) 1" direction="ESE" />
+    <item hash="5f95cef81e38298957146e024316a3b5" sprite="Eldar (U)" width="48" height="40" frame="ShakingHead (Bad) 1" direction="ENE" />
+    <item hash="af512506c95a67ddebb1b0597a2d8df4" sprite="Eldar (U)" width="48" height="40" frame="ShakingHead (Bad) 1" direction="NNE" />
+    <item hash="67111db4afdfde3f102041c1af063394" sprite="Eldar (U)" width="48" height="40" frame="ShakingHead (Bad) 2" direction="SSE" />
+    <item hash="d1fa7ab04da93947a56f2518a8f43dcf" sprite="Eldar (U)" width="48" height="40" frame="ShakingHead (Bad) 2" direction="ESE" />
+    <item hash="33762971197b5d3aa7295068bddca36a" sprite="Eldar (U)" width="48" height="40" frame="ShakingHead (Bad) 2" direction="ENE" />
+    <item hash="5d768ab74f8bef85ad645911e27b3ef5" sprite="Eldar (U)" width="48" height="40" frame="ShakingHead (Bad) 2" direction="NNE" />
     <item hash="fee826df403b45e1dd54e84f70496ead" sprite="Elf Boy w/ Green Hair" width="40" height="40" frame="Walking 1" direction="SSE" />
     <item hash="c8bb96c49776256ae16da47a53b12c16" sprite="Elf Boy w/ Green Hair" width="40" height="40" frame="Walking 1" direction="ESE" />
     <item hash="a11d139886080d89c767897757d620ee" sprite="Elf Boy w/ Green Hair" width="40" height="40" frame="Walking 1" direction="ENE" />
@@ -7209,17 +7209,17 @@
     <item hash="81966108d2ec4798e4a393fd568f05c7" sprite="Franz" width="48" height="40" frame="Idle 3" direction="ESE" />
     <item hash="e091e2a3634173e0149249093bd3acbb" sprite="Franz" width="48" height="40" frame="Idle 3" direction="ENE" />
     <item hash="a8ee08c0f60b7f2ee8cce1f23bca9bea" sprite="Franz" width="48" height="40" frame="Idle 3" direction="NNE" />
-    <item hash="ac7d9462369c49b991510a542898bd5b" sprite="Franz" width="48" height="40" frame="Walking (Has Broken/Missing Frames) 1" direction="SSE" />
-    <item hash="e80f8818b307219fd1c6e66514e10269" sprite="Franz" width="48" height="40" frame="Walking (Has Broken/Missing Frames) 1" direction="ENE" />
-    <item hash="262b43b5707088a5b731da828ac58117" sprite="Franz" width="48" height="40" frame="Walking (Has Broken/Missing Frames) 1" direction="NNE" />
-    <item hash="c4ff232e690789881eb9833bd512fd41" sprite="Franz" width="48" height="40" frame="Walking (Has Broken/Missing Frames) 3" direction="SSE" />
-    <item hash="91ba2eac171f9e73748a62d374ff0ef8" sprite="Franz" width="48" height="40" frame="Walking (Has Broken/Missing Frames) 3" direction="ESE" />
-    <item hash="57279b4ba75bc0b36351a61d206dfb79" sprite="Franz" width="48" height="40" frame="Walking (Has Broken/Missing Frames) 3" direction="ENE" />
-    <item hash="e1603c8cdc24af37ecd0d4c188e99d8b" sprite="Franz" width="48" height="40" frame="Walking (Has Broken/Missing Frames) 3" direction="NNE" />
-    <item hash="97a33d23679f405cfbaa6abbc6cd8a50" sprite="Franz" width="48" height="40" frame="Walking (Has Broken/Missing Frames) 4" direction="SSE" />
-    <item hash="6fb2aed13f9613e1a99ccf1989eaece7" sprite="Franz" width="48" height="40" frame="Walking (Has Broken/Missing Frames) 4" direction="ESE" />
-    <item hash="fb822d010c060c937dc1fd04355078ed" sprite="Franz" width="48" height="40" frame="Walking (Has Broken/Missing Frames) 4" direction="ENE" />
-    <item hash="12971b53d9a870eeaf0521f3d1f74f1e" sprite="Franz" width="48" height="40" frame="Walking (Has Broken/Missing Frames) 4" direction="NNE" />
+    <item hash="ac7d9462369c49b991510a542898bd5b" sprite="Franz" width="48" height="40" frame="Walking (Bad) 1" direction="SSE" />
+    <item hash="e80f8818b307219fd1c6e66514e10269" sprite="Franz" width="48" height="40" frame="Walking (Bad) 1" direction="ENE" />
+    <item hash="262b43b5707088a5b731da828ac58117" sprite="Franz" width="48" height="40" frame="Walking (Bad) 1" direction="NNE" />
+    <item hash="c4ff232e690789881eb9833bd512fd41" sprite="Franz" width="48" height="40" frame="Walking (Bad) 2" direction="SSE" />
+    <item hash="91ba2eac171f9e73748a62d374ff0ef8" sprite="Franz" width="48" height="40" frame="Walking (Bad) 2" direction="ESE" />
+    <item hash="57279b4ba75bc0b36351a61d206dfb79" sprite="Franz" width="48" height="40" frame="Walking (Bad) 2" direction="ENE" />
+    <item hash="e1603c8cdc24af37ecd0d4c188e99d8b" sprite="Franz" width="48" height="40" frame="Walking (Bad) 2" direction="NNE" />
+    <item hash="97a33d23679f405cfbaa6abbc6cd8a50" sprite="Franz" width="48" height="40" frame="Walking (Bad) 3" direction="SSE" />
+    <item hash="6fb2aed13f9613e1a99ccf1989eaece7" sprite="Franz" width="48" height="40" frame="Walking (Bad) 3" direction="ESE" />
+    <item hash="fb822d010c060c937dc1fd04355078ed" sprite="Franz" width="48" height="40" frame="Walking (Bad) 3" direction="ENE" />
+    <item hash="12971b53d9a870eeaf0521f3d1f74f1e" sprite="Franz" width="48" height="40" frame="Walking (Bad) 3" direction="NNE" />
     <item hash="720704a19017841907352b0bd692d173" sprite="Franz (Helmet)" width="48" height="40" frame="Idle 1" direction="SSE" />
     <item hash="ff1e0d47ab2531b1bec7076fdee7e54a" sprite="Franz (Helmet)" width="48" height="40" frame="Idle 1" direction="ESE" />
     <item hash="4adb40a173eaba6645cb24ff12528088" sprite="Franz (Helmet)" width="48" height="40" frame="Idle 1" direction="ENE" />
@@ -7649,22 +7649,22 @@
     <item hash="2fc0b4d6ddaa4fcfdd6fbbac1c9f1af3" sprite="Garosh (U)" width="40" height="40" frame="Idle (Field) 3" direction="ESE" />
     <item hash="277cc5738b80432763678e718b8fcadf" sprite="Garosh (U)" width="40" height="40" frame="Idle (Field) 3" direction="ENE" />
     <item hash="71a431084c31d48be7a4dd08a3ff3429" sprite="Garosh (U)" width="40" height="40" frame="Idle (Field) 3" direction="NNE" />
-    <item hash="9250c611877b5b2db2e3c21ff1174a2d" sprite="Garosh (U)" width="40" height="40" frame="Nodding 2" direction="SSE" />
-    <item hash="0e55427043fc68d735207e330df1064a" sprite="Garosh (U)" width="40" height="40" frame="Nodding 2" direction="ESE" />
-    <item hash="991cfba2a868436c07163d23256ec1f4" sprite="Garosh (U)" width="40" height="40" frame="Nodding 2" direction="ENE" />
-    <item hash="f09d09b141f42e89b9ff1800f853e6f2" sprite="Garosh (U)" width="40" height="40" frame="Nodding 2" direction="NNE" />
-    <item hash="ff2caf791030628756c3671d1526b664" sprite="Garosh (U)" width="40" height="40" frame="Nodding 3" direction="SSE" />
-    <item hash="85e20c6028cd225ed88a7a5074624d38" sprite="Garosh (U)" width="40" height="40" frame="Nodding 3" direction="ESE" />
-    <item hash="267ab44710b9974cd9c963ea1bebfdf1" sprite="Garosh (U)" width="40" height="40" frame="Nodding 3" direction="ENE" />
-    <item hash="90d1bd852849e776832a7fac339fcff5" sprite="Garosh (U)" width="40" height="40" frame="Nodding 3" direction="NNE" />
-    <item hash="156a2c3e6bfc3fed08d593223419f361" sprite="Garosh (U)" width="40" height="40" frame="ShakingHead 2" direction="SSE" />
-    <item hash="4263dc9ce386f3884a3815ab698e3e42" sprite="Garosh (U)" width="40" height="40" frame="ShakingHead 2" direction="ESE" />
-    <item hash="f20d9aaba5cf676b4e83002fee7a7e2b" sprite="Garosh (U)" width="40" height="40" frame="ShakingHead 2" direction="ENE" />
-    <item hash="57be54f6b6e393f8609b29759f9e8fe5" sprite="Garosh (U)" width="40" height="40" frame="ShakingHead 2" direction="NNE" />
-    <item hash="8b4852a9fb806a067be64960ef9b0249" sprite="Garosh (U)" width="40" height="40" frame="ShakingHead 3" direction="SSE" />
-    <item hash="03f4d6bf4bdfaf6c19a5d53a6cf45c04" sprite="Garosh (U)" width="40" height="40" frame="ShakingHead 3" direction="ESE" />
-    <item hash="0b3cdc1afbd9c5bd76d59e364c75afef" sprite="Garosh (U)" width="40" height="40" frame="ShakingHead 3" direction="ENE" />
-    <item hash="9be3570c56fc293af12a0fe9057629c5" sprite="Garosh (U)" width="40" height="40" frame="ShakingHead 3" direction="NNE" />
+    <item hash="9250c611877b5b2db2e3c21ff1174a2d" sprite="Garosh (U)" width="40" height="40" frame="Nodding (Field) 1" direction="SSE" />
+    <item hash="0e55427043fc68d735207e330df1064a" sprite="Garosh (U)" width="40" height="40" frame="Nodding (Field) 1" direction="ESE" />
+    <item hash="991cfba2a868436c07163d23256ec1f4" sprite="Garosh (U)" width="40" height="40" frame="Nodding (Field) 1" direction="ENE" />
+    <item hash="f09d09b141f42e89b9ff1800f853e6f2" sprite="Garosh (U)" width="40" height="40" frame="Nodding (Field) 1" direction="NNE" />
+    <item hash="ff2caf791030628756c3671d1526b664" sprite="Garosh (U)" width="40" height="40" frame="Nodding (Field) 2" direction="SSE" />
+    <item hash="85e20c6028cd225ed88a7a5074624d38" sprite="Garosh (U)" width="40" height="40" frame="Nodding (Field) 2" direction="ESE" />
+    <item hash="267ab44710b9974cd9c963ea1bebfdf1" sprite="Garosh (U)" width="40" height="40" frame="Nodding (Field) 2" direction="ENE" />
+    <item hash="90d1bd852849e776832a7fac339fcff5" sprite="Garosh (U)" width="40" height="40" frame="Nodding (Field) 2" direction="NNE" />
+    <item hash="156a2c3e6bfc3fed08d593223419f361" sprite="Garosh (U)" width="40" height="40" frame="ShakingHead (Field) 1" direction="SSE" />
+    <item hash="4263dc9ce386f3884a3815ab698e3e42" sprite="Garosh (U)" width="40" height="40" frame="ShakingHead (Field) 1" direction="ESE" />
+    <item hash="f20d9aaba5cf676b4e83002fee7a7e2b" sprite="Garosh (U)" width="40" height="40" frame="ShakingHead (Field) 1" direction="ENE" />
+    <item hash="57be54f6b6e393f8609b29759f9e8fe5" sprite="Garosh (U)" width="40" height="40" frame="ShakingHead (Field) 1" direction="NNE" />
+    <item hash="8b4852a9fb806a067be64960ef9b0249" sprite="Garosh (U)" width="40" height="40" frame="ShakingHead (Field) 2" direction="SSE" />
+    <item hash="03f4d6bf4bdfaf6c19a5d53a6cf45c04" sprite="Garosh (U)" width="40" height="40" frame="ShakingHead (Field) 2" direction="ESE" />
+    <item hash="0b3cdc1afbd9c5bd76d59e364c75afef" sprite="Garosh (U)" width="40" height="40" frame="ShakingHead (Field) 2" direction="ENE" />
+    <item hash="9be3570c56fc293af12a0fe9057629c5" sprite="Garosh (U)" width="40" height="40" frame="ShakingHead (Field) 2" direction="NNE" />
     <item hash="335ca08badb716a437048ad291520f56" sprite="Garosh (U)" width="40" height="40" frame="Walking 1" direction="SSE" />
     <item hash="fd85f0dab51d20b2336bf8516099dd72" sprite="Garosh (U)" width="40" height="40" frame="Walking 1" direction="ESE" />
     <item hash="1fd5afa04be5909d7f34911821c7df4f" sprite="Garosh (U)" width="40" height="40" frame="Walking 1" direction="ENE" />
@@ -8231,16 +8231,16 @@
     <item hash="6ee4747b876e8db4a913ae1df3ce4f1d" sprite="Goriate" width="40" height="40" frame="Nodding (Field) 2" direction="ESE" />
     <item hash="a56f392cfa6b802f034a7e7ef4aa727e" sprite="Goriate" width="40" height="40" frame="Nodding (Field) 2" direction="ENE" />
     <item hash="d24674d0728557090091b41ab6188e4c" sprite="Goriate" width="40" height="40" frame="Nodding (Field) 2" direction="NNE" />
-    <item hash="1c0543407d467c93076cd51e21f4f214" sprite="Goriate" width="40" height="40" frame="Nodding (Quick) 2" direction="SSE" />
-    <item hash="6c643d0b7b69dd79cf6afaa42fe2e585" sprite="Goriate" width="40" height="40" frame="Nodding (Quick) 2" direction="ESE" />
-    <item hash="bc2026c0e580e3927023d4d9fccbdff6" sprite="Goriate" width="40" height="40" frame="Nodding (Quick) 2" direction="ENE" />
-    <item hash="5173a6230f65f2142676bee7486e265e" sprite="Goriate" width="40" height="40" frame="Nodding (Quick) 2" direction="NNE" />
-    <item hash="c6fe3c9bc7588c6d100e3f41d704d795" sprite="Goriate" width="40" height="40" frame="Nodding (Quick) 3" direction="SSE" />
-    <item hash="37ad974c5413e4e140558313a6dcb064" sprite="Goriate" width="40" height="40" frame="Nodding (Quick) 3" direction="ESE" />
-    <item hash="d4f85320d89cfca4d993cffdd54a8942" sprite="Goriate" width="40" height="40" frame="Nodding (Quick) 3" direction="ENE" />
-    <item hash="3b3ee1f7c6d02c3364175ab44042428d" sprite="Goriate" width="40" height="40" frame="Nodding (Quick) 3" direction="NNE" />
-    <item hash="1c8b9c4d4450ea951db2c19e80e1a141" sprite="Goriate" width="40" height="40" frame="RaisingFanAndPointing (1 Direction) 1" direction="SSE" />
-    <item hash="c99bbbadb986f7fc9e1ff091d27a72fb" sprite="Goriate" width="40" height="40" frame="RaisingFanAndPointing (1 Direction) 2" direction="SSE" />
+    <item hash="1c0543407d467c93076cd51e21f4f214" sprite="Goriate" width="40" height="40" frame="Nodding (Field) 3" direction="SSE" />
+    <item hash="6c643d0b7b69dd79cf6afaa42fe2e585" sprite="Goriate" width="40" height="40" frame="Nodding (Field) 3" direction="ESE" />
+    <item hash="bc2026c0e580e3927023d4d9fccbdff6" sprite="Goriate" width="40" height="40" frame="Nodding (Field) 3" direction="ENE" />
+    <item hash="5173a6230f65f2142676bee7486e265e" sprite="Goriate" width="40" height="40" frame="Nodding (Field) 3" direction="NNE" />
+    <item hash="c6fe3c9bc7588c6d100e3f41d704d795" sprite="Goriate" width="40" height="40" frame="Nodding (Field) 4" direction="SSE" />
+    <item hash="37ad974c5413e4e140558313a6dcb064" sprite="Goriate" width="40" height="40" frame="Nodding (Field) 4" direction="ESE" />
+    <item hash="d4f85320d89cfca4d993cffdd54a8942" sprite="Goriate" width="40" height="40" frame="Nodding (Field) 4" direction="ENE" />
+    <item hash="3b3ee1f7c6d02c3364175ab44042428d" sprite="Goriate" width="40" height="40" frame="Nodding (Field) 4" direction="NNE" />
+    <item hash="1c8b9c4d4450ea951db2c19e80e1a141" sprite="Goriate" width="40" height="40" frame="RaisingFanAndPointing 1" direction="SSE" />
+    <item hash="c99bbbadb986f7fc9e1ff091d27a72fb" sprite="Goriate" width="40" height="40" frame="RaisingFanAndPointing 2" direction="SSE" />
     <item hash="1d75df4827e04119a5a7daa895ee86c3" sprite="Goriate" width="40" height="40" frame="ShakingHead (Battle) 1" direction="SSE" />
     <item hash="8b572f147ab3cf94b99a5c7946e50519" sprite="Goriate" width="40" height="40" frame="ShakingHead (Battle) 1" direction="ESE" />
     <item hash="b808d664714a025b5a52f7643f5a7560" sprite="Goriate" width="40" height="40" frame="ShakingHead (Battle) 1" direction="ENE" />
@@ -8839,14 +8839,14 @@
     <item hash="868bc59592a5c8e7faf51cc235f13828" sprite="Gracia (P2) (Weaponless)" width="40" height="40" frame="Walking 4" direction="ESE" />
     <item hash="768df0cde5725729a5ca33891883b70c" sprite="Gracia (P2) (Weaponless)" width="40" height="40" frame="Walking 4" direction="ENE" />
     <item hash="3ac54ee9c2189a3d2cefb762265e0083" sprite="Gracia (P2) (Weaponless)" width="40" height="40" frame="Walking 4" direction="NNE" />
-    <item hash="b73b7af8d28d22502724ea8c46229058" sprite="Grantack" width="40" height="40" frame="Idle (Bad Frames) 1" direction="SSE" />
-    <item hash="1a77ee8208b623fc24af56bd28b18fd5" sprite="Grantack" width="40" height="40" frame="Idle (Bad Frames) 1" direction="ESE" />
-    <item hash="5a75d09187c9d57fe17051289a43f52a" sprite="Grantack" width="40" height="40" frame="Idle (Bad Frames) 1" direction="ENE" />
-    <item hash="9c498dac821fa8f2236cf15beeb1753a" sprite="Grantack" width="40" height="40" frame="Idle (Bad Frames) 1" direction="NNE" />
-    <item hash="915ed405390373df292b0f798d2ee0c5" sprite="Grantack" width="40" height="40" frame="Idle (Bad Frames) 2" direction="SSE" />
-    <item hash="2585929f8322d40b38d77b5c7436022b" sprite="Grantack" width="40" height="40" frame="Idle (Bad Frames) 2" direction="ESE" />
-    <item hash="30109d1aa4b1bf8ee4bfdf1170e0fcfe" sprite="Grantack" width="40" height="40" frame="Idle (Bad Frames) 2" direction="ENE" />
-    <item hash="24e0a148d1d482d1dfa9008efeb58161" sprite="Grantack" width="40" height="40" frame="Idle (Bad Frames) 2" direction="NNE" />
+    <item hash="b73b7af8d28d22502724ea8c46229058" sprite="Grantack" width="40" height="40" frame="Idle (Bad) 1" direction="SSE" />
+    <item hash="1a77ee8208b623fc24af56bd28b18fd5" sprite="Grantack" width="40" height="40" frame="Idle (Bad) 1" direction="ESE" />
+    <item hash="5a75d09187c9d57fe17051289a43f52a" sprite="Grantack" width="40" height="40" frame="Idle (Bad) 1" direction="ENE" />
+    <item hash="9c498dac821fa8f2236cf15beeb1753a" sprite="Grantack" width="40" height="40" frame="Idle (Bad) 1" direction="NNE" />
+    <item hash="915ed405390373df292b0f798d2ee0c5" sprite="Grantack" width="40" height="40" frame="Idle (Bad) 2" direction="SSE" />
+    <item hash="2585929f8322d40b38d77b5c7436022b" sprite="Grantack" width="40" height="40" frame="Idle (Bad) 2" direction="ESE" />
+    <item hash="30109d1aa4b1bf8ee4bfdf1170e0fcfe" sprite="Grantack" width="40" height="40" frame="Idle (Bad) 2" direction="ENE" />
+    <item hash="24e0a148d1d482d1dfa9008efeb58161" sprite="Grantack" width="40" height="40" frame="Idle (Bad) 2" direction="NNE" />
     <item hash="127bba576247bc5421c40a95d646c003" sprite="Grantack" width="40" height="40" frame="Idle 1" direction="S" />
     <item hash="ece49fc2dcd80d8d66b0dec7e0580bbc" sprite="Grantack" width="40" height="40" frame="Idle 1" direction="SSE" />
     <item hash="81f572ef8992d1e9f77bcbddc33fd408" sprite="Grantack" width="40" height="40" frame="Idle 1" direction="ESE" />
@@ -8879,14 +8879,14 @@
     <item hash="465e528bca0889d6ff46b76475efe820" sprite="Grantack" width="40" height="40" frame="Idle 6" direction="NNE" />
     <item hash="0326ae8e8a676a76a29ead7fc8b0b793" sprite="Grantack" width="40" height="40" frame="Kneeling 1" direction="NNE" />
     <item hash="697cafd3a90115b6c603a9ed51dd5a68" sprite="Grantack" width="40" height="40" frame="Kneeling 2" direction="NNE" />
-    <item hash="8c4eb1fa5a8acdf00fcc253466a7d23b" sprite="Grantack" width="40" height="40" frame="Nodding (Bad Offsets) 1" direction="SSE" />
-    <item hash="aadd677896fd2fafaf5fe1b669b1762f" sprite="Grantack" width="40" height="40" frame="Nodding (Bad Offsets) 1" direction="ESE" />
-    <item hash="66f3e7a4f07b249ea4f404ed4f32efb5" sprite="Grantack" width="40" height="40" frame="Nodding (Bad Offsets) 1" direction="ENE" />
-    <item hash="e8c749426628b39760866c0324624992" sprite="Grantack" width="40" height="40" frame="Nodding (Bad Offsets) 1" direction="NNE" />
-    <item hash="751906acf3bcfb469915f6c79ebcbb73" sprite="Grantack" width="40" height="40" frame="Nodding (Bad Offsets) 2" direction="SSE" />
-    <item hash="1a6c6c019d043ae7e78815a17dd7f3f7" sprite="Grantack" width="40" height="40" frame="Nodding (Bad Offsets) 2" direction="ESE" />
-    <item hash="d571028f16635271c832a3cd7fdc59c3" sprite="Grantack" width="40" height="40" frame="Nodding (Bad Offsets) 2" direction="ENE" />
-    <item hash="023051c837dfee29f9292a8d0b35e255" sprite="Grantack" width="40" height="40" frame="Nodding (Bad Offsets) 2" direction="NNE" />
+    <item hash="8c4eb1fa5a8acdf00fcc253466a7d23b" sprite="Grantack" width="40" height="40" frame="Nodding (Bad) 1" direction="SSE" />
+    <item hash="aadd677896fd2fafaf5fe1b669b1762f" sprite="Grantack" width="40" height="40" frame="Nodding (Bad) 1" direction="ESE" />
+    <item hash="66f3e7a4f07b249ea4f404ed4f32efb5" sprite="Grantack" width="40" height="40" frame="Nodding (Bad) 1" direction="ENE" />
+    <item hash="e8c749426628b39760866c0324624992" sprite="Grantack" width="40" height="40" frame="Nodding (Bad) 1" direction="NNE" />
+    <item hash="751906acf3bcfb469915f6c79ebcbb73" sprite="Grantack" width="40" height="40" frame="Nodding (Bad) 2" direction="SSE" />
+    <item hash="1a6c6c019d043ae7e78815a17dd7f3f7" sprite="Grantack" width="40" height="40" frame="Nodding (Bad) 2" direction="ESE" />
+    <item hash="d571028f16635271c832a3cd7fdc59c3" sprite="Grantack" width="40" height="40" frame="Nodding (Bad) 2" direction="ENE" />
+    <item hash="023051c837dfee29f9292a8d0b35e255" sprite="Grantack" width="40" height="40" frame="Nodding (Bad) 2" direction="NNE" />
     <item hash="a8801a1bdd756cca2d6a3d5649e079a9" sprite="Grantack" width="40" height="40" frame="Nodding 1" direction="SSE" />
     <item hash="b72d478517ee167618344371a56216a5" sprite="Grantack" width="40" height="40" frame="Nodding 1" direction="ESE" />
     <item hash="d21a4b0f8e51e1f0f93dd8a5f4f2b9e6" sprite="Grantack" width="40" height="40" frame="Nodding 1" direction="ENE" />
@@ -9492,6 +9492,14 @@
     <item hash="d14fc9fabd22d062734272f00633c90d" sprite="Hayward (P1)" width="40" height="40" frame="Idle (Battle) 3" direction="ENE" />
     <item hash="df6c4967dd2894f42b3c471ef53e25ab" sprite="Hayward (P1)" width="40" height="40" frame="Idle (Battle) 3" direction="NNE" />
     <item hash="d673f39bc43013ba6157a6efb1edd389" sprite="Hayward (P1)" width="40" height="40" frame="Idle (Battle) 3" direction="N" />
+    <item hash="fc1fb24565cfafd19690eba9725d5c6e" sprite="Hayward (P1)" width="40" height="40" frame="Nodding (Bad) 1" direction="SSE" />
+    <item hash="d0d11380d28684ce0ac9bc29d97f5e4d" sprite="Hayward (P1)" width="40" height="40" frame="Nodding (Bad) 1" direction="ESE" />
+    <item hash="610d36fb2f64ab33224f0bd7b65d79fe" sprite="Hayward (P1)" width="40" height="40" frame="Nodding (Bad) 1" direction="ENE" />
+    <item hash="0da3f2dd5107088187da4cffae339014" sprite="Hayward (P1)" width="40" height="40" frame="Nodding (Bad) 1" direction="NNE" />
+    <item hash="e9ff90e92d0f6e824279845723611b0e" sprite="Hayward (P1)" width="40" height="40" frame="Nodding (Bad) 2" direction="SSE" />
+    <item hash="f8fbaa1aafa38bfe7600a335dd81c6db" sprite="Hayward (P1)" width="40" height="40" frame="Nodding (Bad) 2" direction="ESE" />
+    <item hash="081b7d0aa30015a9e9e00ccafca0b59f" sprite="Hayward (P1)" width="40" height="40" frame="Nodding (Bad) 2" direction="ENE" />
+    <item hash="f451bc3f013c948d7af10ba064decee8" sprite="Hayward (P1)" width="40" height="40" frame="Nodding (Bad) 2" direction="NNE" />
     <item hash="6e3c8faba17cd0d970be90cb28e3a430" sprite="Hayward (P1)" width="40" height="40" frame="Nodding (Battle) 1" direction="SSE" />
     <item hash="e64f80a150342d6827a020890f372c27" sprite="Hayward (P1)" width="40" height="40" frame="Nodding (Battle) 1" direction="ESE" />
     <item hash="49e6206d8e9da910c692dfc79884ccc0" sprite="Hayward (P1)" width="40" height="40" frame="Nodding (Battle) 1" direction="ENE" />
@@ -9500,14 +9508,14 @@
     <item hash="44173211b4af507d255817baa0b04097" sprite="Hayward (P1)" width="40" height="40" frame="Nodding (Battle) 2" direction="ESE" />
     <item hash="527d584676b00b583accca19b4308263" sprite="Hayward (P1)" width="40" height="40" frame="Nodding (Battle) 2" direction="ENE" />
     <item hash="fd805b41db1fa608e27a9c749f041968" sprite="Hayward (P1)" width="40" height="40" frame="Nodding (Battle) 2" direction="NNE" />
-    <item hash="fc1fb24565cfafd19690eba9725d5c6e" sprite="Hayward (P1)" width="40" height="40" frame="Nodding (Misaligned) 2" direction="SSE" />
-    <item hash="d0d11380d28684ce0ac9bc29d97f5e4d" sprite="Hayward (P1)" width="40" height="40" frame="Nodding (Misaligned) 2" direction="ESE" />
-    <item hash="610d36fb2f64ab33224f0bd7b65d79fe" sprite="Hayward (P1)" width="40" height="40" frame="Nodding (Misaligned) 2" direction="ENE" />
-    <item hash="0da3f2dd5107088187da4cffae339014" sprite="Hayward (P1)" width="40" height="40" frame="Nodding (Misaligned) 2" direction="NNE" />
-    <item hash="e9ff90e92d0f6e824279845723611b0e" sprite="Hayward (P1)" width="40" height="40" frame="Nodding (Misaligned) 3" direction="SSE" />
-    <item hash="f8fbaa1aafa38bfe7600a335dd81c6db" sprite="Hayward (P1)" width="40" height="40" frame="Nodding (Misaligned) 3" direction="ESE" />
-    <item hash="081b7d0aa30015a9e9e00ccafca0b59f" sprite="Hayward (P1)" width="40" height="40" frame="Nodding (Misaligned) 3" direction="ENE" />
-    <item hash="f451bc3f013c948d7af10ba064decee8" sprite="Hayward (P1)" width="40" height="40" frame="Nodding (Misaligned) 3" direction="NNE" />
+    <item hash="730df05c1b705993f62248433ac92245" sprite="Hayward (P1)" width="40" height="40" frame="ShakingHead (Bad) 1" direction="SSE" />
+    <item hash="fa1fa510797a85d7f7df31f25b9c940e" sprite="Hayward (P1)" width="40" height="40" frame="ShakingHead (Bad) 1" direction="ESE" />
+    <item hash="b2c6b79d8e4c75677ccdb1e575c40c3f" sprite="Hayward (P1)" width="40" height="40" frame="ShakingHead (Bad) 1" direction="ENE" />
+    <item hash="ab2ff88e08e3ea2d42a26960848fba6d" sprite="Hayward (P1)" width="40" height="40" frame="ShakingHead (Bad) 1" direction="NNE" />
+    <item hash="090c1cc6993531bf592dc360de285acc" sprite="Hayward (P1)" width="40" height="40" frame="ShakingHead (Bad) 2" direction="SSE" />
+    <item hash="0bc01f407117156346b50560a5fb895b" sprite="Hayward (P1)" width="40" height="40" frame="ShakingHead (Bad) 2" direction="ESE" />
+    <item hash="8ce17ddf99bae537bcd60bd03609ff9b" sprite="Hayward (P1)" width="40" height="40" frame="ShakingHead (Bad) 2" direction="ENE" />
+    <item hash="ace468b5c82d9889c46756a174a8a3a3" sprite="Hayward (P1)" width="40" height="40" frame="ShakingHead (Bad) 2" direction="NNE" />
     <item hash="f16463dc096353247ae33c82af6ea379" sprite="Hayward (P1)" width="40" height="40" frame="ShakingHead (Battle) 1" direction="SSE" />
     <item hash="c8200f0eb7810aabe4898f0ceca98329" sprite="Hayward (P1)" width="40" height="40" frame="ShakingHead (Battle) 1" direction="ESE" />
     <item hash="44b8a9669843feb066ef95db8555d023" sprite="Hayward (P1)" width="40" height="40" frame="ShakingHead (Battle) 1" direction="ENE" />
@@ -9516,14 +9524,6 @@
     <item hash="bc069828b6b02ed89a4a112e9136a718" sprite="Hayward (P1)" width="40" height="40" frame="ShakingHead (Battle) 2" direction="ESE" />
     <item hash="57c19316fdaa698f7692e1ee4d390407" sprite="Hayward (P1)" width="40" height="40" frame="ShakingHead (Battle) 2" direction="ENE" />
     <item hash="fc67906700970aa0344982149f10d31f" sprite="Hayward (P1)" width="40" height="40" frame="ShakingHead (Battle) 2" direction="NNE" />
-    <item hash="730df05c1b705993f62248433ac92245" sprite="Hayward (P1)" width="40" height="40" frame="ShakingHead (Misaligned) 2" direction="SSE" />
-    <item hash="fa1fa510797a85d7f7df31f25b9c940e" sprite="Hayward (P1)" width="40" height="40" frame="ShakingHead (Misaligned) 2" direction="ESE" />
-    <item hash="b2c6b79d8e4c75677ccdb1e575c40c3f" sprite="Hayward (P1)" width="40" height="40" frame="ShakingHead (Misaligned) 2" direction="ENE" />
-    <item hash="ab2ff88e08e3ea2d42a26960848fba6d" sprite="Hayward (P1)" width="40" height="40" frame="ShakingHead (Misaligned) 2" direction="NNE" />
-    <item hash="090c1cc6993531bf592dc360de285acc" sprite="Hayward (P1)" width="40" height="40" frame="ShakingHead (Misaligned) 3" direction="SSE" />
-    <item hash="0bc01f407117156346b50560a5fb895b" sprite="Hayward (P1)" width="40" height="40" frame="ShakingHead (Misaligned) 3" direction="ESE" />
-    <item hash="8ce17ddf99bae537bcd60bd03609ff9b" sprite="Hayward (P1)" width="40" height="40" frame="ShakingHead (Misaligned) 3" direction="ENE" />
-    <item hash="ace468b5c82d9889c46756a174a8a3a3" sprite="Hayward (P1)" width="40" height="40" frame="ShakingHead (Misaligned) 3" direction="NNE" />
     <item hash="bb663fd59e7e57a8b6d9cb6a3fec8b64" sprite="Hayward (P1)" width="40" height="40" frame="Walking 1" direction="S" />
     <item hash="86b27bcb79c87bc16a9ec7400a8d5231" sprite="Hayward (P1)" width="40" height="40" frame="Walking 1" direction="SSE" />
     <item hash="258274bb60185e4e0967645e120a57c0" sprite="Hayward (P1)" width="40" height="40" frame="Walking 1" direction="ESE" />
@@ -9664,18 +9664,18 @@
     <item hash="ced1ad13fdef37de2adf098e445c30ed" sprite="Hayward (U)" width="40" height="40" frame="Nodding (Battle) 2" direction="ESE" />
     <item hash="0d7117398fa73bf730c948c1a3e1d0e0" sprite="Hayward (U)" width="40" height="40" frame="Nodding (Battle) 2" direction="ENE" />
     <item hash="312c548366e1029f645c3bf3ce0ca18c" sprite="Hayward (U)" width="40" height="40" frame="Nodding (Battle) 2" direction="NNE" />
+    <item hash="248d83c4ab416767a990f9ee00a0ae83" sprite="Hayward (U)" width="40" height="40" frame="Nodding (Field) 1" direction="S" />
     <item hash="83385b39df82793135702c4f1b5cb465" sprite="Hayward (U)" width="40" height="40" frame="Nodding (Field) 1" direction="SSE" />
     <item hash="50993d82b65161f13e188012827fc3f4" sprite="Hayward (U)" width="40" height="40" frame="Nodding (Field) 1" direction="ESE" />
     <item hash="d3f8f30778d192e9a1fb87be4e115aa5" sprite="Hayward (U)" width="40" height="40" frame="Nodding (Field) 1" direction="ENE" />
     <item hash="35300b4aa67779ca542f3a2fd8cd1307" sprite="Hayward (U)" width="40" height="40" frame="Nodding (Field) 1" direction="NNE" />
+    <item hash="a435fa9b06bc9367547831f1c70e0ed0" sprite="Hayward (U)" width="40" height="40" frame="Nodding (Field) 1" direction="N" />
+    <item hash="2782e1171dfa6dc544396b0a4ef7bdc7" sprite="Hayward (U)" width="40" height="40" frame="Nodding (Field) 2" direction="S" />
     <item hash="9b2a1cd02187f963bcfb20192f05b843" sprite="Hayward (U)" width="40" height="40" frame="Nodding (Field) 2" direction="SSE" />
     <item hash="7b25c3f47289d665cf9a3af6fe7647c5" sprite="Hayward (U)" width="40" height="40" frame="Nodding (Field) 2" direction="ESE" />
     <item hash="af4d0a9ba6b6e8d6261086fa3e0baeba" sprite="Hayward (U)" width="40" height="40" frame="Nodding (Field) 2" direction="ENE" />
     <item hash="c0834c7334d082984ae3c5ad8e4e08f0" sprite="Hayward (U)" width="40" height="40" frame="Nodding (Field) 2" direction="NNE" />
-    <item hash="248d83c4ab416767a990f9ee00a0ae83" sprite="Hayward (U)" width="40" height="40" frame="Nodding 2" direction="S" />
-    <item hash="a435fa9b06bc9367547831f1c70e0ed0" sprite="Hayward (U)" width="40" height="40" frame="Nodding 2" direction="N" />
-    <item hash="2782e1171dfa6dc544396b0a4ef7bdc7" sprite="Hayward (U)" width="40" height="40" frame="Nodding 3" direction="S" />
-    <item hash="2797e614ae91a1809f7c9389c5d7c488" sprite="Hayward (U)" width="40" height="40" frame="Nodding 3" direction="N" />
+    <item hash="2797e614ae91a1809f7c9389c5d7c488" sprite="Hayward (U)" width="40" height="40" frame="Nodding (Field) 2" direction="N" />
     <item hash="477b28579d30a54dfdc03d7717ebdf5f" sprite="Hayward (U)" width="40" height="40" frame="OnGround 1" direction="SSE" />
     <item hash="113f0f32d2ecee0524eafac943ca026f" sprite="Hayward (U)" width="40" height="40" frame="OnGround 1" direction="ESE" />
     <item hash="9e8f841cc1f5a3a3356d6cf7ea446a66" sprite="Hayward (U)" width="40" height="40" frame="OnGround 1" direction="ENE" />
@@ -9688,18 +9688,18 @@
     <item hash="be402ecc83f1089b59717783e4cba687" sprite="Hayward (U)" width="40" height="40" frame="ShakingHead (Battle) 2" direction="ESE" />
     <item hash="bdf4db2fad53d870a7c8e2ef558a9a36" sprite="Hayward (U)" width="40" height="40" frame="ShakingHead (Battle) 2" direction="ENE" />
     <item hash="221f922bba03c1eab86aed63dec261ed" sprite="Hayward (U)" width="40" height="40" frame="ShakingHead (Battle) 2" direction="NNE" />
+    <item hash="9800c5170741faefd3e743f30b293a6d" sprite="Hayward (U)" width="40" height="40" frame="ShakingHead (Field) 1" direction="S" />
     <item hash="220f104bdef6682b04d7eea372652654" sprite="Hayward (U)" width="40" height="40" frame="ShakingHead (Field) 1" direction="SSE" />
     <item hash="9ed0838c1f6ff9a5d4e2ffc01aaa42ed" sprite="Hayward (U)" width="40" height="40" frame="ShakingHead (Field) 1" direction="ESE" />
     <item hash="fa7519655c98a66c14dea6b1aade57bb" sprite="Hayward (U)" width="40" height="40" frame="ShakingHead (Field) 1" direction="ENE" />
     <item hash="906e0c13fb8b936b93c3b3a0670e77f9" sprite="Hayward (U)" width="40" height="40" frame="ShakingHead (Field) 1" direction="NNE" />
+    <item hash="081cef39ae27173274be94578882a768" sprite="Hayward (U)" width="40" height="40" frame="ShakingHead (Field) 1" direction="N" />
+    <item hash="c5c5a80f59896e085b32c121bd1b70ca" sprite="Hayward (U)" width="40" height="40" frame="ShakingHead (Field) 2" direction="S" />
     <item hash="c89c8098a83ead14dffa036eec10960e" sprite="Hayward (U)" width="40" height="40" frame="ShakingHead (Field) 2" direction="SSE" />
     <item hash="98a8277392e02683170ce4b27ca62c6c" sprite="Hayward (U)" width="40" height="40" frame="ShakingHead (Field) 2" direction="ESE" />
     <item hash="d8d4db41e609fec47da861f20fafe182" sprite="Hayward (U)" width="40" height="40" frame="ShakingHead (Field) 2" direction="ENE" />
     <item hash="28d526818e47a531c3e80a960e8f5752" sprite="Hayward (U)" width="40" height="40" frame="ShakingHead (Field) 2" direction="NNE" />
-    <item hash="9800c5170741faefd3e743f30b293a6d" sprite="Hayward (U)" width="40" height="40" frame="ShakingHead 2" direction="S" />
-    <item hash="081cef39ae27173274be94578882a768" sprite="Hayward (U)" width="40" height="40" frame="ShakingHead 2" direction="N" />
-    <item hash="c5c5a80f59896e085b32c121bd1b70ca" sprite="Hayward (U)" width="40" height="40" frame="ShakingHead 3" direction="S" />
-    <item hash="da24bb103d66170693c93158687071fb" sprite="Hayward (U)" width="40" height="40" frame="ShakingHead 3" direction="N" />
+    <item hash="da24bb103d66170693c93158687071fb" sprite="Hayward (U)" width="40" height="40" frame="ShakingHead (Field) 2" direction="N" />
     <item hash="f6341e67efd8c0ba4c0498ea464edbf7" sprite="Hayward (U)" width="40" height="40" frame="Walking 1" direction="S" />
     <item hash="7ed349177c02f3158482745b923d0d70" sprite="Hayward (U)" width="40" height="40" frame="Walking 1" direction="SSE" />
     <item hash="c26897455035c152e16b267d98c49c21" sprite="Hayward (U)" width="40" height="40" frame="Walking 1" direction="ESE" />
@@ -12382,24 +12382,24 @@
     <item hash="28a9185a6d52a21e1ba9a50ae122af24" sprite="Julian (P1) (Weaponless)" width="40" height="40" frame="Idle 3" direction="ENE" />
     <item hash="e7b9150471c0921f5feed3bc5a77032b" sprite="Julian (P1) (Weaponless)" width="40" height="40" frame="Idle 3" direction="NNE" />
     <item hash="00df7d607d0323b33fd0ea48f3fc01f4" sprite="Julian (P1) (Weaponless)" width="40" height="40" frame="Idle 3" direction="N" />
-    <item hash="abdd58d3ce8e2619f5d908ed795c27a4" sprite="Julian (P1) (Weaponless)" width="40" height="40" frame="LookingBack 1" direction="SSE" />
-    <item hash="9f176bc34390f7da859fc81514432af2" sprite="Julian (P1) (Weaponless)" width="40" height="40" frame="LookingBack 1" direction="ESE" />
-    <item hash="76c14078139be41d1751593e00b1b113" sprite="Julian (P1) (Weaponless)" width="40" height="40" frame="LookingBack 1" direction="ENE" />
-    <item hash="920b97a18f159066ccd73de5b70a3fee" sprite="Julian (P1) (Weaponless)" width="40" height="40" frame="LookingBack 1" direction="NNE" />
-    <item hash="4ff39996c18cb5d112cd06a1d931910b" sprite="Julian (P1) (Weaponless)" width="40" height="40" frame="LookingBack 2" direction="SSE" />
-    <item hash="4158d972616d4f6ed2115772e851e045" sprite="Julian (P1) (Weaponless)" width="40" height="40" frame="LookingBack 2" direction="ESE" />
-    <item hash="63764256e175e7d4e48630bfb5086b02" sprite="Julian (P1) (Weaponless)" width="40" height="40" frame="LookingBack 2" direction="ENE" />
-    <item hash="b1794ea0bf693f84236369b2164b99ff" sprite="Julian (P1) (Weaponless)" width="40" height="40" frame="LookingBack 2" direction="NNE" />
-    <item hash="41d74457b21afdb858cbd3be00d2be48" sprite="Julian (P1) (Weaponless)" width="40" height="40" frame="LookingBack 3" direction="SSE" />
-    <item hash="a04992a9774d6bdebdaaf654d9105f8f" sprite="Julian (P1) (Weaponless)" width="40" height="40" frame="LookingBack 3" direction="ESE" />
-    <item hash="33307d3a43746faede57d029a3c9b6f9" sprite="Julian (P1) (Weaponless)" width="40" height="40" frame="LookingBack 3" direction="ENE" />
-    <item hash="89ba2d8a0a3d66ad8664f3b952d52a70" sprite="Julian (P1) (Weaponless)" width="40" height="40" frame="LookingBack 3" direction="NNE" />
-    <item hash="402aa491b348535212457b3d28f35190" sprite="Julian (P1) (Weaponless)" width="40" height="40" frame="LookingBackThenToIdle 2" direction="S" />
-    <item hash="a3c89283d56abbc636504153ba41c556" sprite="Julian (P1) (Weaponless)" width="40" height="40" frame="LookingBackThenToIdle 2" direction="N" />
-    <item hash="2de97f07af8a352ea591f03e388e3374" sprite="Julian (P1) (Weaponless)" width="40" height="40" frame="LookingBackThenToIdle 3" direction="S" />
-    <item hash="bd28eb4440785726d67eab51e740c18c" sprite="Julian (P1) (Weaponless)" width="40" height="40" frame="LookingBackThenToIdle 3" direction="N" />
-    <item hash="bf0c2aa27637d2518240e2e23e8ab1da" sprite="Julian (P1) (Weaponless)" width="40" height="40" frame="LookingBackThenToIdle 4" direction="S" />
-    <item hash="deaeb8062594e0ceca061278e58338dd" sprite="Julian (P1) (Weaponless)" width="40" height="40" frame="LookingBackThenToIdle 4" direction="N" />
+    <item hash="402aa491b348535212457b3d28f35190" sprite="Julian (P1) (Weaponless)" width="40" height="40" frame="LookingBackThenToIdle 1" direction="S" />
+    <item hash="abdd58d3ce8e2619f5d908ed795c27a4" sprite="Julian (P1) (Weaponless)" width="40" height="40" frame="LookingBackThenToIdle 1" direction="SSE" />
+    <item hash="9f176bc34390f7da859fc81514432af2" sprite="Julian (P1) (Weaponless)" width="40" height="40" frame="LookingBackThenToIdle 1" direction="ESE" />
+    <item hash="76c14078139be41d1751593e00b1b113" sprite="Julian (P1) (Weaponless)" width="40" height="40" frame="LookingBackThenToIdle 1" direction="ENE" />
+    <item hash="920b97a18f159066ccd73de5b70a3fee" sprite="Julian (P1) (Weaponless)" width="40" height="40" frame="LookingBackThenToIdle 1" direction="NNE" />
+    <item hash="a3c89283d56abbc636504153ba41c556" sprite="Julian (P1) (Weaponless)" width="40" height="40" frame="LookingBackThenToIdle 1" direction="N" />
+    <item hash="2de97f07af8a352ea591f03e388e3374" sprite="Julian (P1) (Weaponless)" width="40" height="40" frame="LookingBackThenToIdle 2" direction="S" />
+    <item hash="4ff39996c18cb5d112cd06a1d931910b" sprite="Julian (P1) (Weaponless)" width="40" height="40" frame="LookingBackThenToIdle 2" direction="SSE" />
+    <item hash="4158d972616d4f6ed2115772e851e045" sprite="Julian (P1) (Weaponless)" width="40" height="40" frame="LookingBackThenToIdle 2" direction="ESE" />
+    <item hash="63764256e175e7d4e48630bfb5086b02" sprite="Julian (P1) (Weaponless)" width="40" height="40" frame="LookingBackThenToIdle 2" direction="ENE" />
+    <item hash="b1794ea0bf693f84236369b2164b99ff" sprite="Julian (P1) (Weaponless)" width="40" height="40" frame="LookingBackThenToIdle 2" direction="NNE" />
+    <item hash="bd28eb4440785726d67eab51e740c18c" sprite="Julian (P1) (Weaponless)" width="40" height="40" frame="LookingBackThenToIdle 2" direction="N" />
+    <item hash="bf0c2aa27637d2518240e2e23e8ab1da" sprite="Julian (P1) (Weaponless)" width="40" height="40" frame="LookingBackThenToIdle 3" direction="S" />
+    <item hash="41d74457b21afdb858cbd3be00d2be48" sprite="Julian (P1) (Weaponless)" width="40" height="40" frame="LookingBackThenToIdle 3" direction="SSE" />
+    <item hash="a04992a9774d6bdebdaaf654d9105f8f" sprite="Julian (P1) (Weaponless)" width="40" height="40" frame="LookingBackThenToIdle 3" direction="ESE" />
+    <item hash="33307d3a43746faede57d029a3c9b6f9" sprite="Julian (P1) (Weaponless)" width="40" height="40" frame="LookingBackThenToIdle 3" direction="ENE" />
+    <item hash="89ba2d8a0a3d66ad8664f3b952d52a70" sprite="Julian (P1) (Weaponless)" width="40" height="40" frame="LookingBackThenToIdle 3" direction="NNE" />
+    <item hash="deaeb8062594e0ceca061278e58338dd" sprite="Julian (P1) (Weaponless)" width="40" height="40" frame="LookingBackThenToIdle 3" direction="N" />
     <item hash="6c58e5831fb0883c940f1d89c6424952" sprite="Julian (P1) (Weaponless)" width="40" height="40" frame="Nodding 1" direction="S" />
     <item hash="22b723255d21fa30c9fb5a9613e2eb28" sprite="Julian (P1) (Weaponless)" width="40" height="40" frame="Nodding 1" direction="SSE" />
     <item hash="f106e47edce8884f402e0d6b93efc2db" sprite="Julian (P1) (Weaponless)" width="40" height="40" frame="Nodding 1" direction="ESE" />
@@ -12775,24 +12775,24 @@
     <item hash="4f593ccd4d76c33a379391c96f48006d" sprite="Julian (U) (Shield) (Weaponless)" width="40" height="40" frame="Idle 3" direction="ENE" />
     <item hash="922e547fa5a15da997e712288df896db" sprite="Julian (U) (Shield) (Weaponless)" width="40" height="40" frame="Idle 3" direction="NNE" />
     <item hash="65129275866c272bbcc7a96c804ee39a" sprite="Julian (U) (Shield) (Weaponless)" width="40" height="40" frame="Idle 3" direction="N" />
-    <item hash="a94d54aa0042adbd9b83d90619619378" sprite="Julian (U) (Shield) (Weaponless)" width="40" height="40" frame="LookingBack 1" direction="SSE" />
-    <item hash="d50ac2c0a2f6bd23002632c547460f74" sprite="Julian (U) (Shield) (Weaponless)" width="40" height="40" frame="LookingBack 1" direction="ESE" />
-    <item hash="813b145322fdeaa940b8dbc13f289980" sprite="Julian (U) (Shield) (Weaponless)" width="40" height="40" frame="LookingBack 1" direction="ENE" />
-    <item hash="1a3b35bb6e6a9e8ec8c8d18c3a8c9891" sprite="Julian (U) (Shield) (Weaponless)" width="40" height="40" frame="LookingBack 1" direction="NNE" />
-    <item hash="9a52d46197e940a7926fae235ff3da6b" sprite="Julian (U) (Shield) (Weaponless)" width="40" height="40" frame="LookingBack 2" direction="SSE" />
-    <item hash="d17adc2dc444a77cf4a6d2cd683bbfca" sprite="Julian (U) (Shield) (Weaponless)" width="40" height="40" frame="LookingBack 2" direction="ESE" />
-    <item hash="708746af2faf913e3f22428eba915636" sprite="Julian (U) (Shield) (Weaponless)" width="40" height="40" frame="LookingBack 2" direction="ENE" />
-    <item hash="81c033c381400f932860f2f3ace24982" sprite="Julian (U) (Shield) (Weaponless)" width="40" height="40" frame="LookingBack 2" direction="NNE" />
-    <item hash="3d6d5ef3049e759492c7800c8fad2efd" sprite="Julian (U) (Shield) (Weaponless)" width="40" height="40" frame="LookingBack 3" direction="SSE" />
-    <item hash="3ff257605685f3131feeff980295f162" sprite="Julian (U) (Shield) (Weaponless)" width="40" height="40" frame="LookingBack 3" direction="ESE" />
-    <item hash="f45e58b89d52d1609d7e109ab0337649" sprite="Julian (U) (Shield) (Weaponless)" width="40" height="40" frame="LookingBack 3" direction="ENE" />
-    <item hash="86409d8f8d08d511aee0bb43296ca8c8" sprite="Julian (U) (Shield) (Weaponless)" width="40" height="40" frame="LookingBack 3" direction="NNE" />
-    <item hash="308407c76171e7582b9b2023f6dead40" sprite="Julian (U) (Shield) (Weaponless)" width="40" height="40" frame="LookingBackThenToIdle 2" direction="S" />
-    <item hash="e472a4b038a91bd7a43b475d329ec85c" sprite="Julian (U) (Shield) (Weaponless)" width="40" height="40" frame="LookingBackThenToIdle 2" direction="N" />
-    <item hash="ba3e8ec3d1cc014901a978061ddab1a8" sprite="Julian (U) (Shield) (Weaponless)" width="40" height="40" frame="LookingBackThenToIdle 3" direction="S" />
-    <item hash="2090ea047452304c9e365cac0ad6c06e" sprite="Julian (U) (Shield) (Weaponless)" width="40" height="40" frame="LookingBackThenToIdle 3" direction="N" />
-    <item hash="f240072023424f3a55cf6ee054f626d5" sprite="Julian (U) (Shield) (Weaponless)" width="40" height="40" frame="LookingBackThenToIdle 4" direction="S" />
-    <item hash="a4c70062a2c448c1ed6a0687e743088f" sprite="Julian (U) (Shield) (Weaponless)" width="40" height="40" frame="LookingBackThenToIdle 4" direction="N" />
+    <item hash="308407c76171e7582b9b2023f6dead40" sprite="Julian (U) (Shield) (Weaponless)" width="40" height="40" frame="LookingBackThenToIdle 1" direction="S" />
+    <item hash="a94d54aa0042adbd9b83d90619619378" sprite="Julian (U) (Shield) (Weaponless)" width="40" height="40" frame="LookingBackThenToIdle 1" direction="SSE" />
+    <item hash="d50ac2c0a2f6bd23002632c547460f74" sprite="Julian (U) (Shield) (Weaponless)" width="40" height="40" frame="LookingBackThenToIdle 1" direction="ESE" />
+    <item hash="813b145322fdeaa940b8dbc13f289980" sprite="Julian (U) (Shield) (Weaponless)" width="40" height="40" frame="LookingBackThenToIdle 1" direction="ENE" />
+    <item hash="1a3b35bb6e6a9e8ec8c8d18c3a8c9891" sprite="Julian (U) (Shield) (Weaponless)" width="40" height="40" frame="LookingBackThenToIdle 1" direction="NNE" />
+    <item hash="e472a4b038a91bd7a43b475d329ec85c" sprite="Julian (U) (Shield) (Weaponless)" width="40" height="40" frame="LookingBackThenToIdle 1" direction="N" />
+    <item hash="ba3e8ec3d1cc014901a978061ddab1a8" sprite="Julian (U) (Shield) (Weaponless)" width="40" height="40" frame="LookingBackThenToIdle 2" direction="S" />
+    <item hash="9a52d46197e940a7926fae235ff3da6b" sprite="Julian (U) (Shield) (Weaponless)" width="40" height="40" frame="LookingBackThenToIdle 2" direction="SSE" />
+    <item hash="d17adc2dc444a77cf4a6d2cd683bbfca" sprite="Julian (U) (Shield) (Weaponless)" width="40" height="40" frame="LookingBackThenToIdle 2" direction="ESE" />
+    <item hash="708746af2faf913e3f22428eba915636" sprite="Julian (U) (Shield) (Weaponless)" width="40" height="40" frame="LookingBackThenToIdle 2" direction="ENE" />
+    <item hash="81c033c381400f932860f2f3ace24982" sprite="Julian (U) (Shield) (Weaponless)" width="40" height="40" frame="LookingBackThenToIdle 2" direction="NNE" />
+    <item hash="2090ea047452304c9e365cac0ad6c06e" sprite="Julian (U) (Shield) (Weaponless)" width="40" height="40" frame="LookingBackThenToIdle 2" direction="N" />
+    <item hash="f240072023424f3a55cf6ee054f626d5" sprite="Julian (U) (Shield) (Weaponless)" width="40" height="40" frame="LookingBackThenToIdle 3" direction="S" />
+    <item hash="3d6d5ef3049e759492c7800c8fad2efd" sprite="Julian (U) (Shield) (Weaponless)" width="40" height="40" frame="LookingBackThenToIdle 3" direction="SSE" />
+    <item hash="3ff257605685f3131feeff980295f162" sprite="Julian (U) (Shield) (Weaponless)" width="40" height="40" frame="LookingBackThenToIdle 3" direction="ESE" />
+    <item hash="f45e58b89d52d1609d7e109ab0337649" sprite="Julian (U) (Shield) (Weaponless)" width="40" height="40" frame="LookingBackThenToIdle 3" direction="ENE" />
+    <item hash="86409d8f8d08d511aee0bb43296ca8c8" sprite="Julian (U) (Shield) (Weaponless)" width="40" height="40" frame="LookingBackThenToIdle 3" direction="NNE" />
+    <item hash="a4c70062a2c448c1ed6a0687e743088f" sprite="Julian (U) (Shield) (Weaponless)" width="40" height="40" frame="LookingBackThenToIdle 3" direction="N" />
     <item hash="65ef6510eab962e6bcd8659625d5b61a" sprite="Julian (U) (Shield) (Weaponless)" width="40" height="40" frame="Nodding 1" direction="S" />
     <item hash="1e7d72f9ae481f68e1f76c73b60ef199" sprite="Julian (U) (Shield) (Weaponless)" width="40" height="40" frame="Nodding 1" direction="SSE" />
     <item hash="6bbb54a20bd2a3920fd21056b0e629ea" sprite="Julian (U) (Shield) (Weaponless)" width="40" height="40" frame="Nodding 1" direction="ESE" />
@@ -14977,6 +14977,10 @@
     <item hash="dd447ed92217b25b86d27c09d10e36d0" sprite="Masked Mage (Yellow)" width="40" height="40" frame="Idle (Field) 3" direction="ESE" />
     <item hash="63233f025dadd198d57001198570618b" sprite="Masked Mage (Yellow)" width="40" height="40" frame="Idle (Field) 3" direction="ENE" />
     <item hash="27fec51cb65bf1ec82216b1f3db3b968" sprite="Masked Mage (Yellow)" width="40" height="40" frame="Idle (Field) 3" direction="NNE" />
+    <item hash="7c57b240df75de3b9075c1aa33201d2b" sprite="Masked Mage (Yellow)" width="40" height="40" frame="Nodding (Battle) 1" direction="SSE" />
+    <item hash="219eee591e8c9ec1ad74e38b77fec07a" sprite="Masked Mage (Yellow)" width="40" height="40" frame="Nodding (Battle) 1" direction="ESE" />
+    <item hash="c9d644451e45a894129a96c4f9eeaed7" sprite="Masked Mage (Yellow)" width="40" height="40" frame="Nodding (Battle) 1" direction="ENE" />
+    <item hash="9e7663ae3dc3b9fa201211837e671ae9" sprite="Masked Mage (Yellow)" width="40" height="40" frame="Nodding (Battle) 1" direction="NNE" />
     <item hash="4f43fa3a64931fa682d8b80d6368d945" sprite="Masked Mage (Yellow)" width="40" height="40" frame="Nodding (Field) 1" direction="SSE" />
     <item hash="29236687ca16033911dbf246e8abacbe" sprite="Masked Mage (Yellow)" width="40" height="40" frame="Nodding (Field) 1" direction="ESE" />
     <item hash="d29215e7b7381cba253e1a4f33ac4a0c" sprite="Masked Mage (Yellow)" width="40" height="40" frame="Nodding (Field) 1" direction="ENE" />
@@ -14985,10 +14989,6 @@
     <item hash="e829752b28774abb1aeab51f50da7d9d" sprite="Masked Mage (Yellow)" width="40" height="40" frame="Nodding (Field) 2" direction="ESE" />
     <item hash="bba78e571aa671f3e8f7fe059af5339b" sprite="Masked Mage (Yellow)" width="40" height="40" frame="Nodding (Field) 2" direction="ENE" />
     <item hash="6210498eaf1be95721c896948a1ce5bd" sprite="Masked Mage (Yellow)" width="40" height="40" frame="Nodding (Field) 2" direction="NNE" />
-    <item hash="7c57b240df75de3b9075c1aa33201d2b" sprite="Masked Mage (Yellow)" width="40" height="40" frame="Nodding 2" direction="SSE" />
-    <item hash="219eee591e8c9ec1ad74e38b77fec07a" sprite="Masked Mage (Yellow)" width="40" height="40" frame="Nodding 2" direction="ESE" />
-    <item hash="c9d644451e45a894129a96c4f9eeaed7" sprite="Masked Mage (Yellow)" width="40" height="40" frame="Nodding 2" direction="ENE" />
-    <item hash="9e7663ae3dc3b9fa201211837e671ae9" sprite="Masked Mage (Yellow)" width="40" height="40" frame="Nodding 2" direction="NNE" />
     <item hash="05298076f4b51cc0a02024bd0e8d3c0b" sprite="Masked Mage (Yellow)" width="40" height="40" frame="ShakingHead (Battle) 1" direction="SSE" />
     <item hash="a614f71f2b3e1c22f2a752bdb7d5efac" sprite="Masked Mage (Yellow)" width="40" height="40" frame="ShakingHead (Battle) 1" direction="ESE" />
     <item hash="22dd7282b6df68ea707393db1a569399" sprite="Masked Mage (Yellow)" width="40" height="40" frame="ShakingHead (Battle) 1" direction="ENE" />
@@ -15147,14 +15147,14 @@
     <item hash="8f04395d61f5075a02dacda7ba43d7a3" sprite="Masked Monk (Blue) (Weaponless)" width="40" height="40" frame="LookingDown 1" direction="ESE" />
     <item hash="476b02d895e631b138a549995c3df354" sprite="Masked Monk (Blue) (Weaponless)" width="40" height="40" frame="LookingDown 1" direction="ENE" />
     <item hash="98bc6fe556d4ce60939e54ffb57e3ff6" sprite="Masked Monk (Blue) (Weaponless)" width="40" height="40" frame="LookingDown 1" direction="NNE" />
-    <item hash="9bd1ca0c3c11718a438d84ec50888cad" sprite="Masked Monk (Blue) (Weaponless)" width="40" height="40" frame="LookingUpFromKneeling 2" direction="SSE" />
-    <item hash="de835c6beb7e1cbdfc810602ee02061e" sprite="Masked Monk (Blue) (Weaponless)" width="40" height="40" frame="LookingUpFromKneeling 2" direction="ESE" />
-    <item hash="5e37419fefaba192995c9165909921ec" sprite="Masked Monk (Blue) (Weaponless)" width="40" height="40" frame="LookingUpFromKneeling 2" direction="ENE" />
-    <item hash="135974b6cbf652a4b852f33991377a76" sprite="Masked Monk (Blue) (Weaponless)" width="40" height="40" frame="LookingUpFromKneeling 2" direction="NNE" />
-    <item hash="3a5997c164b539739c3d85482199f6e8" sprite="Masked Monk (Blue) (Weaponless)" width="40" height="40" frame="LookingUpFromKneeling 3" direction="SSE" />
-    <item hash="b639c377efc91e44ba97045d262a8c46" sprite="Masked Monk (Blue) (Weaponless)" width="40" height="40" frame="LookingUpFromKneeling 3" direction="ESE" />
-    <item hash="65a6e8c7a1e9d0694aedb91c0b345603" sprite="Masked Monk (Blue) (Weaponless)" width="40" height="40" frame="LookingUpFromKneeling 3" direction="ENE" />
-    <item hash="8132dd3ee58379ced421a284c58f0ba8" sprite="Masked Monk (Blue) (Weaponless)" width="40" height="40" frame="LookingUpFromKneeling 3" direction="NNE" />
+    <item hash="9bd1ca0c3c11718a438d84ec50888cad" sprite="Masked Monk (Blue) (Weaponless)" width="40" height="40" frame="LookingUp (Kneeling) 1" direction="SSE" />
+    <item hash="de835c6beb7e1cbdfc810602ee02061e" sprite="Masked Monk (Blue) (Weaponless)" width="40" height="40" frame="LookingUp (Kneeling) 1" direction="ESE" />
+    <item hash="5e37419fefaba192995c9165909921ec" sprite="Masked Monk (Blue) (Weaponless)" width="40" height="40" frame="LookingUp (Kneeling) 1" direction="ENE" />
+    <item hash="135974b6cbf652a4b852f33991377a76" sprite="Masked Monk (Blue) (Weaponless)" width="40" height="40" frame="LookingUp (Kneeling) 1" direction="NNE" />
+    <item hash="3a5997c164b539739c3d85482199f6e8" sprite="Masked Monk (Blue) (Weaponless)" width="40" height="40" frame="LookingUp (Kneeling) 2" direction="SSE" />
+    <item hash="b639c377efc91e44ba97045d262a8c46" sprite="Masked Monk (Blue) (Weaponless)" width="40" height="40" frame="LookingUp (Kneeling) 2" direction="ESE" />
+    <item hash="65a6e8c7a1e9d0694aedb91c0b345603" sprite="Masked Monk (Blue) (Weaponless)" width="40" height="40" frame="LookingUp (Kneeling) 2" direction="ENE" />
+    <item hash="8132dd3ee58379ced421a284c58f0ba8" sprite="Masked Monk (Blue) (Weaponless)" width="40" height="40" frame="LookingUp (Kneeling) 2" direction="NNE" />
     <item hash="1853243a04190a3147271efde9383dd2" sprite="Masked Monk (Blue) (Weaponless)" width="40" height="40" frame="Running 1" direction="SSE" />
     <item hash="b7abeb0b505685ee7bf93d0c9edd730b" sprite="Masked Monk (Blue) (Weaponless)" width="40" height="40" frame="Running 1" direction="ESE" />
     <item hash="013a2b585fbb71411a78b7f451079b40" sprite="Masked Monk (Blue) (Weaponless)" width="40" height="40" frame="Running 1" direction="ENE" />
@@ -17358,10 +17358,10 @@
     <item hash="8afe2d3f363fd67619d5e9cfb1709ff0" sprite="Obright (P1)" width="40" height="40" frame="Nodding (Battle) 2" direction="ESE" />
     <item hash="ef05666b57a04d1cd7dd6c3cc2ef706c" sprite="Obright (P1)" width="40" height="40" frame="Nodding (Battle) 2" direction="ENE" />
     <item hash="04a72ba86db4492c3099e195b60da02a" sprite="Obright (P1)" width="40" height="40" frame="Nodding (Battle) 2" direction="NNE" />
-    <item hash="4a9ba380a665d505b56bb4c7eb834b19" sprite="Obright (P1)" width="40" height="40" frame="Nodding (Very Quick) 2" direction="SSE" />
-    <item hash="b5d830ab7d0ab28923a49ac97c09725c" sprite="Obright (P1)" width="40" height="40" frame="Nodding (Very Quick) 2" direction="ESE" />
-    <item hash="86d3c9d68c9b52f5f60c565c7b508403" sprite="Obright (P1)" width="40" height="40" frame="Nodding (Very Quick) 2" direction="ENE" />
-    <item hash="1accc9bda2373b1856f9ec5b68973b5d" sprite="Obright (P1)" width="40" height="40" frame="Nodding (Very Quick) 2" direction="NNE" />
+    <item hash="4a9ba380a665d505b56bb4c7eb834b19" sprite="Obright (P1)" width="40" height="40" frame="Nodding (Battle) 3" direction="SSE" />
+    <item hash="b5d830ab7d0ab28923a49ac97c09725c" sprite="Obright (P1)" width="40" height="40" frame="Nodding (Battle) 3" direction="ESE" />
+    <item hash="86d3c9d68c9b52f5f60c565c7b508403" sprite="Obright (P1)" width="40" height="40" frame="Nodding (Battle) 3" direction="ENE" />
+    <item hash="1accc9bda2373b1856f9ec5b68973b5d" sprite="Obright (P1)" width="40" height="40" frame="Nodding (Battle) 3" direction="NNE" />
     <item hash="46867587798cb6e8d35c0de3caa1c020" sprite="Obright (P1)" width="40" height="40" frame="ShakingHead (Battle) 1" direction="SSE" />
     <item hash="ca7b7e6c0d738f8a96a789515d357c02" sprite="Obright (P1)" width="40" height="40" frame="ShakingHead (Battle) 1" direction="ESE" />
     <item hash="133b74795cf9fa44b34a5a4906a93c4d" sprite="Obright (P1)" width="40" height="40" frame="ShakingHead (Battle) 1" direction="ENE" />
@@ -18351,22 +18351,22 @@
     <item hash="2cd7713a846b9701329c7fc60930e20b" sprite="Penko (P1)" width="40" height="32" frame="Walking 4" direction="ENE" />
     <item hash="71a17d176595d34e82c61a8555a8223a" sprite="Penko (P1)" width="40" height="32" frame="Walking 4" direction="NNE" />
     <item hash="bc2ab87a24f239893cfb659edb841ed0" sprite="Penko (P1)" width="40" height="32" frame="Walking 4" direction="N" />
-    <item hash="9f3d133bfbef7dfb53006dc5318424f5" sprite="Penko (P1) (No Shell)" width="40" height="32" frame="BlushingBobbingSideToSide 2" direction="SSE" />
-    <item hash="47ca7ed080ab5c64bf26ee6a80b2433e" sprite="Penko (P1) (No Shell)" width="40" height="32" frame="BlushingBobbingSideToSide 2" direction="ESE" />
-    <item hash="333d0c8a211aa9e885276588eddac3e1" sprite="Penko (P1) (No Shell)" width="40" height="32" frame="BlushingBobbingSideToSide 2" direction="ENE" />
-    <item hash="a3d2c9550fd2d3b474bfdbf1bd86e14b" sprite="Penko (P1) (No Shell)" width="40" height="32" frame="BlushingBobbingSideToSide 2" direction="NNE" />
-    <item hash="dd84c289fa5e5b4a8f6c47b617074605" sprite="Penko (P1) (No Shell)" width="40" height="32" frame="BlushingBobbingSideToSide 3" direction="SSE" />
-    <item hash="f7af169af145dd98d69bbb0167ccaec8" sprite="Penko (P1) (No Shell)" width="40" height="32" frame="BlushingBobbingSideToSide 3" direction="ESE" />
-    <item hash="6c445aa0e423865bbd226c0099a06acd" sprite="Penko (P1) (No Shell)" width="40" height="32" frame="BlushingBobbingSideToSide 3" direction="ENE" />
-    <item hash="f96a15eeeee3440035d0cae30a95410a" sprite="Penko (P1) (No Shell)" width="40" height="32" frame="BlushingBobbingSideToSide 3" direction="NNE" />
-    <item hash="d531b0da2d99604759b166aeb46f363a" sprite="Penko (P1) (No Shell)" width="40" height="32" frame="BlushingBobbingSideToSide 4" direction="SSE" />
-    <item hash="5bd80fa65a54e1d2d11ae93c44675694" sprite="Penko (P1) (No Shell)" width="40" height="32" frame="BlushingBobbingSideToSide 4" direction="ESE" />
-    <item hash="767f69a5587bfafe0f27e164040afdb8" sprite="Penko (P1) (No Shell)" width="40" height="32" frame="BlushingBobbingSideToSide 4" direction="ENE" />
-    <item hash="9a49dc08bf830cf86b854401d1a1cd52" sprite="Penko (P1) (No Shell)" width="40" height="32" frame="BlushingBobbingSideToSide 4" direction="NNE" />
-    <item hash="39e873116b6be0e780feb09957b48233" sprite="Penko (P1) (No Shell)" width="40" height="32" frame="BlushingBobbingSideToSide 6" direction="SSE" />
-    <item hash="f60e16b37c8aa7aa603661969f848ec5" sprite="Penko (P1) (No Shell)" width="40" height="32" frame="BlushingBobbingSideToSide 6" direction="ESE" />
-    <item hash="db68bdf44c36f1daaad233aed52d6a56" sprite="Penko (P1) (No Shell)" width="40" height="32" frame="BlushingBobbingSideToSide 6" direction="ENE" />
-    <item hash="b7e9b234fafe9f3b480c4b4d541a331c" sprite="Penko (P1) (No Shell)" width="40" height="32" frame="BlushingBobbingSideToSide 6" direction="NNE" />
+    <item hash="9f3d133bfbef7dfb53006dc5318424f5" sprite="Penko (P1) (No Shell)" width="40" height="32" frame="Blushing, BobbingSideToSide 1" direction="SSE" />
+    <item hash="47ca7ed080ab5c64bf26ee6a80b2433e" sprite="Penko (P1) (No Shell)" width="40" height="32" frame="Blushing, BobbingSideToSide 1" direction="ESE" />
+    <item hash="333d0c8a211aa9e885276588eddac3e1" sprite="Penko (P1) (No Shell)" width="40" height="32" frame="Blushing, BobbingSideToSide 1" direction="ENE" />
+    <item hash="a3d2c9550fd2d3b474bfdbf1bd86e14b" sprite="Penko (P1) (No Shell)" width="40" height="32" frame="Blushing, BobbingSideToSide 1" direction="NNE" />
+    <item hash="dd84c289fa5e5b4a8f6c47b617074605" sprite="Penko (P1) (No Shell)" width="40" height="32" frame="Blushing, BobbingSideToSide 2" direction="SSE" />
+    <item hash="f7af169af145dd98d69bbb0167ccaec8" sprite="Penko (P1) (No Shell)" width="40" height="32" frame="Blushing, BobbingSideToSide 2" direction="ESE" />
+    <item hash="6c445aa0e423865bbd226c0099a06acd" sprite="Penko (P1) (No Shell)" width="40" height="32" frame="Blushing, BobbingSideToSide 2" direction="ENE" />
+    <item hash="f96a15eeeee3440035d0cae30a95410a" sprite="Penko (P1) (No Shell)" width="40" height="32" frame="Blushing, BobbingSideToSide 2" direction="NNE" />
+    <item hash="d531b0da2d99604759b166aeb46f363a" sprite="Penko (P1) (No Shell)" width="40" height="32" frame="Blushing, BobbingSideToSide 3" direction="SSE" />
+    <item hash="5bd80fa65a54e1d2d11ae93c44675694" sprite="Penko (P1) (No Shell)" width="40" height="32" frame="Blushing, BobbingSideToSide 3" direction="ESE" />
+    <item hash="767f69a5587bfafe0f27e164040afdb8" sprite="Penko (P1) (No Shell)" width="40" height="32" frame="Blushing, BobbingSideToSide 3" direction="ENE" />
+    <item hash="9a49dc08bf830cf86b854401d1a1cd52" sprite="Penko (P1) (No Shell)" width="40" height="32" frame="Blushing, BobbingSideToSide 3" direction="NNE" />
+    <item hash="39e873116b6be0e780feb09957b48233" sprite="Penko (P1) (No Shell)" width="40" height="32" frame="Blushing, BobbingSideToSide 4" direction="SSE" />
+    <item hash="f60e16b37c8aa7aa603661969f848ec5" sprite="Penko (P1) (No Shell)" width="40" height="32" frame="Blushing, BobbingSideToSide 4" direction="ESE" />
+    <item hash="db68bdf44c36f1daaad233aed52d6a56" sprite="Penko (P1) (No Shell)" width="40" height="32" frame="Blushing, BobbingSideToSide 4" direction="ENE" />
+    <item hash="b7e9b234fafe9f3b480c4b4d541a331c" sprite="Penko (P1) (No Shell)" width="40" height="32" frame="Blushing, BobbingSideToSide 4" direction="NNE" />
     <item hash="0cf3e449eca9ad3905b4409d3035ce91" sprite="Penko (P1) (No Shell)" width="40" height="32" frame="Idle 1" direction="SSE" />
     <item hash="a80c583002602532eef43608ac5ecc1a" sprite="Penko (P1) (No Shell)" width="40" height="32" frame="Idle 1" direction="ESE" />
     <item hash="e34018a215c128451d623b808afd02df" sprite="Penko (P1) (No Shell)" width="40" height="32" frame="Idle 1" direction="ENE" />
@@ -18523,38 +18523,38 @@
     <item hash="2958bf225aff95533227f2ca631d0bc2" sprite="Penko (U)" width="40" height="32" frame="Walking 4" direction="ENE" />
     <item hash="808d0bb6314a984241a1330e1f5a3571" sprite="Penko (U)" width="40" height="32" frame="Walking 4" direction="NNE" />
     <item hash="ef34f43170dbcc131ab88e2299551959" sprite="Penko (U)" width="40" height="32" frame="Walking 4" direction="N" />
-    <item hash="3715c82faf0776324d03e340af06500d" sprite="Penko (U) (NoShell)" width="40" height="32" frame="Blushing, BobbingSideToSide 1, Hopping, Blushing, BobbingSideToSide 1" direction="SSE" />
-    <item hash="acaa9bf6728257e1d76081a9289ae421" sprite="Penko (U) (NoShell)" width="40" height="32" frame="Blushing, BobbingSideToSide 1, Hopping, Blushing, BobbingSideToSide 1" direction="ESE" />
-    <item hash="2079fc865f689b1b719a5b30b8d0cd71" sprite="Penko (U) (NoShell)" width="40" height="32" frame="Blushing, BobbingSideToSide 1, Hopping, Blushing, BobbingSideToSide 1" direction="ENE" />
-    <item hash="142e6d47f7c7ec87526211a1e14d3421" sprite="Penko (U) (NoShell)" width="40" height="32" frame="Blushing, BobbingSideToSide 1, Hopping, Blushing, BobbingSideToSide 1" direction="NNE" />
-    <item hash="0fa055b22599ae49cde5a76b9c6b9fff" sprite="Penko (U) (NoShell)" width="40" height="32" frame="Blushing, BobbingSideToSide 2, Hopping, Blushing, BobbingSideToSide 6" direction="SSE" />
-    <item hash="ac891170cd4245048cdda705f38632d0" sprite="Penko (U) (NoShell)" width="40" height="32" frame="Blushing, BobbingSideToSide 2, Hopping, Blushing, BobbingSideToSide 6" direction="ESE" />
-    <item hash="b8c7ebfb12b97f45b81af59a50fd0e61" sprite="Penko (U) (NoShell)" width="40" height="32" frame="Blushing, BobbingSideToSide 2, Hopping, Blushing, BobbingSideToSide 6" direction="ENE" />
-    <item hash="2a9e06f2afb410c014848c4035cb1751" sprite="Penko (U) (NoShell)" width="40" height="32" frame="Blushing, BobbingSideToSide 2, Hopping, Blushing, BobbingSideToSide 6" direction="NNE" />
-    <item hash="54a6118065a8d89e22f47a54cd496787" sprite="Penko (U) (NoShell)" width="40" height="32" frame="Blushing, BobbingSideToSide 3, Hopping, Blushing, BobbingSideToSide 7" direction="SSE" />
-    <item hash="767cd8279dd1e9c2ba78b69858292185" sprite="Penko (U) (NoShell)" width="40" height="32" frame="Blushing, BobbingSideToSide 3, Hopping, Blushing, BobbingSideToSide 7" direction="ESE" />
-    <item hash="c4b9e539f31bed0963b1aed04a9eb368" sprite="Penko (U) (NoShell)" width="40" height="32" frame="Blushing, BobbingSideToSide 3, Hopping, Blushing, BobbingSideToSide 7" direction="ENE" />
-    <item hash="bb9a6902740ab5da30a6cf2c2495a771" sprite="Penko (U) (NoShell)" width="40" height="32" frame="Blushing, BobbingSideToSide 3, Hopping, Blushing, BobbingSideToSide 7" direction="NNE" />
-    <item hash="6e04977817b29b41136938c14ef0a3d8" sprite="Penko (U) (NoShell)" width="40" height="32" frame="Blushing, BobbingSideToSide 4, Hopping, Blushing, BobbingSideToSide 8" direction="SSE" />
-    <item hash="e90b68619d2063049672aca129afaa8a" sprite="Penko (U) (NoShell)" width="40" height="32" frame="Blushing, BobbingSideToSide 4, Hopping, Blushing, BobbingSideToSide 8" direction="ESE" />
-    <item hash="50bf898b79bd05653d8bde9f0e1d35f7" sprite="Penko (U) (NoShell)" width="40" height="32" frame="Blushing, BobbingSideToSide 4, Hopping, Blushing, BobbingSideToSide 8" direction="ENE" />
-    <item hash="1dd004919f406121813fff4d52265dd5" sprite="Penko (U) (NoShell)" width="40" height="32" frame="Blushing, BobbingSideToSide 4, Hopping, Blushing, BobbingSideToSide 8" direction="NNE" />
-    <item hash="b97732d59ec6acb78cc71a257ab2f337" sprite="Penko (U) (NoShell)" width="40" height="32" frame="Blushing, BobbingSideToSide 6, Hopping, Blushing, BobbingSideToSide10" direction="SSE" />
-    <item hash="e373b2faaa5f0947e911d0765c3bbf15" sprite="Penko (U) (NoShell)" width="40" height="32" frame="Blushing, BobbingSideToSide 6, Hopping, Blushing, BobbingSideToSide10" direction="ESE" />
-    <item hash="bd07d725c3ad79521f26bed7d3267af6" sprite="Penko (U) (NoShell)" width="40" height="32" frame="Blushing, BobbingSideToSide 6, Hopping, Blushing, BobbingSideToSide10" direction="ENE" />
-    <item hash="1963c0111a84848a215068dc4c8d2e45" sprite="Penko (U) (NoShell)" width="40" height="32" frame="Blushing, BobbingSideToSide 6, Hopping, Blushing, BobbingSideToSide10" direction="NNE" />
-    <item hash="10e4a9f5c58ec9c7dfbabeb060022f2b" sprite="Penko (U) (NoShell)" width="40" height="32" frame="Hopping, Blushing, BobbingSideToSide 2" direction="SSE" />
-    <item hash="bc72b44648a08ef4edfb95d704b6ab03" sprite="Penko (U) (NoShell)" width="40" height="32" frame="Hopping, Blushing, BobbingSideToSide 2" direction="ESE" />
-    <item hash="64cb510be06acbe23a5c1f57af0efe3f" sprite="Penko (U) (NoShell)" width="40" height="32" frame="Hopping, Blushing, BobbingSideToSide 2" direction="ENE" />
-    <item hash="b6fe9cbab616ab19e9131452f4b36958" sprite="Penko (U) (NoShell)" width="40" height="32" frame="Hopping, Blushing, BobbingSideToSide 2" direction="NNE" />
-    <item hash="a24eae467c89ca4685c7d59468a3708f" sprite="Penko (U) (NoShell)" width="40" height="32" frame="Hopping, Blushing, BobbingSideToSide 3" direction="SSE" />
-    <item hash="ff768fc73c83a59dcc4f5d52593645cd" sprite="Penko (U) (NoShell)" width="40" height="32" frame="Hopping, Blushing, BobbingSideToSide 3" direction="ESE" />
-    <item hash="facd18124b51eafaded8f33c3e7ed4e9" sprite="Penko (U) (NoShell)" width="40" height="32" frame="Hopping, Blushing, BobbingSideToSide 3" direction="ENE" />
-    <item hash="76aa81da0480fa357d50458417973157" sprite="Penko (U) (NoShell)" width="40" height="32" frame="Hopping, Blushing, BobbingSideToSide 3" direction="NNE" />
-    <item hash="ccd14d52f7bd61fd4001b7c7cf2aff83" sprite="Penko (U) (NoShell)" width="40" height="32" frame="Hopping, Blushing, BobbingSideToSide 4" direction="SSE" />
-    <item hash="caf4b88d622124b06c8ae072c7579107" sprite="Penko (U) (NoShell)" width="40" height="32" frame="Hopping, Blushing, BobbingSideToSide 4" direction="ESE" />
-    <item hash="877164ae4b47e56554686d1e73cf3796" sprite="Penko (U) (NoShell)" width="40" height="32" frame="Hopping, Blushing, BobbingSideToSide 4" direction="ENE" />
-    <item hash="290438ddb0a4db20848d1058d230ccfc" sprite="Penko (U) (NoShell)" width="40" height="32" frame="Hopping, Blushing, BobbingSideToSide 4" direction="NNE" />
+    <item hash="3715c82faf0776324d03e340af06500d" sprite="Penko (U) (NoShell)" width="40" height="32" frame="Blushing, BobbingSideToSide 1" direction="SSE" />
+    <item hash="acaa9bf6728257e1d76081a9289ae421" sprite="Penko (U) (NoShell)" width="40" height="32" frame="Blushing, BobbingSideToSide 1" direction="ESE" />
+    <item hash="2079fc865f689b1b719a5b30b8d0cd71" sprite="Penko (U) (NoShell)" width="40" height="32" frame="Blushing, BobbingSideToSide 1" direction="ENE" />
+    <item hash="142e6d47f7c7ec87526211a1e14d3421" sprite="Penko (U) (NoShell)" width="40" height="32" frame="Blushing, BobbingSideToSide 1" direction="NNE" />
+    <item hash="0fa055b22599ae49cde5a76b9c6b9fff" sprite="Penko (U) (NoShell)" width="40" height="32" frame="Blushing, BobbingSideToSide 2" direction="SSE" />
+    <item hash="ac891170cd4245048cdda705f38632d0" sprite="Penko (U) (NoShell)" width="40" height="32" frame="Blushing, BobbingSideToSide 2" direction="ESE" />
+    <item hash="b8c7ebfb12b97f45b81af59a50fd0e61" sprite="Penko (U) (NoShell)" width="40" height="32" frame="Blushing, BobbingSideToSide 2" direction="ENE" />
+    <item hash="2a9e06f2afb410c014848c4035cb1751" sprite="Penko (U) (NoShell)" width="40" height="32" frame="Blushing, BobbingSideToSide 2" direction="NNE" />
+    <item hash="54a6118065a8d89e22f47a54cd496787" sprite="Penko (U) (NoShell)" width="40" height="32" frame="Blushing, BobbingSideToSide 3" direction="SSE" />
+    <item hash="767cd8279dd1e9c2ba78b69858292185" sprite="Penko (U) (NoShell)" width="40" height="32" frame="Blushing, BobbingSideToSide 3" direction="ESE" />
+    <item hash="c4b9e539f31bed0963b1aed04a9eb368" sprite="Penko (U) (NoShell)" width="40" height="32" frame="Blushing, BobbingSideToSide 3" direction="ENE" />
+    <item hash="bb9a6902740ab5da30a6cf2c2495a771" sprite="Penko (U) (NoShell)" width="40" height="32" frame="Blushing, BobbingSideToSide 3" direction="NNE" />
+    <item hash="6e04977817b29b41136938c14ef0a3d8" sprite="Penko (U) (NoShell)" width="40" height="32" frame="Blushing, BobbingSideToSide 4" direction="SSE" />
+    <item hash="e90b68619d2063049672aca129afaa8a" sprite="Penko (U) (NoShell)" width="40" height="32" frame="Blushing, BobbingSideToSide 4" direction="ESE" />
+    <item hash="50bf898b79bd05653d8bde9f0e1d35f7" sprite="Penko (U) (NoShell)" width="40" height="32" frame="Blushing, BobbingSideToSide 4" direction="ENE" />
+    <item hash="1dd004919f406121813fff4d52265dd5" sprite="Penko (U) (NoShell)" width="40" height="32" frame="Blushing, BobbingSideToSide 4" direction="NNE" />
+    <item hash="b97732d59ec6acb78cc71a257ab2f337" sprite="Penko (U) (NoShell)" width="40" height="32" frame="Blushing, BobbingSideToSide 5" direction="SSE" />
+    <item hash="e373b2faaa5f0947e911d0765c3bbf15" sprite="Penko (U) (NoShell)" width="40" height="32" frame="Blushing, BobbingSideToSide 5" direction="ESE" />
+    <item hash="bd07d725c3ad79521f26bed7d3267af6" sprite="Penko (U) (NoShell)" width="40" height="32" frame="Blushing, BobbingSideToSide 5" direction="ENE" />
+    <item hash="1963c0111a84848a215068dc4c8d2e45" sprite="Penko (U) (NoShell)" width="40" height="32" frame="Blushing, BobbingSideToSide 5" direction="NNE" />
+    <item hash="10e4a9f5c58ec9c7dfbabeb060022f2b" sprite="Penko (U) (NoShell)" width="40" height="32" frame="Hopping, Blushing, BobbingSideToSide 1" direction="SSE" />
+    <item hash="bc72b44648a08ef4edfb95d704b6ab03" sprite="Penko (U) (NoShell)" width="40" height="32" frame="Hopping, Blushing, BobbingSideToSide 1" direction="ESE" />
+    <item hash="64cb510be06acbe23a5c1f57af0efe3f" sprite="Penko (U) (NoShell)" width="40" height="32" frame="Hopping, Blushing, BobbingSideToSide 1" direction="ENE" />
+    <item hash="b6fe9cbab616ab19e9131452f4b36958" sprite="Penko (U) (NoShell)" width="40" height="32" frame="Hopping, Blushing, BobbingSideToSide 1" direction="NNE" />
+    <item hash="a24eae467c89ca4685c7d59468a3708f" sprite="Penko (U) (NoShell)" width="40" height="32" frame="Hopping, Blushing, BobbingSideToSide 2" direction="SSE" />
+    <item hash="ff768fc73c83a59dcc4f5d52593645cd" sprite="Penko (U) (NoShell)" width="40" height="32" frame="Hopping, Blushing, BobbingSideToSide 2" direction="ESE" />
+    <item hash="facd18124b51eafaded8f33c3e7ed4e9" sprite="Penko (U) (NoShell)" width="40" height="32" frame="Hopping, Blushing, BobbingSideToSide 2" direction="ENE" />
+    <item hash="76aa81da0480fa357d50458417973157" sprite="Penko (U) (NoShell)" width="40" height="32" frame="Hopping, Blushing, BobbingSideToSide 2" direction="NNE" />
+    <item hash="ccd14d52f7bd61fd4001b7c7cf2aff83" sprite="Penko (U) (NoShell)" width="40" height="32" frame="Hopping, Blushing, BobbingSideToSide 3" direction="SSE" />
+    <item hash="caf4b88d622124b06c8ae072c7579107" sprite="Penko (U) (NoShell)" width="40" height="32" frame="Hopping, Blushing, BobbingSideToSide 3" direction="ESE" />
+    <item hash="877164ae4b47e56554686d1e73cf3796" sprite="Penko (U) (NoShell)" width="40" height="32" frame="Hopping, Blushing, BobbingSideToSide 3" direction="ENE" />
+    <item hash="290438ddb0a4db20848d1058d230ccfc" sprite="Penko (U) (NoShell)" width="40" height="32" frame="Hopping, Blushing, BobbingSideToSide 3" direction="NNE" />
     <item hash="88afb06f148839a8ca78d975cedb0115" sprite="Penko (U) (NoShell)" width="40" height="32" frame="Kissing (Blushing) 1" direction="SSE" />
     <item hash="0578c1c4f2911325735f85aee7758acb" sprite="Penko (U) (NoShell)" width="40" height="32" frame="Kissing (Blushing) 1" direction="ESE" />
     <item hash="02fc2b3ac8230336fb6c0f517fe29d58" sprite="Penko (U) (NoShell)" width="40" height="32" frame="Kissing (Blushing) 1" direction="ENE" />
@@ -18606,14 +18606,14 @@
     <item hash="5773a7af2a1e17bdb715feb6e4f30e2e" sprite="Penn (P1)" width="40" height="32" frame="Nodding 4" direction="ESE" />
     <item hash="873f829a16c59664e1f72b070416ea14" sprite="Penn (P1)" width="40" height="32" frame="Nodding 4" direction="ENE" />
     <item hash="08c64ab044e1ce525719db56655f5e57" sprite="Penn (P1)" width="40" height="32" frame="Nodding 4" direction="NNE" />
-    <item hash="0731a7691ca8a5a236b3d6484d8a7ece" sprite="Penn (P1)" width="40" height="32" frame="ShakingHead (Stops) 2" direction="SSE" />
-    <item hash="6f9ce5a05c1f43713cc53b5c4a3077d9" sprite="Penn (P1)" width="40" height="32" frame="ShakingHead (Stops) 2" direction="ESE" />
-    <item hash="429cbc486026938e2dd0533b0cd95eae" sprite="Penn (P1)" width="40" height="32" frame="ShakingHead (Stops) 2" direction="ENE" />
-    <item hash="39f0cd45fb6690d2e3aca9e3caf4ab31" sprite="Penn (P1)" width="40" height="32" frame="ShakingHead (Stops) 2" direction="NNE" />
-    <item hash="eb937ac65efa7378a380d995f055f78b" sprite="Penn (P1)" width="40" height="32" frame="ShakingHead (Stops) 4" direction="SSE" />
-    <item hash="13423fea7beda6a72e3f017f7e7dcf95" sprite="Penn (P1)" width="40" height="32" frame="ShakingHead (Stops) 4" direction="ESE" />
-    <item hash="8a6888005d1bc749b7b2075a024c771b" sprite="Penn (P1)" width="40" height="32" frame="ShakingHead (Stops) 4" direction="ENE" />
-    <item hash="42ea61387eb0b59871cc2ee5bf9be889" sprite="Penn (P1)" width="40" height="32" frame="ShakingHead (Stops) 4" direction="NNE" />
+    <item hash="0731a7691ca8a5a236b3d6484d8a7ece" sprite="Penn (P1)" width="40" height="32" frame="ShakingHead (Bad) 1" direction="SSE" />
+    <item hash="6f9ce5a05c1f43713cc53b5c4a3077d9" sprite="Penn (P1)" width="40" height="32" frame="ShakingHead (Bad) 1" direction="ESE" />
+    <item hash="429cbc486026938e2dd0533b0cd95eae" sprite="Penn (P1)" width="40" height="32" frame="ShakingHead (Bad) 1" direction="ENE" />
+    <item hash="39f0cd45fb6690d2e3aca9e3caf4ab31" sprite="Penn (P1)" width="40" height="32" frame="ShakingHead (Bad) 1" direction="NNE" />
+    <item hash="eb937ac65efa7378a380d995f055f78b" sprite="Penn (P1)" width="40" height="32" frame="ShakingHead (Bad) 2" direction="SSE" />
+    <item hash="13423fea7beda6a72e3f017f7e7dcf95" sprite="Penn (P1)" width="40" height="32" frame="ShakingHead (Bad) 2" direction="ESE" />
+    <item hash="8a6888005d1bc749b7b2075a024c771b" sprite="Penn (P1)" width="40" height="32" frame="ShakingHead (Bad) 2" direction="ENE" />
+    <item hash="42ea61387eb0b59871cc2ee5bf9be889" sprite="Penn (P1)" width="40" height="32" frame="ShakingHead (Bad) 2" direction="NNE" />
     <item hash="3b484bad3f23ea7358b5f75e67b2f936" sprite="Penn (P1)" width="40" height="32" frame="ShakingHead 1" direction="SSE" />
     <item hash="d9ae9c4047736fc861a0aaa13cc1c20f" sprite="Penn (P1)" width="40" height="32" frame="ShakingHead 1" direction="ESE" />
     <item hash="0a1974cf704959d3e96d3e8fb57041ab" sprite="Penn (P1)" width="40" height="32" frame="ShakingHead 1" direction="ENE" />
@@ -19013,26 +19013,22 @@
     <item hash="d9bbc0473df337fbd93a090de73851f4" sprite="Primula (P2)" width="48" height="48" frame="ShakingHead 2" direction="ESE" />
     <item hash="c052f3bcf6022dfd0cb88021784b3821" sprite="Primula (P2)" width="48" height="48" frame="ShakingHead 2" direction="ENE" />
     <item hash="4fc8e9f3c72009a0bb6f827218aaf8a8" sprite="Primula (P2)" width="48" height="48" frame="ShakingHead 2" direction="NNE" />
-    <item hash="681b11e083d2e5749bb23ecccd7da27d" sprite="Produn (P1)" width="40" height="40" frame="CarriedAwayByBirdMen 1" direction="SSE" />
-    <item hash="17826860f36f049314dfcd3d82fb4dba" sprite="Produn (P1)" width="40" height="40" frame="CarriedAwayByBirdMen 1" direction="ESE" />
-    <item hash="8d325d4685cf43e27de06d377479d38d" sprite="Produn (P1)" width="40" height="40" frame="CarriedAwayByBirdMen 1" direction="ENE" />
-    <item hash="caafad0e47a4908c354282dbd5cb6a86" sprite="Produn (P1)" width="40" height="40" frame="CarriedAwayByBirdMen 1" direction="NNE" />
-    <item hash="8c4779e004737d3f9e86ca24ed5f5202" sprite="Produn (P1)" width="40" height="40" frame="CarriedAwayByBirdMen 2" direction="SSE" />
-    <item hash="8ed76da28a12779606c72b68cdd90457" sprite="Produn (P1)" width="40" height="40" frame="CarriedAwayByBirdMen 2" direction="ESE" />
-    <item hash="89fc32fb7299a0ff02ac7df4a0bef7a3" sprite="Produn (P1)" width="40" height="40" frame="CarriedAwayByBirdMen 2" direction="ENE" />
-    <item hash="a1f959452a3e5c49356eb34090795c62" sprite="Produn (P1)" width="40" height="40" frame="CarriedAwayByBirdMen 2" direction="NNE" />
-    <item hash="d7f21e30d2979e14fc907af4e3b2dd51" sprite="Produn (P1)" width="40" height="40" frame="CarriedAwayByBirdMen 3" direction="SSE" />
-    <item hash="6dc71225d99811068ed0e0e1df4d4f0f" sprite="Produn (P1)" width="40" height="40" frame="CarriedAwayByBirdMen 3" direction="ESE" />
-    <item hash="cf49e1fb4fdac8587766fbdba318f20f" sprite="Produn (P1)" width="40" height="40" frame="CarriedAwayByBirdMen 3" direction="ENE" />
-    <item hash="eebaad447650cb8343881abe7f709375" sprite="Produn (P1)" width="40" height="40" frame="CarriedAwayByBirdMen 3" direction="NNE" />
-    <item hash="1c427f3ad31c579557603814de232f84" sprite="Produn (P1)" width="40" height="40" frame="CarriedAwayByBirdMen 4" direction="SSE" />
-    <item hash="5a9aa4a136d3964a9330e6522fb42e15" sprite="Produn (P1)" width="40" height="40" frame="CarriedAwayByBirdMen 4" direction="ESE" />
-    <item hash="b1d9b704d94cb6e77be874b3cfa887b8" sprite="Produn (P1)" width="40" height="40" frame="CarriedAwayByBirdMen 4" direction="ENE" />
-    <item hash="b015c90e8a3f575c9d03d2484b19db56" sprite="Produn (P1)" width="40" height="40" frame="CarriedAwayByBirdMen 4" direction="NNE" />
-    <item hash="8ca62da36348347a5f1426d579e0ecb4" sprite="Produn (P1)" width="40" height="40" frame="CarriedAwayByBirdMen 5" direction="SSE" />
-    <item hash="ee358b5b219524a191add9ae9da24050" sprite="Produn (P1)" width="40" height="40" frame="CarriedAwayByBirdMen 5" direction="ESE" />
-    <item hash="675d689f9c4a7fb585866cf9702243d7" sprite="Produn (P1)" width="40" height="40" frame="CarriedAwayByBirdMen 5" direction="ENE" />
-    <item hash="daf046887ecbfc0d26a77bd143c55320" sprite="Produn (P1)" width="40" height="40" frame="CarriedAwayByBirdMen 5" direction="NNE" />
+    <item hash="8c4779e004737d3f9e86ca24ed5f5202" sprite="Produn (P1)" width="40" height="40" frame="CarriedAwayByBirdMen 1" direction="SSE" />
+    <item hash="8ed76da28a12779606c72b68cdd90457" sprite="Produn (P1)" width="40" height="40" frame="CarriedAwayByBirdMen 1" direction="ESE" />
+    <item hash="89fc32fb7299a0ff02ac7df4a0bef7a3" sprite="Produn (P1)" width="40" height="40" frame="CarriedAwayByBirdMen 1" direction="ENE" />
+    <item hash="a1f959452a3e5c49356eb34090795c62" sprite="Produn (P1)" width="40" height="40" frame="CarriedAwayByBirdMen 1" direction="NNE" />
+    <item hash="d7f21e30d2979e14fc907af4e3b2dd51" sprite="Produn (P1)" width="40" height="40" frame="CarriedAwayByBirdMen 2" direction="SSE" />
+    <item hash="6dc71225d99811068ed0e0e1df4d4f0f" sprite="Produn (P1)" width="40" height="40" frame="CarriedAwayByBirdMen 2" direction="ESE" />
+    <item hash="cf49e1fb4fdac8587766fbdba318f20f" sprite="Produn (P1)" width="40" height="40" frame="CarriedAwayByBirdMen 2" direction="ENE" />
+    <item hash="eebaad447650cb8343881abe7f709375" sprite="Produn (P1)" width="40" height="40" frame="CarriedAwayByBirdMen 2" direction="NNE" />
+    <item hash="1c427f3ad31c579557603814de232f84" sprite="Produn (P1)" width="40" height="40" frame="CarriedAwayByBirdMen 3" direction="SSE" />
+    <item hash="5a9aa4a136d3964a9330e6522fb42e15" sprite="Produn (P1)" width="40" height="40" frame="CarriedAwayByBirdMen 3" direction="ESE" />
+    <item hash="b1d9b704d94cb6e77be874b3cfa887b8" sprite="Produn (P1)" width="40" height="40" frame="CarriedAwayByBirdMen 3" direction="ENE" />
+    <item hash="b015c90e8a3f575c9d03d2484b19db56" sprite="Produn (P1)" width="40" height="40" frame="CarriedAwayByBirdMen 3" direction="NNE" />
+    <item hash="8ca62da36348347a5f1426d579e0ecb4" sprite="Produn (P1)" width="40" height="40" frame="CarriedAwayByBirdMen 4" direction="SSE" />
+    <item hash="ee358b5b219524a191add9ae9da24050" sprite="Produn (P1)" width="40" height="40" frame="CarriedAwayByBirdMen 4" direction="ESE" />
+    <item hash="675d689f9c4a7fb585866cf9702243d7" sprite="Produn (P1)" width="40" height="40" frame="CarriedAwayByBirdMen 4" direction="ENE" />
+    <item hash="daf046887ecbfc0d26a77bd143c55320" sprite="Produn (P1)" width="40" height="40" frame="CarriedAwayByBirdMen 4" direction="NNE" />
     <item hash="9a8c733aa6d075badd93651ce03087ac" sprite="Produn (P1)" width="40" height="40" frame="Idle (Battle) 1" direction="S" />
     <item hash="4066b235c76f595cd369d829180305af" sprite="Produn (P1)" width="40" height="40" frame="Idle (Battle) 1" direction="SSE" />
     <item hash="2f8f4e5b6021bd6e35e7b40584c16636" sprite="Produn (P1)" width="40" height="40" frame="Idle (Battle) 1" direction="ESE" />
@@ -19067,14 +19063,18 @@
     <item hash="47a124c083bd6e5e2c665c09503e0648" sprite="Produn (P1)" width="40" height="40" frame="Nodding 2" direction="ESE" />
     <item hash="5470201da949003fb889777be4c94da0" sprite="Produn (P1)" width="40" height="40" frame="Nodding 2" direction="ENE" />
     <item hash="f6489bcced3ec9e7f1a33907a15a2a42" sprite="Produn (P1)" width="40" height="40" frame="Nodding 2" direction="NNE" />
-    <item hash="4d2457e1dfc46dd7a5cfade462b344a9" sprite="Produn (P1)" width="40" height="40" frame="ShakingEntireBody (Strange) 2" direction="SSE" />
-    <item hash="ad5106c6760c62d9fe6b0d9a891d6a10" sprite="Produn (P1)" width="40" height="40" frame="ShakingEntireBody (Strange) 2" direction="ESE" />
-    <item hash="250e91c8648b84c30dcb9330513b6314" sprite="Produn (P1)" width="40" height="40" frame="ShakingEntireBody (Strange) 2" direction="ENE" />
-    <item hash="c201b84042cd50980c5b1b85cd520623" sprite="Produn (P1)" width="40" height="40" frame="ShakingEntireBody (Strange) 2" direction="NNE" />
-    <item hash="95dc8f9e59d74a83324f852ffff6f0f5" sprite="Produn (P1)" width="40" height="40" frame="ShakingEntireBody (Strange) 4" direction="SSE" />
-    <item hash="ccebe8a9a185b696777d984c788fafa3" sprite="Produn (P1)" width="40" height="40" frame="ShakingEntireBody (Strange) 4" direction="ESE" />
-    <item hash="7ca49ea6ba07afb99f838b1d5cc6f0db" sprite="Produn (P1)" width="40" height="40" frame="ShakingEntireBody (Strange) 4" direction="ENE" />
-    <item hash="486505b6b79f2b94696ac5350bbeca72" sprite="Produn (P1)" width="40" height="40" frame="ShakingEntireBody (Strange) 4" direction="NNE" />
+    <item hash="4d2457e1dfc46dd7a5cfade462b344a9" sprite="Produn (P1)" width="40" height="40" frame="ShakingEntireBody 1" direction="SSE" />
+    <item hash="ad5106c6760c62d9fe6b0d9a891d6a10" sprite="Produn (P1)" width="40" height="40" frame="ShakingEntireBody 1" direction="ESE" />
+    <item hash="250e91c8648b84c30dcb9330513b6314" sprite="Produn (P1)" width="40" height="40" frame="ShakingEntireBody 1" direction="ENE" />
+    <item hash="c201b84042cd50980c5b1b85cd520623" sprite="Produn (P1)" width="40" height="40" frame="ShakingEntireBody 1" direction="NNE" />
+    <item hash="95dc8f9e59d74a83324f852ffff6f0f5" sprite="Produn (P1)" width="40" height="40" frame="ShakingEntireBody 2" direction="SSE" />
+    <item hash="ccebe8a9a185b696777d984c788fafa3" sprite="Produn (P1)" width="40" height="40" frame="ShakingEntireBody 2" direction="ESE" />
+    <item hash="7ca49ea6ba07afb99f838b1d5cc6f0db" sprite="Produn (P1)" width="40" height="40" frame="ShakingEntireBody 2" direction="ENE" />
+    <item hash="486505b6b79f2b94696ac5350bbeca72" sprite="Produn (P1)" width="40" height="40" frame="ShakingEntireBody 2" direction="NNE" />
+    <item hash="681b11e083d2e5749bb23ecccd7da27d" sprite="Produn (P1)" width="40" height="40" frame="ShakingEntireBody 3" direction="SSE" />
+    <item hash="17826860f36f049314dfcd3d82fb4dba" sprite="Produn (P1)" width="40" height="40" frame="ShakingEntireBody 3" direction="ESE" />
+    <item hash="8d325d4685cf43e27de06d377479d38d" sprite="Produn (P1)" width="40" height="40" frame="ShakingEntireBody 3" direction="ENE" />
+    <item hash="caafad0e47a4908c354282dbd5cb6a86" sprite="Produn (P1)" width="40" height="40" frame="ShakingEntireBody 3" direction="NNE" />
     <item hash="a608423020a143e38011bc993d186192" sprite="Produn (P1)" width="40" height="40" frame="ShakingHead 1" direction="SSE" />
     <item hash="4a3803de2bd8a871a2aad8f8012acd76" sprite="Produn (P1)" width="40" height="40" frame="ShakingHead 1" direction="ESE" />
     <item hash="cb7c9236fdcf6c749612e8f40ddb4dce" sprite="Produn (P1)" width="40" height="40" frame="ShakingHead 1" direction="ENE" />
@@ -19707,14 +19707,14 @@
     <item hash="96180b2b800f7c469dc727aaabe58d94" sprite="Ratchet in Suit (P2)" width="48" height="40" frame="Nodding 2" direction="ESE" />
     <item hash="5fa6f487815f611a304b6e5f8557028d" sprite="Ratchet in Suit (P2)" width="48" height="40" frame="Nodding 2" direction="ENE" />
     <item hash="5f6bb8c1777bb94288db37692ed48861" sprite="Ratchet in Suit (P2)" width="48" height="40" frame="Nodding 2" direction="NNE" />
-    <item hash="b1baa7847f747411de9ad32cb0fd9984" sprite="Ratchet in Suit (P2)" width="48" height="40" frame="ShakingHead (WholeBody) 2" direction="SSE" />
-    <item hash="89ef38b9e8c47e65b75884e62c5be6fa" sprite="Ratchet in Suit (P2)" width="48" height="40" frame="ShakingHead (WholeBody) 2" direction="ESE" />
-    <item hash="78bf0ed11cae3c7a22a554d4e973a237" sprite="Ratchet in Suit (P2)" width="48" height="40" frame="ShakingHead (WholeBody) 2" direction="ENE" />
-    <item hash="1fb2e198fef0bf87017734cc941c6292" sprite="Ratchet in Suit (P2)" width="48" height="40" frame="ShakingHead (WholeBody) 2" direction="NNE" />
-    <item hash="38bf792a668a61cc7ef644fd4e960793" sprite="Ratchet in Suit (P2)" width="48" height="40" frame="ShakingHead (WholeBody) 4" direction="SSE" />
-    <item hash="0665085744a9953284343bc581b6e219" sprite="Ratchet in Suit (P2)" width="48" height="40" frame="ShakingHead (WholeBody) 4" direction="ESE" />
-    <item hash="ca5fafcf5d06ae827eb0d833c62a19cc" sprite="Ratchet in Suit (P2)" width="48" height="40" frame="ShakingHead (WholeBody) 4" direction="ENE" />
-    <item hash="cc8d3b3a556e92c36db95c87dcf1c50c" sprite="Ratchet in Suit (P2)" width="48" height="40" frame="ShakingHead (WholeBody) 4" direction="NNE" />
+    <item hash="b1baa7847f747411de9ad32cb0fd9984" sprite="Ratchet in Suit (P2)" width="48" height="40" frame="ShakingEntireBody 1" direction="SSE" />
+    <item hash="89ef38b9e8c47e65b75884e62c5be6fa" sprite="Ratchet in Suit (P2)" width="48" height="40" frame="ShakingEntireBody 1" direction="ESE" />
+    <item hash="78bf0ed11cae3c7a22a554d4e973a237" sprite="Ratchet in Suit (P2)" width="48" height="40" frame="ShakingEntireBody 1" direction="ENE" />
+    <item hash="1fb2e198fef0bf87017734cc941c6292" sprite="Ratchet in Suit (P2)" width="48" height="40" frame="ShakingEntireBody 1" direction="NNE" />
+    <item hash="38bf792a668a61cc7ef644fd4e960793" sprite="Ratchet in Suit (P2)" width="48" height="40" frame="ShakingEntireBody 2" direction="SSE" />
+    <item hash="0665085744a9953284343bc581b6e219" sprite="Ratchet in Suit (P2)" width="48" height="40" frame="ShakingEntireBody 2" direction="ESE" />
+    <item hash="ca5fafcf5d06ae827eb0d833c62a19cc" sprite="Ratchet in Suit (P2)" width="48" height="40" frame="ShakingEntireBody 2" direction="ENE" />
+    <item hash="cc8d3b3a556e92c36db95c87dcf1c50c" sprite="Ratchet in Suit (P2)" width="48" height="40" frame="ShakingEntireBody 2" direction="NNE" />
     <item hash="cefe355c64066d0f415a4af5e6e0152f" sprite="Ratchet in Suit (P2)" width="48" height="40" frame="Walking 1" direction="S" />
     <item hash="5b1b5f3097b3e5a669ff65ff1c1d3207" sprite="Ratchet in Suit (P2)" width="48" height="40" frame="Walking 1" direction="SSE" />
     <item hash="5439df273c412defa84a415dfd3e5493" sprite="Ratchet in Suit (P2)" width="48" height="40" frame="Walking 1" direction="ESE" />
@@ -20711,9 +20711,9 @@
     <item hash="172bbe3000485603dab630d252471074" sprite="Sandworm" width="48" height="32" frame="Walking 4" direction="ESE" />
     <item hash="6a56d730edaee595f5f067c97b8be818" sprite="Sandworm" width="48" height="32" frame="Walking 4" direction="ENE" />
     <item hash="403466c1dce7eed33389473a954d9f0a" sprite="Sandworm" width="48" height="32" frame="Walking 4" direction="NNE" />
-    <item hash="02cf77e96265dc2c12695c8b5e7b0fe9" sprite="Saraband Guard" width="40" height="40" frame="Idle (Bad Frames) 1" direction="ESE" />
-    <item hash="65d5bbfa52513dcda7bc098da700c401" sprite="Saraband Guard" width="40" height="40" frame="Idle (Bad Frames) 2" direction="ESE" />
-    <item hash="868826f51894723d368b821846fe9e76" sprite="Saraband Guard" width="40" height="40" frame="Idle (Bad Frames) 3" direction="ESE" />
+    <item hash="02cf77e96265dc2c12695c8b5e7b0fe9" sprite="Saraband Guard" width="40" height="40" frame="Idle (Bad) 1" direction="ESE" />
+    <item hash="65d5bbfa52513dcda7bc098da700c401" sprite="Saraband Guard" width="40" height="40" frame="Idle (Bad) 2" direction="ESE" />
+    <item hash="868826f51894723d368b821846fe9e76" sprite="Saraband Guard" width="40" height="40" frame="Idle (Bad) 3" direction="ESE" />
     <item hash="9e0655ead8052e6a658219288fc34b4c" sprite="Saraband Guard" width="40" height="40" frame="Idle 1" direction="SSE" />
     <item hash="0de74878f80faec791f5a9f780c4c4b0" sprite="Saraband Guard" width="40" height="40" frame="Idle 1" direction="ESE" />
     <item hash="a38cdaccf4dd51b8fb7ebd07870a42b5" sprite="Saraband Guard" width="40" height="40" frame="Idle 1" direction="ENE" />
@@ -21542,22 +21542,22 @@
     <item hash="04c840bc3a9b8dfef05420a161ea2b16" sprite="Sniper" width="40" height="40" frame="Idle (Field) 3" direction="ESE" />
     <item hash="bfbb3bfd4851b5f4f042bc09fc19a9c0" sprite="Sniper" width="40" height="40" frame="Idle (Field) 3" direction="ENE" />
     <item hash="e36dd2c325d597399b9658431f1afc39" sprite="Sniper" width="40" height="40" frame="Idle (Field) 3" direction="NNE" />
-    <item hash="44456c91da7f6979dfbb87ad55155b62" sprite="Sniper" width="40" height="40" frame="Nodding 2" direction="SSE" />
-    <item hash="ce6408e934cb30b74faca3a5fe0c40b1" sprite="Sniper" width="40" height="40" frame="Nodding 2" direction="ESE" />
-    <item hash="cac513d2259b420f7475af96531d517f" sprite="Sniper" width="40" height="40" frame="Nodding 2" direction="ENE" />
-    <item hash="5269c02ec26e2783f44dc6cc2fa5de8e" sprite="Sniper" width="40" height="40" frame="Nodding 2" direction="NNE" />
-    <item hash="0aa50fc993b80068032118d6f9a19996" sprite="Sniper" width="40" height="40" frame="Nodding 3" direction="SSE" />
-    <item hash="3202ea9c0233ccfd40ddc8d5d28cdb12" sprite="Sniper" width="40" height="40" frame="Nodding 3" direction="ESE" />
-    <item hash="3f1d4cb86c068f37a002a2d2fb16736c" sprite="Sniper" width="40" height="40" frame="Nodding 3" direction="ENE" />
-    <item hash="e18fb702e4a4247004bf9000457a6a2d" sprite="Sniper" width="40" height="40" frame="Nodding 3" direction="NNE" />
-    <item hash="79e10d922cf95ed74b6635278b829ec4" sprite="Sniper" width="40" height="40" frame="ShakingHead (MovingWholeBody) 2" direction="SSE" />
-    <item hash="b39c53c1bc6915fc2cec9b5ffa30348c" sprite="Sniper" width="40" height="40" frame="ShakingHead (MovingWholeBody) 2" direction="ESE" />
-    <item hash="79e16375ff9006243607737658897abf" sprite="Sniper" width="40" height="40" frame="ShakingHead (MovingWholeBody) 2" direction="ENE" />
-    <item hash="6bac7ac9a4255dff6477705818d3b0b5" sprite="Sniper" width="40" height="40" frame="ShakingHead (MovingWholeBody) 2" direction="NNE" />
-    <item hash="f94138a6a8c3e9515efdc6ee4d46a4e8" sprite="Sniper" width="40" height="40" frame="ShakingHead (MovingWholeBody) 4" direction="SSE" />
-    <item hash="3be7cc79e7d5176cefed46eebd4310d8" sprite="Sniper" width="40" height="40" frame="ShakingHead (MovingWholeBody) 4" direction="ESE" />
-    <item hash="af623e77672712f33a30779a50f58bbc" sprite="Sniper" width="40" height="40" frame="ShakingHead (MovingWholeBody) 4" direction="ENE" />
-    <item hash="868d01054a3cf70a10fc5b13b820a686" sprite="Sniper" width="40" height="40" frame="ShakingHead (MovingWholeBody) 4" direction="NNE" />
+    <item hash="44456c91da7f6979dfbb87ad55155b62" sprite="Sniper" width="40" height="40" frame="Nodding (Field) 1" direction="SSE" />
+    <item hash="ce6408e934cb30b74faca3a5fe0c40b1" sprite="Sniper" width="40" height="40" frame="Nodding (Field) 1" direction="ESE" />
+    <item hash="cac513d2259b420f7475af96531d517f" sprite="Sniper" width="40" height="40" frame="Nodding (Field) 1" direction="ENE" />
+    <item hash="5269c02ec26e2783f44dc6cc2fa5de8e" sprite="Sniper" width="40" height="40" frame="Nodding (Field) 1" direction="NNE" />
+    <item hash="0aa50fc993b80068032118d6f9a19996" sprite="Sniper" width="40" height="40" frame="Nodding (Field) 2" direction="SSE" />
+    <item hash="3202ea9c0233ccfd40ddc8d5d28cdb12" sprite="Sniper" width="40" height="40" frame="Nodding (Field) 2" direction="ESE" />
+    <item hash="3f1d4cb86c068f37a002a2d2fb16736c" sprite="Sniper" width="40" height="40" frame="Nodding (Field) 2" direction="ENE" />
+    <item hash="e18fb702e4a4247004bf9000457a6a2d" sprite="Sniper" width="40" height="40" frame="Nodding (Field) 2" direction="NNE" />
+    <item hash="79e10d922cf95ed74b6635278b829ec4" sprite="Sniper" width="40" height="40" frame="ShakingEntireBody 1" direction="SSE" />
+    <item hash="b39c53c1bc6915fc2cec9b5ffa30348c" sprite="Sniper" width="40" height="40" frame="ShakingEntireBody 1" direction="ESE" />
+    <item hash="79e16375ff9006243607737658897abf" sprite="Sniper" width="40" height="40" frame="ShakingEntireBody 1" direction="ENE" />
+    <item hash="6bac7ac9a4255dff6477705818d3b0b5" sprite="Sniper" width="40" height="40" frame="ShakingEntireBody 1" direction="NNE" />
+    <item hash="f94138a6a8c3e9515efdc6ee4d46a4e8" sprite="Sniper" width="40" height="40" frame="ShakingEntireBody 2" direction="SSE" />
+    <item hash="3be7cc79e7d5176cefed46eebd4310d8" sprite="Sniper" width="40" height="40" frame="ShakingEntireBody 2" direction="ESE" />
+    <item hash="af623e77672712f33a30779a50f58bbc" sprite="Sniper" width="40" height="40" frame="ShakingEntireBody 2" direction="ENE" />
+    <item hash="868d01054a3cf70a10fc5b13b820a686" sprite="Sniper" width="40" height="40" frame="ShakingEntireBody 2" direction="NNE" />
     <item hash="32c9631febf5027f523b6f399d565cec" sprite="Sniper" width="40" height="40" frame="Walking 1" direction="SSE" />
     <item hash="4f41966b792dde22e0ed92053a8f2e0d" sprite="Sniper" width="40" height="40" frame="Walking 1" direction="ESE" />
     <item hash="c6ddff52860b56a8ff8cd08946b75745" sprite="Sniper" width="40" height="40" frame="Walking 1" direction="ENE" />
@@ -21855,14 +21855,14 @@
     <item hash="f3fc9c6b3d37151bed7a4e54859c72b8" sprite="Spiriel (Sc1+2)" width="48" height="40" frame="Idle (Battle) 3" direction="ESE" />
     <item hash="3f5738a8758978b2b4b9747b3f253935" sprite="Spiriel (Sc1+2)" width="48" height="40" frame="Idle (Battle) 3" direction="ENE" />
     <item hash="f33cbbc6c29aecf85c346c0d5a25cb08" sprite="Spiriel (Sc1+2)" width="48" height="40" frame="Idle (Battle) 3" direction="NNE" />
-    <item hash="af20b01f8b41dbf82dab640fa190ca0b" sprite="Spiriel (Sc1+2)" width="48" height="40" frame="KeelingOverFromSittingCrossLegged 2" direction="SSE" />
-    <item hash="05573ee172a523f0d6ce5de2a2e9aca8" sprite="Spiriel (Sc1+2)" width="48" height="40" frame="KeelingOverFromSittingCrossLegged 2" direction="ESE" />
-    <item hash="6402e89ce8dc27b6469131beda304c30" sprite="Spiriel (Sc1+2)" width="48" height="40" frame="KeelingOverFromSittingCrossLegged 2" direction="ENE" />
-    <item hash="960d8a025040a3924869a19162d30343" sprite="Spiriel (Sc1+2)" width="48" height="40" frame="KeelingOverFromSittingCrossLegged 2" direction="NNE" />
-    <item hash="1a5310b96fae23bace8b236525bb7fcc" sprite="Spiriel (Sc1+2)" width="48" height="40" frame="KeelingOverFromSittingCrossLegged 3" direction="SSE" />
-    <item hash="877e295e3616c52d1fec7df981c7b5e0" sprite="Spiriel (Sc1+2)" width="48" height="40" frame="KeelingOverFromSittingCrossLegged 3" direction="ESE" />
-    <item hash="20c1610a10259856002be8ed25c0d3e5" sprite="Spiriel (Sc1+2)" width="48" height="40" frame="KeelingOverFromSittingCrossLegged 3" direction="ENE" />
-    <item hash="55f39ec1d8f0525834f907c280627dc5" sprite="Spiriel (Sc1+2)" width="48" height="40" frame="KeelingOverFromSittingCrossLegged 3" direction="NNE" />
+    <item hash="af20b01f8b41dbf82dab640fa190ca0b" sprite="Spiriel (Sc1+2)" width="48" height="40" frame="KeelingOverFromSittingCrossLegged 1" direction="SSE" />
+    <item hash="05573ee172a523f0d6ce5de2a2e9aca8" sprite="Spiriel (Sc1+2)" width="48" height="40" frame="KeelingOverFromSittingCrossLegged 1" direction="ESE" />
+    <item hash="6402e89ce8dc27b6469131beda304c30" sprite="Spiriel (Sc1+2)" width="48" height="40" frame="KeelingOverFromSittingCrossLegged 1" direction="ENE" />
+    <item hash="960d8a025040a3924869a19162d30343" sprite="Spiriel (Sc1+2)" width="48" height="40" frame="KeelingOverFromSittingCrossLegged 1" direction="NNE" />
+    <item hash="1a5310b96fae23bace8b236525bb7fcc" sprite="Spiriel (Sc1+2)" width="48" height="40" frame="KeelingOverFromSittingCrossLegged 2" direction="SSE" />
+    <item hash="877e295e3616c52d1fec7df981c7b5e0" sprite="Spiriel (Sc1+2)" width="48" height="40" frame="KeelingOverFromSittingCrossLegged 2" direction="ESE" />
+    <item hash="20c1610a10259856002be8ed25c0d3e5" sprite="Spiriel (Sc1+2)" width="48" height="40" frame="KeelingOverFromSittingCrossLegged 2" direction="ENE" />
+    <item hash="55f39ec1d8f0525834f907c280627dc5" sprite="Spiriel (Sc1+2)" width="48" height="40" frame="KeelingOverFromSittingCrossLegged 2" direction="NNE" />
     <item hash="d6ea52f8ae00c24af3e46884b7213a10" sprite="Spiriel (Sc1+2)" width="48" height="40" frame="OnGround 1" direction="SSE" />
     <item hash="e0308c421d2bf8d0e1d56dc884d159cb" sprite="Spiriel (Sc1+2)" width="48" height="40" frame="OnGround 1" direction="ESE" />
     <item hash="80b694d9c45f1eb1f9a11829357a4f93" sprite="Spiriel (Sc1+2)" width="48" height="40" frame="OnGround 1" direction="ENE" />
@@ -23479,14 +23479,14 @@
     <item hash="cb5451b543132915ed76cf1f5b676649" sprite="Unoma (P1)" width="40" height="40" frame="Idle (Battle) 3" direction="ENE" />
     <item hash="c5bc1f91543da92aca1ef75428c08ebe" sprite="Unoma (P1)" width="40" height="40" frame="Idle (Battle) 3" direction="NNE" />
     <item hash="dc190015ab18c3b4c41a33b3e66d933d" sprite="Unoma (P1)" width="40" height="40" frame="Idle (Battle) 3" direction="N" />
-    <item hash="c01f4ec61351d602af477b30a5361f49" sprite="Unoma (P1)" width="40" height="40" frame="IdleNoddingShakingHead 2" direction="SSE" />
-    <item hash="4a69f5d6142c8cbd09c9df49608aa25e" sprite="Unoma (P1)" width="40" height="40" frame="IdleNoddingShakingHead 2" direction="ESE" />
-    <item hash="f2b9cd87b9661a5e133c1352e192d701" sprite="Unoma (P1)" width="40" height="40" frame="IdleNoddingShakingHead 2" direction="ENE" />
-    <item hash="e43a5fb98003d744bac67158ff0b0c9e" sprite="Unoma (P1)" width="40" height="40" frame="IdleNoddingShakingHead 2" direction="NNE" />
-    <item hash="35af2ad14f09beb6ecc438e0f05ed68a" sprite="Unoma (P1)" width="40" height="40" frame="IdleNoddingShakingHead 3" direction="SSE" />
-    <item hash="1043a47a604c7549666846043a573d0a" sprite="Unoma (P1)" width="40" height="40" frame="IdleNoddingShakingHead 3" direction="ESE" />
-    <item hash="7cc613748939ec03740bcbf51cba0b85" sprite="Unoma (P1)" width="40" height="40" frame="IdleNoddingShakingHead 3" direction="ENE" />
-    <item hash="fd0982cf41d35374b2e90d66f8cc56af" sprite="Unoma (P1)" width="40" height="40" frame="IdleNoddingShakingHead 3" direction="NNE" />
+    <item hash="c01f4ec61351d602af477b30a5361f49" sprite="Unoma (P1)" width="40" height="40" frame="IdleNoddingShakingHead 1" direction="SSE" />
+    <item hash="4a69f5d6142c8cbd09c9df49608aa25e" sprite="Unoma (P1)" width="40" height="40" frame="IdleNoddingShakingHead 1" direction="ESE" />
+    <item hash="f2b9cd87b9661a5e133c1352e192d701" sprite="Unoma (P1)" width="40" height="40" frame="IdleNoddingShakingHead 1" direction="ENE" />
+    <item hash="e43a5fb98003d744bac67158ff0b0c9e" sprite="Unoma (P1)" width="40" height="40" frame="IdleNoddingShakingHead 1" direction="NNE" />
+    <item hash="35af2ad14f09beb6ecc438e0f05ed68a" sprite="Unoma (P1)" width="40" height="40" frame="IdleNoddingShakingHead 2" direction="SSE" />
+    <item hash="1043a47a604c7549666846043a573d0a" sprite="Unoma (P1)" width="40" height="40" frame="IdleNoddingShakingHead 2" direction="ESE" />
+    <item hash="7cc613748939ec03740bcbf51cba0b85" sprite="Unoma (P1)" width="40" height="40" frame="IdleNoddingShakingHead 2" direction="ENE" />
+    <item hash="fd0982cf41d35374b2e90d66f8cc56af" sprite="Unoma (P1)" width="40" height="40" frame="IdleNoddingShakingHead 2" direction="NNE" />
     <item hash="4c3b4e0203e6340c49d4bcdace02cea4" sprite="Unoma (P1)" width="40" height="40" frame="Nodding 1" direction="SSE" />
     <item hash="1a1f101ef68531630058d63860b3ea42" sprite="Unoma (P1)" width="40" height="40" frame="Nodding 1" direction="ESE" />
     <item hash="2130fc1b4b2336d8ce435c52e4cc418d" sprite="Unoma (P1)" width="40" height="40" frame="Nodding 1" direction="ENE" />
@@ -25593,14 +25593,14 @@
     <item hash="b9fc78af57012a56e5ceb672422ffe5e" sprite="Zero (U)" width="48" height="40" frame="Nodding 4" direction="ESE" />
     <item hash="5812904b6f09db336e251ac4d4ffdb06" sprite="Zero (U)" width="48" height="40" frame="Nodding 4" direction="ENE" />
     <item hash="08bbd96846135f8986c7606bf2aaba46" sprite="Zero (U)" width="48" height="40" frame="Nodding 4" direction="NNE" />
-    <item hash="5087ff0d1804f0915ac974acacb91661" sprite="Zero (U)" width="48" height="40" frame="ShakingHead (Stops) 2" direction="SSE" />
-    <item hash="ea350e872fc6de26f056addadf4a68cc" sprite="Zero (U)" width="48" height="40" frame="ShakingHead (Stops) 2" direction="ESE" />
-    <item hash="8b3e622e5b0a4748bb42046815f67f11" sprite="Zero (U)" width="48" height="40" frame="ShakingHead (Stops) 2" direction="ENE" />
-    <item hash="63e7d0dbd386cfab0d2ac7660687d565" sprite="Zero (U)" width="48" height="40" frame="ShakingHead (Stops) 2" direction="NNE" />
-    <item hash="9fd921b7691dbd4fd26c8d135419c9d3" sprite="Zero (U)" width="48" height="40" frame="ShakingHead (Stops) 3" direction="SSE" />
-    <item hash="7354afb67b70a32ed1760cee6bf2e2de" sprite="Zero (U)" width="48" height="40" frame="ShakingHead (Stops) 3" direction="ESE" />
-    <item hash="27ba5f5bd0f8277339f5d14ead6af548" sprite="Zero (U)" width="48" height="40" frame="ShakingHead (Stops) 3" direction="ENE" />
-    <item hash="fa76f04d90a93d82235aa499f5ef6e04" sprite="Zero (U)" width="48" height="40" frame="ShakingHead (Stops) 3" direction="NNE" />
+    <item hash="5087ff0d1804f0915ac974acacb91661" sprite="Zero (U)" width="48" height="40" frame="ShakingHead (Bad) 1" direction="SSE" />
+    <item hash="ea350e872fc6de26f056addadf4a68cc" sprite="Zero (U)" width="48" height="40" frame="ShakingHead (Bad) 1" direction="ESE" />
+    <item hash="8b3e622e5b0a4748bb42046815f67f11" sprite="Zero (U)" width="48" height="40" frame="ShakingHead (Bad) 1" direction="ENE" />
+    <item hash="63e7d0dbd386cfab0d2ac7660687d565" sprite="Zero (U)" width="48" height="40" frame="ShakingHead (Bad) 1" direction="NNE" />
+    <item hash="9fd921b7691dbd4fd26c8d135419c9d3" sprite="Zero (U)" width="48" height="40" frame="ShakingHead (Bad) 2" direction="SSE" />
+    <item hash="7354afb67b70a32ed1760cee6bf2e2de" sprite="Zero (U)" width="48" height="40" frame="ShakingHead (Bad) 2" direction="ESE" />
+    <item hash="27ba5f5bd0f8277339f5d14ead6af548" sprite="Zero (U)" width="48" height="40" frame="ShakingHead (Bad) 2" direction="ENE" />
+    <item hash="fa76f04d90a93d82235aa499f5ef6e04" sprite="Zero (U)" width="48" height="40" frame="ShakingHead (Bad) 2" direction="NNE" />
     <item hash="ee4a0702592d03fabba0506846077327" sprite="Zero (U)" width="48" height="40" frame="ShakingHead 1" direction="SSE" />
     <item hash="94e1aceab8e7e180fbfd0c8c0a51db29" sprite="Zero (U)" width="48" height="40" frame="ShakingHead 1" direction="ESE" />
     <item hash="7ff45a1644b552d38ef4ddab08258366" sprite="Zero (U)" width="48" height="40" frame="ShakingHead 1" direction="ENE" />
