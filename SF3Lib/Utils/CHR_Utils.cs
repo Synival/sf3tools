@@ -194,7 +194,7 @@ namespace SF3.Utils {
                         .Select(y => y.First())
                         .ToArray());
                 })
-                .Where(x => x.Spritesheets.Length > 0)
+                .Where(x => x.Spritesheets.Count > 0)
                 .ToArray();
         }
 

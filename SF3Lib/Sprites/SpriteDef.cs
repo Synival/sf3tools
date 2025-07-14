@@ -8,11 +8,12 @@ namespace SF3.Sprites {
         public SpriteDef(string name, UniqueFrameDef[] frames, UniqueAnimationDef[] animations) {
             Name = name;
             Spritesheets = frames
+                .OrderBy(x => x.Width)
+                .ThenBy(x => x.Height)
                 .OrderBy(x => x.FrameName)
                 .ThenBy(x => x.Direction)
-                .GroupBy(x => x.FrameName)
-                .Select(x => new SpritesheetDef(x.ToArray()))
-                .ToArray();
+                .GroupBy(x => $"{x.Width}x{x.Height}")
+                .ToDictionary(x => x.Key, x => new SpritesheetDef(x.ToArray()));
 
             Variants = GetVariants(animations);
         }
@@ -20,11 +21,12 @@ namespace SF3.Sprites {
         public SpriteDef(string name, StandaloneFrameDef[] frames, UniqueAnimationDef[] animations) {
             Name = name;
             Spritesheets = frames
+                .OrderBy(x => x.Width)
+                .ThenBy(x => x.Height)
                 .OrderBy(x => x.Name)
                 .ThenBy(x => x.Direction)
-                .GroupBy(x => x.Name)
-                .Select(x => new SpritesheetDef(x.ToArray()))
-                .ToArray();
+                .GroupBy(x => $"{x.Width}x{x.Height}")
+                .ToDictionary(x => x.Key, x => new SpritesheetDef(x.ToArray()));
 
             Variants = GetVariants(animations);
         }
@@ -46,7 +48,7 @@ namespace SF3.Sprites {
         public override string ToString() => Name;
 
         public string Name;
-        public SpritesheetDef[] Spritesheets;
+        public Dictionary<string, SpritesheetDef> Spritesheets;
         public SpriteVariantDef[] Variants;
     }
 }

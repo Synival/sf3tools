@@ -125,7 +125,7 @@ namespace CHR_Builder {
             }
 
             var framesByHash = spriteDef.Spritesheets
-                .SelectMany(x => x.FrameGroups.SelectMany(y => y.Frames.Select(z => new StandaloneFrameDef(z, y.Name, x.FrameWidth, x.FrameHeight))))
+                .SelectMany(x => x.Value.FrameGroups.SelectMany(y => y.Frames.Select(z => new StandaloneFrameDef(z, y.Name, x.Value.FrameWidth, x.Value.FrameHeight))))
                 .ToDictionary(x => x.Hash, x => x);
 
             var uniqueAnimationFramesByVariant = spriteDef
@@ -161,7 +161,7 @@ namespace CHR_Builder {
 
             var uniqueFrameHashesFromAnimations = uniqueFramesByHash.Keys.ToHashSet();
             var framesNotUsedInAnimations = spriteDef.Spritesheets
-                .SelectMany(x => x.FrameGroups.SelectMany(y => y.Frames.Select(z => new StandaloneFrameDef(z, y.Name, x.FrameWidth, x.FrameHeight))))
+                .SelectMany(x => x.Value.FrameGroups.SelectMany(y => y.Frames.Select(z => new StandaloneFrameDef(z, y.Name, x.Value.FrameWidth, x.Value.FrameHeight))))
                 .Where(x => !uniqueFrameHashesFromAnimations.Contains(x.Hash)).ToArray();
 
             foreach (var f in framesNotUsedInAnimations) {
