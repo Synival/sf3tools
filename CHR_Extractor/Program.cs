@@ -1148,11 +1148,12 @@ namespace CHR_Analyzer {
                     .Select(x => x.First())
                     .ToArray();
 
-                List<FrameDef> framesFound = [];
+                List<StandaloneFrameDef> framesFound = [];
                 foreach (var variantDef in spriteSheetVariants) {
                     var spriteName = $"{spriteDef.Name} ({variantDef.Width}x{variantDef.Height})";
 
-                    var frames = spriteDef.Frames
+                    var frames = spriteDef.Spritesheets
+                        .SelectMany(x => x.FrameGroups.SelectMany(y => y.Frames.Select(z => new StandaloneFrameDef(z, y.Name, x.FrameWidth, x.FrameHeight))))
                         .Where(x => x.Width == variantDef.Width && x.Height == variantDef.Height && s_framesByHash.ContainsKey(x.Hash))
                         .Select(x => new { SpriteDefFrame = x, s_framesByHash[x.Hash].Texture, s_framesByHash[x.Hash].FrameInfo })
                         .OrderBy(x => x.FrameInfo.Width)
@@ -1302,12 +1303,21 @@ namespace CHR_Analyzer {
                     .ThenBy(x => x.Direction)
                     .ThenBy(x => x.Hash)
                     .ToList();
-                spriteDef.Frames = framesFound.OrderBy(x => x.Name).ToArray();
-                var framesFoundHashSet = spriteDef.Frames.Select(x => x.Hash).ToHashSet();
+
+                spriteDef.Spritesheets = framesFound
+                    .OrderBy(x => x.Width)
+                    .ThenBy(x => x.Height)
+                    .OrderBy(x => x.Name)
+                    .ThenBy(x => x.Direction)
+                    .GroupBy(x => x.Width << 16 + x.Height)
+                    .Select(x => new SpritesheetDef(x.ToArray()))
+                    .ToArray();
+
+                var framesFoundHashSet = framesFound.Select(x => x.Hash).ToHashSet();
 
                 // Filter out variants that have no frames.
                 var validVariants = spriteDef.Variants
-                    .Where(x => spriteDef.Frames.Any(y => x.Width == y.Width && x.Height == y.Height))
+                    .Where(x => framesFound.Any(y => x.Width == y.Width && x.Height == y.Height))
                     .ToArray();
                 spriteDef.Variants = validVariants
                     .OrderBy(x => x.Name)
@@ -1336,17 +1346,12 @@ namespace CHR_Analyzer {
                 if (!spritesWithSpriteSheets.Contains(spriteDef))
                     continue;
 
-                spriteDef.Frames = spriteDef.Frames
-                    .OrderBy(x => x.SpriteSheetY)
-                    .ThenBy(x => x.SpriteSheetX)
-                    .ToArray();
-
                 var spritePath = Path.Combine(c_pathOut, FilesystemString(spriteDef.Name));
                 var spriteDefPath = Path.Combine(spritePath, FilesystemString(spriteDef.Name) + ".json");
                 Console.WriteLine($"Writing '{spriteDefPath}'...");
 
-                if (spriteDef.Frames.Length == 0) {
-                    Console.WriteLine($"    Skipping -- contains no frames");
+                if (spriteDef.Spritesheets.Length == 0) {
+                    Console.WriteLine($"    Skipping -- contains no sprite sheets");
                     continue;
                 }
 

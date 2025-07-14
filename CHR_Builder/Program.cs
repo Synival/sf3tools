@@ -124,7 +124,9 @@ namespace CHR_Builder {
 #pragma warning restore CA1416 // Validate platform compatibility
             }
 
-            var framesByHash = spriteDef.Frames.ToDictionary(x => x.Hash, x => x);
+            var framesByHash = spriteDef.Spritesheets
+                .SelectMany(x => x.FrameGroups.SelectMany(y => y.Frames.Select(z => new StandaloneFrameDef(z, y.Name, x.FrameWidth, x.FrameHeight))))
+                .ToDictionary(x => x.Hash, x => x);
 
             var uniqueAnimationFramesByVariant = spriteDef
                 .Variants
@@ -158,7 +160,10 @@ namespace CHR_Builder {
                 .ToDictionary(x => x.Key, x => x.First());
 
             var uniqueFrameHashesFromAnimations = uniqueFramesByHash.Keys.ToHashSet();
-            var framesNotUsedInAnimations = spriteDef.Frames.Where(x => !uniqueFrameHashesFromAnimations.Contains(x.Hash)).ToArray();
+            var framesNotUsedInAnimations = spriteDef.Spritesheets
+                .SelectMany(x => x.FrameGroups.SelectMany(y => y.Frames.Select(z => new StandaloneFrameDef(z, y.Name, x.FrameWidth, x.FrameHeight))))
+                .Where(x => !uniqueFrameHashesFromAnimations.Contains(x.Hash)).ToArray();
+
             foreach (var f in framesNotUsedInAnimations) {
                 var variant = spriteDef.Variants
                     .Select((x, i) => (Variant : (SpriteVariantDef?) x, Index : i))

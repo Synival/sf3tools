@@ -159,7 +159,7 @@ namespace SF3.Utils {
         }
 
         public static SpriteDef[] CreateAllSpriteDefs() {
-            string[] FixedFrameNames(string spriteName) {
+            string[] ApplicableSpriteNames(string spriteName) {
                 // Edmund's P1 sprites are special because some frames are shared with and without a weapon.
                 // (His cape is so big, the rendered frames are the same when his back is turned)
                 // Make some very specific corrections to include the duplicated frames in both sprite
@@ -178,24 +178,23 @@ namespace SF3.Utils {
             return s_uniqueAnimationsByHash.Values
                 .GroupBy(x => x.SpriteName)
                 .Select(x => {
-                    var frameNames = FixedFrameNames(x.Key);
+                    var spriteNames = ApplicableSpriteNames(x.Key);
                     var frames = s_uniqueFramesByHash
-                        .Where(y => y.Value.TextureHash != null && frameNames.Contains(y.Value.SpriteName))
+                        .Where(y => y.Value.TextureHash != null && spriteNames.Contains(y.Value.SpriteName))
                         .GroupBy(y => y.Value.TextureHash)
-                        .Select(y => y.First())
-                        .Select(y => new FrameDef(y.Value))
+                        .Select(y => y.First().Value)
                         .OrderBy(y => y.Width)
                         .OrderBy(y => y.Height)
-                        .OrderBy(y => y.Name)
+                        .OrderBy(y => y.FrameName)
                         .OrderBy(y => y.Direction)
-                        .OrderBy(y => y.Hash)
+                        .OrderBy(y => y.TextureHash)
                         .ToArray();
                     return new SpriteDef(x.Key, frames, x
                         .GroupBy(y => y.AnimationHash)
                         .Select(y => y.First())
                         .ToArray());
                 })
-                .Where(x => x.Frames.Length > 0)
+                .Where(x => x.Spritesheets.Length > 0)
                 .ToArray();
         }
 
