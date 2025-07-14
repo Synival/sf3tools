@@ -25358,8 +25358,8 @@
     <item hash="5364d4ffec6af11a31b25c10e51b92e2" sprite="Yasha (Weaponless)" width="48" height="32" frame="CollapsingFromPanting 1" direction="ESE" />
     <item hash="969249a201cdd6a39e9d174cc2e98ec3" sprite="Yasha (Weaponless)" width="48" height="32" frame="CollapsingFromPanting 2" direction="ESE" />
     <item hash="cc0d806d0958e88c8f9a331c3a5d57eb" sprite="Yasha (Weaponless)" width="48" height="32" frame="OnGround 1" direction="SSE" />
-    <item hash="2028ffd4581b4ed3087b07657b00dbac" sprite="Yasha (Weaponless)" width="48" height="32" frame="OnGround 1" direction="ESE" />
     <item hash="8d85ae21f567e760e3d9ef467c5f1080" sprite="Yasha (Weaponless)" width="48" height="32" frame="OnGround 1" direction="ESE" />
+    <item hash="2028ffd4581b4ed3087b07657b00dbac" sprite="Yasha (Weaponless)" width="48" height="32" frame="OnGround 1" direction="ENE" />
     <item hash="3933f00a3f1a9e36f7c18c06ebcbfecc" sprite="Yasha (Weaponless)" width="48" height="32" frame="OnGround 1" direction="NNE" />
     <item hash="1b3519b7d52a8009b3d85e9c6dcf8707" sprite="Yasha (Weaponless)" width="48" height="32" frame="Panting 1" direction="ESE" />
     <item hash="9fb0995bd1e1b5b6f3b3903aa51b31d4" sprite="Yasha (Weaponless)" width="48" height="32" frame="Panting 2" direction="ESE" />
