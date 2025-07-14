@@ -1,4 +1,6 @@
-﻿using SF3.Types;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
+using SF3.Types;
 
 namespace SF3.Sprites {
     public class StandaloneFrameDef {
@@ -30,6 +32,9 @@ namespace SF3.Sprites {
         public string Hash;
         public int Width;
         public int Height;
+
+        [JsonConverter(typeof(StringEnumConverter))]
+
         public SpriteFrameDirection Direction;
         public int SpriteSheetX;
         public int SpriteSheetY;
