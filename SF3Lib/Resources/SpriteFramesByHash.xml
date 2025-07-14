@@ -7209,17 +7209,17 @@
     <item hash="81966108d2ec4798e4a393fd568f05c7" sprite="Franz" width="48" height="40" frame="Idle 3" direction="ESE" />
     <item hash="e091e2a3634173e0149249093bd3acbb" sprite="Franz" width="48" height="40" frame="Idle 3" direction="ENE" />
     <item hash="a8ee08c0f60b7f2ee8cce1f23bca9bea" sprite="Franz" width="48" height="40" frame="Idle 3" direction="NNE" />
-    <item hash="ac7d9462369c49b991510a542898bd5b" sprite="Franz" width="48" height="40" frame="Walking (Bad) 1" direction="SSE" />
-    <item hash="e80f8818b307219fd1c6e66514e10269" sprite="Franz" width="48" height="40" frame="Walking (Bad) 1" direction="ENE" />
-    <item hash="262b43b5707088a5b731da828ac58117" sprite="Franz" width="48" height="40" frame="Walking (Bad) 1" direction="NNE" />
-    <item hash="c4ff232e690789881eb9833bd512fd41" sprite="Franz" width="48" height="40" frame="Walking (Bad) 2" direction="SSE" />
-    <item hash="91ba2eac171f9e73748a62d374ff0ef8" sprite="Franz" width="48" height="40" frame="Walking (Bad) 2" direction="ESE" />
-    <item hash="57279b4ba75bc0b36351a61d206dfb79" sprite="Franz" width="48" height="40" frame="Walking (Bad) 2" direction="ENE" />
-    <item hash="e1603c8cdc24af37ecd0d4c188e99d8b" sprite="Franz" width="48" height="40" frame="Walking (Bad) 2" direction="NNE" />
-    <item hash="97a33d23679f405cfbaa6abbc6cd8a50" sprite="Franz" width="48" height="40" frame="Walking (Bad) 3" direction="SSE" />
-    <item hash="6fb2aed13f9613e1a99ccf1989eaece7" sprite="Franz" width="48" height="40" frame="Walking (Bad) 3" direction="ESE" />
-    <item hash="fb822d010c060c937dc1fd04355078ed" sprite="Franz" width="48" height="40" frame="Walking (Bad) 3" direction="ENE" />
-    <item hash="12971b53d9a870eeaf0521f3d1f74f1e" sprite="Franz" width="48" height="40" frame="Walking (Bad) 3" direction="NNE" />
+    <item hash="ac7d9462369c49b991510a542898bd5b" sprite="Franz" width="48" height="40" frame="Walking 1" direction="SSE" />
+    <item hash="e80f8818b307219fd1c6e66514e10269" sprite="Franz" width="48" height="40" frame="Walking 1" direction="ENE" />
+    <item hash="262b43b5707088a5b731da828ac58117" sprite="Franz" width="48" height="40" frame="Walking 1" direction="NNE" />
+    <item hash="c4ff232e690789881eb9833bd512fd41" sprite="Franz" width="48" height="40" frame="Walking 2" direction="SSE" />
+    <item hash="91ba2eac171f9e73748a62d374ff0ef8" sprite="Franz" width="48" height="40" frame="Walking 2" direction="ESE" />
+    <item hash="57279b4ba75bc0b36351a61d206dfb79" sprite="Franz" width="48" height="40" frame="Walking 2" direction="ENE" />
+    <item hash="e1603c8cdc24af37ecd0d4c188e99d8b" sprite="Franz" width="48" height="40" frame="Walking 2" direction="NNE" />
+    <item hash="97a33d23679f405cfbaa6abbc6cd8a50" sprite="Franz" width="48" height="40" frame="Walking 3" direction="SSE" />
+    <item hash="6fb2aed13f9613e1a99ccf1989eaece7" sprite="Franz" width="48" height="40" frame="Walking 3" direction="ESE" />
+    <item hash="fb822d010c060c937dc1fd04355078ed" sprite="Franz" width="48" height="40" frame="Walking 3" direction="ENE" />
+    <item hash="12971b53d9a870eeaf0521f3d1f74f1e" sprite="Franz" width="48" height="40" frame="Walking 3" direction="NNE" />
     <item hash="720704a19017841907352b0bd692d173" sprite="Franz (Helmet)" width="48" height="40" frame="Idle 1" direction="SSE" />
     <item hash="ff1e0d47ab2531b1bec7076fdee7e54a" sprite="Franz (Helmet)" width="48" height="40" frame="Idle 1" direction="ESE" />
     <item hash="4adb40a173eaba6645cb24ff12528088" sprite="Franz (Helmet)" width="48" height="40" frame="Idle 1" direction="ENE" />

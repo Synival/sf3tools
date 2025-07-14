@@ -833,9 +833,6 @@ namespace CHR_Analyzer {
                     "Idle (Offset)",
                     "Idle (Reduced, Janky)",
                 ]},
-                { "Walking (Bad)", [
-                    "Walking (Has Broken/Missing Frames)",
-                ]},
                 { "Nodding (Bad)", [
                     "Nodding (Offset)",
                     "Nodding (Field, Misaligned)",
@@ -1000,6 +997,7 @@ namespace CHR_Analyzer {
                 { " Walking", [
                     "StillFrame (Walking 1)",
                     "StillFrame (Walking, Should be 1 Direction)",
+                    "Walking (Has Broken/Missing Frames)",
                 ]},
             };
 
