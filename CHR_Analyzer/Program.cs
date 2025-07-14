@@ -141,7 +141,13 @@ namespace CHR_Analyzer {
                             frame.SpriteName == "Light Blue Torch Flame" ||
                             frame.SpriteName == "Strange Yellow Light" ||
                             frame.SpriteName == "Large Orange Explosion" ||
-                            frame.SpriteName == "Light From Staff of Besem"
+                            frame.SpriteName == "Light From Staff of Besem" ||
+                            frame.SpriteName == "Rainblood Bishop (Cape)" ||
+                            frame.SpriteName == "Rainblood Queen (Cape)" ||
+                            frame.SpriteName == "Rainblood King (Cape)" ||
+                            frame.SpriteName == "Rainblood Pawn (Cape)" ||
+                            frame.SpriteName == "Rainblood Knight (Cape)" ||
+                            frame.SpriteName == "Rainblood Rook (Cape)"
                         ) {
                             continue;
                         }
