@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace SF3.Sprites {
     public class SpritesheetDef {
@@ -9,8 +10,7 @@ namespace SF3.Sprites {
             FrameHeight = frames[0].Height;
             FrameGroups = frames
                 .GroupBy(x => x.FrameName)
-                .Select(x => new FrameGroupDef(x.ToArray()))
-                .ToArray();
+                .ToDictionary(x => x.Key, x => new FrameGroupDef(x.ToArray()));
         }
 
         public SpritesheetDef(StandaloneFrameDef[] frames) {
@@ -18,14 +18,13 @@ namespace SF3.Sprites {
             FrameHeight = frames[0].Height;
             FrameGroups = frames
                 .GroupBy(x => x.Name)
-                .Select(x => new FrameGroupDef(x.ToArray()))
-                .ToArray();
+                .ToDictionary(x => x.Key, x => new FrameGroupDef(x.ToArray()));
         }
 
         public override string ToString() => $"{FrameWidth}x{FrameHeight}";
 
         public int FrameWidth;
         public int FrameHeight;
-        public FrameGroupDef[] FrameGroups;
+        public Dictionary<string, FrameGroupDef> FrameGroups;
     }
 }
