@@ -97,8 +97,8 @@ namespace CHR_Analyzer {
             if (!s_animationsByHash.ContainsKey(hash))
                 s_animationsByHash.Add(hash, new AnimationInfo(animation.AnimationInfo));
 
-            var lastFrame = animation.AnimationFrames.Last();
-            var lastFrameWord = (lastFrame.FrameID << 8) | lastFrame.Duration;
+            var lastFrame = animation.AnimationFrames.LastOrDefault();
+            var lastFrameWord = (lastFrame == null) ? 0 : (lastFrame.FrameID << 8) | lastFrame.Duration;
 
             s_animationsByHash[hash].Sprites.Add(new AnimationFileSprite(scenario, filename, spriteIndex, animation.ID, lastFrameWord));
         }
@@ -352,6 +352,7 @@ namespace CHR_Analyzer {
                 ]},
                 { "Nodding", [
                     "Nodding",
+                    "Nodding (Incomplete, Missing End)",
                     "Nodding (Should be 4 Directions)",
                     "Nodding 1",
                     "Nodding 2",
@@ -416,6 +417,7 @@ namespace CHR_Analyzer {
                 ]},
                 { "ShakingHead", [
                     "ShakingHead",
+                    "ShakingHead (Incomplete, Missing End)",
                     "ShakingHead (Should be 4 Directions)",
                     "ShakingHead (Some Frames Offset)",
                     "ShakingHead (Repeat)",

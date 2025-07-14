@@ -5,8 +5,8 @@ using SF3.Types;
 
 namespace SF3.Models.Tables.CHR {
     public class AnimationFrameTable : TerminatedTable<AnimationFrame> {
-        protected AnimationFrameTable(IByteData data, string name, int address, string rowPrefix, int spriteIndex, int spriteId, int spriteDirections, int animationType, FrameTable frameTable)
-        : base(data, name, address, 0x00, 100) {
+        protected AnimationFrameTable(IByteData data, string name, int address, string rowPrefix, int spriteIndex, int spriteId, int spriteDirections, int animationType, FrameTable frameTable, int max)
+        : base(data, name, address, 0x00, max) {
             RowPrefix        = rowPrefix ?? "";
             SpriteIndex      = spriteIndex;
             SpriteID         = spriteId;
@@ -15,8 +15,8 @@ namespace SF3.Models.Tables.CHR {
             FrameTable       = frameTable;
         }
 
-        public static AnimationFrameTable Create(IByteData data, string name, int address, string rowPrefix, int spriteIndex, int spriteId, int spriteDirections, int animationIndex, FrameTable frameTable) {
-            var newTable = new AnimationFrameTable(data, name, address, rowPrefix, spriteIndex, spriteId, spriteDirections, animationIndex, frameTable);
+        public static AnimationFrameTable Create(IByteData data, string name, int address, string rowPrefix, int spriteIndex, int spriteId, int spriteDirections, int animationIndex, FrameTable frameTable, int max) {
+            var newTable = new AnimationFrameTable(data, name, address, rowPrefix, spriteIndex, spriteId, spriteDirections, animationIndex, frameTable, max);
             if (!newTable.Load())
                 throw new InvalidOperationException("Couldn't initialize table");
             return newTable;
