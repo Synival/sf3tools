@@ -7,18 +7,15 @@ namespace SF3.Sprites {
         public FrameGroupDef() { }
 
         public FrameGroupDef(UniqueFrameDef[] frames) {
-            Name   = frames[0].FrameName;
             Frames = frames.ToDictionary(x => x.Direction.ToString(), x => new FrameDef(x));
         }
 
         public FrameGroupDef(StandaloneFrameDef[] frames) {
-            Name   = frames[0].Name;
             Frames = frames.ToDictionary(x => x.Direction.ToString(), x => new FrameDef(x));
         }
 
-        public override string ToString() => Name;
+        public override string ToString() => string.Join(", ", Frames.Keys);
 
-        public string Name;
         public Dictionary<string, FrameDef> Frames;
     }
 }

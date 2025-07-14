@@ -16,11 +16,11 @@ namespace SF3.Sprites {
             SpriteSheetY = -1;
         }
 
-        public StandaloneFrameDef(FrameDef frame, string name, int width, int height) {
+        public StandaloneFrameDef(FrameDef frame, SpriteFrameDirection direction, string name, int width, int height) {
             Hash         = frame.Hash;
-            Direction    = frame.Direction;
             SpriteSheetX = frame.SpriteSheetX;
             SpriteSheetY = frame.SpriteSheetY;
+            Direction    = direction;
             Name         = name;
             Width        = width;
             Height       = height;

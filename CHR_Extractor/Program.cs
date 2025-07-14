@@ -1153,7 +1153,12 @@ namespace CHR_Analyzer {
                     var spriteName = $"{spriteDef.Name} ({variantDef.Width}x{variantDef.Height})";
 
                     var frames = spriteDef.Spritesheets
-                        .SelectMany(x => x.Value.FrameGroups.SelectMany(y => y.Value.Frames.Select(z => new StandaloneFrameDef(z.Value, y.Value.Name, x.Value.FrameWidth, x.Value.FrameHeight))))
+                        .SelectMany(x => {
+                            var dimensions = SpritesheetDef.KeyToDimensions(x.Key);
+                            return x.Value.FrameGroups
+                                .SelectMany(y => y.Value.Frames
+                                    .Select(z => new StandaloneFrameDef(z.Value, Enum.Parse<SpriteFrameDirection>(z.Key), y.Key, dimensions.Width, dimensions.Height)));
+                        })
                         .Where(x => x.Width == variantDef.Width && x.Height == variantDef.Height && s_framesByHash.ContainsKey(x.Hash))
                         .Select(x => new { SpriteDefFrame = x, s_framesByHash[x.Hash].Texture, s_framesByHash[x.Hash].FrameInfo })
                         .OrderBy(x => x.FrameInfo.Width)
@@ -1309,7 +1314,7 @@ namespace CHR_Analyzer {
                     .ThenBy(x => x.Height)
                     .OrderBy(x => x.Name)
                     .ThenBy(x => x.Direction)
-                    .GroupBy(x => $"{x.Width}x{x.Height}")
+                    .GroupBy(x => SpritesheetDef.DimensionsToKey(x.Width, x.Height))
                     .ToDictionary(x => x.Key, x => new SpritesheetDef(x.ToArray()));
 
                 var framesFoundHashSet = framesFound.Select(x => x.Hash).ToHashSet();

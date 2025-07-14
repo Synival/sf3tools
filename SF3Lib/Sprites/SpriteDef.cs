@@ -12,7 +12,7 @@ namespace SF3.Sprites {
                 .ThenBy(x => x.Height)
                 .OrderBy(x => x.FrameName)
                 .ThenBy(x => x.Direction)
-                .GroupBy(x => $"{x.Width}x{x.Height}")
+                .GroupBy(x => SpritesheetDef.DimensionsToKey(x.Width, x.Height))
                 .ToDictionary(x => x.Key, x => new SpritesheetDef(x.ToArray()));
 
             Variants = GetVariants(animations);
@@ -25,7 +25,7 @@ namespace SF3.Sprites {
                 .ThenBy(x => x.Height)
                 .OrderBy(x => x.Name)
                 .ThenBy(x => x.Direction)
-                .GroupBy(x => $"{x.Width}x{x.Height}")
+                .GroupBy(x => SpritesheetDef.DimensionsToKey(x.Width, x.Height))
                 .ToDictionary(x => x.Key, x => new SpritesheetDef(x.ToArray()));
 
             Variants = GetVariants(animations);

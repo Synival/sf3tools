@@ -6,25 +6,26 @@ namespace SF3.Sprites {
         public SpritesheetDef() { }
 
         public SpritesheetDef(UniqueFrameDef[] frames) {
-            FrameWidth  = frames[0].Width;
-            FrameHeight = frames[0].Height;
             FrameGroups = frames
                 .GroupBy(x => x.FrameName)
                 .ToDictionary(x => x.Key, x => new FrameGroupDef(x.ToArray()));
         }
 
         public SpritesheetDef(StandaloneFrameDef[] frames) {
-            FrameWidth  = frames[0].Width;
-            FrameHeight = frames[0].Height;
             FrameGroups = frames
                 .GroupBy(x => x.Name)
                 .ToDictionary(x => x.Key, x => new FrameGroupDef(x.ToArray()));
         }
 
-        public override string ToString() => $"{FrameWidth}x{FrameHeight}";
+        public static string DimensionsToKey(int width, int height)
+            => $"{width}x{height}";
 
-        public int FrameWidth;
-        public int FrameHeight;
+        public static (int Width, int Height) KeyToDimensions(string key) {
+            var xPos = key.IndexOf('x');
+            return (Width: int.Parse(key.Substring(0, xPos)), Height: int.Parse(key.Substring(xPos + 1)));
+        }
+
+        public override string ToString() => string.Join(", ", FrameGroups.Keys);
         public Dictionary<string, FrameGroupDef> FrameGroups;
     }
 }

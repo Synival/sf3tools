@@ -6,6 +6,7 @@ using CommonLib.Utils;
 using Newtonsoft.Json;
 using SF3.ByteData;
 using SF3.Sprites;
+using SF3.Types;
 
 namespace CHR_Builder {
     public class Program {
@@ -125,7 +126,12 @@ namespace CHR_Builder {
             }
 
             var framesByHash = spriteDef.Spritesheets
-                .SelectMany(x => x.Value.FrameGroups.SelectMany(y => y.Value.Frames.Select(z => new StandaloneFrameDef(z.Value, y.Value.Name, x.Value.FrameWidth, x.Value.FrameHeight))))
+                .SelectMany(x => {
+                    var dimensions = SpritesheetDef.KeyToDimensions(x.Key);
+                    return x.Value.FrameGroups
+                        .SelectMany(y => y.Value.Frames
+                            .Select(z => new StandaloneFrameDef(z.Value, Enum.Parse<SpriteFrameDirection>(z.Key), y.Key, dimensions.Width, dimensions.Height)));
+                })
                 .ToDictionary(x => x.Hash, x => x);
 
             var uniqueAnimationFramesByVariant = spriteDef
@@ -161,7 +167,12 @@ namespace CHR_Builder {
 
             var uniqueFrameHashesFromAnimations = uniqueFramesByHash.Keys.ToHashSet();
             var framesNotUsedInAnimations = spriteDef.Spritesheets
-                .SelectMany(x => x.Value.FrameGroups.SelectMany(y => y.Value.Frames.Select(z => new StandaloneFrameDef(z.Value, y.Value.Name, x.Value.FrameWidth, x.Value.FrameHeight))))
+                .SelectMany(x => {
+                    var dimensions = SpritesheetDef.KeyToDimensions(x.Key);
+                    return x.Value.FrameGroups
+                        .SelectMany(y => y.Value.Frames
+                            .Select(z => new StandaloneFrameDef(z.Value, Enum.Parse<SpriteFrameDirection>(z.Key), y.Key, dimensions.Width, dimensions.Height)));
+                })
                 .Where(x => !uniqueFrameHashesFromAnimations.Contains(x.Hash)).ToArray();
 
             foreach (var f in framesNotUsedInAnimations) {
