@@ -1153,7 +1153,7 @@ namespace CHR_Analyzer {
                     var spriteName = $"{spriteDef.Name} ({variantDef.Width}x{variantDef.Height})";
 
                     var frames = spriteDef.Spritesheets
-                        .SelectMany(x => x.Value.FrameGroups.SelectMany(y => y.Value.Frames.Select(z => new StandaloneFrameDef(z, y.Value.Name, x.Value.FrameWidth, x.Value.FrameHeight))))
+                        .SelectMany(x => x.Value.FrameGroups.SelectMany(y => y.Value.Frames.Select(z => new StandaloneFrameDef(z.Value, y.Value.Name, x.Value.FrameWidth, x.Value.FrameHeight))))
                         .Where(x => x.Width == variantDef.Width && x.Height == variantDef.Height && s_framesByHash.ContainsKey(x.Hash))
                         .Select(x => new { SpriteDefFrame = x, s_framesByHash[x.Hash].Texture, s_framesByHash[x.Hash].FrameInfo })
                         .OrderBy(x => x.FrameInfo.Width)

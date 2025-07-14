@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using SF3.Types;
 
 namespace SF3.Sprites {
@@ -7,17 +8,17 @@ namespace SF3.Sprites {
 
         public FrameGroupDef(UniqueFrameDef[] frames) {
             Name   = frames[0].FrameName;
-            Frames = frames.Select(x => new FrameDef(x)).ToArray();
+            Frames = frames.ToDictionary(x => x.Direction.ToString(), x => new FrameDef(x));
         }
 
         public FrameGroupDef(StandaloneFrameDef[] frames) {
             Name   = frames[0].Name;
-            Frames = frames.Select(x => new FrameDef(x)).ToArray();
+            Frames = frames.ToDictionary(x => x.Direction.ToString(), x => new FrameDef(x));
         }
 
         public override string ToString() => Name;
 
         public string Name;
-        public FrameDef[] Frames;
+        public Dictionary<string, FrameDef> Frames;
     }
 }
