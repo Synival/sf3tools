@@ -206,6 +206,8 @@ namespace CHR_Analyzer {
                     "Idle (2 Frames)",
                     "Idle (1 Direction, Facing NNE)",
                 ]},
+                { "Idle (Fixed Height)", ["Idle (Fixed Height)"] },
+                { "Idle (Wrong Height)", ["Idle (Wrong Height)"] },
 
                 // ---------------------------
                 //  Idle
