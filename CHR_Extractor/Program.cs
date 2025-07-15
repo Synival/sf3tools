@@ -1141,7 +1141,8 @@ namespace CHR_Analyzer {
             var spritesWithSpriteSheets = new HashSet<SpriteDef>();
             foreach (var spriteDef in spriteDefs) {
                 var spritePath = Path.Combine(c_pathOut, FilesystemString(spriteDef.Name));
-                var spriteSheetVariants = spriteDef.Variants
+                var spriteSheetVariants = spriteDef.Spritesheets.Values
+                    .SelectMany(x => x.Variants)
                     .GroupBy(x => (x.Width << 16) + x.Height)
                     .Select(x => x.First())
                     .ToArray();
@@ -1307,33 +1308,34 @@ namespace CHR_Analyzer {
                     .ThenBy(x => x.Hash)
                     .ToList();
 
+                // Filter out sprite sheets and variants that have no frames.
                 spriteDef.Spritesheets = framesFound
                     .OrderBy(x => x.Width)
                     .ThenBy(x => x.Height)
                     .OrderBy(x => x.Name)
                     .ThenBy(x => x.Direction)
                     .GroupBy(x => SpritesheetDef.DimensionsToKey(x.Width, x.Height))
-                    .ToDictionary(x => x.Key, x => new SpritesheetDef(x.ToArray()));
+                    .ToDictionary(x => x.Key, x => new SpritesheetDef(
+                        x.ToArray(),
+                        spriteDef.Spritesheets[x.Key].Variants
+                            .Where(y => framesFound.Any(z => y.Width == z.Width && y.Height == z.Height))
+                            .OrderBy(y => y.Name)
+                            .ToArray()
+                    ));
 
                 var framesFoundHashSet = framesFound.Select(x => x.Hash).ToHashSet();
 
-                // Filter out variants that have no frames.
-                var validVariants = spriteDef.Variants
-                    .Where(x => framesFound.Any(y => x.Width == y.Width && x.Height == y.Height))
-                    .ToArray();
-                spriteDef.Variants = validVariants
-                    .OrderBy(x => x.Name)
-                    .ToArray();
-
                 // Filter out animations that have missing frames or no frames at all.
-                foreach (var variant in spriteDef.Variants) {
-                    var validAnimations = variant.Animations
-                        .Where(x => x.AnimationFrames.Length > 0 && x.AnimationFrames
-                            .All(y => y.FrameHashes == null || y.FrameHashes.All(z => z == null || framesFoundHashSet.Contains(z)))
-                        )
-                        .OrderBy(x => x.Name)
-                        .ToArray();
-                    variant.Animations = validAnimations;
+                foreach (var spritesheet in spriteDef.Spritesheets.Values) {
+                    foreach (var variant in spritesheet.Variants) {
+                        var validAnimations = variant.Animations
+                            .Where(x => x.AnimationFrames.Length > 0 && x.AnimationFrames
+                                .All(y => y.FrameHashes == null || y.FrameHashes.All(z => z == null || framesFoundHashSet.Contains(z)))
+                            )
+                            .OrderBy(x => x.Name)
+                            .ToArray();
+                        variant.Animations = validAnimations;
+                    }
                 }
             }
             Console.WriteLine("Spritesheet writing complete.");

@@ -34,7 +34,8 @@ namespace CHR_Builder {
 
                 using (var fileOut = File.Open(outputChrFile, FileMode.Create)) {
 #pragma warning disable CA1416 // Validate platform compatibility
-                    var spritesheets = spriteDef.Variants
+                    var spritesheets = spriteDef.Spritesheets.Values
+                        .SelectMany(x => x.Variants)
                         // Sprite sheets don't care about the number of directions, only (width x height).
                         .Select(x => Path.GetFileNameWithoutExtension(path) + $" ({x.Width}x{x.Height})")
                         .Distinct()
@@ -134,8 +135,8 @@ namespace CHR_Builder {
                 })
                 .ToDictionary(x => x.Hash, x => x);
 
-            var uniqueAnimationFramesByVariant = spriteDef
-                .Variants
+            var uniqueAnimationFramesByVariant = spriteDef.Spritesheets.Values
+                        .SelectMany(x => x.Variants)
                 .Select(x => (Variant: x, UniqueAnimationFrames: x.Animations
                     .SelectMany(y => y.AnimationFrames)
                     .Where(y => y != null && y.FrameHashes != null)
@@ -145,7 +146,8 @@ namespace CHR_Builder {
                 ))
                 .ToDictionary(x => x.Variant, x => x.UniqueAnimationFrames);
 
-            var frameInfos = spriteDef.Variants
+            var frameInfos = spriteDef.Spritesheets.Values
+                .SelectMany(x => x.Variants)
                 .SelectMany((x, xi) => (x.Animations ?? [])
                     .SelectMany((y, yi) => (y.AnimationFrames ?? [])
                         .Where(z => uniqueAnimationFramesByVariant[x].Contains(z))
@@ -176,7 +178,8 @@ namespace CHR_Builder {
                 .Where(x => !uniqueFrameHashesFromAnimations.Contains(x.Hash)).ToArray();
 
             foreach (var f in framesNotUsedInAnimations) {
-                var variant = spriteDef.Variants
+                var variant = spriteDef.Spritesheets.Values
+                    .SelectMany(x => x.Variants)
                     .Select((x, i) => (Variant : (SpriteVariantDef?) x, Index : i))
                     .FirstOrDefault(x => x.Variant?.Width == f.Width && x.Variant?.Height == f.Height);
                 if (variant.Variant == null)
@@ -223,11 +226,13 @@ namespace CHR_Builder {
 
         private static void WriteSpriteHeaderTable(FileStream fileOut, SpriteDef spriteDef, out int[] frameTableOffsetAddrs, out int[] animationTableOffsetAddrs) {
             var outputData = new ByteData(new ByteArray(0x18));
-            frameTableOffsetAddrs     = new int[spriteDef.Variants.Length];
-            animationTableOffsetAddrs = new int[spriteDef.Variants.Length];
+            var variants = spriteDef.Spritesheets.Values.SelectMany(x => x.Variants).ToArray();
 
-            for (int i = 0; i < spriteDef.Variants.Length; i++) {
-                var variant = spriteDef.Variants[i];
+            frameTableOffsetAddrs     = new int[variants.Length];
+            animationTableOffsetAddrs = new int[variants.Length];
+
+            for (int i = 0; i < variants.Length; i++) {
+                var variant = variants[i];
 
                 outputData.SetWord(0x00, 0x0000); // Sprite ID (always 0 for these files)
                 outputData.SetWord(0x02, variant.Width);
@@ -270,7 +275,8 @@ namespace CHR_Builder {
 
             var byteData = new ByteData(new ByteArray(4));
             int variantIndex = 0;
-            foreach (var variant in spriteDef.Variants) {
+            var variants = spriteDef.Spritesheets.Values.SelectMany(x => x.Variants).ToArray();
+            foreach (var variant in variants) {
                 var variantFrames = (variantIndex < frameInfosByVariant?.Length) ? frameInfosByVariant[variantIndex] : [];
                 var aniFrameTableOffsets = new int[variant.Animations.Length];
                 int aniIndex = 0;
