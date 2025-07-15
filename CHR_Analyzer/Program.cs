@@ -120,7 +120,6 @@ namespace CHR_Analyzer {
                         if (frame.SpriteName.StartsWith("Small Icons") ||
                             frame.SpriteName.StartsWith("Explosion")   ||
                             frame.SpriteName.StartsWith("Fey Wings")   ||
-                            frame.SpriteName == "Transparent Frame"    ||
                             frame.SpriteName == "Transparency"         ||
                             frame.SpriteName == "Lightning Bolt"       ||
                             frame.SpriteName == "Bulzome Lightning Strike" ||

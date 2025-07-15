@@ -168,19 +168,25 @@ namespace SF3.Utils {
                     return new string[] { "Edmund (P1)", "Edmund (P1) (Sword/Weaponless)" };
                 else if (spriteName == "Edmund (P1) (Weaponless)")
                     return new string[] { "Edmund (P1) (Weaponless)", "Edmund (P1) (Sword/Weaponless)" };
-                // Explosions have a transparent frame with them.
-                else if (spriteName == "Explosion")
-                    return new string[] { "Explosion", "Transparent Frame", "Transparency" };
                 else
                     return spriteName.Split('|').Select(x => x.Trim()).ToArray();
+            }
+
+            string[] ExtraFrameHashes(string spriteName) {
+                // Explosions need to steal some transparency frames.
+                if (spriteName == "Explosion")
+                    return new string[] { "d33e04f92840fa8d80d642441797bafe" };
+                else
+                    return new string[0];
             }
 
             return s_uniqueAnimationsByHash.Values
                 .GroupBy(x => x.SpriteName)
                 .Select(x => {
                     var spriteNames = ApplicableSpriteNames(x.Key);
+                    var extraFrameHashes = ExtraFrameHashes(x.Key);
                     var frames = s_uniqueFramesByHash
-                        .Where(y => y.Value.TextureHash != null && spriteNames.Contains(y.Value.SpriteName))
+                        .Where(y => y.Value.TextureHash != null && (spriteNames.Contains(y.Value.SpriteName) || extraFrameHashes.Contains(y.Value.TextureHash)))
                         .GroupBy(y => y.Value.TextureHash)
                         .Select(y => y.First().Value)
                         .OrderBy(y => y.Width)
