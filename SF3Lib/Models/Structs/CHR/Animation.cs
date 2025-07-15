@@ -77,11 +77,9 @@ namespace SF3.Models.Structs.CHR {
                 .Select(x => {
                     if (x.HasTexture)
                         texCount++;
-                    return new AnimationFrameDef() {
-                        Command = (x.FrameID < 0xF1 || x.FrameID == 0xFC) ? SpriteAnimationFrameCommandType.Frame : (SpriteAnimationFrameCommandType) x.FrameID,
-                        Parameter = x.Duration,
-                        FrameHashes = GetAnimationFrameHashes(x)
-                    };
+                    return (x.FrameID < 0xF1 || x.FrameID == 0xFC)
+                        ? new AnimationFrameDef(GetAnimationFrameHashes(x), x.Duration)
+                        : new AnimationFrameDef((SpriteAnimationFrameCommandType) x.FrameID, x.Duration);
                 }).ToArray();
 
             var uniqueFramesWithTextures = _framesWithTextures.Distinct().ToArray();
