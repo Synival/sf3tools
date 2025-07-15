@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using SF3.Utils;
 
 namespace SF3.Sprites {
     public class SpriteDef {
@@ -17,6 +18,12 @@ namespace SF3.Sprites {
                     x.ToArray(),
                     animations.Where(y => y.Width == x.First().Width && y.Height == x.First().Height).ToArray()
                 ));
+
+            foreach (var spritesheet in Spritesheets.Values)
+                foreach (var variant in spritesheet.Variants)
+                    foreach (var animation in variant.Value.Animations.Values)
+                        foreach (var aniFrame in animation.AnimationFrames)
+                            aniFrame.ConvertHashesToFrameGroup(spritesheet.FrameGroups, CHR_Utils.DirectionsToFrameCount(variant.Key));
         }
 
         public SpriteDef(string name, StandaloneFrameDef[] frames, UniqueAnimationDef[] animations) {

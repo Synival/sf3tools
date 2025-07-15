@@ -38,14 +38,6 @@ namespace SF3.Models.Structs.CHR {
 
             AnimationInfo = CHR_Utils.GetUniqueAnimationInfoByHash(Hash);
 
-            AnimationInfo.SpriteName = SpriteName;
-            AnimationInfo.Width      = _framesWithTextures.Length > 0 ? _framesWithTextures[0].Width  : 0;
-            AnimationInfo.Height     = _framesWithTextures.Length > 0 ? _framesWithTextures[0].Height : 0;
-            AnimationInfo.Directions = (_firstFrameWithTexture == null) ? 1 : _firstFrameWithTexture.Directions;
-            AnimationInfo.FrameCommandCount = FrameCommandCount;
-            AnimationInfo.Duration   = Duration;
-            AnimationInfo.FrameTexturesMissing = FrameTexturesMissing;
-
             int texCount = 0;
             var aniNameLower = AnimationName.ToLower();
             var frameIdsModified = new HashSet<int>();

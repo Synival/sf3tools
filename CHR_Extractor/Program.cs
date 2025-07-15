@@ -1342,6 +1342,11 @@ namespace CHR_Analyzer {
             Console.WriteLine("===================================================");
             Console.WriteLine();
 
+            var jsonSettings = new JsonSerializerSettings() {
+                Formatting = Formatting.Indented,
+                NullValueHandling = NullValueHandling.Ignore,                    
+            };
+
             foreach (var spriteDef in spriteDefs) {
                 if (!spritesWithSpriteSheets.Contains(spriteDef))
                     continue;
@@ -1358,7 +1363,7 @@ namespace CHR_Analyzer {
                 using (var file = File.Open(spriteDefPath, FileMode.Create)) {
                     using (var stream = new StreamWriter(file)) {
                         stream.NewLine = "\n";
-                        stream.Write(JsonConvert.SerializeObject(spriteDef, Formatting.Indented));
+                        stream.Write(JsonConvert.SerializeObject(spriteDef, jsonSettings));
                     }
                 }
             }
