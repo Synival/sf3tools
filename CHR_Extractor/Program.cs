@@ -1314,7 +1314,7 @@ namespace CHR_Analyzer {
                             x.ToArray(),
                             spriteDef.Spritesheets[x.Key].Variants
                                 .Where(y => framesFound.Any(z => size.Width == z.Width && size.Height == z.Height))
-                                .OrderBy(y => y.Value.Name)
+                                .OrderBy(y => y.Key)
                                 .ToDictionary(y => y.Key, y => y.Value)
                         );
                     });

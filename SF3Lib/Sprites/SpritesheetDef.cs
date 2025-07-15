@@ -36,10 +36,7 @@ namespace SF3.Sprites {
                 .ThenBy(y => y.Height)
                 .ThenBy(y => y.Directions)
                 .GroupBy(y => ((y.Width & 0xFFFF) << 24) + ((y.Height & 0xFFFF) << 8) + (y.Directions & 0xFF))
-                .ToDictionary(y => y.First().Directions, y => {
-                    var first = y.First();
-                    return new SpriteVariantDef($"{first.Width}x{first.Height}x{first.Directions}", y.ToArray());
-                });
+                .ToDictionary(y => y.First().Directions, y => new SpriteVariantDef(y.ToArray()));
         }
 
         public static string DimensionsToKey(int width, int height)
