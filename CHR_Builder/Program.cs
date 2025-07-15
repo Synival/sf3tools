@@ -305,7 +305,7 @@ namespace CHR_Builder {
 
                     var validAnimations = variant.Value.Animations.Values
                         .Where(x => x.AnimationFrames
-                            .All(y => y.Command != SpriteAnimationFrameCommandType.Frame || y.HasFullFrame))
+                            .All(y => y.Command != SpriteAnimationFrameCommandType.Frame || y.HasFullFrame(variant.Key)))
                         .ToArray();
 
                     foreach (var animation in validAnimations) {

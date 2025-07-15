@@ -11,20 +11,21 @@ namespace SF3.Sprites {
         public AnimationFrameDef() { }
 
         public AnimationFrameDef(string[] frameHashes, int duration) {
-            FrameGroup       = null;
+            FrameGroup  = null;
+            Frames      = null;
             FrameHashes = frameHashes ?? new string[0];
             Command     = SpriteAnimationFrameCommandType.Frame;
             Parameter   = duration;
         }
 
         public AnimationFrameDef(SpriteAnimationFrameCommandType command, int parameter) {
-            FrameGroup       = null;
+            FrameGroup  = null;
             FrameHashes = (command == SpriteAnimationFrameCommandType.Frame) ? new string[0] : null;
             Command     = command;
             Parameter   = parameter;
         }
 
-        public bool ConvertHashesToFrameGroup(Dictionary<string, FrameGroupDef> frameGroups, int frameCount) {
+        public bool ConvertFrameHashes(Dictionary<string, FrameGroupDef> frameGroups, int frameCount) {
             if (frameGroups == null || FrameHashes == null || FrameHashes.Length != frameCount || FrameHashes.Any(x => x == null))
                 return false;
 
@@ -36,23 +37,41 @@ namespace SF3.Sprites {
 
             var frameGroup = frameGroups
                 .FirstOrDefault(x => FrameGroupHasHashes(x.Value));
-            if (frameGroup.Value == null)
-                return false;
+            if (frameGroup.Value != null) {
+                FrameGroup  = frameGroup.Key;
+                Frames      = null;
+                FrameHashes = null;
+                return true;
+            }
 
-            FrameHashes = null;
-            FrameGroup = frameGroup.Key;
             return true;
         }
 
-        public override string ToString() => (FrameGroup != null)  ? $"{FrameGroup}_{Parameter}" : $"{Command}_{Parameter}";
+        public override string ToString() {
+            return
+                (FrameGroup != null)  ? $"{FrameGroup}, {Parameter}" :
+                (Frames != null)      ? string.Join("_", Frames.Select(x => $"{x.Value} ({x.Key})")) + $", {Parameter}" :
+                (FrameHashes != null) ? string.Join("_", FrameHashes) + $", {Parameter}" :
+                $"{Command}_{Parameter}";
+        }
 
         [JsonIgnore]
-        public bool HasFrame => Command == SpriteAnimationFrameCommandType.Frame && (FrameGroup != null || FrameHashes != null);
+        public bool HasFrame => Command == SpriteAnimationFrameCommandType.Frame && (FrameGroup != null || FrameHashes != null || Frames != null);
 
-        [JsonIgnore]
-        public bool HasFullFrame => Command == SpriteAnimationFrameCommandType.Frame && (FrameGroup != null || (FrameHashes != null && FrameHashes.All(x => x != null)));
+        public bool HasFullFrame(int directions) {
+            return (Command == SpriteAnimationFrameCommandType.Frame) && (
+                FrameGroup != null ||
+                (FrameHashes != null && FrameHashes.Length == directions && FrameHashes.All(x => x != null)) ||
+                (Frames != null && Frames.Count == directions && Enumerable
+                    .Range(0, directions)
+                    .Select(x => CHR_Utils.FrameNumberToSpriteDir(directions, x).ToString())
+                    .All(x => Frames.ContainsKey(x))
+                )
+            );
+        }
 
         public string FrameGroup;
+        public Dictionary<string, AnimationFrameDirectionDef> Frames;
         public string[] FrameHashes;
 
         [JsonConverter(typeof(StringEnumConverter))]
