@@ -9,9 +9,9 @@ using SF3.Sprites;
 using SF3.Types;
 using SF3.Utils;
 
-namespace CHR_Builder {
+namespace SpriteCHR_Builder {
     public class Program {
-        public const string c_spritePath = "../../../../CHR_Extractor/Private";
+        public const string c_spritePath = "../../../../SpriteExtractor/Private";
         public const string c_outputPath = "../../../Private";
 
         public static int Main(string[] args) {

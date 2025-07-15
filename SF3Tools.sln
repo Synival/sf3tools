@@ -68,9 +68,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MPD_DataSearcher", "MPD_Dat
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CHR_Analyzer", "CHR_Analyzer\CHR_Analyzer.csproj", "{383FDA72-1219-423B-A468-106324985091}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CHR_Extractor", "CHR_Extractor\CHR_Extractor.csproj", "{86244428-7AD0-4F8D-8157-EFEF87D401AC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SpriteExtractor", "SpriteExtractor\SpriteExtractor.csproj", "{86244428-7AD0-4F8D-8157-EFEF87D401AC}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CHR_Builder", "CHR_Builder\CHR_Builder.csproj", "{138AB9A3-5551-4337-B12B-960DBA874331}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SpriteCHR_Builder", "SpriteCHR_Builder\SpriteCHR_Builder.csproj", "{138AB9A3-5551-4337-B12B-960DBA874331}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

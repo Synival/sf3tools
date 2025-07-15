@@ -15,7 +15,7 @@ using SF3.Sprites;
 using SF3.Types;
 using SF3.Utils;
 
-namespace CHR_Analyzer {
+namespace SpriteExtractor {
     public class Program {
         // ,--- Enter the paths for all your CHR files here!
         // v
