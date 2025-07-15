@@ -4,11 +4,10 @@ namespace SF3.Sprites {
     public class SpriteVariantDef {
         public SpriteVariantDef() { }
 
-        public SpriteVariantDef(string name, int width, int height, int directions, UniqueAnimationDef[] animations) {
+        public SpriteVariantDef(string name, int width, int height, UniqueAnimationDef[] animations) {
             Name       = name;
             Width      = width;
             Height     = height;
-            Directions = directions;
             Animations = animations
                 .OrderBy(x => x.AnimationName)
                 .ThenBy(x => x.AnimationHash)
@@ -21,7 +20,6 @@ namespace SF3.Sprites {
         public string Name;
         public int Width;
         public int Height;
-        public int Directions;
 
         public AnimationDef[] Animations;
     }

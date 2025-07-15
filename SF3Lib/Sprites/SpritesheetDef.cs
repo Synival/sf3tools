@@ -38,7 +38,7 @@ namespace SF3.Sprites {
                 .GroupBy(y => ((y.Width & 0xFFFF) << 24) + ((y.Height & 0xFFFF) << 8) + (y.Directions & 0xFF))
                 .ToDictionary(y => y.First().Directions, y => {
                     var first = y.First();
-                    return new SpriteVariantDef($"{first.Width}x{first.Height}x{first.Directions}", first.Width, first.Height, first.Directions, y.ToArray());
+                    return new SpriteVariantDef($"{first.Width}x{first.Height}x{first.Directions}", first.Width, first.Height, y.ToArray());
                 });
         }
 

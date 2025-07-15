@@ -228,7 +228,6 @@ namespace CHR_Builder {
             var outputData = new ByteData(new ByteArray(0x18));
             var variants = spriteDef.Spritesheets.Values
                 .SelectMany(x => x.Variants)
-                .Select(x => x.Value)
                 .ToArray();
 
             frameTableOffsetAddrs     = new int[variants.Length];
@@ -238,9 +237,9 @@ namespace CHR_Builder {
                 var variant = variants[i];
 
                 outputData.SetWord(0x00, 0x0000); // Sprite ID (always 0 for these files)
-                outputData.SetWord(0x02, variant.Width);
-                outputData.SetWord(0x04, variant.Height);
-                outputData.SetByte(0x06, (byte) variant.Directions);
+                outputData.SetWord(0x02, variant.Value.Width);
+                outputData.SetWord(0x04, variant.Value.Height);
+                outputData.SetByte(0x06, (byte) variant.Key);
                 outputData.SetByte(0x07, 0x00);   // Vertical offset (always 0 for these files)
                 outputData.SetByte(0x08, 0x00);   // Unknown0x08 (always 0 for these files)
                 outputData.SetByte(0x09, 0x00);   // Collision shadow diameter (always 0 for these files)
