@@ -270,6 +270,20 @@ namespace CHR_Builder {
                     .ToArray();
             }
 
+            if (aniFrameDef.Frames != null) {
+                var hashes =
+                    Enumerable
+                    .Range(0, frameCount)
+                    .Select(x => CHR_Utils.FrameNumberToSpriteDir(frameCount, x).ToString())
+                    .Select(x => aniFrameDef.Frames.TryGetValue(x, out var frameOut) ? frameOut : null)
+                    .Select(x => (x != null && frameGroups.TryGetValue(x.Frame, out var fg)) ? (fg.Frames.TryGetValue(x.Direction.ToString(), out var f) ? f.Hash : null) : null)
+                    .Cast<string>()
+                    .ToArray();
+
+                return hashes;
+            }
+
+            // There should never be animations whose frames couldn't be found.
             return aniFrameDef.FrameHashes ?? [];
         }
 

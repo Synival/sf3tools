@@ -26,25 +26,51 @@ namespace SF3.Sprites {
         }
 
         public bool ConvertFrameHashes(Dictionary<string, FrameGroupDef> frameGroups, int frameCount) {
-            if (frameGroups == null || FrameHashes == null || FrameHashes.Length != frameCount || FrameHashes.Any(x => x == null))
+            if (frameGroups == null || FrameHashes == null || FrameHashes.Length != frameCount)
                 return false;
 
-            bool FrameGroupHasHashes(FrameGroupDef fg) {
-                return FrameHashes
-                    .Select((x, i) => (Hash: x, Dir: CHR_Utils.FrameNumberToSpriteDir(frameCount, i).ToString()))
-                    .All(x => fg.Frames.ContainsKey(x.Dir) && fg.Frames[x.Dir].Hash == x.Hash);
+            if (FrameHashes.All(x => x != null)) {
+                bool FrameGroupHasHashes(FrameGroupDef fg) {
+                    return FrameHashes
+                        .Select((x, i) => (Hash: x, Dir: CHR_Utils.FrameNumberToSpriteDir(frameCount, i).ToString()))
+                        .All(x => fg.Frames.ContainsKey(x.Dir) && fg.Frames[x.Dir].Hash == x.Hash);
+                }
+
+                var frameGroup = frameGroups
+                    .FirstOrDefault(x => FrameGroupHasHashes(x.Value));
+                if (frameGroup.Value != null) {
+                    FrameGroup  = frameGroup.Key;
+                    Frames      = null;
+                    FrameHashes = null;
+                    return true;
+                }
             }
 
-            var frameGroup = frameGroups
-                .FirstOrDefault(x => FrameGroupHasHashes(x.Value));
-            if (frameGroup.Value != null) {
-                FrameGroup  = frameGroup.Key;
-                Frames      = null;
+            var allFramesByHash = frameGroups
+                .SelectMany(x => x.Value.Frames.Select(y => (
+                    Name: x.Key,
+                    Dir: Enum.TryParse<SpriteFrameDirection>(y.Key, out var keyOut) ? (SpriteFrameDirection?) keyOut : null,
+                    Frame: y.Value)))
+                .Where(x => x.Dir != null)
+                .ToDictionary(x => x.Frame.Hash, x => x);
+
+            var frames = FrameHashes
+                .Select((x, i) => (Dir: CHR_Utils.FrameNumberToSpriteDir(frameCount, i), Hash: x))
+                .Where(x => x.Hash != null)
+                .ToDictionary(x => x.Dir.ToString(), x => {
+                    var frame = allFramesByHash.TryGetValue(x.Hash, out var frameOut) ? frameOut : default;
+                    return (frame.Frame != null) ? new AnimationFrameDirectionDef() { Frame = frame.Name, Direction = frame.Dir.Value } : null;
+                });
+
+            if (frames.All(x => x.Value != null)) {
+                FrameGroup  = null;
+                Frames      = frames;
                 FrameHashes = null;
                 return true;
             }
 
-            return true;
+            // We should never reach here!
+            throw new InvalidOperationException("Animation has frames that don't exist!");
         }
 
         public override string ToString() {
