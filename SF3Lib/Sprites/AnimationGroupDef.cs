@@ -2,10 +2,10 @@
 using System.Linq;
 
 namespace SF3.Sprites {
-    public class SpriteVariantDef {
-        public SpriteVariantDef() { }
+    public class AnimationGroupDef {
+        public AnimationGroupDef() { }
 
-        public SpriteVariantDef(UniqueAnimationDef[] animations) {
+        public AnimationGroupDef(UniqueAnimationDef[] animations) {
             Animations = animations
                 .OrderBy(x => x.AnimationName)
                 .ToDictionary(x => x.AnimationName, x => new AnimationDef(x));

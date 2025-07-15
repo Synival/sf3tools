@@ -134,7 +134,7 @@ namespace CHR_Builder {
                 .ToDictionary(x => x.Hash, x => x);
 
             var uniqueAnimationFramesByVariant = spriteDef.Spritesheets
-                .SelectMany(x => x.Value.Variants.Select(y => (Spritesheet: x, Variant: y)))
+                .SelectMany(x => x.Value.AnimationByDirections.Select(y => (Spritesheet: x, Variant: y)))
                 .Select(x => (Variant: x.Variant.Value, UniqueAnimationFrames: x.Variant.Value.Animations.Values
                     .SelectMany(y => y.AnimationFrames)
                     .Where(y => y != null && y.HasFrame)
@@ -145,7 +145,7 @@ namespace CHR_Builder {
                 .ToDictionary(x => x.Variant, x => x.UniqueAnimationFrames);
 
             var frameInfos = spriteDef.Spritesheets
-                .SelectMany(x => x.Value.Variants.Select(y => (Spritesheet: x, Variant: y)))
+                .SelectMany(x => x.Value.AnimationByDirections.Select(y => (Spritesheet: x, Variant: y)))
                 .SelectMany((x, xi) => (x.Variant.Value.Animations ?? [])
                     .SelectMany((y, yi) => (y.Value.AnimationFrames ?? [])
                         .Where(z => uniqueAnimationFramesByVariant[x.Variant.Value].Contains(z))
@@ -177,9 +177,9 @@ namespace CHR_Builder {
 
             foreach (var f in framesNotUsedInAnimations) {
                 var variant = spriteDef.Spritesheets
-                    .SelectMany(x => x.Value.Variants
+                    .SelectMany(x => x.Value.AnimationByDirections
                         .Select(y => (Size: SpritesheetDef.KeyToDimensions(x.Key), Variant: y.Value)))
-                    .Select((x, i) => (x.Size, Variant: (SpriteVariantDef?) x.Variant, Index: i))
+                    .Select((x, i) => (x.Size, Variant: (AnimationGroupDef?) x.Variant, Index: i))
                     .Where(x => x.Size.Width == f.Width && x.Size.Height == f.Height)
                     .FirstOrDefault();
                 if (variant.Variant == null)
@@ -227,7 +227,7 @@ namespace CHR_Builder {
         private static void WriteSpriteHeaderTable(FileStream fileOut, SpriteDef spriteDef, out int[] frameTableOffsetAddrs, out int[] animationTableOffsetAddrs) {
             var outputData = new ByteData(new ByteArray(0x18));
             var variants = spriteDef.Spritesheets
-                .SelectMany(x => x.Value.Variants
+                .SelectMany(x => x.Value.AnimationByDirections
                     .Select(y => (Size: SpritesheetDef.KeyToDimensions(x.Key), Direction: y.Key, Variant: y.Value)))
                 .ToArray();
 
@@ -312,7 +312,7 @@ namespace CHR_Builder {
             int variantIndex = 0;
 
             foreach (var spritesheet in spriteDef.Spritesheets) {
-                foreach (var variant in spritesheet.Value.Variants) {
+                foreach (var variant in spritesheet.Value.AnimationByDirections) {
                     var variantFrames = (variantIndex < frameInfosByVariant?.Length) ? frameInfosByVariant[variantIndex] : [];
                     var aniFrameTableOffsets = new int[variant.Value.Animations.Count];
                     int aniIndex = 0;

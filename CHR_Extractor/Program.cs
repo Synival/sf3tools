@@ -1314,7 +1314,7 @@ namespace CHR_Analyzer {
                         var size = SpritesheetDef.KeyToDimensions(x.Key);
                         return new SpritesheetDef(
                             x.ToArray(),
-                            spriteDef.Spritesheets[x.Key].Variants
+                            spriteDef.Spritesheets[x.Key].AnimationByDirections
                                 .Where(y => framesFound.Any(z => size.Width == z.Width && size.Height == z.Height))
                                 .OrderBy(y => y.Key)
                                 .ToDictionary(y => y.Key, y => y.Value)
@@ -1325,7 +1325,7 @@ namespace CHR_Analyzer {
 
                 // Filter out animations that have missing frames or no frames at all.
                 foreach (var spritesheet in spriteDef.Spritesheets.Values) {
-                    foreach (var variant in spritesheet.Variants) {
+                    foreach (var variant in spritesheet.AnimationByDirections) {
                         var validAnimations = variant.Value.Animations
                             .Where(x => x.Value.AnimationFrames.Length > 0 && x.Value.AnimationFrames
                                 .All(y => y.FrameHashes == null || y.FrameHashes.All(z => z == null || framesFoundHashSet.Contains(z)))

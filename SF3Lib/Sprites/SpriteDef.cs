@@ -20,7 +20,7 @@ namespace SF3.Sprites {
                 ));
 
             foreach (var spritesheet in Spritesheets.Values)
-                foreach (var variant in spritesheet.Variants)
+                foreach (var variant in spritesheet.AnimationByDirections)
                     foreach (var animation in variant.Value.Animations.Values)
                         foreach (var aniFrame in animation.AnimationFrames)
                             aniFrame.ConvertFrameHashes(spritesheet.FrameGroups);
