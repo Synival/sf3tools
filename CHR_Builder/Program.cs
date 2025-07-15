@@ -133,8 +133,8 @@ namespace CHR_Builder {
                 .ToDictionary(x => x.Hash, x => x);
 
             var uniqueAnimationFramesByVariant = spriteDef.Spritesheets.Values
-                        .SelectMany(x => x.Variants)
-                .Select(x => (Variant: x, UniqueAnimationFrames: x.Value.Animations
+                .SelectMany(x => x.Variants)
+                .Select(x => (Variant: x, UniqueAnimationFrames: x.Value.Animations.Values
                     .SelectMany(y => y.AnimationFrames)
                     .Where(y => y != null && y.FrameHashes != null)
                     .GroupBy(y => y.FrameHashes.Aggregate((a, b) => a + ((b == null) ? "_" : b)))
@@ -146,7 +146,7 @@ namespace CHR_Builder {
             var frameInfos = spriteDef.Spritesheets.Values
                 .SelectMany(x => x.Variants)
                 .SelectMany((x, xi) => (x.Value.Animations ?? [])
-                    .SelectMany((y, yi) => (y.AnimationFrames ?? [])
+                    .SelectMany((y, yi) => (y.Value.AnimationFrames ?? [])
                         .Where(z => uniqueAnimationFramesByVariant[x].Contains(z))
                         .SelectMany((z, zi) => (z.FrameHashes ?? [])
                             .Where(zz => zz != null)
@@ -284,10 +284,10 @@ namespace CHR_Builder {
 
             foreach (var variant in variants) {
                 var variantFrames = (variantIndex < frameInfosByVariant?.Length) ? frameInfosByVariant[variantIndex] : [];
-                var aniFrameTableOffsets = new int[variant.Animations.Length];
+                var aniFrameTableOffsets = new int[variant.Animations.Count];
                 int aniIndex = 0;
 
-                var animations = variant.Animations
+                var animations = variant.Animations.Values
                     .Where(x => x.AnimationFrames
                     .All(y => y.FrameHashes == null || y.FrameHashes.All(z => z != null)))
                     .ToArray();

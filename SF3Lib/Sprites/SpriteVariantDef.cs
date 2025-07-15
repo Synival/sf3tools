@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace SF3.Sprites {
     public class SpriteVariantDef {
@@ -7,13 +8,11 @@ namespace SF3.Sprites {
         public SpriteVariantDef(UniqueAnimationDef[] animations) {
             Animations = animations
                 .OrderBy(x => x.AnimationName)
-                .ThenBy(x => x.AnimationHash)
-                .Select(x => new AnimationDef(x))
-                .ToArray();
+                .ToDictionary(x => x.AnimationName, x => new AnimationDef(x));
         }
 
-        public override string ToString() => string.Join(", ", Animations.Select(x => x.ToString()));
+        public override string ToString() => string.Join(", ", Animations.Keys.Select(x => x.ToString()));
 
-        public AnimationDef[] Animations;
+        public Dictionary<string, AnimationDef> Animations;
     }
 }

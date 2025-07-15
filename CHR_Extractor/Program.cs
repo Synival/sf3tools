@@ -1325,11 +1325,11 @@ namespace CHR_Analyzer {
                 foreach (var spritesheet in spriteDef.Spritesheets.Values) {
                     foreach (var variant in spritesheet.Variants) {
                         var validAnimations = variant.Value.Animations
-                            .Where(x => x.AnimationFrames.Length > 0 && x.AnimationFrames
+                            .Where(x => x.Value.AnimationFrames.Length > 0 && x.Value.AnimationFrames
                                 .All(y => y.FrameHashes == null || y.FrameHashes.All(z => z == null || framesFoundHashSet.Contains(z)))
                             )
-                            .OrderBy(x => x.Name)
-                            .ToArray();
+                            .OrderBy(x => x.Key)
+                            .ToDictionary(x => x.Key, x => x.Value);
                         variant.Value.Animations = validAnimations;
                     }
                 }
