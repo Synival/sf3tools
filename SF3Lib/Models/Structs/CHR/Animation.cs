@@ -51,12 +51,6 @@ namespace SF3.Models.Structs.CHR {
                 var hashes = new string[dirs];
                 var maxFrames = FrameTable.Length;
 
-                var shouldBeDirs = dirs;
-                if (aniNameLower == "should be 4 directions")
-                    shouldBeDirs = 4;
-                else if (aniNameLower == "should be 1 direction")
-                    shouldBeDirs = 1;
-
                 for (int i = 0; i < dirs; i++) {
                     var num = aniFrame.FrameID + i;
                     if (num < maxFrames)
