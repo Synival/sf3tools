@@ -167,9 +167,9 @@
     <item hash="6e82334d0fd6d0d417eeae9197bdb0ec" sprite="Basanda" animation="LoweringCaneToIdle" width="40" height="40" directions="4" frames="2" duration="3" />
     <item hash="a36874208efbe60fdebef7756821f644" sprite="Basanda" animation="Nodding" width="40" height="40" directions="4" frames="5" duration="8" />
     <item hash="8698bd759cdb00fa7dd83db86011351b" sprite="Basanda" animation="ShakingHead" width="40" height="40" directions="4" frames="9" duration="16" />
-    <item hash="f749acd96d44a9db5cadf98e81a60657" sprite="Basanda" animation="StillFrame" width="40" height="40" directions="4" frames="2" duration="10" missingFrames="3" />
     <item hash="5b79149a7ad7ace6018c0546a534bd35" sprite="Basanda" animation="StillFrame (Battle)" width="40" height="40" directions="4" frames="2" duration="10" />
     <item hash="f4ce7ec4305483cb13bd740855f54c7c" sprite="Basanda" animation="StillFrame (Field)" width="40" height="40" directions="4" frames="2" duration="10" />
+    <item hash="f749acd96d44a9db5cadf98e81a60657" sprite="Basanda" animation="StillFrame (Should be 1 Direction)" width="40" height="40" directions="4" frames="2" duration="10" missingFrames="3" />
     <item hash="4bea43ddb8681fb15f28a882dc3f1db9" sprite="Basanda" animation="Walking" width="40" height="40" directions="4" frames="7" duration="24" />
     <item hash="4573148c61ae3caa5b29d527bd4af611" sprite="Basanda (Staff)" animation="HoldingUpStaff" width="40" height="40" directions="4" frames="5" duration="25" />
     <item hash="ad29ab60706c20da0c24020bce7b0b05" sprite="Basanda (Staff)" animation="Idle (2 Frames)" width="40" height="40" directions="4" frames="4" duration="12" />
@@ -688,7 +688,7 @@
     <item hash="f9adbe8b1cc62e7891cdc8318be32f4d" sprite="Dantares (P1)" animation="StillThenIdle (Field, Forgot to Nod)" width="48" height="40" directions="4" frames="2" duration="4" />
     <item hash="a0cc74a35a73dbfd9409ebfcf8aec8d4" sprite="Dantares (P1)" animation="Walking" width="48" height="40" directions="6" frames="7" duration="30" />
     <item hash="e97006c30ac6be0b075398c39fdd852d" sprite="Dantares (P1)" animation="Walking (Super Slow, Reduced)" width="48" height="40" directions="4" frames="5" duration="48" />
-    <item hash="4bfea107d1d998986ada86e2b43f4a0f" sprite="Dantares (P2)" animation="Idle (Battle, Missing Last Down Frame)" width="48" height="40" directions="6" frames="5" duration="16" missingFrames="1" />
+    <item hash="4bfea107d1d998986ada86e2b43f4a0f" sprite="Dantares (P2)" animation="Idle (Battle, Missing Last N Frame)" width="48" height="40" directions="6" frames="5" duration="16" missingFrames="1" />
     <item hash="8fce4527f8c601f808f664b40275e2fb" sprite="Dantares (P2)" animation="Idle (Battle)" width="48" height="40" directions="4" frames="5" duration="16" />
     <item hash="7128349375d28090ab29dd8a601df81a" sprite="Dantares (P2)" animation="Idle (Field)" width="48" height="40" directions="4" frames="5" duration="18" />
     <item hash="27352908dd9734dd0d224466436b7659" sprite="Dantares (P2)" animation="Nodding (Field)" width="48" height="40" directions="4" frames="5" duration="16" />

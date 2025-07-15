@@ -185,7 +185,7 @@ namespace CHR_Analyzer {
                     "Idle (Battle 2)",
                     "Idle (Battle, Render 1)",
                     "Idle (Battle, Render 2)",
-                    "Idle (Battle, Missing Last Down Frame)",
+                    "Idle (Battle, Missing Last N Frame)",
                 ]},
                 { "Idle (Upright)", [
                     "Idle (Upright, Some Frames Offset)",
