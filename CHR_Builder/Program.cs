@@ -175,10 +175,12 @@ namespace CHR_Builder {
                 .Where(x => !uniqueFrameHashesFromAnimations.Contains(x.Hash)).ToArray();
 
             foreach (var f in framesNotUsedInAnimations) {
-                var variant = spriteDef.Spritesheets.Values
-                    .SelectMany(x => x.Variants)
-                    .Select((x, i) => (Variant : (SpriteVariantDef?) x.Value, Index : i))
-                    .FirstOrDefault(x => x.Variant?.Width == f.Width && x.Variant?.Height == f.Height);
+                var variant = spriteDef.Spritesheets
+                    .SelectMany(x => x.Value.Variants
+                        .Select(y => (Size: SpritesheetDef.KeyToDimensions(x.Key), Variant: y.Value)))
+                    .Select((x, i) => (x.Size, Variant: (SpriteVariantDef?) x.Variant, Index: i))
+                    .Where(x => x.Size.Width == f.Width && x.Size.Height == f.Height)
+                    .FirstOrDefault();
                 if (variant.Variant == null)
                     continue;
 
@@ -223,8 +225,9 @@ namespace CHR_Builder {
 
         private static void WriteSpriteHeaderTable(FileStream fileOut, SpriteDef spriteDef, out int[] frameTableOffsetAddrs, out int[] animationTableOffsetAddrs) {
             var outputData = new ByteData(new ByteArray(0x18));
-            var variants = spriteDef.Spritesheets.Values
-                .SelectMany(x => x.Variants)
+            var variants = spriteDef.Spritesheets
+                .SelectMany(x => x.Value.Variants
+                    .Select(y => (Size: SpritesheetDef.KeyToDimensions(x.Key), Direction: y.Key, Variant: y.Value)))
                 .ToArray();
 
             frameTableOffsetAddrs     = new int[variants.Length];
@@ -234,9 +237,9 @@ namespace CHR_Builder {
                 var variant = variants[i];
 
                 outputData.SetWord(0x00, 0x0000); // Sprite ID (always 0 for these files)
-                outputData.SetWord(0x02, variant.Value.Width);
-                outputData.SetWord(0x04, variant.Value.Height);
-                outputData.SetByte(0x06, (byte) variant.Key);
+                outputData.SetWord(0x02, variant.Size.Width);
+                outputData.SetWord(0x04, variant.Size.Height);
+                outputData.SetByte(0x06, (byte) variant.Direction);
                 outputData.SetByte(0x07, 0x00);   // Vertical offset (always 0 for these files)
                 outputData.SetByte(0x08, 0x00);   // Unknown0x08 (always 0 for these files)
                 outputData.SetByte(0x09, 0x00);   // Collision shadow diameter (always 0 for these files)
