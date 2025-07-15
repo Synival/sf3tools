@@ -21,7 +21,7 @@ namespace SF3.Sprites {
             Variants = GetVariants(animations);
         }
 
-        public SpritesheetDef(StandaloneFrameDef[] frames, SpriteVariantDef[] variants) {
+        public SpritesheetDef(StandaloneFrameDef[] frames, Dictionary<int, SpriteVariantDef> variants) {
             FrameGroups = frames
                 .GroupBy(x => x.Name)
                 .ToDictionary(x => x.Key, x => new FrameGroupDef(x.ToArray()));
@@ -29,18 +29,17 @@ namespace SF3.Sprites {
             Variants = variants;
         }
 
-        private SpriteVariantDef[] GetVariants(UniqueAnimationDef[] animations) {
+        private Dictionary<int, SpriteVariantDef> GetVariants(UniqueAnimationDef[] animations) {
             return animations
                 .Where(y => y.AnimationFrames != null && y.AnimationFrames.Length > 0)
                 .OrderBy(y => y.Width)
                 .ThenBy(y => y.Height)
                 .ThenBy(y => y.Directions)
                 .GroupBy(y => ((y.Width & 0xFFFF) << 24) + ((y.Height & 0xFFFF) << 8) + (y.Directions & 0xFF))
-                .Select(y => {
+                .ToDictionary(y => y.First().Directions, y => {
                     var first = y.First();
                     return new SpriteVariantDef($"{first.Width}x{first.Height}x{first.Directions}", first.Width, first.Height, first.Directions, y.ToArray());
-                })
-                .ToArray();
+                });
         }
 
         public static string DimensionsToKey(int width, int height)
@@ -53,6 +52,6 @@ namespace SF3.Sprites {
 
         public override string ToString() => string.Join(", ", FrameGroups.Keys);
         public Dictionary<string, FrameGroupDef> FrameGroups;
-        public SpriteVariantDef[] Variants;
+        public Dictionary<int, SpriteVariantDef> Variants;
     }
 }

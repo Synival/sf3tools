@@ -1143,6 +1143,7 @@ namespace CHR_Analyzer {
                 var spritePath = Path.Combine(c_pathOut, FilesystemString(spriteDef.Name));
                 var spriteSheetVariants = spriteDef.Spritesheets.Values
                     .SelectMany(x => x.Variants)
+                    .Select(x => x.Value)
                     .GroupBy(x => (x.Width << 16) + x.Height)
                     .Select(x => x.First())
                     .ToArray();
@@ -1318,9 +1319,9 @@ namespace CHR_Analyzer {
                     .ToDictionary(x => x.Key, x => new SpritesheetDef(
                         x.ToArray(),
                         spriteDef.Spritesheets[x.Key].Variants
-                            .Where(y => framesFound.Any(z => y.Width == z.Width && y.Height == z.Height))
-                            .OrderBy(y => y.Name)
-                            .ToArray()
+                            .Where(y => framesFound.Any(z => y.Value.Width == z.Width && y.Value.Height == z.Height))
+                            .OrderBy(y => y.Value.Name)
+                            .ToDictionary(y => y.Key, y => y.Value)
                     ));
 
                 var framesFoundHashSet = framesFound.Select(x => x.Hash).ToHashSet();
@@ -1328,13 +1329,13 @@ namespace CHR_Analyzer {
                 // Filter out animations that have missing frames or no frames at all.
                 foreach (var spritesheet in spriteDef.Spritesheets.Values) {
                     foreach (var variant in spritesheet.Variants) {
-                        var validAnimations = variant.Animations
+                        var validAnimations = variant.Value.Animations
                             .Where(x => x.AnimationFrames.Length > 0 && x.AnimationFrames
                                 .All(y => y.FrameHashes == null || y.FrameHashes.All(z => z == null || framesFoundHashSet.Contains(z)))
                             )
                             .OrderBy(x => x.Name)
                             .ToArray();
-                        variant.Animations = validAnimations;
+                        variant.Value.Animations = validAnimations;
                     }
                 }
             }
