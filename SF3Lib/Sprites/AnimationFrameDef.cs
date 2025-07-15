@@ -25,10 +25,11 @@ namespace SF3.Sprites {
             Parameter   = parameter;
         }
 
-        public bool ConvertFrameHashes(Dictionary<string, FrameGroupDef> frameGroups, int frameCount) {
-            if (frameGroups == null || FrameHashes == null || FrameHashes.Length != frameCount)
+        public bool ConvertFrameHashes(Dictionary<string, FrameGroupDef> frameGroups) {
+            if (frameGroups == null || FrameHashes == null)
                 return false;
 
+            var frameCount = FrameHashes.Length;
             if (FrameHashes.All(x => x != null)) {
                 bool FrameGroupHasHashes(FrameGroupDef fg) {
                     return FrameHashes

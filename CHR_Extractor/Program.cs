@@ -162,6 +162,7 @@ namespace CHR_Analyzer {
             Console.WriteLine("Processing complete.");
             _ = Directory.CreateDirectory(c_pathOut);
 
+#if false
             Console.WriteLine();
             Console.WriteLine("===================================================");
             Console.WriteLine("| NAMING FRAMES                                   |");
@@ -1113,6 +1114,7 @@ namespace CHR_Analyzer {
             Console.WriteLine("Animations unaccounted for:");
             foreach (var anim in animationsWithUnlabeledFrames)
                 Console.WriteLine($"    {anim}");
+#endif
 
             var spriteDefs = CHR_Utils.CreateAllSpriteDefs();
 

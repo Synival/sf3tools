@@ -1212,6 +1212,9 @@
     <item hash="291d48e6f5db96aef89528f0754ad620" sprite="Benetram" width="40" height="40" frame="Idle 3" direction="ESE" />
     <item hash="d3db2959f0cb7615cd2bdbc304ecd2ac" sprite="Benetram" width="40" height="40" frame="Idle 3" direction="ENE" />
     <item hash="c19b8691f203dba98fa446f049972b8a" sprite="Benetram" width="40" height="40" frame="Idle 3" direction="NNE" />
+    <item hash="afb439e129eea1d9671ecbcf0cb52598" sprite="Benetram" width="40" height="40" frame="Nodding (Sitting in Chair, Alt) 1" direction="ESE" />
+    <item hash="67e975561ee263dcb6f72f0a42f230c3" sprite="Benetram" width="40" height="40" frame="Nodding (Sitting in Chair, Alt) 2" direction="ESE" />
+    <item hash="46242dd28bb7aa1d37d693c24cb14445" sprite="Benetram" width="40" height="40" frame="Nodding (Sitting in Chair, Alt) 3" direction="ESE" />
     <item hash="094a58387e3c0a35e6d0f1a97b9a37d9" sprite="Benetram" width="40" height="40" frame="Nodding (Sitting in Chair) 1" direction="SSE" />
     <item hash="bee6b2d29c03355731e58195ef7de85e" sprite="Benetram" width="40" height="40" frame="Nodding (Sitting in Chair) 1" direction="ESE" />
     <item hash="dbec86de8342138cc2d71490b4e7ff17" sprite="Benetram" width="40" height="40" frame="Nodding (Sitting in Chair) 1" direction="ENE" />
@@ -1236,10 +1239,8 @@
     <item hash="bf8fb37b8fb53616c4d3ec9fc5ae5c9d" sprite="Benetram" width="40" height="40" frame="Nodding 3" direction="ESE" />
     <item hash="08235c2be30b14f021f390d61cfcec2b" sprite="Benetram" width="40" height="40" frame="Nodding 3" direction="ENE" />
     <item hash="421a91bf59020bf81d0a0d5f7d6175b6" sprite="Benetram" width="40" height="40" frame="Nodding 3" direction="NNE" />
-    <item hash="afb439e129eea1d9671ecbcf0cb52598" sprite="Benetram" width="40" height="40" frame="Nodding 4" direction="SSE" />
-    <item hash="67e975561ee263dcb6f72f0a42f230c3" sprite="Benetram" width="40" height="40" frame="Nodding 4" direction="ESE" />
-    <item hash="46242dd28bb7aa1d37d693c24cb14445" sprite="Benetram" width="40" height="40" frame="Nodding 4" direction="ENE" />
-    <item hash="34bd19704d7acad6a94082011002fb35" sprite="Benetram" width="40" height="40" frame="Nodding 4" direction="NNE" />
+    <item hash="34bd19704d7acad6a94082011002fb35" sprite="Benetram" width="40" height="40" frame="ShakingHead (Sitting in Chair, Alt) 1" direction="ESE" />
+    <item hash="c1d17b39f8aebcf2e540e4cb3766e557" sprite="Benetram" width="40" height="40" frame="ShakingHead (Sitting in Chair, Alt) 2" direction="ESE" />
     <item hash="78f6b89ffc966f6a44711d4fc701ecc4" sprite="Benetram" width="40" height="40" frame="Shakinghead (Sitting in Chair, Unused Mistakenly)" direction="SSE" />
     <item hash="aa1c7b3a7156f66fbe6fb03717633db1" sprite="Benetram" width="40" height="40" frame="Shakinghead (Sitting in Chair, Unused Mistakenly)" direction="ESE" />
     <item hash="b0b3914a9dd6b2464d55051dc7b13414" sprite="Benetram" width="40" height="40" frame="Shakinghead (Sitting in Chair, Unused Mistakenly)" direction="ENE" />
@@ -1248,7 +1249,6 @@
     <item hash="5b25bdd8d03a87bc01fa042c6c7f3ef6" sprite="Benetram" width="40" height="40" frame="ShakingHead (Sitting in Chair) 1" direction="ESE" />
     <item hash="a4d43ad0906557332643a8ffdbee612f" sprite="Benetram" width="40" height="40" frame="ShakingHead (Sitting in Chair) 1" direction="ENE" />
     <item hash="1121e4aebaec2cf004f7391c26b4b6d1" sprite="Benetram" width="40" height="40" frame="ShakingHead (Sitting in Chair) 1" direction="NNE" />
-    <item hash="c1d17b39f8aebcf2e540e4cb3766e557" sprite="Benetram" width="40" height="40" frame="ShakingHead (Sitting in Chair) 2" direction="ESE" />
     <item hash="4e5318a81dbaed14419895a42cedd2b5" sprite="Benetram" width="40" height="40" frame="ShakingHead 1" direction="SSE" />
     <item hash="0f76955fdc9c9fe390af2034c04419e1" sprite="Benetram" width="40" height="40" frame="ShakingHead 1" direction="ESE" />
     <item hash="7c33ceb353b62dc6fe4d2fd2d517acdd" sprite="Benetram" width="40" height="40" frame="ShakingHead 1" direction="ENE" />

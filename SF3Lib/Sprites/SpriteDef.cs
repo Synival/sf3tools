@@ -23,7 +23,7 @@ namespace SF3.Sprites {
                 foreach (var variant in spritesheet.Variants)
                     foreach (var animation in variant.Value.Animations.Values)
                         foreach (var aniFrame in animation.AnimationFrames)
-                            aniFrame.ConvertFrameHashes(spritesheet.FrameGroups, CHR_Utils.DirectionsToFrameCount(variant.Key));
+                            aniFrame.ConvertFrameHashes(spritesheet.FrameGroups);
         }
 
         public SpriteDef(string name, StandaloneFrameDef[] frames, UniqueAnimationDef[] animations) {
