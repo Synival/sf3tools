@@ -313,13 +313,13 @@ namespace CHR_Builder {
                     foreach (var aniFrame in animation.AnimationFrames) {
                         if (aniFrame.Command < 0xF1) {
                             byteData.SetWord(0x00, aniFrameFrameIds[aniFrameIndex].FrameID.Value);
-                            byteData.SetWord(0x02, aniFrame.ParameterOrDuration);
+                            byteData.SetWord(0x02, aniFrame.Parameter);
                         }
                         else {
                             // TODO: actually support commands here
                             // TODO: going to another animation should be a hash lookup if it isn't already
                             byteData.SetWord(0x00, aniFrame.Command);
-                            byteData.SetWord(0x02, aniFrame.ParameterOrDuration);
+                            byteData.SetWord(0x02, aniFrame.Parameter);
                         }
 
                         fileOut.Write(byteData.Data.GetDataCopyOrReference());

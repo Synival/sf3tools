@@ -79,7 +79,7 @@ namespace SF3.Models.Structs.CHR {
                         texCount++;
                     return new AnimationFrameDef() {
                         Command = x.FrameID,
-                        ParameterOrDuration = x.Duration,
+                        Parameter = x.Duration,
                         FrameHashes = GetAnimationFrameHashes(x)
                     };
                 }).ToArray();
