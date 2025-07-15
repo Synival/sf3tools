@@ -34,11 +34,8 @@ namespace CHR_Builder {
 
                 using (var fileOut = File.Open(outputChrFile, FileMode.Create)) {
 #pragma warning disable CA1416 // Validate platform compatibility
-                    var spritesheets = spriteDef.Spritesheets.Values
-                        .SelectMany(x => x.Variants)
-                        // Sprite sheets don't care about the number of directions, only (width x height).
-                        .Select(x => Path.GetFileNameWithoutExtension(path) + $" ({x.Value.Width}x{x.Value.Height})")
-                        .Distinct()
+                    var spritesheets = spriteDef.Spritesheets
+                        .Select(x => Path.GetFileNameWithoutExtension(path) + $" ({x.Key})")
                         .Where(x => File.Exists(Path.Combine(Path.GetDirectoryName(path) ?? "", x + ".BMP")))
                         .ToDictionary(x => x, x => {
                             var spritesheetFile = Path.Combine(Path.GetDirectoryName(path) ?? "", x + ".BMP");
