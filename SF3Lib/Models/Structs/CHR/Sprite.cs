@@ -5,6 +5,7 @@ using CommonLib.NamedValues;
 using SF3.ByteData;
 using SF3.Models.Tables.CHR;
 using SF3.Types;
+using SF3.Utils;
 
 namespace SF3.Models.Structs.CHR {
     public class Sprite : Struct {
@@ -79,6 +80,12 @@ namespace SF3.Models.Structs.CHR {
 
             AnimationTable = AnimationTable.Create(Data, $"Sprite{ID:D2}_{nameof(AnimationTable)}", AnimationFrameTablesByIndex.Values.ToArray(),
                 FrameTable, $"Sprite{ID:D2}_");
+
+            var spriteNames = AnimationTable.Select(x => x.SpriteName).Distinct().ToArray();
+            foreach (var spriteName in spriteNames) {
+                var infoName = $"{spriteName} ({Header.Width}x{Header.Height})";
+                CHR_Utils.AddSpriteHeaderInfo(infoName, Header.VerticalOffset, Header.Unknown0x08, Header.CollisionShadowDiameter, Header.Scale / 65536.0f);
+            }
 
             TotalCompressedFramesSize = (uint) FrameTable.Sum(x => x.TextureCompressedSize);
 

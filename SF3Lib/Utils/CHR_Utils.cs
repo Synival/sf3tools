@@ -11,6 +11,7 @@ namespace SF3.Utils {
     public static class CHR_Utils {
         private static Dictionary<string, UniqueFrameDef> s_uniqueFramesByHash = null;
         private static Dictionary<string, UniqueAnimationDef> s_uniqueAnimationsByHash = null;
+        private static Dictionary<string, UniqueSpriteInfoDef> s_uniqueSpriteInfosByName = new Dictionary<string, UniqueSpriteInfoDef>();
 
         public static UniqueFrameDef GetUniqueFrameInfoByHash(string hash) {
             LoadUniqueFramesByHashTable();
@@ -259,5 +260,13 @@ namespace SF3.Utils {
                 default: return 1;
             }
         }
+
+        public static void AddSpriteHeaderInfo(string spriteName, byte verticalOffset, byte unknown0x08, byte collisionSize, float scale) {
+            if (!s_uniqueSpriteInfosByName.ContainsKey(spriteName))
+                s_uniqueSpriteInfosByName.Add(spriteName, new UniqueSpriteInfoDef());
+            s_uniqueSpriteInfosByName[spriteName].AddInfo(verticalOffset, unknown0x08, collisionSize, scale);
+        }
+
+        public static Dictionary<string, UniqueSpriteInfoDef> GetUniqueSpriteInfos() => s_uniqueSpriteInfosByName;
     }
 }

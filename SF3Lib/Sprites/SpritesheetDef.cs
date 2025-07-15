@@ -48,6 +48,12 @@ namespace SF3.Sprites {
         }
 
         public override string ToString() => string.Join(", ", FrameGroups.Keys);
+
+        public int VerticalOffset = 0;
+        public int Unknown0x08    = 0;
+        public int CollisionSize  = 0;
+        public float Scale        = 0;
+
         public Dictionary<string, FrameGroupDef> FrameGroups;
         public Dictionary<int, AnimationGroupDef> AnimationByDirections;
     }

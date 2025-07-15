@@ -1116,7 +1116,36 @@ namespace CHR_Analyzer {
                 Console.WriteLine($"    {anim}");
 #endif
 
+            Console.WriteLine();
+            Console.WriteLine("===================================================");
+            Console.WriteLine("| UPDATING SPRITE HEADER INFO                     |");
+            Console.WriteLine("===================================================");
+            Console.WriteLine();
+
             var spriteDefs = CHR_Utils.CreateAllSpriteDefs();
+            var spriteInfos = CHR_Utils.GetUniqueSpriteInfos().OrderBy(x => x.Key).ToDictionary(x => x.Key, x => x.Value);
+
+            T MostCommonKey<T>(Dictionary<T, int> dict)
+                => dict.OrderByDescending(x => x.Value).ThenBy(x => x.Key).First().Key;
+
+            foreach (var spriteDef in spriteDefs) {
+                foreach (var spritesheet in spriteDef.Spritesheets) {
+                    var key = $"{spriteDef.Name} ({spritesheet.Key})";
+
+                    // Some spirtes have the wrong key because their animations are a different size than its header.
+                    if (key == "Fey (Quonus Priest) (40x48)")
+                        key = "Fey (Quonus Priest) (40x40)";
+                    if (key == "Zero (U) (48x32)")
+                        key = "Zero (U) (48x24)";
+
+                    var spriteInfo = spriteInfos[key];
+
+                    spritesheet.Value.VerticalOffset = MostCommonKey(spriteInfo.VerticalOffsetValueCount);
+                    spritesheet.Value.Unknown0x08    = MostCommonKey(spriteInfo.Unknown0x08Count);
+                    spritesheet.Value.CollisionSize  = MostCommonKey(spriteInfo.CollisionSizeCount);
+                    spritesheet.Value.Scale          = (int) MostCommonKey(spriteInfo.ScaleCount);
+                }
+            }
 
             Console.WriteLine();
             Console.WriteLine("===================================================");
@@ -1312,13 +1341,19 @@ namespace CHR_Analyzer {
                     .GroupBy(x => SpritesheetDef.DimensionsToKey(x.Width, x.Height))
                     .ToDictionary(x => x.Key, x => {
                         var size = SpritesheetDef.KeyToDimensions(x.Key);
+                        var existingSpritesheet = spriteDef.Spritesheets[x.Key];
                         return new SpritesheetDef(
                             x.ToArray(),
                             spriteDef.Spritesheets[x.Key].AnimationByDirections
                                 .Where(y => framesFound.Any(z => size.Width == z.Width && size.Height == z.Height))
                                 .OrderBy(y => y.Key)
                                 .ToDictionary(y => y.Key, y => y.Value)
-                        );
+                        ) {
+                            CollisionSize  = existingSpritesheet.CollisionSize,
+                            Scale          = existingSpritesheet.Scale,
+                            Unknown0x08    = existingSpritesheet.Unknown0x08,
+                            VerticalOffset = existingSpritesheet.VerticalOffset,
+                        };
                     });
 
                 var framesFoundHashSet = framesFound.Select(x => x.Hash).ToHashSet();
