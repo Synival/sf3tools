@@ -34,8 +34,8 @@ namespace SF3.Sprites {
         public int Height;
 
         [JsonConverter(typeof(StringEnumConverter))]
-
         public SpriteFrameDirection Direction;
+
         public int SpriteSheetX;
         public int SpriteSheetY;
     }

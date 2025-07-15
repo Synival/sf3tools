@@ -1,9 +1,16 @@
-﻿namespace SF3.Sprites {
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
+using SF3.Types;
+
+namespace SF3.Sprites {
     public class AnimationFrameDef {
         public override string ToString() => $"{Command}_{Parameter}";
 
         public string[] FrameHashes;
-        public int Command;
+
+        [JsonConverter(typeof(StringEnumConverter))]
+        public SpriteAnimationFrameCommandType Command;
+
         public int Parameter;
     };
 }

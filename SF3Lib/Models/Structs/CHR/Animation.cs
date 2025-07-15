@@ -78,7 +78,7 @@ namespace SF3.Models.Structs.CHR {
                     if (x.HasTexture)
                         texCount++;
                     return new AnimationFrameDef() {
-                        Command = x.FrameID,
+                        Command = (x.FrameID < 0xF1 || x.FrameID == 0xFC) ? SpriteAnimationFrameCommandType.Frame : (SpriteAnimationFrameCommandType) x.FrameID,
                         Parameter = x.Duration,
                         FrameHashes = GetAnimationFrameHashes(x)
                     };

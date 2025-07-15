@@ -296,7 +296,7 @@ namespace CHR_Builder {
                     if (animation.AnimationFrames.Length == 0)
                         continue;
                     var lastCmd = animation.AnimationFrames[animation.AnimationFrames.Length - 1].Command;
-                    if (lastCmd != 0xF2 && lastCmd != 0xFE && lastCmd != 0xFF)
+                    if (!lastCmd.IsEndingCommand())
                         continue;
 
                     var aniFrameFrameIds = animation.AnimationFrames
@@ -311,14 +311,14 @@ namespace CHR_Builder {
                     aniFrameTableOffsets[aniIndex] = (int) fileOut.Position;
                     var aniFrameIndex = 0;
                     foreach (var aniFrame in animation.AnimationFrames) {
-                        if (aniFrame.Command < 0xF1) {
+                        if (aniFrame.Command == SpriteAnimationFrameCommandType.Frame) {
                             byteData.SetWord(0x00, aniFrameFrameIds[aniFrameIndex].FrameID.Value);
                             byteData.SetWord(0x02, aniFrame.Parameter);
                         }
                         else {
                             // TODO: actually support commands here
                             // TODO: going to another animation should be a hash lookup if it isn't already
-                            byteData.SetWord(0x00, aniFrame.Command);
+                            byteData.SetWord(0x00, (byte) aniFrame.Command);
                             byteData.SetWord(0x02, aniFrame.Parameter);
                         }
 
