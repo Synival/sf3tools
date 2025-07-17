@@ -282,7 +282,6 @@ namespace SpriteExtractor {
                     var newData = new byte[imageWidthInPixels * imageHeightInPixels * 2];
 
                     int y = 0;
-                    bool hasErrors = false;
                     foreach (var frameGroup in frameGroups) {
                         // Normally, frames' X positions are set according to their direction.
                         // But if a frame group had multiple directions -- which, unfortunately, can happen --
@@ -290,37 +289,6 @@ namespace SpriteExtractor {
                         bool hasDuplicateDirections = frameGroup.Value
                             .GroupBy(x => x.FrameInfo.Direction)
                             .Any(x => x.Count() != 1);
-
-                        // Determine if this is a valid set of frames.
-                        var frameGroupDirs = frameGroup.Value.Select(x => x.FrameInfo.Direction).Distinct().ToHashSet();
-
-                        var hasFirst  = frameGroupDirs.Contains(SpriteFrameDirection.First);
-                        var hasSecond = frameGroupDirs.Contains(SpriteFrameDirection.Second);
-
-                        var hasS   = frameGroupDirs.Contains(SpriteFrameDirection.S);
-                        var hasSSE = frameGroupDirs.Contains(SpriteFrameDirection.SSE);
-                        var hasSE  = frameGroupDirs.Contains(SpriteFrameDirection.SE);
-                        var hasESE = frameGroupDirs.Contains(SpriteFrameDirection.ESE);
-                        var hasE   = frameGroupDirs.Contains(SpriteFrameDirection.E);
-                        var hasENE = frameGroupDirs.Contains(SpriteFrameDirection.ENE);
-                        var hasNE  = frameGroupDirs.Contains(SpriteFrameDirection.NE);
-                        var hasNNE = frameGroupDirs.Contains(SpriteFrameDirection.NNE);
-                        var hasN   = frameGroupDirs.Contains(SpriteFrameDirection.N);
-                        var hasNNW = frameGroupDirs.Contains(SpriteFrameDirection.NNW);
-                        var hasWNW = frameGroupDirs.Contains(SpriteFrameDirection.WNW);
-                        var hasWSW = frameGroupDirs.Contains(SpriteFrameDirection.WSW);
-                        var hasSSW = frameGroupDirs.Contains(SpriteFrameDirection.SSW);
-
-                        var has1Dir  = frameGroupDirs.Count == 1 && hasFirst;
-                        var has2Dirs = frameGroupDirs.Count == 2 && hasFirst && hasSecond;
-                        var has4Dirs = frameGroupDirs.Count == 4         && hasSSE && hasESE && hasENE && hasNNE;
-                        var has5Dirs = frameGroupDirs.Count == 5 && hasS      && hasSE  && hasE   && hasNE       && hasN;
-                        var has6Dirs = frameGroupDirs.Count == 6 && hasS && hasSSE && hasESE && hasENE && hasNNE && hasN;
-                        var has8Dirs = frameGroupDirs.Count == 8         && hasSSE && hasESE && hasENE && hasNNE         && hasNNW && hasWNW && hasWSW && hasSSW;
-                        var has9Dirs = frameGroupDirs.Count == 9 && hasS && hasSSE && hasSE && hasESE && hasE && hasENE && hasNE && hasNNE && hasN;
-
-                        var hasBogusDirs = !(has1Dir || has2Dirs || has4Dirs || has5Dirs || has6Dirs || has8Dirs || has9Dirs);
-                        hasErrors |= hasDuplicateDirections;
 
                         int frameIndex = 0;
                         foreach (var frame in frameGroup.Value) {
@@ -336,11 +304,11 @@ namespace SpriteExtractor {
                                 int ipos = pos + (iy * imageWidthInPixels) * 2;
 
                                 // If there are errors with this frame group, colorize them with a background color.
-                                if (false /* hasDuplicateDirections || hasBogusDirs */) {
+                                if (hasDuplicateDirections) {
                                     for (int ix = 0; ix < frameWidthInPixels; ix++) {
                                         var argb1555 = (ushort) ((frameData[frameDataPos + 1] << 8) + frameData[frameDataPos]);
                                         if (argb1555 < 0x8000u) {
-                                            newData[ipos++] = (byte) (hasBogusDirs ? 0x1F : 0x00);
+                                            newData[ipos++] = 0x00;
                                             newData[ipos++] = (byte) (0x80 | (hasDuplicateDirections ? 0x7C : 0x00));
                                             frameDataPos += 2;
                                         }
@@ -361,6 +329,19 @@ namespace SpriteExtractor {
                         y += frameHeightInPixels;
                     }
 
+                    var framesByHash = frames
+                        .ToDictionary(x => x.FrameInfo.TextureHash, x => x.SpriteDefFrame);
+                    var spritesheetFrames = spritesheet.Value.FrameGroups
+                        .SelectMany(x => x.Value.Frames)
+                        .Select(x => x.Value)
+                        .ToArray();
+
+                    foreach (var spritesheetFrame in spritesheetFrames) {
+                        var from = framesByHash[spritesheetFrame.Hash];
+                        spritesheetFrame.SpriteSheetX = from.SpriteSheetX;
+                        spritesheetFrame.SpriteSheetY = from.SpriteSheetY;
+                    }
+
 #pragma warning disable CA1416 // Validate platform compatibility
                     Console.WriteLine($"Writing '{outputPath}'...");
                     using (var bitmap = new Bitmap(imageWidthInPixels, imageHeightInPixels, PixelFormat.Format16bppArgb1555)) {
@@ -375,57 +356,6 @@ namespace SpriteExtractor {
                     }
                 }
 #pragma warning restore CA1416 // Validate platform compatibility
-
-                // Unless we have sprite def for "None", which has no frames, eliminate some empty frames/animations.
-                if (spriteDef.Name != "None") {
-                    // Filter out frames that don't have image data that made it to a sprite sheet.
-                    framesFound = framesFound
-                        .Distinct()
-                        .OrderBy(x => x.Name)
-                        .ThenBy(x => x.Direction)
-                        .ThenBy(x => x.Hash)
-                        .ToList();
-
-                    // Filter out sprite sheets and variants that have no frames.
-                    spriteDef.Spritesheets = framesFound
-                        .OrderBy(x => x.Width)
-                        .ThenBy(x => x.Height)
-                        .OrderBy(x => x.Name)
-                        .ThenBy(x => x.Direction)
-                        .GroupBy(x => SpritesheetDef.DimensionsToKey(x.Width, x.Height))
-                        .OrderBy(x => x.Key)
-                        .ToDictionary(x => x.Key, x => {
-                            var size = SpritesheetDef.KeyToDimensions(x.Key);
-                            var existingSpritesheet = spriteDef.Spritesheets[x.Key];
-                            return new SpritesheetDef(
-                                x.ToArray(),
-                                spriteDef.Spritesheets[x.Key].AnimationByDirections
-                                    .Where(y => framesFound.Any(z => size.Width == z.Width && size.Height == z.Height))
-                                    .OrderBy(y => y.Key)
-                                    .ToDictionary(y => y.Key, y => y.Value)
-                            ) {
-                                CollisionSize  = existingSpritesheet.CollisionSize,
-                                Scale          = existingSpritesheet.Scale,
-                                Unknown0x08    = existingSpritesheet.Unknown0x08,
-                                VerticalOffset = existingSpritesheet.VerticalOffset,
-                            };
-                        });
-
-                    var framesFoundHashSet = framesFound.Select(x => x.Hash).ToHashSet();
-
-                    // Filter out animations that have missing frames or no frames at all.
-                    foreach (var spritesheet in spriteDef.Spritesheets.Values) {
-                        foreach (var variant in spritesheet.AnimationByDirections) {
-                            var validAnimations = variant.Value.Animations
-                                .Where(x => x.Value.AnimationFrames.Length > 0 && x.Value.AnimationFrames
-                                    .All(y => y.FrameHashes == null || y.FrameHashes.All(z => z == null || framesFoundHashSet.Contains(z)))
-                                )
-                                .OrderBy(x => x.Key)
-                                .ToDictionary(x => x.Key, x => x.Value);
-                            variant.Value.Animations = validAnimations;
-                        }
-                    }
-                }
             }
             Console.WriteLine("Spritesheet writing complete.");
 
