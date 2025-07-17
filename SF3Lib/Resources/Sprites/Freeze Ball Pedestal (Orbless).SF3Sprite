@@ -1,0 +1,41 @@
+{
+  "Name": "Freeze Ball Pedestal (Orbless)",
+  "Spritesheets": {
+    "48x64": {
+      "VerticalOffset": 0,
+      "Unknown0x08": 20,
+      "CollisionSize": 40,
+      "Scale": 0.0,
+      "FrameGroups": {
+        "Idle 1": {
+          "Frames": {
+            "First": {
+              "Hash": "c5812869da844945da70f6d8f3248bf9",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 0
+            }
+          }
+        }
+      },
+      "AnimationByDirections": {
+        "1": {
+          "Animations": {
+            "StillFrame (Idle)": {
+              "AnimationFrames": [
+                {
+                  "FrameGroup": "Idle 1",
+                  "Command": "Frame",
+                  "Parameter": 5
+                },
+                {
+                  "Command": "Stop",
+                  "Parameter": 0
+                }
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

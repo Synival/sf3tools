@@ -1,0 +1,89 @@
+{
+  "Name": "Guide Statue Beyond The Wall",
+  "Spritesheets": {
+    "56x56": {
+      "VerticalOffset": 0,
+      "Unknown0x08": 20,
+      "CollisionSize": 40,
+      "Scale": 0.0,
+      "FrameGroups": {
+        "Pointing 1": {
+          "Frames": {
+            "SSE": {
+              "Hash": "5117da3edec012c17106a781a1641c1c",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 0
+            },
+            "ESE": {
+              "Hash": "441f0463d9c224d1538b55ee5a8b0346",
+              "SpriteSheetX": 56,
+              "SpriteSheetY": 0
+            },
+            "ENE": {
+              "Hash": "81d4c49fa40708aa59296b4d7741b32c",
+              "SpriteSheetX": 112,
+              "SpriteSheetY": 0
+            },
+            "NNE": {
+              "Hash": "6a61d1c15c9417c8ea23b39dfec1b91b",
+              "SpriteSheetX": 168,
+              "SpriteSheetY": 0
+            },
+            "NNW": {
+              "Hash": "4b39e2b34862eae572c8f307cf542aa0",
+              "SpriteSheetX": 224,
+              "SpriteSheetY": 0
+            },
+            "WNW": {
+              "Hash": "c3241326d58348626cc0d9e25a990033",
+              "SpriteSheetX": 280,
+              "SpriteSheetY": 0
+            },
+            "WSW": {
+              "Hash": "3e32c16f4fc5e829086e31dce056ee71",
+              "SpriteSheetX": 336,
+              "SpriteSheetY": 0
+            },
+            "SSW": {
+              "Hash": "468b4f004e5ad40229d7b8faacffb9d5",
+              "SpriteSheetX": 392,
+              "SpriteSheetY": 0
+            }
+          }
+        }
+      },
+      "AnimationByDirections": {
+        "8": {
+          "Animations": {
+            "StillFrame (Pointing, Repeat)": {
+              "AnimationFrames": [
+                {
+                  "FrameGroup": "Pointing 1",
+                  "Command": "Frame",
+                  "Parameter": 5
+                },
+                {
+                  "Command": "GotoFrameOffset",
+                  "Parameter": 0
+                }
+              ]
+            },
+            "StillFrame (Pointing)": {
+              "AnimationFrames": [
+                {
+                  "FrameGroup": "Pointing 1",
+                  "Command": "Frame",
+                  "Parameter": 10
+                },
+                {
+                  "Command": "Stop",
+                  "Parameter": 0
+                }
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,259 @@
+{
+  "Name": "Small Torch Flame",
+  "Spritesheets": {
+    "16x32": {
+      "VerticalOffset": 0,
+      "Unknown0x08": 8,
+      "CollisionSize": 16,
+      "Scale": 1.0,
+      "FrameGroups": {
+        "Flickering (Large) 1": {
+          "Frames": {
+            "First": {
+              "Hash": "45a676e1b40c5c1373f622ba33418d61",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 0
+            }
+          }
+        },
+        "Flickering (Large) 2": {
+          "Frames": {
+            "First": {
+              "Hash": "a9e3bba97b482c9eeb971eabe501205e",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 32
+            }
+          }
+        },
+        "Flickering (Large) 3": {
+          "Frames": {
+            "First": {
+              "Hash": "570850a1937d36dbb2f0475edc448137",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 64
+            }
+          }
+        },
+        "Flickering (Large) 4": {
+          "Frames": {
+            "First": {
+              "Hash": "d52d087ac707b4b3746e7edce1bd7856",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 96
+            }
+          }
+        },
+        "Flickering (Large) 5": {
+          "Frames": {
+            "First": {
+              "Hash": "0d19d9814daff4cbaf908ef65b0493d3",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 128
+            }
+          }
+        },
+        "Flickering (Large) 6": {
+          "Frames": {
+            "First": {
+              "Hash": "17ae178516a2dc01131ca9f16f86fab6",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 160
+            }
+          }
+        },
+        "Flickering (Large) 7": {
+          "Frames": {
+            "First": {
+              "Hash": "f14bb9d2c06411d2ccbc89ce95bd6c39",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 192
+            }
+          }
+        },
+        "Flickering (Large) 8": {
+          "Frames": {
+            "First": {
+              "Hash": "61ca8b0ca6fcf0bf83807c6a8c0cc030",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 224
+            }
+          }
+        }
+      },
+      "AnimationByDirections": {
+        "1": {
+          "Animations": {
+            "Flickering (Large)": {
+              "AnimationFrames": [
+                {
+                  "FrameGroup": "Flickering (Large) 1",
+                  "Command": "Frame",
+                  "Parameter": 1
+                },
+                {
+                  "FrameGroup": "Flickering (Large) 2",
+                  "Command": "Frame",
+                  "Parameter": 1
+                },
+                {
+                  "FrameGroup": "Flickering (Large) 3",
+                  "Command": "Frame",
+                  "Parameter": 1
+                },
+                {
+                  "FrameGroup": "Flickering (Large) 4",
+                  "Command": "Frame",
+                  "Parameter": 1
+                },
+                {
+                  "FrameGroup": "Flickering (Large) 5",
+                  "Command": "Frame",
+                  "Parameter": 1
+                },
+                {
+                  "FrameGroup": "Flickering (Large) 6",
+                  "Command": "Frame",
+                  "Parameter": 1
+                },
+                {
+                  "FrameGroup": "Flickering (Large) 7",
+                  "Command": "Frame",
+                  "Parameter": 1
+                },
+                {
+                  "FrameGroup": "Flickering (Large) 8",
+                  "Command": "Frame",
+                  "Parameter": 1
+                },
+                {
+                  "Command": "GotoFrameOffset",
+                  "Parameter": 0
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    "16x16": {
+      "VerticalOffset": 0,
+      "Unknown0x08": 8,
+      "CollisionSize": 16,
+      "Scale": 1.0,
+      "FrameGroups": {
+        "Flickering (Small) 1": {
+          "Frames": {
+            "First": {
+              "Hash": "a1a81ae65047ba9b90a26e908b6e5b0b",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 0
+            }
+          }
+        },
+        "Flickering (Small) 2": {
+          "Frames": {
+            "First": {
+              "Hash": "6627023335163ad82b0b2538ae123807",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 16
+            }
+          }
+        },
+        "Flickering (Small) 3": {
+          "Frames": {
+            "First": {
+              "Hash": "a383b660fc96d480a8ca375045ada30d",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 32
+            }
+          }
+        },
+        "Flickering (Small) 4": {
+          "Frames": {
+            "First": {
+              "Hash": "e7cf44dc13fc659d2f09d10dc5a08a82",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 48
+            }
+          }
+        },
+        "Flickering (Small) 5": {
+          "Frames": {
+            "First": {
+              "Hash": "a29a19dd23e546e41b3e987ca2de0943",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 64
+            }
+          }
+        },
+        "Flickering (Small) 6": {
+          "Frames": {
+            "First": {
+              "Hash": "56fedf163574649a95b58df46fac7b0b",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 80
+            }
+          }
+        },
+        "Flickering (Small) 7": {
+          "Frames": {
+            "First": {
+              "Hash": "2a2c2f0a512c87e630500f472bbc0316",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 96
+            }
+          }
+        }
+      },
+      "AnimationByDirections": {
+        "1": {
+          "Animations": {
+            "Flickering (Small)": {
+              "AnimationFrames": [
+                {
+                  "FrameGroup": "Flickering (Small) 1",
+                  "Command": "Frame",
+                  "Parameter": 1
+                },
+                {
+                  "FrameGroup": "Flickering (Small) 2",
+                  "Command": "Frame",
+                  "Parameter": 1
+                },
+                {
+                  "FrameGroup": "Flickering (Small) 3",
+                  "Command": "Frame",
+                  "Parameter": 1
+                },
+                {
+                  "FrameGroup": "Flickering (Small) 4",
+                  "Command": "Frame",
+                  "Parameter": 1
+                },
+                {
+                  "FrameGroup": "Flickering (Small) 5",
+                  "Command": "Frame",
+                  "Parameter": 1
+                },
+                {
+                  "FrameGroup": "Flickering (Small) 6",
+                  "Command": "Frame",
+                  "Parameter": 1
+                },
+                {
+                  "FrameGroup": "Flickering (Small) 7",
+                  "Command": "Frame",
+                  "Parameter": 1
+                },
+                {
+                  "Command": "GotoFrameOffset",
+                  "Parameter": 0
+                }
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

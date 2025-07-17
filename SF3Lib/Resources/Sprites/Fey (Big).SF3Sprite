@@ -1,0 +1,204 @@
+{
+  "Name": "Fey (Big)",
+  "Spritesheets": {
+    "128x128": {
+      "VerticalOffset": 0,
+      "Unknown0x08": 112,
+      "CollisionSize": 96,
+      "Scale": 1.0,
+      "FrameGroups": {
+        "Idle 1": {
+          "Frames": {
+            "S": {
+              "Hash": "7518dfa9d370eeda9eab3214edc332e2",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 0
+            }
+          }
+        },
+        "Idle 2": {
+          "Frames": {
+            "S": {
+              "Hash": "1145cb90d792cdac38b5ee1a0b45d8ac",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 128
+            }
+          }
+        },
+        "Shushing 1": {
+          "Frames": {
+            "S": {
+              "Hash": "e698d373477b10fae8220a7a88cfc04f",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 256
+            }
+          }
+        },
+        "Shushing 2": {
+          "Frames": {
+            "S": {
+              "Hash": "6feda109f65a38e197a790c7f1a1a2ca",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 384
+            }
+          }
+        },
+        "Shushing 3": {
+          "Frames": {
+            "S": {
+              "Hash": "1d2088a2f48151ef3e254f07500243c4",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 512
+            }
+          }
+        },
+        "StartOrStopShushing 1": {
+          "Frames": {
+            "S": {
+              "Hash": "30b6fd0738438affe085b2bc255818e5",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 640
+            }
+          }
+        },
+        "StartOrStopShushing 2": {
+          "Frames": {
+            "S": {
+              "Hash": "f25e400b93bf23217667d46c761df327",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 768
+            }
+          }
+        }
+      },
+      "AnimationByDirections": {
+        "1": {
+          "Animations": {
+            "Idle": {
+              "AnimationFrames": [
+                {
+                  "Frames": {
+                    "First": {
+                      "Frame": "Idle 1",
+                      "Direction": "S"
+                    }
+                  },
+                  "Command": "Frame",
+                  "Parameter": 3
+                },
+                {
+                  "Frames": {
+                    "First": {
+                      "Frame": "Idle 2",
+                      "Direction": "S"
+                    }
+                  },
+                  "Command": "Frame",
+                  "Parameter": 3
+                },
+                {
+                  "Command": "GotoFrameOffset",
+                  "Parameter": 0
+                }
+              ]
+            },
+            "Shushing": {
+              "AnimationFrames": [
+                {
+                  "Frames": {
+                    "First": {
+                      "Frame": "Shushing 1",
+                      "Direction": "S"
+                    }
+                  },
+                  "Command": "Frame",
+                  "Parameter": 7
+                },
+                {
+                  "Frames": {
+                    "First": {
+                      "Frame": "Shushing 2",
+                      "Direction": "S"
+                    }
+                  },
+                  "Command": "Frame",
+                  "Parameter": 7
+                },
+                {
+                  "Frames": {
+                    "First": {
+                      "Frame": "Shushing 3",
+                      "Direction": "S"
+                    }
+                  },
+                  "Command": "Frame",
+                  "Parameter": 7
+                },
+                {
+                  "Frames": {
+                    "First": {
+                      "Frame": "Shushing 2",
+                      "Direction": "S"
+                    }
+                  },
+                  "Command": "Frame",
+                  "Parameter": 7
+                },
+                {
+                  "Command": "GotoFrameOffset",
+                  "Parameter": 0
+                }
+              ]
+            },
+            "ShushingBackToIdle": {
+              "AnimationFrames": [
+                {
+                  "Frames": {
+                    "First": {
+                      "Frame": "StartOrStopShushing 1",
+                      "Direction": "S"
+                    }
+                  },
+                  "Command": "Frame",
+                  "Parameter": 3
+                },
+                {
+                  "Frames": {
+                    "First": {
+                      "Frame": "StartOrStopShushing 2",
+                      "Direction": "S"
+                    }
+                  },
+                  "Command": "Frame",
+                  "Parameter": 3
+                },
+                {
+                  "Command": "GotoAnimation",
+                  "Parameter": 1
+                }
+              ]
+            },
+            "StillFrame (Idle)": {
+              "AnimationFrames": [
+                {
+                  "Frames": {
+                    "First": {
+                      "Frame": "Idle 1",
+                      "Direction": "S"
+                    }
+                  },
+                  "Command": "Frame",
+                  "Parameter": 10
+                },
+                {
+                  "Command": "Stop",
+                  "Parameter": 0
+                }
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,254 @@
+{
+  "Name": "Unoma (P2) (Ramen)",
+  "Spritesheets": {
+    "48x32": {
+      "VerticalOffset": 0,
+      "Unknown0x08": 20,
+      "CollisionSize": 40,
+      "Scale": 1.0,
+      "FrameGroups": {
+        "SittingAndEating 1": {
+          "Frames": {
+            "SSE": {
+              "Hash": "a05c6c93717c589066dd095ab947b9ce",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 0
+            },
+            "ESE": {
+              "Hash": "2ca69dc02b0ecc11ccda661428e55d81",
+              "SpriteSheetX": 48,
+              "SpriteSheetY": 0
+            },
+            "ENE": {
+              "Hash": "091b8309809cd0d9f561b1881a9a3832",
+              "SpriteSheetX": 96,
+              "SpriteSheetY": 0
+            },
+            "NNE": {
+              "Hash": "32d2b7ea23013020a44463851d84f26a",
+              "SpriteSheetX": 144,
+              "SpriteSheetY": 0
+            }
+          }
+        },
+        "SittingAndEating 2": {
+          "Frames": {
+            "SSE": {
+              "Hash": "d7d7a8f0308bd71dee8eee4c11132d74",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 32
+            },
+            "ESE": {
+              "Hash": "7913c0c0eb08af40ca3ceb9b8649e2a4",
+              "SpriteSheetX": 48,
+              "SpriteSheetY": 32
+            },
+            "ENE": {
+              "Hash": "453d570a264ad27d3f058f6c5b16d420",
+              "SpriteSheetX": 96,
+              "SpriteSheetY": 32
+            },
+            "NNE": {
+              "Hash": "5f2aefaec9084f2aec5d7d4a986f3093",
+              "SpriteSheetX": 144,
+              "SpriteSheetY": 32
+            }
+          }
+        },
+        "SittingAndEating 3": {
+          "Frames": {
+            "SSE": {
+              "Hash": "6a58854649b558d2422bd7b4e5da756d",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 64
+            },
+            "ESE": {
+              "Hash": "86937bdacb37a00059ea2f5850a16d6e",
+              "SpriteSheetX": 48,
+              "SpriteSheetY": 64
+            },
+            "ENE": {
+              "Hash": "d92d07ccc4590523ced2a1524487cf4f",
+              "SpriteSheetX": 96,
+              "SpriteSheetY": 64
+            },
+            "NNE": {
+              "Hash": "29104dfa0bedbb4853ca14ff7c499593",
+              "SpriteSheetX": 144,
+              "SpriteSheetY": 64
+            }
+          }
+        },
+        "SittingAndEating 4": {
+          "Frames": {
+            "SSE": {
+              "Hash": "37c2f9a7244b5b1a7c4f2ff81dcdbeb6",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 96
+            },
+            "ESE": {
+              "Hash": "a03b5545291ce63c3dbf121de83ef06a",
+              "SpriteSheetX": 48,
+              "SpriteSheetY": 96
+            },
+            "ENE": {
+              "Hash": "b6d568f258c5816117faac2f14b839c9",
+              "SpriteSheetX": 96,
+              "SpriteSheetY": 96
+            },
+            "NNE": {
+              "Hash": "abea9cfd8b3aefaa58a946af58aa631f",
+              "SpriteSheetX": 144,
+              "SpriteSheetY": 96
+            }
+          }
+        },
+        "SittingAndEating 5": {
+          "Frames": {
+            "SSE": {
+              "Hash": "2e4961ac872d73186ebe3af030ff7246",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 128
+            },
+            "ESE": {
+              "Hash": "630cf2b646bc2911ee78761318650ad3",
+              "SpriteSheetX": 48,
+              "SpriteSheetY": 128
+            },
+            "ENE": {
+              "Hash": "f3c9011506e4440c5fa8881f1e9ba6f4",
+              "SpriteSheetX": 96,
+              "SpriteSheetY": 128
+            },
+            "NNE": {
+              "Hash": "f4f0e4be863c438d65283a78ea51b54f",
+              "SpriteSheetX": 144,
+              "SpriteSheetY": 128
+            }
+          }
+        },
+        "SittingAndEating 6": {
+          "Frames": {
+            "SSE": {
+              "Hash": "9a61ca6ec88ab8d142a43940d0e1fc7e",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 160
+            },
+            "ESE": {
+              "Hash": "1e2f942ab8446d255dc0f50897f79603",
+              "SpriteSheetX": 48,
+              "SpriteSheetY": 160
+            },
+            "ENE": {
+              "Hash": "6f2cce07d9e126f5530f8a4aeae761d7",
+              "SpriteSheetX": 96,
+              "SpriteSheetY": 160
+            },
+            "NNE": {
+              "Hash": "924703fa0c2aebcc3db3d00ea2b47cb7",
+              "SpriteSheetX": 144,
+              "SpriteSheetY": 160
+            }
+          }
+        }
+      },
+      "AnimationByDirections": {
+        "4": {
+          "Animations": {
+            "SittingAndEating": {
+              "AnimationFrames": [
+                {
+                  "FrameGroup": "SittingAndEating 1",
+                  "Command": "Frame",
+                  "Parameter": 5
+                },
+                {
+                  "FrameGroup": "SittingAndEating 2",
+                  "Command": "Frame",
+                  "Parameter": 5
+                },
+                {
+                  "FrameGroup": "SittingAndEating 3",
+                  "Command": "Frame",
+                  "Parameter": 5
+                },
+                {
+                  "FrameGroup": "SittingAndEating 1",
+                  "Command": "Frame",
+                  "Parameter": 5
+                },
+                {
+                  "FrameGroup": "SittingAndEating 2",
+                  "Command": "Frame",
+                  "Parameter": 5
+                },
+                {
+                  "FrameGroup": "SittingAndEating 3",
+                  "Command": "Frame",
+                  "Parameter": 5
+                },
+                {
+                  "FrameGroup": "SittingAndEating 1",
+                  "Command": "Frame",
+                  "Parameter": 5
+                },
+                {
+                  "FrameGroup": "SittingAndEating 2",
+                  "Command": "Frame",
+                  "Parameter": 5
+                },
+                {
+                  "FrameGroup": "SittingAndEating 3",
+                  "Command": "Frame",
+                  "Parameter": 5
+                },
+                {
+                  "FrameGroup": "SittingAndEating 4",
+                  "Command": "Frame",
+                  "Parameter": 12
+                },
+                {
+                  "FrameGroup": "SittingAndEating 5",
+                  "Command": "Frame",
+                  "Parameter": 15
+                },
+                {
+                  "FrameGroup": "SittingAndEating 6",
+                  "Command": "Frame",
+                  "Parameter": 30
+                },
+                {
+                  "FrameGroup": "SittingAndEating 5",
+                  "Command": "Frame",
+                  "Parameter": 8
+                },
+                {
+                  "FrameGroup": "SittingAndEating 4",
+                  "Command": "Frame",
+                  "Parameter": 5
+                },
+                {
+                  "Command": "GotoFrameOffset",
+                  "Parameter": 0
+                }
+              ]
+            },
+            "StillFrame": {
+              "AnimationFrames": [
+                {
+                  "FrameGroup": "SittingAndEating 1",
+                  "Command": "Frame",
+                  "Parameter": 5
+                },
+                {
+                  "Command": "Stop",
+                  "Parameter": 0
+                }
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

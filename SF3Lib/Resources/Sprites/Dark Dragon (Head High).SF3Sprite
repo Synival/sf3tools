@@ -1,0 +1,286 @@
+{
+  "Name": "Dark Dragon (Head High)",
+  "Spritesheets": {
+    "72x48": {
+      "VerticalOffset": 0,
+      "Unknown0x08": 20,
+      "CollisionSize": 40,
+      "Scale": 1.0,
+      "FrameGroups": {
+        "Idle 1": {
+          "Frames": {
+            "SSE": {
+              "Hash": "02476c7f936277dc4ba83a76c784c8bf",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 0
+            },
+            "ESE": {
+              "Hash": "362b328414957f34b804a9e17246bc31",
+              "SpriteSheetX": 72,
+              "SpriteSheetY": 0
+            },
+            "ENE": {
+              "Hash": "f9bef83b0049f201dcf0b395dee0eae6",
+              "SpriteSheetX": 144,
+              "SpriteSheetY": 0
+            },
+            "NNE": {
+              "Hash": "4425e41beb045701fb39ef6c11738f4e",
+              "SpriteSheetX": 216,
+              "SpriteSheetY": 0
+            }
+          }
+        },
+        "Idle 2": {
+          "Frames": {
+            "SSE": {
+              "Hash": "15118ab3e41bba579e372b02035868b3",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 48
+            },
+            "ESE": {
+              "Hash": "3a33088595550dc9059fb6dbb51bdf22",
+              "SpriteSheetX": 72,
+              "SpriteSheetY": 48
+            },
+            "ENE": {
+              "Hash": "0812800e4efbab411ac4fea7cbf04100",
+              "SpriteSheetX": 144,
+              "SpriteSheetY": 48
+            },
+            "NNE": {
+              "Hash": "8b04ffeb2744ab5db3fc3318f613229a",
+              "SpriteSheetX": 216,
+              "SpriteSheetY": 48
+            }
+          }
+        },
+        "Idle 3": {
+          "Frames": {
+            "SSE": {
+              "Hash": "5feb58feb577d91218a445fb3b629fab",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 96
+            },
+            "ESE": {
+              "Hash": "b74b710f01369bca48c9b3584fe1f1f9",
+              "SpriteSheetX": 72,
+              "SpriteSheetY": 96
+            },
+            "ENE": {
+              "Hash": "5cf8c1ad1033cc7b2389415da5f9b91a",
+              "SpriteSheetX": 144,
+              "SpriteSheetY": 96
+            },
+            "NNE": {
+              "Hash": "f0977f23b7511f25fd7a985ab32bdeaf",
+              "SpriteSheetX": 216,
+              "SpriteSheetY": 96
+            }
+          }
+        },
+        "Idle 4": {
+          "Frames": {
+            "SSE": {
+              "Hash": "245b15689bc021452147636e891da6f3",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 144
+            },
+            "ESE": {
+              "Hash": "cfec5256e029fd15855ef48cbeddc35b",
+              "SpriteSheetX": 72,
+              "SpriteSheetY": 144
+            },
+            "ENE": {
+              "Hash": "fa96879ee03860287a823d3c08077751",
+              "SpriteSheetX": 144,
+              "SpriteSheetY": 144
+            },
+            "NNE": {
+              "Hash": "ff7572f03010f179c569b56bd82a62b9",
+              "SpriteSheetX": 216,
+              "SpriteSheetY": 144
+            }
+          }
+        }
+      },
+      "AnimationByDirections": {
+        "4": {
+          "Animations": {
+            "Idle": {
+              "AnimationFrames": [
+                {
+                  "FrameGroup": "Idle 1",
+                  "Command": "Frame",
+                  "Parameter": 10
+                },
+                {
+                  "FrameGroup": "Idle 2",
+                  "Command": "Frame",
+                  "Parameter": 5
+                },
+                {
+                  "FrameGroup": "Idle 3",
+                  "Command": "Frame",
+                  "Parameter": 5
+                },
+                {
+                  "FrameGroup": "Idle 4",
+                  "Command": "Frame",
+                  "Parameter": 15
+                },
+                {
+                  "FrameGroup": "Idle 3",
+                  "Command": "Frame",
+                  "Parameter": 6
+                },
+                {
+                  "FrameGroup": "Idle 2",
+                  "Command": "Frame",
+                  "Parameter": 6
+                },
+                {
+                  "FrameGroup": "Idle 1",
+                  "Command": "Frame",
+                  "Parameter": 10
+                },
+                {
+                  "FrameGroup": "Idle 2",
+                  "Command": "Frame",
+                  "Parameter": 5
+                },
+                {
+                  "FrameGroup": "Idle 3",
+                  "Command": "Frame",
+                  "Parameter": 5
+                },
+                {
+                  "FrameGroup": "Idle 4",
+                  "Command": "Frame",
+                  "Parameter": 15
+                },
+                {
+                  "FrameGroup": "Idle 3",
+                  "Command": "Frame",
+                  "Parameter": 6
+                },
+                {
+                  "FrameGroup": "Idle 2",
+                  "Command": "Frame",
+                  "Parameter": 6
+                },
+                {
+                  "FrameGroup": "Idle 1",
+                  "Command": "Frame",
+                  "Parameter": 10
+                },
+                {
+                  "FrameGroup": "Idle 2",
+                  "Command": "Frame",
+                  "Parameter": 5
+                },
+                {
+                  "FrameGroup": "Idle 3",
+                  "Command": "Frame",
+                  "Parameter": 5
+                },
+                {
+                  "FrameGroup": "Idle 4",
+                  "Command": "Frame",
+                  "Parameter": 15
+                },
+                {
+                  "FrameGroup": "Idle 3",
+                  "Command": "Frame",
+                  "Parameter": 6
+                },
+                {
+                  "FrameGroup": "Idle 2",
+                  "Command": "Frame",
+                  "Parameter": 6
+                },
+                {
+                  "FrameGroup": "Idle 1",
+                  "Command": "Frame",
+                  "Parameter": 10
+                },
+                {
+                  "FrameGroup": "Idle 2",
+                  "Command": "Frame",
+                  "Parameter": 5
+                },
+                {
+                  "FrameGroup": "Idle 3",
+                  "Command": "Frame",
+                  "Parameter": 5
+                },
+                {
+                  "FrameGroup": "Idle 4",
+                  "Command": "Frame",
+                  "Parameter": 15
+                },
+                {
+                  "FrameGroup": "Idle 3",
+                  "Command": "Frame",
+                  "Parameter": 6
+                },
+                {
+                  "FrameGroup": "Idle 2",
+                  "Command": "Frame",
+                  "Parameter": 6
+                },
+                {
+                  "FrameGroup": "Idle 1",
+                  "Command": "Frame",
+                  "Parameter": 10
+                },
+                {
+                  "FrameGroup": "Idle 2",
+                  "Command": "Frame",
+                  "Parameter": 5
+                },
+                {
+                  "FrameGroup": "Idle 3",
+                  "Command": "Frame",
+                  "Parameter": 5
+                },
+                {
+                  "FrameGroup": "Idle 4",
+                  "Command": "Frame",
+                  "Parameter": 15
+                },
+                {
+                  "FrameGroup": "Idle 3",
+                  "Command": "Frame",
+                  "Parameter": 6
+                },
+                {
+                  "FrameGroup": "Idle 2",
+                  "Command": "Frame",
+                  "Parameter": 6
+                },
+                {
+                  "Command": "GotoFrameOffset",
+                  "Parameter": 0
+                }
+              ]
+            },
+            "StillFrame": {
+              "AnimationFrames": [
+                {
+                  "FrameGroup": "Idle 1",
+                  "Command": "Frame",
+                  "Parameter": 10
+                },
+                {
+                  "Command": "Stop",
+                  "Parameter": 0
+                }
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

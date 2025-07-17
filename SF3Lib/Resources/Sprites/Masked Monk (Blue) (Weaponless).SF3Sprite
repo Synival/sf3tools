@@ -1,0 +1,802 @@
+{
+  "Name": "Masked Monk (Blue) (Weaponless)",
+  "Spritesheets": {
+    "40x40": {
+      "VerticalOffset": 0,
+      "Unknown0x08": 20,
+      "CollisionSize": 40,
+      "Scale": 1.0,
+      "FrameGroups": {
+        "Idle (Arms Crossed) 1": {
+          "Frames": {
+            "SSE": {
+              "Hash": "c299a1707e744aa125aa9160616efb39",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 0
+            },
+            "ESE": {
+              "Hash": "5957f419d11c43b2d25cc21b5f22424e",
+              "SpriteSheetX": 40,
+              "SpriteSheetY": 0
+            },
+            "ENE": {
+              "Hash": "60ccab3ed872afd295a8642c5715a47a",
+              "SpriteSheetX": 80,
+              "SpriteSheetY": 0
+            },
+            "NNE": {
+              "Hash": "60c77ce2b411a5a4835887c111b47970",
+              "SpriteSheetX": 120,
+              "SpriteSheetY": 0
+            }
+          }
+        },
+        "Idle (Arms Crossed) 2": {
+          "Frames": {
+            "SSE": {
+              "Hash": "fdda219a2cfeda8e462670e45079a57e",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 40
+            },
+            "ESE": {
+              "Hash": "e6095d4879de853c206236645aa3895a",
+              "SpriteSheetX": 40,
+              "SpriteSheetY": 40
+            },
+            "ENE": {
+              "Hash": "be487df1630332ce7300790c4bcfb8e3",
+              "SpriteSheetX": 80,
+              "SpriteSheetY": 40
+            },
+            "NNE": {
+              "Hash": "b586afbfa85393753d028821bc80f6ef",
+              "SpriteSheetX": 120,
+              "SpriteSheetY": 40
+            }
+          }
+        },
+        "Idle (Arms Crossed) 3": {
+          "Frames": {
+            "SSE": {
+              "Hash": "a79a7bce8964f891888089938bebe3be",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 80
+            },
+            "ESE": {
+              "Hash": "f6f4a13cf71e8da2c33e6ca18b60f5c8",
+              "SpriteSheetX": 40,
+              "SpriteSheetY": 80
+            },
+            "ENE": {
+              "Hash": "1e93f7cc931f9141a19d7062f672cb63",
+              "SpriteSheetX": 80,
+              "SpriteSheetY": 80
+            },
+            "NNE": {
+              "Hash": "99b0dc088e88105a751cc4b63356bec6",
+              "SpriteSheetX": 120,
+              "SpriteSheetY": 80
+            }
+          }
+        },
+        "Jumping Up 1": {
+          "Frames": {
+            "SSE": {
+              "Hash": "33a60c7318f1e55929ceb2cec8611791",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 120
+            },
+            "ESE": {
+              "Hash": "9763407d22c4431e79a0036e7d5b859d",
+              "SpriteSheetX": 40,
+              "SpriteSheetY": 120
+            },
+            "ENE": {
+              "Hash": "6449f9cdf849f8346ed868f81cfd487b",
+              "SpriteSheetX": 80,
+              "SpriteSheetY": 120
+            },
+            "NNE": {
+              "Hash": "4431e9dab7958f2dca49ff10ac06ce24",
+              "SpriteSheetX": 120,
+              "SpriteSheetY": 120
+            }
+          }
+        },
+        "JumpingUp 1": {
+          "Frames": {
+            "SSE": {
+              "Hash": "891e8055d312a8fde29ac618365fb51d",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 160
+            },
+            "ESE": {
+              "Hash": "c7a30949311c25168a184a95c9dc86d8",
+              "SpriteSheetX": 40,
+              "SpriteSheetY": 160
+            },
+            "ENE": {
+              "Hash": "2de0ec47bdc1d706d92cfe0b4af8ccdd",
+              "SpriteSheetX": 80,
+              "SpriteSheetY": 160
+            },
+            "NNE": {
+              "Hash": "777a533f91b8c9e89e1c053bca58dba9",
+              "SpriteSheetX": 120,
+              "SpriteSheetY": 160
+            }
+          }
+        },
+        "JumpingUp 2": {
+          "Frames": {
+            "SSE": {
+              "Hash": "d64cfe5a35f340e451aab3146ba6dedb",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 200
+            },
+            "ESE": {
+              "Hash": "664f9ddb3ca2e33d34ab0d6a0e907478",
+              "SpriteSheetX": 40,
+              "SpriteSheetY": 200
+            },
+            "ENE": {
+              "Hash": "510e871e1ce12d638509bb9c915505b3",
+              "SpriteSheetX": 80,
+              "SpriteSheetY": 200
+            },
+            "NNE": {
+              "Hash": "5e3e74801198cffdade5160ca7b64c4b",
+              "SpriteSheetX": 120,
+              "SpriteSheetY": 200
+            }
+          }
+        },
+        "Landing 1": {
+          "Frames": {
+            "SSE": {
+              "Hash": "b0736dab3e0861e5b327f149a70e2299",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 240
+            },
+            "ESE": {
+              "Hash": "bf4dddd8759e6ffc7906a71600f48926",
+              "SpriteSheetX": 40,
+              "SpriteSheetY": 240
+            },
+            "ENE": {
+              "Hash": "b2ff1ec62e209c8d9c83b0424524193b",
+              "SpriteSheetX": 80,
+              "SpriteSheetY": 240
+            },
+            "NNE": {
+              "Hash": "7dbdd0ff9facd4ada0b1fe00ccd3b08a",
+              "SpriteSheetX": 120,
+              "SpriteSheetY": 240
+            }
+          }
+        },
+        "Laughing 1": {
+          "Frames": {
+            "SSE": {
+              "Hash": "9cf5854f6047d80c4e2781e25dec061c",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 280
+            },
+            "ESE": {
+              "Hash": "90bf0be803874c1353624b8f6bc4f0a8",
+              "SpriteSheetX": 40,
+              "SpriteSheetY": 280
+            },
+            "ENE": {
+              "Hash": "cc612d6693529d6160b1ca72648813a6",
+              "SpriteSheetX": 80,
+              "SpriteSheetY": 280
+            },
+            "NNE": {
+              "Hash": "48b0960a2c5ea732c63a561b9b7baf3d",
+              "SpriteSheetX": 120,
+              "SpriteSheetY": 280
+            }
+          }
+        },
+        "Laughing 2": {
+          "Frames": {
+            "SSE": {
+              "Hash": "fa7128617c606454bd363cb29286e0ba",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 320
+            },
+            "ESE": {
+              "Hash": "33b0c75962233bf49f1fbcb9594a5e4f",
+              "SpriteSheetX": 40,
+              "SpriteSheetY": 320
+            },
+            "ENE": {
+              "Hash": "9e56e31642b3417564db2d9e363cfd44",
+              "SpriteSheetX": 80,
+              "SpriteSheetY": 320
+            },
+            "NNE": {
+              "Hash": "371ea9e4fae0d5385226e5eb8cbc5468",
+              "SpriteSheetX": 120,
+              "SpriteSheetY": 320
+            }
+          }
+        },
+        "LookingDown 1": {
+          "Frames": {
+            "SSE": {
+              "Hash": "7da5f8a6c238e9789efe20ea0e4d1d64",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 360
+            },
+            "ESE": {
+              "Hash": "8f04395d61f5075a02dacda7ba43d7a3",
+              "SpriteSheetX": 40,
+              "SpriteSheetY": 360
+            },
+            "ENE": {
+              "Hash": "476b02d895e631b138a549995c3df354",
+              "SpriteSheetX": 80,
+              "SpriteSheetY": 360
+            },
+            "NNE": {
+              "Hash": "98bc6fe556d4ce60939e54ffb57e3ff6",
+              "SpriteSheetX": 120,
+              "SpriteSheetY": 360
+            }
+          }
+        },
+        "LookingUp (Kneeling) 1": {
+          "Frames": {
+            "SSE": {
+              "Hash": "9bd1ca0c3c11718a438d84ec50888cad",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 400
+            },
+            "ESE": {
+              "Hash": "de835c6beb7e1cbdfc810602ee02061e",
+              "SpriteSheetX": 40,
+              "SpriteSheetY": 400
+            },
+            "ENE": {
+              "Hash": "5e37419fefaba192995c9165909921ec",
+              "SpriteSheetX": 80,
+              "SpriteSheetY": 400
+            },
+            "NNE": {
+              "Hash": "135974b6cbf652a4b852f33991377a76",
+              "SpriteSheetX": 120,
+              "SpriteSheetY": 400
+            }
+          }
+        },
+        "LookingUp (Kneeling) 2": {
+          "Frames": {
+            "SSE": {
+              "Hash": "3a5997c164b539739c3d85482199f6e8",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 440
+            },
+            "ESE": {
+              "Hash": "b639c377efc91e44ba97045d262a8c46",
+              "SpriteSheetX": 40,
+              "SpriteSheetY": 440
+            },
+            "ENE": {
+              "Hash": "65a6e8c7a1e9d0694aedb91c0b345603",
+              "SpriteSheetX": 80,
+              "SpriteSheetY": 440
+            },
+            "NNE": {
+              "Hash": "8132dd3ee58379ced421a284c58f0ba8",
+              "SpriteSheetX": 120,
+              "SpriteSheetY": 440
+            }
+          }
+        },
+        "Running 1": {
+          "Frames": {
+            "SSE": {
+              "Hash": "1853243a04190a3147271efde9383dd2",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 480
+            },
+            "ESE": {
+              "Hash": "b7abeb0b505685ee7bf93d0c9edd730b",
+              "SpriteSheetX": 40,
+              "SpriteSheetY": 480
+            },
+            "ENE": {
+              "Hash": "013a2b585fbb71411a78b7f451079b40",
+              "SpriteSheetX": 80,
+              "SpriteSheetY": 480
+            },
+            "NNE": {
+              "Hash": "db8231d1dc73549349ce2a846fa3541d",
+              "SpriteSheetX": 120,
+              "SpriteSheetY": 480
+            }
+          }
+        },
+        "Running 2": {
+          "Frames": {
+            "SSE": {
+              "Hash": "6df64a0a26823b03a6c335468867c32c",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 520
+            },
+            "ESE": {
+              "Hash": "a4f1658b2574270b7aebad4d4e179c2f",
+              "SpriteSheetX": 40,
+              "SpriteSheetY": 520
+            },
+            "ENE": {
+              "Hash": "67149f06e3f15e4b67c1be15c1e6515f",
+              "SpriteSheetX": 80,
+              "SpriteSheetY": 520
+            },
+            "NNE": {
+              "Hash": "d845ce325d2d809fcd6c8d9ffd679a75",
+              "SpriteSheetX": 120,
+              "SpriteSheetY": 520
+            }
+          }
+        },
+        "Running 3": {
+          "Frames": {
+            "SSE": {
+              "Hash": "293bf19aa4f1c7a587d822de63b8f32c",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 560
+            },
+            "ESE": {
+              "Hash": "85cc3b2369fbbde18e3872fb1c61181b",
+              "SpriteSheetX": 40,
+              "SpriteSheetY": 560
+            },
+            "ENE": {
+              "Hash": "b1841ff3129cd95dd47c9d7b2728fe34",
+              "SpriteSheetX": 80,
+              "SpriteSheetY": 560
+            },
+            "NNE": {
+              "Hash": "5971688cd132c94226ce3bbc722b30ef",
+              "SpriteSheetX": 120,
+              "SpriteSheetY": 560
+            }
+          }
+        },
+        "Running 4": {
+          "Frames": {
+            "SSE": {
+              "Hash": "0cd79be4e47f1557a387363e4a740681",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 600
+            },
+            "ESE": {
+              "Hash": "c6441a5bdfa824fbf2ccf318747f5e5b",
+              "SpriteSheetX": 40,
+              "SpriteSheetY": 600
+            },
+            "ENE": {
+              "Hash": "f5af798a644fd09c25e9df892235d516",
+              "SpriteSheetX": 80,
+              "SpriteSheetY": 600
+            },
+            "NNE": {
+              "Hash": "4b897bc9645cfa1a31e6d2ce8bea81e2",
+              "SpriteSheetX": 120,
+              "SpriteSheetY": 600
+            }
+          }
+        },
+        "Running 5": {
+          "Frames": {
+            "SSE": {
+              "Hash": "fa1784c205853be21d6ba4172f41aba7",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 640
+            },
+            "ESE": {
+              "Hash": "2f24086b82574eff3824c609e38f5021",
+              "SpriteSheetX": 40,
+              "SpriteSheetY": 640
+            },
+            "ENE": {
+              "Hash": "8a5fa32a2d10d0592d0377947723ec3e",
+              "SpriteSheetX": 80,
+              "SpriteSheetY": 640
+            },
+            "NNE": {
+              "Hash": "6838588f18105e9413cd7d76e789fefd",
+              "SpriteSheetX": 120,
+              "SpriteSheetY": 640
+            }
+          }
+        },
+        "ShakingHead 1": {
+          "Frames": {
+            "SSE": {
+              "Hash": "7d24600c6710c5744b5483cf1083e5db",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 680
+            },
+            "ESE": {
+              "Hash": "afae6a2a67037afe5a1ef6478703a22c",
+              "SpriteSheetX": 40,
+              "SpriteSheetY": 680
+            },
+            "ENE": {
+              "Hash": "ebcc2e0af4886f04968bfd9a4fab7826",
+              "SpriteSheetX": 80,
+              "SpriteSheetY": 680
+            },
+            "NNE": {
+              "Hash": "c62eefbd747994513eb741acfb0790ec",
+              "SpriteSheetX": 120,
+              "SpriteSheetY": 680
+            }
+          }
+        },
+        "ShakingHead 2": {
+          "Frames": {
+            "SSE": {
+              "Hash": "41e1dd26d0e234f56b5fae4ba278491a",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 720
+            },
+            "ESE": {
+              "Hash": "41ed46c954d423dc9967541d68f3eb16",
+              "SpriteSheetX": 40,
+              "SpriteSheetY": 720
+            },
+            "ENE": {
+              "Hash": "00dd5ed76773d51aa751f2adbc033dd3",
+              "SpriteSheetX": 80,
+              "SpriteSheetY": 720
+            },
+            "NNE": {
+              "Hash": "b0b06b3199e75a3b34e687c608882710",
+              "SpriteSheetX": 120,
+              "SpriteSheetY": 720
+            }
+          }
+        }
+      },
+      "AnimationByDirections": {
+        "4": {
+          "Animations": {
+            "Idle (Arms Crossed)": {
+              "AnimationFrames": [
+                {
+                  "FrameGroup": "Idle (Arms Crossed) 1",
+                  "Command": "Frame",
+                  "Parameter": 4
+                },
+                {
+                  "FrameGroup": "Idle (Arms Crossed) 2",
+                  "Command": "Frame",
+                  "Parameter": 4
+                },
+                {
+                  "FrameGroup": "Idle (Arms Crossed) 3",
+                  "Command": "Frame",
+                  "Parameter": 4
+                },
+                {
+                  "FrameGroup": "Idle (Arms Crossed) 2",
+                  "Command": "Frame",
+                  "Parameter": 4
+                },
+                {
+                  "Command": "GotoFrameOffset",
+                  "Parameter": 0
+                }
+              ]
+            },
+            "JumpingUp": {
+              "AnimationFrames": [
+                {
+                  "FrameGroup": "JumpingUp 1",
+                  "Command": "Frame",
+                  "Parameter": 2
+                },
+                {
+                  "FrameGroup": "JumpingUp 2",
+                  "Command": "Frame",
+                  "Parameter": 2
+                },
+                {
+                  "Command": "GotoAnimation",
+                  "Parameter": 8
+                }
+              ]
+            },
+            "Landing": {
+              "AnimationFrames": [
+                {
+                  "FrameGroup": "Landing 1",
+                  "Command": "Frame",
+                  "Parameter": 2
+                },
+                {
+                  "Command": "GotoAnimation",
+                  "Parameter": 5
+                }
+              ]
+            },
+            "Laughing": {
+              "AnimationFrames": [
+                {
+                  "FrameGroup": "Idle (Arms Crossed) 1",
+                  "Command": "Frame",
+                  "Parameter": 4
+                },
+                {
+                  "FrameGroup": "Laughing 1",
+                  "Command": "Frame",
+                  "Parameter": 3
+                },
+                {
+                  "FrameGroup": "Laughing 2",
+                  "Command": "Frame",
+                  "Parameter": 3
+                },
+                {
+                  "FrameGroup": "Laughing 1",
+                  "Command": "Frame",
+                  "Parameter": 3
+                },
+                {
+                  "FrameGroup": "Laughing 2",
+                  "Command": "Frame",
+                  "Parameter": 3
+                },
+                {
+                  "FrameGroup": "Laughing 1",
+                  "Command": "Frame",
+                  "Parameter": 3
+                },
+                {
+                  "FrameGroup": "Laughing 2",
+                  "Command": "Frame",
+                  "Parameter": 3
+                },
+                {
+                  "FrameGroup": "Laughing 1",
+                  "Command": "Frame",
+                  "Parameter": 3
+                },
+                {
+                  "Command": "GotoAnimation",
+                  "Parameter": 1
+                }
+              ]
+            },
+            "LookingDown (Fast)": {
+              "AnimationFrames": [
+                {
+                  "FrameGroup": "Idle (Arms Crossed) 1",
+                  "Command": "Frame",
+                  "Parameter": 2
+                },
+                {
+                  "FrameGroup": "LookingDown 1",
+                  "Command": "Frame",
+                  "Parameter": 2
+                },
+                {
+                  "Command": "GotoAnimation",
+                  "Parameter": 6
+                }
+              ]
+            },
+            "LookingDown (Slow)": {
+              "AnimationFrames": [
+                {
+                  "FrameGroup": "Idle (Arms Crossed) 1",
+                  "Command": "Frame",
+                  "Parameter": 6
+                },
+                {
+                  "FrameGroup": "LookingDown 1",
+                  "Command": "Frame",
+                  "Parameter": 10
+                },
+                {
+                  "Command": "GotoAnimation",
+                  "Parameter": 6
+                }
+              ]
+            },
+            "LookingUp (Kneeling)": {
+              "AnimationFrames": [
+                {
+                  "FrameGroup": "JumpingUp 1",
+                  "Command": "Frame",
+                  "Parameter": 4
+                },
+                {
+                  "FrameGroup": "LookingUp (Kneeling) 1",
+                  "Command": "Frame",
+                  "Parameter": 4
+                },
+                {
+                  "FrameGroup": "LookingUp (Kneeling) 2",
+                  "Command": "Frame",
+                  "Parameter": 4
+                },
+                {
+                  "Command": "GotoAnimation",
+                  "Parameter": 11
+                }
+              ]
+            },
+            "Running": {
+              "AnimationFrames": [
+                {
+                  "FrameGroup": "Running 1",
+                  "Command": "Frame",
+                  "Parameter": 3
+                },
+                {
+                  "FrameGroup": "Running 2",
+                  "Command": "Frame",
+                  "Parameter": 1
+                },
+                {
+                  "FrameGroup": "Running 3",
+                  "Command": "Frame",
+                  "Parameter": 2
+                },
+                {
+                  "FrameGroup": "Running 4",
+                  "Command": "Frame",
+                  "Parameter": 3
+                },
+                {
+                  "FrameGroup": "Running 2",
+                  "Command": "Frame",
+                  "Parameter": 1
+                },
+                {
+                  "FrameGroup": "Running 5",
+                  "Command": "Frame",
+                  "Parameter": 2
+                },
+                {
+                  "Command": "GotoFrameOffset",
+                  "Parameter": 0
+                }
+              ]
+            },
+            "ShakingHead": {
+              "AnimationFrames": [
+                {
+                  "FrameGroup": "Idle (Arms Crossed) 1",
+                  "Command": "Frame",
+                  "Parameter": 2
+                },
+                {
+                  "FrameGroup": "ShakingHead 1",
+                  "Command": "Frame",
+                  "Parameter": 3
+                },
+                {
+                  "FrameGroup": "Idle (Arms Crossed) 1",
+                  "Command": "Frame",
+                  "Parameter": 3
+                },
+                {
+                  "FrameGroup": "ShakingHead 2",
+                  "Command": "Frame",
+                  "Parameter": 3
+                },
+                {
+                  "FrameGroup": "Idle (Arms Crossed) 1",
+                  "Command": "Frame",
+                  "Parameter": 3
+                },
+                {
+                  "FrameGroup": "ShakingHead 1",
+                  "Command": "Frame",
+                  "Parameter": 3
+                },
+                {
+                  "FrameGroup": "Idle (Arms Crossed) 1",
+                  "Command": "Frame",
+                  "Parameter": 3
+                },
+                {
+                  "FrameGroup": "ShakingHead 2",
+                  "Command": "Frame",
+                  "Parameter": 3
+                },
+                {
+                  "Command": "GotoAnimation",
+                  "Parameter": 1
+                }
+              ]
+            },
+            "StandingUpFromKneeling": {
+              "AnimationFrames": [
+                {
+                  "FrameGroup": "JumpingUp 1",
+                  "Command": "Frame",
+                  "Parameter": 3
+                },
+                {
+                  "FrameGroup": "LookingDown 1",
+                  "Command": "Frame",
+                  "Parameter": 3
+                },
+                {
+                  "FrameGroup": "Idle (Arms Crossed) 1",
+                  "Command": "Frame",
+                  "Parameter": 4
+                },
+                {
+                  "Command": "GotoAnimation",
+                  "Parameter": 1
+                }
+              ]
+            },
+            "StillFrame (Arms Crossed)": {
+              "AnimationFrames": [
+                {
+                  "FrameGroup": "Idle (Arms Crossed) 1",
+                  "Command": "Frame",
+                  "Parameter": 10
+                },
+                {
+                  "Command": "Stop",
+                  "Parameter": 0
+                }
+              ]
+            },
+            "StillFrame (Jumping Up)": {
+              "AnimationFrames": [
+                {
+                  "FrameGroup": "Jumping Up 1",
+                  "Command": "Frame",
+                  "Parameter": 6
+                },
+                {
+                  "Command": "Stop",
+                  "Parameter": 2
+                }
+              ]
+            },
+            "StillFrame (Kneeling)": {
+              "AnimationFrames": [
+                {
+                  "FrameGroup": "LookingUp (Kneeling) 2",
+                  "Command": "Frame",
+                  "Parameter": 4
+                },
+                {
+                  "Command": "Stop",
+                  "Parameter": 5
+                }
+              ]
+            },
+            "StillFrame (Looking Down)": {
+              "AnimationFrames": [
+                {
+                  "FrameGroup": "JumpingUp 1",
+                  "Command": "Frame",
+                  "Parameter": 3
+                },
+                {
+                  "Command": "Stop",
+                  "Parameter": 6
+                }
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

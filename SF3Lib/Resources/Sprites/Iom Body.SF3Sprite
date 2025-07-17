@@ -1,0 +1,132 @@
+{
+  "Name": "Iom Body",
+  "Spritesheets": {
+    "72x56": {
+      "VerticalOffset": 0,
+      "Unknown0x08": 20,
+      "CollisionSize": 40,
+      "Scale": 1.0,
+      "FrameGroups": {
+        "Idle 1": {
+          "Frames": {
+            "SSE": {
+              "Hash": "e0c1ecf3aca12bcefdecff528187bb11",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 0
+            },
+            "ESE": {
+              "Hash": "54678600bcc8a1d44bff68718ddb94eb",
+              "SpriteSheetX": 72,
+              "SpriteSheetY": 0
+            },
+            "ENE": {
+              "Hash": "9daa974bcf720eca795957b459aa4cfd",
+              "SpriteSheetX": 144,
+              "SpriteSheetY": 0
+            },
+            "NNE": {
+              "Hash": "96120c82a0149d1af1d57caf6af0fd3a",
+              "SpriteSheetX": 216,
+              "SpriteSheetY": 0
+            }
+          }
+        },
+        "Idle 2": {
+          "Frames": {
+            "SSE": {
+              "Hash": "5eca32e8ff403fbc809ca0423cd33ee0",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 56
+            },
+            "ESE": {
+              "Hash": "da1f56bb057204d131a0bc0778f4d789",
+              "SpriteSheetX": 72,
+              "SpriteSheetY": 56
+            },
+            "ENE": {
+              "Hash": "f51e34d655df2616604df83a38ab7f39",
+              "SpriteSheetX": 144,
+              "SpriteSheetY": 56
+            },
+            "NNE": {
+              "Hash": "da409cb88d9785fe9493ddb4b90ab5b6",
+              "SpriteSheetX": 216,
+              "SpriteSheetY": 56
+            }
+          }
+        },
+        "Idle 3": {
+          "Frames": {
+            "SSE": {
+              "Hash": "20ce8eb256b1b2965271691257b62091",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 112
+            },
+            "ESE": {
+              "Hash": "afac9087109d2a25c36eec0623dae8bf",
+              "SpriteSheetX": 72,
+              "SpriteSheetY": 112
+            },
+            "ENE": {
+              "Hash": "2739efd96e1b1727f6d34fcb0b3a445a",
+              "SpriteSheetX": 144,
+              "SpriteSheetY": 112
+            },
+            "NNE": {
+              "Hash": "52ee0f96e0b9654650f58bad0583bcb8",
+              "SpriteSheetX": 216,
+              "SpriteSheetY": 112
+            }
+          }
+        }
+      },
+      "AnimationByDirections": {
+        "4": {
+          "Animations": {
+            "Idle": {
+              "AnimationFrames": [
+                {
+                  "FrameGroup": "Idle 1",
+                  "Command": "Frame",
+                  "Parameter": 12
+                },
+                {
+                  "FrameGroup": "Idle 2",
+                  "Command": "Frame",
+                  "Parameter": 10
+                },
+                {
+                  "FrameGroup": "Idle 3",
+                  "Command": "Frame",
+                  "Parameter": 10
+                },
+                {
+                  "FrameGroup": "Idle 2",
+                  "Command": "Frame",
+                  "Parameter": 10
+                },
+                {
+                  "Command": "GotoFrameOffset",
+                  "Parameter": 0
+                }
+              ]
+            },
+            "StillFrame": {
+              "AnimationFrames": [
+                {
+                  "FrameGroup": "Idle 1",
+                  "Command": "Frame",
+                  "Parameter": 10
+                },
+                {
+                  "Command": "Stop",
+                  "Parameter": 0
+                }
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

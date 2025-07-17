@@ -1,0 +1,248 @@
+{
+  "Name": "Orange Dragon",
+  "Spritesheets": {
+    "48x32": {
+      "VerticalOffset": 0,
+      "Unknown0x08": 20,
+      "CollisionSize": 40,
+      "Scale": 1.0,
+      "FrameGroups": {
+        "Flying 1": {
+          "Frames": {
+            "SSE": {
+              "Hash": "cb0a595d196b813611e475a58137abe6",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 0
+            },
+            "ESE": {
+              "Hash": "0fe2c33e4414cd65bde56495e464a8d2",
+              "SpriteSheetX": 48,
+              "SpriteSheetY": 0
+            },
+            "ENE": {
+              "Hash": "03f4b4b84fd5a79b638b39fb59b9ffde",
+              "SpriteSheetX": 96,
+              "SpriteSheetY": 0
+            },
+            "NNE": {
+              "Hash": "2dfc0fc5f82247a19aff103072444b05",
+              "SpriteSheetX": 144,
+              "SpriteSheetY": 0
+            }
+          }
+        },
+        "Flying 2": {
+          "Frames": {
+            "SSE": {
+              "Hash": "8a42b8bc24e2bfc8008a0972d1fada61",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 32
+            },
+            "ESE": {
+              "Hash": "4d27decbd07382c5985b68527dde6777",
+              "SpriteSheetX": 48,
+              "SpriteSheetY": 32
+            },
+            "ENE": {
+              "Hash": "ce7f82194066a36dbb8c500caabcb0b5",
+              "SpriteSheetX": 96,
+              "SpriteSheetY": 32
+            },
+            "NNE": {
+              "Hash": "ce4e799162c7a3d04244d7ae4de21e43",
+              "SpriteSheetX": 144,
+              "SpriteSheetY": 32
+            }
+          }
+        },
+        "Flying 3": {
+          "Frames": {
+            "SSE": {
+              "Hash": "e0ffd9505255f20cd8059372cd773a29",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 64
+            },
+            "ESE": {
+              "Hash": "5aac208d93a3cd7b430e3e7ae344a2f5",
+              "SpriteSheetX": 48,
+              "SpriteSheetY": 64
+            },
+            "ENE": {
+              "Hash": "aaf201e1ad839fbbdebdda78ed745cc8",
+              "SpriteSheetX": 96,
+              "SpriteSheetY": 64
+            },
+            "NNE": {
+              "Hash": "f91fb13738b49d6de98cb7b30095a273",
+              "SpriteSheetX": 144,
+              "SpriteSheetY": 64
+            }
+          }
+        },
+        "Flying 4": {
+          "Frames": {
+            "SSE": {
+              "Hash": "cb59e4a2ffdbcc0c65c2e71e58d6a9d7",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 96
+            },
+            "ESE": {
+              "Hash": "79f52c006d502b0009eebd57e97af159",
+              "SpriteSheetX": 48,
+              "SpriteSheetY": 96
+            },
+            "ENE": {
+              "Hash": "83ce30641c06ca371a9f498a50fda460",
+              "SpriteSheetX": 96,
+              "SpriteSheetY": 96
+            },
+            "NNE": {
+              "Hash": "650663fcc789dc6baf9f5e8cb202c737",
+              "SpriteSheetX": 144,
+              "SpriteSheetY": 96
+            }
+          }
+        },
+        "Flying 5": {
+          "Frames": {
+            "SSE": {
+              "Hash": "9c5fa0202a4047216546b8be44741c94",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 128
+            },
+            "ESE": {
+              "Hash": "22409429c82481fbb05688dc62bf9022",
+              "SpriteSheetX": 48,
+              "SpriteSheetY": 128
+            },
+            "ENE": {
+              "Hash": "bebff41b80eac5b0dfe684d175be297c",
+              "SpriteSheetX": 96,
+              "SpriteSheetY": 128
+            },
+            "NNE": {
+              "Hash": "0e163c6e1d303dc14722bdba00ba0685",
+              "SpriteSheetX": 144,
+              "SpriteSheetY": 128
+            }
+          }
+        }
+      },
+      "AnimationByDirections": {
+        "4": {
+          "Animations": {
+            "Flying (Fast)": {
+              "AnimationFrames": [
+                {
+                  "FrameGroup": "Flying 1",
+                  "Command": "Frame",
+                  "Parameter": 2
+                },
+                {
+                  "FrameGroup": "Flying 2",
+                  "Command": "Frame",
+                  "Parameter": 2
+                },
+                {
+                  "FrameGroup": "Flying 3",
+                  "Command": "Frame",
+                  "Parameter": 2
+                },
+                {
+                  "FrameGroup": "Flying 4",
+                  "Command": "Frame",
+                  "Parameter": 2
+                },
+                {
+                  "FrameGroup": "Flying 5",
+                  "Command": "Frame",
+                  "Parameter": 2
+                },
+                {
+                  "FrameGroup": "Flying 4",
+                  "Command": "Frame",
+                  "Parameter": 2
+                },
+                {
+                  "FrameGroup": "Flying 3",
+                  "Command": "Frame",
+                  "Parameter": 2
+                },
+                {
+                  "FrameGroup": "Flying 2",
+                  "Command": "Frame",
+                  "Parameter": 2
+                },
+                {
+                  "Command": "GotoFrameOffset",
+                  "Parameter": 0
+                }
+              ]
+            },
+            "Flying (Slow)": {
+              "AnimationFrames": [
+                {
+                  "FrameGroup": "Flying 1",
+                  "Command": "Frame",
+                  "Parameter": 6
+                },
+                {
+                  "FrameGroup": "Flying 2",
+                  "Command": "Frame",
+                  "Parameter": 5
+                },
+                {
+                  "FrameGroup": "Flying 3",
+                  "Command": "Frame",
+                  "Parameter": 5
+                },
+                {
+                  "FrameGroup": "Flying 4",
+                  "Command": "Frame",
+                  "Parameter": 5
+                },
+                {
+                  "FrameGroup": "Flying 5",
+                  "Command": "Frame",
+                  "Parameter": 5
+                },
+                {
+                  "FrameGroup": "Flying 4",
+                  "Command": "Frame",
+                  "Parameter": 5
+                },
+                {
+                  "FrameGroup": "Flying 3",
+                  "Command": "Frame",
+                  "Parameter": 5
+                },
+                {
+                  "FrameGroup": "Flying 2",
+                  "Command": "Frame",
+                  "Parameter": 5
+                },
+                {
+                  "Command": "GotoFrameOffset",
+                  "Parameter": 0
+                }
+              ]
+            },
+            "StillFrame": {
+              "AnimationFrames": [
+                {
+                  "FrameGroup": "Flying 3",
+                  "Command": "Frame",
+                  "Parameter": 10
+                },
+                {
+                  "Command": "Stop",
+                  "Parameter": 0
+                }
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

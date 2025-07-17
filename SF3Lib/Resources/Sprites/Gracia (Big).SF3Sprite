@@ -1,0 +1,102 @@
+{
+  "Name": "Gracia (Big)",
+  "Spritesheets": {
+    "64x64": {
+      "VerticalOffset": 0,
+      "Unknown0x08": 20,
+      "CollisionSize": 40,
+      "Scale": 0.0,
+      "FrameGroups": {
+        "Idle 1": {
+          "Frames": {
+            "NNE": {
+              "Hash": "25cad6de10c94e2a27f063298c660204",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 0
+            }
+          }
+        },
+        "Idle 2": {
+          "Frames": {
+            "NNE": {
+              "Hash": "3997198eccb56260d00162dd1b43c621",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 64
+            }
+          }
+        },
+        "Idle 3": {
+          "Frames": {
+            "NNE": {
+              "Hash": "26793ddb55fa238825c09b1b4b958809",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 128
+            }
+          }
+        }
+      },
+      "AnimationByDirections": {
+        "1": {
+          "Animations": {
+            "Idle": {
+              "AnimationFrames": [
+                {
+                  "Frames": {
+                    "First": {
+                      "Frame": "Idle 1",
+                      "Direction": "NNE"
+                    }
+                  },
+                  "Command": "Frame",
+                  "Parameter": 4
+                },
+                {
+                  "Frames": {
+                    "First": {
+                      "Frame": "Idle 2",
+                      "Direction": "NNE"
+                    }
+                  },
+                  "Command": "Frame",
+                  "Parameter": 4
+                },
+                {
+                  "Frames": {
+                    "First": {
+                      "Frame": "Idle 3",
+                      "Direction": "NNE"
+                    }
+                  },
+                  "Command": "Frame",
+                  "Parameter": 4
+                },
+                {
+                  "Command": "GotoFrameOffset",
+                  "Parameter": 0
+                }
+              ]
+            },
+            "StillFrame": {
+              "AnimationFrames": [
+                {
+                  "Frames": {
+                    "First": {
+                      "Frame": "Idle 1",
+                      "Direction": "NNE"
+                    }
+                  },
+                  "Command": "Frame",
+                  "Parameter": 10
+                },
+                {
+                  "Command": "Stop",
+                  "Parameter": 0
+                }
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

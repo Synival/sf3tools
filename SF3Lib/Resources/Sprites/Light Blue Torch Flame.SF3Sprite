@@ -1,0 +1,139 @@
+{
+  "Name": "Light Blue Torch Flame",
+  "Spritesheets": {
+    "16x32": {
+      "VerticalOffset": 0,
+      "Unknown0x08": 8,
+      "CollisionSize": 16,
+      "Scale": 1.0,
+      "FrameGroups": {
+        "Flickering 1": {
+          "Frames": {
+            "First": {
+              "Hash": "ed55fb1d2ec480d1aef366918ae5b390",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 0
+            }
+          }
+        },
+        "Flickering 2": {
+          "Frames": {
+            "First": {
+              "Hash": "cc941b09547213820f46054f7f2fa7a6",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 32
+            }
+          }
+        },
+        "Flickering 3": {
+          "Frames": {
+            "First": {
+              "Hash": "71ff04ccf9c8873323deaa8f95f7d16a",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 64
+            }
+          }
+        },
+        "Flickering 4": {
+          "Frames": {
+            "First": {
+              "Hash": "37d05ff433ec9bf93ec165728c797a10",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 96
+            }
+          }
+        },
+        "Flickering 5": {
+          "Frames": {
+            "First": {
+              "Hash": "83cba58577a5706b0645b6f02a0aeacc",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 128
+            }
+          }
+        },
+        "Flickering 6": {
+          "Frames": {
+            "First": {
+              "Hash": "8dc6c91c2553b7b3e0edc0b33bdd059f",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 160
+            }
+          }
+        },
+        "Flickering 7": {
+          "Frames": {
+            "First": {
+              "Hash": "d4e5c34f9fa034c2a1f39c8e1726aa8e",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 192
+            }
+          }
+        },
+        "Flickering 8": {
+          "Frames": {
+            "First": {
+              "Hash": "f29004b6e2a2438a6b099eabd5df4961",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 224
+            }
+          }
+        }
+      },
+      "AnimationByDirections": {
+        "1": {
+          "Animations": {
+            "Flickering": {
+              "AnimationFrames": [
+                {
+                  "FrameGroup": "Flickering 1",
+                  "Command": "Frame",
+                  "Parameter": 1
+                },
+                {
+                  "FrameGroup": "Flickering 2",
+                  "Command": "Frame",
+                  "Parameter": 1
+                },
+                {
+                  "FrameGroup": "Flickering 3",
+                  "Command": "Frame",
+                  "Parameter": 1
+                },
+                {
+                  "FrameGroup": "Flickering 4",
+                  "Command": "Frame",
+                  "Parameter": 1
+                },
+                {
+                  "FrameGroup": "Flickering 5",
+                  "Command": "Frame",
+                  "Parameter": 1
+                },
+                {
+                  "FrameGroup": "Flickering 6",
+                  "Command": "Frame",
+                  "Parameter": 1
+                },
+                {
+                  "FrameGroup": "Flickering 7",
+                  "Command": "Frame",
+                  "Parameter": 1
+                },
+                {
+                  "FrameGroup": "Flickering 8",
+                  "Command": "Frame",
+                  "Parameter": 1
+                },
+                {
+                  "Command": "GotoFrameOffset",
+                  "Parameter": 0
+                }
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

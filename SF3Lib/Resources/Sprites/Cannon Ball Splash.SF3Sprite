@@ -1,0 +1,74 @@
+{
+  "Name": "Cannon Ball Splash",
+  "Spritesheets": {
+    "32x128": {
+      "VerticalOffset": 0,
+      "Unknown0x08": 20,
+      "CollisionSize": 48,
+      "Scale": 1.0,
+      "FrameGroups": {
+        "Splash 1": {
+          "Frames": {
+            "First": {
+              "Hash": "2870bfc4eb226cf2f12e1ccfb0b003e1",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 0
+            }
+          }
+        },
+        "Splash 2": {
+          "Frames": {
+            "First": {
+              "Hash": "0f69b0d0aa821d3572b15b376b851495",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 128
+            }
+          }
+        },
+        "Splash 3": {
+          "Frames": {
+            "First": {
+              "Hash": "393159ce7748654bce629fb509459507",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 256
+            }
+          }
+        }
+      },
+      "AnimationByDirections": {
+        "1": {
+          "Animations": {
+            "Splash": {
+              "AnimationFrames": [
+                {
+                  "FrameGroup": "Splash 1",
+                  "Command": "Frame",
+                  "Parameter": 1
+                },
+                {
+                  "FrameGroup": "Splash 2",
+                  "Command": "Frame",
+                  "Parameter": 1
+                },
+                {
+                  "FrameGroup": "Splash 3",
+                  "Command": "Frame",
+                  "Parameter": 1
+                },
+                {
+                  "FrameGroup": "Splash 2",
+                  "Command": "Frame",
+                  "Parameter": 1
+                },
+                {
+                  "Command": "GotoFrameOffset",
+                  "Parameter": 0
+                }
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

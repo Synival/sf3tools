@@ -1,0 +1,228 @@
+{
+  "Name": "Dog w/ White Fur and Black Ears",
+  "Spritesheets": {
+    "48x32": {
+      "VerticalOffset": 0,
+      "Unknown0x08": 20,
+      "CollisionSize": 40,
+      "Scale": 0.0,
+      "FrameGroups": {
+        "Walking 1": {
+          "Frames": {
+            "SSE": {
+              "Hash": "a5b4b7eb8a67acd10b10aef92c052b6b",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 0
+            },
+            "ESE": {
+              "Hash": "dc8a5cc600076c2a04f22c9ba87d487c",
+              "SpriteSheetX": 48,
+              "SpriteSheetY": 0
+            },
+            "ENE": {
+              "Hash": "8b74a8554af9fa438afca55f8723d028",
+              "SpriteSheetX": 96,
+              "SpriteSheetY": 0
+            },
+            "NNE": {
+              "Hash": "955c8322adc600d8724deb0cb4e54d42",
+              "SpriteSheetX": 144,
+              "SpriteSheetY": 0
+            }
+          }
+        },
+        "Walking 2": {
+          "Frames": {
+            "SSE": {
+              "Hash": "be4323baa5221e68e21d8875edd38dfa",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 32
+            },
+            "ESE": {
+              "Hash": "5fc09c41ed7500b64c9fca0036ffa0f1",
+              "SpriteSheetX": 48,
+              "SpriteSheetY": 32
+            },
+            "ENE": {
+              "Hash": "3e933b40d54b69def6a2efae839dc0de",
+              "SpriteSheetX": 96,
+              "SpriteSheetY": 32
+            },
+            "NNE": {
+              "Hash": "7b93d9a4804103a8d2ae9671a4225ffc",
+              "SpriteSheetX": 144,
+              "SpriteSheetY": 32
+            }
+          }
+        },
+        "Walking 3": {
+          "Frames": {
+            "SSE": {
+              "Hash": "20c82c8ded6e574e62d05aeafaed4c75",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 64
+            },
+            "ESE": {
+              "Hash": "d8d6be624fdf2ed5939cfda6fad40ca7",
+              "SpriteSheetX": 48,
+              "SpriteSheetY": 64
+            },
+            "ENE": {
+              "Hash": "8d62321704f930fb0dbbf3d24d29e95e",
+              "SpriteSheetX": 96,
+              "SpriteSheetY": 64
+            },
+            "NNE": {
+              "Hash": "b66200a6e1575da5bf3de825517edcb2",
+              "SpriteSheetX": 144,
+              "SpriteSheetY": 64
+            }
+          }
+        },
+        "Walking 4": {
+          "Frames": {
+            "SSE": {
+              "Hash": "a4ab8ddce3fd395aafb6897b69e94e9c",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 96
+            },
+            "ESE": {
+              "Hash": "d580029e235101dc258d71da7e267d05",
+              "SpriteSheetX": 48,
+              "SpriteSheetY": 96
+            },
+            "ENE": {
+              "Hash": "b818dcfde8e50346d8fbea7d82dba433",
+              "SpriteSheetX": 96,
+              "SpriteSheetY": 96
+            },
+            "NNE": {
+              "Hash": "1fae5560e796653f60d93fc469a76083",
+              "SpriteSheetX": 144,
+              "SpriteSheetY": 96
+            }
+          }
+        },
+        "Walking 5": {
+          "Frames": {
+            "SSE": {
+              "Hash": "3e01705ea428dd5fb70bbd784cc9ca4f",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 128
+            },
+            "ESE": {
+              "Hash": "2f626dc7f4911f4780068a0df5942d10",
+              "SpriteSheetX": 48,
+              "SpriteSheetY": 128
+            },
+            "ENE": {
+              "Hash": "4b9b5d04c7baf60089153a2d1a09f209",
+              "SpriteSheetX": 96,
+              "SpriteSheetY": 128
+            },
+            "NNE": {
+              "Hash": "5f86b4fb8878bcb5ca6638184e235610",
+              "SpriteSheetX": 144,
+              "SpriteSheetY": 128
+            }
+          }
+        }
+      },
+      "AnimationByDirections": {
+        "4": {
+          "Animations": {
+            "StillFrame": {
+              "AnimationFrames": [
+                {
+                  "FrameGroup": "Walking 2",
+                  "Command": "Frame",
+                  "Parameter": 5
+                },
+                {
+                  "Command": "Stop",
+                  "Parameter": 0
+                }
+              ]
+            },
+            "Walking (Faster)": {
+              "AnimationFrames": [
+                {
+                  "FrameGroup": "Walking 1",
+                  "Command": "Frame",
+                  "Parameter": 4
+                },
+                {
+                  "FrameGroup": "Walking 2",
+                  "Command": "Frame",
+                  "Parameter": 4
+                },
+                {
+                  "FrameGroup": "Walking 3",
+                  "Command": "Frame",
+                  "Parameter": 4
+                },
+                {
+                  "FrameGroup": "Walking 4",
+                  "Command": "Frame",
+                  "Parameter": 4
+                },
+                {
+                  "FrameGroup": "Walking 2",
+                  "Command": "Frame",
+                  "Parameter": 4
+                },
+                {
+                  "FrameGroup": "Walking 5",
+                  "Command": "Frame",
+                  "Parameter": 4
+                },
+                {
+                  "Command": "GotoFrameOffset",
+                  "Parameter": 0
+                }
+              ]
+            },
+            "Walking (Slower)": {
+              "AnimationFrames": [
+                {
+                  "FrameGroup": "Walking 1",
+                  "Command": "Frame",
+                  "Parameter": 5
+                },
+                {
+                  "FrameGroup": "Walking 2",
+                  "Command": "Frame",
+                  "Parameter": 5
+                },
+                {
+                  "FrameGroup": "Walking 3",
+                  "Command": "Frame",
+                  "Parameter": 5
+                },
+                {
+                  "FrameGroup": "Walking 4",
+                  "Command": "Frame",
+                  "Parameter": 5
+                },
+                {
+                  "FrameGroup": "Walking 2",
+                  "Command": "Frame",
+                  "Parameter": 5
+                },
+                {
+                  "FrameGroup": "Walking 5",
+                  "Command": "Frame",
+                  "Parameter": 5
+                },
+                {
+                  "Command": "GotoFrameOffset",
+                  "Parameter": 0
+                }
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

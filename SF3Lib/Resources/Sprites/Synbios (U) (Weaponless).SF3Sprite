@@ -1,0 +1,543 @@
+{
+  "Name": "Synbios (U) (Weaponless)",
+  "Spritesheets": {
+    "40x40": {
+      "VerticalOffset": 0,
+      "Unknown0x08": 20,
+      "CollisionSize": 40,
+      "Scale": 1.0,
+      "FrameGroups": {
+        "GettingUpFromKneeling 1": {
+          "Frames": {
+            "ENE": {
+              "Hash": "06f355a45e7c66e21838843f1d49d9d9",
+              "SpriteSheetX": 80,
+              "SpriteSheetY": 0
+            }
+          }
+        },
+        "GettingUpFromKneeling 2": {
+          "Frames": {
+            "ENE": {
+              "Hash": "9c201ec5e7d2331879947d28fffea4b8",
+              "SpriteSheetX": 80,
+              "SpriteSheetY": 40
+            }
+          }
+        },
+        "GettingUpFromPrayer 1": {
+          "Frames": {
+            "SSE": {
+              "Hash": "7395eb51e701ce7377ddfae97cdb64ba",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 80
+            },
+            "ESE": {
+              "Hash": "6105b64e708be9a1404037ae83048c65",
+              "SpriteSheetX": 40,
+              "SpriteSheetY": 80
+            },
+            "ENE": {
+              "Hash": "cead7533323d074fc7f44ff6d3e9e917",
+              "SpriteSheetX": 80,
+              "SpriteSheetY": 80
+            },
+            "NNE": {
+              "Hash": "59ef6e4fe86b65ca0728a7611e7478d7",
+              "SpriteSheetX": 120,
+              "SpriteSheetY": 80
+            }
+          }
+        },
+        "GettingUpFromPrayer 2": {
+          "Frames": {
+            "SSE": {
+              "Hash": "3dd33867a29788a8ef8996199390940c",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 120
+            },
+            "ESE": {
+              "Hash": "6fb3e30a88cc298e3cd91f5bc19b8a73",
+              "SpriteSheetX": 40,
+              "SpriteSheetY": 120
+            },
+            "ENE": {
+              "Hash": "aeeb59ec4273962fd51b13b6acdc4a24",
+              "SpriteSheetX": 80,
+              "SpriteSheetY": 120
+            },
+            "NNE": {
+              "Hash": "1e49ff6b9e82c206bdfabcdc28195190",
+              "SpriteSheetX": 120,
+              "SpriteSheetY": 120
+            }
+          }
+        },
+        "GettingUpFromPrayer 3": {
+          "Frames": {
+            "SSE": {
+              "Hash": "29f01e7f5c73a7988077fcc6f53474d8",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 160
+            },
+            "ESE": {
+              "Hash": "8f8fdc08bcd05a9027035f75b2df832c",
+              "SpriteSheetX": 40,
+              "SpriteSheetY": 160
+            },
+            "ENE": {
+              "Hash": "7235fc72ee9516315b9421ea54c23541",
+              "SpriteSheetX": 80,
+              "SpriteSheetY": 160
+            },
+            "NNE": {
+              "Hash": "cc16b2d708bdb1a9ea99b70c7dd74693",
+              "SpriteSheetX": 120,
+              "SpriteSheetY": 160
+            }
+          }
+        },
+        "Idle 1": {
+          "Frames": {
+            "SSE": {
+              "Hash": "7dadd5756d1442b9a76cb04bc02af4e4",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 200
+            },
+            "ESE": {
+              "Hash": "bb98f82337505dedc35f72e4198d664a",
+              "SpriteSheetX": 40,
+              "SpriteSheetY": 200
+            },
+            "ENE": {
+              "Hash": "bc2a1528bd8c914b8040420b8d4ccabb",
+              "SpriteSheetX": 80,
+              "SpriteSheetY": 200
+            },
+            "NNE": {
+              "Hash": "92a5589c254da04acfbe85da68a36346",
+              "SpriteSheetX": 120,
+              "SpriteSheetY": 200
+            }
+          }
+        },
+        "Idle 2": {
+          "Frames": {
+            "SSE": {
+              "Hash": "6605ad3443092800bcf578f87a5ca5a7",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 240
+            },
+            "ESE": {
+              "Hash": "7c6f29b1caaa926092ce9e1185160d3b",
+              "SpriteSheetX": 40,
+              "SpriteSheetY": 240
+            },
+            "ENE": {
+              "Hash": "e1079ec25b04c48616d02ce6a6972ab0",
+              "SpriteSheetX": 80,
+              "SpriteSheetY": 240
+            },
+            "NNE": {
+              "Hash": "bb50650a11a33188667826703e2190b0",
+              "SpriteSheetX": 120,
+              "SpriteSheetY": 240
+            }
+          }
+        },
+        "Idle 3": {
+          "Frames": {
+            "SSE": {
+              "Hash": "735fa28ae89bb33997e083b20d530520",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 280
+            },
+            "ESE": {
+              "Hash": "4c21c7fbbbe83c7a11be2ae15e0541a9",
+              "SpriteSheetX": 40,
+              "SpriteSheetY": 280
+            },
+            "ENE": {
+              "Hash": "a0aae1317491127929e4febf00347800",
+              "SpriteSheetX": 80,
+              "SpriteSheetY": 280
+            },
+            "NNE": {
+              "Hash": "3de8a4466983e4cab2b8ad3e92587076",
+              "SpriteSheetX": 120,
+              "SpriteSheetY": 280
+            }
+          }
+        },
+        "Walking 1": {
+          "Frames": {
+            "SSE": {
+              "Hash": "59f9867b79d7c1dbc742e2ad8b55f740",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 320
+            },
+            "ESE": {
+              "Hash": "ce74b0404e7c8f0f68b2bdc337fc5b14",
+              "SpriteSheetX": 40,
+              "SpriteSheetY": 320
+            },
+            "ENE": {
+              "Hash": "aae9d0bd5a46f758037722ada736f4b9",
+              "SpriteSheetX": 80,
+              "SpriteSheetY": 320
+            },
+            "NNE": {
+              "Hash": "9f1e24b9c1729f7f544e1687ac0600e9",
+              "SpriteSheetX": 120,
+              "SpriteSheetY": 320
+            }
+          }
+        },
+        "Walking 2": {
+          "Frames": {
+            "SSE": {
+              "Hash": "a0a02c65a4ae88655706125c70e2cc1a",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 360
+            },
+            "ESE": {
+              "Hash": "b90c312c304430f3f39c1de911bf53d1",
+              "SpriteSheetX": 40,
+              "SpriteSheetY": 360
+            },
+            "ENE": {
+              "Hash": "fc6c489a66d0e4427b3e691fbd692f30",
+              "SpriteSheetX": 80,
+              "SpriteSheetY": 360
+            },
+            "NNE": {
+              "Hash": "affdc091299968027f2c849cfa2f80f7",
+              "SpriteSheetX": 120,
+              "SpriteSheetY": 360
+            }
+          }
+        },
+        "Walking 3": {
+          "Frames": {
+            "SSE": {
+              "Hash": "ffda29c666f17b09c8b55551e0f491a8",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 400
+            },
+            "ESE": {
+              "Hash": "0a6ec9a56edca2d2cfa9e0b393df9ca6",
+              "SpriteSheetX": 40,
+              "SpriteSheetY": 400
+            },
+            "ENE": {
+              "Hash": "a9feeb35222c19d68ab24ec19ddc3747",
+              "SpriteSheetX": 80,
+              "SpriteSheetY": 400
+            },
+            "NNE": {
+              "Hash": "74f0ec88909e4c3d5a20fb6b8f2741ae",
+              "SpriteSheetX": 120,
+              "SpriteSheetY": 400
+            }
+          }
+        },
+        "Walking 4": {
+          "Frames": {
+            "SSE": {
+              "Hash": "59018ff156fb7de9271b311758f95069",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 440
+            },
+            "ESE": {
+              "Hash": "9bc428bc0047898c3a4e637d435b0e14",
+              "SpriteSheetX": 40,
+              "SpriteSheetY": 440
+            },
+            "ENE": {
+              "Hash": "07b6b426ee96fb184cae4d9392fbdc66",
+              "SpriteSheetX": 80,
+              "SpriteSheetY": 440
+            },
+            "NNE": {
+              "Hash": "49fe4ef5ea1dc7ff535a1290a882fb14",
+              "SpriteSheetX": 120,
+              "SpriteSheetY": 440
+            }
+          }
+        }
+      },
+      "AnimationByDirections": {
+        "1": {
+          "Animations": {
+            "GettingUpFromKneeling": {
+              "AnimationFrames": [
+                {
+                  "Frames": {
+                    "First": {
+                      "Frame": "GettingUpFromKneeling 1",
+                      "Direction": "ENE"
+                    }
+                  },
+                  "Command": "Frame",
+                  "Parameter": 4
+                },
+                {
+                  "Frames": {
+                    "First": {
+                      "Frame": "GettingUpFromKneeling 2",
+                      "Direction": "ENE"
+                    }
+                  },
+                  "Command": "Frame",
+                  "Parameter": 4
+                },
+                {
+                  "Frames": {
+                    "First": {
+                      "Frame": "Idle 1",
+                      "Direction": "ENE"
+                    }
+                  },
+                  "Command": "Frame",
+                  "Parameter": 6
+                },
+                {
+                  "Command": "Stop",
+                  "Parameter": 0
+                }
+              ]
+            },
+            "Idle": {
+              "AnimationFrames": [
+                {
+                  "Frames": {
+                    "First": {
+                      "Frame": "Idle 1",
+                      "Direction": "ENE"
+                    }
+                  },
+                  "Command": "Frame",
+                  "Parameter": 6
+                },
+                {
+                  "Frames": {
+                    "First": {
+                      "Frame": "Idle 2",
+                      "Direction": "ENE"
+                    }
+                  },
+                  "Command": "Frame",
+                  "Parameter": 4
+                },
+                {
+                  "Frames": {
+                    "First": {
+                      "Frame": "Idle 3",
+                      "Direction": "ENE"
+                    }
+                  },
+                  "Command": "Frame",
+                  "Parameter": 4
+                },
+                {
+                  "Frames": {
+                    "First": {
+                      "Frame": "Idle 2",
+                      "Direction": "ENE"
+                    }
+                  },
+                  "Command": "Frame",
+                  "Parameter": 4
+                },
+                {
+                  "Command": "GotoFrameOffset",
+                  "Parameter": 0
+                }
+              ]
+            },
+            "Kneeling": {
+              "AnimationFrames": [
+                {
+                  "Frames": {
+                    "First": {
+                      "Frame": "Idle 1",
+                      "Direction": "ENE"
+                    }
+                  },
+                  "Command": "Frame",
+                  "Parameter": 6
+                },
+                {
+                  "Frames": {
+                    "First": {
+                      "Frame": "GettingUpFromKneeling 2",
+                      "Direction": "ENE"
+                    }
+                  },
+                  "Command": "Frame",
+                  "Parameter": 4
+                },
+                {
+                  "Frames": {
+                    "First": {
+                      "Frame": "GettingUpFromKneeling 1",
+                      "Direction": "ENE"
+                    }
+                  },
+                  "Command": "Frame",
+                  "Parameter": 4
+                },
+                {
+                  "Command": "Stop",
+                  "Parameter": 0
+                }
+              ]
+            },
+            "StillFrame": {
+              "AnimationFrames": [
+                {
+                  "Frames": {
+                    "First": {
+                      "Frame": "Idle 1",
+                      "Direction": "ENE"
+                    }
+                  },
+                  "Command": "Frame",
+                  "Parameter": 10
+                },
+                {
+                  "Command": "Stop",
+                  "Parameter": 0
+                }
+              ]
+            }
+          }
+        },
+        "4": {
+          "Animations": {
+            "GettingUpFromPrayer": {
+              "AnimationFrames": [
+                {
+                  "FrameGroup": "GettingUpFromPrayer 1",
+                  "Command": "Frame",
+                  "Parameter": 5
+                },
+                {
+                  "FrameGroup": "GettingUpFromPrayer 2",
+                  "Command": "Frame",
+                  "Parameter": 8
+                },
+                {
+                  "FrameGroup": "GettingUpFromPrayer 3",
+                  "Command": "Frame",
+                  "Parameter": 8
+                },
+                {
+                  "FrameGroup": "Idle 1",
+                  "Command": "Frame",
+                  "Parameter": 8
+                },
+                {
+                  "Command": "GotoAnimation",
+                  "Parameter": 1
+                }
+              ]
+            },
+            "Idle": {
+              "AnimationFrames": [
+                {
+                  "FrameGroup": "Idle 1",
+                  "Command": "Frame",
+                  "Parameter": 6
+                },
+                {
+                  "FrameGroup": "Idle 2",
+                  "Command": "Frame",
+                  "Parameter": 4
+                },
+                {
+                  "FrameGroup": "Idle 3",
+                  "Command": "Frame",
+                  "Parameter": 4
+                },
+                {
+                  "FrameGroup": "Idle 2",
+                  "Command": "Frame",
+                  "Parameter": 4
+                },
+                {
+                  "Command": "GotoFrameOffset",
+                  "Parameter": 0
+                }
+              ]
+            },
+            "PrayingStillFrame": {
+              "AnimationFrames": [
+                {
+                  "FrameGroup": "GettingUpFromPrayer 1",
+                  "Command": "Frame",
+                  "Parameter": 10
+                },
+                {
+                  "Command": "Stop",
+                  "Parameter": 0
+                }
+              ]
+            },
+            "StillFrame": {
+              "AnimationFrames": [
+                {
+                  "FrameGroup": "Idle 1",
+                  "Command": "Frame",
+                  "Parameter": 10
+                },
+                {
+                  "Command": "Stop",
+                  "Parameter": 0
+                }
+              ]
+            },
+            "Walking": {
+              "AnimationFrames": [
+                {
+                  "FrameGroup": "Walking 1",
+                  "Command": "Frame",
+                  "Parameter": 5
+                },
+                {
+                  "FrameGroup": "Idle 1",
+                  "Command": "Frame",
+                  "Parameter": 5
+                },
+                {
+                  "FrameGroup": "Walking 2",
+                  "Command": "Frame",
+                  "Parameter": 5
+                },
+                {
+                  "FrameGroup": "Walking 3",
+                  "Command": "Frame",
+                  "Parameter": 5
+                },
+                {
+                  "FrameGroup": "Idle 1",
+                  "Command": "Frame",
+                  "Parameter": 5
+                },
+                {
+                  "FrameGroup": "Walking 4",
+                  "Command": "Frame",
+                  "Parameter": 5
+                },
+                {
+                  "Command": "GotoFrameOffset",
+                  "Parameter": 0
+                }
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

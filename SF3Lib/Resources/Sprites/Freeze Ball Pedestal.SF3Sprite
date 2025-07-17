@@ -1,0 +1,112 @@
+{
+  "Name": "Freeze Ball Pedestal",
+  "Spritesheets": {
+    "48x64": {
+      "VerticalOffset": 0,
+      "Unknown0x08": 20,
+      "CollisionSize": 40,
+      "Scale": 0.0,
+      "FrameGroups": {
+        "OrbHovering 1": {
+          "Frames": {
+            "First": {
+              "Hash": "1dac71484f78a8109b693459d13a7319",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 0
+            }
+          }
+        },
+        "OrbHovering 2": {
+          "Frames": {
+            "First": {
+              "Hash": "bc2c82635f95d2c9eca6f46f4f7ad257",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 64
+            }
+          }
+        },
+        "OrbHovering 3": {
+          "Frames": {
+            "First": {
+              "Hash": "70f1556fa8fce78043f885410dbd0a60",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 128
+            }
+          }
+        },
+        "OrbHovering 4": {
+          "Frames": {
+            "First": {
+              "Hash": "fa2c7cde3ec73a8288a0ffaa2be8dd75",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 192
+            }
+          }
+        },
+        "OrbHovering 5": {
+          "Frames": {
+            "First": {
+              "Hash": "9507600b69c62ac6ad04bce7e435b84c",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 256
+            }
+          }
+        }
+      },
+      "AnimationByDirections": {
+        "1": {
+          "Animations": {
+            "OrbHovering": {
+              "AnimationFrames": [
+                {
+                  "FrameGroup": "OrbHovering 1",
+                  "Command": "Frame",
+                  "Parameter": 5
+                },
+                {
+                  "FrameGroup": "OrbHovering 2",
+                  "Command": "Frame",
+                  "Parameter": 5
+                },
+                {
+                  "FrameGroup": "OrbHovering 3",
+                  "Command": "Frame",
+                  "Parameter": 5
+                },
+                {
+                  "FrameGroup": "OrbHovering 4",
+                  "Command": "Frame",
+                  "Parameter": 5
+                },
+                {
+                  "FrameGroup": "OrbHovering 5",
+                  "Command": "Frame",
+                  "Parameter": 5
+                },
+                {
+                  "FrameGroup": "OrbHovering 4",
+                  "Command": "Frame",
+                  "Parameter": 5
+                },
+                {
+                  "FrameGroup": "OrbHovering 3",
+                  "Command": "Frame",
+                  "Parameter": 5
+                },
+                {
+                  "FrameGroup": "OrbHovering 2",
+                  "Command": "Frame",
+                  "Parameter": 5
+                },
+                {
+                  "Command": "GotoFrameOffset",
+                  "Parameter": 0
+                }
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

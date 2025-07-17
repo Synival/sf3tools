@@ -1,0 +1,212 @@
+{
+  "Name": "David (P2) (Speedo)",
+  "Spritesheets": {
+    "40x40": {
+      "VerticalOffset": 0,
+      "Unknown0x08": 20,
+      "CollisionSize": 40,
+      "Scale": 1.0,
+      "FrameGroups": {
+        "Idle (Posing) 1": {
+          "Frames": {
+            "SSE": {
+              "Hash": "580adfdbb864c3d46e054a2c872a90af",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 0
+            },
+            "ESE": {
+              "Hash": "f133b4cc947fee1311c1d122a29e13a6",
+              "SpriteSheetX": 40,
+              "SpriteSheetY": 0
+            },
+            "ENE": {
+              "Hash": "32d70734458e8ffee5558250d844280e",
+              "SpriteSheetX": 80,
+              "SpriteSheetY": 0
+            },
+            "NNE": {
+              "Hash": "78f57f30b2df6b6ee5cb4e9525e01a9c",
+              "SpriteSheetX": 120,
+              "SpriteSheetY": 0
+            }
+          }
+        },
+        "Idle (Posing) 2": {
+          "Frames": {
+            "SSE": {
+              "Hash": "0dd3e547962dc0c1524e2122b691b95b",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 40
+            },
+            "ESE": {
+              "Hash": "ea503e2c7f1ef31d78e6283dc0bf6d43",
+              "SpriteSheetX": 40,
+              "SpriteSheetY": 40
+            },
+            "ENE": {
+              "Hash": "6a4662683217b126f66cce07be9340ae",
+              "SpriteSheetX": 80,
+              "SpriteSheetY": 40
+            },
+            "NNE": {
+              "Hash": "af31f20f53dba36922b90dd863575ef2",
+              "SpriteSheetX": 120,
+              "SpriteSheetY": 40
+            }
+          }
+        },
+        "Idle (Posing) 3": {
+          "Frames": {
+            "SSE": {
+              "Hash": "ce50baab52b752d5f5ae3b81464b0f36",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 80
+            },
+            "ESE": {
+              "Hash": "15d73d09d33434af5e28966aafe09ad8",
+              "SpriteSheetX": 40,
+              "SpriteSheetY": 80
+            },
+            "ENE": {
+              "Hash": "3cf6056c39ee7c88197f9868134bfa33",
+              "SpriteSheetX": 80,
+              "SpriteSheetY": 80
+            },
+            "NNE": {
+              "Hash": "ac382c82248af27248e173dbfbb8c526",
+              "SpriteSheetX": 120,
+              "SpriteSheetY": 80
+            }
+          }
+        }
+      },
+      "AnimationByDirections": {
+        "4": {
+          "Animations": {
+            "Idle (Posing)": {
+              "AnimationFrames": [
+                {
+                  "FrameGroup": "Idle (Posing) 1",
+                  "Command": "Frame",
+                  "Parameter": 25
+                },
+                {
+                  "FrameGroup": "Idle (Posing) 2",
+                  "Command": "Frame",
+                  "Parameter": 15
+                },
+                {
+                  "FrameGroup": "Idle (Posing) 3",
+                  "Command": "Frame",
+                  "Parameter": 4
+                },
+                {
+                  "FrameGroup": "Idle (Posing) 2",
+                  "Command": "Frame",
+                  "Parameter": 4
+                },
+                {
+                  "FrameGroup": "Idle (Posing) 3",
+                  "Command": "Frame",
+                  "Parameter": 4
+                },
+                {
+                  "FrameGroup": "Idle (Posing) 2",
+                  "Command": "Frame",
+                  "Parameter": 4
+                },
+                {
+                  "FrameGroup": "Idle (Posing) 3",
+                  "Command": "Frame",
+                  "Parameter": 4
+                },
+                {
+                  "FrameGroup": "Idle (Posing) 2",
+                  "Command": "Frame",
+                  "Parameter": 4
+                },
+                {
+                  "FrameGroup": "Idle (Posing) 3",
+                  "Command": "Frame",
+                  "Parameter": 4
+                },
+                {
+                  "FrameGroup": "Idle (Posing) 2",
+                  "Command": "Frame",
+                  "Parameter": 4
+                },
+                {
+                  "FrameGroup": "Idle (Posing) 1",
+                  "Command": "Frame",
+                  "Parameter": 35
+                },
+                {
+                  "FrameGroup": "Idle (Posing) 2",
+                  "Command": "Frame",
+                  "Parameter": 15
+                },
+                {
+                  "FrameGroup": "Idle (Posing) 3",
+                  "Command": "Frame",
+                  "Parameter": 4
+                },
+                {
+                  "FrameGroup": "Idle (Posing) 2",
+                  "Command": "Frame",
+                  "Parameter": 4
+                },
+                {
+                  "FrameGroup": "Idle (Posing) 3",
+                  "Command": "Frame",
+                  "Parameter": 4
+                },
+                {
+                  "FrameGroup": "Idle (Posing) 2",
+                  "Command": "Frame",
+                  "Parameter": 4
+                },
+                {
+                  "FrameGroup": "Idle (Posing) 3",
+                  "Command": "Frame",
+                  "Parameter": 4
+                },
+                {
+                  "FrameGroup": "Idle (Posing) 2",
+                  "Command": "Frame",
+                  "Parameter": 4
+                },
+                {
+                  "FrameGroup": "Idle (Posing) 3",
+                  "Command": "Frame",
+                  "Parameter": 4
+                },
+                {
+                  "FrameGroup": "Idle (Posing) 2",
+                  "Command": "Frame",
+                  "Parameter": 4
+                },
+                {
+                  "Command": "GotoFrameOffset",
+                  "Parameter": 0
+                }
+              ]
+            },
+            "StillFrame (Posing)": {
+              "AnimationFrames": [
+                {
+                  "FrameGroup": "Idle (Posing) 1",
+                  "Command": "Frame",
+                  "Parameter": 10
+                },
+                {
+                  "Command": "Stop",
+                  "Parameter": 0
+                }
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

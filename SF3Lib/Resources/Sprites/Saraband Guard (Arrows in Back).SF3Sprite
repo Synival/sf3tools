@@ -1,0 +1,149 @@
+{
+  "Name": "Saraband Guard (Arrows in Back)",
+  "Spritesheets": {
+    "48x40": {
+      "VerticalOffset": 0,
+      "Unknown0x08": 20,
+      "CollisionSize": 40,
+      "Scale": 1.0,
+      "FrameGroups": {
+        "OnGround 1": {
+          "Frames": {
+            "SSE": {
+              "Hash": "d70796ffc8fc171d1e75e5c714471ef8",
+              "SpriteSheetX": 48,
+              "SpriteSheetY": 0
+            },
+            "ESE": {
+              "Hash": "2004ffe2c92a78a9a2233d2900edf717",
+              "SpriteSheetX": 96,
+              "SpriteSheetY": 0
+            },
+            "ENE": {
+              "Hash": "02debfa171d941ce4d13704d8883c51f",
+              "SpriteSheetX": 144,
+              "SpriteSheetY": 0
+            },
+            "NNE": {
+              "Hash": "6ed7854507ced4d643efd70ea40f45c7",
+              "SpriteSheetX": 192,
+              "SpriteSheetY": 0
+            }
+          }
+        },
+        "OnGround 2": {
+          "Frames": {
+            "S": {
+              "Hash": "df95b0b1dc50395574eb253b3a24cacf",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 40
+            }
+          }
+        }
+      },
+      "AnimationByDirections": {
+        "1": {
+          "Animations": {
+            "StillFrame (OnGround, Repeat 1)": {
+              "AnimationFrames": [
+                {
+                  "Frames": {
+                    "First": {
+                      "Frame": "OnGround 2",
+                      "Direction": "S"
+                    }
+                  },
+                  "Command": "Frame",
+                  "Parameter": 4
+                },
+                {
+                  "Command": "GotoFrameOffset",
+                  "Parameter": 0
+                }
+              ]
+            },
+            "StillFrame (OnGround, Repeat 2)": {
+              "AnimationFrames": [
+                {
+                  "Frames": {
+                    "First": {
+                      "Frame": "OnGround 2",
+                      "Direction": "S"
+                    }
+                  },
+                  "Command": "Frame",
+                  "Parameter": 5
+                },
+                {
+                  "Command": "GotoFrameOffset",
+                  "Parameter": 0
+                }
+              ]
+            },
+            "StillFrame (OnGround)": {
+              "AnimationFrames": [
+                {
+                  "Frames": {
+                    "First": {
+                      "Frame": "OnGround 2",
+                      "Direction": "S"
+                    }
+                  },
+                  "Command": "Frame",
+                  "Parameter": 10
+                },
+                {
+                  "Command": "Stop",
+                  "Parameter": 0
+                }
+              ]
+            }
+          }
+        },
+        "4": {
+          "Animations": {
+            "StillFrame (OnGround, Repeat 1)": {
+              "AnimationFrames": [
+                {
+                  "FrameGroup": "OnGround 1",
+                  "Command": "Frame",
+                  "Parameter": 4
+                },
+                {
+                  "Command": "GotoFrameOffset",
+                  "Parameter": 0
+                }
+              ]
+            },
+            "StillFrame (OnGround, Repeat 2)": {
+              "AnimationFrames": [
+                {
+                  "FrameGroup": "OnGround 1",
+                  "Command": "Frame",
+                  "Parameter": 5
+                },
+                {
+                  "Command": "GotoFrameOffset",
+                  "Parameter": 0
+                }
+              ]
+            },
+            "StillFrame (OnGround)": {
+              "AnimationFrames": [
+                {
+                  "FrameGroup": "OnGround 1",
+                  "Command": "Frame",
+                  "Parameter": 10
+                },
+                {
+                  "Command": "Stop",
+                  "Parameter": 0
+                }
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

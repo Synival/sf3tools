@@ -1,0 +1,423 @@
+{
+  "Name": "Hazuki's Father",
+  "Spritesheets": {
+    "48x40": {
+      "VerticalOffset": 0,
+      "Unknown0x08": 20,
+      "CollisionSize": 40,
+      "Scale": 1.0,
+      "FrameGroups": {
+        "Nodding (OnGround) 1": {
+          "Frames": {
+            "SSE": {
+              "Hash": "08c94f4cfdc1a61af0e40bb3dfc314ac",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 0
+            },
+            "ESE": {
+              "Hash": "e138b3cea70057dd8731874157f82532",
+              "SpriteSheetX": 48,
+              "SpriteSheetY": 0
+            },
+            "ENE": {
+              "Hash": "d7fc6967e69cddd06d47be6eb9309e5f",
+              "SpriteSheetX": 96,
+              "SpriteSheetY": 0
+            },
+            "NNE": {
+              "Hash": "b21b8ace1399c81272fd3fc7555855dd",
+              "SpriteSheetX": 144,
+              "SpriteSheetY": 0
+            }
+          }
+        },
+        "Nodding (OnGround) 2": {
+          "Frames": {
+            "SSE": {
+              "Hash": "7281d3876bcf7e5e57f9d199406c176d",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 40
+            },
+            "ESE": {
+              "Hash": "38a892d568c07e75aa0e34393da4b47d",
+              "SpriteSheetX": 48,
+              "SpriteSheetY": 40
+            },
+            "ENE": {
+              "Hash": "6260c3ad06c9b537ae21694572571119",
+              "SpriteSheetX": 96,
+              "SpriteSheetY": 40
+            },
+            "NNE": {
+              "Hash": "e616419de80c1ff1768a997ba037eeb1",
+              "SpriteSheetX": 144,
+              "SpriteSheetY": 40
+            }
+          }
+        },
+        "Nodding (OnGround) 3": {
+          "Frames": {
+            "SSE": {
+              "Hash": "6fbc31fc41ab9376ba07c90b5664b08d",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 80
+            },
+            "ESE": {
+              "Hash": "3134649b5af3eaae2b52b2ac67ce5851",
+              "SpriteSheetX": 48,
+              "SpriteSheetY": 80
+            },
+            "ENE": {
+              "Hash": "6f205293fa9e001240f7e620940efec4",
+              "SpriteSheetX": 96,
+              "SpriteSheetY": 80
+            },
+            "NNE": {
+              "Hash": "d0100c85a5b8ddddd91b1d4dd666ac6d",
+              "SpriteSheetX": 144,
+              "SpriteSheetY": 80
+            }
+          }
+        },
+        "OpeningEyes (OnGround) 1": {
+          "Frames": {
+            "SSE": {
+              "Hash": "9dd74d50547487095862fc70b00a2432",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 120
+            },
+            "ESE": {
+              "Hash": "970af3e80ddc95eed9268af6047dbf1d",
+              "SpriteSheetX": 48,
+              "SpriteSheetY": 120
+            },
+            "ENE": {
+              "Hash": "3a546a6a64a2256588714271d678d3c2",
+              "SpriteSheetX": 96,
+              "SpriteSheetY": 120
+            },
+            "NNE": {
+              "Hash": "5cb504e7faa170c8c2feea624ef1228f",
+              "SpriteSheetX": 144,
+              "SpriteSheetY": 120
+            }
+          }
+        },
+        "OpeningEyes (OnGround) 2": {
+          "Frames": {
+            "SSE": {
+              "Hash": "463f2cc683731ea192f995055d5bca3e",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 160
+            },
+            "ESE": {
+              "Hash": "14332746cdaff9f427c594eec9a00857",
+              "SpriteSheetX": 48,
+              "SpriteSheetY": 160
+            },
+            "ENE": {
+              "Hash": "e209c9b50249e83cf90e5289c731094d",
+              "SpriteSheetX": 96,
+              "SpriteSheetY": 160
+            },
+            "NNE": {
+              "Hash": "05c2674ce02f35d37c25244f43bb3421",
+              "SpriteSheetX": 144,
+              "SpriteSheetY": 160
+            }
+          }
+        },
+        "ShakingHead (OnGround) 1": {
+          "Frames": {
+            "SSE": {
+              "Hash": "c84aa307b998323147315d53ed9247f1",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 200
+            },
+            "ESE": {
+              "Hash": "780596907bee654087a1ea9ae4262f6c",
+              "SpriteSheetX": 48,
+              "SpriteSheetY": 200
+            },
+            "ENE": {
+              "Hash": "a2bfc08da078fb528a289a6fea303299",
+              "SpriteSheetX": 96,
+              "SpriteSheetY": 200
+            },
+            "NNE": {
+              "Hash": "4d6bb66f08c1604bd69704def7e2573b",
+              "SpriteSheetX": 144,
+              "SpriteSheetY": 200
+            }
+          }
+        },
+        "ShakingHead (OnGround) 2": {
+          "Frames": {
+            "SSE": {
+              "Hash": "f7c8c993d41bcfb3f5a061915199518f",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 240
+            },
+            "ESE": {
+              "Hash": "f6684a473f42363e2f479b41e1acf07b",
+              "SpriteSheetX": 48,
+              "SpriteSheetY": 240
+            },
+            "ENE": {
+              "Hash": "e538ec39522650b26f3475a7e3bfe368",
+              "SpriteSheetX": 96,
+              "SpriteSheetY": 240
+            },
+            "NNE": {
+              "Hash": "243dfa4710d2a448cb47349c06ebdf7f",
+              "SpriteSheetX": 144,
+              "SpriteSheetY": 240
+            }
+          }
+        },
+        "Twitching (OnGround) 1": {
+          "Frames": {
+            "SSE": {
+              "Hash": "de5d4ca195009161be248f8cee4a8960",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 280
+            },
+            "ESE": {
+              "Hash": "be7a36dd28c134df571f56decb03da47",
+              "SpriteSheetX": 48,
+              "SpriteSheetY": 280
+            },
+            "ENE": {
+              "Hash": "a59cad39b73e7f51e0a8f7ac2b818624",
+              "SpriteSheetX": 96,
+              "SpriteSheetY": 280
+            },
+            "NNE": {
+              "Hash": "bc468bc0aba3f558756590508b277588",
+              "SpriteSheetX": 144,
+              "SpriteSheetY": 280
+            }
+          }
+        },
+        "Twitching (OnGround) 2": {
+          "Frames": {
+            "SSE": {
+              "Hash": "46d1596ee4a81cc9eecb0152e8e9756f",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 320
+            },
+            "ESE": {
+              "Hash": "7d223a8e9d58f874d6ae72a7ff8726f4",
+              "SpriteSheetX": 48,
+              "SpriteSheetY": 320
+            },
+            "ENE": {
+              "Hash": "18f5b5a6ac345a9badf73b1988b53c9a",
+              "SpriteSheetX": 96,
+              "SpriteSheetY": 320
+            },
+            "NNE": {
+              "Hash": "562e85f2b841312b6fb41841507d0b47",
+              "SpriteSheetX": 144,
+              "SpriteSheetY": 320
+            }
+          }
+        }
+      },
+      "AnimationByDirections": {
+        "4": {
+          "Animations": {
+            "Nodding (OnGround)": {
+              "AnimationFrames": [
+                {
+                  "FrameGroup": "Nodding (OnGround) 1",
+                  "Command": "Frame",
+                  "Parameter": 6
+                },
+                {
+                  "FrameGroup": "Nodding (OnGround) 2",
+                  "Command": "Frame",
+                  "Parameter": 3
+                },
+                {
+                  "FrameGroup": "Nodding (OnGround) 3",
+                  "Command": "Frame",
+                  "Parameter": 7
+                },
+                {
+                  "FrameGroup": "Nodding (OnGround) 2",
+                  "Command": "Frame",
+                  "Parameter": 4
+                },
+                {
+                  "Command": "GotoAnimation",
+                  "Parameter": 0
+                }
+              ]
+            },
+            "OpeningEyes (OnGround)": {
+              "AnimationFrames": [
+                {
+                  "FrameGroup": "OpeningEyes (OnGround) 1",
+                  "Command": "Frame",
+                  "Parameter": 24
+                },
+                {
+                  "FrameGroup": "OpeningEyes (OnGround) 2",
+                  "Command": "Frame",
+                  "Parameter": 2
+                },
+                {
+                  "FrameGroup": "Nodding (OnGround) 1",
+                  "Command": "Frame",
+                  "Parameter": 3
+                },
+                {
+                  "FrameGroup": "OpeningEyes (OnGround) 2",
+                  "Command": "Frame",
+                  "Parameter": 2
+                },
+                {
+                  "FrameGroup": "OpeningEyes (OnGround) 1",
+                  "Command": "Frame",
+                  "Parameter": 6
+                },
+                {
+                  "FrameGroup": "Nodding (OnGround) 1",
+                  "Command": "Frame",
+                  "Parameter": 120
+                },
+                {
+                  "Command": "GotoAnimation",
+                  "Parameter": 5
+                }
+              ]
+            },
+            "ShakingHead (OnGround)": {
+              "AnimationFrames": [
+                {
+                  "FrameGroup": "Nodding (OnGround) 1",
+                  "Command": "Frame",
+                  "Parameter": 3
+                },
+                {
+                  "FrameGroup": "ShakingHead (OnGround) 1",
+                  "Command": "Frame",
+                  "Parameter": 3
+                },
+                {
+                  "FrameGroup": "Nodding (OnGround) 1",
+                  "Command": "Frame",
+                  "Parameter": 3
+                },
+                {
+                  "FrameGroup": "ShakingHead (OnGround) 2",
+                  "Command": "Frame",
+                  "Parameter": 3
+                },
+                {
+                  "FrameGroup": "Nodding (OnGround) 1",
+                  "Command": "Frame",
+                  "Parameter": 3
+                },
+                {
+                  "FrameGroup": "ShakingHead (OnGround) 1",
+                  "Command": "Frame",
+                  "Parameter": 3
+                },
+                {
+                  "FrameGroup": "Nodding (OnGround) 1",
+                  "Command": "Frame",
+                  "Parameter": 3
+                },
+                {
+                  "FrameGroup": "ShakingHead (OnGround) 2",
+                  "Command": "Frame",
+                  "Parameter": 3
+                },
+                {
+                  "Command": "GotoAnimation",
+                  "Parameter": 0
+                }
+              ]
+            },
+            "StillFrame (OnGround, Eyes Closed)": {
+              "AnimationFrames": [
+                {
+                  "FrameGroup": "OpeningEyes (OnGround) 1",
+                  "Command": "Frame",
+                  "Parameter": 10
+                },
+                {
+                  "Command": "Stop",
+                  "Parameter": 0
+                }
+              ]
+            },
+            "StillFrame (OnGround, Eyes Open)": {
+              "AnimationFrames": [
+                {
+                  "FrameGroup": "Nodding (OnGround) 1",
+                  "Command": "Frame",
+                  "Parameter": 10
+                },
+                {
+                  "Command": "Stop",
+                  "Parameter": 0
+                }
+              ]
+            },
+            "Twitching (OnGround)": {
+              "AnimationFrames": [
+                {
+                  "FrameGroup": "OpeningEyes (OnGround) 1",
+                  "Command": "Frame",
+                  "Parameter": 24
+                },
+                {
+                  "FrameGroup": "Twitching (OnGround) 1",
+                  "Command": "Frame",
+                  "Parameter": 2
+                },
+                {
+                  "FrameGroup": "Twitching (OnGround) 2",
+                  "Command": "Frame",
+                  "Parameter": 2
+                },
+                {
+                  "FrameGroup": "Twitching (OnGround) 1",
+                  "Command": "Frame",
+                  "Parameter": 2
+                },
+                {
+                  "FrameGroup": "OpeningEyes (OnGround) 1",
+                  "Command": "Frame",
+                  "Parameter": 2
+                },
+                {
+                  "FrameGroup": "Twitching (OnGround) 1",
+                  "Command": "Frame",
+                  "Parameter": 2
+                },
+                {
+                  "FrameGroup": "Twitching (OnGround) 2",
+                  "Command": "Frame",
+                  "Parameter": 2
+                },
+                {
+                  "FrameGroup": "Twitching (OnGround) 1",
+                  "Command": "Frame",
+                  "Parameter": 2
+                },
+                {
+                  "Command": "GotoFrameOffset",
+                  "Parameter": 0
+                }
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

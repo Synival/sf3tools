@@ -1,0 +1,85 @@
+{
+  "Name": "Small Icons (Scn1+)",
+  "Spritesheets": {
+    "16x16": {
+      "VerticalOffset": 0,
+      "Unknown0x08": 8,
+      "CollisionSize": 16,
+      "Scale": 1.0,
+      "FrameGroups": {
+        "Alert 1": {
+          "Frames": {
+            "First": {
+              "Hash": "c7059e750bf0fda8104e5c54aa0df10b",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 0
+            }
+          }
+        },
+        "Flag 1": {
+          "Frames": {
+            "First": {
+              "Hash": "3423a1885adc98bb2978ad723de6196b",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 16
+            }
+          }
+        },
+        "Love 1": {
+          "Frames": {
+            "First": {
+              "Hash": "3a704d3d95575f3c452ef6125b459c9f",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 32
+            }
+          }
+        }
+      },
+      "AnimationByDirections": {
+        "1": {
+          "Animations": {
+            "Alert": {
+              "AnimationFrames": [
+                {
+                  "FrameGroup": "Alert 1",
+                  "Command": "Frame",
+                  "Parameter": 10
+                },
+                {
+                  "Command": "Stop",
+                  "Parameter": 0
+                }
+              ]
+            },
+            "Flag": {
+              "AnimationFrames": [
+                {
+                  "FrameGroup": "Flag 1",
+                  "Command": "Frame",
+                  "Parameter": 10
+                },
+                {
+                  "Command": "Stop",
+                  "Parameter": 0
+                }
+              ]
+            },
+            "Love": {
+              "AnimationFrames": [
+                {
+                  "FrameGroup": "Love 1",
+                  "Command": "Frame",
+                  "Parameter": 10
+                },
+                {
+                  "Command": "Stop",
+                  "Parameter": 0
+                }
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

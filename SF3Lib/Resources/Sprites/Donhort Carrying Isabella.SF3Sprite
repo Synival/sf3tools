@@ -1,0 +1,180 @@
+{
+  "Name": "Donhort Carrying Isabella",
+  "Spritesheets": {
+    "48x48": {
+      "VerticalOffset": 0,
+      "Unknown0x08": 20,
+      "CollisionSize": 40,
+      "Scale": 1.0,
+      "FrameGroups": {
+        "Idle 1": {
+          "Frames": {
+            "SSE": {
+              "Hash": "a534ed7f96b9d08c1cc685529ac76a5e",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 0
+            },
+            "ESE": {
+              "Hash": "67cc339200a026b421a1ba13f6dc6882",
+              "SpriteSheetX": 48,
+              "SpriteSheetY": 0
+            },
+            "ENE": {
+              "Hash": "b49d65bf922261281402bb0568dfc8ef",
+              "SpriteSheetX": 96,
+              "SpriteSheetY": 0
+            },
+            "NNE": {
+              "Hash": "f9eb820f420aa92e71f2914d1b3a7489",
+              "SpriteSheetX": 144,
+              "SpriteSheetY": 0
+            }
+          }
+        },
+        "Walking 1": {
+          "Frames": {
+            "NNE": {
+              "Hash": "d4290ca752eb19e4f5a047084a946078",
+              "SpriteSheetX": 144,
+              "SpriteSheetY": 48
+            }
+          }
+        },
+        "Walking 2": {
+          "Frames": {
+            "NNE": {
+              "Hash": "3ce3d1f063ca08127e015eec9bda3eec",
+              "SpriteSheetX": 144,
+              "SpriteSheetY": 96
+            }
+          }
+        },
+        "Walking 3": {
+          "Frames": {
+            "NNE": {
+              "Hash": "0cd3f450d076fe42fe9ceee86f126cd6",
+              "SpriteSheetX": 144,
+              "SpriteSheetY": 144
+            }
+          }
+        },
+        "Walking 4": {
+          "Frames": {
+            "NNE": {
+              "Hash": "9591e80f54160b3851c31b115d2d2cff",
+              "SpriteSheetX": 144,
+              "SpriteSheetY": 192
+            }
+          }
+        },
+        "Walking 5": {
+          "Frames": {
+            "NNE": {
+              "Hash": "0b99d23315dc9875b7c7d14288f1cb99",
+              "SpriteSheetX": 144,
+              "SpriteSheetY": 240
+            }
+          }
+        }
+      },
+      "AnimationByDirections": {
+        "4": {
+          "Animations": {
+            "StillFrame (Idle, Repeat)": {
+              "AnimationFrames": [
+                {
+                  "FrameGroup": "Idle 1",
+                  "Command": "Frame",
+                  "Parameter": 10
+                },
+                {
+                  "Command": "GotoFrameOffset",
+                  "Parameter": 0
+                }
+              ]
+            },
+            "StillFrame (Idle)": {
+              "AnimationFrames": [
+                {
+                  "FrameGroup": "Idle 1",
+                  "Command": "Frame",
+                  "Parameter": 10
+                },
+                {
+                  "Command": "Stop",
+                  "Parameter": 0
+                }
+              ]
+            }
+          }
+        },
+        "17": {
+          "Animations": {
+            "Walking (1 Direction)": {
+              "AnimationFrames": [
+                {
+                  "Command": "SetDirectionCount",
+                  "Parameter": 17
+                },
+                {
+                  "Frames": {
+                    "First": {
+                      "Frame": "Walking 1",
+                      "Direction": "NNE"
+                    }
+                  },
+                  "Command": "Frame",
+                  "Parameter": 4
+                },
+                {
+                  "Frames": {
+                    "First": {
+                      "Frame": "Walking 2",
+                      "Direction": "NNE"
+                    }
+                  },
+                  "Command": "Frame",
+                  "Parameter": 4
+                },
+                {
+                  "Frames": {
+                    "First": {
+                      "Frame": "Walking 3",
+                      "Direction": "NNE"
+                    }
+                  },
+                  "Command": "Frame",
+                  "Parameter": 4
+                },
+                {
+                  "Frames": {
+                    "First": {
+                      "Frame": "Walking 4",
+                      "Direction": "NNE"
+                    }
+                  },
+                  "Command": "Frame",
+                  "Parameter": 4
+                },
+                {
+                  "Frames": {
+                    "First": {
+                      "Frame": "Walking 5",
+                      "Direction": "NNE"
+                    }
+                  },
+                  "Command": "Frame",
+                  "Parameter": 4
+                },
+                {
+                  "Command": "GotoFrameOffset",
+                  "Parameter": 0
+                }
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

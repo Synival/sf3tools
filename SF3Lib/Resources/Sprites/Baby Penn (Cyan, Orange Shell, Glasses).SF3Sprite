@@ -1,0 +1,184 @@
+{
+  "Name": "Baby Penn (Cyan, Orange Shell, Glasses)",
+  "Spritesheets": {
+    "40x32": {
+      "VerticalOffset": 0,
+      "Unknown0x08": 20,
+      "CollisionSize": 40,
+      "Scale": 0.0,
+      "FrameGroups": {
+        "Idle 1": {
+          "Frames": {
+            "SSE": {
+              "Hash": "30a287bce97ed80eb6eb910f6eca6271",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 0
+            },
+            "ESE": {
+              "Hash": "a8083e69b82470f531a9312fd825c371",
+              "SpriteSheetX": 40,
+              "SpriteSheetY": 0
+            },
+            "ENE": {
+              "Hash": "a6359cd7425d1c3762d010e453cfdece",
+              "SpriteSheetX": 80,
+              "SpriteSheetY": 0
+            },
+            "NNE": {
+              "Hash": "50e4c6ed4fbef6743dfe3eec089323c0",
+              "SpriteSheetX": 120,
+              "SpriteSheetY": 0
+            }
+          }
+        },
+        "Idle 2": {
+          "Frames": {
+            "SSE": {
+              "Hash": "7fdc379bec187d5ef67bad529ed61ed5",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 32
+            },
+            "ESE": {
+              "Hash": "d3ef64818e99857747276d4d8f824fdb",
+              "SpriteSheetX": 40,
+              "SpriteSheetY": 32
+            },
+            "ENE": {
+              "Hash": "bf8574bc83c3d7e2a6c5ce45b85adc1f",
+              "SpriteSheetX": 80,
+              "SpriteSheetY": 32
+            },
+            "NNE": {
+              "Hash": "8aa55490e2b77b40f8be3b6f55883d39",
+              "SpriteSheetX": 120,
+              "SpriteSheetY": 32
+            }
+          }
+        },
+        "Idle 3": {
+          "Frames": {
+            "SSE": {
+              "Hash": "d6b247c76991c92b14dba817fbc98ddc",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 64
+            },
+            "ESE": {
+              "Hash": "bc0d323c637cf16ccd823fed9890655d",
+              "SpriteSheetX": 40,
+              "SpriteSheetY": 64
+            },
+            "ENE": {
+              "Hash": "5c91bfae7f257800609ae0edd79a88a8",
+              "SpriteSheetX": 80,
+              "SpriteSheetY": 64
+            },
+            "NNE": {
+              "Hash": "9ff7279b9e75438afce7195a12263d5b",
+              "SpriteSheetX": 120,
+              "SpriteSheetY": 64
+            }
+          }
+        },
+        "Idle 4": {
+          "Frames": {
+            "SSE": {
+              "Hash": "a3dd8f1c856f13abb98ce067a0b91594",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 96
+            },
+            "ESE": {
+              "Hash": "fb64ee87cc823cc6e1ba548c34c158b0",
+              "SpriteSheetX": 40,
+              "SpriteSheetY": 96
+            },
+            "ENE": {
+              "Hash": "6714b11d605407bc68bb77618b531bbb",
+              "SpriteSheetX": 80,
+              "SpriteSheetY": 96
+            },
+            "NNE": {
+              "Hash": "11b7508e20a0d9af60760c018b85bbf9",
+              "SpriteSheetX": 120,
+              "SpriteSheetY": 96
+            }
+          }
+        }
+      },
+      "AnimationByDirections": {
+        "4": {
+          "Animations": {
+            "Idle": {
+              "AnimationFrames": [
+                {
+                  "FrameGroup": "Idle 1",
+                  "Command": "Frame",
+                  "Parameter": 4
+                },
+                {
+                  "FrameGroup": "Idle 2",
+                  "Command": "Frame",
+                  "Parameter": 4
+                },
+                {
+                  "FrameGroup": "Idle 3",
+                  "Command": "Frame",
+                  "Parameter": 4
+                },
+                {
+                  "FrameGroup": "Idle 4",
+                  "Command": "Frame",
+                  "Parameter": 4
+                },
+                {
+                  "Command": "GotoFrameOffset",
+                  "Parameter": 0
+                }
+              ]
+            },
+            "Idle (Wings Down Longer)": {
+              "AnimationFrames": [
+                {
+                  "FrameGroup": "Idle 1",
+                  "Command": "Frame",
+                  "Parameter": 6
+                },
+                {
+                  "FrameGroup": "Idle 2",
+                  "Command": "Frame",
+                  "Parameter": 3
+                },
+                {
+                  "FrameGroup": "Idle 3",
+                  "Command": "Frame",
+                  "Parameter": 4
+                },
+                {
+                  "FrameGroup": "Idle 4",
+                  "Command": "Frame",
+                  "Parameter": 4
+                },
+                {
+                  "Command": "GotoFrameOffset",
+                  "Parameter": 0
+                }
+              ]
+            },
+            "StillFrame": {
+              "AnimationFrames": [
+                {
+                  "FrameGroup": "Idle 1",
+                  "Command": "Frame",
+                  "Parameter": 10
+                },
+                {
+                  "Command": "Stop",
+                  "Parameter": 0
+                }
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

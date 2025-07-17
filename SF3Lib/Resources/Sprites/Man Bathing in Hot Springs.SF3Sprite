@@ -1,0 +1,232 @@
+{
+  "Name": "Man Bathing in Hot Springs",
+  "Spritesheets": {
+    "40x40": {
+      "VerticalOffset": 0,
+      "Unknown0x08": 20,
+      "CollisionSize": 40,
+      "Scale": 1.0,
+      "FrameGroups": {
+        "OccasionallyWipingForehead 1": {
+          "Frames": {
+            "SSE": {
+              "Hash": "bb606c38f48638e65129c8b13776c485",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 0
+            },
+            "ESE": {
+              "Hash": "aca0c21c319420b512b12b24c576a9ea",
+              "SpriteSheetX": 40,
+              "SpriteSheetY": 0
+            },
+            "ENE": {
+              "Hash": "98390b1083f4952c3b820ea6e6e31671",
+              "SpriteSheetX": 80,
+              "SpriteSheetY": 0
+            },
+            "NNE": {
+              "Hash": "815878e1e2ee3384ca50c2a7a0aab79b",
+              "SpriteSheetX": 120,
+              "SpriteSheetY": 0
+            }
+          }
+        },
+        "OccasionallyWipingForehead 2": {
+          "Frames": {
+            "SSE": {
+              "Hash": "4717bdc5548c418fb63fcd5d74747082",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 40
+            },
+            "ESE": {
+              "Hash": "76b2dbb842e369de721b2286c444c911",
+              "SpriteSheetX": 40,
+              "SpriteSheetY": 40
+            },
+            "ENE": {
+              "Hash": "a7db9fa047b75789fd08f0bbe97f939c",
+              "SpriteSheetX": 80,
+              "SpriteSheetY": 40
+            },
+            "NNE": {
+              "Hash": "86661a8f0ffdee3010c9701e167e29ea",
+              "SpriteSheetX": 120,
+              "SpriteSheetY": 40
+            }
+          }
+        },
+        "OccasionallyWipingForehead 3": {
+          "Frames": {
+            "SSE": {
+              "Hash": "7ea187c17895000eb685839e50108a33",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 80
+            },
+            "ESE": {
+              "Hash": "b82694b824c701e4d9d97e4f59d22566",
+              "SpriteSheetX": 40,
+              "SpriteSheetY": 80
+            },
+            "ENE": {
+              "Hash": "6717138e54fd09ce07c464e86720c5fa",
+              "SpriteSheetX": 80,
+              "SpriteSheetY": 80
+            },
+            "NNE": {
+              "Hash": "c366fc8e5ee578b4410ab27214b2983c",
+              "SpriteSheetX": 120,
+              "SpriteSheetY": 80
+            }
+          }
+        },
+        "OccasionallyWipingForehead 4": {
+          "Frames": {
+            "SSE": {
+              "Hash": "ecd159a97178d0d03113d4e3d8bdb6d4",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 120
+            },
+            "ESE": {
+              "Hash": "fc6291f3f883775d79e984a1a05f9618",
+              "SpriteSheetX": 40,
+              "SpriteSheetY": 120
+            },
+            "ENE": {
+              "Hash": "1fa17fb9793ea76b8f0f7efa65148e58",
+              "SpriteSheetX": 80,
+              "SpriteSheetY": 120
+            },
+            "NNE": {
+              "Hash": "2e7a5974efb6ec876a6e733df52510bb",
+              "SpriteSheetX": 120,
+              "SpriteSheetY": 120
+            }
+          }
+        }
+      },
+      "AnimationByDirections": {
+        "4": {
+          "Animations": {
+            "OccasionallyWipingForehead": {
+              "AnimationFrames": [
+                {
+                  "FrameGroup": "OccasionallyWipingForehead 1",
+                  "Command": "Frame",
+                  "Parameter": 300
+                },
+                {
+                  "FrameGroup": "OccasionallyWipingForehead 2",
+                  "Command": "Frame",
+                  "Parameter": 3
+                },
+                {
+                  "FrameGroup": "OccasionallyWipingForehead 3",
+                  "Command": "Frame",
+                  "Parameter": 6
+                },
+                {
+                  "FrameGroup": "OccasionallyWipingForehead 4",
+                  "Command": "Frame",
+                  "Parameter": 6
+                },
+                {
+                  "FrameGroup": "OccasionallyWipingForehead 3",
+                  "Command": "Frame",
+                  "Parameter": 6
+                },
+                {
+                  "FrameGroup": "OccasionallyWipingForehead 4",
+                  "Command": "Frame",
+                  "Parameter": 6
+                },
+                {
+                  "FrameGroup": "OccasionallyWipingForehead 3",
+                  "Command": "Frame",
+                  "Parameter": 6
+                },
+                {
+                  "FrameGroup": "OccasionallyWipingForehead 2",
+                  "Command": "Frame",
+                  "Parameter": 3
+                },
+                {
+                  "FrameGroup": "OccasionallyWipingForehead 1",
+                  "Command": "Frame",
+                  "Parameter": 150
+                },
+                {
+                  "FrameGroup": "OccasionallyWipingForehead 2",
+                  "Command": "Frame",
+                  "Parameter": 3
+                },
+                {
+                  "FrameGroup": "OccasionallyWipingForehead 3",
+                  "Command": "Frame",
+                  "Parameter": 7
+                },
+                {
+                  "FrameGroup": "OccasionallyWipingForehead 4",
+                  "Command": "Frame",
+                  "Parameter": 7
+                },
+                {
+                  "FrameGroup": "OccasionallyWipingForehead 3",
+                  "Command": "Frame",
+                  "Parameter": 7
+                },
+                {
+                  "FrameGroup": "OccasionallyWipingForehead 2",
+                  "Command": "Frame",
+                  "Parameter": 5
+                },
+                {
+                  "Command": "GotoFrameOffset",
+                  "Parameter": 0
+                }
+              ]
+            },
+            "StillFrame (Still)": {
+              "AnimationFrames": [
+                {
+                  "FrameGroup": "OccasionallyWipingForehead 1",
+                  "Command": "Frame",
+                  "Parameter": 10
+                },
+                {
+                  "Command": "Stop",
+                  "Parameter": 0
+                }
+              ]
+            },
+            "StillFrame (Wiping Forehead, Repeat)": {
+              "AnimationFrames": [
+                {
+                  "FrameGroup": "OccasionallyWipingForehead 3",
+                  "Command": "Frame",
+                  "Parameter": 4
+                },
+                {
+                  "Command": "GotoFrameOffset",
+                  "Parameter": 0
+                }
+              ]
+            },
+            "StillFrame (Wiping Forehead)": {
+              "AnimationFrames": [
+                {
+                  "FrameGroup": "OccasionallyWipingForehead 3",
+                  "Command": "Frame",
+                  "Parameter": 10
+                },
+                {
+                  "Command": "Stop",
+                  "Parameter": 0
+                }
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,180 @@
+{
+  "Name": "Large Poof of Black Smoke",
+  "Spritesheets": {
+    "40x40": {
+      "VerticalOffset": 20,
+      "Unknown0x08": 20,
+      "CollisionSize": 40,
+      "Scale": 1.0,
+      "FrameGroups": {
+        "Poofing 1": {
+          "Frames": {
+            "First": {
+              "Hash": "d5659cafc5fd5757358cadc6e2c074a7",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 0
+            }
+          }
+        },
+        "Poofing 10": {
+          "Frames": {
+            "First": {
+              "Hash": "bbfbf7fa6f861ec8590ab2168d60889d",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 40
+            }
+          }
+        },
+        "Poofing 2": {
+          "Frames": {
+            "First": {
+              "Hash": "fb65dcc813e6d42eadac20764600ebc1",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 80
+            }
+          }
+        },
+        "Poofing 3": {
+          "Frames": {
+            "First": {
+              "Hash": "55eb9153451dfe505fc2d7e7042a6c6d",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 120
+            }
+          }
+        },
+        "Poofing 4": {
+          "Frames": {
+            "First": {
+              "Hash": "b8a42b6560d1f60144fe2a90f869f712",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 160
+            }
+          }
+        },
+        "Poofing 5": {
+          "Frames": {
+            "First": {
+              "Hash": "6de9e915ddc1186e5e634957b75698b4",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 200
+            }
+          }
+        },
+        "Poofing 6": {
+          "Frames": {
+            "First": {
+              "Hash": "3e7afe8ea5db4d746f56f39a8cff3cfc",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 240
+            }
+          }
+        },
+        "Poofing 7": {
+          "Frames": {
+            "First": {
+              "Hash": "8ecced5de6af938b9e746dc6a8de8b51",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 280
+            }
+          }
+        },
+        "Poofing 8": {
+          "Frames": {
+            "First": {
+              "Hash": "4b4f04a449dfdb93c12b894d288db04d",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 320
+            }
+          }
+        },
+        "Poofing 9": {
+          "Frames": {
+            "First": {
+              "Hash": "e7723229d61f04972da85dd3dece9b80",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 360
+            }
+          }
+        }
+      },
+      "AnimationByDirections": {
+        "1": {
+          "Animations": {
+            "Poofing (Extremely Slow)": {
+              "AnimationFrames": [
+                {
+                  "FrameGroup": "Poofing 1",
+                  "Command": "Frame",
+                  "Parameter": 20
+                },
+                {
+                  "FrameGroup": "Poofing 2",
+                  "Command": "Frame",
+                  "Parameter": 18
+                },
+                {
+                  "FrameGroup": "Poofing 3",
+                  "Command": "Frame",
+                  "Parameter": 16
+                },
+                {
+                  "FrameGroup": "Poofing 4",
+                  "Command": "Frame",
+                  "Parameter": 14
+                },
+                {
+                  "FrameGroup": "Poofing 5",
+                  "Command": "Frame",
+                  "Parameter": 13
+                },
+                {
+                  "FrameGroup": "Poofing 6",
+                  "Command": "Frame",
+                  "Parameter": 12
+                },
+                {
+                  "FrameGroup": "Poofing 7",
+                  "Command": "Frame",
+                  "Parameter": 11
+                },
+                {
+                  "FrameGroup": "Poofing 8",
+                  "Command": "Frame",
+                  "Parameter": 10
+                },
+                {
+                  "FrameGroup": "Poofing 9",
+                  "Command": "Frame",
+                  "Parameter": 10
+                },
+                {
+                  "FrameGroup": "Poofing 10",
+                  "Command": "Frame",
+                  "Parameter": 10
+                },
+                {
+                  "Command": "Stop",
+                  "Parameter": 0
+                }
+              ]
+            },
+            "StillFrame (End of Poof)": {
+              "AnimationFrames": [
+                {
+                  "FrameGroup": "Poofing 10",
+                  "Command": "Frame",
+                  "Parameter": 2
+                },
+                {
+                  "Command": "Stop",
+                  "Parameter": 0
+                }
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

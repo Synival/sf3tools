@@ -15,9 +15,6 @@ namespace SF3.Models.Structs.CHR {
             AnimationFrames = animationFrames;
             FrameTable = frameTable;
 
-            if (animationIndex != id)
-                ;
-
             _firstFrameWithTexture = animationFrames?.FirstOrDefault(x => x.HasTexture);
 
             _framesWithTextures = AnimationFrames

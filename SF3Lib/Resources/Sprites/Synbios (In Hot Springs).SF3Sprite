@@ -1,0 +1,294 @@
+{
+  "Name": "Synbios (In Hot Springs)",
+  "Spritesheets": {
+    "40x40": {
+      "VerticalOffset": 0,
+      "Unknown0x08": 20,
+      "CollisionSize": 40,
+      "Scale": 1.0,
+      "FrameGroups": {
+        "GettingUp 1": {
+          "Frames": {
+            "SSE": {
+              "Hash": "aefafb1168d5ce899cd291ec01bc3d58",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 0
+            },
+            "ESE": {
+              "Hash": "74cd9ebce968b97385a0bab09c128714",
+              "SpriteSheetX": 40,
+              "SpriteSheetY": 0
+            },
+            "ENE": {
+              "Hash": "6e2dbb73c95476c614ad8bb732e81d0a",
+              "SpriteSheetX": 80,
+              "SpriteSheetY": 0
+            },
+            "NNE": {
+              "Hash": "866a4edc6b38908877a72d9118e85b6b",
+              "SpriteSheetX": 120,
+              "SpriteSheetY": 0
+            }
+          }
+        },
+        "GettingUp 2": {
+          "Frames": {
+            "SSE": {
+              "Hash": "67c5f44f80c85218e74288a4685048d7",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 40
+            },
+            "ESE": {
+              "Hash": "2eb003bd8fec3e3f48ace263b8981c57",
+              "SpriteSheetX": 40,
+              "SpriteSheetY": 40
+            },
+            "ENE": {
+              "Hash": "18afaeca6abfbfb8b55192313a0c3563",
+              "SpriteSheetX": 80,
+              "SpriteSheetY": 40
+            },
+            "NNE": {
+              "Hash": "7b8b678ebb7fce6a8bccc4abb8f8b4df",
+              "SpriteSheetX": 120,
+              "SpriteSheetY": 40
+            }
+          }
+        },
+        "OccasionallyDabbingFace 1": {
+          "Frames": {
+            "SSE": {
+              "Hash": "4deb962982f4da0229d9bb23a8f93539",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 80
+            },
+            "ESE": {
+              "Hash": "5113b4c62616bdd675f41095116da9f4",
+              "SpriteSheetX": 40,
+              "SpriteSheetY": 80
+            },
+            "ENE": {
+              "Hash": "e01433435d16d844fe9b659852525d09",
+              "SpriteSheetX": 80,
+              "SpriteSheetY": 80
+            },
+            "NNE": {
+              "Hash": "df80213204419b9ba7793d7de33939a0",
+              "SpriteSheetX": 120,
+              "SpriteSheetY": 80
+            }
+          }
+        },
+        "OccasionallyDabbingFace 2": {
+          "Frames": {
+            "SSE": {
+              "Hash": "2b05fc9eb455e390f8b63edbffd7c740",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 120
+            },
+            "ESE": {
+              "Hash": "558dfea87af98d16bef31c8a83848bd8",
+              "SpriteSheetX": 40,
+              "SpriteSheetY": 120
+            },
+            "ENE": {
+              "Hash": "98468073ea8e5f8d447ba614b88987ae",
+              "SpriteSheetX": 80,
+              "SpriteSheetY": 120
+            },
+            "NNE": {
+              "Hash": "90029b29cc26b034bdb329395b385e0f",
+              "SpriteSheetX": 120,
+              "SpriteSheetY": 120
+            }
+          }
+        },
+        "OccasionallyDabbingFace 3": {
+          "Frames": {
+            "SSE": {
+              "Hash": "5cee02e59e058165b75f8ec33c3725b0",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 160
+            },
+            "ESE": {
+              "Hash": "09ec5e72bc175ecfeb8be3c084af7287",
+              "SpriteSheetX": 40,
+              "SpriteSheetY": 160
+            },
+            "ENE": {
+              "Hash": "ea0323eb9e824099a0b9cce4d11eb39e",
+              "SpriteSheetX": 80,
+              "SpriteSheetY": 160
+            },
+            "NNE": {
+              "Hash": "7d93444d916adcfbd75f4a4a8d37096c",
+              "SpriteSheetX": 120,
+              "SpriteSheetY": 160
+            }
+          }
+        }
+      },
+      "AnimationByDirections": {
+        "4": {
+          "Animations": {
+            "GettingUp (Slowly)": {
+              "AnimationFrames": [
+                {
+                  "FrameGroup": "OccasionallyDabbingFace 1",
+                  "Command": "Frame",
+                  "Parameter": 9
+                },
+                {
+                  "FrameGroup": "GettingUp 1",
+                  "Command": "Frame",
+                  "Parameter": 12
+                },
+                {
+                  "FrameGroup": "GettingUp 2",
+                  "Command": "Frame",
+                  "Parameter": 12
+                },
+                {
+                  "Command": "Stop",
+                  "Parameter": 0
+                }
+              ]
+            },
+            "GoingBackDown (Slowly)": {
+              "AnimationFrames": [
+                {
+                  "FrameGroup": "GettingUp 2",
+                  "Command": "Frame",
+                  "Parameter": 12
+                },
+                {
+                  "FrameGroup": "GettingUp 1",
+                  "Command": "Frame",
+                  "Parameter": 12
+                },
+                {
+                  "FrameGroup": "OccasionallyDabbingFace 1",
+                  "Command": "Frame",
+                  "Parameter": 9
+                },
+                {
+                  "Command": "Stop",
+                  "Parameter": 0
+                }
+              ]
+            },
+            "OccasionallyDabbingFace": {
+              "AnimationFrames": [
+                {
+                  "FrameGroup": "OccasionallyDabbingFace 1",
+                  "Command": "Frame",
+                  "Parameter": 50
+                },
+                {
+                  "FrameGroup": "OccasionallyDabbingFace 2",
+                  "Command": "Frame",
+                  "Parameter": 5
+                },
+                {
+                  "FrameGroup": "OccasionallyDabbingFace 3",
+                  "Command": "Frame",
+                  "Parameter": 5
+                },
+                {
+                  "FrameGroup": "OccasionallyDabbingFace 2",
+                  "Command": "Frame",
+                  "Parameter": 5
+                },
+                {
+                  "FrameGroup": "OccasionallyDabbingFace 3",
+                  "Command": "Frame",
+                  "Parameter": 5
+                },
+                {
+                  "FrameGroup": "OccasionallyDabbingFace 2",
+                  "Command": "Frame",
+                  "Parameter": 5
+                },
+                {
+                  "FrameGroup": "OccasionallyDabbingFace 1",
+                  "Command": "Frame",
+                  "Parameter": 70
+                },
+                {
+                  "FrameGroup": "OccasionallyDabbingFace 2",
+                  "Command": "Frame",
+                  "Parameter": 5
+                },
+                {
+                  "FrameGroup": "OccasionallyDabbingFace 3",
+                  "Command": "Frame",
+                  "Parameter": 5
+                },
+                {
+                  "FrameGroup": "OccasionallyDabbingFace 2",
+                  "Command": "Frame",
+                  "Parameter": 5
+                },
+                {
+                  "FrameGroup": "OccasionallyDabbingFace 3",
+                  "Command": "Frame",
+                  "Parameter": 5
+                },
+                {
+                  "FrameGroup": "OccasionallyDabbingFace 2",
+                  "Command": "Frame",
+                  "Parameter": 5
+                },
+                {
+                  "Command": "GotoFrameOffset",
+                  "Parameter": 0
+                }
+              ]
+            },
+            "StillFrame": {
+              "AnimationFrames": [
+                {
+                  "FrameGroup": "OccasionallyDabbingFace 1",
+                  "Command": "Frame",
+                  "Parameter": 10
+                },
+                {
+                  "Command": "Stop",
+                  "Parameter": 0
+                }
+              ]
+            },
+            "TryingToGetUp": {
+              "AnimationFrames": [
+                {
+                  "FrameGroup": "OccasionallyDabbingFace 1",
+                  "Command": "Frame",
+                  "Parameter": 3
+                },
+                {
+                  "FrameGroup": "GettingUp 1",
+                  "Command": "Frame",
+                  "Parameter": 6
+                },
+                {
+                  "FrameGroup": "GettingUp 2",
+                  "Command": "Frame",
+                  "Parameter": 6
+                },
+                {
+                  "FrameGroup": "GettingUp 1",
+                  "Command": "Frame",
+                  "Parameter": 3
+                },
+                {
+                  "Command": "GotoFrameOffset",
+                  "Parameter": 0
+                }
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

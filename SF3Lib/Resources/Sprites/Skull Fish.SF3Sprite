@@ -1,0 +1,276 @@
+{
+  "Name": "Skull Fish",
+  "Spritesheets": {
+    "56x32": {
+      "VerticalOffset": 0,
+      "Unknown0x08": 20,
+      "CollisionSize": 40,
+      "Scale": 1.0,
+      "FrameGroups": {
+        "Flying 1": {
+          "Frames": {
+            "SSE": {
+              "Hash": "3bf93e9e9032219d727cf1901cc28578",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 0
+            },
+            "ESE": {
+              "Hash": "c8edd88e8611439d8276920b07880ca7",
+              "SpriteSheetX": 56,
+              "SpriteSheetY": 0
+            },
+            "ENE": {
+              "Hash": "a53f0933ca46f87c13e338d5c95857ea",
+              "SpriteSheetX": 112,
+              "SpriteSheetY": 0
+            },
+            "NNE": {
+              "Hash": "7000b4d5a7c5f85ad9205e0df9adab54",
+              "SpriteSheetX": 168,
+              "SpriteSheetY": 0
+            }
+          }
+        },
+        "Flying 2": {
+          "Frames": {
+            "SSE": {
+              "Hash": "cc03cce11123abc265cffec216aa1f0d",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 32
+            },
+            "ESE": {
+              "Hash": "0606a82f7f1d832e1b1bc4bd90da4901",
+              "SpriteSheetX": 56,
+              "SpriteSheetY": 32
+            },
+            "ENE": {
+              "Hash": "19225ca12c5e5fb82a61d8cee9cf8238",
+              "SpriteSheetX": 112,
+              "SpriteSheetY": 32
+            },
+            "NNE": {
+              "Hash": "4ac60773e1ef26894c07481c9965b4c6",
+              "SpriteSheetX": 168,
+              "SpriteSheetY": 32
+            }
+          }
+        },
+        "Flying 3": {
+          "Frames": {
+            "SSE": {
+              "Hash": "e2f026514c84952330b6bf1bf8f9ae93",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 64
+            },
+            "ESE": {
+              "Hash": "f804f17c024dd195684f9ecc06723ca4",
+              "SpriteSheetX": 56,
+              "SpriteSheetY": 64
+            },
+            "ENE": {
+              "Hash": "0cfdd87cc251a1e744c9b91e28f39a6d",
+              "SpriteSheetX": 112,
+              "SpriteSheetY": 64
+            },
+            "NNE": {
+              "Hash": "13548826952f63ee21225051f121e384",
+              "SpriteSheetX": 168,
+              "SpriteSheetY": 64
+            }
+          }
+        },
+        "Flying 4": {
+          "Frames": {
+            "SSE": {
+              "Hash": "3cb5e66dd7064cfe692618f667e94b0e",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 96
+            },
+            "ESE": {
+              "Hash": "6cdf6f912957d77a4f87886c153fbe11",
+              "SpriteSheetX": 56,
+              "SpriteSheetY": 96
+            },
+            "ENE": {
+              "Hash": "fbf367840d7246f3e2cd2fd434288b6e",
+              "SpriteSheetX": 112,
+              "SpriteSheetY": 96
+            },
+            "NNE": {
+              "Hash": "b4024b6271f65ea2382ee5c8d781a5e3",
+              "SpriteSheetX": 168,
+              "SpriteSheetY": 96
+            }
+          }
+        },
+        "Idle 1": {
+          "Frames": {
+            "SSE": {
+              "Hash": "d29f3b60cede80eaaa6e9f25da68b808",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 128
+            },
+            "ESE": {
+              "Hash": "6ce6e426e77228c1e9e09536f6cff1fd",
+              "SpriteSheetX": 56,
+              "SpriteSheetY": 128
+            },
+            "ENE": {
+              "Hash": "716154969adaf4eadd07d9d47b8a3c45",
+              "SpriteSheetX": 112,
+              "SpriteSheetY": 128
+            },
+            "NNE": {
+              "Hash": "fbb31aec0a8afa9b2dbdeffcc0f957ab",
+              "SpriteSheetX": 168,
+              "SpriteSheetY": 128
+            }
+          }
+        },
+        "Idle 2": {
+          "Frames": {
+            "SSE": {
+              "Hash": "1a56585e102973b83abd9eb6f5498699",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 160
+            },
+            "ESE": {
+              "Hash": "ae063ead3923c981a3e99e8b1df3ed12",
+              "SpriteSheetX": 56,
+              "SpriteSheetY": 160
+            },
+            "ENE": {
+              "Hash": "dd77f22628a26a6b5708c49389c528fb",
+              "SpriteSheetX": 112,
+              "SpriteSheetY": 160
+            },
+            "NNE": {
+              "Hash": "50b94e51a868dbafa89d9e06076d84ff",
+              "SpriteSheetX": 168,
+              "SpriteSheetY": 160
+            }
+          }
+        },
+        "Idle 3": {
+          "Frames": {
+            "SSE": {
+              "Hash": "34cf9f806952c84e9c0add49ac2921fb",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 192
+            },
+            "ESE": {
+              "Hash": "66ca80efdd0d5ec6bc67ebc4463c4e7d",
+              "SpriteSheetX": 56,
+              "SpriteSheetY": 192
+            },
+            "ENE": {
+              "Hash": "911149daa048f5c547017c75ce8b66f9",
+              "SpriteSheetX": 112,
+              "SpriteSheetY": 192
+            },
+            "NNE": {
+              "Hash": "13ac37b014f7e68e35065919de62e466",
+              "SpriteSheetX": 168,
+              "SpriteSheetY": 192
+            }
+          }
+        }
+      },
+      "AnimationByDirections": {
+        "4": {
+          "Animations": {
+            "Flying": {
+              "AnimationFrames": [
+                {
+                  "FrameGroup": "Idle 1",
+                  "Command": "Frame",
+                  "Parameter": 4
+                },
+                {
+                  "FrameGroup": "Flying 1",
+                  "Command": "Frame",
+                  "Parameter": 4
+                },
+                {
+                  "FrameGroup": "Flying 2",
+                  "Command": "Frame",
+                  "Parameter": 4
+                },
+                {
+                  "FrameGroup": "Flying 1",
+                  "Command": "Frame",
+                  "Parameter": 4
+                },
+                {
+                  "FrameGroup": "Idle 1",
+                  "Command": "Frame",
+                  "Parameter": 4
+                },
+                {
+                  "FrameGroup": "Flying 3",
+                  "Command": "Frame",
+                  "Parameter": 4
+                },
+                {
+                  "FrameGroup": "Flying 4",
+                  "Command": "Frame",
+                  "Parameter": 4
+                },
+                {
+                  "FrameGroup": "Flying 3",
+                  "Command": "Frame",
+                  "Parameter": 4
+                },
+                {
+                  "Command": "GotoFrameOffset",
+                  "Parameter": 0
+                }
+              ]
+            },
+            "Idle": {
+              "AnimationFrames": [
+                {
+                  "FrameGroup": "Idle 1",
+                  "Command": "Frame",
+                  "Parameter": 6
+                },
+                {
+                  "FrameGroup": "Idle 2",
+                  "Command": "Frame",
+                  "Parameter": 6
+                },
+                {
+                  "FrameGroup": "Idle 3",
+                  "Command": "Frame",
+                  "Parameter": 6
+                },
+                {
+                  "FrameGroup": "Idle 2",
+                  "Command": "Frame",
+                  "Parameter": 6
+                },
+                {
+                  "Command": "GotoFrameOffset",
+                  "Parameter": 0
+                }
+              ]
+            },
+            "StillFrame": {
+              "AnimationFrames": [
+                {
+                  "FrameGroup": "Idle 1",
+                  "Command": "Frame",
+                  "Parameter": 10
+                },
+                {
+                  "Command": "Stop",
+                  "Parameter": 0
+                }
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

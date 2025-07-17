@@ -1,0 +1,41 @@
+{
+  "Name": "Bomb",
+  "Spritesheets": {
+    "16x16": {
+      "VerticalOffset": 0,
+      "Unknown0x08": 8,
+      "CollisionSize": 16,
+      "Scale": 1.0,
+      "FrameGroups": {
+        "Bomb 1": {
+          "Frames": {
+            "First": {
+              "Hash": "48029a08b05f56f66a237b23bfd947da",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 0
+            }
+          }
+        }
+      },
+      "AnimationByDirections": {
+        "1": {
+          "Animations": {
+            "StillFrame (Bomb)": {
+              "AnimationFrames": [
+                {
+                  "FrameGroup": "Bomb 1",
+                  "Command": "Frame",
+                  "Parameter": 1
+                },
+                {
+                  "Command": "Stop",
+                  "Parameter": 0
+                }
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

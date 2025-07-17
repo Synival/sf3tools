@@ -1,0 +1,104 @@
+{
+  "Name": "Sphere of Darkness",
+  "Spritesheets": {
+    "64x64": {
+      "VerticalOffset": 32,
+      "Unknown0x08": 20,
+      "CollisionSize": 40,
+      "Scale": 1.0,
+      "FrameGroups": {
+        "Pulsating 1": {
+          "Frames": {
+            "First": {
+              "Hash": "9a90cd83485ecc3cceed779838a3def5",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 0
+            }
+          }
+        },
+        "Pulsating 2": {
+          "Frames": {
+            "First": {
+              "Hash": "00833c8b54f5aea9f075992cbca12dd7",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 64
+            }
+          }
+        },
+        "Pulsating 3": {
+          "Frames": {
+            "First": {
+              "Hash": "171397912030ceb69041e16717c73d04",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 128
+            }
+          }
+        },
+        "Pulsating 4": {
+          "Frames": {
+            "First": {
+              "Hash": "20ca0d72613d2710a8f951e83bb379eb",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 192
+            }
+          }
+        }
+      },
+      "AnimationByDirections": {
+        "17": {
+          "Animations": {
+            "Pulsating": {
+              "AnimationFrames": [
+                {
+                  "Command": "SetDirectionCount",
+                  "Parameter": 17
+                },
+                {
+                  "FrameGroup": "Pulsating 1",
+                  "Command": "Frame",
+                  "Parameter": 1
+                },
+                {
+                  "FrameGroup": "Pulsating 2",
+                  "Command": "Frame",
+                  "Parameter": 1
+                },
+                {
+                  "FrameGroup": "Pulsating 3",
+                  "Command": "Frame",
+                  "Parameter": 1
+                },
+                {
+                  "FrameGroup": "Pulsating 4",
+                  "Command": "Frame",
+                  "Parameter": 1
+                },
+                {
+                  "Command": "GotoFrameOffset",
+                  "Parameter": 0
+                }
+              ]
+            },
+            "StillFrame": {
+              "AnimationFrames": [
+                {
+                  "Command": "SetDirectionCount",
+                  "Parameter": 17
+                },
+                {
+                  "FrameGroup": "Pulsating 1",
+                  "Command": "Frame",
+                  "Parameter": 10
+                },
+                {
+                  "Command": "Stop",
+                  "Parameter": 0
+                }
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

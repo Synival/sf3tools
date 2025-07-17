@@ -1,0 +1,132 @@
+{
+  "Name": "Medion (U) (Big)",
+  "Spritesheets": {
+    "64x64": {
+      "VerticalOffset": 0,
+      "Unknown0x08": 20,
+      "CollisionSize": 40,
+      "Scale": 0.0,
+      "FrameGroups": {
+        "Idle (Wind Blowing Hair) 1": {
+          "Frames": {
+            "SSE": {
+              "Hash": "c4444ba1faca741fcc830cae1436ca36",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 0
+            },
+            "ESE": {
+              "Hash": "505ad7152065b114074fc50e729f238c",
+              "SpriteSheetX": 64,
+              "SpriteSheetY": 0
+            },
+            "ENE": {
+              "Hash": "5e7f3420ae18d0ccd8d954d408225f42",
+              "SpriteSheetX": 128,
+              "SpriteSheetY": 0
+            },
+            "NNE": {
+              "Hash": "00930f4cab65e9da7ad5e2337ce1a4e1",
+              "SpriteSheetX": 192,
+              "SpriteSheetY": 0
+            }
+          }
+        },
+        "Idle (Wind Blowing Hair) 2": {
+          "Frames": {
+            "SSE": {
+              "Hash": "b203a8843ac56305d52ff6cba676082e",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 64
+            },
+            "ESE": {
+              "Hash": "0a46f346800d9d500401097043d0231d",
+              "SpriteSheetX": 64,
+              "SpriteSheetY": 64
+            },
+            "ENE": {
+              "Hash": "bed59ec3cf11f6e457e188b746dfc5cb",
+              "SpriteSheetX": 128,
+              "SpriteSheetY": 64
+            },
+            "NNE": {
+              "Hash": "5c1e374dfbed8a38289622ac21e750f9",
+              "SpriteSheetX": 192,
+              "SpriteSheetY": 64
+            }
+          }
+        },
+        "Idle (Wind Blowing Hair) 3": {
+          "Frames": {
+            "SSE": {
+              "Hash": "890188f7fb734cc90283cc316b3d2fc6",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 128
+            },
+            "ESE": {
+              "Hash": "63dc969b6a5c14eac1afdab3c9721803",
+              "SpriteSheetX": 64,
+              "SpriteSheetY": 128
+            },
+            "ENE": {
+              "Hash": "790e766eb134f65c08e880806fc2d3d6",
+              "SpriteSheetX": 128,
+              "SpriteSheetY": 128
+            },
+            "NNE": {
+              "Hash": "d8922603c6075d86e0dc758a15e6682b",
+              "SpriteSheetX": 192,
+              "SpriteSheetY": 128
+            }
+          }
+        }
+      },
+      "AnimationByDirections": {
+        "4": {
+          "Animations": {
+            "Idle (Wind Blowing Hair)": {
+              "AnimationFrames": [
+                {
+                  "FrameGroup": "Idle (Wind Blowing Hair) 1",
+                  "Command": "Frame",
+                  "Parameter": 6
+                },
+                {
+                  "FrameGroup": "Idle (Wind Blowing Hair) 2",
+                  "Command": "Frame",
+                  "Parameter": 4
+                },
+                {
+                  "FrameGroup": "Idle (Wind Blowing Hair) 3",
+                  "Command": "Frame",
+                  "Parameter": 5
+                },
+                {
+                  "FrameGroup": "Idle (Wind Blowing Hair) 2",
+                  "Command": "Frame",
+                  "Parameter": 4
+                },
+                {
+                  "Command": "GotoFrameOffset",
+                  "Parameter": 0
+                }
+              ]
+            },
+            "StillFrame": {
+              "AnimationFrames": [
+                {
+                  "FrameGroup": "Idle (Wind Blowing Hair) 1",
+                  "Command": "Frame",
+                  "Parameter": 10
+                },
+                {
+                  "Command": "Stop",
+                  "Parameter": 0
+                }
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

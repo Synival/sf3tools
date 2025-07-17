@@ -1,0 +1,644 @@
+{
+  "Name": "Campbell (P1)",
+  "Spritesheets": {
+    "48x40": {
+      "VerticalOffset": 0,
+      "Unknown0x08": 20,
+      "CollisionSize": 40,
+      "Scale": 1.0,
+      "FrameGroups": {
+        "Attacking 1": {
+          "Frames": {
+            "NNE": {
+              "Hash": "b381d5986658c0914e6a499a039bc3e4",
+              "SpriteSheetX": 192,
+              "SpriteSheetY": 0
+            }
+          }
+        },
+        "Attacking 2": {
+          "Frames": {
+            "NNE": {
+              "Hash": "c8d34933fc1fd678f4d3f75ce84800ce",
+              "SpriteSheetX": 192,
+              "SpriteSheetY": 40
+            }
+          }
+        },
+        "Idle (Kneeling) 1": {
+          "Frames": {
+            "NNE": {
+              "Hash": "a570925180aedfb3aa7109a3bcc1b690",
+              "SpriteSheetX": 192,
+              "SpriteSheetY": 80
+            }
+          }
+        },
+        "Idle (Kneeling) 2": {
+          "Frames": {
+            "NNE": {
+              "Hash": "5a8217466c00e7346fd2cd861ea87c4b",
+              "SpriteSheetX": 192,
+              "SpriteSheetY": 120
+            }
+          }
+        },
+        "Idle 1": {
+          "Frames": {
+            "S": {
+              "Hash": "c648516821763a336a5f9d2720276cc0",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 160
+            },
+            "SSE": {
+              "Hash": "1e0a6a24ee5d01c0b8815f1158f6d33e",
+              "SpriteSheetX": 48,
+              "SpriteSheetY": 160
+            },
+            "ESE": {
+              "Hash": "5eaba4425381a84e0ad695a4ec468a62",
+              "SpriteSheetX": 96,
+              "SpriteSheetY": 160
+            },
+            "ENE": {
+              "Hash": "490faaacd0d65061a7fd4c3e4b8139e8",
+              "SpriteSheetX": 144,
+              "SpriteSheetY": 160
+            },
+            "NNE": {
+              "Hash": "36549ef1097d4f2c7c9a9db93a51e8b1",
+              "SpriteSheetX": 192,
+              "SpriteSheetY": 160
+            },
+            "N": {
+              "Hash": "5e757fc1c822a8aa2065a449cedbfb86",
+              "SpriteSheetX": 240,
+              "SpriteSheetY": 160
+            }
+          }
+        },
+        "Idle 2": {
+          "Frames": {
+            "S": {
+              "Hash": "3f51dad8c53775f8b4a39a8d456af3a9",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 200
+            },
+            "SSE": {
+              "Hash": "b8420c982d57d69008e6dc1ef8e12006",
+              "SpriteSheetX": 48,
+              "SpriteSheetY": 200
+            },
+            "ESE": {
+              "Hash": "cd6db8c88099ba9fb3cdf38e0c2dae9c",
+              "SpriteSheetX": 96,
+              "SpriteSheetY": 200
+            },
+            "ENE": {
+              "Hash": "687b9f648f2d369d7cf5a2bf58120e30",
+              "SpriteSheetX": 144,
+              "SpriteSheetY": 200
+            },
+            "NNE": {
+              "Hash": "a8f84ca9298574445eb62aa9824fee28",
+              "SpriteSheetX": 192,
+              "SpriteSheetY": 200
+            },
+            "N": {
+              "Hash": "294b33d2f0242df6cf19b844e27f33ef",
+              "SpriteSheetX": 240,
+              "SpriteSheetY": 200
+            }
+          }
+        },
+        "Idle 3": {
+          "Frames": {
+            "S": {
+              "Hash": "0102079adfcbc1301363e4f279c20a12",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 240
+            },
+            "SSE": {
+              "Hash": "16e46c77c0029783a91ef38fe28eb4a0",
+              "SpriteSheetX": 48,
+              "SpriteSheetY": 240
+            },
+            "ESE": {
+              "Hash": "0b98d87626479675df2bb9f742cec1ee",
+              "SpriteSheetX": 96,
+              "SpriteSheetY": 240
+            },
+            "ENE": {
+              "Hash": "f82e361172c8c20d6dabf62e8898120c",
+              "SpriteSheetX": 144,
+              "SpriteSheetY": 240
+            },
+            "NNE": {
+              "Hash": "3094c7e4b171ccfd0f364820fc6d503b",
+              "SpriteSheetX": 192,
+              "SpriteSheetY": 240
+            },
+            "N": {
+              "Hash": "a47ace16172e1206e4c239a6690b7e2c",
+              "SpriteSheetX": 240,
+              "SpriteSheetY": 240
+            }
+          }
+        },
+        "OnGround 1": {
+          "Frames": {
+            "SSE": {
+              "Hash": "51107ec50ee8f7f939be3f2adf768b5c",
+              "SpriteSheetX": 48,
+              "SpriteSheetY": 280
+            },
+            "ESE": {
+              "Hash": "b361180a2660d84342522cb038a2b0c9",
+              "SpriteSheetX": 96,
+              "SpriteSheetY": 280
+            },
+            "ENE": {
+              "Hash": "3316eed334808177b81f9beadf3073f4",
+              "SpriteSheetX": 144,
+              "SpriteSheetY": 280
+            },
+            "NNE": {
+              "Hash": "13e66d713f918f9fba832cedb9d58f25",
+              "SpriteSheetX": 192,
+              "SpriteSheetY": 280
+            }
+          }
+        },
+        "PullingOutLance 1": {
+          "Frames": {
+            "NNE": {
+              "Hash": "d7352790c53c9e53df5cf46d7139e053",
+              "SpriteSheetX": 192,
+              "SpriteSheetY": 320
+            }
+          }
+        },
+        "PullingOutLance 2": {
+          "Frames": {
+            "NNE": {
+              "Hash": "d7bd85e04f944a688449f15e288688fd",
+              "SpriteSheetX": 192,
+              "SpriteSheetY": 360
+            }
+          }
+        },
+        "PullingOutLance 3": {
+          "Frames": {
+            "NNE": {
+              "Hash": "fb29720bcc437d39ddb92a3b47c62d0d",
+              "SpriteSheetX": 192,
+              "SpriteSheetY": 400
+            }
+          }
+        },
+        "Walking 1": {
+          "Frames": {
+            "S": {
+              "Hash": "2f37b9644687d6110980180ed3fbeaa5",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 440
+            },
+            "SSE": {
+              "Hash": "56653af215a9a1447d7ee9d1f14ae6a2",
+              "SpriteSheetX": 48,
+              "SpriteSheetY": 440
+            },
+            "ESE": {
+              "Hash": "342c33acc9b4c7a07504383eaf08c55a",
+              "SpriteSheetX": 96,
+              "SpriteSheetY": 440
+            },
+            "ENE": {
+              "Hash": "82a2373e258f3ec39adc219769a131be",
+              "SpriteSheetX": 144,
+              "SpriteSheetY": 440
+            },
+            "NNE": {
+              "Hash": "ea8c00d572b62b3f5891c4de0b8137f3",
+              "SpriteSheetX": 192,
+              "SpriteSheetY": 440
+            },
+            "N": {
+              "Hash": "630218a5be961f8291b6c7c28ecb9aef",
+              "SpriteSheetX": 240,
+              "SpriteSheetY": 440
+            }
+          }
+        },
+        "Walking 2": {
+          "Frames": {
+            "S": {
+              "Hash": "c05d9ef001e6efb935458bffebbf90a0",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 480
+            },
+            "SSE": {
+              "Hash": "83cc519f95cd0e6d56d6ca7132253fb6",
+              "SpriteSheetX": 48,
+              "SpriteSheetY": 480
+            },
+            "ESE": {
+              "Hash": "03ab1bd47754cc93d8aeb04b6f8c5035",
+              "SpriteSheetX": 96,
+              "SpriteSheetY": 480
+            },
+            "ENE": {
+              "Hash": "d697e5b0d4745e53992d8ebc0bf3d5a0",
+              "SpriteSheetX": 144,
+              "SpriteSheetY": 480
+            },
+            "NNE": {
+              "Hash": "737f67c08c82acf0cd906342e10f62e8",
+              "SpriteSheetX": 192,
+              "SpriteSheetY": 480
+            },
+            "N": {
+              "Hash": "c2263b462074cd4ee7d7813490564a1d",
+              "SpriteSheetX": 240,
+              "SpriteSheetY": 480
+            }
+          }
+        },
+        "Walking 3": {
+          "Frames": {
+            "S": {
+              "Hash": "dd069576269b51610b33571e782baa69",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 520
+            },
+            "SSE": {
+              "Hash": "4900a639e77861ecf93bc46c8b9606af",
+              "SpriteSheetX": 48,
+              "SpriteSheetY": 520
+            },
+            "ESE": {
+              "Hash": "cdf13bc11da161db016736d39a92f62a",
+              "SpriteSheetX": 96,
+              "SpriteSheetY": 520
+            },
+            "ENE": {
+              "Hash": "9fe10114c391df0010b3f548dd503671",
+              "SpriteSheetX": 144,
+              "SpriteSheetY": 520
+            },
+            "NNE": {
+              "Hash": "2f2bde807106760fc692fb50f70c0ac9",
+              "SpriteSheetX": 192,
+              "SpriteSheetY": 520
+            },
+            "N": {
+              "Hash": "446673cb4e1c5c32ff858f1bd4914c61",
+              "SpriteSheetX": 240,
+              "SpriteSheetY": 520
+            }
+          }
+        },
+        "Walking 4": {
+          "Frames": {
+            "S": {
+              "Hash": "ac7f83aea84eb147ace30f770d803535",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 560
+            },
+            "SSE": {
+              "Hash": "cb20f5c10f85f2c495483d2a2f108769",
+              "SpriteSheetX": 48,
+              "SpriteSheetY": 560
+            },
+            "ESE": {
+              "Hash": "fe9c72c071a7a41630fb11e32c871092",
+              "SpriteSheetX": 96,
+              "SpriteSheetY": 560
+            },
+            "ENE": {
+              "Hash": "ca1a669575e8c508c7467aee2d5dd964",
+              "SpriteSheetX": 144,
+              "SpriteSheetY": 560
+            },
+            "NNE": {
+              "Hash": "ab74d43680704fa572e09da4bbcd4e85",
+              "SpriteSheetX": 192,
+              "SpriteSheetY": 560
+            },
+            "N": {
+              "Hash": "0c2d86622fc6205d614aa9b135ca011e",
+              "SpriteSheetX": 240,
+              "SpriteSheetY": 560
+            }
+          }
+        }
+      },
+      "AnimationByDirections": {
+        "4": {
+          "Animations": {
+            "Idle": {
+              "AnimationFrames": [
+                {
+                  "FrameGroup": "Idle 1",
+                  "Command": "Frame",
+                  "Parameter": 5
+                },
+                {
+                  "FrameGroup": "Idle 2",
+                  "Command": "Frame",
+                  "Parameter": 5
+                },
+                {
+                  "FrameGroup": "Idle 3",
+                  "Command": "Frame",
+                  "Parameter": 5
+                },
+                {
+                  "FrameGroup": "Idle 2",
+                  "Command": "Frame",
+                  "Parameter": 5
+                },
+                {
+                  "Command": "GotoFrameOffset",
+                  "Parameter": 0
+                }
+              ]
+            },
+            "Idle (Fast, 2 Frame)": {
+              "AnimationFrames": [
+                {
+                  "FrameGroup": "Idle 2",
+                  "Command": "Frame",
+                  "Parameter": 5
+                },
+                {
+                  "FrameGroup": "Idle 3",
+                  "Command": "Frame",
+                  "Parameter": 5
+                },
+                {
+                  "Command": "GotoFrameOffset",
+                  "Parameter": 0
+                }
+              ]
+            },
+            "StillFrame": {
+              "AnimationFrames": [
+                {
+                  "FrameGroup": "Idle 1",
+                  "Command": "Frame",
+                  "Parameter": 10
+                },
+                {
+                  "Command": "Stop",
+                  "Parameter": 0
+                }
+              ]
+            },
+            "StillFrame (OnGround 1)": {
+              "AnimationFrames": [
+                {
+                  "FrameGroup": "OnGround 1",
+                  "Command": "Frame",
+                  "Parameter": 10
+                },
+                {
+                  "Command": "Stop",
+                  "Parameter": 0
+                }
+              ]
+            },
+            "StillFrame (OnGround 2)": {
+              "AnimationFrames": [
+                {
+                  "FrameGroup": "OnGround 1",
+                  "Command": "Frame",
+                  "Parameter": 5
+                },
+                {
+                  "Command": "Stop",
+                  "Parameter": 0
+                }
+              ]
+            }
+          }
+        },
+        "6": {
+          "Animations": {
+            "Idle": {
+              "AnimationFrames": [
+                {
+                  "FrameGroup": "Idle 1",
+                  "Command": "Frame",
+                  "Parameter": 5
+                },
+                {
+                  "FrameGroup": "Idle 2",
+                  "Command": "Frame",
+                  "Parameter": 5
+                },
+                {
+                  "FrameGroup": "Idle 3",
+                  "Command": "Frame",
+                  "Parameter": 5
+                },
+                {
+                  "FrameGroup": "Idle 2",
+                  "Command": "Frame",
+                  "Parameter": 5
+                },
+                {
+                  "Command": "GotoFrameOffset",
+                  "Parameter": 0
+                }
+              ]
+            },
+            "StillFrame": {
+              "AnimationFrames": [
+                {
+                  "FrameGroup": "Idle 1",
+                  "Command": "Frame",
+                  "Parameter": 10
+                },
+                {
+                  "Command": "Stop",
+                  "Parameter": 0
+                }
+              ]
+            },
+            "Walking": {
+              "AnimationFrames": [
+                {
+                  "FrameGroup": "Walking 1",
+                  "Command": "Frame",
+                  "Parameter": 4
+                },
+                {
+                  "FrameGroup": "Idle 1",
+                  "Command": "Frame",
+                  "Parameter": 4
+                },
+                {
+                  "FrameGroup": "Walking 2",
+                  "Command": "Frame",
+                  "Parameter": 4
+                },
+                {
+                  "FrameGroup": "Walking 3",
+                  "Command": "Frame",
+                  "Parameter": 4
+                },
+                {
+                  "FrameGroup": "Idle 1",
+                  "Command": "Frame",
+                  "Parameter": 4
+                },
+                {
+                  "FrameGroup": "Walking 4",
+                  "Command": "Frame",
+                  "Parameter": 4
+                },
+                {
+                  "Command": "GotoFrameOffset",
+                  "Parameter": 0
+                }
+              ]
+            }
+          }
+        },
+        "17": {
+          "Animations": {
+            "Attacking (1 Direction)": {
+              "AnimationFrames": [
+                {
+                  "Command": "SetDirectionCount",
+                  "Parameter": 17
+                },
+                {
+                  "Frames": {
+                    "First": {
+                      "Frame": "Attacking 1",
+                      "Direction": "NNE"
+                    }
+                  },
+                  "Command": "Frame",
+                  "Parameter": 6
+                },
+                {
+                  "Frames": {
+                    "First": {
+                      "Frame": "Attacking 2",
+                      "Direction": "NNE"
+                    }
+                  },
+                  "Command": "Frame",
+                  "Parameter": 10
+                },
+                {
+                  "Command": "GotoAnimation",
+                  "Parameter": 7
+                }
+              ]
+            },
+            "PullingOutLance (1 Direction)": {
+              "AnimationFrames": [
+                {
+                  "Command": "SetDirectionCount",
+                  "Parameter": 17
+                },
+                {
+                  "Frames": {
+                    "First": {
+                      "Frame": "PullingOutLance 1",
+                      "Direction": "NNE"
+                    }
+                  },
+                  "Command": "Frame",
+                  "Parameter": 4
+                },
+                {
+                  "Frames": {
+                    "First": {
+                      "Frame": "PullingOutLance 2",
+                      "Direction": "NNE"
+                    }
+                  },
+                  "Command": "Frame",
+                  "Parameter": 4
+                },
+                {
+                  "Frames": {
+                    "First": {
+                      "Frame": "PullingOutLance 3",
+                      "Direction": "NNE"
+                    }
+                  },
+                  "Command": "Frame",
+                  "Parameter": 4
+                },
+                {
+                  "Frames": {
+                    "First": {
+                      "Frame": "Attacking 1",
+                      "Direction": "NNE"
+                    }
+                  },
+                  "Command": "Frame",
+                  "Parameter": 4
+                },
+                {
+                  "Command": "Stop",
+                  "Parameter": 0
+                }
+              ]
+            },
+            "StillFrame (Kneeling 1)": {
+              "AnimationFrames": [
+                {
+                  "Command": "SetDirectionCount",
+                  "Parameter": 17
+                },
+                {
+                  "Frames": {
+                    "First": {
+                      "Frame": "Idle (Kneeling) 1",
+                      "Direction": "NNE"
+                    }
+                  },
+                  "Command": "Frame",
+                  "Parameter": 10
+                },
+                {
+                  "Command": "Stop",
+                  "Parameter": 0
+                }
+              ]
+            },
+            "StillFrame (Kneeling 2)": {
+              "AnimationFrames": [
+                {
+                  "Command": "SetDirectionCount",
+                  "Parameter": 17
+                },
+                {
+                  "Frames": {
+                    "First": {
+                      "Frame": "Idle (Kneeling) 2",
+                      "Direction": "NNE"
+                    }
+                  },
+                  "Command": "Frame",
+                  "Parameter": 4
+                },
+                {
+                  "Command": "Stop",
+                  "Parameter": 0
+                }
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

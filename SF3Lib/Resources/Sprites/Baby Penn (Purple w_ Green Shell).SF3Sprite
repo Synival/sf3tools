@@ -1,0 +1,132 @@
+{
+  "Name": "Baby Penn (Purple w/ Green Shell)",
+  "Spritesheets": {
+    "40x32": {
+      "VerticalOffset": 0,
+      "Unknown0x08": 20,
+      "CollisionSize": 40,
+      "Scale": 0.0,
+      "FrameGroups": {
+        "Idle 1": {
+          "Frames": {
+            "SSE": {
+              "Hash": "632863fbe5f6d27db157658ef6206b54",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 0
+            },
+            "ESE": {
+              "Hash": "37b61e82753c4c5113d983b2df8cae7f",
+              "SpriteSheetX": 40,
+              "SpriteSheetY": 0
+            },
+            "ENE": {
+              "Hash": "66aac15506bd6120b3c951c2c2414cfb",
+              "SpriteSheetX": 80,
+              "SpriteSheetY": 0
+            },
+            "NNE": {
+              "Hash": "882556928aff1c76a7e78930f8d3667d",
+              "SpriteSheetX": 120,
+              "SpriteSheetY": 0
+            }
+          }
+        },
+        "Idle 2": {
+          "Frames": {
+            "SSE": {
+              "Hash": "1f51b7e3fe7ae74fcb8c310dfda09228",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 32
+            },
+            "ESE": {
+              "Hash": "b08a867c5a9111cea86e4ea70497959d",
+              "SpriteSheetX": 40,
+              "SpriteSheetY": 32
+            },
+            "ENE": {
+              "Hash": "7e55337dca4e5a0c507ada1e2ce5b5bc",
+              "SpriteSheetX": 80,
+              "SpriteSheetY": 32
+            },
+            "NNE": {
+              "Hash": "c37f7680782a7fb5d931643446849e84",
+              "SpriteSheetX": 120,
+              "SpriteSheetY": 32
+            }
+          }
+        },
+        "Idle 3": {
+          "Frames": {
+            "SSE": {
+              "Hash": "a76d902f4a6a09e92cf492b9b79bc909",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 64
+            },
+            "ESE": {
+              "Hash": "c452aba6bf51d1574c4ee815f144440a",
+              "SpriteSheetX": 40,
+              "SpriteSheetY": 64
+            },
+            "ENE": {
+              "Hash": "f32f7d3ccaf134e01ee881dba271d631",
+              "SpriteSheetX": 80,
+              "SpriteSheetY": 64
+            },
+            "NNE": {
+              "Hash": "59e82be1601d55ec9522ada931e1a696",
+              "SpriteSheetX": 120,
+              "SpriteSheetY": 64
+            }
+          }
+        }
+      },
+      "AnimationByDirections": {
+        "4": {
+          "Animations": {
+            "Idle": {
+              "AnimationFrames": [
+                {
+                  "FrameGroup": "Idle 1",
+                  "Command": "Frame",
+                  "Parameter": 5
+                },
+                {
+                  "FrameGroup": "Idle 2",
+                  "Command": "Frame",
+                  "Parameter": 2
+                },
+                {
+                  "FrameGroup": "Idle 3",
+                  "Command": "Frame",
+                  "Parameter": 3
+                },
+                {
+                  "FrameGroup": "Idle 2",
+                  "Command": "Frame",
+                  "Parameter": 4
+                },
+                {
+                  "Command": "GotoFrameOffset",
+                  "Parameter": 0
+                }
+              ]
+            },
+            "StillFrame": {
+              "AnimationFrames": [
+                {
+                  "FrameGroup": "Idle 1",
+                  "Command": "Frame",
+                  "Parameter": 10
+                },
+                {
+                  "Command": "Stop",
+                  "Parameter": 0
+                }
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

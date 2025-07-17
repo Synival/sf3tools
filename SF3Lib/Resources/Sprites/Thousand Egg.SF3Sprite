@@ -1,0 +1,54 @@
+{
+  "Name": "Thousand Egg",
+  "Spritesheets": {
+    "40x32": {
+      "VerticalOffset": 0,
+      "Unknown0x08": 20,
+      "CollisionSize": 40,
+      "Scale": 0.0,
+      "FrameGroups": {
+        "Egg 1": {
+          "Frames": {
+            "First": {
+              "Hash": "d71542221a4e0fa478309cbe78c8430c",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 0
+            }
+          }
+        }
+      },
+      "AnimationByDirections": {
+        "1": {
+          "Animations": {
+            "StillFrame (Egg, Repeat)": {
+              "AnimationFrames": [
+                {
+                  "FrameGroup": "Egg 1",
+                  "Command": "Frame",
+                  "Parameter": 10
+                },
+                {
+                  "Command": "GotoFrameOffset",
+                  "Parameter": 0
+                }
+              ]
+            },
+            "StillFrame (Egg)": {
+              "AnimationFrames": [
+                {
+                  "FrameGroup": "Egg 1",
+                  "Command": "Frame",
+                  "Parameter": 10
+                },
+                {
+                  "Command": "Stop",
+                  "Parameter": 0
+                }
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

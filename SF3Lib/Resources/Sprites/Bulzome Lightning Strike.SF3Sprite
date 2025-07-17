@@ -1,0 +1,41 @@
+{
+  "Name": "Bulzome Lightning Strike",
+  "Spritesheets": {
+    "8x40": {
+      "VerticalOffset": 0,
+      "Unknown0x08": 8,
+      "CollisionSize": 16,
+      "Scale": 1.0,
+      "FrameGroups": {
+        "Lightning 1": {
+          "Frames": {
+            "First": {
+              "Hash": "4dc924b44afe3d81dc4d3610d296aa52",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 0
+            }
+          }
+        }
+      },
+      "AnimationByDirections": {
+        "1": {
+          "Animations": {
+            "StillFrame (Lightning)": {
+              "AnimationFrames": [
+                {
+                  "FrameGroup": "Lightning 1",
+                  "Command": "Frame",
+                  "Parameter": 10
+                },
+                {
+                  "Command": "Stop",
+                  "Parameter": 0
+                }
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

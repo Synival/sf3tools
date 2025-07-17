@@ -9,52 +9,6 @@
     <FileVersion>0.1.1</FileVersion>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Remove="Models\Files\IconPointer\**" />
-    <EmbeddedResource Remove="Models\Files\IconPointer\**" />
-    <None Remove="Models\Files\IconPointer\**" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Remove="Resources\BoundaryList.xml" />
-    <None Remove="Resources\Elements.xml" />
-    <None Remove="Resources\FriendshipBonusTypeList.xml" />
-    <None Remove="Resources\GameFlags.xml" />
-    <None Remove="Resources\PD\EffectFileIndexes.xml" />
-    <None Remove="Resources\PD\Music.xml" />
-    <None Remove="Resources\PD\ShopDeals.xml" />
-    <None Remove="Resources\PD\Shops.xml" />
-    <None Remove="Resources\PD\SpecialAnimations.xml" />
-    <None Remove="Resources\PD\SpellAnimations.xml" />
-    <None Remove="Resources\PD\Sprites.xml" />
-    <None Remove="Resources\S1\BattleScenesByBattle.xml" />
-    <None Remove="Resources\S1\BattleScenesByTerrain.xml" />
-    <None Remove="Resources\S1\EffectFileIndexes.xml" />
-    <None Remove="Resources\S1\EnemyModels.xml" />
-    <None Remove="Resources\S1\Music.xml" />
-    <None Remove="Resources\S1\OtherBattleScenes.xml" />
-    <None Remove="Resources\S1\ShopDeals.xml" />
-    <None Remove="Resources\S1\Shops.xml" />
-    <None Remove="Resources\S1\SpecialAnimations.xml" />
-    <None Remove="Resources\S1\SpellAnimations.xml" />
-    <None Remove="Resources\S1\Sprites.xml" />
-    <None Remove="Resources\S2\EffectFileIndexes.xml" />
-    <None Remove="Resources\S2\Music.xml" />
-    <None Remove="Resources\S2\ShopDeals.xml" />
-    <None Remove="Resources\S2\Shops.xml" />
-    <None Remove="Resources\S2\SpecialAnimations.xml" />
-    <None Remove="Resources\S2\SpellAnimations.xml" />
-    <None Remove="Resources\S2\Sprites.xml" />
-    <None Remove="Resources\S3\EffectFileIndexes.xml" />
-    <None Remove="Resources\S3\Music.xml" />
-    <None Remove="Resources\S3\ShopDeals.xml" />
-    <None Remove="Resources\S3\Shops.xml" />
-    <None Remove="Resources\S3\SpecialAnimations.xml" />
-    <None Remove="Resources\S3\SpellAnimations.xml" />
-    <None Remove="Resources\S3\Sprites.xml" />
-    <None Remove="Resources\SpellTargets.xml" />
-    <None Remove="Resources\SpriteAnimationsByHash.xml" />
-    <None Remove="Resources\SpriteFramesByHash.xml" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Resources\BoundaryList.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -355,34 +309,1952 @@
     <Content Include="Resources\X013StatList.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\DroprateList.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\PD\FileIndexes.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\S1\FileIndexes.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\S2\FileIndexes.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\S3\FileIndexes.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\SpecialTypes.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\SpecialStatusEffects.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Abdark.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Accessory Dealer.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Algernon (Tied_Up).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Algernon.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Arch Demon.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Arch Dragon.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Ark Hill Priest.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Arrawnt.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Arthur (P1).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Arthur (P2).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Arthur w_o Armor.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Aspinia Knight.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Aspinia Mage.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Aspinia Soldier (Axe).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Aspinia Soldier (Crutches).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Aspinia Soldier (Spear).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Aspinia Soldier (Sword).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Aspinia Soldier (Weaponless).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Assassin.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Baby Dragon.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Baby Penn (Blue Shorts, Yellow Shell up Top).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Baby Penn (Blue, Green Shell on Top and Bottom).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Baby Penn (Cyan, Orange Shell, Glasses).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Baby Penn (Full Pink Shell w_ Purple Braids).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Baby Penn (Light Pink w_ Yellow Hair and Light Pink Braids).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Baby Penn (Purple w_ Green Shell).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Baby Penn (Sea Green w_ Blue Suit, Bow Tie, and Hat).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Bald, Shirtless Burly Man (Shovel).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Bald, Shirtless Burly Man.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Balding Old Man w_ Red Cloak and Cane.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Bartender.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Basanda (Staff).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Basanda.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Bat.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Bear w_ Fish.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Benetram.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Bernard (P1).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Bernard (P2).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Bernard (U) (Tied_Up).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Bernard (U) (Weaponless).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Bernard (U).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Birdboy.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Birdgirl.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Birdman.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Birdwoman w_ Green Dress (Fynnding's Wife).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Black Cat.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Black Dragon.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Black Knight.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Blacksmith.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Blood Born.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Bloody Knight.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Blue Dragon (SC3).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Blue Dragon.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Blue.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Bomb.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Bow Knight (Bow).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Bow Knight (Crossbow).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Bow Knight (Waltz Placeholder).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Boy Masked Monk w_ Blue Shirt and Yellow+Blue Spotted Hood.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Boy w_ Blue Shirt and Blue Shoes.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Boy w_ Blue Shirt and Green Hair.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Boy w_ Green Shirt.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Boy w_ Green+Blue Shirt.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Boy w_ Grey Shirt _ Toby.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Braff (Helmet).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Braff (SC3).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Braff.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Bresby (Big).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Bresby.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Brigit (P1).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Brigit (P2).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Brown Bird.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Brute.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Brutus.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Bugbear.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Bulzome (First Form).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Bulzome (Second Form).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Bulzome Golem.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Bulzome Knight.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Bulzome Lightning Strike.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Burly Shirtless Male Masked Monk.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Burly Worker (Shovel).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Burly Worker.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Butler w_ Grey Hair.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Butler.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Campbell (P1) (Weaponless).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Campbell (P1).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Campbell (P2) (Weaponless).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Campbell (P2).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Campbell (U) (Weaponless) (Old).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Campbell (U) (Weaponless).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Campbell (U).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Cannon Ball Splash.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Cannon Ball.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Captain Domino.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Cat w_ White and Brown Fur.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Cerberus.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Chef.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Chicken.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Chimera.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Church Priest (Female).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Church Priest (Masked Monk).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Church Priest.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Clay Doll.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Clay Golem.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Colossus.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Conrad.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Cow.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Crewart.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Cybel (P1).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Cybel (P2).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Cybel (U).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Cyclops (P1).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Cyclops (P2).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Cyos.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Dakka.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Dantares (P1).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Dantares (P2).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Dantares (U).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Dark Dragon (Head High).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Dark Dragon (Head Low).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Dark Gunner.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Dark Mage.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Dark Priest (Green).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Dark Priest (Purple).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Dark Priest (Red).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Dark Staff.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Darksol.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\David (P1) (With Weight).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\David (P1).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\David (P2) (Speedo).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\David (P2).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\David (U) (Weaponless).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\David (U).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Defenda.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Demon Knight.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Dessheren.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Destonia Soldier (Axe).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Destonia Soldier (Crutch).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Destonia Soldier (Spear).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Destonia Soldier (Weaponless).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Dog w_ White Fur and Black Ears.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Domaric (Cane).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Domaric (Old) (Cane).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Domaric (Sword).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Donhort (P1) (Weaponless).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Donhort (P1).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Donhort (P2).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Donhort Carrying Isabella.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Dove.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Dragonewt.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Durahan.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Dwarf Man w_ White Beard _ Duncan.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Dwarf.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Earth Dragon.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Edmund (P1) (Weaponless).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Edmund (P1).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Edmund (P2) (Weaponless).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Edmund (P2).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Eldar (P1, Pink).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Eldar (P1, Purple_Wrong).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Eldar (P2).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Eldar (U).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Elf Boy w_ Green Hair.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Elf Girl w_ Green Hood.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Elf Man w_ Balding Turquoise Hair (Helmet).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Elf Man w_ Balding Turquoise Hair.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Elf Man w_ Pink Shirt and Balding Brown Hair.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Elf Woman in Bikini Who Doesn't Like To Be Pushed.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Elf Woman w_ Brown Dress and Hair.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Elf Woman w_ Brown Hood and Orange Hair.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Elf Woman w_ White Apron.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Explosion.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Explosion2.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Fafhard (Helmet).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Fafhard.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Female Masked Monk w_ Blue Robe, Apron, and Striped Hood.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Female Masked Monk w_ Grey+Green Dress.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Female Masked Monk w_ Purple Dress and Checkered Hood.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Fey (Big).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Fey (Quonus Priest).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Fey (Small).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Fey Wings (Big).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Fey Wings (Small).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Fiale.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Fiderit (Lance).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Fiderit.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Firey Poof.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Flashing Yellow_Red Light.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Flower Bouquet.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Flower Girl (With Flowers).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Flower Girl.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Foothill Village Chief_Sage.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Frank (P1).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Frank (P2).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Franz (Helmet).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Franz.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Freeze Ball Pedestal (Orbless).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Freeze Ball Pedestal.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Fynnding (P1).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Fynnding (P2).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Galm (Frozen).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Galm.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Gargoyle.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Garosh (P1) (Weaponless).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Garosh (P1).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Garosh (P2).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Garosh (U).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Garvin.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Garzel (Helmet).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Garzel.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Ghoul.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Giant Ant.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Giant Armor.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Giga Breaker.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Girl Masked Monk w_ Red Dress and Red+Pink Spotted Hood.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Girl w_ Blue+Pink Dress and Short Hair.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Girl w_ Green+Yellow Dress.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Girl w_ Pink Dress.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Girl w_ Red Dress.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Goblin.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Golem (Big).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Golem (Small).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Goriate.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Grace (P1).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Grace (P2).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Grace (U).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Gracia (Big).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Gracia (P1) (Weaponless).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Gracia (P1).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Gracia (P2) (Weaponless).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Gracia (P2).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Grantack (Old).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Grantack.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Green Dragon.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Grey Birdman.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Griffon.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Guide Statue Beyond The Wall.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Hagane (P1).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Hagane (P2).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Harold (P1) (No Tank).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Harold (P1) (Tank).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Harold (P2) (No Tank).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Harold (P2) (Tank).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Harold's Tank (P1).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Harpy.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Hayward (P1).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Hayward (P2).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Hayward (U).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Hazuki (P1).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Hazuki (P2).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Hazuki (U).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Hazuki's Father.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Hedva (P1).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Hedva (P2) (Without Weapon).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Hedva (P2).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Hedva (U).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Hell Hound.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Hell Sniper.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Hell Succubus.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Hera (P1).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Hera (P2).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Hermit Crab.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\High Priest.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\High Shinobi.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\High Wizard.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Hill Giant.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Honesty (P1) Carrying Synbios.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Honesty (P1).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Honesty (P2) Carrying Synbios.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Honesty (P2).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Horst (P1).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Horst (P2).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Hunter Elf.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Hydra.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Ice Golem.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Ice Pillar.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Imperial Knight.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Imperial Mage.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Iom Body.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Iom Serpent.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Irene (P1).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Irene (P2).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Irene (U).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Iria's Boy.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Iria's Girl.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Iria.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Isabella (P1).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Isabella (P2).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Ishahakat.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Item Dealer.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Jade (P1) (No Tank).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Jade (P1) (Tank).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Jade (P2) (No Tank).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Jade (P2) (Tank).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Jade's Tank (P1).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Jane (Weaponless).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Jane.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Jin Ninja (Green).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Jubei (P1).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Jubei (P2).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Julian (P1) (Big).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Julian (P1) (Weaponless).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Julian (P1).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Julian (P2) (Weaponless).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Julian (P2).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Julian (U) (Beer).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Julian (U) (Big).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Julian (U) (Shield) (Weaponless).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Julian (U) (Shield).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Julian (U) (Weaponless).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Julian (U).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Justin (P1).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Justin (P2).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Kahn (P1).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Kahn (P2).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Kahn (U).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Kaiser Guard (Cape).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Kaiser Guard.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Kate (P1).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Kate (P2).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Keeper.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Key.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Killer Fish.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Kraken Arm.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Kraken Leg.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Kudan.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Kyon_Shi.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Large Male Masked Monk w_ Brown Shirt and Blue Hood.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Large Man w_ Turquoise Shirt.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Large Orange Explosion.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Large Poof of Black Smoke.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Leon (P1).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Leon (P2).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Lesser Demon.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Lich.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Light Blue Torch Flame.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Light From Staff of Besem.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Lightning Bolt.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Lizardman.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Mad Garvin.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Mageron.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Maid.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Male Masked Monk w_ Pink+Green Shirt and Light Blue Hood.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Man Bathing in Hot Springs.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Man in Fancy Blue Uniform.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Man w_ Blue Robes, Orange Cape, and Black+Grey Hair.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Man w_ Blue+Yellow Shirt and Black+Grey Hair.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Man w_ Cyan Shirt and Brown Ponytail.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Man w_ Grey Shirt, Brown Pants, and Blonde Hair.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Man w_ Orange+Green Shirt.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Man w_ Purple Shirt and Short Black Curly Hair.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Man w_ Red Bandana and No Shirt Hammering Wall.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Man w_ Red Shirt.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Man w_ White Pants and Spoon.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Man w_ White Shirt and Dark Skin.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Margaret.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Marky (P1).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Marky (P2).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Masked Mage (Green).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Masked Mage (Grey).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Masked Mage (Purple) (Maskless) (With Flowers).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Masked Mage (Purple) (Maskless).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Masked Mage (Purple).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Masked Mage (Yellow).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Masked Monk (Blue) (Sceptre).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Masked Monk (Blue) (Weaponless).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Masked Monk (Blue).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Masked Monk (Brown).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Masked Monk Blacksmith.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Masked Monk Item Dealer.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Masked Monk Riding Pegasus.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Masked Monk Weapon Dealer.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Masked Pegasus Carrying Fiale.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Masked Pegasus Carrying Gracia.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Masked Pegasus.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Masked Priest (Red) w_ Ankh.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Masked Priest (White) w_ Ankh.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Masked Priest Carrying Domaric.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Masqurin (P1).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Masqurin (P2).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Masqurin (U) (With Flowers).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Masqurin (U).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Master Mage.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Maya Boy in Blue+Yellow.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Maya Girl in Green+Pink w_ Orange Pigtails.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Maya Man in Blue+Gold.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Maya Man in Turquoise+Gold.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Maya Man in White+Blue (Beer).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Maya Man in White+Blue.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Maya Man in Yellow+Blue.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Maya Old Man in Dark Purple Robe and Red+White Cloak.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Maya Old Woman in Dark Purple Dress and Green+Purple Cloak.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Maya Woman in Dark Blue Dress and Blue+White Cloak.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Maya Woman in Green Dress and Pink+White Cloak.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Maya Woman in Grey Dress and Green+Gold Cloak.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Medion (P1) (Weaponless).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Medion (P1).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Medion (P2) (Weaponless).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Medion (P2).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Medion (U) (Big).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Medion (U) (Weaponless).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Medion (U).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Medium Poof of Black Smoke.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Mega Loader.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Melinda.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Mercenary.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Messenger Soldier (With Flowers).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Messenger Soldier.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Metal Gunner.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Minotaur.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Monk w_ Orange Robe.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Murasame (P1) (Weaponless).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Murasame (P1).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Murasame (P2).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Necromancer.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Nobleman w_ Purple Hair.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Nobleman w_ Red Coat and Brown Hair.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Noblewoman w_ Green Dress and Blonde Hair.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\None.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Noon (P1).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Noon (P2).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Obright (P1).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Obright (P2).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Obright (U).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Ogra (P1).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Old Man Bathing in Hot Springs.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Old Man Masked Monk w_ Green Robe, Cane, and Grey Hood.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Old Man w_ Green Robe.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Old Man.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Old Woman Bathing in Hot Springs.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Old Woman w_ Green+Yellow Dress and Dark Skin.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Old Woman w_ Grey+Turquoise+Gold Dress and Cane.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Old Woman w_ Purple Robe.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Old Woman.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Oneanera.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Orange Dragon.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Palsis.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Pappets (P1).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Pappets (P2).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Pegasus Knight.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Pendolf (P1) (Life Ring).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Pendolf (P1).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Pendolf (P2).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Penko (P1) (No Shell).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Penko (P1).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Penko (P2).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Penko (U) (NoShell).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Penko (U).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Penko Egg.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Penn (P1) (No Shell).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Penn (P1).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Penn (P2).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Penn (U) (No Shell).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Penn (U).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Penn Egg.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Pig.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Popping Bubble.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Priest.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Primula (P1).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Primula (P2).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Produn (P1) (Weaponless).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Produn (P1).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Produn (P2).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Queen Worm.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Rabbit.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Rainblood Bishop (Cape).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Rainblood Bishop (Capeless).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Rainblood King (Cape).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Rainblood King (Capeless).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Rainblood Knight (Cape).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Rainblood Knight (Capeless).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Rainblood Pawn (Cape).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Rainblood Pawn (Capeless).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Rainblood Queen (Cape).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Rainblood Queen (Capeless).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Rainblood Rook (Cape).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Rainblood Rook (Capeless).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Ratchet in Suit (P1).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Ratchet in Suit (P2).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Ratchet w_o Suit.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Ratchet's Suit.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Red Dragon.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Resting Burly Worker.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Resting Old Woman.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Rin Ninja (Blue).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Robby (P1).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Robby (P2).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Rock (P1).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Rock (P2).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Rock (U).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Rock Thrown By Kid.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Rogan (Alt).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Rogan (P1).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Rollie (P1).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Rollie (P2).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Royal Guard (Mace).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Royal Guard (Spear).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\STHA Treasure Chest.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Sailor (Bag).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Sailor.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Saint.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Salamander.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Sandworm.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Saraband Guard (Arrows in Back).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Saraband Guard (In Chair).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Saraband Guard.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Saraband Knight.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Scaven.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Scholar w_ White Wig.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Scholar.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Scissor Crab.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Scruffy Man w_ Short Black Hair and Beard.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Sea Gull.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Seven Dwarves (1_7).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Seven Dwarves (2_7).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Seven Dwarves (3_7).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Seven Dwarves (4_7).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Seven Dwarves (5_7).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Seven Dwarves (6_7).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Seven Dwarves (7_7).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Sheep.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Shiraf.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Silver Knight.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Skeleton.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Skull Fish.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Skull Mage.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Skull Warrior.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Slash Bat.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Small Icons (Scn1 Alt).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Small Icons (Scn1).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Small Icons (Scn1+).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Small Icons (Scn2+).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Small Icons (Scn3+).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Small Poof of Brown Smoke.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Small Poof of Grey Smoke.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Small Torch Flame.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Sniper Elf.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Sniper.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Sorcerer.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Sphere of Darkness.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Sphere of Light Around Jane.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Spiriel (P1).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Spiriel (P2).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Spiriel (Sc1+2).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Squirrel.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Staff of Besem (Yellow).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Staff of Besem.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Steel.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Stella.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Sting Worm.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Strange Yellow Light.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Succubus.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Synbios (Frozen).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Synbios (In Hot Springs).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Synbios (P1) (Weaponless).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Synbios (P1).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Synbios (P2) (Weaponless).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Synbios (P2).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Synbios (U) (Weaponless).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Synbios (U).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Syntesis (P1).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Syntesis (P2).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Syntesis (U) (Old).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Syntesis (U).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Taros.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Thief (Weaponless).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Thief.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Thousand (P1).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Thousand (P2).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Thousand Egg.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Tied Up Domaric Mask.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Tied Up Domaric.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Train Conductor.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Train Official w_ White Uniform.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Transparency.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Tristus.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Turk (P1).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Turk (P2).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Turk on Ogra (P1).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Turk on Ogra (P2).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Two Kids Holding Hands.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Tybalt (Weaponless).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Tybalt.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Unoma (P1) (Ramen).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Unoma (P1) (Ramen, Cape).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Unoma (P1).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Unoma (P2) (Ramen).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Unoma (P2).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Uryudo (Old).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Uryudo (P1).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Uryudo (P2).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Uryudo (U).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Vampire Bat.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Varlant (Weaponless).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Villager Child.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Villager Man.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Villager Old Man.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Villager Woman.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Waitress w_ Black Hair.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Waitress.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Waltz (P1).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Waltz (P2).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Waltz (U) (Weaponless).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Waltz (U).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Warrior (Rock Placeholder).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Weapon Dealer.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\White Lord.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Wilmer (Helmet).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Wilmer.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Wing Knight.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Wolf Baron.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Woman Bathing in Hot Springs.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Woman Carrying Rice.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Woman in Bikini w_ Red Parted Hair.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Woman w_ Baby and Red Dress.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Woman w_ Blue Dress and Apron.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Woman w_ Blue+Yellow Dress and Black Hair.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Woman w_ Brown Dress and White Apron Sweeping w_ Broom.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Woman w_ Brown Ponytail.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Woman w_ Brown Skirt, Blue Dress, and Blonde Ponytail.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Woman w_ Green+Blue Dress and Blonde Hair.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Woman w_ Green+Brown Dress and White Apron.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Woman w_ Grey+Purple Dress and Bun.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Woman w_ Pink Dress.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Woman w_ Turquoise Dress and Hat.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Woman w_ Turquoise+Red Dress and Brown Hair.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Woman w_ Yellow+Green Dress and Pinkish Ponytail.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Worm.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Wyvern.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Yasha (Tied_Up).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Yasha (Weaponless).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Yasha.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Yeti.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Zai Ninja (Purple).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Zeon.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Zero (P1).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Zero (P2).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Zero (U).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Zombie.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CommonLib\CommonLib.csproj" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Update="Resources\DroprateList.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="Resources\PD\FileIndexes.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="Resources\S1\FileIndexes.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="Resources\S2\FileIndexes.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="Resources\S3\FileIndexes.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="Resources\SpecialTypes.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="Resources\SpecialStatusEffects.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
   </ItemGroup>
 </Project>

@@ -1,0 +1,61 @@
+{
+  "Name": "None",
+  "Spritesheets": {
+    "0x0": {
+      "VerticalOffset": 0,
+      "Unknown0x08": 0,
+      "CollisionSize": 0,
+      "Scale": 0.0,
+      "FrameGroups": {},
+      "AnimationByDirections": {
+        "1": {
+          "Animations": {
+            "Nothing (F2,00)": {
+              "AnimationFrames": [
+                {
+                  "Command": "Stop",
+                  "Parameter": 0
+                }
+              ]
+            },
+            "Nothing (FE,00)": {
+              "AnimationFrames": [
+                {
+                  "Command": "GotoFrameOffset",
+                  "Parameter": 0
+                }
+              ]
+            },
+            "Nothing (FF,00)": {
+              "AnimationFrames": [
+                {
+                  "Command": "GotoAnimation",
+                  "Parameter": 0
+                }
+              ]
+            },
+            "Nothing (FF,01)": {
+              "AnimationFrames": [
+                {
+                  "Command": "GotoAnimation",
+                  "Parameter": 1
+                }
+              ]
+            },
+            "Nothing (FF,05)": {
+              "AnimationFrames": [
+                {
+                  "Command": "GotoAnimation",
+                  "Parameter": 5
+                }
+              ]
+            },
+            "Nothing (Broken, No Frames)": {
+              "AnimationFrames": []
+            }
+          }
+        }
+      }
+    }
+  }
+}

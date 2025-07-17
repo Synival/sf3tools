@@ -1,0 +1,263 @@
+{
+  "Name": "Maya Man in White+Blue (Beer)",
+  "Spritesheets": {
+    "40x40": {
+      "VerticalOffset": 0,
+      "Unknown0x08": 20,
+      "CollisionSize": 40,
+      "Scale": 1.0,
+      "FrameGroups": {
+        "Drinking 1": {
+          "Frames": {
+            "SSE": {
+              "Hash": "ee3e89a4c12c56b93b28016259629498",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 0
+            },
+            "ESE": {
+              "Hash": "ecfd0b9b5d997e468ce8cbbff7e41f2e",
+              "SpriteSheetX": 40,
+              "SpriteSheetY": 0
+            },
+            "ENE": {
+              "Hash": "ba3067a190100ffd508ddd787455da4b",
+              "SpriteSheetX": 80,
+              "SpriteSheetY": 0
+            },
+            "NNE": {
+              "Hash": "7be19c4c7c5901959a51b3c9440a3df9",
+              "SpriteSheetX": 120,
+              "SpriteSheetY": 0
+            }
+          }
+        },
+        "Drinking 2": {
+          "Frames": {
+            "SSE": {
+              "Hash": "48b75d7ed209e369d8d561f8b53d5fcc",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 40
+            },
+            "ESE": {
+              "Hash": "91a8cedc6493204fd04e1b61a04d1ca3",
+              "SpriteSheetX": 40,
+              "SpriteSheetY": 40
+            },
+            "ENE": {
+              "Hash": "e388312e4da2b3199d5eee1205e2949a",
+              "SpriteSheetX": 80,
+              "SpriteSheetY": 40
+            },
+            "NNE": {
+              "Hash": "1d1309a876fbc241bdfb94a862d836f1",
+              "SpriteSheetX": 120,
+              "SpriteSheetY": 40
+            }
+          }
+        },
+        "Drinking 3": {
+          "Frames": {
+            "SSE": {
+              "Hash": "e504adbdfba2b46d5d095efab1352869",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 80
+            },
+            "ESE": {
+              "Hash": "37ba13ab217480b88a2060b6a3090439",
+              "SpriteSheetX": 40,
+              "SpriteSheetY": 80
+            },
+            "ENE": {
+              "Hash": "24a0372f14a7aaffe64c2c8630cc782c",
+              "SpriteSheetX": 80,
+              "SpriteSheetY": 80
+            },
+            "NNE": {
+              "Hash": "dffc793d0e2654bcbe2f507631421386",
+              "SpriteSheetX": 120,
+              "SpriteSheetY": 80
+            }
+          }
+        },
+        "Drinking 4": {
+          "Frames": {
+            "SSE": {
+              "Hash": "f35ad4c16df9c0edc703b822cb9088d1",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 120
+            },
+            "ESE": {
+              "Hash": "0e1bcfc0adbb00067df3b5b50acf7017",
+              "SpriteSheetX": 40,
+              "SpriteSheetY": 120
+            },
+            "ENE": {
+              "Hash": "7df4b1523cca6d8dbdf37169d5ea5c0b",
+              "SpriteSheetX": 80,
+              "SpriteSheetY": 120
+            },
+            "NNE": {
+              "Hash": "0bee26a8e7732c3a318c1f1458469a08",
+              "SpriteSheetX": 120,
+              "SpriteSheetY": 120
+            }
+          }
+        },
+        "Drinking 5": {
+          "Frames": {
+            "SSE": {
+              "Hash": "43d2eaf1602b02c098bf0430aebe0558",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 160
+            },
+            "ESE": {
+              "Hash": "186d3548965fee13c47c7ace80ffc915",
+              "SpriteSheetX": 40,
+              "SpriteSheetY": 160
+            },
+            "ENE": {
+              "Hash": "7d545d22a7ae24714556ad57471617aa",
+              "SpriteSheetX": 80,
+              "SpriteSheetY": 160
+            },
+            "NNE": {
+              "Hash": "fab8cdb51f18a1be9ea463dc4f7a03fe",
+              "SpriteSheetX": 120,
+              "SpriteSheetY": 160
+            }
+          }
+        },
+        "Drinking 6": {
+          "Frames": {
+            "SSE": {
+              "Hash": "e3bec2e82b6f9206cc5d91e897a59adb",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 200
+            },
+            "ESE": {
+              "Hash": "7229f390d09f8c325a5dbf1630e76a7a",
+              "SpriteSheetX": 40,
+              "SpriteSheetY": 200
+            },
+            "ENE": {
+              "Hash": "97c63ebd303d3ba18f00ffba4e1dd6b9",
+              "SpriteSheetX": 80,
+              "SpriteSheetY": 200
+            },
+            "NNE": {
+              "Hash": "2554a0d68193a36ceb25efb944f6e62c",
+              "SpriteSheetX": 120,
+              "SpriteSheetY": 200
+            }
+          }
+        },
+        "Drinking 7": {
+          "Frames": {
+            "SSE": {
+              "Hash": "fbda682b496a166e0ed996d55bf1af07",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 240
+            },
+            "ESE": {
+              "Hash": "7b9a7d8294c51e2f387a1c2e06edcaf1",
+              "SpriteSheetX": 40,
+              "SpriteSheetY": 240
+            },
+            "ENE": {
+              "Hash": "7a09ea269cc1487d6003686955d0e513",
+              "SpriteSheetX": 80,
+              "SpriteSheetY": 240
+            },
+            "NNE": {
+              "Hash": "06bf57fea2982989349cf33ad11ace68",
+              "SpriteSheetX": 120,
+              "SpriteSheetY": 240
+            }
+          }
+        }
+      },
+      "AnimationByDirections": {
+        "4": {
+          "Animations": {
+            "Drinking": {
+              "AnimationFrames": [
+                {
+                  "FrameGroup": "Drinking 1",
+                  "Command": "Frame",
+                  "Parameter": 60
+                },
+                {
+                  "FrameGroup": "Drinking 2",
+                  "Command": "Frame",
+                  "Parameter": 4
+                },
+                {
+                  "FrameGroup": "Drinking 3",
+                  "Command": "Frame",
+                  "Parameter": 45
+                },
+                {
+                  "FrameGroup": "Drinking 4",
+                  "Command": "Frame",
+                  "Parameter": 4
+                },
+                {
+                  "FrameGroup": "Drinking 5",
+                  "Command": "Frame",
+                  "Parameter": 30
+                },
+                {
+                  "FrameGroup": "Drinking 6",
+                  "Command": "Frame",
+                  "Parameter": 1
+                },
+                {
+                  "FrameGroup": "Drinking 7",
+                  "Command": "Frame",
+                  "Parameter": 1
+                },
+                {
+                  "FrameGroup": "Drinking 6",
+                  "Command": "Frame",
+                  "Parameter": 1
+                },
+                {
+                  "Command": "GotoAnimation",
+                  "Parameter": 1
+                }
+              ]
+            },
+            "HiccupingWithRedFace": {
+              "AnimationFrames": [
+                {
+                  "FrameGroup": "Drinking 5",
+                  "Command": "Frame",
+                  "Parameter": 60
+                },
+                {
+                  "FrameGroup": "Drinking 6",
+                  "Command": "Frame",
+                  "Parameter": 1
+                },
+                {
+                  "FrameGroup": "Drinking 7",
+                  "Command": "Frame",
+                  "Parameter": 1
+                },
+                {
+                  "FrameGroup": "Drinking 6",
+                  "Command": "Frame",
+                  "Parameter": 1
+                },
+                {
+                  "Command": "Stop",
+                  "Parameter": 0
+                }
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

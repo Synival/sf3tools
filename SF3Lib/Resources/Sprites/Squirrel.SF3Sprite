@@ -1,0 +1,407 @@
+{
+  "Name": "Squirrel",
+  "Spritesheets": {
+    "48x32": {
+      "VerticalOffset": 0,
+      "Unknown0x08": 20,
+      "CollisionSize": 40,
+      "Scale": 0.0,
+      "FrameGroups": {
+        "Idle (Still then Nibbling) 1": {
+          "Frames": {
+            "SSE": {
+              "Hash": "7959e41955750620bef59e4a2e3f480d",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 0
+            },
+            "ESE": {
+              "Hash": "ef32c98091abc9fad2f85232fd8af17e",
+              "SpriteSheetX": 48,
+              "SpriteSheetY": 0
+            },
+            "ENE": {
+              "Hash": "6cc50aee643077ff895a13c0ebc239de",
+              "SpriteSheetX": 96,
+              "SpriteSheetY": 0
+            },
+            "NNE": {
+              "Hash": "42947fd41ba2fca979ef50ec4b5421e6",
+              "SpriteSheetX": 144,
+              "SpriteSheetY": 0
+            }
+          }
+        },
+        "Idle (Still then Nibbling) 2": {
+          "Frames": {
+            "SSE": {
+              "Hash": "7f4cc040ed7f3d68f8714af0e2b9b514",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 32
+            },
+            "ESE": {
+              "Hash": "37859aa1e3099509d8f589ab1ee28c46",
+              "SpriteSheetX": 48,
+              "SpriteSheetY": 32
+            },
+            "ENE": {
+              "Hash": "a42b5bfa7082df96ee291371ad364734",
+              "SpriteSheetX": 96,
+              "SpriteSheetY": 32
+            },
+            "NNE": {
+              "Hash": "74ac0f634ebd3f63707213484a8baa79",
+              "SpriteSheetX": 144,
+              "SpriteSheetY": 32
+            }
+          }
+        },
+        "Idle (Still then Nibbling) 3": {
+          "Frames": {
+            "SSE": {
+              "Hash": "bbe89616df6598ea4e56c664d1aa5a71",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 64
+            },
+            "ESE": {
+              "Hash": "5421a9c0e50066c38c5624e13a0db29c",
+              "SpriteSheetX": 48,
+              "SpriteSheetY": 64
+            },
+            "ENE": {
+              "Hash": "bd20a71dbb0672a9b471e5efab1630ad",
+              "SpriteSheetX": 96,
+              "SpriteSheetY": 64
+            },
+            "NNE": {
+              "Hash": "93f4f31e382a3fb00b13c0d7c97a4823",
+              "SpriteSheetX": 144,
+              "SpriteSheetY": 64
+            }
+          }
+        },
+        "Idle (Still then Nibbling) 4": {
+          "Frames": {
+            "SSE": {
+              "Hash": "f7b9986b69dd9db3ad15fc3018500e97",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 96
+            },
+            "ESE": {
+              "Hash": "ce10cb92597966932f97e12c1af06758",
+              "SpriteSheetX": 48,
+              "SpriteSheetY": 96
+            },
+            "ENE": {
+              "Hash": "4610f64891a653b64edf059ce8091df8",
+              "SpriteSheetX": 96,
+              "SpriteSheetY": 96
+            },
+            "NNE": {
+              "Hash": "307bdff646e2628230925d57243b8953",
+              "SpriteSheetX": 144,
+              "SpriteSheetY": 96
+            }
+          }
+        },
+        "Running 1": {
+          "Frames": {
+            "SSE": {
+              "Hash": "e363b86eb339625200ebefe7e0b54a56",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 128
+            },
+            "ESE": {
+              "Hash": "0b92988e3d02d263d6407e218ce386b6",
+              "SpriteSheetX": 48,
+              "SpriteSheetY": 128
+            },
+            "ENE": {
+              "Hash": "e4d6388f5bda3c76f7d7b2e13629ac1d",
+              "SpriteSheetX": 96,
+              "SpriteSheetY": 128
+            },
+            "NNE": {
+              "Hash": "5c757ff8abdae673605ec990262920e7",
+              "SpriteSheetX": 144,
+              "SpriteSheetY": 128
+            }
+          }
+        },
+        "Running 2": {
+          "Frames": {
+            "SSE": {
+              "Hash": "3fb3e6a9738a0edb26ac45db6b77dfa6",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 160
+            },
+            "ESE": {
+              "Hash": "201b018cc2d824081968f6a2c511b3ac",
+              "SpriteSheetX": 48,
+              "SpriteSheetY": 160
+            },
+            "ENE": {
+              "Hash": "f545184115a80cd7d5967c5cd386251b",
+              "SpriteSheetX": 96,
+              "SpriteSheetY": 160
+            },
+            "NNE": {
+              "Hash": "1c24f351caad373b58e75025d2d0cdd3",
+              "SpriteSheetX": 144,
+              "SpriteSheetY": 160
+            }
+          }
+        },
+        "Running 3": {
+          "Frames": {
+            "SSE": {
+              "Hash": "d0ce786b006076a914e4dbad899439f5",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 192
+            },
+            "ESE": {
+              "Hash": "4dd63965c5e39c19c89ea6e259cf0f6a",
+              "SpriteSheetX": 48,
+              "SpriteSheetY": 192
+            },
+            "ENE": {
+              "Hash": "2a25c29b8224070e6df1f77e253ba1c5",
+              "SpriteSheetX": 96,
+              "SpriteSheetY": 192
+            },
+            "NNE": {
+              "Hash": "cb5520ea76f014dea6528678febb1e77",
+              "SpriteSheetX": 144,
+              "SpriteSheetY": 192
+            }
+          }
+        },
+        "Running 4": {
+          "Frames": {
+            "SSE": {
+              "Hash": "83f23aeb00b23efa630fd13bdeb8cc25",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 224
+            },
+            "ESE": {
+              "Hash": "0f9ea2723940d5d56966a65b134b819e",
+              "SpriteSheetX": 48,
+              "SpriteSheetY": 224
+            },
+            "ENE": {
+              "Hash": "21f50b26b8a5f856afd60f571dfedcfc",
+              "SpriteSheetX": 96,
+              "SpriteSheetY": 224
+            },
+            "NNE": {
+              "Hash": "db8fab96a780f21e802291786e4d986a",
+              "SpriteSheetX": 144,
+              "SpriteSheetY": 224
+            }
+          }
+        },
+        "Running 5": {
+          "Frames": {
+            "SSE": {
+              "Hash": "0e1b341152c8aeb3408c74e15346b7f5",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 256
+            },
+            "ESE": {
+              "Hash": "cd458226e9e46df82ba07c897793c95c",
+              "SpriteSheetX": 48,
+              "SpriteSheetY": 256
+            },
+            "ENE": {
+              "Hash": "92db00851b4fd341183bbfbf8ace6a3e",
+              "SpriteSheetX": 96,
+              "SpriteSheetY": 256
+            },
+            "NNE": {
+              "Hash": "d04ab0219d39da7703b3736bea601204",
+              "SpriteSheetX": 144,
+              "SpriteSheetY": 256
+            }
+          }
+        }
+      },
+      "AnimationByDirections": {
+        "4": {
+          "Animations": {
+            "Idle (Still then Nibbling)": {
+              "AnimationFrames": [
+                {
+                  "FrameGroup": "Idle (Still then Nibbling) 1",
+                  "Command": "Frame",
+                  "Parameter": 150
+                },
+                {
+                  "FrameGroup": "Idle (Still then Nibbling) 2",
+                  "Command": "Frame",
+                  "Parameter": 5
+                },
+                {
+                  "FrameGroup": "Idle (Still then Nibbling) 3",
+                  "Command": "Frame",
+                  "Parameter": 2
+                },
+                {
+                  "FrameGroup": "Idle (Still then Nibbling) 4",
+                  "Command": "Frame",
+                  "Parameter": 2
+                },
+                {
+                  "FrameGroup": "Idle (Still then Nibbling) 3",
+                  "Command": "Frame",
+                  "Parameter": 2
+                },
+                {
+                  "FrameGroup": "Idle (Still then Nibbling) 4",
+                  "Command": "Frame",
+                  "Parameter": 2
+                },
+                {
+                  "FrameGroup": "Idle (Still then Nibbling) 3",
+                  "Command": "Frame",
+                  "Parameter": 2
+                },
+                {
+                  "FrameGroup": "Idle (Still then Nibbling) 4",
+                  "Command": "Frame",
+                  "Parameter": 2
+                },
+                {
+                  "FrameGroup": "Idle (Still then Nibbling) 3",
+                  "Command": "Frame",
+                  "Parameter": 2
+                },
+                {
+                  "FrameGroup": "Idle (Still then Nibbling) 4",
+                  "Command": "Frame",
+                  "Parameter": 2
+                },
+                {
+                  "FrameGroup": "Idle (Still then Nibbling) 3",
+                  "Command": "Frame",
+                  "Parameter": 2
+                },
+                {
+                  "FrameGroup": "Idle (Still then Nibbling) 4",
+                  "Command": "Frame",
+                  "Parameter": 2
+                },
+                {
+                  "FrameGroup": "Idle (Still then Nibbling) 3",
+                  "Command": "Frame",
+                  "Parameter": 2
+                },
+                {
+                  "FrameGroup": "Idle (Still then Nibbling) 4",
+                  "Command": "Frame",
+                  "Parameter": 2
+                },
+                {
+                  "FrameGroup": "Idle (Still then Nibbling) 3",
+                  "Command": "Frame",
+                  "Parameter": 2
+                },
+                {
+                  "FrameGroup": "Idle (Still then Nibbling) 4",
+                  "Command": "Frame",
+                  "Parameter": 2
+                },
+                {
+                  "FrameGroup": "Idle (Still then Nibbling) 3",
+                  "Command": "Frame",
+                  "Parameter": 2
+                },
+                {
+                  "FrameGroup": "Idle (Still then Nibbling) 4",
+                  "Command": "Frame",
+                  "Parameter": 2
+                },
+                {
+                  "FrameGroup": "Idle (Still then Nibbling) 3",
+                  "Command": "Frame",
+                  "Parameter": 2
+                },
+                {
+                  "FrameGroup": "Idle (Still then Nibbling) 2",
+                  "Command": "Frame",
+                  "Parameter": 5
+                },
+                {
+                  "Command": "GotoFrameOffset",
+                  "Parameter": 0
+                }
+              ]
+            },
+            "Running": {
+              "AnimationFrames": [
+                {
+                  "FrameGroup": "Running 1",
+                  "Command": "Frame",
+                  "Parameter": 1
+                },
+                {
+                  "FrameGroup": "Running 2",
+                  "Command": "Frame",
+                  "Parameter": 1
+                },
+                {
+                  "FrameGroup": "Running 3",
+                  "Command": "Frame",
+                  "Parameter": 1
+                },
+                {
+                  "FrameGroup": "Running 4",
+                  "Command": "Frame",
+                  "Parameter": 1
+                },
+                {
+                  "FrameGroup": "Running 2",
+                  "Command": "Frame",
+                  "Parameter": 1
+                },
+                {
+                  "FrameGroup": "Running 5",
+                  "Command": "Frame",
+                  "Parameter": 1
+                },
+                {
+                  "Command": "GotoFrameOffset",
+                  "Parameter": 0
+                }
+              ]
+            },
+            "StillFrame (Down)": {
+              "AnimationFrames": [
+                {
+                  "FrameGroup": "Running 2",
+                  "Command": "Frame",
+                  "Parameter": 10
+                },
+                {
+                  "Command": "Stop",
+                  "Parameter": 0
+                }
+              ]
+            },
+            "StillFrame (Up)": {
+              "AnimationFrames": [
+                {
+                  "FrameGroup": "Idle (Still then Nibbling) 1",
+                  "Command": "Frame",
+                  "Parameter": 10
+                },
+                {
+                  "Command": "Stop",
+                  "Parameter": 0
+                }
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

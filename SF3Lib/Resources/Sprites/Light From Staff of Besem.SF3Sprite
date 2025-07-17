@@ -1,0 +1,41 @@
+{
+  "Name": "Light From Staff of Besem",
+  "Spritesheets": {
+    "40x40": {
+      "VerticalOffset": 20,
+      "Unknown0x08": 20,
+      "CollisionSize": 24,
+      "Scale": 1.0,
+      "FrameGroups": {
+        "Light 1": {
+          "Frames": {
+            "First": {
+              "Hash": "64138241c1ad9e4a7aee83828edf4d3b",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 0
+            }
+          }
+        }
+      },
+      "AnimationByDirections": {
+        "1": {
+          "Animations": {
+            "StillFrame (Light)": {
+              "AnimationFrames": [
+                {
+                  "FrameGroup": "Light 1",
+                  "Command": "Frame",
+                  "Parameter": 10
+                },
+                {
+                  "Command": "Stop",
+                  "Parameter": 0
+                }
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

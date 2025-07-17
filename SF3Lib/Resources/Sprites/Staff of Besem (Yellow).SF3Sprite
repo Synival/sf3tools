@@ -1,0 +1,165 @@
+{
+  "Name": "Staff of Besem (Yellow)",
+  "Spritesheets": {
+    "32x40": {
+      "VerticalOffset": 0,
+      "Unknown0x08": 20,
+      "CollisionSize": 40,
+      "Scale": 0.0,
+      "FrameGroups": {
+        "Glowing 1": {
+          "Frames": {
+            "SSE": {
+              "Hash": "6c18fa2559d09f2f05e856adbc14fef4",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 0
+            }
+          }
+        },
+        "Glowing 2": {
+          "Frames": {
+            "SSE": {
+              "Hash": "bcf5086811ae2c906bfefec233868aca",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 40
+            }
+          }
+        },
+        "Glowing 3": {
+          "Frames": {
+            "SSE": {
+              "Hash": "21aafee78fc035bc836ae81c208925e1",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 80
+            }
+          }
+        },
+        "Idle (Hovering) 1": {
+          "Frames": {
+            "SSE": {
+              "Hash": "c0725c9fe62c9c5ea9cbceb8a84e3a7b",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 120
+            },
+            "ESE": {
+              "Hash": "fe98f17cdb537a53ef8f8fab9dbab1fc",
+              "SpriteSheetX": 32,
+              "SpriteSheetY": 120
+            },
+            "ENE": {
+              "Hash": "468a319af3544379bb8805ea668ed961",
+              "SpriteSheetX": 64,
+              "SpriteSheetY": 120
+            },
+            "NNE": {
+              "Hash": "972d9cda407696944adb613b2c0efafa",
+              "SpriteSheetX": 96,
+              "SpriteSheetY": 120
+            }
+          }
+        }
+      },
+      "AnimationByDirections": {
+        "4": {
+          "Animations": {
+            "StillFrame (Hovering, Change to 0)": {
+              "AnimationFrames": [
+                {
+                  "FrameGroup": "Idle (Hovering) 1",
+                  "Command": "Frame",
+                  "Parameter": 10
+                },
+                {
+                  "Command": "GotoAnimation",
+                  "Parameter": 0
+                }
+              ]
+            },
+            "StillFrame (Hovering, Repeat)": {
+              "AnimationFrames": [
+                {
+                  "FrameGroup": "Idle (Hovering) 1",
+                  "Command": "Frame",
+                  "Parameter": 10
+                },
+                {
+                  "Command": "GotoFrameOffset",
+                  "Parameter": 0
+                }
+              ]
+            },
+            "StillFrame (Hovering)": {
+              "AnimationFrames": [
+                {
+                  "FrameGroup": "Idle (Hovering) 1",
+                  "Command": "Frame",
+                  "Parameter": 10
+                },
+                {
+                  "Command": "Stop",
+                  "Parameter": 0
+                }
+              ]
+            }
+          }
+        },
+        "17": {
+          "Animations": {
+            "Glowing (1 Direction, Stop)": {
+              "AnimationFrames": [
+                {
+                  "Command": "SetDirectionCount",
+                  "Parameter": 17
+                },
+                {
+                  "Frames": {
+                    "First": {
+                      "Frame": "Idle (Hovering) 1",
+                      "Direction": "SSE"
+                    }
+                  },
+                  "Command": "Frame",
+                  "Parameter": 10
+                },
+                {
+                  "Frames": {
+                    "First": {
+                      "Frame": "Glowing 1",
+                      "Direction": "SSE"
+                    }
+                  },
+                  "Command": "Frame",
+                  "Parameter": 10
+                },
+                {
+                  "Frames": {
+                    "First": {
+                      "Frame": "Glowing 2",
+                      "Direction": "SSE"
+                    }
+                  },
+                  "Command": "Frame",
+                  "Parameter": 10
+                },
+                {
+                  "Frames": {
+                    "First": {
+                      "Frame": "Glowing 3",
+                      "Direction": "SSE"
+                    }
+                  },
+                  "Command": "Frame",
+                  "Parameter": 10
+                },
+                {
+                  "Command": "Stop",
+                  "Parameter": 0
+                }
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

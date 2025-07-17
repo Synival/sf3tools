@@ -1,0 +1,166 @@
+{
+  "Name": "Small Poof of Brown Smoke",
+  "Spritesheets": {
+    "24x24": {
+      "VerticalOffset": 0,
+      "Unknown0x08": 20,
+      "CollisionSize": 24,
+      "Scale": 1.0,
+      "FrameGroups": {
+        "Poofing 1": {
+          "Frames": {
+            "First": {
+              "Hash": "c587713ab385a760bb5b7b4a32afa69c",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 0
+            }
+          }
+        },
+        "Poofing 2": {
+          "Frames": {
+            "First": {
+              "Hash": "584252c93398d5e8b51c8e42ef290fe2",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 24
+            }
+          }
+        },
+        "Poofing 3": {
+          "Frames": {
+            "First": {
+              "Hash": "e800c8d9553977b878ccd60b6928a97e",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 48
+            }
+          }
+        },
+        "Poofing 4": {
+          "Frames": {
+            "First": {
+              "Hash": "0f7cd4c76a8a56d9df50549f7618af03",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 72
+            }
+          }
+        },
+        "Poofing 5": {
+          "Frames": {
+            "First": {
+              "Hash": "3ebc2496d5551122ca8814b6bde16fc8",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 96
+            }
+          }
+        },
+        "Poofing 6": {
+          "Frames": {
+            "First": {
+              "Hash": "fcb1d301e157f3619fe8d19e97454832",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 120
+            }
+          }
+        },
+        "Poofing 7": {
+          "Frames": {
+            "First": {
+              "Hash": "a0ac44d2eca07df8dc949f231559cf44",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 144
+            }
+          }
+        },
+        "Poofing 8": {
+          "Frames": {
+            "First": {
+              "Hash": "27800a5a5d4d7d49004d104a8490781f",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 168
+            }
+          }
+        },
+        "Poofing 9": {
+          "Frames": {
+            "First": {
+              "Hash": "2fcf677cc24f226f74febc14821e620d",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 192
+            }
+          }
+        }
+      },
+      "AnimationByDirections": {
+        "1": {
+          "Animations": {
+            "Poofing": {
+              "AnimationFrames": [
+                {
+                  "FrameGroup": "Poofing 1",
+                  "Command": "Frame",
+                  "Parameter": 3
+                },
+                {
+                  "FrameGroup": "Poofing 2",
+                  "Command": "Frame",
+                  "Parameter": 3
+                },
+                {
+                  "FrameGroup": "Poofing 3",
+                  "Command": "Frame",
+                  "Parameter": 3
+                },
+                {
+                  "FrameGroup": "Poofing 4",
+                  "Command": "Frame",
+                  "Parameter": 3
+                },
+                {
+                  "FrameGroup": "Poofing 5",
+                  "Command": "Frame",
+                  "Parameter": 3
+                },
+                {
+                  "FrameGroup": "Poofing 6",
+                  "Command": "Frame",
+                  "Parameter": 3
+                },
+                {
+                  "FrameGroup": "Poofing 7",
+                  "Command": "Frame",
+                  "Parameter": 3
+                },
+                {
+                  "FrameGroup": "Poofing 8",
+                  "Command": "Frame",
+                  "Parameter": 3
+                },
+                {
+                  "FrameGroup": "Poofing 9",
+                  "Command": "Frame",
+                  "Parameter": 3
+                },
+                {
+                  "Command": "Stop",
+                  "Parameter": 0
+                }
+              ]
+            },
+            "StillFrame": {
+              "AnimationFrames": [
+                {
+                  "FrameGroup": "Poofing 1",
+                  "Command": "Frame",
+                  "Parameter": 10
+                },
+                {
+                  "Command": "Stop",
+                  "Parameter": 0
+                }
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

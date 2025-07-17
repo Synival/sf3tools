@@ -1,0 +1,109 @@
+{
+  "Name": "Popping Bubble",
+  "Spritesheets": {
+    "24x24": {
+      "VerticalOffset": 0,
+      "Unknown0x08": 20,
+      "CollisionSize": 24,
+      "Scale": 1.0,
+      "FrameGroups": {
+        "Popping 1": {
+          "Frames": {
+            "First": {
+              "Hash": "44f3658716dacc6badd550eb867e688c",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 0
+            }
+          }
+        },
+        "Popping 2": {
+          "Frames": {
+            "First": {
+              "Hash": "50231802de92e85bc2bd33124a5a7a73",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 24
+            }
+          }
+        },
+        "Popping 3": {
+          "Frames": {
+            "First": {
+              "Hash": "6687c9c30fde1a59189023923b6ee349",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 48
+            }
+          }
+        },
+        "Popping 4": {
+          "Frames": {
+            "First": {
+              "Hash": "dd24e91615f1963a5c64bc9878a0a8d5",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 72
+            }
+          }
+        }
+      },
+      "AnimationByDirections": {
+        "1": {
+          "Animations": {
+            "Popping": {
+              "AnimationFrames": [
+                {
+                  "FrameGroup": "Popping 1",
+                  "Command": "Frame",
+                  "Parameter": 5
+                },
+                {
+                  "FrameGroup": "Popping 2",
+                  "Command": "Frame",
+                  "Parameter": 3
+                },
+                {
+                  "FrameGroup": "Popping 3",
+                  "Command": "Frame",
+                  "Parameter": 3
+                },
+                {
+                  "FrameGroup": "Popping 4",
+                  "Command": "Frame",
+                  "Parameter": 10
+                },
+                {
+                  "Command": "GotoAnimation",
+                  "Parameter": 0
+                }
+              ]
+            },
+            "StillFrame (Bubble)": {
+              "AnimationFrames": [
+                {
+                  "FrameGroup": "Popping 1",
+                  "Command": "Frame",
+                  "Parameter": 5
+                },
+                {
+                  "Command": "GotoFrameOffset",
+                  "Parameter": 0
+                }
+              ]
+            },
+            "StillFrame (Transparent)": {
+              "AnimationFrames": [
+                {
+                  "FrameGroup": "Popping 4",
+                  "Command": "Frame",
+                  "Parameter": 10
+                },
+                {
+                  "Command": "Stop",
+                  "Parameter": 0
+                }
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

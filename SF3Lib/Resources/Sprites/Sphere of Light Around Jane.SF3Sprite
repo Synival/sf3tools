@@ -1,0 +1,41 @@
+{
+  "Name": "Sphere of Light Around Jane",
+  "Spritesheets": {
+    "40x48": {
+      "VerticalOffset": 0,
+      "Unknown0x08": 20,
+      "CollisionSize": 48,
+      "Scale": 1.0,
+      "FrameGroups": {
+        "Light 1": {
+          "Frames": {
+            "First": {
+              "Hash": "f7c68a4d753deae32949e2e2ee75e517",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 0
+            }
+          }
+        }
+      },
+      "AnimationByDirections": {
+        "1": {
+          "Animations": {
+            "StillFrame (Light)": {
+              "AnimationFrames": [
+                {
+                  "FrameGroup": "Light 1",
+                  "Command": "Frame",
+                  "Parameter": 10
+                },
+                {
+                  "Command": "Stop",
+                  "Parameter": 0
+                }
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

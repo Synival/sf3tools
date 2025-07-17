@@ -1,0 +1,217 @@
+{
+  "Name": "Lightning Bolt",
+  "Spritesheets": {
+    "32x64": {
+      "VerticalOffset": 0,
+      "Unknown0x08": 20,
+      "CollisionSize": 32,
+      "Scale": 1.0,
+      "FrameGroups": {
+        "Dot 1": {
+          "Frames": {
+            "First": {
+              "Hash": "3ac2fa58301b3b5a0682f0f311ddd03a",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 0
+            }
+          }
+        },
+        "Transparent 1": {
+          "Frames": {
+            "First": {
+              "Hash": "620f0b67a91f7f74151bc5be745b7110",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 64
+            }
+          }
+        },
+        "Zapping (To the Left) 1": {
+          "Frames": {
+            "First": {
+              "Hash": "5c1a074031a33bd28f9a02a1c029a69a",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 128
+            }
+          }
+        },
+        "Zapping (To the Left) 2": {
+          "Frames": {
+            "First": {
+              "Hash": "1e4ea10c72bee1c7e8ea7d2b63890e69",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 192
+            }
+          }
+        },
+        "Zapping (To the Left) 3": {
+          "Frames": {
+            "First": {
+              "Hash": "2ce9e617bd66f809129cb3903a9ac6d1",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 256
+            }
+          }
+        },
+        "Zapping 1": {
+          "Frames": {
+            "First": {
+              "Hash": "19d2a6156c7c168a05c30bcd1e9f284c",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 320
+            }
+          }
+        },
+        "Zapping 2": {
+          "Frames": {
+            "First": {
+              "Hash": "1c2659b74e8b3c229dce43dd67a31daf",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 384
+            }
+          }
+        },
+        "Zapping 3": {
+          "Frames": {
+            "First": {
+              "Hash": "2335de5e6894aea51212c1f4a7e769b9",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 448
+            }
+          }
+        }
+      },
+      "AnimationByDirections": {
+        "1": {
+          "Animations": {
+            "StillFrame": {
+              "AnimationFrames": [
+                {
+                  "FrameGroup": "Zapping 2",
+                  "Command": "Frame",
+                  "Parameter": 10
+                },
+                {
+                  "Command": "Stop",
+                  "Parameter": 0
+                }
+              ]
+            },
+            "StillFrame (Dot)": {
+              "AnimationFrames": [
+                {
+                  "FrameGroup": "Dot 1",
+                  "Command": "Frame",
+                  "Parameter": 10
+                },
+                {
+                  "Command": "Stop",
+                  "Parameter": 0
+                }
+              ]
+            },
+            "StillFrame (Transparent)": {
+              "AnimationFrames": [
+                {
+                  "FrameGroup": "Transparent 1",
+                  "Command": "Frame",
+                  "Parameter": 10
+                },
+                {
+                  "Command": "Stop",
+                  "Parameter": 0
+                }
+              ]
+            },
+            "Zapping (Fast, To the Left)": {
+              "AnimationFrames": [
+                {
+                  "FrameGroup": "Zapping (To the Left) 1",
+                  "Command": "Frame",
+                  "Parameter": 1
+                },
+                {
+                  "FrameGroup": "Zapping (To the Left) 2",
+                  "Command": "Frame",
+                  "Parameter": 1
+                },
+                {
+                  "FrameGroup": "Zapping (To the Left) 3",
+                  "Command": "Frame",
+                  "Parameter": 1
+                },
+                {
+                  "Command": "GotoFrameOffset",
+                  "Parameter": 0
+                }
+              ]
+            },
+            "Zapping (Fast)": {
+              "AnimationFrames": [
+                {
+                  "FrameGroup": "Zapping 1",
+                  "Command": "Frame",
+                  "Parameter": 1
+                },
+                {
+                  "FrameGroup": "Zapping 2",
+                  "Command": "Frame",
+                  "Parameter": 1
+                },
+                {
+                  "FrameGroup": "Zapping 3",
+                  "Command": "Frame",
+                  "Parameter": 1
+                },
+                {
+                  "Command": "GotoFrameOffset",
+                  "Parameter": 0
+                }
+              ]
+            },
+            "Zapping (Reduced, Slow)": {
+              "AnimationFrames": [
+                {
+                  "FrameGroup": "Zapping 2",
+                  "Command": "Frame",
+                  "Parameter": 3
+                },
+                {
+                  "FrameGroup": "Zapping 3",
+                  "Command": "Frame",
+                  "Parameter": 3
+                },
+                {
+                  "Command": "GotoFrameOffset",
+                  "Parameter": 0
+                }
+              ]
+            },
+            "Zapping (Slow)": {
+              "AnimationFrames": [
+                {
+                  "FrameGroup": "Zapping 1",
+                  "Command": "Frame",
+                  "Parameter": 3
+                },
+                {
+                  "FrameGroup": "Zapping 2",
+                  "Command": "Frame",
+                  "Parameter": 3
+                },
+                {
+                  "FrameGroup": "Zapping 3",
+                  "Command": "Frame",
+                  "Parameter": 3
+                },
+                {
+                  "Command": "GotoFrameOffset",
+                  "Parameter": 0
+                }
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

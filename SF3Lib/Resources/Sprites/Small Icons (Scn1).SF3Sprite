@@ -1,0 +1,107 @@
+{
+  "Name": "Small Icons (Scn1)",
+  "Spritesheets": {
+    "16x16": {
+      "VerticalOffset": 0,
+      "Unknown0x08": 8,
+      "CollisionSize": 16,
+      "Scale": 1.0,
+      "FrameGroups": {
+        "Angry 1": {
+          "Frames": {
+            "First": {
+              "Hash": "dd7955490635785bd5e7a55c8c23ecdf",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 0
+            }
+          }
+        },
+        "Idea 1": {
+          "Frames": {
+            "First": {
+              "Hash": "31b6792b69bfa3443728310feb9a523c",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 16
+            }
+          }
+        },
+        "Shield 1": {
+          "Frames": {
+            "First": {
+              "Hash": "c283599cb6ce3fbc1f0e066af8d5081e",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 32
+            }
+          }
+        },
+        "Sword 1": {
+          "Frames": {
+            "First": {
+              "Hash": "c8c209bb1adf2911a7eec429aa202f8a",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 48
+            }
+          }
+        }
+      },
+      "AnimationByDirections": {
+        "1": {
+          "Animations": {
+            "Angry": {
+              "AnimationFrames": [
+                {
+                  "FrameGroup": "Angry 1",
+                  "Command": "Frame",
+                  "Parameter": 10
+                },
+                {
+                  "Command": "Stop",
+                  "Parameter": 0
+                }
+              ]
+            },
+            "Idea": {
+              "AnimationFrames": [
+                {
+                  "FrameGroup": "Idea 1",
+                  "Command": "Frame",
+                  "Parameter": 10
+                },
+                {
+                  "Command": "Stop",
+                  "Parameter": 0
+                }
+              ]
+            },
+            "Shield": {
+              "AnimationFrames": [
+                {
+                  "FrameGroup": "Shield 1",
+                  "Command": "Frame",
+                  "Parameter": 10
+                },
+                {
+                  "Command": "Stop",
+                  "Parameter": 0
+                }
+              ]
+            },
+            "Sword": {
+              "AnimationFrames": [
+                {
+                  "FrameGroup": "Sword 1",
+                  "Command": "Frame",
+                  "Parameter": 10
+                },
+                {
+                  "Command": "Stop",
+                  "Parameter": 0
+                }
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
