@@ -441,7 +441,7 @@ namespace SpriteExtractor {
 
             foreach (var spriteDef in spriteDefs) {
                 var spritePath = Path.Combine(c_pathOut, FilesystemString(spriteDef.Name));
-                var spriteDefPath = Path.Combine(spritePath, FilesystemString(spriteDef.Name) + ".json");
+                var spriteDefPath = Path.Combine(spritePath, FilesystemString(spriteDef.Name) + ".SF3Sprite");
                 Console.WriteLine($"Writing '{spriteDefPath}'...");
 
                 _ = Directory.CreateDirectory(Path.Combine(c_pathOut, FilesystemString(spriteDef.Name)));

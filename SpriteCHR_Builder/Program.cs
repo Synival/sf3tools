@@ -17,7 +17,7 @@ namespace SpriteCHR_Builder {
         public static int Main(string[] args) {
             var spriteDirs = Directory.GetDirectories(c_spritePath);
             var spriteDefFiles = spriteDirs
-                .SelectMany(x => Directory.GetFiles(x, "*.json"))
+                .SelectMany(x => Directory.GetFiles(x, "*.SF3Sprite"))
                 .ToArray();
 
             var spriteDefsWithPaths = spriteDefFiles
