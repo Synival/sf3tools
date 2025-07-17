@@ -2,8 +2,11 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Security.Cryptography;
+using System.Text;
 using System.Xml;
 using Newtonsoft.Json;
+using SF3.Models.Structs.CHR;
 using SF3.Sprites;
 using SF3.Types;
 
@@ -268,5 +271,102 @@ namespace SF3.Utils {
         }
 
         public static Dictionary<string, UniqueSpriteInfoDef> GetUniqueSpriteInfos() => s_uniqueSpriteInfosByName;
+
+        private class AnimationHashFrame {
+            public SpriteAnimationFrameCommandType Command;
+            public int Parameter;
+            public int FrameID;
+            public int Directions;
+            public ITexture Image;
+        }
+
+        public static string CreateAnimationHash(int directions, AnimationDef animation, Dictionary<string, FrameGroupDef> frameGroups, Dictionary<string, ITexture> texturesByHash) {
+            int currentDirections = directions;
+
+            var hashInfos = animation.AnimationFrames
+                .Select(x => {
+                    var frameCount = DirectionsToFrameCount(currentDirections);
+                    var frames = (!x.HasFrame)
+                        ? null
+                        : (x.FrameGroup != null)
+                        ? Enumerable.Range(0, frameCount)
+                            .Select(y => FrameNumberToSpriteDir(frameCount, y).ToString())
+                            .Select(y => frameGroups[x.FrameGroup].Frames.TryGetValue(y, out var frame) ? frame : null)
+                            .ToArray()
+                        : (x.Frames != null)
+                        ? Enumerable.Range(0, frameCount)
+                            .Select(y => FrameNumberToSpriteDir(frameCount, y).ToString())
+                            .Select(y => x.Frames.TryGetValue(y, out var frame) ? frameGroups[frame.Frame].Frames[frame.Direction.ToString()] : null)
+                            .ToArray()
+                        : null;
+
+                    if (x.Command == SpriteAnimationFrameCommandType.SetDirectionCount)
+                        currentDirections = x.Parameter;
+
+                    return new AnimationHashFrame() {
+                        Command    = x.Command,
+                        Parameter  = x.Parameter,
+                        FrameID    = -1,
+                        Directions = currentDirections,
+                        Image      = StackedImageFromFrames(frames, texturesByHash)
+                    };
+                })
+                .ToArray();
+
+            return CreateAnimationHash(hashInfos);
+        }
+
+        private static ITexture StackedImageFromFrames(FrameDef[] frames, Dictionary<string, ITexture> texturesByHash) {
+            if (frames == null)
+                return null;
+
+            var textures = frames
+                .Where(x => x != null)
+                .Select(x => texturesByHash[x.Hash])
+                .ToArray();
+
+            return TextureUtils.StackTextures(0, 0, 0, textures);
+        }
+
+        public static string CreateAnimationHash(AnimationFrame[] animationFrames) {
+            var hashInfos = animationFrames
+                .Select(x => new AnimationHashFrame() {
+                    Command    = x.HasTexture ? SpriteAnimationFrameCommandType.Frame : (SpriteAnimationFrameCommandType) x.FrameID,
+                    Parameter  = x.Duration,
+                    FrameID    = x.HasTexture ? x.FrameID : -1,
+                    Directions = x.Directions,
+                    Image      = (x.HasTexture) ? x.GetTexture(x.Directions) : null
+                })
+                .ToArray();
+
+            return CreateAnimationHash(hashInfos);
+        }
+
+        private static string CreateAnimationHash(AnimationHashFrame[] animationHashFrames) {
+            // Build a unique hash string for this animation.
+            var hashStr = "";
+            foreach (var aniFrame in animationHashFrames) {
+                if (hashStr != "")
+                    hashStr += "_";
+
+                if (aniFrame.Command != SpriteAnimationFrameCommandType.Frame) {
+                    var cmd   = aniFrame.Command;
+                    var param = aniFrame.Parameter;
+
+                    // Don't bother appending stops.
+                    if (cmd == SpriteAnimationFrameCommandType.Stop)
+                        hashStr += "f2";
+                    else
+                        hashStr += $"{((int) cmd):x2},{aniFrame.Parameter:x2}";
+                }
+                else {
+                    var tex = aniFrame.Image;
+                    hashStr += (tex != null) ? $"{tex.Hash}_{aniFrame.Parameter:x2}" : $"{aniFrame.FrameID:x2},{aniFrame.Parameter:x2}";
+                }
+            }
+
+            using (var md5 = MD5.Create())
+                return BitConverter.ToString(md5.ComputeHash(Encoding.ASCII.GetBytes(hashStr))).Replace("-", "").ToLower();
+        }
     }
 }

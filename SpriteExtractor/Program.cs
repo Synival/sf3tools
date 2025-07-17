@@ -451,6 +451,44 @@ namespace SpriteExtractor {
                 }
             }
             Console.WriteLine("Sprite def writing complete.");
+
+            Console.WriteLine();
+            Console.WriteLine("===================================================");
+            Console.WriteLine("| CHECKING FOR MISSING ANIMATIONS / FRAMES        |");
+            Console.WriteLine("===================================================");
+            Console.WriteLine();
+
+            var framesAccountedFor = new HashSet<string>();
+            var animationsAccountedFor = new HashSet<string>();
+
+            var frameTexturesByHash = s_framesByHash
+                .ToDictionary(x => x.Key, x => x.Value.Texture);
+
+            foreach (var spriteDef in spriteDefs) {
+                foreach (var spritesheet in spriteDef.Spritesheets.Values) {
+                    foreach (var frameGroup in spritesheet.FrameGroups)
+                        foreach (var frame in frameGroup.Value.Frames)
+                            framesAccountedFor.Add(frame.Value.Hash);
+
+                    foreach (var animationGroup in spritesheet.AnimationByDirections)
+                        foreach (var animation in animationGroup.Value.Animations)
+                            animationsAccountedFor.Add(CHR_Utils.CreateAnimationHash(animationGroup.Key, animation.Value, spritesheet.FrameGroups, frameTexturesByHash));
+                }
+            }
+
+            foreach (var frame in s_framesByHash) {
+                if (!framesAccountedFor.Contains(frame.Key)) {
+                    var fi = frame.Value.FrameInfo;
+                    Console.WriteLine($"Frame unaccounted for: {fi.SpriteName}.{fi.FrameName}.{fi.Direction} ({fi.TextureHash})");
+                }
+            }
+
+            foreach (var animation in s_animationsByHash) {
+                if (!animationsAccountedFor.Contains(animation.Key)) {
+                    var ai = animation.Value.AnimInfo;
+                    Console.WriteLine($"Animation unaccounted for: {ai.SpriteName}.{ai.AnimationName} ({ai.AnimationHash})");
+                }
+            }
         }
 
         private static string GetFileString(ScenarioType inputScenario, string filename, ScenarioTableFile chrChpFile) {
