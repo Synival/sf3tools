@@ -190,7 +190,7 @@ namespace SpriteExtractor {
                         spritesheet.Value.VerticalOffset = MostCommonKey(spriteInfo.VerticalOffsetValueCount);
                         spritesheet.Value.Unknown0x08    = MostCommonKey(spriteInfo.Unknown0x08Count);
                         spritesheet.Value.CollisionSize  = MostCommonKey(spriteInfo.CollisionSizeCount);
-                        spritesheet.Value.Scale          = (int) MostCommonKey(spriteInfo.ScaleCount);
+                        spritesheet.Value.Scale          = MostCommonKey(spriteInfo.ScaleCount);
                     }
                 }
             }

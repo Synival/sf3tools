@@ -5,7 +5,7 @@
       "VerticalOffset": 0,
       "Unknown0x08": 20,
       "CollisionSize": 100,
-      "Scale": 1.0,
+      "Scale": 1.5,
       "FrameGroups": {
         "HurlingBoulder 1": {
           "Frames": {

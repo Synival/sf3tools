@@ -276,7 +276,7 @@
       "VerticalOffset": 0,
       "Unknown0x08": 20,
       "CollisionSize": 40,
-      "Scale": 1.0,
+      "Scale": 1.0999908,
       "FrameGroups": {
         "BreathingFire 1": {
           "Frames": {

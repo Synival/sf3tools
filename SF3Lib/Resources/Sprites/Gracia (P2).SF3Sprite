@@ -5,7 +5,7 @@
       "VerticalOffset": 0,
       "Unknown0x08": 20,
       "CollisionSize": 40,
-      "Scale": 0.0,
+      "Scale": 0.8999939,
       "FrameGroups": {
         "BlownBack 1": {
           "Frames": {
@@ -758,7 +758,7 @@
       "VerticalOffset": 0,
       "Unknown0x08": 20,
       "CollisionSize": 40,
-      "Scale": 0.0,
+      "Scale": 0.8999939,
       "FrameGroups": {
         "LoweringStaff (OnGround) 1": {
           "Frames": {
@@ -1005,7 +1005,7 @@
       "VerticalOffset": 0,
       "Unknown0x08": 20,
       "CollisionSize": 40,
-      "Scale": 0.0,
+      "Scale": 0.8999939,
       "FrameGroups": {
         "RaisingStaff 1": {
           "Frames": {

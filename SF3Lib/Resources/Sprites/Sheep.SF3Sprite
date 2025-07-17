@@ -5,7 +5,7 @@
       "VerticalOffset": 0,
       "Unknown0x08": 20,
       "CollisionSize": 40,
-      "Scale": 0.0,
+      "Scale": 0.7999878,
       "FrameGroups": {
         "Idle (Grazing) 1": {
           "Frames": {

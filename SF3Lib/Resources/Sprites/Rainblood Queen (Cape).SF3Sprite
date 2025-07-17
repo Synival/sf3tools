@@ -220,7 +220,7 @@
       "VerticalOffset": 0,
       "Unknown0x08": 20,
       "CollisionSize": 40,
-      "Scale": 0.0,
+      "Scale": 0.91999817,
       "FrameGroups": {
         "Idle (KnockedOut) 1": {
           "Frames": {

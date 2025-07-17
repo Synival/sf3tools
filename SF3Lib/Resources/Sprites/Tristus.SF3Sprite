@@ -5,7 +5,7 @@
       "VerticalOffset": 0,
       "Unknown0x08": 20,
       "CollisionSize": 40,
-      "Scale": 1.0,
+      "Scale": 1.0499878,
       "FrameGroups": {
         "HoldingOutArms 1": {
           "Frames": {

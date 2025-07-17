@@ -5,7 +5,7 @@
       "VerticalOffset": 4,
       "Unknown0x08": 20,
       "CollisionSize": 40,
-      "Scale": 1.0,
+      "Scale": 1.25,
       "FrameGroups": {
         "GettingBackUp 1": {
           "Frames": {
