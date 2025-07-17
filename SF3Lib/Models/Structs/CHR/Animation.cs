@@ -87,14 +87,16 @@ namespace SF3.Models.Structs.CHR {
                 if (_framesWithTextures.Length == 0)
                     return "None";
 
-                var distinctNames = _framesWithTextures. Select(x => $"{x.FrameInfo.SpriteName}").Distinct().OrderBy(x => x).ToArray();
+                var distinctNames = _framesWithTextures.Select(x => $"{x.FrameInfo.SpriteName}").Distinct().OrderBy(x => x).ToArray();
                 if (distinctNames.Length == 1)
                     return distinctNames[0];
 
+                // If the frames in this animation are shared by more than one named sprite, give them a proper name for known cases.
+
                 // Murasame has some animations where his weapon is there, then suddenly not there.
-                // They're bugs, so place them in a special "(Weapon Disappears)" sprite category.
+                // They have to go somewhere, so place them in Murasame (P1).
                 if (distinctNames.Length == 2 && distinctNames[0] == "Murasame (P1)" && distinctNames[1] == "Murasame (P1) (Weaponless)")
-                    return "Murasame (P1) (Weapon Disappears)";
+                    return "Murasame (P1)";
 
                 // Edmund's P1 sprites are special because some frames are shared with and without a weapon.
                 // (His cape is so big, the rendered frames are the same when his back is turned)

@@ -2732,14 +2732,14 @@
     <item hash="de86f78864b23e5d9dbd39a6ffa793ea" sprite="Murasame (P1)" animation="Idle (Battle, Duplicate Frames)" width="40" height="40" directions="4" frames="5" duration="18" />
     <item hash="5f7a7967773f6f7ac53801bc1a6735d8" sprite="Murasame (P1)" animation="Idle (Battle)" width="40" height="40" directions="4" frames="5" duration="18" />
     <item hash="ae4624a1a1f53e7c50732e6247dd37ad" sprite="Murasame (P1)" animation="Idle (Battle)" width="40" height="40" directions="6" frames="5" duration="18" />
+    <item hash="d0cf57adae5c752ade9718ccf8061f38" sprite="Murasame (P1)" animation="Nodding (Weapon Disappears)" width="40" height="40" directions="4" frames="3" duration="16" />
+    <item hash="dcff58c27c02e9299bbaed25015151be" sprite="Murasame (P1)" animation="ShakingHead (Weapon Disappears 1)" width="40" height="40" directions="4" frames="9" duration="32" />
+    <item hash="e3e7e4556d1fe2b3304c40078b0413c7" sprite="Murasame (P1)" animation="ShakingHead (Weapon Disappears 2)" width="40" height="40" directions="4" frames="9" duration="32" />
     <item hash="f7e326cc28d5b5a2fa534314221eafdc" sprite="Murasame (P1)" animation="StillFrame (Battle)" width="40" height="40" directions="4" frames="2" duration="10" />
     <item hash="ea41dc1dcf29a42e97efebdee917e651" sprite="Murasame (P1)" animation="StillFrame (Field)" width="40" height="40" directions="4" frames="2" duration="10" />
     <item hash="bbf99b2f46a86aae349e2126f889bae0" sprite="Murasame (P1)" animation="StillFrame (Walking)" width="40" height="40" directions="6" frames="2" duration="10" />
     <item hash="f5925ae577e20fd10f0b83669bc02efb" sprite="Murasame (P1)" animation="Walking" width="40" height="40" directions="4" frames="7" duration="30" />
     <item hash="a2b7fd39379a782fa9aa5c0a792ef05f" sprite="Murasame (P1)" animation="Walking" width="40" height="40" directions="6" frames="7" duration="30" />
-    <item hash="d0cf57adae5c752ade9718ccf8061f38" sprite="Murasame (P1) (Weapon Disappears)" animation="Nodding (Weapon Disappears)" width="40" height="40" directions="4" frames="3" duration="16" />
-    <item hash="dcff58c27c02e9299bbaed25015151be" sprite="Murasame (P1) (Weapon Disappears)" animation="ShakingHead (Weapon Disappears)" width="40" height="40" directions="4" frames="9" duration="32" />
-    <item hash="e3e7e4556d1fe2b3304c40078b0413c7" sprite="Murasame (P1) (Weapon Disappears)" animation="ShakingHead (Weapon Disappears)" width="40" height="40" directions="4" frames="9" duration="32" />
     <item hash="c80249d8ac47b8c1237be215cc85604b" sprite="Murasame (P1) (Weaponless)" animation="Casting" width="40" height="40" directions="4" frames="17" duration="62" />
     <item hash="346fb461d022d9f7634946472aa0d0c4" sprite="Murasame (P1) (Weaponless)" animation="Idle" width="40" height="40" directions="4" frames="5" duration="18" />
     <item hash="ac1706cba4cb413ed1728c0585719407" sprite="Murasame (P1) (Weaponless)" animation="Nodding" width="40" height="40" directions="4" frames="5" duration="18" />
@@ -2772,12 +2772,12 @@
     <item hash="94229dd19a9532610925840ff33ad686" sprite="Nobleman w/ Red Coat and Brown Hair" animation="Walking" width="40" height="40" directions="4" frames="7" duration="24" />
     <item hash="47a2317a6ac8878b5e47ea6b5f310106" sprite="Noblewoman w/ Green Dress and Blonde Hair" animation="StillFrame" width="40" height="40" directions="4" frames="2" duration="10" />
     <item hash="69e218628eb9f221c82edb5f111b0bd2" sprite="Noblewoman w/ Green Dress and Blonde Hair" animation="Walking" width="40" height="40" directions="4" frames="7" duration="24" />
-    <item hash="d41d8cd98f00b204e9800998ecf8427e" sprite="None" animation="Empty" width="0" height="0" directions="1" frames="0" duration="0" />
-    <item hash="2c3902c1e03b1899867d6f58febfb4ff" sprite="None" animation="Nothing1" width="0" height="0" directions="1" frames="1" duration="0" />
-    <item hash="4882e49f464d705b479dcd10de8cc9e1" sprite="None" animation="Nothing1" width="0" height="0" directions="1" frames="1" duration="0" />
-    <item hash="eb4e6cd80000bcdba84f9e6b70c3d563" sprite="None" animation="Nothing1" width="0" height="0" directions="1" frames="1" duration="0" />
-    <item hash="3667f6a0c97490758d7dc9659d01ea34" sprite="None" animation="Nothing2" width="0" height="0" directions="1" frames="1" duration="0" />
-    <item hash="994ce7ba5fed2939550400ee247a16a2" sprite="None" animation="Nothing2" width="0" height="0" directions="1" frames="1" duration="0" />
+    <item hash="d41d8cd98f00b204e9800998ecf8427e" sprite="None" animation="Nothing (Broken, No Frames)" width="0" height="0" directions="1" frames="0" duration="0" />
+    <item hash="3667f6a0c97490758d7dc9659d01ea34" sprite="None" animation="Nothing (F2,00)" width="0" height="0" directions="1" frames="1" duration="0" />
+    <item hash="994ce7ba5fed2939550400ee247a16a2" sprite="None" animation="Nothing (FE,00)" width="0" height="0" directions="1" frames="1" duration="0" />
+    <item hash="eb4e6cd80000bcdba84f9e6b70c3d563" sprite="None" animation="Nothing (FF,00)" width="0" height="0" directions="1" frames="1" duration="0" />
+    <item hash="2c3902c1e03b1899867d6f58febfb4ff" sprite="None" animation="Nothing (FF,01)" width="0" height="0" directions="1" frames="1" duration="0" />
+    <item hash="4882e49f464d705b479dcd10de8cc9e1" sprite="None" animation="Nothing (FF,05)" width="0" height="0" directions="1" frames="1" duration="0" />
     <item hash="12d9b30a3b3ed4c70516801c57cbdd2b" sprite="Noon (P1)" animation="Idle" width="40" height="40" directions="4" frames="5" duration="24" />
     <item hash="f6fa6d67450784285526a10b370756ba" sprite="Noon (P1)" animation="Idle" width="40" height="40" directions="6" frames="5" duration="24" />
     <item hash="8de5e01d7ba5563784136b600f22f9a7" sprite="Noon (P1)" animation="Nodding" width="40" height="40" directions="4" frames="5" duration="12" />

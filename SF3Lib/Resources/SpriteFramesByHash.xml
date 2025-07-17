@@ -2718,6 +2718,10 @@
     <item hash="673b53a5d7202f4db941f087f91f5200" sprite="Bulzome Golem" width="48" height="40" frame="Idle 3" direction="ESE" />
     <item hash="84b6e061320303d97be658e374edbe15" sprite="Bulzome Golem" width="48" height="40" frame="Idle 3" direction="ENE" />
     <item hash="8e546c229e6647b74717cd07b3505a06" sprite="Bulzome Golem" width="48" height="40" frame="Idle 3" direction="NNE" />
+    <item hash="39b164aeb9cfd7bfa4846ee55f8a618e" sprite="Bulzome Golem" width="48" height="40" frame="StillFrame (Old)" direction="SSE" />
+    <item hash="2ad54b723714019f71dcdf2cea49d394" sprite="Bulzome Golem" width="48" height="40" frame="StillFrame (Old)" direction="ESE" />
+    <item hash="4305832dcd4cd3fab18a156c3d6977aa" sprite="Bulzome Golem" width="48" height="40" frame="StillFrame (Old)" direction="ENE" />
+    <item hash="f9dd5a43e2d9fd154fe2ebacda8c9096" sprite="Bulzome Golem" width="48" height="40" frame="StillFrame (Old)" direction="NNE" />
     <item hash="9e5a25e8b2bf37fc41966d34e8444992" sprite="Bulzome Golem" width="48" height="40" frame="Walking 1" direction="SSE" />
     <item hash="013b68e18933ead3db055aedce17bb33" sprite="Bulzome Golem" width="48" height="40" frame="Walking 1" direction="ESE" />
     <item hash="80cb1e03336b7677475202586e5f609c" sprite="Bulzome Golem" width="48" height="40" frame="Walking 1" direction="ENE" />
@@ -2734,10 +2738,6 @@
     <item hash="465cd0d9ae125643817c6e91caf8c871" sprite="Bulzome Golem" width="48" height="40" frame="Walking 4" direction="ESE" />
     <item hash="bf6f89c607b55c9955123ae33d8d3d02" sprite="Bulzome Golem" width="48" height="40" frame="Walking 4" direction="ENE" />
     <item hash="fa55ff9d0bf5fb73aaeacb95baab308b" sprite="Bulzome Golem" width="48" height="40" frame="Walking 4" direction="NNE" />
-    <item hash="39b164aeb9cfd7bfa4846ee55f8a618e" sprite="Bulzome Golem (Old)" width="48" height="40" frame="StillFrame 1" direction="SSE" />
-    <item hash="2ad54b723714019f71dcdf2cea49d394" sprite="Bulzome Golem (Old)" width="48" height="40" frame="StillFrame 1" direction="ESE" />
-    <item hash="4305832dcd4cd3fab18a156c3d6977aa" sprite="Bulzome Golem (Old)" width="48" height="40" frame="StillFrame 1" direction="ENE" />
-    <item hash="f9dd5a43e2d9fd154fe2ebacda8c9096" sprite="Bulzome Golem (Old)" width="48" height="40" frame="StillFrame 1" direction="NNE" />
     <item hash="be8213bf75e6511a341ecc61cb201128" sprite="Bulzome Knight" width="48" height="40" frame="Idle 1" direction="SSE" />
     <item hash="241b9ab11af5663b2b5ba727a1ff32fe" sprite="Bulzome Knight" width="48" height="40" frame="Idle 1" direction="ESE" />
     <item hash="b86fa5a6ba4da4fa23fdaa35934332c8" sprite="Bulzome Knight" width="48" height="40" frame="Idle 1" direction="ENE" />
@@ -6745,14 +6745,14 @@
     <item hash="ee55785d3b9a60346d24b91fb341728a" sprite="Fey (Small)" width="64" height="64" frame="SpinUpToDown 7" direction="SE" />
     <item hash="7e967473d20eeea48a02ef97b14e4849" sprite="Fey (Small)" width="64" height="64" frame="SpinUpToDown 8" direction="SSE" />
     <item hash="dde2d832681e006b0a5cb497d227e93a" sprite="Fey (Small)" width="64" height="64" frame="SpinUpToDown 9" direction="S" />
+    <item hash="931679d11cb24abb1891e91e9ba7adaa" sprite="Fey (Small)" width="64" height="64" frame="StillFrame (Old 1)" direction="S" />
+    <item hash="cb6885b1d260f6f354223ad6349d9eb9" sprite="Fey (Small)" width="64" height="64" frame="StillFrame (Old 2)" direction="S" />
+    <item hash="c84b1402c91b233df87c0fec1eca1da7" sprite="Fey (Small)" width="64" height="64" frame="StillFrame (Old 3, Black Outline)" direction="S" />
     <item hash="bb1933052044563e5f137dd50f7966df" sprite="Fey (Small)" width="64" height="64" frame="Yawning 1" direction="S" />
     <item hash="fc39e9f22c09f235a584b5232ad191b2" sprite="Fey (Small)" width="64" height="64" frame="Yawning 2" direction="S" />
     <item hash="458849b5bf07563b6e858986e62bc355" sprite="Fey (Small)" width="64" height="64" frame="Yawning 3" direction="S" />
     <item hash="8da8caaf7d045bb232c46c99ac9e37a4" sprite="Fey (Small)" width="64" height="64" frame="Yawning 4" direction="S" />
     <item hash="7158f7773f40daa1ebd5a0b126230d9a" sprite="Fey (Small)" width="64" height="64" frame="Yawning 5" direction="S" />
-    <item hash="931679d11cb24abb1891e91e9ba7adaa" sprite="Fey (Small) (Old)" width="64" height="64" frame="StillFrame 1" direction="S" />
-    <item hash="cb6885b1d260f6f354223ad6349d9eb9" sprite="Fey (Small) (Old)" width="64" height="64" frame="StillFrame 2" direction="S" />
-    <item hash="c84b1402c91b233df87c0fec1eca1da7" sprite="Fey (Small) (Old)" width="64" height="64" frame="StillFrame 3 (Black Outline)" direction="S" />
     <item hash="263969042813f0f27555866455f68715" sprite="Fey Wings (Big)" width="128" height="128" frame="Idle 1" direction="First" />
     <item hash="f98c1a8b4218e3c6f51d58154268d404" sprite="Fey Wings (Big)" width="128" height="128" frame="Idle 1" direction="Second" />
     <item hash="c4d40cd372b6f4b0198c6e68a1e7fa3f" sprite="Fey Wings (Small)" width="64" height="64" frame="Idle 1" direction="First" />

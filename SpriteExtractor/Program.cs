@@ -184,14 +184,22 @@ namespace SpriteExtractor {
                     if (key == "Zero (U) (48x32)")
                         key = "Zero (U) (48x24)";
 
-                    var spriteInfo = spriteInfos[key];
+                    if (spriteInfos.ContainsKey(key)) {
+                        var spriteInfo = spriteInfos[key];
 
-                    spritesheet.Value.VerticalOffset = MostCommonKey(spriteInfo.VerticalOffsetValueCount);
-                    spritesheet.Value.Unknown0x08    = MostCommonKey(spriteInfo.Unknown0x08Count);
-                    spritesheet.Value.CollisionSize  = MostCommonKey(spriteInfo.CollisionSizeCount);
-                    spritesheet.Value.Scale          = (int) MostCommonKey(spriteInfo.ScaleCount);
+                        spritesheet.Value.VerticalOffset = MostCommonKey(spriteInfo.VerticalOffsetValueCount);
+                        spritesheet.Value.Unknown0x08    = MostCommonKey(spriteInfo.Unknown0x08Count);
+                        spritesheet.Value.CollisionSize  = MostCommonKey(spriteInfo.CollisionSizeCount);
+                        spritesheet.Value.Scale          = (int) MostCommonKey(spriteInfo.ScaleCount);
+                    }
                 }
             }
+
+            // For some reason, we have to add "Nothing (Broken, No Frames)" to the "None" spritedef.
+            spriteDefs.First(x => x.Name == "None").Spritesheets.First().Value.AnimationByDirections.First().Value.Animations.Add(
+                "Nothing (Broken, No Frames)",
+                new AnimationDef() { AnimationFrames = [] }
+            );
 
             Console.WriteLine();
             Console.WriteLine("===================================================");
@@ -215,7 +223,6 @@ namespace SpriteExtractor {
             Console.WriteLine("===================================================");
             Console.WriteLine();
 
-            var spritesWithSpriteSheets = new HashSet<SpriteDef>();
             foreach (var spriteDef in spriteDefs) {
                 var spritePath = Path.Combine(c_pathOut, FilesystemString(spriteDef.Name));
 
@@ -363,57 +370,59 @@ namespace SpriteExtractor {
                         try {
                             _ = Directory.CreateDirectory(Path.Combine(c_pathOut, FilesystemString(spriteDef.Name)));
                             bitmap.Save(outputPath);
-                            spritesWithSpriteSheets.Add(spriteDef);
                         }
                         catch { }
                     }
                 }
 #pragma warning restore CA1416 // Validate platform compatibility
 
-                // Filter out frames that don't have image data that made it to a sprite sheet.
-                framesFound = framesFound
-                    .Distinct()
-                    .OrderBy(x => x.Name)
-                    .ThenBy(x => x.Direction)
-                    .ThenBy(x => x.Hash)
-                    .ToList();
+                // Unless we have sprite def for "None", which has no frames, eliminate some empty frames/animations.
+                if (spriteDef.Name != "None") {
+                    // Filter out frames that don't have image data that made it to a sprite sheet.
+                    framesFound = framesFound
+                        .Distinct()
+                        .OrderBy(x => x.Name)
+                        .ThenBy(x => x.Direction)
+                        .ThenBy(x => x.Hash)
+                        .ToList();
 
-                // Filter out sprite sheets and variants that have no frames.
-                spriteDef.Spritesheets = framesFound
-                    .OrderBy(x => x.Width)
-                    .ThenBy(x => x.Height)
-                    .OrderBy(x => x.Name)
-                    .ThenBy(x => x.Direction)
-                    .GroupBy(x => SpritesheetDef.DimensionsToKey(x.Width, x.Height))
-                    .ToDictionary(x => x.Key, x => {
-                        var size = SpritesheetDef.KeyToDimensions(x.Key);
-                        var existingSpritesheet = spriteDef.Spritesheets[x.Key];
-                        return new SpritesheetDef(
-                            x.ToArray(),
-                            spriteDef.Spritesheets[x.Key].AnimationByDirections
-                                .Where(y => framesFound.Any(z => size.Width == z.Width && size.Height == z.Height))
-                                .OrderBy(y => y.Key)
-                                .ToDictionary(y => y.Key, y => y.Value)
-                        ) {
-                            CollisionSize  = existingSpritesheet.CollisionSize,
-                            Scale          = existingSpritesheet.Scale,
-                            Unknown0x08    = existingSpritesheet.Unknown0x08,
-                            VerticalOffset = existingSpritesheet.VerticalOffset,
-                        };
-                    });
+                    // Filter out sprite sheets and variants that have no frames.
+                    spriteDef.Spritesheets = framesFound
+                        .OrderBy(x => x.Width)
+                        .ThenBy(x => x.Height)
+                        .OrderBy(x => x.Name)
+                        .ThenBy(x => x.Direction)
+                        .GroupBy(x => SpritesheetDef.DimensionsToKey(x.Width, x.Height))
+                        .ToDictionary(x => x.Key, x => {
+                            var size = SpritesheetDef.KeyToDimensions(x.Key);
+                            var existingSpritesheet = spriteDef.Spritesheets[x.Key];
+                            return new SpritesheetDef(
+                                x.ToArray(),
+                                spriteDef.Spritesheets[x.Key].AnimationByDirections
+                                    .Where(y => framesFound.Any(z => size.Width == z.Width && size.Height == z.Height))
+                                    .OrderBy(y => y.Key)
+                                    .ToDictionary(y => y.Key, y => y.Value)
+                            ) {
+                                CollisionSize  = existingSpritesheet.CollisionSize,
+                                Scale          = existingSpritesheet.Scale,
+                                Unknown0x08    = existingSpritesheet.Unknown0x08,
+                                VerticalOffset = existingSpritesheet.VerticalOffset,
+                            };
+                        });
 
-                var framesFoundHashSet = framesFound.Select(x => x.Hash).ToHashSet();
+                    var framesFoundHashSet = framesFound.Select(x => x.Hash).ToHashSet();
 
-                // Filter out animations that have missing frames or no frames at all.
-                foreach (var spritesheet in spriteDef.Spritesheets.Values) {
-                    foreach (var variant in spritesheet.AnimationByDirections) {
-                        var validAnimations = variant.Value.Animations
-                            .Where(x => x.Value.AnimationFrames.Length > 0 && x.Value.AnimationFrames
-                                .All(y => y.FrameHashes == null || y.FrameHashes.All(z => z == null || framesFoundHashSet.Contains(z)))
-                            )
-                            .OrderBy(x => x.Key)
-                            .ToDictionary(x => x.Key, x => x.Value);
-                        variant.Value.Animations = validAnimations;
+                    // Filter out animations that have missing frames or no frames at all.
+                    foreach (var spritesheet in spriteDef.Spritesheets.Values) {
+                        foreach (var variant in spritesheet.AnimationByDirections) {
+                            var validAnimations = variant.Value.Animations
+                                .Where(x => x.Value.AnimationFrames.Length > 0 && x.Value.AnimationFrames
+                                    .All(y => y.FrameHashes == null || y.FrameHashes.All(z => z == null || framesFoundHashSet.Contains(z)))
+                                )
+                                .OrderBy(x => x.Key)
+                                .ToDictionary(x => x.Key, x => x.Value);
+                            variant.Value.Animations = validAnimations;
+                        }
                     }
                 }
             }
@@ -431,18 +440,11 @@ namespace SpriteExtractor {
             };
 
             foreach (var spriteDef in spriteDefs) {
-                if (!spritesWithSpriteSheets.Contains(spriteDef))
-                    continue;
-
                 var spritePath = Path.Combine(c_pathOut, FilesystemString(spriteDef.Name));
                 var spriteDefPath = Path.Combine(spritePath, FilesystemString(spriteDef.Name) + ".json");
                 Console.WriteLine($"Writing '{spriteDefPath}'...");
 
-                if (spriteDef.Spritesheets.Count == 0) {
-                    Console.WriteLine($"    Skipping -- contains no sprite sheets");
-                    continue;
-                }
-
+                _ = Directory.CreateDirectory(Path.Combine(c_pathOut, FilesystemString(spriteDef.Name)));
                 using (var file = File.Open(spriteDefPath, FileMode.Create)) {
                     using (var stream = new StreamWriter(file)) {
                         stream.NewLine = "\n";

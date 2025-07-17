@@ -6,16 +6,18 @@ namespace SF3.Sprites {
         public SpriteDef() { }
 
         public SpriteDef(string name, UniqueFrameDef[] frames, UniqueAnimationDef[] animations) {
+            var frameKeys = frames.Select(x => SpritesheetDef.DimensionsToKey(x.Width, x.Height)).Distinct().ToArray();
+            var animationKeys = animations.Select(x => SpritesheetDef.DimensionsToKey(x.Width, x.Height)).Distinct().ToArray();
+            var keys = frameKeys.Concat(animationKeys).Distinct().OrderBy(x => x).ToArray();
+
             Name = name;
-            Spritesheets = frames
+            Spritesheets = keys
+                .Select(x => SpritesheetDef.KeyToDimensions(x))
                 .OrderBy(x => x.Width)
                 .ThenBy(x => x.Height)
-                .OrderBy(x => x.FrameName)
-                .ThenBy(x => x.Direction)
-                .GroupBy(x => SpritesheetDef.DimensionsToKey(x.Width, x.Height))
-                .ToDictionary(x => x.Key, x => new SpritesheetDef(
-                    x.ToArray(),
-                    animations.Where(y => y.Width == x.First().Width && y.Height == x.First().Height).ToArray()
+                .ToDictionary(x => SpritesheetDef.DimensionsToKey(x.Width, x.Height), x => new SpritesheetDef(
+                    frames.Where(y => y.Width == x.Width && y.Height == x.Height).OrderBy(y => y.FrameName).ThenBy(y => y.Direction).ThenBy(y => y.TextureHash).ToArray(),
+                    animations.Where(y => y.Width == x.Width && y.Height == x.Height).OrderBy(y => y.Directions).ThenBy(y => y.AnimationName).ThenBy(y => y.AnimationHash).ToArray()
                 ));
 
             foreach (var spritesheet in Spritesheets.Values)
@@ -26,16 +28,18 @@ namespace SF3.Sprites {
         }
 
         public SpriteDef(string name, StandaloneFrameDef[] frames, UniqueAnimationDef[] animations) {
+            var frameKeys = frames.Select(x => SpritesheetDef.DimensionsToKey(x.Width, x.Height)).Distinct().ToArray();
+            var animationKeys = animations.Select(x => SpritesheetDef.DimensionsToKey(x.Width, x.Height)).Distinct().ToArray();
+            var keys = frameKeys.Concat(animationKeys).Distinct().OrderBy(x => x).ToArray();
+
             Name = name;
-            Spritesheets = frames
+            Spritesheets = keys
+                .Select(x => SpritesheetDef.KeyToDimensions(x))
                 .OrderBy(x => x.Width)
                 .ThenBy(x => x.Height)
-                .OrderBy(x => x.Name)
-                .ThenBy(x => x.Direction)
-                .GroupBy(x => SpritesheetDef.DimensionsToKey(x.Width, x.Height))
-                .ToDictionary(x => x.Key, x => new SpritesheetDef(
-                    x.ToArray(),
-                    animations.Where(y => y.Width == x.First().Width && y.Height == x.First().Height).ToArray()
+                .ToDictionary(x => SpritesheetDef.DimensionsToKey(x.Width, x.Height), x => new SpritesheetDef(
+                    frames.Where(y => y.Width == x.Width && y.Height == x.Height).OrderBy(y => y.Name).ThenBy(y => y.Direction).ThenBy(y => y.Hash).ToArray(),
+                    animations.Where(y => y.Width == x.Width && y.Height == x.Height).OrderBy(y => y.Directions).ThenBy(y => y.AnimationName).ThenBy(y => y.AnimationHash).ToArray()
                 ));
         }
 
