@@ -1,170 +1,6 @@
 {
   "Name": "Garosh (U)",
   "Spritesheets": {
-    "48x40": {
-      "VerticalOffset": 0,
-      "Unknown0x08": 20,
-      "CollisionSize": 40,
-      "Scale": 1.0,
-      "FrameGroups": {
-        "GettingUpFromKneeling 1": {
-          "Frames": {
-            "SSE": {
-              "Hash": "fd2f22efbc0d011b00ce1899d2bc8912",
-              "SpriteSheetX": 0,
-              "SpriteSheetY": 0
-            },
-            "ESE": {
-              "Hash": "7edc03d6d3ef0ca0ee19b14b171dd30f",
-              "SpriteSheetX": 48,
-              "SpriteSheetY": 0
-            },
-            "ENE": {
-              "Hash": "7dfa4e03fcc0617613b26a6014442d9e",
-              "SpriteSheetX": 96,
-              "SpriteSheetY": 0
-            },
-            "NNE": {
-              "Hash": "80285d0751864b74d86b426fd582c7ed",
-              "SpriteSheetX": 144,
-              "SpriteSheetY": 0
-            }
-          }
-        },
-        "GettingUpFromKneeling 2": {
-          "Frames": {
-            "SSE": {
-              "Hash": "d48d3139e708495ce8813a698e57ebf3",
-              "SpriteSheetX": 0,
-              "SpriteSheetY": 40
-            },
-            "ESE": {
-              "Hash": "f8cb26f8aff445bb05636386856837a8",
-              "SpriteSheetX": 48,
-              "SpriteSheetY": 40
-            },
-            "ENE": {
-              "Hash": "5141662c8a83805287d525ea4b725652",
-              "SpriteSheetX": 96,
-              "SpriteSheetY": 40
-            },
-            "NNE": {
-              "Hash": "4bd9eb1d3ebcebbb88d8c6c006052b98",
-              "SpriteSheetX": 144,
-              "SpriteSheetY": 40
-            }
-          }
-        },
-        "GettingUpFromKneeling 3": {
-          "Frames": {
-            "SSE": {
-              "Hash": "aca49ff54a5167b057d722a009937b97",
-              "SpriteSheetX": 0,
-              "SpriteSheetY": 80
-            },
-            "ESE": {
-              "Hash": "ff1a8c025614e8dd72e13fa12ba52bd7",
-              "SpriteSheetX": 48,
-              "SpriteSheetY": 80
-            },
-            "ENE": {
-              "Hash": "0ca01d3a64da8f1c31de6908c3a26bc5",
-              "SpriteSheetX": 96,
-              "SpriteSheetY": 80
-            },
-            "NNE": {
-              "Hash": "2cf299029040c5aef3e72a1bdbede879",
-              "SpriteSheetX": 144,
-              "SpriteSheetY": 80
-            }
-          }
-        },
-        "OnGround 1": {
-          "Frames": {
-            "SSE": {
-              "Hash": "837420ef70137a44e4c3066f87166ee3",
-              "SpriteSheetX": 0,
-              "SpriteSheetY": 120
-            },
-            "ESE": {
-              "Hash": "14526fd4d456b2707c4a66f6207fd9c6",
-              "SpriteSheetX": 48,
-              "SpriteSheetY": 120
-            },
-            "ENE": {
-              "Hash": "9aea71414af90ebfe5bc2ee5af47eb49",
-              "SpriteSheetX": 96,
-              "SpriteSheetY": 120
-            },
-            "NNE": {
-              "Hash": "3c2b2960614b94cb58924f5ee98ec339",
-              "SpriteSheetX": 144,
-              "SpriteSheetY": 120
-            }
-          }
-        }
-      },
-      "AnimationByDirections": {
-        "4": {
-          "Animations": {
-            "GettingUpFromKneeling": {
-              "AnimationFrames": [
-                {
-                  "FrameGroup": "OnGround 1",
-                  "Command": "Frame",
-                  "Parameter": 15
-                },
-                {
-                  "FrameGroup": "GettingUpFromKneeling 1",
-                  "Command": "Frame",
-                  "Parameter": 8
-                },
-                {
-                  "FrameGroup": "GettingUpFromKneeling 2",
-                  "Command": "Frame",
-                  "Parameter": 6
-                },
-                {
-                  "FrameGroup": "GettingUpFromKneeling 3",
-                  "Command": "Frame",
-                  "Parameter": 6
-                },
-                {
-                  "Command": "GotoAnimation",
-                  "Parameter": 1
-                }
-              ]
-            },
-            "StillFrame (Kneeling, Repeat)": {
-              "AnimationFrames": [
-                {
-                  "FrameGroup": "GettingUpFromKneeling 3",
-                  "Command": "Frame",
-                  "Parameter": 99
-                },
-                {
-                  "Command": "GotoFrameOffset",
-                  "Parameter": 0
-                }
-              ]
-            },
-            "StillFrame (OnGround)": {
-              "AnimationFrames": [
-                {
-                  "FrameGroup": "OnGround 1",
-                  "Command": "Frame",
-                  "Parameter": 10
-                },
-                {
-                  "Command": "Stop",
-                  "Parameter": 0
-                }
-              ]
-            }
-          }
-        }
-      }
-    },
     "40x40": {
       "VerticalOffset": 0,
       "Unknown0x08": 20,
@@ -701,6 +537,170 @@
                 },
                 {
                   "Command": "GotoFrameOffset",
+                  "Parameter": 0
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    "48x40": {
+      "VerticalOffset": 0,
+      "Unknown0x08": 20,
+      "CollisionSize": 40,
+      "Scale": 1.0,
+      "FrameGroups": {
+        "GettingUpFromKneeling 1": {
+          "Frames": {
+            "SSE": {
+              "Hash": "fd2f22efbc0d011b00ce1899d2bc8912",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 0
+            },
+            "ESE": {
+              "Hash": "7edc03d6d3ef0ca0ee19b14b171dd30f",
+              "SpriteSheetX": 48,
+              "SpriteSheetY": 0
+            },
+            "ENE": {
+              "Hash": "7dfa4e03fcc0617613b26a6014442d9e",
+              "SpriteSheetX": 96,
+              "SpriteSheetY": 0
+            },
+            "NNE": {
+              "Hash": "80285d0751864b74d86b426fd582c7ed",
+              "SpriteSheetX": 144,
+              "SpriteSheetY": 0
+            }
+          }
+        },
+        "GettingUpFromKneeling 2": {
+          "Frames": {
+            "SSE": {
+              "Hash": "d48d3139e708495ce8813a698e57ebf3",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 40
+            },
+            "ESE": {
+              "Hash": "f8cb26f8aff445bb05636386856837a8",
+              "SpriteSheetX": 48,
+              "SpriteSheetY": 40
+            },
+            "ENE": {
+              "Hash": "5141662c8a83805287d525ea4b725652",
+              "SpriteSheetX": 96,
+              "SpriteSheetY": 40
+            },
+            "NNE": {
+              "Hash": "4bd9eb1d3ebcebbb88d8c6c006052b98",
+              "SpriteSheetX": 144,
+              "SpriteSheetY": 40
+            }
+          }
+        },
+        "GettingUpFromKneeling 3": {
+          "Frames": {
+            "SSE": {
+              "Hash": "aca49ff54a5167b057d722a009937b97",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 80
+            },
+            "ESE": {
+              "Hash": "ff1a8c025614e8dd72e13fa12ba52bd7",
+              "SpriteSheetX": 48,
+              "SpriteSheetY": 80
+            },
+            "ENE": {
+              "Hash": "0ca01d3a64da8f1c31de6908c3a26bc5",
+              "SpriteSheetX": 96,
+              "SpriteSheetY": 80
+            },
+            "NNE": {
+              "Hash": "2cf299029040c5aef3e72a1bdbede879",
+              "SpriteSheetX": 144,
+              "SpriteSheetY": 80
+            }
+          }
+        },
+        "OnGround 1": {
+          "Frames": {
+            "SSE": {
+              "Hash": "837420ef70137a44e4c3066f87166ee3",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 120
+            },
+            "ESE": {
+              "Hash": "14526fd4d456b2707c4a66f6207fd9c6",
+              "SpriteSheetX": 48,
+              "SpriteSheetY": 120
+            },
+            "ENE": {
+              "Hash": "9aea71414af90ebfe5bc2ee5af47eb49",
+              "SpriteSheetX": 96,
+              "SpriteSheetY": 120
+            },
+            "NNE": {
+              "Hash": "3c2b2960614b94cb58924f5ee98ec339",
+              "SpriteSheetX": 144,
+              "SpriteSheetY": 120
+            }
+          }
+        }
+      },
+      "AnimationByDirections": {
+        "4": {
+          "Animations": {
+            "GettingUpFromKneeling": {
+              "AnimationFrames": [
+                {
+                  "FrameGroup": "OnGround 1",
+                  "Command": "Frame",
+                  "Parameter": 15
+                },
+                {
+                  "FrameGroup": "GettingUpFromKneeling 1",
+                  "Command": "Frame",
+                  "Parameter": 8
+                },
+                {
+                  "FrameGroup": "GettingUpFromKneeling 2",
+                  "Command": "Frame",
+                  "Parameter": 6
+                },
+                {
+                  "FrameGroup": "GettingUpFromKneeling 3",
+                  "Command": "Frame",
+                  "Parameter": 6
+                },
+                {
+                  "Command": "GotoAnimation",
+                  "Parameter": 1
+                }
+              ]
+            },
+            "StillFrame (Kneeling, Repeat)": {
+              "AnimationFrames": [
+                {
+                  "FrameGroup": "GettingUpFromKneeling 3",
+                  "Command": "Frame",
+                  "Parameter": 99
+                },
+                {
+                  "Command": "GotoFrameOffset",
+                  "Parameter": 0
+                }
+              ]
+            },
+            "StillFrame (OnGround)": {
+              "AnimationFrames": [
+                {
+                  "FrameGroup": "OnGround 1",
+                  "Command": "Frame",
+                  "Parameter": 10
+                },
+                {
+                  "Command": "Stop",
                   "Parameter": 0
                 }
               ]

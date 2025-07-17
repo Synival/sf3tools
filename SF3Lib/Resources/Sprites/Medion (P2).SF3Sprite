@@ -1,131 +1,6 @@
 {
   "Name": "Medion (P2)",
   "Spritesheets": {
-    "48x40": {
-      "VerticalOffset": 0,
-      "Unknown0x08": 20,
-      "CollisionSize": 40,
-      "Scale": 1.0,
-      "FrameGroups": {
-        "Field 1": {
-          "Frames": {
-            "SSE": {
-              "Hash": "daec641f9ddb7a87711e2794dac3c0e5",
-              "SpriteSheetX": 0,
-              "SpriteSheetY": 0
-            },
-            "ESE": {
-              "Hash": "e3cd09866a3373b98a9900a17b930db0",
-              "SpriteSheetX": 48,
-              "SpriteSheetY": 0
-            },
-            "ENE": {
-              "Hash": "76f8d7ef02681b7ab9f39751bedeb7de",
-              "SpriteSheetX": 96,
-              "SpriteSheetY": 0
-            },
-            "NNE": {
-              "Hash": "fa084381142998f54b160896f614f82f",
-              "SpriteSheetX": 144,
-              "SpriteSheetY": 0
-            }
-          }
-        },
-        "LeaningOnSword 1": {
-          "Frames": {
-            "SSE": {
-              "Hash": "97dc2ef321364df35a7ec8988f63e755",
-              "SpriteSheetX": 0,
-              "SpriteSheetY": 40
-            },
-            "ESE": {
-              "Hash": "0254432426b5e002eac9a5c5a89361a8",
-              "SpriteSheetX": 48,
-              "SpriteSheetY": 40
-            },
-            "ENE": {
-              "Hash": "31631edb793c4a2a3d2d80a94ef4fa8e",
-              "SpriteSheetX": 96,
-              "SpriteSheetY": 40
-            },
-            "NNE": {
-              "Hash": "b890abc546b330a450fb91c757ab245d",
-              "SpriteSheetX": 144,
-              "SpriteSheetY": 40
-            }
-          }
-        },
-        "OnGround 1": {
-          "Frames": {
-            "SSE": {
-              "Hash": "db0bc740e62b915b3c5f213ef138ba6e",
-              "SpriteSheetX": 0,
-              "SpriteSheetY": 80
-            },
-            "ESE": {
-              "Hash": "71404b097fa1924df0c730d3705d27e8",
-              "SpriteSheetX": 48,
-              "SpriteSheetY": 80
-            },
-            "ENE": {
-              "Hash": "bc20c196148fee5602a58d30f439c53a",
-              "SpriteSheetX": 96,
-              "SpriteSheetY": 80
-            },
-            "NNE": {
-              "Hash": "cd7fca77ca9847cecb76130bdc66ed01",
-              "SpriteSheetX": 144,
-              "SpriteSheetY": 80
-            }
-          }
-        }
-      },
-      "AnimationByDirections": {
-        "4": {
-          "Animations": {
-            "StillFrame (Field)": {
-              "AnimationFrames": [
-                {
-                  "FrameGroup": "Field 1",
-                  "Command": "Frame",
-                  "Parameter": 10
-                },
-                {
-                  "Command": "Stop",
-                  "Parameter": 0
-                }
-              ]
-            },
-            "StillFrame (LeaningOnSword)": {
-              "AnimationFrames": [
-                {
-                  "FrameGroup": "LeaningOnSword 1",
-                  "Command": "Frame",
-                  "Parameter": 10
-                },
-                {
-                  "Command": "Stop",
-                  "Parameter": 0
-                }
-              ]
-            },
-            "StillFrame (OnGround)": {
-              "AnimationFrames": [
-                {
-                  "FrameGroup": "OnGround 1",
-                  "Command": "Frame",
-                  "Parameter": 10
-                },
-                {
-                  "Command": "Stop",
-                  "Parameter": 0
-                }
-              ]
-            }
-          }
-        }
-      }
-    },
     "40x40": {
       "VerticalOffset": 0,
       "Unknown0x08": 20,
@@ -528,6 +403,131 @@
                 },
                 {
                   "Command": "GotoFrameOffset",
+                  "Parameter": 0
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    "48x40": {
+      "VerticalOffset": 0,
+      "Unknown0x08": 20,
+      "CollisionSize": 40,
+      "Scale": 1.0,
+      "FrameGroups": {
+        "Field 1": {
+          "Frames": {
+            "SSE": {
+              "Hash": "daec641f9ddb7a87711e2794dac3c0e5",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 0
+            },
+            "ESE": {
+              "Hash": "e3cd09866a3373b98a9900a17b930db0",
+              "SpriteSheetX": 48,
+              "SpriteSheetY": 0
+            },
+            "ENE": {
+              "Hash": "76f8d7ef02681b7ab9f39751bedeb7de",
+              "SpriteSheetX": 96,
+              "SpriteSheetY": 0
+            },
+            "NNE": {
+              "Hash": "fa084381142998f54b160896f614f82f",
+              "SpriteSheetX": 144,
+              "SpriteSheetY": 0
+            }
+          }
+        },
+        "LeaningOnSword 1": {
+          "Frames": {
+            "SSE": {
+              "Hash": "97dc2ef321364df35a7ec8988f63e755",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 40
+            },
+            "ESE": {
+              "Hash": "0254432426b5e002eac9a5c5a89361a8",
+              "SpriteSheetX": 48,
+              "SpriteSheetY": 40
+            },
+            "ENE": {
+              "Hash": "31631edb793c4a2a3d2d80a94ef4fa8e",
+              "SpriteSheetX": 96,
+              "SpriteSheetY": 40
+            },
+            "NNE": {
+              "Hash": "b890abc546b330a450fb91c757ab245d",
+              "SpriteSheetX": 144,
+              "SpriteSheetY": 40
+            }
+          }
+        },
+        "OnGround 1": {
+          "Frames": {
+            "SSE": {
+              "Hash": "db0bc740e62b915b3c5f213ef138ba6e",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 80
+            },
+            "ESE": {
+              "Hash": "71404b097fa1924df0c730d3705d27e8",
+              "SpriteSheetX": 48,
+              "SpriteSheetY": 80
+            },
+            "ENE": {
+              "Hash": "bc20c196148fee5602a58d30f439c53a",
+              "SpriteSheetX": 96,
+              "SpriteSheetY": 80
+            },
+            "NNE": {
+              "Hash": "cd7fca77ca9847cecb76130bdc66ed01",
+              "SpriteSheetX": 144,
+              "SpriteSheetY": 80
+            }
+          }
+        }
+      },
+      "AnimationByDirections": {
+        "4": {
+          "Animations": {
+            "StillFrame (Field)": {
+              "AnimationFrames": [
+                {
+                  "FrameGroup": "Field 1",
+                  "Command": "Frame",
+                  "Parameter": 10
+                },
+                {
+                  "Command": "Stop",
+                  "Parameter": 0
+                }
+              ]
+            },
+            "StillFrame (LeaningOnSword)": {
+              "AnimationFrames": [
+                {
+                  "FrameGroup": "LeaningOnSword 1",
+                  "Command": "Frame",
+                  "Parameter": 10
+                },
+                {
+                  "Command": "Stop",
+                  "Parameter": 0
+                }
+              ]
+            },
+            "StillFrame (OnGround)": {
+              "AnimationFrames": [
+                {
+                  "FrameGroup": "OnGround 1",
+                  "Command": "Frame",
+                  "Parameter": 10
+                },
+                {
+                  "Command": "Stop",
                   "Parameter": 0
                 }
               ]

@@ -1,141 +1,6 @@
 {
   "Name": "Hedva (P1)",
   "Spritesheets": {
-    "48x40": {
-      "VerticalOffset": 0,
-      "Unknown0x08": 20,
-      "CollisionSize": 40,
-      "Scale": 1.0,
-      "FrameGroups": {
-        "GettingUpFromGround 1": {
-          "Frames": {
-            "SSE": {
-              "Hash": "3d7df37f3241a4158d2915a702f59fcd",
-              "SpriteSheetX": 0,
-              "SpriteSheetY": 0
-            },
-            "ESE": {
-              "Hash": "2c071ec762218d7bf01b89fcd3277454",
-              "SpriteSheetX": 48,
-              "SpriteSheetY": 0
-            },
-            "ENE": {
-              "Hash": "a0daee6efebb5adc08ef81811f497a04",
-              "SpriteSheetX": 96,
-              "SpriteSheetY": 0
-            },
-            "NNE": {
-              "Hash": "cba49bd2cff0a7b026adc07552a9ee01",
-              "SpriteSheetX": 144,
-              "SpriteSheetY": 0
-            }
-          }
-        },
-        "GettingUpFromGround 2": {
-          "Frames": {
-            "SSE": {
-              "Hash": "d2528ded20104bfca287d559ed8d325c",
-              "SpriteSheetX": 0,
-              "SpriteSheetY": 40
-            },
-            "ESE": {
-              "Hash": "f3f371fead6f095ac1e94a54f0cd23f9",
-              "SpriteSheetX": 48,
-              "SpriteSheetY": 40
-            },
-            "ENE": {
-              "Hash": "adf027ecd3adabf0b1595808033eda95",
-              "SpriteSheetX": 96,
-              "SpriteSheetY": 40
-            },
-            "NNE": {
-              "Hash": "0502c0a7dc090b529994d302212d9fd8",
-              "SpriteSheetX": 144,
-              "SpriteSheetY": 40
-            }
-          }
-        },
-        "OnGround 1": {
-          "Frames": {
-            "SSE": {
-              "Hash": "9cb77bbd8a8e13150e495eea0d999eb3",
-              "SpriteSheetX": 0,
-              "SpriteSheetY": 80
-            },
-            "ESE": {
-              "Hash": "be491eb403a5bbb76379c10399affd7a",
-              "SpriteSheetX": 48,
-              "SpriteSheetY": 80
-            },
-            "ENE": {
-              "Hash": "3a32e1aea1e0e05251d1e595f3fc1ab3",
-              "SpriteSheetX": 96,
-              "SpriteSheetY": 80
-            },
-            "NNE": {
-              "Hash": "8869e9d93fb497cd1c0044be227ae068",
-              "SpriteSheetX": 144,
-              "SpriteSheetY": 80
-            }
-          }
-        }
-      },
-      "AnimationByDirections": {
-        "4": {
-          "Animations": {
-            "GettingUpFromGround": {
-              "AnimationFrames": [
-                {
-                  "FrameGroup": "OnGround 1",
-                  "Command": "Frame",
-                  "Parameter": 15
-                },
-                {
-                  "FrameGroup": "GettingUpFromGround 1",
-                  "Command": "Frame",
-                  "Parameter": 15
-                },
-                {
-                  "FrameGroup": "GettingUpFromGround 2",
-                  "Command": "Frame",
-                  "Parameter": 5
-                },
-                {
-                  "Command": "GotoFrameOffset",
-                  "Parameter": 0
-                }
-              ]
-            },
-            "StillFrame (Idle)": {
-              "AnimationFrames": [
-                {
-                  "FrameGroup": "GettingUpFromGround 2",
-                  "Command": "Frame",
-                  "Parameter": 10
-                },
-                {
-                  "Command": "Stop",
-                  "Parameter": 0
-                }
-              ]
-            },
-            "StillFrame (OnGround)": {
-              "AnimationFrames": [
-                {
-                  "FrameGroup": "OnGround 1",
-                  "Command": "Frame",
-                  "Parameter": 15
-                },
-                {
-                  "Command": "Stop",
-                  "Parameter": 0
-                }
-              ]
-            }
-          }
-        }
-      }
-    },
     "40x40": {
       "VerticalOffset": 0,
       "Unknown0x08": 20,
@@ -797,6 +662,141 @@
                 },
                 {
                   "Command": "GotoFrameOffset",
+                  "Parameter": 0
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    "48x40": {
+      "VerticalOffset": 0,
+      "Unknown0x08": 20,
+      "CollisionSize": 40,
+      "Scale": 1.0,
+      "FrameGroups": {
+        "GettingUpFromGround 1": {
+          "Frames": {
+            "SSE": {
+              "Hash": "3d7df37f3241a4158d2915a702f59fcd",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 0
+            },
+            "ESE": {
+              "Hash": "2c071ec762218d7bf01b89fcd3277454",
+              "SpriteSheetX": 48,
+              "SpriteSheetY": 0
+            },
+            "ENE": {
+              "Hash": "a0daee6efebb5adc08ef81811f497a04",
+              "SpriteSheetX": 96,
+              "SpriteSheetY": 0
+            },
+            "NNE": {
+              "Hash": "cba49bd2cff0a7b026adc07552a9ee01",
+              "SpriteSheetX": 144,
+              "SpriteSheetY": 0
+            }
+          }
+        },
+        "GettingUpFromGround 2": {
+          "Frames": {
+            "SSE": {
+              "Hash": "d2528ded20104bfca287d559ed8d325c",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 40
+            },
+            "ESE": {
+              "Hash": "f3f371fead6f095ac1e94a54f0cd23f9",
+              "SpriteSheetX": 48,
+              "SpriteSheetY": 40
+            },
+            "ENE": {
+              "Hash": "adf027ecd3adabf0b1595808033eda95",
+              "SpriteSheetX": 96,
+              "SpriteSheetY": 40
+            },
+            "NNE": {
+              "Hash": "0502c0a7dc090b529994d302212d9fd8",
+              "SpriteSheetX": 144,
+              "SpriteSheetY": 40
+            }
+          }
+        },
+        "OnGround 1": {
+          "Frames": {
+            "SSE": {
+              "Hash": "9cb77bbd8a8e13150e495eea0d999eb3",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 80
+            },
+            "ESE": {
+              "Hash": "be491eb403a5bbb76379c10399affd7a",
+              "SpriteSheetX": 48,
+              "SpriteSheetY": 80
+            },
+            "ENE": {
+              "Hash": "3a32e1aea1e0e05251d1e595f3fc1ab3",
+              "SpriteSheetX": 96,
+              "SpriteSheetY": 80
+            },
+            "NNE": {
+              "Hash": "8869e9d93fb497cd1c0044be227ae068",
+              "SpriteSheetX": 144,
+              "SpriteSheetY": 80
+            }
+          }
+        }
+      },
+      "AnimationByDirections": {
+        "4": {
+          "Animations": {
+            "GettingUpFromGround": {
+              "AnimationFrames": [
+                {
+                  "FrameGroup": "OnGround 1",
+                  "Command": "Frame",
+                  "Parameter": 15
+                },
+                {
+                  "FrameGroup": "GettingUpFromGround 1",
+                  "Command": "Frame",
+                  "Parameter": 15
+                },
+                {
+                  "FrameGroup": "GettingUpFromGround 2",
+                  "Command": "Frame",
+                  "Parameter": 5
+                },
+                {
+                  "Command": "GotoFrameOffset",
+                  "Parameter": 0
+                }
+              ]
+            },
+            "StillFrame (Idle)": {
+              "AnimationFrames": [
+                {
+                  "FrameGroup": "GettingUpFromGround 2",
+                  "Command": "Frame",
+                  "Parameter": 10
+                },
+                {
+                  "Command": "Stop",
+                  "Parameter": 0
+                }
+              ]
+            },
+            "StillFrame (OnGround)": {
+              "AnimationFrames": [
+                {
+                  "FrameGroup": "OnGround 1",
+                  "Command": "Frame",
+                  "Parameter": 15
+                },
+                {
+                  "Command": "Stop",
                   "Parameter": 0
                 }
               ]

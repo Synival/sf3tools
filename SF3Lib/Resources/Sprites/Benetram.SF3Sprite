@@ -1,103 +1,6 @@
 {
   "Name": "Benetram",
   "Spritesheets": {
-    "48x40": {
-      "VerticalOffset": 0,
-      "Unknown0x08": 20,
-      "CollisionSize": 40,
-      "Scale": 1.0,
-      "FrameGroups": {
-        "GettingUpFromGround (Looks Silly) 1": {
-          "Frames": {
-            "ESE": {
-              "Hash": "98d4adee3a149ac44f7c818a7acc0127",
-              "SpriteSheetX": 0,
-              "SpriteSheetY": 0
-            }
-          }
-        },
-        "GettingUpFromGround (Looks Silly) 2": {
-          "Frames": {
-            "ESE": {
-              "Hash": "2ec203191c0f5424e4f7d0a69608ca03",
-              "SpriteSheetX": 0,
-              "SpriteSheetY": 40
-            }
-          }
-        },
-        "OnGround 1": {
-          "Frames": {
-            "ESE": {
-              "Hash": "5e2a81b74c53b972dcb4ebcea6b0decb",
-              "SpriteSheetX": 0,
-              "SpriteSheetY": 80
-            }
-          }
-        }
-      },
-      "AnimationByDirections": {
-        "1": {
-          "Animations": {
-            "GettingUpFromGround (Looks Silly)": {
-              "AnimationFrames": [
-                {
-                  "Frames": {
-                    "First": {
-                      "Frame": "OnGround 1",
-                      "Direction": "ESE"
-                    }
-                  },
-                  "Command": "Frame",
-                  "Parameter": 5
-                },
-                {
-                  "Frames": {
-                    "First": {
-                      "Frame": "GettingUpFromGround (Looks Silly) 1",
-                      "Direction": "ESE"
-                    }
-                  },
-                  "Command": "Frame",
-                  "Parameter": 5
-                },
-                {
-                  "Frames": {
-                    "First": {
-                      "Frame": "GettingUpFromGround (Looks Silly) 2",
-                      "Direction": "ESE"
-                    }
-                  },
-                  "Command": "Frame",
-                  "Parameter": 5
-                },
-                {
-                  "Command": "Stop",
-                  "Parameter": 0
-                }
-              ]
-            },
-            "StillFrame (OnGround)": {
-              "AnimationFrames": [
-                {
-                  "Frames": {
-                    "First": {
-                      "Frame": "OnGround 1",
-                      "Direction": "ESE"
-                    }
-                  },
-                  "Command": "Frame",
-                  "Parameter": 10
-                },
-                {
-                  "Command": "Stop",
-                  "Parameter": 0
-                }
-              ]
-            }
-          }
-        }
-      }
-    },
     "40x40": {
       "VerticalOffset": 0,
       "Unknown0x08": 20,
@@ -1758,6 +1661,103 @@
                 },
                 {
                   "Command": "GotoFrameOffset",
+                  "Parameter": 0
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    "48x40": {
+      "VerticalOffset": 0,
+      "Unknown0x08": 20,
+      "CollisionSize": 40,
+      "Scale": 1.0,
+      "FrameGroups": {
+        "GettingUpFromGround (Looks Silly) 1": {
+          "Frames": {
+            "ESE": {
+              "Hash": "98d4adee3a149ac44f7c818a7acc0127",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 0
+            }
+          }
+        },
+        "GettingUpFromGround (Looks Silly) 2": {
+          "Frames": {
+            "ESE": {
+              "Hash": "2ec203191c0f5424e4f7d0a69608ca03",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 40
+            }
+          }
+        },
+        "OnGround 1": {
+          "Frames": {
+            "ESE": {
+              "Hash": "5e2a81b74c53b972dcb4ebcea6b0decb",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 80
+            }
+          }
+        }
+      },
+      "AnimationByDirections": {
+        "1": {
+          "Animations": {
+            "GettingUpFromGround (Looks Silly)": {
+              "AnimationFrames": [
+                {
+                  "Frames": {
+                    "First": {
+                      "Frame": "OnGround 1",
+                      "Direction": "ESE"
+                    }
+                  },
+                  "Command": "Frame",
+                  "Parameter": 5
+                },
+                {
+                  "Frames": {
+                    "First": {
+                      "Frame": "GettingUpFromGround (Looks Silly) 1",
+                      "Direction": "ESE"
+                    }
+                  },
+                  "Command": "Frame",
+                  "Parameter": 5
+                },
+                {
+                  "Frames": {
+                    "First": {
+                      "Frame": "GettingUpFromGround (Looks Silly) 2",
+                      "Direction": "ESE"
+                    }
+                  },
+                  "Command": "Frame",
+                  "Parameter": 5
+                },
+                {
+                  "Command": "Stop",
+                  "Parameter": 0
+                }
+              ]
+            },
+            "StillFrame (OnGround)": {
+              "AnimationFrames": [
+                {
+                  "Frames": {
+                    "First": {
+                      "Frame": "OnGround 1",
+                      "Direction": "ESE"
+                    }
+                  },
+                  "Command": "Frame",
+                  "Parameter": 10
+                },
+                {
+                  "Command": "Stop",
                   "Parameter": 0
                 }
               ]

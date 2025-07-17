@@ -1,83 +1,6 @@
 {
   "Name": "Burly Worker",
   "Spritesheets": {
-    "48x40": {
-      "VerticalOffset": 0,
-      "Unknown0x08": 20,
-      "CollisionSize": 40,
-      "Scale": 1.0,
-      "FrameGroups": {
-        "Idle (Relaxing) 1": {
-          "Frames": {
-            "SSE": {
-              "Hash": "c921195772cfb633f0c181b1232e1b23",
-              "SpriteSheetX": 0,
-              "SpriteSheetY": 0
-            },
-            "ESE": {
-              "Hash": "dfcf7e23844e18c520ac2dd91d571f17",
-              "SpriteSheetX": 48,
-              "SpriteSheetY": 0
-            },
-            "ENE": {
-              "Hash": "7b4e672e7ac82b49759c903e2087565f",
-              "SpriteSheetX": 96,
-              "SpriteSheetY": 0
-            },
-            "NNE": {
-              "Hash": "987f54d18eaaabdbf66e68d6a6293963",
-              "SpriteSheetX": 144,
-              "SpriteSheetY": 0
-            }
-          }
-        }
-      },
-      "AnimationByDirections": {
-        "4": {
-          "Animations": {
-            "StillFrame (Relaxing, Repeat 1)": {
-              "AnimationFrames": [
-                {
-                  "FrameGroup": "Idle (Relaxing) 1",
-                  "Command": "Frame",
-                  "Parameter": 4
-                },
-                {
-                  "Command": "GotoFrameOffset",
-                  "Parameter": 0
-                }
-              ]
-            },
-            "StillFrame (Relaxing, Repeat 2)": {
-              "AnimationFrames": [
-                {
-                  "FrameGroup": "Idle (Relaxing) 1",
-                  "Command": "Frame",
-                  "Parameter": 5
-                },
-                {
-                  "Command": "GotoFrameOffset",
-                  "Parameter": 0
-                }
-              ]
-            },
-            "StillFrame (Relaxing)": {
-              "AnimationFrames": [
-                {
-                  "FrameGroup": "Idle (Relaxing) 1",
-                  "Command": "Frame",
-                  "Parameter": 10
-                },
-                {
-                  "Command": "Stop",
-                  "Parameter": 0
-                }
-              ]
-            }
-          }
-        }
-      }
-    },
     "40x40": {
       "VerticalOffset": 0,
       "Unknown0x08": 20,
@@ -614,6 +537,83 @@
                 },
                 {
                   "Command": "GotoFrameOffset",
+                  "Parameter": 0
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    "48x40": {
+      "VerticalOffset": 0,
+      "Unknown0x08": 20,
+      "CollisionSize": 40,
+      "Scale": 1.0,
+      "FrameGroups": {
+        "Idle (Relaxing) 1": {
+          "Frames": {
+            "SSE": {
+              "Hash": "c921195772cfb633f0c181b1232e1b23",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 0
+            },
+            "ESE": {
+              "Hash": "dfcf7e23844e18c520ac2dd91d571f17",
+              "SpriteSheetX": 48,
+              "SpriteSheetY": 0
+            },
+            "ENE": {
+              "Hash": "7b4e672e7ac82b49759c903e2087565f",
+              "SpriteSheetX": 96,
+              "SpriteSheetY": 0
+            },
+            "NNE": {
+              "Hash": "987f54d18eaaabdbf66e68d6a6293963",
+              "SpriteSheetX": 144,
+              "SpriteSheetY": 0
+            }
+          }
+        }
+      },
+      "AnimationByDirections": {
+        "4": {
+          "Animations": {
+            "StillFrame (Relaxing, Repeat 1)": {
+              "AnimationFrames": [
+                {
+                  "FrameGroup": "Idle (Relaxing) 1",
+                  "Command": "Frame",
+                  "Parameter": 4
+                },
+                {
+                  "Command": "GotoFrameOffset",
+                  "Parameter": 0
+                }
+              ]
+            },
+            "StillFrame (Relaxing, Repeat 2)": {
+              "AnimationFrames": [
+                {
+                  "FrameGroup": "Idle (Relaxing) 1",
+                  "Command": "Frame",
+                  "Parameter": 5
+                },
+                {
+                  "Command": "GotoFrameOffset",
+                  "Parameter": 0
+                }
+              ]
+            },
+            "StillFrame (Relaxing)": {
+              "AnimationFrames": [
+                {
+                  "FrameGroup": "Idle (Relaxing) 1",
+                  "Command": "Frame",
+                  "Parameter": 10
+                },
+                {
+                  "Command": "Stop",
                   "Parameter": 0
                 }
               ]

@@ -1,373 +1,6 @@
 {
   "Name": "Gracia (P1)",
   "Spritesheets": {
-    "48x40": {
-      "VerticalOffset": 0,
-      "Unknown0x08": 20,
-      "CollisionSize": 40,
-      "Scale": 0.0,
-      "FrameGroups": {
-        "GettingUpFromPantingOnGround 1": {
-          "Frames": {
-            "ENE": {
-              "Hash": "51d4341f8c155490f28c494fa65ac010",
-              "SpriteSheetX": 96,
-              "SpriteSheetY": 0
-            }
-          }
-        },
-        "GettingUpFromPantingOnGround 2": {
-          "Frames": {
-            "ENE": {
-              "Hash": "482c801e880b0118bb02b763cc27b4b0",
-              "SpriteSheetX": 96,
-              "SpriteSheetY": 40
-            }
-          }
-        },
-        "GettingUpFromPantingOnGround 3": {
-          "Frames": {
-            "ENE": {
-              "Hash": "e1dca9377e0cdedd330487ccd596814b",
-              "SpriteSheetX": 96,
-              "SpriteSheetY": 80
-            }
-          }
-        },
-        "GettingUpFromPantingOnGround 4": {
-          "Frames": {
-            "ENE": {
-              "Hash": "c98cdff354d61bca614359366c818b08",
-              "SpriteSheetX": 96,
-              "SpriteSheetY": 120
-            }
-          }
-        },
-        "OnGround 1": {
-          "Frames": {
-            "ENE": {
-              "Hash": "78ecb6873d366134876a85990c3ace2c",
-              "SpriteSheetX": 96,
-              "SpriteSheetY": 160
-            }
-          }
-        },
-        "PantingOnGround 1": {
-          "Frames": {
-            "SSE": {
-              "Hash": "4ffbc966148bdaa6601550b759470720",
-              "SpriteSheetX": 0,
-              "SpriteSheetY": 200
-            },
-            "ESE": {
-              "Hash": "eabe030776aa416fc63f79747b22ac4d",
-              "SpriteSheetX": 48,
-              "SpriteSheetY": 200
-            },
-            "ENE": {
-              "Hash": "e0037a609b0571c38f2db170c29d7241",
-              "SpriteSheetX": 96,
-              "SpriteSheetY": 200
-            },
-            "NNE": {
-              "Hash": "e16e3c0b65a901240c9df05d789829f8",
-              "SpriteSheetX": 144,
-              "SpriteSheetY": 200
-            }
-          }
-        },
-        "PantingOnGround 2": {
-          "Frames": {
-            "SSE": {
-              "Hash": "7d66d94f968c29487125a129eeeb4513",
-              "SpriteSheetX": 0,
-              "SpriteSheetY": 240
-            },
-            "ESE": {
-              "Hash": "1dd8bdbd87e1c22d85f6e15f85843bc8",
-              "SpriteSheetX": 48,
-              "SpriteSheetY": 240
-            },
-            "ENE": {
-              "Hash": "41877c5ac255721d51e053a327a5a214",
-              "SpriteSheetX": 96,
-              "SpriteSheetY": 240
-            },
-            "NNE": {
-              "Hash": "c19a57445cca20912d44060b69fd095e",
-              "SpriteSheetX": 144,
-              "SpriteSheetY": 240
-            }
-          }
-        },
-        "PantingOnGround 3": {
-          "Frames": {
-            "SSE": {
-              "Hash": "a0c10d5d2e12560089b76b8e90d51a4b",
-              "SpriteSheetX": 0,
-              "SpriteSheetY": 280
-            },
-            "ESE": {
-              "Hash": "6a64b6db45ce2982f2e9756992895250",
-              "SpriteSheetX": 48,
-              "SpriteSheetY": 280
-            },
-            "ENE": {
-              "Hash": "49299f0a80918f0d9a76063b7745ec28",
-              "SpriteSheetX": 96,
-              "SpriteSheetY": 280
-            },
-            "NNE": {
-              "Hash": "66891dd7821258cdb3f2f768b590f7ef",
-              "SpriteSheetX": 144,
-              "SpriteSheetY": 280
-            }
-          }
-        }
-      },
-      "AnimationByDirections": {
-        "1": {
-          "Animations": {
-            "GettingUpFromPantingOnGround": {
-              "AnimationFrames": [
-                {
-                  "Frames": {
-                    "First": {
-                      "Frame": "PantingOnGround 1",
-                      "Direction": "ENE"
-                    }
-                  },
-                  "Command": "Frame",
-                  "Parameter": 8
-                },
-                {
-                  "Frames": {
-                    "First": {
-                      "Frame": "GettingUpFromPantingOnGround 1",
-                      "Direction": "ENE"
-                    }
-                  },
-                  "Command": "Frame",
-                  "Parameter": 4
-                },
-                {
-                  "Frames": {
-                    "First": {
-                      "Frame": "GettingUpFromPantingOnGround 2",
-                      "Direction": "ENE"
-                    }
-                  },
-                  "Command": "Frame",
-                  "Parameter": 10
-                },
-                {
-                  "Frames": {
-                    "First": {
-                      "Frame": "GettingUpFromPantingOnGround 3",
-                      "Direction": "ENE"
-                    }
-                  },
-                  "Command": "Frame",
-                  "Parameter": 4
-                },
-                {
-                  "Frames": {
-                    "First": {
-                      "Frame": "GettingUpFromPantingOnGround 4",
-                      "Direction": "ENE"
-                    }
-                  },
-                  "Command": "Frame",
-                  "Parameter": 10
-                },
-                {
-                  "Command": "Stop",
-                  "Parameter": 0
-                }
-              ]
-            },
-            "PantingOnGround": {
-              "AnimationFrames": [
-                {
-                  "Frames": {
-                    "First": {
-                      "Frame": "PantingOnGround 1",
-                      "Direction": "ENE"
-                    }
-                  },
-                  "Command": "Frame",
-                  "Parameter": 8
-                },
-                {
-                  "Frames": {
-                    "First": {
-                      "Frame": "PantingOnGround 2",
-                      "Direction": "ENE"
-                    }
-                  },
-                  "Command": "Frame",
-                  "Parameter": 6
-                },
-                {
-                  "Frames": {
-                    "First": {
-                      "Frame": "PantingOnGround 3",
-                      "Direction": "ENE"
-                    }
-                  },
-                  "Command": "Frame",
-                  "Parameter": 10
-                },
-                {
-                  "Frames": {
-                    "First": {
-                      "Frame": "PantingOnGround 2",
-                      "Direction": "ENE"
-                    }
-                  },
-                  "Command": "Frame",
-                  "Parameter": 4
-                },
-                {
-                  "Frames": {
-                    "First": {
-                      "Frame": "PantingOnGround 1",
-                      "Direction": "ENE"
-                    }
-                  },
-                  "Command": "Frame",
-                  "Parameter": 8
-                },
-                {
-                  "Frames": {
-                    "First": {
-                      "Frame": "PantingOnGround 2",
-                      "Direction": "ENE"
-                    }
-                  },
-                  "Command": "Frame",
-                  "Parameter": 6
-                },
-                {
-                  "Frames": {
-                    "First": {
-                      "Frame": "PantingOnGround 3",
-                      "Direction": "ENE"
-                    }
-                  },
-                  "Command": "Frame",
-                  "Parameter": 10
-                },
-                {
-                  "Frames": {
-                    "First": {
-                      "Frame": "PantingOnGround 2",
-                      "Direction": "ENE"
-                    }
-                  },
-                  "Command": "Frame",
-                  "Parameter": 4
-                },
-                {
-                  "Frames": {
-                    "First": {
-                      "Frame": "PantingOnGround 1",
-                      "Direction": "ENE"
-                    }
-                  },
-                  "Command": "Frame",
-                  "Parameter": 8
-                },
-                {
-                  "Frames": {
-                    "First": {
-                      "Frame": "PantingOnGround 2",
-                      "Direction": "ENE"
-                    }
-                  },
-                  "Command": "Frame",
-                  "Parameter": 6
-                },
-                {
-                  "Frames": {
-                    "First": {
-                      "Frame": "PantingOnGround 3",
-                      "Direction": "ENE"
-                    }
-                  },
-                  "Command": "Frame",
-                  "Parameter": 10
-                },
-                {
-                  "Frames": {
-                    "First": {
-                      "Frame": "PantingOnGround 2",
-                      "Direction": "ENE"
-                    }
-                  },
-                  "Command": "Frame",
-                  "Parameter": 4
-                },
-                {
-                  "Command": "GotoFrameOffset",
-                  "Parameter": 0
-                }
-              ]
-            },
-            "StillFrame (OnGround, Repeat)": {
-              "AnimationFrames": [
-                {
-                  "Frames": {
-                    "First": {
-                      "Frame": "OnGround 1",
-                      "Direction": "ENE"
-                    }
-                  },
-                  "Command": "Frame",
-                  "Parameter": 10
-                },
-                {
-                  "Command": "GotoFrameOffset",
-                  "Parameter": 0
-                }
-              ]
-            }
-          }
-        },
-        "4": {
-          "Animations": {
-            "PantingOnGround": {
-              "AnimationFrames": [
-                {
-                  "FrameGroup": "PantingOnGround 1",
-                  "Command": "Frame",
-                  "Parameter": 8
-                },
-                {
-                  "FrameGroup": "PantingOnGround 2",
-                  "Command": "Frame",
-                  "Parameter": 6
-                },
-                {
-                  "FrameGroup": "PantingOnGround 3",
-                  "Command": "Frame",
-                  "Parameter": 10
-                },
-                {
-                  "FrameGroup": "PantingOnGround 2",
-                  "Command": "Frame",
-                  "Parameter": 4
-                },
-                {
-                  "Command": "GotoFrameOffset",
-                  "Parameter": 0
-                }
-              ]
-            }
-          }
-        }
-      }
-    },
     "40x40": {
       "VerticalOffset": 0,
       "Unknown0x08": 20,
@@ -1187,6 +820,373 @@
                 },
                 {
                   "FrameGroup": "Walking 5",
+                  "Command": "Frame",
+                  "Parameter": 4
+                },
+                {
+                  "Command": "GotoFrameOffset",
+                  "Parameter": 0
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    "48x40": {
+      "VerticalOffset": 0,
+      "Unknown0x08": 20,
+      "CollisionSize": 40,
+      "Scale": 0.0,
+      "FrameGroups": {
+        "GettingUpFromPantingOnGround 1": {
+          "Frames": {
+            "ENE": {
+              "Hash": "51d4341f8c155490f28c494fa65ac010",
+              "SpriteSheetX": 96,
+              "SpriteSheetY": 0
+            }
+          }
+        },
+        "GettingUpFromPantingOnGround 2": {
+          "Frames": {
+            "ENE": {
+              "Hash": "482c801e880b0118bb02b763cc27b4b0",
+              "SpriteSheetX": 96,
+              "SpriteSheetY": 40
+            }
+          }
+        },
+        "GettingUpFromPantingOnGround 3": {
+          "Frames": {
+            "ENE": {
+              "Hash": "e1dca9377e0cdedd330487ccd596814b",
+              "SpriteSheetX": 96,
+              "SpriteSheetY": 80
+            }
+          }
+        },
+        "GettingUpFromPantingOnGround 4": {
+          "Frames": {
+            "ENE": {
+              "Hash": "c98cdff354d61bca614359366c818b08",
+              "SpriteSheetX": 96,
+              "SpriteSheetY": 120
+            }
+          }
+        },
+        "OnGround 1": {
+          "Frames": {
+            "ENE": {
+              "Hash": "78ecb6873d366134876a85990c3ace2c",
+              "SpriteSheetX": 96,
+              "SpriteSheetY": 160
+            }
+          }
+        },
+        "PantingOnGround 1": {
+          "Frames": {
+            "SSE": {
+              "Hash": "4ffbc966148bdaa6601550b759470720",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 200
+            },
+            "ESE": {
+              "Hash": "eabe030776aa416fc63f79747b22ac4d",
+              "SpriteSheetX": 48,
+              "SpriteSheetY": 200
+            },
+            "ENE": {
+              "Hash": "e0037a609b0571c38f2db170c29d7241",
+              "SpriteSheetX": 96,
+              "SpriteSheetY": 200
+            },
+            "NNE": {
+              "Hash": "e16e3c0b65a901240c9df05d789829f8",
+              "SpriteSheetX": 144,
+              "SpriteSheetY": 200
+            }
+          }
+        },
+        "PantingOnGround 2": {
+          "Frames": {
+            "SSE": {
+              "Hash": "7d66d94f968c29487125a129eeeb4513",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 240
+            },
+            "ESE": {
+              "Hash": "1dd8bdbd87e1c22d85f6e15f85843bc8",
+              "SpriteSheetX": 48,
+              "SpriteSheetY": 240
+            },
+            "ENE": {
+              "Hash": "41877c5ac255721d51e053a327a5a214",
+              "SpriteSheetX": 96,
+              "SpriteSheetY": 240
+            },
+            "NNE": {
+              "Hash": "c19a57445cca20912d44060b69fd095e",
+              "SpriteSheetX": 144,
+              "SpriteSheetY": 240
+            }
+          }
+        },
+        "PantingOnGround 3": {
+          "Frames": {
+            "SSE": {
+              "Hash": "a0c10d5d2e12560089b76b8e90d51a4b",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 280
+            },
+            "ESE": {
+              "Hash": "6a64b6db45ce2982f2e9756992895250",
+              "SpriteSheetX": 48,
+              "SpriteSheetY": 280
+            },
+            "ENE": {
+              "Hash": "49299f0a80918f0d9a76063b7745ec28",
+              "SpriteSheetX": 96,
+              "SpriteSheetY": 280
+            },
+            "NNE": {
+              "Hash": "66891dd7821258cdb3f2f768b590f7ef",
+              "SpriteSheetX": 144,
+              "SpriteSheetY": 280
+            }
+          }
+        }
+      },
+      "AnimationByDirections": {
+        "1": {
+          "Animations": {
+            "GettingUpFromPantingOnGround": {
+              "AnimationFrames": [
+                {
+                  "Frames": {
+                    "First": {
+                      "Frame": "PantingOnGround 1",
+                      "Direction": "ENE"
+                    }
+                  },
+                  "Command": "Frame",
+                  "Parameter": 8
+                },
+                {
+                  "Frames": {
+                    "First": {
+                      "Frame": "GettingUpFromPantingOnGround 1",
+                      "Direction": "ENE"
+                    }
+                  },
+                  "Command": "Frame",
+                  "Parameter": 4
+                },
+                {
+                  "Frames": {
+                    "First": {
+                      "Frame": "GettingUpFromPantingOnGround 2",
+                      "Direction": "ENE"
+                    }
+                  },
+                  "Command": "Frame",
+                  "Parameter": 10
+                },
+                {
+                  "Frames": {
+                    "First": {
+                      "Frame": "GettingUpFromPantingOnGround 3",
+                      "Direction": "ENE"
+                    }
+                  },
+                  "Command": "Frame",
+                  "Parameter": 4
+                },
+                {
+                  "Frames": {
+                    "First": {
+                      "Frame": "GettingUpFromPantingOnGround 4",
+                      "Direction": "ENE"
+                    }
+                  },
+                  "Command": "Frame",
+                  "Parameter": 10
+                },
+                {
+                  "Command": "Stop",
+                  "Parameter": 0
+                }
+              ]
+            },
+            "PantingOnGround": {
+              "AnimationFrames": [
+                {
+                  "Frames": {
+                    "First": {
+                      "Frame": "PantingOnGround 1",
+                      "Direction": "ENE"
+                    }
+                  },
+                  "Command": "Frame",
+                  "Parameter": 8
+                },
+                {
+                  "Frames": {
+                    "First": {
+                      "Frame": "PantingOnGround 2",
+                      "Direction": "ENE"
+                    }
+                  },
+                  "Command": "Frame",
+                  "Parameter": 6
+                },
+                {
+                  "Frames": {
+                    "First": {
+                      "Frame": "PantingOnGround 3",
+                      "Direction": "ENE"
+                    }
+                  },
+                  "Command": "Frame",
+                  "Parameter": 10
+                },
+                {
+                  "Frames": {
+                    "First": {
+                      "Frame": "PantingOnGround 2",
+                      "Direction": "ENE"
+                    }
+                  },
+                  "Command": "Frame",
+                  "Parameter": 4
+                },
+                {
+                  "Frames": {
+                    "First": {
+                      "Frame": "PantingOnGround 1",
+                      "Direction": "ENE"
+                    }
+                  },
+                  "Command": "Frame",
+                  "Parameter": 8
+                },
+                {
+                  "Frames": {
+                    "First": {
+                      "Frame": "PantingOnGround 2",
+                      "Direction": "ENE"
+                    }
+                  },
+                  "Command": "Frame",
+                  "Parameter": 6
+                },
+                {
+                  "Frames": {
+                    "First": {
+                      "Frame": "PantingOnGround 3",
+                      "Direction": "ENE"
+                    }
+                  },
+                  "Command": "Frame",
+                  "Parameter": 10
+                },
+                {
+                  "Frames": {
+                    "First": {
+                      "Frame": "PantingOnGround 2",
+                      "Direction": "ENE"
+                    }
+                  },
+                  "Command": "Frame",
+                  "Parameter": 4
+                },
+                {
+                  "Frames": {
+                    "First": {
+                      "Frame": "PantingOnGround 1",
+                      "Direction": "ENE"
+                    }
+                  },
+                  "Command": "Frame",
+                  "Parameter": 8
+                },
+                {
+                  "Frames": {
+                    "First": {
+                      "Frame": "PantingOnGround 2",
+                      "Direction": "ENE"
+                    }
+                  },
+                  "Command": "Frame",
+                  "Parameter": 6
+                },
+                {
+                  "Frames": {
+                    "First": {
+                      "Frame": "PantingOnGround 3",
+                      "Direction": "ENE"
+                    }
+                  },
+                  "Command": "Frame",
+                  "Parameter": 10
+                },
+                {
+                  "Frames": {
+                    "First": {
+                      "Frame": "PantingOnGround 2",
+                      "Direction": "ENE"
+                    }
+                  },
+                  "Command": "Frame",
+                  "Parameter": 4
+                },
+                {
+                  "Command": "GotoFrameOffset",
+                  "Parameter": 0
+                }
+              ]
+            },
+            "StillFrame (OnGround, Repeat)": {
+              "AnimationFrames": [
+                {
+                  "Frames": {
+                    "First": {
+                      "Frame": "OnGround 1",
+                      "Direction": "ENE"
+                    }
+                  },
+                  "Command": "Frame",
+                  "Parameter": 10
+                },
+                {
+                  "Command": "GotoFrameOffset",
+                  "Parameter": 0
+                }
+              ]
+            }
+          }
+        },
+        "4": {
+          "Animations": {
+            "PantingOnGround": {
+              "AnimationFrames": [
+                {
+                  "FrameGroup": "PantingOnGround 1",
+                  "Command": "Frame",
+                  "Parameter": 8
+                },
+                {
+                  "FrameGroup": "PantingOnGround 2",
+                  "Command": "Frame",
+                  "Parameter": 6
+                },
+                {
+                  "FrameGroup": "PantingOnGround 3",
+                  "Command": "Frame",
+                  "Parameter": 10
+                },
+                {
+                  "FrameGroup": "PantingOnGround 2",
                   "Command": "Frame",
                   "Parameter": 4
                 },

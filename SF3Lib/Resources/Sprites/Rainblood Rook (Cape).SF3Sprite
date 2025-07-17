@@ -1,63 +1,6 @@
 {
   "Name": "Rainblood Rook (Cape)",
   "Spritesheets": {
-    "56x32": {
-      "VerticalOffset": 0,
-      "Unknown0x08": 20,
-      "CollisionSize": 40,
-      "Scale": 1.0,
-      "FrameGroups": {
-        "Idle (KnockedOut) 1": {
-          "Frames": {
-            "First": {
-              "Hash": "03863ad88a78ee8a03a9307be2fce7a2",
-              "SpriteSheetX": 0,
-              "SpriteSheetY": 0
-            }
-          }
-        }
-      },
-      "AnimationByDirections": {
-        "17": {
-          "Animations": {
-            "StillFrame (KnockedOut, Repeat)": {
-              "AnimationFrames": [
-                {
-                  "Command": "SetDirectionCount",
-                  "Parameter": 17
-                },
-                {
-                  "FrameGroup": "Idle (KnockedOut) 1",
-                  "Command": "Frame",
-                  "Parameter": 10
-                },
-                {
-                  "Command": "GotoFrameOffset",
-                  "Parameter": 0
-                }
-              ]
-            },
-            "StillFrame (KnockedOut)": {
-              "AnimationFrames": [
-                {
-                  "Command": "SetDirectionCount",
-                  "Parameter": 17
-                },
-                {
-                  "FrameGroup": "Idle (KnockedOut) 1",
-                  "Command": "Frame",
-                  "Parameter": 10
-                },
-                {
-                  "Command": "Stop",
-                  "Parameter": 0
-                }
-              ]
-            }
-          }
-        }
-      }
-    },
     "40x40": {
       "VerticalOffset": 0,
       "Unknown0x08": 20,
@@ -260,6 +203,63 @@
               "AnimationFrames": [
                 {
                   "FrameGroup": "Idle 1",
+                  "Command": "Frame",
+                  "Parameter": 10
+                },
+                {
+                  "Command": "Stop",
+                  "Parameter": 0
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    "56x32": {
+      "VerticalOffset": 0,
+      "Unknown0x08": 20,
+      "CollisionSize": 40,
+      "Scale": 1.0,
+      "FrameGroups": {
+        "Idle (KnockedOut) 1": {
+          "Frames": {
+            "First": {
+              "Hash": "03863ad88a78ee8a03a9307be2fce7a2",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 0
+            }
+          }
+        }
+      },
+      "AnimationByDirections": {
+        "17": {
+          "Animations": {
+            "StillFrame (KnockedOut, Repeat)": {
+              "AnimationFrames": [
+                {
+                  "Command": "SetDirectionCount",
+                  "Parameter": 17
+                },
+                {
+                  "FrameGroup": "Idle (KnockedOut) 1",
+                  "Command": "Frame",
+                  "Parameter": 10
+                },
+                {
+                  "Command": "GotoFrameOffset",
+                  "Parameter": 0
+                }
+              ]
+            },
+            "StillFrame (KnockedOut)": {
+              "AnimationFrames": [
+                {
+                  "Command": "SetDirectionCount",
+                  "Parameter": 17
+                },
+                {
+                  "FrameGroup": "Idle (KnockedOut) 1",
                   "Command": "Frame",
                   "Parameter": 10
                 },

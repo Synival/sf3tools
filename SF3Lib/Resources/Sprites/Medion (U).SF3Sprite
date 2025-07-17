@@ -1,154 +1,6 @@
 {
   "Name": "Medion (U)",
   "Spritesheets": {
-    "48x40": {
-      "VerticalOffset": 0,
-      "Unknown0x08": 20,
-      "CollisionSize": 40,
-      "Scale": 1.0,
-      "FrameGroups": {
-        "GettingUpFromGround 1": {
-          "Frames": {
-            "SSE": {
-              "Hash": "9dcce9c74769747a2ccb6f8539eb248a",
-              "SpriteSheetX": 0,
-              "SpriteSheetY": 0
-            },
-            "ESE": {
-              "Hash": "0a8720c62134e5f8b90b676d256ca608",
-              "SpriteSheetX": 48,
-              "SpriteSheetY": 0
-            },
-            "ENE": {
-              "Hash": "2bbfd2b587c4f71d5bb09e0757b0cefe",
-              "SpriteSheetX": 96,
-              "SpriteSheetY": 0
-            },
-            "NNE": {
-              "Hash": "07325bbf17e90255185869723092cc74",
-              "SpriteSheetX": 144,
-              "SpriteSheetY": 0
-            }
-          }
-        },
-        "LeaningOnSword 1": {
-          "Frames": {
-            "SSE": {
-              "Hash": "d4be3331f0408ec814344bf3ca0a8f71",
-              "SpriteSheetX": 0,
-              "SpriteSheetY": 40
-            },
-            "ESE": {
-              "Hash": "efa59264cbbc649e240cf6d323500218",
-              "SpriteSheetX": 48,
-              "SpriteSheetY": 40
-            },
-            "ENE": {
-              "Hash": "56d0ec807024d574d453800f014c6021",
-              "SpriteSheetX": 96,
-              "SpriteSheetY": 40
-            },
-            "NNE": {
-              "Hash": "2adf5e95afd6de248d8421c2e3514a1c",
-              "SpriteSheetX": 144,
-              "SpriteSheetY": 40
-            }
-          }
-        },
-        "OnGround 1": {
-          "Frames": {
-            "SSE": {
-              "Hash": "b004e3fe84f29612f6e084daddcc73df",
-              "SpriteSheetX": 0,
-              "SpriteSheetY": 80
-            },
-            "ESE": {
-              "Hash": "739fa35da80a2d49c6e20dba950af949",
-              "SpriteSheetX": 48,
-              "SpriteSheetY": 80
-            },
-            "ENE": {
-              "Hash": "b7516cc5f1816551ff9fca50c56156d8",
-              "SpriteSheetX": 96,
-              "SpriteSheetY": 80
-            },
-            "NNE": {
-              "Hash": "9a12442f5f510f803e152e45482e4f11",
-              "SpriteSheetX": 144,
-              "SpriteSheetY": 80
-            }
-          }
-        }
-      },
-      "AnimationByDirections": {
-        "4": {
-          "Animations": {
-            "GettingUpFromGround": {
-              "AnimationFrames": [
-                {
-                  "FrameGroup": "OnGround 1",
-                  "Command": "Frame",
-                  "Parameter": 10
-                },
-                {
-                  "FrameGroup": "LeaningOnSword 1",
-                  "Command": "Frame",
-                  "Parameter": 4
-                },
-                {
-                  "FrameGroup": "GettingUpFromGround 1",
-                  "Command": "Frame",
-                  "Parameter": 4
-                },
-                {
-                  "Command": "Stop",
-                  "Parameter": 0
-                }
-              ]
-            },
-            "StillFrame (LeaningOnSword)": {
-              "AnimationFrames": [
-                {
-                  "FrameGroup": "LeaningOnSword 1",
-                  "Command": "Frame",
-                  "Parameter": 10
-                },
-                {
-                  "Command": "Stop",
-                  "Parameter": 0
-                }
-              ]
-            },
-            "StillFrame (OnGround)": {
-              "AnimationFrames": [
-                {
-                  "FrameGroup": "OnGround 1",
-                  "Command": "Frame",
-                  "Parameter": 10
-                },
-                {
-                  "Command": "Stop",
-                  "Parameter": 0
-                }
-              ]
-            },
-            "StillFrame (Standing)": {
-              "AnimationFrames": [
-                {
-                  "FrameGroup": "GettingUpFromGround 1",
-                  "Command": "Frame",
-                  "Parameter": 10
-                },
-                {
-                  "Command": "Stop",
-                  "Parameter": 0
-                }
-              ]
-            }
-          }
-        }
-      }
-    },
     "40x40": {
       "VerticalOffset": 0,
       "Unknown0x08": 20,
@@ -796,6 +648,154 @@
                   },
                   "Command": "Frame",
                   "Parameter": 4
+                },
+                {
+                  "Command": "Stop",
+                  "Parameter": 0
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    "48x40": {
+      "VerticalOffset": 0,
+      "Unknown0x08": 20,
+      "CollisionSize": 40,
+      "Scale": 1.0,
+      "FrameGroups": {
+        "GettingUpFromGround 1": {
+          "Frames": {
+            "SSE": {
+              "Hash": "9dcce9c74769747a2ccb6f8539eb248a",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 0
+            },
+            "ESE": {
+              "Hash": "0a8720c62134e5f8b90b676d256ca608",
+              "SpriteSheetX": 48,
+              "SpriteSheetY": 0
+            },
+            "ENE": {
+              "Hash": "2bbfd2b587c4f71d5bb09e0757b0cefe",
+              "SpriteSheetX": 96,
+              "SpriteSheetY": 0
+            },
+            "NNE": {
+              "Hash": "07325bbf17e90255185869723092cc74",
+              "SpriteSheetX": 144,
+              "SpriteSheetY": 0
+            }
+          }
+        },
+        "LeaningOnSword 1": {
+          "Frames": {
+            "SSE": {
+              "Hash": "d4be3331f0408ec814344bf3ca0a8f71",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 40
+            },
+            "ESE": {
+              "Hash": "efa59264cbbc649e240cf6d323500218",
+              "SpriteSheetX": 48,
+              "SpriteSheetY": 40
+            },
+            "ENE": {
+              "Hash": "56d0ec807024d574d453800f014c6021",
+              "SpriteSheetX": 96,
+              "SpriteSheetY": 40
+            },
+            "NNE": {
+              "Hash": "2adf5e95afd6de248d8421c2e3514a1c",
+              "SpriteSheetX": 144,
+              "SpriteSheetY": 40
+            }
+          }
+        },
+        "OnGround 1": {
+          "Frames": {
+            "SSE": {
+              "Hash": "b004e3fe84f29612f6e084daddcc73df",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 80
+            },
+            "ESE": {
+              "Hash": "739fa35da80a2d49c6e20dba950af949",
+              "SpriteSheetX": 48,
+              "SpriteSheetY": 80
+            },
+            "ENE": {
+              "Hash": "b7516cc5f1816551ff9fca50c56156d8",
+              "SpriteSheetX": 96,
+              "SpriteSheetY": 80
+            },
+            "NNE": {
+              "Hash": "9a12442f5f510f803e152e45482e4f11",
+              "SpriteSheetX": 144,
+              "SpriteSheetY": 80
+            }
+          }
+        }
+      },
+      "AnimationByDirections": {
+        "4": {
+          "Animations": {
+            "GettingUpFromGround": {
+              "AnimationFrames": [
+                {
+                  "FrameGroup": "OnGround 1",
+                  "Command": "Frame",
+                  "Parameter": 10
+                },
+                {
+                  "FrameGroup": "LeaningOnSword 1",
+                  "Command": "Frame",
+                  "Parameter": 4
+                },
+                {
+                  "FrameGroup": "GettingUpFromGround 1",
+                  "Command": "Frame",
+                  "Parameter": 4
+                },
+                {
+                  "Command": "Stop",
+                  "Parameter": 0
+                }
+              ]
+            },
+            "StillFrame (LeaningOnSword)": {
+              "AnimationFrames": [
+                {
+                  "FrameGroup": "LeaningOnSword 1",
+                  "Command": "Frame",
+                  "Parameter": 10
+                },
+                {
+                  "Command": "Stop",
+                  "Parameter": 0
+                }
+              ]
+            },
+            "StillFrame (OnGround)": {
+              "AnimationFrames": [
+                {
+                  "FrameGroup": "OnGround 1",
+                  "Command": "Frame",
+                  "Parameter": 10
+                },
+                {
+                  "Command": "Stop",
+                  "Parameter": 0
+                }
+              ]
+            },
+            "StillFrame (Standing)": {
+              "AnimationFrames": [
+                {
+                  "FrameGroup": "GettingUpFromGround 1",
+                  "Command": "Frame",
+                  "Parameter": 10
                 },
                 {
                   "Command": "Stop",

@@ -1,174 +1,6 @@
 {
   "Name": "Bald, Shirtless Burly Man",
   "Spritesheets": {
-    "48x40": {
-      "VerticalOffset": 0,
-      "Unknown0x08": 20,
-      "CollisionSize": 40,
-      "Scale": 1.0,
-      "FrameGroups": {
-        "Idle (Resting) 1": {
-          "Frames": {
-            "SSE": {
-              "Hash": "23477e75b841e988a1a5b6b597100742",
-              "SpriteSheetX": 0,
-              "SpriteSheetY": 0
-            },
-            "ESE": {
-              "Hash": "1f3acdcff7af84b4004cd6c6d16d47d2",
-              "SpriteSheetX": 48,
-              "SpriteSheetY": 0
-            },
-            "ENE": {
-              "Hash": "a2acd55ea8bf30aaf8639e710f9d820d",
-              "SpriteSheetX": 96,
-              "SpriteSheetY": 0
-            },
-            "NNE": {
-              "Hash": "b9e078adb7ac4cb95290b1f658862bb9",
-              "SpriteSheetX": 144,
-              "SpriteSheetY": 0
-            }
-          }
-        },
-        "Idle (Resting) 2": {
-          "Frames": {
-            "SSE": {
-              "Hash": "8443fcfa9d5a6fb571407ae21fa0b506",
-              "SpriteSheetX": 0,
-              "SpriteSheetY": 40
-            },
-            "ESE": {
-              "Hash": "5b1dce866d298d9d2fea7823e7dd66de",
-              "SpriteSheetX": 48,
-              "SpriteSheetY": 40
-            },
-            "ENE": {
-              "Hash": "1af576766d384f3a4ea43b1fd041faf8",
-              "SpriteSheetX": 96,
-              "SpriteSheetY": 40
-            },
-            "NNE": {
-              "Hash": "d648d14ce64a6ec8f78841347b590d63",
-              "SpriteSheetX": 144,
-              "SpriteSheetY": 40
-            }
-          }
-        },
-        "Idle (Resting) 3": {
-          "Frames": {
-            "SSE": {
-              "Hash": "018eebd7f6a6b884179ed8f091dea4d3",
-              "SpriteSheetX": 0,
-              "SpriteSheetY": 80
-            },
-            "ESE": {
-              "Hash": "32f19289fcf25e8e97a30afa462dce48",
-              "SpriteSheetX": 48,
-              "SpriteSheetY": 80
-            },
-            "ENE": {
-              "Hash": "6bd4ea7db4ac5eb7d3a7eb0a48ce276d",
-              "SpriteSheetX": 96,
-              "SpriteSheetY": 80
-            },
-            "NNE": {
-              "Hash": "1e83a7d1b6aa45021ae7f71559bdcd37",
-              "SpriteSheetX": 144,
-              "SpriteSheetY": 80
-            }
-          }
-        }
-      },
-      "AnimationByDirections": {
-        "4": {
-          "Animations": {
-            "Idle (Resting)": {
-              "AnimationFrames": [
-                {
-                  "FrameGroup": "Idle (Resting) 1",
-                  "Command": "Frame",
-                  "Parameter": 30
-                },
-                {
-                  "FrameGroup": "Idle (Resting) 2",
-                  "Command": "Frame",
-                  "Parameter": 7
-                },
-                {
-                  "FrameGroup": "Idle (Resting) 3",
-                  "Command": "Frame",
-                  "Parameter": 15
-                },
-                {
-                  "FrameGroup": "Idle (Resting) 2",
-                  "Command": "Frame",
-                  "Parameter": 9
-                },
-                {
-                  "Command": "GotoFrameOffset",
-                  "Parameter": 0
-                }
-              ]
-            },
-            "Sleeping": {
-              "AnimationFrames": [
-                {
-                  "FrameGroup": "Idle (Resting) 1",
-                  "Command": "Frame",
-                  "Parameter": 45
-                },
-                {
-                  "FrameGroup": "Idle (Resting) 2",
-                  "Command": "Frame",
-                  "Parameter": 4
-                },
-                {
-                  "FrameGroup": "Idle (Resting) 3",
-                  "Command": "Frame",
-                  "Parameter": 24
-                },
-                {
-                  "FrameGroup": "Idle (Resting) 2",
-                  "Command": "Frame",
-                  "Parameter": 8
-                },
-                {
-                  "Command": "GotoFrameOffset",
-                  "Parameter": 0
-                }
-              ]
-            },
-            "StillFrame (Resting 1)": {
-              "AnimationFrames": [
-                {
-                  "FrameGroup": "Idle (Resting) 3",
-                  "Command": "Frame",
-                  "Parameter": 10
-                },
-                {
-                  "Command": "Stop",
-                  "Parameter": 0
-                }
-              ]
-            },
-            "StillFrame (Resting 2)": {
-              "AnimationFrames": [
-                {
-                  "FrameGroup": "Idle (Resting) 1",
-                  "Command": "Frame",
-                  "Parameter": 10
-                },
-                {
-                  "Command": "Stop",
-                  "Parameter": 0
-                }
-              ]
-            }
-          }
-        }
-      }
-    },
     "40x40": {
       "VerticalOffset": 0,
       "Unknown0x08": 20,
@@ -747,6 +579,174 @@
                 },
                 {
                   "Command": "GotoFrameOffset",
+                  "Parameter": 0
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    "48x40": {
+      "VerticalOffset": 0,
+      "Unknown0x08": 20,
+      "CollisionSize": 40,
+      "Scale": 1.0,
+      "FrameGroups": {
+        "Idle (Resting) 1": {
+          "Frames": {
+            "SSE": {
+              "Hash": "23477e75b841e988a1a5b6b597100742",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 0
+            },
+            "ESE": {
+              "Hash": "1f3acdcff7af84b4004cd6c6d16d47d2",
+              "SpriteSheetX": 48,
+              "SpriteSheetY": 0
+            },
+            "ENE": {
+              "Hash": "a2acd55ea8bf30aaf8639e710f9d820d",
+              "SpriteSheetX": 96,
+              "SpriteSheetY": 0
+            },
+            "NNE": {
+              "Hash": "b9e078adb7ac4cb95290b1f658862bb9",
+              "SpriteSheetX": 144,
+              "SpriteSheetY": 0
+            }
+          }
+        },
+        "Idle (Resting) 2": {
+          "Frames": {
+            "SSE": {
+              "Hash": "8443fcfa9d5a6fb571407ae21fa0b506",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 40
+            },
+            "ESE": {
+              "Hash": "5b1dce866d298d9d2fea7823e7dd66de",
+              "SpriteSheetX": 48,
+              "SpriteSheetY": 40
+            },
+            "ENE": {
+              "Hash": "1af576766d384f3a4ea43b1fd041faf8",
+              "SpriteSheetX": 96,
+              "SpriteSheetY": 40
+            },
+            "NNE": {
+              "Hash": "d648d14ce64a6ec8f78841347b590d63",
+              "SpriteSheetX": 144,
+              "SpriteSheetY": 40
+            }
+          }
+        },
+        "Idle (Resting) 3": {
+          "Frames": {
+            "SSE": {
+              "Hash": "018eebd7f6a6b884179ed8f091dea4d3",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 80
+            },
+            "ESE": {
+              "Hash": "32f19289fcf25e8e97a30afa462dce48",
+              "SpriteSheetX": 48,
+              "SpriteSheetY": 80
+            },
+            "ENE": {
+              "Hash": "6bd4ea7db4ac5eb7d3a7eb0a48ce276d",
+              "SpriteSheetX": 96,
+              "SpriteSheetY": 80
+            },
+            "NNE": {
+              "Hash": "1e83a7d1b6aa45021ae7f71559bdcd37",
+              "SpriteSheetX": 144,
+              "SpriteSheetY": 80
+            }
+          }
+        }
+      },
+      "AnimationByDirections": {
+        "4": {
+          "Animations": {
+            "Idle (Resting)": {
+              "AnimationFrames": [
+                {
+                  "FrameGroup": "Idle (Resting) 1",
+                  "Command": "Frame",
+                  "Parameter": 30
+                },
+                {
+                  "FrameGroup": "Idle (Resting) 2",
+                  "Command": "Frame",
+                  "Parameter": 7
+                },
+                {
+                  "FrameGroup": "Idle (Resting) 3",
+                  "Command": "Frame",
+                  "Parameter": 15
+                },
+                {
+                  "FrameGroup": "Idle (Resting) 2",
+                  "Command": "Frame",
+                  "Parameter": 9
+                },
+                {
+                  "Command": "GotoFrameOffset",
+                  "Parameter": 0
+                }
+              ]
+            },
+            "Sleeping": {
+              "AnimationFrames": [
+                {
+                  "FrameGroup": "Idle (Resting) 1",
+                  "Command": "Frame",
+                  "Parameter": 45
+                },
+                {
+                  "FrameGroup": "Idle (Resting) 2",
+                  "Command": "Frame",
+                  "Parameter": 4
+                },
+                {
+                  "FrameGroup": "Idle (Resting) 3",
+                  "Command": "Frame",
+                  "Parameter": 24
+                },
+                {
+                  "FrameGroup": "Idle (Resting) 2",
+                  "Command": "Frame",
+                  "Parameter": 8
+                },
+                {
+                  "Command": "GotoFrameOffset",
+                  "Parameter": 0
+                }
+              ]
+            },
+            "StillFrame (Resting 1)": {
+              "AnimationFrames": [
+                {
+                  "FrameGroup": "Idle (Resting) 3",
+                  "Command": "Frame",
+                  "Parameter": 10
+                },
+                {
+                  "Command": "Stop",
+                  "Parameter": 0
+                }
+              ]
+            },
+            "StillFrame (Resting 2)": {
+              "AnimationFrames": [
+                {
+                  "FrameGroup": "Idle (Resting) 1",
+                  "Command": "Frame",
+                  "Parameter": 10
+                },
+                {
+                  "Command": "Stop",
                   "Parameter": 0
                 }
               ]

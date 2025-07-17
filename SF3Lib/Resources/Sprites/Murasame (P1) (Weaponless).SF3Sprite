@@ -1,331 +1,6 @@
 {
   "Name": "Murasame (P1) (Weaponless)",
   "Spritesheets": {
-    "48x40": {
-      "VerticalOffset": 0,
-      "Unknown0x08": 20,
-      "CollisionSize": 40,
-      "Scale": 1.0,
-      "FrameGroups": {
-        "Backflip 1": {
-          "Frames": {
-            "SSE": {
-              "Hash": "385c3b5c4cc980927037b523655e3b6b",
-              "SpriteSheetX": 0,
-              "SpriteSheetY": 0
-            },
-            "ESE": {
-              "Hash": "50cd018e66900703b30d9f1e3fa154e4",
-              "SpriteSheetX": 48,
-              "SpriteSheetY": 0
-            },
-            "ENE": {
-              "Hash": "04e2e815f274b9fe5bc04d9315941908",
-              "SpriteSheetX": 96,
-              "SpriteSheetY": 0
-            },
-            "NNE": {
-              "Hash": "de9d50829c07f3b78d896d2c6731a6ba",
-              "SpriteSheetX": 144,
-              "SpriteSheetY": 0
-            }
-          }
-        },
-        "Backflip 10": {
-          "Frames": {
-            "SSE": {
-              "Hash": "46bcb7e4d2e352282700b0291dc22146",
-              "SpriteSheetX": 0,
-              "SpriteSheetY": 40
-            },
-            "ESE": {
-              "Hash": "379418a3680e01012764e194feab36bb",
-              "SpriteSheetX": 48,
-              "SpriteSheetY": 40
-            },
-            "ENE": {
-              "Hash": "38651e0b30b70517e4f0eb24326df866",
-              "SpriteSheetX": 96,
-              "SpriteSheetY": 40
-            },
-            "NNE": {
-              "Hash": "37223b1877c66f2d75c5fb3fcefd4944",
-              "SpriteSheetX": 144,
-              "SpriteSheetY": 40
-            }
-          }
-        },
-        "Backflip 2": {
-          "Frames": {
-            "SSE": {
-              "Hash": "4efbd5666e1ac8d14aa2c91c93811254",
-              "SpriteSheetX": 0,
-              "SpriteSheetY": 80
-            },
-            "ESE": {
-              "Hash": "97e6801eae9abb9260707bae2d9a1521",
-              "SpriteSheetX": 48,
-              "SpriteSheetY": 80
-            },
-            "ENE": {
-              "Hash": "1fef1a397385cefabaaf3651993a70b1",
-              "SpriteSheetX": 96,
-              "SpriteSheetY": 80
-            },
-            "NNE": {
-              "Hash": "52d0b9a0550b9c0715bb77b16dc21b71",
-              "SpriteSheetX": 144,
-              "SpriteSheetY": 80
-            }
-          }
-        },
-        "Backflip 3": {
-          "Frames": {
-            "SSE": {
-              "Hash": "90c0c50f74f543b9e5cfe75764a23dce",
-              "SpriteSheetX": 0,
-              "SpriteSheetY": 120
-            },
-            "ESE": {
-              "Hash": "9d0d4cb06af506c46d5e0aff32654dff",
-              "SpriteSheetX": 48,
-              "SpriteSheetY": 120
-            },
-            "ENE": {
-              "Hash": "06a69c11f591093bf91e48c2480de170",
-              "SpriteSheetX": 96,
-              "SpriteSheetY": 120
-            },
-            "NNE": {
-              "Hash": "01bdfddd1726ae89061c8a7864331815",
-              "SpriteSheetX": 144,
-              "SpriteSheetY": 120
-            }
-          }
-        },
-        "Backflip 4": {
-          "Frames": {
-            "SSE": {
-              "Hash": "c66643b71c3b848cfac0fd960f39e0a5",
-              "SpriteSheetX": 0,
-              "SpriteSheetY": 160
-            },
-            "ESE": {
-              "Hash": "abc26b437d63c9968e2399290f3ed207",
-              "SpriteSheetX": 48,
-              "SpriteSheetY": 160
-            },
-            "ENE": {
-              "Hash": "ad0061d411d436b8dd1bd1b8bd460b40",
-              "SpriteSheetX": 96,
-              "SpriteSheetY": 160
-            },
-            "NNE": {
-              "Hash": "a6e22b1e673a5eddaab10f63c19b977b",
-              "SpriteSheetX": 144,
-              "SpriteSheetY": 160
-            }
-          }
-        },
-        "Backflip 5": {
-          "Frames": {
-            "SSE": {
-              "Hash": "665b0e923783ddc8ee52d28f4e9e00e2",
-              "SpriteSheetX": 0,
-              "SpriteSheetY": 200
-            },
-            "ESE": {
-              "Hash": "9b88a5e70bc0c33e5718c876e8fe0399",
-              "SpriteSheetX": 48,
-              "SpriteSheetY": 200
-            },
-            "ENE": {
-              "Hash": "0e7948ea38ac8d809c1ee461cd9a6588",
-              "SpriteSheetX": 96,
-              "SpriteSheetY": 200
-            },
-            "NNE": {
-              "Hash": "b6f8c9562948a7bca06a4ea65a5ecb99",
-              "SpriteSheetX": 144,
-              "SpriteSheetY": 200
-            }
-          }
-        },
-        "Backflip 6": {
-          "Frames": {
-            "SSE": {
-              "Hash": "c1ae2e0da3ebeeba00069645878de6e2",
-              "SpriteSheetX": 0,
-              "SpriteSheetY": 240
-            },
-            "ESE": {
-              "Hash": "25226f4f269c5030046251ea1bdeabf1",
-              "SpriteSheetX": 48,
-              "SpriteSheetY": 240
-            },
-            "ENE": {
-              "Hash": "daf7e4a82fb2dc14b49bc78f21e35c25",
-              "SpriteSheetX": 96,
-              "SpriteSheetY": 240
-            },
-            "NNE": {
-              "Hash": "fec823e891d613fe52fb8b0d4b41e318",
-              "SpriteSheetX": 144,
-              "SpriteSheetY": 240
-            }
-          }
-        },
-        "Backflip 7": {
-          "Frames": {
-            "SSE": {
-              "Hash": "7dc3635421465171ce7dc5dcd4251e35",
-              "SpriteSheetX": 0,
-              "SpriteSheetY": 280
-            },
-            "ESE": {
-              "Hash": "dbea4ea3cc4e071be747ebc9c900e7a2",
-              "SpriteSheetX": 48,
-              "SpriteSheetY": 280
-            },
-            "ENE": {
-              "Hash": "c603fba1cfb1d49cac1d67e212b7fdf3",
-              "SpriteSheetX": 96,
-              "SpriteSheetY": 280
-            },
-            "NNE": {
-              "Hash": "1675d67bd081b54d8d65db638a498d33",
-              "SpriteSheetX": 144,
-              "SpriteSheetY": 280
-            }
-          }
-        },
-        "Backflip 8": {
-          "Frames": {
-            "SSE": {
-              "Hash": "33c873a3c3d79d99c599707310cb7128",
-              "SpriteSheetX": 0,
-              "SpriteSheetY": 320
-            },
-            "ESE": {
-              "Hash": "503172768a2205119213e43d7c290638",
-              "SpriteSheetX": 48,
-              "SpriteSheetY": 320
-            },
-            "ENE": {
-              "Hash": "79d130f8d86d9cf5c864fa87196b197c",
-              "SpriteSheetX": 96,
-              "SpriteSheetY": 320
-            },
-            "NNE": {
-              "Hash": "a83551cbfcf548095a7f4c631838ce2a",
-              "SpriteSheetX": 144,
-              "SpriteSheetY": 320
-            }
-          }
-        },
-        "Backflip 9": {
-          "Frames": {
-            "SSE": {
-              "Hash": "d6097fac5e4ce054fa73ffff788bc6d8",
-              "SpriteSheetX": 0,
-              "SpriteSheetY": 360
-            },
-            "ESE": {
-              "Hash": "3bf5b54084be03b0a067dadc0e3579fc",
-              "SpriteSheetX": 48,
-              "SpriteSheetY": 360
-            },
-            "ENE": {
-              "Hash": "02cbf15aa36584a2cf82c6e07cda4834",
-              "SpriteSheetX": 96,
-              "SpriteSheetY": 360
-            },
-            "NNE": {
-              "Hash": "ea8b253d6d313303a6c71302b721dbd0",
-              "SpriteSheetX": 144,
-              "SpriteSheetY": 360
-            }
-          }
-        }
-      },
-      "AnimationByDirections": {
-        "4": {
-          "Animations": {
-            "Backflip": {
-              "AnimationFrames": [
-                {
-                  "FrameGroup": "Backflip 1",
-                  "Command": "Frame",
-                  "Parameter": 6
-                },
-                {
-                  "FrameGroup": "Backflip 2",
-                  "Command": "Frame",
-                  "Parameter": 3
-                },
-                {
-                  "FrameGroup": "Backflip 3",
-                  "Command": "Frame",
-                  "Parameter": 2
-                },
-                {
-                  "FrameGroup": "Backflip 4",
-                  "Command": "Frame",
-                  "Parameter": 2
-                },
-                {
-                  "FrameGroup": "Backflip 5",
-                  "Command": "Frame",
-                  "Parameter": 4
-                },
-                {
-                  "FrameGroup": "Backflip 6",
-                  "Command": "Frame",
-                  "Parameter": 3
-                },
-                {
-                  "FrameGroup": "Backflip 7",
-                  "Command": "Frame",
-                  "Parameter": 2
-                },
-                {
-                  "FrameGroup": "Backflip 8",
-                  "Command": "Frame",
-                  "Parameter": 2
-                },
-                {
-                  "FrameGroup": "Backflip 9",
-                  "Command": "Frame",
-                  "Parameter": 2
-                },
-                {
-                  "FrameGroup": "Backflip 10",
-                  "Command": "Frame",
-                  "Parameter": 4
-                },
-                {
-                  "Command": "GotoFrameOffset",
-                  "Parameter": 0
-                }
-              ]
-            },
-            "StillFrame": {
-              "AnimationFrames": [
-                {
-                  "FrameGroup": "Backflip 1",
-                  "Command": "Frame",
-                  "Parameter": 10
-                },
-                {
-                  "Command": "Stop",
-                  "Parameter": 0
-                }
-              ]
-            }
-          }
-        }
-      }
-    },
     "40x40": {
       "VerticalOffset": 0,
       "Unknown0x08": 20,
@@ -1199,6 +874,331 @@
                 },
                 {
                   "Command": "GotoFrameOffset",
+                  "Parameter": 0
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    "48x40": {
+      "VerticalOffset": 0,
+      "Unknown0x08": 20,
+      "CollisionSize": 40,
+      "Scale": 1.0,
+      "FrameGroups": {
+        "Backflip 1": {
+          "Frames": {
+            "SSE": {
+              "Hash": "385c3b5c4cc980927037b523655e3b6b",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 0
+            },
+            "ESE": {
+              "Hash": "50cd018e66900703b30d9f1e3fa154e4",
+              "SpriteSheetX": 48,
+              "SpriteSheetY": 0
+            },
+            "ENE": {
+              "Hash": "04e2e815f274b9fe5bc04d9315941908",
+              "SpriteSheetX": 96,
+              "SpriteSheetY": 0
+            },
+            "NNE": {
+              "Hash": "de9d50829c07f3b78d896d2c6731a6ba",
+              "SpriteSheetX": 144,
+              "SpriteSheetY": 0
+            }
+          }
+        },
+        "Backflip 10": {
+          "Frames": {
+            "SSE": {
+              "Hash": "46bcb7e4d2e352282700b0291dc22146",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 40
+            },
+            "ESE": {
+              "Hash": "379418a3680e01012764e194feab36bb",
+              "SpriteSheetX": 48,
+              "SpriteSheetY": 40
+            },
+            "ENE": {
+              "Hash": "38651e0b30b70517e4f0eb24326df866",
+              "SpriteSheetX": 96,
+              "SpriteSheetY": 40
+            },
+            "NNE": {
+              "Hash": "37223b1877c66f2d75c5fb3fcefd4944",
+              "SpriteSheetX": 144,
+              "SpriteSheetY": 40
+            }
+          }
+        },
+        "Backflip 2": {
+          "Frames": {
+            "SSE": {
+              "Hash": "4efbd5666e1ac8d14aa2c91c93811254",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 80
+            },
+            "ESE": {
+              "Hash": "97e6801eae9abb9260707bae2d9a1521",
+              "SpriteSheetX": 48,
+              "SpriteSheetY": 80
+            },
+            "ENE": {
+              "Hash": "1fef1a397385cefabaaf3651993a70b1",
+              "SpriteSheetX": 96,
+              "SpriteSheetY": 80
+            },
+            "NNE": {
+              "Hash": "52d0b9a0550b9c0715bb77b16dc21b71",
+              "SpriteSheetX": 144,
+              "SpriteSheetY": 80
+            }
+          }
+        },
+        "Backflip 3": {
+          "Frames": {
+            "SSE": {
+              "Hash": "90c0c50f74f543b9e5cfe75764a23dce",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 120
+            },
+            "ESE": {
+              "Hash": "9d0d4cb06af506c46d5e0aff32654dff",
+              "SpriteSheetX": 48,
+              "SpriteSheetY": 120
+            },
+            "ENE": {
+              "Hash": "06a69c11f591093bf91e48c2480de170",
+              "SpriteSheetX": 96,
+              "SpriteSheetY": 120
+            },
+            "NNE": {
+              "Hash": "01bdfddd1726ae89061c8a7864331815",
+              "SpriteSheetX": 144,
+              "SpriteSheetY": 120
+            }
+          }
+        },
+        "Backflip 4": {
+          "Frames": {
+            "SSE": {
+              "Hash": "c66643b71c3b848cfac0fd960f39e0a5",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 160
+            },
+            "ESE": {
+              "Hash": "abc26b437d63c9968e2399290f3ed207",
+              "SpriteSheetX": 48,
+              "SpriteSheetY": 160
+            },
+            "ENE": {
+              "Hash": "ad0061d411d436b8dd1bd1b8bd460b40",
+              "SpriteSheetX": 96,
+              "SpriteSheetY": 160
+            },
+            "NNE": {
+              "Hash": "a6e22b1e673a5eddaab10f63c19b977b",
+              "SpriteSheetX": 144,
+              "SpriteSheetY": 160
+            }
+          }
+        },
+        "Backflip 5": {
+          "Frames": {
+            "SSE": {
+              "Hash": "665b0e923783ddc8ee52d28f4e9e00e2",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 200
+            },
+            "ESE": {
+              "Hash": "9b88a5e70bc0c33e5718c876e8fe0399",
+              "SpriteSheetX": 48,
+              "SpriteSheetY": 200
+            },
+            "ENE": {
+              "Hash": "0e7948ea38ac8d809c1ee461cd9a6588",
+              "SpriteSheetX": 96,
+              "SpriteSheetY": 200
+            },
+            "NNE": {
+              "Hash": "b6f8c9562948a7bca06a4ea65a5ecb99",
+              "SpriteSheetX": 144,
+              "SpriteSheetY": 200
+            }
+          }
+        },
+        "Backflip 6": {
+          "Frames": {
+            "SSE": {
+              "Hash": "c1ae2e0da3ebeeba00069645878de6e2",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 240
+            },
+            "ESE": {
+              "Hash": "25226f4f269c5030046251ea1bdeabf1",
+              "SpriteSheetX": 48,
+              "SpriteSheetY": 240
+            },
+            "ENE": {
+              "Hash": "daf7e4a82fb2dc14b49bc78f21e35c25",
+              "SpriteSheetX": 96,
+              "SpriteSheetY": 240
+            },
+            "NNE": {
+              "Hash": "fec823e891d613fe52fb8b0d4b41e318",
+              "SpriteSheetX": 144,
+              "SpriteSheetY": 240
+            }
+          }
+        },
+        "Backflip 7": {
+          "Frames": {
+            "SSE": {
+              "Hash": "7dc3635421465171ce7dc5dcd4251e35",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 280
+            },
+            "ESE": {
+              "Hash": "dbea4ea3cc4e071be747ebc9c900e7a2",
+              "SpriteSheetX": 48,
+              "SpriteSheetY": 280
+            },
+            "ENE": {
+              "Hash": "c603fba1cfb1d49cac1d67e212b7fdf3",
+              "SpriteSheetX": 96,
+              "SpriteSheetY": 280
+            },
+            "NNE": {
+              "Hash": "1675d67bd081b54d8d65db638a498d33",
+              "SpriteSheetX": 144,
+              "SpriteSheetY": 280
+            }
+          }
+        },
+        "Backflip 8": {
+          "Frames": {
+            "SSE": {
+              "Hash": "33c873a3c3d79d99c599707310cb7128",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 320
+            },
+            "ESE": {
+              "Hash": "503172768a2205119213e43d7c290638",
+              "SpriteSheetX": 48,
+              "SpriteSheetY": 320
+            },
+            "ENE": {
+              "Hash": "79d130f8d86d9cf5c864fa87196b197c",
+              "SpriteSheetX": 96,
+              "SpriteSheetY": 320
+            },
+            "NNE": {
+              "Hash": "a83551cbfcf548095a7f4c631838ce2a",
+              "SpriteSheetX": 144,
+              "SpriteSheetY": 320
+            }
+          }
+        },
+        "Backflip 9": {
+          "Frames": {
+            "SSE": {
+              "Hash": "d6097fac5e4ce054fa73ffff788bc6d8",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 360
+            },
+            "ESE": {
+              "Hash": "3bf5b54084be03b0a067dadc0e3579fc",
+              "SpriteSheetX": 48,
+              "SpriteSheetY": 360
+            },
+            "ENE": {
+              "Hash": "02cbf15aa36584a2cf82c6e07cda4834",
+              "SpriteSheetX": 96,
+              "SpriteSheetY": 360
+            },
+            "NNE": {
+              "Hash": "ea8b253d6d313303a6c71302b721dbd0",
+              "SpriteSheetX": 144,
+              "SpriteSheetY": 360
+            }
+          }
+        }
+      },
+      "AnimationByDirections": {
+        "4": {
+          "Animations": {
+            "Backflip": {
+              "AnimationFrames": [
+                {
+                  "FrameGroup": "Backflip 1",
+                  "Command": "Frame",
+                  "Parameter": 6
+                },
+                {
+                  "FrameGroup": "Backflip 2",
+                  "Command": "Frame",
+                  "Parameter": 3
+                },
+                {
+                  "FrameGroup": "Backflip 3",
+                  "Command": "Frame",
+                  "Parameter": 2
+                },
+                {
+                  "FrameGroup": "Backflip 4",
+                  "Command": "Frame",
+                  "Parameter": 2
+                },
+                {
+                  "FrameGroup": "Backflip 5",
+                  "Command": "Frame",
+                  "Parameter": 4
+                },
+                {
+                  "FrameGroup": "Backflip 6",
+                  "Command": "Frame",
+                  "Parameter": 3
+                },
+                {
+                  "FrameGroup": "Backflip 7",
+                  "Command": "Frame",
+                  "Parameter": 2
+                },
+                {
+                  "FrameGroup": "Backflip 8",
+                  "Command": "Frame",
+                  "Parameter": 2
+                },
+                {
+                  "FrameGroup": "Backflip 9",
+                  "Command": "Frame",
+                  "Parameter": 2
+                },
+                {
+                  "FrameGroup": "Backflip 10",
+                  "Command": "Frame",
+                  "Parameter": 4
+                },
+                {
+                  "Command": "GotoFrameOffset",
+                  "Parameter": 0
+                }
+              ]
+            },
+            "StillFrame": {
+              "AnimationFrames": [
+                {
+                  "FrameGroup": "Backflip 1",
+                  "Command": "Frame",
+                  "Parameter": 10
+                },
+                {
+                  "Command": "Stop",
                   "Parameter": 0
                 }
               ]

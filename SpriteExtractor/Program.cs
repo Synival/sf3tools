@@ -393,6 +393,7 @@ namespace SpriteExtractor {
                         .OrderBy(x => x.Name)
                         .ThenBy(x => x.Direction)
                         .GroupBy(x => SpritesheetDef.DimensionsToKey(x.Width, x.Height))
+                        .OrderBy(x => x.Key)
                         .ToDictionary(x => x.Key, x => {
                             var size = SpritesheetDef.KeyToDimensions(x.Key);
                             var existingSpritesheet = spriteDef.Spritesheets[x.Key];

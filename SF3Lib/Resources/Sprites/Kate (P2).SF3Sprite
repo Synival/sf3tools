@@ -1,121 +1,6 @@
 {
   "Name": "Kate (P2)",
   "Spritesheets": {
-    "48x40": {
-      "VerticalOffset": 0,
-      "Unknown0x08": 20,
-      "CollisionSize": 40,
-      "Scale": 1.0,
-      "FrameGroups": {
-        "GettingUpFromGround 1": {
-          "Frames": {
-            "SSE": {
-              "Hash": "9a987312d5ccb353bd668c4ad98fa6b3",
-              "SpriteSheetX": 0,
-              "SpriteSheetY": 0
-            }
-          }
-        },
-        "GettingUpFromGround 2": {
-          "Frames": {
-            "SSE": {
-              "Hash": "ff79e5bbf4ea904e271efdab1ea64572",
-              "SpriteSheetX": 0,
-              "SpriteSheetY": 40
-            }
-          }
-        },
-        "OnGround 1": {
-          "Frames": {
-            "SSE": {
-              "Hash": "148739218ca871f1ffae7173f95d1342",
-              "SpriteSheetX": 0,
-              "SpriteSheetY": 80
-            }
-          }
-        }
-      },
-      "AnimationByDirections": {
-        "1": {
-          "Animations": {
-            "GettingUpFromGround": {
-              "AnimationFrames": [
-                {
-                  "Frames": {
-                    "First": {
-                      "Frame": "OnGround 1",
-                      "Direction": "SSE"
-                    }
-                  },
-                  "Command": "Frame",
-                  "Parameter": 4
-                },
-                {
-                  "Frames": {
-                    "First": {
-                      "Frame": "GettingUpFromGround 1",
-                      "Direction": "SSE"
-                    }
-                  },
-                  "Command": "Frame",
-                  "Parameter": 12
-                },
-                {
-                  "Frames": {
-                    "First": {
-                      "Frame": "GettingUpFromGround 2",
-                      "Direction": "SSE"
-                    }
-                  },
-                  "Command": "Frame",
-                  "Parameter": 8
-                },
-                {
-                  "Command": "Stop",
-                  "Parameter": 0
-                }
-              ]
-            },
-            "StillFrame (OnGround, Repeat)": {
-              "AnimationFrames": [
-                {
-                  "Frames": {
-                    "First": {
-                      "Frame": "OnGround 1",
-                      "Direction": "SSE"
-                    }
-                  },
-                  "Command": "Frame",
-                  "Parameter": 10
-                },
-                {
-                  "Command": "GotoFrameOffset",
-                  "Parameter": 0
-                }
-              ]
-            },
-            "StillFrame (OnGround)": {
-              "AnimationFrames": [
-                {
-                  "Frames": {
-                    "First": {
-                      "Frame": "OnGround 1",
-                      "Direction": "SSE"
-                    }
-                  },
-                  "Command": "Frame",
-                  "Parameter": 10
-                },
-                {
-                  "Command": "Stop",
-                  "Parameter": 0
-                }
-              ]
-            }
-          }
-        }
-      }
-    },
     "40x40": {
       "VerticalOffset": 0,
       "Unknown0x08": 20,
@@ -817,6 +702,121 @@
                 },
                 {
                   "Command": "GotoFrameOffset",
+                  "Parameter": 0
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    "48x40": {
+      "VerticalOffset": 0,
+      "Unknown0x08": 20,
+      "CollisionSize": 40,
+      "Scale": 1.0,
+      "FrameGroups": {
+        "GettingUpFromGround 1": {
+          "Frames": {
+            "SSE": {
+              "Hash": "9a987312d5ccb353bd668c4ad98fa6b3",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 0
+            }
+          }
+        },
+        "GettingUpFromGround 2": {
+          "Frames": {
+            "SSE": {
+              "Hash": "ff79e5bbf4ea904e271efdab1ea64572",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 40
+            }
+          }
+        },
+        "OnGround 1": {
+          "Frames": {
+            "SSE": {
+              "Hash": "148739218ca871f1ffae7173f95d1342",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 80
+            }
+          }
+        }
+      },
+      "AnimationByDirections": {
+        "1": {
+          "Animations": {
+            "GettingUpFromGround": {
+              "AnimationFrames": [
+                {
+                  "Frames": {
+                    "First": {
+                      "Frame": "OnGround 1",
+                      "Direction": "SSE"
+                    }
+                  },
+                  "Command": "Frame",
+                  "Parameter": 4
+                },
+                {
+                  "Frames": {
+                    "First": {
+                      "Frame": "GettingUpFromGround 1",
+                      "Direction": "SSE"
+                    }
+                  },
+                  "Command": "Frame",
+                  "Parameter": 12
+                },
+                {
+                  "Frames": {
+                    "First": {
+                      "Frame": "GettingUpFromGround 2",
+                      "Direction": "SSE"
+                    }
+                  },
+                  "Command": "Frame",
+                  "Parameter": 8
+                },
+                {
+                  "Command": "Stop",
+                  "Parameter": 0
+                }
+              ]
+            },
+            "StillFrame (OnGround, Repeat)": {
+              "AnimationFrames": [
+                {
+                  "Frames": {
+                    "First": {
+                      "Frame": "OnGround 1",
+                      "Direction": "SSE"
+                    }
+                  },
+                  "Command": "Frame",
+                  "Parameter": 10
+                },
+                {
+                  "Command": "GotoFrameOffset",
+                  "Parameter": 0
+                }
+              ]
+            },
+            "StillFrame (OnGround)": {
+              "AnimationFrames": [
+                {
+                  "Frames": {
+                    "First": {
+                      "Frame": "OnGround 1",
+                      "Direction": "SSE"
+                    }
+                  },
+                  "Command": "Frame",
+                  "Parameter": 10
+                },
+                {
+                  "Command": "Stop",
                   "Parameter": 0
                 }
               ]

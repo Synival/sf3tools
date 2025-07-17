@@ -1,195 +1,6 @@
 {
   "Name": "Green Dragon",
   "Spritesheets": {
-    "56x51": {
-      "VerticalOffset": 0,
-      "Unknown0x08": 20,
-      "CollisionSize": 40,
-      "Scale": 1.0,
-      "FrameGroups": {
-        "BreathingFire 1": {
-          "Frames": {
-            "ESE": {
-              "Hash": "e73c25e2d7baedb0be032d55f4116cd2",
-              "SpriteSheetX": 0,
-              "SpriteSheetY": 0
-            }
-          }
-        },
-        "BreathingFire 2": {
-          "Frames": {
-            "ESE": {
-              "Hash": "24b04b3bd2ba95cc6418aad14b7350fa",
-              "SpriteSheetX": 0,
-              "SpriteSheetY": 51
-            }
-          }
-        },
-        "BreathingFire 3": {
-          "Frames": {
-            "ESE": {
-              "Hash": "f764f1a8cc319f429533ebc6b6c977b2",
-              "SpriteSheetX": 0,
-              "SpriteSheetY": 102
-            }
-          }
-        },
-        "BreathingFire 4": {
-          "Frames": {
-            "ESE": {
-              "Hash": "591088202dd2896cbd92617a83e9930d",
-              "SpriteSheetX": 0,
-              "SpriteSheetY": 153
-            }
-          }
-        },
-        "BreathingFire 5": {
-          "Frames": {
-            "ESE": {
-              "Hash": "20b15b4fd68cf5cd05470c09c2be96ee",
-              "SpriteSheetX": 0,
-              "SpriteSheetY": 204
-            }
-          }
-        }
-      },
-      "AnimationByDirections": {
-        "17": {
-          "Animations": {
-            "BreathingFire1": {
-              "AnimationFrames": [
-                {
-                  "Command": "SetDirectionCount",
-                  "Parameter": 17
-                },
-                {
-                  "Frames": {
-                    "First": {
-                      "Frame": "BreathingFire 1",
-                      "Direction": "ESE"
-                    }
-                  },
-                  "Command": "Frame",
-                  "Parameter": 10
-                },
-                {
-                  "Command": "Stop",
-                  "Parameter": 0
-                }
-              ]
-            },
-            "BreathingFire2": {
-              "AnimationFrames": [
-                {
-                  "Command": "SetDirectionCount",
-                  "Parameter": 17
-                },
-                {
-                  "Frames": {
-                    "First": {
-                      "Frame": "BreathingFire 1",
-                      "Direction": "ESE"
-                    }
-                  },
-                  "Command": "Frame",
-                  "Parameter": 10
-                },
-                {
-                  "Frames": {
-                    "First": {
-                      "Frame": "BreathingFire 2",
-                      "Direction": "ESE"
-                    }
-                  },
-                  "Command": "Frame",
-                  "Parameter": 10
-                },
-                {
-                  "Command": "GotoAnimation",
-                  "Parameter": 3
-                }
-              ]
-            },
-            "BreathingFire3": {
-              "AnimationFrames": [
-                {
-                  "Command": "SetDirectionCount",
-                  "Parameter": 17
-                },
-                {
-                  "Frames": {
-                    "First": {
-                      "Frame": "BreathingFire 2",
-                      "Direction": "ESE"
-                    }
-                  },
-                  "Command": "Frame",
-                  "Parameter": 10
-                },
-                {
-                  "Command": "Stop",
-                  "Parameter": 0
-                }
-              ]
-            },
-            "BreathingFire4": {
-              "AnimationFrames": [
-                {
-                  "Command": "SetDirectionCount",
-                  "Parameter": 17
-                },
-                {
-                  "Frames": {
-                    "First": {
-                      "Frame": "BreathingFire 3",
-                      "Direction": "ESE"
-                    }
-                  },
-                  "Command": "Frame",
-                  "Parameter": 3
-                },
-                {
-                  "Command": "GotoAnimation",
-                  "Parameter": 5
-                }
-              ]
-            },
-            "BreathingFire5": {
-              "AnimationFrames": [
-                {
-                  "Command": "SetDirectionCount",
-                  "Parameter": 17
-                },
-                {
-                  "Frames": {
-                    "First": {
-                      "Frame": "BreathingFire 4",
-                      "Direction": "ESE"
-                    }
-                  },
-                  "Command": "Frame",
-                  "Parameter": 20
-                },
-                {
-                  "Frames": {
-                    "First": {
-                      "Frame": "BreathingFire 5",
-                      "Direction": "ESE"
-                    }
-                  },
-                  "Command": "Frame",
-                  "Parameter": 20
-                },
-                {
-                  "Command": "GotoFrameOffset",
-                  "Parameter": 0
-                }
-              ]
-            }
-          }
-        }
-      }
-    },
     "56x40": {
       "VerticalOffset": 0,
       "Unknown0x08": 20,
@@ -453,6 +264,195 @@
                 },
                 {
                   "Command": "Stop",
+                  "Parameter": 0
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    "56x51": {
+      "VerticalOffset": 0,
+      "Unknown0x08": 20,
+      "CollisionSize": 40,
+      "Scale": 1.0,
+      "FrameGroups": {
+        "BreathingFire 1": {
+          "Frames": {
+            "ESE": {
+              "Hash": "e73c25e2d7baedb0be032d55f4116cd2",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 0
+            }
+          }
+        },
+        "BreathingFire 2": {
+          "Frames": {
+            "ESE": {
+              "Hash": "24b04b3bd2ba95cc6418aad14b7350fa",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 51
+            }
+          }
+        },
+        "BreathingFire 3": {
+          "Frames": {
+            "ESE": {
+              "Hash": "f764f1a8cc319f429533ebc6b6c977b2",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 102
+            }
+          }
+        },
+        "BreathingFire 4": {
+          "Frames": {
+            "ESE": {
+              "Hash": "591088202dd2896cbd92617a83e9930d",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 153
+            }
+          }
+        },
+        "BreathingFire 5": {
+          "Frames": {
+            "ESE": {
+              "Hash": "20b15b4fd68cf5cd05470c09c2be96ee",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 204
+            }
+          }
+        }
+      },
+      "AnimationByDirections": {
+        "17": {
+          "Animations": {
+            "BreathingFire1": {
+              "AnimationFrames": [
+                {
+                  "Command": "SetDirectionCount",
+                  "Parameter": 17
+                },
+                {
+                  "Frames": {
+                    "First": {
+                      "Frame": "BreathingFire 1",
+                      "Direction": "ESE"
+                    }
+                  },
+                  "Command": "Frame",
+                  "Parameter": 10
+                },
+                {
+                  "Command": "Stop",
+                  "Parameter": 0
+                }
+              ]
+            },
+            "BreathingFire2": {
+              "AnimationFrames": [
+                {
+                  "Command": "SetDirectionCount",
+                  "Parameter": 17
+                },
+                {
+                  "Frames": {
+                    "First": {
+                      "Frame": "BreathingFire 1",
+                      "Direction": "ESE"
+                    }
+                  },
+                  "Command": "Frame",
+                  "Parameter": 10
+                },
+                {
+                  "Frames": {
+                    "First": {
+                      "Frame": "BreathingFire 2",
+                      "Direction": "ESE"
+                    }
+                  },
+                  "Command": "Frame",
+                  "Parameter": 10
+                },
+                {
+                  "Command": "GotoAnimation",
+                  "Parameter": 3
+                }
+              ]
+            },
+            "BreathingFire3": {
+              "AnimationFrames": [
+                {
+                  "Command": "SetDirectionCount",
+                  "Parameter": 17
+                },
+                {
+                  "Frames": {
+                    "First": {
+                      "Frame": "BreathingFire 2",
+                      "Direction": "ESE"
+                    }
+                  },
+                  "Command": "Frame",
+                  "Parameter": 10
+                },
+                {
+                  "Command": "Stop",
+                  "Parameter": 0
+                }
+              ]
+            },
+            "BreathingFire4": {
+              "AnimationFrames": [
+                {
+                  "Command": "SetDirectionCount",
+                  "Parameter": 17
+                },
+                {
+                  "Frames": {
+                    "First": {
+                      "Frame": "BreathingFire 3",
+                      "Direction": "ESE"
+                    }
+                  },
+                  "Command": "Frame",
+                  "Parameter": 3
+                },
+                {
+                  "Command": "GotoAnimation",
+                  "Parameter": 5
+                }
+              ]
+            },
+            "BreathingFire5": {
+              "AnimationFrames": [
+                {
+                  "Command": "SetDirectionCount",
+                  "Parameter": 17
+                },
+                {
+                  "Frames": {
+                    "First": {
+                      "Frame": "BreathingFire 4",
+                      "Direction": "ESE"
+                    }
+                  },
+                  "Command": "Frame",
+                  "Parameter": 20
+                },
+                {
+                  "Frames": {
+                    "First": {
+                      "Frame": "BreathingFire 5",
+                      "Direction": "ESE"
+                    }
+                  },
+                  "Command": "Frame",
+                  "Parameter": 20
+                },
+                {
+                  "Command": "GotoFrameOffset",
                   "Parameter": 0
                 }
               ]
