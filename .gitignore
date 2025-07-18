@@ -14,3 +14,11 @@ obj/
 *.swp
 d2u.sh
 Private/
+/SF3Lib/Resources/S1/CHRs
+/SF3Lib/Resources/S1/CHPs
+/SF3Lib/Resources/S2/CHRs
+/SF3Lib/Resources/S2/CHPs
+/SF3Lib/Resources/S3/CHRs
+/SF3Lib/Resources/S3/CHPs
+/SF3Lib/Resources/PD/CHRs
+/SF3Lib/Resources/PD/CHPs

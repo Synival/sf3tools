@@ -1,8 +1,8 @@
 ﻿using SF3.Types;
 
 namespace SF3.Sprites {
-    public class CHR_FrameDef {
+    public class CHR_FrameGroupDef {
         public string Name;
-        public SpriteFrameDirection Direction;
+        public string[] Directions;
     }
 }

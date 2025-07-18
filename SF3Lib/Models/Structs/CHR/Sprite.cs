@@ -95,8 +95,88 @@ namespace SF3.Models.Structs.CHR {
         }
 
         public CHR_SpriteDef ToCHR_SpriteDef() {
-            // TODO: convert!
-            return null;
+            return new CHR_SpriteDef() {
+                SpriteID         = Header.SpriteID,
+                Width            = Header.Width,
+                Height           = Header.Height,
+                Directions       = Header.Directions,
+                SpriteFrames     = CreateSpriteFrames(),
+            };
+        }
+
+        private CHR_SpriteFramesDef[] CreateSpriteFrames() {
+            // Track the sprite whose frame groups are being built.
+            string lastSpriteName = null;
+            var spriteFrames = new List<CHR_SpriteFramesDef>();
+            CHR_SpriteFramesDef lastSpriteFrames = null;
+
+            // Track the frame group whose directions are being built.
+            string lastFrameGroupName = null;
+            var frameGroups = new List<CHR_FrameGroupDef>();
+            CHR_FrameGroupDef lastFrameGroup = null;
+
+            // Track directions to add to the current frame group being built.
+            var frameGroupDirections = new List<SpriteFrameDirection>();
+
+            // Commits the current set of diections to the current frame group.
+            void CommitFrameGroupDirections() {
+                if (lastFrameGroup == null)
+                    return;
+
+                if (lastFrameGroup.Directions == null)
+                    lastFrameGroup.Directions = frameGroupDirections.Select(x => x.ToString()).ToArray();
+
+                frameGroupDirections = new List<SpriteFrameDirection>();
+            }
+
+            // Commits the current frame group to the current sprite.
+            void CommitFrameGroup() {
+                CommitFrameGroupDirections();
+
+                if (lastSpriteFrames == null)
+                    return;
+
+                if (lastSpriteFrames.FrameGroups == null)
+                    lastSpriteFrames.FrameGroups = frameGroups.ToArray();
+
+                lastFrameGroupName = null;
+                frameGroups        = new List<CHR_FrameGroupDef>();
+                lastFrameGroup     = null;
+            }
+
+            // Go through each frame, building a set of CHR_SpriteFrameDef's.
+            foreach (var frame in FrameTable) {
+                // If the sprite name has changed, begin a new one.
+                if (frame.SpriteName != lastSpriteName) {
+                    CommitFrameGroup();
+
+                    lastSpriteName = frame.SpriteName;
+                    lastSpriteFrames = new CHR_SpriteFramesDef() {
+                        SpriteName = frame.SpriteName
+                    };
+                    spriteFrames.Add(lastSpriteFrames);
+                }
+
+                // If the frame group has changed, begin a new one.
+                if (frame.FrameName != lastFrameGroupName) {
+                    CommitFrameGroupDirections();
+
+                    lastFrameGroupName = frame.FrameName;
+                    lastFrameGroup = new CHR_FrameGroupDef() {
+                        Name = frame.FrameName
+                    };
+                    frameGroups.Add(lastFrameGroup);
+                }
+
+                // Add the direction of this frame to the current frame group's directions.
+                frameGroupDirections.Add(frame.Direction);
+            }
+
+            // Commit everything to the last sprite being built.
+            CommitFrameGroup();
+
+            // Return all the frames for every sprite.
+            return spriteFrames.ToArray();
         }
 
         public int IDInGroup { get; }

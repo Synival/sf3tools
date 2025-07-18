@@ -5,7 +5,7 @@
         public int Height;
         public int Directions;
 
-        public CHR_FrameDef[] Frames;
+        public CHR_SpriteFramesDef[] SpriteFrames;
         public CHR_AnimationDef[] Animations;
     }
 }
