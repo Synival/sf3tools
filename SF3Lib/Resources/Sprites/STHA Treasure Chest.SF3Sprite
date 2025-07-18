@@ -2,6 +2,7 @@
   "Name": "STHA Treasure Chest",
   "Spritesheets": {
     "32x32": {
+      "SpriteID": 199,
       "VerticalOffset": 0,
       "Unknown0x08": 16,
       "CollisionSize": 32,

@@ -2,6 +2,7 @@
   "Name": "Explosion",
   "Spritesheets": {
     "48x48": {
+      "SpriteID": 390,
       "VerticalOffset": 0,
       "Unknown0x08": 20,
       "CollisionSize": 48,

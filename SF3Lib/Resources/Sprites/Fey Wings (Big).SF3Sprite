@@ -2,6 +2,7 @@
   "Name": "Fey Wings (Big)",
   "Spritesheets": {
     "128x128": {
+      "SpriteID": 395,
       "VerticalOffset": 0,
       "Unknown0x08": 112,
       "CollisionSize": 96,

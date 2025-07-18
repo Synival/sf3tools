@@ -2,6 +2,7 @@
   "Name": "Earth Dragon",
   "Spritesheets": {
     "56x40": {
+      "SpriteID": 331,
       "VerticalOffset": 0,
       "Unknown0x08": 20,
       "CollisionSize": 40,

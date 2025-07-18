@@ -2,6 +2,7 @@
   "Name": "Dark Gunner",
   "Spritesheets": {
     "48x32": {
+      "SpriteID": 302,
       "VerticalOffset": 4,
       "Unknown0x08": 20,
       "CollisionSize": 40,

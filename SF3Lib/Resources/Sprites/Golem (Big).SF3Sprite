@@ -2,6 +2,7 @@
   "Name": "Golem (Big)",
   "Spritesheets": {
     "72x56": {
+      "SpriteID": 231,
       "VerticalOffset": 0,
       "Unknown0x08": 20,
       "CollisionSize": 100,

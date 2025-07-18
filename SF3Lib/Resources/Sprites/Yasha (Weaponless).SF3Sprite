@@ -2,6 +2,7 @@
   "Name": "Yasha (Weaponless)",
   "Spritesheets": {
     "40x40": {
+      "SpriteID": 131,
       "VerticalOffset": 0,
       "Unknown0x08": 20,
       "CollisionSize": 40,
@@ -1038,6 +1039,7 @@
       }
     },
     "48x32": {
+      "SpriteID": 131,
       "VerticalOffset": 0,
       "Unknown0x08": 20,
       "CollisionSize": 40,

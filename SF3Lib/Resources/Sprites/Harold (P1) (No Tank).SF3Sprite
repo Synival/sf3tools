@@ -2,6 +2,7 @@
   "Name": "Harold (P1) (No Tank)",
   "Spritesheets": {
     "40x40": {
+      "SpriteID": 51,
       "VerticalOffset": 0,
       "Unknown0x08": 20,
       "CollisionSize": 40,

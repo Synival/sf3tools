@@ -2,6 +2,7 @@
   "Name": "Baby Penn (Blue Shorts, Yellow Shell up Top)",
   "Spritesheets": {
     "40x32": {
+      "SpriteID": 39,
       "VerticalOffset": 0,
       "Unknown0x08": 20,
       "CollisionSize": 40,

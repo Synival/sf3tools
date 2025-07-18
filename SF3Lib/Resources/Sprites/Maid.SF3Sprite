@@ -2,6 +2,7 @@
   "Name": "Maid",
   "Spritesheets": {
     "40x40": {
+      "SpriteID": 119,
       "VerticalOffset": 0,
       "Unknown0x08": 20,
       "CollisionSize": 40,

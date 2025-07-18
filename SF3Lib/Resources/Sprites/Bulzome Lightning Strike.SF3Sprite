@@ -2,6 +2,7 @@
   "Name": "Bulzome Lightning Strike",
   "Spritesheets": {
     "8x40": {
+      "SpriteID": 407,
       "VerticalOffset": 0,
       "Unknown0x08": 8,
       "CollisionSize": 16,

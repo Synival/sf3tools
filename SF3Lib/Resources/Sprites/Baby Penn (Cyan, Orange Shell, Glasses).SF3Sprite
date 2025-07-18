@@ -2,6 +2,7 @@
   "Name": "Baby Penn (Cyan, Orange Shell, Glasses)",
   "Spritesheets": {
     "40x32": {
+      "SpriteID": 40,
       "VerticalOffset": 0,
       "Unknown0x08": 20,
       "CollisionSize": 40,

@@ -2,6 +2,7 @@
   "Name": "Masked Monk Riding Pegasus",
   "Spritesheets": {
     "56x49": {
+      "SpriteID": 369,
       "VerticalOffset": 0,
       "Unknown0x08": 20,
       "CollisionSize": 40,

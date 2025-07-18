@@ -2,6 +2,7 @@
   "Name": "Ark Hill Priest",
   "Spritesheets": {
     "40x48": {
+      "SpriteID": 36,
       "VerticalOffset": 0,
       "Unknown0x08": 20,
       "CollisionSize": 40,

@@ -2,6 +2,7 @@
   "Name": "Masked Monk Weapon Dealer",
   "Spritesheets": {
     "40x40": {
+      "SpriteID": 594,
       "VerticalOffset": 0,
       "Unknown0x08": 20,
       "CollisionSize": 40,

@@ -2,6 +2,7 @@
   "Name": "Small Poof of Brown Smoke",
   "Spritesheets": {
     "24x24": {
+      "SpriteID": 405,
       "VerticalOffset": 0,
       "Unknown0x08": 20,
       "CollisionSize": 24,

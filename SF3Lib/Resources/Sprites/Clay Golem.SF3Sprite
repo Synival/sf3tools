@@ -2,6 +2,7 @@
   "Name": "Clay Golem",
   "Spritesheets": {
     "48x40": {
+      "SpriteID": 225,
       "VerticalOffset": 0,
       "Unknown0x08": 20,
       "CollisionSize": 48,

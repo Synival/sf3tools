@@ -2,6 +2,7 @@
   "Name": "None",
   "Spritesheets": {
     "0x0": {
+      "SpriteID": 0,
       "VerticalOffset": 0,
       "Unknown0x08": 0,
       "CollisionSize": 0,

@@ -2,6 +2,7 @@
   "Name": "Church Priest (Masked Monk)",
   "Spritesheets": {
     "40x40": {
+      "SpriteID": 586,
       "VerticalOffset": 0,
       "Unknown0x08": 20,
       "CollisionSize": 40,

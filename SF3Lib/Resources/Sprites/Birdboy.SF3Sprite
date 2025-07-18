@@ -2,6 +2,7 @@
   "Name": "Birdboy",
   "Spritesheets": {
     "48x40": {
+      "SpriteID": 134,
       "VerticalOffset": 0,
       "Unknown0x08": 20,
       "CollisionSize": 40,

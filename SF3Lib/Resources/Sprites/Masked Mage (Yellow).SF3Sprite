@@ -2,6 +2,7 @@
   "Name": "Masked Mage (Yellow)",
   "Spritesheets": {
     "40x40": {
+      "SpriteID": 361,
       "VerticalOffset": 0,
       "Unknown0x08": 20,
       "CollisionSize": 40,
@@ -699,6 +700,7 @@
       }
     },
     "48x40": {
+      "SpriteID": 157,
       "VerticalOffset": 0,
       "Unknown0x08": 20,
       "CollisionSize": 40,

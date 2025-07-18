@@ -2,6 +2,7 @@
   "Name": "Masked Pegasus Carrying Gracia",
   "Spritesheets": {
     "48x40": {
+      "SpriteID": 158,
       "VerticalOffset": 0,
       "Unknown0x08": 20,
       "CollisionSize": 40,

@@ -2,6 +2,7 @@
   "Name": "Staff of Besem (Yellow)",
   "Spritesheets": {
     "32x40": {
+      "SpriteID": 513,
       "VerticalOffset": 0,
       "Unknown0x08": 20,
       "CollisionSize": 40,

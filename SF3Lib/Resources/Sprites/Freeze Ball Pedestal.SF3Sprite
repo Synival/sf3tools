@@ -2,6 +2,7 @@
   "Name": "Freeze Ball Pedestal",
   "Spritesheets": {
     "48x64": {
+      "SpriteID": 516,
       "VerticalOffset": 0,
       "Unknown0x08": 20,
       "CollisionSize": 40,

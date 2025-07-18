@@ -2,6 +2,7 @@
   "Name": "Guide Statue Beyond The Wall",
   "Spritesheets": {
     "56x56": {
+      "SpriteID": 569,
       "VerticalOffset": 0,
       "Unknown0x08": 20,
       "CollisionSize": 40,

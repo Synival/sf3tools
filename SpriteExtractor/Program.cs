@@ -187,7 +187,8 @@ namespace SpriteExtractor {
                     if (spriteInfos.ContainsKey(key)) {
                         var spriteInfo = spriteInfos[key];
 
-                        spritesheet.Value.VerticalOffset = MostCommonKey(spriteInfo.VerticalOffsetValueCount);
+                        spritesheet.Value.SpriteID       = MostCommonKey(spriteInfo.SpriteIDCount);
+                        spritesheet.Value.VerticalOffset = MostCommonKey(spriteInfo.VerticalOffsetCount);
                         spritesheet.Value.Unknown0x08    = MostCommonKey(spriteInfo.Unknown0x08Count);
                         spritesheet.Value.CollisionSize  = MostCommonKey(spriteInfo.CollisionSizeCount);
                         spritesheet.Value.Scale          = MostCommonKey(spriteInfo.ScaleCount);

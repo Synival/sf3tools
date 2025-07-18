@@ -2,6 +2,7 @@
   "Name": "Waitress w/ Black Hair",
   "Spritesheets": {
     "40x40": {
+      "SpriteID": 146,
       "VerticalOffset": 0,
       "Unknown0x08": 20,
       "CollisionSize": 40,

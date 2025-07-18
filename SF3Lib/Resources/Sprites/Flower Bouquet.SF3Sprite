@@ -2,6 +2,7 @@
   "Name": "Flower Bouquet",
   "Spritesheets": {
     "40x40": {
+      "SpriteID": 151,
       "VerticalOffset": 0,
       "Unknown0x08": 20,
       "CollisionSize": 40,

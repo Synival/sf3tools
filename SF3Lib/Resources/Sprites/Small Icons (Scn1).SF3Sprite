@@ -2,6 +2,7 @@
   "Name": "Small Icons (Scn1)",
   "Spritesheets": {
     "16x16": {
+      "SpriteID": 391,
       "VerticalOffset": 0,
       "Unknown0x08": 8,
       "CollisionSize": 16,

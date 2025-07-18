@@ -2,6 +2,7 @@
   "Name": "Dark Priest (Purple)",
   "Spritesheets": {
     "40x48": {
+      "SpriteID": 342,
       "VerticalOffset": 0,
       "Unknown0x08": 20,
       "CollisionSize": 40,

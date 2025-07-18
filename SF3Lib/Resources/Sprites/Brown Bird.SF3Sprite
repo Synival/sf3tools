@@ -2,6 +2,7 @@
   "Name": "Brown Bird",
   "Spritesheets": {
     "48x32": {
+      "SpriteID": 515,
       "VerticalOffset": 0,
       "Unknown0x08": 20,
       "CollisionSize": 40,

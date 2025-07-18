@@ -2,6 +2,7 @@
   "Name": "Rollie (P2)",
   "Spritesheets": {
     "48x40": {
+      "SpriteID": 46,
       "VerticalOffset": 0,
       "Unknown0x08": 20,
       "CollisionSize": 40,

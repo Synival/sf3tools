@@ -2,6 +2,7 @@
   "Name": "Rainblood Knight (Cape)",
   "Spritesheets": {
     "40x48": {
+      "SpriteID": 376,
       "VerticalOffset": 0,
       "Unknown0x08": 20,
       "CollisionSize": 40,
@@ -270,6 +271,7 @@
       }
     },
     "64x24": {
+      "SpriteID": 376,
       "VerticalOffset": 0,
       "Unknown0x08": 20,
       "CollisionSize": 40,

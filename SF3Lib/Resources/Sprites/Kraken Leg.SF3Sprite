@@ -2,6 +2,7 @@
   "Name": "Kraken Leg",
   "Spritesheets": {
     "40x56": {
+      "SpriteID": 365,
       "VerticalOffset": 0,
       "Unknown0x08": 20,
       "CollisionSize": 40,

@@ -2,6 +2,7 @@
   "Name": "Popping Bubble",
   "Spritesheets": {
     "24x24": {
+      "SpriteID": 398,
       "VerticalOffset": 0,
       "Unknown0x08": 20,
       "CollisionSize": 24,

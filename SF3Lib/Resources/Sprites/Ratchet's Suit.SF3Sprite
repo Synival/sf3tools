@@ -2,6 +2,7 @@
   "Name": "Ratchet's Suit",
   "Spritesheets": {
     "48x40": {
+      "SpriteID": 59,
       "VerticalOffset": 0,
       "Unknown0x08": 20,
       "CollisionSize": 40,

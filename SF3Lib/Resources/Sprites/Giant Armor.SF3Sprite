@@ -2,6 +2,7 @@
   "Name": "Giant Armor",
   "Spritesheets": {
     "40x40": {
+      "SpriteID": 213,
       "VerticalOffset": 0,
       "Unknown0x08": 20,
       "CollisionSize": 40,
@@ -300,6 +301,7 @@
       }
     },
     "48x40": {
+      "SpriteID": 341,
       "VerticalOffset": 0,
       "Unknown0x08": 20,
       "CollisionSize": 40,

@@ -2,6 +2,7 @@
   "Name": "Shiraf",
   "Spritesheets": {
     "40x40": {
+      "SpriteID": 299,
       "VerticalOffset": 0,
       "Unknown0x08": 20,
       "CollisionSize": 40,
@@ -581,6 +582,7 @@
       }
     },
     "48x40": {
+      "SpriteID": 299,
       "VerticalOffset": 0,
       "Unknown0x08": 20,
       "CollisionSize": 40,

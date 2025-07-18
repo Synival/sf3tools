@@ -2,6 +2,7 @@
   "Name": "Pendolf (P1) (Life Ring)",
   "Spritesheets": {
     "40x32": {
+      "SpriteID": 52,
       "VerticalOffset": 0,
       "Unknown0x08": 20,
       "CollisionSize": 40,

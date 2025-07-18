@@ -2,6 +2,7 @@
   "Name": "Saraband Guard (Arrows in Back)",
   "Spritesheets": {
     "48x40": {
+      "SpriteID": 81,
       "VerticalOffset": 0,
       "Unknown0x08": 20,
       "CollisionSize": 40,

@@ -2,6 +2,7 @@
   "Name": "Bulzome (First Form)",
   "Spritesheets": {
     "64x64": {
+      "SpriteID": 366,
       "VerticalOffset": 0,
       "Unknown0x08": 20,
       "CollisionSize": 64,

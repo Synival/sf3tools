@@ -2,6 +2,7 @@
   "Name": "Julian (U) (Big)",
   "Spritesheets": {
     "64x64": {
+      "SpriteID": 202,
       "VerticalOffset": 0,
       "Unknown0x08": 20,
       "CollisionSize": 40,

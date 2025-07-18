@@ -2,6 +2,7 @@
   "Name": "Fey Wings (Small)",
   "Spritesheets": {
     "64x64": {
+      "SpriteID": 391,
       "VerticalOffset": 0,
       "Unknown0x08": 56,
       "CollisionSize": 48,

@@ -2,6 +2,7 @@
   "Name": "Braff (Helmet)",
   "Spritesheets": {
     "40x40": {
+      "SpriteID": 316,
       "VerticalOffset": 0,
       "Unknown0x08": 20,
       "CollisionSize": 40,
@@ -435,6 +436,7 @@
       }
     },
     "48x40": {
+      "SpriteID": 316,
       "VerticalOffset": 0,
       "Unknown0x08": 20,
       "CollisionSize": 40,

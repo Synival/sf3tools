@@ -2,6 +2,7 @@
   "Name": "Assassin",
   "Spritesheets": {
     "40x40": {
+      "SpriteID": 228,
       "VerticalOffset": 0,
       "Unknown0x08": 20,
       "CollisionSize": 40,

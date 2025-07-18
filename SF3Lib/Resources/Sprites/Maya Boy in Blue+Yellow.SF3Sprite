@@ -2,6 +2,7 @@
   "Name": "Maya Boy in Blue+Yellow",
   "Spritesheets": {
     "40x40": {
+      "SpriteID": 576,
       "VerticalOffset": 0,
       "Unknown0x08": 20,
       "CollisionSize": 40,

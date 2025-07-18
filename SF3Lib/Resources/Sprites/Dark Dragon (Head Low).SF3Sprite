@@ -2,6 +2,7 @@
   "Name": "Dark Dragon (Head Low)",
   "Spritesheets": {
     "80x48": {
+      "SpriteID": 275,
       "VerticalOffset": 0,
       "Unknown0x08": 20,
       "CollisionSize": 40,

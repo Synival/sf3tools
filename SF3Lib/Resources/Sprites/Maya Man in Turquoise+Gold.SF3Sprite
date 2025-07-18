@@ -2,6 +2,7 @@
   "Name": "Maya Man in Turquoise+Gold",
   "Spritesheets": {
     "40x40": {
+      "SpriteID": 574,
       "VerticalOffset": 0,
       "Unknown0x08": 20,
       "CollisionSize": 40,

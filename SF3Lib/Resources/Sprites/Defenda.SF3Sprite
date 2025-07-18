@@ -2,6 +2,7 @@
   "Name": "Defenda",
   "Spritesheets": {
     "40x40": {
+      "SpriteID": 315,
       "VerticalOffset": 0,
       "Unknown0x08": 20,
       "CollisionSize": 40,
@@ -661,6 +662,7 @@
       }
     },
     "48x40": {
+      "SpriteID": 512,
       "VerticalOffset": 0,
       "Unknown0x08": 20,
       "CollisionSize": 40,

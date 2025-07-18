@@ -2,6 +2,7 @@
   "Name": "Galm",
   "Spritesheets": {
     "40x48": {
+      "SpriteID": 263,
       "VerticalOffset": 0,
       "Unknown0x08": 20,
       "CollisionSize": 40,

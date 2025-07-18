@@ -2,6 +2,7 @@
   "Name": "Woman w/ Brown Skirt, Blue Dress, and Blonde Ponytail",
   "Spritesheets": {
     "40x40": {
+      "SpriteID": 519,
       "VerticalOffset": 0,
       "Unknown0x08": 20,
       "CollisionSize": 40,

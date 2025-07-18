@@ -2,6 +2,7 @@
   "Name": "Maya Girl in Green+Pink w/ Orange Pigtails",
   "Spritesheets": {
     "40x40": {
+      "SpriteID": 577,
       "VerticalOffset": 0,
       "Unknown0x08": 20,
       "CollisionSize": 40,

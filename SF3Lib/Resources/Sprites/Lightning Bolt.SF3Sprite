@@ -2,6 +2,7 @@
   "Name": "Lightning Bolt",
   "Spritesheets": {
     "32x64": {
+      "SpriteID": 393,
       "VerticalOffset": 0,
       "Unknown0x08": 20,
       "CollisionSize": 32,

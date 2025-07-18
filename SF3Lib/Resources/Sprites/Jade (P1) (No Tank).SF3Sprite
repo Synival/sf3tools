@@ -2,6 +2,7 @@
   "Name": "Jade (P1) (No Tank)",
   "Spritesheets": {
     "40x40": {
+      "SpriteID": 37,
       "VerticalOffset": 0,
       "Unknown0x08": 20,
       "CollisionSize": 40,
@@ -578,6 +579,7 @@
       }
     },
     "48x40": {
+      "SpriteID": 37,
       "VerticalOffset": 0,
       "Unknown0x08": 20,
       "CollisionSize": 40,

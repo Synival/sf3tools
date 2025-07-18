@@ -2,6 +2,7 @@
   "Name": "Unoma (P1) (Ramen)",
   "Spritesheets": {
     "48x32": {
+      "SpriteID": 58,
       "VerticalOffset": 0,
       "Unknown0x08": 20,
       "CollisionSize": 40,

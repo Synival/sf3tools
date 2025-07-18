@@ -2,6 +2,7 @@
   "Name": "Masked Priest (White) w/ Ankh",
   "Spritesheets": {
     "40x40": {
+      "SpriteID": 360,
       "VerticalOffset": 0,
       "Unknown0x08": 20,
       "CollisionSize": 40,

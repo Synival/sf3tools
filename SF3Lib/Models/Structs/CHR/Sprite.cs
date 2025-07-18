@@ -85,7 +85,7 @@ namespace SF3.Models.Structs.CHR {
             var spriteNames = AnimationTable.Select(x => x.SpriteName).Distinct().ToArray();
             foreach (var spriteName in spriteNames) {
                 var infoName = $"{spriteName} ({Header.Width}x{Header.Height})";
-                CHR_Utils.AddSpriteHeaderInfo(infoName, Header.VerticalOffset, Header.Unknown0x08, Header.CollisionShadowDiameter, Header.Scale / 65536.0f);
+                CHR_Utils.AddSpriteHeaderInfo(infoName, Header.SpriteID, Header.VerticalOffset, Header.Unknown0x08, Header.CollisionShadowDiameter, Header.Scale / 65536.0f);
             }
 
             TotalCompressedFramesSize = (uint) FrameTable.Sum(x => x.TextureCompressedSize);

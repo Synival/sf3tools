@@ -2,6 +2,7 @@
   "Name": "Maya Man in Yellow+Blue",
   "Spritesheets": {
     "40x40": {
+      "SpriteID": 569,
       "VerticalOffset": 0,
       "Unknown0x08": 20,
       "CollisionSize": 40,

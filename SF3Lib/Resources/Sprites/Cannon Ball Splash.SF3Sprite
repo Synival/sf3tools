@@ -2,6 +2,7 @@
   "Name": "Cannon Ball Splash",
   "Spritesheets": {
     "32x128": {
+      "SpriteID": 397,
       "VerticalOffset": 0,
       "Unknown0x08": 20,
       "CollisionSize": 48,

@@ -2,6 +2,7 @@
   "Name": "Maya Old Man in Dark Purple Robe and Red+White Cloak",
   "Spritesheets": {
     "40x40": {
+      "SpriteID": 579,
       "VerticalOffset": 0,
       "Unknown0x08": 20,
       "CollisionSize": 40,

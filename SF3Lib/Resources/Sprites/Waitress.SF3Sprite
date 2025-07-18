@@ -2,6 +2,7 @@
   "Name": "Waitress",
   "Spritesheets": {
     "40x40": {
+      "SpriteID": 100,
       "VerticalOffset": 0,
       "Unknown0x08": 20,
       "CollisionSize": 40,

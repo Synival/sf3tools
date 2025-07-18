@@ -2,6 +2,7 @@
   "Name": "Metal Gunner",
   "Spritesheets": {
     "48x32": {
+      "SpriteID": 253,
       "VerticalOffset": 4,
       "Unknown0x08": 20,
       "CollisionSize": 40,

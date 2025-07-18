@@ -2,6 +2,7 @@
   "Name": "Medion (P2)",
   "Spritesheets": {
     "40x40": {
+      "SpriteID": 20,
       "VerticalOffset": 0,
       "Unknown0x08": 20,
       "CollisionSize": 40,
@@ -412,6 +413,7 @@
       }
     },
     "48x40": {
+      "SpriteID": 20,
       "VerticalOffset": 0,
       "Unknown0x08": 20,
       "CollisionSize": 40,

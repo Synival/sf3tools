@@ -2,6 +2,7 @@
   "Name": "Medium Poof of Black Smoke",
   "Spritesheets": {
     "32x32": {
+      "SpriteID": 408,
       "VerticalOffset": 20,
       "Unknown0x08": 40,
       "CollisionSize": 40,

@@ -2,6 +2,7 @@
   "Name": "Bernard (P1)",
   "Spritesheets": {
     "40x40": {
+      "SpriteID": 26,
       "VerticalOffset": 0,
       "Unknown0x08": 20,
       "CollisionSize": 40,
@@ -1342,6 +1343,7 @@
       }
     },
     "48x40": {
+      "SpriteID": 26,
       "VerticalOffset": 0,
       "Unknown0x08": 20,
       "CollisionSize": 40,

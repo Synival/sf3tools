@@ -2,6 +2,7 @@
   "Name": "Sphere of Darkness",
   "Spritesheets": {
     "64x64": {
+      "SpriteID": 404,
       "VerticalOffset": 32,
       "Unknown0x08": 20,
       "CollisionSize": 40,

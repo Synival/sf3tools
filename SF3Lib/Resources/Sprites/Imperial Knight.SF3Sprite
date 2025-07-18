@@ -2,6 +2,7 @@
   "Name": "Imperial Knight",
   "Spritesheets": {
     "48x40": {
+      "SpriteID": 204,
       "VerticalOffset": 0,
       "Unknown0x08": 20,
       "CollisionSize": 40,

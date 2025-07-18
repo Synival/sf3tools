@@ -284,10 +284,12 @@ namespace SF3.Utils {
             }
         }
 
-        public static void AddSpriteHeaderInfo(string spriteName, byte verticalOffset, byte unknown0x08, byte collisionSize, float scale) {
+        public static void AddSpriteHeaderInfo(string spriteName, int spriteId, byte verticalOffset, byte unknown0x08, byte collisionSize, float scale) {
             if (!s_uniqueSpriteInfosByName.ContainsKey(spriteName))
                 s_uniqueSpriteInfosByName.Add(spriteName, new UniqueSpriteInfoDef());
-            s_uniqueSpriteInfosByName[spriteName].AddInfo(verticalOffset, unknown0x08, collisionSize, scale);
+
+            var isCharacterSprite = spriteId < 0x60 && (spriteName.Contains("(U)") || spriteName.Contains("(P1)") || spriteName.Contains("(P2)"));
+            s_uniqueSpriteInfosByName[spriteName].AddInfo(spriteId, verticalOffset, unknown0x08, collisionSize, scale, isCharacterSprite);
         }
 
         public static Dictionary<string, UniqueSpriteInfoDef> GetUniqueSpriteInfos() => s_uniqueSpriteInfosByName;

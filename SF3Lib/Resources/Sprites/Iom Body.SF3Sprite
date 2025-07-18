@@ -2,6 +2,7 @@
   "Name": "Iom Body",
   "Spritesheets": {
     "72x56": {
+      "SpriteID": 323,
       "VerticalOffset": 0,
       "Unknown0x08": 20,
       "CollisionSize": 40,

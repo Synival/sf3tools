@@ -2,6 +2,7 @@
   "Name": "Bald, Shirtless Burly Man (Shovel)",
   "Spritesheets": {
     "48x40": {
+      "SpriteID": 69,
       "VerticalOffset": 0,
       "Unknown0x08": 20,
       "CollisionSize": 40,

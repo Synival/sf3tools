@@ -2,6 +2,7 @@
   "Name": "Fafhard (Helmet)",
   "Spritesheets": {
     "40x40": {
+      "SpriteID": 307,
       "VerticalOffset": 0,
       "Unknown0x08": 20,
       "CollisionSize": 40,
@@ -978,6 +979,7 @@
       }
     },
     "48x40": {
+      "SpriteID": 334,
       "VerticalOffset": 0,
       "Unknown0x08": 20,
       "CollisionSize": 40,

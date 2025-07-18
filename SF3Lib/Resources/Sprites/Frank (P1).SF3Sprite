@@ -2,6 +2,7 @@
   "Name": "Frank (P1)",
   "Spritesheets": {
     "40x40": {
+      "SpriteID": 16,
       "VerticalOffset": 0,
       "Unknown0x08": 20,
       "CollisionSize": 40,

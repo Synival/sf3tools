@@ -2,6 +2,7 @@
   "Name": "Zero (U)",
   "Spritesheets": {
     "48x32": {
+      "SpriteID": 27,
       "VerticalOffset": 0,
       "Unknown0x08": 20,
       "CollisionSize": 40,
@@ -66,6 +67,7 @@
       }
     },
     "48x40": {
+      "SpriteID": 27,
       "VerticalOffset": 0,
       "Unknown0x08": 20,
       "CollisionSize": 40,

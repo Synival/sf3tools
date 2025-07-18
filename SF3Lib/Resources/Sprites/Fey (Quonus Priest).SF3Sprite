@@ -2,6 +2,7 @@
   "Name": "Fey (Quonus Priest)",
   "Spritesheets": {
     "40x40": {
+      "SpriteID": 47,
       "VerticalOffset": 0,
       "Unknown0x08": 20,
       "CollisionSize": 40,
@@ -83,6 +84,7 @@
       "AnimationByDirections": {}
     },
     "40x48": {
+      "SpriteID": 47,
       "VerticalOffset": 0,
       "Unknown0x08": 20,
       "CollisionSize": 40,

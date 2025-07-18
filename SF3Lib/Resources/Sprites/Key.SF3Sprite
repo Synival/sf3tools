@@ -2,6 +2,7 @@
   "Name": "Key",
   "Spritesheets": {
     "40x40": {
+      "SpriteID": 161,
       "VerticalOffset": 0,
       "Unknown0x08": 20,
       "CollisionSize": 40,

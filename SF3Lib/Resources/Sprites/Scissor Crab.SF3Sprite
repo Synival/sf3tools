@@ -2,6 +2,7 @@
   "Name": "Scissor Crab",
   "Spritesheets": {
     "48x32": {
+      "SpriteID": 351,
       "VerticalOffset": 0,
       "Unknown0x08": 20,
       "CollisionSize": 40,

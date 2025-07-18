@@ -2,6 +2,7 @@
   "Name": "Thousand Egg",
   "Spritesheets": {
     "40x32": {
+      "SpriteID": 47,
       "VerticalOffset": 0,
       "Unknown0x08": 20,
       "CollisionSize": 40,

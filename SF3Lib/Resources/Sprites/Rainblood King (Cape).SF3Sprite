@@ -2,6 +2,7 @@
   "Name": "Rainblood King (Cape)",
   "Spritesheets": {
     "40x48": {
+      "SpriteID": 374,
       "VerticalOffset": 0,
       "Unknown0x08": 20,
       "CollisionSize": 40,
@@ -389,6 +390,7 @@
       }
     },
     "64x24": {
+      "SpriteID": 374,
       "VerticalOffset": 0,
       "Unknown0x08": 20,
       "CollisionSize": 40,

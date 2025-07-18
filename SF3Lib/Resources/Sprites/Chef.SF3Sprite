@@ -2,6 +2,7 @@
   "Name": "Chef",
   "Spritesheets": {
     "32x48": {
+      "SpriteID": 122,
       "VerticalOffset": 0,
       "Unknown0x08": 20,
       "CollisionSize": 40,

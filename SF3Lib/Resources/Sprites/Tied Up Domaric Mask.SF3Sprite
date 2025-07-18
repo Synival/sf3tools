@@ -2,6 +2,7 @@
   "Name": "Tied Up Domaric Mask",
   "Spritesheets": {
     "40x40": {
+      "SpriteID": 111,
       "VerticalOffset": 0,
       "Unknown0x08": 0,
       "CollisionSize": 40,

@@ -2,6 +2,7 @@
   "Name": "Large Poof of Black Smoke",
   "Spritesheets": {
     "40x40": {
+      "SpriteID": 392,
       "VerticalOffset": 20,
       "Unknown0x08": 20,
       "CollisionSize": 40,

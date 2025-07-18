@@ -2,6 +2,7 @@
   "Name": "Man in Fancy Blue Uniform",
   "Spritesheets": {
     "40x40": {
+      "SpriteID": 522,
       "VerticalOffset": 0,
       "Unknown0x08": 20,
       "CollisionSize": 40,

@@ -2,6 +2,7 @@
   "Name": "Brute",
   "Spritesheets": {
     "48x48": {
+      "SpriteID": 298,
       "VerticalOffset": 0,
       "Unknown0x08": 48,
       "CollisionSize": 60,

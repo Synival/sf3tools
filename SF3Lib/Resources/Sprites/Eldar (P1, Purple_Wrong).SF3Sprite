@@ -2,6 +2,7 @@
   "Name": "Eldar (P1, Purple/Wrong)",
   "Spritesheets": {
     "48x40": {
+      "SpriteID": 9,
       "VerticalOffset": 0,
       "Unknown0x08": 20,
       "CollisionSize": 40,

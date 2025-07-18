@@ -2,6 +2,7 @@
   "Name": "Rainblood Bishop (Cape)",
   "Spritesheets": {
     "40x48": {
+      "SpriteID": 372,
       "VerticalOffset": 0,
       "Unknown0x08": 20,
       "CollisionSize": 40,
@@ -245,6 +246,7 @@
       }
     },
     "64x24": {
+      "SpriteID": 372,
       "VerticalOffset": 0,
       "Unknown0x08": 20,
       "CollisionSize": 40,

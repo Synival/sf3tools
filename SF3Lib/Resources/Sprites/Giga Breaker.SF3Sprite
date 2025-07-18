@@ -2,6 +2,7 @@
   "Name": "Giga Breaker",
   "Spritesheets": {
     "40x40": {
+      "SpriteID": 233,
       "VerticalOffset": 0,
       "Unknown0x08": 20,
       "CollisionSize": 40,

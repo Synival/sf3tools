@@ -2,6 +2,7 @@
   "Name": "Maya Woman in Green Dress and Pink+White Cloak",
   "Spritesheets": {
     "40x40": {
+      "SpriteID": 568,
       "VerticalOffset": 0,
       "Unknown0x08": 20,
       "CollisionSize": 40,

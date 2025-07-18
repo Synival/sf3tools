@@ -2,6 +2,7 @@
   "Name": "Strange Yellow Light",
   "Spritesheets": {
     "8x8": {
+      "SpriteID": 402,
       "VerticalOffset": 0,
       "Unknown0x08": 20,
       "CollisionSize": 48,

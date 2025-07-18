@@ -2,6 +2,7 @@
   "Name": "Darksol",
   "Spritesheets": {
     "72x56": {
+      "SpriteID": 327,
       "VerticalOffset": 0,
       "Unknown0x08": 20,
       "CollisionSize": 40,

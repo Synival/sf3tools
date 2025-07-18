@@ -2,6 +2,7 @@
   "Name": "Hazuki's Father",
   "Spritesheets": {
     "48x40": {
+      "SpriteID": 164,
       "VerticalOffset": 0,
       "Unknown0x08": 20,
       "CollisionSize": 40,

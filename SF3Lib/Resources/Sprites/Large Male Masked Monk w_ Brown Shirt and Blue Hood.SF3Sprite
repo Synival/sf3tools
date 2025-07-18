@@ -2,6 +2,7 @@
   "Name": "Large Male Masked Monk w/ Brown Shirt and Blue Hood",
   "Spritesheets": {
     "40x40": {
+      "SpriteID": 585,
       "VerticalOffset": 0,
       "Unknown0x08": 20,
       "CollisionSize": 40,

@@ -2,6 +2,7 @@
   "Name": "Green Dragon",
   "Spritesheets": {
     "56x40": {
+      "SpriteID": 241,
       "VerticalOffset": 0,
       "Unknown0x08": 20,
       "CollisionSize": 40,
@@ -273,6 +274,7 @@
       }
     },
     "56x51": {
+      "SpriteID": 147,
       "VerticalOffset": 0,
       "Unknown0x08": 20,
       "CollisionSize": 40,

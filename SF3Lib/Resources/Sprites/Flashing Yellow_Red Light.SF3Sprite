@@ -2,6 +2,7 @@
   "Name": "Flashing Yellow/Red Light",
   "Spritesheets": {
     "16x16": {
+      "SpriteID": 400,
       "VerticalOffset": 0,
       "Unknown0x08": 8,
       "CollisionSize": 16,

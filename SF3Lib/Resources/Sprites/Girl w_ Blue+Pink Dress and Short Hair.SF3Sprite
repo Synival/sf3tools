@@ -2,6 +2,7 @@
   "Name": "Girl w/ Blue+Pink Dress and Short Hair",
   "Spritesheets": {
     "40x40": {
+      "SpriteID": 539,
       "VerticalOffset": 0,
       "Unknown0x08": 20,
       "CollisionSize": 40,

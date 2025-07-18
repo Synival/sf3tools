@@ -2,6 +2,7 @@
   "Name": "Baby Penn (Full Pink Shell w/ Purple Braids)",
   "Spritesheets": {
     "40x32": {
+      "SpriteID": 43,
       "VerticalOffset": 0,
       "Unknown0x08": 20,
       "CollisionSize": 40,

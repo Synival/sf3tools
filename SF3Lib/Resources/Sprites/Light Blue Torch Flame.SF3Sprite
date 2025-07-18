@@ -2,6 +2,7 @@
   "Name": "Light Blue Torch Flame",
   "Spritesheets": {
     "16x32": {
+      "SpriteID": 402,
       "VerticalOffset": 0,
       "Unknown0x08": 8,
       "CollisionSize": 16,

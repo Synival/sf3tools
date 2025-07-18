@@ -2,6 +2,7 @@
   "Name": "Church Priest (Female)",
   "Spritesheets": {
     "40x40": {
+      "SpriteID": 44,
       "VerticalOffset": 0,
       "Unknown0x08": 20,
       "CollisionSize": 40,

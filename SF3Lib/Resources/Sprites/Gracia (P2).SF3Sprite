@@ -2,6 +2,7 @@
   "Name": "Gracia (P2)",
   "Spritesheets": {
     "40x40": {
+      "SpriteID": 31,
       "VerticalOffset": 0,
       "Unknown0x08": 20,
       "CollisionSize": 40,
@@ -755,6 +756,7 @@
       }
     },
     "56x32": {
+      "SpriteID": 202,
       "VerticalOffset": 0,
       "Unknown0x08": 20,
       "CollisionSize": 40,
@@ -1002,6 +1004,7 @@
       }
     },
     "64x58": {
+      "SpriteID": 200,
       "VerticalOffset": 0,
       "Unknown0x08": 20,
       "CollisionSize": 40,

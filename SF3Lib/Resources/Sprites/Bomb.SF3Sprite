@@ -2,6 +2,7 @@
   "Name": "Bomb",
   "Spritesheets": {
     "16x16": {
+      "SpriteID": 394,
       "VerticalOffset": 0,
       "Unknown0x08": 8,
       "CollisionSize": 16,

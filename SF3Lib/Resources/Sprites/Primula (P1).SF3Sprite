@@ -2,6 +2,7 @@
   "Name": "Primula (P1)",
   "Spritesheets": {
     "48x48": {
+      "SpriteID": 55,
       "VerticalOffset": 236,
       "Unknown0x08": 40,
       "CollisionSize": 30,

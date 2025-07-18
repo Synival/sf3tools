@@ -2,6 +2,7 @@
   "Name": "Dwarf Man w/ White Beard / Duncan",
   "Spritesheets": {
     "40x40": {
+      "SpriteID": 74,
       "VerticalOffset": 0,
       "Unknown0x08": 20,
       "CollisionSize": 40,

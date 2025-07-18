@@ -2,6 +2,7 @@
   "Name": "Rock Thrown By Kid",
   "Spritesheets": {
     "32x32": {
+      "SpriteID": 60,
       "VerticalOffset": 0,
       "Unknown0x08": 20,
       "CollisionSize": 40,

@@ -49,6 +49,7 @@ namespace SF3.Sprites {
 
         public override string ToString() => string.Join(", ", FrameGroups.Keys);
 
+        public int SpriteID       = 0;
         public int VerticalOffset = 0;
         public int Unknown0x08    = 0;
         public int CollisionSize  = 0;

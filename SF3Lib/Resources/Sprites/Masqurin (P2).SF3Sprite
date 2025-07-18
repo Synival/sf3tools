@@ -2,6 +2,7 @@
   "Name": "Masqurin (P2)",
   "Spritesheets": {
     "40x40": {
+      "SpriteID": 2,
       "VerticalOffset": 0,
       "Unknown0x08": 20,
       "CollisionSize": 40,

@@ -2,6 +2,7 @@
   "Name": "Turk on Ogra (P1)",
   "Spritesheets": {
     "48x48": {
+      "SpriteID": 57,
       "VerticalOffset": 0,
       "Unknown0x08": 20,
       "CollisionSize": 40,

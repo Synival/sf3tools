@@ -2,6 +2,7 @@
   "Name": "Produn (P1)",
   "Spritesheets": {
     "40x40": {
+      "SpriteID": 50,
       "VerticalOffset": 0,
       "Unknown0x08": 20,
       "CollisionSize": 40,
@@ -1185,6 +1186,7 @@
       }
     },
     "48x40": {
+      "SpriteID": 163,
       "VerticalOffset": 0,
       "Unknown0x08": 20,
       "CollisionSize": 40,

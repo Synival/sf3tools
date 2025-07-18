@@ -2,6 +2,7 @@
   "Name": "Arthur (P1)",
   "Spritesheets": {
     "48x40": {
+      "SpriteID": 35,
       "VerticalOffset": 0,
       "Unknown0x08": 20,
       "CollisionSize": 40,

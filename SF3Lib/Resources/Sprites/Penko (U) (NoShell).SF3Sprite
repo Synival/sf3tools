@@ -2,6 +2,7 @@
   "Name": "Penko (U) (NoShell)",
   "Spritesheets": {
     "40x32": {
+      "SpriteID": 38,
       "VerticalOffset": 0,
       "Unknown0x08": 20,
       "CollisionSize": 40,

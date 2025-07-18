@@ -2,6 +2,7 @@
   "Name": "Firey Poof",
   "Spritesheets": {
     "32x56": {
+      "SpriteID": 392,
       "VerticalOffset": 0,
       "Unknown0x08": 40,
       "CollisionSize": 24,

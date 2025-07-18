@@ -2,6 +2,7 @@
   "Name": "Seven Dwarves (1/7)",
   "Spritesheets": {
     "40x40": {
+      "SpriteID": 22,
       "VerticalOffset": 0,
       "Unknown0x08": 20,
       "CollisionSize": 40,

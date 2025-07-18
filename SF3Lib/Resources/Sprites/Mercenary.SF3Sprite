@@ -2,6 +2,7 @@
   "Name": "Mercenary",
   "Spritesheets": {
     "40x40": {
+      "SpriteID": 202,
       "VerticalOffset": 3,
       "Unknown0x08": 20,
       "CollisionSize": 40,

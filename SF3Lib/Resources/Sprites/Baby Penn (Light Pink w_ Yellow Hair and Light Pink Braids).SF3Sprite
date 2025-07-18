@@ -2,6 +2,7 @@
   "Name": "Baby Penn (Light Pink w/ Yellow Hair and Light Pink Braids)",
   "Spritesheets": {
     "40x32": {
+      "SpriteID": 46,
       "VerticalOffset": 0,
       "Unknown0x08": 20,
       "CollisionSize": 40,

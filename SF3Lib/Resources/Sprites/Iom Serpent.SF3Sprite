@@ -2,6 +2,7 @@
   "Name": "Iom Serpent",
   "Spritesheets": {
     "40x48": {
+      "SpriteID": 324,
       "VerticalOffset": 0,
       "Unknown0x08": 20,
       "CollisionSize": 40,

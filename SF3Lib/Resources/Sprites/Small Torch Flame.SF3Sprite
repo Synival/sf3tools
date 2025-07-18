@@ -2,6 +2,7 @@
   "Name": "Small Torch Flame",
   "Spritesheets": {
     "16x16": {
+      "SpriteID": 399,
       "VerticalOffset": 0,
       "Unknown0x08": 8,
       "CollisionSize": 16,
@@ -122,6 +123,7 @@
       }
     },
     "16x32": {
+      "SpriteID": 399,
       "VerticalOffset": 0,
       "Unknown0x08": 8,
       "CollisionSize": 16,

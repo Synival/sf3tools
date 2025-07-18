@@ -2,6 +2,7 @@
   "Name": "Rainblood Pawn (Capeless)",
   "Spritesheets": {
     "40x48": {
+      "SpriteID": 375,
       "VerticalOffset": 0,
       "Unknown0x08": 20,
       "CollisionSize": 40,

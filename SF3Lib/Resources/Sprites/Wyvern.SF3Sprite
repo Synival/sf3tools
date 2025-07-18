@@ -2,6 +2,7 @@
   "Name": "Wyvern",
   "Spritesheets": {
     "48x32": {
+      "SpriteID": 244,
       "VerticalOffset": 0,
       "Unknown0x08": 20,
       "CollisionSize": 40,
