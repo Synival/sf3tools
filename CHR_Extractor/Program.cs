@@ -1,10 +1,12 @@
 ﻿using CommonLib.Arrays;
 using CommonLib.NamedValues;
+using Newtonsoft.Json;
 using SF3.ByteData;
 using SF3.Models.Files;
 using SF3.Models.Files.CHP;
 using SF3.Models.Files.CHR;
 using SF3.NamedValues;
+using SF3.Sprites;
 using SF3.Types;
 
 namespace CHR_Extractor {
@@ -18,7 +20,14 @@ namespace CHR_Extractor {
             { ScenarioType.PremiumDisk, "G:/" },
         };
 
-        private const string c_pathOut = "../../../Private";
+        private static readonly Dictionary<ScenarioType, string> c_scenarioPaths = new() {
+            { ScenarioType.Scenario1,   "S1" },
+            { ScenarioType.Scenario2,   "S2" },
+            { ScenarioType.Scenario3,   "S3" },
+            { ScenarioType.PremiumDisk, "PD" },
+        };
+
+        private const string c_pathOut = "../../../../SF3Lib/Resources";
 
         public static void Main(string[] args) {
             Console.WriteLine("Processing all CHR and CHP files...");
@@ -35,14 +44,29 @@ namespace CHR_Extractor {
             var nameGetterContexts = Enum.GetValues<ScenarioType>()
                 .ToDictionary(x => x, x => (INameGetterContext) new NameGetterContext(x));
 
+            var jsonSettings = new JsonSerializerSettings() {
+                Formatting = Formatting.Indented,
+                NullValueHandling = NullValueHandling.Ignore,
+            };
+
+            // TODO: remove me when analysis is complete.
             var serializedFilesByScenarioAndFilename = new Dictionary<ScenarioType, Dictionary<string, object>>();
 
             // Open each file.
             foreach (var filesKv in allFiles) {
                 var scenario = filesKv.Key;
+
+                var scenarioCHR_Path = Path.Combine(c_pathOut, c_scenarioPaths[scenario], "CHRs");
+                var scenarioCHP_Path = Path.Combine(c_pathOut, c_scenarioPaths[scenario], "CHPs");
+
+                _ = Directory.CreateDirectory(scenarioCHR_Path);
+                _ = Directory.CreateDirectory(scenarioCHP_Path);
+
+                // TODO: remove me when analysis is complete.
                 var nameGetter = nameGetterContexts[scenario];
 
-                serializedFilesByScenarioAndFilename.Add(scenario, new Dictionary<string, object>());
+                serializedFilesByScenarioAndFilename.Add(scenario, []);
+
                 foreach (var file in filesKv.Value) {
                     var filename = Path.GetFileNameWithoutExtension(file);
 
@@ -60,15 +84,31 @@ namespace CHR_Extractor {
                                 ? [(CHR_File) chrChpFile]
                                 : ((CHP_File) chrChpFile).CHR_EntriesByOffset.Values.ToArray();
 
-                            // List the file and any report we may have from CHR_MatchFunc().
+                            // List the file we're serializing.
                             var fileStr = GetFileString(scenario, file, chrChpFile);
                             Console.WriteLine($"{fileStr}");
 
+                            // Serialize the file. Format depends on CHR vs CHP file.
                             var serializedFile = isChr
                                 ? (object) ((CHR_File) chrChpFile).ToCHR_Def()
                                 : (object) ((CHP_File) chrChpFile).ToCHP_Def();
 
+                            // Write either a .SF3CHR or .SF3CHP file out.
+                            var spriteDefPath = Path.Combine(isChr ? scenarioCHR_Path : scenarioCHP_Path, filename + (isChr ? ".SF3CHR" : ".SF3CHP"));
+                            using (var outFile = File.Open(spriteDefPath, FileMode.Create)) {
+                                using (var stream = new StreamWriter(outFile)) {
+                                    stream.NewLine = "\n";
+                                    stream.Write(JsonConvert.SerializeObject(serializedFile, jsonSettings));
+                                }
+                            }
+
+                            // TODO: remove me when analysis is complete.
                             serializedFilesByScenarioAndFilename[scenario].Add(Path.GetFileName(file), serializedFile);
+
+                            // Deserialize the file to confirm its integrity.
+                            var deserializedFile = isChr
+                                ? (object) ((CHR_Def) serializedFile).ToCHR_File()
+                                : (object) ((CHP_Def) serializedFile).ToCHP_File();
                         }
                     }
                     catch (Exception e) {
@@ -78,7 +118,6 @@ namespace CHR_Extractor {
             }
 
             Console.WriteLine("Processing complete.");
-            _ = Directory.CreateDirectory(c_pathOut);
         }
 
         private static string GetFileString(ScenarioType inputScenario, string filename, ScenarioTableFile chrChpFile) {
