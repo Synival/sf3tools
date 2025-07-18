@@ -6,6 +6,7 @@ using SF3.ByteData;
 using SF3.Models.Files.CHR;
 using SF3.Models.Structs.CHR;
 using SF3.Models.Tables;
+using SF3.Sprites;
 using SF3.Types;
 
 namespace SF3.Models.Files.CHP {
@@ -41,6 +42,12 @@ namespace SF3.Models.Files.CHP {
             };
 
             return CHR_EntriesByOffset.Values.SelectMany(x => x.Tables).ToArray();
+        }
+
+        public CHP_Def ToCHP_Def() {
+            return new CHP_Def() {
+                CHRsByOffset = CHR_EntriesByOffset.ToDictionary(x => x.Key, x => x.Value.ToCHR_Def())
+            };
         }
 
         public Dictionary<int, ICHR_File> CHR_EntriesByOffset { get; private set; }

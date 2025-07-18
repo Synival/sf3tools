@@ -7,6 +7,7 @@ obj/
 *.csproj.user
 /dist_src
 /dist
+/SF3Lib/Resources/Spritesheets
 /SF3LibTests/TestData
 /DFRLibTests/TestData
 *.pubxml.user

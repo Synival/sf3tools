@@ -1,9 +1,11 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using CommonLib.NamedValues;
 using SF3.ByteData;
 using SF3.Models.Tables;
 using SF3.Models.Tables.CHR;
+using SF3.Sprites;
 using SF3.Types;
 
 namespace SF3.Models.Files.CHR {
@@ -34,6 +36,12 @@ namespace SF3.Models.Files.CHR {
         public override IEnumerable<ITable> MakeTables() {
             return new ITable[] {
                 (SpriteTable = SpriteTable.Create(Data, nameof(SpriteTable), (int) DataOffset, StartID, DataOffset, NameGetterContext, IsInCHP))
+            };
+        }
+
+        public CHR_Def ToCHR_Def() {
+            return new CHR_Def() {
+                Sprites = SpriteTable.Select(x => x.ToCHR_SpriteDef()).ToArray()
             };
         }
 

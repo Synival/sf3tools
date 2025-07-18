@@ -4,6 +4,7 @@ using System.Linq;
 using CommonLib.NamedValues;
 using SF3.ByteData;
 using SF3.Models.Tables.CHR;
+using SF3.Sprites;
 using SF3.Types;
 using SF3.Utils;
 
@@ -91,6 +92,11 @@ namespace SF3.Models.Structs.CHR {
 
             // TODO: shouldn't be here! We need a separate view for just the sprite.
             Header.TotalCompressedFramesSize = TotalCompressedFramesSize;
+        }
+
+        public CHR_SpriteDef ToCHR_SpriteDef() {
+            // TODO: convert!
+            return null;
         }
 
         public int IDInGroup { get; }
