@@ -10,10 +10,12 @@ using SF3.Utils;
 
 namespace SF3.Models.Structs.CHR {
     public class Animation : Struct {
-        public Animation(IByteData data, int id, string name, int address, int animationIndex, AnimationFrameTable animationFrames, FrameTable frameTable) : base(data, id, name, address, 0 /* abstract */) {
-            AnimationIndex = animationIndex;
-            AnimationFrames = animationFrames;
-            FrameTable = frameTable;
+        public Animation(IByteData data, int id, string name, int address, int animationIndex, int spriteDirections, AnimationFrameTable animationFrames, FrameTable frameTable)
+        : base(data, id, name, address, 0 /* abstract */) {
+            AnimationIndex   = animationIndex;
+            SpriteDirections = spriteDirections;
+            AnimationFrames  = animationFrames;
+            FrameTable       = frameTable;
 
             _firstFrameWithTexture = animationFrames?.FirstOrDefault(x => x.HasTexture);
 
@@ -66,13 +68,17 @@ namespace SF3.Models.Structs.CHR {
             TotalCompressedFramesSize = (uint) uniqueFramesWithTextures.Sum(x => x.TextureCompressedSize);
         }
 
+        public int SpriteDirections { get; }
         public AnimationFrameTable AnimationFrames { get; }
         public FrameTable FrameTable { get; }
 
         private readonly AnimationFrame _firstFrameWithTexture;
         private readonly Frame[] _framesWithTextures;
 
-        [TableViewModelColumn(displayOrder: 0, displayName: "Index")]
+        [TableViewModelColumn(displayOrder: 0)]
+        public int Directions => AnimationInfo.Directions;
+
+        [TableViewModelColumn(displayOrder: 0.05f, displayName: "Index")]
         public int AnimationIndex { get; }
 
         [TableViewModelColumn(displayOrder: 0.1f, displayName: "Type", minWidth: 100)]

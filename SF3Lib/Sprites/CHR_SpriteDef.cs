@@ -6,6 +6,6 @@
         public int Directions;
 
         public CHR_SpriteFramesDef[] SpriteFrames;
-        public CHR_AnimationDef[] Animations;
+        public CHR_SpriteAnimationsDef[] SpriteAnimations;
     }
 }

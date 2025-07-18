@@ -79,7 +79,7 @@ namespace SF3.Models.Structs.CHR {
                     (int) ((aniOffsets[x.ID + 1] - aniOffsets[x.ID]) / 4)))
                 .ToDictionary(x => x.AnimationIndex, x => x);
 
-            AnimationTable = AnimationTable.Create(Data, $"Sprite{ID:D2}_{nameof(AnimationTable)}", AnimationFrameTablesByIndex.Values.ToArray(),
+            AnimationTable = AnimationTable.Create(Data, $"Sprite{ID:D2}_{nameof(AnimationTable)}", Header.Directions, AnimationFrameTablesByIndex.Values.ToArray(),
                 FrameTable, $"Sprite{ID:D2}_");
 
             var spriteNames = AnimationTable.Select(x => x.SpriteName).Distinct().ToArray();
@@ -101,6 +101,7 @@ namespace SF3.Models.Structs.CHR {
                 Height           = Header.Height,
                 Directions       = Header.Directions,
                 SpriteFrames     = CreateSpriteFrames(),
+                SpriteAnimations = CreateSpriteAnimations()
             };
         }
 
@@ -177,6 +178,81 @@ namespace SF3.Models.Structs.CHR {
 
             // Return all the frames for every sprite.
             return spriteFrames.ToArray();
+        }
+
+        private CHR_SpriteAnimationsDef[] CreateSpriteAnimations() {
+            // Track the sprite whose animation groups are being built.
+            string lastSpriteName = null;
+            var spriteAnimations = new List<CHR_SpriteAnimationsDef>();
+            CHR_SpriteAnimationsDef lastSpriteAnimations = null;
+
+            // Track the animation group whose animations are being built.
+            int lastAnimationGroupDirections = -1;
+            var animationGroups = new List<CHR_AnimationGroupDef>();
+            CHR_AnimationGroupDef lastAnimationGroup = null;
+
+            // Track animations to add to the current animation group being built.
+            var animations = new List<string>();
+
+            // Commits the current set of animations to the current animation group.
+            void CommitAnimationGroupAnimations() {
+                if (lastAnimationGroup == null)
+                    return;
+
+                if (lastAnimationGroup.Animations == null)
+                    lastAnimationGroup.Animations = animations.ToArray();
+
+                animations = new List<string>();
+            }
+
+            // Commits the current animation group to the current sprite.
+            void CommitAnimationGroup() {
+                CommitAnimationGroupAnimations();
+
+                if (lastSpriteAnimations == null)
+                    return;
+
+                if (lastSpriteAnimations.AnimationGroups == null)
+                    lastSpriteAnimations.AnimationGroups = animationGroups.ToArray();
+
+                lastAnimationGroupDirections = -1;
+                animationGroups    = new List<CHR_AnimationGroupDef>();
+                lastAnimationGroup = null;
+            }
+
+            // Go through each animation, building a set of CHR_SpriteFrameDef's.
+            foreach (var animation in AnimationTable) {
+                // If the sprite name has changed, begin a new one.
+                if (animation.SpriteName != lastSpriteName) {
+                    CommitAnimationGroup();
+
+                    lastSpriteName = animation.SpriteName;
+                    lastSpriteAnimations = new CHR_SpriteAnimationsDef() {
+                        SpriteName = animation.SpriteName
+                    };
+                    spriteAnimations.Add(lastSpriteAnimations);
+                }
+
+                // If the animation group has changed, begin a new one.
+                if (animation.Directions != lastAnimationGroupDirections) {
+                    CommitAnimationGroupAnimations();
+
+                    lastAnimationGroupDirections = animation.Directions;
+                    lastAnimationGroup = new CHR_AnimationGroupDef() {
+                        Directions = animation.Directions
+                    };
+                    animationGroups.Add(lastAnimationGroup);
+                }
+
+                // Add the current animation to the animation group.
+                animations.Add(animation.AnimationName);
+            }
+
+            // Commit everything to the last sprite being built.
+            CommitAnimationGroup();
+
+            // Return all the animations for every sprite.
+            return spriteAnimations.ToArray();
         }
 
         public int IDInGroup { get; }
