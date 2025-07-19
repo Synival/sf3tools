@@ -2,7 +2,7 @@
   "Name": "Ogra (P1)",
   "Spritesheets": {
     "48x48": {
-      "SpriteID": 562,
+      "SpriteID": 35,
       "VerticalOffset": 0,
       "Unknown0x08": 20,
       "CollisionSize": 40,

@@ -2,7 +2,7 @@
   "Name": "Garosh (U)",
   "Spritesheets": {
     "40x40": {
-      "SpriteID": 290,
+      "SpriteID": 36,
       "VerticalOffset": 0,
       "Unknown0x08": 20,
       "CollisionSize": 40,

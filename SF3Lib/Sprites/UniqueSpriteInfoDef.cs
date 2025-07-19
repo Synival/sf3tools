@@ -11,7 +11,7 @@ namespace SF3.Sprites {
         }
 
         private void AddToDict<T>(Dictionary<T, int> dict, T value, bool isCharacterSprite) {
-            int amount = 1;
+            int amount = isCharacterSprite ? 1000 : 1;
             if (!dict.ContainsKey(value))
                 dict.Add(value, amount);
             else

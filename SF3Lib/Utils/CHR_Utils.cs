@@ -288,7 +288,7 @@ namespace SF3.Utils {
             if (!s_uniqueSpriteInfosByName.ContainsKey(spriteName))
                 s_uniqueSpriteInfosByName.Add(spriteName, new UniqueSpriteInfoDef());
 
-            var isCharacterSprite = spriteId < 0x60 && (spriteName.Contains("(U)") || spriteName.Contains("(P1)") || spriteName.Contains("(P2)"));
+            var isCharacterSprite = spriteId < 60 && (spriteName.Contains("(U)") || spriteName.Contains("(P1)") || spriteName.Contains("(P2)"));
             s_uniqueSpriteInfosByName[spriteName].AddInfo(spriteId, verticalOffset, unknown0x08, collisionSize, scale, isCharacterSprite);
         }
 
