@@ -109,6 +109,19 @@ namespace CHR_Extractor {
                             var deserializedFile = isChr
                                 ? (object) ((CHR_Def) serializedFile).ToCHR_File(nameGetter, scenario)
                                 : (object) ((CHP_Def) serializedFile).ToCHP_File();
+
+                            // TODO: do this for CHPs as well
+                            // Dump CHRs for opening/analysis
+                            if (isChr) {
+                                var data = (CHR_File) deserializedFile;
+                                var pathOut = Path.Combine(c_pathOut, "Rebuilt_CHRs");
+                                Directory.CreateDirectory(pathOut);
+                                pathOut = Path.Combine(pathOut, $"{scenario}_{filename}.CHR");
+                                using (var chrOut = File.Open(pathOut, FileMode.Create)) {
+                                    var bytes = data.Data.Data.GetDataCopyOrReference();
+                                    chrOut.Write(bytes, 0, bytes.Length);
+                                }
+                            }
                         }
                     }
                     catch (Exception e) {
