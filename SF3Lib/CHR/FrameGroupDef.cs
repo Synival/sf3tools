@@ -1,5 +1,5 @@
 ﻿namespace SF3.CHR {
-    public class CHR_FrameGroupDef {
+    public class FrameGroupDef {
         public string Name;
         public string[] Directions;
     }

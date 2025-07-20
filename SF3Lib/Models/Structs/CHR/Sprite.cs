@@ -100,8 +100,8 @@ namespace SF3.Models.Structs.CHR {
             Header.TotalCompressedFramesSize = TotalCompressedFramesSize;
         }
 
-        public CHR_SpriteDef ToCHR_SpriteDef() {
-            return new CHR_SpriteDef() {
+        public SpriteDef ToCHR_SpriteDef() {
+            return new SpriteDef() {
                 SpriteName       = SpriteName,
 
                 SpriteID         = Header.SpriteID,
@@ -120,16 +120,16 @@ namespace SF3.Models.Structs.CHR {
             };
         }
 
-        private CHR_SpriteFramesDef[] CreateSpriteFrames() {
+        private SpriteFramesDef[] CreateSpriteFrames() {
             // Track the sprite whose frame groups are being built.
             string lastSpriteName = null;
-            var spriteFrames = new List<CHR_SpriteFramesDef>();
-            CHR_SpriteFramesDef lastSpriteFrames = null;
+            var spriteFrames = new List<SpriteFramesDef>();
+            SpriteFramesDef lastSpriteFrames = null;
 
             // Track the frame group whose directions are being built.
             string lastFrameGroupName = null;
-            var frameGroups = new List<CHR_FrameGroupDef>();
-            CHR_FrameGroupDef lastFrameGroup = null;
+            var frameGroups = new List<FrameGroupDef>();
+            FrameGroupDef lastFrameGroup = null;
 
             // Track directions to add to the current frame group being built.
             var frameGroupDirections = new List<SpriteFrameDirection>();
@@ -157,7 +157,7 @@ namespace SF3.Models.Structs.CHR {
                     lastSpriteFrames.FrameGroups = frameGroups.ToArray();
 
                 lastFrameGroupName = null;
-                frameGroups        = new List<CHR_FrameGroupDef>();
+                frameGroups        = new List<FrameGroupDef>();
                 lastFrameGroup     = null;
             }
 
@@ -169,7 +169,7 @@ namespace SF3.Models.Structs.CHR {
                     CommitFrameGroup();
 
                     lastSpriteName = spriteName;
-                    lastSpriteFrames = new CHR_SpriteFramesDef() {
+                    lastSpriteFrames = new SpriteFramesDef() {
                         SpriteName = spriteName
                     };
                     spriteFrames.Add(lastSpriteFrames);
@@ -180,7 +180,7 @@ namespace SF3.Models.Structs.CHR {
                     CommitFrameGroupDirections();
 
                     lastFrameGroupName = frame.FrameName;
-                    lastFrameGroup = new CHR_FrameGroupDef() {
+                    lastFrameGroup = new FrameGroupDef() {
                         Name = frame.FrameName
                     };
                     frameGroups.Add(lastFrameGroup);
@@ -255,16 +255,16 @@ namespace SF3.Models.Structs.CHR {
             }
         }
 
-        private CHR_SpriteAnimationsDef[] CreateSpriteAnimations() {
+        private SpriteAnimationsDef[] CreateSpriteAnimations() {
             // Track the sprite whose animation groups are being built.
             string lastSpriteName = null;
-            var spriteAnimations = new List<CHR_SpriteAnimationsDef>();
-            CHR_SpriteAnimationsDef lastSpriteAnimations = null;
+            var spriteAnimations = new List<SpriteAnimationsDef>();
+            SpriteAnimationsDef lastSpriteAnimations = null;
 
             // Track the animation group whose animations are being built.
             int? lastAnimationGroupDirections = null;
-            var animationGroups = new List<CHR_AnimationGroupDef>();
-            CHR_AnimationGroupDef lastAnimationGroup = null;
+            var animationGroups = new List<AnimationGroupDef>();
+            AnimationGroupDef lastAnimationGroup = null;
 
             // Track animations to add to the current animation group being built.
             var animations = new List<string>();
@@ -291,7 +291,7 @@ namespace SF3.Models.Structs.CHR {
                     lastSpriteAnimations.AnimationGroups = animationGroups.ToArray();
 
                 lastAnimationGroupDirections = null;
-                animationGroups    = new List<CHR_AnimationGroupDef>();
+                animationGroups    = new List<AnimationGroupDef>();
                 lastAnimationGroup = null;
             }
 
@@ -307,11 +307,11 @@ namespace SF3.Models.Structs.CHR {
                 if (animation == null) {
                     if (lastSpriteAnimations == null) {
                         lastSpriteName = null;
-                        lastSpriteAnimations = new CHR_SpriteAnimationsDef() { SpriteName = null };
+                        lastSpriteAnimations = new SpriteAnimationsDef() { SpriteName = null };
                         spriteAnimations.Add(lastSpriteAnimations);
 
                         lastAnimationGroupDirections = 0;
-                        lastAnimationGroup = new CHR_AnimationGroupDef() { Directions = null };
+                        lastAnimationGroup = new AnimationGroupDef() { Directions = null };
                         animationGroups.Add(lastAnimationGroup);
                     }
                     animations.Add(null);
@@ -340,7 +340,7 @@ namespace SF3.Models.Structs.CHR {
                     }
                     else {
                         lastSpriteName = spriteName;
-                        lastSpriteAnimations = new CHR_SpriteAnimationsDef() {
+                        lastSpriteAnimations = new SpriteAnimationsDef() {
                             SpriteName = spriteName
                         };
                         spriteAnimations.Add(lastSpriteAnimations);
@@ -352,7 +352,7 @@ namespace SF3.Models.Structs.CHR {
                     CommitAnimationGroupAnimations();
 
                     lastAnimationGroupDirections = directions;
-                    lastAnimationGroup = new CHR_AnimationGroupDef() {
+                    lastAnimationGroup = new AnimationGroupDef() {
                         Directions = directions
                     };
                     animationGroups.Add(lastAnimationGroup);

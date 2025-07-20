@@ -3,7 +3,7 @@ using SF3.Models.Files.CHR;
 
 namespace SF3.CHR {
     public class CHR_Def {
-        public CHR_SpriteDef[] Sprites;
+        public SpriteDef[] Sprites;
 
         public ICHR_File ToCHR_File() {
             // TODO: deserialize!

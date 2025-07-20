@@ -1,5 +1,5 @@
 ﻿namespace SF3.CHR {
-    public class CHR_SpriteDef {
+    public class SpriteDef {
         public string SpriteName;
 
         public int SpriteID;
@@ -13,7 +13,7 @@
         public int CollisionSize;
         public float? Scale;
 
-        public CHR_SpriteFramesDef[] SpriteFrames;
-        public CHR_SpriteAnimationsDef[] SpriteAnimations;
+        public SpriteFramesDef[] SpriteFrames;
+        public SpriteAnimationsDef[] SpriteAnimations;
     }
 }
