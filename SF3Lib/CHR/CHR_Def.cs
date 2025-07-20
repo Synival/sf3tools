@@ -1,4 +1,6 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
+using System.Linq;
 using CommonLib.Arrays;
 using CommonLib.NamedValues;
 using SF3.Models.Files.CHR;
@@ -30,7 +32,28 @@ namespace SF3.CHR {
         /// <returns>The number of bytes written to outputStream.</returns>
         public int ToCHR_File(Stream outputStream) {
             var chrWriter = new CHR_Writer(outputStream);
-            chrWriter.AddHeaderTerminator();
+
+            foreach (var chr in Sprites) {
+                chrWriter.WriteHeaderEntry(
+                    (ushort) chr.SpriteID,
+                    (ushort) chr.Width,
+                    (ushort) chr.Height,
+                    (byte) chr.Directions,
+                    (byte) chr.VerticalOffset,
+                    (byte) chr.Unknown0x08,
+                    (byte) chr.CollisionSize,
+                    (byte) (chr.PromotionLevel ?? 0),
+                    (int) Math.Round(chr.Scale.Value * 65536.0f)
+                );
+            }
+            chrWriter.WriteHeaderTerminator();
+
+            foreach (var (sprite, i) in Sprites.Select((x, i) => (CHR: x, Index: i)))
+                chrWriter.WriteEmptyAnimationTable(i);
+
+            foreach (var (sprite, i) in Sprites.Select((x, i) => (CHR: x, Index: i)))
+                chrWriter.WriteEmptyFrameTable(i);
+
             return chrWriter.BytesWritten;
         }
     }

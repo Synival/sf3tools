@@ -10,6 +10,34 @@ namespace SF3.Tests.CHR {
             { 'Sprites': [] }
         ";
 
+        private static readonly string c_twoEmptySpriteCHR_Text = @"
+            { 'Sprites': [
+                {
+                    'SpriteName': 'Synbios (U)',
+                    'SpriteID': 0,
+                    'Width': 40,
+                    'Height': 40,
+                    'Directions': 4,
+                    'VerticalOffset': 0,
+                    'Unknown0x08': 20,
+                    'CollisionSize': 40,
+                    'Scale': 1.0,
+                },
+                {
+                    'SpriteName': 'Synbios (P1)',
+                    'SpriteID': 0,
+                    'Width': 40,
+                    'Height': 40,
+                    'Directions': 4,
+                    'VerticalOffset': 0,
+                    'Unknown0x08': 20,
+                    'CollisionSize': 40,
+                    'PromotionLevel': 1,
+                    'Scale': 1.0,
+                }
+            ]}
+        ";
+
         private static readonly string c_minimalCHR_Text = @"
             { 'Sprites': [
                 {
@@ -36,13 +64,14 @@ namespace SF3.Tests.CHR {
         ";
 
         private static CHR_Def c_emptyCHR = JsonConvert.DeserializeObject<CHR_Def>(c_emptyCHR_Text)!;
+        private static CHR_Def c_twoEmptySpriteCHR = JsonConvert.DeserializeObject<CHR_Def>(c_twoEmptySpriteCHR_Text)!;
         private static CHR_Def c_minimalCHR = JsonConvert.DeserializeObject<CHR_Def>(c_minimalCHR_Text)!;
 
         [TestMethod]
         public void ToCHR_File_ToStream_WithEmptyCHR_ExportsExpectedData() {
             // TODO: get real data!
             var expectedData = new byte[] {
-                0xFF, 0xFF, 0xFF, 0xFF, 0x00, 0x00, 0x00, 0x00,
+                0xFF, 0xFF, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
                 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
                 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
             };
@@ -63,6 +92,37 @@ namespace SF3.Tests.CHR {
             var nameGetterContext = new NameGetterContext(ScenarioType.Scenario1);
             var chrFile = c_emptyCHR.ToCHR_File(nameGetterContext, nameGetterContext.Scenario);
             Assert.AreEqual(0, chrFile.SpriteTable.Length);
+        }
+
+        [TestMethod]
+        public void ToCHR_File_ToFile_WithMinimalCHR_ExportsExpectedData() {
+            var nameGetterContext = new NameGetterContext(ScenarioType.Scenario1);
+            var chrFile = c_minimalCHR.ToCHR_File(nameGetterContext, nameGetterContext.Scenario);
+
+            Assert.AreEqual(1, chrFile.SpriteTable.Length);
+
+            var sprite = chrFile.SpriteTable[0];
+            Assert.AreEqual(0, sprite.Header.SpriteID);
+            Assert.AreEqual(40, sprite.Header.Width);
+            Assert.AreEqual(40, sprite.Header.Height);
+            Assert.AreEqual(4, sprite.Header.Directions);
+            Assert.AreEqual(0, sprite.Header.VerticalOffset);
+            Assert.AreEqual(20, sprite.Header.Unknown0x08);
+            Assert.AreEqual(40, sprite.Header.CollisionShadowDiameter);
+            Assert.AreEqual(0, sprite.Header.PromotionLevel);
+            Assert.AreEqual(65536u, sprite.Header.Scale);
+        }
+
+        [TestMethod]
+        public void ToCHR_File_ToFile_WithTwoEmptySpriteCHR_ExportsSuccessfully() {
+            var nameGetterContext = new NameGetterContext(ScenarioType.Scenario1);
+            var chrFile = c_twoEmptySpriteCHR.ToCHR_File(nameGetterContext, nameGetterContext.Scenario);
+
+            Assert.AreEqual(2, chrFile.SpriteTable.Length);
+            Assert.AreEqual(0, chrFile.SpriteTable[0].FrameTable.Length);
+            Assert.AreEqual(0, chrFile.SpriteTable[0].AnimationTable.Length);
+            Assert.AreEqual(0, chrFile.SpriteTable[1].FrameTable.Length);
+            Assert.AreEqual(0, chrFile.SpriteTable[1].AnimationTable.Length);
         }
     }
 }

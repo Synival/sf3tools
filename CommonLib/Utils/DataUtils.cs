@@ -66,6 +66,9 @@ namespace CommonLib.Utils {
         public static unsafe byte[] ToByteArray(this ushort src)
             => ToByteArray(new ushort[] { src });
 
+        public static unsafe byte[] ToByteArray(this int src)
+            => ToByteArray(new uint[] { (uint) src });
+
         public static unsafe byte[] ToByteArray(this uint src)
             => ToByteArray(new uint[] { src });
 
