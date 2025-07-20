@@ -22,15 +22,6 @@ namespace SF3.Models.Structs.CHR {
             if (!Header.IsValid())
                 return;
 
-            var spriteIdPropInfo = typeof(SpriteHeader).GetProperty(nameof(Header.SpriteID));
-            SpriteName = NameGetterContext.GetName(Header, spriteIdPropInfo, Header.SpriteID, new object[] { NamedValueType.Sprite });
-
-            DropdownName = Name + " - "
-                + SpriteName
-                + $" ({Header.Width}x{Header.Height}x{Header.Directions})"
-                + (Header.PromotionLevel > 0 ? $" (P{Header.PromotionLevel})" : "")
-                ;
-
             FrameTable = FrameTable.Create(
                 Data,
                 $"Sprite{ID:D2}_Frames",
@@ -87,6 +78,21 @@ namespace SF3.Models.Structs.CHR {
                 var infoName = $"{spriteName} ({Header.Width}x{Header.Height})";
                 CHR_Utils.AddSpriteHeaderInfo(infoName, Header.SpriteID, Header.VerticalOffset, Header.Unknown0x08, Header.CollisionShadowDiameter, Header.Scale / 65536.0f);
             }
+
+            // Set the name of this sprite to the most common SpriteName used in FrameTable.
+            var spriteNameCounts = FrameTable
+                .Select(x => x.SpriteName)
+                .Distinct()
+                .ToDictionary(x => x, x => AnimationTable.Count(y => y.SpriteName == x));
+            var mostCommonSpriteName = spriteNameCounts.OrderByDescending(x => x.Value).FirstOrDefault().Key;
+            var spriteIdPropInfo = typeof(SpriteHeader).GetProperty(nameof(Header.SpriteID));
+            SpriteName = mostCommonSpriteName ?? NameGetterContext.GetName(Header, spriteIdPropInfo, Header.SpriteID, new object[] { NamedValueType.Sprite });
+
+            DropdownName = Name + " - "
+                + SpriteName
+                + $" ({Header.Width}x{Header.Height}x{Header.Directions})"
+                + (Header.PromotionLevel > 0 ? $" (P{Header.PromotionLevel})" : "")
+                ;
 
             TotalCompressedFramesSize = (uint) FrameTable.Sum(x => x.TextureCompressedSize);
 
