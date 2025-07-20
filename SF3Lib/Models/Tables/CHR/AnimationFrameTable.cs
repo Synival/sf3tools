@@ -1,7 +1,6 @@
 using System;
 using SF3.ByteData;
 using SF3.Models.Structs.CHR;
-using SF3.Types;
 
 namespace SF3.Models.Tables.CHR {
     public class AnimationFrameTable : TerminatedTable<AnimationFrame> {

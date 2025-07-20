@@ -220,17 +220,54 @@ namespace SF3.Models.Structs.CHR {
                 lastAnimationGroup = null;
             }
 
+            // We want to add 'null' entries for empty animations, so build an array of animations
+            // by AnimationIndex, with 'null' entries for missing indices.
+            var animationArraySize = AnimationTable.Length > 0 ? (AnimationTable.Max(x => x.AnimationIndex) + 1) : 0;
+            var animationArray = new Animation[animationArraySize];
+            foreach (var animation in AnimationTable)
+                animationArray[animation.AnimationIndex] = animation;
+
             // Go through each animation, building a set of CHR_SpriteFrameDef's.
-            foreach (var animation in AnimationTable) {
+            foreach (var animation in animationArray) {
+                if (animation == null) {
+                    if (lastSpriteAnimations == null) {
+                        lastSpriteName = null;
+                        lastSpriteAnimations = new CHR_SpriteAnimationsDef() { SpriteName = null };
+                        spriteAnimations.Add(lastSpriteAnimations);
+
+                        lastAnimationGroupDirections = 0;
+                        lastAnimationGroup = new CHR_AnimationGroupDef() { Directions = null };
+                        animationGroups.Add(lastAnimationGroup);
+                    }
+                    animations.Add(null);
+                    continue;
+                }
+
                 // If the sprite name has changed, begin a new one.
                 if (animation.SpriteName != lastSpriteName) {
                     CommitAnimationGroup();
 
-                    lastSpriteName = animation.SpriteName;
-                    lastSpriteAnimations = new CHR_SpriteAnimationsDef() {
-                        SpriteName = animation.SpriteName
-                    };
-                    spriteAnimations.Add(lastSpriteAnimations);
+                    // If the previous sprite was a set of 'null' animations, let's hijack it and
+                    // use it as the current sprite + animations, effectively removing one redundant
+                    // sprite at front.
+                    if (lastSpriteAnimations != null && lastSpriteAnimations.SpriteName == null) {
+                        lastSpriteName = animation.SpriteName;
+                        lastSpriteAnimations.SpriteName = animation.SpriteName;
+
+                        lastAnimationGroupDirections = animation.Directions;
+                        lastAnimationGroup = lastSpriteAnimations.AnimationGroups.Last();
+                        lastAnimationGroup.Directions = animation.Directions;
+
+                        animations = lastAnimationGroup.Animations.ToList();
+                        lastAnimationGroup.Animations = null;
+                    }
+                    else {
+                        lastSpriteName = animation.SpriteName;
+                        lastSpriteAnimations = new CHR_SpriteAnimationsDef() {
+                            SpriteName = animation.SpriteName
+                        };
+                        spriteAnimations.Add(lastSpriteAnimations);
+                    }
                 }
 
                 // If the animation group has changed, begin a new one.
