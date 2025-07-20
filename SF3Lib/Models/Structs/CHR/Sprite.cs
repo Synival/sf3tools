@@ -203,61 +203,8 @@ namespace SF3.Models.Structs.CHR {
         }
 
         private static bool AreExpectedFrameDirections(SpriteFrameDirection[] directions, int dirCount) {
-            switch (dirCount) {
-                case 1:
-                case 0x11:
-                    return Enumerable.SequenceEqual(directions, new SpriteFrameDirection[] {
-                        SpriteFrameDirection.First,
-                    });
-
-                case 2:
-                    return Enumerable.SequenceEqual(directions, new SpriteFrameDirection[] {
-                        SpriteFrameDirection.First,
-                        SpriteFrameDirection.Second,
-                    });
-
-                case 4:
-                    return Enumerable.SequenceEqual(directions, new SpriteFrameDirection[] {
-                        SpriteFrameDirection.SSE,
-                        SpriteFrameDirection.ESE,
-                        SpriteFrameDirection.ENE,
-                        SpriteFrameDirection.NNE,
-                    });
-
-                case 5:
-                    return Enumerable.SequenceEqual(directions, new SpriteFrameDirection[] {
-                        SpriteFrameDirection.S,
-                        SpriteFrameDirection.SE,
-                        SpriteFrameDirection.E,
-                        SpriteFrameDirection.NE,
-                        SpriteFrameDirection.N,
-                    });
-
-                case 6:
-                    return Enumerable.SequenceEqual(directions, new SpriteFrameDirection[] {
-                        SpriteFrameDirection.SSE,
-                        SpriteFrameDirection.ESE,
-                        SpriteFrameDirection.ENE,
-                        SpriteFrameDirection.NNE,
-                        SpriteFrameDirection.S,
-                        SpriteFrameDirection.N,
-                    });
-
-                case 8:
-                    return Enumerable.SequenceEqual(directions, new SpriteFrameDirection[] {
-                        SpriteFrameDirection.SSE,
-                        SpriteFrameDirection.ESE,
-                        SpriteFrameDirection.ENE,
-                        SpriteFrameDirection.NNE,
-                        SpriteFrameDirection.NNW,
-                        SpriteFrameDirection.WNW,
-                        SpriteFrameDirection.WSW,
-                        SpriteFrameDirection.SSW,
-                    });
-
-                default:
-                    return false;
-            }
+            var expectedDirections = CHR_Utils.GetCHR_FrameGroupDirections(dirCount);
+            return Enumerable.SequenceEqual(directions, expectedDirections);
         }
 
         private SpriteAnimationsDef[] CreateSpriteAnimations() {

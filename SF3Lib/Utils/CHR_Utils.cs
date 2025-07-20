@@ -390,5 +390,73 @@ namespace SF3.Utils {
             using (var md5 = MD5.Create())
                 return BitConverter.ToString(md5.ComputeHash(Encoding.ASCII.GetBytes(hashStr))).Replace("-", "").ToLower();
         }
+
+        public static SpriteFrameDirection[] GetCHR_FrameGroupDirections(int directions) {
+            switch (directions) {
+                case 1:
+                case 0x11:
+                    return new SpriteFrameDirection[] {
+                        SpriteFrameDirection.First,
+                    };
+
+                case 2:
+                    return new SpriteFrameDirection[] {
+                        SpriteFrameDirection.First,
+                        SpriteFrameDirection.Second,
+                    };
+
+                case 4:
+                    return new SpriteFrameDirection[] {
+                        SpriteFrameDirection.SSE,
+                        SpriteFrameDirection.ESE,
+                        SpriteFrameDirection.ENE,
+                        SpriteFrameDirection.NNE,
+                    };
+
+                case 5:
+                    return new SpriteFrameDirection[] {
+                        SpriteFrameDirection.S,
+                        SpriteFrameDirection.SE,
+                        SpriteFrameDirection.E,
+                        SpriteFrameDirection.NE,
+                        SpriteFrameDirection.N,
+                    };
+
+                case 6:
+                    return new SpriteFrameDirection[] {
+                        SpriteFrameDirection.SSE,
+                        SpriteFrameDirection.ESE,
+                        SpriteFrameDirection.ENE,
+                        SpriteFrameDirection.NNE,
+                        SpriteFrameDirection.S,
+                        SpriteFrameDirection.N,
+                    };
+
+                case 8:
+                    return new SpriteFrameDirection[] {
+                        SpriteFrameDirection.SSE,
+                        SpriteFrameDirection.ESE,
+                        SpriteFrameDirection.ENE,
+                        SpriteFrameDirection.NNE,
+                        SpriteFrameDirection.NNW,
+                        SpriteFrameDirection.WNW,
+                        SpriteFrameDirection.WSW,
+                        SpriteFrameDirection.SSW,
+                    };
+
+                default:
+                    return null;
+            }
+        }
+
+        public static string FilesystemName(string name) {
+            return name
+                .Replace(" | ", ", ")
+                .Replace("|", ",")
+                .Replace("?", "X")
+                .Replace("-", "_")
+                .Replace(":", "_")
+                .Replace("/", "_");
+        }
     }
 }
