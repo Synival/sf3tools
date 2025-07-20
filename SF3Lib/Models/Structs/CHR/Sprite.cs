@@ -102,6 +102,7 @@ namespace SF3.Models.Structs.CHR {
 
         public CHR_SpriteDef ToCHR_SpriteDef() {
             return new CHR_SpriteDef() {
+                SpriteName       = SpriteName,
                 SpriteID         = Header.SpriteID,
                 Width            = Header.Width,
                 Height           = Header.Height,
@@ -155,12 +156,13 @@ namespace SF3.Models.Structs.CHR {
             // Go through each frame, building a set of CHR_SpriteFrameDef's.
             foreach (var frame in FrameTable) {
                 // If the sprite name has changed, begin a new one.
-                if (frame.SpriteName != lastSpriteName || lastSpriteFrames == null) {
+                var spriteName = (frame.SpriteName == SpriteName) ? null : frame.SpriteName;
+                if (spriteName != lastSpriteName || lastSpriteFrames == null) {
                     CommitFrameGroup();
 
-                    lastSpriteName = frame.SpriteName;
+                    lastSpriteName = spriteName;
                     lastSpriteFrames = new CHR_SpriteFramesDef() {
-                        SpriteName = frame.SpriteName
+                        SpriteName = spriteName
                     };
                     spriteFrames.Add(lastSpriteFrames);
                 }
@@ -294,8 +296,6 @@ namespace SF3.Models.Structs.CHR {
 
             // Go through each animation, building a set of CHR_SpriteFrameDef's.
             foreach (var animation in animationArray) {
-                var directions = animation.Directions == Header.Directions ? (int?) null : animation.Directions;
-
                 if (animation == null) {
                     if (lastSpriteAnimations == null) {
                         lastSpriteName = null;
@@ -311,15 +311,17 @@ namespace SF3.Models.Structs.CHR {
                 }
 
                 // If the sprite name has changed, begin a new one.
-                if (animation.SpriteName != lastSpriteName || lastSpriteAnimations == null) {
+                var spriteName = (animation.SpriteName == SpriteName) ? null : animation.SpriteName;
+                var directions = animation.Directions == Header.Directions ? (int?) null : animation.Directions;
+                if (spriteName != lastSpriteName || lastSpriteAnimations == null) {
                     CommitAnimationGroup();
 
                     // If the previous sprite was a set of 'null' animations, let's hijack it and
                     // use it as the current sprite + animations, effectively removing one redundant
                     // sprite at front.
-                    if (lastSpriteAnimations != null && lastSpriteAnimations.SpriteName == null) {
-                        lastSpriteName = animation.SpriteName;
-                        lastSpriteAnimations.SpriteName = animation.SpriteName;
+                    if (lastSpriteAnimations != null && lastSpriteAnimations.SpriteName == null && lastSpriteAnimations.AnimationGroups != null && lastSpriteAnimations.AnimationGroups.All(x => x == null)) {
+                        lastSpriteName = spriteName;
+                        lastSpriteAnimations.SpriteName = spriteName;
 
                         lastAnimationGroupDirections = directions;
                         lastAnimationGroup = lastSpriteAnimations.AnimationGroups.Last();
@@ -329,9 +331,9 @@ namespace SF3.Models.Structs.CHR {
                         lastAnimationGroup.Animations = null;
                     }
                     else {
-                        lastSpriteName = animation.SpriteName;
+                        lastSpriteName = spriteName;
                         lastSpriteAnimations = new CHR_SpriteAnimationsDef() {
-                            SpriteName = animation.SpriteName
+                            SpriteName = spriteName
                         };
                         spriteAnimations.Add(lastSpriteAnimations);
                     }
