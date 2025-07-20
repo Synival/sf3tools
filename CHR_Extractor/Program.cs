@@ -107,7 +107,7 @@ namespace CHR_Extractor {
 
                             // Deserialize the file to confirm its integrity.
                             var deserializedFile = isChr
-                                ? (object) ((CHR_Def) serializedFile).ToCHR_File()
+                                ? (object) ((CHR_Def) serializedFile).ToCHR_File(nameGetter, scenario)
                                 : (object) ((CHP_Def) serializedFile).ToCHP_File();
                         }
                     }
