@@ -170,6 +170,12 @@ namespace SF3.Models.Structs.CHR {
             foreach (var frame in FrameTable) {
                 // If the sprite name has changed, begin a new one.
                 var spriteName = (frame.SpriteName == SpriteName) ? null : frame.SpriteName;
+
+                // Correct some very specific cases for very specific spritesheets.
+                // TODO: this really shouldn't be hard-coded!!
+                if (frame.SpriteName == "Edmund (P1) (Sword/Weaponless)")
+                    spriteName = (SpriteName == "Edmund (P1) (Weaponless)") ? SpriteName : "Edmund (P1)";
+
                 if (spriteName != lastSpriteName || lastSpriteFrames == null) {
                     CommitFrameGroup();
 
