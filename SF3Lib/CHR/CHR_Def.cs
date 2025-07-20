@@ -1,7 +1,7 @@
 ﻿using System;
 using SF3.Models.Files.CHR;
 
-namespace SF3.Sprites {
+namespace SF3.CHR {
     public class CHR_Def {
         public CHR_SpriteDef[] Sprites;
 

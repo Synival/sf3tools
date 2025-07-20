@@ -1,8 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using SF3.Models.Files.CHP;
 
-namespace SF3.Sprites {
+namespace SF3.CHR {
     public class CHP_Def {
         public Dictionary<int, CHR_Def> CHRsByOffset;
 

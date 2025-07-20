@@ -1,5 +1,5 @@
+using SF3.CHR;
 using SF3.Models.Tables.CHR;
-using SF3.Sprites;
 
 namespace SF3.Models.Files.CHR {
     public interface ICHR_File : IScenarioTableFile {

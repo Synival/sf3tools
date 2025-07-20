@@ -2,11 +2,11 @@
 using CommonLib.NamedValues;
 using Newtonsoft.Json;
 using SF3.ByteData;
+using SF3.CHR;
 using SF3.Models.Files;
 using SF3.Models.Files.CHP;
 using SF3.Models.Files.CHR;
 using SF3.NamedValues;
-using SF3.Sprites;
 using SF3.Types;
 
 namespace CHR_Extractor {

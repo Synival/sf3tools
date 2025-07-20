@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using CommonLib.NamedValues;
 using SF3.ByteData;
+using SF3.CHR;
 using SF3.Models.Tables.CHR;
-using SF3.Sprites;
 using SF3.Types;
 using SF3.Utils;
 
