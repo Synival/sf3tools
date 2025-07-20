@@ -103,10 +103,18 @@ namespace SF3.Models.Structs.CHR {
         public CHR_SpriteDef ToCHR_SpriteDef() {
             return new CHR_SpriteDef() {
                 SpriteName       = SpriteName,
+
                 SpriteID         = Header.SpriteID,
                 Width            = Header.Width,
                 Height           = Header.Height,
                 Directions       = Header.Directions,
+                PromotionLevel   = (Header.PromotionLevel == 0) ? (int?) null : Header.PromotionLevel,
+
+                VerticalOffset   = Header.VerticalOffset,
+                Unknown0x08      = Header.Unknown0x08,
+                CollisionSize    = Header.CollisionShadowDiameter,
+                Scale            = Header.Scale / 65536.0f,
+
                 SpriteFrames     = CreateSpriteFrames(),
                 SpriteAnimations = CreateSpriteAnimations()
             };
