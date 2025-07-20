@@ -149,7 +149,7 @@ namespace SF3.Models.Structs.CHR {
             // Go through each frame, building a set of CHR_SpriteFrameDef's.
             foreach (var frame in FrameTable) {
                 // If the sprite name has changed, begin a new one.
-                if (frame.SpriteName != lastSpriteName) {
+                if (frame.SpriteName != lastSpriteName || lastSpriteFrames == null) {
                     CommitFrameGroup();
 
                     lastSpriteName = frame.SpriteName;
@@ -160,7 +160,7 @@ namespace SF3.Models.Structs.CHR {
                 }
 
                 // If the frame group has changed, begin a new one.
-                if (frame.FrameName != lastFrameGroupName) {
+                if (frame.FrameName != lastFrameGroupName || lastFrameGroup == null) {
                     CommitFrameGroupDirections();
 
                     lastFrameGroupName = frame.FrameName;
@@ -246,7 +246,7 @@ namespace SF3.Models.Structs.CHR {
             CHR_SpriteAnimationsDef lastSpriteAnimations = null;
 
             // Track the animation group whose animations are being built.
-            int lastAnimationGroupDirections = -1;
+            int? lastAnimationGroupDirections = null;
             var animationGroups = new List<CHR_AnimationGroupDef>();
             CHR_AnimationGroupDef lastAnimationGroup = null;
 
@@ -274,7 +274,7 @@ namespace SF3.Models.Structs.CHR {
                 if (lastSpriteAnimations.AnimationGroups == null)
                     lastSpriteAnimations.AnimationGroups = animationGroups.ToArray();
 
-                lastAnimationGroupDirections = -1;
+                lastAnimationGroupDirections = null;
                 animationGroups    = new List<CHR_AnimationGroupDef>();
                 lastAnimationGroup = null;
             }
@@ -288,6 +288,8 @@ namespace SF3.Models.Structs.CHR {
 
             // Go through each animation, building a set of CHR_SpriteFrameDef's.
             foreach (var animation in animationArray) {
+                var directions = animation.Directions == Header.Directions ? (int?) null : animation.Directions;
+
                 if (animation == null) {
                     if (lastSpriteAnimations == null) {
                         lastSpriteName = null;
@@ -303,7 +305,7 @@ namespace SF3.Models.Structs.CHR {
                 }
 
                 // If the sprite name has changed, begin a new one.
-                if (animation.SpriteName != lastSpriteName) {
+                if (animation.SpriteName != lastSpriteName || lastSpriteAnimations == null) {
                     CommitAnimationGroup();
 
                     // If the previous sprite was a set of 'null' animations, let's hijack it and
@@ -313,9 +315,9 @@ namespace SF3.Models.Structs.CHR {
                         lastSpriteName = animation.SpriteName;
                         lastSpriteAnimations.SpriteName = animation.SpriteName;
 
-                        lastAnimationGroupDirections = animation.Directions;
+                        lastAnimationGroupDirections = directions;
                         lastAnimationGroup = lastSpriteAnimations.AnimationGroups.Last();
-                        lastAnimationGroup.Directions = animation.Directions;
+                        lastAnimationGroup.Directions = directions;
 
                         animations = lastAnimationGroup.Animations.ToList();
                         lastAnimationGroup.Animations = null;
@@ -330,12 +332,12 @@ namespace SF3.Models.Structs.CHR {
                 }
 
                 // If the animation group has changed, begin a new one.
-                if (animation.Directions != lastAnimationGroupDirections) {
+                if (directions != lastAnimationGroupDirections || lastAnimationGroup == null) {
                     CommitAnimationGroupAnimations();
 
-                    lastAnimationGroupDirections = animation.Directions;
+                    lastAnimationGroupDirections = directions;
                     lastAnimationGroup = new CHR_AnimationGroupDef() {
-                        Directions = animation.Directions
+                        Directions = directions
                     };
                     animationGroups.Add(lastAnimationGroup);
                 }
