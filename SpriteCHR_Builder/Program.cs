@@ -29,7 +29,7 @@ namespace SpriteCHR_Builder {
             foreach (var spriteDefWithPath in spriteDefsWithPaths) {
                 var path = spriteDefWithPath.Path ?? "";
                 var spriteDef = spriteDefWithPath.SpriteDef;
-                var outputChrFile = Path.Combine(c_outputPath, $"{FilesystemString(spriteDef.Name)}.CHR");
+                var outputChrFile = Path.Combine(c_outputPath, $"{SpriteUtils.FilesystemName(spriteDef.Name)}.CHR");
 
                 Console.WriteLine($"Creating '{outputChrFile}'...");
 
@@ -200,7 +200,7 @@ namespace SpriteCHR_Builder {
             var compressedFrameDataByHash = uniqueFramesByHash.Values
                 .Select((x, i) => new { Index = i, FrameDef = x })
                 .ToDictionary(x => x.FrameDef.Hash, x => {
-                    var spritesheetName = $"{FilesystemString(spriteDef.Name)} ({x.FrameDef.Width}x{x.FrameDef.Height})";
+                    var spritesheetName = $"{SpriteUtils.FilesystemName(spriteDef.Name)} ({x.FrameDef.Width}x{x.FrameDef.Height})";
 #pragma warning disable CA1416 // Validate platform compatibility
                     Bitmap? spritesheet;
                     spritesheet = spritesheets.TryGetValue(spritesheetName, out var spritesheetOut) ? spritesheetOut : spritesheets.Values.FirstOrDefault();
@@ -429,16 +429,6 @@ namespace SpriteCHR_Builder {
             var targetPos = ((pos % 4 == 0) ? pos : pos + (4 - (pos % 4))) + 4;
             for (int i = pos; i < targetPos; i++)
                 fileOut.WriteByte(0x00);
-        }
-
-        private static string FilesystemString(string str) {
-            return str
-                .Replace(" | ", ", ")
-                .Replace("|", ",")
-                .Replace("?", "X")
-                .Replace("-", "_")
-                .Replace(":", "_")
-                .Replace("/", "_");
         }
     }
 }

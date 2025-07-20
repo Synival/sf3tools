@@ -225,7 +225,7 @@ namespace SpriteExtractor {
             Console.WriteLine();
 
             foreach (var spriteDef in spriteDefs) {
-                var spritePath = Path.Combine(c_pathOut, FilesystemString(spriteDef.Name));
+                var spritePath = Path.Combine(c_pathOut, SpriteUtils.FilesystemName(spriteDef.Name));
 
                 List<StandaloneFrameDef> framesFound = [];
                 foreach (var spritesheet in spriteDef.Spritesheets) {
@@ -260,7 +260,7 @@ namespace SpriteExtractor {
                         .OrderBy(x => x.Direction)
                         .ToDictionary(x => x.Direction, x => x.Index);
 
-                    var filename = FilesystemString(spriteName) + ".BMP";
+                    var filename = SpriteUtils.FilesystemName(spriteName) + ".BMP";
                     var outputPath = Path.Combine(spritePath, filename);
 
                     var frameGroups = frames
@@ -350,7 +350,7 @@ namespace SpriteExtractor {
                         Marshal.Copy(newData, 0, bmpData.Scan0, newData.Length);
                         bitmap.UnlockBits(bmpData);
                         try {
-                            _ = Directory.CreateDirectory(Path.Combine(c_pathOut, FilesystemString(spriteDef.Name)));
+                            _ = Directory.CreateDirectory(Path.Combine(c_pathOut, SpriteUtils.FilesystemName(spriteDef.Name)));
                             bitmap.Save(outputPath);
                         }
                         catch { }
@@ -372,11 +372,12 @@ namespace SpriteExtractor {
             };
 
             foreach (var spriteDef in spriteDefs) {
-                var spritePath = Path.Combine(c_pathOut, FilesystemString(spriteDef.Name));
-                var spriteDefPath = Path.Combine(spritePath, FilesystemString(spriteDef.Name) + ".SF3Sprite");
+                var fsName = SpriteUtils.FilesystemName(spriteDef.Name);
+                var spritePath = Path.Combine(c_pathOut, fsName);
+                var spriteDefPath = Path.Combine(spritePath, fsName + ".SF3Sprite");
                 Console.WriteLine($"Writing '{spriteDefPath}'...");
 
-                _ = Directory.CreateDirectory(Path.Combine(c_pathOut, FilesystemString(spriteDef.Name)));
+                _ = Directory.CreateDirectory(Path.Combine(c_pathOut, fsName));
                 using (var file = File.Open(spriteDefPath, FileMode.Create)) {
                     using (var stream = new StreamWriter(file)) {
                         stream.NewLine = "\n";
@@ -427,16 +428,6 @@ namespace SpriteExtractor {
 
         private static string GetFileString(ScenarioType inputScenario, string filename, ScenarioTableFile chrChpFile) {
             return inputScenario.ToString().PadLeft(11) + ": " + Path.GetFileName(filename).PadLeft(12);
-        }
-
-        private static string FilesystemString(string str) {
-            return str
-                .Replace(" | ", ", ")
-                .Replace("|", ",")
-                .Replace("?", "X")
-                .Replace("-", "_")
-                .Replace(":", "_")
-                .Replace("/", "_");
         }
     }
 }

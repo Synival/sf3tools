@@ -136,15 +136,5 @@ namespace CHR_Extractor {
         private static string GetFileString(ScenarioType inputScenario, string filename, ScenarioTableFile chrChpFile) {
             return inputScenario.ToString().PadLeft(11) + ": " + Path.GetFileName(filename).PadLeft(12);
         }
-
-        private static string FilesystemString(string str) {
-            return str
-                .Replace(" | ", ", ")
-                .Replace("|", ",")
-                .Replace("?", "X")
-                .Replace("-", "_")
-                .Replace(":", "_")
-                .Replace("/", "_");
-        }
     }
 }
