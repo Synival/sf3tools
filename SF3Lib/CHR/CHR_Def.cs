@@ -64,6 +64,14 @@ namespace SF3.CHR {
         public int ToCHR_File(Stream outputStream) {
             var chrWriter = new CHR_Writer(outputStream);
 
+            WriteCHR_Header(chrWriter);
+            WriteCHR_Animations(chrWriter);
+            WriteCHR_Frames(chrWriter);
+
+            return chrWriter.BytesWritten;
+        }
+
+        private void WriteCHR_Header(CHR_Writer chrWriter) {
             // Write the header table with all sprite definitions and offsets for their own tables.
             foreach (var chr in Sprites) {
                 chrWriter.WriteHeaderEntry(
@@ -79,11 +87,15 @@ namespace SF3.CHR {
                 );
             }
             chrWriter.WriteHeaderTerminator();
+        }
 
+        private void WriteCHR_Animations(CHR_Writer chrWriter) {
             // Write all animation tables.
             foreach (var (sprite, i) in Sprites.Select((x, i) => (CHR: x, Index: i)))
                 chrWriter.WriteEmptyAnimationTable(i);
+        }
 
+        private void WriteCHR_Frames(CHR_Writer chrWriter) {
             // TODO: temporary, until we write the real images!!
             var imageKeys = new HashSet<string>();
 
@@ -120,8 +132,6 @@ namespace SF3.CHR {
 
                 chrWriter.WriteFrameImage(key, Compression.CompressSpriteData(data, 0, data.Length));
             }
-
-            return chrWriter.BytesWritten;
         }
     }
 }
