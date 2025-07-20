@@ -22,7 +22,7 @@ namespace SpriteCHR_Builder {
 
             var spriteDefsWithPaths = spriteDefFiles
                 // TODO: check for invalid objects!
-                .Select(x => new { Path = x, SpriteDef = JsonConvert.DeserializeObject<SpriteDef>(File.ReadAllText(x))! })
+                .Select(x => new { Path = x, SpriteDef = SpriteDef.FromJSON(File.ReadAllText(x))! })
                 .ToArray();
 
             _ = Directory.CreateDirectory(c_outputPath);

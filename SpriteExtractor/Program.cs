@@ -366,11 +366,6 @@ namespace SpriteExtractor {
             Console.WriteLine("===================================================");
             Console.WriteLine();
 
-            var jsonSettings = new JsonSerializerSettings() {
-                Formatting = Formatting.Indented,
-                NullValueHandling = NullValueHandling.Ignore,                    
-            };
-
             foreach (var spriteDef in spriteDefs) {
                 var fsName = SpriteUtils.FilesystemName(spriteDef.Name);
                 var spritePath = Path.Combine(c_pathOut, fsName);
@@ -381,7 +376,7 @@ namespace SpriteExtractor {
                 using (var file = File.Open(spriteDefPath, FileMode.Create)) {
                     using (var stream = new StreamWriter(file)) {
                         stream.NewLine = "\n";
-                        stream.Write(JsonConvert.SerializeObject(spriteDef, jsonSettings));
+                        stream.Write(spriteDef.ToJSON_String());
                     }
                 }
             }

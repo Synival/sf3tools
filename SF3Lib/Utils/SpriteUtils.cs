@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.IO;
-using Newtonsoft.Json;
 using SF3.Sprites;
 using static CommonLib.Utils.ResourceUtils;
 
@@ -23,9 +22,7 @@ namespace SF3.Utils {
             SpriteDef spriteDef = null;
             try {
                 var spriteDefPath = ResourceFile(Path.Combine("Sprites", $"{FilesystemName(name)}.SF3Sprite"));
-                using (var file = File.Open(spriteDefPath, FileMode.Open))
-                    using (var reader = new StreamReader(file))
-                        spriteDef = JsonConvert.DeserializeObject<SpriteDef>(reader.ReadToEnd());
+                spriteDef = SpriteDef.FromJSON(File.ReadAllText(spriteDefPath));
             }
             catch {
                 return null;

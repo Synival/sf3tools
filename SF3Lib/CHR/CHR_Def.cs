@@ -5,6 +5,7 @@ using System.Linq;
 using CommonLib.Arrays;
 using CommonLib.NamedValues;
 using CommonLib.Utils;
+using Newtonsoft.Json;
 using SF3.Models.Files.CHR;
 using SF3.Sprites;
 using SF3.Types;
@@ -13,6 +14,32 @@ using SF3.Utils;
 namespace SF3.CHR {
     public class CHR_Def {
         public SpriteDef[] Sprites;
+
+        /// <summary>
+        /// Deserializes a JSON object of a CHR_Def.
+        /// </summary>
+        /// <param name="json">CHR_Def in JSON format as a string.</param>
+        /// <returns>A new CHR_Def if deserializing was successful, or 'null' if not.</returns>
+        public static CHR_Def FromJSON(string json) {
+            try {
+                return JsonConvert.DeserializeObject<CHR_Def>(json);
+            }
+            catch {
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// Converts the CHR_Def to a JSON object string.
+        /// </summary>
+        /// <returns>A string in JSON format.</returns>
+        public string ToJSON_String() {
+            var settings = new JsonSerializerSettings() {
+                Formatting = Formatting.Indented,
+                NullValueHandling = NullValueHandling.Ignore,
+            };
+            return JsonConvert.SerializeObject(this, settings);
+        }
 
         /// <summary>
         /// Converts the CHR_Def to a CHR_File.

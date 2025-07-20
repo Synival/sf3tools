@@ -1,5 +1,4 @@
-﻿using Newtonsoft.Json;
-using SF3.CHR;
+﻿using SF3.CHR;
 using SF3.NamedValues;
 using SF3.Types;
 
@@ -63,12 +62,10 @@ namespace SF3.Tests.CHR {
             ]}
         ";
 
-        private static CHR_Def c_emptyCHR = JsonConvert.DeserializeObject<CHR_Def>(c_emptyCHR_Text)!;
-        private static CHR_Def c_twoEmptySpriteCHR = JsonConvert.DeserializeObject<CHR_Def>(c_twoEmptySpriteCHR_Text)!;
-        private static CHR_Def c_minimalCHR = JsonConvert.DeserializeObject<CHR_Def>(c_minimalCHR_Text)!;
-
         [TestMethod]
         public void ToCHR_File_ToStream_WithEmptyCHR_ExportsExpectedData() {
+            var emptyCHR = CHR_Def.FromJSON(c_emptyCHR_Text);
+
             // TODO: get real data!
             var expectedData = new byte[] {
                 0xFF, 0xFF, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
@@ -79,7 +76,7 @@ namespace SF3.Tests.CHR {
             byte[]? resultData = null;
             int rval;
             using (var outputStream = new MemoryStream()) {
-                rval = c_emptyCHR.ToCHR_File(outputStream);
+                rval = emptyCHR.ToCHR_File(outputStream);
                 resultData = outputStream.ToArray();
             }
 
@@ -90,14 +87,16 @@ namespace SF3.Tests.CHR {
         [TestMethod]
         public void ToCHR_File_ToFile_WithEmptyCHR_ExportsExpectedData() {
             var nameGetterContext = new NameGetterContext(ScenarioType.Scenario1);
-            var chrFile = c_emptyCHR.ToCHR_File(nameGetterContext, nameGetterContext.Scenario);
+            var emptyCHR = CHR_Def.FromJSON(c_emptyCHR_Text);
+            var chrFile = emptyCHR.ToCHR_File(nameGetterContext, nameGetterContext.Scenario);
             Assert.AreEqual(0, chrFile.SpriteTable.Length);
         }
 
         [TestMethod]
         public void ToCHR_File_ToFile_WithMinimalCHR_ExportsExpectedData() {
             var nameGetterContext = new NameGetterContext(ScenarioType.Scenario1);
-            var chrFile = c_minimalCHR.ToCHR_File(nameGetterContext, nameGetterContext.Scenario);
+            var minimalCHR = CHR_Def.FromJSON(c_minimalCHR_Text);
+            var chrFile = minimalCHR.ToCHR_File(nameGetterContext, nameGetterContext.Scenario);
 
             Assert.AreEqual(1, chrFile.SpriteTable.Length);
 
@@ -116,7 +115,8 @@ namespace SF3.Tests.CHR {
         [TestMethod]
         public void ToCHR_File_ToFile_WithTwoEmptySpriteCHR_ExportsSuccessfully() {
             var nameGetterContext = new NameGetterContext(ScenarioType.Scenario1);
-            var chrFile = c_twoEmptySpriteCHR.ToCHR_File(nameGetterContext, nameGetterContext.Scenario);
+            var twoEmptySpriteCHR = CHR_Def.FromJSON(c_twoEmptySpriteCHR_Text);
+            var chrFile = twoEmptySpriteCHR.ToCHR_File(nameGetterContext, nameGetterContext.Scenario);
 
             Assert.AreEqual(2, chrFile.SpriteTable.Length);
             Assert.AreEqual(0, chrFile.SpriteTable[0].FrameTable.Length);
