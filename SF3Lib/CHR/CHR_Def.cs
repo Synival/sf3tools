@@ -29,13 +29,9 @@ namespace SF3.CHR {
         /// <param name="outputStream">Stream to export the .CHR-formatted data to.</param>
         /// <returns>The number of bytes written to outputStream.</returns>
         public int ToCHR_File(Stream outputStream) {
-            // TODO: deserialize!
-            outputStream.Write(new byte[] {
-                0xFF, 0xFF, 0xFF, 0xFF, 0x00, 0x00, 0x00, 0x00,
-                0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-                0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-            }, 0, 0x18);
-            return 0x18;
+            var chrWriter = new CHR_Writer(outputStream);
+            chrWriter.AddHeaderTerminator();
+            return chrWriter.BytesWritten;
         }
     }
 }
