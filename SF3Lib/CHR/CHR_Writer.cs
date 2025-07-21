@@ -164,14 +164,19 @@ namespace SF3.CHR {
         }
 
         /// <summary>
+        /// Writes enough bytes so the position is divisible by 'alignment'.
+        /// </summary>
+        /// <param name="alignment">The number of bytes the stream's length should be visible by.</param>
+        public void WriteToAlignTo(int alignment) {
+            var pos = Stream.Position;
+            if (pos % alignment != 0)
+                Write(new byte[alignment - (pos % alignment)]);
+        }
+
+        /// <summary>
         /// Ends the CHR file by writing some necessary padding.
         /// </summary>
         public void Finish() {
-            // Write enough bytes for the total length to be divisible by 4.
-            var pos = Stream.Position;
-            if (pos % 4 != 0)
-                Write(new byte[4 - (pos % 4)]);
-
             // Write an additional 4 bytes at the end.
             Write(new byte[4]);
         }

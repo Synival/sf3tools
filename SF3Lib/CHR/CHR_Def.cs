@@ -171,9 +171,15 @@ namespace SF3.CHR {
             var spritesheetImageDict = new Dictionary<string, Bitmap>();
             var imagesRefsByKey = new Dictionary<string, SpritesheetImageRef>();
 
+            // CHR files must have had their compressed frames written by sprite, because there's a forced alignment of 4
+            // after every sprite's groups of frames. We don't bother to do that -- different sprites can share compressed
+            // images -- but most cases are fixed if we record which image is the final image for each sprite.
+            var finalSpriteFrames = new HashSet<string>();
+
             // Write all frame tables.
             foreach (var (sprite, i) in Sprites.Select((x, i) => (CHR: x, Index: i))) {
                 var spritesheetKey = SpritesheetDef.DimensionsToKey(sprite.Width, sprite.Height);
+                string lastFrameKey = null;
 
                 foreach (var spriteFrames in sprite.SpriteFrames ?? new SpriteFramesDef[0]) {
                     var spriteName = spriteFrames.SpriteName ?? sprite.SpriteName;
@@ -222,10 +228,15 @@ namespace SF3.CHR {
                             }
 
                             chrWriter.WriteFrameTableFrame(i, frameKey, aniFrameKey);
+                            lastFrameKey = frameKey;
                         }
                     }
                 }
                 chrWriter.WriteFrameTableTerminator(i);
+
+                // Remember what the last image was in this sprite.
+                if (lastFrameKey != null)
+                    finalSpriteFrames.Add(lastFrameKey);
             }
 
             // Write all images, updating pointers that reference each image by its key.
@@ -253,6 +264,10 @@ namespace SF3.CHR {
 
                 // Write the compressed image, updating any pointers that reference it by its key.
                 chrWriter.WriteFrameImage(key, Compression.CompressSpriteData(data, 0, data.Length));
+
+                // There's some padding after every sprite's group of frames to enforce an alignment of 4.
+                if (finalSpriteFrames.Contains(key))
+                    chrWriter.WriteToAlignTo(4);
             }
         }
     }
