@@ -46,8 +46,8 @@ namespace CHR_Extractor {
 
             // TODO: remove these when analysis is complete.
             var serializedFilesByScenarioAndFilename = new Dictionary<ScenarioType, Dictionary<string, object>>();
-            var totalChrCount = 0;
-            var totalIdenticalChrCount = 0;
+            var totalFileCount = 0;
+            var totalIdenticalFileCount = 0;
 
             // Open each file.
             foreach (var filesKv in allFiles) {
@@ -109,42 +109,41 @@ namespace CHR_Extractor {
                             // Deserialize the file to confirm its integrity.
                             var deserializedFile = isChr
                                 ? (object) ((CHR_Def) chrChpDef).ToCHR_File(nameGetter, scenario)
-                                : (object) ((CHP_Def) chrChpDef).ToCHP_File();
+                                : (object) ((CHP_Def) chrChpDef).ToCHP_File(nameGetter, scenario);
 
-                            // TODO: do this for CHPs as well
-                            // Dump CHRs for opening/analysis
-                            if (isChr) {
-                                bool chrIsDifferent = false;
+                            bool fileIsDifferent = false;
 
-                                var newChrFile = (CHR_File) deserializedFile;
-                                var pathOut = Path.Combine(c_pathOut, "Rebuilt_CHRs", c_scenarioPaths[scenario]);
-                                Directory.CreateDirectory(pathOut);
-                                pathOut = Path.Combine(pathOut, $"{filename}.CHR");
-                                var newData = newChrFile.Data.Data.GetDataCopyOrReference();
-                                using (var chrOut = File.Open(pathOut, FileMode.Create)) {
-                                    chrOut.Write(newData, 0, newData.Length);
-                                }
+                            var pathOut = Path.Combine(c_pathOut, "Rebuilt_CHRs", c_scenarioPaths[scenario]);
+                            Directory.CreateDirectory(pathOut);
+                            pathOut = Path.Combine(pathOut, $"{filename}.{(isChr ? "CHR" : "CHP")}");
+                            var newData = isChr
+                                ? ((CHR_File) deserializedFile).Data.Data.GetDataCopyOrReference()
+                                : ((CHP_File) deserializedFile).Data.Data.GetDataCopyOrReference();
 
-                                var origChrFile = (CHR_File) chrChpFile;
-                                var origData = origChrFile.Data.Data.GetDataCopyOrReference();
-                                if (newData.Length != origData.Length) {
-                                    Console.WriteLine($"    Size changed: 0x{origData.Length:X5} => 0x{newData.Length:X5}");
-                                    chrIsDifferent = true;
-                                }
-
-                                var len = Math.Min(origData.Length, newData.Length);
-                                for (int i = 0; i < len; i++) {
-                                    if (origData[i] != newData[i]) {
-                                        Console.WriteLine($"    Data differs at 0x{i:X5}");
-                                        chrIsDifferent = true;
-                                        break;
-                                    }
-                                }
-
-                                totalChrCount++;
-                                if (!chrIsDifferent)
-                                    totalIdenticalChrCount++;
+                            using (var newDataOut = File.Open(pathOut, FileMode.Create)) {
+                                newDataOut.Write(newData, 0, newData.Length);
                             }
+
+                            var origData = isChr
+                                ? ((CHR_File) chrChpFile).Data.Data.GetDataCopyOrReference()
+                                : ((CHP_File) chrChpFile).Data.Data.GetDataCopyOrReference();
+                            if (newData.Length != origData.Length) {
+                                Console.WriteLine($"    Size changed: 0x{origData.Length:X5} => 0x{newData.Length:X5}");
+                                fileIsDifferent = true;
+                            }
+
+                            var len = Math.Min(origData.Length, newData.Length);
+                            for (int i = 0; i < len; i++) {
+                                if (origData[i] != newData[i]) {
+                                    Console.WriteLine($"    Data differs at 0x{i:X5}");
+                                    fileIsDifferent = true;
+                                    break;
+                                }
+                            }
+
+                            totalFileCount++;
+                            if (!fileIsDifferent)
+                                totalIdenticalFileCount++;
                         }
                     }
                     catch (Exception e) {
@@ -154,7 +153,7 @@ namespace CHR_Extractor {
             }
 
             Console.WriteLine("Processing complete.");
-            Console.WriteLine($"Identical CHR rate: {totalIdenticalChrCount * 100f / totalChrCount}%");
+            Console.WriteLine($"Identical file rate: {totalIdenticalFileCount * 100f / totalFileCount}%");
         }
 
         private static string GetFileString(ScenarioType inputScenario, string filename, ScenarioTableFile chrChpFile) {
