@@ -50,9 +50,8 @@ namespace SF3.Models.Structs.CHR {
                 var firstFrameOffset = Data.GetDouble(firstFrameTableOffset + (int) DataOffset);
                 nextAnimationTableOffset = (firstFrameOffset == 0) ? firstFrameTableOffset : Math.Min(firstFrameTableOffset, firstFrameOffset);
             }
-            var animationTableSize = (nextAnimationTableOffset - (int) Header.AnimationTableOffset) / 4;
+            var animationTableSize = Math.Max(16, (nextAnimationTableOffset - (int) Header.AnimationTableOffset) / 4);
 
-            bool isXOP101_Masqurin = FrameTable.Length == 144;
             AnimationOffsetTable = AnimationOffsetTable.Create(Data, nameof(AnimationOffsetTable), (int) (DataOffset + Header.AnimationTableOffset), animationTableSize);
 
             var aniOffsets = AnimationOffsetTable.Select(x => x.Offset).Concat(new uint[] { Header.AnimationTableOffset }).ToArray();
