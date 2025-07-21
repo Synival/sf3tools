@@ -58,8 +58,13 @@ namespace SF3.Editor.Forms {
             // If we don't know the scenario, we can't load it.
             var scenario = OpenScenario ?? DetermineScenario(openfile.FileName, fileType);
             if (!scenario.HasValue) {
-                ErrorMessage("Can't determine scenario for '" + openfile.FileName + "'.");
-                return null;
+                // CHR's / CHP's are valid for any scenario, so just default to Scenario 1.
+                if (fileType == SF3FileType.CHR || fileType == SF3FileType.CHP)
+                    scenario = ScenarioType.Scenario1;
+                else {
+                    ErrorMessage("Can't determine scenario for '" + openfile.FileName + "'.");
+                    return null;
+                }
             }
 
             // Attempt to load the file. Use an explicitly specificed scenario and file type if provided.

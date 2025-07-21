@@ -11,6 +11,7 @@ using DFRLib.Types;
 using DFRLib.Win.Forms;
 using SF3.ModelLoaders;
 using SF3.Models.Files;
+using SF3.Types;
 using static CommonLib.Win.Utils.MessageUtils;
 using static SF3.Utils.FileUtils;
 
@@ -94,8 +95,13 @@ namespace SF3.Editor.Forms {
             // If we don't know the scenario, we can't load it.
             var scenario = OpenScenario ?? DetermineScenario(copyToFilename, file.FileType);
             if (!scenario.HasValue) {
-                ErrorMessage("Can't determine scenario for '" + copyToFilename + "'.");
-                return;
+                // CHR's / CHP's are valid for any scenario, so just default to Scenario 1.
+                if (file.FileType == SF3FileType.CHR || file.FileType == SF3FileType.CHP)
+                    scenario = ScenarioType.Scenario1;
+                else {
+                    ErrorMessage("Can't determine scenario for '" + copyToFilename + "'.");
+                    return;
+                }
             }
 
             ObjectExtensions.BulkCopyPropertiesResult result = null;
@@ -141,8 +147,13 @@ namespace SF3.Editor.Forms {
             // If we don't know the scenario, we can't load it.
             var scenario = OpenScenario ?? DetermineScenario(copyFromFilename, file.FileType);
             if (!scenario.HasValue) {
-                ErrorMessage("Can't determine scenario for '" + copyFromFilename + "'.");
-                return;
+                // CHR's / CHP's are valid for any scenario, so just default to Scenario 1.
+                if (file.FileType == SF3FileType.CHR || file.FileType == SF3FileType.CHP)
+                    scenario = ScenarioType.Scenario1;
+                {
+                    ErrorMessage("Can't determine scenario for '" + copyFromFilename + "'.");
+                    return;
+                }
             }
 
             ObjectExtensions.BulkCopyPropertiesResult result = null;
