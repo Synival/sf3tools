@@ -110,13 +110,38 @@ namespace SF3.CHR {
                         foreach (var animationName in animationGroup.Animations ?? new string[0]) {
                             var spriteAnimation = (animationName != null && spriteAnimsByDirection?.Animations?.TryGetValue(animationName, out var animOut) == true) ? animOut : null;
                             if (spriteAnimation != null) {
-                                var currentDirection = directions;
+                                var currentDirections = directions;
                                 foreach (var frame in spriteAnimation.AnimationFrames ?? new AnimationFrameDef[0]) {
-                                    if (frame.Command == SpriteAnimationFrameCommandType.SetDirectionCount)
-                                        currentDirection = directions;
+                                    string[] frameKeys = null;
 
-                                    // TODO: get a list of frame names to pass as a key
-                                    chrWriter.WriteAnimationFrame(animationIndex, frame.Command, frame.Parameter);
+                                    // The 'SetDirectionCount' command (0xF1) updates the number of frames in our key from now on.
+                                    if (frame.Command == SpriteAnimationFrameCommandType.SetDirectionCount)
+                                        currentDirections = directions;
+                                    // If this is a frame, we need to generate a key that will be used to locate a FrameID later.
+                                    else if (frame.Command == SpriteAnimationFrameCommandType.Frame) {
+                                        var frameDirections = CHR_Utils.GetCHR_FrameGroupDirections(currentDirections);
+
+                                        // The 'FrameGroup' command assumes the standard directions for this frame.
+                                        if (frame.FrameGroup != null) {
+                                            frameKeys = frameDirections
+                                                .Select(x => $"{frame.FrameGroup} ({x.ToString()})")
+                                                .ToArray();
+                                        }
+                                        // The 'Frames' command has manually specified FrameGroup + Direction pairs.
+                                        else if (frame.Frames != null) {
+                                            frameKeys = frameDirections
+                                                .ToDictionary(x => x, x => frame.Frames.TryGetValue(x.ToString(), out var f) ? f : null)
+                                                .Select(x => (x.Value == null) ? null : $"{x.Value.Frame} ({x.Value.Direction.ToString()})")
+                                                .ToArray();
+                                        }
+                                        // If nothing is there, something is wrong.
+                                        else {
+                                            // TODO: what to do if we reach this point?
+                                        }
+                                    }
+
+                                    // We have enough info; write the frame.
+                                    chrWriter.WriteAnimationFrame(i, animationIndex, frame.Command, frame.Parameter, frameKeys);
                                 }
                             }
 
@@ -175,7 +200,8 @@ namespace SF3.CHR {
 
                         foreach (var direction in directions) {
                             var spriteFrameDef = (spriteFrameGroupDef?.Frames?.TryGetValue(direction.ToString(), out var spriteFrameOut) == true) ? spriteFrameOut : null;
-                            var frameKey = $"{spritesheetImageKey} {frameGroup.Name} ({direction})";
+                            var aniFrameKey = $"{frameGroup.Name} ({direction})";
+                            var frameKey = $"{spritesheetImageKey} {aniFrameKey}";
 
                             // Add a reference to the image whether the spritesheet resources were found or not.
                             // If they're invalid, simply display a red image.
@@ -193,7 +219,7 @@ namespace SF3.CHR {
                                 });
                             }
 
-                            chrWriter.WriteFrameTableFrame(i, frameKey);
+                            chrWriter.WriteFrameTableFrame(i, frameKey, aniFrameKey);
                         }
                     }
                 }
