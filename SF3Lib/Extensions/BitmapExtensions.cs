@@ -1,0 +1,45 @@
+﻿using System.Drawing;
+using System.Drawing.Imaging;
+using CommonLib.Extensions;
+using CommonLib.Imaging;
+
+namespace SF3.Extensions {
+    public static class BitmapExtensions {
+        public static ushort[,] GetDataAt(this Bitmap bitmap, int x, int y, int width, int height) {
+            // Only 16- or 32-bit bitmaps are currently supported.
+            if (bitmap == null || !(bitmap.PixelFormat == PixelFormat.Format16bppArgb1555 || bitmap.PixelFormat == PixelFormat.Format32bppArgb))
+                return null;
+
+            // Image must be within bounds.
+            var x2 = x + width;
+            var y2 = y + height;
+            if (x < 0 || y < 0 || x2 > bitmap.Width || y2 > bitmap.Height)
+                return null;
+
+            // Looks like we should be able to get a sub-image. Get the image data and convert it to ABGR1555 format.
+            var data = new ushort[width * height];
+            var bytesPerPixel = (bitmap.PixelFormat == PixelFormat.Format32bppArgb) ? 4 : 2;
+            var bitmapData = bitmap.LockBits(new Rectangle(0, 0, bitmap.Width, bitmap.Height), ImageLockMode.ReadOnly, bitmap.PixelFormat);
+
+            unsafe {
+                var bitmapDataPtr = (byte*) bitmapData.Scan0.ToPointer();
+                int writePos = 0;
+                for (var iy = y; iy < y2; iy++) {
+                    var readPos = (iy * bitmap.Width + x) * bytesPerPixel;
+                    for (var ix = x; ix < x2; ix++) {
+                        uint bitmapColor = 0;
+                        for (int i = 0; i < bytesPerPixel; i++)
+                            bitmapColor |= (uint) (bitmapDataPtr[readPos++] << (i * 8));
+                        data[writePos++] = (bytesPerPixel == 4)
+                            ? PixelConversion.ARGB8888toABGR1555(bitmapColor)
+                            : PixelConversion.ARGB1555toABGR1555((ushort) bitmapColor);
+                    }
+                }
+            }
+            bitmap.UnlockBits(bitmapData);
+
+            // Return as a 2D array with [x][y] accessors.
+            return data.To2DArrayColumnMajor(width, height);
+        }
+    }
+}

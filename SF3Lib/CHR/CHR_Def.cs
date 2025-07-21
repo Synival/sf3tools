@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using CommonLib.Arrays;
+using CommonLib.Extensions;
 using CommonLib.NamedValues;
 using CommonLib.Utils;
 using Newtonsoft.Json;
+using SF3.Extensions;
 using SF3.Models.Files.CHR;
 using SF3.Sprites;
 using SF3.Types;
@@ -95,9 +98,17 @@ namespace SF3.CHR {
                 chrWriter.WriteEmptyAnimationTable(i);
         }
 
+        private class SpritesheetImageRef {
+            public Bitmap Bitmap;
+            public int X;
+            public int Y;
+            public int Width;
+            public int Height;
+        }
+
         private void WriteCHR_Frames(CHR_Writer chrWriter) {
-            // TODO: temporary, until we write the real images!!
-            var imageKeys = new HashSet<string>();
+            var spritesheetImageDict = new Dictionary<string, Bitmap>();
+            var imagesRefsByKey = new Dictionary<string, SpritesheetImageRef>();
 
             // Write all frame tables.
             foreach (var (sprite, i) in Sprites.Select((x, i) => (CHR: x, Index: i))) {
@@ -106,30 +117,79 @@ namespace SF3.CHR {
                 foreach (var spriteFrames in sprite.SpriteFrames ?? new SpriteFramesDef[0]) {
                     var spriteName = spriteFrames.SpriteName ?? sprite.SpriteName;
                     var spriteDef = SpriteUtils.GetSpriteDef(spriteName);
-                    var spritesheet = (spriteDef?.Spritesheets?.TryGetValue(spritesheetKey, out var spritesheetOut) == true) ? spritesheetOut : null;
+                    var spritesheetDef = (spriteDef?.Spritesheets?.TryGetValue(spritesheetKey, out var spritesheetOut) == true) ? spritesheetOut : null;
+
+                    // Attempt to load the spritesheet referenced by the spritesheetDef.
+                    // Don't bothe if the def couldn't be found.
+                    var spritesheetImageKey = $"{spriteName} ({spritesheetKey})";
+                    if (spritesheetDef != null && !spritesheetImageDict.ContainsKey(spritesheetImageKey)) {
+                        Bitmap bitmap = null;
+                        try {
+                            var bitmapPath = SpriteUtils.SpritesheetImagePath($"{SpriteUtils.FilesystemName(spritesheetImageKey)}.BMP");
+                            bitmap = (Bitmap) Image.FromFile(bitmapPath);
+                        }
+                        catch { }
+                        spritesheetImageDict.Add(spritesheetImageKey, bitmap);
+                    }
 
                     foreach (var frameGroup in spriteFrames.FrameGroups ?? new FrameGroupDef[0]) {
+                        var spriteFrameGroupDef = (spritesheetDef?.FrameGroups?.TryGetValue(frameGroup.Name, out var spriteFrameGroupOut) == true) ? spriteFrameGroupOut : null;
+
                         var directions =
                             frameGroup.Directions?.Select(x => (SpriteFrameDirection) Enum.Parse(typeof(SpriteFrameDirection), x))?.ToArray()
                             ?? CHR_Utils.GetCHR_FrameGroupDirections(sprite.Directions);
 
                         foreach (var direction in directions) {
-                            // TODO: temporary, until we write the real images!!
-                            imageKeys.Add(spritesheetKey);
-                            chrWriter.WriteFrameTableFrame(i, spritesheetKey);
+                            var spriteFrameDef = (spriteFrameGroupDef?.Frames?.TryGetValue(direction.ToString(), out var spriteFrameOut) == true) ? spriteFrameOut : null;
+                            var frameKey = $"{spritesheetImageKey} {frameGroup.Name} ({direction})";
+
+                            // Add a reference to the image whether the spritesheet resources were found or not.
+                            // If they're invalid, simply display a red image.
+                            if (!imagesRefsByKey.ContainsKey(frameKey)) {
+                                // TODO: In the future, when we can specify frame keys, if imagesRefsByKey already has this key,
+                                // we'll need to check that the bitmap/x/y/width/height are the same as the current frame. It's
+                                // an error in the SF3CHR if they're not.
+
+                                imagesRefsByKey.Add(frameKey, new SpritesheetImageRef() {
+                                    Bitmap = spritesheetImageDict.TryGetValue(spritesheetImageKey, out var bmpOut) ? bmpOut : null,
+                                    X = spriteFrameDef?.SpriteSheetX ?? -1,
+                                    Y = spriteFrameDef?.SpriteSheetY ?? -1,
+                                    Width = sprite.Width,
+                                    Height = sprite.Height,
+                                });
+                            }
+
+                            chrWriter.WriteFrameTableFrame(i, frameKey);
                         }
                     }
                 }
                 chrWriter.WriteFrameTableTerminator(i);
             }
 
-            // TODO: temporary, until we write the real images!!
-            foreach (var key in imageKeys) {
-                var imageSize = SpritesheetDef.KeyToDimensions(key);
-                var data = new ushort[imageSize.Width * imageSize.Height];
-                for (int i = 0; i < data.Length; i++)
-                    data[i] = 0xff00;
+            // Write all images, updating pointers that reference each image by its key.
+            foreach (var imageRefKv in imagesRefsByKey) {
+                var key = imageRefKv.Key;
+                var imageRef = imageRefKv.Value;
 
+                ushort[] data = null;
+
+                var bitmap = imageRef.Bitmap;
+                var x1 = imageRef.X;
+                var y1 = imageRef.Y;
+                var x2 = x1 + imageRef.Width;
+                var y2 = y1 + imageRef.Height;
+
+                // If the image is invalid, display a bright red square instead.
+                if (bitmap == null || x1 < 0 || y1 < 0 || x2 > bitmap.Width || y2 > bitmap.Height) {
+                    data = new ushort[imageRef.Width * imageRef.Height];
+                    for (int i = 0; i < data.Length; i++)
+                        data[i] = 0x801F;
+                }
+                // It looks like a valid image. Copy it into the data.
+                else
+                    data = bitmap.GetDataAt(x1, y1, imageRef.Width, imageRef.Height).To1DArrayTransposed();
+
+                // Write the compressed image, updating any pointers that reference it by its key.
                 chrWriter.WriteFrameImage(key, Compression.CompressSpriteData(data, 0, data.Length));
             }
         }

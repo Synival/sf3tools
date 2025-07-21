@@ -42,5 +42,13 @@ namespace SF3.Utils {
         /// <returns>A filesystem-friendly name of the sprite.</returns>
         public static string FilesystemName(string name)
             => CHR_Utils.FilesystemName(name);
+
+        /// <summary>
+        /// Returns the full path of a spritesheet image.
+        /// </summary>
+        /// <param name="filename">The filename of the spritesheet, without the path.</param>
+        /// <returns>A string with the relative path of the spritesheet.</returns>
+        public static string SpritesheetImagePath(string filename)
+            => ResourceFile(Path.Combine("Spritesheets", filename));
     }
 }
