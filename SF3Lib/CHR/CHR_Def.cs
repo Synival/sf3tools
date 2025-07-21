@@ -70,6 +70,7 @@ namespace SF3.CHR {
             WriteCHR_Header(chrWriter);
             WriteCHR_Animations(chrWriter);
             WriteCHR_Frames(chrWriter);
+            chrWriter.Finish();
 
             return chrWriter.BytesWritten;
         }

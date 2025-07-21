@@ -145,8 +145,8 @@ namespace SF3.CHR {
             AssignAnimationFrameFrameIDs(spriteIndex);
             _currentSpriteFrameKeys.Clear();
 
-            // Single blank uint
-            Write(new byte[4]);
+            // Two blank uints; one for a terminator, another for padding.
+            Write(new byte[8]);
         }
 
         /// <summary>
@@ -161,6 +161,19 @@ namespace SF3.CHR {
                 Stream.Write(offset.ToByteArray(), 0, 4);
             });
             Write(compressedImage);
+        }
+
+        /// <summary>
+        /// Ends the CHR file by writing some necessary padding.
+        /// </summary>
+        public void Finish() {
+            // Write enough bytes for the total length to be divisible by 4.
+            var pos = Stream.Position;
+            if (pos % 4 != 0)
+                Write(new byte[4 - (pos % 4)]);
+
+            // Write an additional 4 bytes at the end.
+            Write(new byte[4]);
         }
 
         private void InitFrameTableOffset(int spriteIndex) {
