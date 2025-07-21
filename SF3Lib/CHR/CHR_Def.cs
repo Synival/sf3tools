@@ -93,9 +93,43 @@ namespace SF3.CHR {
         }
 
         private void WriteCHR_Animations(CHR_Writer chrWriter) {
-            // Write all animation tables.
-            foreach (var (sprite, i) in Sprites.Select((x, i) => (CHR: x, Index: i)))
-                chrWriter.WriteEmptyAnimationTable(i);
+            // Write all individual animations.
+            foreach (var (sprite, i) in Sprites.Select((x, i) => (CHR: x, Index: i))) {
+                var spritesheetKey = SpritesheetDef.DimensionsToKey(sprite.Width, sprite.Height);
+                int animationIndex = 0;
+
+                foreach (var animations in sprite.SpriteAnimations ?? new SpriteAnimationsDef[0]) {
+                    var spriteName = animations.SpriteName ?? sprite.SpriteName;
+                    var spriteDef = SpriteUtils.GetSpriteDef(spriteName);
+                    var spritesheetDef = (spriteDef?.Spritesheets?.TryGetValue(spritesheetKey, out var spritesheetOut) == true) ? spritesheetOut : null;
+
+                    foreach (var animationGroup in animations.AnimationGroups ?? new AnimationGroupDef[0]) {
+                        var directions = animationGroup.Directions ?? sprite.Directions;
+                        var spriteAnimsByDirection = (spritesheetDef?.AnimationByDirections?.TryGetValue(directions, out var sadOut) == true) ? sadOut : null;
+
+                        foreach (var animationName in animationGroup.Animations ?? new string[0]) {
+                            var spriteAnimation = (animationName != null && spriteAnimsByDirection?.Animations?.TryGetValue(animationName, out var animOut) == true) ? animOut : null;
+                            if (spriteAnimation != null) {
+                                var currentDirection = directions;
+                                foreach (var frame in spriteAnimation.AnimationFrames ?? new AnimationFrameDef[0]) {
+                                    if (frame.Command == SpriteAnimationFrameCommandType.SetDirectionCount)
+                                        currentDirection = directions;
+
+                                    // TODO: get a list of frame names to pass as a key
+                                    chrWriter.WriteAnimationFrame(animationIndex, frame.Command, frame.Parameter);
+                                }
+                            }
+
+                            animationIndex++;
+                        }
+                    }
+                }
+
+                // Now that all frame tables have been written, write the animation table.
+                // The CHR_Writer knows the locations of all the frame tables we just wrote,
+                // so we don't need to pass it any information.
+                chrWriter.WriteAnimationTable(i);
+            }
         }
 
         private class SpritesheetImageRef {

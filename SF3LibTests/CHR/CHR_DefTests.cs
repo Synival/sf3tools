@@ -119,10 +119,18 @@ namespace SF3.Tests.CHR {
             var chrFile = twoEmptySpriteCHR.ToCHR_File(nameGetterContext, nameGetterContext.Scenario);
 
             Assert.AreEqual(2, chrFile.SpriteTable.Length);
+
             Assert.AreEqual(0, chrFile.SpriteTable[0].FrameTable.Length);
+            Assert.AreEqual(16, chrFile.SpriteTable[0].AnimationOffsetTable.Length);
             Assert.AreEqual(0, chrFile.SpriteTable[0].AnimationTable.Length);
+            for (int i = 0; i < 16; i++)
+                Assert.AreEqual(0u, chrFile.SpriteTable[0].AnimationOffsetTable[i].Offset);
+
             Assert.AreEqual(0, chrFile.SpriteTable[1].FrameTable.Length);
+            Assert.AreEqual(16, chrFile.SpriteTable[1].AnimationOffsetTable.Length);
             Assert.AreEqual(0, chrFile.SpriteTable[1].AnimationTable.Length);
+            for (int i = 0; i < 16; i++)
+                Assert.AreEqual(0u, chrFile.SpriteTable[1].AnimationOffsetTable[i].Offset);
         }
     }
 }

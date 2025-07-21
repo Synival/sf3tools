@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using CommonLib.Arrays;
 using CommonLib.Utils;
+using SF3.Types;
 
 namespace SF3.CHR {
     public class CHR_Writer {
@@ -65,17 +67,39 @@ namespace SF3.CHR {
         }
 
         /// <summary>
-        /// Writes an animation table for a given sprite with no animations at all.
+        /// Writes a single frame for an animation of a sprite.
+        /// </summary>
+        /// <param name="animationIndex">Index of the current sprite's animation to which this frame belongs.</param>
+        /// <param name="command">Command for this frame.</param>
+        /// <param name="parameter">Parameter for this command.</param>
+        public void WriteAnimationFrame(int animationIndex, SpriteAnimationFrameCommandType command, int parameter) {
+            if (!_animationFrameTablePointers.ContainsKey(animationIndex))
+                _animationFrameTablePointers[animationIndex] = Stream.Position;
+
+            Write(((ushort) command).ToByteArray());
+            Write(((ushort) parameter).ToByteArray());
+        }
+
+        /// <summary>
+        /// Writes the animation table for the last sprite written. Table size and values are determined by the
+        /// frame tables written earlier.
         /// </summary>
         /// <param name="spriteIndex">Index of the sprite to which this table belongs.</param>
-        public void WriteEmptyAnimationTable(int spriteIndex) {
+        public void WriteAnimationTable(int spriteIndex) {
             AtPointer(_animationTablePointers[spriteIndex], (offset) => {
                 Stream.Write(offset.ToByteArray(), 0, 4);
                 _animationTablePointers[spriteIndex] = 0;
             });
 
-            // 10 blank ints
-            Write(new byte[0x10 * 4]);
+            var highestAnimationIndex = (_animationFrameTablePointers.Count > 0) ? _animationFrameTablePointers.Max(x => x.Key) : 0;
+            var tableSize = Math.Max(16, highestAnimationIndex + 1);
+
+            for (int i = 0; i < tableSize; i++) {
+                var offset = (int) (_animationFrameTablePointers.ContainsKey(i) ? (_animationFrameTablePointers[i] - StreamStartPosition) : 0);
+                Write(offset.ToByteArray());
+            }
+
+            _animationFrameTablePointers.Clear();
         }
 
         /// <summary>
@@ -161,6 +185,7 @@ namespace SF3.CHR {
 
         private List<long> _frameTablePointers = new List<long>();
         private List<long> _animationTablePointers = new List<long>();
+        private Dictionary<int, long> _animationFrameTablePointers = new Dictionary<int, long>();
         private Dictionary<string, List<long>> _frameImagePointers = new Dictionary<string, List<long>>();
     }
 }
