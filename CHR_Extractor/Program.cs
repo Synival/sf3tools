@@ -112,14 +112,19 @@ namespace CHR_Extractor {
                             // TODO: do this for CHPs as well
                             // Dump CHRs for opening/analysis
                             if (isChr) {
-                                var data = (CHR_File) deserializedFile;
-                                var pathOut = Path.Combine(c_pathOut, "Rebuilt_CHRs");
+                                var newChrFile = (CHR_File) deserializedFile;
+                                var pathOut = Path.Combine(c_pathOut, "Rebuilt_CHRs", c_scenarioPaths[scenario]);
                                 Directory.CreateDirectory(pathOut);
-                                pathOut = Path.Combine(pathOut, $"{scenario}_{filename}.CHR");
+                                pathOut = Path.Combine(pathOut, $"{filename}.CHR");
+                                var newData = newChrFile.Data.Data.GetDataCopyOrReference();
                                 using (var chrOut = File.Open(pathOut, FileMode.Create)) {
-                                    var bytes = data.Data.Data.GetDataCopyOrReference();
-                                    chrOut.Write(bytes, 0, bytes.Length);
+                                    chrOut.Write(newData, 0, newData.Length);
                                 }
+
+                                var origChrFile = (CHR_File) chrChpFile;
+                                var origData = origChrFile.Data.Data.GetDataCopyOrReference();
+                                if (newData.Length != origData.Length)
+                                    Console.WriteLine($"    {origData.Length:X5} => {newData.Length:X5}");
                             }
                         }
                     }
