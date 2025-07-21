@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using SF3.Types;
 
 namespace SF3.Sprites {
     public class FrameGroupDef {
