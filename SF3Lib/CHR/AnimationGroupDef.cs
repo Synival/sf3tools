@@ -4,6 +4,8 @@
             => (Directions.HasValue ? Directions.ToString() + ": " : "") + ((Animations != null) ? string.Join(", ", Animations) : "[]");
 
         public int? Directions;
+        public int? Width;
+        public int? Height;
         public string[] Animations;
     }
 }

@@ -220,6 +220,8 @@ namespace SF3.Models.Structs.CHR {
 
             // Track the animation group whose animations are being built.
             int? lastAnimationGroupDirections = null;
+            int? lastWidth = null;
+            int? lastHeight = null;
             var animationGroups = new List<AnimationGroupDef>();
             AnimationGroupDef lastAnimationGroup = null;
 
@@ -268,6 +270,8 @@ namespace SF3.Models.Structs.CHR {
                         spriteAnimations.Add(lastSpriteAnimations);
 
                         lastAnimationGroupDirections = 0;
+                        lastWidth = 0;
+                        lastHeight = 0;
                         lastAnimationGroup = new AnimationGroupDef() { Directions = null };
                         animationGroups.Add(lastAnimationGroup);
                     }
@@ -278,6 +282,8 @@ namespace SF3.Models.Structs.CHR {
                 // If the sprite name has changed, begin a new one.
                 var spriteName = (animation.SpriteName == SpriteName) ? null : animation.SpriteName;
                 var directions = animation.Directions == Header.Directions ? (int?) null : animation.Directions;
+                var width      = animation.AnimationInfo.Width  == Header.Width  ? (int?) null : animation.AnimationInfo.Width;
+                var height     = animation.AnimationInfo.Height == Header.Height ? (int?) null : animation.AnimationInfo.Height;
                 if (spriteName != lastSpriteName || lastSpriteAnimations == null) {
                     CommitAnimationGroup();
 
@@ -305,12 +311,16 @@ namespace SF3.Models.Structs.CHR {
                 }
 
                 // If the animation group has changed, begin a new one.
-                if (directions != lastAnimationGroupDirections || lastAnimationGroup == null) {
+                if (directions != lastAnimationGroupDirections || width != lastWidth || height != lastHeight || lastAnimationGroup == null) {
                     CommitAnimationGroupAnimations();
 
                     lastAnimationGroupDirections = directions;
+                    lastWidth = width;
+                    lastHeight = height;
                     lastAnimationGroup = new AnimationGroupDef() {
-                        Directions = directions
+                        Directions = directions,
+                        Width = width,
+                        Height = height
                     };
                     animationGroups.Add(lastAnimationGroup);
                 }

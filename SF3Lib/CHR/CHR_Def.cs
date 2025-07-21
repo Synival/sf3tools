@@ -96,16 +96,17 @@ namespace SF3.CHR {
         private void WriteCHR_Animations(CHR_Writer chrWriter) {
             // Write all individual animations.
             foreach (var (sprite, i) in Sprites.Select((x, i) => (CHR: x, Index: i))) {
-                var spritesheetKey = SpritesheetDef.DimensionsToKey(sprite.Width, sprite.Height);
                 int animationIndex = 0;
 
                 foreach (var animations in sprite.SpriteAnimations ?? new SpriteAnimationsDef[0]) {
                     var spriteName = animations.SpriteName ?? sprite.SpriteName;
                     var spriteDef = SpriteUtils.GetSpriteDef(spriteName);
-                    var spritesheetDef = (spriteDef?.Spritesheets?.TryGetValue(spritesheetKey, out var spritesheetOut) == true) ? spritesheetOut : null;
 
                     foreach (var animationGroup in animations.AnimationGroups ?? new AnimationGroupDef[0]) {
                         var directions = animationGroup.Directions ?? sprite.Directions;
+                        var spritesheetKey = SpritesheetDef.DimensionsToKey(
+                            animationGroup.Width ?? sprite.Width, animationGroup.Height ?? sprite.Height);
+                        var spritesheetDef = (spriteDef?.Spritesheets?.TryGetValue(spritesheetKey, out var spritesheetOut) == true) ? spritesheetOut : null;
                         var spriteAnimsByDirection = (spritesheetDef?.AnimationByDirections?.TryGetValue(directions, out var sadOut) == true) ? sadOut : null;
 
                         foreach (var animationName in animationGroup.Animations ?? new string[0]) {
