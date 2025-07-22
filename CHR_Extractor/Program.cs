@@ -5,6 +5,8 @@ using SF3.CHR;
 using SF3.Models.Files;
 using SF3.Models.Files.CHP;
 using SF3.Models.Files.CHR;
+using SF3.Models.Structs.CHR;
+using SF3.Models.Tables;
 using SF3.NamedValues;
 using SF3.Types;
 
@@ -16,7 +18,7 @@ namespace CHR_Extractor {
             { ScenarioType.Scenario1,   "D:/" },
             { ScenarioType.Scenario2,   "E:/" },
             { ScenarioType.Scenario3,   "F:/" },
-            { ScenarioType.PremiumDisk, "G:/" },
+            //{ ScenarioType.PremiumDisk, "G:/" },
         };
 
         private static readonly Dictionary<ScenarioType, string> c_scenarioPaths = new() {
@@ -36,7 +38,7 @@ namespace CHR_Extractor {
                 .Where(x => c_pathsIn.ContainsKey(x))
                 .ToDictionary(x => x, x => {
                     var files = Directory.GetFiles(c_pathsIn[x], "*.CHR").Order().ToList();
-                    files.AddRange(Directory.GetFiles(c_pathsIn[x], "*.CHP").Order().ToList());
+                    //files.AddRange(Directory.GetFiles(c_pathsIn[x], "*.CHP").Order().ToList());
                     return files;
                 });
 
@@ -143,6 +145,64 @@ namespace CHR_Extractor {
                             totalFileCount++;
                             if (!fileIsDifferent)
                                 totalIdenticalFileCount++;
+                            else {
+                                var origChrs = isChr
+                                    ? [(CHR_File) deserializedFile]
+                                    : ((CHP_File) deserializedFile).CHR_EntriesByOffset.Values.ToArray();
+                                var newChrs = isChr
+                                    ? [(CHR_File) chrChpFile]
+                                    : ((CHP_File) chrChpFile).CHR_EntriesByOffset.Values.ToArray();
+
+                                if (origChrs.Length != newChrs.Length)
+                                    Console.WriteLine($"    Wrong number of CHRs: {origChrs.Length} => {newChrs.Length}");
+                                else {
+                                    for (int i = 0; i < origChrs.Length; i++) {
+                                        var origChr = origChrs[i];
+                                        var newChr  = newChrs[i];
+
+                                        var origSprites = origChr.SpriteTable.ToArray();
+                                        var newSprites  = newChr.SpriteTable.ToArray();
+
+                                        if (origSprites.Length != newSprites.Length)
+                                            Console.WriteLine($"    [{i:X2}]: Wrong number of sprites: {origSprites.Length} => {newSprites.Length}");
+                                        else {
+                                            for (int j = 0; j < origSprites.Length; j++) {
+                                                var origSprite = origSprites[j];
+                                                var newSprite  = newSprites[j];
+
+                                                ITable[] GetTables(Sprite sprite) {
+                                                    var tables = new List<ITable>();
+                                                    tables.AddRange(sprite.AnimationFrameTablesByIndex.Select(x => x.Value).ToList());
+                                                    tables.Add(sprite.AnimationOffsetTable);
+                                                    tables.Add(sprite.FrameTable);
+                                                    return tables.ToArray();
+                                                }
+
+                                                var origTables = GetTables(origSprite);
+                                                var newTables  = GetTables(newSprite);
+
+                                                if (origTables.Length != newTables.Length)
+                                                    Console.WriteLine($"    [{i:X2}, {origSprite.SpriteName}]: Wrong number of CHR tables: {origTables.Length} => {newTables.Length}");
+                                                else {
+                                                    for (int k = 0; k < origTables.Length; k++) {
+                                                        var origTable = origTables[k];
+                                                        var newTable  = newTables[k];
+
+                                                        if (origTable.Length != newTable.Length)
+                                                            Console.WriteLine($"    [{i:X2}, {origSprite.SpriteName}, {origTable.Name}]: Wrong number of elements: {origTable.Length} => {newTable.Length}");
+
+                                                        var origChrData = origTable.Data.GetDataCopyAt(origTable.Address, origTable.SizeInBytesPlusTerminator);
+                                                        var newChrData  = newTable .Data.GetDataCopyAt(newTable.Address,  newTable.SizeInBytesPlusTerminator);
+
+                                                        if (!Enumerable.SequenceEqual(origChrData, newChrData))
+                                                            Console.WriteLine($"    [{i:X2}, {origSprite.SpriteName}, {origTable.Name}]: Table has different data");
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
                         }
                     }
                     catch (Exception e) {
