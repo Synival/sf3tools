@@ -178,29 +178,32 @@ namespace SF3.CHR {
 
             // Write all frame tables.
             foreach (var (sprite, i) in Sprites.Select((x, i) => (CHR: x, Index: i))) {
-                var spritesheetKey = SpritesheetDef.DimensionsToKey(sprite.Width, sprite.Height);
                 string lastFrameKey = null;
 
                 foreach (var spriteFrames in sprite.SpriteFrames ?? new SpriteFramesDef[0]) {
                     var spriteName = spriteFrames.SpriteName ?? sprite.SpriteName;
                     var spriteDef = SpriteUtils.GetSpriteDef(spriteName);
-                    var spritesheetDef = (spriteDef?.Spritesheets?.TryGetValue(spritesheetKey, out var spritesheetOut) == true) ? spritesheetOut : null;
-
-                    // Attempt to load the spritesheet referenced by the spritesheetDef.
-                    // Don't bothe if the def couldn't be found.
-                    var spritesheetImageKey = $"{spriteName} ({spritesheetKey})";
-                    if (spritesheetDef != null && !spritesheetImageDict.ContainsKey(spritesheetImageKey)) {
-                        Bitmap bitmap = null;
-                        try {
-                            var bitmapPath = SpriteUtils.SpritesheetImagePath($"{SpriteUtils.FilesystemName(spritesheetImageKey)}.BMP");
-                            bitmap = (Bitmap) Image.FromFile(bitmapPath);
-                        }
-                        catch { }
-                        spritesheetImageDict.Add(spritesheetImageKey, bitmap);
-                    }
 
                     foreach (var frameGroup in spriteFrames.FrameGroups ?? new FrameGroupDef[0]) {
+                        var frameWidth  = frameGroup.Width  ?? sprite.Width;
+                        var frameHeight = frameGroup.Height ?? sprite.Height;
+
+                        // Attempt to load the spritesheet referenced by the spritesheetDef.
+                        // Don't bothe if the def couldn't be found.
+                        var spritesheetKey = SpritesheetDef.DimensionsToKey(frameWidth, frameHeight);
+                        var spritesheetImageKey = $"{spriteName} ({spritesheetKey})";
+                        var spritesheetDef = (spriteDef?.Spritesheets?.TryGetValue(spritesheetKey, out var spritesheetOut) == true) ? spritesheetOut : null;
                         var spriteFrameGroupDef = (spritesheetDef?.FrameGroups?.TryGetValue(frameGroup.Name, out var spriteFrameGroupOut) == true) ? spriteFrameGroupOut : null;
+
+                        if (spritesheetDef != null && !spritesheetImageDict.ContainsKey(spritesheetImageKey)) {
+                            Bitmap bitmap = null;
+                            try {
+                                var bitmapPath = SpriteUtils.SpritesheetImagePath($"{SpriteUtils.FilesystemName(spritesheetImageKey)}.BMP");
+                                bitmap = (Bitmap) Image.FromFile(bitmapPath);
+                            }
+                            catch { }
+                            spritesheetImageDict.Add(spritesheetImageKey, bitmap);
+                        }
 
                         var frames = frameGroup.Frames
                             ?? CHR_Utils.GetCHR_FrameGroupDirections(sprite.Directions)
@@ -219,8 +222,8 @@ namespace SF3.CHR {
                                     Bitmap = spritesheetImageDict.TryGetValue(spritesheetImageKey, out var bmpOut) ? bmpOut : null,
                                     X = spriteFrameDef?.SpriteSheetX ?? -1,
                                     Y = spriteFrameDef?.SpriteSheetY ?? -1,
-                                    Width = sprite.Width,
-                                    Height = sprite.Height,
+                                    Width  = frameWidth,
+                                    Height = frameHeight
                                 });
                             }
 

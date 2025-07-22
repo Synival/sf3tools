@@ -6,6 +6,8 @@ namespace SF3.CHR {
             => (Name != null ? Name + ": " : "") + ((Frames != null) ? string.Join(", ", Frames.Select(x => "{" + x.ToString() + "}")) : "[]");
 
         public string Name;
+        public int? Width;
+        public int? Height;
         public FrameDef[] Frames;
     }
 }

@@ -132,6 +132,8 @@ namespace SF3.Models.Structs.CHR {
 
             // Track the frame group whose directions are being built.
             string lastFrameGroupName = null;
+            int? lastFrameGroupWidth  = null;
+            int? lastFrameGroupHeight = null;
             var frameGroups = new List<FrameGroupDef>();
             FrameGroupDef lastFrameGroup = null;
 
@@ -160,21 +162,25 @@ namespace SF3.Models.Structs.CHR {
                 if (lastSpriteFrames.FrameGroups == null)
                     lastSpriteFrames.FrameGroups = frameGroups.ToArray();
 
-                lastFrameGroupName = null;
-                frameGroups        = new List<FrameGroupDef>();
-                lastFrameGroup     = null;
+                lastFrameGroupName   = null;
+                lastFrameGroupWidth  = null;
+                lastFrameGroupHeight = null;
+                frameGroups          = new List<FrameGroupDef>();
+                lastFrameGroup       = null;
             }
 
             // Go through each frame, building a set of CHR_SpriteFrameDef's.
             foreach (var frame in FrameTable) {
-                // If the sprite name has changed, begin a new one.
-                var spriteName = (frame.SpriteName == SpriteName) ? null : frame.SpriteName;
+                var spriteName = (frame.SpriteName == SpriteName)    ? null        : frame.SpriteName;
+                var width      = (frame.Width      == Header.Width)  ? (int?) null : frame.Width;
+                var height     = (frame.Height     == Header.Height) ? (int?) null : frame.Height;
 
                 // Correct some very specific cases for very specific spritesheets.
                 // TODO: this really shouldn't be hard-coded!!
                 if (frame.SpriteName == "Edmund (P1) (Sword/Weaponless)")
                     spriteName = (SpriteName == "Edmund (P1) (Weaponless)") ? SpriteName : "Edmund (P1)";
 
+                // If the sprite name has changed, begin a new one.
                 if (spriteName != lastSpriteName || lastSpriteFrames == null) {
                     CommitFrameGroup();
 
@@ -186,12 +192,16 @@ namespace SF3.Models.Structs.CHR {
                 }
 
                 // If the frame group has changed, begin a new one.
-                if (frame.FrameName != lastFrameGroupName || lastFrameGroup == null) {
+                if (frame.FrameName != lastFrameGroupName || width != lastFrameGroupWidth || height != lastFrameGroupHeight || lastFrameGroup == null) {
                     CommitFrameGroupDirections();
 
-                    lastFrameGroupName = frame.FrameName;
+                    lastFrameGroupName   = frame.FrameName;
+                    lastFrameGroupWidth  = width;
+                    lastFrameGroupHeight = height;
                     lastFrameGroup = new FrameGroupDef() {
-                        Name = frame.FrameName
+                        Name   = frame.FrameName,
+                        Width  = width,
+                        Height = height,
                     };
                     frameGroups.Add(lastFrameGroup);
                 }
