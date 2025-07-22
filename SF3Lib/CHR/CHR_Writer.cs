@@ -104,8 +104,11 @@ namespace SF3.CHR {
                 _animationTablePointers[spriteIndex] = 0;
             });
 
+            // Determine the size of the table based on the number of animations.
+            // (It's always 16 except for XOP101.CHR, which has more entries for Masqurin (U).)
+            // Account for an additional terminating 0 at the end.
             var highestAnimationIndex = (_animationFrameTablePointers.Count > 0) ? _animationFrameTablePointers.Max(x => x.Key) : 0;
-            var tableSize = Math.Max(16, highestAnimationIndex + 1);
+            var tableSize = Math.Max(16, highestAnimationIndex + 2);
 
             for (int i = 0; i < tableSize; i++) {
                 var offset = (int) (_animationFrameTablePointers.ContainsKey(i) ? (_animationFrameTablePointers[i] - StreamStartPosition) : 0);
