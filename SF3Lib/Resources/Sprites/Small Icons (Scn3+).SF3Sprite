@@ -25,6 +25,15 @@
               "SpriteSheetY": 16
             }
           }
+        },
+        "Embarassed 2": {
+          "Frames": {
+            "First": {
+              "Hash": "6bae56c014353379e449dad9d8c6222a",
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 32
+            }
+          }
         }
       },
       "AnimationByDirections": {
@@ -43,10 +52,23 @@
                 }
               ]
             },
-            "Embarassed": {
+            "Embarassed 1": {
               "AnimationFrames": [
                 {
                   "FrameGroup": "Embarassed 1",
+                  "Command": "Frame",
+                  "Parameter": 10
+                },
+                {
+                  "Command": "Stop",
+                  "Parameter": 0
+                }
+              ]
+            },
+            "Embarassed 2": {
+              "AnimationFrames": [
+                {
+                  "FrameGroup": "Embarassed 2",
                   "Command": "Frame",
                   "Parameter": 10
                 },

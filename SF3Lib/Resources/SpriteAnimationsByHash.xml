@@ -3458,7 +3458,8 @@
     <item hash="3fdd5881443496ddd556bd1969b7ed9b" sprite="Small Icons (Scn2+)" animation="Sweat (Growing Larger)" width="16" height="16" directions="1" frames="4" duration="30" />
     <item hash="7165c703ab2bb8289f3ac510021d98bf" sprite="Small Icons (Scn2+)" animation="Sword" width="16" height="16" directions="1" frames="2" duration="10" />
     <item hash="b34c37ab90d95e943b8e986472e6e255" sprite="Small Icons (Scn3+)" animation="Complaining" width="16" height="16" directions="1" frames="2" duration="10" />
-    <item hash="b22b9185ad983060c70ac7707463c796" sprite="Small Icons (Scn3+)" animation="Embarassed" width="16" height="16" directions="1" frames="2" duration="10" />
+    <item hash="b22b9185ad983060c70ac7707463c796" sprite="Small Icons (Scn3+)" animation="Embarassed 1" width="16" height="16" directions="1" frames="2" duration="10" />
+    <item hash="79849b62e4f77998bf07401e18d47421" sprite="Small Icons (Scn3+)" animation="Embarassed 2" width="16" height="16" directions="1" frames="2" duration="10" />
     <item hash="50e9b35780c22869c95645536ffc1426" sprite="Small Poof of Brown Smoke" animation="Poofing" width="24" height="24" directions="1" frames="10" duration="27" />
     <item hash="b9bc360193ffead7cdd2a5cece5bb938" sprite="Small Poof of Brown Smoke" animation="StillFrame" width="24" height="24" directions="1" frames="2" duration="10" />
     <item hash="8513370f8d2c16333e80acca9e39551d" sprite="Small Poof of Grey Smoke" animation="Poofing" width="24" height="24" directions="1" frames="10" duration="27" />
