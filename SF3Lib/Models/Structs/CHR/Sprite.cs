@@ -104,7 +104,7 @@ namespace SF3.Models.Structs.CHR {
             Header.TotalCompressedFramesSize = TotalCompressedFramesSize;
         }
 
-        public SpriteDef ToCHR_SpriteDef() {
+        public SpriteDef ToCHR_SpriteDef(HashSet<string> framesWithDuplicates) {
             return new SpriteDef() {
                 SpriteName       = SpriteName,
 
@@ -119,12 +119,12 @@ namespace SF3.Models.Structs.CHR {
                 CollisionSize    = Header.CollisionShadowDiameter,
                 Scale            = Header.Scale / 65536.0f,
 
-                SpriteFrames     = CreateSpriteFrames(),
+                SpriteFrames     = CreateSpriteFrames(framesWithDuplicates),
                 SpriteAnimations = CreateSpriteAnimations()
             };
         }
 
-        private SpriteFramesDef[] CreateSpriteFrames() {
+        private SpriteFramesDef[] CreateSpriteFrames(HashSet<string> framesWithDuplicates) {
             // Track the sprite whose frame groups are being built.
             string lastSpriteName = null;
             var spriteFrames = new List<SpriteFramesDef>();
@@ -136,18 +136,18 @@ namespace SF3.Models.Structs.CHR {
             FrameGroupDef lastFrameGroup = null;
 
             // Track directions to add to the current frame group being built.
-            var frameGroupDirections = new List<SpriteFrameDirection>();
+            var frameGroupFrames = new List<FrameDef>();
 
             // Commits the current set of diections to the current frame group.
             void CommitFrameGroupDirections() {
                 if (lastFrameGroup == null)
                     return;
 
-                if (lastFrameGroup.Directions == null)
-                    if (!AreExpectedFrameDirections(frameGroupDirections.ToArray(), Header.Directions))
-                        lastFrameGroup.Directions = frameGroupDirections.Select(x => x.ToString()).ToArray();
+                if (lastFrameGroup.Frames == null)
+                    if (!AreExpectedFrameDirections(frameGroupFrames.Select(x => x.Direction).ToArray(), Header.Directions) || frameGroupFrames.Any(x => x.DuplicateKey != null))
+                        lastFrameGroup.Frames = frameGroupFrames.ToArray();
 
-                frameGroupDirections = new List<SpriteFrameDirection>();
+                frameGroupFrames = new List<FrameDef>();
             }
 
             // Commits the current frame group to the current sprite.
@@ -196,8 +196,13 @@ namespace SF3.Models.Structs.CHR {
                     frameGroups.Add(lastFrameGroup);
                 }
 
+                // If the frame's hash appears more than once, use the texture offset as a key.
+                // This will ensure that duplicate frames aren't merged as duplicates if they
+                // didn't share the same offset.
+                string key = framesWithDuplicates.Contains(frame.TextureHash) ? frame.TextureOffset.ToString() : null;
+
                 // Add the direction of this frame to the current frame group's directions.
-                frameGroupDirections.Add(frame.Direction);
+                frameGroupFrames.Add(new FrameDef() { Direction = frame.Direction, DuplicateKey = key });
             }
 
             // Commit everything to the last sprite being built.

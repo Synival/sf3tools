@@ -202,22 +202,19 @@ namespace SF3.CHR {
                     foreach (var frameGroup in spriteFrames.FrameGroups ?? new FrameGroupDef[0]) {
                         var spriteFrameGroupDef = (spritesheetDef?.FrameGroups?.TryGetValue(frameGroup.Name, out var spriteFrameGroupOut) == true) ? spriteFrameGroupOut : null;
 
-                        var directions =
-                            frameGroup.Directions?.Select(x => (SpriteFrameDirection) Enum.Parse(typeof(SpriteFrameDirection), x))?.ToArray()
-                            ?? CHR_Utils.GetCHR_FrameGroupDirections(sprite.Directions);
+                        var frames = frameGroup.Frames
+                            ?? CHR_Utils.GetCHR_FrameGroupDirections(sprite.Directions)
+                                .Select(x => new FrameDef() { Direction = x })
+                                .ToArray();
 
-                        foreach (var direction in directions) {
-                            var spriteFrameDef = (spriteFrameGroupDef?.Frames?.TryGetValue(direction.ToString(), out var spriteFrameOut) == true) ? spriteFrameOut : null;
-                            var aniFrameKey = $"{frameGroup.Name} ({direction})";
-                            var frameKey = $"{spritesheetImageKey} {aniFrameKey}";
+                        foreach (var frame in frames) {
+                            var spriteFrameDef = (spriteFrameGroupDef?.Frames?.TryGetValue(frame.Direction.ToString(), out var spriteFrameOut) == true) ? spriteFrameOut : null;
+                            var aniFrameKey = $"{frameGroup.Name} ({frame.Direction})";
+                            var frameKey = $"{spritesheetImageKey} {aniFrameKey}" + (frame.DuplicateKey == null ? "" : $" ({frame.DuplicateKey})");
 
                             // Add a reference to the image whether the spritesheet resources were found or not.
                             // If they're invalid, simply display a red image.
                             if (!imagesRefsByKey.ContainsKey(frameKey)) {
-                                // TODO: In the future, when we can specify frame keys, if imagesRefsByKey already has this key,
-                                // we'll need to check that the bitmap/x/y/width/height are the same as the current frame. It's
-                                // an error in the SF3CHR if they're not.
-
                                 imagesRefsByKey.Add(frameKey, new SpritesheetImageRef() {
                                     Bitmap = spritesheetImageDict.TryGetValue(spritesheetImageKey, out var bmpOut) ? bmpOut : null,
                                     X = spriteFrameDef?.SpriteSheetX ?? -1,

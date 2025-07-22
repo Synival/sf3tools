@@ -1,6 +1,5 @@
 ﻿using CommonLib.Arrays;
 using CommonLib.NamedValues;
-using Newtonsoft.Json;
 using SF3.ByteData;
 using SF3.CHR;
 using SF3.Models.Files;

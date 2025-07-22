@@ -40,8 +40,18 @@ namespace SF3.Models.Files.CHR {
         }
 
         public CHR_Def ToCHR_Def() {
+            // Collect a list of frames with duplicates. We'll need this to force certain
+            // duplicate frames to have their own location.
+            var framesWithDuplicates = new HashSet<string>(
+                SpriteTable
+                    .SelectMany(x => x.FrameTable)
+                    .GroupBy(x => x.TextureHash)
+                    .Where(x => x.Count() > 1 && !x.All(y => y.TextureOffset != x.First().TextureOffset))
+                    .Select(x => x.Key)
+            );
+
             return new CHR_Def() {
-                Sprites = SpriteTable.Select(x => x.ToCHR_SpriteDef()).ToArray()
+                Sprites = SpriteTable.Select(x => x.ToCHR_SpriteDef(framesWithDuplicates)).ToArray()
             };
         }
 
