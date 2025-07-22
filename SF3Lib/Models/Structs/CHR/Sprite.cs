@@ -171,14 +171,25 @@ namespace SF3.Models.Structs.CHR {
 
             // Go through each frame, building a set of CHR_SpriteFrameDef's.
             foreach (var frame in FrameTable) {
+                var frameName  = frame.FrameName;
                 var spriteName = (frame.SpriteName == SpriteName)    ? null        : frame.SpriteName;
                 var width      = (frame.Width      == Header.Width)  ? (int?) null : frame.Width;
                 var height     = (frame.Height     == Header.Height) ? (int?) null : frame.Height;
 
-                // Correct some very specific cases for very specific spritesheets.
-                // TODO: this really shouldn't be hard-coded!!
+                // Correct some very specific cases where the exact spritesheet to use can't be // determined without a little help:
+                // TODO: these really shouldn't be hard-coded like this!!
+                //
+                // 1) Edmund (P1) has identical sprites shared between two spritesheets. They're identified with a different name,
+                //    so use the name for the expected spritesheet.
                 if (frame.SpriteName == "Edmund (P1) (Sword/Weaponless)")
-                    spriteName = (SpriteName == "Edmund (P1) (Weaponless)") ? SpriteName : "Edmund (P1)";
+                    spriteName = null;
+                // 2) Murasame (P1) has Nodding and ShakingHead frames that don't have a weapon in the spritesheet with a sword.
+                //    They've been duplicated in his sword spritesheet, so if we see them in there, don't use the weaponless name.
+                else if (SpriteName == "Murasame (P1)" && frame.SpriteName == "Murasame (P1) (Weaponless)" && (frameName == "Nodding 2" || frameName == "ShakingHead 1" || frameName == "ShakingHead 2"))
+                    spriteName = null;
+                // 3) Explosions have a transparent frame
+                else if (SpriteName == "Explosion" && frame.SpriteName == "Transparency")
+                    spriteName = null;
 
                 // If the sprite name has changed, begin a new one.
                 if (spriteName != lastSpriteName || lastSpriteFrames == null) {
@@ -192,10 +203,10 @@ namespace SF3.Models.Structs.CHR {
                 }
 
                 // If the frame group has changed, begin a new one.
-                if (frame.FrameName != lastFrameGroupName || width != lastFrameGroupWidth || height != lastFrameGroupHeight || lastFrameGroup == null) {
+                if (frameName != lastFrameGroupName || width != lastFrameGroupWidth || height != lastFrameGroupHeight || lastFrameGroup == null) {
                     CommitFrameGroupDirections();
 
-                    lastFrameGroupName   = frame.FrameName;
+                    lastFrameGroupName   = frameName;
                     lastFrameGroupWidth  = width;
                     lastFrameGroupHeight = height;
                     lastFrameGroup = new FrameGroupDef() {
@@ -278,6 +289,19 @@ namespace SF3.Models.Structs.CHR {
 
             // Go through each animation, building a set of CHR_SpriteFrameDef's.
             foreach (var animation in animationArray) {
+                var spriteName = (animation.SpriteName == SpriteName) ? null : animation.SpriteName;
+                var directions = animation.Directions == Header.Directions ? (int?) null : animation.Directions;
+                var width      = animation.AnimationInfo.Width  == Header.Width  ? (int?) null : animation.AnimationInfo.Width;
+                var height     = animation.AnimationInfo.Height == Header.Height ? (int?) null : animation.AnimationInfo.Height;
+
+                // Correct some very specific cases where the exact spritesheet to use can't be determined without a little help:
+                // TODO: these really shouldn't be hard-coded like this!!
+                //
+                // 1) Explosions have a StillFrame animation that are duplicated in the 'Transparency' sprite.
+                if (SpriteName == "Explosion" && animation.SpriteName == "Transparency")
+                    spriteName = null;
+
+                // If the first animation is null, we need to create an empty animation group for it.
                 if (animation == null) {
                     if (lastSpriteAnimations == null) {
                         lastSpriteName = null;
@@ -295,10 +319,6 @@ namespace SF3.Models.Structs.CHR {
                 }
 
                 // If the sprite name has changed, begin a new one.
-                var spriteName = (animation.SpriteName == SpriteName) ? null : animation.SpriteName;
-                var directions = animation.Directions == Header.Directions ? (int?) null : animation.Directions;
-                var width      = animation.AnimationInfo.Width  == Header.Width  ? (int?) null : animation.AnimationInfo.Width;
-                var height     = animation.AnimationInfo.Height == Header.Height ? (int?) null : animation.AnimationInfo.Height;
                 if (spriteName != lastSpriteName || lastSpriteAnimations == null) {
                     CommitAnimationGroup();
 
