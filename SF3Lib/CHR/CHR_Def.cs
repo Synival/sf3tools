@@ -106,6 +106,7 @@ namespace SF3.CHR {
                         var directions = animationGroup.Directions ?? sprite.Directions;
                         var spritesheetKey = SpritesheetDef.DimensionsToKey(
                             animationGroup.Width ?? sprite.Width, animationGroup.Height ?? sprite.Height);
+                        var frameKeyPrefix = $"{spriteName} ({spritesheetKey})";
                         var spritesheetDef = (spriteDef?.Spritesheets?.TryGetValue(spritesheetKey, out var spritesheetOut) == true) ? spritesheetOut : null;
                         var spriteAnimsByDirection = (spritesheetDef?.AnimationByDirections?.TryGetValue(directions, out var sadOut) == true) ? sadOut : null;
 
@@ -126,20 +127,20 @@ namespace SF3.CHR {
                                         // The 'FrameGroup' command assumes the standard directions for this frame.
                                         if (frame.FrameGroup != null) {
                                             frameKeys = frameDirections
-                                                .Select(x => $"{frame.FrameGroup} ({x.ToString()})")
+                                                .Select(x => $"{frameKeyPrefix} {frame.FrameGroup} ({x.ToString()})")
                                                 .ToArray();
                                         }
                                         // The 'Frames' command has manually specified FrameGroup + Direction pairs.
                                         else if (frame.Frames != null) {
                                             frameKeys = frameDirections
                                                 .ToDictionary(x => x, x => frame.Frames.TryGetValue(x.ToString(), out var f) ? f : null)
-                                                .Select(x => (x.Value == null) ? null : $"{x.Value.Frame} ({x.Value.Direction.ToString()})")
+                                                .Select(x => (x.Value == null) ? null : $"{frameKeyPrefix} {x.Value.Frame} ({x.Value.Direction.ToString()})")
                                                 .ToArray();
                                         }
                                         // If nothing is there, something is wrong.
-                                        else {
+                                        else
                                             // TODO: what to do if we reach this point?
-                                        }
+                                            ;
                                     }
 
                                     // We have enough info; write the frame.
@@ -212,7 +213,7 @@ namespace SF3.CHR {
 
                         foreach (var frame in frames) {
                             var spriteFrameDef = (spriteFrameGroupDef?.Frames?.TryGetValue(frame.Direction.ToString(), out var spriteFrameOut) == true) ? spriteFrameOut : null;
-                            var aniFrameKey = $"{frameGroup.Name} ({frame.Direction})";
+                            var aniFrameKey = $"{spritesheetImageKey} {frameGroup.Name} ({frame.Direction})";
                             var frameKey = $"{spritesheetImageKey} {aniFrameKey}" + (frame.DuplicateKey == null ? "" : $" ({frame.DuplicateKey})");
 
                             // Add a reference to the image whether the spritesheet resources were found or not.
