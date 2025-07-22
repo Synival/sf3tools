@@ -114,16 +114,9 @@ namespace CHR_Extractor {
 
                             bool fileIsDifferent = false;
 
-                            var pathOut = Path.Combine(c_pathOut, "Rebuilt_CHRs", c_scenarioPaths[scenario]);
-                            Directory.CreateDirectory(pathOut);
-                            pathOut = Path.Combine(pathOut, $"{filename}.{(isChr ? "CHR" : "CHP")}");
                             var newData = isChr
                                 ? ((CHR_File) deserializedFile).Data.Data.GetDataCopyOrReference()
                                 : ((CHP_File) deserializedFile).Data.Data.GetDataCopyOrReference();
-
-                            using (var newDataOut = File.Open(pathOut, FileMode.Create)) {
-                                newDataOut.Write(newData, 0, newData.Length);
-                            }
 
                             bool fileNeedsWork = false;
                             var origData = isChr
@@ -214,7 +207,15 @@ namespace CHR_Extractor {
                                     }
                                 }
                             }
-                            if (!fileNeedsWork)
+
+                            if (fileNeedsWork) {
+                                var pathOut = Path.Combine(c_pathOut, "Rebuilt_CHRs", c_scenarioPaths[scenario]);
+                                Directory.CreateDirectory(pathOut);
+                                pathOut = Path.Combine(pathOut, $"{filename}.{(isChr ? "CHR" : "CHP")}");
+                                using (var newDataOut = File.Open(pathOut, FileMode.Create))
+                                    newDataOut.Write(newData, 0, newData.Length);
+                            }
+                            else
                                 totalAccurateFileCount++;
                         }
                     }
