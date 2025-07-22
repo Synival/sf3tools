@@ -178,8 +178,12 @@ namespace SF3.Utils {
 
             string[] ExtraFrameHashes(string spriteName) {
                 // Explosions need to steal some transparency frames.
-                if (spriteName == "Explosion")
-                    return new string[] { "d33e04f92840fa8d80d642441797bafe" };
+                if (spriteName == "Explosion") {
+                    return new string[] {
+                        "d33e04f92840fa8d80d642441797bafe",
+                        "b1e27aa018409de6bfd73f8afb883a65",
+                    };
+                }
                 // Murasame (P1) has some head nodding/shaking animations that mistakenly use Mursame (P1) (Weaponless) idle frames.
                 // (He doesn't have a nodding/shaking animation with his weapon)
                 else if (spriteName == "Murasame (P1)") {
@@ -204,9 +208,13 @@ namespace SF3.Utils {
             }
 
             string[] ExtraAnimations(string spriteName) {
-                // Explosions need a copy of a StillFrame animation.
-                if (spriteName == "Explosion")
-                    return new string[] { "23708b71160689a09af4ca935a2ea04c" };
+                // Explosions need some StillFrame animations from Transparency.
+                if (spriteName == "Explosion") {
+                    return new string[] {
+                        "23708b71160689a09af4ca935a2ea04c",
+                        "08f1faa76b0f430a925ed3c83c646dd5",
+                    };
+                }
                 else
                     return new string[0];
             }
