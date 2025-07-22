@@ -18,7 +18,7 @@ namespace CHR_Extractor {
             { ScenarioType.Scenario1,   "D:/" },
             { ScenarioType.Scenario2,   "E:/" },
             { ScenarioType.Scenario3,   "F:/" },
-            //{ ScenarioType.PremiumDisk, "G:/" },
+            { ScenarioType.PremiumDisk, "G:/" },
         };
 
         private static readonly Dictionary<ScenarioType, string> c_scenarioPaths = new() {

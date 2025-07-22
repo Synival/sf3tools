@@ -338,9 +338,14 @@ namespace SpriteExtractor {
                         .ToArray();
 
                     foreach (var spritesheetFrame in spritesheetFrames) {
-                        var from = framesByHash[spritesheetFrame.Hash];
-                        spritesheetFrame.SpriteSheetX = from.SpriteSheetX;
-                        spritesheetFrame.SpriteSheetY = from.SpriteSheetY;
+                        if (framesByHash.TryGetValue(spritesheetFrame.Hash, out var from)) {
+                            spritesheetFrame.SpriteSheetX = from.SpriteSheetX;
+                            spritesheetFrame.SpriteSheetY = from.SpriteSheetY;
+                        }
+                        else {
+                            spritesheetFrame.SpriteSheetX = -1;
+                            spritesheetFrame.SpriteSheetY = -1;
+                        }
                     }
 
 #pragma warning disable CA1416 // Validate platform compatibility

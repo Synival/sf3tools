@@ -203,6 +203,14 @@ namespace SF3.Utils {
                     return new string[0];
             }
 
+            string[] ExtraAnimations(string spriteName) {
+                // Explosions need a copy of a StillFrame animation.
+                if (spriteName == "Explosion")
+                    return new string[] { "23708b71160689a09af4ca935a2ea04c" };
+                else
+                    return new string[0];
+            }
+
             return s_uniqueAnimationsByHash.Values
                 .GroupBy(x => x.SpriteName)
                 .Select(x => {
@@ -222,6 +230,7 @@ namespace SF3.Utils {
                     return new SpriteDef(x.Key, frames, x
                         .GroupBy(y => y.AnimationHash)
                         .Select(y => y.First())
+                        .Concat(ExtraAnimations(x.Key).Select(y => s_uniqueAnimationsByHash[y]))
                         .ToArray());
                 })
                 .Where(x => x.Spritesheets.Count > 0)

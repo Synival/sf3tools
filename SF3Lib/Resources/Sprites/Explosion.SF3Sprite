@@ -347,6 +347,19 @@
                 }
               ]
             },
+            "StillFrame (Black+White)": {
+              "AnimationFrames": [
+                {
+                  "FrameGroup": "Black+White 1",
+                  "Command": "Frame",
+                  "Parameter": 10
+                },
+                {
+                  "Command": "Stop",
+                  "Parameter": 0
+                }
+              ]
+            },
             "Unexploding (Alt, w/o Transparent Frame)": {
               "AnimationFrames": [
                 {
