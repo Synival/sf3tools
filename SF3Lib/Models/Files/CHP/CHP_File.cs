@@ -46,6 +46,7 @@ namespace SF3.Models.Files.CHP {
 
         public CHP_Def ToCHP_Def() {
             return new CHP_Def() {
+                ExpectedSize = Data.Length,
                 CHRsByOffset = CHR_EntriesByOffset.ToDictionary(x => x.Key, x => x.Value.ToCHR_Def())
             };
         }

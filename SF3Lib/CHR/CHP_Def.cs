@@ -9,6 +9,7 @@ using SF3.Types;
 
 namespace SF3.CHR {
     public class CHP_Def {
+        public int ExpectedSize;
         public Dictionary<int, CHR_Def> CHRsByOffset;
 
         /// <summary>
@@ -33,20 +34,26 @@ namespace SF3.CHR {
         /// <returns>The number of bytes written to outputStream.</returns>
         public int ToCHP_File(Stream outputStream) {
             var startPosition = outputStream.Position;
+
             foreach (var chrKv in CHRsByOffset.OrderBy(x => x.Key)) {
                 var offset = chrKv.Key + startPosition;
                 var chr = chrKv.Value;
 
-                var pos = outputStream.Position;
-                if (pos < offset)
-                    outputStream.Write(new byte[offset - pos], 0, (int) (offset - pos));
-                else if (offset < pos) {
+                var padding = offset - outputStream.Position;
+                if (padding > 0)
+                    outputStream.Write(new byte[padding], 0, (int) padding);
+                else if (padding < 0) {
                     // TODO: If this ever happens, something is seriously wrong!!
                     outputStream.Position = offset;
                 }
 
                 chr.ToCHR_File(outputStream);
             }
+
+            var eofPadding = ExpectedSize - outputStream.Position - startPosition;
+            if (eofPadding > 0)
+                outputStream.Write(new byte[eofPadding], 0, (int) eofPadding);
+
             return (int) (outputStream.Position - startPosition);
         }
 
