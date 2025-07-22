@@ -38,7 +38,7 @@ namespace CHR_Extractor {
                 .Where(x => c_pathsIn.ContainsKey(x))
                 .ToDictionary(x => x, x => {
                     var files = Directory.GetFiles(c_pathsIn[x], "*.CHR").Order().ToList();
-                    //files.AddRange(Directory.GetFiles(c_pathsIn[x], "*.CHP").Order().ToList());
+                    files.AddRange(Directory.GetFiles(c_pathsIn[x], "*.CHP").Order().ToList());
                     return files;
                 });
 
@@ -48,7 +48,7 @@ namespace CHR_Extractor {
             // TODO: remove these when analysis is complete.
             var serializedFilesByScenarioAndFilename = new Dictionary<ScenarioType, Dictionary<string, object>>();
             var totalFileCount = 0;
-            var totalIdenticalFileCount = 0;
+            var totalAccurateFileCount = 0;
 
             // Open each file.
             foreach (var filesKv in allFiles) {
@@ -125,12 +125,14 @@ namespace CHR_Extractor {
                                 newDataOut.Write(newData, 0, newData.Length);
                             }
 
+                            bool fileNeedsWork = false;
                             var origData = isChr
                                 ? ((CHR_File) chrChpFile).Data.Data.GetDataCopyOrReference()
                                 : ((CHP_File) chrChpFile).Data.Data.GetDataCopyOrReference();
                             if (newData.Length != origData.Length) {
                                 Console.WriteLine($"    Size changed: 0x{origData.Length:X5} => 0x{newData.Length:X5}");
                                 fileIsDifferent = true;
+                                fileNeedsWork = true;
                             }
 
                             var len = Math.Min(origData.Length, newData.Length);
@@ -138,14 +140,13 @@ namespace CHR_Extractor {
                                 if (origData[i] != newData[i]) {
                                     Console.WriteLine($"    Data differs at 0x{i:X5}");
                                     fileIsDifferent = true;
+                                    fileNeedsWork = isChr;
                                     break;
                                 }
                             }
 
                             totalFileCount++;
-                            if (!fileIsDifferent)
-                                totalIdenticalFileCount++;
-                            else {
+                            if (fileIsDifferent) {
                                 var origChrs = isChr
                                     ? [(CHR_File) deserializedFile]
                                     : ((CHP_File) deserializedFile).CHR_EntriesByOffset.Values.ToArray();
@@ -153,8 +154,10 @@ namespace CHR_Extractor {
                                     ? [(CHR_File) chrChpFile]
                                     : ((CHP_File) chrChpFile).CHR_EntriesByOffset.Values.ToArray();
 
-                                if (origChrs.Length != newChrs.Length)
+                                if (origChrs.Length != newChrs.Length) {
+                                    fileNeedsWork = true;
                                     Console.WriteLine($"    Wrong number of CHRs: {origChrs.Length} => {newChrs.Length}");
+                                }
                                 else {
                                     for (int i = 0; i < origChrs.Length; i++) {
                                         var origChr = origChrs[i];
@@ -163,8 +166,10 @@ namespace CHR_Extractor {
                                         var origSprites = origChr.SpriteTable.ToArray();
                                         var newSprites  = newChr.SpriteTable.ToArray();
 
-                                        if (origSprites.Length != newSprites.Length)
+                                        if (origSprites.Length != newSprites.Length) {
+                                            fileNeedsWork = true;
                                             Console.WriteLine($"    [{i:X2}]: Wrong number of sprites: {origSprites.Length} => {newSprites.Length}");
+                                        }
                                         else {
                                             for (int j = 0; j < origSprites.Length; j++) {
                                                 var origSprite = origSprites[j];
@@ -181,21 +186,27 @@ namespace CHR_Extractor {
                                                 var origTables = GetTables(origSprite);
                                                 var newTables  = GetTables(newSprite);
 
-                                                if (origTables.Length != newTables.Length)
+                                                if (origTables.Length != newTables.Length) {
+                                                    fileNeedsWork = true;
                                                     Console.WriteLine($"    [{i:X2}, {origSprite.SpriteName}]: Wrong number of CHR tables: {origTables.Length} => {newTables.Length}");
+                                                }
                                                 else {
                                                     for (int k = 0; k < origTables.Length; k++) {
                                                         var origTable = origTables[k];
                                                         var newTable  = newTables[k];
 
-                                                        if (origTable.Length != newTable.Length)
+                                                        if (origTable.Length != newTable.Length) {
+                                                            fileNeedsWork = true;
                                                             Console.WriteLine($"    [{i:X2}, {origSprite.SpriteName}, {origTable.Name}]: Wrong number of elements: {origTable.Length} => {newTable.Length}");
+                                                        }
 
                                                         var origChrData = origTable.Data.GetDataCopyAt(origTable.Address, origTable.SizeInBytesPlusTerminator);
                                                         var newChrData  = newTable .Data.GetDataCopyAt(newTable.Address,  newTable.SizeInBytesPlusTerminator);
 
-                                                        if (!Enumerable.SequenceEqual(origChrData, newChrData))
+                                                        if (!Enumerable.SequenceEqual(origChrData, newChrData)) {
+                                                            fileNeedsWork = true;
                                                             Console.WriteLine($"    [{i:X2}, {origSprite.SpriteName}, {origTable.Name}]: Table has different data");
+                                                        }
                                                     }
                                                 }
                                             }
@@ -203,6 +214,8 @@ namespace CHR_Extractor {
                                     }
                                 }
                             }
+                            if (!fileNeedsWork)
+                                totalAccurateFileCount++;
                         }
                     }
                     catch (Exception e) {
@@ -212,7 +225,7 @@ namespace CHR_Extractor {
             }
 
             Console.WriteLine("Processing complete.");
-            Console.WriteLine($"Identical file rate: {totalIdenticalFileCount * 100f / totalFileCount}%");
+            Console.WriteLine($"Accuracy rate by file: {totalAccurateFileCount * 100f / totalFileCount}%");
         }
 
         private static string GetFileString(ScenarioType inputScenario, string filename, ScenarioTableFile chrChpFile) {
