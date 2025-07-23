@@ -222,7 +222,11 @@ namespace SF3.CHR {
             }
         }
 
-        private void Write(byte[] bytes) {
+        /// <summary>
+        /// Writes arbitrary data to the stream. Should only be used when the stream position is at the end.
+        /// </summary>
+        /// <param name="bytes">Bytes to write to the stream.</param>
+        public void Write(byte[] bytes) {
             Stream.Write(bytes, 0, bytes.Length);
             BytesWritten += bytes.Length;
         }

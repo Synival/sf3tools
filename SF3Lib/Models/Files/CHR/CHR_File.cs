@@ -50,7 +50,30 @@ namespace SF3.Models.Files.CHR {
                     .Select(x => x.Key)
             );
 
+            // XBTL127.CHR has 6 random '0x0009' words between the frame tables and the frame images.
+            // Let's account for anomalies like that.
+            byte[] junkAfterFrameTable = null;
+
+            var firstTextureOffset = SpriteTable
+                .SelectMany(x => x.FrameTable)
+                .OrderBy(x => x.TextureOffset)
+                .Select(x => (int?) x.TextureOffset)
+                .FirstOrDefault();
+
+            var lastFrameTablePosition = SpriteTable
+                .Select(x => x.FrameTable)
+                .OrderByDescending(x => x.Address)
+                .Select(x => (int?) x.Address + x.SizeInBytesPlusTerminator + 4)
+                .FirstOrDefault();
+
+            if (firstTextureOffset.HasValue && lastFrameTablePosition.HasValue && firstTextureOffset >= lastFrameTablePosition) {
+                var spaceBetween = firstTextureOffset.Value - lastFrameTablePosition.Value;
+                if (spaceBetween > 0)
+                    junkAfterFrameTable = Data.GetDataCopyAt(lastFrameTablePosition.Value, spaceBetween);
+            }
+
             return new CHR_Def() {
+                JunkAfterFrameTables = junkAfterFrameTable,
                 Sprites = SpriteTable.Select(x => x.ToCHR_SpriteDef(framesWithDuplicates)).ToArray()
             };
         }

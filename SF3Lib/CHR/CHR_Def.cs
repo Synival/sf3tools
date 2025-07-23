@@ -16,6 +16,7 @@ using SF3.Utils;
 
 namespace SF3.CHR {
     public class CHR_Def {
+        public byte[] JunkAfterFrameTables;
         public SpriteDef[] Sprites;
 
         /// <summary>
@@ -239,6 +240,10 @@ namespace SF3.CHR {
                 if (lastFrameKey != null)
                     finalSpriteFrames.Add(lastFrameKey);
             }
+
+            // XBTL127.CHR has junk data after the frame table. Write it here.
+            if (JunkAfterFrameTables != null)
+                chrWriter.Write(JunkAfterFrameTables);
 
             // Write all images, updating pointers that reference each image by its key.
             foreach (var imageRefKv in imagesRefsByKey) {
