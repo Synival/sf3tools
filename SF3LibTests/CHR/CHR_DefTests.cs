@@ -66,11 +66,14 @@ namespace SF3.Tests.CHR {
         public void ToCHR_File_ToStream_WithEmptyCHR_ExportsExpectedData() {
             var emptyCHR = CHR_Def.FromJSON(c_emptyCHR_Text);
 
-            // TODO: get real data!
             var expectedData = new byte[] {
+                // Blank (terminating) header entry.
                 0xFF, 0xFF, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
                 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
                 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+
+                // Manditory 4 btyes at the end.
+                0x00, 0x00, 0x00, 0x00
             };
 
             byte[]? resultData = null;
@@ -89,6 +92,7 @@ namespace SF3.Tests.CHR {
             var nameGetterContext = new NameGetterContext(ScenarioType.Scenario1);
             var emptyCHR = CHR_Def.FromJSON(c_emptyCHR_Text);
             var chrFile = emptyCHR.ToCHR_File(nameGetterContext, nameGetterContext.Scenario);
+
             Assert.AreEqual(0, chrFile.SpriteTable.Length);
         }
 
@@ -131,6 +135,50 @@ namespace SF3.Tests.CHR {
             Assert.AreEqual(0, chrFile.SpriteTable[1].AnimationTable.Length);
             for (int i = 0; i < 16; i++)
                 Assert.AreEqual(0u, chrFile.SpriteTable[1].AnimationOffsetTable[i].Offset);
+        }
+
+        [TestMethod]
+        public void Deserialize_WithEmptyCHR_HasExpectedData() {
+            var chrDef = CHR_Def.FromJSON(c_emptyCHR_Text);
+
+            Assert.IsNull(chrDef.JunkAfterFrameTables);
+            Assert.AreEqual(0, chrDef.Sprites.Length);
+        }
+
+        [TestMethod]
+        public void Deserialize_WithTwoEmptySpriteCHR_HasExpectedData() {
+            var chrDef = CHR_Def.FromJSON(c_twoEmptySpriteCHR_Text);
+
+            Assert.IsNull(chrDef.JunkAfterFrameTables);
+            Assert.AreEqual(2, chrDef.Sprites.Length);
+
+            var sprite0 = chrDef.Sprites[0];
+            Assert.AreEqual(sprite0.SpriteName, "Synbios (U)");
+            Assert.AreEqual(sprite0.SpriteID, 0);
+            Assert.AreEqual(sprite0.Width, 40);
+            Assert.AreEqual(sprite0.Height, 40);
+            Assert.AreEqual(sprite0.Directions, 4);
+            Assert.AreEqual(sprite0.VerticalOffset, 0);
+            Assert.AreEqual(sprite0.Unknown0x08, 20);
+            Assert.AreEqual(sprite0.CollisionSize, 40);
+            Assert.AreEqual(sprite0.Scale, 1.00f);
+            Assert.AreEqual(sprite0.PromotionLevel, null);
+            Assert.AreEqual(sprite0.SpriteFrames, null);
+            Assert.AreEqual(sprite0.SpriteAnimations, null);
+
+            var sprite1 = chrDef.Sprites[1];
+            Assert.AreEqual(sprite1.SpriteName, "Synbios (P1)");
+            Assert.AreEqual(sprite1.SpriteID, 0);
+            Assert.AreEqual(sprite1.Width, 40);
+            Assert.AreEqual(sprite1.Height, 40);
+            Assert.AreEqual(sprite1.Directions, 4);
+            Assert.AreEqual(sprite1.VerticalOffset, 0);
+            Assert.AreEqual(sprite1.Unknown0x08, 20);
+            Assert.AreEqual(sprite1.CollisionSize, 40);
+            Assert.AreEqual(sprite1.Scale, 1.00f);
+            Assert.AreEqual(sprite1.PromotionLevel, 1);
+            Assert.AreEqual(sprite1.SpriteFrames, null);
+            Assert.AreEqual(sprite1.SpriteAnimations, null);
         }
     }
 }
