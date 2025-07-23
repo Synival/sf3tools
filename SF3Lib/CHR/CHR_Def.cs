@@ -114,6 +114,8 @@ namespace SF3.CHR {
                         foreach (var animationName in animationGroup.Animations ?? new string[0]) {
                             var spriteAnimation = (animationName != null && spriteAnimsByDirection?.Animations?.TryGetValue(animationName, out var animOut) == true) ? animOut : null;
                             if (spriteAnimation != null) {
+                                chrWriter.StartAnimationForCurrentSprite(animationIndex);
+
                                 var currentDirections = directions;
                                 foreach (var frame in spriteAnimation.AnimationFrames ?? new AnimationFrameDef[0]) {
                                     string[] frameKeys = null;
@@ -145,7 +147,7 @@ namespace SF3.CHR {
                                     }
 
                                     // We have enough info; write the frame.
-                                    chrWriter.WriteAnimationFrame(i, animationIndex, frame.Command, frame.Parameter, frameKeys);
+                                    chrWriter.WriteAnimationFrame(i, frame.Command, frame.Parameter, frameKeys);
                                 }
                             }
 

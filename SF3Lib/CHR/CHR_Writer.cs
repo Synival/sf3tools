@@ -67,27 +67,32 @@ namespace SF3.CHR {
         }
 
         /// <summary>
+        /// Informs the CHR_Writer that an animation frame table is beginning. Must be done before writing frames.
+        /// </summary>
+        /// <param name="animationIndex">Index of the current sprite's animation to which this frame belongs.</param>
+        public void StartAnimationForCurrentSprite(int animationIndex) {
+            _animationFrameTablePointers[animationIndex] = Stream.Position;
+        }
+
+        /// <summary>
         /// Writes a single frame for an animation of a sprite.
         /// </summary>
         /// <param name="spriteIndex">Index of the sprite to which this table belongs.</param>
-        /// <param name="animationIndex">Index of the current sprite's animation to which this frame belongs.</param>
         /// <param name="command">Command for this frame.</param>
         /// <param name="parameter">Parameter for this command.</param>
         /// <param name="frameKeys">List of keys for each frame. Used for assigning the FrameID when frames are written.</param>
-        public void WriteAnimationFrame(int spriteIndex, int animationIndex, SpriteAnimationFrameCommandType command, int parameter, string[] frameKeys) {
+        public void WriteAnimationFrame(int spriteIndex, SpriteAnimationFrameCommandType command, int parameter, string[] frameKeys) {
             // If applicable, track the set of frames expected for this animation frame and its offset.
             // The FrameID will be updated later, when the FrameTable is built.
             if (frameKeys != null) {
                 if (!_animationFrameRefsBySpriteIndex.ContainsKey(spriteIndex))
                     _animationFrameRefsBySpriteIndex.Add(spriteIndex, new List<AnimationFrameRef>());
+
                 _animationFrameRefsBySpriteIndex[spriteIndex].Add(new AnimationFrameRef() {
                     Offset = Stream.Position,
                     FrameKeys = frameKeys
                 });
             }
-
-            if (!_animationFrameTablePointers.ContainsKey(animationIndex))
-                _animationFrameTablePointers[animationIndex] = Stream.Position;
 
             Write(((ushort) command).ToByteArray());
             Write(((ushort) parameter).ToByteArray());
