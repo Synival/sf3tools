@@ -606,7 +606,7 @@
                 }
               ]
             },
-            "StillFrame (Pointing)": {
+            "StillFrame (Pointing, Should be 1 Direction)": {
               "AnimationFrames": [
                 {
                   "Frames": {

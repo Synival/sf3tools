@@ -63,7 +63,9 @@ namespace SF3.Sprites {
                     return (frame.Frame != null) ? new AnimationFrameDirectionDef() { Frame = frame.Name, Direction = frame.Dir.Value } : null;
                 });
 
-            if (frames.All(x => x.Value != null)) {
+            var nonNullFrameCount = FrameHashes.Count(x => x != null);
+            var foundFrameCount = frames.Count(x => x.Value != null);
+            if (foundFrameCount == nonNullFrameCount) {
                 FrameGroup  = null;
                 Frames      = frames;
                 FrameHashes = null;

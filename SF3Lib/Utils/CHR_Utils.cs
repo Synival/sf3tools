@@ -5,7 +5,6 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Xml;
-using Newtonsoft.Json;
 using SF3.Models.Structs.CHR;
 using SF3.Sprites;
 using SF3.Types;
@@ -319,6 +318,7 @@ namespace SF3.Utils {
             public int FrameID;
             public int Directions;
             public ITexture Image;
+            public int FramesMissing;
         }
 
         public static string CreateAnimationHash(int directions, AnimationDef animation, Dictionary<string, FrameGroupDef> frameGroups, Dictionary<string, ITexture> texturesByHash) {
@@ -349,7 +349,8 @@ namespace SF3.Utils {
                         Parameter  = x.Parameter,
                         FrameID    = -1,
                         Directions = currentDirections,
-                        Image      = StackedImageFromFrames(frames, texturesByHash)
+                        Image      = StackedImageFromFrames(frames, texturesByHash),
+                        FramesMissing = frames?.Count(y => y == null) ?? 0
                     };
                 })
                 .ToArray();
@@ -376,7 +377,8 @@ namespace SF3.Utils {
                     Parameter  = x.Duration,
                     FrameID    = x.HasTexture ? x.FrameID : -1,
                     Directions = x.Directions,
-                    Image      = (x.HasTexture) ? x.GetTexture(x.Directions) : null
+                    Image      = (x.HasTexture) ? x.GetTexture(x.Directions) : null,
+                    FramesMissing = x.FramesMissing
                 })
                 .ToArray();
 
@@ -403,6 +405,8 @@ namespace SF3.Utils {
                 else {
                     var tex = aniFrame.Image;
                     hashStr += (tex != null) ? $"{tex.Hash}_{aniFrame.Parameter:x2}" : $"{aniFrame.FrameID:x2},{aniFrame.Parameter:x2}";
+                    if (aniFrame.FramesMissing > 0)
+                        hashStr += $"_M{aniFrame.FramesMissing})";
                 }
             }
 

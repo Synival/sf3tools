@@ -829,7 +829,7 @@
                 }
               ]
             },
-            "ShakingHead (Should be 4 Directions)": {
+            "ShakingHead (Should be 4 Directions, Missing Frames)": {
               "AnimationFrames": [
                 {
                   "Frames": {

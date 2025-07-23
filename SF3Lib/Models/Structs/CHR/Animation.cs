@@ -17,8 +17,6 @@ namespace SF3.Models.Structs.CHR {
             AnimationFrames  = animationFrames;
             FrameTable       = frameTable;
 
-            _firstFrameWithTexture = animationFrames?.FirstOrDefault(x => x.HasTexture);
-
             _framesWithTextures = AnimationFrames
                 .Where(x => x.HasTexture)
                 .SelectMany(x => {
@@ -33,6 +31,17 @@ namespace SF3.Models.Structs.CHR {
                 .ToArray();
 
             AnimationInfo = CHR_Utils.GetUniqueAnimationInfoByHash(Hash);
+
+            // Update animation info, in case it's out of date.
+            var firstAnimationFrameWithTexture = animationFrames?.FirstOrDefault(x => x.HasTexture);
+            var firstFrameWithTexture = _framesWithTextures.FirstOrDefault();
+            AnimationInfo.SpriteName = SpriteName;
+            AnimationInfo.Width  = firstFrameWithTexture?.Width ?? 0;
+            AnimationInfo.Height = firstFrameWithTexture?.Height ?? 0;
+            AnimationInfo.Directions = firstAnimationFrameWithTexture?.Directions ?? 0;
+            AnimationInfo.FrameCommandCount = AnimationFrames.Length;
+            AnimationInfo.Duration = Duration;
+            AnimationInfo.FrameTexturesMissing = FrameTexturesMissing;
 
             int texCount = 0;
             var aniNameLower = AnimationName.ToLower();
@@ -72,7 +81,6 @@ namespace SF3.Models.Structs.CHR {
         public AnimationFrameTable AnimationFrames { get; }
         public FrameTable FrameTable { get; }
 
-        private readonly AnimationFrame _firstFrameWithTexture;
         private readonly Frame[] _framesWithTextures;
 
         [TableViewModelColumn(displayOrder: 0)]

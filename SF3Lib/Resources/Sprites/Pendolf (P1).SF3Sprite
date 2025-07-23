@@ -616,7 +616,7 @@
         },
         "6": {
           "Animations": {
-            "AdjustGlasses (Should be 4 Directions)": {
+            "AdjustGlasses (Should be 4 Directions, Missing Frames)": {
               "AnimationFrames": [
                 {
                   "Frames": {
@@ -974,7 +974,7 @@
                 }
               ]
             },
-            "Idle (Missing Frames)": {
+            "Idle (Should be 4 Directions, Missing Frames)": {
               "AnimationFrames": [
                 {
                   "Frames": {
@@ -1023,6 +1023,36 @@
               "AnimationFrames": [
                 {
                   "FrameGroup": "Idle 1",
+                  "Command": "Frame",
+                  "Parameter": 10
+                },
+                {
+                  "Command": "Stop",
+                  "Parameter": 0
+                }
+              ]
+            },
+            "StillFrame (Should be 4 Directions, Missing Frames)": {
+              "AnimationFrames": [
+                {
+                  "Frames": {
+                    "SSE": {
+                      "Frame": "Idle 1",
+                      "Direction": "SSE"
+                    },
+                    "ESE": {
+                      "Frame": "Idle 1",
+                      "Direction": "ESE"
+                    },
+                    "ENE": {
+                      "Frame": "Idle 1",
+                      "Direction": "ENE"
+                    },
+                    "NNE": {
+                      "Frame": "Idle 1",
+                      "Direction": "NNE"
+                    }
+                  },
                   "Command": "Frame",
                   "Parameter": 10
                 },

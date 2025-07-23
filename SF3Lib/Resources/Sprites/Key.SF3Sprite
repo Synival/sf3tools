@@ -21,7 +21,7 @@
       "AnimationByDirections": {
         "4": {
           "Animations": {
-            "StillFrame (Key)": {
+            "StillFrame (Should be 1 Direction)": {
               "AnimationFrames": [
                 {
                   "Frames": {
