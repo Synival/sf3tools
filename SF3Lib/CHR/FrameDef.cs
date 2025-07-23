@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 using SF3.Types;
 
 namespace SF3.CHR {
@@ -6,7 +7,9 @@ namespace SF3.CHR {
         public override string ToString()
             => Direction.ToString() + (DuplicateKey != null ? $", {DuplicateKey}" : "");
 
+        [JsonConverter(typeof(StringEnumConverter))]
         public SpriteFrameDirection Direction;
+
         public string DuplicateKey;
     }
 }
