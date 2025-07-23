@@ -8,13 +8,11 @@ using SF3.Win.Extensions;
 
 namespace SF3.Win.Views.CHR {
     public class SpriteAnimationFramesViewContext {
-        public SpriteAnimationFramesViewContext(int spriteDirections, AnimationFrameTable animationFrameTable, FrameTable frameTable) {
-            SpriteDirections    = spriteDirections;
+        public SpriteAnimationFramesViewContext(AnimationFrameTable animationFrameTable, FrameTable frameTable) {
             AnimationFrameTable = animationFrameTable;
             FrameTable          = frameTable;
         }
 
-        public readonly int SpriteDirections;
         public readonly AnimationFrameTable AnimationFrameTable;
         public readonly FrameTable FrameTable;
         public string Name => AnimationFrameTable.Name;
@@ -43,7 +41,7 @@ namespace SF3.Win.Views.CHR {
         public void UpdateTexture() {
             var item = (OLVListItem) TableView.OLVControl.SelectedItem;
             var animationFrame = (AnimationFrame) item?.RowObject;
-            TextureView.Image = animationFrame?.GetTexture(Context?.SpriteDirections ?? 1)?.CreateBitmapARGB1555();
+            TextureView.Image = animationFrame?.GetTexture(animationFrame.Directions)?.CreateBitmapARGB1555();
         }
 
         public override void Destroy() {

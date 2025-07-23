@@ -16,7 +16,7 @@ namespace SF3.Win.Views.CHR {
 
             AnimationFramesArrayView = new SpriteAnimationFramesArrayView(
                 "Animation Frames",
-                (Sprite?.AnimationFrameTablesByIndex?.Values?.Select(x => new SpriteAnimationFramesViewContext(Sprite.Header.Directions, x, Sprite.FrameTable))?.ToArray()) ?? [],
+                (Sprite?.AnimationFrameTablesByIndex?.Values?.Select(x => new SpriteAnimationFramesViewContext(x, Sprite.FrameTable))?.ToArray()) ?? [],
                 nameGetterContext
             );
 
@@ -50,7 +50,7 @@ namespace SF3.Win.Views.CHR {
                     HeaderView.Model = _sprite?.Header;
                     FramesView.Table = _sprite?.FrameTable;
                     AnimationOffsetsView.Table = _sprite?.AnimationOffsetTable;
-                    AnimationFramesArrayView.Elements = (Sprite?.AnimationFrameTablesByIndex?.Values?.Select(x => new SpriteAnimationFramesViewContext(x.SpriteDirections, x, Sprite.FrameTable))?.ToArray()) ?? [];
+                    AnimationFramesArrayView.Elements = (Sprite?.AnimationFrameTablesByIndex?.Values?.Select(x => new SpriteAnimationFramesViewContext(x, Sprite.FrameTable))?.ToArray()) ?? [];
                     AnimationsView.Context = new SpriteAnimationsViewContext(Sprite?.Header?.Directions ?? 1, Sprite?.AnimationTable, Sprite?.AnimationFrameTablesByIndex ?? [], Sprite?.FrameTable);
                 }
             }
