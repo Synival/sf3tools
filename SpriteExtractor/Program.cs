@@ -3,7 +3,6 @@ using System.Drawing.Imaging;
 using System.Runtime.InteropServices;
 using CommonLib.Arrays;
 using CommonLib.NamedValues;
-using Newtonsoft.Json;
 using SF3;
 using SF3.ByteData;
 using SF3.Models.Files;
@@ -211,12 +210,12 @@ namespace SpriteExtractor {
             Console.WriteLine("Writing new 'SpriteFramesByHash.xml'...");
             using (var file = File.Open(Path.Combine(c_pathOut, "SpriteFramesByHash.xml"), FileMode.Create))
                 using (var stream = new StreamWriter(file))
-                    CHR_Utils.WriteUniqueFramesByHashXML(stream);
+                    CHR_Utils.WriteUniqueFramesByHashXML(stream, true);
 
             Console.WriteLine("Writing new 'SpriteAnimationsByHash.xml'...");
             using (var file = File.Open(Path.Combine(c_pathOut, "SpriteAnimationsByHash.xml"), FileMode.Create))
                 using (var stream = new StreamWriter(file))
-                    CHR_Utils.WriteUniqueAnimationsByHashXML(stream);
+                    CHR_Utils.WriteUniqueAnimationsByHashXML(stream, true);
 
             Console.WriteLine();
             Console.WriteLine("===================================================");

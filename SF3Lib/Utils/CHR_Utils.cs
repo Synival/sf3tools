@@ -20,7 +20,10 @@ namespace SF3.Utils {
             LoadUniqueFramesByHashTable();
             if (!s_uniqueFramesByHash.ContainsKey(hash.ToLower()))
                 s_uniqueFramesByHash[hash] = new UniqueFrameDef(hash, "Unknown", 0, 0, "Unknown", SpriteFrameDirection.Unset);
-            return s_uniqueFramesByHash[hash];
+
+            var frame = s_uniqueFramesByHash[hash];
+            frame.RefCount++;
+            return frame;
         }
 
         public static UniqueAnimationDef GetUniqueAnimationInfoByHash(string hash) {
@@ -29,7 +32,10 @@ namespace SF3.Utils {
                 s_uniqueAnimationsByHash[hash] = new UniqueAnimationDef(hash, "Unknown", "Unknown", 0, 0, 0, 0, 0, 0,
                     new AnimationFrameDef[0]);
             }
-            return s_uniqueAnimationsByHash[hash];
+
+            var animation = s_uniqueAnimationsByHash[hash];
+            animation.RefCount++;
+            return animation;
         }
 
         private static void LoadUniqueFramesByHashTable() {
@@ -119,8 +125,9 @@ namespace SF3.Utils {
             }
         }
 
-        public static void WriteUniqueFramesByHashXML(StreamWriter stream) {
+        public static void WriteUniqueFramesByHashXML(StreamWriter stream, bool onlyReferenced) {
             var frameInfos = s_uniqueFramesByHash.Values
+                .Where(x => !onlyReferenced || x.RefCount > 0)
                 .OrderBy(x => x.SpriteName)
                 .ThenBy(x => x.Width)
                 .ThenBy(x => x.Height)
@@ -138,8 +145,9 @@ namespace SF3.Utils {
             stream.WriteLine("</items>");
         }
 
-        public static void WriteUniqueAnimationsByHashXML(StreamWriter stream) {
+        public static void WriteUniqueAnimationsByHashXML(StreamWriter stream, bool onlyReferenced) {
             var animationInfos = s_uniqueAnimationsByHash.Values
+                .Where(x => !onlyReferenced || x.RefCount > 0)
                 .OrderBy(x => x.SpriteName)
                 .ThenBy(x => x.Width)
                 .ThenBy(x => x.Height)
@@ -243,12 +251,6 @@ namespace SF3.Utils {
                 })
                 .Where(x => x.Spritesheets.Count > 0)
                 .ToArray();
-        }
-
-        public static void WriteUniqueAnimationsByHashJSON(StreamWriter stream) {
-            stream.NewLine = "\n";
-            var animationInfos = CreateAllSpriteDefs();
-            stream.Write(JsonConvert.SerializeObject(animationInfos, Newtonsoft.Json.Formatting.Indented));
         }
 
         public static SpriteFrameDirection FrameNumberToSpriteDir(int dirs, int num) {

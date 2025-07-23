@@ -49,11 +49,11 @@ namespace SF3.Models.Structs.CHR {
             }
         }
 
-        private void RewriteFrameXML() {
+        private void RewriteFrameXML(bool onlyReferenced) {
             var resourcePath = Path.Combine("..", "..", "..", "..", "SF3Lib", CommonLib.Utils.ResourceUtils.ResourceFile("SpriteFramesByHash.xml"));
             using (var file = File.Open(resourcePath, FileMode.Create))
                 using (var writer = new StreamWriter(file))
-                    CHR_Utils.WriteUniqueFramesByHashXML(writer);
+                    CHR_Utils.WriteUniqueFramesByHashXML(writer, onlyReferenced);
         }
 
         public uint DataOffset { get; }
@@ -71,7 +71,7 @@ namespace SF3.Models.Structs.CHR {
             set {
                 if (FrameInfo != null && FrameInfo.SpriteName != value) {
                     FrameInfo.SpriteName = value;
-                    RewriteFrameXML();
+                    RewriteFrameXML(false);
                 }
             }
         }
@@ -88,7 +88,7 @@ namespace SF3.Models.Structs.CHR {
             set {
                 if (FrameInfo != null && FrameInfo.FrameName != value) {
                     FrameInfo.FrameName = value;
-                    RewriteFrameXML();
+                    RewriteFrameXML(false);
                 }
             }
         }
@@ -99,7 +99,7 @@ namespace SF3.Models.Structs.CHR {
             set {
                 if (FrameInfo != null && FrameInfo.Direction != value) {
                     FrameInfo.Direction = value;
-                    RewriteFrameXML();
+                    RewriteFrameXML(false);
                 }
             }
         }

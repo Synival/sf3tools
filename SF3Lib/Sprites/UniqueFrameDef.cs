@@ -19,5 +19,6 @@ namespace SF3.Sprites {
         public int Height;
         public string FrameName;
         public SpriteFrameDirection Direction;
+        public int RefCount;
     }
 }

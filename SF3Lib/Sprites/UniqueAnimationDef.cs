@@ -36,5 +36,6 @@
         public int Duration;
         public int FrameTexturesMissing;
         public AnimationFrameDef[] AnimationFrames;
+        public int RefCount;
     }
 }
