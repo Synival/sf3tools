@@ -132,11 +132,16 @@ namespace CHR_Extractor {
                             }
 
                             var len = Math.Min(origData.Length, newData.Length);
+                            int bytesDifferent = 0;
                             for (int i = 0; i < len; i++) {
                                 if (origData[i] != newData[i]) {
-                                    Console.WriteLine($"    Data differs at 0x{i:X5}");
+                                    if (bytesDifferent == 20) {
+                                        Console.WriteLine("    (limit reached)");
+                                        break;
+                                    }
+                                    Console.WriteLine($"    Data differs at 0x{i:X5}: 0x{origData[i]:X2} => 0x{newData[i]:X2}");
                                     fileIsDifferent = true;
-                                    break;
+                                    bytesDifferent++;
                                 }
                             }
 
