@@ -87,13 +87,13 @@ namespace CHR_Extractor {
                             Console.WriteLine($"{fileStr}");
 
                             // Serialize the file. Format depends on CHR vs CHP file.
-                            var chrChpDef = isChr
-                                ? (object) ((CHR_File) chrChpFile).ToCHR_Def()
-                                : (object) ((CHP_File) chrChpFile).ToCHP_Def();
-
                             var serializedDef = isChr
-                                ? ((CHR_Def) chrChpDef).ToJSON_String()
-                                : ((CHP_Def) chrChpDef).ToJSON_String();
+                                ? ((CHR_File) chrChpFile).ToCHR_Def().ToJSON_String()
+                                : ((CHP_File) chrChpFile).ToCHP_Def().ToJSON_String();
+
+                            var chrChpDef = isChr
+                                ? (object) CHR_Def.FromJSON(serializedDef)
+                                : (object) CHP_Def.FromJSON(serializedDef);
 
                             // Write either a .SF3CHR or .SF3CHP file out.
                             var spriteDefPath = Path.Combine(isChr ? scenarioCHR_Path : scenarioCHP_Path, filename + (isChr ? ".SF3CHR" : ".SF3CHP"));

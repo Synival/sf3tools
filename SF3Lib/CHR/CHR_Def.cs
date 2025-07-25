@@ -8,6 +8,7 @@ using CommonLib.Extensions;
 using CommonLib.NamedValues;
 using CommonLib.Utils;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using SF3.Extensions;
 using SF3.Models.Files.CHR;
 using SF3.Sprites;
@@ -26,9 +27,31 @@ namespace SF3.CHR {
         /// </summary>
         /// <param name="json">CHR_Def in JSON format as a string.</param>
         /// <returns>A new CHR_Def if deserializing was successful, or 'null' if not.</returns>
-        public static CHR_Def FromJSON(string json) {
+        public static CHR_Def FromJSON(string json)
+            => FromJToken(JToken.Parse(json));
+
+        /// <summary>
+        /// Deserializes a JSON object of a CHR_Def.
+        /// </summary>
+        /// <param name="jToken">CHR_Def as a JObject.</param>
+        /// <returns>A new CHR_Def if deserializing was successful, or 'null' if not.</returns>
+        public static CHR_Def FromJToken(JToken jToken) {
+            if (jToken == null || jToken.Type != JTokenType.Object)
+                return null;
+
             try {
-                return JsonConvert.DeserializeObject<CHR_Def>(json);
+                var jObj = (JObject) jToken;
+                var newDef = new CHR_Def();
+
+                newDef.WriteFrameImagesBeforeTables = jObj.TryGetValue("WriteFrameImagesBeforeTables", out var wfi) ? ((bool?) wfi) : null;
+                newDef.MaxSize                      = jObj.TryGetValue("MaxSize", out var maxSize) ? ((int?) maxSize) : null;
+                newDef.JunkAfterFrameTables         = jObj.TryGetValue("JunkAfterFrameTables", out var jaft) ? ((byte[]) jaft) : null;
+
+                newDef.Sprites = jObj.TryGetValue("Sprites", out var sprites)
+                    ? sprites.Select(x => x.ToObject<SpriteDef>()).ToArray()
+                    : null;
+
+                return newDef;
             }
             catch {
                 return null;

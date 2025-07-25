@@ -4,6 +4,7 @@ using System.Linq;
 using CommonLib.Arrays;
 using CommonLib.NamedValues;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using SF3.Models.Files.CHP;
 using SF3.Types;
 
@@ -11,6 +12,41 @@ namespace SF3.CHR {
     public class CHP_Def {
         public int TotalSectors;
         public Dictionary<int, CHR_Def> CHRsBySector;
+
+        /// <summary>
+        /// Deserializes a JSON object of a CHP_Def.
+        /// </summary>
+        /// <param name="json">CHP_Def in JSON format as a string.</param>
+        /// <returns>A new CHP_Def if deserializing was successful, or 'null' if not.</returns>
+        public static CHP_Def FromJSON(string json)
+            => FromJToken(JToken.Parse(json));
+
+        /// <summary>
+        /// Deserializes a JSON object of a CHP_Def.
+        /// </summary>
+        /// <param name="jToken">CHP_Def as a JToken.</param>
+        /// <returns>A new CHP_Def if deserializing was successful, or 'null' if not.</returns>
+        public static CHP_Def FromJToken(JToken jToken) {
+            if (jToken == null || jToken.Type != JTokenType.Object)
+                return null;
+
+            try {
+                var jObj = (JObject) jToken;
+                var newDef = new CHP_Def();
+                newDef.TotalSectors = jObj.TryGetValue("TotalSectors", out var totalSectors) ? ((int?) totalSectors ?? 0) : 0;
+
+                if (jObj.TryGetValue("CHRsBySector", out var chrsBySectorOut) && chrsBySectorOut.Type == JTokenType.Object) {
+                    newDef.CHRsBySector = ((IDictionary<string, JToken>) ((JObject) chrsBySectorOut))
+                        .Where(x => int.TryParse(x.Key, out _))
+                        .ToDictionary(x => int.Parse(x.Key), x => CHR_Def.FromJToken(x.Value));
+                }
+
+                return newDef;
+            }
+            catch {
+                return null;
+            }
+        }
 
         /// <summary>
         /// Converts the CHP_Def to a CHP_File.
