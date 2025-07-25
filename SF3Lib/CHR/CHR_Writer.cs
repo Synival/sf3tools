@@ -138,8 +138,11 @@ namespace SF3.CHR {
             _frameImagePointers[imageId].Add(Stream.Position);
             _currentSpriteFrameKeys.Add(aniFrameKey);
 
+            // Get the image offset, if it's already been written.
+            var imageOffset = _frameImageOffsets.TryGetValue(imageId, out var offsetOut) ? offsetOut : 0;
+
             // Placeholder for image offset
-            Write(new byte[4]);
+            Write(imageOffset.ToByteArray());
         }
 
         /// <summary>
@@ -165,9 +168,17 @@ namespace SF3.CHR {
         /// if the image is intentionally duplicated, any identifying string unique to this CHR.</param>
         /// <param name="compressedImage">Byte representation of the image, already compressed.</param>
         public void WriteFrameImage(string imageId, byte[] compressedImage) {
-            AtPointers(_frameImagePointers[imageId].ToArray(), (offset) => {
-                Stream.Write(offset.ToByteArray(), 0, 4);
-            });
+            // Update existing pointers to this image.
+            if (_frameImagePointers.TryGetValue(imageId, out var offsets)) {
+                AtPointers(offsets.ToArray(), (offset) => {
+                    Stream.Write(offset.ToByteArray(), 0, 4);
+                });
+                _frameImagePointers.Remove(imageId);
+            }
+
+            // Remember the address of this image.
+            _frameImageOffsets.Add(imageId, (int) (Stream.Position - StreamStartPosition));
+
             Write(compressedImage);
         }
 
@@ -275,6 +286,7 @@ namespace SF3.CHR {
         private Dictionary<int, long> _animationFrameTablePointers = new Dictionary<int, long>();
         private Dictionary<int, List<AnimationFrameRef>> _animationFrameRefsBySpriteIndex = new Dictionary<int, List<AnimationFrameRef>>();
         private Dictionary<string, List<long>> _frameImagePointers = new Dictionary<string, List<long>>();
+        private Dictionary<string, int> _frameImageOffsets = new Dictionary<string, int>();
         private List<string> _currentSpriteFrameKeys = new List<string>();
     }
 }

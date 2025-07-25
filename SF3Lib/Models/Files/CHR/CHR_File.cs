@@ -54,11 +54,19 @@ namespace SF3.Models.Files.CHR {
             // Let's account for anomalies like that.
             byte[] junkAfterFrameTable = null;
 
+            var firstFrameTableOffset = (SpriteTable != null && SpriteTable.Length > 0)
+                ? (int) SpriteTable[0].Header.FrameTableOffset
+                : (int?) null;
+
             var firstTextureOffset = SpriteTable
                 .SelectMany(x => x.FrameTable)
                 .OrderBy(x => x.TextureOffset)
                 .Select(x => (int?) x.TextureOffset)
                 .FirstOrDefault();
+
+            var frameImagesAreBeforeTables = firstTextureOffset.HasValue && firstFrameTableOffset.HasValue && firstTextureOffset.Value < firstFrameTableOffset.Value;
+            if (frameImagesAreBeforeTables)
+                ;
 
             var lastFrameTablePosition = SpriteTable
                 .Select(x => x.FrameTable)
@@ -73,6 +81,7 @@ namespace SF3.Models.Files.CHR {
             }
 
             return new CHR_Def() {
+                WriteFrameImagesBeforeTables = frameImagesAreBeforeTables ? true : (bool?) null,
                 JunkAfterFrameTables = junkAfterFrameTable,
                 Sprites = SpriteTable.Select(x => x.ToCHR_SpriteDef(framesWithDuplicates)).ToArray()
             };
@@ -94,7 +103,9 @@ namespace SF3.Models.Files.CHR {
                 .Max(x => x)
                 + 0x04; // Terminating frame
 
-            var size = Math.Max(lastImageEndPos, lastFrameTableEndPos);
+            var size = (lastFrameTableEndPos >= lastImageEndPos)
+                ? lastFrameTableEndPos + 0x08 // Tons of extra padding in this case for some reason.
+                : lastImageEndPos;
             if (size % 0x04 != 0)
                 size += 0x04 - (size % 0x04);
 
