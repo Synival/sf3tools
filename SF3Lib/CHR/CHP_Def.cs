@@ -79,12 +79,13 @@ namespace SF3.CHR {
                 else if (padding < 0) {
                     // TODO: this is a serious error; how should we handle it?
                     outputStream.Position = offset;
+                    try { throw new InvalidDataException(); } catch { }
                 }
 
                 var bytesWritten = chr.ToCHR_File(outputStream);
                 if (chr.MaxSize.HasValue && bytesWritten > chr.MaxSize) {
                     // TODO: this is a serious error; how should we handle it?
-                    ;
+                    try { throw new InvalidDataException(); } catch { }
                 }
             }
 
