@@ -78,6 +78,29 @@ namespace SF3.Models.Files.CHR {
             };
         }
 
+        public int GetSize() {
+            if (SpriteTable == null || SpriteTable.Length == 0)
+                return 0x18 + 0x04; // Length of zero-sprite header plus EOF padding
+
+            var lastImageEndPos = SpriteTable
+                .SelectMany(x => x.FrameTable.Select(y => (int) y.TextureEndOffset))
+                .Concat(new int[] { 0 })
+                .Max(x => x)
+                + 0x04; // Extra padding
+
+            var lastFrameTableEndPos = (int) SpriteTable
+                .SelectMany(x => x.FrameTable.Select(y => y.Address + y.Size - (int) DataOffset))
+                .Concat(new int[] { 0 })
+                .Max(x => x)
+                + 0x04; // Terminating frame
+
+            var size = Math.Max(lastImageEndPos, lastFrameTableEndPos);
+            if (size % 0x04 != 0)
+                size += 0x04 - (size % 0x04);
+
+            return size;
+        }
+
         public int StartID { get; }
         public uint DataOffset { get; }
         public bool IsInCHP { get; }

@@ -16,6 +16,7 @@ using SF3.Utils;
 
 namespace SF3.CHR {
     public class CHR_Def {
+        public int? MaxSize;
         public byte[] JunkAfterFrameTables;
         public SpriteDef[] Sprites;
 
