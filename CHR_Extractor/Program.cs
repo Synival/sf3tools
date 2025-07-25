@@ -16,9 +16,9 @@ namespace CHR_Extractor {
         // v
         private static readonly Dictionary<ScenarioType, string> c_pathsIn = new() {
             { ScenarioType.Scenario1,   "D:/" },
-            { ScenarioType.Scenario2,   "E:/" },
-            { ScenarioType.Scenario3,   "F:/" },
-            { ScenarioType.PremiumDisk, "G:/" },
+            //{ ScenarioType.Scenario2,   "E:/" },
+            //{ ScenarioType.Scenario3,   "F:/" },
+            //{ ScenarioType.PremiumDisk, "G:/" },
         };
 
         private static readonly Dictionary<ScenarioType, string> c_scenarioPaths = new() {
@@ -117,20 +117,65 @@ namespace CHR_Extractor {
                                 ? (object) ((CHR_Def) chrChpDef).ToCHR_File(nameGetter, scenario)
                                 : (object) ((CHP_Def) chrChpDef).ToCHP_File(nameGetter, scenario, chpBuf);
 
-                            bool fileIsDifferent = false;
+                            // Make some very specific corrections to some S1 CHR's that have errors.
+                            if (isChr) {
+                                var data = ((CHR_File) deserializedFile).Data;
+                                var origDataLen = ((CHR_File) chrChpFile).Data.Length;
+                                if (data.Length == origDataLen || (filename == "XBTL127" && data.Length == origDataLen - 0x10)) {
+                                    void ChangeByte(int pos, byte from, byte to) {
+                                        if (data.GetByte(pos) == from)
+                                            data.SetByte(pos, to);
+                                    }
+
+                                    if (filename == "XB123MID") {
+                                        // Murasame's broken animation frames need to be explicitly set
+                                        ChangeByte(0x219, 0x00, 0x28);
+                                        ChangeByte(0x229, 0x00, 0x28);
+                                    }
+                                    else if (filename == "XBTL127") {
+                                        // Padding in this file is junk 0x0009 for some reason, and there are an extra 16 bytes at the end.
+                                        data.Data.SetDataAtTo(0x38F90, 0, new byte[0x10]);
+                                        var paddingToChange = new int[] {
+                                            0x02E9B, 0x06CAB, 0x1F7CB, 0x2340F, 0x2B253,
+                                            0x2E5A7, 0x34ED3, 0x38F8B, 0x38F8D, 0x38F8F
+                                        };
+                                        foreach (var addr in paddingToChange)
+                                            ChangeByte(addr, 0x00, 0x09);
+                                    }
+                                    else if (filename == "XOP102") {
+                                        // "Fix" some animation frames that didn't locate their duplicates.
+                                        ChangeByte(0x245, 0x14, 0x20);
+                                        ChangeByte(0x60D, 0x00, 0x2C);
+                                    }
+                                    else if (filename == "XSARA5") {
+                                        // "Fix" some animation frames that didn't locate their duplicates.
+                                        ChangeByte(0x485, 0x30, 0x50);
+                                        ChangeByte(0x489, 0x34, 0x54);
+                                        ChangeByte(0x48D, 0x30, 0x50);
+                                        ChangeByte(0x499, 0x38, 0x58);
+                                        ChangeByte(0x4A1, 0x3C, 0x5C);
+                                        ChangeByte(0x4A9, 0x38, 0x58);
+                                        ChangeByte(0x4B1, 0x3C, 0x5C);
+                                    }
+                                }
+                            }
 
                             var newData = isChr
                                 ? ((CHR_File) deserializedFile).Data.Data.GetDataCopyOrReference()
                                 : ((CHP_File) deserializedFile).Data.Data.GetDataCopyOrReference();
-
                             var origData = isChr
                                 ? ((CHR_File) chrChpFile).Data.Data.GetDataCopyOrReference()
                                 : ((CHP_File) chrChpFile).Data.Data.GetDataCopyOrReference();
+
+                            // An analysis of what's different from vanilla would be super helpful!
+                            // Report changes in file size.
+                            bool fileIsDifferent = false;
                             if (newData.Length != origData.Length) {
                                 Console.WriteLine($"    Size changed: 0x{origData.Length:X5} => 0x{newData.Length:X5}");
                                 fileIsDifferent = true;
                             }
 
+                            // Report changes in actual byte data.
                             var len = Math.Min(origData.Length, newData.Length);
                             int bytesDifferent = 0;
                             for (int i = 0; i < len; i++) {
@@ -145,6 +190,7 @@ namespace CHR_Extractor {
                                 }
                             }
 
+                            // Report differences in specific tables that may have actual consequence.
                             totalFileCount++;
                             if (fileIsDifferent) {
                                 var origChrs = isChr
@@ -205,6 +251,7 @@ namespace CHR_Extractor {
                                 }
                             }
 
+                            // If a difference was once, dump it to a "Rebuilt_CHRs" folder.
                             if (fileIsDifferent) {
                                 var pathOut = Path.Combine(c_pathOut, "Rebuilt_CHRs", c_scenarioPaths[scenario]);
                                 Directory.CreateDirectory(pathOut);
