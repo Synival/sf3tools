@@ -175,15 +175,17 @@ namespace SF3.CHR {
         private void WriteCHR_Frames(CHR_Writer chrWriter) {
             var spritesheetImageDict = new Dictionary<string, Bitmap>();
             var imagesRefsByKey = new Dictionary<string, SpritesheetImageRef>();
+            var framesToWriteBySpriteIndex = new Dictionary<int, List<(string FrameKey, string AniFrameKey)>>();
 
             // CHR files must have had their compressed frames written by sprite, because there's a forced alignment of 4
             // after every sprite's groups of frames. We don't bother to do that -- different sprites can share compressed
             // images -- but most cases are fixed if we record which image is the final image for each sprite.
             var finalSpriteFrames = new HashSet<string>();
 
-            // Write all frame tables.
+            // Build all frame tables and the images to be written.
             foreach (var (sprite, i) in Sprites.Select((x, i) => (CHR: x, Index: i))) {
                 string lastFrameKey = null;
+                framesToWriteBySpriteIndex.Add(i, new List<(string, string)>());
 
                 foreach (var spriteFrames in sprite.SpriteFrames ?? new SpriteFramesDef[0]) {
                     var spriteName = spriteFrames.SpriteName ?? sprite.SpriteName;
@@ -232,16 +234,22 @@ namespace SF3.CHR {
                                 });
                             }
 
-                            chrWriter.WriteFrameTableFrame(i, frameKey, aniFrameKey);
+                            framesToWriteBySpriteIndex[i].Add((frameKey, aniFrameKey));
                             lastFrameKey = frameKey;
                         }
                     }
                 }
-                chrWriter.WriteFrameTableTerminator(i);
 
                 // Remember what the last image was in this sprite.
                 if (lastFrameKey != null)
                     finalSpriteFrames.Add(lastFrameKey);
+            }
+
+            // Write frame tables.
+            for (int i = 0; i < Sprites.Length; i++) {
+                foreach (var frame in framesToWriteBySpriteIndex[i])
+                    chrWriter.WriteFrameTableFrame(i, frame.FrameKey, frame.AniFrameKey);
+                chrWriter.WriteFrameTableTerminator(i);
             }
 
             // XBTL127.CHR has junk data after the frame table. Write it here.
