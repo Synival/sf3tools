@@ -1,4 +1,5 @@
-﻿using CommonLib.Attributes;
+﻿using System.Linq;
+using CommonLib.Attributes;
 using SF3.ByteData;
 using SF3.Types;
 
@@ -35,17 +36,23 @@ namespace SF3.Models.Structs.CHR {
         }
 
         public bool IsValid() {
-            return SpriteID != 0xFFFF &&
-                   SpriteID  < 0x0800 &&
-                   Width  < 0x0200 &&
-                   Height < 0x0200 &&
-                   Width  >      0 &&
-                   Height >      0 &&
-                   FrameTableOffset < 0x80000 &&
-                   AnimationTableOffset < 0x80000 &&
-                   Scale > 0x00500 &&
-                   Scale < 0x30000 &&
-                   Directions > 0;
+            return (
+                SpriteID == 0xFFFF &&
+                Enumerable.SequenceEqual(new byte[Size - 4], Data.GetDataCopyAt(Address + 4, Size - 4))
+            )
+            || (
+                SpriteID != 0xFFFF &&
+                SpriteID  < 0x0800 &&
+                Width  < 0x0200 &&
+                Height < 0x0200 &&
+                Width  >      0 &&
+                Height >      0 &&
+                FrameTableOffset < 0x80000 &&
+                AnimationTableOffset < 0x80000 &&
+                Scale > 0x00500 &&
+                Scale < 0x30000 &&
+                Directions > 0
+            );
         }
 
         [TableViewModelColumn(displayOrder: 0, displayFormat: "X2")]
