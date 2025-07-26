@@ -69,8 +69,8 @@ namespace SF3.Sprites {
                 newDef.Name = jObj.TryGetValue("Name", out var name) ? ((string) name) : null;
 
                 if (jObj.TryGetValue("Spritesheets", out var spritesheets) && spritesheets.Type == JTokenType.Object) {
-                    newDef.Spritesheets = ((IDictionary<string, JToken>) (JObject) spritesheets)
-                        .ToDictionary(x => x.Key, x => x.Value.ToObject<SpritesheetDef>());
+                    newDef.Spritesheets = ((IDictionary<string, JToken>) spritesheets)
+                        .ToDictionary(x => x.Key, x => SpritesheetDef.FromJToken(x.Value));
                 }
 
                 return newDef;
