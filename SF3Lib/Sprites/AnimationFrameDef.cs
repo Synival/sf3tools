@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
+using Newtonsoft.Json.Linq;
 using SF3.Types;
 using SF3.Utils;
 
@@ -23,6 +24,48 @@ namespace SF3.Sprites {
             FrameHashes = (command == SpriteAnimationFrameCommandType.Frame) ? new string[0] : null;
             Command     = command;
             Parameter   = parameter;
+        }
+
+        /// <summary>
+        /// Deserializes a JSON object of a AnimationFrameDef.
+        /// </summary>
+        /// <param name="json">AnimationFrameDef in JSON format as a string.</param>
+        /// <returns>A new AnimationFrameDef if deserializing was successful, or 'null' if not.</returns>
+        public static AnimationFrameDef FromJSON(string json)
+            => FromJToken(JToken.Parse(json));
+
+        /// <summary>
+        /// Deserializes a JSON object of a AnimationFrameDef.
+        /// </summary>
+        /// <param name="jToken">AnimationFrameDef as a JToken.</param>
+        /// <returns>A new AnimationFrameDef if deserializing was successful, or 'null' if not.</returns>
+        public static AnimationFrameDef FromJToken(JToken jToken) {
+            if (jToken == null || jToken.Type != JTokenType.Object)
+                return null;
+
+            try {
+                var jObj = (JObject) jToken;
+                var newDef = new AnimationFrameDef();
+
+                newDef.FrameGroup = jObj.TryGetValue("FrameGroup", out var frameGroup) ? ((string) frameGroup) : null;
+
+                if (jObj.TryGetValue("Frames", out var frames) && frames.Type == JTokenType.Object) {
+                    newDef.Frames = ((IDictionary<string, JToken>) frames)
+                        .ToDictionary(x => x.Key, x => AnimationFrameDirectionDef.FromJToken(x.Value));
+                }
+
+                newDef.FrameHashes = jObj.TryGetValue("FrameHashes", out var frameHashes)
+                    ? frameHashes.Select(x => (string) x).ToArray()
+                    : null;
+
+                newDef.Command   = jObj.TryGetValue("Command",   out var command)   ? (command.ToObject<SpriteAnimationFrameCommandType>()) : SpriteAnimationFrameCommandType.Frame;
+                newDef.Parameter = jObj.TryGetValue("Parameter", out var parameter) ? ((int) parameter) : 0;
+
+                return newDef;
+            }
+            catch {
+                return null;
+            }
         }
 
         public bool ConvertFrameHashes(Dictionary<string, FrameGroupDef> frameGroups) {

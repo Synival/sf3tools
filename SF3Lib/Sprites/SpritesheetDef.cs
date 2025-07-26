@@ -35,13 +35,13 @@ namespace SF3.Sprites {
 
                 if (jObj.TryGetValue("FrameGroups", out var frameGroups) && frameGroups.Type == JTokenType.Object) {
                     newDef.FrameGroups = ((IDictionary<string, JToken>) frameGroups)
-                        .ToDictionary(x => x.Key, x => x.Value.ToObject<FrameGroupDef>());
+                        .ToDictionary(x => x.Key, x => FrameGroupDef.FromJToken(x.Value));
                 }
 
                 if (jObj.TryGetValue("AnimationByDirections", out var animationByDirections) && animationByDirections.Type == JTokenType.Object) {
                     newDef.AnimationByDirections = ((IDictionary<string, JToken>) animationByDirections)
                         .Where(x => int.TryParse(x.Key, out var _))
-                        .ToDictionary(x => int.Parse(x.Key), x => x.Value.ToObject<AnimationGroupDef>());
+                        .ToDictionary(x => int.Parse(x.Key), x => AnimationGroupDef.FromJToken(x.Value));
                 }
 
                 return newDef;
