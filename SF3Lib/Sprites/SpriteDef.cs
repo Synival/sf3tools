@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace SF3.Sprites {
     public class SpriteDef {
@@ -49,9 +50,30 @@ namespace SF3.Sprites {
         /// </summary>
         /// <param name="json">SpriteDef in JSON format as a string.</param>
         /// <returns>A new SpriteDef if deserializing was successful, or 'null' if not.</returns>
-        public static SpriteDef FromJSON(string json) {
+        public static SpriteDef FromJSON(string json)
+            => FromJToken(JToken.Parse(json));
+
+        /// <summary>
+        /// Deserializes a JSON object of a SpriteDef.
+        /// </summary>
+        /// <param name="jToken">SpriteDef as a JToken.</param>
+        /// <returns>A new SpriteDef if deserializing was successful, or 'null' if not.</returns>
+        public static SpriteDef FromJToken(JToken jToken) {
+            if (jToken == null || jToken.Type != JTokenType.Object)
+                return null;
+
             try {
-                return JsonConvert.DeserializeObject<SpriteDef>(json);
+                var jObj = (JObject) jToken;
+                var newDef = new SpriteDef();
+
+                newDef.Name = jObj.TryGetValue("Name", out var name) ? ((string) name) : null;
+
+                if (jObj.TryGetValue("Spritesheets", out var spritesheets) && spritesheets.Type == JTokenType.Object) {
+                    newDef.Spritesheets = ((IDictionary<string, JToken>) (JObject) spritesheets)
+                        .ToDictionary(x => x.Key, x => x.Value.ToObject<SpritesheetDef>());
+                }
+
+                return newDef;
             }
             catch {
                 return null;
