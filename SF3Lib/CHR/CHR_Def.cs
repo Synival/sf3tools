@@ -48,7 +48,7 @@ namespace SF3.CHR {
                 newDef.JunkAfterFrameTables         = jObj.TryGetValue("JunkAfterFrameTables", out var jaft) ? ((byte[]) jaft) : null;
 
                 newDef.Sprites = jObj.TryGetValue("Sprites", out var sprites)
-                    ? sprites.Select(x => x.ToObject<SpriteDef>()).ToArray()
+                    ? sprites.Select(x => SpriteDef.FromJToken(x)).ToArray()
                     : null;
 
                 return newDef;
