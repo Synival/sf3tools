@@ -3,12 +3,6 @@ using Newtonsoft.Json.Linq;
 
 namespace SF3.CHR {
     public class SpriteAnimationsDef {
-        public override string ToString()
-            => (SpriteName != null ? SpriteName + ": " : "") + ((AnimationGroups != null) ? string.Join(", ", AnimationGroups.Select(x => "{" + x.ToString() + "}")) : "[]");
-
-        public string SpriteName;
-        public AnimationGroupDef[] AnimationGroups;
-
         /// <summary>
         /// Deserializes a JSON object of a SpriteAnimationsDef.
         /// </summary>
@@ -42,5 +36,11 @@ namespace SF3.CHR {
                 return null;
             }
         }
+
+        public override string ToString()
+            => (SpriteName != null ? SpriteName + ": " : "") + ((AnimationGroups != null) ? string.Join(", ", AnimationGroups.Select(x => "{" + x.ToString() + "}")) : "[]");
+
+        public string SpriteName;
+        public AnimationGroupDef[] AnimationGroups;
     }
 }

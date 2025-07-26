@@ -10,9 +10,6 @@ using SF3.Types;
 
 namespace SF3.CHR {
     public class CHP_Def {
-        public int TotalSectors;
-        public Dictionary<int, CHR_Def> CHRsBySector;
-
         /// <summary>
         /// Deserializes a JSON object of a CHP_Def.
         /// </summary>
@@ -147,5 +144,8 @@ namespace SF3.CHR {
             };
             return JsonConvert.SerializeObject(this, settings);
         }
+
+        public int TotalSectors;
+        public Dictionary<int, CHR_Def> CHRsBySector;
     }
 }

@@ -3,14 +3,6 @@ using Newtonsoft.Json.Linq;
 
 namespace SF3.CHR {
     public class AnimationGroupDef {
-        public override string ToString()
-            => (Directions.HasValue ? Directions.ToString() + ": " : "") + ((Animations != null) ? string.Join(", ", Animations) : "[]");
-
-        public int? Directions;
-        public int? Width;
-        public int? Height;
-        public string[] Animations;
-
         /// <summary>
         /// Deserializes a JSON object of a AnimationGroupDef.
         /// </summary>
@@ -46,5 +38,13 @@ namespace SF3.CHR {
                 return null;
             }
         }
+
+        public override string ToString()
+            => (Directions.HasValue ? Directions.ToString() + ": " : "") + ((Animations != null) ? string.Join(", ", Animations) : "[]");
+
+        public int? Directions;
+        public int? Width;
+        public int? Height;
+        public string[] Animations;
     }
 }

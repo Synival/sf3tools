@@ -3,14 +3,6 @@ using Newtonsoft.Json.Linq;
 
 namespace SF3.CHR {
     public class FrameGroupDef {
-        public override string ToString()
-            => (Name != null ? Name + ": " : "") + ((Frames != null) ? string.Join(", ", Frames.Select(x => "{" + x.ToString() + "}")) : "[]");
-
-        public string Name;
-        public int? Width;
-        public int? Height;
-        public FrameDef[] Frames;
-
         /// <summary>
         /// Deserializes a JSON object of a FrameGroupDef.
         /// </summary>
@@ -46,5 +38,13 @@ namespace SF3.CHR {
                 return null;
             }
         }
+
+        public override string ToString()
+            => (Name != null ? Name + ": " : "") + ((Frames != null) ? string.Join(", ", Frames.Select(x => "{" + x.ToString() + "}")) : "[]");
+
+        public string Name;
+        public int? Width;
+        public int? Height;
+        public FrameDef[] Frames;
     }
 }

@@ -3,22 +3,6 @@ using Newtonsoft.Json.Linq;
 
 namespace SF3.CHR {
     public class SpriteDef {
-        public string SpriteName;
-
-        public int SpriteID;
-        public int Width;
-        public int Height;
-        public int Directions;
-        public int? PromotionLevel;
-
-        public int VerticalOffset;
-        public int Unknown0x08;
-        public int CollisionSize;
-        public float? Scale;
-
-        public SpriteFramesDef[] SpriteFrames;
-        public SpriteAnimationsDef[] SpriteAnimations;
-
         /// <summary>
         /// Deserializes a JSON object of a SpriteDef.
         /// </summary>
@@ -67,5 +51,21 @@ namespace SF3.CHR {
                 return null;
             }
         }
+
+        public string SpriteName;
+
+        public int SpriteID;
+        public int Width;
+        public int Height;
+        public int Directions;
+        public int? PromotionLevel;
+
+        public int VerticalOffset;
+        public int Unknown0x08;
+        public int CollisionSize;
+        public float? Scale;
+
+        public SpriteFramesDef[] SpriteFrames;
+        public SpriteAnimationsDef[] SpriteAnimations;
     }
 }

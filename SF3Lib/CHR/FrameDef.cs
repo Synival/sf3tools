@@ -5,14 +5,6 @@ using SF3.Types;
 
 namespace SF3.CHR {
     public class FrameDef {
-        public override string ToString()
-            => Direction.ToString() + (DuplicateKey != null ? $", {DuplicateKey}" : "");
-
-        [JsonConverter(typeof(StringEnumConverter))]
-        public SpriteFrameDirection Direction;
-
-        public string DuplicateKey;
-
         /// <summary>
         /// Deserializes a JSON object of a FrameDef.
         /// </summary>
@@ -43,5 +35,13 @@ namespace SF3.CHR {
                 return null;
             }
         }
+
+        public override string ToString()
+            => Direction.ToString() + (DuplicateKey != null ? $", {DuplicateKey}" : "");
+
+        [JsonConverter(typeof(StringEnumConverter))]
+        public SpriteFrameDirection Direction;
+
+        public string DuplicateKey;
     }
 }

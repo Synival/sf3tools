@@ -17,11 +17,6 @@ using SF3.Utils;
 
 namespace SF3.CHR {
     public class CHR_Def {
-        public bool? WriteFrameImagesBeforeTables;
-        public int? MaxSize;
-        public byte[] JunkAfterFrameTables;
-        public SpriteDef[] Sprites;
-
         /// <summary>
         /// Deserializes a JSON object of a CHR_Def.
         /// </summary>
@@ -336,5 +331,10 @@ namespace SF3.CHR {
                 WriteFrameImages();
             }
         }
+
+        public bool? WriteFrameImagesBeforeTables;
+        public int? MaxSize;
+        public byte[] JunkAfterFrameTables;
+        public SpriteDef[] Sprites;
     }
 }
