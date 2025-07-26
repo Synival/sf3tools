@@ -54,11 +54,11 @@ namespace SF3.CHR {
                 newDef.Scale          = jObj.TryGetValue("Scale", out var scale) ? ((float?) scale) : 0;
 
                 newDef.SpriteFrames = jObj.TryGetValue("SpriteFrames", out var spriteFrames)
-                    ? spriteFrames.Select(x => x.ToObject<SpriteFramesDef>()).ToArray()
+                    ? spriteFrames.Select(x => SpriteFramesDef.FromJToken(x)).ToArray()
                     : null;
 
                 newDef.SpriteAnimations = jObj.TryGetValue("SpriteAnimations", out var spriteAnimations)
-                    ? spriteAnimations.Select(x => x.ToObject<SpriteAnimationsDef>()).ToArray()
+                    ? spriteAnimations.Select(x => SpriteAnimationsDef.FromJToken(x)).ToArray()
                     : null;
 
                 return newDef;
