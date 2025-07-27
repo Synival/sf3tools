@@ -34,6 +34,10 @@ namespace SF3.CHR {
                 return false;
 
             switch (jToken.Type) {
+                case JTokenType.String:
+                    Direction = jToken.ToObject<SpriteFrameDirection>();
+                    return true;
+
                 case JTokenType.Object:
                     try {
                         var jObj = (JObject) jToken;
