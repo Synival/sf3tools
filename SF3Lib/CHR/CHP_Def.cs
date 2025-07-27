@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using CommonLib;
 using CommonLib.Arrays;
 using CommonLib.NamedValues;
 using Newtonsoft.Json;
@@ -9,14 +10,16 @@ using SF3.Models.Files.CHP;
 using SF3.Types;
 
 namespace SF3.CHR {
-    public class CHP_Def {
+    public class CHP_Def : IJsonResource {
         /// <summary>
         /// Deserializes a JSON object of a CHP_Def.
         /// </summary>
         /// <param name="json">CHP_Def in JSON format as a string.</param>
         /// <returns>A new CHP_Def if deserializing was successful, or 'null' if not.</returns>
-        public static CHP_Def FromJSON(string json)
-            => FromJToken(JToken.Parse(json));
+        public static CHP_Def FromJSON(string json) {
+            var chpDef = new CHP_Def();
+            return chpDef.AssignFromJSON_String(json) ? chpDef : null;
+        }
 
         /// <summary>
         /// Deserializes a JSON object of a CHP_Def.
@@ -24,25 +27,8 @@ namespace SF3.CHR {
         /// <param name="jToken">CHP_Def as a JToken.</param>
         /// <returns>A new CHP_Def if deserializing was successful, or 'null' if not.</returns>
         public static CHP_Def FromJToken(JToken jToken) {
-            if (jToken == null || jToken.Type != JTokenType.Object)
-                return null;
-
-            try {
-                var jObj = (JObject) jToken;
-                var newDef = new CHP_Def();
-                newDef.TotalSectors = jObj.TryGetValue("TotalSectors", out var totalSectors) ? ((int?) totalSectors ?? 0) : 0;
-
-                if (jObj.TryGetValue("CHRsBySector", out var chrsBySectorOut) && chrsBySectorOut.Type == JTokenType.Object) {
-                    newDef.CHRsBySector = ((IDictionary<string, JToken>) ((JObject) chrsBySectorOut))
-                        .Where(x => int.TryParse(x.Key, out _))
-                        .ToDictionary(x => int.Parse(x.Key), x => CHR_Def.FromJToken(x.Value));
-                }
-
-                return newDef;
-            }
-            catch {
-                return null;
-            }
+            var chpDef = new CHP_Def();
+            return chpDef.AssignFromJToken(jToken) ? chpDef : null;
         }
 
         /// <summary>
@@ -133,16 +119,38 @@ namespace SF3.CHR {
             return (int) (outputStream.Position - startPosition);
         }
 
-        /// <summary>
-        /// Converts the CHP_Def to a JSON object string.
-        /// </summary>
-        /// <returns>A string in JSON format.</returns>
-        public string ToJSON_String() {
-            var settings = new JsonSerializerSettings() {
-                Formatting = Formatting.Indented,
-                NullValueHandling = NullValueHandling.Ignore,
+        public bool AssignFromJSON_String(string json)
+            => AssignFromJToken(JToken.Parse(json));
+
+        public bool AssignFromJToken(JToken jToken) {
+            if (jToken == null || jToken.Type != JTokenType.Object)
+                return false;
+
+            try {
+                var jObj = (JObject) jToken;
+                TotalSectors = jObj.TryGetValue("TotalSectors", out var totalSectors) ? ((int?) totalSectors ?? 0) : 0;
+
+                if (jObj.TryGetValue("CHRsBySector", out var chrsBySectorOut) && chrsBySectorOut.Type == JTokenType.Object) {
+                    CHRsBySector = ((IDictionary<string, JToken>) ((JObject) chrsBySectorOut))
+                        .Where(x => int.TryParse(x.Key, out _))
+                        .ToDictionary(x => int.Parse(x.Key), x => CHR_Def.FromJToken(x.Value));
+                }
+
+                return true;
+            }
+            catch {
+                return false;
+            }
+        }
+
+        public string ToJSON_String()
+            => ToJToken().ToString(Formatting.Indented);
+
+        public JToken ToJToken() {
+            return new JObject {
+                { "TotalSectors", new JValue(TotalSectors) },
+                { "CHRsBySector", JObject.FromObject(CHRsBySector, new JsonSerializer { NullValueHandling = NullValueHandling.Ignore }) },
             };
-            return JsonConvert.SerializeObject(this, settings);
         }
 
         public int TotalSectors;
