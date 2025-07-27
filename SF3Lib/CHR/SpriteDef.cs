@@ -37,26 +37,26 @@ namespace SF3.CHR {
             try {
                 var jObj = (JObject) jToken;
 
-                SpriteName     = jObj.TryGetValue("SpriteName", out var spriteName) ? ((string) spriteName) : null;
+                SpriteName     = jObj.TryGetValue("Name",           out var spriteName)     ? ((string) spriteName)  : null;
                 Width          = jObj.TryGetValue("Width",          out var width)          ? ((int) width)          : 0;
                 Height         = jObj.TryGetValue("Height",         out var height)         ? ((int) height)         : 0;
                 Directions     = jObj.TryGetValue("Directions",     out var directions)     ? ((int) directions)     : 0;
                 PromotionLevel = jObj.TryGetValue("PromotionLevel", out var promotionLevel) ? ((int) promotionLevel) : 0;
 
                 var spriteDef = SpriteUtils.GetSpriteDef(SpriteName);
-                var spritesheet  = (spriteDef?.Spritesheets?.TryGetValue(SpritesheetDef.DimensionsToKey(Width, Height), out var ssOut) == true) ? ssOut : null;
+                var spritesheet = (spriteDef?.Spritesheets?.TryGetValue(SpritesheetDef.DimensionsToKey(Width, Height), out var ssOut) == true) ? ssOut : null;
 
-                SpriteID       = jObj.TryGetValue("SpriteID",       out var spriteId)       ? ((int) spriteId)       : spritesheet?.SpriteID ?? 0;
+                SpriteID       = jObj.TryGetValue("SpriteID",       out var spriteId)       ? ((int) spriteId)       : spritesheet?.SpriteID       ?? 0;
                 VerticalOffset = jObj.TryGetValue("VerticalOffset", out var verticalOffset) ? ((int) verticalOffset) : spritesheet?.VerticalOffset ?? 0;
-                Unknown0x08    = jObj.TryGetValue("Unknown0x08",    out var unknown0x08)    ? ((int) unknown0x08)    : spritesheet?.Unknown0x08 ?? 0;
-                CollisionSize  = jObj.TryGetValue("CollisionSize",  out var collisionSize)  ? ((int) collisionSize)  : spritesheet?.CollisionSize ?? 0;
-                Scale          = jObj.TryGetValue("Scale",          out var scale)          ? ((float) scale)        : spritesheet?.Scale ?? 0;
+                Unknown0x08    = jObj.TryGetValue("Unknown0x08",    out var unknown0x08)    ? ((int) unknown0x08)    : spritesheet?.Unknown0x08    ?? 0;
+                CollisionSize  = jObj.TryGetValue("CollisionSize",  out var collisionSize)  ? ((int) collisionSize)  : spritesheet?.CollisionSize  ?? 0;
+                Scale          = jObj.TryGetValue("Scale",          out var scale)          ? ((float) scale)        : spritesheet?.Scale          ?? 0;
 
-                SpriteFrames = jObj.TryGetValue("SpriteFrames", out var spriteFrames)
+                SpriteFrames = jObj.TryGetValue("Frames", out var spriteFrames)
                     ? spriteFrames.Select(x => SpriteFramesDef.FromJToken(x)).ToArray()
                     : null;
 
-                SpriteAnimations = jObj.TryGetValue("SpriteAnimations", out var spriteAnimations)
+                SpriteAnimations = jObj.TryGetValue("Animations", out var spriteAnimations)
                     ? spriteAnimations.Select(x => SpriteAnimationsDef.FromJToken(x)).ToArray()
                     : null;
 
@@ -74,31 +74,31 @@ namespace SF3.CHR {
             var jObj = new JObject();
             var jsonSettings = new JsonSerializer { NullValueHandling = NullValueHandling.Ignore };
 
-            jObj.Add("SpriteName",     new JValue(SpriteName));
-            jObj.Add("Width",          new JValue(Width));
-            jObj.Add("Height",         new JValue(Height));
-            jObj.Add("Directions",     new JValue(Directions));
+            jObj.Add("Name",       new JValue(SpriteName));
+            jObj.Add("Width",      new JValue(Width));
+            jObj.Add("Height",     new JValue(Height));
+            jObj.Add("Directions", new JValue(Directions));
             if (PromotionLevel != 0)
                 jObj.Add("PromotionLevel", new JValue(PromotionLevel));
 
             var spriteDef = SpriteUtils.GetSpriteDef(SpriteName);
-            var spritesheet  = (spriteDef?.Spritesheets?.TryGetValue(SpritesheetDef.DimensionsToKey(Width, Height), out var ssOut) == true) ? ssOut : null;
+            var spritesheet = (spriteDef?.Spritesheets?.TryGetValue(SpritesheetDef.DimensionsToKey(Width, Height), out var ssOut) == true) ? ssOut : null;
 
             if (SpriteID != spritesheet?.SpriteID)
                 jObj.Add("SpriteID", new JValue(SpriteID));
             if (VerticalOffset != spritesheet?.VerticalOffset)
                 jObj.Add("VerticalOffset", new JValue(VerticalOffset));
             if (Unknown0x08 != spritesheet?.Unknown0x08)
-                jObj.Add("Unknown0x08",    new JValue(Unknown0x08));
+                jObj.Add("Unknown0x08", new JValue(Unknown0x08));
             if (CollisionSize != spritesheet?.CollisionSize)
-                jObj.Add("CollisionSize",  new JValue(CollisionSize));
+                jObj.Add("CollisionSize", new JValue(CollisionSize));
             if (!(Scale >= spritesheet?.Scale - 0.001f && Scale <= spritesheet?.Scale + 0.001f))
                 jObj.Add("Scale", new JValue(Scale));
 
             if (SpriteFrames != null)
-                jObj.Add("SpriteFrames", JToken.FromObject(SpriteFrames, jsonSettings));
+                jObj.Add("Frames", JToken.FromObject(SpriteFrames.Select(x => x.ToJToken()).ToArray(), jsonSettings));
             if (SpriteAnimations != null)
-                jObj.Add("SpriteAnimations", JToken.FromObject(SpriteAnimations, jsonSettings));
+                jObj.Add("Animations", JToken.FromObject(SpriteAnimations, jsonSettings));
 
             return jObj;
         }
