@@ -64,7 +64,7 @@ namespace SF3.CHR {
             if (Height.HasValue)
                 jObj.Add("Height", new JValue(Height.Value));
             if (Frames != null)
-                jObj.Add("Frames", JToken.FromObject(Frames, jsonSettings));
+                jObj.Add("Frames", JToken.FromObject(Frames.Select(x => x.ToJToken()).ToArray(), jsonSettings));
 
             return jObj;
         }
