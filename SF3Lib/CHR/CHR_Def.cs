@@ -77,7 +77,7 @@ namespace SF3.CHR {
             if (JunkAfterFrameTables != null)
                 jObj.Add("JunkAfterFrameTables", JToken.FromObject(JunkAfterFrameTables, jsonSettings));
             if (Sprites != null)
-                jObj.Add("Sprites", JArray.FromObject(Sprites, jsonSettings));
+                jObj.Add("Sprites", JArray.FromObject(Sprites.Select(x => x.ToJToken()).ToArray(), jsonSettings));
 
             return jObj;
         }
