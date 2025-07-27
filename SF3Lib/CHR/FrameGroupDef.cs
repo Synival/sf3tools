@@ -1,15 +1,19 @@
 ﻿using System.Linq;
+using CommonLib;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
 namespace SF3.CHR {
-    public class FrameGroupDef {
+    public class FrameGroupDef : IJsonResource {
         /// <summary>
         /// Deserializes a JSON object of a FrameGroupDef.
         /// </summary>
         /// <param name="json">FrameGroupDef in JSON format as a string.</param>
         /// <returns>A new FrameGroupDef if deserializing was successful, or 'null' if not.</returns>
-        public static FrameGroupDef FromJSON(string json)
-            => FromJToken(JToken.Parse(json));
+        public static FrameGroupDef FromJSON(string json) {
+            var frameGroupDef = new FrameGroupDef();
+            return frameGroupDef.AssignFromJSON_String(json) ? frameGroupDef : null;
+        }
 
         /// <summary>
         /// Deserializes a JSON object of a FrameGroupDef.
@@ -17,26 +21,52 @@ namespace SF3.CHR {
         /// <param name="jToken">FrameGroupDef as a JToken.</param>
         /// <returns>A new FrameGroupDef if deserializing was successful, or 'null' if not.</returns>
         public static FrameGroupDef FromJToken(JToken jToken) {
+            var frameGroupDef = new FrameGroupDef();
+            return frameGroupDef.AssignFromJToken(jToken) ? frameGroupDef : null;
+        }
+
+        public bool AssignFromJSON_String(string json)
+            => AssignFromJToken(JToken.Parse(json));
+
+        public bool AssignFromJToken(JToken jToken) {
             if (jToken == null || jToken.Type != JTokenType.Object)
-                return null;
+                return false;
 
             try {
                 var jObj = (JObject) jToken;
-                var newDef = new FrameGroupDef();
 
-                newDef.Name   = jObj.TryGetValue("Name",   out var name)   ? ((string) name) : null;
-                newDef.Width  = jObj.TryGetValue("Width",  out var width)  ? ((int?) width)  : null;
-                newDef.Height = jObj.TryGetValue("Height", out var height) ? ((int?) height) : null;
+                Name   = jObj.TryGetValue("Name",   out var name)   ? ((string) name) : null;
+                Width  = jObj.TryGetValue("Width",  out var width)  ? ((int?) width)  : null;
+                Height = jObj.TryGetValue("Height", out var height) ? ((int?) height) : null;
 
-                newDef.Frames = jObj.TryGetValue("Frames", out var frames)
+                Frames = jObj.TryGetValue("Frames", out var frames)
                     ? frames.Select(x => FrameDef.FromJToken(x)).ToArray()
                     : null;
 
-                return newDef;
+                return true;
             }
             catch {
-                return null;
+                return false;
             }
+        }
+
+        public string ToJSON_String()
+            => ToJToken().ToString(Formatting.Indented);
+
+        public JToken ToJToken() {
+            var jObj = new JObject();
+            var jsonSettings = new JsonSerializer { NullValueHandling = NullValueHandling.Ignore };
+
+            if (Name != null)
+                jObj.Add("Name", new JValue(Name));
+            if (Width.HasValue)
+                jObj.Add("Width", new JValue(Width.Value));
+            if (Height.HasValue)
+                jObj.Add("Height", new JValue(Height.Value));
+            if (Frames != null)
+                jObj.Add("Frames", JToken.FromObject(Frames, jsonSettings));
+
+            return jObj;
         }
 
         public override string ToString()

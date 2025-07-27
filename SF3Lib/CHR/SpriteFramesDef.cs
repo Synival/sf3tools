@@ -57,7 +57,7 @@ namespace SF3.CHR {
 
             jObj.Add("SpriteName", new JValue(SpriteName));
             if (FrameGroups != null)
-                jObj.Add("FrameGroups", JToken.FromObject(FrameGroups, jsonSettings));
+                jObj.Add("FrameGroups", JToken.FromObject(FrameGroups.Select(x => x.ToJToken()), jsonSettings));
 
             return jObj;
         }
