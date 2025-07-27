@@ -149,7 +149,7 @@ namespace SF3.CHR {
         public JToken ToJToken() {
             return new JObject {
                 { "TotalSectors", new JValue(TotalSectors) },
-                { "CHRsBySector", JObject.FromObject(CHRsBySector, new JsonSerializer { NullValueHandling = NullValueHandling.Ignore }) },
+                { "CHRsBySector", JObject.FromObject(CHRsBySector.ToDictionary(x => x.Key, x => x.Value.ToJToken())) },
             };
         }
 
