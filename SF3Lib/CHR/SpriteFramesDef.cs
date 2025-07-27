@@ -29,22 +29,30 @@ namespace SF3.CHR {
             => AssignFromJToken(JToken.Parse(json));
 
         public bool AssignFromJToken(JToken jToken) {
-            if (jToken == null || jToken.Type != JTokenType.Object)
+            if (jToken == null)
                 return false;
 
-            try {
-                var jObj = (JObject) jToken;
+            switch (jToken.Type) {
+                case JTokenType.Array:
+                    var jArray = (JArray) jToken;
+                    FrameGroups = jArray.Select(x => FrameGroupDef.FromJToken(x)).ToArray();
+                    return true;
 
-                SpriteName = jObj.TryGetValue("SpriteName", out var spriteName) ? ((string) spriteName) : null;
+                case JTokenType.Object:
+                    try {
+                        var jObj = (JObject) jToken;
+                        SpriteName = jObj.TryGetValue("SpriteName", out var spriteName) ? ((string) spriteName) : null;
+                        FrameGroups = jObj.TryGetValue("Frames", out var frameGroups)
+                            ? frameGroups.Select(x => FrameGroupDef.FromJToken(x)).ToArray()
+                            : null;
+                    }
+                    catch {
+                        return false;
+                    }
+                    return true;
 
-                FrameGroups = jObj.TryGetValue("FrameGroups", out var frameGroups)
-                    ? frameGroups.Select(x => FrameGroupDef.FromJToken(x)).ToArray()
-                    : null;
-
-                return true;
-            }
-            catch {
-                return false;
+                default:
+                    return false;
             }
         }
 
@@ -52,12 +60,15 @@ namespace SF3.CHR {
             => ToJToken().ToString(Formatting.Indented);
 
         public JToken ToJToken() {
-            var jObj = new JObject();
             var jsonSettings = new JsonSerializer { NullValueHandling = NullValueHandling.Ignore };
 
+            if (SpriteName == null)
+                return FrameGroups != null ? JToken.FromObject(FrameGroups.Select(x => x.ToJToken()).ToArray(), jsonSettings) : null;
+
+            var jObj = new JObject();
             jObj.Add("SpriteName", new JValue(SpriteName));
             if (FrameGroups != null)
-                jObj.Add("FrameGroups", JToken.FromObject(FrameGroups.Select(x => x.ToJToken()), jsonSettings));
+                jObj.Add("Frames", JToken.FromObject(FrameGroups.Select(x => x.ToJToken()), jsonSettings));
 
             return jObj;
         }

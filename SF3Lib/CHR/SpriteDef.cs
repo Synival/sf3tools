@@ -52,9 +52,10 @@ namespace SF3.CHR {
                 CollisionSize  = jObj.TryGetValue("CollisionSize",  out var collisionSize)  ? ((int) collisionSize)  : spritesheet?.CollisionSize  ?? 0;
                 Scale          = jObj.TryGetValue("Scale",          out var scale)          ? ((float) scale)        : spritesheet?.Scale          ?? 0;
 
-                SpriteFrames = jObj.TryGetValue("Frames", out var spriteFrames)
-                    ? spriteFrames.Select(x => SpriteFramesDef.FromJToken(x)).ToArray()
-                    : null;
+                if (jObj.TryGetValue("Frames", out var frames) && frames.Type == JTokenType.Array)
+                    SpriteFrames = new SpriteFramesDef[] { new SpriteFramesDef() { FrameGroups = frames.Select(x => FrameGroupDef.FromJToken(x)).ToArray() } };
+                else if (jObj.TryGetValue("FramesBySprite", out var spriteFrames) && spriteFrames.Type == JTokenType.Array)
+                    SpriteFrames = spriteFrames.Select(x => SpriteFramesDef.FromJToken(x)).ToArray();
 
                 SpriteAnimations = jObj.TryGetValue("Animations", out var spriteAnimations)
                     ? spriteAnimations.Select(x => SpriteAnimationsDef.FromJToken(x)).ToArray()
@@ -95,11 +96,17 @@ namespace SF3.CHR {
             if (!(Scale >= spritesheet?.Scale - 0.001f && Scale <= spritesheet?.Scale + 0.001f))
                 jObj.Add("Scale", new JValue(Scale));
 
-            if (SpriteFrames != null)
-                jObj.Add("Frames", JToken.FromObject(SpriteFrames.Select(x => x.ToJToken()).ToArray(), jsonSettings));
+            if (SpriteFrames != null) {
+                if (SpriteFrames.Length == 1)
+                    jObj.Add("Frames", SpriteFrames[0].ToJToken());
+                else
+                    jObj.Add("FramesBySprite", JToken.FromObject(SpriteFrames.Select(x => x.ToJToken()).ToArray(), jsonSettings));
+            }
+
             if (SpriteAnimations != null)
                 jObj.Add("Animations", JToken.FromObject(SpriteAnimations, jsonSettings));
 
+            var jStr = jObj.ToString();
             return jObj;
         }
 

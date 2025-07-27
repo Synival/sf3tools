@@ -29,24 +29,33 @@ namespace SF3.CHR {
             => AssignFromJToken(JToken.Parse(json));
 
         public bool AssignFromJToken(JToken jToken) {
-            if (jToken == null || jToken.Type != JTokenType.Object)
+            if (jToken == null)
                 return false;
 
-            try {
-                var jObj = (JObject) jToken;
+            switch (jToken.Type) {
+                case JTokenType.String:
+                    Name = (string) jToken;
+                    return true;
 
-                Name   = jObj.TryGetValue("Name",   out var name)   ? ((string) name) : null;
-                Width  = jObj.TryGetValue("Width",  out var width)  ? ((int?) width)  : null;
-                Height = jObj.TryGetValue("Height", out var height) ? ((int?) height) : null;
+                case JTokenType.Object:
+                    try {
+                        var jObj = (JObject) jToken;
 
-                Frames = jObj.TryGetValue("Frames", out var frames)
-                    ? frames.Select(x => FrameDef.FromJToken(x)).ToArray()
-                    : null;
+                        Name   = jObj.TryGetValue("Name",   out var name)   ? ((string) name) : null;
+                        Width  = jObj.TryGetValue("Width",  out var width)  ? ((int?) width)  : null;
+                        Height = jObj.TryGetValue("Height", out var height) ? ((int?) height) : null;
 
-                return true;
-            }
-            catch {
-                return false;
+                        Frames = jObj.TryGetValue("Directions", out var frames)
+                            ? frames.Select(x => FrameDef.FromJToken(x)).ToArray()
+                            : null;
+                    }
+                    catch {
+                        return false;
+                    }
+                    return true;
+
+                default:
+                    return false;
             }
         }
 
@@ -54,9 +63,12 @@ namespace SF3.CHR {
             => ToJToken().ToString(Formatting.Indented);
 
         public JToken ToJToken() {
-            var jObj = new JObject();
             var jsonSettings = new JsonSerializer { NullValueHandling = NullValueHandling.Ignore };
 
+            if (!Width.HasValue && !Height.HasValue && Frames == null)
+                return (Name != null) ? new JValue(Name) : null;
+
+            var jObj = new JObject();
             if (Name != null)
                 jObj.Add("Name", new JValue(Name));
             if (Width.HasValue)
@@ -64,7 +76,7 @@ namespace SF3.CHR {
             if (Height.HasValue)
                 jObj.Add("Height", new JValue(Height.Value));
             if (Frames != null)
-                jObj.Add("Frames", JToken.FromObject(Frames.Select(x => x.ToJToken()).ToArray(), jsonSettings));
+                jObj.Add("Directions", JToken.FromObject(Frames.Select(x => x.ToJToken()).ToArray(), jsonSettings));
 
             return jObj;
         }
