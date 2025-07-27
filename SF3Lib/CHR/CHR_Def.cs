@@ -124,8 +124,8 @@ namespace SF3.CHR {
                     (byte) chr.VerticalOffset,
                     (byte) chr.Unknown0x08,
                     (byte) chr.CollisionSize,
-                    (byte) (chr.PromotionLevel ?? 0),
-                    (int) Math.Round(chr.Scale.Value * 65536.0f)
+                    (byte) chr.PromotionLevel,
+                    (int) Math.Round(chr.Scale * 65536.0f)
                 );
             }
             chrWriter.WriteHeaderTerminator();

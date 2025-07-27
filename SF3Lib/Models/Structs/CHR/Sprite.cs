@@ -107,13 +107,12 @@ namespace SF3.Models.Structs.CHR {
         public SpriteDef ToCHR_SpriteDef(HashSet<string> framesWithDuplicates) {
             return new SpriteDef() {
                 SpriteName       = SpriteName,
-
-                SpriteID         = Header.SpriteID,
                 Width            = Header.Width,
                 Height           = Header.Height,
                 Directions       = Header.Directions,
-                PromotionLevel   = (Header.PromotionLevel == 0) ? (int?) null : Header.PromotionLevel,
+                PromotionLevel   = Header.PromotionLevel,
 
+                SpriteID         = Header.SpriteID,
                 VerticalOffset   = Header.VerticalOffset,
                 Unknown0x08      = Header.Unknown0x08,
                 CollisionSize    = Header.CollisionShadowDiameter,
