@@ -1,5 +1,7 @@
 {
   "Name": "Old Woman w/ Green+Yellow Dress and Dark Skin",
+  "Width": 40,
+  "Height": 40,
   "Spritesheets": {
     "40x40": {
       "SpriteID": 538,

@@ -1,5 +1,7 @@
 {
   "Name": "Cannon Ball Splash",
+  "Width": 32,
+  "Height": 128,
   "Spritesheets": {
     "32x128": {
       "SpriteID": 397,

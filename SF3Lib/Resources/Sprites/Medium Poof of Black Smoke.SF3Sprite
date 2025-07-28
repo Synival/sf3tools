@@ -1,5 +1,7 @@
 {
   "Name": "Medium Poof of Black Smoke",
+  "Width": 32,
+  "Height": 32,
   "Spritesheets": {
     "32x32": {
       "SpriteID": 408,

@@ -1,5 +1,7 @@
 {
   "Name": "Bow Knight (Waltz Placeholder)",
+  "Width": 48,
+  "Height": 40,
   "Spritesheets": {
     "48x40": {
       "SpriteID": 200,

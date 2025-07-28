@@ -1,5 +1,7 @@
 {
   "Name": "Staff of Besem (Yellow)",
+  "Width": 32,
+  "Height": 40,
   "Spritesheets": {
     "32x40": {
       "SpriteID": 513,

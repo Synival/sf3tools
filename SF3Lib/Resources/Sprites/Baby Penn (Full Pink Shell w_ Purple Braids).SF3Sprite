@@ -1,5 +1,7 @@
 {
   "Name": "Baby Penn (Full Pink Shell w/ Purple Braids)",
+  "Width": 40,
+  "Height": 32,
   "Spritesheets": {
     "40x32": {
       "SpriteID": 43,

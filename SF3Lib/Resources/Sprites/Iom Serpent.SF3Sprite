@@ -1,5 +1,7 @@
 {
   "Name": "Iom Serpent",
+  "Width": 40,
+  "Height": 48,
   "Spritesheets": {
     "40x48": {
       "SpriteID": 324,

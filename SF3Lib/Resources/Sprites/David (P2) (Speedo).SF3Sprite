@@ -1,5 +1,7 @@
 {
   "Name": "David (P2) (Speedo)",
+  "Width": 40,
+  "Height": 40,
   "Spritesheets": {
     "40x40": {
       "SpriteID": 29,

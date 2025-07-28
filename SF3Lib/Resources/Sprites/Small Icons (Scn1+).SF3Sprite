@@ -1,5 +1,7 @@
 {
   "Name": "Small Icons (Scn1+)",
+  "Width": 16,
+  "Height": 16,
   "Spritesheets": {
     "16x16": {
       "SpriteID": 391,

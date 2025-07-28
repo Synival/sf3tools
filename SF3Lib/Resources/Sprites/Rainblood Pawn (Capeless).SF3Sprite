@@ -1,5 +1,7 @@
 {
   "Name": "Rainblood Pawn (Capeless)",
+  "Width": 40,
+  "Height": 48,
   "Spritesheets": {
     "40x48": {
       "SpriteID": 375,

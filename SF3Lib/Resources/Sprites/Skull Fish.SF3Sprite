@@ -1,5 +1,7 @@
 {
   "Name": "Skull Fish",
+  "Width": 56,
+  "Height": 32,
   "Spritesheets": {
     "56x32": {
       "SpriteID": 293,

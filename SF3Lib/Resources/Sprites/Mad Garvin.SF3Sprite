@@ -1,5 +1,7 @@
 {
   "Name": "Mad Garvin",
+  "Width": 48,
+  "Height": 48,
   "Spritesheets": {
     "48x48": {
       "SpriteID": 382,

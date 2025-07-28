@@ -1,5 +1,7 @@
 {
   "Name": "Woman w/ Brown Skirt, Blue Dress, and Blonde Ponytail",
+  "Width": 40,
+  "Height": 40,
   "Spritesheets": {
     "40x40": {
       "SpriteID": 519,

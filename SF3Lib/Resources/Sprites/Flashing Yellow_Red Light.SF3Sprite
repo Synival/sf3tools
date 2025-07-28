@@ -1,5 +1,7 @@
 {
   "Name": "Flashing Yellow/Red Light",
+  "Width": 16,
+  "Height": 16,
   "Spritesheets": {
     "16x16": {
       "SpriteID": 400,

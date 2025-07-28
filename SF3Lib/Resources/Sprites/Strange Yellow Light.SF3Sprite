@@ -1,5 +1,7 @@
 {
   "Name": "Strange Yellow Light",
+  "Width": 8,
+  "Height": 8,
   "Spritesheets": {
     "8x8": {
       "SpriteID": 402,

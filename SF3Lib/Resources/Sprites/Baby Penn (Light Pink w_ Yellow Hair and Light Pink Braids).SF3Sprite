@@ -1,5 +1,7 @@
 {
   "Name": "Baby Penn (Light Pink w/ Yellow Hair and Light Pink Braids)",
+  "Width": 40,
+  "Height": 32,
   "Spritesheets": {
     "40x32": {
       "SpriteID": 46,

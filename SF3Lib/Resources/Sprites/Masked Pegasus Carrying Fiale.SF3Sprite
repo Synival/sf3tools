@@ -1,5 +1,7 @@
 {
   "Name": "Masked Pegasus Carrying Fiale",
+  "Width": 56,
+  "Height": 56,
   "Spritesheets": {
     "56x56": {
       "SpriteID": 159,

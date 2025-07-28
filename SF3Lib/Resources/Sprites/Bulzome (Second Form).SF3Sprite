@@ -1,5 +1,7 @@
 {
   "Name": "Bulzome (Second Form)",
+  "Width": 72,
+  "Height": 48,
   "Spritesheets": {
     "72x48": {
       "SpriteID": 345,

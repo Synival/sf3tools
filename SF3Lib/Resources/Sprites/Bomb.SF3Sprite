@@ -1,5 +1,7 @@
 {
   "Name": "Bomb",
+  "Width": 16,
+  "Height": 16,
   "Spritesheets": {
     "16x16": {
       "SpriteID": 394,

@@ -1,5 +1,7 @@
 {
   "Name": "Elf Man w/ Pink Shirt and Balding Brown Hair",
+  "Width": 40,
+  "Height": 40,
   "Spritesheets": {
     "40x40": {
       "SpriteID": 177,

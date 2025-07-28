@@ -1,5 +1,7 @@
 {
   "Name": "Dark Dragon (Head Low)",
+  "Width": 80,
+  "Height": 48,
   "Spritesheets": {
     "80x48": {
       "SpriteID": 275,

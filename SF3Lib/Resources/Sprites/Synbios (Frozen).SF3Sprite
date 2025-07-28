@@ -1,5 +1,7 @@
 {
   "Name": "Synbios (Frozen)",
+  "Width": 64,
+  "Height": 40,
   "Spritesheets": {
     "64x40": {
       "SpriteID": 0,

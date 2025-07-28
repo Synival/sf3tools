@@ -1,5 +1,7 @@
 {
   "Name": "Male Masked Monk w/ Pink+Green Shirt and Light Blue Hood",
+  "Width": 40,
+  "Height": 40,
   "Spritesheets": {
     "40x40": {
       "SpriteID": 589,

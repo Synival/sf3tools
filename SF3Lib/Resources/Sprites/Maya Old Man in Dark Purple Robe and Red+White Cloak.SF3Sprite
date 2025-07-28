@@ -1,5 +1,7 @@
 {
   "Name": "Maya Old Man in Dark Purple Robe and Red+White Cloak",
+  "Width": 40,
+  "Height": 40,
   "Spritesheets": {
     "40x40": {
       "SpriteID": 579,

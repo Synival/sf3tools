@@ -1,5 +1,7 @@
 {
   "Name": "Arthur (P1)",
+  "Width": 48,
+  "Height": 40,
   "Spritesheets": {
     "48x40": {
       "SpriteID": 35,

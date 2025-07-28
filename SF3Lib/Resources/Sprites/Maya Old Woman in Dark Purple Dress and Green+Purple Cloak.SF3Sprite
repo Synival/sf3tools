@@ -1,5 +1,7 @@
 {
   "Name": "Maya Old Woman in Dark Purple Dress and Green+Purple Cloak",
+  "Width": 40,
+  "Height": 40,
   "Spritesheets": {
     "40x40": {
       "SpriteID": 578,

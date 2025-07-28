@@ -1,5 +1,7 @@
 {
   "Name": "Masked Monk Riding Pegasus",
+  "Width": 56,
+  "Height": 49,
   "Spritesheets": {
     "56x49": {
       "SpriteID": 369,

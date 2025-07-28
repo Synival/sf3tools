@@ -1,5 +1,7 @@
 {
   "Name": "Penko (P1)",
+  "Width": 40,
+  "Height": 32,
   "Spritesheets": {
     "40x32": {
       "SpriteID": 38,

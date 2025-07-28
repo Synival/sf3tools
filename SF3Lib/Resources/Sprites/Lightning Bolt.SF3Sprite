@@ -1,5 +1,7 @@
 {
   "Name": "Lightning Bolt",
+  "Width": 32,
+  "Height": 64,
   "Spritesheets": {
     "32x64": {
       "SpriteID": 393,

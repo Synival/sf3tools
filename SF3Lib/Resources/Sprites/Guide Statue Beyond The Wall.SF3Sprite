@@ -1,5 +1,7 @@
 {
   "Name": "Guide Statue Beyond The Wall",
+  "Width": 56,
+  "Height": 56,
   "Spritesheets": {
     "56x56": {
       "SpriteID": 569,

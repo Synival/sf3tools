@@ -1,5 +1,7 @@
 {
   "Name": "Man w/ Red Bandana and No Shirt Hammering Wall",
+  "Width": 40,
+  "Height": 40,
   "Spritesheets": {
     "40x40": {
       "SpriteID": 172,

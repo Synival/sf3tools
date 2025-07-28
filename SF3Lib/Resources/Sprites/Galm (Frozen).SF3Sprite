@@ -1,5 +1,7 @@
 {
   "Name": "Galm (Frozen)",
+  "Width": 48,
+  "Height": 56,
   "Spritesheets": {
     "48x56": {
       "SpriteID": 155,

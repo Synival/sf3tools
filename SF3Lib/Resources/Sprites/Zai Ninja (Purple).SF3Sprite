@@ -1,5 +1,7 @@
 {
   "Name": "Zai Ninja (Purple)",
+  "Width": 40,
+  "Height": 40,
   "Spritesheets": {
     "40x40": {
       "SpriteID": 321,

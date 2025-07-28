@@ -1,5 +1,7 @@
 {
   "Name": "Old Woman w/ Grey+Turquoise+Gold Dress and Cane",
+  "Width": 40,
+  "Height": 40,
   "Spritesheets": {
     "40x40": {
       "SpriteID": 543,

@@ -1,5 +1,7 @@
 {
   "Name": "Small Poof of Brown Smoke",
+  "Width": 24,
+  "Height": 24,
   "Spritesheets": {
     "24x24": {
       "SpriteID": 405,

@@ -1,5 +1,7 @@
 {
   "Name": "Transparency",
+  "Width": 48,
+  "Height": 48,
   "Spritesheets": {
     "8x8": {
       "SpriteID": 287,

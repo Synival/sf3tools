@@ -1,5 +1,7 @@
 {
   "Name": "Elf Woman w/ White Apron",
+  "Width": 40,
+  "Height": 40,
   "Spritesheets": {
     "40x40": {
       "SpriteID": 179,

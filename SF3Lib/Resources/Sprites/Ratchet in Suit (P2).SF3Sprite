@@ -1,5 +1,7 @@
 {
   "Name": "Ratchet in Suit (P2)",
+  "Width": 48,
+  "Height": 40,
   "Spritesheets": {
     "48x40": {
       "SpriteID": 15,

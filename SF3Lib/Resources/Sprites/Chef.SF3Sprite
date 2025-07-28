@@ -1,5 +1,7 @@
 {
   "Name": "Chef",
+  "Width": 32,
+  "Height": 48,
   "Spritesheets": {
     "32x48": {
       "SpriteID": 122,

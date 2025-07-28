@@ -1,5 +1,7 @@
 {
   "Name": "Galm",
+  "Width": 40,
+  "Height": 48,
   "Spritesheets": {
     "40x48": {
       "SpriteID": 263,

@@ -1,5 +1,7 @@
 {
   "Name": "Man w/ Cyan Shirt and Brown Ponytail",
+  "Width": 40,
+  "Height": 40,
   "Spritesheets": {
     "40x40": {
       "SpriteID": 534,

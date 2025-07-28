@@ -1,5 +1,7 @@
 {
   "Name": "Green Dragon",
+  "Width": 56,
+  "Height": 40,
   "Spritesheets": {
     "56x40": {
       "SpriteID": 241,

@@ -1,5 +1,7 @@
 {
   "Name": "Bulzome Lightning Strike",
+  "Width": 8,
+  "Height": 40,
   "Spritesheets": {
     "8x40": {
       "SpriteID": 407,

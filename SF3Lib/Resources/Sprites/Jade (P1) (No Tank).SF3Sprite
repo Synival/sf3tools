@@ -1,5 +1,7 @@
 {
   "Name": "Jade (P1) (No Tank)",
+  "Width": 40,
+  "Height": 40,
   "Spritesheets": {
     "40x40": {
       "SpriteID": 37,

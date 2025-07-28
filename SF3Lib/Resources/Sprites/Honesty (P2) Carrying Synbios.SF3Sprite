@@ -1,5 +1,7 @@
 {
   "Name": "Honesty (P2) Carrying Synbios",
+  "Width": 48,
+  "Height": 40,
   "Spritesheets": {
     "48x40": {
       "SpriteID": 49,

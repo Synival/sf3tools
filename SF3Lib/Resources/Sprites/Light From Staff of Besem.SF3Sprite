@@ -1,5 +1,7 @@
 {
   "Name": "Light From Staff of Besem",
+  "Width": 40,
+  "Height": 40,
   "Spritesheets": {
     "40x40": {
       "SpriteID": 406,

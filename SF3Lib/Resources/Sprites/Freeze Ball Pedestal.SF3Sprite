@@ -1,5 +1,7 @@
 {
   "Name": "Freeze Ball Pedestal",
+  "Width": 48,
+  "Height": 64,
   "Spritesheets": {
     "48x64": {
       "SpriteID": 516,

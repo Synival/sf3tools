@@ -1,5 +1,7 @@
 {
   "Name": "Light Blue Torch Flame",
+  "Width": 16,
+  "Height": 32,
   "Spritesheets": {
     "16x32": {
       "SpriteID": 402,

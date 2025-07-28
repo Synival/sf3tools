@@ -1,5 +1,7 @@
 {
   "Name": "Darksol",
+  "Width": 72,
+  "Height": 56,
   "Spritesheets": {
     "72x56": {
       "SpriteID": 327,

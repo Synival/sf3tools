@@ -1,5 +1,7 @@
 {
   "Name": "Kraken Leg",
+  "Width": 40,
+  "Height": 56,
   "Spritesheets": {
     "40x56": {
       "SpriteID": 365,

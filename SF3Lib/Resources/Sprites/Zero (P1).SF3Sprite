@@ -1,5 +1,7 @@
 {
   "Name": "Zero (P1)",
+  "Width": 48,
+  "Height": 40,
   "Spritesheets": {
     "48x24": {
       "SpriteID": 27,

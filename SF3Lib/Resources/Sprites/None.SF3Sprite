@@ -1,5 +1,7 @@
 {
   "Name": "None",
+  "Width": 40,
+  "Height": 40,
   "Spritesheets": {
     "0x0": {
       "SpriteID": 0,

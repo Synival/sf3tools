@@ -1,5 +1,7 @@
 {
   "Name": "Fey (Quonus Priest)",
+  "Width": 40,
+  "Height": 40,
   "Spritesheets": {
     "40x48": {
       "SpriteID": 47,

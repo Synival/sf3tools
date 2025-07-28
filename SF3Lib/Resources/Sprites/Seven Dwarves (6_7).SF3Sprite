@@ -1,5 +1,7 @@
 {
   "Name": "Seven Dwarves (6/7)",
+  "Width": 40,
+  "Height": 40,
   "Spritesheets": {
     "40x40": {
       "SpriteID": 27,

@@ -1,5 +1,7 @@
 {
   "Name": "Man w/ Purple Shirt and Short Black Curly Hair",
+  "Width": 40,
+  "Height": 40,
   "Spritesheets": {
     "40x40": {
       "SpriteID": 32,

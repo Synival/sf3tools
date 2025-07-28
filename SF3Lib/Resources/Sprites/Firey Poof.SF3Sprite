@@ -1,5 +1,7 @@
 {
   "Name": "Firey Poof",
+  "Width": 32,
+  "Height": 56,
   "Spritesheets": {
     "32x56": {
       "SpriteID": 392,

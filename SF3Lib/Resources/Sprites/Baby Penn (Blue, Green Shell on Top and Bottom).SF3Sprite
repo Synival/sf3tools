@@ -1,5 +1,7 @@
 {
   "Name": "Baby Penn (Blue, Green Shell on Top and Bottom)",
+  "Width": 40,
+  "Height": 32,
   "Spritesheets": {
     "40x32": {
       "SpriteID": 42,

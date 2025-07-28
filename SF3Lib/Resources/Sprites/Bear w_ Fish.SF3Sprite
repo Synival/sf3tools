@@ -1,5 +1,7 @@
 {
   "Name": "Bear w/ Fish",
+  "Width": 48,
+  "Height": 32,
   "Spritesheets": {
     "48x32": {
       "SpriteID": 59,

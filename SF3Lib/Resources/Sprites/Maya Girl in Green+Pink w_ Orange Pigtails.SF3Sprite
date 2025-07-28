@@ -1,5 +1,7 @@
 {
   "Name": "Maya Girl in Green+Pink w/ Orange Pigtails",
+  "Width": 40,
+  "Height": 40,
   "Spritesheets": {
     "40x40": {
       "SpriteID": 577,

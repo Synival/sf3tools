@@ -1,5 +1,7 @@
 {
   "Name": "Fey (Big)",
+  "Width": 128,
+  "Height": 128,
   "Spritesheets": {
     "128x128": {
       "SpriteID": 393,

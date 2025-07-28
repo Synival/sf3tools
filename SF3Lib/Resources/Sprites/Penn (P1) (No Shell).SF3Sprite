@@ -1,5 +1,7 @@
 {
   "Name": "Penn (P1) (No Shell)",
+  "Width": 40,
+  "Height": 32,
   "Spritesheets": {
     "40x32": {
       "SpriteID": 14,
