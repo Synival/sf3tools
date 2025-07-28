@@ -41,55 +41,51 @@
       },
       "AnimationByDirections": {
         "17": {
-          "Pulsating": {
-            "AnimationFrames": [
-              {
-                "Command": "SetDirectionCount",
-                "Parameter": 17
-              },
-              {
-                "FrameGroup": "Pulsating 1",
-                "Command": "Frame",
-                "Parameter": 1
-              },
-              {
-                "FrameGroup": "Pulsating 2",
-                "Command": "Frame",
-                "Parameter": 1
-              },
-              {
-                "FrameGroup": "Pulsating 3",
-                "Command": "Frame",
-                "Parameter": 1
-              },
-              {
-                "FrameGroup": "Pulsating 4",
-                "Command": "Frame",
-                "Parameter": 1
-              },
-              {
-                "Command": "GotoFrameOffset",
-                "Parameter": 0
-              }
-            ]
-          },
-          "StillFrame": {
-            "AnimationFrames": [
-              {
-                "Command": "SetDirectionCount",
-                "Parameter": 17
-              },
-              {
-                "FrameGroup": "Pulsating 1",
-                "Command": "Frame",
-                "Parameter": 10
-              },
-              {
-                "Command": "Stop",
-                "Parameter": 0
-              }
-            ]
-          }
+          "Pulsating": [
+            {
+              "Command": "SetDirectionCount",
+              "Parameter": 17
+            },
+            {
+              "FrameGroup": "Pulsating 1",
+              "Command": "Frame",
+              "Parameter": 1
+            },
+            {
+              "FrameGroup": "Pulsating 2",
+              "Command": "Frame",
+              "Parameter": 1
+            },
+            {
+              "FrameGroup": "Pulsating 3",
+              "Command": "Frame",
+              "Parameter": 1
+            },
+            {
+              "FrameGroup": "Pulsating 4",
+              "Command": "Frame",
+              "Parameter": 1
+            },
+            {
+              "Command": "GotoFrameOffset",
+              "Parameter": 0
+            }
+          ],
+          "StillFrame": [
+            {
+              "Command": "SetDirectionCount",
+              "Parameter": 17
+            },
+            {
+              "FrameGroup": "Pulsating 1",
+              "Command": "Frame",
+              "Parameter": 10
+            },
+            {
+              "Command": "Stop",
+              "Parameter": 0
+            }
+          ]
         }
       }
     }

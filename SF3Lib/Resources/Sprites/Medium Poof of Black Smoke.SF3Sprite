@@ -55,95 +55,89 @@
       },
       "AnimationByDirections": {
         "1": {
-          "Poofing (Fast, Slowing Down)": {
-            "AnimationFrames": [
-              {
-                "FrameGroup": "Poofing 1",
-                "Command": "Frame",
-                "Parameter": 2
-              },
-              {
-                "FrameGroup": "Poofing 2",
-                "Command": "Frame",
-                "Parameter": 2
-              },
-              {
-                "FrameGroup": "Poofing 3",
-                "Command": "Frame",
-                "Parameter": 2
-              },
-              {
-                "FrameGroup": "Poofing 4",
-                "Command": "Frame",
-                "Parameter": 2
-              },
-              {
-                "FrameGroup": "Poofing 5",
-                "Command": "Frame",
-                "Parameter": 4
-              },
-              {
-                "FrameGroup": "Poofing 6",
-                "Command": "Frame",
-                "Parameter": 4
-              },
-              {
-                "Command": "GotoFrameOffset",
-                "Parameter": 0
-              }
-            ]
-          },
-          "Poofing (Slow, Slowing Down)": {
-            "AnimationFrames": [
-              {
-                "FrameGroup": "Poofing 1",
-                "Command": "Frame",
-                "Parameter": 4
-              },
-              {
-                "FrameGroup": "Poofing 2",
-                "Command": "Frame",
-                "Parameter": 4
-              },
-              {
-                "FrameGroup": "Poofing 3",
-                "Command": "Frame",
-                "Parameter": 4
-              },
-              {
-                "FrameGroup": "Poofing 4",
-                "Command": "Frame",
-                "Parameter": 4
-              },
-              {
-                "FrameGroup": "Poofing 5",
-                "Command": "Frame",
-                "Parameter": 8
-              },
-              {
-                "FrameGroup": "Poofing 6",
-                "Command": "Frame",
-                "Parameter": 8
-              },
-              {
-                "Command": "GotoAnimation",
-                "Parameter": 0
-              }
-            ]
-          },
-          "StillFrame": {
-            "AnimationFrames": [
-              {
-                "FrameGroup": "Poofing 1",
-                "Command": "Frame",
-                "Parameter": 1
-              },
-              {
-                "Command": "Stop",
-                "Parameter": 0
-              }
-            ]
-          }
+          "Poofing (Fast, Slowing Down)": [
+            {
+              "FrameGroup": "Poofing 1",
+              "Command": "Frame",
+              "Parameter": 2
+            },
+            {
+              "FrameGroup": "Poofing 2",
+              "Command": "Frame",
+              "Parameter": 2
+            },
+            {
+              "FrameGroup": "Poofing 3",
+              "Command": "Frame",
+              "Parameter": 2
+            },
+            {
+              "FrameGroup": "Poofing 4",
+              "Command": "Frame",
+              "Parameter": 2
+            },
+            {
+              "FrameGroup": "Poofing 5",
+              "Command": "Frame",
+              "Parameter": 4
+            },
+            {
+              "FrameGroup": "Poofing 6",
+              "Command": "Frame",
+              "Parameter": 4
+            },
+            {
+              "Command": "GotoFrameOffset",
+              "Parameter": 0
+            }
+          ],
+          "Poofing (Slow, Slowing Down)": [
+            {
+              "FrameGroup": "Poofing 1",
+              "Command": "Frame",
+              "Parameter": 4
+            },
+            {
+              "FrameGroup": "Poofing 2",
+              "Command": "Frame",
+              "Parameter": 4
+            },
+            {
+              "FrameGroup": "Poofing 3",
+              "Command": "Frame",
+              "Parameter": 4
+            },
+            {
+              "FrameGroup": "Poofing 4",
+              "Command": "Frame",
+              "Parameter": 4
+            },
+            {
+              "FrameGroup": "Poofing 5",
+              "Command": "Frame",
+              "Parameter": 8
+            },
+            {
+              "FrameGroup": "Poofing 6",
+              "Command": "Frame",
+              "Parameter": 8
+            },
+            {
+              "Command": "GotoAnimation",
+              "Parameter": 0
+            }
+          ],
+          "StillFrame": [
+            {
+              "FrameGroup": "Poofing 1",
+              "Command": "Frame",
+              "Parameter": 1
+            },
+            {
+              "Command": "Stop",
+              "Parameter": 0
+            }
+          ]
         }
       }
     }

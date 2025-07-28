@@ -20,19 +20,17 @@
       },
       "AnimationByDirections": {
         "1": {
-          "StillFrame (Bomb)": {
-            "AnimationFrames": [
-              {
-                "FrameGroup": "Bomb 1",
-                "Command": "Frame",
-                "Parameter": 1
-              },
-              {
-                "Command": "Stop",
-                "Parameter": 0
-              }
-            ]
-          }
+          "StillFrame (Bomb)": [
+            {
+              "FrameGroup": "Bomb 1",
+              "Command": "Frame",
+              "Parameter": 1
+            },
+            {
+              "Command": "Stop",
+              "Parameter": 0
+            }
+          ]
         }
       }
     }

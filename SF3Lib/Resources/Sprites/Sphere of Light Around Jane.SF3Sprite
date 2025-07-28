@@ -20,19 +20,17 @@
       },
       "AnimationByDirections": {
         "1": {
-          "StillFrame (Light)": {
-            "AnimationFrames": [
-              {
-                "FrameGroup": "Light 1",
-                "Command": "Frame",
-                "Parameter": 10
-              },
-              {
-                "Command": "Stop",
-                "Parameter": 0
-              }
-            ]
-          }
+          "StillFrame (Light)": [
+            {
+              "FrameGroup": "Light 1",
+              "Command": "Frame",
+              "Parameter": 10
+            },
+            {
+              "Command": "Stop",
+              "Parameter": 0
+            }
+          ]
         }
       }
     }

@@ -42,101 +42,89 @@
       },
       "AnimationByDirections": {
         "1": {
-          "StillFrame (OnGround, Repeat 1)": {
-            "AnimationFrames": [
-              {
-                "Frames": {
-                  "First": {
-                    "Frame": "OnGround 2",
-                    "Direction": "S"
-                  }
-                },
-                "Command": "Frame",
-                "Parameter": 4
+          "StillFrame (OnGround, Repeat 1)": [
+            {
+              "Frames": {
+                "First": {
+                  "Frame": "OnGround 2",
+                  "Direction": "S"
+                }
               },
-              {
-                "Command": "GotoFrameOffset",
-                "Parameter": 0
-              }
-            ]
-          },
-          "StillFrame (OnGround, Repeat 2)": {
-            "AnimationFrames": [
-              {
-                "Frames": {
-                  "First": {
-                    "Frame": "OnGround 2",
-                    "Direction": "S"
-                  }
-                },
-                "Command": "Frame",
-                "Parameter": 5
+              "Command": "Frame",
+              "Parameter": 4
+            },
+            {
+              "Command": "GotoFrameOffset",
+              "Parameter": 0
+            }
+          ],
+          "StillFrame (OnGround, Repeat 2)": [
+            {
+              "Frames": {
+                "First": {
+                  "Frame": "OnGround 2",
+                  "Direction": "S"
+                }
               },
-              {
-                "Command": "GotoFrameOffset",
-                "Parameter": 0
-              }
-            ]
-          },
-          "StillFrame (OnGround)": {
-            "AnimationFrames": [
-              {
-                "Frames": {
-                  "First": {
-                    "Frame": "OnGround 2",
-                    "Direction": "S"
-                  }
-                },
-                "Command": "Frame",
-                "Parameter": 10
+              "Command": "Frame",
+              "Parameter": 5
+            },
+            {
+              "Command": "GotoFrameOffset",
+              "Parameter": 0
+            }
+          ],
+          "StillFrame (OnGround)": [
+            {
+              "Frames": {
+                "First": {
+                  "Frame": "OnGround 2",
+                  "Direction": "S"
+                }
               },
-              {
-                "Command": "Stop",
-                "Parameter": 0
-              }
-            ]
-          }
+              "Command": "Frame",
+              "Parameter": 10
+            },
+            {
+              "Command": "Stop",
+              "Parameter": 0
+            }
+          ]
         },
         "4": {
-          "StillFrame (OnGround, Repeat 1)": {
-            "AnimationFrames": [
-              {
-                "FrameGroup": "OnGround 1",
-                "Command": "Frame",
-                "Parameter": 4
-              },
-              {
-                "Command": "GotoFrameOffset",
-                "Parameter": 0
-              }
-            ]
-          },
-          "StillFrame (OnGround, Repeat 2)": {
-            "AnimationFrames": [
-              {
-                "FrameGroup": "OnGround 1",
-                "Command": "Frame",
-                "Parameter": 5
-              },
-              {
-                "Command": "GotoFrameOffset",
-                "Parameter": 0
-              }
-            ]
-          },
-          "StillFrame (OnGround)": {
-            "AnimationFrames": [
-              {
-                "FrameGroup": "OnGround 1",
-                "Command": "Frame",
-                "Parameter": 10
-              },
-              {
-                "Command": "Stop",
-                "Parameter": 0
-              }
-            ]
-          }
+          "StillFrame (OnGround, Repeat 1)": [
+            {
+              "FrameGroup": "OnGround 1",
+              "Command": "Frame",
+              "Parameter": 4
+            },
+            {
+              "Command": "GotoFrameOffset",
+              "Parameter": 0
+            }
+          ],
+          "StillFrame (OnGround, Repeat 2)": [
+            {
+              "FrameGroup": "OnGround 1",
+              "Command": "Frame",
+              "Parameter": 5
+            },
+            {
+              "Command": "GotoFrameOffset",
+              "Parameter": 0
+            }
+          ],
+          "StillFrame (OnGround)": [
+            {
+              "FrameGroup": "OnGround 1",
+              "Command": "Frame",
+              "Parameter": 10
+            },
+            {
+              "Command": "Stop",
+              "Parameter": 0
+            }
+          ]
         }
       }
     }

@@ -62,49 +62,47 @@
       },
       "AnimationByDirections": {
         "1": {
-          "Flickering (Small)": {
-            "AnimationFrames": [
-              {
-                "FrameGroup": "Flickering (Small) 1",
-                "Command": "Frame",
-                "Parameter": 1
-              },
-              {
-                "FrameGroup": "Flickering (Small) 2",
-                "Command": "Frame",
-                "Parameter": 1
-              },
-              {
-                "FrameGroup": "Flickering (Small) 3",
-                "Command": "Frame",
-                "Parameter": 1
-              },
-              {
-                "FrameGroup": "Flickering (Small) 4",
-                "Command": "Frame",
-                "Parameter": 1
-              },
-              {
-                "FrameGroup": "Flickering (Small) 5",
-                "Command": "Frame",
-                "Parameter": 1
-              },
-              {
-                "FrameGroup": "Flickering (Small) 6",
-                "Command": "Frame",
-                "Parameter": 1
-              },
-              {
-                "FrameGroup": "Flickering (Small) 7",
-                "Command": "Frame",
-                "Parameter": 1
-              },
-              {
-                "Command": "GotoFrameOffset",
-                "Parameter": 0
-              }
-            ]
-          }
+          "Flickering (Small)": [
+            {
+              "FrameGroup": "Flickering (Small) 1",
+              "Command": "Frame",
+              "Parameter": 1
+            },
+            {
+              "FrameGroup": "Flickering (Small) 2",
+              "Command": "Frame",
+              "Parameter": 1
+            },
+            {
+              "FrameGroup": "Flickering (Small) 3",
+              "Command": "Frame",
+              "Parameter": 1
+            },
+            {
+              "FrameGroup": "Flickering (Small) 4",
+              "Command": "Frame",
+              "Parameter": 1
+            },
+            {
+              "FrameGroup": "Flickering (Small) 5",
+              "Command": "Frame",
+              "Parameter": 1
+            },
+            {
+              "FrameGroup": "Flickering (Small) 6",
+              "Command": "Frame",
+              "Parameter": 1
+            },
+            {
+              "FrameGroup": "Flickering (Small) 7",
+              "Command": "Frame",
+              "Parameter": 1
+            },
+            {
+              "Command": "GotoFrameOffset",
+              "Parameter": 0
+            }
+          ]
         }
       }
     },
@@ -174,54 +172,52 @@
       },
       "AnimationByDirections": {
         "1": {
-          "Flickering (Large)": {
-            "AnimationFrames": [
-              {
-                "FrameGroup": "Flickering (Large) 1",
-                "Command": "Frame",
-                "Parameter": 1
-              },
-              {
-                "FrameGroup": "Flickering (Large) 2",
-                "Command": "Frame",
-                "Parameter": 1
-              },
-              {
-                "FrameGroup": "Flickering (Large) 3",
-                "Command": "Frame",
-                "Parameter": 1
-              },
-              {
-                "FrameGroup": "Flickering (Large) 4",
-                "Command": "Frame",
-                "Parameter": 1
-              },
-              {
-                "FrameGroup": "Flickering (Large) 5",
-                "Command": "Frame",
-                "Parameter": 1
-              },
-              {
-                "FrameGroup": "Flickering (Large) 6",
-                "Command": "Frame",
-                "Parameter": 1
-              },
-              {
-                "FrameGroup": "Flickering (Large) 7",
-                "Command": "Frame",
-                "Parameter": 1
-              },
-              {
-                "FrameGroup": "Flickering (Large) 8",
-                "Command": "Frame",
-                "Parameter": 1
-              },
-              {
-                "Command": "GotoFrameOffset",
-                "Parameter": 0
-              }
-            ]
-          }
+          "Flickering (Large)": [
+            {
+              "FrameGroup": "Flickering (Large) 1",
+              "Command": "Frame",
+              "Parameter": 1
+            },
+            {
+              "FrameGroup": "Flickering (Large) 2",
+              "Command": "Frame",
+              "Parameter": 1
+            },
+            {
+              "FrameGroup": "Flickering (Large) 3",
+              "Command": "Frame",
+              "Parameter": 1
+            },
+            {
+              "FrameGroup": "Flickering (Large) 4",
+              "Command": "Frame",
+              "Parameter": 1
+            },
+            {
+              "FrameGroup": "Flickering (Large) 5",
+              "Command": "Frame",
+              "Parameter": 1
+            },
+            {
+              "FrameGroup": "Flickering (Large) 6",
+              "Command": "Frame",
+              "Parameter": 1
+            },
+            {
+              "FrameGroup": "Flickering (Large) 7",
+              "Command": "Frame",
+              "Parameter": 1
+            },
+            {
+              "FrameGroup": "Flickering (Large) 8",
+              "Command": "Frame",
+              "Parameter": 1
+            },
+            {
+              "Command": "GotoFrameOffset",
+              "Parameter": 0
+            }
+          ]
         }
       }
     }

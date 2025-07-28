@@ -20,24 +20,22 @@
       },
       "AnimationByDirections": {
         "1": {
-          "StillFrame (Mask)": {
-            "AnimationFrames": [
-              {
-                "Frames": {
-                  "First": {
-                    "Frame": "Mask 1",
-                    "Direction": "SSE"
-                  }
-                },
-                "Command": "Frame",
-                "Parameter": 10
+          "StillFrame (Mask)": [
+            {
+              "Frames": {
+                "First": {
+                  "Frame": "Mask 1",
+                  "Direction": "SSE"
+                }
               },
-              {
-                "Command": "Stop",
-                "Parameter": 0
-              }
-            ]
-          }
+              "Command": "Frame",
+              "Parameter": 10
+            },
+            {
+              "Command": "Stop",
+              "Parameter": 0
+            }
+          ]
         }
       }
     }

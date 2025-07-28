@@ -55,32 +55,28 @@
       },
       "AnimationByDirections": {
         "8": {
-          "StillFrame (Pointing, Repeat)": {
-            "AnimationFrames": [
-              {
-                "FrameGroup": "Pointing 1",
-                "Command": "Frame",
-                "Parameter": 5
-              },
-              {
-                "Command": "GotoFrameOffset",
-                "Parameter": 0
-              }
-            ]
-          },
-          "StillFrame (Pointing)": {
-            "AnimationFrames": [
-              {
-                "FrameGroup": "Pointing 1",
-                "Command": "Frame",
-                "Parameter": 10
-              },
-              {
-                "Command": "Stop",
-                "Parameter": 0
-              }
-            ]
-          }
+          "StillFrame (Pointing, Repeat)": [
+            {
+              "FrameGroup": "Pointing 1",
+              "Command": "Frame",
+              "Parameter": 5
+            },
+            {
+              "Command": "GotoFrameOffset",
+              "Parameter": 0
+            }
+          ],
+          "StillFrame (Pointing)": [
+            {
+              "FrameGroup": "Pointing 1",
+              "Command": "Frame",
+              "Parameter": 10
+            },
+            {
+              "Command": "Stop",
+              "Parameter": 0
+            }
+          ]
         }
       }
     }

@@ -79,47 +79,43 @@
       },
       "AnimationByDirections": {
         "4": {
-          "StillFrame (OnGround)": {
-            "AnimationFrames": [
-              {
-                "FrameGroup": "OnGround 1",
-                "Command": "Frame",
-                "Parameter": 10
-              },
-              {
-                "Command": "Stop",
-                "Parameter": 0
-              }
-            ]
-          },
-          "WigglingOnGround": {
-            "AnimationFrames": [
-              {
-                "FrameGroup": "OnGround 1",
-                "Command": "Frame",
-                "Parameter": 10
-              },
-              {
-                "FrameGroup": "WigglingOnGround 1",
-                "Command": "Frame",
-                "Parameter": 3
-              },
-              {
-                "FrameGroup": "WigglingOnGround 2",
-                "Command": "Frame",
-                "Parameter": 6
-              },
-              {
-                "FrameGroup": "WigglingOnGround 1",
-                "Command": "Frame",
-                "Parameter": 2
-              },
-              {
-                "Command": "GotoFrameOffset",
-                "Parameter": 0
-              }
-            ]
-          }
+          "StillFrame (OnGround)": [
+            {
+              "FrameGroup": "OnGround 1",
+              "Command": "Frame",
+              "Parameter": 10
+            },
+            {
+              "Command": "Stop",
+              "Parameter": 0
+            }
+          ],
+          "WigglingOnGround": [
+            {
+              "FrameGroup": "OnGround 1",
+              "Command": "Frame",
+              "Parameter": 10
+            },
+            {
+              "FrameGroup": "WigglingOnGround 1",
+              "Command": "Frame",
+              "Parameter": 3
+            },
+            {
+              "FrameGroup": "WigglingOnGround 2",
+              "Command": "Frame",
+              "Parameter": 6
+            },
+            {
+              "FrameGroup": "WigglingOnGround 1",
+              "Command": "Frame",
+              "Parameter": 2
+            },
+            {
+              "Command": "GotoFrameOffset",
+              "Parameter": 0
+            }
+          ]
         }
       }
     }

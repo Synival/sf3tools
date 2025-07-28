@@ -211,194 +211,182 @@
       },
       "AnimationByDirections": {
         "4": {
-          "Nodding (OnGround)": {
-            "AnimationFrames": [
-              {
-                "FrameGroup": "Nodding (OnGround) 1",
-                "Command": "Frame",
-                "Parameter": 6
-              },
-              {
-                "FrameGroup": "Nodding (OnGround) 2",
-                "Command": "Frame",
-                "Parameter": 3
-              },
-              {
-                "FrameGroup": "Nodding (OnGround) 3",
-                "Command": "Frame",
-                "Parameter": 7
-              },
-              {
-                "FrameGroup": "Nodding (OnGround) 2",
-                "Command": "Frame",
-                "Parameter": 4
-              },
-              {
-                "Command": "GotoAnimation",
-                "Parameter": 0
-              }
-            ]
-          },
-          "OpeningEyes (OnGround)": {
-            "AnimationFrames": [
-              {
-                "FrameGroup": "OpeningEyes (OnGround) 1",
-                "Command": "Frame",
-                "Parameter": 24
-              },
-              {
-                "FrameGroup": "OpeningEyes (OnGround) 2",
-                "Command": "Frame",
-                "Parameter": 2
-              },
-              {
-                "FrameGroup": "Nodding (OnGround) 1",
-                "Command": "Frame",
-                "Parameter": 3
-              },
-              {
-                "FrameGroup": "OpeningEyes (OnGround) 2",
-                "Command": "Frame",
-                "Parameter": 2
-              },
-              {
-                "FrameGroup": "OpeningEyes (OnGround) 1",
-                "Command": "Frame",
-                "Parameter": 6
-              },
-              {
-                "FrameGroup": "Nodding (OnGround) 1",
-                "Command": "Frame",
-                "Parameter": 120
-              },
-              {
-                "Command": "GotoAnimation",
-                "Parameter": 5
-              }
-            ]
-          },
-          "ShakingHead (OnGround)": {
-            "AnimationFrames": [
-              {
-                "FrameGroup": "Nodding (OnGround) 1",
-                "Command": "Frame",
-                "Parameter": 3
-              },
-              {
-                "FrameGroup": "ShakingHead (OnGround) 1",
-                "Command": "Frame",
-                "Parameter": 3
-              },
-              {
-                "FrameGroup": "Nodding (OnGround) 1",
-                "Command": "Frame",
-                "Parameter": 3
-              },
-              {
-                "FrameGroup": "ShakingHead (OnGround) 2",
-                "Command": "Frame",
-                "Parameter": 3
-              },
-              {
-                "FrameGroup": "Nodding (OnGround) 1",
-                "Command": "Frame",
-                "Parameter": 3
-              },
-              {
-                "FrameGroup": "ShakingHead (OnGround) 1",
-                "Command": "Frame",
-                "Parameter": 3
-              },
-              {
-                "FrameGroup": "Nodding (OnGround) 1",
-                "Command": "Frame",
-                "Parameter": 3
-              },
-              {
-                "FrameGroup": "ShakingHead (OnGround) 2",
-                "Command": "Frame",
-                "Parameter": 3
-              },
-              {
-                "Command": "GotoAnimation",
-                "Parameter": 0
-              }
-            ]
-          },
-          "StillFrame (OnGround, Eyes Closed)": {
-            "AnimationFrames": [
-              {
-                "FrameGroup": "OpeningEyes (OnGround) 1",
-                "Command": "Frame",
-                "Parameter": 10
-              },
-              {
-                "Command": "Stop",
-                "Parameter": 0
-              }
-            ]
-          },
-          "StillFrame (OnGround, Eyes Open)": {
-            "AnimationFrames": [
-              {
-                "FrameGroup": "Nodding (OnGround) 1",
-                "Command": "Frame",
-                "Parameter": 10
-              },
-              {
-                "Command": "Stop",
-                "Parameter": 0
-              }
-            ]
-          },
-          "Twitching (OnGround)": {
-            "AnimationFrames": [
-              {
-                "FrameGroup": "OpeningEyes (OnGround) 1",
-                "Command": "Frame",
-                "Parameter": 24
-              },
-              {
-                "FrameGroup": "Twitching (OnGround) 1",
-                "Command": "Frame",
-                "Parameter": 2
-              },
-              {
-                "FrameGroup": "Twitching (OnGround) 2",
-                "Command": "Frame",
-                "Parameter": 2
-              },
-              {
-                "FrameGroup": "Twitching (OnGround) 1",
-                "Command": "Frame",
-                "Parameter": 2
-              },
-              {
-                "FrameGroup": "OpeningEyes (OnGround) 1",
-                "Command": "Frame",
-                "Parameter": 2
-              },
-              {
-                "FrameGroup": "Twitching (OnGround) 1",
-                "Command": "Frame",
-                "Parameter": 2
-              },
-              {
-                "FrameGroup": "Twitching (OnGround) 2",
-                "Command": "Frame",
-                "Parameter": 2
-              },
-              {
-                "FrameGroup": "Twitching (OnGround) 1",
-                "Command": "Frame",
-                "Parameter": 2
-              },
-              {
-                "Command": "GotoFrameOffset",
-                "Parameter": 0
-              }
-            ]
-          }
+          "Nodding (OnGround)": [
+            {
+              "FrameGroup": "Nodding (OnGround) 1",
+              "Command": "Frame",
+              "Parameter": 6
+            },
+            {
+              "FrameGroup": "Nodding (OnGround) 2",
+              "Command": "Frame",
+              "Parameter": 3
+            },
+            {
+              "FrameGroup": "Nodding (OnGround) 3",
+              "Command": "Frame",
+              "Parameter": 7
+            },
+            {
+              "FrameGroup": "Nodding (OnGround) 2",
+              "Command": "Frame",
+              "Parameter": 4
+            },
+            {
+              "Command": "GotoAnimation",
+              "Parameter": 0
+            }
+          ],
+          "OpeningEyes (OnGround)": [
+            {
+              "FrameGroup": "OpeningEyes (OnGround) 1",
+              "Command": "Frame",
+              "Parameter": 24
+            },
+            {
+              "FrameGroup": "OpeningEyes (OnGround) 2",
+              "Command": "Frame",
+              "Parameter": 2
+            },
+            {
+              "FrameGroup": "Nodding (OnGround) 1",
+              "Command": "Frame",
+              "Parameter": 3
+            },
+            {
+              "FrameGroup": "OpeningEyes (OnGround) 2",
+              "Command": "Frame",
+              "Parameter": 2
+            },
+            {
+              "FrameGroup": "OpeningEyes (OnGround) 1",
+              "Command": "Frame",
+              "Parameter": 6
+            },
+            {
+              "FrameGroup": "Nodding (OnGround) 1",
+              "Command": "Frame",
+              "Parameter": 120
+            },
+            {
+              "Command": "GotoAnimation",
+              "Parameter": 5
+            }
+          ],
+          "ShakingHead (OnGround)": [
+            {
+              "FrameGroup": "Nodding (OnGround) 1",
+              "Command": "Frame",
+              "Parameter": 3
+            },
+            {
+              "FrameGroup": "ShakingHead (OnGround) 1",
+              "Command": "Frame",
+              "Parameter": 3
+            },
+            {
+              "FrameGroup": "Nodding (OnGround) 1",
+              "Command": "Frame",
+              "Parameter": 3
+            },
+            {
+              "FrameGroup": "ShakingHead (OnGround) 2",
+              "Command": "Frame",
+              "Parameter": 3
+            },
+            {
+              "FrameGroup": "Nodding (OnGround) 1",
+              "Command": "Frame",
+              "Parameter": 3
+            },
+            {
+              "FrameGroup": "ShakingHead (OnGround) 1",
+              "Command": "Frame",
+              "Parameter": 3
+            },
+            {
+              "FrameGroup": "Nodding (OnGround) 1",
+              "Command": "Frame",
+              "Parameter": 3
+            },
+            {
+              "FrameGroup": "ShakingHead (OnGround) 2",
+              "Command": "Frame",
+              "Parameter": 3
+            },
+            {
+              "Command": "GotoAnimation",
+              "Parameter": 0
+            }
+          ],
+          "StillFrame (OnGround, Eyes Closed)": [
+            {
+              "FrameGroup": "OpeningEyes (OnGround) 1",
+              "Command": "Frame",
+              "Parameter": 10
+            },
+            {
+              "Command": "Stop",
+              "Parameter": 0
+            }
+          ],
+          "StillFrame (OnGround, Eyes Open)": [
+            {
+              "FrameGroup": "Nodding (OnGround) 1",
+              "Command": "Frame",
+              "Parameter": 10
+            },
+            {
+              "Command": "Stop",
+              "Parameter": 0
+            }
+          ],
+          "Twitching (OnGround)": [
+            {
+              "FrameGroup": "OpeningEyes (OnGround) 1",
+              "Command": "Frame",
+              "Parameter": 24
+            },
+            {
+              "FrameGroup": "Twitching (OnGround) 1",
+              "Command": "Frame",
+              "Parameter": 2
+            },
+            {
+              "FrameGroup": "Twitching (OnGround) 2",
+              "Command": "Frame",
+              "Parameter": 2
+            },
+            {
+              "FrameGroup": "Twitching (OnGround) 1",
+              "Command": "Frame",
+              "Parameter": 2
+            },
+            {
+              "FrameGroup": "OpeningEyes (OnGround) 1",
+              "Command": "Frame",
+              "Parameter": 2
+            },
+            {
+              "FrameGroup": "Twitching (OnGround) 1",
+              "Command": "Frame",
+              "Parameter": 2
+            },
+            {
+              "FrameGroup": "Twitching (OnGround) 2",
+              "Command": "Frame",
+              "Parameter": 2
+            },
+            {
+              "FrameGroup": "Twitching (OnGround) 1",
+              "Command": "Frame",
+              "Parameter": 2
+            },
+            {
+              "Command": "GotoFrameOffset",
+              "Parameter": 0
+            }
+          ]
         }
       }
     }

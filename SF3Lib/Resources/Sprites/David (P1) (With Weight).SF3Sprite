@@ -79,47 +79,43 @@
       },
       "AnimationByDirections": {
         "4": {
-          "LiftingWeight": {
-            "AnimationFrames": [
-              {
-                "FrameGroup": "LiftingWeight 1",
-                "Command": "Frame",
-                "Parameter": 20
-              },
-              {
-                "FrameGroup": "LiftingWeight 2",
-                "Command": "Frame",
-                "Parameter": 4
-              },
-              {
-                "FrameGroup": "LiftingWeight 3",
-                "Command": "Frame",
-                "Parameter": 10
-              },
-              {
-                "FrameGroup": "LiftingWeight 2",
-                "Command": "Frame",
-                "Parameter": 3
-              },
-              {
-                "Command": "GotoFrameOffset",
-                "Parameter": 0
-              }
-            ]
-          },
-          "StillFrame": {
-            "AnimationFrames": [
-              {
-                "FrameGroup": "LiftingWeight 1",
-                "Command": "Frame",
-                "Parameter": 10
-              },
-              {
-                "Command": "Stop",
-                "Parameter": 0
-              }
-            ]
-          }
+          "LiftingWeight": [
+            {
+              "FrameGroup": "LiftingWeight 1",
+              "Command": "Frame",
+              "Parameter": 20
+            },
+            {
+              "FrameGroup": "LiftingWeight 2",
+              "Command": "Frame",
+              "Parameter": 4
+            },
+            {
+              "FrameGroup": "LiftingWeight 3",
+              "Command": "Frame",
+              "Parameter": 10
+            },
+            {
+              "FrameGroup": "LiftingWeight 2",
+              "Command": "Frame",
+              "Parameter": 3
+            },
+            {
+              "Command": "GotoFrameOffset",
+              "Parameter": 0
+            }
+          ],
+          "StillFrame": [
+            {
+              "FrameGroup": "LiftingWeight 1",
+              "Command": "Frame",
+              "Parameter": 10
+            },
+            {
+              "Command": "Stop",
+              "Parameter": 0
+            }
+          ]
         }
       }
     }

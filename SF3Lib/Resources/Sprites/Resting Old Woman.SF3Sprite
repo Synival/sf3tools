@@ -79,77 +79,73 @@
       },
       "AnimationByDirections": {
         "4": {
-          "Resting (Absurdly Long Duration)": {
-            "AnimationFrames": [
-              {
-                "FrameGroup": "Idle (Resting) 1",
-                "Command": "Frame",
-                "Parameter": 30
-              },
-              {
-                "FrameGroup": "Idle (Resting) 2",
-                "Command": "Frame",
-                "Parameter": 11
-              },
-              {
-                "FrameGroup": "Idle (Resting) 3",
-                "Command": "Frame",
-                "Parameter": 8
-              },
-              {
-                "FrameGroup": "Idle (Resting) 2",
-                "Command": "Frame",
-                "Parameter": 5
-              },
-              {
-                "FrameGroup": "Idle (Resting) 3",
-                "Command": "Frame",
-                "Parameter": 8
-              },
-              {
-                "FrameGroup": "Idle (Resting) 2",
-                "Command": "Frame",
-                "Parameter": 8
-              },
-              {
-                "FrameGroup": "Idle (Resting) 1",
-                "Command": "Frame",
-                "Parameter": 1200
-              },
-              {
-                "FrameGroup": "Idle (Resting) 2",
-                "Command": "Frame",
-                "Parameter": 6
-              },
-              {
-                "FrameGroup": "Idle (Resting) 3",
-                "Command": "Frame",
-                "Parameter": 6
-              },
-              {
-                "FrameGroup": "Idle (Resting) 2",
-                "Command": "Frame",
-                "Parameter": 5
-              },
-              {
-                "Command": "GotoFrameOffset",
-                "Parameter": 0
-              }
-            ]
-          },
-          "StillFrame (OnGround)": {
-            "AnimationFrames": [
-              {
-                "FrameGroup": "Idle (Resting) 1",
-                "Command": "Frame",
-                "Parameter": 10
-              },
-              {
-                "Command": "Stop",
-                "Parameter": 0
-              }
-            ]
-          }
+          "Resting (Absurdly Long Duration)": [
+            {
+              "FrameGroup": "Idle (Resting) 1",
+              "Command": "Frame",
+              "Parameter": 30
+            },
+            {
+              "FrameGroup": "Idle (Resting) 2",
+              "Command": "Frame",
+              "Parameter": 11
+            },
+            {
+              "FrameGroup": "Idle (Resting) 3",
+              "Command": "Frame",
+              "Parameter": 8
+            },
+            {
+              "FrameGroup": "Idle (Resting) 2",
+              "Command": "Frame",
+              "Parameter": 5
+            },
+            {
+              "FrameGroup": "Idle (Resting) 3",
+              "Command": "Frame",
+              "Parameter": 8
+            },
+            {
+              "FrameGroup": "Idle (Resting) 2",
+              "Command": "Frame",
+              "Parameter": 8
+            },
+            {
+              "FrameGroup": "Idle (Resting) 1",
+              "Command": "Frame",
+              "Parameter": 1200
+            },
+            {
+              "FrameGroup": "Idle (Resting) 2",
+              "Command": "Frame",
+              "Parameter": 6
+            },
+            {
+              "FrameGroup": "Idle (Resting) 3",
+              "Command": "Frame",
+              "Parameter": 6
+            },
+            {
+              "FrameGroup": "Idle (Resting) 2",
+              "Command": "Frame",
+              "Parameter": 5
+            },
+            {
+              "Command": "GotoFrameOffset",
+              "Parameter": 0
+            }
+          ],
+          "StillFrame (OnGround)": [
+            {
+              "FrameGroup": "Idle (Resting) 1",
+              "Command": "Frame",
+              "Parameter": 10
+            },
+            {
+              "Command": "Stop",
+              "Parameter": 0
+            }
+          ]
         }
       }
     }

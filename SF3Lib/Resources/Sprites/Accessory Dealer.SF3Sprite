@@ -258,701 +258,683 @@
       },
       "AnimationByDirections": {
         "4": {
-          "Idle": {
-            "AnimationFrames": [
-              {
-                "FrameGroup": "Idle 1",
-                "Command": "Frame",
-                "Parameter": 4
-              },
-              {
-                "FrameGroup": "Idle 2",
-                "Command": "Frame",
-                "Parameter": 4
-              },
-              {
-                "FrameGroup": "Idle 3",
-                "Command": "Frame",
-                "Parameter": 4
-              },
-              {
-                "FrameGroup": "Idle 2",
-                "Command": "Frame",
-                "Parameter": 4
-              },
-              {
-                "Command": "GotoFrameOffset",
-                "Parameter": 0
-              }
-            ]
-          },
-          "Nodding": {
-            "AnimationFrames": [
-              {
-                "FrameGroup": "Idle 1",
-                "Command": "Frame",
-                "Parameter": 5
-              },
-              {
-                "FrameGroup": "Nodding 1",
-                "Command": "Frame",
-                "Parameter": 5
-              },
-              {
-                "FrameGroup": "Nodding 2",
-                "Command": "Frame",
-                "Parameter": 5
-              },
-              {
-                "FrameGroup": "Nodding 1",
-                "Command": "Frame",
-                "Parameter": 5
-              },
-              {
-                "Command": "GotoAnimation",
-                "Parameter": 1
-              }
-            ]
-          },
-          "StillFrame (Walking)": {
-            "AnimationFrames": [
-              {
-                "FrameGroup": "Walking 1",
-                "Command": "Frame",
-                "Parameter": 10
-              },
-              {
-                "Command": "Stop",
-                "Parameter": 0
-              }
-            ]
-          },
-          "Walking": {
-            "AnimationFrames": [
-              {
-                "FrameGroup": "Walking 1",
-                "Command": "Frame",
-                "Parameter": 5
-              },
-              {
-                "FrameGroup": "Walking 2",
-                "Command": "Frame",
-                "Parameter": 5
-              },
-              {
-                "FrameGroup": "Walking 3",
-                "Command": "Frame",
-                "Parameter": 5
-              },
-              {
-                "FrameGroup": "Walking 4",
-                "Command": "Frame",
-                "Parameter": 5
-              },
-              {
-                "FrameGroup": "Walking 2",
-                "Command": "Frame",
-                "Parameter": 5
-              },
-              {
-                "FrameGroup": "Walking 5",
-                "Command": "Frame",
-                "Parameter": 5
-              },
-              {
-                "Command": "GotoFrameOffset",
-                "Parameter": 0
-              }
-            ]
-          }
+          "Idle": [
+            {
+              "FrameGroup": "Idle 1",
+              "Command": "Frame",
+              "Parameter": 4
+            },
+            {
+              "FrameGroup": "Idle 2",
+              "Command": "Frame",
+              "Parameter": 4
+            },
+            {
+              "FrameGroup": "Idle 3",
+              "Command": "Frame",
+              "Parameter": 4
+            },
+            {
+              "FrameGroup": "Idle 2",
+              "Command": "Frame",
+              "Parameter": 4
+            },
+            {
+              "Command": "GotoFrameOffset",
+              "Parameter": 0
+            }
+          ],
+          "Nodding": [
+            {
+              "FrameGroup": "Idle 1",
+              "Command": "Frame",
+              "Parameter": 5
+            },
+            {
+              "FrameGroup": "Nodding 1",
+              "Command": "Frame",
+              "Parameter": 5
+            },
+            {
+              "FrameGroup": "Nodding 2",
+              "Command": "Frame",
+              "Parameter": 5
+            },
+            {
+              "FrameGroup": "Nodding 1",
+              "Command": "Frame",
+              "Parameter": 5
+            },
+            {
+              "Command": "GotoAnimation",
+              "Parameter": 1
+            }
+          ],
+          "StillFrame (Walking)": [
+            {
+              "FrameGroup": "Walking 1",
+              "Command": "Frame",
+              "Parameter": 10
+            },
+            {
+              "Command": "Stop",
+              "Parameter": 0
+            }
+          ],
+          "Walking": [
+            {
+              "FrameGroup": "Walking 1",
+              "Command": "Frame",
+              "Parameter": 5
+            },
+            {
+              "FrameGroup": "Walking 2",
+              "Command": "Frame",
+              "Parameter": 5
+            },
+            {
+              "FrameGroup": "Walking 3",
+              "Command": "Frame",
+              "Parameter": 5
+            },
+            {
+              "FrameGroup": "Walking 4",
+              "Command": "Frame",
+              "Parameter": 5
+            },
+            {
+              "FrameGroup": "Walking 2",
+              "Command": "Frame",
+              "Parameter": 5
+            },
+            {
+              "FrameGroup": "Walking 5",
+              "Command": "Frame",
+              "Parameter": 5
+            },
+            {
+              "Command": "GotoFrameOffset",
+              "Parameter": 0
+            }
+          ]
         },
         "5": {
-          "StillFrame (Walking)": {
-            "AnimationFrames": [
-              {
-                "Frames": {
-                  "S": {
-                    "Frame": "Walking 1",
-                    "Direction": "SSE"
-                  },
-                  "SE": {
-                    "Frame": "Walking 1",
-                    "Direction": "ESE"
-                  },
-                  "E": {
-                    "Frame": "Walking 1",
-                    "Direction": "ENE"
-                  },
-                  "NE": {
-                    "Frame": "Walking 1",
-                    "Direction": "NNE"
-                  },
-                  "N": {
-                    "Frame": "Walking 1",
-                    "Direction": "N"
-                  }
+          "StillFrame (Walking)": [
+            {
+              "Frames": {
+                "S": {
+                  "Frame": "Walking 1",
+                  "Direction": "SSE"
                 },
-                "Command": "Frame",
-                "Parameter": 10
-              },
-              {
-                "Command": "Stop",
-                "Parameter": 0
-              }
-            ]
-          },
-          "Walking": {
-            "AnimationFrames": [
-              {
-                "Frames": {
-                  "S": {
-                    "Frame": "Walking 1",
-                    "Direction": "SSE"
-                  },
-                  "SE": {
-                    "Frame": "Walking 1",
-                    "Direction": "ESE"
-                  },
-                  "E": {
-                    "Frame": "Walking 1",
-                    "Direction": "ENE"
-                  },
-                  "NE": {
-                    "Frame": "Walking 1",
-                    "Direction": "NNE"
-                  },
-                  "N": {
-                    "Frame": "Walking 1",
-                    "Direction": "N"
-                  }
+                "SE": {
+                  "Frame": "Walking 1",
+                  "Direction": "ESE"
                 },
-                "Command": "Frame",
-                "Parameter": 4
-              },
-              {
-                "Frames": {
-                  "S": {
-                    "Frame": "Walking 2",
-                    "Direction": "SSE"
-                  },
-                  "SE": {
-                    "Frame": "Walking 2",
-                    "Direction": "ESE"
-                  },
-                  "E": {
-                    "Frame": "Walking 2",
-                    "Direction": "ENE"
-                  },
-                  "NE": {
-                    "Frame": "Walking 2",
-                    "Direction": "NNE"
-                  },
-                  "N": {
-                    "Frame": "Walking 2",
-                    "Direction": "N"
-                  }
+                "E": {
+                  "Frame": "Walking 1",
+                  "Direction": "ENE"
                 },
-                "Command": "Frame",
-                "Parameter": 4
-              },
-              {
-                "Frames": {
-                  "S": {
-                    "Frame": "Walking 3",
-                    "Direction": "SSE"
-                  },
-                  "SE": {
-                    "Frame": "Walking 3",
-                    "Direction": "ESE"
-                  },
-                  "E": {
-                    "Frame": "Walking 3",
-                    "Direction": "ENE"
-                  },
-                  "NE": {
-                    "Frame": "Walking 3",
-                    "Direction": "NNE"
-                  },
-                  "N": {
-                    "Frame": "Walking 3",
-                    "Direction": "N"
-                  }
+                "NE": {
+                  "Frame": "Walking 1",
+                  "Direction": "NNE"
                 },
-                "Command": "Frame",
-                "Parameter": 4
+                "N": {
+                  "Frame": "Walking 1",
+                  "Direction": "N"
+                }
               },
-              {
-                "Frames": {
-                  "S": {
-                    "Frame": "Walking 4",
-                    "Direction": "SSE"
-                  },
-                  "SE": {
-                    "Frame": "Walking 4",
-                    "Direction": "ESE"
-                  },
-                  "E": {
-                    "Frame": "Walking 4",
-                    "Direction": "ENE"
-                  },
-                  "NE": {
-                    "Frame": "Walking 4",
-                    "Direction": "NNE"
-                  },
-                  "N": {
-                    "Frame": "Walking 4",
-                    "Direction": "N"
-                  }
+              "Command": "Frame",
+              "Parameter": 10
+            },
+            {
+              "Command": "Stop",
+              "Parameter": 0
+            }
+          ],
+          "Walking": [
+            {
+              "Frames": {
+                "S": {
+                  "Frame": "Walking 1",
+                  "Direction": "SSE"
                 },
-                "Command": "Frame",
-                "Parameter": 4
-              },
-              {
-                "Frames": {
-                  "S": {
-                    "Frame": "Walking 2",
-                    "Direction": "SSE"
-                  },
-                  "SE": {
-                    "Frame": "Walking 2",
-                    "Direction": "ESE"
-                  },
-                  "E": {
-                    "Frame": "Walking 2",
-                    "Direction": "ENE"
-                  },
-                  "NE": {
-                    "Frame": "Walking 2",
-                    "Direction": "NNE"
-                  },
-                  "N": {
-                    "Frame": "Walking 2",
-                    "Direction": "N"
-                  }
+                "SE": {
+                  "Frame": "Walking 1",
+                  "Direction": "ESE"
                 },
-                "Command": "Frame",
-                "Parameter": 4
-              },
-              {
-                "Frames": {
-                  "S": {
-                    "Frame": "Walking 5",
-                    "Direction": "SSE"
-                  },
-                  "SE": {
-                    "Frame": "Walking 5",
-                    "Direction": "ESE"
-                  },
-                  "E": {
-                    "Frame": "Walking 5",
-                    "Direction": "ENE"
-                  },
-                  "NE": {
-                    "Frame": "Walking 5",
-                    "Direction": "NNE"
-                  },
-                  "N": {
-                    "Frame": "Walking 5",
-                    "Direction": "N"
-                  }
+                "E": {
+                  "Frame": "Walking 1",
+                  "Direction": "ENE"
                 },
-                "Command": "Frame",
-                "Parameter": 4
-              },
-              {
-                "Command": "GotoFrameOffset",
-                "Parameter": 0
-              }
-            ]
-          },
-          "Walking (Reduced)": {
-            "AnimationFrames": [
-              {
-                "Frames": {
-                  "S": {
-                    "Frame": "Walking 1",
-                    "Direction": "SSE"
-                  },
-                  "SE": {
-                    "Frame": "Walking 1",
-                    "Direction": "ESE"
-                  },
-                  "E": {
-                    "Frame": "Walking 1",
-                    "Direction": "ENE"
-                  },
-                  "NE": {
-                    "Frame": "Walking 1",
-                    "Direction": "NNE"
-                  },
-                  "N": {
-                    "Frame": "Walking 1",
-                    "Direction": "N"
-                  }
+                "NE": {
+                  "Frame": "Walking 1",
+                  "Direction": "NNE"
                 },
-                "Command": "Frame",
-                "Parameter": 6
+                "N": {
+                  "Frame": "Walking 1",
+                  "Direction": "N"
+                }
               },
-              {
-                "Frames": {
-                  "S": {
-                    "Frame": "Walking 2",
-                    "Direction": "SSE"
-                  },
-                  "SE": {
-                    "Frame": "Walking 2",
-                    "Direction": "ESE"
-                  },
-                  "E": {
-                    "Frame": "Walking 2",
-                    "Direction": "ENE"
-                  },
-                  "NE": {
-                    "Frame": "Walking 2",
-                    "Direction": "NNE"
-                  },
-                  "N": {
-                    "Frame": "Walking 2",
-                    "Direction": "N"
-                  }
+              "Command": "Frame",
+              "Parameter": 4
+            },
+            {
+              "Frames": {
+                "S": {
+                  "Frame": "Walking 2",
+                  "Direction": "SSE"
                 },
-                "Command": "Frame",
-                "Parameter": 6
-              },
-              {
-                "Frames": {
-                  "S": {
-                    "Frame": "Walking 4",
-                    "Direction": "SSE"
-                  },
-                  "SE": {
-                    "Frame": "Walking 4",
-                    "Direction": "ESE"
-                  },
-                  "E": {
-                    "Frame": "Walking 4",
-                    "Direction": "ENE"
-                  },
-                  "NE": {
-                    "Frame": "Walking 4",
-                    "Direction": "NNE"
-                  },
-                  "N": {
-                    "Frame": "Walking 4",
-                    "Direction": "N"
-                  }
+                "SE": {
+                  "Frame": "Walking 2",
+                  "Direction": "ESE"
                 },
-                "Command": "Frame",
-                "Parameter": 6
-              },
-              {
-                "Frames": {
-                  "S": {
-                    "Frame": "Walking 2",
-                    "Direction": "SSE"
-                  },
-                  "SE": {
-                    "Frame": "Walking 2",
-                    "Direction": "ESE"
-                  },
-                  "E": {
-                    "Frame": "Walking 2",
-                    "Direction": "ENE"
-                  },
-                  "NE": {
-                    "Frame": "Walking 2",
-                    "Direction": "NNE"
-                  },
-                  "N": {
-                    "Frame": "Walking 2",
-                    "Direction": "N"
-                  }
+                "E": {
+                  "Frame": "Walking 2",
+                  "Direction": "ENE"
                 },
-                "Command": "Frame",
-                "Parameter": 6
-              },
-              {
-                "Command": "GotoFrameOffset",
-                "Parameter": 0
-              }
-            ]
-          },
-          "Walking (Slower)": {
-            "AnimationFrames": [
-              {
-                "Frames": {
-                  "S": {
-                    "Frame": "Walking 1",
-                    "Direction": "SSE"
-                  },
-                  "SE": {
-                    "Frame": "Walking 1",
-                    "Direction": "ESE"
-                  },
-                  "E": {
-                    "Frame": "Walking 1",
-                    "Direction": "ENE"
-                  },
-                  "NE": {
-                    "Frame": "Walking 1",
-                    "Direction": "NNE"
-                  },
-                  "N": {
-                    "Frame": "Walking 1",
-                    "Direction": "N"
-                  }
+                "NE": {
+                  "Frame": "Walking 2",
+                  "Direction": "NNE"
                 },
-                "Command": "Frame",
-                "Parameter": 5
+                "N": {
+                  "Frame": "Walking 2",
+                  "Direction": "N"
+                }
               },
-              {
-                "Frames": {
-                  "S": {
-                    "Frame": "Walking 2",
-                    "Direction": "SSE"
-                  },
-                  "SE": {
-                    "Frame": "Walking 2",
-                    "Direction": "ESE"
-                  },
-                  "E": {
-                    "Frame": "Walking 2",
-                    "Direction": "ENE"
-                  },
-                  "NE": {
-                    "Frame": "Walking 2",
-                    "Direction": "NNE"
-                  },
-                  "N": {
-                    "Frame": "Walking 2",
-                    "Direction": "N"
-                  }
+              "Command": "Frame",
+              "Parameter": 4
+            },
+            {
+              "Frames": {
+                "S": {
+                  "Frame": "Walking 3",
+                  "Direction": "SSE"
                 },
-                "Command": "Frame",
-                "Parameter": 5
-              },
-              {
-                "Frames": {
-                  "S": {
-                    "Frame": "Walking 3",
-                    "Direction": "SSE"
-                  },
-                  "SE": {
-                    "Frame": "Walking 3",
-                    "Direction": "ESE"
-                  },
-                  "E": {
-                    "Frame": "Walking 3",
-                    "Direction": "ENE"
-                  },
-                  "NE": {
-                    "Frame": "Walking 3",
-                    "Direction": "NNE"
-                  },
-                  "N": {
-                    "Frame": "Walking 3",
-                    "Direction": "N"
-                  }
+                "SE": {
+                  "Frame": "Walking 3",
+                  "Direction": "ESE"
                 },
-                "Command": "Frame",
-                "Parameter": 5
-              },
-              {
-                "Frames": {
-                  "S": {
-                    "Frame": "Walking 4",
-                    "Direction": "SSE"
-                  },
-                  "SE": {
-                    "Frame": "Walking 4",
-                    "Direction": "ESE"
-                  },
-                  "E": {
-                    "Frame": "Walking 4",
-                    "Direction": "ENE"
-                  },
-                  "NE": {
-                    "Frame": "Walking 4",
-                    "Direction": "NNE"
-                  },
-                  "N": {
-                    "Frame": "Walking 4",
-                    "Direction": "N"
-                  }
+                "E": {
+                  "Frame": "Walking 3",
+                  "Direction": "ENE"
                 },
-                "Command": "Frame",
-                "Parameter": 5
-              },
-              {
-                "Frames": {
-                  "S": {
-                    "Frame": "Walking 2",
-                    "Direction": "SSE"
-                  },
-                  "SE": {
-                    "Frame": "Walking 2",
-                    "Direction": "ESE"
-                  },
-                  "E": {
-                    "Frame": "Walking 2",
-                    "Direction": "ENE"
-                  },
-                  "NE": {
-                    "Frame": "Walking 2",
-                    "Direction": "NNE"
-                  },
-                  "N": {
-                    "Frame": "Walking 2",
-                    "Direction": "N"
-                  }
+                "NE": {
+                  "Frame": "Walking 3",
+                  "Direction": "NNE"
                 },
-                "Command": "Frame",
-                "Parameter": 5
+                "N": {
+                  "Frame": "Walking 3",
+                  "Direction": "N"
+                }
               },
-              {
-                "Frames": {
-                  "S": {
-                    "Frame": "Walking 5",
-                    "Direction": "SSE"
-                  },
-                  "SE": {
-                    "Frame": "Walking 5",
-                    "Direction": "ESE"
-                  },
-                  "E": {
-                    "Frame": "Walking 5",
-                    "Direction": "ENE"
-                  },
-                  "NE": {
-                    "Frame": "Walking 5",
-                    "Direction": "NNE"
-                  },
-                  "N": {
-                    "Frame": "Walking 5",
-                    "Direction": "N"
-                  }
+              "Command": "Frame",
+              "Parameter": 4
+            },
+            {
+              "Frames": {
+                "S": {
+                  "Frame": "Walking 4",
+                  "Direction": "SSE"
                 },
-                "Command": "Frame",
-                "Parameter": 5
-              },
-              {
-                "Command": "GotoFrameOffset",
-                "Parameter": 0
-              }
-            ]
-          },
-          "Walking (Very Slow, Incomplete)": {
-            "AnimationFrames": [
-              {
-                "Frames": {
-                  "S": {
-                    "Frame": "Walking 1",
-                    "Direction": "SSE"
-                  },
-                  "SE": {
-                    "Frame": "Walking 1",
-                    "Direction": "ESE"
-                  },
-                  "E": {
-                    "Frame": "Walking 1",
-                    "Direction": "ENE"
-                  },
-                  "NE": {
-                    "Frame": "Walking 1",
-                    "Direction": "NNE"
-                  },
-                  "N": {
-                    "Frame": "Walking 1",
-                    "Direction": "N"
-                  }
+                "SE": {
+                  "Frame": "Walking 4",
+                  "Direction": "ESE"
                 },
-                "Command": "Frame",
-                "Parameter": 10
-              },
-              {
-                "Frames": {
-                  "S": {
-                    "Frame": "Walking 5",
-                    "Direction": "SSE"
-                  },
-                  "SE": {
-                    "Frame": "Walking 5",
-                    "Direction": "ESE"
-                  },
-                  "E": {
-                    "Frame": "Walking 5",
-                    "Direction": "ENE"
-                  },
-                  "NE": {
-                    "Frame": "Walking 5",
-                    "Direction": "NNE"
-                  },
-                  "N": {
-                    "Frame": "Walking 5",
-                    "Direction": "N"
-                  }
+                "E": {
+                  "Frame": "Walking 4",
+                  "Direction": "ENE"
                 },
-                "Command": "Frame",
-                "Parameter": 10
-              },
-              {
-                "Frames": {
-                  "S": {
-                    "Frame": "Walking 2",
-                    "Direction": "SSE"
-                  },
-                  "SE": {
-                    "Frame": "Walking 2",
-                    "Direction": "ESE"
-                  },
-                  "E": {
-                    "Frame": "Walking 2",
-                    "Direction": "ENE"
-                  },
-                  "NE": {
-                    "Frame": "Walking 2",
-                    "Direction": "NNE"
-                  },
-                  "N": {
-                    "Frame": "Walking 2",
-                    "Direction": "N"
-                  }
+                "NE": {
+                  "Frame": "Walking 4",
+                  "Direction": "NNE"
                 },
-                "Command": "Frame",
-                "Parameter": 10
+                "N": {
+                  "Frame": "Walking 4",
+                  "Direction": "N"
+                }
               },
-              {
-                "Frames": {
-                  "S": {
-                    "Frame": "Walking 5",
-                    "Direction": "SSE"
-                  },
-                  "SE": {
-                    "Frame": "Walking 5",
-                    "Direction": "ESE"
-                  },
-                  "E": {
-                    "Frame": "Walking 5",
-                    "Direction": "ENE"
-                  },
-                  "NE": {
-                    "Frame": "Walking 5",
-                    "Direction": "NNE"
-                  },
-                  "N": {
-                    "Frame": "Walking 5",
-                    "Direction": "N"
-                  }
+              "Command": "Frame",
+              "Parameter": 4
+            },
+            {
+              "Frames": {
+                "S": {
+                  "Frame": "Walking 2",
+                  "Direction": "SSE"
                 },
-                "Command": "Frame",
-                "Parameter": 10
+                "SE": {
+                  "Frame": "Walking 2",
+                  "Direction": "ESE"
+                },
+                "E": {
+                  "Frame": "Walking 2",
+                  "Direction": "ENE"
+                },
+                "NE": {
+                  "Frame": "Walking 2",
+                  "Direction": "NNE"
+                },
+                "N": {
+                  "Frame": "Walking 2",
+                  "Direction": "N"
+                }
               },
-              {
-                "Command": "GotoFrameOffset",
-                "Parameter": 0
-              }
-            ]
-          }
+              "Command": "Frame",
+              "Parameter": 4
+            },
+            {
+              "Frames": {
+                "S": {
+                  "Frame": "Walking 5",
+                  "Direction": "SSE"
+                },
+                "SE": {
+                  "Frame": "Walking 5",
+                  "Direction": "ESE"
+                },
+                "E": {
+                  "Frame": "Walking 5",
+                  "Direction": "ENE"
+                },
+                "NE": {
+                  "Frame": "Walking 5",
+                  "Direction": "NNE"
+                },
+                "N": {
+                  "Frame": "Walking 5",
+                  "Direction": "N"
+                }
+              },
+              "Command": "Frame",
+              "Parameter": 4
+            },
+            {
+              "Command": "GotoFrameOffset",
+              "Parameter": 0
+            }
+          ],
+          "Walking (Reduced)": [
+            {
+              "Frames": {
+                "S": {
+                  "Frame": "Walking 1",
+                  "Direction": "SSE"
+                },
+                "SE": {
+                  "Frame": "Walking 1",
+                  "Direction": "ESE"
+                },
+                "E": {
+                  "Frame": "Walking 1",
+                  "Direction": "ENE"
+                },
+                "NE": {
+                  "Frame": "Walking 1",
+                  "Direction": "NNE"
+                },
+                "N": {
+                  "Frame": "Walking 1",
+                  "Direction": "N"
+                }
+              },
+              "Command": "Frame",
+              "Parameter": 6
+            },
+            {
+              "Frames": {
+                "S": {
+                  "Frame": "Walking 2",
+                  "Direction": "SSE"
+                },
+                "SE": {
+                  "Frame": "Walking 2",
+                  "Direction": "ESE"
+                },
+                "E": {
+                  "Frame": "Walking 2",
+                  "Direction": "ENE"
+                },
+                "NE": {
+                  "Frame": "Walking 2",
+                  "Direction": "NNE"
+                },
+                "N": {
+                  "Frame": "Walking 2",
+                  "Direction": "N"
+                }
+              },
+              "Command": "Frame",
+              "Parameter": 6
+            },
+            {
+              "Frames": {
+                "S": {
+                  "Frame": "Walking 4",
+                  "Direction": "SSE"
+                },
+                "SE": {
+                  "Frame": "Walking 4",
+                  "Direction": "ESE"
+                },
+                "E": {
+                  "Frame": "Walking 4",
+                  "Direction": "ENE"
+                },
+                "NE": {
+                  "Frame": "Walking 4",
+                  "Direction": "NNE"
+                },
+                "N": {
+                  "Frame": "Walking 4",
+                  "Direction": "N"
+                }
+              },
+              "Command": "Frame",
+              "Parameter": 6
+            },
+            {
+              "Frames": {
+                "S": {
+                  "Frame": "Walking 2",
+                  "Direction": "SSE"
+                },
+                "SE": {
+                  "Frame": "Walking 2",
+                  "Direction": "ESE"
+                },
+                "E": {
+                  "Frame": "Walking 2",
+                  "Direction": "ENE"
+                },
+                "NE": {
+                  "Frame": "Walking 2",
+                  "Direction": "NNE"
+                },
+                "N": {
+                  "Frame": "Walking 2",
+                  "Direction": "N"
+                }
+              },
+              "Command": "Frame",
+              "Parameter": 6
+            },
+            {
+              "Command": "GotoFrameOffset",
+              "Parameter": 0
+            }
+          ],
+          "Walking (Slower)": [
+            {
+              "Frames": {
+                "S": {
+                  "Frame": "Walking 1",
+                  "Direction": "SSE"
+                },
+                "SE": {
+                  "Frame": "Walking 1",
+                  "Direction": "ESE"
+                },
+                "E": {
+                  "Frame": "Walking 1",
+                  "Direction": "ENE"
+                },
+                "NE": {
+                  "Frame": "Walking 1",
+                  "Direction": "NNE"
+                },
+                "N": {
+                  "Frame": "Walking 1",
+                  "Direction": "N"
+                }
+              },
+              "Command": "Frame",
+              "Parameter": 5
+            },
+            {
+              "Frames": {
+                "S": {
+                  "Frame": "Walking 2",
+                  "Direction": "SSE"
+                },
+                "SE": {
+                  "Frame": "Walking 2",
+                  "Direction": "ESE"
+                },
+                "E": {
+                  "Frame": "Walking 2",
+                  "Direction": "ENE"
+                },
+                "NE": {
+                  "Frame": "Walking 2",
+                  "Direction": "NNE"
+                },
+                "N": {
+                  "Frame": "Walking 2",
+                  "Direction": "N"
+                }
+              },
+              "Command": "Frame",
+              "Parameter": 5
+            },
+            {
+              "Frames": {
+                "S": {
+                  "Frame": "Walking 3",
+                  "Direction": "SSE"
+                },
+                "SE": {
+                  "Frame": "Walking 3",
+                  "Direction": "ESE"
+                },
+                "E": {
+                  "Frame": "Walking 3",
+                  "Direction": "ENE"
+                },
+                "NE": {
+                  "Frame": "Walking 3",
+                  "Direction": "NNE"
+                },
+                "N": {
+                  "Frame": "Walking 3",
+                  "Direction": "N"
+                }
+              },
+              "Command": "Frame",
+              "Parameter": 5
+            },
+            {
+              "Frames": {
+                "S": {
+                  "Frame": "Walking 4",
+                  "Direction": "SSE"
+                },
+                "SE": {
+                  "Frame": "Walking 4",
+                  "Direction": "ESE"
+                },
+                "E": {
+                  "Frame": "Walking 4",
+                  "Direction": "ENE"
+                },
+                "NE": {
+                  "Frame": "Walking 4",
+                  "Direction": "NNE"
+                },
+                "N": {
+                  "Frame": "Walking 4",
+                  "Direction": "N"
+                }
+              },
+              "Command": "Frame",
+              "Parameter": 5
+            },
+            {
+              "Frames": {
+                "S": {
+                  "Frame": "Walking 2",
+                  "Direction": "SSE"
+                },
+                "SE": {
+                  "Frame": "Walking 2",
+                  "Direction": "ESE"
+                },
+                "E": {
+                  "Frame": "Walking 2",
+                  "Direction": "ENE"
+                },
+                "NE": {
+                  "Frame": "Walking 2",
+                  "Direction": "NNE"
+                },
+                "N": {
+                  "Frame": "Walking 2",
+                  "Direction": "N"
+                }
+              },
+              "Command": "Frame",
+              "Parameter": 5
+            },
+            {
+              "Frames": {
+                "S": {
+                  "Frame": "Walking 5",
+                  "Direction": "SSE"
+                },
+                "SE": {
+                  "Frame": "Walking 5",
+                  "Direction": "ESE"
+                },
+                "E": {
+                  "Frame": "Walking 5",
+                  "Direction": "ENE"
+                },
+                "NE": {
+                  "Frame": "Walking 5",
+                  "Direction": "NNE"
+                },
+                "N": {
+                  "Frame": "Walking 5",
+                  "Direction": "N"
+                }
+              },
+              "Command": "Frame",
+              "Parameter": 5
+            },
+            {
+              "Command": "GotoFrameOffset",
+              "Parameter": 0
+            }
+          ],
+          "Walking (Very Slow, Incomplete)": [
+            {
+              "Frames": {
+                "S": {
+                  "Frame": "Walking 1",
+                  "Direction": "SSE"
+                },
+                "SE": {
+                  "Frame": "Walking 1",
+                  "Direction": "ESE"
+                },
+                "E": {
+                  "Frame": "Walking 1",
+                  "Direction": "ENE"
+                },
+                "NE": {
+                  "Frame": "Walking 1",
+                  "Direction": "NNE"
+                },
+                "N": {
+                  "Frame": "Walking 1",
+                  "Direction": "N"
+                }
+              },
+              "Command": "Frame",
+              "Parameter": 10
+            },
+            {
+              "Frames": {
+                "S": {
+                  "Frame": "Walking 5",
+                  "Direction": "SSE"
+                },
+                "SE": {
+                  "Frame": "Walking 5",
+                  "Direction": "ESE"
+                },
+                "E": {
+                  "Frame": "Walking 5",
+                  "Direction": "ENE"
+                },
+                "NE": {
+                  "Frame": "Walking 5",
+                  "Direction": "NNE"
+                },
+                "N": {
+                  "Frame": "Walking 5",
+                  "Direction": "N"
+                }
+              },
+              "Command": "Frame",
+              "Parameter": 10
+            },
+            {
+              "Frames": {
+                "S": {
+                  "Frame": "Walking 2",
+                  "Direction": "SSE"
+                },
+                "SE": {
+                  "Frame": "Walking 2",
+                  "Direction": "ESE"
+                },
+                "E": {
+                  "Frame": "Walking 2",
+                  "Direction": "ENE"
+                },
+                "NE": {
+                  "Frame": "Walking 2",
+                  "Direction": "NNE"
+                },
+                "N": {
+                  "Frame": "Walking 2",
+                  "Direction": "N"
+                }
+              },
+              "Command": "Frame",
+              "Parameter": 10
+            },
+            {
+              "Frames": {
+                "S": {
+                  "Frame": "Walking 5",
+                  "Direction": "SSE"
+                },
+                "SE": {
+                  "Frame": "Walking 5",
+                  "Direction": "ESE"
+                },
+                "E": {
+                  "Frame": "Walking 5",
+                  "Direction": "ENE"
+                },
+                "NE": {
+                  "Frame": "Walking 5",
+                  "Direction": "NNE"
+                },
+                "N": {
+                  "Frame": "Walking 5",
+                  "Direction": "N"
+                }
+              },
+              "Command": "Frame",
+              "Parameter": 10
+            },
+            {
+              "Command": "GotoFrameOffset",
+              "Parameter": 0
+            }
+          ]
         }
       }
     }

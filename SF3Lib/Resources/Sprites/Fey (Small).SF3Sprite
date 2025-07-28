@@ -251,468 +251,450 @@
       },
       "AnimationByDirections": {
         "1": {
-          "Giggle": {
-            "AnimationFrames": [
-              {
-                "FrameGroup": "Giggle 1",
-                "Command": "Frame",
-                "Parameter": 2
-              },
-              {
-                "FrameGroup": "Giggle 2",
-                "Command": "Frame",
-                "Parameter": 2
-              },
-              {
-                "FrameGroup": "Giggle 3",
-                "Command": "Frame",
-                "Parameter": 2
-              },
-              {
-                "FrameGroup": "Giggle 4",
-                "Command": "Frame",
-                "Parameter": 2
-              },
-              {
-                "FrameGroup": "Giggle 3",
-                "Command": "Frame",
-                "Parameter": 2
-              },
-              {
-                "FrameGroup": "Giggle 4",
-                "Command": "Frame",
-                "Parameter": 2
-              },
-              {
-                "FrameGroup": "Giggle 3",
-                "Command": "Frame",
-                "Parameter": 2
-              },
-              {
-                "FrameGroup": "Giggle 4",
-                "Command": "Frame",
-                "Parameter": 2
-              },
-              {
-                "FrameGroup": "Giggle 3",
-                "Command": "Frame",
-                "Parameter": 2
-              },
-              {
-                "FrameGroup": "Giggle 2",
-                "Command": "Frame",
-                "Parameter": 2
-              },
-              {
-                "FrameGroup": "Giggle 1",
-                "Command": "Frame",
-                "Parameter": 2
-              },
-              {
-                "Command": "GotoAnimation",
-                "Parameter": 1
-              }
-            ]
-          },
-          "Idle": {
-            "AnimationFrames": [
-              {
-                "FrameGroup": "Idle 1",
-                "Command": "Frame",
-                "Parameter": 7
-              },
-              {
-                "FrameGroup": "Idle 2",
-                "Command": "Frame",
-                "Parameter": 7
-              },
-              {
-                "FrameGroup": "Idle 3",
-                "Command": "Frame",
-                "Parameter": 7
-              },
-              {
-                "FrameGroup": "Idle 2",
-                "Command": "Frame",
-                "Parameter": 7
-              },
-              {
-                "Command": "GotoFrameOffset",
-                "Parameter": 0
-              }
-            ]
-          },
-          "SlapIshahakat (Long, Change to 1)": {
-            "AnimationFrames": [
-              {
-                "FrameGroup": "SlapIshahakat 1",
-                "Command": "Frame",
-                "Parameter": 2
-              },
-              {
-                "FrameGroup": "SlapIshahakat 2",
-                "Command": "Frame",
-                "Parameter": 2
-              },
-              {
-                "FrameGroup": "SlapIshahakat 3",
-                "Command": "Frame",
-                "Parameter": 2
-              },
-              {
-                "FrameGroup": "SlapIshahakat 4",
-                "Command": "Frame",
-                "Parameter": 2
-              },
-              {
-                "FrameGroup": "SlapIshahakat 5",
-                "Command": "Frame",
-                "Parameter": 2
-              },
-              {
-                "FrameGroup": "SlapIshahakat 6",
-                "Command": "Frame",
-                "Parameter": 2
-              },
-              {
-                "FrameGroup": "SlapIshahakat 7",
-                "Command": "Frame",
-                "Parameter": 2
-              },
-              {
-                "FrameGroup": "SlapIshahakat 6",
-                "Command": "Frame",
-                "Parameter": 2
-              },
-              {
-                "FrameGroup": "SlapIshahakat 7",
-                "Command": "Frame",
-                "Parameter": 2
-              },
-              {
-                "FrameGroup": "SlapIshahakat 6",
-                "Command": "Frame",
-                "Parameter": 2
-              },
-              {
-                "FrameGroup": "SlapIshahakat 5",
-                "Command": "Frame",
-                "Parameter": 2
-              },
-              {
-                "FrameGroup": "SlapIshahakat 4",
-                "Command": "Frame",
-                "Parameter": 2
-              },
-              {
-                "FrameGroup": "SlapIshahakat 8",
-                "Command": "Frame",
-                "Parameter": 3
-              },
-              {
-                "FrameGroup": "SlapIshahakat 9",
-                "Command": "Frame",
-                "Parameter": 15
-              },
-              {
-                "FrameGroup": "SlapIshahakat 10",
-                "Command": "Frame",
-                "Parameter": 20
-              },
-              {
-                "FrameGroup": "SlapIshahakat 4",
-                "Command": "Frame",
-                "Parameter": 5
-              },
-              {
-                "FrameGroup": "SlapIshahakat 3",
-                "Command": "Frame",
-                "Parameter": 2
-              },
-              {
-                "FrameGroup": "SlapIshahakat 2",
-                "Command": "Frame",
-                "Parameter": 2
-              },
-              {
-                "FrameGroup": "SlapIshahakat 1",
-                "Command": "Frame",
-                "Parameter": 2
-              },
-              {
-                "Command": "GotoAnimation",
-                "Parameter": 1
-              }
-            ]
-          },
-          "SlapIshahakat (Stop)": {
-            "AnimationFrames": [
-              {
-                "FrameGroup": "SlapIshahakat 1",
-                "Command": "Frame",
-                "Parameter": 2
-              },
-              {
-                "FrameGroup": "SlapIshahakat 2",
-                "Command": "Frame",
-                "Parameter": 2
-              },
-              {
-                "FrameGroup": "SlapIshahakat 3",
-                "Command": "Frame",
-                "Parameter": 2
-              },
-              {
-                "FrameGroup": "SlapIshahakat 4",
-                "Command": "Frame",
-                "Parameter": 2
-              },
-              {
-                "FrameGroup": "SlapIshahakat 5",
-                "Command": "Frame",
-                "Parameter": 2
-              },
-              {
-                "FrameGroup": "SlapIshahakat 6",
-                "Command": "Frame",
-                "Parameter": 2
-              },
-              {
-                "FrameGroup": "SlapIshahakat 7",
-                "Command": "Frame",
-                "Parameter": 2
-              },
-              {
-                "FrameGroup": "SlapIshahakat 6",
-                "Command": "Frame",
-                "Parameter": 2
-              },
-              {
-                "FrameGroup": "SlapIshahakat 7",
-                "Command": "Frame",
-                "Parameter": 2
-              },
-              {
-                "FrameGroup": "SlapIshahakat 6",
-                "Command": "Frame",
-                "Parameter": 2
-              },
-              {
-                "FrameGroup": "SlapIshahakat 5",
-                "Command": "Frame",
-                "Parameter": 2
-              },
-              {
-                "FrameGroup": "SlapIshahakat 4",
-                "Command": "Frame",
-                "Parameter": 22
-              },
-              {
-                "Command": "Stop",
-                "Parameter": 1
-              }
-            ]
-          },
-          "SpinUpToDown": {
-            "AnimationFrames": [
-              {
-                "FrameGroup": "SpinUpToDown 1",
-                "Command": "Frame",
-                "Parameter": 2
-              },
-              {
-                "FrameGroup": "SpinUpToDown 2",
-                "Command": "Frame",
-                "Parameter": 2
-              },
-              {
-                "FrameGroup": "SpinUpToDown 3",
-                "Command": "Frame",
-                "Parameter": 2
-              },
-              {
-                "FrameGroup": "SpinUpToDown 4",
-                "Command": "Frame",
-                "Parameter": 2
-              },
-              {
-                "FrameGroup": "SpinUpToDown 5",
-                "Command": "Frame",
-                "Parameter": 2
-              },
-              {
-                "FrameGroup": "SpinUpToDown 6",
-                "Command": "Frame",
-                "Parameter": 2
-              },
-              {
-                "FrameGroup": "SpinUpToDown 7",
-                "Command": "Frame",
-                "Parameter": 2
-              },
-              {
-                "FrameGroup": "SpinUpToDown 8",
-                "Command": "Frame",
-                "Parameter": 2
-              },
-              {
-                "FrameGroup": "SpinUpToDown 9",
-                "Command": "Frame",
-                "Parameter": 2
-              },
-              {
-                "Command": "GotoAnimation",
-                "Parameter": 1
-              }
-            ]
-          },
-          "StillFrame (Idle)": {
-            "AnimationFrames": [
-              {
-                "FrameGroup": "Idle 3",
-                "Command": "Frame",
-                "Parameter": 10
-              },
-              {
-                "Command": "Stop",
-                "Parameter": 0
-              }
-            ]
-          },
-          "TouchingIshahakat": {
-            "AnimationFrames": [
-              {
-                "FrameGroup": "SlapIshahakat 1",
-                "Command": "Frame",
-                "Parameter": 2
-              },
-              {
-                "FrameGroup": "SlapIshahakat 2",
-                "Command": "Frame",
-                "Parameter": 2
-              },
-              {
-                "FrameGroup": "SlapIshahakat 3",
-                "Command": "Frame",
-                "Parameter": 2
-              },
-              {
-                "FrameGroup": "SlapIshahakat 4",
-                "Command": "Frame",
-                "Parameter": 2
-              },
-              {
-                "FrameGroup": "SlapIshahakat 5",
-                "Command": "Frame",
-                "Parameter": 2
-              },
-              {
-                "FrameGroup": "SlapIshahakat 6",
-                "Command": "Frame",
-                "Parameter": 22
-              },
-              {
-                "Command": "Stop",
-                "Parameter": 0
-              }
-            ]
-          },
-          "TurningBack": {
-            "AnimationFrames": [
-              {
-                "FrameGroup": "SlapIshahakat 3",
-                "Command": "Frame",
-                "Parameter": 2
-              },
-              {
-                "FrameGroup": "SlapIshahakat 2",
-                "Command": "Frame",
-                "Parameter": 2
-              },
-              {
-                "FrameGroup": "SlapIshahakat 1",
-                "Command": "Frame",
-                "Parameter": 2
-              },
-              {
-                "Command": "GotoAnimation",
-                "Parameter": 1
-              }
-            ]
-          },
-          "Yawning": {
-            "AnimationFrames": [
-              {
-                "FrameGroup": "Yawning 1",
-                "Command": "Frame",
-                "Parameter": 3
-              },
-              {
-                "FrameGroup": "Yawning 2",
-                "Command": "Frame",
-                "Parameter": 3
-              },
-              {
-                "FrameGroup": "Yawning 3",
-                "Command": "Frame",
-                "Parameter": 3
-              },
-              {
-                "FrameGroup": "Yawning 4",
-                "Command": "Frame",
-                "Parameter": 3
-              },
-              {
-                "FrameGroup": "Yawning 5",
-                "Command": "Frame",
-                "Parameter": 3
-              },
-              {
-                "FrameGroup": "Yawning 4",
-                "Command": "Frame",
-                "Parameter": 3
-              },
-              {
-                "FrameGroup": "Yawning 5",
-                "Command": "Frame",
-                "Parameter": 3
-              },
-              {
-                "FrameGroup": "Yawning 4",
-                "Command": "Frame",
-                "Parameter": 3
-              },
-              {
-                "FrameGroup": "Yawning 5",
-                "Command": "Frame",
-                "Parameter": 3
-              },
-              {
-                "FrameGroup": "Yawning 4",
-                "Command": "Frame",
-                "Parameter": 3
-              },
-              {
-                "FrameGroup": "Yawning 3",
-                "Command": "Frame",
-                "Parameter": 3
-              },
-              {
-                "FrameGroup": "Yawning 2",
-                "Command": "Frame",
-                "Parameter": 3
-              },
-              {
-                "FrameGroup": "Yawning 1",
-                "Command": "Frame",
-                "Parameter": 3
-              },
-              {
-                "Command": "GotoAnimation",
-                "Parameter": 1
-              }
-            ]
-          }
+          "Giggle": [
+            {
+              "FrameGroup": "Giggle 1",
+              "Command": "Frame",
+              "Parameter": 2
+            },
+            {
+              "FrameGroup": "Giggle 2",
+              "Command": "Frame",
+              "Parameter": 2
+            },
+            {
+              "FrameGroup": "Giggle 3",
+              "Command": "Frame",
+              "Parameter": 2
+            },
+            {
+              "FrameGroup": "Giggle 4",
+              "Command": "Frame",
+              "Parameter": 2
+            },
+            {
+              "FrameGroup": "Giggle 3",
+              "Command": "Frame",
+              "Parameter": 2
+            },
+            {
+              "FrameGroup": "Giggle 4",
+              "Command": "Frame",
+              "Parameter": 2
+            },
+            {
+              "FrameGroup": "Giggle 3",
+              "Command": "Frame",
+              "Parameter": 2
+            },
+            {
+              "FrameGroup": "Giggle 4",
+              "Command": "Frame",
+              "Parameter": 2
+            },
+            {
+              "FrameGroup": "Giggle 3",
+              "Command": "Frame",
+              "Parameter": 2
+            },
+            {
+              "FrameGroup": "Giggle 2",
+              "Command": "Frame",
+              "Parameter": 2
+            },
+            {
+              "FrameGroup": "Giggle 1",
+              "Command": "Frame",
+              "Parameter": 2
+            },
+            {
+              "Command": "GotoAnimation",
+              "Parameter": 1
+            }
+          ],
+          "Idle": [
+            {
+              "FrameGroup": "Idle 1",
+              "Command": "Frame",
+              "Parameter": 7
+            },
+            {
+              "FrameGroup": "Idle 2",
+              "Command": "Frame",
+              "Parameter": 7
+            },
+            {
+              "FrameGroup": "Idle 3",
+              "Command": "Frame",
+              "Parameter": 7
+            },
+            {
+              "FrameGroup": "Idle 2",
+              "Command": "Frame",
+              "Parameter": 7
+            },
+            {
+              "Command": "GotoFrameOffset",
+              "Parameter": 0
+            }
+          ],
+          "SlapIshahakat (Long, Change to 1)": [
+            {
+              "FrameGroup": "SlapIshahakat 1",
+              "Command": "Frame",
+              "Parameter": 2
+            },
+            {
+              "FrameGroup": "SlapIshahakat 2",
+              "Command": "Frame",
+              "Parameter": 2
+            },
+            {
+              "FrameGroup": "SlapIshahakat 3",
+              "Command": "Frame",
+              "Parameter": 2
+            },
+            {
+              "FrameGroup": "SlapIshahakat 4",
+              "Command": "Frame",
+              "Parameter": 2
+            },
+            {
+              "FrameGroup": "SlapIshahakat 5",
+              "Command": "Frame",
+              "Parameter": 2
+            },
+            {
+              "FrameGroup": "SlapIshahakat 6",
+              "Command": "Frame",
+              "Parameter": 2
+            },
+            {
+              "FrameGroup": "SlapIshahakat 7",
+              "Command": "Frame",
+              "Parameter": 2
+            },
+            {
+              "FrameGroup": "SlapIshahakat 6",
+              "Command": "Frame",
+              "Parameter": 2
+            },
+            {
+              "FrameGroup": "SlapIshahakat 7",
+              "Command": "Frame",
+              "Parameter": 2
+            },
+            {
+              "FrameGroup": "SlapIshahakat 6",
+              "Command": "Frame",
+              "Parameter": 2
+            },
+            {
+              "FrameGroup": "SlapIshahakat 5",
+              "Command": "Frame",
+              "Parameter": 2
+            },
+            {
+              "FrameGroup": "SlapIshahakat 4",
+              "Command": "Frame",
+              "Parameter": 2
+            },
+            {
+              "FrameGroup": "SlapIshahakat 8",
+              "Command": "Frame",
+              "Parameter": 3
+            },
+            {
+              "FrameGroup": "SlapIshahakat 9",
+              "Command": "Frame",
+              "Parameter": 15
+            },
+            {
+              "FrameGroup": "SlapIshahakat 10",
+              "Command": "Frame",
+              "Parameter": 20
+            },
+            {
+              "FrameGroup": "SlapIshahakat 4",
+              "Command": "Frame",
+              "Parameter": 5
+            },
+            {
+              "FrameGroup": "SlapIshahakat 3",
+              "Command": "Frame",
+              "Parameter": 2
+            },
+            {
+              "FrameGroup": "SlapIshahakat 2",
+              "Command": "Frame",
+              "Parameter": 2
+            },
+            {
+              "FrameGroup": "SlapIshahakat 1",
+              "Command": "Frame",
+              "Parameter": 2
+            },
+            {
+              "Command": "GotoAnimation",
+              "Parameter": 1
+            }
+          ],
+          "SlapIshahakat (Stop)": [
+            {
+              "FrameGroup": "SlapIshahakat 1",
+              "Command": "Frame",
+              "Parameter": 2
+            },
+            {
+              "FrameGroup": "SlapIshahakat 2",
+              "Command": "Frame",
+              "Parameter": 2
+            },
+            {
+              "FrameGroup": "SlapIshahakat 3",
+              "Command": "Frame",
+              "Parameter": 2
+            },
+            {
+              "FrameGroup": "SlapIshahakat 4",
+              "Command": "Frame",
+              "Parameter": 2
+            },
+            {
+              "FrameGroup": "SlapIshahakat 5",
+              "Command": "Frame",
+              "Parameter": 2
+            },
+            {
+              "FrameGroup": "SlapIshahakat 6",
+              "Command": "Frame",
+              "Parameter": 2
+            },
+            {
+              "FrameGroup": "SlapIshahakat 7",
+              "Command": "Frame",
+              "Parameter": 2
+            },
+            {
+              "FrameGroup": "SlapIshahakat 6",
+              "Command": "Frame",
+              "Parameter": 2
+            },
+            {
+              "FrameGroup": "SlapIshahakat 7",
+              "Command": "Frame",
+              "Parameter": 2
+            },
+            {
+              "FrameGroup": "SlapIshahakat 6",
+              "Command": "Frame",
+              "Parameter": 2
+            },
+            {
+              "FrameGroup": "SlapIshahakat 5",
+              "Command": "Frame",
+              "Parameter": 2
+            },
+            {
+              "FrameGroup": "SlapIshahakat 4",
+              "Command": "Frame",
+              "Parameter": 22
+            },
+            {
+              "Command": "Stop",
+              "Parameter": 1
+            }
+          ],
+          "SpinUpToDown": [
+            {
+              "FrameGroup": "SpinUpToDown 1",
+              "Command": "Frame",
+              "Parameter": 2
+            },
+            {
+              "FrameGroup": "SpinUpToDown 2",
+              "Command": "Frame",
+              "Parameter": 2
+            },
+            {
+              "FrameGroup": "SpinUpToDown 3",
+              "Command": "Frame",
+              "Parameter": 2
+            },
+            {
+              "FrameGroup": "SpinUpToDown 4",
+              "Command": "Frame",
+              "Parameter": 2
+            },
+            {
+              "FrameGroup": "SpinUpToDown 5",
+              "Command": "Frame",
+              "Parameter": 2
+            },
+            {
+              "FrameGroup": "SpinUpToDown 6",
+              "Command": "Frame",
+              "Parameter": 2
+            },
+            {
+              "FrameGroup": "SpinUpToDown 7",
+              "Command": "Frame",
+              "Parameter": 2
+            },
+            {
+              "FrameGroup": "SpinUpToDown 8",
+              "Command": "Frame",
+              "Parameter": 2
+            },
+            {
+              "FrameGroup": "SpinUpToDown 9",
+              "Command": "Frame",
+              "Parameter": 2
+            },
+            {
+              "Command": "GotoAnimation",
+              "Parameter": 1
+            }
+          ],
+          "StillFrame (Idle)": [
+            {
+              "FrameGroup": "Idle 3",
+              "Command": "Frame",
+              "Parameter": 10
+            },
+            {
+              "Command": "Stop",
+              "Parameter": 0
+            }
+          ],
+          "TouchingIshahakat": [
+            {
+              "FrameGroup": "SlapIshahakat 1",
+              "Command": "Frame",
+              "Parameter": 2
+            },
+            {
+              "FrameGroup": "SlapIshahakat 2",
+              "Command": "Frame",
+              "Parameter": 2
+            },
+            {
+              "FrameGroup": "SlapIshahakat 3",
+              "Command": "Frame",
+              "Parameter": 2
+            },
+            {
+              "FrameGroup": "SlapIshahakat 4",
+              "Command": "Frame",
+              "Parameter": 2
+            },
+            {
+              "FrameGroup": "SlapIshahakat 5",
+              "Command": "Frame",
+              "Parameter": 2
+            },
+            {
+              "FrameGroup": "SlapIshahakat 6",
+              "Command": "Frame",
+              "Parameter": 22
+            },
+            {
+              "Command": "Stop",
+              "Parameter": 0
+            }
+          ],
+          "TurningBack": [
+            {
+              "FrameGroup": "SlapIshahakat 3",
+              "Command": "Frame",
+              "Parameter": 2
+            },
+            {
+              "FrameGroup": "SlapIshahakat 2",
+              "Command": "Frame",
+              "Parameter": 2
+            },
+            {
+              "FrameGroup": "SlapIshahakat 1",
+              "Command": "Frame",
+              "Parameter": 2
+            },
+            {
+              "Command": "GotoAnimation",
+              "Parameter": 1
+            }
+          ],
+          "Yawning": [
+            {
+              "FrameGroup": "Yawning 1",
+              "Command": "Frame",
+              "Parameter": 3
+            },
+            {
+              "FrameGroup": "Yawning 2",
+              "Command": "Frame",
+              "Parameter": 3
+            },
+            {
+              "FrameGroup": "Yawning 3",
+              "Command": "Frame",
+              "Parameter": 3
+            },
+            {
+              "FrameGroup": "Yawning 4",
+              "Command": "Frame",
+              "Parameter": 3
+            },
+            {
+              "FrameGroup": "Yawning 5",
+              "Command": "Frame",
+              "Parameter": 3
+            },
+            {
+              "FrameGroup": "Yawning 4",
+              "Command": "Frame",
+              "Parameter": 3
+            },
+            {
+              "FrameGroup": "Yawning 5",
+              "Command": "Frame",
+              "Parameter": 3
+            },
+            {
+              "FrameGroup": "Yawning 4",
+              "Command": "Frame",
+              "Parameter": 3
+            },
+            {
+              "FrameGroup": "Yawning 5",
+              "Command": "Frame",
+              "Parameter": 3
+            },
+            {
+              "FrameGroup": "Yawning 4",
+              "Command": "Frame",
+              "Parameter": 3
+            },
+            {
+              "FrameGroup": "Yawning 3",
+              "Command": "Frame",
+              "Parameter": 3
+            },
+            {
+              "FrameGroup": "Yawning 2",
+              "Command": "Frame",
+              "Parameter": 3
+            },
+            {
+              "FrameGroup": "Yawning 1",
+              "Command": "Frame",
+              "Parameter": 3
+            },
+            {
+              "Command": "GotoAnimation",
+              "Parameter": 1
+            }
+          ]
         }
       }
     }

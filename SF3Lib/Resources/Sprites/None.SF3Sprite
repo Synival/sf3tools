@@ -12,49 +12,37 @@
       "FrameGroups": {},
       "AnimationByDirections": {
         "0": {
-          "Nothing (F2,00)": {
-            "AnimationFrames": [
-              {
-                "Command": "Stop",
-                "Parameter": 0
-              }
-            ]
-          },
-          "Nothing (FE,00)": {
-            "AnimationFrames": [
-              {
-                "Command": "GotoFrameOffset",
-                "Parameter": 0
-              }
-            ]
-          },
-          "Nothing (FF,00)": {
-            "AnimationFrames": [
-              {
-                "Command": "GotoAnimation",
-                "Parameter": 0
-              }
-            ]
-          },
-          "Nothing (FF,01)": {
-            "AnimationFrames": [
-              {
-                "Command": "GotoAnimation",
-                "Parameter": 1
-              }
-            ]
-          },
-          "Nothing (FF,05)": {
-            "AnimationFrames": [
-              {
-                "Command": "GotoAnimation",
-                "Parameter": 5
-              }
-            ]
-          },
-          "Nothing (Broken, No Frames)": {
-            "AnimationFrames": []
-          }
+          "Nothing (F2,00)": [
+            {
+              "Command": "Stop",
+              "Parameter": 0
+            }
+          ],
+          "Nothing (FE,00)": [
+            {
+              "Command": "GotoFrameOffset",
+              "Parameter": 0
+            }
+          ],
+          "Nothing (FF,00)": [
+            {
+              "Command": "GotoAnimation",
+              "Parameter": 0
+            }
+          ],
+          "Nothing (FF,01)": [
+            {
+              "Command": "GotoAnimation",
+              "Parameter": 1
+            }
+          ],
+          "Nothing (FF,05)": [
+            {
+              "Command": "GotoAnimation",
+              "Parameter": 5
+            }
+          ],
+          "Nothing (Broken, No Frames)": []
         }
       }
     }

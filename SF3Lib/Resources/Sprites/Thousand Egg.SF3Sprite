@@ -20,32 +20,28 @@
       },
       "AnimationByDirections": {
         "1": {
-          "StillFrame (Egg, Repeat)": {
-            "AnimationFrames": [
-              {
-                "FrameGroup": "Egg 1",
-                "Command": "Frame",
-                "Parameter": 10
-              },
-              {
-                "Command": "GotoFrameOffset",
-                "Parameter": 0
-              }
-            ]
-          },
-          "StillFrame (Egg)": {
-            "AnimationFrames": [
-              {
-                "FrameGroup": "Egg 1",
-                "Command": "Frame",
-                "Parameter": 10
-              },
-              {
-                "Command": "Stop",
-                "Parameter": 0
-              }
-            ]
-          }
+          "StillFrame (Egg, Repeat)": [
+            {
+              "FrameGroup": "Egg 1",
+              "Command": "Frame",
+              "Parameter": 10
+            },
+            {
+              "Command": "GotoFrameOffset",
+              "Parameter": 0
+            }
+          ],
+          "StillFrame (Egg)": [
+            {
+              "FrameGroup": "Egg 1",
+              "Command": "Frame",
+              "Parameter": 10
+            },
+            {
+              "Command": "Stop",
+              "Parameter": 0
+            }
+          ]
         }
       }
     }

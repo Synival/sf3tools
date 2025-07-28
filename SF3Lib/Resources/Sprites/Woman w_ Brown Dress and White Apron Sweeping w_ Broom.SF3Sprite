@@ -123,39 +123,37 @@
       },
       "AnimationByDirections": {
         "4": {
-          "Sweeping": {
-            "AnimationFrames": [
-              {
-                "FrameGroup": "Sweeping 1",
-                "Command": "Frame",
-                "Parameter": 7
-              },
-              {
-                "FrameGroup": "Sweeping 2",
-                "Command": "Frame",
-                "Parameter": 7
-              },
-              {
-                "FrameGroup": "Sweeping 3",
-                "Command": "Frame",
-                "Parameter": 7
-              },
-              {
-                "FrameGroup": "Sweeping 4",
-                "Command": "Frame",
-                "Parameter": 7
-              },
-              {
-                "FrameGroup": "Sweeping 5",
-                "Command": "Frame",
-                "Parameter": 7
-              },
-              {
-                "Command": "GotoFrameOffset",
-                "Parameter": 0
-              }
-            ]
-          }
+          "Sweeping": [
+            {
+              "FrameGroup": "Sweeping 1",
+              "Command": "Frame",
+              "Parameter": 7
+            },
+            {
+              "FrameGroup": "Sweeping 2",
+              "Command": "Frame",
+              "Parameter": 7
+            },
+            {
+              "FrameGroup": "Sweeping 3",
+              "Command": "Frame",
+              "Parameter": 7
+            },
+            {
+              "FrameGroup": "Sweeping 4",
+              "Command": "Frame",
+              "Parameter": 7
+            },
+            {
+              "FrameGroup": "Sweeping 5",
+              "Command": "Frame",
+              "Parameter": 7
+            },
+            {
+              "Command": "GotoFrameOffset",
+              "Parameter": 0
+            }
+          ]
         }
       }
     }

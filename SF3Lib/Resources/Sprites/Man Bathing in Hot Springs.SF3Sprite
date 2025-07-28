@@ -101,123 +101,115 @@
       },
       "AnimationByDirections": {
         "4": {
-          "OccasionallyWipingForehead": {
-            "AnimationFrames": [
-              {
-                "FrameGroup": "OccasionallyWipingForehead 1",
-                "Command": "Frame",
-                "Parameter": 300
-              },
-              {
-                "FrameGroup": "OccasionallyWipingForehead 2",
-                "Command": "Frame",
-                "Parameter": 3
-              },
-              {
-                "FrameGroup": "OccasionallyWipingForehead 3",
-                "Command": "Frame",
-                "Parameter": 6
-              },
-              {
-                "FrameGroup": "OccasionallyWipingForehead 4",
-                "Command": "Frame",
-                "Parameter": 6
-              },
-              {
-                "FrameGroup": "OccasionallyWipingForehead 3",
-                "Command": "Frame",
-                "Parameter": 6
-              },
-              {
-                "FrameGroup": "OccasionallyWipingForehead 4",
-                "Command": "Frame",
-                "Parameter": 6
-              },
-              {
-                "FrameGroup": "OccasionallyWipingForehead 3",
-                "Command": "Frame",
-                "Parameter": 6
-              },
-              {
-                "FrameGroup": "OccasionallyWipingForehead 2",
-                "Command": "Frame",
-                "Parameter": 3
-              },
-              {
-                "FrameGroup": "OccasionallyWipingForehead 1",
-                "Command": "Frame",
-                "Parameter": 150
-              },
-              {
-                "FrameGroup": "OccasionallyWipingForehead 2",
-                "Command": "Frame",
-                "Parameter": 3
-              },
-              {
-                "FrameGroup": "OccasionallyWipingForehead 3",
-                "Command": "Frame",
-                "Parameter": 7
-              },
-              {
-                "FrameGroup": "OccasionallyWipingForehead 4",
-                "Command": "Frame",
-                "Parameter": 7
-              },
-              {
-                "FrameGroup": "OccasionallyWipingForehead 3",
-                "Command": "Frame",
-                "Parameter": 7
-              },
-              {
-                "FrameGroup": "OccasionallyWipingForehead 2",
-                "Command": "Frame",
-                "Parameter": 5
-              },
-              {
-                "Command": "GotoFrameOffset",
-                "Parameter": 0
-              }
-            ]
-          },
-          "StillFrame (Still)": {
-            "AnimationFrames": [
-              {
-                "FrameGroup": "OccasionallyWipingForehead 1",
-                "Command": "Frame",
-                "Parameter": 10
-              },
-              {
-                "Command": "Stop",
-                "Parameter": 0
-              }
-            ]
-          },
-          "StillFrame (Wiping Forehead, Repeat)": {
-            "AnimationFrames": [
-              {
-                "FrameGroup": "OccasionallyWipingForehead 3",
-                "Command": "Frame",
-                "Parameter": 4
-              },
-              {
-                "Command": "GotoFrameOffset",
-                "Parameter": 0
-              }
-            ]
-          },
-          "StillFrame (Wiping Forehead)": {
-            "AnimationFrames": [
-              {
-                "FrameGroup": "OccasionallyWipingForehead 3",
-                "Command": "Frame",
-                "Parameter": 10
-              },
-              {
-                "Command": "Stop",
-                "Parameter": 0
-              }
-            ]
-          }
+          "OccasionallyWipingForehead": [
+            {
+              "FrameGroup": "OccasionallyWipingForehead 1",
+              "Command": "Frame",
+              "Parameter": 300
+            },
+            {
+              "FrameGroup": "OccasionallyWipingForehead 2",
+              "Command": "Frame",
+              "Parameter": 3
+            },
+            {
+              "FrameGroup": "OccasionallyWipingForehead 3",
+              "Command": "Frame",
+              "Parameter": 6
+            },
+            {
+              "FrameGroup": "OccasionallyWipingForehead 4",
+              "Command": "Frame",
+              "Parameter": 6
+            },
+            {
+              "FrameGroup": "OccasionallyWipingForehead 3",
+              "Command": "Frame",
+              "Parameter": 6
+            },
+            {
+              "FrameGroup": "OccasionallyWipingForehead 4",
+              "Command": "Frame",
+              "Parameter": 6
+            },
+            {
+              "FrameGroup": "OccasionallyWipingForehead 3",
+              "Command": "Frame",
+              "Parameter": 6
+            },
+            {
+              "FrameGroup": "OccasionallyWipingForehead 2",
+              "Command": "Frame",
+              "Parameter": 3
+            },
+            {
+              "FrameGroup": "OccasionallyWipingForehead 1",
+              "Command": "Frame",
+              "Parameter": 150
+            },
+            {
+              "FrameGroup": "OccasionallyWipingForehead 2",
+              "Command": "Frame",
+              "Parameter": 3
+            },
+            {
+              "FrameGroup": "OccasionallyWipingForehead 3",
+              "Command": "Frame",
+              "Parameter": 7
+            },
+            {
+              "FrameGroup": "OccasionallyWipingForehead 4",
+              "Command": "Frame",
+              "Parameter": 7
+            },
+            {
+              "FrameGroup": "OccasionallyWipingForehead 3",
+              "Command": "Frame",
+              "Parameter": 7
+            },
+            {
+              "FrameGroup": "OccasionallyWipingForehead 2",
+              "Command": "Frame",
+              "Parameter": 5
+            },
+            {
+              "Command": "GotoFrameOffset",
+              "Parameter": 0
+            }
+          ],
+          "StillFrame (Still)": [
+            {
+              "FrameGroup": "OccasionallyWipingForehead 1",
+              "Command": "Frame",
+              "Parameter": 10
+            },
+            {
+              "Command": "Stop",
+              "Parameter": 0
+            }
+          ],
+          "StillFrame (Wiping Forehead, Repeat)": [
+            {
+              "FrameGroup": "OccasionallyWipingForehead 3",
+              "Command": "Frame",
+              "Parameter": 4
+            },
+            {
+              "Command": "GotoFrameOffset",
+              "Parameter": 0
+            }
+          ],
+          "StillFrame (Wiping Forehead)": [
+            {
+              "FrameGroup": "OccasionallyWipingForehead 3",
+              "Command": "Frame",
+              "Parameter": 10
+            },
+            {
+              "Command": "Stop",
+              "Parameter": 0
+            }
+          ]
         }
       }
     }
