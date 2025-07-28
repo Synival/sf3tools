@@ -252,454 +252,450 @@
       },
       "AnimationByDirections": {
         "1": {
-          "Animations": {
-            "Kneeling": {
-              "AnimationFrames": [
-                {
-                  "Frames": {
-                    "First": {
-                      "Frame": "Pointing 1",
-                      "Direction": "ESE"
-                    }
-                  },
-                  "Command": "Frame",
-                  "Parameter": 4
+          "Kneeling": {
+            "AnimationFrames": [
+              {
+                "Frames": {
+                  "First": {
+                    "Frame": "Pointing 1",
+                    "Direction": "ESE"
+                  }
                 },
-                {
-                  "Frames": {
-                    "First": {
-                      "Frame": "Kneeling 1",
-                      "Direction": "ESE"
-                    }
-                  },
-                  "Command": "Frame",
-                  "Parameter": 4
+                "Command": "Frame",
+                "Parameter": 4
+              },
+              {
+                "Frames": {
+                  "First": {
+                    "Frame": "Kneeling 1",
+                    "Direction": "ESE"
+                  }
                 },
-                {
-                  "Frames": {
-                    "First": {
-                      "Frame": "Nodding (Kneeling) 1",
-                      "Direction": "ESE"
-                    }
-                  },
-                  "Command": "Frame",
-                  "Parameter": 4
+                "Command": "Frame",
+                "Parameter": 4
+              },
+              {
+                "Frames": {
+                  "First": {
+                    "Frame": "Nodding (Kneeling) 1",
+                    "Direction": "ESE"
+                  }
                 },
-                {
-                  "Command": "Stop",
-                  "Parameter": 0
-                }
-              ]
-            },
-            "Nodding (Kneeling)": {
-              "AnimationFrames": [
-                {
-                  "Frames": {
-                    "First": {
-                      "Frame": "Nodding (Kneeling) 1",
-                      "Direction": "ESE"
-                    }
-                  },
-                  "Command": "Frame",
-                  "Parameter": 2
+                "Command": "Frame",
+                "Parameter": 4
+              },
+              {
+                "Command": "Stop",
+                "Parameter": 0
+              }
+            ]
+          },
+          "Nodding (Kneeling)": {
+            "AnimationFrames": [
+              {
+                "Frames": {
+                  "First": {
+                    "Frame": "Nodding (Kneeling) 1",
+                    "Direction": "ESE"
+                  }
                 },
-                {
-                  "Frames": {
-                    "First": {
-                      "Frame": "Nodding (Kneeling) 2",
-                      "Direction": "ESE"
-                    }
-                  },
-                  "Command": "Frame",
-                  "Parameter": 4
+                "Command": "Frame",
+                "Parameter": 2
+              },
+              {
+                "Frames": {
+                  "First": {
+                    "Frame": "Nodding (Kneeling) 2",
+                    "Direction": "ESE"
+                  }
                 },
-                {
-                  "Frames": {
-                    "First": {
-                      "Frame": "Nodding (Kneeling) 3",
-                      "Direction": "ESE"
-                    }
-                  },
-                  "Command": "Frame",
-                  "Parameter": 4
+                "Command": "Frame",
+                "Parameter": 4
+              },
+              {
+                "Frames": {
+                  "First": {
+                    "Frame": "Nodding (Kneeling) 3",
+                    "Direction": "ESE"
+                  }
                 },
-                {
-                  "Frames": {
-                    "First": {
-                      "Frame": "Nodding (Kneeling) 2",
-                      "Direction": "ESE"
-                    }
-                  },
-                  "Command": "Frame",
-                  "Parameter": 4
+                "Command": "Frame",
+                "Parameter": 4
+              },
+              {
+                "Frames": {
+                  "First": {
+                    "Frame": "Nodding (Kneeling) 2",
+                    "Direction": "ESE"
+                  }
                 },
-                {
-                  "Command": "GotoAnimation",
-                  "Parameter": 6
-                }
-              ]
-            },
-            "Pointing (Fast)": {
-              "AnimationFrames": [
-                {
-                  "Frames": {
-                    "First": {
-                      "Frame": "Pointing 1",
-                      "Direction": "ESE"
-                    }
-                  },
-                  "Command": "Frame",
-                  "Parameter": 4
+                "Command": "Frame",
+                "Parameter": 4
+              },
+              {
+                "Command": "GotoAnimation",
+                "Parameter": 6
+              }
+            ]
+          },
+          "Pointing (Fast)": {
+            "AnimationFrames": [
+              {
+                "Frames": {
+                  "First": {
+                    "Frame": "Pointing 1",
+                    "Direction": "ESE"
+                  }
                 },
-                {
-                  "Frames": {
-                    "First": {
-                      "Frame": "Pointing 2",
-                      "Direction": "ESE"
-                    }
-                  },
-                  "Command": "Frame",
-                  "Parameter": 4
+                "Command": "Frame",
+                "Parameter": 4
+              },
+              {
+                "Frames": {
+                  "First": {
+                    "Frame": "Pointing 2",
+                    "Direction": "ESE"
+                  }
                 },
-                {
-                  "Frames": {
-                    "First": {
-                      "Frame": "Pointing 3",
-                      "Direction": "ESE"
-                    }
-                  },
-                  "Command": "Frame",
-                  "Parameter": 4
+                "Command": "Frame",
+                "Parameter": 4
+              },
+              {
+                "Frames": {
+                  "First": {
+                    "Frame": "Pointing 3",
+                    "Direction": "ESE"
+                  }
                 },
-                {
-                  "Frames": {
-                    "First": {
-                      "Frame": "Pointing 2",
-                      "Direction": "ESE"
-                    }
-                  },
-                  "Command": "Frame",
-                  "Parameter": 3
+                "Command": "Frame",
+                "Parameter": 4
+              },
+              {
+                "Frames": {
+                  "First": {
+                    "Frame": "Pointing 2",
+                    "Direction": "ESE"
+                  }
                 },
-                {
-                  "Frames": {
-                    "First": {
-                      "Frame": "Pointing 1",
-                      "Direction": "ESE"
-                    }
-                  },
-                  "Command": "Frame",
-                  "Parameter": 2
+                "Command": "Frame",
+                "Parameter": 3
+              },
+              {
+                "Frames": {
+                  "First": {
+                    "Frame": "Pointing 1",
+                    "Direction": "ESE"
+                  }
                 },
-                {
-                  "Command": "Stop",
-                  "Parameter": 0
-                }
-              ]
-            },
-            "Pointing (Slow)": {
-              "AnimationFrames": [
-                {
-                  "Frames": {
-                    "First": {
-                      "Frame": "Pointing 1",
-                      "Direction": "ESE"
-                    }
-                  },
-                  "Command": "Frame",
-                  "Parameter": 8
+                "Command": "Frame",
+                "Parameter": 2
+              },
+              {
+                "Command": "Stop",
+                "Parameter": 0
+              }
+            ]
+          },
+          "Pointing (Slow)": {
+            "AnimationFrames": [
+              {
+                "Frames": {
+                  "First": {
+                    "Frame": "Pointing 1",
+                    "Direction": "ESE"
+                  }
                 },
-                {
-                  "Frames": {
-                    "First": {
-                      "Frame": "Pointing 2",
-                      "Direction": "ESE"
-                    }
-                  },
-                  "Command": "Frame",
-                  "Parameter": 8
+                "Command": "Frame",
+                "Parameter": 8
+              },
+              {
+                "Frames": {
+                  "First": {
+                    "Frame": "Pointing 2",
+                    "Direction": "ESE"
+                  }
                 },
-                {
-                  "Frames": {
-                    "First": {
-                      "Frame": "Pointing 3",
-                      "Direction": "ESE"
-                    }
-                  },
-                  "Command": "Frame",
-                  "Parameter": 44
+                "Command": "Frame",
+                "Parameter": 8
+              },
+              {
+                "Frames": {
+                  "First": {
+                    "Frame": "Pointing 3",
+                    "Direction": "ESE"
+                  }
                 },
-                {
-                  "Frames": {
-                    "First": {
-                      "Frame": "Pointing 2",
-                      "Direction": "ESE"
-                    }
-                  },
-                  "Command": "Frame",
-                  "Parameter": 6
+                "Command": "Frame",
+                "Parameter": 44
+              },
+              {
+                "Frames": {
+                  "First": {
+                    "Frame": "Pointing 2",
+                    "Direction": "ESE"
+                  }
                 },
-                {
-                  "Frames": {
-                    "First": {
-                      "Frame": "Pointing 1",
-                      "Direction": "ESE"
-                    }
-                  },
-                  "Command": "Frame",
-                  "Parameter": 5
+                "Command": "Frame",
+                "Parameter": 6
+              },
+              {
+                "Frames": {
+                  "First": {
+                    "Frame": "Pointing 1",
+                    "Direction": "ESE"
+                  }
                 },
-                {
-                  "Command": "Stop",
-                  "Parameter": 0
-                }
-              ]
-            },
-            "ShakingHead": {
-              "AnimationFrames": [
-                {
-                  "Frames": {
-                    "First": {
-                      "Frame": "Nodding (Kneeling) 1",
-                      "Direction": "ESE"
-                    }
-                  },
-                  "Command": "Frame",
-                  "Parameter": 2
+                "Command": "Frame",
+                "Parameter": 5
+              },
+              {
+                "Command": "Stop",
+                "Parameter": 0
+              }
+            ]
+          },
+          "ShakingHead": {
+            "AnimationFrames": [
+              {
+                "Frames": {
+                  "First": {
+                    "Frame": "Nodding (Kneeling) 1",
+                    "Direction": "ESE"
+                  }
                 },
-                {
-                  "Frames": {
-                    "First": {
-                      "Frame": "ShakingHead 3",
-                      "Direction": "ESE"
-                    }
-                  },
-                  "Command": "Frame",
-                  "Parameter": 4
+                "Command": "Frame",
+                "Parameter": 2
+              },
+              {
+                "Frames": {
+                  "First": {
+                    "Frame": "ShakingHead 3",
+                    "Direction": "ESE"
+                  }
                 },
-                {
-                  "Frames": {
-                    "First": {
-                      "Frame": "Nodding (Kneeling) 1",
-                      "Direction": "ESE"
-                    }
-                  },
-                  "Command": "Frame",
-                  "Parameter": 4
+                "Command": "Frame",
+                "Parameter": 4
+              },
+              {
+                "Frames": {
+                  "First": {
+                    "Frame": "Nodding (Kneeling) 1",
+                    "Direction": "ESE"
+                  }
                 },
-                {
-                  "Frames": {
-                    "First": {
-                      "Frame": "ShakingHead 4",
-                      "Direction": "ESE"
-                    }
-                  },
-                  "Command": "Frame",
-                  "Parameter": 4
+                "Command": "Frame",
+                "Parameter": 4
+              },
+              {
+                "Frames": {
+                  "First": {
+                    "Frame": "ShakingHead 4",
+                    "Direction": "ESE"
+                  }
                 },
-                {
-                  "Frames": {
-                    "First": {
-                      "Frame": "Nodding (Kneeling) 1",
-                      "Direction": "ESE"
-                    }
-                  },
-                  "Command": "Frame",
-                  "Parameter": 4
+                "Command": "Frame",
+                "Parameter": 4
+              },
+              {
+                "Frames": {
+                  "First": {
+                    "Frame": "Nodding (Kneeling) 1",
+                    "Direction": "ESE"
+                  }
                 },
-                {
-                  "Frames": {
-                    "First": {
-                      "Frame": "ShakingHead 3",
-                      "Direction": "ESE"
-                    }
-                  },
-                  "Command": "Frame",
-                  "Parameter": 4
+                "Command": "Frame",
+                "Parameter": 4
+              },
+              {
+                "Frames": {
+                  "First": {
+                    "Frame": "ShakingHead 3",
+                    "Direction": "ESE"
+                  }
                 },
-                {
-                  "Frames": {
-                    "First": {
-                      "Frame": "Nodding (Kneeling) 1",
-                      "Direction": "ESE"
-                    }
-                  },
-                  "Command": "Frame",
-                  "Parameter": 4
+                "Command": "Frame",
+                "Parameter": 4
+              },
+              {
+                "Frames": {
+                  "First": {
+                    "Frame": "Nodding (Kneeling) 1",
+                    "Direction": "ESE"
+                  }
                 },
-                {
-                  "Frames": {
-                    "First": {
-                      "Frame": "ShakingHead 4",
-                      "Direction": "ESE"
-                    }
-                  },
-                  "Command": "Frame",
-                  "Parameter": 4
+                "Command": "Frame",
+                "Parameter": 4
+              },
+              {
+                "Frames": {
+                  "First": {
+                    "Frame": "ShakingHead 4",
+                    "Direction": "ESE"
+                  }
                 },
-                {
-                  "Command": "GotoAnimation",
-                  "Parameter": 6
-                }
-              ]
-            },
-            "StillFrame (Idle)": {
-              "AnimationFrames": [
-                {
-                  "Frames": {
-                    "First": {
-                      "Frame": "Pointing 1",
-                      "Direction": "ESE"
-                    }
-                  },
-                  "Command": "Frame",
-                  "Parameter": 10
+                "Command": "Frame",
+                "Parameter": 4
+              },
+              {
+                "Command": "GotoAnimation",
+                "Parameter": 6
+              }
+            ]
+          },
+          "StillFrame (Idle)": {
+            "AnimationFrames": [
+              {
+                "Frames": {
+                  "First": {
+                    "Frame": "Pointing 1",
+                    "Direction": "ESE"
+                  }
                 },
-                {
-                  "Command": "Stop",
-                  "Parameter": 0
-                }
-              ]
-            },
-            "StillFrame (Kneeling)": {
-              "AnimationFrames": [
-                {
-                  "Frames": {
-                    "First": {
-                      "Frame": "Nodding (Kneeling) 1",
-                      "Direction": "ESE"
-                    }
-                  },
-                  "Command": "Frame",
-                  "Parameter": 10
+                "Command": "Frame",
+                "Parameter": 10
+              },
+              {
+                "Command": "Stop",
+                "Parameter": 0
+              }
+            ]
+          },
+          "StillFrame (Kneeling)": {
+            "AnimationFrames": [
+              {
+                "Frames": {
+                  "First": {
+                    "Frame": "Nodding (Kneeling) 1",
+                    "Direction": "ESE"
+                  }
                 },
-                {
-                  "Command": "Stop",
-                  "Parameter": 0
-                }
-              ]
-            }
+                "Command": "Frame",
+                "Parameter": 10
+              },
+              {
+                "Command": "Stop",
+                "Parameter": 0
+              }
+            ]
           }
         },
         "4": {
-          "Animations": {
-            "Hovering": {
-              "AnimationFrames": [
-                {
-                  "FrameGroup": "Hovering 1",
-                  "Command": "Frame",
-                  "Parameter": 4
-                },
-                {
-                  "FrameGroup": "Hovering 2",
-                  "Command": "Frame",
-                  "Parameter": 4
-                },
-                {
-                  "FrameGroup": "Hovering 3",
-                  "Command": "Frame",
-                  "Parameter": 4
-                },
-                {
-                  "FrameGroup": "Hovering 2",
-                  "Command": "Frame",
-                  "Parameter": 4
-                },
-                {
-                  "Command": "GotoFrameOffset",
-                  "Parameter": 0
-                }
-              ]
-            },
-            "Nodding": {
-              "AnimationFrames": [
-                {
-                  "FrameGroup": "Hovering 1",
-                  "Command": "Frame",
-                  "Parameter": 4
-                },
-                {
-                  "FrameGroup": "Nodding 1",
-                  "Command": "Frame",
-                  "Parameter": 4
-                },
-                {
-                  "FrameGroup": "Nodding 2",
-                  "Command": "Frame",
-                  "Parameter": 4
-                },
-                {
-                  "FrameGroup": "Nodding 1",
-                  "Command": "Frame",
-                  "Parameter": 4
-                },
-                {
-                  "Command": "GotoAnimation",
-                  "Parameter": 1
-                }
-              ]
-            },
-            "ShakingHead": {
-              "AnimationFrames": [
-                {
-                  "FrameGroup": "Hovering 1",
-                  "Command": "Frame",
-                  "Parameter": 2
-                },
-                {
-                  "FrameGroup": "ShakingHead 1",
-                  "Command": "Frame",
-                  "Parameter": 4
-                },
-                {
-                  "FrameGroup": "Hovering 1",
-                  "Command": "Frame",
-                  "Parameter": 4
-                },
-                {
-                  "FrameGroup": "ShakingHead 2",
-                  "Command": "Frame",
-                  "Parameter": 4
-                },
-                {
-                  "FrameGroup": "Hovering 1",
-                  "Command": "Frame",
-                  "Parameter": 4
-                },
-                {
-                  "FrameGroup": "ShakingHead 1",
-                  "Command": "Frame",
-                  "Parameter": 4
-                },
-                {
-                  "FrameGroup": "Hovering 1",
-                  "Command": "Frame",
-                  "Parameter": 4
-                },
-                {
-                  "FrameGroup": "ShakingHead 2",
-                  "Command": "Frame",
-                  "Parameter": 4
-                },
-                {
-                  "Command": "GotoAnimation",
-                  "Parameter": 1
-                }
-              ]
-            },
-            "StillFrame": {
-              "AnimationFrames": [
-                {
-                  "FrameGroup": "Hovering 1",
-                  "Command": "Frame",
-                  "Parameter": 10
-                },
-                {
-                  "Command": "Stop",
-                  "Parameter": 0
-                }
-              ]
-            }
+          "Hovering": {
+            "AnimationFrames": [
+              {
+                "FrameGroup": "Hovering 1",
+                "Command": "Frame",
+                "Parameter": 4
+              },
+              {
+                "FrameGroup": "Hovering 2",
+                "Command": "Frame",
+                "Parameter": 4
+              },
+              {
+                "FrameGroup": "Hovering 3",
+                "Command": "Frame",
+                "Parameter": 4
+              },
+              {
+                "FrameGroup": "Hovering 2",
+                "Command": "Frame",
+                "Parameter": 4
+              },
+              {
+                "Command": "GotoFrameOffset",
+                "Parameter": 0
+              }
+            ]
+          },
+          "Nodding": {
+            "AnimationFrames": [
+              {
+                "FrameGroup": "Hovering 1",
+                "Command": "Frame",
+                "Parameter": 4
+              },
+              {
+                "FrameGroup": "Nodding 1",
+                "Command": "Frame",
+                "Parameter": 4
+              },
+              {
+                "FrameGroup": "Nodding 2",
+                "Command": "Frame",
+                "Parameter": 4
+              },
+              {
+                "FrameGroup": "Nodding 1",
+                "Command": "Frame",
+                "Parameter": 4
+              },
+              {
+                "Command": "GotoAnimation",
+                "Parameter": 1
+              }
+            ]
+          },
+          "ShakingHead": {
+            "AnimationFrames": [
+              {
+                "FrameGroup": "Hovering 1",
+                "Command": "Frame",
+                "Parameter": 2
+              },
+              {
+                "FrameGroup": "ShakingHead 1",
+                "Command": "Frame",
+                "Parameter": 4
+              },
+              {
+                "FrameGroup": "Hovering 1",
+                "Command": "Frame",
+                "Parameter": 4
+              },
+              {
+                "FrameGroup": "ShakingHead 2",
+                "Command": "Frame",
+                "Parameter": 4
+              },
+              {
+                "FrameGroup": "Hovering 1",
+                "Command": "Frame",
+                "Parameter": 4
+              },
+              {
+                "FrameGroup": "ShakingHead 1",
+                "Command": "Frame",
+                "Parameter": 4
+              },
+              {
+                "FrameGroup": "Hovering 1",
+                "Command": "Frame",
+                "Parameter": 4
+              },
+              {
+                "FrameGroup": "ShakingHead 2",
+                "Command": "Frame",
+                "Parameter": 4
+              },
+              {
+                "Command": "GotoAnimation",
+                "Parameter": 1
+              }
+            ]
+          },
+          "StillFrame": {
+            "AnimationFrames": [
+              {
+                "FrameGroup": "Hovering 1",
+                "Command": "Frame",
+                "Parameter": 10
+              },
+              {
+                "Command": "Stop",
+                "Parameter": 0
+              }
+            ]
           }
         }
       }

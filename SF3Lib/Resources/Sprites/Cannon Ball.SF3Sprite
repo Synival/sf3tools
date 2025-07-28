@@ -20,46 +20,44 @@
       },
       "AnimationByDirections": {
         "1": {
-          "Animations": {
-            "StillFrame (CannonBall, Change to 1)": {
-              "AnimationFrames": [
-                {
-                  "FrameGroup": "CannonBall 1",
-                  "Command": "Frame",
-                  "Parameter": 10
-                },
-                {
-                  "Command": "GotoAnimation",
-                  "Parameter": 1
-                }
-              ]
-            },
-            "StillFrame (CannonBall, Repeat)": {
-              "AnimationFrames": [
-                {
-                  "FrameGroup": "CannonBall 1",
-                  "Command": "Frame",
-                  "Parameter": 10
-                },
-                {
-                  "Command": "Stop",
-                  "Parameter": 0
-                }
-              ]
-            },
-            "StillFrame (CannonBall)": {
-              "AnimationFrames": [
-                {
-                  "FrameGroup": "CannonBall 1",
-                  "Command": "Frame",
-                  "Parameter": 10
-                },
-                {
-                  "Command": "GotoFrameOffset",
-                  "Parameter": 0
-                }
-              ]
-            }
+          "StillFrame (CannonBall, Change to 1)": {
+            "AnimationFrames": [
+              {
+                "FrameGroup": "CannonBall 1",
+                "Command": "Frame",
+                "Parameter": 10
+              },
+              {
+                "Command": "GotoAnimation",
+                "Parameter": 1
+              }
+            ]
+          },
+          "StillFrame (CannonBall, Repeat)": {
+            "AnimationFrames": [
+              {
+                "FrameGroup": "CannonBall 1",
+                "Command": "Frame",
+                "Parameter": 10
+              },
+              {
+                "Command": "Stop",
+                "Parameter": 0
+              }
+            ]
+          },
+          "StillFrame (CannonBall)": {
+            "AnimationFrames": [
+              {
+                "FrameGroup": "CannonBall 1",
+                "Command": "Frame",
+                "Parameter": 10
+              },
+              {
+                "Command": "GotoFrameOffset",
+                "Parameter": 0
+              }
+            ]
           }
         }
       }

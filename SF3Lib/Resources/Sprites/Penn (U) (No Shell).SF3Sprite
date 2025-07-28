@@ -167,159 +167,157 @@
       },
       "AnimationByDirections": {
         "4": {
-          "Animations": {
-            "BobbingSideToSide": {
-              "AnimationFrames": [
-                {
-                  "FrameGroup": "Idle 1",
-                  "Command": "Frame",
-                  "Parameter": 15
-                },
-                {
-                  "FrameGroup": "BobbingSideToSide 1",
-                  "Command": "Frame",
-                  "Parameter": 8
-                },
-                {
-                  "FrameGroup": "Idle 1",
-                  "Command": "Frame",
-                  "Parameter": 3
-                },
-                {
-                  "FrameGroup": "BobbingSideToSide 2",
-                  "Command": "Frame",
-                  "Parameter": 8
-                },
-                {
-                  "FrameGroup": "Idle 1",
-                  "Command": "Frame",
-                  "Parameter": 3
-                },
-                {
-                  "FrameGroup": "BobbingSideToSide 1",
-                  "Command": "Frame",
-                  "Parameter": 8
-                },
-                {
-                  "FrameGroup": "Idle 1",
-                  "Command": "Frame",
-                  "Parameter": 3
-                },
-                {
-                  "FrameGroup": "BobbingSideToSide 2",
-                  "Command": "Frame",
-                  "Parameter": 8
-                },
-                {
-                  "FrameGroup": "Idle 1",
-                  "Command": "Frame",
-                  "Parameter": 3
-                },
-                {
-                  "FrameGroup": "BobbingSideToSide 1",
-                  "Command": "Frame",
-                  "Parameter": 8
-                },
-                {
-                  "FrameGroup": "Idle 1",
-                  "Command": "Frame",
-                  "Parameter": 3
-                },
-                {
-                  "FrameGroup": "BobbingSideToSide 2",
-                  "Command": "Frame",
-                  "Parameter": 8
-                },
-                {
-                  "Command": "GotoFrameOffset",
-                  "Parameter": 0
-                }
-              ]
-            },
-            "Idle": {
-              "AnimationFrames": [
-                {
-                  "FrameGroup": "Idle 1",
-                  "Command": "Frame",
-                  "Parameter": 4
-                },
-                {
-                  "FrameGroup": "Idle 2",
-                  "Command": "Frame",
-                  "Parameter": 4
-                },
-                {
-                  "FrameGroup": "Idle 3",
-                  "Command": "Frame",
-                  "Parameter": 4
-                },
-                {
-                  "FrameGroup": "Idle 4",
-                  "Command": "Frame",
-                  "Parameter": 4
-                },
-                {
-                  "Command": "GotoFrameOffset",
-                  "Parameter": 0
-                }
-              ]
-            },
-            "Kissing": {
-              "AnimationFrames": [
-                {
-                  "FrameGroup": "Idle 1",
-                  "Command": "Frame",
-                  "Parameter": 3
-                },
-                {
-                  "FrameGroup": "Kissing 1",
-                  "Command": "Frame",
-                  "Parameter": 6
-                },
-                {
-                  "FrameGroup": "Idle 1",
-                  "Command": "Frame",
-                  "Parameter": 3
-                },
-                {
-                  "FrameGroup": "Kissing 1",
-                  "Command": "Frame",
-                  "Parameter": 6
-                },
-                {
-                  "FrameGroup": "Idle 1",
-                  "Command": "Frame",
-                  "Parameter": 3
-                },
-                {
-                  "FrameGroup": "Kissing 1",
-                  "Command": "Frame",
-                  "Parameter": 15
-                },
-                {
-                  "FrameGroup": "Idle 1",
-                  "Command": "Frame",
-                  "Parameter": 3
-                },
-                {
-                  "Command": "Stop",
-                  "Parameter": 1
-                }
-              ]
-            },
-            "StillFrame": {
-              "AnimationFrames": [
-                {
-                  "FrameGroup": "Idle 1",
-                  "Command": "Frame",
-                  "Parameter": 10
-                },
-                {
-                  "Command": "Stop",
-                  "Parameter": 0
-                }
-              ]
-            }
+          "BobbingSideToSide": {
+            "AnimationFrames": [
+              {
+                "FrameGroup": "Idle 1",
+                "Command": "Frame",
+                "Parameter": 15
+              },
+              {
+                "FrameGroup": "BobbingSideToSide 1",
+                "Command": "Frame",
+                "Parameter": 8
+              },
+              {
+                "FrameGroup": "Idle 1",
+                "Command": "Frame",
+                "Parameter": 3
+              },
+              {
+                "FrameGroup": "BobbingSideToSide 2",
+                "Command": "Frame",
+                "Parameter": 8
+              },
+              {
+                "FrameGroup": "Idle 1",
+                "Command": "Frame",
+                "Parameter": 3
+              },
+              {
+                "FrameGroup": "BobbingSideToSide 1",
+                "Command": "Frame",
+                "Parameter": 8
+              },
+              {
+                "FrameGroup": "Idle 1",
+                "Command": "Frame",
+                "Parameter": 3
+              },
+              {
+                "FrameGroup": "BobbingSideToSide 2",
+                "Command": "Frame",
+                "Parameter": 8
+              },
+              {
+                "FrameGroup": "Idle 1",
+                "Command": "Frame",
+                "Parameter": 3
+              },
+              {
+                "FrameGroup": "BobbingSideToSide 1",
+                "Command": "Frame",
+                "Parameter": 8
+              },
+              {
+                "FrameGroup": "Idle 1",
+                "Command": "Frame",
+                "Parameter": 3
+              },
+              {
+                "FrameGroup": "BobbingSideToSide 2",
+                "Command": "Frame",
+                "Parameter": 8
+              },
+              {
+                "Command": "GotoFrameOffset",
+                "Parameter": 0
+              }
+            ]
+          },
+          "Idle": {
+            "AnimationFrames": [
+              {
+                "FrameGroup": "Idle 1",
+                "Command": "Frame",
+                "Parameter": 4
+              },
+              {
+                "FrameGroup": "Idle 2",
+                "Command": "Frame",
+                "Parameter": 4
+              },
+              {
+                "FrameGroup": "Idle 3",
+                "Command": "Frame",
+                "Parameter": 4
+              },
+              {
+                "FrameGroup": "Idle 4",
+                "Command": "Frame",
+                "Parameter": 4
+              },
+              {
+                "Command": "GotoFrameOffset",
+                "Parameter": 0
+              }
+            ]
+          },
+          "Kissing": {
+            "AnimationFrames": [
+              {
+                "FrameGroup": "Idle 1",
+                "Command": "Frame",
+                "Parameter": 3
+              },
+              {
+                "FrameGroup": "Kissing 1",
+                "Command": "Frame",
+                "Parameter": 6
+              },
+              {
+                "FrameGroup": "Idle 1",
+                "Command": "Frame",
+                "Parameter": 3
+              },
+              {
+                "FrameGroup": "Kissing 1",
+                "Command": "Frame",
+                "Parameter": 6
+              },
+              {
+                "FrameGroup": "Idle 1",
+                "Command": "Frame",
+                "Parameter": 3
+              },
+              {
+                "FrameGroup": "Kissing 1",
+                "Command": "Frame",
+                "Parameter": 15
+              },
+              {
+                "FrameGroup": "Idle 1",
+                "Command": "Frame",
+                "Parameter": 3
+              },
+              {
+                "Command": "Stop",
+                "Parameter": 1
+              }
+            ]
+          },
+          "StillFrame": {
+            "AnimationFrames": [
+              {
+                "FrameGroup": "Idle 1",
+                "Command": "Frame",
+                "Parameter": 10
+              },
+              {
+                "Command": "Stop",
+                "Parameter": 0
+              }
+            ]
           }
         }
       }

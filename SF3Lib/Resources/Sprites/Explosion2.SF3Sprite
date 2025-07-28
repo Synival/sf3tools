@@ -48,40 +48,38 @@
       },
       "AnimationByDirections": {
         "1": {
-          "Animations": {
-            "Exploding (Very Fast)": {
-              "AnimationFrames": [
-                {
-                  "FrameGroup": "Exploding 1",
-                  "Command": "Frame",
-                  "Parameter": 1
-                },
-                {
-                  "FrameGroup": "Exploding 2",
-                  "Command": "Frame",
-                  "Parameter": 1
-                },
-                {
-                  "FrameGroup": "Exploding 3",
-                  "Command": "Frame",
-                  "Parameter": 1
-                },
-                {
-                  "FrameGroup": "Exploding 4",
-                  "Command": "Frame",
-                  "Parameter": 1
-                },
-                {
-                  "FrameGroup": "Exploding 5",
-                  "Command": "Frame",
-                  "Parameter": 1
-                },
-                {
-                  "Command": "GotoAnimation",
-                  "Parameter": 0
-                }
-              ]
-            }
+          "Exploding (Very Fast)": {
+            "AnimationFrames": [
+              {
+                "FrameGroup": "Exploding 1",
+                "Command": "Frame",
+                "Parameter": 1
+              },
+              {
+                "FrameGroup": "Exploding 2",
+                "Command": "Frame",
+                "Parameter": 1
+              },
+              {
+                "FrameGroup": "Exploding 3",
+                "Command": "Frame",
+                "Parameter": 1
+              },
+              {
+                "FrameGroup": "Exploding 4",
+                "Command": "Frame",
+                "Parameter": 1
+              },
+              {
+                "FrameGroup": "Exploding 5",
+                "Command": "Frame",
+                "Parameter": 1
+              },
+              {
+                "Command": "GotoAnimation",
+                "Parameter": 0
+              }
+            ]
           }
         }
       }

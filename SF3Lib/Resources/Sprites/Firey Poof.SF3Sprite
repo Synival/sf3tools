@@ -83,225 +83,223 @@
       },
       "AnimationByDirections": {
         "1": {
-          "Animations": {
-            "RepeatedPoofs": {
-              "AnimationFrames": [
-                {
-                  "FrameGroup": "Poofing 1",
-                  "Command": "Frame",
-                  "Parameter": 1
-                },
-                {
-                  "FrameGroup": "Poofing 2",
-                  "Command": "Frame",
-                  "Parameter": 1
-                },
-                {
-                  "FrameGroup": "Poofing 3",
-                  "Command": "Frame",
-                  "Parameter": 1
-                },
-                {
-                  "FrameGroup": "Poofing 4",
-                  "Command": "Frame",
-                  "Parameter": 1
-                },
-                {
-                  "FrameGroup": "Poofing 5",
-                  "Command": "Frame",
-                  "Parameter": 1
-                },
-                {
-                  "FrameGroup": "Poofing 6",
-                  "Command": "Frame",
-                  "Parameter": 1
-                },
-                {
-                  "FrameGroup": "Poofing 7",
-                  "Command": "Frame",
-                  "Parameter": 1
-                },
-                {
-                  "FrameGroup": "Poofing 8",
-                  "Command": "Frame",
-                  "Parameter": 1
-                },
-                {
-                  "FrameGroup": "Poofing 9",
-                  "Command": "Frame",
-                  "Parameter": 1
-                },
-                {
-                  "FrameGroup": "Poofing 10",
-                  "Command": "Frame",
-                  "Parameter": 1
-                },
-                {
-                  "Command": "GotoFrameOffset",
-                  "Parameter": 0
-                }
-              ]
-            },
-            "RepeatedPoofs (Fast)": {
-              "AnimationFrames": [
-                {
-                  "FrameGroup": "Poofing 1",
-                  "Command": "Frame",
-                  "Parameter": 1
-                },
-                {
-                  "FrameGroup": "Poofing 2",
-                  "Command": "Frame",
-                  "Parameter": 1
-                },
-                {
-                  "FrameGroup": "Poofing 3",
-                  "Command": "Frame",
-                  "Parameter": 1
-                },
-                {
-                  "FrameGroup": "Poofing 4",
-                  "Command": "Frame",
-                  "Parameter": 1
-                },
-                {
-                  "FrameGroup": "Poofing 5",
-                  "Command": "Frame",
-                  "Parameter": 1
-                },
-                {
-                  "FrameGroup": "Poofing 6",
-                  "Command": "Frame",
-                  "Parameter": 1
-                },
-                {
-                  "FrameGroup": "Poofing 7",
-                  "Command": "Frame",
-                  "Parameter": 1
-                },
-                {
-                  "FrameGroup": "Poofing 8",
-                  "Command": "Frame",
-                  "Parameter": 1
-                },
-                {
-                  "FrameGroup": "Poofing 9",
-                  "Command": "Frame",
-                  "Parameter": 1
-                },
-                {
-                  "Command": "GotoFrameOffset",
-                  "Parameter": 4
-                }
-              ]
-            },
-            "ShrinkToFireball": {
-              "AnimationFrames": [
-                {
-                  "FrameGroup": "Poofing 3",
-                  "Command": "Frame",
-                  "Parameter": 2
-                },
-                {
-                  "FrameGroup": "Poofing 2",
-                  "Command": "Frame",
-                  "Parameter": 2
-                },
-                {
-                  "FrameGroup": "Poofing 1",
-                  "Command": "Frame",
-                  "Parameter": 2
-                },
-                {
-                  "Command": "Stop",
-                  "Parameter": 0
-                }
-              ]
-            },
-            "SinglePoof": {
-              "AnimationFrames": [
-                {
-                  "FrameGroup": "Poofing 1",
-                  "Command": "Frame",
-                  "Parameter": 1
-                },
-                {
-                  "FrameGroup": "Poofing 2",
-                  "Command": "Frame",
-                  "Parameter": 1
-                },
-                {
-                  "FrameGroup": "Poofing 3",
-                  "Command": "Frame",
-                  "Parameter": 1
-                },
-                {
-                  "FrameGroup": "Poofing 4",
-                  "Command": "Frame",
-                  "Parameter": 1
-                },
-                {
-                  "FrameGroup": "Poofing 5",
-                  "Command": "Frame",
-                  "Parameter": 1
-                },
-                {
-                  "FrameGroup": "Poofing 6",
-                  "Command": "Frame",
-                  "Parameter": 1
-                },
-                {
-                  "FrameGroup": "Poofing 7",
-                  "Command": "Frame",
-                  "Parameter": 1
-                },
-                {
-                  "FrameGroup": "Poofing 8",
-                  "Command": "Frame",
-                  "Parameter": 1
-                },
-                {
-                  "FrameGroup": "Poofing 9",
-                  "Command": "Frame",
-                  "Parameter": 1
-                },
-                {
-                  "FrameGroup": "Poofing 10",
-                  "Command": "Frame",
-                  "Parameter": 1
-                },
-                {
-                  "Command": "GotoAnimation",
-                  "Parameter": 0
-                }
-              ]
-            },
-            "StillFrame (Fireball)": {
-              "AnimationFrames": [
-                {
-                  "FrameGroup": "Poofing 1",
-                  "Command": "Frame",
-                  "Parameter": 1
-                },
-                {
-                  "Command": "Stop",
-                  "Parameter": 0
-                }
-              ]
-            },
-            "StillFrame (Two Pixels)": {
-              "AnimationFrames": [
-                {
-                  "FrameGroup": "Poofing 10",
-                  "Command": "Frame",
-                  "Parameter": 1
-                },
-                {
-                  "Command": "Stop",
-                  "Parameter": 0
-                }
-              ]
-            }
+          "RepeatedPoofs": {
+            "AnimationFrames": [
+              {
+                "FrameGroup": "Poofing 1",
+                "Command": "Frame",
+                "Parameter": 1
+              },
+              {
+                "FrameGroup": "Poofing 2",
+                "Command": "Frame",
+                "Parameter": 1
+              },
+              {
+                "FrameGroup": "Poofing 3",
+                "Command": "Frame",
+                "Parameter": 1
+              },
+              {
+                "FrameGroup": "Poofing 4",
+                "Command": "Frame",
+                "Parameter": 1
+              },
+              {
+                "FrameGroup": "Poofing 5",
+                "Command": "Frame",
+                "Parameter": 1
+              },
+              {
+                "FrameGroup": "Poofing 6",
+                "Command": "Frame",
+                "Parameter": 1
+              },
+              {
+                "FrameGroup": "Poofing 7",
+                "Command": "Frame",
+                "Parameter": 1
+              },
+              {
+                "FrameGroup": "Poofing 8",
+                "Command": "Frame",
+                "Parameter": 1
+              },
+              {
+                "FrameGroup": "Poofing 9",
+                "Command": "Frame",
+                "Parameter": 1
+              },
+              {
+                "FrameGroup": "Poofing 10",
+                "Command": "Frame",
+                "Parameter": 1
+              },
+              {
+                "Command": "GotoFrameOffset",
+                "Parameter": 0
+              }
+            ]
+          },
+          "RepeatedPoofs (Fast)": {
+            "AnimationFrames": [
+              {
+                "FrameGroup": "Poofing 1",
+                "Command": "Frame",
+                "Parameter": 1
+              },
+              {
+                "FrameGroup": "Poofing 2",
+                "Command": "Frame",
+                "Parameter": 1
+              },
+              {
+                "FrameGroup": "Poofing 3",
+                "Command": "Frame",
+                "Parameter": 1
+              },
+              {
+                "FrameGroup": "Poofing 4",
+                "Command": "Frame",
+                "Parameter": 1
+              },
+              {
+                "FrameGroup": "Poofing 5",
+                "Command": "Frame",
+                "Parameter": 1
+              },
+              {
+                "FrameGroup": "Poofing 6",
+                "Command": "Frame",
+                "Parameter": 1
+              },
+              {
+                "FrameGroup": "Poofing 7",
+                "Command": "Frame",
+                "Parameter": 1
+              },
+              {
+                "FrameGroup": "Poofing 8",
+                "Command": "Frame",
+                "Parameter": 1
+              },
+              {
+                "FrameGroup": "Poofing 9",
+                "Command": "Frame",
+                "Parameter": 1
+              },
+              {
+                "Command": "GotoFrameOffset",
+                "Parameter": 4
+              }
+            ]
+          },
+          "ShrinkToFireball": {
+            "AnimationFrames": [
+              {
+                "FrameGroup": "Poofing 3",
+                "Command": "Frame",
+                "Parameter": 2
+              },
+              {
+                "FrameGroup": "Poofing 2",
+                "Command": "Frame",
+                "Parameter": 2
+              },
+              {
+                "FrameGroup": "Poofing 1",
+                "Command": "Frame",
+                "Parameter": 2
+              },
+              {
+                "Command": "Stop",
+                "Parameter": 0
+              }
+            ]
+          },
+          "SinglePoof": {
+            "AnimationFrames": [
+              {
+                "FrameGroup": "Poofing 1",
+                "Command": "Frame",
+                "Parameter": 1
+              },
+              {
+                "FrameGroup": "Poofing 2",
+                "Command": "Frame",
+                "Parameter": 1
+              },
+              {
+                "FrameGroup": "Poofing 3",
+                "Command": "Frame",
+                "Parameter": 1
+              },
+              {
+                "FrameGroup": "Poofing 4",
+                "Command": "Frame",
+                "Parameter": 1
+              },
+              {
+                "FrameGroup": "Poofing 5",
+                "Command": "Frame",
+                "Parameter": 1
+              },
+              {
+                "FrameGroup": "Poofing 6",
+                "Command": "Frame",
+                "Parameter": 1
+              },
+              {
+                "FrameGroup": "Poofing 7",
+                "Command": "Frame",
+                "Parameter": 1
+              },
+              {
+                "FrameGroup": "Poofing 8",
+                "Command": "Frame",
+                "Parameter": 1
+              },
+              {
+                "FrameGroup": "Poofing 9",
+                "Command": "Frame",
+                "Parameter": 1
+              },
+              {
+                "FrameGroup": "Poofing 10",
+                "Command": "Frame",
+                "Parameter": 1
+              },
+              {
+                "Command": "GotoAnimation",
+                "Parameter": 0
+              }
+            ]
+          },
+          "StillFrame (Fireball)": {
+            "AnimationFrames": [
+              {
+                "FrameGroup": "Poofing 1",
+                "Command": "Frame",
+                "Parameter": 1
+              },
+              {
+                "Command": "Stop",
+                "Parameter": 0
+              }
+            ]
+          },
+          "StillFrame (Two Pixels)": {
+            "AnimationFrames": [
+              {
+                "FrameGroup": "Poofing 10",
+                "Command": "Frame",
+                "Parameter": 1
+              },
+              {
+                "Command": "Stop",
+                "Parameter": 0
+              }
+            ]
           }
         }
       }

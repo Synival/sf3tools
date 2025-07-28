@@ -25,20 +25,18 @@
       },
       "AnimationByDirections": {
         "2": {
-          "Animations": {
-            "StillFrame (Idle)": {
-              "AnimationFrames": [
-                {
-                  "FrameGroup": "Idle 1",
-                  "Command": "Frame",
-                  "Parameter": 10
-                },
-                {
-                  "Command": "Stop",
-                  "Parameter": 0
-                }
-              ]
-            }
+          "StillFrame (Idle)": {
+            "AnimationFrames": [
+              {
+                "FrameGroup": "Idle 1",
+                "Command": "Frame",
+                "Parameter": 10
+              },
+              {
+                "Command": "Stop",
+                "Parameter": 0
+              }
+            ]
           }
         }
       }

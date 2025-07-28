@@ -327,313 +327,309 @@
       },
       "AnimationByDirections": {
         "4": {
-          "Animations": {
-            "Flying (Battle, Reduced)": {
-              "AnimationFrames": [
-                {
-                  "FrameGroup": "Flying (Battle) 4",
-                  "Command": "Frame",
-                  "Parameter": 5
-                },
-                {
-                  "FrameGroup": "Flying (Battle) 1",
-                  "Command": "Frame",
-                  "Parameter": 5
-                },
-                {
-                  "FrameGroup": "Flying (Battle) 2",
-                  "Command": "Frame",
-                  "Parameter": 5
-                },
-                {
-                  "FrameGroup": "Flying (Battle) 1",
-                  "Command": "Frame",
-                  "Parameter": 5
-                },
-                {
-                  "Command": "GotoFrameOffset",
-                  "Parameter": 0
-                }
-              ]
-            },
-            "Flying (Battle)": {
-              "AnimationFrames": [
-                {
-                  "FrameGroup": "Flying (Battle) 1",
-                  "Command": "Frame",
-                  "Parameter": 5
-                },
-                {
-                  "FrameGroup": "Flying (Battle) 2",
-                  "Command": "Frame",
-                  "Parameter": 5
-                },
-                {
-                  "FrameGroup": "Flying (Battle) 3",
-                  "Command": "Frame",
-                  "Parameter": 5
-                },
-                {
-                  "FrameGroup": "Flying (Battle) 2",
-                  "Command": "Frame",
-                  "Parameter": 5
-                },
-                {
-                  "FrameGroup": "Flying (Battle) 1",
-                  "Command": "Frame",
-                  "Parameter": 5
-                },
-                {
-                  "FrameGroup": "Flying (Battle) 4",
-                  "Command": "Frame",
-                  "Parameter": 5
-                },
-                {
-                  "FrameGroup": "Flying (Battle) 5",
-                  "Command": "Frame",
-                  "Parameter": 5
-                },
-                {
-                  "FrameGroup": "Flying (Battle) 4",
-                  "Command": "Frame",
-                  "Parameter": 5
-                },
-                {
-                  "Command": "GotoFrameOffset",
-                  "Parameter": 0
-                }
-              ]
-            },
-            "Flying (Field)": {
-              "AnimationFrames": [
-                {
-                  "FrameGroup": "Flying (Field) 1",
-                  "Command": "Frame",
-                  "Parameter": 3
-                },
-                {
-                  "FrameGroup": "Flying (Field) 2",
-                  "Command": "Frame",
-                  "Parameter": 3
-                },
-                {
-                  "FrameGroup": "Flying (Field) 3",
-                  "Command": "Frame",
-                  "Parameter": 3
-                },
-                {
-                  "FrameGroup": "Flying (Field) 2",
-                  "Command": "Frame",
-                  "Parameter": 3
-                },
-                {
-                  "Command": "GotoFrameOffset",
-                  "Parameter": 0
-                }
-              ]
-            },
-            "Nodding": {
-              "AnimationFrames": [
-                {
-                  "FrameGroup": "Flying (Field) 1",
-                  "Command": "Frame",
-                  "Parameter": 4
-                },
-                {
-                  "FrameGroup": "Nodding 1",
-                  "Command": "Frame",
-                  "Parameter": 4
-                },
-                {
-                  "FrameGroup": "Nodding 2",
-                  "Command": "Frame",
-                  "Parameter": 4
-                },
-                {
-                  "FrameGroup": "Nodding 1",
-                  "Command": "Frame",
-                  "Parameter": 3
-                },
-                {
-                  "Command": "GotoAnimation",
-                  "Parameter": 1
-                }
-              ]
-            },
-            "ShakingHead": {
-              "AnimationFrames": [
-                {
-                  "FrameGroup": "Flying (Field) 1",
-                  "Command": "Frame",
-                  "Parameter": 2
-                },
-                {
-                  "FrameGroup": "ShakingHead 1",
-                  "Command": "Frame",
-                  "Parameter": 3
-                },
-                {
-                  "FrameGroup": "Flying (Field) 1",
-                  "Command": "Frame",
-                  "Parameter": 3
-                },
-                {
-                  "FrameGroup": "ShakingHead 2",
-                  "Command": "Frame",
-                  "Parameter": 3
-                },
-                {
-                  "FrameGroup": "Flying (Field) 1",
-                  "Command": "Frame",
-                  "Parameter": 3
-                },
-                {
-                  "FrameGroup": "ShakingHead 1",
-                  "Command": "Frame",
-                  "Parameter": 3
-                },
-                {
-                  "FrameGroup": "Flying (Field) 1",
-                  "Command": "Frame",
-                  "Parameter": 3
-                },
-                {
-                  "FrameGroup": "ShakingHead 2",
-                  "Command": "Frame",
-                  "Parameter": 3
-                },
-                {
-                  "Command": "GotoAnimation",
-                  "Parameter": 1
-                }
-              ]
-            },
-            "StillFrame (Battle)": {
-              "AnimationFrames": [
-                {
-                  "FrameGroup": "Flying (Battle) 1",
-                  "Command": "Frame",
-                  "Parameter": 10
-                },
-                {
-                  "Command": "Stop",
-                  "Parameter": 0
-                }
-              ]
-            }
+          "Flying (Battle, Reduced)": {
+            "AnimationFrames": [
+              {
+                "FrameGroup": "Flying (Battle) 4",
+                "Command": "Frame",
+                "Parameter": 5
+              },
+              {
+                "FrameGroup": "Flying (Battle) 1",
+                "Command": "Frame",
+                "Parameter": 5
+              },
+              {
+                "FrameGroup": "Flying (Battle) 2",
+                "Command": "Frame",
+                "Parameter": 5
+              },
+              {
+                "FrameGroup": "Flying (Battle) 1",
+                "Command": "Frame",
+                "Parameter": 5
+              },
+              {
+                "Command": "GotoFrameOffset",
+                "Parameter": 0
+              }
+            ]
+          },
+          "Flying (Battle)": {
+            "AnimationFrames": [
+              {
+                "FrameGroup": "Flying (Battle) 1",
+                "Command": "Frame",
+                "Parameter": 5
+              },
+              {
+                "FrameGroup": "Flying (Battle) 2",
+                "Command": "Frame",
+                "Parameter": 5
+              },
+              {
+                "FrameGroup": "Flying (Battle) 3",
+                "Command": "Frame",
+                "Parameter": 5
+              },
+              {
+                "FrameGroup": "Flying (Battle) 2",
+                "Command": "Frame",
+                "Parameter": 5
+              },
+              {
+                "FrameGroup": "Flying (Battle) 1",
+                "Command": "Frame",
+                "Parameter": 5
+              },
+              {
+                "FrameGroup": "Flying (Battle) 4",
+                "Command": "Frame",
+                "Parameter": 5
+              },
+              {
+                "FrameGroup": "Flying (Battle) 5",
+                "Command": "Frame",
+                "Parameter": 5
+              },
+              {
+                "FrameGroup": "Flying (Battle) 4",
+                "Command": "Frame",
+                "Parameter": 5
+              },
+              {
+                "Command": "GotoFrameOffset",
+                "Parameter": 0
+              }
+            ]
+          },
+          "Flying (Field)": {
+            "AnimationFrames": [
+              {
+                "FrameGroup": "Flying (Field) 1",
+                "Command": "Frame",
+                "Parameter": 3
+              },
+              {
+                "FrameGroup": "Flying (Field) 2",
+                "Command": "Frame",
+                "Parameter": 3
+              },
+              {
+                "FrameGroup": "Flying (Field) 3",
+                "Command": "Frame",
+                "Parameter": 3
+              },
+              {
+                "FrameGroup": "Flying (Field) 2",
+                "Command": "Frame",
+                "Parameter": 3
+              },
+              {
+                "Command": "GotoFrameOffset",
+                "Parameter": 0
+              }
+            ]
+          },
+          "Nodding": {
+            "AnimationFrames": [
+              {
+                "FrameGroup": "Flying (Field) 1",
+                "Command": "Frame",
+                "Parameter": 4
+              },
+              {
+                "FrameGroup": "Nodding 1",
+                "Command": "Frame",
+                "Parameter": 4
+              },
+              {
+                "FrameGroup": "Nodding 2",
+                "Command": "Frame",
+                "Parameter": 4
+              },
+              {
+                "FrameGroup": "Nodding 1",
+                "Command": "Frame",
+                "Parameter": 3
+              },
+              {
+                "Command": "GotoAnimation",
+                "Parameter": 1
+              }
+            ]
+          },
+          "ShakingHead": {
+            "AnimationFrames": [
+              {
+                "FrameGroup": "Flying (Field) 1",
+                "Command": "Frame",
+                "Parameter": 2
+              },
+              {
+                "FrameGroup": "ShakingHead 1",
+                "Command": "Frame",
+                "Parameter": 3
+              },
+              {
+                "FrameGroup": "Flying (Field) 1",
+                "Command": "Frame",
+                "Parameter": 3
+              },
+              {
+                "FrameGroup": "ShakingHead 2",
+                "Command": "Frame",
+                "Parameter": 3
+              },
+              {
+                "FrameGroup": "Flying (Field) 1",
+                "Command": "Frame",
+                "Parameter": 3
+              },
+              {
+                "FrameGroup": "ShakingHead 1",
+                "Command": "Frame",
+                "Parameter": 3
+              },
+              {
+                "FrameGroup": "Flying (Field) 1",
+                "Command": "Frame",
+                "Parameter": 3
+              },
+              {
+                "FrameGroup": "ShakingHead 2",
+                "Command": "Frame",
+                "Parameter": 3
+              },
+              {
+                "Command": "GotoAnimation",
+                "Parameter": 1
+              }
+            ]
+          },
+          "StillFrame (Battle)": {
+            "AnimationFrames": [
+              {
+                "FrameGroup": "Flying (Battle) 1",
+                "Command": "Frame",
+                "Parameter": 10
+              },
+              {
+                "Command": "Stop",
+                "Parameter": 0
+              }
+            ]
           }
         },
         "6": {
-          "Animations": {
-            "Flying (Battle, Faster)": {
-              "AnimationFrames": [
-                {
-                  "FrameGroup": "Flying (Battle) 1",
-                  "Command": "Frame",
-                  "Parameter": 3
-                },
-                {
-                  "FrameGroup": "Flying (Battle) 2",
-                  "Command": "Frame",
-                  "Parameter": 3
-                },
-                {
-                  "FrameGroup": "Flying (Battle) 3",
-                  "Command": "Frame",
-                  "Parameter": 3
-                },
-                {
-                  "FrameGroup": "Flying (Battle) 2",
-                  "Command": "Frame",
-                  "Parameter": 3
-                },
-                {
-                  "FrameGroup": "Flying (Battle) 1",
-                  "Command": "Frame",
-                  "Parameter": 3
-                },
-                {
-                  "FrameGroup": "Flying (Battle) 4",
-                  "Command": "Frame",
-                  "Parameter": 3
-                },
-                {
-                  "FrameGroup": "Flying (Battle) 5",
-                  "Command": "Frame",
-                  "Parameter": 3
-                },
-                {
-                  "FrameGroup": "Flying (Battle) 4",
-                  "Command": "Frame",
-                  "Parameter": 3
-                },
-                {
-                  "Command": "GotoFrameOffset",
-                  "Parameter": 0
-                }
-              ]
-            },
-            "Flying (Battle, Slower)": {
-              "AnimationFrames": [
-                {
-                  "FrameGroup": "Flying (Battle) 1",
-                  "Command": "Frame",
-                  "Parameter": 5
-                },
-                {
-                  "FrameGroup": "Flying (Battle) 2",
-                  "Command": "Frame",
-                  "Parameter": 5
-                },
-                {
-                  "FrameGroup": "Flying (Battle) 3",
-                  "Command": "Frame",
-                  "Parameter": 5
-                },
-                {
-                  "FrameGroup": "Flying (Battle) 2",
-                  "Command": "Frame",
-                  "Parameter": 5
-                },
-                {
-                  "FrameGroup": "Flying (Battle) 1",
-                  "Command": "Frame",
-                  "Parameter": 5
-                },
-                {
-                  "FrameGroup": "Flying (Battle) 4",
-                  "Command": "Frame",
-                  "Parameter": 5
-                },
-                {
-                  "FrameGroup": "Flying (Battle) 5",
-                  "Command": "Frame",
-                  "Parameter": 5
-                },
-                {
-                  "FrameGroup": "Flying (Battle) 4",
-                  "Command": "Frame",
-                  "Parameter": 5
-                },
-                {
-                  "Command": "GotoFrameOffset",
-                  "Parameter": 0
-                }
-              ]
-            },
-            "StillFrame (Battle)": {
-              "AnimationFrames": [
-                {
-                  "FrameGroup": "Flying (Battle) 1",
-                  "Command": "Frame",
-                  "Parameter": 10
-                },
-                {
-                  "Command": "Stop",
-                  "Parameter": 0
-                }
-              ]
-            }
+          "Flying (Battle, Faster)": {
+            "AnimationFrames": [
+              {
+                "FrameGroup": "Flying (Battle) 1",
+                "Command": "Frame",
+                "Parameter": 3
+              },
+              {
+                "FrameGroup": "Flying (Battle) 2",
+                "Command": "Frame",
+                "Parameter": 3
+              },
+              {
+                "FrameGroup": "Flying (Battle) 3",
+                "Command": "Frame",
+                "Parameter": 3
+              },
+              {
+                "FrameGroup": "Flying (Battle) 2",
+                "Command": "Frame",
+                "Parameter": 3
+              },
+              {
+                "FrameGroup": "Flying (Battle) 1",
+                "Command": "Frame",
+                "Parameter": 3
+              },
+              {
+                "FrameGroup": "Flying (Battle) 4",
+                "Command": "Frame",
+                "Parameter": 3
+              },
+              {
+                "FrameGroup": "Flying (Battle) 5",
+                "Command": "Frame",
+                "Parameter": 3
+              },
+              {
+                "FrameGroup": "Flying (Battle) 4",
+                "Command": "Frame",
+                "Parameter": 3
+              },
+              {
+                "Command": "GotoFrameOffset",
+                "Parameter": 0
+              }
+            ]
+          },
+          "Flying (Battle, Slower)": {
+            "AnimationFrames": [
+              {
+                "FrameGroup": "Flying (Battle) 1",
+                "Command": "Frame",
+                "Parameter": 5
+              },
+              {
+                "FrameGroup": "Flying (Battle) 2",
+                "Command": "Frame",
+                "Parameter": 5
+              },
+              {
+                "FrameGroup": "Flying (Battle) 3",
+                "Command": "Frame",
+                "Parameter": 5
+              },
+              {
+                "FrameGroup": "Flying (Battle) 2",
+                "Command": "Frame",
+                "Parameter": 5
+              },
+              {
+                "FrameGroup": "Flying (Battle) 1",
+                "Command": "Frame",
+                "Parameter": 5
+              },
+              {
+                "FrameGroup": "Flying (Battle) 4",
+                "Command": "Frame",
+                "Parameter": 5
+              },
+              {
+                "FrameGroup": "Flying (Battle) 5",
+                "Command": "Frame",
+                "Parameter": 5
+              },
+              {
+                "FrameGroup": "Flying (Battle) 4",
+                "Command": "Frame",
+                "Parameter": 5
+              },
+              {
+                "Command": "GotoFrameOffset",
+                "Parameter": 0
+              }
+            ]
+          },
+          "StillFrame (Battle)": {
+            "AnimationFrames": [
+              {
+                "FrameGroup": "Flying (Battle) 1",
+                "Command": "Frame",
+                "Parameter": 10
+              },
+              {
+                "Command": "Stop",
+                "Parameter": 0
+              }
+            ]
           }
         }
       }

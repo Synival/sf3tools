@@ -57,99 +57,95 @@
       },
       "AnimationByDirections": {
         "1": {
-          "Animations": {
-            "StillFrame (OnGround, Repeat)": {
-              "AnimationFrames": [
-                {
-                  "Frames": {
-                    "First": {
-                      "Frame": "OnGround 1",
-                      "Direction": "ESE"
-                    }
-                  },
-                  "Command": "Frame",
-                  "Parameter": 10
+          "StillFrame (OnGround, Repeat)": {
+            "AnimationFrames": [
+              {
+                "Frames": {
+                  "First": {
+                    "Frame": "OnGround 1",
+                    "Direction": "ESE"
+                  }
                 },
-                {
-                  "Command": "GotoFrameOffset",
-                  "Parameter": 0
-                }
-              ]
-            },
-            "StillFrame (OnGround)": {
-              "AnimationFrames": [
-                {
-                  "Frames": {
-                    "First": {
-                      "Frame": "OnGround 1",
-                      "Direction": "ESE"
-                    }
-                  },
-                  "Command": "Frame",
-                  "Parameter": 10
+                "Command": "Frame",
+                "Parameter": 10
+              },
+              {
+                "Command": "GotoFrameOffset",
+                "Parameter": 0
+              }
+            ]
+          },
+          "StillFrame (OnGround)": {
+            "AnimationFrames": [
+              {
+                "Frames": {
+                  "First": {
+                    "Frame": "OnGround 1",
+                    "Direction": "ESE"
+                  }
                 },
-                {
-                  "Command": "Stop",
-                  "Parameter": 0
-                }
-              ]
-            }
+                "Command": "Frame",
+                "Parameter": 10
+              },
+              {
+                "Command": "Stop",
+                "Parameter": 0
+              }
+            ]
           }
         },
         "4": {
-          "Animations": {
-            "StillFrame (OnGround 1, Repeat)": {
-              "AnimationFrames": [
-                {
-                  "FrameGroup": "OnGround 1",
-                  "Command": "Frame",
-                  "Parameter": 10
-                },
-                {
-                  "Command": "GotoFrameOffset",
-                  "Parameter": 0
-                }
-              ]
-            },
-            "StillFrame (OnGround 1)": {
-              "AnimationFrames": [
-                {
-                  "FrameGroup": "OnGround 1",
-                  "Command": "Frame",
-                  "Parameter": 10
-                },
-                {
-                  "Command": "Stop",
-                  "Parameter": 0
-                }
-              ]
-            },
-            "StillFrame (OnGround 2, Repeat)": {
-              "AnimationFrames": [
-                {
-                  "FrameGroup": "OnGround (Alt) 1",
-                  "Command": "Frame",
-                  "Parameter": 10
-                },
-                {
-                  "Command": "GotoFrameOffset",
-                  "Parameter": 0
-                }
-              ]
-            },
-            "StillFrame (OnGround 2)": {
-              "AnimationFrames": [
-                {
-                  "FrameGroup": "OnGround (Alt) 1",
-                  "Command": "Frame",
-                  "Parameter": 10
-                },
-                {
-                  "Command": "Stop",
-                  "Parameter": 0
-                }
-              ]
-            }
+          "StillFrame (OnGround 1, Repeat)": {
+            "AnimationFrames": [
+              {
+                "FrameGroup": "OnGround 1",
+                "Command": "Frame",
+                "Parameter": 10
+              },
+              {
+                "Command": "GotoFrameOffset",
+                "Parameter": 0
+              }
+            ]
+          },
+          "StillFrame (OnGround 1)": {
+            "AnimationFrames": [
+              {
+                "FrameGroup": "OnGround 1",
+                "Command": "Frame",
+                "Parameter": 10
+              },
+              {
+                "Command": "Stop",
+                "Parameter": 0
+              }
+            ]
+          },
+          "StillFrame (OnGround 2, Repeat)": {
+            "AnimationFrames": [
+              {
+                "FrameGroup": "OnGround (Alt) 1",
+                "Command": "Frame",
+                "Parameter": 10
+              },
+              {
+                "Command": "GotoFrameOffset",
+                "Parameter": 0
+              }
+            ]
+          },
+          "StillFrame (OnGround 2)": {
+            "AnimationFrames": [
+              {
+                "FrameGroup": "OnGround (Alt) 1",
+                "Command": "Frame",
+                "Parameter": 10
+              },
+              {
+                "Command": "Stop",
+                "Parameter": 0
+              }
+            ]
           }
         }
       }

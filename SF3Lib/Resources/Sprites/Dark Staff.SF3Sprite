@@ -35,33 +35,31 @@
       },
       "AnimationByDirections": {
         "4": {
-          "Animations": {
-            "StillFrame (Hovering, Repeat)": {
-              "AnimationFrames": [
-                {
-                  "FrameGroup": "Idle (Hovering) 1",
-                  "Command": "Frame",
-                  "Parameter": 5
-                },
-                {
-                  "Command": "GotoFrameOffset",
-                  "Parameter": 0
-                }
-              ]
-            },
-            "StillFrame (Hovering)": {
-              "AnimationFrames": [
-                {
-                  "FrameGroup": "Idle (Hovering) 1",
-                  "Command": "Frame",
-                  "Parameter": 5
-                },
-                {
-                  "Command": "Stop",
-                  "Parameter": 0
-                }
-              ]
-            }
+          "StillFrame (Hovering, Repeat)": {
+            "AnimationFrames": [
+              {
+                "FrameGroup": "Idle (Hovering) 1",
+                "Command": "Frame",
+                "Parameter": 5
+              },
+              {
+                "Command": "GotoFrameOffset",
+                "Parameter": 0
+              }
+            ]
+          },
+          "StillFrame (Hovering)": {
+            "AnimationFrames": [
+              {
+                "FrameGroup": "Idle (Hovering) 1",
+                "Command": "Frame",
+                "Parameter": 5
+              },
+              {
+                "Command": "Stop",
+                "Parameter": 0
+              }
+            ]
           }
         }
       }

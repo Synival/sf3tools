@@ -20,20 +20,18 @@
       },
       "AnimationByDirections": {
         "1": {
-          "Animations": {
-            "StillFrame (Lightning)": {
-              "AnimationFrames": [
-                {
-                  "FrameGroup": "Lightning 1",
-                  "Command": "Frame",
-                  "Parameter": 10
-                },
-                {
-                  "Command": "Stop",
-                  "Parameter": 0
-                }
-              ]
-            }
+          "StillFrame (Lightning)": {
+            "AnimationFrames": [
+              {
+                "FrameGroup": "Lightning 1",
+                "Command": "Frame",
+                "Parameter": 10
+              },
+              {
+                "Command": "Stop",
+                "Parameter": 0
+              }
+            ]
           }
         }
       }

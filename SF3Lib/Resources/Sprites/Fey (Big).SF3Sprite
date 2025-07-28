@@ -62,84 +62,82 @@
       },
       "AnimationByDirections": {
         "1": {
-          "Animations": {
-            "Idle": {
-              "AnimationFrames": [
-                {
-                  "FrameGroup": "Idle 1",
-                  "Command": "Frame",
-                  "Parameter": 3
-                },
-                {
-                  "FrameGroup": "Idle 2",
-                  "Command": "Frame",
-                  "Parameter": 3
-                },
-                {
-                  "Command": "GotoFrameOffset",
-                  "Parameter": 0
-                }
-              ]
-            },
-            "Shushing": {
-              "AnimationFrames": [
-                {
-                  "FrameGroup": "Shushing 1",
-                  "Command": "Frame",
-                  "Parameter": 7
-                },
-                {
-                  "FrameGroup": "Shushing 2",
-                  "Command": "Frame",
-                  "Parameter": 7
-                },
-                {
-                  "FrameGroup": "Shushing 3",
-                  "Command": "Frame",
-                  "Parameter": 7
-                },
-                {
-                  "FrameGroup": "Shushing 2",
-                  "Command": "Frame",
-                  "Parameter": 7
-                },
-                {
-                  "Command": "GotoFrameOffset",
-                  "Parameter": 0
-                }
-              ]
-            },
-            "ShushingBackToIdle": {
-              "AnimationFrames": [
-                {
-                  "FrameGroup": "StartOrStopShushing 1",
-                  "Command": "Frame",
-                  "Parameter": 3
-                },
-                {
-                  "FrameGroup": "StartOrStopShushing 2",
-                  "Command": "Frame",
-                  "Parameter": 3
-                },
-                {
-                  "Command": "GotoAnimation",
-                  "Parameter": 1
-                }
-              ]
-            },
-            "StillFrame (Idle)": {
-              "AnimationFrames": [
-                {
-                  "FrameGroup": "Idle 1",
-                  "Command": "Frame",
-                  "Parameter": 10
-                },
-                {
-                  "Command": "Stop",
-                  "Parameter": 0
-                }
-              ]
-            }
+          "Idle": {
+            "AnimationFrames": [
+              {
+                "FrameGroup": "Idle 1",
+                "Command": "Frame",
+                "Parameter": 3
+              },
+              {
+                "FrameGroup": "Idle 2",
+                "Command": "Frame",
+                "Parameter": 3
+              },
+              {
+                "Command": "GotoFrameOffset",
+                "Parameter": 0
+              }
+            ]
+          },
+          "Shushing": {
+            "AnimationFrames": [
+              {
+                "FrameGroup": "Shushing 1",
+                "Command": "Frame",
+                "Parameter": 7
+              },
+              {
+                "FrameGroup": "Shushing 2",
+                "Command": "Frame",
+                "Parameter": 7
+              },
+              {
+                "FrameGroup": "Shushing 3",
+                "Command": "Frame",
+                "Parameter": 7
+              },
+              {
+                "FrameGroup": "Shushing 2",
+                "Command": "Frame",
+                "Parameter": 7
+              },
+              {
+                "Command": "GotoFrameOffset",
+                "Parameter": 0
+              }
+            ]
+          },
+          "ShushingBackToIdle": {
+            "AnimationFrames": [
+              {
+                "FrameGroup": "StartOrStopShushing 1",
+                "Command": "Frame",
+                "Parameter": 3
+              },
+              {
+                "FrameGroup": "StartOrStopShushing 2",
+                "Command": "Frame",
+                "Parameter": 3
+              },
+              {
+                "Command": "GotoAnimation",
+                "Parameter": 1
+              }
+            ]
+          },
+          "StillFrame (Idle)": {
+            "AnimationFrames": [
+              {
+                "FrameGroup": "Idle 1",
+                "Command": "Frame",
+                "Parameter": 10
+              },
+              {
+                "Command": "Stop",
+                "Parameter": 0
+              }
+            ]
           }
         }
       }

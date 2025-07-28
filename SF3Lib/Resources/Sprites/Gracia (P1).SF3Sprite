@@ -467,337 +467,333 @@
       },
       "AnimationByDirections": {
         "4": {
-          "Animations": {
-            "Idle": {
-              "AnimationFrames": [
-                {
-                  "FrameGroup": "Idle 1",
-                  "Command": "Frame",
-                  "Parameter": 4
-                },
-                {
-                  "FrameGroup": "Idle 2",
-                  "Command": "Frame",
-                  "Parameter": 4
-                },
-                {
-                  "FrameGroup": "Idle 3",
-                  "Command": "Frame",
-                  "Parameter": 4
-                },
-                {
-                  "FrameGroup": "Idle 2",
-                  "Command": "Frame",
-                  "Parameter": 4
-                },
-                {
-                  "Command": "GotoFrameOffset",
-                  "Parameter": 0
-                }
-              ]
-            },
-            "KneelingAndPraying": {
-              "AnimationFrames": [
-                {
-                  "FrameGroup": "KneelingAndPraying 1",
-                  "Command": "Frame",
-                  "Parameter": 6
-                },
-                {
-                  "FrameGroup": "KneelingAndPraying 2",
-                  "Command": "Frame",
-                  "Parameter": 4
-                },
-                {
-                  "FrameGroup": "KneelingAndPraying 3",
-                  "Command": "Frame",
-                  "Parameter": 15
-                },
-                {
-                  "FrameGroup": "KneelingAndPraying 4",
-                  "Command": "Frame",
-                  "Parameter": 2
-                },
-                {
-                  "FrameGroup": "KneelingAndPraying 5",
-                  "Command": "Frame",
-                  "Parameter": 4
-                },
-                {
-                  "Command": "Stop",
-                  "Parameter": 0
-                }
-              ]
-            },
-            "KneelingAndPraying (Repeats after a while)": {
-              "AnimationFrames": [
-                {
-                  "FrameGroup": "KneelingAndPraying 1",
-                  "Command": "Frame",
-                  "Parameter": 6
-                },
-                {
-                  "FrameGroup": "KneelingAndPraying 2",
-                  "Command": "Frame",
-                  "Parameter": 4
-                },
-                {
-                  "FrameGroup": "KneelingAndPraying 3",
-                  "Command": "Frame",
-                  "Parameter": 15
-                },
-                {
-                  "FrameGroup": "KneelingAndPraying 4",
-                  "Command": "Frame",
-                  "Parameter": 2
-                },
-                {
-                  "FrameGroup": "KneelingAndPraying 5",
-                  "Command": "Frame",
-                  "Parameter": 120
-                },
-                {
-                  "Command": "GotoFrameOffset",
-                  "Parameter": 0
-                }
-              ]
-            },
-            "Nodding": {
-              "AnimationFrames": [
-                {
-                  "FrameGroup": "Idle 1",
-                  "Command": "Frame",
-                  "Parameter": 4
-                },
-                {
-                  "FrameGroup": "Nodding 1",
-                  "Command": "Frame",
-                  "Parameter": 4
-                },
-                {
-                  "FrameGroup": "Nodding 2",
-                  "Command": "Frame",
-                  "Parameter": 5
-                },
-                {
-                  "FrameGroup": "Nodding 1",
-                  "Command": "Frame",
-                  "Parameter": 4
-                },
-                {
-                  "Command": "GotoAnimation",
-                  "Parameter": 1
-                }
-              ]
-            },
-            "ShakingHead": {
-              "AnimationFrames": [
-                {
-                  "FrameGroup": "Idle 1",
-                  "Command": "Frame",
-                  "Parameter": 2
-                },
-                {
-                  "FrameGroup": "ShakingHead 1",
-                  "Command": "Frame",
-                  "Parameter": 4
-                },
-                {
-                  "FrameGroup": "Idle 1",
-                  "Command": "Frame",
-                  "Parameter": 2
-                },
-                {
-                  "FrameGroup": "ShakingHead 2",
-                  "Command": "Frame",
-                  "Parameter": 4
-                },
-                {
-                  "FrameGroup": "Idle 1",
-                  "Command": "Frame",
-                  "Parameter": 2
-                },
-                {
-                  "FrameGroup": "ShakingHead 1",
-                  "Command": "Frame",
-                  "Parameter": 4
-                },
-                {
-                  "FrameGroup": "Idle 1",
-                  "Command": "Frame",
-                  "Parameter": 2
-                },
-                {
-                  "FrameGroup": "ShakingHead 2",
-                  "Command": "Frame",
-                  "Parameter": 4
-                },
-                {
-                  "Command": "GotoAnimation",
-                  "Parameter": 1
-                }
-              ]
-            },
-            "StillFrame (Idle, Staff in Wrong Hand)": {
-              "AnimationFrames": [
-                {
-                  "FrameGroup": "KneelingAndPraying 1",
-                  "Command": "Frame",
-                  "Parameter": 10
-                },
-                {
-                  "Command": "Stop",
-                  "Parameter": 0
-                }
-              ]
-            },
-            "StillFrame (Idle)": {
-              "AnimationFrames": [
-                {
-                  "FrameGroup": "Idle 1",
-                  "Command": "Frame",
-                  "Parameter": 10
-                },
-                {
-                  "Command": "Stop",
-                  "Parameter": 0
-                }
-              ]
-            },
-            "StillFrame (Walking)": {
-              "AnimationFrames": [
-                {
-                  "FrameGroup": "Walking 2",
-                  "Command": "Frame",
-                  "Parameter": 10
-                },
-                {
-                  "Command": "Stop",
-                  "Parameter": 0
-                }
-              ]
-            },
-            "Walking": {
-              "AnimationFrames": [
-                {
-                  "FrameGroup": "Walking 1",
-                  "Command": "Frame",
-                  "Parameter": 4
-                },
-                {
-                  "FrameGroup": "Walking 2",
-                  "Command": "Frame",
-                  "Parameter": 4
-                },
-                {
-                  "FrameGroup": "Walking 3",
-                  "Command": "Frame",
-                  "Parameter": 4
-                },
-                {
-                  "FrameGroup": "Walking 4",
-                  "Command": "Frame",
-                  "Parameter": 4
-                },
-                {
-                  "FrameGroup": "Walking 2",
-                  "Command": "Frame",
-                  "Parameter": 4
-                },
-                {
-                  "FrameGroup": "Walking 5",
-                  "Command": "Frame",
-                  "Parameter": 4
-                },
-                {
-                  "Command": "GotoFrameOffset",
-                  "Parameter": 0
-                }
-              ]
-            }
+          "Idle": {
+            "AnimationFrames": [
+              {
+                "FrameGroup": "Idle 1",
+                "Command": "Frame",
+                "Parameter": 4
+              },
+              {
+                "FrameGroup": "Idle 2",
+                "Command": "Frame",
+                "Parameter": 4
+              },
+              {
+                "FrameGroup": "Idle 3",
+                "Command": "Frame",
+                "Parameter": 4
+              },
+              {
+                "FrameGroup": "Idle 2",
+                "Command": "Frame",
+                "Parameter": 4
+              },
+              {
+                "Command": "GotoFrameOffset",
+                "Parameter": 0
+              }
+            ]
+          },
+          "KneelingAndPraying": {
+            "AnimationFrames": [
+              {
+                "FrameGroup": "KneelingAndPraying 1",
+                "Command": "Frame",
+                "Parameter": 6
+              },
+              {
+                "FrameGroup": "KneelingAndPraying 2",
+                "Command": "Frame",
+                "Parameter": 4
+              },
+              {
+                "FrameGroup": "KneelingAndPraying 3",
+                "Command": "Frame",
+                "Parameter": 15
+              },
+              {
+                "FrameGroup": "KneelingAndPraying 4",
+                "Command": "Frame",
+                "Parameter": 2
+              },
+              {
+                "FrameGroup": "KneelingAndPraying 5",
+                "Command": "Frame",
+                "Parameter": 4
+              },
+              {
+                "Command": "Stop",
+                "Parameter": 0
+              }
+            ]
+          },
+          "KneelingAndPraying (Repeats after a while)": {
+            "AnimationFrames": [
+              {
+                "FrameGroup": "KneelingAndPraying 1",
+                "Command": "Frame",
+                "Parameter": 6
+              },
+              {
+                "FrameGroup": "KneelingAndPraying 2",
+                "Command": "Frame",
+                "Parameter": 4
+              },
+              {
+                "FrameGroup": "KneelingAndPraying 3",
+                "Command": "Frame",
+                "Parameter": 15
+              },
+              {
+                "FrameGroup": "KneelingAndPraying 4",
+                "Command": "Frame",
+                "Parameter": 2
+              },
+              {
+                "FrameGroup": "KneelingAndPraying 5",
+                "Command": "Frame",
+                "Parameter": 120
+              },
+              {
+                "Command": "GotoFrameOffset",
+                "Parameter": 0
+              }
+            ]
+          },
+          "Nodding": {
+            "AnimationFrames": [
+              {
+                "FrameGroup": "Idle 1",
+                "Command": "Frame",
+                "Parameter": 4
+              },
+              {
+                "FrameGroup": "Nodding 1",
+                "Command": "Frame",
+                "Parameter": 4
+              },
+              {
+                "FrameGroup": "Nodding 2",
+                "Command": "Frame",
+                "Parameter": 5
+              },
+              {
+                "FrameGroup": "Nodding 1",
+                "Command": "Frame",
+                "Parameter": 4
+              },
+              {
+                "Command": "GotoAnimation",
+                "Parameter": 1
+              }
+            ]
+          },
+          "ShakingHead": {
+            "AnimationFrames": [
+              {
+                "FrameGroup": "Idle 1",
+                "Command": "Frame",
+                "Parameter": 2
+              },
+              {
+                "FrameGroup": "ShakingHead 1",
+                "Command": "Frame",
+                "Parameter": 4
+              },
+              {
+                "FrameGroup": "Idle 1",
+                "Command": "Frame",
+                "Parameter": 2
+              },
+              {
+                "FrameGroup": "ShakingHead 2",
+                "Command": "Frame",
+                "Parameter": 4
+              },
+              {
+                "FrameGroup": "Idle 1",
+                "Command": "Frame",
+                "Parameter": 2
+              },
+              {
+                "FrameGroup": "ShakingHead 1",
+                "Command": "Frame",
+                "Parameter": 4
+              },
+              {
+                "FrameGroup": "Idle 1",
+                "Command": "Frame",
+                "Parameter": 2
+              },
+              {
+                "FrameGroup": "ShakingHead 2",
+                "Command": "Frame",
+                "Parameter": 4
+              },
+              {
+                "Command": "GotoAnimation",
+                "Parameter": 1
+              }
+            ]
+          },
+          "StillFrame (Idle, Staff in Wrong Hand)": {
+            "AnimationFrames": [
+              {
+                "FrameGroup": "KneelingAndPraying 1",
+                "Command": "Frame",
+                "Parameter": 10
+              },
+              {
+                "Command": "Stop",
+                "Parameter": 0
+              }
+            ]
+          },
+          "StillFrame (Idle)": {
+            "AnimationFrames": [
+              {
+                "FrameGroup": "Idle 1",
+                "Command": "Frame",
+                "Parameter": 10
+              },
+              {
+                "Command": "Stop",
+                "Parameter": 0
+              }
+            ]
+          },
+          "StillFrame (Walking)": {
+            "AnimationFrames": [
+              {
+                "FrameGroup": "Walking 2",
+                "Command": "Frame",
+                "Parameter": 10
+              },
+              {
+                "Command": "Stop",
+                "Parameter": 0
+              }
+            ]
+          },
+          "Walking": {
+            "AnimationFrames": [
+              {
+                "FrameGroup": "Walking 1",
+                "Command": "Frame",
+                "Parameter": 4
+              },
+              {
+                "FrameGroup": "Walking 2",
+                "Command": "Frame",
+                "Parameter": 4
+              },
+              {
+                "FrameGroup": "Walking 3",
+                "Command": "Frame",
+                "Parameter": 4
+              },
+              {
+                "FrameGroup": "Walking 4",
+                "Command": "Frame",
+                "Parameter": 4
+              },
+              {
+                "FrameGroup": "Walking 2",
+                "Command": "Frame",
+                "Parameter": 4
+              },
+              {
+                "FrameGroup": "Walking 5",
+                "Command": "Frame",
+                "Parameter": 4
+              },
+              {
+                "Command": "GotoFrameOffset",
+                "Parameter": 0
+              }
+            ]
           }
         },
         "6": {
-          "Animations": {
-            "Idle": {
-              "AnimationFrames": [
-                {
-                  "FrameGroup": "Idle 1",
-                  "Command": "Frame",
-                  "Parameter": 4
-                },
-                {
-                  "FrameGroup": "Idle 2",
-                  "Command": "Frame",
-                  "Parameter": 4
-                },
-                {
-                  "FrameGroup": "Idle 3",
-                  "Command": "Frame",
-                  "Parameter": 4
-                },
-                {
-                  "FrameGroup": "Idle 2",
-                  "Command": "Frame",
-                  "Parameter": 4
-                },
-                {
-                  "Command": "GotoFrameOffset",
-                  "Parameter": 0
-                }
-              ]
-            },
-            "StillFrame": {
-              "AnimationFrames": [
-                {
-                  "FrameGroup": "Idle 1",
-                  "Command": "Frame",
-                  "Parameter": 10
-                },
-                {
-                  "Command": "Stop",
-                  "Parameter": 0
-                }
-              ]
-            },
-            "Walking": {
-              "AnimationFrames": [
-                {
-                  "FrameGroup": "Walking 1",
-                  "Command": "Frame",
-                  "Parameter": 4
-                },
-                {
-                  "FrameGroup": "Walking 2",
-                  "Command": "Frame",
-                  "Parameter": 4
-                },
-                {
-                  "FrameGroup": "Walking 3",
-                  "Command": "Frame",
-                  "Parameter": 4
-                },
-                {
-                  "FrameGroup": "Walking 4",
-                  "Command": "Frame",
-                  "Parameter": 4
-                },
-                {
-                  "FrameGroup": "Walking 2",
-                  "Command": "Frame",
-                  "Parameter": 4
-                },
-                {
-                  "FrameGroup": "Walking 5",
-                  "Command": "Frame",
-                  "Parameter": 4
-                },
-                {
-                  "Command": "GotoFrameOffset",
-                  "Parameter": 0
-                }
-              ]
-            }
+          "Idle": {
+            "AnimationFrames": [
+              {
+                "FrameGroup": "Idle 1",
+                "Command": "Frame",
+                "Parameter": 4
+              },
+              {
+                "FrameGroup": "Idle 2",
+                "Command": "Frame",
+                "Parameter": 4
+              },
+              {
+                "FrameGroup": "Idle 3",
+                "Command": "Frame",
+                "Parameter": 4
+              },
+              {
+                "FrameGroup": "Idle 2",
+                "Command": "Frame",
+                "Parameter": 4
+              },
+              {
+                "Command": "GotoFrameOffset",
+                "Parameter": 0
+              }
+            ]
+          },
+          "StillFrame": {
+            "AnimationFrames": [
+              {
+                "FrameGroup": "Idle 1",
+                "Command": "Frame",
+                "Parameter": 10
+              },
+              {
+                "Command": "Stop",
+                "Parameter": 0
+              }
+            ]
+          },
+          "Walking": {
+            "AnimationFrames": [
+              {
+                "FrameGroup": "Walking 1",
+                "Command": "Frame",
+                "Parameter": 4
+              },
+              {
+                "FrameGroup": "Walking 2",
+                "Command": "Frame",
+                "Parameter": 4
+              },
+              {
+                "FrameGroup": "Walking 3",
+                "Command": "Frame",
+                "Parameter": 4
+              },
+              {
+                "FrameGroup": "Walking 4",
+                "Command": "Frame",
+                "Parameter": 4
+              },
+              {
+                "FrameGroup": "Walking 2",
+                "Command": "Frame",
+                "Parameter": 4
+              },
+              {
+                "FrameGroup": "Walking 5",
+                "Command": "Frame",
+                "Parameter": 4
+              },
+              {
+                "Command": "GotoFrameOffset",
+                "Parameter": 0
+              }
+            ]
           }
         }
       }
@@ -913,243 +909,239 @@
       },
       "AnimationByDirections": {
         "1": {
-          "Animations": {
-            "GettingUpFromPantingOnGround": {
-              "AnimationFrames": [
-                {
-                  "Frames": {
-                    "First": {
-                      "Frame": "PantingOnGround 1",
-                      "Direction": "ENE"
-                    }
-                  },
-                  "Command": "Frame",
-                  "Parameter": 8
+          "GettingUpFromPantingOnGround": {
+            "AnimationFrames": [
+              {
+                "Frames": {
+                  "First": {
+                    "Frame": "PantingOnGround 1",
+                    "Direction": "ENE"
+                  }
                 },
-                {
-                  "Frames": {
-                    "First": {
-                      "Frame": "GettingUpFromPantingOnGround 1",
-                      "Direction": "ENE"
-                    }
-                  },
-                  "Command": "Frame",
-                  "Parameter": 4
+                "Command": "Frame",
+                "Parameter": 8
+              },
+              {
+                "Frames": {
+                  "First": {
+                    "Frame": "GettingUpFromPantingOnGround 1",
+                    "Direction": "ENE"
+                  }
                 },
-                {
-                  "Frames": {
-                    "First": {
-                      "Frame": "GettingUpFromPantingOnGround 2",
-                      "Direction": "ENE"
-                    }
-                  },
-                  "Command": "Frame",
-                  "Parameter": 10
+                "Command": "Frame",
+                "Parameter": 4
+              },
+              {
+                "Frames": {
+                  "First": {
+                    "Frame": "GettingUpFromPantingOnGround 2",
+                    "Direction": "ENE"
+                  }
                 },
-                {
-                  "Frames": {
-                    "First": {
-                      "Frame": "GettingUpFromPantingOnGround 3",
-                      "Direction": "ENE"
-                    }
-                  },
-                  "Command": "Frame",
-                  "Parameter": 4
+                "Command": "Frame",
+                "Parameter": 10
+              },
+              {
+                "Frames": {
+                  "First": {
+                    "Frame": "GettingUpFromPantingOnGround 3",
+                    "Direction": "ENE"
+                  }
                 },
-                {
-                  "Frames": {
-                    "First": {
-                      "Frame": "GettingUpFromPantingOnGround 4",
-                      "Direction": "ENE"
-                    }
-                  },
-                  "Command": "Frame",
-                  "Parameter": 10
+                "Command": "Frame",
+                "Parameter": 4
+              },
+              {
+                "Frames": {
+                  "First": {
+                    "Frame": "GettingUpFromPantingOnGround 4",
+                    "Direction": "ENE"
+                  }
                 },
-                {
-                  "Command": "Stop",
-                  "Parameter": 0
-                }
-              ]
-            },
-            "PantingOnGround": {
-              "AnimationFrames": [
-                {
-                  "Frames": {
-                    "First": {
-                      "Frame": "PantingOnGround 1",
-                      "Direction": "ENE"
-                    }
-                  },
-                  "Command": "Frame",
-                  "Parameter": 8
+                "Command": "Frame",
+                "Parameter": 10
+              },
+              {
+                "Command": "Stop",
+                "Parameter": 0
+              }
+            ]
+          },
+          "PantingOnGround": {
+            "AnimationFrames": [
+              {
+                "Frames": {
+                  "First": {
+                    "Frame": "PantingOnGround 1",
+                    "Direction": "ENE"
+                  }
                 },
-                {
-                  "Frames": {
-                    "First": {
-                      "Frame": "PantingOnGround 2",
-                      "Direction": "ENE"
-                    }
-                  },
-                  "Command": "Frame",
-                  "Parameter": 6
+                "Command": "Frame",
+                "Parameter": 8
+              },
+              {
+                "Frames": {
+                  "First": {
+                    "Frame": "PantingOnGround 2",
+                    "Direction": "ENE"
+                  }
                 },
-                {
-                  "Frames": {
-                    "First": {
-                      "Frame": "PantingOnGround 3",
-                      "Direction": "ENE"
-                    }
-                  },
-                  "Command": "Frame",
-                  "Parameter": 10
+                "Command": "Frame",
+                "Parameter": 6
+              },
+              {
+                "Frames": {
+                  "First": {
+                    "Frame": "PantingOnGround 3",
+                    "Direction": "ENE"
+                  }
                 },
-                {
-                  "Frames": {
-                    "First": {
-                      "Frame": "PantingOnGround 2",
-                      "Direction": "ENE"
-                    }
-                  },
-                  "Command": "Frame",
-                  "Parameter": 4
+                "Command": "Frame",
+                "Parameter": 10
+              },
+              {
+                "Frames": {
+                  "First": {
+                    "Frame": "PantingOnGround 2",
+                    "Direction": "ENE"
+                  }
                 },
-                {
-                  "Frames": {
-                    "First": {
-                      "Frame": "PantingOnGround 1",
-                      "Direction": "ENE"
-                    }
-                  },
-                  "Command": "Frame",
-                  "Parameter": 8
+                "Command": "Frame",
+                "Parameter": 4
+              },
+              {
+                "Frames": {
+                  "First": {
+                    "Frame": "PantingOnGround 1",
+                    "Direction": "ENE"
+                  }
                 },
-                {
-                  "Frames": {
-                    "First": {
-                      "Frame": "PantingOnGround 2",
-                      "Direction": "ENE"
-                    }
-                  },
-                  "Command": "Frame",
-                  "Parameter": 6
+                "Command": "Frame",
+                "Parameter": 8
+              },
+              {
+                "Frames": {
+                  "First": {
+                    "Frame": "PantingOnGround 2",
+                    "Direction": "ENE"
+                  }
                 },
-                {
-                  "Frames": {
-                    "First": {
-                      "Frame": "PantingOnGround 3",
-                      "Direction": "ENE"
-                    }
-                  },
-                  "Command": "Frame",
-                  "Parameter": 10
+                "Command": "Frame",
+                "Parameter": 6
+              },
+              {
+                "Frames": {
+                  "First": {
+                    "Frame": "PantingOnGround 3",
+                    "Direction": "ENE"
+                  }
                 },
-                {
-                  "Frames": {
-                    "First": {
-                      "Frame": "PantingOnGround 2",
-                      "Direction": "ENE"
-                    }
-                  },
-                  "Command": "Frame",
-                  "Parameter": 4
+                "Command": "Frame",
+                "Parameter": 10
+              },
+              {
+                "Frames": {
+                  "First": {
+                    "Frame": "PantingOnGround 2",
+                    "Direction": "ENE"
+                  }
                 },
-                {
-                  "Frames": {
-                    "First": {
-                      "Frame": "PantingOnGround 1",
-                      "Direction": "ENE"
-                    }
-                  },
-                  "Command": "Frame",
-                  "Parameter": 8
+                "Command": "Frame",
+                "Parameter": 4
+              },
+              {
+                "Frames": {
+                  "First": {
+                    "Frame": "PantingOnGround 1",
+                    "Direction": "ENE"
+                  }
                 },
-                {
-                  "Frames": {
-                    "First": {
-                      "Frame": "PantingOnGround 2",
-                      "Direction": "ENE"
-                    }
-                  },
-                  "Command": "Frame",
-                  "Parameter": 6
+                "Command": "Frame",
+                "Parameter": 8
+              },
+              {
+                "Frames": {
+                  "First": {
+                    "Frame": "PantingOnGround 2",
+                    "Direction": "ENE"
+                  }
                 },
-                {
-                  "Frames": {
-                    "First": {
-                      "Frame": "PantingOnGround 3",
-                      "Direction": "ENE"
-                    }
-                  },
-                  "Command": "Frame",
-                  "Parameter": 10
+                "Command": "Frame",
+                "Parameter": 6
+              },
+              {
+                "Frames": {
+                  "First": {
+                    "Frame": "PantingOnGround 3",
+                    "Direction": "ENE"
+                  }
                 },
-                {
-                  "Frames": {
-                    "First": {
-                      "Frame": "PantingOnGround 2",
-                      "Direction": "ENE"
-                    }
-                  },
-                  "Command": "Frame",
-                  "Parameter": 4
+                "Command": "Frame",
+                "Parameter": 10
+              },
+              {
+                "Frames": {
+                  "First": {
+                    "Frame": "PantingOnGround 2",
+                    "Direction": "ENE"
+                  }
                 },
-                {
-                  "Command": "GotoFrameOffset",
-                  "Parameter": 0
-                }
-              ]
-            },
-            "StillFrame (OnGround, Repeat)": {
-              "AnimationFrames": [
-                {
-                  "Frames": {
-                    "First": {
-                      "Frame": "OnGround 1",
-                      "Direction": "ENE"
-                    }
-                  },
-                  "Command": "Frame",
-                  "Parameter": 10
+                "Command": "Frame",
+                "Parameter": 4
+              },
+              {
+                "Command": "GotoFrameOffset",
+                "Parameter": 0
+              }
+            ]
+          },
+          "StillFrame (OnGround, Repeat)": {
+            "AnimationFrames": [
+              {
+                "Frames": {
+                  "First": {
+                    "Frame": "OnGround 1",
+                    "Direction": "ENE"
+                  }
                 },
-                {
-                  "Command": "GotoFrameOffset",
-                  "Parameter": 0
-                }
-              ]
-            }
+                "Command": "Frame",
+                "Parameter": 10
+              },
+              {
+                "Command": "GotoFrameOffset",
+                "Parameter": 0
+              }
+            ]
           }
         },
         "4": {
-          "Animations": {
-            "PantingOnGround": {
-              "AnimationFrames": [
-                {
-                  "FrameGroup": "PantingOnGround 1",
-                  "Command": "Frame",
-                  "Parameter": 8
-                },
-                {
-                  "FrameGroup": "PantingOnGround 2",
-                  "Command": "Frame",
-                  "Parameter": 6
-                },
-                {
-                  "FrameGroup": "PantingOnGround 3",
-                  "Command": "Frame",
-                  "Parameter": 10
-                },
-                {
-                  "FrameGroup": "PantingOnGround 2",
-                  "Command": "Frame",
-                  "Parameter": 4
-                },
-                {
-                  "Command": "GotoFrameOffset",
-                  "Parameter": 0
-                }
-              ]
-            }
+          "PantingOnGround": {
+            "AnimationFrames": [
+              {
+                "FrameGroup": "PantingOnGround 1",
+                "Command": "Frame",
+                "Parameter": 8
+              },
+              {
+                "FrameGroup": "PantingOnGround 2",
+                "Command": "Frame",
+                "Parameter": 6
+              },
+              {
+                "FrameGroup": "PantingOnGround 3",
+                "Command": "Frame",
+                "Parameter": 10
+              },
+              {
+                "FrameGroup": "PantingOnGround 2",
+                "Command": "Frame",
+                "Parameter": 4
+              },
+              {
+                "Command": "GotoFrameOffset",
+                "Parameter": 0
+              }
+            ]
           }
         }
       }

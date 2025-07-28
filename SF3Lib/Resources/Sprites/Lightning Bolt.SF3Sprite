@@ -69,133 +69,131 @@
       },
       "AnimationByDirections": {
         "1": {
-          "Animations": {
-            "StillFrame": {
-              "AnimationFrames": [
-                {
-                  "FrameGroup": "Zapping 2",
-                  "Command": "Frame",
-                  "Parameter": 10
-                },
-                {
-                  "Command": "Stop",
-                  "Parameter": 0
-                }
-              ]
-            },
-            "StillFrame (Dot)": {
-              "AnimationFrames": [
-                {
-                  "FrameGroup": "Dot 1",
-                  "Command": "Frame",
-                  "Parameter": 10
-                },
-                {
-                  "Command": "Stop",
-                  "Parameter": 0
-                }
-              ]
-            },
-            "StillFrame (Transparent)": {
-              "AnimationFrames": [
-                {
-                  "FrameGroup": "Transparent 1",
-                  "Command": "Frame",
-                  "Parameter": 10
-                },
-                {
-                  "Command": "Stop",
-                  "Parameter": 0
-                }
-              ]
-            },
-            "Zapping (Fast, To the Left)": {
-              "AnimationFrames": [
-                {
-                  "FrameGroup": "Zapping (To the Left) 1",
-                  "Command": "Frame",
-                  "Parameter": 1
-                },
-                {
-                  "FrameGroup": "Zapping (To the Left) 2",
-                  "Command": "Frame",
-                  "Parameter": 1
-                },
-                {
-                  "FrameGroup": "Zapping (To the Left) 3",
-                  "Command": "Frame",
-                  "Parameter": 1
-                },
-                {
-                  "Command": "GotoFrameOffset",
-                  "Parameter": 0
-                }
-              ]
-            },
-            "Zapping (Fast)": {
-              "AnimationFrames": [
-                {
-                  "FrameGroup": "Zapping 1",
-                  "Command": "Frame",
-                  "Parameter": 1
-                },
-                {
-                  "FrameGroup": "Zapping 2",
-                  "Command": "Frame",
-                  "Parameter": 1
-                },
-                {
-                  "FrameGroup": "Zapping 3",
-                  "Command": "Frame",
-                  "Parameter": 1
-                },
-                {
-                  "Command": "GotoFrameOffset",
-                  "Parameter": 0
-                }
-              ]
-            },
-            "Zapping (Reduced, Slow)": {
-              "AnimationFrames": [
-                {
-                  "FrameGroup": "Zapping 2",
-                  "Command": "Frame",
-                  "Parameter": 3
-                },
-                {
-                  "FrameGroup": "Zapping 3",
-                  "Command": "Frame",
-                  "Parameter": 3
-                },
-                {
-                  "Command": "GotoFrameOffset",
-                  "Parameter": 0
-                }
-              ]
-            },
-            "Zapping (Slow)": {
-              "AnimationFrames": [
-                {
-                  "FrameGroup": "Zapping 1",
-                  "Command": "Frame",
-                  "Parameter": 3
-                },
-                {
-                  "FrameGroup": "Zapping 2",
-                  "Command": "Frame",
-                  "Parameter": 3
-                },
-                {
-                  "FrameGroup": "Zapping 3",
-                  "Command": "Frame",
-                  "Parameter": 3
-                },
-                {
-                  "Command": "GotoFrameOffset",
-                  "Parameter": 0
-                }
-              ]
-            }
+          "StillFrame": {
+            "AnimationFrames": [
+              {
+                "FrameGroup": "Zapping 2",
+                "Command": "Frame",
+                "Parameter": 10
+              },
+              {
+                "Command": "Stop",
+                "Parameter": 0
+              }
+            ]
+          },
+          "StillFrame (Dot)": {
+            "AnimationFrames": [
+              {
+                "FrameGroup": "Dot 1",
+                "Command": "Frame",
+                "Parameter": 10
+              },
+              {
+                "Command": "Stop",
+                "Parameter": 0
+              }
+            ]
+          },
+          "StillFrame (Transparent)": {
+            "AnimationFrames": [
+              {
+                "FrameGroup": "Transparent 1",
+                "Command": "Frame",
+                "Parameter": 10
+              },
+              {
+                "Command": "Stop",
+                "Parameter": 0
+              }
+            ]
+          },
+          "Zapping (Fast, To the Left)": {
+            "AnimationFrames": [
+              {
+                "FrameGroup": "Zapping (To the Left) 1",
+                "Command": "Frame",
+                "Parameter": 1
+              },
+              {
+                "FrameGroup": "Zapping (To the Left) 2",
+                "Command": "Frame",
+                "Parameter": 1
+              },
+              {
+                "FrameGroup": "Zapping (To the Left) 3",
+                "Command": "Frame",
+                "Parameter": 1
+              },
+              {
+                "Command": "GotoFrameOffset",
+                "Parameter": 0
+              }
+            ]
+          },
+          "Zapping (Fast)": {
+            "AnimationFrames": [
+              {
+                "FrameGroup": "Zapping 1",
+                "Command": "Frame",
+                "Parameter": 1
+              },
+              {
+                "FrameGroup": "Zapping 2",
+                "Command": "Frame",
+                "Parameter": 1
+              },
+              {
+                "FrameGroup": "Zapping 3",
+                "Command": "Frame",
+                "Parameter": 1
+              },
+              {
+                "Command": "GotoFrameOffset",
+                "Parameter": 0
+              }
+            ]
+          },
+          "Zapping (Reduced, Slow)": {
+            "AnimationFrames": [
+              {
+                "FrameGroup": "Zapping 2",
+                "Command": "Frame",
+                "Parameter": 3
+              },
+              {
+                "FrameGroup": "Zapping 3",
+                "Command": "Frame",
+                "Parameter": 3
+              },
+              {
+                "Command": "GotoFrameOffset",
+                "Parameter": 0
+              }
+            ]
+          },
+          "Zapping (Slow)": {
+            "AnimationFrames": [
+              {
+                "FrameGroup": "Zapping 1",
+                "Command": "Frame",
+                "Parameter": 3
+              },
+              {
+                "FrameGroup": "Zapping 2",
+                "Command": "Frame",
+                "Parameter": 3
+              },
+              {
+                "FrameGroup": "Zapping 3",
+                "Command": "Frame",
+                "Parameter": 3
+              },
+              {
+                "Command": "GotoFrameOffset",
+                "Parameter": 0
+              }
+            ]
           }
         }
       }

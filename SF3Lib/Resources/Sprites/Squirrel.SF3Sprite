@@ -211,179 +211,177 @@
       },
       "AnimationByDirections": {
         "4": {
-          "Animations": {
-            "Idle (Still then Nibbling)": {
-              "AnimationFrames": [
-                {
-                  "FrameGroup": "Idle (Still then Nibbling) 1",
-                  "Command": "Frame",
-                  "Parameter": 150
-                },
-                {
-                  "FrameGroup": "Idle (Still then Nibbling) 2",
-                  "Command": "Frame",
-                  "Parameter": 5
-                },
-                {
-                  "FrameGroup": "Idle (Still then Nibbling) 3",
-                  "Command": "Frame",
-                  "Parameter": 2
-                },
-                {
-                  "FrameGroup": "Idle (Still then Nibbling) 4",
-                  "Command": "Frame",
-                  "Parameter": 2
-                },
-                {
-                  "FrameGroup": "Idle (Still then Nibbling) 3",
-                  "Command": "Frame",
-                  "Parameter": 2
-                },
-                {
-                  "FrameGroup": "Idle (Still then Nibbling) 4",
-                  "Command": "Frame",
-                  "Parameter": 2
-                },
-                {
-                  "FrameGroup": "Idle (Still then Nibbling) 3",
-                  "Command": "Frame",
-                  "Parameter": 2
-                },
-                {
-                  "FrameGroup": "Idle (Still then Nibbling) 4",
-                  "Command": "Frame",
-                  "Parameter": 2
-                },
-                {
-                  "FrameGroup": "Idle (Still then Nibbling) 3",
-                  "Command": "Frame",
-                  "Parameter": 2
-                },
-                {
-                  "FrameGroup": "Idle (Still then Nibbling) 4",
-                  "Command": "Frame",
-                  "Parameter": 2
-                },
-                {
-                  "FrameGroup": "Idle (Still then Nibbling) 3",
-                  "Command": "Frame",
-                  "Parameter": 2
-                },
-                {
-                  "FrameGroup": "Idle (Still then Nibbling) 4",
-                  "Command": "Frame",
-                  "Parameter": 2
-                },
-                {
-                  "FrameGroup": "Idle (Still then Nibbling) 3",
-                  "Command": "Frame",
-                  "Parameter": 2
-                },
-                {
-                  "FrameGroup": "Idle (Still then Nibbling) 4",
-                  "Command": "Frame",
-                  "Parameter": 2
-                },
-                {
-                  "FrameGroup": "Idle (Still then Nibbling) 3",
-                  "Command": "Frame",
-                  "Parameter": 2
-                },
-                {
-                  "FrameGroup": "Idle (Still then Nibbling) 4",
-                  "Command": "Frame",
-                  "Parameter": 2
-                },
-                {
-                  "FrameGroup": "Idle (Still then Nibbling) 3",
-                  "Command": "Frame",
-                  "Parameter": 2
-                },
-                {
-                  "FrameGroup": "Idle (Still then Nibbling) 4",
-                  "Command": "Frame",
-                  "Parameter": 2
-                },
-                {
-                  "FrameGroup": "Idle (Still then Nibbling) 3",
-                  "Command": "Frame",
-                  "Parameter": 2
-                },
-                {
-                  "FrameGroup": "Idle (Still then Nibbling) 2",
-                  "Command": "Frame",
-                  "Parameter": 5
-                },
-                {
-                  "Command": "GotoFrameOffset",
-                  "Parameter": 0
-                }
-              ]
-            },
-            "Running": {
-              "AnimationFrames": [
-                {
-                  "FrameGroup": "Running 1",
-                  "Command": "Frame",
-                  "Parameter": 1
-                },
-                {
-                  "FrameGroup": "Running 2",
-                  "Command": "Frame",
-                  "Parameter": 1
-                },
-                {
-                  "FrameGroup": "Running 3",
-                  "Command": "Frame",
-                  "Parameter": 1
-                },
-                {
-                  "FrameGroup": "Running 4",
-                  "Command": "Frame",
-                  "Parameter": 1
-                },
-                {
-                  "FrameGroup": "Running 2",
-                  "Command": "Frame",
-                  "Parameter": 1
-                },
-                {
-                  "FrameGroup": "Running 5",
-                  "Command": "Frame",
-                  "Parameter": 1
-                },
-                {
-                  "Command": "GotoFrameOffset",
-                  "Parameter": 0
-                }
-              ]
-            },
-            "StillFrame (Down)": {
-              "AnimationFrames": [
-                {
-                  "FrameGroup": "Running 2",
-                  "Command": "Frame",
-                  "Parameter": 10
-                },
-                {
-                  "Command": "Stop",
-                  "Parameter": 0
-                }
-              ]
-            },
-            "StillFrame (Up)": {
-              "AnimationFrames": [
-                {
-                  "FrameGroup": "Idle (Still then Nibbling) 1",
-                  "Command": "Frame",
-                  "Parameter": 10
-                },
-                {
-                  "Command": "Stop",
-                  "Parameter": 0
-                }
-              ]
-            }
+          "Idle (Still then Nibbling)": {
+            "AnimationFrames": [
+              {
+                "FrameGroup": "Idle (Still then Nibbling) 1",
+                "Command": "Frame",
+                "Parameter": 150
+              },
+              {
+                "FrameGroup": "Idle (Still then Nibbling) 2",
+                "Command": "Frame",
+                "Parameter": 5
+              },
+              {
+                "FrameGroup": "Idle (Still then Nibbling) 3",
+                "Command": "Frame",
+                "Parameter": 2
+              },
+              {
+                "FrameGroup": "Idle (Still then Nibbling) 4",
+                "Command": "Frame",
+                "Parameter": 2
+              },
+              {
+                "FrameGroup": "Idle (Still then Nibbling) 3",
+                "Command": "Frame",
+                "Parameter": 2
+              },
+              {
+                "FrameGroup": "Idle (Still then Nibbling) 4",
+                "Command": "Frame",
+                "Parameter": 2
+              },
+              {
+                "FrameGroup": "Idle (Still then Nibbling) 3",
+                "Command": "Frame",
+                "Parameter": 2
+              },
+              {
+                "FrameGroup": "Idle (Still then Nibbling) 4",
+                "Command": "Frame",
+                "Parameter": 2
+              },
+              {
+                "FrameGroup": "Idle (Still then Nibbling) 3",
+                "Command": "Frame",
+                "Parameter": 2
+              },
+              {
+                "FrameGroup": "Idle (Still then Nibbling) 4",
+                "Command": "Frame",
+                "Parameter": 2
+              },
+              {
+                "FrameGroup": "Idle (Still then Nibbling) 3",
+                "Command": "Frame",
+                "Parameter": 2
+              },
+              {
+                "FrameGroup": "Idle (Still then Nibbling) 4",
+                "Command": "Frame",
+                "Parameter": 2
+              },
+              {
+                "FrameGroup": "Idle (Still then Nibbling) 3",
+                "Command": "Frame",
+                "Parameter": 2
+              },
+              {
+                "FrameGroup": "Idle (Still then Nibbling) 4",
+                "Command": "Frame",
+                "Parameter": 2
+              },
+              {
+                "FrameGroup": "Idle (Still then Nibbling) 3",
+                "Command": "Frame",
+                "Parameter": 2
+              },
+              {
+                "FrameGroup": "Idle (Still then Nibbling) 4",
+                "Command": "Frame",
+                "Parameter": 2
+              },
+              {
+                "FrameGroup": "Idle (Still then Nibbling) 3",
+                "Command": "Frame",
+                "Parameter": 2
+              },
+              {
+                "FrameGroup": "Idle (Still then Nibbling) 4",
+                "Command": "Frame",
+                "Parameter": 2
+              },
+              {
+                "FrameGroup": "Idle (Still then Nibbling) 3",
+                "Command": "Frame",
+                "Parameter": 2
+              },
+              {
+                "FrameGroup": "Idle (Still then Nibbling) 2",
+                "Command": "Frame",
+                "Parameter": 5
+              },
+              {
+                "Command": "GotoFrameOffset",
+                "Parameter": 0
+              }
+            ]
+          },
+          "Running": {
+            "AnimationFrames": [
+              {
+                "FrameGroup": "Running 1",
+                "Command": "Frame",
+                "Parameter": 1
+              },
+              {
+                "FrameGroup": "Running 2",
+                "Command": "Frame",
+                "Parameter": 1
+              },
+              {
+                "FrameGroup": "Running 3",
+                "Command": "Frame",
+                "Parameter": 1
+              },
+              {
+                "FrameGroup": "Running 4",
+                "Command": "Frame",
+                "Parameter": 1
+              },
+              {
+                "FrameGroup": "Running 2",
+                "Command": "Frame",
+                "Parameter": 1
+              },
+              {
+                "FrameGroup": "Running 5",
+                "Command": "Frame",
+                "Parameter": 1
+              },
+              {
+                "Command": "GotoFrameOffset",
+                "Parameter": 0
+              }
+            ]
+          },
+          "StillFrame (Down)": {
+            "AnimationFrames": [
+              {
+                "FrameGroup": "Running 2",
+                "Command": "Frame",
+                "Parameter": 10
+              },
+              {
+                "Command": "Stop",
+                "Parameter": 0
+              }
+            ]
+          },
+          "StillFrame (Up)": {
+            "AnimationFrames": [
+              {
+                "FrameGroup": "Idle (Still then Nibbling) 1",
+                "Command": "Frame",
+                "Parameter": 10
+              },
+              {
+                "Command": "Stop",
+                "Parameter": 0
+              }
+            ]
           }
         }
       }

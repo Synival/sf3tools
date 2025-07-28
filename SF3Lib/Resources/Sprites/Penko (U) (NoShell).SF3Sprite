@@ -233,264 +233,262 @@
       },
       "AnimationByDirections": {
         "4": {
-          "Animations": {
-            "Blushing, BobbingSideToSide": {
-              "AnimationFrames": [
-                {
-                  "FrameGroup": "Blushing, BobbingSideToSide 1",
-                  "Command": "Frame",
-                  "Parameter": 15
-                },
-                {
-                  "FrameGroup": "Blushing, BobbingSideToSide 2",
-                  "Command": "Frame",
-                  "Parameter": 4
-                },
-                {
-                  "FrameGroup": "Blushing, BobbingSideToSide 3",
-                  "Command": "Frame",
-                  "Parameter": 15
-                },
-                {
-                  "FrameGroup": "Blushing, BobbingSideToSide 4",
-                  "Command": "Frame",
-                  "Parameter": 5
-                },
-                {
-                  "FrameGroup": "Blushing, BobbingSideToSide 3",
-                  "Command": "Frame",
-                  "Parameter": 3
-                },
-                {
-                  "FrameGroup": "Blushing, BobbingSideToSide 5",
-                  "Command": "Frame",
-                  "Parameter": 5
-                },
-                {
-                  "FrameGroup": "Blushing, BobbingSideToSide 3",
-                  "Command": "Frame",
-                  "Parameter": 3
-                },
-                {
-                  "FrameGroup": "Blushing, BobbingSideToSide 4",
-                  "Command": "Frame",
-                  "Parameter": 5
-                },
-                {
-                  "FrameGroup": "Blushing, BobbingSideToSide 3",
-                  "Command": "Frame",
-                  "Parameter": 3
-                },
-                {
-                  "FrameGroup": "Blushing, BobbingSideToSide 5",
-                  "Command": "Frame",
-                  "Parameter": 5
-                },
-                {
-                  "FrameGroup": "Blushing, BobbingSideToSide 3",
-                  "Command": "Frame",
-                  "Parameter": 3
-                },
-                {
-                  "FrameGroup": "Blushing, BobbingSideToSide 4",
-                  "Command": "Frame",
-                  "Parameter": 5
-                },
-                {
-                  "FrameGroup": "Blushing, BobbingSideToSide 3",
-                  "Command": "Frame",
-                  "Parameter": 3
-                },
-                {
-                  "Command": "GotoFrameOffset",
-                  "Parameter": 0
-                }
-              ]
-            },
-            "Hopping, Blushing, BobbingSideToSide": {
-              "AnimationFrames": [
-                {
-                  "FrameGroup": "Blushing, BobbingSideToSide 1",
-                  "Command": "Frame",
-                  "Parameter": 4
-                },
-                {
-                  "FrameGroup": "Hopping, Blushing, BobbingSideToSide 1",
-                  "Command": "Frame",
-                  "Parameter": 4
-                },
-                {
-                  "FrameGroup": "Hopping, Blushing, BobbingSideToSide 2",
-                  "Command": "Frame",
-                  "Parameter": 4
-                },
-                {
-                  "FrameGroup": "Hopping, Blushing, BobbingSideToSide 3",
-                  "Command": "Frame",
-                  "Parameter": 4
-                },
-                {
-                  "FrameGroup": "Blushing, BobbingSideToSide 1",
-                  "Command": "Frame",
-                  "Parameter": 15
-                },
-                {
-                  "FrameGroup": "Blushing, BobbingSideToSide 2",
-                  "Command": "Frame",
-                  "Parameter": 4
-                },
-                {
-                  "FrameGroup": "Blushing, BobbingSideToSide 3",
-                  "Command": "Frame",
-                  "Parameter": 15
-                },
-                {
-                  "FrameGroup": "Blushing, BobbingSideToSide 4",
-                  "Command": "Frame",
-                  "Parameter": 5
-                },
-                {
-                  "FrameGroup": "Blushing, BobbingSideToSide 3",
-                  "Command": "Frame",
-                  "Parameter": 3
-                },
-                {
-                  "FrameGroup": "Blushing, BobbingSideToSide 5",
-                  "Command": "Frame",
-                  "Parameter": 5
-                },
-                {
-                  "FrameGroup": "Blushing, BobbingSideToSide 3",
-                  "Command": "Frame",
-                  "Parameter": 3
-                },
-                {
-                  "FrameGroup": "Blushing, BobbingSideToSide 4",
-                  "Command": "Frame",
-                  "Parameter": 5
-                },
-                {
-                  "FrameGroup": "Blushing, BobbingSideToSide 3",
-                  "Command": "Frame",
-                  "Parameter": 3
-                },
-                {
-                  "FrameGroup": "Blushing, BobbingSideToSide 5",
-                  "Command": "Frame",
-                  "Parameter": 5
-                },
-                {
-                  "FrameGroup": "Blushing, BobbingSideToSide 3",
-                  "Command": "Frame",
-                  "Parameter": 3
-                },
-                {
-                  "FrameGroup": "Blushing, BobbingSideToSide 4",
-                  "Command": "Frame",
-                  "Parameter": 5
-                },
-                {
-                  "FrameGroup": "Blushing, BobbingSideToSide 3",
-                  "Command": "Frame",
-                  "Parameter": 3
-                },
-                {
-                  "FrameGroup": "Kissing (Blushing) 1",
-                  "Command": "Frame",
-                  "Parameter": 3
-                },
-                {
-                  "FrameGroup": "Kissing (Blushing) 2",
-                  "Command": "Frame",
-                  "Parameter": 6
-                },
-                {
-                  "FrameGroup": "Kissing (Blushing) 1",
-                  "Command": "Frame",
-                  "Parameter": 3
-                },
-                {
-                  "FrameGroup": "Kissing (Blushing) 2",
-                  "Command": "Frame",
-                  "Parameter": 6
-                },
-                {
-                  "FrameGroup": "Kissing (Blushing) 1",
-                  "Command": "Frame",
-                  "Parameter": 3
-                },
-                {
-                  "FrameGroup": "Kissing (Blushing) 2",
-                  "Command": "Frame",
-                  "Parameter": 15
-                },
-                {
-                  "FrameGroup": "Kissing (Blushing) 1",
-                  "Command": "Frame",
-                  "Parameter": 3
-                },
-                {
-                  "Command": "GotoFrameOffset",
-                  "Parameter": 0
-                }
-              ]
-            },
-            "Kissing (Blushing)": {
-              "AnimationFrames": [
-                {
-                  "FrameGroup": "Kissing (Blushing) 1",
-                  "Command": "Frame",
-                  "Parameter": 3
-                },
-                {
-                  "FrameGroup": "Kissing (Blushing) 2",
-                  "Command": "Frame",
-                  "Parameter": 6
-                },
-                {
-                  "FrameGroup": "Kissing (Blushing) 1",
-                  "Command": "Frame",
-                  "Parameter": 3
-                },
-                {
-                  "FrameGroup": "Kissing (Blushing) 2",
-                  "Command": "Frame",
-                  "Parameter": 6
-                },
-                {
-                  "FrameGroup": "Kissing (Blushing) 1",
-                  "Command": "Frame",
-                  "Parameter": 3
-                },
-                {
-                  "FrameGroup": "Kissing (Blushing) 2",
-                  "Command": "Frame",
-                  "Parameter": 15
-                },
-                {
-                  "FrameGroup": "Kissing (Blushing) 1",
-                  "Command": "Frame",
-                  "Parameter": 3
-                },
-                {
-                  "Command": "Stop",
-                  "Parameter": 1
-                }
-              ]
-            },
-            "StillFrame": {
-              "AnimationFrames": [
-                {
-                  "FrameGroup": "Blushing, BobbingSideToSide 1",
-                  "Command": "Frame",
-                  "Parameter": 10
-                },
-                {
-                  "Command": "Stop",
-                  "Parameter": 0
-                }
-              ]
-            }
+          "Blushing, BobbingSideToSide": {
+            "AnimationFrames": [
+              {
+                "FrameGroup": "Blushing, BobbingSideToSide 1",
+                "Command": "Frame",
+                "Parameter": 15
+              },
+              {
+                "FrameGroup": "Blushing, BobbingSideToSide 2",
+                "Command": "Frame",
+                "Parameter": 4
+              },
+              {
+                "FrameGroup": "Blushing, BobbingSideToSide 3",
+                "Command": "Frame",
+                "Parameter": 15
+              },
+              {
+                "FrameGroup": "Blushing, BobbingSideToSide 4",
+                "Command": "Frame",
+                "Parameter": 5
+              },
+              {
+                "FrameGroup": "Blushing, BobbingSideToSide 3",
+                "Command": "Frame",
+                "Parameter": 3
+              },
+              {
+                "FrameGroup": "Blushing, BobbingSideToSide 5",
+                "Command": "Frame",
+                "Parameter": 5
+              },
+              {
+                "FrameGroup": "Blushing, BobbingSideToSide 3",
+                "Command": "Frame",
+                "Parameter": 3
+              },
+              {
+                "FrameGroup": "Blushing, BobbingSideToSide 4",
+                "Command": "Frame",
+                "Parameter": 5
+              },
+              {
+                "FrameGroup": "Blushing, BobbingSideToSide 3",
+                "Command": "Frame",
+                "Parameter": 3
+              },
+              {
+                "FrameGroup": "Blushing, BobbingSideToSide 5",
+                "Command": "Frame",
+                "Parameter": 5
+              },
+              {
+                "FrameGroup": "Blushing, BobbingSideToSide 3",
+                "Command": "Frame",
+                "Parameter": 3
+              },
+              {
+                "FrameGroup": "Blushing, BobbingSideToSide 4",
+                "Command": "Frame",
+                "Parameter": 5
+              },
+              {
+                "FrameGroup": "Blushing, BobbingSideToSide 3",
+                "Command": "Frame",
+                "Parameter": 3
+              },
+              {
+                "Command": "GotoFrameOffset",
+                "Parameter": 0
+              }
+            ]
+          },
+          "Hopping, Blushing, BobbingSideToSide": {
+            "AnimationFrames": [
+              {
+                "FrameGroup": "Blushing, BobbingSideToSide 1",
+                "Command": "Frame",
+                "Parameter": 4
+              },
+              {
+                "FrameGroup": "Hopping, Blushing, BobbingSideToSide 1",
+                "Command": "Frame",
+                "Parameter": 4
+              },
+              {
+                "FrameGroup": "Hopping, Blushing, BobbingSideToSide 2",
+                "Command": "Frame",
+                "Parameter": 4
+              },
+              {
+                "FrameGroup": "Hopping, Blushing, BobbingSideToSide 3",
+                "Command": "Frame",
+                "Parameter": 4
+              },
+              {
+                "FrameGroup": "Blushing, BobbingSideToSide 1",
+                "Command": "Frame",
+                "Parameter": 15
+              },
+              {
+                "FrameGroup": "Blushing, BobbingSideToSide 2",
+                "Command": "Frame",
+                "Parameter": 4
+              },
+              {
+                "FrameGroup": "Blushing, BobbingSideToSide 3",
+                "Command": "Frame",
+                "Parameter": 15
+              },
+              {
+                "FrameGroup": "Blushing, BobbingSideToSide 4",
+                "Command": "Frame",
+                "Parameter": 5
+              },
+              {
+                "FrameGroup": "Blushing, BobbingSideToSide 3",
+                "Command": "Frame",
+                "Parameter": 3
+              },
+              {
+                "FrameGroup": "Blushing, BobbingSideToSide 5",
+                "Command": "Frame",
+                "Parameter": 5
+              },
+              {
+                "FrameGroup": "Blushing, BobbingSideToSide 3",
+                "Command": "Frame",
+                "Parameter": 3
+              },
+              {
+                "FrameGroup": "Blushing, BobbingSideToSide 4",
+                "Command": "Frame",
+                "Parameter": 5
+              },
+              {
+                "FrameGroup": "Blushing, BobbingSideToSide 3",
+                "Command": "Frame",
+                "Parameter": 3
+              },
+              {
+                "FrameGroup": "Blushing, BobbingSideToSide 5",
+                "Command": "Frame",
+                "Parameter": 5
+              },
+              {
+                "FrameGroup": "Blushing, BobbingSideToSide 3",
+                "Command": "Frame",
+                "Parameter": 3
+              },
+              {
+                "FrameGroup": "Blushing, BobbingSideToSide 4",
+                "Command": "Frame",
+                "Parameter": 5
+              },
+              {
+                "FrameGroup": "Blushing, BobbingSideToSide 3",
+                "Command": "Frame",
+                "Parameter": 3
+              },
+              {
+                "FrameGroup": "Kissing (Blushing) 1",
+                "Command": "Frame",
+                "Parameter": 3
+              },
+              {
+                "FrameGroup": "Kissing (Blushing) 2",
+                "Command": "Frame",
+                "Parameter": 6
+              },
+              {
+                "FrameGroup": "Kissing (Blushing) 1",
+                "Command": "Frame",
+                "Parameter": 3
+              },
+              {
+                "FrameGroup": "Kissing (Blushing) 2",
+                "Command": "Frame",
+                "Parameter": 6
+              },
+              {
+                "FrameGroup": "Kissing (Blushing) 1",
+                "Command": "Frame",
+                "Parameter": 3
+              },
+              {
+                "FrameGroup": "Kissing (Blushing) 2",
+                "Command": "Frame",
+                "Parameter": 15
+              },
+              {
+                "FrameGroup": "Kissing (Blushing) 1",
+                "Command": "Frame",
+                "Parameter": 3
+              },
+              {
+                "Command": "GotoFrameOffset",
+                "Parameter": 0
+              }
+            ]
+          },
+          "Kissing (Blushing)": {
+            "AnimationFrames": [
+              {
+                "FrameGroup": "Kissing (Blushing) 1",
+                "Command": "Frame",
+                "Parameter": 3
+              },
+              {
+                "FrameGroup": "Kissing (Blushing) 2",
+                "Command": "Frame",
+                "Parameter": 6
+              },
+              {
+                "FrameGroup": "Kissing (Blushing) 1",
+                "Command": "Frame",
+                "Parameter": 3
+              },
+              {
+                "FrameGroup": "Kissing (Blushing) 2",
+                "Command": "Frame",
+                "Parameter": 6
+              },
+              {
+                "FrameGroup": "Kissing (Blushing) 1",
+                "Command": "Frame",
+                "Parameter": 3
+              },
+              {
+                "FrameGroup": "Kissing (Blushing) 2",
+                "Command": "Frame",
+                "Parameter": 15
+              },
+              {
+                "FrameGroup": "Kissing (Blushing) 1",
+                "Command": "Frame",
+                "Parameter": 3
+              },
+              {
+                "Command": "Stop",
+                "Parameter": 1
+              }
+            ]
+          },
+          "StillFrame": {
+            "AnimationFrames": [
+              {
+                "FrameGroup": "Blushing, BobbingSideToSide 1",
+                "Command": "Frame",
+                "Parameter": 10
+              },
+              {
+                "Command": "Stop",
+                "Parameter": 0
+              }
+            ]
           }
         }
       }

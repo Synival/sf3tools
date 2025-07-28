@@ -101,61 +101,59 @@
       },
       "AnimationByDirections": {
         "4": {
-          "Animations": {
-            "OccasionallyTusslingHair": {
-              "AnimationFrames": [
-                {
-                  "FrameGroup": "OccasionallyTusslingHair 1",
-                  "Command": "Frame",
-                  "Parameter": 120
-                },
-                {
-                  "FrameGroup": "OccasionallyTusslingHair 2",
-                  "Command": "Frame",
-                  "Parameter": 5
-                },
-                {
-                  "FrameGroup": "OccasionallyTusslingHair 3",
-                  "Command": "Frame",
-                  "Parameter": 5
-                },
-                {
-                  "FrameGroup": "OccasionallyTusslingHair 4",
-                  "Command": "Frame",
-                  "Parameter": 5
-                },
-                {
-                  "Command": "GotoFrameOffset",
-                  "Parameter": 0
-                }
-              ]
-            },
-            "StillFrame": {
-              "AnimationFrames": [
-                {
-                  "FrameGroup": "OccasionallyTusslingHair 1",
-                  "Command": "Frame",
-                  "Parameter": 10
-                },
-                {
-                  "Command": "Stop",
-                  "Parameter": 0
-                }
-              ]
-            },
-            "StillFrame (Repeat)": {
-              "AnimationFrames": [
-                {
-                  "FrameGroup": "OccasionallyTusslingHair 1",
-                  "Command": "Frame",
-                  "Parameter": 120
-                },
-                {
-                  "Command": "GotoFrameOffset",
-                  "Parameter": 0
-                }
-              ]
-            }
+          "OccasionallyTusslingHair": {
+            "AnimationFrames": [
+              {
+                "FrameGroup": "OccasionallyTusslingHair 1",
+                "Command": "Frame",
+                "Parameter": 120
+              },
+              {
+                "FrameGroup": "OccasionallyTusslingHair 2",
+                "Command": "Frame",
+                "Parameter": 5
+              },
+              {
+                "FrameGroup": "OccasionallyTusslingHair 3",
+                "Command": "Frame",
+                "Parameter": 5
+              },
+              {
+                "FrameGroup": "OccasionallyTusslingHair 4",
+                "Command": "Frame",
+                "Parameter": 5
+              },
+              {
+                "Command": "GotoFrameOffset",
+                "Parameter": 0
+              }
+            ]
+          },
+          "StillFrame": {
+            "AnimationFrames": [
+              {
+                "FrameGroup": "OccasionallyTusslingHair 1",
+                "Command": "Frame",
+                "Parameter": 10
+              },
+              {
+                "Command": "Stop",
+                "Parameter": 0
+              }
+            ]
+          },
+          "StillFrame (Repeat)": {
+            "AnimationFrames": [
+              {
+                "FrameGroup": "OccasionallyTusslingHair 1",
+                "Command": "Frame",
+                "Parameter": 120
+              },
+              {
+                "Command": "GotoFrameOffset",
+                "Parameter": 0
+              }
+            ]
           }
         }
       }

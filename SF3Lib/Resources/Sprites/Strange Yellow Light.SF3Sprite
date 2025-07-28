@@ -20,20 +20,18 @@
       },
       "AnimationByDirections": {
         "1": {
-          "Animations": {
-            "StillFrame (Sparkle)": {
-              "AnimationFrames": [
-                {
-                  "FrameGroup": "Sparkle 1",
-                  "Command": "Frame",
-                  "Parameter": 10
-                },
-                {
-                  "Command": "Stop",
-                  "Parameter": 0
-                }
-              ]
-            }
+          "StillFrame (Sparkle)": {
+            "AnimationFrames": [
+              {
+                "FrameGroup": "Sparkle 1",
+                "Command": "Frame",
+                "Parameter": 10
+              },
+              {
+                "Command": "Stop",
+                "Parameter": 0
+              }
+            ]
           }
         }
       }

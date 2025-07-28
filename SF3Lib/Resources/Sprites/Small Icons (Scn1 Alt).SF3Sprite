@@ -41,59 +41,57 @@
       },
       "AnimationByDirections": {
         "1": {
-          "Animations": {
-            "Angry": {
-              "AnimationFrames": [
-                {
-                  "FrameGroup": "Angry 1",
-                  "Command": "Frame",
-                  "Parameter": 10
-                },
-                {
-                  "Command": "Stop",
-                  "Parameter": 0
-                }
-              ]
-            },
-            "Flag": {
-              "AnimationFrames": [
-                {
-                  "FrameGroup": "Flag 1",
-                  "Command": "Frame",
-                  "Parameter": 10
-                },
-                {
-                  "Command": "Stop",
-                  "Parameter": 0
-                }
-              ]
-            },
-            "Idea": {
-              "AnimationFrames": [
-                {
-                  "FrameGroup": "Idea 1",
-                  "Command": "Frame",
-                  "Parameter": 10
-                },
-                {
-                  "Command": "Stop",
-                  "Parameter": 0
-                }
-              ]
-            },
-            "Love": {
-              "AnimationFrames": [
-                {
-                  "FrameGroup": "Love 1",
-                  "Command": "Frame",
-                  "Parameter": 10
-                },
-                {
-                  "Command": "Stop",
-                  "Parameter": 0
-                }
-              ]
-            }
+          "Angry": {
+            "AnimationFrames": [
+              {
+                "FrameGroup": "Angry 1",
+                "Command": "Frame",
+                "Parameter": 10
+              },
+              {
+                "Command": "Stop",
+                "Parameter": 0
+              }
+            ]
+          },
+          "Flag": {
+            "AnimationFrames": [
+              {
+                "FrameGroup": "Flag 1",
+                "Command": "Frame",
+                "Parameter": 10
+              },
+              {
+                "Command": "Stop",
+                "Parameter": 0
+              }
+            ]
+          },
+          "Idea": {
+            "AnimationFrames": [
+              {
+                "FrameGroup": "Idea 1",
+                "Command": "Frame",
+                "Parameter": 10
+              },
+              {
+                "Command": "Stop",
+                "Parameter": 0
+              }
+            ]
+          },
+          "Love": {
+            "AnimationFrames": [
+              {
+                "FrameGroup": "Love 1",
+                "Command": "Frame",
+                "Parameter": 10
+              },
+              {
+                "Command": "Stop",
+                "Parameter": 0
+              }
+            ]
           }
         }
       }

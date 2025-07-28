@@ -167,126 +167,124 @@
       },
       "AnimationByDirections": {
         "4": {
-          "Animations": {
-            "Idle (Chewing)": {
-              "AnimationFrames": [
-                {
-                  "FrameGroup": "Idle (Chewing) 1",
-                  "Command": "Frame",
-                  "Parameter": 45
-                },
-                {
-                  "FrameGroup": "Idle (Chewing) 2",
-                  "Command": "Frame",
-                  "Parameter": 6
-                },
-                {
-                  "FrameGroup": "Idle (Chewing) 3",
-                  "Command": "Frame",
-                  "Parameter": 7
-                },
-                {
-                  "FrameGroup": "Idle (Chewing) 2",
-                  "Command": "Frame",
-                  "Parameter": 6
-                },
-                {
-                  "FrameGroup": "Idle (Chewing) 1",
-                  "Command": "Frame",
-                  "Parameter": 7
-                },
-                {
-                  "FrameGroup": "Idle (Chewing) 2",
-                  "Command": "Frame",
-                  "Parameter": 6
-                },
-                {
-                  "FrameGroup": "Idle (Chewing) 3",
-                  "Command": "Frame",
-                  "Parameter": 7
-                },
-                {
-                  "FrameGroup": "Idle (Chewing) 2",
-                  "Command": "Frame",
-                  "Parameter": 6
-                },
-                {
-                  "FrameGroup": "Idle (Chewing) 1",
-                  "Command": "Frame",
-                  "Parameter": 7
-                },
-                {
-                  "FrameGroup": "Idle (Chewing) 2",
-                  "Command": "Frame",
-                  "Parameter": 6
-                },
-                {
-                  "FrameGroup": "Idle (Chewing) 3",
-                  "Command": "Frame",
-                  "Parameter": 7
-                },
-                {
-                  "FrameGroup": "Idle (Chewing) 2",
-                  "Command": "Frame",
-                  "Parameter": 6
-                },
-                {
-                  "Command": "GotoFrameOffset",
-                  "Parameter": 0
-                }
-              ]
-            },
-            "StillFrame": {
-              "AnimationFrames": [
-                {
-                  "FrameGroup": "Idle (Chewing) 1",
-                  "Command": "Frame",
-                  "Parameter": 10
-                },
-                {
-                  "Command": "Stop",
-                  "Parameter": 0
-                }
-              ]
-            },
-            "Walking": {
-              "AnimationFrames": [
-                {
-                  "FrameGroup": "Walking 1",
-                  "Command": "Frame",
-                  "Parameter": 5
-                },
-                {
-                  "FrameGroup": "Idle (Chewing) 1",
-                  "Command": "Frame",
-                  "Parameter": 5
-                },
-                {
-                  "FrameGroup": "Walking 2",
-                  "Command": "Frame",
-                  "Parameter": 5
-                },
-                {
-                  "FrameGroup": "Walking 3",
-                  "Command": "Frame",
-                  "Parameter": 5
-                },
-                {
-                  "FrameGroup": "Idle (Chewing) 1",
-                  "Command": "Frame",
-                  "Parameter": 5
-                },
-                {
-                  "FrameGroup": "Walking 4",
-                  "Command": "Frame",
-                  "Parameter": 5
-                },
-                {
-                  "Command": "GotoFrameOffset",
-                  "Parameter": 0
-                }
-              ]
-            }
+          "Idle (Chewing)": {
+            "AnimationFrames": [
+              {
+                "FrameGroup": "Idle (Chewing) 1",
+                "Command": "Frame",
+                "Parameter": 45
+              },
+              {
+                "FrameGroup": "Idle (Chewing) 2",
+                "Command": "Frame",
+                "Parameter": 6
+              },
+              {
+                "FrameGroup": "Idle (Chewing) 3",
+                "Command": "Frame",
+                "Parameter": 7
+              },
+              {
+                "FrameGroup": "Idle (Chewing) 2",
+                "Command": "Frame",
+                "Parameter": 6
+              },
+              {
+                "FrameGroup": "Idle (Chewing) 1",
+                "Command": "Frame",
+                "Parameter": 7
+              },
+              {
+                "FrameGroup": "Idle (Chewing) 2",
+                "Command": "Frame",
+                "Parameter": 6
+              },
+              {
+                "FrameGroup": "Idle (Chewing) 3",
+                "Command": "Frame",
+                "Parameter": 7
+              },
+              {
+                "FrameGroup": "Idle (Chewing) 2",
+                "Command": "Frame",
+                "Parameter": 6
+              },
+              {
+                "FrameGroup": "Idle (Chewing) 1",
+                "Command": "Frame",
+                "Parameter": 7
+              },
+              {
+                "FrameGroup": "Idle (Chewing) 2",
+                "Command": "Frame",
+                "Parameter": 6
+              },
+              {
+                "FrameGroup": "Idle (Chewing) 3",
+                "Command": "Frame",
+                "Parameter": 7
+              },
+              {
+                "FrameGroup": "Idle (Chewing) 2",
+                "Command": "Frame",
+                "Parameter": 6
+              },
+              {
+                "Command": "GotoFrameOffset",
+                "Parameter": 0
+              }
+            ]
+          },
+          "StillFrame": {
+            "AnimationFrames": [
+              {
+                "FrameGroup": "Idle (Chewing) 1",
+                "Command": "Frame",
+                "Parameter": 10
+              },
+              {
+                "Command": "Stop",
+                "Parameter": 0
+              }
+            ]
+          },
+          "Walking": {
+            "AnimationFrames": [
+              {
+                "FrameGroup": "Walking 1",
+                "Command": "Frame",
+                "Parameter": 5
+              },
+              {
+                "FrameGroup": "Idle (Chewing) 1",
+                "Command": "Frame",
+                "Parameter": 5
+              },
+              {
+                "FrameGroup": "Walking 2",
+                "Command": "Frame",
+                "Parameter": 5
+              },
+              {
+                "FrameGroup": "Walking 3",
+                "Command": "Frame",
+                "Parameter": 5
+              },
+              {
+                "FrameGroup": "Idle (Chewing) 1",
+                "Command": "Frame",
+                "Parameter": 5
+              },
+              {
+                "FrameGroup": "Walking 4",
+                "Command": "Frame",
+                "Parameter": 5
+              },
+              {
+                "Command": "GotoFrameOffset",
+                "Parameter": 0
+              }
+            ]
           }
         }
       }

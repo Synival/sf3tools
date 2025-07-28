@@ -27,72 +27,70 @@
       },
       "AnimationByDirections": {
         "1": {
-          "Animations": {
-            "StillFrame (Alt)": {
-              "AnimationFrames": [
-                {
-                  "FrameGroup": "Alt 1",
-                  "Command": "Frame",
-                  "Parameter": 1
-                },
-                {
-                  "Command": "Stop",
-                  "Parameter": 0
-                }
-              ]
-            },
-            "StillFrame (Black, Repeat)": {
-              "AnimationFrames": [
-                {
-                  "FrameGroup": "Alt 1",
-                  "Command": "Frame",
-                  "Parameter": 100
-                },
-                {
-                  "Command": "GotoFrameOffset",
-                  "Parameter": 0
-                }
-              ]
-            },
-            "StillFrame (Black+White, Change to 0)": {
-              "AnimationFrames": [
-                {
-                  "FrameGroup": "Black+White 1",
-                  "Command": "Frame",
-                  "Parameter": 0
-                },
-                {
-                  "Command": "GotoAnimation",
-                  "Parameter": 0
-                }
-              ]
-            },
-            "StillFrame (Black+White, Repeat, Duration 0)": {
-              "AnimationFrames": [
-                {
-                  "FrameGroup": "Black+White 1",
-                  "Command": "Frame",
-                  "Parameter": 0
-                },
-                {
-                  "Command": "GotoFrameOffset",
-                  "Parameter": 0
-                }
-              ]
-            },
-            "StillFrame (Black+White)": {
-              "AnimationFrames": [
-                {
-                  "FrameGroup": "Black+White 1",
-                  "Command": "Frame",
-                  "Parameter": 0
-                },
-                {
-                  "Command": "Stop",
-                  "Parameter": 0
-                }
-              ]
-            }
+          "StillFrame (Alt)": {
+            "AnimationFrames": [
+              {
+                "FrameGroup": "Alt 1",
+                "Command": "Frame",
+                "Parameter": 1
+              },
+              {
+                "Command": "Stop",
+                "Parameter": 0
+              }
+            ]
+          },
+          "StillFrame (Black, Repeat)": {
+            "AnimationFrames": [
+              {
+                "FrameGroup": "Alt 1",
+                "Command": "Frame",
+                "Parameter": 100
+              },
+              {
+                "Command": "GotoFrameOffset",
+                "Parameter": 0
+              }
+            ]
+          },
+          "StillFrame (Black+White, Change to 0)": {
+            "AnimationFrames": [
+              {
+                "FrameGroup": "Black+White 1",
+                "Command": "Frame",
+                "Parameter": 0
+              },
+              {
+                "Command": "GotoAnimation",
+                "Parameter": 0
+              }
+            ]
+          },
+          "StillFrame (Black+White, Repeat, Duration 0)": {
+            "AnimationFrames": [
+              {
+                "FrameGroup": "Black+White 1",
+                "Command": "Frame",
+                "Parameter": 0
+              },
+              {
+                "Command": "GotoFrameOffset",
+                "Parameter": 0
+              }
+            ]
+          },
+          "StillFrame (Black+White)": {
+            "AnimationFrames": [
+              {
+                "FrameGroup": "Black+White 1",
+                "Command": "Frame",
+                "Parameter": 0
+              },
+              {
+                "Command": "Stop",
+                "Parameter": 0
+              }
+            ]
           }
         }
       }
@@ -114,20 +112,18 @@
       },
       "AnimationByDirections": {
         "1": {
-          "Animations": {
-            "StillFrame (Black+White)": {
-              "AnimationFrames": [
-                {
-                  "FrameGroup": "Black+White 1",
-                  "Command": "Frame",
-                  "Parameter": 10
-                },
-                {
-                  "Command": "Stop",
-                  "Parameter": 0
-                }
-              ]
-            }
+          "StillFrame (Black+White)": {
+            "AnimationFrames": [
+              {
+                "FrameGroup": "Black+White 1",
+                "Command": "Frame",
+                "Parameter": 10
+              },
+              {
+                "Command": "Stop",
+                "Parameter": 0
+              }
+            ]
           }
         }
       }
@@ -149,20 +145,18 @@
       },
       "AnimationByDirections": {
         "1": {
-          "Animations": {
-            "StillFrame (Black+White)": {
-              "AnimationFrames": [
-                {
-                  "FrameGroup": "Black+White 1",
-                  "Command": "Frame",
-                  "Parameter": 10
-                },
-                {
-                  "Command": "Stop",
-                  "Parameter": 0
-                }
-              ]
-            }
+          "StillFrame (Black+White)": {
+            "AnimationFrames": [
+              {
+                "FrameGroup": "Black+White 1",
+                "Command": "Frame",
+                "Parameter": 10
+              },
+              {
+                "Command": "Stop",
+                "Parameter": 0
+              }
+            ]
           }
         }
       }
@@ -191,33 +185,31 @@
       },
       "AnimationByDirections": {
         "1": {
-          "Animations": {
-            "StillFrame (Black)": {
-              "AnimationFrames": [
-                {
-                  "FrameGroup": "Black 1",
-                  "Command": "Frame",
-                  "Parameter": 10
-                },
-                {
-                  "Command": "Stop",
-                  "Parameter": 0
-                }
-              ]
-            },
-            "StillFrame (Black+White)": {
-              "AnimationFrames": [
-                {
-                  "FrameGroup": "Black+White 1",
-                  "Command": "Frame",
-                  "Parameter": 10
-                },
-                {
-                  "Command": "Stop",
-                  "Parameter": 0
-                }
-              ]
-            }
+          "StillFrame (Black)": {
+            "AnimationFrames": [
+              {
+                "FrameGroup": "Black 1",
+                "Command": "Frame",
+                "Parameter": 10
+              },
+              {
+                "Command": "Stop",
+                "Parameter": 0
+              }
+            ]
+          },
+          "StillFrame (Black+White)": {
+            "AnimationFrames": [
+              {
+                "FrameGroup": "Black+White 1",
+                "Command": "Frame",
+                "Parameter": 10
+              },
+              {
+                "Command": "Stop",
+                "Parameter": 0
+              }
+            ]
           }
         }
       }
@@ -239,20 +231,18 @@
       },
       "AnimationByDirections": {
         "1": {
-          "Animations": {
-            "StillFrame (Black+White)": {
-              "AnimationFrames": [
-                {
-                  "FrameGroup": "Black+White 1",
-                  "Command": "Frame",
-                  "Parameter": 10
-                },
-                {
-                  "Command": "Stop",
-                  "Parameter": 0
-                }
-              ]
-            }
+          "StillFrame (Black+White)": {
+            "AnimationFrames": [
+              {
+                "FrameGroup": "Black+White 1",
+                "Command": "Frame",
+                "Parameter": 10
+              },
+              {
+                "Command": "Stop",
+                "Parameter": 0
+              }
+            ]
           }
         }
       }

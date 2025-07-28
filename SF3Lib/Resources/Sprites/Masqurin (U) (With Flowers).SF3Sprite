@@ -211,122 +211,120 @@
       },
       "AnimationByDirections": {
         "4": {
-          "Animations": {
-            "Nodding": {
-              "AnimationFrames": [
-                {
-                  "FrameGroup": "Nodding 1",
-                  "Command": "Frame",
-                  "Parameter": 2
-                },
-                {
-                  "FrameGroup": "Nodding 2",
-                  "Command": "Frame",
-                  "Parameter": 4
-                },
-                {
-                  "FrameGroup": "Nodding 3",
-                  "Command": "Frame",
-                  "Parameter": 4
-                },
-                {
-                  "FrameGroup": "Nodding 2",
-                  "Command": "Frame",
-                  "Parameter": 4
-                },
-                {
-                  "Command": "GotoAnimation",
-                  "Parameter": 8
-                }
-              ]
-            },
-            "PresentingFlowers": {
-              "AnimationFrames": [
-                {
-                  "FrameGroup": "Walking (Flowers Behind Back) 2",
-                  "Command": "Frame",
-                  "Parameter": 15
-                },
-                {
-                  "FrameGroup": "PresentingFlowers 1",
-                  "Command": "Frame",
-                  "Parameter": 6
-                },
-                {
-                  "FrameGroup": "Nodding 1",
-                  "Command": "Frame",
-                  "Parameter": 15
-                },
-                {
-                  "Command": "GotoAnimation",
-                  "Parameter": 8
-                }
-              ]
-            },
-            "StillFrame (Flowers Behind Back)": {
-              "AnimationFrames": [
-                {
-                  "FrameGroup": "Walking (Flowers Behind Back) 2",
-                  "Command": "Frame",
-                  "Parameter": 10
-                },
-                {
-                  "Command": "Stop",
-                  "Parameter": 0
-                }
-              ]
-            },
-            "StillFrame (Presenting Flowers)": {
-              "AnimationFrames": [
-                {
-                  "FrameGroup": "Nodding 1",
-                  "Command": "Frame",
-                  "Parameter": 10
-                },
-                {
-                  "Command": "Stop",
-                  "Parameter": 0
-                }
-              ]
-            },
-            "Walking (Flowers Behind Back)": {
-              "AnimationFrames": [
-                {
-                  "FrameGroup": "Walking (Flowers Behind Back) 1",
-                  "Command": "Frame",
-                  "Parameter": 4
-                },
-                {
-                  "FrameGroup": "Walking (Flowers Behind Back) 2",
-                  "Command": "Frame",
-                  "Parameter": 4
-                },
-                {
-                  "FrameGroup": "Walking (Flowers Behind Back) 3",
-                  "Command": "Frame",
-                  "Parameter": 4
-                },
-                {
-                  "FrameGroup": "Walking (Flowers Behind Back) 4",
-                  "Command": "Frame",
-                  "Parameter": 4
-                },
-                {
-                  "FrameGroup": "Walking (Flowers Behind Back) 2",
-                  "Command": "Frame",
-                  "Parameter": 4
-                },
-                {
-                  "FrameGroup": "Walking (Flowers Behind Back) 5",
-                  "Command": "Frame",
-                  "Parameter": 4
-                },
-                {
-                  "Command": "GotoFrameOffset",
-                  "Parameter": 0
-                }
-              ]
-            }
+          "Nodding": {
+            "AnimationFrames": [
+              {
+                "FrameGroup": "Nodding 1",
+                "Command": "Frame",
+                "Parameter": 2
+              },
+              {
+                "FrameGroup": "Nodding 2",
+                "Command": "Frame",
+                "Parameter": 4
+              },
+              {
+                "FrameGroup": "Nodding 3",
+                "Command": "Frame",
+                "Parameter": 4
+              },
+              {
+                "FrameGroup": "Nodding 2",
+                "Command": "Frame",
+                "Parameter": 4
+              },
+              {
+                "Command": "GotoAnimation",
+                "Parameter": 8
+              }
+            ]
+          },
+          "PresentingFlowers": {
+            "AnimationFrames": [
+              {
+                "FrameGroup": "Walking (Flowers Behind Back) 2",
+                "Command": "Frame",
+                "Parameter": 15
+              },
+              {
+                "FrameGroup": "PresentingFlowers 1",
+                "Command": "Frame",
+                "Parameter": 6
+              },
+              {
+                "FrameGroup": "Nodding 1",
+                "Command": "Frame",
+                "Parameter": 15
+              },
+              {
+                "Command": "GotoAnimation",
+                "Parameter": 8
+              }
+            ]
+          },
+          "StillFrame (Flowers Behind Back)": {
+            "AnimationFrames": [
+              {
+                "FrameGroup": "Walking (Flowers Behind Back) 2",
+                "Command": "Frame",
+                "Parameter": 10
+              },
+              {
+                "Command": "Stop",
+                "Parameter": 0
+              }
+            ]
+          },
+          "StillFrame (Presenting Flowers)": {
+            "AnimationFrames": [
+              {
+                "FrameGroup": "Nodding 1",
+                "Command": "Frame",
+                "Parameter": 10
+              },
+              {
+                "Command": "Stop",
+                "Parameter": 0
+              }
+            ]
+          },
+          "Walking (Flowers Behind Back)": {
+            "AnimationFrames": [
+              {
+                "FrameGroup": "Walking (Flowers Behind Back) 1",
+                "Command": "Frame",
+                "Parameter": 4
+              },
+              {
+                "FrameGroup": "Walking (Flowers Behind Back) 2",
+                "Command": "Frame",
+                "Parameter": 4
+              },
+              {
+                "FrameGroup": "Walking (Flowers Behind Back) 3",
+                "Command": "Frame",
+                "Parameter": 4
+              },
+              {
+                "FrameGroup": "Walking (Flowers Behind Back) 4",
+                "Command": "Frame",
+                "Parameter": 4
+              },
+              {
+                "FrameGroup": "Walking (Flowers Behind Back) 2",
+                "Command": "Frame",
+                "Parameter": 4
+              },
+              {
+                "FrameGroup": "Walking (Flowers Behind Back) 5",
+                "Command": "Frame",
+                "Parameter": 4
+              },
+              {
+                "Command": "GotoFrameOffset",
+                "Parameter": 0
+              }
+            ]
           }
         }
       }

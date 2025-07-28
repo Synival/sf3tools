@@ -83,78 +83,76 @@
       },
       "AnimationByDirections": {
         "1": {
-          "Animations": {
-            "Poofing (Extremely Slow)": {
-              "AnimationFrames": [
-                {
-                  "FrameGroup": "Poofing 1",
-                  "Command": "Frame",
-                  "Parameter": 20
-                },
-                {
-                  "FrameGroup": "Poofing 2",
-                  "Command": "Frame",
-                  "Parameter": 18
-                },
-                {
-                  "FrameGroup": "Poofing 3",
-                  "Command": "Frame",
-                  "Parameter": 16
-                },
-                {
-                  "FrameGroup": "Poofing 4",
-                  "Command": "Frame",
-                  "Parameter": 14
-                },
-                {
-                  "FrameGroup": "Poofing 5",
-                  "Command": "Frame",
-                  "Parameter": 13
-                },
-                {
-                  "FrameGroup": "Poofing 6",
-                  "Command": "Frame",
-                  "Parameter": 12
-                },
-                {
-                  "FrameGroup": "Poofing 7",
-                  "Command": "Frame",
-                  "Parameter": 11
-                },
-                {
-                  "FrameGroup": "Poofing 8",
-                  "Command": "Frame",
-                  "Parameter": 10
-                },
-                {
-                  "FrameGroup": "Poofing 9",
-                  "Command": "Frame",
-                  "Parameter": 10
-                },
-                {
-                  "FrameGroup": "Poofing 10",
-                  "Command": "Frame",
-                  "Parameter": 10
-                },
-                {
-                  "Command": "Stop",
-                  "Parameter": 0
-                }
-              ]
-            },
-            "StillFrame (End of Poof)": {
-              "AnimationFrames": [
-                {
-                  "FrameGroup": "Poofing 10",
-                  "Command": "Frame",
-                  "Parameter": 2
-                },
-                {
-                  "Command": "Stop",
-                  "Parameter": 0
-                }
-              ]
-            }
+          "Poofing (Extremely Slow)": {
+            "AnimationFrames": [
+              {
+                "FrameGroup": "Poofing 1",
+                "Command": "Frame",
+                "Parameter": 20
+              },
+              {
+                "FrameGroup": "Poofing 2",
+                "Command": "Frame",
+                "Parameter": 18
+              },
+              {
+                "FrameGroup": "Poofing 3",
+                "Command": "Frame",
+                "Parameter": 16
+              },
+              {
+                "FrameGroup": "Poofing 4",
+                "Command": "Frame",
+                "Parameter": 14
+              },
+              {
+                "FrameGroup": "Poofing 5",
+                "Command": "Frame",
+                "Parameter": 13
+              },
+              {
+                "FrameGroup": "Poofing 6",
+                "Command": "Frame",
+                "Parameter": 12
+              },
+              {
+                "FrameGroup": "Poofing 7",
+                "Command": "Frame",
+                "Parameter": 11
+              },
+              {
+                "FrameGroup": "Poofing 8",
+                "Command": "Frame",
+                "Parameter": 10
+              },
+              {
+                "FrameGroup": "Poofing 9",
+                "Command": "Frame",
+                "Parameter": 10
+              },
+              {
+                "FrameGroup": "Poofing 10",
+                "Command": "Frame",
+                "Parameter": 10
+              },
+              {
+                "Command": "Stop",
+                "Parameter": 0
+              }
+            ]
+          },
+          "StillFrame (End of Poof)": {
+            "AnimationFrames": [
+              {
+                "FrameGroup": "Poofing 10",
+                "Command": "Frame",
+                "Parameter": 2
+              },
+              {
+                "Command": "Stop",
+                "Parameter": 0
+              }
+            ]
           }
         }
       }

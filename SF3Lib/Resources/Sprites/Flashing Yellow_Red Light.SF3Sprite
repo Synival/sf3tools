@@ -34,46 +34,44 @@
       },
       "AnimationByDirections": {
         "1": {
-          "Animations": {
-            "BlinkRedOnce": {
-              "AnimationFrames": [
-                {
-                  "FrameGroup": "BlinkRedOnce 1",
-                  "Command": "Frame",
-                  "Parameter": 10
-                },
-                {
-                  "Command": "GotoAnimation",
-                  "Parameter": 0
-                }
-              ]
-            },
-            "BlinkWhiteOnce": {
-              "AnimationFrames": [
-                {
-                  "FrameGroup": "BlinkWhiteOnce 1",
-                  "Command": "Frame",
-                  "Parameter": 10
-                },
-                {
-                  "Command": "GotoAnimation",
-                  "Parameter": 0
-                }
-              ]
-            },
-            "BlinkYellowOnce": {
-              "AnimationFrames": [
-                {
-                  "FrameGroup": "BlinkYellowOnce 1",
-                  "Command": "Frame",
-                  "Parameter": 10
-                },
-                {
-                  "Command": "GotoAnimation",
-                  "Parameter": 0
-                }
-              ]
-            }
+          "BlinkRedOnce": {
+            "AnimationFrames": [
+              {
+                "FrameGroup": "BlinkRedOnce 1",
+                "Command": "Frame",
+                "Parameter": 10
+              },
+              {
+                "Command": "GotoAnimation",
+                "Parameter": 0
+              }
+            ]
+          },
+          "BlinkWhiteOnce": {
+            "AnimationFrames": [
+              {
+                "FrameGroup": "BlinkWhiteOnce 1",
+                "Command": "Frame",
+                "Parameter": 10
+              },
+              {
+                "Command": "GotoAnimation",
+                "Parameter": 0
+              }
+            ]
+          },
+          "BlinkYellowOnce": {
+            "AnimationFrames": [
+              {
+                "FrameGroup": "BlinkYellowOnce 1",
+                "Command": "Frame",
+                "Parameter": 10
+              },
+              {
+                "Command": "GotoAnimation",
+                "Parameter": 0
+              }
+            ]
           }
         }
       }

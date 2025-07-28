@@ -255,131 +255,129 @@
       },
       "AnimationByDirections": {
         "4": {
-          "Animations": {
-            "Idle (Occasionally Looking Around)": {
-              "AnimationFrames": [
-                {
-                  "FrameGroup": "Idle (Occasionally Looking Around) 1",
-                  "Command": "Frame",
-                  "Parameter": 75
-                },
-                {
-                  "FrameGroup": "Idle (Occasionally Looking Around) 2",
-                  "Command": "Frame",
-                  "Parameter": 5
-                },
-                {
-                  "FrameGroup": "Idle (Occasionally Looking Around) 3",
-                  "Command": "Frame",
-                  "Parameter": 30
-                },
-                {
-                  "FrameGroup": "Idle (Occasionally Looking Around) 4",
-                  "Command": "Frame",
-                  "Parameter": 6
-                },
-                {
-                  "FrameGroup": "Idle (Occasionally Looking Around) 5",
-                  "Command": "Frame",
-                  "Parameter": 6
-                },
-                {
-                  "FrameGroup": "Idle (Occasionally Looking Around) 4",
-                  "Command": "Frame",
-                  "Parameter": 6
-                },
-                {
-                  "FrameGroup": "Idle (Occasionally Looking Around) 5",
-                  "Command": "Frame",
-                  "Parameter": 60
-                },
-                {
-                  "FrameGroup": "Idle (Occasionally Looking Around) 3",
-                  "Command": "Frame",
-                  "Parameter": 2
-                },
-                {
-                  "FrameGroup": "Idle (Occasionally Looking Around) 2",
-                  "Command": "Frame",
-                  "Parameter": 2
-                },
-                {
-                  "FrameGroup": "Idle (Occasionally Looking Around) 1",
-                  "Command": "Frame",
-                  "Parameter": 60
-                },
-                {
-                  "FrameGroup": "Idle (Occasionally Looking Around) 2",
-                  "Command": "Frame",
-                  "Parameter": 2
-                },
-                {
-                  "FrameGroup": "Idle (Occasionally Looking Around) 3",
-                  "Command": "Frame",
-                  "Parameter": 120
-                },
-                {
-                  "FrameGroup": "Idle (Occasionally Looking Around) 2",
-                  "Command": "Frame",
-                  "Parameter": 2
-                },
-                {
-                  "Command": "GotoFrameOffset",
-                  "Parameter": 0
-                }
-              ]
-            },
-            "StillFrame (Idle)": {
-              "AnimationFrames": [
-                {
-                  "FrameGroup": "Idle (Occasionally Looking Around) 1",
-                  "Command": "Frame",
-                  "Parameter": 10
-                },
-                {
-                  "Command": "Stop",
-                  "Parameter": 0
-                }
-              ]
-            },
-            "Walking (Hopping)": {
-              "AnimationFrames": [
-                {
-                  "FrameGroup": "Walking (Hopping) 1",
-                  "Command": "Frame",
-                  "Parameter": 3
-                },
-                {
-                  "FrameGroup": "Walking (Hopping) 2",
-                  "Command": "Frame",
-                  "Parameter": 3
-                },
-                {
-                  "FrameGroup": "Walking (Hopping) 3",
-                  "Command": "Frame",
-                  "Parameter": 3
-                },
-                {
-                  "FrameGroup": "Walking (Hopping) 4",
-                  "Command": "Frame",
-                  "Parameter": 3
-                },
-                {
-                  "FrameGroup": "Walking (Hopping) 5",
-                  "Command": "Frame",
-                  "Parameter": 3
-                },
-                {
-                  "FrameGroup": "Walking (Hopping) 6",
-                  "Command": "Frame",
-                  "Parameter": 3
-                },
-                {
-                  "Command": "GotoFrameOffset",
-                  "Parameter": 0
-                }
-              ]
-            }
+          "Idle (Occasionally Looking Around)": {
+            "AnimationFrames": [
+              {
+                "FrameGroup": "Idle (Occasionally Looking Around) 1",
+                "Command": "Frame",
+                "Parameter": 75
+              },
+              {
+                "FrameGroup": "Idle (Occasionally Looking Around) 2",
+                "Command": "Frame",
+                "Parameter": 5
+              },
+              {
+                "FrameGroup": "Idle (Occasionally Looking Around) 3",
+                "Command": "Frame",
+                "Parameter": 30
+              },
+              {
+                "FrameGroup": "Idle (Occasionally Looking Around) 4",
+                "Command": "Frame",
+                "Parameter": 6
+              },
+              {
+                "FrameGroup": "Idle (Occasionally Looking Around) 5",
+                "Command": "Frame",
+                "Parameter": 6
+              },
+              {
+                "FrameGroup": "Idle (Occasionally Looking Around) 4",
+                "Command": "Frame",
+                "Parameter": 6
+              },
+              {
+                "FrameGroup": "Idle (Occasionally Looking Around) 5",
+                "Command": "Frame",
+                "Parameter": 60
+              },
+              {
+                "FrameGroup": "Idle (Occasionally Looking Around) 3",
+                "Command": "Frame",
+                "Parameter": 2
+              },
+              {
+                "FrameGroup": "Idle (Occasionally Looking Around) 2",
+                "Command": "Frame",
+                "Parameter": 2
+              },
+              {
+                "FrameGroup": "Idle (Occasionally Looking Around) 1",
+                "Command": "Frame",
+                "Parameter": 60
+              },
+              {
+                "FrameGroup": "Idle (Occasionally Looking Around) 2",
+                "Command": "Frame",
+                "Parameter": 2
+              },
+              {
+                "FrameGroup": "Idle (Occasionally Looking Around) 3",
+                "Command": "Frame",
+                "Parameter": 120
+              },
+              {
+                "FrameGroup": "Idle (Occasionally Looking Around) 2",
+                "Command": "Frame",
+                "Parameter": 2
+              },
+              {
+                "Command": "GotoFrameOffset",
+                "Parameter": 0
+              }
+            ]
+          },
+          "StillFrame (Idle)": {
+            "AnimationFrames": [
+              {
+                "FrameGroup": "Idle (Occasionally Looking Around) 1",
+                "Command": "Frame",
+                "Parameter": 10
+              },
+              {
+                "Command": "Stop",
+                "Parameter": 0
+              }
+            ]
+          },
+          "Walking (Hopping)": {
+            "AnimationFrames": [
+              {
+                "FrameGroup": "Walking (Hopping) 1",
+                "Command": "Frame",
+                "Parameter": 3
+              },
+              {
+                "FrameGroup": "Walking (Hopping) 2",
+                "Command": "Frame",
+                "Parameter": 3
+              },
+              {
+                "FrameGroup": "Walking (Hopping) 3",
+                "Command": "Frame",
+                "Parameter": 3
+              },
+              {
+                "FrameGroup": "Walking (Hopping) 4",
+                "Command": "Frame",
+                "Parameter": 3
+              },
+              {
+                "FrameGroup": "Walking (Hopping) 5",
+                "Command": "Frame",
+                "Parameter": 3
+              },
+              {
+                "FrameGroup": "Walking (Hopping) 6",
+                "Command": "Frame",
+                "Parameter": 3
+              },
+              {
+                "Command": "GotoFrameOffset",
+                "Parameter": 0
+              }
+            ]
           }
         }
       }

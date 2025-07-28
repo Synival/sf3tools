@@ -34,46 +34,44 @@
       },
       "AnimationByDirections": {
         "1": {
-          "Animations": {
-            "Alert": {
-              "AnimationFrames": [
-                {
-                  "FrameGroup": "Alert 1",
-                  "Command": "Frame",
-                  "Parameter": 10
-                },
-                {
-                  "Command": "Stop",
-                  "Parameter": 0
-                }
-              ]
-            },
-            "Flag": {
-              "AnimationFrames": [
-                {
-                  "FrameGroup": "Flag 1",
-                  "Command": "Frame",
-                  "Parameter": 10
-                },
-                {
-                  "Command": "Stop",
-                  "Parameter": 0
-                }
-              ]
-            },
-            "Love": {
-              "AnimationFrames": [
-                {
-                  "FrameGroup": "Love 1",
-                  "Command": "Frame",
-                  "Parameter": 10
-                },
-                {
-                  "Command": "Stop",
-                  "Parameter": 0
-                }
-              ]
-            }
+          "Alert": {
+            "AnimationFrames": [
+              {
+                "FrameGroup": "Alert 1",
+                "Command": "Frame",
+                "Parameter": 10
+              },
+              {
+                "Command": "Stop",
+                "Parameter": 0
+              }
+            ]
+          },
+          "Flag": {
+            "AnimationFrames": [
+              {
+                "FrameGroup": "Flag 1",
+                "Command": "Frame",
+                "Parameter": 10
+              },
+              {
+                "Command": "Stop",
+                "Parameter": 0
+              }
+            ]
+          },
+          "Love": {
+            "AnimationFrames": [
+              {
+                "FrameGroup": "Love 1",
+                "Command": "Frame",
+                "Parameter": 10
+              },
+              {
+                "Command": "Stop",
+                "Parameter": 0
+              }
+            ]
           }
         }
       }

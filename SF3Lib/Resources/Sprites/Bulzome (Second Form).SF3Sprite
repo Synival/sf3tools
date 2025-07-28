@@ -164,310 +164,306 @@
       },
       "AnimationByDirections": {
         "1": {
-          "Animations": {
-            "GettingBackUp": {
-              "AnimationFrames": [
-                {
-                  "Frames": {
-                    "First": {
-                      "Frame": "GettingBackUp 1",
-                      "Direction": "SSE"
-                    }
-                  },
-                  "Command": "Frame",
-                  "Parameter": 4
+          "GettingBackUp": {
+            "AnimationFrames": [
+              {
+                "Frames": {
+                  "First": {
+                    "Frame": "GettingBackUp 1",
+                    "Direction": "SSE"
+                  }
                 },
-                {
-                  "Frames": {
-                    "First": {
-                      "Frame": "GettingBackUp 2",
-                      "Direction": "SSE"
-                    }
-                  },
-                  "Command": "Frame",
-                  "Parameter": 12
+                "Command": "Frame",
+                "Parameter": 4
+              },
+              {
+                "Frames": {
+                  "First": {
+                    "Frame": "GettingBackUp 2",
+                    "Direction": "SSE"
+                  }
                 },
-                {
-                  "Frames": {
-                    "First": {
-                      "Frame": "PointingToCrystal 1",
-                      "Direction": "SSE"
-                    }
-                  },
-                  "Command": "Frame",
-                  "Parameter": 16
+                "Command": "Frame",
+                "Parameter": 12
+              },
+              {
+                "Frames": {
+                  "First": {
+                    "Frame": "PointingToCrystal 1",
+                    "Direction": "SSE"
+                  }
                 },
-                {
-                  "Command": "Stop",
-                  "Parameter": 0
-                }
-              ]
-            },
-            "KeelingOver": {
-              "AnimationFrames": [
-                {
-                  "Frames": {
-                    "First": {
-                      "Frame": "PointingToCrystal 1",
-                      "Direction": "SSE"
-                    }
-                  },
-                  "Command": "Frame",
-                  "Parameter": 4
+                "Command": "Frame",
+                "Parameter": 16
+              },
+              {
+                "Command": "Stop",
+                "Parameter": 0
+              }
+            ]
+          },
+          "KeelingOver": {
+            "AnimationFrames": [
+              {
+                "Frames": {
+                  "First": {
+                    "Frame": "PointingToCrystal 1",
+                    "Direction": "SSE"
+                  }
                 },
-                {
-                  "Frames": {
-                    "First": {
-                      "Frame": "GettingBackUp 2",
-                      "Direction": "SSE"
-                    }
-                  },
-                  "Command": "Frame",
-                  "Parameter": 3
+                "Command": "Frame",
+                "Parameter": 4
+              },
+              {
+                "Frames": {
+                  "First": {
+                    "Frame": "GettingBackUp 2",
+                    "Direction": "SSE"
+                  }
                 },
-                {
-                  "Frames": {
-                    "First": {
-                      "Frame": "GettingBackUp 1",
-                      "Direction": "SSE"
-                    }
-                  },
-                  "Command": "Frame",
-                  "Parameter": 4
+                "Command": "Frame",
+                "Parameter": 3
+              },
+              {
+                "Frames": {
+                  "First": {
+                    "Frame": "GettingBackUp 1",
+                    "Direction": "SSE"
+                  }
                 },
-                {
-                  "Command": "Stop",
-                  "Parameter": 0
-                }
-              ]
-            },
-            "PointingToCrystal": {
-              "AnimationFrames": [
-                {
-                  "Frames": {
-                    "First": {
-                      "Frame": "PointingToCrystal 1",
-                      "Direction": "SSE"
-                    }
-                  },
-                  "Command": "Frame",
-                  "Parameter": 4
+                "Command": "Frame",
+                "Parameter": 4
+              },
+              {
+                "Command": "Stop",
+                "Parameter": 0
+              }
+            ]
+          },
+          "PointingToCrystal": {
+            "AnimationFrames": [
+              {
+                "Frames": {
+                  "First": {
+                    "Frame": "PointingToCrystal 1",
+                    "Direction": "SSE"
+                  }
                 },
-                {
-                  "Frames": {
-                    "First": {
-                      "Frame": "PointingToCrystal 2",
-                      "Direction": "SSE"
-                    }
-                  },
-                  "Command": "Frame",
-                  "Parameter": 4
+                "Command": "Frame",
+                "Parameter": 4
+              },
+              {
+                "Frames": {
+                  "First": {
+                    "Frame": "PointingToCrystal 2",
+                    "Direction": "SSE"
+                  }
                 },
-                {
-                  "Frames": {
-                    "First": {
-                      "Frame": "PointingToCrystal 3",
-                      "Direction": "SSE"
-                    }
-                  },
-                  "Command": "Frame",
-                  "Parameter": 4
+                "Command": "Frame",
+                "Parameter": 4
+              },
+              {
+                "Frames": {
+                  "First": {
+                    "Frame": "PointingToCrystal 3",
+                    "Direction": "SSE"
+                  }
                 },
-                {
-                  "Command": "Stop",
-                  "Parameter": 0
-                }
-              ]
-            },
-            "RisingUp": {
-              "AnimationFrames": [
-                {
-                  "Frames": {
-                    "First": {
-                      "Frame": "PointingToCrystal 1",
-                      "Direction": "SSE"
-                    }
-                  },
-                  "Command": "Frame",
-                  "Parameter": 4
+                "Command": "Frame",
+                "Parameter": 4
+              },
+              {
+                "Command": "Stop",
+                "Parameter": 0
+              }
+            ]
+          },
+          "RisingUp": {
+            "AnimationFrames": [
+              {
+                "Frames": {
+                  "First": {
+                    "Frame": "PointingToCrystal 1",
+                    "Direction": "SSE"
+                  }
                 },
-                {
-                  "Frames": {
-                    "First": {
-                      "Frame": "RisingUp 1",
-                      "Direction": "SSE"
-                    }
-                  },
-                  "Command": "Frame",
-                  "Parameter": 3
+                "Command": "Frame",
+                "Parameter": 4
+              },
+              {
+                "Frames": {
+                  "First": {
+                    "Frame": "RisingUp 1",
+                    "Direction": "SSE"
+                  }
                 },
-                {
-                  "Frames": {
-                    "First": {
-                      "Frame": "RisingUp 2",
-                      "Direction": "SSE"
-                    }
-                  },
-                  "Command": "Frame",
-                  "Parameter": 4
+                "Command": "Frame",
+                "Parameter": 3
+              },
+              {
+                "Frames": {
+                  "First": {
+                    "Frame": "RisingUp 2",
+                    "Direction": "SSE"
+                  }
                 },
-                {
-                  "Command": "Stop",
-                  "Parameter": 0
-                }
-              ]
-            },
-            "ShieldingSelf": {
-              "AnimationFrames": [
-                {
-                  "Frames": {
-                    "First": {
-                      "Frame": "PointingToCrystal 1",
-                      "Direction": "SSE"
-                    }
-                  },
-                  "Command": "Frame",
-                  "Parameter": 4
+                "Command": "Frame",
+                "Parameter": 4
+              },
+              {
+                "Command": "Stop",
+                "Parameter": 0
+              }
+            ]
+          },
+          "ShieldingSelf": {
+            "AnimationFrames": [
+              {
+                "Frames": {
+                  "First": {
+                    "Frame": "PointingToCrystal 1",
+                    "Direction": "SSE"
+                  }
                 },
-                {
-                  "Frames": {
-                    "First": {
-                      "Frame": "ShieldingSelf 1",
-                      "Direction": "SSE"
-                    }
-                  },
-                  "Command": "Frame",
-                  "Parameter": 3
+                "Command": "Frame",
+                "Parameter": 4
+              },
+              {
+                "Frames": {
+                  "First": {
+                    "Frame": "ShieldingSelf 1",
+                    "Direction": "SSE"
+                  }
                 },
-                {
-                  "Frames": {
-                    "First": {
-                      "Frame": "ShieldingSelf 2",
-                      "Direction": "SSE"
-                    }
-                  },
-                  "Command": "Frame",
-                  "Parameter": 4
+                "Command": "Frame",
+                "Parameter": 3
+              },
+              {
+                "Frames": {
+                  "First": {
+                    "Frame": "ShieldingSelf 2",
+                    "Direction": "SSE"
+                  }
                 },
-                {
-                  "Frames": {
-                    "First": {
-                      "Frame": "ShieldingSelf 1",
-                      "Direction": "SSE"
-                    }
-                  },
-                  "Command": "Frame",
-                  "Parameter": 2
+                "Command": "Frame",
+                "Parameter": 4
+              },
+              {
+                "Frames": {
+                  "First": {
+                    "Frame": "ShieldingSelf 1",
+                    "Direction": "SSE"
+                  }
                 },
-                {
-                  "Command": "Stop",
-                  "Parameter": 0
-                }
-              ]
-            },
-            "StillFrame": {
-              "AnimationFrames": [
-                {
-                  "Frames": {
-                    "First": {
-                      "Frame": "PointingToCrystal 1",
-                      "Direction": "SSE"
-                    }
-                  },
-                  "Command": "Frame",
-                  "Parameter": 10
+                "Command": "Frame",
+                "Parameter": 2
+              },
+              {
+                "Command": "Stop",
+                "Parameter": 0
+              }
+            ]
+          },
+          "StillFrame": {
+            "AnimationFrames": [
+              {
+                "Frames": {
+                  "First": {
+                    "Frame": "PointingToCrystal 1",
+                    "Direction": "SSE"
+                  }
                 },
-                {
-                  "Command": "Stop",
-                  "Parameter": 0
-                }
-              ]
-            }
+                "Command": "Frame",
+                "Parameter": 10
+              },
+              {
+                "Command": "Stop",
+                "Parameter": 0
+              }
+            ]
           }
         },
         "4": {
-          "Animations": {
-            "Idle": {
-              "AnimationFrames": [
-                {
-                  "FrameGroup": "Idle 1",
-                  "Command": "Frame",
-                  "Parameter": 25
-                },
-                {
-                  "FrameGroup": "Idle 2",
-                  "Command": "Frame",
-                  "Parameter": 4
-                },
-                {
-                  "FrameGroup": "Idle 3",
-                  "Command": "Frame",
-                  "Parameter": 3
-                },
-                {
-                  "FrameGroup": "Idle 4",
-                  "Command": "Frame",
-                  "Parameter": 12
-                },
-                {
-                  "FrameGroup": "Idle 3",
-                  "Command": "Frame",
-                  "Parameter": 2
-                },
-                {
-                  "FrameGroup": "Idle 2",
-                  "Command": "Frame",
-                  "Parameter": 4
-                },
-                {
-                  "FrameGroup": "Idle 1",
-                  "Command": "Frame",
-                  "Parameter": 40
-                },
-                {
-                  "FrameGroup": "Idle 2",
-                  "Command": "Frame",
-                  "Parameter": 4
-                },
-                {
-                  "FrameGroup": "Idle 3",
-                  "Command": "Frame",
-                  "Parameter": 3
-                },
-                {
-                  "FrameGroup": "Idle 4",
-                  "Command": "Frame",
-                  "Parameter": 12
-                },
-                {
-                  "FrameGroup": "Idle 3",
-                  "Command": "Frame",
-                  "Parameter": 2
-                },
-                {
-                  "FrameGroup": "Idle 2",
-                  "Command": "Frame",
-                  "Parameter": 4
-                },
-                {
-                  "Command": "GotoFrameOffset",
-                  "Parameter": 0
-                }
-              ]
-            },
-            "StillFrame": {
-              "AnimationFrames": [
-                {
-                  "FrameGroup": "Idle 1",
-                  "Command": "Frame",
-                  "Parameter": 10
-                },
-                {
-                  "Command": "Stop",
-                  "Parameter": 0
-                }
-              ]
-            }
+          "Idle": {
+            "AnimationFrames": [
+              {
+                "FrameGroup": "Idle 1",
+                "Command": "Frame",
+                "Parameter": 25
+              },
+              {
+                "FrameGroup": "Idle 2",
+                "Command": "Frame",
+                "Parameter": 4
+              },
+              {
+                "FrameGroup": "Idle 3",
+                "Command": "Frame",
+                "Parameter": 3
+              },
+              {
+                "FrameGroup": "Idle 4",
+                "Command": "Frame",
+                "Parameter": 12
+              },
+              {
+                "FrameGroup": "Idle 3",
+                "Command": "Frame",
+                "Parameter": 2
+              },
+              {
+                "FrameGroup": "Idle 2",
+                "Command": "Frame",
+                "Parameter": 4
+              },
+              {
+                "FrameGroup": "Idle 1",
+                "Command": "Frame",
+                "Parameter": 40
+              },
+              {
+                "FrameGroup": "Idle 2",
+                "Command": "Frame",
+                "Parameter": 4
+              },
+              {
+                "FrameGroup": "Idle 3",
+                "Command": "Frame",
+                "Parameter": 3
+              },
+              {
+                "FrameGroup": "Idle 4",
+                "Command": "Frame",
+                "Parameter": 12
+              },
+              {
+                "FrameGroup": "Idle 3",
+                "Command": "Frame",
+                "Parameter": 2
+              },
+              {
+                "FrameGroup": "Idle 2",
+                "Command": "Frame",
+                "Parameter": 4
+              },
+              {
+                "Command": "GotoFrameOffset",
+                "Parameter": 0
+              }
+            ]
+          },
+          "StillFrame": {
+            "AnimationFrames": [
+              {
+                "FrameGroup": "Idle 1",
+                "Command": "Frame",
+                "Parameter": 10
+              },
+              {
+                "Command": "Stop",
+                "Parameter": 0
+              }
+            ]
           }
         }
       }

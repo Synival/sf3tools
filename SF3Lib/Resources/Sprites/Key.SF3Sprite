@@ -20,25 +20,23 @@
       },
       "AnimationByDirections": {
         "4": {
-          "Animations": {
-            "StillFrame (Should be 1 Direction)": {
-              "AnimationFrames": [
-                {
-                  "Frames": {
-                    "SSE": {
-                      "Frame": "Key 1",
-                      "Direction": "SSE"
-                    }
-                  },
-                  "Command": "Frame",
-                  "Parameter": 10
+          "StillFrame (Should be 1 Direction)": {
+            "AnimationFrames": [
+              {
+                "Frames": {
+                  "SSE": {
+                    "Frame": "Key 1",
+                    "Direction": "SSE"
+                  }
                 },
-                {
-                  "Command": "GotoFrameOffset",
-                  "Parameter": 0
-                }
-              ]
-            }
+                "Command": "Frame",
+                "Parameter": 10
+              },
+              {
+                "Command": "GotoFrameOffset",
+                "Parameter": 0
+              }
+            ]
           }
         }
       }

@@ -140,120 +140,118 @@
       },
       "AnimationByDirections": {
         "4": {
-          "Animations": {
-            "Idle": {
-              "AnimationFrames": [
-                {
-                  "FrameGroup": "Idle 1",
-                  "Command": "Frame",
-                  "Parameter": 6
-                },
-                {
-                  "FrameGroup": "Idle 2",
-                  "Command": "Frame",
-                  "Parameter": 4
-                },
-                {
-                  "FrameGroup": "Idle 3",
-                  "Command": "Frame",
-                  "Parameter": 4
-                },
-                {
-                  "FrameGroup": "Idle 2",
-                  "Command": "Frame",
-                  "Parameter": 4
-                },
-                {
-                  "Command": "GotoFrameOffset",
-                  "Parameter": 0
-                }
-              ]
-            },
-            "StillFrame (Idle)": {
-              "AnimationFrames": [
-                {
-                  "FrameGroup": "Idle 1",
-                  "Command": "Frame",
-                  "Parameter": 10
-                },
-                {
-                  "Command": "Stop",
-                  "Parameter": 0
-                }
-              ]
-            },
-            "Walking (Has Broken/Missing Frames)": {
-              "AnimationFrames": [
-                {
-                  "Frames": {
-                    "SSE": {
-                      "Frame": "Walking 1",
-                      "Direction": "SSE"
-                    },
-                    "ESE": {
-                      "Frame": "Walking 1",
-                      "Direction": "ENE"
-                    },
-                    "ENE": {
-                      "Frame": "Walking 1",
-                      "Direction": "ENE"
-                    },
-                    "NNE": {
-                      "Frame": "Walking 1",
-                      "Direction": "NNE"
-                    }
+          "Idle": {
+            "AnimationFrames": [
+              {
+                "FrameGroup": "Idle 1",
+                "Command": "Frame",
+                "Parameter": 6
+              },
+              {
+                "FrameGroup": "Idle 2",
+                "Command": "Frame",
+                "Parameter": 4
+              },
+              {
+                "FrameGroup": "Idle 3",
+                "Command": "Frame",
+                "Parameter": 4
+              },
+              {
+                "FrameGroup": "Idle 2",
+                "Command": "Frame",
+                "Parameter": 4
+              },
+              {
+                "Command": "GotoFrameOffset",
+                "Parameter": 0
+              }
+            ]
+          },
+          "StillFrame (Idle)": {
+            "AnimationFrames": [
+              {
+                "FrameGroup": "Idle 1",
+                "Command": "Frame",
+                "Parameter": 10
+              },
+              {
+                "Command": "Stop",
+                "Parameter": 0
+              }
+            ]
+          },
+          "Walking (Has Broken/Missing Frames)": {
+            "AnimationFrames": [
+              {
+                "Frames": {
+                  "SSE": {
+                    "Frame": "Walking 1",
+                    "Direction": "SSE"
                   },
-                  "Command": "Frame",
-                  "Parameter": 5
-                },
-                {
-                  "FrameGroup": "Idle 1",
-                  "Command": "Frame",
-                  "Parameter": 5
-                },
-                {
-                  "FrameGroup": "Walking 2",
-                  "Command": "Frame",
-                  "Parameter": 5
-                },
-                {
-                  "FrameGroup": "Walking 3",
-                  "Command": "Frame",
-                  "Parameter": 5
-                },
-                {
-                  "FrameGroup": "Idle 1",
-                  "Command": "Frame",
-                  "Parameter": 5
-                },
-                {
-                  "Frames": {
-                    "SSE": {
-                      "Frame": "Idle 1",
-                      "Direction": "SSE"
-                    },
-                    "ESE": {
-                      "Frame": "Idle 1",
-                      "Direction": "SSE"
-                    },
-                    "ENE": {
-                      "Frame": "Idle 1",
-                      "Direction": "SSE"
-                    },
-                    "NNE": {
-                      "Frame": "Idle 1",
-                      "Direction": "SSE"
-                    }
+                  "ESE": {
+                    "Frame": "Walking 1",
+                    "Direction": "ENE"
                   },
-                  "Command": "Frame",
-                  "Parameter": 5
+                  "ENE": {
+                    "Frame": "Walking 1",
+                    "Direction": "ENE"
+                  },
+                  "NNE": {
+                    "Frame": "Walking 1",
+                    "Direction": "NNE"
+                  }
                 },
-                {
-                  "Command": "GotoFrameOffset",
-                  "Parameter": 0
-                }
-              ]
-            }
+                "Command": "Frame",
+                "Parameter": 5
+              },
+              {
+                "FrameGroup": "Idle 1",
+                "Command": "Frame",
+                "Parameter": 5
+              },
+              {
+                "FrameGroup": "Walking 2",
+                "Command": "Frame",
+                "Parameter": 5
+              },
+              {
+                "FrameGroup": "Walking 3",
+                "Command": "Frame",
+                "Parameter": 5
+              },
+              {
+                "FrameGroup": "Idle 1",
+                "Command": "Frame",
+                "Parameter": 5
+              },
+              {
+                "Frames": {
+                  "SSE": {
+                    "Frame": "Idle 1",
+                    "Direction": "SSE"
+                  },
+                  "ESE": {
+                    "Frame": "Idle 1",
+                    "Direction": "SSE"
+                  },
+                  "ENE": {
+                    "Frame": "Idle 1",
+                    "Direction": "SSE"
+                  },
+                  "NNE": {
+                    "Frame": "Idle 1",
+                    "Direction": "SSE"
+                  }
+                },
+                "Command": "Frame",
+                "Parameter": 5
+              },
+              {
+                "Command": "GotoFrameOffset",
+                "Parameter": 0
+              }
+            ]
           }
         }
       }

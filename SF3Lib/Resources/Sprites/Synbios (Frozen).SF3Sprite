@@ -77,46 +77,44 @@
       },
       "AnimationByDirections": {
         "6": {
-          "Animations": {
-            "StillFrame (Frozen, Repeat)": {
-              "AnimationFrames": [
-                {
-                  "FrameGroup": "Frozen 1",
-                  "Command": "Frame",
-                  "Parameter": 10
-                },
-                {
-                  "Command": "GotoFrameOffset",
-                  "Parameter": 0
-                }
-              ]
-            },
-            "StillFrame (Frozen)": {
-              "AnimationFrames": [
-                {
-                  "FrameGroup": "Frozen 1",
-                  "Command": "Frame",
-                  "Parameter": 10
-                },
-                {
-                  "Command": "Stop",
-                  "Parameter": 0
-                }
-              ]
-            },
-            "StillFrame (Unfrozen)": {
-              "AnimationFrames": [
-                {
-                  "FrameGroup": "Unfrozen 1",
-                  "Command": "Frame",
-                  "Parameter": 10
-                },
-                {
-                  "Command": "GotoFrameOffset",
-                  "Parameter": 0
-                }
-              ]
-            }
+          "StillFrame (Frozen, Repeat)": {
+            "AnimationFrames": [
+              {
+                "FrameGroup": "Frozen 1",
+                "Command": "Frame",
+                "Parameter": 10
+              },
+              {
+                "Command": "GotoFrameOffset",
+                "Parameter": 0
+              }
+            ]
+          },
+          "StillFrame (Frozen)": {
+            "AnimationFrames": [
+              {
+                "FrameGroup": "Frozen 1",
+                "Command": "Frame",
+                "Parameter": 10
+              },
+              {
+                "Command": "Stop",
+                "Parameter": 0
+              }
+            ]
+          },
+          "StillFrame (Unfrozen)": {
+            "AnimationFrames": [
+              {
+                "FrameGroup": "Unfrozen 1",
+                "Command": "Frame",
+                "Parameter": 10
+              },
+              {
+                "Command": "GotoFrameOffset",
+                "Parameter": 0
+              }
+            ]
           }
         }
       }

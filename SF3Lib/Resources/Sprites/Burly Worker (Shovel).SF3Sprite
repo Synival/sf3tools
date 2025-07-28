@@ -123,151 +123,149 @@
       },
       "AnimationByDirections": {
         "4": {
-          "Animations": {
-            "Shoveling (Repeating Pattern)": {
-              "AnimationFrames": [
-                {
-                  "FrameGroup": "Shoveling 1",
-                  "Command": "Frame",
-                  "Parameter": 13
-                },
-                {
-                  "FrameGroup": "Shoveling 2",
-                  "Command": "Frame",
-                  "Parameter": 14
-                },
-                {
-                  "FrameGroup": "Shoveling 3",
-                  "Command": "Frame",
-                  "Parameter": 10
-                },
-                {
-                  "FrameGroup": "Shoveling 2",
-                  "Command": "Frame",
-                  "Parameter": 11
-                },
-                {
-                  "FrameGroup": "Shoveling 3",
-                  "Command": "Frame",
-                  "Parameter": 8
-                },
-                {
-                  "FrameGroup": "Shoveling 2",
-                  "Command": "Frame",
-                  "Parameter": 12
-                },
-                {
-                  "FrameGroup": "Shoveling 3",
-                  "Command": "Frame",
-                  "Parameter": 9
-                },
-                {
-                  "FrameGroup": "Shoveling 4",
-                  "Command": "Frame",
-                  "Parameter": 5
-                },
-                {
-                  "FrameGroup": "Shoveling 5",
-                  "Command": "Frame",
-                  "Parameter": 13
-                },
-                {
-                  "FrameGroup": "Shoveling 2",
-                  "Command": "Frame",
-                  "Parameter": 11
-                },
-                {
-                  "FrameGroup": "Shoveling 3",
-                  "Command": "Frame",
-                  "Parameter": 9
-                },
-                {
-                  "FrameGroup": "Shoveling 4",
-                  "Command": "Frame",
-                  "Parameter": 12
-                },
-                {
-                  "FrameGroup": "Shoveling 2",
-                  "Command": "Frame",
-                  "Parameter": 10
-                },
-                {
-                  "FrameGroup": "Shoveling 3",
-                  "Command": "Frame",
-                  "Parameter": 9
-                },
-                {
-                  "FrameGroup": "Shoveling 4",
-                  "Command": "Frame",
-                  "Parameter": 12
-                },
-                {
-                  "FrameGroup": "Shoveling 2",
-                  "Command": "Frame",
-                  "Parameter": 10
-                },
-                {
-                  "FrameGroup": "Shoveling 3",
-                  "Command": "Frame",
-                  "Parameter": 9
-                },
-                {
-                  "FrameGroup": "Shoveling 4",
-                  "Command": "Frame",
-                  "Parameter": 8
-                },
-                {
-                  "FrameGroup": "Shoveling 5",
-                  "Command": "Frame",
-                  "Parameter": 12
-                },
-                {
-                  "Command": "GotoFrameOffset",
-                  "Parameter": 0
-                }
-              ]
-            },
-            "Shoveling (Repeating Single)": {
-              "AnimationFrames": [
-                {
-                  "FrameGroup": "Shoveling 1",
-                  "Command": "Frame",
-                  "Parameter": 15
-                },
-                {
-                  "FrameGroup": "Shoveling 2",
-                  "Command": "Frame",
-                  "Parameter": 10
-                },
-                {
-                  "FrameGroup": "Shoveling 3",
-                  "Command": "Frame",
-                  "Parameter": 9
-                },
-                {
-                  "FrameGroup": "Shoveling 4",
-                  "Command": "Frame",
-                  "Parameter": 12
-                },
-                {
-                  "Command": "GotoFrameOffset",
-                  "Parameter": 0
-                }
-              ]
-            },
-            "StillFrame": {
-              "AnimationFrames": [
-                {
-                  "FrameGroup": "Shoveling 1",
-                  "Command": "Frame",
-                  "Parameter": 10
-                },
-                {
-                  "Command": "Stop",
-                  "Parameter": 0
-                }
-              ]
-            }
+          "Shoveling (Repeating Pattern)": {
+            "AnimationFrames": [
+              {
+                "FrameGroup": "Shoveling 1",
+                "Command": "Frame",
+                "Parameter": 13
+              },
+              {
+                "FrameGroup": "Shoveling 2",
+                "Command": "Frame",
+                "Parameter": 14
+              },
+              {
+                "FrameGroup": "Shoveling 3",
+                "Command": "Frame",
+                "Parameter": 10
+              },
+              {
+                "FrameGroup": "Shoveling 2",
+                "Command": "Frame",
+                "Parameter": 11
+              },
+              {
+                "FrameGroup": "Shoveling 3",
+                "Command": "Frame",
+                "Parameter": 8
+              },
+              {
+                "FrameGroup": "Shoveling 2",
+                "Command": "Frame",
+                "Parameter": 12
+              },
+              {
+                "FrameGroup": "Shoveling 3",
+                "Command": "Frame",
+                "Parameter": 9
+              },
+              {
+                "FrameGroup": "Shoveling 4",
+                "Command": "Frame",
+                "Parameter": 5
+              },
+              {
+                "FrameGroup": "Shoveling 5",
+                "Command": "Frame",
+                "Parameter": 13
+              },
+              {
+                "FrameGroup": "Shoveling 2",
+                "Command": "Frame",
+                "Parameter": 11
+              },
+              {
+                "FrameGroup": "Shoveling 3",
+                "Command": "Frame",
+                "Parameter": 9
+              },
+              {
+                "FrameGroup": "Shoveling 4",
+                "Command": "Frame",
+                "Parameter": 12
+              },
+              {
+                "FrameGroup": "Shoveling 2",
+                "Command": "Frame",
+                "Parameter": 10
+              },
+              {
+                "FrameGroup": "Shoveling 3",
+                "Command": "Frame",
+                "Parameter": 9
+              },
+              {
+                "FrameGroup": "Shoveling 4",
+                "Command": "Frame",
+                "Parameter": 12
+              },
+              {
+                "FrameGroup": "Shoveling 2",
+                "Command": "Frame",
+                "Parameter": 10
+              },
+              {
+                "FrameGroup": "Shoveling 3",
+                "Command": "Frame",
+                "Parameter": 9
+              },
+              {
+                "FrameGroup": "Shoveling 4",
+                "Command": "Frame",
+                "Parameter": 8
+              },
+              {
+                "FrameGroup": "Shoveling 5",
+                "Command": "Frame",
+                "Parameter": 12
+              },
+              {
+                "Command": "GotoFrameOffset",
+                "Parameter": 0
+              }
+            ]
+          },
+          "Shoveling (Repeating Single)": {
+            "AnimationFrames": [
+              {
+                "FrameGroup": "Shoveling 1",
+                "Command": "Frame",
+                "Parameter": 15
+              },
+              {
+                "FrameGroup": "Shoveling 2",
+                "Command": "Frame",
+                "Parameter": 10
+              },
+              {
+                "FrameGroup": "Shoveling 3",
+                "Command": "Frame",
+                "Parameter": 9
+              },
+              {
+                "FrameGroup": "Shoveling 4",
+                "Command": "Frame",
+                "Parameter": 12
+              },
+              {
+                "Command": "GotoFrameOffset",
+                "Parameter": 0
+              }
+            ]
+          },
+          "StillFrame": {
+            "AnimationFrames": [
+              {
+                "FrameGroup": "Shoveling 1",
+                "Command": "Frame",
+                "Parameter": 10
+              },
+              {
+                "Command": "Stop",
+                "Parameter": 0
+              }
+            ]
           }
         }
       }

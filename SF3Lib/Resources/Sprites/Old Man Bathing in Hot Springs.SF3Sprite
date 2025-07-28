@@ -79,48 +79,46 @@
       },
       "AnimationByDirections": {
         "4": {
-          "Animations": {
-            "OccasionallyLookingUp": {
-              "AnimationFrames": [
-                {
-                  "FrameGroup": "OccasionallyLookingUp 1",
-                  "Command": "Frame",
-                  "Parameter": 150
-                },
-                {
-                  "FrameGroup": "OccasionallyLookingUp 2",
-                  "Command": "Frame",
-                  "Parameter": 3
-                },
-                {
-                  "FrameGroup": "OccasionallyLookingUp 3",
-                  "Command": "Frame",
-                  "Parameter": 60
-                },
-                {
-                  "FrameGroup": "OccasionallyLookingUp 2",
-                  "Command": "Frame",
-                  "Parameter": 3
-                },
-                {
-                  "Command": "GotoFrameOffset",
-                  "Parameter": 0
-                }
-              ]
-            },
-            "StillFrame": {
-              "AnimationFrames": [
-                {
-                  "FrameGroup": "OccasionallyLookingUp 1",
-                  "Command": "Frame",
-                  "Parameter": 10
-                },
-                {
-                  "Command": "Stop",
-                  "Parameter": 0
-                }
-              ]
-            }
+          "OccasionallyLookingUp": {
+            "AnimationFrames": [
+              {
+                "FrameGroup": "OccasionallyLookingUp 1",
+                "Command": "Frame",
+                "Parameter": 150
+              },
+              {
+                "FrameGroup": "OccasionallyLookingUp 2",
+                "Command": "Frame",
+                "Parameter": 3
+              },
+              {
+                "FrameGroup": "OccasionallyLookingUp 3",
+                "Command": "Frame",
+                "Parameter": 60
+              },
+              {
+                "FrameGroup": "OccasionallyLookingUp 2",
+                "Command": "Frame",
+                "Parameter": 3
+              },
+              {
+                "Command": "GotoFrameOffset",
+                "Parameter": 0
+              }
+            ]
+          },
+          "StillFrame": {
+            "AnimationFrames": [
+              {
+                "FrameGroup": "OccasionallyLookingUp 1",
+                "Command": "Frame",
+                "Parameter": 10
+              },
+              {
+                "Command": "Stop",
+                "Parameter": 0
+              }
+            ]
           }
         }
       }

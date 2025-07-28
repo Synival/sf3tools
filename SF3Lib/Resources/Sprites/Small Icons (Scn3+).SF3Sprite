@@ -27,33 +27,31 @@
       },
       "AnimationByDirections": {
         "1": {
-          "Animations": {
-            "Complaining": {
-              "AnimationFrames": [
-                {
-                  "FrameGroup": "Complaining 1",
-                  "Command": "Frame",
-                  "Parameter": 10
-                },
-                {
-                  "Command": "Stop",
-                  "Parameter": 0
-                }
-              ]
-            },
-            "Embarassed 1": {
-              "AnimationFrames": [
-                {
-                  "FrameGroup": "Embarassed 1",
-                  "Command": "Frame",
-                  "Parameter": 10
-                },
-                {
-                  "Command": "Stop",
-                  "Parameter": 0
-                }
-              ]
-            }
+          "Complaining": {
+            "AnimationFrames": [
+              {
+                "FrameGroup": "Complaining 1",
+                "Command": "Frame",
+                "Parameter": 10
+              },
+              {
+                "Command": "Stop",
+                "Parameter": 0
+              }
+            ]
+          },
+          "Embarassed 1": {
+            "AnimationFrames": [
+              {
+                "FrameGroup": "Embarassed 1",
+                "Command": "Frame",
+                "Parameter": 10
+              },
+              {
+                "Command": "Stop",
+                "Parameter": 0
+              }
+            ]
           }
         }
       }

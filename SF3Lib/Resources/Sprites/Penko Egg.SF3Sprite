@@ -64,89 +64,85 @@
       },
       "AnimationByDirections": {
         "1": {
-          "Animations": {
-            "StillFrame (Full, Repeat)": {
-              "AnimationFrames": [
-                {
-                  "FrameGroup": "Full 1",
-                  "Command": "Frame",
-                  "Parameter": 10
-                },
-                {
-                  "Command": "GotoFrameOffset",
-                  "Parameter": 0
-                }
-              ]
-            },
-            "StillFrame (Full)": {
-              "AnimationFrames": [
-                {
-                  "FrameGroup": "Full 1",
-                  "Command": "Frame",
-                  "Parameter": 10
-                },
-                {
-                  "Command": "Stop",
-                  "Parameter": 0
-                }
-              ]
-            }
+          "StillFrame (Full, Repeat)": {
+            "AnimationFrames": [
+              {
+                "FrameGroup": "Full 1",
+                "Command": "Frame",
+                "Parameter": 10
+              },
+              {
+                "Command": "GotoFrameOffset",
+                "Parameter": 0
+              }
+            ]
+          },
+          "StillFrame (Full)": {
+            "AnimationFrames": [
+              {
+                "FrameGroup": "Full 1",
+                "Command": "Frame",
+                "Parameter": 10
+              },
+              {
+                "Command": "Stop",
+                "Parameter": 0
+              }
+            ]
           }
         },
         "4": {
-          "Animations": {
-            "StillFrame (Half, Repeat)": {
-              "AnimationFrames": [
-                {
-                  "FrameGroup": "Half 1",
-                  "Command": "Frame",
-                  "Parameter": 10
-                },
-                {
-                  "Command": "GotoFrameOffset",
-                  "Parameter": 0
-                }
-              ]
-            },
-            "StillFrame (Half)": {
-              "AnimationFrames": [
-                {
-                  "FrameGroup": "Half 1",
-                  "Command": "Frame",
-                  "Parameter": 10
-                },
-                {
-                  "Command": "Stop",
-                  "Parameter": 0
-                }
-              ]
-            },
-            "StillFrame (Open, Repeat)": {
-              "AnimationFrames": [
-                {
-                  "FrameGroup": "Open 1",
-                  "Command": "Frame",
-                  "Parameter": 10
-                },
-                {
-                  "Command": "GotoFrameOffset",
-                  "Parameter": 0
-                }
-              ]
-            },
-            "StillFrame (Open)": {
-              "AnimationFrames": [
-                {
-                  "FrameGroup": "Open 1",
-                  "Command": "Frame",
-                  "Parameter": 10
-                },
-                {
-                  "Command": "Stop",
-                  "Parameter": 0
-                }
-              ]
-            }
+          "StillFrame (Half, Repeat)": {
+            "AnimationFrames": [
+              {
+                "FrameGroup": "Half 1",
+                "Command": "Frame",
+                "Parameter": 10
+              },
+              {
+                "Command": "GotoFrameOffset",
+                "Parameter": 0
+              }
+            ]
+          },
+          "StillFrame (Half)": {
+            "AnimationFrames": [
+              {
+                "FrameGroup": "Half 1",
+                "Command": "Frame",
+                "Parameter": 10
+              },
+              {
+                "Command": "Stop",
+                "Parameter": 0
+              }
+            ]
+          },
+          "StillFrame (Open, Repeat)": {
+            "AnimationFrames": [
+              {
+                "FrameGroup": "Open 1",
+                "Command": "Frame",
+                "Parameter": 10
+              },
+              {
+                "Command": "GotoFrameOffset",
+                "Parameter": 0
+              }
+            ]
+          },
+          "StillFrame (Open)": {
+            "AnimationFrames": [
+              {
+                "FrameGroup": "Open 1",
+                "Command": "Frame",
+                "Parameter": 10
+              },
+              {
+                "Command": "Stop",
+                "Parameter": 0
+              }
+            ]
           }
         }
       }

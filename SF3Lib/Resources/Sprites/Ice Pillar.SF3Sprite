@@ -101,76 +101,74 @@
       },
       "AnimationByDirections": {
         "4": {
-          "Animations": {
-            "Shimmering (Fast)": {
-              "AnimationFrames": [
-                {
-                  "FrameGroup": "Shimmering 1",
-                  "Command": "Frame",
-                  "Parameter": 12
-                },
-                {
-                  "FrameGroup": "Shimmering 2",
-                  "Command": "Frame",
-                  "Parameter": 2
-                },
-                {
-                  "FrameGroup": "Shimmering 3",
-                  "Command": "Frame",
-                  "Parameter": 1
-                },
-                {
-                  "FrameGroup": "Shimmering 4",
-                  "Command": "Frame",
-                  "Parameter": 1
-                },
-                {
-                  "Command": "GotoFrameOffset",
-                  "Parameter": 0
-                }
-              ]
-            },
-            "Shimmering (Very Slow)": {
-              "AnimationFrames": [
-                {
-                  "FrameGroup": "Shimmering 1",
-                  "Command": "Frame",
-                  "Parameter": 120
-                },
-                {
-                  "FrameGroup": "Shimmering 2",
-                  "Command": "Frame",
-                  "Parameter": 2
-                },
-                {
-                  "FrameGroup": "Shimmering 3",
-                  "Command": "Frame",
-                  "Parameter": 1
-                },
-                {
-                  "FrameGroup": "Shimmering 4",
-                  "Command": "Frame",
-                  "Parameter": 1
-                },
-                {
-                  "Command": "GotoFrameOffset",
-                  "Parameter": 0
-                }
-              ]
-            },
-            "StillFrame": {
-              "AnimationFrames": [
-                {
-                  "FrameGroup": "Shimmering 1",
-                  "Command": "Frame",
-                  "Parameter": 10
-                },
-                {
-                  "Command": "Stop",
-                  "Parameter": 0
-                }
-              ]
-            }
+          "Shimmering (Fast)": {
+            "AnimationFrames": [
+              {
+                "FrameGroup": "Shimmering 1",
+                "Command": "Frame",
+                "Parameter": 12
+              },
+              {
+                "FrameGroup": "Shimmering 2",
+                "Command": "Frame",
+                "Parameter": 2
+              },
+              {
+                "FrameGroup": "Shimmering 3",
+                "Command": "Frame",
+                "Parameter": 1
+              },
+              {
+                "FrameGroup": "Shimmering 4",
+                "Command": "Frame",
+                "Parameter": 1
+              },
+              {
+                "Command": "GotoFrameOffset",
+                "Parameter": 0
+              }
+            ]
+          },
+          "Shimmering (Very Slow)": {
+            "AnimationFrames": [
+              {
+                "FrameGroup": "Shimmering 1",
+                "Command": "Frame",
+                "Parameter": 120
+              },
+              {
+                "FrameGroup": "Shimmering 2",
+                "Command": "Frame",
+                "Parameter": 2
+              },
+              {
+                "FrameGroup": "Shimmering 3",
+                "Command": "Frame",
+                "Parameter": 1
+              },
+              {
+                "FrameGroup": "Shimmering 4",
+                "Command": "Frame",
+                "Parameter": 1
+              },
+              {
+                "Command": "GotoFrameOffset",
+                "Parameter": 0
+              }
+            ]
+          },
+          "StillFrame": {
+            "AnimationFrames": [
+              {
+                "FrameGroup": "Shimmering 1",
+                "Command": "Frame",
+                "Parameter": 10
+              },
+              {
+                "Command": "Stop",
+                "Parameter": 0
+              }
+            ]
           }
         }
       }

@@ -76,121 +76,119 @@
       },
       "AnimationByDirections": {
         "1": {
-          "Animations": {
-            "Angry": {
-              "AnimationFrames": [
-                {
-                  "FrameGroup": "Angry 1",
-                  "Command": "Frame",
-                  "Parameter": 10
-                },
-                {
-                  "Command": "Stop",
-                  "Parameter": 0
-                }
-              ]
-            },
-            "Confused": {
-              "AnimationFrames": [
-                {
-                  "FrameGroup": "Confused 1",
-                  "Command": "Frame",
-                  "Parameter": 10
-                },
-                {
-                  "Command": "Stop",
-                  "Parameter": 0
-                }
-              ]
-            },
-            "Idea": {
-              "AnimationFrames": [
-                {
-                  "FrameGroup": "Idea 1",
-                  "Command": "Frame",
-                  "Parameter": 10
-                },
-                {
-                  "Command": "Stop",
-                  "Parameter": 0
-                }
-              ]
-            },
-            "Shield": {
-              "AnimationFrames": [
-                {
-                  "FrameGroup": "Shield 1",
-                  "Command": "Frame",
-                  "Parameter": 10
-                },
-                {
-                  "Command": "Stop",
-                  "Parameter": 0
-                }
-              ]
-            },
-            "Silent": {
-              "AnimationFrames": [
-                {
-                  "FrameGroup": "Silent 1",
-                  "Command": "Frame",
-                  "Parameter": 10
-                },
-                {
-                  "Command": "Stop",
-                  "Parameter": 0
-                }
-              ]
-            },
-            "Sweat": {
-              "AnimationFrames": [
-                {
-                  "FrameGroup": "Sweat 3",
-                  "Command": "Frame",
-                  "Parameter": 10
-                },
-                {
-                  "Command": "Stop",
-                  "Parameter": 0
-                }
-              ]
-            },
-            "Sweat (Growing Larger)": {
-              "AnimationFrames": [
-                {
-                  "FrameGroup": "Sweat 1",
-                  "Command": "Frame",
-                  "Parameter": 10
-                },
-                {
-                  "FrameGroup": "Sweat 2",
-                  "Command": "Frame",
-                  "Parameter": 10
-                },
-                {
-                  "FrameGroup": "Sweat 3",
-                  "Command": "Frame",
-                  "Parameter": 10
-                },
-                {
-                  "Command": "Stop",
-                  "Parameter": 0
-                }
-              ]
-            },
-            "Sword": {
-              "AnimationFrames": [
-                {
-                  "FrameGroup": "Sword 1",
-                  "Command": "Frame",
-                  "Parameter": 10
-                },
-                {
-                  "Command": "Stop",
-                  "Parameter": 0
-                }
-              ]
-            }
+          "Angry": {
+            "AnimationFrames": [
+              {
+                "FrameGroup": "Angry 1",
+                "Command": "Frame",
+                "Parameter": 10
+              },
+              {
+                "Command": "Stop",
+                "Parameter": 0
+              }
+            ]
+          },
+          "Confused": {
+            "AnimationFrames": [
+              {
+                "FrameGroup": "Confused 1",
+                "Command": "Frame",
+                "Parameter": 10
+              },
+              {
+                "Command": "Stop",
+                "Parameter": 0
+              }
+            ]
+          },
+          "Idea": {
+            "AnimationFrames": [
+              {
+                "FrameGroup": "Idea 1",
+                "Command": "Frame",
+                "Parameter": 10
+              },
+              {
+                "Command": "Stop",
+                "Parameter": 0
+              }
+            ]
+          },
+          "Shield": {
+            "AnimationFrames": [
+              {
+                "FrameGroup": "Shield 1",
+                "Command": "Frame",
+                "Parameter": 10
+              },
+              {
+                "Command": "Stop",
+                "Parameter": 0
+              }
+            ]
+          },
+          "Silent": {
+            "AnimationFrames": [
+              {
+                "FrameGroup": "Silent 1",
+                "Command": "Frame",
+                "Parameter": 10
+              },
+              {
+                "Command": "Stop",
+                "Parameter": 0
+              }
+            ]
+          },
+          "Sweat": {
+            "AnimationFrames": [
+              {
+                "FrameGroup": "Sweat 3",
+                "Command": "Frame",
+                "Parameter": 10
+              },
+              {
+                "Command": "Stop",
+                "Parameter": 0
+              }
+            ]
+          },
+          "Sweat (Growing Larger)": {
+            "AnimationFrames": [
+              {
+                "FrameGroup": "Sweat 1",
+                "Command": "Frame",
+                "Parameter": 10
+              },
+              {
+                "FrameGroup": "Sweat 2",
+                "Command": "Frame",
+                "Parameter": 10
+              },
+              {
+                "FrameGroup": "Sweat 3",
+                "Command": "Frame",
+                "Parameter": 10
+              },
+              {
+                "Command": "Stop",
+                "Parameter": 0
+              }
+            ]
+          },
+          "Sword": {
+            "AnimationFrames": [
+              {
+                "FrameGroup": "Sword 1",
+                "Command": "Frame",
+                "Parameter": 10
+              },
+              {
+                "Command": "Stop",
+                "Parameter": 0
+              }
+            ]
           }
         }
       }

@@ -79,79 +79,77 @@
       },
       "AnimationByDirections": {
         "4": {
-          "Animations": {
-            "Closing": {
-              "AnimationFrames": [
-                {
-                  "FrameGroup": "OpeningAndClosing 3",
-                  "Command": "Frame",
-                  "Parameter": 1
-                },
-                {
-                  "FrameGroup": "OpeningAndClosing 2",
-                  "Command": "Frame",
-                  "Parameter": 1
-                },
-                {
-                  "FrameGroup": "OpeningAndClosing 1",
-                  "Command": "Frame",
-                  "Parameter": 1
-                },
-                {
-                  "Command": "GotoAnimation",
-                  "Parameter": 1
-                }
-              ]
-            },
-            "Opening": {
-              "AnimationFrames": [
-                {
-                  "FrameGroup": "OpeningAndClosing 1",
-                  "Command": "Frame",
-                  "Parameter": 1
-                },
-                {
-                  "FrameGroup": "OpeningAndClosing 2",
-                  "Command": "Frame",
-                  "Parameter": 1
-                },
-                {
-                  "FrameGroup": "OpeningAndClosing 3",
-                  "Command": "Frame",
-                  "Parameter": 1
-                },
-                {
-                  "Command": "GotoAnimation",
-                  "Parameter": 2
-                }
-              ]
-            },
-            "StillFrame (Closed)": {
-              "AnimationFrames": [
-                {
-                  "FrameGroup": "OpeningAndClosing 1",
-                  "Command": "Frame",
-                  "Parameter": 1
-                },
-                {
-                  "Command": "Stop",
-                  "Parameter": 0
-                }
-              ]
-            },
-            "StillFrame (Open)": {
-              "AnimationFrames": [
-                {
-                  "FrameGroup": "OpeningAndClosing 3",
-                  "Command": "Frame",
-                  "Parameter": 1
-                },
-                {
-                  "Command": "Stop",
-                  "Parameter": 0
-                }
-              ]
-            }
+          "Closing": {
+            "AnimationFrames": [
+              {
+                "FrameGroup": "OpeningAndClosing 3",
+                "Command": "Frame",
+                "Parameter": 1
+              },
+              {
+                "FrameGroup": "OpeningAndClosing 2",
+                "Command": "Frame",
+                "Parameter": 1
+              },
+              {
+                "FrameGroup": "OpeningAndClosing 1",
+                "Command": "Frame",
+                "Parameter": 1
+              },
+              {
+                "Command": "GotoAnimation",
+                "Parameter": 1
+              }
+            ]
+          },
+          "Opening": {
+            "AnimationFrames": [
+              {
+                "FrameGroup": "OpeningAndClosing 1",
+                "Command": "Frame",
+                "Parameter": 1
+              },
+              {
+                "FrameGroup": "OpeningAndClosing 2",
+                "Command": "Frame",
+                "Parameter": 1
+              },
+              {
+                "FrameGroup": "OpeningAndClosing 3",
+                "Command": "Frame",
+                "Parameter": 1
+              },
+              {
+                "Command": "GotoAnimation",
+                "Parameter": 2
+              }
+            ]
+          },
+          "StillFrame (Closed)": {
+            "AnimationFrames": [
+              {
+                "FrameGroup": "OpeningAndClosing 1",
+                "Command": "Frame",
+                "Parameter": 1
+              },
+              {
+                "Command": "Stop",
+                "Parameter": 0
+              }
+            ]
+          },
+          "StillFrame (Open)": {
+            "AnimationFrames": [
+              {
+                "FrameGroup": "OpeningAndClosing 3",
+                "Command": "Frame",
+                "Parameter": 1
+              },
+              {
+                "Command": "Stop",
+                "Parameter": 0
+              }
+            ]
           }
         }
       }
