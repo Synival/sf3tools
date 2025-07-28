@@ -274,7 +274,7 @@ namespace SpriteCHR_Builder {
                 var hashes =
                     Enumerable
                     .Range(0, frameCount)
-                    .Select(x => CHR_Utils.FrameNumberToSpriteDir(frameCount, x).ToString())
+                    .Select(x => CHR_Utils.FrameNumberToSpriteDir(frameCount, x))
                     .Select(x => aniFrameDef.Frames.TryGetValue(x, out var frameOut) ? frameOut : null)
                     .Select(x => (x != null && frameGroups.TryGetValue(x.Frame, out var fg)) ? (fg.Frames.TryGetValue(x.Direction, out var f) ? f.Hash : null) : null)
                     .Cast<string>()

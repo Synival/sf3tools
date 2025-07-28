@@ -62,7 +62,7 @@ namespace SF3.Sprites {
 
                         if (jObj.TryGetValue("Frames", out var frames) && frames.Type == JTokenType.Object) {
                             Frames = ((IDictionary<string, JToken>) frames)
-                                .ToDictionary(x => x.Key, x => AnimationFrameDirectionDef.FromJToken(x.Value));
+                                .ToDictionary(x => (SpriteFrameDirection) Enum.Parse(typeof(SpriteFrameDirection), x.Key), x => AnimationFrameDirectionDef.FromJToken(x.Value));
                         }
 
                         Command   = jObj.TryGetValue("Command",   out var command)   ? (command.ToObject<SpriteAnimationFrameCommandType>()) : SpriteAnimationFrameCommandType.Frame;
@@ -88,7 +88,7 @@ namespace SF3.Sprites {
             if (FrameGroup != null)
                 jObj.Add("FrameGroup", new JValue(FrameGroup));
             if (Frames != null)
-                jObj.Add("Frames", JToken.FromObject(Frames, jsonSettings));
+                jObj.Add("Frames", JToken.FromObject(Frames.ToDictionary(x => x.Key.ToString(), x => x.Value), jsonSettings));
 
             jObj.Add("Command", new JValue(Command.ToString()));
             jObj.Add("Parameter", new JValue(Parameter));
@@ -128,7 +128,7 @@ namespace SF3.Sprites {
             var frames = FrameHashes
                 .Select((x, i) => (Dir: CHR_Utils.FrameNumberToSpriteDir(frameCount, i), Hash: x))
                 .Where(x => x.Hash != null)
-                .ToDictionary(x => x.Dir.ToString(), x => {
+                .ToDictionary(x => x.Dir, x => {
                     var frame = allFramesByHash.TryGetValue(x.Hash, out var frameOut) ? frameOut : default;
                     return (frame.Frame != null) ? new AnimationFrameDirectionDef() { Frame = frame.Name, Direction = frame.Dir } : null;
                 });
@@ -163,14 +163,14 @@ namespace SF3.Sprites {
                 (FrameHashes != null && FrameHashes.Length == directions && FrameHashes.All(x => x != null)) ||
                 (Frames != null && Frames.Count == directions && Enumerable
                     .Range(0, directions)
-                    .Select(x => CHR_Utils.FrameNumberToSpriteDir(directions, x).ToString())
+                    .Select(x => CHR_Utils.FrameNumberToSpriteDir(directions, x))
                     .All(x => Frames.ContainsKey(x))
                 )
             );
         }
 
         public string FrameGroup;
-        public Dictionary<string, AnimationFrameDirectionDef> Frames;
+        public Dictionary<SpriteFrameDirection, AnimationFrameDirectionDef> Frames;
         public string[] FrameHashes;
 
         [JsonConverter(typeof(StringEnumConverter))]

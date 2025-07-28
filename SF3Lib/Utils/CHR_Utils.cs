@@ -336,7 +336,7 @@ namespace SF3.Utils {
                             .ToArray()
                         : (x.Frames != null)
                         ? Enumerable.Range(0, frameCount)
-                            .Select(y => FrameNumberToSpriteDir(frameCount, y).ToString())
+                            .Select(y => FrameNumberToSpriteDir(frameCount, y))
                             .Select(y => x.Frames.TryGetValue(y, out var frame) ? frameGroups[frame.Frame].Frames[frame.Direction] : null)
                             .ToArray()
                         : null;

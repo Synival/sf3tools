@@ -172,7 +172,7 @@ namespace SF3.CHR {
                                     // The 'Frames' command has manually specified FrameGroup + Direction pairs.
                                     else if (frame.Frames != null) {
                                         frameKeys = frameDirections
-                                            .ToDictionary(x => x, x => frame.Frames.TryGetValue(x.ToString(), out var f) ? f : null)
+                                            .ToDictionary(x => x, x => frame.Frames.TryGetValue(x, out var f) ? f : null)
                                             .Select(x => (x.Value == null) ? null : $"{frameKeyPrefix} {x.Value.Frame} ({x.Value.Direction.ToString()})")
                                             .ToArray();
                                     }
