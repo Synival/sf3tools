@@ -67,7 +67,7 @@ namespace SF3.Sprites {
 
         public JToken ToJToken() {
             var jsonSettings = new JsonSerializer { NullValueHandling = NullValueHandling.Ignore };
-            return Frames != null ? JToken.FromObject(Frames.ToDictionary(x => x.Key.ToString(), x => x.Value), jsonSettings) :  null;
+            return Frames != null ? JToken.FromObject(Frames.ToDictionary(x => x.Key.ToString(), x => x.Value.ToJToken())) :  null;
         }
 
         public override string ToString() => string.Join(", ", Frames.Keys);

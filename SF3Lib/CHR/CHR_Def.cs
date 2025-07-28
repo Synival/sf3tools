@@ -311,8 +311,8 @@ namespace SF3.CHR {
                             if (!imagesRefsByKey.ContainsKey(frameKey)) {
                                 imagesRefsByKey.Add(frameKey, new SpritesheetImageRef() {
                                     Bitmap = spritesheetImageDict.TryGetValue(spritesheetImageKey, out var bmpOut) ? bmpOut : null,
-                                    X = spriteFrameDef?.SpriteSheetX ?? -1,
-                                    Y = spriteFrameDef?.SpriteSheetY ?? -1,
+                                    X = spriteFrameDef?.SpritesheetX ?? -1,
+                                    Y = spriteFrameDef?.SpritesheetY ?? -1,
                                     Width  = frameWidth,
                                     Height = frameHeight
                                 });

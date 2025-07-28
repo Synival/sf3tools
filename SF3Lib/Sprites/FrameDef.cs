@@ -1,19 +1,21 @@
-﻿using Newtonsoft.Json.Linq;
+﻿using CommonLib;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace SF3.Sprites {
-    public class FrameDef {
+    public class FrameDef : IJsonResource {
         public FrameDef() { }
 
         public FrameDef(UniqueFrameDef frame) {
             Hash         = frame.TextureHash;
-            SpriteSheetX = -1;
-            SpriteSheetY = -1;
+            SpritesheetX = -1;
+            SpritesheetY = -1;
         }
 
         public FrameDef(StandaloneFrameDef frame) {
             Hash         = frame.Hash;
-            SpriteSheetX = frame.SpriteSheetX;
-            SpriteSheetY = frame.SpriteSheetY;
+            SpritesheetX = frame.SpriteSheetX;
+            SpritesheetY = frame.SpriteSheetY;
         }
 
         /// <summary>
@@ -21,8 +23,10 @@ namespace SF3.Sprites {
         /// </summary>
         /// <param name="json">FrameDef in JSON format as a string.</param>
         /// <returns>A new FrameDef if deserializing was successful, or 'null' if not.</returns>
-        public static FrameDef FromJSON(string json)
-            => FromJToken(JToken.Parse(json));
+        public static FrameDef FromJSON(string json) {
+            var frameDef = new FrameDef();
+            return frameDef.AssignFromJSON_String(json) ? frameDef : null;
+        }
 
         /// <summary>
         /// Deserializes a JSON object of a FrameDef.
@@ -30,28 +34,50 @@ namespace SF3.Sprites {
         /// <param name="jToken">FrameDef as a JToken.</param>
         /// <returns>A new FrameDef if deserializing was successful, or 'null' if not.</returns>
         public static FrameDef FromJToken(JToken jToken) {
-            if (jToken == null || jToken.Type != JTokenType.Object)
-                return null;
+            var frameDef = new FrameDef();
+            return frameDef.AssignFromJToken(jToken) ? frameDef : null;
+        }
 
-            try {
-                var jObj = (JObject) jToken;
-                var newDef = new FrameDef();
+        public bool AssignFromJSON_String(string json)
+            => AssignFromJToken(JToken.Parse(json));
 
-                newDef.Hash         = jObj.TryGetValue("Hash",         out var hash)         ? ((string) hash)      : null;
-                newDef.SpriteSheetX = jObj.TryGetValue("SpriteSheetX", out var spritesheetX) ? ((int) spritesheetX) : -1;
-                newDef.SpriteSheetY = jObj.TryGetValue("SpriteSheetY", out var spritesheetY) ? ((int) spritesheetY) : -1;
+        public bool AssignFromJToken(JToken jToken) {
+            if (jToken == null)
+                return false;
 
-                return newDef;
+            switch (jToken.Type) {
+                case JTokenType.Object:
+                    try {
+                        var jObj = (JObject) jToken;
+                        Hash         = jObj.TryGetValue("Hash",         out var hash)         ? ((string) hash)      : null;
+                        SpritesheetX = jObj.TryGetValue("SpritesheetX", out var spritesheetX) ? ((int) spritesheetX) : -1;
+                        SpritesheetY = jObj.TryGetValue("SpritesheetY", out var spritesheetY) ? ((int) spritesheetY) : -1;
+                    }
+                    catch {
+                        return false;
+                    }
+                    return true;
+
+                default:
+                    return false;
             }
-            catch {
-                return null;
-            }
+        }
+
+        public string ToJSON_String()
+            => ToJToken().ToString(Formatting.Indented);
+
+        public JToken ToJToken() {
+            return new JObject() {
+                { "Hash", new JValue(Hash) },
+                { "SpritesheetX", new JValue(SpritesheetX) },
+                { "SpritesheetY", new JValue(SpritesheetY) },
+            };
         }
 
         public override string ToString() => Hash;
 
         public string Hash;
-        public int SpriteSheetX;
-        public int SpriteSheetY;
+        public int SpritesheetX;
+        public int SpritesheetY;
     }
 }

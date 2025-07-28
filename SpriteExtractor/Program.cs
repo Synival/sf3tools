@@ -356,12 +356,12 @@ namespace SpriteExtractor {
 
                     foreach (var spritesheetFrame in spritesheetFrames) {
                         if (framesByHash.TryGetValue(spritesheetFrame.Hash, out var from)) {
-                            spritesheetFrame.SpriteSheetX = from.SpriteSheetX;
-                            spritesheetFrame.SpriteSheetY = from.SpriteSheetY;
+                            spritesheetFrame.SpritesheetX = from.SpriteSheetX;
+                            spritesheetFrame.SpritesheetY = from.SpriteSheetY;
                         }
                         else {
-                            spritesheetFrame.SpriteSheetX = -1;
-                            spritesheetFrame.SpriteSheetY = -1;
+                            spritesheetFrame.SpritesheetX = -1;
+                            spritesheetFrame.SpritesheetY = -1;
                         }
                     }
 
