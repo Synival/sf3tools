@@ -21,8 +21,8 @@
           "Frames": {
             "SSE": {
               "Hash": "3e81efa87de4f44ef6d0b944962868d1",
-              "SpriteSheetX": 0,
-              "SpriteSheetY": 48
+              "SpriteSheetX": 72,
+              "SpriteSheetY": 0
             }
           }
         },
@@ -30,13 +30,13 @@
           "Frames": {
             "SSE": {
               "Hash": "86f8d5cee9abc67f4c138d0279814725",
-              "SpriteSheetX": 0,
-              "SpriteSheetY": 96
+              "SpriteSheetX": 144,
+              "SpriteSheetY": 0
             },
             "ESE": {
               "Hash": "6078890794d0b268c17c691fed314cee",
-              "SpriteSheetX": 72,
-              "SpriteSheetY": 96
+              "SpriteSheetX": 144,
+              "SpriteSheetY": 48
             },
             "ENE": {
               "Hash": "4c7f4d08093b1ce07d5d06515e1ca87d",
@@ -45,8 +45,8 @@
             },
             "NNE": {
               "Hash": "676282d3733d69c86d57639d27cc3474",
-              "SpriteSheetX": 216,
-              "SpriteSheetY": 96
+              "SpriteSheetX": 144,
+              "SpriteSheetY": 144
             }
           }
         },
@@ -54,18 +54,18 @@
           "Frames": {
             "SSE": {
               "Hash": "ecdc651167244ac7d71982397a7b2636",
-              "SpriteSheetX": 0,
-              "SpriteSheetY": 144
+              "SpriteSheetX": 216,
+              "SpriteSheetY": 0
             },
             "ESE": {
               "Hash": "54bbb09ed229defc19cebec703a93eef",
-              "SpriteSheetX": 72,
-              "SpriteSheetY": 144
+              "SpriteSheetX": 216,
+              "SpriteSheetY": 48
             },
             "ENE": {
               "Hash": "08ce962e6bf80692bec91325b741ec20",
-              "SpriteSheetX": 144,
-              "SpriteSheetY": 144
+              "SpriteSheetX": 216,
+              "SpriteSheetY": 96
             },
             "NNE": {
               "Hash": "d1546407e0143c348d14f155ff1b65e5",
@@ -78,23 +78,23 @@
           "Frames": {
             "SSE": {
               "Hash": "a1d354af13d287037bdd8274cb92518a",
-              "SpriteSheetX": 0,
-              "SpriteSheetY": 192
+              "SpriteSheetX": 288,
+              "SpriteSheetY": 0
             },
             "ESE": {
               "Hash": "7f94c74263c573c610230d42391d8dc6",
-              "SpriteSheetX": 72,
-              "SpriteSheetY": 192
+              "SpriteSheetX": 288,
+              "SpriteSheetY": 48
             },
             "ENE": {
               "Hash": "3e16b30b3c04459324598f1abd421fa9",
-              "SpriteSheetX": 144,
-              "SpriteSheetY": 192
+              "SpriteSheetX": 288,
+              "SpriteSheetY": 96
             },
             "NNE": {
               "Hash": "d7a2d68162a7f81c348f2b1606477a7a",
-              "SpriteSheetX": 216,
-              "SpriteSheetY": 192
+              "SpriteSheetX": 288,
+              "SpriteSheetY": 144
             }
           }
         },
@@ -102,23 +102,23 @@
           "Frames": {
             "SSE": {
               "Hash": "e40c4fcba7b12f31a1b4495f3814029c",
-              "SpriteSheetX": 0,
-              "SpriteSheetY": 240
+              "SpriteSheetX": 360,
+              "SpriteSheetY": 0
             },
             "ESE": {
               "Hash": "d64045821c74d517385dde9fe4b1c6bf",
-              "SpriteSheetX": 72,
-              "SpriteSheetY": 240
+              "SpriteSheetX": 360,
+              "SpriteSheetY": 48
             },
             "ENE": {
               "Hash": "0cad44bae2de2926f21315b0849b478f",
-              "SpriteSheetX": 144,
-              "SpriteSheetY": 240
+              "SpriteSheetX": 360,
+              "SpriteSheetY": 96
             },
             "NNE": {
               "Hash": "a84ea73f2f53fd699d6a6cf9b3f684bb",
-              "SpriteSheetX": 216,
-              "SpriteSheetY": 240
+              "SpriteSheetX": 360,
+              "SpriteSheetY": 144
             }
           }
         },
@@ -126,8 +126,8 @@
           "Frames": {
             "SSE": {
               "Hash": "28a199448b2cae1b8482f2c4e9da36f7",
-              "SpriteSheetX": 0,
-              "SpriteSheetY": 288
+              "SpriteSheetX": 432,
+              "SpriteSheetY": 0
             }
           }
         },
@@ -135,8 +135,8 @@
           "Frames": {
             "SSE": {
               "Hash": "1a223f777feffbc537590c93bfd35fa1",
-              "SpriteSheetX": 0,
-              "SpriteSheetY": 336
+              "SpriteSheetX": 504,
+              "SpriteSheetY": 0
             }
           }
         },
@@ -144,8 +144,8 @@
           "Frames": {
             "SSE": {
               "Hash": "647460c3181e313569e7f666515a5318",
-              "SpriteSheetX": 0,
-              "SpriteSheetY": 384
+              "SpriteSheetX": 576,
+              "SpriteSheetY": 0
             }
           }
         },
@@ -153,8 +153,8 @@
           "Frames": {
             "SSE": {
               "Hash": "c84bfbdab0524af56c1b1f307d947ef6",
-              "SpriteSheetX": 0,
-              "SpriteSheetY": 432
+              "SpriteSheetX": 648,
+              "SpriteSheetY": 0
             }
           }
         },
@@ -162,8 +162,8 @@
           "Frames": {
             "SSE": {
               "Hash": "17e49e9269b2f74802790bd10d24b150",
-              "SpriteSheetX": 0,
-              "SpriteSheetY": 480
+              "SpriteSheetX": 720,
+              "SpriteSheetY": 0
             }
           }
         },
@@ -171,8 +171,8 @@
           "Frames": {
             "SSE": {
               "Hash": "d60d0b48777b2e7a53525bb3111bbf03",
-              "SpriteSheetX": 0,
-              "SpriteSheetY": 528
+              "SpriteSheetX": 792,
+              "SpriteSheetY": 0
             }
           }
         },
@@ -180,8 +180,8 @@
           "Frames": {
             "SSE": {
               "Hash": "ab6ba24ec2f1fddd47de547ecfd0daf0",
-              "SpriteSheetX": 0,
-              "SpriteSheetY": 576
+              "SpriteSheetX": 864,
+              "SpriteSheetY": 0
             }
           }
         }

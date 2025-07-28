@@ -21,8 +21,8 @@
           "Frames": {
             "First": {
               "Hash": "00833c8b54f5aea9f075992cbca12dd7",
-              "SpriteSheetX": 0,
-              "SpriteSheetY": 64
+              "SpriteSheetX": 64,
+              "SpriteSheetY": 0
             }
           }
         },
@@ -30,8 +30,8 @@
           "Frames": {
             "First": {
               "Hash": "171397912030ceb69041e16717c73d04",
-              "SpriteSheetX": 0,
-              "SpriteSheetY": 128
+              "SpriteSheetX": 128,
+              "SpriteSheetY": 0
             }
           }
         },
@@ -39,8 +39,8 @@
           "Frames": {
             "First": {
               "Hash": "20ca0d72613d2710a8f951e83bb379eb",
-              "SpriteSheetX": 0,
-              "SpriteSheetY": 192
+              "SpriteSheetX": 192,
+              "SpriteSheetY": 0
             }
           }
         }

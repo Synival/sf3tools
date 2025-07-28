@@ -21,8 +21,8 @@
           "Frames": {
             "SSE": {
               "Hash": "41e72571638db33fe1e76d7162557bc4",
-              "SpriteSheetX": 0,
-              "SpriteSheetY": 56
+              "SpriteSheetX": 48,
+              "SpriteSheetY": 0
             }
           }
         },
@@ -30,8 +30,8 @@
           "Frames": {
             "SSE": {
               "Hash": "af26be64b8863dbfe5d3b8de2ec7906d",
-              "SpriteSheetX": 0,
-              "SpriteSheetY": 112
+              "SpriteSheetX": 96,
+              "SpriteSheetY": 0
             }
           }
         },
@@ -39,8 +39,8 @@
           "Frames": {
             "SSE": {
               "Hash": "0028913d6fa7d66971ce98c6786d1d06",
-              "SpriteSheetX": 0,
-              "SpriteSheetY": 168
+              "SpriteSheetX": 144,
+              "SpriteSheetY": 0
             }
           }
         },
@@ -48,8 +48,8 @@
           "Frames": {
             "SSE": {
               "Hash": "43d6cca75ca6a92f2e54d4580149881d",
-              "SpriteSheetX": 0,
-              "SpriteSheetY": 224
+              "SpriteSheetX": 192,
+              "SpriteSheetY": 0
             }
           }
         },
@@ -57,8 +57,8 @@
           "Frames": {
             "SSE": {
               "Hash": "b3ca5bfb2bfc21278422a6d8ed5dade0",
-              "SpriteSheetX": 0,
-              "SpriteSheetY": 280
+              "SpriteSheetX": 240,
+              "SpriteSheetY": 0
             }
           }
         }

@@ -21,8 +21,8 @@
           "Frames": {
             "NNE": {
               "Hash": "3997198eccb56260d00162dd1b43c621",
-              "SpriteSheetX": 0,
-              "SpriteSheetY": 64
+              "SpriteSheetX": 64,
+              "SpriteSheetY": 0
             }
           }
         },
@@ -30,8 +30,8 @@
           "Frames": {
             "NNE": {
               "Hash": "26793ddb55fa238825c09b1b4b958809",
-              "SpriteSheetX": 0,
-              "SpriteSheetY": 128
+              "SpriteSheetX": 128,
+              "SpriteSheetY": 0
             }
           }
         }

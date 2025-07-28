@@ -10,7 +10,7 @@
       "FrameGroups": {
         "Idle 1": {
           "Frames": {
-            "S": {
+            "First": {
               "Hash": "7518dfa9d370eeda9eab3214edc332e2",
               "SpriteSheetX": 0,
               "SpriteSheetY": 0
@@ -19,55 +19,55 @@
         },
         "Idle 2": {
           "Frames": {
-            "S": {
+            "First": {
               "Hash": "1145cb90d792cdac38b5ee1a0b45d8ac",
-              "SpriteSheetX": 0,
-              "SpriteSheetY": 128
+              "SpriteSheetX": 128,
+              "SpriteSheetY": 0
             }
           }
         },
         "Shushing 1": {
           "Frames": {
-            "S": {
+            "First": {
               "Hash": "e698d373477b10fae8220a7a88cfc04f",
-              "SpriteSheetX": 0,
-              "SpriteSheetY": 256
+              "SpriteSheetX": 256,
+              "SpriteSheetY": 0
             }
           }
         },
         "Shushing 2": {
           "Frames": {
-            "S": {
+            "First": {
               "Hash": "6feda109f65a38e197a790c7f1a1a2ca",
-              "SpriteSheetX": 0,
-              "SpriteSheetY": 384
+              "SpriteSheetX": 384,
+              "SpriteSheetY": 0
             }
           }
         },
         "Shushing 3": {
           "Frames": {
-            "S": {
+            "First": {
               "Hash": "1d2088a2f48151ef3e254f07500243c4",
-              "SpriteSheetX": 0,
-              "SpriteSheetY": 512
+              "SpriteSheetX": 512,
+              "SpriteSheetY": 0
             }
           }
         },
         "StartOrStopShushing 1": {
           "Frames": {
-            "S": {
+            "First": {
               "Hash": "30b6fd0738438affe085b2bc255818e5",
-              "SpriteSheetX": 0,
-              "SpriteSheetY": 640
+              "SpriteSheetX": 640,
+              "SpriteSheetY": 0
             }
           }
         },
         "StartOrStopShushing 2": {
           "Frames": {
-            "S": {
+            "First": {
               "Hash": "f25e400b93bf23217667d46c761df327",
-              "SpriteSheetX": 0,
-              "SpriteSheetY": 768
+              "SpriteSheetX": 768,
+              "SpriteSheetY": 0
             }
           }
         }
@@ -78,22 +78,12 @@
             "Idle": {
               "AnimationFrames": [
                 {
-                  "Frames": {
-                    "First": {
-                      "Frame": "Idle 1",
-                      "Direction": "S"
-                    }
-                  },
+                  "FrameGroup": "Idle 1",
                   "Command": "Frame",
                   "Parameter": 3
                 },
                 {
-                  "Frames": {
-                    "First": {
-                      "Frame": "Idle 2",
-                      "Direction": "S"
-                    }
-                  },
+                  "FrameGroup": "Idle 2",
                   "Command": "Frame",
                   "Parameter": 3
                 },
@@ -106,42 +96,22 @@
             "Shushing": {
               "AnimationFrames": [
                 {
-                  "Frames": {
-                    "First": {
-                      "Frame": "Shushing 1",
-                      "Direction": "S"
-                    }
-                  },
+                  "FrameGroup": "Shushing 1",
                   "Command": "Frame",
                   "Parameter": 7
                 },
                 {
-                  "Frames": {
-                    "First": {
-                      "Frame": "Shushing 2",
-                      "Direction": "S"
-                    }
-                  },
+                  "FrameGroup": "Shushing 2",
                   "Command": "Frame",
                   "Parameter": 7
                 },
                 {
-                  "Frames": {
-                    "First": {
-                      "Frame": "Shushing 3",
-                      "Direction": "S"
-                    }
-                  },
+                  "FrameGroup": "Shushing 3",
                   "Command": "Frame",
                   "Parameter": 7
                 },
                 {
-                  "Frames": {
-                    "First": {
-                      "Frame": "Shushing 2",
-                      "Direction": "S"
-                    }
-                  },
+                  "FrameGroup": "Shushing 2",
                   "Command": "Frame",
                   "Parameter": 7
                 },
@@ -154,22 +124,12 @@
             "ShushingBackToIdle": {
               "AnimationFrames": [
                 {
-                  "Frames": {
-                    "First": {
-                      "Frame": "StartOrStopShushing 1",
-                      "Direction": "S"
-                    }
-                  },
+                  "FrameGroup": "StartOrStopShushing 1",
                   "Command": "Frame",
                   "Parameter": 3
                 },
                 {
-                  "Frames": {
-                    "First": {
-                      "Frame": "StartOrStopShushing 2",
-                      "Direction": "S"
-                    }
-                  },
+                  "FrameGroup": "StartOrStopShushing 2",
                   "Command": "Frame",
                   "Parameter": 3
                 },
@@ -182,12 +142,7 @@
             "StillFrame (Idle)": {
               "AnimationFrames": [
                 {
-                  "Frames": {
-                    "First": {
-                      "Frame": "Idle 1",
-                      "Direction": "S"
-                    }
-                  },
+                  "FrameGroup": "Idle 1",
                   "Command": "Frame",
                   "Parameter": 10
                 },

@@ -21,8 +21,8 @@
           "Frames": {
             "First": {
               "Hash": "563c6d959b159de1d990bb4dd4fcf44a",
-              "SpriteSheetX": 0,
-              "SpriteSheetY": 24
+              "SpriteSheetX": 24,
+              "SpriteSheetY": 0
             }
           }
         },
@@ -30,8 +30,8 @@
           "Frames": {
             "First": {
               "Hash": "160ca21284162529eaf2b4f6197ecaee",
-              "SpriteSheetX": 0,
-              "SpriteSheetY": 48
+              "SpriteSheetX": 48,
+              "SpriteSheetY": 0
             }
           }
         },
@@ -39,8 +39,8 @@
           "Frames": {
             "First": {
               "Hash": "9d60a2688bd1e6cd96f6367295c0180d",
-              "SpriteSheetX": 0,
-              "SpriteSheetY": 72
+              "SpriteSheetX": 72,
+              "SpriteSheetY": 0
             }
           }
         },
@@ -48,8 +48,8 @@
           "Frames": {
             "First": {
               "Hash": "ec5b4e1172a40cbb3b31ce7272995128",
-              "SpriteSheetX": 0,
-              "SpriteSheetY": 96
+              "SpriteSheetX": 96,
+              "SpriteSheetY": 0
             }
           }
         },
@@ -57,8 +57,8 @@
           "Frames": {
             "First": {
               "Hash": "9d5314f4bcafd3dfce14a74631a72e50",
-              "SpriteSheetX": 0,
-              "SpriteSheetY": 120
+              "SpriteSheetX": 120,
+              "SpriteSheetY": 0
             }
           }
         },
@@ -66,8 +66,8 @@
           "Frames": {
             "First": {
               "Hash": "1a9c4b792a136e01990549b91a5c691e",
-              "SpriteSheetX": 0,
-              "SpriteSheetY": 144
+              "SpriteSheetX": 144,
+              "SpriteSheetY": 0
             }
           }
         },
@@ -75,8 +75,8 @@
           "Frames": {
             "First": {
               "Hash": "93a1ca69541ffa928898bac4ec25c728",
-              "SpriteSheetX": 0,
-              "SpriteSheetY": 168
+              "SpriteSheetX": 168,
+              "SpriteSheetY": 0
             }
           }
         },
@@ -84,8 +84,8 @@
           "Frames": {
             "First": {
               "Hash": "b8d67ef2e2a3895dab921b474dbdd29e",
-              "SpriteSheetX": 0,
-              "SpriteSheetY": 192
+              "SpriteSheetX": 192,
+              "SpriteSheetY": 0
             }
           }
         }

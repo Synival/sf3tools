@@ -21,8 +21,8 @@
           "Frames": {
             "First": {
               "Hash": "a2dd2e742467d56762a51b7e4aa0b019",
-              "SpriteSheetX": 0,
-              "SpriteSheetY": 16
+              "SpriteSheetX": 16,
+              "SpriteSheetY": 0
             }
           }
         }

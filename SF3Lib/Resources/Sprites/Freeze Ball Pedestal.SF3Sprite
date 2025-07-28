@@ -21,8 +21,8 @@
           "Frames": {
             "First": {
               "Hash": "bc2c82635f95d2c9eca6f46f4f7ad257",
-              "SpriteSheetX": 0,
-              "SpriteSheetY": 64
+              "SpriteSheetX": 48,
+              "SpriteSheetY": 0
             }
           }
         },
@@ -30,8 +30,8 @@
           "Frames": {
             "First": {
               "Hash": "70f1556fa8fce78043f885410dbd0a60",
-              "SpriteSheetX": 0,
-              "SpriteSheetY": 128
+              "SpriteSheetX": 96,
+              "SpriteSheetY": 0
             }
           }
         },
@@ -39,8 +39,8 @@
           "Frames": {
             "First": {
               "Hash": "fa2c7cde3ec73a8288a0ffaa2be8dd75",
-              "SpriteSheetX": 0,
-              "SpriteSheetY": 192
+              "SpriteSheetX": 144,
+              "SpriteSheetY": 0
             }
           }
         },
@@ -48,8 +48,8 @@
           "Frames": {
             "First": {
               "Hash": "9507600b69c62ac6ad04bce7e435b84c",
-              "SpriteSheetX": 0,
-              "SpriteSheetY": 256
+              "SpriteSheetX": 192,
+              "SpriteSheetY": 0
             }
           }
         }

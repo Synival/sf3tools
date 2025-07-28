@@ -17,18 +17,18 @@
             },
             "ESE": {
               "Hash": "a2ea2fbbb9e7da3e3324e2490ff191ff",
-              "SpriteSheetX": 40,
-              "SpriteSheetY": 0
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 40
             },
             "ENE": {
               "Hash": "72d193274bb2d1139f774dd9390799b8",
-              "SpriteSheetX": 80,
-              "SpriteSheetY": 0
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 80
             },
             "NNE": {
               "Hash": "27cb50daf6030fd5d2db8e4e10dd5d5c",
-              "SpriteSheetX": 120,
-              "SpriteSheetY": 0
+              "SpriteSheetX": 0,
+              "SpriteSheetY": 120
             }
           }
         }

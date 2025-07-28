@@ -10,7 +10,7 @@
       "FrameGroups": {
         "Giggle 1": {
           "Frames": {
-            "S": {
+            "First": {
               "Hash": "60fe44dfc4cbdd780a3c6bf91ee3d282",
               "SpriteSheetX": 0,
               "SpriteSheetY": 0
@@ -19,298 +19,298 @@
         },
         "Giggle 2": {
           "Frames": {
-            "S": {
+            "First": {
               "Hash": "2dab9eeb3c9225eb3fe5ffcddec1dde5",
-              "SpriteSheetX": 0,
-              "SpriteSheetY": 64
+              "SpriteSheetX": 64,
+              "SpriteSheetY": 0
             }
           }
         },
         "Giggle 3": {
           "Frames": {
-            "S": {
+            "First": {
               "Hash": "c0fb7e8a7cec951630e74afce54f144b",
-              "SpriteSheetX": 0,
-              "SpriteSheetY": 128
+              "SpriteSheetX": 128,
+              "SpriteSheetY": 0
             }
           }
         },
         "Giggle 4": {
           "Frames": {
-            "S": {
+            "First": {
               "Hash": "05fbb151ff57598011afd1b7f0d01b18",
-              "SpriteSheetX": 0,
-              "SpriteSheetY": 192
+              "SpriteSheetX": 192,
+              "SpriteSheetY": 0
             }
           }
         },
         "Idle 1": {
           "Frames": {
-            "S": {
+            "First": {
               "Hash": "27f7c54fe2efd1e106bf9844eec6b5a3",
-              "SpriteSheetX": 0,
-              "SpriteSheetY": 256
+              "SpriteSheetX": 256,
+              "SpriteSheetY": 0
             }
           }
         },
         "Idle 2": {
           "Frames": {
-            "S": {
+            "First": {
               "Hash": "3c3b08912f9935e4dc74c9eb302d6378",
-              "SpriteSheetX": 0,
-              "SpriteSheetY": 320
+              "SpriteSheetX": 320,
+              "SpriteSheetY": 0
             }
           }
         },
         "Idle 3": {
           "Frames": {
-            "S": {
+            "First": {
               "Hash": "49a51b35a3c8d18b4c64fcf804697a0a",
-              "SpriteSheetX": 0,
-              "SpriteSheetY": 384
+              "SpriteSheetX": 384,
+              "SpriteSheetY": 0
             }
           }
         },
         "SlapIshahakat 1": {
           "Frames": {
-            "SSE": {
+            "First": {
               "Hash": "e1952ad4c332a0d55405c6c09158d34b",
-              "SpriteSheetX": 64,
-              "SpriteSheetY": 448
+              "SpriteSheetX": 448,
+              "SpriteSheetY": 0
             }
           }
         },
         "SlapIshahakat 10": {
           "Frames": {
-            "E": {
+            "First": {
               "Hash": "eb03f2dbbafae2661da708548873624d",
-              "SpriteSheetX": 256,
-              "SpriteSheetY": 512
+              "SpriteSheetX": 512,
+              "SpriteSheetY": 0
             }
           }
         },
         "SlapIshahakat 2": {
           "Frames": {
-            "ESE": {
+            "First": {
               "Hash": "95ee160be0f5c9eb61c2a8a272152172",
-              "SpriteSheetX": 192,
-              "SpriteSheetY": 576
+              "SpriteSheetX": 576,
+              "SpriteSheetY": 0
             }
           }
         },
         "SlapIshahakat 3": {
           "Frames": {
-            "E": {
+            "First": {
               "Hash": "852f1b96c64a3448633a54690339b6f3",
-              "SpriteSheetX": 256,
-              "SpriteSheetY": 640
+              "SpriteSheetX": 640,
+              "SpriteSheetY": 0
             }
           }
         },
         "SlapIshahakat 4": {
           "Frames": {
-            "E": {
+            "First": {
               "Hash": "e1deb5f0d2fd31c51ebe51816c1ea84c",
-              "SpriteSheetX": 256,
-              "SpriteSheetY": 704
+              "SpriteSheetX": 704,
+              "SpriteSheetY": 0
             }
           }
         },
         "SlapIshahakat 5": {
           "Frames": {
-            "E": {
+            "First": {
               "Hash": "7cb8ec6f664926a62ec89d5cf35810dc",
-              "SpriteSheetX": 256,
-              "SpriteSheetY": 768
+              "SpriteSheetX": 768,
+              "SpriteSheetY": 0
             }
           }
         },
         "SlapIshahakat 6": {
           "Frames": {
-            "E": {
+            "First": {
               "Hash": "ff622bd8f48d6d888c208be9e87dba60",
-              "SpriteSheetX": 256,
-              "SpriteSheetY": 832
+              "SpriteSheetX": 832,
+              "SpriteSheetY": 0
             }
           }
         },
         "SlapIshahakat 7": {
           "Frames": {
-            "E": {
+            "First": {
               "Hash": "223d27bd279be621926d07e68388a50e",
-              "SpriteSheetX": 256,
-              "SpriteSheetY": 896
+              "SpriteSheetX": 896,
+              "SpriteSheetY": 0
             }
           }
         },
         "SlapIshahakat 8": {
           "Frames": {
-            "E": {
+            "First": {
               "Hash": "c48aa3b41a9a03346ffcfbee87a47495",
-              "SpriteSheetX": 256,
-              "SpriteSheetY": 960
+              "SpriteSheetX": 960,
+              "SpriteSheetY": 0
             }
           }
         },
         "SlapIshahakat 9": {
           "Frames": {
-            "E": {
+            "First": {
               "Hash": "57a1c66fba10812e3e70210372d47a88",
-              "SpriteSheetX": 256,
-              "SpriteSheetY": 1024
+              "SpriteSheetX": 1024,
+              "SpriteSheetY": 0
             }
           }
         },
         "SpinUpToDown 1": {
           "Frames": {
-            "N": {
+            "First": {
               "Hash": "6297f645228024fcf1e28b375911798f",
-              "SpriteSheetX": 512,
-              "SpriteSheetY": 1088
+              "SpriteSheetX": 1088,
+              "SpriteSheetY": 0
             }
           }
         },
         "SpinUpToDown 2": {
           "Frames": {
-            "NNE": {
+            "First": {
               "Hash": "1b5f14fe0be7de628ea1c91b177c9fe0",
-              "SpriteSheetX": 448,
-              "SpriteSheetY": 1152
+              "SpriteSheetX": 1152,
+              "SpriteSheetY": 0
             }
           }
         },
         "SpinUpToDown 3": {
           "Frames": {
-            "NE": {
+            "First": {
               "Hash": "362f30188f98af8d8e3cfe67f5ed672a",
-              "SpriteSheetX": 384,
-              "SpriteSheetY": 1216
+              "SpriteSheetX": 1216,
+              "SpriteSheetY": 0
             }
           }
         },
         "SpinUpToDown 4": {
           "Frames": {
-            "ENE": {
+            "First": {
               "Hash": "b1db04810ffde9fd36a4263cb93cbd27",
-              "SpriteSheetX": 320,
-              "SpriteSheetY": 1280
+              "SpriteSheetX": 1280,
+              "SpriteSheetY": 0
             }
           }
         },
         "SpinUpToDown 5": {
           "Frames": {
-            "E": {
+            "First": {
               "Hash": "f1d219f9227c8346295f72bfcfd18c3c",
-              "SpriteSheetX": 256,
-              "SpriteSheetY": 1344
+              "SpriteSheetX": 1344,
+              "SpriteSheetY": 0
             }
           }
         },
         "SpinUpToDown 6": {
           "Frames": {
-            "ESE": {
+            "First": {
               "Hash": "8a96c60f8ba4e096ee9fe9dc9e8cc948",
-              "SpriteSheetX": 192,
-              "SpriteSheetY": 1408
+              "SpriteSheetX": 1408,
+              "SpriteSheetY": 0
             }
           }
         },
         "SpinUpToDown 7": {
           "Frames": {
-            "SE": {
+            "First": {
               "Hash": "ee55785d3b9a60346d24b91fb341728a",
-              "SpriteSheetX": 128,
-              "SpriteSheetY": 1472
+              "SpriteSheetX": 1472,
+              "SpriteSheetY": 0
             }
           }
         },
         "SpinUpToDown 8": {
           "Frames": {
-            "SSE": {
+            "First": {
               "Hash": "7e967473d20eeea48a02ef97b14e4849",
-              "SpriteSheetX": 64,
-              "SpriteSheetY": 1536
+              "SpriteSheetX": 1536,
+              "SpriteSheetY": 0
             }
           }
         },
         "SpinUpToDown 9": {
           "Frames": {
-            "S": {
+            "First": {
               "Hash": "dde2d832681e006b0a5cb497d227e93a",
-              "SpriteSheetX": 0,
-              "SpriteSheetY": 1600
+              "SpriteSheetX": 1600,
+              "SpriteSheetY": 0
             }
           }
         },
         "StillFrame (Old 1)": {
           "Frames": {
-            "S": {
+            "First": {
               "Hash": "931679d11cb24abb1891e91e9ba7adaa",
-              "SpriteSheetX": 0,
-              "SpriteSheetY": 1664
+              "SpriteSheetX": 1664,
+              "SpriteSheetY": 0
             }
           }
         },
         "StillFrame (Old 2)": {
           "Frames": {
-            "S": {
+            "First": {
               "Hash": "cb6885b1d260f6f354223ad6349d9eb9",
-              "SpriteSheetX": 0,
-              "SpriteSheetY": 1728
+              "SpriteSheetX": 1728,
+              "SpriteSheetY": 0
             }
           }
         },
         "StillFrame (Old 3, Black Outline)": {
           "Frames": {
-            "S": {
+            "First": {
               "Hash": "c84b1402c91b233df87c0fec1eca1da7",
-              "SpriteSheetX": 0,
-              "SpriteSheetY": 1792
+              "SpriteSheetX": 1792,
+              "SpriteSheetY": 0
             }
           }
         },
         "Yawning 1": {
           "Frames": {
-            "S": {
+            "First": {
               "Hash": "bb1933052044563e5f137dd50f7966df",
-              "SpriteSheetX": 0,
-              "SpriteSheetY": 1856
+              "SpriteSheetX": 1856,
+              "SpriteSheetY": 0
             }
           }
         },
         "Yawning 2": {
           "Frames": {
-            "S": {
+            "First": {
               "Hash": "fc39e9f22c09f235a584b5232ad191b2",
-              "SpriteSheetX": 0,
-              "SpriteSheetY": 1920
+              "SpriteSheetX": 1920,
+              "SpriteSheetY": 0
             }
           }
         },
         "Yawning 3": {
           "Frames": {
-            "S": {
+            "First": {
               "Hash": "458849b5bf07563b6e858986e62bc355",
-              "SpriteSheetX": 0,
-              "SpriteSheetY": 1984
+              "SpriteSheetX": 1984,
+              "SpriteSheetY": 0
             }
           }
         },
         "Yawning 4": {
           "Frames": {
-            "S": {
+            "First": {
               "Hash": "8da8caaf7d045bb232c46c99ac9e37a4",
-              "SpriteSheetX": 0,
-              "SpriteSheetY": 2048
+              "SpriteSheetX": 2048,
+              "SpriteSheetY": 0
             }
           }
         },
         "Yawning 5": {
           "Frames": {
-            "S": {
+            "First": {
               "Hash": "7158f7773f40daa1ebd5a0b126230d9a",
-              "SpriteSheetX": 0,
-              "SpriteSheetY": 2112
+              "SpriteSheetX": 2112,
+              "SpriteSheetY": 0
             }
           }
         }
@@ -321,112 +321,57 @@
             "Giggle": {
               "AnimationFrames": [
                 {
-                  "Frames": {
-                    "First": {
-                      "Frame": "Giggle 1",
-                      "Direction": "S"
-                    }
-                  },
+                  "FrameGroup": "Giggle 1",
                   "Command": "Frame",
                   "Parameter": 2
                 },
                 {
-                  "Frames": {
-                    "First": {
-                      "Frame": "Giggle 2",
-                      "Direction": "S"
-                    }
-                  },
+                  "FrameGroup": "Giggle 2",
                   "Command": "Frame",
                   "Parameter": 2
                 },
                 {
-                  "Frames": {
-                    "First": {
-                      "Frame": "Giggle 3",
-                      "Direction": "S"
-                    }
-                  },
+                  "FrameGroup": "Giggle 3",
                   "Command": "Frame",
                   "Parameter": 2
                 },
                 {
-                  "Frames": {
-                    "First": {
-                      "Frame": "Giggle 4",
-                      "Direction": "S"
-                    }
-                  },
+                  "FrameGroup": "Giggle 4",
                   "Command": "Frame",
                   "Parameter": 2
                 },
                 {
-                  "Frames": {
-                    "First": {
-                      "Frame": "Giggle 3",
-                      "Direction": "S"
-                    }
-                  },
+                  "FrameGroup": "Giggle 3",
                   "Command": "Frame",
                   "Parameter": 2
                 },
                 {
-                  "Frames": {
-                    "First": {
-                      "Frame": "Giggle 4",
-                      "Direction": "S"
-                    }
-                  },
+                  "FrameGroup": "Giggle 4",
                   "Command": "Frame",
                   "Parameter": 2
                 },
                 {
-                  "Frames": {
-                    "First": {
-                      "Frame": "Giggle 3",
-                      "Direction": "S"
-                    }
-                  },
+                  "FrameGroup": "Giggle 3",
                   "Command": "Frame",
                   "Parameter": 2
                 },
                 {
-                  "Frames": {
-                    "First": {
-                      "Frame": "Giggle 4",
-                      "Direction": "S"
-                    }
-                  },
+                  "FrameGroup": "Giggle 4",
                   "Command": "Frame",
                   "Parameter": 2
                 },
                 {
-                  "Frames": {
-                    "First": {
-                      "Frame": "Giggle 3",
-                      "Direction": "S"
-                    }
-                  },
+                  "FrameGroup": "Giggle 3",
                   "Command": "Frame",
                   "Parameter": 2
                 },
                 {
-                  "Frames": {
-                    "First": {
-                      "Frame": "Giggle 2",
-                      "Direction": "S"
-                    }
-                  },
+                  "FrameGroup": "Giggle 2",
                   "Command": "Frame",
                   "Parameter": 2
                 },
                 {
-                  "Frames": {
-                    "First": {
-                      "Frame": "Giggle 1",
-                      "Direction": "S"
-                    }
-                  },
+                  "FrameGroup": "Giggle 1",
                   "Command": "Frame",
                   "Parameter": 2
                 },
@@ -439,42 +384,22 @@
             "Idle": {
               "AnimationFrames": [
                 {
-                  "Frames": {
-                    "First": {
-                      "Frame": "Idle 1",
-                      "Direction": "S"
-                    }
-                  },
+                  "FrameGroup": "Idle 1",
                   "Command": "Frame",
                   "Parameter": 7
                 },
                 {
-                  "Frames": {
-                    "First": {
-                      "Frame": "Idle 2",
-                      "Direction": "S"
-                    }
-                  },
+                  "FrameGroup": "Idle 2",
                   "Command": "Frame",
                   "Parameter": 7
                 },
                 {
-                  "Frames": {
-                    "First": {
-                      "Frame": "Idle 3",
-                      "Direction": "S"
-                    }
-                  },
+                  "FrameGroup": "Idle 3",
                   "Command": "Frame",
                   "Parameter": 7
                 },
                 {
-                  "Frames": {
-                    "First": {
-                      "Frame": "Idle 2",
-                      "Direction": "S"
-                    }
-                  },
+                  "FrameGroup": "Idle 2",
                   "Command": "Frame",
                   "Parameter": 7
                 },
@@ -487,192 +412,97 @@
             "SlapIshahakat (Long, Change to 1)": {
               "AnimationFrames": [
                 {
-                  "Frames": {
-                    "First": {
-                      "Frame": "SlapIshahakat 1",
-                      "Direction": "SSE"
-                    }
-                  },
+                  "FrameGroup": "SlapIshahakat 1",
                   "Command": "Frame",
                   "Parameter": 2
                 },
                 {
-                  "Frames": {
-                    "First": {
-                      "Frame": "SlapIshahakat 2",
-                      "Direction": "ESE"
-                    }
-                  },
+                  "FrameGroup": "SlapIshahakat 2",
                   "Command": "Frame",
                   "Parameter": 2
                 },
                 {
-                  "Frames": {
-                    "First": {
-                      "Frame": "SlapIshahakat 3",
-                      "Direction": "E"
-                    }
-                  },
+                  "FrameGroup": "SlapIshahakat 3",
                   "Command": "Frame",
                   "Parameter": 2
                 },
                 {
-                  "Frames": {
-                    "First": {
-                      "Frame": "SlapIshahakat 4",
-                      "Direction": "E"
-                    }
-                  },
+                  "FrameGroup": "SlapIshahakat 4",
                   "Command": "Frame",
                   "Parameter": 2
                 },
                 {
-                  "Frames": {
-                    "First": {
-                      "Frame": "SlapIshahakat 5",
-                      "Direction": "E"
-                    }
-                  },
+                  "FrameGroup": "SlapIshahakat 5",
                   "Command": "Frame",
                   "Parameter": 2
                 },
                 {
-                  "Frames": {
-                    "First": {
-                      "Frame": "SlapIshahakat 6",
-                      "Direction": "E"
-                    }
-                  },
+                  "FrameGroup": "SlapIshahakat 6",
                   "Command": "Frame",
                   "Parameter": 2
                 },
                 {
-                  "Frames": {
-                    "First": {
-                      "Frame": "SlapIshahakat 7",
-                      "Direction": "E"
-                    }
-                  },
+                  "FrameGroup": "SlapIshahakat 7",
                   "Command": "Frame",
                   "Parameter": 2
                 },
                 {
-                  "Frames": {
-                    "First": {
-                      "Frame": "SlapIshahakat 6",
-                      "Direction": "E"
-                    }
-                  },
+                  "FrameGroup": "SlapIshahakat 6",
                   "Command": "Frame",
                   "Parameter": 2
                 },
                 {
-                  "Frames": {
-                    "First": {
-                      "Frame": "SlapIshahakat 7",
-                      "Direction": "E"
-                    }
-                  },
+                  "FrameGroup": "SlapIshahakat 7",
                   "Command": "Frame",
                   "Parameter": 2
                 },
                 {
-                  "Frames": {
-                    "First": {
-                      "Frame": "SlapIshahakat 6",
-                      "Direction": "E"
-                    }
-                  },
+                  "FrameGroup": "SlapIshahakat 6",
                   "Command": "Frame",
                   "Parameter": 2
                 },
                 {
-                  "Frames": {
-                    "First": {
-                      "Frame": "SlapIshahakat 5",
-                      "Direction": "E"
-                    }
-                  },
+                  "FrameGroup": "SlapIshahakat 5",
                   "Command": "Frame",
                   "Parameter": 2
                 },
                 {
-                  "Frames": {
-                    "First": {
-                      "Frame": "SlapIshahakat 4",
-                      "Direction": "E"
-                    }
-                  },
+                  "FrameGroup": "SlapIshahakat 4",
                   "Command": "Frame",
                   "Parameter": 2
                 },
                 {
-                  "Frames": {
-                    "First": {
-                      "Frame": "SlapIshahakat 8",
-                      "Direction": "E"
-                    }
-                  },
+                  "FrameGroup": "SlapIshahakat 8",
                   "Command": "Frame",
                   "Parameter": 3
                 },
                 {
-                  "Frames": {
-                    "First": {
-                      "Frame": "SlapIshahakat 9",
-                      "Direction": "E"
-                    }
-                  },
+                  "FrameGroup": "SlapIshahakat 9",
                   "Command": "Frame",
                   "Parameter": 15
                 },
                 {
-                  "Frames": {
-                    "First": {
-                      "Frame": "SlapIshahakat 10",
-                      "Direction": "E"
-                    }
-                  },
+                  "FrameGroup": "SlapIshahakat 10",
                   "Command": "Frame",
                   "Parameter": 20
                 },
                 {
-                  "Frames": {
-                    "First": {
-                      "Frame": "SlapIshahakat 4",
-                      "Direction": "E"
-                    }
-                  },
+                  "FrameGroup": "SlapIshahakat 4",
                   "Command": "Frame",
                   "Parameter": 5
                 },
                 {
-                  "Frames": {
-                    "First": {
-                      "Frame": "SlapIshahakat 3",
-                      "Direction": "E"
-                    }
-                  },
+                  "FrameGroup": "SlapIshahakat 3",
                   "Command": "Frame",
                   "Parameter": 2
                 },
                 {
-                  "Frames": {
-                    "First": {
-                      "Frame": "SlapIshahakat 2",
-                      "Direction": "ESE"
-                    }
-                  },
+                  "FrameGroup": "SlapIshahakat 2",
                   "Command": "Frame",
                   "Parameter": 2
                 },
                 {
-                  "Frames": {
-                    "First": {
-                      "Frame": "SlapIshahakat 1",
-                      "Direction": "SSE"
-                    }
-                  },
+                  "FrameGroup": "SlapIshahakat 1",
                   "Command": "Frame",
                   "Parameter": 2
                 },
@@ -685,122 +515,62 @@
             "SlapIshahakat (Stop)": {
               "AnimationFrames": [
                 {
-                  "Frames": {
-                    "First": {
-                      "Frame": "SlapIshahakat 1",
-                      "Direction": "SSE"
-                    }
-                  },
+                  "FrameGroup": "SlapIshahakat 1",
                   "Command": "Frame",
                   "Parameter": 2
                 },
                 {
-                  "Frames": {
-                    "First": {
-                      "Frame": "SlapIshahakat 2",
-                      "Direction": "ESE"
-                    }
-                  },
+                  "FrameGroup": "SlapIshahakat 2",
                   "Command": "Frame",
                   "Parameter": 2
                 },
                 {
-                  "Frames": {
-                    "First": {
-                      "Frame": "SlapIshahakat 3",
-                      "Direction": "E"
-                    }
-                  },
+                  "FrameGroup": "SlapIshahakat 3",
                   "Command": "Frame",
                   "Parameter": 2
                 },
                 {
-                  "Frames": {
-                    "First": {
-                      "Frame": "SlapIshahakat 4",
-                      "Direction": "E"
-                    }
-                  },
+                  "FrameGroup": "SlapIshahakat 4",
                   "Command": "Frame",
                   "Parameter": 2
                 },
                 {
-                  "Frames": {
-                    "First": {
-                      "Frame": "SlapIshahakat 5",
-                      "Direction": "E"
-                    }
-                  },
+                  "FrameGroup": "SlapIshahakat 5",
                   "Command": "Frame",
                   "Parameter": 2
                 },
                 {
-                  "Frames": {
-                    "First": {
-                      "Frame": "SlapIshahakat 6",
-                      "Direction": "E"
-                    }
-                  },
+                  "FrameGroup": "SlapIshahakat 6",
                   "Command": "Frame",
                   "Parameter": 2
                 },
                 {
-                  "Frames": {
-                    "First": {
-                      "Frame": "SlapIshahakat 7",
-                      "Direction": "E"
-                    }
-                  },
+                  "FrameGroup": "SlapIshahakat 7",
                   "Command": "Frame",
                   "Parameter": 2
                 },
                 {
-                  "Frames": {
-                    "First": {
-                      "Frame": "SlapIshahakat 6",
-                      "Direction": "E"
-                    }
-                  },
+                  "FrameGroup": "SlapIshahakat 6",
                   "Command": "Frame",
                   "Parameter": 2
                 },
                 {
-                  "Frames": {
-                    "First": {
-                      "Frame": "SlapIshahakat 7",
-                      "Direction": "E"
-                    }
-                  },
+                  "FrameGroup": "SlapIshahakat 7",
                   "Command": "Frame",
                   "Parameter": 2
                 },
                 {
-                  "Frames": {
-                    "First": {
-                      "Frame": "SlapIshahakat 6",
-                      "Direction": "E"
-                    }
-                  },
+                  "FrameGroup": "SlapIshahakat 6",
                   "Command": "Frame",
                   "Parameter": 2
                 },
                 {
-                  "Frames": {
-                    "First": {
-                      "Frame": "SlapIshahakat 5",
-                      "Direction": "E"
-                    }
-                  },
+                  "FrameGroup": "SlapIshahakat 5",
                   "Command": "Frame",
                   "Parameter": 2
                 },
                 {
-                  "Frames": {
-                    "First": {
-                      "Frame": "SlapIshahakat 4",
-                      "Direction": "E"
-                    }
-                  },
+                  "FrameGroup": "SlapIshahakat 4",
                   "Command": "Frame",
                   "Parameter": 22
                 },
@@ -813,92 +583,47 @@
             "SpinUpToDown": {
               "AnimationFrames": [
                 {
-                  "Frames": {
-                    "First": {
-                      "Frame": "SpinUpToDown 1",
-                      "Direction": "N"
-                    }
-                  },
+                  "FrameGroup": "SpinUpToDown 1",
                   "Command": "Frame",
                   "Parameter": 2
                 },
                 {
-                  "Frames": {
-                    "First": {
-                      "Frame": "SpinUpToDown 2",
-                      "Direction": "NNE"
-                    }
-                  },
+                  "FrameGroup": "SpinUpToDown 2",
                   "Command": "Frame",
                   "Parameter": 2
                 },
                 {
-                  "Frames": {
-                    "First": {
-                      "Frame": "SpinUpToDown 3",
-                      "Direction": "NE"
-                    }
-                  },
+                  "FrameGroup": "SpinUpToDown 3",
                   "Command": "Frame",
                   "Parameter": 2
                 },
                 {
-                  "Frames": {
-                    "First": {
-                      "Frame": "SpinUpToDown 4",
-                      "Direction": "ENE"
-                    }
-                  },
+                  "FrameGroup": "SpinUpToDown 4",
                   "Command": "Frame",
                   "Parameter": 2
                 },
                 {
-                  "Frames": {
-                    "First": {
-                      "Frame": "SpinUpToDown 5",
-                      "Direction": "E"
-                    }
-                  },
+                  "FrameGroup": "SpinUpToDown 5",
                   "Command": "Frame",
                   "Parameter": 2
                 },
                 {
-                  "Frames": {
-                    "First": {
-                      "Frame": "SpinUpToDown 6",
-                      "Direction": "ESE"
-                    }
-                  },
+                  "FrameGroup": "SpinUpToDown 6",
                   "Command": "Frame",
                   "Parameter": 2
                 },
                 {
-                  "Frames": {
-                    "First": {
-                      "Frame": "SpinUpToDown 7",
-                      "Direction": "SE"
-                    }
-                  },
+                  "FrameGroup": "SpinUpToDown 7",
                   "Command": "Frame",
                   "Parameter": 2
                 },
                 {
-                  "Frames": {
-                    "First": {
-                      "Frame": "SpinUpToDown 8",
-                      "Direction": "SSE"
-                    }
-                  },
+                  "FrameGroup": "SpinUpToDown 8",
                   "Command": "Frame",
                   "Parameter": 2
                 },
                 {
-                  "Frames": {
-                    "First": {
-                      "Frame": "SpinUpToDown 9",
-                      "Direction": "S"
-                    }
-                  },
+                  "FrameGroup": "SpinUpToDown 9",
                   "Command": "Frame",
                   "Parameter": 2
                 },
@@ -911,12 +636,7 @@
             "StillFrame (Idle)": {
               "AnimationFrames": [
                 {
-                  "Frames": {
-                    "First": {
-                      "Frame": "Idle 3",
-                      "Direction": "S"
-                    }
-                  },
+                  "FrameGroup": "Idle 3",
                   "Command": "Frame",
                   "Parameter": 10
                 },
@@ -929,62 +649,32 @@
             "TouchingIshahakat": {
               "AnimationFrames": [
                 {
-                  "Frames": {
-                    "First": {
-                      "Frame": "SlapIshahakat 1",
-                      "Direction": "SSE"
-                    }
-                  },
+                  "FrameGroup": "SlapIshahakat 1",
                   "Command": "Frame",
                   "Parameter": 2
                 },
                 {
-                  "Frames": {
-                    "First": {
-                      "Frame": "SlapIshahakat 2",
-                      "Direction": "ESE"
-                    }
-                  },
+                  "FrameGroup": "SlapIshahakat 2",
                   "Command": "Frame",
                   "Parameter": 2
                 },
                 {
-                  "Frames": {
-                    "First": {
-                      "Frame": "SlapIshahakat 3",
-                      "Direction": "E"
-                    }
-                  },
+                  "FrameGroup": "SlapIshahakat 3",
                   "Command": "Frame",
                   "Parameter": 2
                 },
                 {
-                  "Frames": {
-                    "First": {
-                      "Frame": "SlapIshahakat 4",
-                      "Direction": "E"
-                    }
-                  },
+                  "FrameGroup": "SlapIshahakat 4",
                   "Command": "Frame",
                   "Parameter": 2
                 },
                 {
-                  "Frames": {
-                    "First": {
-                      "Frame": "SlapIshahakat 5",
-                      "Direction": "E"
-                    }
-                  },
+                  "FrameGroup": "SlapIshahakat 5",
                   "Command": "Frame",
                   "Parameter": 2
                 },
                 {
-                  "Frames": {
-                    "First": {
-                      "Frame": "SlapIshahakat 6",
-                      "Direction": "E"
-                    }
-                  },
+                  "FrameGroup": "SlapIshahakat 6",
                   "Command": "Frame",
                   "Parameter": 22
                 },
@@ -997,32 +687,17 @@
             "TurningBack": {
               "AnimationFrames": [
                 {
-                  "Frames": {
-                    "First": {
-                      "Frame": "SlapIshahakat 3",
-                      "Direction": "E"
-                    }
-                  },
+                  "FrameGroup": "SlapIshahakat 3",
                   "Command": "Frame",
                   "Parameter": 2
                 },
                 {
-                  "Frames": {
-                    "First": {
-                      "Frame": "SlapIshahakat 2",
-                      "Direction": "ESE"
-                    }
-                  },
+                  "FrameGroup": "SlapIshahakat 2",
                   "Command": "Frame",
                   "Parameter": 2
                 },
                 {
-                  "Frames": {
-                    "First": {
-                      "Frame": "SlapIshahakat 1",
-                      "Direction": "SSE"
-                    }
-                  },
+                  "FrameGroup": "SlapIshahakat 1",
                   "Command": "Frame",
                   "Parameter": 2
                 },
@@ -1035,132 +710,67 @@
             "Yawning": {
               "AnimationFrames": [
                 {
-                  "Frames": {
-                    "First": {
-                      "Frame": "Yawning 1",
-                      "Direction": "S"
-                    }
-                  },
+                  "FrameGroup": "Yawning 1",
                   "Command": "Frame",
                   "Parameter": 3
                 },
                 {
-                  "Frames": {
-                    "First": {
-                      "Frame": "Yawning 2",
-                      "Direction": "S"
-                    }
-                  },
+                  "FrameGroup": "Yawning 2",
                   "Command": "Frame",
                   "Parameter": 3
                 },
                 {
-                  "Frames": {
-                    "First": {
-                      "Frame": "Yawning 3",
-                      "Direction": "S"
-                    }
-                  },
+                  "FrameGroup": "Yawning 3",
                   "Command": "Frame",
                   "Parameter": 3
                 },
                 {
-                  "Frames": {
-                    "First": {
-                      "Frame": "Yawning 4",
-                      "Direction": "S"
-                    }
-                  },
+                  "FrameGroup": "Yawning 4",
                   "Command": "Frame",
                   "Parameter": 3
                 },
                 {
-                  "Frames": {
-                    "First": {
-                      "Frame": "Yawning 5",
-                      "Direction": "S"
-                    }
-                  },
+                  "FrameGroup": "Yawning 5",
                   "Command": "Frame",
                   "Parameter": 3
                 },
                 {
-                  "Frames": {
-                    "First": {
-                      "Frame": "Yawning 4",
-                      "Direction": "S"
-                    }
-                  },
+                  "FrameGroup": "Yawning 4",
                   "Command": "Frame",
                   "Parameter": 3
                 },
                 {
-                  "Frames": {
-                    "First": {
-                      "Frame": "Yawning 5",
-                      "Direction": "S"
-                    }
-                  },
+                  "FrameGroup": "Yawning 5",
                   "Command": "Frame",
                   "Parameter": 3
                 },
                 {
-                  "Frames": {
-                    "First": {
-                      "Frame": "Yawning 4",
-                      "Direction": "S"
-                    }
-                  },
+                  "FrameGroup": "Yawning 4",
                   "Command": "Frame",
                   "Parameter": 3
                 },
                 {
-                  "Frames": {
-                    "First": {
-                      "Frame": "Yawning 5",
-                      "Direction": "S"
-                    }
-                  },
+                  "FrameGroup": "Yawning 5",
                   "Command": "Frame",
                   "Parameter": 3
                 },
                 {
-                  "Frames": {
-                    "First": {
-                      "Frame": "Yawning 4",
-                      "Direction": "S"
-                    }
-                  },
+                  "FrameGroup": "Yawning 4",
                   "Command": "Frame",
                   "Parameter": 3
                 },
                 {
-                  "Frames": {
-                    "First": {
-                      "Frame": "Yawning 3",
-                      "Direction": "S"
-                    }
-                  },
+                  "FrameGroup": "Yawning 3",
                   "Command": "Frame",
                   "Parameter": 3
                 },
                 {
-                  "Frames": {
-                    "First": {
-                      "Frame": "Yawning 2",
-                      "Direction": "S"
-                    }
-                  },
+                  "FrameGroup": "Yawning 2",
                   "Command": "Frame",
                   "Parameter": 3
                 },
                 {
-                  "Frames": {
-                    "First": {
-                      "Frame": "Yawning 1",
-                      "Direction": "S"
-                    }
-                  },
+                  "FrameGroup": "Yawning 1",
                   "Command": "Frame",
                   "Parameter": 3
                 },

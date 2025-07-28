@@ -21,8 +21,8 @@
           "Frames": {
             "First": {
               "Hash": "6dfac0e77e7d180847d3ab5529271bde",
-              "SpriteSheetX": 0,
-              "SpriteSheetY": 16
+              "SpriteSheetX": 16,
+              "SpriteSheetY": 0
             }
           }
         },
@@ -30,8 +30,8 @@
           "Frames": {
             "First": {
               "Hash": "341f6923dce4d2c47657cea215309e2f",
-              "SpriteSheetX": 0,
-              "SpriteSheetY": 32
+              "SpriteSheetX": 32,
+              "SpriteSheetY": 0
             }
           }
         }
