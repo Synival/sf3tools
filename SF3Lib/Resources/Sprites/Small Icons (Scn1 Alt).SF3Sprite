@@ -13,29 +13,29 @@
         "Angry 1": {
           "First": {
             "Hash": "22a5fb949e50b3c414acb4ec058c2bd6",
-            "SpriteSheetX": 0,
-            "SpriteSheetY": 0
+            "SpritesheetX": 0,
+            "SpritesheetY": 0
           }
         },
         "Flag 1": {
           "First": {
             "Hash": "407aca38b311ed86f6b84ca39b646ad4",
-            "SpriteSheetX": 16,
-            "SpriteSheetY": 0
+            "SpritesheetX": 16,
+            "SpritesheetY": 0
           }
         },
         "Idea 1": {
           "First": {
             "Hash": "aa8e61fc7878d2c26e4870d13480a47d",
-            "SpriteSheetX": 32,
-            "SpriteSheetY": 0
+            "SpritesheetX": 32,
+            "SpritesheetY": 0
           }
         },
         "Love 1": {
           "First": {
             "Hash": "e5c866070bce9e06893035b6c66fed66",
-            "SpriteSheetX": 48,
-            "SpriteSheetY": 0
+            "SpritesheetX": 48,
+            "SpritesheetY": 0
           }
         }
       },

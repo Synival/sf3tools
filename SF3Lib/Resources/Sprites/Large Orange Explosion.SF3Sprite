@@ -13,57 +13,57 @@
         "Exploding 1": {
           "First": {
             "Hash": "24f262759429f94c811e8ba6345a3e0c",
-            "SpriteSheetX": 0,
-            "SpriteSheetY": 0
+            "SpritesheetX": 0,
+            "SpritesheetY": 0
           }
         },
         "Exploding 2": {
           "First": {
             "Hash": "80c2eeff4417b0f1793c15740e965a43",
-            "SpriteSheetX": 64,
-            "SpriteSheetY": 0
+            "SpritesheetX": 64,
+            "SpritesheetY": 0
           }
         },
         "Exploding 3": {
           "First": {
             "Hash": "8b9e7bc412d8d624901b7b2a3c25f13f",
-            "SpriteSheetX": 128,
-            "SpriteSheetY": 0
+            "SpritesheetX": 128,
+            "SpritesheetY": 0
           }
         },
         "Exploding 4": {
           "First": {
             "Hash": "0753cb632da02cd92bd55ec92c7d91a0",
-            "SpriteSheetX": 192,
-            "SpriteSheetY": 0
+            "SpritesheetX": 192,
+            "SpritesheetY": 0
           }
         },
         "Exploding 5": {
           "First": {
             "Hash": "6e28352b1d2d54a58a820adccd03cc56",
-            "SpriteSheetX": 256,
-            "SpriteSheetY": 0
+            "SpritesheetX": 256,
+            "SpritesheetY": 0
           }
         },
         "Exploding 6": {
           "First": {
             "Hash": "ad8b907250df657e1a47b0b53f2e4880",
-            "SpriteSheetX": 320,
-            "SpriteSheetY": 0
+            "SpritesheetX": 320,
+            "SpritesheetY": 0
           }
         },
         "Exploding 7": {
           "First": {
             "Hash": "ae84f02413e4c77d0f57f986707577c8",
-            "SpriteSheetX": 384,
-            "SpriteSheetY": 0
+            "SpritesheetX": 384,
+            "SpritesheetY": 0
           }
         },
         "Exploding 8": {
           "First": {
             "Hash": "f8da7f33f54d6de89bad32188fcb4f88",
-            "SpriteSheetX": 448,
-            "SpriteSheetY": 0
+            "SpritesheetX": 448,
+            "SpritesheetY": 0
           }
         }
       },

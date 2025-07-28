@@ -13,309 +13,309 @@
         "Idle (Battle) 1": {
           "SSE": {
             "Hash": "496538666e30043306decc2ea81a255d",
-            "SpriteSheetX": 0,
-            "SpriteSheetY": 0
+            "SpritesheetX": 0,
+            "SpritesheetY": 0
           },
           "ESE": {
             "Hash": "064f6728aadaa05a994035546a74e01a",
-            "SpriteSheetX": 0,
-            "SpriteSheetY": 40
+            "SpritesheetX": 0,
+            "SpritesheetY": 40
           },
           "ENE": {
             "Hash": "3fda1b804a7d110cfd49d8c2c3d60984",
-            "SpriteSheetX": 0,
-            "SpriteSheetY": 80
+            "SpritesheetX": 0,
+            "SpritesheetY": 80
           },
           "NNE": {
             "Hash": "e041831d26ac88c52b69d74233215bf0",
-            "SpriteSheetX": 0,
-            "SpriteSheetY": 120
+            "SpritesheetX": 0,
+            "SpritesheetY": 120
           }
         },
         "Idle (Battle) 2": {
           "SSE": {
             "Hash": "7228da7e65f08142e4768a6474fb92e7",
-            "SpriteSheetX": 40,
-            "SpriteSheetY": 0
+            "SpritesheetX": 40,
+            "SpritesheetY": 0
           },
           "ESE": {
             "Hash": "4053fe41265c8cd5e42723b039e1428b",
-            "SpriteSheetX": 40,
-            "SpriteSheetY": 40
+            "SpritesheetX": 40,
+            "SpritesheetY": 40
           },
           "ENE": {
             "Hash": "4ae9daf16bad3ee9e5507e71a59d782a",
-            "SpriteSheetX": 40,
-            "SpriteSheetY": 80
+            "SpritesheetX": 40,
+            "SpritesheetY": 80
           },
           "NNE": {
             "Hash": "3922ff8e63fc2b32e826abaa146ed568",
-            "SpriteSheetX": 40,
-            "SpriteSheetY": 120
+            "SpritesheetX": 40,
+            "SpritesheetY": 120
           }
         },
         "Idle (Battle) 3": {
           "SSE": {
             "Hash": "effaf945af9a54d34ea9a76063a4fc9f",
-            "SpriteSheetX": 80,
-            "SpriteSheetY": 0
+            "SpritesheetX": 80,
+            "SpritesheetY": 0
           },
           "ESE": {
             "Hash": "381e7445a154cda5da155924bd7a0e3e",
-            "SpriteSheetX": 80,
-            "SpriteSheetY": 40
+            "SpritesheetX": 80,
+            "SpritesheetY": 40
           },
           "ENE": {
             "Hash": "74b0c9191456d1f4d7fe32c79c8affc7",
-            "SpriteSheetX": 80,
-            "SpriteSheetY": 80
+            "SpritesheetX": 80,
+            "SpritesheetY": 80
           },
           "NNE": {
             "Hash": "265a43f2803de3e18414ae8a8caba6c9",
-            "SpriteSheetX": 80,
-            "SpriteSheetY": 120
+            "SpritesheetX": 80,
+            "SpritesheetY": 120
           }
         },
         "Idle (Field) 1": {
           "SSE": {
             "Hash": "3520a2e7bcb66ecebd63d51fdc751edb",
-            "SpriteSheetX": 120,
-            "SpriteSheetY": 0
+            "SpritesheetX": 120,
+            "SpritesheetY": 0
           },
           "ESE": {
             "Hash": "4ea0b8b4f2809c9e6d60a724b6ffc432",
-            "SpriteSheetX": 120,
-            "SpriteSheetY": 40
+            "SpritesheetX": 120,
+            "SpritesheetY": 40
           },
           "ENE": {
             "Hash": "2dfb3776ad3f139320d16d31cb4bd555",
-            "SpriteSheetX": 120,
-            "SpriteSheetY": 80
+            "SpritesheetX": 120,
+            "SpritesheetY": 80
           },
           "NNE": {
             "Hash": "8b528017e8eb8bdd4fd8c92cf83c6515",
-            "SpriteSheetX": 120,
-            "SpriteSheetY": 120
+            "SpritesheetX": 120,
+            "SpritesheetY": 120
           }
         },
         "Idle (Field) 2": {
           "SSE": {
             "Hash": "2ecc6feb28de48d6b89132f8ec54120a",
-            "SpriteSheetX": 160,
-            "SpriteSheetY": 0
+            "SpritesheetX": 160,
+            "SpritesheetY": 0
           },
           "ESE": {
             "Hash": "04537b3ffd908b1252e004387245694d",
-            "SpriteSheetX": 160,
-            "SpriteSheetY": 40
+            "SpritesheetX": 160,
+            "SpritesheetY": 40
           },
           "ENE": {
             "Hash": "0841a0860046b4f88e4742bdc14a1c66",
-            "SpriteSheetX": 160,
-            "SpriteSheetY": 80
+            "SpritesheetX": 160,
+            "SpritesheetY": 80
           },
           "NNE": {
             "Hash": "22463c8d31bb6d547d998c5d6eb1cca1",
-            "SpriteSheetX": 160,
-            "SpriteSheetY": 120
+            "SpritesheetX": 160,
+            "SpritesheetY": 120
           }
         },
         "Idle (Field) 3": {
           "SSE": {
             "Hash": "69caf16f658c204dc920d0a49de098e4",
-            "SpriteSheetX": 200,
-            "SpriteSheetY": 0
+            "SpritesheetX": 200,
+            "SpritesheetY": 0
           },
           "ESE": {
             "Hash": "2fc0b4d6ddaa4fcfdd6fbbac1c9f1af3",
-            "SpriteSheetX": 200,
-            "SpriteSheetY": 40
+            "SpritesheetX": 200,
+            "SpritesheetY": 40
           },
           "ENE": {
             "Hash": "277cc5738b80432763678e718b8fcadf",
-            "SpriteSheetX": 200,
-            "SpriteSheetY": 80
+            "SpritesheetX": 200,
+            "SpritesheetY": 80
           },
           "NNE": {
             "Hash": "71a431084c31d48be7a4dd08a3ff3429",
-            "SpriteSheetX": 200,
-            "SpriteSheetY": 120
+            "SpritesheetX": 200,
+            "SpritesheetY": 120
           }
         },
         "Nodding (Field) 1": {
           "SSE": {
             "Hash": "9250c611877b5b2db2e3c21ff1174a2d",
-            "SpriteSheetX": 240,
-            "SpriteSheetY": 0
+            "SpritesheetX": 240,
+            "SpritesheetY": 0
           },
           "ESE": {
             "Hash": "0e55427043fc68d735207e330df1064a",
-            "SpriteSheetX": 240,
-            "SpriteSheetY": 40
+            "SpritesheetX": 240,
+            "SpritesheetY": 40
           },
           "ENE": {
             "Hash": "991cfba2a868436c07163d23256ec1f4",
-            "SpriteSheetX": 240,
-            "SpriteSheetY": 80
+            "SpritesheetX": 240,
+            "SpritesheetY": 80
           },
           "NNE": {
             "Hash": "f09d09b141f42e89b9ff1800f853e6f2",
-            "SpriteSheetX": 240,
-            "SpriteSheetY": 120
+            "SpritesheetX": 240,
+            "SpritesheetY": 120
           }
         },
         "Nodding (Field) 2": {
           "SSE": {
             "Hash": "ff2caf791030628756c3671d1526b664",
-            "SpriteSheetX": 280,
-            "SpriteSheetY": 0
+            "SpritesheetX": 280,
+            "SpritesheetY": 0
           },
           "ESE": {
             "Hash": "85e20c6028cd225ed88a7a5074624d38",
-            "SpriteSheetX": 280,
-            "SpriteSheetY": 40
+            "SpritesheetX": 280,
+            "SpritesheetY": 40
           },
           "ENE": {
             "Hash": "267ab44710b9974cd9c963ea1bebfdf1",
-            "SpriteSheetX": 280,
-            "SpriteSheetY": 80
+            "SpritesheetX": 280,
+            "SpritesheetY": 80
           },
           "NNE": {
             "Hash": "90d1bd852849e776832a7fac339fcff5",
-            "SpriteSheetX": 280,
-            "SpriteSheetY": 120
+            "SpritesheetX": 280,
+            "SpritesheetY": 120
           }
         },
         "ShakingHead (Field) 1": {
           "SSE": {
             "Hash": "156a2c3e6bfc3fed08d593223419f361",
-            "SpriteSheetX": 320,
-            "SpriteSheetY": 0
+            "SpritesheetX": 320,
+            "SpritesheetY": 0
           },
           "ESE": {
             "Hash": "4263dc9ce386f3884a3815ab698e3e42",
-            "SpriteSheetX": 320,
-            "SpriteSheetY": 40
+            "SpritesheetX": 320,
+            "SpritesheetY": 40
           },
           "ENE": {
             "Hash": "f20d9aaba5cf676b4e83002fee7a7e2b",
-            "SpriteSheetX": 320,
-            "SpriteSheetY": 80
+            "SpritesheetX": 320,
+            "SpritesheetY": 80
           },
           "NNE": {
             "Hash": "57be54f6b6e393f8609b29759f9e8fe5",
-            "SpriteSheetX": 320,
-            "SpriteSheetY": 120
+            "SpritesheetX": 320,
+            "SpritesheetY": 120
           }
         },
         "ShakingHead (Field) 2": {
           "SSE": {
             "Hash": "8b4852a9fb806a067be64960ef9b0249",
-            "SpriteSheetX": 360,
-            "SpriteSheetY": 0
+            "SpritesheetX": 360,
+            "SpritesheetY": 0
           },
           "ESE": {
             "Hash": "03f4d6bf4bdfaf6c19a5d53a6cf45c04",
-            "SpriteSheetX": 360,
-            "SpriteSheetY": 40
+            "SpritesheetX": 360,
+            "SpritesheetY": 40
           },
           "ENE": {
             "Hash": "0b3cdc1afbd9c5bd76d59e364c75afef",
-            "SpriteSheetX": 360,
-            "SpriteSheetY": 80
+            "SpritesheetX": 360,
+            "SpritesheetY": 80
           },
           "NNE": {
             "Hash": "9be3570c56fc293af12a0fe9057629c5",
-            "SpriteSheetX": 360,
-            "SpriteSheetY": 120
+            "SpritesheetX": 360,
+            "SpritesheetY": 120
           }
         },
         "Walking 1": {
           "SSE": {
             "Hash": "335ca08badb716a437048ad291520f56",
-            "SpriteSheetX": 400,
-            "SpriteSheetY": 0
+            "SpritesheetX": 400,
+            "SpritesheetY": 0
           },
           "ESE": {
             "Hash": "fd85f0dab51d20b2336bf8516099dd72",
-            "SpriteSheetX": 400,
-            "SpriteSheetY": 40
+            "SpritesheetX": 400,
+            "SpritesheetY": 40
           },
           "ENE": {
             "Hash": "1fd5afa04be5909d7f34911821c7df4f",
-            "SpriteSheetX": 400,
-            "SpriteSheetY": 80
+            "SpritesheetX": 400,
+            "SpritesheetY": 80
           },
           "NNE": {
             "Hash": "9a8658693aa430869b1c1589aa6479a2",
-            "SpriteSheetX": 400,
-            "SpriteSheetY": 120
+            "SpritesheetX": 400,
+            "SpritesheetY": 120
           }
         },
         "Walking 2": {
           "SSE": {
             "Hash": "112ddf09beb0acc3380310348cdbcbe8",
-            "SpriteSheetX": 440,
-            "SpriteSheetY": 0
+            "SpritesheetX": 440,
+            "SpritesheetY": 0
           },
           "ESE": {
             "Hash": "d50026922981d8793a9e55682956f421",
-            "SpriteSheetX": 440,
-            "SpriteSheetY": 40
+            "SpritesheetX": 440,
+            "SpritesheetY": 40
           },
           "ENE": {
             "Hash": "497073fe1361a4a2e78c8bc927d0b570",
-            "SpriteSheetX": 440,
-            "SpriteSheetY": 80
+            "SpritesheetX": 440,
+            "SpritesheetY": 80
           },
           "NNE": {
             "Hash": "684f3b14dc43250b5e64f021fbde80ab",
-            "SpriteSheetX": 440,
-            "SpriteSheetY": 120
+            "SpritesheetX": 440,
+            "SpritesheetY": 120
           }
         },
         "Walking 3": {
           "SSE": {
             "Hash": "e7630c13dc6281a9eb63be21c77fab95",
-            "SpriteSheetX": 480,
-            "SpriteSheetY": 0
+            "SpritesheetX": 480,
+            "SpritesheetY": 0
           },
           "ESE": {
             "Hash": "922d47131947b3b289e0e0226099125b",
-            "SpriteSheetX": 480,
-            "SpriteSheetY": 40
+            "SpritesheetX": 480,
+            "SpritesheetY": 40
           },
           "ENE": {
             "Hash": "6ff9a90c9ad5d429174845728f64f73c",
-            "SpriteSheetX": 480,
-            "SpriteSheetY": 80
+            "SpritesheetX": 480,
+            "SpritesheetY": 80
           },
           "NNE": {
             "Hash": "d5602bc3520f7e05adf32e1f1d23874a",
-            "SpriteSheetX": 480,
-            "SpriteSheetY": 120
+            "SpritesheetX": 480,
+            "SpritesheetY": 120
           }
         },
         "Walking 4": {
           "SSE": {
             "Hash": "0c306da3fe1ab0318b0660fa338d7c63",
-            "SpriteSheetX": 520,
-            "SpriteSheetY": 0
+            "SpritesheetX": 520,
+            "SpritesheetY": 0
           },
           "ESE": {
             "Hash": "695c0070efc0e423e8e61f5e9722d90c",
-            "SpriteSheetX": 520,
-            "SpriteSheetY": 40
+            "SpritesheetX": 520,
+            "SpritesheetY": 40
           },
           "ENE": {
             "Hash": "e18dec92d5fe00a6a3ad14dfc52c05a4",
-            "SpriteSheetX": 520,
-            "SpriteSheetY": 80
+            "SpritesheetX": 520,
+            "SpritesheetY": 80
           },
           "NNE": {
             "Hash": "7d396e79960fe6b4eeb6f6ff37c84066",
-            "SpriteSheetX": 520,
-            "SpriteSheetY": 120
+            "SpritesheetX": 520,
+            "SpritesheetY": 120
           }
         }
       },
@@ -530,89 +530,89 @@
         "GettingUpFromKneeling 1": {
           "SSE": {
             "Hash": "fd2f22efbc0d011b00ce1899d2bc8912",
-            "SpriteSheetX": 0,
-            "SpriteSheetY": 0
+            "SpritesheetX": 0,
+            "SpritesheetY": 0
           },
           "ESE": {
             "Hash": "7edc03d6d3ef0ca0ee19b14b171dd30f",
-            "SpriteSheetX": 0,
-            "SpriteSheetY": 40
+            "SpritesheetX": 0,
+            "SpritesheetY": 40
           },
           "ENE": {
             "Hash": "7dfa4e03fcc0617613b26a6014442d9e",
-            "SpriteSheetX": 0,
-            "SpriteSheetY": 80
+            "SpritesheetX": 0,
+            "SpritesheetY": 80
           },
           "NNE": {
             "Hash": "80285d0751864b74d86b426fd582c7ed",
-            "SpriteSheetX": 0,
-            "SpriteSheetY": 120
+            "SpritesheetX": 0,
+            "SpritesheetY": 120
           }
         },
         "GettingUpFromKneeling 2": {
           "SSE": {
             "Hash": "d48d3139e708495ce8813a698e57ebf3",
-            "SpriteSheetX": 48,
-            "SpriteSheetY": 0
+            "SpritesheetX": 48,
+            "SpritesheetY": 0
           },
           "ESE": {
             "Hash": "f8cb26f8aff445bb05636386856837a8",
-            "SpriteSheetX": 48,
-            "SpriteSheetY": 40
+            "SpritesheetX": 48,
+            "SpritesheetY": 40
           },
           "ENE": {
             "Hash": "5141662c8a83805287d525ea4b725652",
-            "SpriteSheetX": 48,
-            "SpriteSheetY": 80
+            "SpritesheetX": 48,
+            "SpritesheetY": 80
           },
           "NNE": {
             "Hash": "4bd9eb1d3ebcebbb88d8c6c006052b98",
-            "SpriteSheetX": 48,
-            "SpriteSheetY": 120
+            "SpritesheetX": 48,
+            "SpritesheetY": 120
           }
         },
         "GettingUpFromKneeling 3": {
           "SSE": {
             "Hash": "aca49ff54a5167b057d722a009937b97",
-            "SpriteSheetX": 96,
-            "SpriteSheetY": 0
+            "SpritesheetX": 96,
+            "SpritesheetY": 0
           },
           "ESE": {
             "Hash": "ff1a8c025614e8dd72e13fa12ba52bd7",
-            "SpriteSheetX": 96,
-            "SpriteSheetY": 40
+            "SpritesheetX": 96,
+            "SpritesheetY": 40
           },
           "ENE": {
             "Hash": "0ca01d3a64da8f1c31de6908c3a26bc5",
-            "SpriteSheetX": 96,
-            "SpriteSheetY": 80
+            "SpritesheetX": 96,
+            "SpritesheetY": 80
           },
           "NNE": {
             "Hash": "2cf299029040c5aef3e72a1bdbede879",
-            "SpriteSheetX": 96,
-            "SpriteSheetY": 120
+            "SpritesheetX": 96,
+            "SpritesheetY": 120
           }
         },
         "OnGround 1": {
           "SSE": {
             "Hash": "837420ef70137a44e4c3066f87166ee3",
-            "SpriteSheetX": 144,
-            "SpriteSheetY": 0
+            "SpritesheetX": 144,
+            "SpritesheetY": 0
           },
           "ESE": {
             "Hash": "14526fd4d456b2707c4a66f6207fd9c6",
-            "SpriteSheetX": 144,
-            "SpriteSheetY": 40
+            "SpritesheetX": 144,
+            "SpritesheetY": 40
           },
           "ENE": {
             "Hash": "9aea71414af90ebfe5bc2ee5af47eb49",
-            "SpriteSheetX": 144,
-            "SpriteSheetY": 80
+            "SpritesheetX": 144,
+            "SpritesheetY": 80
           },
           "NNE": {
             "Hash": "3c2b2960614b94cb58924f5ee98ec339",
-            "SpriteSheetX": 144,
-            "SpriteSheetY": 120
+            "SpritesheetX": 144,
+            "SpritesheetY": 120
           }
         }
       },

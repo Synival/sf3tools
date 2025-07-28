@@ -13,29 +13,29 @@
         "Angry 1": {
           "First": {
             "Hash": "dd7955490635785bd5e7a55c8c23ecdf",
-            "SpriteSheetX": 0,
-            "SpriteSheetY": 0
+            "SpritesheetX": 0,
+            "SpritesheetY": 0
           }
         },
         "Idea 1": {
           "First": {
             "Hash": "31b6792b69bfa3443728310feb9a523c",
-            "SpriteSheetX": 16,
-            "SpriteSheetY": 0
+            "SpritesheetX": 16,
+            "SpritesheetY": 0
           }
         },
         "Shield 1": {
           "First": {
             "Hash": "c283599cb6ce3fbc1f0e066af8d5081e",
-            "SpriteSheetX": 32,
-            "SpriteSheetY": 0
+            "SpritesheetX": 32,
+            "SpritesheetY": 0
           }
         },
         "Sword 1": {
           "First": {
             "Hash": "c8c209bb1adf2911a7eec429aa202f8a",
-            "SpriteSheetX": 48,
-            "SpriteSheetY": 0
+            "SpritesheetX": 48,
+            "SpritesheetY": 0
           }
         }
       },

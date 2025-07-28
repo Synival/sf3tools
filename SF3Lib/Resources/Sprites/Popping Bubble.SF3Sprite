@@ -13,29 +13,29 @@
         "Popping 1": {
           "First": {
             "Hash": "44f3658716dacc6badd550eb867e688c",
-            "SpriteSheetX": 0,
-            "SpriteSheetY": 0
+            "SpritesheetX": 0,
+            "SpritesheetY": 0
           }
         },
         "Popping 2": {
           "First": {
             "Hash": "50231802de92e85bc2bd33124a5a7a73",
-            "SpriteSheetX": 24,
-            "SpriteSheetY": 0
+            "SpritesheetX": 24,
+            "SpritesheetY": 0
           }
         },
         "Popping 3": {
           "First": {
             "Hash": "6687c9c30fde1a59189023923b6ee349",
-            "SpriteSheetX": 48,
-            "SpriteSheetY": 0
+            "SpritesheetX": 48,
+            "SpritesheetY": 0
           }
         },
         "Popping 4": {
           "First": {
             "Hash": "dd24e91615f1963a5c64bc9878a0a8d5",
-            "SpriteSheetX": 72,
-            "SpriteSheetY": 0
+            "SpritesheetX": 72,
+            "SpritesheetY": 0
           }
         }
       },

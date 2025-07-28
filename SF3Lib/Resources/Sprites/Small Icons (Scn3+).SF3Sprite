@@ -13,15 +13,15 @@
         "Complaining 1": {
           "First": {
             "Hash": "5af7b36f7352d858820d3c3bfb4178e7",
-            "SpriteSheetX": 0,
-            "SpriteSheetY": 0
+            "SpritesheetX": 0,
+            "SpritesheetY": 0
           }
         },
         "Embarassed 1": {
           "First": {
             "Hash": "a2dd2e742467d56762a51b7e4aa0b019",
-            "SpriteSheetX": 16,
-            "SpriteSheetY": 0
+            "SpritesheetX": 16,
+            "SpritesheetY": 0
           }
         }
       },

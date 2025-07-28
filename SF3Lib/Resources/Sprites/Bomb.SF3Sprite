@@ -13,8 +13,8 @@
         "Bomb 1": {
           "First": {
             "Hash": "48029a08b05f56f66a237b23bfd947da",
-            "SpriteSheetX": 0,
-            "SpriteSheetY": 0
+            "SpritesheetX": 0,
+            "SpritesheetY": 0
           }
         }
       },

@@ -13,52 +13,52 @@
         "Full 1": {
           "First": {
             "Hash": "e272d1b32674a5fd80c01babd62635f6",
-            "SpriteSheetX": 0,
-            "SpriteSheetY": 0
+            "SpritesheetX": 0,
+            "SpritesheetY": 0
           }
         },
         "Half 1": {
           "SSE": {
             "Hash": "9010a443c20c24e36654f26202f9cb5b",
-            "SpriteSheetX": 40,
-            "SpriteSheetY": 32
+            "SpritesheetX": 40,
+            "SpritesheetY": 32
           },
           "ESE": {
             "Hash": "07de4dd068d73d427476f7bd5e74e928",
-            "SpriteSheetX": 40,
-            "SpriteSheetY": 64
+            "SpritesheetX": 40,
+            "SpritesheetY": 64
           },
           "ENE": {
             "Hash": "0823580e32ba3632a38b860a259d6f7b",
-            "SpriteSheetX": 40,
-            "SpriteSheetY": 96
+            "SpritesheetX": 40,
+            "SpritesheetY": 96
           },
           "NNE": {
             "Hash": "8673a06c08517159e952d686902ce08b",
-            "SpriteSheetX": 40,
-            "SpriteSheetY": 128
+            "SpritesheetX": 40,
+            "SpritesheetY": 128
           }
         },
         "Open 1": {
           "SSE": {
             "Hash": "b6fd8870724df4592503ba0b5865ee49",
-            "SpriteSheetX": 80,
-            "SpriteSheetY": 32
+            "SpritesheetX": 80,
+            "SpritesheetY": 32
           },
           "ESE": {
             "Hash": "d3582c6a55ea40a1d8008802e20a31b1",
-            "SpriteSheetX": 80,
-            "SpriteSheetY": 64
+            "SpritesheetX": 80,
+            "SpritesheetY": 64
           },
           "ENE": {
             "Hash": "10102347e4c26072c149b0f6f6c8ac1d",
-            "SpriteSheetX": 80,
-            "SpriteSheetY": 96
+            "SpritesheetX": 80,
+            "SpritesheetY": 96
           },
           "NNE": {
             "Hash": "061496a6222c600acf0b06508e206b75",
-            "SpriteSheetX": 80,
-            "SpriteSheetY": 128
+            "SpritesheetX": 80,
+            "SpritesheetY": 128
           }
         }
       },

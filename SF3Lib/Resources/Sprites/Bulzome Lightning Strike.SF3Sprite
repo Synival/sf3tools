@@ -13,8 +13,8 @@
         "Lightning 1": {
           "First": {
             "Hash": "4dc924b44afe3d81dc4d3610d296aa52",
-            "SpriteSheetX": 0,
-            "SpriteSheetY": 0
+            "SpritesheetX": 0,
+            "SpritesheetY": 0
           }
         }
       },

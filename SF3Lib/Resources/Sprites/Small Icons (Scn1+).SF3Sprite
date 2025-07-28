@@ -13,22 +13,22 @@
         "Alert 1": {
           "First": {
             "Hash": "c7059e750bf0fda8104e5c54aa0df10b",
-            "SpriteSheetX": 0,
-            "SpriteSheetY": 0
+            "SpritesheetX": 0,
+            "SpritesheetY": 0
           }
         },
         "Flag 1": {
           "First": {
             "Hash": "3423a1885adc98bb2978ad723de6196b",
-            "SpriteSheetX": 16,
-            "SpriteSheetY": 0
+            "SpritesheetX": 16,
+            "SpritesheetY": 0
           }
         },
         "Love 1": {
           "First": {
             "Hash": "3a704d3d95575f3c452ef6125b459c9f",
-            "SpriteSheetX": 32,
-            "SpriteSheetY": 0
+            "SpritesheetX": 32,
+            "SpritesheetY": 0
           }
         }
       },

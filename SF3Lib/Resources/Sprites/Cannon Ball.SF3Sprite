@@ -13,8 +13,8 @@
         "CannonBall 1": {
           "First": {
             "Hash": "46e4e4e7b65d62fbd320c26210f185ce",
-            "SpriteSheetX": 0,
-            "SpriteSheetY": 0
+            "SpritesheetX": 0,
+            "SpritesheetY": 0
           }
         }
       },

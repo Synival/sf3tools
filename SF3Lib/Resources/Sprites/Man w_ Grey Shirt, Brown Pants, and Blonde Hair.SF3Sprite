@@ -13,82 +13,82 @@
         "Walking 1": {
           "S": {
             "Hash": "47033204b2f79de9717de980fa73950d",
-            "SpriteSheetX": 0,
-            "SpriteSheetY": 0
+            "SpritesheetX": 0,
+            "SpritesheetY": 0
           },
           "SE": {
             "Hash": "7874a2d9bc479fed00ded5d24a7f2880",
-            "SpriteSheetX": 0,
-            "SpriteSheetY": 40
+            "SpritesheetX": 0,
+            "SpritesheetY": 40
           },
           "E": {
             "Hash": "0eb07ef90aeba2dcf9e3fce049a6d17e",
-            "SpriteSheetX": 0,
-            "SpriteSheetY": 80
+            "SpritesheetX": 0,
+            "SpritesheetY": 80
           },
           "NE": {
             "Hash": "9c51859da045d2f84b18a1c273cb26ff",
-            "SpriteSheetX": 0,
-            "SpriteSheetY": 120
+            "SpritesheetX": 0,
+            "SpritesheetY": 120
           },
           "N": {
             "Hash": "5761211bc6872825e169280c6c7347dd",
-            "SpriteSheetX": 0,
-            "SpriteSheetY": 160
+            "SpritesheetX": 0,
+            "SpritesheetY": 160
           }
         },
         "Walking 2": {
           "S": {
             "Hash": "476a56c6b3f7770f799847c69acdeeb7",
-            "SpriteSheetX": 40,
-            "SpriteSheetY": 0
+            "SpritesheetX": 40,
+            "SpritesheetY": 0
           },
           "SE": {
             "Hash": "b2e3733835989ed537eb952e98777fef",
-            "SpriteSheetX": 40,
-            "SpriteSheetY": 40
+            "SpritesheetX": 40,
+            "SpritesheetY": 40
           },
           "E": {
             "Hash": "00234036fec7b0ab605a8fa8fdce4ff8",
-            "SpriteSheetX": 40,
-            "SpriteSheetY": 80
+            "SpritesheetX": 40,
+            "SpritesheetY": 80
           },
           "NE": {
             "Hash": "fb2c9c7974ebf479d147dec03a515bc9",
-            "SpriteSheetX": 40,
-            "SpriteSheetY": 120
+            "SpritesheetX": 40,
+            "SpritesheetY": 120
           },
           "N": {
             "Hash": "b1fef51641849e29a39f7e9c1e2d7285",
-            "SpriteSheetX": 40,
-            "SpriteSheetY": 160
+            "SpritesheetX": 40,
+            "SpritesheetY": 160
           }
         },
         "Walking 3": {
           "S": {
             "Hash": "1d927c8d14e1e375b277f88fc0853aef",
-            "SpriteSheetX": 80,
-            "SpriteSheetY": 0
+            "SpritesheetX": 80,
+            "SpritesheetY": 0
           },
           "SE": {
             "Hash": "893f77545c79c36ae5b87eb62e58ecb8",
-            "SpriteSheetX": 80,
-            "SpriteSheetY": 40
+            "SpritesheetX": 80,
+            "SpritesheetY": 40
           },
           "E": {
             "Hash": "ac5e55dca12cc6057baea464760bb59a",
-            "SpriteSheetX": 80,
-            "SpriteSheetY": 80
+            "SpritesheetX": 80,
+            "SpritesheetY": 80
           },
           "NE": {
             "Hash": "a1fc25c883dcfcea01646a1885304695",
-            "SpriteSheetX": 80,
-            "SpriteSheetY": 120
+            "SpritesheetX": 80,
+            "SpritesheetY": 120
           },
           "N": {
             "Hash": "c69096e9d181b26303c32ead8c4d746f",
-            "SpriteSheetX": 80,
-            "SpriteSheetY": 160
+            "SpritesheetX": 80,
+            "SpritesheetY": 160
           }
         }
       },

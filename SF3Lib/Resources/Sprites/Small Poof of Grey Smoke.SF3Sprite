@@ -13,64 +13,64 @@
         "Poofing 1": {
           "First": {
             "Hash": "8927f42453a22f9af59d23330ecbf686",
-            "SpriteSheetX": 0,
-            "SpriteSheetY": 0
+            "SpritesheetX": 0,
+            "SpritesheetY": 0
           }
         },
         "Poofing 2": {
           "First": {
             "Hash": "563c6d959b159de1d990bb4dd4fcf44a",
-            "SpriteSheetX": 24,
-            "SpriteSheetY": 0
+            "SpritesheetX": 24,
+            "SpritesheetY": 0
           }
         },
         "Poofing 3": {
           "First": {
             "Hash": "160ca21284162529eaf2b4f6197ecaee",
-            "SpriteSheetX": 48,
-            "SpriteSheetY": 0
+            "SpritesheetX": 48,
+            "SpritesheetY": 0
           }
         },
         "Poofing 4": {
           "First": {
             "Hash": "9d60a2688bd1e6cd96f6367295c0180d",
-            "SpriteSheetX": 72,
-            "SpriteSheetY": 0
+            "SpritesheetX": 72,
+            "SpritesheetY": 0
           }
         },
         "Poofing 5": {
           "First": {
             "Hash": "ec5b4e1172a40cbb3b31ce7272995128",
-            "SpriteSheetX": 96,
-            "SpriteSheetY": 0
+            "SpritesheetX": 96,
+            "SpritesheetY": 0
           }
         },
         "Poofing 6": {
           "First": {
             "Hash": "9d5314f4bcafd3dfce14a74631a72e50",
-            "SpriteSheetX": 120,
-            "SpriteSheetY": 0
+            "SpritesheetX": 120,
+            "SpritesheetY": 0
           }
         },
         "Poofing 7": {
           "First": {
             "Hash": "1a9c4b792a136e01990549b91a5c691e",
-            "SpriteSheetX": 144,
-            "SpriteSheetY": 0
+            "SpritesheetX": 144,
+            "SpritesheetY": 0
           }
         },
         "Poofing 8": {
           "First": {
             "Hash": "93a1ca69541ffa928898bac4ec25c728",
-            "SpriteSheetX": 168,
-            "SpriteSheetY": 0
+            "SpritesheetX": 168,
+            "SpritesheetY": 0
           }
         },
         "Poofing 9": {
           "First": {
             "Hash": "b8d67ef2e2a3895dab921b474dbdd29e",
-            "SpriteSheetX": 192,
-            "SpriteSheetY": 0
+            "SpritesheetX": 192,
+            "SpritesheetY": 0
           }
         }
       },

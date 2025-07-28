@@ -13,22 +13,22 @@
         "BlinkRedOnce 1": {
           "First": {
             "Hash": "76cf50f7f0dc3a846b5137c6a7b782dc",
-            "SpriteSheetX": 0,
-            "SpriteSheetY": 0
+            "SpritesheetX": 0,
+            "SpritesheetY": 0
           }
         },
         "BlinkWhiteOnce 1": {
           "First": {
             "Hash": "6dfac0e77e7d180847d3ab5529271bde",
-            "SpriteSheetX": 16,
-            "SpriteSheetY": 0
+            "SpritesheetX": 16,
+            "SpritesheetY": 0
           }
         },
         "BlinkYellowOnce 1": {
           "First": {
             "Hash": "341f6923dce4d2c47657cea215309e2f",
-            "SpriteSheetX": 32,
-            "SpriteSheetY": 0
+            "SpritesheetX": 32,
+            "SpritesheetY": 0
           }
         }
       },

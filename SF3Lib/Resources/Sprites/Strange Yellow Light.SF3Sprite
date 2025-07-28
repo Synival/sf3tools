@@ -13,8 +13,8 @@
         "Sparkle 1": {
           "First": {
             "Hash": "a8ad7ad80de38ce4fd6bc6fc4210bb03",
-            "SpriteSheetX": 0,
-            "SpriteSheetY": 0
+            "SpritesheetX": 0,
+            "SpritesheetY": 0
           }
         }
       },

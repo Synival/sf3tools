@@ -13,13 +13,13 @@
         "Idle 1": {
           "First": {
             "Hash": "263969042813f0f27555866455f68715",
-            "SpriteSheetX": 0,
-            "SpriteSheetY": 0
+            "SpritesheetX": 0,
+            "SpritesheetY": 0
           },
           "Second": {
             "Hash": "f98c1a8b4218e3c6f51d58154268d404",
-            "SpriteSheetX": 0,
-            "SpriteSheetY": 128
+            "SpritesheetX": 0,
+            "SpritesheetY": 128
           }
         }
       },

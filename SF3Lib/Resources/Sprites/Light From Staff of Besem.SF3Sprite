@@ -13,8 +13,8 @@
         "Light 1": {
           "First": {
             "Hash": "64138241c1ad9e4a7aee83828edf4d3b",
-            "SpriteSheetX": 0,
-            "SpriteSheetY": 0
+            "SpritesheetX": 0,
+            "SpritesheetY": 0
           }
         }
       },

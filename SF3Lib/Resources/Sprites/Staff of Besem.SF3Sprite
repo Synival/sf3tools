@@ -13,23 +13,23 @@
         "Idle (Hovering) 1": {
           "SSE": {
             "Hash": "f37f77c14b009c9fc83317c8b50134b6",
-            "SpriteSheetX": 0,
-            "SpriteSheetY": 0
+            "SpritesheetX": 0,
+            "SpritesheetY": 0
           },
           "ESE": {
             "Hash": "8e378a45443338efcfdb4ba2fb445724",
-            "SpriteSheetX": 0,
-            "SpriteSheetY": 40
+            "SpritesheetX": 0,
+            "SpritesheetY": 40
           },
           "ENE": {
             "Hash": "2c5914d5fae59426873b1a90caed2aa4",
-            "SpriteSheetX": 0,
-            "SpriteSheetY": 80
+            "SpritesheetX": 0,
+            "SpritesheetY": 80
           },
           "NNE": {
             "Hash": "a119aa537cac013a3537a2adc2d8861e",
-            "SpriteSheetX": 0,
-            "SpriteSheetY": 120
+            "SpritesheetX": 0,
+            "SpritesheetY": 120
           }
         }
       },

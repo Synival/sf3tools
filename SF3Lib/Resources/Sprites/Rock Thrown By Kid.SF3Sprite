@@ -13,8 +13,8 @@
         "Rock 1": {
           "First": {
             "Hash": "37ae9d5b7cacbe694c0ddd825be47ac7",
-            "SpriteSheetX": 0,
-            "SpriteSheetY": 0
+            "SpritesheetX": 0,
+            "SpritesheetY": 0
           }
         }
       },

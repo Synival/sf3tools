@@ -13,15 +13,15 @@
         "Alt 1": {
           "First": {
             "Hash": "f09f35a5637839458e462e6350ecbce4",
-            "SpriteSheetX": 0,
-            "SpriteSheetY": 0
+            "SpritesheetX": 0,
+            "SpritesheetY": 0
           }
         },
         "Black+White 1": {
           "First": {
             "Hash": "3a964726ddf49af8343c0851ccf885a2",
-            "SpriteSheetX": 8,
-            "SpriteSheetY": 0
+            "SpritesheetX": 8,
+            "SpritesheetY": 0
           }
         }
       },
@@ -107,8 +107,8 @@
         "Black+White 1": {
           "First": {
             "Hash": "fd9a62f71778de82628430c658349d91",
-            "SpriteSheetX": 0,
-            "SpriteSheetY": 0
+            "SpritesheetX": 0,
+            "SpritesheetY": 0
           }
         }
       },
@@ -142,8 +142,8 @@
         "Black+White 1": {
           "First": {
             "Hash": "7470b797563079a7f474e66996238818",
-            "SpriteSheetX": 0,
-            "SpriteSheetY": 0
+            "SpritesheetX": 0,
+            "SpritesheetY": 0
           }
         }
       },
@@ -177,15 +177,15 @@
         "Black 1": {
           "First": {
             "Hash": "b1e27aa018409de6bfd73f8afb883a65",
-            "SpriteSheetX": 0,
-            "SpriteSheetY": 0
+            "SpritesheetX": 0,
+            "SpritesheetY": 0
           }
         },
         "Black+White 1": {
           "First": {
             "Hash": "d33e04f92840fa8d80d642441797bafe",
-            "SpriteSheetX": 48,
-            "SpriteSheetY": 0
+            "SpritesheetX": 48,
+            "SpritesheetY": 0
           }
         }
       },
@@ -232,8 +232,8 @@
         "Black+White 1": {
           "First": {
             "Hash": "03ac62ba3da04a0bcca0ea6f6d6ce4b2",
-            "SpriteSheetX": 0,
-            "SpriteSheetY": 0
+            "SpritesheetX": 0,
+            "SpritesheetY": 0
           }
         }
       },

@@ -13,8 +13,8 @@
         "Idle 1": {
           "First": {
             "Hash": "c5812869da844945da70f6d8f3248bf9",
-            "SpriteSheetX": 0,
-            "SpriteSheetY": 0
+            "SpritesheetX": 0,
+            "SpritesheetY": 0
           }
         }
       },

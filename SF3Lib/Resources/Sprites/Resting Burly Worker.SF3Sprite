@@ -13,23 +13,23 @@
         "Idle (Resting) 1": {
           "SSE": {
             "Hash": "0aba773cdcfffc3ff1dc20baac6ec445",
-            "SpriteSheetX": 0,
-            "SpriteSheetY": 0
+            "SpritesheetX": 0,
+            "SpritesheetY": 0
           },
           "ESE": {
             "Hash": "a583f818e2d79c5927f741340e3ce1b0",
-            "SpriteSheetX": 0,
-            "SpriteSheetY": 40
+            "SpritesheetX": 0,
+            "SpritesheetY": 40
           },
           "ENE": {
             "Hash": "47f1b4619d2e32531a2cf57ee1109241",
-            "SpriteSheetX": 0,
-            "SpriteSheetY": 80
+            "SpritesheetX": 0,
+            "SpritesheetY": 80
           },
           "NNE": {
             "Hash": "529540f6d256f6b3c17b7b63ae0762b6",
-            "SpriteSheetX": 0,
-            "SpriteSheetY": 120
+            "SpritesheetX": 0,
+            "SpritesheetY": 120
           }
         }
       },

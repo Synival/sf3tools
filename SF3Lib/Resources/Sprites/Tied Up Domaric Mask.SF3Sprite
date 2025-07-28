@@ -13,8 +13,8 @@
         "Mask 1": {
           "SSE": {
             "Hash": "97253c6ad9362a521b4b16069da9f352",
-            "SpriteSheetX": 0,
-            "SpriteSheetY": 0
+            "SpritesheetX": 0,
+            "SpritesheetY": 0
           }
         }
       },
