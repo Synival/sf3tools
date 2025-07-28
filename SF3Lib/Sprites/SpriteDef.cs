@@ -1,10 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using CommonLib;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
 namespace SF3.Sprites {
-    public class SpriteDef {
+    public class SpriteDef : IJsonResource {
         public SpriteDef() { }
 
         public SpriteDef(string name, UniqueFrameDef[] frames, UniqueAnimationDef[] animations) {
@@ -50,8 +51,10 @@ namespace SF3.Sprites {
         /// </summary>
         /// <param name="json">SpriteDef in JSON format as a string.</param>
         /// <returns>A new SpriteDef if deserializing was successful, or 'null' if not.</returns>
-        public static SpriteDef FromJSON(string json)
-            => FromJToken(JToken.Parse(json));
+        public static SpriteDef FromJSON(string json) {
+            var spriteDef = new SpriteDef();
+            return spriteDef.AssignFromJSON_String(json) ? spriteDef : null;
+        }
 
         /// <summary>
         /// Deserializes a JSON object of a SpriteDef.
@@ -59,39 +62,58 @@ namespace SF3.Sprites {
         /// <param name="jToken">SpriteDef as a JToken.</param>
         /// <returns>A new SpriteDef if deserializing was successful, or 'null' if not.</returns>
         public static SpriteDef FromJToken(JToken jToken) {
-            if (jToken == null || jToken.Type != JTokenType.Object)
-                return null;
+            var spriteDef = new SpriteDef();
+            return spriteDef.AssignFromJToken(jToken) ? spriteDef : null;
+        }
 
-            try {
-                var jObj = (JObject) jToken;
-                var newDef = new SpriteDef();
+        public bool AssignFromJSON_String(string json)
+            => AssignFromJToken(JToken.Parse(json));
 
-                newDef.Name   = jObj.TryGetValue("Name",   out var name)   ? ((string) name) : null;
-                newDef.Width  = jObj.TryGetValue("Width",  out var width)  ? ((int?) width)  : null;
-                newDef.Height = jObj.TryGetValue("Height", out var height) ? ((int?) height) : null;
+        public bool AssignFromJToken(JToken jToken) {
+            if (jToken == null)
+                return false;
 
-                if (jObj.TryGetValue("Spritesheets", out var spritesheets) && spritesheets.Type == JTokenType.Object) {
-                    newDef.Spritesheets = ((IDictionary<string, JToken>) spritesheets)
-                        .ToDictionary(x => x.Key, x => SpritesheetDef.FromJToken(x.Value));
-                }
+            switch (jToken.Type) {
+                case JTokenType.Object:
+                    try {
+                        var jObj = (JObject) jToken;
 
-                return newDef;
-            }
-            catch {
-                return null;
+                        Name   = jObj.TryGetValue("Name",   out var name)   ? ((string) name) : null;
+                        Width  = jObj.TryGetValue("Width",  out var width)  ? ((int?) width)  : null;
+                        Height = jObj.TryGetValue("Height", out var height) ? ((int?) height) : null;
+
+                        if (jObj.TryGetValue("Spritesheets", out var spritesheets) && spritesheets.Type == JTokenType.Object) {
+                            Spritesheets = ((IDictionary<string, JToken>) spritesheets)
+                                .ToDictionary(x => x.Key, x => SpritesheetDef.FromJToken(x.Value));
+                        }
+                    }
+                    catch {
+                        return false;
+                    }
+                    return true;
+
+                default:
+                    return false;
             }
         }
 
-        /// <summary>
-        /// Converts the SpriteDef to a JSON object string.
-        /// </summary>
-        /// <returns>A string in JSON format.</returns>
-        public string ToJSON_String() {
-            var settings = new JsonSerializerSettings() {
-                Formatting = Formatting.Indented,
-                NullValueHandling = NullValueHandling.Ignore,
-            };
-            return JsonConvert.SerializeObject(this, settings);
+        public string ToJSON_String()
+            => ToJToken().ToString(Formatting.Indented);
+
+        public JToken ToJToken() {
+            var jObj = new JObject();
+            var jsonSettings = new JsonSerializer { NullValueHandling = NullValueHandling.Ignore };
+
+            if (Name != null)
+                jObj.Add("Name", new JValue(Name));
+            if (Width.HasValue)
+                jObj.Add("Width", new JValue(Width.Value));
+            if (Height.HasValue)
+                jObj.Add("Height", new JValue(Height.Value));
+            if (Spritesheets != null)
+                jObj.Add("Spritesheets", JToken.FromObject(Spritesheets, jsonSettings));
+
+            return jObj;
         }
 
         public override string ToString() => Name;
