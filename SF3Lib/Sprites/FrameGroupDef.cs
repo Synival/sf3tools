@@ -48,8 +48,7 @@ namespace SF3.Sprites {
             switch (jToken.Type) {
                 case JTokenType.Object:
                     try {
-                        var jObj = (JObject) jToken;
-                        Frames = ((IDictionary<string, JToken>) jObj)
+                        Frames = ((IDictionary<string, JToken>) jToken)
                             .ToDictionary(x => (SpriteFrameDirection) Enum.Parse(typeof(SpriteFrameDirection), x.Key), x => FrameDef.FromJToken(x.Value));
                     }
                     catch {
@@ -65,10 +64,8 @@ namespace SF3.Sprites {
         public string ToJSON_String()
             => ToJToken().ToString(Formatting.Indented);
 
-        public JToken ToJToken() {
-            var jsonSettings = new JsonSerializer { NullValueHandling = NullValueHandling.Ignore };
-            return Frames != null ? JToken.FromObject(Frames.ToDictionary(x => x.Key.ToString(), x => x.Value.ToJToken())) :  null;
-        }
+        public JToken ToJToken()
+            => Frames != null ? JToken.FromObject(Frames.ToDictionary(x => x.Key.ToString(), x => x.Value.ToJToken())) : null;
 
         public override string ToString() => string.Join(", ", Frames.Keys);
 

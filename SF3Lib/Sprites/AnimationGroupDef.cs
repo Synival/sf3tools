@@ -1,9 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using CommonLib;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
 namespace SF3.Sprites {
-    public class AnimationGroupDef {
+    public class AnimationGroupDef : IJsonResource {
         public AnimationGroupDef() { }
 
         public AnimationGroupDef(UniqueAnimationDef[] animations) {
@@ -17,8 +19,10 @@ namespace SF3.Sprites {
         /// </summary>
         /// <param name="json">AnimationGroupDef in JSON format as a string.</param>
         /// <returns>A new AnimationGroupDef if deserializing was successful, or 'null' if not.</returns>
-        public static AnimationGroupDef FromJSON(string json)
-            => FromJToken(JToken.Parse(json));
+        public static AnimationGroupDef FromJSON(string json) {
+            var animationGroupDef = new AnimationGroupDef();
+            return animationGroupDef.AssignFromJSON_String(json) ? animationGroupDef : null;
+        }
 
         /// <summary>
         /// Deserializes a JSON object of a AnimationGroupDef.
@@ -26,23 +30,39 @@ namespace SF3.Sprites {
         /// <param name="jToken">AnimationGroupDef as a JToken.</param>
         /// <returns>A new AnimationGroupDef if deserializing was successful, or 'null' if not.</returns>
         public static AnimationGroupDef FromJToken(JToken jToken) {
-            if (jToken == null || jToken.Type != JTokenType.Object)
-                return null;
+            var animationGroupDef = new AnimationGroupDef();
+            return animationGroupDef.AssignFromJToken(jToken) ? animationGroupDef : null;
+        }
 
-            try {
-                var jObj = (JObject) jToken;
-                var newDef = new AnimationGroupDef();
+        public bool AssignFromJSON_String(string json)
+            => AssignFromJToken(JToken.Parse(json));
 
-                if (jObj.TryGetValue("Animations", out var animations) && animations.Type == JTokenType.Object) {
-                    newDef.Animations = ((IDictionary<string, JToken>) animations)
-                        .ToDictionary(x => x.Key, x => AnimationDef.FromJToken(x.Value));
-                }
+        public bool AssignFromJToken(JToken jToken) {
+            if (jToken == null)
+                return false;
 
-                return newDef;
+            switch (jToken.Type) {
+                case JTokenType.Object:
+                    try {
+                        Animations = ((IDictionary<string, JToken>) jToken)
+                            .ToDictionary(x => x.Key, x => AnimationDef.FromJToken(x.Value));
+                    }
+                    catch {
+                        return false;
+                    }
+                    return true;
+
+                default:
+                    return false;
             }
-            catch {
-                return null;
-            }
+        }
+
+        public string ToJSON_String()
+            => ToJToken().ToString(Formatting.Indented);
+
+        public JToken ToJToken() {
+            var jsonSettings = new JsonSerializer { NullValueHandling = NullValueHandling.Ignore };
+            return Animations != null ? JToken.FromObject(Animations.ToDictionary(x => x.Key.ToString(), x => x.Value), jsonSettings) : null;
         }
 
         public override string ToString() => string.Join(", ", Animations.Keys.Select(x => x.ToString()));

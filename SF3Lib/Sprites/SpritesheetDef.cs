@@ -96,7 +96,6 @@ namespace SF3.Sprites {
 
         public JToken ToJToken() {
             var jObj = new JObject();
-            var jsonSettings = new JsonSerializer { NullValueHandling = NullValueHandling.Ignore };
 
             jObj.Add("SpriteID",       new JValue(SpriteID));
             jObj.Add("VerticalOffset", new JValue(VerticalOffset));
@@ -107,7 +106,7 @@ namespace SF3.Sprites {
             if (FrameGroups != null)
                 jObj.Add("FrameGroups", JToken.FromObject(FrameGroups.ToDictionary(x => x.Key, x => x.Value.ToJToken())));
             if (AnimationByDirections != null)
-                jObj.Add("AnimationByDirections", JToken.FromObject(AnimationByDirections, jsonSettings));
+                jObj.Add("AnimationByDirections", JToken.FromObject(AnimationByDirections.ToDictionary(x => x.Key, x => x.Value.ToJToken())));
 
             return jObj;
         }
