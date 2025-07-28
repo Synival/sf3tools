@@ -29,20 +29,33 @@ namespace SF3.CHR {
             => AssignFromJToken(JToken.Parse(json));
 
         public bool AssignFromJToken(JToken jToken) {
-            if (jToken == null || jToken.Type != JTokenType.Object)
+            if (jToken == null)
                 return false;
 
-            try {
-                var jObj = (JObject) jToken;
-                SpriteName      = jObj.TryGetValue("SpriteName", out var spriteName) ? ((string) spriteName) : null;
-                AnimationGroups = jObj.TryGetValue("Animations", out var animationGroups)
-                    ? animationGroups.Select(x => AnimationGroupDef.FromJToken(x)).ToArray()
-                    : null;
+            switch (jToken.Type) {
+                case JTokenType.Array:
+                    Animations = jToken.Select(x => (string) x).ToArray();
+                    return true;
 
-                return true;
-            }
-            catch {
-                return false;
+                case JTokenType.Object:
+                    try {
+                        var jObj = (JObject) jToken;
+                        SpriteName = jObj.TryGetValue("SpriteName", out var spriteName) ? ((string) spriteName) : null;
+                        Width      = jObj.TryGetValue("Width",      out var width)      ? ((int?) width)        : null;
+                        Height     = jObj.TryGetValue("Height",     out var height)     ? ((int?) height)       : null;
+                        Directions = jObj.TryGetValue("Directions", out var directions) ? ((int?) directions)   : null;
+
+                        Animations = jObj.TryGetValue("Animations", out var animations)
+                            ? animations.Select(x => (string) x).ToArray()
+                            : null;
+                    }
+                    catch {
+                        return false;
+                    }
+                    return true;
+
+                default:
+                    return false;
             }
         }
 
@@ -50,21 +63,34 @@ namespace SF3.CHR {
             => ToJToken().ToString(Formatting.Indented);
 
         public JToken ToJToken() {
-            var jObj = new JObject();
             var jsonSettings = new JsonSerializer { NullValueHandling = NullValueHandling.Ignore };
+
+            if (SpriteName == null && !Directions.HasValue && !Width.HasValue && !Height.HasValue)
+                return (Animations != null) ? JToken.FromObject(Animations, jsonSettings) : null;
+
+            var jObj = new JObject();
 
             if (SpriteName != null)
                 jObj.Add("SpriteName", new JValue(SpriteName));
-            if (AnimationGroups != null)
-                jObj.Add("Animations", JToken.FromObject(AnimationGroups.Select(x => x.ToJToken()).ToArray(), jsonSettings));
+            if (Width.HasValue)
+                jObj.Add("Width", new JValue(Width.Value));
+            if (Height.HasValue)
+                jObj.Add("Height", new JValue(Height.Value));
+            if (Directions.HasValue)
+                jObj.Add("Directions", new JValue(Directions));
+            if (Animations != null)
+                jObj.Add("Animations", JToken.FromObject(Animations, jsonSettings));
 
             return jObj;
         }
 
         public override string ToString()
-            => (SpriteName != null ? SpriteName + ": " : "") + ((AnimationGroups != null) ? string.Join(", ", AnimationGroups.Select(x => "{" + x.ToString() + "}")) : "[]");
+            => (SpriteName != null ? SpriteName + $" ({Width}x{Height}x{Directions}): " : "") + ((Animations != null) ? string.Join(", ", Animations) : "[]");
 
         public string SpriteName;
-        public AnimationGroupDef[] AnimationGroups;
+        public int? Width;
+        public int? Height;
+        public int? Directions;
+        public string[] Animations;
     }
 }

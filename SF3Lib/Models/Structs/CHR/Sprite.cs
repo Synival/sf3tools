@@ -240,43 +240,26 @@ namespace SF3.Models.Structs.CHR {
         private SpriteAnimationsDef[] CreateSpriteAnimations() {
             // Track the sprite whose animation groups are being built.
             string lastSpriteName = null;
-            var spriteAnimations = new List<SpriteAnimationsDef>();
-            SpriteAnimationsDef lastSpriteAnimations = null;
-
-            // Track the animation group whose animations are being built.
-            int? lastAnimationGroupDirections = null;
             int? lastWidth = null;
             int? lastHeight = null;
-            var animationGroups = new List<AnimationGroupDef>();
-            AnimationGroupDef lastAnimationGroup = null;
+            int? lastDirections = null;
+            var spriteAnimations = new List<SpriteAnimationsDef>();
+            SpriteAnimationsDef lastSpriteAnimations = null;
 
             // Track animations to add to the current animation group being built.
             var animations = new List<string>();
 
-            // Commits the current set of animations to the current animation group.
-            void CommitAnimationGroupAnimations() {
-                if (lastAnimationGroup == null)
-                    return;
-
-                if (lastAnimationGroup.Animations == null)
-                    lastAnimationGroup.Animations = animations.ToArray();
-
-                animations = new List<string>();
-            }
-
             // Commits the current animation group to the current sprite.
             void CommitAnimationGroup() {
-                CommitAnimationGroupAnimations();
-
                 if (lastSpriteAnimations == null)
                     return;
 
-                if (lastSpriteAnimations.AnimationGroups == null)
-                    lastSpriteAnimations.AnimationGroups = animationGroups.ToArray();
+                if (lastSpriteAnimations.Animations == null)
+                    lastSpriteAnimations.Animations = animations.ToArray();
 
-                lastAnimationGroupDirections = null;
-                animationGroups    = new List<AnimationGroupDef>();
-                lastAnimationGroup = null;
+                lastDirections = null;
+
+                animations = new List<string>();
             }
 
             // We want to add 'null' entries for empty animations, so build an array of animations
@@ -304,59 +287,59 @@ namespace SF3.Models.Structs.CHR {
                 if (animation == null) {
                     if (lastSpriteAnimations == null) {
                         lastSpriteName = null;
-                        lastSpriteAnimations = new SpriteAnimationsDef() { SpriteName = null };
-                        spriteAnimations.Add(lastSpriteAnimations);
+                        lastWidth      = null;
+                        lastHeight     = null;
+                        lastDirections = null;
 
-                        lastAnimationGroupDirections = 0;
-                        lastWidth = 0;
-                        lastHeight = 0;
-                        lastAnimationGroup = new AnimationGroupDef() { Directions = null };
-                        animationGroups.Add(lastAnimationGroup);
+                        lastSpriteAnimations = new SpriteAnimationsDef();
+                        spriteAnimations.Add(lastSpriteAnimations);
                     }
                     animations.Add(null);
                     continue;
                 }
 
-                // If the sprite name has changed, begin a new one.
-                if (spriteName != lastSpriteName || lastSpriteAnimations == null) {
+                // If the sprite or spritesheet info has changed, begin a new one.
+                if (spriteName != lastSpriteName ||
+                    width      != lastWidth      ||
+                    height     != lastHeight     ||
+                    directions != lastDirections ||
+                    lastSpriteAnimations == null
+                ) {
                     CommitAnimationGroup();
+
+                    lastSpriteName = spriteName;
+                    lastWidth      = width;
+                    lastHeight     = height;
+                    lastDirections = directions;
 
                     // If the previous sprite was a set of 'null' animations, let's hijack it and
                     // use it as the current sprite + animations, effectively removing one redundant
                     // sprite at front.
-                    if (lastSpriteAnimations != null && lastSpriteAnimations.SpriteName == null && lastSpriteAnimations.AnimationGroups != null && lastSpriteAnimations.AnimationGroups.All(x => x == null)) {
-                        lastSpriteName = spriteName;
+                    if (lastSpriteAnimations != null &&
+                        lastSpriteAnimations.SpriteName == null &&
+                        lastSpriteAnimations.Width      == null &&
+                        lastSpriteAnimations.Height     == null &&
+                        lastSpriteAnimations.Directions == null &&
+                        lastSpriteAnimations.Animations != null &&
+                        lastSpriteAnimations.Animations.All(x => x == null)
+                    ) {
                         lastSpriteAnimations.SpriteName = spriteName;
+                        lastSpriteAnimations.Width      = width;
+                        lastSpriteAnimations.Height     = height;
+                        lastSpriteAnimations.Directions = directions;
 
-                        lastAnimationGroupDirections = directions;
-                        lastAnimationGroup = lastSpriteAnimations.AnimationGroups.Last();
-                        lastAnimationGroup.Directions = directions;
-
-                        animations = lastAnimationGroup.Animations.ToList();
-                        lastAnimationGroup.Animations = null;
+                        animations = lastSpriteAnimations.Animations.ToList();
+                        lastSpriteAnimations.Animations = null;
                     }
                     else {
-                        lastSpriteName = spriteName;
                         lastSpriteAnimations = new SpriteAnimationsDef() {
-                            SpriteName = spriteName
+                            SpriteName = spriteName,
+                            Width = width,    
+                            Height = height,
+                            Directions = directions,
                         };
                         spriteAnimations.Add(lastSpriteAnimations);
                     }
-                }
-
-                // If the animation group has changed, begin a new one.
-                if (directions != lastAnimationGroupDirections || width != lastWidth || height != lastHeight || lastAnimationGroup == null) {
-                    CommitAnimationGroupAnimations();
-
-                    lastAnimationGroupDirections = directions;
-                    lastWidth = width;
-                    lastHeight = height;
-                    lastAnimationGroup = new AnimationGroupDef() {
-                        Directions = directions,
-                        Width = width,
-                        Height = height
-                    };
-                    animationGroups.Add(lastAnimationGroup);
                 }
 
                 // Add the current animation to the animation group.

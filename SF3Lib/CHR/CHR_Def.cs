@@ -140,56 +140,54 @@ namespace SF3.CHR {
                     var spriteName = animations.SpriteName ?? sprite.SpriteName;
                     var spriteDef = SpriteUtils.GetSpriteDef(spriteName);
 
-                    foreach (var animationGroup in animations.AnimationGroups ?? new AnimationGroupDef[0]) {
-                        var directions = animationGroup.Directions ?? sprite.Directions;
-                        var spritesheetKey = SpritesheetDef.DimensionsToKey(
-                            animationGroup.Width ?? sprite.Width, animationGroup.Height ?? sprite.Height);
-                        var frameKeyPrefix = $"{spriteName} ({spritesheetKey})";
-                        var spritesheetDef = (spriteDef?.Spritesheets?.TryGetValue(spritesheetKey, out var spritesheetOut) == true) ? spritesheetOut : null;
-                        var spriteAnimsByDirection = (spritesheetDef?.AnimationByDirections?.TryGetValue(directions, out var sadOut) == true) ? sadOut : null;
+                    var directions = animations.Directions ?? sprite.Directions;
+                    var spritesheetKey = SpritesheetDef.DimensionsToKey(
+                        animations.Width ?? sprite.Width, animations.Height ?? sprite.Height);
+                    var frameKeyPrefix = $"{spriteName} ({spritesheetKey})";
+                    var spritesheetDef = (spriteDef?.Spritesheets?.TryGetValue(spritesheetKey, out var spritesheetOut) == true) ? spritesheetOut : null;
+                    var spriteAnimsByDirection = (spritesheetDef?.AnimationByDirections?.TryGetValue(directions, out var sadOut) == true) ? sadOut : null;
 
-                        foreach (var animationName in animationGroup.Animations ?? new string[0]) {
-                            var spriteAnimation = (animationName != null && spriteAnimsByDirection?.Animations?.TryGetValue(animationName, out var animOut) == true) ? animOut : null;
-                            if (spriteAnimation != null) {
-                                chrWriter.StartAnimationForCurrentSprite(animationIndex);
+                    foreach (var animationName in animations.Animations ?? new string[0]) {
+                        var spriteAnimation = (animationName != null && spriteAnimsByDirection?.Animations?.TryGetValue(animationName, out var animOut) == true) ? animOut : null;
+                        if (spriteAnimation != null) {
+                            chrWriter.StartAnimationForCurrentSprite(animationIndex);
 
-                                var currentDirections = directions;
-                                foreach (var frame in spriteAnimation.AnimationFrames ?? new AnimationFrameDef[0]) {
-                                    string[] frameKeys = null;
+                            var currentDirections = directions;
+                            foreach (var frame in spriteAnimation.AnimationFrames ?? new AnimationFrameDef[0]) {
+                                string[] frameKeys = null;
 
-                                    // The 'SetDirectionCount' command (0xF1) updates the number of frames in our key from now on.
-                                    if (frame.Command == SpriteAnimationFrameCommandType.SetDirectionCount)
-                                        currentDirections = frame.Parameter;
-                                    // If this is a frame, we need to generate a key that will be used to locate a FrameID later.
-                                    else if (frame.Command == SpriteAnimationFrameCommandType.Frame) {
-                                        var frameDirections = CHR_Utils.GetCHR_FrameGroupDirections(currentDirections);
+                                // The 'SetDirectionCount' command (0xF1) updates the number of frames in our key from now on.
+                                if (frame.Command == SpriteAnimationFrameCommandType.SetDirectionCount)
+                                    currentDirections = frame.Parameter;
+                                // If this is a frame, we need to generate a key that will be used to locate a FrameID later.
+                                else if (frame.Command == SpriteAnimationFrameCommandType.Frame) {
+                                    var frameDirections = CHR_Utils.GetCHR_FrameGroupDirections(currentDirections);
 
-                                        // The 'FrameGroup' command assumes the standard directions for this frame.
-                                        if (frame.FrameGroup != null) {
-                                            frameKeys = frameDirections
-                                                .Select(x => $"{frameKeyPrefix} {frame.FrameGroup} ({x.ToString()})")
-                                                .ToArray();
-                                        }
-                                        // The 'Frames' command has manually specified FrameGroup + Direction pairs.
-                                        else if (frame.Frames != null) {
-                                            frameKeys = frameDirections
-                                                .ToDictionary(x => x, x => frame.Frames.TryGetValue(x.ToString(), out var f) ? f : null)
-                                                .Select(x => (x.Value == null) ? null : $"{frameKeyPrefix} {x.Value.Frame} ({x.Value.Direction.ToString()})")
-                                                .ToArray();
-                                        }
-                                        // If nothing is there, something is wrong.
-                                        else
-                                            // TODO: what to do if we reach this point?
-                                            ;
+                                    // The 'FrameGroup' command assumes the standard directions for this frame.
+                                    if (frame.FrameGroup != null) {
+                                        frameKeys = frameDirections
+                                            .Select(x => $"{frameKeyPrefix} {frame.FrameGroup} ({x.ToString()})")
+                                            .ToArray();
                                     }
-
-                                    // We have enough info; write the frame.
-                                    chrWriter.WriteAnimationFrame(i, frame.Command, frame.Parameter, frameKeys);
+                                    // The 'Frames' command has manually specified FrameGroup + Direction pairs.
+                                    else if (frame.Frames != null) {
+                                        frameKeys = frameDirections
+                                            .ToDictionary(x => x, x => frame.Frames.TryGetValue(x.ToString(), out var f) ? f : null)
+                                            .Select(x => (x.Value == null) ? null : $"{frameKeyPrefix} {x.Value.Frame} ({x.Value.Direction.ToString()})")
+                                            .ToArray();
+                                    }
+                                    // If nothing is there, something is wrong.
+                                    else
+                                        // TODO: what to do if we reach this point?
+                                        ;
                                 }
-                            }
 
-                            animationIndex++;
+                                // We have enough info; write the frame.
+                                chrWriter.WriteAnimationFrame(i, frame.Command, frame.Parameter, frameKeys);
+                            }
                         }
+
+                        animationIndex++;
                     }
                 }
 
