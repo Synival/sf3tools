@@ -40,11 +40,7 @@ namespace SF3.CHR {
                 case JTokenType.Object:
                     try {
                         var jObj = (JObject) jToken;
-
                         Name   = jObj.TryGetValue("Name",   out var name)   ? ((string) name) : null;
-                        Width  = jObj.TryGetValue("Width",  out var width)  ? ((int?) width)  : null;
-                        Height = jObj.TryGetValue("Height", out var height) ? ((int?) height) : null;
-
                         Frames = jObj.TryGetValue("Directions", out var frames)
                             ? frames.Select(x => FrameDef.FromJToken(x)).ToArray()
                             : null;
@@ -65,16 +61,12 @@ namespace SF3.CHR {
         public JToken ToJToken() {
             var jsonSettings = new JsonSerializer { NullValueHandling = NullValueHandling.Ignore };
 
-            if (!Width.HasValue && !Height.HasValue && Frames == null)
+            if (Frames == null)
                 return (Name != null) ? new JValue(Name) : null;
 
             var jObj = new JObject();
             if (Name != null)
                 jObj.Add("Name", new JValue(Name));
-            if (Width.HasValue)
-                jObj.Add("Width", new JValue(Width.Value));
-            if (Height.HasValue)
-                jObj.Add("Height", new JValue(Height.Value));
             if (Frames != null)
                 jObj.Add("Directions", JToken.FromObject(Frames.Select(x => x.ToJToken()).ToArray(), jsonSettings));
 
@@ -85,8 +77,6 @@ namespace SF3.CHR {
             => (Name != null ? Name + ": " : "") + ((Frames != null) ? string.Join(", ", Frames.Select(x => "{" + x.ToString() + "}")) : "[]");
 
         public string Name;
-        public int? Width;
-        public int? Height;
         public FrameDef[] Frames;
     }
 }

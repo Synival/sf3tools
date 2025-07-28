@@ -126,13 +126,13 @@ namespace SF3.Models.Structs.CHR {
         private SpriteFramesDef[] CreateSpriteFrames(HashSet<string> framesWithDuplicates) {
             // Track the sprite whose frame groups are being built.
             string lastSpriteName = null;
+            int? lastWidth = null;
+            int? lastHeight = null;
             var spriteFrames = new List<SpriteFramesDef>();
             SpriteFramesDef lastSpriteFrames = null;
 
             // Track the frame group whose directions are being built.
             string lastFrameGroupName = null;
-            int? lastFrameGroupWidth  = null;
-            int? lastFrameGroupHeight = null;
             var frameGroups = new List<FrameGroupDef>();
             FrameGroupDef lastFrameGroup = null;
 
@@ -161,11 +161,9 @@ namespace SF3.Models.Structs.CHR {
                 if (lastSpriteFrames.FrameGroups == null)
                     lastSpriteFrames.FrameGroups = frameGroups.ToArray();
 
-                lastFrameGroupName   = null;
-                lastFrameGroupWidth  = null;
-                lastFrameGroupHeight = null;
-                frameGroups          = new List<FrameGroupDef>();
-                lastFrameGroup       = null;
+                lastFrameGroupName = null;
+                frameGroups        = new List<FrameGroupDef>();
+                lastFrameGroup     = null;
             }
 
             // Go through each frame, building a set of CHR_SpriteFrameDef's.
@@ -191,27 +189,27 @@ namespace SF3.Models.Structs.CHR {
                     spriteName = null;
 
                 // If the sprite name has changed, begin a new one.
-                if (spriteName != lastSpriteName || lastSpriteFrames == null) {
+                if (spriteName != lastSpriteName || width != lastWidth || height != lastHeight || lastSpriteFrames == null) {
                     CommitFrameGroup();
 
                     lastSpriteName = spriteName;
+                    lastWidth      = width;
+                    lastHeight     = height;
                     lastSpriteFrames = new SpriteFramesDef() {
-                        SpriteName = spriteName
+                        SpriteName = spriteName,
+                        Width      = width,
+                        Height     = height
                     };
                     spriteFrames.Add(lastSpriteFrames);
                 }
 
                 // If the frame group has changed, begin a new one.
-                if (frameName != lastFrameGroupName || width != lastFrameGroupWidth || height != lastFrameGroupHeight || lastFrameGroup == null) {
+                if (frameName != lastFrameGroupName || lastFrameGroup == null) {
                     CommitFrameGroupDirections();
 
-                    lastFrameGroupName   = frameName;
-                    lastFrameGroupWidth  = width;
-                    lastFrameGroupHeight = height;
+                    lastFrameGroupName = frameName;
                     lastFrameGroup = new FrameGroupDef() {
-                        Name   = frame.FrameName,
-                        Width  = width,
-                        Height = height,
+                        Name = frame.FrameName,
                     };
                     frameGroups.Add(lastFrameGroup);
                 }

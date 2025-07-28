@@ -41,7 +41,11 @@ namespace SF3.CHR {
                 case JTokenType.Object:
                     try {
                         var jObj = (JObject) jToken;
+
                         SpriteName = jObj.TryGetValue("SpriteName", out var spriteName) ? ((string) spriteName) : null;
+                        Width      = jObj.TryGetValue("Width",      out var width)      ? ((int?) width)        : null;
+                        Height     = jObj.TryGetValue("Height",     out var height)     ? ((int?) height)       : null;
+
                         FrameGroups = jObj.TryGetValue("Frames", out var frameGroups)
                             ? frameGroups.Select(x => FrameGroupDef.FromJToken(x)).ToArray()
                             : null;
@@ -62,11 +66,16 @@ namespace SF3.CHR {
         public JToken ToJToken() {
             var jsonSettings = new JsonSerializer { NullValueHandling = NullValueHandling.Ignore };
 
-            if (SpriteName == null)
+            if (SpriteName == null && !Width.HasValue && !Height.HasValue)
                 return FrameGroups != null ? JToken.FromObject(FrameGroups.Select(x => x.ToJToken()).ToArray(), jsonSettings) : null;
 
             var jObj = new JObject();
-            jObj.Add("SpriteName", new JValue(SpriteName));
+            if (SpriteName != null)
+                jObj.Add("SpriteName", new JValue(SpriteName));
+            if (Width.HasValue)
+                jObj.Add("Width", new JValue(Width.Value));
+            if (Height.HasValue)
+                jObj.Add("Height", new JValue(Height.Value));
             if (FrameGroups != null)
                 jObj.Add("Frames", JToken.FromObject(FrameGroups.Select(x => x.ToJToken()), jsonSettings));
 
@@ -77,6 +86,9 @@ namespace SF3.CHR {
             => (SpriteName != null ? SpriteName + ": " : "") + ((FrameGroups != null) ? string.Join(", ", FrameGroups.Select(x => "{" + x.ToString() + "}")) : "[]");
 
         public string SpriteName;
+        public int? Width;
+        public int? Height;
+
         public FrameGroupDef[] FrameGroups;
     }
 }

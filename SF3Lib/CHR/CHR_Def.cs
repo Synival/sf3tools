@@ -273,13 +273,12 @@ namespace SF3.CHR {
                 framesToWriteBySpriteIndex.Add(i, new List<(string, string)>());
 
                 foreach (var spriteFrames in sprite.SpriteFrames ?? new SpriteFramesDef[0]) {
-                    var spriteName = spriteFrames.SpriteName ?? sprite.SpriteName;
-                    var spriteDef = SpriteUtils.GetSpriteDef(spriteName);
+                    var spriteName  = spriteFrames.SpriteName ?? sprite.SpriteName;
+                    var frameWidth  = spriteFrames.Width      ?? sprite.Width;
+                    var frameHeight = spriteFrames.Height     ?? sprite.Height;
+                    var spriteDef   = SpriteUtils.GetSpriteDef(spriteName);
 
                     foreach (var frameGroup in spriteFrames.FrameGroups ?? new FrameGroupDef[0]) {
-                        var frameWidth  = frameGroup.Width  ?? sprite.Width;
-                        var frameHeight = frameGroup.Height ?? sprite.Height;
-
                         // Attempt to load the spritesheet referenced by the spritesheetDef.
                         // Don't bothe if the def couldn't be found.
                         var spritesheetKey = SpritesheetDef.DimensionsToKey(frameWidth, frameHeight);
