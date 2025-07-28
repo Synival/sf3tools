@@ -31,8 +31,10 @@ namespace SF3.Sprites {
         /// </summary>
         /// <param name="json">AnimationFrameDef in JSON format as a string.</param>
         /// <returns>A new AnimationFrameDef if deserializing was successful, or 'null' if not.</returns>
-        public static AnimationFrameDef FromJSON(string json)
-            => FromJToken(JToken.Parse(json));
+        public static AnimationFrameDef FromJSON(string json) {
+            var animationFrameDef = new AnimationFrameDef();
+            return animationFrameDef.AssignFromJSON_String(json) ? animationFrameDef : null;
+        }
 
         /// <summary>
         /// Deserializes a JSON object of a AnimationFrameDef.
@@ -40,32 +42,58 @@ namespace SF3.Sprites {
         /// <param name="jToken">AnimationFrameDef as a JToken.</param>
         /// <returns>A new AnimationFrameDef if deserializing was successful, or 'null' if not.</returns>
         public static AnimationFrameDef FromJToken(JToken jToken) {
-            if (jToken == null || jToken.Type != JTokenType.Object)
-                return null;
+            var animationFrameDef = new AnimationFrameDef();
+            return animationFrameDef.AssignFromJToken(jToken) ? animationFrameDef : null;
+        }
 
-            try {
-                var jObj = (JObject) jToken;
-                var newDef = new AnimationFrameDef();
+        public bool AssignFromJSON_String(string json)
+            => AssignFromJToken(JToken.Parse(json));
 
-                newDef.FrameGroup = jObj.TryGetValue("FrameGroup", out var frameGroup) ? ((string) frameGroup) : null;
+        public bool AssignFromJToken(JToken jToken) {
+            if (jToken == null)
+                return false;
 
-                if (jObj.TryGetValue("Frames", out var frames) && frames.Type == JTokenType.Object) {
-                    newDef.Frames = ((IDictionary<string, JToken>) frames)
-                        .ToDictionary(x => x.Key, x => AnimationFrameDirectionDef.FromJToken(x.Value));
-                }
+            switch (jToken.Type) {
+                case JTokenType.Object:
+                    try {
+                        var jObj = (JObject) jToken;
 
-                newDef.FrameHashes = jObj.TryGetValue("FrameHashes", out var frameHashes)
-                    ? frameHashes.Select(x => (string) x).ToArray()
-                    : null;
+                        FrameGroup = jObj.TryGetValue("FrameGroup", out var frameGroup) ? ((string) frameGroup) : null;
 
-                newDef.Command   = jObj.TryGetValue("Command",   out var command)   ? (command.ToObject<SpriteAnimationFrameCommandType>()) : SpriteAnimationFrameCommandType.Frame;
-                newDef.Parameter = jObj.TryGetValue("Parameter", out var parameter) ? ((int) parameter) : 0;
+                        if (jObj.TryGetValue("Frames", out var frames) && frames.Type == JTokenType.Object) {
+                            Frames = ((IDictionary<string, JToken>) frames)
+                                .ToDictionary(x => x.Key, x => AnimationFrameDirectionDef.FromJToken(x.Value));
+                        }
 
-                return newDef;
+                        Command   = jObj.TryGetValue("Command",   out var command)   ? (command.ToObject<SpriteAnimationFrameCommandType>()) : SpriteAnimationFrameCommandType.Frame;
+                        Parameter = jObj.TryGetValue("Parameter", out var parameter) ? ((int) parameter) : 0;
+                    }
+                    catch {
+                        return false;
+                    }
+                    return true;
+
+                default:
+                    return false;
             }
-            catch {
-                return null;
-            }
+        }
+
+        public string ToJSON_String()
+            => ToJToken().ToString(Formatting.Indented);
+
+        public JToken ToJToken() {
+            var jObj = new JObject();
+            var jsonSettings = new JsonSerializer { NullValueHandling = NullValueHandling.Ignore };
+
+            if (FrameGroup != null)
+                jObj.Add("FrameGroup", new JValue(FrameGroup));
+            if (Frames != null)
+                jObj.Add("Frames", JToken.FromObject(Frames, jsonSettings));
+
+            jObj.Add("Command", new JValue(Command.ToString()));
+            jObj.Add("Parameter", new JValue(Parameter));
+
+            return jObj;
         }
 
         public bool ConvertFrameHashes(Dictionary<string, FrameGroupDef> frameGroups) {
