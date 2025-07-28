@@ -14,8 +14,8 @@ namespace SF3.Sprites {
 
         public FrameDef(StandaloneFrameDef frame) {
             Hash         = frame.Hash;
-            SpritesheetX = frame.SpriteSheetX;
-            SpritesheetY = frame.SpriteSheetY;
+            SpritesheetX = frame.SpritesheetX;
+            SpritesheetY = frame.SpritesheetY;
         }
 
         /// <summary>

@@ -205,7 +205,7 @@ namespace SpriteCHR_Builder {
                     Bitmap? spritesheet;
                     spritesheet = spritesheets.TryGetValue(spritesheetName, out var spritesheetOut) ? spritesheetOut : spritesheets.Values.FirstOrDefault();
 #pragma warning restore CA1416 // Validate platform compatibility
-                    return new { x.Index, Data = GetCompressedFrame(spritesheet, x.Index, x.FrameDef.SpriteSheetX, x.FrameDef.SpriteSheetY, x.FrameDef.Width, x.FrameDef.Height) };
+                    return new { x.Index, Data = GetCompressedFrame(spritesheet, x.Index, x.FrameDef.SpritesheetX, x.FrameDef.SpritesheetY, x.FrameDef.Width, x.FrameDef.Height) };
                 });
 
             var compressedFrameData = compressedFrameDataByHash.Select(x => x.Value.Data).ToArray();

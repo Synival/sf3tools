@@ -12,14 +12,14 @@ namespace SF3.Sprites {
             Width     = uniqueFrameDef.Width;
             Height    = uniqueFrameDef.Height;
             Direction = uniqueFrameDef.Direction;
-            SpriteSheetX = -1;
-            SpriteSheetY = -1;
+            SpritesheetX = -1;
+            SpritesheetY = -1;
         }
 
         public StandaloneFrameDef(FrameDef frame, SpriteFrameDirection direction, string name, int width, int height) {
             Hash         = frame.Hash;
-            SpriteSheetX = frame.SpritesheetX;
-            SpriteSheetY = frame.SpritesheetY;
+            SpritesheetX = frame.SpritesheetX;
+            SpritesheetY = frame.SpritesheetY;
             Direction    = direction;
             Name         = name;
             Width        = width;
@@ -36,7 +36,7 @@ namespace SF3.Sprites {
         [JsonConverter(typeof(StringEnumConverter))]
         public SpriteFrameDirection Direction;
 
-        public int SpriteSheetX;
-        public int SpriteSheetY;
+        public int SpritesheetX;
+        public int SpritesheetY;
     }
 }

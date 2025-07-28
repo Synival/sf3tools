@@ -311,8 +311,8 @@ namespace SpriteExtractor {
                         int frameIndex = 0;
                         foreach (var frame in frameGroup.Value) {
                             int y = ((hasDuplicateDirections) ? frameIndex : frameDirectionToIndex[frame.FrameInfo.Direction]) * frameHeightInPixels;
-                            frame.SpriteDefFrame.SpriteSheetX = x;
-                            frame.SpriteDefFrame.SpriteSheetY = y;
+                            frame.SpriteDefFrame.SpritesheetX = x;
+                            frame.SpriteDefFrame.SpritesheetY = y;
 
                             int pos = (y * imageWidthInPixels + x) * 2;
                             var frameData = frame.Texture.BitmapDataARGB1555;
@@ -356,8 +356,8 @@ namespace SpriteExtractor {
 
                     foreach (var spritesheetFrame in spritesheetFrames) {
                         if (framesByHash.TryGetValue(spritesheetFrame.Hash, out var from)) {
-                            spritesheetFrame.SpritesheetX = from.SpriteSheetX;
-                            spritesheetFrame.SpritesheetY = from.SpriteSheetY;
+                            spritesheetFrame.SpritesheetX = from.SpritesheetX;
+                            spritesheetFrame.SpritesheetY = from.SpritesheetY;
                         }
                         else {
                             spritesheetFrame.SpritesheetX = -1;
