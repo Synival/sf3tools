@@ -111,7 +111,7 @@ namespace SF3.Sprites {
             if (Height.HasValue)
                 jObj.Add("Height", new JValue(Height.Value));
             if (Spritesheets != null)
-                jObj.Add("Spritesheets", JToken.FromObject(Spritesheets, jsonSettings));
+                jObj.Add("Spritesheets", JToken.FromObject(Spritesheets.ToDictionary(x => x.Key, x => x.Value.ToJToken())));
 
             return jObj;
         }
