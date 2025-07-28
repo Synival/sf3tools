@@ -331,13 +331,13 @@ namespace SF3.Utils {
                         ? null
                         : (x.FrameGroup != null)
                         ? Enumerable.Range(0, frameCount)
-                            .Select(y => FrameNumberToSpriteDir(frameCount, y).ToString())
+                            .Select(y => FrameNumberToSpriteDir(frameCount, y))
                             .Select(y => frameGroups[x.FrameGroup].Frames.TryGetValue(y, out var frame) ? frame : null)
                             .ToArray()
                         : (x.Frames != null)
                         ? Enumerable.Range(0, frameCount)
                             .Select(y => FrameNumberToSpriteDir(frameCount, y).ToString())
-                            .Select(y => x.Frames.TryGetValue(y, out var frame) ? frameGroups[frame.Frame].Frames[frame.Direction.ToString()] : null)
+                            .Select(y => x.Frames.TryGetValue(y, out var frame) ? frameGroups[frame.Frame].Frames[frame.Direction] : null)
                             .ToArray()
                         : null;
 

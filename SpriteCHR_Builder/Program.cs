@@ -129,7 +129,7 @@ namespace SpriteCHR_Builder {
                     var dimensions = SpritesheetDef.KeyToDimensions(x.Key);
                     return x.Value.FrameGroups
                         .SelectMany(y => y.Value.Frames
-                            .Select(z => new StandaloneFrameDef(z.Value, Enum.Parse<SpriteFrameDirection>(z.Key), y.Key, dimensions.Width, dimensions.Height)));
+                            .Select(z => new StandaloneFrameDef(z.Value, z.Key, y.Key, dimensions.Width, dimensions.Height)));
                 })
                 .ToDictionary(x => x.Hash, x => x);
 
@@ -171,7 +171,7 @@ namespace SpriteCHR_Builder {
                     var dimensions = SpritesheetDef.KeyToDimensions(x.Key);
                     return x.Value.FrameGroups
                         .SelectMany(y => y.Value.Frames
-                            .Select(z => new StandaloneFrameDef(z.Value, Enum.Parse<SpriteFrameDirection>(z.Key), y.Key, dimensions.Width, dimensions.Height)));
+                            .Select(z => new StandaloneFrameDef(z.Value, z.Key, y.Key, dimensions.Width, dimensions.Height)));
                 })
                 .Where(x => !uniqueFrameHashesFromAnimations.Contains(x.Hash)).ToArray();
 
@@ -265,7 +265,7 @@ namespace SpriteCHR_Builder {
                 var fg = frameGroups[aniFrameDef.FrameGroup];
                 return Enumerable
                     .Range(0, frameCount)
-                    .Select(x => CHR_Utils.FrameNumberToSpriteDir(frameCount, x).ToString())
+                    .Select(x => CHR_Utils.FrameNumberToSpriteDir(frameCount, x))
                     .Select(x => (fg.Frames.TryGetValue(x, out var frame) ? frame.Hash : null)!)
                     .ToArray();
             }
@@ -276,7 +276,7 @@ namespace SpriteCHR_Builder {
                     .Range(0, frameCount)
                     .Select(x => CHR_Utils.FrameNumberToSpriteDir(frameCount, x).ToString())
                     .Select(x => aniFrameDef.Frames.TryGetValue(x, out var frameOut) ? frameOut : null)
-                    .Select(x => (x != null && frameGroups.TryGetValue(x.Frame, out var fg)) ? (fg.Frames.TryGetValue(x.Direction.ToString(), out var f) ? f.Hash : null) : null)
+                    .Select(x => (x != null && frameGroups.TryGetValue(x.Frame, out var fg)) ? (fg.Frames.TryGetValue(x.Direction, out var f) ? f.Hash : null) : null)
                     .Cast<string>()
                     .ToArray();
 

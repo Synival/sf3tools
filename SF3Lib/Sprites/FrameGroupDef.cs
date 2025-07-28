@@ -1,19 +1,21 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using CommonLib;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using SF3.Types;
 
 namespace SF3.Sprites {
     public class FrameGroupDef : IJsonResource {
         public FrameGroupDef() { }
 
         public FrameGroupDef(UniqueFrameDef[] frames) {
-            Frames = frames.ToDictionary(x => x.Direction.ToString(), x => new FrameDef(x));
+            Frames = frames.ToDictionary(x => x.Direction, x => new FrameDef(x));
         }
 
         public FrameGroupDef(StandaloneFrameDef[] frames) {
-            Frames = frames.ToDictionary(x => x.Direction.ToString(), x => new FrameDef(x));
+            Frames = frames.ToDictionary(x => x.Direction, x => new FrameDef(x));
         }
 
         /// <summary>
@@ -50,7 +52,7 @@ namespace SF3.Sprites {
 
                         if (jObj.TryGetValue("Frames", out var frames) && frames.Type == JTokenType.Object) {
                             Frames = ((IDictionary<string, JToken>) frames)
-                                .ToDictionary(x => x.Key, x => FrameDef.FromJToken(x.Value));
+                                .ToDictionary(x => (SpriteFrameDirection) Enum.Parse(typeof(SpriteFrameDirection), x.Key), x => FrameDef.FromJToken(x.Value));
                         }
                     }
                     catch {
@@ -71,13 +73,13 @@ namespace SF3.Sprites {
             var jsonSettings = new JsonSerializer { NullValueHandling = NullValueHandling.Ignore };
 
             if (Frames != null)
-                jObj.Add("Frames", JToken.FromObject(Frames, jsonSettings));
+                jObj.Add("Frames", JToken.FromObject(Frames.ToDictionary(x => x.Key.ToString(), x => x.Value), jsonSettings));
 
             return jObj;
         }
 
         public override string ToString() => string.Join(", ", Frames.Keys);
 
-        public Dictionary<string, FrameDef> Frames;
+        public Dictionary<SpriteFrameDirection, FrameDef> Frames;
     }
 }

@@ -76,7 +76,7 @@ namespace SF3.Sprites {
             if (FrameHashes.All(x => x != null)) {
                 bool FrameGroupHasHashes(FrameGroupDef fg) {
                     return FrameHashes
-                        .Select((x, i) => (Hash: x, Dir: CHR_Utils.FrameNumberToSpriteDir(frameCount, i).ToString()))
+                        .Select((x, i) => (Hash: x, Dir: CHR_Utils.FrameNumberToSpriteDir(frameCount, i)))
                         .All(x => fg.Frames.ContainsKey(x.Dir) && fg.Frames[x.Dir].Hash == x.Hash);
                 }
 
@@ -93,9 +93,8 @@ namespace SF3.Sprites {
             var allFramesByHash = frameGroups
                 .SelectMany(x => x.Value.Frames.Select(y => (
                     Name: x.Key,
-                    Dir: Enum.TryParse<SpriteFrameDirection>(y.Key, out var keyOut) ? (SpriteFrameDirection?) keyOut : null,
+                    Dir: y.Key,
                     Frame: y.Value)))
-                .Where(x => x.Dir != null)
                 .ToDictionary(x => x.Frame.Hash, x => x);
 
             var frames = FrameHashes
@@ -103,7 +102,7 @@ namespace SF3.Sprites {
                 .Where(x => x.Hash != null)
                 .ToDictionary(x => x.Dir.ToString(), x => {
                     var frame = allFramesByHash.TryGetValue(x.Hash, out var frameOut) ? frameOut : default;
-                    return (frame.Frame != null) ? new AnimationFrameDirectionDef() { Frame = frame.Name, Direction = frame.Dir.Value } : null;
+                    return (frame.Frame != null) ? new AnimationFrameDirectionDef() { Frame = frame.Name, Direction = frame.Dir } : null;
                 });
 
             var nonNullFrameCount = FrameHashes.Count(x => x != null);

@@ -251,7 +251,7 @@ namespace SpriteExtractor {
 
                     var frames = spritesheet.Value.FrameGroups
                         .SelectMany(x => x.Value.Frames
-                            .Select(y => new StandaloneFrameDef(y.Value, Enum.Parse<SpriteFrameDirection>(y.Key), x.Key, frameSize.Width, frameSize.Height))
+                            .Select(y => new StandaloneFrameDef(y.Value, y.Key, x.Key, frameSize.Width, frameSize.Height))
                         )
                         .Where(x => s_framesByHash.ContainsKey(x.Hash))
                         .Select(x => new { SpriteDefFrame = x, s_framesByHash[x.Hash].Texture, s_framesByHash[x.Hash].FrameInfo })

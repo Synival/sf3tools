@@ -302,7 +302,7 @@ namespace SF3.CHR {
                                 .ToArray();
 
                         foreach (var frame in frames) {
-                            var spriteFrameDef = (spriteFrameGroupDef?.Frames?.TryGetValue(frame.Direction.ToString(), out var spriteFrameOut) == true) ? spriteFrameOut : null;
+                            var spriteFrameDef = (spriteFrameGroupDef?.Frames?.TryGetValue(frame.Direction, out var spriteFrameOut) == true) ? spriteFrameOut : null;
                             var aniFrameKey = $"{spritesheetImageKey} {frameGroup.Name} ({frame.Direction})";
                             var frameKey = $"{spritesheetImageKey} {aniFrameKey}" + (frame.DuplicateKey == null ? "" : $" ({frame.DuplicateKey})");
 
