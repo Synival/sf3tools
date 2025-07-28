@@ -11,12 +11,10 @@
       "Scale": 0.5,
       "FrameGroups": {
         "CannonBall 1": {
-          "Frames": {
-            "First": {
-              "Hash": "46e4e4e7b65d62fbd320c26210f185ce",
-              "SpriteSheetX": 0,
-              "SpriteSheetY": 0
-            }
+          "First": {
+            "Hash": "46e4e4e7b65d62fbd320c26210f185ce",
+            "SpriteSheetX": 0,
+            "SpriteSheetY": 0
           }
         }
       },

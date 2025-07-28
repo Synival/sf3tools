@@ -11,72 +11,60 @@
       "Scale": 1.0299988,
       "FrameGroups": {
         "Idle 1": {
-          "Frames": {
-            "SSE": {
-              "Hash": "a534ed7f96b9d08c1cc685529ac76a5e",
-              "SpriteSheetX": 0,
-              "SpriteSheetY": 0
-            },
-            "ESE": {
-              "Hash": "67cc339200a026b421a1ba13f6dc6882",
-              "SpriteSheetX": 0,
-              "SpriteSheetY": 48
-            },
-            "ENE": {
-              "Hash": "b49d65bf922261281402bb0568dfc8ef",
-              "SpriteSheetX": 0,
-              "SpriteSheetY": 96
-            },
-            "NNE": {
-              "Hash": "f9eb820f420aa92e71f2914d1b3a7489",
-              "SpriteSheetX": 0,
-              "SpriteSheetY": 144
-            }
+          "SSE": {
+            "Hash": "a534ed7f96b9d08c1cc685529ac76a5e",
+            "SpriteSheetX": 0,
+            "SpriteSheetY": 0
+          },
+          "ESE": {
+            "Hash": "67cc339200a026b421a1ba13f6dc6882",
+            "SpriteSheetX": 0,
+            "SpriteSheetY": 48
+          },
+          "ENE": {
+            "Hash": "b49d65bf922261281402bb0568dfc8ef",
+            "SpriteSheetX": 0,
+            "SpriteSheetY": 96
+          },
+          "NNE": {
+            "Hash": "f9eb820f420aa92e71f2914d1b3a7489",
+            "SpriteSheetX": 0,
+            "SpriteSheetY": 144
           }
         },
         "Walking 1": {
-          "Frames": {
-            "NNE": {
-              "Hash": "d4290ca752eb19e4f5a047084a946078",
-              "SpriteSheetX": 48,
-              "SpriteSheetY": 144
-            }
+          "NNE": {
+            "Hash": "d4290ca752eb19e4f5a047084a946078",
+            "SpriteSheetX": 48,
+            "SpriteSheetY": 144
           }
         },
         "Walking 2": {
-          "Frames": {
-            "NNE": {
-              "Hash": "3ce3d1f063ca08127e015eec9bda3eec",
-              "SpriteSheetX": 96,
-              "SpriteSheetY": 144
-            }
+          "NNE": {
+            "Hash": "3ce3d1f063ca08127e015eec9bda3eec",
+            "SpriteSheetX": 96,
+            "SpriteSheetY": 144
           }
         },
         "Walking 3": {
-          "Frames": {
-            "NNE": {
-              "Hash": "0cd3f450d076fe42fe9ceee86f126cd6",
-              "SpriteSheetX": 144,
-              "SpriteSheetY": 144
-            }
+          "NNE": {
+            "Hash": "0cd3f450d076fe42fe9ceee86f126cd6",
+            "SpriteSheetX": 144,
+            "SpriteSheetY": 144
           }
         },
         "Walking 4": {
-          "Frames": {
-            "NNE": {
-              "Hash": "9591e80f54160b3851c31b115d2d2cff",
-              "SpriteSheetX": 192,
-              "SpriteSheetY": 144
-            }
+          "NNE": {
+            "Hash": "9591e80f54160b3851c31b115d2d2cff",
+            "SpriteSheetX": 192,
+            "SpriteSheetY": 144
           }
         },
         "Walking 5": {
-          "Frames": {
-            "NNE": {
-              "Hash": "0b99d23315dc9875b7c7d14288f1cb99",
-              "SpriteSheetX": 240,
-              "SpriteSheetY": 144
-            }
+          "NNE": {
+            "Hash": "0b99d23315dc9875b7c7d14288f1cb99",
+            "SpriteSheetX": 240,
+            "SpriteSheetY": 144
           }
         }
       },

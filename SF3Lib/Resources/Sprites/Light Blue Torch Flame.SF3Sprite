@@ -11,75 +11,59 @@
       "Scale": 1.0,
       "FrameGroups": {
         "Flickering 1": {
-          "Frames": {
-            "First": {
-              "Hash": "ed55fb1d2ec480d1aef366918ae5b390",
-              "SpriteSheetX": 0,
-              "SpriteSheetY": 0
-            }
+          "First": {
+            "Hash": "ed55fb1d2ec480d1aef366918ae5b390",
+            "SpriteSheetX": 0,
+            "SpriteSheetY": 0
           }
         },
         "Flickering 2": {
-          "Frames": {
-            "First": {
-              "Hash": "cc941b09547213820f46054f7f2fa7a6",
-              "SpriteSheetX": 16,
-              "SpriteSheetY": 0
-            }
+          "First": {
+            "Hash": "cc941b09547213820f46054f7f2fa7a6",
+            "SpriteSheetX": 16,
+            "SpriteSheetY": 0
           }
         },
         "Flickering 3": {
-          "Frames": {
-            "First": {
-              "Hash": "71ff04ccf9c8873323deaa8f95f7d16a",
-              "SpriteSheetX": 32,
-              "SpriteSheetY": 0
-            }
+          "First": {
+            "Hash": "71ff04ccf9c8873323deaa8f95f7d16a",
+            "SpriteSheetX": 32,
+            "SpriteSheetY": 0
           }
         },
         "Flickering 4": {
-          "Frames": {
-            "First": {
-              "Hash": "37d05ff433ec9bf93ec165728c797a10",
-              "SpriteSheetX": 48,
-              "SpriteSheetY": 0
-            }
+          "First": {
+            "Hash": "37d05ff433ec9bf93ec165728c797a10",
+            "SpriteSheetX": 48,
+            "SpriteSheetY": 0
           }
         },
         "Flickering 5": {
-          "Frames": {
-            "First": {
-              "Hash": "83cba58577a5706b0645b6f02a0aeacc",
-              "SpriteSheetX": 64,
-              "SpriteSheetY": 0
-            }
+          "First": {
+            "Hash": "83cba58577a5706b0645b6f02a0aeacc",
+            "SpriteSheetX": 64,
+            "SpriteSheetY": 0
           }
         },
         "Flickering 6": {
-          "Frames": {
-            "First": {
-              "Hash": "8dc6c91c2553b7b3e0edc0b33bdd059f",
-              "SpriteSheetX": 80,
-              "SpriteSheetY": 0
-            }
+          "First": {
+            "Hash": "8dc6c91c2553b7b3e0edc0b33bdd059f",
+            "SpriteSheetX": 80,
+            "SpriteSheetY": 0
           }
         },
         "Flickering 7": {
-          "Frames": {
-            "First": {
-              "Hash": "d4e5c34f9fa034c2a1f39c8e1726aa8e",
-              "SpriteSheetX": 96,
-              "SpriteSheetY": 0
-            }
+          "First": {
+            "Hash": "d4e5c34f9fa034c2a1f39c8e1726aa8e",
+            "SpriteSheetX": 96,
+            "SpriteSheetY": 0
           }
         },
         "Flickering 8": {
-          "Frames": {
-            "First": {
-              "Hash": "f29004b6e2a2438a6b099eabd5df4961",
-              "SpriteSheetX": 112,
-              "SpriteSheetY": 0
-            }
+          "First": {
+            "Hash": "f29004b6e2a2438a6b099eabd5df4961",
+            "SpriteSheetX": 112,
+            "SpriteSheetY": 0
           }
         }
       },

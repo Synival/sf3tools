@@ -11,17 +11,15 @@
       "Scale": 1.0,
       "FrameGroups": {
         "Idle 1": {
-          "Frames": {
-            "First": {
-              "Hash": "263969042813f0f27555866455f68715",
-              "SpriteSheetX": 0,
-              "SpriteSheetY": 0
-            },
-            "Second": {
-              "Hash": "f98c1a8b4218e3c6f51d58154268d404",
-              "SpriteSheetX": 0,
-              "SpriteSheetY": 128
-            }
+          "First": {
+            "Hash": "263969042813f0f27555866455f68715",
+            "SpriteSheetX": 0,
+            "SpriteSheetY": 0
+          },
+          "Second": {
+            "Hash": "f98c1a8b4218e3c6f51d58154268d404",
+            "SpriteSheetX": 0,
+            "SpriteSheetY": 128
           }
         }
       },

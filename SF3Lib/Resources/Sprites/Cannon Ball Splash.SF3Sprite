@@ -11,30 +11,24 @@
       "Scale": 1.0,
       "FrameGroups": {
         "Splash 1": {
-          "Frames": {
-            "First": {
-              "Hash": "2870bfc4eb226cf2f12e1ccfb0b003e1",
-              "SpriteSheetX": 0,
-              "SpriteSheetY": 0
-            }
+          "First": {
+            "Hash": "2870bfc4eb226cf2f12e1ccfb0b003e1",
+            "SpriteSheetX": 0,
+            "SpriteSheetY": 0
           }
         },
         "Splash 2": {
-          "Frames": {
-            "First": {
-              "Hash": "0f69b0d0aa821d3572b15b376b851495",
-              "SpriteSheetX": 32,
-              "SpriteSheetY": 0
-            }
+          "First": {
+            "Hash": "0f69b0d0aa821d3572b15b376b851495",
+            "SpriteSheetX": 32,
+            "SpriteSheetY": 0
           }
         },
         "Splash 3": {
-          "Frames": {
-            "First": {
-              "Hash": "393159ce7748654bce629fb509459507",
-              "SpriteSheetX": 64,
-              "SpriteSheetY": 0
-            }
+          "First": {
+            "Hash": "393159ce7748654bce629fb509459507",
+            "SpriteSheetX": 64,
+            "SpriteSheetY": 0
           }
         }
       },

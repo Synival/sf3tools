@@ -11,12 +11,10 @@
       "Scale": 0.69999695,
       "FrameGroups": {
         "Egg 1": {
-          "Frames": {
-            "First": {
-              "Hash": "d71542221a4e0fa478309cbe78c8430c",
-              "SpriteSheetX": 0,
-              "SpriteSheetY": 0
-            }
+          "First": {
+            "Hash": "d71542221a4e0fa478309cbe78c8430c",
+            "SpriteSheetX": 0,
+            "SpriteSheetY": 0
           }
         }
       },

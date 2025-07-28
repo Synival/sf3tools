@@ -11,75 +11,69 @@
       "Scale": 1.0,
       "FrameGroups": {
         "OccasionallyLookingUp 1": {
-          "Frames": {
-            "SSE": {
-              "Hash": "a2552ef8b9060346a9e092cd2cbd48aa",
-              "SpriteSheetX": 0,
-              "SpriteSheetY": 0
-            },
-            "ESE": {
-              "Hash": "9e68ae0b0d2589e7f3a47184ba5af24f",
-              "SpriteSheetX": 0,
-              "SpriteSheetY": 40
-            },
-            "ENE": {
-              "Hash": "7d068b9f705822aaadcd31532f1a6887",
-              "SpriteSheetX": 0,
-              "SpriteSheetY": 80
-            },
-            "NNE": {
-              "Hash": "f1712549c940c15e43a2ca2834d04d58",
-              "SpriteSheetX": 0,
-              "SpriteSheetY": 120
-            }
+          "SSE": {
+            "Hash": "a2552ef8b9060346a9e092cd2cbd48aa",
+            "SpriteSheetX": 0,
+            "SpriteSheetY": 0
+          },
+          "ESE": {
+            "Hash": "9e68ae0b0d2589e7f3a47184ba5af24f",
+            "SpriteSheetX": 0,
+            "SpriteSheetY": 40
+          },
+          "ENE": {
+            "Hash": "7d068b9f705822aaadcd31532f1a6887",
+            "SpriteSheetX": 0,
+            "SpriteSheetY": 80
+          },
+          "NNE": {
+            "Hash": "f1712549c940c15e43a2ca2834d04d58",
+            "SpriteSheetX": 0,
+            "SpriteSheetY": 120
           }
         },
         "OccasionallyLookingUp 2": {
-          "Frames": {
-            "SSE": {
-              "Hash": "697fbcf00a85789f5d920ba2b8e51679",
-              "SpriteSheetX": 40,
-              "SpriteSheetY": 0
-            },
-            "ESE": {
-              "Hash": "83a7dda4698fb88b71a502dffde0d7bb",
-              "SpriteSheetX": 40,
-              "SpriteSheetY": 40
-            },
-            "ENE": {
-              "Hash": "df670563e4270a62084775f8d38f5c22",
-              "SpriteSheetX": 40,
-              "SpriteSheetY": 80
-            },
-            "NNE": {
-              "Hash": "c8147a7034783671c18ab4b1c18e3acf",
-              "SpriteSheetX": 40,
-              "SpriteSheetY": 120
-            }
+          "SSE": {
+            "Hash": "697fbcf00a85789f5d920ba2b8e51679",
+            "SpriteSheetX": 40,
+            "SpriteSheetY": 0
+          },
+          "ESE": {
+            "Hash": "83a7dda4698fb88b71a502dffde0d7bb",
+            "SpriteSheetX": 40,
+            "SpriteSheetY": 40
+          },
+          "ENE": {
+            "Hash": "df670563e4270a62084775f8d38f5c22",
+            "SpriteSheetX": 40,
+            "SpriteSheetY": 80
+          },
+          "NNE": {
+            "Hash": "c8147a7034783671c18ab4b1c18e3acf",
+            "SpriteSheetX": 40,
+            "SpriteSheetY": 120
           }
         },
         "OccasionallyLookingUp 3": {
-          "Frames": {
-            "SSE": {
-              "Hash": "061decf2093e7548ba2b4e1f8cc3e35f",
-              "SpriteSheetX": 80,
-              "SpriteSheetY": 0
-            },
-            "ESE": {
-              "Hash": "bc06a78bae7fd4ecb842faabd9b30c27",
-              "SpriteSheetX": 80,
-              "SpriteSheetY": 40
-            },
-            "ENE": {
-              "Hash": "2e394637b8545414041b17f1dc9a5c0b",
-              "SpriteSheetX": 80,
-              "SpriteSheetY": 80
-            },
-            "NNE": {
-              "Hash": "6ac610ddf12e9a5e95675895229aca77",
-              "SpriteSheetX": 80,
-              "SpriteSheetY": 120
-            }
+          "SSE": {
+            "Hash": "061decf2093e7548ba2b4e1f8cc3e35f",
+            "SpriteSheetX": 80,
+            "SpriteSheetY": 0
+          },
+          "ESE": {
+            "Hash": "bc06a78bae7fd4ecb842faabd9b30c27",
+            "SpriteSheetX": 80,
+            "SpriteSheetY": 40
+          },
+          "ENE": {
+            "Hash": "2e394637b8545414041b17f1dc9a5c0b",
+            "SpriteSheetX": 80,
+            "SpriteSheetY": 80
+          },
+          "NNE": {
+            "Hash": "6ac610ddf12e9a5e95675895229aca77",
+            "SpriteSheetX": 80,
+            "SpriteSheetY": 120
           }
         }
       },

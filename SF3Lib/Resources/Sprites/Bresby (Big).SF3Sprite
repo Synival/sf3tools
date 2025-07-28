@@ -11,30 +11,24 @@
       "Scale": 0.6199951,
       "FrameGroups": {
         "Idle 1": {
-          "Frames": {
-            "NNE": {
-              "Hash": "e1aec27e0858ed6efb2bdc01678323e7",
-              "SpriteSheetX": 0,
-              "SpriteSheetY": 0
-            }
+          "NNE": {
+            "Hash": "e1aec27e0858ed6efb2bdc01678323e7",
+            "SpriteSheetX": 0,
+            "SpriteSheetY": 0
           }
         },
         "Idle 2": {
-          "Frames": {
-            "NNE": {
-              "Hash": "790b843cef1e360890e9c7060b2f7b9e",
-              "SpriteSheetX": 64,
-              "SpriteSheetY": 0
-            }
+          "NNE": {
+            "Hash": "790b843cef1e360890e9c7060b2f7b9e",
+            "SpriteSheetX": 64,
+            "SpriteSheetY": 0
           }
         },
         "Idle 3": {
-          "Frames": {
-            "NNE": {
-              "Hash": "245de4da9e50c4d1cf64c86c3fca9b23",
-              "SpriteSheetX": 128,
-              "SpriteSheetY": 0
-            }
+          "NNE": {
+            "Hash": "245de4da9e50c4d1cf64c86c3fca9b23",
+            "SpriteSheetX": 128,
+            "SpriteSheetY": 0
           }
         }
       },

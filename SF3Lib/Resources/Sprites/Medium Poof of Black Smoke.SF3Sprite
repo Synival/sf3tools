@@ -11,57 +11,45 @@
       "Scale": 1.0,
       "FrameGroups": {
         "Poofing 1": {
-          "Frames": {
-            "First": {
-              "Hash": "7267931c5c3e853c065ebae2fb4ee894",
-              "SpriteSheetX": 0,
-              "SpriteSheetY": 0
-            }
+          "First": {
+            "Hash": "7267931c5c3e853c065ebae2fb4ee894",
+            "SpriteSheetX": 0,
+            "SpriteSheetY": 0
           }
         },
         "Poofing 2": {
-          "Frames": {
-            "First": {
-              "Hash": "63a841435e028eba430c6fa23d3a9665",
-              "SpriteSheetX": 32,
-              "SpriteSheetY": 0
-            }
+          "First": {
+            "Hash": "63a841435e028eba430c6fa23d3a9665",
+            "SpriteSheetX": 32,
+            "SpriteSheetY": 0
           }
         },
         "Poofing 3": {
-          "Frames": {
-            "First": {
-              "Hash": "d76d2417d152afb2c70669963f0af8fa",
-              "SpriteSheetX": 64,
-              "SpriteSheetY": 0
-            }
+          "First": {
+            "Hash": "d76d2417d152afb2c70669963f0af8fa",
+            "SpriteSheetX": 64,
+            "SpriteSheetY": 0
           }
         },
         "Poofing 4": {
-          "Frames": {
-            "First": {
-              "Hash": "ad00101c8c22c364be1f2da1d25aad5c",
-              "SpriteSheetX": 96,
-              "SpriteSheetY": 0
-            }
+          "First": {
+            "Hash": "ad00101c8c22c364be1f2da1d25aad5c",
+            "SpriteSheetX": 96,
+            "SpriteSheetY": 0
           }
         },
         "Poofing 5": {
-          "Frames": {
-            "First": {
-              "Hash": "f28e3ef1427bcdb09b379c8c69e4823b",
-              "SpriteSheetX": 128,
-              "SpriteSheetY": 0
-            }
+          "First": {
+            "Hash": "f28e3ef1427bcdb09b379c8c69e4823b",
+            "SpriteSheetX": 128,
+            "SpriteSheetY": 0
           }
         },
         "Poofing 6": {
-          "Frames": {
-            "First": {
-              "Hash": "cb20d99ec049db7b3fba22c8ff4dd817",
-              "SpriteSheetX": 160,
-              "SpriteSheetY": 0
-            }
+          "First": {
+            "Hash": "cb20d99ec049db7b3fba22c8ff4dd817",
+            "SpriteSheetX": 160,
+            "SpriteSheetY": 0
           }
         }
       },

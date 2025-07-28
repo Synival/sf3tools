@@ -11,48 +11,38 @@
       "Scale": 0.59999084,
       "FrameGroups": {
         "OrbHovering 1": {
-          "Frames": {
-            "First": {
-              "Hash": "1dac71484f78a8109b693459d13a7319",
-              "SpriteSheetX": 0,
-              "SpriteSheetY": 0
-            }
+          "First": {
+            "Hash": "1dac71484f78a8109b693459d13a7319",
+            "SpriteSheetX": 0,
+            "SpriteSheetY": 0
           }
         },
         "OrbHovering 2": {
-          "Frames": {
-            "First": {
-              "Hash": "bc2c82635f95d2c9eca6f46f4f7ad257",
-              "SpriteSheetX": 48,
-              "SpriteSheetY": 0
-            }
+          "First": {
+            "Hash": "bc2c82635f95d2c9eca6f46f4f7ad257",
+            "SpriteSheetX": 48,
+            "SpriteSheetY": 0
           }
         },
         "OrbHovering 3": {
-          "Frames": {
-            "First": {
-              "Hash": "70f1556fa8fce78043f885410dbd0a60",
-              "SpriteSheetX": 96,
-              "SpriteSheetY": 0
-            }
+          "First": {
+            "Hash": "70f1556fa8fce78043f885410dbd0a60",
+            "SpriteSheetX": 96,
+            "SpriteSheetY": 0
           }
         },
         "OrbHovering 4": {
-          "Frames": {
-            "First": {
-              "Hash": "fa2c7cde3ec73a8288a0ffaa2be8dd75",
-              "SpriteSheetX": 144,
-              "SpriteSheetY": 0
-            }
+          "First": {
+            "Hash": "fa2c7cde3ec73a8288a0ffaa2be8dd75",
+            "SpriteSheetX": 144,
+            "SpriteSheetY": 0
           }
         },
         "OrbHovering 5": {
-          "Frames": {
-            "First": {
-              "Hash": "9507600b69c62ac6ad04bce7e435b84c",
-              "SpriteSheetX": 192,
-              "SpriteSheetY": 0
-            }
+          "First": {
+            "Hash": "9507600b69c62ac6ad04bce7e435b84c",
+            "SpriteSheetX": 192,
+            "SpriteSheetY": 0
           }
         }
       },

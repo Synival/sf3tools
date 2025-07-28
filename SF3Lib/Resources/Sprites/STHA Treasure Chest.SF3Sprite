@@ -11,75 +11,69 @@
       "Scale": 1.0,
       "FrameGroups": {
         "OpeningAndClosing 1": {
-          "Frames": {
-            "SSE": {
-              "Hash": "aa26de57a37d827d3f9e8d15d8f82770",
-              "SpriteSheetX": 0,
-              "SpriteSheetY": 0
-            },
-            "ESE": {
-              "Hash": "5e2bc34f0db7b6a0a4feb6ad730f3d7a",
-              "SpriteSheetX": 0,
-              "SpriteSheetY": 32
-            },
-            "ENE": {
-              "Hash": "034dbfe50d9159378ca86ab5049986dd",
-              "SpriteSheetX": 0,
-              "SpriteSheetY": 64
-            },
-            "NNE": {
-              "Hash": "0c4aa859044db08c5d64d198b91e640f",
-              "SpriteSheetX": 0,
-              "SpriteSheetY": 96
-            }
+          "SSE": {
+            "Hash": "aa26de57a37d827d3f9e8d15d8f82770",
+            "SpriteSheetX": 0,
+            "SpriteSheetY": 0
+          },
+          "ESE": {
+            "Hash": "5e2bc34f0db7b6a0a4feb6ad730f3d7a",
+            "SpriteSheetX": 0,
+            "SpriteSheetY": 32
+          },
+          "ENE": {
+            "Hash": "034dbfe50d9159378ca86ab5049986dd",
+            "SpriteSheetX": 0,
+            "SpriteSheetY": 64
+          },
+          "NNE": {
+            "Hash": "0c4aa859044db08c5d64d198b91e640f",
+            "SpriteSheetX": 0,
+            "SpriteSheetY": 96
           }
         },
         "OpeningAndClosing 2": {
-          "Frames": {
-            "SSE": {
-              "Hash": "f2f455cb601cf83fc2e6928f272cb178",
-              "SpriteSheetX": 32,
-              "SpriteSheetY": 0
-            },
-            "ESE": {
-              "Hash": "30d3f4e48a170baf213ef976967e6108",
-              "SpriteSheetX": 32,
-              "SpriteSheetY": 32
-            },
-            "ENE": {
-              "Hash": "cdf5a3f51548e06a6e3e39cd3f8ba055",
-              "SpriteSheetX": 32,
-              "SpriteSheetY": 64
-            },
-            "NNE": {
-              "Hash": "b94bff7dd2b5f5e3ebefd1addc685b23",
-              "SpriteSheetX": 32,
-              "SpriteSheetY": 96
-            }
+          "SSE": {
+            "Hash": "f2f455cb601cf83fc2e6928f272cb178",
+            "SpriteSheetX": 32,
+            "SpriteSheetY": 0
+          },
+          "ESE": {
+            "Hash": "30d3f4e48a170baf213ef976967e6108",
+            "SpriteSheetX": 32,
+            "SpriteSheetY": 32
+          },
+          "ENE": {
+            "Hash": "cdf5a3f51548e06a6e3e39cd3f8ba055",
+            "SpriteSheetX": 32,
+            "SpriteSheetY": 64
+          },
+          "NNE": {
+            "Hash": "b94bff7dd2b5f5e3ebefd1addc685b23",
+            "SpriteSheetX": 32,
+            "SpriteSheetY": 96
           }
         },
         "OpeningAndClosing 3": {
-          "Frames": {
-            "SSE": {
-              "Hash": "6c4b938ca232916b215b560d96e1bda8",
-              "SpriteSheetX": 64,
-              "SpriteSheetY": 0
-            },
-            "ESE": {
-              "Hash": "96b07ddc66704212dc993277bd05c006",
-              "SpriteSheetX": 64,
-              "SpriteSheetY": 32
-            },
-            "ENE": {
-              "Hash": "136005fd01c3d8389005b0feafe9ad98",
-              "SpriteSheetX": 64,
-              "SpriteSheetY": 64
-            },
-            "NNE": {
-              "Hash": "fedd5a2ea9f46884f79a872586c8e263",
-              "SpriteSheetX": 64,
-              "SpriteSheetY": 96
-            }
+          "SSE": {
+            "Hash": "6c4b938ca232916b215b560d96e1bda8",
+            "SpriteSheetX": 64,
+            "SpriteSheetY": 0
+          },
+          "ESE": {
+            "Hash": "96b07ddc66704212dc993277bd05c006",
+            "SpriteSheetX": 64,
+            "SpriteSheetY": 32
+          },
+          "ENE": {
+            "Hash": "136005fd01c3d8389005b0feafe9ad98",
+            "SpriteSheetX": 64,
+            "SpriteSheetY": 64
+          },
+          "NNE": {
+            "Hash": "fedd5a2ea9f46884f79a872586c8e263",
+            "SpriteSheetX": 64,
+            "SpriteSheetY": 96
           }
         }
       },

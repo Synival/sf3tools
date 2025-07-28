@@ -11,171 +11,157 @@
       "Scale": 1.0,
       "FrameGroups": {
         "Idle (Rocking Baby) 1": {
-          "Frames": {
-            "SSE": {
-              "Hash": "4fb777f09862af54ffd35fc3a3dbe33d",
-              "SpriteSheetX": 0,
-              "SpriteSheetY": 0
-            },
-            "ESE": {
-              "Hash": "7d25e30058ae113224332da36f46ce37",
-              "SpriteSheetX": 0,
-              "SpriteSheetY": 40
-            },
-            "ENE": {
-              "Hash": "58b6246fb6f95d3ef71b351436523ffa",
-              "SpriteSheetX": 0,
-              "SpriteSheetY": 80
-            },
-            "NNE": {
-              "Hash": "19a635ccf3abee6515717c4c16dbc915",
-              "SpriteSheetX": 0,
-              "SpriteSheetY": 120
-            }
+          "SSE": {
+            "Hash": "4fb777f09862af54ffd35fc3a3dbe33d",
+            "SpriteSheetX": 0,
+            "SpriteSheetY": 0
+          },
+          "ESE": {
+            "Hash": "7d25e30058ae113224332da36f46ce37",
+            "SpriteSheetX": 0,
+            "SpriteSheetY": 40
+          },
+          "ENE": {
+            "Hash": "58b6246fb6f95d3ef71b351436523ffa",
+            "SpriteSheetX": 0,
+            "SpriteSheetY": 80
+          },
+          "NNE": {
+            "Hash": "19a635ccf3abee6515717c4c16dbc915",
+            "SpriteSheetX": 0,
+            "SpriteSheetY": 120
           }
         },
         "Idle (Rocking Baby) 2": {
-          "Frames": {
-            "SSE": {
-              "Hash": "4c6eaa85c1379a019824b6468b75aa4b",
-              "SpriteSheetX": 40,
-              "SpriteSheetY": 0
-            },
-            "ESE": {
-              "Hash": "a51e42e512fb1c132c11438535899f85",
-              "SpriteSheetX": 40,
-              "SpriteSheetY": 40
-            },
-            "ENE": {
-              "Hash": "34b69f145a3d4e7b59591721d6305b4b",
-              "SpriteSheetX": 40,
-              "SpriteSheetY": 80
-            },
-            "NNE": {
-              "Hash": "3ef4443e70e926973b5a0c98f2d76ac0",
-              "SpriteSheetX": 40,
-              "SpriteSheetY": 120
-            }
+          "SSE": {
+            "Hash": "4c6eaa85c1379a019824b6468b75aa4b",
+            "SpriteSheetX": 40,
+            "SpriteSheetY": 0
+          },
+          "ESE": {
+            "Hash": "a51e42e512fb1c132c11438535899f85",
+            "SpriteSheetX": 40,
+            "SpriteSheetY": 40
+          },
+          "ENE": {
+            "Hash": "34b69f145a3d4e7b59591721d6305b4b",
+            "SpriteSheetX": 40,
+            "SpriteSheetY": 80
+          },
+          "NNE": {
+            "Hash": "3ef4443e70e926973b5a0c98f2d76ac0",
+            "SpriteSheetX": 40,
+            "SpriteSheetY": 120
           }
         },
         "Idle (Rocking Baby) 3": {
-          "Frames": {
-            "SSE": {
-              "Hash": "9294e2dacad45bb9a866f52de2008a41",
-              "SpriteSheetX": 80,
-              "SpriteSheetY": 0
-            },
-            "ESE": {
-              "Hash": "9ee450f00e89949a723d90311f809e4e",
-              "SpriteSheetX": 80,
-              "SpriteSheetY": 40
-            },
-            "ENE": {
-              "Hash": "99275d4ab9eb968410714e02847000c3",
-              "SpriteSheetX": 80,
-              "SpriteSheetY": 80
-            },
-            "NNE": {
-              "Hash": "50f1bfb9caa948c0504a4324763086e4",
-              "SpriteSheetX": 80,
-              "SpriteSheetY": 120
-            }
+          "SSE": {
+            "Hash": "9294e2dacad45bb9a866f52de2008a41",
+            "SpriteSheetX": 80,
+            "SpriteSheetY": 0
+          },
+          "ESE": {
+            "Hash": "9ee450f00e89949a723d90311f809e4e",
+            "SpriteSheetX": 80,
+            "SpriteSheetY": 40
+          },
+          "ENE": {
+            "Hash": "99275d4ab9eb968410714e02847000c3",
+            "SpriteSheetX": 80,
+            "SpriteSheetY": 80
+          },
+          "NNE": {
+            "Hash": "50f1bfb9caa948c0504a4324763086e4",
+            "SpriteSheetX": 80,
+            "SpriteSheetY": 120
           }
         },
         "Walking 1": {
-          "Frames": {
-            "SSE": {
-              "Hash": "d25fe5f9b107cabb6898f80afc903152",
-              "SpriteSheetX": 120,
-              "SpriteSheetY": 0
-            },
-            "ESE": {
-              "Hash": "3050d03f56c07d8d9b355ee1fabf3eb2",
-              "SpriteSheetX": 120,
-              "SpriteSheetY": 40
-            },
-            "ENE": {
-              "Hash": "db191b1df444eb0f620967fb0ec9bd75",
-              "SpriteSheetX": 120,
-              "SpriteSheetY": 80
-            },
-            "NNE": {
-              "Hash": "2aa82ef4f074c27f5c764c48d784bafa",
-              "SpriteSheetX": 120,
-              "SpriteSheetY": 120
-            }
+          "SSE": {
+            "Hash": "d25fe5f9b107cabb6898f80afc903152",
+            "SpriteSheetX": 120,
+            "SpriteSheetY": 0
+          },
+          "ESE": {
+            "Hash": "3050d03f56c07d8d9b355ee1fabf3eb2",
+            "SpriteSheetX": 120,
+            "SpriteSheetY": 40
+          },
+          "ENE": {
+            "Hash": "db191b1df444eb0f620967fb0ec9bd75",
+            "SpriteSheetX": 120,
+            "SpriteSheetY": 80
+          },
+          "NNE": {
+            "Hash": "2aa82ef4f074c27f5c764c48d784bafa",
+            "SpriteSheetX": 120,
+            "SpriteSheetY": 120
           }
         },
         "Walking 2": {
-          "Frames": {
-            "SSE": {
-              "Hash": "45493eb8b1ce98b19c95ce9a470e6e66",
-              "SpriteSheetX": 160,
-              "SpriteSheetY": 0
-            },
-            "ESE": {
-              "Hash": "8e9a82b74259016c2ff6727300021a3a",
-              "SpriteSheetX": 160,
-              "SpriteSheetY": 40
-            },
-            "ENE": {
-              "Hash": "e22f9c05c0b0a2147b0c61a5ba1b9fd8",
-              "SpriteSheetX": 160,
-              "SpriteSheetY": 80
-            },
-            "NNE": {
-              "Hash": "5c7a92879789e48894db13f7ae4bad80",
-              "SpriteSheetX": 160,
-              "SpriteSheetY": 120
-            }
+          "SSE": {
+            "Hash": "45493eb8b1ce98b19c95ce9a470e6e66",
+            "SpriteSheetX": 160,
+            "SpriteSheetY": 0
+          },
+          "ESE": {
+            "Hash": "8e9a82b74259016c2ff6727300021a3a",
+            "SpriteSheetX": 160,
+            "SpriteSheetY": 40
+          },
+          "ENE": {
+            "Hash": "e22f9c05c0b0a2147b0c61a5ba1b9fd8",
+            "SpriteSheetX": 160,
+            "SpriteSheetY": 80
+          },
+          "NNE": {
+            "Hash": "5c7a92879789e48894db13f7ae4bad80",
+            "SpriteSheetX": 160,
+            "SpriteSheetY": 120
           }
         },
         "Walking 3": {
-          "Frames": {
-            "SSE": {
-              "Hash": "e20d3f554e6cd67a5f858e483662c525",
-              "SpriteSheetX": 200,
-              "SpriteSheetY": 0
-            },
-            "ESE": {
-              "Hash": "82f0cba6523d425f7b963a273f42f81c",
-              "SpriteSheetX": 200,
-              "SpriteSheetY": 40
-            },
-            "ENE": {
-              "Hash": "29184bb764c3e7b3c355d43d2a39fd03",
-              "SpriteSheetX": 200,
-              "SpriteSheetY": 80
-            },
-            "NNE": {
-              "Hash": "f38eb62b964ffc3c7db2974ee8a323bb",
-              "SpriteSheetX": 200,
-              "SpriteSheetY": 120
-            }
+          "SSE": {
+            "Hash": "e20d3f554e6cd67a5f858e483662c525",
+            "SpriteSheetX": 200,
+            "SpriteSheetY": 0
+          },
+          "ESE": {
+            "Hash": "82f0cba6523d425f7b963a273f42f81c",
+            "SpriteSheetX": 200,
+            "SpriteSheetY": 40
+          },
+          "ENE": {
+            "Hash": "29184bb764c3e7b3c355d43d2a39fd03",
+            "SpriteSheetX": 200,
+            "SpriteSheetY": 80
+          },
+          "NNE": {
+            "Hash": "f38eb62b964ffc3c7db2974ee8a323bb",
+            "SpriteSheetX": 200,
+            "SpriteSheetY": 120
           }
         },
         "Walking 4": {
-          "Frames": {
-            "SSE": {
-              "Hash": "14812e21050a74414fac6b9d98a3f641",
-              "SpriteSheetX": 240,
-              "SpriteSheetY": 0
-            },
-            "ESE": {
-              "Hash": "32cb7238685949d6e73b316fd46c6535",
-              "SpriteSheetX": 240,
-              "SpriteSheetY": 40
-            },
-            "ENE": {
-              "Hash": "5debfc7b9d566429ef42f5777db47e16",
-              "SpriteSheetX": 240,
-              "SpriteSheetY": 80
-            },
-            "NNE": {
-              "Hash": "464aa168349958bbe2fed71c25dbbd6c",
-              "SpriteSheetX": 240,
-              "SpriteSheetY": 120
-            }
+          "SSE": {
+            "Hash": "14812e21050a74414fac6b9d98a3f641",
+            "SpriteSheetX": 240,
+            "SpriteSheetY": 0
+          },
+          "ESE": {
+            "Hash": "32cb7238685949d6e73b316fd46c6535",
+            "SpriteSheetX": 240,
+            "SpriteSheetY": 40
+          },
+          "ENE": {
+            "Hash": "5debfc7b9d566429ef42f5777db47e16",
+            "SpriteSheetX": 240,
+            "SpriteSheetY": 80
+          },
+          "NNE": {
+            "Hash": "464aa168349958bbe2fed71c25dbbd6c",
+            "SpriteSheetX": 240,
+            "SpriteSheetY": 120
           }
         }
       },

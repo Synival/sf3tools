@@ -11,27 +11,25 @@
       "Scale": 1.0,
       "FrameGroups": {
         "OnGround 1": {
-          "Frames": {
-            "SSE": {
-              "Hash": "928983c7cbe546f9b98dfedebcf96b06",
-              "SpriteSheetX": 0,
-              "SpriteSheetY": 0
-            },
-            "ESE": {
-              "Hash": "a2ea2fbbb9e7da3e3324e2490ff191ff",
-              "SpriteSheetX": 0,
-              "SpriteSheetY": 40
-            },
-            "ENE": {
-              "Hash": "72d193274bb2d1139f774dd9390799b8",
-              "SpriteSheetX": 0,
-              "SpriteSheetY": 80
-            },
-            "NNE": {
-              "Hash": "27cb50daf6030fd5d2db8e4e10dd5d5c",
-              "SpriteSheetX": 0,
-              "SpriteSheetY": 120
-            }
+          "SSE": {
+            "Hash": "928983c7cbe546f9b98dfedebcf96b06",
+            "SpriteSheetX": 0,
+            "SpriteSheetY": 0
+          },
+          "ESE": {
+            "Hash": "a2ea2fbbb9e7da3e3324e2490ff191ff",
+            "SpriteSheetX": 0,
+            "SpriteSheetY": 40
+          },
+          "ENE": {
+            "Hash": "72d193274bb2d1139f774dd9390799b8",
+            "SpriteSheetX": 0,
+            "SpriteSheetY": 80
+          },
+          "NNE": {
+            "Hash": "27cb50daf6030fd5d2db8e4e10dd5d5c",
+            "SpriteSheetX": 0,
+            "SpriteSheetY": 120
           }
         }
       },

@@ -11,12 +11,10 @@
       "Scale": 1.0499878,
       "FrameGroups": {
         "Key 1": {
-          "Frames": {
-            "SSE": {
-              "Hash": "86dc3008730798bcc67891064112ef36",
-              "SpriteSheetX": 0,
-              "SpriteSheetY": 0
-            }
+          "SSE": {
+            "Hash": "86dc3008730798bcc67891064112ef36",
+            "SpriteSheetX": 0,
+            "SpriteSheetY": 0
           }
         }
       },

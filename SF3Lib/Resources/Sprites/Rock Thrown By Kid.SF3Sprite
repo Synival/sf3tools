@@ -11,12 +11,10 @@
       "Scale": 1.0,
       "FrameGroups": {
         "Rock 1": {
-          "Frames": {
-            "First": {
-              "Hash": "37ae9d5b7cacbe694c0ddd825be47ac7",
-              "SpriteSheetX": 0,
-              "SpriteSheetY": 0
-            }
+          "First": {
+            "Hash": "37ae9d5b7cacbe694c0ddd825be47ac7",
+            "SpriteSheetX": 0,
+            "SpriteSheetY": 0
           }
         }
       },

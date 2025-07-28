@@ -11,12 +11,10 @@
       "Scale": 1.0,
       "FrameGroups": {
         "Light 1": {
-          "Frames": {
-            "First": {
-              "Hash": "f7c68a4d753deae32949e2e2ee75e517",
-              "SpriteSheetX": 0,
-              "SpriteSheetY": 0
-            }
+          "First": {
+            "Hash": "f7c68a4d753deae32949e2e2ee75e517",
+            "SpriteSheetX": 0,
+            "SpriteSheetY": 0
           }
         }
       },

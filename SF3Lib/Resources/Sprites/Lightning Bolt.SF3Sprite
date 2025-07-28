@@ -11,75 +11,59 @@
       "Scale": 1.0,
       "FrameGroups": {
         "Dot 1": {
-          "Frames": {
-            "First": {
-              "Hash": "3ac2fa58301b3b5a0682f0f311ddd03a",
-              "SpriteSheetX": 0,
-              "SpriteSheetY": 0
-            }
+          "First": {
+            "Hash": "3ac2fa58301b3b5a0682f0f311ddd03a",
+            "SpriteSheetX": 0,
+            "SpriteSheetY": 0
           }
         },
         "Transparent 1": {
-          "Frames": {
-            "First": {
-              "Hash": "620f0b67a91f7f74151bc5be745b7110",
-              "SpriteSheetX": 32,
-              "SpriteSheetY": 0
-            }
+          "First": {
+            "Hash": "620f0b67a91f7f74151bc5be745b7110",
+            "SpriteSheetX": 32,
+            "SpriteSheetY": 0
           }
         },
         "Zapping (To the Left) 1": {
-          "Frames": {
-            "First": {
-              "Hash": "5c1a074031a33bd28f9a02a1c029a69a",
-              "SpriteSheetX": 64,
-              "SpriteSheetY": 0
-            }
+          "First": {
+            "Hash": "5c1a074031a33bd28f9a02a1c029a69a",
+            "SpriteSheetX": 64,
+            "SpriteSheetY": 0
           }
         },
         "Zapping (To the Left) 2": {
-          "Frames": {
-            "First": {
-              "Hash": "1e4ea10c72bee1c7e8ea7d2b63890e69",
-              "SpriteSheetX": 96,
-              "SpriteSheetY": 0
-            }
+          "First": {
+            "Hash": "1e4ea10c72bee1c7e8ea7d2b63890e69",
+            "SpriteSheetX": 96,
+            "SpriteSheetY": 0
           }
         },
         "Zapping (To the Left) 3": {
-          "Frames": {
-            "First": {
-              "Hash": "2ce9e617bd66f809129cb3903a9ac6d1",
-              "SpriteSheetX": 128,
-              "SpriteSheetY": 0
-            }
+          "First": {
+            "Hash": "2ce9e617bd66f809129cb3903a9ac6d1",
+            "SpriteSheetX": 128,
+            "SpriteSheetY": 0
           }
         },
         "Zapping 1": {
-          "Frames": {
-            "First": {
-              "Hash": "19d2a6156c7c168a05c30bcd1e9f284c",
-              "SpriteSheetX": 160,
-              "SpriteSheetY": 0
-            }
+          "First": {
+            "Hash": "19d2a6156c7c168a05c30bcd1e9f284c",
+            "SpriteSheetX": 160,
+            "SpriteSheetY": 0
           }
         },
         "Zapping 2": {
-          "Frames": {
-            "First": {
-              "Hash": "1c2659b74e8b3c229dce43dd67a31daf",
-              "SpriteSheetX": 192,
-              "SpriteSheetY": 0
-            }
+          "First": {
+            "Hash": "1c2659b74e8b3c229dce43dd67a31daf",
+            "SpriteSheetX": 192,
+            "SpriteSheetY": 0
           }
         },
         "Zapping 3": {
-          "Frames": {
-            "First": {
-              "Hash": "2335de5e6894aea51212c1f4a7e769b9",
-              "SpriteSheetX": 224,
-              "SpriteSheetY": 0
-            }
+          "First": {
+            "Hash": "2335de5e6894aea51212c1f4a7e769b9",
+            "SpriteSheetX": 224,
+            "SpriteSheetY": 0
           }
         }
       },

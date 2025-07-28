@@ -11,39 +11,31 @@
       "Scale": 1.0,
       "FrameGroups": {
         "Pulsating 1": {
-          "Frames": {
-            "First": {
-              "Hash": "9a90cd83485ecc3cceed779838a3def5",
-              "SpriteSheetX": 0,
-              "SpriteSheetY": 0
-            }
+          "First": {
+            "Hash": "9a90cd83485ecc3cceed779838a3def5",
+            "SpriteSheetX": 0,
+            "SpriteSheetY": 0
           }
         },
         "Pulsating 2": {
-          "Frames": {
-            "First": {
-              "Hash": "00833c8b54f5aea9f075992cbca12dd7",
-              "SpriteSheetX": 64,
-              "SpriteSheetY": 0
-            }
+          "First": {
+            "Hash": "00833c8b54f5aea9f075992cbca12dd7",
+            "SpriteSheetX": 64,
+            "SpriteSheetY": 0
           }
         },
         "Pulsating 3": {
-          "Frames": {
-            "First": {
-              "Hash": "171397912030ceb69041e16717c73d04",
-              "SpriteSheetX": 128,
-              "SpriteSheetY": 0
-            }
+          "First": {
+            "Hash": "171397912030ceb69041e16717c73d04",
+            "SpriteSheetX": 128,
+            "SpriteSheetY": 0
           }
         },
         "Pulsating 4": {
-          "Frames": {
-            "First": {
-              "Hash": "20ca0d72613d2710a8f951e83bb379eb",
-              "SpriteSheetX": 192,
-              "SpriteSheetY": 0
-            }
+          "First": {
+            "Hash": "20ca0d72613d2710a8f951e83bb379eb",
+            "SpriteSheetX": 192,
+            "SpriteSheetY": 0
           }
         }
       },
