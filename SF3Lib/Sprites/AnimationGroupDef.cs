@@ -60,10 +60,8 @@ namespace SF3.Sprites {
         public string ToJSON_String()
             => ToJToken().ToString(Formatting.Indented);
 
-        public JToken ToJToken() {
-            var jsonSettings = new JsonSerializer { NullValueHandling = NullValueHandling.Ignore };
-            return Animations != null ? JToken.FromObject(Animations.ToDictionary(x => x.Key.ToString(), x => x.Value), jsonSettings) : null;
-        }
+        public JToken ToJToken()
+            => Animations != null ? JToken.FromObject(Animations.ToDictionary(x => x.Key, x => x.Value.ToJToken())) : null;
 
         public override string ToString() => string.Join(", ", Animations.Keys.Select(x => x.ToString()));
 

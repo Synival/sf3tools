@@ -1,8 +1,10 @@
 ﻿using System.Linq;
+using CommonLib;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
 namespace SF3.Sprites {
-    public class AnimationDef {
+    public class AnimationDef : IJsonResource {
         public AnimationDef() { }
 
         public AnimationDef(UniqueAnimationDef aniInfo) : this() {
@@ -14,8 +16,10 @@ namespace SF3.Sprites {
         /// </summary>
         /// <param name="json">AnimationDef in JSON format as a string.</param>
         /// <returns>A new AnimationDef if deserializing was successful, or 'null' if not.</returns>
-        public static AnimationDef FromJSON(string json)
-            => FromJToken(JToken.Parse(json));
+        public static AnimationDef FromJSON(string json) {
+            var animationDef = new AnimationDef();
+            return animationDef.AssignFromJSON_String(json) ? animationDef : null;
+        }
 
         /// <summary>
         /// Deserializes a JSON object of a AnimationDef.
@@ -23,22 +27,38 @@ namespace SF3.Sprites {
         /// <param name="jToken">AnimationDef as a JToken.</param>
         /// <returns>A new AnimationDef if deserializing was successful, or 'null' if not.</returns>
         public static AnimationDef FromJToken(JToken jToken) {
-            if (jToken == null || jToken.Type != JTokenType.Object)
-                return null;
+            var animationDef = new AnimationDef();
+            return animationDef.AssignFromJToken(jToken) ? animationDef : null;
+        }
 
-            try {
-                var jObj = (JObject) jToken;
-                var newDef = new AnimationDef();
+        public bool AssignFromJSON_String(string json)
+            => AssignFromJToken(JToken.Parse(json));
 
-                newDef.AnimationFrames = jObj.TryGetValue("AnimationFrames", out var animationFrames)
-                    ? animationFrames.Select(x => AnimationFrameDef.FromJToken(x)).ToArray()
-                    : null;
+        public bool AssignFromJToken(JToken jToken) {
+            if (jToken == null)
+                return false;
 
-                return newDef;
+            switch (jToken.Type) {
+                case JTokenType.Array:
+                    try {
+                        AnimationFrames = jToken.Select(x => AnimationFrameDef.FromJToken(x)).ToArray();
+                    }
+                    catch {
+                        return false;
+                    }
+                    return true;
+
+                default:
+                    return false;
             }
-            catch {
-                return null;
-            }
+        }
+
+        public string ToJSON_String()
+            => ToJToken().ToString(Formatting.Indented);
+
+        public JToken ToJToken() {
+            var jsonSettings = new JsonSerializer { NullValueHandling = NullValueHandling.Ignore };
+            return JToken.FromObject(AnimationFrames, jsonSettings);
         }
 
         public override string ToString() => string.Join(", ", AnimationFrames.Select(x => x.ToString()));
