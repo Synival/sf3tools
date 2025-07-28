@@ -14,6 +14,9 @@ namespace SF3.Utils {
         /// <param name="name">Name (not filename) of the SpriteDef to retrieve.</param>
         /// <returns>A deserialized SpriteDef if the file was available and valid. Otherwise, 'null'.</returns>
         public static SpriteDef GetSpriteDef(string name) {
+            if (name == null)
+                return null;
+
             // Cache loaded SpriteDef's.
             if (s_spriteDefs.ContainsKey(name))
                 return s_spriteDefs[name];

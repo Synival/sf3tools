@@ -12,27 +12,17 @@ namespace SF3.Tests.CHR {
         private static readonly string c_twoEmptySpriteCHR_Text = @"
             { 'Sprites': [
                 {
-                    'SpriteName': 'Synbios (U)',
-                    'SpriteID': 0,
+                    'Name': 'Synbios (U)',
                     'Width': 40,
                     'Height': 40,
-                    'Directions': 4,
-                    'VerticalOffset': 0,
-                    'Unknown0x08': 20,
-                    'CollisionSize': 40,
-                    'Scale': 1.0,
+                    'Directions': 4
                 },
                 {
-                    'SpriteName': 'Synbios (P1)',
-                    'SpriteID': 0,
+                    'Name': 'Synbios (P1)',
                     'Width': 40,
                     'Height': 40,
                     'Directions': 4,
-                    'VerticalOffset': 0,
-                    'Unknown0x08': 20,
-                    'CollisionSize': 40,
-                    'PromotionLevel': 1,
-                    'Scale': 1.0,
+                    'PromotionLevel': 1
                 }
             ]}
         ";
@@ -40,26 +30,22 @@ namespace SF3.Tests.CHR {
         private static readonly string c_minimalCHR_Text = @"
             { 'Sprites': [
                 {
-                    'SpriteName': 'Synbios (U)',
-                    'SpriteID': 0,
-                    'Width': 40,
-                    'Height': 40,
-                    'Directions': 4,
-                    'VerticalOffset': 0,
-                    'Unknown0x08': 20,
-                    'CollisionSize': 40,
-                    'Scale': 1.0,
-                    'SpriteFrames': [{ 'FrameGroups': [
-                        { 'Name': 'Idle (Battle) 1' },
-                        { 'Name': 'Idle (Battle) 2' },
-                        { 'Name': 'Idle (Battle) 3' }
-                    ]}],
-                    'SpriteAnimations': [{ 'AnimationGroups': [{ 'Animations': [
-                        'StillFrame (Battle)',
-                        'Idle (Battle)'
-                    ]}]}]
+                  'Name': 'Synbios (U)',
+                  'Width': 40,
+                  'Height': 40,
+                  'Directions': 4,
+                  'Frames': [
+                    'Idle (Battle) 1',
+                    'Idle (Battle) 2',
+                    'Idle (Battle) 3'
+                  ],
+                  'Animations': [
+                    'StillFrame (Battle)',
+                    'Idle (Battle)'
+                  ]
                 }
-            ]}
+              ]
+            }
         ";
 
         [TestMethod]
@@ -162,7 +148,7 @@ namespace SF3.Tests.CHR {
             Assert.AreEqual(sprite0.Unknown0x08, 20);
             Assert.AreEqual(sprite0.CollisionSize, 40);
             Assert.AreEqual(sprite0.Scale, 1.00f);
-            Assert.AreEqual(sprite0.PromotionLevel, null);
+            Assert.AreEqual(sprite0.PromotionLevel, 0);
             Assert.AreEqual(sprite0.SpriteFrames, null);
             Assert.AreEqual(sprite0.SpriteAnimations, null);
 
