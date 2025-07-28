@@ -104,7 +104,7 @@ namespace SF3.CHR {
             }
 
             if (SpriteAnimations != null)
-                jObj.Add("Animations", JToken.FromObject(SpriteAnimations, jsonSettings));
+                jObj.Add("Animations", JToken.FromObject(SpriteAnimations.Select(x => x.ToJToken()), jsonSettings));
 
             var jStr = jObj.ToString();
             return jObj;
