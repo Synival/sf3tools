@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using CommonLib;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
@@ -8,7 +9,7 @@ using SF3.Types;
 using SF3.Utils;
 
 namespace SF3.Sprites {
-    public class AnimationFrameDef {
+    public class AnimationFrameDef : IJsonResource {
         public AnimationFrameDef() { }
 
         public AnimationFrameDef(string[] frameHashes, int duration) {
@@ -83,12 +84,11 @@ namespace SF3.Sprites {
 
         public JToken ToJToken() {
             var jObj = new JObject();
-            var jsonSettings = new JsonSerializer { NullValueHandling = NullValueHandling.Ignore };
 
             if (FrameGroup != null)
                 jObj.Add("FrameGroup", new JValue(FrameGroup));
             if (Frames != null)
-                jObj.Add("Frames", JToken.FromObject(Frames.ToDictionary(x => x.Key.ToString(), x => x.Value), jsonSettings));
+                jObj.Add("Frames", JToken.FromObject(Frames.ToDictionary(x => x.Key.ToString(), x => x.Value.ToJToken())));
 
             jObj.Add("Command", new JValue(Command.ToString()));
             jObj.Add("Parameter", new JValue(Parameter));

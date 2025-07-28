@@ -5,14 +5,15 @@ using SF3.Types;
 
 namespace SF3.Sprites {
     public class AnimationFrameDirectionDef {
-
         /// <summary>
         /// Deserializes a JSON object of a AnimationFrameDirectionDef.
         /// </summary>
         /// <param name="json">AnimationFrameDirectionDef in JSON format as a string.</param>
         /// <returns>A new AnimationFrameDirectionDef if deserializing was successful, or 'null' if not.</returns>
-        public static AnimationFrameDirectionDef FromJSON(string json)
-            => FromJToken(JToken.Parse(json));
+        public static AnimationFrameDirectionDef FromJSON(string json) {
+            var animationFrameDirectionDef = new AnimationFrameDirectionDef();
+            return animationFrameDirectionDef.AssignFromJSON_String(json) ? animationFrameDirectionDef : null;
+        }
 
         /// <summary>
         /// Deserializes a JSON object of a AnimationFrameDirectionDef.
@@ -20,22 +21,45 @@ namespace SF3.Sprites {
         /// <param name="jToken">AnimationFrameDirectionDef as a JToken.</param>
         /// <returns>A new AnimationFrameDirectionDef if deserializing was successful, or 'null' if not.</returns>
         public static AnimationFrameDirectionDef FromJToken(JToken jToken) {
-            if (jToken == null || jToken.Type != JTokenType.Object)
-                return null;
+            var animationFrameDirectionDef = new AnimationFrameDirectionDef();
+            return animationFrameDirectionDef.AssignFromJToken(jToken) ? animationFrameDirectionDef : null;
+        }
 
-            try {
-                var jObj = (JObject) jToken;
-                var newDef = new AnimationFrameDirectionDef();
+        public bool AssignFromJSON_String(string json)
+            => AssignFromJToken(JToken.Parse(json));
 
-                newDef.Frame     = jObj.TryGetValue("Frame",     out var frame)     ? ((string) frame) : null;
-                newDef.Direction = jObj.TryGetValue("Direction", out var direction) ? (direction.ToObject<SpriteFrameDirection>()) : SpriteFrameDirection.Unset;
+        public bool AssignFromJToken(JToken jToken) {
+            if (jToken == null)
+                return false;
 
-                return newDef;
-            }
-            catch {
-                return null;
+            switch (jToken.Type) {
+                case JTokenType.Object:
+                    try {
+                        var jObj = (JObject) jToken;
+                        Frame     = jObj.TryGetValue("Frame",     out var frame)     ? ((string) frame) : null;
+                        Direction = jObj.TryGetValue("Direction", out var direction) ? (direction.ToObject<SpriteFrameDirection>()) : SpriteFrameDirection.Unset;
+                    }
+                    catch {
+                        return false;
+                    }
+                    return true;
+
+                default:
+                    return false;
             }
         }
+
+        public string ToJSON_String()
+            => ToJToken().ToString(Formatting.Indented);
+
+        public JToken ToJToken() {
+            return new JObject {
+                { "Frame", new JValue(Frame) },
+                { "Direction", new JValue(Direction.ToString()) }
+            };
+        }
+
+        public override string ToString() => $"{Frame} ({Direction})";
 
         public string Frame;
 
