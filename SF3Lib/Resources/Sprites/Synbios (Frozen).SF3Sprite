@@ -79,9 +79,8 @@
         "6": {
           "StillFrame (Frozen, Repeat)": [
             {
-              "FrameGroup": "Frozen 1",
-              "Command": "Frame",
-              "Parameter": 10
+              "Frame": "Frozen 1",
+              "Duration": 10
             },
             {
               "Command": "GotoFrameOffset",
@@ -90,20 +89,17 @@
           ],
           "StillFrame (Frozen)": [
             {
-              "FrameGroup": "Frozen 1",
-              "Command": "Frame",
-              "Parameter": 10
+              "Frame": "Frozen 1",
+              "Duration": 10
             },
             {
-              "Command": "Stop",
-              "Parameter": 0
+              "Command": "Stop"
             }
           ],
           "StillFrame (Unfrozen)": [
             {
-              "FrameGroup": "Unfrozen 1",
-              "Command": "Frame",
-              "Parameter": 10
+              "Frame": "Unfrozen 1",
+              "Duration": 10
             },
             {
               "Command": "GotoFrameOffset",

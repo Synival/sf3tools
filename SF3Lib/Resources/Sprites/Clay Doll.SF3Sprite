@@ -301,24 +301,20 @@
         "4": {
           "Idle": [
             {
-              "FrameGroup": "Idle 1",
-              "Command": "Frame",
-              "Parameter": 50
+              "Frame": "Idle 1",
+              "Duration": 50
             },
             {
-              "FrameGroup": "Idle 2",
-              "Command": "Frame",
-              "Parameter": 3
+              "Frame": "Idle 2",
+              "Duration": 3
             },
             {
-              "FrameGroup": "Idle 3",
-              "Command": "Frame",
-              "Parameter": 3
+              "Frame": "Idle 3",
+              "Duration": 3
             },
             {
-              "FrameGroup": "Idle 2",
-              "Command": "Frame",
-              "Parameter": 3
+              "Frame": "Idle 2",
+              "Duration": 3
             },
             {
               "Command": "GotoFrameOffset",
@@ -327,62 +323,51 @@
           ],
           "StillFrame (Eyes Closed)": [
             {
-              "FrameGroup": "Idle 3",
-              "Command": "Frame",
-              "Parameter": 10
+              "Frame": "Idle 3",
+              "Duration": 10
             },
             {
-              "Command": "Stop",
-              "Parameter": 0
+              "Command": "Stop"
             }
           ],
           "StillFrame (Eyes Open)": [
             {
-              "FrameGroup": "Walking 2",
-              "Command": "Frame",
-              "Parameter": 10
+              "Frame": "Walking 2",
+              "Duration": 10
             },
             {
-              "Command": "Stop",
-              "Parameter": 0
+              "Command": "Stop"
             }
           ],
           "StillFrame (Translucent)": [
             {
-              "FrameGroup": "TurningTranslucent 5",
-              "Command": "Frame",
-              "Parameter": 10
+              "Frame": "TurningTranslucent 5",
+              "Duration": 10
             },
             {
-              "Command": "Stop",
-              "Parameter": 0
+              "Command": "Stop"
             }
           ],
           "TurningTranslucent": [
             {
-              "FrameGroup": "TurningTranslucent 1",
-              "Command": "Frame",
-              "Parameter": 4
+              "Frame": "TurningTranslucent 1",
+              "Duration": 4
             },
             {
-              "FrameGroup": "TurningTranslucent 2",
-              "Command": "Frame",
-              "Parameter": 4
+              "Frame": "TurningTranslucent 2",
+              "Duration": 4
             },
             {
-              "FrameGroup": "TurningTranslucent 3",
-              "Command": "Frame",
-              "Parameter": 4
+              "Frame": "TurningTranslucent 3",
+              "Duration": 4
             },
             {
-              "FrameGroup": "TurningTranslucent 4",
-              "Command": "Frame",
-              "Parameter": 4
+              "Frame": "TurningTranslucent 4",
+              "Duration": 4
             },
             {
-              "FrameGroup": "TurningTranslucent 5",
-              "Command": "Frame",
-              "Parameter": 4
+              "Frame": "TurningTranslucent 5",
+              "Duration": 4
             },
             {
               "Command": "GotoAnimation",
@@ -391,34 +376,28 @@
           ],
           "Walking": [
             {
-              "FrameGroup": "Walking 1",
-              "Command": "Frame",
-              "Parameter": 5
+              "Frame": "Walking 1",
+              "Duration": 5
             },
             {
-              "FrameGroup": "Walking 2",
-              "Command": "Frame",
-              "Parameter": 5
+              "Frame": "Walking 2",
+              "Duration": 5
             },
             {
-              "FrameGroup": "Walking 3",
-              "Command": "Frame",
-              "Parameter": 5
+              "Frame": "Walking 3",
+              "Duration": 5
             },
             {
-              "FrameGroup": "Walking 4",
-              "Command": "Frame",
-              "Parameter": 5
+              "Frame": "Walking 4",
+              "Duration": 5
             },
             {
-              "FrameGroup": "Walking 2",
-              "Command": "Frame",
-              "Parameter": 5
+              "Frame": "Walking 2",
+              "Duration": 5
             },
             {
-              "FrameGroup": "Walking 5",
-              "Command": "Frame",
-              "Parameter": 5
+              "Frame": "Walking 5",
+              "Duration": 5
             },
             {
               "Command": "GotoFrameOffset",

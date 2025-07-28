@@ -29,24 +29,20 @@
         "1": {
           "Complaining": [
             {
-              "FrameGroup": "Complaining 1",
-              "Command": "Frame",
-              "Parameter": 10
+              "Frame": "Complaining 1",
+              "Duration": 10
             },
             {
-              "Command": "Stop",
-              "Parameter": 0
+              "Command": "Stop"
             }
           ],
           "Embarassed 1": [
             {
-              "FrameGroup": "Embarassed 1",
-              "Command": "Frame",
-              "Parameter": 10
+              "Frame": "Embarassed 1",
+              "Duration": 10
             },
             {
-              "Command": "Stop",
-              "Parameter": 0
+              "Command": "Stop"
             }
           ]
         }

@@ -64,14 +64,12 @@
         "1": {
           "Idle": [
             {
-              "FrameGroup": "Idle 1",
-              "Command": "Frame",
-              "Parameter": 3
+              "Frame": "Idle 1",
+              "Duration": 3
             },
             {
-              "FrameGroup": "Idle 2",
-              "Command": "Frame",
-              "Parameter": 3
+              "Frame": "Idle 2",
+              "Duration": 3
             },
             {
               "Command": "GotoFrameOffset",
@@ -80,24 +78,20 @@
           ],
           "Shushing": [
             {
-              "FrameGroup": "Shushing 1",
-              "Command": "Frame",
-              "Parameter": 7
+              "Frame": "Shushing 1",
+              "Duration": 7
             },
             {
-              "FrameGroup": "Shushing 2",
-              "Command": "Frame",
-              "Parameter": 7
+              "Frame": "Shushing 2",
+              "Duration": 7
             },
             {
-              "FrameGroup": "Shushing 3",
-              "Command": "Frame",
-              "Parameter": 7
+              "Frame": "Shushing 3",
+              "Duration": 7
             },
             {
-              "FrameGroup": "Shushing 2",
-              "Command": "Frame",
-              "Parameter": 7
+              "Frame": "Shushing 2",
+              "Duration": 7
             },
             {
               "Command": "GotoFrameOffset",
@@ -106,14 +100,12 @@
           ],
           "ShushingBackToIdle": [
             {
-              "FrameGroup": "StartOrStopShushing 1",
-              "Command": "Frame",
-              "Parameter": 3
+              "Frame": "StartOrStopShushing 1",
+              "Duration": 3
             },
             {
-              "FrameGroup": "StartOrStopShushing 2",
-              "Command": "Frame",
-              "Parameter": 3
+              "Frame": "StartOrStopShushing 2",
+              "Duration": 3
             },
             {
               "Command": "GotoAnimation",
@@ -122,13 +114,11 @@
           ],
           "StillFrame (Idle)": [
             {
-              "FrameGroup": "Idle 1",
-              "Command": "Frame",
-              "Parameter": 10
+              "Frame": "Idle 1",
+              "Duration": 10
             },
             {
-              "Command": "Stop",
-              "Parameter": 0
+              "Command": "Stop"
             }
           ]
         }

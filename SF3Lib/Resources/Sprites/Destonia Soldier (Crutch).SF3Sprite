@@ -81,55 +81,45 @@
         "4": {
           "StillFrame (Leaning)": [
             {
-              "FrameGroup": "Wincing 1",
-              "Command": "Frame",
-              "Parameter": 10
+              "Frame": "Wincing 1",
+              "Duration": 10
             },
             {
-              "Command": "Stop",
-              "Parameter": 0
+              "Command": "Stop"
             }
           ],
           "Wincing (Extremely Long Pause)": [
             {
-              "FrameGroup": "Wincing 1",
-              "Command": "Frame",
-              "Parameter": 120
+              "Frame": "Wincing 1",
+              "Duration": 120
             },
             {
-              "FrameGroup": "Wincing 2",
-              "Command": "Frame",
-              "Parameter": 4
+              "Frame": "Wincing 2",
+              "Duration": 4
             },
             {
-              "FrameGroup": "Wincing 3",
-              "Command": "Frame",
-              "Parameter": 3
+              "Frame": "Wincing 3",
+              "Duration": 3
             },
             {
-              "FrameGroup": "Wincing 2",
-              "Command": "Frame",
-              "Parameter": 4
+              "Frame": "Wincing 2",
+              "Duration": 4
             },
             {
-              "FrameGroup": "Wincing 3",
-              "Command": "Frame",
-              "Parameter": 3
+              "Frame": "Wincing 3",
+              "Duration": 3
             },
             {
-              "FrameGroup": "Wincing 2",
-              "Command": "Frame",
-              "Parameter": 4
+              "Frame": "Wincing 2",
+              "Duration": 4
             },
             {
-              "FrameGroup": "Wincing 3",
-              "Command": "Frame",
-              "Parameter": 3
+              "Frame": "Wincing 3",
+              "Duration": 3
             },
             {
-              "FrameGroup": "Wincing 2",
-              "Command": "Frame",
-              "Parameter": 6
+              "Frame": "Wincing 2",
+              "Duration": 6
             },
             {
               "Command": "GotoFrameOffset",
@@ -138,44 +128,36 @@
           ],
           "Wincing (Very Long Pause)": [
             {
-              "FrameGroup": "Wincing 1",
-              "Command": "Frame",
-              "Parameter": 60
+              "Frame": "Wincing 1",
+              "Duration": 60
             },
             {
-              "FrameGroup": "Wincing 2",
-              "Command": "Frame",
-              "Parameter": 4
+              "Frame": "Wincing 2",
+              "Duration": 4
             },
             {
-              "FrameGroup": "Wincing 3",
-              "Command": "Frame",
-              "Parameter": 3
+              "Frame": "Wincing 3",
+              "Duration": 3
             },
             {
-              "FrameGroup": "Wincing 2",
-              "Command": "Frame",
-              "Parameter": 4
+              "Frame": "Wincing 2",
+              "Duration": 4
             },
             {
-              "FrameGroup": "Wincing 3",
-              "Command": "Frame",
-              "Parameter": 3
+              "Frame": "Wincing 3",
+              "Duration": 3
             },
             {
-              "FrameGroup": "Wincing 2",
-              "Command": "Frame",
-              "Parameter": 4
+              "Frame": "Wincing 2",
+              "Duration": 4
             },
             {
-              "FrameGroup": "Wincing 3",
-              "Command": "Frame",
-              "Parameter": 3
+              "Frame": "Wincing 3",
+              "Duration": 3
             },
             {
-              "FrameGroup": "Wincing 2",
-              "Command": "Frame",
-              "Parameter": 6
+              "Frame": "Wincing 2",
+              "Duration": 6
             },
             {
               "Command": "GotoFrameOffset",

@@ -103,154 +103,124 @@
         "4": {
           "Idle": [
             {
-              "FrameGroup": "Idle 1",
-              "Command": "Frame",
-              "Parameter": 10
+              "Frame": "Idle 1",
+              "Duration": 10
             },
             {
-              "FrameGroup": "Idle 2",
-              "Command": "Frame",
-              "Parameter": 5
+              "Frame": "Idle 2",
+              "Duration": 5
             },
             {
-              "FrameGroup": "Idle 3",
-              "Command": "Frame",
-              "Parameter": 5
+              "Frame": "Idle 3",
+              "Duration": 5
             },
             {
-              "FrameGroup": "Idle 4",
-              "Command": "Frame",
-              "Parameter": 15
+              "Frame": "Idle 4",
+              "Duration": 15
             },
             {
-              "FrameGroup": "Idle 3",
-              "Command": "Frame",
-              "Parameter": 6
+              "Frame": "Idle 3",
+              "Duration": 6
             },
             {
-              "FrameGroup": "Idle 2",
-              "Command": "Frame",
-              "Parameter": 6
+              "Frame": "Idle 2",
+              "Duration": 6
             },
             {
-              "FrameGroup": "Idle 1",
-              "Command": "Frame",
-              "Parameter": 10
+              "Frame": "Idle 1",
+              "Duration": 10
             },
             {
-              "FrameGroup": "Idle 2",
-              "Command": "Frame",
-              "Parameter": 5
+              "Frame": "Idle 2",
+              "Duration": 5
             },
             {
-              "FrameGroup": "Idle 3",
-              "Command": "Frame",
-              "Parameter": 5
+              "Frame": "Idle 3",
+              "Duration": 5
             },
             {
-              "FrameGroup": "Idle 4",
-              "Command": "Frame",
-              "Parameter": 15
+              "Frame": "Idle 4",
+              "Duration": 15
             },
             {
-              "FrameGroup": "Idle 3",
-              "Command": "Frame",
-              "Parameter": 6
+              "Frame": "Idle 3",
+              "Duration": 6
             },
             {
-              "FrameGroup": "Idle 2",
-              "Command": "Frame",
-              "Parameter": 6
+              "Frame": "Idle 2",
+              "Duration": 6
             },
             {
-              "FrameGroup": "Idle 1",
-              "Command": "Frame",
-              "Parameter": 10
+              "Frame": "Idle 1",
+              "Duration": 10
             },
             {
-              "FrameGroup": "Idle 2",
-              "Command": "Frame",
-              "Parameter": 5
+              "Frame": "Idle 2",
+              "Duration": 5
             },
             {
-              "FrameGroup": "Idle 3",
-              "Command": "Frame",
-              "Parameter": 5
+              "Frame": "Idle 3",
+              "Duration": 5
             },
             {
-              "FrameGroup": "Idle 4",
-              "Command": "Frame",
-              "Parameter": 15
+              "Frame": "Idle 4",
+              "Duration": 15
             },
             {
-              "FrameGroup": "Idle 3",
-              "Command": "Frame",
-              "Parameter": 6
+              "Frame": "Idle 3",
+              "Duration": 6
             },
             {
-              "FrameGroup": "Idle 2",
-              "Command": "Frame",
-              "Parameter": 6
+              "Frame": "Idle 2",
+              "Duration": 6
             },
             {
-              "FrameGroup": "Idle 1",
-              "Command": "Frame",
-              "Parameter": 10
+              "Frame": "Idle 1",
+              "Duration": 10
             },
             {
-              "FrameGroup": "Idle 2",
-              "Command": "Frame",
-              "Parameter": 5
+              "Frame": "Idle 2",
+              "Duration": 5
             },
             {
-              "FrameGroup": "Idle 3",
-              "Command": "Frame",
-              "Parameter": 5
+              "Frame": "Idle 3",
+              "Duration": 5
             },
             {
-              "FrameGroup": "Idle 4",
-              "Command": "Frame",
-              "Parameter": 15
+              "Frame": "Idle 4",
+              "Duration": 15
             },
             {
-              "FrameGroup": "Idle 3",
-              "Command": "Frame",
-              "Parameter": 6
+              "Frame": "Idle 3",
+              "Duration": 6
             },
             {
-              "FrameGroup": "Idle 2",
-              "Command": "Frame",
-              "Parameter": 6
+              "Frame": "Idle 2",
+              "Duration": 6
             },
             {
-              "FrameGroup": "Idle 1",
-              "Command": "Frame",
-              "Parameter": 10
+              "Frame": "Idle 1",
+              "Duration": 10
             },
             {
-              "FrameGroup": "Idle 2",
-              "Command": "Frame",
-              "Parameter": 5
+              "Frame": "Idle 2",
+              "Duration": 5
             },
             {
-              "FrameGroup": "Idle 3",
-              "Command": "Frame",
-              "Parameter": 5
+              "Frame": "Idle 3",
+              "Duration": 5
             },
             {
-              "FrameGroup": "Idle 4",
-              "Command": "Frame",
-              "Parameter": 15
+              "Frame": "Idle 4",
+              "Duration": 15
             },
             {
-              "FrameGroup": "Idle 3",
-              "Command": "Frame",
-              "Parameter": 6
+              "Frame": "Idle 3",
+              "Duration": 6
             },
             {
-              "FrameGroup": "Idle 2",
-              "Command": "Frame",
-              "Parameter": 6
+              "Frame": "Idle 2",
+              "Duration": 6
             },
             {
               "Command": "GotoFrameOffset",
@@ -259,13 +229,11 @@
           ],
           "StillFrame": [
             {
-              "FrameGroup": "Idle 1",
-              "Command": "Frame",
-              "Parameter": 10
+              "Frame": "Idle 1",
+              "Duration": 10
             },
             {
-              "Command": "Stop",
-              "Parameter": 0
+              "Command": "Stop"
             }
           ]
         }

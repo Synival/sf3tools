@@ -37,9 +37,8 @@
         "4": {
           "StillFrame (OnGround, Repeat)": [
             {
-              "FrameGroup": "OnGround 1",
-              "Command": "Frame",
-              "Parameter": 10
+              "Frame": "OnGround 1",
+              "Duration": 10
             },
             {
               "Command": "GotoFrameOffset",
@@ -48,13 +47,11 @@
           ],
           "StillFrame (OnGround)": [
             {
-              "FrameGroup": "OnGround 1",
-              "Command": "Frame",
-              "Parameter": 10
+              "Frame": "OnGround 1",
+              "Duration": 10
             },
             {
-              "Command": "Stop",
-              "Parameter": 0
+              "Command": "Stop"
             }
           ]
         }

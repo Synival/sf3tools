@@ -191,24 +191,20 @@
         "4": {
           "Flying (Flapping Quickly)": [
             {
-              "FrameGroup": "Flying 1",
-              "Command": "Frame",
-              "Parameter": 1
+              "Frame": "Flying 1",
+              "Duration": 1
             },
             {
-              "FrameGroup": "Flying 2",
-              "Command": "Frame",
-              "Parameter": 1
+              "Frame": "Flying 2",
+              "Duration": 1
             },
             {
-              "FrameGroup": "Flying 3",
-              "Command": "Frame",
-              "Parameter": 1
+              "Frame": "Flying 3",
+              "Duration": 1
             },
             {
-              "FrameGroup": "Flying 2",
-              "Command": "Frame",
-              "Parameter": 1
+              "Frame": "Flying 2",
+              "Duration": 1
             },
             {
               "Command": "GotoFrameOffset",
@@ -217,29 +213,24 @@
           ],
           "HoppingAround": [
             {
-              "FrameGroup": "HoppingAround 1",
-              "Command": "Frame",
-              "Parameter": 2
+              "Frame": "HoppingAround 1",
+              "Duration": 2
             },
             {
-              "FrameGroup": "HoppingAround 2",
-              "Command": "Frame",
-              "Parameter": 2
+              "Frame": "HoppingAround 2",
+              "Duration": 2
             },
             {
-              "FrameGroup": "HoppingAround 3",
-              "Command": "Frame",
-              "Parameter": 2
+              "Frame": "HoppingAround 3",
+              "Duration": 2
             },
             {
-              "FrameGroup": "HoppingAround 4",
-              "Command": "Frame",
-              "Parameter": 2
+              "Frame": "HoppingAround 4",
+              "Duration": 2
             },
             {
-              "FrameGroup": "HoppingAround 5",
-              "Command": "Frame",
-              "Parameter": 2
+              "Frame": "HoppingAround 5",
+              "Duration": 2
             },
             {
               "Command": "GotoFrameOffset",
@@ -248,13 +239,11 @@
           ],
           "StillFrame": [
             {
-              "FrameGroup": "Flying 1",
-              "Command": "Frame",
-              "Parameter": 1
+              "Frame": "Flying 1",
+              "Duration": 1
             },
             {
-              "Command": "Stop",
-              "Parameter": 0
+              "Command": "Stop"
             }
           ]
         }

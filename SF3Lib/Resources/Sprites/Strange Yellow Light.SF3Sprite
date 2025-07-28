@@ -22,13 +22,11 @@
         "1": {
           "StillFrame (Sparkle)": [
             {
-              "FrameGroup": "Sparkle 1",
-              "Command": "Frame",
-              "Parameter": 10
+              "Frame": "Sparkle 1",
+              "Duration": 10
             },
             {
-              "Command": "Stop",
-              "Parameter": 0
+              "Command": "Stop"
             }
           ]
         }

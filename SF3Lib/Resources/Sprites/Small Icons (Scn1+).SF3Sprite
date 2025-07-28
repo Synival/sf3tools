@@ -36,35 +36,29 @@
         "1": {
           "Alert": [
             {
-              "FrameGroup": "Alert 1",
-              "Command": "Frame",
-              "Parameter": 10
+              "Frame": "Alert 1",
+              "Duration": 10
             },
             {
-              "Command": "Stop",
-              "Parameter": 0
+              "Command": "Stop"
             }
           ],
           "Flag": [
             {
-              "FrameGroup": "Flag 1",
-              "Command": "Frame",
-              "Parameter": 10
+              "Frame": "Flag 1",
+              "Duration": 10
             },
             {
-              "Command": "Stop",
-              "Parameter": 0
+              "Command": "Stop"
             }
           ],
           "Love": [
             {
-              "FrameGroup": "Love 1",
-              "Command": "Frame",
-              "Parameter": 10
+              "Frame": "Love 1",
+              "Duration": 10
             },
             {
-              "Command": "Stop",
-              "Parameter": 0
+              "Command": "Stop"
             }
           ]
         }

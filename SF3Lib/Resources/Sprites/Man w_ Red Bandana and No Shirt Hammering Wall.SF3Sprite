@@ -81,19 +81,16 @@
         "4": {
           "Hammering": [
             {
-              "FrameGroup": "Hammering 1",
-              "Command": "Frame",
-              "Parameter": 3
+              "Frame": "Hammering 1",
+              "Duration": 3
             },
             {
-              "FrameGroup": "Hammering 2",
-              "Command": "Frame",
-              "Parameter": 2
+              "Frame": "Hammering 2",
+              "Duration": 2
             },
             {
-              "FrameGroup": "Hammering 3",
-              "Command": "Frame",
-              "Parameter": 4
+              "Frame": "Hammering 3",
+              "Duration": 4
             },
             {
               "Command": "GotoFrameOffset",
@@ -102,13 +99,11 @@
           ],
           "StillFrame": [
             {
-              "FrameGroup": "Hammering 1",
-              "Command": "Frame",
-              "Parameter": 10
+              "Frame": "Hammering 1",
+              "Duration": 10
             },
             {
-              "Command": "Stop",
-              "Parameter": 0
+              "Command": "Stop"
             }
           ]
         }

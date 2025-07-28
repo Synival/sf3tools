@@ -81,24 +81,20 @@
         "4": {
           "OneHandedPushUps": [
             {
-              "FrameGroup": "OneHandedPushUps 1",
-              "Command": "Frame",
-              "Parameter": 3
+              "Frame": "OneHandedPushUps 1",
+              "Duration": 3
             },
             {
-              "FrameGroup": "OneHandedPushUps 2",
-              "Command": "Frame",
-              "Parameter": 3
+              "Frame": "OneHandedPushUps 2",
+              "Duration": 3
             },
             {
-              "FrameGroup": "OneHandedPushUps 3",
-              "Command": "Frame",
-              "Parameter": 5
+              "Frame": "OneHandedPushUps 3",
+              "Duration": 5
             },
             {
-              "FrameGroup": "OneHandedPushUps 2",
-              "Command": "Frame",
-              "Parameter": 5
+              "Frame": "OneHandedPushUps 2",
+              "Duration": 5
             },
             {
               "Command": "GotoFrameOffset",
@@ -107,13 +103,11 @@
           ],
           "StillFrame (One-Handed Push Ups)": [
             {
-              "FrameGroup": "OneHandedPushUps 1",
-              "Command": "Frame",
-              "Parameter": 10
+              "Frame": "OneHandedPushUps 1",
+              "Duration": 10
             },
             {
-              "Command": "Stop",
-              "Parameter": 0
+              "Command": "Stop"
             }
           ]
         }

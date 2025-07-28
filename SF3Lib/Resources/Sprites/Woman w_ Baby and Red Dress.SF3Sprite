@@ -169,59 +169,48 @@
         "4": {
           "Idle (Rocking Baby)": [
             {
-              "FrameGroup": "Idle (Rocking Baby) 1",
-              "Command": "Frame",
-              "Parameter": 30
+              "Frame": "Idle (Rocking Baby) 1",
+              "Duration": 30
             },
             {
-              "FrameGroup": "Idle (Rocking Baby) 2",
-              "Command": "Frame",
-              "Parameter": 5
+              "Frame": "Idle (Rocking Baby) 2",
+              "Duration": 5
             },
             {
-              "FrameGroup": "Idle (Rocking Baby) 3",
-              "Command": "Frame",
-              "Parameter": 6
+              "Frame": "Idle (Rocking Baby) 3",
+              "Duration": 6
             },
             {
-              "FrameGroup": "Idle (Rocking Baby) 2",
-              "Command": "Frame",
-              "Parameter": 5
+              "Frame": "Idle (Rocking Baby) 2",
+              "Duration": 5
             },
             {
-              "FrameGroup": "Idle (Rocking Baby) 1",
-              "Command": "Frame",
-              "Parameter": 3
+              "Frame": "Idle (Rocking Baby) 1",
+              "Duration": 3
             },
             {
-              "FrameGroup": "Idle (Rocking Baby) 2",
-              "Command": "Frame",
-              "Parameter": 5
+              "Frame": "Idle (Rocking Baby) 2",
+              "Duration": 5
             },
             {
-              "FrameGroup": "Idle (Rocking Baby) 3",
-              "Command": "Frame",
-              "Parameter": 6
+              "Frame": "Idle (Rocking Baby) 3",
+              "Duration": 6
             },
             {
-              "FrameGroup": "Idle (Rocking Baby) 2",
-              "Command": "Frame",
-              "Parameter": 4
+              "Frame": "Idle (Rocking Baby) 2",
+              "Duration": 4
             },
             {
-              "FrameGroup": "Idle (Rocking Baby) 2",
-              "Command": "Frame",
-              "Parameter": 5
+              "Frame": "Idle (Rocking Baby) 2",
+              "Duration": 5
             },
             {
-              "FrameGroup": "Idle (Rocking Baby) 3",
-              "Command": "Frame",
-              "Parameter": 6
+              "Frame": "Idle (Rocking Baby) 3",
+              "Duration": 6
             },
             {
-              "FrameGroup": "Idle (Rocking Baby) 2",
-              "Command": "Frame",
-              "Parameter": 4
+              "Frame": "Idle (Rocking Baby) 2",
+              "Duration": 4
             },
             {
               "Command": "GotoFrameOffset",
@@ -230,45 +219,37 @@
           ],
           "StillFrame": [
             {
-              "FrameGroup": "Idle (Rocking Baby) 1",
-              "Command": "Frame",
-              "Parameter": 10
+              "Frame": "Idle (Rocking Baby) 1",
+              "Duration": 10
             },
             {
-              "Command": "Stop",
-              "Parameter": 0
+              "Command": "Stop"
             }
           ],
           "Walking": [
             {
-              "FrameGroup": "Walking 1",
-              "Command": "Frame",
-              "Parameter": 4
+              "Frame": "Walking 1",
+              "Duration": 4
             },
             {
-              "FrameGroup": "Idle (Rocking Baby) 1",
-              "Command": "Frame",
-              "Parameter": 4
+              "Frame": "Idle (Rocking Baby) 1",
+              "Duration": 4
             },
             {
-              "FrameGroup": "Walking 2",
-              "Command": "Frame",
-              "Parameter": 4
+              "Frame": "Walking 2",
+              "Duration": 4
             },
             {
-              "FrameGroup": "Walking 3",
-              "Command": "Frame",
-              "Parameter": 4
+              "Frame": "Walking 3",
+              "Duration": 4
             },
             {
-              "FrameGroup": "Idle (Rocking Baby) 1",
-              "Command": "Frame",
-              "Parameter": 4
+              "Frame": "Idle (Rocking Baby) 1",
+              "Duration": 4
             },
             {
-              "FrameGroup": "Walking 4",
-              "Command": "Frame",
-              "Parameter": 4
+              "Frame": "Walking 4",
+              "Duration": 4
             },
             {
               "Command": "GotoFrameOffset",

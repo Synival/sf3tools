@@ -22,13 +22,11 @@
         "1": {
           "StillFrame (Lightning)": [
             {
-              "FrameGroup": "Lightning 1",
-              "Command": "Frame",
-              "Parameter": 10
+              "Frame": "Lightning 1",
+              "Duration": 10
             },
             {
-              "Command": "Stop",
-              "Parameter": 0
+              "Command": "Stop"
             }
           ]
         }

@@ -271,24 +271,20 @@
         "4": {
           "Idle": [
             {
-              "FrameGroup": "Idle 1",
-              "Command": "Frame",
-              "Parameter": 1
+              "Frame": "Idle 1",
+              "Duration": 1
             },
             {
-              "FrameGroup": "Idle 2",
-              "Command": "Frame",
-              "Parameter": 1
+              "Frame": "Idle 2",
+              "Duration": 1
             },
             {
-              "FrameGroup": "Idle 1",
-              "Command": "Frame",
-              "Parameter": 1
+              "Frame": "Idle 1",
+              "Duration": 1
             },
             {
-              "FrameGroup": "Idle 3",
-              "Command": "Frame",
-              "Parameter": 1
+              "Frame": "Idle 3",
+              "Duration": 1
             },
             {
               "Command": "GotoFrameOffset",
@@ -297,37 +293,31 @@
           ],
           "StillFrame": [
             {
-              "FrameGroup": "Idle 1",
-              "Command": "Frame",
-              "Parameter": 10
+              "Frame": "Idle 1",
+              "Duration": 10
             },
             {
-              "Command": "Stop",
-              "Parameter": 0
+              "Command": "Stop"
             }
           ]
         },
         "6": {
           "Idle": [
             {
-              "FrameGroup": "Idle 1",
-              "Command": "Frame",
-              "Parameter": 1
+              "Frame": "Idle 1",
+              "Duration": 1
             },
             {
-              "FrameGroup": "Idle 2",
-              "Command": "Frame",
-              "Parameter": 1
+              "Frame": "Idle 2",
+              "Duration": 1
             },
             {
-              "FrameGroup": "Idle 1",
-              "Command": "Frame",
-              "Parameter": 1
+              "Frame": "Idle 1",
+              "Duration": 1
             },
             {
-              "FrameGroup": "Idle 3",
-              "Command": "Frame",
-              "Parameter": 1
+              "Frame": "Idle 3",
+              "Duration": 1
             },
             {
               "Command": "GotoFrameOffset",
@@ -336,44 +326,36 @@
           ],
           "Moving": [
             {
-              "FrameGroup": "Moving 1",
-              "Command": "Frame",
-              "Parameter": 5
+              "Frame": "Moving 1",
+              "Duration": 5
             },
             {
-              "FrameGroup": "Moving 2",
-              "Command": "Frame",
-              "Parameter": 5
+              "Frame": "Moving 2",
+              "Duration": 5
             },
             {
-              "FrameGroup": "Moving 3",
-              "Command": "Frame",
-              "Parameter": 5
+              "Frame": "Moving 3",
+              "Duration": 5
             },
             {
-              "FrameGroup": "Moving 4",
-              "Command": "Frame",
-              "Parameter": 5
+              "Frame": "Moving 4",
+              "Duration": 5
             },
             {
-              "FrameGroup": "Moving 5",
-              "Command": "Frame",
-              "Parameter": 5
+              "Frame": "Moving 5",
+              "Duration": 5
             },
             {
-              "FrameGroup": "Moving 4",
-              "Command": "Frame",
-              "Parameter": 5
+              "Frame": "Moving 4",
+              "Duration": 5
             },
             {
-              "FrameGroup": "Moving 3",
-              "Command": "Frame",
-              "Parameter": 5
+              "Frame": "Moving 3",
+              "Duration": 5
             },
             {
-              "FrameGroup": "Moving 2",
-              "Command": "Frame",
-              "Parameter": 5
+              "Frame": "Moving 2",
+              "Duration": 5
             },
             {
               "Command": "GotoFrameOffset",
@@ -382,13 +364,11 @@
           ],
           "StillFrame": [
             {
-              "FrameGroup": "Moving 3",
-              "Command": "Frame",
-              "Parameter": 10
+              "Frame": "Moving 3",
+              "Duration": 10
             },
             {
-              "Command": "Stop",
-              "Parameter": 0
+              "Command": "Stop"
             }
           ]
         }

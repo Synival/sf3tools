@@ -81,19 +81,16 @@
         "4": {
           "Closing": [
             {
-              "FrameGroup": "OpeningAndClosing 3",
-              "Command": "Frame",
-              "Parameter": 1
+              "Frame": "OpeningAndClosing 3",
+              "Duration": 1
             },
             {
-              "FrameGroup": "OpeningAndClosing 2",
-              "Command": "Frame",
-              "Parameter": 1
+              "Frame": "OpeningAndClosing 2",
+              "Duration": 1
             },
             {
-              "FrameGroup": "OpeningAndClosing 1",
-              "Command": "Frame",
-              "Parameter": 1
+              "Frame": "OpeningAndClosing 1",
+              "Duration": 1
             },
             {
               "Command": "GotoAnimation",
@@ -102,19 +99,16 @@
           ],
           "Opening": [
             {
-              "FrameGroup": "OpeningAndClosing 1",
-              "Command": "Frame",
-              "Parameter": 1
+              "Frame": "OpeningAndClosing 1",
+              "Duration": 1
             },
             {
-              "FrameGroup": "OpeningAndClosing 2",
-              "Command": "Frame",
-              "Parameter": 1
+              "Frame": "OpeningAndClosing 2",
+              "Duration": 1
             },
             {
-              "FrameGroup": "OpeningAndClosing 3",
-              "Command": "Frame",
-              "Parameter": 1
+              "Frame": "OpeningAndClosing 3",
+              "Duration": 1
             },
             {
               "Command": "GotoAnimation",
@@ -123,24 +117,20 @@
           ],
           "StillFrame (Closed)": [
             {
-              "FrameGroup": "OpeningAndClosing 1",
-              "Command": "Frame",
-              "Parameter": 1
+              "Frame": "OpeningAndClosing 1",
+              "Duration": 1
             },
             {
-              "Command": "Stop",
-              "Parameter": 0
+              "Command": "Stop"
             }
           ],
           "StillFrame (Open)": [
             {
-              "FrameGroup": "OpeningAndClosing 3",
-              "Command": "Frame",
-              "Parameter": 1
+              "Frame": "OpeningAndClosing 3",
+              "Duration": 1
             },
             {
-              "Command": "Stop",
-              "Parameter": 0
+              "Command": "Stop"
             }
           ]
         }

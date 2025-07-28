@@ -96,35 +96,29 @@
         "5": {
           "StillFrame": [
             {
-              "FrameGroup": "Walking 1",
-              "Command": "Frame",
-              "Parameter": 10
+              "Frame": "Walking 1",
+              "Duration": 10
             },
             {
-              "Command": "Stop",
-              "Parameter": 0
+              "Command": "Stop"
             }
           ],
           "Walking": [
             {
-              "FrameGroup": "Walking 1",
-              "Command": "Frame",
-              "Parameter": 5
+              "Frame": "Walking 1",
+              "Duration": 5
             },
             {
-              "FrameGroup": "Walking 2",
-              "Command": "Frame",
-              "Parameter": 5
+              "Frame": "Walking 2",
+              "Duration": 5
             },
             {
-              "FrameGroup": "Walking 3",
-              "Command": "Frame",
-              "Parameter": 5
+              "Frame": "Walking 3",
+              "Duration": 5
             },
             {
-              "FrameGroup": "Walking 2",
-              "Command": "Frame",
-              "Parameter": 5
+              "Frame": "Walking 2",
+              "Duration": 5
             },
             {
               "Command": "GotoFrameOffset",
@@ -256,74 +250,60 @@
         "4": {
           "InDespair": [
             {
-              "FrameGroup": "InDespair 1",
-              "Command": "Frame",
-              "Parameter": 5
+              "Frame": "InDespair 1",
+              "Duration": 5
             },
             {
-              "FrameGroup": "InDespair 2",
-              "Command": "Frame",
-              "Parameter": 5
+              "Frame": "InDespair 2",
+              "Duration": 5
             },
             {
-              "FrameGroup": "InDespair 1",
-              "Command": "Frame",
-              "Parameter": 5
+              "Frame": "InDespair 1",
+              "Duration": 5
             },
             {
-              "FrameGroup": "InDespair 3",
-              "Command": "Frame",
-              "Parameter": 5
+              "Frame": "InDespair 3",
+              "Duration": 5
             },
             {
-              "FrameGroup": "InDespair 1",
-              "Command": "Frame",
-              "Parameter": 5
+              "Frame": "InDespair 1",
+              "Duration": 5
             },
             {
-              "FrameGroup": "InDespair 2",
-              "Command": "Frame",
-              "Parameter": 5
+              "Frame": "InDespair 2",
+              "Duration": 5
             },
             {
-              "FrameGroup": "InDespair 1",
-              "Command": "Frame",
-              "Parameter": 5
+              "Frame": "InDespair 1",
+              "Duration": 5
             },
             {
-              "FrameGroup": "InDespair 3",
-              "Command": "Frame",
-              "Parameter": 5
+              "Frame": "InDespair 3",
+              "Duration": 5
             },
             {
-              "FrameGroup": "InDespair 1",
-              "Command": "Frame",
-              "Parameter": 5
+              "Frame": "InDespair 1",
+              "Duration": 5
             },
             {
-              "FrameGroup": "InDespair 4",
-              "Command": "Frame",
-              "Parameter": 10
+              "Frame": "InDespair 4",
+              "Duration": 10
             },
             {
-              "FrameGroup": "InDespair 5",
-              "Command": "Frame",
-              "Parameter": 30
+              "Frame": "InDespair 5",
+              "Duration": 30
             },
             {
-              "FrameGroup": "InDespair 1",
-              "Command": "Frame",
-              "Parameter": 5
+              "Frame": "InDespair 1",
+              "Duration": 5
             },
             {
-              "FrameGroup": "InDespair 5",
-              "Command": "Frame",
-              "Parameter": 10
+              "Frame": "InDespair 5",
+              "Duration": 10
             },
             {
-              "FrameGroup": "InDespair 1",
-              "Command": "Frame",
-              "Parameter": 35
+              "Frame": "InDespair 1",
+              "Duration": 35
             },
             {
               "Command": "GotoFrameOffset",
@@ -332,13 +312,11 @@
           ],
           "StillFrame (In Despair)": [
             {
-              "FrameGroup": "InDespair 1",
-              "Command": "Frame",
-              "Parameter": 5
+              "Frame": "InDespair 1",
+              "Duration": 5
             },
             {
-              "Command": "Stop",
-              "Parameter": 0
+              "Command": "Stop"
             }
           ]
         }
@@ -378,9 +356,8 @@
         "4": {
           "StillFrame (OnGround, Repeat)": [
             {
-              "FrameGroup": "OnGround 1",
-              "Command": "Frame",
-              "Parameter": 10
+              "Frame": "OnGround 1",
+              "Duration": 10
             },
             {
               "Command": "GotoFrameOffset",
@@ -389,13 +366,11 @@
           ],
           "StillFrame (OnGround)": [
             {
-              "FrameGroup": "OnGround 1",
-              "Command": "Frame",
-              "Parameter": 10
+              "Frame": "OnGround 1",
+              "Duration": 10
             },
             {
-              "Command": "Stop",
-              "Parameter": 0
+              "Command": "Stop"
             }
           ]
         }

@@ -71,44 +71,36 @@
         "1": {
           "Exploding (Slow then Fast)": [
             {
-              "FrameGroup": "Exploding 1",
-              "Command": "Frame",
-              "Parameter": 6
+              "Frame": "Exploding 1",
+              "Duration": 6
             },
             {
-              "FrameGroup": "Exploding 2",
-              "Command": "Frame",
-              "Parameter": 5
+              "Frame": "Exploding 2",
+              "Duration": 5
             },
             {
-              "FrameGroup": "Exploding 3",
-              "Command": "Frame",
-              "Parameter": 4
+              "Frame": "Exploding 3",
+              "Duration": 4
             },
             {
-              "FrameGroup": "Exploding 4",
-              "Command": "Frame",
-              "Parameter": 3
+              "Frame": "Exploding 4",
+              "Duration": 3
             },
             {
-              "FrameGroup": "Exploding 5",
-              "Command": "Frame",
-              "Parameter": 2
+              "Frame": "Exploding 5",
+              "Duration": 2
             },
             {
-              "FrameGroup": "Exploding 6",
-              "Command": "Frame",
-              "Parameter": 1
+              "Frame": "Exploding 6",
+              "Duration": 1
             },
             {
-              "FrameGroup": "Exploding 7",
-              "Command": "Frame",
-              "Parameter": 1
+              "Frame": "Exploding 7",
+              "Duration": 1
             },
             {
-              "FrameGroup": "Exploding 8",
-              "Command": "Frame",
-              "Parameter": 1
+              "Frame": "Exploding 8",
+              "Duration": 1
             },
             {
               "Command": "GotoAnimation",

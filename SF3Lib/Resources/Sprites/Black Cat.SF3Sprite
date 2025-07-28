@@ -37,13 +37,11 @@
         "4": {
           "StillFrame (Idle)": [
             {
-              "FrameGroup": "Idle 1",
-              "Command": "Frame",
-              "Parameter": 5
+              "Frame": "Idle 1",
+              "Duration": 5
             },
             {
-              "Command": "Stop",
-              "Parameter": 0
+              "Command": "Stop"
             }
           ]
         }

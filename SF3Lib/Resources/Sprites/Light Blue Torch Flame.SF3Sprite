@@ -71,44 +71,36 @@
         "1": {
           "Flickering": [
             {
-              "FrameGroup": "Flickering 1",
-              "Command": "Frame",
-              "Parameter": 1
+              "Frame": "Flickering 1",
+              "Duration": 1
             },
             {
-              "FrameGroup": "Flickering 2",
-              "Command": "Frame",
-              "Parameter": 1
+              "Frame": "Flickering 2",
+              "Duration": 1
             },
             {
-              "FrameGroup": "Flickering 3",
-              "Command": "Frame",
-              "Parameter": 1
+              "Frame": "Flickering 3",
+              "Duration": 1
             },
             {
-              "FrameGroup": "Flickering 4",
-              "Command": "Frame",
-              "Parameter": 1
+              "Frame": "Flickering 4",
+              "Duration": 1
             },
             {
-              "FrameGroup": "Flickering 5",
-              "Command": "Frame",
-              "Parameter": 1
+              "Frame": "Flickering 5",
+              "Duration": 1
             },
             {
-              "FrameGroup": "Flickering 6",
-              "Command": "Frame",
-              "Parameter": 1
+              "Frame": "Flickering 6",
+              "Duration": 1
             },
             {
-              "FrameGroup": "Flickering 7",
-              "Command": "Frame",
-              "Parameter": 1
+              "Frame": "Flickering 7",
+              "Duration": 1
             },
             {
-              "FrameGroup": "Flickering 8",
-              "Command": "Frame",
-              "Parameter": 1
+              "Frame": "Flickering 8",
+              "Duration": 1
             },
             {
               "Command": "GotoFrameOffset",

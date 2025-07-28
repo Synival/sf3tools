@@ -103,9 +103,8 @@
         "4": {
           "StillFrame (OnGround, Repeat 1)": [
             {
-              "FrameGroup": "OnGround 1",
-              "Command": "Frame",
-              "Parameter": 4
+              "Frame": "OnGround 1",
+              "Duration": 4
             },
             {
               "Command": "GotoFrameOffset",
@@ -114,9 +113,8 @@
           ],
           "StillFrame (OnGround, Repeat 2)": [
             {
-              "FrameGroup": "OnGround 1",
-              "Command": "Frame",
-              "Parameter": 5
+              "Frame": "OnGround 1",
+              "Duration": 5
             },
             {
               "Command": "GotoFrameOffset",
@@ -125,46 +123,38 @@
           ],
           "StillFrame (OnGround)": [
             {
-              "FrameGroup": "OnGround 1",
-              "Command": "Frame",
-              "Parameter": 10
+              "Frame": "OnGround 1",
+              "Duration": 10
             },
             {
-              "Command": "Stop",
-              "Parameter": 0
+              "Command": "Stop"
             }
           ],
           "StillFrame (Twitching on Ground)": [
             {
-              "FrameGroup": "Twitching (OnGround) 1",
-              "Command": "Frame",
-              "Parameter": 10
+              "Frame": "Twitching (OnGround) 1",
+              "Duration": 10
             },
             {
-              "Command": "Stop",
-              "Parameter": 0
+              "Command": "Stop"
             }
           ],
           "Twitching (OnGround)": [
             {
-              "FrameGroup": "Twitching (OnGround) 1",
-              "Command": "Frame",
-              "Parameter": 15
+              "Frame": "Twitching (OnGround) 1",
+              "Duration": 15
             },
             {
-              "FrameGroup": "Twitching (OnGround) 2",
-              "Command": "Frame",
-              "Parameter": 3
+              "Frame": "Twitching (OnGround) 2",
+              "Duration": 3
             },
             {
-              "FrameGroup": "Twitching (OnGround) 3",
-              "Command": "Frame",
-              "Parameter": 3
+              "Frame": "Twitching (OnGround) 3",
+              "Duration": 3
             },
             {
-              "FrameGroup": "Twitching (OnGround) 2",
-              "Command": "Frame",
-              "Parameter": 3
+              "Frame": "Twitching (OnGround) 2",
+              "Duration": 3
             },
             {
               "Command": "GotoFrameOffset",

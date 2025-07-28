@@ -81,24 +81,20 @@
         "4": {
           "LiftingWeight": [
             {
-              "FrameGroup": "LiftingWeight 1",
-              "Command": "Frame",
-              "Parameter": 20
+              "Frame": "LiftingWeight 1",
+              "Duration": 20
             },
             {
-              "FrameGroup": "LiftingWeight 2",
-              "Command": "Frame",
-              "Parameter": 4
+              "Frame": "LiftingWeight 2",
+              "Duration": 4
             },
             {
-              "FrameGroup": "LiftingWeight 3",
-              "Command": "Frame",
-              "Parameter": 10
+              "Frame": "LiftingWeight 3",
+              "Duration": 10
             },
             {
-              "FrameGroup": "LiftingWeight 2",
-              "Command": "Frame",
-              "Parameter": 3
+              "Frame": "LiftingWeight 2",
+              "Duration": 3
             },
             {
               "Command": "GotoFrameOffset",
@@ -107,13 +103,11 @@
           ],
           "StillFrame": [
             {
-              "FrameGroup": "LiftingWeight 1",
-              "Command": "Frame",
-              "Parameter": 10
+              "Frame": "LiftingWeight 1",
+              "Duration": 10
             },
             {
-              "Command": "Stop",
-              "Parameter": 0
+              "Command": "Stop"
             }
           ]
         }

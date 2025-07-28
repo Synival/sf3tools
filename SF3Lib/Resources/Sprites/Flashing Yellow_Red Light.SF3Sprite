@@ -36,9 +36,8 @@
         "1": {
           "BlinkRedOnce": [
             {
-              "FrameGroup": "BlinkRedOnce 1",
-              "Command": "Frame",
-              "Parameter": 10
+              "Frame": "BlinkRedOnce 1",
+              "Duration": 10
             },
             {
               "Command": "GotoAnimation",
@@ -47,9 +46,8 @@
           ],
           "BlinkWhiteOnce": [
             {
-              "FrameGroup": "BlinkWhiteOnce 1",
-              "Command": "Frame",
-              "Parameter": 10
+              "Frame": "BlinkWhiteOnce 1",
+              "Duration": 10
             },
             {
               "Command": "GotoAnimation",
@@ -58,9 +56,8 @@
           ],
           "BlinkYellowOnce": [
             {
-              "FrameGroup": "BlinkYellowOnce 1",
-              "Command": "Frame",
-              "Parameter": 10
+              "Frame": "BlinkYellowOnce 1",
+              "Duration": 10
             },
             {
               "Command": "GotoAnimation",

@@ -176,29 +176,24 @@
         "4": {
           "Idle": [
             {
-              "FrameGroup": "Idle 1",
-              "Command": "Frame",
-              "Parameter": 4
+              "Frame": "Idle 1",
+              "Duration": 4
             },
             {
-              "FrameGroup": "Idle 2",
-              "Command": "Frame",
-              "Parameter": 4
+              "Frame": "Idle 2",
+              "Duration": 4
             },
             {
-              "FrameGroup": "Idle 3",
-              "Command": "Frame",
-              "Parameter": 4
+              "Frame": "Idle 3",
+              "Duration": 4
             },
             {
-              "FrameGroup": "Idle 2",
-              "Command": "Frame",
-              "Parameter": 4
+              "Frame": "Idle 2",
+              "Duration": 4
             },
             {
-              "FrameGroup": "Idle 1",
-              "Command": "Frame",
-              "Parameter": 4
+              "Frame": "Idle 1",
+              "Duration": 4
             },
             {
               "Command": "GotoFrameOffset",
@@ -207,24 +202,20 @@
           ],
           "Nodding": [
             {
-              "FrameGroup": "Idle 1",
-              "Command": "Frame",
-              "Parameter": 4
+              "Frame": "Idle 1",
+              "Duration": 4
             },
             {
-              "FrameGroup": "Nodding 1",
-              "Command": "Frame",
-              "Parameter": 4
+              "Frame": "Nodding 1",
+              "Duration": 4
             },
             {
-              "FrameGroup": "Nodding 2",
-              "Command": "Frame",
-              "Parameter": 4
+              "Frame": "Nodding 2",
+              "Duration": 4
             },
             {
-              "FrameGroup": "Nodding 1",
-              "Command": "Frame",
-              "Parameter": 3
+              "Frame": "Nodding 1",
+              "Duration": 3
             },
             {
               "Command": "GotoAnimation",
@@ -233,44 +224,36 @@
           ],
           "ShakingHead": [
             {
-              "FrameGroup": "Idle 1",
-              "Command": "Frame",
-              "Parameter": 3
+              "Frame": "Idle 1",
+              "Duration": 3
             },
             {
-              "FrameGroup": "ShakingHead 1",
-              "Command": "Frame",
-              "Parameter": 4
+              "Frame": "ShakingHead 1",
+              "Duration": 4
             },
             {
-              "FrameGroup": "Idle 1",
-              "Command": "Frame",
-              "Parameter": 4
+              "Frame": "Idle 1",
+              "Duration": 4
             },
             {
-              "FrameGroup": "ShakingHead 2",
-              "Command": "Frame",
-              "Parameter": 4
+              "Frame": "ShakingHead 2",
+              "Duration": 4
             },
             {
-              "FrameGroup": "Idle 1",
-              "Command": "Frame",
-              "Parameter": 4
+              "Frame": "Idle 1",
+              "Duration": 4
             },
             {
-              "FrameGroup": "ShakingHead 1",
-              "Command": "Frame",
-              "Parameter": 4
+              "Frame": "ShakingHead 1",
+              "Duration": 4
             },
             {
-              "FrameGroup": "Idle 1",
-              "Command": "Frame",
-              "Parameter": 4
+              "Frame": "Idle 1",
+              "Duration": 4
             },
             {
-              "FrameGroup": "ShakingHead 2",
-              "Command": "Frame",
-              "Parameter": 4
+              "Frame": "ShakingHead 2",
+              "Duration": 4
             },
             {
               "Command": "GotoAnimation",
@@ -279,7 +262,7 @@
           ],
           "StillFrame (Walking, Should be 1 Direction)": [
             {
-              "Frames": {
+              "Frame": {
                 "SSE": {
                   "Frame": "Walking 1",
                   "Direction": "SSE"
@@ -297,12 +280,10 @@
                   "Direction": "ENE"
                 }
               },
-              "Command": "Frame",
-              "Parameter": 10
+              "Duration": 10
             },
             {
-              "Command": "Stop",
-              "Parameter": 0
+              "Command": "Stop"
             }
           ]
         }

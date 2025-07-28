@@ -147,74 +147,60 @@
         "4": {
           "SittingAndEating": [
             {
-              "FrameGroup": "SittingAndEating 1",
-              "Command": "Frame",
-              "Parameter": 5
+              "Frame": "SittingAndEating 1",
+              "Duration": 5
             },
             {
-              "FrameGroup": "SittingAndEating 2",
-              "Command": "Frame",
-              "Parameter": 5
+              "Frame": "SittingAndEating 2",
+              "Duration": 5
             },
             {
-              "FrameGroup": "SittingAndEating 3",
-              "Command": "Frame",
-              "Parameter": 5
+              "Frame": "SittingAndEating 3",
+              "Duration": 5
             },
             {
-              "FrameGroup": "SittingAndEating 1",
-              "Command": "Frame",
-              "Parameter": 5
+              "Frame": "SittingAndEating 1",
+              "Duration": 5
             },
             {
-              "FrameGroup": "SittingAndEating 2",
-              "Command": "Frame",
-              "Parameter": 5
+              "Frame": "SittingAndEating 2",
+              "Duration": 5
             },
             {
-              "FrameGroup": "SittingAndEating 3",
-              "Command": "Frame",
-              "Parameter": 5
+              "Frame": "SittingAndEating 3",
+              "Duration": 5
             },
             {
-              "FrameGroup": "SittingAndEating 1",
-              "Command": "Frame",
-              "Parameter": 5
+              "Frame": "SittingAndEating 1",
+              "Duration": 5
             },
             {
-              "FrameGroup": "SittingAndEating 2",
-              "Command": "Frame",
-              "Parameter": 5
+              "Frame": "SittingAndEating 2",
+              "Duration": 5
             },
             {
-              "FrameGroup": "SittingAndEating 3",
-              "Command": "Frame",
-              "Parameter": 5
+              "Frame": "SittingAndEating 3",
+              "Duration": 5
             },
             {
-              "FrameGroup": "SittingAndEating 4",
-              "Command": "Frame",
-              "Parameter": 12
+              "Frame": "SittingAndEating 4",
+              "Duration": 12
             },
             {
-              "FrameGroup": "SittingAndEating 5",
-              "Command": "Frame",
-              "Parameter": 15
+              "Frame": "SittingAndEating 5",
+              "Duration": 15
             },
             {
-              "FrameGroup": "SittingAndEating 6",
-              "Command": "Frame",
-              "Parameter": 30
+              "Frame": "SittingAndEating 6",
+              "Duration": 30
             },
             {
-              "FrameGroup": "SittingAndEating 5",
-              "Command": "Frame",
-              "Parameter": 8
+              "Frame": "SittingAndEating 5",
+              "Duration": 8
             },
             {
-              "FrameGroup": "SittingAndEating 4",
-              "Command": "Frame",
-              "Parameter": 5
+              "Frame": "SittingAndEating 4",
+              "Duration": 5
             },
             {
               "Command": "GotoFrameOffset",
@@ -223,13 +209,11 @@
           ],
           "StillFrame": [
             {
-              "FrameGroup": "SittingAndEating 1",
-              "Command": "Frame",
-              "Parameter": 5
+              "Frame": "SittingAndEating 1",
+              "Duration": 5
             },
             {
-              "Command": "Stop",
-              "Parameter": 0
+              "Command": "Stop"
             }
           ]
         }

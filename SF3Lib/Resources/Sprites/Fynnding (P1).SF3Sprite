@@ -373,24 +373,20 @@
         "4": {
           "Flying (2 Frame)": [
             {
-              "FrameGroup": "Flying 5",
-              "Command": "Frame",
-              "Parameter": 8
+              "Frame": "Flying 5",
+              "Duration": 8
             },
             {
-              "FrameGroup": "Flying 3",
-              "Command": "Frame",
-              "Parameter": 7
+              "Frame": "Flying 3",
+              "Duration": 7
             },
             {
-              "FrameGroup": "Flying 5",
-              "Command": "Frame",
-              "Parameter": 8
+              "Frame": "Flying 5",
+              "Duration": 8
             },
             {
-              "FrameGroup": "Flying 3",
-              "Command": "Frame",
-              "Parameter": 6
+              "Frame": "Flying 3",
+              "Duration": 6
             },
             {
               "Command": "GotoFrameOffset",
@@ -399,44 +395,36 @@
           ],
           "Flying (Faster)": [
             {
-              "FrameGroup": "Flying 1",
-              "Command": "Frame",
-              "Parameter": 4
+              "Frame": "Flying 1",
+              "Duration": 4
             },
             {
-              "FrameGroup": "Flying 2",
-              "Command": "Frame",
-              "Parameter": 3
+              "Frame": "Flying 2",
+              "Duration": 3
             },
             {
-              "FrameGroup": "Flying 3",
-              "Command": "Frame",
-              "Parameter": 3
+              "Frame": "Flying 3",
+              "Duration": 3
             },
             {
-              "FrameGroup": "Flying 4",
-              "Command": "Frame",
-              "Parameter": 3
+              "Frame": "Flying 4",
+              "Duration": 3
             },
             {
-              "FrameGroup": "Flying 5",
-              "Command": "Frame",
-              "Parameter": 4
+              "Frame": "Flying 5",
+              "Duration": 4
             },
             {
-              "FrameGroup": "Flying 4",
-              "Command": "Frame",
-              "Parameter": 3
+              "Frame": "Flying 4",
+              "Duration": 3
             },
             {
-              "FrameGroup": "Flying 3",
-              "Command": "Frame",
-              "Parameter": 2
+              "Frame": "Flying 3",
+              "Duration": 2
             },
             {
-              "FrameGroup": "Flying 2",
-              "Command": "Frame",
-              "Parameter": 1
+              "Frame": "Flying 2",
+              "Duration": 1
             },
             {
               "Command": "GotoFrameOffset",
@@ -445,24 +433,20 @@
           ],
           "Flying (Reduced)": [
             {
-              "FrameGroup": "Flying 1",
-              "Command": "Frame",
-              "Parameter": 8
+              "Frame": "Flying 1",
+              "Duration": 8
             },
             {
-              "FrameGroup": "Flying 3",
-              "Command": "Frame",
-              "Parameter": 7
+              "Frame": "Flying 3",
+              "Duration": 7
             },
             {
-              "FrameGroup": "Flying 5",
-              "Command": "Frame",
-              "Parameter": 8
+              "Frame": "Flying 5",
+              "Duration": 8
             },
             {
-              "FrameGroup": "Flying 3",
-              "Command": "Frame",
-              "Parameter": 6
+              "Frame": "Flying 3",
+              "Duration": 6
             },
             {
               "Command": "GotoFrameOffset",
@@ -471,44 +455,36 @@
           ],
           "Flying (Slower)": [
             {
-              "FrameGroup": "Flying 1",
-              "Command": "Frame",
-              "Parameter": 5
+              "Frame": "Flying 1",
+              "Duration": 5
             },
             {
-              "FrameGroup": "Flying 2",
-              "Command": "Frame",
-              "Parameter": 4
+              "Frame": "Flying 2",
+              "Duration": 4
             },
             {
-              "FrameGroup": "Flying 3",
-              "Command": "Frame",
-              "Parameter": 4
+              "Frame": "Flying 3",
+              "Duration": 4
             },
             {
-              "FrameGroup": "Flying 4",
-              "Command": "Frame",
-              "Parameter": 4
+              "Frame": "Flying 4",
+              "Duration": 4
             },
             {
-              "FrameGroup": "Flying 5",
-              "Command": "Frame",
-              "Parameter": 5
+              "Frame": "Flying 5",
+              "Duration": 5
             },
             {
-              "FrameGroup": "Flying 4",
-              "Command": "Frame",
-              "Parameter": 4
+              "Frame": "Flying 4",
+              "Duration": 4
             },
             {
-              "FrameGroup": "Flying 3",
-              "Command": "Frame",
-              "Parameter": 3
+              "Frame": "Flying 3",
+              "Duration": 3
             },
             {
-              "FrameGroup": "Flying 2",
-              "Command": "Frame",
-              "Parameter": 2
+              "Frame": "Flying 2",
+              "Duration": 2
             },
             {
               "Command": "GotoFrameOffset",
@@ -517,39 +493,32 @@
           ],
           "LiftingUpFlareGun": [
             {
-              "FrameGroup": "LiftingUpFlareGun 1",
-              "Command": "Frame",
-              "Parameter": 5
+              "Frame": "LiftingUpFlareGun 1",
+              "Duration": 5
             },
             {
-              "FrameGroup": "LiftingUpFlareGun 2",
-              "Command": "Frame",
-              "Parameter": 3
+              "Frame": "LiftingUpFlareGun 2",
+              "Duration": 3
             },
             {
-              "FrameGroup": "LiftingUpFlareGun 3",
-              "Command": "Frame",
-              "Parameter": 3
+              "Frame": "LiftingUpFlareGun 3",
+              "Duration": 3
             },
             {
-              "FrameGroup": "LiftingUpFlareGun 2",
-              "Command": "Frame",
-              "Parameter": 3
+              "Frame": "LiftingUpFlareGun 2",
+              "Duration": 3
             },
             {
-              "FrameGroup": "LiftingUpFlareGun 3",
-              "Command": "Frame",
-              "Parameter": 3
+              "Frame": "LiftingUpFlareGun 3",
+              "Duration": 3
             },
             {
-              "FrameGroup": "LiftingUpFlareGun 4",
-              "Command": "Frame",
-              "Parameter": 4
+              "Frame": "LiftingUpFlareGun 4",
+              "Duration": 4
             },
             {
-              "FrameGroup": "LiftingUpFlareGun 5",
-              "Command": "Frame",
-              "Parameter": 10
+              "Frame": "LiftingUpFlareGun 5",
+              "Duration": 10
             },
             {
               "Command": "GotoAnimation",
@@ -558,24 +527,20 @@
           ],
           "Nodding": [
             {
-              "FrameGroup": "Flying 3",
-              "Command": "Frame",
-              "Parameter": 2
+              "Frame": "Flying 3",
+              "Duration": 2
             },
             {
-              "FrameGroup": "Nodding 1",
-              "Command": "Frame",
-              "Parameter": 2
+              "Frame": "Nodding 1",
+              "Duration": 2
             },
             {
-              "FrameGroup": "Nodding 2",
-              "Command": "Frame",
-              "Parameter": 2
+              "Frame": "Nodding 2",
+              "Duration": 2
             },
             {
-              "FrameGroup": "Nodding 1",
-              "Command": "Frame",
-              "Parameter": 2
+              "Frame": "Nodding 1",
+              "Duration": 2
             },
             {
               "Command": "GotoAnimation",
@@ -584,24 +549,20 @@
           ],
           "Nodding (NoStop)": [
             {
-              "FrameGroup": "Flying 3",
-              "Command": "Frame",
-              "Parameter": 2
+              "Frame": "Flying 3",
+              "Duration": 2
             },
             {
-              "FrameGroup": "Nodding 1",
-              "Command": "Frame",
-              "Parameter": 2
+              "Frame": "Nodding 1",
+              "Duration": 2
             },
             {
-              "FrameGroup": "Nodding 2",
-              "Command": "Frame",
-              "Parameter": 2
+              "Frame": "Nodding 2",
+              "Duration": 2
             },
             {
-              "FrameGroup": "Nodding 1",
-              "Command": "Frame",
-              "Parameter": 2
+              "Frame": "Nodding 1",
+              "Duration": 2
             },
             {
               "Command": "GotoFrameOffset",
@@ -610,44 +571,36 @@
           ],
           "ShakingHead": [
             {
-              "FrameGroup": "Flying 3",
-              "Command": "Frame",
-              "Parameter": 2
+              "Frame": "Flying 3",
+              "Duration": 2
             },
             {
-              "FrameGroup": "ShakingHead 1",
-              "Command": "Frame",
-              "Parameter": 2
+              "Frame": "ShakingHead 1",
+              "Duration": 2
             },
             {
-              "FrameGroup": "ShakingHead 2",
-              "Command": "Frame",
-              "Parameter": 2
+              "Frame": "ShakingHead 2",
+              "Duration": 2
             },
             {
-              "FrameGroup": "ShakingHead 1",
-              "Command": "Frame",
-              "Parameter": 2
+              "Frame": "ShakingHead 1",
+              "Duration": 2
             },
             {
-              "FrameGroup": "Flying 3",
-              "Command": "Frame",
-              "Parameter": 2
+              "Frame": "Flying 3",
+              "Duration": 2
             },
             {
-              "FrameGroup": "ShakingHead 1",
-              "Command": "Frame",
-              "Parameter": 2
+              "Frame": "ShakingHead 1",
+              "Duration": 2
             },
             {
-              "FrameGroup": "ShakingHead 2",
-              "Command": "Frame",
-              "Parameter": 2
+              "Frame": "ShakingHead 2",
+              "Duration": 2
             },
             {
-              "FrameGroup": "ShakingHead 1",
-              "Command": "Frame",
-              "Parameter": 2
+              "Frame": "ShakingHead 1",
+              "Duration": 2
             },
             {
               "Command": "GotoAnimation",
@@ -656,44 +609,36 @@
           ],
           "ShakingHead (NoStop)": [
             {
-              "FrameGroup": "Flying 3",
-              "Command": "Frame",
-              "Parameter": 2
+              "Frame": "Flying 3",
+              "Duration": 2
             },
             {
-              "FrameGroup": "ShakingHead 1",
-              "Command": "Frame",
-              "Parameter": 2
+              "Frame": "ShakingHead 1",
+              "Duration": 2
             },
             {
-              "FrameGroup": "ShakingHead 2",
-              "Command": "Frame",
-              "Parameter": 2
+              "Frame": "ShakingHead 2",
+              "Duration": 2
             },
             {
-              "FrameGroup": "ShakingHead 1",
-              "Command": "Frame",
-              "Parameter": 2
+              "Frame": "ShakingHead 1",
+              "Duration": 2
             },
             {
-              "FrameGroup": "Flying 3",
-              "Command": "Frame",
-              "Parameter": 2
+              "Frame": "Flying 3",
+              "Duration": 2
             },
             {
-              "FrameGroup": "ShakingHead 1",
-              "Command": "Frame",
-              "Parameter": 2
+              "Frame": "ShakingHead 1",
+              "Duration": 2
             },
             {
-              "FrameGroup": "ShakingHead 2",
-              "Command": "Frame",
-              "Parameter": 2
+              "Frame": "ShakingHead 2",
+              "Duration": 2
             },
             {
-              "FrameGroup": "ShakingHead 1",
-              "Command": "Frame",
-              "Parameter": 2
+              "Frame": "ShakingHead 1",
+              "Duration": 2
             },
             {
               "Command": "GotoFrameOffset",
@@ -702,68 +647,56 @@
           ],
           "StillFrame": [
             {
-              "FrameGroup": "Flying 3",
-              "Command": "Frame",
-              "Parameter": 10
+              "Frame": "Flying 3",
+              "Duration": 10
             },
             {
-              "Command": "Stop",
-              "Parameter": 0
+              "Command": "Stop"
             }
           ],
           "StillFrame (Holding Up Flare Gun)": [
             {
-              "FrameGroup": "LiftingUpFlareGun 5",
-              "Command": "Frame",
-              "Parameter": 10
+              "Frame": "LiftingUpFlareGun 5",
+              "Duration": 10
             },
             {
-              "Command": "Stop",
-              "Parameter": 0
+              "Command": "Stop"
             }
           ]
         },
         "6": {
           "Flying (Faster)": [
             {
-              "FrameGroup": "Flying 1",
-              "Command": "Frame",
-              "Parameter": 4
+              "Frame": "Flying 1",
+              "Duration": 4
             },
             {
-              "FrameGroup": "Flying 2",
-              "Command": "Frame",
-              "Parameter": 3
+              "Frame": "Flying 2",
+              "Duration": 3
             },
             {
-              "FrameGroup": "Flying 3",
-              "Command": "Frame",
-              "Parameter": 3
+              "Frame": "Flying 3",
+              "Duration": 3
             },
             {
-              "FrameGroup": "Flying 4",
-              "Command": "Frame",
-              "Parameter": 3
+              "Frame": "Flying 4",
+              "Duration": 3
             },
             {
-              "FrameGroup": "Flying 5",
-              "Command": "Frame",
-              "Parameter": 4
+              "Frame": "Flying 5",
+              "Duration": 4
             },
             {
-              "FrameGroup": "Flying 4",
-              "Command": "Frame",
-              "Parameter": 3
+              "Frame": "Flying 4",
+              "Duration": 3
             },
             {
-              "FrameGroup": "Flying 3",
-              "Command": "Frame",
-              "Parameter": 2
+              "Frame": "Flying 3",
+              "Duration": 2
             },
             {
-              "FrameGroup": "Flying 2",
-              "Command": "Frame",
-              "Parameter": 1
+              "Frame": "Flying 2",
+              "Duration": 1
             },
             {
               "Command": "GotoFrameOffset",
@@ -772,44 +705,36 @@
           ],
           "Flying (Slower)": [
             {
-              "FrameGroup": "Flying 1",
-              "Command": "Frame",
-              "Parameter": 5
+              "Frame": "Flying 1",
+              "Duration": 5
             },
             {
-              "FrameGroup": "Flying 2",
-              "Command": "Frame",
-              "Parameter": 4
+              "Frame": "Flying 2",
+              "Duration": 4
             },
             {
-              "FrameGroup": "Flying 3",
-              "Command": "Frame",
-              "Parameter": 4
+              "Frame": "Flying 3",
+              "Duration": 4
             },
             {
-              "FrameGroup": "Flying 4",
-              "Command": "Frame",
-              "Parameter": 4
+              "Frame": "Flying 4",
+              "Duration": 4
             },
             {
-              "FrameGroup": "Flying 5",
-              "Command": "Frame",
-              "Parameter": 5
+              "Frame": "Flying 5",
+              "Duration": 5
             },
             {
-              "FrameGroup": "Flying 4",
-              "Command": "Frame",
-              "Parameter": 4
+              "Frame": "Flying 4",
+              "Duration": 4
             },
             {
-              "FrameGroup": "Flying 3",
-              "Command": "Frame",
-              "Parameter": 3
+              "Frame": "Flying 3",
+              "Duration": 3
             },
             {
-              "FrameGroup": "Flying 2",
-              "Command": "Frame",
-              "Parameter": 2
+              "Frame": "Flying 2",
+              "Duration": 2
             },
             {
               "Command": "GotoFrameOffset",
@@ -818,13 +743,11 @@
           ],
           "StillFrame": [
             {
-              "FrameGroup": "Flying 3",
-              "Command": "Frame",
-              "Parameter": 10
+              "Frame": "Flying 3",
+              "Duration": 10
             },
             {
-              "Command": "Stop",
-              "Parameter": 0
+              "Command": "Stop"
             }
           ]
         }

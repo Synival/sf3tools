@@ -169,19 +169,16 @@
         "4": {
           "Idle": [
             {
-              "FrameGroup": "Idle 1",
-              "Command": "Frame",
-              "Parameter": 6
+              "Frame": "Idle 1",
+              "Duration": 6
             },
             {
-              "FrameGroup": "Idle 2",
-              "Command": "Frame",
-              "Parameter": 6
+              "Frame": "Idle 2",
+              "Duration": 6
             },
             {
-              "FrameGroup": "Idle 3",
-              "Command": "Frame",
-              "Parameter": 6
+              "Frame": "Idle 3",
+              "Duration": 6
             },
             {
               "Command": "GotoFrameOffset",
@@ -190,29 +187,24 @@
           ],
           "Moving": [
             {
-              "FrameGroup": "Idle 1",
-              "Command": "Frame",
-              "Parameter": 4
+              "Frame": "Idle 1",
+              "Duration": 4
             },
             {
-              "FrameGroup": "Moving 1",
-              "Command": "Frame",
-              "Parameter": 4
+              "Frame": "Moving 1",
+              "Duration": 4
             },
             {
-              "FrameGroup": "Moving 2",
-              "Command": "Frame",
-              "Parameter": 4
+              "Frame": "Moving 2",
+              "Duration": 4
             },
             {
-              "FrameGroup": "Moving 3",
-              "Command": "Frame",
-              "Parameter": 4
+              "Frame": "Moving 3",
+              "Duration": 4
             },
             {
-              "FrameGroup": "Moving 4",
-              "Command": "Frame",
-              "Parameter": 4
+              "Frame": "Moving 4",
+              "Duration": 4
             },
             {
               "Command": "GotoFrameOffset",
@@ -221,13 +213,11 @@
           ],
           "StillFrame": [
             {
-              "FrameGroup": "Idle 1",
-              "Command": "Frame",
-              "Parameter": 10
+              "Frame": "Idle 1",
+              "Duration": 10
             },
             {
-              "Command": "Stop",
-              "Parameter": 0
+              "Command": "Stop"
             }
           ]
         }

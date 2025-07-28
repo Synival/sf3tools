@@ -103,24 +103,20 @@
         "4": {
           "Shimmering (Fast)": [
             {
-              "FrameGroup": "Shimmering 1",
-              "Command": "Frame",
-              "Parameter": 12
+              "Frame": "Shimmering 1",
+              "Duration": 12
             },
             {
-              "FrameGroup": "Shimmering 2",
-              "Command": "Frame",
-              "Parameter": 2
+              "Frame": "Shimmering 2",
+              "Duration": 2
             },
             {
-              "FrameGroup": "Shimmering 3",
-              "Command": "Frame",
-              "Parameter": 1
+              "Frame": "Shimmering 3",
+              "Duration": 1
             },
             {
-              "FrameGroup": "Shimmering 4",
-              "Command": "Frame",
-              "Parameter": 1
+              "Frame": "Shimmering 4",
+              "Duration": 1
             },
             {
               "Command": "GotoFrameOffset",
@@ -129,24 +125,20 @@
           ],
           "Shimmering (Very Slow)": [
             {
-              "FrameGroup": "Shimmering 1",
-              "Command": "Frame",
-              "Parameter": 120
+              "Frame": "Shimmering 1",
+              "Duration": 120
             },
             {
-              "FrameGroup": "Shimmering 2",
-              "Command": "Frame",
-              "Parameter": 2
+              "Frame": "Shimmering 2",
+              "Duration": 2
             },
             {
-              "FrameGroup": "Shimmering 3",
-              "Command": "Frame",
-              "Parameter": 1
+              "Frame": "Shimmering 3",
+              "Duration": 1
             },
             {
-              "FrameGroup": "Shimmering 4",
-              "Command": "Frame",
-              "Parameter": 1
+              "Frame": "Shimmering 4",
+              "Duration": 1
             },
             {
               "Command": "GotoFrameOffset",
@@ -155,13 +147,11 @@
           ],
           "StillFrame": [
             {
-              "FrameGroup": "Shimmering 1",
-              "Command": "Frame",
-              "Parameter": 10
+              "Frame": "Shimmering 1",
+              "Duration": 10
             },
             {
-              "Command": "Stop",
-              "Parameter": 0
+              "Command": "Stop"
             }
           ]
         }

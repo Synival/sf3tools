@@ -57,98 +57,86 @@
         "1": {
           "StillFrame (Freezing 1)": [
             {
-              "Frames": {
+              "Frame": {
                 "First": {
                   "Frame": "Freezing 1",
                   "Direction": "SSE"
                 }
               },
-              "Command": "Frame",
-              "Parameter": 10
+              "Duration": 10
             },
             {
-              "Command": "Stop",
-              "Parameter": 0
+              "Command": "Stop"
             }
           ],
           "StillFrame (Freezing 2)": [
             {
-              "Frames": {
+              "Frame": {
                 "First": {
                   "Frame": "Freezing 2",
                   "Direction": "SSE"
                 }
               },
-              "Command": "Frame",
-              "Parameter": 10
+              "Duration": 10
             },
             {
-              "Command": "Stop",
-              "Parameter": 0
+              "Command": "Stop"
             }
           ],
           "StillFrame (Freezing 3)": [
             {
-              "Frames": {
+              "Frame": {
                 "First": {
                   "Frame": "Freezing 3",
                   "Direction": "SSE"
                 }
               },
-              "Command": "Frame",
-              "Parameter": 10
+              "Duration": 10
             },
             {
-              "Command": "Stop",
-              "Parameter": 0
+              "Command": "Stop"
             }
           ],
           "StillFrame (Ice Cracking 1)": [
             {
-              "Frames": {
+              "Frame": {
                 "First": {
                   "Frame": "Ice Cracking 1",
                   "Direction": "SSE"
                 }
               },
-              "Command": "Frame",
-              "Parameter": 10
+              "Duration": 10
             },
             {
-              "Command": "Stop",
-              "Parameter": 0
+              "Command": "Stop"
             }
           ],
           "StillFrame (Ice Cracking 2)": [
             {
-              "Frames": {
+              "Frame": {
                 "First": {
                   "Frame": "Ice Cracking 2",
                   "Direction": "SSE"
                 }
               },
-              "Command": "Frame",
-              "Parameter": 10
+              "Duration": 10
             },
             {
-              "Command": "Stop",
-              "Parameter": 0
+              "Command": "Stop"
             }
           ],
           "StillFrame (Ice Cracking 3)": [
             {
-              "Frames": {
+              "Frame": {
                 "First": {
                   "Frame": "Ice Cracking 3",
                   "Direction": "SSE"
                 }
               },
-              "Command": "Frame",
-              "Parameter": 10
+              "Duration": 10
             },
             {
-              "Command": "Stop",
-              "Parameter": 0
+              "Command": "Stop"
             }
           ]
         }

@@ -169,64 +169,52 @@
         "4": {
           "Idle (Chewing)": [
             {
-              "FrameGroup": "Idle (Chewing) 1",
-              "Command": "Frame",
-              "Parameter": 45
+              "Frame": "Idle (Chewing) 1",
+              "Duration": 45
             },
             {
-              "FrameGroup": "Idle (Chewing) 2",
-              "Command": "Frame",
-              "Parameter": 6
+              "Frame": "Idle (Chewing) 2",
+              "Duration": 6
             },
             {
-              "FrameGroup": "Idle (Chewing) 3",
-              "Command": "Frame",
-              "Parameter": 7
+              "Frame": "Idle (Chewing) 3",
+              "Duration": 7
             },
             {
-              "FrameGroup": "Idle (Chewing) 2",
-              "Command": "Frame",
-              "Parameter": 6
+              "Frame": "Idle (Chewing) 2",
+              "Duration": 6
             },
             {
-              "FrameGroup": "Idle (Chewing) 1",
-              "Command": "Frame",
-              "Parameter": 7
+              "Frame": "Idle (Chewing) 1",
+              "Duration": 7
             },
             {
-              "FrameGroup": "Idle (Chewing) 2",
-              "Command": "Frame",
-              "Parameter": 6
+              "Frame": "Idle (Chewing) 2",
+              "Duration": 6
             },
             {
-              "FrameGroup": "Idle (Chewing) 3",
-              "Command": "Frame",
-              "Parameter": 7
+              "Frame": "Idle (Chewing) 3",
+              "Duration": 7
             },
             {
-              "FrameGroup": "Idle (Chewing) 2",
-              "Command": "Frame",
-              "Parameter": 6
+              "Frame": "Idle (Chewing) 2",
+              "Duration": 6
             },
             {
-              "FrameGroup": "Idle (Chewing) 1",
-              "Command": "Frame",
-              "Parameter": 7
+              "Frame": "Idle (Chewing) 1",
+              "Duration": 7
             },
             {
-              "FrameGroup": "Idle (Chewing) 2",
-              "Command": "Frame",
-              "Parameter": 6
+              "Frame": "Idle (Chewing) 2",
+              "Duration": 6
             },
             {
-              "FrameGroup": "Idle (Chewing) 3",
-              "Command": "Frame",
-              "Parameter": 7
+              "Frame": "Idle (Chewing) 3",
+              "Duration": 7
             },
             {
-              "FrameGroup": "Idle (Chewing) 2",
-              "Command": "Frame",
-              "Parameter": 6
+              "Frame": "Idle (Chewing) 2",
+              "Duration": 6
             },
             {
               "Command": "GotoFrameOffset",
@@ -235,45 +223,37 @@
           ],
           "StillFrame": [
             {
-              "FrameGroup": "Idle (Chewing) 1",
-              "Command": "Frame",
-              "Parameter": 10
+              "Frame": "Idle (Chewing) 1",
+              "Duration": 10
             },
             {
-              "Command": "Stop",
-              "Parameter": 0
+              "Command": "Stop"
             }
           ],
           "Walking": [
             {
-              "FrameGroup": "Walking 1",
-              "Command": "Frame",
-              "Parameter": 5
+              "Frame": "Walking 1",
+              "Duration": 5
             },
             {
-              "FrameGroup": "Idle (Chewing) 1",
-              "Command": "Frame",
-              "Parameter": 5
+              "Frame": "Idle (Chewing) 1",
+              "Duration": 5
             },
             {
-              "FrameGroup": "Walking 2",
-              "Command": "Frame",
-              "Parameter": 5
+              "Frame": "Walking 2",
+              "Duration": 5
             },
             {
-              "FrameGroup": "Walking 3",
-              "Command": "Frame",
-              "Parameter": 5
+              "Frame": "Walking 3",
+              "Duration": 5
             },
             {
-              "FrameGroup": "Idle (Chewing) 1",
-              "Command": "Frame",
-              "Parameter": 5
+              "Frame": "Idle (Chewing) 1",
+              "Duration": 5
             },
             {
-              "FrameGroup": "Walking 4",
-              "Command": "Frame",
-              "Parameter": 5
+              "Frame": "Walking 4",
+              "Duration": 5
             },
             {
               "Command": "GotoFrameOffset",

@@ -204,24 +204,20 @@
         "4": {
           "Idle": [
             {
-              "FrameGroup": "Idle 1",
-              "Command": "Frame",
-              "Parameter": 5
+              "Frame": "Idle 1",
+              "Duration": 5
             },
             {
-              "FrameGroup": "Idle 2",
-              "Command": "Frame",
-              "Parameter": 5
+              "Frame": "Idle 2",
+              "Duration": 5
             },
             {
-              "FrameGroup": "Idle 3",
-              "Command": "Frame",
-              "Parameter": 5
+              "Frame": "Idle 3",
+              "Duration": 5
             },
             {
-              "FrameGroup": "Idle 2",
-              "Command": "Frame",
-              "Parameter": 5
+              "Frame": "Idle 2",
+              "Duration": 5
             },
             {
               "Command": "GotoFrameOffset",
@@ -230,45 +226,37 @@
           ],
           "StillFrame": [
             {
-              "FrameGroup": "Idle 1",
-              "Command": "Frame",
-              "Parameter": 10
+              "Frame": "Idle 1",
+              "Duration": 10
             },
             {
-              "Command": "Stop",
-              "Parameter": 0
+              "Command": "Stop"
             }
           ],
           "Walking (Faster)": [
             {
-              "FrameGroup": "Walking 1",
-              "Command": "Frame",
-              "Parameter": 4
+              "Frame": "Walking 1",
+              "Duration": 4
             },
             {
-              "FrameGroup": "Idle 1",
-              "Command": "Frame",
-              "Parameter": 4
+              "Frame": "Idle 1",
+              "Duration": 4
             },
             {
-              "FrameGroup": "Walking 2",
-              "Command": "Frame",
-              "Parameter": 4
+              "Frame": "Walking 2",
+              "Duration": 4
             },
             {
-              "FrameGroup": "Walking 3",
-              "Command": "Frame",
-              "Parameter": 4
+              "Frame": "Walking 3",
+              "Duration": 4
             },
             {
-              "FrameGroup": "Idle 1",
-              "Command": "Frame",
-              "Parameter": 4
+              "Frame": "Idle 1",
+              "Duration": 4
             },
             {
-              "FrameGroup": "Walking 4",
-              "Command": "Frame",
-              "Parameter": 4
+              "Frame": "Walking 4",
+              "Duration": 4
             },
             {
               "Command": "GotoFrameOffset",
@@ -277,34 +265,28 @@
           ],
           "Walking (Slower)": [
             {
-              "FrameGroup": "Walking 1",
-              "Command": "Frame",
-              "Parameter": 5
+              "Frame": "Walking 1",
+              "Duration": 5
             },
             {
-              "FrameGroup": "Idle 1",
-              "Command": "Frame",
-              "Parameter": 5
+              "Frame": "Idle 1",
+              "Duration": 5
             },
             {
-              "FrameGroup": "Walking 2",
-              "Command": "Frame",
-              "Parameter": 5
+              "Frame": "Walking 2",
+              "Duration": 5
             },
             {
-              "FrameGroup": "Walking 3",
-              "Command": "Frame",
-              "Parameter": 5
+              "Frame": "Walking 3",
+              "Duration": 5
             },
             {
-              "FrameGroup": "Idle 1",
-              "Command": "Frame",
-              "Parameter": 5
+              "Frame": "Idle 1",
+              "Duration": 5
             },
             {
-              "FrameGroup": "Walking 4",
-              "Command": "Frame",
-              "Parameter": 5
+              "Frame": "Walking 4",
+              "Duration": 5
             },
             {
               "Command": "GotoFrameOffset",
@@ -319,68 +301,61 @@
               "Parameter": 17
             },
             {
-              "Frames": {
+              "Frame": {
                 "First": {
                   "Frame": "Idle 1",
                   "Direction": "SSE"
                 }
               },
-              "Command": "Frame",
-              "Parameter": 5
+              "Duration": 5
             },
             {
-              "Frames": {
+              "Frame": {
                 "First": {
                   "Frame": "PullingOutTelescope 1",
                   "Direction": "SSE"
                 }
               },
-              "Command": "Frame",
-              "Parameter": 5
+              "Duration": 5
             },
             {
-              "Frames": {
+              "Frame": {
                 "First": {
                   "Frame": "PullingOutTelescope 2",
                   "Direction": "SSE"
                 }
               },
-              "Command": "Frame",
-              "Parameter": 5
+              "Duration": 5
             },
             {
-              "Frames": {
+              "Frame": {
                 "First": {
                   "Frame": "PullingOutTelescope 3",
                   "Direction": "SSE"
                 }
               },
-              "Command": "Frame",
-              "Parameter": 5
+              "Duration": 5
             },
             {
-              "Frames": {
+              "Frame": {
                 "First": {
                   "Frame": "PullingOutTelescope 4",
                   "Direction": "SSE"
                 }
               },
-              "Command": "Frame",
-              "Parameter": 5
+              "Duration": 5
             },
             {
-              "Frames": {
+              "Frame": {
                 "First": {
                   "Frame": "PullingOutTelescope 5",
                   "Direction": "SSE"
                 }
               },
-              "Command": "Frame",
-              "Parameter": 5
+              "Duration": 5
             },
             {
-              "Command": "Stop",
-              "Parameter": 0
+              "Command": "Stop"
             }
           ]
         }

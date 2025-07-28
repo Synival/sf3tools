@@ -125,106 +125,86 @@
         "4": {
           "GettingUp (Slowly)": [
             {
-              "FrameGroup": "OccasionallyDabbingFace 1",
-              "Command": "Frame",
-              "Parameter": 9
+              "Frame": "OccasionallyDabbingFace 1",
+              "Duration": 9
             },
             {
-              "FrameGroup": "GettingUp 1",
-              "Command": "Frame",
-              "Parameter": 12
+              "Frame": "GettingUp 1",
+              "Duration": 12
             },
             {
-              "FrameGroup": "GettingUp 2",
-              "Command": "Frame",
-              "Parameter": 12
+              "Frame": "GettingUp 2",
+              "Duration": 12
             },
             {
-              "Command": "Stop",
-              "Parameter": 0
+              "Command": "Stop"
             }
           ],
           "GoingBackDown (Slowly)": [
             {
-              "FrameGroup": "GettingUp 2",
-              "Command": "Frame",
-              "Parameter": 12
+              "Frame": "GettingUp 2",
+              "Duration": 12
             },
             {
-              "FrameGroup": "GettingUp 1",
-              "Command": "Frame",
-              "Parameter": 12
+              "Frame": "GettingUp 1",
+              "Duration": 12
             },
             {
-              "FrameGroup": "OccasionallyDabbingFace 1",
-              "Command": "Frame",
-              "Parameter": 9
+              "Frame": "OccasionallyDabbingFace 1",
+              "Duration": 9
             },
             {
-              "Command": "Stop",
-              "Parameter": 0
+              "Command": "Stop"
             }
           ],
           "OccasionallyDabbingFace": [
             {
-              "FrameGroup": "OccasionallyDabbingFace 1",
-              "Command": "Frame",
-              "Parameter": 50
+              "Frame": "OccasionallyDabbingFace 1",
+              "Duration": 50
             },
             {
-              "FrameGroup": "OccasionallyDabbingFace 2",
-              "Command": "Frame",
-              "Parameter": 5
+              "Frame": "OccasionallyDabbingFace 2",
+              "Duration": 5
             },
             {
-              "FrameGroup": "OccasionallyDabbingFace 3",
-              "Command": "Frame",
-              "Parameter": 5
+              "Frame": "OccasionallyDabbingFace 3",
+              "Duration": 5
             },
             {
-              "FrameGroup": "OccasionallyDabbingFace 2",
-              "Command": "Frame",
-              "Parameter": 5
+              "Frame": "OccasionallyDabbingFace 2",
+              "Duration": 5
             },
             {
-              "FrameGroup": "OccasionallyDabbingFace 3",
-              "Command": "Frame",
-              "Parameter": 5
+              "Frame": "OccasionallyDabbingFace 3",
+              "Duration": 5
             },
             {
-              "FrameGroup": "OccasionallyDabbingFace 2",
-              "Command": "Frame",
-              "Parameter": 5
+              "Frame": "OccasionallyDabbingFace 2",
+              "Duration": 5
             },
             {
-              "FrameGroup": "OccasionallyDabbingFace 1",
-              "Command": "Frame",
-              "Parameter": 70
+              "Frame": "OccasionallyDabbingFace 1",
+              "Duration": 70
             },
             {
-              "FrameGroup": "OccasionallyDabbingFace 2",
-              "Command": "Frame",
-              "Parameter": 5
+              "Frame": "OccasionallyDabbingFace 2",
+              "Duration": 5
             },
             {
-              "FrameGroup": "OccasionallyDabbingFace 3",
-              "Command": "Frame",
-              "Parameter": 5
+              "Frame": "OccasionallyDabbingFace 3",
+              "Duration": 5
             },
             {
-              "FrameGroup": "OccasionallyDabbingFace 2",
-              "Command": "Frame",
-              "Parameter": 5
+              "Frame": "OccasionallyDabbingFace 2",
+              "Duration": 5
             },
             {
-              "FrameGroup": "OccasionallyDabbingFace 3",
-              "Command": "Frame",
-              "Parameter": 5
+              "Frame": "OccasionallyDabbingFace 3",
+              "Duration": 5
             },
             {
-              "FrameGroup": "OccasionallyDabbingFace 2",
-              "Command": "Frame",
-              "Parameter": 5
+              "Frame": "OccasionallyDabbingFace 2",
+              "Duration": 5
             },
             {
               "Command": "GotoFrameOffset",
@@ -233,35 +213,29 @@
           ],
           "StillFrame": [
             {
-              "FrameGroup": "OccasionallyDabbingFace 1",
-              "Command": "Frame",
-              "Parameter": 10
+              "Frame": "OccasionallyDabbingFace 1",
+              "Duration": 10
             },
             {
-              "Command": "Stop",
-              "Parameter": 0
+              "Command": "Stop"
             }
           ],
           "TryingToGetUp": [
             {
-              "FrameGroup": "OccasionallyDabbingFace 1",
-              "Command": "Frame",
-              "Parameter": 3
+              "Frame": "OccasionallyDabbingFace 1",
+              "Duration": 3
             },
             {
-              "FrameGroup": "GettingUp 1",
-              "Command": "Frame",
-              "Parameter": 6
+              "Frame": "GettingUp 1",
+              "Duration": 6
             },
             {
-              "FrameGroup": "GettingUp 2",
-              "Command": "Frame",
-              "Parameter": 6
+              "Frame": "GettingUp 2",
+              "Duration": 6
             },
             {
-              "FrameGroup": "GettingUp 1",
-              "Command": "Frame",
-              "Parameter": 3
+              "Frame": "GettingUp 1",
+              "Duration": 3
             },
             {
               "Command": "GotoFrameOffset",

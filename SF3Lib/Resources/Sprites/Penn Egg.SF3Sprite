@@ -66,9 +66,8 @@
         "1": {
           "StillFrame (Full, Repeat)": [
             {
-              "FrameGroup": "Full 1",
-              "Command": "Frame",
-              "Parameter": 10
+              "Frame": "Full 1",
+              "Duration": 10
             },
             {
               "Command": "GotoFrameOffset",
@@ -77,22 +76,19 @@
           ],
           "StillFrame (Full)": [
             {
-              "FrameGroup": "Full 1",
-              "Command": "Frame",
-              "Parameter": 10
+              "Frame": "Full 1",
+              "Duration": 10
             },
             {
-              "Command": "Stop",
-              "Parameter": 0
+              "Command": "Stop"
             }
           ]
         },
         "4": {
           "StillFrame (Half, Repeat)": [
             {
-              "FrameGroup": "Half 1",
-              "Command": "Frame",
-              "Parameter": 10
+              "Frame": "Half 1",
+              "Duration": 10
             },
             {
               "Command": "GotoFrameOffset",
@@ -101,20 +97,17 @@
           ],
           "StillFrame (Half)": [
             {
-              "FrameGroup": "Half 1",
-              "Command": "Frame",
-              "Parameter": 10
+              "Frame": "Half 1",
+              "Duration": 10
             },
             {
-              "Command": "Stop",
-              "Parameter": 0
+              "Command": "Stop"
             }
           ],
           "StillFrame (Open, Repeat)": [
             {
-              "FrameGroup": "Open 1",
-              "Command": "Frame",
-              "Parameter": 10
+              "Frame": "Open 1",
+              "Duration": 10
             },
             {
               "Command": "GotoFrameOffset",
@@ -123,13 +116,11 @@
           ],
           "StillFrame (Open)": [
             {
-              "FrameGroup": "Open 1",
-              "Command": "Frame",
-              "Parameter": 10
+              "Frame": "Open 1",
+              "Duration": 10
             },
             {
-              "Command": "Stop",
-              "Parameter": 0
+              "Command": "Stop"
             }
           ]
         }

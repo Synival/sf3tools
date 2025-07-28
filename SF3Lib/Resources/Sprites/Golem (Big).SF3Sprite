@@ -191,24 +191,20 @@
         "4": {
           "HurlingBoulder": [
             {
-              "FrameGroup": "HurlingBoulder 1",
-              "Command": "Frame",
-              "Parameter": 10
+              "Frame": "HurlingBoulder 1",
+              "Duration": 10
             },
             {
-              "FrameGroup": "HurlingBoulder 2",
-              "Command": "Frame",
-              "Parameter": 6
+              "Frame": "HurlingBoulder 2",
+              "Duration": 6
             },
             {
-              "FrameGroup": "HurlingBoulder 3",
-              "Command": "Frame",
-              "Parameter": 15
+              "Frame": "HurlingBoulder 3",
+              "Duration": 15
             },
             {
-              "FrameGroup": "HurlingBoulder 4",
-              "Command": "Frame",
-              "Parameter": 15
+              "Frame": "HurlingBoulder 4",
+              "Duration": 15
             },
             {
               "Command": "GotoAnimation",
@@ -217,34 +213,28 @@
           ],
           "PoundingGround": [
             {
-              "FrameGroup": "HurlingBoulder 1",
-              "Command": "Frame",
-              "Parameter": 15
+              "Frame": "HurlingBoulder 1",
+              "Duration": 15
             },
             {
-              "FrameGroup": "PoundingGround 1",
-              "Command": "Frame",
-              "Parameter": 6
+              "Frame": "PoundingGround 1",
+              "Duration": 6
             },
             {
-              "FrameGroup": "PoundingGround 2",
-              "Command": "Frame",
-              "Parameter": 15
+              "Frame": "PoundingGround 2",
+              "Duration": 15
             },
             {
-              "FrameGroup": "HurlingBoulder 1",
-              "Command": "Frame",
-              "Parameter": 6
+              "Frame": "HurlingBoulder 1",
+              "Duration": 6
             },
             {
-              "FrameGroup": "PoundingGround 3",
-              "Command": "Frame",
-              "Parameter": 6
+              "Frame": "PoundingGround 3",
+              "Duration": 6
             },
             {
-              "FrameGroup": "PoundingGround 4",
-              "Command": "Frame",
-              "Parameter": 15
+              "Frame": "PoundingGround 4",
+              "Duration": 15
             },
             {
               "Command": "GotoAnimation",
@@ -253,20 +243,17 @@
           ],
           "StillFrame": [
             {
-              "FrameGroup": "HurlingBoulder 1",
-              "Command": "Frame",
-              "Parameter": 10
+              "Frame": "HurlingBoulder 1",
+              "Duration": 10
             },
             {
-              "Command": "Stop",
-              "Parameter": 0
+              "Command": "Stop"
             }
           ],
           "StillFrame (Repeat)": [
             {
-              "FrameGroup": "HurlingBoulder 1",
-              "Command": "Frame",
-              "Parameter": 10
+              "Frame": "HurlingBoulder 1",
+              "Duration": 10
             },
             {
               "Command": "GotoFrameOffset",

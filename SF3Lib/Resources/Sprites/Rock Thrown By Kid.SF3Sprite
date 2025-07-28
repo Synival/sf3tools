@@ -26,9 +26,8 @@
               "Parameter": 17
             },
             {
-              "FrameGroup": "Rock 1",
-              "Command": "Frame",
-              "Parameter": 5
+              "Frame": "Rock 1",
+              "Duration": 5
             },
             {
               "Command": "GotoFrameOffset",
@@ -41,13 +40,11 @@
               "Parameter": 17
             },
             {
-              "FrameGroup": "Rock 1",
-              "Command": "Frame",
-              "Parameter": 5
+              "Frame": "Rock 1",
+              "Duration": 5
             },
             {
-              "Command": "Stop",
-              "Parameter": 0
+              "Command": "Stop"
             }
           ]
         }

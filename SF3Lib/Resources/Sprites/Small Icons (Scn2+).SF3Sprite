@@ -78,100 +78,82 @@
         "1": {
           "Angry": [
             {
-              "FrameGroup": "Angry 1",
-              "Command": "Frame",
-              "Parameter": 10
+              "Frame": "Angry 1",
+              "Duration": 10
             },
             {
-              "Command": "Stop",
-              "Parameter": 0
+              "Command": "Stop"
             }
           ],
           "Confused": [
             {
-              "FrameGroup": "Confused 1",
-              "Command": "Frame",
-              "Parameter": 10
+              "Frame": "Confused 1",
+              "Duration": 10
             },
             {
-              "Command": "Stop",
-              "Parameter": 0
+              "Command": "Stop"
             }
           ],
           "Idea": [
             {
-              "FrameGroup": "Idea 1",
-              "Command": "Frame",
-              "Parameter": 10
+              "Frame": "Idea 1",
+              "Duration": 10
             },
             {
-              "Command": "Stop",
-              "Parameter": 0
+              "Command": "Stop"
             }
           ],
           "Shield": [
             {
-              "FrameGroup": "Shield 1",
-              "Command": "Frame",
-              "Parameter": 10
+              "Frame": "Shield 1",
+              "Duration": 10
             },
             {
-              "Command": "Stop",
-              "Parameter": 0
+              "Command": "Stop"
             }
           ],
           "Silent": [
             {
-              "FrameGroup": "Silent 1",
-              "Command": "Frame",
-              "Parameter": 10
+              "Frame": "Silent 1",
+              "Duration": 10
             },
             {
-              "Command": "Stop",
-              "Parameter": 0
+              "Command": "Stop"
             }
           ],
           "Sweat": [
             {
-              "FrameGroup": "Sweat 3",
-              "Command": "Frame",
-              "Parameter": 10
+              "Frame": "Sweat 3",
+              "Duration": 10
             },
             {
-              "Command": "Stop",
-              "Parameter": 0
+              "Command": "Stop"
             }
           ],
           "Sweat (Growing Larger)": [
             {
-              "FrameGroup": "Sweat 1",
-              "Command": "Frame",
-              "Parameter": 10
+              "Frame": "Sweat 1",
+              "Duration": 10
             },
             {
-              "FrameGroup": "Sweat 2",
-              "Command": "Frame",
-              "Parameter": 10
+              "Frame": "Sweat 2",
+              "Duration": 10
             },
             {
-              "FrameGroup": "Sweat 3",
-              "Command": "Frame",
-              "Parameter": 10
+              "Frame": "Sweat 3",
+              "Duration": 10
             },
             {
-              "Command": "Stop",
-              "Parameter": 0
+              "Command": "Stop"
             }
           ],
           "Sword": [
             {
-              "FrameGroup": "Sword 1",
-              "Command": "Frame",
-              "Parameter": 10
+              "Frame": "Sword 1",
+              "Duration": 10
             },
             {
-              "Command": "Stop",
-              "Parameter": 0
+              "Command": "Stop"
             }
           ]
         }

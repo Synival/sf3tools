@@ -315,69 +315,56 @@
         "2": {
           "MoveDownUpWhileFeyYawns": [
             {
-              "FrameGroup": "MoveDownUpWhileFeyYawns 1",
-              "Command": "Frame",
-              "Parameter": 3
+              "Frame": "MoveDownUpWhileFeyYawns 1",
+              "Duration": 3
             },
             {
-              "FrameGroup": "MoveDownUpWhileFeyYawns 2",
-              "Command": "Frame",
-              "Parameter": 3
+              "Frame": "MoveDownUpWhileFeyYawns 2",
+              "Duration": 3
             },
             {
-              "FrameGroup": "MoveDownUpWhileFeyYawns 3",
-              "Command": "Frame",
-              "Parameter": 3
+              "Frame": "MoveDownUpWhileFeyYawns 3",
+              "Duration": 3
             },
             {
-              "FrameGroup": "MoveDownUpWhileFeyYawns 4",
-              "Command": "Frame",
-              "Parameter": 3
+              "Frame": "MoveDownUpWhileFeyYawns 4",
+              "Duration": 3
             },
             {
-              "FrameGroup": "MoveDownUpWhileFeyYawns 5",
-              "Command": "Frame",
-              "Parameter": 3
+              "Frame": "MoveDownUpWhileFeyYawns 5",
+              "Duration": 3
             },
             {
-              "FrameGroup": "MoveDownUpWhileFeyYawns 4",
-              "Command": "Frame",
-              "Parameter": 3
+              "Frame": "MoveDownUpWhileFeyYawns 4",
+              "Duration": 3
             },
             {
-              "FrameGroup": "MoveDownUpWhileFeyYawns 5",
-              "Command": "Frame",
-              "Parameter": 3
+              "Frame": "MoveDownUpWhileFeyYawns 5",
+              "Duration": 3
             },
             {
-              "FrameGroup": "MoveDownUpWhileFeyYawns 4",
-              "Command": "Frame",
-              "Parameter": 3
+              "Frame": "MoveDownUpWhileFeyYawns 4",
+              "Duration": 3
             },
             {
-              "FrameGroup": "MoveDownUpWhileFeyYawns 5",
-              "Command": "Frame",
-              "Parameter": 3
+              "Frame": "MoveDownUpWhileFeyYawns 5",
+              "Duration": 3
             },
             {
-              "FrameGroup": "MoveDownUpWhileFeyYawns 4",
-              "Command": "Frame",
-              "Parameter": 3
+              "Frame": "MoveDownUpWhileFeyYawns 4",
+              "Duration": 3
             },
             {
-              "FrameGroup": "MoveDownUpWhileFeyYawns 3",
-              "Command": "Frame",
-              "Parameter": 3
+              "Frame": "MoveDownUpWhileFeyYawns 3",
+              "Duration": 3
             },
             {
-              "FrameGroup": "MoveDownUpWhileFeyYawns 2",
-              "Command": "Frame",
-              "Parameter": 3
+              "Frame": "MoveDownUpWhileFeyYawns 2",
+              "Duration": 3
             },
             {
-              "FrameGroup": "MoveDownUpWhileFeyYawns 1",
-              "Command": "Frame",
-              "Parameter": 3
+              "Frame": "MoveDownUpWhileFeyYawns 1",
+              "Duration": 3
             },
             {
               "Command": "GotoAnimation",
@@ -386,99 +373,80 @@
           ],
           "MovingRightWhileFeySlaps": [
             {
-              "FrameGroup": "MovingRightWhileFeySlaps 1",
-              "Command": "Frame",
-              "Parameter": 2
+              "Frame": "MovingRightWhileFeySlaps 1",
+              "Duration": 2
             },
             {
-              "FrameGroup": "MovingRightWhileFeySlaps 2",
-              "Command": "Frame",
-              "Parameter": 2
+              "Frame": "MovingRightWhileFeySlaps 2",
+              "Duration": 2
             },
             {
-              "FrameGroup": "MovingRightWhileFeySlaps 3",
-              "Command": "Frame",
-              "Parameter": 2
+              "Frame": "MovingRightWhileFeySlaps 3",
+              "Duration": 2
             },
             {
-              "FrameGroup": "MovingRightWhileFeySlaps 4",
-              "Command": "Frame",
-              "Parameter": 2
+              "Frame": "MovingRightWhileFeySlaps 4",
+              "Duration": 2
             },
             {
-              "FrameGroup": "MovingRightWhileFeySlaps 5",
-              "Command": "Frame",
-              "Parameter": 2
+              "Frame": "MovingRightWhileFeySlaps 5",
+              "Duration": 2
             },
             {
-              "FrameGroup": "MovingRightWhileFeySlaps 6",
-              "Command": "Frame",
-              "Parameter": 2
+              "Frame": "MovingRightWhileFeySlaps 6",
+              "Duration": 2
             },
             {
-              "FrameGroup": "MovingRightWhileFeySlaps 7",
-              "Command": "Frame",
-              "Parameter": 2
+              "Frame": "MovingRightWhileFeySlaps 7",
+              "Duration": 2
             },
             {
-              "FrameGroup": "MovingRightWhileFeySlaps 6",
-              "Command": "Frame",
-              "Parameter": 2
+              "Frame": "MovingRightWhileFeySlaps 6",
+              "Duration": 2
             },
             {
-              "FrameGroup": "MovingRightWhileFeySlaps 7",
-              "Command": "Frame",
-              "Parameter": 2
+              "Frame": "MovingRightWhileFeySlaps 7",
+              "Duration": 2
             },
             {
-              "FrameGroup": "MovingRightWhileFeySlaps 6",
-              "Command": "Frame",
-              "Parameter": 2
+              "Frame": "MovingRightWhileFeySlaps 6",
+              "Duration": 2
             },
             {
-              "FrameGroup": "MovingRightWhileFeySlaps 5",
-              "Command": "Frame",
-              "Parameter": 2
+              "Frame": "MovingRightWhileFeySlaps 5",
+              "Duration": 2
             },
             {
-              "FrameGroup": "MovingRightWhileFeySlaps 4",
-              "Command": "Frame",
-              "Parameter": 2
+              "Frame": "MovingRightWhileFeySlaps 4",
+              "Duration": 2
             },
             {
-              "FrameGroup": "MovingRightWhileFeySlaps 8",
-              "Command": "Frame",
-              "Parameter": 3
+              "Frame": "MovingRightWhileFeySlaps 8",
+              "Duration": 3
             },
             {
-              "FrameGroup": "MovingRightWhileFeySlaps 9",
-              "Command": "Frame",
-              "Parameter": 15
+              "Frame": "MovingRightWhileFeySlaps 9",
+              "Duration": 15
             },
             {
-              "FrameGroup": "MovingRightWhileFeySlaps 10",
-              "Command": "Frame",
-              "Parameter": 20
+              "Frame": "MovingRightWhileFeySlaps 10",
+              "Duration": 20
             },
             {
-              "FrameGroup": "MovingRightWhileFeySlaps 4",
-              "Command": "Frame",
-              "Parameter": 5
+              "Frame": "MovingRightWhileFeySlaps 4",
+              "Duration": 5
             },
             {
-              "FrameGroup": "MovingRightWhileFeySlaps 3",
-              "Command": "Frame",
-              "Parameter": 2
+              "Frame": "MovingRightWhileFeySlaps 3",
+              "Duration": 2
             },
             {
-              "FrameGroup": "MovingRightWhileFeySlaps 2",
-              "Command": "Frame",
-              "Parameter": 2
+              "Frame": "MovingRightWhileFeySlaps 2",
+              "Duration": 2
             },
             {
-              "FrameGroup": "MovingRightWhileFeySlaps 1",
-              "Command": "Frame",
-              "Parameter": 2
+              "Frame": "MovingRightWhileFeySlaps 1",
+              "Duration": 2
             },
             {
               "Command": "GotoAnimation",
@@ -487,64 +455,52 @@
           ],
           "SlapIshahakat": [
             {
-              "FrameGroup": "MovingRightWhileFeySlaps 1",
-              "Command": "Frame",
-              "Parameter": 2
+              "Frame": "MovingRightWhileFeySlaps 1",
+              "Duration": 2
             },
             {
-              "FrameGroup": "MovingRightWhileFeySlaps 2",
-              "Command": "Frame",
-              "Parameter": 2
+              "Frame": "MovingRightWhileFeySlaps 2",
+              "Duration": 2
             },
             {
-              "FrameGroup": "MovingRightWhileFeySlaps 3",
-              "Command": "Frame",
-              "Parameter": 2
+              "Frame": "MovingRightWhileFeySlaps 3",
+              "Duration": 2
             },
             {
-              "FrameGroup": "MovingRightWhileFeySlaps 4",
-              "Command": "Frame",
-              "Parameter": 2
+              "Frame": "MovingRightWhileFeySlaps 4",
+              "Duration": 2
             },
             {
-              "FrameGroup": "MovingRightWhileFeySlaps 5",
-              "Command": "Frame",
-              "Parameter": 2
+              "Frame": "MovingRightWhileFeySlaps 5",
+              "Duration": 2
             },
             {
-              "FrameGroup": "MovingRightWhileFeySlaps 6",
-              "Command": "Frame",
-              "Parameter": 2
+              "Frame": "MovingRightWhileFeySlaps 6",
+              "Duration": 2
             },
             {
-              "FrameGroup": "MovingRightWhileFeySlaps 7",
-              "Command": "Frame",
-              "Parameter": 2
+              "Frame": "MovingRightWhileFeySlaps 7",
+              "Duration": 2
             },
             {
-              "FrameGroup": "MovingRightWhileFeySlaps 6",
-              "Command": "Frame",
-              "Parameter": 2
+              "Frame": "MovingRightWhileFeySlaps 6",
+              "Duration": 2
             },
             {
-              "FrameGroup": "MovingRightWhileFeySlaps 7",
-              "Command": "Frame",
-              "Parameter": 2
+              "Frame": "MovingRightWhileFeySlaps 7",
+              "Duration": 2
             },
             {
-              "FrameGroup": "MovingRightWhileFeySlaps 6",
-              "Command": "Frame",
-              "Parameter": 2
+              "Frame": "MovingRightWhileFeySlaps 6",
+              "Duration": 2
             },
             {
-              "FrameGroup": "MovingRightWhileFeySlaps 5",
-              "Command": "Frame",
-              "Parameter": 2
+              "Frame": "MovingRightWhileFeySlaps 5",
+              "Duration": 2
             },
             {
-              "FrameGroup": "MovingRightWhileFeySlaps 4",
-              "Command": "Frame",
-              "Parameter": 22
+              "Frame": "MovingRightWhileFeySlaps 4",
+              "Duration": 22
             },
             {
               "Command": "Stop",
@@ -553,49 +509,40 @@
           ],
           "SpinningUpToDown": [
             {
-              "FrameGroup": "SpinningUpToDown 1",
-              "Command": "Frame",
-              "Parameter": 2
+              "Frame": "SpinningUpToDown 1",
+              "Duration": 2
             },
             {
-              "FrameGroup": "SpinningUpToDown 2",
-              "Command": "Frame",
-              "Parameter": 2
+              "Frame": "SpinningUpToDown 2",
+              "Duration": 2
             },
             {
-              "FrameGroup": "SpinningUpToDown 3",
-              "Command": "Frame",
-              "Parameter": 2
+              "Frame": "SpinningUpToDown 3",
+              "Duration": 2
             },
             {
-              "FrameGroup": "SpinningUpToDown 4",
-              "Command": "Frame",
-              "Parameter": 2
+              "Frame": "SpinningUpToDown 4",
+              "Duration": 2
             },
             {
-              "FrameGroup": "SpinningUpToDown 5",
-              "Command": "Frame",
-              "Parameter": 2
+              "Frame": "SpinningUpToDown 5",
+              "Duration": 2
             },
             {
-              "FrameGroup": "SpinningUpToDown 6",
-              "Command": "Frame",
-              "Parameter": 2
+              "Frame": "SpinningUpToDown 6",
+              "Duration": 2
             },
             {
-              "FrameGroup": "SpinningUpToDown 7",
-              "Command": "Frame",
-              "Parameter": 2
+              "Frame": "SpinningUpToDown 7",
+              "Duration": 2
             },
             {
-              "FrameGroup": "SpinningUpToDown 8",
-              "Command": "Frame",
-              "Parameter": 2
+              "Frame": "SpinningUpToDown 8",
+              "Duration": 2
             },
             {
-              "FrameGroup": "SpinningUpToDown 9",
-              "Command": "Frame",
-              "Parameter": 2
+              "Frame": "SpinningUpToDown 9",
+              "Duration": 2
             },
             {
               "Command": "GotoAnimation",
@@ -604,9 +551,8 @@
           ],
           "StillFrame (Idle, Change to 1)": [
             {
-              "FrameGroup": "Idle 1",
-              "Command": "Frame",
-              "Parameter": 2
+              "Frame": "Idle 1",
+              "Duration": 2
             },
             {
               "Command": "GotoAnimation",
@@ -615,99 +561,80 @@
           ],
           "StillFrame (Idle, Repeat)": [
             {
-              "FrameGroup": "Idle 1",
-              "Command": "Frame",
-              "Parameter": 45
+              "Frame": "Idle 1",
+              "Duration": 45
             },
             {
-              "FrameGroup": "Idle 1",
-              "Command": "Frame",
-              "Parameter": 1
+              "Frame": "Idle 1",
+              "Duration": 1
             },
             {
-              "FrameGroup": "Idle 1",
-              "Command": "Frame",
-              "Parameter": 1
+              "Frame": "Idle 1",
+              "Duration": 1
             },
             {
-              "FrameGroup": "Idle 1",
-              "Command": "Frame",
-              "Parameter": 1
+              "Frame": "Idle 1",
+              "Duration": 1
             },
             {
-              "FrameGroup": "Idle 1",
-              "Command": "Frame",
-              "Parameter": 1
+              "Frame": "Idle 1",
+              "Duration": 1
             },
             {
-              "FrameGroup": "Idle 1",
-              "Command": "Frame",
-              "Parameter": 1
+              "Frame": "Idle 1",
+              "Duration": 1
             },
             {
-              "FrameGroup": "Idle 1",
-              "Command": "Frame",
-              "Parameter": 30
+              "Frame": "Idle 1",
+              "Duration": 30
             },
             {
-              "FrameGroup": "Idle 1",
-              "Command": "Frame",
-              "Parameter": 1
+              "Frame": "Idle 1",
+              "Duration": 1
             },
             {
-              "FrameGroup": "Idle 1",
-              "Command": "Frame",
-              "Parameter": 1
+              "Frame": "Idle 1",
+              "Duration": 1
             },
             {
-              "FrameGroup": "Idle 1",
-              "Command": "Frame",
-              "Parameter": 1
+              "Frame": "Idle 1",
+              "Duration": 1
             },
             {
-              "FrameGroup": "Idle 1",
-              "Command": "Frame",
-              "Parameter": 1
+              "Frame": "Idle 1",
+              "Duration": 1
             },
             {
-              "FrameGroup": "Idle 1",
-              "Command": "Frame",
-              "Parameter": 1
+              "Frame": "Idle 1",
+              "Duration": 1
             },
             {
-              "FrameGroup": "Idle 1",
-              "Command": "Frame",
-              "Parameter": 10
+              "Frame": "Idle 1",
+              "Duration": 10
             },
             {
-              "FrameGroup": "Idle 1",
-              "Command": "Frame",
-              "Parameter": 1
+              "Frame": "Idle 1",
+              "Duration": 1
             },
             {
-              "FrameGroup": "Idle 1",
-              "Command": "Frame",
-              "Parameter": 1
+              "Frame": "Idle 1",
+              "Duration": 1
             },
             {
-              "FrameGroup": "Idle 1",
-              "Command": "Frame",
-              "Parameter": 1
+              "Frame": "Idle 1",
+              "Duration": 1
             },
             {
-              "FrameGroup": "Idle 1",
-              "Command": "Frame",
-              "Parameter": 1
+              "Frame": "Idle 1",
+              "Duration": 1
             },
             {
-              "FrameGroup": "Idle 1",
-              "Command": "Frame",
-              "Parameter": 1
+              "Frame": "Idle 1",
+              "Duration": 1
             },
             {
-              "FrameGroup": "Idle 1",
-              "Command": "Frame",
-              "Parameter": 60
+              "Frame": "Idle 1",
+              "Duration": 60
             },
             {
               "Command": "GotoFrameOffset",
@@ -716,66 +643,54 @@
           ],
           "StillFrame (Idle)": [
             {
-              "FrameGroup": "Idle 1",
-              "Command": "Frame",
-              "Parameter": 10
+              "Frame": "Idle 1",
+              "Duration": 10
             },
             {
-              "Command": "Stop",
-              "Parameter": 0
+              "Command": "Stop"
             }
           ],
           "TouchingIshahakat": [
             {
-              "FrameGroup": "MovingRightWhileFeySlaps 1",
-              "Command": "Frame",
-              "Parameter": 2
+              "Frame": "MovingRightWhileFeySlaps 1",
+              "Duration": 2
             },
             {
-              "FrameGroup": "MovingRightWhileFeySlaps 2",
-              "Command": "Frame",
-              "Parameter": 2
+              "Frame": "MovingRightWhileFeySlaps 2",
+              "Duration": 2
             },
             {
-              "FrameGroup": "MovingRightWhileFeySlaps 3",
-              "Command": "Frame",
-              "Parameter": 2
+              "Frame": "MovingRightWhileFeySlaps 3",
+              "Duration": 2
             },
             {
-              "FrameGroup": "MovingRightWhileFeySlaps 4",
-              "Command": "Frame",
-              "Parameter": 2
+              "Frame": "MovingRightWhileFeySlaps 4",
+              "Duration": 2
             },
             {
-              "FrameGroup": "MovingRightWhileFeySlaps 5",
-              "Command": "Frame",
-              "Parameter": 2
+              "Frame": "MovingRightWhileFeySlaps 5",
+              "Duration": 2
             },
             {
-              "FrameGroup": "MovingRightWhileFeySlaps 6",
-              "Command": "Frame",
-              "Parameter": 22
+              "Frame": "MovingRightWhileFeySlaps 6",
+              "Duration": 22
             },
             {
-              "Command": "Stop",
-              "Parameter": 0
+              "Command": "Stop"
             }
           ],
           "TurningBack": [
             {
-              "FrameGroup": "MovingRightWhileFeySlaps 3",
-              "Command": "Frame",
-              "Parameter": 2
+              "Frame": "MovingRightWhileFeySlaps 3",
+              "Duration": 2
             },
             {
-              "FrameGroup": "MovingRightWhileFeySlaps 2",
-              "Command": "Frame",
-              "Parameter": 2
+              "Frame": "MovingRightWhileFeySlaps 2",
+              "Duration": 2
             },
             {
-              "FrameGroup": "MovingRightWhileFeySlaps 1",
-              "Command": "Frame",
-              "Parameter": 2
+              "Frame": "MovingRightWhileFeySlaps 1",
+              "Duration": 2
             },
             {
               "Command": "GotoAnimation",

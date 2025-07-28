@@ -191,24 +191,20 @@
         "4": {
           "Idle (Roaring)": [
             {
-              "FrameGroup": "Idle (Roaring) 1",
-              "Command": "Frame",
-              "Parameter": 20
+              "Frame": "Idle (Roaring) 1",
+              "Duration": 20
             },
             {
-              "FrameGroup": "Idle (Roaring) 2",
-              "Command": "Frame",
-              "Parameter": 4
+              "Frame": "Idle (Roaring) 2",
+              "Duration": 4
             },
             {
-              "FrameGroup": "Idle (Roaring) 3",
-              "Command": "Frame",
-              "Parameter": 4
+              "Frame": "Idle (Roaring) 3",
+              "Duration": 4
             },
             {
-              "FrameGroup": "Idle (Roaring) 2",
-              "Command": "Frame",
-              "Parameter": 4
+              "Frame": "Idle (Roaring) 2",
+              "Duration": 4
             },
             {
               "Command": "GotoFrameOffset",
@@ -217,56 +213,46 @@
           ],
           "StillFrame": [
             {
-              "FrameGroup": "Walking 2",
-              "Command": "Frame",
-              "Parameter": 10
+              "Frame": "Walking 2",
+              "Duration": 10
             },
             {
-              "Command": "Stop",
-              "Parameter": 0
+              "Command": "Stop"
             }
           ],
           "StillFrame (Mid-Roar)": [
             {
-              "FrameGroup": "Idle (Roaring) 3",
-              "Command": "Frame",
-              "Parameter": 10
+              "Frame": "Idle (Roaring) 3",
+              "Duration": 10
             },
             {
-              "Command": "Stop",
-              "Parameter": 0
+              "Command": "Stop"
             }
           ],
           "Walking": [
             {
-              "FrameGroup": "Walking 1",
-              "Command": "Frame",
-              "Parameter": 5
+              "Frame": "Walking 1",
+              "Duration": 5
             },
             {
-              "FrameGroup": "Walking 2",
-              "Command": "Frame",
-              "Parameter": 5
+              "Frame": "Walking 2",
+              "Duration": 5
             },
             {
-              "FrameGroup": "Walking 3",
-              "Command": "Frame",
-              "Parameter": 5
+              "Frame": "Walking 3",
+              "Duration": 5
             },
             {
-              "FrameGroup": "Walking 4",
-              "Command": "Frame",
-              "Parameter": 5
+              "Frame": "Walking 4",
+              "Duration": 5
             },
             {
-              "FrameGroup": "Walking 2",
-              "Command": "Frame",
-              "Parameter": 5
+              "Frame": "Walking 2",
+              "Duration": 5
             },
             {
-              "FrameGroup": "Walking 5",
-              "Command": "Frame",
-              "Parameter": 5
+              "Frame": "Walking 5",
+              "Duration": 5
             },
             {
               "Command": "GotoFrameOffset",
@@ -310,9 +296,8 @@
         "4": {
           "StillFrame (OnGround, Change to 1)": [
             {
-              "FrameGroup": "OnGround 1",
-              "Command": "Frame",
-              "Parameter": 10
+              "Frame": "OnGround 1",
+              "Duration": 10
             },
             {
               "Command": "GotoAnimation",
@@ -321,9 +306,8 @@
           ],
           "StillFrame (OnGround, Repeat)": [
             {
-              "FrameGroup": "OnGround 1",
-              "Command": "Frame",
-              "Parameter": 10
+              "Frame": "OnGround 1",
+              "Duration": 10
             },
             {
               "Command": "GotoFrameOffset",
@@ -332,13 +316,11 @@
           ],
           "StillFrame (OnGround)": [
             {
-              "FrameGroup": "OnGround 1",
-              "Command": "Frame",
-              "Parameter": 10
+              "Frame": "OnGround 1",
+              "Duration": 10
             },
             {
-              "Command": "Stop",
-              "Parameter": 0
+              "Command": "Stop"
             }
           ]
         }

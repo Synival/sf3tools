@@ -279,14 +279,12 @@
         "4": {
           "Idle (Battle, Reduced, Pauses when Lower)": [
             {
-              "FrameGroup": "Idle (Battle) 1",
-              "Command": "Frame",
-              "Parameter": 8
+              "Frame": "Idle (Battle) 1",
+              "Duration": 8
             },
             {
-              "FrameGroup": "Idle (Battle) 3",
-              "Command": "Frame",
-              "Parameter": 6
+              "Frame": "Idle (Battle) 3",
+              "Duration": 6
             },
             {
               "Command": "GotoFrameOffset",
@@ -295,24 +293,20 @@
           ],
           "Idle (Battle, Reduced, Wrong Middle Frame?)": [
             {
-              "FrameGroup": "Idle (Battle) 1",
-              "Command": "Frame",
-              "Parameter": 4
+              "Frame": "Idle (Battle) 1",
+              "Duration": 4
             },
             {
-              "FrameGroup": "Idle (Battle) 2",
-              "Command": "Frame",
-              "Parameter": 4
+              "Frame": "Idle (Battle) 2",
+              "Duration": 4
             },
             {
-              "FrameGroup": "Idle (Battle) 1",
-              "Command": "Frame",
-              "Parameter": 4
+              "Frame": "Idle (Battle) 1",
+              "Duration": 4
             },
             {
-              "FrameGroup": "Idle (Battle) 2",
-              "Command": "Frame",
-              "Parameter": 4
+              "Frame": "Idle (Battle) 2",
+              "Duration": 4
             },
             {
               "Command": "GotoFrameOffset",
@@ -321,14 +315,12 @@
           ],
           "Idle (Battle, Reduced)": [
             {
-              "FrameGroup": "Idle (Battle) 1",
-              "Command": "Frame",
-              "Parameter": 8
+              "Frame": "Idle (Battle) 1",
+              "Duration": 8
             },
             {
-              "FrameGroup": "Idle (Battle) 3",
-              "Command": "Frame",
-              "Parameter": 8
+              "Frame": "Idle (Battle) 3",
+              "Duration": 8
             },
             {
               "Command": "GotoFrameOffset",
@@ -337,24 +329,20 @@
           ],
           "Idle (Battle)": [
             {
-              "FrameGroup": "Idle (Battle) 1",
-              "Command": "Frame",
-              "Parameter": 4
+              "Frame": "Idle (Battle) 1",
+              "Duration": 4
             },
             {
-              "FrameGroup": "Idle (Battle) 2",
-              "Command": "Frame",
-              "Parameter": 4
+              "Frame": "Idle (Battle) 2",
+              "Duration": 4
             },
             {
-              "FrameGroup": "Idle (Battle) 3",
-              "Command": "Frame",
-              "Parameter": 4
+              "Frame": "Idle (Battle) 3",
+              "Duration": 4
             },
             {
-              "FrameGroup": "Idle (Battle) 2",
-              "Command": "Frame",
-              "Parameter": 4
+              "Frame": "Idle (Battle) 2",
+              "Duration": 4
             },
             {
               "Command": "GotoFrameOffset",
@@ -363,24 +351,20 @@
           ],
           "Nodding": [
             {
-              "FrameGroup": "Walking 2",
-              "Command": "Frame",
-              "Parameter": 2
+              "Frame": "Walking 2",
+              "Duration": 2
             },
             {
-              "FrameGroup": "Nodding 1",
-              "Command": "Frame",
-              "Parameter": 2
+              "Frame": "Nodding 1",
+              "Duration": 2
             },
             {
-              "FrameGroup": "Nodding 2",
-              "Command": "Frame",
-              "Parameter": 2
+              "Frame": "Nodding 2",
+              "Duration": 2
             },
             {
-              "FrameGroup": "Nodding 1",
-              "Command": "Frame",
-              "Parameter": 2
+              "Frame": "Nodding 1",
+              "Duration": 2
             },
             {
               "Command": "GotoAnimation",
@@ -389,24 +373,20 @@
           ],
           "Nodding (Slow)": [
             {
-              "FrameGroup": "Walking 2",
-              "Command": "Frame",
-              "Parameter": 5
+              "Frame": "Walking 2",
+              "Duration": 5
             },
             {
-              "FrameGroup": "Nodding 1",
-              "Command": "Frame",
-              "Parameter": 5
+              "Frame": "Nodding 1",
+              "Duration": 5
             },
             {
-              "FrameGroup": "Nodding 2",
-              "Command": "Frame",
-              "Parameter": 12
+              "Frame": "Nodding 2",
+              "Duration": 12
             },
             {
-              "FrameGroup": "Nodding 1",
-              "Command": "Frame",
-              "Parameter": 5
+              "Frame": "Nodding 1",
+              "Duration": 5
             },
             {
               "Command": "GotoAnimation",
@@ -415,24 +395,20 @@
           ],
           "Nodding (Very Slow)": [
             {
-              "FrameGroup": "Walking 2",
-              "Command": "Frame",
-              "Parameter": 5
+              "Frame": "Walking 2",
+              "Duration": 5
             },
             {
-              "FrameGroup": "Nodding 1",
-              "Command": "Frame",
-              "Parameter": 5
+              "Frame": "Nodding 1",
+              "Duration": 5
             },
             {
-              "FrameGroup": "Nodding 2",
-              "Command": "Frame",
-              "Parameter": 30
+              "Frame": "Nodding 2",
+              "Duration": 30
             },
             {
-              "FrameGroup": "Nodding 1",
-              "Command": "Frame",
-              "Parameter": 5
+              "Frame": "Nodding 1",
+              "Duration": 5
             },
             {
               "Command": "GotoAnimation",
@@ -441,44 +417,36 @@
           ],
           "ShakingHead": [
             {
-              "FrameGroup": "Walking 2",
-              "Command": "Frame",
-              "Parameter": 2
+              "Frame": "Walking 2",
+              "Duration": 2
             },
             {
-              "FrameGroup": "ShakingHead 1",
-              "Command": "Frame",
-              "Parameter": 2
+              "Frame": "ShakingHead 1",
+              "Duration": 2
             },
             {
-              "FrameGroup": "ShakingHead 2",
-              "Command": "Frame",
-              "Parameter": 2
+              "Frame": "ShakingHead 2",
+              "Duration": 2
             },
             {
-              "FrameGroup": "ShakingHead 1",
-              "Command": "Frame",
-              "Parameter": 2
+              "Frame": "ShakingHead 1",
+              "Duration": 2
             },
             {
-              "FrameGroup": "Walking 2",
-              "Command": "Frame",
-              "Parameter": 2
+              "Frame": "Walking 2",
+              "Duration": 2
             },
             {
-              "FrameGroup": "ShakingHead 1",
-              "Command": "Frame",
-              "Parameter": 2
+              "Frame": "ShakingHead 1",
+              "Duration": 2
             },
             {
-              "FrameGroup": "ShakingHead 2",
-              "Command": "Frame",
-              "Parameter": 2
+              "Frame": "ShakingHead 2",
+              "Duration": 2
             },
             {
-              "FrameGroup": "ShakingHead 1",
-              "Command": "Frame",
-              "Parameter": 2
+              "Frame": "ShakingHead 1",
+              "Duration": 2
             },
             {
               "Command": "GotoAnimation",
@@ -487,20 +455,17 @@
           ],
           "StillFrame (Battle)": [
             {
-              "FrameGroup": "Idle (Battle) 1",
-              "Command": "Frame",
-              "Parameter": 10
+              "Frame": "Idle (Battle) 1",
+              "Duration": 10
             },
             {
-              "Command": "Stop",
-              "Parameter": 0
+              "Command": "Stop"
             }
           ],
           "StillFrame (Idle, Repeat)": [
             {
-              "FrameGroup": "Walking 5",
-              "Command": "Frame",
-              "Parameter": 4
+              "Frame": "Walking 5",
+              "Duration": 4
             },
             {
               "Command": "GotoFrameOffset",
@@ -509,45 +474,37 @@
           ],
           "StillFrame (Idle)": [
             {
-              "FrameGroup": "Walking 2",
-              "Command": "Frame",
-              "Parameter": 10
+              "Frame": "Walking 2",
+              "Duration": 10
             },
             {
-              "Command": "Stop",
-              "Parameter": 0
+              "Command": "Stop"
             }
           ],
           "Walking": [
             {
-              "FrameGroup": "Walking 1",
-              "Command": "Frame",
-              "Parameter": 4
+              "Frame": "Walking 1",
+              "Duration": 4
             },
             {
-              "FrameGroup": "Walking 2",
-              "Command": "Frame",
-              "Parameter": 4
+              "Frame": "Walking 2",
+              "Duration": 4
             },
             {
-              "FrameGroup": "Walking 3",
-              "Command": "Frame",
-              "Parameter": 4
+              "Frame": "Walking 3",
+              "Duration": 4
             },
             {
-              "FrameGroup": "Walking 4",
-              "Command": "Frame",
-              "Parameter": 4
+              "Frame": "Walking 4",
+              "Duration": 4
             },
             {
-              "FrameGroup": "Walking 2",
-              "Command": "Frame",
-              "Parameter": 4
+              "Frame": "Walking 2",
+              "Duration": 4
             },
             {
-              "FrameGroup": "Walking 5",
-              "Command": "Frame",
-              "Parameter": 4
+              "Frame": "Walking 5",
+              "Duration": 4
             },
             {
               "Command": "GotoFrameOffset",
@@ -562,44 +519,40 @@
               "Parameter": 17
             },
             {
-              "Frames": {
+              "Frame": {
                 "First": {
                   "Frame": "Walking 2",
                   "Direction": "SSE"
                 }
               },
-              "Command": "Frame",
-              "Parameter": 2
+              "Duration": 2
             },
             {
-              "Frames": {
+              "Frame": {
                 "First": {
                   "Frame": "Nodding 1",
                   "Direction": "SSE"
                 }
               },
-              "Command": "Frame",
-              "Parameter": 2
+              "Duration": 2
             },
             {
-              "Frames": {
+              "Frame": {
                 "First": {
                   "Frame": "Nodding 2",
                   "Direction": "SSE"
                 }
               },
-              "Command": "Frame",
-              "Parameter": 2
+              "Duration": 2
             },
             {
-              "Frames": {
+              "Frame": {
                 "First": {
                   "Frame": "Nodding 1",
                   "Direction": "SSE"
                 }
               },
-              "Command": "Frame",
-              "Parameter": 2
+              "Duration": 2
             },
             {
               "Command": "GotoAnimation",

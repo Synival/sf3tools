@@ -200,54 +200,49 @@
               "Parameter": 1
             },
             {
-              "Frames": {
+              "Frame": {
                 "First": {
                   "Frame": "Idle (SittingInChair) 1",
                   "Direction": "SSE"
                 }
               },
-              "Command": "Frame",
-              "Parameter": 2
+              "Duration": 2
             },
             {
-              "Frames": {
+              "Frame": {
                 "First": {
                   "Frame": "ShakingHead 2",
                   "Direction": "SSE"
                 }
               },
-              "Command": "Frame",
-              "Parameter": 3
+              "Duration": 3
             },
             {
-              "Frames": {
+              "Frame": {
                 "First": {
                   "Frame": "GettingKnockedOut 1",
                   "Direction": "SSE"
                 }
               },
-              "Command": "Frame",
-              "Parameter": 6
+              "Duration": 6
             },
             {
-              "Frames": {
+              "Frame": {
                 "First": {
                   "Frame": "GettingKnockedOut 2",
                   "Direction": "SSE"
                 }
               },
-              "Command": "Frame",
-              "Parameter": 4
+              "Duration": 4
             },
             {
-              "Frames": {
+              "Frame": {
                 "First": {
                   "Frame": "GettingKnockedOut 3",
                   "Direction": "SSE"
                 }
               },
-              "Command": "Frame",
-              "Parameter": 6
+              "Duration": 6
             },
             {
               "Command": "GotoAnimation",
@@ -260,44 +255,40 @@
               "Parameter": 1
             },
             {
-              "Frames": {
+              "Frame": {
                 "First": {
                   "Frame": "Idle (SittingInChair) 1",
                   "Direction": "SSE"
                 }
               },
-              "Command": "Frame",
-              "Parameter": 6
+              "Duration": 6
             },
             {
-              "Frames": {
+              "Frame": {
                 "First": {
                   "Frame": "Nodding 1",
                   "Direction": "SSE"
                 }
               },
-              "Command": "Frame",
-              "Parameter": 6
+              "Duration": 6
             },
             {
-              "Frames": {
+              "Frame": {
                 "First": {
                   "Frame": "Nodding 2",
                   "Direction": "SSE"
                 }
               },
-              "Command": "Frame",
-              "Parameter": 6
+              "Duration": 6
             },
             {
-              "Frames": {
+              "Frame": {
                 "First": {
                   "Frame": "Nodding 1",
                   "Direction": "SSE"
                 }
               },
-              "Command": "Frame",
-              "Parameter": 6
+              "Duration": 6
             },
             {
               "Command": "GotoAnimation",
@@ -310,84 +301,76 @@
               "Parameter": 1
             },
             {
-              "Frames": {
+              "Frame": {
                 "First": {
                   "Frame": "Idle (SittingInChair) 1",
                   "Direction": "SSE"
                 }
               },
-              "Command": "Frame",
-              "Parameter": 2
+              "Duration": 2
             },
             {
-              "Frames": {
+              "Frame": {
                 "First": {
                   "Frame": "ShakingHead 1",
                   "Direction": "SSE"
                 }
               },
-              "Command": "Frame",
-              "Parameter": 6
+              "Duration": 6
             },
             {
-              "Frames": {
+              "Frame": {
                 "First": {
                   "Frame": "Idle (SittingInChair) 1",
                   "Direction": "SSE"
                 }
               },
-              "Command": "Frame",
-              "Parameter": 6
+              "Duration": 6
             },
             {
-              "Frames": {
+              "Frame": {
                 "First": {
                   "Frame": "ShakingHead 2",
                   "Direction": "SSE"
                 }
               },
-              "Command": "Frame",
-              "Parameter": 6
+              "Duration": 6
             },
             {
-              "Frames": {
+              "Frame": {
                 "First": {
                   "Frame": "Idle (SittingInChair) 1",
                   "Direction": "SSE"
                 }
               },
-              "Command": "Frame",
-              "Parameter": 6
+              "Duration": 6
             },
             {
-              "Frames": {
+              "Frame": {
                 "First": {
                   "Frame": "ShakingHead 1",
                   "Direction": "SSE"
                 }
               },
-              "Command": "Frame",
-              "Parameter": 6
+              "Duration": 6
             },
             {
-              "Frames": {
+              "Frame": {
                 "First": {
                   "Frame": "Idle (SittingInChair) 1",
                   "Direction": "SSE"
                 }
               },
-              "Command": "Frame",
-              "Parameter": 6
+              "Duration": 6
             },
             {
-              "Frames": {
+              "Frame": {
                 "First": {
                   "Frame": "ShakingHead 2",
                   "Direction": "SSE"
                 }
               },
-              "Command": "Frame",
-              "Parameter": 6
+              "Duration": 6
             },
             {
               "Command": "GotoAnimation",
@@ -400,27 +383,24 @@
               "Parameter": 1
             },
             {
-              "Frames": {
+              "Frame": {
                 "First": {
                   "Frame": "GettingKnockedOut 3",
                   "Direction": "SSE"
                 }
               },
-              "Command": "Frame",
-              "Parameter": 10
+              "Duration": 10
             },
             {
-              "Command": "Stop",
-              "Parameter": 0
+              "Command": "Stop"
             }
           ]
         },
         "4": {
           "StillFrame (SittingInChair, Repeat)": [
             {
-              "FrameGroup": "Idle (SittingInChair) 1",
-              "Command": "Frame",
-              "Parameter": 10
+              "Frame": "Idle (SittingInChair) 1",
+              "Duration": 10
             },
             {
               "Command": "GotoFrameOffset",
@@ -429,45 +409,37 @@
           ],
           "StillFrame (SittingInChair)": [
             {
-              "FrameGroup": "Idle (SittingInChair) 1",
-              "Command": "Frame",
-              "Parameter": 10
+              "Frame": "Idle (SittingInChair) 1",
+              "Duration": 10
             },
             {
-              "Command": "Stop",
-              "Parameter": 0
+              "Command": "Stop"
             }
           ],
           "Walking": [
             {
-              "FrameGroup": "Walking 1",
-              "Command": "Frame",
-              "Parameter": 5
+              "Frame": "Walking 1",
+              "Duration": 5
             },
             {
-              "FrameGroup": "Walking 2",
-              "Command": "Frame",
-              "Parameter": 5
+              "Frame": "Walking 2",
+              "Duration": 5
             },
             {
-              "FrameGroup": "Walking 3",
-              "Command": "Frame",
-              "Parameter": 5
+              "Frame": "Walking 3",
+              "Duration": 5
             },
             {
-              "FrameGroup": "Walking 4",
-              "Command": "Frame",
-              "Parameter": 5
+              "Frame": "Walking 4",
+              "Duration": 5
             },
             {
-              "FrameGroup": "Walking 2",
-              "Command": "Frame",
-              "Parameter": 5
+              "Frame": "Walking 2",
+              "Duration": 5
             },
             {
-              "FrameGroup": "Walking 5",
-              "Command": "Frame",
-              "Parameter": 5
+              "Frame": "Walking 5",
+              "Duration": 5
             },
             {
               "Command": "GotoFrameOffset",
@@ -476,22 +448,19 @@
           ],
           "Walking (Final NNE Frame Missing)": [
             {
-              "FrameGroup": "Walking 1",
-              "Command": "Frame",
-              "Parameter": 5
+              "Frame": "Walking 1",
+              "Duration": 5
             },
             {
-              "FrameGroup": "Walking 2",
-              "Command": "Frame",
-              "Parameter": 5
+              "Frame": "Walking 2",
+              "Duration": 5
             },
             {
-              "FrameGroup": "Walking 3",
-              "Command": "Frame",
-              "Parameter": 5
+              "Frame": "Walking 3",
+              "Duration": 5
             },
             {
-              "Frames": {
+              "Frame": {
                 "SSE": {
                   "Frame": "Walking 4",
                   "Direction": "SSE"
@@ -505,18 +474,15 @@
                   "Direction": "ENE"
                 }
               },
-              "Command": "Frame",
-              "Parameter": 5
+              "Duration": 5
             },
             {
-              "FrameGroup": "Walking 2",
-              "Command": "Frame",
-              "Parameter": 5
+              "Frame": "Walking 2",
+              "Duration": 5
             },
             {
-              "FrameGroup": "Walking 5",
-              "Command": "Frame",
-              "Parameter": 5
+              "Frame": "Walking 5",
+              "Duration": 5
             },
             {
               "Command": "GotoFrameOffset",

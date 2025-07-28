@@ -29,20 +29,17 @@
         "1": {
           "StillFrame (Alt)": [
             {
-              "FrameGroup": "Alt 1",
-              "Command": "Frame",
-              "Parameter": 1
+              "Frame": "Alt 1",
+              "Duration": 1
             },
             {
-              "Command": "Stop",
-              "Parameter": 0
+              "Command": "Stop"
             }
           ],
           "StillFrame (Black, Repeat)": [
             {
-              "FrameGroup": "Alt 1",
-              "Command": "Frame",
-              "Parameter": 100
+              "Frame": "Alt 1",
+              "Duration": 100
             },
             {
               "Command": "GotoFrameOffset",
@@ -51,9 +48,8 @@
           ],
           "StillFrame (Black+White, Change to 0)": [
             {
-              "FrameGroup": "Black+White 1",
-              "Command": "Frame",
-              "Parameter": 0
+              "Frame": "Black+White 1",
+              "Duration": 0
             },
             {
               "Command": "GotoAnimation",
@@ -62,9 +58,8 @@
           ],
           "StillFrame (Black+White, Repeat, Duration 0)": [
             {
-              "FrameGroup": "Black+White 1",
-              "Command": "Frame",
-              "Parameter": 0
+              "Frame": "Black+White 1",
+              "Duration": 0
             },
             {
               "Command": "GotoFrameOffset",
@@ -73,13 +68,11 @@
           ],
           "StillFrame (Black+White)": [
             {
-              "FrameGroup": "Black+White 1",
-              "Command": "Frame",
-              "Parameter": 0
+              "Frame": "Black+White 1",
+              "Duration": 0
             },
             {
-              "Command": "Stop",
-              "Parameter": 0
+              "Command": "Stop"
             }
           ]
         }
@@ -104,13 +97,11 @@
         "1": {
           "StillFrame (Black+White)": [
             {
-              "FrameGroup": "Black+White 1",
-              "Command": "Frame",
-              "Parameter": 10
+              "Frame": "Black+White 1",
+              "Duration": 10
             },
             {
-              "Command": "Stop",
-              "Parameter": 0
+              "Command": "Stop"
             }
           ]
         }
@@ -135,13 +126,11 @@
         "1": {
           "StillFrame (Black+White)": [
             {
-              "FrameGroup": "Black+White 1",
-              "Command": "Frame",
-              "Parameter": 10
+              "Frame": "Black+White 1",
+              "Duration": 10
             },
             {
-              "Command": "Stop",
-              "Parameter": 0
+              "Command": "Stop"
             }
           ]
         }
@@ -173,24 +162,20 @@
         "1": {
           "StillFrame (Black)": [
             {
-              "FrameGroup": "Black 1",
-              "Command": "Frame",
-              "Parameter": 10
+              "Frame": "Black 1",
+              "Duration": 10
             },
             {
-              "Command": "Stop",
-              "Parameter": 0
+              "Command": "Stop"
             }
           ],
           "StillFrame (Black+White)": [
             {
-              "FrameGroup": "Black+White 1",
-              "Command": "Frame",
-              "Parameter": 10
+              "Frame": "Black+White 1",
+              "Duration": 10
             },
             {
-              "Command": "Stop",
-              "Parameter": 0
+              "Command": "Stop"
             }
           ]
         }
@@ -215,13 +200,11 @@
         "1": {
           "StillFrame (Black+White)": [
             {
-              "FrameGroup": "Black+White 1",
-              "Command": "Frame",
-              "Parameter": 10
+              "Frame": "Black+White 1",
+              "Duration": 10
             },
             {
-              "Command": "Stop",
-              "Parameter": 0
+              "Command": "Stop"
             }
           ]
         }

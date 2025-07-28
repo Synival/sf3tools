@@ -36,34 +36,31 @@
         "1": {
           "Idle": [
             {
-              "Frames": {
+              "Frame": {
                 "First": {
                   "Frame": "Idle 1",
                   "Direction": "NNE"
                 }
               },
-              "Command": "Frame",
-              "Parameter": 4
+              "Duration": 4
             },
             {
-              "Frames": {
+              "Frame": {
                 "First": {
                   "Frame": "Idle 2",
                   "Direction": "NNE"
                 }
               },
-              "Command": "Frame",
-              "Parameter": 4
+              "Duration": 4
             },
             {
-              "Frames": {
+              "Frame": {
                 "First": {
                   "Frame": "Idle 3",
                   "Direction": "NNE"
                 }
               },
-              "Command": "Frame",
-              "Parameter": 4
+              "Duration": 4
             },
             {
               "Command": "GotoFrameOffset",
@@ -72,18 +69,16 @@
           ],
           "StillFrame": [
             {
-              "Frames": {
+              "Frame": {
                 "First": {
                   "Frame": "Idle 1",
                   "Direction": "NNE"
                 }
               },
-              "Command": "Frame",
-              "Parameter": 10
+              "Duration": 10
             },
             {
-              "Command": "Stop",
-              "Parameter": 0
+              "Command": "Stop"
             }
           ]
         }

@@ -103,54 +103,44 @@
         "4": {
           "Idle (Winking)": [
             {
-              "FrameGroup": "Idle (Winking) 1",
-              "Command": "Frame",
-              "Parameter": 120
+              "Frame": "Idle (Winking) 1",
+              "Duration": 120
             },
             {
-              "FrameGroup": "Idle (Winking) 2",
-              "Command": "Frame",
-              "Parameter": 3
+              "Frame": "Idle (Winking) 2",
+              "Duration": 3
             },
             {
-              "FrameGroup": "Idle (Winking) 3",
-              "Command": "Frame",
-              "Parameter": 30
+              "Frame": "Idle (Winking) 3",
+              "Duration": 30
             },
             {
-              "FrameGroup": "Idle (Winking) 4",
-              "Command": "Frame",
-              "Parameter": 5
+              "Frame": "Idle (Winking) 4",
+              "Duration": 5
             },
             {
-              "FrameGroup": "Idle (Winking) 3",
-              "Command": "Frame",
-              "Parameter": 30
+              "Frame": "Idle (Winking) 3",
+              "Duration": 30
             },
             {
-              "FrameGroup": "Idle (Winking) 2",
-              "Command": "Frame",
-              "Parameter": 5
+              "Frame": "Idle (Winking) 2",
+              "Duration": 5
             },
             {
-              "FrameGroup": "Idle (Winking) 1",
-              "Command": "Frame",
-              "Parameter": 90
+              "Frame": "Idle (Winking) 1",
+              "Duration": 90
             },
             {
-              "FrameGroup": "Idle (Winking) 2",
-              "Command": "Frame",
-              "Parameter": 3
+              "Frame": "Idle (Winking) 2",
+              "Duration": 3
             },
             {
-              "FrameGroup": "Idle (Winking) 3",
-              "Command": "Frame",
-              "Parameter": 120
+              "Frame": "Idle (Winking) 3",
+              "Duration": 120
             },
             {
-              "FrameGroup": "Idle (Winking) 2",
-              "Command": "Frame",
-              "Parameter": 5
+              "Frame": "Idle (Winking) 2",
+              "Duration": 5
             },
             {
               "Command": "GotoFrameOffset",
@@ -159,13 +149,11 @@
           ],
           "StillFrame": [
             {
-              "FrameGroup": "Idle (Winking) 1",
-              "Command": "Frame",
-              "Parameter": 10
+              "Frame": "Idle (Winking) 1",
+              "Duration": 10
             },
             {
-              "Command": "Stop",
-              "Parameter": 0
+              "Command": "Stop"
             }
           ]
         }

@@ -43,46 +43,38 @@
         "1": {
           "Angry": [
             {
-              "FrameGroup": "Angry 1",
-              "Command": "Frame",
-              "Parameter": 10
+              "Frame": "Angry 1",
+              "Duration": 10
             },
             {
-              "Command": "Stop",
-              "Parameter": 0
+              "Command": "Stop"
             }
           ],
           "Idea": [
             {
-              "FrameGroup": "Idea 1",
-              "Command": "Frame",
-              "Parameter": 10
+              "Frame": "Idea 1",
+              "Duration": 10
             },
             {
-              "Command": "Stop",
-              "Parameter": 0
+              "Command": "Stop"
             }
           ],
           "Shield": [
             {
-              "FrameGroup": "Shield 1",
-              "Command": "Frame",
-              "Parameter": 10
+              "Frame": "Shield 1",
+              "Duration": 10
             },
             {
-              "Command": "Stop",
-              "Parameter": 0
+              "Command": "Stop"
             }
           ],
           "Sword": [
             {
-              "FrameGroup": "Sword 1",
-              "Command": "Frame",
-              "Parameter": 10
+              "Frame": "Sword 1",
+              "Duration": 10
             },
             {
-              "Command": "Stop",
-              "Parameter": 0
+              "Command": "Stop"
             }
           ]
         }

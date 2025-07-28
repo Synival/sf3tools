@@ -22,14 +22,13 @@
         "4": {
           "StillFrame (Should be 1 Direction)": [
             {
-              "Frames": {
+              "Frame": {
                 "SSE": {
                   "Frame": "Key 1",
                   "Direction": "SSE"
                 }
               },
-              "Command": "Frame",
-              "Parameter": 10
+              "Duration": 10
             },
             {
               "Command": "GotoFrameOffset",

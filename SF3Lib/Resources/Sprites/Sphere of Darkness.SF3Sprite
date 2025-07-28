@@ -47,24 +47,20 @@
               "Parameter": 17
             },
             {
-              "FrameGroup": "Pulsating 1",
-              "Command": "Frame",
-              "Parameter": 1
+              "Frame": "Pulsating 1",
+              "Duration": 1
             },
             {
-              "FrameGroup": "Pulsating 2",
-              "Command": "Frame",
-              "Parameter": 1
+              "Frame": "Pulsating 2",
+              "Duration": 1
             },
             {
-              "FrameGroup": "Pulsating 3",
-              "Command": "Frame",
-              "Parameter": 1
+              "Frame": "Pulsating 3",
+              "Duration": 1
             },
             {
-              "FrameGroup": "Pulsating 4",
-              "Command": "Frame",
-              "Parameter": 1
+              "Frame": "Pulsating 4",
+              "Duration": 1
             },
             {
               "Command": "GotoFrameOffset",
@@ -77,13 +73,11 @@
               "Parameter": 17
             },
             {
-              "FrameGroup": "Pulsating 1",
-              "Command": "Frame",
-              "Parameter": 10
+              "Frame": "Pulsating 1",
+              "Duration": 10
             },
             {
-              "Command": "Stop",
-              "Parameter": 0
+              "Command": "Stop"
             }
           ]
         }

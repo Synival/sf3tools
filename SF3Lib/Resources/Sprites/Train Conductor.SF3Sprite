@@ -169,34 +169,28 @@
         "4": {
           "Idle (Occasionally Wipes Forehead)": [
             {
-              "FrameGroup": "Idle (Occasionally Wipes Forehead) 1",
-              "Command": "Frame",
-              "Parameter": 150
+              "Frame": "Idle (Occasionally Wipes Forehead) 1",
+              "Duration": 150
             },
             {
-              "FrameGroup": "Idle (Occasionally Wipes Forehead) 2",
-              "Command": "Frame",
-              "Parameter": 4
+              "Frame": "Idle (Occasionally Wipes Forehead) 2",
+              "Duration": 4
             },
             {
-              "FrameGroup": "Idle (Occasionally Wipes Forehead) 3",
-              "Command": "Frame",
-              "Parameter": 4
+              "Frame": "Idle (Occasionally Wipes Forehead) 3",
+              "Duration": 4
             },
             {
-              "FrameGroup": "Idle (Occasionally Wipes Forehead) 2",
-              "Command": "Frame",
-              "Parameter": 4
+              "Frame": "Idle (Occasionally Wipes Forehead) 2",
+              "Duration": 4
             },
             {
-              "FrameGroup": "Idle (Occasionally Wipes Forehead) 3",
-              "Command": "Frame",
-              "Parameter": 4
+              "Frame": "Idle (Occasionally Wipes Forehead) 3",
+              "Duration": 4
             },
             {
-              "FrameGroup": "Idle (Occasionally Wipes Forehead) 2",
-              "Command": "Frame",
-              "Parameter": 4
+              "Frame": "Idle (Occasionally Wipes Forehead) 2",
+              "Duration": 4
             },
             {
               "Command": "GotoFrameOffset",
@@ -205,45 +199,37 @@
           ],
           "StillFrame": [
             {
-              "FrameGroup": "Idle (Occasionally Wipes Forehead) 1",
-              "Command": "Frame",
-              "Parameter": 10
+              "Frame": "Idle (Occasionally Wipes Forehead) 1",
+              "Duration": 10
             },
             {
-              "Command": "Stop",
-              "Parameter": 0
+              "Command": "Stop"
             }
           ],
           "Walking": [
             {
-              "FrameGroup": "Walking 1",
-              "Command": "Frame",
-              "Parameter": 4
+              "Frame": "Walking 1",
+              "Duration": 4
             },
             {
-              "FrameGroup": "Idle (Occasionally Wipes Forehead) 1",
-              "Command": "Frame",
-              "Parameter": 4
+              "Frame": "Idle (Occasionally Wipes Forehead) 1",
+              "Duration": 4
             },
             {
-              "FrameGroup": "Walking 2",
-              "Command": "Frame",
-              "Parameter": 4
+              "Frame": "Walking 2",
+              "Duration": 4
             },
             {
-              "FrameGroup": "Walking 3",
-              "Command": "Frame",
-              "Parameter": 4
+              "Frame": "Walking 3",
+              "Duration": 4
             },
             {
-              "FrameGroup": "Idle (Occasionally Wipes Forehead) 1",
-              "Command": "Frame",
-              "Parameter": 4
+              "Frame": "Idle (Occasionally Wipes Forehead) 1",
+              "Duration": 4
             },
             {
-              "FrameGroup": "Walking 4",
-              "Command": "Frame",
-              "Parameter": 4
+              "Frame": "Walking 4",
+              "Duration": 4
             },
             {
               "Command": "GotoFrameOffset",
@@ -397,24 +383,20 @@
         "4": {
           "Sleeping (Fast Snoring)": [
             {
-              "FrameGroup": "Sleeping 1",
-              "Command": "Frame",
-              "Parameter": 30
+              "Frame": "Sleeping 1",
+              "Duration": 30
             },
             {
-              "FrameGroup": "Sleeping 2",
-              "Command": "Frame",
-              "Parameter": 10
+              "Frame": "Sleeping 2",
+              "Duration": 10
             },
             {
-              "FrameGroup": "Sleeping 3",
-              "Command": "Frame",
-              "Parameter": 10
+              "Frame": "Sleeping 3",
+              "Duration": 10
             },
             {
-              "FrameGroup": "Sleeping 2",
-              "Command": "Frame",
-              "Parameter": 10
+              "Frame": "Sleeping 2",
+              "Duration": 10
             },
             {
               "Command": "GotoFrameOffset",
@@ -423,24 +405,20 @@
           ],
           "Sleeping (Slow Breathing)": [
             {
-              "FrameGroup": "OnGround 1",
-              "Command": "Frame",
-              "Parameter": 30
+              "Frame": "OnGround 1",
+              "Duration": 30
             },
             {
-              "FrameGroup": "Sleeping 4",
-              "Command": "Frame",
-              "Parameter": 10
+              "Frame": "Sleeping 4",
+              "Duration": 10
             },
             {
-              "FrameGroup": "Sleeping 5",
-              "Command": "Frame",
-              "Parameter": 10
+              "Frame": "Sleeping 5",
+              "Duration": 10
             },
             {
-              "FrameGroup": "Sleeping 4",
-              "Command": "Frame",
-              "Parameter": 10
+              "Frame": "Sleeping 4",
+              "Duration": 10
             },
             {
               "Command": "GotoFrameOffset",
@@ -449,24 +427,20 @@
           ],
           "Sleeping (Slow Snoring)": [
             {
-              "FrameGroup": "Sleeping 1",
-              "Command": "Frame",
-              "Parameter": 30
+              "Frame": "Sleeping 1",
+              "Duration": 30
             },
             {
-              "FrameGroup": "Sleeping 2",
-              "Command": "Frame",
-              "Parameter": 10
+              "Frame": "Sleeping 2",
+              "Duration": 10
             },
             {
-              "FrameGroup": "Sleeping 3",
-              "Command": "Frame",
-              "Parameter": 30
+              "Frame": "Sleeping 3",
+              "Duration": 30
             },
             {
-              "FrameGroup": "Sleeping 2",
-              "Command": "Frame",
-              "Parameter": 10
+              "Frame": "Sleeping 2",
+              "Duration": 10
             },
             {
               "Command": "GotoFrameOffset",
@@ -475,24 +449,20 @@
           ],
           "Sleeping (Very Slow Breathing)": [
             {
-              "FrameGroup": "OnGround 1",
-              "Command": "Frame",
-              "Parameter": 30
+              "Frame": "OnGround 1",
+              "Duration": 30
             },
             {
-              "FrameGroup": "Sleeping 4",
-              "Command": "Frame",
-              "Parameter": 10
+              "Frame": "Sleeping 4",
+              "Duration": 10
             },
             {
-              "FrameGroup": "Sleeping 5",
-              "Command": "Frame",
-              "Parameter": 30
+              "Frame": "Sleeping 5",
+              "Duration": 30
             },
             {
-              "FrameGroup": "Sleeping 4",
-              "Command": "Frame",
-              "Parameter": 10
+              "Frame": "Sleeping 4",
+              "Duration": 10
             },
             {
               "Command": "GotoFrameOffset",
@@ -501,24 +471,20 @@
           ],
           "StillFrame (OnGround)": [
             {
-              "FrameGroup": "OnGround 1",
-              "Command": "Frame",
-              "Parameter": 5
+              "Frame": "OnGround 1",
+              "Duration": 5
             },
             {
-              "Command": "Stop",
-              "Parameter": 0
+              "Command": "Stop"
             }
           ],
           "StillFrame (Sleeping)": [
             {
-              "FrameGroup": "Sleeping 1",
-              "Command": "Frame",
-              "Parameter": 5
+              "Frame": "Sleeping 1",
+              "Duration": 5
             },
             {
-              "Command": "Stop",
-              "Parameter": 0
+              "Command": "Stop"
             }
           ]
         }

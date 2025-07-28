@@ -125,29 +125,24 @@
         "4": {
           "Sweeping": [
             {
-              "FrameGroup": "Sweeping 1",
-              "Command": "Frame",
-              "Parameter": 7
+              "Frame": "Sweeping 1",
+              "Duration": 7
             },
             {
-              "FrameGroup": "Sweeping 2",
-              "Command": "Frame",
-              "Parameter": 7
+              "Frame": "Sweeping 2",
+              "Duration": 7
             },
             {
-              "FrameGroup": "Sweeping 3",
-              "Command": "Frame",
-              "Parameter": 7
+              "Frame": "Sweeping 3",
+              "Duration": 7
             },
             {
-              "FrameGroup": "Sweeping 4",
-              "Command": "Frame",
-              "Parameter": 7
+              "Frame": "Sweeping 4",
+              "Duration": 7
             },
             {
-              "FrameGroup": "Sweeping 5",
-              "Command": "Frame",
-              "Parameter": 7
+              "Frame": "Sweeping 5",
+              "Duration": 7
             },
             {
               "Command": "GotoFrameOffset",

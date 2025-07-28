@@ -22,13 +22,11 @@
         "1": {
           "StillFrame (Bomb)": [
             {
-              "FrameGroup": "Bomb 1",
-              "Command": "Frame",
-              "Parameter": 1
+              "Frame": "Bomb 1",
+              "Duration": 1
             },
             {
-              "Command": "Stop",
-              "Parameter": 0
+              "Command": "Stop"
             }
           ]
         }

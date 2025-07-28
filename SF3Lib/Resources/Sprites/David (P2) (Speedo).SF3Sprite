@@ -81,104 +81,84 @@
         "4": {
           "Idle (Posing)": [
             {
-              "FrameGroup": "Idle (Posing) 1",
-              "Command": "Frame",
-              "Parameter": 25
+              "Frame": "Idle (Posing) 1",
+              "Duration": 25
             },
             {
-              "FrameGroup": "Idle (Posing) 2",
-              "Command": "Frame",
-              "Parameter": 15
+              "Frame": "Idle (Posing) 2",
+              "Duration": 15
             },
             {
-              "FrameGroup": "Idle (Posing) 3",
-              "Command": "Frame",
-              "Parameter": 4
+              "Frame": "Idle (Posing) 3",
+              "Duration": 4
             },
             {
-              "FrameGroup": "Idle (Posing) 2",
-              "Command": "Frame",
-              "Parameter": 4
+              "Frame": "Idle (Posing) 2",
+              "Duration": 4
             },
             {
-              "FrameGroup": "Idle (Posing) 3",
-              "Command": "Frame",
-              "Parameter": 4
+              "Frame": "Idle (Posing) 3",
+              "Duration": 4
             },
             {
-              "FrameGroup": "Idle (Posing) 2",
-              "Command": "Frame",
-              "Parameter": 4
+              "Frame": "Idle (Posing) 2",
+              "Duration": 4
             },
             {
-              "FrameGroup": "Idle (Posing) 3",
-              "Command": "Frame",
-              "Parameter": 4
+              "Frame": "Idle (Posing) 3",
+              "Duration": 4
             },
             {
-              "FrameGroup": "Idle (Posing) 2",
-              "Command": "Frame",
-              "Parameter": 4
+              "Frame": "Idle (Posing) 2",
+              "Duration": 4
             },
             {
-              "FrameGroup": "Idle (Posing) 3",
-              "Command": "Frame",
-              "Parameter": 4
+              "Frame": "Idle (Posing) 3",
+              "Duration": 4
             },
             {
-              "FrameGroup": "Idle (Posing) 2",
-              "Command": "Frame",
-              "Parameter": 4
+              "Frame": "Idle (Posing) 2",
+              "Duration": 4
             },
             {
-              "FrameGroup": "Idle (Posing) 1",
-              "Command": "Frame",
-              "Parameter": 35
+              "Frame": "Idle (Posing) 1",
+              "Duration": 35
             },
             {
-              "FrameGroup": "Idle (Posing) 2",
-              "Command": "Frame",
-              "Parameter": 15
+              "Frame": "Idle (Posing) 2",
+              "Duration": 15
             },
             {
-              "FrameGroup": "Idle (Posing) 3",
-              "Command": "Frame",
-              "Parameter": 4
+              "Frame": "Idle (Posing) 3",
+              "Duration": 4
             },
             {
-              "FrameGroup": "Idle (Posing) 2",
-              "Command": "Frame",
-              "Parameter": 4
+              "Frame": "Idle (Posing) 2",
+              "Duration": 4
             },
             {
-              "FrameGroup": "Idle (Posing) 3",
-              "Command": "Frame",
-              "Parameter": 4
+              "Frame": "Idle (Posing) 3",
+              "Duration": 4
             },
             {
-              "FrameGroup": "Idle (Posing) 2",
-              "Command": "Frame",
-              "Parameter": 4
+              "Frame": "Idle (Posing) 2",
+              "Duration": 4
             },
             {
-              "FrameGroup": "Idle (Posing) 3",
-              "Command": "Frame",
-              "Parameter": 4
+              "Frame": "Idle (Posing) 3",
+              "Duration": 4
             },
             {
-              "FrameGroup": "Idle (Posing) 2",
-              "Command": "Frame",
-              "Parameter": 4
+              "Frame": "Idle (Posing) 2",
+              "Duration": 4
             },
             {
-              "FrameGroup": "Idle (Posing) 3",
-              "Command": "Frame",
-              "Parameter": 4
+              "Frame": "Idle (Posing) 3",
+              "Duration": 4
             },
             {
-              "FrameGroup": "Idle (Posing) 2",
-              "Command": "Frame",
-              "Parameter": 4
+              "Frame": "Idle (Posing) 2",
+              "Duration": 4
             },
             {
               "Command": "GotoFrameOffset",
@@ -187,13 +167,11 @@
           ],
           "StillFrame (Posing)": [
             {
-              "FrameGroup": "Idle (Posing) 1",
-              "Command": "Frame",
-              "Parameter": 10
+              "Frame": "Idle (Posing) 1",
+              "Duration": 10
             },
             {
-              "Command": "Stop",
-              "Parameter": 0
+              "Command": "Stop"
             }
           ]
         }

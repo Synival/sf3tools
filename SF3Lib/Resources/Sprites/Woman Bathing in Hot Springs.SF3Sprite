@@ -103,24 +103,20 @@
         "4": {
           "OccasionallyTusslingHair": [
             {
-              "FrameGroup": "OccasionallyTusslingHair 1",
-              "Command": "Frame",
-              "Parameter": 120
+              "Frame": "OccasionallyTusslingHair 1",
+              "Duration": 120
             },
             {
-              "FrameGroup": "OccasionallyTusslingHair 2",
-              "Command": "Frame",
-              "Parameter": 5
+              "Frame": "OccasionallyTusslingHair 2",
+              "Duration": 5
             },
             {
-              "FrameGroup": "OccasionallyTusslingHair 3",
-              "Command": "Frame",
-              "Parameter": 5
+              "Frame": "OccasionallyTusslingHair 3",
+              "Duration": 5
             },
             {
-              "FrameGroup": "OccasionallyTusslingHair 4",
-              "Command": "Frame",
-              "Parameter": 5
+              "Frame": "OccasionallyTusslingHair 4",
+              "Duration": 5
             },
             {
               "Command": "GotoFrameOffset",
@@ -129,20 +125,17 @@
           ],
           "StillFrame": [
             {
-              "FrameGroup": "OccasionallyTusslingHair 1",
-              "Command": "Frame",
-              "Parameter": 10
+              "Frame": "OccasionallyTusslingHair 1",
+              "Duration": 10
             },
             {
-              "Command": "Stop",
-              "Parameter": 0
+              "Command": "Stop"
             }
           ],
           "StillFrame (Repeat)": [
             {
-              "FrameGroup": "OccasionallyTusslingHair 1",
-              "Command": "Frame",
-              "Parameter": 120
+              "Frame": "OccasionallyTusslingHair 1",
+              "Duration": 120
             },
             {
               "Command": "GotoFrameOffset",

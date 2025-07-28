@@ -57,9 +57,8 @@
         "8": {
           "StillFrame (Pointing, Repeat)": [
             {
-              "FrameGroup": "Pointing 1",
-              "Command": "Frame",
-              "Parameter": 5
+              "Frame": "Pointing 1",
+              "Duration": 5
             },
             {
               "Command": "GotoFrameOffset",
@@ -68,13 +67,11 @@
           ],
           "StillFrame (Pointing)": [
             {
-              "FrameGroup": "Pointing 1",
-              "Command": "Frame",
-              "Parameter": 10
+              "Frame": "Pointing 1",
+              "Duration": 10
             },
             {
-              "Command": "Stop",
-              "Parameter": 0
+              "Command": "Stop"
             }
           ]
         }

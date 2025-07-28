@@ -213,24 +213,20 @@
         "4": {
           "Nodding": [
             {
-              "FrameGroup": "Nodding 1",
-              "Command": "Frame",
-              "Parameter": 2
+              "Frame": "Nodding 1",
+              "Duration": 2
             },
             {
-              "FrameGroup": "Nodding 2",
-              "Command": "Frame",
-              "Parameter": 4
+              "Frame": "Nodding 2",
+              "Duration": 4
             },
             {
-              "FrameGroup": "Nodding 3",
-              "Command": "Frame",
-              "Parameter": 4
+              "Frame": "Nodding 3",
+              "Duration": 4
             },
             {
-              "FrameGroup": "Nodding 2",
-              "Command": "Frame",
-              "Parameter": 4
+              "Frame": "Nodding 2",
+              "Duration": 4
             },
             {
               "Command": "GotoAnimation",
@@ -239,19 +235,16 @@
           ],
           "PresentingFlowers": [
             {
-              "FrameGroup": "Walking (Flowers Behind Back) 2",
-              "Command": "Frame",
-              "Parameter": 15
+              "Frame": "Walking (Flowers Behind Back) 2",
+              "Duration": 15
             },
             {
-              "FrameGroup": "PresentingFlowers 1",
-              "Command": "Frame",
-              "Parameter": 6
+              "Frame": "PresentingFlowers 1",
+              "Duration": 6
             },
             {
-              "FrameGroup": "Nodding 1",
-              "Command": "Frame",
-              "Parameter": 15
+              "Frame": "Nodding 1",
+              "Duration": 15
             },
             {
               "Command": "GotoAnimation",
@@ -260,56 +253,46 @@
           ],
           "StillFrame (Flowers Behind Back)": [
             {
-              "FrameGroup": "Walking (Flowers Behind Back) 2",
-              "Command": "Frame",
-              "Parameter": 10
+              "Frame": "Walking (Flowers Behind Back) 2",
+              "Duration": 10
             },
             {
-              "Command": "Stop",
-              "Parameter": 0
+              "Command": "Stop"
             }
           ],
           "StillFrame (Presenting Flowers)": [
             {
-              "FrameGroup": "Nodding 1",
-              "Command": "Frame",
-              "Parameter": 10
+              "Frame": "Nodding 1",
+              "Duration": 10
             },
             {
-              "Command": "Stop",
-              "Parameter": 0
+              "Command": "Stop"
             }
           ],
           "Walking (Flowers Behind Back)": [
             {
-              "FrameGroup": "Walking (Flowers Behind Back) 1",
-              "Command": "Frame",
-              "Parameter": 4
+              "Frame": "Walking (Flowers Behind Back) 1",
+              "Duration": 4
             },
             {
-              "FrameGroup": "Walking (Flowers Behind Back) 2",
-              "Command": "Frame",
-              "Parameter": 4
+              "Frame": "Walking (Flowers Behind Back) 2",
+              "Duration": 4
             },
             {
-              "FrameGroup": "Walking (Flowers Behind Back) 3",
-              "Command": "Frame",
-              "Parameter": 4
+              "Frame": "Walking (Flowers Behind Back) 3",
+              "Duration": 4
             },
             {
-              "FrameGroup": "Walking (Flowers Behind Back) 4",
-              "Command": "Frame",
-              "Parameter": 4
+              "Frame": "Walking (Flowers Behind Back) 4",
+              "Duration": 4
             },
             {
-              "FrameGroup": "Walking (Flowers Behind Back) 2",
-              "Command": "Frame",
-              "Parameter": 4
+              "Frame": "Walking (Flowers Behind Back) 2",
+              "Duration": 4
             },
             {
-              "FrameGroup": "Walking (Flowers Behind Back) 5",
-              "Command": "Frame",
-              "Parameter": 4
+              "Frame": "Walking (Flowers Behind Back) 5",
+              "Duration": 4
             },
             {
               "Command": "GotoFrameOffset",

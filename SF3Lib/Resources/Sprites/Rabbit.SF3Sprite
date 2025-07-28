@@ -257,69 +257,56 @@
         "4": {
           "Idle (Occasionally Looking Around)": [
             {
-              "FrameGroup": "Idle (Occasionally Looking Around) 1",
-              "Command": "Frame",
-              "Parameter": 75
+              "Frame": "Idle (Occasionally Looking Around) 1",
+              "Duration": 75
             },
             {
-              "FrameGroup": "Idle (Occasionally Looking Around) 2",
-              "Command": "Frame",
-              "Parameter": 5
+              "Frame": "Idle (Occasionally Looking Around) 2",
+              "Duration": 5
             },
             {
-              "FrameGroup": "Idle (Occasionally Looking Around) 3",
-              "Command": "Frame",
-              "Parameter": 30
+              "Frame": "Idle (Occasionally Looking Around) 3",
+              "Duration": 30
             },
             {
-              "FrameGroup": "Idle (Occasionally Looking Around) 4",
-              "Command": "Frame",
-              "Parameter": 6
+              "Frame": "Idle (Occasionally Looking Around) 4",
+              "Duration": 6
             },
             {
-              "FrameGroup": "Idle (Occasionally Looking Around) 5",
-              "Command": "Frame",
-              "Parameter": 6
+              "Frame": "Idle (Occasionally Looking Around) 5",
+              "Duration": 6
             },
             {
-              "FrameGroup": "Idle (Occasionally Looking Around) 4",
-              "Command": "Frame",
-              "Parameter": 6
+              "Frame": "Idle (Occasionally Looking Around) 4",
+              "Duration": 6
             },
             {
-              "FrameGroup": "Idle (Occasionally Looking Around) 5",
-              "Command": "Frame",
-              "Parameter": 60
+              "Frame": "Idle (Occasionally Looking Around) 5",
+              "Duration": 60
             },
             {
-              "FrameGroup": "Idle (Occasionally Looking Around) 3",
-              "Command": "Frame",
-              "Parameter": 2
+              "Frame": "Idle (Occasionally Looking Around) 3",
+              "Duration": 2
             },
             {
-              "FrameGroup": "Idle (Occasionally Looking Around) 2",
-              "Command": "Frame",
-              "Parameter": 2
+              "Frame": "Idle (Occasionally Looking Around) 2",
+              "Duration": 2
             },
             {
-              "FrameGroup": "Idle (Occasionally Looking Around) 1",
-              "Command": "Frame",
-              "Parameter": 60
+              "Frame": "Idle (Occasionally Looking Around) 1",
+              "Duration": 60
             },
             {
-              "FrameGroup": "Idle (Occasionally Looking Around) 2",
-              "Command": "Frame",
-              "Parameter": 2
+              "Frame": "Idle (Occasionally Looking Around) 2",
+              "Duration": 2
             },
             {
-              "FrameGroup": "Idle (Occasionally Looking Around) 3",
-              "Command": "Frame",
-              "Parameter": 120
+              "Frame": "Idle (Occasionally Looking Around) 3",
+              "Duration": 120
             },
             {
-              "FrameGroup": "Idle (Occasionally Looking Around) 2",
-              "Command": "Frame",
-              "Parameter": 2
+              "Frame": "Idle (Occasionally Looking Around) 2",
+              "Duration": 2
             },
             {
               "Command": "GotoFrameOffset",
@@ -328,45 +315,37 @@
           ],
           "StillFrame (Idle)": [
             {
-              "FrameGroup": "Idle (Occasionally Looking Around) 1",
-              "Command": "Frame",
-              "Parameter": 10
+              "Frame": "Idle (Occasionally Looking Around) 1",
+              "Duration": 10
             },
             {
-              "Command": "Stop",
-              "Parameter": 0
+              "Command": "Stop"
             }
           ],
           "Walking (Hopping)": [
             {
-              "FrameGroup": "Walking (Hopping) 1",
-              "Command": "Frame",
-              "Parameter": 3
+              "Frame": "Walking (Hopping) 1",
+              "Duration": 3
             },
             {
-              "FrameGroup": "Walking (Hopping) 2",
-              "Command": "Frame",
-              "Parameter": 3
+              "Frame": "Walking (Hopping) 2",
+              "Duration": 3
             },
             {
-              "FrameGroup": "Walking (Hopping) 3",
-              "Command": "Frame",
-              "Parameter": 3
+              "Frame": "Walking (Hopping) 3",
+              "Duration": 3
             },
             {
-              "FrameGroup": "Walking (Hopping) 4",
-              "Command": "Frame",
-              "Parameter": 3
+              "Frame": "Walking (Hopping) 4",
+              "Duration": 3
             },
             {
-              "FrameGroup": "Walking (Hopping) 5",
-              "Command": "Frame",
-              "Parameter": 3
+              "Frame": "Walking (Hopping) 5",
+              "Duration": 3
             },
             {
-              "FrameGroup": "Walking (Hopping) 6",
-              "Command": "Frame",
-              "Parameter": 3
+              "Frame": "Walking (Hopping) 6",
+              "Duration": 3
             },
             {
               "Command": "GotoFrameOffset",

@@ -323,24 +323,20 @@
         "4": {
           "Idle (Battle)": [
             {
-              "FrameGroup": "Idle (Battle) 1",
-              "Command": "Frame",
-              "Parameter": 4
+              "Frame": "Idle (Battle) 1",
+              "Duration": 4
             },
             {
-              "FrameGroup": "Idle (Battle) 2",
-              "Command": "Frame",
-              "Parameter": 4
+              "Frame": "Idle (Battle) 2",
+              "Duration": 4
             },
             {
-              "FrameGroup": "Idle (Battle) 3",
-              "Command": "Frame",
-              "Parameter": 4
+              "Frame": "Idle (Battle) 3",
+              "Duration": 4
             },
             {
-              "FrameGroup": "Idle (Battle) 2",
-              "Command": "Frame",
-              "Parameter": 4
+              "Frame": "Idle (Battle) 2",
+              "Duration": 4
             },
             {
               "Command": "GotoFrameOffset",
@@ -349,24 +345,20 @@
           ],
           "Idle (Field)": [
             {
-              "FrameGroup": "Idle (Field) 1",
-              "Command": "Frame",
-              "Parameter": 4
+              "Frame": "Idle (Field) 1",
+              "Duration": 4
             },
             {
-              "FrameGroup": "Idle (Field) 2",
-              "Command": "Frame",
-              "Parameter": 4
+              "Frame": "Idle (Field) 2",
+              "Duration": 4
             },
             {
-              "FrameGroup": "Idle (Field) 3",
-              "Command": "Frame",
-              "Parameter": 4
+              "Frame": "Idle (Field) 3",
+              "Duration": 4
             },
             {
-              "FrameGroup": "Idle (Field) 2",
-              "Command": "Frame",
-              "Parameter": 4
+              "Frame": "Idle (Field) 2",
+              "Duration": 4
             },
             {
               "Command": "GotoFrameOffset",
@@ -375,24 +367,20 @@
           ],
           "Nodding (From Walking to Field)": [
             {
-              "FrameGroup": "Walking 1",
-              "Command": "Frame",
-              "Parameter": 4
+              "Frame": "Walking 1",
+              "Duration": 4
             },
             {
-              "FrameGroup": "Nodding (Field) 1",
-              "Command": "Frame",
-              "Parameter": 4
+              "Frame": "Nodding (Field) 1",
+              "Duration": 4
             },
             {
-              "FrameGroup": "Nodding (Field) 2",
-              "Command": "Frame",
-              "Parameter": 4
+              "Frame": "Nodding (Field) 2",
+              "Duration": 4
             },
             {
-              "FrameGroup": "Nodding (Field) 1",
-              "Command": "Frame",
-              "Parameter": 4
+              "Frame": "Nodding (Field) 1",
+              "Duration": 4
             },
             {
               "Command": "GotoAnimation",
@@ -401,24 +389,20 @@
           ],
           "ShakingHead (From Walking to Field)": [
             {
-              "FrameGroup": "Walking 1",
-              "Command": "Frame",
-              "Parameter": 4
+              "Frame": "Walking 1",
+              "Duration": 4
             },
             {
-              "FrameGroup": "ShakingHead (Field) 1",
-              "Command": "Frame",
-              "Parameter": 4
+              "Frame": "ShakingHead (Field) 1",
+              "Duration": 4
             },
             {
-              "FrameGroup": "ShakingHead (Field) 2",
-              "Command": "Frame",
-              "Parameter": 4
+              "Frame": "ShakingHead (Field) 2",
+              "Duration": 4
             },
             {
-              "FrameGroup": "ShakingHead (Field) 1",
-              "Command": "Frame",
-              "Parameter": 4
+              "Frame": "ShakingHead (Field) 1",
+              "Duration": 4
             },
             {
               "Command": "GotoAnimation",
@@ -427,56 +411,46 @@
           ],
           "StillFrame (Field)": [
             {
-              "FrameGroup": "Idle (Field) 1",
-              "Command": "Frame",
-              "Parameter": 10
+              "Frame": "Idle (Field) 1",
+              "Duration": 10
             },
             {
-              "Command": "Stop",
-              "Parameter": 0
+              "Command": "Stop"
             }
           ],
           "StillFrame (Walking)": [
             {
-              "FrameGroup": "Walking 4",
-              "Command": "Frame",
-              "Parameter": 10
+              "Frame": "Walking 4",
+              "Duration": 10
             },
             {
-              "Command": "Stop",
-              "Parameter": 0
+              "Command": "Stop"
             }
           ],
           "Walking": [
             {
-              "FrameGroup": "Walking 1",
-              "Command": "Frame",
-              "Parameter": 4
+              "Frame": "Walking 1",
+              "Duration": 4
             },
             {
-              "FrameGroup": "Idle (Field) 1",
-              "Command": "Frame",
-              "Parameter": 4
+              "Frame": "Idle (Field) 1",
+              "Duration": 4
             },
             {
-              "FrameGroup": "Walking 2",
-              "Command": "Frame",
-              "Parameter": 4
+              "Frame": "Walking 2",
+              "Duration": 4
             },
             {
-              "FrameGroup": "Walking 3",
-              "Command": "Frame",
-              "Parameter": 4
+              "Frame": "Walking 3",
+              "Duration": 4
             },
             {
-              "FrameGroup": "Idle (Field) 1",
-              "Command": "Frame",
-              "Parameter": 4
+              "Frame": "Idle (Field) 1",
+              "Duration": 4
             },
             {
-              "FrameGroup": "Walking 4",
-              "Command": "Frame",
-              "Parameter": 4
+              "Frame": "Walking 4",
+              "Duration": 4
             },
             {
               "Command": "GotoFrameOffset",
@@ -485,14 +459,12 @@
           ],
           "Walking (2 Frame, Janky)": [
             {
-              "FrameGroup": "Walking 1",
-              "Command": "Frame",
-              "Parameter": 10
+              "Frame": "Walking 1",
+              "Duration": 10
             },
             {
-              "FrameGroup": "Walking 4",
-              "Command": "Frame",
-              "Parameter": 10
+              "Frame": "Walking 4",
+              "Duration": 10
             },
             {
               "Command": "GotoFrameOffset",
@@ -602,24 +574,20 @@
         "4": {
           "GettingUpFromKneeling": [
             {
-              "FrameGroup": "OnGround 1",
-              "Command": "Frame",
-              "Parameter": 15
+              "Frame": "OnGround 1",
+              "Duration": 15
             },
             {
-              "FrameGroup": "GettingUpFromKneeling 1",
-              "Command": "Frame",
-              "Parameter": 8
+              "Frame": "GettingUpFromKneeling 1",
+              "Duration": 8
             },
             {
-              "FrameGroup": "GettingUpFromKneeling 2",
-              "Command": "Frame",
-              "Parameter": 6
+              "Frame": "GettingUpFromKneeling 2",
+              "Duration": 6
             },
             {
-              "FrameGroup": "GettingUpFromKneeling 3",
-              "Command": "Frame",
-              "Parameter": 6
+              "Frame": "GettingUpFromKneeling 3",
+              "Duration": 6
             },
             {
               "Command": "GotoAnimation",
@@ -628,9 +596,8 @@
           ],
           "StillFrame (Kneeling, Repeat)": [
             {
-              "FrameGroup": "GettingUpFromKneeling 3",
-              "Command": "Frame",
-              "Parameter": 99
+              "Frame": "GettingUpFromKneeling 3",
+              "Duration": 99
             },
             {
               "Command": "GotoFrameOffset",
@@ -639,13 +606,11 @@
           ],
           "StillFrame (OnGround)": [
             {
-              "FrameGroup": "OnGround 1",
-              "Command": "Frame",
-              "Parameter": 10
+              "Frame": "OnGround 1",
+              "Duration": 10
             },
             {
-              "Command": "Stop",
-              "Parameter": 0
+              "Command": "Stop"
             }
           ]
         }

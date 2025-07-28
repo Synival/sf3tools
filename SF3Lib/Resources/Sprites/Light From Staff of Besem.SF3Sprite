@@ -22,13 +22,11 @@
         "1": {
           "StillFrame (Light)": [
             {
-              "FrameGroup": "Light 1",
-              "Command": "Frame",
-              "Parameter": 10
+              "Frame": "Light 1",
+              "Duration": 10
             },
             {
-              "Command": "Stop",
-              "Parameter": 0
+              "Command": "Stop"
             }
           ]
         }

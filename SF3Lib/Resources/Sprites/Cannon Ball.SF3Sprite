@@ -22,9 +22,8 @@
         "1": {
           "StillFrame (CannonBall, Change to 1)": [
             {
-              "FrameGroup": "CannonBall 1",
-              "Command": "Frame",
-              "Parameter": 10
+              "Frame": "CannonBall 1",
+              "Duration": 10
             },
             {
               "Command": "GotoAnimation",
@@ -33,20 +32,17 @@
           ],
           "StillFrame (CannonBall, Repeat)": [
             {
-              "FrameGroup": "CannonBall 1",
-              "Command": "Frame",
-              "Parameter": 10
+              "Frame": "CannonBall 1",
+              "Duration": 10
             },
             {
-              "Command": "Stop",
-              "Parameter": 0
+              "Command": "Stop"
             }
           ],
           "StillFrame (CannonBall)": [
             {
-              "FrameGroup": "CannonBall 1",
-              "Command": "Frame",
-              "Parameter": 10
+              "Frame": "CannonBall 1",
+              "Duration": 10
             },
             {
               "Command": "GotoFrameOffset",

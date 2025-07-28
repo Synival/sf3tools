@@ -22,9 +22,8 @@
         "1": {
           "StillFrame (Egg, Repeat)": [
             {
-              "FrameGroup": "Egg 1",
-              "Command": "Frame",
-              "Parameter": 10
+              "Frame": "Egg 1",
+              "Duration": 10
             },
             {
               "Command": "GotoFrameOffset",
@@ -33,13 +32,11 @@
           ],
           "StillFrame (Egg)": [
             {
-              "FrameGroup": "Egg 1",
-              "Command": "Frame",
-              "Parameter": 10
+              "Frame": "Egg 1",
+              "Duration": 10
             },
             {
-              "Command": "Stop",
-              "Parameter": 0
+              "Command": "Stop"
             }
           ]
         }

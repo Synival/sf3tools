@@ -36,24 +36,20 @@
         "1": {
           "Splash": [
             {
-              "FrameGroup": "Splash 1",
-              "Command": "Frame",
-              "Parameter": 1
+              "Frame": "Splash 1",
+              "Duration": 1
             },
             {
-              "FrameGroup": "Splash 2",
-              "Command": "Frame",
-              "Parameter": 1
+              "Frame": "Splash 2",
+              "Duration": 1
             },
             {
-              "FrameGroup": "Splash 3",
-              "Command": "Frame",
-              "Parameter": 1
+              "Frame": "Splash 3",
+              "Duration": 1
             },
             {
-              "FrameGroup": "Splash 2",
-              "Command": "Frame",
-              "Parameter": 1
+              "Frame": "Splash 2",
+              "Duration": 1
             },
             {
               "Command": "GotoFrameOffset",

@@ -50,29 +50,24 @@
         "1": {
           "Exploding (Very Fast)": [
             {
-              "FrameGroup": "Exploding 1",
-              "Command": "Frame",
-              "Parameter": 1
+              "Frame": "Exploding 1",
+              "Duration": 1
             },
             {
-              "FrameGroup": "Exploding 2",
-              "Command": "Frame",
-              "Parameter": 1
+              "Frame": "Exploding 2",
+              "Duration": 1
             },
             {
-              "FrameGroup": "Exploding 3",
-              "Command": "Frame",
-              "Parameter": 1
+              "Frame": "Exploding 3",
+              "Duration": 1
             },
             {
-              "FrameGroup": "Exploding 4",
-              "Command": "Frame",
-              "Parameter": 1
+              "Frame": "Exploding 4",
+              "Duration": 1
             },
             {
-              "FrameGroup": "Exploding 5",
-              "Command": "Frame",
-              "Parameter": 1
+              "Frame": "Exploding 5",
+              "Duration": 1
             },
             {
               "Command": "GotoAnimation",

@@ -169,44 +169,36 @@
         "4": {
           "Hovering": [
             {
-              "FrameGroup": "Idle 1",
-              "Command": "Frame",
-              "Parameter": 5
+              "Frame": "Idle 1",
+              "Duration": 5
             },
             {
-              "FrameGroup": "Hovering 1",
-              "Command": "Frame",
-              "Parameter": 5
+              "Frame": "Hovering 1",
+              "Duration": 5
             },
             {
-              "FrameGroup": "Hovering 2",
-              "Command": "Frame",
-              "Parameter": 5
+              "Frame": "Hovering 2",
+              "Duration": 5
             },
             {
-              "FrameGroup": "Hovering 3",
-              "Command": "Frame",
-              "Parameter": 5
+              "Frame": "Hovering 3",
+              "Duration": 5
             },
             {
-              "FrameGroup": "Hovering 4",
-              "Command": "Frame",
-              "Parameter": 5
+              "Frame": "Hovering 4",
+              "Duration": 5
             },
             {
-              "FrameGroup": "Hovering 3",
-              "Command": "Frame",
-              "Parameter": 5
+              "Frame": "Hovering 3",
+              "Duration": 5
             },
             {
-              "FrameGroup": "Hovering 2",
-              "Command": "Frame",
-              "Parameter": 5
+              "Frame": "Hovering 2",
+              "Duration": 5
             },
             {
-              "FrameGroup": "Hovering 1",
-              "Command": "Frame",
-              "Parameter": 5
+              "Frame": "Hovering 1",
+              "Duration": 5
             },
             {
               "Command": "GotoFrameOffset",
@@ -215,24 +207,20 @@
           ],
           "Idle": [
             {
-              "FrameGroup": "Idle 1",
-              "Command": "Frame",
-              "Parameter": 4
+              "Frame": "Idle 1",
+              "Duration": 4
             },
             {
-              "FrameGroup": "Idle 2",
-              "Command": "Frame",
-              "Parameter": 4
+              "Frame": "Idle 2",
+              "Duration": 4
             },
             {
-              "FrameGroup": "Idle 3",
-              "Command": "Frame",
-              "Parameter": 4
+              "Frame": "Idle 3",
+              "Duration": 4
             },
             {
-              "FrameGroup": "Idle 2",
-              "Command": "Frame",
-              "Parameter": 4
+              "Frame": "Idle 2",
+              "Duration": 4
             },
             {
               "Command": "GotoFrameOffset",
@@ -241,13 +229,11 @@
           ],
           "StillFrame": [
             {
-              "FrameGroup": "Idle 1",
-              "Command": "Frame",
-              "Parameter": 10
+              "Frame": "Idle 1",
+              "Duration": 10
             },
             {
-              "Command": "Stop",
-              "Parameter": 0
+              "Command": "Stop"
             }
           ]
         }

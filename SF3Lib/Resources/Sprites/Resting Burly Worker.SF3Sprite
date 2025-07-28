@@ -37,9 +37,8 @@
         "4": {
           "StillFrame (Resting, Repeat)": [
             {
-              "FrameGroup": "Idle (Resting) 1",
-              "Command": "Frame",
-              "Parameter": 10
+              "Frame": "Idle (Resting) 1",
+              "Duration": 10
             },
             {
               "Command": "GotoFrameOffset",
@@ -48,13 +47,11 @@
           ],
           "StillFrame (Resting)": [
             {
-              "FrameGroup": "Idle (Resting) 1",
-              "Command": "Frame",
-              "Parameter": 10
+              "Frame": "Idle (Resting) 1",
+              "Duration": 10
             },
             {
-              "Command": "Stop",
-              "Parameter": 0
+              "Command": "Stop"
             }
           ]
         }

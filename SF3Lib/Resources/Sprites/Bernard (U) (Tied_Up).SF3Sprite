@@ -81,35 +81,29 @@
         "4": {
           "StillFrame (OnGround)": [
             {
-              "FrameGroup": "OnGround 1",
-              "Command": "Frame",
-              "Parameter": 10
+              "Frame": "OnGround 1",
+              "Duration": 10
             },
             {
-              "Command": "Stop",
-              "Parameter": 0
+              "Command": "Stop"
             }
           ],
           "WigglingOnGround": [
             {
-              "FrameGroup": "OnGround 1",
-              "Command": "Frame",
-              "Parameter": 10
+              "Frame": "OnGround 1",
+              "Duration": 10
             },
             {
-              "FrameGroup": "WigglingOnGround 1",
-              "Command": "Frame",
-              "Parameter": 3
+              "Frame": "WigglingOnGround 1",
+              "Duration": 3
             },
             {
-              "FrameGroup": "WigglingOnGround 2",
-              "Command": "Frame",
-              "Parameter": 6
+              "Frame": "WigglingOnGround 2",
+              "Duration": 6
             },
             {
-              "FrameGroup": "WigglingOnGround 1",
-              "Command": "Frame",
-              "Parameter": 2
+              "Frame": "WigglingOnGround 1",
+              "Duration": 2
             },
             {
               "Command": "GotoFrameOffset",

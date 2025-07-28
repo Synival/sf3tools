@@ -81,24 +81,20 @@
         "4": {
           "Idle (Fixed Height)": [
             {
-              "FrameGroup": "Idle (Fixed Height) 1",
-              "Command": "Frame",
-              "Parameter": 4
+              "Frame": "Idle (Fixed Height) 1",
+              "Duration": 4
             },
             {
-              "FrameGroup": "Idle (Fixed Height) 2",
-              "Command": "Frame",
-              "Parameter": 4
+              "Frame": "Idle (Fixed Height) 2",
+              "Duration": 4
             },
             {
-              "FrameGroup": "Idle (Fixed Height) 3",
-              "Command": "Frame",
-              "Parameter": 4
+              "Frame": "Idle (Fixed Height) 3",
+              "Duration": 4
             },
             {
-              "FrameGroup": "Idle (Fixed Height) 2",
-              "Command": "Frame",
-              "Parameter": 4
+              "Frame": "Idle (Fixed Height) 2",
+              "Duration": 4
             },
             {
               "Command": "GotoFrameOffset",
@@ -107,13 +103,11 @@
           ],
           "StillFrame (Fixed Height)": [
             {
-              "FrameGroup": "Idle (Fixed Height) 1",
-              "Command": "Frame",
-              "Parameter": 10
+              "Frame": "Idle (Fixed Height) 1",
+              "Duration": 10
             },
             {
-              "Command": "Stop",
-              "Parameter": 0
+              "Command": "Stop"
             }
           ]
         }

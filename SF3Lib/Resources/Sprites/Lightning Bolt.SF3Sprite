@@ -71,52 +71,43 @@
         "1": {
           "StillFrame": [
             {
-              "FrameGroup": "Zapping 2",
-              "Command": "Frame",
-              "Parameter": 10
+              "Frame": "Zapping 2",
+              "Duration": 10
             },
             {
-              "Command": "Stop",
-              "Parameter": 0
+              "Command": "Stop"
             }
           ],
           "StillFrame (Dot)": [
             {
-              "FrameGroup": "Dot 1",
-              "Command": "Frame",
-              "Parameter": 10
+              "Frame": "Dot 1",
+              "Duration": 10
             },
             {
-              "Command": "Stop",
-              "Parameter": 0
+              "Command": "Stop"
             }
           ],
           "StillFrame (Transparent)": [
             {
-              "FrameGroup": "Transparent 1",
-              "Command": "Frame",
-              "Parameter": 10
+              "Frame": "Transparent 1",
+              "Duration": 10
             },
             {
-              "Command": "Stop",
-              "Parameter": 0
+              "Command": "Stop"
             }
           ],
           "Zapping (Fast, To the Left)": [
             {
-              "FrameGroup": "Zapping (To the Left) 1",
-              "Command": "Frame",
-              "Parameter": 1
+              "Frame": "Zapping (To the Left) 1",
+              "Duration": 1
             },
             {
-              "FrameGroup": "Zapping (To the Left) 2",
-              "Command": "Frame",
-              "Parameter": 1
+              "Frame": "Zapping (To the Left) 2",
+              "Duration": 1
             },
             {
-              "FrameGroup": "Zapping (To the Left) 3",
-              "Command": "Frame",
-              "Parameter": 1
+              "Frame": "Zapping (To the Left) 3",
+              "Duration": 1
             },
             {
               "Command": "GotoFrameOffset",
@@ -125,19 +116,16 @@
           ],
           "Zapping (Fast)": [
             {
-              "FrameGroup": "Zapping 1",
-              "Command": "Frame",
-              "Parameter": 1
+              "Frame": "Zapping 1",
+              "Duration": 1
             },
             {
-              "FrameGroup": "Zapping 2",
-              "Command": "Frame",
-              "Parameter": 1
+              "Frame": "Zapping 2",
+              "Duration": 1
             },
             {
-              "FrameGroup": "Zapping 3",
-              "Command": "Frame",
-              "Parameter": 1
+              "Frame": "Zapping 3",
+              "Duration": 1
             },
             {
               "Command": "GotoFrameOffset",
@@ -146,14 +134,12 @@
           ],
           "Zapping (Reduced, Slow)": [
             {
-              "FrameGroup": "Zapping 2",
-              "Command": "Frame",
-              "Parameter": 3
+              "Frame": "Zapping 2",
+              "Duration": 3
             },
             {
-              "FrameGroup": "Zapping 3",
-              "Command": "Frame",
-              "Parameter": 3
+              "Frame": "Zapping 3",
+              "Duration": 3
             },
             {
               "Command": "GotoFrameOffset",
@@ -162,19 +148,16 @@
           ],
           "Zapping (Slow)": [
             {
-              "FrameGroup": "Zapping 1",
-              "Command": "Frame",
-              "Parameter": 3
+              "Frame": "Zapping 1",
+              "Duration": 3
             },
             {
-              "FrameGroup": "Zapping 2",
-              "Command": "Frame",
-              "Parameter": 3
+              "Frame": "Zapping 2",
+              "Duration": 3
             },
             {
-              "FrameGroup": "Zapping 3",
-              "Command": "Frame",
-              "Parameter": 3
+              "Frame": "Zapping 3",
+              "Duration": 3
             },
             {
               "Command": "GotoFrameOffset",

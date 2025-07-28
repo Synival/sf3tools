@@ -433,24 +433,20 @@
         "4": {
           "Idle (Arms Crossed)": [
             {
-              "FrameGroup": "Idle (Arms Crossed) 1",
-              "Command": "Frame",
-              "Parameter": 4
+              "Frame": "Idle (Arms Crossed) 1",
+              "Duration": 4
             },
             {
-              "FrameGroup": "Idle (Arms Crossed) 2",
-              "Command": "Frame",
-              "Parameter": 4
+              "Frame": "Idle (Arms Crossed) 2",
+              "Duration": 4
             },
             {
-              "FrameGroup": "Idle (Arms Crossed) 3",
-              "Command": "Frame",
-              "Parameter": 4
+              "Frame": "Idle (Arms Crossed) 3",
+              "Duration": 4
             },
             {
-              "FrameGroup": "Idle (Arms Crossed) 2",
-              "Command": "Frame",
-              "Parameter": 4
+              "Frame": "Idle (Arms Crossed) 2",
+              "Duration": 4
             },
             {
               "Command": "GotoFrameOffset",
@@ -459,14 +455,12 @@
           ],
           "JumpingUp": [
             {
-              "FrameGroup": "JumpingUp 1",
-              "Command": "Frame",
-              "Parameter": 2
+              "Frame": "JumpingUp 1",
+              "Duration": 2
             },
             {
-              "FrameGroup": "JumpingUp 2",
-              "Command": "Frame",
-              "Parameter": 2
+              "Frame": "JumpingUp 2",
+              "Duration": 2
             },
             {
               "Command": "GotoAnimation",
@@ -475,9 +469,8 @@
           ],
           "Landing": [
             {
-              "FrameGroup": "Landing 1",
-              "Command": "Frame",
-              "Parameter": 2
+              "Frame": "Landing 1",
+              "Duration": 2
             },
             {
               "Command": "GotoAnimation",
@@ -486,44 +479,36 @@
           ],
           "Laughing": [
             {
-              "FrameGroup": "Idle (Arms Crossed) 1",
-              "Command": "Frame",
-              "Parameter": 4
+              "Frame": "Idle (Arms Crossed) 1",
+              "Duration": 4
             },
             {
-              "FrameGroup": "Laughing 1",
-              "Command": "Frame",
-              "Parameter": 3
+              "Frame": "Laughing 1",
+              "Duration": 3
             },
             {
-              "FrameGroup": "Laughing 2",
-              "Command": "Frame",
-              "Parameter": 3
+              "Frame": "Laughing 2",
+              "Duration": 3
             },
             {
-              "FrameGroup": "Laughing 1",
-              "Command": "Frame",
-              "Parameter": 3
+              "Frame": "Laughing 1",
+              "Duration": 3
             },
             {
-              "FrameGroup": "Laughing 2",
-              "Command": "Frame",
-              "Parameter": 3
+              "Frame": "Laughing 2",
+              "Duration": 3
             },
             {
-              "FrameGroup": "Laughing 1",
-              "Command": "Frame",
-              "Parameter": 3
+              "Frame": "Laughing 1",
+              "Duration": 3
             },
             {
-              "FrameGroup": "Laughing 2",
-              "Command": "Frame",
-              "Parameter": 3
+              "Frame": "Laughing 2",
+              "Duration": 3
             },
             {
-              "FrameGroup": "Laughing 1",
-              "Command": "Frame",
-              "Parameter": 3
+              "Frame": "Laughing 1",
+              "Duration": 3
             },
             {
               "Command": "GotoAnimation",
@@ -532,14 +517,12 @@
           ],
           "LookingDown (Fast)": [
             {
-              "FrameGroup": "Idle (Arms Crossed) 1",
-              "Command": "Frame",
-              "Parameter": 2
+              "Frame": "Idle (Arms Crossed) 1",
+              "Duration": 2
             },
             {
-              "FrameGroup": "LookingDown 1",
-              "Command": "Frame",
-              "Parameter": 2
+              "Frame": "LookingDown 1",
+              "Duration": 2
             },
             {
               "Command": "GotoAnimation",
@@ -548,14 +531,12 @@
           ],
           "LookingDown (Slow)": [
             {
-              "FrameGroup": "Idle (Arms Crossed) 1",
-              "Command": "Frame",
-              "Parameter": 6
+              "Frame": "Idle (Arms Crossed) 1",
+              "Duration": 6
             },
             {
-              "FrameGroup": "LookingDown 1",
-              "Command": "Frame",
-              "Parameter": 10
+              "Frame": "LookingDown 1",
+              "Duration": 10
             },
             {
               "Command": "GotoAnimation",
@@ -564,19 +545,16 @@
           ],
           "LookingUp (Kneeling)": [
             {
-              "FrameGroup": "JumpingUp 1",
-              "Command": "Frame",
-              "Parameter": 4
+              "Frame": "JumpingUp 1",
+              "Duration": 4
             },
             {
-              "FrameGroup": "LookingUp (Kneeling) 1",
-              "Command": "Frame",
-              "Parameter": 4
+              "Frame": "LookingUp (Kneeling) 1",
+              "Duration": 4
             },
             {
-              "FrameGroup": "LookingUp (Kneeling) 2",
-              "Command": "Frame",
-              "Parameter": 4
+              "Frame": "LookingUp (Kneeling) 2",
+              "Duration": 4
             },
             {
               "Command": "GotoAnimation",
@@ -585,34 +563,28 @@
           ],
           "Running": [
             {
-              "FrameGroup": "Running 1",
-              "Command": "Frame",
-              "Parameter": 3
+              "Frame": "Running 1",
+              "Duration": 3
             },
             {
-              "FrameGroup": "Running 2",
-              "Command": "Frame",
-              "Parameter": 1
+              "Frame": "Running 2",
+              "Duration": 1
             },
             {
-              "FrameGroup": "Running 3",
-              "Command": "Frame",
-              "Parameter": 2
+              "Frame": "Running 3",
+              "Duration": 2
             },
             {
-              "FrameGroup": "Running 4",
-              "Command": "Frame",
-              "Parameter": 3
+              "Frame": "Running 4",
+              "Duration": 3
             },
             {
-              "FrameGroup": "Running 2",
-              "Command": "Frame",
-              "Parameter": 1
+              "Frame": "Running 2",
+              "Duration": 1
             },
             {
-              "FrameGroup": "Running 5",
-              "Command": "Frame",
-              "Parameter": 2
+              "Frame": "Running 5",
+              "Duration": 2
             },
             {
               "Command": "GotoFrameOffset",
@@ -621,44 +593,36 @@
           ],
           "ShakingHead": [
             {
-              "FrameGroup": "Idle (Arms Crossed) 1",
-              "Command": "Frame",
-              "Parameter": 2
+              "Frame": "Idle (Arms Crossed) 1",
+              "Duration": 2
             },
             {
-              "FrameGroup": "ShakingHead 1",
-              "Command": "Frame",
-              "Parameter": 3
+              "Frame": "ShakingHead 1",
+              "Duration": 3
             },
             {
-              "FrameGroup": "Idle (Arms Crossed) 1",
-              "Command": "Frame",
-              "Parameter": 3
+              "Frame": "Idle (Arms Crossed) 1",
+              "Duration": 3
             },
             {
-              "FrameGroup": "ShakingHead 2",
-              "Command": "Frame",
-              "Parameter": 3
+              "Frame": "ShakingHead 2",
+              "Duration": 3
             },
             {
-              "FrameGroup": "Idle (Arms Crossed) 1",
-              "Command": "Frame",
-              "Parameter": 3
+              "Frame": "Idle (Arms Crossed) 1",
+              "Duration": 3
             },
             {
-              "FrameGroup": "ShakingHead 1",
-              "Command": "Frame",
-              "Parameter": 3
+              "Frame": "ShakingHead 1",
+              "Duration": 3
             },
             {
-              "FrameGroup": "Idle (Arms Crossed) 1",
-              "Command": "Frame",
-              "Parameter": 3
+              "Frame": "Idle (Arms Crossed) 1",
+              "Duration": 3
             },
             {
-              "FrameGroup": "ShakingHead 2",
-              "Command": "Frame",
-              "Parameter": 3
+              "Frame": "ShakingHead 2",
+              "Duration": 3
             },
             {
               "Command": "GotoAnimation",
@@ -667,19 +631,16 @@
           ],
           "StandingUpFromKneeling": [
             {
-              "FrameGroup": "JumpingUp 1",
-              "Command": "Frame",
-              "Parameter": 3
+              "Frame": "JumpingUp 1",
+              "Duration": 3
             },
             {
-              "FrameGroup": "LookingDown 1",
-              "Command": "Frame",
-              "Parameter": 3
+              "Frame": "LookingDown 1",
+              "Duration": 3
             },
             {
-              "FrameGroup": "Idle (Arms Crossed) 1",
-              "Command": "Frame",
-              "Parameter": 4
+              "Frame": "Idle (Arms Crossed) 1",
+              "Duration": 4
             },
             {
               "Command": "GotoAnimation",
@@ -688,20 +649,17 @@
           ],
           "StillFrame (Arms Crossed)": [
             {
-              "FrameGroup": "Idle (Arms Crossed) 1",
-              "Command": "Frame",
-              "Parameter": 10
+              "Frame": "Idle (Arms Crossed) 1",
+              "Duration": 10
             },
             {
-              "Command": "Stop",
-              "Parameter": 0
+              "Command": "Stop"
             }
           ],
           "StillFrame (Jumping Up)": [
             {
-              "FrameGroup": "Jumping Up 1",
-              "Command": "Frame",
-              "Parameter": 6
+              "Frame": "Jumping Up 1",
+              "Duration": 6
             },
             {
               "Command": "Stop",
@@ -710,9 +668,8 @@
           ],
           "StillFrame (Kneeling)": [
             {
-              "FrameGroup": "LookingUp (Kneeling) 2",
-              "Command": "Frame",
-              "Parameter": 4
+              "Frame": "LookingUp (Kneeling) 2",
+              "Duration": 4
             },
             {
               "Command": "Stop",
@@ -721,9 +678,8 @@
           ],
           "StillFrame (Looking Down)": [
             {
-              "FrameGroup": "JumpingUp 1",
-              "Command": "Frame",
-              "Parameter": 3
+              "Frame": "JumpingUp 1",
+              "Duration": 3
             },
             {
               "Command": "Stop",

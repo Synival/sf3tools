@@ -81,24 +81,20 @@
         "4": {
           "Bathing": [
             {
-              "FrameGroup": "Bathing 1",
-              "Command": "Frame",
-              "Parameter": 5
+              "Frame": "Bathing 1",
+              "Duration": 5
             },
             {
-              "FrameGroup": "Bathing 2",
-              "Command": "Frame",
-              "Parameter": 5
+              "Frame": "Bathing 2",
+              "Duration": 5
             },
             {
-              "FrameGroup": "Bathing 3",
-              "Command": "Frame",
-              "Parameter": 5
+              "Frame": "Bathing 3",
+              "Duration": 5
             },
             {
-              "FrameGroup": "Bathing 2",
-              "Command": "Frame",
-              "Parameter": 5
+              "Frame": "Bathing 2",
+              "Duration": 5
             },
             {
               "Command": "GotoFrameOffset",
@@ -107,20 +103,17 @@
           ],
           "StillFrame": [
             {
-              "FrameGroup": "Bathing 1",
-              "Command": "Frame",
-              "Parameter": 10
+              "Frame": "Bathing 1",
+              "Duration": 10
             },
             {
-              "Command": "Stop",
-              "Parameter": 0
+              "Command": "Stop"
             }
           ],
           "StillFrame (Repeat)": [
             {
-              "FrameGroup": "Bathing 1",
-              "Command": "Frame",
-              "Parameter": 5
+              "Frame": "Bathing 1",
+              "Duration": 5
             },
             {
               "Command": "GotoFrameOffset",

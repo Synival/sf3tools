@@ -43,46 +43,38 @@
         "1": {
           "Angry": [
             {
-              "FrameGroup": "Angry 1",
-              "Command": "Frame",
-              "Parameter": 10
+              "Frame": "Angry 1",
+              "Duration": 10
             },
             {
-              "Command": "Stop",
-              "Parameter": 0
+              "Command": "Stop"
             }
           ],
           "Flag": [
             {
-              "FrameGroup": "Flag 1",
-              "Command": "Frame",
-              "Parameter": 10
+              "Frame": "Flag 1",
+              "Duration": 10
             },
             {
-              "Command": "Stop",
-              "Parameter": 0
+              "Command": "Stop"
             }
           ],
           "Idea": [
             {
-              "FrameGroup": "Idea 1",
-              "Command": "Frame",
-              "Parameter": 10
+              "Frame": "Idea 1",
+              "Duration": 10
             },
             {
-              "Command": "Stop",
-              "Parameter": 0
+              "Command": "Stop"
             }
           ],
           "Love": [
             {
-              "FrameGroup": "Love 1",
-              "Command": "Frame",
-              "Parameter": 10
+              "Frame": "Love 1",
+              "Duration": 10
             },
             {
-              "Command": "Stop",
-              "Parameter": 0
+              "Command": "Stop"
             }
           ]
         }

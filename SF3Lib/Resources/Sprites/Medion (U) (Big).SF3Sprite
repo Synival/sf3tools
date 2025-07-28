@@ -81,24 +81,20 @@
         "4": {
           "Idle (Wind Blowing Hair)": [
             {
-              "FrameGroup": "Idle (Wind Blowing Hair) 1",
-              "Command": "Frame",
-              "Parameter": 6
+              "Frame": "Idle (Wind Blowing Hair) 1",
+              "Duration": 6
             },
             {
-              "FrameGroup": "Idle (Wind Blowing Hair) 2",
-              "Command": "Frame",
-              "Parameter": 4
+              "Frame": "Idle (Wind Blowing Hair) 2",
+              "Duration": 4
             },
             {
-              "FrameGroup": "Idle (Wind Blowing Hair) 3",
-              "Command": "Frame",
-              "Parameter": 5
+              "Frame": "Idle (Wind Blowing Hair) 3",
+              "Duration": 5
             },
             {
-              "FrameGroup": "Idle (Wind Blowing Hair) 2",
-              "Command": "Frame",
-              "Parameter": 4
+              "Frame": "Idle (Wind Blowing Hair) 2",
+              "Duration": 4
             },
             {
               "Command": "GotoFrameOffset",
@@ -107,13 +103,11 @@
           ],
           "StillFrame": [
             {
-              "FrameGroup": "Idle (Wind Blowing Hair) 1",
-              "Command": "Frame",
-              "Parameter": 10
+              "Frame": "Idle (Wind Blowing Hair) 1",
+              "Duration": 10
             },
             {
-              "Command": "Stop",
-              "Parameter": 0
+              "Command": "Stop"
             }
           ]
         }

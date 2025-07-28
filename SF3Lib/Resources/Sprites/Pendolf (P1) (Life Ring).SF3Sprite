@@ -81,24 +81,20 @@
         "4": {
           "Bobbing": [
             {
-              "FrameGroup": "Bobbing 1",
-              "Command": "Frame",
-              "Parameter": 4
+              "Frame": "Bobbing 1",
+              "Duration": 4
             },
             {
-              "FrameGroup": "Bobbing 2",
-              "Command": "Frame",
-              "Parameter": 2
+              "Frame": "Bobbing 2",
+              "Duration": 2
             },
             {
-              "FrameGroup": "Bobbing 3",
-              "Command": "Frame",
-              "Parameter": 4
+              "Frame": "Bobbing 3",
+              "Duration": 4
             },
             {
-              "FrameGroup": "Bobbing 2",
-              "Command": "Frame",
-              "Parameter": 2
+              "Frame": "Bobbing 2",
+              "Duration": 2
             },
             {
               "Command": "GotoFrameOffset",
@@ -107,13 +103,11 @@
           ],
           "StillFrame": [
             {
-              "FrameGroup": "Bobbing 1",
-              "Command": "Frame",
-              "Parameter": 10
+              "Frame": "Bobbing 1",
+              "Duration": 10
             },
             {
-              "Command": "Stop",
-              "Parameter": 0
+              "Command": "Stop"
             }
           ]
         }

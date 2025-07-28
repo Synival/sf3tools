@@ -213,7 +213,7 @@
         "4": {
           "Nodding": [
             {
-              "Frames": {
+              "Frame": {
                 "SSE": {
                   "Frame": "Walking 2",
                   "Direction": "S"
@@ -231,23 +231,19 @@
                   "Direction": "NE"
                 }
               },
-              "Command": "Frame",
-              "Parameter": 2
+              "Duration": 2
             },
             {
-              "FrameGroup": "Nodding 1",
-              "Command": "Frame",
-              "Parameter": 2
+              "Frame": "Nodding 1",
+              "Duration": 2
             },
             {
-              "FrameGroup": "Nodding 2",
-              "Command": "Frame",
-              "Parameter": 2
+              "Frame": "Nodding 2",
+              "Duration": 2
             },
             {
-              "FrameGroup": "Nodding 1",
-              "Command": "Frame",
-              "Parameter": 2
+              "Frame": "Nodding 1",
+              "Duration": 2
             },
             {
               "Command": "GotoAnimation",
@@ -256,7 +252,7 @@
           ],
           "ShakingHead (Once)": [
             {
-              "Frames": {
+              "Frame": {
                 "SSE": {
                   "Frame": "Walking 2",
                   "Direction": "S"
@@ -274,23 +270,19 @@
                   "Direction": "NE"
                 }
               },
-              "Command": "Frame",
-              "Parameter": 2
+              "Duration": 2
             },
             {
-              "FrameGroup": "ShakingHead 1",
-              "Command": "Frame",
-              "Parameter": 2
+              "Frame": "ShakingHead 1",
+              "Duration": 2
             },
             {
-              "FrameGroup": "ShakingHead 2",
-              "Command": "Frame",
-              "Parameter": 2
+              "Frame": "ShakingHead 2",
+              "Duration": 2
             },
             {
-              "FrameGroup": "ShakingHead 1",
-              "Command": "Frame",
-              "Parameter": 2
+              "Frame": "ShakingHead 1",
+              "Duration": 2
             },
             {
               "Command": "GotoAnimation",
@@ -299,7 +291,7 @@
           ],
           "StillFrame (NESW)": [
             {
-              "Frames": {
+              "Frame": {
                 "SSE": {
                   "Frame": "Walking 2",
                   "Direction": "S"
@@ -317,17 +309,15 @@
                   "Direction": "NE"
                 }
               },
-              "Command": "Frame",
-              "Parameter": 10
+              "Duration": 10
             },
             {
-              "Command": "Stop",
-              "Parameter": 0
+              "Command": "Stop"
             }
           ],
           "Walking (NESW, Faster)": [
             {
-              "Frames": {
+              "Frame": {
                 "SSE": {
                   "Frame": "Walking 1",
                   "Direction": "S"
@@ -345,11 +335,10 @@
                   "Direction": "NE"
                 }
               },
-              "Command": "Frame",
-              "Parameter": 4
+              "Duration": 4
             },
             {
-              "Frames": {
+              "Frame": {
                 "SSE": {
                   "Frame": "Walking 2",
                   "Direction": "S"
@@ -367,11 +356,10 @@
                   "Direction": "NE"
                 }
               },
-              "Command": "Frame",
-              "Parameter": 4
+              "Duration": 4
             },
             {
-              "Frames": {
+              "Frame": {
                 "SSE": {
                   "Frame": "Walking 3",
                   "Direction": "S"
@@ -389,11 +377,10 @@
                   "Direction": "NE"
                 }
               },
-              "Command": "Frame",
-              "Parameter": 4
+              "Duration": 4
             },
             {
-              "Frames": {
+              "Frame": {
                 "SSE": {
                   "Frame": "Walking 4",
                   "Direction": "S"
@@ -411,11 +398,10 @@
                   "Direction": "NE"
                 }
               },
-              "Command": "Frame",
-              "Parameter": 4
+              "Duration": 4
             },
             {
-              "Frames": {
+              "Frame": {
                 "SSE": {
                   "Frame": "Walking 2",
                   "Direction": "S"
@@ -433,11 +419,10 @@
                   "Direction": "NE"
                 }
               },
-              "Command": "Frame",
-              "Parameter": 4
+              "Duration": 4
             },
             {
-              "Frames": {
+              "Frame": {
                 "SSE": {
                   "Frame": "Walking 5",
                   "Direction": "S"
@@ -455,8 +440,7 @@
                   "Direction": "NE"
                 }
               },
-              "Command": "Frame",
-              "Parameter": 4
+              "Duration": 4
             },
             {
               "Command": "GotoFrameOffset",
@@ -465,7 +449,7 @@
           ],
           "Walking (NESW, Slower)": [
             {
-              "Frames": {
+              "Frame": {
                 "SSE": {
                   "Frame": "Walking 1",
                   "Direction": "S"
@@ -483,11 +467,10 @@
                   "Direction": "NE"
                 }
               },
-              "Command": "Frame",
-              "Parameter": 5
+              "Duration": 5
             },
             {
-              "Frames": {
+              "Frame": {
                 "SSE": {
                   "Frame": "Walking 2",
                   "Direction": "S"
@@ -505,11 +488,10 @@
                   "Direction": "NE"
                 }
               },
-              "Command": "Frame",
-              "Parameter": 5
+              "Duration": 5
             },
             {
-              "Frames": {
+              "Frame": {
                 "SSE": {
                   "Frame": "Walking 3",
                   "Direction": "S"
@@ -527,11 +509,10 @@
                   "Direction": "NE"
                 }
               },
-              "Command": "Frame",
-              "Parameter": 5
+              "Duration": 5
             },
             {
-              "Frames": {
+              "Frame": {
                 "SSE": {
                   "Frame": "Walking 4",
                   "Direction": "S"
@@ -549,11 +530,10 @@
                   "Direction": "NE"
                 }
               },
-              "Command": "Frame",
-              "Parameter": 5
+              "Duration": 5
             },
             {
-              "Frames": {
+              "Frame": {
                 "SSE": {
                   "Frame": "Walking 2",
                   "Direction": "S"
@@ -571,11 +551,10 @@
                   "Direction": "NE"
                 }
               },
-              "Command": "Frame",
-              "Parameter": 5
+              "Duration": 5
             },
             {
-              "Frames": {
+              "Frame": {
                 "SSE": {
                   "Frame": "Walking 5",
                   "Direction": "S"
@@ -593,8 +572,7 @@
                   "Direction": "NE"
                 }
               },
-              "Command": "Frame",
-              "Parameter": 5
+              "Duration": 5
             },
             {
               "Command": "GotoFrameOffset",

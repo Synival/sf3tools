@@ -22,18 +22,16 @@
         "1": {
           "StillFrame (Mask)": [
             {
-              "Frames": {
+              "Frame": {
                 "First": {
                   "Frame": "Mask 1",
                   "Direction": "SSE"
                 }
               },
-              "Command": "Frame",
-              "Parameter": 10
+              "Duration": 10
             },
             {
-              "Command": "Stop",
-              "Parameter": 0
+              "Command": "Stop"
             }
           ]
         }

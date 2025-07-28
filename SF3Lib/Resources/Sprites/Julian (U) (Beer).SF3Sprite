@@ -81,24 +81,20 @@
         "4": {
           "Drinking": [
             {
-              "FrameGroup": "Drinking 1",
-              "Command": "Frame",
-              "Parameter": 10
+              "Frame": "Drinking 1",
+              "Duration": 10
             },
             {
-              "FrameGroup": "Drinking 2",
-              "Command": "Frame",
-              "Parameter": 4
+              "Frame": "Drinking 2",
+              "Duration": 4
             },
             {
-              "FrameGroup": "Drinking 3",
-              "Command": "Frame",
-              "Parameter": 15
+              "Frame": "Drinking 3",
+              "Duration": 15
             },
             {
-              "FrameGroup": "Drinking 2",
-              "Command": "Frame",
-              "Parameter": 2
+              "Frame": "Drinking 2",
+              "Duration": 2
             },
             {
               "Command": "GotoFrameOffset",
@@ -107,13 +103,11 @@
           ],
           "StillFrame": [
             {
-              "FrameGroup": "Drinking 1",
-              "Command": "Frame",
-              "Parameter": 10
+              "Frame": "Drinking 1",
+              "Duration": 10
             },
             {
-              "Command": "Stop",
-              "Parameter": 0
+              "Command": "Stop"
             }
           ]
         }

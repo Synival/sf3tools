@@ -58,9 +58,8 @@
         "4": {
           "StillFrame (Hovering, Change to 0)": [
             {
-              "FrameGroup": "Idle (Hovering) 1",
-              "Command": "Frame",
-              "Parameter": 10
+              "Frame": "Idle (Hovering) 1",
+              "Duration": 10
             },
             {
               "Command": "GotoAnimation",
@@ -69,9 +68,8 @@
           ],
           "StillFrame (Hovering, Repeat)": [
             {
-              "FrameGroup": "Idle (Hovering) 1",
-              "Command": "Frame",
-              "Parameter": 10
+              "Frame": "Idle (Hovering) 1",
+              "Duration": 10
             },
             {
               "Command": "GotoFrameOffset",
@@ -80,13 +78,11 @@
           ],
           "StillFrame (Hovering)": [
             {
-              "FrameGroup": "Idle (Hovering) 1",
-              "Command": "Frame",
-              "Parameter": 10
+              "Frame": "Idle (Hovering) 1",
+              "Duration": 10
             },
             {
-              "Command": "Stop",
-              "Parameter": 0
+              "Command": "Stop"
             }
           ]
         },
@@ -97,48 +93,43 @@
               "Parameter": 17
             },
             {
-              "Frames": {
+              "Frame": {
                 "First": {
                   "Frame": "Idle (Hovering) 1",
                   "Direction": "SSE"
                 }
               },
-              "Command": "Frame",
-              "Parameter": 10
+              "Duration": 10
             },
             {
-              "Frames": {
+              "Frame": {
                 "First": {
                   "Frame": "Glowing 1",
                   "Direction": "SSE"
                 }
               },
-              "Command": "Frame",
-              "Parameter": 10
+              "Duration": 10
             },
             {
-              "Frames": {
+              "Frame": {
                 "First": {
                   "Frame": "Glowing 2",
                   "Direction": "SSE"
                 }
               },
-              "Command": "Frame",
-              "Parameter": 10
+              "Duration": 10
             },
             {
-              "Frames": {
+              "Frame": {
                 "First": {
                   "Frame": "Glowing 3",
                   "Direction": "SSE"
                 }
               },
-              "Command": "Frame",
-              "Parameter": 10
+              "Duration": 10
             },
             {
-              "Command": "Stop",
-              "Parameter": 0
+              "Command": "Stop"
             }
           ]
         }

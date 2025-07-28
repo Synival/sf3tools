@@ -103,24 +103,20 @@
         "4": {
           "Idle (Battle)": [
             {
-              "FrameGroup": "Idle (Battle) 1",
-              "Command": "Frame",
-              "Parameter": 6
+              "Frame": "Idle (Battle) 1",
+              "Duration": 6
             },
             {
-              "FrameGroup": "Idle (Battle) 2",
-              "Command": "Frame",
-              "Parameter": 6
+              "Frame": "Idle (Battle) 2",
+              "Duration": 6
             },
             {
-              "FrameGroup": "Idle (Battle) 3",
-              "Command": "Frame",
-              "Parameter": 6
+              "Frame": "Idle (Battle) 3",
+              "Duration": 6
             },
             {
-              "FrameGroup": "Idle (Battle) 2",
-              "Command": "Frame",
-              "Parameter": 6
+              "Frame": "Idle (Battle) 2",
+              "Duration": 6
             },
             {
               "Command": "GotoFrameOffset",
@@ -129,13 +125,11 @@
           ],
           "StillFrame (Field)": [
             {
-              "FrameGroup": "Field 1",
-              "Command": "Frame",
-              "Parameter": 10
+              "Frame": "Field 1",
+              "Duration": 10
             },
             {
-              "Command": "Stop",
-              "Parameter": 0
+              "Command": "Stop"
             }
           ]
         }

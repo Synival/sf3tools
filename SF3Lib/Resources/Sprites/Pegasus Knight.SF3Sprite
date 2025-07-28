@@ -301,34 +301,28 @@
         "4": {
           "Flying (Bad Outline, Reduced, Redundant Frames)": [
             {
-              "FrameGroup": "Flying (Bad) 4",
-              "Command": "Frame",
-              "Parameter": 5
+              "Frame": "Flying (Bad) 4",
+              "Duration": 5
             },
             {
-              "FrameGroup": "Flying (Bad) 5",
-              "Command": "Frame",
-              "Parameter": 5
+              "Frame": "Flying (Bad) 5",
+              "Duration": 5
             },
             {
-              "FrameGroup": "Flying (Bad) 6",
-              "Command": "Frame",
-              "Parameter": 5
+              "Frame": "Flying (Bad) 6",
+              "Duration": 5
             },
             {
-              "FrameGroup": "Flying (Bad) 7",
-              "Command": "Frame",
-              "Parameter": 5
+              "Frame": "Flying (Bad) 7",
+              "Duration": 5
             },
             {
-              "FrameGroup": "Flying (Bad) 5",
-              "Command": "Frame",
-              "Parameter": 5
+              "Frame": "Flying (Bad) 5",
+              "Duration": 5
             },
             {
-              "FrameGroup": "Flying (Bad) 8",
-              "Command": "Frame",
-              "Parameter": 5
+              "Frame": "Flying (Bad) 8",
+              "Duration": 5
             },
             {
               "Command": "GotoFrameOffset",
@@ -337,24 +331,20 @@
           ],
           "Flying (Fast, Reduced)": [
             {
-              "FrameGroup": "Flying (Bad) 1",
-              "Command": "Frame",
-              "Parameter": 3
+              "Frame": "Flying (Bad) 1",
+              "Duration": 3
             },
             {
-              "FrameGroup": "Flying (Bad) 2",
-              "Command": "Frame",
-              "Parameter": 2
+              "Frame": "Flying (Bad) 2",
+              "Duration": 2
             },
             {
-              "FrameGroup": "Flying (Bad) 3",
-              "Command": "Frame",
-              "Parameter": 2
+              "Frame": "Flying (Bad) 3",
+              "Duration": 2
             },
             {
-              "FrameGroup": "Flying (Bad) 2",
-              "Command": "Frame",
-              "Parameter": 2
+              "Frame": "Flying (Bad) 2",
+              "Duration": 2
             },
             {
               "Command": "GotoFrameOffset",
@@ -363,44 +353,36 @@
           ],
           "Flying (Slow)": [
             {
-              "FrameGroup": "Flying 1",
-              "Command": "Frame",
-              "Parameter": 5
+              "Frame": "Flying 1",
+              "Duration": 5
             },
             {
-              "FrameGroup": "Flying 2",
-              "Command": "Frame",
-              "Parameter": 5
+              "Frame": "Flying 2",
+              "Duration": 5
             },
             {
-              "FrameGroup": "Flying 3",
-              "Command": "Frame",
-              "Parameter": 5
+              "Frame": "Flying 3",
+              "Duration": 5
             },
             {
-              "FrameGroup": "Flying 4",
-              "Command": "Frame",
-              "Parameter": 5
+              "Frame": "Flying 4",
+              "Duration": 5
             },
             {
-              "FrameGroup": "Flying 5",
-              "Command": "Frame",
-              "Parameter": 5
+              "Frame": "Flying 5",
+              "Duration": 5
             },
             {
-              "FrameGroup": "Flying 4",
-              "Command": "Frame",
-              "Parameter": 5
+              "Frame": "Flying 4",
+              "Duration": 5
             },
             {
-              "FrameGroup": "Flying 3",
-              "Command": "Frame",
-              "Parameter": 5
+              "Frame": "Flying 3",
+              "Duration": 5
             },
             {
-              "FrameGroup": "Flying 2",
-              "Command": "Frame",
-              "Parameter": 5
+              "Frame": "Flying 2",
+              "Duration": 5
             },
             {
               "Command": "GotoFrameOffset",
@@ -409,35 +391,29 @@
           ],
           "StillFrame (Bad Outline)": [
             {
-              "FrameGroup": "Flying (Bad) 4",
-              "Command": "Frame",
-              "Parameter": 10
+              "Frame": "Flying (Bad) 4",
+              "Duration": 10
             },
             {
-              "Command": "Stop",
-              "Parameter": 0
+              "Command": "Stop"
             }
           ],
           "StillFrame (Wings Down)": [
             {
-              "FrameGroup": "Flying (Bad) 1",
-              "Command": "Frame",
-              "Parameter": 10
+              "Frame": "Flying (Bad) 1",
+              "Duration": 10
             },
             {
-              "Command": "Stop",
-              "Parameter": 0
+              "Command": "Stop"
             }
           ],
           "StillFrame (Wings Up)": [
             {
-              "FrameGroup": "Flying 1",
-              "Command": "Frame",
-              "Parameter": 10
+              "Frame": "Flying 1",
+              "Duration": 10
             },
             {
-              "Command": "Stop",
-              "Parameter": 0
+              "Command": "Stop"
             }
           ]
         }

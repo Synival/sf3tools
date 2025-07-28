@@ -43,24 +43,20 @@
         "1": {
           "Popping": [
             {
-              "FrameGroup": "Popping 1",
-              "Command": "Frame",
-              "Parameter": 5
+              "Frame": "Popping 1",
+              "Duration": 5
             },
             {
-              "FrameGroup": "Popping 2",
-              "Command": "Frame",
-              "Parameter": 3
+              "Frame": "Popping 2",
+              "Duration": 3
             },
             {
-              "FrameGroup": "Popping 3",
-              "Command": "Frame",
-              "Parameter": 3
+              "Frame": "Popping 3",
+              "Duration": 3
             },
             {
-              "FrameGroup": "Popping 4",
-              "Command": "Frame",
-              "Parameter": 10
+              "Frame": "Popping 4",
+              "Duration": 10
             },
             {
               "Command": "GotoAnimation",
@@ -69,9 +65,8 @@
           ],
           "StillFrame (Bubble)": [
             {
-              "FrameGroup": "Popping 1",
-              "Command": "Frame",
-              "Parameter": 5
+              "Frame": "Popping 1",
+              "Duration": 5
             },
             {
               "Command": "GotoFrameOffset",
@@ -80,13 +75,11 @@
           ],
           "StillFrame (Transparent)": [
             {
-              "FrameGroup": "Popping 4",
-              "Command": "Frame",
-              "Parameter": 10
+              "Frame": "Popping 4",
+              "Duration": 10
             },
             {
-              "Command": "Stop",
-              "Parameter": 0
+              "Command": "Stop"
             }
           ]
         }

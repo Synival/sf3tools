@@ -81,24 +81,20 @@
         "4": {
           "Idle (Dangling)": [
             {
-              "FrameGroup": "Idle (Dangling) 1",
-              "Command": "Frame",
-              "Parameter": 10
+              "Frame": "Idle (Dangling) 1",
+              "Duration": 10
             },
             {
-              "FrameGroup": "Idle (Dangling) 2",
-              "Command": "Frame",
-              "Parameter": 4
+              "Frame": "Idle (Dangling) 2",
+              "Duration": 4
             },
             {
-              "FrameGroup": "Idle (Dangling) 3",
-              "Command": "Frame",
-              "Parameter": 4
+              "Frame": "Idle (Dangling) 3",
+              "Duration": 4
             },
             {
-              "FrameGroup": "Idle (Dangling) 2",
-              "Command": "Frame",
-              "Parameter": 4
+              "Frame": "Idle (Dangling) 2",
+              "Duration": 4
             },
             {
               "Command": "GotoFrameOffset",
@@ -107,13 +103,11 @@
           ],
           "StillFrame (Dangling)": [
             {
-              "FrameGroup": "Idle (Dangling) 1",
-              "Command": "Frame",
-              "Parameter": 10
+              "Frame": "Idle (Dangling) 1",
+              "Duration": 10
             },
             {
-              "Command": "Stop",
-              "Parameter": 0
+              "Command": "Stop"
             }
           ]
         }

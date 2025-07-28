@@ -50,44 +50,36 @@
         "1": {
           "OrbHovering": [
             {
-              "FrameGroup": "OrbHovering 1",
-              "Command": "Frame",
-              "Parameter": 5
+              "Frame": "OrbHovering 1",
+              "Duration": 5
             },
             {
-              "FrameGroup": "OrbHovering 2",
-              "Command": "Frame",
-              "Parameter": 5
+              "Frame": "OrbHovering 2",
+              "Duration": 5
             },
             {
-              "FrameGroup": "OrbHovering 3",
-              "Command": "Frame",
-              "Parameter": 5
+              "Frame": "OrbHovering 3",
+              "Duration": 5
             },
             {
-              "FrameGroup": "OrbHovering 4",
-              "Command": "Frame",
-              "Parameter": 5
+              "Frame": "OrbHovering 4",
+              "Duration": 5
             },
             {
-              "FrameGroup": "OrbHovering 5",
-              "Command": "Frame",
-              "Parameter": 5
+              "Frame": "OrbHovering 5",
+              "Duration": 5
             },
             {
-              "FrameGroup": "OrbHovering 4",
-              "Command": "Frame",
-              "Parameter": 5
+              "Frame": "OrbHovering 4",
+              "Duration": 5
             },
             {
-              "FrameGroup": "OrbHovering 3",
-              "Command": "Frame",
-              "Parameter": 5
+              "Frame": "OrbHovering 3",
+              "Duration": 5
             },
             {
-              "FrameGroup": "OrbHovering 2",
-              "Command": "Frame",
-              "Parameter": 5
+              "Frame": "OrbHovering 2",
+              "Duration": 5
             },
             {
               "Command": "GotoFrameOffset",
