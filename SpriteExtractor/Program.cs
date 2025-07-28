@@ -168,12 +168,30 @@ namespace SpriteExtractor {
             Console.WriteLine();
 
             var spriteDefs = CHR_Utils.CreateAllSpriteDefs();
-            var spriteInfos = CHR_Utils.GetUniqueSpriteInfos().OrderBy(x => x.Key).ToDictionary(x => x.Key, x => x.Value);
+            var allSpriteInfos = CHR_Utils.GetUniqueSpriteInfos().OrderBy(x => x.Key).ToDictionary(x => x.Key, x => x.Value);
 
             T MostCommonKey<T>(Dictionary<T, int> dict)
                 => dict.OrderByDescending(x => x.Value).ThenBy(x => x.Key).First().Key;
 
             foreach (var spriteDef in spriteDefs) {
+                var spriteInfos = allSpriteInfos
+                    .Where(x => x.Key.StartsWith($"{spriteDef.Name} ("))
+                    .ToDictionary();
+
+                var mostCommonInfos = spriteInfos
+                    .OrderByDescending(x => x.Value.RefCount)
+                    .FirstOrDefault();
+
+                // Extract the most common (Width x Height).
+                if (mostCommonInfos.Key != null) {
+                    var key = mostCommonInfos.Key;
+                    var spritesheetKeyPos = key.LastIndexOf('(') + 1;
+                    var spritesheetKey = key.Substring(spritesheetKeyPos, key.Length - spritesheetKeyPos - 1);
+                    var size = SpritesheetDef.KeyToDimensions(spritesheetKey);
+                    spriteDef.Width  = size.Width;
+                    spriteDef.Height = size.Height;
+                }
+
                 foreach (var spritesheet in spriteDef.Spritesheets) {
                     var key = $"{spriteDef.Name} ({spritesheet.Key})";
 
@@ -184,7 +202,7 @@ namespace SpriteExtractor {
                         key = "Zero (U) (48x24)";
 
                     if (spriteInfos.ContainsKey(key)) {
-                        var spriteInfo = spriteInfos[key];
+                        var spriteInfo = allSpriteInfos[key];
 
                         spritesheet.Value.SpriteID       = MostCommonKey(spriteInfo.SpriteIDCount);
                         spritesheet.Value.VerticalOffset = MostCommonKey(spriteInfo.VerticalOffsetCount);

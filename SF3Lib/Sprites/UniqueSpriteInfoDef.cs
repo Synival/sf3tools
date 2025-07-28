@@ -16,8 +16,11 @@ namespace SF3.Sprites {
                 dict.Add(value, amount);
             else
                 dict[value] += amount;
+
+            RefCount += amount;
         }
 
+        public int RefCount = 0;
         public Dictionary<int, int>   SpriteIDCount       = new Dictionary<int, int>();
         public Dictionary<byte, int>  VerticalOffsetCount = new Dictionary<byte, int>();
         public Dictionary<byte, int>  Unknown0x08Count    = new Dictionary<byte, int>();

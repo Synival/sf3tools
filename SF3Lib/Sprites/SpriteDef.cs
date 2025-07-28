@@ -66,7 +66,9 @@ namespace SF3.Sprites {
                 var jObj = (JObject) jToken;
                 var newDef = new SpriteDef();
 
-                newDef.Name = jObj.TryGetValue("Name", out var name) ? ((string) name) : null;
+                newDef.Name   = jObj.TryGetValue("Name",   out var name)   ? ((string) name) : null;
+                newDef.Width  = jObj.TryGetValue("Width",  out var width)  ? ((int?) width)  : null;
+                newDef.Height = jObj.TryGetValue("Height", out var height) ? ((int?) height) : null;
 
                 if (jObj.TryGetValue("Spritesheets", out var spritesheets) && spritesheets.Type == JTokenType.Object) {
                     newDef.Spritesheets = ((IDictionary<string, JToken>) spritesheets)
@@ -95,6 +97,8 @@ namespace SF3.Sprites {
         public override string ToString() => Name;
 
         public string Name;
+        public int? Width;
+        public int? Height;
         public Dictionary<string, SpritesheetDef> Spritesheets;
     }
 }

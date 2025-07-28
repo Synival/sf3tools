@@ -38,12 +38,14 @@ namespace SF3.CHR {
                 var jObj = (JObject) jToken;
 
                 SpriteName     = jObj.TryGetValue("Name",           out var spriteName)     ? ((string) spriteName)  : null;
-                Width          = jObj.TryGetValue("Width",          out var width)          ? ((int) width)          : 0;
-                Height         = jObj.TryGetValue("Height",         out var height)         ? ((int) height)         : 0;
                 Directions     = jObj.TryGetValue("Directions",     out var directions)     ? ((int) directions)     : 0;
                 PromotionLevel = jObj.TryGetValue("PromotionLevel", out var promotionLevel) ? ((int) promotionLevel) : 0;
 
                 var spriteDef = SpriteUtils.GetSpriteDef(SpriteName);
+
+                Width          = jObj.TryGetValue("Width",          out var width)          ? ((int) width)          : spriteDef?.Width  ?? 0;
+                Height         = jObj.TryGetValue("Height",         out var height)         ? ((int) height)         : spriteDef?.Height ?? 0;
+
                 var spritesheet = (spriteDef?.Spritesheets?.TryGetValue(SpritesheetDef.DimensionsToKey(Width, Height), out var ssOut) == true) ? ssOut : null;
 
                 SpriteID       = jObj.TryGetValue("SpriteID",       out var spriteId)       ? ((int) spriteId)       : spritesheet?.SpriteID       ?? 0;
@@ -77,14 +79,17 @@ namespace SF3.CHR {
             var jsonSettings = new JsonSerializer { NullValueHandling = NullValueHandling.Ignore };
 
             jObj.Add("Name",       new JValue(SpriteName));
-            jObj.Add("Width",      new JValue(Width));
-            jObj.Add("Height",     new JValue(Height));
             jObj.Add("Directions", new JValue(Directions));
             if (PromotionLevel != 0)
                 jObj.Add("PromotionLevel", new JValue(PromotionLevel));
 
             var spriteDef = SpriteUtils.GetSpriteDef(SpriteName);
             var spritesheet = (spriteDef?.Spritesheets?.TryGetValue(SpritesheetDef.DimensionsToKey(Width, Height), out var ssOut) == true) ? ssOut : null;
+
+            if (Width != spriteDef.Width || Height != spriteDef.Height) {
+                jObj.Add("Width", new JValue(Width));
+                jObj.Add("Height", new JValue(Height));
+            }
 
             if (SpriteID != spritesheet?.SpriteID)
                 jObj.Add("SpriteID", new JValue(SpriteID));
