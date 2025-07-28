@@ -105,7 +105,7 @@ namespace SF3.Sprites {
             jObj.Add("Scale",          new JValue(Scale));
 
             if (FrameGroups != null)
-                jObj.Add("FrameGroups", JToken.FromObject(FrameGroups, jsonSettings));
+                jObj.Add("FrameGroups", JToken.FromObject(FrameGroups.ToDictionary(x => x.Key, x => x.Value.ToJToken())));
             if (AnimationByDirections != null)
                 jObj.Add("AnimationByDirections", JToken.FromObject(AnimationByDirections, jsonSettings));
 

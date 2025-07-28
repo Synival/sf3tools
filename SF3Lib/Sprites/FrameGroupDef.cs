@@ -1,9 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using CommonLib;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
 namespace SF3.Sprites {
-    public class FrameGroupDef {
+    public class FrameGroupDef : IJsonResource {
         public FrameGroupDef() { }
 
         public FrameGroupDef(UniqueFrameDef[] frames) {
@@ -19,8 +21,10 @@ namespace SF3.Sprites {
         /// </summary>
         /// <param name="json">FrameGroupDef in JSON format as a string.</param>
         /// <returns>A new FrameGroupDef if deserializing was successful, or 'null' if not.</returns>
-        public static FrameGroupDef FromJSON(string json)
-            => FromJToken(JToken.Parse(json));
+        public static FrameGroupDef FromJSON(string json) {
+            var frameGroupDef = new FrameGroupDef();
+            return frameGroupDef.AssignFromJSON_String(json) ? frameGroupDef : null;
+        }
 
         /// <summary>
         /// Deserializes a JSON object of a FrameGroupDef.
@@ -28,23 +32,48 @@ namespace SF3.Sprites {
         /// <param name="jToken">FrameGroupDef as a JToken.</param>
         /// <returns>A new FrameGroupDef if deserializing was successful, or 'null' if not.</returns>
         public static FrameGroupDef FromJToken(JToken jToken) {
-            if (jToken == null || jToken.Type != JTokenType.Object)
-                return null;
+            var frameGroupDef = new FrameGroupDef();
+            return frameGroupDef.AssignFromJToken(jToken) ? frameGroupDef : null;
+        }
 
-            try {
-                var jObj = (JObject) jToken;
-                var newDef = new FrameGroupDef();
+        public bool AssignFromJSON_String(string json)
+            => AssignFromJToken(JToken.Parse(json));
 
-                if (jObj.TryGetValue("Frames", out var frames) && frames.Type == JTokenType.Object) {
-                    newDef.Frames = ((IDictionary<string, JToken>) frames)
-                        .ToDictionary(x => x.Key, x => FrameDef.FromJToken(x.Value));
-                }
+        public bool AssignFromJToken(JToken jToken) {
+            if (jToken == null)
+                return false;
 
-                return newDef;
+            switch (jToken.Type) {
+                case JTokenType.Object:
+                    try {
+                        var jObj = (JObject) jToken;
+
+                        if (jObj.TryGetValue("Frames", out var frames) && frames.Type == JTokenType.Object) {
+                            Frames = ((IDictionary<string, JToken>) frames)
+                                .ToDictionary(x => x.Key, x => FrameDef.FromJToken(x.Value));
+                        }
+                    }
+                    catch {
+                        return false;
+                    }
+                    return true;
+
+                default:
+                    return false;
             }
-            catch {
-                return null;
-            }
+        }
+
+        public string ToJSON_String()
+            => ToJToken().ToString(Formatting.Indented);
+
+        public JToken ToJToken() {
+            var jObj = new JObject();
+            var jsonSettings = new JsonSerializer { NullValueHandling = NullValueHandling.Ignore };
+
+            if (Frames != null)
+                jObj.Add("Frames", JToken.FromObject(Frames, jsonSettings));
+
+            return jObj;
         }
 
         public override string ToString() => string.Join(", ", Frames.Keys);
