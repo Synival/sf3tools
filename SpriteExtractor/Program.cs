@@ -273,26 +273,26 @@ namespace SpriteExtractor {
                     var frameCount     = frames.Length;
                     var totalPixels    = pixelsPerFrame * frameCount;
 
-                    var imageWidthInFrames  = Math.Max(frameDirections.Count, frameGroups.Max(x => x.Value.Length));
-                    var imageHeightInFrames = frameGroups.Count;
+                    var imageWidthInFrames  = frameGroups.Count;
+                    var imageHeightInFrames = Math.Max(frameDirections.Count, frameGroups.Max(x => x.Value.Length));
 
                     var imageWidthInPixels  = imageWidthInFrames * frameWidthInPixels;
                     var imageHeightInPixels = imageHeightInFrames * frameHeightInPixels;
 
                     var newData = new byte[imageWidthInPixels * imageHeightInPixels * 2];
 
-                    int y = 0;
+                    int x = 0;
                     foreach (var frameGroup in frameGroups) {
-                        // Normally, frames' X positions are set according to their direction.
+                        // Normally, frames' Y positions are set according to their direction.
                         // But if a frame group had multiple directions -- which, unfortunately, can happen --
-                        // set the frames' X position to their index.
+                        // set the frames' Y position to their index.
                         bool hasDuplicateDirections = frameGroup.Value
                             .GroupBy(x => x.FrameInfo.Direction)
                             .Any(x => x.Count() != 1);
 
                         int frameIndex = 0;
                         foreach (var frame in frameGroup.Value) {
-                            int x = ((hasDuplicateDirections) ? frameIndex : frameDirectionToIndex[frame.FrameInfo.Direction]) * frameWidthInPixels;
+                            int y = ((hasDuplicateDirections) ? frameIndex : frameDirectionToIndex[frame.FrameInfo.Direction]) * frameHeightInPixels;
                             frame.SpriteDefFrame.SpriteSheetX = x;
                             frame.SpriteDefFrame.SpriteSheetY = y;
 
@@ -326,7 +326,7 @@ namespace SpriteExtractor {
 
                             frameIndex++;
                         }
-                        y += frameHeightInPixels;
+                        x += frameWidthInPixels;
                     }
 
                     var framesByHash = frames
