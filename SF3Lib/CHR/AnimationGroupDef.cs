@@ -1,15 +1,19 @@
 ﻿using System.Linq;
+using CommonLib;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
 namespace SF3.CHR {
-    public class AnimationGroupDef {
+    public class AnimationGroupDef : IJsonResource {
         /// <summary>
         /// Deserializes a JSON object of a AnimationGroupDef.
         /// </summary>
         /// <param name="json">AnimationGroupDef in JSON format as a string.</param>
         /// <returns>A new AnimationGroupDef if deserializing was successful, or 'null' if not.</returns>
-        public static AnimationGroupDef FromJSON(string json)
-            => FromJToken(JToken.Parse(json));
+        public static AnimationGroupDef FromJSON(string json) {
+            var aniGroup = new AnimationGroupDef();
+            return aniGroup.AssignFromJSON_String(json) ? aniGroup : null;
+        }
 
         /// <summary>
         /// Deserializes a JSON object of a AnimationGroupDef.
@@ -17,26 +21,52 @@ namespace SF3.CHR {
         /// <param name="jToken">AnimationGroupDef as a JToken.</param>
         /// <returns>A new AnimationGroupDef if deserializing was successful, or 'null' if not.</returns>
         public static AnimationGroupDef FromJToken(JToken jToken) {
+            var aniGroup = new AnimationGroupDef();
+            return aniGroup.AssignFromJToken(jToken) ? aniGroup : null;
+        }
+
+        public bool AssignFromJSON_String(string json)
+            => AssignFromJToken(JToken.Parse(json));
+
+        public bool AssignFromJToken(JToken jToken) {
             if (jToken == null || jToken.Type != JTokenType.Object)
-                return null;
+                return false;
 
             try {
                 var jObj = (JObject) jToken;
-                var newDef = new AnimationGroupDef();
 
-                newDef.Directions = jObj.TryGetValue("Directions", out var directions) ? ((int?) directions) : null;
-                newDef.Width      = jObj.TryGetValue("Width",      out var width)      ? ((int?) width)      : null;
-                newDef.Height     = jObj.TryGetValue("Height",     out var height)     ? ((int?) height)     : null;
+                Directions = jObj.TryGetValue("Directions", out var directions) ? ((int?) directions) : null;
+                Width      = jObj.TryGetValue("Width",      out var width)      ? ((int?) width)      : null;
+                Height     = jObj.TryGetValue("Height",     out var height)     ? ((int?) height)     : null;
 
-                newDef.Animations = jObj.TryGetValue("Animations", out var animations)
+                Animations = jObj.TryGetValue("Animations", out var animations)
                     ? animations.Select(x => (string) x).ToArray()
                     : null;
 
-                return newDef;
+                return true;
             }
             catch {
-                return null;
+                return false;
             }
+        }
+
+        public string ToJSON_String()
+            => ToJToken().ToString(Formatting.Indented);
+
+        public JToken ToJToken() {
+            var jsonSettings = new JsonSerializer { NullValueHandling = NullValueHandling.Ignore };
+
+            var jObj = new JObject();
+            if (Directions.HasValue)
+                jObj.Add("Directions", new JValue(Directions));
+            if (Width.HasValue)
+                jObj.Add("Width", new JValue(Width.Value));
+            if (Height.HasValue)
+                jObj.Add("Height", new JValue(Height.Value));
+            if (Animations != null)
+                jObj.Add("Animations", JToken.FromObject(Animations, jsonSettings));
+
+            return jObj;
         }
 
         public override string ToString()
