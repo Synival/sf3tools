@@ -216,7 +216,7 @@ namespace SpriteExtractor {
             // For some reason, we have to add "Nothing (Broken, No Frames)" to the "None" spritedef.
             spriteDefs.First(x => x.Name == "None").Spritesheets.First().Value.AnimationByDirections.First().Value.Animations.Add(
                 "Nothing (Broken, No Frames)",
-                new AnimationDef() { AnimationFrames = [] }
+                new AnimationDef() { AnimationCommands = [] }
             );
 
             Console.WriteLine();

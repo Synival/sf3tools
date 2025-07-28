@@ -64,13 +64,13 @@ namespace SF3.Models.Structs.CHR {
                 return hashes;
             }
 
-            AnimationInfo.AnimationFrames = AnimationFrames
+            AnimationInfo.AnimationCommands = AnimationFrames
                 .Select(x => {
                     if (x.HasTexture)
                         texCount++;
                     return (x.FrameID < 0xF1 || x.FrameID == 0xFC)
-                        ? new AnimationFrameDef(GetAnimationFrameHashes(x), x.Duration)
-                        : new AnimationFrameDef((SpriteAnimationFrameCommandType) x.FrameID, x.Duration);
+                        ? new AnimationCommandDef(GetAnimationFrameHashes(x), x.Duration)
+                        : new AnimationCommandDef((SpriteAnimationFrameCommandType) x.FrameID, x.Duration);
                 }).ToArray();
 
             var uniqueFramesWithTextures = _framesWithTextures.Distinct().ToArray();

@@ -17,5 +17,8 @@ namespace SF3.Types {
     public static class SpriteAnimationFrameCommandTypeExtensions {
         public static bool IsEndingCommand(this SpriteAnimationFrameCommandType cmd)
             => cmd == SpriteAnimationFrameCommandType .Stop || cmd == SpriteAnimationFrameCommandType.GotoFrameOffset || cmd == SpriteAnimationFrameCommandType.GotoAnimation;
+
+        public static bool NeedsParameter(this SpriteAnimationFrameCommandType cmd)
+            => cmd != SpriteAnimationFrameCommandType.Stop;
     }
 }

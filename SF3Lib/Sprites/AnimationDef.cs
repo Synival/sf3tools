@@ -8,7 +8,7 @@ namespace SF3.Sprites {
         public AnimationDef() { }
 
         public AnimationDef(UniqueAnimationDef aniInfo) : this() {
-            AnimationFrames = aniInfo.AnimationFrames;
+            AnimationCommands = aniInfo.AnimationCommands;
         }
 
         /// <summary>
@@ -41,7 +41,7 @@ namespace SF3.Sprites {
             switch (jToken.Type) {
                 case JTokenType.Array:
                     try {
-                        AnimationFrames = jToken.Select(x => AnimationFrameDef.FromJToken(x)).ToArray();
+                        AnimationCommands = jToken.Select(x => AnimationCommandDef.FromJToken(x)).ToArray();
                     }
                     catch {
                         return false;
@@ -57,10 +57,10 @@ namespace SF3.Sprites {
             => ToJToken().ToString(Formatting.Indented);
 
         public JToken ToJToken()
-            => JToken.FromObject(AnimationFrames.Select(x => x.ToJToken()).ToArray());
+            => JToken.FromObject(AnimationCommands.Select(x => x.ToJToken()).ToArray());
 
-        public override string ToString() => string.Join(", ", AnimationFrames.Select(x => x.ToString()));
+        public override string ToString() => string.Join(", ", AnimationCommands.Select(x => x.ToString()));
 
-        public AnimationFrameDef[] AnimationFrames;
+        public AnimationCommandDef[] AnimationCommands;
     };
 }

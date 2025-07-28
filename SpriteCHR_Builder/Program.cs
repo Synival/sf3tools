@@ -136,7 +136,7 @@ namespace SpriteCHR_Builder {
             var uniqueAnimationFramesByVariant = spriteDef.Spritesheets
                 .SelectMany(x => x.Value.AnimationByDirections.Select(y => (Spritesheet: x, Variant: y)))
                 .Select(x => (Variant: x.Variant.Value, UniqueAnimationFrames: x.Variant.Value.Animations.Values
-                    .SelectMany(y => y.AnimationFrames)
+                    .SelectMany(y => y.AnimationCommands)
                     .Where(y => y != null && y.HasFrame)
                     .GroupBy(y => AggregateFrameHashes(y, x.Spritesheet.Value.FrameGroups, CHR_Utils.DirectionsToFrameCount(x.Variant.Key)))
                     .Select(y => y.First())
@@ -147,7 +147,7 @@ namespace SpriteCHR_Builder {
             var frameInfos = spriteDef.Spritesheets
                 .SelectMany(x => x.Value.AnimationByDirections.Select(y => (Spritesheet: x, Variant: y)))
                 .SelectMany((x, xi) => (x.Variant.Value.Animations ?? [])
-                    .SelectMany((y, yi) => (y.Value.AnimationFrames ?? [])
+                    .SelectMany((y, yi) => (y.Value.AnimationCommands ?? [])
                         .Where(z => uniqueAnimationFramesByVariant[x.Variant.Value].Contains(z))
                         .SelectMany((z, zi) => GetAnimationFrameHashes(z, x.Spritesheet.Value.FrameGroups, CHR_Utils.DirectionsToFrameCount(x.Variant.Key))
                             .Where(zz => zz != null)
@@ -260,9 +260,9 @@ namespace SpriteCHR_Builder {
             fileOut.Write(new byte[0x16]);
         }
 
-        private static string[] GetAnimationFrameHashes(AnimationFrameDef aniFrameDef, Dictionary<string, FrameGroupDef> frameGroups, int frameCount) {
-            if (aniFrameDef.FrameGroup != null && frameGroups.ContainsKey(aniFrameDef.FrameGroup)) {
-                var fg = frameGroups[aniFrameDef.FrameGroup];
+        private static string[] GetAnimationFrameHashes(AnimationCommandDef aniCommand, Dictionary<string, FrameGroupDef> frameGroups, int frameCount) {
+            if (aniCommand.FrameGroup != null && frameGroups.ContainsKey(aniCommand.FrameGroup)) {
+                var fg = frameGroups[aniCommand.FrameGroup];
                 return Enumerable
                     .Range(0, frameCount)
                     .Select(x => CHR_Utils.FrameNumberToSpriteDir(frameCount, x))
@@ -270,12 +270,12 @@ namespace SpriteCHR_Builder {
                     .ToArray();
             }
 
-            if (aniFrameDef.Frames != null) {
+            if (aniCommand.Frames != null) {
                 var hashes =
                     Enumerable
                     .Range(0, frameCount)
                     .Select(x => CHR_Utils.FrameNumberToSpriteDir(frameCount, x))
-                    .Select(x => aniFrameDef.Frames.TryGetValue(x, out var frameOut) ? frameOut : null)
+                    .Select(x => aniCommand.Frames.TryGetValue(x, out var frameOut) ? frameOut : null)
                     .Select(x => (x != null && frameGroups.TryGetValue(x.Frame, out var fg)) ? (fg.Frames.TryGetValue(x.Direction, out var f) ? f.Hash : null) : null)
                     .Cast<string>()
                     .ToArray();
@@ -284,11 +284,11 @@ namespace SpriteCHR_Builder {
             }
 
             // There should never be animations whose frames couldn't be found.
-            return aniFrameDef.FrameHashes ?? [];
+            return aniCommand.FrameHashes ?? [];
         }
 
-        private static string AggregateFrameHashes(AnimationFrameDef aniFrameDef, Dictionary<string, FrameGroupDef> frameGroups, int frameCount) {
-            var hashes = GetAnimationFrameHashes (aniFrameDef, frameGroups, frameCount);
+        private static string AggregateFrameHashes(AnimationCommandDef aniCommand, Dictionary<string, FrameGroupDef> frameGroups, int frameCount) {
+            var hashes = GetAnimationFrameHashes(aniCommand, frameGroups, frameCount);
             return hashes.Aggregate((a, b) => a + ((b == null) ? "_" : b));
         }
 
@@ -318,12 +318,12 @@ namespace SpriteCHR_Builder {
                     int aniIndex = 0;
 
                     var validAnimations = variant.Value.Animations.Values
-                        .Where(x => x.AnimationFrames
+                        .Where(x => x.AnimationCommands
                             .All(y => y.Command != SpriteAnimationFrameCommandType.Frame || y.HasFullFrame(variant.Key)))
                         .ToArray();
 
                     foreach (var animation in validAnimations) {
-                        var aniFrameFrameIds = animation.AnimationFrames
+                        var aniFrameFrameIds = animation.AnimationCommands
                             .Select((x, i) => (
                                 FrameID: x.Command == SpriteAnimationFrameCommandType.Frame
                                     ? GetFrameIDForHashes(variantFrames, GetAnimationFrameHashes(x, spritesheet.Value.FrameGroups, CHR_Utils.DirectionsToFrameCount(variant.Key)))
@@ -337,16 +337,16 @@ namespace SpriteCHR_Builder {
 
                         aniFrameTableOffsets[aniIndex] = (int) fileOut.Position;
                         var aniFrameIndex = 0;
-                        foreach (var aniFrame in animation.AnimationFrames) {
-                            if (aniFrame.Command == SpriteAnimationFrameCommandType.Frame) {
+                        foreach (var aniCommand in animation.AnimationCommands) {
+                            if (aniCommand.Command == SpriteAnimationFrameCommandType.Frame) {
                                 byteData.SetWord(0x00, aniFrameFrameIds[aniFrameIndex].FrameID.Value);
-                                byteData.SetWord(0x02, aniFrame.Parameter);
+                                byteData.SetWord(0x02, aniCommand.Parameter);
                             }
                             else {
                                 // TODO: actually support commands here
                                 // TODO: going to another animation should be a hash lookup if it isn't already
-                                byteData.SetWord(0x00, (byte) aniFrame.Command);
-                                byteData.SetWord(0x02, aniFrame.Parameter);
+                                byteData.SetWord(0x00, (byte) aniCommand.Command);
+                                byteData.SetWord(0x02, aniCommand.Parameter);
                             }
 
                             fileOut.Write(byteData.Data.GetDataCopyOrReference());

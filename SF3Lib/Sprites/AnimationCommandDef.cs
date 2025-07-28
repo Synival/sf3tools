@@ -9,10 +9,10 @@ using SF3.Types;
 using SF3.Utils;
 
 namespace SF3.Sprites {
-    public class AnimationFrameDef : IJsonResource {
-        public AnimationFrameDef() { }
+    public class AnimationCommandDef : IJsonResource {
+        public AnimationCommandDef() { }
 
-        public AnimationFrameDef(string[] frameHashes, int duration) {
+        public AnimationCommandDef(string[] frameHashes, int duration) {
             FrameGroup  = null;
             Frames      = null;
             FrameHashes = frameHashes ?? new string[0];
@@ -20,7 +20,7 @@ namespace SF3.Sprites {
             Parameter   = duration;
         }
 
-        public AnimationFrameDef(SpriteAnimationFrameCommandType command, int parameter) {
+        public AnimationCommandDef(SpriteAnimationFrameCommandType command, int parameter) {
             FrameGroup  = null;
             FrameHashes = (command == SpriteAnimationFrameCommandType.Frame) ? new string[0] : null;
             Command     = command;
@@ -32,8 +32,8 @@ namespace SF3.Sprites {
         /// </summary>
         /// <param name="json">AnimationFrameDef in JSON format as a string.</param>
         /// <returns>A new AnimationFrameDef if deserializing was successful, or 'null' if not.</returns>
-        public static AnimationFrameDef FromJSON(string json) {
-            var animationFrameDef = new AnimationFrameDef();
+        public static AnimationCommandDef FromJSON(string json) {
+            var animationFrameDef = new AnimationCommandDef();
             return animationFrameDef.AssignFromJSON_String(json) ? animationFrameDef : null;
         }
 
@@ -42,8 +42,8 @@ namespace SF3.Sprites {
         /// </summary>
         /// <param name="jToken">AnimationFrameDef as a JToken.</param>
         /// <returns>A new AnimationFrameDef if deserializing was successful, or 'null' if not.</returns>
-        public static AnimationFrameDef FromJToken(JToken jToken) {
-            var animationFrameDef = new AnimationFrameDef();
+        public static AnimationCommandDef FromJToken(JToken jToken) {
+            var animationFrameDef = new AnimationCommandDef();
             return animationFrameDef.AssignFromJToken(jToken) ? animationFrameDef : null;
         }
 
@@ -59,15 +59,25 @@ namespace SF3.Sprites {
                     try {
                         var jObj = (JObject) jToken;
 
-                        FrameGroup = jObj.TryGetValue("FrameGroup", out var frameGroup) ? ((string) frameGroup) : null;
+                        if (jObj.TryGetValue("Frame", out var frames)) {
+                            switch (frames.Type) {
+                                case JTokenType.String:
+                                    FrameGroup = (string) frames;
+                                    break;
 
-                        if (jObj.TryGetValue("Frames", out var frames) && frames.Type == JTokenType.Object) {
-                            Frames = ((IDictionary<string, JToken>) frames)
-                                .ToDictionary(x => (SpriteFrameDirection) Enum.Parse(typeof(SpriteFrameDirection), x.Key), x => AnimationFrameDirectionDef.FromJToken(x.Value));
+                                case JTokenType.Object:
+                                    Frames = ((IDictionary<string, JToken>) frames)
+                                        .ToDictionary(x => (SpriteFrameDirection) Enum.Parse(typeof(SpriteFrameDirection), x.Key), x => AnimationFrameDirectionDef.FromJToken(x.Value));
+                                    break;
+                            }
+
+                            Command = SpriteAnimationFrameCommandType.Frame;
+                            Parameter = jObj.TryGetValue("Duration", out var parameter) ? ((int) parameter) : 0;
                         }
-
-                        Command   = jObj.TryGetValue("Command",   out var command)   ? (command.ToObject<SpriteAnimationFrameCommandType>()) : SpriteAnimationFrameCommandType.Frame;
-                        Parameter = jObj.TryGetValue("Parameter", out var parameter) ? ((int) parameter) : 0;
+                        else {
+                            Command = jObj.TryGetValue("Command",   out var command)   ? (command.ToObject<SpriteAnimationFrameCommandType>()) : SpriteAnimationFrameCommandType.Frame;
+                            Parameter = jObj.TryGetValue("Parameter", out var parameter) ? ((int) parameter) : 0;
+                        }
                     }
                     catch {
                         return false;
@@ -85,13 +95,18 @@ namespace SF3.Sprites {
         public JToken ToJToken() {
             var jObj = new JObject();
 
-            if (FrameGroup != null)
-                jObj.Add("FrameGroup", new JValue(FrameGroup));
-            if (Frames != null)
-                jObj.Add("Frames", JToken.FromObject(Frames.ToDictionary(x => x.Key.ToString(), x => x.Value.ToJToken())));
-
-            jObj.Add("Command", new JValue(Command.ToString()));
-            jObj.Add("Parameter", new JValue(Parameter));
+            if (FrameGroup != null || Frames != null) {
+                if (FrameGroup != null)
+                    jObj.Add("Frame", new JValue(FrameGroup));
+                else if (Frames != null)
+                    jObj.Add("Frame", JToken.FromObject(Frames.ToDictionary(x => x.Key.ToString(), x => x.Value.ToJToken())));
+                jObj.Add("Duration", new JValue(Parameter));
+            }
+            else {
+                jObj.Add("Command", new JValue(Command.ToString()));
+                if (Command.NeedsParameter() || Parameter != 0)
+                    jObj.Add("Parameter", new JValue(Parameter));
+            }
 
             return jObj;
         }

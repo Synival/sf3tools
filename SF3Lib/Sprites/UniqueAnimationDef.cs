@@ -10,7 +10,7 @@
             int frameCount,
             int duration,
             int missingFrames,
-            AnimationFrameDef[] animationFrames
+            AnimationCommandDef[] animationCommands
         ) {
             AnimationHash        = animationHash;
             SpriteName           = spriteName;
@@ -21,7 +21,7 @@
             FrameCommandCount    = frameCount;
             Duration             = duration;
             FrameTexturesMissing = missingFrames;
-            AnimationFrames      = animationFrames;
+            AnimationCommands    = animationCommands;
         }
 
         public override string ToString() => $"{SpriteName} ({Width}x{Height}x{Directions}).{AnimationName}";
@@ -35,7 +35,7 @@
         public int FrameCommandCount;
         public int Duration;
         public int FrameTexturesMissing;
-        public AnimationFrameDef[] AnimationFrames;
+        public AnimationCommandDef[] AnimationCommands;
         public int RefCount;
     }
 }

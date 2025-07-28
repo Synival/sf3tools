@@ -153,26 +153,26 @@ namespace SF3.CHR {
                             chrWriter.StartAnimationForCurrentSprite(animationIndex);
 
                             var currentDirections = directions;
-                            foreach (var frame in spriteAnimation.AnimationFrames ?? new AnimationFrameDef[0]) {
+                            foreach (var aniCommand in spriteAnimation.AnimationCommands ?? new AnimationCommandDef[0]) {
                                 string[] frameKeys = null;
 
                                 // The 'SetDirectionCount' command (0xF1) updates the number of frames in our key from now on.
-                                if (frame.Command == SpriteAnimationFrameCommandType.SetDirectionCount)
-                                    currentDirections = frame.Parameter;
+                                if (aniCommand.Command == SpriteAnimationFrameCommandType.SetDirectionCount)
+                                    currentDirections = aniCommand.Parameter;
                                 // If this is a frame, we need to generate a key that will be used to locate a FrameID later.
-                                else if (frame.Command == SpriteAnimationFrameCommandType.Frame) {
+                                else if (aniCommand.Command == SpriteAnimationFrameCommandType.Frame) {
                                     var frameDirections = CHR_Utils.GetCHR_FrameGroupDirections(currentDirections);
 
                                     // The 'FrameGroup' command assumes the standard directions for this frame.
-                                    if (frame.FrameGroup != null) {
+                                    if (aniCommand.FrameGroup != null) {
                                         frameKeys = frameDirections
-                                            .Select(x => $"{frameKeyPrefix} {frame.FrameGroup} ({x.ToString()})")
+                                            .Select(x => $"{frameKeyPrefix} {aniCommand.FrameGroup} ({x.ToString()})")
                                             .ToArray();
                                     }
                                     // The 'Frames' command has manually specified FrameGroup + Direction pairs.
-                                    else if (frame.Frames != null) {
+                                    else if (aniCommand.Frames != null) {
                                         frameKeys = frameDirections
-                                            .ToDictionary(x => x, x => frame.Frames.TryGetValue(x, out var f) ? f : null)
+                                            .ToDictionary(x => x, x => aniCommand.Frames.TryGetValue(x, out var f) ? f : null)
                                             .Select(x => (x.Value == null) ? null : $"{frameKeyPrefix} {x.Value.Frame} ({x.Value.Direction.ToString()})")
                                             .ToArray();
                                     }
@@ -183,7 +183,7 @@ namespace SF3.CHR {
                                 }
 
                                 // We have enough info; write the frame.
-                                chrWriter.WriteAnimationFrame(i, frame.Command, frame.Parameter, frameKeys);
+                                chrWriter.WriteAnimationFrame(i, aniCommand.Command, aniCommand.Parameter, frameKeys);
                             }
                         }
 

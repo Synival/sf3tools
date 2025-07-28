@@ -29,7 +29,7 @@ namespace SF3.Utils {
             LoadUniqueAnimationsByHashTable();
             if (!s_uniqueAnimationsByHash.ContainsKey(hash.ToLower())) {
                 s_uniqueAnimationsByHash[hash] = new UniqueAnimationDef(hash, "Unknown", "Unknown", 0, 0, 0, 0, 0, 0,
-                    new AnimationFrameDef[0]);
+                    new AnimationCommandDef[0]);
             }
 
             var animation = s_uniqueAnimationsByHash[hash];
@@ -118,7 +118,7 @@ namespace SF3.Utils {
                         int missingFrames = int.TryParse(missingAttr, out var missingFramesOut) ? missingFramesOut : 0;
                         int duration = int.TryParse(durationAttr, out var durationOut) ? durationOut : 0;
                         s_uniqueAnimationsByHash.Add(hash.ToLower(), new UniqueAnimationDef(hash, sprite, animation, width, height, directions, frames, duration, missingFrames,
-                            new AnimationFrameDef[0]));
+                            new AnimationCommandDef[0]));
                     }
                 }
             }
@@ -324,7 +324,7 @@ namespace SF3.Utils {
         public static string CreateAnimationHash(int directions, AnimationDef animation, Dictionary<string, FrameGroupDef> frameGroups, Dictionary<string, ITexture> texturesByHash) {
             int currentDirections = directions;
 
-            var hashInfos = animation.AnimationFrames
+            var hashInfos = animation.AnimationCommands
                 .Select(x => {
                     var frameCount = DirectionsToFrameCount(currentDirections);
                     var frames = (!x.HasFrame)
