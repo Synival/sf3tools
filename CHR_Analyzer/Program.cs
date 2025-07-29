@@ -9,6 +9,7 @@ using SF3.Models.Structs.CHR;
 using SF3.NamedValues;
 using SF3.Sprites;
 using SF3.Types;
+using SF3.Utils;
 
 namespace CHR_Analyzer {
     public class Program {
@@ -168,6 +169,9 @@ namespace CHR_Analyzer {
         }
 
         public static void Main(string[] args) {
+            Console.WriteLine("Loading SpriteDefs...");
+            SpriteUtils.LoadAllSpriteDefs();
+
             Console.WriteLine("Processing all CHR and CHP files...");
 
             // Get a list of all .MPD files from all scenarios located at 'c_pathsIn[Scenario]'.

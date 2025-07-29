@@ -1,6 +1,7 @@
 using System;
 using System.Windows.Forms;
 using SF3.Editor.Forms;
+using SF3.Utils;
 using SF3.Win;
 using static SF3.Win.Extensions.ObjectListViewExtensions;
 
@@ -20,6 +21,9 @@ namespace SF3.Editor {
 
             // Add some special handles types to ObjectListView 
             RegisterNamedValues();
+
+            // Pre-load some resources
+            SpriteUtils.LoadAllSpriteDefs();
 
             Application.Run(new SF3EditorForm());
         }

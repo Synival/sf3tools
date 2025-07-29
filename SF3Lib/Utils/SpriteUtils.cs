@@ -5,7 +5,34 @@ using static CommonLib.Utils.ResourceUtils;
 
 namespace SF3.Utils {
     public static class SpriteUtils {
-        private static Dictionary<string, SpriteDef> s_spriteDefs = new Dictionary<string, SpriteDef>();
+        private static Dictionary<string, SpriteDef> s_spriteDefs = null;
+
+        /// <summary>
+        /// Loads all .SF3Sprite files in the "Sprites" directory.
+        /// </summary>
+        /// <returns>The number of new SpriteDef's successfully loaded.</returns>
+        public static int LoadAllSpriteDefs() {
+            if (s_spriteDefs == null)
+                s_spriteDefs = new Dictionary<string, SpriteDef>();
+
+            var spriteDefFiles = Directory.GetFiles(ResourceFile("Sprites"), "*.SF3Sprite");
+            int loadedCount = 0;
+
+            foreach (var file in spriteDefFiles) {
+                try {
+                    var spriteDef = SpriteDef.FromJSON(File.ReadAllText(file));
+                    if (!s_spriteDefs.ContainsKey(spriteDef.Name)) {
+                        s_spriteDefs.Add(spriteDef.Name, spriteDef);
+                        loadedCount++;
+                    }
+                }
+                catch {
+                    // TODO: how to log this error?
+                }
+            }
+
+            return loadedCount;
+        }
 
         /// <summary>
         /// Retrieves a SpriteDef from the filesystem or cache.
@@ -17,25 +44,10 @@ namespace SF3.Utils {
             if (name == null)
                 return null;
 
-            // Cache loaded SpriteDef's.
-            if (s_spriteDefs.ContainsKey(name))
-                return s_spriteDefs[name];
+            if (s_spriteDefs == null)
+                LoadAllSpriteDefs();
 
-            // Attempt to load a SpriteDef in the 'Resources/Sprites' folder.
-            SpriteDef spriteDef = null;
-            try {
-                var spriteDefPath = ResourceFile(Path.Combine("Sprites", $"{FilesystemName(name)}.SF3Sprite"));
-                spriteDef = SpriteDef.FromJSON(File.ReadAllText(spriteDefPath));
-            }
-            catch {
-                return null;
-            }
-            if (spriteDef == null)
-                return null;
-
-            // Only cached if opening and deserialization was successful.
-            s_spriteDefs[name] = spriteDef;
-            return spriteDef;
+            return s_spriteDefs.TryGetValue(name, out var spriteDef) ? spriteDef : null;
         }
 
         /// <summary>

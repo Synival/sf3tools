@@ -9,6 +9,7 @@ using SF3.Models.Structs.CHR;
 using SF3.Models.Tables;
 using SF3.NamedValues;
 using SF3.Types;
+using SF3.Utils;
 
 namespace CHR_Extractor {
     public class Program {
@@ -31,6 +32,9 @@ namespace CHR_Extractor {
         private const string c_pathOut = "../../../../SF3Lib/Resources";
 
         public static void Main(string[] args) {
+            Console.WriteLine("Loading SpriteDefs...");
+            SpriteUtils.LoadAllSpriteDefs();
+
             Console.WriteLine("Processing all CHR and CHP files...");
 
             // Get a list of all .MPD files from all scenarios located at 'c_pathsIn[Scenario]'.
