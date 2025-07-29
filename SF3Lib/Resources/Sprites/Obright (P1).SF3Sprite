@@ -419,7 +419,7 @@
               "Duration": 6
             },
             {
-              "Command": "GotoFrameOffset",
+              "Command": "GotoCommandOffset",
               "Parameter": 0
             }
           ],
@@ -567,7 +567,7 @@
               "Duration": 4
             },
             {
-              "Command": "GotoFrameOffset",
+              "Command": "GotoCommandOffset",
               "Parameter": 0
             }
           ]
@@ -591,7 +591,7 @@
               "Duration": 6
             },
             {
-              "Command": "GotoFrameOffset",
+              "Command": "GotoCommandOffset",
               "Parameter": 0
             }
           ],
@@ -630,7 +630,7 @@
               "Duration": 4
             },
             {
-              "Command": "GotoFrameOffset",
+              "Command": "GotoCommandOffset",
               "Parameter": 0
             }
           ]

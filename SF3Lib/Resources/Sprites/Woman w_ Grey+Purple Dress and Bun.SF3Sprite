@@ -158,7 +158,7 @@
               "Duration": 6
             },
             {
-              "Command": "GotoFrameOffset",
+              "Command": "GotoCommandOffset",
               "Parameter": 0
             }
           ]
