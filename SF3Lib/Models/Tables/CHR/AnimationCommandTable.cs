@@ -29,7 +29,7 @@ namespace SF3.Models.Tables.CHR {
                     prevCommand = new AnimationCommand(Data, id, $"{RowPrefix}{nameof(AnimationCommand)}{id:D2}", addr, SpriteIndex, SpriteID, directions, AnimationIndex, FrameTable);
                     return prevCommand;
                 },
-                (rows, prevRow) => !prevRow.IsFinalCommand,
+                (rows, prevRow) => !prevRow.IsEndingCommand,
                 addEndModel: true // This last row has important data; we always want to include it
             );
         }

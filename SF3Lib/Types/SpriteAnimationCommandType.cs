@@ -6,17 +6,17 @@ namespace SF3.Types {
         SetVerticalOffset = 0xF3, // Unused
                          // 0xF4 ??  Unused
                          // 0xF5 ??  Unused
-        SetDuation        = 0xF6, // Unused
+        SetDuration       = 0xF6, // Unused
         // Nothing for 0xF7 through 0xFB.
         // 0xFC is broken, it's just a normal frame.
         PlaySound         = 0xFD, // Unused
-        GotoFrameOffset   = 0xFE,
+        GotoCommandOffset = 0xFE,
         GotoAnimation     = 0xFF,
     }
 
     public static class SpriteAnimationCommandTypeExtensions {
         public static bool IsEndingCommand(this SpriteAnimationCommandType cmd)
-            => cmd == SpriteAnimationCommandType.Stop || cmd == SpriteAnimationCommandType.GotoFrameOffset || cmd == SpriteAnimationCommandType.GotoAnimation;
+            => (cmd == SpriteAnimationCommandType.Stop) || (cmd == SpriteAnimationCommandType.GotoCommandOffset || cmd == SpriteAnimationCommandType.GotoAnimation);
 
         public static bool NeedsParameter(this SpriteAnimationCommandType cmd)
             => cmd != SpriteAnimationCommandType.Stop;

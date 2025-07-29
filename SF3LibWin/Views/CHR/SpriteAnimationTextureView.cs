@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using SF3.Models.Structs.CHR;
 using SF3.Models.Tables.CHR;
+using SF3.Types;
 
 namespace SF3.Win.Views.CHR {
     public class SpriteAnimationTextureViewContext {
@@ -29,7 +30,7 @@ namespace SF3.Win.Views.CHR {
             }
 
             _commands = Context.AnimationCommandTablesByIndex[index];
-            if (_commands == null || _commands.Length == 0 || _commands[0].IsFinalCommand) {
+            if (_commands == null || _commands.Length == 0 || _commands[0].IsEndingCommand) {
                 ClearAnimation();
                 _commands = null;
                 return;
@@ -64,69 +65,61 @@ namespace SF3.Win.Views.CHR {
                 }
                 commandsSeen.Add(nextCommand);
 
-                // Normal frame with texture.
-                if (nextCommand.IsFrameCommand) {
-                    nextImage = nextCommand.GetTexture(_currentDirections);
-                    var duration = nextCommand.Duration;
-                    if (duration > 0) {
-                        SetFrame(nextImage, nextCommandIndex, duration);
-                        return;
-                    }
-                    else
-                        nextCommandIndex++;
-                }
-                // Special commands.
-                else {
-                    var cmd   = nextCommand.FrameID;
-                    var param = nextCommand.Duration;
+                var cmd     = nextCommand.Command;
+                var param   = nextCommand.Parameter;
+                var cmdType = nextCommand.CommandType;
 
-                    switch (cmd) {
-                        // Set number of directions
-                        case 0xF1:
-                            _currentDirections = param;
+                switch (cmdType) {
+                    case SpriteAnimationCommandType.Frame:
+                        nextImage = nextCommand.GetTexture(_currentDirections);
+                        if (param > 0) {
+                            SetFrame(nextImage, nextCommandIndex, param);
+                            return;
+                        }
+                        else
                             nextCommandIndex++;
-                            break;
+                        break;
 
-                        // Pause
-                        case 0xF2:
+                    case SpriteAnimationCommandType.SetDirectionCount:
+                        _currentDirections = param;
+                        nextCommandIndex++;
+                        break;
+
+                    case SpriteAnimationCommandType.Stop:
+                        PauseAnimation();
+                        return;
+
+                    case SpriteAnimationCommandType.SetDuration:
+                        if (param > 0) {
+                            SetFrame(nextImage, nextCommandIndex, param);
+                            return;
+                        }
+                        nextCommandIndex++;
+                        break;
+
+                    case SpriteAnimationCommandType.GotoCommandOffset:
+                        var isValidParameter = (nextCommand.Parameter % 2 == 0 && (nextCommand.Parameter / 2) < _commands.Length);
+                        if (!isValidParameter) {
                             PauseAnimation();
                             return;
+                        }
+                        nextCommandIndex = nextCommand.Parameter / 2;
+                        break;
 
-                        // Set duration
-                        case 0xF6:
-                            if (param > 0) {
-                                SetFrame(nextImage, nextCommandIndex, param);
-                                return;
-                            }
-                            nextCommandIndex++;
-                            break;
+                    case SpriteAnimationCommandType.GotoAnimation:
+                        if (!Context.AnimationCommandTablesByIndex.ContainsKey(param)) {
+                            PauseAnimation();
+                            return;
+                        }
 
-                        // Jump to frame
-                        case 0xFE:
-                            var isValidParameter = (nextCommand.Duration % 2 == 0 && (nextCommand.Duration / 2) < _commands.Length);
-                            if (!isValidParameter) {
-                                PauseAnimation();
-                                return;
-                            }
-                            nextCommandIndex = nextCommand.Duration / 2;
-                            break;
+                        _commands = Context.AnimationCommandTablesByIndex[param];
+                        nextCommandIndex = 0;
+                        break;
 
-                        // Jump to animation
-                        case 0xFF:
-                            if (!Context.AnimationCommandTablesByIndex.ContainsKey(param)) {
-                                PauseAnimation();
-                                return;
-                            }
-
-                            _commands = Context.AnimationCommandTablesByIndex[param];
-                            nextCommandIndex = 0;
-                            break;
-
-                        // All other commands are skipped.
-                        default:
-                            nextCommandIndex++;
-                            break;
-                    }
+                    // All other commands are skipped.
+                    default:
+                        nextCommandIndex++;
+                        break;
                 }
             }
         }

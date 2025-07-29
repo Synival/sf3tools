@@ -327,9 +327,9 @@ namespace SF3.Utils {
         public static string CreateAnimationHash(Models.Structs.CHR.AnimationCommand[] animationCommands) {
             var hashInfos = animationCommands
                 .Select(x => new AnimationHashCommand() {
-                    Command    = x.IsFrameCommand ? SpriteAnimationCommandType.Frame : (SpriteAnimationCommandType) x.FrameID,
-                    Parameter  = x.Duration,
-                    FrameID    = x.IsFrameCommand ? x.FrameID : -1,
+                    Command    = x.CommandType,
+                    Parameter  = x.Parameter,
+                    FrameID    = x.IsFrameCommand ? x.Command : -1,
                     Directions = x.Directions,
                     Image      = (x.IsFrameCommand) ? x.GetTexture(x.Directions) : null,
                     FramesMissing = x.FramesMissing

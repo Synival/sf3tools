@@ -89,7 +89,7 @@ namespace CHR_Analyzer {
                 s_animationsByHash.Add(hash, new AnimationInfo(animation.AnimationInfo));
 
             var lastCommand = animation.AnimationCommandTable.Last();
-            var lastCommandWord = (lastCommand.FrameID << 8) | lastCommand.Duration;
+            var lastCommandWord = (lastCommand.Command << 8) | lastCommand.Parameter;
 
             s_animationsByHash[hash].Sprites.Add(new AnimationFileSprite(scenario, filename, spriteIndex, animation.ID, lastCommandWord));
         }

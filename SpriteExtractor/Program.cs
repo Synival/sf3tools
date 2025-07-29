@@ -97,7 +97,7 @@ namespace SpriteExtractor {
                 s_animationsByHash.Add(hash, new AnimationInfo(animation.AnimationInfo));
 
             var lastFrame = animation.AnimationCommandTable.LastOrDefault();
-            var lastFrameWord = (lastFrame == null) ? 0 : (lastFrame.FrameID << 8) | lastFrame.Duration;
+            var lastFrameWord = (lastFrame == null) ? 0 : (lastFrame.Command << 8) | lastFrame.Parameter;
 
             s_animationsByHash[hash].Sprites.Add(new AnimationFileSprite(scenario, filename, spriteIndex, animation.ID, lastFrameWord));
         }

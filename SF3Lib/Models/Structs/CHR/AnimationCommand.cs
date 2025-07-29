@@ -23,7 +23,7 @@ namespace SF3.Models.Structs.CHR {
             _durationAddr = Address + 0x02; // 2 bytes
 
             // Number of directions changes with the 0xF1 command.
-            Directions = FrameID == 0xF1 ? Duration : directions;
+            Directions = (CommandType == SpriteAnimationCommandType.SetDirectionCount) ? Parameter : directions;
         }
 
         [TableViewModelColumn(addressField: null, displayOrder: -0.4f, displayFormat: "X2")]
@@ -43,14 +43,18 @@ namespace SF3.Models.Structs.CHR {
 
         [TableViewModelColumn(addressField: nameof(_frameIdAddr), displayOrder: 0, displayFormat: "X2")]
         [BulkCopy]
-        public int FrameID {
+        public int Command {
             get => Data.GetWord(_frameIdAddr);
             set => Data.SetWord(_frameIdAddr, value);
         }
 
-        [TableViewModelColumn(addressField: nameof(_durationAddr), displayOrder: 1, displayFormat: "X2")]
+        [TableViewModelColumn(displayOrder: 0.5f, minWidth: 150)]
+        public SpriteAnimationCommandType CommandType
+            => IsFrameCommand ? SpriteAnimationCommandType.Frame : (SpriteAnimationCommandType) Command;
+
+        [TableViewModelColumn(addressField: nameof(_durationAddr), displayOrder: 1, displayFormat: "X2", displayName: "Parameter/Duration")]
         [BulkCopy]
-        public int Duration {
+        public int Parameter {
             get => Data.GetWord(_durationAddr);
             set => Data.SetWord(_durationAddr, value);
         }
@@ -62,19 +66,22 @@ namespace SF3.Models.Structs.CHR {
         public int FramesMissing => IsFrameCommand ? (CHR_Utils.DirectionsToFrameCount(Directions) - GetFrameCount(Directions)) : 0;
 
         [TableViewModelColumn(displayOrder: 3)]
-        public bool IsFinalCommand {
+        public bool IsEndingCommand {
             get {
-                var cmd = FrameID;
-                return (cmd == 0xF2 || (cmd == 0xFE && Duration < (ID * 2 + 2)) || cmd == 0xFF);
+                var cmdType = CommandType;
+                return
+                    (cmdType == SpriteAnimationCommandType.Stop) ||
+                    (cmdType == SpriteAnimationCommandType.GotoCommandOffset && Parameter < (ID * 2 + 2)) ||
+                    (cmdType == SpriteAnimationCommandType.GotoAnimation);
             }
         }
 
         [TableViewModelColumn(displayOrder: 4)]
         public bool IsFrameCommand {
             get {
-                var cmd = FrameID;
+                var cmd = Command;
                 // (NOTE: Command 0xFC is a special command, but it's broken and sets the frame to 0xFC with a duration. Stupid, huh?)
-                return cmd < 0xF1 || cmd == 0xF4 || cmd == 0xF5 || (cmd >= 0xF7 && cmd <= 0xFC);
+                return cmd < 0xF1 || cmd == 0xFC;
             }
         }
 
@@ -83,19 +90,19 @@ namespace SF3.Models.Structs.CHR {
                 return 0;
 
             int expectedFrameCount = CHR_Utils.DirectionsToFrameCount(directions);
-            return Math.Max(0, Math.Min(FrameTable.Length - FrameID, expectedFrameCount));
+            return Math.Max(0, Math.Min(FrameTable.Length - Command, expectedFrameCount));
         }
 
         private readonly Dictionary<int, ITexture> _texturesByFrameCount = new Dictionary<int, ITexture>();
         public ITexture GetTexture(int directions) {
-            if (FrameTable == null)
+            if (FrameTable == null || !IsFrameCommand)
                 return null;
 
             int frameCount = CHR_Utils.DirectionsToFrameCount(directions);
             if (_texturesByFrameCount.TryGetValue(frameCount, out var tex))
                 return tex;
 
-            var frameMin = FrameID;
+            var frameMin = Command;
             var frameMax = frameMin + frameCount;
             var frames = FrameTable
                 .Where(x => x.ID >= frameMin && x.ID < frameMax)
