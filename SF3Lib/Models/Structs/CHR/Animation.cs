@@ -70,7 +70,7 @@ namespace SF3.Models.Structs.CHR {
                         texCount++;
                     return (x.FrameID < 0xF1 || x.FrameID == 0xFC)
                         ? new AnimationCommandDef(GetAnimationFrameHashes(x), x.Duration)
-                        : new AnimationCommandDef((SpriteAnimationFrameCommandType) x.FrameID, x.Duration);
+                        : new AnimationCommandDef((SpriteAnimationFrameCommand) x.FrameID, x.Duration);
                 }).ToArray();
 
             var uniqueFramesWithTextures = _framesWithTextures.Distinct().ToArray();

@@ -16,13 +16,13 @@ namespace SF3.Sprites {
             FrameGroup  = null;
             Frames      = null;
             FrameHashes = frameHashes ?? new string[0];
-            Command     = SpriteAnimationFrameCommandType.Frame;
+            Command     = SpriteAnimationFrameCommand.Frame;
             Parameter   = duration;
         }
 
-        public AnimationCommandDef(SpriteAnimationFrameCommandType command, int parameter) {
+        public AnimationCommandDef(SpriteAnimationFrameCommand command, int parameter) {
             FrameGroup  = null;
-            FrameHashes = (command == SpriteAnimationFrameCommandType.Frame) ? new string[0] : null;
+            FrameHashes = (command == SpriteAnimationFrameCommand.Frame) ? new string[0] : null;
             Command     = command;
             Parameter   = parameter;
         }
@@ -71,11 +71,11 @@ namespace SF3.Sprites {
                                     break;
                             }
 
-                            Command = SpriteAnimationFrameCommandType.Frame;
+                            Command = SpriteAnimationFrameCommand.Frame;
                             Parameter = jObj.TryGetValue("Duration", out var parameter) ? ((int) parameter) : 0;
                         }
                         else {
-                            Command = jObj.TryGetValue("Command",   out var command)   ? (command.ToObject<SpriteAnimationFrameCommandType>()) : SpriteAnimationFrameCommandType.Frame;
+                            Command = jObj.TryGetValue("Command",   out var command)   ? (command.ToObject<SpriteAnimationFrameCommand>()) : SpriteAnimationFrameCommand.Frame;
                             Parameter = jObj.TryGetValue("Parameter", out var parameter) ? ((int) parameter) : 0;
                         }
                     }
@@ -170,10 +170,10 @@ namespace SF3.Sprites {
         }
 
         [JsonIgnore]
-        public bool HasFrame => Command == SpriteAnimationFrameCommandType.Frame && (FrameGroup != null || FrameHashes != null || Frames != null);
+        public bool HasFrame => Command == SpriteAnimationFrameCommand.Frame && (FrameGroup != null || FrameHashes != null || Frames != null);
 
         public bool HasFullFrame(int directions) {
-            return (Command == SpriteAnimationFrameCommandType.Frame) && (
+            return (Command == SpriteAnimationFrameCommand.Frame) && (
                 FrameGroup != null ||
                 (FrameHashes != null && FrameHashes.Length == directions && FrameHashes.All(x => x != null)) ||
                 (Frames != null && Frames.Count == directions && Enumerable
@@ -189,7 +189,7 @@ namespace SF3.Sprites {
         public string[] FrameHashes;
 
         [JsonConverter(typeof(StringEnumConverter))]
-        public SpriteAnimationFrameCommandType Command;
+        public SpriteAnimationFrameCommand Command;
 
         public int Parameter;
     };

@@ -1,5 +1,5 @@
 namespace SF3.Types {
-    public enum SpriteAnimationFrameCommandType {
+    public enum SpriteAnimationFrameCommand {
         Frame             = 0x00, // Actually 0x00 through (inclusive) 0xF0, and 0xFC
         SetDirectionCount = 0xF1,
         Stop              = 0xF2,
@@ -15,10 +15,10 @@ namespace SF3.Types {
     }
 
     public static class SpriteAnimationFrameCommandTypeExtensions {
-        public static bool IsEndingCommand(this SpriteAnimationFrameCommandType cmd)
-            => cmd == SpriteAnimationFrameCommandType .Stop || cmd == SpriteAnimationFrameCommandType.GotoFrameOffset || cmd == SpriteAnimationFrameCommandType.GotoAnimation;
+        public static bool IsEndingCommand(this SpriteAnimationFrameCommand cmd)
+            => cmd == SpriteAnimationFrameCommand .Stop || cmd == SpriteAnimationFrameCommand.GotoFrameOffset || cmd == SpriteAnimationFrameCommand.GotoAnimation;
 
-        public static bool NeedsParameter(this SpriteAnimationFrameCommandType cmd)
-            => cmd != SpriteAnimationFrameCommandType.Stop;
+        public static bool NeedsParameter(this SpriteAnimationFrameCommand cmd)
+            => cmd != SpriteAnimationFrameCommand.Stop;
     }
 }

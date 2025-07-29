@@ -68,11 +68,11 @@ namespace SpriteCHR_Builder {
                                     var currentDir = directions;
                                     return x.AnimationCommands
                                         .Select(y => {
-                                            if (y.Command == SpriteAnimationFrameCommandType.SetDirectionCount) {
+                                            if (y.Command == SpriteAnimationFrameCommand.SetDirectionCount) {
                                                 currentDir = y.Parameter;
                                                 return null;
                                             }
-                                            else if (y.Command == SpriteAnimationFrameCommandType.Frame) {
+                                            else if (y.Command == SpriteAnimationFrameCommand.Frame) {
                                                 var expectedFrames = CHR_Utils.GetCHR_FrameGroupDirections(currentDir);
                                                 var frames = (y.FrameGroup != null)
                                                     ? expectedFrames.ToDictionary(z => z, z => new AnimationFrameDirectionDef() { Frame = y.FrameGroup, Direction = z })

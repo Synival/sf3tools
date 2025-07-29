@@ -268,7 +268,7 @@ namespace SF3.Utils {
         public static Dictionary<string, UniqueSpriteInfoDef> GetUniqueSpriteInfos() => s_uniqueSpriteInfosByName;
 
         private class AnimationHashFrame {
-            public SpriteAnimationFrameCommandType Command;
+            public SpriteAnimationFrameCommand Command;
             public int Parameter;
             public int FrameID;
             public int Directions;
@@ -296,7 +296,7 @@ namespace SF3.Utils {
                             .ToArray()
                         : null;
 
-                    if (x.Command == SpriteAnimationFrameCommandType.SetDirectionCount)
+                    if (x.Command == SpriteAnimationFrameCommand.SetDirectionCount)
                         currentDirections = x.Parameter;
 
                     return new AnimationHashFrame() {
@@ -328,7 +328,7 @@ namespace SF3.Utils {
         public static string CreateAnimationHash(AnimationFrame[] animationFrames) {
             var hashInfos = animationFrames
                 .Select(x => new AnimationHashFrame() {
-                    Command    = x.HasTexture ? SpriteAnimationFrameCommandType.Frame : (SpriteAnimationFrameCommandType) x.FrameID,
+                    Command    = x.HasTexture ? SpriteAnimationFrameCommand.Frame : (SpriteAnimationFrameCommand) x.FrameID,
                     Parameter  = x.Duration,
                     FrameID    = x.HasTexture ? x.FrameID : -1,
                     Directions = x.Directions,
@@ -347,12 +347,12 @@ namespace SF3.Utils {
                 if (hashStr != "")
                     hashStr += "_";
 
-                if (aniFrame.Command != SpriteAnimationFrameCommandType.Frame) {
+                if (aniFrame.Command != SpriteAnimationFrameCommand.Frame) {
                     var cmd   = aniFrame.Command;
                     var param = aniFrame.Parameter;
 
                     // Don't bother appending stops.
-                    if (cmd == SpriteAnimationFrameCommandType.Stop)
+                    if (cmd == SpriteAnimationFrameCommand.Stop)
                         hashStr += "f2";
                     else
                         hashStr += $"{((int) cmd):x2},{aniFrame.Parameter:x2}";

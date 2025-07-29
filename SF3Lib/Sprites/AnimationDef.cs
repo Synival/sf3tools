@@ -69,9 +69,9 @@ namespace SF3.Sprites {
         public bool HasAllFrames(int startDirections) {
             var currentDirections = startDirections;
             foreach (var aniCommand in AnimationCommands) {
-                if (aniCommand.Command == SpriteAnimationFrameCommandType.SetDirectionCount)
+                if (aniCommand.Command == SpriteAnimationFrameCommand.SetDirectionCount)
                     currentDirections = aniCommand.Parameter;
-                else if (aniCommand.Command == SpriteAnimationFrameCommandType.Frame && !aniCommand.HasFullFrame(CHR_Utils.DirectionsToFrameCount(currentDirections)))
+                else if (aniCommand.Command == SpriteAnimationFrameCommand.Frame && !aniCommand.HasFullFrame(CHR_Utils.DirectionsToFrameCount(currentDirections)))
                     return false;
             }
             return true;

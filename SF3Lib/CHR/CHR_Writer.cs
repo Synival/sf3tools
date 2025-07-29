@@ -81,7 +81,7 @@ namespace SF3.CHR {
         /// <param name="command">Command for this frame.</param>
         /// <param name="parameter">Parameter for this command.</param>
         /// <param name="frameKeys">List of keys for each frame. Used for assigning the FrameID when frames are written.</param>
-        public void WriteAnimationFrame(int spriteIndex, SpriteAnimationFrameCommandType command, int parameter, string[] frameKeys) {
+        public void WriteAnimationFrame(int spriteIndex, SpriteAnimationFrameCommand command, int parameter, string[] frameKeys) {
             // If applicable, track the set of frames expected for this animation frame and its offset.
             // The FrameID will be updated later, when the FrameTable is built.
             if (frameKeys != null) {
