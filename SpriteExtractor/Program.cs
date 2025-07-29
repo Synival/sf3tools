@@ -277,7 +277,7 @@ namespace SpriteExtractor {
                         .OrderBy(x => x.Direction)
                         .ToDictionary(x => x.Direction, x => x.Index);
 
-                    var filename = SpriteUtils.FilesystemName(spriteName) + ".BMP";
+                    var filename = SpriteUtils.FilesystemName(spriteName) + ".png";
                     var outputPath = Path.Combine(spritePath, filename);
 
                     var frameGroups = frames
@@ -371,9 +371,10 @@ namespace SpriteExtractor {
                         var bmpData = bitmap.LockBits(new Rectangle(0, 0, bitmap.Width, bitmap.Height), ImageLockMode.WriteOnly, bitmap.PixelFormat);
                         Marshal.Copy(newData, 0, bmpData.Scan0, newData.Length);
                         bitmap.UnlockBits(bmpData);
+
                         try {
                             _ = Directory.CreateDirectory(Path.Combine(c_pathOut, SpriteUtils.FilesystemName(spriteDef.Name)));
-                            bitmap.Save(outputPath);
+                            bitmap.Save(outputPath, ImageFormat.Png);
                         }
                         catch { }
                     }

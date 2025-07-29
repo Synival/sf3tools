@@ -289,7 +289,7 @@ namespace SF3.CHR {
                         if (spritesheetDef != null && !spritesheetImageDict.ContainsKey(spritesheetImageKey)) {
                             Bitmap bitmap = null;
                             try {
-                                var bitmapPath = SpriteUtils.SpritesheetImagePath($"{SpriteUtils.FilesystemName(spritesheetImageKey)}.BMP");
+                                var bitmapPath = SpriteUtils.SpritesheetImagePath($"{SpriteUtils.FilesystemName(spritesheetImageKey)}.png");
                                 bitmap = (Bitmap) Image.FromFile(bitmapPath);
                             }
                             catch { }

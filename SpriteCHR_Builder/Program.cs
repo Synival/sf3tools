@@ -37,9 +37,9 @@ namespace SpriteCHR_Builder {
 #pragma warning disable CA1416 // Validate platform compatibility
                     var spritesheets = spriteDef.Spritesheets
                         .Select(x => Path.GetFileNameWithoutExtension(path) + $" ({x.Key})")
-                        .Where(x => File.Exists(Path.Combine(Path.GetDirectoryName(path) ?? "", x + ".BMP")))
+                        .Where(x => File.Exists(Path.Combine(Path.GetDirectoryName(path) ?? "", x + ".png")))
                         .ToDictionary(x => x, x => {
-                            var spritesheetFile = Path.Combine(Path.GetDirectoryName(path) ?? "", x + ".BMP");
+                            var spritesheetFile = Path.Combine(Path.GetDirectoryName(path) ?? "", x + ".png");
                             var image = (Bitmap) Image.FromFile(spritesheetFile);
                             return image;
                         });

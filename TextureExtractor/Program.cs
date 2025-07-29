@@ -156,7 +156,7 @@ namespace TextureExtractor {
                 _ = Directory.CreateDirectory(c_pathOut);
 
                 var refStr = tex.Hash + "_Tex" + tex.ID + "_Frame" + tex.Frame + "_x" + texRefs.Value.Count.ToString("D4") + "_" + tex.Width + "x" + tex.Height;
-                var outputPath = Path.Combine(c_pathOut, refStr + ".BMP");
+                var outputPath = Path.Combine(c_pathOut, refStr + ".png");
                 Console.WriteLine("Writing: " + outputPath);
 #pragma warning disable CA1416 // Validate platform compatibility
                 using (var bitmap = new Bitmap(tex.Width, tex.Height, PixelFormat.Format16bppArgb1555)) {
@@ -164,7 +164,7 @@ namespace TextureExtractor {
                     var bmpData = bitmap.LockBits(new Rectangle(0, 0, bitmap.Width, bitmap.Height), ImageLockMode.WriteOnly, bitmap.PixelFormat);
                     Marshal.Copy(imageData, 0, bmpData.Scan0, imageData.Length);
                     bitmap.UnlockBits(bmpData);
-                    bitmap.Save(outputPath);
+                    bitmap.Save(outputPath, ImageFormat.Png);
                 }
 #pragma warning restore CA1416 // Validate platform compatibility
             }
