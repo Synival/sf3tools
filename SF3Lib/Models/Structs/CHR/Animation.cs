@@ -127,21 +127,16 @@ namespace SF3.Models.Structs.CHR {
             set {
                 var lastSpriteName = SpriteName;
                 foreach (var frame in _framesWithTextures)
-                    frame.FrameInfo.SpriteName = value;
-
-                var resourcePath = Path.Combine("..", "..", "..", "..", "SF3Lib", CommonLib.Utils.ResourceUtils.ResourceFile("SpriteFramesByHash.xml"));
-                using (var file = File.Open(resourcePath, FileMode.Create))
-                    using (var writer = new StreamWriter(file))
-                        CHR_Utils.WriteUniqueFramesByHashXML(writer, false);
+                    if (frame.FrameInfo != null && frame.FrameInfo.SpriteName != value)
+                        frame.FrameInfo.SpriteName = value;
 
                 var newSpriteName = SpriteName;
-                if (lastSpriteName != newSpriteName) {
+                if (AnimationInfo != null && lastSpriteName != newSpriteName)
                     AnimationInfo.SpriteName = SpriteName;
-                    var animPath = Path.Combine("..", "..", "..", "..", "SF3Lib", CommonLib.Utils.ResourceUtils.ResourceFile("SpriteAnimationsByHash.xml"));
-                    using (var file = File.Open(animPath, FileMode.Create))
-                        using (var writer = new StreamWriter(file))
-                            CHR_Utils.WriteUniqueAnimationsByHashXML(writer, false);
-                }
+
+                // TODO: update appropriate SpriteDefs:
+                // 1) old sprite def (if it exists)
+                // 2) new sprite def (create if doesn't exist?)
             }
         }
 
@@ -149,11 +144,13 @@ namespace SF3.Models.Structs.CHR {
         public string AnimationName {
             get => AnimationInfo.AnimationName;
             set {
-                AnimationInfo.AnimationName = value;
-                var resourcePath = Path.Combine("..", "..", "..", "..", "SF3Lib", CommonLib.Utils.ResourceUtils.ResourceFile("SpriteAnimationsByHash.xml"));
-                using (var file = File.Open(resourcePath, FileMode.Create))
-                    using (var writer = new StreamWriter(file))
-                        CHR_Utils.WriteUniqueAnimationsByHashXML(writer, false);
+                if (AnimationInfo != null && AnimationInfo.AnimationName != value) {
+                    AnimationInfo.AnimationName = value;
+
+                    // TODO: update appropriate SpriteDefs:
+                    // 1) old sprite def (if it exists)
+                    // 2) new sprite def (create if doesn't exist?)
+                }
             }
         }
 

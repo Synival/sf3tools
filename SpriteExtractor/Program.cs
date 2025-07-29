@@ -222,28 +222,6 @@ namespace SpriteExtractor {
                 new AnimationDef() { AnimationCommands = [] }
             );
 
-            Console.WriteLine();
-            Console.WriteLine("===================================================");
-            Console.WriteLine("| WRITING EDITOR RESOURCES                        |");
-            Console.WriteLine("===================================================");
-            Console.WriteLine();
-
-            Console.WriteLine("Writing new 'SpriteFramesByHash.xml'...");
-            using (var file = File.Open(Path.Combine(c_pathOut, "SpriteFramesByHash.xml"), FileMode.Create))
-                using (var stream = new StreamWriter(file))
-                    CHR_Utils.WriteUniqueFramesByHashXML(stream, true);
-
-            Console.WriteLine("Writing new 'SpriteAnimationsByHash.xml'...");
-            using (var file = File.Open(Path.Combine(c_pathOut, "SpriteAnimationsByHash.xml"), FileMode.Create))
-                using (var stream = new StreamWriter(file))
-                    CHR_Utils.WriteUniqueAnimationsByHashXML(stream, true);
-
-            Console.WriteLine();
-            Console.WriteLine("===================================================");
-            Console.WriteLine("| CREATING SPRITESHEETS                           |");
-            Console.WriteLine("===================================================");
-            Console.WriteLine();
-
             foreach (var spriteDef in spriteDefs) {
                 var spritePath = Path.Combine(c_pathOut, SpriteUtils.FilesystemName(spriteDef.Name));
 

@@ -124,51 +124,6 @@ namespace SF3.Utils {
             }
         }
 
-        public static void WriteUniqueFramesByHashXML(StreamWriter stream, bool onlyReferenced) {
-            var frameInfos = s_uniqueFramesByHash.Values
-                .Where(x => !onlyReferenced || x.RefCount > 0)
-                .OrderBy(x => x.SpriteName)
-                .ThenBy(x => x.Width)
-                .ThenBy(x => x.Height)
-                .ThenBy(x => x.FrameName)
-                .ThenBy(x => x.Direction)
-                .ThenBy(x => x.TextureHash)
-                .ToArray();
-
-            stream.NewLine = "\n";
-            stream.WriteLine("<?xml version=\"1.0\" encoding=\"utf-8\" ?>");
-            stream.WriteLine("<items>");
-            foreach (var fi in frameInfos)
-                stream.WriteLine($"    <item hash=\"{fi.TextureHash}\" sprite=\"{fi.SpriteName}\" width=\"{fi.Width}\" height=\"{fi.Height}\" frame=\"{fi.FrameName}\" direction=\"{fi.Direction}\" />");
-
-            stream.WriteLine("</items>");
-        }
-
-        public static void WriteUniqueAnimationsByHashXML(StreamWriter stream, bool onlyReferenced) {
-            var animationInfos = s_uniqueAnimationsByHash.Values
-                .Where(x => !onlyReferenced || x.RefCount > 0)
-                .OrderBy(x => x.SpriteName)
-                .ThenBy(x => x.Width)
-                .ThenBy(x => x.Height)
-                .ThenBy(x => x.AnimationName)
-                .ThenBy(x => x.Directions)
-                .ThenBy(x => x.FrameCommandCount)
-                .ThenBy(x => x.Duration)
-                .ThenBy(x => x.FrameTexturesMissing)
-                .ThenBy(x => x.AnimationHash)
-                .ToArray();
-
-            stream.NewLine = "\n";
-            stream.WriteLine("<?xml version=\"1.0\" encoding=\"utf-8\" ?>");
-            stream.WriteLine("<items>");
-            foreach (var ai in animationInfos) {
-                var spriteName = (ai.SpriteName == "") ? "None" : ai.SpriteName;
-                var missingFramesStr = (ai.FrameTexturesMissing == 0) ? "" : $" missingFrames=\"{ai.FrameTexturesMissing}\"";
-                stream.WriteLine($"    <item hash=\"{ai.AnimationHash}\" sprite=\"{spriteName}\" animation=\"{ai.AnimationName}\" width=\"{ai.Width}\" height=\"{ai.Height}\" directions=\"{ai.Directions}\" frames=\"{ai.FrameCommandCount}\" duration=\"{ai.Duration}\"{missingFramesStr} />");
-            }
-            stream.WriteLine("</items>");
-        }
-
         public static SpriteDef[] CreateAllSpriteDefs() {
             string[] ApplicableSpriteNames(string spriteName) {
                 // Edmund's P1 sprites are special because some frames are shared with and without a weapon.

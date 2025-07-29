@@ -49,13 +49,6 @@ namespace SF3.Models.Structs.CHR {
             }
         }
 
-        private void RewriteFrameXML(bool onlyReferenced) {
-            var resourcePath = Path.Combine("..", "..", "..", "..", "SF3Lib", CommonLib.Utils.ResourceUtils.ResourceFile("SpriteFramesByHash.xml"));
-            using (var file = File.Open(resourcePath, FileMode.Create))
-                using (var writer = new StreamWriter(file))
-                    CHR_Utils.WriteUniqueFramesByHashXML(writer, onlyReferenced);
-        }
-
         public uint DataOffset { get; }
 
         [TableViewModelColumn(addressField: null, displayOrder: -0.4f, displayFormat: "X2")]
@@ -71,7 +64,10 @@ namespace SF3.Models.Structs.CHR {
             set {
                 if (FrameInfo != null && FrameInfo.SpriteName != value) {
                     FrameInfo.SpriteName = value;
-                    RewriteFrameXML(false);
+
+                    // TODO: update appropriate SpriteDefs:
+                    // 1) old sprite def (if it exists)
+                    // 2) new sprite def (create if doesn't exist?)
                 }
             }
         }
@@ -88,7 +84,10 @@ namespace SF3.Models.Structs.CHR {
             set {
                 if (FrameInfo != null && FrameInfo.FrameName != value) {
                     FrameInfo.FrameName = value;
-                    RewriteFrameXML(false);
+
+                    // TODO: update appropriate SpriteDefs:
+                    // 1) old sprite def (if it exists)
+                    // 2) new sprite def (create if doesn't exist?)
                 }
             }
         }
@@ -99,7 +98,10 @@ namespace SF3.Models.Structs.CHR {
             set {
                 if (FrameInfo != null && FrameInfo.Direction != value) {
                     FrameInfo.Direction = value;
-                    RewriteFrameXML(false);
+
+                    // TODO: update appropriate SpriteDefs:
+                    // 1) old sprite def (if it exists)
+                    // 2) new sprite def (create if doesn't exist?)
                 }
             }
         }
