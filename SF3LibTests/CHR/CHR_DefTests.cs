@@ -10,30 +10,29 @@ namespace SF3.Tests.CHR {
         ";
 
         private static readonly string c_twoEmptySpriteCHR_Text = @"
-            { 'Sprites': [
+            {
+              'Sprites': [
                 {
                     'Name': 'Synbios (U)',
                     'Width': 40,
                     'Height': 40,
-                    'Directions': 4
                 },
                 {
                     'Name': 'Synbios (P1)',
                     'Width': 40,
                     'Height': 40,
-                    'Directions': 4,
                     'PromotionLevel': 1
                 }
             ]}
         ";
 
         private static readonly string c_minimalCHR_Text = @"
-            { 'Sprites': [
+            {
+              'Sprites': [
                 {
                   'Name': 'Synbios (U)',
                   'Width': 40,
                   'Height': 40,
-                  'Directions': 4,
                   'Frames': [
                     'Idle (Battle) 1',
                     'Idle (Battle) 2',

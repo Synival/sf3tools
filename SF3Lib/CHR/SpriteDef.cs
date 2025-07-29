@@ -38,7 +38,7 @@ namespace SF3.CHR {
                 var jObj = (JObject) jToken;
 
                 SpriteName     = jObj.TryGetValue("Name",           out var spriteName)     ? ((string) spriteName)  : null;
-                Directions     = jObj.TryGetValue("Directions",     out var directions)     ? ((int) directions)     : 0;
+                Directions     = jObj.TryGetValue("Directions",     out var directions)     ? ((int) directions)     : 4;
                 PromotionLevel = jObj.TryGetValue("PromotionLevel", out var promotionLevel) ? ((int) promotionLevel) : 0;
 
                 var spriteDef = SpriteUtils.GetSpriteDef(SpriteName);
@@ -79,7 +79,8 @@ namespace SF3.CHR {
             var jsonSettings = new JsonSerializer { NullValueHandling = NullValueHandling.Ignore };
 
             jObj.Add("Name",       new JValue(SpriteName));
-            jObj.Add("Directions", new JValue(Directions));
+            if (Directions != 4)
+                jObj.Add("Directions", new JValue(Directions));
             if (PromotionLevel != 0)
                 jObj.Add("PromotionLevel", new JValue(PromotionLevel));
 
