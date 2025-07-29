@@ -251,7 +251,7 @@
         }
       },
       "AnimationByDirections": {
-        "1": {
+        "OneNoFlip": {
           "Kneeling": [
             {
               "Frame": {

@@ -512,7 +512,7 @@
         }
       },
       "AnimationByDirections": {
-        "1": {
+        "OneNoFlip": {
           "GettingUpFromKneeling": [
             {
               "Frame": {
@@ -1162,7 +1162,7 @@
         }
       },
       "AnimationByDirections": {
-        "1": {
+        "OneNoFlip": {
           "Backflip (Fast, 2x, Change to 0)": [
             {
               "Frame": {

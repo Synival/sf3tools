@@ -82,7 +82,7 @@
         }
       },
       "AnimationByDirections": {
-        "1": {
+        "OneNoFlip": {
           "Poofing (Extremely Slow)": [
             {
               "Frame": "Poofing 1",

@@ -1072,7 +1072,7 @@
         }
       },
       "AnimationByDirections": {
-        "1": {
+        "OneNoFlip": {
           "LeaningAgainstWall": [
             {
               "Command": "SetDirectionCount",
@@ -1873,7 +1873,7 @@
             }
           ]
         },
-        "17": {
+        "OneFlippable": {
           "Idle (2 Frames)": [
             {
               "Command": "SetDirectionCount",

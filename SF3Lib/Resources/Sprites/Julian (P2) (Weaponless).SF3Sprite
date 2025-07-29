@@ -761,7 +761,7 @@
             }
           ]
         },
-        "17": {
+        "OneFlippable": {
           "StillFrame (Blown Back)": [
             {
               "Command": "SetDirectionCount",
@@ -813,7 +813,7 @@
         }
       },
       "AnimationByDirections": {
-        "1": {
+        "OneNoFlip": {
           "GettingUpFromGround": [
             {
               "Frame": {

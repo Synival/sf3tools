@@ -384,7 +384,7 @@
             }
           ]
         },
-        "17": {
+        "OneFlippable": {
           "StillFrame (Cowering, 1 Direction)": [
             {
               "Command": "SetDirectionCount",

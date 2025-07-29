@@ -635,7 +635,7 @@
         }
       },
       "AnimationByDirections": {
-        "1": {
+        "OneNoFlip": {
           "StillFrame (OnGround 1)": [
             {
               "Frame": {
@@ -651,7 +651,7 @@
             }
           ]
         },
-        "17": {
+        "OneFlippable": {
           "StillFrame (OnGround 2)": [
             {
               "Command": "SetDirectionCount",

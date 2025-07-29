@@ -635,7 +635,7 @@
             }
           ]
         },
-        "17": {
+        "OneFlippable": {
           "Pointing": [
             {
               "Command": "SetDirectionCount",

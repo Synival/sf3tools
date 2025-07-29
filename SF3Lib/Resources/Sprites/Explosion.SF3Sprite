@@ -152,7 +152,7 @@
         }
       },
       "AnimationByDirections": {
-        "1": {
+        "OneNoFlip": {
           "Exploding (Alt, w/o Transparent Frame)": [
             {
               "Frame": "Exploding (Alt) 1",

@@ -984,7 +984,7 @@
             }
           ]
         },
-        "17": {
+        "OneFlippable": {
           "CollapsingFromPanting (1 Direction)": [
             {
               "Command": "SetDirectionCount",

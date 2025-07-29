@@ -61,7 +61,7 @@
         }
       },
       "AnimationByDirections": {
-        "1": {
+        "OneNoFlip": {
           "Flickering (Small)": [
             {
               "Frame": "Flickering (Small) 1",
@@ -164,7 +164,7 @@
         }
       },
       "AnimationByDirections": {
-        "1": {
+        "OneNoFlip": {
           "Flickering (Large)": [
             {
               "Frame": "Flickering (Large) 1",

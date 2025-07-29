@@ -294,7 +294,7 @@
             }
           ]
         },
-        "17": {
+        "OneFlippable": {
           "PullingOutTelescope (1 Direction)": [
             {
               "Command": "SetDirectionCount",

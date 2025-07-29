@@ -19,7 +19,7 @@
         }
       },
       "AnimationByDirections": {
-        "1": {
+        "OneNoFlip": {
           "StillFrame (Egg, Repeat)": [
             {
               "Frame": "Egg 1",

@@ -63,7 +63,7 @@
         }
       },
       "AnimationByDirections": {
-        "1": {
+        "OneNoFlip": {
           "StillFrame (Full, Repeat)": [
             {
               "Frame": "Full 1",

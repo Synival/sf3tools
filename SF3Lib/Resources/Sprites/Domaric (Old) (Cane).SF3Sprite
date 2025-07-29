@@ -238,7 +238,7 @@
         }
       },
       "AnimationByDirections": {
-        "1": {
+        "OneNoFlip": {
           "Nodding": [
             {
               "Frame": {

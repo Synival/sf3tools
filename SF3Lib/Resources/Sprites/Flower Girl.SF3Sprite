@@ -276,7 +276,7 @@
         }
       },
       "AnimationByDirections": {
-        "1": {
+        "OneNoFlip": {
           "StillFrame": [
             {
               "Command": "SetDirectionCount",

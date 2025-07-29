@@ -33,7 +33,7 @@
         }
       },
       "AnimationByDirections": {
-        "1": {
+        "OneNoFlip": {
           "Alert": [
             {
               "Frame": "Alert 1",

@@ -40,7 +40,7 @@
         }
       },
       "AnimationByDirections": {
-        "1": {
+        "OneNoFlip": {
           "Angry": [
             {
               "Frame": "Angry 1",

@@ -19,7 +19,7 @@
         }
       },
       "AnimationByDirections": {
-        "17": {
+        "OneFlippable": {
           "StillFrame (Rock, Repeat)": [
             {
               "Command": "SetDirectionCount",

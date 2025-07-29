@@ -68,7 +68,7 @@
         }
       },
       "AnimationByDirections": {
-        "1": {
+        "OneNoFlip": {
           "Exploding (Slow then Fast)": [
             {
               "Frame": "Exploding 1",

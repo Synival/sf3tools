@@ -68,7 +68,7 @@
         }
       },
       "AnimationByDirections": {
-        "1": {
+        "OneNoFlip": {
           "StillFrame": [
             {
               "Frame": "Zapping 2",

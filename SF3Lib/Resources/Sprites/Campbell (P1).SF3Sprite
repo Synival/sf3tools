@@ -435,7 +435,7 @@
             }
           ]
         },
-        "17": {
+        "OneFlippable": {
           "Attacking (1 Direction)": [
             {
               "Command": "SetDirectionCount",

@@ -54,7 +54,7 @@
         }
       },
       "AnimationByDirections": {
-        "1": {
+        "OneNoFlip": {
           "OrbHovering": [
             {
               "Frame": "OrbHovering 1",

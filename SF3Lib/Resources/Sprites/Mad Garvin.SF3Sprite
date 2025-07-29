@@ -390,7 +390,7 @@
         }
       },
       "AnimationByDirections": {
-        "1": {
+        "OneNoFlip": {
           "Collapsing": [
             {
               "Frame": {

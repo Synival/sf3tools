@@ -193,7 +193,7 @@
         }
       },
       "AnimationByDirections": {
-        "1": {
+        "OneNoFlip": {
           "GettingKnockedOut": [
             {
               "Command": "SetDirectionCount",

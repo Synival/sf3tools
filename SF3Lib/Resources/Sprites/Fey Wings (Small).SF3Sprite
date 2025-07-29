@@ -312,7 +312,7 @@
         }
       },
       "AnimationByDirections": {
-        "2": {
+        "TwoNoFlip": {
           "MoveDownUpWhileFeyYawns": [
             {
               "Frame": "MoveDownUpWhileFeyYawns 1",

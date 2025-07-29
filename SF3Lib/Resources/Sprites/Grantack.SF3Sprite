@@ -1244,7 +1244,7 @@
             }
           ]
         },
-        "17": {
+        "OneFlippable": {
           "StillFrame (Kneeling 1, 1 Direction)": [
             {
               "Command": "SetDirectionCount",

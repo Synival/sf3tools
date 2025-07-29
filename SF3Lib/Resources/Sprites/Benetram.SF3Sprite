@@ -552,7 +552,7 @@
         }
       },
       "AnimationByDirections": {
-        "1": {
+        "OneNoFlip": {
           "ShakingHead (Sitting in Chair)": [
             {
               "Command": "SetDirectionCount",
@@ -1268,7 +1268,7 @@
             }
           ]
         },
-        "17": {
+        "OneFlippable": {
           "Idle (2 Frames)": [
             {
               "Command": "SetDirectionCount",
@@ -1450,7 +1450,7 @@
         }
       },
       "AnimationByDirections": {
-        "1": {
+        "OneNoFlip": {
           "GettingUpFromGround (Looks Silly)": [
             {
               "Frame": {

@@ -277,7 +277,7 @@
         }
       },
       "AnimationByDirections": {
-        "17": {
+        "OneFlippable": {
           "BreathingFire1": [
             {
               "Command": "SetDirectionCount",

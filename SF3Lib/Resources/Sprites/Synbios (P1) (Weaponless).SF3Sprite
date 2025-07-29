@@ -246,7 +246,7 @@
         }
       },
       "AnimationByDirections": {
-        "1": {
+        "OneNoFlip": {
           "GettingUpFromKneeling": [
             {
               "Frame": {

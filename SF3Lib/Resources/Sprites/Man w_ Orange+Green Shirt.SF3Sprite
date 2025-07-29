@@ -420,7 +420,7 @@
             }
           ]
         },
-        "17": {
+        "OneFlippable": {
           "Pointing (1 Direction)": [
             {
               "Command": "SetDirectionCount",

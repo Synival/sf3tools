@@ -75,7 +75,7 @@
         }
       },
       "AnimationByDirections": {
-        "1": {
+        "OneNoFlip": {
           "Poofing": [
             {
               "Frame": "Poofing 1",

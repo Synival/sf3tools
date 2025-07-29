@@ -254,7 +254,7 @@
         }
       },
       "AnimationByDirections": {
-        "1": {
+        "OneNoFlip": {
           "Idle (2 Frame)": [
             {
               "Frame": {

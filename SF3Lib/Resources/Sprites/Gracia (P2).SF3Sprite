@@ -407,7 +407,7 @@
         }
       },
       "AnimationByDirections": {
-        "1": {
+        "OneNoFlip": {
           "StillFrame (Blown Back, Repeat)": [
             {
               "Frame": {
@@ -938,7 +938,7 @@
         }
       },
       "AnimationByDirections": {
-        "1": {
+        "OneNoFlip": {
           "HoldingUpStaff": [
             {
               "Frame": {

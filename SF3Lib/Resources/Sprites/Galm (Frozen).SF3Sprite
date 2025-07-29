@@ -54,7 +54,7 @@
         }
       },
       "AnimationByDirections": {
-        "1": {
+        "OneNoFlip": {
           "StillFrame (Freezing 1)": [
             {
               "Frame": {

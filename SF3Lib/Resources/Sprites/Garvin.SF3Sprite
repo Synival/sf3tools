@@ -261,7 +261,7 @@
         }
       },
       "AnimationByDirections": {
-        "1": {
+        "OneNoFlip": {
           "StillFrame (Fierce Pose, Repeat)": [
             {
               "Frame": {

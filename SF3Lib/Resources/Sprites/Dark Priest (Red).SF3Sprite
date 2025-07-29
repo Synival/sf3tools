@@ -394,7 +394,7 @@
         }
       },
       "AnimationByDirections": {
-        "2": {
+        "TwoNoFlip": {
           "StillFrame (OnGround, Repeat)": [
             {
               "Frame": {

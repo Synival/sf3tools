@@ -47,7 +47,7 @@
         }
       },
       "AnimationByDirections": {
-        "1": {
+        "OneNoFlip": {
           "Exploding (Very Fast)": [
             {
               "Frame": "Exploding 1",

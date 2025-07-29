@@ -41,7 +41,7 @@
         }
       },
       "AnimationByDirections": {
-        "1": {
+        "OneNoFlip": {
           "StillFrame (OnGround, Repeat 1)": [
             {
               "Frame": {

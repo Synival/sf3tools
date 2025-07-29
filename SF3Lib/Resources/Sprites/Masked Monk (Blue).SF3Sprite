@@ -525,7 +525,7 @@
             }
           ]
         },
-        "17": {
+        "OneFlippable": {
           "GettingZapped (Fast)": [
             {
               "Command": "SetDirectionCount",

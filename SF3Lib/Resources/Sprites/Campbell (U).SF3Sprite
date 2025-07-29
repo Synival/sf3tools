@@ -386,7 +386,7 @@
             }
           ]
         },
-        "17": {
+        "OneFlippable": {
           "Idle (1 Direction)": [
             {
               "Command": "SetDirectionCount",

@@ -19,7 +19,7 @@
         }
       },
       "AnimationByDirections": {
-        "1": {
+        "OneNoFlip": {
           "StillFrame (Light)": [
             {
               "Frame": "Light 1",

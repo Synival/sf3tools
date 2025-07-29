@@ -26,7 +26,7 @@
         }
       },
       "AnimationByDirections": {
-        "1": {
+        "OneNoFlip": {
           "StillFrame (Alt)": [
             {
               "Frame": "Alt 1",
@@ -94,7 +94,7 @@
         }
       },
       "AnimationByDirections": {
-        "1": {
+        "OneNoFlip": {
           "StillFrame (Black+White)": [
             {
               "Frame": "Black+White 1",
@@ -123,7 +123,7 @@
         }
       },
       "AnimationByDirections": {
-        "1": {
+        "OneNoFlip": {
           "StillFrame (Black+White)": [
             {
               "Frame": "Black+White 1",
@@ -159,7 +159,7 @@
         }
       },
       "AnimationByDirections": {
-        "1": {
+        "OneNoFlip": {
           "StillFrame (Black)": [
             {
               "Frame": "Black 1",
@@ -197,7 +197,7 @@
         }
       },
       "AnimationByDirections": {
-        "1": {
+        "OneNoFlip": {
           "StillFrame (Black+White)": [
             {
               "Frame": "Black+White 1",

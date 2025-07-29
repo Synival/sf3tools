@@ -339,7 +339,7 @@
             }
           ]
         },
-        "17": {
+        "OneFlippable": {
           "HoldingUpHand (1 Direction)": [
             {
               "Command": "SetDirectionCount",

@@ -33,7 +33,7 @@
         }
       },
       "AnimationByDirections": {
-        "1": {
+        "OneNoFlip": {
           "Splash": [
             {
               "Frame": "Splash 1",

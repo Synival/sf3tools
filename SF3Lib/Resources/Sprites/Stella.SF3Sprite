@@ -563,7 +563,7 @@
             }
           ]
         },
-        "17": {
+        "OneFlippable": {
           "GettingUpFromKeeledOver": [
             {
               "Command": "SetDirectionCount",

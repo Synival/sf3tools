@@ -776,7 +776,7 @@
             }
           ]
         },
-        "17": {
+        "OneFlippable": {
           "Nodding (1 Direction)": [
             {
               "Command": "SetDirectionCount",

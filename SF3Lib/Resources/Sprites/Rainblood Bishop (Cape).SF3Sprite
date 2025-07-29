@@ -78,7 +78,7 @@
         }
       },
       "AnimationByDirections": {
-        "1": {
+        "OneNoFlip": {
           "Idle": [
             {
               "Frame": {
@@ -223,7 +223,7 @@
         }
       },
       "AnimationByDirections": {
-        "17": {
+        "OneFlippable": {
           "StillFrame (KnockedOut, Repeat)": [
             {
               "Command": "SetDirectionCount",

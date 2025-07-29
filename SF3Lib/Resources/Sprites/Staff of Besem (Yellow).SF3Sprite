@@ -86,7 +86,7 @@
             }
           ]
         },
-        "17": {
+        "OneFlippable": {
           "Glowing (1 Direction, Stop)": [
             {
               "Command": "SetDirectionCount",

@@ -82,7 +82,7 @@
         }
       },
       "AnimationByDirections": {
-        "1": {
+        "OneNoFlip": {
           "RepeatedPoofs": [
             {
               "Frame": "Poofing 1",

@@ -217,7 +217,7 @@
         }
       },
       "AnimationByDirections": {
-        "1": {
+        "OneNoFlip": {
           "Idle (Reduced)": [
             {
               "Frame": {

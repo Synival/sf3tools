@@ -24,7 +24,7 @@
         }
       },
       "AnimationByDirections": {
-        "2": {
+        "TwoNoFlip": {
           "StillFrame (Idle)": [
             {
               "Frame": "Idle 1",

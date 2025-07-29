@@ -659,7 +659,7 @@
         }
       },
       "AnimationByDirections": {
-        "1": {
+        "OneNoFlip": {
           "GettingUpFromGround": [
             {
               "Frame": {

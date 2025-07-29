@@ -538,7 +538,7 @@
             }
           ]
         },
-        "17": {
+        "OneFlippable": {
           "Kneeling (1 Direction)": [
             {
               "Command": "SetDirectionCount",

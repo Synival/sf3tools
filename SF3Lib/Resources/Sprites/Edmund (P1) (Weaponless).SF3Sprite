@@ -409,7 +409,7 @@
             }
           ]
         },
-        "17": {
+        "OneFlippable": {
           "Walking": [
             {
               "Command": "SetDirectionCount",

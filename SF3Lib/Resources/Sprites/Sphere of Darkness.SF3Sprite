@@ -40,7 +40,7 @@
         }
       },
       "AnimationByDirections": {
-        "17": {
+        "OneFlippable": {
           "Pulsating": [
             {
               "Command": "SetDirectionCount",

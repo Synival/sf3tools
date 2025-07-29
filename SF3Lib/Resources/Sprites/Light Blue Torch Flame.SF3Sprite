@@ -68,7 +68,7 @@
         }
       },
       "AnimationByDirections": {
-        "1": {
+        "OneNoFlip": {
           "Flickering": [
             {
               "Frame": "Flickering 1",

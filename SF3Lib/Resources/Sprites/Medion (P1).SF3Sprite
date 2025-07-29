@@ -345,7 +345,7 @@
         }
       },
       "AnimationByDirections": {
-        "1": {
+        "OneNoFlip": {
           "GettingUpFromKneeling": [
             {
               "Frame": {
@@ -576,7 +576,7 @@
             }
           ]
         },
-        "17": {
+        "OneFlippable": {
           "Attacking (1 Direction)": [
             {
               "Command": "SetDirectionCount",

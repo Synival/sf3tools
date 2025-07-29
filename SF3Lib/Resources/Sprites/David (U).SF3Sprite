@@ -516,7 +516,7 @@
         }
       },
       "AnimationByDirections": {
-        "1": {
+        "OneNoFlip": {
           "GivingThumbsUp (ENE)": [
             {
               "Frame": {
@@ -931,7 +931,7 @@
             }
           ]
         },
-        "17": {
+        "OneFlippable": {
           "StillFrame (Kneeling 1)": [
             {
               "Command": "SetDirectionCount",
