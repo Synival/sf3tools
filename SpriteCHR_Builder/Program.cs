@@ -1,434 +1,154 @@
-﻿using System.Drawing;
-using System.Drawing.Imaging;
-using CommonLib.Arrays;
-using CommonLib.Imaging;
-using CommonLib.Utils;
-using Newtonsoft.Json;
-using SF3.ByteData;
+﻿using SF3.CHR;
 using SF3.Sprites;
 using SF3.Types;
 using SF3.Utils;
 
 namespace SpriteCHR_Builder {
     public class Program {
-        public const string c_spritePath = "../../../../SpriteExtractor/Private";
-        public const string c_outputPath = "../../../Private";
+        public const string c_spritesheetPath = "../../../../SF3Lib/Resources/Spritesheets";
+        public const string c_outputPath      = "../../../../SF3Lib/Resources/Rebuilt_CHRs/Sprites";
 
         public static int Main(string[] args) {
-            var spriteDirs = Directory.GetDirectories(c_spritePath);
-            var spriteDefFiles = spriteDirs
-                .SelectMany(x => Directory.GetFiles(x, "*.SF3Sprite"))
-                .ToArray();
+            // Load all sprite sheets ahead of time.
+            // TODO: These really should be loaded on-demand.
+            Console.WriteLine("Loading SpriteDefs...");
+            SpriteUtils.SetSpritesheetPath(c_spritesheetPath);
+            SpriteUtils.LoadAllSpriteDefs();
+            var spriteDefs = SpriteUtils.GetAllSpriteDefs();
 
-            var spriteDefsWithPaths = spriteDefFiles
-                // TODO: check for invalid objects!
-                .Select(x => new { Path = x, SpriteDef = SpriteDef.FromJSON(File.ReadAllText(x))! })
-                .ToArray();
-
+            Console.WriteLine("Writing CHRs...");
             _ = Directory.CreateDirectory(c_outputPath);
-            foreach (var spriteDefWithPath in spriteDefsWithPaths) {
-                var path = spriteDefWithPath.Path ?? "";
-                var spriteDef = spriteDefWithPath.SpriteDef;
-                var outputChrFile = Path.Combine(c_outputPath, $"{SpriteUtils.FilesystemName(spriteDef.Name)}.CHR");
 
-                Console.WriteLine($"Creating '{outputChrFile}'...");
+            foreach (var spriteDef in spriteDefs) {
+                Console.WriteLine($"    {spriteDef.Name}");
 
-                using (var fileOut = File.Open(outputChrFile, FileMode.Create)) {
-#pragma warning disable CA1416 // Validate platform compatibility
-                    var spritesheets = spriteDef.Spritesheets
-                        .Select(x => Path.GetFileNameWithoutExtension(path) + $" ({x.Key})")
-                        .Where(x => File.Exists(Path.Combine(Path.GetDirectoryName(path) ?? "", x + ".png")))
-                        .ToDictionary(x => x, x => {
-                            var spritesheetFile = Path.Combine(Path.GetDirectoryName(path) ?? "", x + ".png");
-                            var image = (Bitmap) Image.FromFile(spritesheetFile);
-                            return image;
-                        });
-#pragma warning restore CA1416 // Validate platform compatibility
+                var chrSpriteDefs = new List<SF3.CHR.SpriteDef>();
+                foreach (var spritesheetKv in spriteDef.Spritesheets) {
+                    var spritesheetSize = SpritesheetDef.KeyToDimensions(spritesheetKv.Key);
+                    var spritesheetDef = spritesheetKv.Value;
 
-                    WriteSpriteDefCHR(fileOut, spriteDef, spritesheets);
+                    var allDirections = spritesheetDef.AnimationByDirections
+                        .Select(x => x.Key)
+                        .Distinct()
+                        .ToArray();
+
+                    foreach (var directions in allDirections) {
+                        var animationsWithCompleteness = spritesheetDef.AnimationByDirections[directions].Animations
+                            .ToDictionary(x => x.Key, x => (Animation: x.Value, HasAllFrames: x.Value.HasAllFrames(directions)));
+
+                        SpriteAnimationsDef[] completeAnimations = [
+                            new SpriteAnimationsDef() {
+                                Animations = animationsWithCompleteness
+                                    .Where(x => x.Value.HasAllFrames)
+                                    .Select(x => x.Key)
+                                    .ToArray()
+                            }
+                        ];
+
+                        var incompleteAnimations = 
+                            animationsWithCompleteness
+                                .Where(x => !x.Value.HasAllFrames)
+                                .Select(x => new SpriteAnimationsDef[] { new SpriteAnimationsDef() { Animations = [x.Key]}})
+                                .ToArray();
+
+                        SF3.CHR.SpriteDef NewChrSprite(SpriteAnimationsDef[] animations) {
+                            // TODO: let the compiler add these automatically
+                            var aniDefAnimations = animations
+                                .SelectMany(x => x.Animations)
+                                .Distinct()
+                                .OrderBy(x => x)
+                                .Select(x => spritesheetDef.AnimationByDirections[directions].Animations[x])
+                                .ToArray();
+
+                            // Gather all the frame groups required by every animation.
+                            // TODO: Whatever is happening below definitely won't work long-term. The right solution is
+                            // a bit tricky, so this will take some work.
+                            var frames = aniDefAnimations
+                                .SelectMany(x => {
+                                    var currentDir = directions;
+                                    return x.AnimationCommands
+                                        .Select(y => {
+                                            if (y.Command == SpriteAnimationFrameCommandType.SetDirectionCount) {
+                                                currentDir = y.Parameter;
+                                                return null;
+                                            }
+                                            else if (y.Command == SpriteAnimationFrameCommandType.Frame) {
+                                                var expectedFrames = CHR_Utils.GetCHR_FrameGroupDirections(currentDir);
+                                                var frames = (y.FrameGroup != null)
+                                                    ? expectedFrames.ToDictionary(z => z, z => new AnimationFrameDirectionDef() { Frame = y.FrameGroup, Direction = z })
+                                                    : y.Frames;
+
+                                                // If there aren't enough frames, there are 'null's missing. (SF3Sprite error?)
+                                                // Add them to the end.
+                                                foreach (var ef in expectedFrames)
+                                                    if (!frames.ContainsKey(ef))
+                                                        frames.Add(ef, null!);
+
+                                                return frames;
+                                            }
+                                            else
+                                                return null;
+                                        })
+                                        .Where(x => x != null)
+                                        // This two statements together will filter out all animation frames with nulls except for the one with the *most* frames.
+                                        // This is fix to the bogus Rainblood Rook (Capeless) animation, which has missing frames in multiple animation frames.
+                                        // Selecting the animation frame with the fewest missing frames will ensure that the other frames with missing frames exist.
+                                        // (This really isn't always the case, it's just a hack for this one...)
+                                        .OrderBy(x => x.Count(y => y.Value == null))
+                                        .GroupBy(x => x.Count(y => y.Value == null) == 0)
+                                        .SelectMany(x => x.Key == true ? x.ToArray() : [x.First()]);
+                                })
+                                .GroupBy(x => string.Join('|', x.Select(y => $"({y.Key}|{y.Value?.Frame}|{y.Value?.Direction})")))
+                                .Select(x => x.First()!.Values)
+                                .SelectMany(x => x
+                                    .Where(y => y != null)
+                                    .Select(y => new SF3.CHR.FrameGroupDef() {
+                                        Name = y.Frame,
+                                        Frames = [new SF3.CHR.FrameDef() { Direction = y.Direction }]
+                                    })
+                                )
+                                .ToArray();
+
+                            return new SF3.CHR.SpriteDef() {
+                                SpriteID       = spritesheetDef.SpriteID,
+                                SpriteName     = spriteDef.Name,
+                                Width          = spritesheetSize.Width,
+                                Height         = spritesheetSize.Height,
+                                Directions     = directions,
+                                PromotionLevel = 0,
+                                VerticalOffset = spritesheetDef.VerticalOffset,
+                                Unknown0x08    = spritesheetDef.Unknown0x08,
+                                CollisionSize  = spritesheetDef.CollisionSize,
+                                Scale          = spritesheetDef.Scale,
+
+                                SpriteFrames   = [new SpriteFramesDef() { FrameGroups = frames }],
+                                SpriteAnimations = animations
+                            };
+                        }
+
+                        if (completeAnimations.Length > 0)
+                            chrSpriteDefs.Add(NewChrSprite(completeAnimations));
+
+                        foreach (var animation in incompleteAnimations)
+                            chrSpriteDefs.Add(NewChrSprite(animation));
+                    }
+
+                    // TODO: add a special sprite that contains only frames that weren't used.
+                    // (Benetram has some of these, for example.)
+                }
+
+                var chrDef = new CHR_Def() {
+                    Sprites = chrSpriteDefs.ToArray()
+                };
+
+                using (var memoryStream = new MemoryStream()) {
+                    chrDef.ToCHR_File(memoryStream);
+                    var chrOutPath = Path.Combine(c_outputPath, SpriteUtils.FilesystemName(spriteDef.Name) + ".CHR");
+                    File.WriteAllBytes(chrOutPath, memoryStream.ToArray());
                 }
             }
 
             return 0;
-        }
-
-        private static void WriteSpriteDefCHR(FileStream fileOut, SpriteDef spriteDef, Dictionary<string, Bitmap> spritesheets) {
-            var compressedFrameData = GetCompressedFrameData(spriteDef, spritesheets);
-
-            WriteSpriteHeaderTable(fileOut, spriteDef, out var frameTableOffsetAddrs, out var animationTableOffsetAddrs);
-            WriteSpriteAnimationTables(fileOut, spriteDef, compressedFrameData, animationTableOffsetAddrs);
-            WriteSpriteFrameTables(fileOut, spriteDef, compressedFrameData, frameTableOffsetAddrs);
-        }
-
-        private class CompressedFrameDataInfo {
-            public CompressedFrameDataInfo(int variantIndex, int animationIndex, int animationFrameIndex, int animationFrameSubIndex, string hash) {
-                VariantIndex           = variantIndex;
-                AnimationIndex         = animationIndex;
-                AnimationFrameIndex    = animationFrameIndex;
-                AnimationFrameSubIndex = animationFrameSubIndex;
-                Hash                   = hash;
-            }
-
-            public int VariantIndex;
-            public int AnimationIndex;
-            public int AnimationFrameIndex;
-            public int AnimationFrameSubIndex;
-            public string Hash;
-            public int FrameIndex;
-            public int VariantFrameIndex;
-            public int CompressedDataIndex;
-        }
-
-        private class CompressedFrameData {
-            public CompressedFrameData(CompressedFrameDataInfo[] info, byte[][] data) {
-                Info = info;
-                Data = data;
-            }
-
-            public CompressedFrameDataInfo[] Info;
-            public byte[][] Data;
-        }
-
-        private static CompressedFrameData GetCompressedFrameData(SpriteDef spriteDef, Dictionary<string, Bitmap> spritesheets) {
-            byte[] GetCompressedFrame(Bitmap spritesheet, int index, int x, int y, int width, int height) {
-#pragma warning disable CA1416 // Validate platform compatibility
-                var uncompressedData = new ushort[width * height];
-                if (spritesheet == null || x < 0 || y < 0 || !(spritesheet.PixelFormat == PixelFormat.Format16bppArgb1555 || spritesheet.PixelFormat == PixelFormat.Format32bppArgb))
-                    return Compression.CompressSpriteData(uncompressedData, 0, uncompressedData.Length);
-
-                var bytesPerPixel = (spritesheet.PixelFormat == PixelFormat.Format32bppArgb) ? 4 : 2;
-
-                var ixMax = Math.Min(spritesheet.Width,  x + width);
-                var iyMax = Math.Min(spritesheet.Height, y + height);
-
-#pragma warning disable CA1416 // Validate platform compatibility
-                var bitmapData = spritesheet.LockBits(new Rectangle(0, 0, spritesheet.Width, spritesheet.Height), ImageLockMode.ReadOnly, spritesheet.PixelFormat);
-                unsafe {
-                    var bitmapDataPtr = (byte*) bitmapData.Scan0.ToPointer();
-                    int writePos = 0;
-                    for (var iy = y; iy < iyMax; iy++) {
-                        var readPos = (iy * spritesheet.Width + x) * bytesPerPixel;
-                        for (var ix = x; ix < ixMax; ix++) {
-                            uint bitmapColor = 0;
-                            for (int i = 0; i < bytesPerPixel; i++)
-                                bitmapColor |= (uint) (bitmapDataPtr[readPos++] << (i * 8));
-                            uncompressedData[writePos++] = (bytesPerPixel == 4)
-                                ? PixelConversion.ARGB8888toABGR1555(bitmapColor)
-                                : PixelConversion.ARGB1555toABGR1555((ushort) bitmapColor);
-                        }
-                    }
-                }
-                spritesheet.UnlockBits(bitmapData);
-
-                return Compression.CompressSpriteData(uncompressedData, 0, uncompressedData.Length);
-#pragma warning restore CA1416 // Validate platform compatibility
-            }
-
-            var framesByHash = spriteDef.Spritesheets
-                .SelectMany(x => {
-                    var dimensions = SpritesheetDef.KeyToDimensions(x.Key);
-                    return x.Value.FrameGroups
-                        .SelectMany(y => y.Value.Frames
-                            .Select(z => new StandaloneFrameDef(z.Value, z.Key, y.Key, dimensions.Width, dimensions.Height)));
-                })
-                .ToDictionary(x => x.Hash, x => x);
-
-            var uniqueAnimationFramesByVariant = spriteDef.Spritesheets
-                .SelectMany(x => x.Value.AnimationByDirections.Select(y => (Spritesheet: x, Variant: y)))
-                .Select(x => (Variant: x.Variant.Value, UniqueAnimationFrames: x.Variant.Value.Animations.Values
-                    .SelectMany(y => y.AnimationCommands)
-                    .Where(y => y != null && y.HasFrame)
-                    .GroupBy(y => AggregateFrameHashes(y, x.Spritesheet.Value.FrameGroups, CHR_Utils.DirectionsToFrameCount(x.Variant.Key)))
-                    .Select(y => y.First())
-                    .ToHashSet()
-                ))
-                .ToDictionary(x => x.Variant, x => x.UniqueAnimationFrames);
-
-            var frameInfos = spriteDef.Spritesheets
-                .SelectMany(x => x.Value.AnimationByDirections.Select(y => (Spritesheet: x, Variant: y)))
-                .SelectMany((x, xi) => (x.Variant.Value.Animations ?? [])
-                    .SelectMany((y, yi) => (y.Value.AnimationCommands ?? [])
-                        .Where(z => uniqueAnimationFramesByVariant[x.Variant.Value].Contains(z))
-                        .SelectMany((z, zi) => GetAnimationFrameHashes(z, x.Spritesheet.Value.FrameGroups, CHR_Utils.DirectionsToFrameCount(x.Variant.Key))
-                            .Where(zz => zz != null)
-                            .Select((zz, zzi) => new CompressedFrameDataInfo(variantIndex: xi, animationIndex: yi, animationFrameIndex: zi, animationFrameSubIndex: zzi, hash: zz)))
-                        )
-                    )
-                .ToList();
-
-            var frames = frameInfos
-                .Where(x => framesByHash.ContainsKey(x.Hash))
-                .Select(x => framesByHash[x.Hash])
-                .ToList();
-
-            var uniqueFramesByHash = frames
-                .GroupBy(x => x.Hash)
-                .ToDictionary(x => x.Key, x => x.First());
-
-            var uniqueFrameHashesFromAnimations = uniqueFramesByHash.Keys.ToHashSet();
-            var framesNotUsedInAnimations = spriteDef.Spritesheets
-                .SelectMany(x => {
-                    var dimensions = SpritesheetDef.KeyToDimensions(x.Key);
-                    return x.Value.FrameGroups
-                        .SelectMany(y => y.Value.Frames
-                            .Select(z => new StandaloneFrameDef(z.Value, z.Key, y.Key, dimensions.Width, dimensions.Height)));
-                })
-                .Where(x => !uniqueFrameHashesFromAnimations.Contains(x.Hash)).ToArray();
-
-            foreach (var f in framesNotUsedInAnimations) {
-                var variant = spriteDef.Spritesheets
-                    .SelectMany(x => x.Value.AnimationByDirections
-                        .Select(y => (Size: SpritesheetDef.KeyToDimensions(x.Key), Variant: y.Value)))
-                    .Select((x, i) => (x.Size, Variant: (AnimationGroupDef?) x.Variant, Index: i))
-                    .Where(x => x.Size.Width == f.Width && x.Size.Height == f.Height)
-                    .FirstOrDefault();
-                if (variant.Variant == null)
-                    continue;
-
-                frameInfos.Add(new CompressedFrameDataInfo(variant.Index, -1, -1, -1, f.Hash));
-                frames.Add(f);
-                uniqueFramesByHash[f.Hash] = f;
-            }
-
-            frameInfos = frameInfos
-                .OrderBy(x => x.VariantIndex)
-                .ThenBy(x => x.AnimationIndex)
-                .ThenBy(x => x.AnimationFrameIndex)
-                .ThenBy(x => x.AnimationFrameSubIndex)
-                .ToList();
-
-            var compressedFrameDataByHash = uniqueFramesByHash.Values
-                .Select((x, i) => new { Index = i, FrameDef = x })
-                .ToDictionary(x => x.FrameDef.Hash, x => {
-                    var spritesheetName = $"{SpriteUtils.FilesystemName(spriteDef.Name)} ({x.FrameDef.Width}x{x.FrameDef.Height})";
-#pragma warning disable CA1416 // Validate platform compatibility
-                    Bitmap? spritesheet;
-                    spritesheet = spritesheets.TryGetValue(spritesheetName, out var spritesheetOut) ? spritesheetOut : spritesheets.Values.FirstOrDefault();
-#pragma warning restore CA1416 // Validate platform compatibility
-                    return new { x.Index, Data = GetCompressedFrame(spritesheet, x.Index, x.FrameDef.SpritesheetX, x.FrameDef.SpritesheetY, x.FrameDef.Width, x.FrameDef.Height) };
-                });
-
-            var compressedFrameData = compressedFrameDataByHash.Select(x => x.Value.Data).ToArray();
-
-            var frameIndex = 0;
-            var variantFrameIndices = new Dictionary<int, int>();
-            foreach (var frameInfo in frameInfos) {
-                if (!variantFrameIndices.ContainsKey(frameInfo.VariantIndex))
-                    variantFrameIndices[frameInfo.VariantIndex] = 0;
-
-                frameInfo.FrameIndex = frameIndex++;
-                frameInfo.VariantFrameIndex = variantFrameIndices[frameInfo.VariantIndex]++;
-                frameInfo.CompressedDataIndex = compressedFrameDataByHash.ContainsKey(frameInfo.Hash) ? compressedFrameDataByHash[frameInfo.Hash].Index : -1;
-            }
-
-            return new CompressedFrameData(frameInfos.ToArray(), compressedFrameData);
-        }
-
-        private static void WriteSpriteHeaderTable(FileStream fileOut, SpriteDef spriteDef, out int[] frameTableOffsetAddrs, out int[] animationTableOffsetAddrs) {
-            var outputData = new ByteData(new ByteArray(0x18));
-            var variants = spriteDef.Spritesheets
-                .SelectMany(x => x.Value.AnimationByDirections
-                    .Select(y => (Size: SpritesheetDef.KeyToDimensions(x.Key), Direction: y.Key, Variant: y.Value)))
-                .ToArray();
-
-            frameTableOffsetAddrs     = new int[variants.Length];
-            animationTableOffsetAddrs = new int[variants.Length];
-
-            for (int i = 0; i < variants.Length; i++) {
-                var variant = variants[i];
-
-                outputData.SetWord(0x00, 0x0000); // Sprite ID (always 0 for these files)
-                outputData.SetWord(0x02, variant.Size.Width);
-                outputData.SetWord(0x04, variant.Size.Height);
-                outputData.SetByte(0x06, (byte) variant.Direction);
-                outputData.SetByte(0x07, 0x00);   // Vertical offset (always 0 for these files)
-                outputData.SetByte(0x08, 0x00);   // Unknown0x08 (always 0 for these files)
-                outputData.SetByte(0x09, 0x00);   // Collision shadow diameter (always 0 for these files)
-                outputData.SetByte(0x0A, 0x00);   // Promotion level (always 0 for these files)
-                outputData.SetDouble(0x0C, 0x00010000); // Size
-                outputData.SetDouble(0x10, 0x00000000); // Frame table offset (TODO: we should know this by now!)
-                outputData.SetDouble(0x14, 0x00000000); // Animation table offset (TODO: we should know this by now!)
-
-                frameTableOffsetAddrs[i]     = (i * 0x18) + 0x10;
-                animationTableOffsetAddrs[i] = (i * 0x18) + 0x14;
-
-                fileOut.Write(outputData.Data.GetDataCopyOrReference());
-            }
-
-            fileOut.WriteByte(0xFF);
-            fileOut.WriteByte(0xFF);
-            fileOut.Write(new byte[0x16]);
-        }
-
-        private static string[] GetAnimationFrameHashes(AnimationCommandDef aniCommand, Dictionary<string, FrameGroupDef> frameGroups, int frameCount) {
-            if (aniCommand.FrameGroup != null && frameGroups.ContainsKey(aniCommand.FrameGroup)) {
-                var fg = frameGroups[aniCommand.FrameGroup];
-                return Enumerable
-                    .Range(0, frameCount)
-                    .Select(x => CHR_Utils.FrameNumberToSpriteDir(frameCount, x))
-                    .Select(x => (fg.Frames.TryGetValue(x, out var frame) ? frame.Hash : null)!)
-                    .ToArray();
-            }
-
-            if (aniCommand.Frames != null) {
-                var hashes =
-                    Enumerable
-                    .Range(0, frameCount)
-                    .Select(x => CHR_Utils.FrameNumberToSpriteDir(frameCount, x))
-                    .Select(x => aniCommand.Frames.TryGetValue(x, out var frameOut) ? frameOut : null)
-                    .Select(x => (x != null && frameGroups.TryGetValue(x.Frame, out var fg)) ? (fg.Frames.TryGetValue(x.Direction, out var f) ? f.Hash : null) : null)
-                    .Cast<string>()
-                    .ToArray();
-
-                return hashes;
-            }
-
-            // There should never be animations whose frames couldn't be found.
-            return aniCommand.FrameHashes ?? [];
-        }
-
-        private static string AggregateFrameHashes(AnimationCommandDef aniCommand, Dictionary<string, FrameGroupDef> frameGroups, int frameCount) {
-            var hashes = GetAnimationFrameHashes(aniCommand, frameGroups, frameCount);
-            return hashes.Aggregate((a, b) => a + ((b == null) ? "_" : b));
-        }
-
-        private static int GetFrameIDForHashes(CompressedFrameDataInfo[] frames, string[] hashes) {
-            bool PositionHasHashes(int pos, int index) {
-                return (index == hashes.Length) || (pos < frames.Length && frames[pos].Hash == hashes[index] && PositionHasHashes(pos + 1, index + 1));
-            }
-            for (int i = 0; i < frames.Length; i++)
-                if (PositionHasHashes(i, 0))
-                    return i;
-            return -1;
-        }
-
-        private static void WriteSpriteAnimationTables(FileStream fileOut, SpriteDef spriteDef, CompressedFrameData compressedFrameData, int[] animationTableOffsetAddrs) {
-            var frameInfosByVariant = compressedFrameData.Info
-                .GroupBy(x => x.VariantIndex)
-                .Select(x => x.ToArray())
-                .ToArray();
-
-            var byteData = new ByteData(new ByteArray(4));
-            int variantIndex = 0;
-
-            foreach (var spritesheet in spriteDef.Spritesheets) {
-                foreach (var variant in spritesheet.Value.AnimationByDirections) {
-                    var variantFrames = (variantIndex < frameInfosByVariant?.Length) ? frameInfosByVariant[variantIndex] : [];
-                    var aniFrameTableOffsets = new int[variant.Value.Animations.Count];
-                    int aniIndex = 0;
-
-                    var validAnimations = variant.Value.Animations.Values
-                        .Where(x => x.AnimationCommands
-                            .All(y => y.Command != SpriteAnimationFrameCommandType.Frame || y.HasFullFrame(variant.Key)))
-                        .ToArray();
-
-                    foreach (var animation in validAnimations) {
-                        var aniFrameFrameIds = animation.AnimationCommands
-                            .Select((x, i) => (
-                                FrameID: x.Command == SpriteAnimationFrameCommandType.Frame
-                                    ? GetFrameIDForHashes(variantFrames, GetAnimationFrameHashes(x, spritesheet.Value.FrameGroups, CHR_Utils.DirectionsToFrameCount(variant.Key)))
-                                    : (int?) null,
-                                Index: i)
-                            )
-                            .ToArray();
-
-                        if (aniFrameFrameIds.Any(x => x.FrameID == -1))
-                            continue;
-
-                        aniFrameTableOffsets[aniIndex] = (int) fileOut.Position;
-                        var aniFrameIndex = 0;
-                        foreach (var aniCommand in animation.AnimationCommands) {
-                            if (aniCommand.Command == SpriteAnimationFrameCommandType.Frame) {
-                                byteData.SetWord(0x00, aniFrameFrameIds[aniFrameIndex].FrameID.Value);
-                                byteData.SetWord(0x02, aniCommand.Parameter);
-                            }
-                            else {
-                                // TODO: actually support commands here
-                                // TODO: going to another animation should be a hash lookup if it isn't already
-                                byteData.SetWord(0x00, (byte) aniCommand.Command);
-                                byteData.SetWord(0x02, aniCommand.Parameter);
-                            }
-
-                            fileOut.Write(byteData.Data.GetDataCopyOrReference());
-                            aniFrameIndex++;
-                        }
-                        aniIndex++;
-                    }
-
-                    var oldPos = (int) fileOut.Position;
-                    fileOut.Position = animationTableOffsetAddrs[variantIndex];
-                    byteData.SetDouble(0, oldPos);
-                    fileOut.Write(byteData.Data.GetDataCopyOrReference());
-                    fileOut.Position = oldPos;
-
-                    var animationCount = Math.Max(0x10, validAnimations.Length);
-                    for (int i = 0; i < animationCount; i++) {
-                        var aniFrameTableOffset = (i < validAnimations.Length) ? aniFrameTableOffsets[i] : 0;
-                        byteData.SetDouble(0, aniFrameTableOffset);
-                        fileOut.Write(byteData.Data.GetDataCopyOrReference());
-                    }
-
-                    variantIndex++;
-                }
-            }
-        }
-
-        private static void WriteSpriteFrameTables(FileStream fileOut, SpriteDef spriteDef, CompressedFrameData compressedFrameData, int[] frameTableOffsetAddrs) {
-            var frameInfosByVariant = compressedFrameData.Info
-                .GroupBy(x => x.VariantIndex)
-                .Select(x => x.ToArray())
-                .ToArray();
-
-            var offsetIndex = 0;
-            var offsets = new int[compressedFrameData.Info.Length];
-
-            var byteData = new ByteData(new ByteArray(4));
-            var byteDataRef = byteData.Data.GetDataCopyOrReference();
-            int variantIndex = 0;
-            foreach (var frameInfos in frameInfosByVariant) {
-                var oldPos = (int) fileOut.Position;
-                byteData.SetDouble(0, oldPos);
-                fileOut.Position = frameTableOffsetAddrs[variantIndex];
-                fileOut.Write(byteDataRef);
-                fileOut.Position = oldPos;
-
-                foreach (var frameInfo in frameInfos) {
-                    byteData.SetDouble(0, frameInfo.FrameIndex);
-                    offsets[offsetIndex++] = (int) fileOut.Position;
-                    fileOut.Write(byteDataRef);
-                }
-
-                // 4 bytes for terminator, 4 bytes for padding.
-                byteData.SetDouble(0, 0);
-                fileOut.Write(byteDataRef);
-                fileOut.Write(byteDataRef);
-
-                variantIndex++;
-            }
-
-            int imageIndex = 0;
-            foreach (var compressedImage in compressedFrameData.Data) {
-                var framesWithThisImage = compressedFrameData.Info.Where(x => x.CompressedDataIndex == imageIndex).ToArray();
-
-                if (framesWithThisImage.Length > 0) {
-                    var oldPos = (int) fileOut.Position;
-                    foreach (var frame in framesWithThisImage) {
-                        fileOut.Position = offsets[frame.FrameIndex];
-                        byteData.SetDouble(0, oldPos);
-                        fileOut.Write(byteDataRef);
-                    }
-                    fileOut.Position = oldPos;
-                }
-
-                fileOut.Write(compressedImage);
-                imageIndex++;
-            }
-
-            // Write 1) enough zeroes to reach a size divisible by four, and 2) four padding zeros.
-            var pos = (int) fileOut.Position;
-            var targetPos = ((pos % 4 == 0) ? pos : pos + (4 - (pos % 4))) + 4;
-            for (int i = pos; i < targetPos; i++)
-                fileOut.WriteByte(0x00);
         }
     }
 }

@@ -2,6 +2,8 @@
 using CommonLib;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using SF3.Types;
+using SF3.Utils;
 
 namespace SF3.Sprites {
     public class AnimationDef : IJsonResource {
@@ -58,6 +60,22 @@ namespace SF3.Sprites {
 
         public JToken ToJToken()
             => JToken.FromObject(AnimationCommands.Select(x => x.ToJToken()).ToArray());
+
+        /// <summary>
+        /// Returns 'true' if all of the animation commands with frames have no 'null' entries.
+        /// </summary>
+        /// <param name="startDirections">The number directions this animation has before any 'SetDirectionCount' command.</param>
+        /// <returns>'true' if there are no frame groups with missing frames, otherwise 'false'.</returns>
+        public bool HasAllFrames(int startDirections) {
+            var currentDirections = startDirections;
+            foreach (var aniCommand in AnimationCommands) {
+                if (aniCommand.Command == SpriteAnimationFrameCommandType.SetDirectionCount)
+                    currentDirections = aniCommand.Parameter;
+                else if (aniCommand.Command == SpriteAnimationFrameCommandType.Frame && !aniCommand.HasFullFrame(CHR_Utils.DirectionsToFrameCount(currentDirections)))
+                    return false;
+            }
+            return true;
+        }
 
         public override string ToString() => string.Join(", ", AnimationCommands.Select(x => x.ToString()));
 
