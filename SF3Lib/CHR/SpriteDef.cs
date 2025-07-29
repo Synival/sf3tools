@@ -3,6 +3,7 @@ using CommonLib;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using SF3.Sprites;
+using SF3.Types;
 using SF3.Utils;
 
 namespace SF3.CHR {
@@ -38,7 +39,7 @@ namespace SF3.CHR {
                 var jObj = (JObject) jToken;
 
                 SpriteName     = jObj.TryGetValue("Name",           out var spriteName)     ? ((string) spriteName)  : null;
-                Directions     = jObj.TryGetValue("Directions",     out var directions)     ? ((int) directions)     : 4;
+                Directions     = jObj.TryGetValue("Directions",     out var directions)     ? SpriteDirectionCountTypeExtensions.FromJToken(directions) : SpriteDirectionCountType.Four;
                 PromotionLevel = jObj.TryGetValue("PromotionLevel", out var promotionLevel) ? ((int) promotionLevel) : 0;
 
                 var spriteDef = SpriteUtils.GetSpriteDef(SpriteName);
@@ -55,9 +56,9 @@ namespace SF3.CHR {
                 Scale          = jObj.TryGetValue("Scale",          out var scale)          ? ((float) scale)        : spritesheet?.Scale          ?? 0;
 
                 if (jObj.TryGetValue("Frames", out var frames))
-                    FrameGroupsForSpritesheets = new FrameGroupsForSpritesheet[] { CHR.FrameGroupsForSpritesheet.FromJToken(frames) };
+                    FrameGroupsForSpritesheets = new FrameGroupsForSpritesheet[] { FrameGroupsForSpritesheet.FromJToken(frames) };
                 else if (jObj.TryGetValue("FramesBySprite", out var spriteFrames) && spriteFrames.Type == JTokenType.Array)
-                    FrameGroupsForSpritesheets = spriteFrames.Select(x => CHR.FrameGroupsForSpritesheet.FromJToken(x)).ToArray();
+                    FrameGroupsForSpritesheets = spriteFrames.Select(x => FrameGroupsForSpritesheet.FromJToken(x)).ToArray();
 
                 if (jObj.TryGetValue("Animations", out var animations))
                     AnimationsForSpritesheetAndDirections = new AnimationsForSpritesheetAndDirection[] { AnimationsForSpritesheetAndDirection.FromJToken(animations) };
@@ -78,9 +79,10 @@ namespace SF3.CHR {
             var jObj = new JObject();
             var jsonSettings = new JsonSerializer { NullValueHandling = NullValueHandling.Ignore };
 
-            jObj.Add("Name",       new JValue(SpriteName));
-            if (Directions != 4)
-                jObj.Add("Directions", new JValue(Directions));
+            jObj.Add("Name", new JValue(SpriteName));
+
+            if (Directions != SpriteDirectionCountType.Four)
+                jObj.Add("Directions", Directions.ToJToken());
             if (PromotionLevel != 0)
                 jObj.Add("PromotionLevel", new JValue(PromotionLevel));
 
@@ -126,7 +128,7 @@ namespace SF3.CHR {
         public int SpriteID;
         public int Width;
         public int Height;
-        public int Directions;
+        public SpriteDirectionCountType Directions;
         public int PromotionLevel;
 
         public int VerticalOffset;

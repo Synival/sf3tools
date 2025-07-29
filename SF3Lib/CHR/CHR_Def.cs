@@ -158,7 +158,7 @@ namespace SF3.CHR {
 
                                 // The 'SetDirectionCount' command (0xF1) updates the number of frames in our key from now on.
                                 if (aniCommand.Command == SpriteAnimationCommandType.SetDirectionCount)
-                                    currentDirections = aniCommand.Parameter;
+                                    currentDirections = (SpriteDirectionCountType) aniCommand.Parameter;
                                 // If this is a frame, we need to generate a key that will be used to locate a FrameID later.
                                 else if (aniCommand.Command == SpriteAnimationCommandType.Frame) {
                                     var frameDirections = CHR_Utils.GetCHR_FrameGroupDirections(currentDirections);

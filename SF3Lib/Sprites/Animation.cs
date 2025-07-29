@@ -66,11 +66,11 @@ namespace SF3.Sprites {
         /// </summary>
         /// <param name="startDirections">The number directions this animation has before any 'SetDirectionCount' command.</param>
         /// <returns>'true' if there are no frame groups with missing frames, otherwise 'false'.</returns>
-        public bool HasAllFrames(int startDirections) {
+        public bool HasAllFrames(SpriteDirectionCountType startDirections) {
             var currentDirections = startDirections;
             foreach (var aniCommand in AnimationCommands) {
                 if (aniCommand.Command == SpriteAnimationCommandType.SetDirectionCount)
-                    currentDirections = aniCommand.Parameter;
+                    currentDirections = (SpriteDirectionCountType) aniCommand.Parameter;
                 else if (aniCommand.Command == SpriteAnimationCommandType.Frame && !aniCommand.HasFullFrame(CHR_Utils.DirectionsToFrameCount(currentDirections)))
                     return false;
             }

@@ -45,6 +45,7 @@ namespace SF3.Types {
         Spell,
         SpellTarget,
         Sprite,
+        SpriteDirectionCount,
         StatType,
         WeaponSpell,
         WeaponType,

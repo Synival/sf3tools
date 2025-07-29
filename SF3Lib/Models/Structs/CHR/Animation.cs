@@ -85,7 +85,7 @@ namespace SF3.Models.Structs.CHR {
         private readonly Frame[] _framesWithTextures;
 
         [TableViewModelColumn(displayOrder: 0)]
-        public int Directions => AnimationInfo.Directions;
+        public SpriteDirectionCountType Directions => AnimationInfo.Directions;
 
         [TableViewModelColumn(displayOrder: 0.05f, displayName: "Index")]
         public int AnimationIndex { get; }

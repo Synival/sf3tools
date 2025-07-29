@@ -84,6 +84,7 @@ namespace SF3.NamedValues {
                 { NamedValueType.Spell,               new SubMethods((o, p, v, a) => new NameAndInfo(v, ValueNames.SpellInfo.Info[Scenario])) },
                 { NamedValueType.SpellTarget,         new SubMethods((o, p, v, a) => new NameAndInfo(v, ValueNames.SpellTargetInfo)) },
                 { NamedValueType.Sprite,              new SubMethods((o, p, v, a) => new NameAndInfo(v, ValueNames.SpriteCharacterMonsterInfo.Info[Scenario])) },
+                { NamedValueType.SpriteDirectionCount,new SubMethods((o, p, v, a) => new NameAndInfo(v, ValueNames.SpriteDirectionCountInfo)) },
                 { NamedValueType.StatType,            new SubMethods((o, p, v, a) => new NameAndInfo(v, ValueNames.StatTypeInfo)) },
                 { NamedValueType.WeaponSpell,         new SubMethods((o, p, v, a) => new NameAndInfo(v, ValueNames.WeaponSpellInfo.Info[Scenario])) },
                 { NamedValueType.WeaponType,          new SubMethods((o, p, v, a) => new NameAndInfo(v, ValueNames.WeaponTypeInfo)) },

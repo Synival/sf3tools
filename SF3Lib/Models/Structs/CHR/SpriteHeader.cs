@@ -80,7 +80,8 @@ namespace SF3.Models.Structs.CHR {
             set => Data.SetWord(_heightAddr, value);
         }
 
-        [TableViewModelColumn(addressField: nameof(_directionsAddr), displayOrder: 3, displayFormat: "X2")]
+        [TableViewModelColumn(addressField: nameof(_directionsAddr), displayOrder: 3)]
+        [NameGetter(NamedValueType.SpriteDirectionCount)]
         [BulkCopy]
         public byte Directions {
             get => (byte) Data.GetByte(_directionsAddr);

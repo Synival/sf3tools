@@ -69,7 +69,7 @@ namespace SpriteCHR_Builder {
                                     return x.AnimationCommands
                                         .Select(y => {
                                             if (y.Command == SpriteAnimationCommandType.SetDirectionCount) {
-                                                currentDir = y.Parameter;
+                                                currentDir = (SpriteDirectionCountType) y.Parameter;
                                                 return null;
                                             }
                                             else if (y.Command == SpriteAnimationCommandType.Frame) {

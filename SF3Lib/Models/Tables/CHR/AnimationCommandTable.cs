@@ -1,10 +1,11 @@
 using System;
 using SF3.ByteData;
 using SF3.Models.Structs.CHR;
+using SF3.Types;
 
 namespace SF3.Models.Tables.CHR {
     public class AnimationCommandTable : TerminatedTable<AnimationCommand> {
-        protected AnimationCommandTable(IByteData data, string name, int address, string rowPrefix, int spriteIndex, int spriteId, int spriteDirections, int animationType, FrameTable frameTable, int max)
+        protected AnimationCommandTable(IByteData data, string name, int address, string rowPrefix, int spriteIndex, int spriteId, SpriteDirectionCountType spriteDirections, int animationType, FrameTable frameTable, int max)
         : base(data, name, address, 0x00, max) {
             RowPrefix        = rowPrefix ?? "";
             SpriteIndex      = spriteIndex;
@@ -14,7 +15,7 @@ namespace SF3.Models.Tables.CHR {
             FrameTable       = frameTable;
         }
 
-        public static AnimationCommandTable Create(IByteData data, string name, int address, string rowPrefix, int spriteIndex, int spriteId, int spriteDirections, int animationIndex, FrameTable frameTable, int max) {
+        public static AnimationCommandTable Create(IByteData data, string name, int address, string rowPrefix, int spriteIndex, int spriteId, SpriteDirectionCountType spriteDirections, int animationIndex, FrameTable frameTable, int max) {
             var newTable = new AnimationCommandTable(data, name, address, rowPrefix, spriteIndex, spriteId, spriteDirections, animationIndex, frameTable, max);
             if (!newTable.Load())
                 throw new InvalidOperationException("Couldn't initialize table");
@@ -37,7 +38,7 @@ namespace SF3.Models.Tables.CHR {
         public int SpriteIndex { get; }
         public string RowPrefix { get; }
         public int SpriteID { get; }
-        public int SpriteDirections { get; }
+        public SpriteDirectionCountType SpriteDirections { get; }
         public int AnimationIndex { get; }
         public FrameTable FrameTable { get; }
     }

@@ -68,7 +68,7 @@ namespace SF3.Models.Structs.CHR {
                     $"Sprite{ID:D2}_Animation{x.ID:D2}_",
                     ID,
                     Header.SpriteID,
-                    Header.Directions,
+                    (SpriteDirectionCountType) Header.Directions,
                     x.ID,
                     FrameTable,
                     (int) ((aniOffsets[x.ID + 1] - aniOffsets[x.ID]) / 4)))
@@ -109,7 +109,7 @@ namespace SF3.Models.Structs.CHR {
                 SpriteName       = SpriteName,
                 Width            = Header.Width,
                 Height           = Header.Height,
-                Directions       = Header.Directions,
+                Directions       = (SpriteDirectionCountType) Header.Directions,
                 PromotionLevel   = Header.PromotionLevel,
 
                 SpriteID         = Header.SpriteID,
@@ -240,7 +240,7 @@ namespace SF3.Models.Structs.CHR {
             string lastSpriteName = null;
             int? lastWidth = null;
             int? lastHeight = null;
-            int? lastDirections = null;
+            SpriteDirectionCountType? lastDirections = null;
             var spriteAnimations = new List<AnimationsForSpritesheetAndDirection>();
             AnimationsForSpritesheetAndDirection lastSpriteAnimations = null;
 
@@ -270,7 +270,7 @@ namespace SF3.Models.Structs.CHR {
             // Go through each animation, building a set of CHR_SpriteFrameDef's.
             foreach (var animation in animationArray) {
                 var spriteName = (animation.SpriteName == SpriteName) ? null : animation.SpriteName;
-                var directions = animation.Directions == Header.Directions ? (int?) null : animation.Directions;
+                var directions = animation.Directions == (SpriteDirectionCountType) Header.Directions ? (SpriteDirectionCountType?) null : animation.Directions;
                 var width      = animation.AnimationInfo.Width  == Header.Width  ? (int?) null : animation.AnimationInfo.Width;
                 var height     = animation.AnimationInfo.Height == Header.Height ? (int?) null : animation.AnimationInfo.Height;
 

@@ -2,6 +2,7 @@
 using System.Windows.Forms;
 using CommonLib.NamedValues;
 using SF3.Models.Structs.CHR;
+using SF3.Types;
 
 namespace SF3.Win.Views.CHR {
     public class SpriteView : TabView {
@@ -22,7 +23,7 @@ namespace SF3.Win.Views.CHR {
 
             AnimationsView = new SpriteAnimationsView(
                 "Animations",
-                new SpriteAnimationsViewContext(Sprite?.Header?.Directions ?? 1, Sprite?.AnimationTable, Sprite?.AnimationCommandTablesByIndex ?? [], Sprite?.FrameTable),
+                new SpriteAnimationsViewContext((SpriteDirectionCountType) (Sprite?.Header?.Directions ?? 1), Sprite?.AnimationTable, Sprite?.AnimationCommandTablesByIndex ?? [], Sprite?.FrameTable),
                 nameGetterContext
             );
         }
@@ -51,7 +52,7 @@ namespace SF3.Win.Views.CHR {
                     FramesView.Table = _sprite?.FrameTable;
                     AnimationOffsetsView.Table = _sprite?.AnimationOffsetTable;
                     AnimationCommandsArrayView.Elements = (Sprite?.AnimationCommandTablesByIndex?.Values?.Select(x => new SpriteAnimationCommandsViewContext(x, Sprite.FrameTable))?.ToArray()) ?? [];
-                    AnimationsView.Context = new SpriteAnimationsViewContext(Sprite?.Header?.Directions ?? 1, Sprite?.AnimationTable, Sprite?.AnimationCommandTablesByIndex ?? [], Sprite?.FrameTable);
+                    AnimationsView.Context = new SpriteAnimationsViewContext((SpriteDirectionCountType) (Sprite?.Header?.Directions ?? 1), Sprite?.AnimationTable, Sprite?.AnimationCommandTablesByIndex ?? [], Sprite?.FrameTable);
                 }
             }
         }

@@ -12,7 +12,7 @@ namespace SF3.Models.Structs.CHR {
         private readonly int _frameIdAddr;
         private readonly int _durationAddr;
 
-        public AnimationCommand(IByteData data, int id, string name, int address, int spriteIndex, int spriteId, int directions, int animationIndex, FrameTable frameTable)
+        public AnimationCommand(IByteData data, int id, string name, int address, int spriteIndex, int spriteId, SpriteDirectionCountType directions, int animationIndex, FrameTable frameTable)
         : base(data, id, name, address, 0x4) {
             SpriteIndex    = spriteIndex;
             SpriteID       = spriteId;
@@ -23,7 +23,7 @@ namespace SF3.Models.Structs.CHR {
             _durationAddr = Address + 0x02; // 2 bytes
 
             // Number of directions changes with the 0xF1 command.
-            Directions = (CommandType == SpriteAnimationCommandType.SetDirectionCount) ? Parameter : directions;
+            Directions = (CommandType == SpriteAnimationCommandType.SetDirectionCount) ? (SpriteDirectionCountType) Parameter : directions;
         }
 
         [TableViewModelColumn(addressField: null, displayOrder: -0.4f, displayFormat: "X2")]
@@ -59,8 +59,8 @@ namespace SF3.Models.Structs.CHR {
             set => Data.SetWord(_durationAddr, value);
         }
 
-        [TableViewModelColumn(addressField: null, displayOrder: 2, displayFormat: "X2")]
-        public int Directions { get; }
+        [TableViewModelColumn(addressField: null, displayOrder: 2)]
+        public SpriteDirectionCountType Directions { get; }
 
         [TableViewModelColumn(addressField: null, displayOrder: 2.5f)]
         public int FramesMissing => IsFrameCommand ? (CHR_Utils.DirectionsToFrameCount(Directions) - GetFrameCount(Directions)) : 0;
@@ -85,7 +85,7 @@ namespace SF3.Models.Structs.CHR {
             }
         }
 
-        public int GetFrameCount(int directions) {
+        public int GetFrameCount(SpriteDirectionCountType directions) {
             if (FrameTable == null || !IsFrameCommand)
                 return 0;
 
@@ -94,7 +94,7 @@ namespace SF3.Models.Structs.CHR {
         }
 
         private readonly Dictionary<int, ITexture> _texturesByFrameCount = new Dictionary<int, ITexture>();
-        public ITexture GetTexture(int directions) {
+        public ITexture GetTexture(SpriteDirectionCountType directions) {
             if (FrameTable == null || !IsFrameCommand)
                 return null;
 

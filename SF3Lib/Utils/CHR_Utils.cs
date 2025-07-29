@@ -107,9 +107,10 @@ namespace SF3.Utils {
                         if (hash == null || sprite == null || animation == null || widthAttr == null || heightAttr == null || directionsAttr == null)
                             continue;
 
-                        int width, height, directions, frames;
-                        if (!int.TryParse(widthAttr, out width) || !int.TryParse(heightAttr, out height) || !int.TryParse(directionsAttr, out directions) || !int.TryParse(framesAttr, out frames))
+                        int width, height, frames, directionsInt;
+                        if (!int.TryParse(widthAttr, out width) || !int.TryParse(heightAttr, out height) || !int.TryParse(directionsAttr, out directionsInt) || !int.TryParse(framesAttr, out frames))
                             continue;
+                        var directions = (SpriteDirectionCountType) directionsInt;
 
                         if (sprite == "")
                             sprite = "None";
@@ -245,13 +246,13 @@ namespace SF3.Utils {
             }
         }
 
-        public static int DirectionsToFrameCount(int directions) {
+        public static int DirectionsToFrameCount(SpriteDirectionCountType directions) {
             switch (directions) {
-                case 2:  return 2;
-                case 4:  return 4;
-                case 5:  return 5;
-                case 6:  return 6;
-                case 8:  return 8;
+                case SpriteDirectionCountType.TwoNoFlip:   return 2;
+                case SpriteDirectionCountType.Four:  return 4;
+                case SpriteDirectionCountType.Five:  return 5;
+                case SpriteDirectionCountType.Six:   return 6;
+                case SpriteDirectionCountType.Eight: return 8;
                 default: return 1;
             }
         }
@@ -270,13 +271,13 @@ namespace SF3.Utils {
             public SpriteAnimationCommandType Command;
             public int Parameter;
             public int FrameID;
-            public int Directions;
+            public SpriteDirectionCountType Directions;
             public ITexture Image;
             public int FramesMissing;
         }
 
-        public static string CreateAnimationHash(int directions, Animation animation, Dictionary<string, FrameGroup> frameGroups, Dictionary<string, ITexture> texturesByHash) {
-            int currentDirections = directions;
+        public static string CreateAnimationHash(SpriteDirectionCountType directions, Animation animation, Dictionary<string, FrameGroup> frameGroups, Dictionary<string, ITexture> texturesByHash) {
+            SpriteDirectionCountType currentDirections = directions;
 
             var hashInfos = animation.AnimationCommands
                 .Select(x => {
@@ -296,7 +297,7 @@ namespace SF3.Utils {
                         : null;
 
                     if (x.Command == SpriteAnimationCommandType.SetDirectionCount)
-                        currentDirections = x.Parameter;
+                        currentDirections = (SpriteDirectionCountType) x.Parameter;
 
                     return new AnimationHashCommand() {
                         Command    = x.Command,
@@ -368,10 +369,12 @@ namespace SF3.Utils {
                 return BitConverter.ToString(md5.ComputeHash(Encoding.ASCII.GetBytes(hashStr))).Replace("-", "").ToLower();
         }
 
+        public static SpriteFrameDirection[] GetCHR_FrameGroupDirections(SpriteDirectionCountType directions)
+            => GetCHR_FrameGroupDirections(DirectionsToFrameCount(directions));
+
         public static SpriteFrameDirection[] GetCHR_FrameGroupDirections(int directions) {
             switch (directions) {
                 case 1:
-                case 0x11:
                     return new SpriteFrameDirection[] {
                         SpriteFrameDirection.First,
                     };

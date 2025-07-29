@@ -85,6 +85,8 @@ namespace SF3.NamedValues {
             = new NamedValueFromResourceInfo("SpellTargets.xml");
         public static readonly NamedValueFromResourceForScenariosInfo SpriteInfo
             = new NamedValueFromResourceForScenariosInfo("Sprites.xml", minValue: 0, maxValue: 300, formatString: "X3");
+        public static readonly NamedValueFromEnum<SpriteDirectionCountType> SpriteDirectionCountInfo
+            = new NamedValueFromEnum<SpriteDirectionCountType>();
         public static readonly SpriteCharacterMonsterInfo SpriteCharacterMonsterInfo
             = new SpriteCharacterMonsterInfo();
         public static readonly NamedValueFromResourceInfo StatTypeInfo

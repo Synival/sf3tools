@@ -126,17 +126,17 @@ namespace SF3.Sprites {
                 var frameGroup = frameGroups
                     .FirstOrDefault(x => FrameGroupHasHashes(x.Value));
                 if (frameGroup.Value != null) {
-                    FrameGroup  = frameGroup.Key;
-                    FramesByDirection      = null;
-                    FrameHashes = null;
+                    FrameGroup        = frameGroup.Key;
+                    FramesByDirection = null;
+                    FrameHashes       = null;
                     return true;
                 }
             }
 
             var allFramesByHash = frameGroups
                 .SelectMany(x => x.Value.Frames.Select(y => (
-                    Name: x.Key,
-                    Dir: y.Key,
+                    Name:  x.Key,
+                    Dir:   y.Key,
                     Frame: y.Value)))
                 .ToDictionary(x => x.Frame.Hash, x => x);
 
@@ -163,9 +163,9 @@ namespace SF3.Sprites {
 
         public override string ToString() {
             return
-                (FrameGroup != null)  ? $"{FrameGroup}, {Parameter}" :
-                (FramesByDirection != null)      ? string.Join("_", FramesByDirection.Select(x => $"{x.Value} ({x.Key})")) + $", {Parameter}" :
-                (FrameHashes != null) ? string.Join("_", FrameHashes) + $", {Parameter}" :
+                (FrameGroup        != null) ? $"{FrameGroup}, {Parameter}" :
+                (FramesByDirection != null) ? string.Join("_", FramesByDirection.Select(x => $"{x.Value} ({x.Key})")) + $", {Parameter}" :
+                (FrameHashes       != null) ? string.Join("_", FrameHashes) + $", {Parameter}" :
                 $"{Command}_{Parameter}";
         }
 

@@ -5,17 +5,18 @@ using BrightIdeasSoftware;
 using CommonLib.NamedValues;
 using SF3.Models.Structs.CHR;
 using SF3.Models.Tables.CHR;
+using SF3.Types;
 
 namespace SF3.Win.Views.CHR {
     public class SpriteAnimationsViewContext {
-        public SpriteAnimationsViewContext(int spriteDirections, AnimationTable animationTable, Dictionary<int, AnimationCommandTable> aniCommandTablesByIndex, FrameTable frameTable) {
+        public SpriteAnimationsViewContext(SpriteDirectionCountType spriteDirections, AnimationTable animationTable, Dictionary<int, AnimationCommandTable> aniCommandTablesByIndex, FrameTable frameTable) {
             SpriteDirections              = spriteDirections;
             AnimationTable                = animationTable;
             AnimationCommandTablesByIndex = aniCommandTablesByIndex;
             FrameTable                    = frameTable;
         }
 
-        public readonly int SpriteDirections;
+        public readonly SpriteDirectionCountType SpriteDirections;
         public readonly AnimationTable AnimationTable;
         public readonly Dictionary<int, AnimationCommandTable> AnimationCommandTablesByIndex;
         public readonly FrameTable FrameTable;
@@ -71,7 +72,7 @@ namespace SF3.Win.Views.CHR {
             set {
                 if (_context != value) {
                     _context = value;
-                    TextureView.Context = new SpriteAnimationTextureViewContext(value?.SpriteDirections ?? 1, value?.AnimationCommandTablesByIndex, value?.FrameTable);
+                    TextureView.Context = new SpriteAnimationTextureViewContext(value?.SpriteDirections ?? SpriteDirectionCountType.OneNoFlip, value?.AnimationCommandTablesByIndex, value?.FrameTable);
                     TableView.Table = _context?.AnimationTable;
                 }
             }

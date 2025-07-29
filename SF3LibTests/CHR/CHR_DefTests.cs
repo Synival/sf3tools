@@ -47,6 +47,89 @@ namespace SF3.Tests.CHR {
             }
         ";
 
+        private static readonly string c_lookoverChurchCHR_Text = @"
+             {
+              'Sprites': [
+                {
+                  'Name': 'Church Priest',
+                  'Frames': [
+                    'Walking 1',
+                    'Walking 2',
+                    'Idle 1',
+                    'Walking 3',
+                    'Walking 4'
+                  ],
+                  'Animations': [
+                    'StillFrame (Walking 1)',
+                    'Walking (Render 1)',
+                    'Walking (Render 1)'
+                  ]
+                },
+                {
+                  'Name': 'Woman w/ Blue Dress and Apron',
+                  'Frames': [
+                    'Walking 1',
+                    'Walking 2',
+                    'Walking 3',
+                    'Walking 4',
+                    'Walking 5'
+                  ],
+                  'Animations': [
+                    'StillFrame',
+                    'Walking (Slower)',
+                    'Walking (Faster)'
+                  ]
+                },
+                {
+                  'Name': 'Old Woman',
+                  'Frames': [
+                    'Walking 1',
+                    'Walking 2',
+                    'Walking 3',
+                    'Walking 4',
+                    'Walking 5'
+                  ],
+                  'Animations': [
+                    'StillFrame (Walking)',
+                    'Walking',
+                    'Walking'
+                  ]
+                }
+              ]
+            }
+        ";
+
+        private static readonly string c_lookoverChurchCHR_WithoutFrames_Text = @"
+             {
+              'Sprites': [
+                {
+                  'Name': 'Church Priest',
+                  'Animations': [
+                    'StillFrame (Walking 1)',
+                    'Walking (Render 1)',
+                    'Walking (Render 1)'
+                  ]
+                },
+                {
+                  'Name': 'Woman w/ Blue Dress and Apron',
+                  'Animations': [
+                    'StillFrame',
+                    'Walking (Slower)',
+                    'Walking (Faster)'
+                  ]
+                },
+                {
+                  'Name': 'Old Woman',
+                  'Animations': [
+                    'StillFrame (Walking)',
+                    'Walking',
+                    'Walking'
+                  ]
+                }
+              ]
+            }
+        ";
+
         [TestMethod]
         public void ToCHR_File_ToStream_WithEmptyCHR_ExportsExpectedData() {
             var emptyCHR = CHR_Def.FromJSON(c_emptyCHR_Text);
@@ -142,7 +225,7 @@ namespace SF3.Tests.CHR {
             Assert.AreEqual(sprite0.SpriteID, 0);
             Assert.AreEqual(sprite0.Width, 40);
             Assert.AreEqual(sprite0.Height, 40);
-            Assert.AreEqual(sprite0.Directions, 4);
+            Assert.AreEqual(sprite0.Directions, SpriteDirectionCountType.Four);
             Assert.AreEqual(sprite0.VerticalOffset, 0);
             Assert.AreEqual(sprite0.Unknown0x08, 20);
             Assert.AreEqual(sprite0.CollisionSize, 40);
@@ -156,7 +239,7 @@ namespace SF3.Tests.CHR {
             Assert.AreEqual(sprite1.SpriteID, 0);
             Assert.AreEqual(sprite1.Width, 40);
             Assert.AreEqual(sprite1.Height, 40);
-            Assert.AreEqual(sprite1.Directions, 4);
+            Assert.AreEqual(sprite1.Directions, SpriteDirectionCountType.Four);
             Assert.AreEqual(sprite1.VerticalOffset, 0);
             Assert.AreEqual(sprite1.Unknown0x08, 20);
             Assert.AreEqual(sprite1.CollisionSize, 40);
@@ -164,6 +247,15 @@ namespace SF3.Tests.CHR {
             Assert.AreEqual(sprite1.PromotionLevel, 1);
             Assert.AreEqual(sprite1.FrameGroupsForSpritesheets, null);
             Assert.AreEqual(sprite1.AnimationsForSpritesheetAndDirections, null);
+        }
+
+        [TestMethod]
+        public void Deserialize_LookoverChurchCHRs_CompiledCHRsHaveSameFramesAndAnimations() {
+            var chrDefWithFrames    = CHR_Def.FromJSON(c_lookoverChurchCHR_Text);
+            var chrDefWithoutFrames = CHR_Def.FromJSON(c_lookoverChurchCHR_WithoutFrames_Text);
+
+            // TODO: finish this thing!
+            throw new NotImplementedException();
         }
     }
 }

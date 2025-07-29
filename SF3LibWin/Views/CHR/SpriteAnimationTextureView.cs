@@ -5,13 +5,13 @@ using SF3.Types;
 
 namespace SF3.Win.Views.CHR {
     public class SpriteAnimationTextureViewContext {
-        public SpriteAnimationTextureViewContext(int spriteDirections, Dictionary<int, AnimationCommandTable> aniCommandTablesByIndex, FrameTable frameTable) {
+        public SpriteAnimationTextureViewContext(SpriteDirectionCountType spriteDirections, Dictionary<int, AnimationCommandTable> aniCommandTablesByIndex, FrameTable frameTable) {
             SpriteDirections              = spriteDirections;
             AnimationCommandTablesByIndex = aniCommandTablesByIndex;
             FrameTable                    = frameTable;
         }
 
-        public readonly int SpriteDirections;
+        public readonly SpriteDirectionCountType SpriteDirections;
         public readonly Dictionary<int, AnimationCommandTable> AnimationCommandTablesByIndex;
         public readonly FrameTable FrameTable;
     }
@@ -81,7 +81,7 @@ namespace SF3.Win.Views.CHR {
                         break;
 
                     case SpriteAnimationCommandType.SetDirectionCount:
-                        _currentDirections = param;
+                        _currentDirections = (SpriteDirectionCountType) param;
                         nextCommandIndex++;
                         break;
 
@@ -137,6 +137,6 @@ namespace SF3.Win.Views.CHR {
         }
 
         private AnimationCommandTable _commands = null;
-        private int _currentDirections = 0;
+        private SpriteDirectionCountType _currentDirections = 0;
     }
 }

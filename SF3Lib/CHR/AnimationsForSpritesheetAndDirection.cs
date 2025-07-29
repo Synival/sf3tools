@@ -2,6 +2,7 @@
 using CommonLib;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using SF3.Types;
 
 namespace SF3.CHR {
     public class AnimationsForSpritesheetAndDirection : IJsonResource {
@@ -43,7 +44,7 @@ namespace SF3.CHR {
                         SpriteName = jObj.TryGetValue("SpriteName", out var spriteName) ? ((string) spriteName) : null;
                         Width      = jObj.TryGetValue("Width",      out var width)      ? ((int?) width)        : null;
                         Height     = jObj.TryGetValue("Height",     out var height)     ? ((int?) height)       : null;
-                        Directions = jObj.TryGetValue("Directions", out var directions) ? ((int?) directions)   : null;
+                        Directions = jObj.TryGetValue("Directions", out var directions) ? SpriteDirectionCountTypeExtensions.FromJToken(directions) : (SpriteDirectionCountType?) null;
 
                         Animations = jObj.TryGetValue("Animations", out var animations)
                             ? animations.Select(x => (string) x).ToArray()
@@ -77,7 +78,7 @@ namespace SF3.CHR {
             if (Height.HasValue)
                 jObj.Add("Height", new JValue(Height.Value));
             if (Directions.HasValue)
-                jObj.Add("Directions", new JValue(Directions));
+                jObj.Add("Directions", Directions.Value.ToJToken());
             if (Animations != null)
                 jObj.Add("Animations", JToken.FromObject(Animations, jsonSettings));
 
@@ -90,7 +91,7 @@ namespace SF3.CHR {
         public string SpriteName;
         public int? Width;
         public int? Height;
-        public int? Directions;
+        public SpriteDirectionCountType? Directions;
         public string[] Animations;
     }
 }

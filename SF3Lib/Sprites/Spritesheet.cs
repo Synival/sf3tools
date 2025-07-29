@@ -1,8 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using CommonLib;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using SF3.Types;
 
 namespace SF3.Sprites {
     public class Spritesheet : IJsonResource {
@@ -24,12 +26,12 @@ namespace SF3.Sprites {
             AnimationSetsByDirections = GetAnimationGroupsByDirections(animations);
         }
 
-        public Spritesheet(StandaloneFrameDef[] frames, Dictionary<int, AnimationSet> variants) {
+        public Spritesheet(StandaloneFrameDef[] frames, Dictionary<SpriteDirectionCountType, AnimationSet> animationSetsByDirections) {
             FrameGroupsByName = frames
                 .GroupBy(x => x.Name)
                 .ToDictionary(x => x.Key, x => new FrameGroup(x.ToArray()));
 
-            AnimationSetsByDirections = variants;
+            AnimationSetsByDirections = animationSetsByDirections;
         }
 
         /// <summary>
@@ -77,8 +79,8 @@ namespace SF3.Sprites {
 
                         if (jObj.TryGetValue("AnimationByDirections", out var animationByDirections) && animationByDirections.Type == JTokenType.Object) {
                             AnimationSetsByDirections = ((IDictionary<string, JToken>) animationByDirections)
-                                .Where(x => int.TryParse(x.Key, out var _))
-                                .ToDictionary(x => int.Parse(x.Key), x => AnimationSet.FromJToken(x.Value));
+                                .Where(x => Enum.TryParse<SpriteDirectionCountType>(x.Key, out var _))
+                                .ToDictionary(x => SpriteDirectionCountTypeExtensions.FromSerializedString(x.Key), x => AnimationSet.FromJToken(x.Value));
                         }
                     }
                     catch {
@@ -95,29 +97,29 @@ namespace SF3.Sprites {
             => ToJToken().ToString(Formatting.Indented);
 
         public JToken ToJToken() {
-            var jObj = new JObject();
-
-            jObj.Add("SpriteID",       new JValue(SpriteID));
-            jObj.Add("VerticalOffset", new JValue(VerticalOffset));
-            jObj.Add("Unknown0x08",    new JValue(Unknown0x08));
-            jObj.Add("CollisionSize",  new JValue(CollisionSize));
-            jObj.Add("Scale",          new JValue(Scale));
+            var jObj = new JObject {
+                { "SpriteID",       new JValue(SpriteID) },
+                { "VerticalOffset", new JValue(VerticalOffset) },
+                { "Unknown0x08",    new JValue(Unknown0x08) },
+                { "CollisionSize",  new JValue(CollisionSize) },
+                { "Scale",          new JValue(Scale) }
+            };
 
             if (FrameGroupsByName != null)
                 jObj.Add("FrameGroups", JToken.FromObject(FrameGroupsByName.ToDictionary(x => x.Key, x => x.Value.ToJToken())));
             if (AnimationSetsByDirections != null)
-                jObj.Add("AnimationByDirections", JToken.FromObject(AnimationSetsByDirections.ToDictionary(x => x.Key, x => x.Value.ToJToken())));
+                jObj.Add("AnimationByDirections", JToken.FromObject(AnimationSetsByDirections.ToDictionary(x => x.Key.ToSerializedString(), x => x.Value.ToJToken())));
 
             return jObj;
         }
 
-        private Dictionary<int, AnimationSet> GetAnimationGroupsByDirections(UniqueAnimationDef[] animations) {
+        private Dictionary<SpriteDirectionCountType, AnimationSet> GetAnimationGroupsByDirections(UniqueAnimationDef[] animations) {
             return animations
                 .Where(y => y.AnimationCommands != null && y.AnimationCommands.Length > 0)
                 .OrderBy(y => y.Width)
                 .ThenBy(y => y.Height)
                 .ThenBy(y => y.Directions)
-                .GroupBy(y => ((y.Width & 0xFFFF) << 24) + ((y.Height & 0xFFFF) << 8) + (y.Directions & 0xFF))
+                .GroupBy(y => ((y.Width & 0xFFFF) << 24) + ((y.Height & 0xFFFF) << 8) + (byte) y.Directions)
                 .ToDictionary(y => y.First().Directions, y => new AnimationSet(y.ToArray()));
         }
 
@@ -138,6 +140,6 @@ namespace SF3.Sprites {
         public float Scale        = 0;
 
         public Dictionary<string, FrameGroup> FrameGroupsByName;
-        public Dictionary<int, AnimationSet> AnimationSetsByDirections;
+        public Dictionary<SpriteDirectionCountType, AnimationSet> AnimationSetsByDirections;
     }
 }
