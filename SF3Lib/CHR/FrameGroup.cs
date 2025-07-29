@@ -4,25 +4,25 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
 namespace SF3.CHR {
-    public class FrameGroupDef : IJsonResource {
+    public class FrameGroup : IJsonResource {
         /// <summary>
-        /// Deserializes a JSON object of a FrameGroupDef.
+        /// Deserializes a JSON object of a FrameGroup.
         /// </summary>
-        /// <param name="json">FrameGroupDef in JSON format as a string.</param>
-        /// <returns>A new FrameGroupDef if deserializing was successful, or 'null' if not.</returns>
-        public static FrameGroupDef FromJSON(string json) {
-            var frameGroupDef = new FrameGroupDef();
-            return frameGroupDef.AssignFromJSON_String(json) ? frameGroupDef : null;
+        /// <param name="json">FrameGroup in JSON format as a string.</param>
+        /// <returns>A new FrameGroup if deserializing was successful, or 'null' if not.</returns>
+        public static FrameGroup FromJSON(string json) {
+            var frameGroup = new FrameGroup();
+            return frameGroup.AssignFromJSON_String(json) ? frameGroup : null;
         }
 
         /// <summary>
-        /// Deserializes a JSON object of a FrameGroupDef.
+        /// Deserializes a JSON object of a FrameGroup.
         /// </summary>
-        /// <param name="jToken">FrameGroupDef as a JToken.</param>
-        /// <returns>A new FrameGroupDef if deserializing was successful, or 'null' if not.</returns>
-        public static FrameGroupDef FromJToken(JToken jToken) {
-            var frameGroupDef = new FrameGroupDef();
-            return frameGroupDef.AssignFromJToken(jToken) ? frameGroupDef : null;
+        /// <param name="jToken">FrameGroup as a JToken.</param>
+        /// <returns>A new FrameGroup if deserializing was successful, or 'null' if not.</returns>
+        public static FrameGroup FromJToken(JToken jToken) {
+            var frameGroup = new FrameGroup();
+            return frameGroup.AssignFromJToken(jToken) ? frameGroup : null;
         }
 
         public bool AssignFromJSON_String(string json)
@@ -42,7 +42,7 @@ namespace SF3.CHR {
                         var jObj = (JObject) jToken;
                         Name   = jObj.TryGetValue("Name",   out var name)   ? ((string) name) : null;
                         Frames = jObj.TryGetValue("Directions", out var frames)
-                            ? frames.Select(x => FrameDef.FromJToken(x)).ToArray()
+                            ? frames.Select(x => Frame.FromJToken(x)).ToArray()
                             : null;
                     }
                     catch {
@@ -77,6 +77,6 @@ namespace SF3.CHR {
             => (Name != null ? Name + ": " : "") + ((Frames != null) ? string.Join(", ", Frames.Select(x => "{" + x.ToString() + "}")) : "[]");
 
         public string Name;
-        public FrameDef[] Frames;
+        public Frame[] Frames;
     }
 }

@@ -4,14 +4,14 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
 namespace SF3.CHR {
-    public class SpriteAnimationsDef : IJsonResource {
+    public class AnimationsForSpritesheetAndDirection : IJsonResource {
         /// <summary>
         /// Deserializes a JSON object of a SpriteAnimationsDef.
         /// </summary>
         /// <param name="json">SpriteAnimationsDef in JSON format as a string.</param>
         /// <returns>A new SpriteAnimationsDef if deserializing was successful, or 'null' if not.</returns>
-        public static SpriteAnimationsDef FromJSON(string json) {
-            var spriteAnimations = new SpriteAnimationsDef();
+        public static AnimationsForSpritesheetAndDirection FromJSON(string json) {
+            var spriteAnimations = new AnimationsForSpritesheetAndDirection();
             return spriteAnimations.AssignFromJSON_String(json) ? spriteAnimations : null;
         }
 
@@ -20,8 +20,8 @@ namespace SF3.CHR {
         /// </summary>
         /// <param name="jToken">SpriteAnimationsDef as a JToken.</param>
         /// <returns>A new SpriteAnimationsDef if deserializing was successful, or 'null' if not.</returns>
-        public static SpriteAnimationsDef FromJToken(JToken jToken) {
-            var spriteAnimations = new SpriteAnimationsDef();
+        public static AnimationsForSpritesheetAndDirection FromJToken(JToken jToken) {
+            var spriteAnimations = new AnimationsForSpritesheetAndDirection();
             return spriteAnimations.AssignFromJToken(jToken) ? spriteAnimations : null;
         }
 

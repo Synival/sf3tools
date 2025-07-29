@@ -3,39 +3,39 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
 namespace SF3.Sprites {
-    public class FrameDef : IJsonResource {
-        public FrameDef() { }
+    public class Frame : IJsonResource {
+        public Frame() { }
 
-        public FrameDef(UniqueFrameDef frame) {
+        public Frame(UniqueFrameDef frame) {
             Hash         = frame.TextureHash;
             SpritesheetX = -1;
             SpritesheetY = -1;
         }
 
-        public FrameDef(StandaloneFrameDef frame) {
+        public Frame(StandaloneFrameDef frame) {
             Hash         = frame.Hash;
             SpritesheetX = frame.SpritesheetX;
             SpritesheetY = frame.SpritesheetY;
         }
 
         /// <summary>
-        /// Deserializes a JSON object of a FrameDef.
+        /// Deserializes a JSON object of a Frame.
         /// </summary>
-        /// <param name="json">FrameDef in JSON format as a string.</param>
-        /// <returns>A new FrameDef if deserializing was successful, or 'null' if not.</returns>
-        public static FrameDef FromJSON(string json) {
-            var frameDef = new FrameDef();
-            return frameDef.AssignFromJSON_String(json) ? frameDef : null;
+        /// <param name="json">Frame in JSON format as a string.</param>
+        /// <returns>A new Frame if deserializing was successful, or 'null' if not.</returns>
+        public static Frame FromJSON(string json) {
+            var frame = new Frame();
+            return frame.AssignFromJSON_String(json) ? frame : null;
         }
 
         /// <summary>
-        /// Deserializes a JSON object of a FrameDef.
+        /// Deserializes a JSON object of a Frame.
         /// </summary>
-        /// <param name="jToken">FrameDef as a JToken.</param>
-        /// <returns>A new FrameDef if deserializing was successful, or 'null' if not.</returns>
-        public static FrameDef FromJToken(JToken jToken) {
-            var frameDef = new FrameDef();
-            return frameDef.AssignFromJToken(jToken) ? frameDef : null;
+        /// <param name="jToken">Frame as a JToken.</param>
+        /// <returns>A new Frame if deserializing was successful, or 'null' if not.</returns>
+        public static Frame FromJToken(JToken jToken) {
+            var frame = new Frame();
+            return frame.AssignFromJToken(jToken) ? frame : null;
         }
 
         public bool AssignFromJSON_String(string json)

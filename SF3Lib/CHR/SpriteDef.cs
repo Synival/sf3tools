@@ -46,7 +46,7 @@ namespace SF3.CHR {
                 Width          = jObj.TryGetValue("Width",          out var width)          ? ((int) width)          : spriteDef?.Width  ?? 0;
                 Height         = jObj.TryGetValue("Height",         out var height)         ? ((int) height)         : spriteDef?.Height ?? 0;
 
-                var spritesheet = (spriteDef?.Spritesheets?.TryGetValue(SpritesheetDef.DimensionsToKey(Width, Height), out var ssOut) == true) ? ssOut : null;
+                var spritesheet = (spriteDef?.Spritesheets?.TryGetValue(Spritesheet.DimensionsToKey(Width, Height), out var ssOut) == true) ? ssOut : null;
 
                 SpriteID       = jObj.TryGetValue("SpriteID",       out var spriteId)       ? ((int) spriteId)       : spritesheet?.SpriteID       ?? 0;
                 VerticalOffset = jObj.TryGetValue("VerticalOffset", out var verticalOffset) ? ((int) verticalOffset) : spritesheet?.VerticalOffset ?? 0;
@@ -55,14 +55,14 @@ namespace SF3.CHR {
                 Scale          = jObj.TryGetValue("Scale",          out var scale)          ? ((float) scale)        : spritesheet?.Scale          ?? 0;
 
                 if (jObj.TryGetValue("Frames", out var frames))
-                    SpriteFrames = new SpriteFramesDef[] { SpriteFramesDef.FromJToken(frames) };
+                    FrameGroupsForSpritesheets = new FrameGroupsForSpritesheet[] { CHR.FrameGroupsForSpritesheet.FromJToken(frames) };
                 else if (jObj.TryGetValue("FramesBySprite", out var spriteFrames) && spriteFrames.Type == JTokenType.Array)
-                    SpriteFrames = spriteFrames.Select(x => SpriteFramesDef.FromJToken(x)).ToArray();
+                    FrameGroupsForSpritesheets = spriteFrames.Select(x => CHR.FrameGroupsForSpritesheet.FromJToken(x)).ToArray();
 
                 if (jObj.TryGetValue("Animations", out var animations))
-                    SpriteAnimations = new SpriteAnimationsDef[] { SpriteAnimationsDef.FromJToken(animations) };
+                    AnimationsForSpritesheetAndDirections = new AnimationsForSpritesheetAndDirection[] { AnimationsForSpritesheetAndDirection.FromJToken(animations) };
                 else if (jObj.TryGetValue("AnimationsBySprite", out var spriteAnimations) && spriteAnimations.Type == JTokenType.Array)
-                    SpriteAnimations = spriteAnimations.Select(x => SpriteAnimationsDef.FromJToken(x)).ToArray();
+                    AnimationsForSpritesheetAndDirections = spriteAnimations.Select(x => AnimationsForSpritesheetAndDirection.FromJToken(x)).ToArray();
 
                 return true;
             }
@@ -85,7 +85,7 @@ namespace SF3.CHR {
                 jObj.Add("PromotionLevel", new JValue(PromotionLevel));
 
             var spriteDef = SpriteUtils.GetSpriteDef(SpriteName);
-            var spritesheet = (spriteDef?.Spritesheets?.TryGetValue(SpritesheetDef.DimensionsToKey(Width, Height), out var ssOut) == true) ? ssOut : null;
+            var spritesheet = (spriteDef?.Spritesheets?.TryGetValue(Spritesheet.DimensionsToKey(Width, Height), out var ssOut) == true) ? ssOut : null;
 
             if (Width != spriteDef.Width || Height != spriteDef.Height) {
                 jObj.Add("Width", new JValue(Width));
@@ -103,18 +103,18 @@ namespace SF3.CHR {
             if (!(Scale >= spritesheet?.Scale - 0.001f && Scale <= spritesheet?.Scale + 0.001f))
                 jObj.Add("Scale", new JValue(Scale));
 
-            if (SpriteFrames != null) {
-                if (SpriteFrames.Length == 1)
-                    jObj.Add("Frames", SpriteFrames[0].ToJToken());
+            if (FrameGroupsForSpritesheets != null) {
+                if (FrameGroupsForSpritesheets.Length == 1)
+                    jObj.Add("Frames", FrameGroupsForSpritesheets[0].ToJToken());
                 else
-                    jObj.Add("FramesBySprite", JToken.FromObject(SpriteFrames.Select(x => x.ToJToken()).ToArray(), jsonSettings));
+                    jObj.Add("FramesBySprite", JToken.FromObject(FrameGroupsForSpritesheets.Select(x => x.ToJToken()).ToArray(), jsonSettings));
             }
 
-            if (SpriteAnimations != null) {
-                if (SpriteAnimations.Length == 1)
-                    jObj.Add("Animations", SpriteAnimations[0].ToJToken());
+            if (AnimationsForSpritesheetAndDirections != null) {
+                if (AnimationsForSpritesheetAndDirections.Length == 1)
+                    jObj.Add("Animations", AnimationsForSpritesheetAndDirections[0].ToJToken());
                 else
-                    jObj.Add("AnimationsBySprite", JToken.FromObject(SpriteAnimations.Select(x => x.ToJToken()), jsonSettings));
+                    jObj.Add("AnimationsBySprite", JToken.FromObject(AnimationsForSpritesheetAndDirections.Select(x => x.ToJToken()), jsonSettings));
             }
 
             var jStr = jObj.ToString();
@@ -134,7 +134,7 @@ namespace SF3.CHR {
         public int CollisionSize;
         public float Scale;
 
-        public SpriteFramesDef[] SpriteFrames;
-        public SpriteAnimationsDef[] SpriteAnimations;
+        public FrameGroupsForSpritesheet[] FrameGroupsForSpritesheets;
+        public AnimationsForSpritesheetAndDirection[] AnimationsForSpritesheetAndDirections;
     }
 }

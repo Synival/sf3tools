@@ -24,20 +24,20 @@ namespace SpriteCHR_Builder {
 
                 var chrSpriteDefs = new List<SF3.CHR.SpriteDef>();
                 foreach (var spritesheetKv in spriteDef.Spritesheets) {
-                    var spritesheetSize = SpritesheetDef.KeyToDimensions(spritesheetKv.Key);
+                    var spritesheetSize = Spritesheet.KeyToDimensions(spritesheetKv.Key);
                     var spritesheetDef = spritesheetKv.Value;
 
-                    var allDirections = spritesheetDef.AnimationByDirections
+                    var allDirections = spritesheetDef.AnimationSetsByDirections
                         .Select(x => x.Key)
                         .Distinct()
                         .ToArray();
 
                     foreach (var directions in allDirections) {
-                        var animationsWithCompleteness = spritesheetDef.AnimationByDirections[directions].Animations
+                        var animationsWithCompleteness = spritesheetDef.AnimationSetsByDirections[directions].AnimationsByName
                             .ToDictionary(x => x.Key, x => (Animation: x.Value, HasAllFrames: x.Value.HasAllFrames(directions)));
 
-                        SpriteAnimationsDef[] completeAnimations = [
-                            new SpriteAnimationsDef() {
+                        AnimationsForSpritesheetAndDirection[] completeAnimations = [
+                            new AnimationsForSpritesheetAndDirection() {
                                 Animations = animationsWithCompleteness
                                     .Where(x => x.Value.HasAllFrames)
                                     .Select(x => x.Key)
@@ -48,16 +48,16 @@ namespace SpriteCHR_Builder {
                         var incompleteAnimations = 
                             animationsWithCompleteness
                                 .Where(x => !x.Value.HasAllFrames)
-                                .Select(x => new SpriteAnimationsDef[] { new SpriteAnimationsDef() { Animations = [x.Key]}})
+                                .Select(x => new AnimationsForSpritesheetAndDirection[] { new AnimationsForSpritesheetAndDirection() { Animations = [x.Key]}})
                                 .ToArray();
 
-                        SF3.CHR.SpriteDef NewChrSprite(SpriteAnimationsDef[] animations) {
+                        SF3.CHR.SpriteDef NewChrSprite(AnimationsForSpritesheetAndDirection[] animations) {
                             // TODO: let the compiler add these automatically
                             var aniDefAnimations = animations
                                 .SelectMany(x => x.Animations)
                                 .Distinct()
                                 .OrderBy(x => x)
-                                .Select(x => spritesheetDef.AnimationByDirections[directions].Animations[x])
+                                .Select(x => spritesheetDef.AnimationSetsByDirections[directions].AnimationsByName[x])
                                 .ToArray();
 
                             // Gather all the frame groups required by every animation.
@@ -68,19 +68,19 @@ namespace SpriteCHR_Builder {
                                     var currentDir = directions;
                                     return x.AnimationCommands
                                         .Select(y => {
-                                            if (y.Command == SpriteAnimationFrameCommand.SetDirectionCount) {
+                                            if (y.Command == SpriteAnimationCommandType.SetDirectionCount) {
                                                 currentDir = y.Parameter;
                                                 return null;
                                             }
-                                            else if (y.Command == SpriteAnimationFrameCommand.Frame) {
-                                                var expectedFrames = CHR_Utils.GetCHR_FrameGroupDirections(currentDir);
+                                            else if (y.Command == SpriteAnimationCommandType.Frame) {
+                                                var expecteDirections = CHR_Utils.GetCHR_FrameGroupDirections(currentDir);
                                                 var frames = (y.FrameGroup != null)
-                                                    ? expectedFrames.ToDictionary(z => z, z => new AnimationFrameDirectionDef() { Frame = y.FrameGroup, Direction = z })
-                                                    : y.Frames;
+                                                    ? expecteDirections.ToDictionary(z => z, z => new AnimationCommandFrame() { FrameGroup = y.FrameGroup, Direction = z })
+                                                    : y.FramesByDirection;
 
                                                 // If there aren't enough frames, there are 'null's missing. (SF3Sprite error?)
                                                 // Add them to the end.
-                                                foreach (var ef in expectedFrames)
+                                                foreach (var ef in expecteDirections)
                                                     if (!frames.ContainsKey(ef))
                                                         frames.Add(ef, null!);
 
@@ -98,13 +98,13 @@ namespace SpriteCHR_Builder {
                                         .GroupBy(x => x.Count(y => y.Value == null) == 0)
                                         .SelectMany(x => x.Key == true ? x.ToArray() : [x.First()]);
                                 })
-                                .GroupBy(x => string.Join('|', x.Select(y => $"({y.Key}|{y.Value?.Frame}|{y.Value?.Direction})")))
+                                .GroupBy(x => string.Join('|', x.Select(y => $"({y.Key}|{y.Value?.FrameGroup}|{y.Value?.Direction})")))
                                 .Select(x => x.First()!.Values)
                                 .SelectMany(x => x
                                     .Where(y => y != null)
-                                    .Select(y => new SF3.CHR.FrameGroupDef() {
-                                        Name = y.Frame,
-                                        Frames = [new SF3.CHR.FrameDef() { Direction = y.Direction }]
+                                    .Select(y => new SF3.CHR.FrameGroup() {
+                                        Name = y.FrameGroup,
+                                        Frames = [new SF3.CHR.Frame() { Direction = y.Direction }]
                                     })
                                 )
                                 .ToArray();
@@ -121,8 +121,8 @@ namespace SpriteCHR_Builder {
                                 CollisionSize  = spritesheetDef.CollisionSize,
                                 Scale          = spritesheetDef.Scale,
 
-                                SpriteFrames   = [new SpriteFramesDef() { FrameGroups = frames }],
-                                SpriteAnimations = animations
+                                FrameGroupsForSpritesheets   = [new FrameGroupsForSpritesheet() { FrameGroups = frames }],
+                                AnimationsForSpritesheetAndDirections = animations
                             };
                         }
 

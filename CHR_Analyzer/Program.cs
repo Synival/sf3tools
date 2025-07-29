@@ -5,7 +5,6 @@ using SF3.ByteData;
 using SF3.Models.Files;
 using SF3.Models.Files.CHP;
 using SF3.Models.Files.CHR;
-using SF3.Models.Structs.CHR;
 using SF3.NamedValues;
 using SF3.Sprites;
 using SF3.Types;
@@ -57,26 +56,26 @@ namespace CHR_Analyzer {
         }
 
         private class AnimationFileSprite {
-            public AnimationFileSprite(ScenarioType scenario, string filename, int spriteIndex, int animIndex, int lastFrameWord) {
-                Scenario      = scenario;
-                Filename      = filename;
-                SpriteIndex   = spriteIndex;
-                AnimIndex     = animIndex;
-                LastFrameWord = lastFrameWord;
+            public AnimationFileSprite(ScenarioType scenario, string filename, int spriteIndex, int animIndex, int lastCommandWord) {
+                Scenario        = scenario;
+                Filename        = filename;
+                SpriteIndex     = spriteIndex;
+                AnimIndex       = animIndex;
+                LastCommandWord = lastCommandWord;
             }
 
             public readonly ScenarioType Scenario;
             public readonly string Filename;
             public readonly int SpriteIndex;
             public readonly int AnimIndex;
-            public readonly int LastFrameWord;
+            public readonly int LastCommandWord;
         }
 
         private static Dictionary<string, TextureInfo> s_framesByHash = [];
         private static Dictionary<string, AnimationInfo> s_animationsByHash = [];
 
         // TODO: remove and just fetch the serializable data from SF3Lib. Remove all related methods and classes.
-        private static void AddFrame(ScenarioType scenario, string filename, int spriteId, Frame frame) {
+        private static void AddFrame(ScenarioType scenario, string filename, int spriteId, SF3.Models.Structs.CHR.Frame frame) {
             var hash = frame.Texture.Hash;
             if (!s_framesByHash.ContainsKey(hash))
                 s_framesByHash.Add(hash, new TextureInfo(frame.FrameInfo, frame.Texture));
@@ -84,15 +83,15 @@ namespace CHR_Analyzer {
         }
 
         // TODO: remove and just fetch the serializable data from SF3Lib. Remove all related methods and classes.
-        private static void AddAnimation(ScenarioType scenario, string filename, int spriteIndex, Animation animation) {
+        private static void AddAnimation(ScenarioType scenario, string filename, int spriteIndex, SF3.Models.Structs.CHR.Animation animation) {
             var hash = animation.Hash;
             if (!s_animationsByHash.ContainsKey(hash))
                 s_animationsByHash.Add(hash, new AnimationInfo(animation.AnimationInfo));
 
-            var lastFrame = animation.AnimationFrames.Last();
-            var lastFrameWord = (lastFrame.FrameID << 8) | lastFrame.Duration;
+            var lastCommand = animation.AnimationCommandTable.Last();
+            var lastCommandWord = (lastCommand.FrameID << 8) | lastCommand.Duration;
 
-            s_animationsByHash[hash].Sprites.Add(new AnimationFileSprite(scenario, filename, spriteIndex, animation.ID, lastFrameWord));
+            s_animationsByHash[hash].Sprites.Add(new AnimationFileSprite(scenario, filename, spriteIndex, animation.ID, lastCommandWord));
         }
 
         private static List<string> s_matchReports = [];

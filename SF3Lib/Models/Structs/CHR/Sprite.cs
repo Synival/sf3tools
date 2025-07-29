@@ -59,9 +59,9 @@ namespace SF3.Models.Structs.CHR {
                 if (aniOffsets[i] == 0)
                     aniOffsets[i] = aniOffsets[i + 1];
 
-            AnimationFrameTablesByIndex = AnimationOffsetTable
+            AnimationCommandTablesByIndex = AnimationOffsetTable
                 .Where(x => x.Offset != 0)
-                .Select(x => AnimationFrameTable.Create(
+                .Select(x => AnimationCommandTable.Create(
                     Data,
                     $"Sprite{ID:D2}_Animation{x.ID:D2}",
                     (int) (DataOffset + x.Offset),
@@ -74,7 +74,7 @@ namespace SF3.Models.Structs.CHR {
                     (int) ((aniOffsets[x.ID + 1] - aniOffsets[x.ID]) / 4)))
                 .ToDictionary(x => x.AnimationIndex, x => x);
 
-            AnimationTable = AnimationTable.Create(Data, $"Sprite{ID:D2}_{nameof(AnimationTable)}", Header.Directions, AnimationFrameTablesByIndex.Values.ToArray(),
+            AnimationTable = AnimationTable.Create(Data, $"Sprite{ID:D2}_{nameof(AnimationTable)}", Header.Directions, AnimationCommandTablesByIndex.Values.ToArray(),
                 FrameTable, $"Sprite{ID:D2}_");
 
             var spriteNames = AnimationTable.Select(x => x.SpriteName).Distinct().ToArray();
@@ -118,26 +118,26 @@ namespace SF3.Models.Structs.CHR {
                 CollisionSize    = Header.CollisionShadowDiameter,
                 Scale            = Header.Scale / 65536.0f,
 
-                SpriteFrames     = CreateSpriteFrames(framesWithDuplicates),
-                SpriteAnimations = CreateSpriteAnimations()
+                FrameGroupsForSpritesheets = CreateSpriteFrames(framesWithDuplicates),
+                AnimationsForSpritesheetAndDirections = CreateSpriteAnimations()
             };
         }
 
-        private SpriteFramesDef[] CreateSpriteFrames(HashSet<string> framesWithDuplicates) {
+        private FrameGroupsForSpritesheet[] CreateSpriteFrames(HashSet<string> framesWithDuplicates) {
             // Track the sprite whose frame groups are being built.
             string lastSpriteName = null;
             int? lastWidth = null;
             int? lastHeight = null;
-            var spriteFrames = new List<SpriteFramesDef>();
-            SpriteFramesDef lastSpriteFrames = null;
+            var spriteFrames = new List<FrameGroupsForSpritesheet>();
+            FrameGroupsForSpritesheet lastSpriteFrames = null;
 
             // Track the frame group whose directions are being built.
             string lastFrameGroupName = null;
-            var frameGroups = new List<FrameGroupDef>();
-            FrameGroupDef lastFrameGroup = null;
+            var frameGroups = new List<FrameGroup>();
+            FrameGroup lastFrameGroup = null;
 
             // Track directions to add to the current frame group being built.
-            var frameGroupFrames = new List<FrameDef>();
+            var frameGroupFrames = new List<SF3.CHR.Frame>();
 
             // Commits the current set of diections to the current frame group.
             void CommitFrameGroupDirections() {
@@ -148,7 +148,7 @@ namespace SF3.Models.Structs.CHR {
                     if (!AreExpectedFrameDirections(frameGroupFrames.Select(x => x.Direction).ToArray(), Header.Directions) || frameGroupFrames.Any(x => x.DuplicateKey != null))
                         lastFrameGroup.Frames = frameGroupFrames.ToArray();
 
-                frameGroupFrames = new List<FrameDef>();
+                frameGroupFrames = new List<SF3.CHR.Frame>();
             }
 
             // Commits the current frame group to the current sprite.
@@ -162,7 +162,7 @@ namespace SF3.Models.Structs.CHR {
                     lastSpriteFrames.FrameGroups = frameGroups.ToArray();
 
                 lastFrameGroupName = null;
-                frameGroups        = new List<FrameGroupDef>();
+                frameGroups        = new List<FrameGroup>();
                 lastFrameGroup     = null;
             }
 
@@ -195,7 +195,7 @@ namespace SF3.Models.Structs.CHR {
                     lastSpriteName = spriteName;
                     lastWidth      = width;
                     lastHeight     = height;
-                    lastSpriteFrames = new SpriteFramesDef() {
+                    lastSpriteFrames = new FrameGroupsForSpritesheet() {
                         SpriteName = spriteName,
                         Width      = width,
                         Height     = height
@@ -208,7 +208,7 @@ namespace SF3.Models.Structs.CHR {
                     CommitFrameGroupDirections();
 
                     lastFrameGroupName = frameName;
-                    lastFrameGroup = new FrameGroupDef() {
+                    lastFrameGroup = new FrameGroup() {
                         Name = frame.FrameName,
                     };
                     frameGroups.Add(lastFrameGroup);
@@ -220,7 +220,7 @@ namespace SF3.Models.Structs.CHR {
                 string key = framesWithDuplicates.Contains(frame.TextureHash) ? frame.TextureOffset.ToString() : null;
 
                 // Add the direction of this frame to the current frame group's directions.
-                frameGroupFrames.Add(new FrameDef() { Direction = frame.Direction, DuplicateKey = key });
+                frameGroupFrames.Add(new SF3.CHR.Frame() { Direction = frame.Direction, DuplicateKey = key });
             }
 
             // Commit everything to the last sprite being built.
@@ -235,14 +235,14 @@ namespace SF3.Models.Structs.CHR {
             return Enumerable.SequenceEqual(directions, expectedDirections);
         }
 
-        private SpriteAnimationsDef[] CreateSpriteAnimations() {
+        private AnimationsForSpritesheetAndDirection[] CreateSpriteAnimations() {
             // Track the sprite whose animation groups are being built.
             string lastSpriteName = null;
             int? lastWidth = null;
             int? lastHeight = null;
             int? lastDirections = null;
-            var spriteAnimations = new List<SpriteAnimationsDef>();
-            SpriteAnimationsDef lastSpriteAnimations = null;
+            var spriteAnimations = new List<AnimationsForSpritesheetAndDirection>();
+            AnimationsForSpritesheetAndDirection lastSpriteAnimations = null;
 
             // Track animations to add to the current animation group being built.
             var animations = new List<string>();
@@ -289,7 +289,7 @@ namespace SF3.Models.Structs.CHR {
                         lastHeight     = null;
                         lastDirections = null;
 
-                        lastSpriteAnimations = new SpriteAnimationsDef();
+                        lastSpriteAnimations = new AnimationsForSpritesheetAndDirection();
                         spriteAnimations.Add(lastSpriteAnimations);
                     }
                     animations.Add(null);
@@ -330,7 +330,7 @@ namespace SF3.Models.Structs.CHR {
                         lastSpriteAnimations.Animations = null;
                     }
                     else {
-                        lastSpriteAnimations = new SpriteAnimationsDef() {
+                        lastSpriteAnimations = new AnimationsForSpritesheetAndDirection() {
                             SpriteName = spriteName,
                             Width = width,    
                             Height = height,
@@ -360,7 +360,7 @@ namespace SF3.Models.Structs.CHR {
         public SpriteHeader Header { get; }
         public AnimationOffsetTable AnimationOffsetTable { get; }
         public FrameTable FrameTable { get; }
-        public Dictionary<int, AnimationFrameTable> AnimationFrameTablesByIndex { get; }
+        public Dictionary<int, AnimationCommandTable> AnimationCommandTablesByIndex { get; }
         public AnimationTable AnimationTable { get; }
 
         // TODO: show in a view

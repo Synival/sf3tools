@@ -71,7 +71,7 @@ namespace SF3.CHR {
         /// </summary>
         /// <param name="animationIndex">Index of the current sprite's animation to which this frame belongs.</param>
         public void StartAnimationForCurrentSprite(int animationIndex) {
-            _animationFrameTablePointers[animationIndex] = Stream.Position;
+            _animationCommandTablePointers[animationIndex] = Stream.Position;
         }
 
         /// <summary>
@@ -81,7 +81,7 @@ namespace SF3.CHR {
         /// <param name="command">Command for this frame.</param>
         /// <param name="parameter">Parameter for this command.</param>
         /// <param name="frameKeys">List of keys for each frame. Used for assigning the FrameID when frames are written.</param>
-        public void WriteAnimationFrame(int spriteIndex, SpriteAnimationFrameCommand command, int parameter, string[] frameKeys) {
+        public void WriteAnimationCommand(int spriteIndex, SpriteAnimationCommandType command, int parameter, string[] frameKeys) {
             // If applicable, track the set of frames expected for this animation frame and its offset.
             // The FrameID will be updated later, when the FrameTable is built.
             if (frameKeys != null) {
@@ -112,15 +112,15 @@ namespace SF3.CHR {
             // Determine the size of the table based on the number of animations.
             // (It's always 16 except for XOP101.CHR, which has more entries for Masqurin (U).)
             // Account for an additional terminating 0 at the end.
-            var highestAnimationIndex = (_animationFrameTablePointers.Count > 0) ? _animationFrameTablePointers.Max(x => x.Key) : 0;
+            var highestAnimationIndex = (_animationCommandTablePointers.Count > 0) ? _animationCommandTablePointers.Max(x => x.Key) : 0;
             var tableSize = Math.Max(16, highestAnimationIndex + 2);
 
             for (int i = 0; i < tableSize; i++) {
-                var offset = (int) (_animationFrameTablePointers.ContainsKey(i) ? (_animationFrameTablePointers[i] - StreamStartPosition) : 0);
+                var offset = (int) (_animationCommandTablePointers.ContainsKey(i) ? (_animationCommandTablePointers[i] - StreamStartPosition) : 0);
                 Write(offset.ToByteArray());
             }
 
-            _animationFrameTablePointers.Clear();
+            _animationCommandTablePointers.Clear();
         }
 
         /// <summary>
@@ -153,7 +153,7 @@ namespace SF3.CHR {
             InitFrameTableOffset(spriteIndex);
 
             // Now that the table is done, we can assign FrameIDs to animation frames.
-            AssignAnimationFrameFrameIDs(spriteIndex);
+            AssignAnimationCommandFrameIDs(spriteIndex);
             _currentSpriteFrameKeys.Clear();
 
             // Two blank uints; one for a terminator, another for padding.
@@ -207,7 +207,7 @@ namespace SF3.CHR {
             });
         }
 
-        private void AssignAnimationFrameFrameIDs(int spriteIndex) {
+        private void AssignAnimationCommandFrameIDs(int spriteIndex) {
             // Don't do anything if this sprite doesn't have any frames.
             if (!_animationFrameRefsBySpriteIndex.ContainsKey(spriteIndex))
                 return;
@@ -283,7 +283,7 @@ namespace SF3.CHR {
 
         private List<long> _frameTablePointers = new List<long>();
         private List<long> _animationTablePointers = new List<long>();
-        private Dictionary<int, long> _animationFrameTablePointers = new Dictionary<int, long>();
+        private Dictionary<int, long> _animationCommandTablePointers = new Dictionary<int, long>();
         private Dictionary<int, List<AnimationFrameRef>> _animationFrameRefsBySpriteIndex = new Dictionary<int, List<AnimationFrameRef>>();
         private Dictionary<string, List<long>> _frameImagePointers = new Dictionary<string, List<long>>();
         private Dictionary<string, int> _frameImageOffsets = new Dictionary<string, int>();

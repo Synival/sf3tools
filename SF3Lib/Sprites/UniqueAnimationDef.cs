@@ -10,7 +10,7 @@
             int frameCount,
             int duration,
             int missingFrames,
-            AnimationCommandDef[] animationCommands
+            AnimationCommand[] animationCommands
         ) {
             AnimationHash        = animationHash;
             SpriteName           = spriteName;
@@ -35,7 +35,7 @@
         public int FrameCommandCount;
         public int Duration;
         public int FrameTexturesMissing;
-        public AnimationCommandDef[] AnimationCommands;
+        public AnimationCommand[] AnimationCommands;
         public int RefCount;
     }
 }

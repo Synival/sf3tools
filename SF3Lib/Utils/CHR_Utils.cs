@@ -5,7 +5,6 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Xml;
-using SF3.Models.Structs.CHR;
 using SF3.Sprites;
 using SF3.Types;
 
@@ -29,7 +28,7 @@ namespace SF3.Utils {
             LoadUniqueAnimationsByHashTable();
             if (!s_uniqueAnimationsByHash.ContainsKey(hash.ToLower())) {
                 s_uniqueAnimationsByHash[hash] = new UniqueAnimationDef(hash, "Unknown", "Unknown", 0, 0, 0, 0, 0, 0,
-                    new AnimationCommandDef[0]);
+                    new AnimationCommand[0]);
             }
 
             var animation = s_uniqueAnimationsByHash[hash];
@@ -118,7 +117,7 @@ namespace SF3.Utils {
                         int missingFrames = int.TryParse(missingAttr, out var missingFramesOut) ? missingFramesOut : 0;
                         int duration = int.TryParse(durationAttr, out var durationOut) ? durationOut : 0;
                         s_uniqueAnimationsByHash.Add(hash.ToLower(), new UniqueAnimationDef(hash, sprite, animation, width, height, directions, frames, duration, missingFrames,
-                            new AnimationCommandDef[0]));
+                            new AnimationCommand[0]));
                     }
                 }
             }
@@ -267,8 +266,8 @@ namespace SF3.Utils {
 
         public static Dictionary<string, UniqueSpriteInfoDef> GetUniqueSpriteInfos() => s_uniqueSpriteInfosByName;
 
-        private class AnimationHashFrame {
-            public SpriteAnimationFrameCommand Command;
+        private class AnimationHashCommand {
+            public SpriteAnimationCommandType Command;
             public int Parameter;
             public int FrameID;
             public int Directions;
@@ -276,7 +275,7 @@ namespace SF3.Utils {
             public int FramesMissing;
         }
 
-        public static string CreateAnimationHash(int directions, AnimationDef animation, Dictionary<string, FrameGroupDef> frameGroups, Dictionary<string, ITexture> texturesByHash) {
+        public static string CreateAnimationHash(int directions, Animation animation, Dictionary<string, FrameGroup> frameGroups, Dictionary<string, ITexture> texturesByHash) {
             int currentDirections = directions;
 
             var hashInfos = animation.AnimationCommands
@@ -289,17 +288,17 @@ namespace SF3.Utils {
                             .Select(y => FrameNumberToSpriteDir(frameCount, y))
                             .Select(y => frameGroups[x.FrameGroup].Frames.TryGetValue(y, out var frame) ? frame : null)
                             .ToArray()
-                        : (x.Frames != null)
+                        : (x.FramesByDirection != null)
                         ? Enumerable.Range(0, frameCount)
                             .Select(y => FrameNumberToSpriteDir(frameCount, y))
-                            .Select(y => x.Frames.TryGetValue(y, out var frame) ? frameGroups[frame.Frame].Frames[frame.Direction] : null)
+                            .Select(y => x.FramesByDirection.TryGetValue(y, out var frame) ? frameGroups[frame.FrameGroup].Frames[frame.Direction] : null)
                             .ToArray()
                         : null;
 
-                    if (x.Command == SpriteAnimationFrameCommand.SetDirectionCount)
+                    if (x.Command == SpriteAnimationCommandType.SetDirectionCount)
                         currentDirections = x.Parameter;
 
-                    return new AnimationHashFrame() {
+                    return new AnimationHashCommand() {
                         Command    = x.Command,
                         Parameter  = x.Parameter,
                         FrameID    = -1,
@@ -313,7 +312,7 @@ namespace SF3.Utils {
             return CreateAnimationHash(hashInfos);
         }
 
-        private static ITexture StackedImageFromFrames(FrameDef[] frames, Dictionary<string, ITexture> texturesByHash) {
+        private static ITexture StackedImageFromFrames(Frame[] frames, Dictionary<string, ITexture> texturesByHash) {
             if (frames == null)
                 return null;
 
@@ -325,14 +324,14 @@ namespace SF3.Utils {
             return TextureUtils.StackTextures(0, 0, 0, textures);
         }
 
-        public static string CreateAnimationHash(AnimationFrame[] animationFrames) {
-            var hashInfos = animationFrames
-                .Select(x => new AnimationHashFrame() {
-                    Command    = x.HasTexture ? SpriteAnimationFrameCommand.Frame : (SpriteAnimationFrameCommand) x.FrameID,
+        public static string CreateAnimationHash(Models.Structs.CHR.AnimationCommand[] animationCommands) {
+            var hashInfos = animationCommands
+                .Select(x => new AnimationHashCommand() {
+                    Command    = x.IsFrameCommand ? SpriteAnimationCommandType.Frame : (SpriteAnimationCommandType) x.FrameID,
                     Parameter  = x.Duration,
-                    FrameID    = x.HasTexture ? x.FrameID : -1,
+                    FrameID    = x.IsFrameCommand ? x.FrameID : -1,
                     Directions = x.Directions,
-                    Image      = (x.HasTexture) ? x.GetTexture(x.Directions) : null,
+                    Image      = (x.IsFrameCommand) ? x.GetTexture(x.Directions) : null,
                     FramesMissing = x.FramesMissing
                 })
                 .ToArray();
@@ -340,28 +339,28 @@ namespace SF3.Utils {
             return CreateAnimationHash(hashInfos);
         }
 
-        private static string CreateAnimationHash(AnimationHashFrame[] animationHashFrames) {
+        private static string CreateAnimationHash(AnimationHashCommand[] animationHashCommands) {
             // Build a unique hash string for this animation.
             var hashStr = "";
-            foreach (var aniFrame in animationHashFrames) {
+            foreach (var aniCommand in animationHashCommands) {
                 if (hashStr != "")
                     hashStr += "_";
 
-                if (aniFrame.Command != SpriteAnimationFrameCommand.Frame) {
-                    var cmd   = aniFrame.Command;
-                    var param = aniFrame.Parameter;
+                if (aniCommand.Command != SpriteAnimationCommandType.Frame) {
+                    var cmd   = aniCommand.Command;
+                    var param = aniCommand.Parameter;
 
                     // Don't bother appending stops.
-                    if (cmd == SpriteAnimationFrameCommand.Stop)
+                    if (cmd == SpriteAnimationCommandType.Stop)
                         hashStr += "f2";
                     else
-                        hashStr += $"{((int) cmd):x2},{aniFrame.Parameter:x2}";
+                        hashStr += $"{((int) cmd):x2},{aniCommand.Parameter:x2}";
                 }
                 else {
-                    var tex = aniFrame.Image;
-                    hashStr += (tex != null) ? $"{tex.Hash}_{aniFrame.Parameter:x2}" : $"{aniFrame.FrameID:x2},{aniFrame.Parameter:x2}";
-                    if (aniFrame.FramesMissing > 0)
-                        hashStr += $"_M{aniFrame.FramesMissing})";
+                    var tex = aniCommand.Image;
+                    hashStr += (tex != null) ? $"{tex.Hash}_{aniCommand.Parameter:x2}" : $"{aniCommand.FrameID:x2},{aniCommand.Parameter:x2}";
+                    if (aniCommand.FramesMissing > 0)
+                        hashStr += $"_M{aniCommand.FramesMissing})";
                 }
             }
 

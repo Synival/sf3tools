@@ -5,25 +5,25 @@ using Newtonsoft.Json.Linq;
 using SF3.Types;
 
 namespace SF3.CHR {
-    public class FrameDef : IJsonResource {
+    public class Frame : IJsonResource {
         /// <summary>
-        /// Deserializes a JSON object of a FrameDef.
+        /// Deserializes a JSON object of a Frame.
         /// </summary>
-        /// <param name="json">FrameDef in JSON format as a string.</param>
-        /// <returns>A new FrameDef if deserializing was successful, or 'null' if not.</returns>
-        public static FrameDef FromJSON(string json) {
-            var frameDef = new FrameDef();
-            return frameDef.AssignFromJSON_String(json) ? frameDef : null;
+        /// <param name="json">Frame in JSON format as a string.</param>
+        /// <returns>A new Frame if deserializing was successful, or 'null' if not.</returns>
+        public static Frame FromJSON(string json) {
+            var frame = new Frame();
+            return frame.AssignFromJSON_String(json) ? frame : null;
         }
 
         /// <summary>
-        /// Deserializes a JSON object of a FrameDef.
+        /// Deserializes a JSON object of a Frame.
         /// </summary>
-        /// <param name="jToken">FrameDef as a JToken.</param>
-        /// <returns>A new FrameDef if deserializing was successful, or 'null' if not.</returns>
-        public static FrameDef FromJToken(JToken jToken) {
-            var frameDef = new FrameDef();
-            return frameDef.AssignFromJToken(jToken) ? frameDef : null;
+        /// <param name="jToken">Frame as a JToken.</param>
+        /// <returns>A new Frame if deserializing was successful, or 'null' if not.</returns>
+        public static Frame FromJToken(JToken jToken) {
+            var frame = new Frame();
+            return frame.AssignFromJToken(jToken) ? frame : null;
         }
 
         public bool AssignFromJSON_String(string json)

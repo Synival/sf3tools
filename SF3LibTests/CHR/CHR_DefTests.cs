@@ -148,8 +148,8 @@ namespace SF3.Tests.CHR {
             Assert.AreEqual(sprite0.CollisionSize, 40);
             Assert.AreEqual(sprite0.Scale, 1.00f);
             Assert.AreEqual(sprite0.PromotionLevel, 0);
-            Assert.AreEqual(sprite0.SpriteFrames, null);
-            Assert.AreEqual(sprite0.SpriteAnimations, null);
+            Assert.AreEqual(sprite0.FrameGroupsForSpritesheets, null);
+            Assert.AreEqual(sprite0.AnimationsForSpritesheetAndDirections, null);
 
             var sprite1 = chrDef.Sprites[1];
             Assert.AreEqual(sprite1.SpriteName, "Synbios (P1)");
@@ -162,8 +162,8 @@ namespace SF3.Tests.CHR {
             Assert.AreEqual(sprite1.CollisionSize, 40);
             Assert.AreEqual(sprite1.Scale, 1.00f);
             Assert.AreEqual(sprite1.PromotionLevel, 1);
-            Assert.AreEqual(sprite1.SpriteFrames, null);
-            Assert.AreEqual(sprite1.SpriteAnimations, null);
+            Assert.AreEqual(sprite1.FrameGroupsForSpritesheets, null);
+            Assert.AreEqual(sprite1.AnimationsForSpritesheetAndDirections, null);
         }
     }
 }

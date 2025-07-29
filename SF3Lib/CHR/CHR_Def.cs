@@ -136,31 +136,31 @@ namespace SF3.CHR {
             foreach (var (sprite, i) in Sprites.Select((x, i) => (CHR: x, Index: i))) {
                 int animationIndex = 0;
 
-                foreach (var animations in sprite.SpriteAnimations ?? new SpriteAnimationsDef[0]) {
+                foreach (var animations in sprite.AnimationsForSpritesheetAndDirections ?? new AnimationsForSpritesheetAndDirection[0]) {
                     var spriteName = animations.SpriteName ?? sprite.SpriteName;
                     var spriteDef = SpriteUtils.GetSpriteDef(spriteName);
 
                     var directions = animations.Directions ?? sprite.Directions;
-                    var spritesheetKey = SpritesheetDef.DimensionsToKey(
+                    var spritesheetKey = Spritesheet.DimensionsToKey(
                         animations.Width ?? sprite.Width, animations.Height ?? sprite.Height);
                     var frameKeyPrefix = $"{spriteName} ({spritesheetKey})";
                     var spritesheetDef = (spriteDef?.Spritesheets?.TryGetValue(spritesheetKey, out var spritesheetOut) == true) ? spritesheetOut : null;
-                    var spriteAnimsByDirection = (spritesheetDef?.AnimationByDirections?.TryGetValue(directions, out var sadOut) == true) ? sadOut : null;
+                    var spriteAnimsByDirection = (spritesheetDef?.AnimationSetsByDirections?.TryGetValue(directions, out var sadOut) == true) ? sadOut : null;
 
                     foreach (var animationName in animations.Animations ?? new string[0]) {
-                        var spriteAnimation = (animationName != null && spriteAnimsByDirection?.Animations?.TryGetValue(animationName, out var animOut) == true) ? animOut : null;
+                        var spriteAnimation = (animationName != null && spriteAnimsByDirection?.AnimationsByName?.TryGetValue(animationName, out var animOut) == true) ? animOut : null;
                         if (spriteAnimation != null) {
                             chrWriter.StartAnimationForCurrentSprite(animationIndex);
 
                             var currentDirections = directions;
-                            foreach (var aniCommand in spriteAnimation.AnimationCommands ?? new AnimationCommandDef[0]) {
+                            foreach (var aniCommand in spriteAnimation.AnimationCommands ?? new AnimationCommand[0]) {
                                 string[] frameKeys = null;
 
                                 // The 'SetDirectionCount' command (0xF1) updates the number of frames in our key from now on.
-                                if (aniCommand.Command == SpriteAnimationFrameCommand.SetDirectionCount)
+                                if (aniCommand.Command == SpriteAnimationCommandType.SetDirectionCount)
                                     currentDirections = aniCommand.Parameter;
                                 // If this is a frame, we need to generate a key that will be used to locate a FrameID later.
-                                else if (aniCommand.Command == SpriteAnimationFrameCommand.Frame) {
+                                else if (aniCommand.Command == SpriteAnimationCommandType.Frame) {
                                     var frameDirections = CHR_Utils.GetCHR_FrameGroupDirections(currentDirections);
 
                                     // The 'FrameGroup' command assumes the standard directions for this frame.
@@ -170,10 +170,10 @@ namespace SF3.CHR {
                                             .ToArray();
                                     }
                                     // The 'Frames' command has manually specified FrameGroup + Direction pairs.
-                                    else if (aniCommand.Frames != null) {
+                                    else if (aniCommand.FramesByDirection != null) {
                                         frameKeys = frameDirections
-                                            .ToDictionary(x => x, x => aniCommand.Frames.TryGetValue(x, out var f) ? f : null)
-                                            .Select(x => (x.Value == null) ? null : $"{frameKeyPrefix} {x.Value.Frame} ({x.Value.Direction.ToString()})")
+                                            .ToDictionary(x => x, x => aniCommand.FramesByDirection.TryGetValue(x, out var f) ? f : null)
+                                            .Select(x => (x.Value == null) ? null : $"{frameKeyPrefix} {x.Value.FrameGroup} ({x.Value.Direction.ToString()})")
                                             .ToArray();
                                     }
                                     // If nothing is there, something is wrong.
@@ -183,7 +183,7 @@ namespace SF3.CHR {
                                 }
 
                                 // We have enough info; write the frame.
-                                chrWriter.WriteAnimationFrame(i, aniCommand.Command, aniCommand.Parameter, frameKeys);
+                                chrWriter.WriteAnimationCommand(i, aniCommand.Command, aniCommand.Parameter, frameKeys);
                             }
                         }
 
@@ -272,19 +272,19 @@ namespace SF3.CHR {
                 string lastFrameKey = null;
                 framesToWriteBySpriteIndex.Add(i, new List<(string, string)>());
 
-                foreach (var spriteFrames in sprite.SpriteFrames ?? new SpriteFramesDef[0]) {
+                foreach (var spriteFrames in sprite.FrameGroupsForSpritesheets ?? new FrameGroupsForSpritesheet[0]) {
                     var spriteName  = spriteFrames.SpriteName ?? sprite.SpriteName;
                     var frameWidth  = spriteFrames.Width      ?? sprite.Width;
                     var frameHeight = spriteFrames.Height     ?? sprite.Height;
                     var spriteDef   = SpriteUtils.GetSpriteDef(spriteName);
 
-                    foreach (var frameGroup in spriteFrames.FrameGroups ?? new FrameGroupDef[0]) {
+                    foreach (var frameGroup in spriteFrames.FrameGroups ?? new FrameGroup[0]) {
                         // Attempt to load the spritesheet referenced by the spritesheetDef.
                         // Don't bothe if the def couldn't be found.
-                        var spritesheetKey = SpritesheetDef.DimensionsToKey(frameWidth, frameHeight);
+                        var spritesheetKey = Spritesheet.DimensionsToKey(frameWidth, frameHeight);
                         var spritesheetImageKey = $"{spriteName} ({spritesheetKey})";
                         var spritesheetDef = (spriteDef?.Spritesheets?.TryGetValue(spritesheetKey, out var spritesheetOut) == true) ? spritesheetOut : null;
-                        var spriteFrameGroupDef = (spritesheetDef?.FrameGroups?.TryGetValue(frameGroup.Name, out var spriteFrameGroupOut) == true) ? spriteFrameGroupOut : null;
+                        var spriteFrameGroupDef = (spritesheetDef?.FrameGroupsByName?.TryGetValue(frameGroup.Name, out var spriteFrameGroupOut) == true) ? spriteFrameGroupOut : null;
 
                         if (spritesheetDef != null && !spritesheetImageDict.ContainsKey(spritesheetImageKey)) {
                             Bitmap bitmap = null;
@@ -298,7 +298,7 @@ namespace SF3.CHR {
 
                         var frames = frameGroup.Frames
                             ?? CHR_Utils.GetCHR_FrameGroupDirections(sprite.Directions)
-                                .Select(x => new FrameDef() { Direction = x })
+                                .Select(x => new Frame() { Direction = x })
                                 .ToArray();
 
                         foreach (var frame in frames) {

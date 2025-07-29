@@ -7,21 +7,21 @@ using SF3.Models.Tables.CHR;
 using SF3.Win.Extensions;
 
 namespace SF3.Win.Views.CHR {
-    public class SpriteAnimationFramesViewContext {
-        public SpriteAnimationFramesViewContext(AnimationFrameTable animationFrameTable, FrameTable frameTable) {
-            AnimationFrameTable = animationFrameTable;
-            FrameTable          = frameTable;
+    public class SpriteAnimationCommandsViewContext {
+        public SpriteAnimationCommandsViewContext(AnimationCommandTable animationCommandTable, FrameTable frameTable) {
+            AnimationCommandTable = animationCommandTable;
+            FrameTable            = frameTable;
         }
 
-        public readonly AnimationFrameTable AnimationFrameTable;
+        public readonly AnimationCommandTable AnimationCommandTable;
         public readonly FrameTable FrameTable;
-        public string Name => AnimationFrameTable.Name;
+        public string Name => AnimationCommandTable.Name;
     }
 
-    public class SpriteAnimationFramesView : ControlSpaceView {
-        public SpriteAnimationFramesView(string name, SpriteAnimationFramesViewContext model, INameGetterContext nameGetterContext) : base(name) {
-            Context       = model;
-            TableView   = new TableView("Frames", Context?.AnimationFrameTable, nameGetterContext, typeof(AnimationFrame));
+    public class SpriteAnimationCommandsView : ControlSpaceView {
+        public SpriteAnimationCommandsView(string name, SpriteAnimationCommandsViewContext model, INameGetterContext nameGetterContext) : base(name) {
+            Context     = model;
+            TableView   = new TableView("Frames", Context?.AnimationCommandTable, nameGetterContext, typeof(AnimationCommand));
             TextureView = new ImageView("Texture", textureScale: 2);
         }
 
@@ -40,8 +40,8 @@ namespace SF3.Win.Views.CHR {
 
         public void UpdateTexture() {
             var item = (OLVListItem) TableView.OLVControl.SelectedItem;
-            var animationFrame = (AnimationFrame) item?.RowObject;
-            TextureView.Image = animationFrame?.GetTexture(animationFrame.Directions)?.CreateBitmapARGB1555();
+            var aniCommand = (AnimationCommand) item?.RowObject;
+            TextureView.Image = aniCommand?.GetTexture(aniCommand.Directions)?.CreateBitmapARGB1555();
         }
 
         public override void Destroy() {
@@ -59,13 +59,13 @@ namespace SF3.Win.Views.CHR {
             base.Destroy();
         }
 
-        private SpriteAnimationFramesViewContext _context = null;
-        public SpriteAnimationFramesViewContext Context {
+        private SpriteAnimationCommandsViewContext _context = null;
+        public SpriteAnimationCommandsViewContext Context {
             get => _context;
             set {
                 if (_context != value) {
                     _context = value;
-                    TableView.Table = value?.AnimationFrameTable;
+                    TableView.Table = value?.AnimationCommandTable;
                 }
             }
         }

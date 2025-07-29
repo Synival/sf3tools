@@ -83,7 +83,7 @@ namespace SpriteExtractor {
         private static Dictionary<string, AnimationInfo> s_animationsByHash = [];
 
         // TODO: remove and just fetch the serializable data from SF3Lib. Remove all related methods and classes.
-        private static void AddFrame(ScenarioType scenario, string filename, int spriteId, Frame frame) {
+        private static void AddFrame(ScenarioType scenario, string filename, int spriteId, SF3.Models.Structs.CHR.Frame frame) {
             var hash = frame.Texture.Hash;
             if (!s_framesByHash.ContainsKey(hash))
                 s_framesByHash.Add(hash, new TextureInfo(frame.FrameInfo, frame.Texture));
@@ -91,12 +91,12 @@ namespace SpriteExtractor {
         }
 
         // TODO: remove and just fetch the serializable data from SF3Lib. Remove all related methods and classes.
-        private static void AddAnimation(ScenarioType scenario, string filename, int spriteIndex, Animation animation) {
+        private static void AddAnimation(ScenarioType scenario, string filename, int spriteIndex, SF3.Models.Structs.CHR.Animation animation) {
             var hash = animation.Hash;
             if (!s_animationsByHash.ContainsKey(hash))
                 s_animationsByHash.Add(hash, new AnimationInfo(animation.AnimationInfo));
 
-            var lastFrame = animation.AnimationFrames.LastOrDefault();
+            var lastFrame = animation.AnimationCommandTable.LastOrDefault();
             var lastFrameWord = (lastFrame == null) ? 0 : (lastFrame.FrameID << 8) | lastFrame.Duration;
 
             s_animationsByHash[hash].Sprites.Add(new AnimationFileSprite(scenario, filename, spriteIndex, animation.ID, lastFrameWord));
@@ -190,7 +190,7 @@ namespace SpriteExtractor {
                     var key = mostCommonInfos.Key;
                     var spritesheetKeyPos = key.LastIndexOf('(') + 1;
                     var spritesheetKey = key.Substring(spritesheetKeyPos, key.Length - spritesheetKeyPos - 1);
-                    var size = SpritesheetDef.KeyToDimensions(spritesheetKey);
+                    var size = Spritesheet.KeyToDimensions(spritesheetKey);
                     spriteDef.Width  = size.Width;
                     spriteDef.Height = size.Height;
                 }
@@ -217,9 +217,9 @@ namespace SpriteExtractor {
             }
 
             // For some reason, we have to add "Nothing (Broken, No Frames)" to the "None" spritedef.
-            spriteDefs.First(x => x.Name == "None").Spritesheets.First().Value.AnimationByDirections.First().Value.Animations.Add(
+            spriteDefs.First(x => x.Name == "None").Spritesheets.First().Value.AnimationSetsByDirections.First().Value.AnimationsByName.Add(
                 "Nothing (Broken, No Frames)",
-                new AnimationDef() { AnimationCommands = [] }
+                new SF3.Sprites.Animation() { AnimationCommands = [] }
             );
 
             foreach (var spriteDef in spriteDefs) {
@@ -228,9 +228,9 @@ namespace SpriteExtractor {
                 List<StandaloneFrameDef> framesFound = [];
                 foreach (var spritesheet in spriteDef.Spritesheets) {
                     var spriteName = $"{spriteDef.Name} ({spritesheet.Key})";
-                    var frameSize = SpritesheetDef.KeyToDimensions(spritesheet.Key);
+                    var frameSize = Spritesheet.KeyToDimensions(spritesheet.Key);
 
-                    var frames = spritesheet.Value.FrameGroups
+                    var frames = spritesheet.Value.FrameGroupsByName
                         .SelectMany(x => x.Value.Frames
                             .Select(y => new StandaloneFrameDef(y.Value, y.Key, x.Key, frameSize.Width, frameSize.Height))
                         )
@@ -330,7 +330,7 @@ namespace SpriteExtractor {
 
                     var framesByHash = frames
                         .ToDictionary(x => x.FrameInfo.TextureHash, x => x.SpriteDefFrame);
-                    var spritesheetFrames = spritesheet.Value.FrameGroups
+                    var spritesheetFrames = spritesheet.Value.FrameGroupsByName
                         .SelectMany(x => x.Value.Frames)
                         .Select(x => x.Value)
                         .ToArray();
@@ -400,13 +400,13 @@ namespace SpriteExtractor {
 
             foreach (var spriteDef in spriteDefs) {
                 foreach (var spritesheet in spriteDef.Spritesheets.Values) {
-                    foreach (var frameGroup in spritesheet.FrameGroups)
+                    foreach (var frameGroup in spritesheet.FrameGroupsByName)
                         foreach (var frame in frameGroup.Value.Frames)
                             framesAccountedFor.Add(frame.Value.Hash);
 
-                    foreach (var animationGroup in spritesheet.AnimationByDirections)
-                        foreach (var animation in animationGroup.Value.Animations)
-                            animationsAccountedFor.Add(CHR_Utils.CreateAnimationHash(animationGroup.Key, animation.Value, spritesheet.FrameGroups, frameTexturesByHash));
+                    foreach (var animationGroup in spritesheet.AnimationSetsByDirections)
+                        foreach (var animation in animationGroup.Value.AnimationsByName)
+                            animationsAccountedFor.Add(CHR_Utils.CreateAnimationHash(animationGroup.Key, animation.Value, spritesheet.FrameGroupsByName, frameTexturesByHash));
                 }
             }
 

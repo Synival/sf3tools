@@ -8,16 +8,16 @@ using SF3.Models.Tables.CHR;
 
 namespace SF3.Win.Views.CHR {
     public class SpriteAnimationsViewContext {
-        public SpriteAnimationsViewContext(int spriteDirections, AnimationTable animationTable, Dictionary<int, AnimationFrameTable> animationFramesByIndex, FrameTable frameTable) {
-            SpriteDirections       = spriteDirections;
-            AnimationTable         = animationTable;
-            AnimationFramesByIndex = animationFramesByIndex;
-            FrameTable             = frameTable;
+        public SpriteAnimationsViewContext(int spriteDirections, AnimationTable animationTable, Dictionary<int, AnimationCommandTable> aniCommandTablesByIndex, FrameTable frameTable) {
+            SpriteDirections              = spriteDirections;
+            AnimationTable                = animationTable;
+            AnimationCommandTablesByIndex = aniCommandTablesByIndex;
+            FrameTable                    = frameTable;
         }
 
         public readonly int SpriteDirections;
         public readonly AnimationTable AnimationTable;
-        public readonly Dictionary<int, AnimationFrameTable> AnimationFramesByIndex;
+        public readonly Dictionary<int, AnimationCommandTable> AnimationCommandTablesByIndex;
         public readonly FrameTable FrameTable;
 
         public string Name => AnimationTable.Name;
@@ -27,7 +27,7 @@ namespace SF3.Win.Views.CHR {
         public SpriteAnimationsView(string name, SpriteAnimationsViewContext context, INameGetterContext nameGetterContext) : base(name) {
             _context    = context;
             TableView   = new TableView("Frames", context.AnimationTable, nameGetterContext, typeof(Animation));
-            TextureView = new SpriteAnimationTextureView("Texture", new SpriteAnimationTextureViewContext(context.SpriteDirections, context.AnimationFramesByIndex, context.FrameTable), textureScale: 2);
+            TextureView = new SpriteAnimationTextureView("Texture", new SpriteAnimationTextureViewContext(context.SpriteDirections, context.AnimationCommandTablesByIndex, context.FrameTable), textureScale: 2);
         }
 
         public override Control Create() {
@@ -44,7 +44,7 @@ namespace SF3.Win.Views.CHR {
             var item = (OLVListItem) TableView.OLVControl.SelectedItem;
             var animation = (Animation) item?.RowObject;
 
-            if (animation == null || !Context.AnimationFramesByIndex.ContainsKey(animation.ID))
+            if (animation == null || !Context.AnimationCommandTablesByIndex.ContainsKey(animation.ID))
                 TextureView.ClearAnimation();
             else
                 TextureView.StartAnimation(animation.AnimationIndex);
@@ -71,7 +71,7 @@ namespace SF3.Win.Views.CHR {
             set {
                 if (_context != value) {
                     _context = value;
-                    TextureView.Context = new SpriteAnimationTextureViewContext(value?.SpriteDirections ?? 1, value?.AnimationFramesByIndex, value?.FrameTable);
+                    TextureView.Context = new SpriteAnimationTextureViewContext(value?.SpriteDirections ?? 1, value?.AnimationCommandTablesByIndex, value?.FrameTable);
                     TableView.Table = _context?.AnimationTable;
                 }
             }

@@ -4,25 +4,25 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
 namespace SF3.CHR {
-    public class SpriteFramesDef : IJsonResource {
+    public class FrameGroupsForSpritesheet : IJsonResource {
         /// <summary>
-        /// Deserializes a JSON object of a SpriteFramesDef.
+        /// Deserializes a JSON object of a FrameGroupsForSpritesheet.
         /// </summary>
-        /// <param name="json">SpriteFramesDef in JSON format as a string.</param>
-        /// <returns>A new SpriteFramesDef if deserializing was successful, or 'null' if not.</returns>
-        public static SpriteFramesDef FromJSON(string json) {
-            var framesDef = new SpriteFramesDef();
-            return framesDef.AssignFromJSON_String(json) ? framesDef : null;
+        /// <param name="json">FrameGroupsForSpritesheet in JSON format as a string.</param>
+        /// <returns>A new FrameGroupsForSpritesheet if deserializing was successful, or 'null' if not.</returns>
+        public static FrameGroupsForSpritesheet FromJSON(string json) {
+            var frameGroups = new FrameGroupsForSpritesheet();
+            return frameGroups.AssignFromJSON_String(json) ? frameGroups : null;
         }
 
         /// <summary>
-        /// Deserializes a JSON object of a SpriteFramesDef.
+        /// Deserializes a JSON object of a FrameGroupsForSpritesheet.
         /// </summary>
-        /// <param name="jToken">SpriteFramesDef as a JToken.</param>
-        /// <returns>A new SpriteFramesDef if deserializing was successful, or 'null' if not.</returns>
-        public static SpriteFramesDef FromJToken(JToken jToken) {
-            var framesDef = new SpriteFramesDef();
-            return framesDef.AssignFromJToken(jToken) ? framesDef : null;
+        /// <param name="jToken">FrameGroupsForSpritesheet as a JToken.</param>
+        /// <returns>A new FrameGroupsForSpritesheet if deserializing was successful, or 'null' if not.</returns>
+        public static FrameGroupsForSpritesheet FromJToken(JToken jToken) {
+            var frameGroups = new FrameGroupsForSpritesheet();
+            return frameGroups.AssignFromJToken(jToken) ? frameGroups : null;
         }
 
         public bool AssignFromJSON_String(string json)
@@ -35,7 +35,7 @@ namespace SF3.CHR {
             switch (jToken.Type) {
                 case JTokenType.Array:
                     var jArray = (JArray) jToken;
-                    FrameGroups = jArray.Select(x => FrameGroupDef.FromJToken(x)).ToArray();
+                    FrameGroups = jArray.Select(x => FrameGroup.FromJToken(x)).ToArray();
                     return true;
 
                 case JTokenType.Object:
@@ -47,7 +47,7 @@ namespace SF3.CHR {
                         Height     = jObj.TryGetValue("Height",     out var height)     ? ((int?) height)       : null;
 
                         FrameGroups = jObj.TryGetValue("Frames", out var frameGroups)
-                            ? frameGroups.Select(x => FrameGroupDef.FromJToken(x)).ToArray()
+                            ? frameGroups.Select(x => FrameGroup.FromJToken(x)).ToArray()
                             : null;
                     }
                     catch {
@@ -89,6 +89,6 @@ namespace SF3.CHR {
         public int? Width;
         public int? Height;
 
-        public FrameGroupDef[] FrameGroups;
+        public FrameGroup[] FrameGroups;
     }
 }

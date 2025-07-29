@@ -9,42 +9,42 @@ using SF3.Types;
 using SF3.Utils;
 
 namespace SF3.Sprites {
-    public class AnimationCommandDef : IJsonResource {
-        public AnimationCommandDef() { }
+    public class AnimationCommand : IJsonResource {
+        public AnimationCommand() { }
 
-        public AnimationCommandDef(string[] frameHashes, int duration) {
-            FrameGroup  = null;
-            Frames      = null;
-            FrameHashes = frameHashes ?? new string[0];
-            Command     = SpriteAnimationFrameCommand.Frame;
-            Parameter   = duration;
+        public AnimationCommand(string[] frameHashes, int duration) {
+            FrameGroup        = null;
+            FramesByDirection = null;
+            FrameHashes       = frameHashes ?? new string[0];
+            Command           = SpriteAnimationCommandType.Frame;
+            Parameter         = duration;
         }
 
-        public AnimationCommandDef(SpriteAnimationFrameCommand command, int parameter) {
+        public AnimationCommand(SpriteAnimationCommandType command, int parameter) {
             FrameGroup  = null;
-            FrameHashes = (command == SpriteAnimationFrameCommand.Frame) ? new string[0] : null;
+            FrameHashes = (command == SpriteAnimationCommandType.Frame) ? new string[0] : null;
             Command     = command;
             Parameter   = parameter;
         }
 
         /// <summary>
-        /// Deserializes a JSON object of a AnimationFrameDef.
+        /// Deserializes a JSON object of a AnimationCommand.
         /// </summary>
-        /// <param name="json">AnimationFrameDef in JSON format as a string.</param>
-        /// <returns>A new AnimationFrameDef if deserializing was successful, or 'null' if not.</returns>
-        public static AnimationCommandDef FromJSON(string json) {
-            var animationFrameDef = new AnimationCommandDef();
-            return animationFrameDef.AssignFromJSON_String(json) ? animationFrameDef : null;
+        /// <param name="json">AnimationCommand in JSON format as a string.</param>
+        /// <returns>A new AnimationCommand if deserializing was successful, or 'null' if not.</returns>
+        public static AnimationCommand FromJSON(string json) {
+            var aniCommand = new AnimationCommand();
+            return aniCommand.AssignFromJSON_String(json) ? aniCommand : null;
         }
 
         /// <summary>
-        /// Deserializes a JSON object of a AnimationFrameDef.
+        /// Deserializes a JSON object of a AnimationCommand.
         /// </summary>
-        /// <param name="jToken">AnimationFrameDef as a JToken.</param>
-        /// <returns>A new AnimationFrameDef if deserializing was successful, or 'null' if not.</returns>
-        public static AnimationCommandDef FromJToken(JToken jToken) {
-            var animationFrameDef = new AnimationCommandDef();
-            return animationFrameDef.AssignFromJToken(jToken) ? animationFrameDef : null;
+        /// <param name="jToken">AnimationCommand as a JToken.</param>
+        /// <returns>A new AnimationCommand if deserializing was successful, or 'null' if not.</returns>
+        public static AnimationCommand FromJToken(JToken jToken) {
+            var aniCommand = new AnimationCommand();
+            return aniCommand.AssignFromJToken(jToken) ? aniCommand : null;
         }
 
         public bool AssignFromJSON_String(string json)
@@ -66,16 +66,16 @@ namespace SF3.Sprites {
                                     break;
 
                                 case JTokenType.Object:
-                                    Frames = ((IDictionary<string, JToken>) frames)
-                                        .ToDictionary(x => (SpriteFrameDirection) Enum.Parse(typeof(SpriteFrameDirection), x.Key), x => AnimationFrameDirectionDef.FromJToken(x.Value));
+                                    FramesByDirection = ((IDictionary<string, JToken>) frames)
+                                        .ToDictionary(x => (SpriteFrameDirection) Enum.Parse(typeof(SpriteFrameDirection), x.Key), x => AnimationCommandFrame.FromJToken(x.Value));
                                     break;
                             }
 
-                            Command = SpriteAnimationFrameCommand.Frame;
+                            Command   = SpriteAnimationCommandType.Frame;
                             Parameter = jObj.TryGetValue("Duration", out var parameter) ? ((int) parameter) : 0;
                         }
                         else {
-                            Command = jObj.TryGetValue("Command",   out var command)   ? (command.ToObject<SpriteAnimationFrameCommand>()) : SpriteAnimationFrameCommand.Frame;
+                            Command   = jObj.TryGetValue("Command",   out var command)   ? (command.ToObject<SpriteAnimationCommandType>()) : SpriteAnimationCommandType.Frame;
                             Parameter = jObj.TryGetValue("Parameter", out var parameter) ? ((int) parameter) : 0;
                         }
                     }
@@ -95,11 +95,11 @@ namespace SF3.Sprites {
         public JToken ToJToken() {
             var jObj = new JObject();
 
-            if (FrameGroup != null || Frames != null) {
+            if (FrameGroup != null || FramesByDirection != null) {
                 if (FrameGroup != null)
                     jObj.Add("Frame", new JValue(FrameGroup));
-                else if (Frames != null)
-                    jObj.Add("Frame", JToken.FromObject(Frames.ToDictionary(x => x.Key.ToString(), x => x.Value.ToJToken())));
+                else if (FramesByDirection != null)
+                    jObj.Add("Frame", JToken.FromObject(FramesByDirection.ToDictionary(x => x.Key.ToString(), x => x.Value.ToJToken())));
                 jObj.Add("Duration", new JValue(Parameter));
             }
             else {
@@ -111,13 +111,13 @@ namespace SF3.Sprites {
             return jObj;
         }
 
-        public bool ConvertFrameHashes(Dictionary<string, FrameGroupDef> frameGroups) {
+        public bool ConvertFrameHashes(Dictionary<string, FrameGroup> frameGroups) {
             if (frameGroups == null || FrameHashes == null)
                 return false;
 
             var frameCount = FrameHashes.Length;
             if (FrameHashes.All(x => x != null)) {
-                bool FrameGroupHasHashes(FrameGroupDef fg) {
+                bool FrameGroupHasHashes(FrameGroup fg) {
                     return FrameHashes
                         .Select((x, i) => (Hash: x, Dir: CHR_Utils.FrameNumberToSpriteDir(frameCount, i)))
                         .All(x => fg.Frames.ContainsKey(x.Dir) && fg.Frames[x.Dir].Hash == x.Hash);
@@ -127,7 +127,7 @@ namespace SF3.Sprites {
                     .FirstOrDefault(x => FrameGroupHasHashes(x.Value));
                 if (frameGroup.Value != null) {
                     FrameGroup  = frameGroup.Key;
-                    Frames      = null;
+                    FramesByDirection      = null;
                     FrameHashes = null;
                     return true;
                 }
@@ -145,15 +145,15 @@ namespace SF3.Sprites {
                 .Where(x => x.Hash != null)
                 .ToDictionary(x => x.Dir, x => {
                     var frame = allFramesByHash.TryGetValue(x.Hash, out var frameOut) ? frameOut : default;
-                    return (frame.Frame != null) ? new AnimationFrameDirectionDef() { Frame = frame.Name, Direction = frame.Dir } : null;
+                    return (frame.Frame != null) ? new AnimationCommandFrame() { FrameGroup = frame.Name, Direction = frame.Dir } : null;
                 });
 
             var nonNullFrameCount = FrameHashes.Count(x => x != null);
             var foundFrameCount = frames.Count(x => x.Value != null);
             if (foundFrameCount == nonNullFrameCount) {
-                FrameGroup  = null;
-                Frames      = frames;
-                FrameHashes = null;
+                FrameGroup        = null;
+                FramesByDirection = frames;
+                FrameHashes       = null;
                 return true;
             }
 
@@ -164,32 +164,32 @@ namespace SF3.Sprites {
         public override string ToString() {
             return
                 (FrameGroup != null)  ? $"{FrameGroup}, {Parameter}" :
-                (Frames != null)      ? string.Join("_", Frames.Select(x => $"{x.Value} ({x.Key})")) + $", {Parameter}" :
+                (FramesByDirection != null)      ? string.Join("_", FramesByDirection.Select(x => $"{x.Value} ({x.Key})")) + $", {Parameter}" :
                 (FrameHashes != null) ? string.Join("_", FrameHashes) + $", {Parameter}" :
                 $"{Command}_{Parameter}";
         }
 
         [JsonIgnore]
-        public bool HasFrame => Command == SpriteAnimationFrameCommand.Frame && (FrameGroup != null || FrameHashes != null || Frames != null);
+        public bool HasFrame => Command == SpriteAnimationCommandType.Frame && (FrameGroup != null || FrameHashes != null || FramesByDirection != null);
 
         public bool HasFullFrame(int directions) {
-            return (Command == SpriteAnimationFrameCommand.Frame) && (
+            return (Command == SpriteAnimationCommandType.Frame) && (
                 FrameGroup != null ||
                 (FrameHashes != null && FrameHashes.Length == directions && FrameHashes.All(x => x != null)) ||
-                (Frames != null && Frames.Count == directions && Enumerable
+                (FramesByDirection != null && FramesByDirection.Count == directions && Enumerable
                     .Range(0, directions)
                     .Select(x => CHR_Utils.FrameNumberToSpriteDir(directions, x))
-                    .All(x => Frames.ContainsKey(x))
+                    .All(x => FramesByDirection.ContainsKey(x))
                 )
             );
         }
 
         public string FrameGroup;
-        public Dictionary<SpriteFrameDirection, AnimationFrameDirectionDef> Frames;
+        public Dictionary<SpriteFrameDirection, AnimationCommandFrame> FramesByDirection;
         public string[] FrameHashes;
 
         [JsonConverter(typeof(StringEnumConverter))]
-        public SpriteAnimationFrameCommand Command;
+        public SpriteAnimationCommandType Command;
 
         public int Parameter;
     };

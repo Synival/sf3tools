@@ -4,14 +4,14 @@ using SF3.Models.Tables.CHR;
 
 namespace SF3.Win.Views.CHR {
     public class SpriteAnimationTextureViewContext {
-        public SpriteAnimationTextureViewContext(int spriteDirections, Dictionary<int, AnimationFrameTable> animationFramesByIndex, FrameTable frameTable) {
-            SpriteDirections       = spriteDirections;
-            AnimationFramesByIndex = animationFramesByIndex;
-            FrameTable             = frameTable;
+        public SpriteAnimationTextureViewContext(int spriteDirections, Dictionary<int, AnimationCommandTable> aniCommandTablesByIndex, FrameTable frameTable) {
+            SpriteDirections              = spriteDirections;
+            AnimationCommandTablesByIndex = aniCommandTablesByIndex;
+            FrameTable                    = frameTable;
         }
 
         public readonly int SpriteDirections;
-        public readonly Dictionary<int, AnimationFrameTable> AnimationFramesByIndex;
+        public readonly Dictionary<int, AnimationCommandTable> AnimationCommandTablesByIndex;
         public readonly FrameTable FrameTable;
     }
 
@@ -22,69 +22,69 @@ namespace SF3.Win.Views.CHR {
         }
 
         public void StartAnimation(int index) {
-            if (Context == null || Context.FrameTable == null || Context?.AnimationFramesByIndex?.ContainsKey(index) != true) {
+            if (Context == null || Context.FrameTable == null || Context?.AnimationCommandTablesByIndex?.ContainsKey(index) != true) {
                 ClearAnimation();
-                _frames = null;
+                _commands = null;
                 return;
             }
 
-            _frames = Context.AnimationFramesByIndex[index];
-            if (_frames == null || _frames.Length == 0 || _frames[0].IsFinalFrame) {
+            _commands = Context.AnimationCommandTablesByIndex[index];
+            if (_commands == null || _commands.Length == 0 || _commands[0].IsFinalCommand) {
                 ClearAnimation();
-                _frames = null;
+                _commands = null;
                 return;
             }
 
             _currentDirections = Context.SpriteDirections;
-            GotoFrame(null, 0);
+            GotoCommand(null, 0);
         }
 
         protected override void OnFrameCompleted()
-            => GotoFrame(FrameIndex, FrameIndex + 1);
+            => GotoCommand(FrameIndex, FrameIndex + 1);
 
-        private void GotoFrame(int? lastFrameIndex, int nextFrameIndex) {
-            var framesSeen = new List<AnimationFrame>();
-            if (lastFrameIndex.HasValue && lastFrameIndex >= 0 && lastFrameIndex < _frames.Length)
-                framesSeen.Add(_frames[lastFrameIndex.Value]);
+        private void GotoCommand(int? lastCommandIndex, int nextCommandIndex) {
+            var commandsSeen = new List<AnimationCommand>();
+            if (lastCommandIndex.HasValue && lastCommandIndex >= 0 && lastCommandIndex < _commands.Length)
+                commandsSeen.Add(_commands[lastCommandIndex.Value]);
 
-            var frameCount = _frames.Length;
-            var nextImage  = Image;
+            var commandCount = _commands.Length;
+            var nextImage    = Image;
 
             while (true) {
-                if (nextFrameIndex >= frameCount) {
+                if (nextCommandIndex >= commandCount) {
                     PauseAnimation();
                     return;
                 }
 
                 // If we've gone in a loop, abort.
-                var nextFrame = _frames[nextFrameIndex];
-                if (framesSeen.Contains(nextFrame)) {
+                var nextCommand = _commands[nextCommandIndex];
+                if (commandsSeen.Contains(nextCommand)) {
                     PauseAnimation();
                     return;
                 }
-                framesSeen.Add(nextFrame);
+                commandsSeen.Add(nextCommand);
 
                 // Normal frame with texture.
-                if (nextFrame.HasTexture) {
-                    nextImage = nextFrame.GetTexture(_currentDirections);
-                    var duration = nextFrame.Duration;
+                if (nextCommand.IsFrameCommand) {
+                    nextImage = nextCommand.GetTexture(_currentDirections);
+                    var duration = nextCommand.Duration;
                     if (duration > 0) {
-                        SetFrame(nextImage, nextFrameIndex, duration);
+                        SetFrame(nextImage, nextCommandIndex, duration);
                         return;
                     }
                     else
-                        nextFrameIndex++;
+                        nextCommandIndex++;
                 }
                 // Special commands.
                 else {
-                    var cmd   = nextFrame.FrameID;
-                    var param = nextFrame.Duration;
+                    var cmd   = nextCommand.FrameID;
+                    var param = nextCommand.Duration;
 
                     switch (cmd) {
                         // Set number of directions
                         case 0xF1:
                             _currentDirections = param;
-                            nextFrameIndex++;
+                            nextCommandIndex++;
                             break;
 
                         // Pause
@@ -95,36 +95,36 @@ namespace SF3.Win.Views.CHR {
                         // Set duration
                         case 0xF6:
                             if (param > 0) {
-                                SetFrame(nextImage, nextFrameIndex, param);
+                                SetFrame(nextImage, nextCommandIndex, param);
                                 return;
                             }
-                            nextFrameIndex++;
+                            nextCommandIndex++;
                             break;
 
                         // Jump to frame
                         case 0xFE:
-                            var isValidFrame = (nextFrame.Duration % 2 == 0 && (nextFrame.Duration / 2) < _frames.Length);
-                            if (!isValidFrame) {
+                            var isValidParameter = (nextCommand.Duration % 2 == 0 && (nextCommand.Duration / 2) < _commands.Length);
+                            if (!isValidParameter) {
                                 PauseAnimation();
                                 return;
                             }
-                            nextFrameIndex = nextFrame.Duration / 2;
+                            nextCommandIndex = nextCommand.Duration / 2;
                             break;
 
                         // Jump to animation
                         case 0xFF:
-                            if (!Context.AnimationFramesByIndex.ContainsKey(param)) {
+                            if (!Context.AnimationCommandTablesByIndex.ContainsKey(param)) {
                                 PauseAnimation();
                                 return;
                             }
 
-                            _frames = Context.AnimationFramesByIndex[param];
-                            nextFrameIndex = 0;
+                            _commands = Context.AnimationCommandTablesByIndex[param];
+                            nextCommandIndex = 0;
                             break;
 
                         // All other commands are skipped.
                         default:
-                            nextFrameIndex++;
+                            nextCommandIndex++;
                             break;
                     }
                 }
@@ -138,12 +138,12 @@ namespace SF3.Win.Views.CHR {
                 if (_context != value) {
                     _context = value;
                     ClearAnimation();
-                    _frames = null;
+                    _commands = null;
                 }
             }
         }
 
-        private AnimationFrameTable _frames = null;
+        private AnimationCommandTable _commands = null;
         private int _currentDirections = 0;
     }
 }

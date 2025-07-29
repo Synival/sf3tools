@@ -16,7 +16,7 @@ namespace SF3.Sprites {
             SpritesheetY = -1;
         }
 
-        public StandaloneFrameDef(FrameDef frame, SpriteFrameDirection direction, string name, int width, int height) {
+        public StandaloneFrameDef(Frame frame, SpriteFrameDirection direction, string name, int width, int height) {
             Hash         = frame.Hash;
             SpritesheetX = frame.SpritesheetX;
             SpritesheetY = frame.SpritesheetY;

@@ -223,7 +223,7 @@ namespace CHR_Extractor {
 
                                                 ITable[] GetTables(Sprite sprite) {
                                                     var tables = new List<ITable>();
-                                                    tables.AddRange(sprite.AnimationFrameTablesByIndex.Select(x => x.Value).ToList());
+                                                    tables.AddRange(sprite.AnimationCommandTablesByIndex.Select(x => x.Value).ToList());
                                                     tables.Add(sprite.AnimationOffsetTable);
                                                     tables.Add(sprite.FrameTable);
                                                     return tables.ToArray();

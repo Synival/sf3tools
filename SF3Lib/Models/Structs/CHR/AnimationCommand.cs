@@ -8,11 +8,11 @@ using SF3.Types;
 using SF3.Utils;
 
 namespace SF3.Models.Structs.CHR {
-    public class AnimationFrame : Struct {
+    public class AnimationCommand : Struct {
         private readonly int _frameIdAddr;
         private readonly int _durationAddr;
 
-        public AnimationFrame(IByteData data, int id, string name, int address, int spriteIndex, int spriteId, int directions, int animationIndex, FrameTable frameTable)
+        public AnimationCommand(IByteData data, int id, string name, int address, int spriteIndex, int spriteId, int directions, int animationIndex, FrameTable frameTable)
         : base(data, id, name, address, 0x4) {
             SpriteIndex    = spriteIndex;
             SpriteID       = spriteId;
@@ -59,10 +59,10 @@ namespace SF3.Models.Structs.CHR {
         public int Directions { get; }
 
         [TableViewModelColumn(addressField: null, displayOrder: 2.5f)]
-        public int FramesMissing => HasTexture ? (CHR_Utils.DirectionsToFrameCount(Directions) - GetFrameCount(Directions)) : 0;
+        public int FramesMissing => IsFrameCommand ? (CHR_Utils.DirectionsToFrameCount(Directions) - GetFrameCount(Directions)) : 0;
 
         [TableViewModelColumn(displayOrder: 3)]
-        public bool IsFinalFrame {
+        public bool IsFinalCommand {
             get {
                 var cmd = FrameID;
                 return (cmd == 0xF2 || (cmd == 0xFE && Duration < (ID * 2 + 2)) || cmd == 0xFF);
@@ -70,7 +70,7 @@ namespace SF3.Models.Structs.CHR {
         }
 
         [TableViewModelColumn(displayOrder: 4)]
-        public bool HasTexture {
+        public bool IsFrameCommand {
             get {
                 var cmd = FrameID;
                 // (NOTE: Command 0xFC is a special command, but it's broken and sets the frame to 0xFC with a duration. Stupid, huh?)
@@ -79,7 +79,7 @@ namespace SF3.Models.Structs.CHR {
         }
 
         public int GetFrameCount(int directions) {
-            if (FrameTable == null || !HasTexture)
+            if (FrameTable == null || !IsFrameCommand)
                 return 0;
 
             int expectedFrameCount = CHR_Utils.DirectionsToFrameCount(directions);

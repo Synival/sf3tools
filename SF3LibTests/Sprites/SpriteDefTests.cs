@@ -290,9 +290,9 @@ namespace SF3.Tests.Sprites {
             Assert.AreEqual(20,      spritesheet1.Unknown0x08);
             Assert.AreEqual(40,      spritesheet1.CollisionSize);
             Assert.AreEqual(1.0f,    spritesheet1.Scale);
-            Assert.AreEqual(5,       spritesheet1.FrameGroups.Count);
+            Assert.AreEqual(5,       spritesheet1.FrameGroupsByName.Count);
             // TODO: inside the frames
-            Assert.AreEqual(1,       spritesheet1.AnimationByDirections.Count);
+            Assert.AreEqual(1,       spritesheet1.AnimationSetsByDirections.Count);
             // TODO: inside the animations
 
             var spritesheet2Kv = spriteDef.Spritesheets.Last();
@@ -303,9 +303,9 @@ namespace SF3.Tests.Sprites {
             Assert.AreEqual(20,      spritesheet2.Unknown0x08);
             Assert.AreEqual(40,      spritesheet2.CollisionSize);
             Assert.AreEqual(1.0f,    spritesheet2.Scale);
-            Assert.AreEqual(1,       spritesheet2.FrameGroups.Count);
+            Assert.AreEqual(1,       spritesheet2.FrameGroupsByName.Count);
             // TODO: inside the frames
-            Assert.AreEqual(1,       spritesheet2.AnimationByDirections.Count);
+            Assert.AreEqual(1,       spritesheet2.AnimationSetsByDirections.Count);
             // TODO: inside the animations
         }
     }

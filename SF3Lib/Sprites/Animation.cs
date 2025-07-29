@@ -6,31 +6,31 @@ using SF3.Types;
 using SF3.Utils;
 
 namespace SF3.Sprites {
-    public class AnimationDef : IJsonResource {
-        public AnimationDef() { }
+    public class Animation : IJsonResource {
+        public Animation() { }
 
-        public AnimationDef(UniqueAnimationDef aniInfo) : this() {
+        public Animation(UniqueAnimationDef aniInfo) : this() {
             AnimationCommands = aniInfo.AnimationCommands;
         }
 
         /// <summary>
-        /// Deserializes a JSON object of a AnimationDef.
+        /// Deserializes a JSON object of a Animation.
         /// </summary>
-        /// <param name="json">AnimationDef in JSON format as a string.</param>
-        /// <returns>A new AnimationDef if deserializing was successful, or 'null' if not.</returns>
-        public static AnimationDef FromJSON(string json) {
-            var animationDef = new AnimationDef();
-            return animationDef.AssignFromJSON_String(json) ? animationDef : null;
+        /// <param name="json">Animation in JSON format as a string.</param>
+        /// <returns>A new Animation if deserializing was successful, or 'null' if not.</returns>
+        public static Animation FromJSON(string json) {
+            var animation = new Animation();
+            return animation.AssignFromJSON_String(json) ? animation : null;
         }
 
         /// <summary>
-        /// Deserializes a JSON object of a AnimationDef.
+        /// Deserializes a JSON object of a Animation.
         /// </summary>
-        /// <param name="jToken">AnimationDef as a JToken.</param>
-        /// <returns>A new AnimationDef if deserializing was successful, or 'null' if not.</returns>
-        public static AnimationDef FromJToken(JToken jToken) {
-            var animationDef = new AnimationDef();
-            return animationDef.AssignFromJToken(jToken) ? animationDef : null;
+        /// <param name="jToken">Animation as a JToken.</param>
+        /// <returns>A new Animation if deserializing was successful, or 'null' if not.</returns>
+        public static Animation FromJToken(JToken jToken) {
+            var animation = new Animation();
+            return animation.AssignFromJToken(jToken) ? animation : null;
         }
 
         public bool AssignFromJSON_String(string json)
@@ -43,7 +43,7 @@ namespace SF3.Sprites {
             switch (jToken.Type) {
                 case JTokenType.Array:
                     try {
-                        AnimationCommands = jToken.Select(x => AnimationCommandDef.FromJToken(x)).ToArray();
+                        AnimationCommands = jToken.Select(x => AnimationCommand.FromJToken(x)).ToArray();
                     }
                     catch {
                         return false;
@@ -69,9 +69,9 @@ namespace SF3.Sprites {
         public bool HasAllFrames(int startDirections) {
             var currentDirections = startDirections;
             foreach (var aniCommand in AnimationCommands) {
-                if (aniCommand.Command == SpriteAnimationFrameCommand.SetDirectionCount)
+                if (aniCommand.Command == SpriteAnimationCommandType.SetDirectionCount)
                     currentDirections = aniCommand.Parameter;
-                else if (aniCommand.Command == SpriteAnimationFrameCommand.Frame && !aniCommand.HasFullFrame(CHR_Utils.DirectionsToFrameCount(currentDirections)))
+                else if (aniCommand.Command == SpriteAnimationCommandType.Frame && !aniCommand.HasFullFrame(CHR_Utils.DirectionsToFrameCount(currentDirections)))
                     return false;
             }
             return true;
@@ -79,6 +79,6 @@ namespace SF3.Sprites {
 
         public override string ToString() => string.Join(", ", AnimationCommands.Select(x => x.ToString()));
 
-        public AnimationCommandDef[] AnimationCommands;
+        public AnimationCommand[] AnimationCommands;
     };
 }

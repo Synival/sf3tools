@@ -10,15 +10,15 @@ using SF3.Utils;
 
 namespace SF3.Models.Structs.CHR {
     public class Animation : Struct {
-        public Animation(IByteData data, int id, string name, int address, int animationIndex, int spriteDirections, AnimationFrameTable animationFrames, FrameTable frameTable)
+        public Animation(IByteData data, int id, string name, int address, int animationIndex, int spriteDirections, AnimationCommandTable animationCommands, FrameTable frameTable)
         : base(data, id, name, address, 0 /* abstract */) {
-            AnimationIndex   = animationIndex;
-            SpriteDirections = spriteDirections;
-            AnimationFrames  = animationFrames;
-            FrameTable       = frameTable;
+            AnimationIndex        = animationIndex;
+            SpriteDirections      = spriteDirections;
+            AnimationCommandTable = animationCommands;
+            FrameTable            = frameTable;
 
-            _framesWithTextures = AnimationFrames
-                .Where(x => x.HasTexture)
+            _framesWithTextures = AnimationCommandTable
+                .Where(x => x.IsFrameCommand)
                 .SelectMany(x => {
                     var frames = new List<int>();
                     var frameID = x.FrameID;
@@ -33,13 +33,13 @@ namespace SF3.Models.Structs.CHR {
             AnimationInfo = CHR_Utils.GetUniqueAnimationInfoByHash(Hash);
 
             // Update animation info, in case it's out of date.
-            var firstAnimationFrameWithTexture = animationFrames?.FirstOrDefault(x => x.HasTexture);
+            var firstCommandWithTexture = animationCommands?.FirstOrDefault(x => x.IsFrameCommand);
             var firstFrameWithTexture = _framesWithTextures.FirstOrDefault();
             AnimationInfo.SpriteName = SpriteName;
             AnimationInfo.Width  = firstFrameWithTexture?.Width ?? 0;
             AnimationInfo.Height = firstFrameWithTexture?.Height ?? 0;
-            AnimationInfo.Directions = firstAnimationFrameWithTexture?.Directions ?? 0;
-            AnimationInfo.FrameCommandCount = AnimationFrames.Length;
+            AnimationInfo.Directions = firstCommandWithTexture?.Directions ?? 0;
+            AnimationInfo.FrameCommandCount = AnimationCommandTable.Length;
             AnimationInfo.Duration = Duration;
             AnimationInfo.FrameTexturesMissing = FrameTexturesMissing;
 
@@ -47,30 +47,30 @@ namespace SF3.Models.Structs.CHR {
             var aniNameLower = AnimationName.ToLower();
             var frameIdsModified = new HashSet<int>();
 
-            string[] GetAnimationFrameHashes(AnimationFrame aniFrame) {
-                if (!aniFrame.HasTexture)
+            string[] GetCommandFrameHashes(AnimationCommand aniCommand) {
+                if (!aniCommand.IsFrameCommand)
                     return null;
 
-                var frameID = aniFrame.FrameID;
-                var dirs = CHR_Utils.DirectionsToFrameCount(aniFrame.Directions);
+                var frameID = aniCommand.FrameID;
+                var dirs = CHR_Utils.DirectionsToFrameCount(aniCommand.Directions);
                 var hashes = new string[dirs];
                 var maxFrames = FrameTable.Length;
 
                 for (int i = 0; i < dirs; i++) {
-                    var num = aniFrame.FrameID + i;
+                    var num = aniCommand.FrameID + i;
                     if (num < maxFrames)
                         hashes[i] = FrameTable[num].TextureHash;
                 }
                 return hashes;
             }
 
-            AnimationInfo.AnimationCommands = AnimationFrames
+            AnimationInfo.AnimationCommands = AnimationCommandTable
                 .Select(x => {
-                    if (x.HasTexture)
+                    if (x.IsFrameCommand)
                         texCount++;
                     return (x.FrameID < 0xF1 || x.FrameID == 0xFC)
-                        ? new AnimationCommandDef(GetAnimationFrameHashes(x), x.Duration)
-                        : new AnimationCommandDef((SpriteAnimationFrameCommand) x.FrameID, x.Duration);
+                        ? new Sprites.AnimationCommand(GetCommandFrameHashes(x), x.Duration)
+                        : new Sprites.AnimationCommand((SpriteAnimationCommandType) x.FrameID, x.Duration);
                 }).ToArray();
 
             var uniqueFramesWithTextures = _framesWithTextures.Distinct().ToArray();
@@ -78,7 +78,7 @@ namespace SF3.Models.Structs.CHR {
         }
 
         public int SpriteDirections { get; }
-        public AnimationFrameTable AnimationFrames { get; }
+        public AnimationCommandTable AnimationCommandTable { get; }
         public FrameTable FrameTable { get; }
 
         private readonly Frame[] _framesWithTextures;
@@ -154,16 +154,16 @@ namespace SF3.Models.Structs.CHR {
             }
         }
 
-        [TableViewModelColumn(displayOrder: 2.25f, displayName: "Frames+Commands")]
-        public int FrameCommandCount => AnimationFrames.Count();
+        [TableViewModelColumn(displayOrder: 2.25f)]
+        public int CommandCount => AnimationCommandTable.Count();
 
-        [TableViewModelColumn(displayOrder: 2.3f, displayName: "Image Frames")]
-        public int ImageFrameCount => AnimationFrames.Count(x => x.HasTexture);
+        [TableViewModelColumn(displayOrder: 2.3f)]
+        public int FrameCommandCount => AnimationCommandTable.Count(x => x.IsFrameCommand);
 
         [TableViewModelColumn(displayOrder: 2.4f)]
-        public string FinalFrame {
+        public string FinalCommand {
             get {
-                var lastFrame = AnimationFrames.LastOrDefault();
+                var lastFrame = AnimationCommandTable.LastOrDefault();
                 if (lastFrame == null)
                     return null;
                 return $"{lastFrame.FrameID:X2},{lastFrame.Duration:X2}";
@@ -171,17 +171,17 @@ namespace SF3.Models.Structs.CHR {
         }
 
         [TableViewModelColumn(displayOrder: 2.5f)]
-        public int Duration => AnimationFrames.Sum(x => x.HasTexture ? x.Duration : 0);
+        public int Duration => AnimationCommandTable.Sum(x => x.IsFrameCommand ? x.Duration : 0);
 
         [TableViewModelColumn(displayOrder: 2)]
-        public int FrameTexturesMissing => AnimationFrames.Sum(x => x.FramesMissing);
+        public int FrameTexturesMissing => AnimationCommandTable.Sum(x => x.FramesMissing);
 
         private string _hash = null;
         [TableViewModelColumn(displayOrder: 3, minWidth: 300)]
         public string Hash {
             get {
                 if (_hash == null)
-                    _hash = CHR_Utils.CreateAnimationHash(AnimationFrames.ToArray());
+                    _hash = CHR_Utils.CreateAnimationHash(AnimationCommandTable.ToArray());
                 return _hash;
             }
         }

@@ -9,38 +9,38 @@ namespace SF3.Sprites {
         public SpriteDef() { }
 
         public SpriteDef(string name, UniqueFrameDef[] frames, UniqueAnimationDef[] animations) {
-            var frameKeys = frames.Select(x => SpritesheetDef.DimensionsToKey(x.Width, x.Height)).Distinct().ToArray();
-            var animationKeys = animations.Select(x => SpritesheetDef.DimensionsToKey(x.Width, x.Height)).Distinct().ToArray();
+            var frameKeys = frames.Select(x => Spritesheet.DimensionsToKey(x.Width, x.Height)).Distinct().ToArray();
+            var animationKeys = animations.Select(x => Spritesheet.DimensionsToKey(x.Width, x.Height)).Distinct().ToArray();
             var keys = frameKeys.Concat(animationKeys).Distinct().OrderBy(x => x).ToArray();
 
             Name = name;
             Spritesheets = keys
-                .Select(x => SpritesheetDef.KeyToDimensions(x))
+                .Select(x => Spritesheet.KeyToDimensions(x))
                 .OrderBy(x => x.Width)
                 .ThenBy(x => x.Height)
-                .ToDictionary(x => SpritesheetDef.DimensionsToKey(x.Width, x.Height), x => new SpritesheetDef(
+                .ToDictionary(x => Spritesheet.DimensionsToKey(x.Width, x.Height), x => new Spritesheet(
                     frames.Where(y => y.Width == x.Width && y.Height == x.Height).OrderBy(y => y.FrameName).ThenBy(y => y.Direction).ThenBy(y => y.TextureHash).ToArray(),
                     animations.Where(y => y.Width == x.Width && y.Height == x.Height).OrderBy(y => y.Directions).ThenBy(y => y.AnimationName).ThenBy(y => y.AnimationHash).ToArray()
                 ));
 
             foreach (var spritesheet in Spritesheets.Values)
-                foreach (var variant in spritesheet.AnimationByDirections)
-                    foreach (var animation in variant.Value.Animations.Values)
+                foreach (var variant in spritesheet.AnimationSetsByDirections)
+                    foreach (var animation in variant.Value.AnimationsByName.Values)
                         foreach (var aniCommand in animation.AnimationCommands)
-                            aniCommand.ConvertFrameHashes(spritesheet.FrameGroups);
+                            aniCommand.ConvertFrameHashes(spritesheet.FrameGroupsByName);
         }
 
         public SpriteDef(string name, StandaloneFrameDef[] frames, UniqueAnimationDef[] animations) {
-            var frameKeys = frames.Select(x => SpritesheetDef.DimensionsToKey(x.Width, x.Height)).Distinct().ToArray();
-            var animationKeys = animations.Select(x => SpritesheetDef.DimensionsToKey(x.Width, x.Height)).Distinct().ToArray();
+            var frameKeys = frames.Select(x => Spritesheet.DimensionsToKey(x.Width, x.Height)).Distinct().ToArray();
+            var animationKeys = animations.Select(x => Spritesheet.DimensionsToKey(x.Width, x.Height)).Distinct().ToArray();
             var keys = frameKeys.Concat(animationKeys).Distinct().OrderBy(x => x).ToArray();
 
             Name = name;
             Spritesheets = keys
-                .Select(x => SpritesheetDef.KeyToDimensions(x))
+                .Select(x => Spritesheet.KeyToDimensions(x))
                 .OrderBy(x => x.Width)
                 .ThenBy(x => x.Height)
-                .ToDictionary(x => SpritesheetDef.DimensionsToKey(x.Width, x.Height), x => new SpritesheetDef(
+                .ToDictionary(x => Spritesheet.DimensionsToKey(x.Width, x.Height), x => new Spritesheet(
                     frames.Where(y => y.Width == x.Width && y.Height == x.Height).OrderBy(y => y.Name).ThenBy(y => y.Direction).ThenBy(y => y.Hash).ToArray(),
                     animations.Where(y => y.Width == x.Width && y.Height == x.Height).OrderBy(y => y.Directions).ThenBy(y => y.AnimationName).ThenBy(y => y.AnimationHash).ToArray()
                 ));
@@ -84,7 +84,7 @@ namespace SF3.Sprites {
 
                         if (jObj.TryGetValue("Spritesheets", out var spritesheets) && spritesheets.Type == JTokenType.Object) {
                             Spritesheets = ((IDictionary<string, JToken>) spritesheets)
-                                .ToDictionary(x => x.Key, x => SpritesheetDef.FromJToken(x.Value));
+                                .ToDictionary(x => x.Key, x => Spritesheet.FromJToken(x.Value));
                         }
                     }
                     catch {
@@ -121,6 +121,6 @@ namespace SF3.Sprites {
         public string Name;
         public int? Width;
         public int? Height;
-        public Dictionary<string, SpritesheetDef> Spritesheets;
+        public Dictionary<string, Spritesheet> Spritesheets;
     }
 }
