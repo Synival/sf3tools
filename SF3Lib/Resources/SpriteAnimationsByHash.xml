@@ -1186,7 +1186,7 @@
     <item hash="4f04b840870b3f3cb9244f86f5924aee" sprite="Franz (Helmet)" animation="StillFrame" width="48" height="40" directions="4" frames="2" duration="10" />
     <item hash="b2ae935c5ff960ecca62b177c9987cdc" sprite="Franz (Helmet)" animation="Walking" width="48" height="40" directions="4" frames="7" duration="30" />
     <item hash="52e8571aca3f38a23fbb34cf541a38e9" sprite="Freeze Ball Pedestal" animation="OrbHovering" width="48" height="64" directions="1" frames="9" duration="40" />
-    <item hash="d5d2e0981784ed22e12ac199c209aba8" sprite="Freeze Ball Pedestal (Orbless)" animation="StillFrame (Idle)" width="48" height="64" directions="1" frames="2" duration="5" />
+    <item hash="d5d2e0981784ed22e12ac199c209aba8" sprite="Freeze Ball Pedestal" animation="StillFrame (Orbless)" width="48" height="64" directions="1" frames="2" duration="5" />
     <item hash="c48d1e1a2cff7f671605a276da97e726" sprite="Fynnding (P1)" animation="Flying (2 Frame)" width="48" height="40" directions="4" frames="5" duration="29" />
     <item hash="c822f877111c6ad91a631e647efccf65" sprite="Fynnding (P1)" animation="Flying (Faster)" width="48" height="40" directions="4" frames="9" duration="23" />
     <item hash="aa4863368c1a4bb68e731549b30ddf4f" sprite="Fynnding (P1)" animation="Flying (Faster)" width="48" height="40" directions="6" frames="9" duration="23" />
@@ -3555,10 +3555,6 @@
     <item hash="d7292be73c7eb069a13723c6d001d623" sprite="Stella" animation="StillFrame (Field)" width="40" height="40" directions="4" frames="2" duration="10" />
     <item hash="4a4f8c7375710f1e45fa019609bd5887" sprite="Stella" animation="StillFrame (KeeledOver)" width="40" height="40" directions="17" frames="3" duration="10" />
     <item hash="36e422f8f4ff58b740d1dddc2e954381" sprite="Stella" animation="Walking" width="40" height="40" directions="4" frames="7" duration="24" />
-    <item hash="998d8e494d9d9a6e5d58e55eb304665c" sprite="STHA Treasure Chest" animation="Closing" width="32" height="32" directions="4" frames="4" duration="3" />
-    <item hash="c138d6a245009c7d9a748a407189a116" sprite="STHA Treasure Chest" animation="Opening" width="32" height="32" directions="4" frames="4" duration="3" />
-    <item hash="191167220eef844404f6d5d535506fc2" sprite="STHA Treasure Chest" animation="StillFrame (Closed)" width="32" height="32" directions="4" frames="2" duration="1" />
-    <item hash="834cc9a184eb4292b9be68699361dbc0" sprite="STHA Treasure Chest" animation="StillFrame (Open)" width="32" height="32" directions="4" frames="2" duration="1" />
     <item hash="b6f39e1ad6e1e71765c33a76c8a2557d" sprite="Sting Worm" animation="Idle" width="48" height="32" directions="4" frames="5" duration="18" />
     <item hash="c618127f41dc5829c1386ecb8d54cfea" sprite="Sting Worm" animation="StillFrame" width="48" height="32" directions="4" frames="2" duration="10" />
     <item hash="4f1c4ed7316743625119fcc01694af73" sprite="Sting Worm" animation="Walking" width="48" height="32" directions="4" frames="7" duration="30" />
@@ -3764,6 +3760,10 @@
     <item hash="08f1faa76b0f430a925ed3c83c646dd5" sprite="Transparency" animation="StillFrame (Black)" width="48" height="48" directions="1" frames="2" duration="10" />
     <item hash="23708b71160689a09af4ca935a2ea04c" sprite="Transparency" animation="StillFrame (Black+White)" width="48" height="48" directions="1" frames="2" duration="10" />
     <item hash="aaa5605ceb6fc5179dbb64552801fe9b" sprite="Transparency" animation="StillFrame (Black+White)" width="64" height="64" directions="1" frames="2" duration="10" />
+    <item hash="998d8e494d9d9a6e5d58e55eb304665c" sprite="Treasure Chest (Unused)" animation="Closing" width="32" height="32" directions="4" frames="4" duration="3" />
+    <item hash="c138d6a245009c7d9a748a407189a116" sprite="Treasure Chest (Unused)" animation="Opening" width="32" height="32" directions="4" frames="4" duration="3" />
+    <item hash="191167220eef844404f6d5d535506fc2" sprite="Treasure Chest (Unused)" animation="StillFrame (Closed)" width="32" height="32" directions="4" frames="2" duration="1" />
+    <item hash="834cc9a184eb4292b9be68699361dbc0" sprite="Treasure Chest (Unused)" animation="StillFrame (Open)" width="32" height="32" directions="4" frames="2" duration="1" />
     <item hash="1898f3db3efdc84d1a7e6cd1070e8dfe" sprite="Tristus" animation="HoldingOutArms" width="40" height="40" directions="4" frames="4" duration="15" />
     <item hash="c9e7a79d83c91c232274fbce11f83bde" sprite="Tristus" animation="Idle (2 Frames, Redundant Frames)" width="40" height="40" directions="4" frames="5" duration="20" />
     <item hash="1c46d4e3334abb5b89d4e4c1202a42f5" sprite="Tristus" animation="Idle (2 Frames)" width="40" height="40" directions="4" frames="5" duration="24" />

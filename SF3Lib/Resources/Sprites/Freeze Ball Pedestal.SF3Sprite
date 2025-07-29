@@ -44,6 +44,13 @@
             "SpritesheetX": 192,
             "SpritesheetY": 0
           }
+        },
+        "Orbless 1": {
+          "First": {
+            "Hash": "c5812869da844945da70f6d8f3248bf9",
+            "SpritesheetX": 240,
+            "SpritesheetY": 0
+          }
         }
       },
       "AnimationByDirections": {
@@ -84,6 +91,15 @@
             {
               "Command": "GotoCommandOffset",
               "Parameter": 0
+            }
+          ],
+          "StillFrame (Orbless)": [
+            {
+              "Frame": "Orbless 1",
+              "Duration": 5
+            },
+            {
+              "Command": "Stop"
             }
           ]
         }

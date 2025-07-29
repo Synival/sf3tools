@@ -921,9 +921,6 @@
     <Content Include="Resources\Sprites\Franz.SF3Sprite">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\Sprites\Freeze Ball Pedestal (Orbless).SF3Sprite">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Include="Resources\Sprites\Freeze Ball Pedestal.SF3Sprite">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -1824,9 +1821,6 @@
     <Content Include="Resources\Sprites\Royal Guard (Spear).SF3Sprite">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\Sprites\STHA Treasure Chest.SF3Sprite">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Include="Resources\Sprites\Sailor (Bag).SF3Sprite">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -2056,6 +2050,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Sprites\Transparency.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Treasure Chest (Unused).SF3Sprite">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Sprites\Tristus.SF3Sprite">

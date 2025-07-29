@@ -7241,7 +7241,7 @@
     <item hash="70f1556fa8fce78043f885410dbd0a60" sprite="Freeze Ball Pedestal" width="48" height="64" frame="OrbHovering 3" direction="First" />
     <item hash="fa2c7cde3ec73a8288a0ffaa2be8dd75" sprite="Freeze Ball Pedestal" width="48" height="64" frame="OrbHovering 4" direction="First" />
     <item hash="9507600b69c62ac6ad04bce7e435b84c" sprite="Freeze Ball Pedestal" width="48" height="64" frame="OrbHovering 5" direction="First" />
-    <item hash="c5812869da844945da70f6d8f3248bf9" sprite="Freeze Ball Pedestal (Orbless)" width="48" height="64" frame="Idle 1" direction="First" />
+    <item hash="c5812869da844945da70f6d8f3248bf9" sprite="Freeze Ball Pedestal" width="48" height="64" frame="Orbless 1" direction="First" />
     <item hash="67330a32e9242268443e7353f3b51ecf" sprite="Fynnding (P1)" width="48" height="40" frame="Flying 1" direction="S" />
     <item hash="4421c95f1f8d53c2c0d4635014b50faa" sprite="Fynnding (P1)" width="48" height="40" frame="Flying 1" direction="SSE" />
     <item hash="1d78814da5253dfc5b07c1f17e058d21" sprite="Fynnding (P1)" width="48" height="40" frame="Flying 1" direction="ESE" />
@@ -22049,18 +22049,6 @@
     <item hash="e9514900366b124dd0ae166811ce6c54" sprite="Stella" width="40" height="40" frame="Walking 4" direction="ESE" />
     <item hash="837c8d2adb73123d940392cffb67c029" sprite="Stella" width="40" height="40" frame="Walking 4" direction="ENE" />
     <item hash="2e368c245333b00e7323f9a9f9e48896" sprite="Stella" width="40" height="40" frame="Walking 4" direction="NNE" />
-    <item hash="aa26de57a37d827d3f9e8d15d8f82770" sprite="STHA Treasure Chest" width="32" height="32" frame="OpeningAndClosing 1" direction="SSE" />
-    <item hash="5e2bc34f0db7b6a0a4feb6ad730f3d7a" sprite="STHA Treasure Chest" width="32" height="32" frame="OpeningAndClosing 1" direction="ESE" />
-    <item hash="034dbfe50d9159378ca86ab5049986dd" sprite="STHA Treasure Chest" width="32" height="32" frame="OpeningAndClosing 1" direction="ENE" />
-    <item hash="0c4aa859044db08c5d64d198b91e640f" sprite="STHA Treasure Chest" width="32" height="32" frame="OpeningAndClosing 1" direction="NNE" />
-    <item hash="f2f455cb601cf83fc2e6928f272cb178" sprite="STHA Treasure Chest" width="32" height="32" frame="OpeningAndClosing 2" direction="SSE" />
-    <item hash="30d3f4e48a170baf213ef976967e6108" sprite="STHA Treasure Chest" width="32" height="32" frame="OpeningAndClosing 2" direction="ESE" />
-    <item hash="cdf5a3f51548e06a6e3e39cd3f8ba055" sprite="STHA Treasure Chest" width="32" height="32" frame="OpeningAndClosing 2" direction="ENE" />
-    <item hash="b94bff7dd2b5f5e3ebefd1addc685b23" sprite="STHA Treasure Chest" width="32" height="32" frame="OpeningAndClosing 2" direction="NNE" />
-    <item hash="6c4b938ca232916b215b560d96e1bda8" sprite="STHA Treasure Chest" width="32" height="32" frame="OpeningAndClosing 3" direction="SSE" />
-    <item hash="96b07ddc66704212dc993277bd05c006" sprite="STHA Treasure Chest" width="32" height="32" frame="OpeningAndClosing 3" direction="ESE" />
-    <item hash="136005fd01c3d8389005b0feafe9ad98" sprite="STHA Treasure Chest" width="32" height="32" frame="OpeningAndClosing 3" direction="ENE" />
-    <item hash="fedd5a2ea9f46884f79a872586c8e263" sprite="STHA Treasure Chest" width="32" height="32" frame="OpeningAndClosing 3" direction="NNE" />
     <item hash="bc9128fa9740dc6d1f722177cf777414" sprite="Sting Worm" width="48" height="32" frame="Idle 1" direction="SSE" />
     <item hash="319f7d4e816c44abdddf371a16613a83" sprite="Sting Worm" width="48" height="32" frame="Idle 1" direction="ESE" />
     <item hash="b23fa5dd6b8163c49171b9f15c69d436" sprite="Sting Worm" width="48" height="32" frame="Idle 1" direction="ENE" />
@@ -23113,6 +23101,18 @@
     <item hash="b1e27aa018409de6bfd73f8afb883a65" sprite="Transparency" width="48" height="48" frame="Black 1" direction="First" />
     <item hash="d33e04f92840fa8d80d642441797bafe" sprite="Transparency" width="48" height="48" frame="Black+White 1" direction="First" />
     <item hash="03ac62ba3da04a0bcca0ea6f6d6ce4b2" sprite="Transparency" width="64" height="64" frame="Black+White 1" direction="First" />
+    <item hash="aa26de57a37d827d3f9e8d15d8f82770" sprite="Treasure Chest (Unused)" width="32" height="32" frame="OpeningAndClosing 1" direction="SSE" />
+    <item hash="5e2bc34f0db7b6a0a4feb6ad730f3d7a" sprite="Treasure Chest (Unused)" width="32" height="32" frame="OpeningAndClosing 1" direction="ESE" />
+    <item hash="034dbfe50d9159378ca86ab5049986dd" sprite="Treasure Chest (Unused)" width="32" height="32" frame="OpeningAndClosing 1" direction="ENE" />
+    <item hash="0c4aa859044db08c5d64d198b91e640f" sprite="Treasure Chest (Unused)" width="32" height="32" frame="OpeningAndClosing 1" direction="NNE" />
+    <item hash="f2f455cb601cf83fc2e6928f272cb178" sprite="Treasure Chest (Unused)" width="32" height="32" frame="OpeningAndClosing 2" direction="SSE" />
+    <item hash="30d3f4e48a170baf213ef976967e6108" sprite="Treasure Chest (Unused)" width="32" height="32" frame="OpeningAndClosing 2" direction="ESE" />
+    <item hash="cdf5a3f51548e06a6e3e39cd3f8ba055" sprite="Treasure Chest (Unused)" width="32" height="32" frame="OpeningAndClosing 2" direction="ENE" />
+    <item hash="b94bff7dd2b5f5e3ebefd1addc685b23" sprite="Treasure Chest (Unused)" width="32" height="32" frame="OpeningAndClosing 2" direction="NNE" />
+    <item hash="6c4b938ca232916b215b560d96e1bda8" sprite="Treasure Chest (Unused)" width="32" height="32" frame="OpeningAndClosing 3" direction="SSE" />
+    <item hash="96b07ddc66704212dc993277bd05c006" sprite="Treasure Chest (Unused)" width="32" height="32" frame="OpeningAndClosing 3" direction="ESE" />
+    <item hash="136005fd01c3d8389005b0feafe9ad98" sprite="Treasure Chest (Unused)" width="32" height="32" frame="OpeningAndClosing 3" direction="ENE" />
+    <item hash="fedd5a2ea9f46884f79a872586c8e263" sprite="Treasure Chest (Unused)" width="32" height="32" frame="OpeningAndClosing 3" direction="NNE" />
     <item hash="e85882dc00af7bedd6e05f0db0fb7800" sprite="Tristus" width="40" height="40" frame="HoldingOutArms 1" direction="SSE" />
     <item hash="b45d36d516283eb4e50c852267f80b03" sprite="Tristus" width="40" height="40" frame="HoldingOutArms 1" direction="ESE" />
     <item hash="5b2c908e91579ce60099e81ff5910205" sprite="Tristus" width="40" height="40" frame="HoldingOutArms 1" direction="ENE" />
