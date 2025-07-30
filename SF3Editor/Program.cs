@@ -22,9 +22,6 @@ namespace SF3.Editor {
             // Add some special handles types to ObjectListView 
             RegisterNamedValues();
 
-            // Pre-load some resources
-            SpriteUtils.LoadAllSpriteDefs();
-
             Application.Run(new SF3EditorForm());
         }
     }

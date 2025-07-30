@@ -11,10 +11,10 @@ namespace SpriteCHR_Builder {
         public static int Main(string[] args) {
             // Load all sprite sheets ahead of time.
             // TODO: These really should be loaded on-demand.
-            Console.WriteLine("Loading SpriteDefs...");
+            Console.WriteLine("Loading all SpriteDefs...");
             SpriteUtils.SetSpritesheetPath(c_spritesheetPath);
             SpriteUtils.LoadAllSpriteDefs();
-            var spriteDefs = SpriteUtils.GetAllSpriteDefs();
+            var spriteDefs = SpriteUtils.GetAllLoadedSpriteDefs();
 
             Console.WriteLine("Writing CHRs...");
             _ = Directory.CreateDirectory(c_outputPath);

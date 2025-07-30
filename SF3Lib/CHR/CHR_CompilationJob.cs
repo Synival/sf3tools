@@ -253,8 +253,9 @@ namespace SF3.CHR {
         }
 
         private void WriteFrameTable(int spriteIndex, CHR_Writer chrWriter) {
-            foreach (var frame in _framesToWriteBySpriteIndex[spriteIndex])
-                chrWriter.WriteFrameTableFrame(spriteIndex, frame.FrameKey, frame.AniFrameKey);
+            if (_framesToWriteBySpriteIndex.ContainsKey(spriteIndex))
+                foreach (var frame in _framesToWriteBySpriteIndex[spriteIndex])
+                    chrWriter.WriteFrameTableFrame(spriteIndex, frame.FrameKey, frame.AniFrameKey);
             chrWriter.WriteFrameTableTerminator(spriteIndex);
         }
 

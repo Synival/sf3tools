@@ -6,7 +6,8 @@ using static CommonLib.Utils.ResourceUtils;
 
 namespace SF3.Utils {
     public static class SpriteUtils {
-        private static Dictionary<string, SpriteDef> s_spriteDefs = null;
+        private static Dictionary<string, SpriteDef> s_spriteDefs = new Dictionary<string, SpriteDef>();
+        private static HashSet<string> s_spriteDefFilesLoaded = new HashSet<string>();
         private static string s_spritesheetPath = null;
 
         /// <summary>
@@ -14,33 +15,47 @@ namespace SF3.Utils {
         /// </summary>
         /// <returns>The number of new SpriteDef's successfully loaded.</returns>
         public static int LoadAllSpriteDefs() {
-            if (s_spriteDefs == null)
-                s_spriteDefs = new Dictionary<string, SpriteDef>();
-
             var spriteDefFiles = Directory.GetFiles(ResourceFile("Sprites"), "*.SF3Sprite");
-            int loadedCount = 0;
 
-            foreach (var file in spriteDefFiles) {
-                try {
-                    var spriteDef = SpriteDef.FromJSON(File.ReadAllText(file));
-                    if (!s_spriteDefs.ContainsKey(spriteDef.Name)) {
-                        s_spriteDefs.Add(spriteDef.Name, spriteDef);
-                        loadedCount++;
-                    }
-                }
-                catch {
-                    // TODO: how to log this error?
-                }
-            }
+            int loadedCount = 0;
+            foreach (var file in spriteDefFiles)
+                loadedCount += (LoadSpriteDef(file) != null) ? 1 : 0;
 
             return loadedCount;
+        }
+
+        /// <summary>
+        /// Attempts to load a SpriteDef from a file. Returns the new SpriteDef or 'null' on failure.
+        /// of loaded SpriteDef's.
+        /// </summary>
+        /// <param name="file">Filename of the SpriteDef to load.</param>
+        /// <returns>Returns the SpriteDef loaded if the file could be read successfully and a *new* SpriteDef was loaded. Otherwise returns 'null'.</returns>
+        public static SpriteDef LoadSpriteDef(string file) {
+            var fileWithoutExt = Path.GetFileNameWithoutExtension(file);
+            if (s_spriteDefFilesLoaded.Contains(fileWithoutExt))
+                return null;
+
+            try {
+                var spriteDef = SpriteDef.FromJSON(File.ReadAllText(file));
+                s_spriteDefFilesLoaded.Add(fileWithoutExt);
+
+                if (!s_spriteDefs.ContainsKey(spriteDef.Name)) {
+                    s_spriteDefs.Add(spriteDef.Name, spriteDef);
+                    return spriteDef;
+                }
+            }
+            catch {
+                // TODO: how to log this error?
+            }
+
+            return null;
         }
 
         /// <summary>
         /// Returns an array of all loaded sprites in alphabetical order by name.
         /// </summary>
         /// <returns>A SpriteDef[] with every loaded sprite, in alphabetical order by name.</returns>
-        public static SpriteDef[] GetAllSpriteDefs()
+        public static SpriteDef[] GetAllLoadedSpriteDefs()
             => s_spriteDefs.Select(x => x.Value).OrderBy(x => x.Name).ToArray();
 
         /// <summary>
@@ -53,10 +68,11 @@ namespace SF3.Utils {
             if (name == null)
                 return null;
 
-            if (s_spriteDefs == null)
-                LoadAllSpriteDefs();
+            if (s_spriteDefs.TryGetValue(name, out var spriteDef))
+                return spriteDef;
 
-            return s_spriteDefs.TryGetValue(name, out var spriteDef) ? spriteDef : null;
+            var filename = ResourceFile(Path.Combine("Sprites", FilesystemName(name) + ".SF3Sprite"));
+            return LoadSpriteDef(filename);
         }
 
         /// <summary>

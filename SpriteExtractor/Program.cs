@@ -8,7 +8,6 @@ using SF3.ByteData;
 using SF3.Models.Files;
 using SF3.Models.Files.CHP;
 using SF3.Models.Files.CHR;
-using SF3.Models.Structs.CHR;
 using SF3.NamedValues;
 using SF3.Sprites;
 using SF3.Types;
@@ -103,9 +102,6 @@ namespace SpriteExtractor {
         }
 
         public static void Main(string[] args) {
-            Console.WriteLine("Loading SpriteDefs...");
-            SpriteUtils.LoadAllSpriteDefs();
-
             Console.WriteLine("Processing all CHR and CHP files...");
 
             // Get a list of all .MPD files from all scenarios located at 'c_pathsIn[Scenario]'.
