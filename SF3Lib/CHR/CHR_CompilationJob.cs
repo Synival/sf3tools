@@ -20,7 +20,13 @@ namespace SF3.CHR {
             _chrDef = chrDef;
 
             // Build the frame table with image data and other information necessary for writing.
-            AddFrames();
+            if (chrDef.Sprites != null) {
+                foreach (var sprite in chrDef.Sprites) {
+                    StartSprite();
+                    AddFrames(sprite);
+                    FinishSprite();
+                }
+            }
         }
 
         /// <summary>
@@ -154,15 +160,16 @@ namespace SF3.CHR {
             }
         }
 
-        private void AddFrames() {
-            if (_chrDef.Sprites == null)
-                return;
-
-            foreach (var (sprite, spriteIndex) in _chrDef.Sprites.Select((x, i) => (CHR: x, Index: i)))
-                AddFrames(sprite, spriteIndex);
+        private void StartSprite() {
+            _spriteCount = _currentSpriteIndex + 1;
         }
 
-        private void AddFrames(SpriteDef sprite, int spriteIndex) {
+        private void FinishSprite() {
+            if (_currentSpriteIndex < _spriteCount)
+                _currentSpriteIndex = _spriteCount;
+        }
+
+        private void AddFrames(SpriteDef sprite) {
             foreach (var spriteFrames in sprite.FrameGroupsForSpritesheets ?? new FrameGroupsForSpritesheet[0]) {
                 if (spriteFrames.FrameGroups == null)
                     continue;
@@ -172,18 +179,18 @@ namespace SF3.CHR {
                 var frameHeight = spriteFrames.Height     ?? sprite.Height;
 
                 foreach (var frameGroup in spriteFrames.FrameGroups)
-                    AddFrames(frameGroup, spriteIndex, spriteName, frameWidth, frameHeight, sprite.Directions);
+                    AddFrames(frameGroup, spriteName, frameWidth, frameHeight, sprite.Directions);
             }
         }
 
-        private void AddFrames(FrameGroup frameGroup, int spriteIndex, string spriteName, int frameWidth, int frameHeight, SpriteDirectionCountType spriteDirections) {
-            var spriteDef   = SpriteUtils.GetSpriteDef(spriteName);
+        private void AddFrames(FrameGroup frameGroup, string spriteName, int frameWidth, int frameHeight, SpriteDirectionCountType spriteDirections) {
+            var spriteDef = SpriteUtils.GetSpriteDef(spriteName);
 
             // Attempt to load the spritesheet referenced by the spritesheetDef.
             // Don't bothe if the def couldn't be found.
-            var spritesheetKey = Spritesheet.DimensionsToKey(frameWidth, frameHeight);
+            var spritesheetKey      = Spritesheet.DimensionsToKey(frameWidth, frameHeight);
             var spritesheetImageKey = $"{spriteName} ({spritesheetKey})";
-            var spritesheetDef = (spriteDef?.Spritesheets?.TryGetValue(spritesheetKey, out var spritesheetOut) == true) ? spritesheetOut : null;
+            var spritesheetDef      = (spriteDef?.Spritesheets?.TryGetValue(spritesheetKey, out var spritesheetOut) == true) ? spritesheetOut : null;
             var spriteFrameGroupDef = (spritesheetDef?.FrameGroupsByName?.TryGetValue(frameGroup.Name, out var spriteFrameGroupOut) == true) ? spriteFrameGroupOut : null;
 
             if (spritesheetDef != null && !_spritesheetImageDict.ContainsKey(spritesheetImageKey)) {
@@ -203,25 +210,25 @@ namespace SF3.CHR {
 
             foreach (var frame in frames) {
                 var spriteFrameDef = (spriteFrameGroupDef?.Frames?.TryGetValue(frame.Direction, out var spriteFrameOut) == true) ? spriteFrameOut : null;
-                var aniFrameKey = $"{spritesheetImageKey} {frameGroup.Name} ({frame.Direction})";
-                var frameKey = $"{spritesheetImageKey} {aniFrameKey}" + (frame.DuplicateKey == null ? "" : $" ({frame.DuplicateKey})");
+                var aniFrameKey    = $"{spritesheetImageKey} {frameGroup.Name} ({frame.Direction})";
+                var frameKey       = $"{spritesheetImageKey} {aniFrameKey}" + (frame.DuplicateKey == null ? "" : $" ({frame.DuplicateKey})");
 
                 // Add a reference to the image whether the spritesheet resources were found or not.
                 // If they're invalid, simply display a red image.
                 if (!_spritesheetFramesByFrameKey.ContainsKey(frameKey)) {
                     _spritesheetFramesByFrameKey.Add(frameKey, new SpritesheetFrame() {
                         SpritesheetBitmap = _spritesheetImageDict.TryGetValue(spritesheetImageKey, out var bmpOut) ? bmpOut : null,
-                        X = spriteFrameDef?.SpritesheetX ?? -1,
-                        Y = spriteFrameDef?.SpritesheetY ?? -1,
+                        X      = spriteFrameDef?.SpritesheetX ?? -1,
+                        Y      = spriteFrameDef?.SpritesheetY ?? -1,
                         Width  = frameWidth,
                         Height = frameHeight,
-                        FirstSeenSpriteIndex = spriteIndex,
+                        FirstSeenSpriteIndex = _currentSpriteIndex,
                     });
                 }
 
-                if (!_framesToWriteBySpriteIndex.ContainsKey(spriteIndex))
-                    _framesToWriteBySpriteIndex.Add(spriteIndex, new List<(string, string)>());
-                _framesToWriteBySpriteIndex[spriteIndex].Add((FrameKey: frameKey, AniFrameKey: aniFrameKey));
+                if (!_framesToWriteBySpriteIndex.ContainsKey(_currentSpriteIndex))
+                    _framesToWriteBySpriteIndex.Add(_currentSpriteIndex, new List<(string, string)>());
+                _framesToWriteBySpriteIndex[_currentSpriteIndex].Add((FrameKey: frameKey, AniFrameKey: aniFrameKey));
             }
         }
 
@@ -283,6 +290,12 @@ namespace SF3.CHR {
 
         // CHR_Def to be written
         private readonly CHR_Def _chrDef;
+
+        // The current sprite being built
+        private int _currentSpriteIndex = 0;
+
+        // The total number of sprites built (or at least started)
+        private int _spriteCount = 0;
 
         // Spritesheet bitmaps loaded
         private readonly Dictionary<string, Bitmap> _spritesheetImageDict = new Dictionary<string, Bitmap>();
