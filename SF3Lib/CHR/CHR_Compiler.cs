@@ -201,70 +201,13 @@ namespace SF3.CHR {
             }
 
             // Build all frame tables and the images to be written.
-            foreach (var (sprite, i) in chrDef.Sprites.Select((x, i) => (CHR: x, Index: i))) {
-                string lastFrameKey = null;
-                framesToWriteBySpriteIndex.Add(i, new List<(string, string)>());
-
-                foreach (var spriteFrames in sprite.FrameGroupsForSpritesheets ?? new FrameGroupsForSpritesheet[0]) {
-                    var spriteName  = spriteFrames.SpriteName ?? sprite.SpriteName;
-                    var frameWidth  = spriteFrames.Width      ?? sprite.Width;
-                    var frameHeight = spriteFrames.Height     ?? sprite.Height;
-                    var spriteDef   = SpriteUtils.GetSpriteDef(spriteName);
-
-                    foreach (var frameGroup in spriteFrames.FrameGroups ?? new FrameGroup[0]) {
-                        // Attempt to load the spritesheet referenced by the spritesheetDef.
-                        // Don't bothe if the def couldn't be found.
-                        var spritesheetKey = Spritesheet.DimensionsToKey(frameWidth, frameHeight);
-                        var spritesheetImageKey = $"{spriteName} ({spritesheetKey})";
-                        var spritesheetDef = (spriteDef?.Spritesheets?.TryGetValue(spritesheetKey, out var spritesheetOut) == true) ? spritesheetOut : null;
-                        var spriteFrameGroupDef = (spritesheetDef?.FrameGroupsByName?.TryGetValue(frameGroup.Name, out var spriteFrameGroupOut) == true) ? spriteFrameGroupOut : null;
-
-                        if (spritesheetDef != null && !spritesheetImageDict.ContainsKey(spritesheetImageKey)) {
-                            Bitmap bitmap = null;
-                            try {
-                                var bitmapPath = SpriteUtils.SpritesheetImagePath($"{SpriteUtils.FilesystemName(spritesheetImageKey)}.png");
-                                bitmap = (Bitmap) Image.FromFile(bitmapPath);
-                            }
-                            catch { }
-                            spritesheetImageDict.Add(spritesheetImageKey, bitmap);
-                        }
-
-                        var frames = frameGroup.Frames
-                            ?? CHR_Utils.GetCHR_FrameGroupDirections(sprite.Directions)
-                                .Select(x => new Frame() { Direction = x })
-                                .ToArray();
-
-                        foreach (var frame in frames) {
-                            var spriteFrameDef = (spriteFrameGroupDef?.Frames?.TryGetValue(frame.Direction, out var spriteFrameOut) == true) ? spriteFrameOut : null;
-                            var aniFrameKey = $"{spritesheetImageKey} {frameGroup.Name} ({frame.Direction})";
-                            var frameKey = $"{spritesheetImageKey} {aniFrameKey}" + (frame.DuplicateKey == null ? "" : $" ({frame.DuplicateKey})");
-
-                            // Add a reference to the image whether the spritesheet resources were found or not.
-                            // If they're invalid, simply display a red image.
-                            if (!imagesRefsByKey.ContainsKey(frameKey)) {
-                                imagesRefsByKey.Add(frameKey, new SpritesheetImageRef() {
-                                    Bitmap = spritesheetImageDict.TryGetValue(spritesheetImageKey, out var bmpOut) ? bmpOut : null,
-                                    X = spriteFrameDef?.SpritesheetX ?? -1,
-                                    Y = spriteFrameDef?.SpritesheetY ?? -1,
-                                    Width  = frameWidth,
-                                    Height = frameHeight
-                                });
-                            }
-
-                            framesToWriteBySpriteIndex[i].Add((frameKey, aniFrameKey));
-                            lastFrameKey = frameKey;
-                        }
-                    }
-                }
-
-                // Remember what the last image was in this sprite.
-                if (lastFrameKey != null)
-                    finalSpriteFrames.Add(lastFrameKey);
+            foreach (var (sprite, spriteIndex) in chrDef.Sprites.Select((x, i) => (CHR: x, Index: i))) {
+                BuildFrameTableAndImages(sprite, spriteIndex, spritesheetImageDict, imagesRefsByKey, framesToWriteBySpriteIndex, finalSpriteFrames);
 
                 // For what are likely older CHRs, images for each sprite are written before their own frame table.
                 if (chrDef.WriteFrameImagesBeforeTables == true) {
                     WriteFrameImages();
-                    WriteFrameTable(i);
+                    WriteFrameTable(spriteIndex);
                 }
             }
 
@@ -277,6 +220,74 @@ namespace SF3.CHR {
                     chrWriter.Write(chrDef.JunkAfterFrameTables);
                 WriteFrameImages();
             }
+        }
+
+        private void BuildFrameTableAndImages(
+            SpriteDef sprite,
+            int spriteIndex,
+            Dictionary<string, Bitmap> spritesheetImageDict,
+            Dictionary<string, SpritesheetImageRef> imagesRefsByKey,
+            Dictionary<int, List<(string FrameKey, string AniFrameKey)>> framesToWriteBySpriteIndex,
+            HashSet<string> finalSpriteFrames
+        ) {
+            string lastFrameKey = null;
+            framesToWriteBySpriteIndex.Add(spriteIndex, new List<(string, string)>());
+
+            foreach (var spriteFrames in sprite.FrameGroupsForSpritesheets ?? new FrameGroupsForSpritesheet[0]) {
+                var spriteName  = spriteFrames.SpriteName ?? sprite.SpriteName;
+                var frameWidth  = spriteFrames.Width      ?? sprite.Width;
+                var frameHeight = spriteFrames.Height     ?? sprite.Height;
+                var spriteDef   = SpriteUtils.GetSpriteDef(spriteName);
+
+                foreach (var frameGroup in spriteFrames.FrameGroups ?? new FrameGroup[0]) {
+                    // Attempt to load the spritesheet referenced by the spritesheetDef.
+                    // Don't bothe if the def couldn't be found.
+                    var spritesheetKey = Spritesheet.DimensionsToKey(frameWidth, frameHeight);
+                    var spritesheetImageKey = $"{spriteName} ({spritesheetKey})";
+                    var spritesheetDef = (spriteDef?.Spritesheets?.TryGetValue(spritesheetKey, out var spritesheetOut) == true) ? spritesheetOut : null;
+                    var spriteFrameGroupDef = (spritesheetDef?.FrameGroupsByName?.TryGetValue(frameGroup.Name, out var spriteFrameGroupOut) == true) ? spriteFrameGroupOut : null;
+
+                    if (spritesheetDef != null && !spritesheetImageDict.ContainsKey(spritesheetImageKey)) {
+                        Bitmap bitmap = null;
+                        try {
+                            var bitmapPath = SpriteUtils.SpritesheetImagePath($"{SpriteUtils.FilesystemName(spritesheetImageKey)}.png");
+                            bitmap = (Bitmap) Image.FromFile(bitmapPath);
+                        }
+                        catch { }
+                        spritesheetImageDict.Add(spritesheetImageKey, bitmap);
+                    }
+
+                    var frames = frameGroup.Frames
+                        ?? CHR_Utils.GetCHR_FrameGroupDirections(sprite.Directions)
+                            .Select(x => new Frame() { Direction = x })
+                            .ToArray();
+
+                    foreach (var frame in frames) {
+                        var spriteFrameDef = (spriteFrameGroupDef?.Frames?.TryGetValue(frame.Direction, out var spriteFrameOut) == true) ? spriteFrameOut : null;
+                        var aniFrameKey = $"{spritesheetImageKey} {frameGroup.Name} ({frame.Direction})";
+                        var frameKey = $"{spritesheetImageKey} {aniFrameKey}" + (frame.DuplicateKey == null ? "" : $" ({frame.DuplicateKey})");
+
+                        // Add a reference to the image whether the spritesheet resources were found or not.
+                        // If they're invalid, simply display a red image.
+                        if (!imagesRefsByKey.ContainsKey(frameKey)) {
+                            imagesRefsByKey.Add(frameKey, new SpritesheetImageRef() {
+                                Bitmap = spritesheetImageDict.TryGetValue(spritesheetImageKey, out var bmpOut) ? bmpOut : null,
+                                X = spriteFrameDef?.SpritesheetX ?? -1,
+                                Y = spriteFrameDef?.SpritesheetY ?? -1,
+                                Width  = frameWidth,
+                                Height = frameHeight
+                            });
+                        }
+
+                        framesToWriteBySpriteIndex[spriteIndex].Add((FrameKey: frameKey, AniFrameKey: aniFrameKey));
+                        lastFrameKey = frameKey;
+                    }
+                }
+            }
+
+            // Track the final frame that needs to be written. There will need to be some padding after it.
+            if (lastFrameKey != null)
+                finalSpriteFrames.Add(lastFrameKey);
         }
     }
 }
