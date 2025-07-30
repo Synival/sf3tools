@@ -11,12 +11,12 @@ using SF3.Types;
 using SF3.Utils;
 
 namespace SF3.CHR {
-    public class CHR_CompilationUnit {
+    public class CHR_CompilationJob {
         /// <summary>
         /// Creates a compilation unit/context for a single CHR_Def.
         /// </summary>
         /// <param name="chrDef">The CHR_Def to be compiled.</param>
-        public CHR_CompilationUnit(CHR_Def chrDef) {
+        public CHR_CompilationJob(CHR_Def chrDef) {
             _chrDef = chrDef;
 
             // Build the frame table with image data and other information necessary for writing.
