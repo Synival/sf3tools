@@ -22,7 +22,7 @@ namespace SF3.CHR {
             // Build the frame table with image data and other information necessary for writing.
             if (chrDef.Sprites != null) {
                 foreach (var sprite in chrDef.Sprites) {
-                    StartSprite();
+                    StartSprite(sprite);
                     AddFrames(sprite);
                     FinishSprite();
                 }
@@ -57,7 +57,8 @@ namespace SF3.CHR {
 
         private void WriteHeader(CHR_Writer chrWriter) {
             // Write the header table with all sprite definitions and offsets for their own tables.
-            foreach (var sprite in _chrDef.Sprites) {
+            for (var i = 0; i < _spriteCount; i++) {
+                var sprite = _spriteHeaderEntriesBySpriteIndex[i];
                 chrWriter.WriteHeaderEntry(
                     (ushort) sprite.SpriteID,
                     (ushort) sprite.Width,
@@ -160,8 +161,27 @@ namespace SF3.CHR {
             }
         }
 
-        private void StartSprite() {
+        private void StartSprite(SpriteDef spriteDef) {
+            StartSprite(new SpriteHeaderEntry() {
+                SpriteID       = spriteDef.SpriteID,
+                Width          = spriteDef.Width,
+                Height         = spriteDef.Height,
+                Directions     = spriteDef.Directions,
+                VerticalOffset = spriteDef.VerticalOffset,
+                Unknown0x08    = spriteDef.Unknown0x08,
+                CollisionSize  = spriteDef.CollisionSize,
+                PromotionLevel = spriteDef.PromotionLevel,
+                Scale          = spriteDef.Scale,
+            });
+        }
+
+        private void StartSprite(SpriteHeaderEntry header) {
+            if (_currentSpriteIndex < _spriteCount)
+                FinishSprite();
+
+            _spriteHeaderEntriesBySpriteIndex.Add(_currentSpriteIndex, header);
             _spriteCount = _currentSpriteIndex + 1;
+            
         }
 
         private void FinishSprite() {
@@ -296,6 +316,22 @@ namespace SF3.CHR {
 
         // The total number of sprites built (or at least started)
         private int _spriteCount = 0;
+
+        // Basic container for information that will need to be written via CHR_Writer.WriteHeaderEntry()
+        private class SpriteHeaderEntry {
+            public int SpriteID;
+            public int Width;
+            public int Height;
+            public SpriteDirectionCountType Directions;
+            public int VerticalOffset;
+            public int Unknown0x08;
+            public int CollisionSize;
+            public int PromotionLevel;
+            public float Scale;
+        };
+
+        // Collection of sprite headers to be written via CHR_Writer.WriteHeaderEntry()
+        private readonly Dictionary<int, SpriteHeaderEntry> _spriteHeaderEntriesBySpriteIndex = new Dictionary<int, SpriteHeaderEntry>();
 
         // Spritesheet bitmaps loaded
         private readonly Dictionary<string, Bitmap> _spritesheetImageDict = new Dictionary<string, Bitmap>();
