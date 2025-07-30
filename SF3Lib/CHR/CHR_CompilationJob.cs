@@ -20,7 +20,7 @@ namespace SF3.CHR {
             _chrDef = chrDef;
 
             // Build the frame table with image data and other information necessary for writing.
-            BuildFrameTableAndImages();
+            AddFrames();
         }
 
         /// <summary>
@@ -154,22 +154,25 @@ namespace SF3.CHR {
             }
         }
 
-        private void BuildFrameTableAndImages() {
+        private void AddFrames() {
+            if (_chrDef.Sprites == null)
+                return;
+
             foreach (var (sprite, spriteIndex) in _chrDef.Sprites.Select((x, i) => (CHR: x, Index: i)))
-                BuildFrameTableAndImages(sprite, spriteIndex);
+                AddFrames(sprite, spriteIndex);
         }
 
-        private void BuildFrameTableAndImages(SpriteDef sprite, int spriteIndex) {
-            string lastFrameKey = null;
-            _framesToWriteBySpriteIndex.Add(spriteIndex, new List<(string, string)>());
-
+        private void AddFrames(SpriteDef sprite, int spriteIndex) {
             foreach (var spriteFrames in sprite.FrameGroupsForSpritesheets ?? new FrameGroupsForSpritesheet[0]) {
+                if (spriteFrames.FrameGroups == null)
+                    continue;
+
                 var spriteName  = spriteFrames.SpriteName ?? sprite.SpriteName;
                 var frameWidth  = spriteFrames.Width      ?? sprite.Width;
                 var frameHeight = spriteFrames.Height     ?? sprite.Height;
                 var spriteDef   = SpriteUtils.GetSpriteDef(spriteName);
 
-                foreach (var frameGroup in spriteFrames.FrameGroups ?? new FrameGroup[0]) {
+                foreach (var frameGroup in spriteFrames.FrameGroups) {
                     // Attempt to load the spritesheet referenced by the spritesheetDef.
                     // Don't bothe if the def couldn't be found.
                     var spritesheetKey = Spritesheet.DimensionsToKey(frameWidth, frameHeight);
@@ -210,8 +213,9 @@ namespace SF3.CHR {
                             });
                         }
 
+                        if (!_framesToWriteBySpriteIndex.ContainsKey(spriteIndex))
+                            _framesToWriteBySpriteIndex.Add(spriteIndex, new List<(string, string)>());
                         _framesToWriteBySpriteIndex[spriteIndex].Add((FrameKey: frameKey, AniFrameKey: aniFrameKey));
-                        lastFrameKey = frameKey;
                     }
                 }
             }
