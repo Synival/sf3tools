@@ -31,12 +31,15 @@ namespace SF3.CHR {
                 chrWriter = new CHR_Writer(outputStream);
 
             // Create a context with all the data that needs to be tracked during the compilation process.
-            var context = new CHR_CompilerContext();
+            var context = new CHR_CompilerContext(chrDef, chrWriter);
+
+            // Build the frame table with image data and other information necessary for writing.
+            BuildFrameTableAndImages(context);
 
             // Write data.
-            WriteHeader(chrDef, chrWriter);
-            WriteAnimations(chrDef, chrWriter);
-            WriteFrames(chrDef, context, chrWriter);
+            WriteHeader(context);
+            WriteAnimations(context);
+            WriteFrames(context);
             chrWriter.Finish();
             var bytesWritten = chrWriter.BytesWritten;
 
@@ -49,7 +52,10 @@ namespace SF3.CHR {
             return bytesWritten;
         }
 
-        private void WriteHeader(CHR_Def chrDef, CHR_Writer chrWriter) {
+        private void WriteHeader(CHR_CompilerContext context) {
+            var chrDef    = context.CHR_Def;
+            var chrWriter = context.CHR_Writer;
+
             // Write the header table with all sprite definitions and offsets for their own tables.
             foreach (var sprite in chrDef.Sprites) {
                 chrWriter.WriteHeaderEntry(
@@ -67,9 +73,12 @@ namespace SF3.CHR {
             chrWriter.WriteHeaderTerminator();
         }
 
-        private void WriteAnimations(CHR_Def chrDef, CHR_Writer chrWriter) {
+        private void WriteAnimations(CHR_CompilerContext context) {
+            var chrDef    = context.CHR_Def;
+            var chrWriter = context.CHR_Writer;
+
             // Write all individual animations.
-            foreach (var (sprite, i) in chrDef.Sprites.Select((x, i) => (CHR: x, Index: i))) {
+            foreach (var (sprite, spriteIndex) in chrDef.Sprites.Select((x, i) => (CHR: x, Index: i))) {
                 int animationIndex = 0;
 
                 foreach (var animations in sprite.AnimationsForSpritesheetAndDirections ?? new AnimationsForSpritesheetAndDirection[0]) {
@@ -119,7 +128,7 @@ namespace SF3.CHR {
                                 }
 
                                 // We have enough info; write the frame.
-                                chrWriter.WriteAnimationCommand(i, aniCommand.Command, aniCommand.Parameter, frameKeys);
+                                chrWriter.WriteAnimationCommand(spriteIndex, aniCommand.Command, aniCommand.Parameter, frameKeys);
                             }
                         }
 
@@ -130,31 +139,36 @@ namespace SF3.CHR {
                 // Now that all frame tables have been written, write the animation table.
                 // The CHR_Writer knows the locations of all the frame tables we just wrote,
                 // so we don't need to pass it any information.
-                chrWriter.WriteAnimationTable(i);
+                chrWriter.WriteAnimationTable(spriteIndex);
             }
         }
 
-        private void WriteFrames(CHR_Def chrDef, CHR_CompilerContext context, CHR_Writer chrWriter) {
-            // Build all frame tables and the images to be written.
-            foreach (var (sprite, spriteIndex) in chrDef.Sprites.Select((x, i) => (CHR: x, Index: i))) {
-                BuildFrameTableAndImages(sprite, spriteIndex, context);
+        private void WriteFrames(CHR_CompilerContext context) {
+            var chrDef    = context.CHR_Def;
+            var chrWriter = context.CHR_Writer;
 
-                // For what are likely older CHRs, images for each sprite are written before their own frame table.
-                if (chrDef.WriteFrameImagesBeforeTables == true) {
-                    WriteFrameImages(context, chrWriter);
-                    WriteFrameTable(spriteIndex, context, chrWriter);
+            // For what are likely older CHRs, images for each sprite are written before their own frame table.
+            if (chrDef.WriteFrameImagesBeforeTables == true) {
+                for (int i = 0; i < chrDef.Sprites.Length; i++) {
+                    WriteFrameImages(context);
+                    WriteFrameTable(i, context);
                 }
             }
-
             // 99% of the time, the images are written after the frame tables.
-            if (chrDef.WriteFrameImagesBeforeTables != true) {
-                WriteFrameTables(chrDef, context, chrWriter);
+            else {
+                WriteFrameTables(context);
 
                 // XBTL127.CHR has junk data after the frame table. Write it here.
                 if (chrDef.JunkAfterFrameTables != null)
                     chrWriter.Write(chrDef.JunkAfterFrameTables);
-                WriteFrameImages(context, chrWriter);
+                WriteFrameImages(context);
             }
+        }
+
+        private void BuildFrameTableAndImages(CHR_CompilerContext context) {
+            var chrDef = context.CHR_Def;
+            foreach (var (sprite, spriteIndex) in chrDef.Sprites.Select((x, i) => (CHR: x, Index: i)))
+                BuildFrameTableAndImages(sprite, spriteIndex, context);
         }
 
         private void BuildFrameTableAndImages(SpriteDef sprite, int spriteIndex, CHR_CompilerContext context) {
@@ -218,18 +232,21 @@ namespace SF3.CHR {
                 context.FinalSpriteFrames.Add(lastFrameKey);
         }
 
-        private void WriteFrameTable(int spriteIndex, CHR_CompilerContext context, CHR_Writer chrWriter) {
+        private void WriteFrameTable(int spriteIndex, CHR_CompilerContext context) {
+            var chrWriter = context.CHR_Writer;
             foreach (var frame in context.FramesToWriteBySpriteIndex[spriteIndex])
                 chrWriter.WriteFrameTableFrame(spriteIndex, frame.FrameKey, frame.AniFrameKey);
             chrWriter.WriteFrameTableTerminator(spriteIndex);
         }
 
-        private void WriteFrameTables(CHR_Def chrDef, CHR_CompilerContext context, CHR_Writer chrWriter) {
-            for (int i = 0; i < chrDef.Sprites.Length; i++)
-                WriteFrameTable(i, context, chrWriter);
+        private void WriteFrameTables(CHR_CompilerContext context) {
+            for (int i = 0; i < context.CHR_Def.Sprites.Length; i++)
+                WriteFrameTable(i, context);
         }
 
-        private void WriteFrameImages(CHR_CompilerContext context, CHR_Writer chrWriter) {
+        private void WriteFrameImages(CHR_CompilerContext context) {
+            var chrWriter = context.CHR_Writer;
+
             // Write all images, updating pointers that reference each image by its key.
             foreach (var imageRefKv in context.ImagesRefsByKey.Where(x => !context.FrameImagesWritten.Contains(x.Key)).ToArray()) {
                 var imageKey = imageRefKv.Key;
