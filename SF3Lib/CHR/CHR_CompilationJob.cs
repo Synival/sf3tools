@@ -143,7 +143,7 @@ namespace SF3.CHR {
         private void WriteFrames(CHR_Writer chrWriter) {
             // For what are likely older CHRs, images for each sprite are written before their own frame table.
             if (_chrDef.WriteFrameImagesBeforeTables == true) {
-                for (int i = 0; i < _chrDef.Sprites.Length; i++) {
+                for (int i = 0; i < _spriteCount; i++) {
                     WriteFrameImages(i, chrWriter);
                     WriteFrameTable(i, chrWriter);
                 }
@@ -239,12 +239,12 @@ namespace SF3.CHR {
         }
 
         private void WriteFrameTables(CHR_Writer chrWriter) {
-            for (int i = 0; i < _chrDef.Sprites.Length; i++)
+            for (int i = 0; i < _spriteCount; i++)
                 WriteFrameTable(i, chrWriter);
         }
 
         private void WriteFrameImages(CHR_Writer chrWriter) {
-            for (int i = 0; i < _chrDef.Sprites.Length; i++)
+            for (int i = 0; i < _spriteCount; i++)
                 WriteFrameImages(i, chrWriter);
         }
 
