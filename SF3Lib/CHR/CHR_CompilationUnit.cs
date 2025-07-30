@@ -138,7 +138,7 @@ namespace SF3.CHR {
             // For what are likely older CHRs, images for each sprite are written before their own frame table.
             if (_chrDef.WriteFrameImagesBeforeTables == true) {
                 for (int i = 0; i < _chrDef.Sprites.Length; i++) {
-                    WriteFrameImages(chrWriter);
+                    WriteFrameImages(i, chrWriter);
                     WriteFrameTable(i, chrWriter);
                 }
             }
@@ -149,6 +149,7 @@ namespace SF3.CHR {
                 // XBTL127.CHR has junk data after the frame table. Write it here.
                 if (_chrDef.JunkAfterFrameTables != null)
                     chrWriter.Write(_chrDef.JunkAfterFrameTables);
+
                 WriteFrameImages(chrWriter);
             }
         }
@@ -198,13 +199,14 @@ namespace SF3.CHR {
 
                         // Add a reference to the image whether the spritesheet resources were found or not.
                         // If they're invalid, simply display a red image.
-                        if (!_spritesheetImageDefsByFrameKey.ContainsKey(frameKey)) {
-                            _spritesheetImageDefsByFrameKey.Add(frameKey, new CHR_CompilationUnit.SpritesheetImageDef() {
+                        if (!_spritesheetFramesByFrameKey.ContainsKey(frameKey)) {
+                            _spritesheetFramesByFrameKey.Add(frameKey, new SpritesheetFrame() {
                                 SpritesheetBitmap = _spritesheetImageDict.TryGetValue(spritesheetImageKey, out var bmpOut) ? bmpOut : null,
                                 X = spriteFrameDef?.SpritesheetX ?? -1,
                                 Y = spriteFrameDef?.SpritesheetY ?? -1,
                                 Width  = frameWidth,
-                                Height = frameHeight
+                                Height = frameHeight,
+                                FirstSeenSpriteIndex = spriteIndex,
                             });
                         }
 
@@ -213,10 +215,6 @@ namespace SF3.CHR {
                     }
                 }
             }
-
-            // Track the final frame that needs to be written. There will need to be some padding after it.
-            if (lastFrameKey != null)
-                _finalSpriteFrames.Add(lastFrameKey);
         }
 
         private void WriteFrameTable(int spriteIndex, CHR_Writer chrWriter) {
@@ -231,39 +229,48 @@ namespace SF3.CHR {
         }
 
         private void WriteFrameImages(CHR_Writer chrWriter) {
+            for (int i = 0; i < _chrDef.Sprites.Length; i++)
+                WriteFrameImages(i, chrWriter);
+        }
+
+        private void WriteFrameImages(int spriteIndex, CHR_Writer chrWriter) {
+            var spritesheetFrames = _spritesheetFramesByFrameKey
+                .Where(x => !_frameImagesWritten.Contains(x.Key))
+                .Where(x => x.Value.FirstSeenSpriteIndex == spriteIndex)
+                .ToArray();
+
             // Write all images, updating pointers that reference each image by its key.
-            foreach (var imageRefKv in _spritesheetImageDefsByFrameKey.Where(x => !_frameImagesWritten.Contains(x.Key)).ToArray()) {
-                var imageKey = imageRefKv.Key;
-                var imageRef = imageRefKv.Value;
+            foreach (var spritesheetFrameKv in spritesheetFrames) {
+                var frameKey = spritesheetFrameKv.Key;
+                var spritesheetFrame = spritesheetFrameKv.Value;
 
                 ushort[] data = null;
 
-                var bitmap = imageRef.SpritesheetBitmap;
-                var x1 = imageRef.X;
-                var y1 = imageRef.Y;
-                var x2 = x1 + imageRef.Width;
-                var y2 = y1 + imageRef.Height;
+                var bitmap = spritesheetFrame.SpritesheetBitmap;
+                var x1 = spritesheetFrame.X;
+                var y1 = spritesheetFrame.Y;
+                var x2 = x1 + spritesheetFrame.Width;
+                var y2 = y1 + spritesheetFrame.Height;
 
                 // If the image is invalid, display a bright red square instead.
                 if (bitmap == null || x1 < 0 || y1 < 0 || x2 > bitmap.Width || y2 > bitmap.Height) {
-                    data = new ushort[imageRef.Width * imageRef.Height];
+                    data = new ushort[spritesheetFrame.Width * spritesheetFrame.Height];
                     for (int i = 0; i < data.Length; i++)
                         data[i] = 0x801F;
                 }
                 // It looks like a valid image. Copy it into the data.
                 else
-                    data = bitmap.GetDataAt(x1, y1, imageRef.Width, imageRef.Height).To1DArrayTransposed();
+                    data = bitmap.GetDataAt(x1, y1, spritesheetFrame.Width, spritesheetFrame.Height).To1DArrayTransposed();
 
                 // Write the compressed image, updating any pointers that reference it by its key.
-                chrWriter.WriteFrameImage(imageKey, Compression.CompressSpriteData(data, 0, data.Length));
-
-                // There's some padding after every sprite's group of frames to enforce an alignment of 4.
-                if (_finalSpriteFrames.Contains(imageKey))
-                    chrWriter.WriteToAlignTo(4);
+                chrWriter.WriteFrameImage(frameKey, Compression.CompressSpriteData(data, 0, data.Length));
 
                 // Don't write this frame to the CHR file again.
-                _frameImagesWritten.Add(imageKey);
+                _frameImagesWritten.Add(frameKey);
             }
+
+            // There's some padding after every sprite's frame images to enforce an alignment of 4.
+            chrWriter.WriteToAlignTo(4);
         }
 
         // CHR_Def to be written
@@ -273,24 +280,20 @@ namespace SF3.CHR {
         private readonly Dictionary<string, Bitmap> _spritesheetImageDict = new Dictionary<string, Bitmap>();
 
         // Used to identify images for individual frames in a spritesheet
-        private class SpritesheetImageDef {
+        private class SpritesheetFrame {
             public Bitmap SpritesheetBitmap;
             public int X;
             public int Y;
             public int Width;
             public int Height;
+            public int FirstSeenSpriteIndex;
         }
 
         // Set of spritesheet frame images to retrieve by their frame key
-        private readonly Dictionary<string, SpritesheetImageDef> _spritesheetImageDefsByFrameKey = new Dictionary<string, SpritesheetImageDef>();
+        private readonly Dictionary<string, SpritesheetFrame> _spritesheetFramesByFrameKey = new Dictionary<string, SpritesheetFrame>();
 
         // List of frames to write for each sprite, with their frame key (identifying the actual image) and their optional animation frame key (for specifying what is not a duplicate)
         private readonly Dictionary<int, List<(string FrameKey, string AniFrameKey)>> _framesToWriteBySpriteIndex = new Dictionary<int, List<(string FrameKey, string AniFrameKey)>>();
-
-        // CHR files must have had their compressed frames written by sprite, because there's a forced alignment of 4
-        // after every sprite's groups of frames. We don't bother to do that -- different sprites can share compressed
-        // images -- but most cases are fixed if we record which image is the final image for each sprite.
-        private readonly HashSet<string> _finalSpriteFrames = new HashSet<string>();
 
         // Keep track of frame images already written if we're written frame images sprite-by-sprite.
         private readonly HashSet<string> _frameImagesWritten = new HashSet<string>();
