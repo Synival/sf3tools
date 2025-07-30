@@ -135,73 +135,25 @@ namespace SF3.CHR {
         }
 
         private void WriteFrames(CHR_Def chrDef, CHR_CompilerContext context, CHR_Writer chrWriter) {
-            // Write frame tables.
-            void WriteFrameTable(int spriteIndex) {
-                foreach (var frame in context.FramesToWriteBySpriteIndex[spriteIndex])
-                    chrWriter.WriteFrameTableFrame(spriteIndex, frame.FrameKey, frame.AniFrameKey);
-                chrWriter.WriteFrameTableTerminator(spriteIndex);
-            }
-
-            void WriteFrameTables() {
-                for (int i = 0; i < chrDef.Sprites.Length; i++)
-                    WriteFrameTable(i);
-            }
-
-            void WriteFrameImages() {
-                // Write all images, updating pointers that reference each image by its key.
-                foreach (var imageRefKv in context.ImagesRefsByKey.Where(x => !context.FrameImagesWritten.Contains(x.Key)).ToArray()) {
-                    var imageKey = imageRefKv.Key;
-                    var imageRef = imageRefKv.Value;
-
-                    ushort[] data = null;
-
-                    var bitmap = imageRef.Bitmap;
-                    var x1 = imageRef.X;
-                    var y1 = imageRef.Y;
-                    var x2 = x1 + imageRef.Width;
-                    var y2 = y1 + imageRef.Height;
-
-                    // If the image is invalid, display a bright red square instead.
-                    if (bitmap == null || x1 < 0 || y1 < 0 || x2 > bitmap.Width || y2 > bitmap.Height) {
-                        data = new ushort[imageRef.Width * imageRef.Height];
-                        for (int i = 0; i < data.Length; i++)
-                            data[i] = 0x801F;
-                    }
-                    // It looks like a valid image. Copy it into the data.
-                    else
-                        data = bitmap.GetDataAt(x1, y1, imageRef.Width, imageRef.Height).To1DArrayTransposed();
-
-                    // Write the compressed image, updating any pointers that reference it by its key.
-                    chrWriter.WriteFrameImage(imageKey, Compression.CompressSpriteData(data, 0, data.Length));
-
-                    // There's some padding after every sprite's group of frames to enforce an alignment of 4.
-                    if (context.FinalSpriteFrames.Contains(imageKey))
-                        chrWriter.WriteToAlignTo(4);
-
-                    // Don't write this frame to the CHR file again.
-                    context.FrameImagesWritten.Add(imageKey);
-                }
-            }
-
             // Build all frame tables and the images to be written.
             foreach (var (sprite, spriteIndex) in chrDef.Sprites.Select((x, i) => (CHR: x, Index: i))) {
                 BuildFrameTableAndImages(sprite, spriteIndex, context);
 
                 // For what are likely older CHRs, images for each sprite are written before their own frame table.
                 if (chrDef.WriteFrameImagesBeforeTables == true) {
-                    WriteFrameImages();
-                    WriteFrameTable(spriteIndex);
+                    WriteFrameImages(context, chrWriter);
+                    WriteFrameTable(spriteIndex, context, chrWriter);
                 }
             }
 
             // 99% of the time, the images are written after the frame tables.
             if (chrDef.WriteFrameImagesBeforeTables != true) {
-                WriteFrameTables();
+                WriteFrameTables(chrDef, context, chrWriter);
 
                 // XBTL127.CHR has junk data after the frame table. Write it here.
                 if (chrDef.JunkAfterFrameTables != null)
                     chrWriter.Write(chrDef.JunkAfterFrameTables);
-                WriteFrameImages();
+                WriteFrameImages(context, chrWriter);
             }
         }
 
@@ -265,5 +217,53 @@ namespace SF3.CHR {
             if (lastFrameKey != null)
                 context.FinalSpriteFrames.Add(lastFrameKey);
         }
+
+        private void WriteFrameTable(int spriteIndex, CHR_CompilerContext context, CHR_Writer chrWriter) {
+            foreach (var frame in context.FramesToWriteBySpriteIndex[spriteIndex])
+                chrWriter.WriteFrameTableFrame(spriteIndex, frame.FrameKey, frame.AniFrameKey);
+            chrWriter.WriteFrameTableTerminator(spriteIndex);
+        }
+
+        private void WriteFrameTables(CHR_Def chrDef, CHR_CompilerContext context, CHR_Writer chrWriter) {
+            for (int i = 0; i < chrDef.Sprites.Length; i++)
+                WriteFrameTable(i, context, chrWriter);
+        }
+
+        private void WriteFrameImages(CHR_CompilerContext context, CHR_Writer chrWriter) {
+            // Write all images, updating pointers that reference each image by its key.
+            foreach (var imageRefKv in context.ImagesRefsByKey.Where(x => !context.FrameImagesWritten.Contains(x.Key)).ToArray()) {
+                var imageKey = imageRefKv.Key;
+                var imageRef = imageRefKv.Value;
+
+                ushort[] data = null;
+
+                var bitmap = imageRef.Bitmap;
+                var x1 = imageRef.X;
+                var y1 = imageRef.Y;
+                var x2 = x1 + imageRef.Width;
+                var y2 = y1 + imageRef.Height;
+
+                // If the image is invalid, display a bright red square instead.
+                if (bitmap == null || x1 < 0 || y1 < 0 || x2 > bitmap.Width || y2 > bitmap.Height) {
+                    data = new ushort[imageRef.Width * imageRef.Height];
+                    for (int i = 0; i < data.Length; i++)
+                        data[i] = 0x801F;
+                }
+                // It looks like a valid image. Copy it into the data.
+                else
+                    data = bitmap.GetDataAt(x1, y1, imageRef.Width, imageRef.Height).To1DArrayTransposed();
+
+                // Write the compressed image, updating any pointers that reference it by its key.
+                chrWriter.WriteFrameImage(imageKey, Compression.CompressSpriteData(data, 0, data.Length));
+
+                // There's some padding after every sprite's group of frames to enforce an alignment of 4.
+                if (context.FinalSpriteFrames.Contains(imageKey))
+                    chrWriter.WriteToAlignTo(4);
+
+                // Don't write this frame to the CHR file again.
+                context.FrameImagesWritten.Add(imageKey);
+            }
+        }
+
     }
 }
