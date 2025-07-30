@@ -31,7 +31,7 @@ namespace SF3.CHR {
                 chrWriter = new CHR_Writer(outputStream);
 
             // Create a context with all the data that needs to be tracked during the compilation process.
-            var context = new CHR_CompilerContext(chrDef, chrWriter);
+            var context = new CHR_CompilationUnit(chrDef, chrWriter);
 
             // Build the frame table with image data and other information necessary for writing.
             BuildFrameTableAndImages(context);
@@ -52,7 +52,7 @@ namespace SF3.CHR {
             return bytesWritten;
         }
 
-        private void WriteHeader(CHR_CompilerContext context) {
+        private void WriteHeader(CHR_CompilationUnit context) {
             var chrDef    = context.CHR_Def;
             var chrWriter = context.CHR_Writer;
 
@@ -73,7 +73,7 @@ namespace SF3.CHR {
             chrWriter.WriteHeaderTerminator();
         }
 
-        private void WriteAnimations(CHR_CompilerContext context) {
+        private void WriteAnimations(CHR_CompilationUnit context) {
             var chrDef    = context.CHR_Def;
             var chrWriter = context.CHR_Writer;
 
@@ -143,7 +143,7 @@ namespace SF3.CHR {
             }
         }
 
-        private void WriteFrames(CHR_CompilerContext context) {
+        private void WriteFrames(CHR_CompilationUnit context) {
             var chrDef    = context.CHR_Def;
             var chrWriter = context.CHR_Writer;
 
@@ -165,13 +165,13 @@ namespace SF3.CHR {
             }
         }
 
-        private void BuildFrameTableAndImages(CHR_CompilerContext context) {
+        private void BuildFrameTableAndImages(CHR_CompilationUnit context) {
             var chrDef = context.CHR_Def;
             foreach (var (sprite, spriteIndex) in chrDef.Sprites.Select((x, i) => (CHR: x, Index: i)))
                 BuildFrameTableAndImages(sprite, spriteIndex, context);
         }
 
-        private void BuildFrameTableAndImages(SpriteDef sprite, int spriteIndex, CHR_CompilerContext context) {
+        private void BuildFrameTableAndImages(SpriteDef sprite, int spriteIndex, CHR_CompilationUnit context) {
             string lastFrameKey = null;
             context.FramesToWriteBySpriteIndex.Add(spriteIndex, new List<(string, string)>());
 
@@ -212,7 +212,7 @@ namespace SF3.CHR {
                         // Add a reference to the image whether the spritesheet resources were found or not.
                         // If they're invalid, simply display a red image.
                         if (!context.ImagesRefsByKey.ContainsKey(frameKey)) {
-                            context.ImagesRefsByKey.Add(frameKey, new CHR_CompilerContext.SpritesheetImageRef() {
+                            context.ImagesRefsByKey.Add(frameKey, new CHR_CompilationUnit.SpritesheetImageRef() {
                                 Bitmap = context.SpritesheetImageDict.TryGetValue(spritesheetImageKey, out var bmpOut) ? bmpOut : null,
                                 X = spriteFrameDef?.SpritesheetX ?? -1,
                                 Y = spriteFrameDef?.SpritesheetY ?? -1,
@@ -232,19 +232,19 @@ namespace SF3.CHR {
                 context.FinalSpriteFrames.Add(lastFrameKey);
         }
 
-        private void WriteFrameTable(int spriteIndex, CHR_CompilerContext context) {
+        private void WriteFrameTable(int spriteIndex, CHR_CompilationUnit context) {
             var chrWriter = context.CHR_Writer;
             foreach (var frame in context.FramesToWriteBySpriteIndex[spriteIndex])
                 chrWriter.WriteFrameTableFrame(spriteIndex, frame.FrameKey, frame.AniFrameKey);
             chrWriter.WriteFrameTableTerminator(spriteIndex);
         }
 
-        private void WriteFrameTables(CHR_CompilerContext context) {
+        private void WriteFrameTables(CHR_CompilationUnit context) {
             for (int i = 0; i < context.CHR_Def.Sprites.Length; i++)
                 WriteFrameTable(i, context);
         }
 
-        private void WriteFrameImages(CHR_CompilerContext context) {
+        private void WriteFrameImages(CHR_CompilationUnit context) {
             var chrWriter = context.CHR_Writer;
 
             // Write all images, updating pointers that reference each image by its key.

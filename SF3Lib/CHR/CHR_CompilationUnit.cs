@@ -2,7 +2,7 @@
 using System.Drawing;
 
 namespace SF3.CHR {
-    public class CHR_CompilerContext {
+    public class CHR_CompilationUnit {
         public class SpritesheetImageRef {
             public Bitmap Bitmap;
             public int X;
@@ -11,7 +11,7 @@ namespace SF3.CHR {
             public int Height;
         }
 
-        public CHR_CompilerContext(CHR_Def chrDef, CHR_Writer chrWriter) {
+        public CHR_CompilationUnit(CHR_Def chrDef, CHR_Writer chrWriter) {
             CHR_Def    = chrDef;
             CHR_Writer = chrWriter;
         }
