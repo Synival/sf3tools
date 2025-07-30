@@ -34,7 +34,7 @@ namespace SF3.CHR {
         /// </summary>
         /// <param name="outputStream">The stream to write the CHR_Def to.</param>
         /// <returns>The number of bytes written to 'outputStream'.</returns>
-        public int Write(Stream outputStream) {
+        public int Write(Stream outputStream, bool writeFrameImagesBeforeTables, byte[] junkAfterFrameTables) {
             // If the output stream can't seek, we're need to write to an intermediate in-memory stream.
             var targetOutputStream = outputStream.CanSeek ? outputStream : new MemoryStream();
             var chrWriter = new CHR_Writer(targetOutputStream);
@@ -42,7 +42,7 @@ namespace SF3.CHR {
             // Write data.
             WriteHeader(chrWriter);
             WriteAnimations(chrWriter);
-            WriteFrames(chrWriter);
+            WriteFrames(chrWriter, writeFrameImagesBeforeTables, junkAfterFrameTables);
             chrWriter.Finish();
             var bytesWritten = chrWriter.BytesWritten;
 
@@ -141,9 +141,9 @@ namespace SF3.CHR {
             }
         }
 
-        private void WriteFrames(CHR_Writer chrWriter) {
+        private void WriteFrames(CHR_Writer chrWriter, bool writeFrameImagesBeforeTables, byte[] junkAfterFrameTables) {
             // For what are likely older CHRs, images for each sprite are written before their own frame table.
-            if (_chrDef.WriteFrameImagesBeforeTables == true) {
+            if (writeFrameImagesBeforeTables) {
                 for (int i = 0; i < _spriteCount; i++) {
                     WriteFrameImages(i, chrWriter);
                     WriteFrameTable(i, chrWriter);
@@ -154,8 +154,8 @@ namespace SF3.CHR {
                 WriteFrameTables(chrWriter);
 
                 // XBTL127.CHR has junk data after the frame table. Write it here.
-                if (_chrDef.JunkAfterFrameTables != null)
-                    chrWriter.Write(_chrDef.JunkAfterFrameTables);
+                if (junkAfterFrameTables != null)
+                    chrWriter.Write(junkAfterFrameTables);
 
                 WriteFrameImages(chrWriter);
             }

@@ -10,8 +10,8 @@ namespace SF3.CHR {
         /// <returns>The number of bytes written to 'outputStream'.</returns>
         public int Compile(CHR_Def chrDef, Stream outputStream) {
             // Create a compilation unit with all the data that needs to be tracked during the compilation process.
-            var context = new CHR_CompilationJob(chrDef);
-            var bytesWritten = context.Write(outputStream);
+            var job = new CHR_CompilationJob(chrDef);
+            var bytesWritten = job.Write(outputStream, chrDef.WriteFrameImagesBeforeTables == true, chrDef.JunkAfterFrameTables);
             return bytesWritten;
         }
     }
