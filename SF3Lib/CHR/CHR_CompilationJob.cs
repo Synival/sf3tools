@@ -57,9 +57,10 @@ namespace SF3.CHR {
 
         private void WriteHeader(CHR_Writer chrWriter) {
             // Write the header table with all sprite definitions and offsets for their own tables.
-            for (var i = 0; i < _spriteCount; i++) {
-                var sprite = _spriteHeaderEntriesBySpriteIndex[i];
+            for (var spriteIndex = 0; spriteIndex < _spriteCount; spriteIndex++) {
+                var sprite = _spriteHeaderEntriesBySpriteIndex[spriteIndex];
                 chrWriter.WriteHeaderEntry(
+                    spriteIndex,
                     (ushort) sprite.SpriteID,
                     (ushort) sprite.Width,
                     (ushort) sprite.Height,

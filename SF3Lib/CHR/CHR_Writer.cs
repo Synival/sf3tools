@@ -26,7 +26,7 @@ namespace SF3.CHR {
         /// <param name="promotionLevel">Promotion level this sprite is for, when applicable. If not, set to 0.</param>
         /// <param name="scale">Scale fo the this sprite, with 0x10000 as the baseline (1.0).</param>
         public void WriteHeaderEntry(
-            ushort spriteId, ushort width, ushort height, byte directions,
+            int spriteIndex, ushort spriteId, ushort width, ushort height, byte directions,
             byte verticalOffset, byte unknown0x08, byte collisionSize, byte promotionLevel,
             int scale
         ) {
@@ -48,8 +48,13 @@ namespace SF3.CHR {
             // Track the position of the frame table and animation table offsets in the output stream.
             // We'll set them later when we actually write those tables.
             var currentPos = Stream.Position;
-            _frameTablePointers.Add(currentPos + 0x10);
-            _animationTablePointers.Add(currentPos + 0x14);
+
+            if (!_spriteInfoBySpriteIndex.ContainsKey(spriteIndex))
+                _spriteInfoBySpriteIndex.Add(spriteIndex, new SpriteInfo());
+
+            var spriteInfo = GetSpriteInfo(spriteIndex);
+            spriteInfo.UnassignedFrameTablePointerAddress     = currentPos + 0x10;
+            spriteInfo.UnassignedAnimationTablePointerAddress = currentPos + 0x14;
 
             // Write the entry to the stream.
             Write(outputData.Data.GetDataCopyOrReference());
@@ -104,10 +109,11 @@ namespace SF3.CHR {
         /// </summary>
         /// <param name="spriteIndex">Index of the sprite to which this table belongs.</param>
         public void WriteAnimationTable(int spriteIndex) {
-            AtPointer(_animationTablePointers[spriteIndex], (offset) => {
-                Stream.Write(offset.ToByteArray(), 0, 4);
-                _animationTablePointers[spriteIndex] = 0;
-            });
+            var spriteInfo = GetSpriteInfo(spriteIndex);
+            if (spriteInfo.UnassignedAnimationTablePointerAddress.HasValue) {
+                AtPointer(spriteInfo.UnassignedAnimationTablePointerAddress.Value, (currentPos) => Stream.Write(currentPos.ToByteArray(), 0, 4));
+                spriteInfo.UnassignedAnimationTablePointerAddress = null;
+            }
 
             // Determine the size of the table based on the number of animations.
             // (It's always 16 except for XOP101.CHR, which has more entries for Masqurin (U).)
@@ -203,10 +209,11 @@ namespace SF3.CHR {
         }
 
         private void InitFrameTableOffset(int spriteIndex) {
-            AtPointer(_frameTablePointers[spriteIndex], (offset) => {
-                Stream.Write(offset.ToByteArray(), 0, 4);
-                _frameTablePointers[spriteIndex] = 0;
-            });
+            var spriteInfo = GetSpriteInfo(spriteIndex);
+            if (spriteInfo.UnassignedFrameTablePointerAddress.HasValue) {
+                AtPointer(spriteInfo.UnassignedFrameTablePointerAddress.Value, (curPosition) => Stream.Write(curPosition.ToByteArray(), 0, 4));
+                spriteInfo.UnassignedFrameTablePointerAddress = null;
+            }
         }
 
         private void AssignAnimationCommandFrameIDs(int spriteIndex) {
@@ -253,9 +260,6 @@ namespace SF3.CHR {
         }
 
         private void AtPointer(long ptr, Action<int> action) {
-            if (ptr == 0)
-                return;
-
             var oldPosition = Stream.Position;
             Stream.Position = ptr;
             action((int) (oldPosition - StreamStartPosition));
@@ -275,6 +279,12 @@ namespace SF3.CHR {
                 Stream.Position = oldPosition;
         }
 
+        private SpriteInfo GetSpriteInfo(int spriteIndex) {
+            if (_spriteInfoBySpriteIndex.TryGetValue(spriteIndex, out var info))
+                return info;
+            return _spriteInfoBySpriteIndex[spriteIndex] = new SpriteInfo();
+        }
+
         public long StreamStartPosition { get; }
         public Stream Stream { get; }
         public int BytesWritten { get; private set; } = 0;
@@ -286,8 +296,13 @@ namespace SF3.CHR {
             public string[] FrameKeys;
         }
 
-        private List<long> _frameTablePointers = new List<long>();
-        private List<long> _animationTablePointers = new List<long>();
+        private class SpriteInfo {
+            public long? UnassignedFrameTablePointerAddress;
+            public long? UnassignedAnimationTablePointerAddress;
+        }
+
+        private Dictionary<int, SpriteInfo> _spriteInfoBySpriteIndex = new Dictionary<int, SpriteInfo>();
+
         private Dictionary<int, long> _animationCommandTablePointers = new Dictionary<int, long>();
         private Dictionary<int, List<AnimationFrameRef>> _animationFrameRefsBySpriteIndex = new Dictionary<int, List<AnimationFrameRef>>();
         private Dictionary<string, List<long>> _frameImagePointers = new Dictionary<string, List<long>>();
