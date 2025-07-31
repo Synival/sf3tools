@@ -80,6 +80,9 @@ namespace SF3.CHR {
         private void WriteAnimations(CHR_Writer chrWriter) {
             // Write all individual animations.
             foreach (var (sprite, spriteIndex) in _chrDef.Sprites.Select((x, i) => (CHR: x, Index: i))) {
+                var spriteInfo = GetSpriteInfo(spriteIndex);
+                var spriteFrameKeys = spriteInfo.FramesToWrite.Select(x => x.AniFrameKey).ToArray();
+
                 int animationIndex = 0;
 
                 foreach (var animations in sprite.AnimationsForSpritesheetAndDirections ?? new AnimationsForSpritesheetAndDirection[0]) {
@@ -128,8 +131,19 @@ namespace SF3.CHR {
                                         ;
                                 }
 
+                                // Figure out the command. For frames, figure out the FrameID.
+                                var command = (int) aniCommand.Command;
+                                if (aniCommand.Command == SpriteAnimationCommandType.Frame) {
+                                    var frameId = spriteFrameKeys.GetFirstIndexOf(frameKeys, allowExceedingSize: true);
+                                    if (frameId >= 0)
+                                        command = frameId;
+                                    else
+                                        // TODO: what to do here???
+                                        ;
+                                }
+
                                 // We have enough info; write the frame.
-                                chrWriter.WriteAnimationCommand(spriteIndex, aniCommand.Command, aniCommand.Parameter, frameKeys);
+                                chrWriter.WriteAnimationCommand(command, aniCommand.Parameter);
                             }
                         }
 
@@ -259,7 +273,7 @@ namespace SF3.CHR {
         private void WriteFrameTable(int spriteIndex, CHR_Writer chrWriter) {
             var spriteInfo = GetSpriteInfo(spriteIndex);
             foreach (var frame in spriteInfo.FramesToWrite)
-                chrWriter.WriteFrameTableFrame(spriteIndex, frame.FrameKey, frame.AniFrameKey);
+                chrWriter.WriteFrameTableFrame(spriteIndex, frame.FrameKey);
             chrWriter.WriteFrameTableTerminator(spriteIndex);
         }
 

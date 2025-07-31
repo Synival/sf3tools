@@ -74,7 +74,8 @@ namespace SF3.CHR {
         /// <summary>
         /// Informs the CHR_Writer that an animation frame table is beginning. Must be done before writing frames.
         /// </summary>
-        /// <param name="animationIndex">Index of the current sprite's animation to which this frame belongs.</param>
+        /// <param name="spriteIndex">Index of the sprite to which this animation belongs.</param>
+        /// <param name="animationIndex">Index of the sprite's animation to which this frame belongs.</param>
         public void StartAnimationCommandTable(int spriteIndex, int animationIndex) {
             var spriteInfo = GetSpriteInfo(spriteIndex);
             spriteInfo.AnimationOffsetTableOffsets.Add(animationIndex, Stream.Position);
@@ -84,21 +85,9 @@ namespace SF3.CHR {
         /// <summary>
         /// Writes a single frame for an animation of a sprite.
         /// </summary>
-        /// <param name="spriteIndex">Index of the sprite to which this table belongs.</param>
-        /// <param name="command">Command for this frame.</param>
+        /// <param name="command">Command or FrameID for this frame.</param>
         /// <param name="parameter">Parameter for this command.</param>
-        /// <param name="frameKeys">List of keys for each frame. Used for assigning the FrameID when frames are written.</param>
-        public void WriteAnimationCommand(int spriteIndex, SpriteAnimationCommandType command, int parameter, string[] frameKeys) {
-            // If applicable, track the set of frames expected for this animation frame and its offset.
-            // The FrameID will be updated later, when the FrameTable is built.
-            if (frameKeys != null) {
-                var spriteInfo = GetSpriteInfo(spriteIndex);
-                spriteInfo.AnimationFrameRefs.Add(new AnimationFrameRef() {
-                    Offset = Stream.Position,
-                    FrameKeys = frameKeys
-                });
-            }
-
+        public void WriteAnimationCommand(int command, int parameter) {
             Write(((ushort) command).ToByteArray());
             Write(((ushort) parameter).ToByteArray());
         }
@@ -131,17 +120,15 @@ namespace SF3.CHR {
         /// Writes a single frame to the frame table. The offset for the image specified by
         /// 'frameIdentifier' will be assigned when the image itself is written.
         /// </summary>
+        /// <param name="spriteIndex">Index of the sprite to which this frame table belongs.</param>
         /// <param name="frameKey">A unique keyword for the image this represents. This can be a hash or,
         /// <param name="aniFrameKey">An identifier for matching up animation frames, in format "FrameGroup (Dir)"</param>
         /// if the image is intentionally duplicated, any identifying string unique to this CHR.</param>
-        public void WriteFrameTableFrame(int spriteIndex, string frameKey, string aniFrameKey) {
+        public void WriteFrameTableFrame(int spriteIndex, string frameKey) {
             AssignUnassignedFrameTablePointerToCurrentPosition(spriteIndex);
 
             var frameImageInfo = GetFrameImageInfo(frameKey);
             frameImageInfo.UnassignedPointerOffsets.Add(Stream.Position);
-
-            var spriteInfo = GetSpriteInfo(spriteIndex);
-            spriteInfo.AnimationKeys.Add(aniFrameKey);
 
             // Get the frame image offset if it's already been written. Otherwise, write '0' as a placeholder.
             var frameImageOffset = frameImageInfo.Offset ?? 0;
@@ -153,10 +140,8 @@ namespace SF3.CHR {
         /// </summary>
         /// <param name="spriteIndex">Index of the sprite to which this frame table belongs.</param>
         public void WriteFrameTableTerminator(int spriteIndex) {
+            // In case we're finishing a frame table with no frames, ensure that the sprite's frame table is pointing here to the terminator.
             AssignUnassignedFrameTablePointerToCurrentPosition(spriteIndex);
-
-            // Now that the table is done, we can assign FrameIDs to animation frames.
-            AssignAnimationCommandFrameIDs(spriteIndex);
 
             // Two blank uints; one for a terminator, another for padding.
             Write(new byte[8]);
@@ -206,25 +191,6 @@ namespace SF3.CHR {
             if (spriteInfo.UnassignedFrameTablePointerOffset.HasValue) {
                 AtPointer(spriteInfo.UnassignedFrameTablePointerOffset.Value, (curPosition) => Stream.Write(curPosition.ToByteArray(), 0, 4));
                 spriteInfo.UnassignedFrameTablePointerOffset = null;
-            }
-        }
-
-        private void AssignAnimationCommandFrameIDs(int spriteIndex) {
-            // Don't do anything if this sprite doesn't have any frames.
-            var spriteInfo = GetSpriteInfo(spriteIndex);
-            if (spriteInfo.AnimationFrameRefs.Count == 0 || spriteInfo.AnimationKeys.Count == 0)
-                return;
-
-            var animationFrameRefs = spriteInfo.AnimationFrameRefs;
-            var animationKeys      = spriteInfo.AnimationKeys.ToArray();
-
-            // Assign FrameIDs to all animation frames.
-            foreach (var frameRef in animationFrameRefs) {
-                var frameId = animationKeys.GetFirstIndexOf(frameRef.FrameKeys, allowExceedingSize: true);
-                if (frameId >= 0)
-                    AtPointer(frameRef.Offset, _ => Stream.Write(((ushort) frameId).ToByteArray(), 0, 2));
-                else
-                    ; // TODO: what to do if not found?
             }
         }
 
@@ -284,9 +250,6 @@ namespace SF3.CHR {
             public long? UnassignedFrameTablePointerOffset;
             public long? UnassignedAnimationTablePointerOffset;
             public Dictionary<int, long> AnimationOffsetTableOffsets = new Dictionary<int, long>();
-
-            public List<AnimationFrameRef> AnimationFrameRefs = new List<AnimationFrameRef>();
-            public List<string> AnimationKeys = new List<string>();
 
             public int AnimationOffsetTableSize = 0;
         }
