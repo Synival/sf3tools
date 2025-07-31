@@ -75,8 +75,10 @@ namespace SF3.CHR {
         /// Informs the CHR_Writer that an animation frame table is beginning. Must be done before writing frames.
         /// </summary>
         /// <param name="animationIndex">Index of the current sprite's animation to which this frame belongs.</param>
-        public void StartAnimationForCurrentSprite(int animationIndex) {
-            _animationCommandTablePointers[animationIndex] = Stream.Position;
+        public void StartAnimationCommandTable(int spriteIndex, int animationIndex) {
+            var spriteInfo = GetSpriteInfo(spriteIndex);
+            spriteInfo.AnimationOffsetTableAddresses.Add(animationIndex, Stream.Position);
+            spriteInfo.AnimationOffsetTableSize = Math.Max(spriteInfo.AnimationOffsetTableSize, animationIndex + 1);
         }
 
         /// <summary>
@@ -116,15 +118,13 @@ namespace SF3.CHR {
             // Determine the size of the table based on the number of animations.
             // (It's always 16 except for XOP101.CHR, which has more entries for Masqurin (U).)
             // Account for an additional terminating 0 at the end.
-            var highestAnimationIndex = (_animationCommandTablePointers.Count > 0) ? _animationCommandTablePointers.Max(x => x.Key) : 0;
-            var tableSize = Math.Max(16, highestAnimationIndex + 2);
+            var tableSize = Math.Max(16, spriteInfo.AnimationOffsetTableSize + 1);
 
+            var animationOffsetTable = spriteInfo.AnimationOffsetTableAddresses;
             for (int i = 0; i < tableSize; i++) {
-                var offset = (int) (_animationCommandTablePointers.ContainsKey(i) ? (_animationCommandTablePointers[i] - StreamStartPosition) : 0);
+                var offset = (int) (animationOffsetTable.ContainsKey(i) ? (animationOffsetTable[i] - StreamStartPosition) : 0);
                 Write(offset.ToByteArray());
             }
-
-            _animationCommandTablePointers.Clear();
         }
 
         /// <summary>
@@ -297,13 +297,16 @@ namespace SF3.CHR {
         private class SpriteInfo {
             public long? UnassignedFrameTablePointerAddress;
             public long? UnassignedAnimationTablePointerAddress;
+            public Dictionary<int, long> AnimationOffsetTableAddresses = new Dictionary<int, long>();
+
             public List<AnimationFrameRef> AnimationFrameRefs = new List<AnimationFrameRef>();
             public List<string> AnimationKeys = new List<string>();
+
+            public int AnimationOffsetTableSize = 0;
         }
 
         private Dictionary<int, SpriteInfo> _spriteInfoBySpriteIndex = new Dictionary<int, SpriteInfo>();
 
-        private Dictionary<int, long> _animationCommandTablePointers = new Dictionary<int, long>();
         private Dictionary<string, List<long>> _frameImagePointers = new Dictionary<string, List<long>>();
         private Dictionary<string, int> _frameImageOffsets = new Dictionary<string, int>();
     }

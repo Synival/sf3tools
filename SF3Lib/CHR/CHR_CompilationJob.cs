@@ -94,7 +94,7 @@ namespace SF3.CHR {
                     foreach (var animationName in animations.Animations ?? new string[0]) {
                         var spriteAnimation = (animationName != null && spriteAnimsByDirection?.AnimationsByName?.TryGetValue(animationName, out var animOut) == true) ? animOut : null;
                         if (spriteAnimation != null) {
-                            chrWriter.StartAnimationForCurrentSprite(animationIndex);
+                            chrWriter.StartAnimationCommandTable(spriteIndex, animationIndex);
 
                             var currentDirections = directions;
                             foreach (var aniCommand in spriteAnimation.AnimationCommands ?? new AnimationCommand[0]) {
