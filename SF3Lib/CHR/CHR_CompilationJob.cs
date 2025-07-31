@@ -15,7 +15,6 @@ namespace SF3.CHR {
     /// A compilation unit/context for a single CHR_Def.
     /// </summary>
     public class CHR_CompilationJob {
-
         /// <summary>
         /// Begins a new sprite. Animations and frames and be added with AddFrames() and AddAnimations().
         /// FinishSprite() must be called when frames and animations are complete.
@@ -35,6 +34,17 @@ namespace SF3.CHR {
             });
         }
 
+        private void StartSprite(SpriteHeaderEntry header) {
+            if (_currentSpriteIndex < _spriteCount)
+                FinishSprite();
+
+            var spriteInfo = GetSpriteInfo(_currentSpriteIndex);
+            spriteInfo.Header = header;
+
+            _spriteCount = _currentSpriteIndex + 1;
+            
+        }
+
         /// <summary>
         /// Finishes the last sprite being built.
         /// </summary>
@@ -45,8 +55,9 @@ namespace SF3.CHR {
 
         /// <summary>
         /// Adds an entire sprite entire to the CHR to be compiled.
+        /// A new sprite is automatically started and finished via StartSprite() and FinishSprite().
         /// </summary>
-        /// <param name="spriteDef"></param>
+        /// <param name="spriteDef">The CHR SpriteDef to add, in its entirety.</param>
         public void AddCompleteSprite(SpriteDef spriteDef) {
             StartSprite(spriteDef);
             AddFrames(spriteDef);
@@ -57,7 +68,7 @@ namespace SF3.CHR {
         /// <summary>
         /// Adds frames from a CHR SpriteDef.
         /// </summary>
-        /// <param name="sprite">The CHR SpriteDef that contains the sprites to be added.</param>
+        /// <param name="sprite">The CHR SpriteDef that contains the frames to be added.</param>
         public void AddFrames(SpriteDef sprite) {
             foreach (var spriteFrames in sprite.FrameGroupsForSpritesheets ?? new FrameGroupsForSpritesheet[0]) {
                 if (spriteFrames.FrameGroups == null)
@@ -68,7 +79,7 @@ namespace SF3.CHR {
                 var frameHeight = spriteFrames.Height     ?? sprite.Height;
 
                 foreach (var frameGroup in spriteFrames.FrameGroups)
-                    AddFrames(frameGroup, spriteName, frameWidth, frameHeight, sprite.Directions);
+                    AddFrames(frameGroup, spriteName, frameWidth, frameHeight);
             }
         }
 
@@ -79,8 +90,8 @@ namespace SF3.CHR {
         /// <param name="spriteName">The name of the sprite to which 'frameGroup' belongs.</param>
         /// <param name="frameWidth">The width of the frames in 'frameGroup'.</param>
         /// <param name="frameHeight">The height of the frames in 'frameGroup'.</param>
-        /// <param name="spriteDirections">The number of directions the sprite faces.</param>
-        public void AddFrames(FrameGroup frameGroup, string spriteName, int frameWidth, int frameHeight, SpriteDirectionCountType spriteDirections) {
+        public void AddFrames(FrameGroup frameGroup, string spriteName, int frameWidth, int frameHeight) {
+            var spriteInfo = GetSpriteInfo(_currentSpriteIndex);
             var spriteDef = SpriteUtils.GetSpriteDef(spriteName);
 
             // Attempt to load the spritesheet referenced by the spritesheetDef.
@@ -101,7 +112,7 @@ namespace SF3.CHR {
             }
 
             var frames = frameGroup.Frames
-                ?? CHR_Utils.GetCHR_FrameGroupDirections(spriteDirections)
+                ?? CHR_Utils.GetCHR_FrameGroupDirections(spriteInfo.Header.Directions)
                     .Select(x => new Frame() { Direction = x })
                     .ToArray();
 
@@ -123,77 +134,15 @@ namespace SF3.CHR {
                     });
                 }
 
-                var spriteInfo = GetSpriteInfo(_currentSpriteIndex);
                 spriteInfo.Frames.Add(new FrameInfo() { FrameKey = frameKey, AniFrameKey = aniFrameKey });
             }
         }
 
         /// <summary>
-        /// Writes the CHR_Def to an output stream.
+        /// Adds animations from a CHR SpriteDef.
         /// </summary>
-        /// <param name="outputStream">The stream to write the CHR_Def to.</param>
-        /// <returns>The number of bytes written to 'outputStream'.</returns>
-        public int Write(Stream outputStream, bool writeFrameImagesBeforeTables, byte[] junkAfterFrameTables) {
-            // If the output stream can't seek, we're need to write to an intermediate in-memory stream.
-            var targetOutputStream = outputStream.CanSeek ? outputStream : new MemoryStream();
-            var chrWriter = new CHR_Writer(targetOutputStream);
-
-            // Write data.
-            WriteHeader(chrWriter);
-            WriteAnimations(chrWriter);
-            WriteFrames(chrWriter, writeFrameImagesBeforeTables, junkAfterFrameTables);
-            chrWriter.Finish();
-            var bytesWritten = chrWriter.BytesWritten;
-
-            // If we wrote to an intermediate stream, output the contents to 'outputStream'.
-            if (outputStream != targetOutputStream) {
-                var compiledChr = ((MemoryStream) targetOutputStream).ToArray();
-                outputStream.Write(compiledChr, 0, compiledChr.Length);
-            }
-
-            return bytesWritten;
-        }
-
-        private void WriteHeader(CHR_Writer chrWriter) {
-            // Write the header table with all sprite definitions and offsets for their own tables.
-            for (var spriteIndex = 0; spriteIndex < _spriteCount; spriteIndex++) {
-                var spriteInfo = GetSpriteInfo(spriteIndex);
-                var header = spriteInfo.Header;
-
-                chrWriter.WriteHeaderEntry(
-                    spriteIndex,
-                    (ushort) header.SpriteID,
-                    (ushort) header.Width,
-                    (ushort) header.Height,
-                    (byte) header.Directions,
-                    (byte) header.VerticalOffset,
-                    (byte) header.Unknown0x08,
-                    (byte) header.CollisionSize,
-                    (byte) header.PromotionLevel,
-                    (int) Math.Round(header.Scale * 65536.0f)
-                );
-            }
-            chrWriter.WriteHeaderTerminator();
-        }
-
-        private void WriteAnimations(CHR_Writer chrWriter) {
-            for (int spriteIndex = 0; spriteIndex < _spriteCount; spriteIndex++) {
-                var spriteInfo = GetSpriteInfo(spriteIndex);
-
-                foreach (var animationKv in spriteInfo.AnimationsByIndex) {
-                    var aniIndex = animationKv.Key;
-                    var animation = animationKv.Value;
-
-                    chrWriter.StartAnimationCommandTable(spriteIndex, aniIndex);
-                    foreach (var cmd in animation.Commands)
-                        chrWriter.WriteAnimationCommand(cmd.Command, cmd.Parameter);
-                }
-
-                chrWriter.WriteAnimationTable(spriteIndex);
-            }
-        }
-
-        private void AddAnimations(SpriteDef sprite) {
+        /// <param name="sprite">The CHR SpriteDef that contains the animations to be added.</param>
+        public void AddAnimations(SpriteDef sprite) {
             // Write all individual animations.
             var spriteInfo = GetSpriteInfo(_currentSpriteIndex);
             var spriteFrameKeys = spriteInfo.Frames.Select(x => x.AniFrameKey).ToArray();
@@ -269,6 +218,54 @@ namespace SF3.CHR {
             }
         }
 
+        /// <summary>
+        /// Writes the CHR_Def to an output stream.
+        /// </summary>
+        /// <param name="outputStream">The stream to write the CHR_Def to.</param>
+        /// <returns>The number of bytes written to 'outputStream'.</returns>
+        public int Write(Stream outputStream, bool writeFrameImagesBeforeTables, byte[] junkAfterFrameTables) {
+            // If the output stream can't seek, we're need to write to an intermediate in-memory stream.
+            var targetOutputStream = outputStream.CanSeek ? outputStream : new MemoryStream();
+            var chrWriter = new CHR_Writer(targetOutputStream);
+
+            // Write data.
+            WriteHeader(chrWriter);
+            WriteAnimations(chrWriter);
+            WriteFrames(chrWriter, writeFrameImagesBeforeTables, junkAfterFrameTables);
+            chrWriter.Finish();
+            var bytesWritten = chrWriter.BytesWritten;
+
+            // If we wrote to an intermediate stream, output the contents to 'outputStream'.
+            if (outputStream != targetOutputStream) {
+                var compiledChr = ((MemoryStream) targetOutputStream).ToArray();
+                outputStream.Write(compiledChr, 0, compiledChr.Length);
+            }
+
+            return bytesWritten;
+        }
+
+        private void WriteHeader(CHR_Writer chrWriter) {
+            // Write the header table with all sprite definitions and offsets for their own tables.
+            for (var spriteIndex = 0; spriteIndex < _spriteCount; spriteIndex++) {
+                var spriteInfo = GetSpriteInfo(spriteIndex);
+                var header = spriteInfo.Header;
+
+                chrWriter.WriteHeaderEntry(
+                    spriteIndex,
+                    (ushort) header.SpriteID,
+                    (ushort) header.Width,
+                    (ushort) header.Height,
+                    (byte) header.Directions,
+                    (byte) header.VerticalOffset,
+                    (byte) header.Unknown0x08,
+                    (byte) header.CollisionSize,
+                    (byte) header.PromotionLevel,
+                    (int) Math.Round(header.Scale * 65536.0f)
+                );
+            }
+            chrWriter.WriteHeaderTerminator();
+        }
+
         private void WriteFrames(CHR_Writer chrWriter, bool writeFrameImagesBeforeTables, byte[] junkAfterFrameTables) {
             // For what are likely older CHRs, images for each sprite are written before their own frame table.
             if (writeFrameImagesBeforeTables) {
@@ -287,17 +284,6 @@ namespace SF3.CHR {
 
                 WriteFrameImages(chrWriter);
             }
-        }
-
-        private void StartSprite(SpriteHeaderEntry header) {
-            if (_currentSpriteIndex < _spriteCount)
-                FinishSprite();
-
-            var spriteInfo = GetSpriteInfo(_currentSpriteIndex);
-            spriteInfo.Header = header;
-
-            _spriteCount = _currentSpriteIndex + 1;
-            
         }
 
         private void WriteFrameTable(int spriteIndex, CHR_Writer chrWriter) {
@@ -355,6 +341,23 @@ namespace SF3.CHR {
 
             // There's some padding after every sprite's frame images to enforce an alignment of 4.
             chrWriter.WriteToAlignTo(4);
+        }
+
+        private void WriteAnimations(CHR_Writer chrWriter) {
+            for (int spriteIndex = 0; spriteIndex < _spriteCount; spriteIndex++) {
+                var spriteInfo = GetSpriteInfo(spriteIndex);
+
+                foreach (var animationKv in spriteInfo.AnimationsByIndex) {
+                    var aniIndex = animationKv.Key;
+                    var animation = animationKv.Value;
+
+                    chrWriter.StartAnimationCommandTable(spriteIndex, aniIndex);
+                    foreach (var cmd in animation.Commands)
+                        chrWriter.WriteAnimationCommand(cmd.Command, cmd.Parameter);
+                }
+
+                chrWriter.WriteAnimationTable(spriteIndex);
+            }
         }
 
         private SpriteInfo GetSpriteInfo(int spriteIndex) {
