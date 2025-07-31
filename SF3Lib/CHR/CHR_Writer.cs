@@ -90,10 +90,8 @@ namespace SF3.CHR {
             // If applicable, track the set of frames expected for this animation frame and its offset.
             // The FrameID will be updated later, when the FrameTable is built.
             if (frameKeys != null) {
-                if (!_animationFrameRefsBySpriteIndex.ContainsKey(spriteIndex))
-                    _animationFrameRefsBySpriteIndex.Add(spriteIndex, new List<AnimationFrameRef>());
-
-                _animationFrameRefsBySpriteIndex[spriteIndex].Add(new AnimationFrameRef() {
+                var spriteInfo = GetSpriteInfo(spriteIndex);
+                spriteInfo.AnimationFrameRefs.Add(new AnimationFrameRef() {
                     Offset = Stream.Position,
                     FrameKeys = frameKeys
                 });
@@ -143,9 +141,8 @@ namespace SF3.CHR {
                 _frameImagePointers.Add(imageId, new List<long>());
             _frameImagePointers[imageId].Add(Stream.Position);
 
-            if (!_animationKeysBySpriteIndex.ContainsKey(spriteIndex))
-                _animationKeysBySpriteIndex.Add(spriteIndex, new List<string>());
-            _animationKeysBySpriteIndex[spriteIndex].Add(aniFrameKey);
+            var spriteInfo = GetSpriteInfo(spriteIndex);
+            spriteInfo.AnimationKeys.Add(aniFrameKey);
 
             // Get the image offset, if it's already been written.
             var imageOffset = _frameImageOffsets.TryGetValue(imageId, out var offsetOut) ? offsetOut : 0;
@@ -218,11 +215,12 @@ namespace SF3.CHR {
 
         private void AssignAnimationCommandFrameIDs(int spriteIndex) {
             // Don't do anything if this sprite doesn't have any frames.
-            if (!_animationFrameRefsBySpriteIndex.ContainsKey(spriteIndex) || !_animationKeysBySpriteIndex.ContainsKey(spriteIndex))
+            var spriteInfo = GetSpriteInfo(spriteIndex);
+            if (spriteInfo.AnimationFrameRefs.Count == 0 || spriteInfo.AnimationKeys.Count == 0)
                 return;
 
-            var animationFrameRefs = _animationFrameRefsBySpriteIndex[spriteIndex];
-            var animationKeys = _animationKeysBySpriteIndex[spriteIndex];
+            var animationFrameRefs = spriteInfo.AnimationFrameRefs;
+            var animationKeys      = spriteInfo.AnimationKeys;
 
             // Returns 'true' if the sequence of 'keys' is found at 'index'.
             bool KeysAreAtIndex(int index, string[] keys) {
@@ -299,14 +297,14 @@ namespace SF3.CHR {
         private class SpriteInfo {
             public long? UnassignedFrameTablePointerAddress;
             public long? UnassignedAnimationTablePointerAddress;
+            public List<AnimationFrameRef> AnimationFrameRefs = new List<AnimationFrameRef>();
+            public List<string> AnimationKeys = new List<string>();
         }
 
         private Dictionary<int, SpriteInfo> _spriteInfoBySpriteIndex = new Dictionary<int, SpriteInfo>();
 
         private Dictionary<int, long> _animationCommandTablePointers = new Dictionary<int, long>();
-        private Dictionary<int, List<AnimationFrameRef>> _animationFrameRefsBySpriteIndex = new Dictionary<int, List<AnimationFrameRef>>();
         private Dictionary<string, List<long>> _frameImagePointers = new Dictionary<string, List<long>>();
         private Dictionary<string, int> _frameImageOffsets = new Dictionary<string, int>();
-        private Dictionary<int, List<string>> _animationKeysBySpriteIndex = new Dictionary<int, List<string>>();
     }
 }
