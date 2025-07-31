@@ -162,5 +162,41 @@ namespace CommonLib.Extensions {
 
             return newArray;
         }
+
+        /// <summary>
+        /// Checks an array for a sub-array and returns the index if found, or -1 if not.
+        /// If 'allowExceedingSize' is 'true', then this method will search for 'needle' beyond the end of 'haystack',
+        /// using 'null' for values beyond the end of 'haystack'.
+        /// </summary>
+        /// <typeparam name="T">Type of array to search through.</typeparam>
+        /// <param name="haystack">Array of elements T to search through.</param>
+        /// <param name="needle">Array of elements T whose index we want to find.</param>
+        /// <param name="allowExceedingSize">When 'true', this method will search for 'needle' beyond the end of 'haystack',
+        /// using 'null' for values beyond the end of 'haystack'.</param>
+        /// <returns></returns>
+        public static int GetFirstIndexOf<T>(this T[] haystack, T[] needle, bool allowExceedingSize) where T : class {
+            bool GetFirstIndexOfSub(int haystackIndex, int needleIndex) {
+                if (needleIndex == needle.Length)
+                    return true;
+
+                var needleValue = needle[needleIndex];
+                var haystackValue = (haystackIndex < haystack.Length) ? haystack[haystackIndex] : null;
+
+                var equal = (needleValue == null && haystackValue == null) ||
+                            (needleValue != null && haystackValue != null && haystackValue.Equals(needleValue));
+
+                return equal && GetFirstIndexOfSub(haystackIndex + 1, needleIndex + 1);
+            }
+
+            // Use a recursive algorithm to find it!
+            var endPos = haystack.Length + 1 - (allowExceedingSize ? 0 : needle.Length);
+            for (int i = 0; i < endPos; i++) {
+                if (GetFirstIndexOfSub(i, 0))
+                    return i;
+            }
+
+            // Not found
+            return -1;
+        }
     }
 }

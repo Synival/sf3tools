@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using CommonLib.Arrays;
+using CommonLib.Extensions;
 using CommonLib.Utils;
 using SF3.Types;
 
@@ -216,29 +216,13 @@ namespace SF3.CHR {
                 return;
 
             var animationFrameRefs = spriteInfo.AnimationFrameRefs;
-            var animationKeys      = spriteInfo.AnimationKeys;
-
-            // Returns 'true' if the sequence of 'keys' is found at 'index'.
-            bool KeysAreAtIndex(int index, string[] keys) {
-                return
-                    (keys.Length == 0) ||
-                    (keys[0] == (index < animationKeys.Count ? animationKeys[index] : null)
-                        && KeysAreAtIndex(index + 1, keys.Skip(1).ToArray()));
-            }
-
-            // Gets the first FrameID where 'keys' is found in sequence.
-            ushort? GetFrameIDForKeys(string[] keys) {
-                return Enumerable
-                    .Range(0, animationKeys.Count)
-                    .Select(x => (ushort?) x)
-                    .FirstOrDefault(x => KeysAreAtIndex(x.Value, keys));
-            }
+            var animationKeys      = spriteInfo.AnimationKeys.ToArray();
 
             // Assign FrameIDs to all animation frames.
             foreach (var frameRef in animationFrameRefs) {
-                var frameId = GetFrameIDForKeys(frameRef.FrameKeys);
-                if (frameId.HasValue)
-                    AtPointer(frameRef.Offset, _ => Stream.Write(frameId.Value.ToByteArray(), 0, 2));
+                var frameId = animationKeys.GetFirstIndexOf(frameRef.FrameKeys, allowExceedingSize: true);
+                if (frameId >= 0)
+                    AtPointer(frameRef.Offset, _ => Stream.Write(((ushort) frameId).ToByteArray(), 0, 2));
                 else
                     ; // TODO: what to do if not found?
             }
