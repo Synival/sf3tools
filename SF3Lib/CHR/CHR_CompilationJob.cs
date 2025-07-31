@@ -11,20 +11,46 @@ using SF3.Types;
 using SF3.Utils;
 
 namespace SF3.CHR {
+    /// <summary>
+    /// A compilation unit/context for a single CHR_Def.
+    /// </summary>
     public class CHR_CompilationJob {
         /// <summary>
-        /// Creates a compilation unit/context for a single CHR_Def.
+        /// Adds an entire sprite entire to the CHR to be compiled.
         /// </summary>
-        /// <param name="chrDef">The CHR_Def to be compiled.</param>
-        public CHR_CompilationJob(CHR_Def chrDef) {
-            if (chrDef.Sprites != null) {
-                foreach (var sprite in chrDef.Sprites) {
-                    StartSprite(sprite);
-                    AddFrames(sprite);
-                    AddAnimations(sprite);
-                    FinishSprite();
-                }
-            }
+        /// <param name="spriteDef"></param>
+        public void AddCompleteSprite(SpriteDef spriteDef) {
+            StartSprite(spriteDef);
+            AddFrames(spriteDef);
+            AddAnimations(spriteDef);
+            FinishSprite();
+        }
+
+        /// <summary>
+        /// Begins a new sprite. Animations and frames and be added with AddFrames() and AddAnimations().
+        /// FinishSprite() must be called when frames and animations are complete.
+        /// </summary>
+        /// <param name="spriteDef">The sprite with the header entry information.</param>
+        public void StartSprite(SpriteDef spriteDef) {
+            StartSprite(new SpriteHeaderEntry() {
+                SpriteID       = spriteDef.SpriteID,
+                Width          = spriteDef.Width,
+                Height         = spriteDef.Height,
+                Directions     = spriteDef.Directions,
+                VerticalOffset = spriteDef.VerticalOffset,
+                Unknown0x08    = spriteDef.Unknown0x08,
+                CollisionSize  = spriteDef.CollisionSize,
+                PromotionLevel = spriteDef.PromotionLevel,
+                Scale          = spriteDef.Scale,
+            });
+        }
+
+        /// <summary>
+        /// Finishes the last sprite being built.
+        /// </summary>
+        public void FinishSprite() {
+            if (_currentSpriteIndex < _spriteCount)
+                _currentSpriteIndex = _spriteCount;
         }
 
         /// <summary>
@@ -188,20 +214,6 @@ namespace SF3.CHR {
             }
         }
 
-        private void StartSprite(SpriteDef spriteDef) {
-            StartSprite(new SpriteHeaderEntry() {
-                SpriteID       = spriteDef.SpriteID,
-                Width          = spriteDef.Width,
-                Height         = spriteDef.Height,
-                Directions     = spriteDef.Directions,
-                VerticalOffset = spriteDef.VerticalOffset,
-                Unknown0x08    = spriteDef.Unknown0x08,
-                CollisionSize  = spriteDef.CollisionSize,
-                PromotionLevel = spriteDef.PromotionLevel,
-                Scale          = spriteDef.Scale,
-            });
-        }
-
         private void StartSprite(SpriteHeaderEntry header) {
             if (_currentSpriteIndex < _spriteCount)
                 FinishSprite();
@@ -211,11 +223,6 @@ namespace SF3.CHR {
 
             _spriteCount = _currentSpriteIndex + 1;
             
-        }
-
-        private void FinishSprite() {
-            if (_currentSpriteIndex < _spriteCount)
-                _currentSpriteIndex = _spriteCount;
         }
 
         private void AddFrames(SpriteDef sprite) {
