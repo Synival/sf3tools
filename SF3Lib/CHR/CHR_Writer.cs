@@ -136,7 +136,10 @@ namespace SF3.CHR {
             if (!_frameImagePointers.ContainsKey(imageId))
                 _frameImagePointers.Add(imageId, new List<long>());
             _frameImagePointers[imageId].Add(Stream.Position);
-            _currentSpriteFrameKeys.Add(aniFrameKey);
+
+            if (!_animationKeysBySpriteIndex.ContainsKey(spriteIndex))
+                _animationKeysBySpriteIndex.Add(spriteIndex, new List<string>());
+            _animationKeysBySpriteIndex[spriteIndex].Add(aniFrameKey);
 
             // Get the image offset, if it's already been written.
             var imageOffset = _frameImageOffsets.TryGetValue(imageId, out var offsetOut) ? offsetOut : 0;
@@ -154,7 +157,6 @@ namespace SF3.CHR {
 
             // Now that the table is done, we can assign FrameIDs to animation frames.
             AssignAnimationCommandFrameIDs(spriteIndex);
-            _currentSpriteFrameKeys.Clear();
 
             // Two blank uints; one for a terminator, another for padding.
             Write(new byte[8]);
@@ -209,27 +211,30 @@ namespace SF3.CHR {
 
         private void AssignAnimationCommandFrameIDs(int spriteIndex) {
             // Don't do anything if this sprite doesn't have any frames.
-            if (!_animationFrameRefsBySpriteIndex.ContainsKey(spriteIndex))
+            if (!_animationFrameRefsBySpriteIndex.ContainsKey(spriteIndex) || !_animationKeysBySpriteIndex.ContainsKey(spriteIndex))
                 return;
+
+            var animationFrameRefs = _animationFrameRefsBySpriteIndex[spriteIndex];
+            var animationKeys = _animationKeysBySpriteIndex[spriteIndex];
 
             // Returns 'true' if the sequence of 'keys' is found at 'index'.
             bool KeysAreAtIndex(int index, string[] keys) {
                 return
                     (keys.Length == 0) ||
-                    (keys[0] == (index < _currentSpriteFrameKeys.Count ? _currentSpriteFrameKeys[index] : null)
+                    (keys[0] == (index < animationKeys.Count ? animationKeys[index] : null)
                         && KeysAreAtIndex(index + 1, keys.Skip(1).ToArray()));
             }
 
             // Gets the first FrameID where 'keys' is found in sequence.
             ushort? GetFrameIDForKeys(string[] keys) {
                 return Enumerable
-                    .Range(0, _currentSpriteFrameKeys.Count)
+                    .Range(0, animationKeys.Count)
                     .Select(x => (ushort?) x)
                     .FirstOrDefault(x => KeysAreAtIndex(x.Value, keys));
             }
 
             // Assign FrameIDs to all animation frames.
-            foreach (var frameRef in _animationFrameRefsBySpriteIndex[spriteIndex]) {
+            foreach (var frameRef in animationFrameRefs) {
                 var frameId = GetFrameIDForKeys(frameRef.FrameKeys);
                 if (frameId.HasValue)
                     AtPointer(frameRef.Offset, _ => Stream.Write(frameId.Value.ToByteArray(), 0, 2));
@@ -287,6 +292,6 @@ namespace SF3.CHR {
         private Dictionary<int, List<AnimationFrameRef>> _animationFrameRefsBySpriteIndex = new Dictionary<int, List<AnimationFrameRef>>();
         private Dictionary<string, List<long>> _frameImagePointers = new Dictionary<string, List<long>>();
         private Dictionary<string, int> _frameImageOffsets = new Dictionary<string, int>();
-        private List<string> _currentSpriteFrameKeys = new List<string>();
+        private Dictionary<int, List<string>> _animationKeysBySpriteIndex = new Dictionary<int, List<string>>();
     }
 }
