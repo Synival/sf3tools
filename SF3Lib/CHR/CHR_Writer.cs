@@ -137,16 +137,15 @@ namespace SF3.CHR {
         public void WriteFrameTableFrame(int spriteIndex, string frameKey, string aniFrameKey) {
             AssignUnassignedFrameTablePointerToCurrentPosition(spriteIndex);
 
-            if (!_unassignedFrameImagePointersByFrameKey.ContainsKey(frameKey))
-                _unassignedFrameImagePointersByFrameKey.Add(frameKey, new List<long>());
-            _unassignedFrameImagePointersByFrameKey[frameKey].Add(Stream.Position);
+            var frameImageInfo = GetFrameImageInfo(frameKey);
+            frameImageInfo.UnassignedPointerOffsets.Add(Stream.Position);
 
             var spriteInfo = GetSpriteInfo(spriteIndex);
             spriteInfo.AnimationKeys.Add(aniFrameKey);
 
-            // Get the frame image offset, if it's already been written. Otherwise, write '0' as a placeholder.
-            var frameImageOffset = _frameImageOffsetsByFrameKey.TryGetValue(frameKey, out var offsetOut) ? offsetOut : 0;
-            Write(frameImageOffset.ToByteArray());
+            // Get the frame image offset if it's already been written. Otherwise, write '0' as a placeholder.
+            var frameImageOffset = frameImageInfo.Offset ?? 0;
+            Write(((uint) frameImageOffset).ToByteArray());
         }
 
         /// <summary>
@@ -172,13 +171,14 @@ namespace SF3.CHR {
         /// <param name="compressedImage">Byte representation of the image, already compressed.</param>
         public void WriteFrameImage(string frameKey, byte[] compressedImage) {
             // Update existing pointers to this image.
-            if (_unassignedFrameImagePointersByFrameKey.TryGetValue(frameKey, out var offsets)) {
-                AtPointers(offsets.ToArray(), (offset) => Stream.Write(offset.ToByteArray(), 0, 4));
-                _unassignedFrameImagePointersByFrameKey.Remove(frameKey);
+            var frameImageInfo = GetFrameImageInfo(frameKey);
+            if (frameImageInfo.UnassignedPointerOffsets.Count > 0) {
+                AtPointers(frameImageInfo.UnassignedPointerOffsets.ToArray(), (offset) => Stream.Write(offset.ToByteArray(), 0, 4));
+                frameImageInfo.UnassignedPointerOffsets.Clear();
             }
 
             // Remember the offset of this image.
-            _frameImageOffsetsByFrameKey.Add(frameKey, (int) (Stream.Position - StreamStartPosition));
+            frameImageInfo.Offset = Stream.Position - StreamStartPosition;
 
             Write(compressedImage);
         }
@@ -279,6 +279,12 @@ namespace SF3.CHR {
             return _spriteInfoBySpriteIndex[spriteIndex] = new SpriteInfo();
         }
 
+        private FrameImageInfo GetFrameImageInfo(string frameKey) {
+            if (_frameImageInfoByFrameKey.TryGetValue(frameKey, out var info))
+                return info;
+            return _frameImageInfoByFrameKey[frameKey] = new FrameImageInfo();
+        }
+
         public long StreamStartPosition { get; }
         public Stream Stream { get; }
         public int BytesWritten { get; private set; } = 0;
@@ -303,7 +309,11 @@ namespace SF3.CHR {
 
         private Dictionary<int, SpriteInfo> _spriteInfoBySpriteIndex = new Dictionary<int, SpriteInfo>();
 
-        private Dictionary<string, List<long>> _unassignedFrameImagePointersByFrameKey = new Dictionary<string, List<long>>();
-        private Dictionary<string, int> _frameImageOffsetsByFrameKey = new Dictionary<string, int>();
+        private class FrameImageInfo {
+            public long? Offset;
+            public List<long> UnassignedPointerOffsets = new List<long>();
+        }
+
+        private Dictionary<string, FrameImageInfo> _frameImageInfoByFrameKey = new Dictionary<string, FrameImageInfo>();
     }
 }
