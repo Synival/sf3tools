@@ -53,8 +53,8 @@ namespace SF3.CHR {
                 _spriteInfoBySpriteIndex.Add(spriteIndex, new SpriteInfo());
 
             var spriteInfo = GetSpriteInfo(spriteIndex);
-            spriteInfo.UnassignedFrameTablePointerAddress     = currentPos + 0x10;
-            spriteInfo.UnassignedAnimationTablePointerAddress = currentPos + 0x14;
+            spriteInfo.UnassignedFrameTablePointerOffset     = currentPos + 0x10;
+            spriteInfo.UnassignedAnimationTablePointerOffset = currentPos + 0x14;
 
             // Write the entry to the stream.
             Write(outputData.Data.GetDataCopyOrReference());
@@ -77,7 +77,7 @@ namespace SF3.CHR {
         /// <param name="animationIndex">Index of the current sprite's animation to which this frame belongs.</param>
         public void StartAnimationCommandTable(int spriteIndex, int animationIndex) {
             var spriteInfo = GetSpriteInfo(spriteIndex);
-            spriteInfo.AnimationOffsetTableAddresses.Add(animationIndex, Stream.Position);
+            spriteInfo.AnimationOffsetTableOffsets.Add(animationIndex, Stream.Position);
             spriteInfo.AnimationOffsetTableSize = Math.Max(spriteInfo.AnimationOffsetTableSize, animationIndex + 1);
         }
 
@@ -110,9 +110,9 @@ namespace SF3.CHR {
         /// <param name="spriteIndex">Index of the sprite to which this table belongs.</param>
         public void WriteAnimationTable(int spriteIndex) {
             var spriteInfo = GetSpriteInfo(spriteIndex);
-            if (spriteInfo.UnassignedAnimationTablePointerAddress.HasValue) {
-                AtPointer(spriteInfo.UnassignedAnimationTablePointerAddress.Value, (currentPos) => Stream.Write(currentPos.ToByteArray(), 0, 4));
-                spriteInfo.UnassignedAnimationTablePointerAddress = null;
+            if (spriteInfo.UnassignedAnimationTablePointerOffset.HasValue) {
+                AtPointer(spriteInfo.UnassignedAnimationTablePointerOffset.Value, (currentPos) => Stream.Write(currentPos.ToByteArray(), 0, 4));
+                spriteInfo.UnassignedAnimationTablePointerOffset = null;
             }
 
             // Determine the size of the table based on the number of animations.
@@ -120,7 +120,7 @@ namespace SF3.CHR {
             // Account for an additional terminating 0 at the end.
             var tableSize = Math.Max(16, spriteInfo.AnimationOffsetTableSize + 1);
 
-            var animationOffsetTable = spriteInfo.AnimationOffsetTableAddresses;
+            var animationOffsetTable = spriteInfo.AnimationOffsetTableOffsets;
             for (int i = 0; i < tableSize; i++) {
                 var offset = (int) (animationOffsetTable.ContainsKey(i) ? (animationOffsetTable[i] - StreamStartPosition) : 0);
                 Write(offset.ToByteArray());
@@ -131,24 +131,22 @@ namespace SF3.CHR {
         /// Writes a single frame to the frame table. The offset for the image specified by
         /// 'frameIdentifier' will be assigned when the image itself is written.
         /// </summary>
-        /// <param name="imageId">A unique keywod for the image this represents. This can be a hash or,
+        /// <param name="frameKey">A unique keyword for the image this represents. This can be a hash or,
         /// <param name="aniFrameKey">An identifier for matching up animation frames, in format "FrameGroup (Dir)"</param>
         /// if the image is intentionally duplicated, any identifying string unique to this CHR.</param>
-        public void WriteFrameTableFrame(int spriteIndex, string imageId, string aniFrameKey) {
-            InitFrameTableOffset(spriteIndex);
+        public void WriteFrameTableFrame(int spriteIndex, string frameKey, string aniFrameKey) {
+            AssignUnassignedFrameTablePointerToCurrentPosition(spriteIndex);
 
-            if (!_frameImagePointers.ContainsKey(imageId))
-                _frameImagePointers.Add(imageId, new List<long>());
-            _frameImagePointers[imageId].Add(Stream.Position);
+            if (!_unassignedFrameImagePointersByFrameKey.ContainsKey(frameKey))
+                _unassignedFrameImagePointersByFrameKey.Add(frameKey, new List<long>());
+            _unassignedFrameImagePointersByFrameKey[frameKey].Add(Stream.Position);
 
             var spriteInfo = GetSpriteInfo(spriteIndex);
             spriteInfo.AnimationKeys.Add(aniFrameKey);
 
-            // Get the image offset, if it's already been written.
-            var imageOffset = _frameImageOffsets.TryGetValue(imageId, out var offsetOut) ? offsetOut : 0;
-
-            // Placeholder for image offset
-            Write(imageOffset.ToByteArray());
+            // Get the frame image offset, if it's already been written. Otherwise, write '0' as a placeholder.
+            var frameImageOffset = _frameImageOffsetsByFrameKey.TryGetValue(frameKey, out var offsetOut) ? offsetOut : 0;
+            Write(frameImageOffset.ToByteArray());
         }
 
         /// <summary>
@@ -156,7 +154,7 @@ namespace SF3.CHR {
         /// </summary>
         /// <param name="spriteIndex">Index of the sprite to which this frame table belongs.</param>
         public void WriteFrameTableTerminator(int spriteIndex) {
-            InitFrameTableOffset(spriteIndex);
+            AssignUnassignedFrameTablePointerToCurrentPosition(spriteIndex);
 
             // Now that the table is done, we can assign FrameIDs to animation frames.
             AssignAnimationCommandFrameIDs(spriteIndex);
@@ -167,22 +165,20 @@ namespace SF3.CHR {
 
         /// <summary>
         /// Writes a compressed frame image. Any pointers in the frame table that share the
-        /// the same 'imageId' are updated to point to the new image.
+        /// the same 'frameKey' are updated to point to the new image.
         /// </summary>
-        /// <param name="imageId">A unique keywod for the image this represents. This can be a hash or,
+        /// <param name="frameKey">A unique keyword for the image this represents. This can be a hash or,
         /// if the image is intentionally duplicated, any identifying string unique to this CHR.</param>
         /// <param name="compressedImage">Byte representation of the image, already compressed.</param>
-        public void WriteFrameImage(string imageId, byte[] compressedImage) {
+        public void WriteFrameImage(string frameKey, byte[] compressedImage) {
             // Update existing pointers to this image.
-            if (_frameImagePointers.TryGetValue(imageId, out var offsets)) {
-                AtPointers(offsets.ToArray(), (offset) => {
-                    Stream.Write(offset.ToByteArray(), 0, 4);
-                });
-                _frameImagePointers.Remove(imageId);
+            if (_unassignedFrameImagePointersByFrameKey.TryGetValue(frameKey, out var offsets)) {
+                AtPointers(offsets.ToArray(), (offset) => Stream.Write(offset.ToByteArray(), 0, 4));
+                _unassignedFrameImagePointersByFrameKey.Remove(frameKey);
             }
 
-            // Remember the address of this image.
-            _frameImageOffsets.Add(imageId, (int) (Stream.Position - StreamStartPosition));
+            // Remember the offset of this image.
+            _frameImageOffsetsByFrameKey.Add(frameKey, (int) (Stream.Position - StreamStartPosition));
 
             Write(compressedImage);
         }
@@ -205,11 +201,11 @@ namespace SF3.CHR {
             Write(new byte[4]);
         }
 
-        private void InitFrameTableOffset(int spriteIndex) {
+        private void AssignUnassignedFrameTablePointerToCurrentPosition(int spriteIndex) {
             var spriteInfo = GetSpriteInfo(spriteIndex);
-            if (spriteInfo.UnassignedFrameTablePointerAddress.HasValue) {
-                AtPointer(spriteInfo.UnassignedFrameTablePointerAddress.Value, (curPosition) => Stream.Write(curPosition.ToByteArray(), 0, 4));
-                spriteInfo.UnassignedFrameTablePointerAddress = null;
+            if (spriteInfo.UnassignedFrameTablePointerOffset.HasValue) {
+                AtPointer(spriteInfo.UnassignedFrameTablePointerOffset.Value, (curPosition) => Stream.Write(curPosition.ToByteArray(), 0, 4));
+                spriteInfo.UnassignedFrameTablePointerOffset = null;
             }
         }
 
@@ -295,9 +291,9 @@ namespace SF3.CHR {
         }
 
         private class SpriteInfo {
-            public long? UnassignedFrameTablePointerAddress;
-            public long? UnassignedAnimationTablePointerAddress;
-            public Dictionary<int, long> AnimationOffsetTableAddresses = new Dictionary<int, long>();
+            public long? UnassignedFrameTablePointerOffset;
+            public long? UnassignedAnimationTablePointerOffset;
+            public Dictionary<int, long> AnimationOffsetTableOffsets = new Dictionary<int, long>();
 
             public List<AnimationFrameRef> AnimationFrameRefs = new List<AnimationFrameRef>();
             public List<string> AnimationKeys = new List<string>();
@@ -307,7 +303,7 @@ namespace SF3.CHR {
 
         private Dictionary<int, SpriteInfo> _spriteInfoBySpriteIndex = new Dictionary<int, SpriteInfo>();
 
-        private Dictionary<string, List<long>> _frameImagePointers = new Dictionary<string, List<long>>();
-        private Dictionary<string, int> _frameImageOffsets = new Dictionary<string, int>();
+        private Dictionary<string, List<long>> _unassignedFrameImagePointersByFrameKey = new Dictionary<string, List<long>>();
+        private Dictionary<string, int> _frameImageOffsetsByFrameKey = new Dictionary<string, int>();
     }
 }
