@@ -58,18 +58,20 @@ namespace SF3.CHR {
         private void WriteHeader(CHR_Writer chrWriter) {
             // Write the header table with all sprite definitions and offsets for their own tables.
             for (var spriteIndex = 0; spriteIndex < _spriteCount; spriteIndex++) {
-                var sprite = _spriteHeaderEntriesBySpriteIndex[spriteIndex];
+                var spriteInfo = GetSpriteInfo(spriteIndex);
+                var header = spriteInfo.Header;
+
                 chrWriter.WriteHeaderEntry(
                     spriteIndex,
-                    (ushort) sprite.SpriteID,
-                    (ushort) sprite.Width,
-                    (ushort) sprite.Height,
-                    (byte) sprite.Directions,
-                    (byte) sprite.VerticalOffset,
-                    (byte) sprite.Unknown0x08,
-                    (byte) sprite.CollisionSize,
-                    (byte) sprite.PromotionLevel,
-                    (int) Math.Round(sprite.Scale * 65536.0f)
+                    (ushort) header.SpriteID,
+                    (ushort) header.Width,
+                    (ushort) header.Height,
+                    (byte) header.Directions,
+                    (byte) header.VerticalOffset,
+                    (byte) header.Unknown0x08,
+                    (byte) header.CollisionSize,
+                    (byte) header.PromotionLevel,
+                    (int) Math.Round(header.Scale * 65536.0f)
                 );
             }
             chrWriter.WriteHeaderTerminator();
@@ -180,7 +182,9 @@ namespace SF3.CHR {
             if (_currentSpriteIndex < _spriteCount)
                 FinishSprite();
 
-            _spriteHeaderEntriesBySpriteIndex.Add(_currentSpriteIndex, header);
+            var spriteInfo = GetSpriteInfo(_currentSpriteIndex);
+            spriteInfo.Header = header;
+
             _spriteCount = _currentSpriteIndex + 1;
             
         }
@@ -247,16 +251,15 @@ namespace SF3.CHR {
                     });
                 }
 
-                if (!_framesToWriteBySpriteIndex.ContainsKey(_currentSpriteIndex))
-                    _framesToWriteBySpriteIndex.Add(_currentSpriteIndex, new List<(string, string)>());
-                _framesToWriteBySpriteIndex[_currentSpriteIndex].Add((FrameKey: frameKey, AniFrameKey: aniFrameKey));
+                var spriteInfo = GetSpriteInfo(_currentSpriteIndex);
+                spriteInfo.FramesToWrite.Add((FrameKey: frameKey, AniFrameKey: aniFrameKey));
             }
         }
 
         private void WriteFrameTable(int spriteIndex, CHR_Writer chrWriter) {
-            if (_framesToWriteBySpriteIndex.ContainsKey(spriteIndex))
-                foreach (var frame in _framesToWriteBySpriteIndex[spriteIndex])
-                    chrWriter.WriteFrameTableFrame(spriteIndex, frame.FrameKey, frame.AniFrameKey);
+            var spriteInfo = GetSpriteInfo(spriteIndex);
+            foreach (var frame in spriteInfo.FramesToWrite)
+                chrWriter.WriteFrameTableFrame(spriteIndex, frame.FrameKey, frame.AniFrameKey);
             chrWriter.WriteFrameTableTerminator(spriteIndex);
         }
 
@@ -310,6 +313,12 @@ namespace SF3.CHR {
             chrWriter.WriteToAlignTo(4);
         }
 
+        private SpriteInfo GetSpriteInfo(int spriteIndex) {
+            if (_spriteInfoBySpriteIndex.TryGetValue(spriteIndex, out var info))
+                return info;
+            return _spriteInfoBySpriteIndex[spriteIndex] = new SpriteInfo();
+        }
+
         // CHR_Def to be written
         private readonly CHR_Def _chrDef;
 
@@ -332,8 +341,13 @@ namespace SF3.CHR {
             public float Scale;
         };
 
-        // Collection of sprite headers to be written via CHR_Writer.WriteHeaderEntry()
-        private readonly Dictionary<int, SpriteHeaderEntry> _spriteHeaderEntriesBySpriteIndex = new Dictionary<int, SpriteHeaderEntry>();
+        private class SpriteInfo {
+            public SpriteHeaderEntry Header;
+            public List<(string FrameKey, string AniFrameKey)> FramesToWrite = new List<(string FrameKey, string AniFrameKey)>();
+        };
+
+        // Collection of all info for each sprite to be written
+        private readonly Dictionary<int, SpriteInfo> _spriteInfoBySpriteIndex = new Dictionary<int, SpriteInfo>();
 
         // Spritesheet bitmaps loaded
         private readonly Dictionary<string, Bitmap> _spritesheetImageDict = new Dictionary<string, Bitmap>();
@@ -350,9 +364,6 @@ namespace SF3.CHR {
 
         // Set of spritesheet frame images to retrieve by their frame key
         private readonly Dictionary<string, SpritesheetFrame> _spritesheetFramesByFrameKey = new Dictionary<string, SpritesheetFrame>();
-
-        // List of frames to write for each sprite, with their frame key (identifying the actual image) and their optional animation frame key (for specifying what is not a duplicate)
-        private readonly Dictionary<int, List<(string FrameKey, string AniFrameKey)>> _framesToWriteBySpriteIndex = new Dictionary<int, List<(string FrameKey, string AniFrameKey)>>();
 
         // Keep track of frame images already written if we're written frame images sprite-by-sprite.
         private readonly HashSet<string> _frameImagesWritten = new HashSet<string>();
