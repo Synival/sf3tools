@@ -19,21 +19,24 @@ namespace SpriteCHR_Builder {
             Console.WriteLine("Writing CHRs...");
             _ = Directory.CreateDirectory(c_outputPath);
 
+            var chrCompiler = new CHR_Compiler();
+
             foreach (var spriteDef in spriteDefs) {
                 Console.WriteLine($"    {spriteDef.Name}");
 
-                var chrSpriteDefs = new List<SF3.CHR.SpriteDef>();
+                var chrJob = new CHR_CompilationJob();
                 foreach (var spritesheetKv in spriteDef.Spritesheets) {
                     var spritesheetSize = Spritesheet.KeyToDimensions(spritesheetKv.Key);
                     var spritesheetDef = spritesheetKv.Value;
 
-                    var allDirections = spritesheetDef.AnimationSetsByDirections
-                        .Select(x => x.Key)
-                        .Distinct()
-                        .ToArray();
+                    foreach (var animsWithDirectionsKv in spritesheetDef.AnimationSetsByDirections) {
+                        var directions = animsWithDirectionsKv.Key;
+                        var animations = animsWithDirectionsKv.Value;
 
-                    foreach (var directions in allDirections) {
-                        var animationsWithCompleteness = spritesheetDef.AnimationSetsByDirections[directions].AnimationsByName
+                        // Split the animations into two sets:
+                        // 1. A set of animations with all frames, and
+                        // 2. A set of animations with at least one missing frame.
+                        var animationsWithCompleteness = animations.AnimationsByName
                             .ToDictionary(x => x.Key, x => (Animation: x.Value, HasAllFrames: x.Value.HasAllFrames(directions)));
 
                         AnimationsForSpritesheetAndDirection[] completeAnimations = [
@@ -45,104 +48,35 @@ namespace SpriteCHR_Builder {
                             }
                         ];
 
-                        var incompleteAnimations = 
-                            animationsWithCompleteness
-                                .Where(x => !x.Value.HasAllFrames)
-                                .Select(x => new AnimationsForSpritesheetAndDirection[] { new AnimationsForSpritesheetAndDirection() { Animations = [x.Key]}})
-                                .ToArray();
+                        var incompleteAnimations = animationsWithCompleteness
+                            .Where(x => !x.Value.HasAllFrames)
+                            .Select(x => new AnimationsForSpritesheetAndDirection() { Animations = [x.Key]})
+                            .ToArray();
 
-                        SF3.CHR.SpriteDef NewChrSprite(AnimationsForSpritesheetAndDirection[] animations) {
-                            // TODO: let the compiler add these automatically
-                            var aniDefAnimations = animations
-                                .SelectMany(x => x.Animations)
-                                .Distinct()
-                                .OrderBy(x => x)
-                                .Select(x => spritesheetDef.AnimationSetsByDirections[directions].AnimationsByName[x])
-                                .ToArray();
-
-                            // Gather all the frame groups required by every animation.
-                            // TODO: Whatever is happening below definitely won't work long-term. The right solution is
-                            // a bit tricky, so this will take some work.
-                            var frames = aniDefAnimations
-                                .SelectMany(x => {
-                                    var currentDir = directions;
-                                    return x.AnimationCommands
-                                        .Select(y => {
-                                            if (y.Command == SpriteAnimationCommandType.SetDirectionCount) {
-                                                currentDir = (SpriteDirectionCountType) y.Parameter;
-                                                return null;
-                                            }
-                                            else if (y.Command == SpriteAnimationCommandType.Frame) {
-                                                var expecteDirections = CHR_Utils.GetCHR_FrameGroupDirections(currentDir);
-                                                var frames = (y.FrameGroup != null)
-                                                    ? expecteDirections.ToDictionary(z => z, z => new AnimationCommandFrame() { FrameGroup = y.FrameGroup, Direction = z })
-                                                    : y.FramesByDirection;
-
-                                                // If there aren't enough frames, there are 'null's missing. (SF3Sprite error?)
-                                                // Add them to the end.
-                                                foreach (var ef in expecteDirections)
-                                                    if (!frames.ContainsKey(ef))
-                                                        frames.Add(ef, null!);
-
-                                                return frames;
-                                            }
-                                            else
-                                                return null;
-                                        })
-                                        .Where(x => x != null)
-                                        // This two statements together will filter out all animation frames with nulls except for the one with the *most* frames.
-                                        // This is fix to the bogus Rainblood Rook (Capeless) animation, which has missing frames in multiple animation frames.
-                                        // Selecting the animation frame with the fewest missing frames will ensure that the other frames with missing frames exist.
-                                        // (This really isn't always the case, it's just a hack for this one...)
-                                        .OrderBy(x => x.Count(y => y.Value == null))
-                                        .GroupBy(x => x.Count(y => y.Value == null) == 0)
-                                        .SelectMany(x => x.Key == true ? x.ToArray() : [x.First()]);
-                                })
-                                .GroupBy(x => string.Join('|', x.Select(y => $"({y.Key}|{y.Value?.FrameGroup}|{y.Value?.Direction})")))
-                                .Select(x => x.First()!.Values)
-                                .SelectMany(x => x
-                                    .Where(y => y != null)
-                                    .Select(y => new SF3.CHR.FrameGroup() {
-                                        Name = y.FrameGroup,
-                                        Frames = [new SF3.CHR.Frame() { Direction = y.Direction }]
-                                    })
-                                )
-                                .ToArray();
-
-                            return new SF3.CHR.SpriteDef() {
-                                SpriteID       = spritesheetDef.SpriteID,
-                                SpriteName     = spriteDef.Name,
-                                Width          = spritesheetSize.Width,
-                                Height         = spritesheetSize.Height,
-                                Directions     = directions,
-                                PromotionLevel = 0,
-                                VerticalOffset = spritesheetDef.VerticalOffset,
-                                Unknown0x08    = spritesheetDef.Unknown0x08,
-                                CollisionSize  = spritesheetDef.CollisionSize,
-                                Scale          = spritesheetDef.Scale,
-
-                                FrameGroupsForSpritesheets   = [new FrameGroupsForSpritesheet() { FrameGroups = frames }],
-                                AnimationsForSpritesheetAndDirections = animations
-                            };
+                        // Add all complete animations.
+                        if (completeAnimations.Length > 0) {
+                            chrJob.StartSprite(spritesheetDef, spritesheetSize.Width, spritesheetSize.Height, directions, 0);
+                            foreach (var animation in completeAnimations) {
+                                chrJob.AddMissingFrames(animation, spriteDef.Name, spritesheetSize.Width, spritesheetSize.Height, directions);
+                                chrJob.AddAnimations(animation, spriteDef.Name, spritesheetSize.Width, spritesheetSize.Height, directions);
+                            }
+                            chrJob.FinishSprite();
                         }
 
-                        if (completeAnimations.Length > 0)
-                            chrSpriteDefs.Add(NewChrSprite(completeAnimations));
-
-                        foreach (var animation in incompleteAnimations)
-                            chrSpriteDefs.Add(NewChrSprite(animation));
+                        // Add all incomplete animations as individual sprites. (If they were in the same sprite, the missing frames would be replaced with other frames!)
+                        foreach (var anim in incompleteAnimations) {
+                            chrJob.StartSprite(spritesheetDef, spritesheetSize.Width, spritesheetSize.Height, directions, 0);
+                            chrJob.AddAnimations(anim, spriteDef.Name, spritesheetSize.Width, spritesheetSize.Height, directions);
+                            chrJob.FinishSprite();
+                        }
                     }
 
                     // TODO: add a special sprite that contains only frames that weren't used.
                     // (Benetram has some of these, for example.)
                 }
 
-                var chrDef = new CHR_Def() {
-                    Sprites = chrSpriteDefs.ToArray()
-                };
-
                 using (var memoryStream = new MemoryStream()) {
-                    chrDef.ToCHR_File(memoryStream);
+                    chrJob.Write(memoryStream, false, null);
                     var chrOutPath = Path.Combine(c_outputPath, SpriteUtils.FilesystemName(spriteDef.Name) + ".CHR");
                     File.WriteAllBytes(chrOutPath, memoryStream.ToArray());
                 }
