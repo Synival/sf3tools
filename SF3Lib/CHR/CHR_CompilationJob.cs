@@ -96,49 +96,88 @@ namespace SF3.CHR {
 
             // Attempt to load the spritesheet referenced by the spritesheetDef.
             // Don't bother if the def couldn't be found.
-            var spritesheetKey      = Spritesheet.DimensionsToKey(frameWidth, frameHeight);
-            var spritesheetImageKey = $"{spriteName} ({spritesheetKey})";
-            var spritesheetDef      = (spriteDef?.Spritesheets?.TryGetValue(spritesheetKey, out var spritesheetOut) == true) ? spritesheetOut : null;
-            var spriteFrameGroupDef = (spritesheetDef?.FrameGroupsByName?.TryGetValue(frameGroup.Name, out var spriteFrameGroupOut) == true) ? spriteFrameGroupOut : null;
-
-            // Load the spritesheet if it wasn't loaded already.
-            var spritesheetBitmap = LoadSpritesheet(spriteName, frameWidth, frameHeight);
+            var spritesheetKey   = Spritesheet.DimensionsToKey(frameWidth, frameHeight);
+            var spritesheet      = (spriteDef?.Spritesheets?.TryGetValue(spritesheetKey, out var spritesheetOut) == true) ? spritesheetOut : null;
 
             var frames = frameGroup.Frames
                 ?? CHR_Utils.GetCHR_FrameGroupDirections(spriteInfo.Header.Directions)
                     .Select(x => new Frame() { Direction = x })
                     .ToArray();
 
-            foreach (var frame in frames) {
-                var spriteFrameDef = (spriteFrameGroupDef?.Frames?.TryGetValue(frame.Direction, out var spriteFrameOut) == true) ? spriteFrameOut : null;
-                var aniFrameKey    = $"{spritesheetImageKey} {frameGroup.Name} ({frame.Direction})";
-                var frameKey       = $"{spritesheetImageKey} {aniFrameKey}" + (frame.DuplicateKey == null ? "" : $" ({frame.DuplicateKey})");
-
-                AddFrame(spritesheetBitmap, frameWidth, frameHeight, spriteFrameDef?.SpritesheetX ?? -1, spriteFrameDef?.SpritesheetY ?? -1, frameKey, aniFrameKey);
-            }
+            foreach (var frame in frames) 
+                AddFrame(spritesheet, spriteName, frameWidth, frameHeight, frameGroup.Name, frame.Direction, frame.DuplicateKey);
         }
 
         /// <summary>
-        /// Adds an individual frame to the current sprite.
+        /// Add an individual frame from a Spritesheet to the current sprite.
+        /// </summary>
+        /// <param name="spritesheet">Spritesheet which contains the frame.</param>
+        /// <param name="frameWidth">Width of frames in the spritesheet.</param>
+        /// <param name="frameHeight">Height of frames in the spritesheet.</param>
+        /// <param name="spriteName">Name of the sprite which contains the Spritesheet.</param>
+        /// <param name="frameGroupName">Name of the frame group which contains the sprite to add.</param>
+        /// <param name="direction">Direction of the frame to add from the frame group.</param>
+        /// <param name="duplicateKey">Optional key appended to the 'frameKey', which forces duplicate frames to be considered separate.</param>
+        public void AddFrame(Spritesheet spritesheet, string spriteName, int frameWidth, int frameHeight, string frameGroupName, SpriteFrameDirection direction, string duplicateKey) {
+            var spritesheetKey      = Spritesheet.DimensionsToKey(frameWidth, frameHeight);
+            var spritesheetImageKey = $"{spriteName} ({spritesheetKey})";
+            var spriteFrameGroup    = (spritesheet?.FrameGroupsByName?.TryGetValue(frameGroupName, out var spriteFrameGroupOut) == true) ? spriteFrameGroupOut : null;
+            var spriteFrameDef      = (spriteFrameGroup?.Frames?.TryGetValue(direction, out var spriteFrameOut) == true) ? spriteFrameOut : null;
+            var aniFrameKey         = $"{spritesheetImageKey} {frameGroupName} ({direction})";
+            var frameKey            = $"{spritesheetImageKey} {aniFrameKey}" + (duplicateKey == null ? "" : $" ({duplicateKey})");
+
+            // Load the spritesheet if it wasn't loaded already.
+            var spritesheetBitmap = GetSpritesheetBitmap(spriteName, frameWidth, frameHeight);
+
+            AddFrame(spritesheetBitmap, frameWidth, frameHeight, spriteFrameDef?.SpritesheetX ?? -1, spriteFrameDef?.SpritesheetY ?? -1, frameKey, aniFrameKey);
+        }
+
+        /// <summary>
+        /// Adds an individual frame contained within a bitmap to the current sprite.
         /// </summary>
         /// <param name="spritesheetBitmap">Spritesheet image to use.</param>
         /// <param name="frameWidth">Width of frames in the spritesheet.</param>
         /// <param name="frameHeight">Height of frames in the spritesheet.</param>
-        /// <param name="spritesheetX">Top-left X coordinate of the frame image in the spritesheet image.</param>
-        /// <param name="spritesheetY">Top-left Y coordinate of the frame image in the spritesheet image.</param>
+        /// <param name="frameX">Top-left X coordinate of the frame image in the spritesheet image.</param>
+        /// <param name="frameY">Top-left Y coordinate of the frame image in the spritesheet image.</param>
         /// <param name="frameKey">Identifier for this frame for the purpose of eliminating duplicates.</param>
         /// <param name="aniFrameKey">Identifier for this frame for the purpose of matching specific frames in animations.</param>
-        public void AddFrame(Bitmap spritesheetBitmap, int frameWidth, int frameHeight, int spritesheetX, int spritesheetY, string frameKey, string aniFrameKey) {
+        public void AddFrame(Bitmap spritesheetBitmap, int frameWidth, int frameHeight, int frameX, int frameY, string frameKey, string aniFrameKey) {
             // Track the frames we're adding to the entire CHR.
             if (!_spritesheetFramesByFrameKey.ContainsKey(frameKey)) {
                 // Add a reference to the image whether the spritesheet resources were found or not.
                 // If they're invalid, simply display a red image.
                 _spritesheetFramesByFrameKey.Add(frameKey, new SpritesheetFrame() {
                     SpritesheetBitmap = spritesheetBitmap,
-                    X      = spritesheetX,
-                    Y      = spritesheetY,
+                    X      = frameX,
+                    Y      = frameY,
                     Width  = frameWidth,
                     Height = frameHeight,
+                    FirstSeenSpriteIndex = _currentSpriteIndex,
+                });
+            }
+
+            var spriteInfo = GetSpriteInfo(_currentSpriteIndex);
+            spriteInfo.Frames.Add(new FrameInfo() { FrameKey = frameKey, AniFrameKey = aniFrameKey });
+        }
+
+        /// <summary>
+        /// Adds an individual frame to the current sprite.
+        /// </summary>
+        /// <param name="frameImage">Image to use for the frame.</param>
+        /// <param name="frameKey">Identifier for this frame for the purpose of eliminating duplicates.</param>
+        /// <param name="aniFrameKey">Identifier for this frame for the purpose of matching specific frames in animations.</param>
+        public void AddFrame(Bitmap frameImage, string frameKey, string aniFrameKey) {
+            // Track the frames we're adding to the entire CHR.
+            if (!_spritesheetFramesByFrameKey.ContainsKey(frameKey)) {
+                // Add a reference to the image whether the spritesheet resources were found or not.
+                // If they're invalid, simply display a red image.
+                _spritesheetFramesByFrameKey.Add(frameKey, new SpritesheetFrame() {
+                    SpritesheetBitmap = frameImage,
+                    X      = 0,
+                    Y      = 0,
+                    Width  = frameImage.Width,
+                    Height = frameImage.Height,
                     FirstSeenSpriteIndex = _currentSpriteIndex,
                 });
             }
@@ -375,7 +414,7 @@ namespace SF3.CHR {
             return _spriteInfoBySpriteIndex[spriteIndex] = new SpriteInfo();
         }
 
-        private Bitmap LoadSpritesheet(string spriteName, int width, int height) {
+        private Bitmap GetSpritesheetBitmap(string spriteName, int width, int height) {
             var spritesheetKey = Spritesheet.DimensionsToKey(width, height);
             var spritesheetImageKey = $"{spriteName} ({spritesheetKey})";
 
