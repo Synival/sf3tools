@@ -53,6 +53,7 @@ namespace CHR_Extractor {
 
             // Compilers.
             var chrCompiler = new CHR_Compiler();
+            var chpCompiler = new CHP_Compiler();
 
             // Open each file.
             foreach (var filesKv in allFiles) {
@@ -120,7 +121,7 @@ namespace CHR_Extractor {
 
                             var deserializedFile = isChr
                                 ? (object) (chrCompiler.Compile((CHR_Def) chrChpDef, nameGetter, scenario))
-                                : (object) ((CHP_Def) chrChpDef).ToCHP_File(nameGetter, scenario, chpBuf);
+                                : (object) (chpCompiler.Compile((CHP_Def) chrChpDef, nameGetter, scenario, chpBuf));
 
                             // Make some very specific corrections to some S1 CHR's that have errors.
                             if (isChr) {
