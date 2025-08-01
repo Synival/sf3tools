@@ -74,32 +74,6 @@ namespace SF3.CHR {
             return jObj;
         }
 
-        /// <summary>
-        /// Converts the CHR_Def to a CHR_File.
-        /// </summary>
-        /// <param name="nameGetterContext">Context for getting named values.</param>
-        /// <param name="scenario">Scenario to which this CHR belongs.</param>
-        /// <returns></returns>
-        public CHR_File ToCHR_File(INameGetterContext nameGetterContext, ScenarioType scenario) {
-            byte[] data;
-            using (var stream = new MemoryStream()) {
-                ToCHR_File(stream);
-                data = stream.ToArray();
-            }
-            return CHR_File.Create(new ByteData.ByteData(new ByteArray(data)), nameGetterContext, scenario);
-        }
-
-        /// <summary>
-        /// Writes the CHR_Def to a stream in .CHR format.
-        /// </summary>
-        /// <param name="outputStream">Stream to export the .CHR-formatted data to.</param>
-        /// <returns>The number of bytes written to outputStream.</returns>
-        public int ToCHR_File(Stream outputStream) {
-            var compiler = new CHR_Compiler();
-            var bytesWritten = compiler.Compile(this, outputStream);
-            return bytesWritten;
-        }
-
         public bool? WriteFrameImagesBeforeTables;
         public int? MaxSize;
         public byte[] JunkAfterFrameTables;

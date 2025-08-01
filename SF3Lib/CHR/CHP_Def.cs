@@ -83,6 +83,7 @@ namespace SF3.CHR {
         private int ToCHP_FileInternal(Stream outputStream, bool seekInsteadOfWrite) {
             var startPosition = outputStream.Position;
 
+            var chrCompiler = new CHR_Compiler();
             foreach (var chrKv in CHRsBySector.OrderBy(x => x.Key)) {
                 var offset = (chrKv.Key * 0x800) + startPosition;
                 var chr = chrKv.Value;
@@ -100,7 +101,7 @@ namespace SF3.CHR {
                     try { throw new InvalidDataException(); } catch { }
                 }
 
-                var bytesWritten = chr.ToCHR_File(outputStream);
+                var bytesWritten = chrCompiler.Compile(chr, outputStream);
                 if (chr.MaxSize.HasValue && bytesWritten > chr.MaxSize) {
                     // TODO: this is a serious error; how should we handle it?
                     try { throw new InvalidDataException(); } catch { }

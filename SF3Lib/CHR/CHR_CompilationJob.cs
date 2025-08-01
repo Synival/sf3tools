@@ -82,18 +82,6 @@ namespace SF3.CHR {
         }
 
         /// <summary>
-        /// Adds an entire sprite entire to the CHR to be compiled.
-        /// A new sprite is automatically started and finished via StartSprite() and FinishSprite().
-        /// </summary>
-        /// <param name="spriteDef">The CHR SpriteDef to add, in its entirety.</param>
-        public void AddCompleteSprite(SpriteDef spriteDef) {
-            StartSprite(spriteDef);
-            AddFrames(spriteDef);
-            AddAnimations(spriteDef);
-            FinishSprite();
-        }
-
-        /// <summary>
         /// Adds frames from a CHR SpriteDef.
         /// </summary>
         /// <param name="sprite">The CHR SpriteDef that contains the frames to be added.</param>
@@ -221,6 +209,19 @@ namespace SF3.CHR {
             // Write all animations for each particular sprite with a set of directions.
             foreach (var animations in sprite.AnimationsForSpritesheetAndDirections)
                 AddAnimations(animations, sprite.SpriteName, sprite.Width, sprite.Height, sprite.Directions);
+        }
+
+        /// <summary>
+        /// Adds any frames in from all animations of a CHR sprite missing in the FrameTable.
+        /// </summary>
+        /// <param name="sprite">The CHR SpriteDef that contains the animations to be added.</param>
+        public void AddMissingFrames(SpriteDef sprite) {
+            if (sprite.AnimationsForSpritesheetAndDirections == null)
+                return;
+
+            // Write all animations for each particular sprite with a set of directions.
+            foreach (var animations in sprite.AnimationsForSpritesheetAndDirections)
+                AddMissingFrames(animations, sprite.SpriteName, sprite.Width, sprite.Height, sprite.Directions);
         }
 
         /// <summary>

@@ -1,213 +1,12 @@
 ﻿using SF3.CHR;
-using SF3.NamedValues;
 using SF3.Types;
 
 namespace SF3.Tests.CHR {
     [TestClass]
     public class CHR_DefTests {
-        private static readonly string c_emptyCHR_Text = @"
-            { 'Sprites': [] }
-        ";
-
-        private static readonly string c_twoEmptySpriteCHR_Text = @"
-            {
-              'Sprites': [
-                {
-                    'Name': 'Synbios (U)',
-                    'Width': 40,
-                    'Height': 40,
-                },
-                {
-                    'Name': 'Synbios (P1)',
-                    'Width': 40,
-                    'Height': 40,
-                    'PromotionLevel': 1
-                }
-            ]}
-        ";
-
-        private static readonly string c_minimalCHR_Text = @"
-            {
-              'Sprites': [
-                {
-                  'Name': 'Synbios (U)',
-                  'Width': 40,
-                  'Height': 40,
-                  'Frames': [
-                    'Idle (Battle) 1',
-                    'Idle (Battle) 2',
-                    'Idle (Battle) 3'
-                  ],
-                  'Animations': [
-                    'StillFrame (Battle)',
-                    'Idle (Battle)'
-                  ]
-                }
-              ]
-            }
-        ";
-
-        private static readonly string c_lookoverChurchCHR_Text = @"
-             {
-              'Sprites': [
-                {
-                  'Name': 'Church Priest',
-                  'Frames': [
-                    'Walking 1',
-                    'Walking 2',
-                    'Idle 1',
-                    'Walking 3',
-                    'Walking 4'
-                  ],
-                  'Animations': [
-                    'StillFrame (Walking 1)',
-                    'Walking (Render 1)',
-                    'Walking (Render 1)'
-                  ]
-                },
-                {
-                  'Name': 'Woman w/ Blue Dress and Apron',
-                  'Frames': [
-                    'Walking 1',
-                    'Walking 2',
-                    'Walking 3',
-                    'Walking 4',
-                    'Walking 5'
-                  ],
-                  'Animations': [
-                    'StillFrame',
-                    'Walking (Slower)',
-                    'Walking (Faster)'
-                  ]
-                },
-                {
-                  'Name': 'Old Woman',
-                  'Frames': [
-                    'Walking 1',
-                    'Walking 2',
-                    'Walking 3',
-                    'Walking 4',
-                    'Walking 5'
-                  ],
-                  'Animations': [
-                    'StillFrame (Walking)',
-                    'Walking',
-                    'Walking'
-                  ]
-                }
-              ]
-            }
-        ";
-
-        private static readonly string c_lookoverChurchCHR_WithoutFrames_Text = @"
-             {
-              'Sprites': [
-                {
-                  'Name': 'Church Priest',
-                  'Animations': [
-                    'StillFrame (Walking 1)',
-                    'Walking (Render 1)',
-                    'Walking (Render 1)'
-                  ]
-                },
-                {
-                  'Name': 'Woman w/ Blue Dress and Apron',
-                  'Animations': [
-                    'StillFrame',
-                    'Walking (Slower)',
-                    'Walking (Faster)'
-                  ]
-                },
-                {
-                  'Name': 'Old Woman',
-                  'Animations': [
-                    'StillFrame (Walking)',
-                    'Walking',
-                    'Walking'
-                  ]
-                }
-              ]
-            }
-        ";
-
-        [TestMethod]
-        public void ToCHR_File_ToStream_WithEmptyCHR_ExportsExpectedData() {
-            var emptyCHR = CHR_Def.FromJSON(c_emptyCHR_Text);
-
-            var expectedData = new byte[] {
-                // Blank (terminating) header entry.
-                0xFF, 0xFF, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-                0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-                0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-
-                // Manditory 4 btyes at the end.
-                0x00, 0x00, 0x00, 0x00
-            };
-
-            byte[]? resultData = null;
-            int rval;
-            using (var outputStream = new MemoryStream()) {
-                rval = emptyCHR.ToCHR_File(outputStream);
-                resultData = outputStream.ToArray();
-            }
-
-            Assert.IsTrue(Enumerable.SequenceEqual(expectedData, resultData));
-            Assert.AreEqual(expectedData.Length, rval);
-        }
-
-        [TestMethod]
-        public void ToCHR_File_ToFile_WithEmptyCHR_ExportsExpectedData() {
-            var nameGetterContext = new NameGetterContext(ScenarioType.Scenario1);
-            var emptyCHR = CHR_Def.FromJSON(c_emptyCHR_Text);
-            var chrFile = emptyCHR.ToCHR_File(nameGetterContext, nameGetterContext.Scenario);
-
-            Assert.AreEqual(0, chrFile.SpriteTable.Length);
-        }
-
-        [TestMethod]
-        public void ToCHR_File_ToFile_WithMinimalCHR_ExportsExpectedData() {
-            var nameGetterContext = new NameGetterContext(ScenarioType.Scenario1);
-            var minimalCHR = CHR_Def.FromJSON(c_minimalCHR_Text);
-            var chrFile = minimalCHR.ToCHR_File(nameGetterContext, nameGetterContext.Scenario);
-
-            Assert.AreEqual(1, chrFile.SpriteTable.Length);
-
-            var sprite = chrFile.SpriteTable[0];
-            Assert.AreEqual(0, sprite.Header.SpriteID);
-            Assert.AreEqual(40, sprite.Header.Width);
-            Assert.AreEqual(40, sprite.Header.Height);
-            Assert.AreEqual(4, sprite.Header.Directions);
-            Assert.AreEqual(0, sprite.Header.VerticalOffset);
-            Assert.AreEqual(20, sprite.Header.Unknown0x08);
-            Assert.AreEqual(40, sprite.Header.CollisionShadowDiameter);
-            Assert.AreEqual(0, sprite.Header.PromotionLevel);
-            Assert.AreEqual(65536u, sprite.Header.Scale);
-        }
-
-        [TestMethod]
-        public void ToCHR_File_ToFile_WithTwoEmptySpriteCHR_ExportsSuccessfully() {
-            var nameGetterContext = new NameGetterContext(ScenarioType.Scenario1);
-            var twoEmptySpriteCHR = CHR_Def.FromJSON(c_twoEmptySpriteCHR_Text);
-            var chrFile = twoEmptySpriteCHR.ToCHR_File(nameGetterContext, nameGetterContext.Scenario);
-
-            Assert.AreEqual(2, chrFile.SpriteTable.Length);
-
-            Assert.AreEqual(0, chrFile.SpriteTable[0].FrameTable.Length);
-            Assert.AreEqual(16, chrFile.SpriteTable[0].AnimationOffsetTable.Length);
-            Assert.AreEqual(0, chrFile.SpriteTable[0].AnimationTable.Length);
-            for (int i = 0; i < 16; i++)
-                Assert.AreEqual(0u, chrFile.SpriteTable[0].AnimationOffsetTable[i].Offset);
-
-            Assert.AreEqual(0, chrFile.SpriteTable[1].FrameTable.Length);
-            Assert.AreEqual(16, chrFile.SpriteTable[1].AnimationOffsetTable.Length);
-            Assert.AreEqual(0, chrFile.SpriteTable[1].AnimationTable.Length);
-            for (int i = 0; i < 16; i++)
-                Assert.AreEqual(0u, chrFile.SpriteTable[1].AnimationOffsetTable[i].Offset);
-        }
-
         [TestMethod]
         public void Deserialize_WithEmptyCHR_HasExpectedData() {
-            var chrDef = CHR_Def.FromJSON(c_emptyCHR_Text);
+            var chrDef = CHR_Def.FromJSON(TestCHRs.EmptyCHR);
 
             Assert.IsNull(chrDef.JunkAfterFrameTables);
             Assert.AreEqual(0, chrDef.Sprites.Length);
@@ -215,7 +14,7 @@ namespace SF3.Tests.CHR {
 
         [TestMethod]
         public void Deserialize_WithTwoEmptySpriteCHR_HasExpectedData() {
-            var chrDef = CHR_Def.FromJSON(c_twoEmptySpriteCHR_Text);
+            var chrDef = CHR_Def.FromJSON(TestCHRs.TwoEmptySpriteCHR);
 
             Assert.IsNull(chrDef.JunkAfterFrameTables);
             Assert.AreEqual(2, chrDef.Sprites.Length);
@@ -247,15 +46,6 @@ namespace SF3.Tests.CHR {
             Assert.AreEqual(sprite1.PromotionLevel, 1);
             Assert.AreEqual(sprite1.FrameGroupsForSpritesheets, null);
             Assert.AreEqual(sprite1.AnimationsForSpritesheetAndDirections, null);
-        }
-
-        [TestMethod]
-        public void Deserialize_LookoverChurchCHRs_CompiledCHRsHaveSameFramesAndAnimations() {
-            var chrDefWithFrames    = CHR_Def.FromJSON(c_lookoverChurchCHR_Text);
-            var chrDefWithoutFrames = CHR_Def.FromJSON(c_lookoverChurchCHR_WithoutFrames_Text);
-
-            // TODO: finish this thing!
-            throw new NotImplementedException();
         }
     }
 }
