@@ -1,7 +1,11 @@
-﻿using System.Linq;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using CommonLib;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using SF3.Types;
+using SF3.Utils;
 
 namespace SF3.CHR {
     public class FrameGroup : IJsonResource {
@@ -75,6 +79,17 @@ namespace SF3.CHR {
 
         public override string ToString()
             => (Name != null ? Name + ": " : "") + ((Frames != null) ? string.Join(", ", Frames.Select(x => "{" + x.ToString() + "}")) : "[]");
+
+        /// <summary>
+        /// Returns 'Frames' if available or a generated set of frames based on the number of directions for the requested sprite.
+        /// </summary>
+        /// <param name="directions">The set of Frame directions if 'Frames' does not exist.</param>
+        /// <returns>A non-null array of Frame's.</returns>
+        public Frame[] GetFrames(SpriteDirectionCountType directions) {
+            return Frames ?? CHR_Utils.GetCHR_FrameGroupDirections(directions)
+                .Select(x => new Frame() { Direction = x })
+                .ToArray();
+        }
 
         public string Name;
         public Frame[] Frames;

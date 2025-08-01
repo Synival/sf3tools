@@ -96,14 +96,10 @@ namespace SF3.CHR {
 
             // Attempt to load the spritesheet referenced by the spritesheetDef.
             // Don't bother if the def couldn't be found.
-            var spritesheetKey   = Spritesheet.DimensionsToKey(frameWidth, frameHeight);
-            var spritesheet      = (spriteDef?.Spritesheets?.TryGetValue(spritesheetKey, out var spritesheetOut) == true) ? spritesheetOut : null;
+            var spritesheetKey = Spritesheet.DimensionsToKey(frameWidth, frameHeight);
+            var spritesheet    = (spriteDef?.Spritesheets?.TryGetValue(spritesheetKey, out var spritesheetOut) == true) ? spritesheetOut : null;
 
-            var frames = frameGroup.Frames
-                ?? CHR_Utils.GetCHR_FrameGroupDirections(spriteInfo.Header.Directions)
-                    .Select(x => new Frame() { Direction = x })
-                    .ToArray();
-
+            var frames = frameGroup.GetFrames(spriteInfo.Header.Directions);
             foreach (var frame in frames) 
                 AddFrame(spritesheet, spriteName, frameWidth, frameHeight, frameGroup.Name, frame.Direction, frame.DuplicateKey);
         }
@@ -191,13 +187,14 @@ namespace SF3.CHR {
         /// </summary>
         /// <param name="sprite">The CHR SpriteDef that contains the animations to be added.</param>
         public void AddAnimations(SpriteDef sprite) {
+            if (sprite.AnimationsForSpritesheetAndDirections == null)
+                return;
+
             // Write all individual animations.
             var spriteInfo = GetSpriteInfo(_currentSpriteIndex);
             var spriteFrameKeys = spriteInfo.Frames.Select(x => x.AniFrameKey).ToArray();
 
-            int animationIndex = 0;
-
-            foreach (var animations in sprite.AnimationsForSpritesheetAndDirections ?? new AnimationsForSpritesheetAndDirection[0]) {
+            foreach (var animations in sprite.AnimationsForSpritesheetAndDirections) {
                 var spriteName = animations.SpriteName ?? sprite.SpriteName;
                 var spriteDef = SpriteUtils.GetSpriteDef(spriteName);
 
@@ -252,16 +249,16 @@ namespace SF3.CHR {
                                     ;
                             }
 
-                            if (!spriteInfo.AnimationsByIndex.ContainsKey(animationIndex))
-                                spriteInfo.AnimationsByIndex.Add(animationIndex, new AnimationInfo());
-                            spriteInfo.AnimationsByIndex[animationIndex].Commands.Add(new AnimationCommandInfo() {
+                            if (!spriteInfo.AnimationsByIndex.ContainsKey(spriteInfo.CurrentAnimationIndex))
+                                spriteInfo.AnimationsByIndex.Add(spriteInfo.CurrentAnimationIndex, new AnimationInfo());
+                            spriteInfo.AnimationsByIndex[spriteInfo.CurrentAnimationIndex].Commands.Add(new AnimationCommandInfo() {
                                 Command = command,
                                 Parameter = aniCommand.Parameter
                             });
                         }
                     }
 
-                    animationIndex++;
+                    spriteInfo.CurrentAnimationIndex++;
                 }
             }
         }
@@ -473,6 +470,7 @@ namespace SF3.CHR {
             public SpriteHeaderEntry Header;
             public List<FrameInfo> Frames = new List<FrameInfo>();
             public Dictionary<int, AnimationInfo> AnimationsByIndex = new Dictionary<int, AnimationInfo>();
+            public int CurrentAnimationIndex = 0;
         };
 
         // Collection of all info for each sprite to be written
