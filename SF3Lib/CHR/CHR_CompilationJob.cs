@@ -114,21 +114,37 @@ namespace SF3.CHR {
                 var aniFrameKey    = $"{spritesheetImageKey} {frameGroup.Name} ({frame.Direction})";
                 var frameKey       = $"{spritesheetImageKey} {aniFrameKey}" + (frame.DuplicateKey == null ? "" : $" ({frame.DuplicateKey})");
 
+                AddFrame(spritesheetBitmap, frameWidth, frameHeight, spriteFrameDef?.SpritesheetX ?? -1, spriteFrameDef?.SpritesheetY ?? -1, frameKey, aniFrameKey);
+            }
+        }
+
+        /// <summary>
+        /// Adds an individual frame to the current sprite.
+        /// </summary>
+        /// <param name="spritesheetBitmap">Spritesheet image to use.</param>
+        /// <param name="frameWidth">Width of frames in the spritesheet.</param>
+        /// <param name="frameHeight">Height of frames in the spritesheet.</param>
+        /// <param name="spritesheetX">Top-left X coordinate of the frame image in the spritesheet image.</param>
+        /// <param name="spritesheetY">Top-left Y coordinate of the frame image in the spritesheet image.</param>
+        /// <param name="frameKey">Identifier for this frame for the purpose of eliminating duplicates.</param>
+        /// <param name="aniFrameKey">Identifier for this frame for the purpose of matching specific frames in animations.</param>
+        public void AddFrame(Bitmap spritesheetBitmap, int frameWidth, int frameHeight, int spritesheetX, int spritesheetY, string frameKey, string aniFrameKey) {
+            // Track the frames we're adding to the entire CHR.
+            if (!_spritesheetFramesByFrameKey.ContainsKey(frameKey)) {
                 // Add a reference to the image whether the spritesheet resources were found or not.
                 // If they're invalid, simply display a red image.
-                if (!_spritesheetFramesByFrameKey.ContainsKey(frameKey)) {
-                    _spritesheetFramesByFrameKey.Add(frameKey, new SpritesheetFrame() {
-                        SpritesheetBitmap = spritesheetBitmap,
-                        X      = spriteFrameDef?.SpritesheetX ?? -1,
-                        Y      = spriteFrameDef?.SpritesheetY ?? -1,
-                        Width  = frameWidth,
-                        Height = frameHeight,
-                        FirstSeenSpriteIndex = _currentSpriteIndex,
-                    });
-                }
-
-                spriteInfo.Frames.Add(new FrameInfo() { FrameKey = frameKey, AniFrameKey = aniFrameKey });
+                _spritesheetFramesByFrameKey.Add(frameKey, new SpritesheetFrame() {
+                    SpritesheetBitmap = spritesheetBitmap,
+                    X      = spritesheetX,
+                    Y      = spritesheetY,
+                    Width  = frameWidth,
+                    Height = frameHeight,
+                    FirstSeenSpriteIndex = _currentSpriteIndex,
+                });
             }
+
+            var spriteInfo = GetSpriteInfo(_currentSpriteIndex);
+            spriteInfo.Frames.Add(new FrameInfo() { FrameKey = frameKey, AniFrameKey = aniFrameKey });
         }
 
         /// <summary>
