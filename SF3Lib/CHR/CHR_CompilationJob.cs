@@ -191,25 +191,36 @@ namespace SF3.CHR {
                 return;
 
             // Write all animations for each particular sprite with a set of directions.
-            foreach (var animations in sprite.AnimationsForSpritesheetAndDirections) {
-                if (animations.Animations == null)
-                    continue;
+            foreach (var animations in sprite.AnimationsForSpritesheetAndDirections)
+                AddAnimations(animations, sprite.SpriteName, sprite.Width, sprite.Height, sprite.Directions);
+        }
 
-                var spriteName         = animations.SpriteName ?? sprite.SpriteName;
-                var directions         = animations.Directions ?? sprite.Directions;
-                var frameWidth         = animations.Width ?? sprite.Width;
-                var frameHeight        = animations.Height ?? sprite.Height;
-                var spritesheetKey     = Spritesheet.DimensionsToKey(frameWidth, frameHeight);
+        /// <summary>
+        /// Adds animations from a specific set by spritesheet and directions in a CHR.
+        /// </summary>
+        /// <param name="animations">The set of animations for a specific spritesheet and directions.</param>
+        /// <param name="defaultSpriteName">The name of the sprite if 'animations' does not specify one.</param>
+        /// <param name="defaultWidth">The width of the sprite if not specified by 'animations'.</param>
+        /// <param name="defaultHeight">The height of the sprite if not specified by 'animations'.</param>
+        /// <param name="defaultDirections">The directions of the sprite if not specified by 'animations'.</param>
+        public void AddAnimations(AnimationsForSpritesheetAndDirection animations, string defaultSpriteName, int defaultWidth, int defaultHeight, SpriteDirectionCountType defaultDirections) {
+            if (animations.Animations == null)
+                return;
 
-                var spriteDef          = SpriteUtils.GetSpriteDef(spriteName);
-                var spritesheetDef     = (spriteDef?.Spritesheets?.TryGetValue(spritesheetKey, out var spritesheetOut) == true) ? spritesheetOut : null;
-                var spriteAnimationSet = (spritesheetDef?.AnimationSetsByDirections?.TryGetValue(directions, out var sadOut) == true) ? sadOut : null;
+            var spriteName         = animations.SpriteName ?? defaultSpriteName;
+            var directions         = animations.Directions ?? defaultDirections;
+            var frameWidth         = animations.Width ?? defaultWidth;
+            var frameHeight        = animations.Height ?? defaultHeight;
+            var spritesheetKey     = Spritesheet.DimensionsToKey(frameWidth, frameHeight);
 
-                // Write all individual animations.
-                foreach (var animationName in animations.Animations) {
-                    var spriteAnimation = (animationName != null && spriteAnimationSet?.AnimationsByName?.TryGetValue(animationName, out var animOut) == true) ? animOut : null;
-                    AddAnimation(spriteAnimation, animationName, spriteName, frameWidth, frameHeight, directions);
-                }
+            var spriteDef          = SpriteUtils.GetSpriteDef(spriteName);
+            var spritesheetDef     = (spriteDef?.Spritesheets?.TryGetValue(spritesheetKey, out var spritesheetOut) == true) ? spritesheetOut : null;
+            var spriteAnimationSet = (spritesheetDef?.AnimationSetsByDirections?.TryGetValue(directions, out var sadOut) == true) ? sadOut : null;
+
+            // Write all individual animations.
+            foreach (var animationName in animations.Animations) {
+                var spriteAnimation = (animationName != null && spriteAnimationSet?.AnimationsByName?.TryGetValue(animationName, out var animOut) == true) ? animOut : null;
+                AddAnimation(spriteAnimation, animationName, spriteName, frameWidth, frameHeight, directions);
             }
         }
 
