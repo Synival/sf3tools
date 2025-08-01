@@ -71,7 +71,6 @@ namespace SF3.CHR {
         /// <summary>
         /// Writes the CHP_Def to a stream in .CHP format.
         /// </summary>
-        /// <param name="outputStream">Stream to export the .CHP-formatted data to.</param>
         /// <param name="buffer">A pre-existing buffer to which the CHP will be written. Empty space between
         /// CHR files will be skipped rather than written with zeroes. This buffer must be large enough to
         /// contain the entire CHP file.</param>
