@@ -34,7 +34,35 @@ namespace SF3.CHR {
             });
         }
 
-        private void StartSprite(SpriteHeaderEntry header) {
+        /// <summary>
+        /// Begins a new sprite. Animations and frames and be added with AddFrames() and AddAnimations().
+        /// FinishSprite() must be called when frames and animations are complete.
+        /// </summary>
+        /// <param name="spritesheet">The spritesheet which contains the frames and animations for this sprite.</param>
+        /// <param name="frameWidth">The width of the frames in the spritesheet.</param>
+        /// <param name="frameHeight">The height of the frames in the spritesheet.</param>
+        /// <param name="directions">The number of directions for this sprite.</param>
+        /// <param name="promotionLevel">The promotion level of the sprite, if it needs to be disambiguated for a player character. Usually 0.</param>
+        public void StartSprite(Spritesheet spritesheet, int frameWidth, int frameHeight, SpriteDirectionCountType directions, int promotionLevel) {
+            StartSprite(new SpriteHeaderEntry() {
+                SpriteID       = spritesheet.SpriteID,
+                Width          = frameWidth,
+                Height         = frameHeight,
+                Directions     = directions,
+                VerticalOffset = spritesheet.VerticalOffset,
+                Unknown0x08    = spritesheet.Unknown0x08,
+                CollisionSize  = spritesheet.CollisionSize,
+                PromotionLevel = promotionLevel,
+                Scale          = spritesheet.Scale,
+            });
+        }
+
+        /// <summary>
+        /// Begins a new sprite. Animations and frames and be added with AddFrames() and AddAnimations().
+        /// FinishSprite() must be called when frames and animations are complete.
+        /// </summary>
+        /// <param name="header">Header information for the sprite.</param>
+        public void StartSprite(SpriteHeaderEntry header) {
             if (_currentSpriteIndex < _spriteCount)
                 FinishSprite();
 
@@ -120,7 +148,7 @@ namespace SF3.CHR {
             var spriteFrameGroup    = (spritesheet?.FrameGroupsByName?.TryGetValue(frameGroupName, out var spriteFrameGroupOut) == true) ? spriteFrameGroupOut : null;
             var spriteFrameDef      = (spriteFrameGroup?.Frames?.TryGetValue(direction, out var spriteFrameOut) == true) ? spriteFrameOut : null;
             var aniFrameKey         = $"{spritesheetImageKey} {frameGroupName} ({direction})";
-            var frameKey            = $"{spritesheetImageKey} {aniFrameKey}" + (duplicateKey == null ? "" : $" ({duplicateKey})");
+            var frameKey            = $"{spritesheetImageKey} | {aniFrameKey}" + (duplicateKey == null ? "" : $" ({duplicateKey})");
 
             // Load the spritesheet if it wasn't loaded already.
             var spritesheetBitmap = GetSpritesheetBitmap(spriteName, frameWidth, frameHeight);
@@ -204,6 +232,30 @@ namespace SF3.CHR {
         /// <param name="defaultHeight">The height of the sprite if not specified by 'animations'.</param>
         /// <param name="defaultDirections">The directions of the sprite if not specified by 'animations'.</param>
         public void AddAnimations(AnimationsForSpritesheetAndDirection animations, string defaultSpriteName, int defaultWidth, int defaultHeight, SpriteDirectionCountType defaultDirections) {
+            ForEachAnimation(
+                animations, defaultSpriteName, defaultWidth, defaultHeight, defaultDirections,
+                (animation, animationName, spriteName, frameWidth, frameHeight, directions) => AddAnimation(animation, animationName, spriteName, frameWidth, frameHeight, directions)
+            );
+        }
+
+        /// <summary>
+        /// Adds any frames in from a set of animations that are missing in the FrameTable.
+        /// </summary>
+        /// <param name="animations">The set of animations for a specific spritesheet and directions.</param>
+        /// <param name="defaultSpriteName">The name of the sprite if 'animations' does not specify one.</param>
+        /// <param name="defaultWidth">The width of the sprite if not specified by 'animations'.</param>
+        /// <param name="defaultHeight">The height of the sprite if not specified by 'animations'.</param>
+        /// <param name="defaultDirections">The directions of the sprite if not specified by 'animations'.</param>
+        public void AddMissingFrames(AnimationsForSpritesheetAndDirection animations, string defaultSpriteName, int defaultWidth, int defaultHeight, SpriteDirectionCountType defaultDirections) {
+            ForEachAnimation(
+                animations, defaultSpriteName, defaultWidth, defaultHeight, defaultDirections,
+                (animation, animationName, spriteName, frameWidth, frameHeight, directions) => AddMissingFrames(animation, animationName, spriteName, frameWidth, frameHeight, directions)
+            );
+        }
+
+        public void ForEachAnimation(AnimationsForSpritesheetAndDirection animations, string defaultSpriteName, int defaultWidth, int defaultHeight, SpriteDirectionCountType defaultDirections,
+            Action<Animation, string, string, int, int, SpriteDirectionCountType> action
+        ) {
             if (animations.Animations == null)
                 return;
 
@@ -220,7 +272,7 @@ namespace SF3.CHR {
             // Write all individual animations.
             foreach (var animationName in animations.Animations) {
                 var spriteAnimation = (animationName != null && spriteAnimationSet?.AnimationsByName?.TryGetValue(animationName, out var animOut) == true) ? animOut : null;
-                AddAnimation(spriteAnimation, animationName, spriteName, frameWidth, frameHeight, directions);
+                action(spriteAnimation, animationName, spriteName, frameWidth, frameHeight, directions);
             }
         }
 
@@ -234,9 +286,10 @@ namespace SF3.CHR {
         /// <param name="frameHeight">The height of frames in the spritesheet.</param>
         /// <param name="directions">The initial number of directional frames used for 'Frame' commands.</param>
         public void AddAnimation(Animation animation, string animationName, string spriteName, int frameWidth, int frameHeight, SpriteDirectionCountType directions) {
-            var aniFrameKeyPrefix = $"{spriteName} ({Spritesheet.DimensionsToKey(frameWidth, frameHeight)})";
-            var spriteInfo = GetSpriteInfo(_currentSpriteIndex);
+            var aniFrameKeyPrefix  = $"{spriteName} ({Spritesheet.DimensionsToKey(frameWidth, frameHeight)})";
+            var spriteInfo         = GetSpriteInfo(_currentSpriteIndex);
             var spriteAniFrameKeys = spriteInfo.Frames.Select(x => x.AniFrameKey).ToArray();
+            var frameDirections    = CHR_Utils.GetCHR_FrameGroupDirections(directions);
 
             // Write an empty animation entry for deliberately null animations, missing animations, or empty animations.
             if (animation == null || animation.AnimationCommands == null) {
@@ -245,47 +298,28 @@ namespace SF3.CHR {
             }
 
             // Add all commands for the sprite.
-            var currentDirections = directions;
             foreach (var aniCommand in animation.AnimationCommands) {
-                string[] aniFrameKeys = null;
+                var command = (int) aniCommand.Command;
 
                 // The 'SetDirectionCount' command (0xF1) updates the number of frames in our key from now on.
                 if (aniCommand.Command == SpriteAnimationCommandType.SetDirectionCount)
-                    currentDirections = (SpriteDirectionCountType) aniCommand.Parameter;
+                    frameDirections = CHR_Utils.GetCHR_FrameGroupDirections((SpriteDirectionCountType) aniCommand.Parameter);
                 // If this is a frame, we need to generate a key that will be used to locate a FrameID later.
                 else if (aniCommand.Command == SpriteAnimationCommandType.Frame) {
-                    var frameDirections = CHR_Utils.GetCHR_FrameGroupDirections(currentDirections);
-
-                    // The 'FrameGroup' command assumes the standard directions for this frame.
-                    if (aniCommand.FrameGroup != null) {
-                        aniFrameKeys = frameDirections
-                            .Select(x => $"{aniFrameKeyPrefix} {aniCommand.FrameGroup} ({x.ToString()})")
-                            .ToArray();
+                    // Get the FrameKey and AniFrameKey for each direction in this animation frame command.
+                    var frameInfos = GetAnimationFrameCommandFrameInfos(aniCommand, frameDirections, aniFrameKeyPrefix);
+                    if (frameInfos != null) {
+                        var frameId = spriteAniFrameKeys.GetFirstIndexOf(frameInfos.Select(x => x?.AniFrameKey).ToArray(), allowExceedingSize: true);
+                        if (frameId >= 0)
+                            command = frameId;
+                        else
+                            ; // TODO: what to do here???
                     }
-                    // The 'Frames' command has manually specified FrameGroup + Direction pairs.
-                    else if (aniCommand.FramesByDirection != null) {
-                        aniFrameKeys = frameDirections
-                            .ToDictionary(x => x, x => aniCommand.FramesByDirection.TryGetValue(x, out var f) ? f : null)
-                            .Select(x => (x.Value == null) ? null : $"{aniFrameKeyPrefix} {x.Value.FrameGroup} ({x.Value.Direction.ToString()})")
-                            .ToArray();
-                    }
-                    // If nothing is there, something is wrong.
                     else
-                        // TODO: what to do if we reach this point?
-                        ;
+                        ; // TODO: what to do here???
                 }
 
-                // Figure out the command. For frames, figure out the FrameID.
-                var command = (int) aniCommand.Command;
-                if (aniCommand.Command == SpriteAnimationCommandType.Frame) {
-                    var frameId = spriteAniFrameKeys.GetFirstIndexOf(aniFrameKeys, allowExceedingSize: true);
-                    if (frameId >= 0)
-                        command = frameId;
-                    else
-                        // TODO: what to do here???
-                        ;
-                }
-
+                // Add the command to the command table.
                 if (!spriteInfo.AnimationsByIndex.ContainsKey(spriteInfo.CurrentAnimationIndex))
                     spriteInfo.AnimationsByIndex.Add(spriteInfo.CurrentAnimationIndex, new AnimationInfo());
                 spriteInfo.AnimationsByIndex[spriteInfo.CurrentAnimationIndex].Commands.Add(new AnimationCommandInfo() {
@@ -295,6 +329,114 @@ namespace SF3.CHR {
             }
 
             spriteInfo.CurrentAnimationIndex++;
+        }
+
+        /// <summary>
+        /// Adds any frames in an Animation that are missing in the FrameTable.
+        /// </summary>
+        /// <param name="animation">Animation definition in the SpriteDef.</param>
+        /// <param name="animationName">Name of the animation.</param>
+        /// <param name="spriteName">The name of the sprite to which 'animation' belongs.</param>
+        /// <param name="frameWidth">The width of frames in the spritesheet.</param>
+        /// <param name="frameHeight">The height of frames in the spritesheet.</param>
+        /// <param name="directions">The initial number of directional frames used for 'Frame' commands.</param>
+        public void AddMissingFrames(Animation animation, string animationName, string spriteName, int frameWidth, int frameHeight, SpriteDirectionCountType directions) {
+            if (animation == null)
+                return;
+
+            // There's a bug that appears in sprites with multiple missing animation frames: Unless the frames are added
+            // in order of least missing frames to most missing frames, the frames will be added multiple times, and the
+            // missing frames will suddenly be filled. This bug triggers with Rainblood Rook (Capeless), whose animation
+            // isn't properly identified because the frames that *should* be missing *aren't*.
+
+            var aniFrameKeyPrefix   = $"{spriteName} ({Spritesheet.DimensionsToKey(frameWidth, frameHeight)})";
+            var spriteInfo          = GetSpriteInfo(_currentSpriteIndex);
+            var spriteAniFrameKeys  = spriteInfo.Frames.Select(x => x.AniFrameKey).ToArray();
+            var frameDirections     = CHR_Utils.GetCHR_FrameGroupDirections(directions);
+
+            // Only loaded if needed for adding frames.
+            Sprites.SpriteDef spriteDef = null;
+            Spritesheet spritesheet     = null;
+            string spritesheetKey       = null;
+            string spritesheetImageKey  = null;
+            Bitmap spritesheetImage     = null;
+
+            // Add all commands for the sprite.
+            foreach (var aniCommand in animation.AnimationCommands) {
+                // The 'SetDirectionCount' command (0xF1) updates the number of frames in our key from now on.
+                if (aniCommand.Command == SpriteAnimationCommandType.SetDirectionCount)
+                    frameDirections = CHR_Utils.GetCHR_FrameGroupDirections((SpriteDirectionCountType) aniCommand.Parameter);
+
+                // The only other command we caer about in this loop is for frames.
+                if (aniCommand.Command != SpriteAnimationCommandType.Frame)
+                    continue;
+
+                // Get the FrameKey and AniFrameKey for each direction in this animation frame command.
+                var aniFrameGroupsAndKeys = GetAnimationFrameCommandFrameInfos(aniCommand, frameDirections, aniFrameKeyPrefix);
+                if (aniFrameGroupsAndKeys == null)
+                    continue;
+
+                // If the frames could be found, there's nothing to add.
+                if (spriteAniFrameKeys.GetFirstIndexOf(aniFrameGroupsAndKeys.Select(x => x.AniFrameKey).ToArray(), allowExceedingSize: true) >= 0)
+                    continue;
+
+                // Load the spritesheet if it wasn't loaded before.
+                if (spritesheetKey == null) {
+                    spriteDef           = SpriteUtils.GetSpriteDef(spriteName);
+                    spritesheetKey      = Spritesheet.DimensionsToKey(frameWidth, frameHeight);
+                    spritesheet         = (spriteDef?.Spritesheets?.TryGetValue(spritesheetKey, out var spritesheetOut) == true) ? spritesheetOut : null;
+                    spritesheetImageKey = $"{spriteName} ({spritesheetKey})";
+                    spritesheetImage    = GetSpritesheetBitmap(spriteName, frameWidth, frameHeight);
+                }
+
+                // Add all frames required for this animation frame.
+                for (int i = 0; i < frameDirections.Length; i++) {
+                    var frameGroupName = aniFrameGroupsAndKeys[i].FrameGroup;
+                    var aniFrameKey    = aniFrameGroupsAndKeys[i].AniFrameKey;
+
+                    // Skip missing frames.
+                    if (frameGroupName == null || aniFrameKey == null)
+                        continue;
+
+                    var frameKey   = $"{spritesheetImageKey} | {aniFrameKey}";
+                    var frameGroup = (spritesheet?.FrameGroupsByName?.TryGetValue(frameGroupName, out var frameGroupOut) == true) ? frameGroupOut : null;
+                    var frame      = (frameGroup?.Frames?.TryGetValue(frameDirections[i], out var frameOut) == true) ? frameOut : null;
+
+                    AddFrame(spritesheetImage, frameWidth, frameHeight, frame?.SpritesheetX ?? -1, frame?.SpritesheetY ?? -1, frameKey, aniFrameKey);
+                }
+
+                // Update 'spriteAniFrameKeys' with the new frames.
+                spriteAniFrameKeys = spriteInfo.Frames.Select(x => x.AniFrameKey).ToArray();
+            }
+        }
+
+        private class AnimationFrameCommandFrameInfo {
+            public string FrameGroup;
+            public string AniFrameKey;
+        }
+
+        private AnimationFrameCommandFrameInfo[] GetAnimationFrameCommandFrameInfos(AnimationCommand aniCommand, SpriteFrameDirection[] frameDirections, string aniFrameKeyPrefix) {
+            if (aniCommand.FrameGroup != null) {
+                return frameDirections
+                    .Select(x => new AnimationFrameCommandFrameInfo() {
+                        FrameGroup  = aniCommand.FrameGroup,
+                        AniFrameKey = $"{aniFrameKeyPrefix} {aniCommand.FrameGroup} ({x.ToString()})"
+                    })
+                    .ToArray();
+            }
+            // The 'Frames' command has manually specified FrameGroup + Direction pairs.
+            else if (aniCommand.FramesByDirection != null) {
+                return frameDirections
+                    .ToDictionary(x => x, x => aniCommand.FramesByDirection.TryGetValue(x, out var f) ? f : null)
+                    .Select(x => (x.Value == null) ? null : new AnimationFrameCommandFrameInfo() {
+                        FrameGroup  = x.Value.FrameGroup,
+                        AniFrameKey = $"{aniFrameKeyPrefix} {x.Value.FrameGroup} ({x.Value.Direction.ToString()})"
+                    })
+                    .ToArray();
+            }
+
+            // If nothing is there, something is wrong.
+            return null;
         }
 
         /// <summary>
@@ -472,7 +614,7 @@ namespace SF3.CHR {
         private int _spriteCount = 0;
 
         // Basic container for information that will need to be written via CHR_Writer.WriteHeaderEntry()
-        private class SpriteHeaderEntry {
+        public class SpriteHeaderEntry {
             public int SpriteID;
             public int Width;
             public int Height;
