@@ -190,77 +190,100 @@ namespace SF3.CHR {
             if (sprite.AnimationsForSpritesheetAndDirections == null)
                 return;
 
-            // Write all individual animations.
-            var spriteInfo = GetSpriteInfo(_currentSpriteIndex);
-            var spriteFrameKeys = spriteInfo.Frames.Select(x => x.AniFrameKey).ToArray();
-
+            // Write all animations for each particular sprite with a set of directions.
             foreach (var animations in sprite.AnimationsForSpritesheetAndDirections) {
-                var spriteName = animations.SpriteName ?? sprite.SpriteName;
-                var spriteDef = SpriteUtils.GetSpriteDef(spriteName);
+                if (animations.Animations == null)
+                    continue;
 
-                var directions = animations.Directions ?? sprite.Directions;
-                var spritesheetKey = Spritesheet.DimensionsToKey(
-                    animations.Width ?? sprite.Width, animations.Height ?? sprite.Height);
-                var frameKeyPrefix = $"{spriteName} ({spritesheetKey})";
-                var spritesheetDef = (spriteDef?.Spritesheets?.TryGetValue(spritesheetKey, out var spritesheetOut) == true) ? spritesheetOut : null;
-                var spriteAnimsByDirection = (spritesheetDef?.AnimationSetsByDirections?.TryGetValue(directions, out var sadOut) == true) ? sadOut : null;
+                var spriteName         = animations.SpriteName ?? sprite.SpriteName;
+                var directions         = animations.Directions ?? sprite.Directions;
+                var frameWidth         = animations.Width ?? sprite.Width;
+                var frameHeight        = animations.Height ?? sprite.Height;
+                var spritesheetKey     = Spritesheet.DimensionsToKey(frameWidth, frameHeight);
 
-                foreach (var animationName in animations.Animations ?? new string[0]) {
-                    var spriteAnimation = (animationName != null && spriteAnimsByDirection?.AnimationsByName?.TryGetValue(animationName, out var animOut) == true) ? animOut : null;
-                    if (spriteAnimation != null) {
-                        var currentDirections = directions;
-                        foreach (var aniCommand in spriteAnimation.AnimationCommands ?? new AnimationCommand[0]) {
-                            string[] frameKeys = null;
+                var spriteDef          = SpriteUtils.GetSpriteDef(spriteName);
+                var spritesheetDef     = (spriteDef?.Spritesheets?.TryGetValue(spritesheetKey, out var spritesheetOut) == true) ? spritesheetOut : null;
+                var spriteAnimationSet = (spritesheetDef?.AnimationSetsByDirections?.TryGetValue(directions, out var sadOut) == true) ? sadOut : null;
 
-                            // The 'SetDirectionCount' command (0xF1) updates the number of frames in our key from now on.
-                            if (aniCommand.Command == SpriteAnimationCommandType.SetDirectionCount)
-                                currentDirections = (SpriteDirectionCountType) aniCommand.Parameter;
-                            // If this is a frame, we need to generate a key that will be used to locate a FrameID later.
-                            else if (aniCommand.Command == SpriteAnimationCommandType.Frame) {
-                                var frameDirections = CHR_Utils.GetCHR_FrameGroupDirections(currentDirections);
-
-                                // The 'FrameGroup' command assumes the standard directions for this frame.
-                                if (aniCommand.FrameGroup != null) {
-                                    frameKeys = frameDirections
-                                        .Select(x => $"{frameKeyPrefix} {aniCommand.FrameGroup} ({x.ToString()})")
-                                        .ToArray();
-                                }
-                                // The 'Frames' command has manually specified FrameGroup + Direction pairs.
-                                else if (aniCommand.FramesByDirection != null) {
-                                    frameKeys = frameDirections
-                                        .ToDictionary(x => x, x => aniCommand.FramesByDirection.TryGetValue(x, out var f) ? f : null)
-                                        .Select(x => (x.Value == null) ? null : $"{frameKeyPrefix} {x.Value.FrameGroup} ({x.Value.Direction.ToString()})")
-                                        .ToArray();
-                                }
-                                // If nothing is there, something is wrong.
-                                else
-                                    // TODO: what to do if we reach this point?
-                                    ;
-                            }
-
-                            // Figure out the command. For frames, figure out the FrameID.
-                            var command = (int) aniCommand.Command;
-                            if (aniCommand.Command == SpriteAnimationCommandType.Frame) {
-                                var frameId = spriteFrameKeys.GetFirstIndexOf(frameKeys, allowExceedingSize: true);
-                                if (frameId >= 0)
-                                    command = frameId;
-                                else
-                                    // TODO: what to do here???
-                                    ;
-                            }
-
-                            if (!spriteInfo.AnimationsByIndex.ContainsKey(spriteInfo.CurrentAnimationIndex))
-                                spriteInfo.AnimationsByIndex.Add(spriteInfo.CurrentAnimationIndex, new AnimationInfo());
-                            spriteInfo.AnimationsByIndex[spriteInfo.CurrentAnimationIndex].Commands.Add(new AnimationCommandInfo() {
-                                Command = command,
-                                Parameter = aniCommand.Parameter
-                            });
-                        }
-                    }
-
-                    spriteInfo.CurrentAnimationIndex++;
+                // Write all individual animations.
+                foreach (var animationName in animations.Animations) {
+                    var spriteAnimation = (animationName != null && spriteAnimationSet?.AnimationsByName?.TryGetValue(animationName, out var animOut) == true) ? animOut : null;
+                    AddAnimation(spriteAnimation, animationName, spriteName, frameWidth, frameHeight, directions);
                 }
             }
+        }
+
+        /// <summary>
+        /// Adds an animation from a sprite, automatically matching frames.
+        /// </summary>
+        /// <param name="animation">Animation definition in the SpriteDef.</param>
+        /// <param name="animationName">Name of the animation.</param>
+        /// <param name="spriteName">The name of the sprite to which 'animation' belongs.</param>
+        /// <param name="frameWidth">The width of frames in the spritesheet.</param>
+        /// <param name="frameHeight">The height of frames in the spritesheet.</param>
+        /// <param name="directions">The initial number of directional frames used for 'Frame' commands.</param>
+        public void AddAnimation(Animation animation, string animationName, string spriteName, int frameWidth, int frameHeight, SpriteDirectionCountType directions) {
+            var aniFrameKeyPrefix = $"{spriteName} ({Spritesheet.DimensionsToKey(frameWidth, frameHeight)})";
+            var spriteInfo = GetSpriteInfo(_currentSpriteIndex);
+            var spriteAniFrameKeys = spriteInfo.Frames.Select(x => x.AniFrameKey).ToArray();
+
+            // Write an empty animation entry for deliberately null animations, missing animations, or empty animations.
+            if (animation == null || animation.AnimationCommands == null) {
+                spriteInfo.CurrentAnimationIndex++;
+                return;
+            }
+
+            // Add all commands for the sprite.
+            var currentDirections = directions;
+            foreach (var aniCommand in animation.AnimationCommands) {
+                string[] aniFrameKeys = null;
+
+                // The 'SetDirectionCount' command (0xF1) updates the number of frames in our key from now on.
+                if (aniCommand.Command == SpriteAnimationCommandType.SetDirectionCount)
+                    currentDirections = (SpriteDirectionCountType) aniCommand.Parameter;
+                // If this is a frame, we need to generate a key that will be used to locate a FrameID later.
+                else if (aniCommand.Command == SpriteAnimationCommandType.Frame) {
+                    var frameDirections = CHR_Utils.GetCHR_FrameGroupDirections(currentDirections);
+
+                    // The 'FrameGroup' command assumes the standard directions for this frame.
+                    if (aniCommand.FrameGroup != null) {
+                        aniFrameKeys = frameDirections
+                            .Select(x => $"{aniFrameKeyPrefix} {aniCommand.FrameGroup} ({x.ToString()})")
+                            .ToArray();
+                    }
+                    // The 'Frames' command has manually specified FrameGroup + Direction pairs.
+                    else if (aniCommand.FramesByDirection != null) {
+                        aniFrameKeys = frameDirections
+                            .ToDictionary(x => x, x => aniCommand.FramesByDirection.TryGetValue(x, out var f) ? f : null)
+                            .Select(x => (x.Value == null) ? null : $"{aniFrameKeyPrefix} {x.Value.FrameGroup} ({x.Value.Direction.ToString()})")
+                            .ToArray();
+                    }
+                    // If nothing is there, something is wrong.
+                    else
+                        // TODO: what to do if we reach this point?
+                        ;
+                }
+
+                // Figure out the command. For frames, figure out the FrameID.
+                var command = (int) aniCommand.Command;
+                if (aniCommand.Command == SpriteAnimationCommandType.Frame) {
+                    var frameId = spriteAniFrameKeys.GetFirstIndexOf(aniFrameKeys, allowExceedingSize: true);
+                    if (frameId >= 0)
+                        command = frameId;
+                    else
+                        // TODO: what to do here???
+                        ;
+                }
+
+                if (!spriteInfo.AnimationsByIndex.ContainsKey(spriteInfo.CurrentAnimationIndex))
+                    spriteInfo.AnimationsByIndex.Add(spriteInfo.CurrentAnimationIndex, new AnimationInfo());
+                spriteInfo.AnimationsByIndex[spriteInfo.CurrentAnimationIndex].Commands.Add(new AnimationCommandInfo() {
+                    Command = command,
+                    Parameter = aniCommand.Parameter
+                });
+            }
+
+            spriteInfo.CurrentAnimationIndex++;
         }
 
         /// <summary>
