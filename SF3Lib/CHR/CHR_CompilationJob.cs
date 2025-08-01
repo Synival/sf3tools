@@ -95,21 +95,14 @@ namespace SF3.CHR {
             var spriteDef = SpriteUtils.GetSpriteDef(spriteName);
 
             // Attempt to load the spritesheet referenced by the spritesheetDef.
-            // Don't bothe if the def couldn't be found.
+            // Don't bother if the def couldn't be found.
             var spritesheetKey      = Spritesheet.DimensionsToKey(frameWidth, frameHeight);
             var spritesheetImageKey = $"{spriteName} ({spritesheetKey})";
             var spritesheetDef      = (spriteDef?.Spritesheets?.TryGetValue(spritesheetKey, out var spritesheetOut) == true) ? spritesheetOut : null;
             var spriteFrameGroupDef = (spritesheetDef?.FrameGroupsByName?.TryGetValue(frameGroup.Name, out var spriteFrameGroupOut) == true) ? spriteFrameGroupOut : null;
 
-            if (spritesheetDef != null && !_spritesheetImageDict.ContainsKey(spritesheetImageKey)) {
-                Bitmap bitmap = null;
-                try {
-                    var bitmapPath = SpriteUtils.SpritesheetImagePath($"{SpriteUtils.FilesystemName(spritesheetImageKey)}.png");
-                    bitmap = (Bitmap) Image.FromFile(bitmapPath);
-                }
-                catch { }
-                _spritesheetImageDict.Add(spritesheetImageKey, bitmap);
-            }
+            // Load the spritesheet if it wasn't loaded already.
+            var spritesheetBitmap = LoadSpritesheet(spriteName, frameWidth, frameHeight);
 
             var frames = frameGroup.Frames
                 ?? CHR_Utils.GetCHR_FrameGroupDirections(spriteInfo.Header.Directions)
@@ -125,7 +118,7 @@ namespace SF3.CHR {
                 // If they're invalid, simply display a red image.
                 if (!_spritesheetFramesByFrameKey.ContainsKey(frameKey)) {
                     _spritesheetFramesByFrameKey.Add(frameKey, new SpritesheetFrame() {
-                        SpritesheetBitmap = _spritesheetImageDict.TryGetValue(spritesheetImageKey, out var bmpOut) ? bmpOut : null,
+                        SpritesheetBitmap = spritesheetBitmap,
                         X      = spriteFrameDef?.SpritesheetX ?? -1,
                         Y      = spriteFrameDef?.SpritesheetY ?? -1,
                         Width  = frameWidth,
@@ -364,6 +357,26 @@ namespace SF3.CHR {
             if (_spriteInfoBySpriteIndex.TryGetValue(spriteIndex, out var info))
                 return info;
             return _spriteInfoBySpriteIndex[spriteIndex] = new SpriteInfo();
+        }
+
+        private Bitmap LoadSpritesheet(string spriteName, int width, int height) {
+            var spritesheetKey = Spritesheet.DimensionsToKey(width, height);
+            var spritesheetImageKey = $"{spriteName} ({spritesheetKey})";
+
+            if (_spritesheetImageDict.TryGetValue(spritesheetImageKey, out var bitmap))
+                return bitmap;
+
+            try {
+                var bitmapPath = SpriteUtils.SpritesheetImagePath($"{SpriteUtils.FilesystemName(spritesheetImageKey)}.png");
+                bitmap = (Bitmap) Image.FromFile(bitmapPath);
+            }
+            catch {
+                // TODO: log an error
+                bitmap = null;
+            }
+
+            _spritesheetImageDict.Add(spritesheetImageKey, bitmap);
+            return bitmap;
         }
 
         // The current sprite being built
