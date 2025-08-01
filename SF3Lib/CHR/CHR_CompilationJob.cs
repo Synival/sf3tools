@@ -378,7 +378,7 @@ namespace SF3.CHR {
                     continue;
 
                 // If the frames could be found, there's nothing to add.
-                if (spriteAniFrameKeys.GetFirstIndexOf(aniFrameGroupsAndKeys.Select(x => x.AniFrameKey).ToArray(), allowExceedingSize: true) >= 0)
+                if (spriteAniFrameKeys.GetFirstIndexOf(aniFrameGroupsAndKeys.Select(x => x?.AniFrameKey).ToArray(), allowExceedingSize: true) >= 0)
                     continue;
 
                 // Load the spritesheet if it wasn't loaded before.
@@ -392,16 +392,16 @@ namespace SF3.CHR {
 
                 // Add all frames required for this animation frame.
                 for (int i = 0; i < frameDirections.Length; i++) {
-                    var frameGroupName = aniFrameGroupsAndKeys[i].FrameGroup;
-                    var aniFrameKey    = aniFrameGroupsAndKeys[i].AniFrameKey;
-
                     // Skip missing frames.
-                    if (frameGroupName == null || aniFrameKey == null)
+                    var frameGroupAndKey = aniFrameGroupsAndKeys[i];
+                    if (frameGroupAndKey == null || frameGroupAndKey.FrameGroup == null || frameGroupAndKey.AniFrameKey == null)
                         continue;
 
-                    var frameKey   = $"{spritesheetImageKey} | {aniFrameKey}";
-                    var frameGroup = (spritesheet?.FrameGroupsByName?.TryGetValue(frameGroupName, out var frameGroupOut) == true) ? frameGroupOut : null;
-                    var frame      = (frameGroup?.Frames?.TryGetValue(frameDirections[i], out var frameOut) == true) ? frameOut : null;
+                    var frameGroupName = frameGroupAndKey.FrameGroup;
+                    var aniFrameKey    = frameGroupAndKey.AniFrameKey;
+                    var frameKey       = $"{spritesheetImageKey} | {aniFrameKey}";
+                    var frameGroup     = (spritesheet?.FrameGroupsByName?.TryGetValue(frameGroupName, out var frameGroupOut) == true) ? frameGroupOut : null;
+                    var frame          = (frameGroup?.Frames?.TryGetValue(frameDirections[i], out var frameOut) == true) ? frameOut : null;
 
                     AddFrame(spritesheetImage, frameWidth, frameHeight, frame?.SpritesheetX ?? -1, frame?.SpritesheetY ?? -1, frameKey, aniFrameKey);
                 }

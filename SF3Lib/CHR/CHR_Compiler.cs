@@ -38,8 +38,9 @@ namespace SF3.CHR {
             foreach (var sprite in chrDef.Sprites) {
                 job.StartSprite(sprite);
 
-                job.AddFrames(sprite);
-                if (AddMissingAnimationFrames)
+                if (!OptimizeFrames)
+                    job.AddFrames(sprite);
+                if (OptimizeFrames || AddMissingAnimationFrames)
                     job.AddMissingFrames(sprite);
                 job.AddAnimations(sprite);
 
@@ -49,6 +50,11 @@ namespace SF3.CHR {
             var bytesWritten = job.Write(outputStream, chrDef.WriteFrameImagesBeforeTables == true, chrDef.JunkAfterFrameTables);
             return bytesWritten;
         }
+
+        /// <summary>
+        /// When true, the existing frames will be ignored and frames from animations will be added in an optimized order instead.
+        /// </summary>
+        public bool OptimizeFrames { get; set; } = false;
 
         /// <summary>
         /// When true, compiling a sprite will automatically add frames missing for each animation.

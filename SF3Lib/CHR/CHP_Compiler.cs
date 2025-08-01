@@ -98,6 +98,14 @@ namespace SF3.CHR {
         }
 
         /// <summary>
+        /// When true, the existing frames will be ignored and frames from animations will be added in an optimized order instead.
+        /// </summary>
+        public bool OptimizeFrames {
+            get => _chrCompiler.OptimizeFrames;
+            set => _chrCompiler.OptimizeFrames = value;
+        }
+
+        /// <summary>
         /// When true, compiling a sprite will automatically add frames missing for each animation.
         /// </summary>
         public bool AddMissingAnimationFrames {
