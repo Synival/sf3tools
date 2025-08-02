@@ -64,9 +64,10 @@ namespace SpriteCHR_Builder {
                         }
 
                         // Add all incomplete animations as individual sprites. (If they were in the same sprite, the missing frames would be replaced with other frames!)
-                        foreach (var anim in incompleteAnimations) {
+                        foreach (var animation in incompleteAnimations) {
                             chrJob.StartSprite(spritesheetDef, spritesheetSize.Width, spritesheetSize.Height, directions, 0);
-                            chrJob.AddAnimations(anim, spriteDef.Name, spritesheetSize.Width, spritesheetSize.Height, directions);
+                            chrJob.AddMissingFrames(animation, spriteDef.Name, spritesheetSize.Width, spritesheetSize.Height, directions);
+                            chrJob.AddAnimations(animation, spriteDef.Name, spritesheetSize.Width, spritesheetSize.Height, directions);
                             chrJob.FinishSprite();
                         }
                     }
