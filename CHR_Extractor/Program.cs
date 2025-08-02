@@ -200,11 +200,11 @@ namespace CHR_Extractor {
                             totalFileCount++;
                             if (fileIsDifferent) {
                                 var origChrs = isChr
-                                    ? [(CHR_File) deserializedFile]
-                                    : ((CHP_File) deserializedFile).CHR_EntriesByOffset.Values.ToArray();
-                                var newChrs = isChr
                                     ? [(CHR_File) chrChpFile]
                                     : ((CHP_File) chrChpFile).CHR_EntriesByOffset.Values.ToArray();
+                                var newChrs = isChr
+                                    ? [(CHR_File) deserializedFile]
+                                    : ((CHP_File) deserializedFile).CHR_EntriesByOffset.Values.ToArray();
 
                                 if (origChrs.Length != newChrs.Length)
                                     Console.WriteLine($"    Wrong number of CHRs: {origChrs.Length} => {newChrs.Length}");
@@ -223,6 +223,17 @@ namespace CHR_Extractor {
                                                 var origSprite = origSprites[j];
                                                 var newSprite  = newSprites[j];
 
+                                                // Animation names should check out.
+                                                if (origSprite.AnimationTable.Length == newSprite.AnimationTable.Length) {
+                                                    for (int k = 0; k < newSprite.AnimationTable.Length; k++) {
+                                                        var origAnim = origSprite.AnimationTable[k];
+                                                        var newAnim  = newSprite.AnimationTable[k];
+                                                        if (origAnim.AnimationName != newAnim.AnimationName)
+                                                            Console.WriteLine($"    [{i:X2}, {origSprite.SpriteName}, Animation{k:D2}]: Animation changed: {origAnim.AnimationName} => {newAnim.AnimationName}");
+                                                    }
+                                                }
+
+                                                // Report differences in tables in general.
                                                 ITable[] GetTables(Sprite sprite) {
                                                     var tables = new List<ITable>();
                                                     tables.AddRange(sprite.AnimationCommandTablesByIndex.Select(x => x.Value).ToList());
