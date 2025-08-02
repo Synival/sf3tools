@@ -28,7 +28,7 @@ namespace DFRTool {
             "Apply Options:\n" +
             "  -i, --to-input            apply changes to the input .BIN file\n" +
             "\n" +
-            "Create Ootions:\n" +
+            "Create Options:\n" +
             "  -c, --combined-appends    merges all appended changes into one row\n" +
             "\n";
 
