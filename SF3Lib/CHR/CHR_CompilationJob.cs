@@ -345,14 +345,10 @@ namespace SF3.CHR {
             if (animation == null)
                 return;
 
-            // Get the list of missing animation frames beforehand so it can be optimized.
+            // Get the list of missing animation frames beforehand so it can be optimized/sorted.
             var missingAnimationFrames = GetMissingAnimationFrames(animation, animationName, spriteName, frameWidth, frameHeight, directions);
-
-            // TODO: actually optimize!
-
-            // Add all commands for the sprite.
-            foreach (var missingAnimationFrame in missingAnimationFrames)
-                AddMissingAnimationFrame(missingAnimationFrame, animationName, spriteName, frameWidth, frameHeight, directions);
+            missingAnimationFrames = SortMissingFrames(missingAnimationFrames);
+            AddMissingAnimationFrames(missingAnimationFrames, animationName, spriteName, frameWidth, frameHeight, directions);
         }
 
         private MissingAnimationFrame[] GetMissingAnimationFrames(Animation animation, string animationName, string spriteName, int frameWidth, int frameHeight, SpriteDirectionCountType directions) {
@@ -392,6 +388,20 @@ namespace SF3.CHR {
             }
 
             return missingAnimationFrames.ToArray();
+        }
+
+        private MissingAnimationFrame[] SortMissingFrames(MissingAnimationFrame[] missingAnimationFrames) {
+            return missingAnimationFrames
+                .Where(x => x != null && x.MissingFrames != null && x.MissingFrames.Length > 0)
+                .OrderBy(x => x.MissingFrames.Length)
+                .ThenBy(x => x.MissingFrames.Count(y => y == null))
+                .ThenBy(x => x.MissingFrames.Where(y => y != null).All(y => y.FrameGroup == x.MissingFrames[0].FrameGroup) ? ("a" + x.MissingFrames[0].FrameGroup) : "b")
+                .ToArray();
+        }
+
+        private void AddMissingAnimationFrames(MissingAnimationFrame[] missingAnimationFrames, string animationName, string spriteName, int frameWidth, int frameHeight, SpriteDirectionCountType directions) {
+            foreach (var missingAnimationFrame in missingAnimationFrames)
+                AddMissingAnimationFrame(missingAnimationFrame, animationName, spriteName, frameWidth, frameHeight, directions);
         }
 
         private void AddMissingAnimationFrame(MissingAnimationFrame missingAnimationFrame, string animationName, string spriteName, int frameWidth, int frameHeight, SpriteDirectionCountType directions) {
