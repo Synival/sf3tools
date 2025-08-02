@@ -205,23 +205,20 @@ namespace SF3.CHR {
         public void AddAnimations(SpriteDef sprite) {
             if (sprite.AnimationsForSpritesheetAndDirections == null)
                 return;
-
-            // Write all animations for each particular sprite with a set of directions.
-            foreach (var animations in sprite.AnimationsForSpritesheetAndDirections)
-                AddAnimations(animations, sprite.SpriteName, sprite.Width, sprite.Height, sprite.Directions);
+            AddAnimations(sprite.AnimationsForSpritesheetAndDirections, sprite.SpriteName, sprite.Width, sprite.Height, sprite.Directions);
         }
 
         /// <summary>
-        /// Adds any frames in from all animations of a CHR sprite missing in the FrameTable.
+        /// Adds animations from a set of animations with varying spritesheets or directions.
         /// </summary>
-        /// <param name="sprite">The CHR SpriteDef that contains the animations to be added.</param>
-        public void AddMissingFrames(SpriteDef sprite) {
-            if (sprite.AnimationsForSpritesheetAndDirections == null)
-                return;
-
-            // Write all missing animation frames for each particular sprite with a set of directions.
-            foreach (var animations in sprite.AnimationsForSpritesheetAndDirections)
-                AddMissingFrames(animations, sprite.SpriteName, sprite.Width, sprite.Height, sprite.Directions);
+        /// <param name="animationsForSpritesheetAndDirections">A collection of animations for one or more spritesheets or directions.</param>
+        /// <param name="defaultSpriteName">The name of the sprite if 'animations' does not specify one.</param>
+        /// <param name="defaultWidth">The width of the sprite if not specified by 'animations'.</param>
+        /// <param name="defaultHeight">The height of the sprite if not specified by 'animations'.</param>
+        /// <param name="defaultDirections">The directions of the sprite if not specified by 'animations'.</param>
+        public void AddAnimations(AnimationsForSpritesheetAndDirection[] animationsForSpritesheetAndDirections, string defaultSpriteName, int defaultWidth, int defaultHeight, SpriteDirectionCountType defaultDirections) {
+            foreach (var animations in animationsForSpritesheetAndDirections)
+                AddAnimations(animations, defaultSpriteName, defaultWidth, defaultHeight, defaultDirections);
         }
 
         /// <summary>
@@ -236,21 +233,6 @@ namespace SF3.CHR {
             ForEachAnimation(
                 animations, defaultSpriteName, defaultWidth, defaultHeight, defaultDirections,
                 (animation, animationName, spriteName, frameWidth, frameHeight, directions) => AddAnimation(animation, animationName, spriteName, frameWidth, frameHeight, directions)
-            );
-        }
-
-        /// <summary>
-        /// Adds any frames in from a set of animations that are missing in the FrameTable.
-        /// </summary>
-        /// <param name="animations">The set of animations for a specific spritesheet and directions.</param>
-        /// <param name="defaultSpriteName">The name of the sprite if 'animations' does not specify one.</param>
-        /// <param name="defaultWidth">The width of the sprite if not specified by 'animations'.</param>
-        /// <param name="defaultHeight">The height of the sprite if not specified by 'animations'.</param>
-        /// <param name="defaultDirections">The directions of the sprite if not specified by 'animations'.</param>
-        public void AddMissingFrames(AnimationsForSpritesheetAndDirection animations, string defaultSpriteName, int defaultWidth, int defaultHeight, SpriteDirectionCountType defaultDirections) {
-            ForEachAnimation(
-                animations, defaultSpriteName, defaultWidth, defaultHeight, defaultDirections,
-                (animation, animationName, spriteName, frameWidth, frameHeight, directions) => AddMissingFrames(animation, animationName, spriteName, frameWidth, frameHeight, directions)
             );
         }
 
@@ -333,9 +315,85 @@ namespace SF3.CHR {
         }
 
         /// <summary>
+        /// Adds any frames in from all animations of a CHR sprite missing in the FrameTable.
+        /// </summary>
+        /// <param name="sprite">The CHR SpriteDef that contains the animations to be added.</param>
+        public void AddMissingFrames(SpriteDef sprite) {
+            if (sprite.AnimationsForSpritesheetAndDirections == null)
+                return;
+            AddMissingFrames(sprite.AnimationsForSpritesheetAndDirections, sprite.SpriteName, sprite.Width, sprite.Height, sprite.Directions);
+        }
+
+        /// <summary>
+        /// Adds any frames in from all animations in a set of animations with one or more spritesheets or directions.
+        /// </summary>
+        /// <param name="animationsForSpritesheetAndDirections">A collection of animations for one or more spritesheets or directions.</param>
+        /// <param name="defaultSpriteName">The name of the sprite if 'animations' does not specify one.</param>
+        /// <param name="defaultWidth">The width of the sprite if not specified by 'animations'.</param>
+        /// <param name="defaultHeight">The height of the sprite if not specified by 'animations'.</param>
+        /// <param name="defaultDirections">The directions of the sprite if not specified by 'animations'.</param>
+        public void AddMissingFrames(AnimationsForSpritesheetAndDirection[] animationsForSpritesheetAndDirections, string defaultSpriteName, int defaultWidth, int defaultHeight, SpriteDirectionCountType defaultDirections) {
+            // Get the list of missing animation frames beforehand so it can be optimized/sorted.
+            var missingAnimationFrames = new List<MissingAnimationFrame>();
+            foreach (var animations in animationsForSpritesheetAndDirections) {
+                ForEachAnimation(
+                    animations, defaultSpriteName, defaultWidth, defaultHeight, defaultDirections,
+                    (animation, animationName, spriteName, frameWidth, frameHeight, directions) =>
+                        missingAnimationFrames.AddRange(GetMissingAnimationFrames(animation, animationName, spriteName, frameWidth, frameHeight, directions))
+                );
+            }
+
+            // Add the frames.
+            AddMissingAnimationFrames(SortMissingFrames(missingAnimationFrames.ToArray()));
+        }
+
+        /// <summary>
+        /// Adds any frames in from a set of animations that are missing in the FrameTable.
+        /// </summary>
+        /// <param name="animations">The set of animations for a specific spritesheet and directions.</param>
+        /// <param name="defaultSpriteName">The name of the sprite if 'animations' does not specify one.</param>
+        /// <param name="defaultWidth">The width of the sprite if not specified by 'animations'.</param>
+        /// <param name="defaultHeight">The height of the sprite if not specified by 'animations'.</param>
+        /// <param name="defaultDirections">The directions of the sprite if not specified by 'animations'.</param>
+        public void AddMissingFrames(AnimationsForSpritesheetAndDirection animations, string defaultSpriteName, int defaultWidth, int defaultHeight, SpriteDirectionCountType defaultDirections) {
+            // Get the list of missing animation frames beforehand so it can be optimized/sorted.
+            var missingAnimationFrames = new List<MissingAnimationFrame>();
+            ForEachAnimation(
+                animations, defaultSpriteName, defaultWidth, defaultHeight, defaultDirections,
+                (animation, animationName, spriteName, frameWidth, frameHeight, directions) =>
+                    missingAnimationFrames.AddRange(GetMissingAnimationFrames(animation, animationName, spriteName, frameWidth, frameHeight, directions))
+            );
+
+            // Add the frames.
+            AddMissingAnimationFrames(SortMissingFrames(missingAnimationFrames.ToArray()));
+        }
+
+        /// <summary>
+        /// Adds any frames in a set of animations that are missing in the FrameTable.
+        /// </summary>
+        /// <param name="animations">A set of animation definitions from a SpriteDef.</param>
+        /// <param name="animationName">Name of the animation.</param>
+        /// <param name="spriteName">The name of the sprite to which 'animation' belongs.</param>
+        /// <param name="frameWidth">The width of frames in the spritesheet.</param>
+        /// <param name="frameHeight">The height of frames in the spritesheet.</param>
+        /// <param name="directions">The initial number of directional frames used for 'Frame' commands.</param>
+        public void AddMissingFrames(Animation[] animations, string animationName, string spriteName, int frameWidth, int frameHeight, SpriteDirectionCountType directions) {
+            if (animations == null || animations.Length == 0)
+                return;
+
+            // Get the list of missing animation frames beforehand so it can be optimized/sorted.
+            var missingAnimationFrames = new List<MissingAnimationFrame>();
+            foreach (var animation in animations)
+                missingAnimationFrames.AddRange(GetMissingAnimationFrames(animation, animationName, spriteName, frameWidth, frameHeight, directions));
+
+            // Add the frames.
+            AddMissingAnimationFrames(SortMissingFrames(missingAnimationFrames.ToArray()));
+        }
+
+        /// <summary>
         /// Adds any frames in an Animation that are missing in the FrameTable.
         /// </summary>
-        /// <param name="animation">Animation definition in the SpriteDef.</param>
+        /// <param name="animation">Animation definition from a SpriteDef.</param>
         /// <param name="animationName">Name of the animation.</param>
         /// <param name="spriteName">The name of the sprite to which 'animation' belongs.</param>
         /// <param name="frameWidth">The width of frames in the spritesheet.</param>
@@ -348,7 +406,7 @@ namespace SF3.CHR {
             // Get the list of missing animation frames beforehand so it can be optimized/sorted.
             var missingAnimationFrames = GetMissingAnimationFrames(animation, animationName, spriteName, frameWidth, frameHeight, directions);
             missingAnimationFrames = SortMissingFrames(missingAnimationFrames);
-            AddMissingAnimationFrames(missingAnimationFrames, animationName, spriteName, frameWidth, frameHeight, directions);
+            AddMissingAnimationFrames(missingAnimationFrames);
         }
 
         private MissingAnimationFrame[] GetMissingAnimationFrames(Animation animation, string animationName, string spriteName, int frameWidth, int frameHeight, SpriteDirectionCountType directions) {
@@ -381,7 +439,7 @@ namespace SF3.CHR {
                     continue;
 
                 // This is confirmed missing; add it to the list.
-                missingAnimationFrames.Add(new MissingAnimationFrame(aniFrameGroupsAndKeys));
+                missingAnimationFrames.Add(new MissingAnimationFrame(aniFrameGroupsAndKeys, spriteName, frameWidth, frameHeight));
 
                 // Include the recently-added frames in 'spriteAniFrameKeys' to prevent redundant missing frames matches.
                 spriteAniFrameKeys = spriteAniFrameKeys.Concat(aniFrameGroupsAndKeys.Where(x => x?.AniFrameKey != null).Select(x => x.AniFrameKey)).ToArray();
@@ -399,12 +457,12 @@ namespace SF3.CHR {
                 .ToArray();
         }
 
-        private void AddMissingAnimationFrames(MissingAnimationFrame[] missingAnimationFrames, string animationName, string spriteName, int frameWidth, int frameHeight, SpriteDirectionCountType directions) {
+        private void AddMissingAnimationFrames(MissingAnimationFrame[] missingAnimationFrames) {
             foreach (var missingAnimationFrame in missingAnimationFrames)
-                AddMissingAnimationFrame(missingAnimationFrame, animationName, spriteName, frameWidth, frameHeight, directions);
+                AddMissingAnimationFrame(missingAnimationFrame);
         }
 
-        private void AddMissingAnimationFrame(MissingAnimationFrame missingAnimationFrame, string animationName, string spriteName, int frameWidth, int frameHeight, SpriteDirectionCountType directions) {
+        private void AddMissingAnimationFrame(MissingAnimationFrame missingAnimationFrame) {
             // Skip simple "do nothing" conditions.
             if (missingAnimationFrame == null || missingAnimationFrame.MissingFrames == null || missingAnimationFrame.MissingFrames.Length == 0)
                 return;
@@ -418,6 +476,9 @@ namespace SF3.CHR {
                 return;
 
             // Load the spritesheet.
+            var spriteName          = missingAnimationFrame.SpriteName;
+            var frameWidth          = missingAnimationFrame.FrameWidth;
+            var frameHeight         = missingAnimationFrame.FrameHeight;
             var spriteDef           = SpriteUtils.GetSpriteDef(spriteName);
             var spritesheetKey      = Spritesheet.DimensionsToKey(frameWidth, frameHeight);
             var spritesheet         = (spriteDef?.Spritesheets?.TryGetValue(spritesheetKey, out var spritesheetOut) == true) ? spritesheetOut : null;
@@ -442,11 +503,17 @@ namespace SF3.CHR {
         }
 
         private class MissingAnimationFrame {
-            public MissingAnimationFrame(AnimationFrameCommandFrameInfo[] missingFrames) {
+            public MissingAnimationFrame(AnimationFrameCommandFrameInfo[] missingFrames, string spriteName, int frameWidth, int frameHeight) {
                 MissingFrames = missingFrames;
+                SpriteName    = spriteName;
+                FrameWidth    = frameWidth;
+                FrameHeight   = frameHeight;
             }
 
             public readonly AnimationFrameCommandFrameInfo[] MissingFrames;
+            public string SpriteName;
+            public int FrameWidth;
+            public int FrameHeight;
         }
 
         private class AnimationFrameCommandFrameInfo {
@@ -470,6 +537,7 @@ namespace SF3.CHR {
                 return frameDirections
                     .ToDictionary(x => x, x => aniCommand.FramesByDirection.TryGetValue(x, out var f) ? f : null)
                     .Select(x => (x.Value == null) ? null : new AnimationFrameCommandFrameInfo() {
+                        Direction   = x.Value.Direction,
                         FrameGroup  = x.Value.FrameGroup,
                         AniFrameKey = $"{aniFrameKeyPrefix} {x.Value.FrameGroup} ({x.Value.Direction.ToString()})"
                     })
