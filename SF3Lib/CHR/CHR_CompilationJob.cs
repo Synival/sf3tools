@@ -552,6 +552,8 @@ namespace SF3.CHR {
         /// Writes the CHR_Def to an output stream.
         /// </summary>
         /// <param name="outputStream">The stream to write the CHR_Def to.</param>
+        /// <param name="writeFrameImagesBeforeTables">When true, frame images are written before the frame table for each individual sprite, like 'XBTL99.CHR'.</param>
+        /// <param name="junkAfterFrameTables">Additional junk data to add after the frame tables. Necessary to reproduce 'XBTL127.CHR'.</param>
         /// <returns>The number of bytes written to 'outputStream'.</returns>
         public int Write(Stream outputStream, bool writeFrameImagesBeforeTables, byte[] junkAfterFrameTables) {
             // If the output stream can't seek, we're need to write to an intermediate in-memory stream.
