@@ -1,15 +1,19 @@
-﻿using CommonLib.Arrays;
+﻿//#define OPTIMIZE
+
+using CommonLib.Arrays;
 using CommonLib.NamedValues;
 using SF3.ByteData;
 using SF3.CHR;
 using SF3.Models.Files;
 using SF3.Models.Files.CHP;
 using SF3.Models.Files.CHR;
-using SF3.Models.Structs.CHR;
-using SF3.Models.Tables;
 using SF3.NamedValues;
 using SF3.Types;
-using SF3.Utils;
+
+#if !OPTIMIZE
+using SF3.Models.Structs.CHR;
+using SF3.Models.Tables;
+#endif
 
 namespace CHR_Extractor {
     public class Program {
@@ -55,6 +59,11 @@ namespace CHR_Extractor {
             var chrCompiler = new CHR_Compiler();
             var chpCompiler = new CHP_Compiler();
 
+#if OPTIMIZE
+            chrCompiler.OptimizeFrames = true;
+            chpCompiler.OptimizeFrames = true;
+#endif
+
             // Open each file.
             foreach (var filesKv in allFiles) {
                 var scenario = filesKv.Key;
@@ -92,10 +101,32 @@ namespace CHR_Extractor {
                             Console.WriteLine($"{fileStr}");
 
                             // Serialize the file. Format depends on CHR vs CHP file.
-                            var serializedDef = isChr
-                                ? ((CHR_File) chrChpFile).ToCHR_Def().ToJSON_String()
-                                : ((CHP_File) chrChpFile).ToCHP_Def().ToJSON_String();
+                            // TODO: This is redundant, but just there for testing. It can be removed later.
+                            var firstChrChpDef = isChr
+                                ? (object) ((CHR_File) chrChpFile).ToCHR_Def()
+                                : (object) ((CHP_File) chrChpFile).ToCHP_Def();
 
+                            string serializedDef;
+                            if (isChr) {
+                                var chrDef = (CHR_Def) firstChrChpDef;
+#if OPTIMIZE
+                                foreach (var sprite in chrDef.Sprites)
+                                    sprite.FrameGroupsForSpritesheets = null;
+#endif
+                                serializedDef = chrDef.ToJSON_String();
+                            }
+                            else {
+                                var chpDef = (CHP_Def) firstChrChpDef;
+#if OPTIMIZE
+                                foreach (var chr in chpDef.CHRsBySector.Values)
+                                    foreach (var sprite in chr.Sprites)
+                                        sprite.FrameGroupsForSpritesheets = null;
+#endif
+                                serializedDef = chpDef.ToJSON_String();
+                            }
+
+                            // Serialize the file. Format depends on CHR vs CHP file.
+                            // TODO: This is redundant, but just there for testing. It can be removed later.
                             var chrChpDef = isChr
                                 ? (object) CHR_Def.FromJSON(serializedDef)
                                 : (object) CHP_Def.FromJSON(serializedDef);
@@ -182,6 +213,7 @@ namespace CHR_Extractor {
                             }
 
                             // Report changes in actual byte data.
+#if !OPTIMIZE
                             var len = Math.Min(origData.Length, newData.Length);
                             int bytesDifferent = 0;
                             for (int i = 0; i < len; i++) {
@@ -195,6 +227,7 @@ namespace CHR_Extractor {
                                     bytesDifferent++;
                                 }
                             }
+#endif
 
                             // Report differences in specific tables that may have actual consequence.
                             totalFileCount++;
@@ -233,6 +266,7 @@ namespace CHR_Extractor {
                                                     }
                                                 }
 
+#if !OPTIMIZE
                                                 // Report differences in tables in general.
                                                 ITable[] GetTables(Sprite sprite) {
                                                     var tables = new List<ITable>();
@@ -262,6 +296,7 @@ namespace CHR_Extractor {
                                                             Console.WriteLine($"    [{i:X2}, {origSprite.SpriteName}, {origTable.Name}]: Table has different data");
                                                     }
                                                 }
+#endif
                                             }
                                         }
                                     }
