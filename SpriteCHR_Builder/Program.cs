@@ -56,10 +56,8 @@ namespace SpriteCHR_Builder {
                         // Add all complete animations.
                         if (completeAnimations.Length > 0) {
                             chrJob.StartSprite(spritesheetDef, spritesheetSize.Width, spritesheetSize.Height, directions, 0);
-                            foreach (var animation in completeAnimations) {
-                                chrJob.AddMissingFrames(animation, spriteDef.Name, spritesheetSize.Width, spritesheetSize.Height, directions);
-                                chrJob.AddAnimations(animation, spriteDef.Name, spritesheetSize.Width, spritesheetSize.Height, directions);
-                            }
+                            chrJob.AddMissingFrames(completeAnimations, spriteDef.Name, spritesheetSize.Width, spritesheetSize.Height, directions);
+                            chrJob.AddAnimations(completeAnimations, spriteDef.Name, spritesheetSize.Width, spritesheetSize.Height, directions);
                             chrJob.FinishSprite();
                         }
 
