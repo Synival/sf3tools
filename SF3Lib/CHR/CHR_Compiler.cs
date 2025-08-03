@@ -3,6 +3,7 @@ using CommonLib.Arrays;
 using CommonLib.NamedValues;
 using SF3.Models.Files.CHR;
 using SF3.Types;
+using SF3.Utils;
 
 namespace SF3.CHR {
     public class CHR_Compiler {
@@ -32,6 +33,12 @@ namespace SF3.CHR {
         /// <param name="outputStream">The stream to which the CHR_Def will be compiled.</param>
         /// <returns>The number of bytes written to 'outputStream'.</returns>
         public int Compile(CHR_Def chrDef, Stream outputStream) {
+            // TODO: don't do it this way, omg :( :( :(
+            if (SpritePath != null)
+                SpriteUtils.SetSpritePath(SpritePath);
+            if (SpritesheetPath != null)
+                SpriteUtils.SetSpritesheetPath(SpritesheetPath);
+
             // Create a compilation unit with all the data that needs to be tracked during the compilation process.
             var job = new CHR_CompilationJob();
 
@@ -60,5 +67,16 @@ namespace SF3.CHR {
         /// When true, compiling a sprite will automatically add frames missing for each animation.
         /// </summary>
         public bool AddMissingAnimationFrames { get; set; } = false;
+
+        /// <summary>
+        /// When set, a custom directory for SF3Sprite's is used.
+        /// </summary>
+        public string SpritePath { get; set; } = null;
+ 
+
+        /// <summary>
+        /// When set, a custom directory for spritesheets (.PNG files) is used.
+        /// </summary>
+        public string SpritesheetPath { get; set; } = null;
     }
 }

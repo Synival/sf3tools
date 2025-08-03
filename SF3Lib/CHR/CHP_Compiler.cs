@@ -113,6 +113,22 @@ namespace SF3.CHR {
             set => _chrCompiler.AddMissingAnimationFrames = value;
         }
 
+        /// <summary>
+        /// When set, a custom directory for SF3Sprite's is used.
+        /// </summary>
+        public string SpritePath {
+            get => _chrCompiler.SpritePath;
+            set => _chrCompiler.SpritePath = value;
+        }
+ 
+        /// <summary>
+        /// When set, a custom directory for spritesheets (.PNG files) is used.
+        /// </summary>
+        public string SpritesheetPath {
+            get => _chrCompiler.SpritesheetPath;
+            set => _chrCompiler.SpritesheetPath = value;
+        }
+
         private readonly CHR_Compiler _chrCompiler = new CHR_Compiler();
     }
 }

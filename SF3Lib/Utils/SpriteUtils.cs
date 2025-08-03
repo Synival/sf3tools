@@ -8,6 +8,7 @@ namespace SF3.Utils {
     public static class SpriteUtils {
         private static Dictionary<string, SpriteDef> s_spriteDefs = new Dictionary<string, SpriteDef>();
         private static HashSet<string> s_spriteDefFilesLoaded = new HashSet<string>();
+        private static string s_spritePath = null;
         private static string s_spritesheetPath = null;
 
         /// <summary>
@@ -15,7 +16,7 @@ namespace SF3.Utils {
         /// </summary>
         /// <returns>The number of new SpriteDef's successfully loaded.</returns>
         public static int LoadAllSpriteDefs() {
-            var spriteDefFiles = Directory.GetFiles(ResourceFile("Sprites"), "*.SF3Sprite");
+            var spriteDefFiles = Directory.GetFiles(s_spritePath ?? ResourceFile("Sprites"), "*.SF3Sprite");
 
             int loadedCount = 0;
             foreach (var file in spriteDefFiles)
@@ -71,7 +72,7 @@ namespace SF3.Utils {
             if (s_spriteDefs.TryGetValue(name, out var spriteDef))
                 return spriteDef;
 
-            var filename = ResourceFile(Path.Combine("Sprites", FilesystemName(name) + ".SF3Sprite"));
+            var filename = Path.Combine(s_spritePath ?? ResourceFile("Sprites"), FilesystemName(name) + ".SF3Sprite");
             return LoadSpriteDef(filename);
         }
 
@@ -90,6 +91,13 @@ namespace SF3.Utils {
         /// <returns>A string with the relative path of the spritesheet.</returns>
         public static string SpritesheetImagePath(string filename)
             => Path.Combine(s_spritesheetPath ?? ResourceFile("Spritesheets"), filename);
+
+        /// <summary>
+        /// Sets the path to use when retrieving sprites.
+        /// </summary>
+        /// <param name="path">Path that contains spritesheets.</param>
+        public static void SetSpritePath(string path)
+            => s_spritePath = path;
 
         /// <summary>
         /// Sets the path to use when retrieving spritesheets.
