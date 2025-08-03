@@ -55,10 +55,10 @@ namespace DFRTool {
             }
 
             // Gather general options.
-            var outputHelp = false;
-            var outputVersion = false;
-            var programDir = AppDomain.CurrentDomain.BaseDirectory;
-            var spriteDir = Path.Combine(programDir, "Resources", "Sprites");
+            var outputHelp     = false;
+            var outputVersion  = false;
+            var programDir     = AppDomain.CurrentDomain.BaseDirectory;
+            var spriteDir      = Path.Combine(programDir, "Resources", "Sprites");
             var spritesheetDir = Path.Combine(programDir, "Resources", "Spritesheets");
 
             var anywhereOptions = new OptionSet() {
@@ -143,7 +143,7 @@ namespace DFRTool {
 
             switch (command) {
                 case CommandType.Compile:
-                    return Compile(remainingArgs);
+                    return Compile(remainingArgs, spriteDir, spritesheetDir);
 
                 case CommandType.Decompile:
                     return Decompile(remainingArgs);
@@ -154,7 +154,7 @@ namespace DFRTool {
             }
         }
 
-        private static int Compile(string[] args) {
+        private static int Compile(string[] args, string spriteDir, string spritesheetDir) {
             var optimize = false;
             string outputFile = null;
             List<string> spritesToAdd = new List<string>();
@@ -201,10 +201,10 @@ namespace DFRTool {
             string chrDefText = null;
             try {
                 chrDefText = File.ReadAllText(inputFile);
-                Console.WriteLine("Read input file successfully.");
+                Console.WriteLine("  Read input file successfully.");
             }
             catch (Exception e) {
-                Console.WriteLine($"Couldn't open '{inputFile}' for reading:");
+                Console.WriteLine($"  Couldn't open '{inputFile}' for reading:");
                 Console.WriteLine($"    {e.GetType().Name}: {e.Message}");
                 return 1;
             }
@@ -215,17 +215,20 @@ namespace DFRTool {
                 chrDef = CHR_Def.FromJSON(chrDefText);
                 if (chrDef == null)
                     throw new NullReferenceException(); // eh, not really, but whatever
-                Console.WriteLine("Deserialized CHR_Def successfully.");
+                Console.WriteLine("  Deserialized CHR_Def successfully.");
             }
             catch (Exception e) {
-                Console.WriteLine($"Couldn't deserialize '{inputFile}' after reading:");
+                Console.WriteLine($"  Couldn't deserialize '{inputFile}' after reading:");
                 Console.WriteLine($"    {e.GetType().Name}: {e.Message}");
                 return 1;
             }
 
             // We should have everything necessary to compile. Give it a go!
             var chrCompiler = new CHR_Compiler() {
-                OptimizeFrames = optimize
+                OptimizeFrames            = optimize,
+                AddMissingAnimationFrames = true,
+                SpritePath                = spriteDir,
+                SpritesheetPath           = spritesheetDir
             };
             byte[] chrFileData = null;
             try {
@@ -233,10 +236,10 @@ namespace DFRTool {
                     chrCompiler.Compile(chrDef, memoryStream);
                     chrFileData = memoryStream.ToArray();
                 }
-                Console.WriteLine("CHR compiled successfully.");
+                Console.WriteLine("  CHR compiled successfully.");
             }
             catch (Exception e) {
-                Console.WriteLine($"Couldn't compile '{inputFile}' after deserializing:");
+                Console.WriteLine($"  Couldn't compile '{inputFile}' after deserializing:");
                 Console.WriteLine($"    {e.GetType().Name}: {e.Message}");
                 return 1;
             }
@@ -244,10 +247,10 @@ namespace DFRTool {
             // Output the file.
             try {
                 File.WriteAllBytes(outputFile, chrFileData);
-                Console.WriteLine("Output file written successfully.");
+                Console.WriteLine("  Output file written successfully.");
             }
             catch (Exception e) {
-                Console.WriteLine($"Couldn't compile '{inputFile}' after deserializing:");
+                Console.WriteLine($"  Couldn't compile '{inputFile}' after deserializing:");
                 Console.WriteLine($"    {e.GetType().Name}: {e.Message}");
                 return 1;
             }
