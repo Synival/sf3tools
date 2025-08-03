@@ -73,7 +73,6 @@ namespace SF3.CHR {
         /// </summary>
         public string SpritePath { get; set; } = null;
  
-
         /// <summary>
         /// When set, a custom directory for spritesheets (.PNG files) is used.
         /// </summary>

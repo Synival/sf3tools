@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using NDesk.Options;
 using SF3.CHR;
+using SF3.Utils;
 
 namespace DFRTool {
     public class Program {
@@ -141,6 +142,12 @@ namespace DFRTool {
                 return 1;
             }
 
+            // TODO: don't do it this way, omg :( :( :(
+            if (spriteDir != null)
+                SpriteUtils.SetSpritePath(spriteDir);
+            if (spritesheetDir != null)
+                SpriteUtils.SetSpritesheetPath(spritesheetDir);
+
             switch (command) {
                 case CommandType.Compile:
                     return Compile(remainingArgs, spriteDir, spritesheetDir);
@@ -191,7 +198,10 @@ namespace DFRTool {
                 return 1;
             }
 
-            // It looks like we're ready to go! Fetch tthe file data.
+            // It looks like we're ready to go! Fetch the file data.
+            Console.WriteLine($"Sprite directory:     {spriteDir}");
+            Console.WriteLine($"Spriteheet directory: {spritesheetDir}");
+
             var inputFilename = Path.GetFileName(inputFile);
             if (outputFile == null)
                 outputFile = Path.Combine(Path.GetDirectoryName(inputFile), $"{Path.GetFileNameWithoutExtension(inputFilename)}.CHR");
