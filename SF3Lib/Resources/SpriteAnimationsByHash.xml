@@ -144,6 +144,7 @@
     <item hash="31e0f80f1ea5a907a9b1c6c16c9a3dd9" sprite="Bald, Shirtless Burly Man" animation="StillFrame" width="40" height="40" directions="4" frames="2" duration="10" />
     <item hash="14183821f13bd59d82c6a0214e2309b1" sprite="Bald, Shirtless Burly Man" animation="Walking" width="40" height="40" directions="4" frames="7" duration="24" />
     <item hash="c282a23f27dce702572c6c8bfe29721a" sprite="Bald, Shirtless Burly Man" animation="Walking (Reduced)" width="40" height="40" directions="4" frames="5" duration="24" />
+    <item hash="a12734d1afe47ad52f9cb5704a3cc7c0" sprite="Bald, Shirtless Burly Man" animation="Walking (Slower)" width="40" height="40" directions="4" frames="7" duration="30" />
     <item hash="d4d4db3c747935a507ceb53f9b85aaed" sprite="Bald, Shirtless Burly Man" animation="Idle (Resting)" width="48" height="40" directions="4" frames="5" duration="61" />
     <item hash="f744c83d92ea823702fbcf22ce189d6a" sprite="Bald, Shirtless Burly Man" animation="Sleeping" width="48" height="40" directions="4" frames="5" duration="81" />
     <item hash="a9b69dc8f24b813c34f603b4ca7aab45" sprite="Bald, Shirtless Burly Man" animation="StillFrame (Resting 1)" width="48" height="40" directions="4" frames="2" duration="10" />
@@ -914,6 +915,7 @@
     <item hash="b8b369c79eab9affcada48f0f00d8e1f" sprite="Donhort (P1) (Weaponless)" animation="ShakingHead" width="48" height="40" directions="4" frames="9" duration="31" />
     <item hash="c2d4dbf1e17126392c0697cd3e61f639" sprite="Donhort (P1) (Weaponless)" animation="Sleeping" width="48" height="40" directions="4" frames="5" duration="45" />
     <item hash="1cd30632a283766c2ac0bd98ce656f13" sprite="Donhort (P1) (Weaponless)" animation="StillFrame" width="48" height="40" directions="4" frames="2" duration="10" />
+    <item hash="7e6300c7686dc93627407e6ffcde696d" sprite="Donhort (P1) (Weaponless)" animation="StillFrame (Sleeping, Looks Like Animation with Wrong Frames, Repeat)" width="48" height="40" directions="4" frames="5" duration="45" />
     <item hash="188a91e6e0a6371808faa46783a1a51c" sprite="Donhort (P1) (Weaponless)" animation="Walking" width="48" height="40" directions="4" frames="7" duration="30" />
     <item hash="969581346233b82589d00af7231f0f3e" sprite="Donhort (P2)" animation="GettingUpFromGround" width="48" height="40" directions="1" frames="4" duration="22" />
     <item hash="5a0e6375b4e1dfc32c661b49587ffecd" sprite="Donhort (P2)" animation="Idle (Battle)" width="48" height="40" directions="4" frames="5" duration="16" />
@@ -3946,12 +3948,16 @@
     <item hash="9e44f62771e72a26bc1a4a737b5b56bd" sprite="Waltz (U)" animation="Idle (Battle)" width="48" height="40" directions="4" frames="5" duration="18" />
     <item hash="64249c139e14c3e3e70b5b6c4d46f870" sprite="Waltz (U)" animation="Idle (Battle)" width="48" height="40" directions="6" frames="5" duration="18" />
     <item hash="c9e459dd15a9fc6aa32185ce9c311cb8" sprite="Waltz (U)" animation="Idle (Field)" width="48" height="40" directions="4" frames="5" duration="18" />
+    <item hash="accbc42abc03a9794389f332848c9efb" sprite="Waltz (U)" animation="Nodding (Field)" width="48" height="40" directions="4" frames="5" duration="9" />
+    <item hash="67a502d21cb87454f9231286cf7f2841" sprite="Waltz (U)" animation="ShakingHead (Field, Weapon Disappears)" width="48" height="40" directions="4" frames="9" duration="20" />
     <item hash="b4afc2cf2ab8498b30558fd07aa59624" sprite="Waltz (U)" animation="StillFrame (Battle)" width="48" height="40" directions="4" frames="2" duration="10" />
+    <item hash="5437be5ebb03d148faaa265c3ad3941e" sprite="Waltz (U)" animation="StillFrame (Field)" width="48" height="40" directions="4" frames="2" duration="10" />
     <item hash="c8e4b1312fa84b08c62942271a63893d" sprite="Waltz (U)" animation="StillFrame (Field)" width="48" height="40" directions="4" frames="2" duration="10" />
     <item hash="52274409fe77f7e0b79f0101d6c40592" sprite="Waltz (U)" animation="StillFrame (Field)" width="48" height="40" directions="6" frames="2" duration="10" />
     <item hash="e8b9d1b2f057926ef86e846c010bd3f9" sprite="Waltz (U)" animation="StillFrame (OnGround, Repeat)" width="48" height="40" directions="4" frames="2" duration="10" />
     <item hash="769ec35a83954f306289bf76f6f75907" sprite="Waltz (U)" animation="StillFrame (OnGround)" width="48" height="40" directions="4" frames="2" duration="10" />
     <item hash="7d306f1aedb7792db33d3032d22c04ea" sprite="Waltz (U)" animation="Walking" width="48" height="40" directions="6" frames="7" duration="24" />
+    <item hash="8121deff11c6b3364272f0995fd65e3e" sprite="Waltz (U)" animation="Walking (Field)" width="48" height="40" directions="4" frames="7" duration="24" />
     <item hash="16faaf8e35de512913e899c7f5572eef" sprite="Waltz (U) (Weaponless)" animation="Idle" width="48" height="40" directions="4" frames="5" duration="18" />
     <item hash="009c443b042864be5efce0dad0964260" sprite="Waltz (U) (Weaponless)" animation="Nodding" width="48" height="40" directions="4" frames="5" duration="9" />
     <item hash="bd4feb9c370ba392f0ed5e5ccf15d5bb" sprite="Waltz (U) (Weaponless)" animation="ShakingHead" width="48" height="40" directions="4" frames="9" duration="20" />

@@ -24365,10 +24365,25 @@
     <item hash="32e4d69487ad75396b856134d0ed2091" sprite="Waltz (U)" width="48" height="40" frame="Idle (Field) 3" direction="ESE" />
     <item hash="6d440603c064acfe639d2479d52baf9d" sprite="Waltz (U)" width="48" height="40" frame="Idle (Field) 3" direction="ENE" />
     <item hash="2bcfc7b169c0a0907b828ce83bff4cff" sprite="Waltz (U)" width="48" height="40" frame="Idle (Field) 3" direction="NNE" />
+    <item hash="9abc13508f2f58ec5b1a775f6d8c92a7" sprite="Waltz (U)" width="48" height="40" frame="Nodding (Field) 1" direction="SSE" />
+    <item hash="25e101d586403da386319b797407291d" sprite="Waltz (U)" width="48" height="40" frame="Nodding (Field) 1" direction="ESE" />
+    <item hash="3b865279df0634ed2f4eeac71857b801" sprite="Waltz (U)" width="48" height="40" frame="Nodding (Field) 1" direction="ENE" />
+    <item hash="8cfcb9940c1034eb37e3cd7a2ffd2b25" sprite="Waltz (U)" width="48" height="40" frame="Nodding (Field) 1" direction="NNE" />
+    <item hash="e5b0d2699291f28477bc4e559a043e6d" sprite="Waltz (U)" width="48" height="40" frame="Nodding (Field) 2" direction="SSE" />
+    <item hash="278f396066b1bdaf30a776507d879240" sprite="Waltz (U)" width="48" height="40" frame="Nodding (Field) 2" direction="ESE" />
+    <item hash="788d9d797be9ebd525b49265379f79d4" sprite="Waltz (U)" width="48" height="40" frame="Nodding (Field) 2" direction="ENE" />
+    <item hash="fadebf00514b06a88903d6995f52e58e" sprite="Waltz (U)" width="48" height="40" frame="Nodding (Field) 2" direction="NNE" />
     <item hash="f69e8247c89d1bf08632214e1a571097" sprite="Waltz (U)" width="48" height="40" frame="OnGround 1" direction="SSE" />
     <item hash="c1b7b22649dcc75f902c0d2f242a7476" sprite="Waltz (U)" width="48" height="40" frame="OnGround 1" direction="ESE" />
     <item hash="1f5c8f1ca660ef4d5035849d19c9f66e" sprite="Waltz (U)" width="48" height="40" frame="OnGround 1" direction="ENE" />
     <item hash="0280fbab99f08eed8682649bee76893c" sprite="Waltz (U)" width="48" height="40" frame="OnGround 1" direction="NNE" />
+    <item hash="80dc17806fcf040355402061b9b04630" sprite="Waltz (U)" width="48" height="40" frame="ShakingHead (Field) 1" direction="SSE" />
+    <item hash="9b0fd23dad349f0ba702943125ba76fc" sprite="Waltz (U)" width="48" height="40" frame="ShakingHead (Field) 1" direction="ESE" />
+    <item hash="7e96017f50a28da8036bd462a81c9369" sprite="Waltz (U)" width="48" height="40" frame="ShakingHead (Field) 1" direction="ENE" />
+    <item hash="3a1434a0e2ca5fad8b5a1dec82529f8d" sprite="Waltz (U)" width="48" height="40" frame="ShakingHead (Field) 1" direction="NNE" />
+    <item hash="822d84c58001193c7ed9a68aff379f7d" sprite="Waltz (U)" width="48" height="40" frame="ShakingHead (Field) 2" direction="SSE" />
+    <item hash="049c2d76cfec27d6e868989c345f2e2b" sprite="Waltz (U)" width="48" height="40" frame="ShakingHead (Field) 2" direction="ENE" />
+    <item hash="1700cb65b93cc0159c6283dca8cf7fdd" sprite="Waltz (U)" width="48" height="40" frame="ShakingHead (Field) 2" direction="NNE" />
     <item hash="556e4d8d7b92430fa6429764233454cc" sprite="Waltz (U)" width="48" height="40" frame="Walking 1" direction="S" />
     <item hash="c871f5bffff2f190902525ce7cb97c51" sprite="Waltz (U)" width="48" height="40" frame="Walking 1" direction="SSE" />
     <item hash="45ba2aa9717a21d6e86aa27d7bebe925" sprite="Waltz (U)" width="48" height="40" frame="Walking 1" direction="ESE" />
