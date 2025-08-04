@@ -84,7 +84,10 @@ namespace SF3.Sprites {
 
                         if (jObj.TryGetValue("Spritesheets", out var spritesheets) && spritesheets.Type == JTokenType.Object) {
                             Spritesheets = ((IDictionary<string, JToken>) spritesheets)
-                                .ToDictionary(x => x.Key, x => Spritesheet.FromJToken(x.Value));
+                                .ToDictionary(x => x.Key, x => {
+                                    var size = Spritesheet.KeyToDimensions(x.Key);
+                                    return Spritesheet.FromJToken(x.Value, size.Height);
+                                });
                         }
                     }
                     catch {
@@ -110,8 +113,12 @@ namespace SF3.Sprites {
                 jObj.Add("Width", new JValue(Width.Value));
             if (Height.HasValue)
                 jObj.Add("Height", new JValue(Height.Value));
-            if (Spritesheets != null)
-                jObj.Add("Spritesheets", JToken.FromObject(Spritesheets.ToDictionary(x => x.Key, x => x.Value.ToJToken())));
+            if (Spritesheets != null) {
+                jObj.Add("Spritesheets", JToken.FromObject(Spritesheets.ToDictionary(x => x.Key, x => {
+                    var size = Spritesheet.KeyToDimensions(x.Key);
+                    return x.Value.ToJToken(size.Height);
+                })));
+            }
 
             return jObj;
         }

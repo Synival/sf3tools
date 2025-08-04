@@ -239,13 +239,6 @@ namespace SF3.CHR {
         public Stream Stream { get; }
         public int BytesWritten { get; private set; } = 0;
 
-        private class AnimationFrameRef {
-            public override string ToString() => $"0x{Offset:X4} = {string.Join(", ", FrameKeys)}";
-
-            public long Offset;
-            public string[] FrameKeys;
-        }
-
         private class SpriteInfo {
             public long? UnassignedFrameTablePointerOffset;
             public long? UnassignedAnimationTablePointerOffset;

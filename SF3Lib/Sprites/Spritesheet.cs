@@ -7,7 +7,7 @@ using Newtonsoft.Json.Linq;
 using SF3.Types;
 
 namespace SF3.Sprites {
-    public class Spritesheet : IJsonResource {
+    public class Spritesheet {
         public Spritesheet() { }
 
         public Spritesheet(UniqueFrameDef[] frames, UniqueAnimationDef[] animations) {
@@ -39,9 +39,9 @@ namespace SF3.Sprites {
         /// </summary>
         /// <param name="json">Spritesheet in JSON format as a string.</param>
         /// <returns>A new Spritesheet if deserializing was successful, or 'null' if not.</returns>
-        public static Spritesheet FromJSON(string json) {
+        public static Spritesheet FromJSON(string json, int frameHeight) {
             var spritesheet = new Spritesheet();
-            return spritesheet.AssignFromJSON_String(json) ? spritesheet : null;
+            return spritesheet.AssignFromJSON_String(json, frameHeight) ? spritesheet : null;
         }
 
         /// <summary>
@@ -49,15 +49,15 @@ namespace SF3.Sprites {
         /// </summary>
         /// <param name="jToken">Spritesheet as a JToken.</param>
         /// <returns>A new Spritesheet if deserializing was successful, or 'null' if not.</returns>
-        public static Spritesheet FromJToken(JToken jToken) {
+        public static Spritesheet FromJToken(JToken jToken, int frameHeight) {
             var spritesheet = new Spritesheet();
-            return spritesheet.AssignFromJToken(jToken) ? spritesheet : null;
+            return spritesheet.AssignFromJToken(jToken, frameHeight) ? spritesheet : null;
         }
 
-        public bool AssignFromJSON_String(string json)
-            => AssignFromJToken(JToken.Parse(json));
+        public bool AssignFromJSON_String(string json, int frameHeight)
+            => AssignFromJToken(JToken.Parse(json), frameHeight);
 
-        public bool AssignFromJToken(JToken jToken) {
+        public bool AssignFromJToken(JToken jToken, int frameHeight) {
             if (jToken == null)
                 return false;
 
@@ -74,7 +74,7 @@ namespace SF3.Sprites {
 
                         if (jObj.TryGetValue("FrameGroups", out var frameGroups) && frameGroups.Type == JTokenType.Object) {
                             FrameGroupsByName = ((IDictionary<string, JToken>) frameGroups)
-                                .ToDictionary(x => x.Key, x => FrameGroup.FromJToken(x.Value));
+                                .ToDictionary(x => x.Key, x => FrameGroup.FromJToken(x.Value, frameHeight));
                         }
 
                         if (jObj.TryGetValue("AnimationByDirections", out var animationByDirections) && animationByDirections.Type == JTokenType.Object) {
@@ -93,10 +93,10 @@ namespace SF3.Sprites {
             }
         }
 
-        public string ToJSON_String()
-            => ToJToken().ToString(Formatting.Indented);
+        public string ToJSON_String(int frameHeight)
+            => ToJToken(frameHeight).ToString(Formatting.Indented);
 
-        public JToken ToJToken() {
+        public JToken ToJToken(int frameHeight) {
             var jObj = new JObject {
                 { "SpriteID",       new JValue(SpriteID) },
                 { "VerticalOffset", new JValue(VerticalOffset) },
@@ -106,7 +106,7 @@ namespace SF3.Sprites {
             };
 
             if (FrameGroupsByName != null)
-                jObj.Add("FrameGroups", JToken.FromObject(FrameGroupsByName.ToDictionary(x => x.Key, x => x.Value.ToJToken())));
+                jObj.Add("FrameGroups", JToken.FromObject(FrameGroupsByName.ToDictionary(x => x.Key, x => x.Value.ToJToken(frameHeight))));
             if (AnimationSetsByDirections != null)
                 jObj.Add("AnimationByDirections", JToken.FromObject(AnimationSetsByDirections.ToDictionary(x => x.Key.ToSerializedString(), x => x.Value.ToJToken())));
 
