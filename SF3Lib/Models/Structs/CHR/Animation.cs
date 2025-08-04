@@ -93,6 +93,20 @@ namespace SF3.Models.Structs.CHR {
         [TableViewModelColumn(displayOrder: 0.1f, displayName: "Type", minWidth: 100)]
         public AnimationType AnimationType => (AnimationType) AnimationIndex;
 
+        private void RewriteFrameXML() {
+            var resourcePath = Path.Combine("..", "..", "..", "..", "SF3Lib", CommonLib.Utils.ResourceUtils.ResourceFile("SpriteFramesByHash.xml"));
+            using (var file = File.Open(resourcePath, FileMode.Create))
+                using (var writer = new StreamWriter(file))
+                    CHR_Utils.WriteUniqueFramesByHashXML(writer, false);
+        }
+
+        private void RewriteAnimationXML() {
+            var resourcePath = Path.Combine("..", "..", "..", "..", "SF3Lib", CommonLib.Utils.ResourceUtils.ResourceFile("SpriteAnimationsByHash.xml"));
+            using (var file = File.Open(resourcePath, FileMode.Create))
+                using (var writer = new StreamWriter(file))
+                    CHR_Utils.WriteUniqueAnimationsByHashXML(writer, false);
+        }
+
         [TableViewModelColumn(displayOrder: 0.5f, minWidth: 200)]
         public string SpriteName {
             get {
@@ -127,17 +141,26 @@ namespace SF3.Models.Structs.CHR {
             }
             set {
                 var lastSpriteName = SpriteName;
-                foreach (var frame in _framesWithTextures)
-                    if (frame.FrameInfo != null && frame.FrameInfo.SpriteName != value)
+                var changed = false;
+                foreach (var frame in _framesWithTextures) {
+                    if (frame.FrameInfo != null && frame.FrameInfo.SpriteName != value) {
                         frame.FrameInfo.SpriteName = value;
+                        changed = true;
+                    }
+                }
 
-                var newSpriteName = SpriteName;
-                if (AnimationInfo != null && lastSpriteName != newSpriteName)
-                    AnimationInfo.SpriteName = SpriteName;
+                if (changed) {
+                    var newSpriteName = SpriteName;
+                    if (AnimationInfo != null && lastSpriteName != newSpriteName) {
+                        AnimationInfo.SpriteName = SpriteName;
+                        RewriteAnimationXML();
+                    }
+                    RewriteFrameXML();
 
-                // TODO: update appropriate SpriteDefs:
-                // 1) old sprite def (if it exists)
-                // 2) new sprite def (create if doesn't exist?)
+                    // TODO: update appropriate SpriteDefs:
+                    // 1) old sprite def (if it exists)
+                    // 2) new sprite def (create if doesn't exist?)
+                }
             }
         }
 
@@ -147,6 +170,7 @@ namespace SF3.Models.Structs.CHR {
             set {
                 if (AnimationInfo != null && AnimationInfo.AnimationName != value) {
                     AnimationInfo.AnimationName = value;
+                    RewriteAnimationXML();
 
                     // TODO: update appropriate SpriteDefs:
                     // 1) old sprite def (if it exists)
