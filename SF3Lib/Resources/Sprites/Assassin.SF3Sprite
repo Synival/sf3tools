@@ -261,6 +261,59 @@
           ]
         }
       }
+    },
+    "48x40": {
+      "SpriteID": 84,
+      "VerticalOffset": 0,
+      "Unknown0x08": 20,
+      "CollisionSize": 40,
+      "Scale": 1.0499878,
+      "FrameGroups": {
+        "OnGround 1": {
+          "Directions": 4,
+          "SpritesheetX": 0,
+          "SpritesheetY": 0,
+          "Hashes": [
+            "8a0a34437aa215e07765d1ea88e7e719",
+            "953683b2fb765d209bee41ad352adc29",
+            "f6f458736806c2bae39bca7579893b1d",
+            "90d7ae5de0c6d4607611b8b3bc9f1ae0"
+          ]
+        }
+      },
+      "AnimationByDirections": {
+        "4": {
+          "StillFrame (OnGround, Repeat, Duration 4)": [
+            {
+              "Frame": "OnGround 1",
+              "Duration": 4
+            },
+            {
+              "Command": "GotoCommandOffset",
+              "Parameter": 0
+            }
+          ],
+          "StillFrame (OnGround, Repeat, Duration 5)": [
+            {
+              "Frame": "OnGround 1",
+              "Duration": 5
+            },
+            {
+              "Command": "GotoCommandOffset",
+              "Parameter": 0
+            }
+          ],
+          "StillFrame (OnGround)": [
+            {
+              "Frame": "OnGround 1",
+              "Duration": 10
+            },
+            {
+              "Command": "Stop"
+            }
+          ]
+        }
+      }
     }
   }
 }

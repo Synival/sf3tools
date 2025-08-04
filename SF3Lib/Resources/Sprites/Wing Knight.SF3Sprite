@@ -3,6 +3,164 @@
   "Width": 48,
   "Height": 40,
   "Spritesheets": {
+    "40x40": {
+      "SpriteID": 240,
+      "VerticalOffset": 0,
+      "Unknown0x08": 20,
+      "CollisionSize": 40,
+      "Scale": 1.0,
+      "FrameGroups": {
+        "Flying (Moves Vertically) 1": {
+          "Directions": 5,
+          "SpritesheetX": 0,
+          "SpritesheetY": 0,
+          "Hashes": [
+            "5d65d473184dccfcb764a5f56e5b9ea5",
+            "4daaa8c889150002bff2b4e3582b09db",
+            "4b26faf38b1267f813d699e692001d9f",
+            "967d5ec0d214884d95b993e943f5fa10",
+            "cf78822fcc2529f13c8f7d4024bf8640"
+          ]
+        },
+        "Flying (Moves Vertically) 2": {
+          "Directions": 5,
+          "SpritesheetX": 40,
+          "SpritesheetY": 0,
+          "Hashes": [
+            "c581c9de4cefe52da651dd273480367c",
+            "9bd84c28f8ef5a548077119723904ac6",
+            "f04c4ef93178fedca420a4a849e064eb",
+            "70dc146302c8afeee84d6648c0ce4971",
+            "9ba8ec016a3fba8713794a9938267ae3"
+          ]
+        },
+        "Flying (Moves Vertically) 3": {
+          "Directions": 5,
+          "SpritesheetX": 80,
+          "SpritesheetY": 0,
+          "Hashes": [
+            "b49753919a43d0602b04b0b6e230d166",
+            "e1e52be37f20178e1939ef87ea990088",
+            "5551127c1a56a09389f5fc7533f6c11b",
+            "b9aca36ad8c148af4a25a35da6937a31",
+            "9d13df32831d1dbe40ab8071d60238b9"
+          ]
+        },
+        "Flying (Moves Vertically) 4": {
+          "Directions": 5,
+          "SpritesheetX": 120,
+          "SpritesheetY": 0,
+          "Hashes": [
+            "8eebbcdda7c8ab935bc1f90caae79278",
+            "1a17031c698760d47e0e6c6ea8242d63",
+            "93f16f3265cee5cf16dc410078022e1c",
+            "92cf5e00178b3c000023f65d13042efd",
+            "4d6dca116167cc3da58e16292923e938"
+          ]
+        },
+        "Flying (Moves Vertically) 5": {
+          "Directions": 5,
+          "SpritesheetX": 160,
+          "SpritesheetY": 0,
+          "Hashes": [
+            "b54ab28742f38908aa026bb479f0e151",
+            "1241dd368c9f67397484cca96ada6d6a",
+            "2f721668bc6b5a39f71bd91ea5dc8cbc",
+            "369d52087f9f2c7fac4b84dcf8041389",
+            "ec16ba1ed112470248e5f45350369673"
+          ]
+        }
+      },
+      "AnimationByDirections": {
+        "5": {
+          "Flying (Faster, Moves Vertically)": [
+            {
+              "Frame": "Flying (Moves Vertically) 1",
+              "Duration": 4
+            },
+            {
+              "Frame": "Flying (Moves Vertically) 2",
+              "Duration": 4
+            },
+            {
+              "Frame": "Flying (Moves Vertically) 3",
+              "Duration": 4
+            },
+            {
+              "Frame": "Flying (Moves Vertically) 4",
+              "Duration": 4
+            },
+            {
+              "Frame": "Flying (Moves Vertically) 5",
+              "Duration": 4
+            },
+            {
+              "Frame": "Flying (Moves Vertically) 4",
+              "Duration": 4
+            },
+            {
+              "Frame": "Flying (Moves Vertically) 3",
+              "Duration": 4
+            },
+            {
+              "Frame": "Flying (Moves Vertically) 2",
+              "Duration": 4
+            },
+            {
+              "Command": "GotoCommandOffset",
+              "Parameter": 0
+            }
+          ],
+          "Flying (Slower, Moves Vertically)": [
+            {
+              "Frame": "Flying (Moves Vertically) 1",
+              "Duration": 7
+            },
+            {
+              "Frame": "Flying (Moves Vertically) 2",
+              "Duration": 5
+            },
+            {
+              "Frame": "Flying (Moves Vertically) 3",
+              "Duration": 5
+            },
+            {
+              "Frame": "Flying (Moves Vertically) 4",
+              "Duration": 5
+            },
+            {
+              "Frame": "Flying (Moves Vertically) 5",
+              "Duration": 5
+            },
+            {
+              "Frame": "Flying (Moves Vertically) 4",
+              "Duration": 5
+            },
+            {
+              "Frame": "Flying (Moves Vertically) 3",
+              "Duration": 5
+            },
+            {
+              "Frame": "Flying (Moves Vertically) 2",
+              "Duration": 5
+            },
+            {
+              "Command": "GotoCommandOffset",
+              "Parameter": 0
+            }
+          ],
+          "StillFrame": [
+            {
+              "Frame": "Flying (Moves Vertically) 1",
+              "Duration": 10
+            },
+            {
+              "Command": "Stop"
+            }
+          ]
+        }
+      }
+    },
     "48x40": {
       "SpriteID": 240,
       "VerticalOffset": 0,

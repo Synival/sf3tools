@@ -1,24 +1,24 @@
 {
-  "Name": "Dwarf",
+  "Name": "Benetram (Prototype 2)",
   "Width": 40,
   "Height": 40,
   "Spritesheets": {
     "40x40": {
-      "SpriteID": 220,
+      "SpriteID": 76,
       "VerticalOffset": 0,
       "Unknown0x08": 20,
       "CollisionSize": 40,
-      "Scale": 1.0,
+      "Scale": 1.019989,
       "FrameGroups": {
         "Idle 1": {
           "Directions": 4,
           "SpritesheetX": 0,
           "SpritesheetY": 0,
           "Hashes": [
-            "6d0c74743e6c33d06dba4612be84d403",
-            "c53c649109fb05115e2a3d3cc952c41d",
-            "fbcb7d7c4415f92b2730a5eef14da5dc",
-            "266f617e8cc9f5800f29c9d120792d8a"
+            "c3ec928d3b7ec0605b9ffde2885d1966",
+            "16c6557831b9999e8b5c2d7f5832baa5",
+            "e1dff7e8f110e96a133de7bfd6963aa4",
+            "642da3f6ca4af01045bcaaacb04aa6d9"
           ]
         },
         "Idle 2": {
@@ -26,10 +26,10 @@
           "SpritesheetX": 40,
           "SpritesheetY": 0,
           "Hashes": [
-            "1032b216d4127ad2202d664713d2f948",
-            "812a80bdef4dadd231804cc6bd094af1",
-            "daf08261e4568a87509b61c7e3d8d491",
-            "3195631b6fed5fcd39e284658b6bc48c"
+            "fe1650e18f0ee2dc8fb65eb0de79e390",
+            "8f6ee7e7f78a9427c8e9d9202a156a64",
+            "56917151168aa3776226cb877d25c549",
+            "4858a8743ce2a4f8ca72ac85924166da"
           ]
         },
         "Idle 3": {
@@ -37,10 +37,10 @@
           "SpritesheetX": 80,
           "SpritesheetY": 0,
           "Hashes": [
-            "3f14b6ccf867c8984b91bd58d43cb9ca",
-            "c21c50ffced29714ddd1754f09851056",
-            "598f2875e0e3a09f836c2abf978cf5c5",
-            "b2e90e4122c98bdeed795884f0e5be6a"
+            "41a7ef42273241edd06463f2008ea2c3",
+            "c9926ebaa189832776e2a845e2b40da8",
+            "e79039b4e59f94c4f844d64b99bb8418",
+            "959ff5a8e3b78cf9ad71bf8a72031491"
           ]
         },
         "Nodding 1": {
@@ -48,10 +48,10 @@
           "SpritesheetX": 120,
           "SpritesheetY": 0,
           "Hashes": [
-            "1bd8e2cc677a57ea48aeac36bcf2f767",
-            "bb168f38953fab8e2332c691b1f90540",
-            "39bb6d20827fc521acf369c87f4aa4ec",
-            "2b3a5a95953d83dc12d6848fcb116105"
+            "93dfb9a8fdb2b78741a068b6ee647277",
+            "6e76a911b5b8d01f26247e0952b36b56",
+            "c729634c52432afdf2df1f8e7897ca99",
+            "01cdf11935dee2f13e0d271cecee106f"
           ]
         },
         "Nodding 2": {
@@ -59,10 +59,10 @@
           "SpritesheetX": 160,
           "SpritesheetY": 0,
           "Hashes": [
-            "e186766b818322cb023358097c65f106",
-            "b39d8acd090c069271b5da6fca9a09d6",
-            "037a00f87abc2eb06bb9b1ce071a28dd",
-            "211a02e643399d16b518aeac49e7c6de"
+            "440915f57f51312364470f562b7f1752",
+            "36a575e8ba59567bc086401f5e82b3d6",
+            "3b87c65a83e2cc3784adf59fd6126b1a",
+            "59dc901c091f8e73927244c21394731d"
           ]
         },
         "ShakingHead 1": {
@@ -70,10 +70,10 @@
           "SpritesheetX": 200,
           "SpritesheetY": 0,
           "Hashes": [
-            "a8ff62ca710e49a48f898014524628ac",
-            "5be43bc92781909ae825e9682b27afad",
-            "a0dd156e8bd84ff07f5a64cd6f6b9ed5",
-            "5c8c48db3a8843a1e3aed15b4ceabd88"
+            "cc0e1a1df75d0982f822013a208e320b",
+            "f598b623b87ee1d1eaa5e78226991934",
+            "c910baf92315a18fa4c7d7b9cfb25191",
+            "4374e87fd6f721461e3a5443196eef71"
           ]
         },
         "ShakingHead 2": {
@@ -81,10 +81,10 @@
           "SpritesheetX": 240,
           "SpritesheetY": 0,
           "Hashes": [
-            "7be4b59fd997716a1b9f8727fa7b8490",
-            "097750e4718b41d17362f37775276d8a",
-            "b363bcafbc89552076c49cb3c4f2de08",
-            "13506b49a8149124f7919e55e060f867"
+            "171f81345073db79066da900e307fcb4",
+            "2b1bcd4e156a30ddf2e0cd2ec9f4d8df",
+            "25ccbfa007239564dbac783899eae853",
+            "445e80121201372a70149e9966658c8b"
           ]
         },
         "Walking 1": {
@@ -92,10 +92,10 @@
           "SpritesheetX": 280,
           "SpritesheetY": 0,
           "Hashes": [
-            "77b2712592f205849868b1031527b770",
-            "017360ce98118d4c8e559e5181802a42",
-            "94695cf46e93be0c8984579c74e7acdb",
-            "0688207b4d1c0ace81a37506369b0c66"
+            "046a88e0dd5c5a601914b40166e6ee4f",
+            "18faa55239c6f0dbbb7424a704023f6f",
+            "d013588e73bd3d6107dbf5c3d8efd2c8",
+            "fcb364cbc17a46a7e6d370e200b0281c"
           ]
         },
         "Walking 2": {
@@ -103,10 +103,10 @@
           "SpritesheetX": 320,
           "SpritesheetY": 0,
           "Hashes": [
-            "c7c1115fa2ce72fb1e32bd4b034583fd",
-            "364c631d9365a80252a01140258be76c",
-            "dfc4cc8bf347f6749d87782d3069b43c",
-            "fc3022bac5f69939f9bf53d0fd1aff73"
+            "c3e53a928330df1095afc08d62ff16cb",
+            "4f0b443fe18a72ce901bff41c907a86d",
+            "afa4925ba1feec200d1c4335ad52da18",
+            "7b5b84aa4280de1689f93f08c0ab8439"
           ]
         },
         "Walking 3": {
@@ -114,10 +114,10 @@
           "SpritesheetX": 360,
           "SpritesheetY": 0,
           "Hashes": [
-            "7d48c661c43b2ffee12ef579d4ed81e6",
-            "c8cd7e80c236ff0c9b53b18069d119e9",
-            "fabb0da0e2c1e89f5cbe8b04e6aeadec",
-            "97112b4d46d9d4906e0b9f3210bcc111"
+            "42fc6325b4c5536f71e4df7f4c2b710a",
+            "384da5d2640e92b0120358a882864089",
+            "fdf423c49e48d0425270cb298dc13b0f",
+            "54727744edd5da5472d6eed73c01af10"
           ]
         },
         "Walking 4": {
@@ -125,10 +125,10 @@
           "SpritesheetX": 400,
           "SpritesheetY": 0,
           "Hashes": [
-            "2ddf056962ca031dfd3c5ae097a0f499",
-            "85005be3ee72853a6e232c365aa73838",
-            "834c0de881782d788f57331ff69e2e52",
-            "7aaea9fd29212cae0eab80f178de7268"
+            "75a4627cc97ccbdd7c8b80e2321d529d",
+            "7174e1546cca726f2ef7ca06c9e15248",
+            "e843157b74c01caddbc3fb739c91871d",
+            "e765182e6362aab1658b72b73833e56a"
           ]
         },
         "Walking 5": {
@@ -136,10 +136,10 @@
           "SpritesheetX": 440,
           "SpritesheetY": 0,
           "Hashes": [
-            "a825b031b560a98ed9da55e87b99e735",
-            "14ea1e852e9370fb34c5e3d4c4476f1c",
-            "c274ab4e2242513ada091fb30b9f61a0",
-            "6daa39f21ae1fafb29985e990c61778e"
+            "047c56e75d5ed267cf7d659458a44179",
+            "2b26f3ff5495b7edf2c6022cdfb76070",
+            "cbbd8facfd15e02d5eda822c768f7db6",
+            "55fe32857c00026c0be52e721165df13"
           ]
         }
       },
@@ -148,19 +148,19 @@
           "Idle": [
             {
               "Frame": "Idle 1",
-              "Duration": 6
+              "Duration": 5
             },
             {
               "Frame": "Idle 2",
-              "Duration": 6
+              "Duration": 5
             },
             {
               "Frame": "Idle 3",
-              "Duration": 6
+              "Duration": 5
             },
             {
               "Frame": "Idle 2",
-              "Duration": 6
+              "Duration": 5
             },
             {
               "Command": "GotoCommandOffset",
@@ -170,19 +170,19 @@
           "Nodding": [
             {
               "Frame": "Walking 2",
-              "Duration": 2
+              "Duration": 5
             },
             {
               "Frame": "Nodding 1",
-              "Duration": 2
+              "Duration": 5
             },
             {
               "Frame": "Nodding 2",
-              "Duration": 2
+              "Duration": 5
             },
             {
               "Frame": "Nodding 1",
-              "Duration": 2
+              "Duration": 5
             },
             {
               "Command": "GotoAnimation",
@@ -196,78 +196,112 @@
             },
             {
               "Frame": "Nodding 1",
-              "Duration": 4
+              "Duration": 2
             },
             {
               "Frame": "Nodding 2",
-              "Duration": 4
+              "Duration": 8
             },
             {
               "Frame": "Nodding 1",
-              "Duration": 4
+              "Duration": 2
+            },
+            {
+              "Frame": "Walking 2",
+              "Duration": 3
+            },
+            {
+              "Command": "GotoAnimation",
+              "Parameter": 0
+            }
+          ],
+          "ShakingHead": [
+            {
+              "Frame": "Walking 2",
+              "Duration": 5
+            },
+            {
+              "Frame": "ShakingHead 1",
+              "Duration": 5
+            },
+            {
+              "Frame": "ShakingHead 2",
+              "Duration": 5
+            },
+            {
+              "Frame": "ShakingHead 1",
+              "Duration": 5
             },
             {
               "Command": "GotoAnimation",
               "Parameter": 1
             }
           ],
-          "ShakingHead (Alt)": [
+          "ShakingHead (Twice, Reduced)": [
+            {
+              "Frame": "Walking 2",
+              "Duration": 6
+            },
+            {
+              "Frame": "ShakingHead 1",
+              "Duration": 6
+            },
+            {
+              "Frame": "Walking 2",
+              "Duration": 6
+            },
+            {
+              "Frame": "ShakingHead 1",
+              "Duration": 6
+            },
+            {
+              "Frame": "Walking 2",
+              "Duration": 6
+            },
+            {
+              "Command": "GotoAnimation",
+              "Parameter": 0
+            }
+          ],
+          "ShakingHead (Weird Motion)": [
             {
               "Frame": "Walking 2",
               "Duration": 4
             },
             {
               "Frame": "ShakingHead 1",
-              "Duration": 4
+              "Duration": 2
             },
             {
               "Frame": "ShakingHead 2",
-              "Duration": 4
+              "Duration": 8
             },
             {
               "Frame": "ShakingHead 1",
-              "Duration": 4
+              "Duration": 2
             },
-            {
-              "Command": "GotoAnimation",
-              "Parameter": 1
-            }
-          ],
-          "ShakingHead (Once)": [
             {
               "Frame": "Walking 2",
-              "Duration": 2
-            },
-            {
-              "Frame": "ShakingHead 1",
-              "Duration": 2
-            },
-            {
-              "Frame": "ShakingHead 2",
-              "Duration": 2
-            },
-            {
-              "Frame": "ShakingHead 1",
-              "Duration": 2
+              "Duration": 3
             },
             {
               "Command": "GotoAnimation",
-              "Parameter": 1
+              "Parameter": 0
             }
           ],
-          "StillFrame (Idle)": [
+          "StillFrame": [
             {
-              "Frame": "Idle 1",
+              "Frame": "Walking 2",
               "Duration": 10
             },
             {
               "Command": "Stop"
             }
           ],
-          "StillFrame (Walking)": [
+          "StillFrame (Idle 2)": [
             {
               "Frame": "Walking 2",
-              "Duration": 10
+              "Duration": 999
             },
             {
               "Command": "Stop"
@@ -276,27 +310,27 @@
           "Walking": [
             {
               "Frame": "Walking 1",
-              "Duration": 4
+              "Duration": 5
             },
             {
               "Frame": "Walking 2",
-              "Duration": 4
+              "Duration": 5
             },
             {
               "Frame": "Walking 3",
-              "Duration": 4
+              "Duration": 5
             },
             {
               "Frame": "Walking 4",
-              "Duration": 4
+              "Duration": 5
             },
             {
               "Frame": "Walking 2",
-              "Duration": 4
+              "Duration": 5
             },
             {
               "Frame": "Walking 5",
-              "Duration": 4
+              "Duration": 5
             },
             {
               "Command": "GotoCommandOffset",

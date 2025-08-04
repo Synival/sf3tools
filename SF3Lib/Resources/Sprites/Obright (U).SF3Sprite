@@ -72,25 +72,29 @@
           ]
         },
         "Nodding (Field) 1": {
-          "Directions": 4,
+          "Directions": 6,
           "SpritesheetX": 200,
-          "SpritesheetY": 40,
+          "SpritesheetY": 0,
           "Hashes": [
+            "543809e6fbdeb3d27c31eb96dbdb5888",
             "246729739cc9327480a0a54d38ba6588",
             "aaaca99b7abf2b8aa83db5e5730a819a",
             "851d28619bb2d71f308d80de5b5c7c6a",
-            "cc150ce792696ff467b1fee1b9272dec"
+            "cc150ce792696ff467b1fee1b9272dec",
+            "97bd992d08a120a7004d447251ef1a9c"
           ]
         },
         "Nodding (Field) 2": {
-          "Directions": 4,
+          "Directions": 6,
           "SpritesheetX": 240,
-          "SpritesheetY": 40,
+          "SpritesheetY": 0,
           "Hashes": [
+            "6605a78c1cbfa8acd63723b00091d65b",
             "54a842f68abee86eb064961bf2b98030",
             "aacdc251cf747922bce490b1345ac5a0",
             "cec33b8b9ba0b1d4dffdbe969f060030",
-            "f01784e90901c57cd1b496946357c7ad"
+            "f01784e90901c57cd1b496946357c7ad",
+            "bc5d3aefb63977546419ab5e2001b6a1"
           ]
         },
         "ShakingHead (Battle) 1": {
@@ -116,25 +120,29 @@
           ]
         },
         "ShakingHead (Field) 1": {
-          "Directions": 4,
+          "Directions": 6,
           "SpritesheetX": 360,
-          "SpritesheetY": 40,
+          "SpritesheetY": 0,
           "Hashes": [
+            "da8e57f448d2ddc1c073db58abbbc8d5",
             "a91f44d1c8f4222ffbff928f140d545d",
             "c6255e76736ba630ee2eac2b28a1415f",
             "ac597e1c37529f9a0ecf59c1f58f6715",
-            "59431515171b5c3c83f53131cb3c92c6"
+            "59431515171b5c3c83f53131cb3c92c6",
+            "480df37dda28c580edd3fe332e5317c6"
           ]
         },
         "ShakingHead (Field) 2": {
-          "Directions": 4,
+          "Directions": 6,
           "SpritesheetX": 400,
-          "SpritesheetY": 40,
+          "SpritesheetY": 0,
           "Hashes": [
+            "cec2712f60a74b63375c281e99fe2c25",
             "1c19e75bb6e7a55de343640e2a1571c8",
             "7b7488c82840a072b22a7de56ba9d4ba",
             "eec120b420fbebba96c065ce49a93dca",
-            "d893ecf44c7c1aab8e67779a77d73786"
+            "d893ecf44c7c1aab8e67779a77d73786",
+            "d0f1378665c3aef17b4ecf9301ebc58e"
           ]
         },
         "Walking 1": {
@@ -327,6 +335,28 @@
               "Parameter": 1
             }
           ],
+          "ShakingHead (Field, Once)": [
+            {
+              "Frame": "Walking 2",
+              "Duration": 2
+            },
+            {
+              "Frame": "ShakingHead (Field) 1",
+              "Duration": 2
+            },
+            {
+              "Frame": "ShakingHead (Field) 2",
+              "Duration": 2
+            },
+            {
+              "Frame": "ShakingHead (Field) 1",
+              "Duration": 2
+            },
+            {
+              "Command": "GotoAnimation",
+              "Parameter": 1
+            }
+          ],
           "ShakingHead (Field, Weird Angle, Short)": [
             {
               "Frame": "Walking 2",
@@ -457,6 +487,94 @@
             {
               "Command": "GotoCommandOffset",
               "Parameter": 0
+            }
+          ],
+          "Nodding": [
+            {
+              "Frame": "Walking 2",
+              "Duration": 4
+            },
+            {
+              "Frame": "Nodding (Field) 1",
+              "Duration": 4
+            },
+            {
+              "Frame": "Nodding (Field) 2",
+              "Duration": 4
+            },
+            {
+              "Frame": "Nodding (Field) 1",
+              "Duration": 4
+            },
+            {
+              "Command": "GotoAnimation",
+              "Parameter": 1
+            }
+          ],
+          "Nodding (Fast)": [
+            {
+              "Frame": "Walking 2",
+              "Duration": 2
+            },
+            {
+              "Frame": "Nodding (Field) 1",
+              "Duration": 2
+            },
+            {
+              "Frame": "Nodding (Field) 2",
+              "Duration": 2
+            },
+            {
+              "Frame": "Nodding (Field) 1",
+              "Duration": 2
+            },
+            {
+              "Command": "GotoAnimation",
+              "Parameter": 1
+            }
+          ],
+          "ShakingHead (Fast)": [
+            {
+              "Frame": "Walking 2",
+              "Duration": 2
+            },
+            {
+              "Frame": "ShakingHead (Field) 1",
+              "Duration": 2
+            },
+            {
+              "Frame": "ShakingHead (Field) 2",
+              "Duration": 2
+            },
+            {
+              "Frame": "ShakingHead (Field) 1",
+              "Duration": 2
+            },
+            {
+              "Command": "GotoAnimation",
+              "Parameter": 1
+            }
+          ],
+          "ShakingHead (Once)": [
+            {
+              "Frame": "Walking 2",
+              "Duration": 4
+            },
+            {
+              "Frame": "ShakingHead (Field) 1",
+              "Duration": 4
+            },
+            {
+              "Frame": "ShakingHead (Field) 2",
+              "Duration": 4
+            },
+            {
+              "Frame": "ShakingHead (Field) 1",
+              "Duration": 4
+            },
+            {
+              "Command": "GotoAnimation",
+              "Parameter": 1
             }
           ],
           "StillFrame (Field)": [

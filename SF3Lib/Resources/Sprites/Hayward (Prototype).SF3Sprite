@@ -1,0 +1,218 @@
+{
+  "Name": "Hayward (Prototype)",
+  "Width": 40,
+  "Height": 40,
+  "Spritesheets": {
+    "40x40": {
+      "SpriteID": 4,
+      "VerticalOffset": 0,
+      "Unknown0x08": 20,
+      "CollisionSize": 40,
+      "Scale": 1.0,
+      "FrameGroups": {
+        "Idle 1": {
+          "Directions": 6,
+          "SpritesheetX": 0,
+          "SpritesheetY": 0,
+          "Hashes": [
+            "33b7d695f8f091fa2de6281ee5e573cb",
+            "2133f021798f8fee1ee881d2200a1ada",
+            "2313cf2adc34dfd3c239f2ec1d6a43a9",
+            "d4ce9d6d507a68f2f572003bf4d7ed76",
+            "1343a61c68997708e4412b9c969fefc7",
+            "c7cada2a869bb6423b22481383a61b5a"
+          ]
+        },
+        "Idle 2": {
+          "Directions": 6,
+          "SpritesheetX": 40,
+          "SpritesheetY": 0,
+          "Hashes": [
+            "7aef504c57f9da847478e64f413824f8",
+            "8b322572a92c46d3bbe63309b3ee59a3",
+            "5954112a2226a581b5a326fe69535364",
+            "3bce980bdd899590032d9e2eab39deeb",
+            "7754c33699ed71fbad95e866e71018ba",
+            "0b68327773283f37cd10babcf0c4b064"
+          ]
+        },
+        "Idle 3": {
+          "Directions": 6,
+          "SpritesheetX": 80,
+          "SpritesheetY": 0,
+          "Hashes": [
+            "e5bca7e8de7063168e9b56fd6dcdfc23",
+            "974afd6c596e5940a8fd3eb103be556d",
+            "e033843f1c8c213fe52870caeb51252e",
+            "4f1b12dfc4c113014c4a4c16acaa9afc",
+            "18ad83175c6b79164b11ad7e12ece56e",
+            "4d65f96ee5cf4fede0925a81c1648a5a"
+          ]
+        },
+        "Walking 1": {
+          "Directions": 6,
+          "SpritesheetX": 120,
+          "SpritesheetY": 0,
+          "Hashes": [
+            "f736b461deb2534b3557cb1a35bad20f",
+            "515854491961e58c58d6c7cdb8d8c54c",
+            "8e3c2120238d41c0ab90d5ff01f24f5a",
+            "16fbba6306464e560c72a1cda916cde8",
+            "bb0db70db18ae7ff6c60aefa025d098b",
+            "eefa439c5e47af4873991d7c671b1e1c"
+          ]
+        },
+        "Walking 2": {
+          "Directions": 6,
+          "SpritesheetX": 160,
+          "SpritesheetY": 0,
+          "Hashes": [
+            "c475a7fd185b3823ce7999470e1d2f09",
+            "6fdd0c560efcaa7eefea36f481197c2d",
+            "5eead2c2bd47488d5d0e2f010230ab1a",
+            "97585b3a9cacb6ba5f937119e901e1d7",
+            "806c086ff8dbda1cc2f29e82cc6efc08",
+            "5dd26e746415fbbe513dd5e4be991e36"
+          ]
+        },
+        "Walking 3": {
+          "Directions": 6,
+          "SpritesheetX": 200,
+          "SpritesheetY": 0,
+          "Hashes": [
+            "43d161fb9aea8d2072220e30d7b92cd7",
+            "73cdbb3db560c30ec8cca73762263651",
+            "81f707924a6ba20a4635667536dafe3a",
+            "ff80057d7fd7deef02884570d74156da",
+            "400699e8e0be099a359149763987b1a1",
+            "f9969bfc41165b6bf4f95d07be889936"
+          ]
+        },
+        "Walking 4": {
+          "Directions": 6,
+          "SpritesheetX": 240,
+          "SpritesheetY": 0,
+          "Hashes": [
+            "77055facc2a4941314cb49469cd8c9bf",
+            "81be1f2024bef847e6282cf741633dbb",
+            "e9160d139a4528799e1c85fccb453e3d",
+            "be506eb507d568239e1771caa7b7c9cf",
+            "405adcc5be36c327cbd10adc2c103aa4",
+            "f4f314fb7c8b886d4d3a47162c1f64f1"
+          ]
+        },
+        "Walking 5": {
+          "Directions": 6,
+          "SpritesheetX": 280,
+          "SpritesheetY": 0,
+          "Hashes": [
+            "3550c405be5e66401e3e01e9b57665ef",
+            "c9a4e82dcc9da05316b65058bd9e5c59",
+            "528820a34fa17de20a9386417d4fe3df",
+            "e1ffc620b0b9d920f3ea2a1bcd3cb3d1",
+            "07d0af050a1c4192728e4f457dc508cd",
+            "2eeb653cd18ad924629c681cc275933c"
+          ]
+        }
+      },
+      "AnimationByDirections": {
+        "4": {
+          "Idle (Battle)": [
+            {
+              "Frame": "Idle 1",
+              "Duration": 6
+            },
+            {
+              "Frame": "Idle 2",
+              "Duration": 6
+            },
+            {
+              "Frame": "Idle 3",
+              "Duration": 6
+            },
+            {
+              "Frame": "Idle 2",
+              "Duration": 6
+            },
+            {
+              "Command": "GotoCommandOffset",
+              "Parameter": 0
+            }
+          ],
+          "StillFrame (Battle)": [
+            {
+              "Frame": "Idle 3",
+              "Duration": 10
+            },
+            {
+              "Command": "Stop"
+            }
+          ]
+        },
+        "6": {
+          "Idle (Battle)": [
+            {
+              "Frame": "Idle 1",
+              "Duration": 5
+            },
+            {
+              "Frame": "Idle 2",
+              "Duration": 5
+            },
+            {
+              "Frame": "Idle 3",
+              "Duration": 5
+            },
+            {
+              "Frame": "Idle 2",
+              "Duration": 5
+            },
+            {
+              "Command": "GotoCommandOffset",
+              "Parameter": 0
+            }
+          ],
+          "StillFrame (Walking)": [
+            {
+              "Frame": "Walking 2",
+              "Duration": 10
+            },
+            {
+              "Command": "Stop"
+            }
+          ],
+          "Walking (Battle)": [
+            {
+              "Frame": "Walking 1",
+              "Duration": 4
+            },
+            {
+              "Frame": "Walking 2",
+              "Duration": 4
+            },
+            {
+              "Frame": "Walking 3",
+              "Duration": 4
+            },
+            {
+              "Frame": "Walking 4",
+              "Duration": 4
+            },
+            {
+              "Frame": "Walking 2",
+              "Duration": 4
+            },
+            {
+              "Frame": "Walking 5",
+              "Duration": 4
+            },
+            {
+              "Command": "GotoCommandOffset",
+              "Parameter": 0
+            }
+          ]
+        }
+      }
+    }
+  }
+}

@@ -10,9 +10,42 @@
       "CollisionSize": 40,
       "Scale": 1.0,
       "FrameGroups": {
-        "ShakingHead (On Knees) 1": {
+        "Idle 1": {
           "Directions": 4,
           "SpritesheetX": 0,
+          "SpritesheetY": 0,
+          "Hashes": [
+            "f2b575f704d4b31041ec99a9f1342e72",
+            "cbb7771fb93055a677eca531a9f3e578",
+            "25b8588751025ee70853343287e55017",
+            "b57d723bde9a4cc5bd270a940c381839"
+          ]
+        },
+        "Idle 2": {
+          "Directions": 4,
+          "SpritesheetX": 40,
+          "SpritesheetY": 0,
+          "Hashes": [
+            "db78a1b42c4f6cf053651dc4a240058a",
+            "88f85d095d9f499f97780393ba7c8c74",
+            "232e65a61671bdd9f87414d653511326",
+            "04d78da41b68ebefb726849cd82aa3c3"
+          ]
+        },
+        "Idle 3": {
+          "Directions": 4,
+          "SpritesheetX": 80,
+          "SpritesheetY": 0,
+          "Hashes": [
+            "07b0297a41bc7207b1e267f5c521e5ff",
+            "524a0e4b6db45b19bc86358353a0f9ea",
+            "2570634be0d2d66e7eb45298ec371d91",
+            "5f01afddf6b307318329f8a5fbef1880"
+          ]
+        },
+        "ShakingHead (On Knees) 1": {
+          "Directions": 4,
+          "SpritesheetX": 120,
           "SpritesheetY": 0,
           "Hashes": [
             "5cc3f6fa25e8b907e2cd26c5b27136d7",
@@ -23,7 +56,7 @@
         },
         "ShakingHead (On Knees) 2": {
           "Directions": 4,
-          "SpritesheetX": 40,
+          "SpritesheetX": 160,
           "SpritesheetY": 0,
           "Hashes": [
             "2e7059ea3e29842ef3c1c22c8507968a",
@@ -34,7 +67,7 @@
         },
         "ShakingHead (On Knees) 3": {
           "Directions": 4,
-          "SpritesheetX": 80,
+          "SpritesheetX": 200,
           "SpritesheetY": 0,
           "Hashes": [
             "829469615e87a91050099eb8e345e6ce",
@@ -45,7 +78,7 @@
         },
         "Walking 1": {
           "Directions": 4,
-          "SpritesheetX": 120,
+          "SpritesheetX": 240,
           "SpritesheetY": 0,
           "Hashes": [
             "fe8d0ad43424e977121c2e6161d13e87",
@@ -56,7 +89,7 @@
         },
         "Walking 2": {
           "Directions": 4,
-          "SpritesheetX": 160,
+          "SpritesheetX": 280,
           "SpritesheetY": 0,
           "Hashes": [
             "415525ffeafabd8e73d8ea9e4407800d",
@@ -67,7 +100,7 @@
         },
         "Walking 3": {
           "Directions": 4,
-          "SpritesheetX": 200,
+          "SpritesheetX": 320,
           "SpritesheetY": 0,
           "Hashes": [
             "317e71ab241074848860e981eed84c57",
@@ -78,7 +111,7 @@
         },
         "Walking 4": {
           "Directions": 4,
-          "SpritesheetX": 240,
+          "SpritesheetX": 360,
           "SpritesheetY": 0,
           "Hashes": [
             "203d41f214e105f049f430a9d37d787a",
@@ -89,7 +122,7 @@
         },
         "Walking 5": {
           "Directions": 4,
-          "SpritesheetX": 280,
+          "SpritesheetX": 400,
           "SpritesheetY": 0,
           "Hashes": [
             "1b09dca93404f909073675087fa55c9e",
@@ -101,6 +134,32 @@
       },
       "AnimationByDirections": {
         "4": {
+          "Idle (Sitting)": [
+            {
+              "Frame": "Idle 1",
+              "Duration": 6
+            },
+            {
+              "Frame": "Idle 2",
+              "Duration": 6
+            },
+            {
+              "Frame": "Idle 3",
+              "Duration": 15
+            },
+            {
+              "Frame": "Idle 2",
+              "Duration": 15
+            },
+            {
+              "Frame": "Idle 1",
+              "Duration": 120
+            },
+            {
+              "Command": "GotoCommandOffset",
+              "Parameter": 0
+            }
+          ],
           "ShakingHead (On Knees)": [
             {
               "Frame": "ShakingHead (On Knees) 1",
@@ -147,6 +206,15 @@
             {
               "Frame": "ShakingHead (On Knees) 1",
               "Duration": 5
+            },
+            {
+              "Command": "Stop"
+            }
+          ],
+          "StillFrame (Sitting)": [
+            {
+              "Frame": "Idle 1",
+              "Duration": 10
             },
             {
               "Command": "Stop"

@@ -1,0 +1,127 @@
+{
+  "Name": "Doom Centaur",
+  "Width": 48,
+  "Height": 40,
+  "Spritesheets": {
+    "48x40": {
+      "SpriteID": 109,
+      "VerticalOffset": 0,
+      "Unknown0x08": 20,
+      "CollisionSize": 40,
+      "Scale": 1.0,
+      "FrameGroups": {
+        "Walking 1": {
+          "Directions": 5,
+          "SpritesheetX": 0,
+          "SpritesheetY": 0,
+          "Hashes": [
+            "4276a20c3987e22c172f7b47b90297f3",
+            "0427591fdbdac3bf79045ee4087e30dd",
+            "ab197b1c5c7660bd6386db9220ccc568",
+            "869c4085e94e976ac2bb6ab726a30edd",
+            "d59b6a215038c8d40a745c95be74d3c6"
+          ]
+        },
+        "Walking 2": {
+          "Directions": 5,
+          "SpritesheetX": 48,
+          "SpritesheetY": 0,
+          "Hashes": [
+            "cee19e62951d218f290e8f41e4d543f1",
+            "499c0cf755f943db9a295f8e786c4e26",
+            "520bbaa1b904642f4b76b3d4e1d89251",
+            "0c85aafd78173fbb9e37b69de701c086",
+            "dec27eb1d27cc34f72a14fb32d863550"
+          ]
+        },
+        "Walking 3": {
+          "Directions": 5,
+          "SpritesheetX": 96,
+          "SpritesheetY": 0,
+          "Hashes": [
+            "772f6b977a72f7b3d87dfa809916ac0f",
+            "5fa46a6de032b04439dd07c2d5bf7931",
+            "d159a2e93684c082f47ae17adf6e25ed",
+            "a2b18c27268b71f3aad86420fc56cd28",
+            "6ac479ea7a6559b2df905ddc785c235c"
+          ]
+        },
+        "Walking 4": {
+          "Directions": 5,
+          "SpritesheetX": 144,
+          "SpritesheetY": 0,
+          "Hashes": [
+            "4cb1d30f3f128aa74284e2434c842c32",
+            "297a7c6724e5ba963abb8f923cc13973",
+            "4fb7b84c2b9a8fdd29b8e528afdfa797",
+            "7f9d909f07930b32a315cbbe1d6fd3c9",
+            "d42e4c51f7edc4dff853819272b5ab8f"
+          ]
+        },
+        "Walking 5": {
+          "Directions": 5,
+          "SpritesheetX": 192,
+          "SpritesheetY": 0,
+          "Hashes": [
+            "7fe1c5e4c6c182d96381b3d594f11943",
+            "2ba4bced9f5bb1c1ac1e2d4a6da752c1",
+            "b1f48c8ea8745a0f3420f998a7e1e773",
+            "97705f54cb61b81c05cdd990b27d5296",
+            "41f23bfaab409631c9ec3ec12bcf79ae"
+          ]
+        }
+      },
+      "AnimationByDirections": {
+        "5": {
+          "StillFrame": [
+            {
+              "Frame": "Walking 1",
+              "Duration": 10
+            },
+            {
+              "Command": "Stop"
+            }
+          ],
+          "Walking": [
+            {
+              "Frame": "Walking 1",
+              "Duration": 5
+            },
+            {
+              "Frame": "Walking 2",
+              "Duration": 5
+            },
+            {
+              "Frame": "Walking 3",
+              "Duration": 5
+            },
+            {
+              "Frame": "Walking 4",
+              "Duration": 5
+            },
+            {
+              "Frame": "Walking 5",
+              "Duration": 5
+            },
+            {
+              "Frame": "Walking 4",
+              "Duration": 5
+            },
+            {
+              "Frame": "Walking 3",
+              "Duration": 5
+            },
+            {
+              "Frame": "Walking 2",
+              "Duration": 5
+            },
+            {
+              "Command": "GotoCommandOffset",
+              "Parameter": 0
+            }
+          ]
+        }
+      }
+    }
+  }
+}

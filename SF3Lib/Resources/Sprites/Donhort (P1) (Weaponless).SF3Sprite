@@ -280,6 +280,28 @@
               "Command": "Stop"
             }
           ],
+          "StillFrame (Sleeping, Looks Like Animation with Wrong Frames, Repeat)": [
+            {
+              "Frame": "Sleeping 1",
+              "Duration": 10
+            },
+            {
+              "Frame": "Sleeping 1",
+              "Duration": 10
+            },
+            {
+              "Frame": "Sleeping 1",
+              "Duration": 15
+            },
+            {
+              "Frame": "Sleeping 1",
+              "Duration": 10
+            },
+            {
+              "Command": "GotoCommandOffset",
+              "Parameter": 0
+            }
+          ],
           "Walking": [
             {
               "Frame": "Walking 1",

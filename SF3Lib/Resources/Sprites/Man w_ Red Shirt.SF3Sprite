@@ -54,9 +54,16 @@
             "3af653bb1d62dfff28fdcc1f039f34c2"
           ]
         },
+        "Idle 1 (Alt)": {
+          "ESE": {
+            "Hash": "8a0fd04b4d5f8300c602d392f6d18c93",
+            "SpritesheetX": 160,
+            "SpritesheetY": 40
+          }
+        },
         "Idle 2": {
           "Directions": 4,
-          "SpritesheetX": 160,
+          "SpritesheetX": 200,
           "SpritesheetY": 0,
           "Hashes": [
             "2e6f6a304b9633b7414453d08f6f5297",
@@ -67,7 +74,7 @@
         },
         "Idle 3": {
           "Directions": 4,
-          "SpritesheetX": 200,
+          "SpritesheetX": 240,
           "SpritesheetY": 0,
           "Hashes": [
             "03b93e93dbb80995a5062cb4b7c17b0f",
@@ -78,7 +85,7 @@
         },
         "Nodding 1": {
           "Directions": 4,
-          "SpritesheetX": 240,
+          "SpritesheetX": 280,
           "SpritesheetY": 0,
           "Hashes": [
             "16926c72a3019fd53346effadb9e390e",
@@ -89,7 +96,7 @@
         },
         "Nodding 2": {
           "Directions": 4,
-          "SpritesheetX": 280,
+          "SpritesheetX": 320,
           "SpritesheetY": 0,
           "Hashes": [
             "31176971a992fc1b56333f8b4af7401e",
@@ -100,7 +107,7 @@
         },
         "Walking 1": {
           "Directions": 4,
-          "SpritesheetX": 320,
+          "SpritesheetX": 360,
           "SpritesheetY": 0,
           "Hashes": [
             "be9d55649ecf26ff884e29819143bfca",
@@ -109,9 +116,16 @@
             "9e778b250735064a1202d3a588714b78"
           ]
         },
+        "Walking 1 (Alt)": {
+          "ESE": {
+            "Hash": "02faafde25f9c66438c2eb947aae7b79",
+            "SpritesheetX": 400,
+            "SpritesheetY": 40
+          }
+        },
         "Walking 2": {
           "Directions": 4,
-          "SpritesheetX": 360,
+          "SpritesheetX": 440,
           "SpritesheetY": 0,
           "Hashes": [
             "2bb945327e6da5ef1949b83d7a826a36",
@@ -120,9 +134,16 @@
             "b7103e360d6b86a537d071a668535c50"
           ]
         },
+        "Walking 2 (Alt)": {
+          "ESE": {
+            "Hash": "b5945245cae596ba7502191a412386f9",
+            "SpritesheetX": 480,
+            "SpritesheetY": 40
+          }
+        },
         "Walking 3": {
           "Directions": 4,
-          "SpritesheetX": 400,
+          "SpritesheetX": 520,
           "SpritesheetY": 0,
           "Hashes": [
             "7f485426af5d4f7167bd9a6bee8cfc36",
@@ -131,9 +152,16 @@
             "9ee9fe4da0a4db5b4dfd0cf003a08584"
           ]
         },
+        "Walking 3 (Alt)": {
+          "ESE": {
+            "Hash": "78bcea2b47a6cc730b349fcbe781492a",
+            "SpritesheetX": 560,
+            "SpritesheetY": 40
+          }
+        },
         "Walking 4": {
           "Directions": 4,
-          "SpritesheetX": 440,
+          "SpritesheetX": 600,
           "SpritesheetY": 0,
           "Hashes": [
             "ed61692daae27281db8e9918a356d6a3",
@@ -141,6 +169,13 @@
             "4502bfabc6e7e0fe7b39765bd6fb5fa6",
             "b7a3988bc252db0837133aececd24742"
           ]
+        },
+        "Walking 4 (Alt)": {
+          "ESE": {
+            "Hash": "fdd8957bdb36cc0e70dcf4f22467ee3f",
+            "SpritesheetX": 640,
+            "SpritesheetY": 40
+          }
         }
       },
       "AnimationByDirections": {
@@ -219,6 +254,32 @@
               "Parameter": 1
             }
           ],
+          "StillFrame (Alt, Walking)": [
+            {
+              "Frame": {
+                "SSE": {
+                  "Frame": "Walking 1",
+                  "Direction": "SSE"
+                },
+                "ESE": {
+                  "Frame": "Walking 1 (Alt)",
+                  "Direction": "ESE"
+                },
+                "ENE": {
+                  "Frame": "Walking 1",
+                  "Direction": "ENE"
+                },
+                "NNE": {
+                  "Frame": "Walking 1",
+                  "Direction": "NNE"
+                }
+              },
+              "Duration": 10
+            },
+            {
+              "Command": "Stop"
+            }
+          ],
           "StillFrame (Idle)": [
             {
               "Frame": "Idle 1",
@@ -235,6 +296,270 @@
             },
             {
               "Command": "Stop"
+            }
+          ],
+          "Walking (Alt, Faster)": [
+            {
+              "Frame": {
+                "SSE": {
+                  "Frame": "Walking 1",
+                  "Direction": "SSE"
+                },
+                "ESE": {
+                  "Frame": "Walking 1 (Alt)",
+                  "Direction": "ESE"
+                },
+                "ENE": {
+                  "Frame": "Walking 1",
+                  "Direction": "ENE"
+                },
+                "NNE": {
+                  "Frame": "Walking 1",
+                  "Direction": "NNE"
+                }
+              },
+              "Duration": 4
+            },
+            {
+              "Frame": {
+                "SSE": {
+                  "Frame": "Idle 1",
+                  "Direction": "SSE"
+                },
+                "ESE": {
+                  "Frame": "Idle 1 (Alt)",
+                  "Direction": "ESE"
+                },
+                "ENE": {
+                  "Frame": "Idle 1",
+                  "Direction": "ENE"
+                },
+                "NNE": {
+                  "Frame": "Idle 1",
+                  "Direction": "NNE"
+                }
+              },
+              "Duration": 4
+            },
+            {
+              "Frame": {
+                "SSE": {
+                  "Frame": "Walking 2",
+                  "Direction": "SSE"
+                },
+                "ESE": {
+                  "Frame": "Walking 2 (Alt)",
+                  "Direction": "ESE"
+                },
+                "ENE": {
+                  "Frame": "Walking 2",
+                  "Direction": "ENE"
+                },
+                "NNE": {
+                  "Frame": "Walking 2",
+                  "Direction": "NNE"
+                }
+              },
+              "Duration": 4
+            },
+            {
+              "Frame": {
+                "SSE": {
+                  "Frame": "Walking 3",
+                  "Direction": "SSE"
+                },
+                "ESE": {
+                  "Frame": "Walking 3 (Alt)",
+                  "Direction": "ESE"
+                },
+                "ENE": {
+                  "Frame": "Walking 3",
+                  "Direction": "ENE"
+                },
+                "NNE": {
+                  "Frame": "Walking 3",
+                  "Direction": "NNE"
+                }
+              },
+              "Duration": 4
+            },
+            {
+              "Frame": {
+                "SSE": {
+                  "Frame": "Idle 1",
+                  "Direction": "SSE"
+                },
+                "ESE": {
+                  "Frame": "Idle 1 (Alt)",
+                  "Direction": "ESE"
+                },
+                "ENE": {
+                  "Frame": "Idle 1",
+                  "Direction": "ENE"
+                },
+                "NNE": {
+                  "Frame": "Idle 1",
+                  "Direction": "NNE"
+                }
+              },
+              "Duration": 4
+            },
+            {
+              "Frame": {
+                "SSE": {
+                  "Frame": "Walking 4",
+                  "Direction": "SSE"
+                },
+                "ESE": {
+                  "Frame": "Walking 4 (Alt)",
+                  "Direction": "ESE"
+                },
+                "ENE": {
+                  "Frame": "Walking 4",
+                  "Direction": "ENE"
+                },
+                "NNE": {
+                  "Frame": "Walking 4",
+                  "Direction": "NNE"
+                }
+              },
+              "Duration": 4
+            },
+            {
+              "Command": "GotoCommandOffset",
+              "Parameter": 0
+            }
+          ],
+          "Walking (Alt, Slower)": [
+            {
+              "Frame": {
+                "SSE": {
+                  "Frame": "Walking 1",
+                  "Direction": "SSE"
+                },
+                "ESE": {
+                  "Frame": "Walking 1 (Alt)",
+                  "Direction": "ESE"
+                },
+                "ENE": {
+                  "Frame": "Walking 1",
+                  "Direction": "ENE"
+                },
+                "NNE": {
+                  "Frame": "Walking 1",
+                  "Direction": "NNE"
+                }
+              },
+              "Duration": 5
+            },
+            {
+              "Frame": {
+                "SSE": {
+                  "Frame": "Idle 1",
+                  "Direction": "SSE"
+                },
+                "ESE": {
+                  "Frame": "Idle 1 (Alt)",
+                  "Direction": "ESE"
+                },
+                "ENE": {
+                  "Frame": "Idle 1",
+                  "Direction": "ENE"
+                },
+                "NNE": {
+                  "Frame": "Idle 1",
+                  "Direction": "NNE"
+                }
+              },
+              "Duration": 5
+            },
+            {
+              "Frame": {
+                "SSE": {
+                  "Frame": "Walking 2",
+                  "Direction": "SSE"
+                },
+                "ESE": {
+                  "Frame": "Walking 2 (Alt)",
+                  "Direction": "ESE"
+                },
+                "ENE": {
+                  "Frame": "Walking 2",
+                  "Direction": "ENE"
+                },
+                "NNE": {
+                  "Frame": "Walking 2",
+                  "Direction": "NNE"
+                }
+              },
+              "Duration": 5
+            },
+            {
+              "Frame": {
+                "SSE": {
+                  "Frame": "Walking 3",
+                  "Direction": "SSE"
+                },
+                "ESE": {
+                  "Frame": "Walking 3 (Alt)",
+                  "Direction": "ESE"
+                },
+                "ENE": {
+                  "Frame": "Walking 3",
+                  "Direction": "ENE"
+                },
+                "NNE": {
+                  "Frame": "Walking 3",
+                  "Direction": "NNE"
+                }
+              },
+              "Duration": 5
+            },
+            {
+              "Frame": {
+                "SSE": {
+                  "Frame": "Idle 1",
+                  "Direction": "SSE"
+                },
+                "ESE": {
+                  "Frame": "Idle 1 (Alt)",
+                  "Direction": "ESE"
+                },
+                "ENE": {
+                  "Frame": "Idle 1",
+                  "Direction": "ENE"
+                },
+                "NNE": {
+                  "Frame": "Idle 1",
+                  "Direction": "NNE"
+                }
+              },
+              "Duration": 5
+            },
+            {
+              "Frame": {
+                "SSE": {
+                  "Frame": "Walking 4",
+                  "Direction": "SSE"
+                },
+                "ESE": {
+                  "Frame": "Walking 4 (Alt)",
+                  "Direction": "ESE"
+                },
+                "ENE": {
+                  "Frame": "Walking 4",
+                  "Direction": "ENE"
+                },
+                "NNE": {
+                  "Frame": "Walking 4",
+                  "Direction": "NNE"
+                }
+              },
+              "Duration": 5
+            },
+            {
+              "Command": "GotoCommandOffset",
+              "Parameter": 0
             }
           ],
           "Walking (Faster)": [

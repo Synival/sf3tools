@@ -13,7 +13,7 @@
         "Complaining 1": {
           "Directions": 1,
           "SpritesheetX": 0,
-          "SpritesheetY": 0,
+          "SpritesheetY": 16,
           "Hashes": [
             "5af7b36f7352d858820d3c3bfb4178e7"
           ]
@@ -21,10 +21,17 @@
         "Embarassed 1": {
           "Directions": 1,
           "SpritesheetX": 16,
-          "SpritesheetY": 0,
+          "SpritesheetY": 16,
           "Hashes": [
             "a2dd2e742467d56762a51b7e4aa0b019"
           ]
+        },
+        "Embarrased (by KoD) 1": {
+          "Unset": {
+            "Hash": "6bae56c014353379e449dad9d8c6222a",
+            "SpritesheetX": 32,
+            "SpritesheetY": 0
+          }
         }
       },
       "AnimationByDirections": {
@@ -32,6 +39,20 @@
           "Complaining": [
             {
               "Frame": "Complaining 1",
+              "Duration": 10
+            },
+            {
+              "Command": "Stop"
+            }
+          ],
+          "Embarassed (by KoD)": [
+            {
+              "Frame": {
+                "First": {
+                  "Frame": "Embarrased (by KoD) 1",
+                  "Direction": "Unset"
+                }
+              },
               "Duration": 10
             },
             {

@@ -8,7 +8,7 @@
       "VerticalOffset": 0,
       "Unknown0x08": 20,
       "CollisionSize": 40,
-      "Scale": 1.5,
+      "Scale": 1.199997,
       "FrameGroups": {
         "Idle 1": {
           "Directions": 4,
@@ -41,6 +41,50 @@
             "df968f58cac22ae2cc6948413fbcb2e7",
             "676c9348d340de5d0ba3f012b5bbd706",
             "02dd6bb9cd25e7a8872a655ddd5de656"
+          ]
+        },
+        "Walking 1": {
+          "Directions": 4,
+          "SpritesheetX": 144,
+          "SpritesheetY": 0,
+          "Hashes": [
+            "79b275467e54dbd4d99d5897555b9976",
+            "180d87f6e02e305471f616823022f521",
+            "a6eb419cc41343968285d510b675e910",
+            "e4f34e6eda6949fe5427ba4312714059"
+          ]
+        },
+        "Walking 2": {
+          "Directions": 4,
+          "SpritesheetX": 192,
+          "SpritesheetY": 0,
+          "Hashes": [
+            "9e7eb9cefe469f16231e334a827d9062",
+            "d1fad4d63c0408fbe85303e0e6da1bc8",
+            "df3db7bc1b9983ec2eb18deb206b7f43",
+            "63fa58379e2123afdcc14bc344b4823f"
+          ]
+        },
+        "Walking 3": {
+          "Directions": 4,
+          "SpritesheetX": 240,
+          "SpritesheetY": 0,
+          "Hashes": [
+            "50f1fe5be4551b1b57b2baa8036a16db",
+            "4d08f9cb4880fd7bcbef5890b6825642",
+            "ca3af9dd99c76a607c538e28263f366c",
+            "f4dcf2b706e2681b6124b48a8773ed1c"
+          ]
+        },
+        "Walking 4": {
+          "Directions": 4,
+          "SpritesheetX": 288,
+          "SpritesheetY": 0,
+          "Hashes": [
+            "bc33ef743796bc2306df71440b9ac266",
+            "7123da92e5b2b26217fa7ebd40d13fea",
+            "8fc73bfbc6c893a280cd2316c8b3ac76",
+            "b702ad7e21d2cc5119b0fd438057e732"
           ]
         }
       },
@@ -75,6 +119,45 @@
             },
             {
               "Command": "Stop"
+            }
+          ],
+          "StillFrame (Alt)": [
+            {
+              "Frame": "Idle 1",
+              "Duration": 10
+            },
+            {
+              "Command": "Stop"
+            }
+          ],
+          "Walking": [
+            {
+              "Frame": "Walking 1",
+              "Duration": 7
+            },
+            {
+              "Frame": "Idle 1",
+              "Duration": 7
+            },
+            {
+              "Frame": "Walking 2",
+              "Duration": 7
+            },
+            {
+              "Frame": "Walking 3",
+              "Duration": 7
+            },
+            {
+              "Frame": "Idle 1",
+              "Duration": 7
+            },
+            {
+              "Frame": "Walking 4",
+              "Duration": 7
+            },
+            {
+              "Command": "GotoCommandOffset",
+              "Parameter": 0
             }
           ]
         }

@@ -288,6 +288,32 @@
               "Parameter": 1
             }
           ],
+          "Nodding (Hold)": [
+            {
+              "Frame": "Idle (Field) 1",
+              "Duration": 4
+            },
+            {
+              "Frame": "Nodding 1",
+              "Duration": 2
+            },
+            {
+              "Frame": "Nodding 2",
+              "Duration": 8
+            },
+            {
+              "Frame": "Nodding 1",
+              "Duration": 2
+            },
+            {
+              "Frame": "Idle (Field) 1",
+              "Duration": 3
+            },
+            {
+              "Command": "GotoAnimation",
+              "Parameter": 0
+            }
+          ],
           "ShakingHead": [
             {
               "Frame": "ShakingHead 1",
@@ -325,6 +351,25 @@
             },
             {
               "Command": "Stop"
+            }
+          ],
+          "StillFrame (Field 2)": [
+            {
+              "Frame": "Idle (Field) 1",
+              "Duration": 999
+            },
+            {
+              "Command": "Stop"
+            }
+          ],
+          "StillFrame (Field, Change to 0)": [
+            {
+              "Frame": "Idle (Field) 1",
+              "Duration": 4
+            },
+            {
+              "Command": "GotoAnimation",
+              "Parameter": 0
             }
           ],
           "StillFrame (Field, Repeat)": [
@@ -453,6 +498,24 @@
               "Frame": "ShakingHead 2",
               "Duration": 4
             },
+            {
+              "Frame": "ShakingHead 1",
+              "Duration": 4
+            },
+            {
+              "Frame": "Idle (Field) 1",
+              "Duration": 4
+            },
+            {
+              "Frame": "ShakingHead 2",
+              "Duration": 4
+            },
+            {
+              "Command": "GotoAnimation",
+              "Parameter": 1
+            }
+          ],
+          "ShakingHead (Once)": [
             {
               "Frame": "ShakingHead 1",
               "Duration": 4
