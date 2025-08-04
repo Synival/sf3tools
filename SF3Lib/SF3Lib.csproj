@@ -132,6 +132,24 @@
     <Content Include="Resources\SpriteFramesByHash.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\Sprites\Benetram (Prototype 2).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Benetram (Prototype).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Doom Centaur.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Hayward (Prototype).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Irene (Prototype).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Wise Man.SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\WeaponTypes.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

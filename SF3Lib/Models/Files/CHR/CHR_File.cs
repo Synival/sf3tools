@@ -44,6 +44,7 @@ namespace SF3.Models.Files.CHR {
             // duplicate frames to have their own location.
             var framesWithDuplicates = new HashSet<string>(
                 SpriteTable
+                    .Where(x => x.FrameTable != null)
                     .SelectMany(x => x.FrameTable)
                     .GroupBy(x => x.TextureHash)
                     .Where(x => x.Count() > 1 && !x.All(y => y.TextureOffset != x.First().TextureOffset))
@@ -59,6 +60,7 @@ namespace SF3.Models.Files.CHR {
                 : (int?) null;
 
             var firstTextureOffset = SpriteTable
+                .Where(x => x.FrameTable != null)
                 .SelectMany(x => x.FrameTable)
                 .OrderBy(x => x.TextureOffset)
                 .Select(x => (int?) x.TextureOffset)
@@ -69,6 +71,7 @@ namespace SF3.Models.Files.CHR {
                 ;
 
             var lastFrameTablePosition = SpriteTable
+                .Where(x => x.FrameTable != null)
                 .Select(x => x.FrameTable)
                 .OrderByDescending(x => x.Address)
                 .Select(x => (int?) x.Address + x.SizeInBytesPlusTerminator + 4)

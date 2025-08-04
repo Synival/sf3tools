@@ -124,6 +124,9 @@ namespace SF3.Models.Structs.CHR {
         }
 
         private FrameGroupsForSpritesheet[] CreateSpriteFrames(HashSet<string> framesWithDuplicates) {
+            if (FrameTable == null)
+                return new FrameGroupsForSpritesheet[0];
+
             // Track the sprite whose frame groups are being built.
             string lastSpriteName = null;
             int? lastWidth = null;
@@ -240,6 +243,9 @@ namespace SF3.Models.Structs.CHR {
         }
 
         private AnimationsForSpritesheetAndDirection[] CreateSpriteAnimations() {
+            if (AnimationTable == null)
+                return new AnimationsForSpritesheetAndDirection[0];
+
             // Track the sprite whose animation groups are being built.
             string lastSpriteName = null;
             int? lastWidth = null;

@@ -259,7 +259,7 @@ namespace CHR_Extractor {
                                                 var newSprite  = newSprites[j];
 
                                                 // Animation names should check out.
-                                                if (origSprite.AnimationTable.Length == newSprite.AnimationTable.Length) {
+                                                if (origSprite.AnimationTable?.Length == newSprite.AnimationTable?.Length && origSprite.AnimationTable != null) {
                                                     for (int k = 0; k < newSprite.AnimationTable.Length; k++) {
                                                         var origAnim = origSprite.AnimationTable[k];
                                                         var newAnim  = newSprite.AnimationTable[k];
@@ -272,9 +272,12 @@ namespace CHR_Extractor {
                                                 // Report differences in tables in general.
                                                 ITable[] GetTables(Sprite sprite) {
                                                     var tables = new List<ITable>();
-                                                    tables.AddRange(sprite.AnimationCommandTablesByIndex.Select(x => x.Value).ToList());
-                                                    tables.Add(sprite.AnimationOffsetTable);
-                                                    tables.Add(sprite.FrameTable);
+                                                    if (sprite.AnimationCommandTablesByIndex != null)
+                                                        tables.AddRange(sprite.AnimationCommandTablesByIndex.Select(x => x.Value).ToList());
+                                                    if (sprite.AnimationOffsetTable != null)
+                                                        tables.Add(sprite.AnimationOffsetTable);
+                                                    if (sprite.FrameTable != null)
+                                                        tables.Add(sprite.FrameTable);
                                                     return tables.ToArray();
                                                 }
 

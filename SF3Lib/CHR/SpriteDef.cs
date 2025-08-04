@@ -89,7 +89,7 @@ namespace SF3.CHR {
             var spriteDef = SpriteUtils.GetSpriteDef(SpriteName);
             var spritesheet = (spriteDef?.Spritesheets?.TryGetValue(Spritesheet.DimensionsToKey(Width, Height), out var ssOut) == true) ? ssOut : null;
 
-            if (Width != spriteDef.Width || Height != spriteDef.Height) {
+            if (Width != spriteDef?.Width || Height != spriteDef?.Height) {
                 jObj.Add("Width", new JValue(Width));
                 jObj.Add("Height", new JValue(Height));
             }
