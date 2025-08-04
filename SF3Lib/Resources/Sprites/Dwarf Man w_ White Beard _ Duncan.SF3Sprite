@@ -11,92 +11,52 @@
       "Scale": 1.0,
       "FrameGroups": {
         "Nodding 1": {
-          "SSE": {
-            "Hash": "aa30a354e51ed8c47ffefb6b177931f5",
-            "SpritesheetX": 0,
-            "SpritesheetY": 40
-          },
-          "ESE": {
-            "Hash": "a796150817a5b44b77d735f9defc55d8",
-            "SpritesheetX": 0,
-            "SpritesheetY": 120
-          },
-          "ENE": {
-            "Hash": "6f07f2db714330e95bf1709bdd06aba6",
-            "SpritesheetX": 0,
-            "SpritesheetY": 200
-          },
-          "NNE": {
-            "Hash": "0785ffc2ee816639d0693b55e1c6b077",
-            "SpritesheetX": 0,
-            "SpritesheetY": 280
-          }
+          "Directions": 4,
+          "SpritesheetX": 0,
+          "SpritesheetY": 40,
+          "Span": 80,
+          "Hashes": [
+            "aa30a354e51ed8c47ffefb6b177931f5",
+            "a796150817a5b44b77d735f9defc55d8",
+            "6f07f2db714330e95bf1709bdd06aba6",
+            "0785ffc2ee816639d0693b55e1c6b077"
+          ]
         },
         "Nodding 2": {
-          "SSE": {
-            "Hash": "a8948d586773848c1baa89d917c17d34",
-            "SpritesheetX": 40,
-            "SpritesheetY": 40
-          },
-          "ESE": {
-            "Hash": "41d1cebbc68cb489f31ec3dee17c21d8",
-            "SpritesheetX": 40,
-            "SpritesheetY": 120
-          },
-          "ENE": {
-            "Hash": "889570e17ee09480122aa365c355392c",
-            "SpritesheetX": 40,
-            "SpritesheetY": 200
-          },
-          "NNE": {
-            "Hash": "edf02c8bdea35cdba77b442bc51a1367",
-            "SpritesheetX": 40,
-            "SpritesheetY": 280
-          }
+          "Directions": 4,
+          "SpritesheetX": 40,
+          "SpritesheetY": 40,
+          "Span": 80,
+          "Hashes": [
+            "a8948d586773848c1baa89d917c17d34",
+            "41d1cebbc68cb489f31ec3dee17c21d8",
+            "889570e17ee09480122aa365c355392c",
+            "edf02c8bdea35cdba77b442bc51a1367"
+          ]
         },
         "ShakingHead 1": {
-          "SSE": {
-            "Hash": "540db4ab9862e98d69457e574359ec9a",
-            "SpritesheetX": 80,
-            "SpritesheetY": 40
-          },
-          "ESE": {
-            "Hash": "e973afabfd61f4a5ad42e5ee4b2df3ef",
-            "SpritesheetX": 80,
-            "SpritesheetY": 120
-          },
-          "ENE": {
-            "Hash": "6f6853e9a5f8c27a7e2b18a06227b525",
-            "SpritesheetX": 80,
-            "SpritesheetY": 200
-          },
-          "NNE": {
-            "Hash": "428328895eda10db340c472dd20c718e",
-            "SpritesheetX": 80,
-            "SpritesheetY": 280
-          }
+          "Directions": 4,
+          "SpritesheetX": 80,
+          "SpritesheetY": 40,
+          "Span": 80,
+          "Hashes": [
+            "540db4ab9862e98d69457e574359ec9a",
+            "e973afabfd61f4a5ad42e5ee4b2df3ef",
+            "6f6853e9a5f8c27a7e2b18a06227b525",
+            "428328895eda10db340c472dd20c718e"
+          ]
         },
         "ShakingHead 2": {
-          "SSE": {
-            "Hash": "0fca0ae8b189a8b3c34d016400652687",
-            "SpritesheetX": 120,
-            "SpritesheetY": 40
-          },
-          "ESE": {
-            "Hash": "bd8e75ac3eed304b8b17efd3b5c1d62a",
-            "SpritesheetX": 120,
-            "SpritesheetY": 120
-          },
-          "ENE": {
-            "Hash": "504451b988a23a4d5102f8d9c8ea47d1",
-            "SpritesheetX": 120,
-            "SpritesheetY": 200
-          },
-          "NNE": {
-            "Hash": "b87f89389e369fbff8083cdb892ca3ad",
-            "SpritesheetX": 120,
-            "SpritesheetY": 280
-          }
+          "Directions": 4,
+          "SpritesheetX": 120,
+          "SpritesheetY": 40,
+          "Span": 80,
+          "Hashes": [
+            "0fca0ae8b189a8b3c34d016400652687",
+            "bd8e75ac3eed304b8b17efd3b5c1d62a",
+            "504451b988a23a4d5102f8d9c8ea47d1",
+            "b87f89389e369fbff8083cdb892ca3ad"
+          ]
         },
         "Walking 1": {
           "S": {
