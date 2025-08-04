@@ -20,6 +20,7 @@ namespace CHR_Extractor {
         // ,--- Enter the paths for all your CHR files here!
         // v
         private static readonly Dictionary<ScenarioType, string> c_pathsIn = new() {
+            { ScenarioType.Other,       "../../../../Private/ExtraCHRs" },
             { ScenarioType.Scenario1,   "D:/" },
             { ScenarioType.Scenario2,   "E:/" },
             { ScenarioType.Scenario3,   "F:/" },
@@ -27,6 +28,7 @@ namespace CHR_Extractor {
         };
 
         private static readonly Dictionary<ScenarioType, string> c_scenarioPaths = new() {
+            { ScenarioType.Other,       "Other" },
             { ScenarioType.Scenario1,   "S1" },
             { ScenarioType.Scenario2,   "S2" },
             { ScenarioType.Scenario3,   "S3" },

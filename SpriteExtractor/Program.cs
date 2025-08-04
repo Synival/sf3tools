@@ -18,6 +18,7 @@ namespace SpriteExtractor {
         // ,--- Enter the paths for all your CHR files here!
         // v
         private static readonly Dictionary<ScenarioType, string> c_pathsIn = new() {
+            { ScenarioType.Other,       "../../../../Private/ExtraCHRs" },
             { ScenarioType.Scenario1,   "D:/" },
             { ScenarioType.Scenario2,   "E:/" },
             { ScenarioType.Scenario3,   "F:/" },
@@ -144,10 +145,14 @@ namespace SpriteExtractor {
 
                             // Build a table of all textures.
                             foreach (var sprite in chrFiles.SelectMany(x => x.SpriteTable).ToArray()) {
-                                foreach (var frame in sprite.FrameTable)
-                                    AddFrame(scenario, filename, sprite.ID, frame);
-                                foreach (var animation in sprite.AnimationTable)
-                                    AddAnimation(scenario, filename, sprite.ID, animation);
+                                if (sprite.FrameTable != null) {
+                                    foreach (var frame in sprite.FrameTable)
+                                        AddFrame(scenario, filename, sprite.ID, frame);
+                                }
+                                if (sprite.AnimationTable != null) {
+                                    foreach (var animation in sprite.AnimationTable)
+                                        AddAnimation(scenario, filename, sprite.ID, animation);
+                                }
                             }
                         }
                     }
