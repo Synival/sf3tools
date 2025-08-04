@@ -210,6 +210,9 @@ namespace SF3.Utils {
                         "6738c467a0197cf04f04d8c2269d4a71",
                     };
                 }
+                // Waltz (U) has a missing *weaponless* "ShakingHead 2 (ESE)" frame
+                else if (spriteName == "Waltz (U)")
+                    return new string[] { "f22b1ebaae5956a053ab81a1a54ba9fe" };
                 else
                     return new string[0];
             }

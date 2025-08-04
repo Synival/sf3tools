@@ -187,6 +187,10 @@ namespace SF3.Models.Structs.CHR {
                 // 3) Explosions have a transparent frame
                 else if (SpriteName == "Explosion" && frame.SpriteName == "Transparency")
                     spriteName = null;
+                // 4) Waltz (U) has a ShakingHead frame that don't have a weapon in one of her w/ weapon animations.
+                //    It's been been duplicated in her weapon spritesheet, so if we see it in there, don't use the weaponless name.
+                else if (SpriteName == "Waltz (U)" && frame.SpriteName == "Waltz (U) (Weaponless)")
+                    spriteName = null;
 
                 // If the sprite name has changed, begin a new one.
                 if (spriteName != lastSpriteName || width != lastWidth || height != lastHeight || lastSpriteFrames == null) {

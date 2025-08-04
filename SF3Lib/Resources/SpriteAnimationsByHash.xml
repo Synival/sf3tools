@@ -4026,7 +4026,7 @@
     <item hash="accbc42abc03a9794389f332848c9efb" sprite="Waltz (U)" animation="Nodding (Field)" width="48" height="40" directions="4" frames="5" duration="9" />
     <item hash="67a502d21cb87454f9231286cf7f2841" sprite="Waltz (U)" animation="ShakingHead (Field, Weapon Disappears)" width="48" height="40" directions="4" frames="9" duration="20" />
     <item hash="b4afc2cf2ab8498b30558fd07aa59624" sprite="Waltz (U)" animation="StillFrame (Battle)" width="48" height="40" directions="4" frames="2" duration="10" />
-    <item hash="5437be5ebb03d148faaa265c3ad3941e" sprite="Waltz (U)" animation="StillFrame (Field)" width="48" height="40" directions="4" frames="2" duration="10" />
+    <item hash="5437be5ebb03d148faaa265c3ad3941e" sprite="Waltz (U)" animation="StillFrame (Field 2)" width="48" height="40" directions="4" frames="2" duration="10" />
     <item hash="c8e4b1312fa84b08c62942271a63893d" sprite="Waltz (U)" animation="StillFrame (Field)" width="48" height="40" directions="4" frames="2" duration="10" />
     <item hash="52274409fe77f7e0b79f0101d6c40592" sprite="Waltz (U)" animation="StillFrame (Field)" width="48" height="40" directions="6" frames="2" duration="10" />
     <item hash="e8b9d1b2f057926ef86e846c010bd3f9" sprite="Waltz (U)" animation="StillFrame (OnGround, Repeat)" width="48" height="40" directions="4" frames="2" duration="10" />

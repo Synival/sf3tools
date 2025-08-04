@@ -119,10 +119,12 @@ namespace SF3.Models.Structs.CHR {
 
                 // If the frames in this animation are shared by more than one named sprite, give them a proper name for known cases.
 
-                // Murasame has some animations where his weapon is there, then suddenly not there.
-                // They have to go somewhere, so place them in Murasame (P1).
+                // Murasame and Waltz have some animations where his weapon is there, then suddenly not there.
+                // They have to go somewhere, so place them in Murasame (P1) / Waltz (U).
                 if (distinctNames.Length == 2 && distinctNames[0] == "Murasame (P1)" && distinctNames[1] == "Murasame (P1) (Weaponless)")
                     return "Murasame (P1)";
+                else if (distinctNames.Length == 2 && distinctNames[0] == "Waltz (U)" && distinctNames[1] == "Waltz (U) (Weaponless)")
+                    return "Waltz (U)";
 
                 // Edmund's P1 sprites are special because some frames are shared with and without a weapon.
                 // (His cape is so big, the rendered frames are the same when his back is turned)
