@@ -11,18 +11,20 @@
       "Scale": 1.0,
       "FrameGroups": {
         "Complaining 1": {
-          "First": {
-            "Hash": "5af7b36f7352d858820d3c3bfb4178e7",
-            "SpritesheetX": 0,
-            "SpritesheetY": 0
-          }
+          "Directions": 1,
+          "SpritesheetX": 0,
+          "SpritesheetY": 0,
+          "Hashes": [
+            "5af7b36f7352d858820d3c3bfb4178e7"
+          ]
         },
         "Embarassed 1": {
-          "First": {
-            "Hash": "a2dd2e742467d56762a51b7e4aa0b019",
-            "SpritesheetX": 16,
-            "SpritesheetY": 0
-          }
+          "Directions": 1,
+          "SpritesheetX": 16,
+          "SpritesheetY": 0,
+          "Hashes": [
+            "a2dd2e742467d56762a51b7e4aa0b019"
+          ]
         }
       },
       "AnimationByDirections": {

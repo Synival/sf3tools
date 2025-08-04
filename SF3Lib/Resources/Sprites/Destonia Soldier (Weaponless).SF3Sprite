@@ -11,48 +11,26 @@
       "Scale": 1.0,
       "FrameGroups": {
         "OnGround (Alt) 1": {
-          "SSE": {
-            "Hash": "fe6793d2362a56a34dec75834117a985",
-            "SpritesheetX": 0,
-            "SpritesheetY": 0
-          },
-          "ESE": {
-            "Hash": "7ee4ea6032c8d22ae23685a536b082da",
-            "SpritesheetX": 0,
-            "SpritesheetY": 40
-          },
-          "ENE": {
-            "Hash": "d20484a3c7640a3a55e63e7ee94f9f11",
-            "SpritesheetX": 0,
-            "SpritesheetY": 80
-          },
-          "NNE": {
-            "Hash": "e03bdbd0353170f45a84222ba9edcdb2",
-            "SpritesheetX": 0,
-            "SpritesheetY": 120
-          }
+          "Directions": 4,
+          "SpritesheetX": 0,
+          "SpritesheetY": 0,
+          "Hashes": [
+            "fe6793d2362a56a34dec75834117a985",
+            "7ee4ea6032c8d22ae23685a536b082da",
+            "d20484a3c7640a3a55e63e7ee94f9f11",
+            "e03bdbd0353170f45a84222ba9edcdb2"
+          ]
         },
         "OnGround 1": {
-          "SSE": {
-            "Hash": "6b6dd09044384375816174b7d12a252f",
-            "SpritesheetX": 48,
-            "SpritesheetY": 0
-          },
-          "ESE": {
-            "Hash": "cd4db59d56a337879189303f76754059",
-            "SpritesheetX": 48,
-            "SpritesheetY": 40
-          },
-          "ENE": {
-            "Hash": "80acddb3d47fd76429245c1d9d2cd452",
-            "SpritesheetX": 48,
-            "SpritesheetY": 80
-          },
-          "NNE": {
-            "Hash": "5f1a3371cbd9b7ec3030acbbf0754af8",
-            "SpritesheetX": 48,
-            "SpritesheetY": 120
-          }
+          "Directions": 4,
+          "SpritesheetX": 48,
+          "SpritesheetY": 0,
+          "Hashes": [
+            "6b6dd09044384375816174b7d12a252f",
+            "cd4db59d56a337879189303f76754059",
+            "80acddb3d47fd76429245c1d9d2cd452",
+            "5f1a3371cbd9b7ec3030acbbf0754af8"
+          ]
         }
       },
       "AnimationByDirections": {

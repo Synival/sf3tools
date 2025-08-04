@@ -32,26 +32,15 @@
           }
         },
         "Idle (Hovering) 1": {
-          "SSE": {
-            "Hash": "c0725c9fe62c9c5ea9cbceb8a84e3a7b",
-            "SpritesheetX": 96,
-            "SpritesheetY": 0
-          },
-          "ESE": {
-            "Hash": "fe98f17cdb537a53ef8f8fab9dbab1fc",
-            "SpritesheetX": 96,
-            "SpritesheetY": 40
-          },
-          "ENE": {
-            "Hash": "468a319af3544379bb8805ea668ed961",
-            "SpritesheetX": 96,
-            "SpritesheetY": 80
-          },
-          "NNE": {
-            "Hash": "972d9cda407696944adb613b2c0efafa",
-            "SpritesheetX": 96,
-            "SpritesheetY": 120
-          }
+          "Directions": 4,
+          "SpritesheetX": 96,
+          "SpritesheetY": 0,
+          "Hashes": [
+            "c0725c9fe62c9c5ea9cbceb8a84e3a7b",
+            "fe98f17cdb537a53ef8f8fab9dbab1fc",
+            "468a319af3544379bb8805ea668ed961",
+            "972d9cda407696944adb613b2c0efafa"
+          ]
         }
       },
       "AnimationByDirections": {

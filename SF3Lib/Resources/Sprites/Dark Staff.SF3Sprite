@@ -11,26 +11,15 @@
       "Scale": 1.0,
       "FrameGroups": {
         "Idle (Hovering) 1": {
-          "SSE": {
-            "Hash": "6bf98ab6fc36dd62975056471d242683",
-            "SpritesheetX": 0,
-            "SpritesheetY": 0
-          },
-          "ESE": {
-            "Hash": "9fd38fe7395ce394c216dfcbe3ebaffe",
-            "SpritesheetX": 0,
-            "SpritesheetY": 40
-          },
-          "ENE": {
-            "Hash": "1d84c316f5ef7b4af71aaebb8e40ecff",
-            "SpritesheetX": 0,
-            "SpritesheetY": 80
-          },
-          "NNE": {
-            "Hash": "b8926b1e52f76ce36230f46a4993df84",
-            "SpritesheetX": 0,
-            "SpritesheetY": 120
-          }
+          "Directions": 4,
+          "SpritesheetX": 0,
+          "SpritesheetY": 0,
+          "Hashes": [
+            "6bf98ab6fc36dd62975056471d242683",
+            "9fd38fe7395ce394c216dfcbe3ebaffe",
+            "1d84c316f5ef7b4af71aaebb8e40ecff",
+            "b8926b1e52f76ce36230f46a4993df84"
+          ]
         }
       },
       "AnimationByDirections": {

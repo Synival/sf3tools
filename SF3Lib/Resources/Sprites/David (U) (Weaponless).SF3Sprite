@@ -11,70 +11,37 @@
       "Scale": 1.0,
       "FrameGroups": {
         "OneHandedPushUps 1": {
-          "SSE": {
-            "Hash": "f22436c1891f72399073ac5e639e83da",
-            "SpritesheetX": 0,
-            "SpritesheetY": 0
-          },
-          "ESE": {
-            "Hash": "e8dbb4887f146113553522c39527a893",
-            "SpritesheetX": 0,
-            "SpritesheetY": 40
-          },
-          "ENE": {
-            "Hash": "12d2b359c857df5ffd983de6287f782b",
-            "SpritesheetX": 0,
-            "SpritesheetY": 80
-          },
-          "NNE": {
-            "Hash": "2a545407a591845ae9112190aae46bfd",
-            "SpritesheetX": 0,
-            "SpritesheetY": 120
-          }
+          "Directions": 4,
+          "SpritesheetX": 0,
+          "SpritesheetY": 0,
+          "Hashes": [
+            "f22436c1891f72399073ac5e639e83da",
+            "e8dbb4887f146113553522c39527a893",
+            "12d2b359c857df5ffd983de6287f782b",
+            "2a545407a591845ae9112190aae46bfd"
+          ]
         },
         "OneHandedPushUps 2": {
-          "SSE": {
-            "Hash": "365448b42168aff1d9450540bc51234d",
-            "SpritesheetX": 48,
-            "SpritesheetY": 0
-          },
-          "ESE": {
-            "Hash": "f4eeb054771680ad8feaf1f33fb0f4f0",
-            "SpritesheetX": 48,
-            "SpritesheetY": 40
-          },
-          "ENE": {
-            "Hash": "fe28becb19934162b6f2dcade0e8709c",
-            "SpritesheetX": 48,
-            "SpritesheetY": 80
-          },
-          "NNE": {
-            "Hash": "c91be9981f7537e943261b927417b157",
-            "SpritesheetX": 48,
-            "SpritesheetY": 120
-          }
+          "Directions": 4,
+          "SpritesheetX": 48,
+          "SpritesheetY": 0,
+          "Hashes": [
+            "365448b42168aff1d9450540bc51234d",
+            "f4eeb054771680ad8feaf1f33fb0f4f0",
+            "fe28becb19934162b6f2dcade0e8709c",
+            "c91be9981f7537e943261b927417b157"
+          ]
         },
         "OneHandedPushUps 3": {
-          "SSE": {
-            "Hash": "ee6c77d3aefc9e465ca27412ac4c243a",
-            "SpritesheetX": 96,
-            "SpritesheetY": 0
-          },
-          "ESE": {
-            "Hash": "f1d74603213cc79a03ab21a30bd389f6",
-            "SpritesheetX": 96,
-            "SpritesheetY": 40
-          },
-          "ENE": {
-            "Hash": "28e384a4f4c0e6771679d3aa07beaff7",
-            "SpritesheetX": 96,
-            "SpritesheetY": 80
-          },
-          "NNE": {
-            "Hash": "4249141f76be5151a8c038eef94592e6",
-            "SpritesheetX": 96,
-            "SpritesheetY": 120
-          }
+          "Directions": 4,
+          "SpritesheetX": 96,
+          "SpritesheetY": 0,
+          "Hashes": [
+            "ee6c77d3aefc9e465ca27412ac4c243a",
+            "f1d74603213cc79a03ab21a30bd389f6",
+            "28e384a4f4c0e6771679d3aa07beaff7",
+            "4249141f76be5151a8c038eef94592e6"
+          ]
         }
       },
       "AnimationByDirections": {

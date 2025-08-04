@@ -11,39 +11,44 @@
       "Scale": 1.0,
       "FrameGroups": {
         "Exploding 1": {
-          "First": {
-            "Hash": "afaf8a07986c51ecbc033edf49a29a9b",
-            "SpritesheetX": 0,
-            "SpritesheetY": 0
-          }
+          "Directions": 1,
+          "SpritesheetX": 0,
+          "SpritesheetY": 0,
+          "Hashes": [
+            "afaf8a07986c51ecbc033edf49a29a9b"
+          ]
         },
         "Exploding 2": {
-          "First": {
-            "Hash": "b71077e6896f825d6a30e072a89effd2",
-            "SpritesheetX": 48,
-            "SpritesheetY": 0
-          }
+          "Directions": 1,
+          "SpritesheetX": 48,
+          "SpritesheetY": 0,
+          "Hashes": [
+            "b71077e6896f825d6a30e072a89effd2"
+          ]
         },
         "Exploding 3": {
-          "First": {
-            "Hash": "a6581c415fd3004be166a049b5432e31",
-            "SpritesheetX": 96,
-            "SpritesheetY": 0
-          }
+          "Directions": 1,
+          "SpritesheetX": 96,
+          "SpritesheetY": 0,
+          "Hashes": [
+            "a6581c415fd3004be166a049b5432e31"
+          ]
         },
         "Exploding 4": {
-          "First": {
-            "Hash": "35d2e1a8782841067a5d04adaae1ba6e",
-            "SpritesheetX": 144,
-            "SpritesheetY": 0
-          }
+          "Directions": 1,
+          "SpritesheetX": 144,
+          "SpritesheetY": 0,
+          "Hashes": [
+            "35d2e1a8782841067a5d04adaae1ba6e"
+          ]
         },
         "Exploding 5": {
-          "First": {
-            "Hash": "46148875328f9ba03de5c67074385a9a",
-            "SpritesheetX": 192,
-            "SpritesheetY": 0
-          }
+          "Directions": 1,
+          "SpritesheetX": 192,
+          "SpritesheetY": 0,
+          "Hashes": [
+            "46148875328f9ba03de5c67074385a9a"
+          ]
         }
       },
       "AnimationByDirections": {

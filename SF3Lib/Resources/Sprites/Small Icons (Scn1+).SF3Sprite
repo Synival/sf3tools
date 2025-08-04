@@ -11,25 +11,28 @@
       "Scale": 1.0,
       "FrameGroups": {
         "Alert 1": {
-          "First": {
-            "Hash": "c7059e750bf0fda8104e5c54aa0df10b",
-            "SpritesheetX": 0,
-            "SpritesheetY": 0
-          }
+          "Directions": 1,
+          "SpritesheetX": 0,
+          "SpritesheetY": 0,
+          "Hashes": [
+            "c7059e750bf0fda8104e5c54aa0df10b"
+          ]
         },
         "Flag 1": {
-          "First": {
-            "Hash": "3423a1885adc98bb2978ad723de6196b",
-            "SpritesheetX": 16,
-            "SpritesheetY": 0
-          }
+          "Directions": 1,
+          "SpritesheetX": 16,
+          "SpritesheetY": 0,
+          "Hashes": [
+            "3423a1885adc98bb2978ad723de6196b"
+          ]
         },
         "Love 1": {
-          "First": {
-            "Hash": "3a704d3d95575f3c452ef6125b459c9f",
-            "SpritesheetX": 32,
-            "SpritesheetY": 0
-          }
+          "Directions": 1,
+          "SpritesheetX": 32,
+          "SpritesheetY": 0,
+          "Hashes": [
+            "3a704d3d95575f3c452ef6125b459c9f"
+          ]
         }
       },
       "AnimationByDirections": {

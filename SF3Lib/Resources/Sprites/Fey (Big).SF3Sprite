@@ -11,53 +11,60 @@
       "Scale": 1.0,
       "FrameGroups": {
         "Idle 1": {
-          "First": {
-            "Hash": "7518dfa9d370eeda9eab3214edc332e2",
-            "SpritesheetX": 0,
-            "SpritesheetY": 0
-          }
+          "Directions": 1,
+          "SpritesheetX": 0,
+          "SpritesheetY": 0,
+          "Hashes": [
+            "7518dfa9d370eeda9eab3214edc332e2"
+          ]
         },
         "Idle 2": {
-          "First": {
-            "Hash": "1145cb90d792cdac38b5ee1a0b45d8ac",
-            "SpritesheetX": 128,
-            "SpritesheetY": 0
-          }
+          "Directions": 1,
+          "SpritesheetX": 128,
+          "SpritesheetY": 0,
+          "Hashes": [
+            "1145cb90d792cdac38b5ee1a0b45d8ac"
+          ]
         },
         "Shushing 1": {
-          "First": {
-            "Hash": "e698d373477b10fae8220a7a88cfc04f",
-            "SpritesheetX": 256,
-            "SpritesheetY": 0
-          }
+          "Directions": 1,
+          "SpritesheetX": 256,
+          "SpritesheetY": 0,
+          "Hashes": [
+            "e698d373477b10fae8220a7a88cfc04f"
+          ]
         },
         "Shushing 2": {
-          "First": {
-            "Hash": "6feda109f65a38e197a790c7f1a1a2ca",
-            "SpritesheetX": 384,
-            "SpritesheetY": 0
-          }
+          "Directions": 1,
+          "SpritesheetX": 384,
+          "SpritesheetY": 0,
+          "Hashes": [
+            "6feda109f65a38e197a790c7f1a1a2ca"
+          ]
         },
         "Shushing 3": {
-          "First": {
-            "Hash": "1d2088a2f48151ef3e254f07500243c4",
-            "SpritesheetX": 512,
-            "SpritesheetY": 0
-          }
+          "Directions": 1,
+          "SpritesheetX": 512,
+          "SpritesheetY": 0,
+          "Hashes": [
+            "1d2088a2f48151ef3e254f07500243c4"
+          ]
         },
         "StartOrStopShushing 1": {
-          "First": {
-            "Hash": "30b6fd0738438affe085b2bc255818e5",
-            "SpritesheetX": 640,
-            "SpritesheetY": 0
-          }
+          "Directions": 1,
+          "SpritesheetX": 640,
+          "SpritesheetY": 0,
+          "Hashes": [
+            "30b6fd0738438affe085b2bc255818e5"
+          ]
         },
         "StartOrStopShushing 2": {
-          "First": {
-            "Hash": "f25e400b93bf23217667d46c761df327",
-            "SpritesheetX": 768,
-            "SpritesheetY": 0
-          }
+          "Directions": 1,
+          "SpritesheetX": 768,
+          "SpritesheetY": 0,
+          "Hashes": [
+            "f25e400b93bf23217667d46c761df327"
+          ]
         }
       },
       "AnimationByDirections": {

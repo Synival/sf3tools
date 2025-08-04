@@ -11,25 +11,28 @@
       "Scale": 1.0,
       "FrameGroups": {
         "BlinkRedOnce 1": {
-          "First": {
-            "Hash": "76cf50f7f0dc3a846b5137c6a7b782dc",
-            "SpritesheetX": 0,
-            "SpritesheetY": 0
-          }
+          "Directions": 1,
+          "SpritesheetX": 0,
+          "SpritesheetY": 0,
+          "Hashes": [
+            "76cf50f7f0dc3a846b5137c6a7b782dc"
+          ]
         },
         "BlinkWhiteOnce 1": {
-          "First": {
-            "Hash": "6dfac0e77e7d180847d3ab5529271bde",
-            "SpritesheetX": 16,
-            "SpritesheetY": 0
-          }
+          "Directions": 1,
+          "SpritesheetX": 16,
+          "SpritesheetY": 0,
+          "Hashes": [
+            "6dfac0e77e7d180847d3ab5529271bde"
+          ]
         },
         "BlinkYellowOnce 1": {
-          "First": {
-            "Hash": "341f6923dce4d2c47657cea215309e2f",
-            "SpritesheetX": 32,
-            "SpritesheetY": 0
-          }
+          "Directions": 1,
+          "SpritesheetX": 32,
+          "SpritesheetY": 0,
+          "Hashes": [
+            "341f6923dce4d2c47657cea215309e2f"
+          ]
         }
       },
       "AnimationByDirections": {

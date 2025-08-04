@@ -11,11 +11,12 @@
       "Scale": 0.5,
       "FrameGroups": {
         "CannonBall 1": {
-          "First": {
-            "Hash": "46e4e4e7b65d62fbd320c26210f185ce",
-            "SpritesheetX": 0,
-            "SpritesheetY": 0
-          }
+          "Directions": 1,
+          "SpritesheetX": 0,
+          "SpritesheetY": 0,
+          "Hashes": [
+            "46e4e4e7b65d62fbd320c26210f185ce"
+          ]
         }
       },
       "AnimationByDirections": {

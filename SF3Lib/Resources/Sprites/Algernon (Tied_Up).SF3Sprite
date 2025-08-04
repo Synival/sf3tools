@@ -11,70 +11,37 @@
       "Scale": 1.0,
       "FrameGroups": {
         "Idle (Dangling) 1": {
-          "SSE": {
-            "Hash": "7bfbd1e28f891cb5785ca7f1b9013f35",
-            "SpritesheetX": 0,
-            "SpritesheetY": 0
-          },
-          "ESE": {
-            "Hash": "0f53d8852da408e1725636c45c4586e5",
-            "SpritesheetX": 0,
-            "SpritesheetY": 40
-          },
-          "ENE": {
-            "Hash": "1318c83de4b270a7a9162e342cf1db91",
-            "SpritesheetX": 0,
-            "SpritesheetY": 80
-          },
-          "NNE": {
-            "Hash": "bda00cf8ac5b293e0dc196f08a869aaf",
-            "SpritesheetX": 0,
-            "SpritesheetY": 120
-          }
+          "Directions": 4,
+          "SpritesheetX": 0,
+          "SpritesheetY": 0,
+          "Hashes": [
+            "7bfbd1e28f891cb5785ca7f1b9013f35",
+            "0f53d8852da408e1725636c45c4586e5",
+            "1318c83de4b270a7a9162e342cf1db91",
+            "bda00cf8ac5b293e0dc196f08a869aaf"
+          ]
         },
         "Idle (Dangling) 2": {
-          "SSE": {
-            "Hash": "081f426c88dd48d052a4ce32dba19966",
-            "SpritesheetX": 40,
-            "SpritesheetY": 0
-          },
-          "ESE": {
-            "Hash": "5fe5e4ef229a3cba95ce1686c89d8163",
-            "SpritesheetX": 40,
-            "SpritesheetY": 40
-          },
-          "ENE": {
-            "Hash": "9a6a25e40793aba8c3519ac48c8d3c56",
-            "SpritesheetX": 40,
-            "SpritesheetY": 80
-          },
-          "NNE": {
-            "Hash": "4dbdec545826661f5e945192d73f0c68",
-            "SpritesheetX": 40,
-            "SpritesheetY": 120
-          }
+          "Directions": 4,
+          "SpritesheetX": 40,
+          "SpritesheetY": 0,
+          "Hashes": [
+            "081f426c88dd48d052a4ce32dba19966",
+            "5fe5e4ef229a3cba95ce1686c89d8163",
+            "9a6a25e40793aba8c3519ac48c8d3c56",
+            "4dbdec545826661f5e945192d73f0c68"
+          ]
         },
         "Idle (Dangling) 3": {
-          "SSE": {
-            "Hash": "268571b9d48dcf0d7ecd1e247082577a",
-            "SpritesheetX": 80,
-            "SpritesheetY": 0
-          },
-          "ESE": {
-            "Hash": "6123a6c55771b206184e3d0c034bc101",
-            "SpritesheetX": 80,
-            "SpritesheetY": 40
-          },
-          "ENE": {
-            "Hash": "8e2a5aca684446119739f8eda0da8da7",
-            "SpritesheetX": 80,
-            "SpritesheetY": 80
-          },
-          "NNE": {
-            "Hash": "dc4bca850b271a30d7a600bbdb72c801",
-            "SpritesheetX": 80,
-            "SpritesheetY": 120
-          }
+          "Directions": 4,
+          "SpritesheetX": 80,
+          "SpritesheetY": 0,
+          "Hashes": [
+            "268571b9d48dcf0d7ecd1e247082577a",
+            "6123a6c55771b206184e3d0c034bc101",
+            "8e2a5aca684446119739f8eda0da8da7",
+            "dc4bca850b271a30d7a600bbdb72c801"
+          ]
         }
       },
       "AnimationByDirections": {

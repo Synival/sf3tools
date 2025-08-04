@@ -11,11 +11,12 @@
       "Scale": 0.69999695,
       "FrameGroups": {
         "Egg 1": {
-          "First": {
-            "Hash": "d71542221a4e0fa478309cbe78c8430c",
-            "SpritesheetX": 0,
-            "SpritesheetY": 0
-          }
+          "Directions": 1,
+          "SpritesheetX": 0,
+          "SpritesheetY": 0,
+          "Hashes": [
+            "d71542221a4e0fa478309cbe78c8430c"
+          ]
         }
       },
       "AnimationByDirections": {

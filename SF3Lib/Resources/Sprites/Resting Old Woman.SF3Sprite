@@ -11,70 +11,37 @@
       "Scale": 1.0499878,
       "FrameGroups": {
         "Idle (Resting) 1": {
-          "SSE": {
-            "Hash": "b6569ac49c98e00f58c7025156418c6a",
-            "SpritesheetX": 0,
-            "SpritesheetY": 0
-          },
-          "ESE": {
-            "Hash": "a09ec1b4884c94099d04f2319516c5b6",
-            "SpritesheetX": 0,
-            "SpritesheetY": 40
-          },
-          "ENE": {
-            "Hash": "09011cb0d9dd42bc1f40cbbb0986a2ac",
-            "SpritesheetX": 0,
-            "SpritesheetY": 80
-          },
-          "NNE": {
-            "Hash": "d658aa91c07834db3712e29efc713c54",
-            "SpritesheetX": 0,
-            "SpritesheetY": 120
-          }
+          "Directions": 4,
+          "SpritesheetX": 0,
+          "SpritesheetY": 0,
+          "Hashes": [
+            "b6569ac49c98e00f58c7025156418c6a",
+            "a09ec1b4884c94099d04f2319516c5b6",
+            "09011cb0d9dd42bc1f40cbbb0986a2ac",
+            "d658aa91c07834db3712e29efc713c54"
+          ]
         },
         "Idle (Resting) 2": {
-          "SSE": {
-            "Hash": "e12ad404fba2ed1513a8cd9608fe53e3",
-            "SpritesheetX": 48,
-            "SpritesheetY": 0
-          },
-          "ESE": {
-            "Hash": "a86d33ba15d8da47e861ea99c82019ab",
-            "SpritesheetX": 48,
-            "SpritesheetY": 40
-          },
-          "ENE": {
-            "Hash": "8f37d91638d1cdc3013877c369bb4b4d",
-            "SpritesheetX": 48,
-            "SpritesheetY": 80
-          },
-          "NNE": {
-            "Hash": "c8e7f1362ff145ed8e614273cc521b78",
-            "SpritesheetX": 48,
-            "SpritesheetY": 120
-          }
+          "Directions": 4,
+          "SpritesheetX": 48,
+          "SpritesheetY": 0,
+          "Hashes": [
+            "e12ad404fba2ed1513a8cd9608fe53e3",
+            "a86d33ba15d8da47e861ea99c82019ab",
+            "8f37d91638d1cdc3013877c369bb4b4d",
+            "c8e7f1362ff145ed8e614273cc521b78"
+          ]
         },
         "Idle (Resting) 3": {
-          "SSE": {
-            "Hash": "793dde685be0b5af6811c1b014c030d6",
-            "SpritesheetX": 96,
-            "SpritesheetY": 0
-          },
-          "ESE": {
-            "Hash": "67119f4f986b9aaaa839ccda82f4621b",
-            "SpritesheetX": 96,
-            "SpritesheetY": 40
-          },
-          "ENE": {
-            "Hash": "f622a78e64cbb624d3f94e5de7faae37",
-            "SpritesheetX": 96,
-            "SpritesheetY": 80
-          },
-          "NNE": {
-            "Hash": "0cd6c213d8fc9ba3d8405cf319444cb7",
-            "SpritesheetX": 96,
-            "SpritesheetY": 120
-          }
+          "Directions": 4,
+          "SpritesheetX": 96,
+          "SpritesheetY": 0,
+          "Hashes": [
+            "793dde685be0b5af6811c1b014c030d6",
+            "67119f4f986b9aaaa839ccda82f4621b",
+            "f622a78e64cbb624d3f94e5de7faae37",
+            "0cd6c213d8fc9ba3d8405cf319444cb7"
+          ]
         }
       },
       "AnimationByDirections": {

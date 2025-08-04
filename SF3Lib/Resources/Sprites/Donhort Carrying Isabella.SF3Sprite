@@ -11,26 +11,15 @@
       "Scale": 1.0299988,
       "FrameGroups": {
         "Idle 1": {
-          "SSE": {
-            "Hash": "a534ed7f96b9d08c1cc685529ac76a5e",
-            "SpritesheetX": 0,
-            "SpritesheetY": 0
-          },
-          "ESE": {
-            "Hash": "67cc339200a026b421a1ba13f6dc6882",
-            "SpritesheetX": 0,
-            "SpritesheetY": 48
-          },
-          "ENE": {
-            "Hash": "b49d65bf922261281402bb0568dfc8ef",
-            "SpritesheetX": 0,
-            "SpritesheetY": 96
-          },
-          "NNE": {
-            "Hash": "f9eb820f420aa92e71f2914d1b3a7489",
-            "SpritesheetX": 0,
-            "SpritesheetY": 144
-          }
+          "Directions": 4,
+          "SpritesheetX": 0,
+          "SpritesheetY": 0,
+          "Hashes": [
+            "a534ed7f96b9d08c1cc685529ac76a5e",
+            "67cc339200a026b421a1ba13f6dc6882",
+            "b49d65bf922261281402bb0568dfc8ef",
+            "f9eb820f420aa92e71f2914d1b3a7489"
+          ]
         },
         "Walking 1": {
           "NNE": {

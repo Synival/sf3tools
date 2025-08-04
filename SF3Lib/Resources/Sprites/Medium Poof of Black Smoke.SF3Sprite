@@ -11,46 +11,52 @@
       "Scale": 1.0,
       "FrameGroups": {
         "Poofing 1": {
-          "First": {
-            "Hash": "7267931c5c3e853c065ebae2fb4ee894",
-            "SpritesheetX": 0,
-            "SpritesheetY": 0
-          }
+          "Directions": 1,
+          "SpritesheetX": 0,
+          "SpritesheetY": 0,
+          "Hashes": [
+            "7267931c5c3e853c065ebae2fb4ee894"
+          ]
         },
         "Poofing 2": {
-          "First": {
-            "Hash": "63a841435e028eba430c6fa23d3a9665",
-            "SpritesheetX": 32,
-            "SpritesheetY": 0
-          }
+          "Directions": 1,
+          "SpritesheetX": 32,
+          "SpritesheetY": 0,
+          "Hashes": [
+            "63a841435e028eba430c6fa23d3a9665"
+          ]
         },
         "Poofing 3": {
-          "First": {
-            "Hash": "d76d2417d152afb2c70669963f0af8fa",
-            "SpritesheetX": 64,
-            "SpritesheetY": 0
-          }
+          "Directions": 1,
+          "SpritesheetX": 64,
+          "SpritesheetY": 0,
+          "Hashes": [
+            "d76d2417d152afb2c70669963f0af8fa"
+          ]
         },
         "Poofing 4": {
-          "First": {
-            "Hash": "ad00101c8c22c364be1f2da1d25aad5c",
-            "SpritesheetX": 96,
-            "SpritesheetY": 0
-          }
+          "Directions": 1,
+          "SpritesheetX": 96,
+          "SpritesheetY": 0,
+          "Hashes": [
+            "ad00101c8c22c364be1f2da1d25aad5c"
+          ]
         },
         "Poofing 5": {
-          "First": {
-            "Hash": "f28e3ef1427bcdb09b379c8c69e4823b",
-            "SpritesheetX": 128,
-            "SpritesheetY": 0
-          }
+          "Directions": 1,
+          "SpritesheetX": 128,
+          "SpritesheetY": 0,
+          "Hashes": [
+            "f28e3ef1427bcdb09b379c8c69e4823b"
+          ]
         },
         "Poofing 6": {
-          "First": {
-            "Hash": "cb20d99ec049db7b3fba22c8ff4dd817",
-            "SpritesheetX": 160,
-            "SpritesheetY": 0
-          }
+          "Directions": 1,
+          "SpritesheetX": 160,
+          "SpritesheetY": 0,
+          "Hashes": [
+            "cb20d99ec049db7b3fba22c8ff4dd817"
+          ]
         }
       },
       "AnimationByDirections": {

@@ -11,26 +11,15 @@
       "Scale": 1.0,
       "FrameGroups": {
         "OnGround 1": {
-          "SSE": {
-            "Hash": "928983c7cbe546f9b98dfedebcf96b06",
-            "SpritesheetX": 0,
-            "SpritesheetY": 0
-          },
-          "ESE": {
-            "Hash": "a2ea2fbbb9e7da3e3324e2490ff191ff",
-            "SpritesheetX": 0,
-            "SpritesheetY": 40
-          },
-          "ENE": {
-            "Hash": "72d193274bb2d1139f774dd9390799b8",
-            "SpritesheetX": 0,
-            "SpritesheetY": 80
-          },
-          "NNE": {
-            "Hash": "27cb50daf6030fd5d2db8e4e10dd5d5c",
-            "SpritesheetX": 0,
-            "SpritesheetY": 120
-          }
+          "Directions": 4,
+          "SpritesheetX": 0,
+          "SpritesheetY": 0,
+          "Hashes": [
+            "928983c7cbe546f9b98dfedebcf96b06",
+            "a2ea2fbbb9e7da3e3324e2490ff191ff",
+            "72d193274bb2d1139f774dd9390799b8",
+            "27cb50daf6030fd5d2db8e4e10dd5d5c"
+          ]
         }
       },
       "AnimationByDirections": {

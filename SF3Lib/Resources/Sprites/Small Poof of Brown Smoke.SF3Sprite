@@ -11,67 +11,76 @@
       "Scale": 1.0,
       "FrameGroups": {
         "Poofing 1": {
-          "First": {
-            "Hash": "c587713ab385a760bb5b7b4a32afa69c",
-            "SpritesheetX": 0,
-            "SpritesheetY": 0
-          }
+          "Directions": 1,
+          "SpritesheetX": 0,
+          "SpritesheetY": 0,
+          "Hashes": [
+            "c587713ab385a760bb5b7b4a32afa69c"
+          ]
         },
         "Poofing 2": {
-          "First": {
-            "Hash": "584252c93398d5e8b51c8e42ef290fe2",
-            "SpritesheetX": 24,
-            "SpritesheetY": 0
-          }
+          "Directions": 1,
+          "SpritesheetX": 24,
+          "SpritesheetY": 0,
+          "Hashes": [
+            "584252c93398d5e8b51c8e42ef290fe2"
+          ]
         },
         "Poofing 3": {
-          "First": {
-            "Hash": "e800c8d9553977b878ccd60b6928a97e",
-            "SpritesheetX": 48,
-            "SpritesheetY": 0
-          }
+          "Directions": 1,
+          "SpritesheetX": 48,
+          "SpritesheetY": 0,
+          "Hashes": [
+            "e800c8d9553977b878ccd60b6928a97e"
+          ]
         },
         "Poofing 4": {
-          "First": {
-            "Hash": "0f7cd4c76a8a56d9df50549f7618af03",
-            "SpritesheetX": 72,
-            "SpritesheetY": 0
-          }
+          "Directions": 1,
+          "SpritesheetX": 72,
+          "SpritesheetY": 0,
+          "Hashes": [
+            "0f7cd4c76a8a56d9df50549f7618af03"
+          ]
         },
         "Poofing 5": {
-          "First": {
-            "Hash": "3ebc2496d5551122ca8814b6bde16fc8",
-            "SpritesheetX": 96,
-            "SpritesheetY": 0
-          }
+          "Directions": 1,
+          "SpritesheetX": 96,
+          "SpritesheetY": 0,
+          "Hashes": [
+            "3ebc2496d5551122ca8814b6bde16fc8"
+          ]
         },
         "Poofing 6": {
-          "First": {
-            "Hash": "fcb1d301e157f3619fe8d19e97454832",
-            "SpritesheetX": 120,
-            "SpritesheetY": 0
-          }
+          "Directions": 1,
+          "SpritesheetX": 120,
+          "SpritesheetY": 0,
+          "Hashes": [
+            "fcb1d301e157f3619fe8d19e97454832"
+          ]
         },
         "Poofing 7": {
-          "First": {
-            "Hash": "a0ac44d2eca07df8dc949f231559cf44",
-            "SpritesheetX": 144,
-            "SpritesheetY": 0
-          }
+          "Directions": 1,
+          "SpritesheetX": 144,
+          "SpritesheetY": 0,
+          "Hashes": [
+            "a0ac44d2eca07df8dc949f231559cf44"
+          ]
         },
         "Poofing 8": {
-          "First": {
-            "Hash": "27800a5a5d4d7d49004d104a8490781f",
-            "SpritesheetX": 168,
-            "SpritesheetY": 0
-          }
+          "Directions": 1,
+          "SpritesheetX": 168,
+          "SpritesheetY": 0,
+          "Hashes": [
+            "27800a5a5d4d7d49004d104a8490781f"
+          ]
         },
         "Poofing 9": {
-          "First": {
-            "Hash": "2fcf677cc24f226f74febc14821e620d",
-            "SpritesheetX": 192,
-            "SpritesheetY": 0
-          }
+          "Directions": 1,
+          "SpritesheetX": 192,
+          "SpritesheetY": 0,
+          "Hashes": [
+            "2fcf677cc24f226f74febc14821e620d"
+          ]
         }
       },
       "AnimationByDirections": {

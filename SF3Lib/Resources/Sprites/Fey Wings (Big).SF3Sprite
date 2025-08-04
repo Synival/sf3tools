@@ -11,16 +11,13 @@
       "Scale": 1.0,
       "FrameGroups": {
         "Idle 1": {
-          "First": {
-            "Hash": "263969042813f0f27555866455f68715",
-            "SpritesheetX": 0,
-            "SpritesheetY": 0
-          },
-          "Second": {
-            "Hash": "f98c1a8b4218e3c6f51d58154268d404",
-            "SpritesheetX": 0,
-            "SpritesheetY": 128
-          }
+          "Directions": 2,
+          "SpritesheetX": 0,
+          "SpritesheetY": 0,
+          "Hashes": [
+            "263969042813f0f27555866455f68715",
+            "f98c1a8b4218e3c6f51d58154268d404"
+          ]
         }
       },
       "AnimationByDirections": {

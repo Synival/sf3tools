@@ -11,60 +11,68 @@
       "Scale": 1.0,
       "FrameGroups": {
         "Dot 1": {
-          "First": {
-            "Hash": "3ac2fa58301b3b5a0682f0f311ddd03a",
-            "SpritesheetX": 0,
-            "SpritesheetY": 0
-          }
+          "Directions": 1,
+          "SpritesheetX": 0,
+          "SpritesheetY": 0,
+          "Hashes": [
+            "3ac2fa58301b3b5a0682f0f311ddd03a"
+          ]
         },
         "Transparent 1": {
-          "First": {
-            "Hash": "620f0b67a91f7f74151bc5be745b7110",
-            "SpritesheetX": 32,
-            "SpritesheetY": 0
-          }
+          "Directions": 1,
+          "SpritesheetX": 32,
+          "SpritesheetY": 0,
+          "Hashes": [
+            "620f0b67a91f7f74151bc5be745b7110"
+          ]
         },
         "Zapping (To the Left) 1": {
-          "First": {
-            "Hash": "5c1a074031a33bd28f9a02a1c029a69a",
-            "SpritesheetX": 64,
-            "SpritesheetY": 0
-          }
+          "Directions": 1,
+          "SpritesheetX": 64,
+          "SpritesheetY": 0,
+          "Hashes": [
+            "5c1a074031a33bd28f9a02a1c029a69a"
+          ]
         },
         "Zapping (To the Left) 2": {
-          "First": {
-            "Hash": "1e4ea10c72bee1c7e8ea7d2b63890e69",
-            "SpritesheetX": 96,
-            "SpritesheetY": 0
-          }
+          "Directions": 1,
+          "SpritesheetX": 96,
+          "SpritesheetY": 0,
+          "Hashes": [
+            "1e4ea10c72bee1c7e8ea7d2b63890e69"
+          ]
         },
         "Zapping (To the Left) 3": {
-          "First": {
-            "Hash": "2ce9e617bd66f809129cb3903a9ac6d1",
-            "SpritesheetX": 128,
-            "SpritesheetY": 0
-          }
+          "Directions": 1,
+          "SpritesheetX": 128,
+          "SpritesheetY": 0,
+          "Hashes": [
+            "2ce9e617bd66f809129cb3903a9ac6d1"
+          ]
         },
         "Zapping 1": {
-          "First": {
-            "Hash": "19d2a6156c7c168a05c30bcd1e9f284c",
-            "SpritesheetX": 160,
-            "SpritesheetY": 0
-          }
+          "Directions": 1,
+          "SpritesheetX": 160,
+          "SpritesheetY": 0,
+          "Hashes": [
+            "19d2a6156c7c168a05c30bcd1e9f284c"
+          ]
         },
         "Zapping 2": {
-          "First": {
-            "Hash": "1c2659b74e8b3c229dce43dd67a31daf",
-            "SpritesheetX": 192,
-            "SpritesheetY": 0
-          }
+          "Directions": 1,
+          "SpritesheetX": 192,
+          "SpritesheetY": 0,
+          "Hashes": [
+            "1c2659b74e8b3c229dce43dd67a31daf"
+          ]
         },
         "Zapping 3": {
-          "First": {
-            "Hash": "2335de5e6894aea51212c1f4a7e769b9",
-            "SpritesheetX": 224,
-            "SpritesheetY": 0
-          }
+          "Directions": 1,
+          "SpritesheetX": 224,
+          "SpritesheetY": 0,
+          "Hashes": [
+            "2335de5e6894aea51212c1f4a7e769b9"
+          ]
         }
       },
       "AnimationByDirections": {

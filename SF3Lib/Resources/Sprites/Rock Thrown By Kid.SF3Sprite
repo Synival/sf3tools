@@ -11,11 +11,12 @@
       "Scale": 1.0,
       "FrameGroups": {
         "Rock 1": {
-          "First": {
-            "Hash": "37ae9d5b7cacbe694c0ddd825be47ac7",
-            "SpritesheetX": 0,
-            "SpritesheetY": 0
-          }
+          "Directions": 1,
+          "SpritesheetX": 0,
+          "SpritesheetY": 0,
+          "Hashes": [
+            "37ae9d5b7cacbe694c0ddd825be47ac7"
+          ]
         }
       },
       "AnimationByDirections": {

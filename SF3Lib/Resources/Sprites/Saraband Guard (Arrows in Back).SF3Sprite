@@ -11,26 +11,15 @@
       "Scale": 1.0499878,
       "FrameGroups": {
         "OnGround 1": {
-          "SSE": {
-            "Hash": "d70796ffc8fc171d1e75e5c714471ef8",
-            "SpritesheetX": 0,
-            "SpritesheetY": 40
-          },
-          "ESE": {
-            "Hash": "2004ffe2c92a78a9a2233d2900edf717",
-            "SpritesheetX": 0,
-            "SpritesheetY": 80
-          },
-          "ENE": {
-            "Hash": "02debfa171d941ce4d13704d8883c51f",
-            "SpritesheetX": 0,
-            "SpritesheetY": 120
-          },
-          "NNE": {
-            "Hash": "6ed7854507ced4d643efd70ea40f45c7",
-            "SpritesheetX": 0,
-            "SpritesheetY": 160
-          }
+          "Directions": 4,
+          "SpritesheetX": 0,
+          "SpritesheetY": 40,
+          "Hashes": [
+            "d70796ffc8fc171d1e75e5c714471ef8",
+            "2004ffe2c92a78a9a2233d2900edf717",
+            "02debfa171d941ce4d13704d8883c51f",
+            "6ed7854507ced4d643efd70ea40f45c7"
+          ]
         },
         "OnGround 2": {
           "S": {

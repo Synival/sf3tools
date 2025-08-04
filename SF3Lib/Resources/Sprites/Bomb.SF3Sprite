@@ -11,11 +11,12 @@
       "Scale": 1.0,
       "FrameGroups": {
         "Bomb 1": {
-          "First": {
-            "Hash": "48029a08b05f56f66a237b23bfd947da",
-            "SpritesheetX": 0,
-            "SpritesheetY": 0
-          }
+          "Directions": 1,
+          "SpritesheetX": 0,
+          "SpritesheetY": 0,
+          "Hashes": [
+            "48029a08b05f56f66a237b23bfd947da"
+          ]
         }
       },
       "AnimationByDirections": {

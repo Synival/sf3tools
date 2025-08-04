@@ -11,25 +11,28 @@
       "Scale": 1.0,
       "FrameGroups": {
         "Splash 1": {
-          "First": {
-            "Hash": "2870bfc4eb226cf2f12e1ccfb0b003e1",
-            "SpritesheetX": 0,
-            "SpritesheetY": 0
-          }
+          "Directions": 1,
+          "SpritesheetX": 0,
+          "SpritesheetY": 0,
+          "Hashes": [
+            "2870bfc4eb226cf2f12e1ccfb0b003e1"
+          ]
         },
         "Splash 2": {
-          "First": {
-            "Hash": "0f69b0d0aa821d3572b15b376b851495",
-            "SpritesheetX": 32,
-            "SpritesheetY": 0
-          }
+          "Directions": 1,
+          "SpritesheetX": 32,
+          "SpritesheetY": 0,
+          "Hashes": [
+            "0f69b0d0aa821d3572b15b376b851495"
+          ]
         },
         "Splash 3": {
-          "First": {
-            "Hash": "393159ce7748654bce629fb509459507",
-            "SpritesheetX": 64,
-            "SpritesheetY": 0
-          }
+          "Directions": 1,
+          "SpritesheetX": 64,
+          "SpritesheetY": 0,
+          "Hashes": [
+            "393159ce7748654bce629fb509459507"
+          ]
         }
       },
       "AnimationByDirections": {
