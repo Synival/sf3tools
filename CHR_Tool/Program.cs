@@ -1,8 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
+using CommonLib.Arrays;
 using NDesk.Options;
+using SF3.ByteData;
 using SF3.CHR;
+using SF3.Models.Files.CHP;
+using SF3.Models.Files.CHR;
+using SF3.NamedValues;
+using SF3.Types;
 using SF3.Utils;
 
 namespace CHRTool {
@@ -14,9 +21,9 @@ namespace CHRTool {
 
         private const string c_ShortUsageString =
             "Usage:\n" +
-            "  chrtool [GENERAL_OPTIONS]... compile [COMPILE_OPTIONS]... SF3CHR_file\n" +
-            "  chrtool [GENERAL_OPTIONS]... decompile [DECOMPILE_OPTIONS]... CHR_file\n" +
-            "  chrtool [GENERAL_OPTIONS]... extract-sheets [OPTIONS]... game_data_path\n";
+            "  chrtool [GENERAL_OPTIONS]... compile [OPTIONS]... SF3CHR_file\n" +
+            "  chrtool [GENERAL_OPTIONS]... decompile [OPTIONS]... CHR_file\n" +
+            "  chrtool [GENERAL_OPTIONS]... extract-sheets [OPTIONS]... game_data_dir\n";
 
         private const string c_ErrorUsageString =
             c_ShortUsageString +
@@ -290,13 +297,13 @@ namespace CHRTool {
         private static int ExtractSheets(string[] args, string spriteDir, string spritesheetDir) {
             // (any extra options would go here.)
 
-            // Fetch the filename for reading.
+            // Fetch the directory with the game data for ripping spritesheets.
             if (args.Length == 0) {
-                Console.Error.WriteLine("Missing input file");
+                Console.Error.WriteLine("Missing game data directory");
                 Console.Error.Write(c_ErrorUsageString);
                 return 1;
             }
-            var inputFile = args[0];
+            var gameDataDir = args[0];
             args = args[1..args.Length];
 
             // There shouldn't be any unrecognized arguments at this point.
@@ -310,9 +317,54 @@ namespace CHRTool {
             // It looks like we're ready to go! Fetch the file data.
             Console.WriteLine($"Sprite directory:     {spriteDir}");
             Console.WriteLine($"Spriteheet directory: {spritesheetDir}");
+            Console.WriteLine($"Game data directory:  {gameDataDir}");
 
-            Console.WriteLine("Coming soon! (tm)");
+            string[] files;
+            try {
+                files = Directory.GetFiles(gameDataDir, "*.CHR")
+                    .Concat(Directory.GetFiles(gameDataDir, "*.CHP"))
+                    .OrderBy(x => x)
+                    .ToArray();
+            }
+            catch (Exception e) {
+                Console.WriteLine($"  Couldn't get game data files from path '{gameDataDir}':");
+                Console.WriteLine($"    {e.GetType().Name}: {e.Message}");
+                return 1;
+            }
+
+            // We don't care about the NameGetterContext or Scenario, since CHRs/CHP are all the same format,
+            // and we don't care about any scenario-based resources. Just use Scenario 1.
+            var scenario = ScenarioType.Scenario1;
+            var nameGetterContext = new NameGetterContext(scenario);
+
+            foreach (var file in files) {
+                Console.WriteLine($"Extracting sprites from '{Path.GetFileName(file)}'...");
+                try {
+                    var bytes = File.ReadAllBytes(file);
+                    var byteData = new ByteData(new ByteArray(bytes));
+
+                    if (file.ToLower().EndsWith(".CHR")) {
+                        var chrFile = CHR_File.Create(byteData, nameGetterContext, scenario);
+                        ExtractSheets(chrFile, spritesheetDir);
+                    }
+                    else if (file.ToLower().EndsWith(".CHP")) {
+                        var chpFile = CHP_File.Create(byteData, nameGetterContext, scenario);
+                        foreach (var chrFile in chpFile.CHR_EntriesByOffset.Values)
+                            ExtractSheets(chrFile, spritesheetDir);
+                    }
+                }
+                catch (Exception e) {
+                    Console.WriteLine($"  Couldn't extract sheets from '{file}':");
+                    Console.WriteLine($"    {e.GetType().Name}: {e.Message}");
+                }
+            }
+
+            Console.WriteLine("Done");
             return 0;
+        }
+
+        public static void ExtractSheets(ICHR_File chrFile, string spritesheetDir) {
+            // TODO: extract them sprites!
         }
     }
 }
