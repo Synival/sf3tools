@@ -14,11 +14,14 @@ namespace CHRTool {
             }
 
             // It looks like we're ready to go! Fetch the file data.
+            Console.WriteLine("Updating lookup hashes...");
+            Console.WriteLine("------------------------------------------------------------------------------");
             Console.WriteLine($"Sprite directory:      {spriteDir}");
             Console.WriteLine($"Spritesheet directory: {spritesheetDir}");
             Console.WriteLine($"Hash lookup directory: {hashLookupDir}");
 
             // TODO: finish this!!
+            Console.WriteLine("------------------------------------------------------------------------------");
             Console.WriteLine("Coming soon (tm)!");
             return 0;
         }

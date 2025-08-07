@@ -44,14 +44,15 @@ namespace CHRTool {
             }
 
             // It looks like we're ready to go! Fetch the file data.
-            Console.WriteLine($"Sprite directory:      {spriteDir}");
-            Console.WriteLine($"Spritesheet directory: {spritesheetDir}");
-
             var inputFilename = Path.GetFileName(inputFile);
             if (outputFile == null)
                 outputFile = Path.Combine(Path.GetDirectoryName(inputFile), $"{Path.GetFileNameWithoutExtension(inputFilename)}.CHR");
             var outputFilename = Path.GetFileName(outputFile);
             Console.WriteLine($"Compiling '{inputFilename}' to '{outputFilename}'...");
+            Console.WriteLine("------------------------------------------------------------------------------");
+            Console.WriteLine($"Sprite directory:      {spriteDir}");
+            Console.WriteLine($"Spritesheet directory: {spritesheetDir}");
+            Console.WriteLine("------------------------------------------------------------------------------");
 
             string chrDefText = null;
             try {
@@ -59,8 +60,9 @@ namespace CHRTool {
                 Console.WriteLine("  Read input file successfully.");
             }
             catch (Exception e) {
-                Console.WriteLine($"  Couldn't open '{inputFile}' for reading:");
-                Console.WriteLine($"    {e.GetType().Name}: {e.Message}");
+                Console.WriteLine("------------------------------------------------------------------------------");
+                Console.Error.WriteLine($"  Couldn't open '{inputFile}' for reading:");
+                Console.Error.WriteLine($"    {e.GetType().Name}: {e.Message}");
                 return 1;
             }
 
@@ -73,8 +75,9 @@ namespace CHRTool {
                 Console.WriteLine("  Deserialized CHR_Def successfully.");
             }
             catch (Exception e) {
-                Console.WriteLine($"  Couldn't deserialize '{inputFile}' after reading:");
-                Console.WriteLine($"    {e.GetType().Name}: {e.Message}");
+                Console.WriteLine("------------------------------------------------------------------------------");
+                Console.Error.WriteLine($"  Couldn't deserialize '{inputFile}' after reading:");
+                Console.Error.WriteLine($"    {e.GetType().Name}: {e.Message}");
                 return 1;
             }
 
@@ -94,8 +97,9 @@ namespace CHRTool {
                 Console.WriteLine("  CHR compiled successfully.");
             }
             catch (Exception e) {
-                Console.WriteLine($"  Couldn't compile '{inputFile}' after deserializing:");
-                Console.WriteLine($"    {e.GetType().Name}: {e.Message}");
+                Console.WriteLine("------------------------------------------------------------------------------");
+                Console.Error.WriteLine($"  Couldn't compile '{inputFile}' after deserializing:");
+                Console.Error.WriteLine($"    {e.GetType().Name}: {e.Message}");
                 return 1;
             }
 
@@ -105,11 +109,13 @@ namespace CHRTool {
                 Console.WriteLine("  Output file written successfully.");
             }
             catch (Exception e) {
-                Console.WriteLine($"  Couldn't compile '{inputFile}' after deserializing:");
-                Console.WriteLine($"    {e.GetType().Name}: {e.Message}");
+                Console.WriteLine("------------------------------------------------------------------------------");
+                Console.Error.WriteLine($"  Couldn't compile '{inputFile}' after deserializing:");
+                Console.Error.WriteLine($"    {e.GetType().Name}: {e.Message}");
                 return 1;
             }
 
+            Console.WriteLine("------------------------------------------------------------------------------");
             Console.WriteLine("Done");
             return 0;
         }

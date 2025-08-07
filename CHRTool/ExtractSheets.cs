@@ -31,10 +31,12 @@ namespace CHRTool {
             }
 
             // It looks like we're ready to go! Fetch the file data.
+            Console.WriteLine($"Extracting spritesheet frames from path '{gameDataDir}'...");
+            Console.WriteLine("------------------------------------------------------------------------------");
             Console.WriteLine($"Sprite directory:      {spriteDir}");
             Console.WriteLine($"Spritesheet directory: {spritesheetDir}");
             Console.WriteLine($"Hash lookup directory: {hashLookupDir}");
-            Console.WriteLine($"Game data directory:   {gameDataDir}");
+            Console.WriteLine("------------------------------------------------------------------------------");
 
             string[] files;
             try {
@@ -44,8 +46,9 @@ namespace CHRTool {
                     .ToArray();
             }
             catch (Exception e) {
-                Console.WriteLine($"  Couldn't get game data files from path '{gameDataDir}':");
-                Console.WriteLine($"    {e.GetType().Name}: {e.Message}");
+                Console.WriteLine("------------------------------------------------------------------------------");
+                Console.Error.WriteLine($"  Couldn't get game data files from path '{gameDataDir}':");
+                Console.Error.WriteLine($"    {e.GetType().Name}: {e.Message}");
                 return 1;
             }
 
@@ -71,11 +74,12 @@ namespace CHRTool {
                     }
                 }
                 catch (Exception e) {
-                    Console.WriteLine($"  Couldn't extract sheets from '{file}':");
-                    Console.WriteLine($"    {e.GetType().Name}: {e.Message}");
+                    Console.Error.WriteLine($"  Couldn't extract sheets from '{file}':");
+                    Console.Error.WriteLine($"    {e.GetType().Name}: {e.Message}");
                 }
             }
 
+            Console.WriteLine("------------------------------------------------------------------------------");
             Console.WriteLine("Done");
             return 0;
         }
