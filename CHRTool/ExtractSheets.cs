@@ -10,7 +10,7 @@ using SF3.Types;
 
 namespace CHRTool {
     public static class ExtractSheets {
-        public static int Run(string[] args, string spriteDir, string spritesheetDir, string hashLookupDir) {
+        public static int Run(string[] args, string spriteDir, string spritesheetDir, string frameHashLookupsFile) {
             // (any extra options would go here.)
 
             // Fetch the directory with the game data for ripping spritesheets.
@@ -33,9 +33,9 @@ namespace CHRTool {
             // It looks like we're ready to go! Fetch the file data.
             Console.WriteLine($"Extracting spritesheet frames from path '{gameDataDir}'...");
             Console.WriteLine("------------------------------------------------------------------------------");
-            Console.WriteLine($"Sprite directory:      {spriteDir}");
-            Console.WriteLine($"Spritesheet directory: {spritesheetDir}");
-            Console.WriteLine($"Hash lookup directory: {hashLookupDir}");
+            Console.WriteLine($"Sprite directory:        {spriteDir}");
+            Console.WriteLine($"Spritesheet directory:   {spritesheetDir}");
+            Console.WriteLine($"Frame hash lookups file: {frameHashLookupsFile}");
             Console.WriteLine("------------------------------------------------------------------------------");
 
             string[] files;

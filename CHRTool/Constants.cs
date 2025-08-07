@@ -32,6 +32,9 @@ namespace CHRTool {
             "      (default='<program-dir>/Resources/Sprites')\n" +
             "  --spritesheet-dir=<dir>   directory for spritesheets (.PNG files)\n" +
             "      (default='<program-dir>/Resources/Spritesheets')\n" +
+            "  --frame-hash-lookups-file=<file>\n" +
+            "      The file for lookup up frames based on hashes\n" +
+            "      (default='<program-dir>/Resources/FrameHashLookups.json')\n" +
             "\n" +
             "'compile' Options:\n" +
             "  -O, --optimize            optimizes frames, ignoring anything explicit\n" +
