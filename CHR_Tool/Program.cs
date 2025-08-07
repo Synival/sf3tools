@@ -1,69 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using CommonLib.Arrays;
 using NDesk.Options;
-using SF3.ByteData;
-using SF3.CHR;
-using SF3.Models.Files.CHP;
-using SF3.Models.Files.CHR;
-using SF3.NamedValues;
-using SF3.Types;
 using SF3.Utils;
 
-namespace CHRTool {
+namespace CHR_Tool {
     public class Program {
-        private const string c_Version = "0.1";
-
-        private const string c_VersionString =
-            "CHRTool v" + c_Version + "\n";
-
-        private const string c_ShortUsageString =
-            "Usage:\n" +
-            "  chrtool [GENERAL_OPTIONS]... compile [OPTIONS]... SF3CHR_file\n" +
-            "  chrtool [GENERAL_OPTIONS]... decompile [OPTIONS]... CHR_file\n" +
-            "  chrtool [GENERAL_OPTIONS]... extract-sheets [OPTIONS]... game_data_dir\n";
-
-        private const string c_ErrorUsageString =
-            c_ShortUsageString +
-            "Try 'chrtool --help' for more information.\n";
-
-        private const string c_FullUsageString =
-            c_ShortUsageString +
-            "\n" +
-            "Compiles or decompiles CHR files from/to SF3CHR files.\n" +
-            "\n" +
-            "General Options:\n" +
-            "  -h, --help                print this help message\n" +
-            "  --version                 print CHRTool version\n" +
-            "  --sprite-dir=<dir>        directory for sprites (.SF3Sprite files)\n" +
-            "      (default='<program-dir>/Resources/Sprites')\n" +
-            "  --spritesheet-dir=<dir>   directory for spritesheets (.PNG files)\n" +
-            "      (default='<program-dir>/Resources/Spritesheets')\n" +
-            "\n" +
-            "Compile Options:\n" +
-            "  -O, --optimize            optimizes frames, ignoring anything explicit\n" +
-            "  --output=<output-file>    specify output .CHR file\n" +
-            "  --add-sprite=<file>       adds an SF3CHRSprite file\n" +
-            "\n" +
-            "Decompile Options:\n" +
-            "  --output=<output-file>    specify output .SF3CHR file\n" +
-            "\n" +
-            "Extract Sheets Options:\n" +
-            "  (none)\n" +
-            "\n";
-
-        enum CommandType {
-            Compile,
-            Decompile,
-            ExtractSheets
-        }
-
         private static int Main(string[] args) {
             // Complain if no command was found.
             if (args == null || args.Length == 0) {
-                Console.Error.Write(c_ErrorUsageString);
+                Console.Error.Write(Constants.ErrorUsageString);
                 return 1;
             }
 
@@ -86,21 +31,21 @@ namespace CHRTool {
             }
             catch (Exception e) {
                 Console.WriteLine("Error: " + e.Message);
-                Console.Error.Write(c_ErrorUsageString);
+                Console.Error.Write(Constants.ErrorUsageString);
                 return 1;
             }
 
             // Never show errors if -h was specified anywhere.
             if (outputHelp) {
                 if (outputVersion)
-                    Console.Write(c_VersionString);
-                Console.Write(c_FullUsageString);
+                    Console.Write(Constants.VersionString);
+                Console.Write(Constants.FullUsageString);
                 return 0;
             }
 
             // Always just show version string if requested (unless help is requested).
             if (outputVersion) {
-                Console.Write(c_VersionString);
+                Console.Write(Constants.VersionString);
                 return 0;
             }
 
@@ -140,22 +85,22 @@ namespace CHRTool {
             }
             catch (Exception e) {
                 Console.WriteLine("Error: " + e.Message);
-                Console.Error.Write(c_ErrorUsageString);
+                Console.Error.Write(Constants.ErrorUsageString);
                 return 1;
             }
 
             // Complain if no command was found.
             if (command == null) {
-                Console.Error.WriteLine("Couldn't find 'compile' or 'decompile' command.");
-                Console.Error.Write(c_ErrorUsageString);
+                Console.Error.WriteLine("Couldn't find command.");
+                Console.Error.Write(Constants.ErrorUsageString);
                 return 1;
             }
 
             // There shouldn't be any unrecognized options before the command.
             if (extraArgsBeforeCommand.Length > 0) {
-                Console.Error.WriteLine("Unrecognized arguments before 'compile' or 'decompile' command:");
+                Console.Error.WriteLine("Unrecognized arguments before command:");
                 Console.Error.Write($"    {string.Join(" ", extraArgsBeforeCommand)}");
-                Console.Error.Write(c_ErrorUsageString);
+                Console.Error.Write(Constants.ErrorUsageString);
                 return 1;
             }
 
@@ -167,204 +112,18 @@ namespace CHRTool {
 
             switch (command) {
                 case CommandType.Compile:
-                    return Compile(remainingArgs, spriteDir, spritesheetDir);
+                    return Compile.Run(remainingArgs, spriteDir, spritesheetDir);
 
                 case CommandType.Decompile:
-                    return Decompile(remainingArgs);
+                    return Decompile.Run(remainingArgs);
 
                 case CommandType.ExtractSheets:
-                    return ExtractSheets(remainingArgs, spriteDir, spritesheetDir);
+                    return ExtractSheets.Run(remainingArgs, spriteDir, spritesheetDir);
 
                 default:
                     Console.Error.WriteLine("Internal error: unimplemented command '" + command.ToString() + "'");
                     return 1;
             }
-        }
-
-        private static int Compile(string[] args, string spriteDir, string spritesheetDir) {
-            var optimize = false;
-            string outputFile = null;
-            List<string> spritesToAdd = new List<string>();
-
-            // Read any command line options.
-            var compileOptions = new OptionSet() {
-                { "O|optimize",  v => optimize = true },
-                { "output=",     v => outputFile = v },
-                { "add-sprite=", v => spritesToAdd.Add(v) },
-            };
-            try {
-                args = compileOptions.Parse(args).ToArray();
-            }
-            catch (Exception e) {
-                Console.WriteLine("Error: " + e.Message);
-                Console.Error.Write(c_ErrorUsageString);
-                return 1;
-            }
-
-            // Fetch the filename for reading.
-            if (args.Length == 0) {
-                Console.Error.WriteLine("Missing input file");
-                Console.Error.Write(c_ErrorUsageString);
-                return 1;
-            }
-            var inputFile = args[0];
-            args = args[1..args.Length];
-
-            // There shouldn't be any unrecognized arguments at this point.
-            if (args.Length > 0) {
-                Console.Error.WriteLine("Unrecognized arguments in 'compile' command:");
-                Console.Error.Write($"    {string.Join(" ", args)}");
-                Console.Error.Write(c_ErrorUsageString);
-                return 1;
-            }
-
-            // It looks like we're ready to go! Fetch the file data.
-            Console.WriteLine($"Sprite directory:     {spriteDir}");
-            Console.WriteLine($"Spriteheet directory: {spritesheetDir}");
-
-            var inputFilename = Path.GetFileName(inputFile);
-            if (outputFile == null)
-                outputFile = Path.Combine(Path.GetDirectoryName(inputFile), $"{Path.GetFileNameWithoutExtension(inputFilename)}.CHR");
-            var outputFilename = Path.GetFileName(outputFile);
-            Console.WriteLine($"Compiling '{inputFilename}' to '{outputFilename}'...");
-
-            string chrDefText = null;
-            try {
-                chrDefText = File.ReadAllText(inputFile);
-                Console.WriteLine("  Read input file successfully.");
-            }
-            catch (Exception e) {
-                Console.WriteLine($"  Couldn't open '{inputFile}' for reading:");
-                Console.WriteLine($"    {e.GetType().Name}: {e.Message}");
-                return 1;
-            }
-
-            // Attempt to deserialize.
-            CHR_Def chrDef = null;
-            try {
-                chrDef = CHR_Def.FromJSON(chrDefText);
-                if (chrDef == null)
-                    throw new NullReferenceException(); // eh, not really, but whatever
-                Console.WriteLine("  Deserialized CHR_Def successfully.");
-            }
-            catch (Exception e) {
-                Console.WriteLine($"  Couldn't deserialize '{inputFile}' after reading:");
-                Console.WriteLine($"    {e.GetType().Name}: {e.Message}");
-                return 1;
-            }
-
-            // We should have everything necessary to compile. Give it a go!
-            var chrCompiler = new CHR_Compiler() {
-                OptimizeFrames            = optimize,
-                AddMissingAnimationFrames = true,
-                SpritePath                = spriteDir,
-                SpritesheetPath           = spritesheetDir
-            };
-            byte[] chrFileData = null;
-            try {
-                using (var memoryStream = new MemoryStream()) {
-                    chrCompiler.Compile(chrDef, memoryStream);
-                    chrFileData = memoryStream.ToArray();
-                }
-                Console.WriteLine("  CHR compiled successfully.");
-            }
-            catch (Exception e) {
-                Console.WriteLine($"  Couldn't compile '{inputFile}' after deserializing:");
-                Console.WriteLine($"    {e.GetType().Name}: {e.Message}");
-                return 1;
-            }
-
-            // Output the file.
-            try {
-                File.WriteAllBytes(outputFile, chrFileData);
-                Console.WriteLine("  Output file written successfully.");
-            }
-            catch (Exception e) {
-                Console.WriteLine($"  Couldn't compile '{inputFile}' after deserializing:");
-                Console.WriteLine($"    {e.GetType().Name}: {e.Message}");
-                return 1;
-            }
-
-            Console.WriteLine("Done");
-            return 0;
-        }
-
-        private static int Decompile(string[] args) {
-            Console.Error.WriteLine("Coming soon (tm)!");
-            return 1;
-        }
-
-        private static int ExtractSheets(string[] args, string spriteDir, string spritesheetDir) {
-            // (any extra options would go here.)
-
-            // Fetch the directory with the game data for ripping spritesheets.
-            if (args.Length == 0) {
-                Console.Error.WriteLine("Missing game data directory");
-                Console.Error.Write(c_ErrorUsageString);
-                return 1;
-            }
-            var gameDataDir = args[0];
-            args = args[1..args.Length];
-
-            // There shouldn't be any unrecognized arguments at this point.
-            if (args.Length > 0) {
-                Console.Error.WriteLine("Unrecognized arguments in 'compile' command:");
-                Console.Error.Write($"    {string.Join(" ", args)}");
-                Console.Error.Write(c_ErrorUsageString);
-                return 1;
-            }
-
-            // It looks like we're ready to go! Fetch the file data.
-            Console.WriteLine($"Sprite directory:     {spriteDir}");
-            Console.WriteLine($"Spriteheet directory: {spritesheetDir}");
-            Console.WriteLine($"Game data directory:  {gameDataDir}");
-
-            string[] files;
-            try {
-                files = Directory.GetFiles(gameDataDir, "*.CHR")
-                    .Concat(Directory.GetFiles(gameDataDir, "*.CHP"))
-                    .OrderBy(x => x)
-                    .ToArray();
-            }
-            catch (Exception e) {
-                Console.WriteLine($"  Couldn't get game data files from path '{gameDataDir}':");
-                Console.WriteLine($"    {e.GetType().Name}: {e.Message}");
-                return 1;
-            }
-
-            // We don't care about the NameGetterContext or Scenario, since CHRs/CHP are all the same format,
-            // and we don't care about any scenario-based resources. Just use Scenario 1.
-            var scenario = ScenarioType.Scenario1;
-            var nameGetterContext = new NameGetterContext(scenario);
-
-            foreach (var file in files) {
-                Console.WriteLine($"Extracting sprites from '{Path.GetFileName(file)}'...");
-                try {
-                    var bytes = File.ReadAllBytes(file);
-                    var byteData = new ByteData(new ByteArray(bytes));
-
-                    if (file.ToLower().EndsWith(".CHR")) {
-                        var chrFile = CHR_File.Create(byteData, nameGetterContext, scenario);
-                        ExtractSheets(chrFile, spritesheetDir);
-                    }
-                    else if (file.ToLower().EndsWith(".CHP")) {
-                        var chpFile = CHP_File.Create(byteData, nameGetterContext, scenario);
-                        foreach (var chrFile in chpFile.CHR_EntriesByOffset.Values)
-                            ExtractSheets(chrFile, spritesheetDir);
-                    }
-                }
-                catch (Exception e) {
-                    Console.WriteLine($"  Couldn't extract sheets from '{file}':");
-                    Console.WriteLine($"    {e.GetType().Name}: {e.Message}");
-                }
-            }
-
-            Console.WriteLine("Done");
-            return 0;
-        }
-
-        public static void ExtractSheets(ICHR_File chrFile, string spritesheetDir) {
-            // TODO: extract them sprites!
         }
     }
 }
