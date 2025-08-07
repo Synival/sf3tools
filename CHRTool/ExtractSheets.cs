@@ -10,7 +10,7 @@ using SF3.Types;
 
 namespace CHRTool {
     public static class ExtractSheets {
-        public static int Run(string[] args, string spriteDir, string spritesheetDir) {
+        public static int Run(string[] args, string spriteDir, string spritesheetDir, string hashLookupDir) {
             // (any extra options would go here.)
 
             // Fetch the directory with the game data for ripping spritesheets.
@@ -24,16 +24,17 @@ namespace CHRTool {
 
             // There shouldn't be any unrecognized arguments at this point.
             if (args.Length > 0) {
-                Console.Error.WriteLine("Unrecognized arguments in 'compile' command:");
+                Console.Error.WriteLine("Unrecognized arguments in 'extract-sheet' command:");
                 Console.Error.Write($"    {string.Join(" ", args)}");
                 Console.Error.Write(Constants.ErrorUsageString);
                 return 1;
             }
 
             // It looks like we're ready to go! Fetch the file data.
-            Console.WriteLine($"Sprite directory:     {spriteDir}");
-            Console.WriteLine($"Spriteheet directory: {spritesheetDir}");
-            Console.WriteLine($"Game data directory:  {gameDataDir}");
+            Console.WriteLine($"Sprite directory:      {spriteDir}");
+            Console.WriteLine($"Spritesheet directory: {spritesheetDir}");
+            Console.WriteLine($"Hash lookup directory: {hashLookupDir}");
+            Console.WriteLine($"Game data directory:   {gameDataDir}");
 
             string[] files;
             try {

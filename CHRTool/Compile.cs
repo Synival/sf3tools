@@ -44,8 +44,8 @@ namespace CHRTool {
             }
 
             // It looks like we're ready to go! Fetch the file data.
-            Console.WriteLine($"Sprite directory:     {spriteDir}");
-            Console.WriteLine($"Spriteheet directory: {spritesheetDir}");
+            Console.WriteLine($"Sprite directory:      {spriteDir}");
+            Console.WriteLine($"Spritesheet directory: {spritesheetDir}");
 
             var inputFilename = Path.GetFileName(inputFile);
             if (outputFile == null)

@@ -18,6 +18,7 @@ namespace CHRTool {
             var programDir     = AppDomain.CurrentDomain.BaseDirectory;
             var spriteDir      = Path.Combine(programDir, "Resources", "Sprites");
             var spritesheetDir = Path.Combine(programDir, "Resources", "Spritesheets");
+            var hashLookupDir  = Path.Combine(programDir, "Resources");
 
             var anywhereOptions = new OptionSet() {
                 { "h|help",           v => outputHelp = true },
@@ -49,22 +50,12 @@ namespace CHRTool {
                 return 0;
             }
 
-            // Look for a 'compile' or 'decompile' keyword.
+            // Look for a command.
             CommandType? command = null;
             int commandArg = -1;
             for (int i = 0; i < args.Length; i++) {
-                if (args[i].ToLower() == "compile") {
-                    command = CommandType.Compile;
-                    commandArg = i;
-                    break;
-                }
-                else if (args[i].ToLower() == "decompile") {
-                    command = CommandType.Decompile;
-                    commandArg = i;
-                    break;
-                }
-                else if (args[i].ToLower() == "extract-sheets") {
-                    command = CommandType.ExtractSheets;
+                if (Constants.CommandKeywords.TryGetValue(args[i].ToLower(), out var commandOut)) {
+                    command = commandOut;
                     commandArg = i;
                     break;
                 }
@@ -118,7 +109,10 @@ namespace CHRTool {
                     return Decompile.Run(remainingArgs);
 
                 case CommandType.ExtractSheets:
-                    return ExtractSheets.Run(remainingArgs, spriteDir, spritesheetDir);
+                    return ExtractSheets.Run(remainingArgs, spriteDir, spritesheetDir, hashLookupDir);
+
+                case CommandType.UpdateLookupHashes:
+                    return UpdateLookupHashes.Run(remainingArgs, spriteDir, spritesheetDir, hashLookupDir);
 
                 default:
                     Console.Error.WriteLine("Internal error: unimplemented command '" + command.ToString() + "'");

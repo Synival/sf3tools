@@ -2,6 +2,7 @@
     public enum CommandType {
         Compile,
         Decompile,
-        ExtractSheets
+        ExtractSheets,
+        UpdateLookupHashes,
     }
 }

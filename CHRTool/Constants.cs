@@ -1,4 +1,6 @@
-﻿namespace CHRTool {
+﻿using System.Collections.Generic;
+
+namespace CHRTool {
     public static class Constants {
         public const string Version = "0.1";
 
@@ -7,9 +9,14 @@
 
         public const string ShortUsageString =
             "Usage:\n" +
-            "  chrtool [GENERAL_OPTIONS]... compile [OPTIONS]... SF3CHR_file\n" +
-            "  chrtool [GENERAL_OPTIONS]... decompile [OPTIONS]... CHR_file\n" +
-            "  chrtool [GENERAL_OPTIONS]... extract-sheets [OPTIONS]... game_data_dir\n";
+            "  Compile .SF3CHR file into a .CHR file:\n" +
+            "    chrtool [GENERAL_OPTIONS]... compile [OPTIONS]... SF3CHR_file\n" +
+            "  Decompile a .CHR file into a .SF3CHR file:\n" +
+            "    chrtool [GENERAL_OPTIONS]... decompile [OPTIONS]... CHR_file\n" +
+            "  Extract spritesheet frames from .CHR and .CHP files:\n" +
+            "    chrtool [GENERAL_OPTIONS]... extract-sheets [OPTIONS]... game_data_dir\n" +
+            "  Update the lookup table for frame and animation hashes in SF3Lib:\n" +
+            "    chrtool [GENERAL_OPTIONS]... update-lookup-hashes [OPTIONS]...\n";
 
         public const string ErrorUsageString =
             ShortUsageString +
@@ -17,8 +24,6 @@
 
         public const string FullUsageString =
             ShortUsageString +
-            "\n" +
-            "Compiles or decompiles CHR files from/to SF3CHR files.\n" +
             "\n" +
             "General Options:\n" +
             "  -h, --help                print this help message\n" +
@@ -28,16 +33,26 @@
             "  --spritesheet-dir=<dir>   directory for spritesheets (.PNG files)\n" +
             "      (default='<program-dir>/Resources/Spritesheets')\n" +
             "\n" +
-            "Compile Options:\n" +
+            "'compile' Options:\n" +
             "  -O, --optimize            optimizes frames, ignoring anything explicit\n" +
             "  --output=<output-file>    specify output .CHR file\n" +
             "  --add-sprite=<file>       adds an SF3CHRSprite file\n" +
             "\n" +
-            "Decompile Options:\n" +
+            "'decompile' Options:\n" +
             "  --output=<output-file>    specify output .SF3CHR file\n" +
             "\n" +
-            "Extract Sheets Options:\n" +
+            "'extract-sheets' Options:\n" +
+            "  (none)\n" +
+            "\n" +
+            "'update-lookup-hashes' Options:\n" +
             "  (none)\n" +
             "\n";
+
+        public static readonly Dictionary<string, CommandType> CommandKeywords = new() {
+            { "compile",              CommandType.Compile },
+            { "decompile",            CommandType.Decompile },
+            { "extract-sheets",       CommandType.ExtractSheets },
+            { "update-lookup-hashes", CommandType.UpdateLookupHashes },
+        };
     }
 }
