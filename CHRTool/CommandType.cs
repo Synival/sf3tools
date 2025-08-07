@@ -3,6 +3,6 @@
         Compile,
         Decompile,
         ExtractSheets,
-        UpdateLookupHashes,
+        UpdateHashLookups,
     }
 }

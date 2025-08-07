@@ -16,7 +16,7 @@ namespace CHRTool {
             "  Extract spritesheet frames from .CHR and .CHP files:\n" +
             "    chrtool [GENERAL_OPTIONS]... extract-sheets [OPTIONS]... game_data_dir\n" +
             "  Update the lookup table for frame and animation hashes in SF3Lib:\n" +
-            "    chrtool [GENERAL_OPTIONS]... update-lookup-hashes [OPTIONS]...\n";
+            "    chrtool [GENERAL_OPTIONS]... update-hash-lookups [OPTIONS]...\n";
 
         public const string ErrorUsageString =
             ShortUsageString +
@@ -47,15 +47,15 @@ namespace CHRTool {
             "'extract-sheets' Options:\n" +
             "  (none)\n" +
             "\n" +
-            "'update-lookup-hashes' Options:\n" +
+            "'update-hash-lookups' Options:\n" +
             "  (none)\n" +
             "\n";
 
         public static readonly Dictionary<string, CommandType> CommandKeywords = new() {
-            { "compile",              CommandType.Compile },
-            { "decompile",            CommandType.Decompile },
-            { "extract-sheets",       CommandType.ExtractSheets },
-            { "update-lookup-hashes", CommandType.UpdateLookupHashes },
+            { "compile",             CommandType.Compile },
+            { "decompile",           CommandType.Decompile },
+            { "extract-sheets",      CommandType.ExtractSheets },
+            { "update-hash-lookups", CommandType.UpdateHashLookups },
         };
     }
 }

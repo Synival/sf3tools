@@ -4,7 +4,7 @@ using SF3.Sprites;
 using SF3.Utils;
 
 namespace CHRTool {
-    public static class UpdateLookupHashes {
+    public static class UpdateHashLookups {
         public static int Run(string[] args, string spriteDir, string spritesheetDir, string frameHashLookupsFile) {
             // (any extra options would go here.)
 
