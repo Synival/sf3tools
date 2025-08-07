@@ -4,7 +4,7 @@ using System.IO;
 using NDesk.Options;
 using SF3.CHR;
 
-namespace CHR_Tool {
+namespace CHRTool {
     public static class Compile {
         public static int Run(string[] args, string spriteDir, string spritesheetDir) {
             var optimize = false;

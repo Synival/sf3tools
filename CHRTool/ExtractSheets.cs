@@ -8,7 +8,7 @@ using SF3.Models.Files.CHR;
 using SF3.NamedValues;
 using SF3.Types;
 
-namespace CHR_Tool {
+namespace CHRTool {
     public static class ExtractSheets {
         public static int Run(string[] args, string spriteDir, string spritesheetDir) {
             // (any extra options would go here.)

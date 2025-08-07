@@ -1,4 +1,4 @@
-﻿namespace CHR_Tool {
+﻿namespace CHRTool {
     public enum CommandType {
         Compile,
         Decompile,

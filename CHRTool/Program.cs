@@ -3,7 +3,7 @@ using System.IO;
 using NDesk.Options;
 using SF3.Utils;
 
-namespace CHR_Tool {
+namespace CHRTool {
     public class Program {
         private static int Main(string[] args) {
             // Complain if no command was found.

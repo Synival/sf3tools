@@ -74,7 +74,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SpriteCHR_Builder", "Sprite
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CHR_Extractor", "CHR_Extractor\CHR_Extractor.csproj", "{AF7DC87A-1847-4DB1-B74C-0701AA84F2BB}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CHR_Tool", "CHR_Tool\CHR_Tool.csproj", "{8F6C10E5-3E75-4B83-968E-5B8A61E5166C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CHRTool", "CHRTool\CHRTool.csproj", "{8F6C10E5-3E75-4B83-968E-5B8A61E5166C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

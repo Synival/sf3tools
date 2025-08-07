@@ -1,4 +1,4 @@
-﻿namespace CHR_Tool {
+﻿namespace CHRTool {
     public static class Constants {
         public const string Version = "0.1";
 
