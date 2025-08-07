@@ -11,8 +11,8 @@ namespace DFRTool {
 
         private const string c_ShortUsageString =
             "Usage:\n" +
-            "  dfrtool [GENERAL_OPTIONS] apply [APPLY_OPTIONS]... bin_file dfr_file <output_file | -i>\n" +
-            "  dfrtool [GENERAL_OPTIONS] create [CREATE_OPTIONS]... original_file altered_file\n";
+            "  dfrtool [GENERAL_OPTIONS]... apply [APPLY_OPTIONS]... bin_file dfr_file <output_file | -i>\n" +
+            "  dfrtool [GENERAL_OPTIONS]... create [CREATE_OPTIONS]... original_file altered_file\n";
         private const string c_ErrorUsageString =
             c_ShortUsageString +
             "Try 'dfrtool --help' for more information.\n";

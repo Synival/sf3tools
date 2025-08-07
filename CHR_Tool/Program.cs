@@ -5,7 +5,7 @@ using NDesk.Options;
 using SF3.CHR;
 using SF3.Utils;
 
-namespace DFRTool {
+namespace CHRTool {
     public class Program {
         private const string c_Version = "0.1";
 
@@ -14,8 +14,9 @@ namespace DFRTool {
 
         private const string c_ShortUsageString =
             "Usage:\n" +
-            "  chrtool [GENERAL_OPTIONS] compile [COMPILE_OPTIONS]... SF3CHR_file\n" +
-            "  chrtool [GENERAL_OPTIONS] decompile [DECOMPILE_OPTIONS]... CHR_file\n";
+            "  chrtool [GENERAL_OPTIONS]... compile [COMPILE_OPTIONS]... SF3CHR_file\n" +
+            "  chrtool [GENERAL_OPTIONS]... decompile [DECOMPILE_OPTIONS]... CHR_file\n" +
+            "  chrtool [GENERAL_OPTIONS]... extract-sheets [OPTIONS]... game_data_path\n";
 
         private const string c_ErrorUsageString =
             c_ShortUsageString +
@@ -41,11 +42,15 @@ namespace DFRTool {
             "\n" +
             "Decompile Options:\n" +
             "  --output=<output-file>    specify output .SF3CHR file\n" +
+            "\n" +
+            "Extract Sheets Options:\n" +
+            "  (none)\n" +
             "\n";
 
         enum CommandType {
             Compile,
-            Decompile
+            Decompile,
+            ExtractSheets
         }
 
         private static int Main(string[] args) {
@@ -106,6 +111,11 @@ namespace DFRTool {
                     commandArg = i;
                     break;
                 }
+                else if (args[i].ToLower() == "extract-sheets") {
+                    command = CommandType.ExtractSheets;
+                    commandArg = i;
+                    break;
+                }
             }
 
             // If a command was supplied, split arguments up.
@@ -154,6 +164,9 @@ namespace DFRTool {
 
                 case CommandType.Decompile:
                     return Decompile(remainingArgs);
+
+                case CommandType.ExtractSheets:
+                    return ExtractSheets(remainingArgs, spriteDir, spritesheetDir);
 
                 default:
                     Console.Error.WriteLine("Internal error: unimplemented command '" + command.ToString() + "'");
@@ -272,6 +285,34 @@ namespace DFRTool {
         private static int Decompile(string[] args) {
             Console.Error.WriteLine("Coming soon (tm)!");
             return 1;
+        }
+
+        private static int ExtractSheets(string[] args, string spriteDir, string spritesheetDir) {
+            // (any extra options would go here.)
+
+            // Fetch the filename for reading.
+            if (args.Length == 0) {
+                Console.Error.WriteLine("Missing input file");
+                Console.Error.Write(c_ErrorUsageString);
+                return 1;
+            }
+            var inputFile = args[0];
+            args = args[1..args.Length];
+
+            // There shouldn't be any unrecognized arguments at this point.
+            if (args.Length > 0) {
+                Console.Error.WriteLine("Unrecognized arguments in 'compile' command:");
+                Console.Error.Write($"    {string.Join(" ", args)}");
+                Console.Error.Write(c_ErrorUsageString);
+                return 1;
+            }
+
+            // It looks like we're ready to go! Fetch the file data.
+            Console.WriteLine($"Sprite directory:     {spriteDir}");
+            Console.WriteLine($"Spriteheet directory: {spritesheetDir}");
+
+            Console.WriteLine("Coming soon! (tm)");
+            return 0;
         }
     }
 }
