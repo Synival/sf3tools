@@ -699,14 +699,13 @@ namespace SF3.CHR {
         }
 
         private Bitmap GetSpritesheetBitmap(string spriteName, int width, int height) {
-            var spritesheetKey = Spritesheet.DimensionsToKey(width, height);
-            var spritesheetImageKey = $"{spriteName} ({spritesheetKey})";
+            var spritesheetImageKey = SpriteResources.SpritesheetImageKey(spriteName, width, height);
 
             if (_spritesheetImageDict.TryGetValue(spritesheetImageKey, out var bitmap))
                 return bitmap;
 
             try {
-                var bitmapPath = SpriteResources.SpritesheetImagePath($"{SpriteResources.FilesystemName(spritesheetImageKey)}.png");
+                var bitmapPath = SpriteResources.SpritesheetImageFile(spritesheetImageKey);
                 bitmap = (Bitmap) Image.FromFile(bitmapPath);
             }
             catch {

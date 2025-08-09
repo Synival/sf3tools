@@ -6,6 +6,7 @@ using SF3.ByteData;
 using SF3.Models.Files.CHP;
 using SF3.Models.Files.CHR;
 using SF3.NamedValues;
+using SF3.Sprites;
 using SF3.Types;
 
 namespace CHRTool {
@@ -63,14 +64,14 @@ namespace CHRTool {
                     var bytes = File.ReadAllBytes(file);
                     var byteData = new ByteData(new ByteArray(bytes));
 
-                    if (file.ToLower().EndsWith(".CHR")) {
+                    if (file.ToLower().EndsWith(".chr")) {
                         var chrFile = CHR_File.Create(byteData, nameGetterContext, scenario);
-                        ExtractFromCHR(chrFile, spritesheetDir);
+                        ExtractFromCHR(chrFile);
                     }
-                    else if (file.ToLower().EndsWith(".CHP")) {
+                    else if (file.ToLower().EndsWith(".chp")) {
                         var chpFile = CHP_File.Create(byteData, nameGetterContext, scenario);
                         foreach (var chrFile in chpFile.CHR_EntriesByOffset.Values)
-                            ExtractFromCHR(chrFile, spritesheetDir);
+                            ExtractFromCHR(chrFile);
                     }
                 }
                 catch (Exception e) {
@@ -84,8 +85,34 @@ namespace CHRTool {
             return 0;
         }
 
-        private static void ExtractFromCHR(ICHR_File chrFile, string spritesheetDir) {
-            // TODO: extract them sprites!
+        private static void ExtractFromCHR(ICHR_File chrFile) {
+            // TODO: we desperately need some try/catch blocks in here!
+
+            // Get a list of all frames referenced in this CHR file.
+            var frameRefs = chrFile.SpriteTable
+                .SelectMany(x => x.FrameTable.SelectMany(y => y.FrameRefs.Select(z => (FrameRef: z, Texture: y.Texture))))
+                .GroupBy(x => x.FrameRef)
+                .Select(x => x.First())
+                .Distinct()
+                .OrderBy(x => x.FrameRef.SpriteName)
+                .ThenBy(x => x.FrameRef.FrameWidth)
+                .ThenBy(x => x.FrameRef.FrameHeight)
+                .ThenBy(x => x.FrameRef.FrameGroupName)
+                .ThenBy(x => x.FrameRef.FrameDirection)
+                .ToArray();
+
+            foreach (var frameRefTex in frameRefs) {
+                var frameRef = frameRefTex.FrameRef;
+                var spriteDef = SpriteResources.GetSpriteDef(frameRef.SpriteName);
+                var spritesheetImageFile = SpriteResources.SpritesheetImageFile(frameRef.SpriteName, frameRef.FrameWidth, frameRef.FrameHeight);
+                var spritesheet = spriteDef.Spritesheets[Spritesheet.DimensionsToKey(frameRef.FrameWidth, frameRef.FrameHeight)];
+                var frameGroup = spritesheet.FrameGroupsByName[frameRef.FrameGroupName];
+                var frame = frameGroup.Frames[frameRef.FrameDirection];
+
+                // TODO: Add this to the spritesheet!
+                var texture = frameRefTex.Texture;
+                Console.WriteLine($"    {spriteDef.Name}: {frameRef.FrameGroupName} ({frameRef.FrameDirection}): {frame.ToString()}: {texture.Hash}");
+            }
         }
     }
 }

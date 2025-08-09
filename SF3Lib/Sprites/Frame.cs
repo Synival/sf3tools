@@ -74,7 +74,7 @@ namespace SF3.Sprites {
             };
         }
 
-        public override string ToString() => Hash;
+        public override string ToString() => $"({SpritesheetX}, {SpritesheetY})";
 
         public string Hash;
         public int SpritesheetX;

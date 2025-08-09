@@ -32,12 +32,32 @@ namespace SF3.Sprites {
         public static string FrameHashLookupsFile { get; set; } = null;
 
         /// <summary>
-        /// Returns the full path of a spritesheet image.
+        /// Returns an individual spritesheet's key used for filenames or storage.
         /// </summary>
-        /// <param name="filename">The filename of the spritesheet, without the path.</param>
-        /// <returns>A string with the relative path of the spritesheet.</returns>
-        public static string SpritesheetImagePath(string filename)
-            => Path.Combine(SpritesheetPath ?? ResourceFile("Spritesheets"), filename);
+        /// <param name="spriteName">The name of the spite.</param>
+        /// <param name="frameWidth">The width of each frame in the spritesheet.</param>
+        /// <param name="frameHeight">The height of each frame in the spritesheet.</param>
+        /// <returns>A string with a unique key for this spritesheet.</returns>
+        public static string SpritesheetImageKey(string spriteName, int frameWidth, int frameHeight)
+            => $"{spriteName} ({frameWidth}x{frameHeight})";
+
+        /// <summary>
+        /// Returns the full path of a spritesheet image. Root path is 'SpritesheetPath' if set, or 'Resources/Spritesheets' if not.
+        /// </summary>
+        /// <param name="spritesheetImageKey">The unique key for the spritesheet, returned by SpritesheetImageKey().</param>
+        /// <returns>A string with the full path (relative if 'SpritesheetPath' is unset) of the spritesheet.</returns>
+        public static string SpritesheetImageFile(string spritesheetImageKey)
+            => Path.Combine(SpritesheetPath ?? ResourceFile("Spritesheets"), $"{FilesystemName(spritesheetImageKey)}.png");
+
+        /// <summary>
+        /// Returns the full path of a spritesheet image. Root path is 'SpritesheetPath' if set, or 'Resources/Spritesheets' if not.
+        /// </summary>
+        /// <param name="spriteName">The name of the spite.</param>
+        /// <param name="frameWidth">The width of each frame in the spritesheet.</param>
+        /// <param name="frameHeight">The height of each frame in the spritesheet.</param>
+        /// <returns>A string with the full path (relative if 'SpritesheetPath' is unset) of the spritesheet.</returns>
+        public static string SpritesheetImageFile(string spriteName, int frameWidth, int frameHeight)
+            => SpritesheetImageFile(SpritesheetImageKey(spriteName, frameWidth, frameHeight));
 
         /// <summary>
         /// Returns the name of a sprite as it would be stored in the filesystem, with invalid characters replaced.
@@ -182,7 +202,7 @@ namespace SF3.Sprites {
                 var frameSize = Spritesheet.KeyToDimensions(spritesheetKv.Key);
                 var spritesheet = spritesheetKv.Value;
 
-                var bitmapFilename = SpritesheetImagePath($"{FilesystemName(spriteDef.Name)} ({spritesheetKv.Key}).png");
+                var bitmapFilename = SpritesheetImageFile(spriteDef.Name, frameSize.Width, frameSize.Height);
                 using (var bitmap = new Bitmap(bitmapFilename)) {
                     foreach (var frameGroupKv in spritesheet.FrameGroupsByName) {
                         var frameGroupName = frameGroupKv.Key;
