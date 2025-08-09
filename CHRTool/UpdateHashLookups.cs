@@ -1,7 +1,6 @@
 ﻿using System;
 using System.IO;
 using SF3.Sprites;
-using SF3.Utils;
 
 namespace CHRTool {
     public static class UpdateHashLookups {
@@ -43,7 +42,7 @@ namespace CHRTool {
                     Console.WriteLine($"Couldn't find '{frameHashLookupsFile}'. Creating file from scratch.");
                 else {
                     Console.WriteLine($"Loading '{frameHashLookupsFile}'...");
-                    SpriteUtils.LoadFrameHashLookups();
+                    SpriteResources.LoadFrameHashLookups();
                 }
             }
             catch (Exception e) {
@@ -62,7 +61,7 @@ namespace CHRTool {
                 try {
                     var jsonText = File.ReadAllText(file);
                     var spriteDef = SpriteDef.FromJSON(jsonText);
-                    var framesAdded = SpriteUtils.AddFrameHashLookups(spriteDef);
+                    var framesAdded = SpriteResources.AddFrameHashLookups(spriteDef);
                     totalFramesAdded += framesAdded;
 
                     if (framesAdded > 0)
@@ -78,7 +77,7 @@ namespace CHRTool {
             Console.WriteLine("------------------------------------------------------------------------------");
             Console.WriteLine($"Writing '{frameHashLookupsFile}'...");
             try {
-                SpriteUtils.WriteFrameHashLookupsJSON();
+                SpriteResources.WriteFrameHashLookupsJSON();
             }
             catch (Exception e) {
                 Console.WriteLine();

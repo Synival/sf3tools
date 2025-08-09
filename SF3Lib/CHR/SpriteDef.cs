@@ -4,7 +4,6 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using SF3.Sprites;
 using SF3.Types;
-using SF3.Utils;
 
 namespace SF3.CHR {
     public class SpriteDef : IJsonResource {
@@ -42,7 +41,7 @@ namespace SF3.CHR {
                 Directions     = jObj.TryGetValue("Directions",     out var directions)     ? SpriteDirectionCountTypeExtensions.FromJToken(directions) : SpriteDirectionCountType.Four;
                 PromotionLevel = jObj.TryGetValue("PromotionLevel", out var promotionLevel) ? ((int) promotionLevel) : 0;
 
-                var spriteDef = SpriteUtils.GetSpriteDef(SpriteName);
+                var spriteDef = SpriteResources.GetSpriteDef(SpriteName);
 
                 Width          = jObj.TryGetValue("Width",          out var width)          ? ((int) width)          : spriteDef?.Width  ?? 0;
                 Height         = jObj.TryGetValue("Height",         out var height)         ? ((int) height)         : spriteDef?.Height ?? 0;
@@ -86,7 +85,7 @@ namespace SF3.CHR {
             if (PromotionLevel != 0)
                 jObj.Add("PromotionLevel", new JValue(PromotionLevel));
 
-            var spriteDef = SpriteUtils.GetSpriteDef(SpriteName);
+            var spriteDef = SpriteResources.GetSpriteDef(SpriteName);
             var spritesheet = (spriteDef?.Spritesheets?.TryGetValue(Spritesheet.DimensionsToKey(Width, Height), out var ssOut) == true) ? ssOut : null;
 
             if (Width != spriteDef?.Width || Height != spriteDef?.Height) {

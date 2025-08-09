@@ -476,15 +476,5 @@ namespace SF3.Utils {
                     return null;
             }
         }
-
-        public static string FilesystemName(string name) {
-            return name
-                .Replace(" | ", ", ")
-                .Replace("|", ",")
-                .Replace("?", "X")
-                .Replace("-", "_")
-                .Replace(":", "_")
-                .Replace("/", "_");
-        }
     }
 }

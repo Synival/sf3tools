@@ -246,7 +246,7 @@ namespace SpriteExtractor {
             Console.WriteLine();
 
             foreach (var spriteDef in spriteDefs) {
-                var spritePath = Path.Combine(c_pathOut, SpriteUtils.FilesystemName(spriteDef.Name));
+                var spritePath = Path.Combine(c_pathOut, SpriteResources.FilesystemName(spriteDef.Name));
 
                 List<StandaloneFrameDef> framesFound = [];
                 foreach (var spritesheet in spriteDef.Spritesheets) {
@@ -281,7 +281,7 @@ namespace SpriteExtractor {
                         .OrderBy(x => x.Direction)
                         .ToDictionary(x => x.Direction, x => x.Index);
 
-                    var filename = SpriteUtils.FilesystemName(spriteName) + ".png";
+                    var filename = SpriteResources.FilesystemName(spriteName) + ".png";
                     var outputPath = Path.Combine(spritePath, filename);
 
                     var frameGroups = frames
@@ -377,7 +377,7 @@ namespace SpriteExtractor {
                         bitmap.UnlockBits(bmpData);
 
                         try {
-                            _ = Directory.CreateDirectory(Path.Combine(c_pathOut, SpriteUtils.FilesystemName(spriteDef.Name)));
+                            _ = Directory.CreateDirectory(Path.Combine(c_pathOut, SpriteResources.FilesystemName(spriteDef.Name)));
                             bitmap.Save(outputPath, ImageFormat.Png);
                         }
                         catch { }
@@ -394,7 +394,7 @@ namespace SpriteExtractor {
             Console.WriteLine();
 
             foreach (var spriteDef in spriteDefs) {
-                var fsName = SpriteUtils.FilesystemName(spriteDef.Name);
+                var fsName = SpriteResources.FilesystemName(spriteDef.Name);
                 var spritePath = Path.Combine(c_pathOut, fsName);
                 var spriteDefPath = Path.Combine(spritePath, fsName + ".SF3Sprite");
                 Console.WriteLine($"Writing '{spriteDefPath}'...");

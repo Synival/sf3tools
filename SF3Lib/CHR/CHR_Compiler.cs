@@ -2,8 +2,8 @@
 using CommonLib.Arrays;
 using CommonLib.NamedValues;
 using SF3.Models.Files.CHR;
+using SF3.Sprites;
 using SF3.Types;
-using SF3.Utils;
 
 namespace SF3.CHR {
     public class CHR_Compiler {
@@ -35,9 +35,9 @@ namespace SF3.CHR {
         public int Compile(CHR_Def chrDef, Stream outputStream) {
             // TODO: don't do it this way, omg :( :( :(
             if (SpritePath != null)
-                SpriteUtils.SetSpritePath(SpritePath);
+                SpriteResources.SetSpritePath(SpritePath);
             if (SpritesheetPath != null)
-                SpriteUtils.SetSpritesheetPath(SpritesheetPath);
+                SpriteResources.SetSpritesheetPath(SpritesheetPath);
 
             // Create a compilation unit with all the data that needs to be tracked during the compilation process.
             var job = new CHR_CompilationJob();

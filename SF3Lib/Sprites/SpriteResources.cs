@@ -1,0 +1,249 @@
+﻿using System.Collections.Generic;
+using System.Drawing;
+using System.IO;
+using System.Linq;
+using Newtonsoft.Json;
+using SF3.Extensions;
+using SF3.Types;
+using SF3.Utils;
+using static CommonLib.Utils.ResourceUtils;
+
+namespace SF3.Sprites {
+    public static class SpriteResources {
+        private static Dictionary<string, SpriteDef> s_spriteDefs = new Dictionary<string, SpriteDef>();
+        private static HashSet<string> s_spriteDefFilesLoaded = new HashSet<string>();
+        private static Dictionary<string, HashSet<FrameHashLookup>> s_frameHashLookups = new Dictionary<string, HashSet<FrameHashLookup>>();
+
+        private static string s_spritePath = null;
+        private static string s_spritesheetPath = null;
+        private static string s_frameHashLookupsFile = null;
+
+        /// <summary>
+        /// Sets the path to use when retrieving sprites.
+        /// </summary>
+        /// <param name="path">Path that contains spritesheets.</param>
+        public static void SetSpritePath(string path)
+            => s_spritePath = path;
+
+        /// <summary>
+        /// Sets the path to use when retrieving spritesheets.
+        /// </summary>
+        /// <param name="path">Path that contains spritesheets.</param>
+        public static void SetSpritesheetPath(string path)
+            => s_spritesheetPath = path;
+
+        /// <summary>
+        /// Sets the JSON file to use for loading and updating frame hash lookups.
+        /// </summary>
+        /// <param name="file">Full path and filename for the JSON that contains frame hash lookups.</param>
+        public static void SetFrameHashLookupsFile(string file)
+            => s_frameHashLookupsFile = file;
+
+        /// <summary>
+        /// Returns the full path of a spritesheet image.
+        /// </summary>
+        /// <param name="filename">The filename of the spritesheet, without the path.</param>
+        /// <returns>A string with the relative path of the spritesheet.</returns>
+        public static string SpritesheetImagePath(string filename)
+            => Path.Combine(s_spritesheetPath ?? ResourceFile("Spritesheets"), filename);
+
+        /// <summary>
+        /// Returns the name of a sprite as it would be stored in the filesystem, with invalid characters replaced.
+        /// </summary>
+        /// <param name="name">The name of the sprite.</param>
+        /// <returns>A filesystem-friendly name of the sprite.</returns>
+        public static string FilesystemName(string name)
+            => ResourceUtils.FilesystemName(name);
+
+        /// <summary>
+        /// Loads all .SF3Sprite files in the "Sprites" directory.
+        /// </summary>
+        /// <returns>The number of new SpriteDef's successfully loaded.</returns>
+        public static int LoadAllSpriteDefs() {
+            var spriteDefFiles = Directory.GetFiles(s_spritePath ?? ResourceFile("Sprites"), "*.SF3Sprite");
+
+            int loadedCount = 0;
+            foreach (var file in spriteDefFiles)
+                loadedCount += (LoadSpriteDef(file) != null) ? 1 : 0;
+
+            return loadedCount;
+        }
+
+        /// <summary>
+        /// Attempts to load a SpriteDef from a file. Returns the new SpriteDef or 'null' on failure.
+        /// of loaded SpriteDef's.
+        /// </summary>
+        /// <param name="file">Filename of the SpriteDef to load.</param>
+        /// <returns>Returns the SpriteDef loaded if the file could be read successfully and a *new* SpriteDef was loaded. Otherwise returns 'null'.</returns>
+        public static SpriteDef LoadSpriteDef(string file) {
+            var fileWithoutExt = Path.GetFileNameWithoutExtension(file);
+            if (s_spriteDefFilesLoaded.Contains(fileWithoutExt))
+                return null;
+
+            try {
+                var spriteDef = SpriteDef.FromJSON(File.ReadAllText(file));
+                s_spriteDefFilesLoaded.Add(fileWithoutExt);
+
+                if (!s_spriteDefs.ContainsKey(spriteDef.Name)) {
+                    s_spriteDefs.Add(spriteDef.Name, spriteDef);
+                    return spriteDef;
+                }
+            }
+            catch {
+                // TODO: how to log this error?
+            }
+
+            return null;
+        }
+
+        /// <summary>
+        /// Returns an array of all loaded sprites in alphabetical order by name.
+        /// </summary>
+        /// <returns>A SpriteDef[] with every loaded sprite, in alphabetical order by name.</returns>
+        public static SpriteDef[] GetAllLoadedSpriteDefs()
+            => s_spriteDefs.Select(x => x.Value).OrderBy(x => x.Name).ToArray();
+
+        /// <summary>
+        /// Retrieves a SpriteDef from the filesystem or cache.
+        /// SpriteDef's are stored in the 'Resources/Sprites' folder.
+        /// </summary>
+        /// <param name="name">Name (not filename) of the SpriteDef to retrieve.</param>
+        /// <returns>A deserialized SpriteDef if the file was available and valid. Otherwise, 'null'.</returns>
+        public static SpriteDef GetSpriteDef(string name) {
+            if (name == null)
+                return null;
+
+            if (s_spriteDefs.TryGetValue(name, out var spriteDef))
+                return spriteDef;
+
+            var filename = Path.Combine(s_spritePath ?? ResourceFile("Sprites"), FilesystemName(name) + ".SF3Sprite");
+            return LoadSpriteDef(filename);
+        }
+
+        /// <summary>
+        /// Loads the list of sprite frames that can be looked up by hash.
+        /// This will look in 'Resources/FrameHashLookups.json' by default, or the file set by SetFrameHashLookupsFile().
+        /// If the file has already been loaded, any new frames present are loaded.
+        /// </summary>
+        public static void LoadFrameHashLookups() {
+            var filename = s_frameHashLookupsFile ?? ResourceFile("FrameHashLookups.json");
+            var jsonText = File.ReadAllText(filename);
+            var jsonObj = JsonConvert.DeserializeObject<Dictionary<string, FrameHashLookup[]>>(jsonText);
+
+            foreach (var lookupKv in jsonObj) {
+                if (!s_frameHashLookups.ContainsKey(lookupKv.Key))
+                    s_frameHashLookups.Add(lookupKv.Key, new HashSet<FrameHashLookup>(lookupKv.Value));
+                else {
+                    foreach (var frame in lookupKv.Value)
+                        s_frameHashLookups[lookupKv.Key].Add(frame);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Rewrites the list of sprite frames that can be looked up by hash.
+        /// This will rewrite 'Resources/FrameHashLookups.json' by default, or the file set by SetFrameHashLookupsFile().
+        /// </summary>
+        public static void WriteFrameHashLookupsJSON() {
+            var filename = s_frameHashLookupsFile ?? ResourceFile("FrameHashLookups.json");
+
+            // We could just use SerializeObject(), but then the file would either be one giant blob, or a
+            // 100,000 line long mess, so let's do some custom writing.
+            using (var file = File.Open(s_frameHashLookupsFile, FileMode.Create)) {
+                using (var stream = new StreamWriter(file)) {
+                    stream.WriteLine("{");
+
+                    var lookupKvArray = s_frameHashLookups
+                        .OrderBy(x => string.Join("|", x.Value.Select(y => y.SpriteName)))
+                        .ThenBy(x => string.Join("|", x.Value.Select(y => y.FrameGroupName)))
+                        .ThenBy(x => x.Value.Min(y => y.FrameWidth))
+                        .ThenBy(x => x.Value.Min(y => y.FrameHeight))
+                        .ToArray();
+
+                    for (int i = 0; i < lookupKvArray.Length; i++) {
+                        var lookupKv = lookupKvArray[i];
+                        var hash = lookupKv.Key;
+                        var frames = lookupKv.Value;
+                        stream.Write($"\"{hash}\": ");
+                        stream.Write(JsonConvert.SerializeObject(frames.ToArray()));
+                        stream.WriteLine((i < lookupKvArray.Length - 1) ? "," : "");
+                    }
+                    stream.WriteLine("}");
+                }
+            }
+        }
+
+        /// <summary>
+        /// Adds frame hash lookups for all frames in a sprite.
+        /// </summary>
+        /// <param name="spriteDef">The sprite which contains all the frames to be added.</param>
+        /// <returns>The number of new frame hash lookups added.</returns>
+        public static int AddFrameHashLookups(SpriteDef spriteDef) {
+            int framesAdded = 0;
+            foreach (var spritesheetKv in spriteDef.Spritesheets) {
+                var frameSize = Spritesheet.KeyToDimensions(spritesheetKv.Key);
+                var spritesheet = spritesheetKv.Value;
+
+                var bitmapFilename = SpritesheetImagePath($"{FilesystemName(spriteDef.Name)} ({spritesheetKv.Key}).png");
+                using (var bitmap = new Bitmap(bitmapFilename)) {
+                    foreach (var frameGroupKv in spritesheet.FrameGroupsByName) {
+                        var frameGroupName = frameGroupKv.Key;
+                        var frameGroup = frameGroupKv.Value;
+                        var frames = frameGroup.Frames;
+
+                        foreach (var frameKv in frames) {
+                            var frameDir = frameKv.Key;
+                            var frame = frameKv.Value;
+
+                            var x1 = frame.SpritesheetX;
+                            var y1 = frame.SpritesheetY;
+                            var x2 = x1 + frameSize.Width;
+                            var y2 = y1 + frameSize.Height;
+
+                            if (x1 >= 0 && y1 >= 0 && x2 <= bitmap.Width && y2 <= bitmap.Height) {
+                                var bitmapData = bitmap.GetDataAt(x1, y1, frameSize.Width, frameSize.Height);
+                                var texture = new TextureABGR1555(0, 0, 0, bitmapData);
+                                var hash = texture.Hash;
+                                if (AddFrameHashLookup(hash, spriteDef.Name, frameSize.Width, frameSize.Height, frameGroupName, frameDir))
+                                    framesAdded++;
+                            }
+                        }
+                    }
+                }
+            }
+            return framesAdded;
+        }
+
+        /// <summary>
+        /// Adds a sprite frame hash lookup, if it doesn't exist already.
+        /// </summary>
+        /// <param name="hash">The hash of the frame image.</param>
+        /// <param name="spriteName">The name of the sprite to which this frame belongs.</param>
+        /// <param name="frameWidth">The width of the frame.</param>
+        /// <param name="frameHeight">The height of the frame.</param>
+        /// <param name="frameGroupName">The frame group name of the frame (e.g, 'Idle 1').</param>
+        /// <param name="frameDir">The direction of this frame.</param>
+        /// <returns></returns>
+        public static bool AddFrameHashLookup(string hash, string spriteName, int frameWidth, int frameHeight, string frameGroupName, SpriteFrameDirection frameDir) {
+            var frameHashLookup = new FrameHashLookup() {
+                SpriteName     = spriteName,
+                FrameWidth     = frameWidth,
+                FrameHeight    = frameHeight,
+                FrameGroupName = frameGroupName,
+                FrameDirection = frameDir,
+            };
+
+            if (!s_frameHashLookups.ContainsKey(hash)) {
+                s_frameHashLookups.Add(hash, new HashSet<FrameHashLookup>() { frameHashLookup });
+                return true;
+            }
+
+            var hashSet = s_frameHashLookups[hash];
+            if (hashSet.Contains(frameHashLookup))
+                return false;
+
+            hashSet.Add(frameHashLookup);
+            return true;
+        }
+    }
+}

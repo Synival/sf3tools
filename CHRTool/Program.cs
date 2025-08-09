@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 using NDesk.Options;
-using SF3.Utils;
+using SF3.Sprites;
 
 namespace CHRTool {
     public class Program {
@@ -98,11 +98,11 @@ namespace CHRTool {
 
             // TODO: don't do it this way, omg :( :( :(
             if (spriteDir != null)
-                SpriteUtils.SetSpritePath(spriteDir);
+                SpriteResources.SetSpritePath(spriteDir);
             if (spritesheetDir != null)
-                SpriteUtils.SetSpritesheetPath(spritesheetDir);
+                SpriteResources.SetSpritesheetPath(spritesheetDir);
             if (frameHashLookupsFile != null)
-                SpriteUtils.SetFrameHashLookupsFile(frameHashLookupsFile);
+                SpriteResources.SetFrameHashLookupsFile(frameHashLookupsFile);
 
             switch (command) {
                 case CommandType.Compile:

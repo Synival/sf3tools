@@ -58,5 +58,20 @@ namespace SF3.Utils {
             };
             return XmlReader.Create(stream, settings);
         }
+
+        /// <summary>
+        /// Changes a name to a filesystem-friendly one. Used for CHRs, CHPs, and sprites.
+        /// </summary>
+        /// <param name="name">The name of the resource to fetch a filesystem-friendly name for.</param>
+        /// <returns>A filesystem-friendly version of 'name' as a string.</returns>
+        public static string FilesystemName(string name) {
+            return name
+                .Replace(" | ", ", ")
+                .Replace("|", ",")
+                .Replace("?", "X")
+                .Replace("-", "_")
+                .Replace(":", "_")
+                .Replace("/", "_");
+        }
     }
 }

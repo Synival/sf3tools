@@ -108,7 +108,7 @@ namespace SF3.CHR {
         /// <param name="frameHeight">The height of the frames in 'frameGroup'.</param>
         public void AddFrames(FrameGroup frameGroup, string spriteName, int frameWidth, int frameHeight) {
             var spriteInfo = GetSpriteInfo(_currentSpriteIndex);
-            var spriteDef = SpriteUtils.GetSpriteDef(spriteName);
+            var spriteDef = SpriteResources.GetSpriteDef(spriteName);
 
             // Attempt to load the spritesheet referenced by the spritesheetDef.
             // Don't bother if the def couldn't be found.
@@ -248,7 +248,7 @@ namespace SF3.CHR {
             var frameHeight        = animations.Height ?? defaultHeight;
             var spritesheetKey     = Spritesheet.DimensionsToKey(frameWidth, frameHeight);
 
-            var spriteDef          = SpriteUtils.GetSpriteDef(spriteName);
+            var spriteDef          = SpriteResources.GetSpriteDef(spriteName);
             var spritesheetDef     = (spriteDef?.Spritesheets?.TryGetValue(spritesheetKey, out var spritesheetOut) == true) ? spritesheetOut : null;
             var spriteAnimationSet = (spritesheetDef?.AnimationSetsByDirections?.TryGetValue(directions, out var sadOut) == true) ? sadOut : null;
 
@@ -479,7 +479,7 @@ namespace SF3.CHR {
             var spriteName          = missingAnimationFrame.SpriteName;
             var frameWidth          = missingAnimationFrame.FrameWidth;
             var frameHeight         = missingAnimationFrame.FrameHeight;
-            var spriteDef           = SpriteUtils.GetSpriteDef(spriteName);
+            var spriteDef           = SpriteResources.GetSpriteDef(spriteName);
             var spritesheetKey      = Spritesheet.DimensionsToKey(frameWidth, frameHeight);
             var spritesheet         = (spriteDef?.Spritesheets?.TryGetValue(spritesheetKey, out var spritesheetOut) == true) ? spritesheetOut : null;
             var spritesheetImageKey = $"{spriteName} ({spritesheetKey})";
@@ -706,7 +706,7 @@ namespace SF3.CHR {
                 return bitmap;
 
             try {
-                var bitmapPath = SpriteUtils.SpritesheetImagePath($"{SpriteUtils.FilesystemName(spritesheetImageKey)}.png");
+                var bitmapPath = SpriteResources.SpritesheetImagePath($"{SpriteResources.FilesystemName(spritesheetImageKey)}.png");
                 bitmap = (Bitmap) Image.FromFile(bitmapPath);
             }
             catch {

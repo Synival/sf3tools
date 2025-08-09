@@ -1,7 +1,5 @@
 ﻿using SF3.CHR;
 using SF3.Sprites;
-using SF3.Types;
-using SF3.Utils;
 
 namespace SpriteCHR_Builder {
     public class Program {
@@ -12,9 +10,9 @@ namespace SpriteCHR_Builder {
             // Load all sprite sheets ahead of time.
             // TODO: These really should be loaded on-demand.
             Console.WriteLine("Loading all SpriteDefs...");
-            SpriteUtils.SetSpritesheetPath(c_spritesheetPath);
-            SpriteUtils.LoadAllSpriteDefs();
-            var spriteDefs = SpriteUtils.GetAllLoadedSpriteDefs();
+            SpriteResources.SetSpritesheetPath(c_spritesheetPath);
+            SpriteResources.LoadAllSpriteDefs();
+            var spriteDefs = SpriteResources.GetAllLoadedSpriteDefs();
 
             Console.WriteLine("Writing CHRs...");
             _ = Directory.CreateDirectory(c_outputPath);
@@ -76,7 +74,7 @@ namespace SpriteCHR_Builder {
 
                 using (var memoryStream = new MemoryStream()) {
                     chrJob.Write(memoryStream, false, null);
-                    var chrOutPath = Path.Combine(c_outputPath, SpriteUtils.FilesystemName(spriteDef.Name) + ".CHR");
+                    var chrOutPath = Path.Combine(c_outputPath, SpriteResources.FilesystemName(spriteDef.Name) + ".CHR");
                     File.WriteAllBytes(chrOutPath, memoryStream.ToArray());
                 }
             }
