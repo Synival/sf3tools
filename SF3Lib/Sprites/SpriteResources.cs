@@ -14,30 +14,20 @@ namespace SF3.Sprites {
         private static HashSet<string> s_spriteDefFilesLoaded = new HashSet<string>();
         private static Dictionary<string, HashSet<FrameHashLookup>> s_frameHashLookups = new Dictionary<string, HashSet<FrameHashLookup>>();
 
-        private static string s_spritePath = null;
-        private static string s_spritesheetPath = null;
-        private static string s_frameHashLookupsFile = null;
+        /// <summary>
+        /// The path where .SF3Sprite files can be found. When 'null', the path 'Resources/Sprites' will be used.
+        /// </summary>
+        public static string SpritePath { get; set; } = null;
 
         /// <summary>
-        /// Sets the path to use when retrieving sprites.
+        /// The path where .png files for spritesheets can be found. When 'null', the path 'Resources/Spritesheets' will be used.
         /// </summary>
-        /// <param name="path">Path that contains spritesheets.</param>
-        public static void SetSpritePath(string path)
-            => s_spritePath = path;
+        public static string SpritesheetPath { get; set; } = null;
 
         /// <summary>
-        /// Sets the path to use when retrieving spritesheets.
+        /// Full path to the file which contains sprite frame lookups by hash. When 'null', the path 'Resources/FrameHashLookups.json' will be used.
         /// </summary>
-        /// <param name="path">Path that contains spritesheets.</param>
-        public static void SetSpritesheetPath(string path)
-            => s_spritesheetPath = path;
-
-        /// <summary>
-        /// Sets the JSON file to use for loading and updating frame hash lookups.
-        /// </summary>
-        /// <param name="file">Full path and filename for the JSON that contains frame hash lookups.</param>
-        public static void SetFrameHashLookupsFile(string file)
-            => s_frameHashLookupsFile = file;
+        public static string FrameHashLookupsFile { get; set; } = null;
 
         /// <summary>
         /// Returns the full path of a spritesheet image.
@@ -45,7 +35,7 @@ namespace SF3.Sprites {
         /// <param name="filename">The filename of the spritesheet, without the path.</param>
         /// <returns>A string with the relative path of the spritesheet.</returns>
         public static string SpritesheetImagePath(string filename)
-            => Path.Combine(s_spritesheetPath ?? ResourceFile("Spritesheets"), filename);
+            => Path.Combine(SpritesheetPath ?? ResourceFile("Spritesheets"), filename);
 
         /// <summary>
         /// Returns the name of a sprite as it would be stored in the filesystem, with invalid characters replaced.
@@ -60,7 +50,7 @@ namespace SF3.Sprites {
         /// </summary>
         /// <returns>The number of new SpriteDef's successfully loaded.</returns>
         public static int LoadAllSpriteDefs() {
-            var spriteDefFiles = Directory.GetFiles(s_spritePath ?? ResourceFile("Sprites"), "*.SF3Sprite");
+            var spriteDefFiles = Directory.GetFiles(SpritePath ?? ResourceFile("Sprites"), "*.SF3Sprite");
 
             int loadedCount = 0;
             foreach (var file in spriteDefFiles)
@@ -116,7 +106,7 @@ namespace SF3.Sprites {
             if (s_spriteDefs.TryGetValue(name, out var spriteDef))
                 return spriteDef;
 
-            var filename = Path.Combine(s_spritePath ?? ResourceFile("Sprites"), FilesystemName(name) + ".SF3Sprite");
+            var filename = Path.Combine(SpritePath ?? ResourceFile("Sprites"), FilesystemName(name) + ".SF3Sprite");
             return LoadSpriteDef(filename);
         }
 
@@ -126,7 +116,7 @@ namespace SF3.Sprites {
         /// If the file has already been loaded, any new frames present are loaded.
         /// </summary>
         public static void LoadFrameHashLookups() {
-            var filename = s_frameHashLookupsFile ?? ResourceFile("FrameHashLookups.json");
+            var filename = FrameHashLookupsFile ?? ResourceFile("FrameHashLookups.json");
             var jsonText = File.ReadAllText(filename);
             var jsonObj = JsonConvert.DeserializeObject<Dictionary<string, FrameHashLookup[]>>(jsonText);
 
@@ -145,11 +135,11 @@ namespace SF3.Sprites {
         /// This will rewrite 'Resources/FrameHashLookups.json' by default, or the file set by SetFrameHashLookupsFile().
         /// </summary>
         public static void WriteFrameHashLookupsJSON() {
-            var filename = s_frameHashLookupsFile ?? ResourceFile("FrameHashLookups.json");
+            var filename = FrameHashLookupsFile ?? ResourceFile("FrameHashLookups.json");
 
             // We could just use SerializeObject(), but then the file would either be one giant blob, or a
             // 100,000 line long mess, so let's do some custom writing.
-            using (var file = File.Open(s_frameHashLookupsFile, FileMode.Create)) {
+            using (var file = File.Open(FrameHashLookupsFile, FileMode.Create)) {
                 using (var stream = new StreamWriter(file)) {
                     stream.WriteLine("{");
 

@@ -98,11 +98,11 @@ namespace CHRTool {
 
             // TODO: don't do it this way, omg :( :( :(
             if (spriteDir != null)
-                SpriteResources.SetSpritePath(spriteDir);
+                SpriteResources.SpritePath = spriteDir;
             if (spritesheetDir != null)
-                SpriteResources.SetSpritesheetPath(spritesheetDir);
+                SpriteResources.SpritesheetPath = spritesheetDir;
             if (frameHashLookupsFile != null)
-                SpriteResources.SetFrameHashLookupsFile(frameHashLookupsFile);
+                SpriteResources.FrameHashLookupsFile = frameHashLookupsFile;
 
             switch (command) {
                 case CommandType.Compile:

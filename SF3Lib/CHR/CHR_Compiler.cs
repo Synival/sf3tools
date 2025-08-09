@@ -35,9 +35,9 @@ namespace SF3.CHR {
         public int Compile(CHR_Def chrDef, Stream outputStream) {
             // TODO: don't do it this way, omg :( :( :(
             if (SpritePath != null)
-                SpriteResources.SetSpritePath(SpritePath);
+                SpriteResources.SpritePath = SpritePath;
             if (SpritesheetPath != null)
-                SpriteResources.SetSpritesheetPath(SpritesheetPath);
+                SpriteResources.SpritesheetPath = SpritesheetPath;
 
             // Create a compilation unit with all the data that needs to be tracked during the compilation process.
             var job = new CHR_CompilationJob();

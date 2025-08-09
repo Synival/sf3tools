@@ -10,7 +10,7 @@ namespace SpriteCHR_Builder {
             // Load all sprite sheets ahead of time.
             // TODO: These really should be loaded on-demand.
             Console.WriteLine("Loading all SpriteDefs...");
-            SpriteResources.SetSpritesheetPath(c_spritesheetPath);
+            SpriteResources.SpritesheetPath = c_spritesheetPath;
             SpriteResources.LoadAllSpriteDefs();
             var spriteDefs = SpriteResources.GetAllLoadedSpriteDefs();
 
