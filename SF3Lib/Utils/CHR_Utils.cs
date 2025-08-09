@@ -296,11 +296,11 @@ namespace SF3.Utils {
 
         public static int DirectionsToFrameCount(SpriteDirectionCountType directions) {
             switch (directions) {
-                case SpriteDirectionCountType.TwoNoFlip:   return 2;
-                case SpriteDirectionCountType.Four:  return 4;
-                case SpriteDirectionCountType.Five:  return 5;
-                case SpriteDirectionCountType.Six:   return 6;
-                case SpriteDirectionCountType.Eight: return 8;
+                case SpriteDirectionCountType.TwoNoFlip: return 2;
+                case SpriteDirectionCountType.Four:      return 4;
+                case SpriteDirectionCountType.Five:      return 5;
+                case SpriteDirectionCountType.Six:       return 6;
+                case SpriteDirectionCountType.Eight:     return 8;
                 default: return 1;
             }
         }
