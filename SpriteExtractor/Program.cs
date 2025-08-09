@@ -28,14 +28,16 @@ namespace SpriteExtractor {
         private const string c_pathOut = "../../../Private";
 
         private class TextureInfo {
-            public TextureInfo(UniqueFrameDef frameInfo, ITexture texture) {
-                FrameInfo = frameInfo;
+            public TextureInfo(string imageHash, FrameHashLookupSet frameRefs, ITexture texture) {
+                ImageHash = imageHash;
+                FrameRefs = frameRefs;
                 Texture = texture;
             }
 
-            public override string ToString() => FrameInfo.ToString();
+            public override string ToString() => FrameRefs.ToString();
 
-            public UniqueFrameDef FrameInfo { get; }
+            public string ImageHash { get; }
+            public FrameHashLookupSet FrameRefs { get; }
             public ITexture Texture { get; }
             public List<TextureSpriteInfo> Sprites { get; } = new List<TextureSpriteInfo>();
         }
@@ -86,7 +88,7 @@ namespace SpriteExtractor {
         private static void AddFrame(ScenarioType scenario, string filename, int spriteId, SF3.Models.Structs.CHR.Frame frame) {
             var hash = frame.Texture.Hash;
             if (!s_framesByHash.ContainsKey(hash))
-                s_framesByHash.Add(hash, new TextureInfo(frame.FrameInfo, frame.Texture));
+                s_framesByHash.Add(hash, new TextureInfo(hash, frame.FrameRefs, frame.Texture));
             s_framesByHash[hash].Sprites.Add(new TextureSpriteInfo(scenario, filename, spriteId));
         }
 
@@ -171,7 +173,8 @@ namespace SpriteExtractor {
             Console.WriteLine("===================================================");
             Console.WriteLine();
 
-            var spriteDefs = CHR_Utils.CreateAllSpriteDefs();
+            SpriteResources.LoadAllSpriteDefs();
+            var spriteDefs = SpriteResources.GetAllLoadedSpriteDefs();
             var allSpriteInfos = CHR_Utils.GetUniqueSpriteInfos().OrderBy(x => x.Key).ToDictionary(x => x.Key, x => x.Value);
 
             T MostCommonKey<T>(Dictionary<T, int> dict)
@@ -217,28 +220,6 @@ namespace SpriteExtractor {
                 }
             }
 
-            // For some reason, we have to add "Nothing (Broken, No Frames)" to the "None" spritedef.
-            spriteDefs.First(x => x.Name == "None").Spritesheets.First().Value.AnimationSetsByDirections.First().Value.AnimationsByName.Add(
-                "Nothing (Broken, No Frames)",
-                new SF3.Sprites.Animation() { AnimationCommands = [] }
-            );
-
-            Console.WriteLine();
-            Console.WriteLine("===================================================");
-            Console.WriteLine("| WRITING EDITOR RESOURCES                        |");
-            Console.WriteLine("===================================================");
-            Console.WriteLine();
-
-            Console.WriteLine("Writing new 'SpriteFramesByHash.xml'...");
-            using (var file = File.Open(Path.Combine(c_pathOut, "SpriteFramesByHash.xml"), FileMode.Create))
-                using (var stream = new StreamWriter(file))
-                    CHR_Utils.WriteUniqueFramesByHashXML(stream, true);
-
-            Console.WriteLine("Writing new 'SpriteAnimationsByHash.xml'...");
-            using (var file = File.Open(Path.Combine(c_pathOut, "SpriteAnimationsByHash.xml"), FileMode.Create))
-                using (var stream = new StreamWriter(file))
-                    CHR_Utils.WriteUniqueAnimationsByHashXML(stream, true);
-
             Console.WriteLine();
             Console.WriteLine("===================================================");
             Console.WriteLine("| CREATING SPRITESHEETS                           |");
@@ -258,12 +239,27 @@ namespace SpriteExtractor {
                             .Select(y => new StandaloneFrameDef(y.Value, y.Key, x.Key, frameSize.Width, frameSize.Height))
                         )
                         .Where(x => s_framesByHash.ContainsKey(x.Hash))
-                        .Select(x => new { SpriteDefFrame = x, s_framesByHash[x.Hash].Texture, s_framesByHash[x.Hash].FrameInfo })
-                        .OrderBy(x => x.FrameInfo.Width)
-                        .ThenBy(x => x.FrameInfo.Height)
-                        .ThenBy(x => x.FrameInfo.FrameName)
-                        .ThenBy(x => x.FrameInfo.Direction)
-                        .ThenBy(x => x.FrameInfo.TextureHash)
+                        .Select(x => {
+                            var texInfo = s_framesByHash[x.Hash];
+                            var frameRefs = new FrameHashLookupSet(texInfo.FrameRefs.Where(y => y.SpriteName == spriteDef.Name && y.FrameGroupName == x.Name));
+
+                            return new {
+                                SpriteDefFrame = x,
+                                texInfo.Texture,
+                                FrameRefs = frameRefs,
+                                x.Hash,
+                                SpriteName     = frameRefs.GetAggergateSpriteName(),
+                                FrameWidth     = frameRefs.GetUniqueFrameWidth(),
+                                FrameHeight    = frameRefs.GetUniqueFrameHeight(),
+                                FrameGroupName = frameRefs.GetAggregateFrameGroupName(),
+                                FrameDirection = frameRefs.GetUniqueFrameDirection(),
+                            };
+                        })
+                        .OrderBy(x => x.FrameWidth)
+                        .ThenBy(x => x.FrameHeight)
+                        .ThenBy(x => x.FrameGroupName)
+                        .ThenBy(x => x.FrameDirection)
+                        .ThenBy(x => x.Hash)
                         .ToArray();
 
                     if (frames.Length == 0)
@@ -271,7 +267,7 @@ namespace SpriteExtractor {
 
                     framesFound.AddRange(frames.Select(x => x.SpriteDefFrame));
 
-                    var frameDirections = frames.Select(x => x.FrameInfo.Direction)
+                    var frameDirections = frames.Select(x => x.FrameDirection)
                         .Distinct()
                         .ToHashSet();
 
@@ -285,8 +281,8 @@ namespace SpriteExtractor {
                     var outputPath = Path.Combine(spritePath, filename);
 
                     var frameGroups = frames
-                        .GroupBy(x => x.FrameInfo.FrameName)
-                        .ToDictionary(x => x.Key, x => x.OrderBy(y => y.FrameInfo.Direction).ThenBy(y => y.FrameInfo.TextureHash).ToArray());
+                        .GroupBy(x => x.FrameGroupName)
+                        .ToDictionary(x => x.Key, x => x.OrderBy(y => y.FrameDirection).ThenBy(y => y.Hash).ToArray());
 
                     var frameWidthInPixels  = frames[0].Texture.Width;
                     var frameHeightInPixels = frames[0].Texture.Height;
@@ -309,12 +305,12 @@ namespace SpriteExtractor {
                         // But if a frame group had multiple directions -- which, unfortunately, can happen --
                         // set the frames' Y position to their index.
                         bool hasDuplicateDirections = frameGroup.Value
-                            .GroupBy(x => x.FrameInfo.Direction)
+                            .GroupBy(x => x.FrameDirection)
                             .Any(x => x.Count() != 1);
 
                         int frameIndex = 0;
                         foreach (var frame in frameGroup.Value) {
-                            int y = ((hasDuplicateDirections) ? frameIndex : frameDirectionToIndex[frame.FrameInfo.Direction]) * frameHeightInPixels;
+                            int y = ((hasDuplicateDirections) ? frameIndex : frameDirectionToIndex[frame.FrameDirection]) * frameHeightInPixels;
                             frame.SpriteDefFrame.SpritesheetX = x;
                             frame.SpriteDefFrame.SpritesheetY = y;
 
@@ -352,7 +348,7 @@ namespace SpriteExtractor {
                     }
 
                     var framesByHash = frames
-                        .ToDictionary(x => x.FrameInfo.TextureHash, x => x.SpriteDefFrame);
+                        .ToDictionary(x => x.Hash, x => x.SpriteDefFrame);
                     var spritesheetFrames = spritesheet.Value.FrameGroupsByName
                         .SelectMany(x => x.Value.Frames)
                         .Select(x => x.Value)
@@ -435,8 +431,8 @@ namespace SpriteExtractor {
 
             foreach (var frame in s_framesByHash) {
                 if (!framesAccountedFor.Contains(frame.Key)) {
-                    var fi = frame.Value.FrameInfo;
-                    Console.WriteLine($"Frame unaccounted for: {fi.SpriteName}.{fi.FrameName}.{fi.Direction} ({fi.TextureHash})");
+                    var fi = frame.Value.FrameRefs;
+                    Console.WriteLine($"Frame unaccounted for: {fi.GetAggergateSpriteName()}.{fi.GetUniqueFrameDirection()}.{fi.GetUniqueFrameDirection()} ({frame.Key})");
                 }
             }
 

@@ -12,7 +12,9 @@ namespace SF3.Sprites {
     public static class SpriteResources {
         private static Dictionary<string, SpriteDef> s_spriteDefs = new Dictionary<string, SpriteDef>();
         private static HashSet<string> s_spriteDefFilesLoaded = new HashSet<string>();
-        private static Dictionary<string, HashSet<FrameHashLookup>> s_frameHashLookups = new Dictionary<string, HashSet<FrameHashLookup>>();
+        private static Dictionary<string, FrameHashLookupSet> s_frameHashLookups = new Dictionary<string, FrameHashLookupSet>();
+
+        private static bool s_frameHashLookupsLoaded = false;
 
         /// <summary>
         /// The path where .SF3Sprite files can be found. When 'null', the path 'Resources/Sprites' will be used.
@@ -71,9 +73,13 @@ namespace SF3.Sprites {
                 return null;
 
             try {
-                var spriteDef = SpriteDef.FromJSON(File.ReadAllText(file));
-                s_spriteDefFilesLoaded.Add(fileWithoutExt);
+                SpriteDef spriteDef;
+                if (file == "(Unknown).SF3Sprite")
+                    spriteDef = null;
+                else
+                    spriteDef = SpriteDef.FromJSON(File.ReadAllText(file));
 
+                s_spriteDefFilesLoaded.Add(fileWithoutExt);
                 if (!s_spriteDefs.ContainsKey(spriteDef.Name)) {
                     s_spriteDefs.Add(spriteDef.Name, spriteDef);
                     return spriteDef;
@@ -122,12 +128,14 @@ namespace SF3.Sprites {
 
             foreach (var lookupKv in jsonObj) {
                 if (!s_frameHashLookups.ContainsKey(lookupKv.Key))
-                    s_frameHashLookups.Add(lookupKv.Key, new HashSet<FrameHashLookup>(lookupKv.Value));
+                    s_frameHashLookups.Add(lookupKv.Key, new FrameHashLookupSet(lookupKv.Value));
                 else {
                     foreach (var frame in lookupKv.Value)
                         s_frameHashLookups[lookupKv.Key].Add(frame);
                 }
             }
+
+            s_frameHashLookupsLoaded = true;
         }
 
         /// <summary>
@@ -224,7 +232,7 @@ namespace SF3.Sprites {
             };
 
             if (!s_frameHashLookups.ContainsKey(hash)) {
-                s_frameHashLookups.Add(hash, new HashSet<FrameHashLookup>() { frameHashLookup });
+                s_frameHashLookups.Add(hash, new FrameHashLookupSet() { frameHashLookup });
                 return true;
             }
 
@@ -234,6 +242,17 @@ namespace SF3.Sprites {
 
             hashSet.Add(frameHashLookup);
             return true;
+        }
+
+        /// <summary>
+        /// Returns an array of frame references based on an image hash.
+        /// </summary>
+        /// <param name="imageHash">An MD5 hash generated from an TextureABGR1555 of a frame image.</param>
+        /// <returns>An array of FrameHashLookup's identifying where this frame image is used. If this frame image is unknown, an empty array is returned.</returns>
+        public static FrameHashLookupSet GetFrameRefsForImageHash(string imageHash) {
+            if (!s_frameHashLookupsLoaded)
+                LoadFrameHashLookups();
+            return s_frameHashLookups.TryGetValue(imageHash, out var frames) ? frames : new FrameHashLookupSet();
         }
     }
 }

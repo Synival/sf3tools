@@ -12,6 +12,9 @@
     <Content Include="Resources\BoundaryList.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\FrameHashLookups.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\FriendshipBonusTypeList.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

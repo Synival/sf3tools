@@ -169,12 +169,26 @@ namespace SF3.Models.Structs.CHR {
                 lastFrameGroup     = null;
             }
 
+            // Gather a list of unique sprite names. This will be used for resolving
+            // frames whose image hashes are for more than one sprite.
+            var singularFrameRefSpriteNames = new HashSet<string>(FrameTable
+                .Select(x => x.FrameRefs.GetUniqueSpriteName())
+                .Where(x => x != null)
+                .GroupBy(x => x)
+                .OrderByDescending(x => x.Count())
+                .Select(x => x.First()));
+
             // Go through each frame, building a set of CHR_SpriteFrameDef's.
             foreach (var frame in FrameTable) {
-                var frameName  = frame.FrameName;
-                var spriteName = (frame.SpriteName == SpriteName)    ? null        : frame.SpriteName;
-                var width      = (frame.Width      == Header.Width)  ? (int?) null : frame.Width;
-                var height     = (frame.Height     == Header.Height) ? (int?) null : frame.Height;
+                var bestSpriteName = singularFrameRefSpriteNames.FirstOrDefault(x => frame.FrameRefs.Any(y => y.SpriteName == x));
+                var frameRef = (bestSpriteName == null) ? frame.FrameRefs.FirstOrDefault() : frame.FrameRefs.First(x => x.SpriteName == bestSpriteName);
+                if (frameRef == null)
+                    continue;
+
+                var frameName  = frameRef?.FrameGroupName ?? frame.FrameName;
+                var spriteName = (frameRef?.SpriteName  == SpriteName)    ? null        : frameRef.SpriteName;
+                var width      = (frameRef?.FrameWidth  == Header.Width)  ? (int?) null : frameRef.FrameWidth;
+                var height     = (frameRef?.FrameHeight == Header.Height) ? (int?) null : frameRef.FrameHeight;
 
                 // Correct some very specific cases where the exact spritesheet to use can't be // determined without a little help:
                 // TODO: these really shouldn't be hard-coded like this!!

@@ -43,9 +43,7 @@ namespace SF3.Models.Structs.CHR {
                     Height = Texture.Height;
                 }
 
-                FrameInfo = CHR_Utils.GetUniqueFrameInfoByHash(hash);
-                FrameInfo.Width  = Texture.Width;
-                FrameInfo.Height = Texture.Height;
+                FrameRefs = SpriteResources.GetFrameRefsForImageHash(hash);
             }
         }
 
@@ -73,20 +71,8 @@ namespace SF3.Models.Structs.CHR {
         public int SpriteID { get; }
 
         [TableViewModelColumn(displayOrder: -0.25f, minWidth: 175)]
-        public string SpriteName {
-            get => FrameInfo?.SpriteName;
-            set {
-                if (FrameInfo != null && FrameInfo.SpriteName != value) {
-                    FrameInfo.SpriteName = value;
-                    RewriteFrameXML();
-                    RewriteAnimationXML();
-
-                    // TODO: update appropriate SpriteDefs:
-                    // 1) old sprite def (if it exists)
-                    // 2) new sprite def (create if doesn't exist?)
-                }
-            }
-        }
+        public string SpriteName
+            => FrameRefs.GetAggergateSpriteName();
 
         [TableViewModelColumn(displayOrder: -0.2f)]
         public int Width { get; private set; }
@@ -95,36 +81,12 @@ namespace SF3.Models.Structs.CHR {
         public int Height { get; private set; }
 
         [TableViewModelColumn(displayOrder: 0, minWidth: 200)]
-        public string FrameName {
-            get => FrameInfo?.FrameName;
-            set {
-                if (FrameInfo != null && FrameInfo.FrameName != value) {
-                    FrameInfo.FrameName = value;
-                    RewriteFrameXML();
-                    RewriteAnimationXML();
-
-                    // TODO: update appropriate SpriteDefs:
-                    // 1) old sprite def (if it exists)
-                    // 2) new sprite def (create if doesn't exist?)
-                }
-            }
-        }
+        public string FrameName
+            => FrameRefs.GetAggregateFrameGroupName();
 
         [TableViewModelColumn(displayOrder: 0.1f)]
-        public SpriteFrameDirection Direction {
-            get => FrameInfo?.Direction ?? SpriteFrameDirection.Unset;
-            set {
-                if (FrameInfo != null && FrameInfo.Direction != value) {
-                    FrameInfo.Direction = value;
-                    RewriteFrameXML();
-                    RewriteAnimationXML();
-
-                    // TODO: update appropriate SpriteDefs:
-                    // 1) old sprite def (if it exists)
-                    // 2) new sprite def (create if doesn't exist?)
-                }
-            }
-        }
+        public SpriteFrameDirection Direction
+            => FrameRefs.GetUniqueFrameDirection() ?? SpriteFrameDirection.Unset;
 
         [TableViewModelColumn(displayOrder: 0.2f, addressField: nameof(_textureOffsetAddr), displayFormat: "X4")]
         [BulkCopy]
@@ -186,7 +148,7 @@ namespace SF3.Models.Structs.CHR {
             }
         }
 
-        public UniqueFrameDef FrameInfo { get; }
+        public FrameHashLookupSet FrameRefs { get; }
  
         [TableViewModelColumn(displayOrder: 1, minWidth: 200)]
         public string TextureHash => Texture?.Hash;

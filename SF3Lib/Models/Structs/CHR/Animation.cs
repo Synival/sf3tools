@@ -113,10 +113,22 @@ namespace SF3.Models.Structs.CHR {
                 if (_framesWithTextures.Length == 0)
                     return "None";
 
-                var distinctNames = _framesWithTextures.Select(x => $"{x.FrameInfo.SpriteName}").Distinct().OrderBy(x => x).ToArray();
-                if (distinctNames.Length == 1)
-                    return distinctNames[0];
+                var distinctNames = _framesWithTextures
+                    .SelectMany(x => x.SpriteName.Split('|').Select(y => y.Trim()))
+                    .GroupBy(x => x)
+                    .ToDictionary(x => x.Key, x => x.Count());
 
+                if (distinctNames.Count == 1)
+                    return distinctNames.Keys.First();
+
+                var highestCount = distinctNames.Max(x => x.Value);
+
+                // Some hard-coded tie-breakers (ick)
+                if (highestCount == 1 && distinctNames.Count == 2 && distinctNames.Keys.Contains("Explosion") && distinctNames.Keys.Contains("Transparency"))
+                    return "Explosion";
+
+                return distinctNames.FirstOrDefault(x => x.Value == highestCount).Key;
+#if false
                 // If the frames in this animation are shared by more than one named sprite, give them a proper name for known cases.
 
                 // Murasame and Waltz have some animations where his weapon is there, then suddenly not there.
@@ -130,26 +142,19 @@ namespace SF3.Models.Structs.CHR {
                 // (His cape is so big, the rendered frames are the same when his back is turned)
                 // Make some very specific corrections to include the duplicated frames in both sprite
                 // definitions.
-                if (distinctNames.Length == 2 && distinctNames[0] == "Edmund (P1)" && distinctNames[1] == "Edmund (P1) (Sword/Weaponless)")
-                    return "Edmund (P1)";
-                if (distinctNames.Length == 2 && distinctNames[0] == "Edmund (P1) (Sword/Weaponless)" && distinctNames[1] == "Edmund (P1) (Weaponless)")
-                    return "Edmund (P1) (Weaponless)";
+                if (distinctNames.Length == 2 && distinctNames[0] == "Edmund (P1)" && distinctNames[1] == "Edmund (P1) (Weaponless)")
+                    return _framesWithTextures.Any(x => x.SpriteName == "Edmund (P1)") ? "Edmund (P1)" : "Edmund (P1) (Weaponless)";
 
                 // Explosions have transparent frames sometimes.
                 if (distinctNames.Length == 2 && distinctNames[0] == "Explosion" && distinctNames[1] == "Transparency")
                     return "Explosion";
 
                 return string.Join(" | ", distinctNames);
+#endif
             }
             set {
                 var lastSpriteName = SpriteName;
-                var changed = false;
-                foreach (var frame in _framesWithTextures) {
-                    if (frame.FrameInfo != null && frame.FrameInfo.SpriteName != value) {
-                        frame.FrameInfo.SpriteName = value;
-                        changed = true;
-                    }
-                }
+                var changed = _framesWithTextures.Any(x => x.SpriteName != value);
 
                 if (changed) {
                     var newSpriteName = SpriteName;

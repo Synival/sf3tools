@@ -14,16 +14,6 @@ namespace SF3.Utils {
         private static Dictionary<string, UniqueAnimationDef> s_uniqueAnimationsByHash = null;
         private static Dictionary<string, UniqueSpriteInfoDef> s_uniqueSpriteInfosByName = new Dictionary<string, UniqueSpriteInfoDef>();
 
-        public static UniqueFrameDef GetUniqueFrameInfoByHash(string hash) {
-            LoadUniqueFramesByHashTable();
-            if (!s_uniqueFramesByHash.ContainsKey(hash.ToLower()))
-                s_uniqueFramesByHash[hash] = new UniqueFrameDef(hash, "Unknown", 0, 0, "Unknown", SpriteFrameDirection.Unset);
-
-            var frame = s_uniqueFramesByHash[hash];
-            frame.RefCount++;
-            return frame;
-        }
-
         public static UniqueAnimationDef GetUniqueAnimationInfoByHash(string hash) {
             LoadUniqueAnimationsByHashTable();
             if (!s_uniqueAnimationsByHash.ContainsKey(hash.ToLower())) {
@@ -169,92 +159,6 @@ namespace SF3.Utils {
             stream.WriteLine("</items>");
         }
 
-        public static SpriteDef[] CreateAllSpriteDefs() {
-            string[] ApplicableSpriteNames(string spriteName) {
-                // Edmund's P1 sprites are special because some frames are shared with and without a weapon.
-                // (His cape is so big, the rendered frames are the same when his back is turned)
-                // Make some very specific corrections to include the duplicated frames in both sprite
-                // definitions.
-                if (spriteName == "Edmund (P1)")
-                    return new string[] { "Edmund (P1)", "Edmund (P1) (Sword/Weaponless)" };
-                else if (spriteName == "Edmund (P1) (Weaponless)")
-                    return new string[] { "Edmund (P1) (Weaponless)", "Edmund (P1) (Sword/Weaponless)" };
-                else
-                    return spriteName.Split('|').Select(x => x.Trim()).ToArray();
-            }
-
-            string[] ExtraFrameHashes(string spriteName) {
-                // Explosions need to steal some transparency frames.
-                if (spriteName == "Explosion") {
-                    return new string[] {
-                        "d33e04f92840fa8d80d642441797bafe",
-                        "b1e27aa018409de6bfd73f8afb883a65",
-                    };
-                }
-                // Murasame (P1) has some head nodding/shaking animations that mistakenly use Mursame (P1) (Weaponless) idle frames.
-                // (He doesn't have a nodding/shaking animation with his weapon)
-                else if (spriteName == "Murasame (P1)") {
-                    return new string[] {
-                        "6435253706983a8ba65853305367d6a5",
-                        "c8f2ea332f813be6d36667520efab236",
-                        "da43f81c86b23710d965d38646220bcb",
-                        "83f8871fbf7eff0fdf90592f288ff2dd",
-                        "1775c3e62b666260aa56c8b7dbc28657",
-                        "1a699b3d2010a2431bda1da6702f0a2a",
-                        "ef24efab5459d4e6f28c74e9c3d572f9",
-                        "9f5d571cf3863086fc0764b0a2a50a9c",
-                        "3d607c240092ee65fa5477d374aa81fe",
-                        "b23aa2dd6ce9034733e0191253f6420a",
-                        "e884430806eb8f0674ac914c5c1a869d",
-                        "ea899f09df61d9d5740eec177e2e006c",
-                        "6738c467a0197cf04f04d8c2269d4a71",
-                    };
-                }
-                // Waltz (U) has a missing *weaponless* "ShakingHead 2 (ESE)" frame
-                else if (spriteName == "Waltz (U)")
-                    return new string[] { "f22b1ebaae5956a053ab81a1a54ba9fe" };
-                else
-                    return new string[0];
-            }
-
-            string[] ExtraAnimations(string spriteName) {
-                // Explosions need some StillFrame animations from Transparency.
-                if (spriteName == "Explosion") {
-                    return new string[] {
-                        "23708b71160689a09af4ca935a2ea04c",
-                        "08f1faa76b0f430a925ed3c83c646dd5",
-                    };
-                }
-                else
-                    return new string[0];
-            }
-
-            return s_uniqueAnimationsByHash.Values
-                .GroupBy(x => x.SpriteName)
-                .Select(x => {
-                    var spriteNames = ApplicableSpriteNames(x.Key);
-                    var extraFrameHashes = ExtraFrameHashes(x.Key);
-                    var frames = s_uniqueFramesByHash
-                        .Where(y => y.Value.TextureHash != null && (spriteNames.Contains(y.Value.SpriteName) || extraFrameHashes.Contains(y.Value.TextureHash)))
-                        .GroupBy(y => y.Value.TextureHash)
-                        .Select(y => y.First().Value)
-                        .OrderBy(y => y.Width)
-                        .OrderBy(y => y.Height)
-                        .OrderBy(y => y.FrameName)
-                        .OrderBy(y => y.Direction)
-                        .OrderBy(y => y.TextureHash)
-                        .ToArray();
-
-                    return new SpriteDef(x.Key, frames, x
-                        .GroupBy(y => y.AnimationHash)
-                        .Select(y => y.First())
-                        .Concat(ExtraAnimations(x.Key).Select(y => s_uniqueAnimationsByHash[y]))
-                        .ToArray());
-                })
-                .Where(x => x.Spritesheets.Count > 0)
-                .ToArray();
-        }
-
         public static SpriteFrameDirection FrameNumberToSpriteDir(int dirs, int num) {
             switch (dirs) {
                 case 4:
@@ -366,7 +270,7 @@ namespace SF3.Utils {
                 return null;
 
             var textures = frames
-                .Where(x => x != null)
+                .Where(x => x != null && texturesByHash.ContainsKey(x.Hash))
                 .Select(x => texturesByHash[x.Hash])
                 .ToArray();
 

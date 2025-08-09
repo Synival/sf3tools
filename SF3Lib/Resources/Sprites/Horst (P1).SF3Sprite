@@ -60,6 +60,18 @@
             "0de2ca65ea54890cda513ad8bb7a1fb5"
           ]
         },
+        "Nodding 2": {
+          "Directions": 4,
+          "SpritesheetX": -1,
+          "SpritesheetY": -1,
+          "Span": 0,
+          "Hashes": [
+            "19aedce016d3f8f71e22f4ae4e6c8245",
+            "ff6141210b08452c036d28ca16c50024",
+            "65964c569516c49519e0d3eac8c45ffa",
+            "6594c05dc4d12de2096d014dd04cd478"
+          ]
+        },
         "ShakingHead 1": {
           "Directions": 4,
           "SpritesheetX": 160,
@@ -69,6 +81,18 @@
             "1f9d8058bbd1aef115c989e4f1ae2145",
             "cd41cca5f8a0f9dcafa1e9b1979df04d",
             "b39bae3ce96cfca8c99d3f4fabf372b2"
+          ]
+        },
+        "ShakingHead 2": {
+          "Directions": 4,
+          "SpritesheetX": -1,
+          "SpritesheetY": -1,
+          "Span": 0,
+          "Hashes": [
+            "22d7ecb114889f58a2e1ea8515f443ef",
+            "267cf702aea924e0e16bbf06a5d9387c",
+            "3ddeb842688b7151443797970571bfa0",
+            "7fe4f8cb4020ff47e1543b85e230610a"
           ]
         },
         "Walking 1": {

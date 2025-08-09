@@ -8,7 +8,6 @@ using SF3.Models.Files.CHR;
 using SF3.NamedValues;
 using SF3.Sprites;
 using SF3.Types;
-using SF3.Utils;
 
 namespace CHR_Analyzer {
     public class Program {
@@ -24,12 +23,13 @@ namespace CHR_Analyzer {
         private const string c_pathOut = "../../../Private";
 
         private class TextureInfo {
-            public TextureInfo(UniqueFrameDef frameInfo, ITexture texture) {
-                FrameInfo = frameInfo;
+            public TextureInfo(string imageHash, FrameHashLookupSet frameRefs, ITexture texture) {
+                FrameRefs = frameRefs;
                 Texture = texture;
             }
 
-            public UniqueFrameDef FrameInfo { get; }
+            public string ImageHash { get; }
+            public FrameHashLookupSet FrameRefs { get; }
             public ITexture Texture { get; }
             public List<TextureSpriteInfo> Sprites { get; } = new List<TextureSpriteInfo>();
         }
@@ -78,7 +78,7 @@ namespace CHR_Analyzer {
         private static void AddFrame(ScenarioType scenario, string filename, int spriteId, SF3.Models.Structs.CHR.Frame frame) {
             var hash = frame.Texture.Hash;
             if (!s_framesByHash.ContainsKey(hash))
-                s_framesByHash.Add(hash, new TextureInfo(frame.FrameInfo, frame.Texture));
+                s_framesByHash.Add(hash, new TextureInfo(hash, frame.FrameRefs, frame.Texture));
             s_framesByHash[hash].Sprites.Add(new TextureSpriteInfo(scenario, filename, spriteId));
         }
 
@@ -269,7 +269,7 @@ namespace CHR_Analyzer {
 
             // Report any sprite frames with mixed sizes.
             var allTexturesByName = s_framesByHash.Values
-                .GroupBy(x => $"{x.FrameInfo.SpriteName} ({x.FrameInfo.Width}x{x.FrameInfo.Height})")
+                .GroupBy(x => $"{x.FrameRefs.GetAggergateSpriteName()} ({x.FrameRefs.GetUniqueFrameWidth()}x{x.FrameRefs.GetUniqueFrameHeight()})")
                 .ToDictionary(x => x.Key, x => x.ToArray());
 
             var texturesWithMultipleSizes = allTexturesByName
@@ -293,11 +293,11 @@ namespace CHR_Analyzer {
                     .Where(x => x.Texture.Width != first.Width || x.Texture.Height != first.Height)
                     .OrderBy(x => x.Texture.Width)
                     .ThenBy(x => x.Texture.Height)
-                    .ThenBy(x => x.FrameInfo.TextureHash)
+                    .ThenBy(x => x.ImageHash)
                     .ToArray();
 
                 foreach (var tex in texturesToFix)
-                    Console.WriteLine($"    {tex.FrameInfo.TextureHash} ({tex.Texture.Width}x{tex.Texture.Height})");
+                    Console.WriteLine($"    {tex.ImageHash} ({tex.Texture.Width}x{tex.Texture.Height})");
             }
 
             Console.WriteLine();

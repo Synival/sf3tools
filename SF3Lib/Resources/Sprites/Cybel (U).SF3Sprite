@@ -60,6 +60,18 @@
             "859de37c5acd7243ab1184f0f14c2d8e"
           ]
         },
+        "Nodding 2": {
+          "Directions": 4,
+          "SpritesheetX": -1,
+          "SpritesheetY": -1,
+          "Span": 0,
+          "Hashes": [
+            "a4010d5fbb8703c2d8fec19cec5b683d",
+            "9b564fb15b2e4392d248ba9888d338f6",
+            "eb618a308d6c61642cbba30a88e9048a",
+            "75fa6262402682270d089eaf84545aaf"
+          ]
+        },
         "ShakingHead 1": {
           "Directions": 4,
           "SpritesheetX": 192,

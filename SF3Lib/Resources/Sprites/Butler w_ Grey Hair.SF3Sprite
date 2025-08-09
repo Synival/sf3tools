@@ -148,7 +148,7 @@
               "Command": "Stop"
             }
           ],
-          "Walking": [
+          "Walking (Faster)": [
             {
               "Frame": "Walking 1",
               "Duration": 4
