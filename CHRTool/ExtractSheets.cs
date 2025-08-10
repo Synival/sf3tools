@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Drawing;
+using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using CommonLib.Arrays;
@@ -8,6 +11,8 @@ using SF3.Models.Files.CHR;
 using SF3.NamedValues;
 using SF3.Sprites;
 using SF3.Types;
+using SF3.Extensions;
+using CommonLib.Imaging;
 
 namespace CHRTool {
     public static class ExtractSheets {
@@ -101,18 +106,92 @@ namespace CHRTool {
                 .ThenBy(x => x.FrameRef.FrameDirection)
                 .ToArray();
 
+            var loadedSpritesheets = new Dictionary<string, Bitmap>();
             foreach (var frameRefTex in frameRefs) {
                 var frameRef = frameRefTex.FrameRef;
                 var spriteDef = SpriteResources.GetSpriteDef(frameRef.SpriteName);
-                var spritesheetImageFile = SpriteResources.SpritesheetImageFile(frameRef.SpriteName, frameRef.FrameWidth, frameRef.FrameHeight);
                 var spritesheet = spriteDef.Spritesheets[Spritesheet.DimensionsToKey(frameRef.FrameWidth, frameRef.FrameHeight)];
                 var frameGroup = spritesheet.FrameGroupsByName[frameRef.FrameGroupName];
                 var frame = frameGroup.Frames[frameRef.FrameDirection];
 
                 // TODO: Add this to the spritesheet!
                 var texture = frameRefTex.Texture;
-                Console.WriteLine($"    {spriteDef.Name}: {frameRef.FrameGroupName} ({frameRef.FrameDirection}): {frame.ToString()}: {texture.Hash}");
+                var bitmap = LoadSpritesheet(loadedSpritesheets, spriteDef, frameRef.FrameWidth, frameRef.FrameHeight);
             }
+        }
+
+        private static Bitmap LoadSpritesheet(Dictionary<string, Bitmap> loadedSpritesheets, SpriteDef spriteDef, int frameWidth, int frameHeight) {
+            var spritesheetImageFile = SpriteResources.SpritesheetImageFile(spriteDef.Name, frameWidth, frameHeight);
+            var spritesheet = spriteDef.Spritesheets[Spritesheet.DimensionsToKey(frameWidth, frameHeight)];
+
+            if (loadedSpritesheets.TryGetValue(spritesheetImageFile, out var bitmapOut))
+                return bitmapOut;
+
+            // If the spritesheet doesn't exist, create it, with placeholder red squares for spritesheets.
+            // (These will stay red if actual frames aren't found)
+            if (File.Exists(spritesheetImageFile)) {
+                Bitmap bitmap = null;
+                try {
+                    bitmap = new Bitmap(spritesheetImageFile);
+                }
+                catch {
+                    loadedSpritesheets.Add(spritesheetImageFile, null);
+                    throw;
+                }
+                loadedSpritesheets.Add(spritesheetImageFile, bitmap);
+                return bitmap;
+            }
+
+            // Get the dimensions of the spritesheet.
+            var frameDimensions = spritesheet.FrameGroupsByName.Values
+                .SelectMany(y => y.Frames.Values
+                    .Where(z => z.SpritesheetX >= 0 && z.SpritesheetY >= 0)
+                    .Select(z => (X: z.SpritesheetX, Y: z.SpritesheetY))
+                )
+                .ToArray();
+            var sheetWidth  = frameDimensions.Max(x => x.X) + frameWidth;
+            var sheetHeight = frameDimensions.Max(x => x.Y) + frameHeight;
+
+            // Create the empty spritesheet.
+            var newImage = new Bitmap(sheetWidth, sheetHeight, PixelFormat.Format16bppArgb1555);
+
+            // Build a red, non-filled rectangle with lines 3 pixels wide.
+            var box = new ushort[frameWidth, frameHeight];
+            var redColor    = new PixelChannels() { a = 255, r = 255, g = 0,   b = 0 }.ToABGR1555();
+            var orangeColor = new PixelChannels() { a = 255, r = 255, g = 127, b = 0 }.ToABGR1555();
+
+            for (int i = 0; i < 3; i++) {
+                if (i < frameHeight) {
+                    for (int x = i; x < frameWidth - i; ++x) {
+                        box[x, i] = redColor;
+                        box[x, frameHeight - i - 1] = orangeColor;
+                    }
+                }
+                if (i < frameWidth) {
+                    for (int y = i + 1; y < frameHeight - i - 1; ++y) {
+                        box[i, y] = redColor;
+                        box[frameWidth - i - 1, y] = orangeColor;
+                    }
+                }
+            }
+
+            // Place that red box at all frame locations.
+            foreach (var frameGroup in spritesheet.FrameGroupsByName.Values)
+                foreach (var frame in frameGroup.Frames.Values)
+                    newImage.SetDataAt(frame.SpritesheetX, frame.SpritesheetY, box);
+
+            // Save the image out.
+            try {
+                newImage.Save(spritesheetImageFile, ImageFormat.Png);
+            }
+            catch {
+                loadedSpritesheets.Add(spritesheetImageFile, null);
+                throw;
+            }
+
+            // Cache the loaded image and return it for later editing.
+            loadedSpritesheets.Add(spritesheetImageFile, newImage);
+            return newImage;
         }
     }
 }
