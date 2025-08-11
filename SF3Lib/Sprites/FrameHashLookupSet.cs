@@ -5,8 +5,13 @@ using SF3.Types;
 
 namespace SF3.Sprites {
     public class FrameHashLookupSet : HashSet<FrameHashLookup> {
-        public FrameHashLookupSet() { }
-        public FrameHashLookupSet(IEnumerable<FrameHashLookup> collection) : base(collection) { }
+        public FrameHashLookupSet(string imageHash) {
+            ImageHash = imageHash;
+        }
+
+        public FrameHashLookupSet(string imageHash, IEnumerable<FrameHashLookup> collection) : base(collection) {
+            ImageHash = imageHash;
+        }
 
         private string GetAggregateString(Func<FrameHashLookup, string> lookupFunc)
             => (Count == 0) ? "(Unknown)" : string.Join(" | ", this.Select(x => lookupFunc(x)).OrderBy(x => x).Distinct());
@@ -32,5 +37,7 @@ namespace SF3.Sprites {
         public string GetAggregateFrameGroupName() => GetAggregateString(x => x.FrameGroupName);
         public string GetUniqueFrameGroupName() => GetUniqueValue(x => x.FrameGroupName, null);
         public SpriteFrameDirection? GetUniqueFrameDirection() => GetUniqueValue(x => x.FrameDirection, (SpriteFrameDirection?) null);
+
+        public readonly string ImageHash;
     }
 }

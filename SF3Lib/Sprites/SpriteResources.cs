@@ -149,7 +149,7 @@ namespace SF3.Sprites {
 
             foreach (var lookupKv in jsonObj) {
                 if (!s_frameHashLookups.ContainsKey(lookupKv.Key))
-                    s_frameHashLookups.Add(lookupKv.Key, new FrameHashLookupSet(lookupKv.Value));
+                    s_frameHashLookups.Add(lookupKv.Key, new FrameHashLookupSet(lookupKv.Key, lookupKv.Value));
                 else {
                     foreach (var frame in lookupKv.Value)
                         s_frameHashLookups[lookupKv.Key].Add(frame);
@@ -253,7 +253,7 @@ namespace SF3.Sprites {
             };
 
             if (!s_frameHashLookups.ContainsKey(hash)) {
-                s_frameHashLookups.Add(hash, new FrameHashLookupSet() { frameHashLookup });
+                s_frameHashLookups.Add(hash, new FrameHashLookupSet(hash) { frameHashLookup });
                 return true;
             }
 
@@ -273,7 +273,7 @@ namespace SF3.Sprites {
         public static FrameHashLookupSet GetFrameRefsForImageHash(string imageHash) {
             if (!s_frameHashLookupsLoaded)
                 LoadFrameHashLookups();
-            return s_frameHashLookups.TryGetValue(imageHash, out var frames) ? frames : new FrameHashLookupSet();
+            return s_frameHashLookups.TryGetValue(imageHash, out var frames) ? frames : new FrameHashLookupSet(imageHash);
         }
     }
 }
