@@ -11,10 +11,12 @@ using SF3.Types;
 namespace CHRTool {
     public static class Decompile {
         public static int Run(string[] args) {
+            bool optimize = false;
             string outputFile = null;
 
             // Read any command line options.
             var compileOptions = new OptionSet() {
+                { "O|optimize",  v => optimize = true },
                 { "output=",     v => outputFile = v },
             };
             try {
@@ -68,6 +70,10 @@ namespace CHRTool {
                 Console.WriteLine("Serializing to CHR_Def...");
                 CHR_Def chrDef = null;
                 chrDef = chrFile.ToCHR_Def();
+                if (optimize) {
+                    foreach (var sprite in chrDef.Sprites)
+                        sprite.FrameGroupsForSpritesheets = null;
+                }
 
                 // Serialize the file.
                 Console.WriteLine($"Converting to JSON file...");

@@ -42,6 +42,7 @@ namespace CHRTool {
             "  --add-sprite=<file>       adds an SF3CHRSprite file\n" +
             "\n" +
             "'decompile' Options:\n" +
+            "  -O, --optimize            optimizes output SF3CHR file\n" +
             "  --output=<output-file>    specify output .SF3CHR file\n" +
             "\n" +
             "'extract-sheets' Options:\n" +
