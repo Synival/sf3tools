@@ -17,7 +17,7 @@ using SF3;
 
 namespace CHRTool {
     public static class ExtractSheets {
-        public static int Run(string[] args, string spriteDir, string spritesheetDir, string frameHashLookupsFile) {
+        public static int Run(string[] args, string spritesheetDir) {
             // (any extra options would go here.)
 
             // Fetch the directory with the game data for ripping spritesheets.
@@ -32,100 +32,96 @@ namespace CHRTool {
             // There shouldn't be any unrecognized arguments at this point.
             if (args.Length > 0) {
                 Console.Error.WriteLine("Unrecognized arguments in 'extract-sheet' command:");
-                Console.Error.Write($"    {string.Join(" ", args)}");
+                Console.Error.WriteLine($"    {string.Join(" ", args)}");
                 Console.Error.Write(Constants.ErrorUsageString);
                 return 1;
             }
 
             // It looks like we're ready to go!
-            Console.WriteLine($"Extracting spritesheet frames from files/paths(s):");
-            foreach (var gameDataFile in gameDataFiles)
-                Console.WriteLine($"  {gameDataFile}");
-
-            Console.WriteLine("------------------------------------------------------------------------------");
-            Console.WriteLine($"Sprite directory:        {spriteDir}");
-            Console.WriteLine($"Spritesheet directory:   {spritesheetDir}");
-            Console.WriteLine($"Frame hash lookups file: {frameHashLookupsFile}");
-            Console.WriteLine("------------------------------------------------------------------------------");
-
-            // Try to create the spritesheet directory if it doesn't exist.
             try {
+                Console.WriteLine($"Extracting spritesheet frames from files/paths(s):");
+                foreach (var gameDataFile in gameDataFiles)
+                    Console.WriteLine($"  {gameDataFile}");
+                Console.WriteLine("------------------------------------------------------------------------------");
+
+                // Try to create the spritesheet directory if it doesn't exist.
                 if (!Directory.Exists(spritesheetDir))
                     Directory.CreateDirectory(spritesheetDir);
+
+                // Fetch the CHR and CHP files to extract frames from.
+                var filesList = new List<string>();
+                foreach (var file in gameDataFiles) {
+                    try {
+                        if (Directory.Exists(file)) {
+                            filesList.AddRange(Directory.GetFiles(file, "*.CHR")
+                                .Concat(Directory.GetFiles(file, "*.CHP"))
+                                .OrderBy(x => x)
+                            );
+                        }
+                        else
+                            filesList.Add(file);
+                    }
+                    catch (Exception e) {
+                        Console.Error.WriteLine($"    Error fetching file(s) at '{file}':");
+                        Console.Error.WriteLine($"        {e.GetType().Name}: {e.Message}");
+                        return 1;
+                    }
+                }
+                var files = filesList.ToArray();
+
+                // We don't care about the NameGetterContext or Scenario, since CHRs/CHP are all the same format,
+                // and we don't care about any scenario-based resources. Just use Scenario 1.
+                var scenario = ScenarioType.Scenario1;
+                var nameGetterContext = new NameGetterContext(scenario);
+                var framesWritten = new HashSet<string>();
+
+                foreach (var file in files) {
+                    Console.Write($"Extracting frames from '{Path.GetFileName(file)}': ");
+                    var loadedSpritesheets = new Dictionary<string, Bitmap>();
+                    try {
+                        var bytes = File.ReadAllBytes(file);
+                        var byteData = new ByteData(new ByteArray(bytes));
+
+                        // Gather the frame refs and textures from either the CHR or CHP file
+                        ExtractInfo[] extractInfos;
+                        if (file.ToLower().EndsWith(".chr")) {
+                            var chrFile = CHR_File.Create(byteData, nameGetterContext, scenario);
+                            extractInfos = GetExtractInfos(chrFile);
+                        }
+                        else if (file.ToLower().EndsWith(".chp")) {
+                            var chpFile = CHP_File.Create(byteData, nameGetterContext, scenario);
+                            extractInfos = GetExtractInfos(chpFile);
+                        }
+                        else {
+                            Console.Error.WriteLine($"  Unrecognized extension for '{file}'");
+                            continue;
+                        }
+
+                        // Perform the extraction!
+                        var totalFrames = extractInfos.Length;
+                        var framesAdded = ExtractFrames(extractInfos, framesWritten, loadedSpritesheets);
+                        var framesSkipped = totalFrames - framesAdded;
+
+                        // Report
+                        if (framesSkipped > 0)
+                            Console.WriteLine($"{framesAdded} frame(s) extracted, {framesSkipped} frame(s) skipped");
+                        else if (framesAdded > 0)
+                            Console.WriteLine($"{framesAdded} frame(s) extracted");
+                        else
+                            Console.WriteLine($"no frames");
+                    }
+                    catch (Exception e) {
+                        Console.WriteLine();
+                        Console.Error.WriteLine($"    Error extracting frames from '{file}':");
+                        Console.Error.WriteLine($"        {e.GetType().Name}: {e.Message}");
+                    }
+                }
             }
             catch (Exception e) {
-                Console.Error.WriteLine($"  Couldn't create spritesheet directory a '{spritesheetDir}':");
+                Console.WriteLine("------------------------------------------------------------------------------");
+                Console.Error.WriteLine($"Error:");
                 Console.Error.WriteLine($"    {e.GetType().Name}: {e.Message}");
                 return 1;
-            }
-
-            // Fetch the CHR and CHP files to extract frames from.
-            var filesList = new List<string>();
-            foreach (var file in gameDataFiles) {
-                try {
-                    if (Directory.Exists(file)) {
-                        filesList.AddRange(Directory.GetFiles(file, "*.CHR")
-                            .Concat(Directory.GetFiles(file, "*.CHP"))
-                            .OrderBy(x => x)
-                        );
-                    }
-                    else
-                        filesList.Add(file);
-                }
-                catch (Exception e) {
-                    Console.Error.WriteLine($"  Couldn't get game data file or files at '{file}':");
-                    Console.Error.WriteLine($"    {e.GetType().Name}: {e.Message}");
-                    return 1;
-                }
-            }
-            var files = filesList.ToArray();
-
-            // We don't care about the NameGetterContext or Scenario, since CHRs/CHP are all the same format,
-            // and we don't care about any scenario-based resources. Just use Scenario 1.
-            var scenario = ScenarioType.Scenario1;
-            var nameGetterContext = new NameGetterContext(scenario);
-            var framesWritten = new HashSet<string>();
-
-            foreach (var file in files) {
-                Console.Write($"Extracting frames from '{Path.GetFileName(file)}'");
-                var loadedSpritesheets = new Dictionary<string, Bitmap>();
-                try {
-                    var bytes = File.ReadAllBytes(file);
-                    var byteData = new ByteData(new ByteArray(bytes));
-
-                    // Gather the frame refs and textures from either the CHR or CHP file
-                    ExtractInfo[] extractInfos;
-                    if (file.ToLower().EndsWith(".chr")) {
-                        var chrFile = CHR_File.Create(byteData, nameGetterContext, scenario);
-                        extractInfos = GetExtractInfos(chrFile);
-                    }
-                    else if (file.ToLower().EndsWith(".chp")) {
-                        var chpFile = CHP_File.Create(byteData, nameGetterContext, scenario);
-                        extractInfos = GetExtractInfos(chpFile);
-                    }
-                    else {
-                        Console.Error.WriteLine($"  Unrecognized extension for '{file}'");
-                        continue;
-                    }
-
-                    // Perform the extraction!
-                    var totalFrames = extractInfos.Length;
-                    var framesAdded = ExtractFrames(extractInfos, framesWritten, loadedSpritesheets);
-                    var framesSkipped = totalFrames - framesAdded;
-
-                    // Report
-                    if (framesSkipped > 0)
-                        Console.WriteLine($": {framesAdded} frame(s) extracted, {framesSkipped} frame(s) skipped");
-                    else if (framesAdded > 0)
-                        Console.WriteLine($": {framesAdded} frame(s) extracted");
-                    else
-                        Console.WriteLine($": no frames");
-                }
-                catch (Exception e) {
-                    Console.WriteLine();
-                    Console.Error.WriteLine($"  Couldn't extract sheets from '{file}':");
-                    Console.Error.WriteLine($"    {e.GetType().Name}: {e.Message}");
-                }
             }
 
             Console.WriteLine("------------------------------------------------------------------------------");

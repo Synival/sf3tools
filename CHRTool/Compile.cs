@@ -6,7 +6,7 @@ using SF3.CHR;
 
 namespace CHRTool {
     public static class Compile {
-        public static int Run(string[] args, string spriteDir, string spritesheetDir) {
+        public static int Run(string[] args) {
             var optimize = false;
             string outputFile = null;
             List<string> spritesToAdd = new List<string>();
@@ -38,79 +38,52 @@ namespace CHRTool {
             // There shouldn't be any unrecognized arguments at this point.
             if (args.Length > 0) {
                 Console.Error.WriteLine("Unrecognized arguments in 'compile' command:");
-                Console.Error.Write($"    {string.Join(" ", args)}");
+                Console.Error.WriteLine($"    {string.Join(" ", args)}");
                 Console.Error.Write(Constants.ErrorUsageString);
                 return 1;
             }
 
             // It looks like we're ready to go! Fetch the file data.
-            var inputFilename = Path.GetFileName(inputFile);
-            if (outputFile == null)
-                outputFile = Path.Combine(Path.GetDirectoryName(inputFile), $"{Path.GetFileNameWithoutExtension(inputFilename)}.CHR");
-            var outputFilename = Path.GetFileName(outputFile);
-            Console.WriteLine($"Compiling '{inputFilename}' to '{outputFilename}'...");
-            Console.WriteLine("------------------------------------------------------------------------------");
-            Console.WriteLine($"Sprite directory:      {spriteDir}");
-            Console.WriteLine($"Spritesheet directory: {spritesheetDir}");
-            Console.WriteLine("------------------------------------------------------------------------------");
-
-            string chrDefText = null;
             try {
-                chrDefText = File.ReadAllText(inputFile);
-                Console.WriteLine("  Read input file successfully.");
-            }
-            catch (Exception e) {
+                var inputFilename = Path.GetFileName(inputFile);
+                if (outputFile == null)
+                    outputFile = Path.Combine(Path.GetDirectoryName(inputFile), $"{Path.GetFileNameWithoutExtension(inputFilename)}.CHR");
+                var outputFilename = Path.GetFileName(outputFile);
+
+                Console.WriteLine($"Compiling '{inputFilename}' to '{outputFilename}'...");
                 Console.WriteLine("------------------------------------------------------------------------------");
-                Console.Error.WriteLine($"  Couldn't open '{inputFile}' for reading:");
-                Console.Error.WriteLine($"    {e.GetType().Name}: {e.Message}");
-                return 1;
-            }
 
-            // Attempt to deserialize.
-            CHR_Def chrDef = null;
-            try {
+                string chrDefText = null;
+                Console.WriteLine($"Reading '{inputFile}...");
+                chrDefText = File.ReadAllText(inputFile);
+
+                // Attempt to deserialize.
+                Console.WriteLine("Deserializing to CHR_Def...");
+                CHR_Def chrDef = null;
                 chrDef = CHR_Def.FromJSON(chrDefText);
                 if (chrDef == null)
                     throw new NullReferenceException(); // eh, not really, but whatever
-                Console.WriteLine("  Deserialized CHR_Def successfully.");
-            }
-            catch (Exception e) {
-                Console.WriteLine("------------------------------------------------------------------------------");
-                Console.Error.WriteLine($"  Couldn't deserialize '{inputFile}' after reading:");
-                Console.Error.WriteLine($"    {e.GetType().Name}: {e.Message}");
-                return 1;
-            }
 
-            // We should have everything necessary to compile. Give it a go!
-            var chrCompiler = new CHR_Compiler() {
-                OptimizeFrames            = optimize,
-                AddMissingAnimationFrames = true,
-                SpritePath                = spriteDir,
-                SpritesheetPath           = spritesheetDir
-            };
-            byte[] chrFileData = null;
-            try {
+                // We should have everything necessary to compile. Give it a go!
+                Console.WriteLine("Compiling...");
+                var chrCompiler = new CHR_Compiler() {
+                    OptimizeFrames            = optimize,
+                    AddMissingAnimationFrames = true,
+                };
+
+                byte[] chrFileData = null;
                 using (var memoryStream = new MemoryStream()) {
                     chrCompiler.Compile(chrDef, memoryStream);
                     chrFileData = memoryStream.ToArray();
                 }
-                Console.WriteLine("  CHR compiled successfully.");
-            }
-            catch (Exception e) {
-                Console.WriteLine("------------------------------------------------------------------------------");
-                Console.Error.WriteLine($"  Couldn't compile '{inputFile}' after deserializing:");
-                Console.Error.WriteLine($"    {e.GetType().Name}: {e.Message}");
-                return 1;
-            }
 
-            // Output the file.
-            try {
+                // Output the file.
+                Console.WriteLine($"Writing to '{outputFile}'...");
                 File.WriteAllBytes(outputFile, chrFileData);
-                Console.WriteLine("  Output file written successfully.");
             }
             catch (Exception e) {
                 Console.WriteLine("------------------------------------------------------------------------------");
-                Console.Error.WriteLine($"  Couldn't compile '{inputFile}' after deserializing:");
+                Console.Error.WriteLine($"Error:");
                 Console.Error.WriteLine($"    {e.GetType().Name}: {e.Message}");
                 return 1;
             }

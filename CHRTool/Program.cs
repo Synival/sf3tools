@@ -91,7 +91,7 @@ namespace CHRTool {
             // There shouldn't be any unrecognized options before the command.
             if (extraArgsBeforeCommand.Length > 0) {
                 Console.Error.WriteLine("Unrecognized arguments before command:");
-                Console.Error.Write($"    {string.Join(" ", extraArgsBeforeCommand)}");
+                Console.Error.WriteLine($"    {string.Join(" ", extraArgsBeforeCommand)}");
                 Console.Error.Write(Constants.ErrorUsageString);
                 return 1;
             }
@@ -106,13 +106,13 @@ namespace CHRTool {
 
             switch (command) {
                 case CommandType.Compile:
-                    return Compile.Run(remainingArgs, spriteDir, spritesheetDir);
+                    return Compile.Run(remainingArgs);
                 case CommandType.Decompile:
-                    return Decompile.Run(remainingArgs, spriteDir, spritesheetDir);
+                    return Decompile.Run(remainingArgs);
                 case CommandType.ExtractSheets:
-                    return ExtractSheets.Run(remainingArgs, spriteDir, spritesheetDir, frameHashLookupsFile);
+                    return ExtractSheets.Run(remainingArgs, spritesheetDir);
                 case CommandType.UpdateHashLookups:
-                    return UpdateHashLookups.Run(remainingArgs, spriteDir, spritesheetDir, frameHashLookupsFile);
+                    return UpdateHashLookups.Run(remainingArgs, spriteDir, frameHashLookupsFile);
 
                 default:
                     Console.Error.WriteLine("Internal error: unimplemented command '" + command.ToString() + "'");

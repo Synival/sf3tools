@@ -2,7 +2,7 @@
 
 namespace CHRTool {
     public static class Constants {
-        public const string Version = "0.0.2";
+        public const string Version = "0.0.3";
 
         public const string VersionString =
             "CHRTool v" + Version + "\n";
