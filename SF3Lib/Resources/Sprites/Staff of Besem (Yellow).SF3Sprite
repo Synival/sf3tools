@@ -12,21 +12,18 @@
       "FrameGroups": {
         "Glowing 1": {
           "SSE": {
-            "Hash": "6c18fa2559d09f2f05e856adbc14fef4",
             "SpritesheetX": 0,
             "SpritesheetY": 0
           }
         },
         "Glowing 2": {
           "SSE": {
-            "Hash": "bcf5086811ae2c906bfefec233868aca",
             "SpritesheetX": 32,
             "SpritesheetY": 0
           }
         },
         "Glowing 3": {
           "SSE": {
-            "Hash": "21aafee78fc035bc836ae81c208925e1",
             "SpritesheetX": 64,
             "SpritesheetY": 0
           }
@@ -34,13 +31,7 @@
         "Idle (Hovering) 1": {
           "Directions": 4,
           "SpritesheetX": 96,
-          "SpritesheetY": 0,
-          "Hashes": [
-            "c0725c9fe62c9c5ea9cbceb8a84e3a7b",
-            "fe98f17cdb537a53ef8f8fab9dbab1fc",
-            "468a319af3544379bb8805ea668ed961",
-            "972d9cda407696944adb613b2c0efafa"
-          ]
+          "SpritesheetY": 0
         }
       },
       "AnimationByDirections": {

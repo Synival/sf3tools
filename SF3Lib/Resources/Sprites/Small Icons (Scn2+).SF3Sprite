@@ -13,74 +13,47 @@
         "Angry 1": {
           "Directions": 1,
           "SpritesheetX": 0,
-          "SpritesheetY": 0,
-          "Hashes": [
-            "9704f396c6236b19383fbf59957650a1"
-          ]
+          "SpritesheetY": 0
         },
         "Confused 1": {
           "Directions": 1,
           "SpritesheetX": 16,
-          "SpritesheetY": 0,
-          "Hashes": [
-            "faa6c9f255309bf8cb86d6c66e9282d0"
-          ]
+          "SpritesheetY": 0
         },
         "Idea 1": {
           "Directions": 1,
           "SpritesheetX": 32,
-          "SpritesheetY": 0,
-          "Hashes": [
-            "b9e1fa956409cdc3ac13d30aa1cbd40b"
-          ]
+          "SpritesheetY": 0
         },
         "Shield 1": {
           "Directions": 1,
           "SpritesheetX": 48,
-          "SpritesheetY": 0,
-          "Hashes": [
-            "fc597e6f1e5974e4055882c6373472a4"
-          ]
+          "SpritesheetY": 0
         },
         "Silent 1": {
           "Directions": 1,
           "SpritesheetX": 64,
-          "SpritesheetY": 0,
-          "Hashes": [
-            "5092f4cf33632bb6ea20942322fdbc57"
-          ]
+          "SpritesheetY": 0
         },
         "Sweat 1": {
           "Directions": 1,
           "SpritesheetX": 80,
-          "SpritesheetY": 0,
-          "Hashes": [
-            "380805239fe47bd851ebb8053752e729"
-          ]
+          "SpritesheetY": 0
         },
         "Sweat 2": {
           "Directions": 1,
           "SpritesheetX": 96,
-          "SpritesheetY": 0,
-          "Hashes": [
-            "01a0053a764c0b46d0eac73b62dd34e2"
-          ]
+          "SpritesheetY": 0
         },
         "Sweat 3": {
           "Directions": 1,
           "SpritesheetX": 112,
-          "SpritesheetY": 0,
-          "Hashes": [
-            "f759a7510147d0c94c7fd67c6923c526"
-          ]
+          "SpritesheetY": 0
         },
         "Sword 1": {
           "Directions": 1,
           "SpritesheetX": 128,
-          "SpritesheetY": 0,
-          "Hashes": [
-            "82e0b34942ffcdb9aa874d547a3b9d7c"
-          ]
+          "SpritesheetY": 0
         }
       },
       "AnimationByDirections": {

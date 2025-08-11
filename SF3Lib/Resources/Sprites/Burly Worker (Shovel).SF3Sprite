@@ -13,57 +13,27 @@
         "Shoveling 1": {
           "Directions": 4,
           "SpritesheetX": 0,
-          "SpritesheetY": 0,
-          "Hashes": [
-            "4c49df1a407580487ef8cfd8d8ac1a26",
-            "69659b42427bf92f83dba50c894064e2",
-            "e5ccf5fee678819f555d8b2a1cf778c2",
-            "d0c3c240e85e4c81c7028a0f90ccedae"
-          ]
+          "SpritesheetY": 0
         },
         "Shoveling 2": {
           "Directions": 4,
           "SpritesheetX": 48,
-          "SpritesheetY": 0,
-          "Hashes": [
-            "b1004d41573cdb73b32cfa77ae64da4b",
-            "286273f05b1d752ae03e8921ca3c52d7",
-            "03c875418f1f76c8696d1125a1921de4",
-            "221c238012d2eb29cfc5938049ded991"
-          ]
+          "SpritesheetY": 0
         },
         "Shoveling 3": {
           "Directions": 4,
           "SpritesheetX": 96,
-          "SpritesheetY": 0,
-          "Hashes": [
-            "2e0f893e99809e3c1cded9f24ce7c847",
-            "181ab812d31a98ffdc3896c00ce27e3e",
-            "d8cf00839eef380fd179faac6013ece0",
-            "51b14c777c24b9be91dbc65226a983a4"
-          ]
+          "SpritesheetY": 0
         },
         "Shoveling 4": {
           "Directions": 4,
           "SpritesheetX": 144,
-          "SpritesheetY": 0,
-          "Hashes": [
-            "0f46fb52f71b3f3c78b27497f555d864",
-            "f80f4ba7a47d32c3f47ed1ce0d4afeeb",
-            "26ab253ad3ae7cc8c8a1165b7f4c2365",
-            "71101b49f3f7bb025805a4581b270bcc"
-          ]
+          "SpritesheetY": 0
         },
         "Shoveling 5": {
           "Directions": 4,
           "SpritesheetX": 192,
-          "SpritesheetY": 0,
-          "Hashes": [
-            "fa101fc2799c1742f1b327c26eccc5da",
-            "9cc959c58a3b88cc23b15563b978b24c",
-            "7c9e9ef74fd9071204a9131d995fdce2",
-            "59dfcdb984b2b1af05cb039fa7dde56a"
-          ]
+          "SpritesheetY": 0
         }
       },
       "AnimationByDirections": {

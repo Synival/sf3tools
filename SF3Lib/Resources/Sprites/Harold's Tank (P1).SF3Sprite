@@ -13,13 +13,7 @@
         "Idle 1": {
           "Directions": 4,
           "SpritesheetX": 0,
-          "SpritesheetY": 0,
-          "Hashes": [
-            "2927224d38241beeee4818f661fc7363",
-            "c04427fac4f6f45be312da2f4f25c6f3",
-            "90ad34846fe13c2cb55ef8fa10348ada",
-            "a0a0a08ea9ee7f6773ff7e2aa8e65319"
-          ]
+          "SpritesheetY": 0
         }
       },
       "AnimationByDirections": {

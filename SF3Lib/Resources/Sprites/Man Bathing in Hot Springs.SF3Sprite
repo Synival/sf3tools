@@ -13,46 +13,22 @@
         "OccasionallyWipingForehead 1": {
           "Directions": 4,
           "SpritesheetX": 0,
-          "SpritesheetY": 0,
-          "Hashes": [
-            "bb606c38f48638e65129c8b13776c485",
-            "aca0c21c319420b512b12b24c576a9ea",
-            "98390b1083f4952c3b820ea6e6e31671",
-            "815878e1e2ee3384ca50c2a7a0aab79b"
-          ]
+          "SpritesheetY": 0
         },
         "OccasionallyWipingForehead 2": {
           "Directions": 4,
           "SpritesheetX": 40,
-          "SpritesheetY": 0,
-          "Hashes": [
-            "4717bdc5548c418fb63fcd5d74747082",
-            "76b2dbb842e369de721b2286c444c911",
-            "a7db9fa047b75789fd08f0bbe97f939c",
-            "86661a8f0ffdee3010c9701e167e29ea"
-          ]
+          "SpritesheetY": 0
         },
         "OccasionallyWipingForehead 3": {
           "Directions": 4,
           "SpritesheetX": 80,
-          "SpritesheetY": 0,
-          "Hashes": [
-            "7ea187c17895000eb685839e50108a33",
-            "b82694b824c701e4d9d97e4f59d22566",
-            "6717138e54fd09ce07c464e86720c5fa",
-            "c366fc8e5ee578b4410ab27214b2983c"
-          ]
+          "SpritesheetY": 0
         },
         "OccasionallyWipingForehead 4": {
           "Directions": 4,
           "SpritesheetX": 120,
-          "SpritesheetY": 0,
-          "Hashes": [
-            "ecd159a97178d0d03113d4e3d8bdb6d4",
-            "fc6291f3f883775d79e984a1a05f9618",
-            "1fa17fb9793ea76b8f0f7efa65148e58",
-            "2e7a5974efb6ec876a6e733df52510bb"
-          ]
+          "SpritesheetY": 0
         }
       },
       "AnimationByDirections": {

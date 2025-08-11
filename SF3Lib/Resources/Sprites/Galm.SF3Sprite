@@ -13,60 +13,38 @@
         "Hovering 1": {
           "Directions": 4,
           "SpritesheetX": 0,
-          "SpritesheetY": 0,
-          "Hashes": [
-            "e8a35effa5559a41d6a14b2eaeabb2ec",
-            "16363028a5ad20e8b48533935dce7b2e",
-            "0b683a066f4526dde96350877c4112a8",
-            "24a392261620bedeb80475e89d8284ef"
-          ]
+          "SpritesheetY": 0
         },
         "Hovering 2": {
           "Directions": 4,
           "SpritesheetX": 40,
-          "SpritesheetY": 0,
-          "Hashes": [
-            "6557ec671ce70e1251a4cb08d95364ca",
-            "cc6a3ffabc387bc1d2419a52a3dc91d7",
-            "e456b7d2093163f03c860153f6e2f679",
-            "63a65e1f7863239a724b0187062246e7"
-          ]
+          "SpritesheetY": 0
         },
         "Hovering 3": {
           "Directions": 4,
           "SpritesheetX": 80,
-          "SpritesheetY": 0,
-          "Hashes": [
-            "80105cf47a2bd8d55757f5359e9c217a",
-            "7119ec262e4bb35e9cb29fe6b6a19662",
-            "c1460f2c175faf750583dc1fcfd477ee",
-            "10d26ef1b863262a69ecd294cf4e9fee"
-          ]
+          "SpritesheetY": 0
         },
         "Kneeling 1": {
           "ESE": {
-            "Hash": "5053e4561fbcbe1b0e90fed0750689c6",
             "SpritesheetX": 120,
             "SpritesheetY": 48
           }
         },
         "Nodding (Kneeling) 1": {
           "ESE": {
-            "Hash": "f12b4aa4e09f4bf03a4a4248e07f76fb",
             "SpritesheetX": 160,
             "SpritesheetY": 48
           }
         },
         "Nodding (Kneeling) 2": {
           "ESE": {
-            "Hash": "9170b973f5a43793a70d8d0e5a821c16",
             "SpritesheetX": 200,
             "SpritesheetY": 48
           }
         },
         "Nodding (Kneeling) 3": {
           "ESE": {
-            "Hash": "c7f7ffaa58e85ead7969d66eb17b4c8d",
             "SpritesheetX": 240,
             "SpritesheetY": 48
           }
@@ -74,42 +52,27 @@
         "Nodding 1": {
           "Directions": 4,
           "SpritesheetX": 280,
-          "SpritesheetY": 0,
-          "Hashes": [
-            "5a56bee6cc20bd14ed87e94c8629a339",
-            "4dd44c9c546690f422edf547549a9269",
-            "1d4c600f05c099c6d6b06dbbee35294c",
-            "c34462428a0e51667aeaad1aacf58eaf"
-          ]
+          "SpritesheetY": 0
         },
         "Nodding 2": {
           "Directions": 4,
           "SpritesheetX": 320,
-          "SpritesheetY": 0,
-          "Hashes": [
-            "3653155ab67dc58144437677fb359845",
-            "4498ed099328fc133eb60f16d15a5feb",
-            "ed509ce032d524199ec450dd47e1f970",
-            "a32d795c495af5e7b4eb8041eb62cc38"
-          ]
+          "SpritesheetY": 0
         },
         "Pointing 1": {
           "ESE": {
-            "Hash": "9af7d68e1082e85abeae2d5cbc24037c",
             "SpritesheetX": 360,
             "SpritesheetY": 48
           }
         },
         "Pointing 2": {
           "ESE": {
-            "Hash": "1c7288c0396719f198d7fbe044a1737f",
             "SpritesheetX": 400,
             "SpritesheetY": 48
           }
         },
         "Pointing 3": {
           "ESE": {
-            "Hash": "dbfd97691679b894d5ba3c287811b0fb",
             "SpritesheetX": 440,
             "SpritesheetY": 48
           }
@@ -117,35 +80,21 @@
         "ShakingHead 1": {
           "Directions": 4,
           "SpritesheetX": 480,
-          "SpritesheetY": 0,
-          "Hashes": [
-            "b21d5b91e579431271cc9d9b7dcd304c",
-            "30172896128d7c305d77e1a5f727a15c",
-            "940212bde63eccd5c1d2b93d0d185a3b",
-            "34593de98be0227412b5aadcf3a686eb"
-          ]
+          "SpritesheetY": 0
         },
         "ShakingHead 2": {
           "Directions": 4,
           "SpritesheetX": 520,
-          "SpritesheetY": 0,
-          "Hashes": [
-            "694c73e25f09862dc347bb22bcaa5c5e",
-            "dd219c9e1f9810c87143e762195a1097",
-            "8c0854cd9dadd04d8f647b9e8a60534c",
-            "245e5fbe424f8ed672f8cbe9902b004e"
-          ]
+          "SpritesheetY": 0
         },
         "ShakingHead 3": {
           "ESE": {
-            "Hash": "b116af090bf240a42e669de62739ceee",
             "SpritesheetX": 560,
             "SpritesheetY": 48
           }
         },
         "ShakingHead 4": {
           "ESE": {
-            "Hash": "4bfe9479a1ba9d94c73d91fc1287a206",
             "SpritesheetX": 600,
             "SpritesheetY": 48
           }
@@ -153,13 +102,7 @@
         "Walking 1 (Unused Duplicate)": {
           "Directions": 4,
           "SpritesheetX": 640,
-          "SpritesheetY": 0,
-          "Hashes": [
-            "b086f0eb0b8ae6809fcf3f8e8a886a2d",
-            "4fce0a55d6cfb81f12d877863c519235",
-            "d6a8d020cd08d072699ae0ed0fc9784d",
-            "00c8d937fb5089ee5b9cd952304635a9"
-          ]
+          "SpritesheetY": 0
         }
       },
       "AnimationByDirections": {

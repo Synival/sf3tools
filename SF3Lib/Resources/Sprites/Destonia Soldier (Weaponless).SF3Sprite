@@ -13,24 +13,12 @@
         "OnGround (Alt) 1": {
           "Directions": 4,
           "SpritesheetX": 0,
-          "SpritesheetY": 0,
-          "Hashes": [
-            "fe6793d2362a56a34dec75834117a985",
-            "7ee4ea6032c8d22ae23685a536b082da",
-            "d20484a3c7640a3a55e63e7ee94f9f11",
-            "e03bdbd0353170f45a84222ba9edcdb2"
-          ]
+          "SpritesheetY": 0
         },
         "OnGround 1": {
           "Directions": 4,
           "SpritesheetX": 48,
-          "SpritesheetY": 0,
-          "Hashes": [
-            "6b6dd09044384375816174b7d12a252f",
-            "cd4db59d56a337879189303f76754059",
-            "80acddb3d47fd76429245c1d9d2cd452",
-            "5f1a3371cbd9b7ec3030acbbf0754af8"
-          ]
+          "SpritesheetY": 0
         }
       },
       "AnimationByDirections": {

@@ -13,35 +13,17 @@
         "OccasionallyLookingUp 1": {
           "Directions": 4,
           "SpritesheetX": 0,
-          "SpritesheetY": 0,
-          "Hashes": [
-            "a2552ef8b9060346a9e092cd2cbd48aa",
-            "9e68ae0b0d2589e7f3a47184ba5af24f",
-            "7d068b9f705822aaadcd31532f1a6887",
-            "f1712549c940c15e43a2ca2834d04d58"
-          ]
+          "SpritesheetY": 0
         },
         "OccasionallyLookingUp 2": {
           "Directions": 4,
           "SpritesheetX": 40,
-          "SpritesheetY": 0,
-          "Hashes": [
-            "697fbcf00a85789f5d920ba2b8e51679",
-            "83a7dda4698fb88b71a502dffde0d7bb",
-            "df670563e4270a62084775f8d38f5c22",
-            "c8147a7034783671c18ab4b1c18e3acf"
-          ]
+          "SpritesheetY": 0
         },
         "OccasionallyLookingUp 3": {
           "Directions": 4,
           "SpritesheetX": 80,
-          "SpritesheetY": 0,
-          "Hashes": [
-            "061decf2093e7548ba2b4e1f8cc3e35f",
-            "bc06a78bae7fd4ecb842faabd9b30c27",
-            "2e394637b8545414041b17f1dc9a5c0b",
-            "6ac610ddf12e9a5e95675895229aca77"
-          ]
+          "SpritesheetY": 0
         }
       },
       "AnimationByDirections": {

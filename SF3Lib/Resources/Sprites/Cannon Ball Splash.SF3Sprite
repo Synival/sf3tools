@@ -13,26 +13,17 @@
         "Splash 1": {
           "Directions": 1,
           "SpritesheetX": 0,
-          "SpritesheetY": 0,
-          "Hashes": [
-            "2870bfc4eb226cf2f12e1ccfb0b003e1"
-          ]
+          "SpritesheetY": 0
         },
         "Splash 2": {
           "Directions": 1,
           "SpritesheetX": 32,
-          "SpritesheetY": 0,
-          "Hashes": [
-            "0f69b0d0aa821d3572b15b376b851495"
-          ]
+          "SpritesheetY": 0
         },
         "Splash 3": {
           "Directions": 1,
           "SpritesheetX": 64,
-          "SpritesheetY": 0,
-          "Hashes": [
-            "393159ce7748654bce629fb509459507"
-          ]
+          "SpritesheetY": 0
         }
       },
       "AnimationByDirections": {

@@ -13,35 +13,17 @@
         "Bobbing 1": {
           "Directions": 4,
           "SpritesheetX": 0,
-          "SpritesheetY": 0,
-          "Hashes": [
-            "36cfb68c6627518d2043216c96296bba",
-            "fa95caed53ab9a3b61e0072a3cc80372",
-            "f1968474fdedabec483c8a1d2cbf074d",
-            "19772584bfb54d81eda7e93b1212d92c"
-          ]
+          "SpritesheetY": 0
         },
         "Bobbing 2": {
           "Directions": 4,
           "SpritesheetX": 40,
-          "SpritesheetY": 0,
-          "Hashes": [
-            "e43854ac43c5bfafbde7d89334890b32",
-            "fa6b4d90ded8e5e557d9c93ab07865a4",
-            "3399e9a8b9256772583b2071bd3bd12d",
-            "edd6833b313c59b9492abd3bf5a186f2"
-          ]
+          "SpritesheetY": 0
         },
         "Bobbing 3": {
           "Directions": 4,
           "SpritesheetX": 80,
-          "SpritesheetY": 0,
-          "Hashes": [
-            "8533166f29fffe4da23d346b54e4d0ec",
-            "4deff142c934ac01cd80376b0e3382bf",
-            "24b97348607ce75ccde444ce7dce505f",
-            "1d639d144f48d26f06308a00462668c8"
-          ]
+          "SpritesheetY": 0
         }
       },
       "AnimationByDirections": {

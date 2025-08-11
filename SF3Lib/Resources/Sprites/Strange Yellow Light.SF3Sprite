@@ -13,10 +13,7 @@
         "Sparkle 1": {
           "Directions": 1,
           "SpritesheetX": 0,
-          "SpritesheetY": 0,
-          "Hashes": [
-            "a8ad7ad80de38ce4fd6bc6fc4210bb03"
-          ]
+          "SpritesheetY": 0
         }
       },
       "AnimationByDirections": {

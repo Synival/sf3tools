@@ -13,82 +13,52 @@
         "Poofing 1": {
           "Directions": 1,
           "SpritesheetX": 0,
-          "SpritesheetY": 0,
-          "Hashes": [
-            "8f373bbd19fa5c8bc6094ce809eb66e6"
-          ]
+          "SpritesheetY": 0
         },
         "Poofing 10": {
           "Directions": 1,
           "SpritesheetX": 32,
-          "SpritesheetY": 0,
-          "Hashes": [
-            "4bfb956bd03a5ab369d792737bcdc822"
-          ]
+          "SpritesheetY": 0
         },
         "Poofing 2": {
           "Directions": 1,
           "SpritesheetX": 64,
-          "SpritesheetY": 0,
-          "Hashes": [
-            "9160c348269bab1825c02aa9b7d9082f"
-          ]
+          "SpritesheetY": 0
         },
         "Poofing 3": {
           "Directions": 1,
           "SpritesheetX": 96,
-          "SpritesheetY": 0,
-          "Hashes": [
-            "d5067fb45564f84c9003cda6a8145ed3"
-          ]
+          "SpritesheetY": 0
         },
         "Poofing 4": {
           "Directions": 1,
           "SpritesheetX": 128,
-          "SpritesheetY": 0,
-          "Hashes": [
-            "8418880583124ba6b226b9bbeb63a1be"
-          ]
+          "SpritesheetY": 0
         },
         "Poofing 5": {
           "Directions": 1,
           "SpritesheetX": 160,
-          "SpritesheetY": 0,
-          "Hashes": [
-            "f27e3353d82cf10ff6d617fc865c5115"
-          ]
+          "SpritesheetY": 0
         },
         "Poofing 6": {
           "Directions": 1,
           "SpritesheetX": 192,
-          "SpritesheetY": 0,
-          "Hashes": [
-            "d83c2e751e6da6fc3be260f1c869a315"
-          ]
+          "SpritesheetY": 0
         },
         "Poofing 7": {
           "Directions": 1,
           "SpritesheetX": 224,
-          "SpritesheetY": 0,
-          "Hashes": [
-            "4e4a95fe239d34ed87b97006ad3efd91"
-          ]
+          "SpritesheetY": 0
         },
         "Poofing 8": {
           "Directions": 1,
           "SpritesheetX": 256,
-          "SpritesheetY": 0,
-          "Hashes": [
-            "7b2f314ce66c544ebd7eefbb45ad5d26"
-          ]
+          "SpritesheetY": 0
         },
         "Poofing 9": {
           "Directions": 1,
           "SpritesheetX": 288,
-          "SpritesheetY": 0,
-          "Hashes": [
-            "ae02c7f11da4c9bd2cf38b380d3bc4dd"
-          ]
+          "SpritesheetY": 0
         }
       },
       "AnimationByDirections": {

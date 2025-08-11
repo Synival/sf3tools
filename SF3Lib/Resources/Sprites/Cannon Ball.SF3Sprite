@@ -13,10 +13,7 @@
         "CannonBall 1": {
           "Directions": 1,
           "SpritesheetX": 0,
-          "SpritesheetY": 0,
-          "Hashes": [
-            "46e4e4e7b65d62fbd320c26210f185ce"
-          ]
+          "SpritesheetY": 0
         }
       },
       "AnimationByDirections": {

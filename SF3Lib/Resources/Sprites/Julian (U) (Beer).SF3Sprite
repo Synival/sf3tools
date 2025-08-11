@@ -13,35 +13,17 @@
         "Drinking 1": {
           "Directions": 4,
           "SpritesheetX": 0,
-          "SpritesheetY": 0,
-          "Hashes": [
-            "cb6211ad1be97b57224b2cbe9293a220",
-            "b0c4bd8123ce91242437df138a83360f",
-            "a767adfbcc3fb7f529f8550d7d76da0d",
-            "684f73495a6824ee8edbd42bb31a1ddb"
-          ]
+          "SpritesheetY": 0
         },
         "Drinking 2": {
           "Directions": 4,
           "SpritesheetX": 40,
-          "SpritesheetY": 0,
-          "Hashes": [
-            "0c032b289bc6c4583dab807ffb9db7be",
-            "62658d20e5a994e90b08027c65e2e94e",
-            "e4e77bf7a59cc67743fd5aed2b58d184",
-            "41f0abc0cd35e2a2af649e55f245541e"
-          ]
+          "SpritesheetY": 0
         },
         "Drinking 3": {
           "Directions": 4,
           "SpritesheetX": 80,
-          "SpritesheetY": 0,
-          "Hashes": [
-            "2dd583edca9ec78825db23017e331854",
-            "21e500826ba932201c92fb20834cda54",
-            "c3882f4d4c2524459a9546ef647cc084",
-            "890f681ea4213e4084ff1e73b24657fa"
-          ]
+          "SpritesheetY": 0
         }
       },
       "AnimationByDirections": {

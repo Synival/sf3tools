@@ -13,10 +13,7 @@
         "Lightning 1": {
           "Directions": 1,
           "SpritesheetX": 0,
-          "SpritesheetY": 0,
-          "Hashes": [
-            "4dc924b44afe3d81dc4d3610d296aa52"
-          ]
+          "SpritesheetY": 0
         }
       },
       "AnimationByDirections": {

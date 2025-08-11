@@ -13,50 +13,32 @@
         "OrbHovering 1": {
           "Directions": 1,
           "SpritesheetX": 0,
-          "SpritesheetY": 0,
-          "Hashes": [
-            "1dac71484f78a8109b693459d13a7319"
-          ]
+          "SpritesheetY": 0
         },
         "OrbHovering 2": {
           "Directions": 1,
           "SpritesheetX": 48,
-          "SpritesheetY": 0,
-          "Hashes": [
-            "bc2c82635f95d2c9eca6f46f4f7ad257"
-          ]
+          "SpritesheetY": 0
         },
         "OrbHovering 3": {
           "Directions": 1,
           "SpritesheetX": 96,
-          "SpritesheetY": 0,
-          "Hashes": [
-            "70f1556fa8fce78043f885410dbd0a60"
-          ]
+          "SpritesheetY": 0
         },
         "OrbHovering 4": {
           "Directions": 1,
           "SpritesheetX": 144,
-          "SpritesheetY": 0,
-          "Hashes": [
-            "fa2c7cde3ec73a8288a0ffaa2be8dd75"
-          ]
+          "SpritesheetY": 0
         },
         "OrbHovering 5": {
           "Directions": 1,
           "SpritesheetX": 192,
-          "SpritesheetY": 0,
-          "Hashes": [
-            "9507600b69c62ac6ad04bce7e435b84c"
-          ]
+          "SpritesheetY": 0
         },
         "Orbless 1": {
           "Directions": 1,
           "SpritesheetX": 240,
-          "SpritesheetY": 0,
-          "Hashes": [
-            "c5812869da844945da70f6d8f3248bf9"
-          ]
+          "SpritesheetY": 0
         }
       },
       "AnimationByDirections": {

@@ -12,42 +12,36 @@
       "FrameGroups": {
         "Freezing 1": {
           "SSE": {
-            "Hash": "d8eb4007890e6fbb91fc64638c388eb2",
             "SpritesheetX": 0,
             "SpritesheetY": 0
           }
         },
         "Freezing 2": {
           "SSE": {
-            "Hash": "41e72571638db33fe1e76d7162557bc4",
             "SpritesheetX": 48,
             "SpritesheetY": 0
           }
         },
         "Freezing 3": {
           "SSE": {
-            "Hash": "af26be64b8863dbfe5d3b8de2ec7906d",
             "SpritesheetX": 96,
             "SpritesheetY": 0
           }
         },
         "Ice Cracking 1": {
           "SSE": {
-            "Hash": "0028913d6fa7d66971ce98c6786d1d06",
             "SpritesheetX": 144,
             "SpritesheetY": 0
           }
         },
         "Ice Cracking 2": {
           "SSE": {
-            "Hash": "43d6cca75ca6a92f2e54d4580149881d",
             "SpritesheetX": 192,
             "SpritesheetY": 0
           }
         },
         "Ice Cracking 3": {
           "SSE": {
-            "Hash": "b3ca5bfb2bfc21278422a6d8ed5dade0",
             "SpritesheetX": 240,
             "SpritesheetY": 0
           }

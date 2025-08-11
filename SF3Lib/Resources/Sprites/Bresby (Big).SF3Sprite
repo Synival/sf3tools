@@ -12,21 +12,18 @@
       "FrameGroups": {
         "Idle 1": {
           "NNE": {
-            "Hash": "e1aec27e0858ed6efb2bdc01678323e7",
             "SpritesheetX": 0,
             "SpritesheetY": 0
           }
         },
         "Idle 2": {
           "NNE": {
-            "Hash": "790b843cef1e360890e9c7060b2f7b9e",
             "SpritesheetX": 64,
             "SpritesheetY": 0
           }
         },
         "Idle 3": {
           "NNE": {
-            "Hash": "245de4da9e50c4d1cf64c86c3fca9b23",
             "SpritesheetX": 128,
             "SpritesheetY": 0
           }

@@ -13,35 +13,17 @@
         "Idle (Wind Blowing Hair) 1": {
           "Directions": 4,
           "SpritesheetX": 0,
-          "SpritesheetY": 0,
-          "Hashes": [
-            "c4444ba1faca741fcc830cae1436ca36",
-            "505ad7152065b114074fc50e729f238c",
-            "5e7f3420ae18d0ccd8d954d408225f42",
-            "00930f4cab65e9da7ad5e2337ce1a4e1"
-          ]
+          "SpritesheetY": 0
         },
         "Idle (Wind Blowing Hair) 2": {
           "Directions": 4,
           "SpritesheetX": 64,
-          "SpritesheetY": 0,
-          "Hashes": [
-            "b203a8843ac56305d52ff6cba676082e",
-            "0a46f346800d9d500401097043d0231d",
-            "bed59ec3cf11f6e457e188b746dfc5cb",
-            "5c1e374dfbed8a38289622ac21e750f9"
-          ]
+          "SpritesheetY": 0
         },
         "Idle (Wind Blowing Hair) 3": {
           "Directions": 4,
           "SpritesheetX": 128,
-          "SpritesheetY": 0,
-          "Hashes": [
-            "890188f7fb734cc90283cc316b3d2fc6",
-            "63dc969b6a5c14eac1afdab3c9721803",
-            "790e766eb134f65c08e880806fc2d3d6",
-            "d8922603c6075d86e0dc758a15e6682b"
-          ]
+          "SpritesheetY": 0
         }
       },
       "AnimationByDirections": {

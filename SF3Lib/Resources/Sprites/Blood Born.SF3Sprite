@@ -13,90 +13,42 @@
         "Idle 1": {
           "Directions": 4,
           "SpritesheetX": 0,
-          "SpritesheetY": 0,
-          "Hashes": [
-            "74cd399650fbd1936d1c9b7c10f339f1",
-            "604439b750057048a86980bd72ef17c3",
-            "f20ff28f927c6ebceccd9d577b9df92f",
-            "7e3721b5ac01ec132c069bc18af1671b"
-          ]
+          "SpritesheetY": 0
         },
         "Idle 2": {
           "Directions": 4,
           "SpritesheetX": 40,
-          "SpritesheetY": 0,
-          "Hashes": [
-            "8806efdb788f11d206be7875e3a09e4f",
-            "d109c0c9a0ffc1acdda1faeb78d9d973",
-            "66fa9077cfd46723b34bdd193f9a6e6b",
-            "eef4251f13666eeb3270de9d06f980b4"
-          ]
+          "SpritesheetY": 0
         },
         "Idle 3": {
           "Directions": 4,
           "SpritesheetX": 80,
-          "SpritesheetY": 0,
-          "Hashes": [
-            "d586cf5bf40375fd755a8a99f3da392c",
-            "fbf148b00e590777ea0a3ed39a552cec",
-            "67c4c93a5f6735942bcfe78aea75d9e7",
-            "099b84c34e8e0b0ee22cf1c06feebe51"
-          ]
+          "SpritesheetY": 0
         },
         "Walking 1": {
           "Directions": 4,
           "SpritesheetX": 120,
-          "SpritesheetY": 0,
-          "Hashes": [
-            "0248648dbc851a5ca1313e863e243838",
-            "06b03f9603cf69135a4e63aa89e0e086",
-            "6aa89740b27fcfc157b4a4119c8597e8",
-            "3b31401ee5dba57518c67f75819b5005"
-          ]
+          "SpritesheetY": 0
         },
         "Walking 2": {
           "Directions": 4,
           "SpritesheetX": 160,
-          "SpritesheetY": 0,
-          "Hashes": [
-            "142c5c47ccca94731c944ff7d899b7eb",
-            "e4b43ab8d7b8e03e247819c54893c7db",
-            "cf3eae75ec28764181f07b4eb4c36645",
-            "f86329afe4f6b6953be23fecfc76b126"
-          ]
+          "SpritesheetY": 0
         },
         "Walking 3": {
           "Directions": 4,
           "SpritesheetX": 200,
-          "SpritesheetY": 0,
-          "Hashes": [
-            "ee01b8aa1a3199152b5b6025e2c1c179",
-            "83bdd71a11f26f6fe643e3f103c5e3f8",
-            "774243912bda329e632ae81dcf00702a",
-            "065a5e9540edc04704eb16ed36886da6"
-          ]
+          "SpritesheetY": 0
         },
         "Walking 4": {
           "Directions": 4,
           "SpritesheetX": 240,
-          "SpritesheetY": 0,
-          "Hashes": [
-            "ffc482c6c1942f6648ab69fcec0a1c75",
-            "4820a3deede79ed257522d866fd90edc",
-            "7ec9155c53fc7cbc7d9637ba585875d0",
-            "2ec52dfcc255941b6f1e3b9aa6dbdcf1"
-          ]
+          "SpritesheetY": 0
         },
         "Walking 5": {
           "Directions": 4,
           "SpritesheetX": 280,
-          "SpritesheetY": 0,
-          "Hashes": [
-            "f07aba5cfe286b24421dc44cc643d26c",
-            "42eb7c7391c913be5ae79be7d5eb2852",
-            "d1a947802e1da6f5dc23cc2a2f044b61",
-            "581bb7c6395ff2edc6653008702166ac"
-          ]
+          "SpritesheetY": 0
         }
       },
       "AnimationByDirections": {

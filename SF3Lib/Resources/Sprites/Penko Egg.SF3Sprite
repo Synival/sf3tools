@@ -13,32 +13,17 @@
         "Full 1": {
           "Directions": 1,
           "SpritesheetX": 0,
-          "SpritesheetY": 0,
-          "Hashes": [
-            "bee9dc6853856c9a6b91a399795dffe0"
-          ]
+          "SpritesheetY": 0
         },
         "Half 1": {
           "Directions": 4,
           "SpritesheetX": 40,
-          "SpritesheetY": 32,
-          "Hashes": [
-            "bbfe49fc1d712664d460905747f8ef25",
-            "174e6e139c400867a5117266bbabd226",
-            "67a22548e151c30b0df004ec8fb6969d",
-            "2aa9cd1c2ff89020ff1aaf457034e871"
-          ]
+          "SpritesheetY": 32
         },
         "Open 1": {
           "Directions": 4,
           "SpritesheetX": 80,
-          "SpritesheetY": 32,
-          "Hashes": [
-            "2664e0487d8df915b4b1cc92bd78cf30",
-            "13f888f95f39906f6d137ba407ed5839",
-            "3db08edd18686911b9a0e96cc06c7c4a",
-            "1af7e41197b5c8ff3c3e9c9b1aa526de"
-          ]
+          "SpritesheetY": 32
         }
       },
       "AnimationByDirections": {

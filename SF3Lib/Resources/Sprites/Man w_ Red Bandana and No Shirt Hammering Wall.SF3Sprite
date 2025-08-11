@@ -13,35 +13,17 @@
         "Hammering 1": {
           "Directions": 4,
           "SpritesheetX": 0,
-          "SpritesheetY": 0,
-          "Hashes": [
-            "5c9f9e101231f8c6e84aa2d8db90f37d",
-            "9fa0ab5637f4381d53481c2189e4e691",
-            "4946da0abb0d72ead7b69266a9a874d8",
-            "256863b6cae93a94b96e450b7a17272b"
-          ]
+          "SpritesheetY": 0
         },
         "Hammering 2": {
           "Directions": 4,
           "SpritesheetX": 40,
-          "SpritesheetY": 0,
-          "Hashes": [
-            "1cb6322a74992843544eb58510b88062",
-            "06222a881ec347c4abd813b2751231ca",
-            "7a7a7363e6725c5844fab9b43ec87f3a",
-            "2e8acc33ee54b66ddeb106b8fe72fb5c"
-          ]
+          "SpritesheetY": 0
         },
         "Hammering 3": {
           "Directions": 4,
           "SpritesheetX": 80,
-          "SpritesheetY": 0,
-          "Hashes": [
-            "dca003c920ea5131b0160a43b8d48ac8",
-            "c1fffb814b71080bdcc39302c6dbb043",
-            "25e9ecf18be6971b87457a286d87ebf5",
-            "f709c8e1c107b2533b531d99db71287d"
-          ]
+          "SpritesheetY": 0
         }
       },
       "AnimationByDirections": {

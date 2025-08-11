@@ -13,10 +13,7 @@
         "Light 1": {
           "Directions": 1,
           "SpritesheetX": 0,
-          "SpritesheetY": 0,
-          "Hashes": [
-            "64138241c1ad9e4a7aee83828edf4d3b"
-          ]
+          "SpritesheetY": 0
         }
       },
       "AnimationByDirections": {

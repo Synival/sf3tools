@@ -13,10 +13,7 @@
         "Bomb 1": {
           "Directions": 1,
           "SpritesheetX": 0,
-          "SpritesheetY": 0,
-          "Hashes": [
-            "48029a08b05f56f66a237b23bfd947da"
-          ]
+          "SpritesheetY": 0
         }
       },
       "AnimationByDirections": {

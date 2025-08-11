@@ -13,66 +13,42 @@
         "Flickering 1": {
           "Directions": 1,
           "SpritesheetX": 0,
-          "SpritesheetY": 0,
-          "Hashes": [
-            "ed55fb1d2ec480d1aef366918ae5b390"
-          ]
+          "SpritesheetY": 0
         },
         "Flickering 2": {
           "Directions": 1,
           "SpritesheetX": 16,
-          "SpritesheetY": 0,
-          "Hashes": [
-            "cc941b09547213820f46054f7f2fa7a6"
-          ]
+          "SpritesheetY": 0
         },
         "Flickering 3": {
           "Directions": 1,
           "SpritesheetX": 32,
-          "SpritesheetY": 0,
-          "Hashes": [
-            "71ff04ccf9c8873323deaa8f95f7d16a"
-          ]
+          "SpritesheetY": 0
         },
         "Flickering 4": {
           "Directions": 1,
           "SpritesheetX": 48,
-          "SpritesheetY": 0,
-          "Hashes": [
-            "37d05ff433ec9bf93ec165728c797a10"
-          ]
+          "SpritesheetY": 0
         },
         "Flickering 5": {
           "Directions": 1,
           "SpritesheetX": 64,
-          "SpritesheetY": 0,
-          "Hashes": [
-            "83cba58577a5706b0645b6f02a0aeacc"
-          ]
+          "SpritesheetY": 0
         },
         "Flickering 6": {
           "Directions": 1,
           "SpritesheetX": 80,
-          "SpritesheetY": 0,
-          "Hashes": [
-            "8dc6c91c2553b7b3e0edc0b33bdd059f"
-          ]
+          "SpritesheetY": 0
         },
         "Flickering 7": {
           "Directions": 1,
           "SpritesheetX": 96,
-          "SpritesheetY": 0,
-          "Hashes": [
-            "d4e5c34f9fa034c2a1f39c8e1726aa8e"
-          ]
+          "SpritesheetY": 0
         },
         "Flickering 8": {
           "Directions": 1,
           "SpritesheetX": 112,
-          "SpritesheetY": 0,
-          "Hashes": [
-            "f29004b6e2a2438a6b099eabd5df4961"
-          ]
+          "SpritesheetY": 0
         }
       },
       "AnimationByDirections": {

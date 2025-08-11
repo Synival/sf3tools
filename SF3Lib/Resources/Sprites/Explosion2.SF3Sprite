@@ -13,42 +13,27 @@
         "Exploding 1": {
           "Directions": 1,
           "SpritesheetX": 0,
-          "SpritesheetY": 0,
-          "Hashes": [
-            "afaf8a07986c51ecbc033edf49a29a9b"
-          ]
+          "SpritesheetY": 0
         },
         "Exploding 2": {
           "Directions": 1,
           "SpritesheetX": 48,
-          "SpritesheetY": 0,
-          "Hashes": [
-            "b71077e6896f825d6a30e072a89effd2"
-          ]
+          "SpritesheetY": 0
         },
         "Exploding 3": {
           "Directions": 1,
           "SpritesheetX": 96,
-          "SpritesheetY": 0,
-          "Hashes": [
-            "a6581c415fd3004be166a049b5432e31"
-          ]
+          "SpritesheetY": 0
         },
         "Exploding 4": {
           "Directions": 1,
           "SpritesheetX": 144,
-          "SpritesheetY": 0,
-          "Hashes": [
-            "35d2e1a8782841067a5d04adaae1ba6e"
-          ]
+          "SpritesheetY": 0
         },
         "Exploding 5": {
           "Directions": 1,
           "SpritesheetX": 192,
-          "SpritesheetY": 0,
-          "Hashes": [
-            "46148875328f9ba03de5c67074385a9a"
-          ]
+          "SpritesheetY": 0
         }
       },
       "AnimationByDirections": {

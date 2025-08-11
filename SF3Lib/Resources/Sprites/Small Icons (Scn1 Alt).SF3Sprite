@@ -13,34 +13,22 @@
         "Angry 1": {
           "Directions": 1,
           "SpritesheetX": 0,
-          "SpritesheetY": 0,
-          "Hashes": [
-            "22a5fb949e50b3c414acb4ec058c2bd6"
-          ]
+          "SpritesheetY": 0
         },
         "Flag 1": {
           "Directions": 1,
           "SpritesheetX": 16,
-          "SpritesheetY": 0,
-          "Hashes": [
-            "407aca38b311ed86f6b84ca39b646ad4"
-          ]
+          "SpritesheetY": 0
         },
         "Idea 1": {
           "Directions": 1,
           "SpritesheetX": 32,
-          "SpritesheetY": 0,
-          "Hashes": [
-            "aa8e61fc7878d2c26e4870d13480a47d"
-          ]
+          "SpritesheetY": 0
         },
         "Love 1": {
           "Directions": 1,
           "SpritesheetX": 48,
-          "SpritesheetY": 0,
-          "Hashes": [
-            "e5c866070bce9e06893035b6c66fed66"
-          ]
+          "SpritesheetY": 0
         }
       },
       "AnimationByDirections": {

@@ -13,74 +13,47 @@
         "Poofing 1": {
           "Directions": 1,
           "SpritesheetX": 0,
-          "SpritesheetY": 0,
-          "Hashes": [
-            "8927f42453a22f9af59d23330ecbf686"
-          ]
+          "SpritesheetY": 0
         },
         "Poofing 2": {
           "Directions": 1,
           "SpritesheetX": 24,
-          "SpritesheetY": 0,
-          "Hashes": [
-            "563c6d959b159de1d990bb4dd4fcf44a"
-          ]
+          "SpritesheetY": 0
         },
         "Poofing 3": {
           "Directions": 1,
           "SpritesheetX": 48,
-          "SpritesheetY": 0,
-          "Hashes": [
-            "160ca21284162529eaf2b4f6197ecaee"
-          ]
+          "SpritesheetY": 0
         },
         "Poofing 4": {
           "Directions": 1,
           "SpritesheetX": 72,
-          "SpritesheetY": 0,
-          "Hashes": [
-            "9d60a2688bd1e6cd96f6367295c0180d"
-          ]
+          "SpritesheetY": 0
         },
         "Poofing 5": {
           "Directions": 1,
           "SpritesheetX": 96,
-          "SpritesheetY": 0,
-          "Hashes": [
-            "ec5b4e1172a40cbb3b31ce7272995128"
-          ]
+          "SpritesheetY": 0
         },
         "Poofing 6": {
           "Directions": 1,
           "SpritesheetX": 120,
-          "SpritesheetY": 0,
-          "Hashes": [
-            "9d5314f4bcafd3dfce14a74631a72e50"
-          ]
+          "SpritesheetY": 0
         },
         "Poofing 7": {
           "Directions": 1,
           "SpritesheetX": 144,
-          "SpritesheetY": 0,
-          "Hashes": [
-            "1a9c4b792a136e01990549b91a5c691e"
-          ]
+          "SpritesheetY": 0
         },
         "Poofing 8": {
           "Directions": 1,
           "SpritesheetX": 168,
-          "SpritesheetY": 0,
-          "Hashes": [
-            "93a1ca69541ffa928898bac4ec25c728"
-          ]
+          "SpritesheetY": 0
         },
         "Poofing 9": {
           "Directions": 1,
           "SpritesheetX": 192,
-          "SpritesheetY": 0,
-          "Hashes": [
-            "b8d67ef2e2a3895dab921b474dbdd29e"
-          ]
+          "SpritesheetY": 0
         }
       },
       "AnimationByDirections": {

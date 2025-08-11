@@ -14,126 +14,61 @@
           "Directions": 5,
           "SpritesheetX": 0,
           "SpritesheetY": 0,
-          "Span": 80,
-          "Hashes": [
-            "18782fe6af07c4a3a365042959282122",
-            "6e7a8ede4d5df17f6e66ab37d342fee3",
-            "30d7aa5f29f92ed4201b31654d7f8a02",
-            "d4b59183250f32537e980ce8f8cce74d",
-            "f419fe490f0223d98a19538571c02512"
-          ]
+          "Span": 80
         },
         "Walking (5 Dir) 2": {
           "Directions": 5,
           "SpritesheetX": 40,
           "SpritesheetY": 0,
-          "Span": 80,
-          "Hashes": [
-            "e0f1a03db6e4bf7e22935b2b02043dc9",
-            "b61428216939d04e87231904139b1d32",
-            "8a717c3acd269d2e46900f6d05d4fcff",
-            "f381844e3fdbc6f79b16fe77336e8fd8",
-            "0f8a516590ab7718a14d1be269e4b49f"
-          ]
+          "Span": 80
         },
         "Walking (5 Dir) 3": {
           "Directions": 5,
           "SpritesheetX": 80,
           "SpritesheetY": 0,
-          "Span": 80,
-          "Hashes": [
-            "421feda724d8139803209fca46f82fd7",
-            "3c8f7dab27ae6689b5ba964ff3e640be",
-            "1608a97551fcd79f37a3e04ca7a99d3d",
-            "955926b9524e0105940ddc67b174e392",
-            "7ac0273a689abd477c9678faa2a7e6c3"
-          ]
+          "Span": 80
         },
         "Walking (5 Dir) 4": {
           "Directions": 5,
           "SpritesheetX": 120,
           "SpritesheetY": 0,
-          "Span": 80,
-          "Hashes": [
-            "5e442bf8b1d73cbd25cc9fedbc76756d",
-            "aa1570555b5b0112cac80428463b8348",
-            "ec58261a8c45837c6b9e76ea1e7f592d",
-            "56c76e732319f6f2ec660ed75221e330",
-            "c2b6e9bfe123b9391f548b35ad15a25d"
-          ]
+          "Span": 80
         },
         "Walking (5 Dir) 5": {
           "Directions": 5,
           "SpritesheetX": 160,
           "SpritesheetY": 0,
-          "Span": 80,
-          "Hashes": [
-            "934286d4b42907aa6201ad9d3d2afc02",
-            "b85c6e2c8cd9334adab5d60bae334d27",
-            "5da4fc9b82575149320b78c6894e0585",
-            "e8c7af66f125ad295b7ed2ac1ba7454a",
-            "5ca8f423f0b138a08542a2d95b82a083"
-          ]
+          "Span": 80
         },
         "Walking 1": {
           "Directions": 4,
           "SpritesheetX": 200,
           "SpritesheetY": 40,
-          "Span": 80,
-          "Hashes": [
-            "cc83f41e5acae2c6486d5feac3abbdc9",
-            "fb89f7631dc1a7e777f74c7aaa081f42",
-            "2ab27817a08b58d4bdf47cbeb8d89e2b",
-            "5a21b9ca27a850563e581fb21cf9d53f"
-          ]
+          "Span": 80
         },
         "Walking 2": {
           "Directions": 4,
           "SpritesheetX": 240,
           "SpritesheetY": 40,
-          "Span": 80,
-          "Hashes": [
-            "92415cf56ff3a7f4a801b53cf9bb83d1",
-            "c8b3129e4691d4b8e5632efe8d16eccf",
-            "a3763b79fd51a2d6f415923496819821",
-            "69426f37bbf3c214608cf90959613661"
-          ]
+          "Span": 80
         },
         "Walking 3": {
           "Directions": 4,
           "SpritesheetX": 280,
           "SpritesheetY": 40,
-          "Span": 80,
-          "Hashes": [
-            "4ad56a0b836a825d6435747ed0617784",
-            "64b2b53b5bee67352a09c08b0d52b180",
-            "9a45fcb6dbbb59815f2e1bcc674bd965",
-            "8ff7ad3ebf1c0945fb0fc5f870383344"
-          ]
+          "Span": 80
         },
         "Walking 4": {
           "Directions": 4,
           "SpritesheetX": 320,
           "SpritesheetY": 40,
-          "Span": 80,
-          "Hashes": [
-            "fdd2f3062cb97be98a20929c4542a010",
-            "ce2cc049691049c3764c9123e261764d",
-            "4e34e85ef7fda42e6367d46c89c77c8b",
-            "5b8728479c6e1bcbac745f081a806c30"
-          ]
+          "Span": 80
         },
         "Walking 5": {
           "Directions": 4,
           "SpritesheetX": 360,
           "SpritesheetY": 40,
-          "Span": 80,
-          "Hashes": [
-            "2e581c3559e9ff6b53272a028b4ffe04",
-            "c81d1a5c639e8c73a00ac7969c64736e",
-            "5fefa9c11e56de41b504545b664aabd7",
-            "947e29bfbf93f9c6db420b0375249c48"
-          ]
+          "Span": 80
         }
       },
       "AnimationByDirections": {

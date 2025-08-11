@@ -13,35 +13,17 @@
         "OpeningAndClosing 1": {
           "Directions": 4,
           "SpritesheetX": 0,
-          "SpritesheetY": 0,
-          "Hashes": [
-            "aa26de57a37d827d3f9e8d15d8f82770",
-            "5e2bc34f0db7b6a0a4feb6ad730f3d7a",
-            "034dbfe50d9159378ca86ab5049986dd",
-            "0c4aa859044db08c5d64d198b91e640f"
-          ]
+          "SpritesheetY": 0
         },
         "OpeningAndClosing 2": {
           "Directions": 4,
           "SpritesheetX": 32,
-          "SpritesheetY": 0,
-          "Hashes": [
-            "f2f455cb601cf83fc2e6928f272cb178",
-            "30d3f4e48a170baf213ef976967e6108",
-            "cdf5a3f51548e06a6e3e39cd3f8ba055",
-            "b94bff7dd2b5f5e3ebefd1addc685b23"
-          ]
+          "SpritesheetY": 0
         },
         "OpeningAndClosing 3": {
           "Directions": 4,
           "SpritesheetX": 64,
-          "SpritesheetY": 0,
-          "Hashes": [
-            "6c4b938ca232916b215b560d96e1bda8",
-            "96b07ddc66704212dc993277bd05c006",
-            "136005fd01c3d8389005b0feafe9ad98",
-            "fedd5a2ea9f46884f79a872586c8e263"
-          ]
+          "SpritesheetY": 0
         }
       },
       "AnimationByDirections": {

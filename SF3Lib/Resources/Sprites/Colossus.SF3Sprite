@@ -13,57 +13,27 @@
         "Hovering 1": {
           "Directions": 4,
           "SpritesheetX": 0,
-          "SpritesheetY": 0,
-          "Hashes": [
-            "19815a78af03a3419f36033505aa87c4",
-            "8d85bd1af338f00dd7f8fc7e884b9ac0",
-            "216ce8d3386951a4a7e4ca014d85feda",
-            "0d589939fce031422b9567396ae3ef69"
-          ]
+          "SpritesheetY": 0
         },
         "Hovering 2": {
           "Directions": 4,
           "SpritesheetX": 40,
-          "SpritesheetY": 0,
-          "Hashes": [
-            "7f85fa9f25cb0ffe7bbd13601c3bfb2d",
-            "cb592133df474ea6221e6172dc27ec3c",
-            "1ace9f3d2835d765dadc1bc2ee2b4df1",
-            "3e823709fd7772fdf5893fad92a2daa4"
-          ]
+          "SpritesheetY": 0
         },
         "Hovering 3": {
           "Directions": 4,
           "SpritesheetX": 80,
-          "SpritesheetY": 0,
-          "Hashes": [
-            "a3b153132b164cd1be108174b1ae8f8a",
-            "fbd6a54d41bc9b31503156f4fa02e376",
-            "b41d8610fb706a76e632e7ae6f02e584",
-            "2a47d74d92b64dfc7d590f84e8d050f5"
-          ]
+          "SpritesheetY": 0
         },
         "Hovering 4": {
           "Directions": 4,
           "SpritesheetX": 120,
-          "SpritesheetY": 0,
-          "Hashes": [
-            "14e9efec9acecd557433ccdec3c3a7be",
-            "4a2d906804abc42ad24afeac493f9729",
-            "81866e669939b79ff8e40991529b117a",
-            "c76e034ccc3d49708bd104c45feb31f7"
-          ]
+          "SpritesheetY": 0
         },
         "Hovering 5": {
           "Directions": 4,
           "SpritesheetX": 160,
-          "SpritesheetY": 0,
-          "Hashes": [
-            "b98125046757c8ba4c8d00e2721e3b18",
-            "a396eb169693efcbe64297a62ee40aad",
-            "9cd19d4c3e767651ab849a667c44e036",
-            "43d72477aa16d04eb7d2b379e97aa4e0"
-          ]
+          "SpritesheetY": 0
         }
       },
       "AnimationByDirections": {

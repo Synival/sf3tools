@@ -13,50 +13,32 @@
         "Poofing 1": {
           "Directions": 1,
           "SpritesheetX": 0,
-          "SpritesheetY": 0,
-          "Hashes": [
-            "7267931c5c3e853c065ebae2fb4ee894"
-          ]
+          "SpritesheetY": 0
         },
         "Poofing 2": {
           "Directions": 1,
           "SpritesheetX": 32,
-          "SpritesheetY": 0,
-          "Hashes": [
-            "63a841435e028eba430c6fa23d3a9665"
-          ]
+          "SpritesheetY": 0
         },
         "Poofing 3": {
           "Directions": 1,
           "SpritesheetX": 64,
-          "SpritesheetY": 0,
-          "Hashes": [
-            "d76d2417d152afb2c70669963f0af8fa"
-          ]
+          "SpritesheetY": 0
         },
         "Poofing 4": {
           "Directions": 1,
           "SpritesheetX": 96,
-          "SpritesheetY": 0,
-          "Hashes": [
-            "ad00101c8c22c364be1f2da1d25aad5c"
-          ]
+          "SpritesheetY": 0
         },
         "Poofing 5": {
           "Directions": 1,
           "SpritesheetX": 128,
-          "SpritesheetY": 0,
-          "Hashes": [
-            "f28e3ef1427bcdb09b379c8c69e4823b"
-          ]
+          "SpritesheetY": 0
         },
         "Poofing 6": {
           "Directions": 1,
           "SpritesheetX": 160,
-          "SpritesheetY": 0,
-          "Hashes": [
-            "cb20d99ec049db7b3fba22c8ff4dd817"
-          ]
+          "SpritesheetY": 0
         }
       },
       "AnimationByDirections": {

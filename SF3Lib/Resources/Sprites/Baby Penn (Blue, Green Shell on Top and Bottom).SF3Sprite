@@ -13,46 +13,22 @@
         "Idle 1": {
           "Directions": 4,
           "SpritesheetX": 0,
-          "SpritesheetY": 0,
-          "Hashes": [
-            "9f157d58345b7d5b42978be4b4f9317e",
-            "5f28b714cc43ae4f48f32ec82108f342",
-            "f48a21edddbdd4b62a6f961581556e8d",
-            "088a2778747c5bf210f4ce23086d70b6"
-          ]
+          "SpritesheetY": 0
         },
         "Idle 2": {
           "Directions": 4,
           "SpritesheetX": 40,
-          "SpritesheetY": 0,
-          "Hashes": [
-            "c495279edad1fbd6cc6b700bfac297e5",
-            "74ca2bc2609544742195ea1647950642",
-            "f93dcfcfbe29d4cad5d028379c4eb40d",
-            "c13bb598580e5b5689bbac5caeb50c02"
-          ]
+          "SpritesheetY": 0
         },
         "Idle 3": {
           "Directions": 4,
           "SpritesheetX": 80,
-          "SpritesheetY": 0,
-          "Hashes": [
-            "7abcf340324c087b2c7df9f63da8c96c",
-            "e6440b38ac4795183ee165a9d333e28a",
-            "145bb8221cdef67f517faecbaf22284d",
-            "c897f654f21b88c9814130ee2b0c2017"
-          ]
+          "SpritesheetY": 0
         },
         "Idle 4": {
           "Directions": 4,
           "SpritesheetX": 120,
-          "SpritesheetY": 0,
-          "Hashes": [
-            "401038ae96c2cf4937f0fb778a7255e6",
-            "f3e4de021e94a2e76e804a85cf50e327",
-            "2918e9d5c99a10df60c8dcab692ec3cb",
-            "0ed031e76e1b846c3cf7b47cd78ef147"
-          ]
+          "SpritesheetY": 0
         }
       },
       "AnimationByDirections": {

@@ -13,46 +13,22 @@
         "OccasionallyTusslingHair 1": {
           "Directions": 4,
           "SpritesheetX": 0,
-          "SpritesheetY": 0,
-          "Hashes": [
-            "8dbc5dc8344e04a76a16105caee15f86",
-            "c983e29c196e902f71597e1705c3cddc",
-            "769a74cf14075443dc0ca32aa9137dc4",
-            "bdf7c8e47b7ab7c687422dc1adbb9df6"
-          ]
+          "SpritesheetY": 0
         },
         "OccasionallyTusslingHair 2": {
           "Directions": 4,
           "SpritesheetX": 40,
-          "SpritesheetY": 0,
-          "Hashes": [
-            "25334cb1b6331edd9d4dd8287f68a32d",
-            "f2c6b5cc26437c3f18b79cf8f953efaa",
-            "70ec35f6e2fd009868405880d17020a6",
-            "6dbcd9abb8ec8eb6c020e02c2777d0b6"
-          ]
+          "SpritesheetY": 0
         },
         "OccasionallyTusslingHair 3": {
           "Directions": 4,
           "SpritesheetX": 80,
-          "SpritesheetY": 0,
-          "Hashes": [
-            "839565e64c09464e06e6b9625c7cd8fc",
-            "c39e3ad2c9e6f8c7b927f609117f2249",
-            "44cf21c8b32e62e4efd8892619c62ab6",
-            "81b8cbe106dbbce8c873a9cb30813c28"
-          ]
+          "SpritesheetY": 0
         },
         "OccasionallyTusslingHair 4": {
           "Directions": 4,
           "SpritesheetX": 120,
-          "SpritesheetY": 0,
-          "Hashes": [
-            "71a2df13b4fd1a676d989ad3c0e21e18",
-            "7e9f1b78b8716085fc5d72e9e1f920b6",
-            "8df6f8cfee90811d9c2b4e14be944baf",
-            "cb2d3ec6f60ae5c3b0834bd4747ed3e9"
-          ]
+          "SpritesheetY": 0
         }
       },
       "AnimationByDirections": {

@@ -13,17 +13,10 @@
         "OnGround 1": {
           "Directions": 4,
           "SpritesheetX": 0,
-          "SpritesheetY": 40,
-          "Hashes": [
-            "d70796ffc8fc171d1e75e5c714471ef8",
-            "2004ffe2c92a78a9a2233d2900edf717",
-            "02debfa171d941ce4d13704d8883c51f",
-            "6ed7854507ced4d643efd70ea40f45c7"
-          ]
+          "SpritesheetY": 40
         },
         "OnGround 2": {
           "S": {
-            "Hash": "df95b0b1dc50395574eb253b3a24cacf",
             "SpritesheetX": 48,
             "SpritesheetY": 0
           }

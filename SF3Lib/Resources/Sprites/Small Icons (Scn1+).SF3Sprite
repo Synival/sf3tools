@@ -13,26 +13,17 @@
         "Alert 1": {
           "Directions": 1,
           "SpritesheetX": 0,
-          "SpritesheetY": 0,
-          "Hashes": [
-            "c7059e750bf0fda8104e5c54aa0df10b"
-          ]
+          "SpritesheetY": 0
         },
         "Flag 1": {
           "Directions": 1,
           "SpritesheetX": 16,
-          "SpritesheetY": 0,
-          "Hashes": [
-            "3423a1885adc98bb2978ad723de6196b"
-          ]
+          "SpritesheetY": 0
         },
         "Love 1": {
           "Directions": 1,
           "SpritesheetX": 32,
-          "SpritesheetY": 0,
-          "Hashes": [
-            "3a704d3d95575f3c452ef6125b459c9f"
-          ]
+          "SpritesheetY": 0
         }
       },
       "AnimationByDirections": {

@@ -13,35 +13,17 @@
         "Idle (Fixed Height) 1": {
           "Directions": 4,
           "SpritesheetX": 0,
-          "SpritesheetY": 0,
-          "Hashes": [
-            "e103dbd9fb539f0c271a07935b5bb929",
-            "cf0bf2fcc1a0a59dd446d8e5c2cb1a5c",
-            "8973c7cb814b785c0164ab2bc829a4eb",
-            "d6e79c92da94a8dd3861a57f03cc565f"
-          ]
+          "SpritesheetY": 0
         },
         "Idle (Fixed Height) 2": {
           "Directions": 4,
           "SpritesheetX": 40,
-          "SpritesheetY": 0,
-          "Hashes": [
-            "3a71e86181f67d70ce46215ec0478f6e",
-            "560f8d4fb3e1026aa57ad08cac47ddc8",
-            "4683abfe098bc5590f38a07f3107cbbd",
-            "865a13076cf6382647e12cf79894fbe8"
-          ]
+          "SpritesheetY": 0
         },
         "Idle (Fixed Height) 3": {
           "Directions": 4,
           "SpritesheetX": 80,
-          "SpritesheetY": 0,
-          "Hashes": [
-            "5a51973fd54fde772e4540c1120e3df7",
-            "224a34ecd4375fbeb0b4ff2ff95d018e",
-            "6960e0f60d6337d2e8081092362e77f0",
-            "c227dd2c9680cd82d1f2df2ccd832587"
-          ]
+          "SpritesheetY": 0
         }
       },
       "AnimationByDirections": {

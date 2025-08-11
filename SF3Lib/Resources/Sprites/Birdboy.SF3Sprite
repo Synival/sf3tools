@@ -13,57 +13,27 @@
         "Flying 1": {
           "Directions": 4,
           "SpritesheetX": 0,
-          "SpritesheetY": 0,
-          "Hashes": [
-            "5ac270be4ee322cd046c9e0f930c7deb",
-            "3dec7e1dbe03c3d732bfefa1ece67530",
-            "c8ced7d14ad21ab63209f18c68d2ee83",
-            "04dd6351a4eae8f6ceb2ebc43613c832"
-          ]
+          "SpritesheetY": 0
         },
         "Flying 2": {
           "Directions": 4,
           "SpritesheetX": 48,
-          "SpritesheetY": 0,
-          "Hashes": [
-            "2372f7ab5cf248fff8decaefe66571cd",
-            "334ed6e72192d630122be3d273279770",
-            "9e1f1bac23a3d606b8e3235fcb1ac91c",
-            "32809aff87bec3d828b420f0a15a423f"
-          ]
+          "SpritesheetY": 0
         },
         "Flying 3": {
           "Directions": 4,
           "SpritesheetX": 96,
-          "SpritesheetY": 0,
-          "Hashes": [
-            "5da7da7332d0c217088fe73ae36a4b5e",
-            "75fbe643c4ca585ee3a18b8c1b6fb8e5",
-            "f14ab9dd4452ba0bc45c773238fb0b01",
-            "8199a4d465d11f9877f5a100008f8d2c"
-          ]
+          "SpritesheetY": 0
         },
         "Flying 4": {
           "Directions": 4,
           "SpritesheetX": 144,
-          "SpritesheetY": 0,
-          "Hashes": [
-            "656f6b47c3a92cabaf9ab53413de61a6",
-            "d09c9aa29490fa1ca5845ccc2ba5cacd",
-            "f0b45a6573e3ec15806410ba5aacb59b",
-            "ee2aaba9f3c9b9b6603da3f0cf3a8578"
-          ]
+          "SpritesheetY": 0
         },
         "Flying 5": {
           "Directions": 4,
           "SpritesheetX": 192,
-          "SpritesheetY": 0,
-          "Hashes": [
-            "73df0bd4b98ffdd761b1dcd9998fdb19",
-            "516756d9af4262a27dfdf838066cd4be",
-            "250cca9c4123150ddb118b438f67d562",
-            "e49ec00dffaaa8ededb2787cc4e053fb"
-          ]
+          "SpritesheetY": 0
         }
       },
       "AnimationByDirections": {

@@ -13,35 +13,17 @@
         "LiftingWeight 1": {
           "Directions": 4,
           "SpritesheetX": 0,
-          "SpritesheetY": 0,
-          "Hashes": [
-            "fa04ef83964bb0bb3848642a5a3763ea",
-            "79d9d8b50824e14356b247c04fa85162",
-            "2e9aa86d35a5a0a1194505e32058929b",
-            "b2bf1c364fa502da109843fb1e62d049"
-          ]
+          "SpritesheetY": 0
         },
         "LiftingWeight 2": {
           "Directions": 4,
           "SpritesheetX": 40,
-          "SpritesheetY": 0,
-          "Hashes": [
-            "b505071059a65b8b4f0924d2b6d9e62f",
-            "a8fbad387a7ee75b62b07f65a386e361",
-            "7de4c0ca8d4b8b5dbf836e584f7d93aa",
-            "66925c6bf342bb4b3c7b8d4d5baf2a3f"
-          ]
+          "SpritesheetY": 0
         },
         "LiftingWeight 3": {
           "Directions": 4,
           "SpritesheetX": 80,
-          "SpritesheetY": 0,
-          "Hashes": [
-            "ab3ba147d96dd56de90124c9840f8fac",
-            "bda9a0ee0c4d001fb4ecf9e446375fc1",
-            "5abd12186f7b55bdbbf2078e0b58302f",
-            "4eaa3c8ae7c632a62b4260ac363d3960"
-          ]
+          "SpritesheetY": 0
         }
       },
       "AnimationByDirections": {

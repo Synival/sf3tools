@@ -13,58 +13,37 @@
         "Flickering (Small) 1": {
           "Directions": 1,
           "SpritesheetX": 0,
-          "SpritesheetY": 0,
-          "Hashes": [
-            "a1a81ae65047ba9b90a26e908b6e5b0b"
-          ]
+          "SpritesheetY": 0
         },
         "Flickering (Small) 2": {
           "Directions": 1,
           "SpritesheetX": 16,
-          "SpritesheetY": 0,
-          "Hashes": [
-            "6627023335163ad82b0b2538ae123807"
-          ]
+          "SpritesheetY": 0
         },
         "Flickering (Small) 3": {
           "Directions": 1,
           "SpritesheetX": 32,
-          "SpritesheetY": 0,
-          "Hashes": [
-            "a383b660fc96d480a8ca375045ada30d"
-          ]
+          "SpritesheetY": 0
         },
         "Flickering (Small) 4": {
           "Directions": 1,
           "SpritesheetX": 48,
-          "SpritesheetY": 0,
-          "Hashes": [
-            "e7cf44dc13fc659d2f09d10dc5a08a82"
-          ]
+          "SpritesheetY": 0
         },
         "Flickering (Small) 5": {
           "Directions": 1,
           "SpritesheetX": 64,
-          "SpritesheetY": 0,
-          "Hashes": [
-            "a29a19dd23e546e41b3e987ca2de0943"
-          ]
+          "SpritesheetY": 0
         },
         "Flickering (Small) 6": {
           "Directions": 1,
           "SpritesheetX": 80,
-          "SpritesheetY": 0,
-          "Hashes": [
-            "56fedf163574649a95b58df46fac7b0b"
-          ]
+          "SpritesheetY": 0
         },
         "Flickering (Small) 7": {
           "Directions": 1,
           "SpritesheetX": 96,
-          "SpritesheetY": 0,
-          "Hashes": [
-            "2a2c2f0a512c87e630500f472bbc0316"
-          ]
+          "SpritesheetY": 0
         }
       },
       "AnimationByDirections": {
@@ -116,66 +95,42 @@
         "Flickering (Large) 1": {
           "Directions": 1,
           "SpritesheetX": 0,
-          "SpritesheetY": 0,
-          "Hashes": [
-            "45a676e1b40c5c1373f622ba33418d61"
-          ]
+          "SpritesheetY": 0
         },
         "Flickering (Large) 2": {
           "Directions": 1,
           "SpritesheetX": 16,
-          "SpritesheetY": 0,
-          "Hashes": [
-            "a9e3bba97b482c9eeb971eabe501205e"
-          ]
+          "SpritesheetY": 0
         },
         "Flickering (Large) 3": {
           "Directions": 1,
           "SpritesheetX": 32,
-          "SpritesheetY": 0,
-          "Hashes": [
-            "570850a1937d36dbb2f0475edc448137"
-          ]
+          "SpritesheetY": 0
         },
         "Flickering (Large) 4": {
           "Directions": 1,
           "SpritesheetX": 48,
-          "SpritesheetY": 0,
-          "Hashes": [
-            "d52d087ac707b4b3746e7edce1bd7856"
-          ]
+          "SpritesheetY": 0
         },
         "Flickering (Large) 5": {
           "Directions": 1,
           "SpritesheetX": 64,
-          "SpritesheetY": 0,
-          "Hashes": [
-            "0d19d9814daff4cbaf908ef65b0493d3"
-          ]
+          "SpritesheetY": 0
         },
         "Flickering (Large) 6": {
           "Directions": 1,
           "SpritesheetX": 80,
-          "SpritesheetY": 0,
-          "Hashes": [
-            "17ae178516a2dc01131ca9f16f86fab6"
-          ]
+          "SpritesheetY": 0
         },
         "Flickering (Large) 7": {
           "Directions": 1,
           "SpritesheetX": 96,
-          "SpritesheetY": 0,
-          "Hashes": [
-            "f14bb9d2c06411d2ccbc89ce95bd6c39"
-          ]
+          "SpritesheetY": 0
         },
         "Flickering (Large) 8": {
           "Directions": 1,
           "SpritesheetX": 112,
-          "SpritesheetY": 0,
-          "Hashes": [
-            "61ca8b0ca6fcf0bf83807c6a8c0cc030"
-          ]
+          "SpritesheetY": 0
         }
       },
       "AnimationByDirections": {

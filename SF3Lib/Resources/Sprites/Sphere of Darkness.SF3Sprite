@@ -13,34 +13,22 @@
         "Pulsating 1": {
           "Directions": 1,
           "SpritesheetX": 0,
-          "SpritesheetY": 0,
-          "Hashes": [
-            "9a90cd83485ecc3cceed779838a3def5"
-          ]
+          "SpritesheetY": 0
         },
         "Pulsating 2": {
           "Directions": 1,
           "SpritesheetX": 64,
-          "SpritesheetY": 0,
-          "Hashes": [
-            "00833c8b54f5aea9f075992cbca12dd7"
-          ]
+          "SpritesheetY": 0
         },
         "Pulsating 3": {
           "Directions": 1,
           "SpritesheetX": 128,
-          "SpritesheetY": 0,
-          "Hashes": [
-            "171397912030ceb69041e16717c73d04"
-          ]
+          "SpritesheetY": 0
         },
         "Pulsating 4": {
           "Directions": 1,
           "SpritesheetX": 192,
-          "SpritesheetY": 0,
-          "Hashes": [
-            "20ca0d72613d2710a8f951e83bb379eb"
-          ]
+          "SpritesheetY": 0
         }
       },
       "AnimationByDirections": {

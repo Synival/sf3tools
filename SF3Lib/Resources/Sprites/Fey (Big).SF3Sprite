@@ -13,58 +13,37 @@
         "Idle 1": {
           "Directions": 1,
           "SpritesheetX": 0,
-          "SpritesheetY": 0,
-          "Hashes": [
-            "7518dfa9d370eeda9eab3214edc332e2"
-          ]
+          "SpritesheetY": 0
         },
         "Idle 2": {
           "Directions": 1,
           "SpritesheetX": 128,
-          "SpritesheetY": 0,
-          "Hashes": [
-            "1145cb90d792cdac38b5ee1a0b45d8ac"
-          ]
+          "SpritesheetY": 0
         },
         "Shushing 1": {
           "Directions": 1,
           "SpritesheetX": 256,
-          "SpritesheetY": 0,
-          "Hashes": [
-            "e698d373477b10fae8220a7a88cfc04f"
-          ]
+          "SpritesheetY": 0
         },
         "Shushing 2": {
           "Directions": 1,
           "SpritesheetX": 384,
-          "SpritesheetY": 0,
-          "Hashes": [
-            "6feda109f65a38e197a790c7f1a1a2ca"
-          ]
+          "SpritesheetY": 0
         },
         "Shushing 3": {
           "Directions": 1,
           "SpritesheetX": 512,
-          "SpritesheetY": 0,
-          "Hashes": [
-            "1d2088a2f48151ef3e254f07500243c4"
-          ]
+          "SpritesheetY": 0
         },
         "StartOrStopShushing 1": {
           "Directions": 1,
           "SpritesheetX": 640,
-          "SpritesheetY": 0,
-          "Hashes": [
-            "30b6fd0738438affe085b2bc255818e5"
-          ]
+          "SpritesheetY": 0
         },
         "StartOrStopShushing 2": {
           "Directions": 1,
           "SpritesheetX": 768,
-          "SpritesheetY": 0,
-          "Hashes": [
-            "f25e400b93bf23217667d46c761df327"
-          ]
+          "SpritesheetY": 0
         }
       },
       "AnimationByDirections": {

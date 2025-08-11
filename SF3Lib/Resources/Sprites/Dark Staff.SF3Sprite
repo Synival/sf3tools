@@ -13,13 +13,7 @@
         "Idle (Hovering) 1": {
           "Directions": 4,
           "SpritesheetX": 0,
-          "SpritesheetY": 0,
-          "Hashes": [
-            "6bf98ab6fc36dd62975056471d242683",
-            "9fd38fe7395ce394c216dfcbe3ebaffe",
-            "1d84c316f5ef7b4af71aaebb8e40ecff",
-            "b8926b1e52f76ce36230f46a4993df84"
-          ]
+          "SpritesheetY": 0
         }
       },
       "AnimationByDirections": {

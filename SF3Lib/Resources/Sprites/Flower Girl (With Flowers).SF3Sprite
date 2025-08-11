@@ -13,101 +13,47 @@
         "Holding Out Flowers 1": {
           "Directions": 4,
           "SpritesheetX": 0,
-          "SpritesheetY": 0,
-          "Hashes": [
-            "eb09eb0f073c5fd6c6752c97e5dc7ebd",
-            "090b406922505c9df2162b1cad12dc13",
-            "b3ebab4a848f1d7c91d6530bc413b872",
-            "086c4ba9ac1a9fe17f68b11b20957a0a"
-          ]
+          "SpritesheetY": 0
         },
         "Idle 1": {
           "Directions": 4,
           "SpritesheetX": 40,
-          "SpritesheetY": 0,
-          "Hashes": [
-            "2008a43517677d7b88abd98a02a71af1",
-            "38021244527f2d557f993c76f003215f",
-            "6fda94a77b6e2d286bf796bf92fbc88b",
-            "4f9dc815a09ff044eb7a3b99a982e30a"
-          ]
+          "SpritesheetY": 0
         },
         "Idle 2": {
           "Directions": 4,
           "SpritesheetX": 80,
-          "SpritesheetY": 0,
-          "Hashes": [
-            "0b601719737f20ea26fa440d8c759d1f",
-            "9a6902a385071de11c4297847785a22b",
-            "4c8af3cc605f79230dcfee6fc87278a5",
-            "43e3ce088ff0d2a395dbc7221a928c17"
-          ]
+          "SpritesheetY": 0
         },
         "Idle 3": {
           "Directions": 4,
           "SpritesheetX": 120,
-          "SpritesheetY": 0,
-          "Hashes": [
-            "99c1b7d7dea1addc1e2a3892d79c9aa2",
-            "b8d264b4a5a2d1d2a6a582df2eb8c0c4",
-            "868144cc0b128711a9f305e831a27db1",
-            "92dbd59ccb2b4234b0f58580232e6656"
-          ]
+          "SpritesheetY": 0
         },
         "Walking 1": {
           "Directions": 4,
           "SpritesheetX": 160,
-          "SpritesheetY": 0,
-          "Hashes": [
-            "ed99ff5c7832b568d789f9b2f323bd6b",
-            "f731776ba490cd5e5870a6587c7cbc33",
-            "3b5746a408dd330e8a8465879b4cd0f7",
-            "72365ec2a726bc60f03df528af2c8114"
-          ]
+          "SpritesheetY": 0
         },
         "Walking 2": {
           "Directions": 4,
           "SpritesheetX": 200,
-          "SpritesheetY": 0,
-          "Hashes": [
-            "dc1ce64e581aec398d882131f69753d9",
-            "6a4138cd75f9d4892c4ad6cb2c5b27bc",
-            "9aa0c948e9ef5a3d808fc0e8a7931466",
-            "ff96157fd71c8ae8557eaf3ca1cdbb5a"
-          ]
+          "SpritesheetY": 0
         },
         "Walking 3": {
           "Directions": 4,
           "SpritesheetX": 240,
-          "SpritesheetY": 0,
-          "Hashes": [
-            "ba22787502109005eb35ccbee3a6c21d",
-            "cad916026c90165126df2ce26c2009df",
-            "2e0a65a7e0d41d8d05d168b00bce0466",
-            "2076a767b9bc13688c6ab12f6cae4696"
-          ]
+          "SpritesheetY": 0
         },
         "Walking 4": {
           "Directions": 4,
           "SpritesheetX": 280,
-          "SpritesheetY": 0,
-          "Hashes": [
-            "72b9e7d9890aabbf0c90830664d35544",
-            "26d48d8de2e66e4fd521b0007bc6b095",
-            "c08c8fe53e01d689ce88cd3c5851b58c",
-            "d23afe7f051be7fd9ef45d0d081b834d"
-          ]
+          "SpritesheetY": 0
         },
         "Walking 5": {
           "Directions": 4,
           "SpritesheetX": 320,
-          "SpritesheetY": 0,
-          "Hashes": [
-            "eb385aaf0798028f2b84758fbc9439d7",
-            "644c8384a33a42e59ad41a437f77fe3c",
-            "8fe3759e6f481800949c548dee1e67df",
-            "ceffc13e75113a9884b6d81a122f95ed"
-          ]
+          "SpritesheetY": 0
         }
       },
       "AnimationByDirections": {

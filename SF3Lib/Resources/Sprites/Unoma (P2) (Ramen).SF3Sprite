@@ -13,68 +13,32 @@
         "SittingAndEating 1": {
           "Directions": 4,
           "SpritesheetX": 0,
-          "SpritesheetY": 0,
-          "Hashes": [
-            "a05c6c93717c589066dd095ab947b9ce",
-            "2ca69dc02b0ecc11ccda661428e55d81",
-            "091b8309809cd0d9f561b1881a9a3832",
-            "32d2b7ea23013020a44463851d84f26a"
-          ]
+          "SpritesheetY": 0
         },
         "SittingAndEating 2": {
           "Directions": 4,
           "SpritesheetX": 48,
-          "SpritesheetY": 0,
-          "Hashes": [
-            "d7d7a8f0308bd71dee8eee4c11132d74",
-            "7913c0c0eb08af40ca3ceb9b8649e2a4",
-            "453d570a264ad27d3f058f6c5b16d420",
-            "5f2aefaec9084f2aec5d7d4a986f3093"
-          ]
+          "SpritesheetY": 0
         },
         "SittingAndEating 3": {
           "Directions": 4,
           "SpritesheetX": 96,
-          "SpritesheetY": 0,
-          "Hashes": [
-            "6a58854649b558d2422bd7b4e5da756d",
-            "86937bdacb37a00059ea2f5850a16d6e",
-            "d92d07ccc4590523ced2a1524487cf4f",
-            "29104dfa0bedbb4853ca14ff7c499593"
-          ]
+          "SpritesheetY": 0
         },
         "SittingAndEating 4": {
           "Directions": 4,
           "SpritesheetX": 144,
-          "SpritesheetY": 0,
-          "Hashes": [
-            "37c2f9a7244b5b1a7c4f2ff81dcdbeb6",
-            "a03b5545291ce63c3dbf121de83ef06a",
-            "b6d568f258c5816117faac2f14b839c9",
-            "abea9cfd8b3aefaa58a946af58aa631f"
-          ]
+          "SpritesheetY": 0
         },
         "SittingAndEating 5": {
           "Directions": 4,
           "SpritesheetX": 192,
-          "SpritesheetY": 0,
-          "Hashes": [
-            "2e4961ac872d73186ebe3af030ff7246",
-            "630cf2b646bc2911ee78761318650ad3",
-            "f3c9011506e4440c5fa8881f1e9ba6f4",
-            "f4f0e4be863c438d65283a78ea51b54f"
-          ]
+          "SpritesheetY": 0
         },
         "SittingAndEating 6": {
           "Directions": 4,
           "SpritesheetX": 240,
-          "SpritesheetY": 0,
-          "Hashes": [
-            "9a61ca6ec88ab8d142a43940d0e1fc7e",
-            "1e2f942ab8446d255dc0f50897f79603",
-            "6f2cce07d9e126f5530f8a4aeae761d7",
-            "924703fa0c2aebcc3db3d00ea2b47cb7"
-          ]
+          "SpritesheetY": 0
         }
       },
       "AnimationByDirections": {

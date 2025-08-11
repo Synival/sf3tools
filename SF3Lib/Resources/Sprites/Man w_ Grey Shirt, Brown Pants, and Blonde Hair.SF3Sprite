@@ -13,38 +13,17 @@
         "Walking 1": {
           "Directions": 5,
           "SpritesheetX": 0,
-          "SpritesheetY": 0,
-          "Hashes": [
-            "47033204b2f79de9717de980fa73950d",
-            "7874a2d9bc479fed00ded5d24a7f2880",
-            "0eb07ef90aeba2dcf9e3fce049a6d17e",
-            "9c51859da045d2f84b18a1c273cb26ff",
-            "5761211bc6872825e169280c6c7347dd"
-          ]
+          "SpritesheetY": 0
         },
         "Walking 2": {
           "Directions": 5,
           "SpritesheetX": 40,
-          "SpritesheetY": 0,
-          "Hashes": [
-            "476a56c6b3f7770f799847c69acdeeb7",
-            "b2e3733835989ed537eb952e98777fef",
-            "00234036fec7b0ab605a8fa8fdce4ff8",
-            "fb2c9c7974ebf479d147dec03a515bc9",
-            "b1fef51641849e29a39f7e9c1e2d7285"
-          ]
+          "SpritesheetY": 0
         },
         "Walking 3": {
           "Directions": 5,
           "SpritesheetX": 80,
-          "SpritesheetY": 0,
-          "Hashes": [
-            "1d927c8d14e1e375b277f88fc0853aef",
-            "893f77545c79c36ae5b87eb62e58ecb8",
-            "ac5e55dca12cc6057baea464760bb59a",
-            "a1fc25c883dcfcea01646a1885304695",
-            "c69096e9d181b26303c32ead8c4d746f"
-          ]
+          "SpritesheetY": 0
         }
       },
       "AnimationByDirections": {
