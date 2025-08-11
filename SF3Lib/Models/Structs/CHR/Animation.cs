@@ -32,48 +32,6 @@ namespace SF3.Models.Structs.CHR {
 
             AnimationInfo = CHR_Utils.GetUniqueAnimationInfoByHash(Hash);
 
-            // Update animation info, in case it's out of date.
-            var firstCommandWithTexture = animationCommands?.FirstOrDefault(x => x.IsFrameCommand);
-            var firstFrameWithTexture = _framesWithTextures.FirstOrDefault();
-            AnimationInfo.SpriteName = SpriteName;
-            AnimationInfo.Width  = firstFrameWithTexture?.Width ?? 0;
-            AnimationInfo.Height = firstFrameWithTexture?.Height ?? 0;
-            AnimationInfo.Directions = firstCommandWithTexture?.Directions ?? 0;
-            AnimationInfo.FrameCommandCount = AnimationCommandTable.Length;
-            AnimationInfo.Duration = Duration;
-            AnimationInfo.FrameTexturesMissing = FrameTexturesMissing;
-
-            int texCount = 0;
-            var aniNameLower = AnimationName.ToLower();
-            var frameIdsModified = new HashSet<int>();
-
-            string[] GetCommandFrameHashes(AnimationCommand aniCommand) {
-                if (!aniCommand.IsFrameCommand)
-                    return null;
-
-                var frameID = aniCommand.Command;
-                var dirs = CHR_Utils.DirectionsToFrameCount(aniCommand.Directions);
-                var hashes = new string[dirs];
-                var maxFrames = FrameTable.Length;
-
-                for (int i = 0; i < dirs; i++) {
-                    var num = aniCommand.Command + i;
-                    if (num < maxFrames)
-                        hashes[i] = FrameTable[num].TextureHash;
-                }
-                return hashes;
-            }
-
-            AnimationInfo.AnimationCommands = AnimationCommandTable
-                .Select(x => {
-                    var isFrameCommand = x.IsFrameCommand;
-                    if (isFrameCommand)
-                        texCount++;
-                    return (isFrameCommand)
-                        ? new Sprites.AnimationCommand(GetCommandFrameHashes(x), x.Parameter)
-                        : new Sprites.AnimationCommand((SpriteAnimationCommandType) x.Command, x.Parameter);
-                }).ToArray();
-
             var uniqueFramesWithTextures = _framesWithTextures.Distinct().ToArray();
             TotalCompressedFramesSize = (uint) uniqueFramesWithTextures.Sum(x => x.TextureCompressedSize);
         }
@@ -121,29 +79,6 @@ namespace SF3.Models.Structs.CHR {
                     return "Explosion";
 
                 return distinctNames.FirstOrDefault(x => x.Value == highestCount).Key;
-#if false
-                // If the frames in this animation are shared by more than one named sprite, give them a proper name for known cases.
-
-                // Murasame and Waltz have some animations where his weapon is there, then suddenly not there.
-                // They have to go somewhere, so place them in Murasame (P1) / Waltz (U).
-                if (distinctNames.Length == 2 && distinctNames[0] == "Murasame (P1)" && distinctNames[1] == "Murasame (P1) (Weaponless)")
-                    return "Murasame (P1)";
-                else if (distinctNames.Length == 2 && distinctNames[0] == "Waltz (U)" && distinctNames[1] == "Waltz (U) (Weaponless)")
-                    return "Waltz (U)";
-
-                // Edmund's P1 sprites are special because some frames are shared with and without a weapon.
-                // (His cape is so big, the rendered frames are the same when his back is turned)
-                // Make some very specific corrections to include the duplicated frames in both sprite
-                // definitions.
-                if (distinctNames.Length == 2 && distinctNames[0] == "Edmund (P1)" && distinctNames[1] == "Edmund (P1) (Weaponless)")
-                    return _framesWithTextures.Any(x => x.SpriteName == "Edmund (P1)") ? "Edmund (P1)" : "Edmund (P1) (Weaponless)";
-
-                // Explosions have transparent frames sometimes.
-                if (distinctNames.Length == 2 && distinctNames[0] == "Explosion" && distinctNames[1] == "Transparency")
-                    return "Explosion";
-
-                return string.Join(" | ", distinctNames);
-#endif
             }
             set {
                 var lastSpriteName = SpriteName;

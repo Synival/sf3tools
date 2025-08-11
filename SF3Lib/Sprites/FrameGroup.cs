@@ -46,7 +46,6 @@ namespace SF3.Sprites {
                             var spritesheetX = (int) jObj["SpritesheetX"];
                             var spritesheetY = (int) jObj["SpritesheetY"];
                             var span         = jObj.TryGetValue("Span", out var spanOut) ? (int) spanOut : frameHeight;
-                            var hashes       = jObj["Hashes"].Select(x => (string) x).ToArray();
 
                             var frameDirs = SpriteUtils.SpritesheetFrameGroupDirections(directions);
                             Frames = frameDirs
@@ -54,7 +53,6 @@ namespace SF3.Sprites {
                                 .ToDictionary(x => x.Direction, x => new Frame() {
                                     SpritesheetX = spritesheetX,
                                     SpritesheetY = spritesheetY + (x.Index * span),
-                                    Hash = hashes[x.Index]
                                 });
                         }
                         else {
@@ -134,7 +132,6 @@ namespace SF3.Sprites {
                 };
                 if (span != frameHeight)
                     jObj.Add("Span", new JValue(span));
-                jObj.Add("Hashes", JToken.FromObject(directions.Select(x => Frames[x].Hash)));
 
                 return jObj;
             }

@@ -14,10 +14,8 @@ namespace SF3.Utils {
 
         public static UniqueAnimationDef GetUniqueAnimationInfoByHash(string hash) {
             LoadUniqueAnimationsByHashTable();
-            if (!s_uniqueAnimationsByHash.ContainsKey(hash.ToLower())) {
-                s_uniqueAnimationsByHash[hash] = new UniqueAnimationDef(hash, "Unknown", "Unknown", 0, 0, 0, 0, 0, 0,
-                    new AnimationCommand[0]);
-            }
+            if (!s_uniqueAnimationsByHash.ContainsKey(hash.ToLower()))
+                s_uniqueAnimationsByHash[hash] = new UniqueAnimationDef(hash, "Unknown", "Unknown", 0, 0, 0, 0, 0, 0);
 
             var animation = s_uniqueAnimationsByHash[hash];
             animation.RefCount++;
@@ -66,8 +64,7 @@ namespace SF3.Utils {
 
                             int missingFrames = int.TryParse(missingAttr, out var missingFramesOut) ? missingFramesOut : 0;
                             int duration = int.TryParse(durationAttr, out var durationOut) ? durationOut : 0;
-                            s_uniqueAnimationsByHash.Add(hash.ToLower(), new UniqueAnimationDef(hash, sprite, animation, width, height, directions, frames, duration, missingFrames,
-                                new AnimationCommand[0]));
+                            s_uniqueAnimationsByHash.Add(hash.ToLower(), new UniqueAnimationDef(hash, sprite, animation, width, height, directions, frames, duration, missingFrames));
                         }
                     }
                 }
@@ -159,55 +156,6 @@ namespace SF3.Utils {
             public SpriteDirectionCountType Directions;
             public ITexture Image;
             public int FramesMissing;
-        }
-
-        public static string CreateAnimationHash(SpriteDirectionCountType directions, Animation animation, Dictionary<string, FrameGroup> frameGroups, Dictionary<string, ITexture> texturesByHash) {
-            SpriteDirectionCountType currentDirections = directions;
-
-            var hashInfos = animation.AnimationCommands
-                .Select(x => {
-                    var frameCount = DirectionsToFrameCount(currentDirections);
-                    var frames = (!x.HasFrame)
-                        ? null
-                        : (x.FrameGroup != null)
-                        ? Enumerable.Range(0, frameCount)
-                            .Select(y => FrameNumberToSpriteDir(frameCount, y))
-                            .Select(y => frameGroups[x.FrameGroup].Frames.TryGetValue(y, out var frame) ? frame : null)
-                            .ToArray()
-                        : (x.FramesByDirection != null)
-                        ? Enumerable.Range(0, frameCount)
-                            .Select(y => FrameNumberToSpriteDir(frameCount, y))
-                            .Select(y => x.FramesByDirection.TryGetValue(y, out var frame) ? frameGroups[frame.FrameGroup].Frames[frame.Direction] : null)
-                            .ToArray()
-                        : null;
-
-                    if (x.Command == SpriteAnimationCommandType.SetDirectionCount)
-                        currentDirections = (SpriteDirectionCountType) x.Parameter;
-
-                    return new AnimationHashCommand() {
-                        Command    = x.Command,
-                        Parameter  = x.Parameter,
-                        FrameID    = -1,
-                        Directions = currentDirections,
-                        Image      = StackedImageFromFrames(frames, texturesByHash),
-                        FramesMissing = frames?.Count(y => y == null) ?? 0
-                    };
-                })
-                .ToArray();
-
-            return CreateAnimationHash(hashInfos);
-        }
-
-        private static ITexture StackedImageFromFrames(Frame[] frames, Dictionary<string, ITexture> texturesByHash) {
-            if (frames == null)
-                return null;
-
-            var textures = frames
-                .Where(x => x != null && texturesByHash.ContainsKey(x.Hash))
-                .Select(x => texturesByHash[x.Hash])
-                .ToArray();
-
-            return TextureUtils.StackTextures(0, 0, 0, textures);
         }
 
         public static string CreateAnimationHash(Models.Structs.CHR.AnimationCommand[] animationCommands) {

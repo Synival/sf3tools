@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using SF3.ByteData;
 using SF3.Models.Structs.CHR;
 
@@ -28,6 +30,20 @@ namespace SF3.Models.Tables.CHR {
                 (rows, prevRow) => prevRow.TextureOffset != 0,
                 addEndModel: false
             );
+        }
+
+        /// <summary>
+        /// Fetches a set of sprite names used in this FrameTable, in order from most common to least common.
+        /// Can be used resolve ambiguous cases where there are multiple FrameDef's for a given hash.
+        /// </summary>
+        /// <returns>A HashSet containing the SpriteName of each element in the table, in order from most common to least common.</returns>
+        public HashSet<string> GetSingularFrameRefSpriteNames() {
+            return new HashSet<string>(this
+                .Select(x => x.FrameRefs.GetUniqueSpriteName())
+                .Where(x => x != null)
+                .GroupBy(x => x)
+                .OrderByDescending(x => x.Count())
+                .Select(x => x.First()));
         }
 
         public uint DataOffset { get; }

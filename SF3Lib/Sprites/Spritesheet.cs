@@ -88,16 +88,6 @@ namespace SF3.Sprites {
             return jObj;
         }
 
-        private Dictionary<SpriteDirectionCountType, AnimationSet> GetAnimationGroupsByDirections(UniqueAnimationDef[] animations) {
-            return animations
-                .Where(y => y.AnimationCommands != null && y.AnimationCommands.Length > 0)
-                .OrderBy(y => y.Width)
-                .ThenBy(y => y.Height)
-                .ThenBy(y => y.Directions)
-                .GroupBy(y => ((y.Width & 0xFFFF) << 24) + ((y.Height & 0xFFFF) << 8) + (byte) y.Directions)
-                .ToDictionary(y => y.First().Directions, y => new AnimationSet(y.ToArray()));
-        }
-
         public static string DimensionsToKey(int width, int height)
             => $"{width}x{height}";
 

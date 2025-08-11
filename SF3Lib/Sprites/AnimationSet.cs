@@ -8,12 +8,6 @@ namespace SF3.Sprites {
     public class AnimationSet : IJsonResource {
         public AnimationSet() { }
 
-        public AnimationSet(UniqueAnimationDef[] animations) {
-            AnimationsByName = animations
-                .OrderBy(x => x.AnimationName)
-                .ToDictionary(x => x.AnimationName, x => new Animation(x));
-        }
-
         /// <summary>
         /// Deserializes a JSON object of a AnimationSet.
         /// </summary>

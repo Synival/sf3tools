@@ -165,12 +165,7 @@ namespace SF3.Models.Structs.CHR {
 
             // Gather a list of unique sprite names. This will be used for resolving
             // frames whose image hashes are for more than one sprite.
-            var singularFrameRefSpriteNames = new HashSet<string>(FrameTable
-                .Select(x => x.FrameRefs.GetUniqueSpriteName())
-                .Where(x => x != null)
-                .GroupBy(x => x)
-                .OrderByDescending(x => x.Count())
-                .Select(x => x.First()));
+            var singularFrameRefSpriteNames = FrameTable.GetSingularFrameRefSpriteNames();
 
             // Go through each frame, building a set of CHR_SpriteFrameDef's.
             foreach (var frame in FrameTable) {

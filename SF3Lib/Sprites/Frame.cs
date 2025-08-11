@@ -37,7 +37,6 @@ namespace SF3.Sprites {
                 case JTokenType.Object:
                     try {
                         var jObj = (JObject) jToken;
-                        Hash         = jObj.TryGetValue("Hash",         out var hash)         ? ((string) hash)      : null;
                         SpritesheetX = jObj.TryGetValue("SpritesheetX", out var spritesheetX) ? ((int) spritesheetX) : -1;
                         SpritesheetY = jObj.TryGetValue("SpritesheetY", out var spritesheetY) ? ((int) spritesheetY) : -1;
                     }
@@ -56,7 +55,6 @@ namespace SF3.Sprites {
 
         public JToken ToJToken() {
             return new JObject() {
-                { "Hash", new JValue(Hash) },
                 { "SpritesheetX", new JValue(SpritesheetX) },
                 { "SpritesheetY", new JValue(SpritesheetY) },
             };
@@ -64,7 +62,6 @@ namespace SF3.Sprites {
 
         public override string ToString() => $"({SpritesheetX}, {SpritesheetY})";
 
-        public string Hash;
         public int SpritesheetX;
         public int SpritesheetY;
     }

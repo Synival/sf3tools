@@ -12,17 +12,22 @@ namespace SF3.Sprites {
     public class AnimationCommand : IJsonResource {
         public AnimationCommand() { }
 
-        public AnimationCommand(string[] frameHashes, int duration) {
-            FrameGroup        = null;
+        public AnimationCommand(string frameGroup, int duration) {
+            FrameGroup        = frameGroup;
             FramesByDirection = null;
-            FrameHashes       = frameHashes ?? new string[0];
+            Command           = SpriteAnimationCommandType.Frame;
+            Parameter         = duration;
+        }
+
+        public AnimationCommand(Dictionary<SpriteFrameDirection, AnimationCommandFrame> framesByDirection, int duration) {
+            FrameGroup        = null;
+            FramesByDirection = framesByDirection;
             Command           = SpriteAnimationCommandType.Frame;
             Parameter         = duration;
         }
 
         public AnimationCommand(SpriteAnimationCommandType command, int parameter) {
             FrameGroup  = null;
-            FrameHashes = (command == SpriteAnimationCommandType.Frame) ? new string[0] : null;
             Command     = command;
             Parameter   = parameter;
         }
@@ -115,17 +120,15 @@ namespace SF3.Sprites {
             return
                 (FrameGroup        != null) ? $"{FrameGroup}, {Parameter}" :
                 (FramesByDirection != null) ? string.Join("_", FramesByDirection.Select(x => $"{x.Value} ({x.Key})")) + $", {Parameter}" :
-                (FrameHashes       != null) ? string.Join("_", FrameHashes) + $", {Parameter}" :
                 $"{Command}_{Parameter}";
         }
 
         [JsonIgnore]
-        public bool HasFrame => Command == SpriteAnimationCommandType.Frame && (FrameGroup != null || FrameHashes != null || FramesByDirection != null);
+        public bool HasFrame => Command == SpriteAnimationCommandType.Frame && (FrameGroup != null || FramesByDirection != null);
 
         public bool HasFullFrame(int directions) {
             return (Command == SpriteAnimationCommandType.Frame) && (
                 FrameGroup != null ||
-                (FrameHashes != null && FrameHashes.Length == directions && FrameHashes.All(x => x != null)) ||
                 (FramesByDirection != null && FramesByDirection.Count == directions && Enumerable
                     .Range(0, directions)
                     .Select(x => CHR_Utils.FrameNumberToSpriteDir(directions, x))
@@ -136,7 +139,6 @@ namespace SF3.Sprites {
 
         public string FrameGroup;
         public Dictionary<SpriteFrameDirection, AnimationCommandFrame> FramesByDirection;
-        public string[] FrameHashes;
 
         [JsonConverter(typeof(StringEnumConverter))]
         public SpriteAnimationCommandType Command;

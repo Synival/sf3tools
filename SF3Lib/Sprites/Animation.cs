@@ -9,10 +9,6 @@ namespace SF3.Sprites {
     public class Animation : IJsonResource {
         public Animation() { }
 
-        public Animation(UniqueAnimationDef aniInfo) : this() {
-            AnimationCommands = aniInfo.AnimationCommands;
-        }
-
         /// <summary>
         /// Deserializes a JSON object of a Animation.
         /// </summary>

@@ -11,8 +11,7 @@ namespace SF3.Sprites {
             SpriteDirectionCountType directions,
             int frameCount,
             int duration,
-            int missingFrames,
-            AnimationCommand[] animationCommands
+            int missingFrames
         ) {
             AnimationHash        = animationHash;
             SpriteName           = spriteName;
@@ -23,7 +22,6 @@ namespace SF3.Sprites {
             FrameCommandCount    = frameCount;
             Duration             = duration;
             FrameTexturesMissing = missingFrames;
-            AnimationCommands    = animationCommands;
         }
 
         public override string ToString() => $"{SpriteName} ({Width}x{Height}x{Directions}).{AnimationName}";
@@ -37,7 +35,6 @@ namespace SF3.Sprites {
         public int FrameCommandCount;
         public int Duration;
         public int FrameTexturesMissing;
-        public AnimationCommand[] AnimationCommands;
         public int RefCount;
     }
 }
