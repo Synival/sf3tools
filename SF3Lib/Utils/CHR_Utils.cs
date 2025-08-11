@@ -11,7 +11,6 @@ using SF3.Types;
 namespace SF3.Utils {
     public static class CHR_Utils {
         private static Dictionary<string, UniqueAnimationDef> s_uniqueAnimationsByHash = null;
-        private static Dictionary<string, UniqueSpriteInfoDef> s_uniqueSpriteInfosByName = new Dictionary<string, UniqueSpriteInfoDef>();
 
         public static UniqueAnimationDef GetUniqueAnimationInfoByHash(string hash) {
             LoadUniqueAnimationsByHashTable();
@@ -152,16 +151,6 @@ namespace SF3.Utils {
                 default: return 1;
             }
         }
-
-        public static void AddSpriteHeaderInfo(string spriteName, int spriteId, byte verticalOffset, byte unknown0x08, byte collisionSize, float scale) {
-            if (!s_uniqueSpriteInfosByName.ContainsKey(spriteName))
-                s_uniqueSpriteInfosByName.Add(spriteName, new UniqueSpriteInfoDef());
-
-            var isCharacterSprite = spriteId < 60 && (spriteName.Contains("(U)") || spriteName.Contains("(P1)") || spriteName.Contains("(P2)"));
-            s_uniqueSpriteInfosByName[spriteName].AddInfo(spriteId, verticalOffset, unknown0x08, collisionSize, scale, isCharacterSprite);
-        }
-
-        public static Dictionary<string, UniqueSpriteInfoDef> GetUniqueSpriteInfos() => s_uniqueSpriteInfosByName;
 
         private class AnimationHashCommand {
             public SpriteAnimationCommandType Command;

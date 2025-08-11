@@ -77,12 +77,6 @@ namespace SF3.Models.Structs.CHR {
             AnimationTable = AnimationTable.Create(Data, $"Sprite{ID:D2}_{nameof(AnimationTable)}", Header.Directions, AnimationCommandTablesByIndex.Values.ToArray(),
                 FrameTable, $"Sprite{ID:D2}_");
 
-            var spriteNames = AnimationTable.Select(x => x.SpriteName).Distinct().ToArray();
-            foreach (var spriteName in spriteNames) {
-                var infoName = $"{spriteName} ({Header.Width}x{Header.Height})";
-                CHR_Utils.AddSpriteHeaderInfo(infoName, Header.SpriteID, Header.VerticalOffset, Header.Unknown0x08, Header.CollisionShadowDiameter, Header.Scale / 65536.0f);
-            }
-
             // Set the name of this sprite to the most common SpriteName used in FrameTable.
             var spriteNameCounts = FrameTable
                 .Select(x => x.SpriteName)
