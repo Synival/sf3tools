@@ -14,7 +14,7 @@ namespace CHRTool {
             "  Decompile a .CHR file into a .SF3CHR file:\n" +
             "    chrtool [GENERAL_OPTIONS]... decompile [OPTIONS]... CHR_file\n" +
             "  Extract spritesheet frames from .CHR and .CHP files:\n" +
-            "    chrtool [GENERAL_OPTIONS]... extract-sheets [OPTIONS]... game_data_dir\n" +
+            "    chrtool [GENERAL_OPTIONS]... extract-sheets [OPTIONS]... [game_data_dir/file]...\n" +
             "  Update the lookup table for frame and animation hashes in SF3Lib:\n" +
             "    chrtool [GENERAL_OPTIONS]... update-hash-lookups [OPTIONS]...\n";
 

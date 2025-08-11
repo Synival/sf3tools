@@ -20,13 +20,13 @@ namespace CHRTool {
             // (any extra options would go here.)
 
             // Fetch the directory with the game data for ripping spritesheets.
+            var gameDataFiles = args.Where(x => !x.StartsWith('-')).ToArray();
             if (args.Length == 0) {
                 Console.Error.WriteLine("Missing game data directory");
                 Console.Error.Write(Constants.ErrorUsageString);
                 return 1;
             }
-            var gameDataDir = args[0];
-            args = args[1..args.Length];
+            args = args.Where(x => x.StartsWith('-')).ToArray();
 
             // There shouldn't be any unrecognized arguments at this point.
             if (args.Length > 0) {
@@ -37,7 +37,10 @@ namespace CHRTool {
             }
 
             // It looks like we're ready to go!
-            Console.WriteLine($"Extracting spritesheet frames from path '{gameDataDir}'...");
+            Console.WriteLine($"Extracting spritesheet frames from files/paths(s):");
+            foreach (var gameDataFile in gameDataFiles)
+                Console.WriteLine($"  {gameDataFile}");
+
             Console.WriteLine("------------------------------------------------------------------------------");
             Console.WriteLine($"Sprite directory:        {spriteDir}");
             Console.WriteLine($"Spritesheet directory:   {spritesheetDir}");
@@ -50,24 +53,31 @@ namespace CHRTool {
                     Directory.CreateDirectory(spritesheetDir);
             }
             catch (Exception e) {
-                Console.Error.WriteLine($"  Couldn't get game data files from path '{gameDataDir}':");
+                Console.Error.WriteLine($"  Couldn't create spritesheet directory a '{spritesheetDir}':");
                 Console.Error.WriteLine($"    {e.GetType().Name}: {e.Message}");
                 return 1;
             }
 
             // Fetch the CHR and CHP files to extract frames from.
-            string[] files;
-            try {
-                files = Directory.GetFiles(gameDataDir, "*.CHR")
-                    .Concat(Directory.GetFiles(gameDataDir, "*.CHP"))
-                    .OrderBy(x => x)
-                    .ToArray();
+            var filesList = new List<string>();
+            foreach (var file in gameDataFiles) {
+                try {
+                    if (Directory.Exists(file)) {
+                        filesList.AddRange(Directory.GetFiles(file, "*.CHR")
+                            .Concat(Directory.GetFiles(file, "*.CHP"))
+                            .OrderBy(x => x)
+                        );
+                    }
+                    else
+                        filesList.Add(file);
+                }
+                catch (Exception e) {
+                    Console.Error.WriteLine($"  Couldn't get game data file or files at '{file}':");
+                    Console.Error.WriteLine($"    {e.GetType().Name}: {e.Message}");
+                    return 1;
+                }
             }
-            catch (Exception e) {
-                Console.Error.WriteLine($"  Couldn't get game data files from path '{gameDataDir}':");
-                Console.Error.WriteLine($"    {e.GetType().Name}: {e.Message}");
-                return 1;
-            }
+            var files = filesList.ToArray();
 
             // We don't care about the NameGetterContext or Scenario, since CHRs/CHP are all the same format,
             // and we don't care about any scenario-based resources. Just use Scenario 1.
@@ -90,6 +100,10 @@ namespace CHRTool {
                         var chpFile = CHP_File.Create(byteData, nameGetterContext, scenario);
                         foreach (var chrFile in chpFile.CHR_EntriesByOffset.Values)
                             framesAdded += ExtractFromCHR(chrFile, framesWritten);
+                    }
+                    else {
+                        Console.Error.WriteLine($"  Unrecognized extension for '{file}'");
+                        continue;
                     }
 
                     if (framesAdded > 0)
