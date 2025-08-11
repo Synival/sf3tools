@@ -208,7 +208,7 @@ namespace CHRTool {
                 try {
                     // We have to load the bitmap in this odd way to prevent exceptions caused by saving to the same file you loaded from...
                     // Pretty cool stuff.
-                    var bitmap = new Bitmap(Image.FromStream(new MemoryStream(File.ReadAllBytes(spritesheetImageFile))));
+                    var bitmap = new Bitmap(new MemoryStream(File.ReadAllBytes(spritesheetImageFile)));
                     loadedSpritesheets.Add(spritesheetImageFile, bitmap);
                     return bitmap;
                 }
