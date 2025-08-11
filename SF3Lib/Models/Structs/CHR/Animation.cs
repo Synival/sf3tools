@@ -93,13 +93,6 @@ namespace SF3.Models.Structs.CHR {
         [TableViewModelColumn(displayOrder: 0.1f, displayName: "Type", minWidth: 100)]
         public AnimationType AnimationType => (AnimationType) AnimationIndex;
 
-        private void RewriteFrameXML() {
-            var resourcePath = Path.Combine("..", "..", "..", "..", "SF3Lib", CommonLib.Utils.ResourceUtils.ResourceFile("SpriteFramesByHash.xml"));
-            using (var file = File.Open(resourcePath, FileMode.Create))
-                using (var writer = new StreamWriter(file))
-                    CHR_Utils.WriteUniqueFramesByHashXML(writer, false);
-        }
-
         private void RewriteAnimationXML() {
             var resourcePath = Path.Combine("..", "..", "..", "..", "SF3Lib", CommonLib.Utils.ResourceUtils.ResourceFile("SpriteAnimationsByHash.xml"));
             using (var file = File.Open(resourcePath, FileMode.Create))
@@ -162,7 +155,6 @@ namespace SF3.Models.Structs.CHR {
                         AnimationInfo.SpriteName = SpriteName;
                         RewriteAnimationXML();
                     }
-                    RewriteFrameXML();
 
                     // TODO: update appropriate SpriteDefs:
                     // 1) old sprite def (if it exists)

@@ -47,13 +47,6 @@ namespace SF3.Models.Structs.CHR {
             }
         }
 
-        private void RewriteFrameXML() {
-            var resourcePath = Path.Combine("..", "..", "..", "..", "SF3Lib", CommonLib.Utils.ResourceUtils.ResourceFile("SpriteFramesByHash.xml"));
-            using (var file = File.Open(resourcePath, FileMode.Create))
-                using (var writer = new StreamWriter(file))
-                    CHR_Utils.WriteUniqueFramesByHashXML(writer, false);
-        }
-
         private void RewriteAnimationXML() {
             var resourcePath = Path.Combine("..", "..", "..", "..", "SF3Lib", CommonLib.Utils.ResourceUtils.ResourceFile("SpriteAnimationsByHash.xml"));
             using (var file = File.Open(resourcePath, FileMode.Create))

@@ -10,7 +10,6 @@ using SF3.Types;
 
 namespace SF3.Utils {
     public static class CHR_Utils {
-        private static Dictionary<string, UniqueFrameDef> s_uniqueFramesByHash = null;
         private static Dictionary<string, UniqueAnimationDef> s_uniqueAnimationsByHash = null;
         private static Dictionary<string, UniqueSpriteInfoDef> s_uniqueSpriteInfosByName = new Dictionary<string, UniqueSpriteInfoDef>();
 
@@ -24,46 +23,6 @@ namespace SF3.Utils {
             var animation = s_uniqueAnimationsByHash[hash];
             animation.RefCount++;
             return animation;
-        }
-
-        private static void LoadUniqueFramesByHashTable() {
-            if (s_uniqueFramesByHash != null)
-                return;
-            s_uniqueFramesByHash = new Dictionary<string, UniqueFrameDef>();
-
-            using (var stream = new FileStream(CommonLib.Utils.ResourceUtils.ResourceFile("SpriteFramesByHash.xml"), FileMode.Open, FileAccess.Read)) {
-                var settings = new XmlReaderSettings {
-                    IgnoreComments = true,
-                    IgnoreWhitespace = true
-                };
-
-                var xml = XmlReader.Create(stream, settings);
-                _ = xml.Read();
-
-                var nameDict = new Dictionary<int, string>();
-                while (!xml.EOF) {
-                    _ = xml.Read();
-                    if (xml.HasAttributes) {
-                        var hash       = xml.GetAttribute("hash");
-                        var sprite     = xml.GetAttribute("sprite");
-                        var frameAttr  = xml.GetAttribute("frame");
-                        var widthAttr  = xml.GetAttribute("width");
-                        var heightAttr = xml.GetAttribute("height");
-                        var directionAttr = xml.GetAttribute("direction");
-
-                        if (hash == null || sprite == null || widthAttr == null || heightAttr == null)
-                            continue;
-
-                        int width, height;
-                        if (!int.TryParse(widthAttr, out width) || !int.TryParse(heightAttr, out height))
-                            continue;
-
-                        var frame = frameAttr ?? "";
-                        var direction = Enum.TryParse<SpriteFrameDirection>(directionAttr, out var directionOut) ? directionOut : SpriteFrameDirection.Unset;
-                        s_uniqueFramesByHash.Add(hash.ToLower(), new UniqueFrameDef(hash, sprite, width, height, frame, direction));
-                    }
-                }
-            }
         }
 
         private static void LoadUniqueAnimationsByHashTable() {
@@ -117,26 +76,6 @@ namespace SF3.Utils {
             catch {
                 // TDOO what to do here??
             }
-        }
-
-        public static void WriteUniqueFramesByHashXML(StreamWriter stream, bool onlyReferenced) {
-            var frameInfos = s_uniqueFramesByHash.Values
-                .Where(x => !onlyReferenced || x.RefCount > 0)
-                .OrderBy(x => x.SpriteName)
-                .ThenBy(x => x.Width)
-                .ThenBy(x => x.Height)
-                .ThenBy(x => x.FrameName)
-                .ThenBy(x => x.Direction)
-                .ThenBy(x => x.TextureHash)
-                .ToArray();
-
-            stream.NewLine = "\n";
-            stream.WriteLine("<?xml version=\"1.0\" encoding=\"utf-8\" ?>");
-            stream.WriteLine("<items>");
-            foreach (var fi in frameInfos)
-                stream.WriteLine($"    <item hash=\"{fi.TextureHash}\" sprite=\"{fi.SpriteName}\" width=\"{fi.Width}\" height=\"{fi.Height}\" frame=\"{fi.FrameName}\" direction=\"{fi.Direction}\" />");
-
-            stream.WriteLine("</items>");
         }
 
         public static void WriteUniqueAnimationsByHashXML(StreamWriter stream, bool onlyReferenced) {
