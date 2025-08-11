@@ -87,7 +87,7 @@ namespace CHRTool {
             var framesWritten = new HashSet<string>();
 
             foreach (var file in files) {
-                Console.Write($"Extracting sprites from '{Path.GetFileName(file)}'");
+                Console.Write($"Extracting frames from '{Path.GetFileName(file)}'");
                 var loadedSpritesheets = new Dictionary<string, Bitmap>();
                 try {
                     var bytes = File.ReadAllBytes(file);
