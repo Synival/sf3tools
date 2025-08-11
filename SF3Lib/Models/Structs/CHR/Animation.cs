@@ -22,7 +22,7 @@ namespace SF3.Models.Structs.CHR {
                 .SelectMany(x => {
                     var frames = new List<int>();
                     var frameID = x.Command;
-                    for (int i = 0; i < CHR_Utils.DirectionsToFrameCount(x.Directions); i++)
+                    for (int i = 0; i < x.Directions.GetAnimationFrameCount(); i++)
                         if (frameID + i < FrameTable.Length)
                             frames.Add(frameID + i);
                     return frames;
@@ -30,7 +30,7 @@ namespace SF3.Models.Structs.CHR {
                 .Select(x => FrameTable[x])
                 .ToArray();
 
-            AnimationInfo = CHR_Utils.GetUniqueAnimationInfoByHash(Hash);
+            AnimationInfo = SpriteResources.GetUniqueAnimationInfoByHash(Hash);
 
             var uniqueFramesWithTextures = _framesWithTextures.Distinct().ToArray();
             TotalCompressedFramesSize = (uint) uniqueFramesWithTextures.Sum(x => x.TextureCompressedSize);
@@ -56,7 +56,7 @@ namespace SF3.Models.Structs.CHR {
             using (var file = File.Open(resourcePath, FileMode.Create)) {
                 using (var writer = new StreamWriter(file)) {
                     writer.NewLine = "\n";
-                    CHR_Utils.WriteUniqueAnimationsByHashXML(writer, false);
+                    SpriteResources.WriteUniqueAnimationsByHashXML(writer, false);
                 }
             }
         }
@@ -143,7 +143,7 @@ namespace SF3.Models.Structs.CHR {
         public string Hash {
             get {
                 if (_hash == null)
-                    _hash = CHR_Utils.CreateAnimationHash(AnimationCommandTable.ToArray());
+                    _hash = SpriteResources.CreateAnimationHash(AnimationCommandTable.ToArray());
                 return _hash;
             }
         }

@@ -241,7 +241,7 @@ namespace SF3.Models.Structs.CHR {
         }
 
         private static bool AreExpectedFrameDirections(SpriteFrameDirection[] directions, int dirCount) {
-            var expectedDirections = CHR_Utils.GetCHR_FrameGroupDirections(dirCount);
+            var expectedDirections = CHR_Utils.GetFrameGroupDirections(dirCount);
             return Enumerable.SequenceEqual(directions, expectedDirections);
         }
 

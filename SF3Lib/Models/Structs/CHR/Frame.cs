@@ -52,7 +52,7 @@ namespace SF3.Models.Structs.CHR {
             using (var file = File.Open(resourcePath, FileMode.Create)) {
                 using (var writer = new StreamWriter(file)) {
                     writer.NewLine = "\n";
-                    CHR_Utils.WriteUniqueAnimationsByHashXML(writer, false);
+                    SpriteResources.WriteUniqueAnimationsByHashXML(writer, false);
                 }
             }
         }

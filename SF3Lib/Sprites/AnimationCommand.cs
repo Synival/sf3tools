@@ -131,7 +131,7 @@ namespace SF3.Sprites {
                 FrameGroup != null ||
                 (FramesByDirection != null && FramesByDirection.Count == directions && Enumerable
                     .Range(0, directions)
-                    .Select(x => CHR_Utils.FrameNumberToSpriteDir(directions, x))
+                    .Select(x => CHR_Utils.GetFrameGroupDirection(directions, x))
                     .All(x => FramesByDirection.ContainsKey(x))
                 )
             );

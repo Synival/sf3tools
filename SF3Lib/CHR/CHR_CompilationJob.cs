@@ -272,7 +272,7 @@ namespace SF3.CHR {
             var aniFrameKeyPrefix  = $"{spriteName} ({Spritesheet.DimensionsToKey(frameWidth, frameHeight)})";
             var spriteInfo         = GetSpriteInfo(_currentSpriteIndex);
             var spriteAniFrameKeys = spriteInfo.Frames.Select(x => x.AniFrameKey).ToArray();
-            var frameDirections    = CHR_Utils.GetCHR_FrameGroupDirections(directions);
+            var frameDirections    = directions.ToAnimationFrameDirections();
 
             // Write an empty animation entry for deliberately null animations, missing animations, or empty animations.
             if (animation == null || animation.AnimationCommands == null) {
@@ -286,7 +286,7 @@ namespace SF3.CHR {
 
                 // The 'SetDirectionCount' command (0xF1) updates the number of frames in our key from now on.
                 if (aniCommand.Command == SpriteAnimationCommandType.SetDirectionCount)
-                    frameDirections = CHR_Utils.GetCHR_FrameGroupDirections((SpriteDirectionCountType) aniCommand.Parameter);
+                    frameDirections = ((SpriteDirectionCountType) aniCommand.Parameter).ToAnimationFrameDirections();
                 // If this is a frame, we need to generate a key that will be used to locate a FrameID later.
                 else if (aniCommand.Command == SpriteAnimationCommandType.Frame) {
                     // Get the FrameKey and AniFrameKey for each direction in this animation frame command.
@@ -416,14 +416,14 @@ namespace SF3.CHR {
             var aniFrameKeyPrefix   = $"{spriteName} ({Spritesheet.DimensionsToKey(frameWidth, frameHeight)})";
             var spriteInfo          = GetSpriteInfo(_currentSpriteIndex);
             var spriteAniFrameKeys  = spriteInfo.Frames.Select(x => x.AniFrameKey).ToArray();
-            var frameDirections     = CHR_Utils.GetCHR_FrameGroupDirections(directions);
+            var frameDirections     = directions.ToAnimationFrameDirections();
 
             // Add all commands for the sprite.
             var missingAnimationFrames = new List<MissingAnimationFrame>();
             foreach (var aniCommand in animation.AnimationCommands) {
                 // The 'SetDirectionCount' command (0xF1) updates the number of frames in our key from now on.
                 if (aniCommand.Command == SpriteAnimationCommandType.SetDirectionCount)
-                    frameDirections = CHR_Utils.GetCHR_FrameGroupDirections((SpriteDirectionCountType) aniCommand.Parameter);
+                    frameDirections = ((SpriteDirectionCountType) aniCommand.Parameter).ToAnimationFrameDirections();
 
                 // The only other command we caer about in this loop is for frames.
                 if (aniCommand.Command != SpriteAnimationCommandType.Frame)

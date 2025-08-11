@@ -86,7 +86,7 @@ namespace SF3.CHR {
         /// <param name="directions">The set of Frame directions if 'Frames' does not exist.</param>
         /// <returns>A non-null array of Frame's.</returns>
         public Frame[] GetFrames(SpriteDirectionCountType directions) {
-            return Frames ?? CHR_Utils.GetCHR_FrameGroupDirections(directions)
+            return Frames ?? directions.ToAnimationFrameDirections()
                 .Select(x => new Frame() { Direction = x })
                 .ToArray();
         }

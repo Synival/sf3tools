@@ -1,5 +1,6 @@
 ﻿using System;
 using Newtonsoft.Json.Linq;
+using SF3.Utils;
 
 namespace SF3.Types {
     public enum SpriteDirectionCountType {
@@ -27,5 +28,19 @@ namespace SF3.Types {
 
         public static SpriteDirectionCountType FromJToken(JToken jToken)
             => (jToken.Type == JTokenType.Integer) ? (SpriteDirectionCountType) ((int) jToken) : jToken.ToObject<SpriteDirectionCountType>();
+
+        public static int GetAnimationFrameCount(this SpriteDirectionCountType directions) {
+            switch (directions) {
+                case SpriteDirectionCountType.TwoNoFlip: return 2;
+                case SpriteDirectionCountType.Four:      return 4;
+                case SpriteDirectionCountType.Five:      return 5;
+                case SpriteDirectionCountType.Six:       return 6;
+                case SpriteDirectionCountType.Eight:     return 8;
+                default: return 1;
+            }
+        }
+
+        public static SpriteFrameDirection[] ToAnimationFrameDirections(this SpriteDirectionCountType directions)
+            => CHR_Utils.GetFrameGroupDirections(directions.GetAnimationFrameCount());
     }
 }

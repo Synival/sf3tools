@@ -63,7 +63,7 @@ namespace SF3.Models.Structs.CHR {
         public SpriteDirectionCountType Directions { get; }
 
         [TableViewModelColumn(addressField: null, displayOrder: 2.5f)]
-        public int FramesMissing => IsFrameCommand ? (CHR_Utils.DirectionsToFrameCount(Directions) - GetFrameCount(Directions)) : 0;
+        public int FramesMissing => IsFrameCommand ? (Directions.GetAnimationFrameCount() - GetFrameCount(Directions)) : 0;
 
         [TableViewModelColumn(displayOrder: 3)]
         public bool IsEndingCommand {
@@ -89,7 +89,7 @@ namespace SF3.Models.Structs.CHR {
             if (FrameTable == null || !IsFrameCommand)
                 return 0;
 
-            int expectedFrameCount = CHR_Utils.DirectionsToFrameCount(directions);
+            int expectedFrameCount = directions.GetAnimationFrameCount();
             return Math.Max(0, Math.Min(FrameTable.Length - Command, expectedFrameCount));
         }
 
@@ -98,7 +98,7 @@ namespace SF3.Models.Structs.CHR {
             if (FrameTable == null || !IsFrameCommand)
                 return null;
 
-            int frameCount = CHR_Utils.DirectionsToFrameCount(directions);
+            int frameCount = directions.GetAnimationFrameCount();
             if (_texturesByFrameCount.TryGetValue(frameCount, out var tex))
                 return tex;
 

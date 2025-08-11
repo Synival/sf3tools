@@ -1,7 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Security.Cryptography;
+using System.Text;
+using System.Xml;
 using Newtonsoft.Json;
 using SF3.Extensions;
 using SF3.Types;
@@ -13,6 +17,7 @@ namespace SF3.Sprites {
         private static Dictionary<string, SpriteDef> s_spriteDefs = new Dictionary<string, SpriteDef>();
         private static HashSet<string> s_spriteDefFilesLoaded = new HashSet<string>();
         private static Dictionary<string, FrameHashLookupSet> s_frameHashLookups = new Dictionary<string, FrameHashLookupSet>();
+        private static Dictionary<string, UniqueAnimationDef> s_uniqueAnimationsByHash = null;
 
         private static bool s_frameHashLookupsLoaded = false;
 
@@ -275,6 +280,146 @@ namespace SF3.Sprites {
             if (!s_frameHashLookupsLoaded)
                 LoadFrameHashLookups();
             return s_frameHashLookups.TryGetValue(imageHash, out var frames) ? frames : new FrameHashLookupSet(imageHash);
+        }
+
+        public static UniqueAnimationDef GetUniqueAnimationInfoByHash(string hash) {
+            LoadUniqueAnimationsByHashTable();
+            if (!s_uniqueAnimationsByHash.ContainsKey(hash.ToLower()))
+                s_uniqueAnimationsByHash[hash] = new UniqueAnimationDef(hash, "Unknown", "Unknown", 0, 0, 0, 0, 0, 0);
+
+            var animation = s_uniqueAnimationsByHash[hash];
+            animation.RefCount++;
+            return animation;
+        }
+
+        private static void LoadUniqueAnimationsByHashTable() {
+            if (s_uniqueAnimationsByHash != null)
+                return;
+            s_uniqueAnimationsByHash = new Dictionary<string, UniqueAnimationDef>();
+
+            try {
+                using (var stream = new FileStream(ResourceFile("SpriteAnimationsByHash.xml"), FileMode.Open, FileAccess.Read)) {
+                    var settings = new XmlReaderSettings {
+                        IgnoreComments = true,
+                        IgnoreWhitespace = true
+                    };
+
+                    var xml = XmlReader.Create(stream, settings);
+                    _ = xml.Read();
+
+                    var nameDict = new Dictionary<int, string>();
+                    while (!xml.EOF) {
+                        _ = xml.Read();
+                        if (xml.HasAttributes) {
+                            var hash           = xml.GetAttribute("hash");
+                            var sprite         = xml.GetAttribute("sprite");
+                            var animation      = xml.GetAttribute("animation");
+                            var widthAttr      = xml.GetAttribute("width");
+                            var heightAttr     = xml.GetAttribute("height");
+                            var directionsAttr = xml.GetAttribute("directions");
+                            var framesAttr     = xml.GetAttribute("frames");
+                            var durationAttr   = xml.GetAttribute("duration");
+                            var missingAttr    = xml.GetAttribute("missingFrames");
+
+                            if (hash == null || sprite == null || animation == null || widthAttr == null || heightAttr == null || directionsAttr == null)
+                                continue;
+
+                            int width, height, frames, directionsInt;
+                            if (!int.TryParse(widthAttr, out width) || !int.TryParse(heightAttr, out height) || !int.TryParse(directionsAttr, out directionsInt) || !int.TryParse(framesAttr, out frames))
+                                continue;
+                            var directions = (SpriteDirectionCountType) directionsInt;
+
+                            if (sprite == "")
+                                sprite = "None";
+
+                            int missingFrames = int.TryParse(missingAttr, out var missingFramesOut) ? missingFramesOut : 0;
+                            int duration = int.TryParse(durationAttr, out var durationOut) ? durationOut : 0;
+                            s_uniqueAnimationsByHash.Add(hash.ToLower(), new UniqueAnimationDef(hash, sprite, animation, width, height, directions, frames, duration, missingFrames));
+                        }
+                    }
+                }
+            }
+            catch {
+                // TDOO what to do here??
+            }
+        }
+
+        public static void WriteUniqueAnimationsByHashXML(StreamWriter stream, bool onlyReferenced) {
+            var animationInfos = s_uniqueAnimationsByHash.Values
+                .Where(x => !onlyReferenced || x.RefCount > 0)
+                .OrderBy(x => x.SpriteName)
+                .ThenBy(x => x.Width)
+                .ThenBy(x => x.Height)
+                .ThenBy(x => x.AnimationName)
+                .ThenBy(x => x.Directions)
+                .ThenBy(x => x.FrameCommandCount)
+                .ThenBy(x => x.Duration)
+                .ThenBy(x => x.FrameTexturesMissing)
+                .ThenBy(x => x.AnimationHash)
+                .ToArray();
+
+            stream.NewLine = "\n";
+            stream.WriteLine("<?xml version=\"1.0\" encoding=\"utf-8\" ?>");
+            stream.WriteLine("<items>");
+            foreach (var ai in animationInfos) {
+                var spriteName = (ai.SpriteName == "") ? "None" : ai.SpriteName;
+                var missingFramesStr = (ai.FrameTexturesMissing == 0) ? "" : $" missingFrames=\"{ai.FrameTexturesMissing}\"";
+                stream.WriteLine($"    <item hash=\"{ai.AnimationHash}\" sprite=\"{spriteName}\" animation=\"{ai.AnimationName}\" width=\"{ai.Width}\" height=\"{ai.Height}\" directions=\"{(int) ai.Directions}\" frames=\"{ai.FrameCommandCount}\" duration=\"{ai.Duration}\"{missingFramesStr} />");
+            }
+            stream.WriteLine("</items>");
+        }
+
+        private class AnimationHashCommand {
+            public SpriteAnimationCommandType Command;
+            public int Parameter;
+            public int FrameID;
+            public SpriteDirectionCountType Directions;
+            public ITexture Image;
+            public int FramesMissing;
+        }
+
+        public static string CreateAnimationHash(Models.Structs.CHR.AnimationCommand[] animationCommands) {
+            var hashInfos = animationCommands
+                .Select(x => new AnimationHashCommand() {
+                    Command    = x.CommandType,
+                    Parameter  = x.Parameter,
+                    FrameID    = x.IsFrameCommand ? x.Command : -1,
+                    Directions = x.Directions,
+                    Image      = (x.IsFrameCommand) ? x.GetTexture(x.Directions) : null,
+                    FramesMissing = x.FramesMissing
+                })
+                .ToArray();
+
+            return CreateAnimationHash(hashInfos);
+        }
+
+        private static string CreateAnimationHash(AnimationHashCommand[] animationHashCommands) {
+            // Build a unique hash string for this animation.
+            var hashStr = "";
+            foreach (var aniCommand in animationHashCommands) {
+                if (hashStr != "")
+                    hashStr += "_";
+
+                if (aniCommand.Command != SpriteAnimationCommandType.Frame) {
+                    var cmd   = aniCommand.Command;
+                    var param = aniCommand.Parameter;
+
+                    // Don't bother appending stops.
+                    if (cmd == SpriteAnimationCommandType.Stop)
+                        hashStr += "f2";
+                    else
+                        hashStr += $"{((int) cmd):x2},{aniCommand.Parameter:x2}";
+                }
+                else {
+                    var tex = aniCommand.Image;
+                    hashStr += (tex != null) ? $"{tex.Hash}_{aniCommand.Parameter:x2}" : $"{aniCommand.FrameID:x2},{aniCommand.Parameter:x2}";
+                    if (aniCommand.FramesMissing > 0)
+                        hashStr += $"_M{aniCommand.FramesMissing})";
+                }
+            }
+
+            using (var md5 = MD5.Create())
+                return BitConverter.ToString(md5.ComputeHash(Encoding.ASCII.GetBytes(hashStr))).Replace("-", "").ToLower();
         }
     }
 }
