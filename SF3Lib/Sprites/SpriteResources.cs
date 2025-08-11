@@ -100,16 +100,17 @@ namespace SF3.Sprites {
                     spriteDef = SpriteDef.FromJSON(File.ReadAllText(file));
 
                 s_spriteDefFilesLoaded.Add(fileWithoutExt);
-                if (!s_spriteDefs.ContainsKey(spriteDef.Name)) {
-                    s_spriteDefs.Add(spriteDef.Name, spriteDef);
-                    return spriteDef;
-                }
+                if (s_spriteDefs.ContainsKey(spriteDef.Name))
+                    return null;
+
+                s_spriteDefs.Add(spriteDef.Name, spriteDef);
+                return spriteDef;
             }
             catch {
                 // TODO: how to log this error?
+                s_spriteDefFilesLoaded.Add(fileWithoutExt);
+                return null;
             }
-
-            return null;
         }
 
         /// <summary>
