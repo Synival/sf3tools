@@ -2,7 +2,7 @@
 
 namespace CHRTool {
     public static class Constants {
-        public const string Version = "0.1";
+        public const string Version = "0.0.2";
 
         public const string VersionString =
             "CHRTool v" + Version + "\n";
@@ -48,8 +48,7 @@ namespace CHRTool {
             "  (none)\n" +
             "\n" +
             "'update-hash-lookups' Options:\n" +
-            "  (none)\n" +
-            "\n";
+            "  (none)\n";
 
         public static readonly Dictionary<string, CommandType> CommandKeywords = new() {
             { "compile",             CommandType.Compile },

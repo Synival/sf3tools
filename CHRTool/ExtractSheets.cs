@@ -13,6 +13,7 @@ using SF3.Sprites;
 using SF3.Types;
 using SF3.Extensions;
 using CommonLib.Imaging;
+using SF3;
 
 namespace CHRTool {
     public static class ExtractSheets {
@@ -92,25 +93,33 @@ namespace CHRTool {
                     var bytes = File.ReadAllBytes(file);
                     var byteData = new ByteData(new ByteArray(bytes));
 
-                    int framesAdded = 0;
+                    // Gather the frame refs and textures from either the CHR or CHP file
+                    ExtractInfo[] extractInfos;
                     if (file.ToLower().EndsWith(".chr")) {
                         var chrFile = CHR_File.Create(byteData, nameGetterContext, scenario);
-                        framesAdded = ExtractFromCHR(chrFile, framesWritten, loadedSpritesheets);
+                        extractInfos = GetExtractInfos(chrFile);
                     }
                     else if (file.ToLower().EndsWith(".chp")) {
                         var chpFile = CHP_File.Create(byteData, nameGetterContext, scenario);
-                        foreach (var chrFile in chpFile.CHR_EntriesByOffset.Values)
-                            framesAdded += ExtractFromCHR(chrFile, framesWritten, loadedSpritesheets);
+                        extractInfos = GetExtractInfos(chpFile);
                     }
                     else {
                         Console.Error.WriteLine($"  Unrecognized extension for '{file}'");
                         continue;
                     }
 
-                    if (framesAdded > 0)
-                        Console.WriteLine($": {framesAdded} frame(s) extracted.");
+                    // Perform the extraction!
+                    var totalFrames = extractInfos.Length;
+                    var framesAdded = ExtractFrames(extractInfos, framesWritten, loadedSpritesheets);
+                    var framesSkipped = totalFrames - framesAdded;
+
+                    // Report
+                    if (framesSkipped > 0)
+                        Console.WriteLine($": {framesAdded} frame(s) extracted, {framesSkipped} frame(s) skipped");
+                    else if (framesAdded > 0)
+                        Console.WriteLine($": {framesAdded} frame(s) extracted");
                     else
-                        Console.WriteLine();
+                        Console.WriteLine($": no frames");
                 }
                 catch (Exception e) {
                     Console.WriteLine();
@@ -124,20 +133,46 @@ namespace CHRTool {
             return 0;
         }
 
-        private static int ExtractFromCHR(ICHR_File chrFile, HashSet<string> framesWritten, Dictionary<string, Bitmap> loadedSpritesheets) {
-            // Get a list of all frames referenced in this CHR file.
-            var frameRefs = chrFile.SpriteTable
+        private class ExtractInfo {
+            public string Hash;
+            public FrameHashLookup FrameRef;
+            public ITexture Texture;
+        }
+
+        private static ExtractInfo[] GetExtractInfos(ICHR_File chrFile) {
+            return chrFile.SpriteTable
                 .Where(x => x.FrameTable != null)
                 .SelectMany(x => x.FrameTable
-                    .Where(y => !framesWritten.Contains(y.TextureHash))
                     .SelectMany(y => y.FrameRefs
                         .Where(z => z.FrameGroupName != "(Unknown)")
-                        .Select(z => (FrameRef: z, Texture: y.Texture, Hash: y.TextureHash))
+                        .Select(z => new ExtractInfo() { Hash = y.TextureHash, FrameRef = z, Texture = y.Texture })
                     )
                 )
                 .GroupBy(x => x.FrameRef)
                 .Select(x => x.First())
-                .Distinct()
+                .ToArray();
+        }
+
+        private static ExtractInfo[] GetExtractInfos(ICHP_File chrFile) {
+            return chrFile.CHR_EntriesByOffset.Values
+                .SelectMany(w => w.SpriteTable
+                    .Where(x => x.FrameTable != null)
+                    .SelectMany(x => x.FrameTable
+                        .SelectMany(y => y.FrameRefs
+                            .Where(z => z.FrameGroupName != "(Unknown)")
+                            .Select(z => new ExtractInfo() { Hash = y.TextureHash, FrameRef = z, Texture = y.Texture })
+                        )
+                    )
+                )
+                .GroupBy(x => x.FrameRef)
+                .Select(x => x.First())
+                .ToArray();
+        }
+
+        private static int ExtractFrames(ExtractInfo[] extractInfos, HashSet<string> framesWritten, Dictionary<string, Bitmap> loadedSpritesheets) {
+            // Get a list of all frames referenced in this CHR file.
+            var frameRefs = extractInfos
+                .Where(x => !framesWritten.Contains(x.Hash))
                 .OrderBy(x => x.FrameRef.SpriteName)
                 .ThenBy(x => x.FrameRef.FrameWidth)
                 .ThenBy(x => x.FrameRef.FrameHeight)
