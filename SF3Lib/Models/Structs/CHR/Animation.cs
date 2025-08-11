@@ -53,9 +53,12 @@ namespace SF3.Models.Structs.CHR {
 
         private void RewriteAnimationXML() {
             var resourcePath = Path.Combine("..", "..", "..", "..", "SF3Lib", CommonLib.Utils.ResourceUtils.ResourceFile("SpriteAnimationsByHash.xml"));
-            using (var file = File.Open(resourcePath, FileMode.Create))
-                using (var writer = new StreamWriter(file))
+            using (var file = File.Open(resourcePath, FileMode.Create)) {
+                using (var writer = new StreamWriter(file)) {
+                    writer.NewLine = "\n";
                     CHR_Utils.WriteUniqueAnimationsByHashXML(writer, false);
+                }
+            }
         }
 
         [TableViewModelColumn(displayOrder: 0.5f, minWidth: 200)]

@@ -170,6 +170,7 @@ namespace SF3.Sprites {
             // 100,000 line long mess, so let's do some custom writing.
             using (var file = File.Open(FrameHashLookupsFile, FileMode.Create)) {
                 using (var stream = new StreamWriter(file)) {
+                    stream.NewLine = "\n";
                     stream.WriteLine("{");
 
                     var lookupKvArray = s_frameHashLookups
