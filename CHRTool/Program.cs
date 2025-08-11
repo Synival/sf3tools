@@ -108,7 +108,7 @@ namespace CHRTool {
                 case CommandType.Compile:
                     return Compile.Run(remainingArgs, spriteDir, spritesheetDir);
                 case CommandType.Decompile:
-                    return Decompile.Run(remainingArgs);
+                    return Decompile.Run(remainingArgs, spriteDir, spritesheetDir);
                 case CommandType.ExtractSheets:
                     return ExtractSheets.Run(remainingArgs, spriteDir, spritesheetDir, frameHashLookupsFile);
                 case CommandType.UpdateHashLookups:
