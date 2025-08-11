@@ -8,22 +8,6 @@ namespace SF3.Sprites {
     public class SpriteDef : IJsonResource {
         public SpriteDef() { }
 
-        public SpriteDef(string name, StandaloneFrameDef[] frames, UniqueAnimationDef[] animations) {
-            var frameKeys = frames.Select(x => Spritesheet.DimensionsToKey(x.Width, x.Height)).Distinct().ToArray();
-            var animationKeys = animations.Select(x => Spritesheet.DimensionsToKey(x.Width, x.Height)).Distinct().ToArray();
-            var keys = frameKeys.Concat(animationKeys).Distinct().OrderBy(x => x).ToArray();
-
-            Name = name;
-            Spritesheets = keys
-                .Select(x => Spritesheet.KeyToDimensions(x))
-                .OrderBy(x => x.Width)
-                .ThenBy(x => x.Height)
-                .ToDictionary(x => Spritesheet.DimensionsToKey(x.Width, x.Height), x => new Spritesheet(
-                    frames.Where(y => y.Width == x.Width && y.Height == x.Height).OrderBy(y => y.Name).ThenBy(y => y.Direction).ThenBy(y => y.Hash).ToArray(),
-                    animations.Where(y => y.Width == x.Width && y.Height == x.Height).OrderBy(y => y.Directions).ThenBy(y => y.AnimationName).ThenBy(y => y.AnimationHash).ToArray()
-                ));
-        }
-
         /// <summary>
         /// Deserializes a JSON object of a SpriteDef.
         /// </summary>

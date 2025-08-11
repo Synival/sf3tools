@@ -6,12 +6,6 @@ namespace SF3.Sprites {
     public class Frame : IJsonResource {
         public Frame() { }
 
-        public Frame(StandaloneFrameDef frame) {
-            Hash         = frame.Hash;
-            SpritesheetX = frame.SpritesheetX;
-            SpritesheetY = frame.SpritesheetY;
-        }
-
         /// <summary>
         /// Deserializes a JSON object of a Frame.
         /// </summary>

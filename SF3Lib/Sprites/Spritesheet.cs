@@ -9,22 +9,6 @@ namespace SF3.Sprites {
     public class Spritesheet {
         public Spritesheet() { }
 
-        public Spritesheet(StandaloneFrameDef[] frames, UniqueAnimationDef[] animations) {
-            FrameGroupsByName = frames
-                .GroupBy(x => x.Name)
-                .ToDictionary(x => x.Key, x => new FrameGroup(x.ToArray()));
-
-            AnimationSetsByDirections = GetAnimationGroupsByDirections(animations);
-        }
-
-        public Spritesheet(StandaloneFrameDef[] frames, Dictionary<SpriteDirectionCountType, AnimationSet> animationSetsByDirections) {
-            FrameGroupsByName = frames
-                .GroupBy(x => x.Name)
-                .ToDictionary(x => x.Key, x => new FrameGroup(x.ToArray()));
-
-            AnimationSetsByDirections = animationSetsByDirections;
-        }
-
         /// <summary>
         /// Deserializes a JSON object of a Spritesheet.
         /// </summary>
