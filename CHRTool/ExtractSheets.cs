@@ -36,7 +36,7 @@ namespace CHRTool {
                 return 1;
             }
 
-            // It looks like we're ready to go! Fetch the file data.
+            // It looks like we're ready to go!
             Console.WriteLine($"Extracting spritesheet frames from path '{gameDataDir}'...");
             Console.WriteLine("------------------------------------------------------------------------------");
             Console.WriteLine($"Sprite directory:        {spriteDir}");
@@ -44,6 +44,18 @@ namespace CHRTool {
             Console.WriteLine($"Frame hash lookups file: {frameHashLookupsFile}");
             Console.WriteLine("------------------------------------------------------------------------------");
 
+            // Try to create the spritesheet directory if it doesn't exist.
+            try {
+                if (!Directory.Exists(spritesheetDir))
+                    Directory.CreateDirectory(spritesheetDir);
+            }
+            catch (Exception e) {
+                Console.Error.WriteLine($"  Couldn't get game data files from path '{gameDataDir}':");
+                Console.Error.WriteLine($"    {e.GetType().Name}: {e.Message}");
+                return 1;
+            }
+
+            // Fetch the CHR and CHP files to extract frames from.
             string[] files;
             try {
                 files = Directory.GetFiles(gameDataDir, "*.CHR")
@@ -52,7 +64,6 @@ namespace CHRTool {
                     .ToArray();
             }
             catch (Exception e) {
-                Console.WriteLine("------------------------------------------------------------------------------");
                 Console.Error.WriteLine($"  Couldn't get game data files from path '{gameDataDir}':");
                 Console.Error.WriteLine($"    {e.GetType().Name}: {e.Message}");
                 return 1;
@@ -62,24 +73,32 @@ namespace CHRTool {
             // and we don't care about any scenario-based resources. Just use Scenario 1.
             var scenario = ScenarioType.Scenario1;
             var nameGetterContext = new NameGetterContext(scenario);
+            var framesWritten = new HashSet<string>();
 
             foreach (var file in files) {
-                Console.WriteLine($"Extracting sprites from '{Path.GetFileName(file)}'...");
+                Console.Write($"Extracting sprites from '{Path.GetFileName(file)}'");
                 try {
                     var bytes = File.ReadAllBytes(file);
                     var byteData = new ByteData(new ByteArray(bytes));
 
+                    int framesAdded = 0;
                     if (file.ToLower().EndsWith(".chr")) {
                         var chrFile = CHR_File.Create(byteData, nameGetterContext, scenario);
-                        ExtractFromCHR(chrFile);
+                        framesAdded = ExtractFromCHR(chrFile, framesWritten);
                     }
                     else if (file.ToLower().EndsWith(".chp")) {
                         var chpFile = CHP_File.Create(byteData, nameGetterContext, scenario);
                         foreach (var chrFile in chpFile.CHR_EntriesByOffset.Values)
-                            ExtractFromCHR(chrFile);
+                            framesAdded += ExtractFromCHR(chrFile, framesWritten);
                     }
+
+                    if (framesAdded > 0)
+                        Console.WriteLine($": {framesAdded} frame(s) extracted.");
+                    else
+                        Console.WriteLine();
                 }
                 catch (Exception e) {
+                    Console.WriteLine();
                     Console.Error.WriteLine($"  Couldn't extract sheets from '{file}':");
                     Console.Error.WriteLine($"    {e.GetType().Name}: {e.Message}");
                 }
@@ -90,12 +109,17 @@ namespace CHRTool {
             return 0;
         }
 
-        private static void ExtractFromCHR(ICHR_File chrFile) {
-            // TODO: we desperately need some try/catch blocks in here!
-
+        private static int ExtractFromCHR(ICHR_File chrFile, HashSet<string> framesWritten) {
             // Get a list of all frames referenced in this CHR file.
             var frameRefs = chrFile.SpriteTable
-                .SelectMany(x => x.FrameTable.SelectMany(y => y.FrameRefs.Select(z => (FrameRef: z, Texture: y.Texture))))
+                .Where(x => x.FrameTable != null)
+                .SelectMany(x => x.FrameTable
+                    .Where(y => !framesWritten.Contains(y.TextureHash))
+                    .SelectMany(y => y.FrameRefs
+                        .Where(z => z.FrameGroupName != "(Unknown)")
+                        .Select(z => (FrameRef: z, Texture: y.Texture, Hash: y.TextureHash))
+                    )
+                )
                 .GroupBy(x => x.FrameRef)
                 .Select(x => x.First())
                 .Distinct()
@@ -104,43 +128,79 @@ namespace CHRTool {
                 .ThenBy(x => x.FrameRef.FrameHeight)
                 .ThenBy(x => x.FrameRef.FrameGroupName)
                 .ThenBy(x => x.FrameRef.FrameDirection)
-                .ToArray();
+                .GroupBy(x => x.Hash)
+                .ToDictionary(x => x.Key, x => x.ToArray());
 
+            // Add frames to spritesheet bitmaps.
             var loadedSpritesheets = new Dictionary<string, Bitmap>();
-            foreach (var frameRefTex in frameRefs) {
-                var frameRef = frameRefTex.FrameRef;
-                var spriteDef = SpriteResources.GetSpriteDef(frameRef.SpriteName);
-                var spritesheet = spriteDef.Spritesheets[Spritesheet.DimensionsToKey(frameRef.FrameWidth, frameRef.FrameHeight)];
-                var frameGroup = spritesheet.FrameGroupsByName[frameRef.FrameGroupName];
-                var frame = frameGroup.Frames[frameRef.FrameDirection];
+            int framesAdded = 0;
+            foreach (var frameRefTexKv in frameRefs) {
+                var hash = frameRefTexKv.Key;
+                foreach (var frameRefTex in frameRefTexKv.Value) {
+                    try {
+                        var frameRef = frameRefTex.FrameRef;
+                        var spriteDef = SpriteResources.GetSpriteDef(frameRef.SpriteName);
+                        var spritesheet = spriteDef.Spritesheets[Spritesheet.DimensionsToKey(frameRef.FrameWidth, frameRef.FrameHeight)];
+                        var frameGroup = spritesheet.FrameGroupsByName[frameRef.FrameGroupName];
+                        var frame = frameGroup.Frames[frameRef.FrameDirection];
 
-                // TODO: Add this to the spritesheet!
-                var texture = frameRefTex.Texture;
-                var bitmap = LoadSpritesheet(loadedSpritesheets, spriteDef, frameRef.FrameWidth, frameRef.FrameHeight);
+                        if (frame.SpritesheetX < 0 || frame.SpritesheetY < 0)
+                            continue;
+
+                        // Add this to the spritesheet!
+                        var texture = frameRefTex.Texture;
+                        var bitmap = LoadSpritesheet(loadedSpritesheets, spriteDef, frameRef.FrameWidth, frameRef.FrameHeight);
+                        if (bitmap != null)
+                            bitmap.SetDataAt(frame.SpritesheetX, frame.SpritesheetY, texture.ImageData16Bit);
+                        framesAdded++;
+                    }
+                    catch (Exception e) {
+                        Console.Error.WriteLine($"  Couldn't write frame '{frameRefTex.FrameRef}':");
+                        Console.Error.WriteLine($"    {e.GetType().Name}: {e.Message}");
+                    }
+                }
+                framesWritten.Add(hash);
             }
+
+            // Save bitmaps.
+            foreach (var bitmapKv in loadedSpritesheets.Where(x => x.Value != null)) {
+                try {
+                    bitmapKv.Value.Save(bitmapKv.Key, ImageFormat.Png);
+                }
+                catch (Exception e) {
+                    Console.Error.WriteLine($"  Couldn't save bitmap '{bitmapKv.Key}':");
+                    Console.Error.WriteLine($"    {e.GetType().Name}: {e.Message}");
+                }
+            }
+
+            return framesAdded;
         }
 
         private static Bitmap LoadSpritesheet(Dictionary<string, Bitmap> loadedSpritesheets, SpriteDef spriteDef, int frameWidth, int frameHeight) {
             var spritesheetImageFile = SpriteResources.SpritesheetImageFile(spriteDef.Name, frameWidth, frameHeight);
             var spritesheet = spriteDef.Spritesheets[Spritesheet.DimensionsToKey(frameWidth, frameHeight)];
 
+            // If the spritesheet has already been loaded, return it.
             if (loadedSpritesheets.TryGetValue(spritesheetImageFile, out var bitmapOut))
                 return bitmapOut;
 
-            // If the spritesheet doesn't exist, create it, with placeholder red squares for spritesheets.
-            // (These will stay red if actual frames aren't found)
+            // If the spritesheet exists, fetch it.
             if (File.Exists(spritesheetImageFile)) {
-                Bitmap bitmap = null;
                 try {
-                    bitmap = new Bitmap(spritesheetImageFile);
+                    // We have to load the bitmap in this odd way to prevent exceptions caused by saving to the same file you loaded from...
+                    // Pretty cool stuff.
+                    var bitmap = new Bitmap(Image.FromStream(new MemoryStream(File.ReadAllBytes(spritesheetImageFile))));
+                    loadedSpritesheets.Add(spritesheetImageFile, bitmap);
+                    return bitmap;
                 }
                 catch {
                     loadedSpritesheets.Add(spritesheetImageFile, null);
                     throw;
                 }
-                loadedSpritesheets.Add(spritesheetImageFile, bitmap);
-                return bitmap;
             }
+
+            // If the spritesheet doesn't exist, create it, with placeholder red squares for spritesheets.
+            // (These will stay red if actual frames aren't found)
 
             // Get the dimensions of the spritesheet.
             var frameDimensions = spritesheet.FrameGroupsByName.Values
@@ -153,7 +213,7 @@ namespace CHRTool {
             var sheetHeight = frameDimensions.Max(x => x.Y) + frameHeight;
 
             // Create the empty spritesheet.
-            var newImage = new Bitmap(sheetWidth, sheetHeight, PixelFormat.Format16bppArgb1555);
+            var newImage = new Bitmap(sheetWidth, sheetHeight, PixelFormat.Format32bppArgb);
 
             // Build a red, non-filled rectangle with lines 3 pixels wide.
             var box = new ushort[frameWidth, frameHeight];
