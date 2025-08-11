@@ -62,9 +62,8 @@
         },
         "Nodding 2": {
           "Directions": 4,
-          "SpritesheetX": -1,
-          "SpritesheetY": -1,
-          "Span": 0,
+          "SpritesheetX": 160,
+          "SpritesheetY": 40,
           "Hashes": [
             "19aedce016d3f8f71e22f4ae4e6c8245",
             "ff6141210b08452c036d28ca16c50024",
@@ -74,7 +73,7 @@
         },
         "ShakingHead 1": {
           "Directions": 4,
-          "SpritesheetX": 160,
+          "SpritesheetX": 200,
           "SpritesheetY": 40,
           "Hashes": [
             "d8e2ff8c82be0857ee874a1ec5ecb317",
@@ -85,9 +84,8 @@
         },
         "ShakingHead 2": {
           "Directions": 4,
-          "SpritesheetX": -1,
-          "SpritesheetY": -1,
-          "Span": 0,
+          "SpritesheetX": 240,
+          "SpritesheetY": 40,
           "Hashes": [
             "22d7ecb114889f58a2e1ea8515f443ef",
             "267cf702aea924e0e16bbf06a5d9387c",
@@ -97,7 +95,7 @@
         },
         "Walking 1": {
           "Directions": 6,
-          "SpritesheetX": 200,
+          "SpritesheetX": 280,
           "SpritesheetY": 0,
           "Hashes": [
             "b6e31d2408de2483a4cc0ff70eefd007",
@@ -110,7 +108,7 @@
         },
         "Walking 2": {
           "Directions": 6,
-          "SpritesheetX": 240,
+          "SpritesheetX": 320,
           "SpritesheetY": 0,
           "Hashes": [
             "1fad3f990c60d8e2980bacfc5b4c2734",
@@ -123,7 +121,7 @@
         },
         "Walking 3": {
           "Directions": 6,
-          "SpritesheetX": 280,
+          "SpritesheetX": 360,
           "SpritesheetY": 0,
           "Hashes": [
             "3a2eea5bb3ff96c5249f97ffdfbba708",
@@ -136,7 +134,7 @@
         },
         "Walking 4": {
           "Directions": 6,
-          "SpritesheetX": 320,
+          "SpritesheetX": 400,
           "SpritesheetY": 0,
           "Hashes": [
             "9da617ff4240cf885e7747e2ad6cdcf1",
@@ -149,7 +147,7 @@
         },
         "Walking 5": {
           "Directions": 6,
-          "SpritesheetX": 360,
+          "SpritesheetX": 440,
           "SpritesheetY": 0,
           "Hashes": [
             "8f02aec801de1d2df994046e42517f6d",
@@ -221,6 +219,28 @@
               "Parameter": 1
             }
           ],
+          "Nodding (Alt, More Frames)": [
+            {
+              "Frame": "Walking 2",
+              "Duration": 2
+            },
+            {
+              "Frame": "Nodding 2",
+              "Duration": 2
+            },
+            {
+              "Frame": "Nodding 1",
+              "Duration": 2
+            },
+            {
+              "Frame": "Nodding 2",
+              "Duration": 2
+            },
+            {
+              "Command": "GotoAnimation",
+              "Parameter": 1
+            }
+          ],
           "ShakingHead": [
             {
               "Frame": "Walking 2",
@@ -237,6 +257,44 @@
             {
               "Frame": "ShakingHead 1",
               "Duration": 5
+            },
+            {
+              "Command": "GotoAnimation",
+              "Parameter": 1
+            }
+          ],
+          "ShakingHead (Alt, More Frames)": [
+            {
+              "Frame": "Walking 2",
+              "Duration": 2
+            },
+            {
+              "Frame": "ShakingHead 2",
+              "Duration": 2
+            },
+            {
+              "Frame": "ShakingHead 1",
+              "Duration": 2
+            },
+            {
+              "Frame": "ShakingHead 2",
+              "Duration": 2
+            },
+            {
+              "Frame": "Walking 2",
+              "Duration": 2
+            },
+            {
+              "Frame": "ShakingHead 2",
+              "Duration": 2
+            },
+            {
+              "Frame": "ShakingHead 1",
+              "Duration": 2
+            },
+            {
+              "Frame": "ShakingHead 2",
+              "Duration": 2
             },
             {
               "Command": "GotoAnimation",

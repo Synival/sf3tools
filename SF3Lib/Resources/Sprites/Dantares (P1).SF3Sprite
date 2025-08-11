@@ -366,6 +366,24 @@
               "Parameter": 1
             }
           ],
+          "Nodding (Weird Offsets)": [
+            {
+              "Frame": "Idle (Battle) 3",
+              "Duration": 4
+            },
+            {
+              "Frame": "Nodding (Field) 2",
+              "Duration": 4
+            },
+            {
+              "Frame": "Nodding (Field) 1",
+              "Duration": 4
+            },
+            {
+              "Command": "GotoAnimation",
+              "Parameter": 1
+            }
+          ],
           "ShakingHead (Battle, Weird)": [
             {
               "Frame": "ShakingHead (Battle) 1",
@@ -452,6 +470,36 @@
               "Parameter": 1
             }
           ],
+          "ShakingHead (Weird Offsets)": [
+            {
+              "Frame": "ShakingHead (Field) 1",
+              "Duration": 2
+            },
+            {
+              "Frame": "Idle (Battle) 3",
+              "Duration": 4
+            },
+            {
+              "Frame": "ShakingHead (Field) 2",
+              "Duration": 4
+            },
+            {
+              "Frame": "ShakingHead (Field) 1",
+              "Duration": 4
+            },
+            {
+              "Frame": "Idle (Battle) 3",
+              "Duration": 4
+            },
+            {
+              "Frame": "ShakingHead (Field) 2",
+              "Duration": 4
+            },
+            {
+              "Command": "GotoAnimation",
+              "Parameter": 1
+            }
+          ],
           "StillFrame (Battle 1)": [
             {
               "Frame": "Idle (Battle) 4",
@@ -498,6 +546,15 @@
               "Command": "Stop"
             }
           ],
+          "StillFrame (Idle Battle 3)": [
+            {
+              "Frame": "Idle (Battle) 3",
+              "Duration": 10
+            },
+            {
+              "Command": "Stop"
+            }
+          ],
           "StillThenIdle (Field, Forgot to Nod)": [
             {
               "Frame": "Walking 2",
@@ -524,6 +581,36 @@
             {
               "Frame": "Walking 2",
               "Duration": 12
+            },
+            {
+              "Command": "GotoCommandOffset",
+              "Parameter": 0
+            }
+          ],
+          "Walking (Weird Offsets)": [
+            {
+              "Frame": "Walking 1",
+              "Duration": 5
+            },
+            {
+              "Frame": "Idle (Battle) 3",
+              "Duration": 5
+            },
+            {
+              "Frame": "Walking 3",
+              "Duration": 5
+            },
+            {
+              "Frame": "Walking 4",
+              "Duration": 5
+            },
+            {
+              "Frame": "Idle (Battle) 3",
+              "Duration": 5
+            },
+            {
+              "Frame": "Walking 5",
+              "Duration": 5
             },
             {
               "Command": "GotoCommandOffset",

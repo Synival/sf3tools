@@ -1,18 +1,19 @@
 {
   "Name": "Justin (Unused P1)",
+  "Width": 48,
+  "Height": 40,
   "Spritesheets": {
     "48x40": {
-      "SpriteID": 0,
+      "SpriteID": 12,
       "VerticalOffset": 0,
-      "Unknown0x08": 0,
-      "CollisionSize": 0,
-      "Scale": 0.0,
+      "Unknown0x08": 20,
+      "CollisionSize": 40,
+      "Scale": 1.0499878,
       "FrameGroups": {
         "Idle (Battle) 1": {
           "Directions": 6,
-          "SpritesheetX": -1,
-          "SpritesheetY": -1,
-          "Span": 0,
+          "SpritesheetX": 0,
+          "SpritesheetY": 0,
           "Hashes": [
             "a5c34f2874492a7a118183add7d664dd",
             "224a78365d54faee55e0ddaef008d395",
@@ -24,9 +25,8 @@
         },
         "Idle (Battle) 2": {
           "Directions": 6,
-          "SpritesheetX": -1,
-          "SpritesheetY": -1,
-          "Span": 0,
+          "SpritesheetX": 48,
+          "SpritesheetY": 0,
           "Hashes": [
             "f2979de142e9a5d9ee49a70dedc345d7",
             "507f22156e0e3159bb4545872ccd4097",
@@ -38,9 +38,8 @@
         },
         "Idle (Battle) 3": {
           "Directions": 6,
-          "SpritesheetX": -1,
-          "SpritesheetY": -1,
-          "Span": 0,
+          "SpritesheetX": 96,
+          "SpritesheetY": 0,
           "Hashes": [
             "bbb9e27f8e972c6966126eefb2e45a8f",
             "4b202b3aab5c34d5a00bf6cc4b7cd9ce",
@@ -52,9 +51,8 @@
         },
         "Walking 1": {
           "Directions": 6,
-          "SpritesheetX": -1,
-          "SpritesheetY": -1,
-          "Span": 0,
+          "SpritesheetX": 144,
+          "SpritesheetY": 0,
           "Hashes": [
             "904d8665b9670a0d5a72f4d08d2a2f95",
             "6c154e3c8282dd8ffccfa699d5c5c4ec",
@@ -66,9 +64,8 @@
         },
         "Walking 2": {
           "Directions": 6,
-          "SpritesheetX": -1,
-          "SpritesheetY": -1,
-          "Span": 0,
+          "SpritesheetX": 192,
+          "SpritesheetY": 0,
           "Hashes": [
             "2505a2714473df58def742eec591184f",
             "fef3d6544ae62da51431dfee9ca35036",
@@ -80,9 +77,8 @@
         },
         "Walking 3": {
           "Directions": 6,
-          "SpritesheetX": -1,
-          "SpritesheetY": -1,
-          "Span": 0,
+          "SpritesheetX": 240,
+          "SpritesheetY": 0,
           "Hashes": [
             "e952319b054d741879bdf4b64cac3362",
             "6fbc411c763322e6c49061ad5920093d",
@@ -94,9 +90,8 @@
         },
         "Walking 4": {
           "Directions": 6,
-          "SpritesheetX": -1,
-          "SpritesheetY": -1,
-          "Span": 0,
+          "SpritesheetX": 288,
+          "SpritesheetY": 0,
           "Hashes": [
             "1d46dee69f3a2b2af2dfc0bce5a14042",
             "7e5651166d55fc4a79b3e1f3b74216cd",
@@ -108,9 +103,8 @@
         },
         "Walking 5": {
           "Directions": 6,
-          "SpritesheetX": -1,
-          "SpritesheetY": -1,
-          "Span": 0,
+          "SpritesheetX": 336,
+          "SpritesheetY": 0,
           "Hashes": [
             "17e83845c7c6a444f88a9932c682a2dc",
             "d99102114cf489d229416e76c27dc24c",
@@ -121,7 +115,104 @@
           ]
         }
       },
-      "AnimationByDirections": {}
+      "AnimationByDirections": {
+        "4": {
+          "Idle (Battle)": [
+            {
+              "Frame": "Idle (Battle) 1",
+              "Duration": 6
+            },
+            {
+              "Frame": "Idle (Battle) 2",
+              "Duration": 4
+            },
+            {
+              "Frame": "Idle (Battle) 3",
+              "Duration": 4
+            },
+            {
+              "Frame": "Idle (Battle) 2",
+              "Duration": 4
+            },
+            {
+              "Command": "GotoCommandOffset",
+              "Parameter": 0
+            }
+          ],
+          "StillFrame (Battle)": [
+            {
+              "Frame": "Idle (Battle) 3",
+              "Duration": 10
+            },
+            {
+              "Command": "Stop"
+            }
+          ]
+        },
+        "6": {
+          "Idle (Battle)": [
+            {
+              "Frame": "Idle (Battle) 1",
+              "Duration": 6
+            },
+            {
+              "Frame": "Idle (Battle) 2",
+              "Duration": 4
+            },
+            {
+              "Frame": "Idle (Battle) 3",
+              "Duration": 4
+            },
+            {
+              "Frame": "Idle (Battle) 2",
+              "Duration": 4
+            },
+            {
+              "Command": "GotoCommandOffset",
+              "Parameter": 0
+            }
+          ],
+          "StillFrame (Walking)": [
+            {
+              "Frame": "Walking 2",
+              "Duration": 10
+            },
+            {
+              "Command": "Stop"
+            }
+          ],
+          "Walking": [
+            {
+              "Frame": "Walking 1",
+              "Duration": 4
+            },
+            {
+              "Frame": "Walking 2",
+              "Duration": 4
+            },
+            {
+              "Frame": "Walking 3",
+              "Duration": 4
+            },
+            {
+              "Frame": "Walking 4",
+              "Duration": 4
+            },
+            {
+              "Frame": "Walking 2",
+              "Duration": 4
+            },
+            {
+              "Frame": "Walking 5",
+              "Duration": 4
+            },
+            {
+              "Command": "GotoCommandOffset",
+              "Parameter": 0
+            }
+          ]
+        }
+      }
     }
   }
 }

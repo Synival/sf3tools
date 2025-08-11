@@ -864,6 +864,28 @@
               "Parameter": 1
             }
           ],
+          "Nodding (Super Fast)": [
+            {
+              "Frame": "Idle 3",
+              "Duration": 2
+            },
+            {
+              "Frame": "Nodding 3",
+              "Duration": 2
+            },
+            {
+              "Frame": "Nodding 4",
+              "Duration": 2
+            },
+            {
+              "Frame": "Nodding 3",
+              "Duration": 2
+            },
+            {
+              "Command": "GotoAnimation",
+              "Parameter": 1
+            }
+          ],
           "Nodding (Twice, Quick 1)": [
             {
               "Frame": "Walking 2",
@@ -1140,6 +1162,44 @@
             },
             {
               "Frame": "Walking 2",
+              "Duration": 2
+            },
+            {
+              "Frame": "ShakingHead 3",
+              "Duration": 2
+            },
+            {
+              "Frame": "ShakingHead 4",
+              "Duration": 2
+            },
+            {
+              "Frame": "ShakingHead 3",
+              "Duration": 2
+            },
+            {
+              "Command": "GotoAnimation",
+              "Parameter": 1
+            }
+          ],
+          "ShakingHead (Weird, Fast)": [
+            {
+              "Frame": "Idle 3",
+              "Duration": 2
+            },
+            {
+              "Frame": "ShakingHead 3",
+              "Duration": 2
+            },
+            {
+              "Frame": "ShakingHead 4",
+              "Duration": 2
+            },
+            {
+              "Frame": "ShakingHead 3",
+              "Duration": 2
+            },
+            {
+              "Frame": "Idle 3",
               "Duration": 2
             },
             {

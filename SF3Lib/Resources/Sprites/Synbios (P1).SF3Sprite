@@ -423,6 +423,120 @@
           ]
         },
         "6": {
+          "Idle (Battle, Should be 6 Directions)": [
+            {
+              "Frame": {
+                "SSE": {
+                  "Frame": "Idle (Battle) 1",
+                  "Direction": "SSE"
+                },
+                "ESE": {
+                  "Frame": "Idle (Battle) 1",
+                  "Direction": "ESE"
+                },
+                "ENE": {
+                  "Frame": "Idle (Battle) 1",
+                  "Direction": "ENE"
+                },
+                "NNE": {
+                  "Frame": "Idle (Battle) 1",
+                  "Direction": "NNE"
+                },
+                "S": {
+                  "Frame": "Idle (Battle) 2",
+                  "Direction": "SSE"
+                },
+                "N": {
+                  "Frame": "Idle (Battle) 2",
+                  "Direction": "ESE"
+                }
+              },
+              "Duration": 6
+            },
+            {
+              "Frame": {
+                "SSE": {
+                  "Frame": "Idle (Battle) 2",
+                  "Direction": "SSE"
+                },
+                "ESE": {
+                  "Frame": "Idle (Battle) 2",
+                  "Direction": "ESE"
+                },
+                "ENE": {
+                  "Frame": "Idle (Battle) 2",
+                  "Direction": "ENE"
+                },
+                "NNE": {
+                  "Frame": "Idle (Battle) 2",
+                  "Direction": "NNE"
+                },
+                "S": {
+                  "Frame": "Idle (Battle) 3",
+                  "Direction": "SSE"
+                },
+                "N": {
+                  "Frame": "Idle (Battle) 3",
+                  "Direction": "ESE"
+                }
+              },
+              "Duration": 4
+            },
+            {
+              "Frame": {
+                "SSE": {
+                  "Frame": "Idle (Battle) 3",
+                  "Direction": "SSE"
+                },
+                "ESE": {
+                  "Frame": "Idle (Battle) 3",
+                  "Direction": "ESE"
+                },
+                "ENE": {
+                  "Frame": "Idle (Battle) 3",
+                  "Direction": "ENE"
+                },
+                "NNE": {
+                  "Frame": "Idle (Battle) 3",
+                  "Direction": "NNE"
+                }
+              },
+              "Duration": 4
+            },
+            {
+              "Frame": {
+                "SSE": {
+                  "Frame": "Idle (Battle) 2",
+                  "Direction": "SSE"
+                },
+                "ESE": {
+                  "Frame": "Idle (Battle) 2",
+                  "Direction": "ESE"
+                },
+                "ENE": {
+                  "Frame": "Idle (Battle) 2",
+                  "Direction": "ENE"
+                },
+                "NNE": {
+                  "Frame": "Idle (Battle) 2",
+                  "Direction": "NNE"
+                },
+                "S": {
+                  "Frame": "Idle (Battle) 3",
+                  "Direction": "SSE"
+                },
+                "N": {
+                  "Frame": "Idle (Battle) 3",
+                  "Direction": "ESE"
+                }
+              },
+              "Duration": 4
+            },
+            {
+              "Command": "GotoCommandOffset",
+              "Parameter": 0
+            }
+          ],
           "Idle (Battle)": [
             {
               "Frame": "Idle (Battle) 1",
@@ -513,6 +627,32 @@
             {
               "Command": "GotoAnimation",
               "Parameter": 1
+            }
+          ],
+          "StillFrame (Battle, Should be 4 Directions)": [
+            {
+              "Frame": {
+                "SSE": {
+                  "Frame": "Idle (Battle) 3",
+                  "Direction": "SSE"
+                },
+                "ESE": {
+                  "Frame": "Idle (Battle) 3",
+                  "Direction": "ESE"
+                },
+                "ENE": {
+                  "Frame": "Idle (Battle) 3",
+                  "Direction": "ENE"
+                },
+                "NNE": {
+                  "Frame": "Idle (Battle) 3",
+                  "Direction": "NNE"
+                }
+              },
+              "Duration": 10
+            },
+            {
+              "Command": "Stop"
             }
           ],
           "StillFrame (Field)": [

@@ -90,6 +90,28 @@
       },
       "AnimationByDirections": {
         "4": {
+          "Idle (Occasionally Raising Hand, Short)": [
+            {
+              "Frame": "Idle (Occasionally Raising Hand) 1",
+              "Duration": 4
+            },
+            {
+              "Frame": "Idle (Occasionally Raising Hand) 2",
+              "Duration": 5
+            },
+            {
+              "Frame": "Idle (Occasionally Raising Hand) 3",
+              "Duration": 30
+            },
+            {
+              "Frame": "Idle (Occasionally Raising Hand) 2",
+              "Duration": 5
+            },
+            {
+              "Command": "GotoCommandOffset",
+              "Parameter": 0
+            }
+          ],
           "Idle (Occasionally Raising Hand)": [
             {
               "Frame": "Idle (Occasionally Raising Hand) 1",

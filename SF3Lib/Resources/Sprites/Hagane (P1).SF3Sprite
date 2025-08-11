@@ -484,6 +484,15 @@
               "Parameter": 0
             }
           ],
+          "StillFrame (Battle)": [
+            {
+              "Frame": "Idle (Battle) 3",
+              "Duration": 10
+            },
+            {
+              "Command": "Stop"
+            }
+          ],
           "StillFrame (Walking)": [
             {
               "Frame": "Walking 2",

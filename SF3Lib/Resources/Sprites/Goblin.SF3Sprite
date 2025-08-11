@@ -167,6 +167,62 @@
               "Parameter": 0
             }
           ],
+          "Idle (Very Broken)": [
+            {
+              "Frame": "Idle 1",
+              "Duration": 6
+            },
+            {
+              "Frame": {
+                "SSE": {
+                  "Frame": "Idle 2",
+                  "Direction": "SSE"
+                },
+                "ESE": {
+                  "Frame": "Idle 2",
+                  "Direction": "NNE"
+                },
+                "ENE": {
+                  "Frame": "Idle 2",
+                  "Direction": "NNE"
+                },
+                "NNE": {
+                  "Frame": "Idle 2",
+                  "Direction": "NNE"
+                }
+              },
+              "Duration": 4
+            },
+            {
+              "Frame": "Idle 3",
+              "Duration": 4
+            },
+            {
+              "Frame": {
+                "SSE": {
+                  "Frame": "Idle 2",
+                  "Direction": "SSE"
+                },
+                "ESE": {
+                  "Frame": "Idle 2",
+                  "Direction": "NNE"
+                },
+                "ENE": {
+                  "Frame": "Idle 2",
+                  "Direction": "NNE"
+                },
+                "NNE": {
+                  "Frame": "Idle 2",
+                  "Direction": "NNE"
+                }
+              },
+              "Duration": 4
+            },
+            {
+              "Command": "GotoCommandOffset",
+              "Parameter": 0
+            }
+          ],
           "StillFrame (Idle)": [
             {
               "Frame": "Idle 3",
@@ -200,6 +256,53 @@
             },
             {
               "Frame": "Walking 4",
+              "Duration": 5
+            },
+            {
+              "Frame": "Walking 2",
+              "Duration": 5
+            },
+            {
+              "Frame": "Walking 5",
+              "Duration": 5
+            },
+            {
+              "Command": "GotoCommandOffset",
+              "Parameter": 0
+            }
+          ],
+          "Walking (Wrong ENE Frame)": [
+            {
+              "Frame": "Walking 1",
+              "Duration": 5
+            },
+            {
+              "Frame": "Walking 2",
+              "Duration": 5
+            },
+            {
+              "Frame": "Walking 3",
+              "Duration": 5
+            },
+            {
+              "Frame": {
+                "SSE": {
+                  "Frame": "Walking 4",
+                  "Direction": "SSE"
+                },
+                "ESE": {
+                  "Frame": "Walking 4",
+                  "Direction": "ESE"
+                },
+                "ENE": {
+                  "Frame": "Walking 4",
+                  "Direction": "NNE"
+                },
+                "NNE": {
+                  "Frame": "Walking 4",
+                  "Direction": "NNE"
+                }
+              },
               "Duration": 5
             },
             {
