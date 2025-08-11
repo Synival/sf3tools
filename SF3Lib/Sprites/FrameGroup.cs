@@ -10,10 +10,6 @@ namespace SF3.Sprites {
     public class FrameGroup {
         public FrameGroup() { }
 
-        public FrameGroup(UniqueFrameDef[] frames) {
-            Frames = frames.ToDictionary(x => x.Direction, x => new Frame(x));
-        }
-
         public FrameGroup(StandaloneFrameDef[] frames) {
             Frames = frames.ToDictionary(x => x.Direction, x => new Frame(x));
         }

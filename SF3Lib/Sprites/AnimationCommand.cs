@@ -111,56 +111,6 @@ namespace SF3.Sprites {
             return jObj;
         }
 
-        public bool ConvertFrameHashes(Dictionary<string, FrameGroup> frameGroups) {
-            if (frameGroups == null || FrameHashes == null)
-                return false;
-
-            var frameCount = FrameHashes.Length;
-            if (FrameHashes.All(x => x != null)) {
-                bool FrameGroupHasHashes(FrameGroup fg) {
-                    return FrameHashes
-                        .Select((x, i) => (Hash: x, Dir: CHR_Utils.FrameNumberToSpriteDir(frameCount, i)))
-                        .All(x => fg.Frames.ContainsKey(x.Dir) && fg.Frames[x.Dir].Hash == x.Hash);
-                }
-
-                var frameGroup = frameGroups
-                    .FirstOrDefault(x => FrameGroupHasHashes(x.Value));
-                if (frameGroup.Value != null) {
-                    FrameGroup        = frameGroup.Key;
-                    FramesByDirection = null;
-                    FrameHashes       = null;
-                    return true;
-                }
-            }
-
-            var allFramesByHash = frameGroups
-                .SelectMany(x => x.Value.Frames.Select(y => (
-                    Name:  x.Key,
-                    Dir:   y.Key,
-                    Frame: y.Value)))
-                .ToDictionary(x => x.Frame.Hash, x => x);
-
-            var frames = FrameHashes
-                .Select((x, i) => (Dir: CHR_Utils.FrameNumberToSpriteDir(frameCount, i), Hash: x))
-                .Where(x => x.Hash != null)
-                .ToDictionary(x => x.Dir, x => {
-                    var frame = allFramesByHash.TryGetValue(x.Hash, out var frameOut) ? frameOut : default;
-                    return (frame.Frame != null) ? new AnimationCommandFrame() { FrameGroup = frame.Name, Direction = frame.Dir } : null;
-                });
-
-            var nonNullFrameCount = FrameHashes.Count(x => x != null);
-            var foundFrameCount = frames.Count(x => x.Value != null);
-            if (foundFrameCount == nonNullFrameCount) {
-                FrameGroup        = null;
-                FramesByDirection = frames;
-                FrameHashes       = null;
-                return true;
-            }
-
-            // We should never reach here!
-            throw new InvalidOperationException("Animation has frames that don't exist!");
-        }
-
         public override string ToString() {
             return
                 (FrameGroup        != null) ? $"{FrameGroup}, {Parameter}" :

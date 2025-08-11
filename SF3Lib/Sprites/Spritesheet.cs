@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using CommonLib;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using SF3.Types;
@@ -9,14 +8,6 @@ using SF3.Types;
 namespace SF3.Sprites {
     public class Spritesheet {
         public Spritesheet() { }
-
-        public Spritesheet(UniqueFrameDef[] frames, UniqueAnimationDef[] animations) {
-            FrameGroupsByName = frames
-                .GroupBy(x => x.FrameName)
-                .ToDictionary(x => x.Key, x => new FrameGroup(x.ToArray()));
-
-            AnimationSetsByDirections = GetAnimationGroupsByDirections(animations);
-        }
 
         public Spritesheet(StandaloneFrameDef[] frames, UniqueAnimationDef[] animations) {
             FrameGroupsByName = frames

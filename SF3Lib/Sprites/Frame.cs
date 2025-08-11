@@ -6,12 +6,6 @@ namespace SF3.Sprites {
     public class Frame : IJsonResource {
         public Frame() { }
 
-        public Frame(UniqueFrameDef frame) {
-            Hash         = frame.TextureHash;
-            SpritesheetX = -1;
-            SpritesheetY = -1;
-        }
-
         public Frame(StandaloneFrameDef frame) {
             Hash         = frame.Hash;
             SpritesheetX = frame.SpritesheetX;
