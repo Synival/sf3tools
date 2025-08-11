@@ -87,6 +87,7 @@ namespace CHRTool {
 
             foreach (var file in files) {
                 Console.Write($"Extracting sprites from '{Path.GetFileName(file)}'");
+                var loadedSpritesheets = new Dictionary<string, Bitmap>();
                 try {
                     var bytes = File.ReadAllBytes(file);
                     var byteData = new ByteData(new ByteArray(bytes));
@@ -94,12 +95,12 @@ namespace CHRTool {
                     int framesAdded = 0;
                     if (file.ToLower().EndsWith(".chr")) {
                         var chrFile = CHR_File.Create(byteData, nameGetterContext, scenario);
-                        framesAdded = ExtractFromCHR(chrFile, framesWritten);
+                        framesAdded = ExtractFromCHR(chrFile, framesWritten, loadedSpritesheets);
                     }
                     else if (file.ToLower().EndsWith(".chp")) {
                         var chpFile = CHP_File.Create(byteData, nameGetterContext, scenario);
                         foreach (var chrFile in chpFile.CHR_EntriesByOffset.Values)
-                            framesAdded += ExtractFromCHR(chrFile, framesWritten);
+                            framesAdded += ExtractFromCHR(chrFile, framesWritten, loadedSpritesheets);
                     }
                     else {
                         Console.Error.WriteLine($"  Unrecognized extension for '{file}'");
@@ -123,7 +124,7 @@ namespace CHRTool {
             return 0;
         }
 
-        private static int ExtractFromCHR(ICHR_File chrFile, HashSet<string> framesWritten) {
+        private static int ExtractFromCHR(ICHR_File chrFile, HashSet<string> framesWritten, Dictionary<string, Bitmap> loadedSpritesheets) {
             // Get a list of all frames referenced in this CHR file.
             var frameRefs = chrFile.SpriteTable
                 .Where(x => x.FrameTable != null)
@@ -146,8 +147,8 @@ namespace CHRTool {
                 .ToDictionary(x => x.Key, x => x.ToArray());
 
             // Add frames to spritesheet bitmaps.
-            var loadedSpritesheets = new Dictionary<string, Bitmap>();
             int framesAdded = 0;
+            var updatedSpritesheets = new HashSet<string>();
             foreach (var frameRefTexKv in frameRefs) {
                 var hash = frameRefTexKv.Key;
                 foreach (var frameRefTex in frameRefTexKv.Value) {
@@ -164,9 +165,12 @@ namespace CHRTool {
                         // Add this to the spritesheet!
                         var texture = frameRefTex.Texture;
                         var bitmap = LoadSpritesheet(loadedSpritesheets, spriteDef, frameRef.FrameWidth, frameRef.FrameHeight);
-                        if (bitmap != null)
-                            bitmap.SetDataAt(frame.SpritesheetX, frame.SpritesheetY, texture.ImageData16Bit);
-                        framesAdded++;
+                        if (bitmap != null) {
+                            if (bitmap.SetDataAt(frame.SpritesheetX, frame.SpritesheetY, texture.ImageData16Bit)) {
+                                updatedSpritesheets.Add(SpriteResources.SpritesheetImageFile(spriteDef.Name, frameRef.FrameWidth, frameRef.FrameHeight));
+                                framesAdded++;
+                            }
+                        }
                     }
                     catch (Exception e) {
                         Console.Error.WriteLine($"  Couldn't write frame '{frameRefTex.FrameRef}':");
@@ -176,13 +180,14 @@ namespace CHRTool {
                 framesWritten.Add(hash);
             }
 
-            // Save bitmaps.
-            foreach (var bitmapKv in loadedSpritesheets.Where(x => x.Value != null)) {
+            // Save updated bitmaps.
+            foreach (var filename in updatedSpritesheets) {
                 try {
-                    bitmapKv.Value.Save(bitmapKv.Key, ImageFormat.Png);
+                    var bitmap = loadedSpritesheets[filename];
+                    bitmap.Save(filename, ImageFormat.Png);
                 }
                 catch (Exception e) {
-                    Console.Error.WriteLine($"  Couldn't save bitmap '{bitmapKv.Key}':");
+                    Console.Error.WriteLine($"  Couldn't save bitmap '{filename}':");
                     Console.Error.WriteLine($"    {e.GetType().Name}: {e.Message}");
                 }
             }
