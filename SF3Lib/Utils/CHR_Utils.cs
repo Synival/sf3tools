@@ -71,46 +71,51 @@ namespace SF3.Utils {
                 return;
             s_uniqueAnimationsByHash = new Dictionary<string, UniqueAnimationDef>();
 
-            using (var stream = new FileStream(CommonLib.Utils.ResourceUtils.ResourceFile("SpriteAnimationsByHash.xml"), FileMode.Open, FileAccess.Read)) {
-                var settings = new XmlReaderSettings {
-                    IgnoreComments = true,
-                    IgnoreWhitespace = true
-                };
+            try {
+                using (var stream = new FileStream(CommonLib.Utils.ResourceUtils.ResourceFile("SpriteAnimationsByHash.xml"), FileMode.Open, FileAccess.Read)) {
+                    var settings = new XmlReaderSettings {
+                        IgnoreComments = true,
+                        IgnoreWhitespace = true
+                    };
 
-                var xml = XmlReader.Create(stream, settings);
-                _ = xml.Read();
-
-                var nameDict = new Dictionary<int, string>();
-                while (!xml.EOF) {
+                    var xml = XmlReader.Create(stream, settings);
                     _ = xml.Read();
-                    if (xml.HasAttributes) {
-                        var hash           = xml.GetAttribute("hash");
-                        var sprite         = xml.GetAttribute("sprite");
-                        var animation      = xml.GetAttribute("animation");
-                        var widthAttr      = xml.GetAttribute("width");
-                        var heightAttr     = xml.GetAttribute("height");
-                        var directionsAttr = xml.GetAttribute("directions");
-                        var framesAttr     = xml.GetAttribute("frames");
-                        var durationAttr   = xml.GetAttribute("duration");
-                        var missingAttr    = xml.GetAttribute("missingFrames");
 
-                        if (hash == null || sprite == null || animation == null || widthAttr == null || heightAttr == null || directionsAttr == null)
-                            continue;
+                    var nameDict = new Dictionary<int, string>();
+                    while (!xml.EOF) {
+                        _ = xml.Read();
+                        if (xml.HasAttributes) {
+                            var hash           = xml.GetAttribute("hash");
+                            var sprite         = xml.GetAttribute("sprite");
+                            var animation      = xml.GetAttribute("animation");
+                            var widthAttr      = xml.GetAttribute("width");
+                            var heightAttr     = xml.GetAttribute("height");
+                            var directionsAttr = xml.GetAttribute("directions");
+                            var framesAttr     = xml.GetAttribute("frames");
+                            var durationAttr   = xml.GetAttribute("duration");
+                            var missingAttr    = xml.GetAttribute("missingFrames");
 
-                        int width, height, frames, directionsInt;
-                        if (!int.TryParse(widthAttr, out width) || !int.TryParse(heightAttr, out height) || !int.TryParse(directionsAttr, out directionsInt) || !int.TryParse(framesAttr, out frames))
-                            continue;
-                        var directions = (SpriteDirectionCountType) directionsInt;
+                            if (hash == null || sprite == null || animation == null || widthAttr == null || heightAttr == null || directionsAttr == null)
+                                continue;
 
-                        if (sprite == "")
-                            sprite = "None";
+                            int width, height, frames, directionsInt;
+                            if (!int.TryParse(widthAttr, out width) || !int.TryParse(heightAttr, out height) || !int.TryParse(directionsAttr, out directionsInt) || !int.TryParse(framesAttr, out frames))
+                                continue;
+                            var directions = (SpriteDirectionCountType) directionsInt;
 
-                        int missingFrames = int.TryParse(missingAttr, out var missingFramesOut) ? missingFramesOut : 0;
-                        int duration = int.TryParse(durationAttr, out var durationOut) ? durationOut : 0;
-                        s_uniqueAnimationsByHash.Add(hash.ToLower(), new UniqueAnimationDef(hash, sprite, animation, width, height, directions, frames, duration, missingFrames,
-                            new AnimationCommand[0]));
+                            if (sprite == "")
+                                sprite = "None";
+
+                            int missingFrames = int.TryParse(missingAttr, out var missingFramesOut) ? missingFramesOut : 0;
+                            int duration = int.TryParse(durationAttr, out var durationOut) ? durationOut : 0;
+                            s_uniqueAnimationsByHash.Add(hash.ToLower(), new UniqueAnimationDef(hash, sprite, animation, width, height, directions, frames, duration, missingFrames,
+                                new AnimationCommand[0]));
+                        }
                     }
                 }
+            }
+            catch {
+                // TDOO what to do here??
             }
         }
 
