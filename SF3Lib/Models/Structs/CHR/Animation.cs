@@ -55,21 +55,13 @@ namespace SF3.Models.Structs.CHR {
                 if (_framesWithTextures.Length == 0)
                     return "None";
 
-                var distinctNames = _framesWithTextures
+                // Return the most frequent frame name to resolve animations with frames that appear in multiple spritesheets.
+                // This isn't a guarantee that it will work, but solves all vanilla game cases and is very unlikely to ever choose the wrong sprite.
+                return _framesWithTextures
                     .SelectMany(x => x.SpriteName.Split('|').Select(y => y.Trim()))
                     .GroupBy(x => x)
-                    .ToDictionary(x => x.Key, x => x.Count());
-
-                if (distinctNames.Count == 1)
-                    return distinctNames.Keys.First();
-
-                var highestCount = distinctNames.Max(x => x.Value);
-
-                // Some hard-coded tie-breakers (ick)
-                if (highestCount == 1 && distinctNames.Count == 2 && distinctNames.Keys.Contains("Explosion") && distinctNames.Keys.Contains("Transparency"))
-                    return "Explosion";
-
-                return distinctNames.FirstOrDefault(x => x.Value == highestCount).Key;
+                    .OrderByDescending(x => x.Count())
+                    .First().Key;
             }
         }
 
