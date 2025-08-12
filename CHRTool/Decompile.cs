@@ -3,7 +3,7 @@ using System.IO;
 using CommonLib.Arrays;
 using NDesk.Options;
 using SF3.ByteData;
-using SF3.CHR;
+using SF3.Models.Files.CHP;
 using SF3.Models.Files.CHR;
 using SF3.NamedValues;
 using SF3.Types;
@@ -48,8 +48,15 @@ namespace CHRTool {
             // It looks like we're ready to go! Fetch the file data.
             try {
                 var inputFilename = Path.GetFileName(inputFile);
-                if (outputFile == null)
-                    outputFile = Path.Combine(Path.GetDirectoryName(inputFile), $"{Path.GetFileNameWithoutExtension(inputFilename)}.SF3CHR");
+
+                bool isChp = inputFilename.ToLower().EndsWith(".chp");
+                if (!isChp && !inputFilename.ToLower().EndsWith(".chr"))
+                    throw new Exception($"File '{inputFilename}' is not a .CHR or .CHP file");
+
+                if (outputFile == null) {
+                    var outputExtension = isChp ? "SF3CHP" : "SF3CHR";
+                    outputFile = Path.Combine(Path.GetDirectoryName(inputFile), $"{Path.GetFileNameWithoutExtension(inputFilename)}.{outputExtension}");
+                }
                 var outputFilename = Path.GetFileName(outputFile);
 
                 Console.WriteLine($"Decompiling '{inputFilename}' to '{outputFilename}'...");
@@ -57,30 +64,50 @@ namespace CHRTool {
 
                 // Fetch the data.
                 Console.WriteLine($"Loading data from '{inputFile}...");
-                byte[] chrBytes = null;
-                chrBytes = File.ReadAllBytes(inputFile);
+                byte[] inputBytes = null;
+                inputBytes = File.ReadAllBytes(inputFile);
 
-                // Attempt to load it as a CHR_File.
-                Console.WriteLine("Creating CHR_File...");
-                CHR_File chrFile = null;
-                var nameGetterContext = new NameGetterContext(ScenarioType.Scenario1);
-                chrFile = CHR_File.Create(new ByteData(new ByteArray(chrBytes)), nameGetterContext, ScenarioType.Scenario1);
+                string outputText = null;
+                if (isChp) {
+                    // Attempt to load it as a CHP_File.
+                    Console.WriteLine("Creating CHP_File...");
+                    var nameGetterContext = new NameGetterContext(ScenarioType.Scenario1);
+                    var chpFile = CHP_File.Create(new ByteData(new ByteArray(inputBytes)), nameGetterContext, ScenarioType.Scenario1);
 
-                // Get a CHR_Def from the CHR_File.
-                Console.WriteLine("Serializing to CHR_Def...");
-                CHR_Def chrDef = null;
-                chrDef = chrFile.ToCHR_Def();
-                if (optimize) {
-                    foreach (var sprite in chrDef.Sprites)
-                        sprite.FrameGroupsForSpritesheets = null;
+                    // Get a CHR_Def from the CHR_File.
+                    Console.WriteLine("Serializing to CHP_Def...");
+                    var chpDef = chpFile.ToCHP_Def();
+                    if (optimize) {
+                        foreach (var chrDef in chpDef.CHRsBySector.Values)
+                            foreach (var sprite in chrDef.Sprites)
+                                sprite.FrameGroupsForSpritesheets = null;
+                    }
+
+                    // Serialize the file.
+                    Console.WriteLine($"Converting to JSON file...");
+                    outputText = chpDef.ToJSON_String();
+                }
+                else {
+                    // Attempt to load it as a CHR_File.
+                    Console.WriteLine("Creating CHR_File...");
+                    var nameGetterContext = new NameGetterContext(ScenarioType.Scenario1);
+                    var chrFile = CHR_File.Create(new ByteData(new ByteArray(inputBytes)), nameGetterContext, ScenarioType.Scenario1);
+
+                    // Get a CHR_Def from the CHR_File.
+                    Console.WriteLine("Serializing to CHR_Def...");
+                    var chrDef = chrFile.ToCHR_Def();
+                    if (optimize) {
+                        foreach (var sprite in chrDef.Sprites)
+                            sprite.FrameGroupsForSpritesheets = null;
+                    }
+
+                    // Serialize the file.
+                    Console.WriteLine($"Converting to JSON file...");
+                    outputText = chrDef.ToJSON_String();
                 }
 
-                // Serialize the file.
-                Console.WriteLine($"Converting to JSON file...");
-                var chrDefText = chrDef.ToJSON_String();
-
                 Console.WriteLine($"Writing to '{outputFile}'...");
-                File.WriteAllText(outputFile, chrDefText);
+                File.WriteAllText(outputFile, outputText);
             }
             catch (Exception e) {
                 Console.WriteLine("------------------------------------------------------------------------------");

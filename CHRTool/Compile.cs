@@ -46,40 +46,68 @@ namespace CHRTool {
             // It looks like we're ready to go! Fetch the file data.
             try {
                 var inputFilename = Path.GetFileName(inputFile);
-                if (outputFile == null)
-                    outputFile = Path.Combine(Path.GetDirectoryName(inputFile), $"{Path.GetFileNameWithoutExtension(inputFilename)}.CHR");
+
+                bool isChp = inputFilename.ToLower().EndsWith(".sf3chp");
+                if (!isChp && !inputFilename.ToLower().EndsWith(".sf3chr"))
+                    throw new Exception($"File '{inputFilename}' is not a .SF3CHR or .SF3CHP file");
+
+                if (outputFile == null) {
+                    var outputExtension = isChp ? "CHP" : "CHR";
+                    outputFile = Path.Combine(Path.GetDirectoryName(inputFile), $"{Path.GetFileNameWithoutExtension(inputFilename)}.{outputExtension}");
+                }
                 var outputFilename = Path.GetFileName(outputFile);
 
                 Console.WriteLine($"Compiling '{inputFilename}' to '{outputFilename}'...");
                 Console.WriteLine("------------------------------------------------------------------------------");
 
-                string chrDefText = null;
+                string inputText = null;
                 Console.WriteLine($"Reading '{inputFile}...");
-                chrDefText = File.ReadAllText(inputFile);
+                inputText = File.ReadAllText(inputFile);
 
-                // Attempt to deserialize.
-                Console.WriteLine("Deserializing to CHR_Def...");
-                CHR_Def chrDef = null;
-                chrDef = CHR_Def.FromJSON(chrDefText);
-                if (chrDef == null)
-                    throw new NullReferenceException(); // eh, not really, but whatever
+                byte[] outputData = null;
+                if (isChp) {
+                    // Attempt to deserialize.
+                    Console.WriteLine("Deserializing to CHP_Def...");
+                    var chpDef = CHP_Def.FromJSON(inputText);
+                    if (chpDef == null)
+                        throw new NullReferenceException(); // eh, not really, but whatever
 
-                // We should have everything necessary to compile. Give it a go!
-                Console.WriteLine("Compiling...");
-                var chrCompiler = new CHR_Compiler() {
-                    OptimizeFrames            = optimize,
-                    AddMissingAnimationFrames = true,
-                };
+                    // We should have everything necessary to compile. Give it a go!
+                    Console.WriteLine("Compiling...");
+                    var chpCompiler = new CHP_Compiler() {
+                        OptimizeFrames            = optimize,
+                        AddMissingAnimationFrames = true,
+                    };
 
-                byte[] chrFileData = null;
-                using (var memoryStream = new MemoryStream()) {
-                    chrCompiler.Compile(chrDef, memoryStream);
-                    chrFileData = memoryStream.ToArray();
+                    using (var memoryStream = new MemoryStream()) {
+                        chpCompiler.Compile(chpDef, memoryStream);
+                        outputData = memoryStream.ToArray();
+                    }
+                }
+                else {
+                    // Attempt to deserialize.
+                    Console.WriteLine("Deserializing to CHR_Def...");
+                    CHR_Def chrDef = null;
+                    chrDef = CHR_Def.FromJSON(inputText);
+                    if (chrDef == null)
+                        throw new NullReferenceException(); // eh, not really, but whatever
+
+                    // We should have everything necessary to compile. Give it a go!
+                    Console.WriteLine("Compiling...");
+                    var chrCompiler = new CHR_Compiler() {
+                        OptimizeFrames            = optimize,
+                        AddMissingAnimationFrames = true,
+                    };
+
+                    using (var memoryStream = new MemoryStream()) {
+                        chrCompiler.Compile(chrDef, memoryStream);
+                        outputData = memoryStream.ToArray();
+                    }
                 }
 
                 // Output the file.
                 Console.WriteLine($"Writing to '{outputFile}'...");
-                File.WriteAllBytes(outputFile, chrFileData);
+                File.WriteAllBytes(outputFile, outputData);
             }
             catch (Exception e) {
                 Console.WriteLine("------------------------------------------------------------------------------");
