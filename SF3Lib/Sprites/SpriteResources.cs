@@ -289,10 +289,9 @@ namespace SF3.Sprites {
         public static UniqueAnimationDef GetUniqueAnimationInfoByHash(string hash) {
             LoadUniqueAnimationsByHashTable();
             if (!s_uniqueAnimationsByHash.ContainsKey(hash.ToLower()))
-                s_uniqueAnimationsByHash[hash] = new UniqueAnimationDef(hash, "Unknown", "Unknown", 0, 0, 0, 0, 0, 0);
+                s_uniqueAnimationsByHash[hash] = new UniqueAnimationDef(hash, "(Unknown)", 0, 0, 0, "(Unknown)");
 
             var animation = s_uniqueAnimationsByHash[hash];
-            animation.RefCount++;
             return animation;
         }
 
@@ -317,28 +316,23 @@ namespace SF3.Sprites {
                         if (xml.HasAttributes) {
                             var hash           = xml.GetAttribute("hash");
                             var sprite         = xml.GetAttribute("sprite");
-                            var animation      = xml.GetAttribute("animation");
                             var widthAttr      = xml.GetAttribute("width");
                             var heightAttr     = xml.GetAttribute("height");
                             var directionsAttr = xml.GetAttribute("directions");
-                            var framesAttr     = xml.GetAttribute("frames");
-                            var durationAttr   = xml.GetAttribute("duration");
-                            var missingAttr    = xml.GetAttribute("missingFrames");
+                            var animation      = xml.GetAttribute("animation");
 
                             if (hash == null || sprite == null || animation == null || widthAttr == null || heightAttr == null || directionsAttr == null)
                                 continue;
 
-                            int width, height, frames, directionsInt;
-                            if (!int.TryParse(widthAttr, out width) || !int.TryParse(heightAttr, out height) || !int.TryParse(directionsAttr, out directionsInt) || !int.TryParse(framesAttr, out frames))
+                            int width, height, directionsInt;
+                            if (!int.TryParse(widthAttr, out width) || !int.TryParse(heightAttr, out height) || !int.TryParse(directionsAttr, out directionsInt))
                                 continue;
                             var directions = (SpriteDirectionCountType) directionsInt;
 
                             if (sprite == "")
                                 sprite = "None";
 
-                            int missingFrames = int.TryParse(missingAttr, out var missingFramesOut) ? missingFramesOut : 0;
-                            int duration = int.TryParse(durationAttr, out var durationOut) ? durationOut : 0;
-                            s_uniqueAnimationsByHash.Add(hash.ToLower(), new UniqueAnimationDef(hash, sprite, animation, width, height, directions, frames, duration, missingFrames));
+                            s_uniqueAnimationsByHash.Add(hash.ToLower(), new UniqueAnimationDef(hash, sprite, width, height, directions, animation));
                         }
                     }
                 }
