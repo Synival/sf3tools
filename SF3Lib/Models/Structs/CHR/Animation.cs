@@ -28,7 +28,7 @@ namespace SF3.Models.Structs.CHR {
                 .Select(x => FrameTable[x])
                 .ToArray();
 
-            AnimationInfo = SpriteResources.GetUniqueAnimationInfo(SpriteName, Hash);
+            AnimationRef = SpriteResources.GetUniqueAnimationInfo(SpriteName, Hash);
 
             var uniqueFramesWithTextures = _framesWithTextures.Distinct().ToArray();
             TotalCompressedFramesSize = (uint) uniqueFramesWithTextures.Sum(x => x.TextureCompressedSize);
@@ -41,7 +41,7 @@ namespace SF3.Models.Structs.CHR {
         private readonly Frame[] _framesWithTextures;
 
         [TableViewModelColumn(displayOrder: 0)]
-        public SpriteDirectionCountType Directions => AnimationInfo.Directions;
+        public SpriteDirectionCountType Directions => AnimationRef.Directions;
 
         [TableViewModelColumn(displayOrder: 0.05f, displayName: "Index")]
         public int AnimationIndex { get; }
@@ -66,7 +66,7 @@ namespace SF3.Models.Structs.CHR {
         }
 
         [TableViewModelColumn(displayOrder: 1, minWidth: 300)]
-        public string AnimationName => AnimationInfo.AnimationName;
+        public string AnimationName => AnimationRef.AnimationName;
 
         [TableViewModelColumn(displayOrder: 2.25f)]
         public int CommandCount => AnimationCommandTable.Count();
@@ -100,7 +100,7 @@ namespace SF3.Models.Structs.CHR {
             }
         }
 
-        public UniqueAnimationDef AnimationInfo { get; }
+        public AnimationRef AnimationRef { get; }
 
         [TableViewModelColumn(displayOrder: 4, displayFormat: "X4")]
         public uint TotalCompressedFramesSize { get; }

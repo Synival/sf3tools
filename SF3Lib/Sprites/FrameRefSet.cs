@@ -4,21 +4,21 @@ using System.Linq;
 using SF3.Types;
 
 namespace SF3.Sprites {
-    public class FrameHashLookupSet : HashSet<FrameHashLookup> {
-        public FrameHashLookupSet(IEnumerable<FrameHashLookup> collection) : base(collection) {
+    public class FrameRefSet : HashSet<FrameRef> {
+        public FrameRefSet(IEnumerable<FrameRef> collection) : base(collection) {
             ImageHash = collection.First().ImageHash;
             if (!collection.All(x => x.ImageHash == ImageHash))
                 throw new ArgumentException("FrameHashLookup's must have the same ImageHash");
         }
 
-        public FrameHashLookupSet(string imageHash) {
+        public FrameRefSet(string imageHash) {
             ImageHash = imageHash;
         }
 
-        private string GetAggregateString(Func<FrameHashLookup, string> lookupFunc)
+        private string GetAggregateString(Func<FrameRef, string> lookupFunc)
             => (Count == 0) ? "(Unknown)" : string.Join(" | ", this.Select(x => lookupFunc(x)).OrderBy(x => x).Distinct());
 
-        private T GetUniqueValue<T>(Func<FrameHashLookup, T> lookupFunc, T defaultValue = default) {
+        private T GetUniqueValue<T>(Func<FrameRef, T> lookupFunc, T defaultValue = default) {
             if (Count == 0)
                 return defaultValue;
 

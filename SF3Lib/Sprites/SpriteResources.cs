@@ -15,8 +15,8 @@ namespace SF3.Sprites {
     public static class SpriteResources {
         private static Dictionary<string, SpriteDef> s_spriteDefs = new Dictionary<string, SpriteDef>();
         private static HashSet<string> s_spriteDefFilesLoaded = new HashSet<string>();
-        private static Dictionary<string, FrameHashLookupSet> s_frameRefsByHash = new Dictionary<string, FrameHashLookupSet>();
-        private static Dictionary<string, UniqueAnimationDef> s_animationRefsByHash = new Dictionary<string, UniqueAnimationDef>();
+        private static Dictionary<string, FrameRefSet> s_frameRefsByHash = new Dictionary<string, FrameRefSet>();
+        private static Dictionary<string, AnimationRef> s_animationRefsByHash = new Dictionary<string, AnimationRef>();
 
         private static bool s_frameRefsLoaded = false;
 
@@ -151,14 +151,14 @@ namespace SF3.Sprites {
         public static void LoadFrameHashLookups() {
             var filename = FrameHashLookupsFile ?? ResourceFile("FrameHashLookups.json");
             var jsonText = File.ReadAllText(filename);
-            var jsonObj = JsonConvert.DeserializeObject<Dictionary<string, FrameHashLookup[]>>(jsonText);
+            var jsonObj = JsonConvert.DeserializeObject<Dictionary<string, FrameRef[]>>(jsonText);
 
             foreach (var lookupKv in jsonObj) {
                 foreach (var frameRef in lookupKv.Value)
                     frameRef.ImageHash = lookupKv.Key;
 
                 if (!s_frameRefsByHash.ContainsKey(lookupKv.Key))
-                    s_frameRefsByHash.Add(lookupKv.Key, new FrameHashLookupSet(lookupKv.Value));
+                    s_frameRefsByHash.Add(lookupKv.Key, new FrameRefSet(lookupKv.Value));
                 else {
                     foreach (var frame in lookupKv.Value)
                         s_frameRefsByHash[lookupKv.Key].Add(frame);
@@ -254,7 +254,7 @@ namespace SF3.Sprites {
         /// <param name="frameDir">The direction of this frame.</param>
         /// <returns></returns>
         public static bool AddFrameHashLookup(string hash, string spriteName, int frameWidth, int frameHeight, string frameGroupName, SpriteFrameDirection frameDir) {
-            var frameHashLookup = new FrameHashLookup() {
+            var frameHashLookup = new FrameRef() {
                 SpriteName     = spriteName,
                 FrameWidth     = frameWidth,
                 FrameHeight    = frameHeight,
@@ -264,7 +264,7 @@ namespace SF3.Sprites {
             };
 
             if (!s_frameRefsByHash.ContainsKey(hash)) {
-                s_frameRefsByHash.Add(hash, new FrameHashLookupSet(new FrameHashLookup[] { frameHashLookup }));
+                s_frameRefsByHash.Add(hash, new FrameRefSet(new FrameRef[] { frameHashLookup }));
                 return true;
             }
 
@@ -281,10 +281,10 @@ namespace SF3.Sprites {
         /// </summary>
         /// <param name="imageHash">An MD5 hash generated from an TextureABGR1555 of a frame image.</param>
         /// <returns>An array of FrameHashLookup's identifying where this frame image is used. If this frame image is unknown, an empty array is returned.</returns>
-        public static FrameHashLookupSet GetFrameRefsForImageHash(string imageHash) {
+        public static FrameRefSet GetFrameRefsForImageHash(string imageHash) {
             if (!s_frameRefsLoaded)
                 LoadFrameHashLookups();
-            return s_frameRefsByHash.TryGetValue(imageHash, out var frames) ? frames : new FrameHashLookupSet(imageHash);
+            return s_frameRefsByHash.TryGetValue(imageHash, out var frames) ? frames : new FrameRefSet(imageHash);
         }
 
         /// <summary>
@@ -309,7 +309,14 @@ namespace SF3.Sprites {
                         if (s_animationRefsByHash.ContainsKey(animationHash))
                             continue;
 
-                        var uniqueAnim = new UniqueAnimationDef(animationHash, spriteDef.Name, frameSize.Width, frameSize.Height, directions, animationName);
+                        var uniqueAnim = new AnimationRef() {
+                            AnimationHash = animationHash,
+                            SpriteName    = spriteDef.Name,
+                            FrameWidth    = frameSize.Width,
+                            FrameHeight   = frameSize.Height,
+                            Directions    = directions,
+                            AnimationName = animationName,
+                        };
                         s_animationRefsByHash.Add(animationHash, uniqueAnim);
                         animationsAdded++;
                     }
@@ -324,13 +331,21 @@ namespace SF3.Sprites {
         /// <param name="spriteName">The name of the sprite to which this animation belongs.</param>
         /// <param name="animationHash">The hash generated for the animation.</param>
         /// <returns></returns>
-        public static UniqueAnimationDef GetUniqueAnimationInfo(string spriteName, string animationHash) {
+        public static AnimationRef GetUniqueAnimationInfo(string spriteName, string animationHash) {
             // Load the sprite def to get the animation hashes.
             _ = GetSpriteDef(spriteName);
 
             //LoadUniqueAnimationsByHashTable();
-            if (!s_animationRefsByHash.ContainsKey(animationHash.ToLower()))
-                s_animationRefsByHash[animationHash] = new UniqueAnimationDef(animationHash, "(Unknown)", 0, 0, 0, "(Unknown)");
+            if (!s_animationRefsByHash.ContainsKey(animationHash.ToLower())) {
+                s_animationRefsByHash[animationHash] = new AnimationRef() {
+                    AnimationHash = animationHash,
+                    SpriteName = "(Unknown)",
+                    FrameWidth = 0,
+                    FrameHeight = 0,
+                    Directions = 0,
+                    AnimationName = "(Unknown)"
+                };
+            }
 
             var animation = s_animationRefsByHash[animationHash];
             return animation;
@@ -403,11 +418,11 @@ namespace SF3.Sprites {
                     }
 
                     // For frames, we'll need to get the actual image. Start by getting the frame references.
-                    FrameHashLookup[] frameRefs = null;
+                    FrameRef[] frameRefs = null;
                     var frameGroupDirections = CHR_Utils.GetFrameGroupDirections(animationFrameCount);
                     if (x.FrameGroup != null) {
                         frameRefs = frameGroupDirections
-                            .Select(y => new FrameHashLookup() {
+                            .Select(y => new FrameRef() {
                                 SpriteName = spriteDef.Name,
                                 FrameWidth = frameWidth,
                                 FrameHeight = frameHeight,
@@ -423,7 +438,7 @@ namespace SF3.Sprites {
                                     return null;
 
                                 var frame = x.FramesByDirection[y];
-                                return new FrameHashLookup() {
+                                return new FrameRef() {
                                     SpriteName = spriteDef.Name,
                                     FrameWidth = frameWidth,
                                     FrameHeight = frameHeight,

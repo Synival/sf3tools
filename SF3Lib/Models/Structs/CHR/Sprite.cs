@@ -284,8 +284,8 @@ namespace SF3.Models.Structs.CHR {
             foreach (var animation in animationArray) {
                 var spriteName = (animation.SpriteName == SpriteName) ? null : animation.SpriteName;
                 var directions = animation.Directions == (SpriteDirectionCountType) Header.Directions ? (SpriteDirectionCountType?) null : animation.Directions;
-                var width      = animation.AnimationInfo.Width  == Header.Width  ? (int?) null : animation.AnimationInfo.Width;
-                var height     = animation.AnimationInfo.Height == Header.Height ? (int?) null : animation.AnimationInfo.Height;
+                var width      = animation.AnimationRef.FrameWidth  == Header.Width  ? (int?) null : animation.AnimationRef.FrameWidth;
+                var height     = animation.AnimationRef.FrameHeight == Header.Height ? (int?) null : animation.AnimationRef.FrameHeight;
 
                 // Correct some very specific cases where the exact spritesheet to use can't be determined without a little help:
                 // TODO: these really shouldn't be hard-coded like this!!

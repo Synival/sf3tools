@@ -23,13 +23,13 @@ namespace CHR_Analyzer {
         private const string c_pathOut = "../../../Private";
 
         private class TextureInfo {
-            public TextureInfo(string imageHash, FrameHashLookupSet frameRefs, ITexture texture) {
+            public TextureInfo(string imageHash, FrameRefSet frameRefs, ITexture texture) {
                 FrameRefs = frameRefs;
                 Texture = texture;
             }
 
             public string ImageHash { get; }
-            public FrameHashLookupSet FrameRefs { get; }
+            public FrameRefSet FrameRefs { get; }
             public ITexture Texture { get; }
             public List<TextureSpriteInfo> Sprites { get; } = new List<TextureSpriteInfo>();
         }
@@ -47,11 +47,11 @@ namespace CHR_Analyzer {
         }
 
         private class AnimationInfo {
-            public AnimationInfo(UniqueAnimationDef animationInfo) {
-                AnimInfo = animationInfo;
+            public AnimationInfo(AnimationRef animationRef) {
+                AnimationRef = animationRef;
             }
 
-            public UniqueAnimationDef AnimInfo { get; }
+            public AnimationRef AnimationRef { get; }
             public List<AnimationFileSprite> Sprites { get; } = new List<AnimationFileSprite>();
         }
 
@@ -86,7 +86,7 @@ namespace CHR_Analyzer {
         private static void AddAnimation(ScenarioType scenario, string filename, int spriteIndex, SF3.Models.Structs.CHR.Animation animation) {
             var hash = animation.Hash;
             if (!s_animationsByHash.ContainsKey(hash))
-                s_animationsByHash.Add(hash, new AnimationInfo(animation.AnimationInfo));
+                s_animationsByHash.Add(hash, new AnimationInfo(animation.AnimationRef));
 
             var lastCommand = animation.AnimationCommandTable.Last();
             var lastCommandWord = (lastCommand.Command << 8) | lastCommand.Parameter;
@@ -302,7 +302,7 @@ namespace CHR_Analyzer {
 
             Console.WriteLine();
             Console.WriteLine($"There are {s_animationsByHash.Count} unique animations.");
-            var unidentifiedAnimationCount = s_animationsByHash.Values.Where(x => x.AnimInfo.AnimationName == "").Count();
+            var unidentifiedAnimationCount = s_animationsByHash.Values.Where(x => x.AnimationRef.AnimationName == "").Count();
             Console.WriteLine($"{unidentifiedAnimationCount} are unidentified.");
             var avgUsagesPerAnimation = s_animationsByHash.Sum(x => x.Value.Sprites.Count) / (float) s_animationsByHash.Count;
             Console.WriteLine($"Each animation is used {avgUsagesPerAnimation} times on average.");

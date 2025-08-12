@@ -134,7 +134,7 @@ namespace SF3.Models.Structs.CHR {
             }
         }
 
-        public FrameHashLookupSet FrameRefs { get; }
+        public FrameRefSet FrameRefs { get; }
  
         [TableViewModelColumn(displayOrder: 1, minWidth: 200)]
         public string TextureHash => Texture?.Hash;

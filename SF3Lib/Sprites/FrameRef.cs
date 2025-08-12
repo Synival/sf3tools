@@ -4,7 +4,7 @@ using Newtonsoft.Json.Converters;
 using SF3.Types;
 
 namespace SF3.Sprites {
-    public class FrameHashLookup {
+    public class FrameRef {
         public string SpriteName;
         public int FrameWidth;
         public int FrameHeight;
@@ -16,8 +16,10 @@ namespace SF3.Sprites {
         [JsonIgnore]
         public string ImageHash;
 
+        public override string ToString() => $"{SpriteName} ({FrameWidth}x{FrameHeight}).{FrameGroupName}";
+
         public override bool Equals(object obj) {
-            return obj is FrameHashLookup lookup
+            return obj is FrameRef lookup
                 && SpriteName     == lookup.SpriteName
                 && FrameWidth     == lookup.FrameWidth
                 && FrameHeight    == lookup.FrameHeight

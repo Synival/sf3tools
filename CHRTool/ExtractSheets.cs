@@ -131,7 +131,7 @@ namespace CHRTool {
 
         private class ExtractInfo {
             public string Hash;
-            public FrameHashLookup FrameRef;
+            public FrameRef FrameRef;
             public ITexture Texture;
         }
 
