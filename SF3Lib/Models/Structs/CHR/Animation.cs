@@ -1,12 +1,10 @@
 ﻿using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using CommonLib.Attributes;
 using SF3.ByteData;
 using SF3.Models.Tables.CHR;
 using SF3.Sprites;
 using SF3.Types;
-using SF3.Utils;
 
 namespace SF3.Models.Structs.CHR {
     public class Animation : Struct {
@@ -51,16 +49,6 @@ namespace SF3.Models.Structs.CHR {
         [TableViewModelColumn(displayOrder: 0.1f, displayName: "Type", minWidth: 100)]
         public AnimationType AnimationType => (AnimationType) AnimationIndex;
 
-        private void RewriteAnimationXML() {
-            var resourcePath = Path.Combine("..", "..", "..", "..", "SF3Lib", CommonLib.Utils.ResourceUtils.ResourceFile("SpriteAnimationsByHash.xml"));
-            using (var file = File.Open(resourcePath, FileMode.Create)) {
-                using (var writer = new StreamWriter(file)) {
-                    writer.NewLine = "\n";
-                    SpriteResources.WriteUniqueAnimationsByHashXML(writer, false);
-                }
-            }
-        }
-
         [TableViewModelColumn(displayOrder: 0.5f, minWidth: 200)]
         public string SpriteName {
             get {
@@ -83,38 +71,10 @@ namespace SF3.Models.Structs.CHR {
 
                 return distinctNames.FirstOrDefault(x => x.Value == highestCount).Key;
             }
-            set {
-                var lastSpriteName = SpriteName;
-                var changed = _framesWithTextures.Any(x => x.SpriteName != value);
-
-                if (changed) {
-                    var newSpriteName = SpriteName;
-                    if (AnimationInfo != null && lastSpriteName != newSpriteName) {
-                        AnimationInfo.SpriteName = SpriteName;
-                        RewriteAnimationXML();
-                    }
-
-                    // TODO: update appropriate SpriteDefs:
-                    // 1) old sprite def (if it exists)
-                    // 2) new sprite def (create if doesn't exist?)
-                }
-            }
         }
 
         [TableViewModelColumn(displayOrder: 1, minWidth: 300)]
-        public string AnimationName {
-            get => AnimationInfo.AnimationName;
-            set {
-                if (AnimationInfo != null && AnimationInfo.AnimationName != value) {
-                    AnimationInfo.AnimationName = value;
-                    RewriteAnimationXML();
-
-                    // TODO: update appropriate SpriteDefs:
-                    // 1) old sprite def (if it exists)
-                    // 2) new sprite def (create if doesn't exist?)
-                }
-            }
-        }
+        public string AnimationName => AnimationInfo.AnimationName;
 
         [TableViewModelColumn(displayOrder: 2.25f)]
         public int CommandCount => AnimationCommandTable.Count();

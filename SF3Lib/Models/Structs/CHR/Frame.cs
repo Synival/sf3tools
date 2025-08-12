@@ -47,16 +47,6 @@ namespace SF3.Models.Structs.CHR {
             }
         }
 
-        private void RewriteAnimationXML() {
-            var resourcePath = Path.Combine("..", "..", "..", "..", "SF3Lib", CommonLib.Utils.ResourceUtils.ResourceFile("SpriteAnimationsByHash.xml"));
-            using (var file = File.Open(resourcePath, FileMode.Create)) {
-                using (var writer = new StreamWriter(file)) {
-                    writer.NewLine = "\n";
-                    SpriteResources.WriteUniqueAnimationsByHashXML(writer, false);
-                }
-            }
-        }
-
         public uint DataOffset { get; }
 
         [TableViewModelColumn(addressField: null, displayOrder: -0.4f, displayFormat: "X2")]
