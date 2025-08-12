@@ -205,12 +205,18 @@ namespace SF3.Sprites {
         /// Adds frame hash lookups for all frames in a sprite.
         /// </summary>
         /// <param name="spriteDef">The sprite which contains all the frames to be added.</param>
-        /// <returns>The number of new frame hash lookups added.</returns>
-        public static int AddFrameRefs(SpriteDef spriteDef) {
+        /// <returns>The number of new frame hash lookups added and the number of frames skipped.</returns>
+        public static (int added, int skipped) AddFrameRefs(SpriteDef spriteDef) {
             int framesAdded = 0;
+            int framesSkipped = 0;
+
             foreach (var spritesheetKv in spriteDef.Spritesheets) {
                 var frameSize = Spritesheet.KeyToDimensions(spritesheetKv.Key);
                 var spritesheet = spritesheetKv.Value;
+
+                // The 'None' sprite has a spritesheet that's (0x0). There are animations, but obviously no frames.
+                if (frameSize.Width <= 0 || frameSize.Height <= 0)
+                    continue;
 
                 var bitmapFilename = SpritesheetImageFile(spriteDef.Name, frameSize.Width, frameSize.Height);
                 using (var bitmap = new Bitmap(new MemoryStream(File.ReadAllBytes(bitmapFilename)))) {
@@ -235,11 +241,13 @@ namespace SF3.Sprites {
                                 if (AddFrameRef(hash, spriteDef.Name, frameSize.Width, frameSize.Height, frameGroupName, frameDir))
                                     framesAdded++;
                             }
+                            else
+                                framesSkipped++;
                         }
                     }
                 }
             }
-            return framesAdded;
+            return (framesAdded, framesSkipped);
         }
 
         /// <summary>

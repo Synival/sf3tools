@@ -10,9 +10,9 @@ namespace CHRTool {
         public const string ShortUsageString =
             "Usage:\n" +
             "  Compile .SF3CHR file into a .CHR file:\n" +
-            "    chrtool [GENERAL_OPTIONS]... compile [OPTIONS]... SF3CHR_file\n" +
+            "    chrtool [GENERAL_OPTIONS]... compile [OPTIONS]... SF3CHR/SF3CHP_file\n" +
             "  Decompile a .CHR file into a .SF3CHR file:\n" +
-            "    chrtool [GENERAL_OPTIONS]... decompile [OPTIONS]... CHR_file\n" +
+            "    chrtool [GENERAL_OPTIONS]... decompile [OPTIONS]... CHR/CHP_file\n" +
             "  Extract spritesheet frames from .CHR and .CHP files:\n" +
             "    chrtool [GENERAL_OPTIONS]... extract-sheets [OPTIONS]... [game_data_dir/file]...\n" +
             "  Update the lookup table for frame and animation hashes in SF3Lib:\n" +
@@ -28,9 +28,9 @@ namespace CHRTool {
             "General Options:\n" +
             "  -h, --help                print this help message\n" +
             "  --version                 print CHRTool version\n" +
-            "  --sprite-dir=<dir>        directory for sprites (.SF3Sprite files)\n" +
+            "  --sprite-dir=<dir>        directory for sprites (SF3Sprite files)\n" +
             "      (default='<program-dir>/Resources/Sprites')\n" +
-            "  --spritesheet-dir=<dir>   directory for spritesheets (.PNG files)\n" +
+            "  --spritesheet-dir=<dir>   directory for spritesheets (PNG files)\n" +
             "      (default='<program-dir>/Resources/Spritesheets')\n" +
             "  --frame-hash-lookups-file=<file>\n" +
             "      The file for lookup up frames based on hashes\n" +
@@ -38,12 +38,12 @@ namespace CHRTool {
             "\n" +
             "'compile' Options:\n" +
             "  -O, --optimize            optimizes frames, ignoring anything explicit\n" +
-            "  --output=<output-file>    specify output .CHR file\n" +
+            "  --output=<output-file>    specify output CHR/CHP file\n" +
             "  --add-sprite=<file>       adds an SF3CHRSprite file\n" +
             "\n" +
             "'decompile' Options:\n" +
-            "  -O, --optimize            optimizes output SF3CHR file\n" +
-            "  --output=<output-file>    specify output .SF3CHR file\n" +
+            "  -O, --optimize            optimizes output SF3CHR/SF3CHP file\n" +
+            "  --output=<output-file>    specify output SF3CHR/SF3CHP file\n" +
             "\n" +
             "'extract-sheets' Options:\n" +
             "  (none)\n" +

@@ -39,9 +39,7 @@ namespace CHRTool {
 
             // It looks like we're ready to go!
             try {
-                Console.WriteLine($"Extracting spritesheet frames from files/paths(s):");
-                foreach (var gameDataFile in gameDataFiles)
-                    Console.WriteLine($"  {gameDataFile}");
+                Console.WriteLine($"Extracting spritesheet frames:");
                 Console.WriteLine("------------------------------------------------------------------------------");
 
                 // Try to create the spritesheet directory if it doesn't exist.
@@ -76,7 +74,7 @@ namespace CHRTool {
                 var framesWritten = new HashSet<string>();
 
                 foreach (var file in files) {
-                    Console.Write($"Extracting frames from '{Path.GetFileName(file)}': ");
+                    Console.Write($"Extracting frames from '{file}': ");
                     var loadedSpritesheets = new Dictionary<string, Bitmap>();
                     try {
                         var bytes = File.ReadAllBytes(file);

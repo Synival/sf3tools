@@ -37,15 +37,20 @@ namespace CHRTool {
                 // Open SF3Sprite files and their accompanying spritesheets.
                 Console.WriteLine("Checking sprites for new frame hashes:");
                 foreach (var file in files) {
-                    Console.WriteLine($"Updating '{Path.GetFileName(file)}'...");
+                    Console.Write($"Updating '{file}': ");
                     try {
                         var jsonText = File.ReadAllText(file);
                         var spriteDef = SpriteDef.FromJSON(jsonText);
-                        var framesAdded = SpriteResources.AddFrameRefs(spriteDef);
+
+                        (var framesAdded, var framesSkipped) = SpriteResources.AddFrameRefs(spriteDef);
                         totalFramesAdded += framesAdded;
 
-                        if (framesAdded > 0)
-                            Console.WriteLine($"    {framesAdded} new frame(s) added");
+                        if (framesSkipped > 0)
+                            Console.WriteLine($"{framesAdded} new frame(s) added, {framesSkipped} frame(s) skipped");
+                        else if (framesAdded > 0)
+                            Console.WriteLine($"{framesAdded} new frame(s) added");
+                        else
+                            Console.WriteLine();
                     }
                     catch (Exception e) {
                         Console.Error.WriteLine($"    Error updating frame hashes:");
