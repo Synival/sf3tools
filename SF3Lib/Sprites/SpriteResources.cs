@@ -5,7 +5,6 @@ using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
-using System.Xml;
 using Newtonsoft.Json;
 using SF3.Extensions;
 using SF3.Types;
@@ -16,10 +15,10 @@ namespace SF3.Sprites {
     public static class SpriteResources {
         private static Dictionary<string, SpriteDef> s_spriteDefs = new Dictionary<string, SpriteDef>();
         private static HashSet<string> s_spriteDefFilesLoaded = new HashSet<string>();
-        private static Dictionary<string, FrameHashLookupSet> s_frameHashLookups = new Dictionary<string, FrameHashLookupSet>();
-        private static Dictionary<string, UniqueAnimationDef> s_uniqueAnimationsByHash = null;
+        private static Dictionary<string, FrameHashLookupSet> s_frameRefsByHash = new Dictionary<string, FrameHashLookupSet>();
+        private static Dictionary<string, UniqueAnimationDef> s_animationRefsByHash = new Dictionary<string, UniqueAnimationDef>();
 
-        private static bool s_frameHashLookupsLoaded = false;
+        private static bool s_frameRefsLoaded = false;
 
         /// <summary>
         /// The path where .SF3Sprite files can be found. When 'null', the path 'Resources/Sprites' will be used.
@@ -109,6 +108,8 @@ namespace SF3.Sprites {
                     return null;
 
                 s_spriteDefs.Add(spriteDef.Name, spriteDef);
+                AddAnimationHashLookups(spriteDef);
+
                 return spriteDef;
             }
             catch {
@@ -156,15 +157,15 @@ namespace SF3.Sprites {
                 foreach (var frameRef in lookupKv.Value)
                     frameRef.ImageHash = lookupKv.Key;
 
-                if (!s_frameHashLookups.ContainsKey(lookupKv.Key))
-                    s_frameHashLookups.Add(lookupKv.Key, new FrameHashLookupSet(lookupKv.Value));
+                if (!s_frameRefsByHash.ContainsKey(lookupKv.Key))
+                    s_frameRefsByHash.Add(lookupKv.Key, new FrameHashLookupSet(lookupKv.Value));
                 else {
                     foreach (var frame in lookupKv.Value)
-                        s_frameHashLookups[lookupKv.Key].Add(frame);
+                        s_frameRefsByHash[lookupKv.Key].Add(frame);
                 }
             }
 
-            s_frameHashLookupsLoaded = true;
+            s_frameRefsLoaded = true;
         }
 
         /// <summary>
@@ -181,7 +182,7 @@ namespace SF3.Sprites {
                     stream.NewLine = "\n";
                     stream.WriteLine("{");
 
-                    var lookupKvArray = s_frameHashLookups
+                    var lookupKvArray = s_frameRefsByHash
                         .OrderBy(x => string.Join("|", x.Value.Select(y => y.SpriteName)))
                         .ThenBy(x => string.Join("|", x.Value.Select(y => y.FrameGroupName)))
                         .ThenBy(x => x.Value.Min(y => y.FrameWidth))
@@ -262,12 +263,12 @@ namespace SF3.Sprites {
                 ImageHash      = hash,
             };
 
-            if (!s_frameHashLookups.ContainsKey(hash)) {
-                s_frameHashLookups.Add(hash, new FrameHashLookupSet(new FrameHashLookup[] { frameHashLookup }));
+            if (!s_frameRefsByHash.ContainsKey(hash)) {
+                s_frameRefsByHash.Add(hash, new FrameHashLookupSet(new FrameHashLookup[] { frameHashLookup }));
                 return true;
             }
 
-            var hashSet = s_frameHashLookups[hash];
+            var hashSet = s_frameRefsByHash[hash];
             if (hashSet.Contains(frameHashLookup))
                 return false;
 
@@ -281,76 +282,65 @@ namespace SF3.Sprites {
         /// <param name="imageHash">An MD5 hash generated from an TextureABGR1555 of a frame image.</param>
         /// <returns>An array of FrameHashLookup's identifying where this frame image is used. If this frame image is unknown, an empty array is returned.</returns>
         public static FrameHashLookupSet GetFrameRefsForImageHash(string imageHash) {
-            if (!s_frameHashLookupsLoaded)
+            if (!s_frameRefsLoaded)
                 LoadFrameHashLookups();
-            return s_frameHashLookups.TryGetValue(imageHash, out var frames) ? frames : new FrameHashLookupSet(imageHash);
+            return s_frameRefsByHash.TryGetValue(imageHash, out var frames) ? frames : new FrameHashLookupSet(imageHash);
         }
 
-        public static UniqueAnimationDef GetUniqueAnimationInfoByHash(string hash) {
-            LoadUniqueAnimationsByHashTable();
-            if (!s_uniqueAnimationsByHash.ContainsKey(hash.ToLower()))
-                s_uniqueAnimationsByHash[hash] = new UniqueAnimationDef(hash, "(Unknown)", 0, 0, 0, "(Unknown)");
+        /// <summary>
+        /// Adds animation hash lookups for all frames in a sprite.
+        /// </summary>
+        /// <param name="spriteDef">The sprite which contains all the animations to be added.</param>
+        /// <returns>The number of new animations hash lookups added.</returns>
+        public static int AddAnimationHashLookups(SpriteDef spriteDef) {
+            int animationsAdded = 0;
+            foreach (var spritesheetKv in spriteDef.Spritesheets) {
+                var frameSize = Spritesheet.KeyToDimensions(spritesheetKv.Key);
+                var spritesheet = spritesheetKv.Value;
 
-            var animation = s_uniqueAnimationsByHash[hash];
-            return animation;
-        }
+                foreach (var animationSetKv in spritesheet.AnimationSetsByDirections) {
+                    var directions = animationSetKv.Key;
+                    foreach (var animationKv in animationSetKv.Value.AnimationsByName) {
+                        var animationName = animationKv.Key;
+                        var animation = animationKv.Value;
+                        var animationHash = CreateAnimationHash(spriteDef, frameSize.Width, frameSize.Height, directions, animation.AnimationCommands);
 
-        private static void LoadUniqueAnimationsByHashTable() {
-            if (s_uniqueAnimationsByHash != null)
-                return;
-            s_uniqueAnimationsByHash = new Dictionary<string, UniqueAnimationDef>();
+                        // TODO: Hash collisions and duplication animations can indeed happen. We should handle that!
+                        if (s_animationRefsByHash.ContainsKey(animationHash))
+                            continue;
 
-            try {
-                using (var stream = new FileStream(ResourceFile("SpriteAnimationsByHash.xml"), FileMode.Open, FileAccess.Read)) {
-                    var settings = new XmlReaderSettings {
-                        IgnoreComments = true,
-                        IgnoreWhitespace = true
-                    };
-
-                    var xml = XmlReader.Create(stream, settings);
-                    _ = xml.Read();
-
-                    var nameDict = new Dictionary<int, string>();
-                    while (!xml.EOF) {
-                        _ = xml.Read();
-                        if (xml.HasAttributes) {
-                            var hash           = xml.GetAttribute("hash");
-                            var sprite         = xml.GetAttribute("sprite");
-                            var widthAttr      = xml.GetAttribute("width");
-                            var heightAttr     = xml.GetAttribute("height");
-                            var directionsAttr = xml.GetAttribute("directions");
-                            var animation      = xml.GetAttribute("animation");
-
-                            if (hash == null || sprite == null || animation == null || widthAttr == null || heightAttr == null || directionsAttr == null)
-                                continue;
-
-                            int width, height, directionsInt;
-                            if (!int.TryParse(widthAttr, out width) || !int.TryParse(heightAttr, out height) || !int.TryParse(directionsAttr, out directionsInt))
-                                continue;
-                            var directions = (SpriteDirectionCountType) directionsInt;
-
-                            if (sprite == "")
-                                sprite = "None";
-
-                            s_uniqueAnimationsByHash.Add(hash.ToLower(), new UniqueAnimationDef(hash, sprite, width, height, directions, animation));
-                        }
+                        var uniqueAnim = new UniqueAnimationDef(animationHash, spriteDef.Name, frameSize.Width, frameSize.Height, directions, animationName);
+                        s_animationRefsByHash.Add(animationHash, uniqueAnim);
+                        animationsAdded++;
                     }
                 }
             }
-            catch {
-                // TDOO what to do here??
-            }
+            return animationsAdded;
         }
 
-        private class AnimationHashCommand {
-            public SpriteAnimationCommandType Command;
-            public int Parameter;
-            public int FrameID;
-            public SpriteDirectionCountType Directions;
-            public ITexture Image;
-            public int FramesMissing;
+        /// <summary>
+        /// Returns an animation reference baesd on an animation hash. Can be used to fetch an animation name from a CHR file.
+        /// </summary>
+        /// <param name="spriteName">The name of the sprite to which this animation belongs.</param>
+        /// <param name="animationHash">The hash generated for the animation.</param>
+        /// <returns></returns>
+        public static UniqueAnimationDef GetUniqueAnimationInfo(string spriteName, string animationHash) {
+            // Load the sprite def to get the animation hashes.
+            _ = GetSpriteDef(spriteName);
+
+            //LoadUniqueAnimationsByHashTable();
+            if (!s_animationRefsByHash.ContainsKey(animationHash.ToLower()))
+                s_animationRefsByHash[animationHash] = new UniqueAnimationDef(animationHash, "(Unknown)", 0, 0, 0, "(Unknown)");
+
+            var animation = s_animationRefsByHash[animationHash];
+            return animation;
         }
 
+        /// <summary>
+        /// Generates a unique animation hash based on animation commands found in a CHR file.
+        /// </summary>
+        /// <param name="animationCommands">Animation commands from an animation in a CHR file.</param>
+        /// <returns>A unique hash corresponding to the animation.</returns>
         public static string CreateAnimationHash(Models.Structs.CHR.AnimationCommand[] animationCommands) {
             var hashInfos = animationCommands
                 .Select(x => new AnimationHashCommand() {
@@ -358,12 +348,128 @@ namespace SF3.Sprites {
                     Parameter  = x.Parameter,
                     FrameID    = x.IsFrameCommand ? x.Command : -1,
                     Directions = x.Directions,
-                    Image      = (x.IsFrameCommand) ? x.GetTexture(x.Directions) : null,
+                    ImageHash  = (x.IsFrameCommand) ? x.GetTexture(x.Directions)?.Hash : null,
                     FramesMissing = x.FramesMissing
                 })
                 .ToArray();
 
             return CreateAnimationHash(hashInfos);
+        }
+
+        /// <summary>
+        /// Generates a unique animation hash based on animation commands found in a SpriteDef.
+        /// </summary>
+        /// <param name="spriteDef">The SpriteDef which contains the animation.</param>
+        /// <param name="frameWidth">The width of the frames in the animation.</param>
+        /// <param name="frameHeight">The height of the frames in the animation.</param>
+        /// <param name="directions">The initial number of directions in this animation.</param>
+        /// <param name="animationCommands">The commands in this animation.</param>
+        /// <returns>A unique hash corresponding to the animation.</returns>
+        public static string CreateAnimationHash(SpriteDef spriteDef, int frameWidth, int frameHeight, SpriteDirectionCountType directions, AnimationCommand[] animationCommands) {
+            var spritesheetKey = Spritesheet.DimensionsToKey(frameWidth, frameHeight);
+            if (spriteDef == null || spriteDef.Spritesheets == null || !spriteDef.Spritesheets.ContainsKey(spritesheetKey))
+                return null;
+
+            // We'll need to get images from the spritesheet. Check if it exists.
+            var spritesheetImageFile = SpritesheetImageFile(spriteDef.Name, frameWidth, frameHeight);
+            Bitmap spritesheetBitmap = null;
+            if (File.Exists(spritesheetImageFile)) {
+                try {
+                    spritesheetBitmap = new Bitmap(spritesheetImageFile);
+                }
+                catch {
+                    // TODO: log error?
+                }
+            }
+
+            var spritesheet = spriteDef.Spritesheets[spritesheetKey];
+            var animationFrameCount = directions.GetAnimationFrameCount();
+            var hashInfos = animationCommands
+                .Select(x => {
+                    // Account for changing frame counts.
+                    if (x.Command == SpriteAnimationCommandType.SetDirectionCount)
+                        animationFrameCount = ((SpriteDirectionCountType) x.Parameter).GetAnimationFrameCount();
+
+                    // Non-frame commands are straight-forward for hash generation.
+                    if (x.Command != SpriteAnimationCommandType.Frame) {
+                        return new AnimationHashCommand() {
+                            Command    = x.Command,
+                            Parameter  = x.Parameter,
+                            FrameID    = -1,
+                            Directions = directions,
+                            ImageHash  = null,
+                            FramesMissing = 0
+                        };
+                    }
+
+                    // For frames, we'll need to get the actual image. Start by getting the frame references.
+                    FrameHashLookup[] frameRefs = null;
+                    var frameGroupDirections = CHR_Utils.GetFrameGroupDirections(animationFrameCount);
+                    if (x.FrameGroup != null) {
+                        frameRefs = frameGroupDirections
+                            .Select(y => new FrameHashLookup() {
+                                SpriteName = spriteDef.Name,
+                                FrameWidth = frameWidth,
+                                FrameHeight = frameHeight,
+                                FrameDirection = y,
+                                FrameGroupName = x.FrameGroup
+                            })
+                            .ToArray();
+                    }
+                    else {
+                        frameRefs = frameGroupDirections
+                            .Select(y => {
+                                if (!x.FramesByDirection.ContainsKey(y))
+                                    return null;
+
+                                var frame = x.FramesByDirection[y];
+                                return new FrameHashLookup() {
+                                    SpriteName = spriteDef.Name,
+                                    FrameWidth = frameWidth,
+                                    FrameHeight = frameHeight,
+                                    FrameDirection = frame.Direction,
+                                    FrameGroupName = frame.FrameGroup
+                                };
+                            })
+                            .ToArray();
+                    }
+
+                    // Get the image on the spritesheet.
+                    var textures = new List<ITexture>();
+                    if (spritesheetBitmap != null) {
+                        foreach (var frameRef in frameRefs.Where(y => y != null)) {
+                            if (spritesheet.FrameGroupsByName.TryGetValue(frameRef.FrameGroupName, out var frameGroup)) {
+                                if (frameGroup.Frames.TryGetValue(frameRef.FrameDirection, out var frame)) {
+                                    var frameImageData = spritesheetBitmap.GetDataAt(frame.SpritesheetX, frame.SpritesheetY, frameWidth, frameHeight);
+                                    if (frameImageData != null)
+                                        textures.Add(new TextureABGR1555(0, 0, 0, frameImageData));
+                                }
+                            }
+                        }
+                    }
+                    var stackedTexture = TextureUtils.StackTextures(0, 0, 0, textures.ToArray());
+
+                    return new AnimationHashCommand() {
+                        Command    = x.Command,
+                        Parameter  = x.Parameter,
+                        FrameID    = -1,
+                        Directions = directions,
+                        ImageHash  = stackedTexture?.Hash,
+                        FramesMissing = animationFrameCount - textures.Count
+                    };
+                })
+                .ToArray();
+
+            return CreateAnimationHash(hashInfos);
+        }
+
+        private class AnimationHashCommand {
+            public SpriteAnimationCommandType Command;
+            public int Parameter;
+            public int FrameID;
+            public SpriteDirectionCountType Directions;
+            public string ImageHash;
+            public int FramesMissing;
         }
 
         private static string CreateAnimationHash(AnimationHashCommand[] animationHashCommands) {
@@ -384,8 +490,7 @@ namespace SF3.Sprites {
                         hashStr += $"{((int) cmd):x2},{aniCommand.Parameter:x2}";
                 }
                 else {
-                    var tex = aniCommand.Image;
-                    hashStr += (tex != null) ? $"{tex.Hash}_{aniCommand.Parameter:x2}" : $"{aniCommand.FrameID:x2},{aniCommand.Parameter:x2}";
+                    hashStr += (aniCommand.ImageHash != null) ? $"{aniCommand.ImageHash}_{aniCommand.Parameter:x2}" : $"{aniCommand.FrameID:x2},{aniCommand.Parameter:x2}";
                     if (aniCommand.FramesMissing > 0)
                         hashStr += $"_M{aniCommand.FramesMissing})";
                 }

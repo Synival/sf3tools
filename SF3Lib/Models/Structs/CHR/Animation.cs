@@ -28,7 +28,7 @@ namespace SF3.Models.Structs.CHR {
                 .Select(x => FrameTable[x])
                 .ToArray();
 
-            AnimationInfo = SpriteResources.GetUniqueAnimationInfoByHash(Hash);
+            AnimationInfo = SpriteResources.GetUniqueAnimationInfo(SpriteName, Hash);
 
             var uniqueFramesWithTextures = _framesWithTextures.Distinct().ToArray();
             TotalCompressedFramesSize = (uint) uniqueFramesWithTextures.Sum(x => x.TextureCompressedSize);

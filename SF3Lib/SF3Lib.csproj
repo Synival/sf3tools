@@ -129,9 +129,6 @@
     <Content Include="Resources\BattlePointersList.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\SpriteAnimationsByHash.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Include="Resources\Sprites\Benetram (Prototype 2).SF3Sprite">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
