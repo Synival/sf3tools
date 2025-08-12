@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
+using System.Text;
 using CommonLib.Attributes;
 using SF3.ByteData;
 using SF3.Models.Tables.CHR;
@@ -93,7 +95,9 @@ namespace SF3.Models.Structs.CHR {
             return Math.Max(0, Math.Min(FrameTable.Length - Command, expectedFrameCount));
         }
 
+        private readonly Dictionary<int, string> _textureHashByFrameCount = new Dictionary<int, string>();
         private readonly Dictionary<int, ITexture> _texturesByFrameCount = new Dictionary<int, ITexture>();
+
         public ITexture GetTexture(SpriteDirectionCountType directions) {
             if (FrameTable == null || !IsFrameCommand)
                 return null;
@@ -104,17 +108,32 @@ namespace SF3.Models.Structs.CHR {
 
             var frameMin = Command;
             var frameMax = frameMin + frameCount;
+
             var frames = FrameTable
                 .Where(x => x.ID >= frameMin && x.ID < frameMax)
                 .Select(x => x.Texture)
                 .ToArray();
-
             tex = TextureUtils.StackTextures(0, 0, 0, frames);
             _texturesByFrameCount[frameCount] = tex;
+
+            var frameTableCount = FrameTable.Length;
+            var frameHash = Enumerable.Range(frameMin, frameCount)
+                .Select(x => (x < frameTableCount) ? FrameTable[x] : null)
+                .Select(x => (x?.Texture != null) ? $"({x.Texture.Hash})" : "()")
+                .Aggregate((a, b) => a + b);
+            using (var md5 = MD5.Create())
+                _textureHashByFrameCount.Add(frameCount, BitConverter.ToString(md5.ComputeHash(Encoding.ASCII.GetBytes(frameHash))).Replace("-", "").ToLower());
+
             return tex;
         }
 
+        public string GetTextureHash(SpriteDirectionCountType directions) {
+            // Has the side-effect of assigning _textureHashByFrameCount.
+            _ = GetTexture(directions);
+            return IsFrameCommand ? _textureHashByFrameCount[directions.GetAnimationFrameCount()] : null;
+        }
+
         [TableViewModelColumn(displayOrder: 5, minWidth: 200)]
-        public string TextureHash => GetTexture(Directions)?.Hash;
+        public string TextureHash => GetTextureHash(Directions);
     }
 }

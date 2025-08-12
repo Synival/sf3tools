@@ -16,7 +16,7 @@ namespace SF3.Sprites {
         [JsonIgnore]
         public string ImageHash;
 
-        public override string ToString() => $"{SpriteName} ({FrameWidth}x{FrameHeight}).{FrameGroupName}";
+        public override string ToString() => $"{SpriteName} ({FrameWidth}x{FrameHeight}).{FrameGroupName} ({FrameDirection})";
 
         public override bool Equals(object obj) {
             return obj is FrameRef lookup
