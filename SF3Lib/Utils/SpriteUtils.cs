@@ -7,7 +7,7 @@ namespace SF3.Utils {
         /// </summary>
         /// <param name="directions">The number of directions for the frame group.</param>
         /// <returns>A set of SpriteFrameDirection's in order as they would appear vertically in a spritesheet.</returns>
-        public static SpriteFrameDirection[] SpritesheetFrameGroupDirections(int directions) {
+        public static SpriteFrameDirection[] GetFrameGroupDirections(int directions) {
             switch (directions) {
                 case 1:
                     return new SpriteFrameDirection[] {

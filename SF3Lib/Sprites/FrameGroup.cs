@@ -47,7 +47,7 @@ namespace SF3.Sprites {
                             var spritesheetY = (int) jObj["SpritesheetY"];
                             var span         = jObj.TryGetValue("Span", out var spanOut) ? (int) spanOut : frameHeight;
 
-                            var frameDirs = SpriteUtils.SpritesheetFrameGroupDirections(directions);
+                            var frameDirs = SpriteUtils.GetFrameGroupDirections(directions);
                             Frames = frameDirs
                                 .Select((x, i) => (Direction: x, Index: i))
                                 .ToDictionary(x => x.Direction, x => new Frame() {
@@ -79,7 +79,7 @@ namespace SF3.Sprites {
 
             // If the frames are standard and stacked in a very specific way, we can simplify the declaration.
             // This is a big improvement for most sprites.
-            var directions = SpriteUtils.SpritesheetFrameGroupDirections(Frames.Count);
+            var directions = SpriteUtils.GetFrameGroupDirections(Frames.Count);
             bool FramesAreStacked(out int spritesheetXOut, out int spritesheetYOut, out int spanOut) {
                 spritesheetXOut = -1;
                 spritesheetYOut = -1;
