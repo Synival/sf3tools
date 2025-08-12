@@ -5,11 +5,13 @@ using SF3.Types;
 
 namespace SF3.Sprites {
     public class FrameHashLookupSet : HashSet<FrameHashLookup> {
-        public FrameHashLookupSet(string imageHash) {
-            ImageHash = imageHash;
+        public FrameHashLookupSet(IEnumerable<FrameHashLookup> collection) : base(collection) {
+            ImageHash = collection.First().ImageHash;
+            if (!collection.All(x => x.ImageHash == ImageHash))
+                throw new ArgumentException("FrameHashLookup's must have the same ImageHash");
         }
 
-        public FrameHashLookupSet(string imageHash, IEnumerable<FrameHashLookup> collection) : base(collection) {
+        public FrameHashLookupSet(string imageHash) {
             ImageHash = imageHash;
         }
 

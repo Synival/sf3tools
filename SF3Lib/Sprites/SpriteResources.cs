@@ -153,8 +153,11 @@ namespace SF3.Sprites {
             var jsonObj = JsonConvert.DeserializeObject<Dictionary<string, FrameHashLookup[]>>(jsonText);
 
             foreach (var lookupKv in jsonObj) {
+                foreach (var frameRef in lookupKv.Value)
+                    frameRef.ImageHash = lookupKv.Key;
+
                 if (!s_frameHashLookups.ContainsKey(lookupKv.Key))
-                    s_frameHashLookups.Add(lookupKv.Key, new FrameHashLookupSet(lookupKv.Key, lookupKv.Value));
+                    s_frameHashLookups.Add(lookupKv.Key, new FrameHashLookupSet(lookupKv.Value));
                 else {
                     foreach (var frame in lookupKv.Value)
                         s_frameHashLookups[lookupKv.Key].Add(frame);
@@ -256,10 +259,11 @@ namespace SF3.Sprites {
                 FrameHeight    = frameHeight,
                 FrameGroupName = frameGroupName,
                 FrameDirection = frameDir,
+                ImageHash      = hash,
             };
 
             if (!s_frameHashLookups.ContainsKey(hash)) {
-                s_frameHashLookups.Add(hash, new FrameHashLookupSet(hash) { frameHashLookup });
+                s_frameHashLookups.Add(hash, new FrameHashLookupSet(new FrameHashLookup[] { frameHashLookup }));
                 return true;
             }
 

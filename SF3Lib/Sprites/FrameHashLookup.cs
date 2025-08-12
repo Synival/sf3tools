@@ -13,6 +13,9 @@ namespace SF3.Sprites {
         [JsonConverter(typeof(StringEnumConverter))]
         public SpriteFrameDirection FrameDirection;
 
+        [JsonIgnore]
+        public string ImageHash;
+
         public override bool Equals(object obj) {
             return obj is FrameHashLookup lookup
                 && SpriteName     == lookup.SpriteName
