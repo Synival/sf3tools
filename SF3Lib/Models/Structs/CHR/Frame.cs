@@ -43,7 +43,7 @@ namespace SF3.Models.Structs.CHR {
                     Height = Texture.Height;
                 }
 
-                FrameRefs = SpriteResources.GetFrameRefsForImageHash(hash);
+                FrameRefs = SpriteResources.GetFrameRefsByImageHash(hash);
             }
         }
 

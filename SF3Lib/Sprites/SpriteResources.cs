@@ -17,6 +17,7 @@ namespace SF3.Sprites {
         private static HashSet<string> s_spriteDefFilesLoaded = new HashSet<string>();
         private static Dictionary<string, FrameRefSet> s_frameRefsByHash = new Dictionary<string, FrameRefSet>();
         private static Dictionary<string, AnimationRef> s_animationRefsByHash = new Dictionary<string, AnimationRef>();
+        private static HashSet<string> s_animationRefsLoaded = new HashSet<string>();
 
         private static bool s_frameRefsLoaded = false;
 
@@ -108,8 +109,6 @@ namespace SF3.Sprites {
                     return null;
 
                 s_spriteDefs.Add(spriteDef.Name, spriteDef);
-                AddAnimationHashLookups(spriteDef);
-
                 return spriteDef;
             }
             catch {
@@ -281,7 +280,7 @@ namespace SF3.Sprites {
         /// </summary>
         /// <param name="imageHash">An MD5 hash generated from an TextureABGR1555 of a frame image.</param>
         /// <returns>An array of FrameHashLookup's identifying where this frame image is used. If this frame image is unknown, an empty array is returned.</returns>
-        public static FrameRefSet GetFrameRefsForImageHash(string imageHash) {
+        public static FrameRefSet GetFrameRefsByImageHash(string imageHash) {
             if (!s_frameRefsLoaded)
                 LoadFrameHashLookups();
             return s_frameRefsByHash.TryGetValue(imageHash, out var frames) ? frames : new FrameRefSet(imageHash);
@@ -290,9 +289,14 @@ namespace SF3.Sprites {
         /// <summary>
         /// Adds animation hash lookups for all frames in a sprite.
         /// </summary>
-        /// <param name="spriteDef">The sprite which contains all the animations to be added.</param>
+        /// <param name="spriteName">Name of the sprite which contains all the animations to be added.</param>
         /// <returns>The number of new animations hash lookups added.</returns>
-        public static int AddAnimationHashLookups(SpriteDef spriteDef) {
+        public static int AddAnimationHashLookups(string spriteName) {
+            if (s_animationRefsLoaded.Contains(spriteName))
+                return 0;
+            s_animationRefsLoaded.Add(spriteName);
+            var spriteDef = GetSpriteDef(spriteName);
+
             int animationsAdded = 0;
             foreach (var spritesheetKv in spriteDef.Spritesheets) {
                 var frameSize = Spritesheet.KeyToDimensions(spritesheetKv.Key);
@@ -331,9 +335,10 @@ namespace SF3.Sprites {
         /// <param name="spriteName">The name of the sprite to which this animation belongs.</param>
         /// <param name="animationHash">The hash generated for the animation.</param>
         /// <returns></returns>
-        public static AnimationRef GetUniqueAnimationInfo(string spriteName, string animationHash) {
+        public static AnimationRef GetAnimationRefByImageHash(string spriteName, string animationHash) {
             // Load the sprite def to get the animation hashes.
-            _ = GetSpriteDef(spriteName);
+            if (!s_animationRefsLoaded.Contains(spriteName))
+                AddAnimationHashLookups(spriteName);
 
             //LoadUniqueAnimationsByHashTable();
             if (!s_animationRefsByHash.ContainsKey(animationHash.ToLower())) {

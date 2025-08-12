@@ -28,8 +28,6 @@ namespace SF3.Models.Structs.CHR {
                 .Select(x => FrameTable[x])
                 .ToArray();
 
-            AnimationRef = SpriteResources.GetUniqueAnimationInfo(SpriteName, Hash);
-
             var uniqueFramesWithTextures = _framesWithTextures.Distinct().ToArray();
             TotalCompressedFramesSize = (uint) uniqueFramesWithTextures.Sum(x => x.TextureCompressedSize);
         }
@@ -100,7 +98,14 @@ namespace SF3.Models.Structs.CHR {
             }
         }
 
-        public AnimationRef AnimationRef { get; }
+        private AnimationRef _animationRef = null;
+        public AnimationRef AnimationRef {
+            get {
+                if (_animationRef == null)
+                    _animationRef = SpriteResources.GetAnimationRefByImageHash(SpriteName, Hash);
+                return _animationRef;
+            }
+        }
 
         [TableViewModelColumn(displayOrder: 4, displayFormat: "X4")]
         public uint TotalCompressedFramesSize { get; }
