@@ -31,7 +31,7 @@ namespace CHRTool {
                     Console.WriteLine($"Couldn't find '{frameHashLookupsFile}' -- creating file from scratch.");
                 else {
                     Console.WriteLine($"Loading '{frameHashLookupsFile}'...");
-                    SpriteResources.LoadFrameHashLookups();
+                    SpriteResources.LoadFrameRefs();
                 }
 
                 // Open SF3Sprite files and their accompanying spritesheets.
@@ -41,7 +41,7 @@ namespace CHRTool {
                     try {
                         var jsonText = File.ReadAllText(file);
                         var spriteDef = SpriteDef.FromJSON(jsonText);
-                        var framesAdded = SpriteResources.AddFrameHashLookups(spriteDef);
+                        var framesAdded = SpriteResources.AddFrameRefs(spriteDef);
                         totalFramesAdded += framesAdded;
 
                         if (framesAdded > 0)
@@ -54,7 +54,7 @@ namespace CHRTool {
                 }
 
                 Console.WriteLine($"Writing '{frameHashLookupsFile}'...");
-                SpriteResources.WriteFrameHashLookupsJSON();
+                SpriteResources.WriteFrameRefsJSON();
             }
             catch (Exception e) {
                 Console.WriteLine("------------------------------------------------------------------------------");

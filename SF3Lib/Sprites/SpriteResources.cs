@@ -147,7 +147,7 @@ namespace SF3.Sprites {
         /// This will look in 'Resources/FrameHashLookups.json' by default, or the file set by SetFrameHashLookupsFile().
         /// If the file has already been loaded, any new frames present are loaded.
         /// </summary>
-        public static void LoadFrameHashLookups() {
+        public static void LoadFrameRefs() {
             var filename = FrameHashLookupsFile ?? ResourceFile("FrameHashLookups.json");
             var jsonText = File.ReadAllText(filename);
             var jsonObj = JsonConvert.DeserializeObject<Dictionary<string, FrameRef[]>>(jsonText);
@@ -171,7 +171,7 @@ namespace SF3.Sprites {
         /// Rewrites the list of sprite frames that can be looked up by hash.
         /// This will rewrite 'Resources/FrameHashLookups.json' by default, or the file set by SetFrameHashLookupsFile().
         /// </summary>
-        public static void WriteFrameHashLookupsJSON() {
+        public static void WriteFrameRefsJSON() {
             var filename = FrameHashLookupsFile ?? ResourceFile("FrameHashLookups.json");
 
             // We could just use SerializeObject(), but then the file would either be one giant blob, or a
@@ -206,14 +206,14 @@ namespace SF3.Sprites {
         /// </summary>
         /// <param name="spriteDef">The sprite which contains all the frames to be added.</param>
         /// <returns>The number of new frame hash lookups added.</returns>
-        public static int AddFrameHashLookups(SpriteDef spriteDef) {
+        public static int AddFrameRefs(SpriteDef spriteDef) {
             int framesAdded = 0;
             foreach (var spritesheetKv in spriteDef.Spritesheets) {
                 var frameSize = Spritesheet.KeyToDimensions(spritesheetKv.Key);
                 var spritesheet = spritesheetKv.Value;
 
                 var bitmapFilename = SpritesheetImageFile(spriteDef.Name, frameSize.Width, frameSize.Height);
-                using (var bitmap = new Bitmap(bitmapFilename)) {
+                using (var bitmap = new Bitmap(new MemoryStream(File.ReadAllBytes(bitmapFilename)))) {
                     foreach (var frameGroupKv in spritesheet.FrameGroupsByName) {
                         var frameGroupName = frameGroupKv.Key;
                         var frameGroup = frameGroupKv.Value;
@@ -232,7 +232,7 @@ namespace SF3.Sprites {
                                 var bitmapData = bitmap.GetDataAt(x1, y1, frameSize.Width, frameSize.Height);
                                 var texture = new TextureABGR1555(0, 0, 0, bitmapData);
                                 var hash = texture.Hash;
-                                if (AddFrameHashLookup(hash, spriteDef.Name, frameSize.Width, frameSize.Height, frameGroupName, frameDir))
+                                if (AddFrameRef(hash, spriteDef.Name, frameSize.Width, frameSize.Height, frameGroupName, frameDir))
                                     framesAdded++;
                             }
                         }
@@ -252,7 +252,7 @@ namespace SF3.Sprites {
         /// <param name="frameGroupName">The frame group name of the frame (e.g, 'Idle 1').</param>
         /// <param name="frameDir">The direction of this frame.</param>
         /// <returns></returns>
-        public static bool AddFrameHashLookup(string hash, string spriteName, int frameWidth, int frameHeight, string frameGroupName, SpriteFrameDirection frameDir) {
+        public static bool AddFrameRef(string hash, string spriteName, int frameWidth, int frameHeight, string frameGroupName, SpriteFrameDirection frameDir) {
             var frameHashLookup = new FrameRef() {
                 SpriteName     = spriteName,
                 FrameWidth     = frameWidth,
@@ -282,7 +282,7 @@ namespace SF3.Sprites {
         /// <returns>An array of FrameHashLookup's identifying where this frame image is used. If this frame image is unknown, an empty array is returned.</returns>
         public static FrameRefSet GetFrameRefsByImageHash(string imageHash) {
             if (!s_frameRefsLoaded)
-                LoadFrameHashLookups();
+                LoadFrameRefs();
             return s_frameRefsByHash.TryGetValue(imageHash, out var frames) ? frames : new FrameRefSet(imageHash);
         }
 
@@ -291,7 +291,7 @@ namespace SF3.Sprites {
         /// </summary>
         /// <param name="spriteName">Name of the sprite which contains all the animations to be added.</param>
         /// <returns>The number of new animations hash lookups added.</returns>
-        public static int AddAnimationHashLookups(string spriteName) {
+        public static int AddAnimationRefs(string spriteName) {
             if (s_animationRefsLoaded.Contains(spriteName))
                 return 0;
             s_animationRefsLoaded.Add(spriteName);
@@ -338,7 +338,7 @@ namespace SF3.Sprites {
         public static AnimationRef GetAnimationRefByImageHash(string spriteName, string animationHash) {
             // Load the sprite def to get the animation hashes.
             if (!s_animationRefsLoaded.Contains(spriteName))
-                AddAnimationHashLookups(spriteName);
+                AddAnimationRefs(spriteName);
 
             //LoadUniqueAnimationsByHashTable();
             if (!s_animationRefsByHash.ContainsKey(animationHash.ToLower())) {
@@ -395,90 +395,93 @@ namespace SF3.Sprites {
             Bitmap spritesheetBitmap = null;
             if (File.Exists(spritesheetImageFile)) {
                 try {
-                    spritesheetBitmap = new Bitmap(spritesheetImageFile);
+                    spritesheetBitmap = new Bitmap(new MemoryStream(File.ReadAllBytes(spritesheetImageFile)));
                 }
                 catch {
                     // TODO: log error?
                 }
             }
 
-            var spritesheet = spriteDef.Spritesheets[spritesheetKey];
-            var animationFrameCount = directions.GetAnimationFrameCount();
-            var hashInfos = animationCommands
-                .Select(x => {
-                    // Account for changing frame counts.
-                    if (x.Command == SpriteAnimationCommandType.SetDirectionCount)
-                        animationFrameCount = ((SpriteDirectionCountType) x.Parameter).GetAnimationFrameCount();
+            AnimationHashCommand[] hashInfos;
+            using (spritesheetBitmap) {
+                var spritesheet = spriteDef.Spritesheets[spritesheetKey];
+                var animationFrameCount = directions.GetAnimationFrameCount();
+                hashInfos = animationCommands
+                    .Select(x => {
+                        // Account for changing frame counts.
+                        if (x.Command == SpriteAnimationCommandType.SetDirectionCount)
+                            animationFrameCount = ((SpriteDirectionCountType) x.Parameter).GetAnimationFrameCount();
 
-                    // Non-frame commands are straight-forward for hash generation.
-                    if (x.Command != SpriteAnimationCommandType.Frame) {
+                        // Non-frame commands are straight-forward for hash generation.
+                        if (x.Command != SpriteAnimationCommandType.Frame) {
+                            return new AnimationHashCommand() {
+                                Command    = x.Command,
+                                Parameter  = x.Parameter,
+                                FrameID    = -1,
+                                Directions = directions,
+                                ImageHash  = null,
+                                FramesMissing = 0
+                            };
+                        }
+
+                        // For frames, we'll need to get the actual image. Start by getting the frame references.
+                        FrameRef[] frameRefs = null;
+                        var frameGroupDirections = CHR_Utils.GetFrameGroupDirections(animationFrameCount);
+                        if (x.FrameGroup != null) {
+                            frameRefs = frameGroupDirections
+                                .Select(y => new FrameRef() {
+                                    SpriteName = spriteDef.Name,
+                                    FrameWidth = frameWidth,
+                                    FrameHeight = frameHeight,
+                                    FrameDirection = y,
+                                    FrameGroupName = x.FrameGroup
+                                })
+                                .ToArray();
+                        }
+                        else {
+                            frameRefs = frameGroupDirections
+                                .Select(y => {
+                                    if (!x.FramesByDirection.ContainsKey(y))
+                                        return null;
+
+                                    var frame = x.FramesByDirection[y];
+                                    return new FrameRef() {
+                                        SpriteName = spriteDef.Name,
+                                        FrameWidth = frameWidth,
+                                        FrameHeight = frameHeight,
+                                        FrameDirection = frame.Direction,
+                                        FrameGroupName = frame.FrameGroup
+                                    };
+                                })
+                                .ToArray();
+                        }
+
+                        // Get the image on the spritesheet.
+                        var textures = new List<ITexture>();
+                        if (spritesheetBitmap != null) {
+                            foreach (var frameRef in frameRefs.Where(y => y != null)) {
+                                if (spritesheet.FrameGroupsByName.TryGetValue(frameRef.FrameGroupName, out var frameGroup)) {
+                                    if (frameGroup.Frames.TryGetValue(frameRef.FrameDirection, out var frame)) {
+                                        var frameImageData = spritesheetBitmap.GetDataAt(frame.SpritesheetX, frame.SpritesheetY, frameWidth, frameHeight);
+                                        if (frameImageData != null)
+                                            textures.Add(new TextureABGR1555(0, 0, 0, frameImageData));
+                                    }
+                                }
+                            }
+                        }
+                        var stackedTexture = TextureUtils.StackTextures(0, 0, 0, textures.ToArray());
+
                         return new AnimationHashCommand() {
                             Command    = x.Command,
                             Parameter  = x.Parameter,
                             FrameID    = -1,
                             Directions = directions,
-                            ImageHash  = null,
-                            FramesMissing = 0
+                            ImageHash  = stackedTexture?.Hash,
+                            FramesMissing = animationFrameCount - textures.Count
                         };
-                    }
-
-                    // For frames, we'll need to get the actual image. Start by getting the frame references.
-                    FrameRef[] frameRefs = null;
-                    var frameGroupDirections = CHR_Utils.GetFrameGroupDirections(animationFrameCount);
-                    if (x.FrameGroup != null) {
-                        frameRefs = frameGroupDirections
-                            .Select(y => new FrameRef() {
-                                SpriteName = spriteDef.Name,
-                                FrameWidth = frameWidth,
-                                FrameHeight = frameHeight,
-                                FrameDirection = y,
-                                FrameGroupName = x.FrameGroup
-                            })
-                            .ToArray();
-                    }
-                    else {
-                        frameRefs = frameGroupDirections
-                            .Select(y => {
-                                if (!x.FramesByDirection.ContainsKey(y))
-                                    return null;
-
-                                var frame = x.FramesByDirection[y];
-                                return new FrameRef() {
-                                    SpriteName = spriteDef.Name,
-                                    FrameWidth = frameWidth,
-                                    FrameHeight = frameHeight,
-                                    FrameDirection = frame.Direction,
-                                    FrameGroupName = frame.FrameGroup
-                                };
-                            })
-                            .ToArray();
-                    }
-
-                    // Get the image on the spritesheet.
-                    var textures = new List<ITexture>();
-                    if (spritesheetBitmap != null) {
-                        foreach (var frameRef in frameRefs.Where(y => y != null)) {
-                            if (spritesheet.FrameGroupsByName.TryGetValue(frameRef.FrameGroupName, out var frameGroup)) {
-                                if (frameGroup.Frames.TryGetValue(frameRef.FrameDirection, out var frame)) {
-                                    var frameImageData = spritesheetBitmap.GetDataAt(frame.SpritesheetX, frame.SpritesheetY, frameWidth, frameHeight);
-                                    if (frameImageData != null)
-                                        textures.Add(new TextureABGR1555(0, 0, 0, frameImageData));
-                                }
-                            }
-                        }
-                    }
-                    var stackedTexture = TextureUtils.StackTextures(0, 0, 0, textures.ToArray());
-
-                    return new AnimationHashCommand() {
-                        Command    = x.Command,
-                        Parameter  = x.Parameter,
-                        FrameID    = -1,
-                        Directions = directions,
-                        ImageHash  = stackedTexture?.Hash,
-                        FramesMissing = animationFrameCount - textures.Count
-                    };
-                })
-                .ToArray();
+                    })
+                    .ToArray();
+            }
 
             return CreateAnimationHash(hashInfos);
         }
