@@ -24,7 +24,7 @@ namespace SF3.Models.Files.X013 {
         public static X013_File Create(IByteData data, INameGetterContext nameContext, ScenarioType scenario) {
             var newFile = new X013_File(data, nameContext, scenario);
             if (!newFile.Init())
-                throw new InvalidOperationException("Couldn't initialize tables");
+                throw new InvalidOperationException("Couldn't initialize X013_File");
             return newFile;
         }
 

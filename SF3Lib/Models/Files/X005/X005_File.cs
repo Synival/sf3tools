@@ -45,7 +45,7 @@ namespace SF3.Models.Files.X005 {
         public static X005_File Create(IByteData data, INameGetterContext nameContext, ScenarioType scenario) {
             var newFile = new X005_File(data, nameContext, scenario);
             if (!newFile.Init())
-                throw new InvalidOperationException("Couldn't initialize tables");
+                throw new InvalidOperationException("Couldn't initialize X005_File");
             return newFile;
         }
 

@@ -20,7 +20,7 @@ namespace SF3.Models.Files.CHP {
         public static CHP_File Create(IByteData data, INameGetterContext nameContext, ScenarioType scenario) {
             var newFile = new CHP_File(data, nameContext, scenario);
             if (!newFile.Init())
-                throw new InvalidOperationException("Couldn't initialize tables");
+                throw new InvalidOperationException("Couldn't initialize CHP_File");
             return newFile;
         }
 

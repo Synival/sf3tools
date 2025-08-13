@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
+using CommonLib.Extensions;
 using Newtonsoft.Json;
 using SF3.Extensions;
 using SF3.Types;
@@ -112,8 +114,9 @@ namespace SF3.Sprites {
                 s_spriteDefs.Add(spriteDef.Name, spriteDef);
                 return spriteDef;
             }
-            catch {
-                // TODO: how to log this error?
+            catch (Exception e) {
+                Trace.TraceError($"Couldn't load SpriteDef from '{file}':");
+                Trace.TraceError($"  {e.GetTypeAndMessage()}");
                 s_spriteDefFilesLoaded.Add(fileWithoutExt);
                 return null;
             }

@@ -60,7 +60,7 @@ namespace SF3.Models.Files.MPD {
         public static MPD_File Create(IByteData data, Dictionary<ScenarioType, INameGetterContext> nameContexts) {
             var newFile = new MPD_File(data, nameContexts);
             if (!newFile.Init())
-                throw new InvalidOperationException("Couldn't initialize tables");
+                throw new InvalidOperationException("Couldn't initialize MPD_File");
             return newFile;
         }
 

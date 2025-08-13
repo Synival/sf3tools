@@ -23,7 +23,7 @@ namespace SF3.Models.Files.X033 {
         public static X033_File Create(IByteData data, INameGetterContext nameContext, ScenarioType scenario) {
             var newFile = new X033_File(data, nameContext, scenario);
             if (!newFile.Init())
-                throw new InvalidOperationException("Couldn't initialize tables");
+                throw new InvalidOperationException("Couldn't initialize X033_File");
             return newFile;
         }
 

@@ -22,14 +22,14 @@ namespace SF3.Models.Files.CHR {
         public static CHR_File Create(IByteData data, INameGetterContext nameContext, ScenarioType scenario) {
             var newFile = new CHR_File(data, nameContext, scenario, 0, 0, false);
             if (!newFile.Init())
-                throw new InvalidOperationException("Couldn't initialize tables");
+                throw new InvalidOperationException("Couldn't initialize CHR_File");
             return newFile;
         }
 
         public static CHR_File Create(IByteData data, INameGetterContext nameContext, ScenarioType scenario, int startId, uint dataOffset) {
             var newFile = new CHR_File(data, nameContext, scenario, startId, dataOffset, true);
             if (!newFile.Init())
-                throw new InvalidOperationException("Couldn't initialize tables");
+                throw new InvalidOperationException("Couldn't initialize CHR_File");
             return newFile;
         }
 

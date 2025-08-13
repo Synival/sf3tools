@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -292,14 +293,15 @@ namespace SF3.CHR {
                     // Get the FrameKey and AniFrameKey for each direction in this animation frame command.
                     var frameInfos = GetAnimationFrameCommandFrameInfos(aniCommand, frameDirections, aniFrameKeyPrefix);
                     if (frameInfos != null) {
-                        var frameId = spriteAniFrameKeys.GetFirstIndexOf(frameInfos.Select(x => x?.AniFrameKey).ToArray(), allowExceedingSize: true);
+                        var aniKeys = frameInfos.Select(x => x?.AniFrameKey).ToArray();
+                        var frameId = spriteAniFrameKeys.GetFirstIndexOf(aniKeys, allowExceedingSize: true);
                         if (frameId >= 0)
                             command = frameId;
                         else
-                            ; // TODO: what to do here???
+                            Trace.TraceError($"Couldn't find FrameID for animation command with keys '{string.Join(", ", aniKeys.Select(x => x ?? "(null)"))}'");
                     }
                     else
-                        ; // TODO: what to do here???
+                        Trace.TraceError("Animation 'Frame' command has no frames");
                 }
 
                 // Add the command to the command table.
@@ -708,8 +710,9 @@ namespace SF3.CHR {
                 var bitmapPath = SpriteResources.SpritesheetImageFile(spritesheetImageKey);
                 bitmap = (Bitmap) Image.FromFile(bitmapPath);
             }
-            catch {
-                // TODO: log an error
+            catch (Exception e) {
+                Trace.TraceError($"Couldn't load spritesheet '{spritesheetImageKey}'");
+                Trace.TraceError($"  {e.GetTypeAndMessage()}");
                 bitmap = null;
             }
 

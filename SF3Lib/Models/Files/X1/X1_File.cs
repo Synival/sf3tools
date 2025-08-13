@@ -36,7 +36,7 @@ namespace SF3.Models.Files.X1 {
         public static X1_File Create(IByteData data, INameGetterContext nameContext, ScenarioType scenario, bool isBTL99) {
             var newFile = new X1_File(data, nameContext, scenario, isBTL99);
             if (!newFile.Init())
-                throw new InvalidOperationException("Couldn't initialize tables");
+                throw new InvalidOperationException("Couldn't initialize X1_File");
             return newFile;
         }
 

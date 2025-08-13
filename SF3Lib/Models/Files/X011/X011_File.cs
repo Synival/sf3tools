@@ -22,7 +22,7 @@ namespace SF3.Models.Files.X011 {
         public static X011_File Create(IByteData data, INameGetterContext nameContext, ScenarioType scenario) {
             var newFile = new X011_File(data, nameContext, scenario);
             if (!newFile.Init())
-                throw new InvalidOperationException("Couldn't initialize tables");
+                throw new InvalidOperationException("Couldn't initialize X011_File");
             return newFile;
         }
 

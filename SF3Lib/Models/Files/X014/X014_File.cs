@@ -33,7 +33,7 @@ namespace SF3.Models.Files.X014 {
         public static X014_File Create(IByteData data, INameGetterContext nameContext, ScenarioType scenario) {
             var newFile = new X014_File(data, nameContext, scenario);
             if (!newFile.Init())
-                throw new InvalidOperationException("Couldn't initialize tables");
+                throw new InvalidOperationException("Couldn't initialize X014_File");
             return newFile;
         }
 
