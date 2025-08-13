@@ -1,6 +1,7 @@
 using System;
 using System.Reflection;
 using System.Windows.Forms;
+using CommonLib.Extensions;
 
 namespace CommonLib.Win.Utils {
     public static class MessageUtils {
@@ -31,7 +32,7 @@ namespace CommonLib.Win.Utils {
         /// <param name="message">The error messsage to display.</param>
         /// <param name="e">An exception to display.</param>
         public static void ErrorMessage(string message, Exception e)
-            => MessageBox.Show($"{message}:\r\n\r\n{e.GetType().Name}: {e.Message}", MessageTitle(), MessageBoxButtons.OK, MessageBoxIcon.Error);
+            => MessageBox.Show($"{message}:\r\n\r\n{e.GetTypeAndMessage()}", MessageTitle(), MessageBoxButtons.OK, MessageBoxIcon.Error);
 
         /// <summary>
         /// Shows a warning MessageBox with the correct title, buttons, and icon.

@@ -2,6 +2,7 @@
 using System.IO;
 using System.Windows.Forms;
 using CommonLib.Arrays;
+using CommonLib.Extensions;
 using SF3.Models.Files.X002;
 using SF3.Models.Files.X019;
 using SF3.Models.Tables.Shared;
@@ -51,7 +52,7 @@ namespace SF3.Editor.Forms {
                 x002File = X002_File.Create(data, new NameGetterContext(scenario), scenario);
             }
             catch (Exception e) {
-                ErrorMessage($"Couldn't open '{x002Filename}':\r\n\r\n{e.GetType().Name}: {e.Message}");
+                ErrorMessage($"Couldn't open '{x002Filename}':\r\n\r\n{e.GetTypeAndMessage()}");
                 return false;
             }
 
@@ -68,7 +69,7 @@ namespace SF3.Editor.Forms {
                 (monstersAffected, itemsApplied) = monsterTable.ApplyEquipmentStats(x002File.ItemTable, apply);
             }
             catch (Exception e) {
-                ErrorMessage($"Couldn't apply items:\n\r\n{e.GetType().Name}: {e.Message}");
+                ErrorMessage($"Couldn't apply items:\n\r\n{e.GetTypeAndMessage()}");
                 return false;
             }
 

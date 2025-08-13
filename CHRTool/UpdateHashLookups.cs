@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using System.IO;
+using CommonLib.Extensions;
 using SF3.Sprites;
 
 namespace CHRTool {
@@ -55,7 +56,7 @@ namespace CHRTool {
                     }
                     catch (Exception e) {
                         Trace.TraceError($"    Error updating frame hashes:");
-                        Trace.TraceError($"        {e.GetType().Name}: {e.Message}");
+                        Trace.TraceError($"        {e.GetTypeAndMessage()}");
                     }
                 }
 
@@ -65,7 +66,7 @@ namespace CHRTool {
             catch (Exception e) {
                 Trace.WriteLine("------------------------------------------------------------------------------");
                 Trace.TraceError($"Error:");
-                Trace.TraceError($"    {e.GetType().Name}: {e.Message}");
+                Trace.TraceError($"    {e.GetTypeAndMessage()}");
                 return 1;
             }
 

@@ -5,6 +5,7 @@ using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using CommonLib.Arrays;
+using CommonLib.Extensions;
 using SF3.ByteData;
 using SF3.Models.Files.CHP;
 using SF3.Models.Files.CHR;
@@ -62,7 +63,7 @@ namespace CHRTool {
                     }
                     catch (Exception e) {
                         Trace.TraceError($"    Error fetching file(s) at '{file}':");
-                        Trace.TraceError($"        {e.GetType().Name}: {e.Message}");
+                        Trace.TraceError($"        {e.GetTypeAndMessage()}");
                         return 1;
                     }
                 }
@@ -112,14 +113,14 @@ namespace CHRTool {
                     catch (Exception e) {
                         Trace.WriteLine("");
                         Trace.TraceError($"    Error extracting frames from '{file}':");
-                        Trace.TraceError($"        {e.GetType().Name}: {e.Message}");
+                        Trace.TraceError($"        {e.GetTypeAndMessage()}");
                     }
                 }
             }
             catch (Exception e) {
                 Trace.WriteLine("------------------------------------------------------------------------------");
                 Trace.TraceError($"Error:");
-                Trace.TraceError($"    {e.GetType().Name}: {e.Message}");
+                Trace.TraceError($"    {e.GetTypeAndMessage()}");
                 return 1;
             }
 
@@ -204,7 +205,7 @@ namespace CHRTool {
                     }
                     catch (Exception e) {
                         Trace.TraceError($"  Couldn't write frame '{frameRefTex.FrameRef}':");
-                        Trace.TraceError($"    {e.GetType().Name}: {e.Message}");
+                        Trace.TraceError($"    {e.GetTypeAndMessage()}");
                     }
                 }
                 framesWritten.Add(hash);
@@ -218,7 +219,7 @@ namespace CHRTool {
                 }
                 catch (Exception e) {
                     Trace.TraceError($"  Couldn't save bitmap '{filename}':");
-                    Trace.TraceError($"    {e.GetType().Name}: {e.Message}");
+                    Trace.TraceError($"    {e.GetTypeAndMessage()}");
                 }
             }
 

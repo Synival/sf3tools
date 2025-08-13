@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using System.IO;
 using CommonLib.Arrays;
+using CommonLib.Extensions;
 using NDesk.Options;
 using SF3.ByteData;
 using SF3.Models.Files.CHP;
@@ -113,7 +114,7 @@ namespace CHRTool {
             catch (Exception e) {
                 Trace.WriteLine("------------------------------------------------------------------------------");
                 Trace.TraceError($"Error:");
-                Trace.TraceError($"    {e.GetType().Name}: {e.Message}");
+                Trace.TraceError($"    {e.GetTypeAndMessage()}");
                 return 1;
             }
 
