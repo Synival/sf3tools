@@ -14,6 +14,7 @@ using SF3.Types;
 using SF3.Extensions;
 using CommonLib.Imaging;
 using SF3;
+using System.Diagnostics;
 
 namespace CHRTool {
     public static class ExtractSheets {
@@ -23,24 +24,24 @@ namespace CHRTool {
             // Fetch the directory with the game data for ripping spritesheets.
             var gameDataFiles = args.Where(x => !x.StartsWith('-')).ToArray();
             if (args.Length == 0) {
-                Console.Error.WriteLine("Missing game data directory");
-                Console.Error.Write(Constants.ErrorUsageString);
+                Trace.TraceError("Missing game data directory");
+                Trace.Write(Constants.ErrorUsageString);
                 return 1;
             }
             args = args.Where(x => x.StartsWith('-')).ToArray();
 
             // There shouldn't be any unrecognized arguments at this point.
             if (args.Length > 0) {
-                Console.Error.WriteLine("Unrecognized arguments in 'extract-sheet' command:");
-                Console.Error.WriteLine($"    {string.Join(" ", args)}");
-                Console.Error.Write(Constants.ErrorUsageString);
+                Trace.TraceError("Unrecognized arguments in 'extract-sheet' command:");
+                Trace.TraceError($"    {string.Join(" ", args)}");
+                Trace.Write(Constants.ErrorUsageString);
                 return 1;
             }
 
             // It looks like we're ready to go!
             try {
-                Console.WriteLine($"Extracting spritesheet frames:");
-                Console.WriteLine("------------------------------------------------------------------------------");
+                Trace.WriteLine($"Extracting spritesheet frames:");
+                Trace.WriteLine("------------------------------------------------------------------------------");
 
                 // Try to create the spritesheet directory if it doesn't exist.
                 if (!Directory.Exists(spritesheetDir))
@@ -60,8 +61,8 @@ namespace CHRTool {
                             filesList.Add(file);
                     }
                     catch (Exception e) {
-                        Console.Error.WriteLine($"    Error fetching file(s) at '{file}':");
-                        Console.Error.WriteLine($"        {e.GetType().Name}: {e.Message}");
+                        Trace.TraceError($"    Error fetching file(s) at '{file}':");
+                        Trace.TraceError($"        {e.GetType().Name}: {e.Message}");
                         return 1;
                     }
                 }
@@ -74,7 +75,7 @@ namespace CHRTool {
                 var framesWritten = new HashSet<string>();
 
                 foreach (var file in files) {
-                    Console.Write($"Extracting frames from '{file}': ");
+                    Trace.Write($"Extracting frames from '{file}': ");
                     var loadedSpritesheets = new Dictionary<string, Bitmap>();
                     try {
                         var bytes = File.ReadAllBytes(file);
@@ -91,7 +92,7 @@ namespace CHRTool {
                             extractInfos = GetExtractInfos(chpFile);
                         }
                         else {
-                            Console.Error.WriteLine($"  Unrecognized extension for '{file}'");
+                            Trace.TraceError($"  Unrecognized extension for '{file}'");
                             continue;
                         }
 
@@ -102,28 +103,28 @@ namespace CHRTool {
 
                         // Report
                         if (framesSkipped > 0)
-                            Console.WriteLine($"{framesAdded} frame(s) extracted, {framesSkipped} frame(s) skipped");
+                            Trace.WriteLine($"{framesAdded} frame(s) extracted, {framesSkipped} frame(s) skipped");
                         else if (framesAdded > 0)
-                            Console.WriteLine($"{framesAdded} frame(s) extracted");
+                            Trace.WriteLine($"{framesAdded} frame(s) extracted");
                         else
-                            Console.WriteLine($"no frames");
+                            Trace.WriteLine($"no frames");
                     }
                     catch (Exception e) {
-                        Console.WriteLine();
-                        Console.Error.WriteLine($"    Error extracting frames from '{file}':");
-                        Console.Error.WriteLine($"        {e.GetType().Name}: {e.Message}");
+                        Trace.WriteLine("");
+                        Trace.TraceError($"    Error extracting frames from '{file}':");
+                        Trace.TraceError($"        {e.GetType().Name}: {e.Message}");
                     }
                 }
             }
             catch (Exception e) {
-                Console.WriteLine("------------------------------------------------------------------------------");
-                Console.Error.WriteLine($"Error:");
-                Console.Error.WriteLine($"    {e.GetType().Name}: {e.Message}");
+                Trace.WriteLine("------------------------------------------------------------------------------");
+                Trace.TraceError($"Error:");
+                Trace.TraceError($"    {e.GetType().Name}: {e.Message}");
                 return 1;
             }
 
-            Console.WriteLine("------------------------------------------------------------------------------");
-            Console.WriteLine("Done");
+            Trace.WriteLine("------------------------------------------------------------------------------");
+            Trace.WriteLine("Done");
             return 0;
         }
 
@@ -202,8 +203,8 @@ namespace CHRTool {
                         }
                     }
                     catch (Exception e) {
-                        Console.Error.WriteLine($"  Couldn't write frame '{frameRefTex.FrameRef}':");
-                        Console.Error.WriteLine($"    {e.GetType().Name}: {e.Message}");
+                        Trace.TraceError($"  Couldn't write frame '{frameRefTex.FrameRef}':");
+                        Trace.TraceError($"    {e.GetType().Name}: {e.Message}");
                     }
                 }
                 framesWritten.Add(hash);
@@ -216,8 +217,8 @@ namespace CHRTool {
                     bitmap.Save(filename, ImageFormat.Png);
                 }
                 catch (Exception e) {
-                    Console.Error.WriteLine($"  Couldn't save bitmap '{filename}':");
-                    Console.Error.WriteLine($"    {e.GetType().Name}: {e.Message}");
+                    Trace.TraceError($"  Couldn't save bitmap '{filename}':");
+                    Trace.TraceError($"    {e.GetType().Name}: {e.Message}");
                 }
             }
 

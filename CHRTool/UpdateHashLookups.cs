@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.IO;
 using SF3.Sprites;
 
@@ -9,35 +10,35 @@ namespace CHRTool {
 
             // There shouldn't be any unrecognized arguments at this point.
             if (args.Length > 0) {
-                Console.Error.WriteLine("Unrecognized arguments in 'update-hashes' command:");
-                Console.Error.WriteLine($"    {string.Join(" ", args)}");
-                Console.Error.Write(Constants.ErrorUsageString);
+                Trace.TraceError("Unrecognized arguments in 'update-hashes' command:");
+                Trace.TraceError($"    {string.Join(" ", args)}");
+                Trace.Write(Constants.ErrorUsageString);
                 return 1;
             }
 
             // It looks like we're ready to go! Fetch the file data.
             int totalFramesAdded = 0;
             try {
-                Console.WriteLine("Updating lookup hashes...");
-                Console.WriteLine("------------------------------------------------------------------------------");
+                Trace.WriteLine("Updating lookup hashes...");
+                Trace.WriteLine("------------------------------------------------------------------------------");
 
                 // Fetch all .SF3Sprite files
                 string[] files;
-                Console.WriteLine("Getting list of SF3Sprites...");
+                Trace.WriteLine("Getting list of SF3Sprites...");
                 files = Directory.GetFiles(spriteDir, "*.SF3Sprite");
 
                 // Get the curent list of frame hash lookups.
                 if (!File.Exists(frameHashLookupsFile))
-                    Console.WriteLine($"Couldn't find '{frameHashLookupsFile}' -- creating file from scratch.");
+                    Trace.WriteLine($"Couldn't find '{frameHashLookupsFile}' -- creating file from scratch.");
                 else {
-                    Console.WriteLine($"Loading '{frameHashLookupsFile}'...");
+                    Trace.WriteLine($"Loading '{frameHashLookupsFile}'...");
                     SpriteResources.LoadFrameRefs();
                 }
 
                 // Open SF3Sprite files and their accompanying spritesheets.
-                Console.WriteLine("Checking sprites for new frame hashes:");
+                Trace.WriteLine("Checking sprites for new frame hashes:");
                 foreach (var file in files) {
-                    Console.Write($"Updating '{file}': ");
+                    Trace.Write($"Updating '{file}': ");
                     try {
                         var jsonText = File.ReadAllText(file);
                         var spriteDef = SpriteDef.FromJSON(jsonText);
@@ -46,30 +47,30 @@ namespace CHRTool {
                         totalFramesAdded += framesAdded;
 
                         if (framesSkipped > 0)
-                            Console.WriteLine($"{framesAdded} new frame(s) added, {framesSkipped} frame(s) skipped");
+                            Trace.WriteLine($"{framesAdded} new frame(s) added, {framesSkipped} frame(s) skipped");
                         else if (framesAdded > 0)
-                            Console.WriteLine($"{framesAdded} new frame(s) added");
+                            Trace.WriteLine($"{framesAdded} new frame(s) added");
                         else
-                            Console.WriteLine();
+                            Trace.WriteLine("");
                     }
                     catch (Exception e) {
-                        Console.Error.WriteLine($"    Error updating frame hashes:");
-                        Console.Error.WriteLine($"        {e.GetType().Name}: {e.Message}");
+                        Trace.TraceError($"    Error updating frame hashes:");
+                        Trace.TraceError($"        {e.GetType().Name}: {e.Message}");
                     }
                 }
 
-                Console.WriteLine($"Writing '{frameHashLookupsFile}'...");
+                Trace.WriteLine($"Writing '{frameHashLookupsFile}'...");
                 SpriteResources.WriteFrameRefsJSON();
             }
             catch (Exception e) {
-                Console.WriteLine("------------------------------------------------------------------------------");
-                Console.Error.WriteLine($"Error:");
-                Console.Error.WriteLine($"    {e.GetType().Name}: {e.Message}");
+                Trace.WriteLine("------------------------------------------------------------------------------");
+                Trace.TraceError($"Error:");
+                Trace.TraceError($"    {e.GetType().Name}: {e.Message}");
                 return 1;
             }
 
-            Console.WriteLine("------------------------------------------------------------------------------");
-            Console.WriteLine($"Done. {totalFramesAdded} frame(s) added.");
+            Trace.WriteLine("------------------------------------------------------------------------------");
+            Trace.WriteLine($"Done. {totalFramesAdded} frame(s) added.");
             return 0;
         }
     }

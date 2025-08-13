@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using NDesk.Options;
 using SF3.CHR;
@@ -21,15 +22,15 @@ namespace CHRTool {
                 args = compileOptions.Parse(args).ToArray();
             }
             catch (Exception e) {
-                Console.WriteLine("Error: " + e.Message);
-                Console.Error.Write(Constants.ErrorUsageString);
+                Trace.TraceError("Error: " + e.Message);
+                Trace.Write(Constants.ErrorUsageString);
                 return 1;
             }
 
             // Fetch the filename for reading.
             if (args.Length == 0) {
-                Console.Error.WriteLine("Missing input file");
-                Console.Error.Write(Constants.ErrorUsageString);
+                Trace.TraceError("Missing input file");
+                Trace.Write(Constants.ErrorUsageString);
                 return 1;
             }
             var inputFile = args[0];
@@ -37,9 +38,9 @@ namespace CHRTool {
 
             // There shouldn't be any unrecognized arguments at this point.
             if (args.Length > 0) {
-                Console.Error.WriteLine("Unrecognized arguments in 'compile' command:");
-                Console.Error.WriteLine($"    {string.Join(" ", args)}");
-                Console.Error.Write(Constants.ErrorUsageString);
+                Trace.TraceError("Unrecognized arguments in 'compile' command:");
+                Trace.TraceError($"    {string.Join(" ", args)}");
+                Trace.Write(Constants.ErrorUsageString);
                 return 1;
             }
 
@@ -57,23 +58,23 @@ namespace CHRTool {
                 }
                 var outputFilename = Path.GetFileName(outputFile);
 
-                Console.WriteLine($"Compiling '{inputFilename}' to '{outputFilename}'...");
-                Console.WriteLine("------------------------------------------------------------------------------");
+                Trace.WriteLine($"Compiling '{inputFilename}' to '{outputFilename}'...");
+                Trace.WriteLine("------------------------------------------------------------------------------");
 
                 string inputText = null;
-                Console.WriteLine($"Reading '{inputFile}...");
+                Trace.WriteLine($"Reading '{inputFile}...");
                 inputText = File.ReadAllText(inputFile);
 
                 byte[] outputData = null;
                 if (isChp) {
                     // Attempt to deserialize.
-                    Console.WriteLine("Deserializing to CHP_Def...");
+                    Trace.WriteLine("Deserializing to CHP_Def...");
                     var chpDef = CHP_Def.FromJSON(inputText);
                     if (chpDef == null)
                         throw new NullReferenceException(); // eh, not really, but whatever
 
                     // We should have everything necessary to compile. Give it a go!
-                    Console.WriteLine("Compiling...");
+                    Trace.WriteLine("Compiling...");
                     var chpCompiler = new CHP_Compiler() {
                         OptimizeFrames            = optimize,
                         AddMissingAnimationFrames = true,
@@ -86,14 +87,14 @@ namespace CHRTool {
                 }
                 else {
                     // Attempt to deserialize.
-                    Console.WriteLine("Deserializing to CHR_Def...");
+                    Trace.WriteLine("Deserializing to CHR_Def...");
                     CHR_Def chrDef = null;
                     chrDef = CHR_Def.FromJSON(inputText);
                     if (chrDef == null)
                         throw new NullReferenceException(); // eh, not really, but whatever
 
                     // We should have everything necessary to compile. Give it a go!
-                    Console.WriteLine("Compiling...");
+                    Trace.WriteLine("Compiling...");
                     var chrCompiler = new CHR_Compiler() {
                         OptimizeFrames            = optimize,
                         AddMissingAnimationFrames = true,
@@ -106,18 +107,18 @@ namespace CHRTool {
                 }
 
                 // Output the file.
-                Console.WriteLine($"Writing to '{outputFile}'...");
+                Trace.WriteLine($"Writing to '{outputFile}'...");
                 File.WriteAllBytes(outputFile, outputData);
             }
             catch (Exception e) {
-                Console.WriteLine("------------------------------------------------------------------------------");
-                Console.Error.WriteLine($"Error:");
-                Console.Error.WriteLine($"    {e.GetType().Name}: {e.Message}");
+                Trace.WriteLine("------------------------------------------------------------------------------");
+                Trace.TraceError($"Error:");
+                Trace.TraceError($"    {e.GetType().Name}: {e.Message}");
                 return 1;
             }
 
-            Console.WriteLine("------------------------------------------------------------------------------");
-            Console.WriteLine("Done");
+            Trace.WriteLine("------------------------------------------------------------------------------");
+            Trace.WriteLine("Done");
             return 0;
         }
     }

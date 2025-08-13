@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.IO;
 using NDesk.Options;
 using SF3.Sprites;
@@ -6,9 +7,13 @@ using SF3.Sprites;
 namespace CHRTool {
     public class Program {
         private static int Main(string[] args) {
+            var consoleTraceListener = new ConsoleTraceListener();
+            Trace.Listeners.Add(consoleTraceListener);
+            Trace.AutoFlush = true;
+
             // Complain if no command was found.
             if (args == null || args.Length == 0) {
-                Console.Error.Write(Constants.ErrorUsageString);
+                Trace.Write(Constants.ErrorUsageString);
                 return 1;
             }
 
@@ -32,22 +37,22 @@ namespace CHRTool {
                 args = anywhereOptions.Parse(args).ToArray();
             }
             catch (Exception e) {
-                Console.WriteLine("Error: " + e.Message);
-                Console.Error.Write(Constants.ErrorUsageString);
+                Trace.TraceError("Error: " + e.Message);
+                Trace.Write(Constants.ErrorUsageString);
                 return 1;
             }
 
             // Never show errors if -h was specified anywhere.
             if (outputHelp) {
                 if (outputVersion)
-                    Console.Write(Constants.VersionString);
-                Console.Write(Constants.FullUsageString);
+                    Trace.Write(Constants.VersionString);
+                Trace.Write(Constants.FullUsageString);
                 return 0;
             }
 
             // Always just show version string if requested (unless help is requested).
             if (outputVersion) {
-                Console.Write(Constants.VersionString);
+                Trace.Write(Constants.VersionString);
                 return 0;
             }
 
@@ -76,23 +81,23 @@ namespace CHRTool {
                 extraArgsBeforeCommand = generalOptions.Parse(generalArgs).ToArray();
             }
             catch (Exception e) {
-                Console.WriteLine("Error: " + e.Message);
-                Console.Error.Write(Constants.ErrorUsageString);
+                Trace.TraceError("Error: " + e.Message);
+                Trace.Write(Constants.ErrorUsageString);
                 return 1;
             }
 
             // Complain if no command was found.
             if (command == null) {
-                Console.Error.WriteLine("Couldn't find command.");
-                Console.Error.Write(Constants.ErrorUsageString);
+                Trace.TraceError("Couldn't find command.");
+                Trace.Write(Constants.ErrorUsageString);
                 return 1;
             }
 
             // There shouldn't be any unrecognized options before the command.
             if (extraArgsBeforeCommand.Length > 0) {
-                Console.Error.WriteLine("Unrecognized arguments before command:");
-                Console.Error.WriteLine($"    {string.Join(" ", extraArgsBeforeCommand)}");
-                Console.Error.Write(Constants.ErrorUsageString);
+                Trace.TraceError("Unrecognized arguments before command:");
+                Trace.TraceError($"    {string.Join(" ", extraArgsBeforeCommand)}");
+                Trace.Write(Constants.ErrorUsageString);
                 return 1;
             }
 
@@ -115,7 +120,7 @@ namespace CHRTool {
                     return UpdateHashLookups.Run(remainingArgs, spriteDir, frameHashLookupsFile);
 
                 default:
-                    Console.Error.WriteLine("Internal error: unimplemented command '" + command.ToString() + "'");
+                    Trace.TraceError("Internal error: unimplemented command '" + command.ToString() + "'");
                     return 1;
             }
         }
