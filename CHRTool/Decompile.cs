@@ -13,13 +13,15 @@ using SF3.Types;
 namespace CHRTool {
     public static class Decompile {
         public static int Run(string[] args, bool verbose) {
-            bool optimize = false;
+            var optimize = false;
             string outputFile = null;
+            string outputPath = null;
 
             // Read any command line options.
             var compileOptions = new OptionSet() {
-                { "O|optimize",  v => optimize = true },
-                { "output=",     v => outputFile = v },
+                { "O|optimize",   v => optimize = true },
+                { "output=",      v => outputFile = v },
+                { "output-path=", v => outputPath = v },
             };
             try {
                 args = compileOptions.Parse(args).ToArray();
@@ -59,9 +61,17 @@ namespace CHRTool {
                     var outputExtension = isChp ? "SF3CHP" : "SF3CHR";
                     outputFile = Path.Combine(Path.GetDirectoryName(inputFile), $"{Path.GetFileNameWithoutExtension(inputFilename)}.{outputExtension}");
                 }
-                var outputFilename = Path.GetFileName(outputFile);
+                if (outputPath != null) {
+                    var outputFilenameWithExtension = Path.GetFileName(outputFile);
+                    outputFile = Path.Combine(outputPath ?? Path.GetDirectoryName(inputFile), outputFilenameWithExtension);
+                }
 
-                Trace.WriteLine($"Decompiling '{inputFilename}' to '{outputFilename}'...");
+                Trace.WriteLine($"Decompiling '{inputFile}' to '{outputFile}'...");
+
+                // Try to create the output directory if it doesn't exist.
+                outputPath = Path.GetDirectoryName(outputFile);
+                if (outputPath != "" && !Directory.Exists(outputPath))
+                    Directory.CreateDirectory(outputPath);
 
                 // Fetch the data.
                 if (verbose) {

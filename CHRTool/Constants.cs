@@ -39,12 +39,14 @@ namespace CHRTool {
             "\n" +
             "'compile' Options:\n" +
             "  -O, --optimize            optimizes frames, ignoring anything explicit\n" +
-            "  --output=<output-file>    specify output CHR/CHP file\n" +
+            "  --output=<output-file>    specify output file for one CHR/CHP file\n" +
+            "  --output=path<dir>        specify output path for all CHR/CHP file(s)\n" +
             "  --add-sprite=<file>       adds an SF3CHRSprite file\n" +
             "\n" +
             "'decompile' Options:\n" +
             "  -O, --optimize            optimizes output SF3CHR/SF3CHP file\n" +
-            "  --output=<output-file>    specify output SF3CHR/SF3CHP file\n" +
+            "  --output=<output-file>    specify output file for one SF3CHR/SF3CHP file\n" +
+            "  --output=path<dir>        specify output path for all SF3CHR/SF3CHP file(s)\n" +
             "\n" +
             "'extract-sheets' Options:\n" +
             "  (none)\n" +

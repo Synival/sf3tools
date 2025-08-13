@@ -11,13 +11,15 @@ namespace CHRTool {
         public static int Run(string[] args, bool verbose) {
             var optimize = false;
             string outputFile = null;
+            string outputPath = null;
             List<string> spritesToAdd = new List<string>();
 
             // Read any command line options.
             var compileOptions = new OptionSet() {
-                { "O|optimize",  v => optimize = true },
-                { "output=",     v => outputFile = v },
-                { "add-sprite=", v => spritesToAdd.Add(v) },
+                { "O|optimize",   v => optimize = true },
+                { "output=",      v => outputFile = v },
+                { "output-path=", v => outputPath = v },
+                { "add-sprite=",  v => spritesToAdd.Add(v) },
             };
             try {
                 args = compileOptions.Parse(args).ToArray();
@@ -57,9 +59,18 @@ namespace CHRTool {
                     var outputExtension = isChp ? "CHP" : "CHR";
                     outputFile = Path.Combine(Path.GetDirectoryName(inputFile), $"{Path.GetFileNameWithoutExtension(inputFilename)}.{outputExtension}");
                 }
+                if (outputPath != null) {
+                    var outputFilenameWithExtension = Path.GetFileName(outputFile);
+                    outputFile = Path.Combine(outputPath ?? Path.GetDirectoryName(inputFile), outputFilenameWithExtension);
+                }
                 var outputFilename = Path.GetFileName(outputFile);
 
-                Trace.WriteLine($"Compiling '{inputFilename}' to '{outputFilename}'...");
+                Trace.WriteLine($"Compiling '{inputFile}' to '{outputFile}'...");
+
+                // Try to create the output directory if it doesn't exist.
+                outputPath = Path.GetDirectoryName(outputFile);
+                if (outputPath != "" && !Directory.Exists(outputPath))
+                    Directory.CreateDirectory(outputPath);
 
                 string inputText = null;
                 if (verbose) {
