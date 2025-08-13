@@ -20,6 +20,7 @@ namespace CHRTool {
             // Gather general options.
             var outputHelp     = false;
             var outputVersion  = false;
+            var verbose        = false;
             var programDir     = AppDomain.CurrentDomain.BaseDirectory;
             var spriteDir      = Path.Combine(programDir, "Resources", "Sprites");
             var spritesheetDir = Path.Combine(programDir, "Resources", "Spritesheets");
@@ -31,6 +32,7 @@ namespace CHRTool {
                 { "sprite-dir=",      v => spriteDir = v },
                 { "spritesheet-dir=", v => spritesheetDir = v },
                 { "frame-hash-lookups-file=", v => frameHashLookupsFile = v },
+                { "v|verbose",        v => verbose = true },
             };
 
             try {
@@ -111,9 +113,9 @@ namespace CHRTool {
 
             switch (command) {
                 case CommandType.Compile:
-                    return Compile.Run(remainingArgs);
+                    return Compile.Run(remainingArgs, verbose);
                 case CommandType.Decompile:
-                    return Decompile.Run(remainingArgs);
+                    return Decompile.Run(remainingArgs, verbose);
                 case CommandType.ExtractSheets:
                     return ExtractSheets.Run(remainingArgs, spritesheetDir);
                 case CommandType.UpdateHashLookups:

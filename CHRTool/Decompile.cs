@@ -12,7 +12,7 @@ using SF3.Types;
 
 namespace CHRTool {
     public static class Decompile {
-        public static int Run(string[] args) {
+        public static int Run(string[] args, bool verbose) {
             bool optimize = false;
             string outputFile = null;
 
@@ -62,22 +62,27 @@ namespace CHRTool {
                 var outputFilename = Path.GetFileName(outputFile);
 
                 Trace.WriteLine($"Decompiling '{inputFilename}' to '{outputFilename}'...");
-                Trace.WriteLine("------------------------------------------------------------------------------");
 
                 // Fetch the data.
-                Trace.WriteLine($"Loading data from '{inputFile}...");
+                if (verbose) {
+                    Trace.WriteLine("------------------------------------------------------------------------------");
+                    Trace.WriteLine($"Loading data from '{inputFile}...");
+                }
+
                 byte[] inputBytes = null;
                 inputBytes = File.ReadAllBytes(inputFile);
 
                 string outputText = null;
                 if (isChp) {
                     // Attempt to load it as a CHP_File.
-                    Trace.WriteLine("Creating CHP_File...");
+                    if (verbose)
+                        Trace.WriteLine("Creating CHP_File...");
                     var nameGetterContext = new NameGetterContext(ScenarioType.Scenario1);
                     var chpFile = CHP_File.Create(new ByteData(new ByteArray(inputBytes)), nameGetterContext, ScenarioType.Scenario1);
 
                     // Get a CHR_Def from the CHR_File.
-                    Trace.WriteLine("Serializing to CHP_Def...");
+                    if (verbose)
+                        Trace.WriteLine("Serializing to CHP_Def...");
                     var chpDef = chpFile.ToCHP_Def();
                     if (optimize) {
                         foreach (var chrDef in chpDef.CHRsBySector.Values)
@@ -86,17 +91,20 @@ namespace CHRTool {
                     }
 
                     // Serialize the file.
-                    Trace.WriteLine($"Converting to JSON file...");
+                    if (verbose)
+                        Trace.WriteLine($"Converting to JSON file...");
                     outputText = chpDef.ToJSON_String();
                 }
                 else {
                     // Attempt to load it as a CHR_File.
-                    Trace.WriteLine("Creating CHR_File...");
+                    if (verbose)
+                        Trace.WriteLine("Creating CHR_File...");
                     var nameGetterContext = new NameGetterContext(ScenarioType.Scenario1);
                     var chrFile = CHR_File.Create(new ByteData(new ByteArray(inputBytes)), nameGetterContext, ScenarioType.Scenario1);
 
                     // Get a CHR_Def from the CHR_File.
-                    Trace.WriteLine("Serializing to CHR_Def...");
+                    if (verbose)
+                        Trace.WriteLine("Serializing to CHR_Def...");
                     var chrDef = chrFile.ToCHR_Def();
                     if (optimize) {
                         foreach (var sprite in chrDef.Sprites)
@@ -104,11 +112,13 @@ namespace CHRTool {
                     }
 
                     // Serialize the file.
-                    Trace.WriteLine($"Converting to JSON file...");
+                    if (verbose)
+                        Trace.WriteLine($"Converting to JSON file...");
                     outputText = chrDef.ToJSON_String();
                 }
 
-                Trace.WriteLine($"Writing to '{outputFile}'...");
+                if (verbose)
+                    Trace.WriteLine($"Writing to '{outputFile}'...");
                 File.WriteAllText(outputFile, outputText);
             }
             catch (Exception e) {

@@ -8,7 +8,7 @@ using SF3.CHR;
 
 namespace CHRTool {
     public static class Compile {
-        public static int Run(string[] args) {
+        public static int Run(string[] args, bool verbose) {
             var optimize = false;
             string outputFile = null;
             List<string> spritesToAdd = new List<string>();
@@ -60,22 +60,26 @@ namespace CHRTool {
                 var outputFilename = Path.GetFileName(outputFile);
 
                 Trace.WriteLine($"Compiling '{inputFilename}' to '{outputFilename}'...");
-                Trace.WriteLine("------------------------------------------------------------------------------");
 
                 string inputText = null;
-                Trace.WriteLine($"Reading '{inputFile}...");
+                if (verbose) {
+                    Trace.WriteLine("------------------------------------------------------------------------------");
+                    Trace.WriteLine($"Reading '{inputFile}...");
+                }
                 inputText = File.ReadAllText(inputFile);
 
                 byte[] outputData = null;
                 if (isChp) {
                     // Attempt to deserialize.
-                    Trace.WriteLine("Deserializing to CHP_Def...");
+                    if (verbose)
+                        Trace.WriteLine("Deserializing to CHP_Def...");
                     var chpDef = CHP_Def.FromJSON(inputText);
                     if (chpDef == null)
                         throw new NullReferenceException(); // eh, not really, but whatever
 
                     // We should have everything necessary to compile. Give it a go!
-                    Trace.WriteLine("Compiling...");
+                    if (verbose)
+                        Trace.WriteLine("Compiling...");
                     var chpCompiler = new CHP_Compiler() {
                         OptimizeFrames            = optimize,
                         AddMissingAnimationFrames = true,
@@ -88,14 +92,16 @@ namespace CHRTool {
                 }
                 else {
                     // Attempt to deserialize.
-                    Trace.WriteLine("Deserializing to CHR_Def...");
+                    if (verbose)
+                        Trace.WriteLine("Deserializing to CHR_Def...");
                     CHR_Def chrDef = null;
                     chrDef = CHR_Def.FromJSON(inputText);
                     if (chrDef == null)
                         throw new NullReferenceException(); // eh, not really, but whatever
 
                     // We should have everything necessary to compile. Give it a go!
-                    Trace.WriteLine("Compiling...");
+                    if (verbose)
+                        Trace.WriteLine("Compiling...");
                     var chrCompiler = new CHR_Compiler() {
                         OptimizeFrames            = optimize,
                         AddMissingAnimationFrames = true,
@@ -108,7 +114,8 @@ namespace CHRTool {
                 }
 
                 // Output the file.
-                Trace.WriteLine($"Writing to '{outputFile}'...");
+                if (verbose)
+                    Trace.WriteLine($"Writing to '{outputFile}'...");
                 File.WriteAllBytes(outputFile, outputData);
             }
             catch (Exception e) {

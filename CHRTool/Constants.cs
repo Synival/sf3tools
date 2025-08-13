@@ -2,7 +2,7 @@
 
 namespace CHRTool {
     public static class Constants {
-        public const string Version = "0.0.3";
+        public const string Version = "0.0.4";
 
         public const string VersionString =
             "CHRTool v" + Version + "\n";
@@ -28,6 +28,7 @@ namespace CHRTool {
             "General Options:\n" +
             "  -h, --help                print this help message\n" +
             "  --version                 print CHRTool version\n" +
+            "  -v, --verbose             verbose output\n" +
             "  --sprite-dir=<dir>        directory for sprites (SF3Sprite files)\n" +
             "      (default='<program-dir>/Resources/Sprites')\n" +
             "  --spritesheet-dir=<dir>   directory for spritesheets (PNG files)\n" +
