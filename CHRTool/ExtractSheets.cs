@@ -23,13 +23,18 @@ namespace CHRTool {
             // (any extra options would go here.)
 
             // Fetch the directory with the game data for ripping spritesheets.
-            var gameDataFiles = args.Where(x => !x.StartsWith('-')).ToArray();
-            if (args.Length == 0) {
-                Trace.TraceError("Missing game data directory");
+            string[] files;
+            (files, args) = Utils.GetFilesAndPathsFromAgs(args, path => {
+                return Directory.GetFiles(path, "*.CHR")
+                    .Concat(Directory.GetFiles(path, "*.CHP"))
+                    .OrderBy(x => x)
+                    .ToArray();
+            });
+            if (files.Length == 0) {
+                Trace.TraceError("No .CHR or .CHP file(s) or path(s) provided");
                 Trace.Write(Constants.ErrorUsageString);
                 return 1;
             }
-            args = args.Where(x => x.StartsWith('-')).ToArray();
 
             // There shouldn't be any unrecognized arguments at this point.
             if (args.Length > 0) {
@@ -47,27 +52,6 @@ namespace CHRTool {
                 // Try to create the spritesheet directory if it doesn't exist.
                 if (!Directory.Exists(spritesheetDir))
                     Directory.CreateDirectory(spritesheetDir);
-
-                // Fetch the CHR and CHP files to extract frames from.
-                var filesList = new List<string>();
-                foreach (var file in gameDataFiles) {
-                    try {
-                        if (Directory.Exists(file)) {
-                            filesList.AddRange(Directory.GetFiles(file, "*.CHR")
-                                .Concat(Directory.GetFiles(file, "*.CHP"))
-                                .OrderBy(x => x)
-                            );
-                        }
-                        else
-                            filesList.Add(file);
-                    }
-                    catch (Exception e) {
-                        Trace.TraceError($"    Error fetching file(s) at '{file}':");
-                        Trace.TraceError($"        {e.GetTypeAndMessage()}");
-                        return 1;
-                    }
-                }
-                var files = filesList.ToArray();
 
                 // We don't care about the NameGetterContext or Scenario, since CHRs/CHP are all the same format,
                 // and we don't care about any scenario-based resources. Just use Scenario 1.
