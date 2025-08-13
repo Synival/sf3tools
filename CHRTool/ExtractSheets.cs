@@ -16,6 +16,7 @@ using SF3.Extensions;
 using CommonLib.Imaging;
 using SF3;
 using System.Diagnostics;
+using CommonLib.NamedValues;
 
 namespace CHRTool {
     public static class ExtractSheets {
@@ -46,53 +47,19 @@ namespace CHRTool {
 
             // It looks like we're ready to go!
             try {
-                Trace.WriteLine($"Extracting spritesheet frames:");
-                Trace.WriteLine("------------------------------------------------------------------------------");
-
                 // Try to create the spritesheet directory if it doesn't exist.
                 if (!Directory.Exists(spritesheetDir))
                     Directory.CreateDirectory(spritesheetDir);
 
                 // We don't care about the NameGetterContext or Scenario, since CHRs/CHP are all the same format,
                 // and we don't care about any scenario-based resources. Just use Scenario 1.
-                var scenario = ScenarioType.Scenario1;
-                var nameGetterContext = new NameGetterContext(scenario);
+                var nameGetterContext = new NameGetterContext(ScenarioType.Scenario1);
+
+                // Extract!
                 var framesWritten = new HashSet<string>();
-
                 foreach (var file in files) {
-                    Trace.Write($"Extracting frames from '{file}': ");
-                    var loadedSpritesheets = new Dictionary<string, Bitmap>();
                     try {
-                        var bytes = File.ReadAllBytes(file);
-                        var byteData = new ByteData(new ByteArray(bytes));
-
-                        // Gather the frame refs and textures from either the CHR or CHP file
-                        ExtractInfo[] extractInfos;
-                        if (file.ToLower().EndsWith(".chr")) {
-                            var chrFile = CHR_File.Create(byteData, nameGetterContext, scenario);
-                            extractInfos = GetExtractInfos(chrFile);
-                        }
-                        else if (file.ToLower().EndsWith(".chp")) {
-                            var chpFile = CHP_File.Create(byteData, nameGetterContext, scenario);
-                            extractInfos = GetExtractInfos(chpFile);
-                        }
-                        else {
-                            Trace.TraceError($"  Unrecognized extension for '{file}'");
-                            continue;
-                        }
-
-                        // Perform the extraction!
-                        var totalFrames = extractInfos.Length;
-                        var framesAdded = ExtractFrames(extractInfos, framesWritten, loadedSpritesheets);
-                        var framesSkipped = totalFrames - framesAdded;
-
-                        // Report
-                        if (framesSkipped > 0)
-                            Trace.WriteLine($"{framesAdded} frame(s) extracted, {framesSkipped} frame(s) skipped");
-                        else if (framesAdded > 0)
-                            Trace.WriteLine($"{framesAdded} frame(s) extracted");
-                        else
-                            Trace.WriteLine($"no frames");
+                        ExtractFrames(file, nameGetterContext, framesWritten);
                     }
                     catch (Exception e) {
                         Trace.WriteLine("");
@@ -111,6 +78,41 @@ namespace CHRTool {
             Trace.WriteLine("------------------------------------------------------------------------------");
             Trace.WriteLine("Done");
             return 0;
+        }
+
+        private static void ExtractFrames(string file, INameGetterContext nameGetterContext, HashSet<string> framesWritten) {
+            Trace.Write($"Extracting frames from '{file}': ");
+            var loadedSpritesheets = new Dictionary<string, Bitmap>();
+            var bytes = File.ReadAllBytes(file);
+            var byteData = new ByteData(new ByteArray(bytes));
+
+            // Gather the frame refs and textures from either the CHR or CHP file
+            ExtractInfo[] extractInfos;
+            if (file.ToLower().EndsWith(".chr")) {
+                var chrFile = CHR_File.Create(byteData, nameGetterContext, ScenarioType.Scenario1);
+                extractInfos = GetExtractInfos(chrFile);
+            }
+            else if (file.ToLower().EndsWith(".chp")) {
+                var chpFile = CHP_File.Create(byteData, nameGetterContext, ScenarioType.Scenario1);
+                extractInfos = GetExtractInfos(chpFile);
+            }
+            else {
+                Trace.TraceError($"  Unrecognized extension for '{file}'");
+                return;
+            }
+
+            // Perform the extraction!
+            var totalFrames = extractInfos.Length;
+            var framesAdded = ExtractFrames(extractInfos, framesWritten, loadedSpritesheets);
+            var framesSkipped = totalFrames - framesAdded;
+
+            // Report
+            if (framesSkipped > 0)
+                Trace.WriteLine($"{framesAdded} frame(s) extracted, {framesSkipped} frame(s) skipped");
+            else if (framesAdded > 0)
+                Trace.WriteLine($"{framesAdded} frame(s) extracted");
+            else
+                Trace.WriteLine($"no frames");
         }
 
         private class ExtractInfo {
