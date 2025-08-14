@@ -114,8 +114,11 @@ namespace CHRTool {
 
             // Try to create the output directory if it doesn't exist.
             outputPath = Path.GetDirectoryName(outputFile);
-            if (outputPath != "" && !Directory.Exists(outputPath))
+            if (outputPath != "" && !Directory.Exists(outputPath)) {
+                if (verbose)
+                    Logger.WriteLine($"Creating path '{outputPath}'");
                 Directory.CreateDirectory(outputPath);
+            }
 
             // Fetch the data.
             if (verbose) {

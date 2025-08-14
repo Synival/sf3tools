@@ -53,8 +53,11 @@ namespace CHRTool {
                 }
 
                 // Try to create the spritesheet directory if it doesn't exist.
-                if (!Directory.Exists(spritesheetDir))
+                if (!Directory.Exists(spritesheetDir)) {
+                    if (verbose)
+                        Logger.WriteLine($"Creating path '{spritesheetDir}'");
                     Directory.CreateDirectory(spritesheetDir);
+                }
 
                 // We don't care about the NameGetterContext or Scenario, since CHRs/CHP are all the same format,
                 // and we don't care about any scenario-based resources. Just use Scenario 1.

@@ -6,6 +6,7 @@ using CommonLib.Extensions;
 using CommonLib.Logging;
 using CommonLib.Types;
 using NDesk.Options;
+using Newtonsoft.Json.Linq;
 using SF3.CHR;
 
 namespace CHRTool {
@@ -15,6 +16,7 @@ namespace CHRTool {
             string outputFile = null;
             string outputDir = null;
             var spritesToAdd = new List<string>();
+            var spritesToAddDefList = new List<SpriteDef>();
             var cantSetOutputFile = false;
 
             // Read any command line options.
@@ -62,6 +64,35 @@ namespace CHRTool {
                 return 1;
             }
 
+            // Fetch any sprites we want to add. Make sure they're valid JObject's.
+            if (verbose && spritesToAdd.Count > 0) {
+                Logger.WriteLine("Loading JSON for sprites to add...");
+                Logger.WriteLine("------------------------------------------------------------------------------");
+            }
+            foreach (var spriteToAdd in spritesToAdd) {
+                try {
+                    Console.WriteLine($"Loading sprite to add '{spriteToAdd}'...");
+                    var text = File.ReadAllText(spriteToAdd);
+                    var jObj = JObject.Parse(text);
+
+                    // TODO: there's probably a much better way to do this...
+                    if (optimize)
+                        _ = jObj.Remove("Frames");
+
+                    if (verbose)
+                        Console.WriteLine("Converting to SpriteDef...");
+                    spritesToAddDefList.Add(SpriteDef.FromJToken(jObj));
+                }
+                catch (Exception e) {
+                    Logger.WriteLine("------------------------------------------------------------------------------");
+                    Logger.WriteLine(e.GetTypeAndMessage(), LogType.Error);
+                    return 1;
+                }
+            }
+            if (verbose && spritesToAdd.Count > 0)
+                Logger.WriteLine("------------------------------------------------------------------------------");
+            var spritesToAddDefs = spritesToAddDefList.ToArray();
+
             // It looks like we're ready to go! Fetch the file data.
             try {
                 if (verbose) {
@@ -71,7 +102,7 @@ namespace CHRTool {
 
                 foreach (var file in files) {
                     try {
-                        CompileFile(file, outputFile, outputDir, verbose, optimize);
+                        CompileFile(file, outputFile, outputDir, verbose, optimize, spritesToAddDefs);
                     }
                     catch (Exception e) {
                         Logger.WriteLine(e.GetTypeAndMessage(), LogType.Error);
@@ -92,7 +123,7 @@ namespace CHRTool {
             return 0;
         }
 
-        private static void CompileFile(string inputFile, string outputFile, string outputPath, bool verbose, bool optimize) {
+        private static void CompileFile(string inputFile, string outputFile, string outputPath, bool verbose, bool optimize, SpriteDef[] spritesToAdd) {
             var inputFilename = Path.GetFileName(inputFile);
 
             bool isChp = inputFilename.ToLower().EndsWith(".sf3chp");
@@ -113,8 +144,11 @@ namespace CHRTool {
 
             // Try to create the output directory if it doesn't exist.
             outputPath = Path.GetDirectoryName(outputFile);
-            if (outputPath != "" && !Directory.Exists(outputPath))
+            if (outputPath != "" && !Directory.Exists(outputPath)) {
+                if (verbose)
+                    Logger.WriteLine($"Creating path '{outputPath}'");
                 Directory.CreateDirectory(outputPath);
+            }
 
             string inputText = null;
             if (verbose) {
@@ -131,6 +165,12 @@ namespace CHRTool {
                 var chpDef = CHP_Def.FromJSON(inputText);
                 if (chpDef == null)
                     throw new NullReferenceException(); // eh, not really, but whatever
+
+                // Add sprites if requested
+                if (spritesToAdd?.Length >= 1) {
+                    // TODO: get this working for CHP files!
+                    Logger.WriteLine("(cannot yet add sprites to CHP files using --add-sprite)", LogType.Warning);
+                }
 
                 // We should have everything necessary to compile. Give it a go!
                 if (verbose)
@@ -153,6 +193,10 @@ namespace CHRTool {
                 chrDef = CHR_Def.FromJSON(inputText);
                 if (chrDef == null)
                     throw new NullReferenceException(); // eh, not really, but whatever
+
+                // Add sprites if requested
+                if (spritesToAdd?.Length >= 1)
+                    chrDef.Sprites = chrDef.Sprites.Concat(spritesToAdd).ToArray();
 
                 // We should have everything necessary to compile. Give it a go!
                 if (verbose)
