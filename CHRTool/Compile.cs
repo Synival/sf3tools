@@ -12,16 +12,16 @@ namespace CHRTool {
         public static int Run(string[] args, bool verbose) {
             var optimize = false;
             string outputFile = null;
-            string outputPath = null;
+            string outputDir = null;
             var spritesToAdd = new List<string>();
             var cantSetOutputFile = false;
 
             // Read any command line options.
             var compileOptions = new OptionSet() {
-                { "O|optimize",   v => optimize = true },
-                { "output=",      v => outputFile = v },
-                { "output-path=", v => outputPath = v },
-                { "add-sprite=",  v => spritesToAdd.Add(v) },
+                { "O|optimize",    v => optimize = true },
+                { "o|output=",     v => outputFile = v },
+                { "d|output-dir=", v => outputDir = v },
+                { "add-sprite=",   v => spritesToAdd.Add(v) },
             };
             try {
                 args = compileOptions.Parse(args).ToArray();
@@ -62,7 +62,7 @@ namespace CHRTool {
             try {
                 foreach (var file in files) {
                     try {
-                        CompileFile(file, outputFile, outputPath, verbose, optimize);
+                        CompileFile(file, outputFile, outputDir, verbose, optimize);
                     }
                     catch (Exception e) {
                         Trace.TraceError(e.GetTypeAndMessage());

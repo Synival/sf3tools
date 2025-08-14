@@ -14,16 +14,16 @@ using SF3.Types;
 namespace CHRTool {
     public static class Decompile {
         public static int Run(string[] args, bool verbose) {
-            var optimize = false;
+            var simplify = false;
             string outputFile = null;
-            string outputPath = null;
+            string outputDir = null;
             var cantSetOutputFile = false;
 
             // Read any command line options.
             var compileOptions = new OptionSet() {
-                { "O|optimize",   v => optimize = true },
-                { "output=",      v => outputFile = v },
-                { "output-path=", v => outputPath = v },
+                { "S|simplify",    v => simplify = true },
+                { "o|output=",     v => outputFile = v },
+                { "d|output-dir=", v => outputDir = v },
             };
             try {
                 args = compileOptions.Parse(args).ToArray();
@@ -64,7 +64,7 @@ namespace CHRTool {
             try {
                 foreach (var file in files) {
                     try {
-                        DecompileFile(file, outputFile, outputPath, verbose, optimize);
+                        DecompileFile(file, outputFile, outputDir, verbose, simplify);
                     }
                     catch (Exception e) {
                         Trace.TraceError(e.GetTypeAndMessage());
@@ -82,7 +82,7 @@ namespace CHRTool {
             return 0;
         }
 
-        private static void DecompileFile(string inputFile, string outputFile, string outputPath, bool verbose, bool optimize) {
+        private static void DecompileFile(string inputFile, string outputFile, string outputPath, bool verbose, bool simplify) {
             var inputFilename = Path.GetFileName(inputFile);
 
             bool isChp = inputFilename.ToLower().EndsWith(".chp");
@@ -126,7 +126,7 @@ namespace CHRTool {
                 if (verbose)
                     Trace.WriteLine("Serializing to CHP_Def...");
                 var chpDef = chpFile.ToCHP_Def();
-                if (optimize) {
+                if (simplify) {
                     foreach (var chrDef in chpDef.CHRsBySector.Values)
                         foreach (var sprite in chrDef.Sprites)
                             sprite.FrameGroupsForSpritesheets = null;
@@ -148,7 +148,7 @@ namespace CHRTool {
                 if (verbose)
                     Trace.WriteLine("Serializing to CHR_Def...");
                 var chrDef = chrFile.ToCHR_Def();
-                if (optimize) {
+                if (simplify) {
                     foreach (var sprite in chrDef.Sprites)
                         sprite.FrameGroupsForSpritesheets = null;
                 }
