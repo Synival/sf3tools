@@ -40,8 +40,10 @@ namespace CHRTool {
                 }
 
                 // Open SF3Sprite files and their accompanying spritesheets.
-                if (verbose)
+                if (verbose) {
+                    Logger.WriteLine("------------------------------------------------------------------------------");
                     Logger.WriteLine("Checking sprites for new frame hashes:");
+                }
                 foreach (var file in files) {
                     Logger.Write($"Adding frame hashes from '{file}': ");
                     try {
@@ -56,12 +58,15 @@ namespace CHRTool {
                         else if (framesAdded > 0)
                             Logger.WriteLine($"{framesAdded} new frame(s) added");
                         else
-                            Logger.WriteLine("");
+                            Logger.WriteLine("no new frames");
                     }
                     catch (Exception e) {
                         Logger.WriteLine(e.GetTypeAndMessage(), LogType.Error);
                     }
                 }
+
+                if (verbose)
+                    Logger.WriteLine("------------------------------------------------------------------------------");
 
                 if (totalFramesAdded > 0) {
                     Logger.WriteLine($"Writing '{frameHashLookupsFile}' ({totalFramesAdded} new frames)...");
