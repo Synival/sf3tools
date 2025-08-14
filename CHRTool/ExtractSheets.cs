@@ -220,79 +220,75 @@ namespace CHRTool {
                 return bitmapOut;
 
             // If the spritesheet exists, fetch it.
-            if (File.Exists(spritesheetImageFile)) {
-                if (verbose)
-                    Trace.WriteLine($"Loading spritesheet '{spritesheetImageFile}...");
-                try {
+            try {
+                if (File.Exists(spritesheetImageFile)) {
+                    if (verbose)
+                        Trace.WriteLine($"Loading spritesheet '{spritesheetImageFile}...");
+
                     // We have to load the bitmap in this odd way to prevent exceptions caused by saving to the same file you loaded from...
                     // Pretty cool stuff.
                     var bitmap = new Bitmap(new MemoryStream(File.ReadAllBytes(spritesheetImageFile)));
                     loadedSpritesheets.Add(spritesheetImageFile, bitmap);
                     return bitmap;
                 }
-                catch {
-                    loadedSpritesheets.Add(spritesheetImageFile, null);
-                    throw;
-                }
-            }
 
-            // If the spritesheet doesn't exist, create it, with placeholder red squares for spritesheets.
-            // (These will stay red if actual frames aren't found)
-            if (verbose)
-                Trace.WriteLine($"Creating new spritesheet '{spriteDef.Name} ({Spritesheet.DimensionsToKey(frameWidth, frameHeight)})...");
+                // If the spritesheet doesn't exist, create it, with placeholder red squares for spritesheets.
+                // (These will stay red if actual frames aren't found)
+                if (verbose)
+                    Trace.WriteLine($"Creating new spritesheet '{spriteDef.Name} ({Spritesheet.DimensionsToKey(frameWidth, frameHeight)})...");
 
-            // Get the dimensions of the spritesheet.
-            var frameDimensions = spritesheet.FrameGroupsByName.Values
-                .SelectMany(y => y.Frames.Values
-                    .Where(z => z.SpritesheetX >= 0 && z.SpritesheetY >= 0)
-                    .Select(z => (X: z.SpritesheetX, Y: z.SpritesheetY))
-                )
-                .ToArray();
-            var sheetWidth  = frameDimensions.Max(x => x.X) + frameWidth;
-            var sheetHeight = frameDimensions.Max(x => x.Y) + frameHeight;
+                // Get the dimensions of the spritesheet.
+                var frameDimensions = spritesheet.FrameGroupsByName.Values
+                    .SelectMany(y => y.Frames.Values
+                        .Where(z => z.SpritesheetX >= 0 && z.SpritesheetY >= 0)
+                        .Select(z => (X: z.SpritesheetX, Y: z.SpritesheetY))
+                    )
+                    .ToArray();
+                var sheetWidth  = frameDimensions.Max(x => x.X) + frameWidth;
+                var sheetHeight = frameDimensions.Max(x => x.Y) + frameHeight;
 
-            // Create the empty spritesheet.
-            var newImage = new Bitmap(sheetWidth, sheetHeight, PixelFormat.Format32bppArgb);
+                // Create the empty spritesheet.
+                var newImage = new Bitmap(sheetWidth, sheetHeight, PixelFormat.Format32bppArgb);
 
-            // Build a red, non-filled rectangle with lines 3 pixels wide.
-            var box = new ushort[frameWidth, frameHeight];
-            var redColor    = new PixelChannels() { a = 255, r = 255, g = 0,   b = 0 }.ToABGR1555();
-            var orangeColor = new PixelChannels() { a = 255, r = 255, g = 127, b = 0 }.ToABGR1555();
+                // Build a red, non-filled rectangle with lines 3 pixels wide.
+                var box = new ushort[frameWidth, frameHeight];
+                var redColor    = new PixelChannels() { a = 255, r = 255, g = 0,   b = 0 }.ToABGR1555();
+                var orangeColor = new PixelChannels() { a = 255, r = 255, g = 127, b = 0 }.ToABGR1555();
 
-            for (int i = 0; i < 3; i++) {
-                if (i < frameHeight) {
-                    for (int x = i; x < frameWidth - i; ++x) {
-                        box[x, i] = redColor;
-                        box[x, frameHeight - i - 1] = orangeColor;
+                for (int i = 0; i < 3; i++) {
+                    if (i < frameHeight) {
+                        for (int x = i; x < frameWidth - i; ++x) {
+                            box[x, i] = redColor;
+                            box[x, frameHeight - i - 1] = orangeColor;
+                        }
+                    }
+                    if (i < frameWidth) {
+                        for (int y = i + 1; y < frameHeight - i - 1; ++y) {
+                            box[i, y] = redColor;
+                            box[frameWidth - i - 1, y] = orangeColor;
+                        }
                     }
                 }
-                if (i < frameWidth) {
-                    for (int y = i + 1; y < frameHeight - i - 1; ++y) {
-                        box[i, y] = redColor;
-                        box[frameWidth - i - 1, y] = orangeColor;
-                    }
-                }
-            }
 
-            // Place that red box at all frame locations.
-            foreach (var frameGroup in spritesheet.FrameGroupsByName.Values)
-                foreach (var frame in frameGroup.Frames.Values)
-                    newImage.SetDataAt(frame.SpritesheetX, frame.SpritesheetY, box);
+                // Place that red box at all frame locations.
+                foreach (var frameGroup in spritesheet.FrameGroupsByName.Values)
+                    foreach (var frame in frameGroup.Frames.Values)
+                        newImage.SetDataAt(frame.SpritesheetX, frame.SpritesheetY, box);
 
-            // Save the image out.
-            try {
+                // Save the image out.
                 if (verbose)
                     Trace.WriteLine($"Saving to '{spritesheetImageFile}'...");
                 newImage.Save(spritesheetImageFile, ImageFormat.Png);
-            }
-            catch {
-                loadedSpritesheets.Add(spritesheetImageFile, null);
-                throw;
-            }
 
-            // Cache the loaded image and return it for later editing.
-            loadedSpritesheets.Add(spritesheetImageFile, newImage);
-            return newImage;
+                // Cache the loaded image and return it for later editing.
+                loadedSpritesheets.Add(spritesheetImageFile, newImage);
+                return newImage;
+            }
+            catch (Exception e) {
+                Trace.TraceError(e.GetTypeAndMessage());
+                loadedSpritesheets.Add(spritesheetImageFile, null);
+                return null;
+            }
         }
     }
 }
