@@ -85,21 +85,19 @@ namespace CHRTool {
             }
             catch (Exception e) {
                 Trace.TraceError(e.GetTypeAndMessage());
-                Trace.Write(Constants.ErrorUsageString);
                 return 1;
             }
 
             // Complain if no command was found.
             if (command == null) {
-                Trace.TraceError("Couldn't find command.");
+                Trace.TraceError("Couldn't find command");
                 Trace.Write(Constants.ErrorUsageString);
                 return 1;
             }
 
             // There shouldn't be any unrecognized options before the command.
             if (extraArgsBeforeCommand.Length > 0) {
-                Trace.TraceError("Unrecognized arguments before command:");
-                Trace.TraceError($"    {string.Join(" ", extraArgsBeforeCommand)}");
+                Trace.TraceError("Unrecognized arguments before command: " + string.Join(" ", extraArgsBeforeCommand));
                 Trace.Write(Constants.ErrorUsageString);
                 return 1;
             }

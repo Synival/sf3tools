@@ -19,7 +19,6 @@ namespace CHRTool {
             "    chrtool [GENERAL_OPTIONS]... update-hash-lookups [OPTIONS]...\n";
 
         public const string ErrorUsageString =
-            ShortUsageString +
             "Try 'chrtool --help' for more information.\n";
 
         public const string FullUsageString =

@@ -12,6 +12,7 @@ namespace CHRTool {
             // There shouldn't be any unrecognized arguments at this point.
             if (args.Length > 0) {
                 Trace.TraceError("Unrecognized arguments in 'update-hashes' command: " + string.Join(" ", args));
+                Trace.Write(Constants.ErrorUsageString);
                 return 1;
             }
 

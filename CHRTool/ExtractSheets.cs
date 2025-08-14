@@ -33,12 +33,14 @@ namespace CHRTool {
             });
             if (files.Length == 0) {
                 Trace.TraceError("No .CHR or .CHP file(s) or path(s) provided");
+                Trace.Write(Constants.ErrorUsageString);
                 return 1;
             }
 
             // There shouldn't be any unrecognized arguments at this point.
             if (args.Length > 0) {
                 Trace.TraceError("Unrecognized arguments in 'extract-sheet' command: " + string.Join(" ", args));
+                Trace.Write(Constants.ErrorUsageString);
                 return 1;
             }
 

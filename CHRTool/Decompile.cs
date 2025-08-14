@@ -44,6 +44,7 @@ namespace CHRTool {
             });
             if (files.Length == 0) {
                 Trace.TraceError("No .CHR or .CHP file(s) or path(s) provided");
+                Trace.Write(Constants.ErrorUsageString);
                 return 1;
             }
             else if (files.Length > 1)
@@ -51,12 +52,14 @@ namespace CHRTool {
 
             if (cantSetOutputFile && outputFile != null) {
                 Trace.TraceError("Cannot use '--output' pararameter with multiple files");
+                Trace.Write(Constants.ErrorUsageString);
                 return 1;
             }
 
             // There shouldn't be any unrecognized arguments at this point.
             if (args.Length > 0) {
                 Trace.TraceError("Unrecognized arguments in 'decompile' command: " + string.Join(" ", args));
+                Trace.Write(Constants.ErrorUsageString);
                 return 1;
             }
 
