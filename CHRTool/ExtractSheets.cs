@@ -20,7 +20,7 @@ using CommonLib.NamedValues;
 
 namespace CHRTool {
     public static class ExtractSheets {
-        public static int Run(string[] args, string spritesheetDir) {
+        public static int Run(string[] args, string spritesheetDir, bool verbose) {
             // (any extra options would go here.)
 
             // Fetch the directory with the game data for ripping spritesheets.
@@ -65,13 +65,16 @@ namespace CHRTool {
                 }
             }
             catch (Exception e) {
-                Trace.WriteLine("------------------------------------------------------------------------------");
+                if (verbose)
+                    Trace.WriteLine("------------------------------------------------------------------------------");
                 Trace.TraceError(e.GetTypeAndMessage());
                 return 1;
             }
 
-            Trace.WriteLine("------------------------------------------------------------------------------");
-            Trace.WriteLine("Done");
+            if (verbose) {
+                Trace.WriteLine("------------------------------------------------------------------------------");
+                Trace.WriteLine("Done");
+            }
             return 0;
         }
 

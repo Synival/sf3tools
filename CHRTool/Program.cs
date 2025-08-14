@@ -118,9 +118,9 @@ namespace CHRTool {
                 case CommandType.Decompile:
                     return Decompile.Run(remainingArgs, verbose);
                 case CommandType.ExtractSheets:
-                    return ExtractSheets.Run(remainingArgs, spritesheetDir);
+                    return ExtractSheets.Run(remainingArgs, spritesheetDir, verbose);
                 case CommandType.UpdateHashLookups:
-                    return UpdateHashLookups.Run(remainingArgs, spriteDir, frameHashLookupsFile);
+                    return UpdateHashLookups.Run(remainingArgs, spriteDir, frameHashLookupsFile, verbose);
 
                 default:
                     Trace.TraceError("Internal error: unimplemented command '" + command.ToString() + "'");

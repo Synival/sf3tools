@@ -70,13 +70,16 @@ namespace CHRTool {
                 }
             }
             catch (Exception e) {
-                Trace.WriteLine("------------------------------------------------------------------------------");
+                if (verbose)
+                    Trace.WriteLine("------------------------------------------------------------------------------");
                 Trace.TraceError(e.GetTypeAndMessage());
                 return 1;
             }
 
-            Trace.WriteLine("------------------------------------------------------------------------------");
-            Trace.WriteLine("Done");
+            if (verbose) {
+                Trace.WriteLine("------------------------------------------------------------------------------");
+                Trace.WriteLine("Done");
+            }
             return 0;
         }
 

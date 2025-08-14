@@ -6,7 +6,7 @@ using SF3.Sprites;
 
 namespace CHRTool {
     public static class UpdateHashLookups {
-        public static int Run(string[] args, string spriteDir, string frameHashLookupsFile) {
+        public static int Run(string[] args, string spriteDir, string frameHashLookupsFile, bool verbose) {
             // (any extra options would go here.)
 
             // There shouldn't be any unrecognized arguments at this point.
@@ -61,13 +61,16 @@ namespace CHRTool {
                 SpriteResources.WriteFrameRefsJSON();
             }
             catch (Exception e) {
-                Trace.WriteLine("------------------------------------------------------------------------------");
+                if (verbose)
+                    Trace.WriteLine("------------------------------------------------------------------------------");
                 Trace.TraceError(e.GetTypeAndMessage());
                 return 1;
             }
 
-            Trace.WriteLine("------------------------------------------------------------------------------");
-            Trace.WriteLine($"Done. {totalFramesAdded} frame(s) added.");
+            if (verbose) {
+                Trace.WriteLine("------------------------------------------------------------------------------");
+                Trace.WriteLine($"Done");
+            }
             return 0;
         }
     }
