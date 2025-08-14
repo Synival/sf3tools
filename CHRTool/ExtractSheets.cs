@@ -60,15 +60,13 @@ namespace CHRTool {
                     }
                     catch (Exception e) {
                         Trace.WriteLine("");
-                        Trace.TraceError($"    Error extracting frames from '{file}':");
-                        Trace.TraceError($"        {e.GetTypeAndMessage()}");
+                        Trace.TraceError(e.GetTypeAndMessage());
                     }
                 }
             }
             catch (Exception e) {
                 Trace.WriteLine("------------------------------------------------------------------------------");
-                Trace.TraceError($"Error:");
-                Trace.TraceError($"    {e.GetTypeAndMessage()}");
+                Trace.TraceError(e.GetTypeAndMessage());
                 return 1;
             }
 
@@ -187,8 +185,7 @@ namespace CHRTool {
                         }
                     }
                     catch (Exception e) {
-                        Trace.TraceError($"  Couldn't write frame '{frameRefTex.FrameRef}':");
-                        Trace.TraceError($"    {e.GetTypeAndMessage()}");
+                        Trace.TraceError(e.GetTypeAndMessage());
                     }
                 }
                 framesWritten.Add(hash);
@@ -201,8 +198,7 @@ namespace CHRTool {
                     bitmap.Save(filename, ImageFormat.Png);
                 }
                 catch (Exception e) {
-                    Trace.TraceError($"  Couldn't save bitmap '{filename}':");
-                    Trace.TraceError($"    {e.GetTypeAndMessage()}");
+                    Trace.TraceError(e.GetTypeAndMessage());
                 }
             }
 

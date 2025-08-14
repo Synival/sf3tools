@@ -27,7 +27,7 @@ namespace CHRTool {
                 args = compileOptions.Parse(args).ToArray();
             }
             catch (Exception e) {
-                Trace.TraceError("Error: " + e.Message);
+                Trace.TraceError(e.GetTypeAndMessage());
                 return 1;
             }
 
@@ -65,15 +65,13 @@ namespace CHRTool {
                         CompileFile(file, outputFile, outputPath, verbose, optimize);
                     }
                     catch (Exception e) {
-                        Trace.TraceError($"    Error:");
-                        Trace.TraceError($"        {e.GetTypeAndMessage()}");
+                        Trace.TraceError(e.GetTypeAndMessage());
                     }
                 }
             }
             catch (Exception e) {
                 Trace.WriteLine("------------------------------------------------------------------------------");
-                Trace.TraceError($"Error:");
-                Trace.TraceError($"    {e.GetTypeAndMessage()}");
+                Trace.TraceError(e.GetTypeAndMessage());
                 return 1;
             }
 

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using System.IO;
+using CommonLib.Extensions;
 using NDesk.Options;
 using SF3.Sprites;
 
@@ -39,7 +40,7 @@ namespace CHRTool {
                 args = anywhereOptions.Parse(args).ToArray();
             }
             catch (Exception e) {
-                Trace.TraceError("Error: " + e.Message);
+                Trace.TraceError(e.GetTypeAndMessage());
                 Trace.Write(Constants.ErrorUsageString);
                 return 1;
             }
@@ -83,7 +84,7 @@ namespace CHRTool {
                 extraArgsBeforeCommand = generalOptions.Parse(generalArgs).ToArray();
             }
             catch (Exception e) {
-                Trace.TraceError("Error: " + e.Message);
+                Trace.TraceError(e.GetTypeAndMessage());
                 Trace.Write(Constants.ErrorUsageString);
                 return 1;
             }

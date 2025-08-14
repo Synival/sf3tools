@@ -53,8 +53,7 @@ namespace CHRTool {
                             Trace.WriteLine("");
                     }
                     catch (Exception e) {
-                        Trace.TraceError($"    Error updating frame hashes:");
-                        Trace.TraceError($"        {e.GetTypeAndMessage()}");
+                        Trace.TraceError(e.GetTypeAndMessage());
                     }
                 }
 
@@ -63,8 +62,7 @@ namespace CHRTool {
             }
             catch (Exception e) {
                 Trace.WriteLine("------------------------------------------------------------------------------");
-                Trace.TraceError($"Error:");
-                Trace.TraceError($"    {e.GetTypeAndMessage()}");
+                Trace.TraceError(e.GetTypeAndMessage());
                 return 1;
             }
 
