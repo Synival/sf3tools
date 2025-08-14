@@ -15,8 +15,9 @@ using SF3.Types;
 using SF3.Extensions;
 using CommonLib.Imaging;
 using SF3;
-using System.Diagnostics;
 using CommonLib.NamedValues;
+using CommonLib.Logging;
+using CommonLib.Types;
 
 namespace CHRTool {
     public static class ExtractSheets {
@@ -32,15 +33,15 @@ namespace CHRTool {
                     .ToArray();
             });
             if (files.Length == 0) {
-                Trace.TraceError("No .CHR or .CHP file(s) or path(s) provided");
-                Trace.Write(Constants.ErrorUsageString);
+                Logger.WriteLine("No .CHR or .CHP file(s) or path(s) provided", LogType.Error);
+                Logger.Write(Constants.ErrorUsageString);
                 return 1;
             }
 
             // There shouldn't be any unrecognized arguments at this point.
             if (args.Length > 0) {
-                Trace.TraceError("Unrecognized arguments in 'extract-sheet' command: " + string.Join(" ", args));
-                Trace.Write(Constants.ErrorUsageString);
+                Logger.WriteLine("Unrecognized arguments in 'extract-sheet' command: " + string.Join(" ", args), LogType.Error);
+                Logger.Write(Constants.ErrorUsageString);
                 return 1;
             }
 
@@ -61,21 +62,21 @@ namespace CHRTool {
                         ExtractFrames(file, nameGetterContext, framesWritten, verbose);
                     }
                     catch (Exception e) {
-                        Trace.WriteLine("");
-                        Trace.TraceError(e.GetTypeAndMessage());
+                        Logger.WriteLine("");
+                        Logger.WriteLine(e.GetTypeAndMessage(), LogType.Error);
                     }
                 }
             }
             catch (Exception e) {
                 if (verbose)
-                    Trace.WriteLine("------------------------------------------------------------------------------");
-                Trace.TraceError(e.GetTypeAndMessage());
+                    Logger.WriteLine("------------------------------------------------------------------------------");
+                Logger.WriteLine(e.GetTypeAndMessage(), LogType.Error);
                 return 1;
             }
 
             if (verbose) {
-                Trace.WriteLine("------------------------------------------------------------------------------");
-                Trace.WriteLine("Done");
+                Logger.WriteLine("------------------------------------------------------------------------------");
+                Logger.WriteLine("Done");
             }
             return 0;
         }
@@ -84,7 +85,7 @@ namespace CHRTool {
             if (!file.ToLower().EndsWith(".chr") && !file.ToLower().EndsWith(".chp"))
                 throw new Exception($"File '{file}' is not a .CHR or .CHP file");
 
-            Trace.Write($"Extracting frames from '{file}': ");
+            Logger.Write($"Extracting frames from '{file}': " + (verbose ? "\n" : ""));
             var loadedSpritesheets = new Dictionary<string, Bitmap>();
             var bytes = File.ReadAllBytes(file);
             var byteData = new ByteData(new ByteArray(bytes));
@@ -107,11 +108,11 @@ namespace CHRTool {
 
             // Report
             if (framesSkipped > 0)
-                Trace.WriteLine($"{framesAdded} frame(s) extracted, {framesSkipped} frame(s) skipped");
+                Logger.WriteLine($"{framesAdded} frame(s) extracted, {framesSkipped} frame(s) skipped");
             else if (framesAdded > 0)
-                Trace.WriteLine($"{framesAdded} frame(s) extracted");
+                Logger.WriteLine($"{framesAdded} frame(s) extracted");
             else
-                Trace.WriteLine($"no frames");
+                Logger.WriteLine($"no frames");
         }
 
         private class ExtractInfo {
@@ -189,7 +190,7 @@ namespace CHRTool {
                         }
                     }
                     catch (Exception e) {
-                        Trace.TraceError(e.GetTypeAndMessage());
+                        Logger.WriteLine(e.GetTypeAndMessage(), LogType.Error);
                     }
                 }
                 framesWritten.Add(hash);
@@ -199,12 +200,12 @@ namespace CHRTool {
             foreach (var filename in updatedSpritesheets) {
                 try {
                     if (verbose)
-                        Trace.WriteLine($"Saving updated '{filename}'...");
+                        Logger.WriteLine($"Saving updated '{filename}'...");
                     var bitmap = loadedSpritesheets[filename];
                     bitmap.Save(filename, ImageFormat.Png);
                 }
                 catch (Exception e) {
-                    Trace.TraceError(e.GetTypeAndMessage());
+                    Logger.WriteLine(e.GetTypeAndMessage(), LogType.Error);
                 }
             }
 
@@ -223,7 +224,7 @@ namespace CHRTool {
             try {
                 if (File.Exists(spritesheetImageFile)) {
                     if (verbose)
-                        Trace.WriteLine($"Loading spritesheet '{spritesheetImageFile}...");
+                        Logger.WriteLine($"Loading spritesheet '{spritesheetImageFile}...");
 
                     // We have to load the bitmap in this odd way to prevent exceptions caused by saving to the same file you loaded from...
                     // Pretty cool stuff.
@@ -235,7 +236,7 @@ namespace CHRTool {
                 // If the spritesheet doesn't exist, create it, with placeholder red squares for spritesheets.
                 // (These will stay red if actual frames aren't found)
                 if (verbose)
-                    Trace.WriteLine($"Creating new spritesheet '{spriteDef.Name} ({Spritesheet.DimensionsToKey(frameWidth, frameHeight)})...");
+                    Logger.WriteLine($"Creating new spritesheet '{spriteDef.Name} ({Spritesheet.DimensionsToKey(frameWidth, frameHeight)})...");
 
                 // Get the dimensions of the spritesheet.
                 var frameDimensions = spritesheet.FrameGroupsByName.Values
@@ -277,7 +278,7 @@ namespace CHRTool {
 
                 // Save the image out.
                 if (verbose)
-                    Trace.WriteLine($"Saving to '{spritesheetImageFile}'...");
+                    Logger.WriteLine($"Saving to '{spritesheetImageFile}'...");
                 newImage.Save(spritesheetImageFile, ImageFormat.Png);
 
                 // Cache the loaded image and return it for later editing.
@@ -285,7 +286,7 @@ namespace CHRTool {
                 return newImage;
             }
             catch (Exception e) {
-                Trace.TraceError(e.GetTypeAndMessage());
+                Logger.WriteLine(e.GetTypeAndMessage(), LogType.Error);
                 loadedSpritesheets.Add(spritesheetImageFile, null);
                 return null;
             }

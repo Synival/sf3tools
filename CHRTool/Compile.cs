@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using CommonLib.Extensions;
+using CommonLib.Logging;
+using CommonLib.Types;
 using NDesk.Options;
 using SF3.CHR;
 
@@ -27,7 +28,7 @@ namespace CHRTool {
                 args = compileOptions.Parse(args).ToArray();
             }
             catch (Exception e) {
-                Trace.TraceError(e.GetTypeAndMessage());
+                Logger.WriteLine(e.GetTypeAndMessage(), LogType.Error);
                 return 1;
             }
 
@@ -41,23 +42,23 @@ namespace CHRTool {
                     .ToArray();
             });
             if (files.Length == 0) {
-                Trace.TraceError("No .SF3CHR or .SF3CHP file(s) or path(s) provided");
-                Trace.Write(Constants.ErrorUsageString);
+                Logger.WriteLine("No .SF3CHR or .SF3CHP file(s) or path(s) provided", LogType.Error);
+                Logger.Write(Constants.ErrorUsageString);
                 return 1;
             }
             else if (files.Length > 1)
                 cantSetOutputFile = true;
 
             if (cantSetOutputFile && outputFile != null) {
-                Trace.TraceError("Cannot use '--output' pararameter with multiple files");
-                Trace.Write(Constants.ErrorUsageString);
+                Logger.WriteLine("Cannot use '--output' pararameter with multiple files", LogType.Error);
+                Logger.Write(Constants.ErrorUsageString);
                 return 1;
             }
 
             // There shouldn't be any unrecognized arguments at this point.
             if (args.Length > 0) {
-                Trace.TraceError("Unrecognized arguments in 'compile' command: " + string.Join(" ", args));
-                Trace.Write(Constants.ErrorUsageString);
+                Logger.WriteLine("Unrecognized arguments in 'compile' command: " + string.Join(" ", args), LogType.Error);
+                Logger.Write(Constants.ErrorUsageString);
                 return 1;
             }
 
@@ -68,20 +69,20 @@ namespace CHRTool {
                         CompileFile(file, outputFile, outputDir, verbose, optimize);
                     }
                     catch (Exception e) {
-                        Trace.TraceError(e.GetTypeAndMessage());
+                        Logger.WriteLine(e.GetTypeAndMessage(), LogType.Error);
                     }
                 }
             }
             catch (Exception e) {
                 if (verbose)
-                    Trace.WriteLine("------------------------------------------------------------------------------");
-                Trace.TraceError(e.GetTypeAndMessage());
+                    Logger.WriteLine("------------------------------------------------------------------------------");
+                Logger.WriteLine(e.GetTypeAndMessage(), LogType.Error);
                 return 1;
             }
 
             if (verbose) {
-                Trace.WriteLine("------------------------------------------------------------------------------");
-                Trace.WriteLine("Done");
+                Logger.WriteLine("------------------------------------------------------------------------------");
+                Logger.WriteLine("Done");
             }
             return 0;
         }
@@ -103,7 +104,7 @@ namespace CHRTool {
             }
             var outputFilename = Path.GetFileName(outputFile);
 
-            Trace.WriteLine($"Compiling '{inputFile}' to '{outputFile}'...");
+            Logger.WriteLine($"Compiling '{inputFile}' to '{outputFile}'...");
 
             // Try to create the output directory if it doesn't exist.
             outputPath = Path.GetDirectoryName(outputFile);
@@ -112,8 +113,8 @@ namespace CHRTool {
 
             string inputText = null;
             if (verbose) {
-                Trace.WriteLine("------------------------------------------------------------------------------");
-                Trace.WriteLine($"Reading '{inputFile}...");
+                Logger.WriteLine("------------------------------------------------------------------------------");
+                Logger.WriteLine($"Reading '{inputFile}...");
             }
             inputText = File.ReadAllText(inputFile);
 
@@ -121,14 +122,14 @@ namespace CHRTool {
             if (isChp) {
                 // Attempt to deserialize.
                 if (verbose)
-                    Trace.WriteLine("Deserializing to CHP_Def...");
+                    Logger.WriteLine("Deserializing to CHP_Def...");
                 var chpDef = CHP_Def.FromJSON(inputText);
                 if (chpDef == null)
                     throw new NullReferenceException(); // eh, not really, but whatever
 
                 // We should have everything necessary to compile. Give it a go!
                 if (verbose)
-                    Trace.WriteLine("Compiling...");
+                    Logger.WriteLine("Compiling...");
                 var chpCompiler = new CHP_Compiler() {
                     OptimizeFrames            = optimize,
                     AddMissingAnimationFrames = true,
@@ -142,7 +143,7 @@ namespace CHRTool {
             else {
                 // Attempt to deserialize.
                 if (verbose)
-                    Trace.WriteLine("Deserializing to CHR_Def...");
+                    Logger.WriteLine("Deserializing to CHR_Def...");
                 CHR_Def chrDef = null;
                 chrDef = CHR_Def.FromJSON(inputText);
                 if (chrDef == null)
@@ -150,7 +151,7 @@ namespace CHRTool {
 
                 // We should have everything necessary to compile. Give it a go!
                 if (verbose)
-                    Trace.WriteLine("Compiling...");
+                    Logger.WriteLine("Compiling...");
                 var chrCompiler = new CHR_Compiler() {
                     OptimizeFrames            = optimize,
                     AddMissingAnimationFrames = true,
@@ -164,7 +165,7 @@ namespace CHRTool {
 
             // Output the file.
             if (verbose)
-                Trace.WriteLine($"Writing to '{outputFile}'...");
+                Logger.WriteLine($"Writing to '{outputFile}'...");
             File.WriteAllBytes(outputFile, outputData);
         }
     }

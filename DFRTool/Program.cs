@@ -1,4 +1,5 @@
-using System.Diagnostics;
+using CommonLib.Logging;
+using CommonLib.Types;
 using DFRLib;
 using DFRLib.Types;
 using NDesk.Options;
@@ -34,13 +35,9 @@ namespace DFRTool {
             "\n";
 
         private static int Main(string[] args) {
-            var consoleTraceListener = new ConsoleTraceListener();
-            Trace.Listeners.Add(consoleTraceListener);
-            Trace.AutoFlush = true;
-
             // Complain if no command was found.
             if (args == null || args.Length == 0) {
-                Trace.Write(c_ErrorUsageString);
+                Logger.Write(c_ErrorUsageString);
                 return 1;
             }
 
@@ -82,37 +79,37 @@ namespace DFRTool {
                 extraArgsBeforeCommand = generalOptions.Parse(generalArgs).ToArray();
             }
             catch (Exception e) {
-                Trace.TraceError("Error: " + e.Message);
-                Trace.Write(c_ErrorUsageString);
+                Logger.WriteLine("Error: " + e.Message, LogType.Error);
+                Logger.Write(c_ErrorUsageString);
                 return 1;
             }
 
             // Never show errors if -h was specified anywhere.
             if (outputHelp) {
                 if (outputVersion)
-                    Trace.Write(c_VersionString);
-                Trace.Write(c_FullUsageString);
+                    Logger.Write(c_VersionString);
+                Logger.Write(c_FullUsageString);
                 return 0;
             }
 
             // Always just show version string if requested (unless help is requested).
             if (outputVersion) {
-                Trace.Write(c_VersionString);
+                Logger.Write(c_VersionString);
                 return 0;
             }
 
             // Complain if no command was found.
             if (command == null) {
-                Trace.TraceError("Couldn't find 'apply' or 'create' command.");
-                Trace.Write(c_ErrorUsageString);
+                Logger.WriteLine("Couldn't find 'apply' or 'create' command.", LogType.Error);
+                Logger.Write(c_ErrorUsageString);
                 return 1;
             }
 
             // There shouldn't be any unrecognized options before the command.
             if (extraArgsBeforeCommand.Length > 0) {
                 // TODO: what arguments? maybe tell the user??
-                Trace.TraceError("Unrecognized arguments before 'apply' or 'create' command.");
-                Trace.Write(c_ErrorUsageString);
+                Logger.WriteLine("Unrecognized arguments before 'apply' or 'create' command.", LogType.Error);
+                Logger.Write(c_ErrorUsageString);
                 return 1;
             }
 
@@ -124,7 +121,7 @@ namespace DFRTool {
                     return Create(remainingArgs);
 
                 default:
-                    Trace.TraceError("Internal error: unimplemented command '" + command.ToString() + "'");
+                    Logger.WriteLine("Internal error: unimplemented command '" + command.ToString() + "'", LogType.Error);
                     return 1;
             }
         }
@@ -141,8 +138,8 @@ namespace DFRTool {
                 extra = options.Parse(args).ToArray();
             }
             catch (Exception e) {
-                Trace.TraceError("Error: " + e.Message);
-                Trace.Write(c_ErrorUsageString);
+                Logger.WriteLine("Error: " + e.Message, LogType.Error);
+                Logger.Write(c_ErrorUsageString);
                 return 1;
             }
 
@@ -150,8 +147,8 @@ namespace DFRTool {
 
             // Require two arguments.
             if (extra.Length != requiredArguments) {
-                Trace.TraceError("Incorrect number of 'apply' arguments.");
-                Trace.Write(c_ErrorUsageString);
+                Logger.WriteLine("Incorrect number of 'apply' arguments.", LogType.Error);
+                Logger.Write(c_ErrorUsageString);
                 return 1;
             }
 
@@ -166,15 +163,15 @@ namespace DFRTool {
                 File.WriteAllBytes(outputFilename, newBytes);
             }
             catch (Exception ex) {
-                Trace.TraceError("Error: " + ex.Message);
+                Logger.WriteLine("Error: " + ex.Message, LogType.Error);
                 return 1;
             }
 
             // We did it! Give the user a nice message.
             if (applyToInputFile)
-                Trace.WriteLine(outputFilename + " created successfully.");
+                Logger.WriteLine(outputFilename + " created successfully.");
             else
-                Trace.WriteLine(outputFilename + " patched successfully.");
+                Logger.WriteLine(outputFilename + " patched successfully.");
             return 0;
         }
 
@@ -190,15 +187,15 @@ namespace DFRTool {
                 extra = options.Parse(args).ToArray();
             }
             catch (Exception e) {
-                Trace.TraceError("Error: " + e.Message);
-                Trace.Write(c_ErrorUsageString);
+                Logger.WriteLine("Error: " + e.Message, LogType.Error);
+                Logger.Write(c_ErrorUsageString);
                 return 1;
             }
 
             // Require two arguments.
             if (extra.Length != 2) {
-                Trace.TraceError("Incorrect number of 'create' arguments.");
-                Trace.Write(c_ErrorUsageString);
+                Logger.WriteLine("Incorrect number of 'create' arguments.", LogType.Error);
+                Logger.Write(c_ErrorUsageString);
                 return 1;
             }
 
@@ -213,12 +210,12 @@ namespace DFRTool {
                 });
             }
             catch (Exception ex) {
-                Trace.TraceError("Error: " + ex.Message);
+                Logger.WriteLine("Error: " + ex.Message, LogType.Error);
                 return 1;
             }
 
             // We did it! Write the DFR file.
-            Trace.Write(diff.ToDFR());
+            Logger.Write(diff.ToDFR());
             return 0;
         }
     }

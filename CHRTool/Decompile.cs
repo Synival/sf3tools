@@ -1,9 +1,10 @@
 ﻿using System;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using CommonLib.Arrays;
 using CommonLib.Extensions;
+using CommonLib.Logging;
+using CommonLib.Types;
 using NDesk.Options;
 using SF3.ByteData;
 using SF3.Models.Files.CHP;
@@ -29,7 +30,7 @@ namespace CHRTool {
                 args = compileOptions.Parse(args).ToArray();
             }
             catch (Exception e) {
-                Trace.TraceError(e.GetTypeAndMessage());
+                Logger.WriteLine(e.GetTypeAndMessage(), LogType.Error);
                 return 1;
             }
 
@@ -43,23 +44,23 @@ namespace CHRTool {
                     .ToArray();
             });
             if (files.Length == 0) {
-                Trace.TraceError("No .CHR or .CHP file(s) or path(s) provided");
-                Trace.Write(Constants.ErrorUsageString);
+                Logger.WriteLine("No .CHR or .CHP file(s) or path(s) provided", LogType.Error);
+                Logger.Write(Constants.ErrorUsageString);
                 return 1;
             }
             else if (files.Length > 1)
                 cantSetOutputFile = true;
 
             if (cantSetOutputFile && outputFile != null) {
-                Trace.TraceError("Cannot use '--output' pararameter with multiple files");
-                Trace.Write(Constants.ErrorUsageString);
+                Logger.WriteLine("Cannot use '--output' pararameter with multiple files", LogType.Error);
+                Logger.Write(Constants.ErrorUsageString);
                 return 1;
             }
 
             // There shouldn't be any unrecognized arguments at this point.
             if (args.Length > 0) {
-                Trace.TraceError("Unrecognized arguments in 'decompile' command: " + string.Join(" ", args));
-                Trace.Write(Constants.ErrorUsageString);
+                Logger.WriteLine("Unrecognized arguments in 'decompile' command: " + string.Join(" ", args), LogType.Error);
+                Logger.Write(Constants.ErrorUsageString);
                 return 1;
             }
 
@@ -70,20 +71,20 @@ namespace CHRTool {
                         DecompileFile(file, outputFile, outputDir, verbose, simplify);
                     }
                     catch (Exception e) {
-                        Trace.TraceError(e.GetTypeAndMessage());
+                        Logger.WriteLine(e.GetTypeAndMessage(), LogType.Error);
                     }
                 }
             }
             catch (Exception e) {
                 if (verbose)
-                    Trace.WriteLine("------------------------------------------------------------------------------");
-                Trace.TraceError(e.GetTypeAndMessage());
+                    Logger.WriteLine("------------------------------------------------------------------------------");
+                Logger.WriteLine(e.GetTypeAndMessage(), LogType.Error);
                 return 1;
             }
 
             if (verbose) {
-                Trace.WriteLine("------------------------------------------------------------------------------");
-                Trace.WriteLine("Done");
+                Logger.WriteLine("------------------------------------------------------------------------------");
+                Logger.WriteLine("Done");
             }
             return 0;
         }
@@ -104,7 +105,7 @@ namespace CHRTool {
                 outputFile = Path.Combine(outputPath ?? Path.GetDirectoryName(inputFile), outputFilenameWithExtension);
             }
 
-            Trace.WriteLine($"Decompiling '{inputFile}' to '{outputFile}'...");
+            Logger.WriteLine($"Decompiling '{inputFile}' to '{outputFile}'...");
 
             // Try to create the output directory if it doesn't exist.
             outputPath = Path.GetDirectoryName(outputFile);
@@ -113,8 +114,8 @@ namespace CHRTool {
 
             // Fetch the data.
             if (verbose) {
-                Trace.WriteLine("------------------------------------------------------------------------------");
-                Trace.WriteLine($"Loading data from '{inputFile}...");
+                Logger.WriteLine("------------------------------------------------------------------------------");
+                Logger.WriteLine($"Loading data from '{inputFile}...");
             }
 
             byte[] inputBytes = null;
@@ -124,13 +125,13 @@ namespace CHRTool {
             if (isChp) {
                 // Attempt to load it as a CHP_File.
                 if (verbose)
-                    Trace.WriteLine("Creating CHP_File...");
+                    Logger.WriteLine("Creating CHP_File...");
                 var nameGetterContext = new NameGetterContext(ScenarioType.Scenario1);
                 var chpFile = CHP_File.Create(new ByteData(new ByteArray(inputBytes)), nameGetterContext, ScenarioType.Scenario1);
 
                 // Get a CHR_Def from the CHR_File.
                 if (verbose)
-                    Trace.WriteLine("Serializing to CHP_Def...");
+                    Logger.WriteLine("Serializing to CHP_Def...");
                 var chpDef = chpFile.ToCHP_Def();
                 if (simplify) {
                     foreach (var chrDef in chpDef.CHRsBySector.Values)
@@ -140,19 +141,19 @@ namespace CHRTool {
 
                 // Serialize the file.
                 if (verbose)
-                    Trace.WriteLine($"Converting to JSON file...");
+                    Logger.WriteLine($"Converting to JSON file...");
                 outputText = chpDef.ToJSON_String();
             }
             else {
                 // Attempt to load it as a CHR_File.
                 if (verbose)
-                    Trace.WriteLine("Creating CHR_File...");
+                    Logger.WriteLine("Creating CHR_File...");
                 var nameGetterContext = new NameGetterContext(ScenarioType.Scenario1);
                 var chrFile = CHR_File.Create(new ByteData(new ByteArray(inputBytes)), nameGetterContext, ScenarioType.Scenario1);
 
                 // Get a CHR_Def from the CHR_File.
                 if (verbose)
-                    Trace.WriteLine("Serializing to CHR_Def...");
+                    Logger.WriteLine("Serializing to CHR_Def...");
                 var chrDef = chrFile.ToCHR_Def();
                 if (simplify) {
                     foreach (var sprite in chrDef.Sprites)
@@ -161,12 +162,12 @@ namespace CHRTool {
 
                 // Serialize the file.
                 if (verbose)
-                    Trace.WriteLine($"Converting to JSON file...");
+                    Logger.WriteLine($"Converting to JSON file...");
                 outputText = chrDef.ToJSON_String();
             }
 
             if (verbose)
-                Trace.WriteLine($"Writing to '{outputFile}'...");
+                Logger.WriteLine($"Writing to '{outputFile}'...");
             File.WriteAllText(outputFile, outputText);
         }
 

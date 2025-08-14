@@ -1,8 +1,9 @@
-﻿using System.Diagnostics;
-using System.IO;
+﻿using System.IO;
 using System.Linq;
 using CommonLib.Arrays;
+using CommonLib.Logging;
 using CommonLib.NamedValues;
+using CommonLib.Types;
 using SF3.Models.Files.CHP;
 using SF3.Types;
 
@@ -75,13 +76,13 @@ namespace SF3.CHR {
                         outputStream.Write(new byte[padding], 0, (int) padding);
                 }
                 else if (padding < 0) {
-                    Trace.TraceError($"CHR at sector {chrKv.Key} (position 0x{offset:X5}) forced to seek back 0x{-padding:X2} bytes, overwriting previous CHR");
+                    Logger.WriteLine($"CHR at sector {chrKv.Key} (position 0x{offset:X5}) forced to seek back 0x{-padding:X2} bytes, overwriting previous CHR", LogType.Error);
                     outputStream.Position = offset;
                 }
 
                 var bytesWritten = _chrCompiler.Compile(chr, outputStream);
                 if (chr.MaxSize.HasValue && bytesWritten > chr.MaxSize)
-                    Trace.TraceError($"CHR at sector {chrKv.Key} (position 0x{offset:X5}) exceeds MaxSize (0x{chr.MaxSize:X5}) by 0x{(bytesWritten - chr.MaxSize):X2} bytes");
+                    Logger.WriteLine($"CHR at sector {chrKv.Key} (position 0x{offset:X5}) exceeds MaxSize (0x{chr.MaxSize:X5}) by 0x{(bytesWritten - chr.MaxSize):X2} bytes", LogType.Error);
             }
 
             var eofPadding = (chpDef.TotalSectors * 0x800) - outputStream.Position - startPosition;

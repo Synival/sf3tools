@@ -1,15 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
 using CommonLib.Extensions;
+using CommonLib.Logging;
+using CommonLib.Types;
 using CommonLib.Utils;
 using SF3.Extensions;
 using SF3.Sprites;
 using SF3.Types;
-using SF3.Utils;
 
 namespace SF3.CHR {
     /// <summary>
@@ -298,10 +298,10 @@ namespace SF3.CHR {
                         if (frameId >= 0)
                             command = frameId;
                         else
-                            Trace.TraceError($"Couldn't find FrameID for animation command with keys '{string.Join(", ", aniKeys.Select(x => x ?? "(null)"))}'");
+                            Logger.WriteLine($"Couldn't find FrameID for animation command with keys '{string.Join(", ", aniKeys.Select(x => x ?? "(null)"))}'", LogType.Error);
                     }
                     else
-                        Trace.TraceError("Animation 'Frame' command has no frames");
+                        Logger.WriteLine("Animation 'Frame' command has no frames", LogType.Error);
                 }
 
                 // Add the command to the command table.
@@ -711,8 +711,8 @@ namespace SF3.CHR {
                 bitmap = (Bitmap) Image.FromFile(bitmapPath);
             }
             catch (Exception e) {
-                Trace.TraceError($"Couldn't load spritesheet '{spritesheetImageKey}'");
-                Trace.TraceError($"  {e.GetTypeAndMessage()}");
+                Logger.WriteLine($"Couldn't load spritesheet '{spritesheetImageKey}'", LogType.Error);
+                Logger.WriteLine($"  {e.GetTypeAndMessage()}", LogType.Error);
                 bitmap = null;
             }
 
