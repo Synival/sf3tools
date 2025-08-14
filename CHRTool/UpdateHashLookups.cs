@@ -28,10 +28,13 @@ namespace CHRTool {
                 var files = Directory.GetFiles(spriteDir, "*.SF3Sprite");
 
                 // Get the curent list of frame hash lookups.
-                if (!File.Exists(frameHashLookupsFile))
-                    Trace.WriteLine($"Couldn't find '{frameHashLookupsFile}' -- creating file from scratch.");
+                if (!File.Exists(frameHashLookupsFile)) {
+                    if (verbose)
+                        Trace.WriteLine($"Couldn't find '{frameHashLookupsFile}' -- creating file from scratch.");
+                }
                 else {
-                    Trace.WriteLine($"Loading '{frameHashLookupsFile}'...");
+                    if (verbose)
+                        Trace.WriteLine($"Loading '{frameHashLookupsFile}'...");
                     SpriteResources.LoadFrameRefs();
                 }
 
@@ -39,7 +42,7 @@ namespace CHRTool {
                 if (verbose)
                     Trace.WriteLine("Checking sprites for new frame hashes:");
                 foreach (var file in files) {
-                    Trace.Write($"Updating '{file}': ");
+                    Trace.Write($"Adding frame hashes from '{file}': ");
                     try {
                         var jsonText = File.ReadAllText(file);
                         var spriteDef = SpriteDef.FromJSON(jsonText);
