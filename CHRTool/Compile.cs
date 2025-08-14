@@ -64,6 +64,11 @@ namespace CHRTool {
 
             // It looks like we're ready to go! Fetch the file data.
             try {
+                if (verbose) {
+                    Logger.WriteLine("Compiling to .CHR(s) / CHP(s)...");
+                    Logger.WriteLine("------------------------------------------------------------------------------");
+                }
+
                 foreach (var file in files) {
                     try {
                         CompileFile(file, outputFile, outputDir, verbose, optimize);

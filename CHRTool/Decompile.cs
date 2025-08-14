@@ -66,6 +66,11 @@ namespace CHRTool {
 
             // It looks like we're ready to go! Fetch the file data.
             try {
+                if (verbose) {
+                    Logger.WriteLine("Decompiling to .SF3CHR(s) / SF3CHP(s)...");
+                    Logger.WriteLine("------------------------------------------------------------------------------");
+                }
+
                 foreach (var file in files) {
                     try {
                         DecompileFile(file, outputFile, outputDir, verbose, simplify);

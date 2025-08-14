@@ -47,6 +47,11 @@ namespace CHRTool {
 
             // It looks like we're ready to go!
             try {
+                if (verbose) {
+                    Logger.WriteLine("Extracting frames to spritesheets...");
+                    Logger.WriteLine("------------------------------------------------------------------------------");
+                }
+
                 // Try to create the spritesheet directory if it doesn't exist.
                 if (!Directory.Exists(spritesheetDir))
                     Directory.CreateDirectory(spritesheetDir);
