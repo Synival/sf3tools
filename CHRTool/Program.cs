@@ -11,7 +11,8 @@ namespace CHRTool {
         private static int Main(string[] args) {
             // Complain if no command was found.
             if (args == null || args.Length == 0) {
-                Logger.Write(Constants.ErrorUsageString);
+                Logger.Write(Constants.VersionString);
+                Logger.Write(Constants.ShortUsageString);
                 return 1;
             }
 
