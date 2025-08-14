@@ -30,7 +30,6 @@ namespace CHRTool {
             }
             catch (Exception e) {
                 Trace.TraceError("Error: " + e.Message);
-                Trace.Write(Constants.ErrorUsageString);
                 return 1;
             }
 
@@ -45,7 +44,6 @@ namespace CHRTool {
             });
             if (files.Length == 0) {
                 Trace.TraceError("No .CHR or .CHP file(s) or path(s) provided");
-                Trace.Write(Constants.ErrorUsageString);
                 return 1;
             }
             else if (files.Length > 1)
@@ -58,9 +56,7 @@ namespace CHRTool {
 
             // There shouldn't be any unrecognized arguments at this point.
             if (args.Length > 0) {
-                Trace.TraceError("Unrecognized arguments in 'decompile' command:");
-                Trace.TraceError($"    {string.Join(" ", args)}");
-                Trace.Write(Constants.ErrorUsageString);
+                Trace.TraceError("Unrecognized arguments in 'decompile' command: " + string.Join(" ", args));
                 return 1;
             }
 
