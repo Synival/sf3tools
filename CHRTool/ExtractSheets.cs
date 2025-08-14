@@ -58,7 +58,7 @@ namespace CHRTool {
                 var framesWritten = new HashSet<string>();
                 foreach (var file in files) {
                     try {
-                        ExtractFrames(file, nameGetterContext, framesWritten);
+                        ExtractFrames(file, nameGetterContext, framesWritten, verbose);
                     }
                     catch (Exception e) {
                         Trace.WriteLine("");
@@ -80,7 +80,7 @@ namespace CHRTool {
             return 0;
         }
 
-        private static void ExtractFrames(string file, INameGetterContext nameGetterContext, HashSet<string> framesWritten) {
+        private static void ExtractFrames(string file, INameGetterContext nameGetterContext, HashSet<string> framesWritten, bool verbose) {
             if (!file.ToLower().EndsWith(".chr") && !file.ToLower().EndsWith(".chp"))
                 throw new Exception($"File '{file}' is not a .CHR or .CHP file");
 
@@ -102,7 +102,7 @@ namespace CHRTool {
 
             // Perform the extraction!
             var totalFrames = extractInfos.Length;
-            var framesAdded = ExtractFrames(extractInfos, framesWritten, loadedSpritesheets);
+            var framesAdded = ExtractFrames(extractInfos, framesWritten, loadedSpritesheets, verbose);
             var framesSkipped = totalFrames - framesAdded;
 
             // Report
@@ -150,7 +150,7 @@ namespace CHRTool {
                 .ToArray();
         }
 
-        private static int ExtractFrames(ExtractInfo[] extractInfos, HashSet<string> framesWritten, Dictionary<string, Bitmap> loadedSpritesheets) {
+        private static int ExtractFrames(ExtractInfo[] extractInfos, HashSet<string> framesWritten, Dictionary<string, Bitmap> loadedSpritesheets, bool verbose) {
             // Get a list of all frames referenced in this CHR file.
             var frameRefs = extractInfos
                 .Where(x => !framesWritten.Contains(x.Hash))
@@ -180,7 +180,7 @@ namespace CHRTool {
 
                         // Add this to the spritesheet!
                         var texture = frameRefTex.Texture;
-                        var bitmap = LoadSpritesheet(loadedSpritesheets, spriteDef, frameRef.FrameWidth, frameRef.FrameHeight);
+                        var bitmap = LoadSpritesheet(loadedSpritesheets, spriteDef, frameRef.FrameWidth, frameRef.FrameHeight, verbose);
                         if (bitmap != null) {
                             if (bitmap.SetDataAt(frame.SpritesheetX, frame.SpritesheetY, texture.ImageData16Bit)) {
                                 updatedSpritesheets.Add(SpriteResources.SpritesheetImageFile(spriteDef.Name, frameRef.FrameWidth, frameRef.FrameHeight));
@@ -198,6 +198,8 @@ namespace CHRTool {
             // Save updated bitmaps.
             foreach (var filename in updatedSpritesheets) {
                 try {
+                    if (verbose)
+                        Trace.WriteLine($"Saving updated '{filename}'...");
                     var bitmap = loadedSpritesheets[filename];
                     bitmap.Save(filename, ImageFormat.Png);
                 }
@@ -209,7 +211,7 @@ namespace CHRTool {
             return framesAdded;
         }
 
-        private static Bitmap LoadSpritesheet(Dictionary<string, Bitmap> loadedSpritesheets, SpriteDef spriteDef, int frameWidth, int frameHeight) {
+        private static Bitmap LoadSpritesheet(Dictionary<string, Bitmap> loadedSpritesheets, SpriteDef spriteDef, int frameWidth, int frameHeight, bool verbose) {
             var spritesheetImageFile = SpriteResources.SpritesheetImageFile(spriteDef.Name, frameWidth, frameHeight);
             var spritesheet = spriteDef.Spritesheets[Spritesheet.DimensionsToKey(frameWidth, frameHeight)];
 
@@ -219,6 +221,8 @@ namespace CHRTool {
 
             // If the spritesheet exists, fetch it.
             if (File.Exists(spritesheetImageFile)) {
+                if (verbose)
+                    Trace.WriteLine($"Loading spritesheet '{spritesheetImageFile}...");
                 try {
                     // We have to load the bitmap in this odd way to prevent exceptions caused by saving to the same file you loaded from...
                     // Pretty cool stuff.
@@ -234,6 +238,8 @@ namespace CHRTool {
 
             // If the spritesheet doesn't exist, create it, with placeholder red squares for spritesheets.
             // (These will stay red if actual frames aren't found)
+            if (verbose)
+                Trace.WriteLine($"Creating new spritesheet '{spriteDef.Name} ({Spritesheet.DimensionsToKey(frameWidth, frameHeight)})...");
 
             // Get the dimensions of the spritesheet.
             var frameDimensions = spritesheet.FrameGroupsByName.Values
@@ -275,6 +281,8 @@ namespace CHRTool {
 
             // Save the image out.
             try {
+                if (verbose)
+                    Trace.WriteLine($"Saving to '{spritesheetImageFile}'...");
                 newImage.Save(spritesheetImageFile, ImageFormat.Png);
             }
             catch {
