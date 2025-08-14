@@ -66,9 +66,12 @@ namespace CHRTool {
                 var spritesheetsUpdated = new HashSet<string>();
 
                 var framesAdded = 0;
+                var framesUnchanged = 0;
                 foreach (var file in files) {
                     try {
-                        framesAdded += ExtractFrames(file, nameGetterContext, loadedSpritesheets, framesWritten, spritesheetsUpdated, verbose);
+                        (var fa, var fs) = ExtractFrames(file, nameGetterContext, loadedSpritesheets, framesWritten, spritesheetsUpdated, verbose);
+                        framesAdded += fa;
+                        framesUnchanged += fs;
                     }
                     catch (Exception e) {
                         Logger.WriteLine("");
@@ -80,7 +83,7 @@ namespace CHRTool {
                 if (verbose)
                     Logger.WriteLine("------------------------------------------------------------------------------");
                 Logger.WriteLine($"Saving {spritesheetsUpdated.Count} updated spritesheet(s)...");
-                if (verbose)
+                if (verbose && spritesheetsUpdated.Count > 0)
                     Logger.WriteLine("------------------------------------------------------------------------------");
 
                 foreach (var filename in spritesheetsUpdated) {
@@ -97,7 +100,8 @@ namespace CHRTool {
 
                 if (verbose)
                     Logger.WriteLine("------------------------------------------------------------------------------");
-                Logger.WriteLine($"{framesAdded} total frame(s) added");
+
+                Logger.WriteLine($"{framesAdded} total new frame(s) extracted, {framesUnchanged} total frame(s) found but unchanged");
             }
             catch (Exception e) {
                 if (verbose)
@@ -113,7 +117,7 @@ namespace CHRTool {
             return 0;
         }
 
-        private static int ExtractFrames(string file, INameGetterContext nameGetterContext, Dictionary<string, Bitmap> loadedSpritesheets, HashSet<string> framesWritten, HashSet<string> spritesheetsUpdated, bool verbose) {
+        private static (int framesAdded, int framesUnchanged) ExtractFrames(string file, INameGetterContext nameGetterContext, Dictionary<string, Bitmap> loadedSpritesheets, HashSet<string> framesWritten, HashSet<string> spritesheetsUpdated, bool verbose) {
             if (!file.ToLower().EndsWith(".chr") && !file.ToLower().EndsWith(".chp"))
                 throw new Exception($"File '{file}' is not a .CHR or .CHP file");
 
@@ -133,19 +137,18 @@ namespace CHRTool {
             }
 
             // Perform the extraction!
-            var totalFrames = extractInfos.Length;
-            var framesAdded = ExtractFrames(extractInfos, loadedSpritesheets, framesWritten, spritesheetsUpdated, verbose);
-            var framesSkipped = totalFrames - framesAdded;
+            (var framesAdded, var framesUnchanged) = ExtractFrames(extractInfos, loadedSpritesheets, framesWritten, spritesheetsUpdated, verbose);
 
             // Report
-            if (framesSkipped > 0)
-                Logger.WriteLine($"{framesAdded} frame(s) extracted, {framesSkipped} frame(s) skipped");
-            else if (framesAdded > 0)
-                Logger.WriteLine($"{framesAdded} frame(s) extracted");
+            var totalNewFrames = framesAdded + framesUnchanged;
+            if (totalNewFrames > 0 && framesUnchanged > 0)
+                Logger.WriteLine($"{totalNewFrames} new frame(s): {framesAdded} extracted, {framesUnchanged} unchanged");
+            else if (totalNewFrames > 0)
+                Logger.WriteLine($"{totalNewFrames} new frame(s): {framesAdded} extracted");
             else
-                Logger.WriteLine($"no frames");
+                Logger.WriteLine($"no new frames");
 
-            return framesAdded;
+            return (framesAdded, framesUnchanged);
         }
 
         private class ExtractInfo {
@@ -184,10 +187,9 @@ namespace CHRTool {
                 .ToArray();
         }
 
-        private static int ExtractFrames(ExtractInfo[] extractInfos, Dictionary<string, Bitmap> loadedSpritesheets, HashSet<string> framesWritten, HashSet<string> spritesheetsUpdated, bool verbose) {
+        private static (int framesAdded, int framesUnchanged) ExtractFrames(ExtractInfo[] extractInfos, Dictionary<string, Bitmap> loadedSpritesheets, HashSet<string> framesWritten, HashSet<string> spritesheetsUpdated, bool verbose) {
             // Get a list of all frames referenced in this CHR file.
             var frameRefs = extractInfos
-                .Where(x => !framesWritten.Contains(x.Hash))
                 .OrderBy(x => x.FrameRef.SpriteName)
                 .ThenBy(x => x.FrameRef.FrameWidth)
                 .ThenBy(x => x.FrameRef.FrameHeight)
@@ -198,11 +200,19 @@ namespace CHRTool {
 
             // Add frames to spritesheet bitmaps.
             int framesAdded = 0;
+            int framesUnchanged = 0;
+
             foreach (var frameRefTexKv in frameRefs) {
                 var hash = frameRefTexKv.Key;
-                foreach (var frameRefTex in frameRefTexKv.Value) {
+                var extractInfo = frameRefTexKv.Value;
+
+                foreach (var frameRefTex in extractInfo) {
+                    var frameRef = frameRefTex.FrameRef;
+                    var frameRefKey = frameRef.ToString();
                     try {
-                        var frameRef = frameRefTex.FrameRef;
+                        if (framesWritten.Contains(frameRefKey))
+                            continue;
+
                         var spriteDef = SpriteResources.GetSpriteDef(frameRef.SpriteName);
                         var spritesheet = spriteDef.Spritesheets[Spritesheet.DimensionsToKey(frameRef.FrameWidth, frameRef.FrameHeight)];
                         var frameGroup = spritesheet.FrameGroupsByName[frameRef.FrameGroupName];
@@ -215,19 +225,24 @@ namespace CHRTool {
                         var texture = frameRefTex.Texture;
                         var bitmap = LoadSpritesheet(loadedSpritesheets, spriteDef, frameRef.FrameWidth, frameRef.FrameHeight, verbose);
                         if (bitmap != null) {
-                            if (bitmap.SetDataAt(frame.SpritesheetX, frame.SpritesheetY, texture.ImageData16Bit)) {
-                                spritesheetsUpdated.Add(SpriteResources.SpritesheetImageFile(spriteDef.Name, frameRef.FrameWidth, frameRef.FrameHeight));
+                            var newData = texture.ImageData16Bit;
+                            var existingData = bitmap.GetDataAt(frame.SpritesheetX, frame.SpritesheetY, frameRef.FrameWidth, frameRef.FrameHeight);
+                            if (Enumerable.SequenceEqual(newData.To1DArray(), existingData.To1DArray()))
+                                framesUnchanged++;
+                            else if (bitmap.SetDataAt(frame.SpritesheetX, frame.SpritesheetY, newData)) {
                                 framesAdded++;
+                                spritesheetsUpdated.Add(SpriteResources.SpritesheetImageFile(spriteDef.Name, frameRef.FrameWidth, frameRef.FrameHeight));
                             }
                         }
                     }
                     catch (Exception e) {
                         Logger.WriteLine(e.GetTypeAndMessage(), LogType.Error);
                     }
+                    framesWritten.Add(frameRefKey);
                 }
-                framesWritten.Add(hash);
             }
-            return framesAdded;
+
+            return (framesAdded, framesUnchanged);
         }
 
         private static Bitmap LoadSpritesheet(Dictionary<string, Bitmap> loadedSpritesheets, SpriteDef spriteDef, int frameWidth, int frameHeight, bool verbose) {
