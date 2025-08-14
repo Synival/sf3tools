@@ -81,6 +81,9 @@ namespace CHRTool {
         }
 
         private static void ExtractFrames(string file, INameGetterContext nameGetterContext, HashSet<string> framesWritten) {
+            if (!file.ToLower().EndsWith(".chr") && !file.ToLower().EndsWith(".chp"))
+                throw new Exception($"File '{file}' is not a .CHR or .CHP file");
+
             Trace.Write($"Extracting frames from '{file}': ");
             var loadedSpritesheets = new Dictionary<string, Bitmap>();
             var bytes = File.ReadAllBytes(file);
@@ -92,13 +95,9 @@ namespace CHRTool {
                 var chrFile = CHR_File.Create(byteData, nameGetterContext, ScenarioType.Scenario1);
                 extractInfos = GetExtractInfos(chrFile);
             }
-            else if (file.ToLower().EndsWith(".chp")) {
+            else {
                 var chpFile = CHP_File.Create(byteData, nameGetterContext, ScenarioType.Scenario1);
                 extractInfos = GetExtractInfos(chpFile);
-            }
-            else {
-                Trace.TraceError($"  Unrecognized extension for '{file}'");
-                return;
             }
 
             // Perform the extraction!
