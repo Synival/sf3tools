@@ -18,13 +18,13 @@ namespace CHRTool {
             // It looks like we're ready to go! Fetch the file data.
             int totalFramesAdded = 0;
             try {
-                Trace.WriteLine("Updating lookup hashes...");
-                Trace.WriteLine("------------------------------------------------------------------------------");
-
                 // Fetch all .SF3Sprite files
-                string[] files;
-                Trace.WriteLine("Getting list of SF3Sprites...");
-                files = Directory.GetFiles(spriteDir, "*.SF3Sprite");
+                if (verbose) {
+                    Trace.WriteLine("Updating lookup hashes...");
+                    Trace.WriteLine("------------------------------------------------------------------------------");
+                    Trace.WriteLine("Getting list of SF3Sprites...");
+                }
+                var files = Directory.GetFiles(spriteDir, "*.SF3Sprite");
 
                 // Get the curent list of frame hash lookups.
                 if (!File.Exists(frameHashLookupsFile))
@@ -35,7 +35,8 @@ namespace CHRTool {
                 }
 
                 // Open SF3Sprite files and their accompanying spritesheets.
-                Trace.WriteLine("Checking sprites for new frame hashes:");
+                if (verbose)
+                    Trace.WriteLine("Checking sprites for new frame hashes:");
                 foreach (var file in files) {
                     Trace.Write($"Updating '{file}': ");
                     try {
@@ -57,8 +58,12 @@ namespace CHRTool {
                     }
                 }
 
-                Trace.WriteLine($"Writing '{frameHashLookupsFile}'...");
-                SpriteResources.WriteFrameRefsJSON();
+                if (totalFramesAdded > 0) {
+                    Trace.WriteLine($"Writing '{frameHashLookupsFile}' ({totalFramesAdded} new frames)...");
+                    SpriteResources.WriteFrameRefsJSON();
+                }
+                else
+                    Trace.WriteLine($"No new frames; not updating frame hash lookup file");
             }
             catch (Exception e) {
                 if (verbose)
