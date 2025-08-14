@@ -61,16 +61,43 @@ namespace CHRTool {
                 var nameGetterContext = new NameGetterContext(ScenarioType.Scenario1);
 
                 // Extract!
-                var framesWritten = new HashSet<string>();
+                var loadedSpritesheets  = new Dictionary<string, Bitmap>();
+                var framesWritten       = new HashSet<string>();
+                var spritesheetsUpdated = new HashSet<string>();
+
+                var framesAdded = 0;
                 foreach (var file in files) {
                     try {
-                        ExtractFrames(file, nameGetterContext, framesWritten, verbose);
+                        framesAdded += ExtractFrames(file, nameGetterContext, loadedSpritesheets, framesWritten, spritesheetsUpdated, verbose);
                     }
                     catch (Exception e) {
                         Logger.WriteLine("");
                         Logger.WriteLine(e.GetTypeAndMessage(), LogType.Error);
                     }
                 }
+
+                // Save updated bitmaps.
+                if (verbose)
+                    Logger.WriteLine("------------------------------------------------------------------------------");
+                Logger.WriteLine($"Saving {spritesheetsUpdated.Count} updated spritesheet(s)...");
+                if (verbose)
+                    Logger.WriteLine("------------------------------------------------------------------------------");
+
+                foreach (var filename in spritesheetsUpdated) {
+                    try {
+                        if (verbose)
+                            Logger.WriteLine($"Saving '{filename}'...");
+                        var bitmap = loadedSpritesheets[filename];
+                        bitmap.Save(filename, ImageFormat.Png);
+                    }
+                    catch (Exception e) {
+                        Logger.WriteLine(e.GetTypeAndMessage(), LogType.Error);
+                    }
+                }
+
+                if (verbose)
+                    Logger.WriteLine("------------------------------------------------------------------------------");
+                Logger.WriteLine($"{framesAdded} total frame(s) added");
             }
             catch (Exception e) {
                 if (verbose)
@@ -86,12 +113,11 @@ namespace CHRTool {
             return 0;
         }
 
-        private static void ExtractFrames(string file, INameGetterContext nameGetterContext, HashSet<string> framesWritten, bool verbose) {
+        private static int ExtractFrames(string file, INameGetterContext nameGetterContext, Dictionary<string, Bitmap> loadedSpritesheets, HashSet<string> framesWritten, HashSet<string> spritesheetsUpdated, bool verbose) {
             if (!file.ToLower().EndsWith(".chr") && !file.ToLower().EndsWith(".chp"))
                 throw new Exception($"File '{file}' is not a .CHR or .CHP file");
 
             Logger.Write($"Extracting frames from '{file}': " + (verbose ? "\n" : ""));
-            var loadedSpritesheets = new Dictionary<string, Bitmap>();
             var bytes = File.ReadAllBytes(file);
             var byteData = new ByteData(new ByteArray(bytes));
 
@@ -108,7 +134,7 @@ namespace CHRTool {
 
             // Perform the extraction!
             var totalFrames = extractInfos.Length;
-            var framesAdded = ExtractFrames(extractInfos, framesWritten, loadedSpritesheets, verbose);
+            var framesAdded = ExtractFrames(extractInfos, loadedSpritesheets, framesWritten, spritesheetsUpdated, verbose);
             var framesSkipped = totalFrames - framesAdded;
 
             // Report
@@ -118,6 +144,8 @@ namespace CHRTool {
                 Logger.WriteLine($"{framesAdded} frame(s) extracted");
             else
                 Logger.WriteLine($"no frames");
+
+            return framesAdded;
         }
 
         private class ExtractInfo {
@@ -156,7 +184,7 @@ namespace CHRTool {
                 .ToArray();
         }
 
-        private static int ExtractFrames(ExtractInfo[] extractInfos, HashSet<string> framesWritten, Dictionary<string, Bitmap> loadedSpritesheets, bool verbose) {
+        private static int ExtractFrames(ExtractInfo[] extractInfos, Dictionary<string, Bitmap> loadedSpritesheets, HashSet<string> framesWritten, HashSet<string> spritesheetsUpdated, bool verbose) {
             // Get a list of all frames referenced in this CHR file.
             var frameRefs = extractInfos
                 .Where(x => !framesWritten.Contains(x.Hash))
@@ -170,7 +198,6 @@ namespace CHRTool {
 
             // Add frames to spritesheet bitmaps.
             int framesAdded = 0;
-            var updatedSpritesheets = new HashSet<string>();
             foreach (var frameRefTexKv in frameRefs) {
                 var hash = frameRefTexKv.Key;
                 foreach (var frameRefTex in frameRefTexKv.Value) {
@@ -189,7 +216,7 @@ namespace CHRTool {
                         var bitmap = LoadSpritesheet(loadedSpritesheets, spriteDef, frameRef.FrameWidth, frameRef.FrameHeight, verbose);
                         if (bitmap != null) {
                             if (bitmap.SetDataAt(frame.SpritesheetX, frame.SpritesheetY, texture.ImageData16Bit)) {
-                                updatedSpritesheets.Add(SpriteResources.SpritesheetImageFile(spriteDef.Name, frameRef.FrameWidth, frameRef.FrameHeight));
+                                spritesheetsUpdated.Add(SpriteResources.SpritesheetImageFile(spriteDef.Name, frameRef.FrameWidth, frameRef.FrameHeight));
                                 framesAdded++;
                             }
                         }
@@ -200,20 +227,6 @@ namespace CHRTool {
                 }
                 framesWritten.Add(hash);
             }
-
-            // Save updated bitmaps.
-            foreach (var filename in updatedSpritesheets) {
-                try {
-                    if (verbose)
-                        Logger.WriteLine($"Saving updated '{filename}'...");
-                    var bitmap = loadedSpritesheets[filename];
-                    bitmap.Save(filename, ImageFormat.Png);
-                }
-                catch (Exception e) {
-                    Logger.WriteLine(e.GetTypeAndMessage(), LogType.Error);
-                }
-            }
-
             return framesAdded;
         }
 
