@@ -10,95 +10,45 @@
       "CollisionSize": 40,
       "Scale": 1.0999908,
       "FrameGroups": {
-        "Idle (5 Dir) 1": {
-          "Directions": 5,
-          "SpritesheetX": 0,
-          "SpritesheetY": 0,
-          "Span": 64
-        },
-        "Idle (5 Dir) 2": {
-          "Directions": 5,
-          "SpritesheetX": 48,
-          "SpritesheetY": 0,
-          "Span": 64
-        },
-        "Idle (5 Dir) 3": {
-          "Directions": 5,
-          "SpritesheetX": 96,
-          "SpritesheetY": 0,
-          "Span": 64
-        },
         "Idle 1": {
           "Directions": 4,
-          "SpritesheetX": 144,
-          "SpritesheetY": 32,
-          "Span": 64
+          "SpritesheetX": 0,
+          "SpritesheetY": 0,
         },
         "Idle 2": {
           "Directions": 4,
-          "SpritesheetX": 192,
-          "SpritesheetY": 32,
-          "Span": 64
+          "SpritesheetX": 48,
+          "SpritesheetY": 0,
         },
         "Idle 3": {
           "Directions": 4,
-          "SpritesheetX": 240,
-          "SpritesheetY": 32,
-          "Span": 64
-        },
-        "Walking (5 Dir) 1": {
-          "Directions": 5,
-          "SpritesheetX": 288,
+          "SpritesheetX": 96,
           "SpritesheetY": 0,
-          "Span": 64
-        },
-        "Walking (5 Dir) 2": {
-          "Directions": 5,
-          "SpritesheetX": 336,
-          "SpritesheetY": 0,
-          "Span": 64
-        },
-        "Walking (5 Dir) 3": {
-          "Directions": 5,
-          "SpritesheetX": 384,
-          "SpritesheetY": 0,
-          "Span": 64
-        },
-        "Walking (5 Dir) 4": {
-          "Directions": 5,
-          "SpritesheetX": 432,
-          "SpritesheetY": 0,
-          "Span": 64
         },
         "Walking 1": {
           "Directions": 4,
-          "SpritesheetX": 480,
-          "SpritesheetY": 32,
-          "Span": 64
+          "SpritesheetX": 144,
+          "SpritesheetY": 0,
         },
         "Walking 2": {
           "Directions": 4,
-          "SpritesheetX": 528,
-          "SpritesheetY": 32,
-          "Span": 64
+          "SpritesheetX": 192,
+          "SpritesheetY": 0,
         },
         "Walking 3": {
           "Directions": 4,
-          "SpritesheetX": 576,
-          "SpritesheetY": 32,
-          "Span": 64
+          "SpritesheetX": 240,
+          "SpritesheetY": 0,
         },
         "Walking 4": {
           "Directions": 4,
-          "SpritesheetX": 624,
-          "SpritesheetY": 32,
-          "Span": 64
+          "SpritesheetX": 288,
+          "SpritesheetY": 0,
         },
         "Walking 5": {
           "Directions": 4,
-          "SpritesheetX": 672,
-          "SpritesheetY": 32,
-          "Span": 64
+          "SpritesheetX": 336,
+          "SpritesheetY": 0,
         }
       },
       "AnimationByDirections": {
@@ -167,85 +117,6 @@
             {
               "Frame": "Walking 5",
               "Duration": 4
-            },
-            {
-              "Command": "GotoCommandOffset",
-              "Parameter": 0
-            }
-          ]
-        },
-        "5": {
-          "Idle": [
-            {
-              "Frame": "Idle (5 Dir) 1",
-              "Duration": 6
-            },
-            {
-              "Frame": "Idle (5 Dir) 2",
-              "Duration": 4
-            },
-            {
-              "Frame": "Idle (5 Dir) 3",
-              "Duration": 4
-            },
-            {
-              "Frame": "Idle (5 Dir) 2",
-              "Duration": 4
-            },
-            {
-              "Frame": "Idle (5 Dir) 3",
-              "Duration": 4
-            },
-            {
-              "Frame": "Idle (5 Dir) 2",
-              "Duration": 4
-            },
-            {
-              "Frame": "Idle (5 Dir) 3",
-              "Duration": 4
-            },
-            {
-              "Frame": "Idle (5 Dir) 2",
-              "Duration": 4
-            },
-            {
-              "Command": "GotoCommandOffset",
-              "Parameter": 0
-            }
-          ],
-          "StillFrame (Idle)": [
-            {
-              "Frame": "Idle (5 Dir) 1",
-              "Duration": 10
-            },
-            {
-              "Command": "Stop"
-            }
-          ],
-          "Walking": [
-            {
-              "Frame": "Walking (5 Dir) 1",
-              "Duration": 5
-            },
-            {
-              "Frame": "Idle (5 Dir) 1",
-              "Duration": 5
-            },
-            {
-              "Frame": "Walking (5 Dir) 2",
-              "Duration": 5
-            },
-            {
-              "Frame": "Walking (5 Dir) 3",
-              "Duration": 5
-            },
-            {
-              "Frame": "Idle (5 Dir) 1",
-              "Duration": 5
-            },
-            {
-              "Frame": "Walking (5 Dir) 4",
-              "Duration": 5
             },
             {
               "Command": "GotoCommandOffset",
