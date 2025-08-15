@@ -21935,7 +21935,7 @@
 "82e0b34942ffcdb9aa874d547a3b9d7c": [{"SpriteName":"Small Icons (Scn2+)","FrameWidth":16,"FrameHeight":16,"FrameGroupName":"Sword 1","FrameDirection":"First"}],
 "5af7b36f7352d858820d3c3bfb4178e7": [{"SpriteName":"Small Icons (Scn3+)","FrameWidth":16,"FrameHeight":16,"FrameGroupName":"Complaining 1","FrameDirection":"First"}],
 "a2dd2e742467d56762a51b7e4aa0b019": [{"SpriteName":"Small Icons (Scn3+)","FrameWidth":16,"FrameHeight":16,"FrameGroupName":"Embarassed 1","FrameDirection":"First"}],
-"6bae56c014353379e449dad9d8c6222a": [{"SpriteName":"Small Icons (Scn3+)","FrameWidth":16,"FrameHeight":16,"FrameGroupName":"Embarrased (by KoD) 1","FrameDirection":"Unset"}],
+"6bae56c014353379e449dad9d8c6222a": [{"SpriteName":"Small Icons (Scn3+)","FrameWidth":16,"FrameHeight":16,"FrameGroupName":"Embarrased (by KoD) 1","FrameDirection":"First"}],
 "c587713ab385a760bb5b7b4a32afa69c": [{"SpriteName":"Small Poof of Brown Smoke","FrameWidth":24,"FrameHeight":24,"FrameGroupName":"Poofing 1","FrameDirection":"First"}],
 "584252c93398d5e8b51c8e42ef290fe2": [{"SpriteName":"Small Poof of Brown Smoke","FrameWidth":24,"FrameHeight":24,"FrameGroupName":"Poofing 2","FrameDirection":"First"}],
 "e800c8d9553977b878ccd60b6928a97e": [{"SpriteName":"Small Poof of Brown Smoke","FrameWidth":24,"FrameHeight":24,"FrameGroupName":"Poofing 3","FrameDirection":"First"}],

@@ -18,7 +18,8 @@
         "Transparent 1": {
           "Directions": 1,
           "SpritesheetX": 32,
-          "SpritesheetY": 0
+          "SpritesheetY": 0,
+          "Coding": "Off"
         },
         "Zapping (To the Left) 1": {
           "Directions": 1,

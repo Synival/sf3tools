@@ -13,22 +13,26 @@
         "OccasionallyWipingForehead 1": {
           "Directions": 4,
           "SpritesheetX": 0,
-          "SpritesheetY": 0
+          "SpritesheetY": 0,
+          "Coding": "Ignore"
         },
         "OccasionallyWipingForehead 2": {
           "Directions": 4,
           "SpritesheetX": 40,
-          "SpritesheetY": 0
+          "SpritesheetY": 0,
+          "Coding": "Ignore"
         },
         "OccasionallyWipingForehead 3": {
           "Directions": 4,
           "SpritesheetX": 80,
-          "SpritesheetY": 0
+          "SpritesheetY": 0,
+          "Coding": "Ignore"
         },
         "OccasionallyWipingForehead 4": {
           "Directions": 4,
           "SpritesheetX": 120,
-          "SpritesheetY": 0
+          "SpritesheetY": 0,
+          "Coding": "Ignore"
         }
       },
       "AnimationByDirections": {

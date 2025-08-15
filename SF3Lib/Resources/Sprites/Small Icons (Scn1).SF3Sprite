@@ -13,22 +13,26 @@
         "Angry 1": {
           "Directions": 1,
           "SpritesheetX": 0,
-          "SpritesheetY": 0
+          "SpritesheetY": 0,
+          "Coding": "Off"
         },
         "Idea 1": {
           "Directions": 1,
           "SpritesheetX": 16,
-          "SpritesheetY": 0
+          "SpritesheetY": 0,
+          "Coding": "Off"
         },
         "Shield 1": {
           "Directions": 1,
           "SpritesheetX": 32,
-          "SpritesheetY": 0
+          "SpritesheetY": 0,
+          "Coding": "Off"
         },
         "Sword 1": {
           "Directions": 1,
           "SpritesheetX": 48,
-          "SpritesheetY": 0
+          "SpritesheetY": 0,
+          "Coding": "Off"
         }
       },
       "AnimationByDirections": {

@@ -13,22 +13,26 @@
         "Popping 1": {
           "Directions": 1,
           "SpritesheetX": 0,
-          "SpritesheetY": 0
+          "SpritesheetY": 0,
+          "Coding": "Off"
         },
         "Popping 2": {
           "Directions": 1,
           "SpritesheetX": 24,
-          "SpritesheetY": 0
+          "SpritesheetY": 0,
+          "Coding": "Off"
         },
         "Popping 3": {
           "Directions": 1,
           "SpritesheetX": 48,
-          "SpritesheetY": 0
+          "SpritesheetY": 0,
+          "Coding": "Off"
         },
         "Popping 4": {
           "Directions": 1,
           "SpritesheetX": 72,
-          "SpritesheetY": 0
+          "SpritesheetY": 0,
+          "Coding": "Off"
         }
       },
       "AnimationByDirections": {

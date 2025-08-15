@@ -13,27 +13,32 @@
         "Exploding 1": {
           "Directions": 1,
           "SpritesheetX": 0,
-          "SpritesheetY": 0
+          "SpritesheetY": 0,
+          "Coding": "Off"
         },
         "Exploding 2": {
           "Directions": 1,
           "SpritesheetX": 48,
-          "SpritesheetY": 0
+          "SpritesheetY": 0,
+          "Coding": "Off"
         },
         "Exploding 3": {
           "Directions": 1,
           "SpritesheetX": 96,
-          "SpritesheetY": 0
+          "SpritesheetY": 0,
+          "Coding": "Off"
         },
         "Exploding 4": {
           "Directions": 1,
           "SpritesheetX": 144,
-          "SpritesheetY": 0
+          "SpritesheetY": 0,
+          "Coding": "Off"
         },
         "Exploding 5": {
           "Directions": 1,
           "SpritesheetX": 192,
-          "SpritesheetY": 0
+          "SpritesheetY": 0,
+          "Coding": "Off"
         }
       },
       "AnimationByDirections": {

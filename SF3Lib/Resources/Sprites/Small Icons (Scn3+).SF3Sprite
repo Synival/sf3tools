@@ -13,18 +13,20 @@
         "Complaining 1": {
           "Directions": 1,
           "SpritesheetX": 0,
-          "SpritesheetY": 16
+          "SpritesheetY": 0,
+          "Coding": "Off"
         },
         "Embarassed 1": {
           "Directions": 1,
           "SpritesheetX": 16,
-          "SpritesheetY": 16
+          "SpritesheetY": 0,
+          "Coding": "Off"
         },
         "Embarrased (by KoD) 1": {
-          "Unset": {
-            "SpritesheetX": 32,
-            "SpritesheetY": 0
-          }
+          "Directions": 1,
+          "SpritesheetX": 32,
+          "SpritesheetY": 0,
+          "Coding": "Off"
         }
       },
       "AnimationByDirections": {
@@ -40,12 +42,7 @@
           ],
           "Embarassed (by KoD)": [
             {
-              "Frame": {
-                "First": {
-                  "Frame": "Embarrased (by KoD) 1",
-                  "Direction": "Unset"
-                }
-              },
+              "Frame": "Embarrased (by KoD) 1",
               "Duration": 10
             },
             {

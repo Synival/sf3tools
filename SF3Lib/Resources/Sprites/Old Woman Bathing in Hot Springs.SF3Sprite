@@ -13,17 +13,20 @@
         "Bathing 1": {
           "Directions": 4,
           "SpritesheetX": 0,
-          "SpritesheetY": 0
+          "SpritesheetY": 0,
+          "Coding": "Ignore"
         },
         "Bathing 2": {
           "Directions": 4,
           "SpritesheetX": 40,
-          "SpritesheetY": 0
+          "SpritesheetY": 0,
+          "Coding": "Ignore"
         },
         "Bathing 3": {
           "Directions": 4,
           "SpritesheetX": 80,
-          "SpritesheetY": 0
+          "SpritesheetY": 0,
+          "Coding": "Ignore"
         }
       },
       "AnimationByDirections": {

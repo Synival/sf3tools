@@ -13,47 +13,56 @@
         "Poofing 1": {
           "Directions": 1,
           "SpritesheetX": 0,
-          "SpritesheetY": 0
+          "SpritesheetY": 0,
+          "Coding": "Off"
         },
         "Poofing 2": {
           "Directions": 1,
           "SpritesheetX": 24,
-          "SpritesheetY": 0
+          "SpritesheetY": 0,
+          "Coding": "Off"
         },
         "Poofing 3": {
           "Directions": 1,
           "SpritesheetX": 48,
-          "SpritesheetY": 0
+          "SpritesheetY": 0,
+          "Coding": "Off"
         },
         "Poofing 4": {
           "Directions": 1,
           "SpritesheetX": 72,
-          "SpritesheetY": 0
+          "SpritesheetY": 0,
+          "Coding": "Off"
         },
         "Poofing 5": {
           "Directions": 1,
           "SpritesheetX": 96,
-          "SpritesheetY": 0
+          "SpritesheetY": 0,
+          "Coding": "Off"
         },
         "Poofing 6": {
           "Directions": 1,
           "SpritesheetX": 120,
-          "SpritesheetY": 0
+          "SpritesheetY": 0,
+          "Coding": "Off"
         },
         "Poofing 7": {
           "Directions": 1,
           "SpritesheetX": 144,
-          "SpritesheetY": 0
+          "SpritesheetY": 0,
+          "Coding": "Off"
         },
         "Poofing 8": {
           "Directions": 1,
           "SpritesheetX": 168,
-          "SpritesheetY": 0
+          "SpritesheetY": 0,
+          "Coding": "Off"
         },
         "Poofing 9": {
           "Directions": 1,
           "SpritesheetX": 192,
-          "SpritesheetY": 0
+          "SpritesheetY": 0,
+          "Coding": "Off"
         }
       },
       "AnimationByDirections": {

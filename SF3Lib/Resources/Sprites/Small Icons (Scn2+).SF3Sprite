@@ -13,47 +13,56 @@
         "Angry 1": {
           "Directions": 1,
           "SpritesheetX": 0,
-          "SpritesheetY": 0
+          "SpritesheetY": 0,
+          "Coding": "Off"
         },
         "Confused 1": {
           "Directions": 1,
           "SpritesheetX": 16,
-          "SpritesheetY": 0
+          "SpritesheetY": 0,
+          "Coding": "Off"
         },
         "Idea 1": {
           "Directions": 1,
           "SpritesheetX": 32,
-          "SpritesheetY": 0
+          "SpritesheetY": 0,
+          "Coding": "Off"
         },
         "Shield 1": {
           "Directions": 1,
           "SpritesheetX": 48,
-          "SpritesheetY": 0
+          "SpritesheetY": 0,
+          "Coding": "Off"
         },
         "Silent 1": {
           "Directions": 1,
           "SpritesheetX": 64,
-          "SpritesheetY": 0
+          "SpritesheetY": 0,
+          "Coding": "Off"
         },
         "Sweat 1": {
           "Directions": 1,
           "SpritesheetX": 80,
-          "SpritesheetY": 0
+          "SpritesheetY": 0,
+          "Coding": "Off"
         },
         "Sweat 2": {
           "Directions": 1,
           "SpritesheetX": 96,
-          "SpritesheetY": 0
+          "SpritesheetY": 0,
+          "Coding": "Off"
         },
         "Sweat 3": {
           "Directions": 1,
           "SpritesheetX": 112,
-          "SpritesheetY": 0
+          "SpritesheetY": 0,
+          "Coding": "Off"
         },
         "Sword 1": {
           "Directions": 1,
           "SpritesheetX": 128,
-          "SpritesheetY": 0
+          "SpritesheetY": 0,
+          "Coding": "Off"
         }
       },
       "AnimationByDirections": {

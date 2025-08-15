@@ -13,7 +13,8 @@
         "Black 1": {
           "Directions": 1,
           "SpritesheetX": 0,
-          "SpritesheetY": 0
+          "SpritesheetY": 0,
+          "Coding": "Off"
         },
         "Black+White 1": {
           "Directions": 1,
@@ -23,47 +24,56 @@
         "Exploding (Alt) 1": {
           "Directions": 1,
           "SpritesheetX": 96,
-          "SpritesheetY": 0
+          "SpritesheetY": 0,
+          "Coding": "Off"
         },
         "Exploding (Alt) 2": {
           "Directions": 1,
           "SpritesheetX": 144,
-          "SpritesheetY": 0
+          "SpritesheetY": 0,
+          "Coding": "Off"
         },
         "Exploding (Alt) 3": {
           "Directions": 1,
           "SpritesheetX": 192,
-          "SpritesheetY": 0
+          "SpritesheetY": 0,
+          "Coding": "Off"
         },
         "Exploding (Alt) 4": {
           "Directions": 1,
           "SpritesheetX": 240,
-          "SpritesheetY": 0
+          "SpritesheetY": 0,
+          "Coding": "Off"
         },
         "Exploding (Alt) 5": {
           "Directions": 1,
           "SpritesheetX": 288,
-          "SpritesheetY": 0
+          "SpritesheetY": 0,
+          "Coding": "Off"
         },
         "Exploding (Alt) 6": {
           "Directions": 1,
           "SpritesheetX": 336,
-          "SpritesheetY": 0
+          "SpritesheetY": 0,
+          "Coding": "Off"
         },
         "Exploding (Alt) 7": {
           "Directions": 1,
           "SpritesheetX": 384,
-          "SpritesheetY": 0
+          "SpritesheetY": 0,
+          "Coding": "Off"
         },
         "Exploding (Alt) 8": {
           "Directions": 1,
           "SpritesheetX": 432,
-          "SpritesheetY": 0
+          "SpritesheetY": 0,
+          "Coding": "Off"
         },
         "Exploding (Alt) 9": {
           "Directions": 1,
           "SpritesheetX": 480,
-          "SpritesheetY": 0
+          "SpritesheetY": 0,
+          "Coding": "Off"
         },
         "Exploding 1": {
           "Directions": 1,
