@@ -3,12 +3,25 @@ using System.IO;
 using CommonLib.Extensions;
 using CommonLib.Logging;
 using CommonLib.Types;
+using NDesk.Options;
 using SF3.Sprites;
 
 namespace CHRTool {
     public static class UpdateHashLookups {
         public static int Run(string[] args, string spriteDir, string frameHashLookupsFile, bool verbose) {
-            // (any extra options would go here.)
+            var replaceFile = false;
+
+            // Read any command line options.
+            var compileOptions = new OptionSet() {
+                { "r|replace", v => replaceFile = true },
+            };
+            try {
+                args = compileOptions.Parse(args).ToArray();
+            }
+            catch (Exception e) {
+                Logger.WriteLine(e.GetTypeAndMessage(), LogType.Error);
+                return 1;
+            }
 
             // There shouldn't be any unrecognized arguments at this point.
             if (args.Length > 0) {
@@ -29,15 +42,19 @@ namespace CHRTool {
                 var files = Directory.GetFiles(spriteDir, "*.SF3Sprite");
 
                 // Get the curent list of frame hash lookups.
-                if (!File.Exists(frameHashLookupsFile)) {
-                    if (verbose)
-                        Logger.WriteLine($"Couldn't find '{frameHashLookupsFile}' -- creating file from scratch.");
+                if (!replaceFile) {
+                    if (!File.Exists(frameHashLookupsFile)) {
+                        if (verbose)
+                            Logger.WriteLine($"Couldn't find '{frameHashLookupsFile}' -- creating file from scratch");
+                    }
+                    else {
+                        if (verbose)
+                            Logger.WriteLine($"Loading '{frameHashLookupsFile}'...");
+                        SpriteResources.LoadFrameRefs();
+                    }
                 }
-                else {
-                    if (verbose)
-                        Logger.WriteLine($"Loading '{frameHashLookupsFile}'...");
-                    SpriteResources.LoadFrameRefs();
-                }
+                else if (verbose)
+                    Logger.WriteLine($"Replacing '{frameHashLookupsFile}'");
 
                 // Open SF3Sprite files and their accompanying spritesheets.
                 if (verbose) {

@@ -50,7 +50,7 @@ namespace CHRTool {
             "  -d, --output-dir=<dir>    specify output path for all SF3CHR/SF3CHP file(s)\n" +
             "\n" +
             "'extract-sheets' Options:\n" +
-            "  (none)\n" +
+            "  -r, --replace             replaces the entire file rather than only update\n" +
             "\n" +
             "'update-hash-lookups' Options:\n" +
             "  (none)\n";
