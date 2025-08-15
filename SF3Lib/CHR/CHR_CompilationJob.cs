@@ -111,11 +111,15 @@ namespace SF3.CHR {
         public void AddFrames(FrameGroup frameGroup, string spriteName, int frameWidth, int frameHeight) {
             var spriteInfo = GetSpriteInfo(_currentSpriteIndex);
             var spriteDef = SpriteResources.GetSpriteDef(spriteName);
+            if (spriteDef == null)
+                Logger.WriteLine($"{nameof(AddFrames)}(): SpriteDef for '{spriteName}' not found", LogType.Error);
 
             // Attempt to load the spritesheet referenced by the spritesheetDef.
             // Don't bother if the def couldn't be found.
             var spritesheetKey = Spritesheet.DimensionsToKey(frameWidth, frameHeight);
             var spritesheet    = (spriteDef?.Spritesheets?.TryGetValue(spritesheetKey, out var spritesheetOut) == true) ? spritesheetOut : null;
+            if (spritesheet == null)
+                Logger.WriteLine($"{nameof(AddFrames)}(): Spritesheet '{spriteName} ({spritesheetKey})' not found", LogType.Error);
 
             var frames = frameGroup.GetFrames(spriteInfo.Header.Directions);
             foreach (var frame in frames) 
@@ -136,9 +140,16 @@ namespace SF3.CHR {
             var spritesheetKey      = Spritesheet.DimensionsToKey(frameWidth, frameHeight);
             var spritesheetImageKey = $"{spriteName} ({spritesheetKey})";
             var spriteFrameGroup    = (spritesheet?.FrameGroupsByName?.TryGetValue(frameGroupName, out var spriteFrameGroupOut) == true) ? spriteFrameGroupOut : null;
-            var spriteFrameDef      = (spriteFrameGroup?.Frames?.TryGetValue(direction, out var spriteFrameOut) == true) ? spriteFrameOut : null;
-            var aniFrameKey         = $"{spritesheetImageKey} {frameGroupName} ({direction})";
-            var frameKey            = $"{spritesheetImageKey} | {aniFrameKey}" + (duplicateKey == null ? "" : $" ({duplicateKey})");
+
+            if (spriteFrameGroup == null)
+                Logger.WriteLine($"{nameof(AddFrames)}(): Frame group '{spritesheetImageKey}: {frameGroupName}' not found", LogType.Error);
+
+            var spriteFrameDef = (spriteFrameGroup?.Frames?.TryGetValue(direction, out var spriteFrameOut) == true) ? spriteFrameOut : null;
+            if (spriteFrameGroup == null)
+                Logger.WriteLine($"{nameof(AddFrames)}(): Frame '{spritesheetImageKey}: {frameGroupName} ({direction})' not found", LogType.Error);
+
+            var aniFrameKey = $"{spritesheetImageKey} {frameGroupName} ({direction})";
+            var frameKey    = $"{spritesheetImageKey} | {aniFrameKey}" + (duplicateKey == null ? "" : $" ({duplicateKey})");
 
             // Load the spritesheet if it wasn't loaded already.
             var spritesheetBitmap = GetSpritesheetBitmap(spriteName, frameWidth, frameHeight);
@@ -254,15 +265,23 @@ namespace SF3.CHR {
             if (animations.Animations == null)
                 return;
 
-            var spriteName         = animations.SpriteName ?? defaultSpriteName;
-            var directions         = animations.Directions ?? defaultDirections;
-            var frameWidth         = animations.Width ?? defaultWidth;
-            var frameHeight        = animations.Height ?? defaultHeight;
-            var spritesheetKey     = Spritesheet.DimensionsToKey(frameWidth, frameHeight);
+            var spriteName     = animations.SpriteName ?? defaultSpriteName;
+            var directions     = animations.Directions ?? defaultDirections;
+            var frameWidth     = animations.Width ?? defaultWidth;
+            var frameHeight    = animations.Height ?? defaultHeight;
+            var spritesheetKey = Spritesheet.DimensionsToKey(frameWidth, frameHeight);
 
-            var spriteDef          = SpriteResources.GetSpriteDef(spriteName);
-            var spritesheetDef     = (spriteDef?.Spritesheets?.TryGetValue(spritesheetKey, out var spritesheetOut) == true) ? spritesheetOut : null;
+            var spriteDef = SpriteResources.GetSpriteDef(spriteName);
+            if (spriteDef == null)
+                Logger.WriteLine($"{nameof(AddAnimations)}(): SpriteDef '{spriteName}' not found", LogType.Error);
+
+            var spritesheetDef = (spriteDef?.Spritesheets?.TryGetValue(spritesheetKey, out var spritesheetOut) == true) ? spritesheetOut : null;
+            if (spritesheetDef == null)
+                Logger.WriteLine($"{nameof(AddAnimations)}(): Spritesheet '{spriteName} ({spritesheetKey})' not found", LogType.Error);
+
             var spriteAnimationSet = (spritesheetDef?.AnimationSetsByDirections?.TryGetValue(directions, out var sadOut) == true) ? sadOut : null;
+            if (spriteAnimationSet == null)
+                Logger.WriteLine($"{nameof(AddAnimations)}(): AnimationSet '{spriteName} ({spritesheetKey}x{directions})' not found", LogType.Error);
 
             // Write all individual animations.
             foreach (var animationName in animations.Animations) {
@@ -281,10 +300,14 @@ namespace SF3.CHR {
         /// <param name="frameHeight">The height of frames in the spritesheet.</param>
         /// <param name="directions">The initial number of directional frames used for 'Frame' commands.</param>
         public void AddAnimation(Animation animation, string animationName, string spriteName, int frameWidth, int frameHeight, SpriteDirectionCountType directions) {
-            var aniFrameKeyPrefix  = $"{spriteName} ({Spritesheet.DimensionsToKey(frameWidth, frameHeight)})";
+            var spritesheetKey     = Spritesheet.DimensionsToKey(frameWidth, frameHeight);
+            var aniFrameKeyPrefix  = $"{spriteName} ({spritesheetKey})";
             var spriteInfo         = GetSpriteInfo(_currentSpriteIndex);
             var spriteAniFrameKeys = spriteInfo.Frames.Select(x => x.AniFrameKey).ToArray();
             var frameDirections    = directions.ToAnimationFrameDirections();
+
+            if (animation == null)
+                Logger.WriteLine($"{nameof(AddAnimation)}(): Animation '{spriteName} ({spritesheetKey}x{directions}): {animationName}' not found", LogType.Error);
 
             // Write an empty animation entry for deliberately null animations, missing animations, or empty animations.
             if (animation == null || animation.AnimationCommands == null) {
@@ -309,10 +332,10 @@ namespace SF3.CHR {
                         if (frameId >= 0)
                             command = frameId;
                         else
-                            Logger.WriteLine($"Couldn't find FrameID for animation command with keys '{string.Join(", ", aniKeys.Select(x => x ?? "(null)"))}'", LogType.Error);
+                            Logger.WriteLine($"{nameof(AddAnimation)}(): Couldn't find FrameID for animation command with keys '{string.Join(", ", aniKeys.Select(x => x ?? "(null)"))}'", LogType.Error);
                     }
                     else
-                        Logger.WriteLine("Animation 'Frame' command has no frames", LogType.Error);
+                        Logger.WriteLine($"{nameof(AddAnimation)}(): Animation 'Frame' command has no frames", LogType.Error);
                 }
 
                 // Add the command to the command table.
@@ -732,8 +755,7 @@ namespace SF3.CHR {
                 bitmap = (Bitmap) Image.FromFile(bitmapPath);
             }
             catch (Exception e) {
-                Logger.WriteLine($"Couldn't load spritesheet '{spritesheetImageKey}'", LogType.Error);
-                Logger.WriteLine($"  {e.GetTypeAndMessage()}", LogType.Error);
+                Logger.WriteLine($"{nameof(GetSpritesheetBitmap)}: Couldn't load spritesheet '{spritesheetImageKey}': {e.GetTypeAndMessage()}", LogType.Error);
                 bitmap = null;
             }
 
