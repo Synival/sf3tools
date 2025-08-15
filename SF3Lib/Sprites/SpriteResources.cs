@@ -19,7 +19,7 @@ namespace SF3.Sprites {
         private static Dictionary<string, SpriteDef> s_spriteDefs = new Dictionary<string, SpriteDef>();
         private static HashSet<string> s_spriteDefFilesLoaded = new HashSet<string>();
         private static Dictionary<string, FrameRefSet> s_frameRefsByImageHash = new Dictionary<string, FrameRefSet>();
-        private static Dictionary<int, FrameRef> s_frameRefsByHashCode = new Dictionary<int, FrameRef>();
+        private static Dictionary<string, FrameRef> s_uniqueFrameRefs = new Dictionary<string, FrameRef>();
         private static Dictionary<string, AnimationRef> s_animationRefsByHash = new Dictionary<string, AnimationRef>();
         private static HashSet<string> s_animationRefsLoaded = new HashSet<string>();
 
@@ -159,7 +159,7 @@ namespace SF3.Sprites {
             foreach (var lookupKv in jsonObj) {
                 foreach (var frameRef in lookupKv.Value) {
                     frameRef.ImageHash = lookupKv.Key;
-                    s_frameRefsByHashCode.Add(frameRef.GetHashCode(), frameRef);
+                    s_uniqueFrameRefs.Add(frameRef.ToString(), frameRef);
                 }
 
                 if (!s_frameRefsByImageHash.ContainsKey(lookupKv.Key))
@@ -306,10 +306,20 @@ namespace SF3.Sprites {
         /// <param name="spriteName">Name of the sprite which contains all the animations to be added.</param>
         /// <returns>The number of new animations hash lookups added.</returns>
         public static int AddAnimationRefs(string spriteName) {
+            // Don't load animation refs if they're already loaded.
             if (s_animationRefsLoaded.Contains(spriteName))
                 return 0;
             s_animationRefsLoaded.Add(spriteName);
+
             var spriteDef = GetSpriteDef(spriteName);
+            if (spriteDef == null) {
+                Logger.WriteLine($"Can't add animation refs for sprite '{spriteName}': sprite was not found");
+                return 0;
+            }
+            if (spriteDef.Spritesheets == null) {
+                Logger.WriteLine($"Can't add animation refs for sprite '{spriteName}': SpriteDef has no spritesheets");
+                return 0;
+            }
 
             int animationsAdded = 0;
             foreach (var spritesheetKv in spriteDef.Spritesheets) {
@@ -462,8 +472,7 @@ namespace SF3.Sprites {
                             nullCount++;
                         }
                         else {
-                            var hashCode = frameRef.GetHashCode();
-                            if (s_frameRefsByHashCode.TryGetValue(hashCode, out var frameDefOut))
+                            if (s_uniqueFrameRefs.TryGetValue(frameRef.ToString(), out var frameDefOut))
                                 hashes += $"({frameDefOut.ImageHash})";
                             else
                                 hashes += $"(missing:{frameDefOut.ToString()})";

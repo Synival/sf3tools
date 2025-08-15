@@ -10,6 +10,7 @@ using CommonLib.Utils;
 using SF3.Extensions;
 using SF3.Sprites;
 using SF3.Types;
+using SF3.Utils;
 
 namespace SF3.CHR {
     /// <summary>
@@ -142,7 +143,13 @@ namespace SF3.CHR {
             // Load the spritesheet if it wasn't loaded already.
             var spritesheetBitmap = GetSpritesheetBitmap(spriteName, frameWidth, frameHeight);
 
-            AddFrame(spritesheetBitmap, frameWidth, frameHeight, spriteFrameDef?.SpritesheetX ?? -1, spriteFrameDef?.SpritesheetY ?? -1, frameKey, aniFrameKey);
+            AddFrame(
+                spritesheetBitmap, frameWidth, frameHeight,
+                spriteFrameDef?.SpritesheetX ?? -1,
+                spriteFrameDef?.SpritesheetY ?? -1,
+                spriteFrameDef?.Coding ?? SpriteImageCodingType.On,
+                frameKey, aniFrameKey
+            );
         }
 
         /// <summary>
@@ -153,9 +160,10 @@ namespace SF3.CHR {
         /// <param name="frameHeight">Height of frames in the spritesheet.</param>
         /// <param name="frameX">Top-left X coordinate of the frame image in the spritesheet image.</param>
         /// <param name="frameY">Top-left Y coordinate of the frame image in the spritesheet image.</param>
+        /// <param name="coding">Specifiy on how to handle special pixel codes used for each row of the image.</param>
         /// <param name="frameKey">Identifier for this frame for the purpose of eliminating duplicates.</param>
         /// <param name="aniFrameKey">Identifier for this frame for the purpose of matching specific frames in animations.</param>
-        public void AddFrame(Bitmap spritesheetBitmap, int frameWidth, int frameHeight, int frameX, int frameY, string frameKey, string aniFrameKey) {
+        public void AddFrame(Bitmap spritesheetBitmap, int frameWidth, int frameHeight, int frameX, int frameY, SpriteImageCodingType coding, string frameKey, string aniFrameKey) {
             // Track the frames we're adding to the entire CHR.
             if (!_spritesheetFramesByFrameKey.ContainsKey(frameKey)) {
                 // Add a reference to the image whether the spritesheet resources were found or not.
@@ -167,6 +175,7 @@ namespace SF3.CHR {
                     Width  = frameWidth,
                     Height = frameHeight,
                     FirstSeenSpriteIndex = _currentSpriteIndex,
+                    Coding = coding,
                 });
             }
 
@@ -178,9 +187,10 @@ namespace SF3.CHR {
         /// Adds an individual frame to the current sprite.
         /// </summary>
         /// <param name="frameImage">Image to use for the frame.</param>
+        /// <param name="coding">Specifiy on how to handle special pixel codes used for each row of the image.</param>
         /// <param name="frameKey">Identifier for this frame for the purpose of eliminating duplicates.</param>
         /// <param name="aniFrameKey">Identifier for this frame for the purpose of matching specific frames in animations.</param>
-        public void AddFrame(Bitmap frameImage, string frameKey, string aniFrameKey) {
+        public void AddFrame(Bitmap frameImage, SpriteImageCodingType coding, string frameKey, string aniFrameKey) {
             // Track the frames we're adding to the entire CHR.
             if (!_spritesheetFramesByFrameKey.ContainsKey(frameKey)) {
                 // Add a reference to the image whether the spritesheet resources were found or not.
@@ -192,6 +202,7 @@ namespace SF3.CHR {
                     Width  = frameImage.Width,
                     Height = frameImage.Height,
                     FirstSeenSpriteIndex = _currentSpriteIndex,
+                    Coding = coding,
                 });
             }
 
@@ -500,7 +511,13 @@ namespace SF3.CHR {
                 var frameGroup     = (spritesheet?.FrameGroupsByName?.TryGetValue(frameGroupName, out var frameGroupOut) == true) ? frameGroupOut : null;
                 var frame          = (frameGroup?.Frames?.TryGetValue(missingFrames[i].Direction, out var frameOut) == true) ? frameOut : null;
 
-                AddFrame(spritesheetImage, frameWidth, frameHeight, frame?.SpritesheetX ?? -1, frame?.SpritesheetY ?? -1, frameKey, aniFrameKey);
+                AddFrame(
+                    spritesheetImage, frameWidth, frameHeight,
+                    frame?.SpritesheetX ?? -1,
+                    frame?.SpritesheetY ?? -1,
+                    frame?.Coding ?? SpriteImageCodingType.On,
+                    frameKey, aniFrameKey
+                );
             }
         }
 
@@ -663,8 +680,12 @@ namespace SF3.CHR {
                         data[i] = 0x801F;
                 }
                 // It looks like a valid image. Copy it into the data.
-                else
-                    data = bitmap.GetDataAt(x1, y1, spritesheetFrame.Width, spritesheetFrame.Height).To1DArrayTransposed();
+                else {
+                    var data2D = bitmap.GetDataAt(x1, y1, spritesheetFrame.Width, spritesheetFrame.Height);
+                    if (spritesheetFrame.Coding != SpriteImageCodingType.Ignore)
+                        CHR_Utils.EncodeSpriteFrameImage(data2D, spritesheetFrame.Coding == SpriteImageCodingType.On);
+                    data = data2D.To1DArrayTransposed();
+                }
 
                 // Write the compressed image, updating any pointers that reference it by its key.
                 chrWriter.WriteFrameImage(frameKey, Compression.CompressSpriteData(data, 0, data.Length));
@@ -776,6 +797,7 @@ namespace SF3.CHR {
             public int Width;
             public int Height;
             public int FirstSeenSpriteIndex;
+            public SpriteImageCodingType Coding;
         }
 
         // Set of spritesheet frame images to retrieve by their frame key

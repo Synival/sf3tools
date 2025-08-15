@@ -46,6 +46,7 @@ namespace SF3.Sprites {
                             var spritesheetX = (int) jObj["SpritesheetX"];
                             var spritesheetY = (int) jObj["SpritesheetY"];
                             var span         = jObj.TryGetValue("Span", out var spanOut) ? (int) spanOut : frameHeight;
+                            var coding        = (jObj.TryGetValue("Coding", out var codingOut) && Enum.TryParse<SpriteImageCodingType>(codingOut.ToString(), out var codingType)) ? codingType : SpriteImageCodingType.On;
 
                             var frameDirs = SpriteUtils.GetFrameGroupDirections(directions);
                             Frames = frameDirs
@@ -53,6 +54,7 @@ namespace SF3.Sprites {
                                 .ToDictionary(x => x.Direction, x => new Frame() {
                                     SpritesheetX = spritesheetX,
                                     SpritesheetY = spritesheetY + (x.Index * span),
+                                    Coding       = coding,
                                 });
                         }
                         else {
@@ -80,10 +82,11 @@ namespace SF3.Sprites {
             // If the frames are standard and stacked in a very specific way, we can simplify the declaration.
             // This is a big improvement for most sprites.
             var directions = SpriteUtils.GetFrameGroupDirections(Frames.Count);
-            bool FramesAreStacked(out int spritesheetXOut, out int spritesheetYOut, out int spanOut) {
+            bool FramesAreStacked(out int spritesheetXOut, out int spritesheetYOut, out int spanOut, out SpriteImageCodingType codingOut) {
                 spritesheetXOut = -1;
                 spritesheetYOut = -1;
                 spanOut = -1;
+                codingOut = SpriteImageCodingType.On;
 
                 if (Frames.Count == 0)
                     return false;
@@ -99,15 +102,18 @@ namespace SF3.Sprites {
                 int? frameY = null;
                 int? topFrameY = null;
                 int? spanY = null;
+                SpriteImageCodingType? coding_ = null;
+
                 foreach (var dir in directions) {
                     var frame = Frames[dir];
                     if (!topFrameY.HasValue) {
-                        frameX = frame.SpritesheetX;
-                        frameY = frame.SpritesheetY;
+                        frameX    = frame.SpritesheetX;
+                        frameY    = frame.SpritesheetY;
                         topFrameY = frameY;
+                        coding_   = frame.Coding;
                     }
                     else if (!spanY.HasValue) {
-                        spanY = frame.SpritesheetY - frameY;
+                        spanY  = frame.SpritesheetY - frameY;
                         frameY = frame.SpritesheetY;
                     }
                     else {
@@ -120,11 +126,12 @@ namespace SF3.Sprites {
                 // Checks passed; this frame group can be simplified.
                 spritesheetXOut = frameX.Value;
                 spritesheetYOut = topFrameY.Value;
-                spanOut = spanY ?? frameHeight;
+                spanOut         = spanY ?? frameHeight;
+                codingOut       = coding_.Value;
                 return true;
             }
 
-            if (FramesAreStacked(out var spritesheetX, out var spritesheetY, out var span)) {
+            if (FramesAreStacked(out var spritesheetX, out var spritesheetY, out var span, out var coding)) {
                 var jObj = new JObject {
                     { "Directions", new JValue(Frames.Count) },
                     { "SpritesheetX", new JValue(spritesheetX) },
@@ -132,6 +139,8 @@ namespace SF3.Sprites {
                 };
                 if (span != frameHeight)
                     jObj.Add("Span", new JValue(span));
+                if (coding != SpriteImageCodingType.On)
+                    jObj.Add("Coding", new JValue(span));
 
                 return jObj;
             }

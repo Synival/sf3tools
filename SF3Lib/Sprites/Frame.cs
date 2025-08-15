@@ -1,6 +1,9 @@
-﻿using CommonLib;
+﻿using System;
+using CommonLib;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
+using SF3.Types;
 
 namespace SF3.Sprites {
     public class Frame : IJsonResource {
@@ -39,6 +42,7 @@ namespace SF3.Sprites {
                         var jObj = (JObject) jToken;
                         SpritesheetX = jObj.TryGetValue("SpritesheetX", out var spritesheetX) ? ((int) spritesheetX) : -1;
                         SpritesheetY = jObj.TryGetValue("SpritesheetY", out var spritesheetY) ? ((int) spritesheetY) : -1;
+                        Coding       = (jObj.TryGetValue("Coding", out var coding) && Enum.TryParse<SpriteImageCodingType>(coding.ToString(), out var codingType)) ? codingType : SpriteImageCodingType.On;
                     }
                     catch {
                         return false;
@@ -54,15 +58,22 @@ namespace SF3.Sprites {
             => ToJToken().ToString(Formatting.Indented);
 
         public JToken ToJToken() {
-            return new JObject() {
+            var jObj = new JObject() {
                 { "SpritesheetX", new JValue(SpritesheetX) },
                 { "SpritesheetY", new JValue(SpritesheetY) },
             };
+            if (Coding != SpriteImageCodingType.On)
+                jObj.Add("Coding", Coding.ToString());
+
+            return jObj;
         }
 
         public override string ToString() => $"({SpritesheetX}, {SpritesheetY})";
 
         public int SpritesheetX;
         public int SpritesheetY;
+
+        [JsonConverter(typeof(StringEnumConverter))]
+        public SpriteImageCodingType Coding;
     }
 }
