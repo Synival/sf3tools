@@ -47,76 +47,72 @@ namespace CHRTool {
 
             // It looks like we're ready to go!
             try {
-                if (verbose) {
-                    Logger.WriteLine("Extracting frames to spritesheets...");
-                    Logger.WriteLine("------------------------------------------------------------------------------");
-                }
-
-                // Try to create the spritesheet directory if it doesn't exist.
-                if (!Directory.Exists(spritesheetDir)) {
-                    if (verbose)
-                        Logger.WriteLine($"Creating path '{spritesheetDir}'");
-                    Directory.CreateDirectory(spritesheetDir);
-                }
-
-                // We don't care about the NameGetterContext or Scenario, since CHRs/CHP are all the same format,
-                // and we don't care about any scenario-based resources. Just use Scenario 1.
-                var nameGetterContext = new NameGetterContext(ScenarioType.Scenario1);
-
-                // Extract!
+                int framesAdded         = 0;
+                int framesUnchanged     = 0;
+                var spritesheetsUpdated = new HashSet<string>();
                 var loadedSpritesheets  = new Dictionary<string, Bitmap>();
                 var framesWritten       = new HashSet<string>();
-                var spritesheetsUpdated = new HashSet<string>();
 
-                var framesAdded = 0;
-                var framesUnchanged = 0;
-                foreach (var file in files) {
-                    try {
-                        (var fa, var fs) = ExtractFrames(file, nameGetterContext, loadedSpritesheets, framesWritten, spritesheetsUpdated, verbose);
-                        framesAdded += fa;
-                        framesUnchanged += fs;
+                if (verbose)
+                    Logger.WriteLine("Extracting frames to spritesheets...");
+                using (Logger.IndentedSection(verbose ? 1 : 0)) {
+                    // Try to create the spritesheet directory if it doesn't exist.
+                    if (!Directory.Exists(spritesheetDir)) {
+                        if (verbose)
+                            Logger.WriteLine($"Creating path '{spritesheetDir}'");
+                        using (Logger.IndentedSection(verbose ? 1 : 0))
+                            Directory.CreateDirectory(spritesheetDir);
                     }
-                    catch (Exception e) {
-                        Logger.WriteLine("");
-                        Logger.WriteLine(e.GetTypeAndMessage(), LogType.Error);
+
+                    // We don't care about the NameGetterContext or Scenario, since CHRs/CHP are all the same format,
+                    // and we don't care about any scenario-based resources. Just use Scenario 1.
+                    var nameGetterContext = new NameGetterContext(ScenarioType.Scenario1);
+
+                    // Extract!
+                    foreach (var file in files) {
+                        Logger.FinishLine();
+                        Logger.Write($"Extracting frames from '{file}': " + (verbose ? "\n" : ""));
+                        using (Logger.IndentedSection()) {
+                            try {
+                                (var fa, var fs) = ExtractFrames(file, nameGetterContext, loadedSpritesheets, framesWritten, spritesheetsUpdated, verbose);
+                                framesAdded += fa;
+                                framesUnchanged += fs;
+                            }
+                            catch (Exception e) {
+                                Logger.WriteLine("");
+                                Logger.WriteLine(e.GetTypeAndMessage(), LogType.Error);
+                            }
+                        }
                     }
                 }
 
                 // Save updated bitmaps.
-                if (verbose)
-                    Logger.WriteLine("------------------------------------------------------------------------------");
                 Logger.WriteLine($"Saving {spritesheetsUpdated.Count} updated spritesheet(s)...");
-                if (verbose && spritesheetsUpdated.Count > 0)
-                    Logger.WriteLine("------------------------------------------------------------------------------");
-
-                foreach (var filename in spritesheetsUpdated) {
-                    try {
-                        if (verbose)
-                            Logger.WriteLine($"Saving '{filename}'...");
-                        var bitmap = loadedSpritesheets[filename];
-                        bitmap.Save(filename, ImageFormat.Png);
-                    }
-                    catch (Exception e) {
-                        Logger.WriteLine(e.GetTypeAndMessage(), LogType.Error);
+                using (Logger.IndentedSection(verbose ? 1 : 0)) {
+                    foreach (var filename in spritesheetsUpdated) {
+                        Logger.WriteLine($"Saving '{filename}'...");
+                        using (Logger.IndentedSection()) {
+                            try {
+                                var bitmap = loadedSpritesheets[filename];
+                                bitmap.Save(filename, ImageFormat.Png);
+                            }
+                            catch (Exception e) {
+                                Logger.WriteLine(e.GetTypeAndMessage(), LogType.Error);
+                            }
+                        }
                     }
                 }
-
-                if (verbose)
-                    Logger.WriteLine("------------------------------------------------------------------------------");
 
                 Logger.WriteLine($"{framesAdded} total new frame(s) extracted, {framesUnchanged} total frame(s) found but unchanged");
             }
             catch (Exception e) {
-                if (verbose)
-                    Logger.WriteLine("------------------------------------------------------------------------------");
                 Logger.WriteLine(e.GetTypeAndMessage(), LogType.Error);
                 return 1;
             }
 
-            if (verbose) {
-                Logger.WriteLine("------------------------------------------------------------------------------");
+            if (verbose)
                 Logger.WriteLine("Done");
-            }
+
             return 0;
         }
 
@@ -124,7 +120,6 @@ namespace CHRTool {
             if (!file.ToLower().EndsWith(".chr") && !file.ToLower().EndsWith(".chp"))
                 throw new Exception($"File '{file}' is not a .CHR or .CHP file");
 
-            Logger.Write($"Extracting frames from '{file}': " + (verbose ? "\n" : ""));
             var bytes = File.ReadAllBytes(file);
             var byteData = new ByteData(new ByteArray(bytes));
 
@@ -145,11 +140,11 @@ namespace CHRTool {
             // Report
             var totalNewFrames = framesAdded + framesUnchanged;
             if (totalNewFrames > 0 && framesUnchanged > 0)
-                Logger.WriteLine($"{totalNewFrames} new frame(s): {framesAdded} extracted, {framesUnchanged} unchanged");
+                Logger.Write($"{totalNewFrames} new frame(s): {framesAdded} extracted, {framesUnchanged} unchanged\n");
             else if (totalNewFrames > 0)
-                Logger.WriteLine($"{totalNewFrames} new frame(s): {framesAdded} extracted");
+                Logger.Write($"{totalNewFrames} new frame(s): {framesAdded} extracted\n");
             else
-                Logger.WriteLine($"no new frames");
+                Logger.Write($"no new frames\n");
 
             return (framesAdded, framesUnchanged);
         }
@@ -261,65 +256,70 @@ namespace CHRTool {
                 if (File.Exists(spritesheetImageFile)) {
                     if (verbose)
                         Logger.WriteLine($"Loading spritesheet '{spritesheetImageFile}...");
-
-                    // We have to load the bitmap in this odd way to prevent exceptions caused by saving to the same file you loaded from...
-                    // Pretty cool stuff.
-                    var bitmap = new Bitmap(new MemoryStream(File.ReadAllBytes(spritesheetImageFile)));
-                    loadedSpritesheets.Add(spritesheetImageFile, bitmap);
-                    return bitmap;
+                    using (Logger.IndentedSection(verbose ? 1 : 0)) {
+                        // We have to load the bitmap in this odd way to prevent exceptions caused by saving to the same file you loaded from...
+                        // Pretty cool stuff.
+                        var bitmap = new Bitmap(new MemoryStream(File.ReadAllBytes(spritesheetImageFile)));
+                        loadedSpritesheets.Add(spritesheetImageFile, bitmap);
+                        return bitmap;
+                    }
                 }
 
                 // If the spritesheet doesn't exist, create it, with placeholder red squares for spritesheets.
                 // (These will stay red if actual frames aren't found)
+                Bitmap newImage = null;
                 if (verbose)
                     Logger.WriteLine($"Creating new spritesheet '{spriteDef.Name} ({Spritesheet.DimensionsToKey(frameWidth, frameHeight)})...");
+                using (Logger.IndentedSection(verbose ? 1 : 0)) {
+                    // Get the dimensions of the spritesheet.
+                    var frameDimensions = spritesheet.FrameGroupsByName.Values
+                        .SelectMany(y => y.Frames.Values
+                            .Where(z => z.SpritesheetX >= 0 && z.SpritesheetY >= 0)
+                            .Select(z => (X: z.SpritesheetX, Y: z.SpritesheetY))
+                        )
+                        .ToArray();
+                    var sheetWidth  = frameDimensions.Max(x => x.X) + frameWidth;
+                    var sheetHeight = frameDimensions.Max(x => x.Y) + frameHeight;
 
-                // Get the dimensions of the spritesheet.
-                var frameDimensions = spritesheet.FrameGroupsByName.Values
-                    .SelectMany(y => y.Frames.Values
-                        .Where(z => z.SpritesheetX >= 0 && z.SpritesheetY >= 0)
-                        .Select(z => (X: z.SpritesheetX, Y: z.SpritesheetY))
-                    )
-                    .ToArray();
-                var sheetWidth  = frameDimensions.Max(x => x.X) + frameWidth;
-                var sheetHeight = frameDimensions.Max(x => x.Y) + frameHeight;
+                    // Create the empty spritesheet.
+                    newImage = new Bitmap(sheetWidth, sheetHeight, PixelFormat.Format32bppArgb);
 
-                // Create the empty spritesheet.
-                var newImage = new Bitmap(sheetWidth, sheetHeight, PixelFormat.Format32bppArgb);
+                    // Build a red, non-filled rectangle with lines 3 pixels wide.
+                    var box = new ushort[frameWidth, frameHeight];
+                    var redColor    = new PixelChannels() { a = 255, r = 255, g = 0,   b = 0 }.ToABGR1555();
+                    var orangeColor = new PixelChannels() { a = 255, r = 255, g = 127, b = 0 }.ToABGR1555();
 
-                // Build a red, non-filled rectangle with lines 3 pixels wide.
-                var box = new ushort[frameWidth, frameHeight];
-                var redColor    = new PixelChannels() { a = 255, r = 255, g = 0,   b = 0 }.ToABGR1555();
-                var orangeColor = new PixelChannels() { a = 255, r = 255, g = 127, b = 0 }.ToABGR1555();
-
-                for (int i = 0; i < 3; i++) {
-                    if (i < frameHeight) {
-                        for (int x = i; x < frameWidth - i; ++x) {
-                            box[x, i] = redColor;
-                            box[x, frameHeight - i - 1] = orangeColor;
+                    for (int i = 0; i < 3; i++) {
+                        if (i < frameHeight) {
+                            for (int x = i; x < frameWidth - i; ++x) {
+                                box[x, i] = redColor;
+                                box[x, frameHeight - i - 1] = orangeColor;
+                            }
+                        }
+                        if (i < frameWidth) {
+                            for (int y = i + 1; y < frameHeight - i - 1; ++y) {
+                                box[i, y] = redColor;
+                                box[frameWidth - i - 1, y] = orangeColor;
+                            }
                         }
                     }
-                    if (i < frameWidth) {
-                        for (int y = i + 1; y < frameHeight - i - 1; ++y) {
-                            box[i, y] = redColor;
-                            box[frameWidth - i - 1, y] = orangeColor;
-                        }
-                    }
+
+                    // Place that red box at all frame locations.
+                    foreach (var frameGroup in spritesheet.FrameGroupsByName.Values)
+                        foreach (var frame in frameGroup.Frames.Values)
+                            newImage.SetDataAt(frame.SpritesheetX, frame.SpritesheetY, box);
                 }
-
-                // Place that red box at all frame locations.
-                foreach (var frameGroup in spritesheet.FrameGroupsByName.Values)
-                    foreach (var frame in frameGroup.Frames.Values)
-                        newImage.SetDataAt(frame.SpritesheetX, frame.SpritesheetY, box);
 
                 // Save the image out.
                 if (verbose)
                     Logger.WriteLine($"Saving to '{spritesheetImageFile}'...");
-                newImage.Save(spritesheetImageFile, ImageFormat.Png);
+                using (Logger.IndentedSection(verbose ? 1 : 0)) {
+                    newImage.Save(spritesheetImageFile, ImageFormat.Png);
 
-                // Cache the loaded image and return it for later editing.
-                loadedSpritesheets.Add(spritesheetImageFile, newImage);
-                return newImage;
+                    // Cache the loaded image and return it for later editing.
+                    loadedSpritesheets.Add(spritesheetImageFile, newImage);
+                    return newImage;
+                }
             }
             catch (Exception e) {
                 Logger.WriteLine(e.GetTypeAndMessage(), LogType.Error);
