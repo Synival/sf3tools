@@ -132,64 +132,11 @@ namespace CHRTool {
             using (Logger.IndentedSection(verbose ? 1 : 0))
                 inputBytes = File.ReadAllBytes(inputFile);
 
-            string outputText = null;
-            if (isChp) {
-                // Attempt to load it as a CHP_File.
-                CHP_File chpFile;
-                if (verbose)
-                    Logger.WriteLine("Creating CHP_File...");
-                using (Logger.IndentedSection(verbose ? 1 : 0)) {
-                    var nameGetterContext = new NameGetterContext(ScenarioType.Scenario1);
-                    chpFile = CHP_File.Create(new ByteData(new ByteArray(inputBytes)), nameGetterContext, ScenarioType.Scenario1);
-                }
-
-                // Get a CHR_Def from the CHR_File.
-                if (verbose)
-                    Logger.WriteLine("Serializing to CHP_Def...");
-                CHP_Def chpDef;
-                using (Logger.IndentedSection(verbose ? 1 : 0)) {
-                    chpDef = chpFile.ToCHP_Def();
-                    if (simplify) {
-                        foreach (var chrDef in chpDef.CHRsBySector.Values)
-                            foreach (var sprite in chrDef.Sprites)
-                                sprite.FrameGroupsForSpritesheets = null;
-                    }
-                }
-
-                // Serialize the file.
-                if (verbose)
-                    Logger.WriteLine($"Converting to JSON file...");
-                using (Logger.IndentedSection(verbose ? 1 : 0))
-                    outputText = chpDef.ToJSON_String();
-            }
-            else {
-                // Attempt to load it as a CHR_File.
-                CHR_File chrFile;
-                if (verbose)
-                    Logger.WriteLine("Creating CHR_File...");
-                using (Logger.IndentedSection(verbose ? 1 : 0)) {
-                    var nameGetterContext = new NameGetterContext(ScenarioType.Scenario1);
-                    chrFile = CHR_File.Create(new ByteData(new ByteArray(inputBytes)), nameGetterContext, ScenarioType.Scenario1);
-                }
-
-                // Get a CHR_Def from the CHR_File.
-                CHR_Def chrDef;
-                if (verbose)
-                    Logger.WriteLine("Serializing to CHR_Def...");
-                using (Logger.IndentedSection(verbose ? 1 : 0)) {
-                    chrDef = chrFile.ToCHR_Def();
-                    if (simplify) {
-                        foreach (var sprite in chrDef.Sprites)
-                            sprite.FrameGroupsForSpritesheets = null;
-                    }
-                }
-
-                // Serialize the file.
-                if (verbose)
-                    Logger.WriteLine($"Converting to JSON file...");
-                using (Logger.IndentedSection(verbose ? 1 : 0))
-                    outputText = chrDef.ToJSON_String();
-            }
+            string outputText = isChp
+                ? DecompileCHP(inputBytes, verbose, simplify)
+                : DecompileCHR(inputBytes, verbose, simplify);
+            if (outputText == null)
+                return;
 
             if (verbose)
                 Logger.WriteLine($"Writing to '{outputFile}'...");
@@ -197,5 +144,63 @@ namespace CHRTool {
                 File.WriteAllText(outputFile, outputText);
         }
 
+        public static string DecompileCHP(byte[] inputBytes, bool verbose, bool simplify) {
+            // Attempt to load it as a CHP_File.
+            CHP_File chpFile;
+            if (verbose)
+                Logger.WriteLine("Creating CHP_File...");
+            using (Logger.IndentedSection(verbose ? 1 : 0)) {
+                var nameGetterContext = new NameGetterContext(ScenarioType.Scenario1);
+                chpFile = CHP_File.Create(new ByteData(new ByteArray(inputBytes)), nameGetterContext, ScenarioType.Scenario1);
+            }
+
+            // Get a CHR_Def from the CHR_File.
+            if (verbose)
+                Logger.WriteLine("Serializing to CHP_Def...");
+            CHP_Def chpDef;
+            using (Logger.IndentedSection(verbose ? 1 : 0)) {
+                chpDef = chpFile.ToCHP_Def();
+                if (simplify) {
+                    foreach (var chrDef in chpDef.CHRsBySector.Values)
+                        foreach (var sprite in chrDef.Sprites)
+                            sprite.FrameGroupsForSpritesheets = null;
+                }
+            }
+
+            // Serialize the file.
+            if (verbose)
+                Logger.WriteLine($"Converting to JSON file...");
+            using (Logger.IndentedSection(verbose ? 1 : 0))
+                return chpDef.ToJSON_String();
+        }
+
+        public static string DecompileCHR(byte[] inputBytes, bool verbose, bool simplify) {
+            // Attempt to load it as a CHR_File.
+            CHR_File chrFile;
+            if (verbose)
+                Logger.WriteLine("Creating CHR_File...");
+            using (Logger.IndentedSection(verbose ? 1 : 0)) {
+                var nameGetterContext = new NameGetterContext(ScenarioType.Scenario1);
+                chrFile = CHR_File.Create(new ByteData(new ByteArray(inputBytes)), nameGetterContext, ScenarioType.Scenario1);
+            }
+
+            // Get a CHR_Def from the CHR_File.
+            CHR_Def chrDef;
+            if (verbose)
+                Logger.WriteLine("Serializing to CHR_Def...");
+            using (Logger.IndentedSection(verbose ? 1 : 0)) {
+                chrDef = chrFile.ToCHR_Def();
+                if (simplify) {
+                    foreach (var sprite in chrDef.Sprites)
+                        sprite.FrameGroupsForSpritesheets = null;
+                }
+            }
+
+            // Serialize the file.
+            if (verbose)
+                Logger.WriteLine($"Converting to JSON file...");
+            using (Logger.IndentedSection(verbose ? 1 : 0))
+                return chrDef.ToJSON_String();
+        }
     }
 }

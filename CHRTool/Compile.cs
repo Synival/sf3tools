@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using CommonLib;
 using CommonLib.Extensions;
 using CommonLib.Logging;
 using CommonLib.Types;
@@ -161,79 +160,85 @@ namespace CHRTool {
             using (Logger.IndentedSection(verbose ? 1 : 0))
                 inputText = File.ReadAllText(inputFile);
 
-            byte[] outputData = null;
-            if (isChp) {
-                // Attempt to deserialize.
-                CHP_Def chpDef;
-                if (verbose)
-                    Logger.WriteLine("Deserializing to CHP_Def...");
-                using (Logger.IndentedSection(verbose ? 1 : 0)) {
-                    chpDef = CHP_Def.FromJSON(inputText);
-                    if (chpDef == null) {
-                        Logger.WriteLine($"Failure during deserialization of '{inputFile}': null returned", LogType.Error);
-                        return;
-                    }
-                }
-
-                // Add sprites if requested
-                if (spritesToAdd?.Length >= 1) {
-                    // TODO: get this working for CHP files!
-                    Logger.WriteLine("(cannot yet add sprites to CHP files using --add-sprite)", LogType.Warning);
-                }
-
-                // We should have everything necessary to compile. Give it a go!
-                if (verbose)
-                    Logger.WriteLine("Compiling...");
-                using (Logger.IndentedSection(verbose ? 1 : 0)) {
-                    var chpCompiler = new CHP_Compiler() {
-                        OptimizeFrames            = optimize,
-                        AddMissingAnimationFrames = true,
-                    };
-
-                    using (var memoryStream = new MemoryStream()) {
-                        chpCompiler.Compile(chpDef, memoryStream);
-                        outputData = memoryStream.ToArray();
-                    }
-                }
-            }
-            else {
-                // Attempt to deserialize.
-                CHR_Def chrDef = null;
-                if (verbose)
-                    Logger.WriteLine("Deserializing to CHR_Def...");
-                using (Logger.IndentedSection(verbose ? 1 : 0)) {
-                    chrDef = CHR_Def.FromJSON(inputText);
-                    if (chrDef == null) {
-                        Logger.WriteLine($"Failure during deserialization of '{inputFile}': null returned", LogType.Error);
-                        return;
-                    }
-                }
-
-                // Add sprites if requested
-                if (spritesToAdd?.Length >= 1)
-                    chrDef.Sprites = chrDef.Sprites.Concat(spritesToAdd).ToArray();
-
-                // We should have everything necessary to compile. Give it a go!
-                if (verbose)
-                    Logger.WriteLine("Compiling...");
-                using (Logger.IndentedSection(verbose ? 1 : 0)) {
-                    var chrCompiler = new CHR_Compiler() {
-                        OptimizeFrames            = optimize,
-                        AddMissingAnimationFrames = true,
-                    };
-
-                    using (var memoryStream = new MemoryStream()) {
-                        chrCompiler.Compile(chrDef, memoryStream);
-                        outputData = memoryStream.ToArray();
-                    }
-                }
-            }
+            byte[] outputData = isChp
+                ? CompileCHP(inputFile, inputText, verbose, optimize, spritesToAdd)
+                : CompileCHR(inputFile, inputText, verbose, optimize, spritesToAdd);
+            if (outputData == null)
+                return;
 
             // Output the file.
             if (verbose)
                 Logger.WriteLine($"Writing to '{outputFile}'...");
             using (Logger.IndentedSection(verbose ? 1 : 0))
                 File.WriteAllBytes(outputFile, outputData);
+        }
+
+        private static byte[] CompileCHP(string inputFile, string inputText, bool verbose, bool optimize, SpriteDef[] spritesToAdd) {
+            // Attempt to deserialize.
+            CHP_Def chpDef;
+            if (verbose)
+                Logger.WriteLine("Deserializing to CHP_Def...");
+            using (Logger.IndentedSection(verbose ? 1 : 0)) {
+                chpDef = CHP_Def.FromJSON(inputText);
+                if (chpDef == null) {
+                    Logger.WriteLine($"Failure during deserialization of '{inputFile}': null returned", LogType.Error);
+                    return null;
+                }
+            }
+
+            // Add sprites if requested
+            if (spritesToAdd?.Length >= 1) {
+                // TODO: get this working for CHP files!
+                Logger.WriteLine("(cannot yet add sprites to CHP files using --add-sprite)", LogType.Warning);
+            }
+
+            // We should have everything necessary to compile. Give it a go!
+            if (verbose)
+                Logger.WriteLine("Compiling...");
+            using (Logger.IndentedSection(verbose ? 1 : 0)) {
+                var chpCompiler = new CHP_Compiler() {
+                    OptimizeFrames            = optimize,
+                    AddMissingAnimationFrames = true,
+                };
+
+                using (var memoryStream = new MemoryStream()) {
+                    chpCompiler.Compile(chpDef, memoryStream);
+                    return memoryStream.ToArray();
+                }
+            }
+        }
+
+        private static byte[] CompileCHR(string inputFile, string inputText, bool verbose, bool optimize, SpriteDef[] spritesToAdd) {
+            // Attempt to deserialize.
+            CHR_Def chrDef = null;
+            if (verbose)
+                Logger.WriteLine("Deserializing to CHR_Def...");
+            using (Logger.IndentedSection(verbose ? 1 : 0)) {
+                chrDef = CHR_Def.FromJSON(inputText);
+                if (chrDef == null) {
+                    Logger.WriteLine($"Failure during deserialization of '{inputFile}': null returned", LogType.Error);
+                    return null;
+                }
+            }
+
+            // Add sprites if requested
+            if (spritesToAdd?.Length >= 1)
+                chrDef.Sprites = chrDef.Sprites.Concat(spritesToAdd).ToArray();
+
+            // We should have everything necessary to compile. Give it a go!
+            if (verbose)
+                Logger.WriteLine("Compiling...");
+            using (Logger.IndentedSection(verbose ? 1 : 0)) {
+                var chrCompiler = new CHR_Compiler() {
+                    OptimizeFrames            = optimize,
+                    AddMissingAnimationFrames = true,
+                };
+
+                using (var memoryStream = new MemoryStream()) {
+                    chrCompiler.Compile(chrDef, memoryStream);
+                    return memoryStream.ToArray();
+                }
+            }
         }
     }
 }
