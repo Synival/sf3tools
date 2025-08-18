@@ -32,11 +32,11 @@ namespace CHRTool {
 
             // It looks like we're ready to go! Fetch the file data.
             int totalFramesAdded = 0;
-            try {
-                // Fetch all .SF3Sprite files
-                if (verbose)
-                    Logger.WriteLine("Updating lookup hashes...");
-                using (Logger.IndentedSection(verbose ? 1 : 0)) {
+            if (verbose)
+                Logger.WriteLine("Updating lookup hashes...");
+            using (Logger.IndentedSection(verbose ? 1 : 0)) {
+                try {
+                    // Fetch all .SF3Sprite files
                     string[] files;
                     if (verbose)
                         Logger.WriteLine("Getting list of SF3Sprites...");
@@ -96,10 +96,10 @@ namespace CHRTool {
                             Logger.WriteLine($"No new frames; not updating frame hash lookup file");
                     }
                 }
-            }
-            catch (Exception e) {
-                Logger.WriteLine(e.GetTypeAndMessage(), LogType.Error);
-                return 1;
+                catch (Exception e) {
+                    Logger.WriteLine(e.GetTypeAndMessage(), LogType.Error);
+                    return 1;
+                }
             }
 
             if (verbose)

@@ -46,16 +46,15 @@ namespace CHRTool {
             }
 
             // It looks like we're ready to go!
-            try {
-                int framesAdded         = 0;
-                int framesUnchanged     = 0;
-                var spritesheetsUpdated = new HashSet<string>();
-                var loadedSpritesheets  = new Dictionary<string, Bitmap>();
-                var framesWritten       = new HashSet<string>();
-
-                if (verbose)
-                    Logger.WriteLine("Extracting frames to spritesheets...");
-                using (Logger.IndentedSection(verbose ? 1 : 0)) {
+            int framesAdded         = 0;
+            int framesUnchanged     = 0;
+            var spritesheetsUpdated = new HashSet<string>();
+            var loadedSpritesheets  = new Dictionary<string, Bitmap>();
+            var framesWritten       = new HashSet<string>();
+            if (verbose)
+                Logger.WriteLine("Extracting frames to spritesheets...");
+            using (Logger.IndentedSection(verbose ? 1 : 0)) {
+                try {
                     // Try to create the spritesheet directory if it doesn't exist.
                     if (!Directory.Exists(spritesheetDir)) {
                         if (verbose)
@@ -85,6 +84,10 @@ namespace CHRTool {
                         }
                     }
                 }
+                catch (Exception e) {
+                    Logger.WriteLine(e.GetTypeAndMessage(), LogType.Error);
+                    return 1;
+                }
 
                 // Save updated bitmaps.
                 Logger.WriteLine($"Saving {spritesheetsUpdated.Count} updated spritesheet(s)...");
@@ -104,10 +107,6 @@ namespace CHRTool {
                 }
 
                 Logger.WriteLine($"{framesAdded} total new frame(s) extracted, {framesUnchanged} total frame(s) found but unchanged");
-            }
-            catch (Exception e) {
-                Logger.WriteLine(e.GetTypeAndMessage(), LogType.Error);
-                return 1;
             }
 
             if (verbose)

@@ -1,11 +1,17 @@
 ﻿using System;
 using System.IO;
 using System.Linq;
+using CommonLib.Arrays;
 using CommonLib.Extensions;
 using CommonLib.Logging;
 using CommonLib.Types;
-using Newtonsoft.Json.Linq;
+using SF3.ByteData;
 using SF3.CHR;
+using SF3.Models.Files.CHP;
+using SF3.Models.Files.CHR;
+using SF3.NamedValues;
+using SF3.Sprites;
+using SF3.Types;
 
 namespace CHRTool {
     public static class Describe {
@@ -86,27 +92,33 @@ namespace CHRTool {
         }
 
         private static void DescribeCHR(string inputFile, bool verbose) {
-            // TODO: describe!
+            var bytes = File.ReadAllBytes(inputFile);
+            var chrFile = CHR_File.Create(new ByteData(new ByteArray(bytes)), new NameGetterContext(ScenarioType.Scenario1), ScenarioType.Scenario1);
         }
 
         private static void DescribeCHP(string inputFile, bool verbose) {
-            // TODO: describe!
+            var bytes = File.ReadAllBytes(inputFile);
+            var chpFile = CHP_File.Create(new ByteData(new ByteArray(bytes)), new NameGetterContext(ScenarioType.Scenario1), ScenarioType.Scenario1);
         }
 
         private static void DescribeSF3CHR(string inputFile, bool verbose) {
-            // TODO: describe!
+            var text = File.ReadAllText(inputFile);
+            var chrDef = CHR_Def.FromJSON(text);
         }
 
         private static void DescribeSF3CHP(string inputFile, bool verbose) {
-            // TODO: describe!
+            var text = File.ReadAllText(inputFile);
+            var chpDef = CHP_Def.FromJSON(text);
         }
 
         private static void DescribeSF3Sprite(string inputFile, bool verbose) {
-            // TODO: describe!
+            var text = File.ReadAllText(inputFile);
+            var spriteDef = SF3.Sprites.SpriteDef.FromJSON(text);
         }
 
         private static void DescribeSF3CHRSprite(string inputFile, bool verbose) {
-            // TODO: describe!
+            var text = File.ReadAllText(inputFile);
+            var chrSpriteDef = SF3.CHR.SpriteDef.FromJSON(text);
         }
     }
 }

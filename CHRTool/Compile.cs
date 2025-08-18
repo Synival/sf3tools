@@ -69,9 +69,9 @@ namespace CHRTool {
                 Logger.WriteLine("Loading JSON for sprites to add...");
             using (Logger.IndentedSection(verbose ? 1 : 0)) {
                 foreach (var spriteToAdd in spritesToAdd) {
-                    try {
-                        Console.WriteLine($"Loading sprite to add '{spriteToAdd}'...");
-                        using (Logger.IndentedSection()) {
+                    Console.WriteLine($"Loading sprite to add '{spriteToAdd}'...");
+                    using (Logger.IndentedSection()) {
+                        try {
                             var text = File.ReadAllText(spriteToAdd);
                             var jObj = JObject.Parse(text);
 
@@ -84,36 +84,37 @@ namespace CHRTool {
                             using (Logger.IndentedSection(verbose ? 1 : 0))
                                 spritesToAddDefList.Add(SpriteDef.FromJToken(jObj));
                         }
-                    }
-                    catch (Exception e) {
-                        Logger.WriteLine(e.GetTypeAndMessage(), LogType.Error);
-                        return 1;
+                        catch (Exception e) {
+                            Logger.WriteLine(e.GetTypeAndMessage(), LogType.Error);
+                            return 1;
+                        }
                     }
                 }
             }
             var spritesToAddDefs = spritesToAddDefList.ToArray();
 
             // It looks like we're ready to go! Fetch the file data.
-            try {
-                if (verbose)
-                    Logger.WriteLine("Compiling to .CHR(s) / CHP(s)...");
-                using (Logger.IndentedSection(verbose ? 1 : 0)) {
+            if (verbose)
+                Logger.WriteLine("Compiling to .CHR(s) / CHP(s)...");
+            using (Logger.IndentedSection(verbose ? 1 : 0)) {
+                try {
                     foreach (var file in files) {
-                        try {
-                            var thisOutputFile = GetOutputFile(file, outputFile, outputDir);
-                            Logger.WriteLine($"Compiling '{file}' to '{thisOutputFile}'...");
-                            using (Logger.IndentedSection())
+                        var thisOutputFile = GetOutputFile(file, outputFile, outputDir);
+                        Logger.WriteLine($"Compiling '{file}' to '{thisOutputFile}'...");
+                        using (Logger.IndentedSection()) {
+                            try {
                                 CompileFile(file, thisOutputFile, outputDir, verbose, optimize, spritesToAddDefs);
-                        }
-                        catch (Exception e) {
-                            Logger.WriteLine(e.GetTypeAndMessage(), LogType.Error);
+                            }
+                            catch (Exception e) {
+                                Logger.WriteLine(e.GetTypeAndMessage(), LogType.Error);
+                            }
                         }
                     }
                 }
-            }
-            catch (Exception e) {
-                Logger.WriteLine(e.GetTypeAndMessage(), LogType.Error);
-                return 1;
+                catch (Exception e) {
+                    Logger.WriteLine(e.GetTypeAndMessage(), LogType.Error);
+                    return 1;
+                }
             }
 
             if (verbose)

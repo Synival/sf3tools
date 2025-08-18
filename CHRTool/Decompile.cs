@@ -66,26 +66,27 @@ namespace CHRTool {
             }
 
             // It looks like we're ready to go! Fetch the file data.
-            try {
-                if (verbose)
-                    Logger.WriteLine("Decompiling to .SF3CHR(s) / SF3CHP(s)...");
-                using (Logger.IndentedSection(verbose ? 1 : 0)) {
+            if (verbose)
+                Logger.WriteLine("Decompiling to .SF3CHR(s) / SF3CHP(s)...");
+            using (Logger.IndentedSection(verbose ? 1 : 0)) {
+                try {
                     foreach (var file in files) {
-                        try {
-                            var thisOutputFile = GetOutputFile(file, outputFile, outputDir);
-                            Logger.WriteLine($"Decompiling '{file}' to '{thisOutputFile}'...");
-                            using (Logger.IndentedSection())
+                        var thisOutputFile = GetOutputFile(file, outputFile, outputDir);
+                        Logger.WriteLine($"Decompiling '{file}' to '{thisOutputFile}'...");
+                        using (Logger.IndentedSection()) {
+                            try {
                                 DecompileFile(file, thisOutputFile, outputDir, verbose, simplify);
-                        }
-                        catch (Exception e) {
-                            Logger.WriteLine(e.GetTypeAndMessage(), LogType.Error);
+                            }
+                            catch (Exception e) {
+                                Logger.WriteLine(e.GetTypeAndMessage(), LogType.Error);
+                            }
                         }
                     }
                 }
-            }
-            catch (Exception e) {
-                Logger.WriteLine(e.GetTypeAndMessage(), LogType.Error);
-                return 1;
+                catch (Exception e) {
+                    Logger.WriteLine(e.GetTypeAndMessage(), LogType.Error);
+                    return 1;
+                }
             }
 
             if (verbose)
