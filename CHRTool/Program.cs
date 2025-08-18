@@ -1,6 +1,5 @@
 ﻿using System;
 using System.IO;
-using CommonLib.Extensions;
 using CommonLib.Logging;
 using CommonLib.Types;
 using NDesk.Options;
@@ -38,7 +37,7 @@ namespace CHRTool {
                 args = anywhereOptions.Parse(args).ToArray();
             }
             catch (Exception e) {
-                Logger.WriteLine(e.GetTypeAndMessage(), LogType.Error);
+                Logger.LogException(e);
                 Logger.Write(Constants.ErrorUsageString);
                 return 1;
             }
@@ -82,7 +81,7 @@ namespace CHRTool {
                 extraArgsBeforeCommand = generalOptions.Parse(generalArgs).ToArray();
             }
             catch (Exception e) {
-                Logger.WriteLine(e.GetTypeAndMessage(), LogType.Error);
+                Logger.LogException(e);
                 return 1;
             }
 

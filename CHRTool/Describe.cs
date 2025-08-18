@@ -2,7 +2,6 @@
 using System.IO;
 using System.Linq;
 using CommonLib.Arrays;
-using CommonLib.Extensions;
 using CommonLib.Logging;
 using CommonLib.Types;
 using SF3.ByteData;
@@ -10,7 +9,6 @@ using SF3.CHR;
 using SF3.Models.Files.CHP;
 using SF3.Models.Files.CHR;
 using SF3.NamedValues;
-using SF3.Sprites;
 using SF3.Types;
 
 namespace CHRTool {
@@ -55,14 +53,14 @@ namespace CHRTool {
                         DescribeFile(file, verbose);
                     }
                     catch (Exception e) {
-                        Logger.WriteLine(e.GetTypeAndMessage(), LogType.Error);
+                        Logger.LogException(e);
                     }
                 }
             }
             catch (Exception e) {
                 if (verbose)
                     Logger.WriteLine("------------------------------------------------------------------------------");
-                Logger.WriteLine(e.GetTypeAndMessage(), LogType.Error);
+                Logger.LogException(e);
                 return 1;
             }
 

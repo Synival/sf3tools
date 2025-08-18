@@ -1,6 +1,5 @@
 ﻿using System;
 using System.IO;
-using CommonLib.Extensions;
 using CommonLib.Logging;
 using CommonLib.Types;
 using NDesk.Options;
@@ -19,7 +18,7 @@ namespace CHRTool {
                 args = compileOptions.Parse(args).ToArray();
             }
             catch (Exception e) {
-                Logger.WriteLine(e.GetTypeAndMessage(), LogType.Error);
+                Logger.LogException(e);
                 return 1;
             }
 
@@ -82,7 +81,7 @@ namespace CHRTool {
                                         Logger.Write("no new frames\n");
                                 }
                                 catch (Exception e) {
-                                    Logger.WriteLine(e.GetTypeAndMessage(), LogType.Error);
+                                    Logger.LogException(e);
                                 }
                             }
                         }
@@ -97,7 +96,7 @@ namespace CHRTool {
                     }
                 }
                 catch (Exception e) {
-                    Logger.WriteLine(e.GetTypeAndMessage(), LogType.Error);
+                    Logger.LogException(e);
                     return 1;
                 }
             }

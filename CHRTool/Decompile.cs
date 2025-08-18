@@ -2,7 +2,6 @@
 using System.IO;
 using System.Linq;
 using CommonLib.Arrays;
-using CommonLib.Extensions;
 using CommonLib.Logging;
 using CommonLib.Types;
 using NDesk.Options;
@@ -31,7 +30,7 @@ namespace CHRTool {
                 args = compileOptions.Parse(args).ToArray();
             }
             catch (Exception e) {
-                Logger.WriteLine(e.GetTypeAndMessage(), LogType.Error);
+                Logger.LogException(e);
                 return 1;
             }
 
@@ -78,13 +77,13 @@ namespace CHRTool {
                                 DecompileFile(file, thisOutputFile, outputDir, verbose, simplify);
                             }
                             catch (Exception e) {
-                                Logger.WriteLine(e.GetTypeAndMessage(), LogType.Error);
+                                Logger.LogException(e);
                             }
                         }
                     }
                 }
                 catch (Exception e) {
-                    Logger.WriteLine(e.GetTypeAndMessage(), LogType.Error);
+                    Logger.LogException(e);
                     return 1;
                 }
             }

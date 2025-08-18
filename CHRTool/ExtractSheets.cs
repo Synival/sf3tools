@@ -78,14 +78,13 @@ namespace CHRTool {
                                 framesUnchanged += fs;
                             }
                             catch (Exception e) {
-                                Logger.WriteLine("");
-                                Logger.WriteLine(e.GetTypeAndMessage(), LogType.Error);
+                                Logger.LogException(e);
                             }
                         }
                     }
                 }
                 catch (Exception e) {
-                    Logger.WriteLine(e.GetTypeAndMessage(), LogType.Error);
+                    Logger.LogException(e);
                     return 1;
                 }
 
@@ -100,7 +99,7 @@ namespace CHRTool {
                                 bitmap.Save(filename, ImageFormat.Png);
                             }
                             catch (Exception e) {
-                                Logger.WriteLine(e.GetTypeAndMessage(), LogType.Error);
+                                Logger.LogException(e);
                             }
                         }
                     }
@@ -233,7 +232,7 @@ namespace CHRTool {
                         }
                     }
                     catch (Exception e) {
-                        Logger.WriteLine(e.GetTypeAndMessage(), LogType.Error);
+                        Logger.LogException(e);
                     }
                     framesWritten.Add(frameRefKey);
                 }
@@ -321,7 +320,7 @@ namespace CHRTool {
                 }
             }
             catch (Exception e) {
-                Logger.WriteLine(e.GetTypeAndMessage(), LogType.Error);
+                Logger.LogException(e);
                 loadedSpritesheets.Add(spritesheetImageFile, null);
                 return null;
             }

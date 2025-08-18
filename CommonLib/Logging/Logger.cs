@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using CommonLib.Extensions;
 using CommonLib.Types;
 
 namespace CommonLib.Logging {
@@ -45,6 +47,13 @@ namespace CommonLib.Logging {
             FinishLine();
             Write(message + "\n", logType);
         }
+
+        /// <summary>
+        /// Logs an exception on its own line with predefined formatting.
+        /// </summary>
+        /// <param name="exception">The exception to log.</param>
+        public static void LogException(Exception exception)
+            => WriteLine(exception.GetTypeAndMessage(), LogType.Error);
 
         /// <summary>
         /// Indents all registered loggers by the number of tabs provided.
