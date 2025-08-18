@@ -117,6 +117,8 @@ namespace CHRTool {
                     return ExtractSheets.Run(remainingArgs, spritesheetDir, verbose);
                 case CommandType.UpdateHashLookups:
                     return UpdateHashLookups.Run(remainingArgs, spriteDir, frameHashLookupsFile, verbose);
+                case CommandType.Describe:
+                    return Describe.Run(remainingArgs, verbose);
 
                 default:
                     Logger.WriteLine("Internal error: unimplemented command '" + command.ToString() + "'", LogType.Error);

@@ -34,7 +34,7 @@ namespace CHRTool {
                 return 1;
             }
 
-            // Fetch the directory with the game data for decompile CHR/CHP files.
+            // Fetch the directory with the CHR/CHP files to decompile to SF3CHR/SF3CHP files.
             string[] files;
             (files, args) = Utils.GetFilesAndPathsFromAgs(args, path => {
                 cantSetOutputFile = true;

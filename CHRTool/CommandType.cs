@@ -4,5 +4,6 @@
         Decompile,
         ExtractSheets,
         UpdateHashLookups,
+        Describe,
     }
 }

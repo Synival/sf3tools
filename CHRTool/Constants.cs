@@ -16,7 +16,9 @@ namespace CHRTool {
             "  Extract spritesheet frames from CHR/CHP files:\n" +
             "    chrtool [GENERAL_OPTIONS]... extract-sheets [OPTIONS]... [CHR/CHP file/path]...\n" +
             "  Update the lookup table for frame and animation hashes in SF3Lib:\n" +
-            "    chrtool [GENERAL_OPTIONS]... update-hash-lookups [OPTIONS]...\n";
+            "    chrtool [GENERAL_OPTIONS]... update-hash-lookups [OPTIONS]...\n" +
+            "  Show brief or verbose (-v) contents of an SF3CHR, SF3CHP, CHR, CHP, or SF3Sprite\n" +
+            "    chrtool [GENERAL_OPTIONS]... describe [OPTIONS]... [file/path]...\n";
 
         public const string ErrorUsageString =
             "Try 'chrtool --help' for more information.\n";
@@ -50,9 +52,12 @@ namespace CHRTool {
             "  -d, --output-dir=<dir>    specify output path for all SF3CHR/SF3CHP file(s)\n" +
             "\n" +
             "'extract-sheets' Options:\n" +
-            "  -r, --replace             replaces the entire file rather than only update\n" +
+            "  (none)\n" +
             "\n" +
             "'update-hash-lookups' Options:\n" +
+            "  -r, --replace             replaces the entire file rather than only update\n" +
+            "\n" +
+            "'describe' Options:\n" +
             "  (none)\n";
 
         public static readonly Dictionary<string, CommandType> CommandKeywords = new() {
@@ -60,6 +65,7 @@ namespace CHRTool {
             { "decompile",           CommandType.Decompile },
             { "extract-sheets",      CommandType.ExtractSheets },
             { "update-hash-lookups", CommandType.UpdateHashLookups },
+            { "describe",            CommandType.Describe },
         };
     }
 }
