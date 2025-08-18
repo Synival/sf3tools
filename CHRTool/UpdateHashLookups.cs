@@ -34,75 +34,77 @@ namespace CHRTool {
             int totalFramesAdded = 0;
             try {
                 // Fetch all .SF3Sprite files
-                if (verbose) {
-                    Logger.WriteLine("Updating lookup hashes...");
-                    Logger.WriteLine("------------------------------------------------------------------------------");
-                    Logger.WriteLine("Getting list of SF3Sprites...");
-                }
-                var files = Directory.GetFiles(spriteDir, "*.SF3Sprite");
-
-                // Get the curent list of frame hash lookups.
-                if (!replaceFile) {
-                    if (!File.Exists(frameHashLookupsFile)) {
-                        if (verbose)
-                            Logger.WriteLine($"Couldn't find '{frameHashLookupsFile}' -- creating file from scratch");
-                    }
-                    else {
-                        if (verbose)
-                            Logger.WriteLine($"Loading '{frameHashLookupsFile}'...");
-                        SpriteResources.LoadFrameRefs();
-                    }
-                }
-                else if (verbose)
-                    Logger.WriteLine($"Replacing '{frameHashLookupsFile}'");
-
-                // Open SF3Sprite files and their accompanying spritesheets.
-                if (verbose) {
-                    Logger.WriteLine("------------------------------------------------------------------------------");
-                    Logger.WriteLine("Checking sprites for new frame hashes:");
-                }
-                foreach (var file in files) {
-                    Logger.Write($"Adding frame hashes from '{file}': ");
-                    try {
-                        var jsonText = File.ReadAllText(file);
-                        var spriteDef = SpriteDef.FromJSON(jsonText);
-
-                        (var framesAdded, var framesSkipped) = SpriteResources.AddFrameRefs(spriteDef);
-                        totalFramesAdded += framesAdded;
-
-                        if (framesSkipped > 0)
-                            Logger.WriteLine($"{framesAdded} new frame(s) added, {framesSkipped} frame(s) skipped");
-                        else if (framesAdded > 0)
-                            Logger.WriteLine($"{framesAdded} new frame(s) added");
-                        else
-                            Logger.WriteLine("no new frames");
-                    }
-                    catch (Exception e) {
-                        Logger.WriteLine(e.GetTypeAndMessage(), LogType.Error);
-                    }
-                }
-
                 if (verbose)
-                    Logger.WriteLine("------------------------------------------------------------------------------");
+                    Logger.WriteLine("Updating lookup hashes...");
+                using (Logger.IndentedSection(verbose ? 1 : 0)) {
+                    string[] files;
+                    if (verbose)
+                        Logger.WriteLine("Getting list of SF3Sprites...");
+                    using (Logger.IndentedSection(verbose ? 1 : 0)) {
+                        files = Directory.GetFiles(spriteDir, "*.SF3Sprite");
 
-                if (totalFramesAdded > 0) {
-                    Logger.WriteLine($"Writing '{frameHashLookupsFile}' ({totalFramesAdded} new frames)...");
-                    SpriteResources.WriteFrameRefsJSON();
+                        // Get the curent list of frame hash lookups.
+                        if (!replaceFile) {
+                            if (!File.Exists(frameHashLookupsFile)) {
+                                if (verbose)
+                                    Logger.WriteLine($"Couldn't find '{frameHashLookupsFile}' -- creating file from scratch");
+                            }
+                            else {
+                                if (verbose)
+                                    Logger.WriteLine($"Loading '{frameHashLookupsFile}'...");
+                                SpriteResources.LoadFrameRefs();
+                            }
+                        }
+                        else if (verbose)
+                            Logger.WriteLine($"Replacing '{frameHashLookupsFile}'");
+                    }
+
+                    // Open SF3Sprite files and their accompanying spritesheets.
+                    if (verbose)
+                        Logger.WriteLine("Checking sprites for new frame hashes:");
+                    using (Logger.IndentedSection(verbose ? 1 : 0)) {
+                        foreach (var file in files) {
+                            Logger.FinishLine();
+                            Logger.Write($"Adding frame hashes from '{file}': ");
+                            using (Logger.IndentedSection()) {
+                                try {
+                                    var jsonText = File.ReadAllText(file);
+                                    var spriteDef = SpriteDef.FromJSON(jsonText);
+
+                                    (var framesAdded, var framesSkipped) = SpriteResources.AddFrameRefs(spriteDef);
+                                    totalFramesAdded += framesAdded;
+
+                                    if (framesSkipped > 0)
+                                        Logger.Write($"{framesAdded} new frame(s) added, {framesSkipped} frame(s) skipped\n");
+                                    else if (framesAdded > 0)
+                                        Logger.Write($"{framesAdded} new frame(s) added\n");
+                                    else
+                                        Logger.Write("no new frames\n");
+                                }
+                                catch (Exception e) {
+                                    Logger.WriteLine(e.GetTypeAndMessage(), LogType.Error);
+                                }
+                            }
+                        }
+
+                        if (totalFramesAdded > 0) {
+                            Logger.WriteLine($"Writing '{frameHashLookupsFile}' ({totalFramesAdded} new frames)...");
+                            using (Logger.IndentedSection())
+                                SpriteResources.WriteFrameRefsJSON();
+                        }
+                        else
+                            Logger.WriteLine($"No new frames; not updating frame hash lookup file");
+                    }
                 }
-                else
-                    Logger.WriteLine($"No new frames; not updating frame hash lookup file");
             }
             catch (Exception e) {
-                if (verbose)
-                    Logger.WriteLine("------------------------------------------------------------------------------");
                 Logger.WriteLine(e.GetTypeAndMessage(), LogType.Error);
                 return 1;
             }
 
-            if (verbose) {
-                Logger.WriteLine("------------------------------------------------------------------------------");
+            if (verbose)
                 Logger.WriteLine($"Done");
-            }
+
             return 0;
         }
     }
