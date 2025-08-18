@@ -3,34 +3,44 @@ using CommonLib.Types;
 
 namespace CommonLib.Logging {
     public class ConsoleLogger : ILogger {
-        public void Write(string message, LogType logType = LogType.Info) {
-            ConsoleColor? color = null;
+        public void StartLine(LogType logType = LogType.Info) {
+            if (LogLineStarted == true)
+                return;
+            LogLineStarted = true;
 
             // Set color for warnings/errors
             if (logType == LogType.Warning)
-                color = ConsoleColor.Yellow;
+                _lastColor = ConsoleColor.Yellow;
             else if (logType == LogType.Error)
-                color = ConsoleColor.Red;
+                _lastColor = ConsoleColor.Red;
+            if (_lastColor.HasValue)
+                Console.ForegroundColor = _lastColor.Value;
 
-            bool addAnotherNewline = false;
-            if (color.HasValue) {
-                Console.ForegroundColor = color.Value;
-                if (message.EndsWith("\n")) {
-                    addAnotherNewline = true;
-                    message = message.Substring(0, message.Length - 1);
-                }
-            }
+            if (Indentation > 0)
+                Console.Write(new string(' ', Indentation * 2));
+        }
+
+        public void WriteOnLine(string message) {
+            if (LogLineStarted == false || message == null || message == "")
+                return;
             Console.Write(message);
+        }
 
-            // Reset color if set earlier
-            if (color.HasValue)
+        public void FinishLine() {
+            if (LogLineStarted == false)
+                return;
+
+            if (_lastColor.HasValue) {
                 Console.ResetColor();
-            if (addAnotherNewline == true)
-                Console.Write('\n');
+                _lastColor = null;
+            }
+            Console.WriteLine();
+            LogLineStarted = false;
         }
 
-        public void WriteLine(string message, LogType logType = LogType.Info) {
-            Write(message + "\n", logType);
-        }
+        public int Indentation { get; set; }
+        public bool LogLineStarted { get; private set; } = false;
+
+        private ConsoleColor? _lastColor = null;
     }
 }

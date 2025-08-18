@@ -6,17 +6,31 @@ namespace CommonLib.Logging {
     /// </summary>
     public interface ILogger {
         /// <summary>
-        /// Writes a message without a trailing newline.
+        /// Begins a new log line with a specific log type. Indentation and other line formatting is applied here.
+        /// Does nothing if the line has already been started.
         /// </summary>
-        /// <param name="message">Message to write.</param>
         /// <param name="logType">Type of message to write.</param>
-        void Write(string message, LogType logType = LogType.Info);
+        void StartLine(LogType logType = LogType.Info);
 
         /// <summary>
-        /// Writes a message with a trailing newline.
+        /// Appends to the current log line. Does nothing if a line has not been started.
         /// </summary>
         /// <param name="message">Message to write.</param>
-        /// <param name="logType">Type of message to write.</param>
-        void WriteLine(string message, LogType logType = LogType.Info);
+        void WriteOnLine(string message);
+
+        /// <summary>
+        /// Finishes the current log line. Does nothing if a line has not been started.
+        /// </summary>
+        void FinishLine();
+
+        /// <summary>
+        /// The amount of line indentation, in tabs.
+        /// </summary>
+        int Indentation { get; set; }
+
+        /// <summary>
+        /// When true, a log line has been started with StartLine().
+        /// </summary>
+        bool LogLineStarted { get; }
     }
 }
