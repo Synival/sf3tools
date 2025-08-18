@@ -40,34 +40,25 @@ namespace CHRTool {
             }
 
             // It looks like we're ready to go! Fetch the file data.
-            try {
-                if (verbose)
-                    Logger.WriteLine("Describing files:");
-
+            if (verbose)
+                Logger.WriteLine("Describing files:");
+            using (Logger.IndentedSection(verbose ? 1 : 0)) {
                 foreach (var file in files) {
-                    try {
-                        if (verbose)
-                            Logger.WriteLine("------------------------------------------------------------------------------");
-
-                        Logger.WriteLine($"{file}:");
-                        DescribeFile(file, verbose);
-                    }
-                    catch (Exception e) {
-                        Logger.LogException(e);
+                    Logger.WriteLine($"{file}:");
+                    using (Logger.IndentedSection()) {
+                        try {
+                            DescribeFile(file, verbose);
+                        }
+                        catch (Exception e) {
+                            Logger.LogException(e);
+                        }
                     }
                 }
             }
-            catch (Exception e) {
-                if (verbose)
-                    Logger.WriteLine("------------------------------------------------------------------------------");
-                Logger.LogException(e);
-                return 1;
-            }
 
-            if (verbose) {
-                Logger.WriteLine("------------------------------------------------------------------------------");
+            if (verbose)
                 Logger.WriteLine("Done");
-            }
+
             return 0;
         }
 
