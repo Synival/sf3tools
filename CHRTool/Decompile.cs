@@ -7,6 +7,7 @@ using CommonLib.Logging;
 using CommonLib.Types;
 using NDesk.Options;
 using SF3.ByteData;
+using SF3.CHR;
 using SF3.Models.Files.CHP;
 using SF3.Models.Files.CHR;
 using SF3.NamedValues;
@@ -66,35 +67,34 @@ namespace CHRTool {
 
             // It looks like we're ready to go! Fetch the file data.
             try {
-                if (verbose) {
+                if (verbose)
                     Logger.WriteLine("Decompiling to .SF3CHR(s) / SF3CHP(s)...");
-                    Logger.WriteLine("------------------------------------------------------------------------------");
-                }
-
-                foreach (var file in files) {
-                    try {
-                        DecompileFile(file, outputFile, outputDir, verbose, simplify);
-                    }
-                    catch (Exception e) {
-                        Logger.WriteLine(e.GetTypeAndMessage(), LogType.Error);
+                using (Logger.IndentedSection(verbose ? 1 : 0)) {
+                    foreach (var file in files) {
+                        try {
+                            var thisOutputFile = GetOutputFile(file, outputFile, outputDir);
+                            Logger.WriteLine($"Decompiling '{file}' to '{thisOutputFile}'...");
+                            using (Logger.IndentedSection())
+                                DecompileFile(file, thisOutputFile, outputDir, verbose, simplify);
+                        }
+                        catch (Exception e) {
+                            Logger.WriteLine(e.GetTypeAndMessage(), LogType.Error);
+                        }
                     }
                 }
             }
             catch (Exception e) {
-                if (verbose)
-                    Logger.WriteLine("------------------------------------------------------------------------------");
                 Logger.WriteLine(e.GetTypeAndMessage(), LogType.Error);
                 return 1;
             }
 
-            if (verbose) {
-                Logger.WriteLine("------------------------------------------------------------------------------");
+            if (verbose)
                 Logger.WriteLine("Done");
-            }
+
             return 0;
         }
 
-        private static void DecompileFile(string inputFile, string outputFile, string outputPath, bool verbose, bool simplify) {
+        private static string GetOutputFile(string inputFile, string outputFile, string outputPath) {
             var inputFilename = Path.GetFileName(inputFile);
 
             bool isChp = inputFilename.ToLower().EndsWith(".chp");
@@ -110,73 +110,91 @@ namespace CHRTool {
                 outputFile = Path.Combine(outputPath ?? Path.GetDirectoryName(inputFile), outputFilenameWithExtension);
             }
 
-            Logger.WriteLine($"Decompiling '{inputFile}' to '{outputFile}'...");
+            return outputFile;
+        }
+
+        private static void DecompileFile(string inputFile, string outputFile, string outputPath, bool verbose, bool simplify) {
+            bool isChp = inputFile.ToLower().EndsWith(".chp");
 
             // Try to create the output directory if it doesn't exist.
             outputPath = Path.GetDirectoryName(outputFile);
             if (outputPath != "" && !Directory.Exists(outputPath)) {
                 if (verbose)
                     Logger.WriteLine($"Creating path '{outputPath}'");
-                Directory.CreateDirectory(outputPath);
+                using (Logger.IndentedSection(verbose ? 1 : 0))
+                    Directory.CreateDirectory(outputPath);
             }
 
             // Fetch the data.
-            if (verbose) {
-                Logger.WriteLine("------------------------------------------------------------------------------");
+            byte[] inputBytes;
+            if (verbose)
                 Logger.WriteLine($"Loading data from '{inputFile}...");
-            }
-
-            byte[] inputBytes = null;
-            inputBytes = File.ReadAllBytes(inputFile);
+            using (Logger.IndentedSection(verbose ? 1 : 0))
+                inputBytes = File.ReadAllBytes(inputFile);
 
             string outputText = null;
             if (isChp) {
                 // Attempt to load it as a CHP_File.
+                CHP_File chpFile;
                 if (verbose)
                     Logger.WriteLine("Creating CHP_File...");
-                var nameGetterContext = new NameGetterContext(ScenarioType.Scenario1);
-                var chpFile = CHP_File.Create(new ByteData(new ByteArray(inputBytes)), nameGetterContext, ScenarioType.Scenario1);
+                using (Logger.IndentedSection(verbose ? 1 : 0)) {
+                    var nameGetterContext = new NameGetterContext(ScenarioType.Scenario1);
+                    chpFile = CHP_File.Create(new ByteData(new ByteArray(inputBytes)), nameGetterContext, ScenarioType.Scenario1);
+                }
 
                 // Get a CHR_Def from the CHR_File.
                 if (verbose)
                     Logger.WriteLine("Serializing to CHP_Def...");
-                var chpDef = chpFile.ToCHP_Def();
-                if (simplify) {
-                    foreach (var chrDef in chpDef.CHRsBySector.Values)
-                        foreach (var sprite in chrDef.Sprites)
-                            sprite.FrameGroupsForSpritesheets = null;
+                CHP_Def chpDef;
+                using (Logger.IndentedSection(verbose ? 1 : 0)) {
+                    chpDef = chpFile.ToCHP_Def();
+                    if (simplify) {
+                        foreach (var chrDef in chpDef.CHRsBySector.Values)
+                            foreach (var sprite in chrDef.Sprites)
+                                sprite.FrameGroupsForSpritesheets = null;
+                    }
                 }
 
                 // Serialize the file.
                 if (verbose)
                     Logger.WriteLine($"Converting to JSON file...");
-                outputText = chpDef.ToJSON_String();
+                using (Logger.IndentedSection(verbose ? 1 : 0))
+                    outputText = chpDef.ToJSON_String();
             }
             else {
                 // Attempt to load it as a CHR_File.
+                CHR_File chrFile;
                 if (verbose)
                     Logger.WriteLine("Creating CHR_File...");
-                var nameGetterContext = new NameGetterContext(ScenarioType.Scenario1);
-                var chrFile = CHR_File.Create(new ByteData(new ByteArray(inputBytes)), nameGetterContext, ScenarioType.Scenario1);
+                using (Logger.IndentedSection(verbose ? 1 : 0)) {
+                    var nameGetterContext = new NameGetterContext(ScenarioType.Scenario1);
+                    chrFile = CHR_File.Create(new ByteData(new ByteArray(inputBytes)), nameGetterContext, ScenarioType.Scenario1);
+                }
 
                 // Get a CHR_Def from the CHR_File.
+                CHR_Def chrDef;
                 if (verbose)
                     Logger.WriteLine("Serializing to CHR_Def...");
-                var chrDef = chrFile.ToCHR_Def();
-                if (simplify) {
-                    foreach (var sprite in chrDef.Sprites)
-                        sprite.FrameGroupsForSpritesheets = null;
+                using (Logger.IndentedSection(verbose ? 1 : 0)) {
+                    chrDef = chrFile.ToCHR_Def();
+                    if (simplify) {
+                        foreach (var sprite in chrDef.Sprites)
+                            sprite.FrameGroupsForSpritesheets = null;
+                    }
                 }
 
                 // Serialize the file.
                 if (verbose)
                     Logger.WriteLine($"Converting to JSON file...");
-                outputText = chrDef.ToJSON_String();
+                using (Logger.IndentedSection(verbose ? 1 : 0))
+                    outputText = chrDef.ToJSON_String();
             }
 
             if (verbose)
                 Logger.WriteLine($"Writing to '{outputFile}'...");
-            File.WriteAllText(outputFile, outputText);
+            using (Logger.IndentedSection(verbose ? 1 : 0))
+                File.WriteAllText(outputFile, outputText);
         }
 
     }
