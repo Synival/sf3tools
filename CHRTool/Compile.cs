@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using CommonLib;
 using CommonLib.Extensions;
 using CommonLib.Logging;
 using CommonLib.Types;
@@ -65,65 +66,64 @@ namespace CHRTool {
             }
 
             // Fetch any sprites we want to add. Make sure they're valid JObject's.
-            if (verbose && spritesToAdd.Count > 0) {
-                Logger.WriteLine("Loading JSON for sprites to add...");
-                Logger.WriteLine("------------------------------------------------------------------------------");
-            }
-            foreach (var spriteToAdd in spritesToAdd) {
-                try {
-                    Console.WriteLine($"Loading sprite to add '{spriteToAdd}'...");
-                    var text = File.ReadAllText(spriteToAdd);
-                    var jObj = JObject.Parse(text);
-
-                    // TODO: there's probably a much better way to do this...
-                    if (optimize)
-                        _ = jObj.Remove("Frames");
-
-                    if (verbose)
-                        Console.WriteLine("Converting to SpriteDef...");
-                    spritesToAddDefList.Add(SpriteDef.FromJToken(jObj));
-                }
-                catch (Exception e) {
-                    Logger.WriteLine("------------------------------------------------------------------------------");
-                    Logger.WriteLine(e.GetTypeAndMessage(), LogType.Error);
-                    return 1;
-                }
-            }
             if (verbose && spritesToAdd.Count > 0)
-                Logger.WriteLine("------------------------------------------------------------------------------");
+                Logger.WriteLine("Loading JSON for sprites to add...");
+            using (Logger.IndentedSection(verbose ? 1 : 0)) {
+                foreach (var spriteToAdd in spritesToAdd) {
+                    try {
+                        Console.WriteLine($"Loading sprite to add '{spriteToAdd}'...");
+                        using (Logger.IndentedSection()) {
+                            var text = File.ReadAllText(spriteToAdd);
+                            var jObj = JObject.Parse(text);
+
+                            // TODO: there's probably a much better way to do this...
+                            if (optimize)
+                                _ = jObj.Remove("Frames");
+
+                            if (verbose)
+                                Console.WriteLine("Converting to SpriteDef...");
+                            using (Logger.IndentedSection(verbose ? 1 : 0))
+                                spritesToAddDefList.Add(SpriteDef.FromJToken(jObj));
+                        }
+                    }
+                    catch (Exception e) {
+                        Logger.WriteLine(e.GetTypeAndMessage(), LogType.Error);
+                        return 1;
+                    }
+                }
+            }
             var spritesToAddDefs = spritesToAddDefList.ToArray();
 
             // It looks like we're ready to go! Fetch the file data.
             try {
-                if (verbose) {
+                if (verbose)
                     Logger.WriteLine("Compiling to .CHR(s) / CHP(s)...");
-                    Logger.WriteLine("------------------------------------------------------------------------------");
-                }
-
-                foreach (var file in files) {
-                    try {
-                        CompileFile(file, outputFile, outputDir, verbose, optimize, spritesToAddDefs);
-                    }
-                    catch (Exception e) {
-                        Logger.WriteLine(e.GetTypeAndMessage(), LogType.Error);
+                using (Logger.IndentedSection(verbose ? 1 : 0)) {
+                    foreach (var file in files) {
+                        try {
+                            var thisOutputFile = GetOutputFile(file, outputFile, outputDir);
+                            Logger.WriteLine($"Compiling '{file}' to '{thisOutputFile}'...");
+                            using (Logger.IndentedSection())
+                                CompileFile(file, thisOutputFile, outputDir, verbose, optimize, spritesToAddDefs);
+                        }
+                        catch (Exception e) {
+                            Logger.WriteLine(e.GetTypeAndMessage(), LogType.Error);
+                        }
                     }
                 }
             }
             catch (Exception e) {
-                if (verbose)
-                    Logger.WriteLine("------------------------------------------------------------------------------");
                 Logger.WriteLine(e.GetTypeAndMessage(), LogType.Error);
                 return 1;
             }
 
-            if (verbose) {
-                Logger.WriteLine("------------------------------------------------------------------------------");
+            if (verbose)
                 Logger.WriteLine("Done");
-            }
+
             return 0;
         }
 
-        private static void CompileFile(string inputFile, string outputFile, string outputPath, bool verbose, bool optimize, SpriteDef[] spritesToAdd) {
+        private static string GetOutputFile(string inputFile, string outputFile, string outputPath) {
             var inputFilename = Path.GetFileName(inputFile);
 
             bool isChp = inputFilename.ToLower().EndsWith(".sf3chp");
@@ -140,31 +140,40 @@ namespace CHRTool {
             }
             var outputFilename = Path.GetFileName(outputFile);
 
-            Logger.WriteLine($"Compiling '{inputFile}' to '{outputFile}'...");
+            return outputFile;
+        }
+
+        private static void CompileFile(string inputFile, string outputFile, string outputPath, bool verbose, bool optimize, SpriteDef[] spritesToAdd) {
+            bool isChp = inputFile.ToLower().EndsWith(".sf3chp");
 
             // Try to create the output directory if it doesn't exist.
             outputPath = Path.GetDirectoryName(outputFile);
             if (outputPath != "" && !Directory.Exists(outputPath)) {
                 if (verbose)
                     Logger.WriteLine($"Creating path '{outputPath}'");
-                Directory.CreateDirectory(outputPath);
+                using (Logger.IndentedSection(verbose ? 1 : 0))
+                    Directory.CreateDirectory(outputPath);
             }
 
             string inputText = null;
-            if (verbose) {
-                Logger.WriteLine("------------------------------------------------------------------------------");
+            if (verbose)
                 Logger.WriteLine($"Reading '{inputFile}...");
-            }
-            inputText = File.ReadAllText(inputFile);
+            using (Logger.IndentedSection(verbose ? 1 : 0))
+                inputText = File.ReadAllText(inputFile);
 
             byte[] outputData = null;
             if (isChp) {
                 // Attempt to deserialize.
+                CHP_Def chpDef;
                 if (verbose)
                     Logger.WriteLine("Deserializing to CHP_Def...");
-                var chpDef = CHP_Def.FromJSON(inputText);
-                if (chpDef == null)
-                    throw new NullReferenceException(); // eh, not really, but whatever
+                using (Logger.IndentedSection(verbose ? 1 : 0)) {
+                    chpDef = CHP_Def.FromJSON(inputText);
+                    if (chpDef == null) {
+                        Logger.WriteLine($"Failure during deserialization of '{inputFile}': null returned", LogType.Error);
+                        return;
+                    }
+                }
 
                 // Add sprites if requested
                 if (spritesToAdd?.Length >= 1) {
@@ -175,24 +184,30 @@ namespace CHRTool {
                 // We should have everything necessary to compile. Give it a go!
                 if (verbose)
                     Logger.WriteLine("Compiling...");
-                var chpCompiler = new CHP_Compiler() {
-                    OptimizeFrames            = optimize,
-                    AddMissingAnimationFrames = true,
-                };
+                using (Logger.IndentedSection(verbose ? 1 : 0)) {
+                    var chpCompiler = new CHP_Compiler() {
+                        OptimizeFrames            = optimize,
+                        AddMissingAnimationFrames = true,
+                    };
 
-                using (var memoryStream = new MemoryStream()) {
-                    chpCompiler.Compile(chpDef, memoryStream);
-                    outputData = memoryStream.ToArray();
+                    using (var memoryStream = new MemoryStream()) {
+                        chpCompiler.Compile(chpDef, memoryStream);
+                        outputData = memoryStream.ToArray();
+                    }
                 }
             }
             else {
                 // Attempt to deserialize.
+                CHR_Def chrDef = null;
                 if (verbose)
                     Logger.WriteLine("Deserializing to CHR_Def...");
-                CHR_Def chrDef = null;
-                chrDef = CHR_Def.FromJSON(inputText);
-                if (chrDef == null)
-                    throw new NullReferenceException(); // eh, not really, but whatever
+                using (Logger.IndentedSection(verbose ? 1 : 0)) {
+                    chrDef = CHR_Def.FromJSON(inputText);
+                    if (chrDef == null) {
+                        Logger.WriteLine($"Failure during deserialization of '{inputFile}': null returned", LogType.Error);
+                        return;
+                    }
+                }
 
                 // Add sprites if requested
                 if (spritesToAdd?.Length >= 1)
@@ -201,21 +216,24 @@ namespace CHRTool {
                 // We should have everything necessary to compile. Give it a go!
                 if (verbose)
                     Logger.WriteLine("Compiling...");
-                var chrCompiler = new CHR_Compiler() {
-                    OptimizeFrames            = optimize,
-                    AddMissingAnimationFrames = true,
-                };
+                using (Logger.IndentedSection(verbose ? 1 : 0)) {
+                    var chrCompiler = new CHR_Compiler() {
+                        OptimizeFrames            = optimize,
+                        AddMissingAnimationFrames = true,
+                    };
 
-                using (var memoryStream = new MemoryStream()) {
-                    chrCompiler.Compile(chrDef, memoryStream);
-                    outputData = memoryStream.ToArray();
+                    using (var memoryStream = new MemoryStream()) {
+                        chrCompiler.Compile(chrDef, memoryStream);
+                        outputData = memoryStream.ToArray();
+                    }
                 }
             }
 
             // Output the file.
             if (verbose)
                 Logger.WriteLine($"Writing to '{outputFile}'...");
-            File.WriteAllBytes(outputFile, outputData);
+            using (Logger.IndentedSection(verbose ? 1 : 0))
+                File.WriteAllBytes(outputFile, outputData);
         }
     }
 }
