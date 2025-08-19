@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using CommonLib;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using SF3.Types;
-using SF3.Utils;
 
 namespace SF3.CHR {
     public class FrameGroup : IJsonResource {
