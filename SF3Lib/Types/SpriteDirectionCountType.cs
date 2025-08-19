@@ -42,5 +42,8 @@ namespace SF3.Types {
 
         public static SpriteFrameDirection[] ToAnimationFrameDirections(this SpriteDirectionCountType directions)
             => CHR_Utils.GetFrameGroupDirections(directions.GetAnimationFrameCount());
+
+        public static SpriteFrameDirection[] ToSpritesheetDirections(this SpriteDirectionCountType directions)
+            => SpriteUtils.GetFrameGroupDirections(directions.GetAnimationFrameCount());
     }
 }

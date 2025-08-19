@@ -9,6 +9,7 @@ using SF3.CHR;
 using SF3.Models.Files.CHP;
 using SF3.Models.Files.CHR;
 using SF3.NamedValues;
+using SF3.Sprites;
 using SF3.Types;
 
 namespace CHRTool {
@@ -90,7 +91,7 @@ namespace CHRTool {
             foreach (var sprite in chrFile.SpriteTable) {
                 var header = sprite.Header;
                 var promotionLevelStr = (header.PromotionLevel == 0) ? "" : $", PromotionLevel={header.PromotionLevel}";
-                Logger.WriteLine($"[0x{sprite.IDInGroup:X2}] {sprite.SpriteName} (SpriteID=0x{header?.SpriteID:X2}, Size=({header?.Width}x{header?.Height}), Dirs={header?.Directions}{promotionLevelStr}):");
+                Logger.WriteLine($"[0x{sprite.IDInGroup:X2}] {sprite.SpriteName} (SpriteID=0x{header?.SpriteID:X2}, {header?.Width}x{header?.Height}, Dirs={(SpriteDirectionCountType) header?.Directions}{promotionLevelStr}):");
 
                 using (Logger.IndentedSection()) {
                     try {
@@ -107,9 +108,12 @@ namespace CHRTool {
                             Logger.WriteLine("No animation table", LogType.Warning);
                         else {
                             Logger.WriteLine("Animations:");
-                            using (Logger.IndentedSection())
-                                foreach (var animation in sprite.AnimationTable)
-                                    Logger.WriteLine($"[0x{animation.AnimationIndex:X2}]: {animation.SpriteName}.{animation.AnimationName}");
+                            using (Logger.IndentedSection()) {
+                                foreach (var animation in sprite.AnimationTable) {
+                                    var prefix = (animation.SpriteName != sprite.SpriteName) ? $"({animation.SpriteName}) " : "";
+                                    Logger.WriteLine($"[0x{animation.AnimationIndex:X2}]: {prefix}{animation.AnimationName}");
+                                }
+                            }
                         }
                     }
                     catch (Exception e) {
@@ -147,7 +151,7 @@ namespace CHRTool {
             int index = 0;
             foreach (var sprite in chrDef.Sprites) {
                 var promotionLevelStr = (sprite.PromotionLevel == 0) ? "" : $", PromotionLevel={sprite.PromotionLevel}";
-                Logger.WriteLine($"[0x{index++:X2}] {sprite.SpriteName} (SpriteID=0x{sprite.SpriteID:X2}, Size=({sprite.Width}x{sprite.Height}), Dirs={sprite.Directions}{promotionLevelStr}):");
+                Logger.WriteLine($"[0x{index++:X2}] {sprite.SpriteName} (SpriteID=0x{sprite.SpriteID:X2}, {sprite.Width}x{sprite.Height}, Dirs={sprite.Directions}{promotionLevelStr}):");
 
                 using (Logger.IndentedSection()) {
                     try {
@@ -156,23 +160,25 @@ namespace CHRTool {
                             using (Logger.IndentedSection()) {
                                 int frameIndex = 0;
                                 foreach (var fgss in sprite.FrameGroupsForSpritesheets) {
-                                    var sizeStr = (fgss.Width.HasValue && fgss.Height.HasValue) ? $", Size=({fgss.Width.Value}x{fgss.Height.Value})" : "";
-                                    var str = sizeStr;
-                                    str = str.Substring(Math.Min(str.Length, 2));
+                                    var spriteName = fgss.SpriteName ?? sprite.SpriteName;
+                                    var width  = fgss.Width  ?? sprite.Width;
+                                    var height = fgss.Height ?? sprite.Height;
 
-                                    if (str != "")
-                                        Logger.WriteLine(str);
-                                    using (Logger.IndentedSection((str != "") ? 1 : 0)) {
-                                        foreach (var frameGroup in fgss.FrameGroups ?? new FrameGroup[0]) {
-                                            if (frameGroup.Frames == null) {
-                                                var dirs = SpriteDirectionCountTypeExtensions.ToAnimationFrameDirections(sprite.Directions);
-                                                foreach (var dir in dirs)
-                                                    Logger.WriteLine($"[0x{frameIndex++:X2}, in group]: {fgss.SpriteName ?? sprite.SpriteName}.{frameGroup.Name} ({dir})");
-                                            }
-                                            else {
-                                                foreach (var frame in frameGroup.Frames)
-                                                    Logger.WriteLine($"[0x{frameIndex++:X2}, individual]: {fgss.SpriteName ?? sprite.SpriteName}.{frameGroup.Name} ({frame.Direction})");
-                                            }
+                                    var spriteStr = (spriteName != sprite.SpriteName) ? $", {sprite.SpriteName}" : "";
+                                    var sizeStr = (width != sprite.Width || height != sprite.Height) ? $", {width}x{height}" : "";
+                                    var prefix = spriteStr + sizeStr;
+
+                                    prefix = (prefix.Length > 0) ? $"({prefix.Substring(2)}) " : "";
+
+                                    foreach (var frameGroup in fgss.FrameGroups ?? new SF3.CHR.FrameGroup[0]) {
+                                        if (frameGroup.Frames == null) {
+                                            var dirs = SpriteDirectionCountTypeExtensions.ToAnimationFrameDirections(sprite.Directions);
+                                            foreach (var dir in dirs)
+                                                Logger.WriteLine($"[0x{frameIndex++:X2}, in group]: {prefix}{frameGroup.Name} ({dir})");
+                                        }
+                                        else {
+                                            foreach (var frame in frameGroup.Frames)
+                                                Logger.WriteLine($"[0x{frameIndex++:X2}, specific]: {prefix}{frameGroup.Name} ({frame.Direction})");
                                         }
                                     }
                                 }
@@ -186,16 +192,20 @@ namespace CHRTool {
                             using (Logger.IndentedSection()) {
                                 int animationIndex = 0;
                                 foreach (var assd in sprite.AnimationsForSpritesheetAndDirections) {
-                                    var sizeStr = (assd.Width.HasValue && assd.Height.HasValue) ? $", Size=({assd.Width.Value}x{assd.Height.Value})" : "";
-                                    var dirsStr = assd.Directions.HasValue ? $", Dirs=({assd.Directions.Value})" : "";
-                                    var str = sizeStr + dirsStr;
-                                    str = str.Substring(Math.Min(str.Length, 2));
+                                    var spriteName = assd.SpriteName ?? sprite.SpriteName;
+                                    var width  = assd.Width  ?? sprite.Width;
+                                    var height = assd.Height ?? sprite.Height;
+                                    var dirs = assd.Directions ?? sprite.Directions;
 
-                                    if (str != "")
-                                        Logger.WriteLine(str);
-                                    using (Logger.IndentedSection((str != "") ? 1 : 0)) {
-                                        foreach (var animation in assd.Animations ?? new string[0])
-                                            Logger.WriteLine($"[0x{animationIndex++:X2}]: {assd.SpriteName ?? sprite.SpriteName}.{animation}");
+                                    var spriteStr = (spriteName != sprite.SpriteName) ? $", {sprite.SpriteName}" : "";
+                                    var sizeStr = (width != sprite.Width || height != sprite.Height) ? $", {width}x{height}" : "";
+                                    var dirsStr = (dirs != sprite.Directions) ? $", Dirs={dirs}" : "";
+                                    var prefix = spriteStr + sizeStr + dirsStr;
+
+                                    prefix = (prefix.Length > 0) ? $"({prefix.Substring(2)}) " : "";
+
+                                    foreach (var animation in assd.Animations ?? new string[0]) {
+                                        Logger.WriteLine($"[0x{animationIndex++:X2}]: {prefix}{animation}");
                                     }
                                 }
                             }
@@ -229,6 +239,76 @@ namespace CHRTool {
         private static void DescribeSF3Sprite(string inputFile, bool verbose) {
             var text = File.ReadAllText(inputFile);
             var spriteDef = SF3.Sprites.SpriteDef.FromJSON(text);
+ 
+            var sizeStr = (spriteDef.Width.HasValue && spriteDef.Height.HasValue) ? $" (DefaultSize={spriteDef.Width.Value}x{spriteDef.Height.Value})" : "";
+            Logger.WriteLine($"{spriteDef.Name}{sizeStr}");
+            using (Logger.IndentedSection()) {
+                if ((spriteDef.Spritesheets?.Count ?? 0) == 0) {
+                    Logger.WriteLine("No spritesheets", LogType.Warning);
+                    return;
+                }
+
+                // TODO: more null checks
+                if (verbose) {
+                    Logger.WriteLine("Frames:");
+                    using (Logger.IndentedSection()) {
+                        var frames = spriteDef.Spritesheets
+                            .Select(x => (Size: Spritesheet.KeyToDimensions(x.Key), x.Value))
+                            .SelectMany(x => x.Value.FrameGroupsByName
+                                .SelectMany(y => y.Value.Frames
+                                    .Select(z => (x.Size.Width, x.Size.Height, Name: y.Key, Direction: z.Key))
+                                )
+                            )
+                            .ToArray();
+
+                        var frameGroups = frames
+                            .GroupBy(x => $"{x.Name} ({x.Width}x{x.Height})")
+                            .ToDictionary(x => x.Key, x => x.ToArray());
+
+                        bool IsCompleteGroup((int Width, int Height, string Name, SpriteFrameDirection Direction)[] frames) {
+                            var dirs = SpriteDirectionCountTypeExtensions.ToSpritesheetDirections((SpriteDirectionCountType) frames.Length);
+                            if (dirs.Length != frames.Length)
+                                return false;
+                            for (int i = 0; i < frames.Length; i++)
+                                if (frames[i].Direction != dirs[i])
+                                    return false;
+                            return true;
+                        }
+
+                        foreach (var frameGroupKv in frameGroups) {
+                            var frames2 = frameGroupKv.Value;
+                            var width   = frames2[0].Width;
+                            var height  = frames2[0].Height;
+                            var frameSizeStr = (width != spriteDef.Width || height != spriteDef.Height) ? $"({width}x{height}) " : "";
+
+                            if (IsCompleteGroup(frameGroupKv.Value))
+                                Logger.WriteLine($"{frameSizeStr}{frames2[0].Name} (Dirs={(SpriteDirectionCountType) frames2.Length})");
+                            else {
+                                foreach (var frame in frames2)
+                                    Logger.WriteLine($"{frameSizeStr}{frame.Name} ({frame.Direction})");
+                            }
+                        }
+                    }
+                }
+
+                // TODO: more null checks
+                Logger.WriteLine("Animations:");
+                using (Logger.IndentedSection()) {
+                    var animations = spriteDef.Spritesheets
+                        .Select(x => (Size: Spritesheet.KeyToDimensions(x.Key), x.Value))
+                        .SelectMany(x => x.Value.AnimationSetsByDirections
+                            .SelectMany(y => y.Value.AnimationsByName
+                                .Select(z => (x.Size.Width, x.Size.Height, Directions: y.Key, Name: z.Key))
+                            )
+                        )
+                        .ToArray();
+
+                    foreach (var ani in animations) {
+                        var aniSizeStr = (ani.Width != spriteDef.Width || ani.Height != spriteDef.Height) ? $"{ani.Width}x{ani.Height}, " : "";
+                        Logger.WriteLine($"({aniSizeStr}Dirs={ani.Directions}) {ani.Name}");
+                    }
+                }
+            }
         }
 
         private static void DescribeSF3CHRSprite(string inputFile, bool verbose) {
