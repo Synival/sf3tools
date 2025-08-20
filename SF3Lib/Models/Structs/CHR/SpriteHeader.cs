@@ -47,8 +47,8 @@ namespace SF3.Models.Structs.CHR {
                 Height < 0x0200 &&
                 Width  >      0 &&
                 Height >      0 &&
-                FrameTableOffset < 0x80000 &&
-                AnimationTableOffset < 0x80000 &&
+                FrameTableOffset < 0xC0000 &&
+                AnimationTableOffset < 0xC0000 &&
                 Scale > 0x00500 &&
                 Scale < 0x30000 &&
                 Directions > 0
