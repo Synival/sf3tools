@@ -365,6 +365,7 @@ namespace SF3.Sprites {
                 AddAnimationRefs(spriteName);
 
             if (!s_animationRefsByHash.ContainsKey(animationHash.ToLower())) {
+                Logger.WriteLine($"{nameof(GetAnimationRefByImageHash)}(): Can't find animation '{spriteName}.{animationHash}'", LogType.Error);
                 s_animationRefsByHash[animationHash] = new AnimationRef() {
                     AnimationHash = animationHash,
                     SpriteName = "(Unknown)",
@@ -475,7 +476,7 @@ namespace SF3.Sprites {
                             if (s_uniqueFrameRefs.TryGetValue(frameRef.ToString(), out var frameDefOut))
                                 hashes += $"({frameDefOut.ImageHash})";
                             else
-                                hashes += $"(missing:{frameDefOut.ToString()})";
+                                hashes += $"(missing:{frameRef.ToString()})";
                         }
                     }
 
