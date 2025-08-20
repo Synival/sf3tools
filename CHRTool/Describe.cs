@@ -97,7 +97,7 @@ namespace CHRTool {
                     try {
                         if (sprite.FrameTable == null)
                             Logger.WriteLine("No frame table", LogType.Warning);
-                        else if (verbose) {
+                        else {
                             Logger.WriteLine("Frames:");
                             using (Logger.IndentedSection()) {
                                 var frameCount = sprite.FrameTable.Length;
@@ -222,7 +222,7 @@ namespace CHRTool {
 
             using (Logger.IndentedSection()) {
                 try {
-                    if (verbose && sprite.FrameGroupsForSpritesheets != null) {
+                    if (sprite.FrameGroupsForSpritesheets != null) {
                         Logger.WriteLine("Frames:");
                         using (Logger.IndentedSection()) {
                             int frameIndex = 0;
@@ -238,14 +238,11 @@ namespace CHRTool {
                                 prefix = (prefix.Length > 0) ? $"({prefix.Substring(2)}) " : "";
 
                                 foreach (var frameGroup in fgss.FrameGroups ?? new SF3.CHR.FrameGroup[0]) {
-                                    if (frameGroup.Frames == null) {
-                                        var dirs = SpriteDirectionCountTypeExtensions.ToAnimationFrameDirections(sprite.Directions);
-                                        foreach (var dir in dirs)
-                                            Logger.WriteLine($"[0x{frameIndex++:X2}, in group]: {prefix}{frameGroup.Name} ({dir})");
-                                    }
+                                    if (frameGroup.Frames == null)
+                                        Logger.WriteLine($"[0x{frameIndex++:X2}]: {prefix}{frameGroup.Name} (Dirs={sprite.Directions})");
                                     else {
                                         foreach (var frame in frameGroup.Frames)
-                                            Logger.WriteLine($"[0x{frameIndex++:X2}, specific]: {prefix}{frameGroup.Name} ({frame.Direction})");
+                                            Logger.WriteLine($"[0x{frameIndex++:X2}]: {prefix}{frameGroup.Name} ({frame.Direction})");
                                     }
                                 }
                             }
@@ -315,44 +312,42 @@ namespace CHRTool {
                 }
 
                 // TODO: more null checks
-                if (verbose) {
-                    Logger.WriteLine("Frames:");
-                    using (Logger.IndentedSection()) {
-                        var frames = spriteDef.Spritesheets
-                            .Select(x => (Size: Spritesheet.KeyToDimensions(x.Key), x.Value))
-                            .SelectMany(x => x.Value.FrameGroupsByName
-                                .SelectMany(y => y.Value.Frames
-                                    .Select(z => (x.Size.Width, x.Size.Height, Name: y.Key, Direction: z.Key))
-                                )
+                Logger.WriteLine("Frames:");
+                using (Logger.IndentedSection()) {
+                    var frames = spriteDef.Spritesheets
+                        .Select(x => (Size: Spritesheet.KeyToDimensions(x.Key), x.Value))
+                        .SelectMany(x => x.Value.FrameGroupsByName
+                            .SelectMany(y => y.Value.Frames
+                                .Select(z => (x.Size.Width, x.Size.Height, Name: y.Key, Direction: z.Key))
                             )
-                            .ToArray();
+                        )
+                        .ToArray();
 
-                        var frameGroups = frames
-                            .GroupBy(x => $"{x.Name} ({x.Width}x{x.Height})")
-                            .ToDictionary(x => x.Key, x => x.ToArray());
+                    var frameGroups = frames
+                        .GroupBy(x => $"{x.Name} ({x.Width}x{x.Height})")
+                        .ToDictionary(x => x.Key, x => x.ToArray());
 
-                        bool IsCompleteGroup((int Width, int Height, string Name, SpriteFrameDirection Direction)[] frames) {
-                            var dirs = SpriteDirectionCountTypeExtensions.ToSpritesheetDirections((SpriteDirectionCountType) frames.Length);
-                            if (dirs.Length != frames.Length)
+                    bool IsCompleteGroup((int Width, int Height, string Name, SpriteFrameDirection Direction)[] frames) {
+                        var dirs = SpriteDirectionCountTypeExtensions.ToSpritesheetDirections((SpriteDirectionCountType) frames.Length);
+                        if (dirs.Length != frames.Length)
+                            return false;
+                        for (int i = 0; i < frames.Length; i++)
+                            if (frames[i].Direction != dirs[i])
                                 return false;
-                            for (int i = 0; i < frames.Length; i++)
-                                if (frames[i].Direction != dirs[i])
-                                    return false;
-                            return true;
-                        }
+                        return true;
+                    }
 
-                        foreach (var frameGroupKv in frameGroups) {
-                            var frames2 = frameGroupKv.Value;
-                            var width   = frames2[0].Width;
-                            var height  = frames2[0].Height;
-                            var frameSizeStr = (width != spriteDef.Width || height != spriteDef.Height) ? $"({width}x{height}) " : "";
+                    foreach (var frameGroupKv in frameGroups) {
+                        var frames2 = frameGroupKv.Value;
+                        var width   = frames2[0].Width;
+                        var height  = frames2[0].Height;
+                        var frameSizeStr = (width != spriteDef.Width || height != spriteDef.Height) ? $"({width}x{height}) " : "";
 
-                            if (IsCompleteGroup(frameGroupKv.Value))
-                                Logger.WriteLine($"{frameSizeStr}{frames2[0].Name} (Dirs={(SpriteDirectionCountType) frames2.Length})");
-                            else {
-                                foreach (var frame in frames2)
-                                    Logger.WriteLine($"{frameSizeStr}{frame.Name} ({frame.Direction})");
-                            }
+                        if (IsCompleteGroup(frameGroupKv.Value))
+                            Logger.WriteLine($"{frameSizeStr}{frames2[0].Name} (Dirs={(SpriteDirectionCountType) frames2.Length})");
+                        else {
+                            foreach (var frame in frames2)
+                                Logger.WriteLine($"{frameSizeStr}{frame.Name} ({frame.Direction})");
                         }
                     }
                 }
