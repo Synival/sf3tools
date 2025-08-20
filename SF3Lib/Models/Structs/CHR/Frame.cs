@@ -1,13 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using CommonLib.Attributes;
 using CommonLib.Extensions;
 using CommonLib.Utils;
 using SF3.ByteData;
 using SF3.Sprites;
 using SF3.Types;
-using SF3.Utils;
 
 namespace SF3.Models.Structs.CHR {
     public class Frame : Struct {
@@ -58,7 +56,7 @@ namespace SF3.Models.Structs.CHR {
 
         [TableViewModelColumn(displayOrder: -0.25f, minWidth: 175)]
         public string SpriteName
-            => FrameRefs.GetAggergateSpriteName();
+            => FrameRefs?.GetAggergateSpriteName();
 
         [TableViewModelColumn(displayOrder: -0.2f)]
         public int Width { get; private set; }
@@ -68,11 +66,11 @@ namespace SF3.Models.Structs.CHR {
 
         [TableViewModelColumn(displayOrder: 0, minWidth: 200)]
         public string FrameName
-            => FrameRefs.GetAggregateFrameGroupName();
+            => FrameRefs?.GetAggregateFrameGroupName();
 
         [TableViewModelColumn(displayOrder: 0.1f)]
         public SpriteFrameDirection Direction
-            => FrameRefs.GetUniqueFrameDirection() ?? SpriteFrameDirection.Unset;
+            => FrameRefs?.GetUniqueFrameDirection() ?? SpriteFrameDirection.Unset;
 
         [TableViewModelColumn(displayOrder: 0.2f, addressField: nameof(_textureOffsetAddr), displayFormat: "X4")]
         [BulkCopy]

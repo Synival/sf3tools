@@ -297,7 +297,12 @@ namespace SF3.Sprites {
         public static FrameRefSet GetFrameRefsByImageHash(string imageHash) {
             if (!s_frameRefsLoaded)
                 LoadFrameRefs();
-            return s_frameRefsByImageHash.TryGetValue(imageHash, out var frames) ? frames : new FrameRefSet(imageHash);
+            if (s_frameRefsByImageHash.TryGetValue(imageHash, out var frames))
+                return frames;
+            else {
+                Logger.WriteLine($"{nameof(GetFrameRefsByImageHash)}(): Can't find frame by hash '{imageHash}'", LogType.Error);
+                return new FrameRefSet(imageHash);
+            }
         }
 
         /// <summary>
@@ -313,11 +318,11 @@ namespace SF3.Sprites {
 
             var spriteDef = GetSpriteDef(spriteName);
             if (spriteDef == null) {
-                Logger.WriteLine($"Can't add animation refs for sprite '{spriteName}': sprite was not found");
+                Logger.WriteLine($"{nameof(AddAnimationRefs)}(): Can't add animation refs for sprite '{spriteName}': sprite was not found");
                 return 0;
             }
             if (spriteDef.Spritesheets == null) {
-                Logger.WriteLine($"Can't add animation refs for sprite '{spriteName}': SpriteDef has no spritesheets");
+                Logger.WriteLine($"{nameof(AddAnimationRefs)}(): Can't add animation refs for sprite '{spriteName}': SpriteDef has no spritesheets");
                 return 0;
             }
 
