@@ -100,9 +100,62 @@ namespace CHRTool {
                         else if (verbose) {
                             Logger.WriteLine("Frames:");
                             using (Logger.IndentedSection()) {
-                                // TODO: fancy grouping algoithm
-                                foreach (var frame in sprite.FrameTable)
-                                    Logger.WriteLine($"[0x{frame.ID:X2}]: {frame.SpriteName}.{frame.FrameName} ({frame.Direction})");
+                                var frameCount = sprite.FrameTable.Length;
+
+                                // Function to label frames that are in sequence of a frame group.
+                                var dirCounts = new int[frameCount];
+                                void GroupFrames(int dirCount) {
+                                    var expectedDirs = SpriteDirectionCountTypeExtensions.ToAnimationFrameDirections((SpriteDirectionCountType) dirCount);
+                                    var nextExpectedDirIndex = 0;
+                                    string expectedName = null;
+
+                                    for (int i = 0; i < frameCount; i++) {
+                                        var frame = sprite.FrameTable[i];
+                                        var frameName = $"{frame.SpriteName}.{frame.FrameName}";
+
+                                        // Reset the search state if we have a negative match.
+                                        if (dirCounts[i] != 0 || frame.Direction != expectedDirs[nextExpectedDirIndex] || (expectedName != null && frameName != expectedName)) {
+                                            nextExpectedDirIndex = 0;
+                                            expectedName = null;
+                                        }
+
+                                        // If starting a new group, make sure it's the correct first direction. Remember the name for future frame matches.
+                                        if (nextExpectedDirIndex == 0) {
+                                            if (frame.Direction != expectedDirs[nextExpectedDirIndex])
+                                                continue;
+                                            else
+                                                expectedName = frameName;
+                                        }
+
+                                        // If we've reached the end, then we've found a group; label it accordingly and reset the search state.
+                                        if (++nextExpectedDirIndex == dirCount) {
+                                            for (int j = i; j > i - dirCount; j--)
+                                                dirCounts[j] = dirCount;
+                                            nextExpectedDirIndex = 0;
+                                            expectedName = null;
+                                        }
+                                    }
+                                }
+
+                                // Label in order from most frames-in-group to least to avoid redundant checks for frame groups
+                                // that exist inside one another (e.g, 4 directions inside of 6 or 8 directions)
+                                GroupFrames(8);
+                                GroupFrames(6);
+                                GroupFrames(5);
+                                GroupFrames(4);
+                                GroupFrames(2);
+                                GroupFrames(1);
+
+                                for (int frameIndex = 0; frameIndex < frameCount; ++frameIndex) {
+                                    var frame = sprite.FrameTable[frameIndex];
+                                    var dirCount = dirCounts[frameIndex];
+                                    if (dirCount <= 1)
+                                        Logger.WriteLine($"[0x{frameIndex:X2}]: {frame.SpriteName}.{frame.FrameName} ({frame.Direction})");
+                                    else {
+                                        Logger.WriteLine($"[0x{frameIndex:X2} - 0x{frameIndex + dirCount - 1:X2}]: {frame.SpriteName}.{frame.FrameName} (Dirs={(SpriteDirectionCountType) dirCount})");
+                                        frameIndex += dirCount - 1;
+                                    }
+                                }
                             }
                         }
 
