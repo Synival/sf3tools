@@ -1929,19 +1929,7 @@
     <Content Include="Resources\Sprites\Slash Bat.SF3Sprite">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\Sprites\Small Icons (Scn1 Alt).SF3Sprite">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Sprites\Small Icons (Scn1).SF3Sprite">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Sprites\Small Icons (Scn1+).SF3Sprite">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Sprites\Small Icons (Scn2+).SF3Sprite">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Sprites\Small Icons (Scn3+).SF3Sprite">
+    <Content Include="Resources\Sprites\Small Icons.SF3Sprite">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Sprites\Small Poof of Brown Smoke.SF3Sprite">
