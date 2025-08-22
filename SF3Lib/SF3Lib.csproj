@@ -1425,6 +1425,9 @@
     <Content Include="Resources\Sprites\Masked Mage (Green).SF3Sprite">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\Sprites\Masked Mage (Black).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\Sprites\Masked Mage (Grey).SF3Sprite">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -1473,10 +1476,13 @@
     <Content Include="Resources\Sprites\Masked Pegasus.SF3Sprite">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\Sprites\Masked Priest (Red) w_ Ankh.SF3Sprite">
+    <Content Include="Resources\Sprites\Masked Priest (Red).SF3Sprite">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\Sprites\Masked Priest (White) w_ Ankh.SF3Sprite">
+    <Content Include="Resources\Sprites\Masked Priest (White).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sprites\Masked Priest (Aquamarine).SF3Sprite">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Sprites\Masked Priest Carrying Domaric.SF3Sprite">
