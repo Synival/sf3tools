@@ -59,8 +59,8 @@ namespace SF3.Models.Structs.Shared {
             public double[] AtPercentages { get; }
         }
 
-        public class StatDataPoint {
-            public StatDataPoint(int level, Dictionary<StatType, double> stats) {
+        public class StatsAtLevel {
+            public StatsAtLevel(int level, Dictionary<StatType, double> stats) {
                 Level = level;
                 Stats = stats;
             }
@@ -69,8 +69,8 @@ namespace SF3.Models.Structs.Shared {
             public Dictionary<StatType, double> Stats { get; }
         }
 
-        public class ProbableStatsDataPoint {
-            public ProbableStatsDataPoint(int level, Dictionary<StatType, ProbableStats> probableStats) {
+        public class ProbableStatsAtLevel {
+            public ProbableStatsAtLevel(int level, Dictionary<StatType, ProbableStats> probableStats) {
                 Level = level;
                 ProbableStats = probableStats;
             }
@@ -96,22 +96,17 @@ namespace SF3.Models.Structs.Shared {
         }
 
         public Stats Stats { get; }
-        public StatDataPoint[] TargetStatsDataPoints { get; private set; }
-        public ProbableStatsDataPoint[] ProbableStatsDataPoints { get; private set; }
+        public Dictionary<int, StatsAtLevel> TargetStatsByLevel { get; private set; }
+        public Dictionary<int, ProbableStatsAtLevel> ProbableStatsByLevel { get; private set; }
 
         public void Recalc() {
             // Data points for the chart.
-            var targetStatDataPoints = new List<StatDataPoint>();
-            var probableStatsDataPoints = new List<ProbableStatsDataPoint>();
+            var targetStatsAtLevels = new List<StatsAtLevel>();
+            var probableStatsAtLevel = new List<ProbableStatsAtLevel>();
 
             // We'll need to use some different values depending on the promotion level.
             var promotionLevel = (int) Stats.PromotionLevel;
             var isPromoted = Stats.IsPromoted;
-
-            // Default axis ranges.
-            // NOTE: The actual stat gain caps at (30, 99, 99).
-            //       This is different from level gains, which are (20, 99, 99).
-            var maxValue = promotionLevel == 0 ? 50 : promotionLevel == 1 ? 100 : 200;
 
             // Function to convert a ProbableValueSet to a ProbableStatsDict.
             Dictionary<StatType, ProbableStats> GetProbableStats(Dictionary<StatType, ProbableValueSet> pvs, Dictionary<StatType, double> targets)
@@ -122,9 +117,8 @@ namespace SF3.Models.Structs.Shared {
             foreach (var statType in (StatType[]) Enum.GetValues(typeof(StatType))) {
                 var targetStat = GetStatGrowthRange(statType, 0).Begin;
                 startStatValues.Add(statType, targetStat);
-                maxValue = Math.Max(maxValue, targetStat);
             }
-            targetStatDataPoints.Add(new StatDataPoint(1, startStatValues));
+            targetStatsAtLevels.Add(new StatsAtLevel(1, startStatValues));
 
             // Get initial probable stats for level 1 (which are the same as startStatValues).
             var currentProbableStatValues = new Dictionary<StatType, ProbableValueSet>();
@@ -134,7 +128,7 @@ namespace SF3.Models.Structs.Shared {
                 };
             }
 
-            probableStatsDataPoints.Add(new ProbableStatsDataPoint(1, GetProbableStats(currentProbableStatValues, startStatValues)));
+            probableStatsAtLevel.Add(new ProbableStatsAtLevel(1, GetProbableStats(currentProbableStatValues, startStatValues)));
 
             // Populate data points for all stat growth groups, until the max level.
             foreach (var statGrowthGroup in GrowthStats.StatGrowthGroups[isPromoted]) {
@@ -143,14 +137,13 @@ namespace SF3.Models.Structs.Shared {
                 foreach (var statType in (StatType[]) Enum.GetValues(typeof(StatType))) {
                     var targetStat = GetStatGrowthRange(statType, statGrowthGroup.GroupIndex).End;
                     statValues.Add(statType, targetStat);
-                    maxValue = Math.Max(maxValue, targetStat);
                 }
-                targetStatDataPoints.Add(new StatDataPoint(statGrowthGroup.Range.End, statValues));
+                targetStatsAtLevels.Add(new StatsAtLevel(statGrowthGroup.Range.End, statValues));
 
                 // Add probable stat values for every level in this stat growth group.
                 for (var lv = statGrowthGroup.Range.Begin + 1; lv <= statGrowthGroup.Range.End; lv++) {
-                    var lowPoint = targetStatDataPoints.Last(x => x.Level <= lv);
-                    var highPoint = targetStatDataPoints.First(x => x.Level >= lv);
+                    var lowPoint = targetStatsAtLevels.Last(x => x.Level <= lv);
+                    var highPoint = targetStatsAtLevels.First(x => x.Level >= lv);
 
                     Dictionary<StatType, double> targetStats;
                     if (lowPoint == highPoint || lv == lowPoint.Level)
@@ -174,15 +167,15 @@ namespace SF3.Models.Structs.Shared {
                             { val + guaranteedGrowth + 1, plusOneProbability }
                         });
                     }
-                    probableStatsDataPoints.Add(new ProbableStatsDataPoint(lv, GetProbableStats(currentProbableStatValues, targetStats)));
+                    probableStatsAtLevel.Add(new ProbableStatsAtLevel(lv, GetProbableStats(currentProbableStatValues, targetStats)));
                 }
             }
 
-            TargetStatsDataPoints   = targetStatDataPoints.ToArray();
-            ProbableStatsDataPoints = probableStatsDataPoints.ToArray();
+            TargetStatsByLevel = targetStatsAtLevels.ToDictionary(x => x.Level, x => x);
+            ProbableStatsByLevel = probableStatsAtLevel.ToDictionary(x => x.Level, x => x);
         }
 
-        public ValueRange<int> GetStatGrowthRange(StatType stat, int groupIndex) {
+        private ValueRange<int> GetStatGrowthRange(StatType stat, int groupIndex) {
             switch (stat) {
                 case StatType.HP:
                     switch (groupIndex) {
@@ -249,12 +242,12 @@ namespace SF3.Models.Structs.Shared {
             }
         }
 
-        public double GetAverageStatGrowthPerLevel(StatType stat, int groupIndex) {
+        private double GetAverageStatGrowthPerLevel(StatType stat, int groupIndex) {
             var growthValue = GrowthStats.GetStatGrowthValuePerLevel(GetStatGrowthRange(stat, groupIndex).Range, GrowthStats.StatGrowthGroups[Stats.IsPromoted][groupIndex].Range.Range);
             return GrowthStats.GetAverageStatGrowthPerLevel(growthValue);
         }
 
-        public string GetAverageStatGrowthPerLevelAsPercent(StatType stat, int groupIndex) {
+        private string GetAverageStatGrowthPerLevelAsPercent(StatType stat, int groupIndex) {
             var growthValue = GrowthStats.GetStatGrowthValuePerLevel(GetStatGrowthRange(stat, groupIndex).Range, GrowthStats.StatGrowthGroups[Stats.IsPromoted][groupIndex].Range.Range);
             return (DebugGrowthValues ? string.Format("{0:x}", growthValue) + " || " : "") +
                     GrowthStats.GetAverageStatGrowthPerLevelAsPercent(growthValue);

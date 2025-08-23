@@ -53,7 +53,7 @@ namespace SF3.Win.Controls {
             // Do nothing if the position is unchanged or no data is available.
             var pos = e.Location;
             var statistics = GetCurerntGrowthStatistics();
-            if (_lastMousePos.HasValue && pos == _lastMousePos.Value || statistics?.ProbableStatsDataPoints == null)
+            if (_lastMousePos.HasValue && pos == _lastMousePos.Value || statistics?.ProbableStatsByLevel == null)
                 return;
             _lastMousePos = pos;
 
@@ -120,9 +120,9 @@ namespace SF3.Win.Controls {
 
             var x0 = dataPoint.ChartArea.AxisX.ValueToPixelPosition(0.0);
             var xSpan = dataPoint.ChartArea.AxisX.ValueToPixelPosition(1.0) - dataPoint.ChartArea.AxisX.ValueToPixelPosition(0.0);
-            var pointIndex = Math.Max(0, pos.X < x0 + xSpan * ( dataPoint.PointIndex + 0.5) ? dataPoint.PointIndex - 1 : dataPoint.PointIndex);
+            var pointIndex = Math.Max(0, pos.X < x0 + xSpan * (dataPoint.PointIndex + 0.5) ? dataPoint.PointIndex - 1 : dataPoint.PointIndex);
 
-            var probableStats = statistics.ProbableStatsDataPoints[pointIndex];
+            var probableStats = statistics.ProbableStatsByLevel.Values.ToArray()[pointIndex];
             var tooltipText = probableStats.MakeReport((StatType) stat);
             var tooltipX = (int) dataPoint.ChartArea.AxisX.ValueToPixelPosition(probableStats.Level);
             var tooltipY = (int) dataPoint.ChartArea.AxisY.ValueToPixelPosition(probableStats.ProbableStats[(StatType) stat].Likely);
@@ -148,8 +148,8 @@ namespace SF3.Win.Controls {
             var isPromoted     = promotionLevel >= 1;
             var maxLevel       = isPromoted ? 40 : 20;
             var maxValue       = promotionLevel == 0 ? 50 : promotionLevel == 1 ? 100 : 200;
-            var targetStats    = statistics?.TargetStatsDataPoints ?? [];
-            var probableStats  = statistics?.ProbableStatsDataPoints ?? [];
+            var targetStats    = statistics?.TargetStatsByLevel?.Values?.ToArray() ?? [];
+            var probableStats  = statistics?.ProbableStatsByLevel?.Values?.ToArray() ?? [];
 
             CurveGraph.ChartAreas[0].AxisX.Minimum  = 0;
             CurveGraph.ChartAreas[0].AxisX.Maximum  = maxLevel;
