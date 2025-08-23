@@ -14,8 +14,8 @@ namespace SF3.Win.Views {
                 return null;
 
             var ngc = NameGetterContext;
-            CreateChild(new TableView("Growth Table", Model, ngc));
             CreateChild(new StatGrowthChartView("Growth Graph", Model));
+            CreateChild(new TableView("Growth Curve Calc", Model, ngc, displayGroups: ["Metadata", "CurveCalc"]));
 
             return Control;
         }

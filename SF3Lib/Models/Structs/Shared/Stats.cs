@@ -2,16 +2,10 @@ using System;
 using CommonLib.Attributes;
 using CommonLib.Statistics;
 using SF3.ByteData;
-using SF3.Statistics;
 using SF3.Types;
 
 namespace SF3.Models.Structs.Shared {
     public class Stats : Struct {
-        /// <summary>
-        /// When enabled, GetAverageStatGrowthPerLevelAsPercent() will show the "growthValue" in its output
-        /// </summary>
-        public static bool DebugGrowthValues { get; set; } = false;
-
         public enum PromotionLevelType {
             Unpromoted = 0,
             Promotion1 = 1,
@@ -308,114 +302,6 @@ namespace SF3.Models.Structs.Shared {
                        chClass < 0x48 ? PromotionLevelType.Promotion1 :
                                         PromotionLevelType.Promotion2;
             }
-        }
-
-        public ValueRange<int> GetStatGrowthRange(StatType stat, int groupIndex) {
-            switch (stat) {
-                case StatType.HP:
-                    switch (groupIndex) {
-                        case 0:
-                            return new ValueRange<int>(HPCurve1, HPCurve5);
-                        case 1:
-                            return new ValueRange<int>(HPCurve5, HPCurve10);
-                        case 2:
-                            return new ValueRange<int>(HPCurve10, HPCurve12_15);
-                        case 3:
-                            return new ValueRange<int>(HPCurve12_15, HPCurve14_20);
-                        case 4:
-                            return new ValueRange<int>(HPCurve14_20, HPCurve17_30);
-                        case 5:
-                            return new ValueRange<int>(HPCurve17_30, HPCurve30_99);
-                        default:
-                            throw new ArgumentOutOfRangeException();
-                    }
-
-                case StatType.MP:
-                    switch (groupIndex) {
-                        case 0:
-                            return new ValueRange<int>(MPCurve1, MPCurve5);
-                        case 1:
-                            return new ValueRange<int>(MPCurve5, MPCurve10);
-                        case 2:
-                            return new ValueRange<int>(MPCurve10, MPCurve12_15);
-                        case 3:
-                            return new ValueRange<int>(MPCurve12_15, MPCurve14_20);
-                        case 4:
-                            return new ValueRange<int>(MPCurve14_20, MPCurve17_30);
-                        case 5:
-                            return new ValueRange<int>(MPCurve17_30, MPCurve30_99);
-                        default:
-                            throw new ArgumentOutOfRangeException();
-                    }
-
-                case StatType.Atk:
-                    switch (groupIndex) {
-                        case 0:
-                            return new ValueRange<int>(AtkCurve1, AtkCurve5);
-                        case 1:
-                            return new ValueRange<int>(AtkCurve5, AtkCurve10);
-                        case 2:
-                            return new ValueRange<int>(AtkCurve10, AtkCurve12_15);
-                        case 3:
-                            return new ValueRange<int>(AtkCurve12_15, AtkCurve14_20);
-                        case 4:
-                            return new ValueRange<int>(AtkCurve14_20, AtkCurve17_30);
-                        case 5:
-                            return new ValueRange<int>(AtkCurve17_30, AtkCurve30_99);
-                        default:
-                            throw new ArgumentOutOfRangeException();
-                    }
-
-                case StatType.Def:
-                    switch (groupIndex) {
-                        case 0:
-                            return new ValueRange<int>(DefCurve1, DefCurve5);
-                        case 1:
-                            return new ValueRange<int>(DefCurve5, DefCurve10);
-                        case 2:
-                            return new ValueRange<int>(DefCurve10, DefCurve12_15);
-                        case 3:
-                            return new ValueRange<int>(DefCurve12_15, DefCurve14_20);
-                        case 4:
-                            return new ValueRange<int>(DefCurve14_20, DefCurve17_30);
-                        case 5:
-                            return new ValueRange<int>(DefCurve17_30, DefCurve30_99);
-                        default:
-                            throw new ArgumentOutOfRangeException();
-                    }
-
-                case StatType.Agi:
-                    switch (groupIndex) {
-                        case 0:
-                            return new ValueRange<int>(AgiCurve1, AgiCurve5);
-                        case 1:
-                            return new ValueRange<int>(AgiCurve5, AgiCurve10);
-                        case 2:
-                            return new ValueRange<int>(AgiCurve10, AgiCurve12_15);
-                        case 3:
-                            return new ValueRange<int>(AgiCurve12_15, AgiCurve14_20);
-                        case 4:
-                            return new ValueRange<int>(AgiCurve14_20, AgiCurve17_30);
-                        case 5:
-                            return new ValueRange<int>(AgiCurve17_30, AgiCurve30_99);
-                        default:
-                            throw new ArgumentOutOfRangeException();
-                    }
-
-                default:
-                    throw new ArgumentOutOfRangeException();
-            }
-        }
-
-        public double GetAverageStatGrowthPerLevel(StatType stat, int groupIndex) {
-            var growthValue = GrowthStats.GetStatGrowthValuePerLevel(GetStatGrowthRange(stat, groupIndex).Range, GrowthStats.StatGrowthGroups[IsPromoted][groupIndex].Range.Range);
-            return GrowthStats.GetAverageStatGrowthPerLevel(growthValue);
-        }
-
-        public string GetAverageStatGrowthPerLevelAsPercent(StatType stat, int groupIndex) {
-            var growthValue = GrowthStats.GetStatGrowthValuePerLevel(GetStatGrowthRange(stat, groupIndex).Range, GrowthStats.StatGrowthGroups[IsPromoted][groupIndex].Range.Range);
-            return (DebugGrowthValues ? string.Format("{0:x}", growthValue) + " || " : "") +
-                    GrowthStats.GetAverageStatGrowthPerLevelAsPercent(growthValue);
         }
 
         // ==============================
@@ -1320,56 +1206,5 @@ namespace SF3.Models.Structs.Shared {
             get => Data.GetByte(_accessoryEquipable4Addr);
             set => Data.SetByte(_accessoryEquipable4Addr, (byte) value);
         }
-
-        // ==============================
-        // Curve Calc 1
-        // ==============================
-
-        [TableViewModelColumn(addressField: null, displayOrder: 200, displayGroup: "CurveCalc1")] public string HPgroup1 => GetAverageStatGrowthPerLevelAsPercent(StatType.HP, 0);
-        [TableViewModelColumn(addressField: null, displayOrder: 201, displayGroup: "CurveCalc1")] public string HPgroup2 => GetAverageStatGrowthPerLevelAsPercent(StatType.HP, 1);
-        [TableViewModelColumn(addressField: null, displayOrder: 202, displayGroup: "CurveCalc1")] public string HPgroup3 => GetAverageStatGrowthPerLevelAsPercent(StatType.HP, 2);
-        [TableViewModelColumn(addressField: null, displayOrder: 203, displayGroup: "CurveCalc1")] public string HPgroup4 => GetAverageStatGrowthPerLevelAsPercent(StatType.HP, 3);
-        [TableViewModelColumn(addressField: null, displayOrder: 204, displayGroup: "CurveCalc1")] public string HPgroup5 => GetAverageStatGrowthPerLevelAsPercent(StatType.HP, 4);
-        [TableViewModelColumn(addressField: null, displayOrder: 205, displayGroup: "CurveCalc1")] public string HPgroup6 => GetAverageStatGrowthPerLevelAsPercent(StatType.HP, 5);
-
-        [TableViewModelColumn(addressField: null, displayOrder: 210, displayGroup: "CurveCalc1")] public string MPgroup1 => GetAverageStatGrowthPerLevelAsPercent(StatType.MP, 0);
-        [TableViewModelColumn(addressField: null, displayOrder: 211, displayGroup: "CurveCalc1")] public string MPgroup2 => GetAverageStatGrowthPerLevelAsPercent(StatType.MP, 1);
-        [TableViewModelColumn(addressField: null, displayOrder: 212, displayGroup: "CurveCalc1")] public string MPgroup3 => GetAverageStatGrowthPerLevelAsPercent(StatType.MP, 2);
-        [TableViewModelColumn(addressField: null, displayOrder: 213, displayGroup: "CurveCalc1")] public string MPgroup4 => GetAverageStatGrowthPerLevelAsPercent(StatType.MP, 3);
-        [TableViewModelColumn(addressField: null, displayOrder: 214, displayGroup: "CurveCalc1")] public string MPgroup5 => GetAverageStatGrowthPerLevelAsPercent(StatType.MP, 4);
-        [TableViewModelColumn(addressField: null, displayOrder: 215, displayGroup: "CurveCalc1")] public string MPgroup6 => GetAverageStatGrowthPerLevelAsPercent(StatType.MP, 5);
-
-        [TableViewModelColumn(addressField: null, displayOrder: 220, displayGroup: "CurveCalc1")] public string Atkgroup1 => GetAverageStatGrowthPerLevelAsPercent(StatType.Atk, 0);
-        [TableViewModelColumn(addressField: null, displayOrder: 221, displayGroup: "CurveCalc1")] public string Atkgroup2 => GetAverageStatGrowthPerLevelAsPercent(StatType.Atk, 1);
-        [TableViewModelColumn(addressField: null, displayOrder: 222, displayGroup: "CurveCalc1")] public string Atkgroup3 => GetAverageStatGrowthPerLevelAsPercent(StatType.Atk, 2);
-        [TableViewModelColumn(addressField: null, displayOrder: 223, displayGroup: "CurveCalc1")] public string Atkgroup4 => GetAverageStatGrowthPerLevelAsPercent(StatType.Atk, 3);
-        [TableViewModelColumn(addressField: null, displayOrder: 224, displayGroup: "CurveCalc1")] public string Atkgroup5 => GetAverageStatGrowthPerLevelAsPercent(StatType.Atk, 4);
-        [TableViewModelColumn(addressField: null, displayOrder: 225, displayGroup: "CurveCalc1")] public string Atkgroup6 => GetAverageStatGrowthPerLevelAsPercent(StatType.Atk, 5);
-
-        [TableViewModelColumn(addressField: null, displayOrder: 230, displayGroup: "CurveCalc1")] public string Defgroup1 => GetAverageStatGrowthPerLevelAsPercent(StatType.Def, 0);
-        [TableViewModelColumn(addressField: null, displayOrder: 231, displayGroup: "CurveCalc1")] public string Defgroup2 => GetAverageStatGrowthPerLevelAsPercent(StatType.Def, 1);
-        [TableViewModelColumn(addressField: null, displayOrder: 232, displayGroup: "CurveCalc1")] public string Defgroup3 => GetAverageStatGrowthPerLevelAsPercent(StatType.Def, 2);
-        [TableViewModelColumn(addressField: null, displayOrder: 233, displayGroup: "CurveCalc1")] public string Defgroup4 => GetAverageStatGrowthPerLevelAsPercent(StatType.Def, 3);
-        [TableViewModelColumn(addressField: null, displayOrder: 234, displayGroup: "CurveCalc1")] public string Defgroup5 => GetAverageStatGrowthPerLevelAsPercent(StatType.Def, 4);
-        [TableViewModelColumn(addressField: null, displayOrder: 235, displayGroup: "CurveCalc1")] public string Defgroup6 => GetAverageStatGrowthPerLevelAsPercent(StatType.Def, 5);
-
-        [TableViewModelColumn(addressField: null, displayOrder: 240, displayGroup: "CurveCalc1")] public string Agigroup1 => GetAverageStatGrowthPerLevelAsPercent(StatType.Agi, 0);
-        [TableViewModelColumn(addressField: null, displayOrder: 241, displayGroup: "CurveCalc1")] public string Agigroup2 => GetAverageStatGrowthPerLevelAsPercent(StatType.Agi, 1);
-        [TableViewModelColumn(addressField: null, displayOrder: 242, displayGroup: "CurveCalc1")] public string Agigroup3 => GetAverageStatGrowthPerLevelAsPercent(StatType.Agi, 2);
-        [TableViewModelColumn(addressField: null, displayOrder: 243, displayGroup: "CurveCalc1")] public string Agigroup4 => GetAverageStatGrowthPerLevelAsPercent(StatType.Agi, 3);
-        [TableViewModelColumn(addressField: null, displayOrder: 244, displayGroup: "CurveCalc1")] public string Agigroup5 => GetAverageStatGrowthPerLevelAsPercent(StatType.Agi, 4);
-        [TableViewModelColumn(addressField: null, displayOrder: 245, displayGroup: "CurveCalc1")] public string Agigroup6 => GetAverageStatGrowthPerLevelAsPercent(StatType.Agi, 5);
-
-        // ==============================
-        // Curve Calc 2
-        // ==============================
-
-        [TableViewModelColumn(addressField: null, displayOrder: 300, displayGroup: "CurveCalc2")] public string HP1 => GetAverageStatGrowthPerLevelAsPercent(StatType.HP, 0);
-        [TableViewModelColumn(addressField: null, displayOrder: 301, displayGroup: "CurveCalc2")] public string HP2 => GetAverageStatGrowthPerLevelAsPercent(StatType.HP, 1);
-        [TableViewModelColumn(addressField: null, displayOrder: 302, displayGroup: "CurveCalc2")] public string HP3 => GetAverageStatGrowthPerLevelAsPercent(StatType.HP, 2);
-        [TableViewModelColumn(addressField: null, displayOrder: 303, displayGroup: "CurveCalc2")] public string HP4 => GetAverageStatGrowthPerLevelAsPercent(StatType.HP, 3);
-        [TableViewModelColumn(addressField: null, displayOrder: 304, displayGroup: "CurveCalc2")] public string HP5 => GetAverageStatGrowthPerLevelAsPercent(StatType.HP, 4);
-        [TableViewModelColumn(addressField: null, displayOrder: 305, displayGroup: "CurveCalc2")] public string HP6 => GetAverageStatGrowthPerLevelAsPercent(StatType.HP, 5);
-
     }
 }

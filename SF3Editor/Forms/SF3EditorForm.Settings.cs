@@ -10,10 +10,10 @@ namespace SF3.Editor.Forms {
             tsmiSettings_MPD_ImprovedNormalCalculations.Checked = _appState.UseImprovedNormalCalculations;
             tsmiSettings_MPD_UseFullHeightForNormals.Checked    = !_appState.UseVanillaHalfHeightForSurfaceNormalCalculations;
             tsmiSettings_MPD_FixNormalOverflowUnderflowErrors.Checked = _appState.FixSurfaceMapTileNormalOverflowUnderflowErrors;
-            Stats.DebugGrowthValues = _appState.EnableDebugSettings;
+            StatStatistics.DebugGrowthValues = _appState.EnableDebugSettings;
 
             _appState.UseDropdownsForNamedValuesChanged                       += (s, e) => { tsmiSettings_UseDropdowns.Checked                   = _appState.UseDropdownsForNamedValues; _appState.Serialize(); };
-            _appState.EnableDebugSettingsChanged                              += (s, e) => { tsmiSettings_EnableDebugSettings.Checked            = _appState.EnableDebugSettings; Stats.DebugGrowthValues = _appState.EnableDebugSettings; _appState.Serialize(); };
+            _appState.EnableDebugSettingsChanged                              += (s, e) => { tsmiSettings_EnableDebugSettings.Checked            = _appState.EnableDebugSettings; StatStatistics.DebugGrowthValues = _appState.EnableDebugSettings; _appState.Serialize(); };
             _appState.UseImprovedNormalCalculationsChanged                    += (s, e) => { tsmiSettings_MPD_ImprovedNormalCalculations.Checked = _appState.UseImprovedNormalCalculations; _appState.Serialize(); };
             _appState.UseVanillaHalfHeightForSurfaceNormalCalculationsChanged += (s, e) => { tsmiSettings_MPD_UseFullHeightForNormals.Checked    = !_appState.UseVanillaHalfHeightForSurfaceNormalCalculations; _appState.Serialize(); };
             _appState.FixSurfaceMapTileNormalOverflowUnderflowErrorsChanged   += (s, e) => { tsmiSettings_MPD_FixNormalOverflowUnderflowErrors.Checked = _appState.FixSurfaceMapTileNormalOverflowUnderflowErrors; _appState.Serialize(); };

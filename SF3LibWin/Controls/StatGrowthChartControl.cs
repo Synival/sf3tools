@@ -210,6 +210,7 @@ namespace SF3.Win.Controls {
             // Get the stats model for the selected character.
             var index = cbCurveGraphCharacter.SelectedIndex;
             var stats = index >= 0 && index < StatStatistics.StatsTable.Length ? StatStatistics.StatsTable[index] : null;
+            var statistics = index >= 0 && index < StatStatistics.Length ? StatStatistics[index] : null;
 
             // We'll need to use some different values depending on the promotion level.
             var promotionLevel = (int?)stats?.PromotionLevel ?? 0;
@@ -230,7 +231,7 @@ namespace SF3.Win.Controls {
                 // Add initial stats for level 1.
                 var startStatValues = new Dictionary<StatType, double>();
                 foreach (var statType in (StatType[]) Enum.GetValues(typeof(StatType))) {
-                    var targetStat = stats.GetStatGrowthRange(statType, 0).Begin;
+                    var targetStat = statistics.GetStatGrowthRange(statType, 0).Begin;
                     startStatValues.Add(statType, targetStat);
                     maxValue = Math.Max(maxValue, targetStat);
                 }
@@ -251,7 +252,7 @@ namespace SF3.Win.Controls {
                     // Add the next target stats.
                     var statValues = new Dictionary<StatType, double>();
                     foreach (var statType in (StatType[]) Enum.GetValues(typeof(StatType))) {
-                        var targetStat = stats.GetStatGrowthRange(statType, statGrowthGroup.GroupIndex).End;
+                        var targetStat = statistics.GetStatGrowthRange(statType, statGrowthGroup.GroupIndex).End;
                         statValues.Add(statType, targetStat);
                         maxValue = Math.Max(maxValue, targetStat);
                     }
@@ -275,7 +276,7 @@ namespace SF3.Win.Controls {
                         }
 
                         foreach (var statType in (StatType[]) Enum.GetValues(typeof(StatType))) {
-                            var growthValue = stats.GetAverageStatGrowthPerLevel(statType, statGrowthGroup.GroupIndex);
+                            var growthValue = statistics.GetAverageStatGrowthPerLevel(statType, statGrowthGroup.GroupIndex);
                             var guaranteedGrowth = (int)growthValue;
                             var plusOneProbability = growthValue - guaranteedGrowth;
 
