@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using CommonLib.Attributes;
 using CommonLib.Statistics;
 using SF3.Statistics;
@@ -11,6 +13,78 @@ namespace SF3.Models.Structs.Shared {
         /// </summary>
         public static bool DebugGrowthValues { get; set; } = false;
 
+        public readonly struct ProbableStats {
+            public ProbableStats(ProbableValueSet pvs, double target) {
+                ProbableValueSet = pvs;
+                Target = target;
+
+                Likely = pvs.GetWeightedAverage();
+                AtPercentages = new double[] {
+                    pvs.GetWeightedMedianAt(0.005),
+                    pvs.GetWeightedMedianAt(0.25),
+                    pvs.GetWeightedMedianAt(0.75),
+                    pvs.GetWeightedMedianAt(0.995)
+                };
+            }
+
+            public string MakeReport(double minimumProbabilityCutoff = 0.01) {
+                var report =
+                    "Target: " + Target.ToString("N2") + "\n" +
+                    "Likely: " + Likely.ToString("N2") + "\n" +
+                    "---------------------------\n";
+
+                var totalPool = ProbableValueSet.Sum(x => x.Value);
+                var adjustedSet = ProbableValueSet
+                    .Where(x => x.Value / totalPool * 100.0 >= minimumProbabilityCutoff)
+                    .ToDictionary(x => x.Key, x => x.Value);
+                totalPool = adjustedSet.Sum(x => x.Value);
+
+                var currentTotalProb = 0.0;
+                var lastKey = adjustedSet.Last().Key;
+
+                foreach (var kv in adjustedSet) {
+                    var probability = kv.Value / totalPool * 100.0;
+                    var nextTotalProb = kv.Key == lastKey ? 100.0 : currentTotalProb + probability;
+
+                    report += kv.Key + ": " + probability.ToString("N2") + "% (" + currentTotalProb.ToString("N2") + " - " + nextTotalProb.ToString("N2") + ")\n";
+                    currentTotalProb = nextTotalProb;
+                }
+                return report;
+            }
+
+            public ProbableValueSet ProbableValueSet { get; }
+            public double Target { get; }
+
+            public double Likely { get; }
+            public double[] AtPercentages { get; }
+        }
+
+        public class StatDataPoint {
+            public StatDataPoint(int level, Dictionary<StatType, double> stats) {
+                Level = level;
+                Stats = stats;
+            }
+
+            public int Level { get; }
+            public Dictionary<StatType, double> Stats { get; }
+        }
+
+        public class ProbableStatsDataPoint {
+            public ProbableStatsDataPoint(int level, Dictionary<StatType, ProbableStats> probableStats) {
+                Level = level;
+                ProbableStats = probableStats;
+            }
+
+            public string MakeReport(StatType stat) {
+                return "Lv" + Level + " " + stat.ToString() + ":\n" +
+                    "---------------------------\n" +
+                    ProbableStats[stat].MakeReport();
+            }
+
+            public int Level { get; }
+            public Dictionary<StatType, ProbableStats> ProbableStats { get; }
+        }
+
         /// <summary>
         /// *Mathematical* statistics for *character* stats for an individual character at a specific promotion.
         /// </summary>
@@ -18,9 +92,95 @@ namespace SF3.Models.Structs.Shared {
         public StatGrowthStatistics(Stats stats)
         : base(stats.Data, stats.ID, stats.Name + " (Stats)", stats.Address, stats.Size) {
             Stats = stats;
+            Recalc();
         }
 
         public Stats Stats { get; }
+        public StatDataPoint[] TargetStatsDataPoints { get; private set; }
+        public ProbableStatsDataPoint[] ProbableStatsDataPoints { get; private set; }
+
+        public void Recalc() {
+            // Data points for the chart.
+            var targetStatDataPoints = new List<StatDataPoint>();
+            var probableStatsDataPoints = new List<ProbableStatsDataPoint>();
+
+            // We'll need to use some different values depending on the promotion level.
+            var promotionLevel = (int) Stats.PromotionLevel;
+            var isPromoted = Stats.IsPromoted;
+
+            // Default axis ranges.
+            // NOTE: The actual stat gain caps at (30, 99, 99).
+            //       This is different from level gains, which are (20, 99, 99).
+            var maxValue = promotionLevel == 0 ? 50 : promotionLevel == 1 ? 100 : 200;
+
+            // Function to convert a ProbableValueSet to a ProbableStatsDict.
+            Dictionary<StatType, ProbableStats> GetProbableStats(Dictionary<StatType, ProbableValueSet> pvs, Dictionary<StatType, double> targets)
+                => pvs.ToDictionary(x => x.Key, x => new ProbableStats(x.Value, targets[x.Key]));
+
+            // Add initial stats for level 1.
+            var startStatValues = new Dictionary<StatType, double>();
+            foreach (var statType in (StatType[]) Enum.GetValues(typeof(StatType))) {
+                var targetStat = GetStatGrowthRange(statType, 0).Begin;
+                startStatValues.Add(statType, targetStat);
+                maxValue = Math.Max(maxValue, targetStat);
+            }
+            targetStatDataPoints.Add(new StatDataPoint(1, startStatValues));
+
+            // Get initial probable stats for level 1 (which are the same as startStatValues).
+            var currentProbableStatValues = new Dictionary<StatType, ProbableValueSet>();
+            foreach (var statType in (StatType[]) Enum.GetValues(typeof(StatType))) {
+                currentProbableStatValues[statType] = new ProbableValueSet() {
+                    { (int) startStatValues[statType], 1.00 }
+                };
+            }
+
+            probableStatsDataPoints.Add(new ProbableStatsDataPoint(1, GetProbableStats(currentProbableStatValues, startStatValues)));
+
+            // Populate data points for all stat growth groups, until the max level.
+            foreach (var statGrowthGroup in GrowthStats.StatGrowthGroups[isPromoted]) {
+                // Add the next target stats.
+                var statValues = new Dictionary<StatType, double>();
+                foreach (var statType in (StatType[]) Enum.GetValues(typeof(StatType))) {
+                    var targetStat = GetStatGrowthRange(statType, statGrowthGroup.GroupIndex).End;
+                    statValues.Add(statType, targetStat);
+                    maxValue = Math.Max(maxValue, targetStat);
+                }
+                targetStatDataPoints.Add(new StatDataPoint(statGrowthGroup.Range.End, statValues));
+
+                // Add probable stat values for every level in this stat growth group.
+                for (var lv = statGrowthGroup.Range.Begin + 1; lv <= statGrowthGroup.Range.End; lv++) {
+                    var lowPoint = targetStatDataPoints.Last(x => x.Level <= lv);
+                    var highPoint = targetStatDataPoints.First(x => x.Level >= lv);
+
+                    Dictionary<StatType, double> targetStats;
+                    if (lowPoint == highPoint || lv == lowPoint.Level)
+                        targetStats = lowPoint.Stats;
+                    else if (lv == highPoint.Level)
+                        targetStats = highPoint.Stats;
+                    else {
+                        var levelRange = highPoint.Level - lowPoint.Level;
+                        var rangePercent =  (lv - lowPoint.Level) / (double) levelRange;
+                        targetStats = lowPoint.Stats.Keys
+                            .ToDictionary(x => x, x => lowPoint.Stats[x] + (highPoint.Stats[x] - lowPoint.Stats[x]) * rangePercent);
+                    }
+
+                    foreach (var statType in (StatType[]) Enum.GetValues(typeof(StatType))) {
+                        var growthValue = GetAverageStatGrowthPerLevel(statType, statGrowthGroup.GroupIndex);
+                        var guaranteedGrowth = (int)growthValue;
+                        var plusOneProbability = growthValue - guaranteedGrowth;
+
+                        currentProbableStatValues[statType] = currentProbableStatValues[statType].RollNext(val => new ProbableValueSet() {
+                            { val + guaranteedGrowth, 1.00 - plusOneProbability },
+                            { val + guaranteedGrowth + 1, plusOneProbability }
+                        });
+                    }
+                    probableStatsDataPoints.Add(new ProbableStatsDataPoint(lv, GetProbableStats(currentProbableStatValues, targetStats)));
+                }
+            }
+
+            TargetStatsDataPoints   = targetStatDataPoints.ToArray();
+            ProbableStatsDataPoints = probableStatsDataPoints.ToArray();
+        }
 
         public ValueRange<int> GetStatGrowthRange(StatType stat, int groupIndex) {
             switch (stat) {

@@ -21,7 +21,9 @@ namespace SF3.Win.Views {
         public override void RefreshContent() {
             if (!IsCreated)
                 return;
-            Control.RefreshData();
+
+            Control.RecalcData();
+            Control.RefreshChart();
         }
 
         public StatGrowthStatisticsTable StatStatistics { get; }

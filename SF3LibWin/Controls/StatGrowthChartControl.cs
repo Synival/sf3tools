@@ -1,12 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
-using CommonLib.Statistics;
+using SF3.Models.Structs.Shared;
 using SF3.Models.Tables.Shared;
-using SF3.Statistics;
 using SF3.Types;
 
 namespace SF3.Win.Controls {
@@ -28,99 +26,34 @@ namespace SF3.Win.Controls {
                     _statStatistics = value;
                     cbCurveGraphCharacter.DataSource = StatGrowthStatistics.StatsTable.Rows;
                     cbCurveGraphCharacter.DisplayMember = "Name";
-                    RefreshData();
+
+                    RecalcData();
+                    RefreshChart();
                 }
             }
         }
 
-        private void CurveGraphCharacterComboBox_SelectedIndexChanged(object sender, EventArgs e)
-            => RefreshData();
-
-        private readonly struct ProbableStats {
-            public ProbableStats(ProbableValueSet pvs, double target) {
-                ProbableValueSet = pvs;
-                Target = target;
-
-                Likely = pvs.GetWeightedAverage();
-                AtPercentages = new double[] {
-                    pvs.GetWeightedMedianAt(0.005),
-                    pvs.GetWeightedMedianAt(0.25),
-                    pvs.GetWeightedMedianAt(0.75),
-                    pvs.GetWeightedMedianAt(0.995)
-                };
-            }
-
-            public string MakeReport(double minimumProbabilityCutoff = 0.01) {
-                var report =
-                    "Target: " + Target.ToString("N2") + "\n" +
-                    "Likely: " + Likely.ToString("N2") + "\n" +
-                    "---------------------------\n";
-
-                var totalPool = ProbableValueSet.Sum(x => x.Value);
-                var adjustedSet = ProbableValueSet
-                    .Where(x => x.Value / totalPool * 100.0 >= minimumProbabilityCutoff)
-                    .ToDictionary(x => x.Key, x => x.Value);
-                totalPool = adjustedSet.Sum(x => x.Value);
-
-                var currentTotalProb = 0.0;
-                var lastKey = adjustedSet.Last().Key;
-
-                foreach (var kv in adjustedSet) {
-                    var probability = kv.Value / totalPool * 100.0;
-                    var nextTotalProb = kv.Key == lastKey ? 100.0 : currentTotalProb + probability;
-
-                    report += kv.Key + ": " + probability.ToString("N2") + "% (" + currentTotalProb.ToString("N2") + " - " + nextTotalProb.ToString("N2") + ")\n";
-                    currentTotalProb = nextTotalProb;
-                }
-                return report;
-            }
-
-            public ProbableValueSet ProbableValueSet { get; }
-            public double Target { get; }
-
-            public double Likely { get; }
-            public double[] AtPercentages { get; }
-        }
-
-        private class StatDataPoint {
-            public StatDataPoint(int level, Dictionary<StatType, double> stats) {
-                Level = level;
-                Stats = stats;
-            }
-
-            public int Level { get; }
-            public Dictionary<StatType, double> Stats { get; }
-        }
-
-        private class ProbableStatsDataPoint {
-            public ProbableStatsDataPoint(int level, Dictionary<StatType, ProbableStats> probableStats) {
-                Level = level;
-                ProbableStats = probableStats;
-            }
-
-            public string MakeReport(StatType stat) {
-                return "Lv" + Level + " " + stat.ToString() + ":\n" +
-                    "---------------------------\n" +
-                    ProbableStats[stat].MakeReport();
-            }
-
-            public int Level { get; }
-            public Dictionary<StatType, ProbableStats> ProbableStats { get; }
+        private void CurveGraphCharacterComboBox_SelectedIndexChanged(object sender, EventArgs e) {
+            RecalcData();
+            RefreshChart();
         }
 
         private ToolTip _mouseoverTooltip = new ToolTip();
-        private StatDataPoint[] _targetStats = null;
-        private ProbableStatsDataPoint[] _probableStats = null;
-
         private Point? _lastMousePos = null;
         private string _lastTooltipText = null;
         private int? _lastTooltipX = null;
         private int? _lastTooltipY = null;
 
+        private StatGrowthStatistics GetCurerntGrowthStatistics() {
+            var index = cbCurveGraphCharacter.SelectedIndex;
+            return (index >= 0 && index < StatGrowthStatistics.Length) ? StatGrowthStatistics[index] : null;
+        }
+
         private void CurveGraph_MouseMove(object sender, MouseEventArgs e) {
             // Do nothing if the position is unchanged or no data is available.
             var pos = e.Location;
-            if (_lastMousePos.HasValue && pos == _lastMousePos.Value || _probableStats == null)
+            var statistics = GetCurerntGrowthStatistics();
+            if (_lastMousePos.HasValue && pos == _lastMousePos.Value || statistics?.ProbableStatsDataPoints == null)
                 return;
             _lastMousePos = pos;
 
@@ -189,7 +122,7 @@ namespace SF3.Win.Controls {
             var xSpan = dataPoint.ChartArea.AxisX.ValueToPixelPosition(1.0) - dataPoint.ChartArea.AxisX.ValueToPixelPosition(0.0);
             var pointIndex = Math.Max(0, pos.X < x0 + xSpan * ( dataPoint.PointIndex + 0.5) ? dataPoint.PointIndex - 1 : dataPoint.PointIndex);
 
-            var probableStats = _probableStats[pointIndex];
+            var probableStats = statistics.ProbableStatsDataPoints[pointIndex];
             var tooltipText = probableStats.MakeReport((StatType) stat);
             var tooltipX = (int) dataPoint.ChartArea.AxisX.ValueToPixelPosition(probableStats.Level);
             var tooltipY = (int) dataPoint.ChartArea.AxisY.ValueToPixelPosition(probableStats.ProbableStats[(StatType) stat].Likely);
@@ -203,106 +136,20 @@ namespace SF3.Win.Controls {
         }
 
         public void RecalcData() {
-            // Data points for the chart.
-            var targetStatDataPoints = new List<StatDataPoint>();
-            var probableStatsDataPoints = new List<ProbableStatsDataPoint>();
-
-            // Get the stats model for the selected character.
-            var index = cbCurveGraphCharacter.SelectedIndex;
-            var statistics = index >= 0 && index < StatGrowthStatistics.Length ? StatGrowthStatistics[index] : null;
-
-            // We'll need to use some different values depending on the promotion level.
-            var promotionLevel = (int?)(statistics?.Stats?.PromotionLevel) ?? 0;
-            var isPromoted = promotionLevel >= 1;
-
-            // Default axis ranges.
-            // NOTE: The actual stat gain caps at (30, 99, 99).
-            //       This is different from level gains, which are (20, 99, 99).
-            var maxValue = promotionLevel == 0 ? 50 : promotionLevel == 1 ? 100 : 200;
-
-            // Did we find stats? If so, populate our data sets.
-            if (statistics != null) {
-                // Function to convert a ProbableValueSet to a ProbableStatsDict.
-                Dictionary<StatType, ProbableStats> GetProbableStats(Dictionary<StatType, ProbableValueSet> pvs, Dictionary<StatType, double> targets)
-                    => pvs.ToDictionary(x => x.Key, x => new ProbableStats(x.Value, targets[x.Key]));
-
-                // Add initial stats for level 1.
-                var startStatValues = new Dictionary<StatType, double>();
-                foreach (var statType in (StatType[]) Enum.GetValues(typeof(StatType))) {
-                    var targetStat = statistics.GetStatGrowthRange(statType, 0).Begin;
-                    startStatValues.Add(statType, targetStat);
-                    maxValue = Math.Max(maxValue, targetStat);
-                }
-                targetStatDataPoints.Add(new StatDataPoint(1, startStatValues));
-
-                // Get initial probable stats for level 1 (which are the same as startStatValues).
-                var currentProbableStatValues = new Dictionary<StatType, ProbableValueSet>();
-                foreach (var statType in (StatType[]) Enum.GetValues(typeof(StatType))) {
-                    currentProbableStatValues[statType] = new ProbableValueSet() {
-                        { (int) startStatValues[statType], 1.00 }
-                    };
-                }
-
-                probableStatsDataPoints.Add(new ProbableStatsDataPoint(1, GetProbableStats(currentProbableStatValues, startStatValues)));
-
-                // Populate data points for all stat growth groups, until the max level.
-                foreach (var statGrowthGroup in GrowthStats.StatGrowthGroups[isPromoted]) {
-                    // Add the next target stats.
-                    var statValues = new Dictionary<StatType, double>();
-                    foreach (var statType in (StatType[]) Enum.GetValues(typeof(StatType))) {
-                        var targetStat = statistics.GetStatGrowthRange(statType, statGrowthGroup.GroupIndex).End;
-                        statValues.Add(statType, targetStat);
-                        maxValue = Math.Max(maxValue, targetStat);
-                    }
-                    targetStatDataPoints.Add(new StatDataPoint(statGrowthGroup.Range.End, statValues));
-
-                    // Add probable stat values for every level in this stat growth group.
-                    for (var lv = statGrowthGroup.Range.Begin + 1; lv <= statGrowthGroup.Range.End; lv++) {
-                        var lowPoint = targetStatDataPoints.Last(x => x.Level <= lv);
-                        var highPoint = targetStatDataPoints.First(x => x.Level >= lv);
-
-                        Dictionary<StatType, double> targetStats;
-                        if (lowPoint == highPoint || lv == lowPoint.Level)
-                            targetStats = lowPoint.Stats;
-                        else if (lv == highPoint.Level)
-                            targetStats = highPoint.Stats;
-                        else {
-                            var levelRange = highPoint.Level - lowPoint.Level;
-                            var rangePercent =  (lv - lowPoint.Level) / (double) levelRange;
-                            targetStats = lowPoint.Stats.Keys
-                                .ToDictionary(x => x, x => lowPoint.Stats[x] + (highPoint.Stats[x] - lowPoint.Stats[x]) * rangePercent);
-                        }
-
-                        foreach (var statType in (StatType[]) Enum.GetValues(typeof(StatType))) {
-                            var growthValue = statistics.GetAverageStatGrowthPerLevel(statType, statGrowthGroup.GroupIndex);
-                            var guaranteedGrowth = (int)growthValue;
-                            var plusOneProbability = growthValue - guaranteedGrowth;
-
-                            currentProbableStatValues[statType] = currentProbableStatValues[statType].RollNext(val => new ProbableValueSet() {
-                                { val + guaranteedGrowth, 1.00 - plusOneProbability },
-                                { val + guaranteedGrowth + 1, plusOneProbability }
-                            });
-                        }
-                        probableStatsDataPoints.Add(new ProbableStatsDataPoint(lv, GetProbableStats(currentProbableStatValues, targetStats)));
-                    }
-                }
-            }
-
-            _targetStats   = targetStatDataPoints.ToArray();
-            _probableStats = probableStatsDataPoints.ToArray();
-        }
-
-        // TODO: this method does way too much work and shouldn't belong in the form. sort it out!!
-        public void RefreshData() {
-            RecalcData();
-
-            // We'll need to use some different values depending on the promotion level.
             var index = cbCurveGraphCharacter.SelectedIndex;
             var statistics = (index >= 0 && index < StatGrowthStatistics.Length ? StatGrowthStatistics[index] : null);
+            statistics?.Recalc();
+        }
+
+        public void RefreshChart() {
+            // We'll need to use some different values depending on the promotion level.
+            var statistics     = GetCurerntGrowthStatistics();
             var promotionLevel = (int?)(statistics?.Stats?.PromotionLevel) ?? 0;
-            var isPromoted = promotionLevel >= 1;
-            var maxLevel = isPromoted ? 40 : 20;
-            var maxValue = promotionLevel == 0 ? 50 : promotionLevel == 1 ? 100 : 200;
+            var isPromoted     = promotionLevel >= 1;
+            var maxLevel       = isPromoted ? 40 : 20;
+            var maxValue       = promotionLevel == 0 ? 50 : promotionLevel == 1 ? 100 : 200;
+            var targetStats    = statistics?.TargetStatsDataPoints ?? [];
+            var probableStats  = statistics?.ProbableStatsDataPoints ?? [];
 
             CurveGraph.ChartAreas[0].AxisX.Minimum  = 0;
             CurveGraph.ChartAreas[0].AxisX.Maximum  = maxLevel;
@@ -315,22 +162,22 @@ namespace SF3.Win.Controls {
 
                 var targetSeries = CurveGraph.Series[statTypeStr];
                 targetSeries.Points.Clear();
-                foreach (var dataPoint in _targetStats)
+                foreach (var dataPoint in targetStats)
                     _ = targetSeries.Points.AddXY(dataPoint.Level, dataPoint.Stats[statType]);
 
                 var likelySeries = CurveGraph.Series["Likely " + statTypeStr];
                 likelySeries.Points.Clear();
-                foreach (var dataPoint in _probableStats)
+                foreach (var dataPoint in probableStats)
                     _ = likelySeries.Points.AddXY(dataPoint.Level, dataPoint.ProbableStats[statType].Likely);
 
                 var range1Series = CurveGraph.Series[statTypeStr + " Range 1 (50% Likely)"];
                 range1Series.Points.Clear();
-                foreach (var dataPoint in _probableStats)
+                foreach (var dataPoint in probableStats)
                     _ = range1Series.Points.AddXY(dataPoint.Level, dataPoint.ProbableStats[statType].AtPercentages[1], dataPoint.ProbableStats[statType].AtPercentages[2]);
 
                 var range2Series = CurveGraph.Series[statTypeStr + " Range 2 (99% Likely)"];
                 range2Series.Points.Clear();
-                foreach (var dataPoint in _probableStats)
+                foreach (var dataPoint in probableStats)
                     _ = range2Series.Points.AddXY(dataPoint.Level, dataPoint.ProbableStats[statType].AtPercentages[0], dataPoint.ProbableStats[statType].AtPercentages[3]);
             }
         }

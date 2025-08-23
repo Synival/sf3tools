@@ -28,6 +28,7 @@ namespace SF3.Models.Tables.Shared {
         public IStruct[] RowObjs => Rows;
         public IEnumerator GetEnumerator() => Rows.GetEnumerator();
         IEnumerator<StatGrowthStatistics> IEnumerable<StatGrowthStatistics>.GetEnumerator() => ((IEnumerable<StatGrowthStatistics>) Rows).GetEnumerator();
+
         public StatGrowthStatistics this[int index] => Rows[index];
 
         public IByteData Data => StatsTable.Data;
