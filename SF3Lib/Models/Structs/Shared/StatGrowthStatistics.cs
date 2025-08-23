@@ -5,7 +5,7 @@ using SF3.Statistics;
 using SF3.Types;
 
 namespace SF3.Models.Structs.Shared {
-    public class StatStatistics : Struct {
+    public class StatGrowthStatistics : Struct {
         /// <summary>
         /// When enabled, GetAverageStatGrowthPerLevelAsPercent() will show the "growthValue" in its output
         /// </summary>
@@ -15,7 +15,7 @@ namespace SF3.Models.Structs.Shared {
         /// *Mathematical* statistics for *character* stats for an individual character at a specific promotion.
         /// </summary>
         /// <param name="stats">Character stats to generate mathematical statistics from.</param>
-        public StatStatistics(Stats stats)
+        public StatGrowthStatistics(Stats stats)
         : base(stats.Data, stats.ID, stats.Name + " (Stats)", stats.Address, stats.Size) {
             Stats = stats;
         }

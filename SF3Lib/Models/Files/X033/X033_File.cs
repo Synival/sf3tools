@@ -69,7 +69,7 @@ namespace SF3.Models.Files.X033 {
             return new List<ITable>() {
                 (StatsTable       = StatsTable.Create      (Data, "Stats",        ResourceFileForScenario(Scenario, "ClassList.xml"), statsAddress)),
                 (InitialInfoTable = InitialInfoTable.Create(Data, "InitialStats", ResourceFileForScenario(Scenario, "ClassEquip.xml"), initialInfoAddress)),
-                (StatStatistics   = new StatStatisticsTable(StatsTable, "StatStatistics")),
+                (StatGrowthStatistics = new StatGrowthStatisticsTable(StatsTable, "StatStatistics")),
             };
         }
 
@@ -79,7 +79,7 @@ namespace SF3.Models.Files.X033 {
         [BulkCopyRecurse]
         public StatsTable StatsTable { get; private set; }
 
-        public StatStatisticsTable StatStatistics { get; private set; }
+        public StatGrowthStatisticsTable StatGrowthStatistics { get; private set; }
 
         [BulkCopyRecurse]
         public InitialInfoTable InitialInfoTable { get; private set; }

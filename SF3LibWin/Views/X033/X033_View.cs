@@ -16,7 +16,7 @@ namespace SF3.Win.Views.X033 {
 
             if (Model.StatsTable != null) {
                 CreateChild(new StatTableView("Character Stats", Model.StatsTable, ngc));
-                CreateChild(new StatStatisticsView("Stat Statistics", Model.StatStatistics, ngc));
+                CreateChild(new StatGrowthStatisticsView("Stat Statistics", Model.StatGrowthStatistics, ngc));
             }
             if (Model.InitialInfoTable != null)
                 CreateChild(new TableView("Initial Info", Model.InitialInfoTable, ngc));

@@ -15,18 +15,18 @@ namespace SF3.Win.Controls {
             InitializeComponent();
         }
 
-        public StatGrowthChartControl(StatStatisticsTable statStatistics) {
+        public StatGrowthChartControl(StatGrowthStatisticsTable statGrowthStatistics) {
             InitializeComponent();
-            StatStatistics = statStatistics;
+            StatGrowthStatistics = statGrowthStatistics;
         }
 
-        private StatStatisticsTable _statStatistics = null;
-        public StatStatisticsTable StatStatistics {
+        private StatGrowthStatisticsTable _statStatistics = null;
+        public StatGrowthStatisticsTable StatGrowthStatistics {
             get => _statStatistics;
             set {
                 if (_statStatistics != value) {
                     _statStatistics = value;
-                    cbCurveGraphCharacter.DataSource = StatStatistics.StatsTable.Rows;
+                    cbCurveGraphCharacter.DataSource = StatGrowthStatistics.StatsTable.Rows;
                     cbCurveGraphCharacter.DisplayMember = "Name";
                     RefreshData();
                 }
@@ -209,8 +209,8 @@ namespace SF3.Win.Controls {
 
             // Get the stats model for the selected character.
             var index = cbCurveGraphCharacter.SelectedIndex;
-            var stats = index >= 0 && index < StatStatistics.StatsTable.Length ? StatStatistics.StatsTable[index] : null;
-            var statistics = index >= 0 && index < StatStatistics.Length ? StatStatistics[index] : null;
+            var stats = index >= 0 && index < StatGrowthStatistics.StatsTable.Length ? StatGrowthStatistics.StatsTable[index] : null;
+            var statistics = index >= 0 && index < StatGrowthStatistics.Length ? StatGrowthStatistics[index] : null;
 
             // We'll need to use some different values depending on the promotion level.
             var promotionLevel = (int?)stats?.PromotionLevel ?? 0;

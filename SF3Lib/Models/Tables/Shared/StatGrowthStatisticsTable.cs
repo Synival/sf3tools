@@ -9,11 +9,11 @@ namespace SF3.Models.Tables.Shared {
     /// <summary>
     /// Table of *mathematical* statistics for *character* stats for all character and promotion combinations.
     /// </summary>
-    public class StatStatisticsTable : ITable<StatStatistics> {
-        public StatStatisticsTable(StatsTable statsTable, string name) {
+    public class StatGrowthStatisticsTable : ITable<StatGrowthStatistics> {
+        public StatGrowthStatisticsTable(StatsTable statsTable, string name) {
             StatsTable = statsTable;
             Name = name;
-            Rows = StatsTable.Select(x => new StatStatistics(x)).ToArray();
+            Rows = StatsTable.Select(x => new StatGrowthStatistics(x)).ToArray();
         }
 
         public StatsTable StatsTable { get; }
@@ -24,11 +24,11 @@ namespace SF3.Models.Tables.Shared {
         public string Name { get; }
         public bool IsLoaded => true;
 
-        public StatStatistics[] Rows { get; }
+        public StatGrowthStatistics[] Rows { get; }
         public IStruct[] RowObjs => Rows;
         public IEnumerator GetEnumerator() => Rows.GetEnumerator();
-        IEnumerator<StatStatistics> IEnumerable<StatStatistics>.GetEnumerator() => ((IEnumerable<StatStatistics>) Rows).GetEnumerator();
-        public StatStatistics this[int index] => Rows[index];
+        IEnumerator<StatGrowthStatistics> IEnumerable<StatGrowthStatistics>.GetEnumerator() => ((IEnumerable<StatGrowthStatistics>) Rows).GetEnumerator();
+        public StatGrowthStatistics this[int index] => Rows[index];
 
         public IByteData Data => StatsTable.Data;
         public int Address => StatsTable.Address;

@@ -4,13 +4,13 @@ using SF3.Win.Controls;
 
 namespace SF3.Win.Views {
     public class StatGrowthChartView : ControlView<StatGrowthChartControl> {
-        public StatGrowthChartView(string name, StatStatisticsTable statStatistics) : base(name) {
+        public StatGrowthChartView(string name, StatGrowthStatisticsTable statStatistics) : base(name) {
             StatStatistics = statStatistics;
         }
 
         public override Control Create() {
             var rval = base.Create();
-            Control.StatStatistics = StatStatistics;
+            Control.StatGrowthStatistics = StatStatistics;
             return rval;
         }
 
@@ -24,6 +24,6 @@ namespace SF3.Win.Views {
             Control.RefreshData();
         }
 
-        public StatStatisticsTable StatStatistics { get; }
+        public StatGrowthStatisticsTable StatStatistics { get; }
     }
 }
