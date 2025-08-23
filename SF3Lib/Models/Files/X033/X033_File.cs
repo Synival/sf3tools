@@ -66,14 +66,11 @@ namespace SF3.Models.Files.X033 {
 
             WeaponLevelExp = new WeaponLevel(Data, 0, "WeaponLevelExp", weaponLevelAddress);
 
-            var tables = new List<ITable>() {
+            return new List<ITable>() {
                 (StatsTable       = StatsTable.Create      (Data, "Stats",        ResourceFileForScenario(Scenario, "ClassList.xml"), statsAddress)),
                 (InitialInfoTable = InitialInfoTable.Create(Data, "InitialStats", ResourceFileForScenario(Scenario, "ClassEquip.xml"), initialInfoAddress)),
+                (StatStatistics   = new StatStatisticsTable(StatsTable, "StatStatistics")),
             };
-
-            StatStatistics = new StatStatisticsTable(StatsTable);
-
-            return tables;
         }
 
         [BulkCopyRecurse]
