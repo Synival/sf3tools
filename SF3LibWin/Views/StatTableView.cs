@@ -21,7 +21,8 @@ namespace SF3.Win.Views {
             CreateChild(new TableView("Spells",                 Model, ngc, displayGroups: ["Metadata", "Spells"]));
             CreateChild(new TableView("Weapons / Accessories",  Model, ngc, displayGroups: ["Metadata", "Equipment"]));
             CreateChild(new TableView("Specials",               Model, ngc, displayGroups: ["Metadata", "Specials"]));
-            CreateChild(new TableView("Growth Curve Calc",      Model, ngc, displayGroups: ["Metadata", "CurveCalc"]));
+            CreateChild(new TableView("Growth Curve Calc (1/2)",Model, ngc, displayGroups: ["Metadata", "CurveCalc1"]));
+            CreateChild(new TableView("Growth Curve Calc (2/2)",Model, ngc, displayGroups: ["Metadata", "CurveCalc2"]));
 
             return Control;
         }

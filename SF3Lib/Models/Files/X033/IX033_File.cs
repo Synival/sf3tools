@@ -4,6 +4,7 @@ using SF3.Models.Tables.Shared;
 namespace SF3.Models.Files.X033 {
     public interface IX033_File : IScenarioTableFile {
         StatsTable StatsTable { get; }
+        StatStatisticsTable StatStatistics { get; }
         InitialInfoTable InitialInfoTable { get; }
         WeaponLevel WeaponLevelExp { get; }
     }

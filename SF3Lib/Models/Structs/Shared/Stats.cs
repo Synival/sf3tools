@@ -1322,42 +1322,54 @@ namespace SF3.Models.Structs.Shared {
         }
 
         // ==============================
-        // Curve Calc
+        // Curve Calc 1
         // ==============================
 
-        [TableViewModelColumn(addressField: null, displayOrder: 200, displayGroup: "CurveCalc")] public string HPgroup1 => GetAverageStatGrowthPerLevelAsPercent(StatType.HP, 0);
-        [TableViewModelColumn(addressField: null, displayOrder: 201, displayGroup: "CurveCalc")] public string HPgroup2 => GetAverageStatGrowthPerLevelAsPercent(StatType.HP, 1);
-        [TableViewModelColumn(addressField: null, displayOrder: 202, displayGroup: "CurveCalc")] public string HPgroup3 => GetAverageStatGrowthPerLevelAsPercent(StatType.HP, 2);
-        [TableViewModelColumn(addressField: null, displayOrder: 203, displayGroup: "CurveCalc")] public string HPgroup4 => GetAverageStatGrowthPerLevelAsPercent(StatType.HP, 3);
-        [TableViewModelColumn(addressField: null, displayOrder: 204, displayGroup: "CurveCalc")] public string HPgroup5 => GetAverageStatGrowthPerLevelAsPercent(StatType.HP, 4);
-        [TableViewModelColumn(addressField: null, displayOrder: 205, displayGroup: "CurveCalc")] public string HPgroup6 => GetAverageStatGrowthPerLevelAsPercent(StatType.HP, 5);
+        [TableViewModelColumn(addressField: null, displayOrder: 200, displayGroup: "CurveCalc1")] public string HPgroup1 => GetAverageStatGrowthPerLevelAsPercent(StatType.HP, 0);
+        [TableViewModelColumn(addressField: null, displayOrder: 201, displayGroup: "CurveCalc1")] public string HPgroup2 => GetAverageStatGrowthPerLevelAsPercent(StatType.HP, 1);
+        [TableViewModelColumn(addressField: null, displayOrder: 202, displayGroup: "CurveCalc1")] public string HPgroup3 => GetAverageStatGrowthPerLevelAsPercent(StatType.HP, 2);
+        [TableViewModelColumn(addressField: null, displayOrder: 203, displayGroup: "CurveCalc1")] public string HPgroup4 => GetAverageStatGrowthPerLevelAsPercent(StatType.HP, 3);
+        [TableViewModelColumn(addressField: null, displayOrder: 204, displayGroup: "CurveCalc1")] public string HPgroup5 => GetAverageStatGrowthPerLevelAsPercent(StatType.HP, 4);
+        [TableViewModelColumn(addressField: null, displayOrder: 205, displayGroup: "CurveCalc1")] public string HPgroup6 => GetAverageStatGrowthPerLevelAsPercent(StatType.HP, 5);
 
-        [TableViewModelColumn(addressField: null, displayOrder: 210, displayGroup: "CurveCalc")] public string MPgroup1 => GetAverageStatGrowthPerLevelAsPercent(StatType.MP, 0);
-        [TableViewModelColumn(addressField: null, displayOrder: 211, displayGroup: "CurveCalc")] public string MPgroup2 => GetAverageStatGrowthPerLevelAsPercent(StatType.MP, 1);
-        [TableViewModelColumn(addressField: null, displayOrder: 212, displayGroup: "CurveCalc")] public string MPgroup3 => GetAverageStatGrowthPerLevelAsPercent(StatType.MP, 2);
-        [TableViewModelColumn(addressField: null, displayOrder: 213, displayGroup: "CurveCalc")] public string MPgroup4 => GetAverageStatGrowthPerLevelAsPercent(StatType.MP, 3);
-        [TableViewModelColumn(addressField: null, displayOrder: 214, displayGroup: "CurveCalc")] public string MPgroup5 => GetAverageStatGrowthPerLevelAsPercent(StatType.MP, 4);
-        [TableViewModelColumn(addressField: null, displayOrder: 215, displayGroup: "CurveCalc")] public string MPgroup6 => GetAverageStatGrowthPerLevelAsPercent(StatType.MP, 5);
+        [TableViewModelColumn(addressField: null, displayOrder: 210, displayGroup: "CurveCalc1")] public string MPgroup1 => GetAverageStatGrowthPerLevelAsPercent(StatType.MP, 0);
+        [TableViewModelColumn(addressField: null, displayOrder: 211, displayGroup: "CurveCalc1")] public string MPgroup2 => GetAverageStatGrowthPerLevelAsPercent(StatType.MP, 1);
+        [TableViewModelColumn(addressField: null, displayOrder: 212, displayGroup: "CurveCalc1")] public string MPgroup3 => GetAverageStatGrowthPerLevelAsPercent(StatType.MP, 2);
+        [TableViewModelColumn(addressField: null, displayOrder: 213, displayGroup: "CurveCalc1")] public string MPgroup4 => GetAverageStatGrowthPerLevelAsPercent(StatType.MP, 3);
+        [TableViewModelColumn(addressField: null, displayOrder: 214, displayGroup: "CurveCalc1")] public string MPgroup5 => GetAverageStatGrowthPerLevelAsPercent(StatType.MP, 4);
+        [TableViewModelColumn(addressField: null, displayOrder: 215, displayGroup: "CurveCalc1")] public string MPgroup6 => GetAverageStatGrowthPerLevelAsPercent(StatType.MP, 5);
 
-        [TableViewModelColumn(addressField: null, displayOrder: 220, displayGroup: "CurveCalc")] public string Atkgroup1 => GetAverageStatGrowthPerLevelAsPercent(StatType.Atk, 0);
-        [TableViewModelColumn(addressField: null, displayOrder: 221, displayGroup: "CurveCalc")] public string Atkgroup2 => GetAverageStatGrowthPerLevelAsPercent(StatType.Atk, 1);
-        [TableViewModelColumn(addressField: null, displayOrder: 222, displayGroup: "CurveCalc")] public string Atkgroup3 => GetAverageStatGrowthPerLevelAsPercent(StatType.Atk, 2);
-        [TableViewModelColumn(addressField: null, displayOrder: 223, displayGroup: "CurveCalc")] public string Atkgroup4 => GetAverageStatGrowthPerLevelAsPercent(StatType.Atk, 3);
-        [TableViewModelColumn(addressField: null, displayOrder: 224, displayGroup: "CurveCalc")] public string Atkgroup5 => GetAverageStatGrowthPerLevelAsPercent(StatType.Atk, 4);
-        [TableViewModelColumn(addressField: null, displayOrder: 225, displayGroup: "CurveCalc")] public string Atkgroup6 => GetAverageStatGrowthPerLevelAsPercent(StatType.Atk, 5);
+        [TableViewModelColumn(addressField: null, displayOrder: 220, displayGroup: "CurveCalc1")] public string Atkgroup1 => GetAverageStatGrowthPerLevelAsPercent(StatType.Atk, 0);
+        [TableViewModelColumn(addressField: null, displayOrder: 221, displayGroup: "CurveCalc1")] public string Atkgroup2 => GetAverageStatGrowthPerLevelAsPercent(StatType.Atk, 1);
+        [TableViewModelColumn(addressField: null, displayOrder: 222, displayGroup: "CurveCalc1")] public string Atkgroup3 => GetAverageStatGrowthPerLevelAsPercent(StatType.Atk, 2);
+        [TableViewModelColumn(addressField: null, displayOrder: 223, displayGroup: "CurveCalc1")] public string Atkgroup4 => GetAverageStatGrowthPerLevelAsPercent(StatType.Atk, 3);
+        [TableViewModelColumn(addressField: null, displayOrder: 224, displayGroup: "CurveCalc1")] public string Atkgroup5 => GetAverageStatGrowthPerLevelAsPercent(StatType.Atk, 4);
+        [TableViewModelColumn(addressField: null, displayOrder: 225, displayGroup: "CurveCalc1")] public string Atkgroup6 => GetAverageStatGrowthPerLevelAsPercent(StatType.Atk, 5);
 
-        [TableViewModelColumn(addressField: null, displayOrder: 230, displayGroup: "CurveCalc")] public string Defgroup1 => GetAverageStatGrowthPerLevelAsPercent(StatType.Def, 0);
-        [TableViewModelColumn(addressField: null, displayOrder: 231, displayGroup: "CurveCalc")] public string Defgroup2 => GetAverageStatGrowthPerLevelAsPercent(StatType.Def, 1);
-        [TableViewModelColumn(addressField: null, displayOrder: 232, displayGroup: "CurveCalc")] public string Defgroup3 => GetAverageStatGrowthPerLevelAsPercent(StatType.Def, 2);
-        [TableViewModelColumn(addressField: null, displayOrder: 233, displayGroup: "CurveCalc")] public string Defgroup4 => GetAverageStatGrowthPerLevelAsPercent(StatType.Def, 3);
-        [TableViewModelColumn(addressField: null, displayOrder: 234, displayGroup: "CurveCalc")] public string Defgroup5 => GetAverageStatGrowthPerLevelAsPercent(StatType.Def, 4);
-        [TableViewModelColumn(addressField: null, displayOrder: 235, displayGroup: "CurveCalc")] public string Defgroup6 => GetAverageStatGrowthPerLevelAsPercent(StatType.Def, 5);
+        [TableViewModelColumn(addressField: null, displayOrder: 230, displayGroup: "CurveCalc1")] public string Defgroup1 => GetAverageStatGrowthPerLevelAsPercent(StatType.Def, 0);
+        [TableViewModelColumn(addressField: null, displayOrder: 231, displayGroup: "CurveCalc1")] public string Defgroup2 => GetAverageStatGrowthPerLevelAsPercent(StatType.Def, 1);
+        [TableViewModelColumn(addressField: null, displayOrder: 232, displayGroup: "CurveCalc1")] public string Defgroup3 => GetAverageStatGrowthPerLevelAsPercent(StatType.Def, 2);
+        [TableViewModelColumn(addressField: null, displayOrder: 233, displayGroup: "CurveCalc1")] public string Defgroup4 => GetAverageStatGrowthPerLevelAsPercent(StatType.Def, 3);
+        [TableViewModelColumn(addressField: null, displayOrder: 234, displayGroup: "CurveCalc1")] public string Defgroup5 => GetAverageStatGrowthPerLevelAsPercent(StatType.Def, 4);
+        [TableViewModelColumn(addressField: null, displayOrder: 235, displayGroup: "CurveCalc1")] public string Defgroup6 => GetAverageStatGrowthPerLevelAsPercent(StatType.Def, 5);
 
-        [TableViewModelColumn(addressField: null, displayOrder: 240, displayGroup: "CurveCalc")] public string Agigroup1 => GetAverageStatGrowthPerLevelAsPercent(StatType.Agi, 0);
-        [TableViewModelColumn(addressField: null, displayOrder: 241, displayGroup: "CurveCalc")] public string Agigroup2 => GetAverageStatGrowthPerLevelAsPercent(StatType.Agi, 1);
-        [TableViewModelColumn(addressField: null, displayOrder: 242, displayGroup: "CurveCalc")] public string Agigroup3 => GetAverageStatGrowthPerLevelAsPercent(StatType.Agi, 2);
-        [TableViewModelColumn(addressField: null, displayOrder: 243, displayGroup: "CurveCalc")] public string Agigroup4 => GetAverageStatGrowthPerLevelAsPercent(StatType.Agi, 3);
-        [TableViewModelColumn(addressField: null, displayOrder: 244, displayGroup: "CurveCalc")] public string Agigroup5 => GetAverageStatGrowthPerLevelAsPercent(StatType.Agi, 4);
-        [TableViewModelColumn(addressField: null, displayOrder: 245, displayGroup: "CurveCalc")] public string Agigroup6 => GetAverageStatGrowthPerLevelAsPercent(StatType.Agi, 5);
+        [TableViewModelColumn(addressField: null, displayOrder: 240, displayGroup: "CurveCalc1")] public string Agigroup1 => GetAverageStatGrowthPerLevelAsPercent(StatType.Agi, 0);
+        [TableViewModelColumn(addressField: null, displayOrder: 241, displayGroup: "CurveCalc1")] public string Agigroup2 => GetAverageStatGrowthPerLevelAsPercent(StatType.Agi, 1);
+        [TableViewModelColumn(addressField: null, displayOrder: 242, displayGroup: "CurveCalc1")] public string Agigroup3 => GetAverageStatGrowthPerLevelAsPercent(StatType.Agi, 2);
+        [TableViewModelColumn(addressField: null, displayOrder: 243, displayGroup: "CurveCalc1")] public string Agigroup4 => GetAverageStatGrowthPerLevelAsPercent(StatType.Agi, 3);
+        [TableViewModelColumn(addressField: null, displayOrder: 244, displayGroup: "CurveCalc1")] public string Agigroup5 => GetAverageStatGrowthPerLevelAsPercent(StatType.Agi, 4);
+        [TableViewModelColumn(addressField: null, displayOrder: 245, displayGroup: "CurveCalc1")] public string Agigroup6 => GetAverageStatGrowthPerLevelAsPercent(StatType.Agi, 5);
+
+        // ==============================
+        // Curve Calc 2
+        // ==============================
+
+        [TableViewModelColumn(addressField: null, displayOrder: 300, displayGroup: "CurveCalc2")] public string HP1 => GetAverageStatGrowthPerLevelAsPercent(StatType.HP, 0);
+        [TableViewModelColumn(addressField: null, displayOrder: 301, displayGroup: "CurveCalc2")] public string HP2 => GetAverageStatGrowthPerLevelAsPercent(StatType.HP, 1);
+        [TableViewModelColumn(addressField: null, displayOrder: 302, displayGroup: "CurveCalc2")] public string HP3 => GetAverageStatGrowthPerLevelAsPercent(StatType.HP, 2);
+        [TableViewModelColumn(addressField: null, displayOrder: 303, displayGroup: "CurveCalc2")] public string HP4 => GetAverageStatGrowthPerLevelAsPercent(StatType.HP, 3);
+        [TableViewModelColumn(addressField: null, displayOrder: 304, displayGroup: "CurveCalc2")] public string HP5 => GetAverageStatGrowthPerLevelAsPercent(StatType.HP, 4);
+        [TableViewModelColumn(addressField: null, displayOrder: 305, displayGroup: "CurveCalc2")] public string HP6 => GetAverageStatGrowthPerLevelAsPercent(StatType.HP, 5);
+
     }
 }
