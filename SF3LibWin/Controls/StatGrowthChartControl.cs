@@ -109,6 +109,7 @@ namespace SF3.Win.Controls {
         }
 
         private ToolTip _mouseoverTooltip = new ToolTip();
+        private StatDataPoint[] _targetStats = null;
         private ProbableStatsDataPoint[] _probableStats = null;
 
         private Point? _lastMousePos = null;
@@ -201,29 +202,26 @@ namespace SF3.Win.Controls {
             }
         }
 
-        // TODO: this method does way too much work and shouldn't belong in the form. sort it out!!
-        public void RefreshData() {
+        public void RecalcData() {
             // Data points for the chart.
             var targetStatDataPoints = new List<StatDataPoint>();
             var probableStatsDataPoints = new List<ProbableStatsDataPoint>();
 
             // Get the stats model for the selected character.
             var index = cbCurveGraphCharacter.SelectedIndex;
-            var stats = index >= 0 && index < StatGrowthStatistics.StatsTable.Length ? StatGrowthStatistics.StatsTable[index] : null;
             var statistics = index >= 0 && index < StatGrowthStatistics.Length ? StatGrowthStatistics[index] : null;
 
             // We'll need to use some different values depending on the promotion level.
-            var promotionLevel = (int?)stats?.PromotionLevel ?? 0;
+            var promotionLevel = (int?)(statistics?.Stats?.PromotionLevel) ?? 0;
             var isPromoted = promotionLevel >= 1;
 
             // Default axis ranges.
             // NOTE: The actual stat gain caps at (30, 99, 99).
             //       This is different from level gains, which are (20, 99, 99).
-            var maxLevel = isPromoted ? 40 : 20;
             var maxValue = promotionLevel == 0 ? 50 : promotionLevel == 1 ? 100 : 200;
 
             // Did we find stats? If so, populate our data sets.
-            if (stats != null) {
+            if (statistics != null) {
                 // Function to convert a ProbableValueSet to a ProbableStatsDict.
                 Dictionary<StatType, ProbableStats> GetProbableStats(Dictionary<StatType, ProbableValueSet> pvs, Dictionary<StatType, double> targets)
                     => pvs.ToDictionary(x => x.Key, x => new ProbableStats(x.Value, targets[x.Key]));
@@ -290,20 +288,34 @@ namespace SF3.Win.Controls {
                 }
             }
 
-            CurveGraph.ChartAreas[0].AxisX.Minimum = 0;
-            CurveGraph.ChartAreas[0].AxisX.Maximum = maxLevel;
-            CurveGraph.ChartAreas[0].AxisX.Interval = isPromoted ? 10 : 5;
-            CurveGraph.ChartAreas[0].AxisY.Maximum = maxValue;
-            CurveGraph.ChartAreas[0].AxisY.Interval = promotionLevel == 0 ? 5 : promotionLevel == 1 ? 10 : 20;
-
+            _targetStats   = targetStatDataPoints.ToArray();
             _probableStats = probableStatsDataPoints.ToArray();
+        }
+
+        // TODO: this method does way too much work and shouldn't belong in the form. sort it out!!
+        public void RefreshData() {
+            RecalcData();
+
+            // We'll need to use some different values depending on the promotion level.
+            var index = cbCurveGraphCharacter.SelectedIndex;
+            var statistics = (index >= 0 && index < StatGrowthStatistics.Length ? StatGrowthStatistics[index] : null);
+            var promotionLevel = (int?)(statistics?.Stats?.PromotionLevel) ?? 0;
+            var isPromoted = promotionLevel >= 1;
+            var maxLevel = isPromoted ? 40 : 20;
+            var maxValue = promotionLevel == 0 ? 50 : promotionLevel == 1 ? 100 : 200;
+
+            CurveGraph.ChartAreas[0].AxisX.Minimum  = 0;
+            CurveGraph.ChartAreas[0].AxisX.Maximum  = maxLevel;
+            CurveGraph.ChartAreas[0].AxisX.Interval = isPromoted ? 10 : 5;
+            CurveGraph.ChartAreas[0].AxisY.Maximum  = maxValue;
+            CurveGraph.ChartAreas[0].AxisY.Interval = promotionLevel == 0 ? 5 : promotionLevel == 1 ? 10 : 20;
 
             foreach (var statType in (StatType[]) Enum.GetValues(typeof(StatType))) {
                 var statTypeStr = statType.ToString();
 
                 var targetSeries = CurveGraph.Series[statTypeStr];
                 targetSeries.Points.Clear();
-                foreach (var dataPoint in targetStatDataPoints)
+                foreach (var dataPoint in _targetStats)
                     _ = targetSeries.Points.AddXY(dataPoint.Level, dataPoint.Stats[statType]);
 
                 var likelySeries = CurveGraph.Series["Likely " + statTypeStr];
