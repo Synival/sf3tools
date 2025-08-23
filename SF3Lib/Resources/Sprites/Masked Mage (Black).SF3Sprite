@@ -4,7 +4,7 @@
   "Height": 40,
   "Spritesheets": {
     "40x40": {
-      "SpriteID": 359,
+      "SpriteID": 296,
       "VerticalOffset": 0,
       "Unknown0x08": 20,
       "CollisionSize": 40,
