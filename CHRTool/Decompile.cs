@@ -161,7 +161,7 @@ namespace CHRTool {
             using (Logger.IndentedSection(verbose ? 1 : 0)) {
                 chpDef = chpFile.ToCHP_Def();
                 if (simplify) {
-                    foreach (var chrDef in chpDef.CHRsBySector.Values)
+                    foreach (var chrDef in chpDef.CHRs)
                         foreach (var sprite in chrDef.Sprites)
                             sprite.FrameGroupsForSpritesheets = null;
                 }

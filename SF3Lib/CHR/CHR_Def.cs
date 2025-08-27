@@ -1,12 +1,7 @@
-﻿using System.IO;
-using System.Linq;
+﻿using System.Linq;
 using CommonLib;
-using CommonLib.Arrays;
-using CommonLib.NamedValues;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using SF3.Models.Files.CHR;
-using SF3.Types;
 
 namespace SF3.CHR {
     public class CHR_Def : IJsonResource {
@@ -41,6 +36,7 @@ namespace SF3.CHR {
                 var jObj = (JObject) jToken;
 
                 WriteFrameImagesBeforeTables = jObj.TryGetValue("WriteFrameImagesBeforeTables", out var wfi)     ? ((bool?) wfi)    : null;
+                Sector                       = jObj.TryGetValue("Sector",                       out var sector)  ? ((int?) sector)  : null;
                 MaxSize                      = jObj.TryGetValue("MaxSize",                      out var maxSize) ? ((int?) maxSize) : null;
                 JunkAfterFrameTables         = jObj.TryGetValue("JunkAfterFrameTables",         out var jaft)    ? ((byte[]) jaft)  : null;
 
@@ -64,6 +60,8 @@ namespace SF3.CHR {
 
             if (WriteFrameImagesBeforeTables.HasValue)
                 jObj.Add("WriteFrameImagesBeforeTables", new JValue(WriteFrameImagesBeforeTables.Value));
+            if (Sector.HasValue)
+                jObj.Add("Sector", new JValue(Sector.Value));
             if (MaxSize.HasValue)
                 jObj.Add("MaxSize", new JValue(MaxSize.Value));
             if (JunkAfterFrameTables != null)
@@ -75,6 +73,7 @@ namespace SF3.CHR {
         }
 
         public bool? WriteFrameImagesBeforeTables;
+        public int? Sector;
         public int? MaxSize;
         public byte[] JunkAfterFrameTables;
         public SpriteDef[] Sprites;

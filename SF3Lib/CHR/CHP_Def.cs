@@ -1,13 +1,8 @@
 ﻿using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using CommonLib;
-using CommonLib.Arrays;
-using CommonLib.NamedValues;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using SF3.Models.Files.CHP;
-using SF3.Types;
 
 namespace SF3.CHR {
     public class CHP_Def : IJsonResource {
@@ -42,10 +37,20 @@ namespace SF3.CHR {
                 var jObj = (JObject) jToken;
                 TotalSectors = jObj.TryGetValue("TotalSectors", out var totalSectors) ? ((int?) totalSectors ?? 0) : 0;
 
-                if (jObj.TryGetValue("CHRsBySector", out var chrsBySectorOut) && chrsBySectorOut.Type == JTokenType.Object) {
-                    CHRsBySector = ((IDictionary<string, JToken>) ((JObject) chrsBySectorOut))
+                if (jObj.TryGetValue("CHRs", out var chrsOut) && chrsOut.Type == JTokenType.Array) {
+                    CHRs = ((JArray) chrsOut)
+                        .Select(x => CHR_Def.FromJToken(x))
+                        .ToArray();
+                }
+                else if (jObj.TryGetValue("CHRsBySector", out var chrsBySectorOut) && chrsBySectorOut.Type == JTokenType.Object) {
+                    CHRs = ((IDictionary<string, JToken>) ((JObject) chrsBySectorOut))
                         .Where(x => int.TryParse(x.Key, out _))
-                        .ToDictionary(x => int.Parse(x.Key), x => CHR_Def.FromJToken(x.Value));
+                        .Select(x => {
+                            var chrDef = CHR_Def.FromJToken(x.Value);
+                            chrDef.Sector = int.Parse(x.Key);
+                            return chrDef;
+                        })
+                        .ToArray();
                 }
 
                 return true;
@@ -59,13 +64,15 @@ namespace SF3.CHR {
             => ToJToken().ToString(Formatting.Indented);
 
         public JToken ToJToken() {
+            var jsonSettings = new JsonSerializer { NullValueHandling = NullValueHandling.Ignore };
+
             return new JObject {
                 { "TotalSectors", new JValue(TotalSectors) },
-                { "CHRsBySector", JObject.FromObject(CHRsBySector.ToDictionary(x => x.Key, x => x.Value.ToJToken())) },
+                { "CHRs", JArray.FromObject(CHRs.Select(x => x.ToJToken()).ToArray(), jsonSettings) },
             };
         }
 
         public int TotalSectors;
-        public Dictionary<int, CHR_Def> CHRsBySector;
+        public CHR_Def[] CHRs;
     }
 }

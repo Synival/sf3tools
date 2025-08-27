@@ -64,9 +64,9 @@ namespace SF3.CHR {
         private int CompileInternal(CHP_Def chpDef, Stream outputStream, bool seekInsteadOfWrite) {
             var startPosition = outputStream.Position;
 
-            foreach (var chrKv in chpDef.CHRsBySector.OrderBy(x => x.Key)) {
-                var offset = (chrKv.Key * 0x800) + startPosition;
-                var chr = chrKv.Value;
+            foreach (var chr in chpDef.CHRs.OrderBy(x => x.Sector.HasValue ? 1 : 0).ThenBy(x => x.Sector ?? 0)) {
+                var sector = chr.Sector ?? ((outputStream.Position - startPosition + 0x7FF) / 0x800);
+                var offset = sector * 0x800 + startPosition;
 
                 var padding = offset - outputStream.Position;
                 if (padding > 0) {
@@ -76,13 +76,13 @@ namespace SF3.CHR {
                         outputStream.Write(new byte[padding], 0, (int) padding);
                 }
                 else if (padding < 0) {
-                    Logger.WriteLine($"CHR at sector {chrKv.Key} (position 0x{offset:X5}) forced to seek back 0x{-padding:X2} bytes, overwriting previous CHR", LogType.Error);
+                    Logger.WriteLine($"CHR at sector {sector} (position 0x{offset:X5}) forced to seek back 0x{-padding:X2} bytes, overwriting previous CHR", LogType.Error);
                     outputStream.Position = offset;
                 }
 
                 var bytesWritten = _chrCompiler.Compile(chr, outputStream);
                 if (chr.MaxSize.HasValue && bytesWritten > chr.MaxSize)
-                    Logger.WriteLine($"CHR at sector {chrKv.Key} (position 0x{offset:X5}) exceeds MaxSize (0x{chr.MaxSize:X5}) by 0x{(bytesWritten - chr.MaxSize):X2} bytes", LogType.Error);
+                    Logger.WriteLine($"CHR at sector {sector} (position 0x{offset:X5}) exceeds MaxSize (0x{chr.MaxSize:X5}) by 0x{(bytesWritten - chr.MaxSize):X2} bytes", LogType.Error);
             }
 
             var eofPadding = (chpDef.TotalSectors * 0x800) - outputStream.Position - startPosition;

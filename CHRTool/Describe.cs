@@ -286,11 +286,11 @@ namespace CHRTool {
             var chpDef = CHP_Def.FromJSON(text);
 
             int index = 0;
-            foreach (var chrKv in chpDef.CHRsBySector) {
-                Logger.WriteLine($"[0x{index++:X2} @0x{chrKv.Key * 0x800:X5}]:");
+            foreach (var chr in chpDef.CHRs) {
+                Logger.WriteLine($"[0x{index++:X2}" + (chr.Sector.HasValue ? $"@0x{chr.Sector * 0x800:X5}]:" : ""));
                 using (Logger.IndentedSection()) {
                     try {
-                        DescribeSF3CHR(chrKv.Value, verbose);
+                        DescribeSF3CHR(chr, verbose);
                     }
                     catch (Exception e) {
                         Logger.LogException(e);
