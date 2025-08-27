@@ -240,7 +240,7 @@ namespace SF3.Models.Structs.X002 {
                 case StatUpType.Special:
                     return NamedValueType.Special;
                 case StatUpType.Spell:
-                    return NamedValueType.Spell;
+                    return NamedValueType.WeaponSpell;
                 default:
                     return null;
             }
