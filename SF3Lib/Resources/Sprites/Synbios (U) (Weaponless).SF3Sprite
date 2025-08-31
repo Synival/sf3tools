@@ -10,284 +10,143 @@
       "CollisionSize": 40,
       "Scale": 1.0,
       "FrameGroups": {
-        "GettingUpFromKneeling 1": {
-          "ENE": {
-            "SpritesheetX": 0,
-            "SpritesheetY": 80
-          }
-        },
-        "GettingUpFromKneeling 2": {
-          "ENE": {
-            "SpritesheetX": 40,
-            "SpritesheetY": 80
-          }
-        },
-        "GettingUpFromPrayer 1": {
-          "Directions": 4,
-          "SpritesheetX": 80,
-          "SpritesheetY": 0
-        },
-        "GettingUpFromPrayer 2": {
-          "Directions": 4,
-          "SpritesheetX": 120,
-          "SpritesheetY": 0
-        },
-        "GettingUpFromPrayer 3": {
-          "Directions": 4,
-          "SpritesheetX": 160,
-          "SpritesheetY": 0
-        },
-        "Idle 1": {
-          "Directions": 4,
-          "SpritesheetX": 200,
-          "SpritesheetY": 0
-        },
-        "Idle 2": {
-          "Directions": 4,
-          "SpritesheetX": 240,
-          "SpritesheetY": 0
-        },
-        "Idle 3": {
-          "Directions": 4,
-          "SpritesheetX": 280,
-          "SpritesheetY": 0
-        },
-        "Walking 1": {
-          "Directions": 4,
-          "SpritesheetX": 320,
-          "SpritesheetY": 0
-        },
-        "Walking 2": {
-          "Directions": 4,
-          "SpritesheetX": 360,
-          "SpritesheetY": 0
-        },
-        "Walking 3": {
-          "Directions": 4,
-          "SpritesheetX": 400,
-          "SpritesheetY": 0
-        },
-        "Walking 4": {
-          "Directions": 4,
-          "SpritesheetX": 440,
-          "SpritesheetY": 0
-        }
+        "GettingUpFromKneeling 1": { "ENE": { "SpritesheetX":  0, "SpritesheetY": 120 } },
+        "GettingUpFromKneeling 2": { "ENE": { "SpritesheetX": 40, "SpritesheetY": 120 } },
+
+        "GettingUpFromPrayer 1": { "Directions": 4, "SpritesheetX":  80, "SpritesheetY": 40 },
+        "GettingUpFromPrayer 2": { "Directions": 4, "SpritesheetX": 120, "SpritesheetY": 40 },
+        "GettingUpFromPrayer 3": { "Directions": 4, "SpritesheetX": 160, "SpritesheetY": 40 },
+
+        "Idle 1": { "Directions": 6, "SpritesheetX": 200, "SpritesheetY": 0 },
+        "Idle 2": { "Directions": 6, "SpritesheetX": 240, "SpritesheetY": 0 },
+        "Idle 3": { "Directions": 6, "SpritesheetX": 280, "SpritesheetY": 0 },
+
+        "Walking 1": { "Directions": 6, "SpritesheetX": 320, "SpritesheetY": 0 },
+        "Walking 2": { "Directions": 6, "SpritesheetX": 360, "SpritesheetY": 0 },
+        "Walking 3": { "Directions": 6, "SpritesheetX": 400, "SpritesheetY": 0 },
+        "Walking 4": { "Directions": 6, "SpritesheetX": 440, "SpritesheetY": 0 },
+
+        "Nodding 1": { "Directions": 6, "SpritesheetX": 480, "SpritesheetY": 0 },
+        "Nodding 2": { "Directions": 6, "SpritesheetX": 520, "SpritesheetY": 0 },
+
+        "ShakingHead 1": { "Directions": 6, "SpritesheetX": 560, "SpritesheetY": 0 },
+        "ShakingHead 2": { "Directions": 6, "SpritesheetX": 600, "SpritesheetY": 0 }
       },
       "AnimationByDirections": {
         "OneNoFlip": {
           "GettingUpFromKneeling": [
-            {
-              "Frame": {
-                "First": {
-                  "Frame": "GettingUpFromKneeling 1",
-                  "Direction": "ENE"
-                }
-              },
-              "Duration": 4
-            },
-            {
-              "Frame": {
-                "First": {
-                  "Frame": "GettingUpFromKneeling 2",
-                  "Direction": "ENE"
-                }
-              },
-              "Duration": 4
-            },
-            {
-              "Frame": {
-                "First": {
-                  "Frame": "Idle 1",
-                  "Direction": "ENE"
-                }
-              },
-              "Duration": 6
-            },
-            {
-              "Command": "Stop"
-            }
+            { "Frame": { "First": { "Frame": "GettingUpFromKneeling 1", "Direction": "ENE" } }, "Duration": 4 },
+            { "Frame": { "First": { "Frame": "GettingUpFromKneeling 2", "Direction": "ENE" } }, "Duration": 4 },
+            { "Frame": { "First": { "Frame": "Idle 1",                  "Direction": "ENE" } }, "Duration": 6 },
+            { "Command": "Stop" }
           ],
           "Idle": [
-            {
-              "Frame": {
-                "First": {
-                  "Frame": "Idle 1",
-                  "Direction": "ENE"
-                }
-              },
-              "Duration": 6
-            },
-            {
-              "Frame": {
-                "First": {
-                  "Frame": "Idle 2",
-                  "Direction": "ENE"
-                }
-              },
-              "Duration": 4
-            },
-            {
-              "Frame": {
-                "First": {
-                  "Frame": "Idle 3",
-                  "Direction": "ENE"
-                }
-              },
-              "Duration": 4
-            },
-            {
-              "Frame": {
-                "First": {
-                  "Frame": "Idle 2",
-                  "Direction": "ENE"
-                }
-              },
-              "Duration": 4
-            },
-            {
-              "Command": "GotoCommandOffset",
-              "Parameter": 0
-            }
+            { "Frame": { "First": { "Frame": "Idle 1", "Direction": "ENE" } }, "Duration": 6 },
+            { "Frame": { "First": { "Frame": "Idle 2", "Direction": "ENE" } }, "Duration": 4 },
+            { "Frame": { "First": { "Frame": "Idle 3", "Direction": "ENE" } }, "Duration": 4 },
+            { "Frame": { "First": { "Frame": "Idle 2", "Direction": "ENE" } }, "Duration": 4 },
+            { "Command": "GotoCommandOffset", "Parameter": 0 }
           ],
           "Kneeling": [
-            {
-              "Frame": {
-                "First": {
-                  "Frame": "Idle 1",
-                  "Direction": "ENE"
-                }
-              },
-              "Duration": 6
-            },
-            {
-              "Frame": {
-                "First": {
-                  "Frame": "GettingUpFromKneeling 2",
-                  "Direction": "ENE"
-                }
-              },
-              "Duration": 4
-            },
-            {
-              "Frame": {
-                "First": {
-                  "Frame": "GettingUpFromKneeling 1",
-                  "Direction": "ENE"
-                }
-              },
-              "Duration": 4
-            },
-            {
-              "Command": "Stop"
-            }
+            { "Frame": { "First": { "Frame": "Idle 1",                  "Direction": "ENE" } }, "Duration": 6 },
+            { "Frame": { "First": { "Frame": "GettingUpFromKneeling 2", "Direction": "ENE" } }, "Duration": 4 },
+            { "Frame": { "First": { "Frame": "GettingUpFromKneeling 1", "Direction": "ENE" } }, "Duration": 4 },
+            { "Command": "Stop" }
           ],
           "StillFrame": [
-            {
-              "Frame": {
-                "First": {
-                  "Frame": "Idle 1",
-                  "Direction": "ENE"
-                }
-              },
-              "Duration": 10
-            },
-            {
-              "Command": "Stop"
-            }
+            { "Frame": { "First": { "Frame": "Idle 1", "Direction": "ENE" } }, "Duration": 10 },
+            { "Command": "Stop" }
           ]
         },
         "4": {
           "GettingUpFromPrayer": [
-            {
-              "Frame": "GettingUpFromPrayer 1",
-              "Duration": 5
-            },
-            {
-              "Frame": "GettingUpFromPrayer 2",
-              "Duration": 8
-            },
-            {
-              "Frame": "GettingUpFromPrayer 3",
-              "Duration": 8
-            },
-            {
-              "Frame": "Idle 1",
-              "Duration": 8
-            },
-            {
-              "Command": "GotoAnimation",
-              "Parameter": 1
-            }
+            { "Frame": "GettingUpFromPrayer 1", "Duration": 5 },
+            { "Frame": "GettingUpFromPrayer 2", "Duration": 8 },
+            { "Frame": "GettingUpFromPrayer 3", "Duration": 8 },
+            { "Frame": "Idle 1",                "Duration": 8 },
+            { "Command": "GotoAnimation", "Parameter": 1 }
           ],
           "Idle": [
-            {
-              "Frame": "Idle 1",
-              "Duration": 6
-            },
-            {
-              "Frame": "Idle 2",
-              "Duration": 4
-            },
-            {
-              "Frame": "Idle 3",
-              "Duration": 4
-            },
-            {
-              "Frame": "Idle 2",
-              "Duration": 4
-            },
-            {
-              "Command": "GotoCommandOffset",
-              "Parameter": 0
-            }
+            { "Frame": "Idle 1", "Duration": 6 },
+            { "Frame": "Idle 2", "Duration": 4 },
+            { "Frame": "Idle 3", "Duration": 4 },
+            { "Frame": "Idle 2", "Duration": 4 },
+            { "Command": "GotoCommandOffset", "Parameter": 0 }
           ],
           "PrayingStillFrame": [
-            {
-              "Frame": "GettingUpFromPrayer 1",
-              "Duration": 10
-            },
-            {
-              "Command": "Stop"
-            }
+            { "Frame": "GettingUpFromPrayer 1", "Duration": 10 },
+            { "Command": "Stop" }
           ],
           "StillFrame": [
-            {
-              "Frame": "Idle 1",
-              "Duration": 10
-            },
-            {
-              "Command": "Stop"
-            }
+            { "Frame": "Idle 1", "Duration": 10 },
+            { "Command": "Stop" }
           ],
           "Walking": [
-            {
-              "Frame": "Walking 1",
-              "Duration": 5
-            },
-            {
-              "Frame": "Idle 1",
-              "Duration": 5
-            },
-            {
-              "Frame": "Walking 2",
-              "Duration": 5
-            },
-            {
-              "Frame": "Walking 3",
-              "Duration": 5
-            },
-            {
-              "Frame": "Idle 1",
-              "Duration": 5
-            },
-            {
-              "Frame": "Walking 4",
-              "Duration": 5
-            },
-            {
-              "Command": "GotoCommandOffset",
-              "Parameter": 0
-            }
+            { "Frame": "Walking 1", "Duration": 5 },
+            { "Frame": "Idle 1",    "Duration": 5 },
+            { "Frame": "Walking 2", "Duration": 5 },
+            { "Frame": "Walking 3", "Duration": 5 },
+            { "Frame": "Idle 1",    "Duration": 5 },
+            { "Frame": "Walking 4", "Duration": 5 },
+            { "Command": "GotoCommandOffset", "Parameter": 0 }
+          ],
+          "Nodding": [
+            { "Frame": "Idle 1",    "Duration": 4 },
+            { "Frame": "Nodding 1", "Duration": 4 },
+            { "Frame": "Nodding 2", "Duration": 4 },
+            { "Frame": "Nodding 1", "Duration": 4 },
+            { "Command": "GotoAnimation", "Parameter": 1 }
+          ],
+          "ShakingHead": [
+            { "Frame": "Idle 1",        "Duration": 2 },
+            { "Frame": "ShakingHead 1", "Duration": 4 },
+            { "Frame": "Idle 1",        "Duration": 2 },
+            { "Frame": "ShakingHead 2", "Duration": 4 },
+            { "Frame": "Idle 1",        "Duration": 2 },
+            { "Frame": "ShakingHead 1", "Duration": 4 },
+            { "Frame": "Idle 1",        "Duration": 2 },
+            { "Frame": "ShakingHead 2", "Duration": 4 },
+            { "Command": "GotoAnimation", "Parameter": 1 }
+          ]
+        },
+        "6": {
+          "Idle": [
+            { "Frame": "Idle 1", "Duration": 6 },
+            { "Frame": "Idle 2", "Duration": 4 },
+            { "Frame": "Idle 3", "Duration": 4 },
+            { "Frame": "Idle 2", "Duration": 4 },
+            { "Command": "GotoCommandOffset", "Parameter": 0 }
+          ],
+          "StillFrame": [
+            { "Frame": "Idle 1", "Duration": 10 },
+            { "Command": "Stop" }
+          ],
+          "Walking": [
+            { "Frame": "Walking 1", "Duration": 5 },
+            { "Frame": "Idle 1",    "Duration": 5 },
+            { "Frame": "Walking 2", "Duration": 5 },
+            { "Frame": "Walking 3", "Duration": 5 },
+            { "Frame": "Idle 1",    "Duration": 5 },
+            { "Frame": "Walking 4", "Duration": 5 },
+            { "Command": "GotoCommandOffset", "Parameter": 0 }
+          ],
+          "Nodding": [
+            { "Frame": "Idle 1",    "Duration": 4 },
+            { "Frame": "Nodding 1", "Duration": 4 },
+            { "Frame": "Nodding 2", "Duration": 4 },
+            { "Frame": "Nodding 1", "Duration": 4 },
+            { "Command": "GotoAnimation", "Parameter": 1 }
+          ],
+          "ShakingHead": [
+            { "Frame": "Idle 1",        "Duration": 2 },
+            { "Frame": "ShakingHead 1", "Duration": 4 },
+            { "Frame": "Idle 1",        "Duration": 2 },
+            { "Frame": "ShakingHead 2", "Duration": 4 },
+            { "Frame": "Idle 1",        "Duration": 2 },
+            { "Frame": "ShakingHead 1", "Duration": 4 },
+            { "Frame": "Idle 1",        "Duration": 2 },
+            { "Frame": "ShakingHead 2", "Duration": 4 },
+            { "Command": "GotoAnimation", "Parameter": 1 }
           ]
         }
       }
