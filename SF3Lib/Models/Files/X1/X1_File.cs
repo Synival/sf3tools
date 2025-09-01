@@ -515,9 +515,11 @@ namespace SF3.Models.Files.X1 {
                     .ToArray();
 
                 foreach (var ramAddr in ramAddrs) {
-                    _ = scriptRamAddrs.Add(ramAddr);
-                    _ = knownScriptRamAddrs.Add(ramAddr);
-                    AddScriptInfo(ramAddr, $"Referenced in {nameof(Models.Tables.X1.Town.NpcTable)}", prepend: true);
+                    if (ramAddr >= RamAddress && ramAddr < RamAddress + Data.Length - 3) {
+                        _ = scriptRamAddrs.Add(ramAddr);
+                        _ = knownScriptRamAddrs.Add(ramAddr);
+                        AddScriptInfo(ramAddr, $"Referenced in {nameof(Models.Tables.X1.Town.NpcTable)}", prepend: true);
+                    }
                 }
             }
 
@@ -546,7 +548,7 @@ namespace SF3.Models.Files.X1 {
                 var ramAddr = addr + (uint) RamAddress;
                 if (discoveredPointersByRamAddr.ContainsKey(ramAddr) || knownScriptRamAddrs.Contains(ramAddr))
                     continue;
-                if (ActorScriptUtils.DataLooksLikeBeginningOfScript(Data, addr)) {
+                if (ramAddr >= RamAddress && ramAddr < RamAddress + Data.Length - 3 && ActorScriptUtils.DataLooksLikeBeginningOfScript(Data, addr)) {
                     _ = scriptRamAddrs.Add(ramAddr);
                     _ = maybeScriptRamAddrs.Add(ramAddr);
                 }
