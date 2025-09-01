@@ -103,18 +103,23 @@ namespace SF3.Sprites {
 
             try {
                 SpriteDef spriteDef;
-                if (file == "(Unknown).SF3Sprite") {
-                    Logger.WriteLine($"{nameof(LoadSpriteDef)}(): Attempting to load '(Unknown).SF3Sprite; something must be missing", LogType.Warning);
+                var filename = Path.GetFileName(file);
+                string key;
+                if (filename == "(Unknown).SF3Sprite") {
+                    Logger.WriteLine($"{nameof(LoadSpriteDef)}(): Attempting to load '(Unknown).SF3Sprite'; something must be missing", LogType.Warning);
                     spriteDef = null;
+                    key = "(Unknown)";
                 }
-                else
+                else {
                     spriteDef = SpriteDef.FromJSON(File.ReadAllText(file));
+                    key = spriteDef?.Name ?? "(Error)";
+                }
 
                 s_spriteDefFilesLoaded.Add(fileWithoutExt);
-                if (s_spriteDefs.ContainsKey(spriteDef.Name))
+                if (s_spriteDefs.ContainsKey(key))
                     return null;
 
-                s_spriteDefs.Add(spriteDef.Name, spriteDef);
+                s_spriteDefs.Add(key, spriteDef);
                 return spriteDef;
             }
             catch (Exception e) {
