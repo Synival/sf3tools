@@ -41,15 +41,8 @@ namespace SF3.Editor.Forms {
             if (openfile.ShowDialog() != DialogResult.OK)
                 return null;
 
-            // Split each filter into a an n-element array of 2 strings
-            var filters = openfile.Filter
-                .Split('|')
-                .Select((x, i) => new { Index = i / 2, Value = x })
-                .GroupBy(x => x.Index)
-                .ToDictionary(x => x.Key, x => x.Select(y => y.Value).ToArray());
-
             // If we don't know the file type, we can't load it.
-            var fileType = DetermineFileType(openfile.FileName, filters[openfile.FilterIndex - 1][1]);
+            var fileType = DetermineFileType(openfile.FileName, GetFileFilterFromDialog(openfile.Filter, openfile.FilterIndex));
             if (!fileType.HasValue) {
                 ErrorMessage("Can't determine file type for '" + openfile.FileName + "'.");
                 return null;

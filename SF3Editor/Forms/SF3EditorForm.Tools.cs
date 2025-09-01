@@ -86,28 +86,19 @@ namespace SF3.Editor.Forms {
 
             var saveFileDialog = new SaveFileDialog {
                 Title = "Copy Tables To",
-                Filter = file.Loader.FileDialogFilter
+                Filter = OpenDialogFilter
             };
             if (saveFileDialog.ShowDialog() != DialogResult.OK)
                 return;
             var copyToFilename = saveFileDialog.FileName;
 
-            // If we don't know the scenario, we can't load it.
-            var scenario = OpenScenario ?? DetermineScenario(copyToFilename, file.FileType);
-            if (!scenario.HasValue) {
-                // CHR's / CHP's are valid for any scenario, so just default to Scenario 1.
-                if (file.FileType == SF3FileType.CHR || file.FileType == SF3FileType.CHP)
-                    scenario = ScenarioType.Scenario1;
-                else {
-                    ErrorMessage("Can't determine scenario for '" + copyToFilename + "'.");
-                    return;
-                }
-            }
+            var fileType = DetermineFileType(copyToFilename, GetFileFilterFromDialog(saveFileDialog.Filter, saveFileDialog.FilterIndex)) ?? file.FileType;
+            var scenario = OpenScenario ?? DetermineScenario(copyToFilename, file.FileType) ?? file.Scenario;
 
             ObjectExtensions.BulkCopyPropertiesResult result = null;
             try {
                 var copyModelLoader = new ModelFileLoader();
-                if (!copyModelLoader.LoadFile(copyToFilename, null, loader => CreateFile(loader.ByteData, file.FileType, c_nameGetterContexts, scenario.Value))) {
+                if (!copyModelLoader.LoadFile(copyToFilename, null, loader => CreateFile(loader.ByteData, fileType, c_nameGetterContexts, scenario))) {
                     ErrorMessage("Error trying to load file. It is probably in use by another process.");
                     return;
                 }
@@ -138,28 +129,19 @@ namespace SF3.Editor.Forms {
 
             var openFileDialog = new OpenFileDialog {
                 Title = "Copy Tables From",
-                Filter = file.Loader.FileDialogFilter
+                Filter = OpenDialogFilter
             };
             if (openFileDialog.ShowDialog() != DialogResult.OK)
                 return;
             var copyFromFilename = openFileDialog.FileName;
 
-            // If we don't know the scenario, we can't load it.
-            var scenario = OpenScenario ?? DetermineScenario(copyFromFilename, file.FileType);
-            if (!scenario.HasValue) {
-                // CHR's / CHP's are valid for any scenario, so just default to Scenario 1.
-                if (file.FileType == SF3FileType.CHR || file.FileType == SF3FileType.CHP)
-                    scenario = ScenarioType.Scenario1;
-                {
-                    ErrorMessage("Can't determine scenario for '" + copyFromFilename + "'.");
-                    return;
-                }
-            }
+            var fileType = DetermineFileType(copyFromFilename, GetFileFilterFromDialog(openFileDialog.Filter, openFileDialog.FilterIndex)) ?? file.FileType;
+            var scenario = OpenScenario ?? DetermineScenario(copyFromFilename, file.FileType) ?? file.Scenario;
 
             ObjectExtensions.BulkCopyPropertiesResult result = null;
             try {
                 var copyModelLoader = new ModelFileLoader();
-                if (!copyModelLoader.LoadFile(copyFromFilename, null, loader => CreateFile(loader.ByteData, file.FileType, c_nameGetterContexts, scenario.Value))) {
+                if (!copyModelLoader.LoadFile(copyFromFilename, null, loader => CreateFile(loader.ByteData, fileType, c_nameGetterContexts, scenario))) {
                     ErrorMessage("Error trying to load file. It is probably in use by another process.");
                     return;
                 }

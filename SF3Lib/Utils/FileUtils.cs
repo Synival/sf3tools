@@ -274,5 +274,16 @@ namespace SF3.Utils {
             var filter = GetFileFilterForFileType(type);
             return $"{name} ({filter})|{filter}";
         }
+
+        public static string GetFileFilterFromDialog(string filter, int filterIndex) {
+            // Split each filter into a an n-element array of 2 strings
+            var filters = filter
+                .Split('|')
+                .Select((x, i) => new { Index = i / 2, Value = x })
+                .GroupBy(x => x.Index)
+                .ToDictionary(x => x.Key, x => x.Select(y => y.Value).ToArray());
+
+            return filters[filterIndex - 1][1];
+        }
     }
 }

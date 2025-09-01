@@ -360,29 +360,41 @@ namespace CommonLib.Extensions {
         /// <returns>A list of all properties considered and the result.</returns>
         public static BulkCopyPropertiesResult BulkCopyProperties(this object objFrom, object objTo, bool inherit = true, PropertyInfo property = null) {
             // Get all public properties we're considering to check.
-            var allProperties = objFrom.GetType().GetProperties(
-                    BindingFlags.Public |
-                    BindingFlags.Instance |
-                    (inherit ? 0 : BindingFlags.DeclaredOnly)
-                ).ToList();
+            var allPropertiesFrom = objFrom.GetType().GetProperties(
+                    BindingFlags.Public | BindingFlags.Instance | (inherit ? 0 : BindingFlags.DeclaredOnly)
+                ).ToDictionary(x => x.Name, x => x);
+
+            var allPropertiesTo = objTo.GetType().GetProperties(
+                    BindingFlags.Public | BindingFlags.Instance | (inherit ? 0 : BindingFlags.DeclaredOnly)
+                ).ToDictionary(x => x.Name, x => x);
+
+            var allProperties = allPropertiesFrom
+                .Where(x => allPropertiesTo.ContainsKey(x.Key))
+                .ToDictionary(x => x.Key, x => (From: x.Value, To: allPropertiesTo[x.Key]));
 
             // Get all public properties with the [BulkCopy] attribute.
-            var copyList = allProperties.Where(x => x.IsDefined(typeof(BulkCopyAttribute))).ToList();
-            var resultList = new List<IBulkCopyResult>();
-            foreach (var copyProperty in copyList) {
-                var oldValue = copyProperty.GetValue(objTo);
-                copyProperty.SetValue(objTo, copyProperty.GetValue(objFrom));
-                var newValue = copyProperty.GetValue(objTo);
+            var copyList = allProperties
+                .Where(x => x.Value.From.IsDefined(typeof(BulkCopyAttribute)) && x.Value.To.IsDefined(typeof(BulkCopyAttribute)))
+                .ToList();
 
-                resultList.Add(new BulkCopyPropertyResult(objFrom, objTo, copyProperty, oldValue, newValue));
+            var resultList = new List<IBulkCopyResult>();
+            foreach (var copyProperties in copyList) {
+                var oldValue = copyProperties.Value.To.GetValue(objTo);
+                copyProperties.Value.To.SetValue(objTo, copyProperties.Value.From.GetValue(objFrom));
+                var newValue = copyProperties.Value.To.GetValue(objTo);
+
+                resultList.Add(new BulkCopyPropertyResult(objFrom, objTo, copyProperties.Value.To, oldValue, newValue));
             }
 
             // Get all public properties with the [BulkCopy] attribute.
-            var copyContentsList = allProperties.Where(x => x.IsDefined(typeof(BulkCopyRecurseAttribute))).ToList();
+            var copyContentsList = allProperties
+                .Where(x => x.Value.From.IsDefined(typeof(BulkCopyRecurseAttribute)) && x.Value.To.IsDefined(typeof(BulkCopyRecurseAttribute)))
+                .ToList();
+
             var subResultList = new List<BulkCopyPropertyResult>();
             foreach (var copyProperty in copyContentsList) {
-                var valueFrom = copyProperty.GetValue(objFrom);
-                var valueTo = copyProperty.GetValue(objTo);
+                var valueFrom = copyProperty.Value.From.GetValue(objFrom);
+                var valueTo = copyProperty.Value.To.GetValue(objTo);
 
                 // Don't recurse through objects that are unassigned, on either end.
                 // We have no idea how to instantiate them anyway.
@@ -392,11 +404,11 @@ namespace CommonLib.Extensions {
 
                 var type = valueFrom.GetType();
                 if (typeof(IDictionary).IsAssignableFrom(type))
-                    resultList.Add(BulkCopyCollectionProperties(valueFrom as IDictionary, valueTo as IDictionary, inherit, copyProperty));
+                    resultList.Add(BulkCopyCollectionProperties(valueFrom as IDictionary, valueTo as IDictionary, inherit, copyProperty.Value.From));
                 if (typeof(IEnumerable<object>).IsAssignableFrom(type))
-                    resultList.Add(BulkCopyCollectionProperties(valueFrom as IEnumerable<object>, valueTo as IEnumerable<object>, inherit, copyProperty));
+                    resultList.Add(BulkCopyCollectionProperties(valueFrom as IEnumerable<object>, valueTo as IEnumerable<object>, inherit, copyProperty.Value.From));
                 else
-                    resultList.Add(BulkCopyProperties(valueFrom, valueTo, inherit, copyProperty));
+                    resultList.Add(BulkCopyProperties(valueFrom, valueTo, inherit, copyProperty.Value.From));
             }
 
             return new BulkCopyPropertiesResult(objFrom, resultList, property);
