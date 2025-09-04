@@ -698,6 +698,11 @@ namespace SF3.CHR {
 
                 // If the image is invalid, display a bright red square instead.
                 if (bitmap == null || x1 < 0 || y1 < 0 || x2 > bitmap.Width || y2 > bitmap.Height) {
+                    if (bitmap == null)
+                        Logger.WriteLine($"{nameof(WriteFrameImages)}: No bitmap for frame '{frameKey}'", LogType.Error);
+                    else
+                        Logger.WriteLine($"{nameof(WriteFrameImages)}: Bad coordinates for frame '{frameKey}' for {bitmap.Width}x{bitmap.Height} image: ({x1}, {y1})-({x2}, {y2})", LogType.Error);
+
                     data = new ushort[spritesheetFrame.Width * spritesheetFrame.Height];
                     for (int i = 0; i < data.Length; i++)
                         data[i] = 0x801F;
