@@ -19,11 +19,11 @@ namespace SF3.CHR {
     public class CHR_CompilationJob {
         /// <summary>
         /// Begins a new sprite. Animations and frames and be added with AddFrames() and AddAnimations().
-        /// FinishSprite() must be called when frames and animations are complete.
         /// </summary>
         /// <param name="spriteDef">The sprite with the header entry information.</param>
-        public void StartSprite(SpriteDef spriteDef) {
-            StartSprite(new SpriteHeaderEntry() {
+        /// <returns>The index of the new sprite initialized.</returns>
+        public int InitNewSprite(SpriteDef spriteDef) {
+            return InitNewSprite(new SpriteHeaderEntry() {
                 SpriteID       = spriteDef.SpriteID,
                 Width          = spriteDef.Width,
                 Height         = spriteDef.Height,
@@ -38,15 +38,15 @@ namespace SF3.CHR {
 
         /// <summary>
         /// Begins a new sprite. Animations and frames and be added with AddFrames() and AddAnimations().
-        /// FinishSprite() must be called when frames and animations are complete.
         /// </summary>
         /// <param name="spritesheet">The spritesheet which contains the frames and animations for this sprite.</param>
         /// <param name="frameWidth">The width of the frames in the spritesheet.</param>
         /// <param name="frameHeight">The height of the frames in the spritesheet.</param>
         /// <param name="directions">The number of directions for this sprite.</param>
         /// <param name="promotionLevel">The promotion level of the sprite, if it needs to be disambiguated for a player character. Usually 0.</param>
-        public void StartSprite(Spritesheet spritesheet, int frameWidth, int frameHeight, SpriteDirectionCountType directions, int promotionLevel) {
-            StartSprite(new SpriteHeaderEntry() {
+        /// <returns>The index of the new sprite initialized.</returns>
+        public int InitNewSprite(Spritesheet spritesheet, int frameWidth, int frameHeight, SpriteDirectionCountType directions, int promotionLevel) {
+            return InitNewSprite(new SpriteHeaderEntry() {
                 SpriteID       = spritesheet.SpriteID,
                 Width          = frameWidth,
                 Height         = frameHeight,
@@ -61,26 +61,15 @@ namespace SF3.CHR {
 
         /// <summary>
         /// Begins a new sprite. Animations and frames and be added with AddFrames() and AddAnimations().
-        /// FinishSprite() must be called when frames and animations are complete.
         /// </summary>
         /// <param name="header">Header information for the sprite.</param>
-        public void StartSprite(SpriteHeaderEntry header) {
-            if (_currentSpriteIndex < _spriteCount)
-                FinishSprite();
-
-            var spriteInfo = GetSpriteInfo(_currentSpriteIndex);
+        /// <returns>The index of the new sprite initialized.</returns>
+        public int InitNewSprite(SpriteHeaderEntry header) {
+            _currentSpriteIndex = _spriteCount;
+            var spriteInfo = GetSpriteInfo(_currentSpriteIndex.Value);
             spriteInfo.Header = header;
-
-            _spriteCount = _currentSpriteIndex + 1;
-            
-        }
-
-        /// <summary>
-        /// Finishes the last sprite being built.
-        /// </summary>
-        public void FinishSprite() {
-            if (_currentSpriteIndex < _spriteCount)
-                _currentSpriteIndex = _spriteCount;
+            _spriteCount = _currentSpriteIndex.Value + 1;
+            return _currentSpriteIndex.Value;
         }
 
         /// <summary>
@@ -109,7 +98,7 @@ namespace SF3.CHR {
         /// <param name="frameWidth">The width of the frames in 'frameGroup'.</param>
         /// <param name="frameHeight">The height of the frames in 'frameGroup'.</param>
         public void AddFrames(FrameGroup frameGroup, string spriteName, int frameWidth, int frameHeight) {
-            var spriteInfo = GetSpriteInfo(_currentSpriteIndex);
+            var spriteInfo = GetSpriteInfo(_currentSpriteIndex.Value);
             var spriteDef = SpriteResources.GetSpriteDef(spriteName);
             if (spriteDef == null)
                 Logger.WriteLine($"{nameof(AddFrames)}(): SpriteDef for '{spriteName}' not found", LogType.Error);
@@ -185,12 +174,12 @@ namespace SF3.CHR {
                     Y      = frameY,
                     Width  = frameWidth,
                     Height = frameHeight,
-                    FirstSeenSpriteIndex = _currentSpriteIndex,
+                    FirstSeenSpriteIndex = _currentSpriteIndex.Value,
                     Coding = coding,
                 });
             }
 
-            var spriteInfo = GetSpriteInfo(_currentSpriteIndex);
+            var spriteInfo = GetSpriteInfo(_currentSpriteIndex.Value);
             spriteInfo.Frames.Add(new FrameInfo() { FrameKey = frameKey, AniFrameKey = aniFrameKey });
         }
 
@@ -212,12 +201,12 @@ namespace SF3.CHR {
                     Y      = 0,
                     Width  = frameImage.Width,
                     Height = frameImage.Height,
-                    FirstSeenSpriteIndex = _currentSpriteIndex,
+                    FirstSeenSpriteIndex = _currentSpriteIndex.Value,
                     Coding = coding,
                 });
             }
 
-            var spriteInfo = GetSpriteInfo(_currentSpriteIndex);
+            var spriteInfo = GetSpriteInfo(_currentSpriteIndex.Value);
             spriteInfo.Frames.Add(new FrameInfo() { FrameKey = frameKey, AniFrameKey = aniFrameKey });
         }
 
@@ -302,7 +291,7 @@ namespace SF3.CHR {
         public void AddAnimation(Animation animation, string animationName, string spriteName, int frameWidth, int frameHeight, SpriteDirectionCountType directions) {
             var spritesheetKey     = Spritesheet.DimensionsToKey(frameWidth, frameHeight);
             var aniFrameKeyPrefix  = $"{spriteName} ({spritesheetKey})";
-            var spriteInfo         = GetSpriteInfo(_currentSpriteIndex);
+            var spriteInfo         = GetSpriteInfo(_currentSpriteIndex.Value);
             var spriteAniFrameKeys = spriteInfo.Frames.Select(x => x.AniFrameKey).ToArray();
             var frameDirections    = directions.ToAnimationFrameDirections();
 
@@ -450,7 +439,7 @@ namespace SF3.CHR {
                 return new MissingAnimationFrame[0];
 
             var aniFrameKeyPrefix   = $"{spriteName} ({Spritesheet.DimensionsToKey(frameWidth, frameHeight)})";
-            var spriteInfo          = GetSpriteInfo(_currentSpriteIndex);
+            var spriteInfo          = GetSpriteInfo(_currentSpriteIndex.Value);
             var spriteAniFrameKeys  = spriteInfo.Frames.Select(x => x.AniFrameKey).ToArray();
             var frameDirections     = directions.ToAnimationFrameDirections();
 
@@ -504,7 +493,7 @@ namespace SF3.CHR {
                 return;
 
             var missingFrames      = missingAnimationFrame.MissingFrames;
-            var spriteInfo         = GetSpriteInfo(_currentSpriteIndex);
+            var spriteInfo         = GetSpriteInfo(_currentSpriteIndex.Value);
             var spriteAniFrameKeys = spriteInfo.Frames.Select(x => x.AniFrameKey).ToArray();
 
             // It's possible that this frame could have been added after 'missingAnimationFrames' was first populated. If so, do nothing.
@@ -769,7 +758,7 @@ namespace SF3.CHR {
         }
 
         // The current sprite being built
-        private int _currentSpriteIndex = 0;
+        private int? _currentSpriteIndex = null;
 
         // The total number of sprites built (or at least started)
         private int _spriteCount = 0;

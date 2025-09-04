@@ -43,15 +43,13 @@ namespace SF3.CHR {
             var job = new CHR_CompilationJob();
 
             foreach (var sprite in chrDef.Sprites) {
-                job.StartSprite(sprite);
+                job.InitNewSprite(sprite);
 
                 if (!OptimizeFrames)
                     job.AddFrames(sprite);
                 if (OptimizeFrames || AddMissingAnimationFrames)
                     job.AddMissingFrames(sprite);
                 job.AddAnimations(sprite);
-
-                job.FinishSprite();
             }
 
             var bytesWritten = job.Write(outputStream, chrDef.WriteFrameImagesBeforeTables == true, chrDef.JunkAfterFrameTables);
