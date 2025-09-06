@@ -13,7 +13,7 @@
     <item value="0x0A" name="Black Knight" />
     <item value="0x0B" name="Royal Guard" />
     <item value="0x0C" name="Kaiser Knight" />
-    <item value="0x0D" name="Giant Armor" />
+    <item value="0x0D" name="Giant Armour" />
     <item value="0x0E" name="Hill Giant" />
     <item value="0x0F" name="Lizardman" />
     <item value="0x10" name="Dragonewt" />
@@ -73,8 +73,8 @@
     <item value="0x46" name="Kyon-Shi" />
     <item value="0x47" name="Thief" />
     <item value="0x48" name="Vampire Bat" />
-    <item value="0x49" name="Kraken Leg" />
-    <item value="0x4A" name="Kraken Arm" />
+    <item value="0x49" name="Kraken Arm" />
+    <item value="0x4A" name="Kraken Leg" />
     <item value="0x4B" name="Dark Dragon 1" />
     <item value="0x4C" name="Dark Dragon 2" />
     <item value="0x4D" name="Dark Dragon 3" />

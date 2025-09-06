@@ -14,7 +14,7 @@
     <item value="0x0B" name="Charm" />
     <item value="0x0C" name="Cold" />
     <item value="0x0D" name="Critical Hit?" />
-    <item value="0x0E" name="Penetrate Armor" />
+    <item value="0x0E" name="Penetrate Armour" />
     <item value="0x0F" name="Berserk" />
     <item value="0x10" name="Blood Sucker" />
     <item value="0x11" name="Regret Hit" />
@@ -42,7 +42,7 @@
     <item value="0x27" name="After Burner" />
     <item value="0x28" name="Ice Breaker" />
     <item value="0x29" name="Dimension" />
-    <item value="0x2A" name="Melt Armor" />
+    <item value="0x2A" name="Melt Armour" />
     <item value="0x2B" name="Light Cross" />
     <item value="0x2C" name="Light Sphere" />
     <item value="0x2D" name="Poison Blade" />
@@ -129,7 +129,7 @@
     <item value="0x7E" name="Hell Wind" />
     <item value="0x7F" name="Stun Needle" />
     <item value="0x80" name="Dazzle Shot" />
-    <item value="0x81" name="Armor Shot" />
+    <item value="0x81" name="Armour Shot" />
     <item value="0x82" name="Explode" />
     <item value="0x83" name="Desert Storm" />
     <item value="0x84" name="Planet Dance" />
@@ -179,7 +179,7 @@
     <item value="0xB0" name="Star Bomb" />
     <item value="0xB1" name="Road Rush" />
     <item value="0xB2" name="Flame Tail" />
-    <item value="0xB3" name="Melt Armor (Fafhard)" />
+    <item value="0xB3" name="Melt Armour (Fafhard)" />
     <item value="0xB4" name="Dominion Ray" />
     <item value="0xB5" name="Thunder Blow" />
     <item value="0xB6" name="Photon Rage" />

@@ -164,13 +164,13 @@
     <item value="0xA1" name="Unknown1 2" />
     <item value="0xA2" name="Unknown1 3" />
     <item value="0xA3" name="(end)" />
-    <item value="0xA4" name="PenetrateArmor 1" />
-    <item value="0xA5" name="PenetrateArmor 2" />
-    <item value="0xA6" name="PenetrateArmor 3" />
-    <item value="0xA7" name="PenetrateArmor 4" />
-    <item value="0xA8" name="PenetrateArmor 5" />
-    <item value="0xA9" name="PenetrateArmor 6" />
-    <item value="0xAA" name="PenetrateArmor 7" />
+    <item value="0xA4" name="PenetrateArmour 1" />
+    <item value="0xA5" name="PenetrateArmour 2" />
+    <item value="0xA6" name="PenetrateArmour 3" />
+    <item value="0xA7" name="PenetrateArmour 4" />
+    <item value="0xA8" name="PenetrateArmour 5" />
+    <item value="0xA9" name="PenetrateArmour 6" />
+    <item value="0xAA" name="PenetrateArmour 7" />
     <item value="0xAB" name="(end)" />
     <item value="0xAC" name="Unknown2 1" />
     <item value="0xAD" name="Unknown2 2" />
