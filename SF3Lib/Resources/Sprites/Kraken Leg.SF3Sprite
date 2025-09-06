@@ -1,10 +1,10 @@
 {
   "Name": "Kraken Leg",
-  "Width": 40,
-  "Height": 56,
+  "Width": 32,
+  "Height": 48,
   "Spritesheets": {
-    "40x56": {
-      "SpriteID": 365,
+    "32x48": {
+      "SpriteID": 366,
       "VerticalOffset": 0,
       "Unknown0x08": 20,
       "CollisionSize": 40,
@@ -17,22 +17,22 @@
         },
         "Moving 2": {
           "Directions": 4,
-          "SpritesheetX": 40,
+          "SpritesheetX": 32,
           "SpritesheetY": 0
         },
         "Moving 3": {
           "Directions": 4,
-          "SpritesheetX": 80,
+          "SpritesheetX": 64,
           "SpritesheetY": 0
         },
         "Moving 4": {
           "Directions": 4,
-          "SpritesheetX": 120,
+          "SpritesheetX": 96,
           "SpritesheetY": 0
         },
         "Moving 5": {
           "Directions": 4,
-          "SpritesheetX": 160,
+          "SpritesheetX": 128,
           "SpritesheetY": 0
         }
       },

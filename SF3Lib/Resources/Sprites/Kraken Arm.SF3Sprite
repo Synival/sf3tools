@@ -1,10 +1,10 @@
 {
   "Name": "Kraken Arm",
-  "Width": 32,
-  "Height": 48,
+  "Width": 40,
+  "Height": 56,
   "Spritesheets": {
-    "32x48": {
-      "SpriteID": 366,
+    "40x56": {
+      "SpriteID": 365,
       "VerticalOffset": 0,
       "Unknown0x08": 20,
       "CollisionSize": 40,
@@ -17,22 +17,22 @@
         },
         "Moving 2": {
           "Directions": 4,
-          "SpritesheetX": 32,
+          "SpritesheetX": 40,
           "SpritesheetY": 0
         },
         "Moving 3": {
           "Directions": 4,
-          "SpritesheetX": 64,
+          "SpritesheetX": 80,
           "SpritesheetY": 0
         },
         "Moving 4": {
           "Directions": 4,
-          "SpritesheetX": 96,
+          "SpritesheetX": 120,
           "SpritesheetY": 0
         },
         "Moving 5": {
           "Directions": 4,
-          "SpritesheetX": 128,
+          "SpritesheetX": 160,
           "SpritesheetY": 0
         }
       },

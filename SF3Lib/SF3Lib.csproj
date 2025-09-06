@@ -378,7 +378,7 @@
     <Content Include="Resources\Sprites\Arthur (P2).SF3Sprite">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\Sprites\Arthur w_o Armor.SF3Sprite">
+    <Content Include="Resources\Sprites\Arthur w_o Armour.SF3Sprite">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Sprites\Aspinia Knight.SF3Sprite">
@@ -984,7 +984,7 @@
     <Content Include="Resources\Sprites\Giant Ant.SF3Sprite">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\Sprites\Giant Armor.SF3Sprite">
+    <Content Include="Resources\Sprites\Giant Armour.SF3Sprite">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Sprites\Giga Breaker.SF3Sprite">
