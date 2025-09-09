@@ -1,4 +1,3 @@
-using System;
 using SF3.ByteData;
 using SF3.Models.Structs.CHR;
 using SF3.Types;
@@ -15,12 +14,8 @@ namespace SF3.Models.Tables.CHR {
             FrameTable       = frameTable;
         }
 
-        public static AnimationCommandTable Create(IByteData data, string name, int address, string rowPrefix, int spriteIndex, int spriteId, SpriteDirectionCountType spriteDirections, int animationIndex, FrameTable frameTable, int max) {
-            var newTable = new AnimationCommandTable(data, name, address, rowPrefix, spriteIndex, spriteId, spriteDirections, animationIndex, frameTable, max);
-            if (!newTable.Load())
-                throw new InvalidOperationException("Couldn't initialize table");
-            return newTable;
-        }
+        public static AnimationCommandTable Create(IByteData data, string name, int address, string rowPrefix, int spriteIndex, int spriteId, SpriteDirectionCountType spriteDirections, int animationIndex, FrameTable frameTable, int max)
+            => CreateBase(() => new AnimationCommandTable(data, name, address, rowPrefix, spriteIndex, spriteId, spriteDirections, animationIndex, frameTable, max));
 
         public override bool Load() {
             AnimationCommand prevCommand = null;

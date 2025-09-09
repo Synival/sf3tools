@@ -1,4 +1,3 @@
-using System;
 using CommonLib.NamedValues;
 using SF3.ByteData;
 using SF3.Models.Structs.CHR;
@@ -13,12 +12,8 @@ namespace SF3.Models.Tables.CHR {
             IsInCHP = isInCHP;
         }
 
-        public static SpriteTable Create(IByteData data, string name, int address, int startId, uint dataOffset, INameGetterContext ngc, bool isInCHP) {
-            var newTable = new SpriteTable(data, name, address, startId, dataOffset, ngc, isInCHP);
-            if (!newTable.Load())
-                throw new InvalidOperationException("Couldn't initialize table");
-            return newTable;
-        }
+        public static SpriteTable Create(IByteData data, string name, int address, int startId, uint dataOffset, INameGetterContext ngc, bool isInCHP)
+            => CreateBase(() => new SpriteTable(data, name, address, startId, dataOffset, ngc, isInCHP));
 
         public override bool Load() {
             int globalId = StartID;

@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using SF3.ByteData;
@@ -17,12 +16,8 @@ namespace SF3.Models.Tables.CHR {
             SpriteDirections = spriteDirections;
         }
 
-        public static FrameTable Create(IByteData data, string name, int address, uint dataOffset, int width, int height, string rowPrefix, int spriteIndex, int spriteId, int spriteDirections) {
-            var newTable = new FrameTable(data, name, address, dataOffset, width, height, rowPrefix, spriteIndex, spriteId, spriteDirections);
-            if (!newTable.Load())
-                throw new InvalidOperationException("Couldn't initialize table");
-            return newTable;
-        }
+        public static FrameTable Create(IByteData data, string name, int address, uint dataOffset, int width, int height, string rowPrefix, int spriteIndex, int spriteId, int spriteDirections)
+            => CreateBase(() => new FrameTable(data, name, address, dataOffset, width, height, rowPrefix, spriteIndex, spriteId, spriteDirections));
 
         public override bool Load() {
             return Load(

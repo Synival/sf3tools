@@ -1,4 +1,3 @@
-using System;
 using SF3.ByteData;
 using SF3.Models.Structs.CHR;
 
@@ -10,12 +9,8 @@ namespace SF3.Models.Tables.CHR {
             SpriteIDs   = spriteIds;
         }
 
-        public static MultipleAnimationOffsetsTable Create(IByteData data, string name, int[] addresses, uint[] dataOffsets, int[] spriteIds) {
-            var newTable = new MultipleAnimationOffsetsTable(data, name, addresses, dataOffsets, spriteIds);
-            if (!newTable.Load())
-                throw new InvalidOperationException("Couldn't initialize table");
-            return newTable;
-        }
+        public static MultipleAnimationOffsetsTable Create(IByteData data, string name, int[] addresses, uint[] dataOffsets, int[] spriteIds)
+            => CreateBase(() => new MultipleAnimationOffsetsTable(data, name, addresses, dataOffsets, spriteIds));
 
         public override bool Load() {
             return Load(

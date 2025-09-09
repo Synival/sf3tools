@@ -1,5 +1,4 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using SF3.ByteData;
 using SF3.Models.Structs.CHR;
 
@@ -13,12 +12,8 @@ namespace SF3.Models.Tables.CHR {
             RowPrefix              = rowPrefix ?? "";
         }
 
-        public static AnimationTable Create(IByteData data, string name, int spriteDirections, AnimationCommandTable[] animationCommandTables, FrameTable frameTable, string rowPrefix) {
-            var newTable = new AnimationTable(data, name, spriteDirections, animationCommandTables, frameTable, rowPrefix);
-            if (!newTable.Load())
-                throw new InvalidOperationException("Couldn't initialize table");
-            return newTable;
-        }
+        public static AnimationTable Create(IByteData data, string name, int spriteDirections, AnimationCommandTable[] animationCommandTables, FrameTable frameTable, string rowPrefix)
+            => CreateBase(() => new AnimationTable(data, name, spriteDirections, animationCommandTables, frameTable, rowPrefix));
 
         public override bool Load() {
             return Load(

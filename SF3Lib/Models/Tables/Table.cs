@@ -1,7 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using CommonLib.Attributes;
+using CommonLib.Logging;
 using SF3.ByteData;
 using SF3.Models.Structs;
 
@@ -23,6 +25,17 @@ namespace SF3.Models.Tables {
             Data = data;
             Name = name;
             Address = address;
+        }
+
+        public static U CreateBase<U>(Func<U> tableCreator) where U : Table<T> {
+            try {
+                var table = tableCreator();
+                return table.Load() ? table : throw new Exception($"Couldn't load table of type '{typeof(U).Name}'.");
+            }
+            catch (Exception ex) {
+                Logger.LogException(ex);
+                return null;
+            }
         }
 
         public abstract bool Load();
