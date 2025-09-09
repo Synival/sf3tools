@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using CommonLib.Logging;
 using CommonLib.NamedValues;
 using SF3.ByteData;
 using SF3.Models.Files;
@@ -162,29 +163,35 @@ namespace SF3.Utils {
         /// <exception cref="InvalidOperationException">Thrown if 'fileType' is not supported.</exception>
         public static IBaseFile CreateFile(IByteData byteData, SF3FileType fileType, Dictionary<ScenarioType, INameGetterContext> nameGetterContexts, ScenarioType scenario) {
             var ngc = nameGetterContexts[scenario];
-            switch (fileType) {
-                case SF3FileType.X1:      return X1_File  .Create(byteData, ngc, scenario, false);
-                case SF3FileType.X1BTL99: return X1_File  .Create(byteData, ngc, scenario, true);
-                case SF3FileType.X002:    return X002_File.Create(byteData, ngc, scenario);
-                case SF3FileType.X005:    return X005_File.Create(byteData, ngc, scenario);
-                case SF3FileType.X011:    return X011_File.Create(byteData, ngc, scenario);
-                case SF3FileType.X021:    return X021_File.Create(byteData, ngc, scenario);
-                case SF3FileType.X023:    return X023_File.Create(byteData, ngc, scenario);
-                case SF3FileType.X024:    return X024_File.Create(byteData, ngc, scenario);
-                case SF3FileType.X026:    return X026_File.Create(byteData, ngc, scenario);
-                case SF3FileType.X027:    return X027_File.Create(byteData, ngc, scenario);
-                case SF3FileType.X012:    return X012_File.Create(byteData, ngc, scenario);
-                case SF3FileType.X013:    return X013_File.Create(byteData, ngc, scenario);
-                case SF3FileType.X014:    return X014_File.Create(byteData, ngc, scenario);
-                case SF3FileType.X019:    return X019_File.Create(byteData, ngc, scenario);
-                case SF3FileType.X031:    return X031_File.Create(byteData, ngc, scenario);
-                case SF3FileType.X033:    return X033_File.Create(byteData, ngc, scenario);
-                case SF3FileType.X044:    return X044_File.Create(byteData, ngc, scenario);
-                case SF3FileType.MPD:     return MPD_File .Create(byteData, nameGetterContexts);
-                case SF3FileType.CHR:     return CHR_File .Create(byteData, ngc, scenario);
-                case SF3FileType.CHP:     return CHP_File .Create(byteData, ngc, scenario);
-                default:
-                    throw new InvalidOperationException($"Unhandled file type '{fileType}'");
+            try {
+                switch (fileType) {
+                    case SF3FileType.X1:      return X1_File  .Create(byteData, ngc, scenario, false);
+                    case SF3FileType.X1BTL99: return X1_File  .Create(byteData, ngc, scenario, true);
+                    case SF3FileType.X002:    return X002_File.Create(byteData, ngc, scenario);
+                    case SF3FileType.X005:    return X005_File.Create(byteData, ngc, scenario);
+                    case SF3FileType.X011:    return X011_File.Create(byteData, ngc, scenario);
+                    case SF3FileType.X021:    return X021_File.Create(byteData, ngc, scenario);
+                    case SF3FileType.X023:    return X023_File.Create(byteData, ngc, scenario);
+                    case SF3FileType.X024:    return X024_File.Create(byteData, ngc, scenario);
+                    case SF3FileType.X026:    return X026_File.Create(byteData, ngc, scenario);
+                    case SF3FileType.X027:    return X027_File.Create(byteData, ngc, scenario);
+                    case SF3FileType.X012:    return X012_File.Create(byteData, ngc, scenario);
+                    case SF3FileType.X013:    return X013_File.Create(byteData, ngc, scenario);
+                    case SF3FileType.X014:    return X014_File.Create(byteData, ngc, scenario);
+                    case SF3FileType.X019:    return X019_File.Create(byteData, ngc, scenario);
+                    case SF3FileType.X031:    return X031_File.Create(byteData, ngc, scenario);
+                    case SF3FileType.X033:    return X033_File.Create(byteData, ngc, scenario);
+                    case SF3FileType.X044:    return X044_File.Create(byteData, ngc, scenario);
+                    case SF3FileType.MPD:     return MPD_File .Create(byteData, nameGetterContexts);
+                    case SF3FileType.CHR:     return CHR_File .Create(byteData, ngc, scenario);
+                    case SF3FileType.CHP:     return CHP_File .Create(byteData, ngc, scenario);
+                    default:
+                        throw new InvalidOperationException($"Unhandled file type '{fileType}'");
+                }
+            }
+            catch (Exception ex) {
+                Logger.LogException(ex);
+                return null;
             }
         }
 

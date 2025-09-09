@@ -1,6 +1,7 @@
 using System;
 using System.IO;
 using CommonLib.Arrays;
+using CommonLib.Logging;
 using SF3.Exceptions;
 using static SF3.ModelLoaders.ModelFileLoaderDelegates;
 
@@ -44,10 +45,19 @@ namespace SF3.ModelLoaders {
                     FileDialogFilter = fileDialogFilter;
                     return newData;
                 }
-                catch (Exception) {
+                catch (Exception ex) {
+                    Logger.LogException(ex);
                     return null;
                 }
-            }, el => createModel((IModelFileLoader) el));
+            }, el => {
+                try {
+                    return createModel((IModelFileLoader) el);
+                }
+                catch (Exception ex) {
+                    Logger.LogException(ex);
+                    return null;
+                }
+            });
         }
 
         public virtual bool SaveFile(string filename) {
@@ -59,7 +69,8 @@ namespace SF3.ModelLoaders {
                     Filename = filename;
                     return true;
                 }
-                catch {
+                catch (Exception ex) {
+                    Logger.LogException(ex);
                     return false;
                 }
             });

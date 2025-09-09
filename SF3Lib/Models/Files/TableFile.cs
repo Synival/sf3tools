@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using CommonLib;
+using CommonLib.Logging;
 using CommonLib.NamedValues;
 using SF3.ByteData;
 using SF3.Models.Tables;
@@ -37,12 +38,18 @@ namespace SF3.Models.Files {
         /// </summary>
         /// <returns>'true' if all tables are loaded. Otherwise 'false'.</returns>
         protected bool Init() {
-            Tables = MakeTables();
-            foreach (var ma in Tables.Where(x => x != null && !x.IsLoaded)) {
-                if (!ma.Load())
-                    return false;
+            try {
+                Tables = MakeTables();
+                foreach (var ma in Tables.Where(x => x != null && !x.IsLoaded)) {
+                    if (!ma.Load())
+                        return false;
+                }
+                return true;
             }
-            return true;
+            catch (Exception ex) {
+                Logger.LogException(ex);
+                return false;
+            }
         }
 
         /// <summary>
@@ -58,10 +65,16 @@ namespace SF3.Models.Files {
         public virtual bool OnFinish() => Data.Finish();
 
         public bool Finish() {
-            if (!OnFinish())
+            try {
+                if (!OnFinish())
+                    return false;
+                Finished?.Invoke(this, EventArgs.Empty);
+                return true;
+            }
+            catch (Exception ex) {
+                Logger.LogException(ex);
                 return false;
-            Finished?.Invoke(this, EventArgs.Empty);
-            return true;
+            }
         }
 
         public virtual void Dispose() => Data.Dispose();
