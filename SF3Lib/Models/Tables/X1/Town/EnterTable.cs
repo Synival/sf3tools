@@ -8,7 +8,7 @@ namespace SF3.Models.Tables.X1.Town {
         }
 
         public static EnterTable Create(IByteData data, string name, int address)
-            => CreateBase(() => new EnterTable(data, name, address));
+            => Create(() => new EnterTable(data, name, address));
 
         public override bool Load()
             => Load(

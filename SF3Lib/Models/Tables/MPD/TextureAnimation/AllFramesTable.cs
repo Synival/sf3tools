@@ -11,7 +11,7 @@ namespace SF3.Models.Tables.MPD.TextureAnimation {
         }
 
         public static AllFramesTable Create(IByteData data, string name, int address, IEnumerable<TextureAnimationModel> animations)
-            => CreateBase(() => new AllFramesTable(data, name, address, animations));
+            => Create(() => new AllFramesTable(data, name, address, animations));
 
         public override bool Load() {
             _rows = Animations.SelectMany(x => x.FrameTable).ToArray();

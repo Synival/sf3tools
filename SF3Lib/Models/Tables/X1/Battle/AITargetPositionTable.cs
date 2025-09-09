@@ -7,7 +7,7 @@ namespace SF3.Models.Tables.X1.Battle {
         }
 
         public static AITargetPositionTable Create(IByteData data, string name, int address)
-            => CreateBase(() => new AITargetPositionTable(data, name, address));
+            => Create(() => new AITargetPositionTable(data, name, address));
 
         public override bool Load()
             => Load((id, address) => new AITargetPosition(Data, id, "AITargetPosition" + id.ToString("D2"), address));

@@ -12,7 +12,7 @@ namespace SF3.Models.Tables.X1 {
         }
 
         public static InteractableTable Create(IByteData data, string name, int address, INameGetterContext nameGetterContext, NpcTable npcTable)
-            => CreateBase(() => new InteractableTable(data, name, address, nameGetterContext, npcTable));
+            => Create(() => new InteractableTable(data, name, address, nameGetterContext, npcTable));
 
         public override bool Load() {
             return Load(

@@ -11,7 +11,7 @@ namespace SF3.Models.Tables.Shared {
         }
 
         public static WarpTable Create(IByteData data, string name, int address, bool isBattle, INameGetterContext nameGetterContext)
-            => CreateBase(() => new WarpTable(data, name, address, isBattle, nameGetterContext));
+            => Create(() => new WarpTable(data, name, address, isBattle, nameGetterContext));
 
         public override bool Load() {
             Warp prevWarp = null;

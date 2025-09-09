@@ -8,7 +8,7 @@ namespace SF3.Models.Tables.X1.Town {
         }
 
         public static ArrowTable Create(IByteData data, string name, int address)
-            => CreateBase(() => new ArrowTable(data, name, address));
+            => Create(() => new ArrowTable(data, name, address));
 
         public override bool Load()
             => Load(

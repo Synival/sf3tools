@@ -10,7 +10,7 @@ namespace SF3.Models.Tables.Shared {
         }
 
         public static TileMovementTable Create(IByteData data, string name, int address, bool hasExtra)
-            => CreateBase(() => new TileMovementTable(data, name, address, hasExtra));
+            => Create(() => new TileMovementTable(data, name, address, hasExtra));
 
         public override bool Load()
             => Load((id, address) => new TileMovement(Data, id, EnumNameOr((MovementType) id, x => $"Unknown0x{((int) x):X2}"), address));

@@ -7,7 +7,7 @@ namespace SF3.Models.Tables.X002 {
         }
 
         public static LoadingOverrideTable Create(IByteData data, string name, string resourceFile, int address)
-            => CreateBase(() => new LoadingOverrideTable(data, name, resourceFile, address));
+            => Create(() => new LoadingOverrideTable(data, name, resourceFile, address));
 
         public override bool Load()
             => Load((id, name, address) => new LoadingOverride(Data, id, name, address));

@@ -7,7 +7,7 @@ namespace SF3.Models.Tables.X1.Battle {
         }
 
         public static BattleTalkTable Create(IByteData data, string name, int address)
-            => CreateBase(() => new BattleTalkTable(data, name, address));
+            => Create(() => new BattleTalkTable(data, name, address));
 
         public override bool Load()
             => Load((id, address) => new BattleTalk(Data, id, $"{nameof(BattleTalk)}{id:D2}", address),

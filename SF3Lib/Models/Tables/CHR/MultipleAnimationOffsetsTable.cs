@@ -10,7 +10,7 @@ namespace SF3.Models.Tables.CHR {
         }
 
         public static MultipleAnimationOffsetsTable Create(IByteData data, string name, int[] addresses, uint[] dataOffsets, int[] spriteIds)
-            => CreateBase(() => new MultipleAnimationOffsetsTable(data, name, addresses, dataOffsets, spriteIds));
+            => Create(() => new MultipleAnimationOffsetsTable(data, name, addresses, dataOffsets, spriteIds));
 
         public override bool Load() {
             return Load(

@@ -9,7 +9,7 @@ namespace SF3.Models.Tables.MPD.Model {
         }
 
         public static MovableModelTable Create(IByteData data, string name, int address, ModelCollectionType collectionType)
-            => CreateBase(() => new MovableModelTable(data, name, address, collectionType));
+            => Create(() => new MovableModelTable(data, name, address, collectionType));
 
         public override bool Load() {
             return Load(

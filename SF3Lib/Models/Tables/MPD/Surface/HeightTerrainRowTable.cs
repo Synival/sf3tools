@@ -7,7 +7,7 @@ namespace SF3.Models.Tables.MPD.Surface {
         }
 
         public static HeightTerrainRowTable Create(IByteData data, string name, int address)
-            => CreateBase(() => new HeightTerrainRowTable(data, name, address));
+            => Create(() => new HeightTerrainRowTable(data, name, address));
 
         public override bool Load() {
             var size = new HeightTerrainRow(Data, 0, "", Address).Size;

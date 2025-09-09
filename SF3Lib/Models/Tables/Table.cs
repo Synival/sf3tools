@@ -27,7 +27,7 @@ namespace SF3.Models.Tables {
             Address = address;
         }
 
-        public static U CreateBase<U>(Func<U> tableCreator) where U : Table<T> {
+        protected static U Create<U>(Func<U> tableCreator) where U : Table<T> {
             try {
                 var table = tableCreator();
                 return table.Load() ? table : throw new Exception($"Couldn't load table of type '{typeof(U).Name}'.");

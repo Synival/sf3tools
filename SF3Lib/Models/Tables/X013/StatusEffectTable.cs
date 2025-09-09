@@ -7,7 +7,7 @@ namespace SF3.Models.Tables.X013 {
         }
 
         public static StatusEffectTable Create(IByteData data, string name, string resourceFile, int address)
-            => CreateBase(() => new StatusEffectTable(data, name, resourceFile, address));
+            => Create(() => new StatusEffectTable(data, name, resourceFile, address));
 
         public override bool Load()
             => Load((id, name, address) => new StatusEffect(Data, id, name, address));

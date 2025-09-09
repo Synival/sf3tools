@@ -13,7 +13,7 @@ namespace SF3.Models.Tables.CHR {
         }
 
         public static AnimationTable Create(IByteData data, string name, int spriteDirections, AnimationCommandTable[] animationCommandTables, FrameTable frameTable, string rowPrefix)
-            => CreateBase(() => new AnimationTable(data, name, spriteDirections, animationCommandTables, frameTable, rowPrefix));
+            => Create(() => new AnimationTable(data, name, spriteDirections, animationCommandTables, frameTable, rowPrefix));
 
         public override bool Load() {
             return Load(

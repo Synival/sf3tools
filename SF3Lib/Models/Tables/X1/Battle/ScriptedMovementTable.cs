@@ -7,7 +7,7 @@ namespace SF3.Models.Tables.X1.Battle {
         }
 
         public static ScriptedMovementTable Create(IByteData data, string name, int address)
-            => CreateBase(() => new ScriptedMovementTable(data, name, address));
+            => Create(() => new ScriptedMovementTable(data, name, address));
 
         public override bool Load()
             => Load((id, address) => new ScriptedMovement(Data, id, "ScriptedMovement" + id.ToString("D2"), address));

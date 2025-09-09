@@ -7,7 +7,7 @@ namespace SF3.Models.Tables.MPD.Surface {
         }
 
         public static EventIDRowTable Create(IByteData data, string name, int address)
-            => CreateBase(() => new EventIDRowTable(data, name, address));
+            => Create(() => new EventIDRowTable(data, name, address));
 
         public override bool Load() {
             var size = new EventIDRow(Data, 0, "", Address).Size;

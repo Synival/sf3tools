@@ -7,7 +7,7 @@ namespace SF3.Models.Tables.Shared {
         }
 
         public static StatsTable Create(IByteData data, string name, string resourceFile, int address)
-            => CreateBase(() => new StatsTable(data, name, resourceFile, address));
+            => Create(() => new StatsTable(data, name, resourceFile, address));
 
         public override bool Load()
             => Load((id, name, address) => new Stats(Data, id, name, address));

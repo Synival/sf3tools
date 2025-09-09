@@ -7,7 +7,7 @@ namespace SF3.Models.Tables.X002 {
         }
 
         public static ItemTable Create(IByteData data, string name, string resourceFile, int address)
-            => CreateBase(() => new ItemTable(data, name, resourceFile, address));
+            => Create(() => new ItemTable(data, name, resourceFile, address));
 
         public override bool Load()
             => Load((id, name, address) => new Item(Data, id, name, address));

@@ -7,7 +7,7 @@ namespace SF3.Models.Tables.X014 {
         }
 
         public static CharacterBattleModelsSc3Table Create(IByteData data, string name, string resourceFile, int address)
-            => CreateBase(() => new CharacterBattleModelsSc3Table(data, name, resourceFile, address));
+            => Create(() => new CharacterBattleModelsSc3Table(data, name, resourceFile, address));
 
         public override bool Load()
             => Load((id, name, address) => new CharacterBattleModelsSc3(Data, id, name, address));

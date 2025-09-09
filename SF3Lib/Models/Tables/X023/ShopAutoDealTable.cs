@@ -8,7 +8,7 @@ namespace SF3.Models.Tables.X023 {
         }
 
         public static ShopAutoDealTable Create(IByteData data, string name, int address, bool hasFlag)
-            => CreateBase(() => new ShopAutoDealTable(data, name, address, hasFlag));
+            => Create(() => new ShopAutoDealTable(data, name, address, hasFlag));
 
         public override bool Load()
             => Load((id, address) => new ShopAutoDeal(Data, id, $"{nameof(ShopAutoDeal)}{id:D2}", address, HasFlag),

@@ -11,7 +11,7 @@ namespace SF3.Models.Tables.MPD.TextureCollection {
         }
 
         public static AllTexturesTable Create(string name, IEnumerable<TextureTable> textureTables)
-            => CreateBase(() => new AllTexturesTable(name, textureTables));
+            => Create(() => new AllTexturesTable(name, textureTables));
 
         public override bool Load() {
             _rows = Textures.OrderBy(x => x.Collection).ThenBy(x => x.ID).ToArray();

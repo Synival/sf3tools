@@ -10,7 +10,7 @@ namespace SF3.Models.Tables.X023 {
         }
 
         public static ShopItemsPointerTable Create(IByteData data, string name, string resourceFile, int address)
-            => CreateBase(() => new ShopItemsPointerTable(data, name, resourceFile, address));
+            => Create(() => new ShopItemsPointerTable(data, name, resourceFile, address));
 
         public override bool Load()
             => Load((id, address) => new ShopItemsPointer(Data, id, Resources.TryGetValue(id, out var name) ? name : $"{nameof(ShopItemsPointer)}{id:D2}", address),

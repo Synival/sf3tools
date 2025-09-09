@@ -7,7 +7,7 @@ namespace SF3.Models.Tables.MPD.Model {
         }
 
         public static CollisionLineIndexTable Create(IByteData data, string name, int address)
-            => CreateBase(() => new CollisionLineIndexTable(data, name, address));
+            => Create(() => new CollisionLineIndexTable(data, name, address));
 
         public override bool Load() {
             return Load(

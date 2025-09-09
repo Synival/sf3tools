@@ -6,7 +6,7 @@ namespace SF3.Models.Tables.CHR {
         protected AnimationOffsetTable(IByteData data, string name, int address, int size) : base(data, name, address, size) {}
 
         public static AnimationOffsetTable Create(IByteData data, string name, int address, int size)
-            => CreateBase(() => new AnimationOffsetTable(data, name, address, size));
+            => Create(() => new AnimationOffsetTable(data, name, address, size));
 
         public override bool Load()
             => Load((id, address) => new AnimationOffset(Data, id, $"{nameof(AnimationOffset)}{id:D2}", address));

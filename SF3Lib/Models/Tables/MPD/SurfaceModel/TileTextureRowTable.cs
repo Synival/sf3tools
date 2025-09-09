@@ -8,7 +8,7 @@ namespace SF3.Models.Tables.MPD.SurfaceModel {
         }
 
         public static TileTextureRowTable Create(IByteData data, string name, int address, bool hasRotation)
-            => CreateBase(() => new TileTextureRowTable(data, name, address, hasRotation));
+            => Create(() => new TileTextureRowTable(data, name, address, hasRotation));
 
         public override bool Load() {
             return Load((id, address) => {

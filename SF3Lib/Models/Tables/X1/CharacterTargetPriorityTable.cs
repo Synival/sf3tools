@@ -7,7 +7,7 @@ namespace SF3.Models.Tables.X1 {
         }
 
         public static CharacterTargetPriorityTable Create(IByteData data, string name, int address)
-            => CreateBase(() => new CharacterTargetPriorityTable(data, name, address));
+            => Create(() => new CharacterTargetPriorityTable(data, name, address));
 
         public override bool Load()
             => Load((id, address) => new CharacterTargetPriority(Data, id, "CharacterTarget" + id.ToString("D2"), address));

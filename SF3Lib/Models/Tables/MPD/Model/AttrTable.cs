@@ -7,7 +7,7 @@ namespace SF3.Models.Tables.MPD.Model {
         }
 
         public static AttrTable Create(IByteData data, string name, int address, int size)
-            => CreateBase(() => new AttrTable(data, name, address, size));
+            => Create(() => new AttrTable(data, name, address, size));
 
         public override bool Load()
             => Load((id, address) => new AttrModel(Data, id, "ATTR" + id.ToString("D4"), address));

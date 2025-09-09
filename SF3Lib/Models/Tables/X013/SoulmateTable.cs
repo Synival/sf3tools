@@ -7,7 +7,7 @@ namespace SF3.Models.Tables.X013 {
         }
 
         public static SoulmateTable Create(IByteData data, string name, string resourceFile, int address)
-            => CreateBase(() => new SoulmateTable(data, name, resourceFile, address));
+            => Create(() => new SoulmateTable(data, name, resourceFile, address));
 
         public override bool Load()
             => Load((id, name, address) => new Soulmate(Data, id, name, address));

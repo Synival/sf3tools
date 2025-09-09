@@ -7,7 +7,7 @@ namespace SF3.Models.Tables.MPD.Model {
         }
 
         public static PolygonTable Create(IByteData data, string name, int address, int size)
-            => CreateBase(() => new PolygonTable(data, name, address, size));
+            => Create(() => new PolygonTable(data, name, address, size));
 
         public override bool Load()
             => Load((id, address) => new PolygonModel(Data, id, "POLYGON" + id.ToString("D4"), address));

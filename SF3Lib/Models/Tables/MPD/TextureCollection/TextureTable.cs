@@ -26,7 +26,7 @@ namespace SF3.Models.Tables.MPD.TextureCollection {
             TextureCollectionType collection, int textureCount, int startId, Dictionary<int, TexturePixelFormat> pixelFormats, Dictionary<TexturePixelFormat, Palette> palettes,
             int? chunkIndex
         )
-            => CreateBase(() => new TextureTable(data, name, address, collection, textureCount, startId, pixelFormats, palettes, chunkIndex));
+            => Create(() => new TextureTable(data, name, address, collection, textureCount, startId, pixelFormats, palettes, chunkIndex));
 
         public override bool Load() {
             var size = TextureModel.GlobalSize;

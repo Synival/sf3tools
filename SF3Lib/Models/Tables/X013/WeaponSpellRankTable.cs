@@ -7,7 +7,7 @@ namespace SF3.Models.Tables.X013 {
         }
 
         public static WeaponSpellRankTable Create(IByteData data, string name, string resourceFile, int address)
-            => CreateBase(() => new WeaponSpellRankTable(data, name, resourceFile, address));
+            => Create(() => new WeaponSpellRankTable(data, name, resourceFile, address));
 
         public override bool Load()
             => Load((id, name, address) => new WeaponSpellRank(Data, id, name, address));

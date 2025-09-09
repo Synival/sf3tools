@@ -7,7 +7,7 @@ namespace SF3.Models.Tables.X013 {
         }
 
         public static SupportTypeTable Create(IByteData data, string name, string resourceFile, int address)
-            => CreateBase(() => new SupportTypeTable(data, name, resourceFile, address));
+            => Create(() => new SupportTypeTable(data, name, resourceFile, address));
 
         public override bool Load()
             => Load((id, name, address) => new SupportType(Data, id, name, address));

@@ -8,7 +8,7 @@ namespace SF3.Models.Tables.X002 {
         }
 
         public static SpellTable Create(IByteData data, string name, string resourceFile, int address)
-            => CreateBase(() => new SpellTable(data, name, resourceFile, address));
+            => Create(() => new SpellTable(data, name, resourceFile, address));
 
         public override bool Load()
             => Load((id, name, address) => new Spell(Data, id, name, address));

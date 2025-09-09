@@ -15,7 +15,7 @@ namespace SF3.Models.Tables {
         }
 
         public static UnknownUInt32Table Create(IByteData data, string name, int address, int? count, int? readUntil)
-            => CreateBase(() => new UnknownUInt32Table(data, name, address, count, readUntil));
+            => Create(() => new UnknownUInt32Table(data, name, address, count, readUntil));
 
         private bool ContinueReadingPred(Dictionary<int, UnknownUInt32Struct> currentRows, UnknownUInt32Struct newModel)
             => newModel.Value != ReadUntil.Value;

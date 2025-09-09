@@ -8,7 +8,7 @@ namespace SF3.Models.Tables.X1 {
         }
 
         public static ModelInstanceGroupTable Create(IByteData data, string name, int address, bool addEndModel = true)
-            => CreateBase(() => new ModelInstanceGroupTable(data, name, address, addEndModel: addEndModel));
+            => Create(() => new ModelInstanceGroupTable(data, name, address, addEndModel: addEndModel));
 
         public override bool Load()
             => Load((id, address) => new ModelInstanceGroup(Data, id, $"{nameof(ModelInstanceGroup)}_{id:D2}", address),

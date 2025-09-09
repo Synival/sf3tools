@@ -9,7 +9,7 @@ namespace SF3.Models.Tables.X1 {
         }
 
         public static MapUpdateFuncTable Create(IByteData data, string name, int address, bool addEndModel = true)
-            => CreateBase(() => new MapUpdateFuncTable(data, name, address, addEndModel: addEndModel));
+            => Create(() => new MapUpdateFuncTable(data, name, address, addEndModel: addEndModel));
 
         public override bool Load()
             => Load((id, address) => new MapUpdateFunc(Data, id, $"{nameof(MapUpdateFunc)}_{id:D2}", address),

@@ -7,7 +7,7 @@ namespace SF3.Models.Tables.MPD.TextureCollection {
         }
 
         public static TextureHeaderTable Create(IByteData data, string name, int address)
-            => CreateBase(() => new TextureHeaderTable(data, name, address));
+            => Create(() => new TextureHeaderTable(data, name, address));
 
         public override bool Load()
             => Load((id, address) => new TextureHeader(Data, id, "Header", address));

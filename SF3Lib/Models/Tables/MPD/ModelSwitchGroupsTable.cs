@@ -7,7 +7,7 @@ namespace SF3.Models.Tables.MPD {
         }
 
         public static ModelSwitchGroupsTable Create(IByteData data, string name, int address)
-            => CreateBase(() => new ModelSwitchGroupsTable(data, name, address));
+            => Create(() => new ModelSwitchGroupsTable(data, name, address));
 
         public override bool Load() {
             return Load(

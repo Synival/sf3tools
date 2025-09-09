@@ -7,7 +7,7 @@ namespace SF3.Models.Tables.MPD.Model {
         }
 
         public static CollisionBlockTable Create(IByteData data, string name, int address)
-            => CreateBase(() => new CollisionBlockTable(data, name, address));
+            => Create(() => new CollisionBlockTable(data, name, address));
 
         public override bool Load()
             => Load((id, address) => new CollisionBlockRow(Data, id, "Y" + id.ToString("D2"), address));

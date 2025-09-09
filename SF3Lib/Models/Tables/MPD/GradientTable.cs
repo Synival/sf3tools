@@ -6,7 +6,7 @@ namespace SF3.Models.Tables.MPD {
         protected GradientTable(IByteData data, string name, int address) : base(data, name, address, 2, null) { }
 
         public static GradientTable Create(IByteData data, string name, int address)
-            => CreateBase(() => new GradientTable(data, name, address));
+            => Create(() => new GradientTable(data, name, address));
 
         public override bool Load() {
             return Load(

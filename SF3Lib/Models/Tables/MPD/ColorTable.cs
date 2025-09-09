@@ -6,7 +6,7 @@ namespace SF3.Models.Tables.MPD {
         protected ColorTable(IByteData data, string name, int address, int size) : base(data, name, address, size) {}
 
         public static ColorTable Create(IByteData data, string name, int address, int size)
-            => CreateBase(() => new ColorTable(data, name, address, size));
+            => Create(() => new ColorTable(data, name, address, size));
 
         public override bool Load()
             => Load((id, address) => new ColorModel(Data, id, "Color" + id.ToString("D3"), address));

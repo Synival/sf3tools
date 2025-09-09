@@ -7,7 +7,7 @@ namespace SF3.Models.Tables.X013 {
         }
 
         public static SpecialAnimationAssignmentTable Create(IByteData data, string name, int address, int size)
-            => CreateBase(() => new SpecialAnimationAssignmentTable(data, name, address, size));
+            => Create(() => new SpecialAnimationAssignmentTable(data, name, address, size));
 
         public override bool Load()
             => Load((id, address) => new SpecialAnimationAssignment(Data, id, $"SpecialAnimation{id:D2}", address));

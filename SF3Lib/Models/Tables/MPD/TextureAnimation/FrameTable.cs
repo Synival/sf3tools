@@ -14,7 +14,7 @@ namespace SF3.Models.Tables.MPD.TextureAnimation {
         }
 
         public static FrameTable Create(IByteData data, string name, int address, bool is32Bit, int texId, int width, int height, int texAnimId)
-            => CreateBase(() => new FrameTable(data, name, address, is32Bit, texId, width, height, texAnimId));
+            => Create(() => new FrameTable(data, name, address, is32Bit, texId, width, height, texAnimId));
 
         public override bool Load() {
             return Load(

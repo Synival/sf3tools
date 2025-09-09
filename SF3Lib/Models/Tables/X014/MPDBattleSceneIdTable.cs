@@ -7,7 +7,7 @@ namespace SF3.Models.Tables.X014 {
         }
 
         public static MPDBattleSceneIdTable Create(IByteData data, string name, int address)
-            => CreateBase(() => new MPDBattleSceneIdTable(data, name, address));
+            => Create(() => new MPDBattleSceneIdTable(data, name, address));
 
         public override bool Load() {
             return Load(

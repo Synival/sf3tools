@@ -7,7 +7,7 @@ namespace SF3.Models.Tables.MPD.Model {
         }
 
         public static CollisionPointTable Create(IByteData data, string name, int address, int size)
-            => CreateBase(() => new CollisionPointTable(data, name, address, size));
+            => Create(() => new CollisionPointTable(data, name, address, size));
 
         public override bool Load()
             => Load((id, address) => new CollisionPoint(Data, id, "Point" + id.ToString("D3"), address));

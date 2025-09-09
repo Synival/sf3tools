@@ -8,7 +8,7 @@ namespace SF3.Models.Tables.Shared {
         }
 
         public static MonsterTable Create(IByteData data, string name, string resourceFile, int address)
-            => CreateBase(() => new MonsterTable(data, name, resourceFile, address));
+            => Create(() => new MonsterTable(data, name, resourceFile, address));
 
         public override bool Load()
             => Load((id, name, address) => new Monster(Data, id, name, address));

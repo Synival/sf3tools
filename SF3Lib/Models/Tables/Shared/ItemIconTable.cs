@@ -9,7 +9,7 @@ namespace SF3.Models.Tables.Shared {
         }
 
         public static ItemIconTable Create(IByteData data, string name, string resourceFile, int address, bool has16BitIconAddr)
-            => CreateBase(() => new ItemIconTable(data, name, resourceFile, address, has16BitIconAddr));
+            => Create(() => new ItemIconTable(data, name, resourceFile, address, has16BitIconAddr));
 
         public override bool Load()
             => Load((id, name, address) => new ItemIcon(Data, id, name, address, Has16BitIconAddr));

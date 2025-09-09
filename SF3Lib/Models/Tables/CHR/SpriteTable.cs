@@ -13,7 +13,7 @@ namespace SF3.Models.Tables.CHR {
         }
 
         public static SpriteTable Create(IByteData data, string name, int address, int startId, uint dataOffset, INameGetterContext ngc, bool isInCHP)
-            => CreateBase(() => new SpriteTable(data, name, address, startId, dataOffset, ngc, isInCHP));
+            => Create(() => new SpriteTable(data, name, address, startId, dataOffset, ngc, isInCHP));
 
         public override bool Load() {
             int globalId = StartID;

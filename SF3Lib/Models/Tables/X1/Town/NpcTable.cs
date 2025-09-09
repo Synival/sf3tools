@@ -11,7 +11,7 @@ namespace SF3.Models.Tables.X1.Town {
         }
 
         public static NpcTable Create(IByteData data, string name, int address, Dictionary<uint, ActorScript> actorScripts)
-            => CreateBase(() => new NpcTable(data, name, address, actorScripts));
+            => Create(() => new NpcTable(data, name, address, actorScripts));
 
         public override bool Load() {
             return Load(

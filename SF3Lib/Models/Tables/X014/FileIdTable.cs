@@ -8,7 +8,7 @@ namespace SF3.Models.Tables.Shared {
         }
 
         public static AnimationLocationTable Create(IByteData data, string name, string resourceFile, int address, bool isEffectFileIndexes)
-            => CreateBase(() => new AnimationLocationTable(data, name, resourceFile, address, isEffectFileIndexes));
+            => Create(() => new AnimationLocationTable(data, name, resourceFile, address, isEffectFileIndexes));
 
         public override bool Load()
             => Load((id, name, address) => new AnimationLocation(Data, id, name, address, IsEffectFileIndexes));

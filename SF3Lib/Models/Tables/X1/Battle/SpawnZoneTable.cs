@@ -7,7 +7,7 @@ namespace SF3.Models.Tables.X1.Battle {
         }
 
         public static SpawnZoneTable Create(IByteData data, string name, int address)
-            => CreateBase(() => new SpawnZoneTable(data, name, address));
+            => Create(() => new SpawnZoneTable(data, name, address));
 
         public override bool Load()
             => Load((id, address) => new SpawnZone(Data, id, "SpawnZone" + id.ToString("D2"), address));

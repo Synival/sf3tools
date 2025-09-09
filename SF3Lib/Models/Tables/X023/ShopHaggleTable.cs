@@ -7,7 +7,7 @@ namespace SF3.Models.Tables.X023 {
         }
 
         public static ShopHaggleTable Create(IByteData data, string name, int address)
-            => CreateBase(() => new ShopHaggleTable(data, name, address));
+            => Create(() => new ShopHaggleTable(data, name, address));
 
         public override bool Load()
             => Load((id, address) => new ShopHaggle(Data, id, $"{nameof(ShopHaggle)}{id:D2}", address),

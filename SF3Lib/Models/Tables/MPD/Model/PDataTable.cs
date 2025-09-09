@@ -18,7 +18,7 @@ namespace SF3.Models.Tables.MPD.Model {
         }
 
         public static PDataTable Create(IByteData data, string name, PDataRef[] refs)
-            => CreateBase(() => new PDataTable(data, name, refs));
+            => Create(() => new PDataTable(data, name, refs));
 
         public override bool Load() {
             return Load((id, address) => new PDataModel(

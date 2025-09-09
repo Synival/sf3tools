@@ -7,7 +7,7 @@ namespace SF3.Models.Tables.Shared {
         }
 
         public static FileIdTable Create(IByteData data, string name, string resourceFile, int address)
-            => CreateBase(() => new FileIdTable(data, name, resourceFile, address));
+            => Create(() => new FileIdTable(data, name, resourceFile, address));
 
         public override bool Load()
             => Load((id, name, address) => new FileIdModel(Data, id, name, address));

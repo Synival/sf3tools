@@ -6,7 +6,7 @@ namespace SF3.Models.Tables.MPD {
         protected BoundaryTable(IByteData data, string name, string resourceFile, int address) : base(data, name, resourceFile, address) { }
 
         public static BoundaryTable Create(IByteData data, string name, string resourceFile, int address)
-            => CreateBase(() => new BoundaryTable(data, name, resourceFile, address));
+            => Create(() => new BoundaryTable(data, name, resourceFile, address));
 
         public override bool Load()
             => Load((id, name, address) => new Boundary(Data, id, name, address));

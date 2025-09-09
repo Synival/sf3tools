@@ -10,7 +10,7 @@ namespace SF3.Models.Tables.MPD {
         }
 
         public static TextureAnimationTable Create(IByteData data, string name, int address, bool is32Bit)
-            => CreateBase(() => new TextureAnimationTable(data, name, address, is32Bit));
+            => Create(() => new TextureAnimationTable(data, name, address, is32Bit));
 
         public override bool Load() {
             return Load(

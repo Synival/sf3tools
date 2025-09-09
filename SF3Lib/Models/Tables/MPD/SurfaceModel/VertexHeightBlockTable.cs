@@ -7,7 +7,7 @@ namespace SF3.Models.Tables.MPD.SurfaceModel {
         }
 
         public static VertexHeightBlockTable Create(IByteData data, string name, int address)
-            => CreateBase(() => new VertexHeightBlockTable(data, name, address));
+            => Create(() => new VertexHeightBlockTable(data, name, address));
 
         public override bool Load()
             => Load((id, address)

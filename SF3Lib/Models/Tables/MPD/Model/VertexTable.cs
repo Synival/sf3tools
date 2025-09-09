@@ -7,7 +7,7 @@ namespace SF3.Models.Tables.MPD.Model {
         }
 
         public static VertexTable Create(IByteData data, string name, int address, int size)
-            => CreateBase(() => new VertexTable(data, name, address, size));
+            => Create(() => new VertexTable(data, name, address, size));
 
         public override bool Load()
             => Load((id, address) => new VertexModel(Data, id, "VERTEX" + id.ToString("D4"), address));

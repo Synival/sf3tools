@@ -7,7 +7,7 @@ namespace SF3.Models.Tables.X1 {
         }
 
         public static CharacterTargetUnknownTable Create(IByteData data, string name, int address)
-            => CreateBase(() => new CharacterTargetUnknownTable(data, name, address));
+            => Create(() => new CharacterTargetUnknownTable(data, name, address));
 
         public override bool Load()
             => Load((id, address) => new CharacterTargetUnknown(Data, id, "CharacterUnknown" + id.ToString("D2"), address));

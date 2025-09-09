@@ -17,7 +17,7 @@ namespace SF3.Models.Tables.CHR {
         }
 
         public static FrameTable Create(IByteData data, string name, int address, uint dataOffset, int width, int height, string rowPrefix, int spriteIndex, int spriteId, int spriteDirections)
-            => CreateBase(() => new FrameTable(data, name, address, dataOffset, width, height, rowPrefix, spriteIndex, spriteId, spriteDirections));
+            => Create(() => new FrameTable(data, name, address, dataOffset, width, height, rowPrefix, spriteIndex, spriteId, spriteDirections));
 
         public override bool Load() {
             return Load(

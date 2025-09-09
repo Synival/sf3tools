@@ -9,7 +9,7 @@ namespace SF3.Models.Tables.MPD {
         }
 
         public static TextureIDTable Create(IByteData data, string name, int address, int terminatorSize, int? maxSize)
-            => CreateBase(() => new TextureIDTable(data, name, address, terminatorSize, maxSize));
+            => Create(() => new TextureIDTable(data, name, address, terminatorSize, maxSize));
 
         public override bool Load() {
             return Load(

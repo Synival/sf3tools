@@ -10,7 +10,7 @@ namespace SF3.Models.Tables.MPD.Model {
         }
 
         public static ModelTable Create(IByteData data, string name, int address, int count, bool hasTagsAndFlags, ModelCollectionType collectionType)
-            => CreateBase(() => new ModelTable(data, name, address, count, hasTagsAndFlags, collectionType));
+            => Create(() => new ModelTable(data, name, address, count, hasTagsAndFlags, collectionType));
 
         public override bool Load()
             => Load((id, address) => new Structs.MPD.Model.Model(Data, id, "Model" + id.ToString("D4"), address, HasTagsAndFlags, CollectionType));

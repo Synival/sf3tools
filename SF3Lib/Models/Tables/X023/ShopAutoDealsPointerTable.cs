@@ -11,7 +11,7 @@ namespace SF3.Models.Tables.X023 {
         }
 
         public static ShopAutoDealsPointerTable Create(IByteData data, string name, string resourceFile, int address, int? hasFlagOffset)
-            => CreateBase(() => new ShopAutoDealsPointerTable(data, name, resourceFile, address, hasFlagOffset));
+            => Create(() => new ShopAutoDealsPointerTable(data, name, resourceFile, address, hasFlagOffset));
 
         public override bool Load()
             => Load((id, address) => new ShopAutoDealsPointer(Data, id, Resources.TryGetValue(id, out var name) ? name : $"{nameof(ShopAutoDealsPointer)}{id:D2}", address, HasFlagOffset),

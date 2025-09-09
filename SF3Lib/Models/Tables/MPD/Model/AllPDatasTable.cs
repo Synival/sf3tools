@@ -15,7 +15,7 @@ namespace SF3.Models.Tables.MPD.TextureCollection {
         }
 
         public static AllPDatasTable Create(string name, IEnumerable<PDataTable> modelTables)
-            => CreateBase(() => new AllPDatasTable(name, modelTables));
+            => Create(() => new AllPDatasTable(name, modelTables));
 
         public override bool Load() {
             _rows = Models.OrderBy(x => x.Collection).ThenBy(x => x.ID).ToArray();

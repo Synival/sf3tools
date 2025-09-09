@@ -10,7 +10,7 @@ namespace SF3.Models.Tables.X1.Battle {
         }
 
         public static SlotTable Create(IByteData data, string name, int address, int size, ScenarioType scenario, Slot prevSlot)
-            => CreateBase(() => new SlotTable(data, name, address, size, scenario, prevSlot));
+            => Create(() => new SlotTable(data, name, address, size, scenario, prevSlot));
 
         public override bool Load() {
             return Load((id, address) => {

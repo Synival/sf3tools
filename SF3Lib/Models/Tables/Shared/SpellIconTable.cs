@@ -10,7 +10,7 @@ namespace SF3.Models.Tables.Shared {
         }
 
         public static SpellIconTable Create(IByteData data, string name, string resourceFile, int address, bool has16BitIconAddr, int realOffsetStart)
-            => CreateBase(() => new SpellIconTable(data, name, resourceFile, address, has16BitIconAddr, realOffsetStart));
+            => Create(() => new SpellIconTable(data, name, resourceFile, address, has16BitIconAddr, realOffsetStart));
 
         public override bool Load()
             => Load((id, name, address) => new SpellIcon(Data, id, name, address, Has16BitIconAddr, RealOffsetStart));

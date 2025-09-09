@@ -8,7 +8,7 @@ namespace SF3.Models.Tables.X013 {
         }
 
         public static MagicBonusTable Create(IByteData data, string name, string resourceFile, int address, bool has32BitValues)
-            => CreateBase(() => new MagicBonusTable(data, name, resourceFile, address, has32BitValues));
+            => Create(() => new MagicBonusTable(data, name, resourceFile, address, has32BitValues));
 
         public override bool Load()
             => Load((id, name, address) => new MagicBonus(Data, id, name, address, Has32BitValues));

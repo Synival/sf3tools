@@ -8,7 +8,7 @@ namespace SF3.Models.Tables.Shared {
         }
 
         public static BlacksmithTable Create(IByteData data, string name, int address)
-            => CreateBase(() => new BlacksmithTable(data, name, address));
+            => Create(() => new BlacksmithTable(data, name, address));
 
         public override bool Load() {
             return Load(

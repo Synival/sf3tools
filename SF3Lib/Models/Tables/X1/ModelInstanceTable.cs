@@ -12,7 +12,7 @@ namespace SF3.Models.Tables.X1 {
         }
 
         public static ModelInstanceTable Create(IByteData data, string name, int address, Dictionary<uint, ActorScript> actorScripts, bool addEndModel = true)
-            => CreateBase(() => new ModelInstanceTable(data, name, address, actorScripts, addEndModel: addEndModel));
+            => Create(() => new ModelInstanceTable(data, name, address, actorScripts, addEndModel: addEndModel));
 
         public override bool Load()
             => Load((id, address) => new ModelInstance(Data, id, $"{nameof(ModelInstance)}_{id:D2}", address, ActorScripts),

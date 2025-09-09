@@ -9,7 +9,7 @@ namespace SF3.Models.Tables.X014 {
         }
 
         public static Sc1BattleSceneFileIdTable Create(IByteData data, string name, string resourceFile, int address, int size, int? globalIdStart)
-            => CreateBase(() => new Sc1BattleSceneFileIdTable(data, name, resourceFile, address, size, globalIdStart));
+            => Create(() => new Sc1BattleSceneFileIdTable(data, name, resourceFile, address, size, globalIdStart));
 
         public override bool Load()
             => Load((id, name, address) => new BattleSceneFileIdSc1(Data, id, name, address, GlobalIdStart.HasValue ? (GlobalIdStart + id) : null));

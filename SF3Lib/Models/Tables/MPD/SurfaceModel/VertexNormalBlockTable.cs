@@ -7,7 +7,7 @@ namespace SF3.Models.Tables.MPD.SurfaceModel {
         }
 
         public static VertexNormalBlockTable Create(IByteData data, string name, int address)
-            => CreateBase(() => new VertexNormalBlockTable(data, name, address));
+            => Create(() => new VertexNormalBlockTable(data, name, address));
 
         public override bool Load()
             => Load((id, address)

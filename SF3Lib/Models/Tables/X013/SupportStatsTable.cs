@@ -7,7 +7,7 @@ namespace SF3.Models.Tables.X013 {
         }
 
         public static SupportStatsTable Create(IByteData data, string name, string resourceFile, int address)
-            => CreateBase(() => new SupportStatsTable(data, name, resourceFile, address));
+            => Create(() => new SupportStatsTable(data, name, resourceFile, address));
 
         public override bool Load()
             => Load((id, name, address) => new SupportStats(Data, id, name, address));

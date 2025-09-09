@@ -7,7 +7,7 @@ namespace SF3.Models.Tables.X023 {
         }
 
         public static ShopItemTable Create(IByteData data, string name, int address)
-            => CreateBase(() => new ShopItemTable(data, name, address));
+            => Create(() => new ShopItemTable(data, name, address));
 
         public override bool Load()
             => Load((id, address) => new ShopItem(Data, id, $"{nameof(ShopItem)}{id:D2}", address),

@@ -10,7 +10,7 @@ namespace SF3.Models.Tables.CHR {
         }
 
         public static MultipleFrameDataOffsetsTable Create(IByteData data, string name, int[] addresses, uint[] dataOffsets, int[] spriteIds)
-            => CreateBase(() => new MultipleFrameDataOffsetsTable(data, name, addresses, dataOffsets, spriteIds));
+            => Create(() => new MultipleFrameDataOffsetsTable(data, name, addresses, dataOffsets, spriteIds));
 
         public override bool Load() {
             return Load(

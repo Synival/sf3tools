@@ -8,7 +8,7 @@ namespace SF3.Models.Tables.X1.Battle {
         }
 
         public static BattlePointersTable Create(IByteData data, string name, string resourceFile, int address)
-            => CreateBase(() => new BattlePointersTable(data, name, resourceFile, address));
+            => Create(() => new BattlePointersTable(data, name, resourceFile, address));
 
         public override bool Load()
             => Load((id, name, address) => new BattlePointers(Data, id, name, address));

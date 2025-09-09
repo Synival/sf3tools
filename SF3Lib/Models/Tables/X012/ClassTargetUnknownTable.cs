@@ -8,7 +8,7 @@ namespace SF3.Models.Tables.X012 {
         }
 
         public static ClassTargetUnknownTable Create(IByteData data, string name, int address)
-            => CreateBase(() => new ClassTargetUnknownTable(data, name, address));
+            => Create(() => new ClassTargetUnknownTable(data, name, address));
 
         public override bool Load() {
             return Load(

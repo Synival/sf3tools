@@ -7,7 +7,7 @@ namespace SF3.Models.Tables.X014 {
         }
 
         public static TerrainBasedBattleSceneTable Create(IByteData data, string name, int address)
-            => CreateBase(() => new TerrainBasedBattleSceneTable(data, name, address));
+            => Create(() => new TerrainBasedBattleSceneTable(data, name, address));
 
         public override bool Load()
             => Load((id, address) => new TerrainBasedBattleScene(Data, id, "TerrainBattleScene" + id.ToString("D2"), address));

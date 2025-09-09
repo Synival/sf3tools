@@ -7,7 +7,7 @@ namespace SF3.Models.Tables.Shared {
         }
 
         public static InitialInfoTable Create(IByteData data, string name, string resourceFile, int address)
-            => CreateBase(() => new InitialInfoTable(data, name, resourceFile, address));
+            => Create(() => new InitialInfoTable(data, name, resourceFile, address));
 
         public override bool Load()
             => Load((id, name, address) => new InitialInfo(Data, id, name, address));

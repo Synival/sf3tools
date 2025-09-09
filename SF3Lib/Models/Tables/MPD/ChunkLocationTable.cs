@@ -7,7 +7,7 @@ namespace SF3.Models.Tables.MPD {
         }
 
         public static ChunkLocationTable Create(IByteData data, string name, int address)
-            => CreateBase(() => new ChunkLocationTable(data, name, address));
+            => Create(() => new ChunkLocationTable(data, name, address));
 
         public override bool Load()
             => Load((id, address) => new ChunkLocation(Data, id, "Chunk" + id.ToString("D2"), address));

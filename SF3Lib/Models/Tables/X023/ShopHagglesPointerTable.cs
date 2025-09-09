@@ -10,7 +10,7 @@ namespace SF3.Models.Tables.X023 {
         }
 
         public static ShopHagglesPointerTable Create(IByteData data, string name, string resourceFile, int address)
-            => CreateBase(() => new ShopHagglesPointerTable(data, name, resourceFile, address));
+            => Create(() => new ShopHagglesPointerTable(data, name, resourceFile, address));
 
         public override bool Load()
             => Load((id, address) => new ShopHagglesPointer(Data, id, Resources.TryGetValue(id, out var name) ? name : $"{nameof(ShopHagglesPointer)}{id:D2}", address),
