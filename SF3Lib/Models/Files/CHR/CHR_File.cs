@@ -67,9 +67,6 @@ namespace SF3.Models.Files.CHR {
                 .FirstOrDefault();
 
             var frameImagesAreBeforeTables = firstTextureOffset.HasValue && firstFrameTableOffset.HasValue && firstTextureOffset.Value < firstFrameTableOffset.Value;
-            if (frameImagesAreBeforeTables)
-                ;
-
             var lastFrameTablePosition = SpriteTable
                 .Where(x => x.FrameTable != null)
                 .Select(x => x.FrameTable)
