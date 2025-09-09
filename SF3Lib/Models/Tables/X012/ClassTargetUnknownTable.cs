@@ -1,5 +1,4 @@
-﻿using System;
-using SF3.ByteData;
+﻿using SF3.ByteData;
 using SF3.Models.Structs.X012;
 
 namespace SF3.Models.Tables.X012 {
@@ -8,12 +7,8 @@ namespace SF3.Models.Tables.X012 {
         : base(data, name, address, 1, null) {
         }
 
-        public static ClassTargetUnknownTable Create(IByteData data, string name, int address) {
-            var newTable = new ClassTargetUnknownTable(data, name, address);
-            if (!newTable.Load())
-                throw new InvalidOperationException("Couldn't initialize table");
-            return newTable;
-        }
+        public static ClassTargetUnknownTable Create(IByteData data, string name, int address)
+            => CreateBase(() => new ClassTargetUnknownTable(data, name, address));
 
         public override bool Load() {
             return Load(
