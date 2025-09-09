@@ -1,4 +1,3 @@
-using System;
 using SF3.ByteData;
 using SF3.Models.Structs.X1;
 
@@ -8,12 +7,8 @@ namespace SF3.Models.Tables.X1 {
             AddEndModel = addEndModel;
         }
 
-        public static ModelInstanceGroupTable Create(IByteData data, string name, int address, bool addEndModel = true) {
-            var newTable = new ModelInstanceGroupTable(data, name, address, addEndModel: addEndModel);
-            if (!newTable.Load())
-                throw new InvalidOperationException("Couldn't initialize table");
-            return newTable;
-        }
+        public static ModelInstanceGroupTable Create(IByteData data, string name, int address, bool addEndModel = true)
+            => CreateBase(() => new ModelInstanceGroupTable(data, name, address, addEndModel: addEndModel));
 
         public override bool Load()
             => Load((id, address) => new ModelInstanceGroup(Data, id, $"{nameof(ModelInstanceGroup)}_{id:D2}", address),

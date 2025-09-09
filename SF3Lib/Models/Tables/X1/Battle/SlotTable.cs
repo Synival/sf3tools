@@ -1,4 +1,3 @@
-using System;
 using SF3.ByteData;
 using SF3.Models.Structs.X1.Battle;
 using SF3.Types;
@@ -10,12 +9,8 @@ namespace SF3.Models.Tables.X1.Battle {
             PrevSlot = prevSlot;
         }
 
-        public static SlotTable Create(IByteData data, string name, int address, int size, ScenarioType scenario, Slot prevSlot) {
-            var newTable = new SlotTable(data, name, address, size, scenario, prevSlot);
-            if (!newTable.Load())
-                throw new InvalidOperationException("Couldn't initialize table");
-            return newTable;
-        }
+        public static SlotTable Create(IByteData data, string name, int address, int size, ScenarioType scenario, Slot prevSlot)
+            => CreateBase(() => new SlotTable(data, name, address, size, scenario, prevSlot));
 
         public override bool Load() {
             return Load((id, address) => {

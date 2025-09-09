@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using SF3.ByteData;
 using SF3.Models.Structs.Shared;
@@ -11,12 +10,8 @@ namespace SF3.Models.Tables.X1.Town {
             ActorScripts = actorScripts;
         }
 
-        public static NpcTable Create(IByteData data, string name, int address, Dictionary<uint, ActorScript> actorScripts) {
-            var newTable = new NpcTable(data, name, address, actorScripts);
-            if (!newTable.Load())
-                throw new InvalidOperationException("Couldn't initialize table");
-            return newTable;
-        }
+        public static NpcTable Create(IByteData data, string name, int address, Dictionary<uint, ActorScript> actorScripts)
+            => CreateBase(() => new NpcTable(data, name, address, actorScripts));
 
         public override bool Load() {
             return Load(

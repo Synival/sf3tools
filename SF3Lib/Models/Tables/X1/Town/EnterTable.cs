@@ -1,4 +1,3 @@
-using System;
 using SF3.ByteData;
 using SF3.Models.Structs.X1.Town;
 
@@ -8,12 +7,8 @@ namespace SF3.Models.Tables.X1.Town {
         : base(data, name, address, 2, 100) {
         }
 
-        public static EnterTable Create(IByteData data, string name, int address) {
-            var newTable = new EnterTable(data, name, address);
-            if (!newTable.Load())
-                throw new InvalidOperationException("Couldn't initialize table");
-            return newTable;
-        }
+        public static EnterTable Create(IByteData data, string name, int address)
+            => CreateBase(() => new EnterTable(data, name, address));
 
         public override bool Load()
             => Load(

@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using SF3.ByteData;
 using SF3.Models.Structs.Shared;
@@ -12,12 +11,8 @@ namespace SF3.Models.Tables.X1 {
             AddEndModel = addEndModel;
         }
 
-        public static ModelInstanceTable Create(IByteData data, string name, int address, Dictionary<uint, ActorScript> actorScripts, bool addEndModel = true) {
-            var newTable = new ModelInstanceTable(data, name, address, actorScripts, addEndModel: addEndModel);
-            if (!newTable.Load())
-                throw new InvalidOperationException("Couldn't initialize table");
-            return newTable;
-        }
+        public static ModelInstanceTable Create(IByteData data, string name, int address, Dictionary<uint, ActorScript> actorScripts, bool addEndModel = true)
+            => CreateBase(() => new ModelInstanceTable(data, name, address, actorScripts, addEndModel: addEndModel));
 
         public override bool Load()
             => Load((id, address) => new ModelInstance(Data, id, $"{nameof(ModelInstance)}_{id:D2}", address, ActorScripts),

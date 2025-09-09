@@ -1,4 +1,3 @@
-using System;
 using SF3.ByteData;
 using SF3.Models.Structs.X1;
 
@@ -9,12 +8,8 @@ namespace SF3.Models.Tables.X1 {
             AddEndModel = addEndModel;
         }
 
-        public static MapUpdateFuncTable Create(IByteData data, string name, int address, bool addEndModel = true) {
-            var newTable = new MapUpdateFuncTable(data, name, address, addEndModel: addEndModel);
-            if (!newTable.Load())
-                throw new InvalidOperationException("Couldn't initialize table");
-            return newTable;
-        }
+        public static MapUpdateFuncTable Create(IByteData data, string name, int address, bool addEndModel = true)
+            => CreateBase(() => new MapUpdateFuncTable(data, name, address, addEndModel: addEndModel));
 
         public override bool Load()
             => Load((id, address) => new MapUpdateFunc(Data, id, $"{nameof(MapUpdateFunc)}_{id:D2}", address),

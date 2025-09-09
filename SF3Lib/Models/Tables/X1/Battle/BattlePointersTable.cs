@@ -7,12 +7,8 @@ namespace SF3.Models.Tables.X1.Battle {
         protected BattlePointersTable(IByteData data, string name, string resourceFile, int address) : base(data, name, resourceFile, address, 5) {
         }
 
-        public static BattlePointersTable Create(IByteData data, string name, string resourceFile, int address) {
-            var newTable = new BattlePointersTable(data, name, resourceFile, address);
-            if (!newTable.Load())
-                throw new InvalidOperationException("Couldn't initialize table");
-            return newTable;
-        }
+        public static BattlePointersTable Create(IByteData data, string name, string resourceFile, int address)
+            => CreateBase(() => new BattlePointersTable(data, name, resourceFile, address));
 
         public override bool Load()
             => Load((id, name, address) => new BattlePointers(Data, id, name, address));

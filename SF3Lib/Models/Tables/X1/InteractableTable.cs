@@ -1,4 +1,3 @@
-using System;
 using CommonLib.NamedValues;
 using SF3.ByteData;
 using SF3.Models.Structs.X1;
@@ -12,12 +11,8 @@ namespace SF3.Models.Tables.X1 {
             NpcTable = npcTable;
         }
 
-        public static InteractableTable Create(IByteData data, string name, int address, INameGetterContext nameGetterContext, NpcTable npcTable) {
-            var newTable = new InteractableTable(data, name, address, nameGetterContext, npcTable);
-            if (!newTable.Load())
-                throw new InvalidOperationException("Couldn't initialize table");
-            return newTable;
-        }
+        public static InteractableTable Create(IByteData data, string name, int address, INameGetterContext nameGetterContext, NpcTable npcTable)
+            => CreateBase(() => new InteractableTable(data, name, address, nameGetterContext, npcTable));
 
         public override bool Load() {
             return Load(

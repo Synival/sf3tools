@@ -14,12 +14,8 @@ namespace SF3.Models.Tables {
             FormatString = "X" + MaxSize.ToString().Length;
         }
 
-        public static UnknownInt16Table Create(IByteData data, string name, int address, int? count, int? readUntil) {
-            var newTable = new UnknownInt16Table(data, name, address, count, readUntil);
-            if (!newTable.Load())
-                throw new InvalidOperationException("Couldn't initialize table");
-            return newTable;
-        }
+        public static UnknownInt16Table Create(IByteData data, string name, int address, int? count, int? readUntil)
+            => CreateBase(() => new UnknownInt16Table(data, name, address, count, readUntil));
 
         private bool ContinueReadingPred(Dictionary<int, UnknownInt16Struct> currentRows, UnknownInt16Struct newModel)
             => newModel.Value != ReadUntil.Value;
