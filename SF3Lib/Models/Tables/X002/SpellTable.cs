@@ -7,12 +7,8 @@ namespace SF3.Models.Tables.X002 {
         protected SpellTable(IByteData data, string name, string resourceFile, int address) : base(data, name, resourceFile, address, 78) {
         }
 
-        public static SpellTable Create(IByteData data, string name, string resourceFile, int address) {
-            var newTable = new SpellTable(data, name, resourceFile, address);
-            if (!newTable.Load())
-                throw new InvalidOperationException("Couldn't initialize table");
-            return newTable;
-        }
+        public static SpellTable Create(IByteData data, string name, string resourceFile, int address)
+            => CreateBase(() => new SpellTable(data, name, resourceFile, address));
 
         public override bool Load()
             => Load((id, name, address) => new Spell(Data, id, name, address));

@@ -1,4 +1,3 @@
-using System;
 using SF3.ByteData;
 using SF3.Models.Structs.X002;
 
@@ -7,12 +6,8 @@ namespace SF3.Models.Tables.X002 {
         protected LoadingTable(IByteData data, string name, string resourceFile, int address) : base(data, name, resourceFile, address, 300) {
         }
 
-        public static LoadingTable Create(IByteData data, string name, string resourceFile, int address) {
-            var newTable = new LoadingTable(data, name, resourceFile, address);
-            if (!newTable.Load())
-                throw new InvalidOperationException("Couldn't initialize table");
-            return newTable;
-        }
+        public static LoadingTable Create(IByteData data, string name, string resourceFile, int address)
+            => CreateBase(() => new LoadingTable(data, name, resourceFile, address));
 
         public override bool Load()
             => Load((id, name, address) => new Loading(Data, id, name, address));
