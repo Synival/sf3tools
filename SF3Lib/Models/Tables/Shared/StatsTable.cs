@@ -1,4 +1,3 @@
-using System;
 using SF3.ByteData;
 using SF3.Models.Structs.Shared;
 
@@ -7,12 +6,8 @@ namespace SF3.Models.Tables.Shared {
         protected StatsTable(IByteData data, string name, string resourceFile, int address) : base(data, name, resourceFile, address, 300) {
         }
 
-        public static StatsTable Create(IByteData data, string name, string resourceFile, int address) {
-            var newTable = new StatsTable(data, name, resourceFile, address);
-            if (!newTable.Load())
-                throw new InvalidOperationException("Couldn't initialize table");
-            return newTable;
-        }
+        public static StatsTable Create(IByteData data, string name, string resourceFile, int address)
+            => CreateBase(() => new StatsTable(data, name, resourceFile, address));
 
         public override bool Load()
             => Load((id, name, address) => new Stats(Data, id, name, address));

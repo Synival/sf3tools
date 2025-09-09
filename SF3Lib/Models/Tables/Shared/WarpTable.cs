@@ -1,4 +1,3 @@
-using System;
 using CommonLib.NamedValues;
 using SF3.ByteData;
 using SF3.Models.Structs.Shared;
@@ -11,12 +10,8 @@ namespace SF3.Models.Tables.Shared {
             NameGetterContext = nameGetterContext;
         }
 
-        public static WarpTable Create(IByteData data, string name, int address, bool isBattle, INameGetterContext nameGetterContext) {
-            var newTable = new WarpTable(data, name, address, isBattle, nameGetterContext);
-            if (!newTable.Load())
-                throw new InvalidOperationException("Couldn't initialize table");
-            return newTable;
-        }
+        public static WarpTable Create(IByteData data, string name, int address, bool isBattle, INameGetterContext nameGetterContext)
+            => CreateBase(() => new WarpTable(data, name, address, isBattle, nameGetterContext));
 
         public override bool Load() {
             Warp prevWarp = null;

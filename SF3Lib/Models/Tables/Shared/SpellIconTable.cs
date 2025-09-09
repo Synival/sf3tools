@@ -1,4 +1,3 @@
-using System;
 using SF3.ByteData;
 using SF3.Models.Structs.Shared;
 
@@ -10,12 +9,8 @@ namespace SF3.Models.Tables.Shared {
             RealOffsetStart  = realOffsetStart;
         }
 
-        public static SpellIconTable Create(IByteData data, string name, string resourceFile, int address, bool has16BitIconAddr, int realOffsetStart) {
-            var newTable = new SpellIconTable(data, name, resourceFile, address, has16BitIconAddr, realOffsetStart);
-            if (!newTable.Load())
-                throw new InvalidOperationException("Couldn't initialize table");
-            return newTable;
-        }
+        public static SpellIconTable Create(IByteData data, string name, string resourceFile, int address, bool has16BitIconAddr, int realOffsetStart)
+            => CreateBase(() => new SpellIconTable(data, name, resourceFile, address, has16BitIconAddr, realOffsetStart));
 
         public override bool Load()
             => Load((id, name, address) => new SpellIcon(Data, id, name, address, Has16BitIconAddr, RealOffsetStart));

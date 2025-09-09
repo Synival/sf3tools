@@ -1,4 +1,3 @@
-using System;
 using SF3.ByteData;
 using SF3.Models.Structs.Shared;
 
@@ -8,12 +7,8 @@ namespace SF3.Models.Tables.Shared {
         : base(data, name, address, terminatedBytes: 4, maxSize: 100) {
         }
 
-        public static BlacksmithTable Create(IByteData data, string name, int address) {
-            var newTable = new BlacksmithTable(data, name, address);
-            if (!newTable.Load())
-                throw new InvalidOperationException("Couldn't initialize table");
-            return newTable;
-        }
+        public static BlacksmithTable Create(IByteData data, string name, int address)
+            => CreateBase(() => new BlacksmithTable(data, name, address));
 
         public override bool Load() {
             return Load(

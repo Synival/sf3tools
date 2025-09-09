@@ -1,4 +1,3 @@
-using System;
 using SF3.ByteData;
 using SF3.Models.Structs.Shared;
 using SF3.Types;
@@ -10,12 +9,8 @@ namespace SF3.Models.Tables.Shared {
             HasExtra = hasExtra;
         }
 
-        public static TileMovementTable Create(IByteData data, string name, int address, bool hasExtra) {
-            var newTable = new TileMovementTable(data, name, address, hasExtra);
-            if (!newTable.Load())
-                throw new InvalidOperationException("Couldn't initialize table");
-            return newTable;
-        }
+        public static TileMovementTable Create(IByteData data, string name, int address, bool hasExtra)
+            => CreateBase(() => new TileMovementTable(data, name, address, hasExtra));
 
         public override bool Load()
             => Load((id, address) => new TileMovement(Data, id, EnumNameOr((MovementType) id, x => $"Unknown0x{((int) x):X2}"), address));
