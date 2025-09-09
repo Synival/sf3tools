@@ -1,5 +1,4 @@
-﻿using System;
-using SF3.ByteData;
+﻿using SF3.ByteData;
 using SF3.Models.Structs.MPD;
 
 namespace SF3.Models.Tables.MPD {
@@ -7,12 +6,8 @@ namespace SF3.Models.Tables.MPD {
         protected ModelSwitchGroupsTable(IByteData data, string name, int address) : base(data, name, address, 4, null) {
         }
 
-        public static ModelSwitchGroupsTable Create(IByteData data, string name, int address) {
-            var newTable = new ModelSwitchGroupsTable(data, name, address);
-            if (!newTable.Load())
-                throw new InvalidOperationException("Couldn't initialize table");
-            return newTable;
-        }
+        public static ModelSwitchGroupsTable Create(IByteData data, string name, int address)
+            => CreateBase(() => new ModelSwitchGroupsTable(data, name, address));
 
         public override bool Load() {
             return Load(

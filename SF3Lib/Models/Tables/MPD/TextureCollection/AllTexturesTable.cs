@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using SF3.Models.Structs.MPD.TextureChunk;
 
@@ -11,12 +10,8 @@ namespace SF3.Models.Tables.MPD.TextureCollection {
             Textures = textureTables.SelectMany(x => x).OrderBy(x => x.ID).ToArray();
         }
 
-        public static AllTexturesTable Create(string name, IEnumerable<TextureTable> textureTables) {
-            var newTable = new AllTexturesTable(name, textureTables);
-            if (!newTable.Load())
-                throw new InvalidOperationException("Couldn't initialize table");
-            return newTable;
-        }
+        public static AllTexturesTable Create(string name, IEnumerable<TextureTable> textureTables)
+            => CreateBase(() => new AllTexturesTable(name, textureTables));
 
         public override bool Load() {
             _rows = Textures.OrderBy(x => x.Collection).ThenBy(x => x.ID).ToArray();

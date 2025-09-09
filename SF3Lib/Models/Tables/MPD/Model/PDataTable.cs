@@ -1,5 +1,4 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using SF3.ByteData;
 using SF3.Models.Structs.MPD.Model;
 using SF3.Types;
@@ -18,12 +17,8 @@ namespace SF3.Models.Tables.MPD.Model {
             Refs = refs;
         }
 
-        public static PDataTable Create(IByteData data, string name, PDataRef[] refs) {
-            var newTable = new PDataTable(data, name, refs);
-            if (!newTable.Load())
-                throw new InvalidOperationException("Couldn't initialize table");
-            return newTable;
-        }
+        public static PDataTable Create(IByteData data, string name, PDataRef[] refs)
+            => CreateBase(() => new PDataTable(data, name, refs));
 
         public override bool Load() {
             return Load((id, address) => new PDataModel(

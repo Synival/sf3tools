@@ -1,5 +1,4 @@
-﻿using System;
-using SF3.ByteData;
+﻿using SF3.ByteData;
 using SF3.Models.Structs.MPD.Model;
 using SF3.Types;
 
@@ -9,12 +8,8 @@ namespace SF3.Models.Tables.MPD.Model {
             CollectionType = collectionType;
         }
 
-        public static MovableModelTable Create(IByteData data, string name, int address, ModelCollectionType collectionType) {
-            var newTable = new MovableModelTable(data, name, address, collectionType);
-            if (!newTable.Load())
-                throw new InvalidOperationException("Couldn't initialize table");
-            return newTable;
-        }
+        public static MovableModelTable Create(IByteData data, string name, int address, ModelCollectionType collectionType)
+            => CreateBase(() => new MovableModelTable(data, name, address, collectionType));
 
         public override bool Load() {
             return Load(

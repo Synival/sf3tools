@@ -1,5 +1,4 @@
-﻿using System;
-using SF3.ByteData;
+﻿using SF3.ByteData;
 using SF3.Models.Structs.MPD;
 
 namespace SF3.Models.Tables.MPD {
@@ -10,12 +9,8 @@ namespace SF3.Models.Tables.MPD {
             _textureEndId = is32Bit ? 0xFFFF_FFFF : 0xFFFF;
         }
 
-        public static TextureAnimationTable Create(IByteData data, string name, int address, bool is32Bit) {
-            var newTable = new TextureAnimationTable(data, name, address, is32Bit);
-            if (!newTable.Load())
-                throw new InvalidOperationException("Couldn't initialize table");
-            return newTable;
-        }
+        public static TextureAnimationTable Create(IByteData data, string name, int address, bool is32Bit)
+            => CreateBase(() => new TextureAnimationTable(data, name, address, is32Bit));
 
         public override bool Load() {
             return Load(

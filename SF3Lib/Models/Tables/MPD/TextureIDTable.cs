@@ -8,12 +8,8 @@ namespace SF3.Models.Tables.MPD {
         protected TextureIDTable(IByteData data, string name, int address, int terminatorSize, int? maxSize) : base(data, name, address, terminatorSize, maxSize) {
         }
 
-        public static TextureIDTable Create(IByteData data, string name, int address, int terminatorSize, int? maxSize) {
-            var newTable = new TextureIDTable(data, name, address, terminatorSize, maxSize);
-            if (!newTable.Load())
-                throw new InvalidOperationException("Couldn't initialize table");
-            return newTable;
-        }
+        public static TextureIDTable Create(IByteData data, string name, int address, int terminatorSize, int? maxSize)
+            => CreateBase(() => new TextureIDTable(data, name, address, terminatorSize, maxSize));
 
         public override bool Load() {
             return Load(

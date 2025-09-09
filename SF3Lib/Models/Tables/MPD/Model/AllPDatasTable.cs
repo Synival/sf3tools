@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using SF3.Models.Structs.MPD.Model;
 using SF3.Models.Tables.MPD.Model;
@@ -15,12 +14,8 @@ namespace SF3.Models.Tables.MPD.TextureCollection {
                 .OrderBy(x => x.ID).ToArray();
         }
 
-        public static AllPDatasTable Create(string name, IEnumerable<PDataTable> modelTables) {
-            var newTable = new AllPDatasTable(name, modelTables);
-            if (!newTable.Load())
-                throw new InvalidOperationException("Couldn't initialize table");
-            return newTable;
-        }
+        public static AllPDatasTable Create(string name, IEnumerable<PDataTable> modelTables)
+            => CreateBase(() => new AllPDatasTable(name, modelTables));
 
         public override bool Load() {
             _rows = Models.OrderBy(x => x.Collection).ThenBy(x => x.ID).ToArray();

@@ -1,4 +1,3 @@
-using System;
 using SF3.ByteData;
 using SF3.Models.Structs.MPD.SurfaceModel;
 
@@ -8,12 +7,8 @@ namespace SF3.Models.Tables.MPD.SurfaceModel {
             HasRotation = hasRotation;
         }
 
-        public static TileTextureRowTable Create(IByteData data, string name, int address, bool hasRotation) {
-            var newTable = new TileTextureRowTable(data, name, address, hasRotation);
-            if (!newTable.Load())
-                throw new InvalidOperationException("Couldn't initialize table");
-            return newTable;
-        }
+        public static TileTextureRowTable Create(IByteData data, string name, int address, bool hasRotation)
+            => CreateBase(() => new TileTextureRowTable(data, name, address, hasRotation));
 
         public override bool Load() {
             return Load((id, address) => {

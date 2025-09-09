@@ -25,12 +25,8 @@ namespace SF3.Models.Tables.MPD.TextureCollection {
             IByteData data, string name, int address,
             TextureCollectionType collection, int textureCount, int startId, Dictionary<int, TexturePixelFormat> pixelFormats, Dictionary<TexturePixelFormat, Palette> palettes,
             int? chunkIndex
-        ) {
-            var newTable = new TextureTable(data, name, address, collection, textureCount, startId, pixelFormats, palettes, chunkIndex);
-            if (!newTable.Load())
-                throw new InvalidOperationException("Couldn't initialize table");
-            return newTable;
-        }
+        )
+            => CreateBase(() => new TextureTable(data, name, address, collection, textureCount, startId, pixelFormats, palettes, chunkIndex));
 
         public override bool Load() {
             var size = TextureModel.GlobalSize;

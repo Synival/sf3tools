@@ -1,5 +1,4 @@
-﻿using System;
-using SF3.ByteData;
+﻿using SF3.ByteData;
 using SF3.Models.Structs.MPD.Model;
 
 namespace SF3.Models.Tables.MPD.Model {
@@ -7,12 +6,8 @@ namespace SF3.Models.Tables.MPD.Model {
         protected CollisionLineIndexTable(IByteData data, string name, int address) : base(data, name, address, 2, null) {
         }
 
-        public static CollisionLineIndexTable Create(IByteData data, string name, int address) {
-            var newTable = new CollisionLineIndexTable(data, name, address);
-            if (!newTable.Load())
-                throw new InvalidOperationException("Couldn't initialize table");
-            return newTable;
-        }
+        public static CollisionLineIndexTable Create(IByteData data, string name, int address)
+            => CreateBase(() => new CollisionLineIndexTable(data, name, address));
 
         public override bool Load() {
             return Load(

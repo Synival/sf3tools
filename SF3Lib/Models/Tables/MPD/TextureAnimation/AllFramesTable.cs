@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using SF3.ByteData;
 using SF3.Models.Structs.MPD;
@@ -11,12 +10,8 @@ namespace SF3.Models.Tables.MPD.TextureAnimation {
             Animations = animations;
         }
 
-        public static AllFramesTable Create(IByteData data, string name, int address, IEnumerable<TextureAnimationModel> animations) {
-            var newTable = new AllFramesTable(data, name, address, animations);
-            if (!newTable.Load())
-                throw new InvalidOperationException("Couldn't initialize table");
-            return newTable;
-        }
+        public static AllFramesTable Create(IByteData data, string name, int address, IEnumerable<TextureAnimationModel> animations)
+            => CreateBase(() => new AllFramesTable(data, name, address, animations));
 
         public override bool Load() {
             _rows = Animations.SelectMany(x => x.FrameTable).ToArray();
