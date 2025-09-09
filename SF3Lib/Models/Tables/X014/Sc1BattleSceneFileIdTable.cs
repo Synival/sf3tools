@@ -1,5 +1,4 @@
-﻿using System;
-using SF3.ByteData;
+﻿using SF3.ByteData;
 using SF3.Models.Structs.X014;
 
 namespace SF3.Models.Tables.X014 {
@@ -9,12 +8,8 @@ namespace SF3.Models.Tables.X014 {
             GlobalIdStart = globalIdStart;
         }
 
-        public static Sc1BattleSceneFileIdTable Create(IByteData data, string name, string resourceFile, int address, int size, int? globalIdStart) {
-            var newTable = new Sc1BattleSceneFileIdTable(data, name, resourceFile, address, size, globalIdStart);
-            if (!newTable.Load())
-                throw new InvalidOperationException("Couldn't initialize table");
-            return newTable;
-        }
+        public static Sc1BattleSceneFileIdTable Create(IByteData data, string name, string resourceFile, int address, int size, int? globalIdStart)
+            => CreateBase(() => new Sc1BattleSceneFileIdTable(data, name, resourceFile, address, size, globalIdStart));
 
         public override bool Load()
             => Load((id, name, address) => new BattleSceneFileIdSc1(Data, id, name, address, GlobalIdStart.HasValue ? (GlobalIdStart + id) : null));

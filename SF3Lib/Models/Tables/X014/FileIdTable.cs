@@ -1,5 +1,4 @@
-﻿using System;
-using SF3.ByteData;
+﻿using SF3.ByteData;
 using SF3.Models.Structs.Shared;
 
 namespace SF3.Models.Tables.Shared {
@@ -8,12 +7,8 @@ namespace SF3.Models.Tables.Shared {
             IsEffectFileIndexes = isEffectFileIndexes;
         }
 
-        public static AnimationLocationTable Create(IByteData data, string name, string resourceFile, int address, bool isEffectFileIndexes) {
-            var newTable = new AnimationLocationTable(data, name, resourceFile, address, isEffectFileIndexes);
-            if (!newTable.Load())
-                throw new InvalidOperationException("Couldn't initialize table");
-            return newTable;
-        }
+        public static AnimationLocationTable Create(IByteData data, string name, string resourceFile, int address, bool isEffectFileIndexes)
+            => CreateBase(() => new AnimationLocationTable(data, name, resourceFile, address, isEffectFileIndexes));
 
         public override bool Load()
             => Load((id, name, address) => new AnimationLocation(Data, id, name, address, IsEffectFileIndexes));
