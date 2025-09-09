@@ -630,7 +630,7 @@ namespace SF3.CHR {
         }
 
         private void WriteFrames(CHR_Writer chrWriter, bool writeFrameImagesBeforeTables, byte[] junkAfterFrameTables) {
-            // For what are likely older CHRs, images for each sprite are written before their own frame table.
+            // For prototype CHRs, images for each sprite are written before their own frame table.
             if (writeFrameImagesBeforeTables) {
                 for (int i = 0; i < _spriteCount; i++) {
                     WriteFrameImages(i, chrWriter);
