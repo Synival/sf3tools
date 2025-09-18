@@ -254,7 +254,7 @@ namespace SF3.Models.Structs.X1 {
                     }
 
                     case EventTriggerType.Warp: {
-                        var withSoundEffect = ((EventTriggerWarpSoundType) TriggerParam1 == EventTriggerWarpSoundType.PlaySound) ? " with sound effect" : "";
+                        var withSoundEffect = ((EventTriggerWarpSoundType) TriggerParam1 == EventTriggerWarpSoundType.PlaySound) ? " (with sound effect)" : "";
                         return "When entering tile 0x" + (TriggerMPDTieIn ?? -1).ToString("X2") + withSoundEffect;
                     }
 
@@ -293,10 +293,10 @@ namespace SF3.Models.Structs.X1 {
                     }
 
                     case EventTriggerType.Bookshelf:
-                        return "When checking bookshelf at tile " + (TriggerMPDTieIn ?? -1).ToString("X2");
+                        return "When checking bookshelf at tile 0x" + (TriggerMPDTieIn ?? -1).ToString("X2");
 
                     case EventTriggerType.Cupboard:
-                        return "When checking cupboard at tile " + (TriggerMPDTieIn ?? -1).ToString("X2");
+                        return "When checking cupboard at tile 0x" + (TriggerMPDTieIn ?? -1).ToString("X2");
 
                     default:
                         return "(Unhandled event)";
@@ -501,15 +501,35 @@ namespace SF3.Models.Structs.X1 {
         [TableViewModelColumn(addressField: null, displayOrder: 5, minWidth: 350)]
         public string ActionDescription {
             get {
-                // TODO: way better!!
-                switch (ActionParam3Type) {
-                    case NamedValueType.Item: {
-                        var item = ActionParam3;
-                        return "Get " + NameGetterContext.GetName(null, null, item, new object[] { NamedValueType.Item }) + $" (0x{item})";
-                    }
+                switch (ActionParam1Type) {
+                    case NamedValueType.EventActionNpcTalk:
+                        switch ((EventActionNpcTalkType) ActionParam1) {
+                            case EventActionNpcTalkType.RunFunction:
+                                return $"Run function at 0x{Action:X8}";
+                            default:
+                                return $"Show text 0x{ActionParam2:X3}";
+                        }
+
+                    case NamedValueType.EventActionInspect:
+                        switch (ActionParam3Type) {
+                            case NamedValueType.Item: {
+                                var itemID = ActionParam3;
+                                var itemName = NameGetterContext.GetName(null, null, itemID, new object[] { NamedValueType.Item });
+                                var inspectFlags = (EventActionInspectFlags) ActionParam2;
+                                var inspectFlagsStr = (inspectFlags == EventActionInspectFlags.Locked) ? " (locked)" : "";
+                                return $"Get {itemName} (0x{itemID}){inspectFlagsStr}";
+                            }
+                            default:
+                                return $"Run function at 0x{Action:X8}";
+                        }
 
                     default:
-                        return Action.ToString("X8");
+                        switch ((EventTriggerType) TriggerType) {
+                            case EventTriggerType.Warp:
+                                return $"Warp to 0x{ActionParam1:X2} in warp table";
+                            default:
+                                return $"Run function at 0x{Action:X8}";
+                        }
                 }
             }
         }
