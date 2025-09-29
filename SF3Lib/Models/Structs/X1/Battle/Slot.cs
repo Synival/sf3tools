@@ -4,7 +4,8 @@ using SF3.Types;
 
 namespace SF3.Models.Structs.X1.Battle {
     public class Slot : Struct {
-        private readonly int _battleAddrBase;
+        private readonly int _battleAddrEnemyBase;
+        private readonly int _battleAddrPlayerBase;
 
         private readonly int _enemyIDAddr;
         private readonly int _xAddr;
@@ -67,7 +68,8 @@ namespace SF3.Models.Structs.X1.Battle {
         : base(data, id, name, address, 0x34) {
             Scenario = scenario;
             PrevSlot = prevSlot;
-            _battleAddrBase = GetBattleAddrBase(scenario);
+            _battleAddrEnemyBase  = GetBattleAddrBase(scenario);
+            _battleAddrPlayerBase = _battleAddrEnemyBase + 0x3C * 0xB0;
 
             _enemyIDAddr            = Address + 0x00; // 2 bytes  
             _xAddr                  = Address + 0x02; // 2 bytes
@@ -159,8 +161,12 @@ namespace SF3.Models.Structs.X1.Battle {
         public string BattleIDStr =>
             (BattleID < 0) ? "--" : BattleID.ToString("X2");
 
-        public int BattleAddress =>
-            (BattleID < 0) ? 0 : (BattleID - 0x80) * 0xB0 + _battleAddrBase;
+        public int BattleAddress {
+            get {
+                var battleId = BattleID;
+                return (battleId < 0) ? 0 : (battleId % 0x80 * 0xB0 + (battleId >= 0x80 ? _battleAddrEnemyBase : _battleAddrPlayerBase));
+            }
+        }
 
         [TableViewModelColumn(addressField: null, displayOrder: 0.8f, displayName: "Battle Address", displayGroup: "Metadata", isPointer: true)]
         public string BattleAddressStr =>
