@@ -83,6 +83,46 @@
             {
               "Command": "Stop"
             }
+          ],
+          "Walking": [
+            {
+              "Frame": "Walking 1",
+              "Duration": 4
+            },
+            {
+              "Frame": "Walking 2",
+              "Duration": 4
+            },
+            {
+              "Frame": "Walking 3",
+              "Duration": 4
+            },
+            {
+              "Frame": "Walking 4",
+              "Duration": 4
+            },
+            {
+              "Frame": "Walking 2",
+              "Duration": 4
+            },
+            {
+              "Frame": "Walking 5",
+              "Duration": 4
+            },
+            {
+              "Command": "GotoCommandOffset",
+              "Parameter": 0
+            }
+          ],
+          "StillFrame (Change to 1)": [
+            {
+              "Frame": "Idle (Battle) 3",
+              "Duration": 10
+            },
+            {
+              "Command": "GotoAnimation",
+              "Parameter": 1
+            }
           ]
         },
         "6": {
@@ -145,6 +185,16 @@
             {
               "Command": "GotoCommandOffset",
               "Parameter": 0
+            }
+          ],
+          "StillFrame (Change to 1)": [
+            {
+              "Frame": "Idle (Battle) 3",
+              "Duration": 10
+            },
+            {
+              "Command": "GotoAnimation",
+              "Parameter": 1
             }
           ]
         }
