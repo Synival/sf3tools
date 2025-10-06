@@ -2,7 +2,7 @@
 
 namespace CHRTool {
     public static class Constants {
-        public const string Version = "1.1.1";
+        public const string Version = "1.1.2";
 
         public const string VersionString =
             "CHRTool v" + Version + "\n";
@@ -44,6 +44,8 @@ namespace CHRTool {
             "      (can' be used with multiple files or with paths)\n" +
             "  -d, --output-dir=<dir>    specify output path for all CHR/CHP file(s)\n" +
             "  --add-sprite=<file>       adds an SF3CHRSprite file\n" +
+            "  --padding-from=<file>     specify a file to use when adding padding\n" +
+            "                            (useful for the junk data in vanilla files)\n" +
             "\n" +
             "'decompile' Options:\n" +
             "  -S --simplify             ignore accuracy and simplify output\n" +
