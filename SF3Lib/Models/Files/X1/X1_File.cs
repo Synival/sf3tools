@@ -224,12 +224,29 @@ namespace SF3.Models.Files.X1 {
 
             // Look for known functions and create corresponding DiscoveredData() entries.
             var funcs = KnownX1Functions.AllKnownFunctions
-                .Select(x => new { Info = x.Key, Size = x.Value.Length * 2, Indices = data.IndicesOfSubset(x.Value.ToByteArray()) })
+                .Select(x => new { Info = x, Size = x.Data.Length * 2, Indices = data.IndicesOfSubset(x.Data.ToByteArray())})
                 .ToArray();
 
+            // TODO: shouldn't be just in X1 file. do this better!!
             foreach (var func in funcs) {
-                for (int i = 0; i < func.Indices.Length; i++)
-                    _ = Discoveries.AddFunction((uint) (func.Indices[i] + RamAddress), func.Info.TypeName, (i == 0 ? "" : $"DUP{i}_") + func.Info.Name, func.Size);
+                for (int i = 0; i < func.Indices.Length; i++) {
+                    var fileAddr = func.Indices[i];
+                    var funcName = (i == 0 ? "" : $"DUP{i}_") + func.Info.Name;
+                    _ = Discoveries.AddFunction((uint) (fileAddr + RamAddress), func.Info.TypeName, funcName, func.Size);
+                }
+            }
+
+            // TODO: shouldn't be just in X1 file. do this better!!
+            int subFuncCount = 0;
+            foreach (var func in Discoveries.GetFunctions()) {
+                if (func.Name.EndsWith("runFunctionWithParam()")) {
+                    var fileAddr = (int) (func.Address - RamAddress);
+                    var param1 = data.GetUInt32(fileAddr + func.Size.Value);
+                    var param2 = data.GetUInt32(fileAddr + func.Size.Value + 0x04);
+
+                    var param2Func = Discoveries.GetFunctionAt(param2) ?? Discoveries.AddFunction(param2, "Function", $"unknownFunction{++subFuncCount}(int)", null);
+                    func.Name = $"run_{param2Func.Name}_with0x{param1:X2}()";
+                }
             }
 
             // Add functions in the interactable table.
