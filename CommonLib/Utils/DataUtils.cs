@@ -1,8 +1,21 @@
 using System.Collections.Generic;
+using System.Linq;
 
 namespace CommonLib.Utils {
     public static class DataUtils {
         public static int[] IndicesOfSubset(this byte[] src, byte[] subset, int startPos = 0, int alignment = 1) {
+            var indices = new List<int>();
+            while (true) {
+                var index = IndexOfSubset(src, subset, startPos, alignment);
+                if (index < 0)
+                    break;
+                startPos = index + alignment;
+                indices.Add(index);
+            }
+            return indices.ToArray();
+        }
+
+        public static int[] IndicesOfSubset(this byte[] src, byte?[] subset, int startPos = 0, int alignment = 1) {
             var indices = new List<int>();
             while (true) {
                 var index = IndexOfSubset(src, subset, startPos, alignment);
@@ -63,6 +76,49 @@ namespace CommonLib.Utils {
             return -1;
         }
 
+        public static unsafe int IndexOfSubset(this byte[] src, byte?[] subset, int startPos = 0, int alignment = 1) {
+            // Check for invalid values.
+            if (src == null || subset == null || startPos < 0 || alignment < 1)
+                return -1;
+
+            // Make sure 'startPos' is in increments of 'alignment'.
+            if (startPos % alignment != 0)
+                startPos = ((startPos / alignment) + 1) * alignment;
+
+            // Make sure we're not trying to search beyond the length of 'src'.
+            if (startPos >= src.Length)
+                return -1;
+
+            // Searching for 0 bytes is easy, it's right there!
+            if (subset.Length == 0)
+                return startPos;
+
+            // Bail early if what we're searching for is too large for the search area.
+            var searchLen = src.Length - subset.Length + 1;
+            if (startPos >= searchLen)
+                return -1;
+
+            var hasNull = subset.Any(x => !x.HasValue);
+
+            fixed (byte* srcPtrStart = &src[0]) {
+                byte* srcPtr = srcPtrStart + startPos;
+
+                for (int i = startPos; i < searchLen; i += alignment, srcPtr += alignment) {
+                    byte* srcSearchPtr = srcPtr;
+
+                    int j = 0;
+                    for (; j < subset.Length; j++, srcSearchPtr++) {
+                        var searchVal = subset[j];
+                        if (searchVal.HasValue && *srcSearchPtr != searchVal.Value)
+                            break;
+                    }
+                    if (j == subset.Length)
+                        return i;
+                }
+            }
+            return -1;
+        }
+
         public static unsafe byte[] ToByteArray(this ushort src)
             => ToByteArray(new ushort[] { src });
 
@@ -102,6 +158,25 @@ namespace CommonLib.Utils {
                     *(outputPtr++) = (byte) (srcValue >> 16);
                     *(outputPtr++) = (byte) (srcValue >> 8);
                     *(outputPtr++) = (byte) (srcValue);
+                }
+            }
+
+            return output;
+        }
+
+        public static byte?[] ToByteArray(this ushort?[] src) {
+            var output = new byte?[src.Length * 2];
+            var len = src.Length;
+            var pos = 0;
+
+            for (int i = 0; i < len; i++) {
+                if (src[i].HasValue) {
+                    output[pos++] = (byte) ((src[i] & 0xFF00) >> 8);
+                    output[pos++] = (byte) (src[i] & 0xFF);
+                }
+                else {
+                    output[pos++] = null;
+                    output[pos++] = null;
                 }
             }
 
