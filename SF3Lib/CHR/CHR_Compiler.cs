@@ -75,5 +75,11 @@ namespace SF3.CHR {
         /// When set, a custom directory for spritesheets (.PNG files) is used.
         /// </summary>
         public string SpritesheetPath { get; set; } = null;
+
+        /// <summary>
+        /// When set, padding is used from an existing array rather than zeroes.
+        /// This is useful for recompiling CHP's that have a lot of junk data in their original files.
+        /// </summary>
+        public byte[] PaddingBytes { get; set; } = null;
     }
 }

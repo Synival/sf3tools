@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Linq;
 using CommonLib.Arrays;
 using CommonLib.Logging;
@@ -64,14 +65,32 @@ namespace SF3.CHR {
         private int CompileInternal(CHP_Def chpDef, Stream outputStream, bool seekInsteadOfWrite) {
             var startPosition = outputStream.Position;
 
+            // If padding bytes are explicitly set, then we always want to write instead of seek.
+            if (PaddingBytes != null)
+                seekInsteadOfWrite = false;
+
+            void AddPaddingFromBytes(int paddingFromStart, int padding) {
+                var paddingFromEnd = Math.Min(paddingFromStart + padding, PaddingBytes.Length);
+                var paddingFromLen = Math.Max(paddingFromEnd - paddingFromStart, 0);
+                var remainingZeroes = padding - paddingFromLen;
+
+                if (paddingFromLen > 0)
+                    outputStream.Write(PaddingBytes, paddingFromStart, paddingFromLen);
+                if (remainingZeroes > 0)
+                    outputStream.Write(new byte[remainingZeroes], 0, remainingZeroes);
+            }
+
             foreach (var chr in chpDef.CHRs.OrderBy(x => x.Sector.HasValue ? 1 : 0).ThenBy(x => x.Sector ?? 0)) {
                 var sector = chr.Sector ?? ((outputStream.Position - startPosition + 0x7FF) / 0x800);
                 var offset = sector * 0x800 + startPosition;
 
-                var padding = offset - outputStream.Position;
+                var position = outputStream.Position;
+                var padding = offset - position;
                 if (padding > 0) {
                     if (seekInsteadOfWrite)
                         outputStream.Position += padding;
+                    else if (PaddingBytes != null)
+                        AddPaddingFromBytes((int) (position - startPosition), (int) padding);
                     else
                         outputStream.Write(new byte[padding], 0, (int) padding);
                 }
@@ -85,10 +104,13 @@ namespace SF3.CHR {
                     Logger.WriteLine($"CHR at sector {sector} (position 0x{offset:X5}) exceeds MaxSize (0x{chr.MaxSize:X5}) by 0x{(bytesWritten - chr.MaxSize):X2} bytes", LogType.Error);
             }
 
-            var eofPadding = (chpDef.TotalSectors * 0x800) - outputStream.Position - startPosition;
+            var eofPosition = outputStream.Position;
+            var eofPadding = (chpDef.TotalSectors * 0x800) - eofPosition - startPosition;
             if (eofPadding > 0) {
                 if (seekInsteadOfWrite)
                     outputStream.Position += eofPadding;
+                else if (PaddingBytes != null)
+                    AddPaddingFromBytes((int) (eofPosition - startPosition), (int) eofPadding);
                 else
                     outputStream.Write(new byte[eofPadding], 0, (int) eofPadding);
             }
@@ -126,6 +148,15 @@ namespace SF3.CHR {
         public string SpritesheetPath {
             get => _chrCompiler.SpritesheetPath;
             set => _chrCompiler.SpritesheetPath = value;
+        }
+
+        /// <summary>
+        /// When set, padding is used from an existing array rather than zeroes.
+        /// This is useful for recompiling CHP's that have a lot of junk data in their original files.
+        /// </summary>
+        public byte[] PaddingBytes {
+            get => _chrCompiler.PaddingBytes;
+            set => _chrCompiler.PaddingBytes = value;
         }
 
         private readonly CHR_Compiler _chrCompiler = new CHR_Compiler();
