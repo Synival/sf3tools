@@ -1,5 +1,6 @@
 using System.Linq;
 using CommonLib.Attributes;
+using CommonLib.Discovery;
 using CommonLib.NamedValues;
 using SF3.ByteData;
 using SF3.Models.Tables.X1.Town;
@@ -14,10 +15,11 @@ namespace SF3.Models.Structs.X1 {
         private readonly int _padding0x06;
         private readonly int _actionAddr;
 
-        public Interactable(IByteData data, int id, string name, int address, INameGetterContext nameGetterContext, NpcTable npcTable)
+        public Interactable(IByteData data, int id, string name, int address, INameGetterContext nameGetterContext, NpcTable npcTable, DiscoveryContext discoveries)
         : base(data, id, name, address, 0x0C) {
             NameGetterContext = nameGetterContext;
             NpcTable = npcTable;
+            Discoveries = discoveries;
 
             _triggerAddr         = Address + 0x00; // 2 bytes
             _triggerFlagsAddr    = Address + 0x02; // 1 byte
@@ -29,6 +31,7 @@ namespace SF3.Models.Structs.X1 {
 
         public INameGetterContext NameGetterContext { get; }
         public NpcTable NpcTable { get; }
+        public DiscoveryContext Discoveries { get; }
 
         [TableViewModelColumn(addressField: nameof(_triggerAddr), displayOrder: 0, displayFormat: "X4")]
         [BulkCopy]
@@ -505,7 +508,7 @@ namespace SF3.Models.Structs.X1 {
                     case NamedValueType.EventActionNpcTalk:
                         switch ((EventActionNpcTalkType) ActionParam1) {
                             case EventActionNpcTalkType.RunFunction:
-                                return $"Run function at 0x{Action:X8}";
+                                return $"Run {FunctionName(Action)}";
                             default:
                                 return $"Show text 0x{ActionParam2:X3}";
                         }
@@ -520,7 +523,7 @@ namespace SF3.Models.Structs.X1 {
                                 return $"Get {itemName} (0x{itemID}){inspectFlagsStr}";
                             }
                             default:
-                                return $"Run function at 0x{Action:X8}";
+                                return $"Run {FunctionName(Action)}";
                         }
 
                     default:
@@ -528,10 +531,15 @@ namespace SF3.Models.Structs.X1 {
                             case EventTriggerType.Warp:
                                 return $"Warp to 0x{ActionParam1:X2} in warp table";
                             default:
-                                return $"Run function at 0x{Action:X8}";
+                                return $"Run {FunctionName(Action)}";
                         }
                 }
             }
+        }
+
+        private string FunctionName(uint addr) {
+            var func = Discoveries?.GetFunctionAt(addr);
+            return (func == null) ? $"function at 0x{addr:X8}" : $"{func.Name} (0x{addr:X8})";
         }
     }
 }

@@ -169,7 +169,7 @@ namespace SF3.Models.Files.X1 {
             if (npcAddress >= 0)
                 tables.Add(NpcTable = NpcTable.Create(Data, "NPCs", npcAddress, null));
             if (treasureAddress >= 0)
-                tables.Add(InteractableTable = InteractableTable.Create(Data, "Interactables", treasureAddress, NameGetterContext, NpcTable));
+                tables.Add(InteractableTable = InteractableTable.Create(Data, "Interactables", treasureAddress, NameGetterContext, NpcTable, Discoveries));
             if (enterAddress >= 0)
                 tables.Add(EnterTable = EnterTable.Create(Data, "Entrances", enterAddress));
             if (arrowAddress >= 0)
