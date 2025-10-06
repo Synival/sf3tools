@@ -1,3 +1,111 @@
+## SF3Tools v0.2.0 (2025-09-06)
+
+This release adds several new features, the most exciting of which is a tool to update Shining Force III's sprites!
+
+With the new CHRTool, you can now completely rebuild CHR and CHP files (the files that contain sprites used for all
+scenes and battles) to change existing sprites, introduce completely new sprites, and make any change you'd like. This
+is all done with a command-line tool (`chrtool.exe`) that works with various source files in JSON format (`.SF3CHR`,
+`.SF3CHP`, and `.SF3Sprite`). With the CHRTool, we can now decompile `.CHR`/`.CHP` files and recompile them using
+source code and spritesheets to produce byte-for-byte accurate game files.\*
+
+\* *For all but **two** files, but it's because they're broken anyway! :P*
+
+In addition, ***all*** of the games sprites with their frames and animations have been identified and labelled
+accordingly. **This amounts to over 25,000 total frames and over 600 individual sprites.** All of this information is
+stored in JSON format in files `SF3Lib/Resources/Sprites/*.SF3Sprite`.
+
+The spritesheets themselves are not provided by SF3Tools; you must extract them from each disc using the command:
+```
+chrtool.exe extract-sheets <path-to-disc>
+```
+
+This works with multiple paths, so you can extract from all 4 discs at once:
+```
+chrtool.exe extract-sheets Scn1/ Scn2/ Scn3/ PD/
+```
+
+More information about how to use CHRTool and how to edit sprites can be found in `CHRTool.md`.
+
+Have fun, and happy hacking!
+-- Synival
+
+Full changelog:
+
+### Sprite editing/viewing:
+
+- New command-line program CHRTool (`chrtool.exe`) with the following commands:
+    - `decompile`: Decompiles binary `.CHR` and `.CHP` files into JSON-format `.SF3CHR` and `.SF3CHP` source files
+    - `compile`: Compiles `.SF3CHR` and `.SF3CHP` source files into JSON-format `.CHR` and `.CHP` binary files
+    - `extract-sheets`: Extracting frame images into spritesheets from `.CHR` and `.CHP` files
+    - `describe`: Describing the sprites contained in any of the supported file types (`.CHR`, `.CHP`, `.SF3CHR`,
+        `.SF3CHP`, `.SF3Sprite`, `.SF3CHRSprite`)
+    - `update-hash-lookups`: Updates the file `Resouces/FrameHashLookups.json`, which is used for identifying frames
+        in `.CHR` and `.CHP` files, with the latest frames available 
+- All 600+ sprites with all their unique frames and animations have been identified and labeled as files
+    `SF3Lib/Resources/Sprites/*.SF3Sprite`.
+- Files containing game sprites can now be loaded and modified (`*.CHR`, `*.CHP`):
+    - Frames and animations can be viewed
+    - Header info and animation commands can be modified
+- Added some custom sprites and frames to show off new sprite editing features:
+    - New frames for sprites "Synbios (U) (Weaponless)" and "Synbios (P1) (Weaponless)" to give him a complete set of
+        frames for a "weaponless Synbios" controllable avatar, similar to how Medion and Julian in scenarios 2 + 3
+    - Masked Priest (Aquamarine)
+    - Masked Mage (Black)
+
+### New editable data:
+
+- Shop items, deals, and haggles can now be modified (`X023.BIN`)
+- Blacksmith weapon/item editing (`X1*.BIN`, `X023.BIN`, `X024.BIN`, and `X027.BIN`)
+- Special attack and spell animations can now be changed (`X013.BIN`, `X014.BIN`)
+- 3D battle scenes for all scenarios can now be changed (`X014.BIN`)
+- Character and enemy models for all scenarios can now be changed (`X014.BIN`)
+- MPD files now have a "Map Flags" tab for easily modifying flags without dealing with the bits directly
+- Added "Battle Talk" table for battles (`X1*.BIN`)
+- Updated NPC tables for scenes with most recent discoveries (`X1*.BIN`)
+- Added table for setting up MPD Models as actors for scenes/battles (`X1*.BIN`)
+
+### Quality of life:
+
+- Hovering the mouse over any cell in any table will show the address of the data in the file (when applicable) and
+    other technical information
+- The selected row of deselected tables is now much more obvious (very useful when switching between tabs or files and
+    you need to cross-reference data!)
+- Tool to apply/unapply equipment stat bonuses for the enemy table (very useful for modifying their final stats!)
+    (`X019.BIN`)
+
+### Other changes:
+
+- MPD lighting used in Scenario 2+ outdoor maps has been reverse-engineered and is now rendered accurately
+- Finished identifying unknown values in MPD model `ATTR` tables
+- Added lists of "Actor Scripts" for scenes/battles (currently read-only) (`X1*.BIN`)
+- Interactables tables now show known named-functions being called (`X1*.BIN`)
+- All SpriteIDs for Scenario 3 and the Premium Disk have (finally) been identified
+- Statistics and charts for character stat growth in `X031.BIN` and `X033.BIN` have been moved to their own tab
+    - Lots of useful data from the character growth chart can now be viewed as a table as well
+- Removed some redundant info for special tables that have specific values in each row (e.g, the "Significant Values"
+    table in `X013.BIN`)
+
+### Technical features:
+
+- Added a tool for adding blank data to the EOF of any supported `.BIN` file, automatically updating any pointer that
+    references runtime-only post-EOF variables
+- Added a tool for inserting arbitrary data into any suppoted `.BIN` file at any point, automatically updating any
+    poiner that is referenced after the point of insertion
+- A tab for technical info for every supported `.BIN` file
+- Added discovery of common known functions, tables, and other data to supported files (most importantly, `X1*.BIN`)
+- Added a table for scene/battle interrupt/tick function hooks setup (`X1*.BIN`)
+- Some very minor changes to eror logging using a new logging system. Still WIP, but will be very cool in the next
+    release!
+
+### Bugfixes:
+
+- Fixed a bug in MPD lighting where the brightest value in the lightmap was never displayed
+- Fixed some rendering bugs involving gradients
+- DFRToolGUI window is now placed in the center of the screen and has some control positions fixed
+- DFRTool didn't report the correct file address when a byte had the wrong expected value; this is now fixed
+- Some incorrect names of characters and sprites have been corrected
+- Added missing named-value dropdown for the "ExtraMusic" column in the `X002.BIN` "Loading Overrides" table
+
 ## SF3Editor and SF3Lib v0.1.1 (2025-04-26)
 
 Another release, another huge batch of changes!
