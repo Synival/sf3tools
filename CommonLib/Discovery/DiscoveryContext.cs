@@ -234,6 +234,9 @@ namespace CommonLib.Discovery {
             return null;
         }
 
+        public DiscoveredData GetFunctionAt(uint addr)
+            => DiscoveredFunctionsByAddress.TryGetValue(addr, out var func) ? func : null;
+
         public bool HasDiscoveryAt(uint addr) {
             return
                 DiscoveredFunctionsByAddress.ContainsKey(addr) ||
