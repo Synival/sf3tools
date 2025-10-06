@@ -1,3 +1,5 @@
+using System;
+using System.IO;
 using CommonLib.Logging;
 using CommonLib.Types;
 using DFRLib;
@@ -59,15 +61,15 @@ namespace DFRTool {
 
             // If a command was supplied, split arguments up.
             var generalArgs   = (command != null) ? args[0..commandArg] : args;
-            var remainingArgs = (command != null) ? args[(commandArg + 1)..args.Length] : [];
+            var remainingArgs = (command != null) ? args[(commandArg + 1)..args.Length] : new string[0];
 
             // Gather general options.
             var outputHelp = false;
             var outputVersion = false;
 
             var anywhereOptions = new OptionSet() {
-               { "h|help",  v => outputHelp = true },
-               { "version", v => outputVersion = true },
+                { "h|help",  v => outputHelp = true },
+                { "version", v => outputVersion = true },
             };
             var generalOptions = new OptionSet() {
                 // more options coming sometime!
@@ -130,7 +132,7 @@ namespace DFRTool {
             var applyToInputFile = false;
 
             var options = new OptionSet() {
-               { "i|to-input", v => applyToInputFile = true },
+                { "i|to-input", v => applyToInputFile = true },
             };
 
             string[] extra;
@@ -179,7 +181,7 @@ namespace DFRTool {
             var combineAppends = false;
 
             var options = new OptionSet() {
-               { "c|combine-appends", v => combineAppends = true },
+                { "c|combine-appends", v => combineAppends = true },
             };
 
             string[] extra;
