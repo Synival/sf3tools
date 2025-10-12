@@ -198,5 +198,25 @@ namespace CommonLib.Extensions {
             // Not found
             return -1;
         }
+
+        /// <summary>
+        /// Converts an array of bytes to an array of ushorts.
+        /// </summary>
+        /// <param name="bytes">Input array to convert.</param>
+        /// <returns>An array of ushort[] with half the length of 'bytes'.</returns>
+        /// <exception cref="ArgumentException"></exception>
+        public static ushort[] ToUShorts(this byte[] bytes) {
+            if (bytes.Length % 2 != 0)
+                throw new ArgumentException($"'{nameof(bytes)}.Length' must be divisible by 2");
+
+            var shorts = new ushort[bytes.Length / 2];
+            int pos = 0;
+            for (int i = 0; i < shorts.Length; i++) {
+                shorts[i] = (ushort) (bytes[pos++] << 8);
+                shorts[i] += bytes[pos++];
+            }
+
+            return shorts;
+        }
     }
 }
