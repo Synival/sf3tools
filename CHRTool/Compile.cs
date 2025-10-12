@@ -19,6 +19,9 @@ namespace CHRTool {
             var cantSetOutputFile = false;
             string paddingFrom = null;
 
+            // Keep track of any errors that may have occurred.
+            int initialErrorCount = Logger.TotalErrorCount;
+
             // Read any command line options.
             var compileOptions = new OptionSet() {
                 { "O|optimize",    v => optimize = true },
@@ -111,6 +114,10 @@ namespace CHRTool {
             }
             var spritesToAddDefs = spritesToAddDefList.ToArray();
 
+            // Paranoia check -- don't attempt to compile anything if we've encountered errors at this point.
+            if (Logger.TotalErrorCount > initialErrorCount)
+                return 1;
+
             // It looks like we're ready to go! Fetch the file data.
             if (verbose)
                 Logger.WriteLine("Compiling to .CHR(s) / CHP(s)...");
@@ -120,11 +127,19 @@ namespace CHRTool {
                         var thisOutputFile = GetOutputFile(file, outputFile, outputDir);
                         Logger.WriteLine($"Compiling '{file}' to '{thisOutputFile}'...");
                         using (Logger.IndentedSection()) {
+                            int errorCount = Logger.TotalErrorCount;
                             try {
                                 CompileFile(file, thisOutputFile, outputDir, verbose, optimize, spritesToAddDefs, paddingBytes);
                             }
                             catch (Exception e) {
                                 Logger.LogException(e);
+                            }
+
+                            // If something was compiled with errors, don't continue.
+                            if (Logger.TotalErrorCount > errorCount && File.Exists(thisOutputFile)) {
+                                if (verbose)
+                                    Logger.WriteLine("Errors detected; aborting.");
+                                return 1;
                             }
                         }
                     }
@@ -133,6 +148,13 @@ namespace CHRTool {
                     Logger.LogException(e);
                     return 1;
                 }
+            }
+
+            // We're not "done" if errors were produced.
+            if (Logger.TotalErrorCount > initialErrorCount) {
+                if (verbose)
+                    Logger.WriteLine("Errors detected; aborting.");
+                return 1;
             }
 
             if (verbose)
@@ -163,6 +185,7 @@ namespace CHRTool {
 
         private static void CompileFile(string inputFile, string outputFile, string outputPath, bool verbose, bool optimize, SpriteDef[] spritesToAdd, byte[] paddingBytes) {
             bool isChp = inputFile.ToLower().EndsWith(".sf3chp");
+            int initialErrorCount = Logger.TotalErrorCount;
 
             // Try to create the output directory if it doesn't exist.
             outputPath = Path.GetDirectoryName(outputFile);
@@ -184,6 +207,13 @@ namespace CHRTool {
                 : CompileCHR(inputFile, inputText, verbose, optimize, spritesToAdd, paddingBytes);
             if (outputData == null)
                 return;
+
+            // Don't write anything on error.
+            if (Logger.TotalErrorCount > initialErrorCount) {
+                if (verbose)
+                    Logger.WriteLine($"Errors detected; not writing to '{outputFile}'.");
+                return;
+            }
 
             // Output the file.
             if (verbose)

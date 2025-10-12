@@ -107,22 +107,50 @@ namespace CHRTool {
             if (frameHashLookupsFile != null)
                 SpriteResources.FrameHashLookupsFile = frameHashLookupsFile;
 
+            int rval = 0;
+            bool showWarningsAndErrors = false;
             switch (command) {
                 case CommandType.Compile:
-                    return Compile.Run(remainingArgs, verbose);
+                    showWarningsAndErrors = true;
+                    rval = Compile.Run(remainingArgs, verbose);
+                    break;
+
                 case CommandType.Decompile:
-                    return Decompile.Run(remainingArgs, verbose);
+                    showWarningsAndErrors = true;
+                    rval = Decompile.Run(remainingArgs, verbose);
+                    break;
+
                 case CommandType.ExtractSheets:
-                    return ExtractSheets.Run(remainingArgs, spritesheetDir, verbose);
+                    showWarningsAndErrors = true;
+                    rval = ExtractSheets.Run(remainingArgs, spritesheetDir, verbose);
+                    break;
+
                 case CommandType.UpdateHashLookups:
-                    return UpdateHashLookups.Run(remainingArgs, spriteDir, frameHashLookupsFile, verbose);
+                    showWarningsAndErrors = true;
+                    rval = UpdateHashLookups.Run(remainingArgs, spriteDir, frameHashLookupsFile, verbose);
+                    break;
+
                 case CommandType.Describe:
-                    return Describe.Run(remainingArgs, verbose);
+                    rval = Describe.Run(remainingArgs, verbose);
+                    break;
 
                 default:
                     Logger.WriteLine("Internal error: unimplemented command '" + command.ToString() + "'", LogType.Error);
                     return 1;
             }
+
+            var warnings = Logger.TotalWarningCount;
+            var errors = Logger.TotalErrorCount;
+            if (showWarningsAndErrors && (errors > 0 || warnings > 0 || verbose))
+                Logger.WriteLine($"{warnings} warning(s), {errors} error(s)");
+
+            // If errors were reported, never return 0 (success).
+            if (rval == 0 && errors > 0) {
+                if (verbose)
+                    Logger.WriteLine($"Errors detected; returning failure");
+                rval = 1;
+            }
+            return rval;
         }
     }
 }

@@ -115,6 +115,7 @@ namespace CHRTool {
 
         private static void DecompileFile(string inputFile, string outputFile, string outputPath, bool verbose, bool simplify) {
             bool isChp = inputFile.ToLower().EndsWith(".chp");
+            int initialErrorCount = Logger.TotalErrorCount;
 
             // Try to create the output directory if it doesn't exist.
             outputPath = Path.GetDirectoryName(outputFile);
@@ -137,6 +138,13 @@ namespace CHRTool {
                 : DecompileCHR(inputBytes, verbose, simplify);
             if (outputText == null)
                 return;
+
+            // Don't write anything on error.
+            if (Logger.TotalErrorCount > initialErrorCount) {
+                if (verbose)
+                    Logger.WriteLine($"Errors detected; not writing to '{outputFile}'.");
+                return;
+            }
 
             if (verbose)
                 Logger.WriteLine($"Writing to '{outputFile}'...");
