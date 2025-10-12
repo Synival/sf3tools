@@ -5,8 +5,10 @@ using CommonLib.Types;
 
 namespace CommonLib.Logging {
     public static class Logger {
+        public static ILogger DefaultLogger = new ConsoleLogger();
+
         private static List<ILogger> s_loggers = new List<ILogger>() {
-            new ConsoleLogger()
+            DefaultLogger
         };
 
         /// <summary>
@@ -76,5 +78,15 @@ namespace CommonLib.Logging {
         /// <returns></returns>
         public static ScopeGuard IndentedSection(int tabs = 1)
             => new ScopeGuard(() => Indent(tabs), () => Unindent(tabs));
+
+        /// <summary>
+        /// Returns the number of warnings reported during the entire lifespan of the Logger.
+        /// </summary>
+        public static int TotalWarningCount => DefaultLogger.WarningCount;
+
+        /// <summary>
+        /// Returns the number of errors reported during the entire lifespan of the Logger.
+        /// </summary>
+        public static int TotalErrorCount => DefaultLogger.ErrorCount;
     }
 }

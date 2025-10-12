@@ -32,5 +32,15 @@ namespace CommonLib.Logging {
         /// When true, a log line has been started with StartLine().
         /// </summary>
         bool LogLineStarted { get; }
+
+        /// <summary>
+        /// The number of warning lines logged.
+        /// </summary>
+        int WarningCount { get; }
+
+        /// <summary>
+        /// The number of error lines logged.
+        /// </summary>
+        int ErrorCount { get; }
     }
 }

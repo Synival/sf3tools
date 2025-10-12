@@ -7,12 +7,19 @@ namespace CommonLib.Logging {
             if (LogLineStarted == true)
                 return;
             LogLineStarted = true;
+            _currentLogType = logType;
 
             // Set color for warnings/errors
-            if (logType == LogType.Warning)
-                _lastColor = ConsoleColor.Yellow;
-            else if (logType == LogType.Error)
-                _lastColor = ConsoleColor.Red;
+            switch (logType) {
+                case LogType.Warning:
+                    _lastColor = ConsoleColor.Yellow;
+                    break;
+
+                case LogType.Error:
+                    _lastColor = ConsoleColor.Red;
+                    break;
+            }
+
             if (_lastColor.HasValue)
                 Console.ForegroundColor = _lastColor.Value;
 
@@ -35,12 +42,26 @@ namespace CommonLib.Logging {
                 _lastColor = null;
             }
             Console.WriteLine();
+
             LogLineStarted = false;
+            switch (_currentLogType) {
+                case LogType.Warning:
+                    WarningCount++;
+                    break;
+
+                case LogType.Error:
+                    ErrorCount++;
+                    break;
+            }
+            _currentLogType = null;
         }
 
         public int Indentation { get; set; }
         public bool LogLineStarted { get; private set; } = false;
+        public int WarningCount { get; private set; } = 0;
+        public int ErrorCount { get; private set; } = 0;
 
         private ConsoleColor? _lastColor = null;
+        private LogType? _currentLogType = null;
     }
 }
