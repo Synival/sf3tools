@@ -101,7 +101,7 @@ namespace SF3.CHR {
 
                 var bytesWritten = _chrCompiler.Compile(chr, outputStream);
                 if (chr.MaxSize.HasValue && bytesWritten > chr.MaxSize)
-                    Logger.WriteLine($"CHR at sector {sector} (position 0x{offset:X5}) exceeds MaxSize (0x{chr.MaxSize:X5}) by 0x{(bytesWritten - chr.MaxSize):X2} bytes", LogType.Error);
+                    Logger.WriteLine($"CHR at sector {sector} (position 0x{offset:X5}) exceeds MaxSize (0x{chr.MaxSize:X5}) by 0x{(bytesWritten - chr.MaxSize):X2} bytes", LogType.Warning);
             }
 
             var eofPosition = outputStream.Position;
