@@ -6,5 +6,6 @@
         UpdateHashLookups,
         Describe,
         Depends,
+        Format,
     }
 }

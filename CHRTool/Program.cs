@@ -138,6 +138,13 @@ namespace CHRTool {
                     rval = Depends.Run(remainingArgs, verbose);
                     break;
 
+                case CommandType.Format:
+                    // Format shouldn't print out too much extra vebose junk.
+                    rval = Format.Run(remainingArgs);
+                    if (rval == 0)
+                        return 0;
+                    break;
+
                 default:
                     Logger.WriteLine("Internal error: unimplemented command '" + command.ToString() + "'", LogType.Error);
                     return 1;

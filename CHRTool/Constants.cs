@@ -20,7 +20,9 @@ namespace CHRTool {
             "  Show brief or verbose (-v) contents of an SF3CHR, SF3CHP, CHR, CHP, or SF3Sprite\n" +
             "    chrtool [GENERAL_OPTIONS]... describe [OPTIONS]... [file/path]...\n" +
             "  Show list of dependencies in a .SF3CHR or .SF3CHP file\n" +
-            "    chrtool [GENERAL_OPTIONS]... depends [OPTIONS]... [file/path]...\n";
+            "    chrtool [GENERAL_OPTIONS]... depends [OPTIONS]... [file/path]...\n" +
+            "  Reformats a file and dumps it to stdout\n" +
+            "    chrtool [GENERAL_OPTIONS]... format [OPTIONS]... [file]\n";
 
         public const string ErrorUsageString =
             "Try 'chrtool --help' for more information.\n";
@@ -67,6 +69,9 @@ namespace CHRTool {
             "  (none)\n" +
             "\n" +
             "'depends' Options:\n" +
+            "  (none)\n" +
+           "\n" +
+            "'format' Options:\n" +
             "  (none)\n";
 
         public static readonly Dictionary<string, CommandType> CommandKeywords = new() {
@@ -76,6 +81,7 @@ namespace CHRTool {
             { "update-hash-lookups", CommandType.UpdateHashLookups },
             { "describe",            CommandType.Describe },
             { "depends",             CommandType.Depends },
+            { "format",              CommandType.Format },
         };
     }
 }
