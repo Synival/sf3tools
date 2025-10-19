@@ -134,6 +134,10 @@ namespace CHRTool {
                     rval = Describe.Run(remainingArgs, verbose);
                     break;
 
+                case CommandType.Depends:
+                    rval = Depends.Run(remainingArgs, verbose);
+                    break;
+
                 default:
                     Logger.WriteLine("Internal error: unimplemented command '" + command.ToString() + "'", LogType.Error);
                     return 1;
