@@ -37,7 +37,7 @@ namespace SF3.Tests.Sprites {
       }
     }
   }
-}";
+}".Replace('\'', '"').Replace("\r\n", "\n");
 
         private static string c_bombJsonFormatted =
 @"{
@@ -54,7 +54,6 @@ namespace SF3.Tests.Sprites {
       'FrameGroups': {
         'Bomb 1': { 'Directions': 1, 'SpritesheetX': 0, 'SpritesheetY': 0 }
       },
-
       'AnimationByDirections': {
         'OneNoFlip': {
           'StillFrame (Bomb)': [
@@ -65,13 +64,14 @@ namespace SF3.Tests.Sprites {
       }
     }
   }
-}";
+}".Replace('\'', '"').Replace("\r\n", "\n");
 
         [TestMethod]
         public void Format_WithBombJsonStandardFormat_ProducesFormattedTextt () {
             var formatter = new Formatter();
             var formattedText = formatter.Format(c_bombJsonStandardFormat);
-            Assert.AreEqual(c_bombJsonFormatted, formattedText);
+            var expectedText = c_bombJsonFormatted;
+            Assert.AreEqual(expectedText, formattedText);
         }
     }
 }
