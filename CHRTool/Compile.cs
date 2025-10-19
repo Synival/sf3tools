@@ -18,6 +18,7 @@ namespace CHRTool {
             var spritesToAddDefList = new List<SpriteDef>();
             var cantSetOutputFile = false;
             string paddingFrom = null;
+            bool optimizeSectors = false;
 
             // Keep track of any errors that may have occurred.
             int initialErrorCount = Logger.TotalErrorCount;
@@ -29,6 +30,7 @@ namespace CHRTool {
                 { "d|output-dir=", v => outputDir = v },
                 { "add-sprite=",   v => spritesToAdd.Add(v) },
                 { "padding-from=", v => paddingFrom = v },
+                { "optimize-sectors", v => optimizeSectors = true },
             };
             try {
                 args = compileOptions.Parse(args).ToArray();
@@ -129,7 +131,7 @@ namespace CHRTool {
                         using (Logger.IndentedSection()) {
                             int errorCount = Logger.TotalErrorCount;
                             try {
-                                CompileFile(file, thisOutputFile, outputDir, verbose, optimize, spritesToAddDefs, paddingBytes);
+                                CompileFile(file, thisOutputFile, outputDir, verbose, optimize, spritesToAddDefs, paddingBytes, optimizeSectors);
                             }
                             catch (Exception e) {
                                 Logger.LogException(e);
@@ -183,7 +185,7 @@ namespace CHRTool {
             return outputFile;
         }
 
-        private static void CompileFile(string inputFile, string outputFile, string outputPath, bool verbose, bool optimize, SpriteDef[] spritesToAdd, byte[] paddingBytes) {
+        private static void CompileFile(string inputFile, string outputFile, string outputPath, bool verbose, bool optimize, SpriteDef[] spritesToAdd, byte[] paddingBytes, bool optimizeSectors) {
             bool isChp = inputFile.ToLower().EndsWith(".sf3chp");
             int initialErrorCount = Logger.TotalErrorCount;
 
@@ -203,7 +205,7 @@ namespace CHRTool {
                 inputText = File.ReadAllText(inputFile);
 
             byte[] outputData = isChp
-                ? CompileCHP(inputFile, inputText, verbose, optimize, spritesToAdd, paddingBytes)
+                ? CompileCHP(inputFile, inputText, verbose, optimize, spritesToAdd, paddingBytes, optimizeSectors)
                 : CompileCHR(inputFile, inputText, verbose, optimize, spritesToAdd, paddingBytes);
             if (outputData == null)
                 return;
@@ -222,7 +224,7 @@ namespace CHRTool {
                 File.WriteAllBytes(outputFile, outputData);
         }
 
-        private static byte[] CompileCHP(string inputFile, string inputText, bool verbose, bool optimize, SpriteDef[] spritesToAdd, byte[] paddingBytes) {
+        private static byte[] CompileCHP(string inputFile, string inputText, bool verbose, bool optimize, SpriteDef[] spritesToAdd, byte[] paddingBytes, bool optimizeSectors) {
             // Attempt to deserialize.
             CHP_Def chpDef;
             if (verbose)
@@ -249,6 +251,7 @@ namespace CHRTool {
                     OptimizeFrames            = optimize,
                     AddMissingAnimationFrames = true,
                     PaddingBytes              = paddingBytes,
+                    OptimizeSectors           = optimizeSectors
                 };
 
                 using (var memoryStream = new MemoryStream()) {

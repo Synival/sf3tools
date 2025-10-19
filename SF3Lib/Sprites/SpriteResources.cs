@@ -61,12 +61,20 @@ namespace SF3.Sprites {
         /// <summary>
         /// Returns the full path of a spritesheet image. Root path is 'SpritesheetPath' if set, or 'Resources/Spritesheets' if not.
         /// </summary>
-        /// <param name="spriteName">The name of the spite.</param>
+        /// <param name="spriteName">The name of the sprite.</param>
         /// <param name="frameWidth">The width of each frame in the spritesheet.</param>
         /// <param name="frameHeight">The height of each frame in the spritesheet.</param>
         /// <returns>A string with the full path (relative if 'SpritesheetPath' is unset) of the spritesheet.</returns>
         public static string SpritesheetImageFile(string spriteName, int frameWidth, int frameHeight)
             => SpritesheetImageFile(SpritesheetImageKey(spriteName, frameWidth, frameHeight));
+
+        /// <summary>
+        /// Returns the full path of a sprite definition (.SF3Sprite). Root path is 'SpritesheetPath' if set, or 'Resources/Sprites' if not.
+        /// </summary>
+        /// <param name="spriteName">The name of the sprite.</param>
+        /// <returns>A string with the full path (relative if 'SpritePath' is unset) of the sprite definition.</returns>
+        public static string SpriteDefFile(string spriteName)
+            => Path.Combine(SpritePath ?? ResourceFile("Spritesheets"), $"{FilesystemName(spriteName)}.SF3Sprite");
 
         /// <summary>
         /// Returns the name of a sprite as it would be stored in the filesystem, with invalid characters replaced.
