@@ -141,6 +141,7 @@ namespace SF3.Sprites {
 
             var condensedValuesArray = condensedValues.ToArray();
             var valueTypesArray = valueTypes.ToArray();
+            AlignSubstrings(condensedValuesArray, "\"Direction\":", (str, i) => valueTypesArray[i] == AnimationFrameType.SimpleFrame);
             AlignSubstrings(condensedValuesArray, "\"Duration\":", (str, i) => valueTypesArray[i] == AnimationFrameType.SimpleFrame);
 
             // Write the values: condensed if desired, otherwise as-is.
@@ -190,8 +191,15 @@ namespace SF3.Sprites {
 
             if (properties.Length >= 1 && properties[0].Name == "Command")
                 return AnimationFrameType.Command;
-            if (properties.Length == 2 && properties[0].Name == "Frame" && properties[1].Name == "Duration")
-                return AnimationFrameType.SimpleFrame;
+            if (properties.Length == 2 && properties[0].Name == "Frame" && properties[1].Name == "Duration") {
+                if (properties[0].Value.Type == JTokenType.String)
+                    return AnimationFrameType.SimpleFrame;
+                else if (properties[0].Value.Type == JTokenType.Object) {
+                    var frameObj = (JObject) properties[0].Value;
+                    if (frameObj.Properties().Count() == 1)
+                        return AnimationFrameType.SimpleFrame;
+                }
+            }
 
             return AnimationFrameType.Other;
         }
