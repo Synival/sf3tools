@@ -46,10 +46,68 @@ namespace SF3.Sprites {
             });
         }
 
-        public void WriteFrameGroupDictionary(JObject animations, JsonTextWriter writer) {
-            WriteObjectImpl(animations, writer, null,
-                (prop) => WriteCondensed(prop.Value, writer)
-            );
+        public void WriteFrameGroupDictionary(JObject frameGroups, JsonTextWriter writer) {
+            writer.WriteStartObject();
+
+            // Gather value types and their condensed value, if desired.
+            var properties = frameGroups.Properties().ToArray();
+            var condensedValues = new string[properties.Length];
+            var valueTypes = new FrameGroupType[properties.Length];
+            var maxPropLen = 0;
+            for (int i = 0; i < properties.Length; i++) {
+                var prop = properties[i];
+                var value = prop.Value;
+                var valueType = GetFrameGroupType(value);
+                valueTypes[i] = valueType;
+
+                var shouldCondense = valueType == FrameGroupType.SimpleFrameGroup;
+                if (shouldCondense) {
+                    condensedValues[i] = CondensedToken(value);
+                    maxPropLen = Math.Max(maxPropLen, prop.Name.Length);
+                }
+                else
+                    condensedValues[i] = null;
+            }
+
+            AlignSubstrings(condensedValues, "\"SpritesheetX\":", (str, i) => valueTypes[i] == FrameGroupType.SimpleFrameGroup);
+            AlignSubstrings(condensedValues, "\"SpritesheetY\":", (str, i) => valueTypes[i] == FrameGroupType.SimpleFrameGroup);
+
+            // Write the values: condensed if desired, otherwise as-is.
+            var index = 0;
+            for (int i = 0; i < properties.Length; i++) {
+                var prop = properties[i];
+                writer.WritePropertyName(prop.Name);
+
+                var condensedValue = condensedValues[index];
+                if (condensedValue != null) {
+                    if (prop.Name.Length < maxPropLen)
+                        writer.WriteRaw(new string(' ', maxPropLen - prop.Name.Length));
+                    writer.WriteRawValue(condensedValue);
+                }
+                else
+                    prop.Value.WriteTo(writer);
+                index++;
+            }
+
+            writer.WriteEndObject();
+        }
+
+        private enum FrameGroupType {
+            Other,
+            SimpleFrameGroup,
+        }
+
+        private FrameGroupType GetFrameGroupType(JToken token) {
+            if (token.Type != JTokenType.Object)
+                return FrameGroupType.Other;
+
+            var obj = (JObject) token;
+            var properties = obj.Properties().ToArray();
+
+            if (properties.Length == 3 && properties[0].Name == "Directions" && properties[1].Name == "SpritesheetX" && properties[2].Name == "SpritesheetY")
+                return FrameGroupType.SimpleFrameGroup;
+
+            return FrameGroupType.Other;
         }
 
         public void WriteAnimationByDirections(JObject animationsByDir, JsonTextWriter writer) {
@@ -73,6 +131,7 @@ namespace SF3.Sprites {
             foreach (var value in animation) {
                 var frameType = GetAnimationFrameType(value);
                 valueTypes.Add(frameType);
+
                 var shouldCondense = frameType == AnimationFrameType.SimpleFrame || frameType == AnimationFrameType.Command;
                 if (shouldCondense)
                     condensedValues.Add(CondensedToken(value));

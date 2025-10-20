@@ -110,7 +110,7 @@ namespace SF3.Tests.Sprites {
   'Spritesheets': {
     '16x16': {
       'FrameGroups': {
-        'First Frame': { 'Directions': 1, 'SpritesheetX': 0, 'SpritesheetY': 0 },
+        'First Frame':  { 'Directions': 1, 'SpritesheetX': 0,  'SpritesheetY': 0 },
         'Second Frame': { 'Directions': 1, 'SpritesheetX': 16, 'SpritesheetY': 0 }
       },
       'AnimationByDirections': {
