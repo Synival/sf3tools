@@ -150,12 +150,26 @@ namespace SF3.Sprites {
                 var condensedValue = condensedValuesArray[index];
                 if (condensedValue != null)
                     writer.WriteRawValue(condensedValue);
+                else if (valueTypesArray[index] == AnimationFrameType.ComplexFrame)
+                    WriteComplexAnimationFrame((JObject) value, writer);
                 else
                     value.WriteTo(writer);
                 index++;
             }
 
             writer.WriteEndArray();
+        }
+
+        private void WriteComplexAnimationFrame(JObject frame, JsonTextWriter writer) {
+            WriteObjectImpl(frame, writer, new Dictionary<string, Action<JProperty>>() {
+                { "Frame", prop => WriteIfType(prop.Value, writer, JTokenType.Object, () => WriteComplexAnimationFrameFrame((JObject) prop.Value, writer)) }
+            });
+        }
+
+        private void WriteComplexAnimationFrameFrame(JObject frame, JsonTextWriter writer) {
+            WriteObjectImpl(frame, writer, null,
+                prop => WriteCondensed(prop.Value, writer)
+            );
         }
 
         private void AlignSubstrings(string[] strings, string substring, Func<string, int, bool> predicate = null) {
@@ -179,6 +193,7 @@ namespace SF3.Sprites {
         private enum AnimationFrameType {
             Other,
             SimpleFrame,
+            ComplexFrame,
             Command
         }
 
@@ -198,6 +213,8 @@ namespace SF3.Sprites {
                     var frameObj = (JObject) properties[0].Value;
                     if (frameObj.Properties().Count() == 1)
                         return AnimationFrameType.SimpleFrame;
+                    else
+                        return AnimationFrameType.ComplexFrame;
                 }
             }
 
