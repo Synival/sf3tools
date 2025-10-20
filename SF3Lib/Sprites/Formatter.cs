@@ -64,23 +64,92 @@ namespace SF3.Sprites {
             );
         }
 
-        public void WriteAnimation(JArray animations, JsonTextWriter writer) {
+        public void WriteAnimation(JArray animation, JsonTextWriter writer) {
             writer.WriteStartArray();
-            foreach (var value in animations)
-                WriteCondensed(value, writer);
+
+            // Gather the list of condensed values to write, and some alignments that need to be made.
+            var condensedValues = new List<string>();
+            var valueTypes = new List<AnimationFrameType>();
+            foreach (var value in animation) {
+                var frameType = GetAnimationFrameType(value);
+                valueTypes.Add(frameType);
+                var shouldCondense = frameType == AnimationFrameType.SimpleFrame || frameType == AnimationFrameType.Command;
+                if (shouldCondense)
+                    condensedValues.Add(CondensedToken(value));
+                else
+                    condensedValues.Add(null);
+            }
+
+            var condensedValuesArray = condensedValues.ToArray();
+            var valueTypesArray = valueTypes.ToArray();
+            AlignSubstrings(condensedValuesArray, "\"Duration\":", (str, i) => valueTypesArray[i] == AnimationFrameType.SimpleFrame);
+
+            // Write the values: condensed if desired, otherwise as-is.
+            var index = 0;
+            foreach (var value in animation) {
+                var condensedValue = condensedValuesArray[index];
+                if (condensedValue != null)
+                    writer.WriteRawValue(condensedValue);
+                else
+                    value.WriteTo(writer);
+                index++;
+            }
+
             writer.WriteEndArray();
         }
 
-        private void WriteCondensed(JToken token, JsonTextWriter writer) {
+        private void AlignSubstrings(string[] strings, string substring, Func<string, int, bool> predicate = null) {
+            var max = strings.Max(x => (x == null) ? -1 : x.IndexOf(substring));
+            for (int i = 0; i < strings.Length; i++) {
+                var str = strings[i];
+                if (str == null)
+                    continue;
+
+                var substrIndex = str.IndexOf(substring);
+                if (substrIndex < 0 || substrIndex == max)
+                    continue;
+
+                if (predicate != null && !predicate(str, i))
+                    continue;
+
+                strings[i] = str.Substring(0, substrIndex) + new string(' ', max - substrIndex) + str.Substring(substrIndex);
+            }
+        }
+
+        private enum AnimationFrameType {
+            Other,
+            SimpleFrame,
+            Command
+        }
+
+        private AnimationFrameType GetAnimationFrameType(JToken token) {
+            if (token.Type != JTokenType.Object)
+                return AnimationFrameType.Other;
+
+            var obj = (JObject) token;
+            var properties = obj.Properties().ToArray();
+
+            if (properties.Length >= 1 && properties[0].Name == "Command")
+                return AnimationFrameType.Command;
+            if (properties.Length == 2 && properties[0].Name == "Frame" && properties[1].Name == "Duration")
+                return AnimationFrameType.SimpleFrame;
+
+            return AnimationFrameType.Other;
+        }
+
+        private string CondensedToken(JToken token) {
             using (var stringWriter = new StringWriter()) {
                 stringWriter.NewLine = "\n";
                 var jsonWriter = new JsonTextWriter(stringWriter);
                 jsonWriter.Formatting = Formatting.Indented;
                 token.WriteTo(jsonWriter);
                 var text = stringWriter.ToString();
-                writer.WriteRawValue(string.Join(" ", text.Split('\n').Select(x => x.Trim())));
+                return string.Join(" ", text.Split('\n').Select(x => x.Trim()));
             }
         }
+
+        private void WriteCondensed(JToken token, JsonTextWriter writer)
+            => writer.WriteRawValue(CondensedToken(token));
 
         private void WriteIfType(JToken token, JsonTextWriter writer, JTokenType type, Action action, Action defaultAction = null)
             => WriteByType(token, writer, new Dictionary<JTokenType, Action> {{ type, action }}, defaultAction);
