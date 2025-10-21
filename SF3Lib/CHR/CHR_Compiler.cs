@@ -1,6 +1,8 @@
 ﻿using System.IO;
 using CommonLib.Arrays;
+using CommonLib.Logging;
 using CommonLib.NamedValues;
+using CommonLib.Types;
 using SF3.Models.Files.CHR;
 using SF3.Sprites;
 using SF3.Types;
@@ -53,6 +55,9 @@ namespace SF3.CHR {
             }
 
             var bytesWritten = job.Write(outputStream, chrDef.WriteFrameImagesBeforeTables == true, chrDef.JunkAfterFrameTables);
+            if (bytesWritten > 0x80000)
+                Logger.WriteLine($"CHR exceeds limit of 0x80000 (524288) bytes. Output is 0x{bytesWritten:X5} ({bytesWritten}) bytes", LogType.Error);
+
             return bytesWritten;
         }
 
