@@ -1164,6 +1164,9 @@
     <Content Include="Resources\Sprites\Horst (P2).SF3Sprite">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\Sprites\Horst (U).SF3Sprite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\Sprites\Hunter Elf.SF3Sprite">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
