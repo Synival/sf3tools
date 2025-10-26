@@ -43,7 +43,8 @@ namespace CHRTool {
                 foreach (var file in files) {
                     var fileLower = file.ToLower();
                     try {
-                        var depends = new List<string>() { file };
+                        var depends = new List<string>();
+
                         if (fileLower.EndsWith(".sf3chr"))
                             depends.AddRange(GetDependsForSF3CHR(file, verbose, ngc));
                         else if (fileLower.EndsWith(".sf3chp"))
@@ -53,7 +54,8 @@ namespace CHRTool {
                             continue;
                         }
 
-                        var compiledFile = Path.GetFileNameWithoutExtension(file) + (fileLower.EndsWith(".sf3chr") ? ".CHR" : ".CHP");
+                        var compiledFile = Path.Combine(Path.GetDirectoryName(file), Path.GetFileNameWithoutExtension(file)).Replace('\\', '/')
+                            + (fileLower.EndsWith(".sf3chr") ? ".CHR" : ".CHP");
 
                         Logger.Write($"{compiledFile}: {file.Replace('\\', '/')}");
                         foreach (var depend in depends) {
