@@ -39,7 +39,7 @@ namespace SF3.ByteData {
 
         private void UpdateDecompressedData() {
             var bytes = Data.GetDataCopy();
-            var decompressedData = Decompress(bytes, MaxDecompressedSize, out var lastDataReadForDecompress);
+            var decompressedData = Decompress(bytes, MaxDecompressedSize, out var lastDataReadForDecompress, out var _);
             LastDataReadForDecompress = lastDataReadForDecompress;
 
             if (DecompressedData == null) {

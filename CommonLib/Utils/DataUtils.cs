@@ -129,6 +129,9 @@ namespace CommonLib.Utils {
             => ToByteArray(new uint[] { src });
 
         public static unsafe byte[] ToByteArray(this ushort[] src) {
+            if (src.Length == 0)
+                return new byte[0];
+
             var output = new byte[src.Length * 2];
             fixed (ushort* srcPtrStart = &src[0])
             fixed (byte* outputPtrStart = &output[0]) {

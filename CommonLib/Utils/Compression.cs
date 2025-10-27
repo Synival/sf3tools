@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using CommonLib.Extensions;
 
 namespace CommonLib.Utils {
     /// <summary>
@@ -17,25 +18,30 @@ namespace CommonLib.Utils {
         /// <param name="data">The compressed data to decompress.</param>
         /// <returns>A decompressed set of bytes.</returns>
         public static byte[] Decompress(byte[] data, int? maxOutput, out int bytesRead, out bool endDataFound) {
-            endDataFound = false;
-            bytesRead = 0;
+            if (data.Length % 2 == 1)
+                throw new ArgumentException(nameof(data) + ": must be an even number of bytes");
+            var output = Decompress(data.ToUShorts(), maxOutput * 2, out var wordsRead, out endDataFound).ToByteArray();
+            bytesRead = wordsRead * 2;
+            return output;
+        }
 
-            byte[] outputArray = new byte[maxOutput ?? 0x20000];
+        public static ushort[] Decompress(ushort[] data, int? maxOutput, out int wordsRead, out bool endDataFound) {
+            endDataFound = false;
+            wordsRead = 0;
+
+            var outputArray = new ushort[maxOutput ?? 0x10000];
             int outPos = 0;
             int bufferLoc = 0;
 
             // Decompress until we've run out of data or we've hit 'maxOutput'.
             int pos = 0;
-            while (pos < (data.Length - 1) && (!maxOutput.HasValue || outPos < (maxOutput.Value - 1))) {
+            while (pos < data.Length && (!maxOutput.HasValue || outPos < maxOutput.Value)) {
                 // Fetch a 16-bit 'control' value.
-                byte ctrl1 = data[pos++];
-                byte ctrl2 = data[pos++];
-                ushort control = (ushort) ((ctrl1 << 8) | ctrl2);
+                ushort control = data[pos++];
 
                 // Start reading 16-bit data -- 1 word for each bit in the 'control' value (so 16 words).
                 for (int i = 0; i < 16; i++) {
-                    byte v1 = data[pos++];
-                    byte v2 = data[pos++];
+                    ushort value = data[pos++];
 
                     // (15, 14, 13, ... 0)
                     var bit = (1 << (15 - i));
@@ -45,8 +51,6 @@ namespace CommonLib.Utils {
                     // - Last 5 bits: Length of data to copy.
                     if ((control & bit) != 0) {
                         var currentLoc = pos;
-
-                        ushort value = (ushort) ((v1 << 8) | v2);
                         if (value == 0) {
                             endDataFound = true;
                             break;
@@ -55,23 +59,21 @@ namespace CommonLib.Utils {
                         byte copyLen = (byte) ((value & 0x1F) + 2);
                         ushort copyOffset = (ushort) ((value & 0xFFE0) >> 5);
 
-                        bufferLoc += copyLen * 2;
-                        var windowPos = outPos - copyOffset * 2;
+                        bufferLoc += copyLen;
+                        var windowPos = outPos - copyOffset;
                         for (int j = 0; j < copyLen; j++) {
-                            outputArray[outPos++] = outputArray[windowPos++];
                             outputArray[outPos++] = outputArray[windowPos++];
                         }
                     }
                     // Control bit unset = data is literal, inserted once
                     else {
-                        outputArray[outPos++] = v1;
-                        outputArray[outPos++] = v2;
-                        bufferLoc += 2;
+                        outputArray[outPos++] = value;
+                        bufferLoc++;
                     }
                 }
             }
 
-            bytesRead = pos;
+            wordsRead = pos;
             return outputArray.Take(outPos).ToArray();
         }
 
