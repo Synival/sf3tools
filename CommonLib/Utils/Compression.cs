@@ -41,8 +41,8 @@ namespace CommonLib.Utils {
                     var bit = (1 << (15 - i));
 
                     // Control bit set = data is a lookup:
-                    // - First 11 bits: offset of data to repeat
-                    // - Last 5 bits: number of repeats
+                    // - First 11 bits: Offset (in # of words) of data to copy. Applied negatively to 'outPos'.
+                    // - Last 5 bits: Length of data to copy.
                     if ((control & bit) != 0) {
                         var currentLoc = pos;
 
@@ -52,12 +52,12 @@ namespace CommonLib.Utils {
                             break;
                         }
 
-                        byte count = (byte) ((value & 0x1F) + 2);
-                        ushort offset = (ushort) ((value & 0xFFE0) >> 5);
+                        byte copyLen = (byte) ((value & 0x1F) + 2);
+                        ushort copyOffset = (ushort) ((value & 0xFFE0) >> 5);
 
-                        bufferLoc += count * 2;
-                        var windowPos = outPos - offset * 2;
-                        for (int j = 0; j < count; j++) {
+                        bufferLoc += copyLen * 2;
+                        var windowPos = outPos - copyOffset * 2;
+                        for (int j = 0; j < copyLen; j++) {
                             outputArray[outPos++] = outputArray[windowPos++];
                             outputArray[outPos++] = outputArray[windowPos++];
                         }
@@ -85,91 +85,114 @@ namespace CommonLib.Utils {
             if (data.Length % 2 == 1)
                 throw new ArgumentException(nameof(data) + ": must be an even number of bytes");
 
-            const int MAXIMUM_COPY_LENGTH = 66; //...why?
-            const int MINIMUM_COPY_LENGTH = 3;
+            // The "copy length" segment of the data is 5-bits (max value 0x1F). The number of bytes to copy is:
+            //     (copyLength + 2) * 2
+            // ...the max value of which is 0x42 (66).
+            const int MAXIMUM_COPY_LENGTH = 0x42;
+
+            // Copy values must be at least 4 bytes.
+            const int MINIMUM_COPY_LENGTH = 4;
+
+            const int MAX_COPY_LOOKBACK = 0x1000;
 
             // gamble: will we ever end up with that catastrophic state where we compress the file bigger than it originally was?
             // (gamble lost -- for low sizes like 4 bytes, the compressed version is actually larger, by double.
             //  let's add at least 8 bytes.)
-            byte[] compressedBytes = new byte[(int) (data.Length * 1.25) + 8];
+            byte[] outputArray = new byte[(int) (data.Length * 1.25) + 8];
 
-            int currentLocation = 0;
+            int pos = 0;
             ushort currentControl = 0;
-            int currentControlLocation = 0;
-            int currentOutputLocation = 2;
+            int controlPos = 0;
+            int outPos = 2;
             int controlCounter = 0;
 
-            bool MatchOffsets(int location1, int location2)
+            int GetMatchLen(int currentPos, int searchPos) {
+                int currentPosSub = currentPos;
+                int searchPosSub = searchPos;
+                int matchLen = 0;
+
+                while (matchLen < MAXIMUM_COPY_LENGTH && currentPosSub < data.Length && searchPosSub < data.Length && IsDataEqual(currentPosSub, searchPosSub)) {
+                    currentPosSub += 2;
+                    searchPosSub  += 2;
+                    matchLen      += 2;
+                }
+
+                return matchLen;
+            }
+
+            bool IsDataEqual(int location1, int location2)
                 => data[location1] == data[location2] && data[location1 + 1] == data[location2 + 1];
 
             void CommitControlValue() {
-                compressedBytes[currentControlLocation] = (byte) ((currentControl >> 8) & 0xFF);
-                compressedBytes[currentControlLocation + 1] = (byte) ((currentControl >> 0) & 0xFF);
-                currentControlLocation += 0x22;
-                currentOutputLocation += 2;
+                outputArray[controlPos++] = (byte) ((currentControl >> 8) & 0xFF);
+                outputArray[controlPos++] = (byte) ((currentControl >> 0) & 0xFF);
+                controlPos += 0x20;
+
                 currentControl = 0;
                 controlCounter = 0;
+
+                outPos += 2;
             }
 
-            void AppendRawValue() {
-                compressedBytes[currentOutputLocation++] = data[currentLocation++];
-                compressedBytes[currentOutputLocation++] = data[currentLocation++];
-                controlCounter++;
-                if (controlCounter == 16)
-                    CommitControlValue();
+            void AppendLiteralValue() {
+                outputArray[outPos++] = data[pos++];
+                outputArray[outPos++] = data[pos++];
             }
 
-            void AppendRemoteValue(int count, int offset) {
-                ushort combinedValue = (ushort)((offset << 5) | (count - 2));
+            void AppendCopyValue(int countInWords, int offsetInWords) {
+                ushort combinedValue = (ushort)((offsetInWords << 5) | (countInWords - 2));
                 byte[] bytes = BitConverter.GetBytes(combinedValue);
-                compressedBytes[currentOutputLocation++] = bytes[1];
-                compressedBytes[currentOutputLocation++] = bytes[0];
+                outputArray[outPos++] = bytes[1];
+                outputArray[outPos++] = bytes[0];
                 currentControl |= (ushort) (1 << (15 - controlCounter));
-                controlCounter++;
-                if (controlCounter == 16)
-                    CommitControlValue();
             }
 
             void AppendClose() {
-                // control value set to 00
-                compressedBytes[currentOutputLocation++] = 0;
-                compressedBytes[currentOutputLocation++] = 0;
-                currentControl |= (ushort) (1 << (15 - controlCounter));
-                CommitControlValue();
-                currentOutputLocation -= 2; // cheap hack -- we don't need the NEXT control value
             }
 
-            while (currentLocation < data.Length) {
-                int seekLocation = currentLocation - 2;
+            while (pos < data.Length) {
+                // Initialize "best match" values that indicate "no match found".
+                int bestMatchLen = MINIMUM_COPY_LENGTH - 1;
+                int bestMatchOffset = -1;
 
-                // match must be higher than 4 -- impossible to represent anything smaller.
-                int largestMatch = MINIMUM_COPY_LENGTH;
-                int bestOffset = -1;
-                while (seekLocation >= 0 && ((currentLocation - seekLocation) < 0x1000)) {
-                    int currentMatch = 0;
-                    while (currentMatch < MAXIMUM_COPY_LENGTH && (currentLocation + currentMatch < data.Length) &&
-                           MatchOffsets(seekLocation + currentMatch, currentLocation + currentMatch)) {
-                        currentMatch += 2;
+                // Look for the largest dictionary match that's occurred so far in the data.
+                // Allow reading ahead into the future if a match was found -- the decompressor will "copy itself".
+                for (int searchPos = pos - 2; searchPos >= 0 && ((pos - searchPos) < MAX_COPY_LOOKBACK); searchPos -= 2) {
+                    // Get the length of matching data for data at this position.
+                    var matchLen = GetMatchLen(pos, searchPos);
+
+                    // If this is the new best match, take note of the offset and number of matches.
+                    if (matchLen > bestMatchLen) {
+                        bestMatchOffset = searchPos;
+                        bestMatchLen = matchLen;
                     }
-                    if (currentMatch > largestMatch) {
-                        bestOffset = seekLocation;
-                        largestMatch = currentMatch;
-                    }
-                    if (currentMatch == MAXIMUM_COPY_LENGTH)
+                    if (matchLen == MAXIMUM_COPY_LENGTH)
                         break;
+                }
 
-                    seekLocation -= 2;
+                // If a match was found, append a "copy" value.
+                if (bestMatchOffset != -1) {
+                    AppendCopyValue(bestMatchLen / 2, (pos - bestMatchOffset) / 2);
+                    pos += bestMatchLen;
                 }
-                if (bestOffset != -1) {
-                    AppendRemoteValue(largestMatch / 2, (currentLocation - bestOffset) / 2);
-                    currentLocation += largestMatch;
-                }
+                // Otherwise, append a "literal" value.
                 else
-                    AppendRawValue();
+                    AppendLiteralValue();
+
+                controlCounter++;
+                if (controlCounter == 16)
+                    CommitControlValue();
             }
 
-            AppendClose();
-            return compressedBytes.Take(currentOutputLocation).ToArray();
+            // Write 0x0000 with a set control bit to indicate end-of-data.
+            outputArray[outPos++] = 0;
+            outputArray[outPos++] = 0;
+
+            currentControl |= (ushort) (1 << (15 - controlCounter));
+            outputArray[controlPos + 0] = (byte) ((currentControl >> 8) & 0xFF);
+            outputArray[controlPos + 1] = (byte) ((currentControl >> 0) & 0xFF);
+
+            return outputArray.Take(outPos).ToArray();
         }
 
         /// <summary>

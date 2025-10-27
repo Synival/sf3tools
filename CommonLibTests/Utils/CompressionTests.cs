@@ -137,23 +137,34 @@ namespace CommonLib.Tests.Utils {
             0x7FFF, 0x7FFF, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x7FFF, 0x7FFF, 
         ];
 
+        private class CompressStringTestCase : TestCase {
+            public CompressStringTestCase(string name, int expectedCompressedLength = 0) : base(name) {
+                ExpectedCompressedLength = expectedCompressedLength;
+            }
+
+            public readonly int ExpectedCompressedLength;
+        }
+
         [TestMethod]
         public void CompressThenDecompressStringsOfVariousLengthsReturnsOriginalString() {
-            var testCases = new TestCase[]{
-                new TestCase(""),
-                new TestCase("He"),
-                new TestCase("Hell"),
-                new TestCase("Hello,"),
-                new TestCase("Hello, w"),
-                new TestCase("Hello, wor"),
-                new TestCase("Hello, world"),
-                new TestCase("Hello, world! "),
-                new TestCase("Hello, world! Ho"),
-                new TestCase("Hello, world! How "),
-                new TestCase("Hello, world! How ya"),
-                new TestCase("Hello, world! How ya d"),
-                new TestCase("Hello, world! How ya doi"),
-                new TestCase("Hello, world! How ya doin?"),
+            var testCases = new CompressStringTestCase[]{
+                new CompressStringTestCase("", 4),
+                new CompressStringTestCase("He", 6),
+                new CompressStringTestCase("Hell", 8),
+                new CompressStringTestCase("Hello,", 10),
+                new CompressStringTestCase("Hello, w", 12),
+                new CompressStringTestCase("Hello, wor", 14),
+                new CompressStringTestCase("Hello, world", 16),
+                new CompressStringTestCase("Hello, world! ", 18),
+                new CompressStringTestCase("Hello, world! Ho", 20),
+                new CompressStringTestCase("Hello, world! How ", 22),
+                new CompressStringTestCase("Hello, world! How ya", 24),
+                new CompressStringTestCase("Hello, world! How ya d", 26),
+                new CompressStringTestCase("Hello, world! How ya doi", 28),
+                new CompressStringTestCase("Hello, world! How ya doin?", 30),
+                new CompressStringTestCase("Hello, world! Hello, world! ", 20),
+                new CompressStringTestCase("Hello, world! Hello, world! Hello, world! ", 20),
+                new CompressStringTestCase("Hello, world!  Hello, world!  Hello, world! ", 38),
             };
 
             TestCase.Run(testCases, testCase => {
@@ -161,10 +172,14 @@ namespace CommonLib.Tests.Utils {
                 byte[] originalBytes = System.Text.Encoding.UTF8.GetBytes(originalString);
 
                 var compressedBytes = Compress(originalBytes);
-                var decompressedBytes = Decompress(compressedBytes);
+                Assert.AreEqual(compressedBytes.Length, testCase.ExpectedCompressedLength);
+
+                var decompressedBytes = Decompress(compressedBytes, null, out int bytesRead, out bool endDataFound);
 
                 var resultString = System.Text.Encoding.UTF8.GetString(decompressedBytes);
                 Assert.AreEqual(originalString, resultString);
+                Assert.AreEqual(bytesRead, compressedBytes.Length);
+                Assert.IsTrue(endDataFound);
             });
         }
 
