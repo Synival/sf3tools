@@ -86,26 +86,32 @@ namespace CommonLib.Utils {
         public static byte[] Compress(byte[] data) {
             if (data.Length % 2 == 1)
                 throw new ArgumentException(nameof(data) + ": must be an even number of bytes");
+            var compressedData = Compress(data.ToUShorts());
+            return compressedData.ToByteArray();
+        }
 
-            // The "copy length" segment of the data is 5-bits (max value 0x1F). The number of bytes to copy is:
-            //     (copyLength + 2) * 2
-            // ...the max value of which is 0x42 (66).
-            const int MAXIMUM_COPY_LENGTH = 0x42;
+        public static ushort[] Compress(ushort[] data) {
+            // The "copy length" segment of the data is 5-bits (max value 0x1F). The number of words to copy is:
+            //     copyLength + 2
+            // ...the max value of which is 0x21 (33).
+            const int MAX_WORD_COPY_LENGTH = 0x21;
 
-            // Copy values must be at least 4 bytes.
-            const int MINIMUM_COPY_LENGTH = 4;
+            // Copy values must be at least 2 words.
+            const int MIN_WORD_COPY_LENGTH = 2;
 
+            // Sensible(?) limit to prevent slowdown with huge buffers.
+            // Increasing this would be nice, at the cost of exponential time increase for large buffers.
             const int MAX_COPY_LOOKBACK = 0x1000;
 
             // gamble: will we ever end up with that catastrophic state where we compress the file bigger than it originally was?
             // (gamble lost -- for low sizes like 4 bytes, the compressed version is actually larger, by double.
             //  let's add at least 8 bytes.)
-            byte[] outputArray = new byte[(int) (data.Length * 1.25) + 8];
+            ushort[] outputArray = new ushort[(int) (data.Length * 1.25) + 8];
 
             int pos = 0;
             ushort currentControl = 0;
             int controlPos = 0;
-            int outPos = 2;
+            int outPos = 1;
             int controlCounter = 0;
 
             int GetMatchLen(int currentPos, int searchPos) {
@@ -113,86 +119,63 @@ namespace CommonLib.Utils {
                 int searchPosSub = searchPos;
                 int matchLen = 0;
 
-                while (matchLen < MAXIMUM_COPY_LENGTH && currentPosSub < data.Length && searchPosSub < data.Length && IsDataEqual(currentPosSub, searchPosSub)) {
-                    currentPosSub += 2;
-                    searchPosSub  += 2;
-                    matchLen      += 2;
+                while (matchLen < MAX_WORD_COPY_LENGTH && currentPosSub < data.Length && searchPosSub < data.Length && data[currentPosSub] == data[searchPosSub]) {
+                    currentPosSub++;
+                    searchPosSub++;
+                    matchLen++;
                 }
 
                 return matchLen;
             }
 
-            bool IsDataEqual(int location1, int location2)
-                => data[location1] == data[location2] && data[location1 + 1] == data[location2 + 1];
-
-            void CommitControlValue() {
-                outputArray[controlPos++] = (byte) ((currentControl >> 8) & 0xFF);
-                outputArray[controlPos++] = (byte) ((currentControl >> 0) & 0xFF);
-                controlPos += 0x20;
-
-                currentControl = 0;
-                controlCounter = 0;
-
-                outPos += 2;
-            }
-
-            void AppendLiteralValue() {
-                outputArray[outPos++] = data[pos++];
-                outputArray[outPos++] = data[pos++];
-            }
-
-            void AppendCopyValue(int countInWords, int offsetInWords) {
-                ushort combinedValue = (ushort)((offsetInWords << 5) | (countInWords - 2));
-                byte[] bytes = BitConverter.GetBytes(combinedValue);
-                outputArray[outPos++] = bytes[1];
-                outputArray[outPos++] = bytes[0];
-                currentControl |= (ushort) (1 << (15 - controlCounter));
-            }
-
-            void AppendClose() {
-            }
-
             while (pos < data.Length) {
                 // Initialize "best match" values that indicate "no match found".
-                int bestMatchLen = MINIMUM_COPY_LENGTH - 1;
-                int bestMatchOffset = -1;
+                int bestMatchLen = MIN_WORD_COPY_LENGTH - 1;
+                int bestMatchPos = -1;
 
                 // Look for the largest dictionary match that's occurred so far in the data.
                 // Allow reading ahead into the future if a match was found -- the decompressor will "copy itself".
-                for (int searchPos = pos - 2; searchPos >= 0 && ((pos - searchPos) < MAX_COPY_LOOKBACK); searchPos -= 2) {
+                for (int searchPos = pos - 1; searchPos >= 0 && ((pos - searchPos) < MAX_COPY_LOOKBACK); searchPos--) {
                     // Get the length of matching data for data at this position.
                     var matchLen = GetMatchLen(pos, searchPos);
 
                     // If this is the new best match, take note of the offset and number of matches.
                     if (matchLen > bestMatchLen) {
-                        bestMatchOffset = searchPos;
+                        bestMatchPos = searchPos;
                         bestMatchLen = matchLen;
                     }
-                    if (matchLen == MAXIMUM_COPY_LENGTH)
+                    if (matchLen == MAX_WORD_COPY_LENGTH)
                         break;
                 }
 
                 // If a match was found, append a "copy" value.
-                if (bestMatchOffset != -1) {
-                    AppendCopyValue(bestMatchLen / 2, (pos - bestMatchOffset) / 2);
+                if (bestMatchPos != -1) {
+                    outputArray[outPos++] = (ushort) (((pos - bestMatchPos) << 5) | ((bestMatchLen - 2) & 0x1F));
+                    currentControl |= (ushort) (1 << (15 - controlCounter));
                     pos += bestMatchLen;
                 }
                 // Otherwise, append a "literal" value.
                 else
-                    AppendLiteralValue();
+                    outputArray[outPos++] = data[pos++];
 
+                // Move to the next "control" bit.
                 controlCounter++;
-                if (controlCounter == 16)
-                    CommitControlValue();
+
+                // If all "control" bits have been filled, commit the "control" value and move to the next one.
+                if (controlCounter == 16) {
+                    outputArray[controlPos] = currentControl;
+                    controlPos = outPos++;
+
+                    currentControl = 0;
+                    controlCounter = 0;
+                }
             }
 
             // Write 0x0000 with a set control bit to indicate end-of-data.
             outputArray[outPos++] = 0;
-            outputArray[outPos++] = 0;
 
             currentControl |= (ushort) (1 << (15 - controlCounter));
-            outputArray[controlPos + 0] = (byte) ((currentControl >> 8) & 0xFF);
-            outputArray[controlPos + 1] = (byte) ((currentControl >> 0) & 0xFF);
+            outputArray[controlPos] = currentControl;
 
             return outputArray.Take(outPos).ToArray();
         }
