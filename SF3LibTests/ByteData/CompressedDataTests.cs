@@ -6,7 +6,7 @@ using static CommonLib.Utils.Compression;
 namespace SF3.Tests.ByteData {
     [TestClass]
     public class CompressedDataTests {
-        private static readonly byte[] _compressedTestData = Compress(Encoding.UTF8.GetBytes("Hello, world!!"));
+        private static readonly byte[] _compressedTestData = CompressLZSS(Encoding.UTF8.GetBytes("Hello, world!!"));
 
         [TestMethod]
         public void Constructor_ResultsInExpectedState() {

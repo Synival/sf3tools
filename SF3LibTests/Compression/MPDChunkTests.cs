@@ -81,9 +81,9 @@ namespace SF3.Tests.Compression {
                     return;
 
                 // Let's go!
-                var decompressed1 = Decompress(data.GetDataCopy());
-                var compressed1 = Compress(decompressed1);
-                var decompressed2 = Decompress(compressed1);
+                var decompressed1 = DecompressLZSS(data.GetDataCopy());
+                var compressed1 = CompressLZSS(decompressed1);
+                var decompressed2 = DecompressLZSS(compressed1);
 
                 Assert.IsTrue(ByteArraysAreEqual(decompressed1, decompressed2));
             });
@@ -99,9 +99,9 @@ namespace SF3.Tests.Compression {
                         continue;
 
                     // Let's go!
-                    var decompressed1 = Decompress(data.GetDataCopy());
-                    var compressed1 = Compress(decompressed1);
-                    var decompressed2 = Decompress(compressed1);
+                    var decompressed1 = DecompressLZSS(data.GetDataCopy());
+                    var compressed1 = CompressLZSS(decompressed1);
+                    var decompressed2 = DecompressLZSS(compressed1);
 
                     Assert.IsTrue(ByteArraysAreEqual(decompressed1, decompressed2), "Chunk" + i.ToString("D2") + " failed (" + data.Length + " bytes)");
                 }
@@ -117,9 +117,9 @@ namespace SF3.Tests.Compression {
                         continue;
 
                     // Let's go!
-                    var decompressed1 = Decompress(data.GetDataCopy());
-                    var compressed1 = Compress(decompressed1);
-                    var decompressed2 = Decompress(compressed1);
+                    var decompressed1 = DecompressLZSS(data.GetDataCopy());
+                    var compressed1 = CompressLZSS(decompressed1);
+                    var decompressed2 = DecompressLZSS(compressed1);
 
                     Assert.IsTrue(ByteArraysAreEqual(decompressed1, decompressed2), "Chunk" + i.ToString("D2") + " failed (" + data.Length + " bytes)");
                 }

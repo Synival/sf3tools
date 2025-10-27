@@ -146,7 +146,7 @@ namespace CommonLib.Tests.Utils {
         }
 
         [TestMethod]
-        public void CompressThenDecompressStringsOfVariousLengthsReturnsOriginalString() {
+        public void LZSS_CompressThenDecompressStringsOfVariousLengthsReturnsOriginalString() {
             var testCases = new CompressStringTestCase[]{
                 new CompressStringTestCase("", 4),
                 new CompressStringTestCase("He", 6),
@@ -171,10 +171,10 @@ namespace CommonLib.Tests.Utils {
                 string originalString = testCase.Name;
                 byte[] originalBytes = System.Text.Encoding.UTF8.GetBytes(originalString);
 
-                var compressedBytes = Compress(originalBytes);
+                var compressedBytes = CompressLZSS(originalBytes);
                 Assert.AreEqual(compressedBytes.Length, testCase.ExpectedCompressedLength);
 
-                var decompressedBytes = Decompress(compressedBytes, null, out int bytesRead, out bool endDataFound);
+                var decompressedBytes = DecompressLZSS(compressedBytes, null, out int bytesRead, out bool endDataFound);
 
                 var resultString = System.Text.Encoding.UTF8.GetString(decompressedBytes);
                 Assert.AreEqual(originalString, resultString);
@@ -184,21 +184,21 @@ namespace CommonLib.Tests.Utils {
         }
 
         [TestMethod]
-        public void DecompressSpriteData_ProducesExpectedDataForFrame() {
+        public void CHR_DecompressSpriteData_ProducesExpectedDataForFrame() {
             var decompressed = DecompressSpriteData(c_testSpriteFrameCompressed, 0, out _);
             Assert.AreEqual(1600, decompressed.Length);
             Assert.IsTrue(Enumerable.SequenceEqual(c_testSpriteFrameUncompressed, decompressed));
         }
 
         [TestMethod]
-        public void CompressSpriteData_ProducesExpectedDataForFrame() {
+        public void CHR_CompressSpriteData_ProducesExpectedDataForFrame() {
             var compressed = CompressSpriteData(c_testSpriteFrameUncompressed, 0, c_testSpriteFrameUncompressed.Length);
             Assert.AreEqual(0x572, compressed.Length);
             Assert.IsTrue(Enumerable.SequenceEqual(c_testSpriteFrameCompressed, compressed));
         }
 
         [TestMethod]
-        public void CompressThenDecompressSpriteFrameProducesTheOriginalFrame() {
+        public void CHR_CompressThenDecompressSpriteFrameProducesTheOriginalFrame() {
             var compressed = CompressSpriteData(c_testSpriteFrameUncompressed, 0, c_testSpriteFrameUncompressed.Length);
             var decompressed = DecompressSpriteData(compressed, 0, out _);
             Assert.IsTrue(Enumerable.SequenceEqual(c_testSpriteFrameUncompressed, decompressed));

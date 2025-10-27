@@ -39,7 +39,7 @@ namespace SF3.ByteData {
 
         private void UpdateDecompressedData() {
             var bytes = Data.GetDataCopy();
-            var decompressedData = Decompress(bytes, MaxDecompressedSize, out var lastDataReadForDecompress, out var _);
+            var decompressedData = DecompressLZSS(bytes, MaxDecompressedSize, out var lastDataReadForDecompress, out var _);
             LastDataReadForDecompress = lastDataReadForDecompress;
 
             if (DecompressedData == null) {
@@ -62,7 +62,7 @@ namespace SF3.ByteData {
 
         public bool Recompress() {
             using (var modifyGuard2 = DecompressedData.IsModifiedChangeBlocker()) {
-                if (!SetDataTo(Compress(DecompressedData.GetDataCopy())))
+                if (!SetDataTo(CompressLZSS(DecompressedData.GetDataCopy())))
                     return false;
                 NeedsRecompression = false;
             }

@@ -8,24 +8,53 @@ namespace CommonLib.Utils {
     /// Utilities for compression and decompression. Used for MPD chunks, for example.
     /// </summary>
     public static class Compression {
-        public static byte[] Decompress(byte[] data)
-            => Decompress(data, null, out _, out _);
+        /// <summary>
+        /// Perform the LZSS decompression algorithm used in Shining Force III.
+        /// (The algorithm is word-based; this is a convenience overlord to work with bytes.)
+        /// All credit to Agrathejagged for the original decompression code/algorithm: https://github.com/Agrathejagged
+        /// </summary>
+        /// <param name="data">LZSS-compressed data to decompress.</param>
+        /// <returns>The decompressed array of data in bytes.</returns>
+        public static byte[] DecompressLZSS(byte[] data)
+            => DecompressLZSS(data, null, out _, out _);
 
         /// <summary>
-        /// Takes a compressed byte array and returns its decompressed data.
-        /// All credit to Agrathejagged for the original decompression code: https://github.com/Agrathejagged
+        /// Perform the LZSS decompression algorithm used in Shining Force III.
+        /// All credit to Agrathejagged for the original decompression code/algorithm: https://github.com/Agrathejagged
         /// </summary>
-        /// <param name="data">The compressed data to decompress.</param>
-        /// <returns>A decompressed set of bytes.</returns>
-        public static byte[] Decompress(byte[] data, int? maxOutput, out int bytesRead, out bool endDataFound) {
+        /// <param name="data">LZSS-compressed data to decompress.</param>
+        /// <returns>The decompressed array of data in words.</returns>
+        public static ushort[] DecompressLZSS(ushort[] data)
+            => DecompressLZSS(data, null, out _, out _);
+
+        /// <summary>
+        /// Perform the LZSS decompression algorithm used in Shining Force III.
+        /// (The algorithm is word-based; this is a convenience overlord to work with bytes.)
+        /// All credit to Agrathejagged for the original decompression code/algorithm: https://github.com/Agrathejagged
+        /// </summary>
+        /// <param name="data">LZSS-compressed data to decompress.</param>
+        /// <param name="maxOutput">Maximum amount of data to write. Useful if the input is unknown and could overflow.</param>
+        /// <param name="bytesRead">Output parameter: the number of bytes read from 'data'.</param>
+        /// <param name="endDataFound">Output parameter: set to 'true' if and ending word of 0x0000 was found in a set contol bit. Otherwise set to false.</param>
+        /// <returns>The decompressed array of data in bytes.</returns>
+        public static byte[] DecompressLZSS(byte[] data, int? maxOutput, out int bytesRead, out bool endDataFound) {
             if (data.Length % 2 == 1)
                 throw new ArgumentException(nameof(data) + ": must be an even number of bytes");
-            var output = Decompress(data.ToUShorts(), maxOutput * 2, out var wordsRead, out endDataFound).ToByteArray();
+            var output = DecompressLZSS(data.ToUShorts(), maxOutput * 2, out var wordsRead, out endDataFound).ToByteArray();
             bytesRead = wordsRead * 2;
             return output;
         }
 
-        public static ushort[] Decompress(ushort[] data, int? maxOutput, out int wordsRead, out bool endDataFound) {
+        /// <summary>
+        /// Perform the LZSS decompression algorithm used in Shining Force III.
+        /// All credit to Agrathejagged for the original decompression code/algorithm: https://github.com/Agrathejagged
+        /// </summary>
+        /// <param name="data">LZSS-compressed data to decompress.</param>
+        /// <param name="maxOutput">Maximum amount of data to write. Useful if the input is unknown and could overflow.</param>
+        /// <param name="wordsRead">Output parameter: the number of words read from 'data'.</param>
+        /// <param name="endDataFound">Output parameter: set to 'true' if and ending word of 0x0000 was found in a set contol bit. Otherwise set to false.</param>
+        /// <returns>The decompressed array of data in words.</returns>
+        public static ushort[] DecompressLZSS(ushort[] data, int? maxOutput, out int wordsRead, out bool endDataFound) {
             endDataFound = false;
             wordsRead = 0;
 
@@ -83,14 +112,14 @@ namespace CommonLib.Utils {
         /// </summary>
         /// <param name="data">The uncompressed data to compress.</param>
         /// <returns>A compressed set of bytes.</returns>
-        public static byte[] Compress(byte[] data) {
+        public static byte[] CompressLZSS(byte[] data) {
             if (data.Length % 2 == 1)
                 throw new ArgumentException(nameof(data) + ": must be an even number of bytes");
-            var compressedData = Compress(data.ToUShorts());
+            var compressedData = CompressLZSS(data.ToUShorts());
             return compressedData.ToByteArray();
         }
 
-        public static ushort[] Compress(ushort[] data) {
+        public static ushort[] CompressLZSS(ushort[] data) {
             // The "copy length" segment of the data is 5-bits (max value 0x1F). The number of words to copy is:
             //     copyLength + 2
             // ...the max value of which is 0x21 (33).

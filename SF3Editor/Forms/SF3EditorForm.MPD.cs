@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Windows.Forms;
+using CommonLib.Logging;
 using CommonLib.Types;
 using Microsoft.WindowsAPICodePack.Dialogs;
 using SF3.Models.Files.MPD;
@@ -67,7 +68,9 @@ namespace SF3.Editor.Forms {
                 else {
                     // Make sure this can actually be decompressed.
                     try {
-                        var decompressedData = Decompress(chunkDataBytes, null, out var _);
+                        var decompressedData = DecompressLZSS(chunkDataBytes, null, out var _, out var endDataFound);
+                        if (!endDataFound)
+                            Logger.WriteLine("Chunk data read may be corrupt -- no 0x0000 'end' code found", LogType.Warning);
                     }
                     catch (Exception ex) {
                         ErrorMessage("Data is corrupt - failure to decompress:\r\n\r\n" + ex.Message);
