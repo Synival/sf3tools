@@ -8,63 +8,71 @@ namespace CommonLib.Utils {
     /// </summary>
     public static class Compression {
         public static byte[] Decompress(byte[] data)
-            => Decompress(data, null, out _);
+            => Decompress(data, null, out _, out _);
 
         /// <summary>
         /// Takes a compressed byte array and returns its decompressed data.
-        /// All credit to Agrathejagged for the decompression code: https://github.com/Agrathejagged
+        /// All credit to Agrathejagged for the original decompression code: https://github.com/Agrathejagged
         /// </summary>
         /// <param name="data">The compressed data to decompress.</param>
         /// <returns>A decompressed set of bytes.</returns>
-        public static byte[] Decompress(byte[] data, int? maxOutput, out int bytesRead) {
-            if (data.Length % 2 == 1)
-                throw new ArgumentException(nameof(data) + ": must be an even number of bytes");
+        public static byte[] Decompress(byte[] data, int? maxOutput, out int bytesRead, out bool endDataFound) {
+            endDataFound = false;
+            bytesRead = 0;
 
             byte[] outputArray = new byte[maxOutput ?? 0x20000];
-            int outputPosition = 0;
+            int outPos = 0;
             int bufferLoc = 0;
 
+            // Decompress until we've run out of data or we've hit 'maxOutput'.
             int pos = 0;
-            while (pos < data.Length && (!maxOutput.HasValue || outputPosition < maxOutput.Value)) {
+            while (pos < (data.Length - 1) && (!maxOutput.HasValue || outPos < (maxOutput.Value - 1))) {
+                // Fetch a 16-bit 'control' value.
                 byte ctrl1 = data[pos++];
                 byte ctrl2 = data[pos++];
+                ushort control = (ushort) ((ctrl1 << 8) | ctrl2);
 
-                int control = ctrl1 << 8 | ctrl2;
+                // Start reading 16-bit data -- 1 word for each bit in the 'control' value (so 16 words).
                 for (int i = 0; i < 16; i++) {
-                    //1 == control
-                    if ((control & (1 << (15 - i))) != 0) {
-                        int currentLoc = pos;
+                    byte v1 = data[pos++];
+                    byte v2 = data[pos++];
 
-                        byte val1 = data[pos++];
-                        byte val2 = data[pos++];
+                    // (15, 14, 13, ... 0)
+                    var bit = (1 << (15 - i));
 
-                        if (val1 == 0 && val2 == 0)
+                    // Control bit set = data is a lookup:
+                    // - First 11 bits: offset of data to repeat
+                    // - Last 5 bits: number of repeats
+                    if ((control & bit) != 0) {
+                        var currentLoc = pos;
+
+                        ushort value = (ushort) ((v1 << 8) | v2);
+                        if (value == 0) {
+                            endDataFound = true;
                             break;
+                        }
 
-                        int count = (val2 & 0x1F) + 2;
-                        int offset = (val1 << 3) | ((val2 & 0xE0) >> 5);
+                        byte count = (byte) ((value & 0x1F) + 2);
+                        ushort offset = (ushort) ((value & 0xFFE0) >> 5);
+
                         bufferLoc += count * 2;
-                        int windowPos = outputPosition - offset * 2;
+                        var windowPos = outPos - offset * 2;
                         for (int j = 0; j < count; j++) {
-                            outputArray[outputPosition++] = outputArray[windowPos++];
-                            outputArray[outputPosition++] = outputArray[windowPos++];
+                            outputArray[outPos++] = outputArray[windowPos++];
+                            outputArray[outPos++] = outputArray[windowPos++];
                         }
                     }
-                    // 2 == data
+                    // Control bit unset = data is literal, inserted once
                     else {
-                        byte val1 = data[pos++];
-                        byte val2 = data[pos++];
-
-                        outputArray[outputPosition++] = val1;
-                        outputArray[outputPosition++] = val2;
-
+                        outputArray[outPos++] = v1;
+                        outputArray[outPos++] = v2;
                         bufferLoc += 2;
                     }
                 }
             }
 
             bytesRead = pos;
-            return outputArray.Take(outputPosition).ToArray();
+            return outputArray.Take(outPos).ToArray();
         }
 
         /// <summary>
