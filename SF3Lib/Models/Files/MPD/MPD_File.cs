@@ -813,7 +813,7 @@ namespace SF3.Models.Files.MPD {
                     catch { }
 
                     if (newData != null && frame.Texture != null) {
-                        byteArray.Redefine(byteArray.Offset, newData.LastDataReadForDecompress.Value); // Sets the correct compressed size, which wasn't available before
+                        byteArray.Redefine(byteArray.Offset, newData.LastDecompressBytesRead.Value); // Sets the correct compressed size, which wasn't available before
                         newData.IsModified = false;
                         chunk3Textures.Add(offset, frame.Texture);
                         Chunk3Frames.Add(new Chunk3Frame((int) offset, newData));

@@ -38,9 +38,9 @@ namespace SF3.ByteData {
         }
 
         private void UpdateDecompressedData() {
-            var bytes = Data.GetDataCopy();
-            var decompressedData = DecompressLZSS(bytes, MaxDecompressedSize, out var lastDataReadForDecompress, out var _);
-            LastDataReadForDecompress = lastDataReadForDecompress;
+            var decompressedData = DecompressLZSS(Data.GetDataCopyOrReference(), MaxDecompressedSize, out var bytesRead, out var endCodeFound);
+            LastDecompressBytesRead = bytesRead;
+            LastDecompressEndCodeFound = endCodeFound;
 
             if (DecompressedData == null) {
                 DecompressedData = new ByteData(new ByteArray(decompressedData));
@@ -109,7 +109,8 @@ namespace SF3.ByteData {
         }
 
         public int? MaxDecompressedSize { get; }
-        public int? LastDataReadForDecompress { get; private set; } = null;
+        public int? LastDecompressBytesRead { get; private set; } = null;
+        public bool? LastDecompressEndCodeFound { get; private set; } = null;
 
         public event EventHandler NeedsRecompressionChanged;
         public event EventHandler Recompressed;
