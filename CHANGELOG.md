@@ -91,6 +91,9 @@ Full changelog:
     - Lots of useful data from the character growth chart can now be viewed as a table as well
 - Removed some redundant info for special tables that have specific values in each row (e.g, the "Significant Values"
     table in `X013.BIN`)
+- Added "CHPTableUpdater" project that updates game files that specify where `.CHR` files can be found in `.CHP`
+    files and their sizes. (This is a very crude, slapped-together programm that makes a lot of assumptions, but
+    it gets the job done if used right.)
 - Updated LZSS compression/decompression code to be a bit more generous on failure and match original data more closely
 
 ### Technical features:
