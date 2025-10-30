@@ -103,11 +103,12 @@ namespace CommonLib.Utils {
         }
 
         /// <summary>
-        /// Takes an uncompressed byte array and returns its compressed data.
-        /// All credit to Agrathejagged for the compression code: https://github.com/Agrathejagged
+        /// Returns data compressed using LZSS encoding.
+        /// (The algorithm is word-based; this is a convenience overlord to work with bytes.)
+        /// All credit to Agrathejagged for the original compression code: https://github.com/Agrathejagged
         /// </summary>
         /// <param name="data">The uncompressed data to compress.</param>
-        /// <returns>A compressed set of bytes.</returns>
+        /// <returns>An array of bytes compressed with LZSS encoding.</returns>
         public static byte[] CompressLZSS(byte[] data) {
             if (data.Length % 2 == 1)
                 throw new ArgumentException(nameof(data) + ": must be an even number of bytes");
@@ -115,6 +116,12 @@ namespace CommonLib.Utils {
             return compressedData.ToByteArray();
         }
 
+        /// <summary>
+        /// Returns data compressed using LZSS encoding.
+        /// All credit to Agrathejagged for the original compression code: https://github.com/Agrathejagged
+        /// </summary>
+        /// <param name="data">The uncompressed data to compress.</param>
+        /// <returns>An array of words compressed with LZSS encoding.</returns>
         public static ushort[] CompressLZSS(ushort[] data) {
             // The "copy length" segment of the data is 5-bits (max value 0x1F). The number of words to copy is:
             //     copyLength + 2
