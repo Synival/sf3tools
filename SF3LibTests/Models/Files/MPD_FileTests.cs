@@ -1,5 +1,6 @@
 using CommonLib.Arrays;
 using CommonLib.NamedValues;
+using CommonLib.Tests;
 using SF3.ByteData;
 using SF3.Models.Files.MPD;
 using SF3.NamedValues;
@@ -14,7 +15,7 @@ namespace SF3.Tests.Models.Files {
                 .GetValues<ScenarioType>()
                 .ToDictionary(x => x, x => (INameGetterContext) new NameGetterContext(x));
 
-            var data = new SF3.ByteData.ByteData(new ByteArray(File.ReadAllBytes(ResourcePath(ScenarioType.Scenario1, "BTL02.MPD"))));
+            var data = new SF3.ByteData.ByteData(new ByteArray(File.ReadAllBytes(ResourcePath(ScenarioType.Scenario1, "BTL02.MPD") ?? "")));
             return MPD_File.Create(data, nameGetters);
         }
 
@@ -38,7 +39,7 @@ namespace SF3.Tests.Models.Files {
         }
 
         [TestMethod]
-        public void ChunkData_WithDifferentOriginalCompressionAlgorithmForData_Recompress_UpdatesCompressedData() {
+        public void ChunkData_WithDifferentOriginalCompressionAlgorithmForData_Recompress_PerformsNoUpdates() {
             // Arrange
             var mpdFile = MakeFile();
             var data = new CompressedData(new ByteArray(mpdFile.ChunkData[5].GetDataCopy()));
@@ -52,7 +53,7 @@ namespace SF3.Tests.Models.Files {
             // Assert
             Assert.IsTrue(recompressResult);
             Assert.IsFalse(data.NeedsRecompression);
-            Assert.IsTrue(data.IsModified);
+            Assert.IsFalse(data.IsModified);
             Assert.IsFalse(data.DecompressedData.IsModified);
         }
 
@@ -89,6 +90,14 @@ namespace SF3.Tests.Models.Files {
             Assert.IsFalse(data.IsModified);
         }
 
+        public class ValueTestCase : TestCase {
+            public ValueTestCase(int value) : base(value.ToString()) {
+                Value = value;
+            }
+
+            public readonly int Value;
+        }
+
         [TestMethod]
         public void Recompress_WithoutChanges_HasExpectedIsModifiedFlags() {
             // Arrange
@@ -100,24 +109,20 @@ namespace SF3.Tests.Models.Files {
             // Assert
             Assert.IsTrue(recompressResult);
 
-            for (var i = 0; i < data.ChunkData.Length; i++) {
-                var chunkData = data.ChunkData[i];
+            var range = Enumerable.Range(0, data.ChunkData.Length).Select(x => new ValueTestCase(x)).ToArray();
+            TestCase.Run(range, (testCase) => {
+                var chunkData = data.ChunkData[testCase.Value];
                 if (chunkData == null)
-                    continue;
+                    return;
 
                 if (!chunkData.IsCompressed)
                     Assert.AreEqual(false, chunkData.IsModified);
                 else {
-                    // NOTE: Recompressing an actual .MPD file uses a different algorithm than originally used
-                    //       so the content of the chunks will have been modified from the original test data.
-                    //       The MPD_File should be an a modified state.
-                    //       A few chunks are actually unmodified, how about that!
-                    var expectedResult = (i == 5 || i == 6) ? true : false;
                     Assert.IsFalse(chunkData.NeedsRecompression);
                     Assert.IsFalse(chunkData.DecompressedData.IsModified);
-                    Assert.AreEqual(expectedResult, chunkData.IsModified);
+                    Assert.IsFalse(chunkData.IsModified);
                 }
-            }
+            });
 
             Assert.IsTrue(data.Data.IsModified);
             Assert.IsTrue(data.IsModified);

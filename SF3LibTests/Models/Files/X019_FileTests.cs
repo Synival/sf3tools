@@ -1,4 +1,5 @@
 using CommonLib.Arrays;
+using CommonLib.Tests;
 using SF3.Models.Files.X019;
 using SF3.NamedValues;
 using SF3.Types;
@@ -6,7 +7,7 @@ using SF3.Types;
 namespace SF3.Tests.Models.Files {
     [TestClass]
     public class X019_FileTests {
-        private class X019_TestCase : TestCase {
+        private class X019_TestCase : SF3FileTestCase {
             public X019_TestCase(ScenarioType scenario, string filename, int expectedRows)
             : base(scenario, filename) {
                 ExpectedRows = expectedRows;

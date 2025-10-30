@@ -6,7 +6,7 @@ using SF3.Types;
 namespace SF3.Tests.Models.Files {
     [TestClass]
     public class X1_FileTests_Town_S2 {
-        private class X1_TestCase : TestCase {
+        private class X1_TestCase : SF3FileTestCase {
             public X1_TestCase(
                 ScenarioType scenario,
                 string filename)

@@ -1,4 +1,5 @@
 using CommonLib.Arrays;
+using CommonLib.Tests;
 using SF3.Models.Files.X031;
 using SF3.NamedValues;
 using SF3.Types;
@@ -6,7 +7,7 @@ using SF3.Types;
 namespace SF3.Tests.Models.Files {
     [TestClass]
     public class X031_FileTests {
-        private class X031_TestCase : TestCase {
+        private class X031_TestCase : SF3FileTestCase {
             public X031_TestCase(
                 ScenarioType scenario,
                 string filename,

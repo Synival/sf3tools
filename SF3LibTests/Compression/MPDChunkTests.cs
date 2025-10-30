@@ -1,6 +1,7 @@
 ﻿using System.Runtime.InteropServices;
 using CommonLib.Arrays;
 using CommonLib.NamedValues;
+using CommonLib.Tests;
 using SF3.ByteData;
 using SF3.Models.Files.MPD;
 using SF3.NamedValues;
@@ -16,8 +17,8 @@ namespace SF3.Tests.Compression {
         private static bool ByteArraysAreEqual(byte[] lhs, byte[] rhs)
             => lhs.Length == rhs.Length && memcmp(lhs, rhs, lhs.Length) == 0;
 
-        private static TestCase[] CreateAllTestCases() {
-            var testCases = new List<TestCase>();
+        private static SF3FileTestCase[] CreateAllTestCases() {
+            var testCases = new List<SF3FileTestCase>();
 
             foreach (var st in Enum.GetValues<ScenarioType>()) {
                 var resourcePath = TestDataPaths.ResourcePath(st);
@@ -28,7 +29,7 @@ namespace SF3.Tests.Compression {
                 testCases.AddRange(mpdFiles
                     .Select(x => x.Split('/'))
                     .Select(x => x[x.Length - 1])
-                    .Select(x => new TestCase(st, x))
+                    .Select(x => new SF3FileTestCase(st, x))
                     .ToArray()
                 );
             }
@@ -36,7 +37,7 @@ namespace SF3.Tests.Compression {
             return testCases.ToArray();
         }
 
-        private static void RunOnAllTestCases(Action<TestCase, MPD_File> func) {
+        private static void RunOnAllTestCases(Action<SF3FileTestCase, MPD_File> func) {
             var nameGetters = Enum
                 .GetValues<ScenarioType>()
                 .ToDictionary(x => x, x => (INameGetterContext) new NameGetterContext(x));

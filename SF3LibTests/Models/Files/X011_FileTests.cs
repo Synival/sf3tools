@@ -1,4 +1,5 @@
 using CommonLib.Arrays;
+using CommonLib.Tests;
 using SF3.Models.Files.X011;
 using SF3.NamedValues;
 using SF3.Types;
@@ -6,7 +7,7 @@ using SF3.Types;
 namespace SF3.Tests.Models.Files {
     [TestClass]
     public class X011_FileTests {
-        private class X011_FileTestCase : TestCase {
+        private class X011_FileTestCase : SF3FileTestCase {
             public X011_FileTestCase(ScenarioType scenario, string filename, int itemIconRows, int spellIconRows, int spellRealOffsetStart)
             : base(scenario, filename) {
                 ExpectedItemIconRows = itemIconRows;

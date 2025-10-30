@@ -18,6 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\CommonLibTests\CommonLibTests.csproj" />
     <ProjectReference Include="..\SF3Lib\SF3Lib.csproj" />
   </ItemGroup>
 

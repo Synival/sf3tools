@@ -240,15 +240,29 @@ namespace CommonLib.Tests.Utils {
 
         private class CompressedChunkTestCase : TestCase {
             public CompressedChunkTestCase(string name, int decompressedSizeInBytes) : base(name) {
+                Filename = "../../../" + name;
                 DecompressedSizeInBytes = decompressedSizeInBytes;
             }
 
+            public readonly string Filename;
             public readonly int DecompressedSizeInBytes;
         }
 
         private static readonly CompressedChunkTestCase[] c_lzssChunkFiles = [
-            new CompressedChunkTestCase("TestData/BalsaChunk.bin", 0x10000),
-            new CompressedChunkTestCase("TestData/Btl02Chunk.bin", 0x07000),
+            new CompressedChunkTestCase("TestData/BalsaChunk19.bin", 0x10000),
+            new CompressedChunkTestCase("TestData/Btl02Chunk05.bin", 0x07000),
+            new CompressedChunkTestCase("TestData/Btl02Chunk06.bin", 0x0FF98),
+            new CompressedChunkTestCase("TestData/Btl02Chunk07.bin", 0x0FEF0),
+            new CompressedChunkTestCase("TestData/Btl02Chunk08.bin", 0x0F620),
+            new CompressedChunkTestCase("TestData/Btl02Chunk09.bin", 0x05050),
+            new CompressedChunkTestCase("TestData/Btl02Chunk10.bin", 0x00004),
+            new CompressedChunkTestCase("TestData/Btl02Chunk11.bin", 0x01D18),
+            new CompressedChunkTestCase("TestData/Btl02Chunk12.bin", 0x01D18),
+            new CompressedChunkTestCase("TestData/Btl02Chunk13.bin", 0x0090C),
+            new CompressedChunkTestCase("TestData/Btl02Chunk14.bin", 0x10000),
+            new CompressedChunkTestCase("TestData/Btl02Chunk15.bin", 0x10000),
+            new CompressedChunkTestCase("TestData/Btl02Chunk17.bin", 0x10000),
+            new CompressedChunkTestCase("TestData/Btl02Chunk18.bin", 0x10000),
         ];
 
         [TestMethod]
@@ -263,7 +277,7 @@ namespace CommonLib.Tests.Utils {
         [TestMethod]
         public void LZSS_DecompressChunks_SucceededWithExpectedSize() {
             TestCase.Run(c_lzssChunkFiles, (testCase) => {
-                var chunk = File.ReadAllBytes(testCase.Name).ToUShorts();
+                var chunk = File.ReadAllBytes(testCase.Filename).ToUShorts();
 
                 var decompressedData = DecompressLZSS(chunk, null, out var wordsRead, out var endDataFound);
                 Assert.AreEqual(testCase.DecompressedSizeInBytes, decompressedData.Length * 2);
@@ -282,45 +296,57 @@ namespace CommonLib.Tests.Utils {
             // changing the matching algorithm, which produces differences much earlier in the file. Is
             // that value the result of some bug or undefined behavior in the original compressor...?
             TestCase.Run(c_lzssChunkFiles, (testCase) => {
-                var balsaChunk = File.ReadAllBytes(testCase.Name).ToUShorts();
+                var chunk = File.ReadAllBytes(testCase.Filename).ToUShorts();
 
-                var decompressedData = DecompressLZSS(balsaChunk);
+                var decompressedData = DecompressLZSS(chunk);
                 var recompressedData = CompressLZSS(decompressedData);
 
-                Assert.AreEqual(balsaChunk.Length, recompressedData.Length);
-                var firstWrongWordIndex = balsaChunk
+                var errors = new List<string>();
+                if (chunk.Length != recompressedData.Length)
+                    errors.Add($"Incorrect size: Should be 0x{chunk.Length * 2:X04} bytes, is 0x{recompressedData.Length * 2:X04}.");
+
+                var firstWrongWordIndex = chunk
                     .Select((x, i) => new { Value = x, Index = i })
                     .FirstOrDefault(x => x.Value != recompressedData[x.Index])?.Index;
 
                 if (firstWrongWordIndex.HasValue) {
-                    Assert.Fail($"+0x{firstWrongWordIndex * 2:X05}: " +
-                        $"Should be 0x{balsaChunk[firstWrongWordIndex ?? 0]:X04}" +
+                    errors.Add($"+0x{firstWrongWordIndex * 2:X04}: " +
+                        $"Should be 0x{chunk[firstWrongWordIndex ?? 0]:X04}" +
                         $", is 0x{recompressedData[firstWrongWordIndex ?? 0]:X04}"
                     );
                 }
+
+                if (errors.Count > 0)
+                    Assert.Fail("\r\n" + string.Join("\r\n", errors.Select(x => "  " + x)));
             });
         }
 
         [TestMethod]
         public void LZSS_RecompressChunksThenDecompress_BothDecompressedDatasAreIdentical() {
             TestCase.Run(c_lzssChunkFiles, (testCase) => {
-                var balsaChunk = File.ReadAllBytes(testCase.Name).ToUShorts();
+                var chunk = File.ReadAllBytes(testCase.Filename).ToUShorts();
 
-                var decompressedData1 = DecompressLZSS(balsaChunk);
+                var decompressedData1 = DecompressLZSS(chunk);
                 var recompressedData  = CompressLZSS(decompressedData1);
                 var decompressedData2 = DecompressLZSS(recompressedData);
 
-                Assert.AreEqual(decompressedData1.Length, decompressedData2.Length);
+                var errors = new List<string>();
+                if (decompressedData1.Length != decompressedData2.Length)
+                    errors.Add($"Incorrect size: Should be 0x{decompressedData1.Length * 2:X04} bytes, is 0x{decompressedData2.Length * 2:X04}.");
+
                 var firstWrongWordIndex = decompressedData1
                     .Select((x, i) => new { Value = x, Index = i })
                     .FirstOrDefault(x => x.Value != decompressedData2[x.Index])?.Index;
 
                 if (firstWrongWordIndex.HasValue) {
-                    Assert.Fail($"+0x{firstWrongWordIndex * 2:X05}: " +
-                        $"Should be 0x{balsaChunk[firstWrongWordIndex ?? 0]:X04}" +
-                        $", is 0x{recompressedData[firstWrongWordIndex ?? 0]:X04}"
+                    errors.Add($"+0x{firstWrongWordIndex * 2:X04}: " +
+                        $"Should be 0x{decompressedData1[firstWrongWordIndex ?? 0]:X04}" +
+                        $", is 0x{decompressedData2[firstWrongWordIndex ?? 0]:X04}"
                     );
                 }
+
+                if (errors.Count > 0)
+                    Assert.Fail("\r\n" + string.Join("\r\n", errors.Select(x => "  " + x)));
             });
         }
 
