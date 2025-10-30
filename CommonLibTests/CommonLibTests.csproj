@@ -19,6 +19,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\CommonLib\CommonLib.csproj" />
+    <ProjectReference Include="..\SF3Lib\SF3Lib.csproj" />
   </ItemGroup>
 
   <ItemGroup>

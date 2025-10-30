@@ -8,6 +8,7 @@ obj/
 /dist_src
 /dist
 /SF3Lib/Resources/Spritesheets
+/CommonLibTests/TestData
 /SF3LibTests/TestData
 /DFRLibTests/TestData
 *.pubxml.user

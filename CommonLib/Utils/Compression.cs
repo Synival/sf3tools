@@ -119,14 +119,14 @@ namespace CommonLib.Utils {
             // The "copy length" segment of the data is 5-bits (max value 0x1F). The number of words to copy is:
             //     copyLength + 2
             // ...the max value of which is 0x21 (33).
-            const int MAX_WORD_COPY_LENGTH = 0x21;
+            const int MAX_COPY_LENGTH = 0x21;
 
             // Copy values must be at least 2 words.
-            const int MIN_WORD_COPY_LENGTH = 2;
+            const int MIN_COPY_LENGTH = 2;
 
-            // Sensible(?) limit to prevent slowdown with huge buffers.
-            // Increasing this would be nice, at the cost of exponential time increase for large buffers.
-            const int MAX_COPY_LOOKBACK = 0x1000;
+            // Maximum possible value for the copy offset is 0x07FF (11 bits, so 0x01 << 11 - 1).
+            // However, it looks like the SF3 compression chose 0x07DF for its max value, for some reason.
+            const int MAX_COPY_OFFSET = 0x07DF;
 
             // gamble: will we ever end up with that catastrophic state where we compress the file bigger than it originally was?
             // (gamble lost -- for low sizes like 4 bytes, the compressed version is actually larger, by double.
@@ -144,7 +144,7 @@ namespace CommonLib.Utils {
                 int searchPosSub = searchPos;
                 int matchLen = 0;
 
-                while (matchLen < MAX_WORD_COPY_LENGTH && currentPosSub < data.Length && searchPosSub < data.Length && data[currentPosSub] == data[searchPosSub]) {
+                while (matchLen < MAX_COPY_LENGTH && currentPosSub < data.Length && searchPosSub < data.Length && data[currentPosSub] == data[searchPosSub]) {
                     currentPosSub++;
                     searchPosSub++;
                     matchLen++;
@@ -155,12 +155,13 @@ namespace CommonLib.Utils {
 
             while (pos < data.Length) {
                 // Initialize "best match" values that indicate "no match found".
-                int bestMatchLen = MIN_WORD_COPY_LENGTH - 1;
+                int bestMatchLen = MIN_COPY_LENGTH - 1;
                 int bestMatchPos = -1;
 
                 // Look for the largest dictionary match that's occurred so far in the data.
                 // Allow reading ahead into the future if a match was found -- the decompressor will "copy itself".
-                for (int searchPos = pos - 1; searchPos >= 0 && ((pos - searchPos) < MAX_COPY_LOOKBACK); searchPos--) {
+                var searchLimit = pos - MAX_COPY_OFFSET - 1;
+                for (int searchPos = pos - 1; searchPos >= 0 && searchPos > searchLimit; searchPos--) {
                     // Get the length of matching data for data at this position.
                     var matchLen = GetMatchLen(pos, searchPos);
 
@@ -169,13 +170,14 @@ namespace CommonLib.Utils {
                         bestMatchPos = searchPos;
                         bestMatchLen = matchLen;
                     }
-                    if (matchLen == MAX_WORD_COPY_LENGTH)
+                    if (matchLen == MAX_COPY_LENGTH)
                         break;
                 }
 
                 // If a match was found, append a "copy" value.
                 if (bestMatchPos != -1) {
-                    outputArray[outPos++] = (ushort) (((pos - bestMatchPos) << 5) | ((bestMatchLen - 2) & 0x1F));
+                    var matchOffset = pos - bestMatchPos;
+                    outputArray[outPos++] = (ushort) ((matchOffset << 5) | ((bestMatchLen - 2) & 0x1F));
                     currentControl |= (ushort) (1 << (15 - controlCounter));
                     pos += bestMatchLen;
                 }

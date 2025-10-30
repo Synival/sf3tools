@@ -1,4 +1,5 @@
 ﻿using static CommonLib.Utils.Compression;
+using static CommonLib.Extensions.ArrayExtensions;
 
 namespace CommonLib.Tests.Utils {
     [TestClass]
@@ -147,7 +148,7 @@ namespace CommonLib.Tests.Utils {
 
         [TestMethod]
         public void LZSS_CompressThenDecompressStringsOfVariousLengthsReturnsOriginalString() {
-            var stringTestCases = new CompressStringTestCase[]{
+            var stringTestCases = new CompressStringTestCase[] {
                 new CompressStringTestCase("", 4),
                 new CompressStringTestCase("He", 6),
                 new CompressStringTestCase("Hell", 8),
@@ -187,7 +188,7 @@ namespace CommonLib.Tests.Utils {
             private const ushort o  = 0x0000;
             private const ushort XX = 0x8000;
 
-            public static readonly ushort[] c_uncompressed = new ushort[] {
+            public static readonly ushort[] c_uncompressed = [
                  o, o, o, o, o, o, o, o, o, o, o,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX, o, o, o, o, o, o, o, o, o, o, o,
                  o, o, o, o, o, o, o,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX, o, o, o, o, o, o, o,
                  o, o, o, o,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX, o, o, o, o,
@@ -204,9 +205,9 @@ namespace CommonLib.Tests.Utils {
                  o, o, o, o,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX, o, o, o, o,
                  o, o, o, o, o, o, o,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX, o, o, o, o, o, o, o,
                  o, o, o, o, o, o, o, o, o, o, o,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX, o, o, o, o, o, o, o, o, o, o, o,
-            };
+            ];
 
-            public static readonly ushort[] c_compressed = {
+            public static readonly ushort[] c_compressed = [
                 0x5BFF, // 0101, 1011, 1111, 1111
                         0x0000, 0x0028, 0x8000, 0x0027, // 0101
                         0x02A9, 0x0000, 0x038E, 0x0491, // 1011
@@ -216,14 +217,14 @@ namespace CommonLib.Tests.Utils {
                         0x03FC, 0x003F, 0x003F, 0x003E, // 1111
                         0x141E, 0x1C1F, 0x241F, 0x2C1F, // 1111
                         0x341F, 0x3C1A, 0x0000          // 1110
-            };
+            ];
 
             // TODO: This should match the compressed version above.
             // Buuuut, the SF3 compression has this unnecessary 0x0000 value
             // that's marked below with /*XXX*/, so the algoithm here is more
             // efficient. It would be great to be 100% accurate, but how do
             // we introduce this weird inefficiency? Need more tests!
-            public static readonly ushort[] c_compressedFromUs = {
+            public static readonly ushort[] c_compressedFromUs = [
                 0x5FFF, // 0101, 1111, 1111, 1111
                         0x0000, 0x0028, 0x8000, 0x0027, // 0101
                         0x02A9, /*XXX*/ 0x038F, 0x0491, // 1 11
@@ -234,8 +235,21 @@ namespace CommonLib.Tests.Utils {
                                 0x003F, 0x003F, 0x003E, //  111
                         0x141E, 0x1C1F, 0x241F, 0x2C1F, // 1111
                         0x341F, 0x3C1A, 0x0000          // 111
-            };
+            ];
         }
+
+        private class CompressedChunkTestCase : TestCase {
+            public CompressedChunkTestCase(string name, int decompressedSizeInBytes) : base(name) {
+                DecompressedSizeInBytes = decompressedSizeInBytes;
+            }
+
+            public readonly int DecompressedSizeInBytes;
+        }
+
+        private static readonly CompressedChunkTestCase[] c_lzssChunkFiles = [
+            new CompressedChunkTestCase("TestData/BalsaChunk.bin", 0x10000),
+            new CompressedChunkTestCase("TestData/Btl02Chunk.bin", 0x07000),
+        ];
 
         [TestMethod]
         public void LZSS_DecompressShadow_ProducesExpectedData() {
@@ -244,6 +258,70 @@ namespace CommonLib.Tests.Utils {
             Assert.AreEqual(ShadowImage.c_compressed.Length, wordsRead);
             Assert.IsTrue(endDataFound);
             Assert.IsTrue(Enumerable.SequenceEqual<ushort>(ShadowImage.c_uncompressed, decompressedData));
+        }
+
+        [TestMethod]
+        public void LZSS_DecompressChunks_SucceededWithExpectedSize() {
+            TestCase.Run(c_lzssChunkFiles, (testCase) => {
+                var chunk = File.ReadAllBytes(testCase.Name).ToUShorts();
+
+                var decompressedData = DecompressLZSS(chunk, null, out var wordsRead, out var endDataFound);
+                Assert.AreEqual(testCase.DecompressedSizeInBytes, decompressedData.Length * 2);
+                Assert.AreEqual(chunk.Length, wordsRead);
+                Assert.IsTrue(endDataFound);
+            });
+        }
+
+        [TestMethod]
+        public void LZSS_RecompressChunks_ProducesOriginalCompressedData() {
+            // NOTE: The BalsaChunk.bin test case fails at the moment:
+            //     +0x01EC4: Should be 0x0210, is 0x0110
+            // This is the second-to-last word in the file, *just before* the 0x0000 "end-of-data" word.
+            // Both the original value and our own are perfectly valid, but 0x0210 (the original) is a
+            // bit odd because 0x0110 products the exact same result. It's difficult to get 0x0210 without
+            // changing the matching algorithm, which produces differences much earlier in the file. Is
+            // that value the result of some bug or undefined behavior in the original compressor...?
+            TestCase.Run(c_lzssChunkFiles, (testCase) => {
+                var balsaChunk = File.ReadAllBytes(testCase.Name).ToUShorts();
+
+                var decompressedData = DecompressLZSS(balsaChunk);
+                var recompressedData = CompressLZSS(decompressedData);
+
+                Assert.AreEqual(balsaChunk.Length, recompressedData.Length);
+                var firstWrongWordIndex = balsaChunk
+                    .Select((x, i) => new { Value = x, Index = i })
+                    .FirstOrDefault(x => x.Value != recompressedData[x.Index])?.Index;
+
+                if (firstWrongWordIndex.HasValue) {
+                    Assert.Fail($"+0x{firstWrongWordIndex * 2:X05}: " +
+                        $"Should be 0x{balsaChunk[firstWrongWordIndex ?? 0]:X04}" +
+                        $", is 0x{recompressedData[firstWrongWordIndex ?? 0]:X04}"
+                    );
+                }
+            });
+        }
+
+        [TestMethod]
+        public void LZSS_RecompressChunksThenDecompress_BothDecompressedDatasAreIdentical() {
+            TestCase.Run(c_lzssChunkFiles, (testCase) => {
+                var balsaChunk = File.ReadAllBytes(testCase.Name).ToUShorts();
+
+                var decompressedData1 = DecompressLZSS(balsaChunk);
+                var recompressedData  = CompressLZSS(decompressedData1);
+                var decompressedData2 = DecompressLZSS(recompressedData);
+
+                Assert.AreEqual(decompressedData1.Length, decompressedData2.Length);
+                var firstWrongWordIndex = decompressedData1
+                    .Select((x, i) => new { Value = x, Index = i })
+                    .FirstOrDefault(x => x.Value != decompressedData2[x.Index])?.Index;
+
+                if (firstWrongWordIndex.HasValue) {
+                    Assert.Fail($"+0x{firstWrongWordIndex * 2:X05}: " +
+                        $"Should be 0x{balsaChunk[firstWrongWordIndex ?? 0]:X04}" +
+                        $", is 0x{recompressedData[firstWrongWordIndex ?? 0]:X04}"
+                    );
+                }
+            });
         }
 
         [TestMethod]
