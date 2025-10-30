@@ -10,11 +10,7 @@
       "CollisionSize": 40,
       "Scale": 1.0299988,
       "FrameGroups": {
-        "Idle 1": {
-          "Directions": 4,
-          "SpritesheetX": 0,
-          "SpritesheetY": 0
-        },
+        "Idle 1": { "Directions": 4, "SpritesheetX": 0, "SpritesheetY": 0 },
         "Walking 1": {
           "NNE": {
             "SpritesheetX": 48,
@@ -49,80 +45,23 @@
       "AnimationByDirections": {
         "4": {
           "StillFrame (Idle, Repeat)": [
-            {
-              "Frame": "Idle 1",
-              "Duration": 10
-            },
-            {
-              "Command": "GotoCommandOffset",
-              "Parameter": 0
-            }
+            { "Frame": "Idle 1", "Duration": 10 },
+            { "Command": "GotoCommandOffset", "Parameter": 0 }
           ],
           "StillFrame (Idle)": [
-            {
-              "Frame": "Idle 1",
-              "Duration": 10
-            },
-            {
-              "Command": "Stop"
-            }
+            { "Frame": "Idle 1", "Duration": 10 },
+            { "Command": "Stop" }
           ]
         },
         "OneFlippable": {
           "Walking (1 Direction)": [
-            {
-              "Command": "SetDirectionCount",
-              "Parameter": 17
-            },
-            {
-              "Frame": {
-                "First": {
-                  "Frame": "Walking 1",
-                  "Direction": "NNE"
-                }
-              },
-              "Duration": 4
-            },
-            {
-              "Frame": {
-                "First": {
-                  "Frame": "Walking 2",
-                  "Direction": "NNE"
-                }
-              },
-              "Duration": 4
-            },
-            {
-              "Frame": {
-                "First": {
-                  "Frame": "Walking 3",
-                  "Direction": "NNE"
-                }
-              },
-              "Duration": 4
-            },
-            {
-              "Frame": {
-                "First": {
-                  "Frame": "Walking 4",
-                  "Direction": "NNE"
-                }
-              },
-              "Duration": 4
-            },
-            {
-              "Frame": {
-                "First": {
-                  "Frame": "Walking 5",
-                  "Direction": "NNE"
-                }
-              },
-              "Duration": 4
-            },
-            {
-              "Command": "GotoCommandOffset",
-              "Parameter": 0
-            }
+            { "Command": "SetDirectionCount", "Parameter": 17 },
+            { "Frame": { "First": { "Frame": "Walking 1", "Direction": "NNE" } }, "Duration": 4 },
+            { "Frame": { "First": { "Frame": "Walking 2", "Direction": "NNE" } }, "Duration": 4 },
+            { "Frame": { "First": { "Frame": "Walking 3", "Direction": "NNE" } }, "Duration": 4 },
+            { "Frame": { "First": { "Frame": "Walking 4", "Direction": "NNE" } }, "Duration": 4 },
+            { "Frame": { "First": { "Frame": "Walking 5", "Direction": "NNE" } }, "Duration": 4 },
+            { "Command": "GotoCommandOffset", "Parameter": 0 }
           ]
         }
       }

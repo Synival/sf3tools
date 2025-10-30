@@ -10,140 +10,47 @@
       "CollisionSize": 40,
       "Scale": 1.1499939,
       "FrameGroups": {
-        "Idle (Bad) 1": {
-          "Directions": 4,
-          "SpritesheetX": 0,
-          "SpritesheetY": 0
-        },
-        "Idle (Bad) 2": {
-          "Directions": 4,
-          "SpritesheetX": 48,
-          "SpritesheetY": 0
-        },
-        "Idle (Bad) 3": {
-          "Directions": 4,
-          "SpritesheetX": 96,
-          "SpritesheetY": 0
-        },
-        "Walking 1": {
-          "Directions": 4,
-          "SpritesheetX": 144,
-          "SpritesheetY": 0
-        },
-        "Walking 2": {
-          "Directions": 4,
-          "SpritesheetX": 192,
-          "SpritesheetY": 0
-        },
-        "Walking 3": {
-          "Directions": 4,
-          "SpritesheetX": 240,
-          "SpritesheetY": 0
-        },
-        "Walking 4": {
-          "Directions": 4,
-          "SpritesheetX": 288,
-          "SpritesheetY": 0
-        },
-        "Walking 5": {
-          "Directions": 4,
-          "SpritesheetX": 336,
-          "SpritesheetY": 0
-        }
+        "Idle (Bad) 1": { "Directions": 4, "SpritesheetX": 0,   "SpritesheetY": 0 },
+        "Idle (Bad) 2": { "Directions": 4, "SpritesheetX": 48,  "SpritesheetY": 0 },
+        "Idle (Bad) 3": { "Directions": 4, "SpritesheetX": 96,  "SpritesheetY": 0 },
+        "Walking 1":    { "Directions": 4, "SpritesheetX": 144, "SpritesheetY": 0 },
+        "Walking 2":    { "Directions": 4, "SpritesheetX": 192, "SpritesheetY": 0 },
+        "Walking 3":    { "Directions": 4, "SpritesheetX": 240, "SpritesheetY": 0 },
+        "Walking 4":    { "Directions": 4, "SpritesheetX": 288, "SpritesheetY": 0 },
+        "Walking 5":    { "Directions": 4, "SpritesheetX": 336, "SpritesheetY": 0 }
       },
       "AnimationByDirections": {
         "4": {
           "Idle (Bad NNE Offset)": [
-            {
-              "Frame": "Walking 2",
-              "Duration": 5
-            },
-            {
-              "Frame": "Idle (Bad) 1",
-              "Duration": 5
-            },
-            {
-              "Frame": "Idle (Bad) 2",
-              "Duration": 5
-            },
-            {
-              "Frame": "Idle (Bad) 1",
-              "Duration": 5
-            },
-            {
-              "Command": "GotoCommandOffset",
-              "Parameter": 0
-            }
+            { "Frame": "Walking 2",    "Duration": 5 },
+            { "Frame": "Idle (Bad) 1", "Duration": 5 },
+            { "Frame": "Idle (Bad) 2", "Duration": 5 },
+            { "Frame": "Idle (Bad) 1", "Duration": 5 },
+            { "Command": "GotoCommandOffset", "Parameter": 0 }
           ],
           "Idle (Reduced, Janky)": [
-            {
-              "Frame": "Walking 2",
-              "Duration": 4
-            },
-            {
-              "Frame": "Idle (Bad) 1",
-              "Duration": 5
-            },
-            {
-              "Frame": "Idle (Bad) 3",
-              "Duration": 30
-            },
-            {
-              "Frame": "Idle (Bad) 1",
-              "Duration": 5
-            },
-            {
-              "Command": "GotoCommandOffset",
-              "Parameter": 0
-            }
+            { "Frame": "Walking 2",    "Duration": 4 },
+            { "Frame": "Idle (Bad) 1", "Duration": 5 },
+            { "Frame": "Idle (Bad) 3", "Duration": 30 },
+            { "Frame": "Idle (Bad) 1", "Duration": 5 },
+            { "Command": "GotoCommandOffset", "Parameter": 0 }
           ],
           "StillFrame 1": [
-            {
-              "Frame": "Walking 2",
-              "Duration": 10
-            },
-            {
-              "Command": "Stop"
-            }
+            { "Frame": "Walking 2", "Duration": 10 },
+            { "Command": "Stop" }
           ],
           "StillFrame 2": [
-            {
-              "Frame": "Idle (Bad) 3",
-              "Duration": 10
-            },
-            {
-              "Command": "Stop"
-            }
+            { "Frame": "Idle (Bad) 3", "Duration": 10 },
+            { "Command": "Stop" }
           ],
           "Walking": [
-            {
-              "Frame": "Walking 1",
-              "Duration": 4
-            },
-            {
-              "Frame": "Walking 2",
-              "Duration": 4
-            },
-            {
-              "Frame": "Walking 3",
-              "Duration": 4
-            },
-            {
-              "Frame": "Walking 4",
-              "Duration": 4
-            },
-            {
-              "Frame": "Walking 2",
-              "Duration": 4
-            },
-            {
-              "Frame": "Walking 5",
-              "Duration": 4
-            },
-            {
-              "Command": "GotoCommandOffset",
-              "Parameter": 0
-            }
+            { "Frame": "Walking 1", "Duration": 4 },
+            { "Frame": "Walking 2", "Duration": 4 },
+            { "Frame": "Walking 3", "Duration": 4 },
+            { "Frame": "Walking 4", "Duration": 4 },
+            { "Frame": "Walking 2", "Duration": 4 },
+            { "Frame": "Walking 5", "Duration": 4 },
+            { "Command": "GotoCommandOffset", "Parameter": 0 }
           ]
         }
       }

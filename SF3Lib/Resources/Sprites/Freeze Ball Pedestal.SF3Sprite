@@ -10,85 +10,29 @@
       "CollisionSize": 40,
       "Scale": 0.59999084,
       "FrameGroups": {
-        "OrbHovering 1": {
-          "Directions": 1,
-          "SpritesheetX": 0,
-          "SpritesheetY": 0
-        },
-        "OrbHovering 2": {
-          "Directions": 1,
-          "SpritesheetX": 48,
-          "SpritesheetY": 0
-        },
-        "OrbHovering 3": {
-          "Directions": 1,
-          "SpritesheetX": 96,
-          "SpritesheetY": 0
-        },
-        "OrbHovering 4": {
-          "Directions": 1,
-          "SpritesheetX": 144,
-          "SpritesheetY": 0
-        },
-        "OrbHovering 5": {
-          "Directions": 1,
-          "SpritesheetX": 192,
-          "SpritesheetY": 0
-        },
-        "Orbless 1": {
-          "Directions": 1,
-          "SpritesheetX": 240,
-          "SpritesheetY": 0
-        }
+        "OrbHovering 1": { "Directions": 1, "SpritesheetX": 0,   "SpritesheetY": 0 },
+        "OrbHovering 2": { "Directions": 1, "SpritesheetX": 48,  "SpritesheetY": 0 },
+        "OrbHovering 3": { "Directions": 1, "SpritesheetX": 96,  "SpritesheetY": 0 },
+        "OrbHovering 4": { "Directions": 1, "SpritesheetX": 144, "SpritesheetY": 0 },
+        "OrbHovering 5": { "Directions": 1, "SpritesheetX": 192, "SpritesheetY": 0 },
+        "Orbless 1":     { "Directions": 1, "SpritesheetX": 240, "SpritesheetY": 0 }
       },
       "AnimationByDirections": {
         "OneNoFlip": {
           "OrbHovering": [
-            {
-              "Frame": "OrbHovering 1",
-              "Duration": 5
-            },
-            {
-              "Frame": "OrbHovering 2",
-              "Duration": 5
-            },
-            {
-              "Frame": "OrbHovering 3",
-              "Duration": 5
-            },
-            {
-              "Frame": "OrbHovering 4",
-              "Duration": 5
-            },
-            {
-              "Frame": "OrbHovering 5",
-              "Duration": 5
-            },
-            {
-              "Frame": "OrbHovering 4",
-              "Duration": 5
-            },
-            {
-              "Frame": "OrbHovering 3",
-              "Duration": 5
-            },
-            {
-              "Frame": "OrbHovering 2",
-              "Duration": 5
-            },
-            {
-              "Command": "GotoCommandOffset",
-              "Parameter": 0
-            }
+            { "Frame": "OrbHovering 1", "Duration": 5 },
+            { "Frame": "OrbHovering 2", "Duration": 5 },
+            { "Frame": "OrbHovering 3", "Duration": 5 },
+            { "Frame": "OrbHovering 4", "Duration": 5 },
+            { "Frame": "OrbHovering 5", "Duration": 5 },
+            { "Frame": "OrbHovering 4", "Duration": 5 },
+            { "Frame": "OrbHovering 3", "Duration": 5 },
+            { "Frame": "OrbHovering 2", "Duration": 5 },
+            { "Command": "GotoCommandOffset", "Parameter": 0 }
           ],
           "StillFrame (Orbless)": [
-            {
-              "Frame": "Orbless 1",
-              "Duration": 5
-            },
-            {
-              "Command": "Stop"
-            }
+            { "Frame": "Orbless 1", "Duration": 5 },
+            { "Command": "Stop" }
           ]
         }
       }

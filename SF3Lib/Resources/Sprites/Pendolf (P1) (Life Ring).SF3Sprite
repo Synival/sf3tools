@@ -32,35 +32,15 @@
       "AnimationByDirections": {
         "4": {
           "Bobbing": [
-            {
-              "Frame": "Bobbing 1",
-              "Duration": 4
-            },
-            {
-              "Frame": "Bobbing 2",
-              "Duration": 2
-            },
-            {
-              "Frame": "Bobbing 3",
-              "Duration": 4
-            },
-            {
-              "Frame": "Bobbing 2",
-              "Duration": 2
-            },
-            {
-              "Command": "GotoCommandOffset",
-              "Parameter": 0
-            }
+            { "Frame": "Bobbing 1", "Duration": 4 },
+            { "Frame": "Bobbing 2", "Duration": 2 },
+            { "Frame": "Bobbing 3", "Duration": 4 },
+            { "Frame": "Bobbing 2", "Duration": 2 },
+            { "Command": "GotoCommandOffset", "Parameter": 0 }
           ],
           "StillFrame": [
-            {
-              "Frame": "Bobbing 1",
-              "Duration": 10
-            },
-            {
-              "Command": "Stop"
-            }
+            { "Frame": "Bobbing 1", "Duration": 10 },
+            { "Command": "Stop" }
           ]
         }
       }

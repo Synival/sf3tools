@@ -10,59 +10,237 @@
       "CollisionSize": 16,
       "Scale": 1.0,
       "FrameGroups": {
-        "Angry (Scn1 Alt)":     { "Directions": 1, "SpritesheetX":   0, "SpritesheetY": 0, "Coding": "Off" },
-        "Flag (Scn1 Alt)":      { "Directions": 1, "SpritesheetX":  16, "SpritesheetY": 0, "Coding": "Off" },
-        "Idea (Scn1 Alt)":      { "Directions": 1, "SpritesheetX":  32, "SpritesheetY": 0, "Coding": "Off" },
-        "Love (Scn1 Alt)":      { "Directions": 1, "SpritesheetX":  48, "SpritesheetY": 0, "Coding": "Off" },
-        "Angry (Scn1)":         { "Directions": 1, "SpritesheetX":   0, "SpritesheetY": 16, "Coding": "Off" },
-        "Idea (Scn1)":          { "Directions": 1, "SpritesheetX":  16, "SpritesheetY": 16, "Coding": "Off" },
-        "Shield (Scn1)":        { "Directions": 1, "SpritesheetX":  32, "SpritesheetY": 16, "Coding": "Off" },
-        "Sword (Scn1)":         { "Directions": 1, "SpritesheetX":  48, "SpritesheetY": 16, "Coding": "Off" },
-        "Alert (Scn1+)":        { "Directions": 1, "SpritesheetX":   0, "SpritesheetY": 32, "Coding": "Off" },
-        "Flag (Scn1+)":         { "Directions": 1, "SpritesheetX":  16, "SpritesheetY": 32, "Coding": "Off" },
-        "Love (Scn1+)":         { "Directions": 1, "SpritesheetX":  32, "SpritesheetY": 32, "Coding": "Off" },
-        "Angry (Scn2+)":        { "Directions": 1, "SpritesheetX":   0, "SpritesheetY": 48, "Coding": "Off" },
-        "Confused (Scn2+)":     { "Directions": 1, "SpritesheetX":  16, "SpritesheetY": 48, "Coding": "Off" },
-        "Idea (Scn2+)":         { "Directions": 1, "SpritesheetX":  32, "SpritesheetY": 48, "Coding": "Off" },
-        "Shield (Scn2+)":       { "Directions": 1, "SpritesheetX":  48, "SpritesheetY": 48, "Coding": "Off" },
-        "Silent (Scn2+)":       { "Directions": 1, "SpritesheetX":  64, "SpritesheetY": 48, "Coding": "Off" },
-        "Sweat (Scn2+) 1":      { "Directions": 1, "SpritesheetX":  80, "SpritesheetY": 48, "Coding": "Off" },
-        "Sweat (Scn2+) 2":      { "Directions": 1, "SpritesheetX":  96, "SpritesheetY": 48, "Coding": "Off" },
-        "Sweat (Scn2+) 3":      { "Directions": 1, "SpritesheetX": 112, "SpritesheetY": 48, "Coding": "Off" },
-        "Sword (Scn2+)":        { "Directions": 1, "SpritesheetX": 128, "SpritesheetY": 48, "Coding": "Off" },
-        "Complaining (Scn3+)":  { "Directions": 1, "SpritesheetX":   0, "SpritesheetY": 64, "Coding": "Off" },
-        "Embarrassed (Scn3+)":  { "Directions": 1, "SpritesheetX":  16, "SpritesheetY": 64, "Coding": "Off" },
-        "Embarrassed (by KoD)": { "Directions": 1, "SpritesheetX":   0, "SpritesheetY": 80, "Coding": "Off" }
+        "Angry (Scn1 Alt)": {
+          "Directions": 1,
+          "SpritesheetX": 0,
+          "SpritesheetY": 0,
+          "Coding": "Off"
+        },
+        "Flag (Scn1 Alt)": {
+          "Directions": 1,
+          "SpritesheetX": 16,
+          "SpritesheetY": 0,
+          "Coding": "Off"
+        },
+        "Idea (Scn1 Alt)": {
+          "Directions": 1,
+          "SpritesheetX": 32,
+          "SpritesheetY": 0,
+          "Coding": "Off"
+        },
+        "Love (Scn1 Alt)": {
+          "Directions": 1,
+          "SpritesheetX": 48,
+          "SpritesheetY": 0,
+          "Coding": "Off"
+        },
+        "Angry (Scn1)": {
+          "Directions": 1,
+          "SpritesheetX": 0,
+          "SpritesheetY": 16,
+          "Coding": "Off"
+        },
+        "Idea (Scn1)": {
+          "Directions": 1,
+          "SpritesheetX": 16,
+          "SpritesheetY": 16,
+          "Coding": "Off"
+        },
+        "Shield (Scn1)": {
+          "Directions": 1,
+          "SpritesheetX": 32,
+          "SpritesheetY": 16,
+          "Coding": "Off"
+        },
+        "Sword (Scn1)": {
+          "Directions": 1,
+          "SpritesheetX": 48,
+          "SpritesheetY": 16,
+          "Coding": "Off"
+        },
+        "Alert (Scn1+)": {
+          "Directions": 1,
+          "SpritesheetX": 0,
+          "SpritesheetY": 32,
+          "Coding": "Off"
+        },
+        "Flag (Scn1+)": {
+          "Directions": 1,
+          "SpritesheetX": 16,
+          "SpritesheetY": 32,
+          "Coding": "Off"
+        },
+        "Love (Scn1+)": {
+          "Directions": 1,
+          "SpritesheetX": 32,
+          "SpritesheetY": 32,
+          "Coding": "Off"
+        },
+        "Angry (Scn2+)": {
+          "Directions": 1,
+          "SpritesheetX": 0,
+          "SpritesheetY": 48,
+          "Coding": "Off"
+        },
+        "Confused (Scn2+)": {
+          "Directions": 1,
+          "SpritesheetX": 16,
+          "SpritesheetY": 48,
+          "Coding": "Off"
+        },
+        "Idea (Scn2+)": {
+          "Directions": 1,
+          "SpritesheetX": 32,
+          "SpritesheetY": 48,
+          "Coding": "Off"
+        },
+        "Shield (Scn2+)": {
+          "Directions": 1,
+          "SpritesheetX": 48,
+          "SpritesheetY": 48,
+          "Coding": "Off"
+        },
+        "Silent (Scn2+)": {
+          "Directions": 1,
+          "SpritesheetX": 64,
+          "SpritesheetY": 48,
+          "Coding": "Off"
+        },
+        "Sweat (Scn2+) 1": {
+          "Directions": 1,
+          "SpritesheetX": 80,
+          "SpritesheetY": 48,
+          "Coding": "Off"
+        },
+        "Sweat (Scn2+) 2": {
+          "Directions": 1,
+          "SpritesheetX": 96,
+          "SpritesheetY": 48,
+          "Coding": "Off"
+        },
+        "Sweat (Scn2+) 3": {
+          "Directions": 1,
+          "SpritesheetX": 112,
+          "SpritesheetY": 48,
+          "Coding": "Off"
+        },
+        "Sword (Scn2+)": {
+          "Directions": 1,
+          "SpritesheetX": 128,
+          "SpritesheetY": 48,
+          "Coding": "Off"
+        },
+        "Complaining (Scn3+)": {
+          "Directions": 1,
+          "SpritesheetX": 0,
+          "SpritesheetY": 64,
+          "Coding": "Off"
+        },
+        "Embarrassed (Scn3+)": {
+          "Directions": 1,
+          "SpritesheetX": 16,
+          "SpritesheetY": 64,
+          "Coding": "Off"
+        },
+        "Embarrassed (by KoD)": {
+          "Directions": 1,
+          "SpritesheetX": 0,
+          "SpritesheetY": 80,
+          "Coding": "Off"
+        }
       },
       "AnimationByDirections": {
         "OneNoFlip": {
-          "Angry (Scn1 Alt)":     [ { "Frame": "Angry (Scn1 Alt)",     "Duration": 10 }, { "Command": "Stop" } ],
-          "Flag (Scn1 Alt)":      [ { "Frame": "Flag (Scn1 Alt)",      "Duration": 10 }, { "Command": "Stop" } ],
-          "Idea (Scn1 Alt)":      [ { "Frame": "Idea (Scn1 Alt)",      "Duration": 10 }, { "Command": "Stop" } ],
-          "Love (Scn1 Alt)":      [ { "Frame": "Love (Scn1 Alt)",      "Duration": 10 }, { "Command": "Stop" } ],
-          "Angry (Scn1)":         [ { "Frame": "Angry (Scn1)",         "Duration": 10 }, { "Command": "Stop" } ],
-          "Idea (Scn1)":          [ { "Frame": "Idea (Scn1)",          "Duration": 10 }, { "Command": "Stop" } ],
-          "Shield (Scn1)":        [ { "Frame": "Shield (Scn1)",        "Duration": 10 }, { "Command": "Stop" } ],
-          "Sword (Scn1)":         [ { "Frame": "Sword (Scn1)",         "Duration": 10 }, { "Command": "Stop" } ],
-          "Alert (Scn1)":         [ { "Frame": "Alert (Scn1+)",        "Duration": 10 }, { "Command": "Stop" } ],
-          "Flag (Scn1)":          [ { "Frame": "Flag (Scn1+)",         "Duration": 10 }, { "Command": "Stop" } ],
-          "Love (Scn1)":          [ { "Frame": "Love (Scn1+)",         "Duration": 10 }, { "Command": "Stop" } ],
-          "Angry (Scn2+)":        [ { "Frame": "Angry (Scn2+)",        "Duration": 10 }, { "Command": "Stop" } ],
-          "Confused (Scn2+)":     [ { "Frame": "Confused (Scn2+)",     "Duration": 10 }, { "Command": "Stop" } ],
-          "Idea (Scn2+)":         [ { "Frame": "Idea (Scn2+)",         "Duration": 10 }, { "Command": "Stop" } ],
-          "Shield (Scn2+)":       [ { "Frame": "Shield (Scn2+)",       "Duration": 10 }, { "Command": "Stop" } ],
-          "Silent (Scn2+)":       [ { "Frame": "Silent (Scn2+)",       "Duration": 10 }, { "Command": "Stop" } ],
-          "Sweat (Scn2+)":        [ { "Frame": "Sweat (Scn2+) 3",      "Duration": 10 }, { "Command": "Stop" } ],
+          "Angry (Scn1 Alt)": [
+            { "Frame": "Angry (Scn1 Alt)", "Duration": 10 },
+            { "Command": "Stop" }
+          ],
+          "Flag (Scn1 Alt)": [
+            { "Frame": "Flag (Scn1 Alt)", "Duration": 10 },
+            { "Command": "Stop" }
+          ],
+          "Idea (Scn1 Alt)": [
+            { "Frame": "Idea (Scn1 Alt)", "Duration": 10 },
+            { "Command": "Stop" }
+          ],
+          "Love (Scn1 Alt)": [
+            { "Frame": "Love (Scn1 Alt)", "Duration": 10 },
+            { "Command": "Stop" }
+          ],
+          "Angry (Scn1)": [
+            { "Frame": "Angry (Scn1)", "Duration": 10 },
+            { "Command": "Stop" }
+          ],
+          "Idea (Scn1)": [
+            { "Frame": "Idea (Scn1)", "Duration": 10 },
+            { "Command": "Stop" }
+          ],
+          "Shield (Scn1)": [
+            { "Frame": "Shield (Scn1)", "Duration": 10 },
+            { "Command": "Stop" }
+          ],
+          "Sword (Scn1)": [
+            { "Frame": "Sword (Scn1)", "Duration": 10 },
+            { "Command": "Stop" }
+          ],
+          "Alert (Scn1)": [
+            { "Frame": "Alert (Scn1+)", "Duration": 10 },
+            { "Command": "Stop" }
+          ],
+          "Flag (Scn1)": [
+            { "Frame": "Flag (Scn1+)", "Duration": 10 },
+            { "Command": "Stop" }
+          ],
+          "Love (Scn1)": [
+            { "Frame": "Love (Scn1+)", "Duration": 10 },
+            { "Command": "Stop" }
+          ],
+          "Angry (Scn2+)": [
+            { "Frame": "Angry (Scn2+)", "Duration": 10 },
+            { "Command": "Stop" }
+          ],
+          "Confused (Scn2+)": [
+            { "Frame": "Confused (Scn2+)", "Duration": 10 },
+            { "Command": "Stop" }
+          ],
+          "Idea (Scn2+)": [
+            { "Frame": "Idea (Scn2+)", "Duration": 10 },
+            { "Command": "Stop" }
+          ],
+          "Shield (Scn2+)": [
+            { "Frame": "Shield (Scn2+)", "Duration": 10 },
+            { "Command": "Stop" }
+          ],
+          "Silent (Scn2+)": [
+            { "Frame": "Silent (Scn2+)", "Duration": 10 },
+            { "Command": "Stop" }
+          ],
+          "Sweat (Scn2+)": [
+            { "Frame": "Sweat (Scn2+) 3", "Duration": 10 },
+            { "Command": "Stop" }
+          ],
           "Sweat (Growing Larger) (Scn2+)": [
             { "Frame": "Sweat (Scn2+) 1", "Duration": 10 },
             { "Frame": "Sweat (Scn2+) 2", "Duration": 10 },
             { "Frame": "Sweat (Scn2+) 3", "Duration": 10 },
             { "Command": "Stop" }
           ],
-          "Sword (Scn2+)":        [ { "Frame": "Sword (Scn2+)",        "Duration": 10 }, { "Command": "Stop" } ],
-          "Complaining (Scn3+)":  [ { "Frame": "Complaining (Scn3+)",  "Duration": 10 }, { "Command": "Stop" } ],
-          "Embarrassed (by KoD)": [ { "Frame": "Embarrassed (by KoD)", "Duration": 10 }, { "Command": "Stop" } ],
-          "Embarrassed (Scn3+)":  [ { "Frame": "Embarrassed (Scn3+)",  "Duration": 10 }, { "Command": "Stop" } ]
+          "Sword (Scn2+)": [
+            { "Frame": "Sword (Scn2+)", "Duration": 10 },
+            { "Command": "Stop" }
+          ],
+          "Complaining (Scn3+)": [
+            { "Frame": "Complaining (Scn3+)", "Duration": 10 },
+            { "Command": "Stop" }
+          ],
+          "Embarrassed (by KoD)": [
+            { "Frame": "Embarrassed (by KoD)", "Duration": 10 },
+            { "Command": "Stop" }
+          ],
+          "Embarrassed (Scn3+)": [
+            { "Frame": "Embarrassed (Scn3+)", "Duration": 10 },
+            { "Command": "Stop" }
+          ]
         }
       }
     }

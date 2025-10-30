@@ -10,54 +10,22 @@
       "CollisionSize": 40,
       "Scale": 0.59999084,
       "FrameGroups": {
-        "Idle (Fixed Height) 1": {
-          "Directions": 4,
-          "SpritesheetX": 0,
-          "SpritesheetY": 0
-        },
-        "Idle (Fixed Height) 2": {
-          "Directions": 4,
-          "SpritesheetX": 40,
-          "SpritesheetY": 0
-        },
-        "Idle (Fixed Height) 3": {
-          "Directions": 4,
-          "SpritesheetX": 80,
-          "SpritesheetY": 0
-        }
+        "Idle (Fixed Height) 1": { "Directions": 4, "SpritesheetX": 0,  "SpritesheetY": 0 },
+        "Idle (Fixed Height) 2": { "Directions": 4, "SpritesheetX": 40, "SpritesheetY": 0 },
+        "Idle (Fixed Height) 3": { "Directions": 4, "SpritesheetX": 80, "SpritesheetY": 0 }
       },
       "AnimationByDirections": {
         "4": {
           "Idle (Fixed Height)": [
-            {
-              "Frame": "Idle (Fixed Height) 1",
-              "Duration": 4
-            },
-            {
-              "Frame": "Idle (Fixed Height) 2",
-              "Duration": 4
-            },
-            {
-              "Frame": "Idle (Fixed Height) 3",
-              "Duration": 4
-            },
-            {
-              "Frame": "Idle (Fixed Height) 2",
-              "Duration": 4
-            },
-            {
-              "Command": "GotoCommandOffset",
-              "Parameter": 0
-            }
+            { "Frame": "Idle (Fixed Height) 1", "Duration": 4 },
+            { "Frame": "Idle (Fixed Height) 2", "Duration": 4 },
+            { "Frame": "Idle (Fixed Height) 3", "Duration": 4 },
+            { "Frame": "Idle (Fixed Height) 2", "Duration": 4 },
+            { "Command": "GotoCommandOffset", "Parameter": 0 }
           ],
           "StillFrame (Fixed Height)": [
-            {
-              "Frame": "Idle (Fixed Height) 1",
-              "Duration": 10
-            },
-            {
-              "Command": "Stop"
-            }
+            { "Frame": "Idle (Fixed Height) 1", "Duration": 10 },
+            { "Command": "Stop" }
           ]
         }
       }

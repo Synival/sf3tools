@@ -10,50 +10,21 @@
       "CollisionSize": 40,
       "Scale": 1.0,
       "FrameGroups": {
-        "Hammering 1": {
-          "Directions": 4,
-          "SpritesheetX": 0,
-          "SpritesheetY": 0
-        },
-        "Hammering 2": {
-          "Directions": 4,
-          "SpritesheetX": 40,
-          "SpritesheetY": 0
-        },
-        "Hammering 3": {
-          "Directions": 4,
-          "SpritesheetX": 80,
-          "SpritesheetY": 0
-        }
+        "Hammering 1": { "Directions": 4, "SpritesheetX": 0,  "SpritesheetY": 0 },
+        "Hammering 2": { "Directions": 4, "SpritesheetX": 40, "SpritesheetY": 0 },
+        "Hammering 3": { "Directions": 4, "SpritesheetX": 80, "SpritesheetY": 0 }
       },
       "AnimationByDirections": {
         "4": {
           "Hammering": [
-            {
-              "Frame": "Hammering 1",
-              "Duration": 3
-            },
-            {
-              "Frame": "Hammering 2",
-              "Duration": 2
-            },
-            {
-              "Frame": "Hammering 3",
-              "Duration": 4
-            },
-            {
-              "Command": "GotoCommandOffset",
-              "Parameter": 0
-            }
+            { "Frame": "Hammering 1", "Duration": 3 },
+            { "Frame": "Hammering 2", "Duration": 2 },
+            { "Frame": "Hammering 3", "Duration": 4 },
+            { "Command": "GotoCommandOffset", "Parameter": 0 }
           ],
           "StillFrame": [
-            {
-              "Frame": "Hammering 1",
-              "Duration": 10
-            },
-            {
-              "Command": "Stop"
-            }
+            { "Frame": "Hammering 1", "Duration": 10 },
+            { "Command": "Stop" }
           ]
         }
       }

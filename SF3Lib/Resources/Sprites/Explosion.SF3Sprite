@@ -16,11 +16,7 @@
           "SpritesheetY": 0,
           "Coding": "Off"
         },
-        "Black+White 1": {
-          "Directions": 1,
-          "SpritesheetX": 48,
-          "SpritesheetY": 0
-        },
+        "Black+White 1": { "Directions": 1, "SpritesheetX": 48,  "SpritesheetY": 0 },
         "Exploding (Alt) 1": {
           "Directions": 1,
           "SpritesheetX": 96,
@@ -75,379 +71,114 @@
           "SpritesheetY": 0,
           "Coding": "Off"
         },
-        "Exploding 1": {
-          "Directions": 1,
-          "SpritesheetX": 528,
-          "SpritesheetY": 0
-        },
-        "Exploding 2": {
-          "Directions": 1,
-          "SpritesheetX": 576,
-          "SpritesheetY": 0
-        },
-        "Exploding 3": {
-          "Directions": 1,
-          "SpritesheetX": 624,
-          "SpritesheetY": 0
-        },
-        "Exploding 4": {
-          "Directions": 1,
-          "SpritesheetX": 672,
-          "SpritesheetY": 0
-        },
-        "Exploding 5": {
-          "Directions": 1,
-          "SpritesheetX": 720,
-          "SpritesheetY": 0
-        },
-        "Exploding 6": {
-          "Directions": 1,
-          "SpritesheetX": 768,
-          "SpritesheetY": 0
-        },
-        "Exploding 7": {
-          "Directions": 1,
-          "SpritesheetX": 816,
-          "SpritesheetY": 0
-        },
-        "Exploding 8": {
-          "Directions": 1,
-          "SpritesheetX": 864,
-          "SpritesheetY": 0
-        },
-        "Exploding 9": {
-          "Directions": 1,
-          "SpritesheetX": 912,
-          "SpritesheetY": 0
-        }
+        "Exploding 1":   { "Directions": 1, "SpritesheetX": 528, "SpritesheetY": 0 },
+        "Exploding 2":   { "Directions": 1, "SpritesheetX": 576, "SpritesheetY": 0 },
+        "Exploding 3":   { "Directions": 1, "SpritesheetX": 624, "SpritesheetY": 0 },
+        "Exploding 4":   { "Directions": 1, "SpritesheetX": 672, "SpritesheetY": 0 },
+        "Exploding 5":   { "Directions": 1, "SpritesheetX": 720, "SpritesheetY": 0 },
+        "Exploding 6":   { "Directions": 1, "SpritesheetX": 768, "SpritesheetY": 0 },
+        "Exploding 7":   { "Directions": 1, "SpritesheetX": 816, "SpritesheetY": 0 },
+        "Exploding 8":   { "Directions": 1, "SpritesheetX": 864, "SpritesheetY": 0 },
+        "Exploding 9":   { "Directions": 1, "SpritesheetX": 912, "SpritesheetY": 0 }
       },
       "AnimationByDirections": {
         "OneNoFlip": {
           "Exploding (Alt, w/o Transparent Frame)": [
-            {
-              "Frame": "Exploding (Alt) 1",
-              "Duration": 1
-            },
-            {
-              "Frame": "Exploding (Alt) 2",
-              "Duration": 1
-            },
-            {
-              "Frame": "Exploding (Alt) 3",
-              "Duration": 2
-            },
-            {
-              "Frame": "Exploding (Alt) 4",
-              "Duration": 2
-            },
-            {
-              "Frame": "Exploding (Alt) 5",
-              "Duration": 2
-            },
-            {
-              "Frame": "Exploding (Alt) 6",
-              "Duration": 2
-            },
-            {
-              "Frame": "Exploding (Alt) 7",
-              "Duration": 2
-            },
-            {
-              "Frame": "Exploding (Alt) 8",
-              "Duration": 2
-            },
-            {
-              "Frame": "Exploding (Alt) 9",
-              "Duration": 2
-            },
-            {
-              "Command": "GotoAnimation",
-              "Parameter": 0
-            }
+            { "Frame": "Exploding (Alt) 1", "Duration": 1 },
+            { "Frame": "Exploding (Alt) 2", "Duration": 1 },
+            { "Frame": "Exploding (Alt) 3", "Duration": 2 },
+            { "Frame": "Exploding (Alt) 4", "Duration": 2 },
+            { "Frame": "Exploding (Alt) 5", "Duration": 2 },
+            { "Frame": "Exploding (Alt) 6", "Duration": 2 },
+            { "Frame": "Exploding (Alt) 7", "Duration": 2 },
+            { "Frame": "Exploding (Alt) 8", "Duration": 2 },
+            { "Frame": "Exploding (Alt) 9", "Duration": 2 },
+            { "Command": "GotoAnimation", "Parameter": 0 }
           ],
           "Exploding (w/ Transparent Frame)": [
-            {
-              "Frame": "Exploding 1",
-              "Duration": 1
-            },
-            {
-              "Frame": "Exploding 2",
-              "Duration": 1
-            },
-            {
-              "Frame": "Exploding 3",
-              "Duration": 2
-            },
-            {
-              "Frame": "Exploding 4",
-              "Duration": 2
-            },
-            {
-              "Frame": "Exploding 5",
-              "Duration": 2
-            },
-            {
-              "Frame": "Exploding 6",
-              "Duration": 2
-            },
-            {
-              "Frame": "Exploding 7",
-              "Duration": 2
-            },
-            {
-              "Frame": "Exploding 8",
-              "Duration": 2
-            },
-            {
-              "Frame": "Exploding 9",
-              "Duration": 2
-            },
-            {
-              "Frame": "Black+White 1",
-              "Duration": 10
-            },
-            {
-              "Command": "GotoAnimation",
-              "Parameter": 0
-            }
+            { "Frame": "Exploding 1",   "Duration": 1 },
+            { "Frame": "Exploding 2",   "Duration": 1 },
+            { "Frame": "Exploding 3",   "Duration": 2 },
+            { "Frame": "Exploding 4",   "Duration": 2 },
+            { "Frame": "Exploding 5",   "Duration": 2 },
+            { "Frame": "Exploding 6",   "Duration": 2 },
+            { "Frame": "Exploding 7",   "Duration": 2 },
+            { "Frame": "Exploding 8",   "Duration": 2 },
+            { "Frame": "Exploding 9",   "Duration": 2 },
+            { "Frame": "Black+White 1", "Duration": 10 },
+            { "Command": "GotoAnimation", "Parameter": 0 }
           ],
           "Exploding (w/o Transparent Frame)": [
-            {
-              "Frame": "Exploding 1",
-              "Duration": 1
-            },
-            {
-              "Frame": "Exploding 2",
-              "Duration": 1
-            },
-            {
-              "Frame": "Exploding 3",
-              "Duration": 2
-            },
-            {
-              "Frame": "Exploding 4",
-              "Duration": 2
-            },
-            {
-              "Frame": "Exploding 5",
-              "Duration": 2
-            },
-            {
-              "Frame": "Exploding 6",
-              "Duration": 2
-            },
-            {
-              "Frame": "Exploding 7",
-              "Duration": 2
-            },
-            {
-              "Frame": "Exploding 8",
-              "Duration": 2
-            },
-            {
-              "Frame": "Exploding 9",
-              "Duration": 2
-            },
-            {
-              "Command": "GotoAnimation",
-              "Parameter": 0
-            }
+            { "Frame": "Exploding 1", "Duration": 1 },
+            { "Frame": "Exploding 2", "Duration": 1 },
+            { "Frame": "Exploding 3", "Duration": 2 },
+            { "Frame": "Exploding 4", "Duration": 2 },
+            { "Frame": "Exploding 5", "Duration": 2 },
+            { "Frame": "Exploding 6", "Duration": 2 },
+            { "Frame": "Exploding 7", "Duration": 2 },
+            { "Frame": "Exploding 8", "Duration": 2 },
+            { "Frame": "Exploding 9", "Duration": 2 },
+            { "Command": "GotoAnimation", "Parameter": 0 }
           ],
           "StillFrame (Black)": [
-            {
-              "Frame": "Black 1",
-              "Duration": 10
-            },
-            {
-              "Command": "Stop"
-            }
+            { "Frame": "Black 1", "Duration": 10 },
+            { "Command": "Stop" }
           ],
           "StillFrame (Black+White)": [
-            {
-              "Frame": "Black+White 1",
-              "Duration": 10
-            },
-            {
-              "Command": "Stop"
-            }
+            { "Frame": "Black+White 1", "Duration": 10 },
+            { "Command": "Stop" }
           ],
           "Unexploding (Alt, w/o Transparent Frame)": [
-            {
-              "Frame": "Exploding (Alt) 9",
-              "Duration": 4
-            },
-            {
-              "Frame": "Exploding (Alt) 8",
-              "Duration": 4
-            },
-            {
-              "Frame": "Exploding (Alt) 7",
-              "Duration": 3
-            },
-            {
-              "Frame": "Exploding (Alt) 6",
-              "Duration": 3
-            },
-            {
-              "Frame": "Exploding (Alt) 5",
-              "Duration": 2
-            },
-            {
-              "Frame": "Exploding (Alt) 4",
-              "Duration": 2
-            },
-            {
-              "Frame": "Exploding (Alt) 3",
-              "Duration": 2
-            },
-            {
-              "Frame": "Exploding (Alt) 2",
-              "Duration": 1
-            },
-            {
-              "Frame": "Exploding (Alt) 1",
-              "Duration": 1
-            },
-            {
-              "Command": "GotoAnimation",
-              "Parameter": 0
-            }
+            { "Frame": "Exploding (Alt) 9", "Duration": 4 },
+            { "Frame": "Exploding (Alt) 8", "Duration": 4 },
+            { "Frame": "Exploding (Alt) 7", "Duration": 3 },
+            { "Frame": "Exploding (Alt) 6", "Duration": 3 },
+            { "Frame": "Exploding (Alt) 5", "Duration": 2 },
+            { "Frame": "Exploding (Alt) 4", "Duration": 2 },
+            { "Frame": "Exploding (Alt) 3", "Duration": 2 },
+            { "Frame": "Exploding (Alt) 2", "Duration": 1 },
+            { "Frame": "Exploding (Alt) 1", "Duration": 1 },
+            { "Command": "GotoAnimation", "Parameter": 0 }
           ],
           "Unexploding (Incomplete)": [
-            {
-              "Frame": "Exploding 9",
-              "Duration": 4
-            },
-            {
-              "Frame": "Exploding 8",
-              "Duration": 4
-            },
-            {
-              "Frame": "Exploding 7",
-              "Duration": 3
-            },
-            {
-              "Frame": "Exploding 6",
-              "Duration": 3
-            },
-            {
-              "Frame": "Black+White 1",
-              "Duration": 10
-            },
-            {
-              "Command": "GotoAnimation",
-              "Parameter": 0
-            }
+            { "Frame": "Exploding 9",   "Duration": 4 },
+            { "Frame": "Exploding 8",   "Duration": 4 },
+            { "Frame": "Exploding 7",   "Duration": 3 },
+            { "Frame": "Exploding 6",   "Duration": 3 },
+            { "Frame": "Black+White 1", "Duration": 10 },
+            { "Command": "GotoAnimation", "Parameter": 0 }
           ],
           "Unexploding (Very Incomplete, Broken)": [
-            {
-              "Frame": "Exploding 9",
-              "Duration": 4
-            },
-            {
-              "Frame": "Exploding 8",
-              "Duration": 4
-            },
-            {
-              "Frame": "Exploding 7",
-              "Duration": 3
-            },
-            {
-              "Frame": "Exploding 6",
-              "Duration": 3
-            },
-            {
-              "Command": "GotoAnimation",
-              "Parameter": 0
-            }
+            { "Frame": "Exploding 9", "Duration": 4 },
+            { "Frame": "Exploding 8", "Duration": 4 },
+            { "Frame": "Exploding 7", "Duration": 3 },
+            { "Frame": "Exploding 6", "Duration": 3 },
+            { "Command": "GotoAnimation", "Parameter": 0 }
           ],
           "Unexploding (w/ Transparent Frame)": [
-            {
-              "Frame": "Exploding 9",
-              "Duration": 4
-            },
-            {
-              "Frame": "Exploding 8",
-              "Duration": 4
-            },
-            {
-              "Frame": "Exploding 7",
-              "Duration": 3
-            },
-            {
-              "Frame": "Exploding 6",
-              "Duration": 3
-            },
-            {
-              "Frame": "Exploding 5",
-              "Duration": 2
-            },
-            {
-              "Frame": "Exploding 4",
-              "Duration": 2
-            },
-            {
-              "Frame": "Exploding 3",
-              "Duration": 2
-            },
-            {
-              "Frame": "Exploding 2",
-              "Duration": 1
-            },
-            {
-              "Frame": "Exploding 1",
-              "Duration": 1
-            },
-            {
-              "Frame": "Black+White 1",
-              "Duration": 10
-            },
-            {
-              "Command": "GotoAnimation",
-              "Parameter": 0
-            }
+            { "Frame": "Exploding 9",   "Duration": 4 },
+            { "Frame": "Exploding 8",   "Duration": 4 },
+            { "Frame": "Exploding 7",   "Duration": 3 },
+            { "Frame": "Exploding 6",   "Duration": 3 },
+            { "Frame": "Exploding 5",   "Duration": 2 },
+            { "Frame": "Exploding 4",   "Duration": 2 },
+            { "Frame": "Exploding 3",   "Duration": 2 },
+            { "Frame": "Exploding 2",   "Duration": 1 },
+            { "Frame": "Exploding 1",   "Duration": 1 },
+            { "Frame": "Black+White 1", "Duration": 10 },
+            { "Command": "GotoAnimation", "Parameter": 0 }
           ],
           "Unexploding (w/o Transparent Frame)": [
-            {
-              "Frame": "Exploding 9",
-              "Duration": 4
-            },
-            {
-              "Frame": "Exploding 8",
-              "Duration": 4
-            },
-            {
-              "Frame": "Exploding 7",
-              "Duration": 3
-            },
-            {
-              "Frame": "Exploding 6",
-              "Duration": 3
-            },
-            {
-              "Frame": "Exploding 5",
-              "Duration": 2
-            },
-            {
-              "Frame": "Exploding 4",
-              "Duration": 2
-            },
-            {
-              "Frame": "Exploding 3",
-              "Duration": 2
-            },
-            {
-              "Frame": "Exploding 2",
-              "Duration": 1
-            },
-            {
-              "Frame": "Exploding 1",
-              "Duration": 1
-            },
-            {
-              "Command": "GotoAnimation",
-              "Parameter": 0
-            }
+            { "Frame": "Exploding 9", "Duration": 4 },
+            { "Frame": "Exploding 8", "Duration": 4 },
+            { "Frame": "Exploding 7", "Duration": 3 },
+            { "Frame": "Exploding 6", "Duration": 3 },
+            { "Frame": "Exploding 5", "Duration": 2 },
+            { "Frame": "Exploding 4", "Duration": 2 },
+            { "Frame": "Exploding 3", "Duration": 2 },
+            { "Frame": "Exploding 2", "Duration": 1 },
+            { "Frame": "Exploding 1", "Duration": 1 },
+            { "Command": "GotoAnimation", "Parameter": 0 }
           ]
         }
       }

@@ -10,112 +10,35 @@
       "CollisionSize": 40,
       "Scale": 1.0,
       "FrameGroups": {
-        "Poofing 1": {
-          "Directions": 1,
-          "SpritesheetX": 0,
-          "SpritesheetY": 0
-        },
-        "Poofing 10": {
-          "Directions": 1,
-          "SpritesheetX": 40,
-          "SpritesheetY": 0
-        },
-        "Poofing 2": {
-          "Directions": 1,
-          "SpritesheetX": 80,
-          "SpritesheetY": 0
-        },
-        "Poofing 3": {
-          "Directions": 1,
-          "SpritesheetX": 120,
-          "SpritesheetY": 0
-        },
-        "Poofing 4": {
-          "Directions": 1,
-          "SpritesheetX": 160,
-          "SpritesheetY": 0
-        },
-        "Poofing 5": {
-          "Directions": 1,
-          "SpritesheetX": 200,
-          "SpritesheetY": 0
-        },
-        "Poofing 6": {
-          "Directions": 1,
-          "SpritesheetX": 240,
-          "SpritesheetY": 0
-        },
-        "Poofing 7": {
-          "Directions": 1,
-          "SpritesheetX": 280,
-          "SpritesheetY": 0
-        },
-        "Poofing 8": {
-          "Directions": 1,
-          "SpritesheetX": 320,
-          "SpritesheetY": 0
-        },
-        "Poofing 9": {
-          "Directions": 1,
-          "SpritesheetX": 360,
-          "SpritesheetY": 0
-        }
+        "Poofing 1":  { "Directions": 1, "SpritesheetX": 0,   "SpritesheetY": 0 },
+        "Poofing 10": { "Directions": 1, "SpritesheetX": 40,  "SpritesheetY": 0 },
+        "Poofing 2":  { "Directions": 1, "SpritesheetX": 80,  "SpritesheetY": 0 },
+        "Poofing 3":  { "Directions": 1, "SpritesheetX": 120, "SpritesheetY": 0 },
+        "Poofing 4":  { "Directions": 1, "SpritesheetX": 160, "SpritesheetY": 0 },
+        "Poofing 5":  { "Directions": 1, "SpritesheetX": 200, "SpritesheetY": 0 },
+        "Poofing 6":  { "Directions": 1, "SpritesheetX": 240, "SpritesheetY": 0 },
+        "Poofing 7":  { "Directions": 1, "SpritesheetX": 280, "SpritesheetY": 0 },
+        "Poofing 8":  { "Directions": 1, "SpritesheetX": 320, "SpritesheetY": 0 },
+        "Poofing 9":  { "Directions": 1, "SpritesheetX": 360, "SpritesheetY": 0 }
       },
       "AnimationByDirections": {
         "OneNoFlip": {
           "Poofing (Extremely Slow)": [
-            {
-              "Frame": "Poofing 1",
-              "Duration": 20
-            },
-            {
-              "Frame": "Poofing 2",
-              "Duration": 18
-            },
-            {
-              "Frame": "Poofing 3",
-              "Duration": 16
-            },
-            {
-              "Frame": "Poofing 4",
-              "Duration": 14
-            },
-            {
-              "Frame": "Poofing 5",
-              "Duration": 13
-            },
-            {
-              "Frame": "Poofing 6",
-              "Duration": 12
-            },
-            {
-              "Frame": "Poofing 7",
-              "Duration": 11
-            },
-            {
-              "Frame": "Poofing 8",
-              "Duration": 10
-            },
-            {
-              "Frame": "Poofing 9",
-              "Duration": 10
-            },
-            {
-              "Frame": "Poofing 10",
-              "Duration": 10
-            },
-            {
-              "Command": "Stop"
-            }
+            { "Frame": "Poofing 1",  "Duration": 20 },
+            { "Frame": "Poofing 2",  "Duration": 18 },
+            { "Frame": "Poofing 3",  "Duration": 16 },
+            { "Frame": "Poofing 4",  "Duration": 14 },
+            { "Frame": "Poofing 5",  "Duration": 13 },
+            { "Frame": "Poofing 6",  "Duration": 12 },
+            { "Frame": "Poofing 7",  "Duration": 11 },
+            { "Frame": "Poofing 8",  "Duration": 10 },
+            { "Frame": "Poofing 9",  "Duration": 10 },
+            { "Frame": "Poofing 10", "Duration": 10 },
+            { "Command": "Stop" }
           ],
           "StillFrame (End of Poof)": [
-            {
-              "Frame": "Poofing 10",
-              "Duration": 2
-            },
-            {
-              "Command": "Stop"
-            }
+            { "Frame": "Poofing 10", "Duration": 2 },
+            { "Command": "Stop" }
           ]
         }
       }

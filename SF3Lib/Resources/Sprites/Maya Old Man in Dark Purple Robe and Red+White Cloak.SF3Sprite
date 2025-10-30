@@ -10,54 +10,22 @@
       "CollisionSize": 40,
       "Scale": 1.0,
       "FrameGroups": {
-        "Walking 1": {
-          "Directions": 4,
-          "SpritesheetX": 0,
-          "SpritesheetY": 0
-        },
-        "Walking 2": {
-          "Directions": 4,
-          "SpritesheetX": 40,
-          "SpritesheetY": 0
-        },
-        "Walking 3": {
-          "Directions": 4,
-          "SpritesheetX": 80,
-          "SpritesheetY": 0
-        }
+        "Walking 1": { "Directions": 4, "SpritesheetX": 0,  "SpritesheetY": 0 },
+        "Walking 2": { "Directions": 4, "SpritesheetX": 40, "SpritesheetY": 0 },
+        "Walking 3": { "Directions": 4, "SpritesheetX": 80, "SpritesheetY": 0 }
       },
       "AnimationByDirections": {
         "4": {
           "StillFrame": [
-            {
-              "Frame": "Walking 2",
-              "Duration": 10
-            },
-            {
-              "Command": "Stop"
-            }
+            { "Frame": "Walking 2", "Duration": 10 },
+            { "Command": "Stop" }
           ],
           "Walking": [
-            {
-              "Frame": "Walking 1",
-              "Duration": 7
-            },
-            {
-              "Frame": "Walking 2",
-              "Duration": 7
-            },
-            {
-              "Frame": "Walking 3",
-              "Duration": 7
-            },
-            {
-              "Frame": "Walking 2",
-              "Duration": 7
-            },
-            {
-              "Command": "GotoCommandOffset",
-              "Parameter": 0
-            }
+            { "Frame": "Walking 1", "Duration": 7 },
+            { "Frame": "Walking 2", "Duration": 7 },
+            { "Frame": "Walking 3", "Duration": 7 },
+            { "Frame": "Walking 2", "Duration": 7 },
+            { "Command": "GotoCommandOffset", "Parameter": 0 }
           ]
         }
       }

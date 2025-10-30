@@ -10,81 +10,30 @@
       "CollisionSize": 40,
       "Scale": 1.0,
       "FrameGroups": {
-        "Shimmering 1": {
-          "Directions": 4,
-          "SpritesheetX": 0,
-          "SpritesheetY": 0
-        },
-        "Shimmering 2": {
-          "Directions": 4,
-          "SpritesheetX": 40,
-          "SpritesheetY": 0
-        },
-        "Shimmering 3": {
-          "Directions": 4,
-          "SpritesheetX": 80,
-          "SpritesheetY": 0
-        },
-        "Shimmering 4": {
-          "Directions": 4,
-          "SpritesheetX": 120,
-          "SpritesheetY": 0
-        }
+        "Shimmering 1": { "Directions": 4, "SpritesheetX": 0,   "SpritesheetY": 0 },
+        "Shimmering 2": { "Directions": 4, "SpritesheetX": 40,  "SpritesheetY": 0 },
+        "Shimmering 3": { "Directions": 4, "SpritesheetX": 80,  "SpritesheetY": 0 },
+        "Shimmering 4": { "Directions": 4, "SpritesheetX": 120, "SpritesheetY": 0 }
       },
       "AnimationByDirections": {
         "4": {
           "Shimmering (Fast)": [
-            {
-              "Frame": "Shimmering 1",
-              "Duration": 12
-            },
-            {
-              "Frame": "Shimmering 2",
-              "Duration": 2
-            },
-            {
-              "Frame": "Shimmering 3",
-              "Duration": 1
-            },
-            {
-              "Frame": "Shimmering 4",
-              "Duration": 1
-            },
-            {
-              "Command": "GotoCommandOffset",
-              "Parameter": 0
-            }
+            { "Frame": "Shimmering 1", "Duration": 12 },
+            { "Frame": "Shimmering 2", "Duration": 2 },
+            { "Frame": "Shimmering 3", "Duration": 1 },
+            { "Frame": "Shimmering 4", "Duration": 1 },
+            { "Command": "GotoCommandOffset", "Parameter": 0 }
           ],
           "Shimmering (Very Slow)": [
-            {
-              "Frame": "Shimmering 1",
-              "Duration": 120
-            },
-            {
-              "Frame": "Shimmering 2",
-              "Duration": 2
-            },
-            {
-              "Frame": "Shimmering 3",
-              "Duration": 1
-            },
-            {
-              "Frame": "Shimmering 4",
-              "Duration": 1
-            },
-            {
-              "Command": "GotoCommandOffset",
-              "Parameter": 0
-            }
+            { "Frame": "Shimmering 1", "Duration": 120 },
+            { "Frame": "Shimmering 2", "Duration": 2 },
+            { "Frame": "Shimmering 3", "Duration": 1 },
+            { "Frame": "Shimmering 4", "Duration": 1 },
+            { "Command": "GotoCommandOffset", "Parameter": 0 }
           ],
           "StillFrame": [
-            {
-              "Frame": "Shimmering 1",
-              "Duration": 10
-            },
-            {
-              "Command": "Stop"
-            }
+            { "Frame": "Shimmering 1", "Duration": 10 },
+            { "Command": "Stop" }
           ]
         }
       }

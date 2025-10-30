@@ -10,22 +10,13 @@
       "CollisionSize": 48,
       "Scale": 1.0,
       "FrameGroups": {
-        "Sparkle 1": {
-          "Directions": 1,
-          "SpritesheetX": 0,
-          "SpritesheetY": 0
-        }
+        "Sparkle 1": { "Directions": 1, "SpritesheetX": 0, "SpritesheetY": 0 }
       },
       "AnimationByDirections": {
         "OneNoFlip": {
           "StillFrame (Sparkle)": [
-            {
-              "Frame": "Sparkle 1",
-              "Duration": 10
-            },
-            {
-              "Command": "Stop"
-            }
+            { "Frame": "Sparkle 1", "Duration": 10 },
+            { "Command": "Stop" }
           ]
         }
       }

@@ -16,61 +16,29 @@
           "SpritesheetY": 0,
           "Coding": "Off"
         },
-        "Black+White 1": {
-          "Directions": 1,
-          "SpritesheetX": 8,
-          "SpritesheetY": 0
-        }
+        "Black+White 1": { "Directions": 1, "SpritesheetX": 8, "SpritesheetY": 0 }
       },
       "AnimationByDirections": {
         "OneNoFlip": {
           "StillFrame (Alt)": [
-            {
-              "Frame": "Alt 1",
-              "Duration": 1
-            },
-            {
-              "Command": "Stop"
-            }
+            { "Frame": "Alt 1", "Duration": 1 },
+            { "Command": "Stop" }
           ],
           "StillFrame (Black, Repeat)": [
-            {
-              "Frame": "Alt 1",
-              "Duration": 100
-            },
-            {
-              "Command": "GotoCommandOffset",
-              "Parameter": 0
-            }
+            { "Frame": "Alt 1", "Duration": 100 },
+            { "Command": "GotoCommandOffset", "Parameter": 0 }
           ],
           "StillFrame (Black+White, Change to 0)": [
-            {
-              "Frame": "Black+White 1",
-              "Duration": 0
-            },
-            {
-              "Command": "GotoAnimation",
-              "Parameter": 0
-            }
+            { "Frame": "Black+White 1", "Duration": 0 },
+            { "Command": "GotoAnimation", "Parameter": 0 }
           ],
           "StillFrame (Black+White, Repeat, Duration 0)": [
-            {
-              "Frame": "Black+White 1",
-              "Duration": 0
-            },
-            {
-              "Command": "GotoCommandOffset",
-              "Parameter": 0
-            }
+            { "Frame": "Black+White 1", "Duration": 0 },
+            { "Command": "GotoCommandOffset", "Parameter": 0 }
           ],
           "StillFrame (Black+White)": [
-            {
-              "Frame": "Black+White 1",
-              "Duration": 0
-            },
-            {
-              "Command": "Stop"
-            }
+            { "Frame": "Black+White 1", "Duration": 0 },
+            { "Command": "Stop" }
           ]
         }
       }
@@ -82,22 +50,13 @@
       "CollisionSize": 16,
       "Scale": 1.0,
       "FrameGroups": {
-        "Black+White 1": {
-          "Directions": 1,
-          "SpritesheetX": 0,
-          "SpritesheetY": 0
-        }
+        "Black+White 1": { "Directions": 1, "SpritesheetX": 0, "SpritesheetY": 0 }
       },
       "AnimationByDirections": {
         "OneNoFlip": {
           "StillFrame (Black+White)": [
-            {
-              "Frame": "Black+White 1",
-              "Duration": 10
-            },
-            {
-              "Command": "Stop"
-            }
+            { "Frame": "Black+White 1", "Duration": 10 },
+            { "Command": "Stop" }
           ]
         }
       }
@@ -109,22 +68,13 @@
       "CollisionSize": 16,
       "Scale": 1.0,
       "FrameGroups": {
-        "Black+White 1": {
-          "Directions": 1,
-          "SpritesheetX": 0,
-          "SpritesheetY": 0
-        }
+        "Black+White 1": { "Directions": 1, "SpritesheetX": 0, "SpritesheetY": 0 }
       },
       "AnimationByDirections": {
         "OneNoFlip": {
           "StillFrame (Black+White)": [
-            {
-              "Frame": "Black+White 1",
-              "Duration": 10
-            },
-            {
-              "Command": "Stop"
-            }
+            { "Frame": "Black+White 1", "Duration": 10 },
+            { "Command": "Stop" }
           ]
         }
       }
@@ -142,31 +92,17 @@
           "SpritesheetY": 0,
           "Coding": "Off"
         },
-        "Black+White 1": {
-          "Directions": 1,
-          "SpritesheetX": 48,
-          "SpritesheetY": 0
-        }
+        "Black+White 1": { "Directions": 1, "SpritesheetX": 48, "SpritesheetY": 0 }
       },
       "AnimationByDirections": {
         "OneNoFlip": {
           "StillFrame (Black)": [
-            {
-              "Frame": "Black 1",
-              "Duration": 10
-            },
-            {
-              "Command": "Stop"
-            }
+            { "Frame": "Black 1", "Duration": 10 },
+            { "Command": "Stop" }
           ],
           "StillFrame (Black+White)": [
-            {
-              "Frame": "Black+White 1",
-              "Duration": 10
-            },
-            {
-              "Command": "Stop"
-            }
+            { "Frame": "Black+White 1", "Duration": 10 },
+            { "Command": "Stop" }
           ]
         }
       }
@@ -178,22 +114,13 @@
       "CollisionSize": 48,
       "Scale": 1.0,
       "FrameGroups": {
-        "Black+White 1": {
-          "Directions": 1,
-          "SpritesheetX": 0,
-          "SpritesheetY": 0
-        }
+        "Black+White 1": { "Directions": 1, "SpritesheetX": 0, "SpritesheetY": 0 }
       },
       "AnimationByDirections": {
         "OneNoFlip": {
           "StillFrame (Black+White)": [
-            {
-              "Frame": "Black+White 1",
-              "Duration": 10
-            },
-            {
-              "Command": "Stop"
-            }
+            { "Frame": "Black+White 1", "Duration": 10 },
+            { "Command": "Stop" }
           ]
         }
       }

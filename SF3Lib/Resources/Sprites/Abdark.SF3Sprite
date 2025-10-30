@@ -10,118 +10,39 @@
       "CollisionSize": 40,
       "Scale": 1.0,
       "FrameGroups": {
-        "Hovering 1": {
-          "Directions": 4,
-          "SpritesheetX": 0,
-          "SpritesheetY": 0
-        },
-        "Hovering 2": {
-          "Directions": 4,
-          "SpritesheetX": 40,
-          "SpritesheetY": 0
-        },
-        "Hovering 3": {
-          "Directions": 4,
-          "SpritesheetX": 80,
-          "SpritesheetY": 0
-        },
-        "Hovering 4": {
-          "Directions": 4,
-          "SpritesheetX": 120,
-          "SpritesheetY": 0
-        },
-        "Hovering 5": {
-          "Directions": 4,
-          "SpritesheetX": 160,
-          "SpritesheetY": 0
-        }
+        "Hovering 1": { "Directions": 4, "SpritesheetX": 0,   "SpritesheetY": 0 },
+        "Hovering 2": { "Directions": 4, "SpritesheetX": 40,  "SpritesheetY": 0 },
+        "Hovering 3": { "Directions": 4, "SpritesheetX": 80,  "SpritesheetY": 0 },
+        "Hovering 4": { "Directions": 4, "SpritesheetX": 120, "SpritesheetY": 0 },
+        "Hovering 5": { "Directions": 4, "SpritesheetX": 160, "SpritesheetY": 0 }
       },
       "AnimationByDirections": {
         "4": {
           "Hovering (Fast)": [
-            {
-              "Frame": "Hovering 1",
-              "Duration": 5
-            },
-            {
-              "Frame": "Hovering 2",
-              "Duration": 2
-            },
-            {
-              "Frame": "Hovering 3",
-              "Duration": 2
-            },
-            {
-              "Frame": "Hovering 4",
-              "Duration": 2
-            },
-            {
-              "Frame": "Hovering 5",
-              "Duration": 3
-            },
-            {
-              "Frame": "Hovering 4",
-              "Duration": 3
-            },
-            {
-              "Frame": "Hovering 3",
-              "Duration": 3
-            },
-            {
-              "Frame": "Hovering 2",
-              "Duration": 3
-            },
-            {
-              "Command": "GotoCommandOffset",
-              "Parameter": 0
-            }
+            { "Frame": "Hovering 1", "Duration": 5 },
+            { "Frame": "Hovering 2", "Duration": 2 },
+            { "Frame": "Hovering 3", "Duration": 2 },
+            { "Frame": "Hovering 4", "Duration": 2 },
+            { "Frame": "Hovering 5", "Duration": 3 },
+            { "Frame": "Hovering 4", "Duration": 3 },
+            { "Frame": "Hovering 3", "Duration": 3 },
+            { "Frame": "Hovering 2", "Duration": 3 },
+            { "Command": "GotoCommandOffset", "Parameter": 0 }
           ],
           "Hovering (Slow)": [
-            {
-              "Frame": "Hovering 1",
-              "Duration": 5
-            },
-            {
-              "Frame": "Hovering 2",
-              "Duration": 3
-            },
-            {
-              "Frame": "Hovering 3",
-              "Duration": 3
-            },
-            {
-              "Frame": "Hovering 4",
-              "Duration": 3
-            },
-            {
-              "Frame": "Hovering 5",
-              "Duration": 5
-            },
-            {
-              "Frame": "Hovering 4",
-              "Duration": 5
-            },
-            {
-              "Frame": "Hovering 3",
-              "Duration": 5
-            },
-            {
-              "Frame": "Hovering 2",
-              "Duration": 5
-            },
-            {
-              "Command": "GotoCommandOffset",
-              "Parameter": 0
-            }
+            { "Frame": "Hovering 1", "Duration": 5 },
+            { "Frame": "Hovering 2", "Duration": 3 },
+            { "Frame": "Hovering 3", "Duration": 3 },
+            { "Frame": "Hovering 4", "Duration": 3 },
+            { "Frame": "Hovering 5", "Duration": 5 },
+            { "Frame": "Hovering 4", "Duration": 5 },
+            { "Frame": "Hovering 3", "Duration": 5 },
+            { "Frame": "Hovering 2", "Duration": 5 },
+            { "Command": "GotoCommandOffset", "Parameter": 0 }
           ],
           "StillFrame": [
-            {
-              "Frame": "Hovering 1",
-              "Duration": 10
-            },
-            {
-              "Command": "Stop"
-            }
+            { "Frame": "Hovering 1", "Duration": 10 },
+            { "Command": "Stop" }
           ]
         }
       }
@@ -133,32 +54,17 @@
       "CollisionSize": 40,
       "Scale": 1.0,
       "FrameGroups": {
-        "OnGround 1": {
-          "Directions": 4,
-          "SpritesheetX": 0,
-          "SpritesheetY": 0
-        }
+        "OnGround 1": { "Directions": 4, "SpritesheetX": 0, "SpritesheetY": 0 }
       },
       "AnimationByDirections": {
         "4": {
           "StillFrame (OnGround, Repeat)": [
-            {
-              "Frame": "OnGround 1",
-              "Duration": 5
-            },
-            {
-              "Command": "GotoCommandOffset",
-              "Parameter": 0
-            }
+            { "Frame": "OnGround 1", "Duration": 5 },
+            { "Command": "GotoCommandOffset", "Parameter": 0 }
           ],
           "StillFrame (OnGround)": [
-            {
-              "Frame": "OnGround 1",
-              "Duration": 10
-            },
-            {
-              "Command": "Stop"
-            }
+            { "Frame": "OnGround 1", "Duration": 10 },
+            { "Command": "Stop" }
           ]
         }
       }

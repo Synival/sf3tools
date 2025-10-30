@@ -10,27 +10,32 @@
       "CollisionSize": 40,
       "Scale": 1.0,
       "FrameGroups": {
-        "GettingUpFromKneeling 1": { "ENE": { "SpritesheetX":  0, "SpritesheetY": 120 } },
-        "GettingUpFromKneeling 2": { "ENE": { "SpritesheetX": 40, "SpritesheetY": 120 } },
-
-        "GettingUpFromPrayer 1": { "Directions": 4, "SpritesheetX":  80, "SpritesheetY": 40 },
+        "GettingUpFromKneeling 1": {
+          "ENE": {
+            "SpritesheetX": 0,
+            "SpritesheetY": 120
+          }
+        },
+        "GettingUpFromKneeling 2": {
+          "ENE": {
+            "SpritesheetX": 40,
+            "SpritesheetY": 120
+          }
+        },
+        "GettingUpFromPrayer 1": { "Directions": 4, "SpritesheetX": 80,  "SpritesheetY": 40 },
         "GettingUpFromPrayer 2": { "Directions": 4, "SpritesheetX": 120, "SpritesheetY": 40 },
         "GettingUpFromPrayer 3": { "Directions": 4, "SpritesheetX": 160, "SpritesheetY": 40 },
-
-        "Idle 1": { "Directions": 6, "SpritesheetX": 200, "SpritesheetY": 0 },
-        "Idle 2": { "Directions": 6, "SpritesheetX": 240, "SpritesheetY": 0 },
-        "Idle 3": { "Directions": 6, "SpritesheetX": 280, "SpritesheetY": 0 },
-
-        "Walking 1": { "Directions": 6, "SpritesheetX": 320, "SpritesheetY": 0 },
-        "Walking 2": { "Directions": 6, "SpritesheetX": 360, "SpritesheetY": 0 },
-        "Walking 3": { "Directions": 6, "SpritesheetX": 400, "SpritesheetY": 0 },
-        "Walking 4": { "Directions": 6, "SpritesheetX": 440, "SpritesheetY": 0 },
-
-        "Nodding 1": { "Directions": 6, "SpritesheetX": 480, "SpritesheetY": 0 },
-        "Nodding 2": { "Directions": 6, "SpritesheetX": 520, "SpritesheetY": 0 },
-
-        "ShakingHead 1": { "Directions": 6, "SpritesheetX": 560, "SpritesheetY": 0 },
-        "ShakingHead 2": { "Directions": 6, "SpritesheetX": 600, "SpritesheetY": 0 }
+        "Idle 1":                { "Directions": 6, "SpritesheetX": 200, "SpritesheetY": 0 },
+        "Idle 2":                { "Directions": 6, "SpritesheetX": 240, "SpritesheetY": 0 },
+        "Idle 3":                { "Directions": 6, "SpritesheetX": 280, "SpritesheetY": 0 },
+        "Walking 1":             { "Directions": 6, "SpritesheetX": 320, "SpritesheetY": 0 },
+        "Walking 2":             { "Directions": 6, "SpritesheetX": 360, "SpritesheetY": 0 },
+        "Walking 3":             { "Directions": 6, "SpritesheetX": 400, "SpritesheetY": 0 },
+        "Walking 4":             { "Directions": 6, "SpritesheetX": 440, "SpritesheetY": 0 },
+        "Nodding 1":             { "Directions": 6, "SpritesheetX": 480, "SpritesheetY": 0 },
+        "Nodding 2":             { "Directions": 6, "SpritesheetX": 520, "SpritesheetY": 0 },
+        "ShakingHead 1":         { "Directions": 6, "SpritesheetX": 560, "SpritesheetY": 0 },
+        "ShakingHead 2":         { "Directions": 6, "SpritesheetX": 600, "SpritesheetY": 0 }
       },
       "AnimationByDirections": {
         "OneNoFlip": {

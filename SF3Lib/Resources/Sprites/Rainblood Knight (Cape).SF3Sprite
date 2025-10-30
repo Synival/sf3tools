@@ -10,168 +10,52 @@
       "CollisionSize": 40,
       "Scale": 1.0,
       "FrameGroups": {
-        "Idle 1": {
-          "Directions": 4,
-          "SpritesheetX": 0,
-          "SpritesheetY": 0
-        },
-        "Idle 2": {
-          "Directions": 4,
-          "SpritesheetX": 40,
-          "SpritesheetY": 0
-        },
-        "Idle 3": {
-          "Directions": 4,
-          "SpritesheetX": 80,
-          "SpritesheetY": 0
-        }
+        "Idle 1": { "Directions": 4, "SpritesheetX": 0,  "SpritesheetY": 0 },
+        "Idle 2": { "Directions": 4, "SpritesheetX": 40, "SpritesheetY": 0 },
+        "Idle 3": { "Directions": 4, "SpritesheetX": 80, "SpritesheetY": 0 }
       },
       "AnimationByDirections": {
         "OneNoFlip": {
           "Idle": [
-            {
-              "Frame": {
-                "First": {
-                  "Frame": "Idle 1",
-                  "Direction": "SSE"
-                }
-              },
-              "Duration": 4
-            },
-            {
-              "Frame": {
-                "First": {
-                  "Frame": "Idle 2",
-                  "Direction": "SSE"
-                }
-              },
-              "Duration": 4
-            },
-            {
-              "Frame": {
-                "First": {
-                  "Frame": "Idle 3",
-                  "Direction": "SSE"
-                }
-              },
-              "Duration": 4
-            },
-            {
-              "Frame": {
-                "First": {
-                  "Frame": "Idle 2",
-                  "Direction": "SSE"
-                }
-              },
-              "Duration": 4
-            },
-            {
-              "Command": "GotoCommandOffset",
-              "Parameter": 0
-            }
+            { "Frame": { "First": { "Frame": "Idle 1", "Direction": "SSE" } }, "Duration": 4 },
+            { "Frame": { "First": { "Frame": "Idle 2", "Direction": "SSE" } }, "Duration": 4 },
+            { "Frame": { "First": { "Frame": "Idle 3", "Direction": "SSE" } }, "Duration": 4 },
+            { "Frame": { "First": { "Frame": "Idle 2", "Direction": "SSE" } }, "Duration": 4 },
+            { "Command": "GotoCommandOffset", "Parameter": 0 }
           ],
           "StillFrame": [
-            {
-              "Frame": {
-                "First": {
-                  "Frame": "Idle 1",
-                  "Direction": "SSE"
-                }
-              },
-              "Duration": 10
-            },
-            {
-              "Command": "Stop"
-            }
+            { "Frame": { "First": { "Frame": "Idle 1", "Direction": "SSE" } }, "Duration": 10 },
+            { "Command": "Stop" }
           ]
         },
         "4": {
           "Idle": [
-            {
-              "Frame": "Idle 1",
-              "Duration": 4
-            },
-            {
-              "Frame": "Idle 2",
-              "Duration": 4
-            },
-            {
-              "Frame": "Idle 3",
-              "Duration": 4
-            },
-            {
-              "Frame": "Idle 2",
-              "Duration": 4
-            },
-            {
-              "Command": "GotoCommandOffset",
-              "Parameter": 0
-            }
+            { "Frame": "Idle 1", "Duration": 4 },
+            { "Frame": "Idle 2", "Duration": 4 },
+            { "Frame": "Idle 3", "Duration": 4 },
+            { "Frame": "Idle 2", "Duration": 4 },
+            { "Command": "GotoCommandOffset", "Parameter": 0 }
           ],
           "Idle (Pause at Top)": [
-            {
-              "Frame": "Idle 1",
-              "Duration": 4
-            },
-            {
-              "Frame": "Idle 2",
-              "Duration": 4
-            },
-            {
-              "Frame": "Idle 3",
-              "Duration": 4
-            },
-            {
-              "Frame": "Idle 2",
-              "Duration": 4
-            },
-            {
-              "Frame": "Idle 1",
-              "Duration": 4
-            },
-            {
-              "Frame": "Idle 1",
-              "Duration": 2
-            },
-            {
-              "Frame": "Idle 1",
-              "Duration": 4
-            },
-            {
-              "Frame": "Idle 1",
-              "Duration": 4
-            },
-            {
-              "Frame": "Idle 1",
-              "Duration": 4
-            },
-            {
-              "Command": "GotoCommandOffset",
-              "Parameter": 0
-            }
+            { "Frame": "Idle 1", "Duration": 4 },
+            { "Frame": "Idle 2", "Duration": 4 },
+            { "Frame": "Idle 3", "Duration": 4 },
+            { "Frame": "Idle 2", "Duration": 4 },
+            { "Frame": "Idle 1", "Duration": 4 },
+            { "Frame": "Idle 1", "Duration": 2 },
+            { "Frame": "Idle 1", "Duration": 4 },
+            { "Frame": "Idle 1", "Duration": 4 },
+            { "Frame": "Idle 1", "Duration": 4 },
+            { "Command": "GotoCommandOffset", "Parameter": 0 }
           ],
           "Idle (Reduced)": [
-            {
-              "Frame": "Idle 1",
-              "Duration": 8
-            },
-            {
-              "Frame": "Idle 3",
-              "Duration": 8
-            },
-            {
-              "Command": "GotoCommandOffset",
-              "Parameter": 0
-            }
+            { "Frame": "Idle 1", "Duration": 8 },
+            { "Frame": "Idle 3", "Duration": 8 },
+            { "Command": "GotoCommandOffset", "Parameter": 0 }
           ],
           "StillFrame": [
-            {
-              "Frame": "Idle 1",
-              "Duration": 10
-            },
-            {
-              "Command": "Stop"
-            }
+            { "Frame": "Idle 1", "Duration": 10 },
+            { "Command": "Stop" }
           ]
         }
       }
@@ -183,40 +67,19 @@
       "CollisionSize": 40,
       "Scale": 0.91999817,
       "FrameGroups": {
-        "Idle (KnockedOut) 1": {
-          "Directions": 1,
-          "SpritesheetX": 0,
-          "SpritesheetY": 0
-        }
+        "Idle (KnockedOut) 1": { "Directions": 1, "SpritesheetX": 0, "SpritesheetY": 0 }
       },
       "AnimationByDirections": {
         "OneFlippable": {
           "StillFrame (KnockedOut, Repeat)": [
-            {
-              "Command": "SetDirectionCount",
-              "Parameter": 17
-            },
-            {
-              "Frame": "Idle (KnockedOut) 1",
-              "Duration": 4
-            },
-            {
-              "Command": "GotoCommandOffset",
-              "Parameter": 0
-            }
+            { "Command": "SetDirectionCount", "Parameter": 17 },
+            { "Frame": "Idle (KnockedOut) 1", "Duration": 4 },
+            { "Command": "GotoCommandOffset", "Parameter": 0 }
           ],
           "StillFrame (KnockedOut)": [
-            {
-              "Command": "SetDirectionCount",
-              "Parameter": 17
-            },
-            {
-              "Frame": "Idle (KnockedOut) 1",
-              "Duration": 10
-            },
-            {
-              "Command": "Stop"
-            }
+            { "Command": "SetDirectionCount", "Parameter": 17 },
+            { "Frame": "Idle (KnockedOut) 1", "Duration": 10 },
+            { "Command": "Stop" }
           ]
         }
       }

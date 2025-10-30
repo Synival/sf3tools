@@ -10,141 +10,47 @@
       "CollisionSize": 40,
       "Scale": 1.0,
       "FrameGroups": {
-        "Nodding 1": {
-          "Directions": 4,
-          "SpritesheetX": 0,
-          "SpritesheetY": 0
-        },
-        "Nodding 2": {
-          "Directions": 4,
-          "SpritesheetX": 40,
-          "SpritesheetY": 0
-        },
-        "Nodding 3": {
-          "Directions": 4,
-          "SpritesheetX": 80,
-          "SpritesheetY": 0
-        },
-        "PresentingFlowers 1": {
-          "Directions": 4,
-          "SpritesheetX": 120,
-          "SpritesheetY": 0
-        },
-        "Walking (Flowers Behind Back) 1": {
-          "Directions": 4,
-          "SpritesheetX": 160,
-          "SpritesheetY": 0
-        },
-        "Walking (Flowers Behind Back) 2": {
-          "Directions": 4,
-          "SpritesheetX": 200,
-          "SpritesheetY": 0
-        },
-        "Walking (Flowers Behind Back) 3": {
-          "Directions": 4,
-          "SpritesheetX": 240,
-          "SpritesheetY": 0
-        },
-        "Walking (Flowers Behind Back) 4": {
-          "Directions": 4,
-          "SpritesheetX": 280,
-          "SpritesheetY": 0
-        },
-        "Walking (Flowers Behind Back) 5": {
-          "Directions": 4,
-          "SpritesheetX": 320,
-          "SpritesheetY": 0
-        }
+        "Nodding 1":                       { "Directions": 4, "SpritesheetX": 0,   "SpritesheetY": 0 },
+        "Nodding 2":                       { "Directions": 4, "SpritesheetX": 40,  "SpritesheetY": 0 },
+        "Nodding 3":                       { "Directions": 4, "SpritesheetX": 80,  "SpritesheetY": 0 },
+        "PresentingFlowers 1":             { "Directions": 4, "SpritesheetX": 120, "SpritesheetY": 0 },
+        "Walking (Flowers Behind Back) 1": { "Directions": 4, "SpritesheetX": 160, "SpritesheetY": 0 },
+        "Walking (Flowers Behind Back) 2": { "Directions": 4, "SpritesheetX": 200, "SpritesheetY": 0 },
+        "Walking (Flowers Behind Back) 3": { "Directions": 4, "SpritesheetX": 240, "SpritesheetY": 0 },
+        "Walking (Flowers Behind Back) 4": { "Directions": 4, "SpritesheetX": 280, "SpritesheetY": 0 },
+        "Walking (Flowers Behind Back) 5": { "Directions": 4, "SpritesheetX": 320, "SpritesheetY": 0 }
       },
       "AnimationByDirections": {
         "4": {
           "Nodding": [
-            {
-              "Frame": "Nodding 1",
-              "Duration": 2
-            },
-            {
-              "Frame": "Nodding 2",
-              "Duration": 4
-            },
-            {
-              "Frame": "Nodding 3",
-              "Duration": 4
-            },
-            {
-              "Frame": "Nodding 2",
-              "Duration": 4
-            },
-            {
-              "Command": "GotoAnimation",
-              "Parameter": 8
-            }
+            { "Frame": "Nodding 1", "Duration": 2 },
+            { "Frame": "Nodding 2", "Duration": 4 },
+            { "Frame": "Nodding 3", "Duration": 4 },
+            { "Frame": "Nodding 2", "Duration": 4 },
+            { "Command": "GotoAnimation", "Parameter": 8 }
           ],
           "PresentingFlowers": [
-            {
-              "Frame": "Walking (Flowers Behind Back) 2",
-              "Duration": 15
-            },
-            {
-              "Frame": "PresentingFlowers 1",
-              "Duration": 6
-            },
-            {
-              "Frame": "Nodding 1",
-              "Duration": 15
-            },
-            {
-              "Command": "GotoAnimation",
-              "Parameter": 8
-            }
+            { "Frame": "Walking (Flowers Behind Back) 2", "Duration": 15 },
+            { "Frame": "PresentingFlowers 1",             "Duration": 6 },
+            { "Frame": "Nodding 1",                       "Duration": 15 },
+            { "Command": "GotoAnimation", "Parameter": 8 }
           ],
           "StillFrame (Flowers Behind Back)": [
-            {
-              "Frame": "Walking (Flowers Behind Back) 2",
-              "Duration": 10
-            },
-            {
-              "Command": "Stop"
-            }
+            { "Frame": "Walking (Flowers Behind Back) 2", "Duration": 10 },
+            { "Command": "Stop" }
           ],
           "StillFrame (Presenting Flowers)": [
-            {
-              "Frame": "Nodding 1",
-              "Duration": 10
-            },
-            {
-              "Command": "Stop"
-            }
+            { "Frame": "Nodding 1", "Duration": 10 },
+            { "Command": "Stop" }
           ],
           "Walking (Flowers Behind Back)": [
-            {
-              "Frame": "Walking (Flowers Behind Back) 1",
-              "Duration": 4
-            },
-            {
-              "Frame": "Walking (Flowers Behind Back) 2",
-              "Duration": 4
-            },
-            {
-              "Frame": "Walking (Flowers Behind Back) 3",
-              "Duration": 4
-            },
-            {
-              "Frame": "Walking (Flowers Behind Back) 4",
-              "Duration": 4
-            },
-            {
-              "Frame": "Walking (Flowers Behind Back) 2",
-              "Duration": 4
-            },
-            {
-              "Frame": "Walking (Flowers Behind Back) 5",
-              "Duration": 4
-            },
-            {
-              "Command": "GotoCommandOffset",
-              "Parameter": 0
-            }
+            { "Frame": "Walking (Flowers Behind Back) 1", "Duration": 4 },
+            { "Frame": "Walking (Flowers Behind Back) 2", "Duration": 4 },
+            { "Frame": "Walking (Flowers Behind Back) 3", "Duration": 4 },
+            { "Frame": "Walking (Flowers Behind Back) 4", "Duration": 4 },
+            { "Frame": "Walking (Flowers Behind Back) 2", "Duration": 4 },
+            { "Frame": "Walking (Flowers Behind Back) 5", "Duration": 4 },
+            { "Command": "GotoCommandOffset", "Parameter": 0 }
           ]
         }
       }

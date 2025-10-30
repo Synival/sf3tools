@@ -38,45 +38,19 @@
       "AnimationByDirections": {
         "4": {
           "OccasionallyTusslingHair": [
-            {
-              "Frame": "OccasionallyTusslingHair 1",
-              "Duration": 120
-            },
-            {
-              "Frame": "OccasionallyTusslingHair 2",
-              "Duration": 5
-            },
-            {
-              "Frame": "OccasionallyTusslingHair 3",
-              "Duration": 5
-            },
-            {
-              "Frame": "OccasionallyTusslingHair 4",
-              "Duration": 5
-            },
-            {
-              "Command": "GotoCommandOffset",
-              "Parameter": 0
-            }
+            { "Frame": "OccasionallyTusslingHair 1", "Duration": 120 },
+            { "Frame": "OccasionallyTusslingHair 2", "Duration": 5 },
+            { "Frame": "OccasionallyTusslingHair 3", "Duration": 5 },
+            { "Frame": "OccasionallyTusslingHair 4", "Duration": 5 },
+            { "Command": "GotoCommandOffset", "Parameter": 0 }
           ],
           "StillFrame": [
-            {
-              "Frame": "OccasionallyTusslingHair 1",
-              "Duration": 10
-            },
-            {
-              "Command": "Stop"
-            }
+            { "Frame": "OccasionallyTusslingHair 1", "Duration": 10 },
+            { "Command": "Stop" }
           ],
           "StillFrame (Repeat)": [
-            {
-              "Frame": "OccasionallyTusslingHair 1",
-              "Duration": 120
-            },
-            {
-              "Command": "GotoCommandOffset",
-              "Parameter": 0
-            }
+            { "Frame": "OccasionallyTusslingHair 1", "Duration": 120 },
+            { "Command": "GotoCommandOffset", "Parameter": 0 }
           ]
         }
       }

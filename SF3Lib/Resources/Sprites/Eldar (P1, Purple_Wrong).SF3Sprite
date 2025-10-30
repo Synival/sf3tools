@@ -10,151 +10,52 @@
       "CollisionSize": 40,
       "Scale": 1.0,
       "FrameGroups": {
-        "Idle 1": {
-          "Directions": 6,
-          "SpritesheetX": 0,
-          "SpritesheetY": 0
-        },
-        "Idle 2": {
-          "Directions": 6,
-          "SpritesheetX": 48,
-          "SpritesheetY": 0
-        },
-        "Idle 3": {
-          "Directions": 6,
-          "SpritesheetX": 96,
-          "SpritesheetY": 0
-        },
-        "Idle 4": {
-          "Directions": 6,
-          "SpritesheetX": 144,
-          "SpritesheetY": 0
-        },
-        "Idle 5": {
-          "Directions": 6,
-          "SpritesheetX": 192,
-          "SpritesheetY": 0
-        }
+        "Idle 1": { "Directions": 6, "SpritesheetX": 0,   "SpritesheetY": 0 },
+        "Idle 2": { "Directions": 6, "SpritesheetX": 48,  "SpritesheetY": 0 },
+        "Idle 3": { "Directions": 6, "SpritesheetX": 96,  "SpritesheetY": 0 },
+        "Idle 4": { "Directions": 6, "SpritesheetX": 144, "SpritesheetY": 0 },
+        "Idle 5": { "Directions": 6, "SpritesheetX": 192, "SpritesheetY": 0 }
       },
       "AnimationByDirections": {
         "4": {
           "Flying (3 Frames)": [
-            {
-              "Frame": "Idle 1",
-              "Duration": 8
-            },
-            {
-              "Frame": "Idle 3",
-              "Duration": 7
-            },
-            {
-              "Frame": "Idle 5",
-              "Duration": 8
-            },
-            {
-              "Frame": "Idle 3",
-              "Duration": 6
-            },
-            {
-              "Command": "GotoCommandOffset",
-              "Parameter": 0
-            }
+            { "Frame": "Idle 1", "Duration": 8 },
+            { "Frame": "Idle 3", "Duration": 7 },
+            { "Frame": "Idle 5", "Duration": 8 },
+            { "Frame": "Idle 3", "Duration": 6 },
+            { "Command": "GotoCommandOffset", "Parameter": 0 }
           ],
           "StillFrame": [
-            {
-              "Frame": "Idle 3",
-              "Duration": 10
-            },
-            {
-              "Command": "Stop"
-            }
+            { "Frame": "Idle 3", "Duration": 10 },
+            { "Command": "Stop" }
           ]
         },
         "6": {
           "Flying (Faster)": [
-            {
-              "Frame": "Idle 1",
-              "Duration": 4
-            },
-            {
-              "Frame": "Idle 2",
-              "Duration": 3
-            },
-            {
-              "Frame": "Idle 3",
-              "Duration": 3
-            },
-            {
-              "Frame": "Idle 4",
-              "Duration": 3
-            },
-            {
-              "Frame": "Idle 5",
-              "Duration": 4
-            },
-            {
-              "Frame": "Idle 4",
-              "Duration": 3
-            },
-            {
-              "Frame": "Idle 3",
-              "Duration": 2
-            },
-            {
-              "Frame": "Idle 2",
-              "Duration": 1
-            },
-            {
-              "Command": "GotoCommandOffset",
-              "Parameter": 0
-            }
+            { "Frame": "Idle 1", "Duration": 4 },
+            { "Frame": "Idle 2", "Duration": 3 },
+            { "Frame": "Idle 3", "Duration": 3 },
+            { "Frame": "Idle 4", "Duration": 3 },
+            { "Frame": "Idle 5", "Duration": 4 },
+            { "Frame": "Idle 4", "Duration": 3 },
+            { "Frame": "Idle 3", "Duration": 2 },
+            { "Frame": "Idle 2", "Duration": 1 },
+            { "Command": "GotoCommandOffset", "Parameter": 0 }
           ],
           "Idle (Slower)": [
-            {
-              "Frame": "Idle 1",
-              "Duration": 5
-            },
-            {
-              "Frame": "Idle 2",
-              "Duration": 4
-            },
-            {
-              "Frame": "Idle 3",
-              "Duration": 4
-            },
-            {
-              "Frame": "Idle 4",
-              "Duration": 4
-            },
-            {
-              "Frame": "Idle 5",
-              "Duration": 5
-            },
-            {
-              "Frame": "Idle 4",
-              "Duration": 4
-            },
-            {
-              "Frame": "Idle 3",
-              "Duration": 3
-            },
-            {
-              "Frame": "Idle 2",
-              "Duration": 2
-            },
-            {
-              "Command": "GotoCommandOffset",
-              "Parameter": 0
-            }
+            { "Frame": "Idle 1", "Duration": 5 },
+            { "Frame": "Idle 2", "Duration": 4 },
+            { "Frame": "Idle 3", "Duration": 4 },
+            { "Frame": "Idle 4", "Duration": 4 },
+            { "Frame": "Idle 5", "Duration": 5 },
+            { "Frame": "Idle 4", "Duration": 4 },
+            { "Frame": "Idle 3", "Duration": 3 },
+            { "Frame": "Idle 2", "Duration": 2 },
+            { "Command": "GotoCommandOffset", "Parameter": 0 }
           ],
           "StillFrame": [
-            {
-              "Frame": "Idle 3",
-              "Duration": 10
-            },
-            {
-              "Command": "Stop"
-            }
+            { "Frame": "Idle 3", "Duration": 10 },
+            { "Command": "Stop" }
           ]
         }
       }

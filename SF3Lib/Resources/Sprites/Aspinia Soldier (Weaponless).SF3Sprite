@@ -10,88 +10,35 @@
       "CollisionSize": 40,
       "Scale": 1.0499878,
       "FrameGroups": {
-        "OnGround 1": {
-          "Directions": 4,
-          "SpritesheetX": 0,
-          "SpritesheetY": 0
-        },
-        "Twitching (OnGround) 1": {
-          "Directions": 4,
-          "SpritesheetX": 48,
-          "SpritesheetY": 0
-        },
-        "Twitching (OnGround) 2": {
-          "Directions": 4,
-          "SpritesheetX": 96,
-          "SpritesheetY": 0
-        },
-        "Twitching (OnGround) 3": {
-          "Directions": 4,
-          "SpritesheetX": 144,
-          "SpritesheetY": 0
-        }
+        "OnGround 1":             { "Directions": 4, "SpritesheetX": 0,   "SpritesheetY": 0 },
+        "Twitching (OnGround) 1": { "Directions": 4, "SpritesheetX": 48,  "SpritesheetY": 0 },
+        "Twitching (OnGround) 2": { "Directions": 4, "SpritesheetX": 96,  "SpritesheetY": 0 },
+        "Twitching (OnGround) 3": { "Directions": 4, "SpritesheetX": 144, "SpritesheetY": 0 }
       },
       "AnimationByDirections": {
         "4": {
           "StillFrame (OnGround, Repeat 1)": [
-            {
-              "Frame": "OnGround 1",
-              "Duration": 4
-            },
-            {
-              "Command": "GotoCommandOffset",
-              "Parameter": 0
-            }
+            { "Frame": "OnGround 1", "Duration": 4 },
+            { "Command": "GotoCommandOffset", "Parameter": 0 }
           ],
           "StillFrame (OnGround, Repeat 2)": [
-            {
-              "Frame": "OnGround 1",
-              "Duration": 5
-            },
-            {
-              "Command": "GotoCommandOffset",
-              "Parameter": 0
-            }
+            { "Frame": "OnGround 1", "Duration": 5 },
+            { "Command": "GotoCommandOffset", "Parameter": 0 }
           ],
           "StillFrame (OnGround)": [
-            {
-              "Frame": "OnGround 1",
-              "Duration": 10
-            },
-            {
-              "Command": "Stop"
-            }
+            { "Frame": "OnGround 1", "Duration": 10 },
+            { "Command": "Stop" }
           ],
           "StillFrame (Twitching on Ground)": [
-            {
-              "Frame": "Twitching (OnGround) 1",
-              "Duration": 10
-            },
-            {
-              "Command": "Stop"
-            }
+            { "Frame": "Twitching (OnGround) 1", "Duration": 10 },
+            { "Command": "Stop" }
           ],
           "Twitching (OnGround)": [
-            {
-              "Frame": "Twitching (OnGround) 1",
-              "Duration": 15
-            },
-            {
-              "Frame": "Twitching (OnGround) 2",
-              "Duration": 3
-            },
-            {
-              "Frame": "Twitching (OnGround) 3",
-              "Duration": 3
-            },
-            {
-              "Frame": "Twitching (OnGround) 2",
-              "Duration": 3
-            },
-            {
-              "Command": "GotoCommandOffset",
-              "Parameter": 0
-            }
+            { "Frame": "Twitching (OnGround) 1", "Duration": 15 },
+            { "Frame": "Twitching (OnGround) 2", "Duration": 3 },
+            { "Frame": "Twitching (OnGround) 3", "Duration": 3 },
+            { "Frame": "Twitching (OnGround) 2", "Duration": 3 },
+            { "Command": "GotoCommandOffset", "Parameter": 0 }
           ]
         }
       }

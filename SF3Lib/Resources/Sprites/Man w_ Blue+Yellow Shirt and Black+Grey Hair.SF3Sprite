@@ -10,21 +10,9 @@
       "CollisionSize": 40,
       "Scale": 1.0,
       "FrameGroups": {
-        "Idle 1": {
-          "Directions": 4,
-          "SpritesheetX": 0,
-          "SpritesheetY": 0
-        },
-        "Idle 2": {
-          "Directions": 4,
-          "SpritesheetX": 40,
-          "SpritesheetY": 0
-        },
-        "Idle 3": {
-          "Directions": 4,
-          "SpritesheetX": 80,
-          "SpritesheetY": 0
-        },
+        "Idle 1":    { "Directions": 4, "SpritesheetX": 0,   "SpritesheetY": 0 },
+        "Idle 2":    { "Directions": 4, "SpritesheetX": 40,  "SpritesheetY": 0 },
+        "Idle 3":    { "Directions": 4, "SpritesheetX": 80,  "SpritesheetY": 0 },
         "PullingOutTelescope 1": {
           "SSE": {
             "SpritesheetX": 120,
@@ -55,184 +43,53 @@
             "SpritesheetY": 0
           }
         },
-        "Walking 1": {
-          "Directions": 4,
-          "SpritesheetX": 320,
-          "SpritesheetY": 0
-        },
-        "Walking 2": {
-          "Directions": 4,
-          "SpritesheetX": 360,
-          "SpritesheetY": 0
-        },
-        "Walking 3": {
-          "Directions": 4,
-          "SpritesheetX": 400,
-          "SpritesheetY": 0
-        },
-        "Walking 4": {
-          "Directions": 4,
-          "SpritesheetX": 440,
-          "SpritesheetY": 0
-        }
+        "Walking 1": { "Directions": 4, "SpritesheetX": 320, "SpritesheetY": 0 },
+        "Walking 2": { "Directions": 4, "SpritesheetX": 360, "SpritesheetY": 0 },
+        "Walking 3": { "Directions": 4, "SpritesheetX": 400, "SpritesheetY": 0 },
+        "Walking 4": { "Directions": 4, "SpritesheetX": 440, "SpritesheetY": 0 }
       },
       "AnimationByDirections": {
         "4": {
           "Idle": [
-            {
-              "Frame": "Idle 1",
-              "Duration": 5
-            },
-            {
-              "Frame": "Idle 2",
-              "Duration": 5
-            },
-            {
-              "Frame": "Idle 3",
-              "Duration": 5
-            },
-            {
-              "Frame": "Idle 2",
-              "Duration": 5
-            },
-            {
-              "Command": "GotoCommandOffset",
-              "Parameter": 0
-            }
+            { "Frame": "Idle 1", "Duration": 5 },
+            { "Frame": "Idle 2", "Duration": 5 },
+            { "Frame": "Idle 3", "Duration": 5 },
+            { "Frame": "Idle 2", "Duration": 5 },
+            { "Command": "GotoCommandOffset", "Parameter": 0 }
           ],
           "StillFrame": [
-            {
-              "Frame": "Idle 1",
-              "Duration": 10
-            },
-            {
-              "Command": "Stop"
-            }
+            { "Frame": "Idle 1", "Duration": 10 },
+            { "Command": "Stop" }
           ],
           "Walking (Faster)": [
-            {
-              "Frame": "Walking 1",
-              "Duration": 4
-            },
-            {
-              "Frame": "Idle 1",
-              "Duration": 4
-            },
-            {
-              "Frame": "Walking 2",
-              "Duration": 4
-            },
-            {
-              "Frame": "Walking 3",
-              "Duration": 4
-            },
-            {
-              "Frame": "Idle 1",
-              "Duration": 4
-            },
-            {
-              "Frame": "Walking 4",
-              "Duration": 4
-            },
-            {
-              "Command": "GotoCommandOffset",
-              "Parameter": 0
-            }
+            { "Frame": "Walking 1", "Duration": 4 },
+            { "Frame": "Idle 1",    "Duration": 4 },
+            { "Frame": "Walking 2", "Duration": 4 },
+            { "Frame": "Walking 3", "Duration": 4 },
+            { "Frame": "Idle 1",    "Duration": 4 },
+            { "Frame": "Walking 4", "Duration": 4 },
+            { "Command": "GotoCommandOffset", "Parameter": 0 }
           ],
           "Walking (Slower)": [
-            {
-              "Frame": "Walking 1",
-              "Duration": 5
-            },
-            {
-              "Frame": "Idle 1",
-              "Duration": 5
-            },
-            {
-              "Frame": "Walking 2",
-              "Duration": 5
-            },
-            {
-              "Frame": "Walking 3",
-              "Duration": 5
-            },
-            {
-              "Frame": "Idle 1",
-              "Duration": 5
-            },
-            {
-              "Frame": "Walking 4",
-              "Duration": 5
-            },
-            {
-              "Command": "GotoCommandOffset",
-              "Parameter": 0
-            }
+            { "Frame": "Walking 1", "Duration": 5 },
+            { "Frame": "Idle 1",    "Duration": 5 },
+            { "Frame": "Walking 2", "Duration": 5 },
+            { "Frame": "Walking 3", "Duration": 5 },
+            { "Frame": "Idle 1",    "Duration": 5 },
+            { "Frame": "Walking 4", "Duration": 5 },
+            { "Command": "GotoCommandOffset", "Parameter": 0 }
           ]
         },
         "OneFlippable": {
           "PullingOutTelescope (1 Direction)": [
-            {
-              "Command": "SetDirectionCount",
-              "Parameter": 17
-            },
-            {
-              "Frame": {
-                "First": {
-                  "Frame": "Idle 1",
-                  "Direction": "SSE"
-                }
-              },
-              "Duration": 5
-            },
-            {
-              "Frame": {
-                "First": {
-                  "Frame": "PullingOutTelescope 1",
-                  "Direction": "SSE"
-                }
-              },
-              "Duration": 5
-            },
-            {
-              "Frame": {
-                "First": {
-                  "Frame": "PullingOutTelescope 2",
-                  "Direction": "SSE"
-                }
-              },
-              "Duration": 5
-            },
-            {
-              "Frame": {
-                "First": {
-                  "Frame": "PullingOutTelescope 3",
-                  "Direction": "SSE"
-                }
-              },
-              "Duration": 5
-            },
-            {
-              "Frame": {
-                "First": {
-                  "Frame": "PullingOutTelescope 4",
-                  "Direction": "SSE"
-                }
-              },
-              "Duration": 5
-            },
-            {
-              "Frame": {
-                "First": {
-                  "Frame": "PullingOutTelescope 5",
-                  "Direction": "SSE"
-                }
-              },
-              "Duration": 5
-            },
-            {
-              "Command": "Stop"
-            }
+            { "Command": "SetDirectionCount", "Parameter": 17 },
+            { "Frame": { "First": { "Frame": "Idle 1",                "Direction": "SSE" } }, "Duration": 5 },
+            { "Frame": { "First": { "Frame": "PullingOutTelescope 1", "Direction": "SSE" } }, "Duration": 5 },
+            { "Frame": { "First": { "Frame": "PullingOutTelescope 2", "Direction": "SSE" } }, "Duration": 5 },
+            { "Frame": { "First": { "Frame": "PullingOutTelescope 3", "Direction": "SSE" } }, "Duration": 5 },
+            { "Frame": { "First": { "Frame": "PullingOutTelescope 4", "Direction": "SSE" } }, "Duration": 5 },
+            { "Frame": { "First": { "Frame": "PullingOutTelescope 5", "Direction": "SSE" } }, "Duration": 5 },
+            { "Command": "Stop" }
           ]
         }
       }

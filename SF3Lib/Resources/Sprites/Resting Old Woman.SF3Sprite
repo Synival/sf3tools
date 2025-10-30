@@ -10,78 +10,28 @@
       "CollisionSize": 40,
       "Scale": 1.0499878,
       "FrameGroups": {
-        "Idle (Resting) 1": {
-          "Directions": 4,
-          "SpritesheetX": 0,
-          "SpritesheetY": 0
-        },
-        "Idle (Resting) 2": {
-          "Directions": 4,
-          "SpritesheetX": 48,
-          "SpritesheetY": 0
-        },
-        "Idle (Resting) 3": {
-          "Directions": 4,
-          "SpritesheetX": 96,
-          "SpritesheetY": 0
-        }
+        "Idle (Resting) 1": { "Directions": 4, "SpritesheetX": 0,  "SpritesheetY": 0 },
+        "Idle (Resting) 2": { "Directions": 4, "SpritesheetX": 48, "SpritesheetY": 0 },
+        "Idle (Resting) 3": { "Directions": 4, "SpritesheetX": 96, "SpritesheetY": 0 }
       },
       "AnimationByDirections": {
         "4": {
           "Resting (Absurdly Long Duration)": [
-            {
-              "Frame": "Idle (Resting) 1",
-              "Duration": 30
-            },
-            {
-              "Frame": "Idle (Resting) 2",
-              "Duration": 11
-            },
-            {
-              "Frame": "Idle (Resting) 3",
-              "Duration": 8
-            },
-            {
-              "Frame": "Idle (Resting) 2",
-              "Duration": 5
-            },
-            {
-              "Frame": "Idle (Resting) 3",
-              "Duration": 8
-            },
-            {
-              "Frame": "Idle (Resting) 2",
-              "Duration": 8
-            },
-            {
-              "Frame": "Idle (Resting) 1",
-              "Duration": 1200
-            },
-            {
-              "Frame": "Idle (Resting) 2",
-              "Duration": 6
-            },
-            {
-              "Frame": "Idle (Resting) 3",
-              "Duration": 6
-            },
-            {
-              "Frame": "Idle (Resting) 2",
-              "Duration": 5
-            },
-            {
-              "Command": "GotoCommandOffset",
-              "Parameter": 0
-            }
+            { "Frame": "Idle (Resting) 1", "Duration": 30 },
+            { "Frame": "Idle (Resting) 2", "Duration": 11 },
+            { "Frame": "Idle (Resting) 3", "Duration": 8 },
+            { "Frame": "Idle (Resting) 2", "Duration": 5 },
+            { "Frame": "Idle (Resting) 3", "Duration": 8 },
+            { "Frame": "Idle (Resting) 2", "Duration": 8 },
+            { "Frame": "Idle (Resting) 1", "Duration": 1200 },
+            { "Frame": "Idle (Resting) 2", "Duration": 6 },
+            { "Frame": "Idle (Resting) 3", "Duration": 6 },
+            { "Frame": "Idle (Resting) 2", "Duration": 5 },
+            { "Command": "GotoCommandOffset", "Parameter": 0 }
           ],
           "StillFrame (OnGround)": [
-            {
-              "Frame": "Idle (Resting) 1",
-              "Duration": 10
-            },
-            {
-              "Command": "Stop"
-            }
+            { "Frame": "Idle (Resting) 1", "Duration": 10 },
+            { "Command": "Stop" }
           ]
         }
       }

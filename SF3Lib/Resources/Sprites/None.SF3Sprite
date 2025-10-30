@@ -12,35 +12,11 @@
       "FrameGroups": {},
       "AnimationByDirections": {
         "0": {
-          "Nothing (F2,00)": [
-            {
-              "Command": "Stop"
-            }
-          ],
-          "Nothing (FE,00)": [
-            {
-              "Command": "GotoCommandOffset",
-              "Parameter": 0
-            }
-          ],
-          "Nothing (FF,00)": [
-            {
-              "Command": "GotoAnimation",
-              "Parameter": 0
-            }
-          ],
-          "Nothing (FF,01)": [
-            {
-              "Command": "GotoAnimation",
-              "Parameter": 1
-            }
-          ],
-          "Nothing (FF,05)": [
-            {
-              "Command": "GotoAnimation",
-              "Parameter": 5
-            }
-          ],
+          "Nothing (F2,00)": [ { "Command": "Stop" } ],
+          "Nothing (FE,00)": [ { "Command": "GotoCommandOffset", "Parameter": 0 } ],
+          "Nothing (FF,00)": [ { "Command": "GotoAnimation", "Parameter": 0 } ],
+          "Nothing (FF,01)": [ { "Command": "GotoAnimation", "Parameter": 1 } ],
+          "Nothing (FF,05)": [ { "Command": "GotoAnimation", "Parameter": 5 } ],
           "Nothing (Broken, No Frames)": []
         }
       }

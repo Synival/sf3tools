@@ -44,30 +44,12 @@
       "AnimationByDirections": {
         "OneNoFlip": {
           "Exploding (Very Fast)": [
-            {
-              "Frame": "Exploding 1",
-              "Duration": 1
-            },
-            {
-              "Frame": "Exploding 2",
-              "Duration": 1
-            },
-            {
-              "Frame": "Exploding 3",
-              "Duration": 1
-            },
-            {
-              "Frame": "Exploding 4",
-              "Duration": 1
-            },
-            {
-              "Frame": "Exploding 5",
-              "Duration": 1
-            },
-            {
-              "Command": "GotoAnimation",
-              "Parameter": 0
-            }
+            { "Frame": "Exploding 1", "Duration": 1 },
+            { "Frame": "Exploding 2", "Duration": 1 },
+            { "Frame": "Exploding 3", "Duration": 1 },
+            { "Frame": "Exploding 4", "Duration": 1 },
+            { "Frame": "Exploding 5", "Duration": 1 },
+            { "Command": "GotoAnimation", "Parameter": 0 }
           ]
         }
       }

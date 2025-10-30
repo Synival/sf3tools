@@ -10,67 +10,25 @@
       "CollisionSize": 40,
       "Scale": 1.0,
       "FrameGroups": {
-        "Pulsating 1": {
-          "Directions": 1,
-          "SpritesheetX": 0,
-          "SpritesheetY": 0
-        },
-        "Pulsating 2": {
-          "Directions": 1,
-          "SpritesheetX": 64,
-          "SpritesheetY": 0
-        },
-        "Pulsating 3": {
-          "Directions": 1,
-          "SpritesheetX": 128,
-          "SpritesheetY": 0
-        },
-        "Pulsating 4": {
-          "Directions": 1,
-          "SpritesheetX": 192,
-          "SpritesheetY": 0
-        }
+        "Pulsating 1": { "Directions": 1, "SpritesheetX": 0,   "SpritesheetY": 0 },
+        "Pulsating 2": { "Directions": 1, "SpritesheetX": 64,  "SpritesheetY": 0 },
+        "Pulsating 3": { "Directions": 1, "SpritesheetX": 128, "SpritesheetY": 0 },
+        "Pulsating 4": { "Directions": 1, "SpritesheetX": 192, "SpritesheetY": 0 }
       },
       "AnimationByDirections": {
         "OneFlippable": {
           "Pulsating": [
-            {
-              "Command": "SetDirectionCount",
-              "Parameter": 17
-            },
-            {
-              "Frame": "Pulsating 1",
-              "Duration": 1
-            },
-            {
-              "Frame": "Pulsating 2",
-              "Duration": 1
-            },
-            {
-              "Frame": "Pulsating 3",
-              "Duration": 1
-            },
-            {
-              "Frame": "Pulsating 4",
-              "Duration": 1
-            },
-            {
-              "Command": "GotoCommandOffset",
-              "Parameter": 0
-            }
+            { "Command": "SetDirectionCount", "Parameter": 17 },
+            { "Frame": "Pulsating 1", "Duration": 1 },
+            { "Frame": "Pulsating 2", "Duration": 1 },
+            { "Frame": "Pulsating 3", "Duration": 1 },
+            { "Frame": "Pulsating 4", "Duration": 1 },
+            { "Command": "GotoCommandOffset", "Parameter": 0 }
           ],
           "StillFrame": [
-            {
-              "Command": "SetDirectionCount",
-              "Parameter": 17
-            },
-            {
-              "Frame": "Pulsating 1",
-              "Duration": 10
-            },
-            {
-              "Command": "Stop"
-            }
+            { "Command": "SetDirectionCount", "Parameter": 17 },
+            { "Frame": "Pulsating 1", "Duration": 10 },
+            { "Command": "Stop" }
           ]
         }
       }

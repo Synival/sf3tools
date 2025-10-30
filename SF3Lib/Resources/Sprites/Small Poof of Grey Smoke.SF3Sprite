@@ -68,70 +68,24 @@
       "AnimationByDirections": {
         "OneNoFlip": {
           "Poofing": [
-            {
-              "Frame": "Poofing 1",
-              "Duration": 3
-            },
-            {
-              "Frame": "Poofing 2",
-              "Duration": 3
-            },
-            {
-              "Frame": "Poofing 3",
-              "Duration": 3
-            },
-            {
-              "Frame": "Poofing 4",
-              "Duration": 3
-            },
-            {
-              "Frame": "Poofing 5",
-              "Duration": 3
-            },
-            {
-              "Frame": "Poofing 6",
-              "Duration": 3
-            },
-            {
-              "Frame": "Poofing 7",
-              "Duration": 3
-            },
-            {
-              "Frame": "Poofing 8",
-              "Duration": 3
-            },
-            {
-              "Frame": "Poofing 9",
-              "Duration": 3
-            },
-            {
-              "Command": "Stop"
-            }
+            { "Frame": "Poofing 1", "Duration": 3 },
+            { "Frame": "Poofing 2", "Duration": 3 },
+            { "Frame": "Poofing 3", "Duration": 3 },
+            { "Frame": "Poofing 4", "Duration": 3 },
+            { "Frame": "Poofing 5", "Duration": 3 },
+            { "Frame": "Poofing 6", "Duration": 3 },
+            { "Frame": "Poofing 7", "Duration": 3 },
+            { "Frame": "Poofing 8", "Duration": 3 },
+            { "Frame": "Poofing 9", "Duration": 3 },
+            { "Command": "Stop" }
           ],
           "Poofing (Very Fast)": [
-            {
-              "Frame": "Poofing 1",
-              "Duration": 1
-            },
-            {
-              "Frame": "Poofing 3",
-              "Duration": 1
-            },
-            {
-              "Frame": "Poofing 5",
-              "Duration": 1
-            },
-            {
-              "Frame": "Poofing 7",
-              "Duration": 1
-            },
-            {
-              "Frame": "Poofing 9",
-              "Duration": 1
-            },
-            {
-              "Command": "Stop"
-            }
+            { "Frame": "Poofing 1", "Duration": 1 },
+            { "Frame": "Poofing 3", "Duration": 1 },
+            { "Frame": "Poofing 5", "Duration": 1 },
+            { "Frame": "Poofing 7", "Duration": 1 },
+            { "Frame": "Poofing 9", "Duration": 1 },
+            { "Command": "Stop" }
           ]
         }
       }

@@ -10,42 +10,21 @@
       "CollisionSize": 48,
       "Scale": 0.5,
       "FrameGroups": {
-        "CannonBall 1": {
-          "Directions": 1,
-          "SpritesheetX": 0,
-          "SpritesheetY": 0
-        }
+        "CannonBall 1": { "Directions": 1, "SpritesheetX": 0, "SpritesheetY": 0 }
       },
       "AnimationByDirections": {
         "OneNoFlip": {
           "StillFrame (CannonBall, Change to 1)": [
-            {
-              "Frame": "CannonBall 1",
-              "Duration": 10
-            },
-            {
-              "Command": "GotoAnimation",
-              "Parameter": 1
-            }
+            { "Frame": "CannonBall 1", "Duration": 10 },
+            { "Command": "GotoAnimation", "Parameter": 1 }
           ],
           "StillFrame (CannonBall, Repeat)": [
-            {
-              "Frame": "CannonBall 1",
-              "Duration": 10
-            },
-            {
-              "Command": "Stop"
-            }
+            { "Frame": "CannonBall 1", "Duration": 10 },
+            { "Command": "Stop" }
           ],
           "StillFrame (CannonBall)": [
-            {
-              "Frame": "CannonBall 1",
-              "Duration": 10
-            },
-            {
-              "Command": "GotoCommandOffset",
-              "Parameter": 0
-            }
+            { "Frame": "CannonBall 1", "Duration": 10 },
+            { "Command": "GotoCommandOffset", "Parameter": 0 }
           ]
         }
       }

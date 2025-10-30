@@ -10,457 +10,140 @@
       "CollisionSize": 40,
       "Scale": 1.0,
       "FrameGroups": {
-        "Flying 1": {
-          "Directions": 6,
-          "SpritesheetX": 0,
-          "SpritesheetY": 0
-        },
-        "Flying 2": {
-          "Directions": 6,
-          "SpritesheetX": 48,
-          "SpritesheetY": 0
-        },
-        "Flying 3": {
-          "Directions": 6,
-          "SpritesheetX": 96,
-          "SpritesheetY": 0
-        },
-        "Flying 4": {
-          "Directions": 6,
-          "SpritesheetX": 144,
-          "SpritesheetY": 0
-        },
-        "Flying 5": {
-          "Directions": 6,
-          "SpritesheetX": 192,
-          "SpritesheetY": 0
-        },
-        "LiftingUpFlareGun 1": {
-          "Directions": 4,
-          "SpritesheetX": 240,
-          "SpritesheetY": 40
-        },
-        "LiftingUpFlareGun 2": {
-          "Directions": 4,
-          "SpritesheetX": 288,
-          "SpritesheetY": 40
-        },
-        "LiftingUpFlareGun 3": {
-          "Directions": 4,
-          "SpritesheetX": 336,
-          "SpritesheetY": 40
-        },
-        "LiftingUpFlareGun 4": {
-          "Directions": 4,
-          "SpritesheetX": 384,
-          "SpritesheetY": 40
-        },
-        "LiftingUpFlareGun 5": {
-          "Directions": 4,
-          "SpritesheetX": 432,
-          "SpritesheetY": 40
-        },
-        "Nodding 1": {
-          "Directions": 4,
-          "SpritesheetX": 480,
-          "SpritesheetY": 40
-        },
-        "Nodding 2": {
-          "Directions": 4,
-          "SpritesheetX": 528,
-          "SpritesheetY": 40
-        },
-        "ShakingHead 1": {
-          "Directions": 4,
-          "SpritesheetX": 576,
-          "SpritesheetY": 40
-        },
-        "ShakingHead 2": {
-          "Directions": 4,
-          "SpritesheetX": 624,
-          "SpritesheetY": 40
-        }
+        "Flying 1":            { "Directions": 6, "SpritesheetX": 0,   "SpritesheetY": 0 },
+        "Flying 2":            { "Directions": 6, "SpritesheetX": 48,  "SpritesheetY": 0 },
+        "Flying 3":            { "Directions": 6, "SpritesheetX": 96,  "SpritesheetY": 0 },
+        "Flying 4":            { "Directions": 6, "SpritesheetX": 144, "SpritesheetY": 0 },
+        "Flying 5":            { "Directions": 6, "SpritesheetX": 192, "SpritesheetY": 0 },
+        "LiftingUpFlareGun 1": { "Directions": 4, "SpritesheetX": 240, "SpritesheetY": 40 },
+        "LiftingUpFlareGun 2": { "Directions": 4, "SpritesheetX": 288, "SpritesheetY": 40 },
+        "LiftingUpFlareGun 3": { "Directions": 4, "SpritesheetX": 336, "SpritesheetY": 40 },
+        "LiftingUpFlareGun 4": { "Directions": 4, "SpritesheetX": 384, "SpritesheetY": 40 },
+        "LiftingUpFlareGun 5": { "Directions": 4, "SpritesheetX": 432, "SpritesheetY": 40 },
+        "Nodding 1":           { "Directions": 4, "SpritesheetX": 480, "SpritesheetY": 40 },
+        "Nodding 2":           { "Directions": 4, "SpritesheetX": 528, "SpritesheetY": 40 },
+        "ShakingHead 1":       { "Directions": 4, "SpritesheetX": 576, "SpritesheetY": 40 },
+        "ShakingHead 2":       { "Directions": 4, "SpritesheetX": 624, "SpritesheetY": 40 }
       },
       "AnimationByDirections": {
         "4": {
           "Flying (2 Frame)": [
-            {
-              "Frame": "Flying 5",
-              "Duration": 8
-            },
-            {
-              "Frame": "Flying 3",
-              "Duration": 7
-            },
-            {
-              "Frame": "Flying 5",
-              "Duration": 8
-            },
-            {
-              "Frame": "Flying 3",
-              "Duration": 6
-            },
-            {
-              "Command": "GotoCommandOffset",
-              "Parameter": 0
-            }
+            { "Frame": "Flying 5", "Duration": 8 },
+            { "Frame": "Flying 3", "Duration": 7 },
+            { "Frame": "Flying 5", "Duration": 8 },
+            { "Frame": "Flying 3", "Duration": 6 },
+            { "Command": "GotoCommandOffset", "Parameter": 0 }
           ],
           "Flying (Faster)": [
-            {
-              "Frame": "Flying 1",
-              "Duration": 4
-            },
-            {
-              "Frame": "Flying 2",
-              "Duration": 3
-            },
-            {
-              "Frame": "Flying 3",
-              "Duration": 3
-            },
-            {
-              "Frame": "Flying 4",
-              "Duration": 3
-            },
-            {
-              "Frame": "Flying 5",
-              "Duration": 4
-            },
-            {
-              "Frame": "Flying 4",
-              "Duration": 3
-            },
-            {
-              "Frame": "Flying 3",
-              "Duration": 2
-            },
-            {
-              "Frame": "Flying 2",
-              "Duration": 1
-            },
-            {
-              "Command": "GotoCommandOffset",
-              "Parameter": 0
-            }
+            { "Frame": "Flying 1", "Duration": 4 },
+            { "Frame": "Flying 2", "Duration": 3 },
+            { "Frame": "Flying 3", "Duration": 3 },
+            { "Frame": "Flying 4", "Duration": 3 },
+            { "Frame": "Flying 5", "Duration": 4 },
+            { "Frame": "Flying 4", "Duration": 3 },
+            { "Frame": "Flying 3", "Duration": 2 },
+            { "Frame": "Flying 2", "Duration": 1 },
+            { "Command": "GotoCommandOffset", "Parameter": 0 }
           ],
           "Flying (Reduced)": [
-            {
-              "Frame": "Flying 1",
-              "Duration": 8
-            },
-            {
-              "Frame": "Flying 3",
-              "Duration": 7
-            },
-            {
-              "Frame": "Flying 5",
-              "Duration": 8
-            },
-            {
-              "Frame": "Flying 3",
-              "Duration": 6
-            },
-            {
-              "Command": "GotoCommandOffset",
-              "Parameter": 0
-            }
+            { "Frame": "Flying 1", "Duration": 8 },
+            { "Frame": "Flying 3", "Duration": 7 },
+            { "Frame": "Flying 5", "Duration": 8 },
+            { "Frame": "Flying 3", "Duration": 6 },
+            { "Command": "GotoCommandOffset", "Parameter": 0 }
           ],
           "Flying (Slower)": [
-            {
-              "Frame": "Flying 1",
-              "Duration": 5
-            },
-            {
-              "Frame": "Flying 2",
-              "Duration": 4
-            },
-            {
-              "Frame": "Flying 3",
-              "Duration": 4
-            },
-            {
-              "Frame": "Flying 4",
-              "Duration": 4
-            },
-            {
-              "Frame": "Flying 5",
-              "Duration": 5
-            },
-            {
-              "Frame": "Flying 4",
-              "Duration": 4
-            },
-            {
-              "Frame": "Flying 3",
-              "Duration": 3
-            },
-            {
-              "Frame": "Flying 2",
-              "Duration": 2
-            },
-            {
-              "Command": "GotoCommandOffset",
-              "Parameter": 0
-            }
+            { "Frame": "Flying 1", "Duration": 5 },
+            { "Frame": "Flying 2", "Duration": 4 },
+            { "Frame": "Flying 3", "Duration": 4 },
+            { "Frame": "Flying 4", "Duration": 4 },
+            { "Frame": "Flying 5", "Duration": 5 },
+            { "Frame": "Flying 4", "Duration": 4 },
+            { "Frame": "Flying 3", "Duration": 3 },
+            { "Frame": "Flying 2", "Duration": 2 },
+            { "Command": "GotoCommandOffset", "Parameter": 0 }
           ],
           "LiftingUpFlareGun": [
-            {
-              "Frame": "LiftingUpFlareGun 1",
-              "Duration": 5
-            },
-            {
-              "Frame": "LiftingUpFlareGun 2",
-              "Duration": 3
-            },
-            {
-              "Frame": "LiftingUpFlareGun 3",
-              "Duration": 3
-            },
-            {
-              "Frame": "LiftingUpFlareGun 2",
-              "Duration": 3
-            },
-            {
-              "Frame": "LiftingUpFlareGun 3",
-              "Duration": 3
-            },
-            {
-              "Frame": "LiftingUpFlareGun 4",
-              "Duration": 4
-            },
-            {
-              "Frame": "LiftingUpFlareGun 5",
-              "Duration": 10
-            },
-            {
-              "Command": "GotoAnimation",
-              "Parameter": 5
-            }
+            { "Frame": "LiftingUpFlareGun 1", "Duration": 5 },
+            { "Frame": "LiftingUpFlareGun 2", "Duration": 3 },
+            { "Frame": "LiftingUpFlareGun 3", "Duration": 3 },
+            { "Frame": "LiftingUpFlareGun 2", "Duration": 3 },
+            { "Frame": "LiftingUpFlareGun 3", "Duration": 3 },
+            { "Frame": "LiftingUpFlareGun 4", "Duration": 4 },
+            { "Frame": "LiftingUpFlareGun 5", "Duration": 10 },
+            { "Command": "GotoAnimation", "Parameter": 5 }
           ],
           "Nodding": [
-            {
-              "Frame": "Flying 3",
-              "Duration": 2
-            },
-            {
-              "Frame": "Nodding 1",
-              "Duration": 2
-            },
-            {
-              "Frame": "Nodding 2",
-              "Duration": 2
-            },
-            {
-              "Frame": "Nodding 1",
-              "Duration": 2
-            },
-            {
-              "Command": "GotoAnimation",
-              "Parameter": 1
-            }
+            { "Frame": "Flying 3",  "Duration": 2 },
+            { "Frame": "Nodding 1", "Duration": 2 },
+            { "Frame": "Nodding 2", "Duration": 2 },
+            { "Frame": "Nodding 1", "Duration": 2 },
+            { "Command": "GotoAnimation", "Parameter": 1 }
           ],
           "Nodding (NoStop)": [
-            {
-              "Frame": "Flying 3",
-              "Duration": 2
-            },
-            {
-              "Frame": "Nodding 1",
-              "Duration": 2
-            },
-            {
-              "Frame": "Nodding 2",
-              "Duration": 2
-            },
-            {
-              "Frame": "Nodding 1",
-              "Duration": 2
-            },
-            {
-              "Command": "GotoCommandOffset",
-              "Parameter": 0
-            }
+            { "Frame": "Flying 3",  "Duration": 2 },
+            { "Frame": "Nodding 1", "Duration": 2 },
+            { "Frame": "Nodding 2", "Duration": 2 },
+            { "Frame": "Nodding 1", "Duration": 2 },
+            { "Command": "GotoCommandOffset", "Parameter": 0 }
           ],
           "ShakingHead": [
-            {
-              "Frame": "Flying 3",
-              "Duration": 2
-            },
-            {
-              "Frame": "ShakingHead 1",
-              "Duration": 2
-            },
-            {
-              "Frame": "ShakingHead 2",
-              "Duration": 2
-            },
-            {
-              "Frame": "ShakingHead 1",
-              "Duration": 2
-            },
-            {
-              "Frame": "Flying 3",
-              "Duration": 2
-            },
-            {
-              "Frame": "ShakingHead 1",
-              "Duration": 2
-            },
-            {
-              "Frame": "ShakingHead 2",
-              "Duration": 2
-            },
-            {
-              "Frame": "ShakingHead 1",
-              "Duration": 2
-            },
-            {
-              "Command": "GotoAnimation",
-              "Parameter": 1
-            }
+            { "Frame": "Flying 3",      "Duration": 2 },
+            { "Frame": "ShakingHead 1", "Duration": 2 },
+            { "Frame": "ShakingHead 2", "Duration": 2 },
+            { "Frame": "ShakingHead 1", "Duration": 2 },
+            { "Frame": "Flying 3",      "Duration": 2 },
+            { "Frame": "ShakingHead 1", "Duration": 2 },
+            { "Frame": "ShakingHead 2", "Duration": 2 },
+            { "Frame": "ShakingHead 1", "Duration": 2 },
+            { "Command": "GotoAnimation", "Parameter": 1 }
           ],
           "ShakingHead (NoStop)": [
-            {
-              "Frame": "Flying 3",
-              "Duration": 2
-            },
-            {
-              "Frame": "ShakingHead 1",
-              "Duration": 2
-            },
-            {
-              "Frame": "ShakingHead 2",
-              "Duration": 2
-            },
-            {
-              "Frame": "ShakingHead 1",
-              "Duration": 2
-            },
-            {
-              "Frame": "Flying 3",
-              "Duration": 2
-            },
-            {
-              "Frame": "ShakingHead 1",
-              "Duration": 2
-            },
-            {
-              "Frame": "ShakingHead 2",
-              "Duration": 2
-            },
-            {
-              "Frame": "ShakingHead 1",
-              "Duration": 2
-            },
-            {
-              "Command": "GotoCommandOffset",
-              "Parameter": 0
-            }
+            { "Frame": "Flying 3",      "Duration": 2 },
+            { "Frame": "ShakingHead 1", "Duration": 2 },
+            { "Frame": "ShakingHead 2", "Duration": 2 },
+            { "Frame": "ShakingHead 1", "Duration": 2 },
+            { "Frame": "Flying 3",      "Duration": 2 },
+            { "Frame": "ShakingHead 1", "Duration": 2 },
+            { "Frame": "ShakingHead 2", "Duration": 2 },
+            { "Frame": "ShakingHead 1", "Duration": 2 },
+            { "Command": "GotoCommandOffset", "Parameter": 0 }
           ],
           "StillFrame": [
-            {
-              "Frame": "Flying 3",
-              "Duration": 10
-            },
-            {
-              "Command": "Stop"
-            }
+            { "Frame": "Flying 3", "Duration": 10 },
+            { "Command": "Stop" }
           ],
           "StillFrame (Holding Up Flare Gun)": [
-            {
-              "Frame": "LiftingUpFlareGun 5",
-              "Duration": 10
-            },
-            {
-              "Command": "Stop"
-            }
+            { "Frame": "LiftingUpFlareGun 5", "Duration": 10 },
+            { "Command": "Stop" }
           ]
         },
         "6": {
           "Flying (Faster)": [
-            {
-              "Frame": "Flying 1",
-              "Duration": 4
-            },
-            {
-              "Frame": "Flying 2",
-              "Duration": 3
-            },
-            {
-              "Frame": "Flying 3",
-              "Duration": 3
-            },
-            {
-              "Frame": "Flying 4",
-              "Duration": 3
-            },
-            {
-              "Frame": "Flying 5",
-              "Duration": 4
-            },
-            {
-              "Frame": "Flying 4",
-              "Duration": 3
-            },
-            {
-              "Frame": "Flying 3",
-              "Duration": 2
-            },
-            {
-              "Frame": "Flying 2",
-              "Duration": 1
-            },
-            {
-              "Command": "GotoCommandOffset",
-              "Parameter": 0
-            }
+            { "Frame": "Flying 1", "Duration": 4 },
+            { "Frame": "Flying 2", "Duration": 3 },
+            { "Frame": "Flying 3", "Duration": 3 },
+            { "Frame": "Flying 4", "Duration": 3 },
+            { "Frame": "Flying 5", "Duration": 4 },
+            { "Frame": "Flying 4", "Duration": 3 },
+            { "Frame": "Flying 3", "Duration": 2 },
+            { "Frame": "Flying 2", "Duration": 1 },
+            { "Command": "GotoCommandOffset", "Parameter": 0 }
           ],
           "Flying (Slower)": [
-            {
-              "Frame": "Flying 1",
-              "Duration": 5
-            },
-            {
-              "Frame": "Flying 2",
-              "Duration": 4
-            },
-            {
-              "Frame": "Flying 3",
-              "Duration": 4
-            },
-            {
-              "Frame": "Flying 4",
-              "Duration": 4
-            },
-            {
-              "Frame": "Flying 5",
-              "Duration": 5
-            },
-            {
-              "Frame": "Flying 4",
-              "Duration": 4
-            },
-            {
-              "Frame": "Flying 3",
-              "Duration": 3
-            },
-            {
-              "Frame": "Flying 2",
-              "Duration": 2
-            },
-            {
-              "Command": "GotoCommandOffset",
-              "Parameter": 0
-            }
+            { "Frame": "Flying 1", "Duration": 5 },
+            { "Frame": "Flying 2", "Duration": 4 },
+            { "Frame": "Flying 3", "Duration": 4 },
+            { "Frame": "Flying 4", "Duration": 4 },
+            { "Frame": "Flying 5", "Duration": 5 },
+            { "Frame": "Flying 4", "Duration": 4 },
+            { "Frame": "Flying 3", "Duration": 3 },
+            { "Frame": "Flying 2", "Duration": 2 },
+            { "Command": "GotoCommandOffset", "Parameter": 0 }
           ],
           "StillFrame": [
-            {
-              "Frame": "Flying 3",
-              "Duration": 10
-            },
-            {
-              "Command": "Stop"
-            }
+            { "Frame": "Flying 3", "Duration": 10 },
+            { "Command": "Stop" }
           ]
         }
       }

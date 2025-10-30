@@ -10,109 +10,35 @@
       "CollisionSize": 40,
       "Scale": 1.0,
       "FrameGroups": {
-        "SittingAndEating 1": {
-          "Directions": 4,
-          "SpritesheetX": 0,
-          "SpritesheetY": 0
-        },
-        "SittingAndEating 2": {
-          "Directions": 4,
-          "SpritesheetX": 48,
-          "SpritesheetY": 0
-        },
-        "SittingAndEating 3": {
-          "Directions": 4,
-          "SpritesheetX": 96,
-          "SpritesheetY": 0
-        },
-        "SittingAndEating 4": {
-          "Directions": 4,
-          "SpritesheetX": 144,
-          "SpritesheetY": 0
-        },
-        "SittingAndEating 5": {
-          "Directions": 4,
-          "SpritesheetX": 192,
-          "SpritesheetY": 0
-        },
-        "SittingAndEating 6": {
-          "Directions": 4,
-          "SpritesheetX": 240,
-          "SpritesheetY": 0
-        }
+        "SittingAndEating 1": { "Directions": 4, "SpritesheetX": 0,   "SpritesheetY": 0 },
+        "SittingAndEating 2": { "Directions": 4, "SpritesheetX": 48,  "SpritesheetY": 0 },
+        "SittingAndEating 3": { "Directions": 4, "SpritesheetX": 96,  "SpritesheetY": 0 },
+        "SittingAndEating 4": { "Directions": 4, "SpritesheetX": 144, "SpritesheetY": 0 },
+        "SittingAndEating 5": { "Directions": 4, "SpritesheetX": 192, "SpritesheetY": 0 },
+        "SittingAndEating 6": { "Directions": 4, "SpritesheetX": 240, "SpritesheetY": 0 }
       },
       "AnimationByDirections": {
         "4": {
           "SittingAndEating": [
-            {
-              "Frame": "SittingAndEating 1",
-              "Duration": 5
-            },
-            {
-              "Frame": "SittingAndEating 2",
-              "Duration": 5
-            },
-            {
-              "Frame": "SittingAndEating 3",
-              "Duration": 5
-            },
-            {
-              "Frame": "SittingAndEating 1",
-              "Duration": 5
-            },
-            {
-              "Frame": "SittingAndEating 2",
-              "Duration": 5
-            },
-            {
-              "Frame": "SittingAndEating 3",
-              "Duration": 5
-            },
-            {
-              "Frame": "SittingAndEating 1",
-              "Duration": 5
-            },
-            {
-              "Frame": "SittingAndEating 2",
-              "Duration": 5
-            },
-            {
-              "Frame": "SittingAndEating 3",
-              "Duration": 5
-            },
-            {
-              "Frame": "SittingAndEating 4",
-              "Duration": 12
-            },
-            {
-              "Frame": "SittingAndEating 5",
-              "Duration": 15
-            },
-            {
-              "Frame": "SittingAndEating 6",
-              "Duration": 30
-            },
-            {
-              "Frame": "SittingAndEating 5",
-              "Duration": 8
-            },
-            {
-              "Frame": "SittingAndEating 4",
-              "Duration": 5
-            },
-            {
-              "Command": "GotoCommandOffset",
-              "Parameter": 0
-            }
+            { "Frame": "SittingAndEating 1", "Duration": 5 },
+            { "Frame": "SittingAndEating 2", "Duration": 5 },
+            { "Frame": "SittingAndEating 3", "Duration": 5 },
+            { "Frame": "SittingAndEating 1", "Duration": 5 },
+            { "Frame": "SittingAndEating 2", "Duration": 5 },
+            { "Frame": "SittingAndEating 3", "Duration": 5 },
+            { "Frame": "SittingAndEating 1", "Duration": 5 },
+            { "Frame": "SittingAndEating 2", "Duration": 5 },
+            { "Frame": "SittingAndEating 3", "Duration": 5 },
+            { "Frame": "SittingAndEating 4", "Duration": 12 },
+            { "Frame": "SittingAndEating 5", "Duration": 15 },
+            { "Frame": "SittingAndEating 6", "Duration": 30 },
+            { "Frame": "SittingAndEating 5", "Duration": 8 },
+            { "Frame": "SittingAndEating 4", "Duration": 5 },
+            { "Command": "GotoCommandOffset", "Parameter": 0 }
           ],
           "StillFrame": [
-            {
-              "Frame": "SittingAndEating 1",
-              "Duration": 5
-            },
-            {
-              "Command": "Stop"
-            }
+            { "Frame": "SittingAndEating 1", "Duration": 5 },
+            { "Command": "Stop" }
           ]
         }
       }

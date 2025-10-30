@@ -10,382 +10,115 @@
       "CollisionSize": 40,
       "Scale": 1.0,
       "FrameGroups": {
-        "Casting 1": {
-          "Directions": 4,
-          "SpritesheetX": 0,
-          "SpritesheetY": 0
-        },
-        "Casting 2": {
-          "Directions": 4,
-          "SpritesheetX": 40,
-          "SpritesheetY": 0
-        },
-        "Casting 3": {
-          "Directions": 4,
-          "SpritesheetX": 80,
-          "SpritesheetY": 0
-        },
-        "Casting 4": {
-          "Directions": 4,
-          "SpritesheetX": 120,
-          "SpritesheetY": 0
-        },
-        "Casting 5": {
-          "Directions": 4,
-          "SpritesheetX": 160,
-          "SpritesheetY": 0
-        },
-        "Idle 1": {
-          "Directions": 4,
-          "SpritesheetX": 200,
-          "SpritesheetY": 0
-        },
-        "Idle 2": {
-          "Directions": 4,
-          "SpritesheetX": 240,
-          "SpritesheetY": 0
-        },
-        "Idle 3": {
-          "Directions": 4,
-          "SpritesheetX": 280,
-          "SpritesheetY": 0
-        },
-        "Nodding 1": {
-          "Directions": 4,
-          "SpritesheetX": 320,
-          "SpritesheetY": 0
-        },
-        "Nodding 2": {
-          "Directions": 4,
-          "SpritesheetX": 360,
-          "SpritesheetY": 0
-        },
+        "Casting 1":      { "Directions": 4, "SpritesheetX": 0,   "SpritesheetY": 0 },
+        "Casting 2":      { "Directions": 4, "SpritesheetX": 40,  "SpritesheetY": 0 },
+        "Casting 3":      { "Directions": 4, "SpritesheetX": 80,  "SpritesheetY": 0 },
+        "Casting 4":      { "Directions": 4, "SpritesheetX": 120, "SpritesheetY": 0 },
+        "Casting 5":      { "Directions": 4, "SpritesheetX": 160, "SpritesheetY": 0 },
+        "Idle 1":         { "Directions": 4, "SpritesheetX": 200, "SpritesheetY": 0 },
+        "Idle 2":         { "Directions": 4, "SpritesheetX": 240, "SpritesheetY": 0 },
+        "Idle 3":         { "Directions": 4, "SpritesheetX": 280, "SpritesheetY": 0 },
+        "Nodding 1":      { "Directions": 4, "SpritesheetX": 320, "SpritesheetY": 0 },
+        "Nodding 2":      { "Directions": 4, "SpritesheetX": 360, "SpritesheetY": 0 },
         "OnGround 1": {
           "WNW": {
             "SpritesheetX": 400,
             "SpritesheetY": 160
           }
         },
-        "ShakingHead 1": {
-          "Directions": 4,
-          "SpritesheetX": 440,
-          "SpritesheetY": 0
-        },
-        "ShakingHead 2": {
-          "Directions": 4,
-          "SpritesheetX": 480,
-          "SpritesheetY": 0
-        },
-        "ThrowingBomb 1": {
-          "Directions": 4,
-          "SpritesheetX": 520,
-          "SpritesheetY": 0
-        },
-        "ThrowingBomb 2": {
-          "Directions": 4,
-          "SpritesheetX": 560,
-          "SpritesheetY": 0
-        },
-        "ThrowingBomb 3": {
-          "Directions": 4,
-          "SpritesheetX": 600,
-          "SpritesheetY": 0
-        },
-        "ThrowingBomb 4": {
-          "Directions": 4,
-          "SpritesheetX": 640,
-          "SpritesheetY": 0
-        },
-        "ThrowingBomb 5": {
-          "Directions": 4,
-          "SpritesheetX": 680,
-          "SpritesheetY": 0
-        },
-        "ThrowingBomb 6": {
-          "Directions": 4,
-          "SpritesheetX": 720,
-          "SpritesheetY": 0
-        },
-        "Walking 1": {
-          "Directions": 4,
-          "SpritesheetX": 760,
-          "SpritesheetY": 0
-        },
-        "Walking 2": {
-          "Directions": 4,
-          "SpritesheetX": 800,
-          "SpritesheetY": 0
-        },
-        "Walking 3": {
-          "Directions": 4,
-          "SpritesheetX": 840,
-          "SpritesheetY": 0
-        },
-        "Walking 4": {
-          "Directions": 4,
-          "SpritesheetX": 880,
-          "SpritesheetY": 0
-        }
+        "ShakingHead 1":  { "Directions": 4, "SpritesheetX": 440, "SpritesheetY": 0 },
+        "ShakingHead 2":  { "Directions": 4, "SpritesheetX": 480, "SpritesheetY": 0 },
+        "ThrowingBomb 1": { "Directions": 4, "SpritesheetX": 520, "SpritesheetY": 0 },
+        "ThrowingBomb 2": { "Directions": 4, "SpritesheetX": 560, "SpritesheetY": 0 },
+        "ThrowingBomb 3": { "Directions": 4, "SpritesheetX": 600, "SpritesheetY": 0 },
+        "ThrowingBomb 4": { "Directions": 4, "SpritesheetX": 640, "SpritesheetY": 0 },
+        "ThrowingBomb 5": { "Directions": 4, "SpritesheetX": 680, "SpritesheetY": 0 },
+        "ThrowingBomb 6": { "Directions": 4, "SpritesheetX": 720, "SpritesheetY": 0 },
+        "Walking 1":      { "Directions": 4, "SpritesheetX": 760, "SpritesheetY": 0 },
+        "Walking 2":      { "Directions": 4, "SpritesheetX": 800, "SpritesheetY": 0 },
+        "Walking 3":      { "Directions": 4, "SpritesheetX": 840, "SpritesheetY": 0 },
+        "Walking 4":      { "Directions": 4, "SpritesheetX": 880, "SpritesheetY": 0 }
       },
       "AnimationByDirections": {
         "OneNoFlip": {
           "StillFrame (OnGround)": [
-            {
-              "Command": "SetDirectionCount",
-              "Parameter": 1
-            },
-            {
-              "Frame": {
-                "First": {
-                  "Frame": "OnGround 1",
-                  "Direction": "WNW"
-                }
-              },
-              "Duration": 10
-            },
-            {
-              "Command": "Stop"
-            }
+            { "Command": "SetDirectionCount", "Parameter": 1 },
+            { "Frame": { "First": { "Frame": "OnGround 1", "Direction": "WNW" } }, "Duration": 10 },
+            { "Command": "Stop" }
           ]
         },
         "4": {
           "Casting": [
-            {
-              "Frame": "Casting 1",
-              "Duration": 5
-            },
-            {
-              "Frame": "Casting 2",
-              "Duration": 2
-            },
-            {
-              "Frame": "Casting 3",
-              "Duration": 5
-            },
-            {
-              "Frame": "Casting 4",
-              "Duration": 4
-            },
-            {
-              "Frame": "Casting 5",
-              "Duration": 4
-            },
-            {
-              "Frame": "Casting 4",
-              "Duration": 4
-            },
-            {
-              "Frame": "Casting 3",
-              "Duration": 4
-            },
-            {
-              "Frame": "Casting 4",
-              "Duration": 4
-            },
-            {
-              "Frame": "Casting 5",
-              "Duration": 4
-            },
-            {
-              "Frame": "Casting 4",
-              "Duration": 4
-            },
-            {
-              "Frame": "Casting 3",
-              "Duration": 4
-            },
-            {
-              "Frame": "Casting 4",
-              "Duration": 4
-            },
-            {
-              "Frame": "Casting 5",
-              "Duration": 4
-            },
-            {
-              "Frame": "Casting 4",
-              "Duration": 4
-            },
-            {
-              "Frame": "Casting 3",
-              "Duration": 4
-            },
-            {
-              "Frame": "Casting 2",
-              "Duration": 2
-            },
-            {
-              "Command": "GotoCommandOffset",
-              "Parameter": 0
-            }
+            { "Frame": "Casting 1", "Duration": 5 },
+            { "Frame": "Casting 2", "Duration": 2 },
+            { "Frame": "Casting 3", "Duration": 5 },
+            { "Frame": "Casting 4", "Duration": 4 },
+            { "Frame": "Casting 5", "Duration": 4 },
+            { "Frame": "Casting 4", "Duration": 4 },
+            { "Frame": "Casting 3", "Duration": 4 },
+            { "Frame": "Casting 4", "Duration": 4 },
+            { "Frame": "Casting 5", "Duration": 4 },
+            { "Frame": "Casting 4", "Duration": 4 },
+            { "Frame": "Casting 3", "Duration": 4 },
+            { "Frame": "Casting 4", "Duration": 4 },
+            { "Frame": "Casting 5", "Duration": 4 },
+            { "Frame": "Casting 4", "Duration": 4 },
+            { "Frame": "Casting 3", "Duration": 4 },
+            { "Frame": "Casting 2", "Duration": 2 },
+            { "Command": "GotoCommandOffset", "Parameter": 0 }
           ],
           "Idle": [
-            {
-              "Frame": "Idle 1",
-              "Duration": 6
-            },
-            {
-              "Frame": "Idle 2",
-              "Duration": 4
-            },
-            {
-              "Frame": "Idle 3",
-              "Duration": 4
-            },
-            {
-              "Frame": "Idle 2",
-              "Duration": 4
-            },
-            {
-              "Command": "GotoCommandOffset",
-              "Parameter": 0
-            }
+            { "Frame": "Idle 1", "Duration": 6 },
+            { "Frame": "Idle 2", "Duration": 4 },
+            { "Frame": "Idle 3", "Duration": 4 },
+            { "Frame": "Idle 2", "Duration": 4 },
+            { "Command": "GotoCommandOffset", "Parameter": 0 }
           ],
           "Nodding": [
-            {
-              "Frame": "Idle 1",
-              "Duration": 6
-            },
-            {
-              "Frame": "Nodding 1",
-              "Duration": 4
-            },
-            {
-              "Frame": "Nodding 2",
-              "Duration": 4
-            },
-            {
-              "Frame": "Nodding 1",
-              "Duration": 4
-            },
-            {
-              "Command": "GotoAnimation",
-              "Parameter": 1
-            }
+            { "Frame": "Idle 1",    "Duration": 6 },
+            { "Frame": "Nodding 1", "Duration": 4 },
+            { "Frame": "Nodding 2", "Duration": 4 },
+            { "Frame": "Nodding 1", "Duration": 4 },
+            { "Command": "GotoAnimation", "Parameter": 1 }
           ],
           "ShakingHead": [
-            {
-              "Frame": "Idle 1",
-              "Duration": 2
-            },
-            {
-              "Frame": "ShakingHead 1",
-              "Duration": 4
-            },
-            {
-              "Frame": "Idle 1",
-              "Duration": 4
-            },
-            {
-              "Frame": "ShakingHead 2",
-              "Duration": 4
-            },
-            {
-              "Frame": "Idle 1",
-              "Duration": 6
-            },
-            {
-              "Frame": "ShakingHead 1",
-              "Duration": 4
-            },
-            {
-              "Frame": "Idle 1",
-              "Duration": 4
-            },
-            {
-              "Frame": "ShakingHead 2",
-              "Duration": 4
-            },
-            {
-              "Command": "GotoAnimation",
-              "Parameter": 1
-            }
+            { "Frame": "Idle 1",        "Duration": 2 },
+            { "Frame": "ShakingHead 1", "Duration": 4 },
+            { "Frame": "Idle 1",        "Duration": 4 },
+            { "Frame": "ShakingHead 2", "Duration": 4 },
+            { "Frame": "Idle 1",        "Duration": 6 },
+            { "Frame": "ShakingHead 1", "Duration": 4 },
+            { "Frame": "Idle 1",        "Duration": 4 },
+            { "Frame": "ShakingHead 2", "Duration": 4 },
+            { "Command": "GotoAnimation", "Parameter": 1 }
           ],
           "StillFrame (Idle 1)": [
-            {
-              "Frame": "Casting 1",
-              "Duration": 10
-            },
-            {
-              "Command": "Stop"
-            }
+            { "Frame": "Casting 1", "Duration": 10 },
+            { "Command": "Stop" }
           ],
           "StillFrame (Idle 2)": [
-            {
-              "Frame": "Idle 1",
-              "Duration": 10
-            },
-            {
-              "Command": "Stop"
-            }
+            { "Frame": "Idle 1", "Duration": 10 },
+            { "Command": "Stop" }
           ],
           "ThrowingBomb": [
-            {
-              "Frame": "Casting 1",
-              "Duration": 6
-            },
-            {
-              "Frame": "ThrowingBomb 1",
-              "Duration": 3
-            },
-            {
-              "Frame": "ThrowingBomb 2",
-              "Duration": 2
-            },
-            {
-              "Frame": "ThrowingBomb 3",
-              "Duration": 1
-            },
-            {
-              "Frame": "ThrowingBomb 4",
-              "Duration": 1
-            },
-            {
-              "Frame": "ThrowingBomb 5",
-              "Duration": 1
-            },
-            {
-              "Frame": "ThrowingBomb 6",
-              "Duration": 3
-            },
-            {
-              "Frame": "ThrowingBomb 1",
-              "Duration": 2
-            },
-            {
-              "Command": "GotoAnimation",
-              "Parameter": 1
-            }
+            { "Frame": "Casting 1",      "Duration": 6 },
+            { "Frame": "ThrowingBomb 1", "Duration": 3 },
+            { "Frame": "ThrowingBomb 2", "Duration": 2 },
+            { "Frame": "ThrowingBomb 3", "Duration": 1 },
+            { "Frame": "ThrowingBomb 4", "Duration": 1 },
+            { "Frame": "ThrowingBomb 5", "Duration": 1 },
+            { "Frame": "ThrowingBomb 6", "Duration": 3 },
+            { "Frame": "ThrowingBomb 1", "Duration": 2 },
+            { "Command": "GotoAnimation", "Parameter": 1 }
           ],
           "Walking": [
-            {
-              "Frame": "Walking 1",
-              "Duration": 5
-            },
-            {
-              "Frame": "Idle 1",
-              "Duration": 5
-            },
-            {
-              "Frame": "Walking 2",
-              "Duration": 5
-            },
-            {
-              "Frame": "Walking 3",
-              "Duration": 5
-            },
-            {
-              "Frame": "Idle 1",
-              "Duration": 5
-            },
-            {
-              "Frame": "Walking 4",
-              "Duration": 5
-            },
-            {
-              "Command": "GotoCommandOffset",
-              "Parameter": 0
-            }
+            { "Frame": "Walking 1", "Duration": 5 },
+            { "Frame": "Idle 1",    "Duration": 5 },
+            { "Frame": "Walking 2", "Duration": 5 },
+            { "Frame": "Walking 3", "Duration": 5 },
+            { "Frame": "Idle 1",    "Duration": 5 },
+            { "Frame": "Walking 4", "Duration": 5 },
+            { "Command": "GotoCommandOffset", "Parameter": 0 }
           ]
         }
       }
@@ -397,113 +130,35 @@
       "CollisionSize": 40,
       "Scale": 1.0,
       "FrameGroups": {
-        "Backflip 1": {
-          "Directions": 4,
-          "SpritesheetX": 0,
-          "SpritesheetY": 0
-        },
-        "Backflip 10": {
-          "Directions": 4,
-          "SpritesheetX": 48,
-          "SpritesheetY": 0
-        },
-        "Backflip 2": {
-          "Directions": 4,
-          "SpritesheetX": 96,
-          "SpritesheetY": 0
-        },
-        "Backflip 3": {
-          "Directions": 4,
-          "SpritesheetX": 144,
-          "SpritesheetY": 0
-        },
-        "Backflip 4": {
-          "Directions": 4,
-          "SpritesheetX": 192,
-          "SpritesheetY": 0
-        },
-        "Backflip 5": {
-          "Directions": 4,
-          "SpritesheetX": 240,
-          "SpritesheetY": 0
-        },
-        "Backflip 6": {
-          "Directions": 4,
-          "SpritesheetX": 288,
-          "SpritesheetY": 0
-        },
-        "Backflip 7": {
-          "Directions": 4,
-          "SpritesheetX": 336,
-          "SpritesheetY": 0
-        },
-        "Backflip 8": {
-          "Directions": 4,
-          "SpritesheetX": 384,
-          "SpritesheetY": 0
-        },
-        "Backflip 9": {
-          "Directions": 4,
-          "SpritesheetX": 432,
-          "SpritesheetY": 0
-        }
+        "Backflip 1":  { "Directions": 4, "SpritesheetX": 0,   "SpritesheetY": 0 },
+        "Backflip 10": { "Directions": 4, "SpritesheetX": 48,  "SpritesheetY": 0 },
+        "Backflip 2":  { "Directions": 4, "SpritesheetX": 96,  "SpritesheetY": 0 },
+        "Backflip 3":  { "Directions": 4, "SpritesheetX": 144, "SpritesheetY": 0 },
+        "Backflip 4":  { "Directions": 4, "SpritesheetX": 192, "SpritesheetY": 0 },
+        "Backflip 5":  { "Directions": 4, "SpritesheetX": 240, "SpritesheetY": 0 },
+        "Backflip 6":  { "Directions": 4, "SpritesheetX": 288, "SpritesheetY": 0 },
+        "Backflip 7":  { "Directions": 4, "SpritesheetX": 336, "SpritesheetY": 0 },
+        "Backflip 8":  { "Directions": 4, "SpritesheetX": 384, "SpritesheetY": 0 },
+        "Backflip 9":  { "Directions": 4, "SpritesheetX": 432, "SpritesheetY": 0 }
       },
       "AnimationByDirections": {
         "4": {
           "Backflip": [
-            {
-              "Frame": "Backflip 1",
-              "Duration": 6
-            },
-            {
-              "Frame": "Backflip 2",
-              "Duration": 3
-            },
-            {
-              "Frame": "Backflip 3",
-              "Duration": 2
-            },
-            {
-              "Frame": "Backflip 4",
-              "Duration": 2
-            },
-            {
-              "Frame": "Backflip 5",
-              "Duration": 4
-            },
-            {
-              "Frame": "Backflip 6",
-              "Duration": 3
-            },
-            {
-              "Frame": "Backflip 7",
-              "Duration": 2
-            },
-            {
-              "Frame": "Backflip 8",
-              "Duration": 2
-            },
-            {
-              "Frame": "Backflip 9",
-              "Duration": 2
-            },
-            {
-              "Frame": "Backflip 10",
-              "Duration": 4
-            },
-            {
-              "Command": "GotoCommandOffset",
-              "Parameter": 0
-            }
+            { "Frame": "Backflip 1",  "Duration": 6 },
+            { "Frame": "Backflip 2",  "Duration": 3 },
+            { "Frame": "Backflip 3",  "Duration": 2 },
+            { "Frame": "Backflip 4",  "Duration": 2 },
+            { "Frame": "Backflip 5",  "Duration": 4 },
+            { "Frame": "Backflip 6",  "Duration": 3 },
+            { "Frame": "Backflip 7",  "Duration": 2 },
+            { "Frame": "Backflip 8",  "Duration": 2 },
+            { "Frame": "Backflip 9",  "Duration": 2 },
+            { "Frame": "Backflip 10", "Duration": 4 },
+            { "Command": "GotoCommandOffset", "Parameter": 0 }
           ],
           "StillFrame": [
-            {
-              "Frame": "Backflip 1",
-              "Duration": 10
-            },
-            {
-              "Command": "Stop"
-            }
+            { "Frame": "Backflip 1", "Duration": 10 },
+            { "Command": "Stop" }
           ]
         }
       }

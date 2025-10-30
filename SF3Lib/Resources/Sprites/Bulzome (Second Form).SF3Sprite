@@ -22,26 +22,10 @@
             "SpritesheetY": 0
           }
         },
-        "Idle 1": {
-          "Directions": 4,
-          "SpritesheetX": 144,
-          "SpritesheetY": 0
-        },
-        "Idle 2": {
-          "Directions": 4,
-          "SpritesheetX": 216,
-          "SpritesheetY": 0
-        },
-        "Idle 3": {
-          "Directions": 4,
-          "SpritesheetX": 288,
-          "SpritesheetY": 0
-        },
-        "Idle 4": {
-          "Directions": 4,
-          "SpritesheetX": 360,
-          "SpritesheetY": 0
-        },
+        "Idle 1": { "Directions": 4, "SpritesheetX": 144, "SpritesheetY": 0 },
+        "Idle 2": { "Directions": 4, "SpritesheetX": 216, "SpritesheetY": 0 },
+        "Idle 3": { "Directions": 4, "SpritesheetX": 288, "SpritesheetY": 0 },
+        "Idle 4": { "Directions": 4, "SpritesheetX": 360, "SpritesheetY": 0 },
         "PointingToCrystal 1": {
           "SSE": {
             "SpritesheetX": 432,
@@ -88,252 +72,60 @@
       "AnimationByDirections": {
         "OneNoFlip": {
           "GettingBackUp": [
-            {
-              "Frame": {
-                "First": {
-                  "Frame": "GettingBackUp 1",
-                  "Direction": "SSE"
-                }
-              },
-              "Duration": 4
-            },
-            {
-              "Frame": {
-                "First": {
-                  "Frame": "GettingBackUp 2",
-                  "Direction": "SSE"
-                }
-              },
-              "Duration": 12
-            },
-            {
-              "Frame": {
-                "First": {
-                  "Frame": "PointingToCrystal 1",
-                  "Direction": "SSE"
-                }
-              },
-              "Duration": 16
-            },
-            {
-              "Command": "Stop"
-            }
+            { "Frame": { "First": { "Frame": "GettingBackUp 1",     "Direction": "SSE" } }, "Duration": 4 },
+            { "Frame": { "First": { "Frame": "GettingBackUp 2",     "Direction": "SSE" } }, "Duration": 12 },
+            { "Frame": { "First": { "Frame": "PointingToCrystal 1", "Direction": "SSE" } }, "Duration": 16 },
+            { "Command": "Stop" }
           ],
           "KeelingOver": [
-            {
-              "Frame": {
-                "First": {
-                  "Frame": "PointingToCrystal 1",
-                  "Direction": "SSE"
-                }
-              },
-              "Duration": 4
-            },
-            {
-              "Frame": {
-                "First": {
-                  "Frame": "GettingBackUp 2",
-                  "Direction": "SSE"
-                }
-              },
-              "Duration": 3
-            },
-            {
-              "Frame": {
-                "First": {
-                  "Frame": "GettingBackUp 1",
-                  "Direction": "SSE"
-                }
-              },
-              "Duration": 4
-            },
-            {
-              "Command": "Stop"
-            }
+            { "Frame": { "First": { "Frame": "PointingToCrystal 1", "Direction": "SSE" } }, "Duration": 4 },
+            { "Frame": { "First": { "Frame": "GettingBackUp 2",     "Direction": "SSE" } }, "Duration": 3 },
+            { "Frame": { "First": { "Frame": "GettingBackUp 1",     "Direction": "SSE" } }, "Duration": 4 },
+            { "Command": "Stop" }
           ],
           "PointingToCrystal": [
-            {
-              "Frame": {
-                "First": {
-                  "Frame": "PointingToCrystal 1",
-                  "Direction": "SSE"
-                }
-              },
-              "Duration": 4
-            },
-            {
-              "Frame": {
-                "First": {
-                  "Frame": "PointingToCrystal 2",
-                  "Direction": "SSE"
-                }
-              },
-              "Duration": 4
-            },
-            {
-              "Frame": {
-                "First": {
-                  "Frame": "PointingToCrystal 3",
-                  "Direction": "SSE"
-                }
-              },
-              "Duration": 4
-            },
-            {
-              "Command": "Stop"
-            }
+            { "Frame": { "First": { "Frame": "PointingToCrystal 1", "Direction": "SSE" } }, "Duration": 4 },
+            { "Frame": { "First": { "Frame": "PointingToCrystal 2", "Direction": "SSE" } }, "Duration": 4 },
+            { "Frame": { "First": { "Frame": "PointingToCrystal 3", "Direction": "SSE" } }, "Duration": 4 },
+            { "Command": "Stop" }
           ],
           "RisingUp": [
-            {
-              "Frame": {
-                "First": {
-                  "Frame": "PointingToCrystal 1",
-                  "Direction": "SSE"
-                }
-              },
-              "Duration": 4
-            },
-            {
-              "Frame": {
-                "First": {
-                  "Frame": "RisingUp 1",
-                  "Direction": "SSE"
-                }
-              },
-              "Duration": 3
-            },
-            {
-              "Frame": {
-                "First": {
-                  "Frame": "RisingUp 2",
-                  "Direction": "SSE"
-                }
-              },
-              "Duration": 4
-            },
-            {
-              "Command": "Stop"
-            }
+            { "Frame": { "First": { "Frame": "PointingToCrystal 1", "Direction": "SSE" } }, "Duration": 4 },
+            { "Frame": { "First": { "Frame": "RisingUp 1",          "Direction": "SSE" } }, "Duration": 3 },
+            { "Frame": { "First": { "Frame": "RisingUp 2",          "Direction": "SSE" } }, "Duration": 4 },
+            { "Command": "Stop" }
           ],
           "ShieldingSelf": [
-            {
-              "Frame": {
-                "First": {
-                  "Frame": "PointingToCrystal 1",
-                  "Direction": "SSE"
-                }
-              },
-              "Duration": 4
-            },
-            {
-              "Frame": {
-                "First": {
-                  "Frame": "ShieldingSelf 1",
-                  "Direction": "SSE"
-                }
-              },
-              "Duration": 3
-            },
-            {
-              "Frame": {
-                "First": {
-                  "Frame": "ShieldingSelf 2",
-                  "Direction": "SSE"
-                }
-              },
-              "Duration": 4
-            },
-            {
-              "Frame": {
-                "First": {
-                  "Frame": "ShieldingSelf 1",
-                  "Direction": "SSE"
-                }
-              },
-              "Duration": 2
-            },
-            {
-              "Command": "Stop"
-            }
+            { "Frame": { "First": { "Frame": "PointingToCrystal 1", "Direction": "SSE" } }, "Duration": 4 },
+            { "Frame": { "First": { "Frame": "ShieldingSelf 1",     "Direction": "SSE" } }, "Duration": 3 },
+            { "Frame": { "First": { "Frame": "ShieldingSelf 2",     "Direction": "SSE" } }, "Duration": 4 },
+            { "Frame": { "First": { "Frame": "ShieldingSelf 1",     "Direction": "SSE" } }, "Duration": 2 },
+            { "Command": "Stop" }
           ],
           "StillFrame": [
-            {
-              "Frame": {
-                "First": {
-                  "Frame": "PointingToCrystal 1",
-                  "Direction": "SSE"
-                }
-              },
-              "Duration": 10
-            },
-            {
-              "Command": "Stop"
-            }
+            { "Frame": { "First": { "Frame": "PointingToCrystal 1", "Direction": "SSE" } }, "Duration": 10 },
+            { "Command": "Stop" }
           ]
         },
         "4": {
           "Idle": [
-            {
-              "Frame": "Idle 1",
-              "Duration": 25
-            },
-            {
-              "Frame": "Idle 2",
-              "Duration": 4
-            },
-            {
-              "Frame": "Idle 3",
-              "Duration": 3
-            },
-            {
-              "Frame": "Idle 4",
-              "Duration": 12
-            },
-            {
-              "Frame": "Idle 3",
-              "Duration": 2
-            },
-            {
-              "Frame": "Idle 2",
-              "Duration": 4
-            },
-            {
-              "Frame": "Idle 1",
-              "Duration": 40
-            },
-            {
-              "Frame": "Idle 2",
-              "Duration": 4
-            },
-            {
-              "Frame": "Idle 3",
-              "Duration": 3
-            },
-            {
-              "Frame": "Idle 4",
-              "Duration": 12
-            },
-            {
-              "Frame": "Idle 3",
-              "Duration": 2
-            },
-            {
-              "Frame": "Idle 2",
-              "Duration": 4
-            },
-            {
-              "Command": "GotoCommandOffset",
-              "Parameter": 0
-            }
+            { "Frame": "Idle 1", "Duration": 25 },
+            { "Frame": "Idle 2", "Duration": 4 },
+            { "Frame": "Idle 3", "Duration": 3 },
+            { "Frame": "Idle 4", "Duration": 12 },
+            { "Frame": "Idle 3", "Duration": 2 },
+            { "Frame": "Idle 2", "Duration": 4 },
+            { "Frame": "Idle 1", "Duration": 40 },
+            { "Frame": "Idle 2", "Duration": 4 },
+            { "Frame": "Idle 3", "Duration": 3 },
+            { "Frame": "Idle 4", "Duration": 12 },
+            { "Frame": "Idle 3", "Duration": 2 },
+            { "Frame": "Idle 2", "Duration": 4 },
+            { "Command": "GotoCommandOffset", "Parameter": 0 }
           ],
           "StillFrame": [
-            {
-              "Frame": "Idle 1",
-              "Duration": 10
-            },
-            {
-              "Command": "Stop"
-            }
+            { "Frame": "Idle 1", "Duration": 10 },
+            { "Command": "Stop" }
           ]
         }
       }

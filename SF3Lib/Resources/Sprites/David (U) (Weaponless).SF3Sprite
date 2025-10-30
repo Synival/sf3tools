@@ -10,54 +10,22 @@
       "CollisionSize": 40,
       "Scale": 1.0,
       "FrameGroups": {
-        "OneHandedPushUps 1": {
-          "Directions": 4,
-          "SpritesheetX": 0,
-          "SpritesheetY": 0
-        },
-        "OneHandedPushUps 2": {
-          "Directions": 4,
-          "SpritesheetX": 48,
-          "SpritesheetY": 0
-        },
-        "OneHandedPushUps 3": {
-          "Directions": 4,
-          "SpritesheetX": 96,
-          "SpritesheetY": 0
-        }
+        "OneHandedPushUps 1": { "Directions": 4, "SpritesheetX": 0,  "SpritesheetY": 0 },
+        "OneHandedPushUps 2": { "Directions": 4, "SpritesheetX": 48, "SpritesheetY": 0 },
+        "OneHandedPushUps 3": { "Directions": 4, "SpritesheetX": 96, "SpritesheetY": 0 }
       },
       "AnimationByDirections": {
         "4": {
           "OneHandedPushUps": [
-            {
-              "Frame": "OneHandedPushUps 1",
-              "Duration": 3
-            },
-            {
-              "Frame": "OneHandedPushUps 2",
-              "Duration": 3
-            },
-            {
-              "Frame": "OneHandedPushUps 3",
-              "Duration": 5
-            },
-            {
-              "Frame": "OneHandedPushUps 2",
-              "Duration": 5
-            },
-            {
-              "Command": "GotoCommandOffset",
-              "Parameter": 0
-            }
+            { "Frame": "OneHandedPushUps 1", "Duration": 3 },
+            { "Frame": "OneHandedPushUps 2", "Duration": 3 },
+            { "Frame": "OneHandedPushUps 3", "Duration": 5 },
+            { "Frame": "OneHandedPushUps 2", "Duration": 5 },
+            { "Command": "GotoCommandOffset", "Parameter": 0 }
           ],
           "StillFrame (One-Handed Push Ups)": [
-            {
-              "Frame": "OneHandedPushUps 1",
-              "Duration": 10
-            },
-            {
-              "Command": "Stop"
-            }
+            { "Frame": "OneHandedPushUps 1", "Duration": 10 },
+            { "Command": "Stop" }
           ]
         }
       }

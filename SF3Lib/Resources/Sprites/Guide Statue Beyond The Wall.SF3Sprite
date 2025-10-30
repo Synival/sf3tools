@@ -10,32 +10,17 @@
       "CollisionSize": 40,
       "Scale": 0.7999878,
       "FrameGroups": {
-        "Pointing 1": {
-          "Directions": 8,
-          "SpritesheetX": 0,
-          "SpritesheetY": 0
-        }
+        "Pointing 1": { "Directions": 8, "SpritesheetX": 0, "SpritesheetY": 0 }
       },
       "AnimationByDirections": {
         "8": {
           "StillFrame (Pointing, Repeat)": [
-            {
-              "Frame": "Pointing 1",
-              "Duration": 5
-            },
-            {
-              "Command": "GotoCommandOffset",
-              "Parameter": 0
-            }
+            { "Frame": "Pointing 1", "Duration": 5 },
+            { "Command": "GotoCommandOffset", "Parameter": 0 }
           ],
           "StillFrame (Pointing)": [
-            {
-              "Frame": "Pointing 1",
-              "Duration": 10
-            },
-            {
-              "Command": "Stop"
-            }
+            { "Frame": "Pointing 1", "Duration": 10 },
+            { "Command": "Stop" }
           ]
         }
       }

@@ -32,45 +32,19 @@
       "AnimationByDirections": {
         "4": {
           "Bathing": [
-            {
-              "Frame": "Bathing 1",
-              "Duration": 5
-            },
-            {
-              "Frame": "Bathing 2",
-              "Duration": 5
-            },
-            {
-              "Frame": "Bathing 3",
-              "Duration": 5
-            },
-            {
-              "Frame": "Bathing 2",
-              "Duration": 5
-            },
-            {
-              "Command": "GotoCommandOffset",
-              "Parameter": 0
-            }
+            { "Frame": "Bathing 1", "Duration": 5 },
+            { "Frame": "Bathing 2", "Duration": 5 },
+            { "Frame": "Bathing 3", "Duration": 5 },
+            { "Frame": "Bathing 2", "Duration": 5 },
+            { "Command": "GotoCommandOffset", "Parameter": 0 }
           ],
           "StillFrame": [
-            {
-              "Frame": "Bathing 1",
-              "Duration": 10
-            },
-            {
-              "Command": "Stop"
-            }
+            { "Frame": "Bathing 1", "Duration": 10 },
+            { "Command": "Stop" }
           ],
           "StillFrame (Repeat)": [
-            {
-              "Frame": "Bathing 1",
-              "Duration": 5
-            },
-            {
-              "Command": "GotoCommandOffset",
-              "Parameter": 0
-            }
+            { "Frame": "Bathing 1", "Duration": 5 },
+            { "Command": "GotoCommandOffset", "Parameter": 0 }
           ]
         }
       }

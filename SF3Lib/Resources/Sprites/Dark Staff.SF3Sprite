@@ -10,32 +10,17 @@
       "CollisionSize": 40,
       "Scale": 1.0,
       "FrameGroups": {
-        "Idle (Hovering) 1": {
-          "Directions": 4,
-          "SpritesheetX": 0,
-          "SpritesheetY": 0
-        }
+        "Idle (Hovering) 1": { "Directions": 4, "SpritesheetX": 0, "SpritesheetY": 0 }
       },
       "AnimationByDirections": {
         "4": {
           "StillFrame (Hovering, Repeat)": [
-            {
-              "Frame": "Idle (Hovering) 1",
-              "Duration": 5
-            },
-            {
-              "Command": "GotoCommandOffset",
-              "Parameter": 0
-            }
+            { "Frame": "Idle (Hovering) 1", "Duration": 5 },
+            { "Command": "GotoCommandOffset", "Parameter": 0 }
           ],
           "StillFrame (Hovering)": [
-            {
-              "Frame": "Idle (Hovering) 1",
-              "Duration": 5
-            },
-            {
-              "Command": "Stop"
-            }
+            { "Frame": "Idle (Hovering) 1", "Duration": 5 },
+            { "Command": "Stop" }
           ]
         }
       }

@@ -10,32 +10,17 @@
       "CollisionSize": 40,
       "Scale": 0.69999695,
       "FrameGroups": {
-        "Egg 1": {
-          "Directions": 1,
-          "SpritesheetX": 0,
-          "SpritesheetY": 0
-        }
+        "Egg 1": { "Directions": 1, "SpritesheetX": 0, "SpritesheetY": 0 }
       },
       "AnimationByDirections": {
         "OneNoFlip": {
           "StillFrame (Egg, Repeat)": [
-            {
-              "Frame": "Egg 1",
-              "Duration": 10
-            },
-            {
-              "Command": "GotoCommandOffset",
-              "Parameter": 0
-            }
+            { "Frame": "Egg 1", "Duration": 10 },
+            { "Command": "GotoCommandOffset", "Parameter": 0 }
           ],
           "StillFrame (Egg)": [
-            {
-              "Frame": "Egg 1",
-              "Duration": 10
-            },
-            {
-              "Command": "Stop"
-            }
+            { "Frame": "Egg 1", "Duration": 10 },
+            { "Command": "Stop" }
           ]
         }
       }

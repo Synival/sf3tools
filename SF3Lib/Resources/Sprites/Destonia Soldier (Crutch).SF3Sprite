@@ -10,108 +10,37 @@
       "CollisionSize": 40,
       "Scale": 1.0,
       "FrameGroups": {
-        "Wincing 1": {
-          "Directions": 4,
-          "SpritesheetX": 0,
-          "SpritesheetY": 0
-        },
-        "Wincing 2": {
-          "Directions": 4,
-          "SpritesheetX": 40,
-          "SpritesheetY": 0
-        },
-        "Wincing 3": {
-          "Directions": 4,
-          "SpritesheetX": 80,
-          "SpritesheetY": 0
-        }
+        "Wincing 1": { "Directions": 4, "SpritesheetX": 0,  "SpritesheetY": 0 },
+        "Wincing 2": { "Directions": 4, "SpritesheetX": 40, "SpritesheetY": 0 },
+        "Wincing 3": { "Directions": 4, "SpritesheetX": 80, "SpritesheetY": 0 }
       },
       "AnimationByDirections": {
         "4": {
           "StillFrame (Leaning)": [
-            {
-              "Frame": "Wincing 1",
-              "Duration": 10
-            },
-            {
-              "Command": "Stop"
-            }
+            { "Frame": "Wincing 1", "Duration": 10 },
+            { "Command": "Stop" }
           ],
           "Wincing (Extremely Long Pause)": [
-            {
-              "Frame": "Wincing 1",
-              "Duration": 120
-            },
-            {
-              "Frame": "Wincing 2",
-              "Duration": 4
-            },
-            {
-              "Frame": "Wincing 3",
-              "Duration": 3
-            },
-            {
-              "Frame": "Wincing 2",
-              "Duration": 4
-            },
-            {
-              "Frame": "Wincing 3",
-              "Duration": 3
-            },
-            {
-              "Frame": "Wincing 2",
-              "Duration": 4
-            },
-            {
-              "Frame": "Wincing 3",
-              "Duration": 3
-            },
-            {
-              "Frame": "Wincing 2",
-              "Duration": 6
-            },
-            {
-              "Command": "GotoCommandOffset",
-              "Parameter": 0
-            }
+            { "Frame": "Wincing 1", "Duration": 120 },
+            { "Frame": "Wincing 2", "Duration": 4 },
+            { "Frame": "Wincing 3", "Duration": 3 },
+            { "Frame": "Wincing 2", "Duration": 4 },
+            { "Frame": "Wincing 3", "Duration": 3 },
+            { "Frame": "Wincing 2", "Duration": 4 },
+            { "Frame": "Wincing 3", "Duration": 3 },
+            { "Frame": "Wincing 2", "Duration": 6 },
+            { "Command": "GotoCommandOffset", "Parameter": 0 }
           ],
           "Wincing (Very Long Pause)": [
-            {
-              "Frame": "Wincing 1",
-              "Duration": 60
-            },
-            {
-              "Frame": "Wincing 2",
-              "Duration": 4
-            },
-            {
-              "Frame": "Wincing 3",
-              "Duration": 3
-            },
-            {
-              "Frame": "Wincing 2",
-              "Duration": 4
-            },
-            {
-              "Frame": "Wincing 3",
-              "Duration": 3
-            },
-            {
-              "Frame": "Wincing 2",
-              "Duration": 4
-            },
-            {
-              "Frame": "Wincing 3",
-              "Duration": 3
-            },
-            {
-              "Frame": "Wincing 2",
-              "Duration": 6
-            },
-            {
-              "Command": "GotoCommandOffset",
-              "Parameter": 0
-            }
+            { "Frame": "Wincing 1", "Duration": 60 },
+            { "Frame": "Wincing 2", "Duration": 4 },
+            { "Frame": "Wincing 3", "Duration": 3 },
+            { "Frame": "Wincing 2", "Duration": 4 },
+            { "Frame": "Wincing 3", "Duration": 3 },
+            { "Frame": "Wincing 2", "Duration": 4 },
+            { "Frame": "Wincing 3", "Duration": 3 },
+            { "Frame": "Wincing 2", "Duration": 6 },
+            { "Command": "GotoCommandOffset", "Parameter": 0 }
           ]
         }
       }

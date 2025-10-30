@@ -10,199 +10,63 @@
       "CollisionSize": 40,
       "Scale": 1.0,
       "FrameGroups": {
-        "Nodding (OnGround) 1": {
-          "Directions": 4,
-          "SpritesheetX": 0,
-          "SpritesheetY": 0
-        },
-        "Nodding (OnGround) 2": {
-          "Directions": 4,
-          "SpritesheetX": 48,
-          "SpritesheetY": 0
-        },
-        "Nodding (OnGround) 3": {
-          "Directions": 4,
-          "SpritesheetX": 96,
-          "SpritesheetY": 0
-        },
-        "OpeningEyes (OnGround) 1": {
-          "Directions": 4,
-          "SpritesheetX": 144,
-          "SpritesheetY": 0
-        },
-        "OpeningEyes (OnGround) 2": {
-          "Directions": 4,
-          "SpritesheetX": 192,
-          "SpritesheetY": 0
-        },
-        "ShakingHead (OnGround) 1": {
-          "Directions": 4,
-          "SpritesheetX": 240,
-          "SpritesheetY": 0
-        },
-        "ShakingHead (OnGround) 2": {
-          "Directions": 4,
-          "SpritesheetX": 288,
-          "SpritesheetY": 0
-        },
-        "Twitching (OnGround) 1": {
-          "Directions": 4,
-          "SpritesheetX": 336,
-          "SpritesheetY": 0
-        },
-        "Twitching (OnGround) 2": {
-          "Directions": 4,
-          "SpritesheetX": 384,
-          "SpritesheetY": 0
-        }
+        "Nodding (OnGround) 1":     { "Directions": 4, "SpritesheetX": 0,   "SpritesheetY": 0 },
+        "Nodding (OnGround) 2":     { "Directions": 4, "SpritesheetX": 48,  "SpritesheetY": 0 },
+        "Nodding (OnGround) 3":     { "Directions": 4, "SpritesheetX": 96,  "SpritesheetY": 0 },
+        "OpeningEyes (OnGround) 1": { "Directions": 4, "SpritesheetX": 144, "SpritesheetY": 0 },
+        "OpeningEyes (OnGround) 2": { "Directions": 4, "SpritesheetX": 192, "SpritesheetY": 0 },
+        "ShakingHead (OnGround) 1": { "Directions": 4, "SpritesheetX": 240, "SpritesheetY": 0 },
+        "ShakingHead (OnGround) 2": { "Directions": 4, "SpritesheetX": 288, "SpritesheetY": 0 },
+        "Twitching (OnGround) 1":   { "Directions": 4, "SpritesheetX": 336, "SpritesheetY": 0 },
+        "Twitching (OnGround) 2":   { "Directions": 4, "SpritesheetX": 384, "SpritesheetY": 0 }
       },
       "AnimationByDirections": {
         "4": {
           "Nodding (OnGround)": [
-            {
-              "Frame": "Nodding (OnGround) 1",
-              "Duration": 6
-            },
-            {
-              "Frame": "Nodding (OnGround) 2",
-              "Duration": 3
-            },
-            {
-              "Frame": "Nodding (OnGround) 3",
-              "Duration": 7
-            },
-            {
-              "Frame": "Nodding (OnGround) 2",
-              "Duration": 4
-            },
-            {
-              "Command": "GotoAnimation",
-              "Parameter": 0
-            }
+            { "Frame": "Nodding (OnGround) 1", "Duration": 6 },
+            { "Frame": "Nodding (OnGround) 2", "Duration": 3 },
+            { "Frame": "Nodding (OnGround) 3", "Duration": 7 },
+            { "Frame": "Nodding (OnGround) 2", "Duration": 4 },
+            { "Command": "GotoAnimation", "Parameter": 0 }
           ],
           "OpeningEyes (OnGround)": [
-            {
-              "Frame": "OpeningEyes (OnGround) 1",
-              "Duration": 24
-            },
-            {
-              "Frame": "OpeningEyes (OnGround) 2",
-              "Duration": 2
-            },
-            {
-              "Frame": "Nodding (OnGround) 1",
-              "Duration": 3
-            },
-            {
-              "Frame": "OpeningEyes (OnGround) 2",
-              "Duration": 2
-            },
-            {
-              "Frame": "OpeningEyes (OnGround) 1",
-              "Duration": 6
-            },
-            {
-              "Frame": "Nodding (OnGround) 1",
-              "Duration": 120
-            },
-            {
-              "Command": "GotoAnimation",
-              "Parameter": 5
-            }
+            { "Frame": "OpeningEyes (OnGround) 1", "Duration": 24 },
+            { "Frame": "OpeningEyes (OnGround) 2", "Duration": 2 },
+            { "Frame": "Nodding (OnGround) 1",     "Duration": 3 },
+            { "Frame": "OpeningEyes (OnGround) 2", "Duration": 2 },
+            { "Frame": "OpeningEyes (OnGround) 1", "Duration": 6 },
+            { "Frame": "Nodding (OnGround) 1",     "Duration": 120 },
+            { "Command": "GotoAnimation", "Parameter": 5 }
           ],
           "ShakingHead (OnGround)": [
-            {
-              "Frame": "Nodding (OnGround) 1",
-              "Duration": 3
-            },
-            {
-              "Frame": "ShakingHead (OnGround) 1",
-              "Duration": 3
-            },
-            {
-              "Frame": "Nodding (OnGround) 1",
-              "Duration": 3
-            },
-            {
-              "Frame": "ShakingHead (OnGround) 2",
-              "Duration": 3
-            },
-            {
-              "Frame": "Nodding (OnGround) 1",
-              "Duration": 3
-            },
-            {
-              "Frame": "ShakingHead (OnGround) 1",
-              "Duration": 3
-            },
-            {
-              "Frame": "Nodding (OnGround) 1",
-              "Duration": 3
-            },
-            {
-              "Frame": "ShakingHead (OnGround) 2",
-              "Duration": 3
-            },
-            {
-              "Command": "GotoAnimation",
-              "Parameter": 0
-            }
+            { "Frame": "Nodding (OnGround) 1",     "Duration": 3 },
+            { "Frame": "ShakingHead (OnGround) 1", "Duration": 3 },
+            { "Frame": "Nodding (OnGround) 1",     "Duration": 3 },
+            { "Frame": "ShakingHead (OnGround) 2", "Duration": 3 },
+            { "Frame": "Nodding (OnGround) 1",     "Duration": 3 },
+            { "Frame": "ShakingHead (OnGround) 1", "Duration": 3 },
+            { "Frame": "Nodding (OnGround) 1",     "Duration": 3 },
+            { "Frame": "ShakingHead (OnGround) 2", "Duration": 3 },
+            { "Command": "GotoAnimation", "Parameter": 0 }
           ],
           "StillFrame (OnGround, Eyes Closed)": [
-            {
-              "Frame": "OpeningEyes (OnGround) 1",
-              "Duration": 10
-            },
-            {
-              "Command": "Stop"
-            }
+            { "Frame": "OpeningEyes (OnGround) 1", "Duration": 10 },
+            { "Command": "Stop" }
           ],
           "StillFrame (OnGround, Eyes Open)": [
-            {
-              "Frame": "Nodding (OnGround) 1",
-              "Duration": 10
-            },
-            {
-              "Command": "Stop"
-            }
+            { "Frame": "Nodding (OnGround) 1", "Duration": 10 },
+            { "Command": "Stop" }
           ],
           "Twitching (OnGround)": [
-            {
-              "Frame": "OpeningEyes (OnGround) 1",
-              "Duration": 24
-            },
-            {
-              "Frame": "Twitching (OnGround) 1",
-              "Duration": 2
-            },
-            {
-              "Frame": "Twitching (OnGround) 2",
-              "Duration": 2
-            },
-            {
-              "Frame": "Twitching (OnGround) 1",
-              "Duration": 2
-            },
-            {
-              "Frame": "OpeningEyes (OnGround) 1",
-              "Duration": 2
-            },
-            {
-              "Frame": "Twitching (OnGround) 1",
-              "Duration": 2
-            },
-            {
-              "Frame": "Twitching (OnGround) 2",
-              "Duration": 2
-            },
-            {
-              "Frame": "Twitching (OnGround) 1",
-              "Duration": 2
-            },
-            {
-              "Command": "GotoCommandOffset",
-              "Parameter": 0
-            }
+            { "Frame": "OpeningEyes (OnGround) 1", "Duration": 24 },
+            { "Frame": "Twitching (OnGround) 1",   "Duration": 2 },
+            { "Frame": "Twitching (OnGround) 2",   "Duration": 2 },
+            { "Frame": "Twitching (OnGround) 1",   "Duration": 2 },
+            { "Frame": "OpeningEyes (OnGround) 1", "Duration": 2 },
+            { "Frame": "Twitching (OnGround) 1",   "Duration": 2 },
+            { "Frame": "Twitching (OnGround) 2",   "Duration": 2 },
+            { "Frame": "Twitching (OnGround) 1",   "Duration": 2 },
+            { "Command": "GotoCommandOffset", "Parameter": 0 }
           ]
         }
       }

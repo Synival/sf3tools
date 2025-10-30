@@ -10,53 +10,23 @@
       "CollisionSize": 16,
       "Scale": 1.0,
       "FrameGroups": {
-        "BlinkRedOnce 1": {
-          "Directions": 1,
-          "SpritesheetX": 0,
-          "SpritesheetY": 0
-        },
-        "BlinkWhiteOnce 1": {
-          "Directions": 1,
-          "SpritesheetX": 16,
-          "SpritesheetY": 0
-        },
-        "BlinkYellowOnce 1": {
-          "Directions": 1,
-          "SpritesheetX": 32,
-          "SpritesheetY": 0
-        }
+        "BlinkRedOnce 1":    { "Directions": 1, "SpritesheetX": 0,  "SpritesheetY": 0 },
+        "BlinkWhiteOnce 1":  { "Directions": 1, "SpritesheetX": 16, "SpritesheetY": 0 },
+        "BlinkYellowOnce 1": { "Directions": 1, "SpritesheetX": 32, "SpritesheetY": 0 }
       },
       "AnimationByDirections": {
         "OneNoFlip": {
           "BlinkRedOnce": [
-            {
-              "Frame": "BlinkRedOnce 1",
-              "Duration": 10
-            },
-            {
-              "Command": "GotoAnimation",
-              "Parameter": 0
-            }
+            { "Frame": "BlinkRedOnce 1", "Duration": 10 },
+            { "Command": "GotoAnimation", "Parameter": 0 }
           ],
           "BlinkWhiteOnce": [
-            {
-              "Frame": "BlinkWhiteOnce 1",
-              "Duration": 10
-            },
-            {
-              "Command": "GotoAnimation",
-              "Parameter": 0
-            }
+            { "Frame": "BlinkWhiteOnce 1", "Duration": 10 },
+            { "Command": "GotoAnimation", "Parameter": 0 }
           ],
           "BlinkYellowOnce": [
-            {
-              "Frame": "BlinkYellowOnce 1",
-              "Duration": 10
-            },
-            {
-              "Command": "GotoAnimation",
-              "Parameter": 0
-            }
+            { "Frame": "BlinkYellowOnce 1", "Duration": 10 },
+            { "Command": "GotoAnimation", "Parameter": 0 }
           ]
         }
       }

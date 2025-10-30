@@ -10,118 +10,39 @@
       "CollisionSize": 40,
       "Scale": 1.0999908,
       "FrameGroups": {
-        "Flying 1": {
-          "Directions": 4,
-          "SpritesheetX": 0,
-          "SpritesheetY": 0
-        },
-        "Flying 2": {
-          "Directions": 4,
-          "SpritesheetX": 48,
-          "SpritesheetY": 0
-        },
-        "Flying 3": {
-          "Directions": 4,
-          "SpritesheetX": 96,
-          "SpritesheetY": 0
-        },
-        "Flying 4": {
-          "Directions": 4,
-          "SpritesheetX": 144,
-          "SpritesheetY": 0
-        },
-        "Flying 5": {
-          "Directions": 4,
-          "SpritesheetX": 192,
-          "SpritesheetY": 0
-        }
+        "Flying 1": { "Directions": 4, "SpritesheetX": 0,   "SpritesheetY": 0 },
+        "Flying 2": { "Directions": 4, "SpritesheetX": 48,  "SpritesheetY": 0 },
+        "Flying 3": { "Directions": 4, "SpritesheetX": 96,  "SpritesheetY": 0 },
+        "Flying 4": { "Directions": 4, "SpritesheetX": 144, "SpritesheetY": 0 },
+        "Flying 5": { "Directions": 4, "SpritesheetX": 192, "SpritesheetY": 0 }
       },
       "AnimationByDirections": {
         "4": {
           "Flying (Faster)": [
-            {
-              "Frame": "Flying 1",
-              "Duration": 4
-            },
-            {
-              "Frame": "Flying 2",
-              "Duration": 4
-            },
-            {
-              "Frame": "Flying 3",
-              "Duration": 4
-            },
-            {
-              "Frame": "Flying 4",
-              "Duration": 4
-            },
-            {
-              "Frame": "Flying 5",
-              "Duration": 4
-            },
-            {
-              "Frame": "Flying 4",
-              "Duration": 4
-            },
-            {
-              "Frame": "Flying 3",
-              "Duration": 4
-            },
-            {
-              "Frame": "Flying 2",
-              "Duration": 4
-            },
-            {
-              "Command": "GotoCommandOffset",
-              "Parameter": 0
-            }
+            { "Frame": "Flying 1", "Duration": 4 },
+            { "Frame": "Flying 2", "Duration": 4 },
+            { "Frame": "Flying 3", "Duration": 4 },
+            { "Frame": "Flying 4", "Duration": 4 },
+            { "Frame": "Flying 5", "Duration": 4 },
+            { "Frame": "Flying 4", "Duration": 4 },
+            { "Frame": "Flying 3", "Duration": 4 },
+            { "Frame": "Flying 2", "Duration": 4 },
+            { "Command": "GotoCommandOffset", "Parameter": 0 }
           ],
           "Flying (Slower)": [
-            {
-              "Frame": "Flying 1",
-              "Duration": 5
-            },
-            {
-              "Frame": "Flying 2",
-              "Duration": 5
-            },
-            {
-              "Frame": "Flying 3",
-              "Duration": 5
-            },
-            {
-              "Frame": "Flying 4",
-              "Duration": 5
-            },
-            {
-              "Frame": "Flying 5",
-              "Duration": 5
-            },
-            {
-              "Frame": "Flying 4",
-              "Duration": 5
-            },
-            {
-              "Frame": "Flying 3",
-              "Duration": 5
-            },
-            {
-              "Frame": "Flying 2",
-              "Duration": 5
-            },
-            {
-              "Command": "GotoCommandOffset",
-              "Parameter": 0
-            }
+            { "Frame": "Flying 1", "Duration": 5 },
+            { "Frame": "Flying 2", "Duration": 5 },
+            { "Frame": "Flying 3", "Duration": 5 },
+            { "Frame": "Flying 4", "Duration": 5 },
+            { "Frame": "Flying 5", "Duration": 5 },
+            { "Frame": "Flying 4", "Duration": 5 },
+            { "Frame": "Flying 3", "Duration": 5 },
+            { "Frame": "Flying 2", "Duration": 5 },
+            { "Command": "GotoCommandOffset", "Parameter": 0 }
           ],
           "StillFrame": [
-            {
-              "Frame": "Flying 1",
-              "Duration": 10
-            },
-            {
-              "Command": "Stop"
-            }
+            { "Frame": "Flying 1", "Duration": 10 },
+            { "Command": "Stop" }
           ]
         }
       }

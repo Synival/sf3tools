@@ -10,187 +10,57 @@
       "CollisionSize": 40,
       "Scale": 0.69999695,
       "FrameGroups": {
-        "Idle (Still then Nibbling) 1": {
-          "Directions": 4,
-          "SpritesheetX": 0,
-          "SpritesheetY": 0
-        },
-        "Idle (Still then Nibbling) 2": {
-          "Directions": 4,
-          "SpritesheetX": 48,
-          "SpritesheetY": 0
-        },
-        "Idle (Still then Nibbling) 3": {
-          "Directions": 4,
-          "SpritesheetX": 96,
-          "SpritesheetY": 0
-        },
-        "Idle (Still then Nibbling) 4": {
-          "Directions": 4,
-          "SpritesheetX": 144,
-          "SpritesheetY": 0
-        },
-        "Running 1": {
-          "Directions": 4,
-          "SpritesheetX": 192,
-          "SpritesheetY": 0
-        },
-        "Running 2": {
-          "Directions": 4,
-          "SpritesheetX": 240,
-          "SpritesheetY": 0
-        },
-        "Running 3": {
-          "Directions": 4,
-          "SpritesheetX": 288,
-          "SpritesheetY": 0
-        },
-        "Running 4": {
-          "Directions": 4,
-          "SpritesheetX": 336,
-          "SpritesheetY": 0
-        },
-        "Running 5": {
-          "Directions": 4,
-          "SpritesheetX": 384,
-          "SpritesheetY": 0
-        }
+        "Idle (Still then Nibbling) 1": { "Directions": 4, "SpritesheetX": 0,   "SpritesheetY": 0 },
+        "Idle (Still then Nibbling) 2": { "Directions": 4, "SpritesheetX": 48,  "SpritesheetY": 0 },
+        "Idle (Still then Nibbling) 3": { "Directions": 4, "SpritesheetX": 96,  "SpritesheetY": 0 },
+        "Idle (Still then Nibbling) 4": { "Directions": 4, "SpritesheetX": 144, "SpritesheetY": 0 },
+        "Running 1":                    { "Directions": 4, "SpritesheetX": 192, "SpritesheetY": 0 },
+        "Running 2":                    { "Directions": 4, "SpritesheetX": 240, "SpritesheetY": 0 },
+        "Running 3":                    { "Directions": 4, "SpritesheetX": 288, "SpritesheetY": 0 },
+        "Running 4":                    { "Directions": 4, "SpritesheetX": 336, "SpritesheetY": 0 },
+        "Running 5":                    { "Directions": 4, "SpritesheetX": 384, "SpritesheetY": 0 }
       },
       "AnimationByDirections": {
         "4": {
           "Idle (Still then Nibbling)": [
-            {
-              "Frame": "Idle (Still then Nibbling) 1",
-              "Duration": 150
-            },
-            {
-              "Frame": "Idle (Still then Nibbling) 2",
-              "Duration": 5
-            },
-            {
-              "Frame": "Idle (Still then Nibbling) 3",
-              "Duration": 2
-            },
-            {
-              "Frame": "Idle (Still then Nibbling) 4",
-              "Duration": 2
-            },
-            {
-              "Frame": "Idle (Still then Nibbling) 3",
-              "Duration": 2
-            },
-            {
-              "Frame": "Idle (Still then Nibbling) 4",
-              "Duration": 2
-            },
-            {
-              "Frame": "Idle (Still then Nibbling) 3",
-              "Duration": 2
-            },
-            {
-              "Frame": "Idle (Still then Nibbling) 4",
-              "Duration": 2
-            },
-            {
-              "Frame": "Idle (Still then Nibbling) 3",
-              "Duration": 2
-            },
-            {
-              "Frame": "Idle (Still then Nibbling) 4",
-              "Duration": 2
-            },
-            {
-              "Frame": "Idle (Still then Nibbling) 3",
-              "Duration": 2
-            },
-            {
-              "Frame": "Idle (Still then Nibbling) 4",
-              "Duration": 2
-            },
-            {
-              "Frame": "Idle (Still then Nibbling) 3",
-              "Duration": 2
-            },
-            {
-              "Frame": "Idle (Still then Nibbling) 4",
-              "Duration": 2
-            },
-            {
-              "Frame": "Idle (Still then Nibbling) 3",
-              "Duration": 2
-            },
-            {
-              "Frame": "Idle (Still then Nibbling) 4",
-              "Duration": 2
-            },
-            {
-              "Frame": "Idle (Still then Nibbling) 3",
-              "Duration": 2
-            },
-            {
-              "Frame": "Idle (Still then Nibbling) 4",
-              "Duration": 2
-            },
-            {
-              "Frame": "Idle (Still then Nibbling) 3",
-              "Duration": 2
-            },
-            {
-              "Frame": "Idle (Still then Nibbling) 2",
-              "Duration": 5
-            },
-            {
-              "Command": "GotoCommandOffset",
-              "Parameter": 0
-            }
+            { "Frame": "Idle (Still then Nibbling) 1", "Duration": 150 },
+            { "Frame": "Idle (Still then Nibbling) 2", "Duration": 5 },
+            { "Frame": "Idle (Still then Nibbling) 3", "Duration": 2 },
+            { "Frame": "Idle (Still then Nibbling) 4", "Duration": 2 },
+            { "Frame": "Idle (Still then Nibbling) 3", "Duration": 2 },
+            { "Frame": "Idle (Still then Nibbling) 4", "Duration": 2 },
+            { "Frame": "Idle (Still then Nibbling) 3", "Duration": 2 },
+            { "Frame": "Idle (Still then Nibbling) 4", "Duration": 2 },
+            { "Frame": "Idle (Still then Nibbling) 3", "Duration": 2 },
+            { "Frame": "Idle (Still then Nibbling) 4", "Duration": 2 },
+            { "Frame": "Idle (Still then Nibbling) 3", "Duration": 2 },
+            { "Frame": "Idle (Still then Nibbling) 4", "Duration": 2 },
+            { "Frame": "Idle (Still then Nibbling) 3", "Duration": 2 },
+            { "Frame": "Idle (Still then Nibbling) 4", "Duration": 2 },
+            { "Frame": "Idle (Still then Nibbling) 3", "Duration": 2 },
+            { "Frame": "Idle (Still then Nibbling) 4", "Duration": 2 },
+            { "Frame": "Idle (Still then Nibbling) 3", "Duration": 2 },
+            { "Frame": "Idle (Still then Nibbling) 4", "Duration": 2 },
+            { "Frame": "Idle (Still then Nibbling) 3", "Duration": 2 },
+            { "Frame": "Idle (Still then Nibbling) 2", "Duration": 5 },
+            { "Command": "GotoCommandOffset", "Parameter": 0 }
           ],
           "Running": [
-            {
-              "Frame": "Running 1",
-              "Duration": 1
-            },
-            {
-              "Frame": "Running 2",
-              "Duration": 1
-            },
-            {
-              "Frame": "Running 3",
-              "Duration": 1
-            },
-            {
-              "Frame": "Running 4",
-              "Duration": 1
-            },
-            {
-              "Frame": "Running 2",
-              "Duration": 1
-            },
-            {
-              "Frame": "Running 5",
-              "Duration": 1
-            },
-            {
-              "Command": "GotoCommandOffset",
-              "Parameter": 0
-            }
+            { "Frame": "Running 1", "Duration": 1 },
+            { "Frame": "Running 2", "Duration": 1 },
+            { "Frame": "Running 3", "Duration": 1 },
+            { "Frame": "Running 4", "Duration": 1 },
+            { "Frame": "Running 2", "Duration": 1 },
+            { "Frame": "Running 5", "Duration": 1 },
+            { "Command": "GotoCommandOffset", "Parameter": 0 }
           ],
           "StillFrame (Down)": [
-            {
-              "Frame": "Running 2",
-              "Duration": 10
-            },
-            {
-              "Command": "Stop"
-            }
+            { "Frame": "Running 2", "Duration": 10 },
+            { "Command": "Stop" }
           ],
           "StillFrame (Up)": [
-            {
-              "Frame": "Idle (Still then Nibbling) 1",
-              "Duration": 10
-            },
-            {
-              "Command": "Stop"
-            }
+            { "Frame": "Idle (Still then Nibbling) 1", "Duration": 10 },
+            { "Command": "Stop" }
           ]
         }
       }

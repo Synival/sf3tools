@@ -10,86 +10,27 @@
       "CollisionSize": 48,
       "Scale": 1.0,
       "FrameGroups": {
-        "Exploding 1": {
-          "Directions": 1,
-          "SpritesheetX": 0,
-          "SpritesheetY": 0
-        },
-        "Exploding 2": {
-          "Directions": 1,
-          "SpritesheetX": 64,
-          "SpritesheetY": 0
-        },
-        "Exploding 3": {
-          "Directions": 1,
-          "SpritesheetX": 128,
-          "SpritesheetY": 0
-        },
-        "Exploding 4": {
-          "Directions": 1,
-          "SpritesheetX": 192,
-          "SpritesheetY": 0
-        },
-        "Exploding 5": {
-          "Directions": 1,
-          "SpritesheetX": 256,
-          "SpritesheetY": 0
-        },
-        "Exploding 6": {
-          "Directions": 1,
-          "SpritesheetX": 320,
-          "SpritesheetY": 0
-        },
-        "Exploding 7": {
-          "Directions": 1,
-          "SpritesheetX": 384,
-          "SpritesheetY": 0
-        },
-        "Exploding 8": {
-          "Directions": 1,
-          "SpritesheetX": 448,
-          "SpritesheetY": 0
-        }
+        "Exploding 1": { "Directions": 1, "SpritesheetX": 0,   "SpritesheetY": 0 },
+        "Exploding 2": { "Directions": 1, "SpritesheetX": 64,  "SpritesheetY": 0 },
+        "Exploding 3": { "Directions": 1, "SpritesheetX": 128, "SpritesheetY": 0 },
+        "Exploding 4": { "Directions": 1, "SpritesheetX": 192, "SpritesheetY": 0 },
+        "Exploding 5": { "Directions": 1, "SpritesheetX": 256, "SpritesheetY": 0 },
+        "Exploding 6": { "Directions": 1, "SpritesheetX": 320, "SpritesheetY": 0 },
+        "Exploding 7": { "Directions": 1, "SpritesheetX": 384, "SpritesheetY": 0 },
+        "Exploding 8": { "Directions": 1, "SpritesheetX": 448, "SpritesheetY": 0 }
       },
       "AnimationByDirections": {
         "OneNoFlip": {
           "Exploding (Slow then Fast)": [
-            {
-              "Frame": "Exploding 1",
-              "Duration": 6
-            },
-            {
-              "Frame": "Exploding 2",
-              "Duration": 5
-            },
-            {
-              "Frame": "Exploding 3",
-              "Duration": 4
-            },
-            {
-              "Frame": "Exploding 4",
-              "Duration": 3
-            },
-            {
-              "Frame": "Exploding 5",
-              "Duration": 2
-            },
-            {
-              "Frame": "Exploding 6",
-              "Duration": 1
-            },
-            {
-              "Frame": "Exploding 7",
-              "Duration": 1
-            },
-            {
-              "Frame": "Exploding 8",
-              "Duration": 1
-            },
-            {
-              "Command": "GotoAnimation",
-              "Parameter": 0
-            }
+            { "Frame": "Exploding 1", "Duration": 6 },
+            { "Frame": "Exploding 2", "Duration": 5 },
+            { "Frame": "Exploding 3", "Duration": 4 },
+            { "Frame": "Exploding 4", "Duration": 3 },
+            { "Frame": "Exploding 5", "Duration": 2 },
+            { "Frame": "Exploding 6", "Duration": 1 },
+            { "Frame": "Exploding 7", "Duration": 1 },
+            { "Frame": "Exploding 8", "Duration": 1 },
+            { "Command": "GotoAnimation", "Parameter": 0 }
           ]
         }
       }

@@ -10,542 +10,147 @@
       "CollisionSize": 48,
       "Scale": 1.0,
       "FrameGroups": {
-        "Giggle 1": {
-          "Directions": 1,
-          "SpritesheetX": 0,
-          "SpritesheetY": 0
-        },
-        "Giggle 2": {
-          "Directions": 1,
-          "SpritesheetX": 64,
-          "SpritesheetY": 0
-        },
-        "Giggle 3": {
-          "Directions": 1,
-          "SpritesheetX": 128,
-          "SpritesheetY": 0
-        },
-        "Giggle 4": {
-          "Directions": 1,
-          "SpritesheetX": 192,
-          "SpritesheetY": 0
-        },
-        "Idle 1": {
-          "Directions": 1,
-          "SpritesheetX": 256,
-          "SpritesheetY": 0
-        },
-        "Idle 2": {
-          "Directions": 1,
-          "SpritesheetX": 320,
-          "SpritesheetY": 0
-        },
-        "Idle 3": {
-          "Directions": 1,
-          "SpritesheetX": 384,
-          "SpritesheetY": 0
-        },
-        "SlapIshahakat 1": {
-          "Directions": 1,
-          "SpritesheetX": 448,
-          "SpritesheetY": 0
-        },
-        "SlapIshahakat 10": {
-          "Directions": 1,
-          "SpritesheetX": 512,
-          "SpritesheetY": 0
-        },
-        "SlapIshahakat 2": {
-          "Directions": 1,
-          "SpritesheetX": 576,
-          "SpritesheetY": 0
-        },
-        "SlapIshahakat 3": {
-          "Directions": 1,
-          "SpritesheetX": 640,
-          "SpritesheetY": 0
-        },
-        "SlapIshahakat 4": {
-          "Directions": 1,
-          "SpritesheetX": 704,
-          "SpritesheetY": 0
-        },
-        "SlapIshahakat 5": {
-          "Directions": 1,
-          "SpritesheetX": 768,
-          "SpritesheetY": 0
-        },
-        "SlapIshahakat 6": {
-          "Directions": 1,
-          "SpritesheetX": 832,
-          "SpritesheetY": 0
-        },
-        "SlapIshahakat 7": {
-          "Directions": 1,
-          "SpritesheetX": 896,
-          "SpritesheetY": 0
-        },
-        "SlapIshahakat 8": {
-          "Directions": 1,
-          "SpritesheetX": 960,
-          "SpritesheetY": 0
-        },
-        "SlapIshahakat 9": {
-          "Directions": 1,
-          "SpritesheetX": 1024,
-          "SpritesheetY": 0
-        },
-        "SpinUpToDown 1": {
-          "Directions": 1,
-          "SpritesheetX": 1088,
-          "SpritesheetY": 0
-        },
-        "SpinUpToDown 2": {
-          "Directions": 1,
-          "SpritesheetX": 1152,
-          "SpritesheetY": 0
-        },
-        "SpinUpToDown 3": {
-          "Directions": 1,
-          "SpritesheetX": 1216,
-          "SpritesheetY": 0
-        },
-        "SpinUpToDown 4": {
-          "Directions": 1,
-          "SpritesheetX": 1280,
-          "SpritesheetY": 0
-        },
-        "SpinUpToDown 5": {
-          "Directions": 1,
-          "SpritesheetX": 1344,
-          "SpritesheetY": 0
-        },
-        "SpinUpToDown 6": {
-          "Directions": 1,
-          "SpritesheetX": 1408,
-          "SpritesheetY": 0
-        },
-        "SpinUpToDown 7": {
-          "Directions": 1,
-          "SpritesheetX": 1472,
-          "SpritesheetY": 0
-        },
-        "SpinUpToDown 8": {
-          "Directions": 1,
-          "SpritesheetX": 1536,
-          "SpritesheetY": 0
-        },
-        "SpinUpToDown 9": {
-          "Directions": 1,
-          "SpritesheetX": 1600,
-          "SpritesheetY": 0
-        },
-        "StillFrame (Old 1)": {
-          "Directions": 1,
-          "SpritesheetX": 1664,
-          "SpritesheetY": 0
-        },
-        "StillFrame (Old 2)": {
-          "Directions": 1,
-          "SpritesheetX": 1728,
-          "SpritesheetY": 0
-        },
-        "StillFrame (Old 3, Black Outline)": {
-          "Directions": 1,
-          "SpritesheetX": 1792,
-          "SpritesheetY": 0
-        },
-        "Yawning 1": {
-          "Directions": 1,
-          "SpritesheetX": 1856,
-          "SpritesheetY": 0
-        },
-        "Yawning 2": {
-          "Directions": 1,
-          "SpritesheetX": 1920,
-          "SpritesheetY": 0
-        },
-        "Yawning 3": {
-          "Directions": 1,
-          "SpritesheetX": 1984,
-          "SpritesheetY": 0
-        },
-        "Yawning 4": {
-          "Directions": 1,
-          "SpritesheetX": 2048,
-          "SpritesheetY": 0
-        },
-        "Yawning 5": {
-          "Directions": 1,
-          "SpritesheetX": 2112,
-          "SpritesheetY": 0
-        }
+        "Giggle 1":                          { "Directions": 1, "SpritesheetX": 0,    "SpritesheetY": 0 },
+        "Giggle 2":                          { "Directions": 1, "SpritesheetX": 64,   "SpritesheetY": 0 },
+        "Giggle 3":                          { "Directions": 1, "SpritesheetX": 128,  "SpritesheetY": 0 },
+        "Giggle 4":                          { "Directions": 1, "SpritesheetX": 192,  "SpritesheetY": 0 },
+        "Idle 1":                            { "Directions": 1, "SpritesheetX": 256,  "SpritesheetY": 0 },
+        "Idle 2":                            { "Directions": 1, "SpritesheetX": 320,  "SpritesheetY": 0 },
+        "Idle 3":                            { "Directions": 1, "SpritesheetX": 384,  "SpritesheetY": 0 },
+        "SlapIshahakat 1":                   { "Directions": 1, "SpritesheetX": 448,  "SpritesheetY": 0 },
+        "SlapIshahakat 10":                  { "Directions": 1, "SpritesheetX": 512,  "SpritesheetY": 0 },
+        "SlapIshahakat 2":                   { "Directions": 1, "SpritesheetX": 576,  "SpritesheetY": 0 },
+        "SlapIshahakat 3":                   { "Directions": 1, "SpritesheetX": 640,  "SpritesheetY": 0 },
+        "SlapIshahakat 4":                   { "Directions": 1, "SpritesheetX": 704,  "SpritesheetY": 0 },
+        "SlapIshahakat 5":                   { "Directions": 1, "SpritesheetX": 768,  "SpritesheetY": 0 },
+        "SlapIshahakat 6":                   { "Directions": 1, "SpritesheetX": 832,  "SpritesheetY": 0 },
+        "SlapIshahakat 7":                   { "Directions": 1, "SpritesheetX": 896,  "SpritesheetY": 0 },
+        "SlapIshahakat 8":                   { "Directions": 1, "SpritesheetX": 960,  "SpritesheetY": 0 },
+        "SlapIshahakat 9":                   { "Directions": 1, "SpritesheetX": 1024, "SpritesheetY": 0 },
+        "SpinUpToDown 1":                    { "Directions": 1, "SpritesheetX": 1088, "SpritesheetY": 0 },
+        "SpinUpToDown 2":                    { "Directions": 1, "SpritesheetX": 1152, "SpritesheetY": 0 },
+        "SpinUpToDown 3":                    { "Directions": 1, "SpritesheetX": 1216, "SpritesheetY": 0 },
+        "SpinUpToDown 4":                    { "Directions": 1, "SpritesheetX": 1280, "SpritesheetY": 0 },
+        "SpinUpToDown 5":                    { "Directions": 1, "SpritesheetX": 1344, "SpritesheetY": 0 },
+        "SpinUpToDown 6":                    { "Directions": 1, "SpritesheetX": 1408, "SpritesheetY": 0 },
+        "SpinUpToDown 7":                    { "Directions": 1, "SpritesheetX": 1472, "SpritesheetY": 0 },
+        "SpinUpToDown 8":                    { "Directions": 1, "SpritesheetX": 1536, "SpritesheetY": 0 },
+        "SpinUpToDown 9":                    { "Directions": 1, "SpritesheetX": 1600, "SpritesheetY": 0 },
+        "StillFrame (Old 1)":                { "Directions": 1, "SpritesheetX": 1664, "SpritesheetY": 0 },
+        "StillFrame (Old 2)":                { "Directions": 1, "SpritesheetX": 1728, "SpritesheetY": 0 },
+        "StillFrame (Old 3, Black Outline)": { "Directions": 1, "SpritesheetX": 1792, "SpritesheetY": 0 },
+        "Yawning 1":                         { "Directions": 1, "SpritesheetX": 1856, "SpritesheetY": 0 },
+        "Yawning 2":                         { "Directions": 1, "SpritesheetX": 1920, "SpritesheetY": 0 },
+        "Yawning 3":                         { "Directions": 1, "SpritesheetX": 1984, "SpritesheetY": 0 },
+        "Yawning 4":                         { "Directions": 1, "SpritesheetX": 2048, "SpritesheetY": 0 },
+        "Yawning 5":                         { "Directions": 1, "SpritesheetX": 2112, "SpritesheetY": 0 }
       },
       "AnimationByDirections": {
         "OneNoFlip": {
           "Giggle": [
-            {
-              "Frame": "Giggle 1",
-              "Duration": 2
-            },
-            {
-              "Frame": "Giggle 2",
-              "Duration": 2
-            },
-            {
-              "Frame": "Giggle 3",
-              "Duration": 2
-            },
-            {
-              "Frame": "Giggle 4",
-              "Duration": 2
-            },
-            {
-              "Frame": "Giggle 3",
-              "Duration": 2
-            },
-            {
-              "Frame": "Giggle 4",
-              "Duration": 2
-            },
-            {
-              "Frame": "Giggle 3",
-              "Duration": 2
-            },
-            {
-              "Frame": "Giggle 4",
-              "Duration": 2
-            },
-            {
-              "Frame": "Giggle 3",
-              "Duration": 2
-            },
-            {
-              "Frame": "Giggle 2",
-              "Duration": 2
-            },
-            {
-              "Frame": "Giggle 1",
-              "Duration": 2
-            },
-            {
-              "Command": "GotoAnimation",
-              "Parameter": 1
-            }
+            { "Frame": "Giggle 1", "Duration": 2 },
+            { "Frame": "Giggle 2", "Duration": 2 },
+            { "Frame": "Giggle 3", "Duration": 2 },
+            { "Frame": "Giggle 4", "Duration": 2 },
+            { "Frame": "Giggle 3", "Duration": 2 },
+            { "Frame": "Giggle 4", "Duration": 2 },
+            { "Frame": "Giggle 3", "Duration": 2 },
+            { "Frame": "Giggle 4", "Duration": 2 },
+            { "Frame": "Giggle 3", "Duration": 2 },
+            { "Frame": "Giggle 2", "Duration": 2 },
+            { "Frame": "Giggle 1", "Duration": 2 },
+            { "Command": "GotoAnimation", "Parameter": 1 }
           ],
           "Idle": [
-            {
-              "Frame": "Idle 1",
-              "Duration": 7
-            },
-            {
-              "Frame": "Idle 2",
-              "Duration": 7
-            },
-            {
-              "Frame": "Idle 3",
-              "Duration": 7
-            },
-            {
-              "Frame": "Idle 2",
-              "Duration": 7
-            },
-            {
-              "Command": "GotoCommandOffset",
-              "Parameter": 0
-            }
+            { "Frame": "Idle 1", "Duration": 7 },
+            { "Frame": "Idle 2", "Duration": 7 },
+            { "Frame": "Idle 3", "Duration": 7 },
+            { "Frame": "Idle 2", "Duration": 7 },
+            { "Command": "GotoCommandOffset", "Parameter": 0 }
           ],
           "SlapIshahakat (Long, Change to 1)": [
-            {
-              "Frame": "SlapIshahakat 1",
-              "Duration": 2
-            },
-            {
-              "Frame": "SlapIshahakat 2",
-              "Duration": 2
-            },
-            {
-              "Frame": "SlapIshahakat 3",
-              "Duration": 2
-            },
-            {
-              "Frame": "SlapIshahakat 4",
-              "Duration": 2
-            },
-            {
-              "Frame": "SlapIshahakat 5",
-              "Duration": 2
-            },
-            {
-              "Frame": "SlapIshahakat 6",
-              "Duration": 2
-            },
-            {
-              "Frame": "SlapIshahakat 7",
-              "Duration": 2
-            },
-            {
-              "Frame": "SlapIshahakat 6",
-              "Duration": 2
-            },
-            {
-              "Frame": "SlapIshahakat 7",
-              "Duration": 2
-            },
-            {
-              "Frame": "SlapIshahakat 6",
-              "Duration": 2
-            },
-            {
-              "Frame": "SlapIshahakat 5",
-              "Duration": 2
-            },
-            {
-              "Frame": "SlapIshahakat 4",
-              "Duration": 2
-            },
-            {
-              "Frame": "SlapIshahakat 8",
-              "Duration": 3
-            },
-            {
-              "Frame": "SlapIshahakat 9",
-              "Duration": 15
-            },
-            {
-              "Frame": "SlapIshahakat 10",
-              "Duration": 20
-            },
-            {
-              "Frame": "SlapIshahakat 4",
-              "Duration": 5
-            },
-            {
-              "Frame": "SlapIshahakat 3",
-              "Duration": 2
-            },
-            {
-              "Frame": "SlapIshahakat 2",
-              "Duration": 2
-            },
-            {
-              "Frame": "SlapIshahakat 1",
-              "Duration": 2
-            },
-            {
-              "Command": "GotoAnimation",
-              "Parameter": 1
-            }
+            { "Frame": "SlapIshahakat 1",  "Duration": 2 },
+            { "Frame": "SlapIshahakat 2",  "Duration": 2 },
+            { "Frame": "SlapIshahakat 3",  "Duration": 2 },
+            { "Frame": "SlapIshahakat 4",  "Duration": 2 },
+            { "Frame": "SlapIshahakat 5",  "Duration": 2 },
+            { "Frame": "SlapIshahakat 6",  "Duration": 2 },
+            { "Frame": "SlapIshahakat 7",  "Duration": 2 },
+            { "Frame": "SlapIshahakat 6",  "Duration": 2 },
+            { "Frame": "SlapIshahakat 7",  "Duration": 2 },
+            { "Frame": "SlapIshahakat 6",  "Duration": 2 },
+            { "Frame": "SlapIshahakat 5",  "Duration": 2 },
+            { "Frame": "SlapIshahakat 4",  "Duration": 2 },
+            { "Frame": "SlapIshahakat 8",  "Duration": 3 },
+            { "Frame": "SlapIshahakat 9",  "Duration": 15 },
+            { "Frame": "SlapIshahakat 10", "Duration": 20 },
+            { "Frame": "SlapIshahakat 4",  "Duration": 5 },
+            { "Frame": "SlapIshahakat 3",  "Duration": 2 },
+            { "Frame": "SlapIshahakat 2",  "Duration": 2 },
+            { "Frame": "SlapIshahakat 1",  "Duration": 2 },
+            { "Command": "GotoAnimation", "Parameter": 1 }
           ],
           "SlapIshahakat (Stop)": [
-            {
-              "Frame": "SlapIshahakat 1",
-              "Duration": 2
-            },
-            {
-              "Frame": "SlapIshahakat 2",
-              "Duration": 2
-            },
-            {
-              "Frame": "SlapIshahakat 3",
-              "Duration": 2
-            },
-            {
-              "Frame": "SlapIshahakat 4",
-              "Duration": 2
-            },
-            {
-              "Frame": "SlapIshahakat 5",
-              "Duration": 2
-            },
-            {
-              "Frame": "SlapIshahakat 6",
-              "Duration": 2
-            },
-            {
-              "Frame": "SlapIshahakat 7",
-              "Duration": 2
-            },
-            {
-              "Frame": "SlapIshahakat 6",
-              "Duration": 2
-            },
-            {
-              "Frame": "SlapIshahakat 7",
-              "Duration": 2
-            },
-            {
-              "Frame": "SlapIshahakat 6",
-              "Duration": 2
-            },
-            {
-              "Frame": "SlapIshahakat 5",
-              "Duration": 2
-            },
-            {
-              "Frame": "SlapIshahakat 4",
-              "Duration": 22
-            },
-            {
-              "Command": "Stop",
-              "Parameter": 1
-            }
+            { "Frame": "SlapIshahakat 1", "Duration": 2 },
+            { "Frame": "SlapIshahakat 2", "Duration": 2 },
+            { "Frame": "SlapIshahakat 3", "Duration": 2 },
+            { "Frame": "SlapIshahakat 4", "Duration": 2 },
+            { "Frame": "SlapIshahakat 5", "Duration": 2 },
+            { "Frame": "SlapIshahakat 6", "Duration": 2 },
+            { "Frame": "SlapIshahakat 7", "Duration": 2 },
+            { "Frame": "SlapIshahakat 6", "Duration": 2 },
+            { "Frame": "SlapIshahakat 7", "Duration": 2 },
+            { "Frame": "SlapIshahakat 6", "Duration": 2 },
+            { "Frame": "SlapIshahakat 5", "Duration": 2 },
+            { "Frame": "SlapIshahakat 4", "Duration": 22 },
+            { "Command": "Stop", "Parameter": 1 }
           ],
           "SpinUpToDown": [
-            {
-              "Frame": "SpinUpToDown 1",
-              "Duration": 2
-            },
-            {
-              "Frame": "SpinUpToDown 2",
-              "Duration": 2
-            },
-            {
-              "Frame": "SpinUpToDown 3",
-              "Duration": 2
-            },
-            {
-              "Frame": "SpinUpToDown 4",
-              "Duration": 2
-            },
-            {
-              "Frame": "SpinUpToDown 5",
-              "Duration": 2
-            },
-            {
-              "Frame": "SpinUpToDown 6",
-              "Duration": 2
-            },
-            {
-              "Frame": "SpinUpToDown 7",
-              "Duration": 2
-            },
-            {
-              "Frame": "SpinUpToDown 8",
-              "Duration": 2
-            },
-            {
-              "Frame": "SpinUpToDown 9",
-              "Duration": 2
-            },
-            {
-              "Command": "GotoAnimation",
-              "Parameter": 1
-            }
+            { "Frame": "SpinUpToDown 1", "Duration": 2 },
+            { "Frame": "SpinUpToDown 2", "Duration": 2 },
+            { "Frame": "SpinUpToDown 3", "Duration": 2 },
+            { "Frame": "SpinUpToDown 4", "Duration": 2 },
+            { "Frame": "SpinUpToDown 5", "Duration": 2 },
+            { "Frame": "SpinUpToDown 6", "Duration": 2 },
+            { "Frame": "SpinUpToDown 7", "Duration": 2 },
+            { "Frame": "SpinUpToDown 8", "Duration": 2 },
+            { "Frame": "SpinUpToDown 9", "Duration": 2 },
+            { "Command": "GotoAnimation", "Parameter": 1 }
           ],
           "StillFrame (Idle)": [
-            {
-              "Frame": "Idle 3",
-              "Duration": 10
-            },
-            {
-              "Command": "Stop"
-            }
+            { "Frame": "Idle 3", "Duration": 10 },
+            { "Command": "Stop" }
           ],
           "TouchingIshahakat": [
-            {
-              "Frame": "SlapIshahakat 1",
-              "Duration": 2
-            },
-            {
-              "Frame": "SlapIshahakat 2",
-              "Duration": 2
-            },
-            {
-              "Frame": "SlapIshahakat 3",
-              "Duration": 2
-            },
-            {
-              "Frame": "SlapIshahakat 4",
-              "Duration": 2
-            },
-            {
-              "Frame": "SlapIshahakat 5",
-              "Duration": 2
-            },
-            {
-              "Frame": "SlapIshahakat 6",
-              "Duration": 22
-            },
-            {
-              "Command": "Stop"
-            }
+            { "Frame": "SlapIshahakat 1", "Duration": 2 },
+            { "Frame": "SlapIshahakat 2", "Duration": 2 },
+            { "Frame": "SlapIshahakat 3", "Duration": 2 },
+            { "Frame": "SlapIshahakat 4", "Duration": 2 },
+            { "Frame": "SlapIshahakat 5", "Duration": 2 },
+            { "Frame": "SlapIshahakat 6", "Duration": 22 },
+            { "Command": "Stop" }
           ],
           "TurningBack": [
-            {
-              "Frame": "SlapIshahakat 3",
-              "Duration": 2
-            },
-            {
-              "Frame": "SlapIshahakat 2",
-              "Duration": 2
-            },
-            {
-              "Frame": "SlapIshahakat 1",
-              "Duration": 2
-            },
-            {
-              "Command": "GotoAnimation",
-              "Parameter": 1
-            }
+            { "Frame": "SlapIshahakat 3", "Duration": 2 },
+            { "Frame": "SlapIshahakat 2", "Duration": 2 },
+            { "Frame": "SlapIshahakat 1", "Duration": 2 },
+            { "Command": "GotoAnimation", "Parameter": 1 }
           ],
           "Yawning": [
-            {
-              "Frame": "Yawning 1",
-              "Duration": 3
-            },
-            {
-              "Frame": "Yawning 2",
-              "Duration": 3
-            },
-            {
-              "Frame": "Yawning 3",
-              "Duration": 3
-            },
-            {
-              "Frame": "Yawning 4",
-              "Duration": 3
-            },
-            {
-              "Frame": "Yawning 5",
-              "Duration": 3
-            },
-            {
-              "Frame": "Yawning 4",
-              "Duration": 3
-            },
-            {
-              "Frame": "Yawning 5",
-              "Duration": 3
-            },
-            {
-              "Frame": "Yawning 4",
-              "Duration": 3
-            },
-            {
-              "Frame": "Yawning 5",
-              "Duration": 3
-            },
-            {
-              "Frame": "Yawning 4",
-              "Duration": 3
-            },
-            {
-              "Frame": "Yawning 3",
-              "Duration": 3
-            },
-            {
-              "Frame": "Yawning 2",
-              "Duration": 3
-            },
-            {
-              "Frame": "Yawning 1",
-              "Duration": 3
-            },
-            {
-              "Command": "GotoAnimation",
-              "Parameter": 1
-            }
+            { "Frame": "Yawning 1", "Duration": 3 },
+            { "Frame": "Yawning 2", "Duration": 3 },
+            { "Frame": "Yawning 3", "Duration": 3 },
+            { "Frame": "Yawning 4", "Duration": 3 },
+            { "Frame": "Yawning 5", "Duration": 3 },
+            { "Frame": "Yawning 4", "Duration": 3 },
+            { "Frame": "Yawning 5", "Duration": 3 },
+            { "Frame": "Yawning 4", "Duration": 3 },
+            { "Frame": "Yawning 5", "Duration": 3 },
+            { "Frame": "Yawning 4", "Duration": 3 },
+            { "Frame": "Yawning 3", "Duration": 3 },
+            { "Frame": "Yawning 2", "Duration": 3 },
+            { "Frame": "Yawning 1", "Duration": 3 },
+            { "Command": "GotoAnimation", "Parameter": 1 }
           ]
         }
       }

@@ -10,190 +10,60 @@
       "CollisionSize": 40,
       "Scale": 1.0499878,
       "FrameGroups": {
-        "Flying (Bad) 1": {
-          "Directions": 4,
-          "SpritesheetX": 0,
-          "SpritesheetY": 0
-        },
-        "Flying (Bad) 2": {
-          "Directions": 4,
-          "SpritesheetX": 48,
-          "SpritesheetY": 0
-        },
-        "Flying (Bad) 3": {
-          "Directions": 4,
-          "SpritesheetX": 96,
-          "SpritesheetY": 0
-        },
-        "Flying (Bad) 4": {
-          "Directions": 4,
-          "SpritesheetX": 144,
-          "SpritesheetY": 0
-        },
-        "Flying (Bad) 5": {
-          "Directions": 4,
-          "SpritesheetX": 192,
-          "SpritesheetY": 0
-        },
-        "Flying (Bad) 6": {
-          "Directions": 4,
-          "SpritesheetX": 240,
-          "SpritesheetY": 0
-        },
-        "Flying (Bad) 7": {
-          "Directions": 4,
-          "SpritesheetX": 288,
-          "SpritesheetY": 0
-        },
-        "Flying (Bad) 8": {
-          "Directions": 4,
-          "SpritesheetX": 336,
-          "SpritesheetY": 0
-        },
-        "Flying 1": {
-          "Directions": 4,
-          "SpritesheetX": 384,
-          "SpritesheetY": 0
-        },
-        "Flying 2": {
-          "Directions": 4,
-          "SpritesheetX": 432,
-          "SpritesheetY": 0
-        },
-        "Flying 3": {
-          "Directions": 4,
-          "SpritesheetX": 480,
-          "SpritesheetY": 0
-        },
-        "Flying 4": {
-          "Directions": 4,
-          "SpritesheetX": 528,
-          "SpritesheetY": 0
-        },
-        "Flying 5": {
-          "Directions": 4,
-          "SpritesheetX": 576,
-          "SpritesheetY": 0
-        }
+        "Flying (Bad) 1": { "Directions": 4, "SpritesheetX": 0,   "SpritesheetY": 0 },
+        "Flying (Bad) 2": { "Directions": 4, "SpritesheetX": 48,  "SpritesheetY": 0 },
+        "Flying (Bad) 3": { "Directions": 4, "SpritesheetX": 96,  "SpritesheetY": 0 },
+        "Flying (Bad) 4": { "Directions": 4, "SpritesheetX": 144, "SpritesheetY": 0 },
+        "Flying (Bad) 5": { "Directions": 4, "SpritesheetX": 192, "SpritesheetY": 0 },
+        "Flying (Bad) 6": { "Directions": 4, "SpritesheetX": 240, "SpritesheetY": 0 },
+        "Flying (Bad) 7": { "Directions": 4, "SpritesheetX": 288, "SpritesheetY": 0 },
+        "Flying (Bad) 8": { "Directions": 4, "SpritesheetX": 336, "SpritesheetY": 0 },
+        "Flying 1":       { "Directions": 4, "SpritesheetX": 384, "SpritesheetY": 0 },
+        "Flying 2":       { "Directions": 4, "SpritesheetX": 432, "SpritesheetY": 0 },
+        "Flying 3":       { "Directions": 4, "SpritesheetX": 480, "SpritesheetY": 0 },
+        "Flying 4":       { "Directions": 4, "SpritesheetX": 528, "SpritesheetY": 0 },
+        "Flying 5":       { "Directions": 4, "SpritesheetX": 576, "SpritesheetY": 0 }
       },
       "AnimationByDirections": {
         "4": {
           "Flying (Bad Outline, Reduced, Redundant Frames)": [
-            {
-              "Frame": "Flying (Bad) 4",
-              "Duration": 5
-            },
-            {
-              "Frame": "Flying (Bad) 5",
-              "Duration": 5
-            },
-            {
-              "Frame": "Flying (Bad) 6",
-              "Duration": 5
-            },
-            {
-              "Frame": "Flying (Bad) 7",
-              "Duration": 5
-            },
-            {
-              "Frame": "Flying (Bad) 5",
-              "Duration": 5
-            },
-            {
-              "Frame": "Flying (Bad) 8",
-              "Duration": 5
-            },
-            {
-              "Command": "GotoCommandOffset",
-              "Parameter": 0
-            }
+            { "Frame": "Flying (Bad) 4", "Duration": 5 },
+            { "Frame": "Flying (Bad) 5", "Duration": 5 },
+            { "Frame": "Flying (Bad) 6", "Duration": 5 },
+            { "Frame": "Flying (Bad) 7", "Duration": 5 },
+            { "Frame": "Flying (Bad) 5", "Duration": 5 },
+            { "Frame": "Flying (Bad) 8", "Duration": 5 },
+            { "Command": "GotoCommandOffset", "Parameter": 0 }
           ],
           "Flying (Fast, Reduced)": [
-            {
-              "Frame": "Flying (Bad) 1",
-              "Duration": 3
-            },
-            {
-              "Frame": "Flying (Bad) 2",
-              "Duration": 2
-            },
-            {
-              "Frame": "Flying (Bad) 3",
-              "Duration": 2
-            },
-            {
-              "Frame": "Flying (Bad) 2",
-              "Duration": 2
-            },
-            {
-              "Command": "GotoCommandOffset",
-              "Parameter": 0
-            }
+            { "Frame": "Flying (Bad) 1", "Duration": 3 },
+            { "Frame": "Flying (Bad) 2", "Duration": 2 },
+            { "Frame": "Flying (Bad) 3", "Duration": 2 },
+            { "Frame": "Flying (Bad) 2", "Duration": 2 },
+            { "Command": "GotoCommandOffset", "Parameter": 0 }
           ],
           "Flying (Slow)": [
-            {
-              "Frame": "Flying 1",
-              "Duration": 5
-            },
-            {
-              "Frame": "Flying 2",
-              "Duration": 5
-            },
-            {
-              "Frame": "Flying 3",
-              "Duration": 5
-            },
-            {
-              "Frame": "Flying 4",
-              "Duration": 5
-            },
-            {
-              "Frame": "Flying 5",
-              "Duration": 5
-            },
-            {
-              "Frame": "Flying 4",
-              "Duration": 5
-            },
-            {
-              "Frame": "Flying 3",
-              "Duration": 5
-            },
-            {
-              "Frame": "Flying 2",
-              "Duration": 5
-            },
-            {
-              "Command": "GotoCommandOffset",
-              "Parameter": 0
-            }
+            { "Frame": "Flying 1", "Duration": 5 },
+            { "Frame": "Flying 2", "Duration": 5 },
+            { "Frame": "Flying 3", "Duration": 5 },
+            { "Frame": "Flying 4", "Duration": 5 },
+            { "Frame": "Flying 5", "Duration": 5 },
+            { "Frame": "Flying 4", "Duration": 5 },
+            { "Frame": "Flying 3", "Duration": 5 },
+            { "Frame": "Flying 2", "Duration": 5 },
+            { "Command": "GotoCommandOffset", "Parameter": 0 }
           ],
           "StillFrame (Bad Outline)": [
-            {
-              "Frame": "Flying (Bad) 4",
-              "Duration": 10
-            },
-            {
-              "Command": "Stop"
-            }
+            { "Frame": "Flying (Bad) 4", "Duration": 10 },
+            { "Command": "Stop" }
           ],
           "StillFrame (Wings Down)": [
-            {
-              "Frame": "Flying (Bad) 1",
-              "Duration": 10
-            },
-            {
-              "Command": "Stop"
-            }
+            { "Frame": "Flying (Bad) 1", "Duration": 10 },
+            { "Command": "Stop" }
           ],
           "StillFrame (Wings Up)": [
-            {
-              "Frame": "Flying 1",
-              "Duration": 10
-            },
-            {
-              "Command": "Stop"
-            }
+            { "Frame": "Flying 1", "Duration": 10 },
+            { "Command": "Stop" }
           ]
         }
       }

@@ -10,72 +10,26 @@
       "CollisionSize": 40,
       "Scale": 0.7999878,
       "FrameGroups": {
-        "Walking 1": {
-          "Directions": 4,
-          "SpritesheetX": 0,
-          "SpritesheetY": 0
-        },
-        "Walking 2": {
-          "Directions": 4,
-          "SpritesheetX": 48,
-          "SpritesheetY": 0
-        },
-        "Walking 3": {
-          "Directions": 4,
-          "SpritesheetX": 96,
-          "SpritesheetY": 0
-        },
-        "Walking 4": {
-          "Directions": 4,
-          "SpritesheetX": 144,
-          "SpritesheetY": 0
-        },
-        "Walking 5": {
-          "Directions": 4,
-          "SpritesheetX": 192,
-          "SpritesheetY": 0
-        }
+        "Walking 1": { "Directions": 4, "SpritesheetX": 0,   "SpritesheetY": 0 },
+        "Walking 2": { "Directions": 4, "SpritesheetX": 48,  "SpritesheetY": 0 },
+        "Walking 3": { "Directions": 4, "SpritesheetX": 96,  "SpritesheetY": 0 },
+        "Walking 4": { "Directions": 4, "SpritesheetX": 144, "SpritesheetY": 0 },
+        "Walking 5": { "Directions": 4, "SpritesheetX": 192, "SpritesheetY": 0 }
       },
       "AnimationByDirections": {
         "4": {
           "StillFrame": [
-            {
-              "Frame": "Walking 1",
-              "Duration": 5
-            },
-            {
-              "Command": "Stop"
-            }
+            { "Frame": "Walking 1", "Duration": 5 },
+            { "Command": "Stop" }
           ],
           "Walking": [
-            {
-              "Frame": "Walking 1",
-              "Duration": 5
-            },
-            {
-              "Frame": "Walking 2",
-              "Duration": 5
-            },
-            {
-              "Frame": "Walking 3",
-              "Duration": 5
-            },
-            {
-              "Frame": "Walking 4",
-              "Duration": 5
-            },
-            {
-              "Frame": "Walking 2",
-              "Duration": 5
-            },
-            {
-              "Frame": "Walking 5",
-              "Duration": 5
-            },
-            {
-              "Command": "GotoCommandOffset",
-              "Parameter": 0
-            }
+            { "Frame": "Walking 1", "Duration": 5 },
+            { "Frame": "Walking 2", "Duration": 5 },
+            { "Frame": "Walking 3", "Duration": 5 },
+            { "Frame": "Walking 4", "Duration": 5 },
+            { "Frame": "Walking 2", "Duration": 5 },
+            { "Frame": "Walking 5", "Duration": 5 },
+            { "Command": "GotoCommandOffset", "Parameter": 0 }
           ]
         }
       }

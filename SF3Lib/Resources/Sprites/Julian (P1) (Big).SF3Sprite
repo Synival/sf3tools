@@ -32,60 +32,15 @@
       "AnimationByDirections": {
         "OneNoFlip": {
           "Idle": [
-            {
-              "Frame": {
-                "First": {
-                  "Frame": "Idle 1",
-                  "Direction": "NNE"
-                }
-              },
-              "Duration": 6
-            },
-            {
-              "Frame": {
-                "First": {
-                  "Frame": "Idle 2",
-                  "Direction": "NNE"
-                }
-              },
-              "Duration": 4
-            },
-            {
-              "Frame": {
-                "First": {
-                  "Frame": "Idle 3",
-                  "Direction": "NNE"
-                }
-              },
-              "Duration": 4
-            },
-            {
-              "Frame": {
-                "First": {
-                  "Frame": "Idle 2",
-                  "Direction": "NNE"
-                }
-              },
-              "Duration": 4
-            },
-            {
-              "Command": "GotoCommandOffset",
-              "Parameter": 0
-            }
+            { "Frame": { "First": { "Frame": "Idle 1", "Direction": "NNE" } }, "Duration": 6 },
+            { "Frame": { "First": { "Frame": "Idle 2", "Direction": "NNE" } }, "Duration": 4 },
+            { "Frame": { "First": { "Frame": "Idle 3", "Direction": "NNE" } }, "Duration": 4 },
+            { "Frame": { "First": { "Frame": "Idle 2", "Direction": "NNE" } }, "Duration": 4 },
+            { "Command": "GotoCommandOffset", "Parameter": 0 }
           ],
           "StillFrame": [
-            {
-              "Frame": {
-                "First": {
-                  "Frame": "Idle 1",
-                  "Direction": "NNE"
-                }
-              },
-              "Duration": 10
-            },
-            {
-              "Command": "Stop"
-            }
+            { "Frame": { "First": { "Frame": "Idle 1", "Direction": "NNE" } }, "Duration": 10 },
+            { "Command": "Stop" }
           ]
         }
       }

@@ -10,132 +10,42 @@
       "CollisionSize": 40,
       "Scale": 1.0,
       "FrameGroups": {
-        "Idle (Rocking Baby) 1": {
-          "Directions": 4,
-          "SpritesheetX": 0,
-          "SpritesheetY": 0
-        },
-        "Idle (Rocking Baby) 2": {
-          "Directions": 4,
-          "SpritesheetX": 40,
-          "SpritesheetY": 0
-        },
-        "Idle (Rocking Baby) 3": {
-          "Directions": 4,
-          "SpritesheetX": 80,
-          "SpritesheetY": 0
-        },
-        "Walking 1": {
-          "Directions": 4,
-          "SpritesheetX": 120,
-          "SpritesheetY": 0
-        },
-        "Walking 2": {
-          "Directions": 4,
-          "SpritesheetX": 160,
-          "SpritesheetY": 0
-        },
-        "Walking 3": {
-          "Directions": 4,
-          "SpritesheetX": 200,
-          "SpritesheetY": 0
-        },
-        "Walking 4": {
-          "Directions": 4,
-          "SpritesheetX": 240,
-          "SpritesheetY": 0
-        }
+        "Idle (Rocking Baby) 1": { "Directions": 4, "SpritesheetX": 0,   "SpritesheetY": 0 },
+        "Idle (Rocking Baby) 2": { "Directions": 4, "SpritesheetX": 40,  "SpritesheetY": 0 },
+        "Idle (Rocking Baby) 3": { "Directions": 4, "SpritesheetX": 80,  "SpritesheetY": 0 },
+        "Walking 1":             { "Directions": 4, "SpritesheetX": 120, "SpritesheetY": 0 },
+        "Walking 2":             { "Directions": 4, "SpritesheetX": 160, "SpritesheetY": 0 },
+        "Walking 3":             { "Directions": 4, "SpritesheetX": 200, "SpritesheetY": 0 },
+        "Walking 4":             { "Directions": 4, "SpritesheetX": 240, "SpritesheetY": 0 }
       },
       "AnimationByDirections": {
         "4": {
           "Idle (Rocking Baby)": [
-            {
-              "Frame": "Idle (Rocking Baby) 1",
-              "Duration": 30
-            },
-            {
-              "Frame": "Idle (Rocking Baby) 2",
-              "Duration": 5
-            },
-            {
-              "Frame": "Idle (Rocking Baby) 3",
-              "Duration": 6
-            },
-            {
-              "Frame": "Idle (Rocking Baby) 2",
-              "Duration": 5
-            },
-            {
-              "Frame": "Idle (Rocking Baby) 1",
-              "Duration": 3
-            },
-            {
-              "Frame": "Idle (Rocking Baby) 2",
-              "Duration": 5
-            },
-            {
-              "Frame": "Idle (Rocking Baby) 3",
-              "Duration": 6
-            },
-            {
-              "Frame": "Idle (Rocking Baby) 2",
-              "Duration": 4
-            },
-            {
-              "Frame": "Idle (Rocking Baby) 2",
-              "Duration": 5
-            },
-            {
-              "Frame": "Idle (Rocking Baby) 3",
-              "Duration": 6
-            },
-            {
-              "Frame": "Idle (Rocking Baby) 2",
-              "Duration": 4
-            },
-            {
-              "Command": "GotoCommandOffset",
-              "Parameter": 0
-            }
+            { "Frame": "Idle (Rocking Baby) 1", "Duration": 30 },
+            { "Frame": "Idle (Rocking Baby) 2", "Duration": 5 },
+            { "Frame": "Idle (Rocking Baby) 3", "Duration": 6 },
+            { "Frame": "Idle (Rocking Baby) 2", "Duration": 5 },
+            { "Frame": "Idle (Rocking Baby) 1", "Duration": 3 },
+            { "Frame": "Idle (Rocking Baby) 2", "Duration": 5 },
+            { "Frame": "Idle (Rocking Baby) 3", "Duration": 6 },
+            { "Frame": "Idle (Rocking Baby) 2", "Duration": 4 },
+            { "Frame": "Idle (Rocking Baby) 2", "Duration": 5 },
+            { "Frame": "Idle (Rocking Baby) 3", "Duration": 6 },
+            { "Frame": "Idle (Rocking Baby) 2", "Duration": 4 },
+            { "Command": "GotoCommandOffset", "Parameter": 0 }
           ],
           "StillFrame": [
-            {
-              "Frame": "Idle (Rocking Baby) 1",
-              "Duration": 10
-            },
-            {
-              "Command": "Stop"
-            }
+            { "Frame": "Idle (Rocking Baby) 1", "Duration": 10 },
+            { "Command": "Stop" }
           ],
           "Walking": [
-            {
-              "Frame": "Walking 1",
-              "Duration": 4
-            },
-            {
-              "Frame": "Idle (Rocking Baby) 1",
-              "Duration": 4
-            },
-            {
-              "Frame": "Walking 2",
-              "Duration": 4
-            },
-            {
-              "Frame": "Walking 3",
-              "Duration": 4
-            },
-            {
-              "Frame": "Idle (Rocking Baby) 1",
-              "Duration": 4
-            },
-            {
-              "Frame": "Walking 4",
-              "Duration": 4
-            },
-            {
-              "Command": "GotoCommandOffset",
-              "Parameter": 0
-            }
+            { "Frame": "Walking 1",             "Duration": 4 },
+            { "Frame": "Idle (Rocking Baby) 1", "Duration": 4 },
+            { "Frame": "Walking 2",             "Duration": 4 },
+            { "Frame": "Walking 3",             "Duration": 4 },
+            { "Frame": "Idle (Rocking Baby) 1", "Duration": 4 },
+            { "Frame": "Walking 4",             "Duration": 4 },
+            { "Command": "GotoCommandOffset", "Parameter": 0 }
           ]
         }
       }

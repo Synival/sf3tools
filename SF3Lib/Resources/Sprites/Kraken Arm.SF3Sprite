@@ -10,118 +10,39 @@
       "CollisionSize": 40,
       "Scale": 1.0,
       "FrameGroups": {
-        "Moving 1": {
-          "Directions": 4,
-          "SpritesheetX": 0,
-          "SpritesheetY": 0
-        },
-        "Moving 2": {
-          "Directions": 4,
-          "SpritesheetX": 40,
-          "SpritesheetY": 0
-        },
-        "Moving 3": {
-          "Directions": 4,
-          "SpritesheetX": 80,
-          "SpritesheetY": 0
-        },
-        "Moving 4": {
-          "Directions": 4,
-          "SpritesheetX": 120,
-          "SpritesheetY": 0
-        },
-        "Moving 5": {
-          "Directions": 4,
-          "SpritesheetX": 160,
-          "SpritesheetY": 0
-        }
+        "Moving 1": { "Directions": 4, "SpritesheetX": 0,   "SpritesheetY": 0 },
+        "Moving 2": { "Directions": 4, "SpritesheetX": 40,  "SpritesheetY": 0 },
+        "Moving 3": { "Directions": 4, "SpritesheetX": 80,  "SpritesheetY": 0 },
+        "Moving 4": { "Directions": 4, "SpritesheetX": 120, "SpritesheetY": 0 },
+        "Moving 5": { "Directions": 4, "SpritesheetX": 160, "SpritesheetY": 0 }
       },
       "AnimationByDirections": {
         "4": {
           "Moving (Fast)": [
-            {
-              "Frame": "Moving 1",
-              "Duration": 2
-            },
-            {
-              "Frame": "Moving 2",
-              "Duration": 2
-            },
-            {
-              "Frame": "Moving 3",
-              "Duration": 2
-            },
-            {
-              "Frame": "Moving 4",
-              "Duration": 2
-            },
-            {
-              "Frame": "Moving 5",
-              "Duration": 2
-            },
-            {
-              "Frame": "Moving 4",
-              "Duration": 2
-            },
-            {
-              "Frame": "Moving 3",
-              "Duration": 2
-            },
-            {
-              "Frame": "Moving 2",
-              "Duration": 2
-            },
-            {
-              "Command": "GotoCommandOffset",
-              "Parameter": 0
-            }
+            { "Frame": "Moving 1", "Duration": 2 },
+            { "Frame": "Moving 2", "Duration": 2 },
+            { "Frame": "Moving 3", "Duration": 2 },
+            { "Frame": "Moving 4", "Duration": 2 },
+            { "Frame": "Moving 5", "Duration": 2 },
+            { "Frame": "Moving 4", "Duration": 2 },
+            { "Frame": "Moving 3", "Duration": 2 },
+            { "Frame": "Moving 2", "Duration": 2 },
+            { "Command": "GotoCommandOffset", "Parameter": 0 }
           ],
           "Moving (Slow)": [
-            {
-              "Frame": "Moving 1",
-              "Duration": 4
-            },
-            {
-              "Frame": "Moving 2",
-              "Duration": 4
-            },
-            {
-              "Frame": "Moving 3",
-              "Duration": 4
-            },
-            {
-              "Frame": "Moving 4",
-              "Duration": 4
-            },
-            {
-              "Frame": "Moving 5",
-              "Duration": 4
-            },
-            {
-              "Frame": "Moving 4",
-              "Duration": 4
-            },
-            {
-              "Frame": "Moving 3",
-              "Duration": 4
-            },
-            {
-              "Frame": "Moving 2",
-              "Duration": 4
-            },
-            {
-              "Command": "GotoCommandOffset",
-              "Parameter": 0
-            }
+            { "Frame": "Moving 1", "Duration": 4 },
+            { "Frame": "Moving 2", "Duration": 4 },
+            { "Frame": "Moving 3", "Duration": 4 },
+            { "Frame": "Moving 4", "Duration": 4 },
+            { "Frame": "Moving 5", "Duration": 4 },
+            { "Frame": "Moving 4", "Duration": 4 },
+            { "Frame": "Moving 3", "Duration": 4 },
+            { "Frame": "Moving 2", "Duration": 4 },
+            { "Command": "GotoCommandOffset", "Parameter": 0 }
           ],
           "StillFrame": [
-            {
-              "Frame": "Moving 3",
-              "Duration": 10
-            },
-            {
-              "Command": "Stop"
-            }
+            { "Frame": "Moving 3", "Duration": 10 },
+            { "Command": "Stop" }
           ]
         }
       }

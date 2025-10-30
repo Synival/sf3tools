@@ -10,86 +10,27 @@
       "CollisionSize": 16,
       "Scale": 1.0,
       "FrameGroups": {
-        "Flickering 1": {
-          "Directions": 1,
-          "SpritesheetX": 0,
-          "SpritesheetY": 0
-        },
-        "Flickering 2": {
-          "Directions": 1,
-          "SpritesheetX": 16,
-          "SpritesheetY": 0
-        },
-        "Flickering 3": {
-          "Directions": 1,
-          "SpritesheetX": 32,
-          "SpritesheetY": 0
-        },
-        "Flickering 4": {
-          "Directions": 1,
-          "SpritesheetX": 48,
-          "SpritesheetY": 0
-        },
-        "Flickering 5": {
-          "Directions": 1,
-          "SpritesheetX": 64,
-          "SpritesheetY": 0
-        },
-        "Flickering 6": {
-          "Directions": 1,
-          "SpritesheetX": 80,
-          "SpritesheetY": 0
-        },
-        "Flickering 7": {
-          "Directions": 1,
-          "SpritesheetX": 96,
-          "SpritesheetY": 0
-        },
-        "Flickering 8": {
-          "Directions": 1,
-          "SpritesheetX": 112,
-          "SpritesheetY": 0
-        }
+        "Flickering 1": { "Directions": 1, "SpritesheetX": 0,   "SpritesheetY": 0 },
+        "Flickering 2": { "Directions": 1, "SpritesheetX": 16,  "SpritesheetY": 0 },
+        "Flickering 3": { "Directions": 1, "SpritesheetX": 32,  "SpritesheetY": 0 },
+        "Flickering 4": { "Directions": 1, "SpritesheetX": 48,  "SpritesheetY": 0 },
+        "Flickering 5": { "Directions": 1, "SpritesheetX": 64,  "SpritesheetY": 0 },
+        "Flickering 6": { "Directions": 1, "SpritesheetX": 80,  "SpritesheetY": 0 },
+        "Flickering 7": { "Directions": 1, "SpritesheetX": 96,  "SpritesheetY": 0 },
+        "Flickering 8": { "Directions": 1, "SpritesheetX": 112, "SpritesheetY": 0 }
       },
       "AnimationByDirections": {
         "OneNoFlip": {
           "Flickering": [
-            {
-              "Frame": "Flickering 1",
-              "Duration": 1
-            },
-            {
-              "Frame": "Flickering 2",
-              "Duration": 1
-            },
-            {
-              "Frame": "Flickering 3",
-              "Duration": 1
-            },
-            {
-              "Frame": "Flickering 4",
-              "Duration": 1
-            },
-            {
-              "Frame": "Flickering 5",
-              "Duration": 1
-            },
-            {
-              "Frame": "Flickering 6",
-              "Duration": 1
-            },
-            {
-              "Frame": "Flickering 7",
-              "Duration": 1
-            },
-            {
-              "Frame": "Flickering 8",
-              "Duration": 1
-            },
-            {
-              "Command": "GotoCommandOffset",
-              "Parameter": 0
-            }
+            { "Frame": "Flickering 1", "Duration": 1 },
+            { "Frame": "Flickering 2", "Duration": 1 },
+            { "Frame": "Flickering 3", "Duration": 1 },
+            { "Frame": "Flickering 4", "Duration": 1 },
+            { "Frame": "Flickering 5", "Duration": 1 },
+            { "Frame": "Flickering 6", "Duration": 1 },
+            { "Frame": "Flickering 7", "Duration": 1 },
+            { "Frame": "Flickering 8", "Duration": 1 },
+            { "Command": "GotoCommandOffset", "Parameter": 0 }
           ]
         }
       }

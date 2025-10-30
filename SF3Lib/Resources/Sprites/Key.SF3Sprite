@@ -20,19 +20,8 @@
       "AnimationByDirections": {
         "4": {
           "StillFrame (Should be 1 Direction)": [
-            {
-              "Frame": {
-                "SSE": {
-                  "Frame": "Key 1",
-                  "Direction": "SSE"
-                }
-              },
-              "Duration": 10
-            },
-            {
-              "Command": "GotoCommandOffset",
-              "Parameter": 0
-            }
+            { "Frame": { "SSE": { "Frame": "Key 1", "Direction": "SSE" } }, "Duration": 10 },
+            { "Command": "GotoCommandOffset", "Parameter": 0 }
           ]
         }
       }

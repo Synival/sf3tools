@@ -10,47 +10,22 @@
       "CollisionSize": 40,
       "Scale": 0.8999939,
       "FrameGroups": {
-        "Frozen 1": {
-          "Directions": 6,
-          "SpritesheetX": 0,
-          "SpritesheetY": 0
-        },
-        "Unfrozen 1": {
-          "Directions": 6,
-          "SpritesheetX": 64,
-          "SpritesheetY": 0
-        }
+        "Frozen 1":   { "Directions": 6, "SpritesheetX": 0,  "SpritesheetY": 0 },
+        "Unfrozen 1": { "Directions": 6, "SpritesheetX": 64, "SpritesheetY": 0 }
       },
       "AnimationByDirections": {
         "6": {
           "StillFrame (Frozen, Repeat)": [
-            {
-              "Frame": "Frozen 1",
-              "Duration": 10
-            },
-            {
-              "Command": "GotoCommandOffset",
-              "Parameter": 0
-            }
+            { "Frame": "Frozen 1", "Duration": 10 },
+            { "Command": "GotoCommandOffset", "Parameter": 0 }
           ],
           "StillFrame (Frozen)": [
-            {
-              "Frame": "Frozen 1",
-              "Duration": 10
-            },
-            {
-              "Command": "Stop"
-            }
+            { "Frame": "Frozen 1", "Duration": 10 },
+            { "Command": "Stop" }
           ],
           "StillFrame (Unfrozen)": [
-            {
-              "Frame": "Unfrozen 1",
-              "Duration": 10
-            },
-            {
-              "Command": "GotoCommandOffset",
-              "Parameter": 0
-            }
+            { "Frame": "Unfrozen 1", "Duration": 10 },
+            { "Command": "GotoCommandOffset", "Parameter": 0 }
           ]
         }
       }

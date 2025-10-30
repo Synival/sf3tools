@@ -10,160 +10,48 @@
       "CollisionSize": 40,
       "Scale": 0.7999878,
       "FrameGroups": {
-        "Idle (Occasionally Looking Around) 1": {
-          "Directions": 4,
-          "SpritesheetX": 0,
-          "SpritesheetY": 0
-        },
-        "Idle (Occasionally Looking Around) 2": {
-          "Directions": 4,
-          "SpritesheetX": 40,
-          "SpritesheetY": 0
-        },
-        "Idle (Occasionally Looking Around) 3": {
-          "Directions": 4,
-          "SpritesheetX": 80,
-          "SpritesheetY": 0
-        },
-        "Idle (Occasionally Looking Around) 4": {
-          "Directions": 4,
-          "SpritesheetX": 120,
-          "SpritesheetY": 0
-        },
-        "Idle (Occasionally Looking Around) 5": {
-          "Directions": 4,
-          "SpritesheetX": 160,
-          "SpritesheetY": 0
-        },
-        "Walking (Hopping) 1": {
-          "Directions": 4,
-          "SpritesheetX": 200,
-          "SpritesheetY": 0
-        },
-        "Walking (Hopping) 2": {
-          "Directions": 4,
-          "SpritesheetX": 240,
-          "SpritesheetY": 0
-        },
-        "Walking (Hopping) 3": {
-          "Directions": 4,
-          "SpritesheetX": 280,
-          "SpritesheetY": 0
-        },
-        "Walking (Hopping) 4": {
-          "Directions": 4,
-          "SpritesheetX": 320,
-          "SpritesheetY": 0
-        },
-        "Walking (Hopping) 5": {
-          "Directions": 4,
-          "SpritesheetX": 360,
-          "SpritesheetY": 0
-        },
-        "Walking (Hopping) 6": {
-          "Directions": 4,
-          "SpritesheetX": 400,
-          "SpritesheetY": 0
-        }
+        "Idle (Occasionally Looking Around) 1": { "Directions": 4, "SpritesheetX": 0,   "SpritesheetY": 0 },
+        "Idle (Occasionally Looking Around) 2": { "Directions": 4, "SpritesheetX": 40,  "SpritesheetY": 0 },
+        "Idle (Occasionally Looking Around) 3": { "Directions": 4, "SpritesheetX": 80,  "SpritesheetY": 0 },
+        "Idle (Occasionally Looking Around) 4": { "Directions": 4, "SpritesheetX": 120, "SpritesheetY": 0 },
+        "Idle (Occasionally Looking Around) 5": { "Directions": 4, "SpritesheetX": 160, "SpritesheetY": 0 },
+        "Walking (Hopping) 1":                  { "Directions": 4, "SpritesheetX": 200, "SpritesheetY": 0 },
+        "Walking (Hopping) 2":                  { "Directions": 4, "SpritesheetX": 240, "SpritesheetY": 0 },
+        "Walking (Hopping) 3":                  { "Directions": 4, "SpritesheetX": 280, "SpritesheetY": 0 },
+        "Walking (Hopping) 4":                  { "Directions": 4, "SpritesheetX": 320, "SpritesheetY": 0 },
+        "Walking (Hopping) 5":                  { "Directions": 4, "SpritesheetX": 360, "SpritesheetY": 0 },
+        "Walking (Hopping) 6":                  { "Directions": 4, "SpritesheetX": 400, "SpritesheetY": 0 }
       },
       "AnimationByDirections": {
         "4": {
           "Idle (Occasionally Looking Around)": [
-            {
-              "Frame": "Idle (Occasionally Looking Around) 1",
-              "Duration": 75
-            },
-            {
-              "Frame": "Idle (Occasionally Looking Around) 2",
-              "Duration": 5
-            },
-            {
-              "Frame": "Idle (Occasionally Looking Around) 3",
-              "Duration": 30
-            },
-            {
-              "Frame": "Idle (Occasionally Looking Around) 4",
-              "Duration": 6
-            },
-            {
-              "Frame": "Idle (Occasionally Looking Around) 5",
-              "Duration": 6
-            },
-            {
-              "Frame": "Idle (Occasionally Looking Around) 4",
-              "Duration": 6
-            },
-            {
-              "Frame": "Idle (Occasionally Looking Around) 5",
-              "Duration": 60
-            },
-            {
-              "Frame": "Idle (Occasionally Looking Around) 3",
-              "Duration": 2
-            },
-            {
-              "Frame": "Idle (Occasionally Looking Around) 2",
-              "Duration": 2
-            },
-            {
-              "Frame": "Idle (Occasionally Looking Around) 1",
-              "Duration": 60
-            },
-            {
-              "Frame": "Idle (Occasionally Looking Around) 2",
-              "Duration": 2
-            },
-            {
-              "Frame": "Idle (Occasionally Looking Around) 3",
-              "Duration": 120
-            },
-            {
-              "Frame": "Idle (Occasionally Looking Around) 2",
-              "Duration": 2
-            },
-            {
-              "Command": "GotoCommandOffset",
-              "Parameter": 0
-            }
+            { "Frame": "Idle (Occasionally Looking Around) 1", "Duration": 75 },
+            { "Frame": "Idle (Occasionally Looking Around) 2", "Duration": 5 },
+            { "Frame": "Idle (Occasionally Looking Around) 3", "Duration": 30 },
+            { "Frame": "Idle (Occasionally Looking Around) 4", "Duration": 6 },
+            { "Frame": "Idle (Occasionally Looking Around) 5", "Duration": 6 },
+            { "Frame": "Idle (Occasionally Looking Around) 4", "Duration": 6 },
+            { "Frame": "Idle (Occasionally Looking Around) 5", "Duration": 60 },
+            { "Frame": "Idle (Occasionally Looking Around) 3", "Duration": 2 },
+            { "Frame": "Idle (Occasionally Looking Around) 2", "Duration": 2 },
+            { "Frame": "Idle (Occasionally Looking Around) 1", "Duration": 60 },
+            { "Frame": "Idle (Occasionally Looking Around) 2", "Duration": 2 },
+            { "Frame": "Idle (Occasionally Looking Around) 3", "Duration": 120 },
+            { "Frame": "Idle (Occasionally Looking Around) 2", "Duration": 2 },
+            { "Command": "GotoCommandOffset", "Parameter": 0 }
           ],
           "StillFrame (Idle)": [
-            {
-              "Frame": "Idle (Occasionally Looking Around) 1",
-              "Duration": 10
-            },
-            {
-              "Command": "Stop"
-            }
+            { "Frame": "Idle (Occasionally Looking Around) 1", "Duration": 10 },
+            { "Command": "Stop" }
           ],
           "Walking (Hopping)": [
-            {
-              "Frame": "Walking (Hopping) 1",
-              "Duration": 3
-            },
-            {
-              "Frame": "Walking (Hopping) 2",
-              "Duration": 3
-            },
-            {
-              "Frame": "Walking (Hopping) 3",
-              "Duration": 3
-            },
-            {
-              "Frame": "Walking (Hopping) 4",
-              "Duration": 3
-            },
-            {
-              "Frame": "Walking (Hopping) 5",
-              "Duration": 3
-            },
-            {
-              "Frame": "Walking (Hopping) 6",
-              "Duration": 3
-            },
-            {
-              "Command": "GotoCommandOffset",
-              "Parameter": 0
-            }
+            { "Frame": "Walking (Hopping) 1", "Duration": 3 },
+            { "Frame": "Walking (Hopping) 2", "Duration": 3 },
+            { "Frame": "Walking (Hopping) 3", "Duration": 3 },
+            { "Frame": "Walking (Hopping) 4", "Duration": 3 },
+            { "Frame": "Walking (Hopping) 5", "Duration": 3 },
+            { "Frame": "Walking (Hopping) 6", "Duration": 3 },
+            { "Command": "GotoCommandOffset", "Parameter": 0 }
           ]
         }
       }

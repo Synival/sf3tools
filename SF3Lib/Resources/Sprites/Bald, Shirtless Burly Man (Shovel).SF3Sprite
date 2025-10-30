@@ -10,154 +10,48 @@
       "CollisionSize": 40,
       "Scale": 1.0,
       "FrameGroups": {
-        "Shoveling 1": {
-          "Directions": 4,
-          "SpritesheetX": 0,
-          "SpritesheetY": 0
-        },
-        "Shoveling 2": {
-          "Directions": 4,
-          "SpritesheetX": 48,
-          "SpritesheetY": 0
-        },
-        "Shoveling 3": {
-          "Directions": 4,
-          "SpritesheetX": 96,
-          "SpritesheetY": 0
-        },
-        "Shoveling 4": {
-          "Directions": 4,
-          "SpritesheetX": 144,
-          "SpritesheetY": 0
-        },
-        "Shoveling 5": {
-          "Directions": 4,
-          "SpritesheetX": 192,
-          "SpritesheetY": 0
-        }
+        "Shoveling 1": { "Directions": 4, "SpritesheetX": 0,   "SpritesheetY": 0 },
+        "Shoveling 2": { "Directions": 4, "SpritesheetX": 48,  "SpritesheetY": 0 },
+        "Shoveling 3": { "Directions": 4, "SpritesheetX": 96,  "SpritesheetY": 0 },
+        "Shoveling 4": { "Directions": 4, "SpritesheetX": 144, "SpritesheetY": 0 },
+        "Shoveling 5": { "Directions": 4, "SpritesheetX": 192, "SpritesheetY": 0 }
       },
       "AnimationByDirections": {
         "4": {
           "Shoveling (Repeating Pattern)": [
-            {
-              "Frame": "Shoveling 1",
-              "Duration": 15
-            },
-            {
-              "Frame": "Shoveling 2",
-              "Duration": 10
-            },
-            {
-              "Frame": "Shoveling 3",
-              "Duration": 9
-            },
-            {
-              "Frame": "Shoveling 2",
-              "Duration": 10
-            },
-            {
-              "Frame": "Shoveling 3",
-              "Duration": 9
-            },
-            {
-              "Frame": "Shoveling 2",
-              "Duration": 10
-            },
-            {
-              "Frame": "Shoveling 3",
-              "Duration": 9
-            },
-            {
-              "Frame": "Shoveling 4",
-              "Duration": 3
-            },
-            {
-              "Frame": "Shoveling 5",
-              "Duration": 12
-            },
-            {
-              "Frame": "Shoveling 2",
-              "Duration": 10
-            },
-            {
-              "Frame": "Shoveling 3",
-              "Duration": 9
-            },
-            {
-              "Frame": "Shoveling 4",
-              "Duration": 12
-            },
-            {
-              "Frame": "Shoveling 2",
-              "Duration": 10
-            },
-            {
-              "Frame": "Shoveling 3",
-              "Duration": 9
-            },
-            {
-              "Frame": "Shoveling 4",
-              "Duration": 12
-            },
-            {
-              "Frame": "Shoveling 2",
-              "Duration": 10
-            },
-            {
-              "Frame": "Shoveling 3",
-              "Duration": 9
-            },
-            {
-              "Frame": "Shoveling 2",
-              "Duration": 10
-            },
-            {
-              "Frame": "Shoveling 3",
-              "Duration": 9
-            },
-            {
-              "Frame": "Shoveling 4",
-              "Duration": 4
-            },
-            {
-              "Frame": "Shoveling 5",
-              "Duration": 12
-            },
-            {
-              "Command": "GotoCommandOffset",
-              "Parameter": 0
-            }
+            { "Frame": "Shoveling 1", "Duration": 15 },
+            { "Frame": "Shoveling 2", "Duration": 10 },
+            { "Frame": "Shoveling 3", "Duration": 9 },
+            { "Frame": "Shoveling 2", "Duration": 10 },
+            { "Frame": "Shoveling 3", "Duration": 9 },
+            { "Frame": "Shoveling 2", "Duration": 10 },
+            { "Frame": "Shoveling 3", "Duration": 9 },
+            { "Frame": "Shoveling 4", "Duration": 3 },
+            { "Frame": "Shoveling 5", "Duration": 12 },
+            { "Frame": "Shoveling 2", "Duration": 10 },
+            { "Frame": "Shoveling 3", "Duration": 9 },
+            { "Frame": "Shoveling 4", "Duration": 12 },
+            { "Frame": "Shoveling 2", "Duration": 10 },
+            { "Frame": "Shoveling 3", "Duration": 9 },
+            { "Frame": "Shoveling 4", "Duration": 12 },
+            { "Frame": "Shoveling 2", "Duration": 10 },
+            { "Frame": "Shoveling 3", "Duration": 9 },
+            { "Frame": "Shoveling 2", "Duration": 10 },
+            { "Frame": "Shoveling 3", "Duration": 9 },
+            { "Frame": "Shoveling 4", "Duration": 4 },
+            { "Frame": "Shoveling 5", "Duration": 12 },
+            { "Command": "GotoCommandOffset", "Parameter": 0 }
           ],
           "Shoveling (Repeating Single)": [
-            {
-              "Frame": "Shoveling 1",
-              "Duration": 15
-            },
-            {
-              "Frame": "Shoveling 2",
-              "Duration": 10
-            },
-            {
-              "Frame": "Shoveling 3",
-              "Duration": 9
-            },
-            {
-              "Frame": "Shoveling 4",
-              "Duration": 12
-            },
-            {
-              "Command": "GotoCommandOffset",
-              "Parameter": 0
-            }
+            { "Frame": "Shoveling 1", "Duration": 15 },
+            { "Frame": "Shoveling 2", "Duration": 10 },
+            { "Frame": "Shoveling 3", "Duration": 9 },
+            { "Frame": "Shoveling 4", "Duration": 12 },
+            { "Command": "GotoCommandOffset", "Parameter": 0 }
           ],
           "StillFrame": [
-            {
-              "Frame": "Shoveling 1",
-              "Duration": 10
-            },
-            {
-              "Command": "Stop"
-            }
+            { "Frame": "Shoveling 1", "Duration": 10 },
+            { "Command": "Stop" }
           ]
         }
       }

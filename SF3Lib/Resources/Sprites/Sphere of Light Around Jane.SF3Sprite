@@ -10,22 +10,13 @@
       "CollisionSize": 48,
       "Scale": 1.0,
       "FrameGroups": {
-        "Light 1": {
-          "Directions": 1,
-          "SpritesheetX": 0,
-          "SpritesheetY": 0
-        }
+        "Light 1": { "Directions": 1, "SpritesheetX": 0, "SpritesheetY": 0 }
       },
       "AnimationByDirections": {
         "OneNoFlip": {
           "StillFrame (Light)": [
-            {
-              "Frame": "Light 1",
-              "Duration": 10
-            },
-            {
-              "Command": "Stop"
-            }
+            { "Frame": "Light 1", "Duration": 10 },
+            { "Command": "Stop" }
           ]
         }
       }

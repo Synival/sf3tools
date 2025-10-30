@@ -10,45 +10,18 @@
       "CollisionSize": 48,
       "Scale": 1.0,
       "FrameGroups": {
-        "Splash 1": {
-          "Directions": 1,
-          "SpritesheetX": 0,
-          "SpritesheetY": 0
-        },
-        "Splash 2": {
-          "Directions": 1,
-          "SpritesheetX": 32,
-          "SpritesheetY": 0
-        },
-        "Splash 3": {
-          "Directions": 1,
-          "SpritesheetX": 64,
-          "SpritesheetY": 0
-        }
+        "Splash 1": { "Directions": 1, "SpritesheetX": 0,  "SpritesheetY": 0 },
+        "Splash 2": { "Directions": 1, "SpritesheetX": 32, "SpritesheetY": 0 },
+        "Splash 3": { "Directions": 1, "SpritesheetX": 64, "SpritesheetY": 0 }
       },
       "AnimationByDirections": {
         "OneNoFlip": {
           "Splash": [
-            {
-              "Frame": "Splash 1",
-              "Duration": 1
-            },
-            {
-              "Frame": "Splash 2",
-              "Duration": 1
-            },
-            {
-              "Frame": "Splash 3",
-              "Duration": 1
-            },
-            {
-              "Frame": "Splash 2",
-              "Duration": 1
-            },
-            {
-              "Command": "GotoCommandOffset",
-              "Parameter": 0
-            }
+            { "Frame": "Splash 1", "Duration": 1 },
+            { "Frame": "Splash 2", "Duration": 1 },
+            { "Frame": "Splash 3", "Duration": 1 },
+            { "Frame": "Splash 2", "Duration": 1 },
+            { "Command": "GotoCommandOffset", "Parameter": 0 }
           ]
         }
       }

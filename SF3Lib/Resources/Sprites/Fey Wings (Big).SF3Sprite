@@ -10,22 +10,13 @@
       "CollisionSize": 96,
       "Scale": 1.0,
       "FrameGroups": {
-        "Idle 1": {
-          "Directions": 2,
-          "SpritesheetX": 0,
-          "SpritesheetY": 0
-        }
+        "Idle 1": { "Directions": 2, "SpritesheetX": 0, "SpritesheetY": 0 }
       },
       "AnimationByDirections": {
         "TwoNoFlip": {
           "StillFrame (Idle)": [
-            {
-              "Frame": "Idle 1",
-              "Duration": 10
-            },
-            {
-              "Command": "Stop"
-            }
+            { "Frame": "Idle 1", "Duration": 10 },
+            { "Command": "Stop" }
           ]
         }
       }

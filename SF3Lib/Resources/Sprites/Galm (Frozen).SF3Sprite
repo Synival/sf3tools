@@ -50,88 +50,28 @@
       "AnimationByDirections": {
         "OneNoFlip": {
           "StillFrame (Freezing 1)": [
-            {
-              "Frame": {
-                "First": {
-                  "Frame": "Freezing 1",
-                  "Direction": "SSE"
-                }
-              },
-              "Duration": 10
-            },
-            {
-              "Command": "Stop"
-            }
+            { "Frame": { "First": { "Frame": "Freezing 1", "Direction": "SSE" } }, "Duration": 10 },
+            { "Command": "Stop" }
           ],
           "StillFrame (Freezing 2)": [
-            {
-              "Frame": {
-                "First": {
-                  "Frame": "Freezing 2",
-                  "Direction": "SSE"
-                }
-              },
-              "Duration": 10
-            },
-            {
-              "Command": "Stop"
-            }
+            { "Frame": { "First": { "Frame": "Freezing 2", "Direction": "SSE" } }, "Duration": 10 },
+            { "Command": "Stop" }
           ],
           "StillFrame (Freezing 3)": [
-            {
-              "Frame": {
-                "First": {
-                  "Frame": "Freezing 3",
-                  "Direction": "SSE"
-                }
-              },
-              "Duration": 10
-            },
-            {
-              "Command": "Stop"
-            }
+            { "Frame": { "First": { "Frame": "Freezing 3", "Direction": "SSE" } }, "Duration": 10 },
+            { "Command": "Stop" }
           ],
           "StillFrame (Ice Cracking 1)": [
-            {
-              "Frame": {
-                "First": {
-                  "Frame": "Ice Cracking 1",
-                  "Direction": "SSE"
-                }
-              },
-              "Duration": 10
-            },
-            {
-              "Command": "Stop"
-            }
+            { "Frame": { "First": { "Frame": "Ice Cracking 1", "Direction": "SSE" } }, "Duration": 10 },
+            { "Command": "Stop" }
           ],
           "StillFrame (Ice Cracking 2)": [
-            {
-              "Frame": {
-                "First": {
-                  "Frame": "Ice Cracking 2",
-                  "Direction": "SSE"
-                }
-              },
-              "Duration": 10
-            },
-            {
-              "Command": "Stop"
-            }
+            { "Frame": { "First": { "Frame": "Ice Cracking 2", "Direction": "SSE" } }, "Duration": 10 },
+            { "Command": "Stop" }
           ],
           "StillFrame (Ice Cracking 3)": [
-            {
-              "Frame": {
-                "First": {
-                  "Frame": "Ice Cracking 3",
-                  "Direction": "SSE"
-                }
-              },
-              "Duration": 10
-            },
-            {
-              "Command": "Stop"
-            }
+            { "Frame": { "First": { "Frame": "Ice Cracking 3", "Direction": "SSE" } }, "Duration": 10 },
+            { "Command": "Stop" }
           ]
         }
       }

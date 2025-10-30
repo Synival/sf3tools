@@ -10,22 +10,13 @@
       "CollisionSize": 16,
       "Scale": 1.0,
       "FrameGroups": {
-        "Lightning 1": {
-          "Directions": 1,
-          "SpritesheetX": 0,
-          "SpritesheetY": 0
-        }
+        "Lightning 1": { "Directions": 1, "SpritesheetX": 0, "SpritesheetY": 0 }
       },
       "AnimationByDirections": {
         "OneNoFlip": {
           "StillFrame (Lightning)": [
-            {
-              "Frame": "Lightning 1",
-              "Duration": 10
-            },
-            {
-              "Command": "Stop"
-            }
+            { "Frame": "Lightning 1", "Duration": 10 },
+            { "Command": "Stop" }
           ]
         }
       }

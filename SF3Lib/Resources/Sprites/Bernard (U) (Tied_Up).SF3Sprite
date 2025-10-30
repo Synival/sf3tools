@@ -10,54 +10,22 @@
       "CollisionSize": 40,
       "Scale": 1.0,
       "FrameGroups": {
-        "OnGround 1": {
-          "Directions": 4,
-          "SpritesheetX": 0,
-          "SpritesheetY": 0
-        },
-        "WigglingOnGround 1": {
-          "Directions": 4,
-          "SpritesheetX": 48,
-          "SpritesheetY": 0
-        },
-        "WigglingOnGround 2": {
-          "Directions": 4,
-          "SpritesheetX": 96,
-          "SpritesheetY": 0
-        }
+        "OnGround 1":         { "Directions": 4, "SpritesheetX": 0,  "SpritesheetY": 0 },
+        "WigglingOnGround 1": { "Directions": 4, "SpritesheetX": 48, "SpritesheetY": 0 },
+        "WigglingOnGround 2": { "Directions": 4, "SpritesheetX": 96, "SpritesheetY": 0 }
       },
       "AnimationByDirections": {
         "4": {
           "StillFrame (OnGround)": [
-            {
-              "Frame": "OnGround 1",
-              "Duration": 10
-            },
-            {
-              "Command": "Stop"
-            }
+            { "Frame": "OnGround 1", "Duration": 10 },
+            { "Command": "Stop" }
           ],
           "WigglingOnGround": [
-            {
-              "Frame": "OnGround 1",
-              "Duration": 10
-            },
-            {
-              "Frame": "WigglingOnGround 1",
-              "Duration": 3
-            },
-            {
-              "Frame": "WigglingOnGround 2",
-              "Duration": 6
-            },
-            {
-              "Frame": "WigglingOnGround 1",
-              "Duration": 2
-            },
-            {
-              "Command": "GotoCommandOffset",
-              "Parameter": 0
-            }
+            { "Frame": "OnGround 1",         "Duration": 10 },
+            { "Frame": "WigglingOnGround 1", "Duration": 3 },
+            { "Frame": "WigglingOnGround 2", "Duration": 6 },
+            { "Frame": "WigglingOnGround 1", "Duration": 2 },
+            { "Command": "GotoCommandOffset", "Parameter": 0 }
           ]
         }
       }

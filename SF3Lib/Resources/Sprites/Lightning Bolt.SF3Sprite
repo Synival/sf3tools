@@ -10,144 +10,56 @@
       "CollisionSize": 32,
       "Scale": 1.0,
       "FrameGroups": {
-        "Dot 1": {
-          "Directions": 1,
-          "SpritesheetX": 0,
-          "SpritesheetY": 0
-        },
+        "Dot 1":                   { "Directions": 1, "SpritesheetX": 0,   "SpritesheetY": 0 },
         "Transparent 1": {
           "Directions": 1,
           "SpritesheetX": 32,
           "SpritesheetY": 0,
           "Coding": "Off"
         },
-        "Zapping (To the Left) 1": {
-          "Directions": 1,
-          "SpritesheetX": 64,
-          "SpritesheetY": 0
-        },
-        "Zapping (To the Left) 2": {
-          "Directions": 1,
-          "SpritesheetX": 96,
-          "SpritesheetY": 0
-        },
-        "Zapping (To the Left) 3": {
-          "Directions": 1,
-          "SpritesheetX": 128,
-          "SpritesheetY": 0
-        },
-        "Zapping 1": {
-          "Directions": 1,
-          "SpritesheetX": 160,
-          "SpritesheetY": 0
-        },
-        "Zapping 2": {
-          "Directions": 1,
-          "SpritesheetX": 192,
-          "SpritesheetY": 0
-        },
-        "Zapping 3": {
-          "Directions": 1,
-          "SpritesheetX": 224,
-          "SpritesheetY": 0
-        }
+        "Zapping (To the Left) 1": { "Directions": 1, "SpritesheetX": 64,  "SpritesheetY": 0 },
+        "Zapping (To the Left) 2": { "Directions": 1, "SpritesheetX": 96,  "SpritesheetY": 0 },
+        "Zapping (To the Left) 3": { "Directions": 1, "SpritesheetX": 128, "SpritesheetY": 0 },
+        "Zapping 1":               { "Directions": 1, "SpritesheetX": 160, "SpritesheetY": 0 },
+        "Zapping 2":               { "Directions": 1, "SpritesheetX": 192, "SpritesheetY": 0 },
+        "Zapping 3":               { "Directions": 1, "SpritesheetX": 224, "SpritesheetY": 0 }
       },
       "AnimationByDirections": {
         "OneNoFlip": {
           "StillFrame": [
-            {
-              "Frame": "Zapping 2",
-              "Duration": 10
-            },
-            {
-              "Command": "Stop"
-            }
+            { "Frame": "Zapping 2", "Duration": 10 },
+            { "Command": "Stop" }
           ],
           "StillFrame (Dot)": [
-            {
-              "Frame": "Dot 1",
-              "Duration": 10
-            },
-            {
-              "Command": "Stop"
-            }
+            { "Frame": "Dot 1", "Duration": 10 },
+            { "Command": "Stop" }
           ],
           "StillFrame (Transparent)": [
-            {
-              "Frame": "Transparent 1",
-              "Duration": 10
-            },
-            {
-              "Command": "Stop"
-            }
+            { "Frame": "Transparent 1", "Duration": 10 },
+            { "Command": "Stop" }
           ],
           "Zapping (Fast, To the Left)": [
-            {
-              "Frame": "Zapping (To the Left) 1",
-              "Duration": 1
-            },
-            {
-              "Frame": "Zapping (To the Left) 2",
-              "Duration": 1
-            },
-            {
-              "Frame": "Zapping (To the Left) 3",
-              "Duration": 1
-            },
-            {
-              "Command": "GotoCommandOffset",
-              "Parameter": 0
-            }
+            { "Frame": "Zapping (To the Left) 1", "Duration": 1 },
+            { "Frame": "Zapping (To the Left) 2", "Duration": 1 },
+            { "Frame": "Zapping (To the Left) 3", "Duration": 1 },
+            { "Command": "GotoCommandOffset", "Parameter": 0 }
           ],
           "Zapping (Fast)": [
-            {
-              "Frame": "Zapping 1",
-              "Duration": 1
-            },
-            {
-              "Frame": "Zapping 2",
-              "Duration": 1
-            },
-            {
-              "Frame": "Zapping 3",
-              "Duration": 1
-            },
-            {
-              "Command": "GotoCommandOffset",
-              "Parameter": 0
-            }
+            { "Frame": "Zapping 1", "Duration": 1 },
+            { "Frame": "Zapping 2", "Duration": 1 },
+            { "Frame": "Zapping 3", "Duration": 1 },
+            { "Command": "GotoCommandOffset", "Parameter": 0 }
           ],
           "Zapping (Reduced, Slow)": [
-            {
-              "Frame": "Zapping 2",
-              "Duration": 3
-            },
-            {
-              "Frame": "Zapping 3",
-              "Duration": 3
-            },
-            {
-              "Command": "GotoCommandOffset",
-              "Parameter": 0
-            }
+            { "Frame": "Zapping 2", "Duration": 3 },
+            { "Frame": "Zapping 3", "Duration": 3 },
+            { "Command": "GotoCommandOffset", "Parameter": 0 }
           ],
           "Zapping (Slow)": [
-            {
-              "Frame": "Zapping 1",
-              "Duration": 3
-            },
-            {
-              "Frame": "Zapping 2",
-              "Duration": 3
-            },
-            {
-              "Frame": "Zapping 3",
-              "Duration": 3
-            },
-            {
-              "Command": "GotoCommandOffset",
-              "Parameter": 0
-            }
+            { "Frame": "Zapping 1", "Duration": 3 },
+            { "Frame": "Zapping 2", "Duration": 3 },
+            { "Frame": "Zapping 3", "Duration": 3 },
+            { "Command": "GotoCommandOffset", "Parameter": 0 }
           ]
         }
       }

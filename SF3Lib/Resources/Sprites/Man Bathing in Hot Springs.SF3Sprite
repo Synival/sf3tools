@@ -38,94 +38,33 @@
       "AnimationByDirections": {
         "4": {
           "OccasionallyWipingForehead": [
-            {
-              "Frame": "OccasionallyWipingForehead 1",
-              "Duration": 300
-            },
-            {
-              "Frame": "OccasionallyWipingForehead 2",
-              "Duration": 3
-            },
-            {
-              "Frame": "OccasionallyWipingForehead 3",
-              "Duration": 6
-            },
-            {
-              "Frame": "OccasionallyWipingForehead 4",
-              "Duration": 6
-            },
-            {
-              "Frame": "OccasionallyWipingForehead 3",
-              "Duration": 6
-            },
-            {
-              "Frame": "OccasionallyWipingForehead 4",
-              "Duration": 6
-            },
-            {
-              "Frame": "OccasionallyWipingForehead 3",
-              "Duration": 6
-            },
-            {
-              "Frame": "OccasionallyWipingForehead 2",
-              "Duration": 3
-            },
-            {
-              "Frame": "OccasionallyWipingForehead 1",
-              "Duration": 150
-            },
-            {
-              "Frame": "OccasionallyWipingForehead 2",
-              "Duration": 3
-            },
-            {
-              "Frame": "OccasionallyWipingForehead 3",
-              "Duration": 7
-            },
-            {
-              "Frame": "OccasionallyWipingForehead 4",
-              "Duration": 7
-            },
-            {
-              "Frame": "OccasionallyWipingForehead 3",
-              "Duration": 7
-            },
-            {
-              "Frame": "OccasionallyWipingForehead 2",
-              "Duration": 5
-            },
-            {
-              "Command": "GotoCommandOffset",
-              "Parameter": 0
-            }
+            { "Frame": "OccasionallyWipingForehead 1", "Duration": 300 },
+            { "Frame": "OccasionallyWipingForehead 2", "Duration": 3 },
+            { "Frame": "OccasionallyWipingForehead 3", "Duration": 6 },
+            { "Frame": "OccasionallyWipingForehead 4", "Duration": 6 },
+            { "Frame": "OccasionallyWipingForehead 3", "Duration": 6 },
+            { "Frame": "OccasionallyWipingForehead 4", "Duration": 6 },
+            { "Frame": "OccasionallyWipingForehead 3", "Duration": 6 },
+            { "Frame": "OccasionallyWipingForehead 2", "Duration": 3 },
+            { "Frame": "OccasionallyWipingForehead 1", "Duration": 150 },
+            { "Frame": "OccasionallyWipingForehead 2", "Duration": 3 },
+            { "Frame": "OccasionallyWipingForehead 3", "Duration": 7 },
+            { "Frame": "OccasionallyWipingForehead 4", "Duration": 7 },
+            { "Frame": "OccasionallyWipingForehead 3", "Duration": 7 },
+            { "Frame": "OccasionallyWipingForehead 2", "Duration": 5 },
+            { "Command": "GotoCommandOffset", "Parameter": 0 }
           ],
           "StillFrame (Still)": [
-            {
-              "Frame": "OccasionallyWipingForehead 1",
-              "Duration": 10
-            },
-            {
-              "Command": "Stop"
-            }
+            { "Frame": "OccasionallyWipingForehead 1", "Duration": 10 },
+            { "Command": "Stop" }
           ],
           "StillFrame (Wiping Forehead, Repeat)": [
-            {
-              "Frame": "OccasionallyWipingForehead 3",
-              "Duration": 4
-            },
-            {
-              "Command": "GotoCommandOffset",
-              "Parameter": 0
-            }
+            { "Frame": "OccasionallyWipingForehead 3", "Duration": 4 },
+            { "Command": "GotoCommandOffset", "Parameter": 0 }
           ],
           "StillFrame (Wiping Forehead)": [
-            {
-              "Frame": "OccasionallyWipingForehead 3",
-              "Duration": 10
-            },
-            {
-              "Command": "Stop"
-            }
+            { "Frame": "OccasionallyWipingForehead 3", "Duration": 10 },
+            { "Command": "Stop" }
           ]
         }
       }

@@ -10,77 +10,31 @@
       "CollisionSize": 32,
       "Scale": 1.0,
       "FrameGroups": {
-        "OpeningAndClosing 1": {
-          "Directions": 4,
-          "SpritesheetX": 0,
-          "SpritesheetY": 0
-        },
-        "OpeningAndClosing 2": {
-          "Directions": 4,
-          "SpritesheetX": 32,
-          "SpritesheetY": 0
-        },
-        "OpeningAndClosing 3": {
-          "Directions": 4,
-          "SpritesheetX": 64,
-          "SpritesheetY": 0
-        }
+        "OpeningAndClosing 1": { "Directions": 4, "SpritesheetX": 0,  "SpritesheetY": 0 },
+        "OpeningAndClosing 2": { "Directions": 4, "SpritesheetX": 32, "SpritesheetY": 0 },
+        "OpeningAndClosing 3": { "Directions": 4, "SpritesheetX": 64, "SpritesheetY": 0 }
       },
       "AnimationByDirections": {
         "4": {
           "Closing": [
-            {
-              "Frame": "OpeningAndClosing 3",
-              "Duration": 1
-            },
-            {
-              "Frame": "OpeningAndClosing 2",
-              "Duration": 1
-            },
-            {
-              "Frame": "OpeningAndClosing 1",
-              "Duration": 1
-            },
-            {
-              "Command": "GotoAnimation",
-              "Parameter": 1
-            }
+            { "Frame": "OpeningAndClosing 3", "Duration": 1 },
+            { "Frame": "OpeningAndClosing 2", "Duration": 1 },
+            { "Frame": "OpeningAndClosing 1", "Duration": 1 },
+            { "Command": "GotoAnimation", "Parameter": 1 }
           ],
           "Opening": [
-            {
-              "Frame": "OpeningAndClosing 1",
-              "Duration": 1
-            },
-            {
-              "Frame": "OpeningAndClosing 2",
-              "Duration": 1
-            },
-            {
-              "Frame": "OpeningAndClosing 3",
-              "Duration": 1
-            },
-            {
-              "Command": "GotoAnimation",
-              "Parameter": 2
-            }
+            { "Frame": "OpeningAndClosing 1", "Duration": 1 },
+            { "Frame": "OpeningAndClosing 2", "Duration": 1 },
+            { "Frame": "OpeningAndClosing 3", "Duration": 1 },
+            { "Command": "GotoAnimation", "Parameter": 2 }
           ],
           "StillFrame (Closed)": [
-            {
-              "Frame": "OpeningAndClosing 1",
-              "Duration": 1
-            },
-            {
-              "Command": "Stop"
-            }
+            { "Frame": "OpeningAndClosing 1", "Duration": 1 },
+            { "Command": "Stop" }
           ],
           "StillFrame (Open)": [
-            {
-              "Frame": "OpeningAndClosing 3",
-              "Duration": 1
-            },
-            {
-              "Command": "Stop"
-            }
+            { "Frame": "OpeningAndClosing 3", "Duration": 1 },
+            { "Command": "Stop" }
           ]
         }
       }

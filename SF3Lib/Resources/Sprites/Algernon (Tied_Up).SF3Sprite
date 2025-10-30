@@ -10,54 +10,22 @@
       "CollisionSize": 40,
       "Scale": 1.0,
       "FrameGroups": {
-        "Idle (Dangling) 1": {
-          "Directions": 4,
-          "SpritesheetX": 0,
-          "SpritesheetY": 0
-        },
-        "Idle (Dangling) 2": {
-          "Directions": 4,
-          "SpritesheetX": 40,
-          "SpritesheetY": 0
-        },
-        "Idle (Dangling) 3": {
-          "Directions": 4,
-          "SpritesheetX": 80,
-          "SpritesheetY": 0
-        }
+        "Idle (Dangling) 1": { "Directions": 4, "SpritesheetX": 0,  "SpritesheetY": 0 },
+        "Idle (Dangling) 2": { "Directions": 4, "SpritesheetX": 40, "SpritesheetY": 0 },
+        "Idle (Dangling) 3": { "Directions": 4, "SpritesheetX": 80, "SpritesheetY": 0 }
       },
       "AnimationByDirections": {
         "4": {
           "Idle (Dangling)": [
-            {
-              "Frame": "Idle (Dangling) 1",
-              "Duration": 10
-            },
-            {
-              "Frame": "Idle (Dangling) 2",
-              "Duration": 4
-            },
-            {
-              "Frame": "Idle (Dangling) 3",
-              "Duration": 4
-            },
-            {
-              "Frame": "Idle (Dangling) 2",
-              "Duration": 4
-            },
-            {
-              "Command": "GotoCommandOffset",
-              "Parameter": 0
-            }
+            { "Frame": "Idle (Dangling) 1", "Duration": 10 },
+            { "Frame": "Idle (Dangling) 2", "Duration": 4 },
+            { "Frame": "Idle (Dangling) 3", "Duration": 4 },
+            { "Frame": "Idle (Dangling) 2", "Duration": 4 },
+            { "Command": "GotoCommandOffset", "Parameter": 0 }
           ],
           "StillFrame (Dangling)": [
-            {
-              "Frame": "Idle (Dangling) 1",
-              "Duration": 10
-            },
-            {
-              "Command": "Stop"
-            }
+            { "Frame": "Idle (Dangling) 1", "Duration": 10 },
+            { "Command": "Stop" }
           ]
         }
       }

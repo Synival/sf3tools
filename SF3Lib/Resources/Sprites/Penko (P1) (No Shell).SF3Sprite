@@ -10,181 +10,55 @@
       "CollisionSize": 40,
       "Scale": 1.0,
       "FrameGroups": {
-        "Blushing, BobbingSideToSide 1": {
-          "Directions": 4,
-          "SpritesheetX": 0,
-          "SpritesheetY": 0
-        },
-        "Blushing, BobbingSideToSide 2": {
-          "Directions": 4,
-          "SpritesheetX": 40,
-          "SpritesheetY": 0
-        },
-        "Blushing, BobbingSideToSide 3": {
-          "Directions": 4,
-          "SpritesheetX": 80,
-          "SpritesheetY": 0
-        },
-        "Blushing, BobbingSideToSide 4": {
-          "Directions": 4,
-          "SpritesheetX": 120,
-          "SpritesheetY": 0
-        },
-        "Idle 1": {
-          "Directions": 4,
-          "SpritesheetX": 160,
-          "SpritesheetY": 0
-        },
-        "Idle 2": {
-          "Directions": 4,
-          "SpritesheetX": 200,
-          "SpritesheetY": 0
-        },
-        "Idle 3": {
-          "Directions": 4,
-          "SpritesheetX": 240,
-          "SpritesheetY": 0
-        },
-        "Idle 4": {
-          "Directions": 4,
-          "SpritesheetX": 280,
-          "SpritesheetY": 0
-        },
-        "Kissing (Blushing) 1": {
-          "Directions": 4,
-          "SpritesheetX": 320,
-          "SpritesheetY": 0
-        },
-        "Kissing (Blushing) 2": {
-          "Directions": 4,
-          "SpritesheetX": 360,
-          "SpritesheetY": 0
-        }
+        "Blushing, BobbingSideToSide 1": { "Directions": 4, "SpritesheetX": 0,   "SpritesheetY": 0 },
+        "Blushing, BobbingSideToSide 2": { "Directions": 4, "SpritesheetX": 40,  "SpritesheetY": 0 },
+        "Blushing, BobbingSideToSide 3": { "Directions": 4, "SpritesheetX": 80,  "SpritesheetY": 0 },
+        "Blushing, BobbingSideToSide 4": { "Directions": 4, "SpritesheetX": 120, "SpritesheetY": 0 },
+        "Idle 1":                        { "Directions": 4, "SpritesheetX": 160, "SpritesheetY": 0 },
+        "Idle 2":                        { "Directions": 4, "SpritesheetX": 200, "SpritesheetY": 0 },
+        "Idle 3":                        { "Directions": 4, "SpritesheetX": 240, "SpritesheetY": 0 },
+        "Idle 4":                        { "Directions": 4, "SpritesheetX": 280, "SpritesheetY": 0 },
+        "Kissing (Blushing) 1":          { "Directions": 4, "SpritesheetX": 320, "SpritesheetY": 0 },
+        "Kissing (Blushing) 2":          { "Directions": 4, "SpritesheetX": 360, "SpritesheetY": 0 }
       },
       "AnimationByDirections": {
         "4": {
           "Blushing, BobbingSideToSide": [
-            {
-              "Frame": "Idle 1",
-              "Duration": 15
-            },
-            {
-              "Frame": "Blushing, BobbingSideToSide 1",
-              "Duration": 4
-            },
-            {
-              "Frame": "Blushing, BobbingSideToSide 2",
-              "Duration": 15
-            },
-            {
-              "Frame": "Blushing, BobbingSideToSide 3",
-              "Duration": 5
-            },
-            {
-              "Frame": "Blushing, BobbingSideToSide 2",
-              "Duration": 3
-            },
-            {
-              "Frame": "Blushing, BobbingSideToSide 4",
-              "Duration": 5
-            },
-            {
-              "Frame": "Blushing, BobbingSideToSide 2",
-              "Duration": 3
-            },
-            {
-              "Frame": "Blushing, BobbingSideToSide 3",
-              "Duration": 5
-            },
-            {
-              "Frame": "Blushing, BobbingSideToSide 2",
-              "Duration": 3
-            },
-            {
-              "Frame": "Blushing, BobbingSideToSide 4",
-              "Duration": 5
-            },
-            {
-              "Frame": "Blushing, BobbingSideToSide 2",
-              "Duration": 3
-            },
-            {
-              "Frame": "Blushing, BobbingSideToSide 3",
-              "Duration": 5
-            },
-            {
-              "Frame": "Blushing, BobbingSideToSide 2",
-              "Duration": 3
-            },
-            {
-              "Command": "GotoCommandOffset",
-              "Parameter": 0
-            }
+            { "Frame": "Idle 1",                        "Duration": 15 },
+            { "Frame": "Blushing, BobbingSideToSide 1", "Duration": 4 },
+            { "Frame": "Blushing, BobbingSideToSide 2", "Duration": 15 },
+            { "Frame": "Blushing, BobbingSideToSide 3", "Duration": 5 },
+            { "Frame": "Blushing, BobbingSideToSide 2", "Duration": 3 },
+            { "Frame": "Blushing, BobbingSideToSide 4", "Duration": 5 },
+            { "Frame": "Blushing, BobbingSideToSide 2", "Duration": 3 },
+            { "Frame": "Blushing, BobbingSideToSide 3", "Duration": 5 },
+            { "Frame": "Blushing, BobbingSideToSide 2", "Duration": 3 },
+            { "Frame": "Blushing, BobbingSideToSide 4", "Duration": 5 },
+            { "Frame": "Blushing, BobbingSideToSide 2", "Duration": 3 },
+            { "Frame": "Blushing, BobbingSideToSide 3", "Duration": 5 },
+            { "Frame": "Blushing, BobbingSideToSide 2", "Duration": 3 },
+            { "Command": "GotoCommandOffset", "Parameter": 0 }
           ],
           "Idle": [
-            {
-              "Frame": "Idle 1",
-              "Duration": 4
-            },
-            {
-              "Frame": "Idle 2",
-              "Duration": 4
-            },
-            {
-              "Frame": "Idle 3",
-              "Duration": 4
-            },
-            {
-              "Frame": "Idle 4",
-              "Duration": 4
-            },
-            {
-              "Command": "GotoCommandOffset",
-              "Parameter": 0
-            }
+            { "Frame": "Idle 1", "Duration": 4 },
+            { "Frame": "Idle 2", "Duration": 4 },
+            { "Frame": "Idle 3", "Duration": 4 },
+            { "Frame": "Idle 4", "Duration": 4 },
+            { "Command": "GotoCommandOffset", "Parameter": 0 }
           ],
           "Kissing (Blushing)": [
-            {
-              "Frame": "Kissing (Blushing) 1",
-              "Duration": 3
-            },
-            {
-              "Frame": "Kissing (Blushing) 2",
-              "Duration": 6
-            },
-            {
-              "Frame": "Kissing (Blushing) 1",
-              "Duration": 3
-            },
-            {
-              "Frame": "Kissing (Blushing) 2",
-              "Duration": 6
-            },
-            {
-              "Frame": "Kissing (Blushing) 1",
-              "Duration": 3
-            },
-            {
-              "Frame": "Kissing (Blushing) 2",
-              "Duration": 15
-            },
-            {
-              "Frame": "Kissing (Blushing) 1",
-              "Duration": 3
-            },
-            {
-              "Command": "Stop",
-              "Parameter": 1
-            }
+            { "Frame": "Kissing (Blushing) 1", "Duration": 3 },
+            { "Frame": "Kissing (Blushing) 2", "Duration": 6 },
+            { "Frame": "Kissing (Blushing) 1", "Duration": 3 },
+            { "Frame": "Kissing (Blushing) 2", "Duration": 6 },
+            { "Frame": "Kissing (Blushing) 1", "Duration": 3 },
+            { "Frame": "Kissing (Blushing) 2", "Duration": 15 },
+            { "Frame": "Kissing (Blushing) 1", "Duration": 3 },
+            { "Command": "Stop", "Parameter": 1 }
           ],
           "StillFrame": [
-            {
-              "Frame": "Idle 1",
-              "Duration": 10
-            },
-            {
-              "Command": "Stop"
-            }
+            { "Frame": "Idle 1", "Duration": 10 },
+            { "Command": "Stop" }
           ]
         }
       }

@@ -10,54 +10,22 @@
       "CollisionSize": 40,
       "Scale": 0.6299896,
       "FrameGroups": {
-        "Idle (Wind Blowing Hair) 1": {
-          "Directions": 4,
-          "SpritesheetX": 0,
-          "SpritesheetY": 0
-        },
-        "Idle (Wind Blowing Hair) 2": {
-          "Directions": 4,
-          "SpritesheetX": 64,
-          "SpritesheetY": 0
-        },
-        "Idle (Wind Blowing Hair) 3": {
-          "Directions": 4,
-          "SpritesheetX": 128,
-          "SpritesheetY": 0
-        }
+        "Idle (Wind Blowing Hair) 1": { "Directions": 4, "SpritesheetX": 0,   "SpritesheetY": 0 },
+        "Idle (Wind Blowing Hair) 2": { "Directions": 4, "SpritesheetX": 64,  "SpritesheetY": 0 },
+        "Idle (Wind Blowing Hair) 3": { "Directions": 4, "SpritesheetX": 128, "SpritesheetY": 0 }
       },
       "AnimationByDirections": {
         "4": {
           "Idle (Wind Blowing Hair)": [
-            {
-              "Frame": "Idle (Wind Blowing Hair) 1",
-              "Duration": 6
-            },
-            {
-              "Frame": "Idle (Wind Blowing Hair) 2",
-              "Duration": 4
-            },
-            {
-              "Frame": "Idle (Wind Blowing Hair) 3",
-              "Duration": 5
-            },
-            {
-              "Frame": "Idle (Wind Blowing Hair) 2",
-              "Duration": 4
-            },
-            {
-              "Command": "GotoCommandOffset",
-              "Parameter": 0
-            }
+            { "Frame": "Idle (Wind Blowing Hair) 1", "Duration": 6 },
+            { "Frame": "Idle (Wind Blowing Hair) 2", "Duration": 4 },
+            { "Frame": "Idle (Wind Blowing Hair) 3", "Duration": 5 },
+            { "Frame": "Idle (Wind Blowing Hair) 2", "Duration": 4 },
+            { "Command": "GotoCommandOffset", "Parameter": 0 }
           ],
           "StillFrame": [
-            {
-              "Frame": "Idle (Wind Blowing Hair) 1",
-              "Duration": 10
-            },
-            {
-              "Command": "Stop"
-            }
+            { "Frame": "Idle (Wind Blowing Hair) 1", "Duration": 10 },
+            { "Command": "Stop" }
           ]
         }
       }

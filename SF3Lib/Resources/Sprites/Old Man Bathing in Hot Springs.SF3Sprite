@@ -32,35 +32,15 @@
       "AnimationByDirections": {
         "4": {
           "OccasionallyLookingUp": [
-            {
-              "Frame": "OccasionallyLookingUp 1",
-              "Duration": 150
-            },
-            {
-              "Frame": "OccasionallyLookingUp 2",
-              "Duration": 3
-            },
-            {
-              "Frame": "OccasionallyLookingUp 3",
-              "Duration": 60
-            },
-            {
-              "Frame": "OccasionallyLookingUp 2",
-              "Duration": 3
-            },
-            {
-              "Command": "GotoCommandOffset",
-              "Parameter": 0
-            }
+            { "Frame": "OccasionallyLookingUp 1", "Duration": 150 },
+            { "Frame": "OccasionallyLookingUp 2", "Duration": 3 },
+            { "Frame": "OccasionallyLookingUp 3", "Duration": 60 },
+            { "Frame": "OccasionallyLookingUp 2", "Duration": 3 },
+            { "Command": "GotoCommandOffset", "Parameter": 0 }
           ],
           "StillFrame": [
-            {
-              "Frame": "OccasionallyLookingUp 1",
-              "Duration": 10
-            },
-            {
-              "Command": "Stop"
-            }
+            { "Frame": "OccasionallyLookingUp 1", "Duration": 10 },
+            { "Command": "Stop" }
           ]
         }
       }

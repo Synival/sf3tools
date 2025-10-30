@@ -10,26 +10,10 @@
       "CollisionSize": 40,
       "Scale": 1.0,
       "FrameGroups": {
-        "Nodding 1": {
-          "Directions": 4,
-          "SpritesheetX": 0,
-          "SpritesheetY": 0
-        },
-        "Nodding 2": {
-          "Directions": 4,
-          "SpritesheetX": 40,
-          "SpritesheetY": 0
-        },
-        "ShakingHead 1": {
-          "Directions": 4,
-          "SpritesheetX": 80,
-          "SpritesheetY": 0
-        },
-        "ShakingHead 2": {
-          "Directions": 4,
-          "SpritesheetX": 120,
-          "SpritesheetY": 0
-        },
+        "Nodding 1":     { "Directions": 4, "SpritesheetX": 0,   "SpritesheetY": 0 },
+        "Nodding 2":     { "Directions": 4, "SpritesheetX": 40,  "SpritesheetY": 0 },
+        "ShakingHead 1": { "Directions": 4, "SpritesheetX": 80,  "SpritesheetY": 0 },
+        "ShakingHead 2": { "Directions": 4, "SpritesheetX": 120, "SpritesheetY": 0 },
         "ShakingHead 3": {
           "ESE": {
             "SpritesheetX": 160,
@@ -54,479 +38,102 @@
             "SpritesheetY": 40
           }
         },
-        "Walking 1": {
-          "Directions": 4,
-          "SpritesheetX": 320,
-          "SpritesheetY": 0
-        },
-        "Walking 2": {
-          "Directions": 4,
-          "SpritesheetX": 360,
-          "SpritesheetY": 0
-        },
-        "Walking 3": {
-          "Directions": 4,
-          "SpritesheetX": 400,
-          "SpritesheetY": 0
-        },
-        "Walking 4": {
-          "Directions": 4,
-          "SpritesheetX": 440,
-          "SpritesheetY": 0
-        },
-        "Walking 5": {
-          "Directions": 4,
-          "SpritesheetX": 480,
-          "SpritesheetY": 0
-        }
+        "Walking 1":     { "Directions": 4, "SpritesheetX": 320, "SpritesheetY": 0 },
+        "Walking 2":     { "Directions": 4, "SpritesheetX": 360, "SpritesheetY": 0 },
+        "Walking 3":     { "Directions": 4, "SpritesheetX": 400, "SpritesheetY": 0 },
+        "Walking 4":     { "Directions": 4, "SpritesheetX": 440, "SpritesheetY": 0 },
+        "Walking 5":     { "Directions": 4, "SpritesheetX": 480, "SpritesheetY": 0 }
       },
       "AnimationByDirections": {
         "OneNoFlip": {
           "Nodding": [
-            {
-              "Frame": {
-                "First": {
-                  "Frame": "Walking 3",
-                  "Direction": "ESE"
-                }
-              },
-              "Duration": 2
-            },
-            {
-              "Frame": {
-                "First": {
-                  "Frame": "Nodding 1",
-                  "Direction": "ESE"
-                }
-              },
-              "Duration": 2
-            },
-            {
-              "Frame": {
-                "First": {
-                  "Frame": "Nodding 2",
-                  "Direction": "ESE"
-                }
-              },
-              "Duration": 2
-            },
-            {
-              "Frame": {
-                "First": {
-                  "Frame": "Nodding 1",
-                  "Direction": "ESE"
-                }
-              },
-              "Duration": 2
-            },
-            {
-              "Command": "GotoAnimation",
-              "Parameter": 1
-            }
+            { "Frame": { "First": { "Frame": "Walking 3", "Direction": "ESE" } }, "Duration": 2 },
+            { "Frame": { "First": { "Frame": "Nodding 1", "Direction": "ESE" } }, "Duration": 2 },
+            { "Frame": { "First": { "Frame": "Nodding 2", "Direction": "ESE" } }, "Duration": 2 },
+            { "Frame": { "First": { "Frame": "Nodding 1", "Direction": "ESE" } }, "Duration": 2 },
+            { "Command": "GotoAnimation", "Parameter": 1 }
           ],
           "ShakingHead": [
-            {
-              "Frame": {
-                "First": {
-                  "Frame": "Walking 3",
-                  "Direction": "ESE"
-                }
-              },
-              "Duration": 2
-            },
-            {
-              "Frame": {
-                "First": {
-                  "Frame": "ShakingHead 1",
-                  "Direction": "ESE"
-                }
-              },
-              "Duration": 2
-            },
-            {
-              "Frame": {
-                "First": {
-                  "Frame": "ShakingHead 2",
-                  "Direction": "ESE"
-                }
-              },
-              "Duration": 2
-            },
-            {
-              "Frame": {
-                "First": {
-                  "Frame": "ShakingHead 1",
-                  "Direction": "ESE"
-                }
-              },
-              "Duration": 2
-            },
-            {
-              "Frame": {
-                "First": {
-                  "Frame": "Walking 3",
-                  "Direction": "ESE"
-                }
-              },
-              "Duration": 2
-            },
-            {
-              "Frame": {
-                "First": {
-                  "Frame": "ShakingHead 1",
-                  "Direction": "ESE"
-                }
-              },
-              "Duration": 2
-            },
-            {
-              "Frame": {
-                "First": {
-                  "Frame": "ShakingHead 2",
-                  "Direction": "ESE"
-                }
-              },
-              "Duration": 2
-            },
-            {
-              "Frame": {
-                "First": {
-                  "Frame": "ShakingHead 1",
-                  "Direction": "ESE"
-                }
-              },
-              "Duration": 2
-            },
-            {
-              "Command": "GotoAnimation",
-              "Parameter": 1
-            }
+            { "Frame": { "First": { "Frame": "Walking 3",     "Direction": "ESE" } }, "Duration": 2 },
+            { "Frame": { "First": { "Frame": "ShakingHead 1", "Direction": "ESE" } }, "Duration": 2 },
+            { "Frame": { "First": { "Frame": "ShakingHead 2", "Direction": "ESE" } }, "Duration": 2 },
+            { "Frame": { "First": { "Frame": "ShakingHead 1", "Direction": "ESE" } }, "Duration": 2 },
+            { "Frame": { "First": { "Frame": "Walking 3",     "Direction": "ESE" } }, "Duration": 2 },
+            { "Frame": { "First": { "Frame": "ShakingHead 1", "Direction": "ESE" } }, "Duration": 2 },
+            { "Frame": { "First": { "Frame": "ShakingHead 2", "Direction": "ESE" } }, "Duration": 2 },
+            { "Frame": { "First": { "Frame": "ShakingHead 1", "Direction": "ESE" } }, "Duration": 2 },
+            { "Command": "GotoAnimation", "Parameter": 1 }
           ],
           "ShakingHead (Leaning Forward)": [
-            {
-              "Frame": {
-                "First": {
-                  "Frame": "ShakingHead 3",
-                  "Direction": "ESE"
-                }
-              },
-              "Duration": 15
-            },
-            {
-              "Frame": {
-                "First": {
-                  "Frame": "ShakingHead 4",
-                  "Direction": "ESE"
-                }
-              },
-              "Duration": 2
-            },
-            {
-              "Frame": {
-                "First": {
-                  "Frame": "ShakingHead 5",
-                  "Direction": "ESE"
-                }
-              },
-              "Duration": 2
-            },
-            {
-              "Frame": {
-                "First": {
-                  "Frame": "ShakingHead 4",
-                  "Direction": "ESE"
-                }
-              },
-              "Duration": 2
-            },
-            {
-              "Frame": {
-                "First": {
-                  "Frame": "ShakingHead 3",
-                  "Direction": "ESE"
-                }
-              },
-              "Duration": 2
-            },
-            {
-              "Frame": {
-                "First": {
-                  "Frame": "ShakingHead 4",
-                  "Direction": "ESE"
-                }
-              },
-              "Duration": 2
-            },
-            {
-              "Frame": {
-                "First": {
-                  "Frame": "ShakingHead 5",
-                  "Direction": "ESE"
-                }
-              },
-              "Duration": 2
-            },
-            {
-              "Frame": {
-                "First": {
-                  "Frame": "ShakingHead 4",
-                  "Direction": "ESE"
-                }
-              },
-              "Duration": 2
-            },
-            {
-              "Command": "GotoAnimation",
-              "Parameter": 5
-            }
+            { "Frame": { "First": { "Frame": "ShakingHead 3", "Direction": "ESE" } }, "Duration": 15 },
+            { "Frame": { "First": { "Frame": "ShakingHead 4", "Direction": "ESE" } }, "Duration": 2 },
+            { "Frame": { "First": { "Frame": "ShakingHead 5", "Direction": "ESE" } }, "Duration": 2 },
+            { "Frame": { "First": { "Frame": "ShakingHead 4", "Direction": "ESE" } }, "Duration": 2 },
+            { "Frame": { "First": { "Frame": "ShakingHead 3", "Direction": "ESE" } }, "Duration": 2 },
+            { "Frame": { "First": { "Frame": "ShakingHead 4", "Direction": "ESE" } }, "Duration": 2 },
+            { "Frame": { "First": { "Frame": "ShakingHead 5", "Direction": "ESE" } }, "Duration": 2 },
+            { "Frame": { "First": { "Frame": "ShakingHead 4", "Direction": "ESE" } }, "Duration": 2 },
+            { "Command": "GotoAnimation", "Parameter": 5 }
           ],
           "StandingUprightFromLeaningForward": [
-            {
-              "Frame": {
-                "First": {
-                  "Frame": "ShakingHead 3",
-                  "Direction": "ESE"
-                }
-              },
-              "Duration": 3
-            },
-            {
-              "Frame": {
-                "First": {
-                  "Frame": "StandingUprightFromLeaningForward 1",
-                  "Direction": "ESE"
-                }
-              },
-              "Duration": 3
-            },
-            {
-              "Frame": {
-                "First": {
-                  "Frame": "Walking 3",
-                  "Direction": "ESE"
-                }
-              },
-              "Duration": 15
-            },
-            {
-              "Command": "GotoAnimation",
-              "Parameter": 0
-            }
+            { "Frame": { "First": { "Frame": "ShakingHead 3",                       "Direction": "ESE" } }, "Duration": 3 },
+            { "Frame": { "First": { "Frame": "StandingUprightFromLeaningForward 1", "Direction": "ESE" } }, "Duration": 3 },
+            { "Frame": { "First": { "Frame": "Walking 3",                           "Direction": "ESE" } }, "Duration": 15 },
+            { "Command": "GotoAnimation", "Parameter": 0 }
           ],
           "StillFrame": [
-            {
-              "Frame": {
-                "First": {
-                  "Frame": "Walking 1",
-                  "Direction": "ESE"
-                }
-              },
-              "Duration": 10
-            },
-            {
-              "Command": "Stop"
-            }
+            { "Frame": { "First": { "Frame": "Walking 1", "Direction": "ESE" } }, "Duration": 10 },
+            { "Command": "Stop" }
           ],
           "StillFrame (Leaning Forward)": [
-            {
-              "Frame": {
-                "First": {
-                  "Frame": "ShakingHead 3",
-                  "Direction": "ESE"
-                }
-              },
-              "Duration": 10
-            },
-            {
-              "Command": "Stop"
-            }
+            { "Frame": { "First": { "Frame": "ShakingHead 3", "Direction": "ESE" } }, "Duration": 10 },
+            { "Command": "Stop" }
           ],
           "Walking": [
-            {
-              "Frame": {
-                "First": {
-                  "Frame": "Walking 1",
-                  "Direction": "ESE"
-                }
-              },
-              "Duration": 4
-            },
-            {
-              "Frame": {
-                "First": {
-                  "Frame": "Walking 2",
-                  "Direction": "ESE"
-                }
-              },
-              "Duration": 4
-            },
-            {
-              "Frame": {
-                "First": {
-                  "Frame": "Walking 3",
-                  "Direction": "ESE"
-                }
-              },
-              "Duration": 4
-            },
-            {
-              "Frame": {
-                "First": {
-                  "Frame": "Walking 4",
-                  "Direction": "ESE"
-                }
-              },
-              "Duration": 4
-            },
-            {
-              "Frame": {
-                "First": {
-                  "Frame": "Walking 5",
-                  "Direction": "ESE"
-                }
-              },
-              "Duration": 4
-            },
-            {
-              "Frame": {
-                "First": {
-                  "Frame": "Walking 4",
-                  "Direction": "ESE"
-                }
-              },
-              "Duration": 4
-            },
-            {
-              "Frame": {
-                "First": {
-                  "Frame": "Walking 3",
-                  "Direction": "ESE"
-                }
-              },
-              "Duration": 4
-            },
-            {
-              "Frame": {
-                "First": {
-                  "Frame": "Walking 2",
-                  "Direction": "ESE"
-                }
-              },
-              "Duration": 4
-            },
-            {
-              "Command": "GotoCommandOffset",
-              "Parameter": 0
-            }
+            { "Frame": { "First": { "Frame": "Walking 1", "Direction": "ESE" } }, "Duration": 4 },
+            { "Frame": { "First": { "Frame": "Walking 2", "Direction": "ESE" } }, "Duration": 4 },
+            { "Frame": { "First": { "Frame": "Walking 3", "Direction": "ESE" } }, "Duration": 4 },
+            { "Frame": { "First": { "Frame": "Walking 4", "Direction": "ESE" } }, "Duration": 4 },
+            { "Frame": { "First": { "Frame": "Walking 5", "Direction": "ESE" } }, "Duration": 4 },
+            { "Frame": { "First": { "Frame": "Walking 4", "Direction": "ESE" } }, "Duration": 4 },
+            { "Frame": { "First": { "Frame": "Walking 3", "Direction": "ESE" } }, "Duration": 4 },
+            { "Frame": { "First": { "Frame": "Walking 2", "Direction": "ESE" } }, "Duration": 4 },
+            { "Command": "GotoCommandOffset", "Parameter": 0 }
           ]
         },
         "4": {
           "Nodding": [
-            {
-              "Frame": "Walking 3",
-              "Duration": 2
-            },
-            {
-              "Frame": "Nodding 1",
-              "Duration": 2
-            },
-            {
-              "Frame": "Nodding 2",
-              "Duration": 2
-            },
-            {
-              "Frame": "Nodding 1",
-              "Duration": 2
-            },
-            {
-              "Command": "GotoAnimation",
-              "Parameter": 1
-            }
+            { "Frame": "Walking 3", "Duration": 2 },
+            { "Frame": "Nodding 1", "Duration": 2 },
+            { "Frame": "Nodding 2", "Duration": 2 },
+            { "Frame": "Nodding 1", "Duration": 2 },
+            { "Command": "GotoAnimation", "Parameter": 1 }
           ],
           "ShakingHead": [
-            {
-              "Frame": "Walking 3",
-              "Duration": 2
-            },
-            {
-              "Frame": "ShakingHead 1",
-              "Duration": 2
-            },
-            {
-              "Frame": "ShakingHead 2",
-              "Duration": 2
-            },
-            {
-              "Frame": "ShakingHead 1",
-              "Duration": 2
-            },
-            {
-              "Frame": "Walking 3",
-              "Duration": 2
-            },
-            {
-              "Frame": "ShakingHead 1",
-              "Duration": 2
-            },
-            {
-              "Frame": "ShakingHead 2",
-              "Duration": 2
-            },
-            {
-              "Frame": "ShakingHead 1",
-              "Duration": 2
-            },
-            {
-              "Command": "GotoAnimation",
-              "Parameter": 1
-            }
+            { "Frame": "Walking 3",     "Duration": 2 },
+            { "Frame": "ShakingHead 1", "Duration": 2 },
+            { "Frame": "ShakingHead 2", "Duration": 2 },
+            { "Frame": "ShakingHead 1", "Duration": 2 },
+            { "Frame": "Walking 3",     "Duration": 2 },
+            { "Frame": "ShakingHead 1", "Duration": 2 },
+            { "Frame": "ShakingHead 2", "Duration": 2 },
+            { "Frame": "ShakingHead 1", "Duration": 2 },
+            { "Command": "GotoAnimation", "Parameter": 1 }
           ],
           "StillFrame (Walking)": [
-            {
-              "Frame": "Walking 1",
-              "Duration": 10
-            },
-            {
-              "Command": "Stop"
-            }
+            { "Frame": "Walking 1", "Duration": 10 },
+            { "Command": "Stop" }
           ],
           "Walking": [
-            {
-              "Frame": "Walking 1",
-              "Duration": 4
-            },
-            {
-              "Frame": "Walking 2",
-              "Duration": 4
-            },
-            {
-              "Frame": "Walking 3",
-              "Duration": 4
-            },
-            {
-              "Frame": "Walking 4",
-              "Duration": 4
-            },
-            {
-              "Frame": "Walking 5",
-              "Duration": 4
-            },
-            {
-              "Frame": "Walking 4",
-              "Duration": 4
-            },
-            {
-              "Frame": "Walking 3",
-              "Duration": 4
-            },
-            {
-              "Frame": "Walking 2",
-              "Duration": 4
-            },
-            {
-              "Command": "GotoCommandOffset",
-              "Parameter": 0
-            }
+            { "Frame": "Walking 1", "Duration": 4 },
+            { "Frame": "Walking 2", "Duration": 4 },
+            { "Frame": "Walking 3", "Duration": 4 },
+            { "Frame": "Walking 4", "Duration": 4 },
+            { "Frame": "Walking 5", "Duration": 4 },
+            { "Frame": "Walking 4", "Duration": 4 },
+            { "Frame": "Walking 3", "Duration": 4 },
+            { "Frame": "Walking 2", "Duration": 4 },
+            { "Command": "GotoCommandOffset", "Parameter": 0 }
           ]
         }
       }

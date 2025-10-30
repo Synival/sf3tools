@@ -10,152 +10,51 @@
       "CollisionSize": 40,
       "Scale": 1.0,
       "FrameGroups": {
-        "GettingUp 1": {
-          "Directions": 4,
-          "SpritesheetX": 0,
-          "SpritesheetY": 0
-        },
-        "GettingUp 2": {
-          "Directions": 4,
-          "SpritesheetX": 40,
-          "SpritesheetY": 0
-        },
-        "OccasionallyDabbingFace 1": {
-          "Directions": 4,
-          "SpritesheetX": 80,
-          "SpritesheetY": 0
-        },
-        "OccasionallyDabbingFace 2": {
-          "Directions": 4,
-          "SpritesheetX": 120,
-          "SpritesheetY": 0
-        },
-        "OccasionallyDabbingFace 3": {
-          "Directions": 4,
-          "SpritesheetX": 160,
-          "SpritesheetY": 0
-        }
+        "GettingUp 1":               { "Directions": 4, "SpritesheetX": 0,   "SpritesheetY": 0 },
+        "GettingUp 2":               { "Directions": 4, "SpritesheetX": 40,  "SpritesheetY": 0 },
+        "OccasionallyDabbingFace 1": { "Directions": 4, "SpritesheetX": 80,  "SpritesheetY": 0 },
+        "OccasionallyDabbingFace 2": { "Directions": 4, "SpritesheetX": 120, "SpritesheetY": 0 },
+        "OccasionallyDabbingFace 3": { "Directions": 4, "SpritesheetX": 160, "SpritesheetY": 0 }
       },
       "AnimationByDirections": {
         "4": {
           "GettingUp (Slowly)": [
-            {
-              "Frame": "OccasionallyDabbingFace 1",
-              "Duration": 9
-            },
-            {
-              "Frame": "GettingUp 1",
-              "Duration": 12
-            },
-            {
-              "Frame": "GettingUp 2",
-              "Duration": 12
-            },
-            {
-              "Command": "Stop"
-            }
+            { "Frame": "OccasionallyDabbingFace 1", "Duration": 9 },
+            { "Frame": "GettingUp 1",               "Duration": 12 },
+            { "Frame": "GettingUp 2",               "Duration": 12 },
+            { "Command": "Stop" }
           ],
           "GoingBackDown (Slowly)": [
-            {
-              "Frame": "GettingUp 2",
-              "Duration": 12
-            },
-            {
-              "Frame": "GettingUp 1",
-              "Duration": 12
-            },
-            {
-              "Frame": "OccasionallyDabbingFace 1",
-              "Duration": 9
-            },
-            {
-              "Command": "Stop"
-            }
+            { "Frame": "GettingUp 2",               "Duration": 12 },
+            { "Frame": "GettingUp 1",               "Duration": 12 },
+            { "Frame": "OccasionallyDabbingFace 1", "Duration": 9 },
+            { "Command": "Stop" }
           ],
           "OccasionallyDabbingFace": [
-            {
-              "Frame": "OccasionallyDabbingFace 1",
-              "Duration": 50
-            },
-            {
-              "Frame": "OccasionallyDabbingFace 2",
-              "Duration": 5
-            },
-            {
-              "Frame": "OccasionallyDabbingFace 3",
-              "Duration": 5
-            },
-            {
-              "Frame": "OccasionallyDabbingFace 2",
-              "Duration": 5
-            },
-            {
-              "Frame": "OccasionallyDabbingFace 3",
-              "Duration": 5
-            },
-            {
-              "Frame": "OccasionallyDabbingFace 2",
-              "Duration": 5
-            },
-            {
-              "Frame": "OccasionallyDabbingFace 1",
-              "Duration": 70
-            },
-            {
-              "Frame": "OccasionallyDabbingFace 2",
-              "Duration": 5
-            },
-            {
-              "Frame": "OccasionallyDabbingFace 3",
-              "Duration": 5
-            },
-            {
-              "Frame": "OccasionallyDabbingFace 2",
-              "Duration": 5
-            },
-            {
-              "Frame": "OccasionallyDabbingFace 3",
-              "Duration": 5
-            },
-            {
-              "Frame": "OccasionallyDabbingFace 2",
-              "Duration": 5
-            },
-            {
-              "Command": "GotoCommandOffset",
-              "Parameter": 0
-            }
+            { "Frame": "OccasionallyDabbingFace 1", "Duration": 50 },
+            { "Frame": "OccasionallyDabbingFace 2", "Duration": 5 },
+            { "Frame": "OccasionallyDabbingFace 3", "Duration": 5 },
+            { "Frame": "OccasionallyDabbingFace 2", "Duration": 5 },
+            { "Frame": "OccasionallyDabbingFace 3", "Duration": 5 },
+            { "Frame": "OccasionallyDabbingFace 2", "Duration": 5 },
+            { "Frame": "OccasionallyDabbingFace 1", "Duration": 70 },
+            { "Frame": "OccasionallyDabbingFace 2", "Duration": 5 },
+            { "Frame": "OccasionallyDabbingFace 3", "Duration": 5 },
+            { "Frame": "OccasionallyDabbingFace 2", "Duration": 5 },
+            { "Frame": "OccasionallyDabbingFace 3", "Duration": 5 },
+            { "Frame": "OccasionallyDabbingFace 2", "Duration": 5 },
+            { "Command": "GotoCommandOffset", "Parameter": 0 }
           ],
           "StillFrame": [
-            {
-              "Frame": "OccasionallyDabbingFace 1",
-              "Duration": 10
-            },
-            {
-              "Command": "Stop"
-            }
+            { "Frame": "OccasionallyDabbingFace 1", "Duration": 10 },
+            { "Command": "Stop" }
           ],
           "TryingToGetUp": [
-            {
-              "Frame": "OccasionallyDabbingFace 1",
-              "Duration": 3
-            },
-            {
-              "Frame": "GettingUp 1",
-              "Duration": 6
-            },
-            {
-              "Frame": "GettingUp 2",
-              "Duration": 6
-            },
-            {
-              "Frame": "GettingUp 1",
-              "Duration": 3
-            },
-            {
-              "Command": "GotoCommandOffset",
-              "Parameter": 0
-            }
+            { "Frame": "OccasionallyDabbingFace 1", "Duration": 3 },
+            { "Frame": "GettingUp 1",               "Duration": 6 },
+            { "Frame": "GettingUp 2",               "Duration": 6 },
+            { "Frame": "GettingUp 1",               "Duration": 3 },
+            { "Command": "GotoCommandOffset", "Parameter": 0 }
           ]
         }
       }

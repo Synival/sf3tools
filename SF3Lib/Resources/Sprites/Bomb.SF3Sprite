@@ -10,22 +10,13 @@
       "CollisionSize": 16,
       "Scale": 1.0,
       "FrameGroups": {
-        "Bomb 1": {
-          "Directions": 1,
-          "SpritesheetX": 0,
-          "SpritesheetY": 0
-        }
+        "Bomb 1": { "Directions": 1, "SpritesheetX": 0, "SpritesheetY": 0 }
       },
       "AnimationByDirections": {
         "OneNoFlip": {
           "StillFrame (Bomb)": [
-            {
-              "Frame": "Bomb 1",
-              "Duration": 1
-            },
-            {
-              "Command": "Stop"
-            }
+            { "Frame": "Bomb 1", "Duration": 1 },
+            { "Command": "Stop" }
           ]
         }
       }

@@ -10,107 +10,36 @@
       "CollisionSize": 40,
       "Scale": 1.0,
       "FrameGroups": {
-        "Poofing 1": {
-          "Directions": 1,
-          "SpritesheetX": 0,
-          "SpritesheetY": 0
-        },
-        "Poofing 2": {
-          "Directions": 1,
-          "SpritesheetX": 32,
-          "SpritesheetY": 0
-        },
-        "Poofing 3": {
-          "Directions": 1,
-          "SpritesheetX": 64,
-          "SpritesheetY": 0
-        },
-        "Poofing 4": {
-          "Directions": 1,
-          "SpritesheetX": 96,
-          "SpritesheetY": 0
-        },
-        "Poofing 5": {
-          "Directions": 1,
-          "SpritesheetX": 128,
-          "SpritesheetY": 0
-        },
-        "Poofing 6": {
-          "Directions": 1,
-          "SpritesheetX": 160,
-          "SpritesheetY": 0
-        }
+        "Poofing 1": { "Directions": 1, "SpritesheetX": 0,   "SpritesheetY": 0 },
+        "Poofing 2": { "Directions": 1, "SpritesheetX": 32,  "SpritesheetY": 0 },
+        "Poofing 3": { "Directions": 1, "SpritesheetX": 64,  "SpritesheetY": 0 },
+        "Poofing 4": { "Directions": 1, "SpritesheetX": 96,  "SpritesheetY": 0 },
+        "Poofing 5": { "Directions": 1, "SpritesheetX": 128, "SpritesheetY": 0 },
+        "Poofing 6": { "Directions": 1, "SpritesheetX": 160, "SpritesheetY": 0 }
       },
       "AnimationByDirections": {
         "OneNoFlip": {
           "Poofing (Fast, Slowing Down)": [
-            {
-              "Frame": "Poofing 1",
-              "Duration": 2
-            },
-            {
-              "Frame": "Poofing 2",
-              "Duration": 2
-            },
-            {
-              "Frame": "Poofing 3",
-              "Duration": 2
-            },
-            {
-              "Frame": "Poofing 4",
-              "Duration": 2
-            },
-            {
-              "Frame": "Poofing 5",
-              "Duration": 4
-            },
-            {
-              "Frame": "Poofing 6",
-              "Duration": 4
-            },
-            {
-              "Command": "GotoCommandOffset",
-              "Parameter": 0
-            }
+            { "Frame": "Poofing 1", "Duration": 2 },
+            { "Frame": "Poofing 2", "Duration": 2 },
+            { "Frame": "Poofing 3", "Duration": 2 },
+            { "Frame": "Poofing 4", "Duration": 2 },
+            { "Frame": "Poofing 5", "Duration": 4 },
+            { "Frame": "Poofing 6", "Duration": 4 },
+            { "Command": "GotoCommandOffset", "Parameter": 0 }
           ],
           "Poofing (Slow, Slowing Down)": [
-            {
-              "Frame": "Poofing 1",
-              "Duration": 4
-            },
-            {
-              "Frame": "Poofing 2",
-              "Duration": 4
-            },
-            {
-              "Frame": "Poofing 3",
-              "Duration": 4
-            },
-            {
-              "Frame": "Poofing 4",
-              "Duration": 4
-            },
-            {
-              "Frame": "Poofing 5",
-              "Duration": 8
-            },
-            {
-              "Frame": "Poofing 6",
-              "Duration": 8
-            },
-            {
-              "Command": "GotoAnimation",
-              "Parameter": 0
-            }
+            { "Frame": "Poofing 1", "Duration": 4 },
+            { "Frame": "Poofing 2", "Duration": 4 },
+            { "Frame": "Poofing 3", "Duration": 4 },
+            { "Frame": "Poofing 4", "Duration": 4 },
+            { "Frame": "Poofing 5", "Duration": 8 },
+            { "Frame": "Poofing 6", "Duration": 8 },
+            { "Command": "GotoAnimation", "Parameter": 0 }
           ],
           "StillFrame": [
-            {
-              "Frame": "Poofing 1",
-              "Duration": 1
-            },
-            {
-              "Command": "Stop"
-            }
+            { "Frame": "Poofing 1", "Duration": 1 },
+            { "Command": "Stop" }
           ]
         }
       }

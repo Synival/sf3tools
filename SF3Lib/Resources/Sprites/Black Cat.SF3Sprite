@@ -10,22 +10,13 @@
       "CollisionSize": 40,
       "Scale": 0.7999878,
       "FrameGroups": {
-        "Idle 1": {
-          "Directions": 4,
-          "SpritesheetX": 0,
-          "SpritesheetY": 0
-        }
+        "Idle 1": { "Directions": 4, "SpritesheetX": 0, "SpritesheetY": 0 }
       },
       "AnimationByDirections": {
         "4": {
           "StillFrame (Idle)": [
-            {
-              "Frame": "Idle 1",
-              "Duration": 5
-            },
-            {
-              "Command": "Stop"
-            }
+            { "Frame": "Idle 1", "Duration": 5 },
+            { "Command": "Stop" }
           ]
         }
       }

@@ -10,59 +10,23 @@
       "CollisionSize": 40,
       "Scale": 1.0,
       "FrameGroups": {
-        "Field 1": {
-          "Directions": 4,
-          "SpritesheetX": 0,
-          "SpritesheetY": 0
-        },
-        "Idle (Battle) 1": {
-          "Directions": 4,
-          "SpritesheetX": 40,
-          "SpritesheetY": 0
-        },
-        "Idle (Battle) 2": {
-          "Directions": 4,
-          "SpritesheetX": 80,
-          "SpritesheetY": 0
-        },
-        "Idle (Battle) 3": {
-          "Directions": 4,
-          "SpritesheetX": 120,
-          "SpritesheetY": 0
-        }
+        "Field 1":         { "Directions": 4, "SpritesheetX": 0,   "SpritesheetY": 0 },
+        "Idle (Battle) 1": { "Directions": 4, "SpritesheetX": 40,  "SpritesheetY": 0 },
+        "Idle (Battle) 2": { "Directions": 4, "SpritesheetX": 80,  "SpritesheetY": 0 },
+        "Idle (Battle) 3": { "Directions": 4, "SpritesheetX": 120, "SpritesheetY": 0 }
       },
       "AnimationByDirections": {
         "4": {
           "Idle (Battle)": [
-            {
-              "Frame": "Idle (Battle) 1",
-              "Duration": 6
-            },
-            {
-              "Frame": "Idle (Battle) 2",
-              "Duration": 6
-            },
-            {
-              "Frame": "Idle (Battle) 3",
-              "Duration": 6
-            },
-            {
-              "Frame": "Idle (Battle) 2",
-              "Duration": 6
-            },
-            {
-              "Command": "GotoCommandOffset",
-              "Parameter": 0
-            }
+            { "Frame": "Idle (Battle) 1", "Duration": 6 },
+            { "Frame": "Idle (Battle) 2", "Duration": 6 },
+            { "Frame": "Idle (Battle) 3", "Duration": 6 },
+            { "Frame": "Idle (Battle) 2", "Duration": 6 },
+            { "Command": "GotoCommandOffset", "Parameter": 0 }
           ],
           "StillFrame (Field)": [
-            {
-              "Frame": "Field 1",
-              "Duration": 10
-            },
-            {
-              "Command": "Stop"
-            }
+            { "Frame": "Field 1", "Duration": 10 },
+            { "Command": "Stop" }
           ]
         }
       }
