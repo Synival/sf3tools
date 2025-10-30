@@ -147,7 +147,7 @@ namespace CommonLib.Tests.Utils {
 
         [TestMethod]
         public void LZSS_CompressThenDecompressStringsOfVariousLengthsReturnsOriginalString() {
-            var testCases = new CompressStringTestCase[]{
+            var stringTestCases = new CompressStringTestCase[]{
                 new CompressStringTestCase("", 4),
                 new CompressStringTestCase("He", 6),
                 new CompressStringTestCase("Hell", 8),
@@ -167,7 +167,7 @@ namespace CommonLib.Tests.Utils {
                 new CompressStringTestCase("Hello, world!  Hello, world!  Hello, world! ", 38),
             };
 
-            TestCase.Run(testCases, testCase => {
+            TestCase.Run(stringTestCases, testCase => {
                 string originalString = testCase.Name;
                 byte[] originalBytes = System.Text.Encoding.UTF8.GetBytes(originalString);
 
@@ -181,6 +181,76 @@ namespace CommonLib.Tests.Utils {
                 Assert.AreEqual(bytesRead, compressedBytes.Length);
                 Assert.IsTrue(endDataFound);
             });
+        }
+
+        private static class ShadowImage {
+            private const ushort o  = 0x0000;
+            private const ushort XX = 0x8000;
+
+            public static readonly ushort[] c_uncompressed = new ushort[] {
+                 o, o, o, o, o, o, o, o, o, o, o,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX, o, o, o, o, o, o, o, o, o, o, o,
+                 o, o, o, o, o, o, o,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX, o, o, o, o, o, o, o,
+                 o, o, o, o,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX, o, o, o, o,
+                 o, o, o,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX, o, o, o,
+                 o, o,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX, o, o,
+                 o,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX, o,
+                XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,
+                XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,
+                XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,
+                XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,
+                 o,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX, o,
+                 o, o,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX, o, o,
+                 o, o, o,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX, o, o, o,
+                 o, o, o, o,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX, o, o, o, o,
+                 o, o, o, o, o, o, o,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX, o, o, o, o, o, o, o,
+                 o, o, o, o, o, o, o, o, o, o, o,XX,XX,XX,XX,XX,XX,XX,XX,XX,XX, o, o, o, o, o, o, o, o, o, o, o,
+            };
+
+            public static readonly ushort[] c_compressed = {
+                0x5BFF, // 0101, 1011, 1111, 1111
+                        0x0000, 0x0028, 0x8000, 0x0027, // 0101
+                        0x02A9, 0x0000, 0x038E, 0x0491, // 1011
+                        0x03B0, 0x046B, 0x03F6, 0x0425, // 1111
+                        0x03F8, 0x0423, 0x03FA, 0x0421, // 1111
+                0xFFE0, // 0101, 1111, 1111, 1111
+                        0x03FC, 0x003F, 0x003F, 0x003E, // 1111
+                        0x141E, 0x1C1F, 0x241F, 0x2C1F, // 1111
+                        0x341F, 0x3C1A, 0x0000          // 1110
+            };
+
+            // TODO: This should match the compressed version above.
+            // Buuuut, the SF3 compression has this unnecessary 0x0000 value
+            // that's marked below with /*XXX*/, so the algoithm here is more
+            // efficient. It would be great to be 100% accurate, but how do
+            // we introduce this weird inefficiency? Need more tests!
+            public static readonly ushort[] c_compressedFromUs = {
+                0x5FFF, // 0101, 1111, 1111, 1111
+                        0x0000, 0x0028, 0x8000, 0x0027, // 0101
+                        0x02A9, /*XXX*/ 0x038F, 0x0491, // 1 11
+                        0x03B0, 0x046B, 0x03F6, 0x0425, // 1111
+                        0x03F8, 0x0423, 0x03FA, 0x0421, // 1111
+                        0x03FC,                         // 1
+                0xFFC0, // 1111, 1111, 1100, 0000
+                                0x003F, 0x003F, 0x003E, //  111
+                        0x141E, 0x1C1F, 0x241F, 0x2C1F, // 1111
+                        0x341F, 0x3C1A, 0x0000          // 111
+            };
+        }
+
+        [TestMethod]
+        public void LZSS_DecompressShadow_ProducesExpectedData() {
+            var decompressedData = DecompressLZSS(ShadowImage.c_compressed, null, out var wordsRead, out var endDataFound);
+            Assert.AreEqual(ShadowImage.c_uncompressed.Length, decompressedData.Length);
+            Assert.AreEqual(ShadowImage.c_compressed.Length, wordsRead);
+            Assert.IsTrue(endDataFound);
+            Assert.IsTrue(Enumerable.SequenceEqual<ushort>(ShadowImage.c_uncompressed, decompressedData));
+        }
+
+        [TestMethod]
+        public void LZSS_CompressShadow_ProducesExpectedData() {
+            var compressedData = CompressLZSS(ShadowImage.c_uncompressed);
+            Assert.AreEqual(ShadowImage.c_compressedFromUs.Length, compressedData.Length);
+            Assert.IsTrue(Enumerable.SequenceEqual<ushort>(ShadowImage.c_compressedFromUs, compressedData));
         }
 
         [TestMethod]

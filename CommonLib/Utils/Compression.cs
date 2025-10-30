@@ -60,16 +60,15 @@ namespace CommonLib.Utils {
 
             var outputArray = new ushort[maxOutput ?? 0x10000];
             int outPos = 0;
-            int bufferLoc = 0;
 
             // Decompress until we've run out of data or we've hit 'maxOutput'.
             int pos = 0;
-            while (pos < data.Length && (!maxOutput.HasValue || outPos < maxOutput.Value)) {
+            while (pos < data.Length && !endDataFound && (!maxOutput.HasValue || outPos < maxOutput.Value)) {
                 // Fetch a 16-bit 'control' value.
                 ushort control = data[pos++];
 
                 // Start reading 16-bit data -- 1 word for each bit in the 'control' value (so 16 words).
-                for (int i = 0; i < 16; i++) {
+                for (int i = 0; i < 16 && pos < data.Length; i++) {
                     ushort value = data[pos++];
 
                     // (15, 14, 13, ... 0)
@@ -88,17 +87,14 @@ namespace CommonLib.Utils {
                         byte copyLen = (byte) ((value & 0x1F) + 2);
                         ushort copyOffset = (ushort) ((value & 0xFFE0) >> 5);
 
-                        bufferLoc += copyLen;
                         var windowPos = outPos - copyOffset;
                         for (int j = 0; j < copyLen; j++) {
                             outputArray[outPos++] = outputArray[windowPos++];
                         }
                     }
                     // Control bit unset = data is literal, inserted once
-                    else {
+                    else
                         outputArray[outPos++] = value;
-                        bufferLoc++;
-                    }
                 }
             }
 
