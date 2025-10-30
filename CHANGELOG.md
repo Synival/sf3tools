@@ -1,4 +1,4 @@
-## SF3Tools v0.2.0 (2025-09-06)
+## SF3Tools v0.2.0 (2025-10-31)
 
 This release adds several new features, the most exciting of which is a tool to update Shining Force III's sprites!
 
@@ -10,7 +10,7 @@ source code and spritesheets to produce byte-for-byte accurate game files.\*
 
 \* *For all but **two** files, but it's because they're broken anyway! :P*
 
-In addition, ***all*** of the games sprites with their frames and animations have been identified and labelled
+In addition, ***all*** of the game's sprites with their frames and animations have been identified and labeled
 accordingly. **This amounts to over 25,000 total frames and over 600 individual sprites.** All of this information is
 stored in JSON format in files `SF3Lib/Resources/Sprites/*.SF3Sprite`.
 
@@ -26,6 +26,11 @@ chrtool.exe extract-sheets Scn1/ Scn2/ Scn3/ PD/
 
 More information about how to use CHRTool and how to edit sprites can be found in `CHRTool.md`.
 
+If you want to set up a project to update sprites across all four discs of the engine game, an entire toolchain is
+set up here (currently only functional in Windows in a "bash" environment):
+
+[https://github.com/Synival/sf3sprites](https://github.com/Synival/sf3sprites)
+
 Have fun, and happy hacking!
 -- Synival
 
@@ -36,11 +41,13 @@ Full changelog:
 - New command-line program CHRTool (`chrtool.exe`) with the following commands:
     - `decompile`: Decompiles binary `.CHR` and `.CHP` files into JSON-format `.SF3CHR` and `.SF3CHP` source files
     - `compile`: Compiles `.SF3CHR` and `.SF3CHP` source files into JSON-format `.CHR` and `.CHP` binary files
-    - `extract-sheets`: Extracting frame images into spritesheets from `.CHR` and `.CHP` files
-    - `describe`: Describing the sprites contained in any of the supported file types (`.CHR`, `.CHP`, `.SF3CHR`,
-        `.SF3CHP`, `.SF3Sprite`, `.SF3CHRSprite`)
-    - `update-hash-lookups`: Updates the file `Resouces/FrameHashLookups.json`, which is used for identifying frames
+    - `extract-sheets`: Extracts frame images into spritesheets from `.CHR` and `.CHP` files
+    - `update-hash-lookups`: Updates the file `Resources/FrameHashLookups.json`, which is used for identifying frames
         in `.CHR` and `.CHP` files, with the latest frames available 
+    - `describe`: Describes the sprites/frames/animations contained in any of the supported file types (`.CHR`, `.CHP`, `.SF3CHR`,
+        `.SF3CHP`, `.SF3Sprite`, `.SF3CHRSprite`)
+    - `depends`: Dumps a list of dependencies for .SF3CHR or .SF3CHP files in a format usable in a Makefile
+    - `format`: Dumps .SF3Sprite files with special formatting rules for frames and animations for better readability/maintainability
 - All 600+ sprites with all their unique frames and animations have been identified and labeled as files
     `SF3Lib/Resources/Sprites/*.SF3Sprite`.
 - Files containing game sprites can now be loaded and modified (`*.CHR`, `*.CHP`):
@@ -78,23 +85,25 @@ Full changelog:
 - MPD lighting used in Scenario 2+ outdoor maps has been reverse-engineered and is now rendered accurately
 - Finished identifying unknown values in MPD model `ATTR` tables
 - Added lists of "Actor Scripts" for scenes/battles (currently read-only) (`X1*.BIN`)
-- Interactables tables now show known named-functions being called (`X1*.BIN`)
+- "Interactables" tables now show known named-functions being called (`X1*.BIN`)
 - All SpriteIDs for Scenario 3 and the Premium Disk have (finally) been identified
 - Statistics and charts for character stat growth in `X031.BIN` and `X033.BIN` have been moved to their own tab
     - Lots of useful data from the character growth chart can now be viewed as a table as well
 - Removed some redundant info for special tables that have specific values in each row (e.g, the "Significant Values"
     table in `X013.BIN`)
+- Updated LZSS compression/decompression code to be a bit more generous on failure and match original data more closely
 
 ### Technical features:
 
-- Added a tool for adding blank data to the EOF of any supported `.BIN` file, automatically updating any pointer that
-    references runtime-only post-EOF variables
-- Added a tool for inserting arbitrary data into any suppoted `.BIN` file at any point, automatically updating any
-    poiner that is referenced after the point of insertion
-- A tab for technical info for every supported `.BIN` file
+- Added a tool for pointers to data beyond the EOF of any supported `.BIN` file. Useful for manually adding new data to
+    the end of a file without causing data collisions. Accessible from the menu: "Tools -> Move Post-EOF Data..."
+- Added a tool for inserting arbitrary data into any supported `.BIN` file at any point, automatically updating any
+    pointer that is referenced after the point of insertion. Accessible from the menu: "Tools -> Insert Data..."
+- A new tab called "Technical Info" for every supported `.BIN` file, which contains identified files, pointers, tables,
+    and functions.
 - Added discovery of common known functions, tables, and other data to supported files (most importantly, `X1*.BIN`)
 - Added a table for scene/battle interrupt/tick function hooks setup (`X1*.BIN`)
-- Some very minor changes to eror logging using a new logging system. Still WIP, but will be very cool in the next
+- Some very minor changes to error logging using a new logging system. Still WIP, but will be very cool in the next
     release!
 
 ### Bugfixes:
@@ -105,6 +114,8 @@ Full changelog:
 - DFRTool didn't report the correct file address when a byte had the wrong expected value; this is now fixed
 - Some incorrect names of characters and sprites have been corrected
 - Added missing named-value dropdown for the "ExtraMusic" column in the `X002.BIN` "Loading Overrides" table
+
+----
 
 ## SF3Editor and SF3Lib v0.1.1 (2025-04-26)
 
@@ -256,6 +267,8 @@ Full changelog:
 
 ### X1\_Analyzer (new project):
 - Similar to the MPD\_Analyzer, this can be used to search through X1 files for info
+
+----
 
 ## 2025-02-23
 
@@ -444,6 +457,8 @@ Full changelog:
         - More monster name corrections
         - Updated Monsters.xml using the latest translations
 
+----
+
 ## 2025-01-19
 
 This bug update introduces an MPD Editor! MPD files contain 3D map geometry, tiles, textures, terrain types, and much more. In this version, you can view and modify all the tiles of a map, modify their textures, tweak lighting (not yet shown visually), and change camera and battle boundaries.
@@ -489,6 +504,8 @@ This bug update introduces an MPD Editor! MPD files contain 3D map geometry, til
 - Introduced 'ByteArraySegment'. This represents a small window of byte[]'s inside a 'ByteArray' that can be resized dynamically, affecting the parent and other neighboring 'ByteArraySegment's.
 - Updated 'ByteData's to use new 'IByteArray' instead of byte[].
 
+----
+
 ## 2024-11-10
 
 A few nice extra features of quality-of-life changes that deserve to be released
@@ -526,6 +543,8 @@ sooner rather than later. Enjoy :)
 - Added "SpecialEffects" table for Scenario 3 + Premium Disk to modify the table of
     status effects for specials
 - Added 10 "Unknown" byte values to the debuff%-by-luck table
+
+----
 
 ## 2024-11-08
 
@@ -627,6 +646,8 @@ Enjoy!
         - Fixed some bugs regarding really badly-formatted logs for collections
         - (debug only) Collection keys and underlying types are now shown
 
+----
+
 ## 2024-10-26
 
 This is the first version of the DFRTool command-line tool and GUI tool (DFRToolGUI)!
@@ -689,6 +710,8 @@ They require the .NET 8.0 runtime to use.
 - Added automated testing for IconPointerEditor to ensure it works across all scenarios and X026.BIN files
 - Made it easy to manage the "NamedValues" for new resources
 - More refactoring (it's almost done!)
+
+----
 
 ## 2024-10-19
 
