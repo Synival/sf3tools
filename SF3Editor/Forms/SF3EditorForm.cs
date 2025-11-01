@@ -12,7 +12,7 @@ using static SF3.Utils.FileUtils;
 
 namespace SF3.Editor.Forms {
     public partial class SF3EditorForm : Form {
-        public static readonly string Version = "0.2.0"; // + " (dev build: " + DateTime.Today.ToString("yyyy/MM/dd") + ")";
+        public static readonly string Version = "0.2.1" + " (dev build: " + DateTime.Today.ToString("yyyy/MM/dd") + ")";
 
         private readonly Dictionary<ScenarioType, INameGetterContext> c_nameGetterContexts = Enum.GetValues<ScenarioType>()
             .ToDictionary(x => x, x => (INameGetterContext) new NameGetterContext(x));
