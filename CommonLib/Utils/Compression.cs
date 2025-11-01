@@ -60,10 +60,11 @@ namespace CommonLib.Utils {
 
             var outputArray = new ushort[maxOutput ?? 0x10000];
             int outPos = 0;
+            maxOutput = maxOutput ?? outputArray.Length;
 
             // Decompress until we've run out of data or we've hit 'maxOutput'.
             int pos = 0;
-            while (pos < data.Length && !endDataFound && (!maxOutput.HasValue || outPos < maxOutput.Value)) {
+            while (pos < data.Length && !endDataFound) {
                 // Fetch a 16-bit 'control' value.
                 ushort control = data[pos++];
 
@@ -81,22 +82,28 @@ namespace CommonLib.Utils {
                         var currentLoc = pos;
                         if (value == 0) {
                             endDataFound = true;
-                            break;
+                            goto breakEntireLoop;
                         }
+
+                        if (outPos >= maxOutput)
+                            goto breakEntireLoop;
 
                         byte copyLen = (byte) ((value & 0x1F) + 2);
                         ushort copyOffset = (ushort) ((value & 0xFFE0) >> 5);
 
                         var windowPos = outPos - copyOffset;
-                        for (int j = 0; j < copyLen; j++) {
+                        for (int j = 0; j < copyLen && outPos < maxOutput; j++)
                             outputArray[outPos++] = outputArray[windowPos++];
-                        }
                     }
                     // Control bit unset = data is literal, inserted once
-                    else
+                    else {
+                        if (outPos >= maxOutput)
+                            goto breakEntireLoop;
                         outputArray[outPos++] = value;
+                    }
                 }
             }
+breakEntireLoop:
 
             wordsRead = pos;
             return outputArray.Take(outPos).ToArray();
@@ -108,8 +115,10 @@ namespace CommonLib.Utils {
         /// All credit to Agrathejagged for the original compression code: https://github.com/Agrathejagged
         /// </summary>
         /// <param name="data">The uncompressed data to compress.</param>
+        /// <param name="optimize">When true, the maximum allowed window size (0x0800) is used instead of what SF3 appears to use (0x07E0).
+        /// This is slightly more optimized for larger files, but produces many more differences and may not be compatible.</param>
         /// <returns>An array of bytes compressed with LZSS encoding.</returns>
-        public static byte[] CompressLZSS(byte[] data) {
+        public static byte[] CompressLZSS(byte[] data, bool optimize = false) {
             if (data.Length % 2 == 1)
                 throw new ArgumentException(nameof(data) + ": must be an even number of bytes");
             var compressedData = CompressLZSS(data.ToUShorts());
@@ -121,8 +130,10 @@ namespace CommonLib.Utils {
         /// All credit to Agrathejagged for the original compression code: https://github.com/Agrathejagged
         /// </summary>
         /// <param name="data">The uncompressed data to compress.</param>
+        /// <param name="optimize">When true, the maximum allowed window size (0x0800) is used instead of what SF3 appears to use (0x07E0).
+        /// This is slightly more optimized for larger files, but produces many more differences and may not be compatible.</param>
         /// <returns>An array of words compressed with LZSS encoding.</returns>
-        public static ushort[] CompressLZSS(ushort[] data) {
+        public static ushort[] CompressLZSS(ushort[] data, bool optimize = false) {
             // The "copy length" segment of the data is 5-bits (max value 0x1F). The number of words to copy is:
             //     copyLength + 2
             // ...the max value of which is 0x21 (33).
@@ -131,9 +142,10 @@ namespace CommonLib.Utils {
             // Copy values must be at least 2 words.
             const int MIN_COPY_LENGTH = 2;
 
-            // Maximum possible value for the copy offset is 0x07FF (11 bits, so 0x01 << 11 - 1).
-            // However, it looks like the SF3 compression chose 0x07DF for its max value, for some reason.
-            const int MAX_COPY_OFFSET = 0x07DF;
+            // Maximum possible value for the copy offset is 0x0800 (11 bits, so 0x01 << 11).
+            // However, it looks like the SF3 compression chose 0x07E0 for its max value, for some reason.
+            // TODO: Does the game do something special of values >= 0x07E0 are found?
+            int windowSize = optimize ? 0x0800 : 0x07E0;
 
             // gamble: will we ever end up with that catastrophic state where we compress the file bigger than it originally was?
             // (gamble lost -- for low sizes like 4 bytes, the compressed version is actually larger, by double.
@@ -167,7 +179,7 @@ namespace CommonLib.Utils {
 
                 // Look for the largest dictionary match that's occurred so far in the data.
                 // Allow reading ahead into the future if a match was found -- the decompressor will "copy itself".
-                var searchLimit = pos - MAX_COPY_OFFSET - 1;
+                var searchLimit = pos - windowSize;
                 for (int searchPos = pos - 1; searchPos >= 0 && searchPos > searchLimit; searchPos--) {
                     // Get the length of matching data for data at this position.
                     var matchLen = GetMatchLen(pos, searchPos);
@@ -177,6 +189,8 @@ namespace CommonLib.Utils {
                         bestMatchPos = searchPos;
                         bestMatchLen = matchLen;
                     }
+
+                    // If this is the max size for a match, stop searching -- it's impossible to get any better than this.
                     if (matchLen == MAX_COPY_LENGTH)
                         break;
                 }

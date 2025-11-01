@@ -358,6 +358,33 @@ namespace CommonLib.Tests.Utils {
         }
 
         [TestMethod]
+        public void LZSS_Decompress_WithSameMaxSize_ProducesSameResultAsWithout() {
+            var decompressedShadow1 = DecompressLZSS(ShadowImage.c_compressed);
+            var decompressedShadow2 = DecompressLZSS(ShadowImage.c_compressed, decompressedShadow1.Length, out var bytesRead, out var endDataFound);
+            Assert.AreEqual(decompressedShadow1.Length, decompressedShadow2.Length);
+            Assert.AreEqual(ShadowImage.c_compressed.Length, bytesRead);
+            Assert.IsTrue(endDataFound);
+        }
+
+        [TestMethod]
+        public void LZSS_Decompress_WithGreaterMaxSize_ProducesSameResultAsWithout() {
+            var decompressedShadow1 = DecompressLZSS(ShadowImage.c_compressed);
+            var decompressedShadow2 = DecompressLZSS(ShadowImage.c_compressed, decompressedShadow1.Length + 0x100, out var bytesRead, out var endDataFound);
+            Assert.AreEqual(decompressedShadow1.Length, decompressedShadow2.Length);
+            Assert.AreEqual(ShadowImage.c_compressed.Length, bytesRead);
+            Assert.IsTrue(endDataFound);
+        }
+
+        [TestMethod]
+        public void LZSS_Decompress_WithHalfMaxSize_ProducesHalfTheImage() {
+            var decompressedShadow1 = DecompressLZSS(ShadowImage.c_compressed);
+            var decompressedShadow2 = DecompressLZSS(ShadowImage.c_compressed, decompressedShadow1.Length / 2, out var bytesRead, out var endDataFound);
+            Assert.AreEqual(decompressedShadow1.Length / 2, decompressedShadow2.Length);
+            Assert.AreEqual(22, bytesRead);
+            Assert.IsFalse(endDataFound);
+        }
+
+        [TestMethod]
         public void CHR_DecompressSpriteData_ProducesExpectedDataForFrame() {
             var decompressed = DecompressSpriteData(c_testSpriteFrameCompressed, 0, out _);
             Assert.AreEqual(1600, decompressed.Length);
