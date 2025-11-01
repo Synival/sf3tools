@@ -2,7 +2,7 @@
 
 namespace SF3Compress {
     public static class Constants {
-        public const string Version = "0.1.0";
+        public const string Version = "0.1.1";
 
         public const string VersionString =
             "SF3Compress v" + Version + "\n";
@@ -30,12 +30,18 @@ namespace SF3Compress {
             "                            (default is 0)\n" +
             "  -s, --size=<size>         amount of data to compress in the file\n" +
             "                            (default is until EOF)\n" +
+            "  -O, --optimize            uses the maximum window size of 0x800 instead\n" +
+            "                            of SF3's apparent window size of 0x7E0\n" +
+            "                            (may break compatibility)\n" +
+            "  -p, --print               print a formatted hex dump instead of writing to an output file\n" +
             "\n" +
             "'decompress' Options:\n" +
             "  -o, --offset=<pos>        offset of data to decompress in the file\n" +
             "                            (default is 0)\n" +
             "  -s, --size=<size>         max amount of data to decompress in the file\n" +
-            "                            (default is until ending code is reached)\n";
+            "                            (default is until ending code is reached)\n" +
+            "  -p, --print               print a formatted hex dump instead of writing to an output file\n" +
+            "  --words-per-row=<num>     the number of words per row to print (default is 8)\n";
 
         public static readonly Dictionary<string, CommandType> CommandKeywords = new() {
             { "compress",   CommandType.Compress },

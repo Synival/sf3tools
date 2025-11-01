@@ -17,7 +17,6 @@ namespace SF3Compress {
             var outputHelp     = false;
             var outputVersion  = false;
             var verbose        = false;
-            var programDir     = AppDomain.CurrentDomain.BaseDirectory;
 
             var anywhereOptions = new OptionSet() {
                 { "h|help",           v => outputHelp = true },
