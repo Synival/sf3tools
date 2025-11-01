@@ -385,6 +385,18 @@ namespace CommonLib.Tests.Utils {
         }
 
         [TestMethod]
+        public void LZSS_Decompress_WithBogusData_TriesItsBest() {
+            ushort[] bogusData = [
+                0xBEEF, 0x1234, 0x5555, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF
+            ];
+
+            var decompressedData = DecompressLZSS(bogusData, null, out var wordsRead, out var endDataFound);
+            Assert.AreEqual(222, decompressedData.Length);
+            Assert.AreEqual(bogusData.Length, wordsRead);
+            Assert.IsFalse(endDataFound);
+        }
+
+        [TestMethod]
         public void CHR_DecompressSpriteData_ProducesExpectedDataForFrame() {
             var decompressed = DecompressSpriteData(c_testSpriteFrameCompressed, 0, out _);
             Assert.AreEqual(1600, decompressed.Length);

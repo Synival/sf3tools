@@ -91,9 +91,13 @@ namespace CommonLib.Utils {
                         byte copyLen = (byte) ((value & 0x1F) + 2);
                         ushort copyOffset = (ushort) ((value & 0xFFE0) >> 5);
 
+                        // Copy from the window. If the position to copy within the window is bogus, just use '0' for the value.
+                        // TODO: Maybe output more error details in this case?
                         var windowPos = outPos - copyOffset;
-                        for (int j = 0; j < copyLen && outPos < maxOutput; j++)
-                            outputArray[outPos++] = outputArray[windowPos++];
+                        for (int j = 0; j < copyLen && outPos < maxOutput; j++) {
+                            outputArray[outPos++] = (windowPos >= 0 && windowPos < maxOutput) ? outputArray[windowPos] : (ushort) 0;
+                            windowPos++;
+                        }
                     }
                     // Control bit unset = data is literal, inserted once
                     else {
