@@ -30,11 +30,14 @@ namespace SF3.Models.Structs.DAT {
 
         public abstract int ImageDataOffset { get; }
         public abstract bool HasImage { get; }
+        public int StoredImageDataSize { get; private set; }
 
         protected bool FetchAndCacheTexture() {
             try {
-                if (!HasImage)
+                if (!HasImage) {
                     Texture = null;
+                    StoredImageDataSize = 0;
+                }
                 else {
                     Texture = PixelFormat == TexturePixelFormat.ABGR1555
                         ? new TextureABGR1555(ID, 0, 0, RawImageData16Bit)
@@ -65,8 +68,9 @@ namespace SF3.Models.Structs.DAT {
                 if (BytesPerPixel != 1)
                     throw new InvalidOperationException();
 
+                int storedSize = ImageDataSize;
                 var inputData = IsCompressed
-                    ? Compression.DecompressLZSS(Data.GetDataCopyAt(ImageDataOffset, Math.Min((int) (Width * Height * 1.5), Data.Length - ImageDataOffset)))
+                    ? Compression.DecompressLZSS(Data.GetDataCopyAt(ImageDataOffset, Math.Min((int) (Width * Height * 1.5), Data.Length - ImageDataOffset)), null, out storedSize, out var _)
                     : Data.GetDataCopyAt(ImageDataOffset, Width * Height);
                 var outputData = new byte[Width, Height];
 
@@ -77,6 +81,8 @@ namespace SF3.Models.Structs.DAT {
                         outputData[x, y] = texPixel;
                     }
                 }
+
+                StoredImageDataSize = storedSize;
                 return outputData;
             }
             set {
@@ -101,9 +107,10 @@ namespace SF3.Models.Structs.DAT {
                 if (BytesPerPixel != 2)
                     throw new InvalidOperationException();
 
+                int storedSize = ImageDataSize;
                 var inputData = (IsCompressed
-                    ? Compression.DecompressLZSS(Data.GetDataCopyAt(ImageDataOffset, Math.Min(Width * Height * 3, Data.Length - ImageDataOffset)))
-                    : Data.GetDataCopyAt(ImageDataOffset, Width * Height))
+                    ? Compression.DecompressLZSS(Data.GetDataCopyAt(ImageDataOffset, Math.Min(Width * Height * 3, Data.Length - ImageDataOffset)), null, out storedSize, out var _)
+                    : Data.GetDataCopyAt(ImageDataOffset, Width * Height * 2))
                     .ToUShorts();
                 var outputData = new ushort[Width, Height];
 
@@ -114,6 +121,8 @@ namespace SF3.Models.Structs.DAT {
                         outputData[x, y] = texPixel;
                     }
                 }
+
+                StoredImageDataSize = storedSize;
                 return outputData;
             }
             set {

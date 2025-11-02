@@ -58,15 +58,11 @@ namespace SF3.Models.Tables.DAT {
                     if (itemsStart.HasValue)
                         ngcName = NameGetterContext.GetName(null, null, id - itemsStart.Value, new object[] { NamedValueType.Spell });
 
-                    // TODO: DecompressLZSS should take an offset!!!
-                    // TODO: We shouldn't have to decompress this anyway!!!
-                    var decomp = Compression.DecompressLZSS(rawData.Skip(address).ToArray(), 24 * 24, out var bytesRead, out var endDataFound);
-                    var compressedData = new CompressedData(new ByteArraySegment(Data.Data, address, bytesRead));
-                    var newModel = new ItemCG_TextureModel(compressedData, id, ngcName, address, ItemSpellPalette);
+                    var newModel = new ItemCG_TextureModel(Data, id, ngcName, address, ItemSpellPalette);
 
                     rowDict[id] = newModel;
                     rows.Add(newModel);
-                    address += bytesRead;
+                    address += newModel.StoredImageDataSize;
 
                     if (address >= rawData.Length)
                         break;
