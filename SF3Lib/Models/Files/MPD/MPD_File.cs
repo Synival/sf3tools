@@ -620,11 +620,13 @@ namespace SF3.Models.Files.MPD {
                         chunk.DecompressedData, NameGetterContext, 0x00, "TextureCollection" + index,
                         collection, pixelFormats[collection], palettes, chunk.Index, startId
                     );
-                    if (isMovableModelsChunk && texCol.TextureTable.Length > 0)
-                        nextModelCollectionStartId = texCol.TextureTable.Last().ID + 1;
+                    if (texCol.TextureTable != null) {
+                        if (isMovableModelsChunk && texCol.TextureTable.Length > 0)
+                            nextModelCollectionStartId = texCol.TextureTable.Last().ID + 1;
 
-                    texColList.Add(texCol);
-                    tables.AddRange(texCol.Tables);
+                        texColList.Add(texCol);
+                        tables.AddRange(texCol.Tables);
+                    }
                 }
                 catch {
                     // TODO: what to do if we get an error here?

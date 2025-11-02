@@ -74,8 +74,8 @@ namespace SF3.Win.Views {
                 case IX033_File file: return new X033_View("X033_File", file);
                 case IX044_File file: return new X044_View("X044_File", file);
                 case IMPD_File  file: return new MPD_View ("MPD_File",  file);
-                case ICHR_File  file: return new CHR_View ("CHR_File",  file, file.NameGetterContext);
-                case ICHP_File  file: return new CHP_View ("CHP_File",  file, file.NameGetterContext);
+                case ICHR_File  file: return new CHR_View ("CHR_File",  file);
+                case ICHP_File  file: return new CHP_View ("CHP_File",  file);
                 default:
                     return null;
             }

@@ -1,17 +1,16 @@
 ﻿using System;
 using System.Linq;
 using System.Windows.Forms;
-using CommonLib.NamedValues;
 using SF3.Models.Files.CHR;
 using SF3.Models.Structs.CHR;
 
 namespace SF3.Win.Views.CHR {
     public class CHR_View : ArrayView<Sprite, SpriteView> {
-        public CHR_View(string name, ICHR_File chrFile, INameGetterContext nameGetterContext) : base(
+        public CHR_View(string name, ICHR_File chrFile) : base(
             name,
             chrFile?.SpriteTable?.ToArray() ?? [],
             "DropdownName",
-            new SpriteView("Sprite", null, nameGetterContext, TabAlignment.Left)
+            new SpriteView("Sprite", null, chrFile.NameGetterContext, TabAlignment.Left)
         ) {
             _model = chrFile;
         }

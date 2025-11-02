@@ -1,18 +1,17 @@
 ﻿using System;
 using System.Linq;
 using System.Windows.Forms;
-using CommonLib.NamedValues;
 using SF3.Models.Files.CHP;
 using SF3.Models.Structs.CHR;
 using SF3.Win.Views.CHR;
 
 namespace SF3.Win.Views.CHP {
     public class CHP_View : ArrayView<Sprite, SpriteView> {
-        public CHP_View(string name, ICHP_File chpFile, INameGetterContext nameGetterContext) : base(
+        public CHP_View(string name, ICHP_File chpFile) : base(
             name,
             chpFile?.CHR_EntriesByOffset?.Values?.SelectMany(x => x.SpriteTable)?.ToArray() ?? [],
             "DropdownName",
-            new SpriteView("Sprite", null, nameGetterContext, TabAlignment.Left)
+            new SpriteView("Sprite", null, chpFile.NameGetterContext, TabAlignment.Left)
         ) {
             _model = chpFile;
         }
