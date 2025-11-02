@@ -61,7 +61,7 @@ namespace SF3Compress {
                     if (offset != 0)
                         allData = allData[offset .. allData.Length];
 
-                    var decompressedData = CommonLib.Utils.Compression.DecompressLZSS(allData, maxSize, out var bytesRead, out var endDataFound);
+                    var decompressedData = CommonLib.Utils.Compression.DecompressLZSS(allData, 0, maxSize, out var bytesRead, out var endDataFound);
                     if (print)
                         PrintDecompressedLZSS(decompressedData, wordsPerRow);
                     else

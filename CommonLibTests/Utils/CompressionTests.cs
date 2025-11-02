@@ -175,7 +175,7 @@ namespace CommonLib.Tests.Utils {
                 var compressedBytes = CompressLZSS(originalBytes);
                 Assert.AreEqual(compressedBytes.Length, testCase.ExpectedCompressedLength);
 
-                var decompressedBytes = DecompressLZSS(compressedBytes, null, out int bytesRead, out bool endDataFound);
+                var decompressedBytes = DecompressLZSS(compressedBytes, 0, null, out int bytesRead, out bool endDataFound);
 
                 var resultString = System.Text.Encoding.UTF8.GetString(decompressedBytes);
                 Assert.AreEqual(originalString, resultString);
@@ -267,7 +267,7 @@ namespace CommonLib.Tests.Utils {
 
         [TestMethod]
         public void LZSS_DecompressShadow_ProducesExpectedData() {
-            var decompressedData = DecompressLZSS(ShadowImage.c_compressed, null, out var wordsRead, out var endDataFound);
+            var decompressedData = DecompressLZSS(ShadowImage.c_compressed, 0, null, out var wordsRead, out var endDataFound);
             Assert.AreEqual(ShadowImage.c_uncompressed.Length, decompressedData.Length);
             Assert.AreEqual(ShadowImage.c_compressed.Length, wordsRead);
             Assert.IsTrue(endDataFound);
@@ -279,7 +279,7 @@ namespace CommonLib.Tests.Utils {
             TestCase.Run(c_lzssChunkFiles, (testCase) => {
                 var chunk = File.ReadAllBytes(testCase.Filename).ToUShorts();
 
-                var decompressedData = DecompressLZSS(chunk, null, out var wordsRead, out var endDataFound);
+                var decompressedData = DecompressLZSS(chunk, 0, null, out var wordsRead, out var endDataFound);
                 Assert.AreEqual(testCase.DecompressedSizeInBytes, decompressedData.Length * 2);
                 Assert.AreEqual(chunk.Length, wordsRead);
                 Assert.IsTrue(endDataFound);
@@ -360,7 +360,7 @@ namespace CommonLib.Tests.Utils {
         [TestMethod]
         public void LZSS_Decompress_WithSameMaxSize_ProducesSameResultAsWithout() {
             var decompressedShadow1 = DecompressLZSS(ShadowImage.c_compressed);
-            var decompressedShadow2 = DecompressLZSS(ShadowImage.c_compressed, decompressedShadow1.Length, out var bytesRead, out var endDataFound);
+            var decompressedShadow2 = DecompressLZSS(ShadowImage.c_compressed, 0, decompressedShadow1.Length, out var bytesRead, out var endDataFound);
             Assert.AreEqual(decompressedShadow1.Length, decompressedShadow2.Length);
             Assert.AreEqual(ShadowImage.c_compressed.Length, bytesRead);
             Assert.IsTrue(endDataFound);
@@ -369,7 +369,7 @@ namespace CommonLib.Tests.Utils {
         [TestMethod]
         public void LZSS_Decompress_WithGreaterMaxSize_ProducesSameResultAsWithout() {
             var decompressedShadow1 = DecompressLZSS(ShadowImage.c_compressed);
-            var decompressedShadow2 = DecompressLZSS(ShadowImage.c_compressed, decompressedShadow1.Length + 0x100, out var bytesRead, out var endDataFound);
+            var decompressedShadow2 = DecompressLZSS(ShadowImage.c_compressed, 0, decompressedShadow1.Length + 0x100, out var bytesRead, out var endDataFound);
             Assert.AreEqual(decompressedShadow1.Length, decompressedShadow2.Length);
             Assert.AreEqual(ShadowImage.c_compressed.Length, bytesRead);
             Assert.IsTrue(endDataFound);
@@ -378,7 +378,7 @@ namespace CommonLib.Tests.Utils {
         [TestMethod]
         public void LZSS_Decompress_WithHalfMaxSize_ProducesHalfTheImage() {
             var decompressedShadow1 = DecompressLZSS(ShadowImage.c_compressed);
-            var decompressedShadow2 = DecompressLZSS(ShadowImage.c_compressed, decompressedShadow1.Length / 2, out var bytesRead, out var endDataFound);
+            var decompressedShadow2 = DecompressLZSS(ShadowImage.c_compressed, 0, decompressedShadow1.Length / 2, out var bytesRead, out var endDataFound);
             Assert.AreEqual(decompressedShadow1.Length / 2, decompressedShadow2.Length);
             Assert.AreEqual(22, bytesRead);
             Assert.IsFalse(endDataFound);
@@ -390,7 +390,7 @@ namespace CommonLib.Tests.Utils {
                 0xBEEF, 0x1234, 0x5555, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF
             ];
 
-            var decompressedData = DecompressLZSS(bogusData, null, out var wordsRead, out var endDataFound);
+            var decompressedData = DecompressLZSS(bogusData, 0, null, out var wordsRead, out var endDataFound);
             Assert.AreEqual(222, decompressedData.Length);
             Assert.AreEqual(bogusData.Length, wordsRead);
             Assert.IsFalse(endDataFound);

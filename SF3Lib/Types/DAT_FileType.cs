@@ -1,7 +1,6 @@
 ﻿namespace SF3.Types {
     public enum DAT_FileType {
-        FACE32_Compressed,
-        FACE32_Uncompressed,
+        FACE32,
         FACE64,
         KAO,
         ITEM_CG

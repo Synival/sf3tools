@@ -14,18 +14,22 @@ namespace CommonLib.Utils {
         /// All credit to Agrathejagged for the original decompression code/algorithm: https://github.com/Agrathejagged
         /// </summary>
         /// <param name="data">LZSS-compressed data to decompress.</param>
+        /// <param name="offset">Offset of the data in 'data' to decompress.</param>
+        /// <param name="maxOutput">Maximum amount of data to write. Useful if the input is unknown and could overflow.</param>
         /// <returns>The decompressed array of data in bytes.</returns>
-        public static byte[] DecompressLZSS(byte[] data)
-            => DecompressLZSS(data, null, out _, out _);
+        public static byte[] DecompressLZSS(byte[] data, int offset = 0, int? maxOutput = null)
+            => DecompressLZSS(data, offset, maxOutput, out _, out _);
 
         /// <summary>
         /// Perform the LZSS decompression algorithm used in Shining Force III.
         /// All credit to Agrathejagged for the original decompression code/algorithm: https://github.com/Agrathejagged
         /// </summary>
         /// <param name="data">LZSS-compressed data to decompress.</param>
+        /// <param name="offset">Offset of the data in 'data' to decompress.</param>
+        /// <param name="maxOutput">Maximum amount of data to write. Useful if the input is unknown and could overflow.</param>
         /// <returns>The decompressed array of data in words.</returns>
-        public static ushort[] DecompressLZSS(ushort[] data)
-            => DecompressLZSS(data, null, out _, out _);
+        public static ushort[] DecompressLZSS(ushort[] data, int offset = 0, int? maxOutput = null)
+            => DecompressLZSS(data, offset, maxOutput, out _, out _);
 
         /// <summary>
         /// Perform the LZSS decompression algorithm used in Shining Force III.
@@ -37,10 +41,13 @@ namespace CommonLib.Utils {
         /// <param name="bytesRead">Output parameter: the number of bytes read from 'data'.</param>
         /// <param name="endDataFound">Output parameter: set to 'true' if and ending word of 0x0000 was found in a set contol bit. Otherwise set to false.</param>
         /// <returns>The decompressed array of data in bytes.</returns>
-        public static byte[] DecompressLZSS(byte[] data, int? maxOutput, out int bytesRead, out bool endDataFound) {
+        public static byte[] DecompressLZSS(byte[] data, int offset, int? maxOutput, out int bytesRead, out bool endDataFound) {
             if (data.Length % 2 == 1)
                 throw new ArgumentException(nameof(data) + ": must be an even number of bytes");
-            var output = DecompressLZSS(data.ToUShorts(), maxOutput * 2, out var wordsRead, out endDataFound).ToByteArray();
+            if (offset % 2 == 1)
+                throw new ArgumentException(nameof(offset) + ": must be an even number of bytes");
+
+            var output = DecompressLZSS(data.ToUShorts(), offset / 2, maxOutput * 2, out var wordsRead, out endDataFound).ToByteArray();
             bytesRead = wordsRead * 2;
             return output;
         }
@@ -54,7 +61,7 @@ namespace CommonLib.Utils {
         /// <param name="wordsRead">Output parameter: the number of words read from 'data'.</param>
         /// <param name="endDataFound">Output parameter: set to 'true' if and ending word of 0x0000 was found in a set contol bit. Otherwise set to false.</param>
         /// <returns>The decompressed array of data in words.</returns>
-        public static ushort[] DecompressLZSS(ushort[] data, int? maxOutput, out int wordsRead, out bool endDataFound) {
+        public static ushort[] DecompressLZSS(ushort[] data, int offset, int? maxOutput, out int wordsRead, out bool endDataFound) {
             endDataFound = false;
             wordsRead = 0;
 
@@ -63,7 +70,7 @@ namespace CommonLib.Utils {
             maxOutput = maxOutput ?? outputArray.Length;
 
             // Decompress until we've run out of data or we've hit 'maxOutput'.
-            int pos = 0;
+            int pos = offset;
             while (pos < data.Length && !endDataFound) {
                 // Fetch a 16-bit 'control' value.
                 ushort control = data[pos++];
@@ -79,7 +86,6 @@ namespace CommonLib.Utils {
                     // - First 11 bits: Offset (in # of words) of data to copy. Applied negatively to 'outPos'.
                     // - Last 5 bits: Length of data to copy.
                     if ((control & bit) != 0) {
-                        var currentLoc = pos;
                         if (value == 0) {
                             endDataFound = true;
                             goto breakEntireLoop;
@@ -109,7 +115,7 @@ namespace CommonLib.Utils {
             }
 breakEntireLoop:
 
-            wordsRead = pos;
+            wordsRead = pos - offset;
             return outputArray.Take(outPos).ToArray();
         }
 

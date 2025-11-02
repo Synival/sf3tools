@@ -38,7 +38,7 @@ namespace SF3.ByteData {
         }
 
         private void UpdateDecompressedData() {
-            var decompressedData = DecompressLZSS(Data.GetDataCopyOrReference(), MaxDecompressedSize, out var bytesRead, out var endCodeFound);
+            var decompressedData = DecompressLZSS(Data.GetDataCopyOrReference(), 0, MaxDecompressedSize, out var bytesRead, out var endCodeFound);
             LastDecompressBytesRead = bytesRead;
             LastDecompressEndCodeFound = endCodeFound;
 

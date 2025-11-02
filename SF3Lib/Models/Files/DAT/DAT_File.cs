@@ -37,8 +37,7 @@ namespace SF3.Models.Files.DAT {
                     TextureViewerScale = 2;
                     break;
 
-                case DAT_FileType.FACE32_Uncompressed:
-                case DAT_FileType.FACE32_Compressed: {
+                case DAT_FileType.FACE32: {
                     // Get the position of the palette by getting the first face image location.
                     // The palette will be 0x200 before that.
                     var paletteOffset = 0;
@@ -55,9 +54,8 @@ namespace SF3.Models.Files.DAT {
                     var palette = new Palette(Data.GetDataCopyAt(paletteOffset, 0x200).ToUShorts());
 
                     var faceCount = paletteOffset / 4;
-                    bool isCompressed = FileType == DAT_FileType.FACE32_Compressed;
                     tables.Add(
-                        TextureTable = Face32_TextureTable.Create(Data, nameof(TextureTable), 0, NameGetterContext, faceCount, palette, isCompressed)
+                        TextureTable = Face32_TextureTable.Create(Data, nameof(TextureTable), 0, NameGetterContext, faceCount, palette)
                     );
                     TextureViewerScale = 4;
                     break;

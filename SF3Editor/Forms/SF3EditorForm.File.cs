@@ -94,7 +94,7 @@ namespace SF3.Editor.Forms {
             // Attempt to the load the file.
             var fileLoader = new ModelFileLoader();
             bool success = fileLoader.LoadFile(filename, GetFileDialogFilterForFileType(fileType), stream,
-                loader => CreateFile(loader.ByteData, fileType, c_nameGetterContexts, scenario, Path.GetFileName(filename)));
+                loader => CreateFile(loader.ByteData, fileType, c_nameGetterContexts, scenario));
 
             if (!success) {
                 // TODO: maybe an actual error???

@@ -170,10 +170,9 @@ namespace SF3.Utils {
         /// <param name="nameGetterContexts">Dictionary with all INameGetterContext's. Necessary to provide all
         /// for files that can auto-determine their scenario.</param>
         /// <param name="scenario">The scenario for the file.</param>
-        /// <param name="filename">The filename for the file.</param>
         /// <returns>A newly-created IBaseFile of the type requested.</returns>
         /// <exception cref="InvalidOperationException">Thrown if 'fileType' is not supported.</exception>
-        public static IBaseFile CreateFile(IByteData byteData, SF3FileType fileType, Dictionary<ScenarioType, INameGetterContext> nameGetterContexts, ScenarioType scenario, string filename) {
+        public static IBaseFile CreateFile(IByteData byteData, SF3FileType fileType, Dictionary<ScenarioType, INameGetterContext> nameGetterContexts, ScenarioType scenario) {
             var ngc = nameGetterContexts[scenario];
             try {
                 switch (fileType) {
@@ -197,13 +196,7 @@ namespace SF3.Utils {
                     case SF3FileType.MPD:     return MPD_File .Create(byteData, nameGetterContexts);
                     case SF3FileType.CHR:     return CHR_File .Create(byteData, ngc, scenario);
                     case SF3FileType.CHP:     return CHP_File .Create(byteData, ngc, scenario);
-
-                    case SF3FileType.DAT_FACE32: {
-                        var upperFilename = filename.ToUpper();
-                        var isUncompressed = (scenario == ScenarioType.PremiumDisk && (upperFilename.Contains("FACE32D.DAT") || upperFilename.Contains("FACE32P.DAT")));
-                        return DAT_File.Create(byteData, ngc, scenario, isUncompressed ? DAT_FileType.FACE32_Uncompressed : DAT_FileType.FACE32_Compressed);
-                    }
-
+                    case SF3FileType.DAT_FACE32:  return DAT_File.Create(byteData, ngc, scenario, DAT_FileType.FACE32);
                     case SF3FileType.DAT_FACE64:  return DAT_File.Create(byteData, ngc, scenario, DAT_FileType.FACE64);
                     //case SF3FileType.DAT_KAO:     return DAT_File.Create(byteData, ngc, scenario, DAT_FileType.KAO);
                     case SF3FileType.DAT_ITEM_CG: return DAT_File.Create(byteData, ngc, scenario, DAT_FileType.ITEM_CG);
