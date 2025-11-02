@@ -1,0 +1,89 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using CommonLib.Arrays;
+using CommonLib.Imaging;
+using CommonLib.NamedValues;
+using CommonLib.Utils;
+using SF3.ByteData;
+using SF3.Models.Structs.DAT;
+using SF3.Types;
+
+namespace SF3.Models.Tables.DAT {
+    public class ItemCG_TextureTable : Table<TextureModelBase> {
+        public static readonly Palette ItemSpellPalette = new Palette(new ushort[] {
+            0x2C64, 0x6C00, 0x043C, 0x443E, 0x0EE4, 0x76A0, 0x07DF, 0x7FFF, 0x0000, 0x01BF, 0x5409, 0x05A0, 0x04CB, 0x1DD2, 0x6318, 0x4210,
+            0x2108, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x7FFF, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000,
+            0x7B9B, 0x7338, 0x62B4, 0x5651, 0x49EE, 0x3D8B, 0x2254, 0x1A12, 0x11D0, 0x098E, 0x014C, 0x010A, 0x7DCE, 0x6129, 0x50A6, 0x3400,
+            0x03FF, 0x029F, 0x017F, 0x001F, 0x0015, 0x000D, 0x6739, 0x5AD6, 0x4A52, 0x39CE, 0x294A, 0x1CE7, 0x3BEE, 0x2308, 0x09E0, 0x0140,
+            0x570F, 0x4AAC, 0x3E49, 0x31E6, 0x2583, 0x1920, 0x2217, 0x19D5, 0x1193, 0x0951, 0x010F, 0x00CD, 0x681A, 0x5415, 0x4411, 0x340D,
+            0x7F7B, 0x7EF7, 0x7E52, 0x573F, 0x3E7B, 0x21D6, 0x0D31, 0x00CD, 0x78BE, 0x3BEC, 0x33FF, 0x231C, 0x1A57, 0x1191, 0x090D, 0x04C9,
+            0x4E9E, 0x31BF, 0x14D5, 0x000F, 0x1084, 0x18C6, 0x0842, 0x639F, 0x79DE, 0x0000, 0x0000, 0x0000, 0x0000, 0x0087, 0x716B, 0x4464,
+            0x3528, 0x2885, 0x0029, 0x6795, 0x24E5, 0x3148, 0x14E0, 0x0000, 0x2C04, 0x3827, 0x484B, 0x54CF, 0x6553, 0x7E59, 0x7F1C, 0x0000,
+            0x7BFF, 0x4F77, 0x3AF1, 0x324D, 0x29E8, 0x2164, 0x18E0, 0x3D4A, 0x0044, 0x4F3C, 0x3698, 0x25F3, 0x114D, 0x0CC8, 0x0000, 0x0000,
+            0x7BDE, 0x529E, 0x3DBE, 0x201F, 0x0819, 0x0813, 0x040D, 0x0000, 0x017B, 0x0177, 0x0530, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000,
+            0x0000, 0x421E, 0x355C, 0x28D9, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000,
+            0x7E4D, 0x7EA9, 0x72E5, 0x6B21, 0x6740, 0x5381, 0x3BA2, 0x17E2, 0x0FE7, 0x0FEE, 0x3E76, 0x29D1, 0x194D, 0x40E1, 0x38A0, 0x2840,
+            0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000,
+            0x0000, 0x7DCE, 0x6129, 0x50A6, 0x3400, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000,
+            0x0005, 0x0039, 0x0736, 0x0739, 0x0000, 0x3907, 0x3808, 0x3807, 0x3900, 0x3707, 0x0800, 0x0007, 0x3708, 0x0707, 0x0080, 0x0708,
+            0x0102, 0x0000, 0x3907, 0x3800, 0x3807, 0x3908, 0x0039, 0x0707, 0x0739, 0x0808, 0x0000, 0x0808, 0x0808, 0x0800, 0x0000, 0x0039,
+        });
+
+        protected ItemCG_TextureTable(IByteData data, string name, int address, INameGetterContext nameGetterContext)
+        : base(data, name, address) {
+            NameGetterContext = nameGetterContext;
+        }
+
+        public static ItemCG_TextureTable Create(IByteData data, string name, int address, INameGetterContext nameGetterContext)
+            => Create(() => new ItemCG_TextureTable(data, name, address, nameGetterContext));
+
+        public override bool Load() {
+            var rowDict = new Dictionary<int, ItemCG_TextureModel>();
+            var rows = new List<ItemCG_TextureModel>();
+
+            try {
+                var address = Address;
+                var rawData = Data.Data.GetDataCopyOrReference();
+
+                int? itemsStart = null;
+                for (var id = 0; id < 0x1000; ++id) {
+                    string ngcName = null;
+
+                    if (!itemsStart.HasValue) {
+                        ngcName = NameGetterContext.GetName(null, null, id, new object[] { NamedValueType.Item });
+                        if (ngcName == null)
+                            itemsStart = id;
+                    }
+                    if (itemsStart.HasValue)
+                        ngcName = NameGetterContext.GetName(null, null, id - itemsStart.Value, new object[] { NamedValueType.Spell });
+
+                    // TODO: DecompressLZSS should take an offset!!!
+                    // TODO: We shouldn't have to decompress this anyway!!!
+                    var decomp = Compression.DecompressLZSS(rawData.Skip(address).ToArray(), 24 * 24, out var bytesRead, out var endDataFound);
+                    var compressedData = new CompressedData(new ByteArraySegment(Data.Data, address, bytesRead));
+                    var newModel = new ItemCG_TextureModel(compressedData, id, ngcName, address, ItemSpellPalette);
+
+                    rowDict[id] = newModel;
+                    rows.Add(newModel);
+                    address += bytesRead;
+
+                    if (address >= rawData.Length)
+                        break;
+                }
+            }
+            catch {
+                return false;
+            }
+            finally {
+                _rows = rows.ToArray();
+            }
+            return true;
+        }
+
+        public override int TerminatorSize => 0;
+        public override bool IsContiguous => true;
+
+        public INameGetterContext NameGetterContext { get; }
+    }
+}

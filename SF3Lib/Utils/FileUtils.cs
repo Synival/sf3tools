@@ -8,6 +8,7 @@ using SF3.ByteData;
 using SF3.Models.Files;
 using SF3.Models.Files.CHP;
 using SF3.Models.Files.CHR;
+using SF3.Models.Files.DAT;
 using SF3.Models.Files.MPD;
 using SF3.Models.Files.X002;
 using SF3.Models.Files.X005;
@@ -87,6 +88,16 @@ namespace SF3.Utils {
                 else if (preExtension.Contains("X031"))    return SF3FileType.X031;
                 else if (preExtension.Contains("X033"))    return SF3FileType.X033;
                 else if (preExtension.Contains("X044"))    return SF3FileType.X044;
+            }
+            else if (filenameUpper.Contains(".DAT")) {
+                //if (filenameUpper.Contains("FACE32"))
+                //    return SF3FileType.DAT_FACE32;
+                if (filenameUpper.Contains("FACE64"))
+                    return SF3FileType.DAT_FACE64;
+                //if (filenameUpper.Contains("KAO"))
+                //    return SF3FileType.DAT_KAO;
+                if (filenameUpper.Contains("ITEM_CG"))
+                    return SF3FileType.DAT_ITEM_CG;
             }
 
             // Couldn't figure it out; it's unknown.
@@ -185,6 +196,10 @@ namespace SF3.Utils {
                     case SF3FileType.MPD:     return MPD_File .Create(byteData, nameGetterContexts);
                     case SF3FileType.CHR:     return CHR_File .Create(byteData, ngc, scenario);
                     case SF3FileType.CHP:     return CHP_File .Create(byteData, ngc, scenario);
+                    //case SF3FileType.DAT_FACE32:  return DAT_File.Create(byteData, ngc, scenario, DAT_FileType.FACE32);
+                    case SF3FileType.DAT_FACE64:  return DAT_File.Create(byteData, ngc, scenario, DAT_FileType.FACE64);
+                    //case SF3FileType.DAT_KAO:     return DAT_File.Create(byteData, ngc, scenario, DAT_FileType.KAO);
+                    case SF3FileType.DAT_ITEM_CG: return DAT_File.Create(byteData, ngc, scenario, DAT_FileType.ITEM_CG);
                     default:
                         throw new InvalidOperationException($"Unhandled file type '{fileType}'");
                 }
@@ -217,6 +232,10 @@ namespace SF3.Utils {
                 case SF3FileType.MPD:     return "MPD Files";
                 case SF3FileType.CHR:     return "CHR Files";
                 case SF3FileType.CHP:     return "CHP Files";
+                //case SF3FileType.DAT_FACE32:  return "FACE32*.DAT Files";
+                case SF3FileType.DAT_FACE64:  return "FACE64*.DAT Files";
+                //case SF3FileType.DAT_KAO:     return "KAO*.DAT Files";
+                case SF3FileType.DAT_ITEM_CG: return "ITEM_CG.DAT File";
                 default:
                     throw new ArgumentException($"Unhandled value '{type}' for '{nameof(type)}'");
             }
@@ -244,6 +263,10 @@ namespace SF3.Utils {
                 case SF3FileType.MPD:     return "*.MPD";
                 case SF3FileType.CHR:     return "*.CHR";
                 case SF3FileType.CHP:     return "*.CHP";
+                //case SF3FileType.DAT_FACE32:  return "*FACE32*.DAT";
+                case SF3FileType.DAT_FACE64:  return "*FACE64*.DAT";
+                //case SF3FileType.DAT_KAO:     return "*KAO*.DAT";
+                case SF3FileType.DAT_ITEM_CG: return "*ITEM_CG*.DAT";
                 default:
                     throw new ArgumentException($"Unhandled value '{type}' for '{nameof(type)}'");
             }
@@ -271,6 +294,10 @@ namespace SF3.Utils {
                 case "*.MPD":         return new SF3FileType[] { SF3FileType.MPD };
                 case "*.CHR":         return new SF3FileType[] { SF3FileType.CHR };
                 case "*.CHP":         return new SF3FileType[] { SF3FileType.CHP };
+                //case "*FACE32*.DAT":  return new SF3FileType[] { SF3FileType.DAT_FACE32 };
+                case "*FACE64*.DAT":  return new SF3FileType[] { SF3FileType.DAT_FACE64 };
+                //case "*KAO*.DAT":     return new SF3FileType[] { SF3FileType.DAT_KAO };
+                case "*ITEM_CG*.DAT": return new SF3FileType[] { SF3FileType.DAT_ITEM_CG };
                 default:
                     return new SF3FileType[] {};
             }

@@ -2,6 +2,7 @@ using System.Windows.Forms;
 using SF3.Models.Files;
 using SF3.Models.Files.CHP;
 using SF3.Models.Files.CHR;
+using SF3.Models.Files.DAT;
 using SF3.Models.Files.MPD;
 using SF3.Models.Files.X002;
 using SF3.Models.Files.X005;
@@ -21,6 +22,7 @@ using SF3.Models.Files.X044;
 using SF3.Models.Files.X1;
 using SF3.Win.Views.CHP;
 using SF3.Win.Views.CHR;
+using SF3.Win.Views.DAT;
 using SF3.Win.Views.MPD;
 using SF3.Win.Views.X002;
 using SF3.Win.Views.X005;
@@ -76,6 +78,7 @@ namespace SF3.Win.Views {
                 case IMPD_File  file: return new MPD_View ("MPD_File",  file);
                 case ICHR_File  file: return new CHR_View ("CHR_File",  file);
                 case ICHP_File  file: return new CHP_View ("CHP_File",  file);
+                case IDAT_File  file: return new DAT_View ("DAT_File",  file);
                 default:
                     return null;
             }
