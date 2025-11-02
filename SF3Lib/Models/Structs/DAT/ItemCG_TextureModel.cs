@@ -7,12 +7,13 @@ using SF3.Types;
 namespace SF3.Models.Structs.DAT {
     public class ItemCG_TextureModel : TextureModelBase {
         public ItemCG_TextureModel(CompressedData data, int id, string name, int address, Palette palette)
-        : base(data.DecompressedData, id, name, address, 24, 24, TexturePixelFormat.Palette1, palette) {
+        : base(data.DecompressedData, id, name, address, 24 * 24, 24, 24, TexturePixelFormat.Palette1, palette, false) {
             CompressedData = data;
             _ = FetchAndCacheTexture();
         }
 
         public override int ImageDataOffset => 0;
+        public override bool HasImage => true;
 
         [TableViewModelColumn(addressField: null, displayOrder: 2, displayFormat: "X4")]
         public int CompressedImageDataOffset {

@@ -1,20 +1,23 @@
 ﻿using System;
 using CommonLib.Arrays;
 using CommonLib.Attributes;
+using CommonLib.Extensions;
 using CommonLib.Imaging;
+using CommonLib.Utils;
 using SF3.ByteData;
 using SF3.Types;
 
 namespace SF3.Models.Structs.DAT {
     public abstract class TextureModelBase : Struct {
-        public TextureModelBase(IByteData data, int id, string name, int address, int width, int height, TexturePixelFormat pixelFormat, Palette palette)
-        : base(data, id, name, address, width * height) {
+        public TextureModelBase(IByteData data, int id, string name, int address, int size,
+            int width, int height, TexturePixelFormat pixelFormat, Palette palette, bool isCompressed)
+        : base(data, id, name, address, size) {
             Width  = width;
             Height = height;
             PixelFormat = pixelFormat;
             BytesPerPixel = PixelFormat.BytesPerPixel();
-            Size *= BytesPerPixel;
             Palette = palette;
+            IsCompressed = isCompressed;
 
             _ = FetchAndCacheTexture();
         }
@@ -26,12 +29,17 @@ namespace SF3.Models.Structs.DAT {
         public int Height { get; }
 
         public abstract int ImageDataOffset { get; }
+        public abstract bool HasImage { get; }
 
         protected bool FetchAndCacheTexture() {
             try {
-                Texture = PixelFormat == TexturePixelFormat.ABGR1555
-                    ? new TextureABGR1555(ID, 0, 0, RawImageData16Bit)
-                    : (ITexture) new TextureIndexed(ID, 0, 0, RawImageData8Bit, PixelFormat, Palette, zeroIsTransparent: true);
+                if (!HasImage)
+                    Texture = null;
+                else {
+                    Texture = PixelFormat == TexturePixelFormat.ABGR1555
+                        ? new TextureABGR1555(ID, 0, 0, RawImageData16Bit)
+                        : (ITexture) new TextureIndexed(ID, 0, 0, RawImageData8Bit, PixelFormat, Palette, zeroIsTransparent: true);
+                }
                 return true;
             }
             catch {
@@ -46,8 +54,8 @@ namespace SF3.Models.Structs.DAT {
         public TexturePixelFormat PixelFormat { get; }
 
         public int BytesPerPixel { get; }
-
         public Palette Palette { get; }
+        public bool IsCompressed { get; }
 
         [TableViewModelColumn(addressField: null, displayName: "Internal Hash", displayOrder: 4, minWidth: 225)]
         public string Hash => Texture?.Hash ?? "";
@@ -57,18 +65,22 @@ namespace SF3.Models.Structs.DAT {
                 if (BytesPerPixel != 1)
                     throw new InvalidOperationException();
 
-                var data = new byte[Width, Height];
-                var off = ImageDataOffset;
+                var inputData = IsCompressed
+                    ? Compression.DecompressLZSS(Data.GetDataCopyAt(ImageDataOffset, Math.Min((int) (Width * Height * 1.5), Data.Length - ImageDataOffset)))
+                    : Data.GetDataCopyAt(ImageDataOffset, Width * Height);
+                var outputData = new byte[Width, Height];
+
+                var off = 0;
                 for (var y = 0; y < Height; y++) {
                     for (var x = 0; x < Width; x++) {
-                        var texPixel = (byte) Data.GetByte(off++);
-                        data[x, y] = texPixel;
+                        var texPixel = inputData[off++];
+                        outputData[x, y] = texPixel;
                     }
                 }
-                return data;
+                return outputData;
             }
             set {
-                if (BytesPerPixel != 1)
+                if (BytesPerPixel != 1 || IsCompressed)
                     throw new InvalidOperationException();
                 if (value.GetLength(0) != Width || value.GetLength(1) != Height)
                     throw new ArgumentException("Incoming data dimensions must match specified width/height");
@@ -89,19 +101,23 @@ namespace SF3.Models.Structs.DAT {
                 if (BytesPerPixel != 2)
                     throw new InvalidOperationException();
 
-                var data = new ushort[Width, Height];
-                var off = ImageDataOffset;
+                var inputData = (IsCompressed
+                    ? Compression.DecompressLZSS(Data.GetDataCopyAt(ImageDataOffset, Math.Min(Width * Height * 3, Data.Length - ImageDataOffset)))
+                    : Data.GetDataCopyAt(ImageDataOffset, Width * Height))
+                    .ToUShorts();
+                var outputData = new ushort[Width, Height];
+
+                var off = 0;
                 for (var y = 0; y < Height; y++) {
                     for (var x = 0; x < Width; x++) {
-                        var texPixel = (ushort) Data.GetWord(off);
-                        off += 2;
-                        data[x, y] = texPixel;
+                        var texPixel = inputData[off++];
+                        outputData[x, y] = texPixel;
                     }
                 }
-                return data;
+                return outputData;
             }
             set {
-                if (BytesPerPixel != 2)
+                if (BytesPerPixel != 2 || IsCompressed)
                     throw new InvalidOperationException();
                 if (value.GetLength(0) != Width || value.GetLength(1) != Height)
                     throw new ArgumentException("Incoming data dimensions must match specified width/height");

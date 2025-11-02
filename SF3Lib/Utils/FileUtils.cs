@@ -90,8 +90,8 @@ namespace SF3.Utils {
                 else if (preExtension.Contains("X044"))    return SF3FileType.X044;
             }
             else if (filenameUpper.Contains(".DAT")) {
-                //if (filenameUpper.Contains("FACE32"))
-                //    return SF3FileType.DAT_FACE32;
+                if (filenameUpper.Contains("FACE32"))
+                    return SF3FileType.DAT_FACE32;
                 if (filenameUpper.Contains("FACE64"))
                     return SF3FileType.DAT_FACE64;
                 //if (filenameUpper.Contains("KAO"))
@@ -170,9 +170,10 @@ namespace SF3.Utils {
         /// <param name="nameGetterContexts">Dictionary with all INameGetterContext's. Necessary to provide all
         /// for files that can auto-determine their scenario.</param>
         /// <param name="scenario">The scenario for the file.</param>
+        /// <param name="filename">The filename for the file.</param>
         /// <returns>A newly-created IBaseFile of the type requested.</returns>
         /// <exception cref="InvalidOperationException">Thrown if 'fileType' is not supported.</exception>
-        public static IBaseFile CreateFile(IByteData byteData, SF3FileType fileType, Dictionary<ScenarioType, INameGetterContext> nameGetterContexts, ScenarioType scenario) {
+        public static IBaseFile CreateFile(IByteData byteData, SF3FileType fileType, Dictionary<ScenarioType, INameGetterContext> nameGetterContexts, ScenarioType scenario, string filename) {
             var ngc = nameGetterContexts[scenario];
             try {
                 switch (fileType) {
@@ -196,7 +197,13 @@ namespace SF3.Utils {
                     case SF3FileType.MPD:     return MPD_File .Create(byteData, nameGetterContexts);
                     case SF3FileType.CHR:     return CHR_File .Create(byteData, ngc, scenario);
                     case SF3FileType.CHP:     return CHP_File .Create(byteData, ngc, scenario);
-                    //case SF3FileType.DAT_FACE32:  return DAT_File.Create(byteData, ngc, scenario, DAT_FileType.FACE32);
+
+                    case SF3FileType.DAT_FACE32: {
+                        var upperFilename = filename.ToUpper();
+                        var isUncompressed = (scenario == ScenarioType.PremiumDisk && (upperFilename.Contains("FACE32D.DAT") || upperFilename.Contains("FACE32P.DAT")));
+                        return DAT_File.Create(byteData, ngc, scenario, isUncompressed ? DAT_FileType.FACE32_Uncompressed : DAT_FileType.FACE32_Compressed);
+                    }
+
                     case SF3FileType.DAT_FACE64:  return DAT_File.Create(byteData, ngc, scenario, DAT_FileType.FACE64);
                     //case SF3FileType.DAT_KAO:     return DAT_File.Create(byteData, ngc, scenario, DAT_FileType.KAO);
                     case SF3FileType.DAT_ITEM_CG: return DAT_File.Create(byteData, ngc, scenario, DAT_FileType.ITEM_CG);
@@ -232,7 +239,7 @@ namespace SF3.Utils {
                 case SF3FileType.MPD:     return "MPD Files";
                 case SF3FileType.CHR:     return "CHR Files";
                 case SF3FileType.CHP:     return "CHP Files";
-                //case SF3FileType.DAT_FACE32:  return "FACE32*.DAT Files";
+                case SF3FileType.DAT_FACE32:  return "FACE32*.DAT Files";
                 case SF3FileType.DAT_FACE64:  return "FACE64*.DAT Files";
                 //case SF3FileType.DAT_KAO:     return "KAO*.DAT Files";
                 case SF3FileType.DAT_ITEM_CG: return "ITEM_CG.DAT File";
@@ -263,7 +270,7 @@ namespace SF3.Utils {
                 case SF3FileType.MPD:     return "*.MPD";
                 case SF3FileType.CHR:     return "*.CHR";
                 case SF3FileType.CHP:     return "*.CHP";
-                //case SF3FileType.DAT_FACE32:  return "*FACE32*.DAT";
+                case SF3FileType.DAT_FACE32:  return "*FACE32*.DAT";
                 case SF3FileType.DAT_FACE64:  return "*FACE64*.DAT";
                 //case SF3FileType.DAT_KAO:     return "*KAO*.DAT";
                 case SF3FileType.DAT_ITEM_CG: return "*ITEM_CG*.DAT";
@@ -294,7 +301,7 @@ namespace SF3.Utils {
                 case "*.MPD":         return new SF3FileType[] { SF3FileType.MPD };
                 case "*.CHR":         return new SF3FileType[] { SF3FileType.CHR };
                 case "*.CHP":         return new SF3FileType[] { SF3FileType.CHP };
-                //case "*FACE32*.DAT":  return new SF3FileType[] { SF3FileType.DAT_FACE32 };
+                case "*FACE32*.DAT":  return new SF3FileType[] { SF3FileType.DAT_FACE32 };
                 case "*FACE64*.DAT":  return new SF3FileType[] { SF3FileType.DAT_FACE64 };
                 //case "*KAO*.DAT":     return new SF3FileType[] { SF3FileType.DAT_KAO };
                 case "*ITEM_CG*.DAT": return new SF3FileType[] { SF3FileType.DAT_ITEM_CG };
