@@ -4,13 +4,13 @@ using SF3.Win.Controls;
 
 namespace SF3.Win.Views {
     public class ImageView : ControlView<TextureControl> {
-        public ImageView(string name, float textureScale = 0) : base(name) {
-            ImageScale = textureScale;
+        public ImageView(string name, float? textureScale = null) : base(name) {
+            ImageScale = textureScale ?? 0;
         }
 
-        public ImageView(string name, Image image, float textureScale = 0) : base(name) {
+        public ImageView(string name, Image image, float? textureScale = null) : base(name) {
             _image = image;
-            ImageScale = textureScale;
+            ImageScale = textureScale ?? 0;
         }
 
         public override Control Create() {

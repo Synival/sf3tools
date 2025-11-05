@@ -49,7 +49,7 @@ namespace SF3.Win.Views.CHR {
                 commandsSeen.Add(_commands[lastCommandIndex.Value]);
 
             var commandCount = _commands.Length;
-            var nextImage    = Image;
+            var nextTexture  = Texture;
 
             while (true) {
                 if (nextCommandIndex >= commandCount) {
@@ -71,9 +71,9 @@ namespace SF3.Win.Views.CHR {
 
                 switch (cmdType) {
                     case SpriteAnimationCommandType.Frame:
-                        nextImage = nextCommand.GetTexture(_currentDirections);
+                        nextTexture = nextCommand.GetTexture(_currentDirections);
                         if (param > 0) {
-                            SetFrame(nextImage, nextCommandIndex, param);
+                            SetFrame(nextTexture, nextCommandIndex, param);
                             return;
                         }
                         else
@@ -91,7 +91,7 @@ namespace SF3.Win.Views.CHR {
 
                     case SpriteAnimationCommandType.SetDuration:
                         if (param > 0) {
-                            SetFrame(nextImage, nextCommandIndex, param);
+                            SetFrame(nextTexture, nextCommandIndex, param);
                             return;
                         }
                         nextCommandIndex++;

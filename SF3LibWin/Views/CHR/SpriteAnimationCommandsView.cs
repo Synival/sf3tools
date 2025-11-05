@@ -1,4 +1,5 @@
 using System;
+using System.Drawing;
 using System.Windows.Forms;
 using BrightIdeasSoftware;
 using CommonLib.NamedValues;
@@ -18,46 +19,14 @@ namespace SF3.Win.Views.CHR {
         public string Name => AnimationCommandTable.Name;
     }
 
-    public class SpriteAnimationCommandsView : ControlSpaceView {
-        public SpriteAnimationCommandsView(string name, SpriteAnimationCommandsViewContext model, INameGetterContext nameGetterContext) : base(name) {
-            Context     = model;
-            TableView   = new TableView("Frames", Context?.AnimationCommandTable, nameGetterContext, typeof(AnimationCommand));
-            TextureView = new ImageView("Texture", textureScale: 2);
+    public class SpriteAnimationCommandsView : TableImageView<AnimationCommand, AnimationCommandTable> {
+        public SpriteAnimationCommandsView(string name, SpriteAnimationCommandsViewContext model, INameGetterContext nameGetterContext)
+        : base(name, model?.AnimationCommandTable, nameGetterContext, 2) {
+            Context = model;
         }
 
-        public override Control Create() {
-            if (base.Create() == null)
-                return null;
-
-            CreateChild(TableView, (c) => ((ObjectListView) c).ItemSelectionChanged += OnTextureChanged);
-            CreateChild(TextureView, (c) => c.Dock = DockStyle.Right, autoFill: false);
-
-            return Control;
-        }
-
-        private void OnTextureChanged(object sender, EventArgs e)
-            => UpdateTexture();
-
-        public void UpdateTexture() {
-            var item = (OLVListItem) TableView.OLVControl.SelectedItem;
-            var aniCommand = (AnimationCommand) item?.RowObject;
-            TextureView.Image = aniCommand?.GetTexture(aniCommand.Directions)?.CreateBitmapARGB1555();
-        }
-
-        public override void Destroy() {
-            if (!IsCreated)
-                return;
-
-            Control?.Hide();
-
-            if (TableView.OLVControl != null)
-                TableView.OLVControl.ItemSelectionChanged -= OnTextureChanged;
-
-            TableView.Destroy();
-            TextureView.Destroy();
-
-            base.Destroy();
-        }
+        public override Image GetImageFromModel(AnimationCommand aniCommand)
+            => aniCommand?.GetTexture(aniCommand.Directions)?.CreateBitmapARGB1555();
 
         private SpriteAnimationCommandsViewContext _context = null;
         public SpriteAnimationCommandsViewContext Context {
@@ -69,8 +38,5 @@ namespace SF3.Win.Views.CHR {
                 }
             }
         }
-
-        public TableView TableView { get; private set; }
-        public ImageView TextureView { get; private set; }
     }
 }

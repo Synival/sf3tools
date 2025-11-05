@@ -5,7 +5,6 @@ using CommonLib.NamedValues;
 using SF3.Models.Structs.MPD.TextureChunk;
 using SF3.Models.Tables;
 using SF3.Win.Controls;
-using SF3.Win.Extensions;
 
 namespace SF3.Win.Views.MPD {
     public class TextureTableView : ControlSpaceView {
@@ -39,7 +38,7 @@ namespace SF3.Win.Views.MPD {
 
         private void OnTextureChanged(object sender, EventArgs e) {
             var item = (OLVListItem) TexturesView.OLVControl.SelectedItem;
-            TextureView.Image = ((TextureModel) item?.RowObject)?.Texture;
+            TextureView.Texture = ((TextureModel) item?.RowObject)?.Texture;
         }
 
         public override void Destroy() {

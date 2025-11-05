@@ -37,7 +37,7 @@ namespace SF3.Win.Views {
             if (Paused)
                 ResumeAnimation();
 
-            Image        = texture;
+            Texture      = texture;
             FrameIndex   = index;
             FrameCounter = duration;
 
