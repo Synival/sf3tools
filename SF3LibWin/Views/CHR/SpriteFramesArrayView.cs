@@ -13,7 +13,7 @@ namespace SF3.Win.Views.CHR {
 
         protected override void OnSelectValue(object sender, EventArgs args) {
             ElementView.TableView.Table = (FrameTable) DropdownList.SelectedValue;
-            ElementView.UpdateTexture();
+            ElementView.UpdateImage();
         }
     }
 }

@@ -10,7 +10,7 @@ namespace SF3.Win.Views.CHR {
         protected override void OnSelectValue(object sender, EventArgs args) {
             var selection = (SpriteAnimationCommandsViewContext) DropdownList.SelectedValue;
             ElementView.Context = selection;
-            ElementView.UpdateTexture();
+            ElementView.UpdateImage();
         }
     }
 }

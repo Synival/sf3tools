@@ -15,7 +15,7 @@ namespace SF3.Win.Views.MPD {
         private static AllFramesTable CreateTable(IMPD_File model)
             => AllFramesTable.Create(model.TextureAnimations.Data, "AllFrames", model.TextureAnimations.Address, model.TextureAnimations);
 
-        public override Image GetImageFromModel(FrameModel frame)
+        protected override Image GetImageFromModel(FrameModel frame)
             => frame?.Texture?.CreateBitmapARGB1555();
 
         public IMPD_File Model { get; }

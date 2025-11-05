@@ -7,8 +7,8 @@ namespace SF3.Win.Views.MPD {
             Model = model;
 
             var ngc = Model.NameGetterContext;
-            HeaderView   = new TableView("Header", Model.TextureHeaderTable, ngc);
-            TexturesView = new TextureTableView("Textures", Model.TextureTable, ngc);
+            HeaderView       = new TableView("Header", Model.TextureHeaderTable, ngc);
+            TextureTableView = new TextureTableView("Textures", Model.TextureTable, ngc);
         }
 
         public override Control Create() {
@@ -16,7 +16,7 @@ namespace SF3.Win.Views.MPD {
                 return null;
 
             CreateChild(HeaderView);
-            CreateChild(TexturesView);
+            CreateChild(TextureTableView);
 
             // Return the top-level control.
             return Control;
@@ -24,6 +24,6 @@ namespace SF3.Win.Views.MPD {
 
         public TextureCollection Model { get; }
         public TableView HeaderView { get; }
-        public TextureTableView TexturesView { get; }
+        public TextureTableView TextureTableView { get; }
     }
 }

@@ -8,7 +8,7 @@ namespace SF3.Win.Views.CHR {
     public class SpriteFramesView : TableImageView<Frame, FrameTable> {
         public SpriteFramesView(string name, FrameTable table, INameGetterContext nameGetterContext) : base(name, table, nameGetterContext) {}
 
-        public override Image GetImageFromModel(Frame frame)
+        protected override Image GetImageFromModel(Frame frame)
             => frame?.Texture?.CreateBitmapARGB1555();
     }
 }

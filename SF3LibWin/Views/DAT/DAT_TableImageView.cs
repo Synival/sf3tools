@@ -9,7 +9,7 @@ namespace SF3.Win.Views.DAT {
         public DAT_TableImageView(string name, Table<TextureModelBase> table, INameGetterContext nameGetterContext, float? textureScale = null)
         : base(name, table, nameGetterContext, textureScale) {}
 
-        public override Image GetImageFromModel(TextureModelBase frame)
+        protected override Image GetImageFromModel(TextureModelBase frame)
             => frame?.Texture?.CreateBitmapARGB1555();
     }
 }

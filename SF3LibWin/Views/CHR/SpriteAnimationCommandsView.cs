@@ -25,7 +25,7 @@ namespace SF3.Win.Views.CHR {
             Context = model;
         }
 
-        public override Image GetImageFromModel(AnimationCommand aniCommand)
+        protected override Image GetImageFromModel(AnimationCommand aniCommand)
             => aniCommand?.GetTexture(aniCommand.Directions)?.CreateBitmapARGB1555();
 
         private SpriteAnimationCommandsViewContext _context = null;
