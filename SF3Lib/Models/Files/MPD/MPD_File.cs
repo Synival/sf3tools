@@ -17,7 +17,7 @@ using SF3.Models.Tables;
 using SF3.Models.Tables.MPD;
 using SF3.Types;
 using static CommonLib.Utils.ResourceUtils;
-using static CommonLib.Imaging.PixelConversion;
+using CommonLib.Extensions;
 
 namespace SF3.Models.Files.MPD {
     public class MPD_File : ScenarioTableFile, IMPD_File {
@@ -1185,19 +1185,16 @@ namespace SF3.Models.Files.MPD {
                         continue;
                     }
 
-                    for (var ix = 0; ix < imageDataWidth; ix++) {
-                        for (var iy = 0; iy < imageDataHeight; iy++) {
-                            // If the alpha channel is clear, preserve whatever color was originally used.
-                            // This should prevent marking data as 'modified' too often.
-                            if ((imageData[ix, iy] & 0x8000u) == 0) {
-                                var cached = ABGR1555toChannels(texture.ImageData16Bit[ix, iy]);
-                                cached.a = 0;
-                                imageData[ix, iy] = cached.ToABGR1555();
-                            }
-                        }
-                    }
+                    // MPD textures should have end codes.
+                    // One common texture used for the locked chest is encoded in an ever-so-slightly different way,
+                    // so account for that to prevent "IsModified" from always being set.
+                    bool applyEndCodesToBorder = true;
+                    var tm = model as TextureModel;
+                    if (tm != null && tm.ID == 0x109 && tm.ChunkIndex == 12)
+                        applyEndCodesToBorder = false;
+                    imageData.FixSaturnTransparency(useEndCodes: true, applyEndCodesToBorder);
 
-                    if (model is TextureModel tm)
+                    if (tm != null)
                         tm.RawImageData16Bit = imageData;
                     else if (model is FrameModel fm) {
                         var referenceTex = TextureCollections.Where(x => x != null).Select(x => x.TextureTable).SelectMany(x => x).FirstOrDefault(x => x.ID == fm.TextureID)?.Texture;

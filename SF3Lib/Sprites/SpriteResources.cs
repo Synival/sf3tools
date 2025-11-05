@@ -258,7 +258,7 @@ namespace SF3.Sprites {
                             if (x1 >= 0 && y1 >= 0 && x2 <= bitmap.Width && y2 <= bitmap.Height) {
                                 var bitmapData = bitmap.GetDataAt(x1, y1, frameSize.Width, frameSize.Height);
                                 if (frame.Coding != SpriteImageCodingType.Ignore)
-                                    CHR_Utils.EncodeSpriteFrameImage(bitmapData, frame.Coding == SpriteImageCodingType.On);
+                                    bitmapData.FixSaturnTransparency(frame.Coding == SpriteImageCodingType.On);
 
                                 var texture = new TextureABGR1555(0, 0, 0, bitmapData);
                                 var hash = texture.Hash;

@@ -218,5 +218,72 @@ namespace CommonLib.Extensions {
 
             return shorts;
         }
+
+        /// <summary>
+        /// Updates transparency pixels of an image to either by 0x0000 (transparent) or, if end codes are enabled,
+        /// 0x7FFF to indicate the start and stop of rows.
+        /// </summary>
+        /// <param name="frameImage">Image to encode.</param>
+        /// <param name="useEndCodes">When true, the encoding pixels that indicate row start/end are set.</param>
+        /// <param name="applyEndCodesToBorder">When true, encode pixels (if enabled) are added to 1-pixel-wide left/right borders.</param>
+        public static void FixSaturnTransparency(this ushort[,] frameImage, bool useEndCodes, bool applyEndCodesToBorder = false) {
+            var width  = frameImage.GetLength(0);
+            var height = frameImage.GetLength(1);
+
+            // First, force all transparent pixels to be 0x0000. (This is a bit inefficient but makes life easier.)
+            for (int y = 0; y < height; y++)
+                for (int x = 0; x < width; x++)
+                    if ((frameImage[x, y] & 0x8000) == 0)
+                        frameImage[x, y] = 0;
+
+            // We don't have to do anything more if we're not adding encoding pixels.
+            if (!useEndCodes)
+                return;
+
+            int firstEncodingPixel = applyEndCodesToBorder ? 1 : 2;
+            int lastEncodingPixel  = width - (applyEndCodesToBorder ? 2 : 3);
+
+            // Go row-by-row, applying 0x7FFF pixel encoding.
+            for (int y = 0; y < height; y++) {
+                // Get the first solid pixel on the left side.
+                int firstSolid = -1;
+                for (int x = 0; x < width; x++) {
+                    if ((frameImage[x, y] & 0x8000) != 0) {
+                        firstSolid = x;
+                        break;
+                    }
+                }
+
+                // If there was no solid pixel, the row is completely transparent. Use a special encoding.
+                if (firstSolid == -1) {
+                    if (width <= 4) {
+                        for (int x = 0; x < width; x++)
+                            frameImage[x, y] = 0x7FFF;
+                    }
+                    else {
+                        frameImage[0, y] = 0x7FFF;
+                        frameImage[1, y] = 0x7FFF;
+                        frameImage[width - 2, y] = 0x7FFF;
+                        frameImage[width - 1, y] = 0x7FFF;
+                    }
+                    continue;
+                }
+
+                // Get the first solid pixel on the right side.
+                int lastSolid = -1;
+                for (int x = width - 1; x >= 0; x--) {
+                    if ((frameImage[x, y] & 0x8000) != 0) {
+                        lastSolid = x;
+                        break;
+                    }
+                }
+
+                // Apply encoding pixel if there are at least 2 (or 1 if 'applyEndCodesToBorder') transparent pixels.
+                if (firstSolid >= firstEncodingPixel)
+                    frameImage[firstSolid - 1, y] = 0x7FFF;
+                if (lastSolid <= lastEncodingPixel)
+                    frameImage[lastSolid + 1, y] = 0x7FFF;
+            }
+        }
     }
 }

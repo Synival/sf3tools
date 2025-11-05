@@ -19,7 +19,9 @@ namespace SF3 {
 
         private readonly ushort[,] _data;
         private byte[] _bitmapDataARGB1555 = null;
+        private byte[] _bitmapDataARGB1555_Endcodes = null;
         private byte[] _bitmapDataARGB8888 = null;
+        private byte[] _bitmapDataARGB8888_Endcodes = null;
 
         public int ID { get; }
         public int Frame { get; }
@@ -33,18 +35,32 @@ namespace SF3 {
         public byte[,] ImageData8Bit => throw new NotSupportedException();
         public ushort[,] ImageData16Bit => (ushort[,]) _data.Clone();
 
-        public byte[] BitmapDataARGB1555 {
-            get {
+        public byte[] BitmapDataARGB1555 => GetBitmapDataARGB1555(false);
+
+        public byte[] GetBitmapDataARGB1555(bool highlightEndcodes = false) {
+            if (highlightEndcodes) {
+                if (_bitmapDataARGB1555_Endcodes == null)
+                    _bitmapDataARGB1555_Endcodes = BitmapUtils.ConvertABGR1555DataToARGB1555BitmapData(_data, true);
+                return _bitmapDataARGB1555_Endcodes;
+            }
+            else {
                 if (_bitmapDataARGB1555 == null)
-                    _bitmapDataARGB1555 = BitmapUtils.ConvertABGR1555DataToARGB1555BitmapData(_data);
+                    _bitmapDataARGB1555 = BitmapUtils.ConvertABGR1555DataToARGB1555BitmapData(_data, false);
                 return _bitmapDataARGB1555;
             }
         }
 
-        public byte[] BitmapDataARGB8888 {
-            get {
+        public byte[] BitmapDataARGB8888 => GetBitmapDataARGB8888(false);
+
+        public byte[] GetBitmapDataARGB8888(bool highlightEndcodes = false) {
+            if (highlightEndcodes) {
+                if (_bitmapDataARGB8888_Endcodes == null)
+                    _bitmapDataARGB8888_Endcodes = BitmapUtils.ConvertABGR1555DataToARGB8888BitmapData(_data, true);
+                return _bitmapDataARGB8888_Endcodes;
+            }
+            else {
                 if (_bitmapDataARGB8888 == null)
-                    _bitmapDataARGB8888 = BitmapUtils.ConvertABGR1555DataToARGB8888BitmapData(_data);
+                    _bitmapDataARGB8888 = BitmapUtils.ConvertABGR1555DataToARGB8888BitmapData(_data, false);
                 return _bitmapDataARGB8888;
             }
         }

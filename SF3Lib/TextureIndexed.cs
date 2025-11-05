@@ -38,20 +38,20 @@ namespace SF3 {
         public byte[,] ImageData8Bit => _data;
         public ushort[,] ImageData16Bit => throw new NotSupportedException();
 
-        public byte[] BitmapDataARGB1555 {
-            get {
-                if (_bitmapDataARGB1555 == null)
-                    _bitmapDataARGB1555 = BitmapUtils.ConvertIndexedDataToARGB1555BitmapData(_data, Palette, ZeroIsTransparent);
-                return _bitmapDataARGB1555;
-            }
+        public byte[] BitmapDataARGB1555 => GetBitmapDataARGB1555(false);
+
+        public byte[] GetBitmapDataARGB1555(bool highlightEndcodes = false /* unused */) {
+            if (_bitmapDataARGB1555 == null)
+                _bitmapDataARGB1555 = BitmapUtils.ConvertIndexedDataToARGB1555BitmapData(_data, Palette, ZeroIsTransparent);
+            return _bitmapDataARGB1555;
         }
 
-        public byte[] BitmapDataARGB8888 {
-            get {
-                if (_bitmapDataARGB8888 == null)
-                    _bitmapDataARGB8888 = BitmapUtils.ConvertIndexedDataToARGB8888BitmapData(_data, Palette, ZeroIsTransparent);
-                return _bitmapDataARGB8888;
-            }
+        public byte[] BitmapDataARGB8888 => GetBitmapDataARGB8888(false);
+
+        public byte[] GetBitmapDataARGB8888(bool highlightEndcodes = false /* unused */) {
+            if (_bitmapDataARGB8888 == null)
+                _bitmapDataARGB8888 = BitmapUtils.ConvertIndexedDataToARGB8888BitmapData(_data, Palette, ZeroIsTransparent);
+            return _bitmapDataARGB8888;
         }
 
         private string _hash = null;

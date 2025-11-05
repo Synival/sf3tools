@@ -73,9 +73,23 @@ namespace SF3 {
         byte[] BitmapDataARGB1555 { get; }
 
         /// <summary>
+        /// Gets the image data for 16-bit ARGB1555 format.
+        /// </summary>
+        /// <param name="highlightEndcodes">When set, 'endcode' pixels will be highlighted so they are visible.</param>
+        /// <returns></returns>
+        byte[] GetBitmapDataARGB1555(bool highlightEndcodes = false);
+
+        /// <summary>
         /// Image data for 32-bit ARGB8888 format. Cannot be set; it is based on the image data and PixelFormat.
         /// </summary>
         byte[] BitmapDataARGB8888 { get; }
+
+        /// <summary>
+        /// Gets the image data for 32-bit ARGB8888 format.
+        /// </summary>
+        /// <param name="highlightEndcodes">When set, 'endcode' pixels will be highlighted so they are visible.</param>
+        /// <returns></returns>
+        byte[] GetBitmapDataARGB8888(bool highlightEndcodes = false);
 
         /// <summary>
         /// Hash for identifying this as a unique texture.

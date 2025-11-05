@@ -120,6 +120,7 @@ namespace SF3.Editor.Forms {
             tsmiSettings_MPD_FixNormalOverflowUnderflowErrors = new System.Windows.Forms.ToolStripMenuItem();
             tsmiHelp = new System.Windows.Forms.ToolStripMenuItem();
             tsmiHelp_About = new System.Windows.Forms.ToolStripMenuItem();
+            tsmiSettings_HighlightEndCodes = new System.Windows.Forms.ToolStripMenuItem();
             menuStrip1.SuspendLayout();
             SuspendLayout();
             // 
@@ -725,7 +726,7 @@ namespace SF3.Editor.Forms {
             // 
             // tsmiSettings
             // 
-            tsmiSettings.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { tsmiSettings_UseDropdowns, tsmiSettings_EnableDebugSettings, tsmiSettings_Sep1, tsmiSettings_MPD });
+            tsmiSettings.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { tsmiSettings_UseDropdowns, tsmiSettings_EnableDebugSettings, tsmiSettings_HighlightEndCodes, tsmiSettings_Sep1, tsmiSettings_MPD });
             tsmiSettings.Name = "tsmiSettings";
             tsmiSettings.Size = new Size(61, 20);
             tsmiSettings.Text = "&Settings";
@@ -733,27 +734,27 @@ namespace SF3.Editor.Forms {
             // tsmiSettings_UseDropdowns
             // 
             tsmiSettings_UseDropdowns.Name = "tsmiSettings_UseDropdowns";
-            tsmiSettings_UseDropdowns.Size = new Size(253, 22);
+            tsmiSettings_UseDropdowns.Size = new Size(265, 22);
             tsmiSettings_UseDropdowns.Text = "Use &Dropdowns for Named Values";
             tsmiSettings_UseDropdowns.Click += tsmiSettings_UseDropdowns_Click;
             // 
             // tsmiSettings_EnableDebugSettings
             // 
             tsmiSettings_EnableDebugSettings.Name = "tsmiSettings_EnableDebugSettings";
-            tsmiSettings_EnableDebugSettings.Size = new Size(253, 22);
+            tsmiSettings_EnableDebugSettings.Size = new Size(265, 22);
             tsmiSettings_EnableDebugSettings.Text = "Show Debu&g Fields";
             tsmiSettings_EnableDebugSettings.Click += tsmiSettings_EnableDebugSettings_Click;
             // 
             // tsmiSettings_Sep1
             // 
             tsmiSettings_Sep1.Name = "tsmiSettings_Sep1";
-            tsmiSettings_Sep1.Size = new Size(250, 6);
+            tsmiSettings_Sep1.Size = new Size(262, 6);
             // 
             // tsmiSettings_MPD
             // 
             tsmiSettings_MPD.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { tsmiSettings_MPD_ImprovedNormalCalculations, tsmiSettings_MPD_UseFullHeightForNormals, tsmiSettings_MPD_FixNormalOverflowUnderflowErrors });
             tsmiSettings_MPD.Name = "tsmiSettings_MPD";
-            tsmiSettings_MPD.Size = new Size(253, 22);
+            tsmiSettings_MPD.Size = new Size(265, 22);
             tsmiSettings_MPD.Text = "&MPD";
             // 
             // tsmiSettings_MPD_ImprovedNormalCalculations
@@ -790,6 +791,13 @@ namespace SF3.Editor.Forms {
             tsmiHelp_About.Size = new Size(116, 22);
             tsmiHelp_About.Text = "&About...";
             tsmiHelp_About.Click += tsmiHelp_About_Click;
+            // 
+            // tsmiSettings_HighlightEndCodes
+            // 
+            tsmiSettings_HighlightEndCodes.Name = "tsmiSettings_HighlightEndCodes";
+            tsmiSettings_HighlightEndCodes.Size = new Size(265, 22);
+            tsmiSettings_HighlightEndCodes.Text = "Highlight &Endcodes in Texture Views";
+            tsmiSettings_HighlightEndCodes.Click += tsmiSettings_HighlightEndCodes_Click;
             // 
             // SF3EditorForm
             // 
@@ -903,5 +911,6 @@ namespace SF3.Editor.Forms {
         private System.Windows.Forms.ToolStripSeparator tsmiTools_Sep2;
         private System.Windows.Forms.ToolStripMenuItem tsmiTools_MovePostEOFData;
         private System.Windows.Forms.ToolStripMenuItem tsmiTools_InsertData;
+        private System.Windows.Forms.ToolStripMenuItem tsmiSettings_HighlightEndCodes;
     }
 }

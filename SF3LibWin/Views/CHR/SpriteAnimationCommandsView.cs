@@ -1,11 +1,6 @@
-using System;
-using System.Drawing;
-using System.Windows.Forms;
-using BrightIdeasSoftware;
 using CommonLib.NamedValues;
 using SF3.Models.Structs.CHR;
 using SF3.Models.Tables.CHR;
-using SF3.Win.Extensions;
 
 namespace SF3.Win.Views.CHR {
     public class SpriteAnimationCommandsViewContext {
@@ -19,14 +14,14 @@ namespace SF3.Win.Views.CHR {
         public string Name => AnimationCommandTable.Name;
     }
 
-    public class SpriteAnimationCommandsView : TableImageView<AnimationCommand, AnimationCommandTable> {
+    public class SpriteAnimationCommandsView : TableTextureView<AnimationCommand, AnimationCommandTable> {
         public SpriteAnimationCommandsView(string name, SpriteAnimationCommandsViewContext model, INameGetterContext nameGetterContext)
         : base(name, model?.AnimationCommandTable, nameGetterContext, 2) {
             Context = model;
         }
 
-        protected override Image GetImageFromModel(AnimationCommand aniCommand)
-            => aniCommand?.GetTexture(aniCommand.Directions)?.CreateBitmapARGB1555();
+        protected override ITexture GetTextureFromModel(AnimationCommand aniCommand)
+            => aniCommand?.GetTexture(aniCommand.Directions);
 
         private SpriteAnimationCommandsViewContext _context = null;
         public SpriteAnimationCommandsViewContext Context {

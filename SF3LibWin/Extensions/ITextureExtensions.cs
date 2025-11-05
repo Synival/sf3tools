@@ -9,9 +9,10 @@ namespace SF3.Win.Extensions {
         /// Creates a bitmap image using an a texture's BitmapDataARGB1555.
         /// </summary>
         /// <param name="texture">This texture whose Bitmap image should be generated.</param>
+        /// <param name="highlightEndcodes">When set, 'endcode' pixels will be highlighted so they are visible.</param>
         /// <returns>A bitmap image for the texture.</returns>
-        public static Bitmap CreateBitmapARGB1555(this ITexture texture) {
-            var texBitmapData = texture.BitmapDataARGB1555;
+        public static Bitmap CreateBitmapARGB1555(this ITexture texture, bool highlightEndcodes = false) {
+            var texBitmapData = texture.GetBitmapDataARGB1555(highlightEndcodes);
             if (texBitmapData == null)
                 return null;
 
@@ -28,9 +29,10 @@ namespace SF3.Win.Extensions {
         /// Creates a bitmap image using an a texture's BitmapDataARGB8888.
         /// </summary>
         /// <param name="texture">This texture whose Bitmap image should be generated.</param>
+        /// <param name="highlightEndcodes">When set, 'endcode' pixels will be highlighted so they are visible.</param>
         /// <returns>A bitmap image for the texture.</returns>
-        public static Bitmap CreateBitmapARGB8888(this ITexture texture) {
-            var texBitmapData = texture.BitmapDataARGB8888;
+        public static Bitmap CreateBitmapARGB8888(this ITexture texture, bool highlightEndcodes = false) {
+            var texBitmapData = texture.GetBitmapDataARGB8888(highlightEndcodes);
             if (texBitmapData == null)
                 return null;
 

@@ -14,7 +14,7 @@ namespace SF3.Win.Views {
             set {
                 if (value != _texture) {
                     _texture = value;
-                    Image = value?.CreateBitmapARGB1555();
+                    Image = value?.CreateBitmapARGB1555(AppState.RetrieveAppState().HighlightEndCodesInTextureView);
                 }
             }
         }

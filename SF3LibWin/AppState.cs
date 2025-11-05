@@ -374,6 +374,16 @@ namespace SF3.Win {
         public event EventHandler EnableDebugSettingsChanged;
 
         /// <summary>
+        /// When enabled, texture views will show encode pixels with a special highlighting to make them visible.
+        /// </summary>
+        public bool HighlightEndCodesInTextureView {
+            get => _highlightEndCodesInTextureView;
+            set => SetValue(ref _highlightEndCodesInTextureView, value, HighlightEndCodesInTextureViewChanged);
+        }
+        private bool _highlightEndCodesInTextureView = false;
+        public event EventHandler HighlightEndCodesInTextureViewChanged;
+
+        /// <summary>
         /// When enabled, each component of surface map tile normal vectors are clamped to (roughly) within the -.5 to .5 range to
         /// prevent weird errors that occur when the "0.5 bit" is interpreted as the signed most-significant bit.
         /// (See implementation of ByteData.SetWeirdCompressedFIXED and GetWeirdCompressedFIXED to see why this could happen)

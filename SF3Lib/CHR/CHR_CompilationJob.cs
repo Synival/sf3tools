@@ -700,7 +700,7 @@ namespace SF3.CHR {
                 else {
                     var data2D = bitmap.GetDataAt(x1, y1, spritesheetFrame.Width, spritesheetFrame.Height);
                     if (spritesheetFrame.Coding != SpriteImageCodingType.Ignore)
-                        CHR_Utils.EncodeSpriteFrameImage(data2D, spritesheetFrame.Coding == SpriteImageCodingType.On);
+                        data2D.FixSaturnTransparency(spritesheetFrame.Coding == SpriteImageCodingType.On);
                     data = data2D.To1DArrayTransposed();
                 }
 
