@@ -13,7 +13,7 @@ namespace SF3.Win.Views.DAT {
                 return null;
 
             if (Model.TextureTable != null)
-                CreateChild(new TextureTableView<TextureModelBase>("Textures", Model.NameGetterContext, Model.TextureTable, Model.TextureViewerScale));
+                CreateChild(new DAT_TableImageView("Textures", Model.TextureTable, Model.NameGetterContext, Model.TextureViewerScale));
 
             return Control;
         }
