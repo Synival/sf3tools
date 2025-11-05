@@ -7,11 +7,11 @@ namespace SF3.Win.Views {
         where TTableItem : class, IStruct
         where TTable : class, ITable<TTableItem>
     {
-        public TableTextureView(string name, TTable table, INameGetterContext ngc, float? textureScale = null)
-        : base(name, table, ngc, textureScale) {}
+        public TableTextureView(string name, TTable table, INameGetterContext ngc, float? imageScale = null)
+        : base(name, table, ngc, imageScale) {}
 
-        protected override TextureView CreateImageView(float? textureScale)
-            => new TextureView("Texture", textureScale);
+        protected override TextureView CreateImageView(float? imageScale)
+            => new TextureView("Texture", imageScale);
 
         protected override void SetImage(TTableItem item)
             => ImageView.Texture = GetTextureFromModel(item);

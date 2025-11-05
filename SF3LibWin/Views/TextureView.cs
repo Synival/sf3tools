@@ -2,9 +2,9 @@
 
 namespace SF3.Win.Views {
     public class TextureView : ImageView {
-        public TextureView(string name, float? textureScale = null) : base(name, textureScale) {}
+        public TextureView(string name, float? imageScale = null) : base(name, imageScale) {}
 
-        public TextureView(string name, ITexture texture, float? textureScale = null) : base(name, texture?.CreateBitmapARGB1555(), textureScale) {
+        public TextureView(string name, ITexture texture, float? imageScale = null) : base(name, texture?.CreateBitmapARGB1555(), imageScale) {
             _texture = texture;
         }
 

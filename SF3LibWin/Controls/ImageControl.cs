@@ -2,8 +2,8 @@
 using System.Windows.Forms;
 
 namespace SF3.Win.Controls {
-    public partial class TextureControl : UserControl {
-        public TextureControl() {
+    public partial class ImageControl : UserControl {
+        public ImageControl() {
             InitializeComponent();
             DoubleBuffered = true;
         }
@@ -16,27 +16,26 @@ namespace SF3.Win.Controls {
             e.Graphics.PixelOffsetMode    = System.Drawing.Drawing2D.PixelOffsetMode.HighQuality;
             e.Graphics.SmoothingMode      = System.Drawing.Drawing2D.SmoothingMode.None;
 
-            if (_textureImage != null) {
-                var textureScale = TextureScale;
-                var w = (int) (_textureImage.Width * textureScale);
-                var h = (int) (_textureImage.Height * textureScale);
+            if (_image != null) {
+                var imageScale = ImageScale;
+                var w = (int) (_image.Width * imageScale);
+                var h = (int) (_image.Height * imageScale);
                 e.Graphics.DrawRectangle(Pens.Black, new Rectangle(1, 1, w + 1, h + 1));
-                e.Graphics.DrawImage(TextureImage, 1, 1, w, h);
+                e.Graphics.DrawImage(Image, 1, 1, w, h);
             }
         }
 
-        private Image _textureImage = null;
+        public float ImageScale { get; set; } = 4;
 
-        public float TextureScale { get; set; } = 4;
-
-        public Image TextureImage {
-            get => _textureImage;
+        private Image _image = null;
+        public Image Image {
+            get => _image;
             set {
-                if (_textureImage != value) {
-                    _textureImage = value;
-                    if (_textureImage != null) {
-                        var textureScale = TextureScale;
-                        var newSize = new Size((int) (value.Width * textureScale) + 2, (int) (value.Height * textureScale) + 2);
+                if (_image != value) {
+                    _image = value;
+                    if (_image != null) {
+                        var imageScale = ImageScale;
+                        var newSize = new Size((int) (value.Width * imageScale) + 2, (int) (value.Height * imageScale) + 2);
                         var sizeDiff = new Point(newSize.Width - this.Size.Width, newSize.Height - this.Size.Height);
                         this.Size = newSize;
 

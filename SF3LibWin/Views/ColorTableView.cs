@@ -31,8 +31,8 @@ namespace SF3.Win.Views {
             });
 
             CreateChild(TextureView, (c) => {
-                var tc = (TextureControl) c;
-                tc.Dock = DockStyle.Right;
+                var ic = (ImageControl) c;
+                ic.Dock = DockStyle.Right;
                 UpdateBitmap();
             }, false);
 
@@ -67,10 +67,10 @@ namespace SF3.Win.Views {
                 }
             }
 
-            var tc = (TextureControl) (TextureView?.Control);
-            if (tc != null) {
-                tc.TextureScale = (int) Math.Ceiling(128.0f / PaletteBitmap.Width);
-                tc.TextureImage = PaletteBitmap;
+            var ic = (ImageControl) (TextureView?.Control);
+            if (ic != null) {
+                ic.ImageScale = (int) Math.Ceiling(128.0f / PaletteBitmap.Width);
+                ic.Image = PaletteBitmap;
             }
         }
 

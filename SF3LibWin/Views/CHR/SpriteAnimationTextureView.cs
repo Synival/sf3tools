@@ -17,8 +17,8 @@ namespace SF3.Win.Views.CHR {
     }
 
     public class SpriteAnimationTextureView : AnimatedTextureView {
-        public SpriteAnimationTextureView(string name, SpriteAnimationTextureViewContext context, float textureScale = 0)
-        : base(name, textureScale) {
+        public SpriteAnimationTextureView(string name, SpriteAnimationTextureViewContext context, float imageScale = 0)
+        : base(name, imageScale) {
             _context = context;
         }
 

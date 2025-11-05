@@ -3,8 +3,8 @@ using System.Windows.Forms;
 
 namespace SF3.Win.Views {
     public abstract class AnimatedTextureView : TextureView {
-        public AnimatedTextureView(string name, float textureScale = 0) : base(name, textureScale) {}
-        public AnimatedTextureView(string name, ITexture firstTexture, float textureScale = 0) : base(name, firstTexture, textureScale) {}
+        public AnimatedTextureView(string name, float imageScale = 0) : base(name, imageScale) {}
+        public AnimatedTextureView(string name, ITexture firstTexture, float imageScale = 0) : base(name, firstTexture, imageScale) {}
 
         private void OnTick(object sender, EventArgs e) {
             if (!Animating)

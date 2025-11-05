@@ -8,11 +8,11 @@ namespace SF3.Win.Views {
         where TTableItem : class, IStruct
         where TTable : class, ITable<TTableItem>
     {
-        public TableImageView(string name, TTable table, INameGetterContext nameGetterContext, float? textureScale = null)
-        : base(name, table, nameGetterContext, textureScale) {}
+        public TableImageView(string name, TTable table, INameGetterContext nameGetterContext, float? imageScale = null)
+        : base(name, table, nameGetterContext, imageScale) {}
 
-        protected override ImageView CreateImageView(float? textureScale)
-            => new ImageView("Image", textureScale);
+        protected override ImageView CreateImageView(float? imageScale)
+            => new ImageView("Image", imageScale);
 
         protected override void SetImage(TTableItem item) {
             ImageView.Image = GetImageFromModel(item);

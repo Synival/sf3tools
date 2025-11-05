@@ -1,5 +1,5 @@
 ﻿namespace SF3.Win.Controls {
-    partial class TextureControl {
+    partial class ImageControl {
         /// <summary> 
         /// Required designer variable.
         /// </summary>
@@ -25,13 +25,13 @@
         private void InitializeComponent() {
             SuspendLayout();
             // 
-            // TextureControl
+            // ImageControl
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             BackColor = System.Drawing.Color.Transparent;
             Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            Name = "TextureControl";
+            Name = "ImageControl";
             Size = new System.Drawing.Size(64, 64);
             ResumeLayout(false);
         }

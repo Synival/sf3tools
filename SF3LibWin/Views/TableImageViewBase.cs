@@ -11,12 +11,12 @@ namespace SF3.Win.Views {
         where TTable : class, ITable<TTableItem>
         where TImageView : ImageView
     {
-        public TableImageViewBase(string name, TTable table, INameGetterContext nameGetterContext, float? textureScale = null) : base(name) {
+        public TableImageViewBase(string name, TTable table, INameGetterContext nameGetterContext, float? imageScale = null) : base(name) {
             TableView = new TableView("Table", table, nameGetterContext, typeof(TTableItem));
-            ImageView = CreateImageView(textureScale);
+            ImageView = CreateImageView(imageScale);
         }
 
-        protected abstract TImageView CreateImageView(float? textureScale);
+        protected abstract TImageView CreateImageView(float? imageScale);
 
         public override Control Create() {
             if (base.Create() == null)

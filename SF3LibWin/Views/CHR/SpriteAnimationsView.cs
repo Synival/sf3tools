@@ -28,7 +28,7 @@ namespace SF3.Win.Views.CHR {
         public SpriteAnimationsView(string name, SpriteAnimationsViewContext context, INameGetterContext nameGetterContext) : base(name) {
             _context    = context;
             TableView   = new TableView("Frames", context.AnimationTable, nameGetterContext, typeof(Animation));
-            TextureView = new SpriteAnimationTextureView("Texture", new SpriteAnimationTextureViewContext(context.SpriteDirections, context.AnimationCommandTablesByIndex, context.FrameTable), textureScale: 2);
+            TextureView = new SpriteAnimationTextureView("Texture", new SpriteAnimationTextureViewContext(context.SpriteDirections, context.AnimationCommandTablesByIndex, context.FrameTable), imageScale: 2);
         }
 
         public override Control Create() {

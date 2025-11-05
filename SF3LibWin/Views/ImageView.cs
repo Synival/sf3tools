@@ -3,25 +3,25 @@ using System.Windows.Forms;
 using SF3.Win.Controls;
 
 namespace SF3.Win.Views {
-    public class ImageView : ControlView<TextureControl> {
-        public ImageView(string name, float? textureScale = null) : base(name) {
-            ImageScale = textureScale ?? 0;
+    public class ImageView : ControlView<ImageControl> {
+        public ImageView(string name, float? imageScale = null) : base(name) {
+            ImageScale = imageScale ?? 0;
         }
 
-        public ImageView(string name, Image image, float? textureScale = null) : base(name) {
+        public ImageView(string name, Image image, float? imageScale = null) : base(name) {
             _image = image;
-            ImageScale = textureScale ?? 0;
+            ImageScale = imageScale ?? 0;
         }
 
         public override Control Create() {
             var rval = base.Create();
 
             if (ImageScale == 0)
-                ImageScale = TextureControl.TextureScale;
+                ImageScale = Control.ImageScale;
             else
-                TextureControl.TextureScale = ImageScale;
+                Control.ImageScale = ImageScale;
 
-            TextureControl.TextureImage = _image;
+            Control.Image = _image;
             return rval;
         }
 
@@ -29,12 +29,10 @@ namespace SF3.Win.Views {
             if (!IsCreated)
                 return;
 
-            var old = TextureControl.TextureImage;
-            TextureControl.TextureImage = null;
-            TextureControl.TextureImage = old;
+            var old = Control.Image;
+            Control.Image = null;
+            Control.Image = old;
         }
-
-        public TextureControl TextureControl => (TextureControl) Control;
 
         private Image _image = null;
         public Image Image {
@@ -42,8 +40,8 @@ namespace SF3.Win.Views {
             set {
                 if (value != _image) {
                     _image = value;
-                    if (TextureControl != null)
-                        TextureControl.TextureImage = value;
+                    if (Control != null)
+                        Control.Image = value;
                 }
             }
         }
@@ -54,8 +52,8 @@ namespace SF3.Win.Views {
             set {
                 if (value != _imageScale) {
                     _imageScale = value;
-                    if (TextureControl != null)
-                        TextureControl.TextureScale = value;
+                    if (Control != null)
+                        Control.ImageScale = value;
                 }
             }
         }
