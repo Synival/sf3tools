@@ -31,8 +31,7 @@ namespace SF3.Win.Views {
             });
 
             CreateChild(ImageView, (c) => {
-                var ic = (ImageControl) c;
-                ic.Dock = DockStyle.Right;
+                c.Dock = DockStyle.Right;
                 UpdateBitmap();
             }, false);
 
