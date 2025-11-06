@@ -13,7 +13,7 @@ namespace SF3.Win.Views {
         public ColorTableView(string name, ColorTable table, INameGetterContext nameGetterContext) : base(name) {
             Table       = table;
             TableView   = new TableView("Table", table, nameGetterContext);
-            TextureView = new ImageView("Texture");
+            ImageView = new ImageView("Texture");
         }
 
         public override Control Create() {
@@ -30,7 +30,7 @@ namespace SF3.Win.Views {
                 };
             });
 
-            CreateChild(TextureView, (c) => {
+            CreateChild(ImageView, (c) => {
                 var ic = (ImageControl) c;
                 ic.Dock = DockStyle.Right;
                 UpdateBitmap();
@@ -67,7 +67,7 @@ namespace SF3.Win.Views {
                 }
             }
 
-            var ic = (ImageControl) (TextureView?.Control);
+            var ic = ImageView?.Control;
             if (ic != null) {
                 ic.ImageScale = (int) Math.Ceiling(128.0f / PaletteBitmap.Width);
                 ic.Image = PaletteBitmap;
@@ -76,7 +76,7 @@ namespace SF3.Win.Views {
 
         public readonly ColorTable Table = null;
         public readonly TableView TableView = null;
-        public readonly ImageView TextureView = null;
+        public readonly ImageView ImageView = null;
 
         public Bitmap PaletteBitmap { get; private set; } = null;
 

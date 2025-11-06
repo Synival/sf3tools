@@ -3,7 +3,7 @@ using System.Windows.Forms;
 using SF3.Win.Controls;
 
 namespace SF3.Win.Views {
-    public class ImageView : ControlView<ImageControl> {
+    public class ImageView : ControlView<ImagePanel> {
         public ImageView(string name, float? imageScale = null) : base(name) {
             ImageScale = imageScale ?? 0;
         }
