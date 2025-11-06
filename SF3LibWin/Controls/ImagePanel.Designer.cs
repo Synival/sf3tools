@@ -47,6 +47,7 @@
             btnExport.TabIndex = 1;
             btnExport.Text = "Export...";
             btnExport.UseVisualStyleBackColor = true;
+            btnExport.Click += btnExport_Click;
             // 
             // btnImport
             // 
@@ -56,6 +57,7 @@
             btnImport.TabIndex = 2;
             btnImport.Text = "Import...";
             btnImport.UseVisualStyleBackColor = true;
+            btnImport.Click += btnImport_Click;
             // 
             // ImagePanel
             // 

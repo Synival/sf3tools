@@ -9,10 +9,10 @@ namespace SF3.Win.Controls {
             imageControl.Resize += (s, e) => {
                 Height = imageControl.Height + 26;
                 Width = Math.Max(imageControl.Width + 4, MinimumSize.Width);
-
-                btnExport.Enabled = false;
-                btnImport.Enabled = false;
             };
+
+            btnExport.Enabled = false;
+            btnImport.Enabled = false;
         }
 
         public float ImageScale {
@@ -41,6 +41,14 @@ namespace SF3.Win.Controls {
                 _exportAction = value;
                 btnExport.Enabled = value != null;
             }
+        }
+
+        private void btnExport_Click(object sender, EventArgs e) {
+            ExportAction?.Invoke();
+        }
+
+        private void btnImport_Click(object sender, EventArgs e) {
+            ImportAction?.Invoke();
         }
     }
 }

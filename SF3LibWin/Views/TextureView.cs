@@ -1,4 +1,5 @@
-﻿using SF3.Win.Extensions;
+﻿using System.Drawing.Imaging;
+using SF3.Win.Extensions;
 
 namespace SF3.Win.Views {
     public class TextureView : ImageView {
@@ -7,6 +8,9 @@ namespace SF3.Win.Views {
         public TextureView(string name, ITexture texture, float? imageScale = null) : base(name, texture?.CreateBitmapARGB1555(), imageScale) {
             _texture = texture;
         }
+
+        public override void SaveImage(string filename, ImageFormat format)
+            => _texture?.CreateBitmapARGB1555()?.Save(filename, format);
 
         private ITexture _texture = null;
         public ITexture Texture {

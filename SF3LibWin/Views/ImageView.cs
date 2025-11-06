@@ -1,4 +1,6 @@
 ﻿using System.Drawing;
+using System.Drawing.Imaging;
+using System.IO;
 using System.Windows.Forms;
 using SF3.Win.Controls;
 
@@ -21,9 +23,36 @@ namespace SF3.Win.Views {
             else
                 Control.ImageScale = ImageScale;
 
-            Control.Image = _image;
+            // Set _image with the setter so we get the side-effects.
+            var controlImage = _image;
+            _image = null;
+            Image = controlImage;
+
             return rval;
         }
+
+        public void ExportTextureDialog() {
+            SaveFileDialog dialog = new SaveFileDialog();
+            dialog.Filter = "Images|*.png;*.bmp;*.gif;*.jpg;*.jpeg;*.tiff";
+
+            if (dialog.ShowDialog() == DialogResult.OK) {
+                string filename = dialog.FileName;
+                ImageFormat format = ImageFormat.Png;
+                switch (Path.GetExtension(dialog.FileName).ToLower())
+                {
+                    case ".bmp":               format = ImageFormat.Bmp; break;
+                    case ".gif":               format = ImageFormat.Gif; break;
+                    case ".jpg": case ".jpeg": format = ImageFormat.Jpeg; break;
+                    case ".png":               format = ImageFormat.Png; break;
+                    case ".tif": case ".tiff": format = ImageFormat.Tiff; break;
+                }
+
+                SaveImage(dialog.FileName, format);
+            }
+        }
+
+        public virtual void SaveImage(string filename, ImageFormat format)
+            => Image.Save(filename, format);
 
         public override void RefreshContent() {
             if (!IsCreated)
@@ -40,8 +69,12 @@ namespace SF3.Win.Views {
             set {
                 if (value != _image) {
                     _image = value;
-                    if (Control != null)
+                    if (Control != null) {
                         Control.Image = value;
+                        Control.ExportAction = ExportTextureDialog;
+                    }
+                    else
+                        Control.ExportAction = null;
                 }
             }
         }
