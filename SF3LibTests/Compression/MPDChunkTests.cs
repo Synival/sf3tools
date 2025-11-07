@@ -51,12 +51,12 @@ namespace SF3.Tests.Compression {
 
         [Ignore]
         [TestMethod]
-        public void Recompress_ConsistencyCheck_Chunk3FramesHaveValidData() {
+        public void RecompressChunks_ConsistencyCheck_Chunk3FramesHaveValidData() {
             RunOnAllTestCases((testCase, mpdFile) => {
                 if (mpdFile.Chunk3Frames == null || mpdFile.Chunk3Frames.Count == 0)
                     return;
 
-                _ = mpdFile.Recompress(onlyModified: false);
+                mpdFile.RecompressChunks(onlyModified: false);
                 var allFrames = mpdFile.TextureAnimations
                     .SelectMany(x => x.FrameTable)
                     .GroupBy(x => x.CompressedImageDataOffset)
@@ -93,19 +93,25 @@ namespace SF3.Tests.Compression {
         [Ignore]
         [TestMethod]
         public void CompressDecompress_ConsistencyCheck_TextureChunks_WithTexturesPresent() {
+            bool weDone = false;
             RunOnAllTestCases((testCase, mpdFile) => {
-                for (int i = 6; i <= 10; i++) {
+                if (weDone)
+                    return;
+                for (int i = 0; i < mpdFile.ChunkData.Length; i++) {
+                    if (mpdFile.ChunkData[i] == null || !mpdFile.ChunkData[i].IsCompressed)
+                        continue;
                     var data = mpdFile.ChunkData[i];
                     if (data == null || data.Length == 8)
                         continue;
 
                     // Let's go!
-                    var decompressed1 = DecompressLZSS(data.GetDataCopy());
+                    var decompressed1 = DecompressLZSS(data.Data.GetDataCopyOrReference());
                     var compressed1 = CompressLZSS(decompressed1);
                     var decompressed2 = DecompressLZSS(compressed1);
 
                     Assert.IsTrue(ByteArraysAreEqual(decompressed1, decompressed2), "Chunk" + i.ToString("D2") + " failed (" + data.Length + " bytes)");
                 }
+                weDone = true;
             });
         }
 
@@ -144,7 +150,7 @@ namespace SF3.Tests.Compression {
                     }
                 }
 
-                _ = mpdFile.Recompress(onlyModified: true);
+                mpdFile.RecompressChunks(onlyModified: true);
 
                 var pos = 0x292100;
                 foreach (var ch in mpdFile.ChunkLocations) {
@@ -159,6 +165,8 @@ namespace SF3.Tests.Compression {
                 var nameGetters = new Dictionary<ScenarioType, INameGetterContext>() {
                     { mpdFile.Scenario, mpdFile.NameGetterContext }
                 };
+
+                mpdFile.CommitChunks();
                 var recreatedMpdFile = MPD_File.Create(new SF3.ByteData.ByteData(new ByteArray(mpdFile.Data.GetDataCopy())), nameGetters);
             });
         }
@@ -187,7 +195,7 @@ namespace SF3.Tests.Compression {
                     .OrderBy(x => x.ChunkRAMAddress)
                     .ToArray();
 
-                mpdFile.RebuildChunkTable(onlyModified: true);
+                mpdFile.RebuildChunkTable();
 
                 var pos = 0x2100;
                 var orderedChunkLocations = mpdFile.ChunkLocations

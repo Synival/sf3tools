@@ -105,8 +105,6 @@ namespace SF3.ByteData {
             }
         }
 
-        public int Offset => (Data is ByteArraySegment bas) ? bas.Offset : 0;
-
         public event EventHandler NeedsRecompressionChanged;
         public event EventHandler Finished;
         public event EventHandler IsModifiedChanged;

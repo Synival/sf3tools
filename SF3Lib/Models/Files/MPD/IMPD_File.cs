@@ -33,13 +33,20 @@ namespace SF3.Models.Files.MPD {
 
     public interface IMPD_File : IScenarioTableFile {
         /// <summary>
-        /// Recompresses compressed chunks, updating the ChunkHeader however necessary.
-        /// All of the file's data will be updated to contain the new recompressed data.
-        /// This could result in a different data size.
+        /// Recompresses compressed chunks.
         /// </summary>
         /// <param name="onlyModified">Only perform updates for modified compressed chunks.</param>
-        /// <returns>'true' on success, otherwise 'false'.</returns>
-        bool Recompress(bool onlyModified);
+        void RecompressChunks(bool onlyModified);
+
+        /// <summary>
+        /// Rewrites the chunk offset and size table to reflect contents in ChunkData[].
+        /// </summary>
+        void RebuildChunkTable();
+
+        /// <summary>
+        /// Writes all chunk data to the main data.
+        /// </summary>
+        void CommitChunks();
 
         /// <summary>
         /// Scans the model collections for trees and associates them with specific tiles.

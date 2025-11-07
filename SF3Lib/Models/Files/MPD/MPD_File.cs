@@ -398,85 +398,55 @@ namespace SF3.Models.Files.MPD {
                 throw new ArgumentException(nameof(chunkIndex));
 
             var isCompressed = (compressionType == CompressionType.Compressed);
-            ByteArraySegment byteArraySegment = null;
+            ByteArray byteArray = null;
             ChunkData chunkData = null;
 
             try {
-                byteArraySegment = new ByteArraySegment(Data.Data, ChunkLocations[chunkIndex].ChunkRAMAddress - RamAddress, ChunkLocations[chunkIndex].ChunkSize);
-                chunkData = new ChunkData(byteArraySegment, isCompressed, chunkIndex);
+                byteArray = new ByteArray(Data.Data.GetDataCopyAt(ChunkLocations[chunkIndex].ChunkFileAddress, ChunkLocations[chunkIndex].ChunkSize));
+                chunkData = new ChunkData(byteArray, isCompressed, chunkIndex);
             }
             catch {
                 // TODO: what to do???
                 return null;
             }
-            var chunkLocations = ChunkLocations[chunkIndex];
+            var chunkLocation = ChunkLocations[chunkIndex];
 
-            chunkLocations.DecompressedSize = chunkData.DecompressedData.Length;
+            chunkLocation.DecompressedSize = chunkData.DecompressedData.Length;
             chunkData.DecompressedData.Data.RangeModified += (s, a) => {
                 if (a.Resized)
-                    chunkLocations.DecompressedSize = chunkData.DecompressedData.Length;
+                    chunkLocation.DecompressedSize = chunkData.DecompressedData.Length;
             };
 
             chunkData.Data.RangeModified += (s, a) => {
-                var chunkName = chunkLocations.Name;
-                if (a.Moved) {
-                    // Figure out how much the offset has changed.
-                    var oldOffset = chunkLocations.ChunkRAMAddress - RamAddress;
-                    var newOffset = byteArraySegment.Offset;
-                    var offsetDelta = newOffset - oldOffset;
-                    if (offsetDelta == 0)
-                        return;
+                // If the data hasn't been modified, do nothing.
+                if (chunkLocation.ChunkSize == chunkData.Length)
+                    return;
 
-                    // Update the address in the chunk table.
-                    chunkLocations.ChunkRAMAddress = newOffset + RamAddress;
+                // Determine how much the next chunks should be moved by.
+                var oldNextChunkOffset = (int) (Math.Ceiling((chunkLocation.ChunkRAMAddress + chunkLocation.ChunkSize) / 4.0) * 4.0);
+                var newNextChunkOffset = (int) (Math.Ceiling((chunkLocation.ChunkRAMAddress + chunkData.Length) / 4.0) * 4.0);
+                var nextChunkOffsetDelta = newNextChunkOffset - oldNextChunkOffset;
 
-                    // Chunks after this one with something assigned to ChunkData[] will have their
-                    // ChunkAddress updated automatically. For chunks without a ChunkData[] after this one
-                    // (but before the next ChunkData), update addresses manually.
-                    for (var j = chunkIndex + 1; j < ChunkLocations.Length; j++) {
-                        if (ChunkData[j] != null)
-                            break;
+                // Set the new chunk size.
+                chunkLocation.ChunkSize = chunkData.Length;
 
-                        var ch = ChunkLocations[j];
-                        if (ch != null && ch.ChunkRAMAddress != 0)
-                            ch.ChunkRAMAddress += offsetDelta;
-                    }
-                }
-                if (a.Resized)
-                    chunkLocations.ChunkSize = chunkData.Data.Length;
-            };
+                // Adjust the offset/address of every chunk after this one.
+                var thisRamAddr = chunkLocation.ChunkRAMAddress;
+                var thisIndex = chunkLocation.ID;
+                foreach (var loc in ChunkLocations) {
+                    var ramAddr = loc.ChunkRAMAddress;
+                    var index = loc.ID;
 
-            // Add some integrity checks after recompression.
-            chunkData.Recompressed += (s, e) => {
-                var errors = new List<string>();
-                for (var i = 0; i < ChunkLocations.Length; i++) {
-                    var ch = ChunkLocations[i];
-                    var cd = ChunkData[i];
-                    if (ch.ChunkRAMAddress == 0 || cd == null)
-                        continue;
-
-                    if (ch.ChunkFileAddress != cd.Offset) {
-                        errors.Add(
-                            $"ChunkHeader[{i}].ChunkFileAddress and ChunkData[{i}].Offset mismatch after recompress: " +
-                            $"{ch.ChunkFileAddress} vs {cd.Offset}");
-                    }
-                    if (ch.ChunkSize != cd.Length) {
-                        errors.Add(
-                            $"ChunkHeader[{i}].ChunkSize and ChunkData[{i}].Length length/size mismatch after recompress: " +
-                            $"{ch.ChunkSize} vs {cd.Length}");
-                    }
-                }
-
-                if (errors.Count > 0) {
-                    throw new InvalidOperationException(
-                        "Integrity checks failed when recompressing chunk " + chunkIndex + ":\r\n" +
-                        string.Join("\r\n", errors)
-                    );
+                    // Offset the chunk if either:
+                    //   1) its offset/address is later, or
+                    //   2) it's the same but is a higher ID (this happens when the earlier chunk has a size of 0)
+                    if (ramAddr > thisRamAddr || (ramAddr == thisRamAddr && index > thisIndex))
+                        loc.ChunkRAMAddress += nextChunkOffsetDelta;
                 }
             };
 
-            chunkLocations.ChunkType = type;
-            chunkLocations.CompressionType = compressionType;
+            chunkLocation.ChunkType = type;
+            chunkLocation.CompressionType = compressionType;
 
             ChunkData[chunkIndex] = chunkData;
             return chunkData;
@@ -865,20 +835,26 @@ namespace SF3.Models.Files.MPD {
             }
         }
 
-        public bool Recompress(bool onlyModified) {
+        public void RecompressChunks(bool onlyModified) {
             var framesModified = Chunk3Frames?.Any(x => x.Data.IsModified || x.Data.NeedsRecompression) ?? false;
             var chunksModified = framesModified || ChunkData.Any(x => x != null && (x.IsModified || x.NeedsRecompression));
 
             // Don't bother doing anything if no chunks have been modified.
             if (onlyModified && !framesModified && !chunksModified)
-                return true;
+                return;
 
             // Chunk 3 is made up of several individually-compressed images that need to be recompressed.
             RecompressChunk3Frames(onlyModified);
 
-            // Recompress and update the chunk table.
-            RebuildChunkTable(onlyModified);
-            return true;
+            // Perform recompression.
+            foreach (var chunkData in ChunkData) {
+                if (chunkData == null || !chunkData.IsCompressed)
+                    continue;
+                if (chunkData.IsModified || !onlyModified)
+                    chunkData.Recompress();
+            }
+
+            return;
         }
 
         private void RecompressChunk3Frames(bool onlyModified) {
@@ -893,68 +869,24 @@ namespace SF3.Models.Files.MPD {
             }
         }
 
-        public void RebuildChunkTable(bool onlyModified) {
-            // Gets all the chunks in order of their address, followed by the order in which they'll be updated.
-            ChunkLocation[] GetSortedChunks() {
-                return ChunkLocations
-                    .Where(x => x.ChunkRAMAddress != 0)
-                    .OrderBy(x => x.ChunkRAMAddress)
-                    .ThenBy(x => x.ChunkSize)
-                    .ThenBy(x => x.ID)
-                    .ToArray();
-            }
+        public void RebuildChunkTable() {
+            // Chunks always start at file offset 0x2100.
+            int nextChunkOffset = 0x2100;
 
-            // Finish compressed chunks.
-            var oldChunksOrderedByPosition = GetSortedChunks();
-            foreach (var cd in ChunkData)
-                if (cd != null && cd.IsCompressed && (!onlyModified || cd.NeedsRecompression || cd.IsModified))
-                    _ = cd.Recompress();
+            foreach (var loc in ChunkLocations) {
+                if (loc.ChunkRAMAddress == 0)
+                    break;
 
-            // When fixing offsets and removing empty space, we want to apply changes in order from
-            // lowest to highest address.
-            var chunksOrderedByPosition = GetSortedChunks();
-
-            // Perform sanity check.
-            var oldOrderedChunkIds = oldChunksOrderedByPosition.Select(x => x.ID).ToArray();
-            var newOrderedChunkIds = chunksOrderedByPosition.Select(x => x.ID).ToArray();
-            if (!Enumerable.SequenceEqual<int>(oldOrderedChunkIds, newOrderedChunkIds))
-                throw new InvalidOperationException("Chunks became out of order during decompression. This is bad, please contact the devs!");
-
-            // We need to know when the first chunk begins 
-            var firstChunkData = ChunkData.FirstOrDefault(x => x != null);
-            var firstChunkDataIndex = firstChunkData?.Index ?? 100;
-
-            int expectedFileAddr = 0x2100;
-            int lastChunkEndFileAddr = expectedFileAddr;
-            foreach (var chunk in chunksOrderedByPosition) {
-                // Enforce alignment by inserting bytes where necessary before this chunk begins.
-                if (chunk.ChunkFileAddress != expectedFileAddr) {
-                    var resizeStart = lastChunkEndFileAddr;
-                    var resizeEnd = Math.Min(Data.Data.Length, chunk.ChunkFileAddress);
-                    var resizeOldSize = resizeEnd - resizeStart;
-                    var resizeNewSize = expectedFileAddr - lastChunkEndFileAddr;
-
-                    Data.Data.ResizeAt(resizeStart, resizeOldSize, resizeNewSize);
-
-                    // If the chunk just moved isn't managed by any ChunkData, then it's one of the first
-                    // chunks, and its empty. It should be at 0x2100, and so should every other empty chunk
-                    // at the beginning.
-                    if (chunk.ID < firstChunkDataIndex) {
-                        if (expectedFileAddr != 0x2100)
-                            throw new InvalidOperationException("Huh? We shouldn't be trying to fix chunks here!");
-                        for (int i = 0; i < firstChunkDataIndex; i++)
-                            if (i != chunk.ID)
-                                ChunkLocations[i].ChunkRAMAddress = chunk.Address;
-                    }
+                var chunkData = ChunkData[loc.ID];
+                if (chunkData == null) {
+                    loc.ChunkFileAddress = nextChunkOffset;
+                    loc.ChunkSize = 0;
                 }
-
-                // Move forward. Make sure the next chunk starts at an alignment of 4 bytes.
-                expectedFileAddr += chunk.ChunkSize;
-                if (expectedFileAddr % 4 != 0)
-                    expectedFileAddr += 4 - (expectedFileAddr % 4);
-
-                // Keep track of where the last chunk ended. We'll add or remove zeroes here to enforce alignemnt.
-                lastChunkEndFileAddr = chunk.ChunkFileAddress + chunk.ChunkSize;
+                else {
+                    loc.ChunkFileAddress = nextChunkOffset;
+                    loc.ChunkSize = chunkData.Length;
+                    nextChunkOffset += (int) (Math.Ceiling(loc.ChunkSize / 4.0) * 4.0);
+                }
             }
         }
 
@@ -1062,8 +994,42 @@ namespace SF3.Models.Files.MPD {
             }
         }
 
-        public override bool OnFinish()
-            => Recompress(onlyModified: true);
+        public override bool OnFinish() {
+            // Recompress any chunk waiting for it.
+            RecompressChunks(onlyModified: true);
+
+            // Make sure the chunk table matches the chunks, in the expected order.
+            // TODO: make this an option!!
+            RebuildChunkTable();
+
+            // Update the content of the file.
+            CommitChunks();
+
+            // Always return success.
+            return true;
+        }
+
+        public void CommitChunks() {
+            // We need to copy chunk data into the file -- get the new file size.
+            var maxChunkEnd = ChunkLocations.Max(x => x.ChunkFileAddress + x.ChunkSize);
+            var newFileSize = (int) (Math.Ceiling(maxChunkEnd / 4.0) * 4.0);
+
+            // Copy all the chunk data into a clean buffer.
+            var newChunkData = new byte[newFileSize - 0x2100];
+            foreach (var chunk in ChunkData) {
+                if (chunk == null)
+                    continue;
+                var copyToOffset = ChunkLocations[chunk.Index].ChunkFileAddress - 0x2100;
+                if (copyToOffset >= 0)
+                    chunk.Data.GetDataCopyOrReference().CopyTo(newChunkData, copyToOffset);
+                else
+                    CommonLib.Logging.Logger.WriteLine($"Chunk[{chunk.Index}] position (0x{copyToOffset + 0x2100:X4}) is < 0x2100; not writing", CommonLib.Types.LogType.Error);
+            }
+
+            // Resize and update our file.
+            Data.Data.Resize(newFileSize);
+            Data.Data.SetDataAtTo(0x2100, newChunkData.Length, newChunkData);
+        }
 
         public override void Dispose() {
             base.Dispose();

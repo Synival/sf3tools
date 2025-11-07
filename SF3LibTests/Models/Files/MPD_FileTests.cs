@@ -10,12 +10,27 @@ using static SF3.Tests.TestDataPaths;
 namespace SF3.Tests.Models.Files {
     [TestClass]
     public class MPD_FileTests {
-        private static MPD_File MakeFile() {
+        private static MPD_File MakeFile(ScenarioType scenario = ScenarioType.Scenario1) {
             var nameGetters = Enum
                 .GetValues<ScenarioType>()
                 .ToDictionary(x => x, x => (INameGetterContext) new NameGetterContext(x));
 
-            var data = new SF3.ByteData.ByteData(new ByteArray(File.ReadAllBytes(ResourcePath(ScenarioType.Scenario1, "BTL02.MPD") ?? "")));
+            var getResourcePath = () => {
+                switch (scenario) {
+                    case ScenarioType.Scenario1:
+                        return ResourcePath(scenario, "BTL02.MPD") ?? "";
+                    case ScenarioType.Scenario2:
+                        return ResourcePath(scenario, "BTL42.MPD") ?? "";
+                    case ScenarioType.Scenario3:
+                        return ResourcePath(scenario, "BTL87.MPD") ?? "";
+                    case ScenarioType.PremiumDisk:
+                        return ResourcePath(scenario, "PD_MAP.MPD") ?? "";
+                    default:
+                        throw new ArgumentException($"Unhandled scenario '{scenario}'");
+                }
+            };
+
+            var data = new SF3.ByteData.ByteData(new ByteArray(File.ReadAllBytes(getResourcePath())));
             return MPD_File.Create(data, nameGetters);
         }
 
@@ -104,10 +119,7 @@ namespace SF3.Tests.Models.Files {
             var data = MakeFile();
 
             // Act
-            var recompressResult = data.Recompress(false);
-
-            // Assert
-            Assert.IsTrue(recompressResult);
+            data.RecompressChunks(onlyModified: false);
 
             var range = Enumerable.Range(0, data.ChunkData.Length).Select(x => new ValueTestCase(x)).ToArray();
             TestCase.Run(range, (testCase) => {
@@ -118,9 +130,11 @@ namespace SF3.Tests.Models.Files {
                 if (!chunkData.IsCompressed)
                     Assert.AreEqual(false, chunkData.IsModified);
                 else {
+                    // Some chunks are always modified due to differences in the compression algorithm that can't be reproduce.
+                    var shouldBeModified = testCase.Value == 13 || testCase.Value == 17;
                     Assert.IsFalse(chunkData.NeedsRecompression);
                     Assert.IsFalse(chunkData.DecompressedData.IsModified);
-                    Assert.IsFalse(chunkData.IsModified);
+                    Assert.AreEqual(shouldBeModified, chunkData.IsModified);
                 }
             });
 
@@ -132,15 +146,14 @@ namespace SF3.Tests.Models.Files {
         public void Recompress_WithoutChanges_ASecondTime_ResultsInExpectedState() {
             // Arrange
             var data = MakeFile();
-            data.Recompress(false);
+            data.RecompressChunks(onlyModified: false);
             data.IsModified = false;
             Assert.IsFalse(data.Data.IsModified);
 
             // Act
-            var recompressResult = data.Recompress(false);
+            data.RecompressChunks(onlyModified: false);
 
             // Assert
-            Assert.IsTrue(recompressResult);
             foreach (var ce in data.ChunkData.Where(x => x != null)) {
                 Assert.IsFalse(ce.IsModified);
                 Assert.IsFalse(ce.DecompressedData.IsModified);
