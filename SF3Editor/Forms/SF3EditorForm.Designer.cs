@@ -100,10 +100,9 @@ namespace SF3.Editor.Forms {
             tsmiMPD_Chunks_ExportChunk = new System.Windows.Forms.ToolStripMenuItem();
             tsmiMPD_Chunks_DeleteChunk = new System.Windows.Forms.ToolStripMenuItem();
             toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            tsmiMPD_Chunks_RecompressChunks = new System.Windows.Forms.ToolStripMenuItem();
-            tsmiMPD_Chunks_CorrectChunkPlacement = new System.Windows.Forms.ToolStripMenuItem();
-            toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            tsmiMPD_Chunks_MoveChunksAutomatically = new System.Windows.Forms.ToolStripMenuItem();
+            tsmiMPD_Chunks_RecompressModifiedChunks = new System.Windows.Forms.ToolStripMenuItem();
+            tsmiMPD_Chunks_RecompressAllChunks = new System.Windows.Forms.ToolStripMenuItem();
+            tsmiMPD_Chunks_RebuildChunkTable = new System.Windows.Forms.ToolStripMenuItem();
             tsmiMPD_Textures = new System.Windows.Forms.ToolStripMenuItem();
             tsmiMPD_Textures_ImportAll = new System.Windows.Forms.ToolStripMenuItem();
             tsmiMPD_Textures_ExportAll = new System.Windows.Forms.ToolStripMenuItem();
@@ -113,14 +112,15 @@ namespace SF3.Editor.Forms {
             tsmiSettings = new System.Windows.Forms.ToolStripMenuItem();
             tsmiSettings_UseDropdowns = new System.Windows.Forms.ToolStripMenuItem();
             tsmiSettings_EnableDebugSettings = new System.Windows.Forms.ToolStripMenuItem();
+            tsmiSettings_HighlightEndCodes = new System.Windows.Forms.ToolStripMenuItem();
             tsmiSettings_Sep1 = new System.Windows.Forms.ToolStripSeparator();
             tsmiSettings_MPD = new System.Windows.Forms.ToolStripMenuItem();
             tsmiSettings_MPD_ImprovedNormalCalculations = new System.Windows.Forms.ToolStripMenuItem();
             tsmiSettings_MPD_UseFullHeightForNormals = new System.Windows.Forms.ToolStripMenuItem();
             tsmiSettings_MPD_FixNormalOverflowUnderflowErrors = new System.Windows.Forms.ToolStripMenuItem();
+            tsmiSettings_MPD_AutoRebuildMPDChunkTable = new System.Windows.Forms.ToolStripMenuItem();
             tsmiHelp = new System.Windows.Forms.ToolStripMenuItem();
             tsmiHelp_About = new System.Windows.Forms.ToolStripMenuItem();
-            tsmiSettings_HighlightEndCodes = new System.Windows.Forms.ToolStripMenuItem();
             menuStrip1.SuspendLayout();
             SuspendLayout();
             // 
@@ -624,65 +624,57 @@ namespace SF3.Editor.Forms {
             // 
             // tsmiMPD_Chunks
             // 
-            tsmiMPD_Chunks.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { tsmiMPD_Chunks_ImportChunk, tsmiMPD_Chunks_ExportChunk, tsmiMPD_Chunks_DeleteChunk, toolStripSeparator1, tsmiMPD_Chunks_RecompressChunks, tsmiMPD_Chunks_CorrectChunkPlacement, toolStripSeparator2, tsmiMPD_Chunks_MoveChunksAutomatically });
+            tsmiMPD_Chunks.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { tsmiMPD_Chunks_ImportChunk, tsmiMPD_Chunks_ExportChunk, tsmiMPD_Chunks_DeleteChunk, toolStripSeparator1, tsmiMPD_Chunks_RecompressModifiedChunks, tsmiMPD_Chunks_RecompressAllChunks, tsmiMPD_Chunks_RebuildChunkTable });
             tsmiMPD_Chunks.Name = "tsmiMPD_Chunks";
             tsmiMPD_Chunks.Size = new Size(261, 22);
             tsmiMPD_Chunks.Text = "&Chunks";
-            tsmiMPD_Chunks.Visible = false;
             // 
             // tsmiMPD_Chunks_ImportChunk
             // 
             tsmiMPD_Chunks_ImportChunk.Name = "tsmiMPD_Chunks_ImportChunk";
-            tsmiMPD_Chunks_ImportChunk.Size = new Size(224, 22);
+            tsmiMPD_Chunks_ImportChunk.Size = new Size(232, 22);
             tsmiMPD_Chunks_ImportChunk.Text = "&Import Chunk...";
             tsmiMPD_Chunks_ImportChunk.Click += tsmiMPD_Chunks_ImportChunk_Click;
             // 
             // tsmiMPD_Chunks_ExportChunk
             // 
             tsmiMPD_Chunks_ExportChunk.Name = "tsmiMPD_Chunks_ExportChunk";
-            tsmiMPD_Chunks_ExportChunk.Size = new Size(224, 22);
+            tsmiMPD_Chunks_ExportChunk.Size = new Size(232, 22);
             tsmiMPD_Chunks_ExportChunk.Text = "&Export Chunk...";
             tsmiMPD_Chunks_ExportChunk.Click += tsmiMPD_Chunks_ExportChunk_Click;
             // 
             // tsmiMPD_Chunks_DeleteChunk
             // 
             tsmiMPD_Chunks_DeleteChunk.Name = "tsmiMPD_Chunks_DeleteChunk";
-            tsmiMPD_Chunks_DeleteChunk.Size = new Size(224, 22);
+            tsmiMPD_Chunks_DeleteChunk.Size = new Size(232, 22);
             tsmiMPD_Chunks_DeleteChunk.Text = "&Delete Chunk...";
             tsmiMPD_Chunks_DeleteChunk.Click += tsmiMPD_Chunks_DeleteChunk_Click;
             // 
             // toolStripSeparator1
             // 
             toolStripSeparator1.Name = "toolStripSeparator1";
-            toolStripSeparator1.Size = new Size(221, 6);
+            toolStripSeparator1.Size = new Size(229, 6);
             // 
-            // tsmiMPD_Chunks_RecompressChunks
+            // tsmiMPD_Chunks_RecompressModifiedChunks
             // 
-            tsmiMPD_Chunks_RecompressChunks.Enabled = false;
-            tsmiMPD_Chunks_RecompressChunks.Name = "tsmiMPD_Chunks_RecompressChunks";
-            tsmiMPD_Chunks_RecompressChunks.Size = new Size(224, 22);
-            tsmiMPD_Chunks_RecompressChunks.Text = "Recompress Chunks";
+            tsmiMPD_Chunks_RecompressModifiedChunks.Name = "tsmiMPD_Chunks_RecompressModifiedChunks";
+            tsmiMPD_Chunks_RecompressModifiedChunks.Size = new Size(232, 22);
+            tsmiMPD_Chunks_RecompressModifiedChunks.Text = "Recompress Modified Chunks";
+            tsmiMPD_Chunks_RecompressModifiedChunks.Click += tsmiMPD_Chunks_RecompressModifiedChunks_Click;
             // 
-            // tsmiMPD_Chunks_CorrectChunkPlacement
+            // tsmiMPD_Chunks_RecompressAllChunks
             // 
-            tsmiMPD_Chunks_CorrectChunkPlacement.Enabled = false;
-            tsmiMPD_Chunks_CorrectChunkPlacement.Name = "tsmiMPD_Chunks_CorrectChunkPlacement";
-            tsmiMPD_Chunks_CorrectChunkPlacement.Size = new Size(224, 22);
-            tsmiMPD_Chunks_CorrectChunkPlacement.Text = "Correct Chunk Placement";
+            tsmiMPD_Chunks_RecompressAllChunks.Name = "tsmiMPD_Chunks_RecompressAllChunks";
+            tsmiMPD_Chunks_RecompressAllChunks.Size = new Size(232, 22);
+            tsmiMPD_Chunks_RecompressAllChunks.Text = "Recompress All Chunks";
+            tsmiMPD_Chunks_RecompressAllChunks.Click += tsmiMPD_Chunks_RecompressAllChunks_Click;
             // 
-            // toolStripSeparator2
+            // tsmiMPD_Chunks_RebuildChunkTable
             // 
-            toolStripSeparator2.Name = "toolStripSeparator2";
-            toolStripSeparator2.Size = new Size(221, 6);
-            // 
-            // tsmiMPD_Chunks_MoveChunksAutomatically
-            // 
-            tsmiMPD_Chunks_MoveChunksAutomatically.Checked = true;
-            tsmiMPD_Chunks_MoveChunksAutomatically.CheckState = System.Windows.Forms.CheckState.Checked;
-            tsmiMPD_Chunks_MoveChunksAutomatically.Enabled = false;
-            tsmiMPD_Chunks_MoveChunksAutomatically.Name = "tsmiMPD_Chunks_MoveChunksAutomatically";
-            tsmiMPD_Chunks_MoveChunksAutomatically.Size = new Size(224, 22);
-            tsmiMPD_Chunks_MoveChunksAutomatically.Text = "Move Chunks Automatically";
+            tsmiMPD_Chunks_RebuildChunkTable.Name = "tsmiMPD_Chunks_RebuildChunkTable";
+            tsmiMPD_Chunks_RebuildChunkTable.Size = new Size(232, 22);
+            tsmiMPD_Chunks_RebuildChunkTable.Text = "Rebuild Chunk Table";
+            tsmiMPD_Chunks_RebuildChunkTable.Click += tsmiMPD_Chunks_RebuildChunkTable_Click;
             // 
             // tsmiMPD_Textures
             // 
@@ -745,6 +737,13 @@ namespace SF3.Editor.Forms {
             tsmiSettings_EnableDebugSettings.Text = "Show Debu&g Fields";
             tsmiSettings_EnableDebugSettings.Click += tsmiSettings_EnableDebugSettings_Click;
             // 
+            // tsmiSettings_HighlightEndCodes
+            // 
+            tsmiSettings_HighlightEndCodes.Name = "tsmiSettings_HighlightEndCodes";
+            tsmiSettings_HighlightEndCodes.Size = new Size(265, 22);
+            tsmiSettings_HighlightEndCodes.Text = "Highlight &Endcodes in Texture Views";
+            tsmiSettings_HighlightEndCodes.Click += tsmiSettings_HighlightEndCodes_Click;
+            // 
             // tsmiSettings_Sep1
             // 
             tsmiSettings_Sep1.Name = "tsmiSettings_Sep1";
@@ -752,7 +751,7 @@ namespace SF3.Editor.Forms {
             // 
             // tsmiSettings_MPD
             // 
-            tsmiSettings_MPD.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { tsmiSettings_MPD_ImprovedNormalCalculations, tsmiSettings_MPD_UseFullHeightForNormals, tsmiSettings_MPD_FixNormalOverflowUnderflowErrors });
+            tsmiSettings_MPD.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { tsmiSettings_MPD_ImprovedNormalCalculations, tsmiSettings_MPD_UseFullHeightForNormals, tsmiSettings_MPD_FixNormalOverflowUnderflowErrors, tsmiSettings_MPD_AutoRebuildMPDChunkTable });
             tsmiSettings_MPD.Name = "tsmiSettings_MPD";
             tsmiSettings_MPD.Size = new Size(265, 22);
             tsmiSettings_MPD.Text = "&MPD";
@@ -778,6 +777,13 @@ namespace SF3.Editor.Forms {
             tsmiSettings_MPD_FixNormalOverflowUnderflowErrors.Text = "Fix Surface Map Tile Normal Overflow/Underflow Errors";
             tsmiSettings_MPD_FixNormalOverflowUnderflowErrors.Click += tsmiSettings_MPD_FixNormalOverflowUnderflowErrors_Click;
             // 
+            // tsmiSettings_MPD_AutoRebuildMPDChunkTable
+            // 
+            tsmiSettings_MPD_AutoRebuildMPDChunkTable.Name = "tsmiSettings_MPD_AutoRebuildMPDChunkTable";
+            tsmiSettings_MPD_AutoRebuildMPDChunkTable.Size = new Size(454, 22);
+            tsmiSettings_MPD_AutoRebuildMPDChunkTable.Text = "Automatically Rebuild Chunk Table on Save";
+            tsmiSettings_MPD_AutoRebuildMPDChunkTable.Click += tsmiSettings_MPD_AutoRebuildMPDChunkTable_Click;
+            // 
             // tsmiHelp
             // 
             tsmiHelp.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { tsmiHelp_About });
@@ -791,13 +797,6 @@ namespace SF3.Editor.Forms {
             tsmiHelp_About.Size = new Size(116, 22);
             tsmiHelp_About.Text = "&About...";
             tsmiHelp_About.Click += tsmiHelp_About_Click;
-            // 
-            // tsmiSettings_HighlightEndCodes
-            // 
-            tsmiSettings_HighlightEndCodes.Name = "tsmiSettings_HighlightEndCodes";
-            tsmiSettings_HighlightEndCodes.Size = new Size(265, 22);
-            tsmiSettings_HighlightEndCodes.Text = "Highlight &Endcodes in Texture Views";
-            tsmiSettings_HighlightEndCodes.Click += tsmiSettings_HighlightEndCodes_Click;
             // 
             // SF3EditorForm
             // 
@@ -853,10 +852,8 @@ namespace SF3.Editor.Forms {
         private System.Windows.Forms.ToolStripMenuItem tsmiMPD_Chunks_ImportChunk;
         private System.Windows.Forms.ToolStripMenuItem tsmiMPD_Chunks_DeleteChunk;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
-        private System.Windows.Forms.ToolStripMenuItem tsmiMPD_Chunks_RecompressChunks;
-        private System.Windows.Forms.ToolStripMenuItem tsmiMPD_Chunks_CorrectChunkPlacement;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
-        private System.Windows.Forms.ToolStripMenuItem tsmiMPD_Chunks_MoveChunksAutomatically;
+        private System.Windows.Forms.ToolStripMenuItem tsmiMPD_Chunks_RecompressModifiedChunks;
+        private System.Windows.Forms.ToolStripMenuItem tsmiMPD_Chunks_RebuildChunkTable;
         private System.Windows.Forms.ToolStripSeparator tsmiFile_Sep3;
         private System.Windows.Forms.ToolStripMenuItem tsmiFile_SwapToPrev;
         private System.Windows.Forms.ToolStripMenuItem tsmiFile_SwapToNext;
@@ -912,5 +909,7 @@ namespace SF3.Editor.Forms {
         private System.Windows.Forms.ToolStripMenuItem tsmiTools_MovePostEOFData;
         private System.Windows.Forms.ToolStripMenuItem tsmiTools_InsertData;
         private System.Windows.Forms.ToolStripMenuItem tsmiSettings_HighlightEndCodes;
+        private System.Windows.Forms.ToolStripMenuItem tsmiSettings_MPD_AutoRebuildMPDChunkTable;
+        private System.Windows.Forms.ToolStripMenuItem tsmiMPD_Chunks_RecompressAllChunks;
     }
 }

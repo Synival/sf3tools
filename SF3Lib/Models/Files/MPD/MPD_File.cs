@@ -431,17 +431,19 @@ namespace SF3.Models.Files.MPD {
                 chunkLocation.ChunkSize = chunkData.Length;
 
                 // Adjust the offset/address of every chunk after this one.
-                var thisRamAddr = chunkLocation.ChunkRAMAddress;
-                var thisIndex = chunkLocation.ID;
-                foreach (var loc in ChunkLocations) {
-                    var ramAddr = loc.ChunkRAMAddress;
-                    var index = loc.ID;
+                if (nextChunkOffsetDelta != 0) {
+                    var thisRamAddr = chunkLocation.ChunkRAMAddress;
+                    var thisIndex = chunkLocation.ID;
+                    foreach (var loc in ChunkLocations) {
+                        var ramAddr = loc.ChunkRAMAddress;
+                        var index = loc.ID;
 
-                    // Offset the chunk if either:
-                    //   1) its offset/address is later, or
-                    //   2) it's the same but is a higher ID (this happens when the earlier chunk has a size of 0)
-                    if (ramAddr > thisRamAddr || (ramAddr == thisRamAddr && index > thisIndex))
-                        loc.ChunkRAMAddress += nextChunkOffsetDelta;
+                        // Offset the chunk if either:
+                        //   1) its offset/address is later, or
+                        //   2) it's the same but is a higher ID (this happens when the earlier chunk has a size of 0)
+                        if (ramAddr > thisRamAddr || (ramAddr == thisRamAddr && index > thisIndex))
+                            loc.ChunkRAMAddress += nextChunkOffsetDelta;
+                    }
                 }
             };
 
@@ -999,8 +1001,8 @@ namespace SF3.Models.Files.MPD {
             RecompressChunks(onlyModified: true);
 
             // Make sure the chunk table matches the chunks, in the expected order.
-            // TODO: make this an option!!
-            RebuildChunkTable();
+            if (RebuildChunkTableOnFinish)
+                RebuildChunkTable();
 
             // Update the content of the file.
             CommitChunks();
@@ -1346,5 +1348,7 @@ namespace SF3.Models.Files.MPD {
         public ITexture ForegroundImage { get; private set; }
 
         public EventHandler ModelsUpdated { get; set; }
+
+        public static bool RebuildChunkTableOnFinish { get; set; } = true;
     }
 }

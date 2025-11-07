@@ -11,7 +11,7 @@ namespace SF3.Win {
 
         public AppState() { }
 
-        public AppState(string appName) {
+        public AppState(string appName) : base() {
             AppName = appName;
             FileFullPath = GetFileFullPath(appName);
         }
@@ -394,6 +394,17 @@ namespace SF3.Win {
         }
         private bool _fixSurfaceMapTileNormalOverflowUnderflowErrors = true;
         public event EventHandler FixSurfaceMapTileNormalOverflowUnderflowErrorsChanged;
+
+        /// <summary>
+        /// When enabled, when an MPD is saved (i.e., Finish() is ran before writing the bytes out to a stream), the chunk table
+        /// won't be completely rebuilt.
+        /// </summary>
+        public bool AutoRebuildMPDChunkTable {
+            get => _autoRebuildMPDChunkTable;
+            set => SetValue(ref _autoRebuildMPDChunkTable, value, AutoRebuildMPDChunkTableChanged);
+        }
+        private bool _autoRebuildMPDChunkTable = true;
+        public event EventHandler AutoRebuildMPDChunkTableChanged;
 
         public struct RecentFile {
             public string Filename { get; set; }

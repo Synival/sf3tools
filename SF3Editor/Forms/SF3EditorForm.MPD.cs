@@ -237,7 +237,22 @@ namespace SF3.Editor.Forms {
             }
         }
 
-        private void UpdateModelSwitchGroupsMenu(IMPD_File? mpdFile) {
+        private void tsmiMPD_Chunks_RecompressModifiedChunks_Click(object sender, EventArgs e) {
+            if (SelectedFile?.FileType == SF3FileType.MPD)
+                ((IMPD_File) SelectedFile.Loader.Model).RecompressChunks(onlyModified: true);
+        }
+
+        private void tsmiMPD_Chunks_RecompressAllChunks_Click(object sender, EventArgs e) {
+            if (SelectedFile?.FileType == SF3FileType.MPD)
+                ((IMPD_File) SelectedFile.Loader.Model).RecompressChunks(onlyModified: false);
+        }
+
+        private void tsmiMPD_Chunks_RebuildChunkTable_Click(object sender, EventArgs e) {
+            if (SelectedFile?.FileType == SF3FileType.MPD)
+                ((IMPD_File) SelectedFile.Loader.Model).RebuildChunkTable();
+        }
+
+        private void UpdateMPD_ModelSwitchGroupsMenu(IMPD_File? mpdFile) {
             var items = tsmiMPD_ModelSwitchGroups.DropDown.Items;
 
             items.Clear();

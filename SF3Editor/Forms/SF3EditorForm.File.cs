@@ -378,7 +378,8 @@ namespace SF3.Editor.Forms {
             tsmiX019.Visible = tsmiX019.Enabled = hasFile && (fileType == SF3FileType.X019 || fileType == SF3FileType.X044);
             tsmiMPD.Visible  = tsmiMPD.Enabled  = hasFile && (fileType == SF3FileType.MPD);
 
-            UpdateModelSwitchGroupsMenu((fileType == SF3FileType.MPD && file?.Loader?.Model != null) ? (IMPD_File) file.Loader.Model : null);
+            var mpdFile = (fileType == SF3FileType.MPD && file?.Loader?.Model != null) ? (IMPD_File) file.Loader.Model : null;
+            UpdateMPD_ModelSwitchGroupsMenu(mpdFile);
         }
 
         private void UpdateLocalOpenScenario() {
