@@ -289,7 +289,7 @@ namespace SF3.Win {
         public event EventHandler ViewerDrawHelpChanged;
 
         /// <summary>
-        /// When set, models that are only visible from certain camera directions are not rendered.
+        /// When enabled, models that are only visible from certain camera directions are not rendered.
         /// </summary>
         public bool HideModelsNotFacingCamera {
             get => _hideModelsNotFacingCamera;
@@ -297,6 +297,26 @@ namespace SF3.Win {
         }
         private bool _hideModelsNotFacingCamera = false;
         public event EventHandler HideModelsNotFacingCameraChanged;
+
+        /// <summary>
+        /// When enabled, model instances with "tags" 2000 are rendered as shadows.
+        /// </summary>
+        public bool ViewerApplyShadowTags {
+            get => _viewerApplyShadowTags;
+            set => SetValue(ref _viewerApplyShadowTags, value, ViewerApplyShadowTagsChanged);
+        }
+        private bool _viewerApplyShadowTags = true;
+        public event EventHandler ViewerApplyShadowTagsChanged;
+
+        /// <summary>
+        /// When enabled, model instances with "tags" 3000 are hidden.
+        /// </summary>
+        public bool ViewerApplyHideTags {
+            get => _viewerApplyHideTags;
+            set => SetValue(ref _viewerApplyHideTags, value, ViewerApplyHideTagsChanged);
+        }
+        private bool _viewerApplyHideTags = false;
+        public event EventHandler ViewerApplyHideTagsChanged;
 
         /// <summary>
         /// The current the cursor tool selected in the MPD Viewer.

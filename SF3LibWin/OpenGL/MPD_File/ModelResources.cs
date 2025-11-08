@@ -15,6 +15,11 @@ using SF3.Win.Extensions;
 
 namespace SF3.Win.OpenGL.MPD_File {
     public class ModelResources : ResourcesBase, IMPD_Resources {
+        public ModelResources(bool applyShadowTags, bool applyHideTags) : base() {
+            ApplyShadowTags = applyShadowTags;
+            ApplyHideTags   = applyHideTags;
+        }
+
         protected override void PerformInit() { }
         public override void DeInit() { }
 
@@ -108,22 +113,23 @@ namespace SF3.Win.OpenGL.MPD_File {
                 // There is a function that scans for models with the tag '2000' and forcibly changes all the textures
                 // in their PDATAs to be semi-transparent. Yes, this is redundant to have on the *model* instead of the *PDATA*,
                 // so who knows why it works this way.
-                var modelsWith2000Tag = models.ModelTable
+                var modelsWith2000Tag = ApplyShadowTags ? models.ModelTable
                     .Where(x => x.Tag == 2000)
                     .SelectMany(x => x.PDatas)
                     .Select(x => x.Value)
                     .Distinct()
-                    .ToHashSet();
+                    .ToHashSet()
+                    : [];
 
                 // There are some (usually) bright-red models in Scenario 3 that are removed when
                 // the 3000 tag is present. They're an eyesore, so let's remove them as well.
-                // TODO: make this an option!
-                var modelsWith3000Tag = models.ModelTable
+                var modelsWith3000Tag = ApplyHideTags ? models.ModelTable
                     .Where(x => x.Tag == 3000)
                     .SelectMany(x => x.PDatas)
                     .Select(x => x.Value)
                     .Distinct()
-                    .ToHashSet();
+                    .ToHashSet()
+                    : [];
 
                 InitDictsForType(models.CollectionType);
                 var pdatasByAddress     = PDatasByAddressByCollection[models.CollectionType];
@@ -417,5 +423,8 @@ namespace SF3.Win.OpenGL.MPD_File {
         public Dictionary<ModelCollectionType, Dictionary<uint, PolygonModel[]>> PolygonsByAddressByCollection { get; } = [];
         public Dictionary<ModelCollectionType, Dictionary<uint, AttrModel[]>> AttributesByAddressByCollection { get; } = [];
         public ModelBase[] Models { get; private set; }
+
+        public bool ApplyShadowTags { get; set; } = false;
+        public bool ApplyHideTags { get; set; } = false;
     }
 }

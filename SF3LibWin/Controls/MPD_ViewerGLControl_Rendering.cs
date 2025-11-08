@@ -6,7 +6,6 @@ using OpenTK.Graphics.OpenGL;
 using OpenTK.Mathematics;
 using SF3.Models.Files.MPD;
 using SF3.Models.Structs.MPD;
-using SF3.Types;
 using SF3.Win.OpenGL;
 using SF3.Win.OpenGL.MPD_File;
 using SF3.Win.Types;
@@ -34,6 +33,24 @@ namespace SF3.Win.Controls {
             _appState.ViewerDrawEventIDsChanged       += (s, e) => Invalidate();
             _appState.ViewerDrawCollisionLinesChanged += (s, e) => Invalidate();
             _appState.HideModelsNotFacingCameraChanged += (s, e) => Invalidate();
+
+            _appState.ViewerApplyShadowTagsChanged += (s, e) => {
+                if (_models != null) {
+                    MakeCurrent();
+                    _models.ApplyShadowTags = _appState.ViewerApplyShadowTags;
+                    _models.Update(MPD_File);
+                }
+                Invalidate();
+            };
+            _appState.ViewerApplyHideTagsChanged += (s, e) => {
+                if (_models != null) {
+                    MakeCurrent();
+                    _models.ApplyHideTags = _appState.ViewerApplyHideTags;
+                    _models.Update(MPD_File);
+                }
+                Invalidate();
+            };
+
             _appState.RenderOnBlackBackgroundChanged  += (s, e) => Invalidate();
             _appState.ViewerDrawNormalsChanged        += (s, e) => Invalidate();
             _appState.ViewerRotateSpritesUpChanged    += (s, e) => Invalidate();
@@ -76,7 +93,7 @@ namespace SF3.Win.Controls {
             GL.BlendEquationSeparate(BlendEquationMode.FuncAdd, BlendEquationMode.Max);
 
             _general         = new GeneralResources();
-            _models          = new ModelResources();
+            _models          = new ModelResources(_appState.ViewerApplyShadowTags, _appState.ViewerApplyHideTags);
             _surfaceModel    = new SurfaceModelResources();
             _groundModel     = new GroundModelResources();
             _skyBoxModel     = new SkyBoxModelResources();
@@ -444,6 +461,20 @@ namespace SF3.Win.Controls {
         public bool HideModelsNotFacingCamera {
             get => AppState.HideModelsNotFacingCamera;
             set => UpdateAppState(nameof(AppState.HideModelsNotFacingCamera), value);
+        }
+
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public bool ApplyShadowTags {
+            get => AppState.ViewerApplyShadowTags;
+            set => UpdateAppState(nameof(AppState.ViewerApplyShadowTags), value);
+        }
+
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public bool ApplyHideTags {
+            get => AppState.ViewerApplyHideTags;
+            set => UpdateAppState(nameof(AppState.ViewerApplyHideTags), value);
         }
 
         [Browsable(false)]

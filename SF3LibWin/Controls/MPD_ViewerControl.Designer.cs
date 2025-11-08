@@ -42,8 +42,12 @@
             tsbToggleEventID = new System.Windows.Forms.ToolStripButton();
             tsbToggleCollisions = new System.Windows.Forms.ToolStripButton();
             tsbHideModelsNotFacingCamera = new System.Windows.Forms.ToolStripButton();
+            toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
+            tsbRenderOnBlackBackground = new System.Windows.Forms.ToolStripButton();
             tsbToggleNormals = new System.Windows.Forms.ToolStripButton();
             tsbRotateSpritesUp = new System.Windows.Forms.ToolStripButton();
+            tsbApplyShadowTags = new System.Windows.Forms.ToolStripButton();
+            tsbApplyHideTags = new System.Windows.Forms.ToolStripButton();
             toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             tsbCameraReset = new System.Windows.Forms.ToolStripButton();
             tsbCameraTopView = new System.Windows.Forms.ToolStripButton();
@@ -67,7 +71,6 @@
             tsbDrawNoEntry = new System.Windows.Forms.ToolStripButton();
             toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
             tsbFixTiles = new System.Windows.Forms.ToolStripButton();
-            tsbRenderOnBlackBackground = new System.Windows.Forms.ToolStripButton();
             toolStrip1.SuspendLayout();
             toolStrip2.SuspendLayout();
             SuspendLayout();
@@ -75,7 +78,7 @@
             // toolStrip1
             // 
             toolStrip1.ImageScalingSize = new System.Drawing.Size(24, 24);
-            toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { tsbCursorSelect, tsbCursorNavigate, toolStripSeparator5, tsbDrawSurfaceModel, tsbDrawModels, tsbDrawGround, tsbDrawSkyBox, tsbRunAnimations, tsbApplyLighting, tsbDrawGradients, toolStripSeparator2, tsbToggleWireframe, tsbToggleBoundaries, tsbToggleTerrainType, tsbToggleEventID, tsbToggleCollisions, tsbHideModelsNotFacingCamera, tsbRenderOnBlackBackground, tsbToggleNormals, tsbRotateSpritesUp, toolStripSeparator1, tsbCameraReset, tsbCameraTopView, tsbCameraLookAtCenter, toolStripSeparator3, tsbToggleHelp });
+            toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { tsbCursorSelect, tsbCursorNavigate, toolStripSeparator5, tsbDrawSurfaceModel, tsbDrawModels, tsbDrawGround, tsbDrawSkyBox, tsbRunAnimations, tsbApplyLighting, tsbDrawGradients, toolStripSeparator2, tsbToggleWireframe, tsbToggleBoundaries, tsbToggleTerrainType, tsbToggleEventID, tsbToggleCollisions, tsbHideModelsNotFacingCamera, tsbApplyShadowTags, tsbApplyHideTags, toolStripSeparator4, tsbRenderOnBlackBackground, tsbToggleNormals, tsbRotateSpritesUp, toolStripSeparator1, tsbCameraReset, tsbCameraTopView, tsbCameraLookAtCenter, toolStripSeparator3, tsbToggleHelp });
             toolStrip1.Location = new System.Drawing.Point(0, 0);
             toolStrip1.Name = "toolStrip1";
             toolStrip1.Size = new System.Drawing.Size(789, 31);
@@ -250,6 +253,21 @@
             tsbHideModelsNotFacingCamera.Text = "Hide Models Not Facing Camera";
             tsbHideModelsNotFacingCamera.Click += tsbHideModelsNotFacingCamera_Click;
             // 
+            // toolStripSeparator4
+            // 
+            toolStripSeparator4.Name = "toolStripSeparator4";
+            toolStripSeparator4.Size = new System.Drawing.Size(6, 31);
+            // 
+            // tsbRenderOnBlackBackground
+            // 
+            tsbRenderOnBlackBackground.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            tsbRenderOnBlackBackground.Image = Properties.Resources.RenderOnBlackBackgroundBmp;
+            tsbRenderOnBlackBackground.ImageTransparentColor = System.Drawing.Color.Magenta;
+            tsbRenderOnBlackBackground.Name = "tsbRenderOnBlackBackground";
+            tsbRenderOnBlackBackground.Size = new System.Drawing.Size(28, 28);
+            tsbRenderOnBlackBackground.Text = "Render on Black Background";
+            tsbRenderOnBlackBackground.Click += tsbRenderOnBlackBackground_Click;
+            // 
             // tsbToggleNormals
             // 
             tsbToggleNormals.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -270,6 +288,26 @@
             tsbRotateSpritesUp.Size = new System.Drawing.Size(28, 28);
             tsbRotateSpritesUp.Text = "Rotate Sprites Up to Camera";
             tsbRotateSpritesUp.Click += tsbRotateSpritesUp_Click;
+            // 
+            // tsbApplyShadowTags
+            // 
+            tsbApplyShadowTags.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            tsbApplyShadowTags.Image = Properties.Resources.ApplyShadowTagsBmp;
+            tsbApplyShadowTags.ImageTransparentColor = System.Drawing.Color.Magenta;
+            tsbApplyShadowTags.Name = "tsbApplyShadowTags";
+            tsbApplyShadowTags.Size = new System.Drawing.Size(28, 28);
+            tsbApplyShadowTags.Text = "Apply Shadow Tags";
+            tsbApplyShadowTags.Click += tsbApplyShadowTags_Click;
+            // 
+            // tsbApplyHideTags
+            // 
+            tsbApplyHideTags.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            tsbApplyHideTags.Image = Properties.Resources.ApplyHideTagsBmp;
+            tsbApplyHideTags.ImageTransparentColor = System.Drawing.Color.Magenta;
+            tsbApplyHideTags.Name = "tsbApplyHideTags";
+            tsbApplyHideTags.Size = new System.Drawing.Size(28, 28);
+            tsbApplyHideTags.Text = "Apply Hide Tags";
+            tsbApplyHideTags.Click += tsbApplyHideTags_Click;
             // 
             // toolStripSeparator1
             // 
@@ -506,16 +544,6 @@
             tsbFixTiles.Text = "Fix All Tile Textures Based on Neighbors\n(You'll probably want to save first!!)";
             tsbFixTiles.Click += tsbFixTiles_Click;
             // 
-            // tsbRenderOnBlackBackground
-            // 
-            tsbRenderOnBlackBackground.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            tsbRenderOnBlackBackground.Image = Properties.Resources.RenderOnBlackBackgroundBmp;
-            tsbRenderOnBlackBackground.ImageTransparentColor = System.Drawing.Color.Magenta;
-            tsbRenderOnBlackBackground.Name = "tsbRenderOnBlackBackground";
-            tsbRenderOnBlackBackground.Size = new System.Drawing.Size(28, 28);
-            tsbRenderOnBlackBackground.Text = "Render on Black Background";
-            tsbRenderOnBlackBackground.Click += tsbRenderOnBlackBackground_Click;
-            // 
             // MPD_ViewerControl
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -580,5 +608,8 @@
         private System.Windows.Forms.ToolStripButton tsbFixTiles;
         private System.Windows.Forms.ToolStripButton tsbHideModelsNotFacingCamera;
         private System.Windows.Forms.ToolStripButton tsbRenderOnBlackBackground;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
+        private System.Windows.Forms.ToolStripButton tsbApplyShadowTags;
+        private System.Windows.Forms.ToolStripButton tsbApplyHideTags;
     }
 }

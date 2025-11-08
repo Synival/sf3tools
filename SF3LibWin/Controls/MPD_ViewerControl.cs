@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Linq;
 using System.Windows.Forms;
-using CommonLib.Types;
 using OpenTK.Mathematics;
 using SF3.Models.Files.MPD;
 using SF3.Win.OpenGL.MPD_File;
@@ -33,6 +32,9 @@ namespace SF3.Win.Controls {
             tsbToggleEventID.Checked     = GLControl.DrawEventIDs;
             tsbToggleCollisions.Checked  = GLControl.DrawCollisionLines;
             tsbHideModelsNotFacingCamera.Checked = GLControl.HideModelsNotFacingCamera;
+            tsbApplyShadowTags.Checked   = GLControl.ApplyShadowTags;
+            tsbApplyHideTags.Checked     = GLControl.ApplyHideTags;
+
             tsbRenderOnBlackBackground.Checked = GLControl.RenderOnBlackBackground;
             tsbToggleNormals.Checked     = GLControl.DrawNormals;
             tsbRotateSpritesUp.Checked   = GLControl.RotateSpritesUp;
@@ -55,6 +57,9 @@ namespace SF3.Win.Controls {
             appState.ViewerDrawEventIDsChanged       += (s, e) => { tsbToggleEventID.Checked     = appState.ViewerDrawEventIDs; };
             appState.ViewerDrawCollisionLinesChanged += (s, e) => { tsbToggleCollisions.Checked  = appState.ViewerDrawCollisionLines; };
             appState.HideModelsNotFacingCameraChanged += (s, e) => { tsbHideModelsNotFacingCamera.Checked = appState.HideModelsNotFacingCamera; };
+            appState.ViewerApplyShadowTagsChanged    += (s, e) => { tsbApplyShadowTags.Checked   = appState.ViewerApplyShadowTags; };
+            appState.ViewerApplyHideTagsChanged      += (s, e) => { tsbApplyHideTags.Checked     = appState.ViewerApplyHideTags; };
+
             appState.RenderOnBlackBackgroundChanged  += (s, e) => { tsbRenderOnBlackBackground.Checked = appState.RenderOnBlackBackground; };
             appState.ViewerDrawNormalsChanged        += (s, e) => { tsbToggleNormals.Checked     = appState.ViewerDrawNormals; };
             appState.ViewerRotateSpritesUpChanged    += (s, e) => { tsbRotateSpritesUp.Checked   = appState.ViewerRotateSpritesUp; };
@@ -139,6 +144,9 @@ namespace SF3.Win.Controls {
         private void tsbToggleEventID_Click    (object sender, EventArgs e) => tsbToggleEventID.Checked     = GLControl.DrawEventIDs     = !GLControl.DrawEventIDs;
         private void tsbToggleCollisions_Click (object sender, EventArgs e) => tsbToggleCollisions.Checked  = GLControl.DrawCollisionLines = !GLControl.DrawCollisionLines;
         private void tsbHideModelsNotFacingCamera_Click(object sender, EventArgs e) => tsbHideModelsNotFacingCamera.Checked = GLControl.HideModelsNotFacingCamera = !GLControl.HideModelsNotFacingCamera;
+        private void tsbApplyShadowTags_Click  (object sender, EventArgs e) => tsbApplyShadowTags.Checked   = GLControl.ApplyShadowTags  = !GLControl.ApplyShadowTags;
+        private void tsbApplyHideTags_Click    (object sender, EventArgs e) => tsbApplyHideTags.Checked     = GLControl.ApplyHideTags    = !GLControl.ApplyHideTags;
+
         private void tsbRenderOnBlackBackground_Click(object sender, EventArgs e) => tsbRenderOnBlackBackground.Checked = GLControl.RenderOnBlackBackground = !GLControl.RenderOnBlackBackground;
         private void tsbToggleNormals_Click    (object sender, EventArgs e) => tsbToggleNormals.Checked     = GLControl.DrawNormals      = !GLControl.DrawNormals;
         private void tsbRotateSpritesUp_Click  (object sender, EventArgs e) => tsbRotateSpritesUp.Checked   = GLControl.RotateSpritesUp  = !GLControl.RotateSpritesUp;

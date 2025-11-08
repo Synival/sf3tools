@@ -19,6 +19,9 @@ namespace SF3.Editor.Forms {
             tsmiView_MPD_DrawEventIDs.Checked            = _appState.ViewerDrawEventIDs;
             tsmiView_MPD_DrawCollisionLines.Checked      = _appState.ViewerDrawCollisionLines;
             tsmiView_MPD_HideModelsNotFacingCamera.Checked = _appState.HideModelsNotFacingCamera;
+            tsmiView_MPD_ApplyShadowTags.Checked         = _appState.ViewerApplyShadowTags;
+            tsmiView_MPD_ApplyHideTags.Checked           = _appState.ViewerApplyHideTags;
+
             tsmiView_MPD_DrawNormalMap.Checked           = _appState.ViewerDrawNormals;
             tsmiView_MPD_RotateSpritesUpToCamera.Checked = _appState.ViewerRotateSpritesUp;
             tsmiView_MPD_RenderOnBlackBackground.Checked = _appState.RenderOnBlackBackground;
@@ -57,6 +60,11 @@ namespace SF3.Editor.Forms {
                 => { tsmiView_MPD_DrawCollisionLines.Checked = _appState.ViewerDrawCollisionLines; _appState.Serialize(); };
             _appState.HideModelsNotFacingCameraChanged += (s, e)
                 => { tsmiView_MPD_HideModelsNotFacingCamera.Checked = _appState.HideModelsNotFacingCamera; _appState.Serialize(); };
+            _appState.ViewerApplyShadowTagsChanged += (s, e)
+                => { tsmiView_MPD_ApplyShadowTags.Checked = _appState.ViewerApplyShadowTags; _appState.Serialize(); };
+            _appState.ViewerApplyHideTagsChanged += (s, e)
+                => { tsmiView_MPD_ApplyHideTags.Checked = _appState.ViewerApplyHideTags; _appState.Serialize(); };
+
             _appState.ViewerDrawNormalsChanged += (s, e)
                 => { tsmiView_MPD_DrawNormalMap.Checked = _appState.ViewerDrawNormals; _appState.Serialize(); };
             _appState.ViewerRotateSpritesUpChanged += (s, e)
@@ -90,6 +98,10 @@ namespace SF3.Editor.Forms {
             => _appState.ViewerDrawGradients = !_appState.ViewerDrawGradients;
         private void tsmiView_MPD_HideModelsNotFacingCamera_Click(object sender, EventArgs e)
             => _appState.HideModelsNotFacingCamera = !_appState.HideModelsNotFacingCamera;
+        private void tsmiView_MPD_ApplyShadowTags_Click(object sender, EventArgs e)
+            => _appState.ViewerApplyShadowTags = !_appState.ViewerApplyShadowTags;
+        private void tsmiView_MPD_ApplyHideTags_Click(object sender, EventArgs e)
+            => _appState.ViewerApplyHideTags = !_appState.ViewerApplyHideTags;
 
         private void tsmiView_MPD_DrawWireframes_Click(object sender, EventArgs e)
             => _appState.ViewerDrawWireframe = !_appState.ViewerDrawWireframe;

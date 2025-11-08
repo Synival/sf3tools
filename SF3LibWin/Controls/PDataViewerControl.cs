@@ -31,7 +31,7 @@ namespace SF3.Win.Controls {
             GL.BlendEquationSeparate(BlendEquationMode.FuncAdd, BlendEquationMode.Max);
 
             _general  = new GeneralResources();
-            _models   = new ModelResources();
+            _models   = new ModelResources(false, false);
             _lighting = new LightingResources();
 
             _general.Init();
