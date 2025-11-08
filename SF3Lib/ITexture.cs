@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using CommonLib.Imaging;
 using SF3.Types;
 
 namespace SF3 {
@@ -100,5 +101,10 @@ namespace SF3 {
         /// Tags for identifying textures with the same Hash.
         /// </summary>
         Dictionary<TagKey, TagValue> Tags { get; }
+
+        /// <summary>
+        /// The palette used for indexed images. Should be 'null' for non-indexed images.
+        /// </summary>
+        Palette Palette { get; set; }
     }
 }

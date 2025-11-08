@@ -95,10 +95,8 @@ namespace SF3.Win.Views {
                     _image = value;
                     if (Control != null) {
                         Control.Image = value;
-                        Control.ExportAction = ExportImageDialog;
+                        Control.ExportAction = (value == null) ? null : ExportImageDialog;
                     }
-                    else
-                        Control.ExportAction = null;
                 }
             }
         }

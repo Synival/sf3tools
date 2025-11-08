@@ -6,11 +6,11 @@ namespace SF3.Win.Views {
         public TextureView(string name, float? imageScale = null) : base(name, imageScale) {}
 
         public TextureView(string name, ITexture texture, float? imageScale = null) : base(name, texture?.CreateBitmapARGB1555(), imageScale) {
-            _texture = texture;
+            Texture = texture;
         }
 
         public override void SaveImage(string filename, ImageFormat format)
-            => _texture?.CreateBitmapARGB1555()?.Save(filename, format);
+            => _texture?.CreateBitmap()?.Save(filename, format);
 
         private ITexture _texture = null;
         public ITexture Texture {
@@ -18,7 +18,7 @@ namespace SF3.Win.Views {
             set {
                 if (value != _texture) {
                     _texture = value;
-                    Image = value?.CreateBitmapARGB1555(AppState.RetrieveAppState().HighlightEndCodesInTextureView);
+                    Image = value?.CreateBitmap(AppState.RetrieveAppState().HighlightEndCodesInTextureView);
                 }
             }
         }

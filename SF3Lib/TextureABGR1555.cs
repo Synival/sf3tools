@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography;
+using CommonLib.Imaging;
 using CommonLib.Utils;
 using SF3.Types;
 
@@ -78,5 +79,10 @@ namespace SF3 {
         }
 
         public Dictionary<TagKey, TagValue> Tags { get; }
+
+        public Palette Palette {
+            get => null;
+            set => throw new InvalidOperationException();
+        }
     }
 }
