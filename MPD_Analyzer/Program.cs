@@ -56,6 +56,8 @@ namespace MPD_Analyzer {
         };
 
         private static string[] MPD_MatchFunc(IMPD_File mpdFile, string filename) {
+            return new string[0];
+#if false
             List<string> matchReports = new List<string>();
 
             foreach (var msg in mpdFile.ModelSwitchGroupsTable) {
@@ -67,6 +69,7 @@ namespace MPD_Analyzer {
             }
 
             return matchReports.ToArray();
+#endif
         }
 
         public static void Main(string[] args) {
@@ -299,12 +302,6 @@ namespace MPD_Analyzer {
             var header = mpdFile.MPDHeader;
 
             totalErrors.AddRange(ScanForCorrectScenario(inputScenario, mpdFile));
-            totalErrors.AddRange(ScanForNonZeroHeaderPadding(mpdFile));
-            totalErrors.AddRange(ScanForChunkHeaderErrors(mpdFile));
-            totalErrors.AddRange(ScanForPaletteErrors(mpdFile));
-            totalErrors.AddRange(ScanForModelErrors(mpdFile));
-            totalErrors.AddRange(ScanForSurfaceModelErrors(mpdFile));
-            totalErrors.AddRange(ScanForImageChunkErrors(mpdFile));
             totalErrors.AddRange(mpdFile.GetErrors());
 
             foreach (var error in totalErrors)
@@ -318,258 +315,6 @@ namespace MPD_Analyzer {
             return mpdFile.Scenario != expectedScenario
                 ? ["Wrong scenario for this disc! ShouldBe=" + expectedScenario + ", Is=" + mpdFile.Scenario]
                 : [];
-        }
-
-        private static string[] ScanForNonZeroHeaderPadding(IMPD_File mpdFile) {
-            var header = mpdFile.MPDHeader;
-            var errors = new List<string>();
-
-            void CheckPadding(string prop, int value) {
-                if (value != 0)
-                    errors.Add($"{prop} has non-zero data: {value.ToString("X4")}");
-            }
-
-            CheckPadding(nameof(header.Padding1), header.Padding1);
-            CheckPadding(nameof(header.Padding2), header.Padding2);
-            CheckPadding(nameof(header.Padding3), header.Padding3);
-            CheckPadding(nameof(header.Padding4), header.Padding4);
-
-            return errors.ToArray();
-        }
-
-        private static string[] ScanForChunkHeaderErrors(IMPD_File mpdFile) {
-            var chunkHeaders = mpdFile.ChunkLocations;
-            var errors = new List<string>();
-
-            // Chunk[0] and Chunk[4] should always be empty.
-            if (chunkHeaders[0].Exists)
-                errors.Add("Chunk[0] exists!");
-            if (chunkHeaders[4].Exists)
-                errors.Add("Chunk[4] exists!");
-
-            // Anything Scenario 2 or higher should have addresses for Chunk[20] and Chunk[21].
-            bool shouldHaveChunk20_21 = mpdFile.Scenario >= ScenarioType.Scenario2;
-            bool hasChunk20 = chunkHeaders[20].ChunkRAMAddress > 0;
-            bool hasChunk21 = chunkHeaders[21].ChunkRAMAddress > 0;
-
-            if (shouldHaveChunk20_21 != hasChunk20)
-                errors.Add("Chunk[20] problem! ShouldHave=" + shouldHaveChunk20_21 + ", DoesHave=" + hasChunk20);
-            if (shouldHaveChunk20_21 != hasChunk21)
-                errors.Add("Chunk[21] problem! ShouldHave=" + shouldHaveChunk20_21 + ", DoesHave=" + hasChunk21);
-
-            // Make sure the header indicates the correct chunks.
-            var mpdHeader = mpdFile.MPDHeader;
-            if (mpdHeader.Chunk1IsModels && chunkHeaders[1].ChunkType != ChunkType.Models)
-                errors.Add($"Chunk[1] should be 'Models', but is {chunkHeaders[1].ChunkType}");
-            if (mpdHeader.Chunk2IsSurfaceModel && chunkHeaders[2].ChunkType != ChunkType.SurfaceModel)
-                errors.Add($"Chunk[2] should be 'SurfaceModel', but is {chunkHeaders[2].ChunkType}");
-            if (mpdHeader.Chunk20IsModels && chunkHeaders[20].ChunkType != ChunkType.Models)
-                errors.Add($"Chunk[20] should be 'Models', but is {chunkHeaders[20].ChunkType}");
-            if (mpdHeader.Chunk20IsSurfaceModel && chunkHeaders[20].ChunkType != ChunkType.SurfaceModel)
-                errors.Add($"Chunk[20] should be 'SurfaceModel', but is {chunkHeaders[20].ChunkType}");
-
-            return errors.ToArray();
-        }
-
-        private static string[] ScanForPaletteErrors(IMPD_File mpdFile) {
-            var header = mpdFile.MPDHeader;
-            var errors = new List<string>();
-
-            // Anything Scenario 3 or higher should have Palette3.
-            bool shouldHavePalette3 = mpdFile.Scenario >= ScenarioType.Scenario3;
-            bool hasPalette3 = header.Data.GetWord(header.Address + 0x44) == 0x0029;
-            if (shouldHavePalette3 != hasPalette3)
-                errors.Add("Palette3 problem! ShouldHave=" + shouldHavePalette3 + ", DoesHave=" + hasPalette3);
-
-            // If the disc is Scenario 3, all palettes should be present.
-            if (mpdFile.Scenario >= ScenarioType.Scenario3) {
-                if (mpdFile.PaletteTables[0] == null)
-                    errors.Add("Scenario3 Palette[0] doesn't exist!");
-                if (mpdFile.PaletteTables[1] == null)
-                    errors.Add("Scenario3 Palette[1] doesn't exist!");
-                if (mpdFile.PaletteTables[2] == null)
-                    errors.Add("Scenario3 Palette[2] doesn't exist!");
-            }
-
-            return errors.ToArray();
-        }
-
-        private static string[] ScanForModelErrors(IMPD_File mpdFile) {
-            var header = mpdFile.MPDHeader;
-            var errors = new List<string>();
-
-            var mc1  = mpdFile.ModelCollections.FirstOrDefault(x => x.ChunkIndex == 1);
-            var mc20 = mpdFile.ModelCollections.FirstOrDefault(x => x.ChunkIndex == 20);
-
-            if (mc1 != null) {
-                var expectedLmm = header.Chunk1IsLoadedFromLowMemory;
-                var expectedHmm = header.Chunk1IsLoadedFromHighMemory;
-                var actualHmm   = HasHighMemoryModels(mc1) == true;
-
-                if (expectedLmm && expectedHmm)
-                    errors.Add("Chunk[1] is somehow expected to be both in high and low memory! Bug?");
-                else if (!expectedLmm && !expectedHmm)
-                    errors.Add("Chunk[1] is somehow expected to be neither in high and low memory! Bug?");
-
-                if (expectedHmm && !actualHmm)
-                    errors.Add("Chunk[1] models have low memory, but they should be high memory");
-                else if (!expectedHmm && actualHmm)
-                    errors.Add("Chunk[1] models have high memory, but they should be low memory");
-            }
-
-            if (mc20 != null && HasHighMemoryModels(mc20) == false)
-                errors.Add("Chunk[20] models have low memory, but they should be high memory");
-
-            foreach (var mc in mpdFile.ModelCollections)
-                foreach (var attrTable in mc.AttrTablesByMemoryAddress.Values)
-                    foreach (var attr in attrTable)
-                        if (attr.Mode_MSBon)
-                            errors.Add($"-- MSBon: {attr.Address}");
-
-            return errors.ToArray();
-        }
-
-        private static string[] ScanForSurfaceModelErrors(IMPD_File mpdFile) {
-            var header = mpdFile.MPDHeader;
-            var chunkHeaders = mpdFile.ChunkLocations;
-            var errors = new List<string>();
-
-            var expectedIndex = (header.Chunk20IsSurfaceModelIfExists && chunkHeaders[20].Exists) ? 20 : 2;
-            var chunk2LooksLikeSurfaceChunk  = chunkHeaders[2].Exists  && chunkHeaders[2].ChunkSize  == 0xCF00;
-            var chunk20LooksLikeSurfaceChunk = chunkHeaders[20].Exists && chunkHeaders[20].ChunkSize == 0xCF00;
-
-            if (header.HasSurfaceModel) {
-                if (mpdFile.SurfaceModel == null) {
-                    errors.Add("SurfaceModel is missing!");
-                    if (chunk2LooksLikeSurfaceChunk)
-                        errors.Add($"  Chunk[2] (expected={expectedIndex}) looks like one!");
-                    if (chunk20LooksLikeSurfaceChunk)
-                        errors.Add($"  Chunk[20] (expected={expectedIndex}) looks like one!");
-                }
-                else if (mpdFile.SurfaceModelChunkIndex != expectedIndex)
-                    errors.Add($"(normal?) SurfaceModel in unexpected index. Expected in {expectedIndex}, found in {mpdFile.SurfaceModelChunkIndex}");
-            }
-            else if (!header.HasSurfaceModel) {
-                if (header.Chunk20IsSurfaceModelIfExists)
-                    errors.Add("Has no SurfaceModel, but Chunk20SurfaceModel bit is set!");
-                if (chunk2LooksLikeSurfaceChunk)
-                    errors.Add($"Has no SurfaceModel, but Chunk[2] (expected={expectedIndex}) looks like one!");
-                if (chunk20LooksLikeSurfaceChunk)
-                    errors.Add($"Has no SurfaceModel, but Chunk[20] (expected={expectedIndex}) looks like one!");
-            }
-
-            if (chunk2LooksLikeSurfaceChunk && chunk20LooksLikeSurfaceChunk)
-                errors.Add("Both Chunk[2] and Chunk[20] look like surface chunks. Probably an error!");
-
-            if (mpdFile.SurfaceModel != null) {
-                var corners = Enum.GetValues<CornerType>();
-                foreach (var tile in mpdFile.Tiles) {
-                    // This *would* report irregularities in heightmaps, if the existed :)
-                    var moveHeights  = corners.ToDictionary(c => c, tile.GetMoveHeightmap);
-                    if (tile.ModelIsFlat) {
-                        var br = CornerType.BottomRight;
-                        foreach (var c in corners) {
-                            if (c == br)
-                                continue;
-                            if (moveHeights[c] != moveHeights[br])
-                                errors.Add("Mismatched corner/BR walk mesh heights (" + tile.X + ", " + tile.Y + "), " + c.ToString() + ": " + moveHeights[c] + " != " + moveHeights[br]);
-                        }
-                    }
-                    else {
-                        var modelHeights = corners.ToDictionary(c => c, tile.GetModelVertexHeightmap);
-                        foreach (var c in corners) {
-                            if (moveHeights[c] != modelHeights[c])
-                                errors.Add("Mismatched walk/model mesh heights for (" + tile.X + ", " + tile.Y + "), " + c.ToString() + ": " + moveHeights[c] + " != " + modelHeights[c]);
-                        }
-                    }
-
-                    // Report unknown or unhandled tile flags. Only Scenario 3+ has rotation flags 0x01 and 0x02.
-                    var weirdTexFlags = tile.ModelTextureFlags & ~0xB0;
-                    if (mpdFile.Scenario >= ScenarioType.Scenario3)
-                        weirdTexFlags &= ~0x03;
-                    if (weirdTexFlags != 0x00)
-                        errors.Add("Unhandled tile texture flags: @(" + tile.X + ", " + tile.Y + "): " + weirdTexFlags.ToString("X2"));
-                    if (mpdFile.Scenario >= ScenarioType.Scenario3 && !header.HasSurfaceTextureRotation && (tile.ModelTextureFlags & 0x03) != 0)
-                        errors.Add("Disabled tile texture rotation flag: @(" + tile.X + ", " + tile.Y + "): " + weirdTexFlags.ToString("X2"));
-                }
-            }
-
-            return errors.ToArray();
-        }
-
-        private static string[] ScanForImageChunkErrors(IMPD_File mpdFile) {
-            var header = mpdFile.MPDHeader;
-            var chunkHeaders = mpdFile.ChunkLocations;
-            var errors = new List<string>();
-
-            var chunkUses = new Dictionary<int, List<string>>() {
-                { 14, new List<string>() },
-                { 15, new List<string>() },
-                { 16, new List<string>() },
-                { 17, new List<string>() },
-                { 18, new List<string>() },
-                { 19, new List<string>() },
-            };
-
-            var typicalUse = new Dictionary<int, string>() {
-                { 14, "GroundImageTop[Tiles]" },
-                { 15, "GroundImageBottom[Tiles]" },
-                { 16, "GroundImageTopTileMap" },
-                { 17, "SkyBoxImageTop" },
-                { 18, "SkyBoxImageBottom" },
-                { 19, "GroundImageBottomTileMap" },
-            };
-
-            if (header.GroundImageType.HasFlag(GroundImageType.Repeated)) {
-                chunkUses[14].Add("GroundImageTop");
-                chunkUses[15].Add("GroundImageBottom");
-            }
-
-            if (header.GroundImageType.HasFlag(GroundImageType.Tiled)) {
-                chunkUses[14].Add("GroundImageTopTiles");
-                chunkUses[15].Add("GroundImageBottomTiles");
-                chunkUses[16].Add("GroundImageTopTileMap");
-                chunkUses[19].Add("GroundImageBottomTileMap");
-            }
-
-            if (header.HasAnySkyBox) {
-                chunkUses[17].Add("SkyBoxImageTop");
-                chunkUses[18].Add("SkyBoxImageBottom");
-            }
-
-            if (header.BackgroundImageType.HasFlag(BackgroundImageType.Still)) {
-                chunkUses[14].Add("BackgroundImageTop");
-                chunkUses[15].Add("BackgroundImageBottom");
-            }
-
-            if (header.BackgroundImageType.HasFlag(BackgroundImageType.Tiled)) {
-                chunkUses[17].Add("ForegroundImageTopTiles");
-                chunkUses[18].Add("ForegroundImageBottomTiles");
-                chunkUses[19].Add("ForegroundImageTileMap");
-            }
-
-            if (header.HasChunk19Model)
-                chunkUses[19].Add("ExtraModel");
-
-            foreach (var cu in chunkUses) {
-                if (cu.Value.Count == 0) {
-                    if (chunkHeaders[cu.Key].Exists)
-                        errors.Add($"Image Chunk[{cu.Key}] exists, but has no flag to indicate its use! (probably {typicalUse[cu.Key]})");
-                }
-                else {
-                    var usesStr = string.Join(", ", cu.Value);
-                    if (cu.Value.Count > 1)
-                        errors.Add($"Image Chunk[{cu.Key}] has multiple uses indicated: {usesStr}");
-
-                    if (!chunkHeaders[cu.Key].Exists) {
-                        // The skybox is allowed to be missing from Scenario2 onward.
-                        if (!(usesStr.StartsWith("SkyBoxImage") && mpdFile.Scenario >= ScenarioType.Scenario2))
-                            errors.Add($"{usesStr} Chunk[{cu.Key}] is missing!");
-                    }
-                }
-            }
-
-            return errors.ToArray();
         }
     }
 }

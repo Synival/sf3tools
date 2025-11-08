@@ -18,6 +18,7 @@ using SF3.Models.Tables.MPD;
 using SF3.Types;
 using static CommonLib.Utils.ResourceUtils;
 using CommonLib.Extensions;
+using CommonLib.Types;
 
 namespace SF3.Models.Files.MPD {
     public class MPD_File : ScenarioTableFile, IMPD_File {
@@ -1002,6 +1003,58 @@ namespace SF3.Models.Files.MPD {
         public override string[] GetErrors() {
             var errors = base.GetErrors().ToList();
 
+            errors.AddRange(GetHeaderPaddingErrors());
+            errors.AddRange(GetPaletteErrors());
+            errors.AddRange(GetChunkTableErrors());
+            errors.AddRange(GetChunkTypeErrors());
+            errors.AddRange(GetModelChunkErrors());
+            errors.AddRange(GetSurfaceChunkErrors());
+            errors.AddRange(GetImageChunkErrors());
+            errors.AddRange(GetSurfaceTileErrors());
+
+            return errors.ToArray();
+        }
+
+        private string[] GetHeaderPaddingErrors() {
+            var header = MPDHeader;
+            var errors = new List<string>();
+
+            void CheckPadding(string prop, int value) {
+                if (value != 0)
+                    errors.Add($"{prop} has non-zero data: {value.ToString("X4")}");
+            }
+
+            CheckPadding(nameof(header.Padding1), header.Padding1);
+            CheckPadding(nameof(header.Padding2), header.Padding2);
+            CheckPadding(nameof(header.Padding3), header.Padding3);
+            CheckPadding(nameof(header.Padding4), header.Padding4);
+
+            return errors.ToArray();
+        }
+
+        private string[] GetPaletteErrors() {
+            var header = MPDHeader;
+            var errors = new List<string>();
+
+            // TODO: improve logic -- check for Scenario1+2, and what palettes should be present based on chunks
+            // TODO: check palette sizes
+
+            // If the disc is Scenario 3, all palettes should be present.
+            if (Scenario >= ScenarioType.Scenario3) {
+                if (PaletteTables[0] == null)
+                    errors.Add("Palette1 is required for Scenario 3 and above but it is missing");
+                if (PaletteTables[1] == null)
+                    errors.Add("Palette2 is required for Scenario 3 and above but it is missing");
+                if (PaletteTables[2] == null)
+                    errors.Add("Palette3 is required for Scenario 3 and above but it is missing");
+            }
+
+            return errors.ToArray();
+        }
+
+        private string[] GetChunkTableErrors() {
+            var errors = new List<string>();
+
             ChunkLocation[] GetIntersectingChunks(ChunkLocation loc) {
                 if (loc.ChunkRAMAddress == 0)
                     return new ChunkLocation[0];
@@ -1048,6 +1101,229 @@ namespace SF3.Models.Files.MPD {
                 var intersectingChunks = GetIntersectingChunks(chunkLoc);
                 foreach (var intersectingChunk in intersectingChunks)
                     AddChunkError($"Intersects with Chunk[{intersectingChunk.ID}]");
+            }
+
+            return errors.ToArray();
+        }
+
+        private string[] GetChunkTypeErrors() {
+            var chunkHeaders = ChunkLocations;
+            var errors = new List<string>();
+
+            // Chunk[0] and Chunk[4] should always be empty.
+            if (chunkHeaders[0].Exists)
+                errors.Add("Chunk[0] exists -- this chunk should always be empty");
+            if (chunkHeaders[4].Exists)
+                errors.Add("Chunk[4] exists -- this chunk should always be empty");
+
+            // Anything Scenario 2 or higher should have addresses for Chunk[20] and Chunk[21].
+            bool shouldHaveChunk20_21 = Scenario >= ScenarioType.Scenario2;
+            bool hasChunk20 = chunkHeaders[20].ChunkRAMAddress > 0;
+            bool hasChunk21 = chunkHeaders[21].ChunkRAMAddress > 0;
+
+            if (shouldHaveChunk20_21 != hasChunk20)
+                errors.Add("Chunk[20] error: ShouldHave=" + shouldHaveChunk20_21 + ", DoesHave=" + hasChunk20);
+            if (shouldHaveChunk20_21 != hasChunk21)
+                errors.Add("Chunk[21] errors: ShouldHave=" + shouldHaveChunk20_21 + ", DoesHave=" + hasChunk21);
+
+            // Make sure the header indicates the correct chunks.
+            var mpdHeader = MPDHeader;
+            if (mpdHeader.Chunk1IsModels && chunkHeaders[1].ChunkType != ChunkType.Models)
+                errors.Add($"Chunk[1] type should be 'Models', but is {chunkHeaders[1].ChunkType}");
+            if (mpdHeader.Chunk2IsSurfaceModel && chunkHeaders[2].ChunkType != ChunkType.SurfaceModel)
+                errors.Add($"Chunk[2] type should be 'SurfaceModel', but is {chunkHeaders[2].ChunkType}");
+            if (mpdHeader.Chunk20IsModels && chunkHeaders[20].ChunkType != ChunkType.Models)
+                errors.Add($"Chunk[20] type should be 'Models', but is {chunkHeaders[20].ChunkType}");
+            if (mpdHeader.Chunk20IsSurfaceModel && chunkHeaders[20].ChunkType != ChunkType.SurfaceModel)
+                errors.Add($"Chunk[20] type should be 'SurfaceModel', but is {chunkHeaders[20].ChunkType}");
+
+            return errors.ToArray();
+        }
+
+        private static bool? HasHighMemoryModels(ModelCollection mc) {
+            if (mc == null)
+                return null;
+            return (mc.PDatasByMemoryAddress.Values.Count == 0)
+                ? (bool?) null
+                : mc.PDatasByMemoryAddress.Values.First().RamAddress >= 0x0600_0000;
+        }
+
+        private string[] GetModelChunkErrors() {
+            var header = MPDHeader;
+            var errors = new List<string>();
+
+            var mc1  = ModelCollections.FirstOrDefault(x => x.ChunkIndex == 1);
+            var mc20 = ModelCollections.FirstOrDefault(x => x.ChunkIndex == 20);
+
+            if (mc1 != null) {
+                var expectedLmm = header.Chunk1IsLoadedFromLowMemory;
+                var expectedHmm = header.Chunk1IsLoadedFromHighMemory;
+                var actualHmm   = HasHighMemoryModels(mc1) == true;
+
+                if (expectedLmm && expectedHmm)
+                    errors.Add("Chunk[1] is somehow expected to be both in high and low memory");
+                else if (!expectedLmm && !expectedHmm)
+                    errors.Add("Chunk[1] is somehow expected to be neither in high and low memory");
+                else {
+                    if (expectedHmm && !actualHmm)
+                        errors.Add("Chunk[1] has models in low memory but they should be in high memory");
+                    else if (!expectedHmm && actualHmm)
+                        errors.Add("Chunk[1] has models in high memory but they should be in low memory");
+                }
+            }
+
+            if (mc20 != null && HasHighMemoryModels(mc20) == false)
+                errors.Add("Chunk[20] has models in low memory but they should be in high memory");
+
+            return errors.ToArray();
+        }
+
+        private string[] GetSurfaceChunkErrors() {
+            var header = MPDHeader;
+            var chunkHeaders = ChunkLocations;
+            var errors = new List<string>();
+
+            var expectedIndex = (header.Chunk20IsSurfaceModelIfExists && chunkHeaders[20].Exists) ? 20 : 2;
+            var chunk2LooksLikeSurfaceChunk  = chunkHeaders[2].Exists  && chunkHeaders[2].ChunkSize  == 0xCF00;
+            var chunk20LooksLikeSurfaceChunk = chunkHeaders[20].Exists && chunkHeaders[20].ChunkSize == 0xCF00;
+
+            if (header.HasSurfaceModel) {
+                if (SurfaceModel == null) {
+                    errors.Add("HasSurfaceModel flag is set but no surface model was created");
+                    if (chunk2LooksLikeSurfaceChunk)
+                        errors.Add($"  (Chunk[2] (expected={expectedIndex}) looks like one -- this could be an SF3Lib error)");
+                    if (chunk20LooksLikeSurfaceChunk)
+                        errors.Add($"  (Chunk[20] (expected={expectedIndex}) looks like one -- this could be an SF3Lib error)");
+                }
+                else if (SurfaceModelChunkIndex != expectedIndex)
+                    errors.Add($"(Maybe not an error?) SurfaceModel in unexpected index. Expected in Chunk[{expectedIndex}] but found at Chunk[{SurfaceModelChunkIndex}]");
+            }
+            else if (!header.HasSurfaceModel) {
+                if (header.Chunk20IsSurfaceModelIfExists)
+                    errors.Add("HasSurfaceModel flag is unset but Chunk20IsSurfaceModelIfExists flag is set");
+                if (chunk2LooksLikeSurfaceChunk)
+                    errors.Add($"HasSurfaceModel flag is unset but Chunk[2] (expected={expectedIndex}) looks like one");
+                if (chunk20LooksLikeSurfaceChunk)
+                    errors.Add($"HasSurfaceModel flag is unset but Chunk[20] (expected={expectedIndex}) looks like one");
+            }
+
+            if (chunk2LooksLikeSurfaceChunk && chunk20LooksLikeSurfaceChunk)
+                errors.Add("Only one surface chunk should be present but both Chunk[2] and Chunk[20] look like one");
+
+            return errors.ToArray();
+        }
+
+        private string[] GetImageChunkErrors() {
+            var header = MPDHeader;
+            var chunkHeaders = ChunkLocations;
+            var errors = new List<string>();
+
+            var chunkUses = new Dictionary<int, List<string>>() {
+                { 14, new List<string>() },
+                { 15, new List<string>() },
+                { 16, new List<string>() },
+                { 17, new List<string>() },
+                { 18, new List<string>() },
+                { 19, new List<string>() },
+            };
+
+            var typicalUse = new Dictionary<int, string>() {
+                { 14, "GroundImageTop[Tiles]" },
+                { 15, "GroundImageBottom[Tiles]" },
+                { 16, "GroundImageTopTileMap" },
+                { 17, "SkyBoxImageTop" },
+                { 18, "SkyBoxImageBottom" },
+                { 19, "GroundImageBottomTileMap" },
+            };
+
+            if (header.GroundImageType.HasFlag(GroundImageType.Repeated)) {
+                chunkUses[14].Add("GroundImageTop");
+                chunkUses[15].Add("GroundImageBottom");
+            }
+
+            if (header.GroundImageType.HasFlag(GroundImageType.Tiled)) {
+                chunkUses[14].Add("GroundImageTopTiles");
+                chunkUses[15].Add("GroundImageBottomTiles");
+                chunkUses[16].Add("GroundImageTopTileMap");
+                chunkUses[19].Add("GroundImageBottomTileMap");
+            }
+
+            if (header.HasAnySkyBox) {
+                chunkUses[17].Add("SkyBoxImageTop");
+                chunkUses[18].Add("SkyBoxImageBottom");
+            }
+
+            if (header.BackgroundImageType.HasFlag(BackgroundImageType.Still)) {
+                chunkUses[14].Add("BackgroundImageTop");
+                chunkUses[15].Add("BackgroundImageBottom");
+            }
+
+            if (header.BackgroundImageType.HasFlag(BackgroundImageType.Tiled)) {
+                chunkUses[17].Add("ForegroundImageTopTiles");
+                chunkUses[18].Add("ForegroundImageBottomTiles");
+                chunkUses[19].Add("ForegroundImageTileMap");
+            }
+
+            if (header.HasChunk19Model)
+                chunkUses[19].Add("ExtraModel");
+
+            foreach (var cu in chunkUses) {
+                if (cu.Value.Count == 0) {
+                    if (chunkHeaders[cu.Key].Exists)
+                        errors.Add($"Image Chunk[{cu.Key}] exists but has no flag to indicate its use (probably {typicalUse[cu.Key]})");
+                }
+                else {
+                    var usesStr = string.Join(", ", cu.Value);
+                    if (cu.Value.Count > 1)
+                        errors.Add($"Image Chunk[{cu.Key}] has multiple uses indicated: {usesStr}");
+
+                    if (!chunkHeaders[cu.Key].Exists) {
+                        // The skybox is allowed to be missing from Scenario2 onward.
+                        if (!(usesStr.StartsWith("SkyBoxImage") && Scenario >= ScenarioType.Scenario2))
+                            errors.Add($"{usesStr} Chunk[{cu.Key}] is missing");
+                    }
+                }
+            }
+
+            return errors.ToArray();
+        }
+
+        private string[] GetSurfaceTileErrors() {
+            if (SurfaceModel == null)
+                return new string[0];
+
+            var errors = new List<string>();
+            var header = MPDHeader;
+            var corners = (CornerType[]) Enum.GetValues(typeof(CornerType));
+
+            foreach (var tile in Tiles) {
+                // This *would* report irregularities in heightmaps, if the existed :)
+                var moveHeights  = corners.ToDictionary(c => c, tile.GetMoveHeightmap);
+                if (tile.ModelIsFlat) {
+                    var br = CornerType.BottomRight;
+                    foreach (var c in corners) {
+                        if (c == br)
+                            continue;
+                        if (moveHeights[c] != moveHeights[br])
+                            errors.Add("Flat tile (" + tile.X + ", " + tile.Y + ") corner '" + c.ToString() + " height doesn't match bottom-right corner height: " + moveHeights[c] + " != " + moveHeights[br]);
+                    }
+                }
+                else {
+                    var modelHeights = corners.ToDictionary(c => c, tile.GetModelVertexHeightmap);
+                    foreach (var c in corners) {
+                        if (moveHeights[c] != modelHeights[c])
+                            errors.Add("Non-flat tile (" + tile.X + ", " + tile.Y + ") corner '" + c.ToString() + " height doesn't match surface model height: " + moveHeights[c] + " != " + modelHeights[c]);
+                    }
+                }
+
+                // Report unknown or unhandled tile flags. Only Scenario 3+ has rotation flags 0x01 and 0x02.
+                var weirdTexFlags = tile.ModelTextureFlags & ~0xB0;
+                if (Scenario >= ScenarioType.Scenario3)
+                    weirdTexFlags &= ~0x03;
+                if (weirdTexFlags != 0x00)
+                    errors.Add("Tile (" + tile.X + ", " + tile.Y + ") has unhandled texture flag 0x" + weirdTexFlags.ToString("X2"));
+                if (Scenario >= ScenarioType.Scenario3 && !header.HasSurfaceTextureRotation && (tile.ModelTextureFlags & 0x03) != 0)
+                    errors.Add("HasSurfaceTextureRotation flag is off but tile (" + tile.X + ", " + tile.Y + ") has rotation flags 0x" + (weirdTexFlags & 0x03).ToString("X2"));
             }
 
             return errors.ToArray();
