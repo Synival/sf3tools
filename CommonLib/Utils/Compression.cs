@@ -116,7 +116,14 @@ namespace CommonLib.Utils {
 breakEntireLoop:
 
             wordsRead = pos - offset;
-            return outputArray.Take(outPos).ToArray();
+
+            var outputTrimmed = new ushort[outPos];
+            unsafe {
+                fixed (void* outputArrayPtr = outputArray, outputTrimmedPtr = outputTrimmed)
+                    Buffer.MemoryCopy(outputArrayPtr, outputTrimmedPtr, outPos * sizeof(ushort), outPos * sizeof(ushort));
+            }
+
+            return outputTrimmed;
         }
 
         /// <summary>
@@ -235,7 +242,13 @@ breakEntireLoop:
             currentControl |= (ushort) (1 << (15 - controlCounter));
             outputArray[controlPos] = currentControl;
 
-            return outputArray.Take(outPos).ToArray();
+            var outputTrimmed = new ushort[outPos];
+            unsafe {
+                fixed (void* outputArrayPtr = outputArray, outputTrimmedPtr = outputTrimmed)
+                    Buffer.MemoryCopy(outputArrayPtr, outputTrimmedPtr, outPos * sizeof(ushort), outPos * sizeof(ushort));
+            }
+
+            return outputTrimmed;
         }
 
         /// <summary>
