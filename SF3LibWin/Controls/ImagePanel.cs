@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
+using CommonLib.Win.Utils;
 
 namespace SF3.Win.Controls {
     public partial class ImagePanel : UserControl {
@@ -44,11 +45,21 @@ namespace SF3.Win.Controls {
         }
 
         private void btnExport_Click(object sender, EventArgs e) {
-            ExportAction?.Invoke();
+            try {
+                ExportAction?.Invoke();
+            }
+            catch (Exception ex) {
+                MessageUtils.ErrorMessage("Couldn't export image", ex);
+            }
         }
 
         private void btnImport_Click(object sender, EventArgs e) {
-            ImportAction?.Invoke();
+            try {
+                ImportAction?.Invoke();
+            }
+            catch (Exception ex) {
+                MessageUtils.ErrorMessage("Couldn't import image", ex);
+            }
         }
     }
 }
