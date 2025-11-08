@@ -419,9 +419,6 @@ namespace SF3.Models.Files.MPD {
             };
 
             chunkData.Data.RangeModified += (s, a) => {
-                if (!UpdateChunkTableOnChunkResize)
-                    return;
-
                 // If the data hasn't been modified, do nothing.
                 if (chunkLocation.ChunkSize == chunkData.Length)
                     return;
@@ -429,12 +426,16 @@ namespace SF3.Models.Files.MPD {
                 // Determine how much the next chunks should be moved by.
                 var oldNextChunkOffset = (int) (Math.Ceiling((chunkLocation.ChunkRAMAddress + chunkLocation.ChunkSize) / 4.0) * 4.0);
                 var newNextChunkOffset = (int) (Math.Ceiling((chunkLocation.ChunkRAMAddress + chunkData.Length) / 4.0) * 4.0);
-                var nextChunkOffsetDelta = newNextChunkOffset - oldNextChunkOffset;
 
                 // Set the new chunk size.
                 chunkLocation.ChunkSize = chunkData.Length;
 
+                // Don't move proceeding chunks if not requested.
+                if (!UpdateChunkTableOnChunkResize)
+                    return;
+
                 // Adjust the offset/address of every chunk after this one.
+                var nextChunkOffsetDelta = newNextChunkOffset - oldNextChunkOffset;
                 if (nextChunkOffsetDelta != 0) {
                     var thisRamAddr = chunkLocation.ChunkRAMAddress;
                     var thisIndex = chunkLocation.ID;
