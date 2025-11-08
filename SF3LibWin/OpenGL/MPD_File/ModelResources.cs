@@ -114,7 +114,7 @@ namespace SF3.Win.OpenGL.MPD_File {
                 // in their PDATAs to be semi-transparent. Yes, this is redundant to have on the *model* instead of the *PDATA*,
                 // so who knows why it works this way.
                 var modelsWith2000Tag = ApplyShadowTags ? models.ModelTable
-                    .Where(x => x.Tag == 2000)
+                    .Where(x => x.Tag >= 2000 && x.Tag < 2100)
                     .SelectMany(x => x.PDatas)
                     .Select(x => x.Value)
                     .Distinct()
@@ -122,7 +122,7 @@ namespace SF3.Win.OpenGL.MPD_File {
                     : [];
 
                 // There are some (usually) bright-red models in Scenario 3 that are removed when
-                // the 3000 tag is present. They're an eyesore, so let's remove them as well.
+                // the 3000 tag is present. They are used to crop out models so the ground texture (VDP2) is visible instead.
                 var modelsWith3000Tag = ApplyHideTags ? models.ModelTable
                     .Where(x => x.Tag == 3000)
                     .SelectMany(x => x.PDatas)
@@ -177,9 +177,10 @@ namespace SF3.Win.OpenGL.MPD_File {
                     }
 
                     // Don't render movable models; they're not placed on the map in that way.
-                    if (!models.IsMovableModelCollection && !modelsWith3000Tag.Contains(pdata.RamAddress)) {
+                    if (!models.IsMovableModelCollection) {
                         bool isForcedSemiTransparent = modelsWith2000Tag.Contains(pdata.RamAddress);
-                        CreateAndAddQuadModels(mpdFile, models.CollectionType, pdata, texturesById, animationsById, isForcedSemiTransparent);
+                        bool isHideMesh = modelsWith3000Tag.Contains(pdata.RamAddress);
+                        CreateAndAddQuadModels(mpdFile, models.CollectionType, pdata, texturesById, animationsById, isForcedSemiTransparent, isHideMesh);
                     }
                 }
             }
@@ -187,7 +188,8 @@ namespace SF3.Win.OpenGL.MPD_File {
             Models = modelsList.ToArray();
         }
 
-        public void Update(IMPD_File mpdFile, ModelCollection models, PDataModel pdata, bool forceSemiTransparent = false,
+        public void Update(IMPD_File mpdFile, ModelCollection models, PDataModel pdata,
+            bool forceSemiTransparent = false, bool isHideMesh = false,
             float rotX = 0f, float rotY = 0f, float rotZ = 0f,
             float scaleX = 1f, float scaleY = 1f, float scaleZ = 1f
         ) {
@@ -205,7 +207,7 @@ namespace SF3.Win.OpenGL.MPD_File {
             var texturesById   = GetTexturesByID(mpdFile, texCollection);
             var animationsById = GetAnimationsByID(mpdFile, texCollection);
 
-            CreateAndAddQuadModels(mpdFile, models.CollectionType, pdata, texturesById, animationsById, forceSemiTransparent);
+            CreateAndAddQuadModels(mpdFile, models.CollectionType, pdata, texturesById, animationsById, forceSemiTransparent, isHideMesh);
 
             var model = new Model(new ByteData.ByteData(new ByteArray(256)), 0, "Model", 0, true, models.CollectionType);
             model.PData0 = pdata.RamAddress;
@@ -238,7 +240,8 @@ namespace SF3.Win.OpenGL.MPD_File {
             PDataModel pdata,
             Dictionary<int, ITexture> texturesById,
             Dictionary<int, ModelAnimationInfo> animationsById,
-            bool forceSemiTransparent
+            bool forceSemiTransparent,
+            bool isHideMesh
         ) {
             TextureFlipType ToggleHorizontalFlipping(TextureFlipType flip)
                 => (flip & ~TextureFlipType.Horizontal) | (TextureFlipType) (TextureFlipType.Horizontal - (flip & TextureFlipType.Horizontal));
@@ -262,6 +265,7 @@ namespace SF3.Win.OpenGL.MPD_File {
 
             bool modelExists = false;
 
+            var hideQuads                      = new List<Quad>();
             var solidTexturedQuads             = new List<Quad>();
             var solidUntexturedQuads           = new List<Quad>();
             var semiTransparentTexturedQuads   = new List<Quad>();
@@ -271,73 +275,70 @@ namespace SF3.Win.OpenGL.MPD_File {
                 var polygon = polygons[i];
                 var attr = attrs[i];
 
-                // Get texture. Fetch animated textures if possible.
-                var textureId = attr.TextureNo;
-
-                // Get texture flipping. Manually flip them horizontally to account for the weird thing where the X coordinates are reversed.
-                var flip = (TextureFlipType) (attr.Dir & 0x0030);
-                flip = ToggleHorizontalFlipping(flip);
-
                 var color = new Vector4(1);
-
-                // Apply semi-transparency for the appropriate draw mode.
-                var transparency = 1.0f;
-
-                var drawMode = (DrawMode) ((int) attr.Mode_DrawMode & 0x03);
-                bool transparencyForced = false;
-
-                if (drawMode == DrawMode.CL_Trans || drawMode == DrawMode.CL_Shadow)
-                    transparency *= 0.5f;
-                else if (forceSemiTransparent) {
-                    transparency *= 0.5f;
-                    transparencyForced = true;
-                }
-
-                if (attr.Mode_MESHon)
-                    transparency *= 0.5f;
-
                 TextureAnimation anim = null;
+                bool isSemiTransparent = false;
+                TextureFlipType flip = TextureFlipType.NoFlip;
 
-                if (!attr.UseTexture) {
-                    var colorChannels = PixelConversion.ABGR1555toChannels(attr.ColorNo);
-                    color = new Vector4(colorChannels.r / 255.0f, colorChannels.g / 255.0f, colorChannels.b / 255.0f, 1.0f);
-                }
-                else {
-                    if (textureId != 0xFF && texturesById.ContainsKey(textureId)) {
-                        if (animationsById.ContainsKey(textureId))
-                            anim = new TextureAnimation(textureId, animationsById[textureId].Textures, animationsById[textureId].FrameTimerStart);
-                        // TODO: this isn't quite right... it should check to see if it's in the "Palette3" list
-                        else if (animationsById.ContainsKey(textureId + 0x100))
-                            anim = new TextureAnimation(textureId + 0x100, animationsById[textureId + 0x100].Textures, animationsById[textureId + 0x100].FrameTimerStart);
-                        else if (texturesById.ContainsKey(textureId))
-                            anim = new TextureAnimation(textureId, [texturesById[textureId]], 0);
-                    }
-                    // TODO: what to do for missing textures?
-                    if (anim == null)
-                        continue;
-                    else if (anim.Frames.Length > 0 && anim.Frames[0].PixelFormat == TexturePixelFormat.Palette3) {
-                        var lightAdjTransparency = mpdFile.LightAdjustment != null ? (mpdFile.LightAdjustment.Palette3Transparency & 0x1F) / (float) 0x1F : 0.5f;
-                        if (transparencyForced)
-                            transparency *= 2.0f;
+                if (!isHideMesh) {
+                    // Get texture. Fetch animated textures if possible.
+                    var textureId = attr.TextureNo;
+
+                    // Get texture flipping. Manually flip them horizontally to account for the weird thing where the X coordinates are reversed.
+                    flip = (TextureFlipType) (attr.Dir & 0x0030);
+                    flip = ToggleHorizontalFlipping(flip);
+
+                    // Apply semi-transparency for the appropriate draw mode.
+                    var transparency = 1.0f;
+
+                    var drawMode = (DrawMode) ((int) attr.Mode_DrawMode & 0x03);
+
+                    if (drawMode == DrawMode.CL_Trans || drawMode == DrawMode.CL_Shadow)
+                        transparency *= 0.5f;
+                    else if (forceSemiTransparent) {
+                        var lightAdjTransparency = (mpdFile.LightAdjustment?.HasShadowTransparency == true)
+                            ? (mpdFile.LightAdjustment.ShadowTransparency & 0x1F) / (float) 0x1F
+                            : 0.5f;
                         transparency *= 1.0f - lightAdjTransparency;
                     }
-                }
+                    if (attr.Mode_MESHon)
+                        transparency *= 0.5f;
 
-                // If forcing semi-transparency, and there aren't any already-indexed textures, force color to black.
-                // (This isn't how this actually works, but this is fine for display.)
-                if (forceSemiTransparent && (anim == null || anim.Frames.All(x => x.BytesPerPixel == 2)))
-                    color[0] = color[1] = color[2] = 0.0f;
+                    if (!attr.UseTexture) {
+                        var colorChannels = PixelConversion.ABGR1555toChannels(attr.ColorNo);
+                        color = new Vector4(colorChannels.r / 255.0f, colorChannels.g / 255.0f, colorChannels.b / 255.0f, 1.0f);
+                    }
+                    else {
+                        if (textureId != 0xFF && texturesById.ContainsKey(textureId)) {
+                            if (animationsById.ContainsKey(textureId))
+                                anim = new TextureAnimation(textureId, animationsById[textureId].Textures, animationsById[textureId].FrameTimerStart);
+                            // TODO: this isn't quite right... it should check to see if it's in the "Palette3" list
+                            else if (animationsById.ContainsKey(textureId + 0x100))
+                                anim = new TextureAnimation(textureId + 0x100, animationsById[textureId + 0x100].Textures, animationsById[textureId + 0x100].FrameTimerStart);
+                            else if (texturesById.ContainsKey(textureId))
+                                anim = new TextureAnimation(textureId, [texturesById[textureId]], 0);
+                        }
+                        // TODO: what to do for missing textures?
+                        if (anim == null)
+                            continue;
+                    }
 
-                color[3] *= transparency;
-                bool isSemiTransparent = color[3] < 0.99f;
-                if (!isSemiTransparent && color[3] < 1.00f)
-                    color[3] = 1.00f;
+                    // If forcing semi-transparency, and there aren't any already-indexed textures, force color to black.
+                    // (This isn't how this actually works, but this is fine for display.)
+                    if (forceSemiTransparent && (anim == null || anim.Frames.All(x => x.BytesPerPixel == 2)))
+                        color[0] = color[1] = color[2] = 0.0f;
 
-                // "Half" draw mode darkens textures by 50%.
-                if (drawMode == DrawMode.CL_Half) {
-                    color[0] *= 0.5f;
-                    color[1] *= 0.5f;
-                    color[2] *= 0.5f;
+                    color[3] *= transparency;
+                    isSemiTransparent = color[3] < 0.99f;
+                    if (!isSemiTransparent && color[3] < 1.00f)
+                        color[3] = 1.00f;
+
+                    // "Half" draw mode darkens textures by 50%.
+                    if (drawMode == DrawMode.CL_Half) {
+                        color[0] *= 0.5f;
+                        color[1] *= 0.5f;
+                        color[2] *= 0.5f;
+                    }
                 }
 
                 VECTOR[] polyVertexModels = [
@@ -361,20 +362,24 @@ namespace SF3.Win.OpenGL.MPD_File {
 
                 void AddQuad() {
                     var newQuad = new Quad(polyVertices, anim, TextureRotateType.NoRotation, flip, color);
-                    newQuad.AddAttribute(new PolyAttribute(1, ActiveAttribType.FloatVec3, "normal", 4, normalVboData));
-                    newQuad.AddAttribute(new PolyAttribute(1, ActiveAttribType.Float, "applyLighting", 4, applyLightingVboData));
 
-                    if (isSemiTransparent) {
-                        if (anim != null)
-                            semiTransparentTexturedQuads.Add(newQuad);
-                        else
-                            semiTransparentUntexturedQuads.Add(newQuad);
-                    }
+                    if (isHideMesh)
+                        hideQuads.Add(newQuad);
                     else {
-                        if (anim != null)
-                            solidTexturedQuads.Add(newQuad);
-                        else
-                            solidUntexturedQuads.Add(newQuad);
+                        newQuad.AddAttribute(new PolyAttribute(1, ActiveAttribType.FloatVec3, "normal", 4, normalVboData));
+                        newQuad.AddAttribute(new PolyAttribute(1, ActiveAttribType.Float, "applyLighting", 4, applyLightingVboData));
+                        if (isSemiTransparent) {
+                            if (anim != null)
+                                semiTransparentTexturedQuads.Add(newQuad);
+                            else
+                                semiTransparentUntexturedQuads.Add(newQuad);
+                        }
+                        else {
+                            if (anim != null)
+                                solidTexturedQuads.Add(newQuad);
+                            else
+                                solidUntexturedQuads.Add(newQuad);
+                        }
                     }
                 }
 
@@ -402,8 +407,9 @@ namespace SF3.Win.OpenGL.MPD_File {
                 modelExists = true;
             }
 
-            var solidTexturedModel             = (solidTexturedQuads.Count > 0)             ? new QuadModel(solidTexturedQuads.ToArray())              : null;
-            var solidUntexturedModel           = (solidUntexturedQuads.Count > 0)           ? new QuadModel(solidUntexturedQuads.ToArray())            : null;
+            var hideModel                      = (hideQuads.Count > 0)                      ? new QuadModel(hideQuads.ToArray())                   : null;
+            var solidTexturedModel             = (solidTexturedQuads.Count > 0)             ? new QuadModel(solidTexturedQuads.ToArray())             : null;
+            var solidUntexturedModel           = (solidUntexturedQuads.Count > 0)           ? new QuadModel(solidUntexturedQuads.ToArray())           : null;
             var semiTransparentTexturedModel   = (semiTransparentTexturedQuads.Count > 0)   ? new QuadModel(semiTransparentTexturedQuads.ToArray())   : null;
             var semiTransparentUntexturedModel = (semiTransparentUntexturedQuads.Count > 0) ? new QuadModel(semiTransparentUntexturedQuads.ToArray()) : null;
 
@@ -412,7 +418,8 @@ namespace SF3.Win.OpenGL.MPD_File {
                     solidTexturedModel,
                     solidUntexturedModel,
                     semiTransparentTexturedModel,
-                    semiTransparentUntexturedModel
+                    semiTransparentUntexturedModel,
+                    hideModel
                 );
             }
         }

@@ -27,7 +27,7 @@ namespace SF3.Models.Structs.MPD {
 
         public ScenarioType Scenario { get; }
         public bool HasGroundAdjust => Scenario >= ScenarioType.Scenario3;
-        public bool HasPalette3Transparency => Scenario >= ScenarioType.Scenario3;
+        public bool HasShadowTransparency => Scenario >= ScenarioType.Scenario3;
 
         [BulkCopy]
         [TableViewModelColumn(addressField: nameof(_rAdjustAddr), displayOrder: 0, displayName: "R +/-")]
@@ -81,11 +81,11 @@ namespace SF3.Models.Structs.MPD {
         }
 
         [BulkCopy]
-        [TableViewModelColumn(addressField: nameof(_palette3TransparencyAddr), displayOrder: 6, displayFormat: "X2", displayName: "Palette3 Transparency (Scn3+)", visibilityProperty: nameof(HasPalette3Transparency))]
-        public ushort Palette3Transparency {
-            get => HasPalette3Transparency ? (ushort) Data.GetWord(_palette3TransparencyAddr) : (ushort) 0;
+        [TableViewModelColumn(addressField: nameof(_palette3TransparencyAddr), displayOrder: 6, displayFormat: "X2", displayName: "Shadow Transparency (Scn3+)", visibilityProperty: nameof(HasShadowTransparency))]
+        public ushort ShadowTransparency {
+            get => HasShadowTransparency ? (ushort) Data.GetWord(_palette3TransparencyAddr) : (ushort) 0;
             set {
-                if (HasPalette3Transparency)
+                if (HasShadowTransparency)
                     Data.SetWord(_palette3TransparencyAddr, value);
             }
         }

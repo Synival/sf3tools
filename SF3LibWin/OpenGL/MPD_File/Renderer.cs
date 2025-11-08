@@ -405,6 +405,7 @@ namespace SF3.Win.OpenGL.MPD_File {
             general.ObjectShader.UpdateUniform(ShaderUniformType.SmoothLighting, options.SmoothLighting);
 
             var lightingTexture = lighting.LightingTexture ?? general.WhiteTexture;
+            bool usedSolidShader = false;
 
             using (general.TransparentBlackTexture.Use(MPD_TextureUnit.TextureTerrainTypes))
             using (general.TransparentBlackTexture.Use(MPD_TextureUnit.TextureEventIDs))
@@ -415,19 +416,33 @@ namespace SF3.Win.OpenGL.MPD_File {
                     .Where(x => x.ModelGroup != null)
                     .Where(x => {
                         var direction = x.Model.OnlyVisibleFromDirection;
-                        return direction == SF3.Types.ModelDirectionType.Unset || modelDirectionsFacingCamera[(int) direction];
+                        return direction == ModelDirectionType.Unset || modelDirectionsFacingCamera[(int) direction];
                     })
                     .Where(x => options.ModelsToHide?.Contains(x.Model.ID) != true)
                     .ToArray();
 
                 if (!transparentPass) {
-                    // Pass 1: Textured models
+                    // Pass 1: Stencil
+                    var modelsWithStencils = modelsWithGroups.Where(x => x.ModelGroup.HideModel != null).ToArray();
+                    if (modelsWithStencils.Length > 0) {
+                        usedSolidShader = true;
+                        GL.ColorMask(false, false, false, false);
+                        using (general.SolidShader.Use()) {
+                            foreach (var mwg in modelsWithStencils) {
+                                SetModelAndNormalMatricesForModel(models, mwg.Model, general.SolidShader, options, cameraYaw, cameraPitch);
+                                mwg.ModelGroup.HideModel.Draw(general.SolidShader, null);
+                            }
+                        }
+                        GL.ColorMask(true, true, true, true);
+                    }
+
+                    // Pass 2: Textured models
                     foreach (var mwg in modelsWithGroups.Where(x => x.ModelGroup.SolidTexturedModel != null).ToArray()) {
                         SetModelAndNormalMatricesForModel(models, mwg.Model, general.ObjectShader, options, cameraYaw, cameraPitch);
                         mwg.ModelGroup.SolidTexturedModel.Draw(general.ObjectShader);
                     }
 
-                    // Pass 2: Untextured models
+                    // Pass 3: Untextured models
                     using (general.WhiteTexture.Use(MPD_TextureUnit.TextureAtlas)) {
                         foreach (var mwg in modelsWithGroups.Where(x => x.ModelGroup.SolidUntexturedModel != null).ToArray()) {
                             SetModelAndNormalMatricesForModel(models, mwg.Model, general.ObjectShader, options, cameraYaw, cameraPitch);
@@ -461,6 +476,11 @@ namespace SF3.Win.OpenGL.MPD_File {
             // Reset model matrices to their identity.
             general.ObjectShader.UpdateUniform(ShaderUniformType.ModelMatrix, Matrix4.Identity);
             general.ObjectShader.UpdateUniform(ShaderUniformType.NormalMatrix, Matrix3.Identity);
+
+            if (usedSolidShader) {
+                general.SolidShader.UpdateUniform(ShaderUniformType.ModelMatrix, Matrix4.Identity);
+                general.SolidShader.UpdateUniform(ShaderUniformType.NormalMatrix, Matrix3.Identity);
+            }
         }
 
         public void DrawSceneSurfaceModel(

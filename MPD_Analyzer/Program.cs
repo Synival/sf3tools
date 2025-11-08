@@ -56,20 +56,17 @@ namespace MPD_Analyzer {
         };
 
         private static string[] MPD_MatchFunc(IMPD_File mpdFile, string filename) {
-            return new string[0];
-#if false
             List<string> matchReports = new List<string>();
 
-            foreach (var msg in mpdFile.ModelSwitchGroupsTable) {
-                if (msg.Flag >= 0x2C0 && msg.Flag <= 0x2CF)
+            foreach (var mc in mpdFile.ModelCollections) {
+                if (mc?.ModelTable == null)
                     continue;
-
-                var flagName = mpdFile.NameGetterContext.GetName(null, null, msg.Flag, [NamedValueType.GameFlag]) ?? "";
-                matchReports.Add("0x" + msg.ID.ToString("X2") + " | " + "Flag 0x" + msg.Flag.ToString("X3") + " " + flagName);
+                foreach (var model in mc.ModelTable)
+                    if (model.Tag == 3000)
+                        matchReports.Add($"{mc.Name}: Model 0x{model.ID:X2}.Tag = {model.Tag}");
             }
 
             return matchReports.ToArray();
-#endif
         }
 
         public static void Main(string[] args) {
@@ -170,7 +167,7 @@ namespace MPD_Analyzer {
                                 }
                             }
 
-                            ScanForErrorsAndReport(scenario, mpdFile);
+                            //ScanForErrorsAndReport(scenario, mpdFile);
                         }
                     }
                     catch (Exception e) {

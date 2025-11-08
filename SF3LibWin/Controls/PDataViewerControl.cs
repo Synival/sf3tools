@@ -184,7 +184,8 @@ namespace SF3.Win.Controls {
             if (_models != null) {
                 _models.Reset();
                 if (MPD_File != null && Models != null && _pdata != null) {
-                    _models.Update(MPD_File, Models, _pdata, forceSemiTransparent: false, rotX, rotY, rotZ, scaleX, scaleY, scaleZ);
+                    _models.Update(MPD_File, Models, _pdata, forceSemiTransparent: false, isHideMesh: false,
+                        rotX, rotY, rotZ, scaleX, scaleY, scaleZ);
 
                     if (_models.VerticesByAddressByCollection[Models.CollectionType]?.TryGetValue(_pdata.VerticesOffset, out var vertices) == true) {
                         var verticesMatrix =

@@ -309,13 +309,13 @@ namespace SF3.Win {
         public event EventHandler ViewerApplyShadowTagsChanged;
 
         /// <summary>
-        /// When enabled, model instances with "tags" 3000 are hidden.
+        /// When enabled, model instances with "tags" 3000 are rendered in a way that blocks models behind them.
         /// </summary>
         public bool ViewerApplyHideTags {
             get => _viewerApplyHideTags;
             set => SetValue(ref _viewerApplyHideTags, value, ViewerApplyHideTagsChanged);
         }
-        private bool _viewerApplyHideTags = false;
+        private bool _viewerApplyHideTags = true;
         public event EventHandler ViewerApplyHideTagsChanged;
 
         /// <summary>
