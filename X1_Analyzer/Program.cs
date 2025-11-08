@@ -21,15 +21,14 @@ namespace X1_Analyzer {
         private static List<int> s_allAiTags = [];
         private static List<int> s_allAiTypes = [];
         private static List<int> s_allAiAggrs = [];
-        private static List<string> s_matchReports = [];
 
         /// <summary>
         /// Check for matching X1 files for certain conditions.
         /// </summary>
         /// <param name="x1File"></param>
-        /// <returns>'null' if this file should be skipped, 'true' if it matches our criteria, 'false' if not.</returns>
-        private static bool? X1_Match_Func(string filename, IX1_File x1File) {
-            // Sample: Skip non-battles, and match non-battles with scripted movements.
+        /// <returns>'null' if this file should be skipped, otherwise a list of results/reports that, if a match was found, will be non-empty.
+        private static string[] X1_Match_Func(string filename, IX1_File x1File) {
+            var matchReports = new List<string>();
 
             var ramOffset = (x1File.Scenario == ScenarioType.Scenario1) ? 0x0605f000 : 0x0605e000;
 
@@ -116,13 +115,13 @@ namespace X1_Analyzer {
                     var type = enemy.AITypes[i];
 
                     if (tag >= 0x32 && tag < 0x80)
-                        s_matchReports.Add($"Tag=Location | Type={type:X2} | Func AI[{i}] | {enemyStr}");
+                        matchReports.Add($"Tag=Location | Type={type:X2} | Func AI[{i}] | {enemyStr}");
                     else if (tag >= 0x80 && tag < 0xC0)
-                        s_matchReports.Add($"Tag=Enemy    | Type={type:X2} | Func AI[{i}] | {enemyStr}");
+                        matchReports.Add($"Tag=Enemy    | Type={type:X2} | Func AI[{i}] | {enemyStr}");
                     else if (tag >= 0xC0 && tag < 0xFF)
-                        s_matchReports.Add($"Tag=Path     | Type={type:X2} | Func AI[{i}] | {enemyStr}");
+                        matchReports.Add($"Tag=Path     | Type={type:X2} | Func AI[{i}] | {enemyStr}");
                     else
-                        s_matchReports.Add($"Tag=0x{tag:X2}     | Type={type:X2} | Func AI[{i}] | {enemyStr}");
+                        matchReports.Add($"Tag=0x{tag:X2}     | Type={type:X2} | Func AI[{i}] | {enemyStr}");
                 }
             }
 #elif false
@@ -142,7 +141,7 @@ namespace X1_Analyzer {
                     var flagStr  = $"{flagName.PadLeft(60)} (0x{enemy.FlagTieInOrUnknown:X3})";
                     var itemStr  = $"{itemName} (0x{enemy.ItemOverride:X2})";
 
-                    s_matchReports.Add(
+                    matchReports.Add(
                         enemy.EnemyFlags.ToString("X4") + " | " +
                         BitString(enemy.EnemyFlags) + " | " +
                         flagStr + " | " +
@@ -169,7 +168,7 @@ namespace X1_Analyzer {
 
                 var charName = x1File.NameGetterContext.GetName(null, null, i.TriggerTargetID, [NamedValueType.Character]);
 
-                s_matchReports.Add("Event | " + interactableStr + " | " + i.TriggerDescription.PadRight(60) + " | " + flagStr + " | " + itemStr);
+                matchReports.Add("Event | " + interactableStr + " | " + i.TriggerDescription.PadRight(60) + " | " + flagStr + " | " + itemStr);
             }
 
             // Match Warps with unknown flags
@@ -184,7 +183,7 @@ namespace X1_Analyzer {
                     continue;
 
                 var flagStr = $"Flag (0x{i.IfFlagUnset:X3} == False)";
-                s_matchReports.Add(" Warp | " + warpStr + " | " + flagStr);
+                matchReports.Add(" Warp | " + warpStr + " | " + flagStr);
             }
 
             // Match enemies with unknown flags
@@ -204,7 +203,7 @@ namespace X1_Analyzer {
                     var flagStr  = $"Flag (0x{enemy.FlagOrBattleID:X3})";
                     var itemStr  = $"{itemName} (0x{enemy.ItemOverride:X2})";
 
-                    s_matchReports.Add(
+                    matchReports.Add(
                         "Enemy | " +
                         enemy.EnemyFlags.ToString("X4") + " | " +
                         BitString(enemy.EnemyFlags) + " | " +
@@ -216,7 +215,7 @@ namespace X1_Analyzer {
             }
 #endif
 
-            return s_matchReports.Count > 0 ? true : null;
+            return matchReports.ToArray();
         }
 
         public static void Main(string[] args) {
@@ -248,22 +247,19 @@ namespace X1_Analyzer {
                     try {
                         var isBTL99 = filename == "X1BTL99";
                         using (var x1File = X1_File.Create(byteData, nameGetterContexts[scenario], scenario, isBTL99)) {
-                            var match = X1_Match_Func(filename, x1File);
+                            var matchReports = X1_Match_Func(filename, x1File);
 
                             // If the match is 'null', that means we're just skipping this file completely.
-                            if (match == null) {
-                                s_matchReports.Clear();
+                            if (matchReports == null)
                                 continue;
-                            }
 
                             // List the file and any report we may have from X1_Match_Func().
                             var fileStr = GetFileString(scenario, file, x1File);
                             Console.WriteLine(fileStr + " | ");
-                            foreach (var mr in s_matchReports)
+                            foreach (var mr in matchReports)
                                 Console.WriteLine("    " + mr);
-                            s_matchReports.Clear();
 
-                            if (match == true)
+                            if (matchReports.Length > 0)
                                 matchSet.Add(fileStr);
                             else
                                 nomatchSet.Add(fileStr);

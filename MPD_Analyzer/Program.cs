@@ -55,6 +55,20 @@ namespace MPD_Analyzer {
             ]}
         };
 
+        private static string[] MPD_MatchFunc(IMPD_File mpdFile, string filename) {
+            List<string> matchReports = new List<string>();
+
+            foreach (var msg in mpdFile.ModelSwitchGroupsTable) {
+                if (msg.Flag >= 0x2C0 && msg.Flag <= 0x2CF)
+                    continue;
+
+                var flagName = mpdFile.NameGetterContext.GetName(null, null, msg.Flag, [NamedValueType.GameFlag]) ?? "";
+                matchReports.Add("0x" + msg.ID.ToString("X2") + " | " + "Flag 0x" + msg.Flag.ToString("X3") + " " + flagName);
+            }
+
+            return matchReports.ToArray();
+        }
+
         public static void Main(string[] args) {
             // Get a list of all .MPD files from all scenarios located at 'c_pathsIn[Scenario]'.
             var allFiles = Enum.GetValues<ScenarioType>()
@@ -105,21 +119,16 @@ namespace MPD_Analyzer {
                             var mapFlags = mpdFile.MPDHeader.MapFlags;
 
                             // Condition for match checks here
-                            var reports = new List<string>();
-                            foreach (var msg in mpdFile.ModelSwitchGroupsTable) {
-                                if (msg.Flag >= 0x2C0 && msg.Flag <= 0x2CF)
-                                    continue;
+                            var matchReports = MPD_MatchFunc(mpdFile, filename);
+                            if (matchReports == null)
+                                continue;
 
-                                var flagName = mpdFile.NameGetterContext.GetName(null, null, msg.Flag, [NamedValueType.GameFlag]) ?? "";
-                                reports.Add(filename.PadLeft(8) + " | 0x" + msg.ID.ToString("X2") + " | Flag 0x" + msg.Flag.ToString("X3") + " " + flagName);
-                            }
-                            bool match = reports.Count > 0;
-
+                            bool match = matchReports.Length > 0;
                             var fileStr = GetFileString(scenario, file, mpdFile);
                             Console.WriteLine(fileStr + " | " + (match ? "Match  " : "NoMatch"));
-                            if (reports.Count > 0) {
-                                foreach (var r in reports)
-                                    Console.WriteLine("    " + r);
+                            if (matchReports.Length > 0) {
+                                foreach (var r in matchReports)
+                                    Console.WriteLine("    " + filename.PadLeft(8) + " | " + r);
                                 Console.WriteLine();
                             }
 
@@ -296,6 +305,7 @@ namespace MPD_Analyzer {
             totalErrors.AddRange(ScanForModelErrors(mpdFile));
             totalErrors.AddRange(ScanForSurfaceModelErrors(mpdFile));
             totalErrors.AddRange(ScanForImageChunkErrors(mpdFile));
+            totalErrors.AddRange(mpdFile.GetErrors());
 
             foreach (var error in totalErrors)
                 Console.WriteLine("    !!! " + error);
