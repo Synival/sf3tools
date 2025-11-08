@@ -9,6 +9,8 @@ using static CommonLib.Utils.BlockHelpers;
 
 namespace SF3.Models.Files.MPD {
     public class Tile {
+        private static int[,] s_tileSeeds = null;
+
         public Tile(IMPD_File mpdFile, int x, int y) {
             MPD_File = mpdFile;
             X = x;
@@ -19,12 +21,23 @@ namespace SF3.Models.Files.MPD {
             SharedBlockVertexLocations = ((CornerType[]) Enum.GetValues(typeof(CornerType)))
                 .ToDictionary(c => c, c => GetVertexBlockLocations(X, Y, c, false));
 
-            var seed = 2166136261;
-            seed += (uint) x;
-            seed *= 16777619;
-            seed += (uint) y;
-            seed *= 16777619;
-            RandomSeed = (int) seed;
+            if (s_tileSeeds == null)
+                GenerateTileSeeds();
+            RandomSeed = s_tileSeeds[x, y];
+        }
+
+        private static void GenerateTileSeeds() {
+            s_tileSeeds = new int[64, 64];
+            for (int x = 0; x < 64; x++) {
+                for (int y = 0; y < 64; y++) {
+                    var seed = 2166136261;
+                    seed += (uint) x;
+                    seed *= 16777619;
+                    seed += (uint) y;
+                    seed *= 16777619;
+                    s_tileSeeds[x, y] = (int) seed;
+                }
+            }
         }
 
         private void TriggerNeighborTileModified(int offsetX, int offsetY) {

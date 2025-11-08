@@ -56,11 +56,12 @@ namespace CommonLib.Imaging {
         }
 
         public static PixelChannels IndexedToChannels(byte input, Palette palette, bool zeroIsTransparent) {
+            var color = palette[input];
             return new PixelChannels {
                 a = (byte) ((zeroIsTransparent && input == 0) ? 0 : 255),
-                r = palette[input].r,
-                g = palette[input].g,
-                b = palette[input].b
+                r = color.r,
+                g = color.g,
+                b = color.b
             };
         }
 

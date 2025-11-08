@@ -670,30 +670,52 @@ namespace SF3.Models.Files.MPD {
             var tileCount = tileCountX * tileCountY;
             var outputImage = new byte[tileSize * blockCountX * 8, (int) Math.Ceiling(tileSize * blockCountYf) * 8];
 
-            var tile = 0;
-            foreach (var tileMap in tileMaps) {
-                var data = tileMap.GetDataCopy();
-                for (var dataPos = 0; dataPos < data.Length - 1; dataPos += 2, tile++) {
-                    var high = data[dataPos];
-                    var low = data[dataPos + 1];
+            // Precalculations for tile lookups
+            var tileInputX = new int[tileCount];
+            var tileInputY = new int[tileCount];
+            int pos = 0;
+            for (int y = 0; y < tileCountY; y++) {
+                for (int x = 0; x < tileCountX; x++) {
+                    tileInputX[pos]   = x * 8;
+                    tileInputY[pos++] = y * 8;
+                }
+            }
 
-                    var tileIndex = ((high << 8) + low) / 2;
+            int blockXMax = blockCountX * tileSize;
+            int tile = 0, tileInBlock = 0, blockX = 0, blockY = 0, tileInBlockX = 0, tileInBlockY = 0;
+            foreach (var tileMap in tileMaps) {
+                var data = tileMap.Data.GetDataCopyOrReference();
+                for (var dataPos = 0; dataPos < data.Length - 1; tile++, tileInBlock++, tileInBlockX++) {
+                    // Reset some tile locations when we've reached the end of a block.
+                    if (tileInBlock == tilesPerBlock) {
+                        tileInBlock = 0;
+                        tileInBlockX = 0;
+                        tileInBlockY = 0;
+
+                        // Move ahead one block, wrapping when blockXMax is reached.
+                        blockX += tileSize;
+                        if (blockX == blockXMax) {
+                            blockX = 0;
+                            blockY += tileSize;
+                        }
+                    }
+                    // Make sure that tileInBlockX wraps.
+                    else if (tileInBlockX == tileSize) {
+                        tileInBlockX = 0;
+                        tileInBlockY++;
+                    }
+
+                    var tileIndex = ((data[dataPos++] << 8) + data[dataPos++]) / 2;
                     if (tileIndex >= tileCount) {
-                        System.Diagnostics.Debug.WriteLine($"{dataPos:X4}: {tileIndex} ({high}, {low})");
+                        System.Diagnostics.Debug.WriteLine($"{dataPos:X4}: {tileIndex}");
                         continue;
                     }
 
-                    // TODO: refactor this to reduce all these calculations!!
-                    var inputX = (tileIndex % tileCountX) * 8;
-                    var inputY = (tileIndex / tileCountX) * 8;
+                    var inputX = tileInputX[tileIndex];
+                    var inputY = tileInputY[tileIndex];
 
-                    var blockIndex = tile / tilesPerBlock;
-                    var blockX = blockIndex % blockCountX;
-                    var blockY = blockIndex / blockCountX;
-
-                    var tileInBlock = tile % tilesPerBlock;
-                    var outputX = ((tileInBlock % tileSize) + (blockX * tileSize)) * 8;
-                    var outputY = ((tileInBlock / tileSize) + (blockY * tileSize)) * 8;
+                    var outputX = (tileInBlockX + blockX) * 8;
+                    var outputY = (tileInBlockY + blockY) * 8;
 
                     for (int y = 0; y < 8; y++)
                         for (int x = 0; x < 8; x++)
