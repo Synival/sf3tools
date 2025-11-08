@@ -44,7 +44,9 @@ namespace SF3.Win.Views {
             var heights = Datas.Select(x => x.Length / width).ToArray();
 
             var bitmapHeight = heights.Sum() * Palettes.Length;
-            var bitmapData = new byte[width * bitmapHeight * 4];
+            var pixelFormat = (Palettes.Length == 1) ? PixelFormat.Format8bppIndexed : PixelFormat.Format32bppArgb;
+            var bpp         = (Palettes.Length == 1) ? 1 : 4;
+            var bitmapData = new byte[width * bitmapHeight * bpp];
 
             var pos = 0;
             foreach (var palette in Palettes) {
@@ -71,18 +73,24 @@ namespace SF3.Win.Views {
                             throw new InvalidOperationException($"Unhandled {nameof(ViewMode)}: {ViewMode}");
                     }
 
-                    var paletteBitmapData = BitmapUtils.ConvertIndexedDataToARGB8888BitmapData(imageData, palette, false);
+                    var paletteBitmapData = (bpp == 4)
+                        ? BitmapUtils.ConvertIndexedDataToARGB8888BitmapData(imageData, palette, false)
+                        : imageData.To1DArrayTransposed();
+
                     paletteBitmapData.CopyTo(bitmapData, pos);
-                    pos += width * height * 4;
+                    pos += width * height * bpp;
                 }
             }
 
-            var bitmap = new Bitmap(width, bitmapHeight, PixelFormat.Format32bppArgb);
+            var bitmap = new Bitmap(width, bitmapHeight, pixelFormat);
             unsafe {
                 var bitmapLock = bitmap.LockBits(new Rectangle(0, 0, width, bitmapHeight), ImageLockMode.WriteOnly, bitmap.PixelFormat);
                 Marshal.Copy(bitmapData, 0, bitmapLock.Scan0, bitmapData.Length);
                 bitmap.UnlockBits(bitmapLock);
             }
+
+            if (pixelFormat == PixelFormat.Format8bppIndexed)
+                bitmap.UsePalette(Palettes[0]);
 
             Image = bitmap;
         }

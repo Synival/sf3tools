@@ -167,5 +167,16 @@ namespace CommonLib.Extensions {
 
             return outputData;
         }
+
+        public static void UsePalette(this Bitmap bitmap, Palette palette) {
+            var outputPalette = bitmap.Palette;
+            var palLen = Math.Min(256, palette.Channels.Length);
+
+            for (int i = 0; i < palLen; ++i) {
+                var inputColor = palette[i];
+                outputPalette.Entries[i] = Color.FromArgb(inputColor.r, inputColor.g, inputColor.b);
+            }
+            bitmap.Palette = outputPalette;
+        }
     }
 }
