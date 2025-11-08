@@ -417,6 +417,17 @@ namespace SF3.Win {
         private bool _autoRebuildMPDChunkTableOnSave = true;
         public event EventHandler AutoRebuildMPDChunkTableOnSaveChanged;
 
+        /// <summary>
+        /// When enabled, if a file contains known errors when it is loaded, a warning dialog will appear with a list of the errors.
+        /// won't be completely rebuilt.
+        /// </summary>
+        public bool ShowErrorsOnFileLoad {
+            get => _showErrorsOnFileLoad;
+            set => SetValue(ref _showErrorsOnFileLoad, value, ShowErrorsOnFileLoadChanged);
+        }
+        private bool _showErrorsOnFileLoad = true;
+        public event EventHandler ShowErrorsOnFileLoadChanged;
+
         public struct RecentFile {
             public string Filename { get; set; }
             public ScenarioType Scenario { get; set; }

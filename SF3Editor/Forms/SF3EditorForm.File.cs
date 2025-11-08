@@ -173,6 +173,17 @@ namespace SF3.Editor.Forms {
                 _appState.Serialize();
             }
 
+            // Report any known errors in the file.
+            if (_appState.ShowErrorsOnFileLoad) {
+                var errors = loadedFile?.Loader?.Model?.GetErrors() ?? new string[0];
+                if (errors.Length > 0)
+                    WarningMessage(
+                        "Warning: File contains known errors:\r\n\r\n" +
+                        string.Join("\r\n", errors.Select(x => "- " + x).ToArray()) + "\r\n\r\n" +
+                        "To disable these error messages, disable setting at:\r\n" +
+                        "   Settings -> Show Errors when Loading File");
+            }
+
             return loadedFile;
         }
 
@@ -363,6 +374,7 @@ namespace SF3.Editor.Forms {
             tsmiFile_CloseAll.Enabled     = hasFile;
             tsmiFile_SwapToPrev.Enabled   = hasFile;
             tsmiFile_SwapToNext.Enabled   = hasFile;
+            tsmiFile_ScanForErrors.Enabled = hasFile;
 
             tsmiTools_ApplyDFR.Enabled    = hasFile;
             tsmiTools_CreateDFR.Enabled   = hasFile;
@@ -571,5 +583,16 @@ namespace SF3.Editor.Forms {
             => OpenRecentFile(9);
 
         private void tsmiFile_Exit_Click(object sender, EventArgs e) => Close();
+
+
+        private void tsmiFile_ScanForErrors_Click(object sender, EventArgs e) {
+            if (SelectedFile != null) {
+                var errors = SelectedFile?.Loader?.Model?.GetErrors() ?? new string[0];
+                if (errors.Length == 0)
+                    InfoMessage("File has no known errors");
+                else
+                    InfoMessage($"File contains {errors.Length} known error(s):\r\n\r\n" + string.Join("\r\n", errors.Select(x => "- " + x).ToArray()));
+            }
+        }
     }
 }
