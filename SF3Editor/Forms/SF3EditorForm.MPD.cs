@@ -7,6 +7,7 @@ using System.Windows.Forms;
 using CommonLib.Extensions;
 using CommonLib.Logging;
 using CommonLib.Types;
+using CommonLib.Win;
 using Microsoft.WindowsAPICodePack.Dialogs;
 using SF3.Models.Files.MPD;
 using SF3.Models.Structs.MPD;
@@ -239,12 +240,14 @@ namespace SF3.Editor.Forms {
 
         private void tsmiMPD_Chunks_RecompressModifiedChunks_Click(object sender, EventArgs e) {
             if (SelectedFile?.FileType == SF3FileType.MPD)
-                ((IMPD_File) SelectedFile.Loader.Model).RecompressChunks(onlyModified: true);
+                using (new CursorWait())
+                    ((IMPD_File) SelectedFile.Loader.Model).RecompressChunks(onlyModified: true);
         }
 
         private void tsmiMPD_Chunks_RecompressAllChunks_Click(object sender, EventArgs e) {
             if (SelectedFile?.FileType == SF3FileType.MPD)
-                ((IMPD_File) SelectedFile.Loader.Model).RecompressChunks(onlyModified: false);
+                using (new CursorWait())
+                    ((IMPD_File) SelectedFile.Loader.Model).RecompressChunks(onlyModified: false);
         }
 
         private void tsmiMPD_Chunks_RebuildChunkTable_Click(object sender, EventArgs e) {

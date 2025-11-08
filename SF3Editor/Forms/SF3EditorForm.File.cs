@@ -11,6 +11,7 @@ using SF3.Models.Files.MPD;
 using SF3.Models.Files;
 using CommonLib.Logging;
 using SF3.Win.ModelLoader;
+using CommonLib.Win;
 
 namespace SF3.Editor.Forms {
     public partial class SF3EditorForm {
@@ -92,6 +93,8 @@ namespace SF3.Editor.Forms {
         /// <param name="stream">Stream from which the input data comes.</param>
         /// <returns>A record for the file loaded, or 'null' on failure/cancel.</returns>
         public LoadedFile? LoadFile(string filename, ScenarioType scenario, SF3FileType fileType, Stream stream, bool addToRecentFiles) {
+            using (new CursorWait()) {
+
             // Attempt to the load the file.
             var fileLoader = new InteractiveModelFileLoader();
 
@@ -189,6 +192,8 @@ namespace SF3.Editor.Forms {
             }
 
             return loadedFile;
+
+            } // using new CursorWait()
         }
 
         /// <summary>
@@ -207,8 +212,9 @@ namespace SF3.Editor.Forms {
         /// <returns>'true' if a file was saved successfully. Otherwise, 'false'.</returns>
         public bool SaveFile(LoadedFile file, string filename, bool addToRecentFiles) {
             try {
-                if (!file.Loader.SaveFile(filename))
-                    return false;
+                using (new CursorWait())
+                    if (!file.Loader.SaveFile(filename))
+                        return false;
             }
             catch (Exception ex) {
                 Logger.LogException(ex);
