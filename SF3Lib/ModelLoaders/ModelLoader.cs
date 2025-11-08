@@ -66,8 +66,12 @@ namespace SF3.ModelLoaders {
 
             if (!Model.Finish())
                 return false;
+            if (!OnFinished())
+                return false;
+
             if (!saveAction())
                 return false;
+
             IsModified = false;
             if (IsModified == true)
                 return false;
@@ -204,6 +208,12 @@ namespace SF3.ModelLoaders {
                 ByteData = null;
             }
         }
+
+        /// <summary>
+        /// Perfoms on action on the loaded model after finishing but before performing the save action.
+        /// </summary>
+        /// <returns>Returns 'false' if saving should be aborted for any reason. Otherwise returns 'true'.</returns>
+        protected virtual bool OnFinished() => true;
 
         public event EventHandler IsLoadedChanged;
         public event EventHandler PreLoaded;

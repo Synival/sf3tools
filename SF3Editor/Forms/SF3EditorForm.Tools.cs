@@ -9,9 +9,8 @@ using CommonLib.NamedValues;
 using CommonLib.Types;
 using DFRLib.Types;
 using DFRLib.Win.Forms;
-using SF3.ModelLoaders;
 using SF3.Models.Files;
-using SF3.Types;
+using SF3.Win.ModelLoader;
 using static CommonLib.Win.Utils.MessageUtils;
 using static SF3.Utils.FileUtils;
 
@@ -97,11 +96,9 @@ namespace SF3.Editor.Forms {
 
             ObjectExtensions.BulkCopyPropertiesResult result = null;
             try {
-                var copyModelLoader = new ModelFileLoader();
-                if (!copyModelLoader.LoadFile(copyToFilename, null, (byteData) => CreateFile(byteData, fileType, c_nameGetterContexts, scenario))) {
-                    ErrorMessage("Error trying to load file. It is probably in use by another process.");
+                var copyModelLoader = new InteractiveModelFileLoader();
+                if (!copyModelLoader.LoadFile(copyToFilename, null, (byteData) => CreateFile(byteData, fileType, c_nameGetterContexts, scenario)))
                     return;
-                }
 
                 result = file.Loader.Model.BulkCopyProperties(copyModelLoader.Model);
                 if (!copyModelLoader.SaveFile(copyToFilename)) {
@@ -140,11 +137,10 @@ namespace SF3.Editor.Forms {
 
             ObjectExtensions.BulkCopyPropertiesResult result = null;
             try {
-                var copyModelLoader = new ModelFileLoader();
-                if (!copyModelLoader.LoadFile(copyFromFilename, null, (byteData) => CreateFile(byteData, fileType, c_nameGetterContexts, scenario))) {
-                    ErrorMessage("Error trying to load file. It is probably in use by another process.");
+                var copyModelLoader = new InteractiveModelFileLoader();
+                if (!copyModelLoader.LoadFile(copyFromFilename, null, (byteData) => CreateFile(byteData, fileType, c_nameGetterContexts, scenario)))
                     return;
-                }
+
                 result = copyModelLoader.Model.BulkCopyProperties(file.Loader.Model);
             }
             catch (Exception e) {

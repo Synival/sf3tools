@@ -5,12 +5,12 @@ using SF3.Types;
 using static SF3.Utils.FileUtils;
 using static CommonLib.Win.Utils.MessageUtils;
 using System.IO;
-using SF3.ModelLoaders;
 using SF3.Win.Views;
 using SF3.Win;
 using SF3.Models.Files.MPD;
 using SF3.Models.Files;
 using CommonLib.Logging;
+using SF3.Win.ModelLoader;
 
 namespace SF3.Editor.Forms {
     public partial class SF3EditorForm {
@@ -93,7 +93,7 @@ namespace SF3.Editor.Forms {
         /// <returns>A record for the file loaded, or 'null' on failure/cancel.</returns>
         public LoadedFile? LoadFile(string filename, ScenarioType scenario, SF3FileType fileType, Stream stream, bool addToRecentFiles) {
             // Attempt to the load the file.
-            var fileLoader = new ModelFileLoader();
+            var fileLoader = new InteractiveModelFileLoader();
 
             try {
                 if (!fileLoader.LoadFile(filename, GetFileDialogFilterForFileType(fileType), stream,
