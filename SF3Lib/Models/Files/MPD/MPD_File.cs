@@ -1003,6 +1003,10 @@ namespace SF3.Models.Files.MPD {
         public override string[] GetErrors() {
             var errors = base.GetErrors().ToList();
 
+            foreach (var chunk in ChunkData)
+                if (chunk?.NeedsRecompression == true)
+                    errors.Add($"Chunk[{chunk.Index}] must be recompressed");
+
             errors.AddRange(GetHeaderPaddingErrors());
             errors.AddRange(GetPaletteErrors());
             errors.AddRange(GetChunkTableErrors());
