@@ -118,6 +118,7 @@ namespace SF3.Editor.Forms {
             tsmiSettings_MPD_ImprovedNormalCalculations = new System.Windows.Forms.ToolStripMenuItem();
             tsmiSettings_MPD_UseFullHeightForNormals = new System.Windows.Forms.ToolStripMenuItem();
             tsmiSettings_MPD_FixNormalOverflowUnderflowErrors = new System.Windows.Forms.ToolStripMenuItem();
+            tsmiSettings_MPD_UpdateChunkTableOnChunkResize = new System.Windows.Forms.ToolStripMenuItem();
             tsmiSettings_MPD_AutoRebuildMPDChunkTable = new System.Windows.Forms.ToolStripMenuItem();
             tsmiHelp = new System.Windows.Forms.ToolStripMenuItem();
             tsmiHelp_About = new System.Windows.Forms.ToolStripMenuItem();
@@ -751,7 +752,7 @@ namespace SF3.Editor.Forms {
             // 
             // tsmiSettings_MPD
             // 
-            tsmiSettings_MPD.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { tsmiSettings_MPD_ImprovedNormalCalculations, tsmiSettings_MPD_UseFullHeightForNormals, tsmiSettings_MPD_FixNormalOverflowUnderflowErrors, tsmiSettings_MPD_AutoRebuildMPDChunkTable });
+            tsmiSettings_MPD.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { tsmiSettings_MPD_ImprovedNormalCalculations, tsmiSettings_MPD_UseFullHeightForNormals, tsmiSettings_MPD_FixNormalOverflowUnderflowErrors, tsmiSettings_MPD_UpdateChunkTableOnChunkResize, tsmiSettings_MPD_AutoRebuildMPDChunkTable });
             tsmiSettings_MPD.Name = "tsmiSettings_MPD";
             tsmiSettings_MPD.Size = new Size(265, 22);
             tsmiSettings_MPD.Text = "&MPD";
@@ -777,11 +778,18 @@ namespace SF3.Editor.Forms {
             tsmiSettings_MPD_FixNormalOverflowUnderflowErrors.Text = "Fix Surface Map Tile Normal Overflow/Underflow Errors";
             tsmiSettings_MPD_FixNormalOverflowUnderflowErrors.Click += tsmiSettings_MPD_FixNormalOverflowUnderflowErrors_Click;
             // 
+            // tsmiSettings_MPD_UpdateChunkTableOnChunkResize
+            // 
+            tsmiSettings_MPD_UpdateChunkTableOnChunkResize.Name = "tsmiSettings_MPD_UpdateChunkTableOnChunkResize";
+            tsmiSettings_MPD_UpdateChunkTableOnChunkResize.Size = new Size(454, 22);
+            tsmiSettings_MPD_UpdateChunkTableOnChunkResize.Text = "Update Chunk Table on Chunk Resize";
+            tsmiSettings_MPD_UpdateChunkTableOnChunkResize.Click += tsmiSettings_MPD_UpdateChunkTableOnChunkResize_Click;
+            // 
             // tsmiSettings_MPD_AutoRebuildMPDChunkTable
             // 
             tsmiSettings_MPD_AutoRebuildMPDChunkTable.Name = "tsmiSettings_MPD_AutoRebuildMPDChunkTable";
             tsmiSettings_MPD_AutoRebuildMPDChunkTable.Size = new Size(454, 22);
-            tsmiSettings_MPD_AutoRebuildMPDChunkTable.Text = "Automatically Rebuild Chunk Table on Save";
+            tsmiSettings_MPD_AutoRebuildMPDChunkTable.Text = "Rebuild Chunk Table on Save";
             tsmiSettings_MPD_AutoRebuildMPDChunkTable.Click += tsmiSettings_MPD_AutoRebuildMPDChunkTable_Click;
             // 
             // tsmiHelp
@@ -911,5 +919,6 @@ namespace SF3.Editor.Forms {
         private System.Windows.Forms.ToolStripMenuItem tsmiSettings_HighlightEndCodes;
         private System.Windows.Forms.ToolStripMenuItem tsmiSettings_MPD_AutoRebuildMPDChunkTable;
         private System.Windows.Forms.ToolStripMenuItem tsmiMPD_Chunks_RecompressAllChunks;
+        private System.Windows.Forms.ToolStripMenuItem tsmiSettings_MPD_UpdateChunkTableOnChunkResize;
     }
 }

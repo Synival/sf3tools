@@ -418,6 +418,9 @@ namespace SF3.Models.Files.MPD {
             };
 
             chunkData.Data.RangeModified += (s, a) => {
+                if (!UpdateChunkTableOnChunkResize)
+                    return;
+
                 // If the data hasn't been modified, do nothing.
                 if (chunkLocation.ChunkSize == chunkData.Length)
                     return;
@@ -1349,6 +1352,7 @@ namespace SF3.Models.Files.MPD {
 
         public EventHandler ModelsUpdated { get; set; }
 
+        public static bool UpdateChunkTableOnChunkResize { get; set; } = true;
         public static bool RebuildChunkTableOnFinish { get; set; } = true;
     }
 }

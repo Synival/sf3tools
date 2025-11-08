@@ -396,15 +396,26 @@ namespace SF3.Win {
         public event EventHandler FixSurfaceMapTileNormalOverflowUnderflowErrorsChanged;
 
         /// <summary>
+        /// When enabled, if a chunk in an MPD is resized, it will automatically update the chunk table, updating the chunk's own size
+        /// as well as moving the positions of the chunks after it. Also applies to exporting, importing, or moving chunks.
+        /// </summary>
+        public bool AutoUpdateMPDChunkTableOnChunkResize {
+            get => _autoUpdateMPDChunkTableOnChunkResize;
+            set => SetValue(ref _autoUpdateMPDChunkTableOnChunkResize, value, AutoUpdateMPDChunkTableOnChunkResizeChanged);
+        }
+        private bool _autoUpdateMPDChunkTableOnChunkResize = true;
+        public event EventHandler AutoUpdateMPDChunkTableOnChunkResizeChanged;
+
+        /// <summary>
         /// When enabled, when an MPD is saved (i.e., Finish() is ran before writing the bytes out to a stream), the chunk table
         /// won't be completely rebuilt.
         /// </summary>
-        public bool AutoRebuildMPDChunkTable {
-            get => _autoRebuildMPDChunkTable;
-            set => SetValue(ref _autoRebuildMPDChunkTable, value, AutoRebuildMPDChunkTableChanged);
+        public bool AutoRebuildMPDChunkTableOnSave {
+            get => _autoRebuildMPDChunkTableOnSave;
+            set => SetValue(ref _autoRebuildMPDChunkTableOnSave, value, AutoRebuildMPDChunkTableOnSaveChanged);
         }
-        private bool _autoRebuildMPDChunkTable = true;
-        public event EventHandler AutoRebuildMPDChunkTableChanged;
+        private bool _autoRebuildMPDChunkTableOnSave = true;
+        public event EventHandler AutoRebuildMPDChunkTableOnSaveChanged;
 
         public struct RecentFile {
             public string Filename { get; set; }
