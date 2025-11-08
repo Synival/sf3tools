@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Windows.Forms;
@@ -31,28 +32,51 @@ namespace SF3.Win.Views {
             return rval;
         }
 
-        public void ExportTextureDialog() {
-            SaveFileDialog dialog = new SaveFileDialog();
+        public void ExportImageDialog() {
+            if (Image == null)
+                throw new Exception("No image to expot");
+
+            var dialog = new SaveFileDialog();
             dialog.Filter = "Images|*.png;*.bmp;*.gif;*.jpg;*.jpeg;*.tiff";
 
-            if (dialog.ShowDialog() == DialogResult.OK) {
-                string filename = dialog.FileName;
-                ImageFormat format = ImageFormat.Png;
-                switch (Path.GetExtension(dialog.FileName).ToLower())
-                {
-                    case ".bmp":               format = ImageFormat.Bmp; break;
-                    case ".gif":               format = ImageFormat.Gif; break;
-                    case ".jpg": case ".jpeg": format = ImageFormat.Jpeg; break;
-                    case ".png":               format = ImageFormat.Png; break;
-                    case ".tif": case ".tiff": format = ImageFormat.Tiff; break;
-                }
+            if (dialog.ShowDialog() != DialogResult.OK)
+                return;
 
-                SaveImage(dialog.FileName, format);
+            SaveImage(dialog.FileName, GetImageFormatFromFilename(dialog.FileName));
+        }
+
+        public void ImportImageDialog() {
+            var dialog = new OpenFileDialog();
+            dialog.Filter = "Images|*.png;*.bmp;*.gif;*.jpg;*.jpeg;*.tiff";
+
+            if (dialog.ShowDialog() != DialogResult.OK)
+                return;
+
+            LoadImage(dialog.FileName);
+        }
+
+        private ImageFormat GetImageFormatFromFilename(string filename) {
+            switch (Path.GetExtension(filename).ToLower())
+            {
+                case ".bmp":               return ImageFormat.Bmp;
+                case ".gif":               return ImageFormat.Gif;
+                case ".jpg": case ".jpeg": return ImageFormat.Jpeg;
+                case ".png":               return ImageFormat.Png;
+                case ".tif": case ".tiff": return ImageFormat.Tiff;
+                default:                   return ImageFormat.Png;
             }
         }
 
         public virtual void SaveImage(string filename, ImageFormat format)
             => Image.Save(filename, format);
+
+        public virtual void LoadImage(string filename) {
+            var image = Image.FromFile(filename);
+            OnLoadImage(image, filename);
+        }
+
+        protected virtual void OnLoadImage(Image image, string filename)
+        { }
 
         public override void RefreshContent() {
             if (!IsCreated)
@@ -71,7 +95,7 @@ namespace SF3.Win.Views {
                     _image = value;
                     if (Control != null) {
                         Control.Image = value;
-                        Control.ExportAction = ExportTextureDialog;
+                        Control.ExportAction = ExportImageDialog;
                     }
                     else
                         Control.ExportAction = null;

@@ -41,7 +41,7 @@
             // 
             // btnExport
             // 
-            btnExport.Location = new System.Drawing.Point(4, 0);
+            btnExport.Location = new System.Drawing.Point(74, 0);
             btnExport.Name = "btnExport";
             btnExport.Size = new System.Drawing.Size(64, 23);
             btnExport.TabIndex = 1;
@@ -51,7 +51,7 @@
             // 
             // btnImport
             // 
-            btnImport.Location = new System.Drawing.Point(74, 0);
+            btnImport.Location = new System.Drawing.Point(4, 0);
             btnImport.Name = "btnImport";
             btnImport.Size = new System.Drawing.Size(64, 23);
             btnImport.TabIndex = 2;
