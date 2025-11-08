@@ -2,7 +2,6 @@ using System;
 using System.IO;
 using CommonLib.Arrays;
 using SF3.ByteData;
-using SF3.Exceptions;
 using SF3.Models.Files;
 
 namespace SF3.ModelLoaders {
@@ -33,7 +32,7 @@ namespace SF3.ModelLoaders {
 
         public bool SaveFile(string filename) {
             if (!IsLoaded)
-                throw new ModelFileLoaderNotLoadedException();
+                throw new Exception("Nothing is loaded");
             return PerformSave(() => {
                 File.WriteAllBytes(filename, ByteData.Data.GetDataCopyOrReference());
                 Filename = filename;

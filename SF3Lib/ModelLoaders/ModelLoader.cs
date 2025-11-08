@@ -53,8 +53,14 @@ namespace SF3.ModelLoaders {
         /// <param name="saveAction">The function to save the model when possible.</param>
         /// <returns>'true' if saveAction was invokvd and returned success.</returns>
         protected bool PerformSave(Func<bool> saveAction) {
-            if (saveAction == null || ByteData == null || Model == null || !IsLoaded)
-                return false;
+            if (saveAction == null)
+                throw new Exception("No save action");
+            if (!IsLoaded)
+                throw new Exception("Not loaded");
+            if (ByteData == null)
+                throw new Exception("No data to save");
+            if (Model == null)
+                throw new Exception("No model is save");
 
             PreSaved?.Invoke(this, EventArgs.Empty);
 
