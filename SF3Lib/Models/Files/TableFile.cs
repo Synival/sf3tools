@@ -20,6 +20,10 @@ namespace SF3.Models.Files {
             Data.IsModifiedChanged += (s, e) => IsModifiedChanged?.Invoke(this, EventArgs.Empty);
         }
 
+        public virtual string[] GetErrors() {
+            return new string[0];
+        }
+
         private int _isModifiedGuard = 0;
 
         public virtual bool IsModified {

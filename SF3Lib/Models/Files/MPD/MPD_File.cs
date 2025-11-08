@@ -999,6 +999,60 @@ namespace SF3.Models.Files.MPD {
             }
         }
 
+        public override string[] GetErrors() {
+            var errors = base.GetErrors().ToList();
+
+            ChunkLocation[] GetIntersectingChunks(ChunkLocation loc) {
+                if (loc.ChunkRAMAddress == 0)
+                    return new ChunkLocation[0];
+
+                var loc1Start = loc.ChunkRAMAddress;
+                var loc1Stop = loc.ChunkRAMAddress + loc.ChunkSize;
+
+                var locations = new List<ChunkLocation>();
+                foreach (var loc2 in ChunkLocations) {
+                    if (loc2 == loc || loc2.ChunkRAMAddress == 0)
+                        continue;
+
+                    var loc2Start = loc2.ChunkRAMAddress;
+                    var loc2Stop = loc2.ChunkRAMAddress + loc2.ChunkSize;
+
+                    var intersects = (loc1Start < loc2Stop) && (loc1Stop > loc2Start);
+                    if (intersects)
+                        locations.Add(loc2);
+                }
+
+                return locations.ToArray();
+            };
+
+            foreach (var chunkLoc in ChunkLocations) {
+                var chunk = ChunkData[chunkLoc.ID];
+
+                void AddChunkError(string error)
+                    => errors.Add($"Chunk[{chunkLoc.ID}]: {error}");
+
+                if (chunkLoc.ChunkRAMAddress == 0 && chunk != null)
+                    AddChunkError($"RAM address in table is 0 but has chunk data (size = 0x{chunk.Length:X4})");
+                if (chunkLoc.ChunkRAMAddress == 0 && chunkLoc.ChunkSize != 0)
+                    AddChunkError($"RAM address in table is 0 but has size in table (0x{chunkLoc.ChunkSize:X4})");
+                if (chunkLoc.ChunkRAMAddress > 0 && chunkLoc.ChunkRAMAddress < c_RamAddress + 0x2100)
+                    AddChunkError($"RAM address in table is invalid value (0x{chunkLoc.ChunkRAMAddress:X6})");
+
+                if (chunkLoc.ChunkSize == 0 && chunk != null)
+                    AddChunkError($"Size in table is 0 but has chunk data (size = 0x{chunk.Length:X4})");
+                if (chunkLoc.ChunkSize != 0 && chunk == null)
+                    AddChunkError($"Size in table is non-zero (0x{chunkLoc.ChunkSize:X4}) but has no chunk data");
+                if (chunkLoc.ChunkSize != 0 && chunk != null && chunk.Length != chunkLoc.ChunkSize)
+                    AddChunkError($"Size in table (0x{chunkLoc.ChunkSize:X4}) does not match chunk data size (0x{chunk.Length:X4})");
+
+                var intersectingChunks = GetIntersectingChunks(chunkLoc);
+                foreach (var intersectingChunk in intersectingChunks)
+                    AddChunkError($"Intersects with Chunk[{intersectingChunk.ID}]");
+            }
+
+            return errors.ToArray();
+        }
+
         public override bool OnFinish() {
             // Recompress any chunk waiting for it.
             RecompressChunks(onlyModified: true);

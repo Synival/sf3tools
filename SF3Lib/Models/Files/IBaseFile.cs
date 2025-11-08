@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using CommonLib.NamedValues;
 
 namespace SF3.Models.Files {
@@ -6,6 +7,12 @@ namespace SF3.Models.Files {
     /// Any kind of file.
     /// </summary>
     public interface IBaseFile : IModifiable, IDisposable {
+        /// <summary>
+        /// Gets any errors or mistakes that may be present in the file.
+        /// </summary>
+        /// <returns>An array of errors or mistakes in the file.</returns>
+        string[] GetErrors();
+
         /// <summary>
         /// Perform any extra tasks that need to be performed before saving.
         /// </summary>
