@@ -17,6 +17,7 @@ namespace SF3.Editor.Forms {
             tsmiSettings_MPD_AutoRebuildMPDChunkTable.Checked         = _appState.AutoRebuildMPDChunkTableOnSave;
 
             StatGrowthStatistics.DebugGrowthValues = _appState.EnableDebugSettings;
+            MPD_File.UpdateChunkTableOnChunkResize = _appState.AutoUpdateMPDChunkTableOnChunkResize;
             MPD_File.RebuildChunkTableOnFinish     = _appState.AutoRebuildMPDChunkTableOnSave;
 
             _appState.UseDropdownsForNamedValuesChanged += (s, e)
