@@ -1,5 +1,7 @@
+using System;
 using System.IO;
-using static SF3.ModelLoaders.ModelFileLoaderDelegates;
+using SF3.ByteData;
+using SF3.Models.Files;
 
 namespace SF3.ModelLoaders {
     /// <summary>
@@ -13,7 +15,7 @@ namespace SF3.ModelLoaders {
         /// <param name="fileDialogFilter">The filter used for saving the dialog or looking for similar files.</param>
         /// <param name="createModel">Callback to create a model once after creating the byte data.</param>
         /// <returns>'true' on success, 'false' on failure.</returns>
-        bool LoadFile(string filename, string fileDialogFilter, ModelFileLoaderCreateModelDelegate createModel);
+        bool LoadFile(string filename, string fileDialogFilter, Func<IByteData, IBaseFile> createModel);
 
         /// <summary>
         /// Loads a stream of binary data for editing. Invokes events 'PreLoaded' and 'Loaded'.
@@ -23,7 +25,7 @@ namespace SF3.ModelLoaders {
         /// <param name="stream">The data stream to load.</param>
         /// <param name="createModel">Callback to create a model once after creating the byte data.</param>
         /// <returns>'true' on success, 'false' on failure.</returns>
-        bool LoadFile(string filename, string fileDialogFilter, Stream stream, ModelFileLoaderCreateModelDelegate createModel);
+        bool LoadFile(string filename, string fileDialogFilter, Stream stream, Func<IByteData, IBaseFile> createModel);
 
         /// <summary>
         /// Saves a file's binary data for editing. Invokes events 'PreSaved' and 'Saved'.

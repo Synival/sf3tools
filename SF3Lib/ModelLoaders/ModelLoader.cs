@@ -1,12 +1,11 @@
 ﻿using System;
 using CommonLib;
-using CommonLib.Logging;
 using SF3.ByteData;
 using SF3.Models.Files;
 
 namespace SF3.ModelLoaders {
-    public abstract class BaseModelLoader : IModelLoader {
-        protected BaseModelLoader() {
+    public abstract class ModelLoader : IModelLoader {
+        protected ModelLoader() {
             _title = UnloadedTitle;
             _onModifiedChangedDelegate = new EventHandler((o, e) => {
                 IsModifiedChanged?.Invoke(this, EventArgs.Empty);
@@ -16,45 +15,35 @@ namespace SF3.ModelLoaders {
 
         private readonly EventHandler _onModifiedChangedDelegate;
 
-        public delegate IByteData BaseModelLoaderCreateByteDataDelegate(IModelLoader loader);
-        public delegate IBaseFile BaseModelLoaderCreateModelDelegate(IModelLoader loader);
-        public delegate bool BaseModelLoaderSaveDelegate(IModelLoader loader);
-
         /// <summary>
         /// Performs loading of a model provided. Invokes events 'PreLoaded' and 'Loaded'.
-        /// Complete ownership of 'model' is transferred to the BaseModelLoader when this is invoked.
+        /// Complete ownership of 'model' is transferred to the ModelLoader when this is invoked.
         /// If the model could not be used, it is immediately disposed of via Dispose().
         /// If the model is already loaded, this will return 'false'.
         /// </summary>
         /// <param name="createModel">Callback to create an model when possible.</param>
         /// <returns>'true' a new model was loaded and successfully created. Otherwise, 'false'.</returns>
-        protected bool PerformLoad(BaseModelLoaderCreateByteDataDelegate createByteData, BaseModelLoaderCreateModelDelegate createModel) {
+        protected bool PerformLoad(Func<IByteData> createByteData, Func<IBaseFile> createModel) {
             if (createByteData == null || createModel == null || IsLoaded)
                 return false;
 
-            try {
-                PreLoaded?.Invoke(this, EventArgs.Empty);
+            PreLoaded?.Invoke(this, EventArgs.Empty);
 
-                if ((ByteData = createByteData(this)) == null)
-                    return false;
-                if ((Model = createModel(this)) == null) {
-                    ByteData = null;
-                    return false;
-                }
-
-                Model.IsModifiedChanged += _onModifiedChangedDelegate;
-
-                Loaded?.Invoke(this, EventArgs.Empty);
-                if (!IsLoaded)
-                    return false;
-
-                IsLoadedChanged?.Invoke(this, EventArgs.Empty);
-                return true;
-            }
-            catch (Exception ex) {
-                Logger.LogException(ex);
+            if ((ByteData = createByteData()) == null)
+                return false;
+            if ((Model = createModel()) == null) {
+                ByteData = null;
                 return false;
             }
+
+            Model.IsModifiedChanged += _onModifiedChangedDelegate;
+
+            Loaded?.Invoke(this, EventArgs.Empty);
+            if (!IsLoaded)
+                return false;
+
+            IsLoadedChanged?.Invoke(this, EventArgs.Empty);
+            return true;
         }
 
         /// <summary>
@@ -63,28 +52,22 @@ namespace SF3.ModelLoaders {
         /// </summary>
         /// <param name="saveAction">The function to save the model when possible.</param>
         /// <returns>'true' if saveAction was invokvd and returned success.</returns>
-        protected bool PerformSave(BaseModelLoaderSaveDelegate saveAction) {
+        protected bool PerformSave(Func<bool> saveAction) {
             if (saveAction == null || ByteData == null || Model == null || !IsLoaded)
                 return false;
 
-            try {
-                PreSaved?.Invoke(this, EventArgs.Empty);
+            PreSaved?.Invoke(this, EventArgs.Empty);
 
-                if (!Model.Finish())
-                    return false;
-                if (!saveAction(this))
-                    return false;
-                IsModified = false;
-                if (IsModified == true)
-                    return false;
-
-                Saved?.Invoke(this, EventArgs.Empty);
-                return true;
-            }
-            catch (Exception ex) {
-                Logger.LogException(ex);
+            if (!Model.Finish())
                 return false;
-            }
+            if (!saveAction())
+                return false;
+            IsModified = false;
+            if (IsModified == true)
+                return false;
+
+            Saved?.Invoke(this, EventArgs.Empty);
+            return true;
         }
 
         private IBaseFile _model = null;
@@ -182,31 +165,25 @@ namespace SF3.ModelLoaders {
             if (!IsLoaded)
                 return true;
 
-            try {
-                PreClosed?.Invoke(this, EventArgs.Empty);
+            PreClosed?.Invoke(this, EventArgs.Empty);
 
-                if (!OnClose())
-                    return !IsLoaded;
+            if (!OnClose())
+                return !IsLoaded;
 
-                if (Model != null)
-                    Model.IsModifiedChanged -= _onModifiedChangedDelegate;
+            if (Model != null)
+                Model.IsModifiedChanged -= _onModifiedChangedDelegate;
 
-                Model = null;
-                ByteData = null;
+            Model = null;
+            ByteData = null;
 
-                Closed?.Invoke(this, EventArgs.Empty);
+            Closed?.Invoke(this, EventArgs.Empty);
 
-                // TODO: Shouldn't ever be possible... Maybe throw/assert here?
-                if (IsLoaded)
-                    return false;
-
-                IsLoadedChanged?.Invoke(this, EventArgs.Empty);
-                return true;
-            }
-            catch (Exception ex) {
-                Logger.LogException(ex);
+            // TODO: Shouldn't ever be possible... Maybe throw/assert here?
+            if (IsLoaded)
                 return false;
-            }
+
+            IsLoadedChanged?.Invoke(this, EventArgs.Empty);
+            return true;
         }
 
         public virtual void Dispose() {

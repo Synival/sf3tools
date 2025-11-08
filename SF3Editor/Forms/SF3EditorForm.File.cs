@@ -10,6 +10,7 @@ using SF3.Win.Views;
 using SF3.Win;
 using SF3.Models.Files.MPD;
 using SF3.Models.Files;
+using CommonLib.Logging;
 
 namespace SF3.Editor.Forms {
     public partial class SF3EditorForm {
@@ -93,15 +94,18 @@ namespace SF3.Editor.Forms {
         public LoadedFile? LoadFile(string filename, ScenarioType scenario, SF3FileType fileType, Stream stream, bool addToRecentFiles) {
             // Attempt to the load the file.
             var fileLoader = new ModelFileLoader();
-            bool success = fileLoader.LoadFile(filename, GetFileDialogFilterForFileType(fileType), stream,
-                loader => CreateFile(loader.ByteData, fileType, c_nameGetterContexts, scenario));
 
-            if (!success) {
-                // TODO: maybe an actual error???
-                // Wrong file was selected.
-                ErrorMessage($"Data in '{filename}' appears corrupt or invalid.\r\n\r\n" +
-                             $"Attempted to open as type '{fileType}' for '{scenario}'.\r\n\r\n" +
-                              "Is this the correct type of file and the correct scenario?");
+            try {
+                if (!fileLoader.LoadFile(filename, GetFileDialogFilterForFileType(fileType), stream,
+                    (byteData) => CreateFile(byteData, fileType, c_nameGetterContexts, scenario)))
+                {
+                    fileLoader.Close();
+                    return null;
+                }
+            }
+            catch (Exception ex) {
+                Logger.LogException(ex);
+                ErrorMessage($"Couldn't load '{filename}'. Have you selected the right scenario?\r\n\r\nException", ex);
                 fileLoader.Close();
                 return null;
             }
@@ -202,19 +206,13 @@ namespace SF3.Editor.Forms {
         /// <param name="filename">The filename to save the file as.</param>
         /// <returns>'true' if a file was saved successfully. Otherwise, 'false'.</returns>
         public bool SaveFile(LoadedFile file, string filename, bool addToRecentFiles) {
-            string? error = null;
             try {
-                if (!file.Loader.SaveFile(filename)) {
-                    // TODO: Actually get an error from SaveFile()!
-                    error = $"Error while saving '{filename}'";
-                }
+                if (!file.Loader.SaveFile(filename))
+                    return false;
             }
-            catch (Exception e) {
-                error = $"{e.GetType().Name} exception while saving '{filename}' with message:\r\n{e.Message}";
-            }
-
-            if (error != null) {
-                ErrorMessage(error);
+            catch (Exception ex) {
+                Logger.LogException(ex);
+                ErrorMessage($"Couldn't save '{filename}'", ex);
                 return false;
             }
 

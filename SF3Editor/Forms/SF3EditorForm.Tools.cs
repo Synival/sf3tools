@@ -98,7 +98,7 @@ namespace SF3.Editor.Forms {
             ObjectExtensions.BulkCopyPropertiesResult result = null;
             try {
                 var copyModelLoader = new ModelFileLoader();
-                if (!copyModelLoader.LoadFile(copyToFilename, null, loader => CreateFile(loader.ByteData, fileType, c_nameGetterContexts, scenario))) {
+                if (!copyModelLoader.LoadFile(copyToFilename, null, (byteData) => CreateFile(byteData, fileType, c_nameGetterContexts, scenario))) {
                     ErrorMessage("Error trying to load file. It is probably in use by another process.");
                     return;
                 }
@@ -141,7 +141,7 @@ namespace SF3.Editor.Forms {
             ObjectExtensions.BulkCopyPropertiesResult result = null;
             try {
                 var copyModelLoader = new ModelFileLoader();
-                if (!copyModelLoader.LoadFile(copyFromFilename, null, loader => CreateFile(loader.ByteData, fileType, c_nameGetterContexts, scenario))) {
+                if (!copyModelLoader.LoadFile(copyFromFilename, null, (byteData) => CreateFile(byteData, fileType, c_nameGetterContexts, scenario))) {
                     ErrorMessage("Error trying to load file. It is probably in use by another process.");
                     return;
                 }

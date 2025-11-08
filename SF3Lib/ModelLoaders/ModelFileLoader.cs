@@ -1,82 +1,54 @@
 using System;
 using System.IO;
 using CommonLib.Arrays;
-using CommonLib.Logging;
+using SF3.ByteData;
 using SF3.Exceptions;
-using static SF3.ModelLoaders.ModelFileLoaderDelegates;
+using SF3.Models.Files;
 
 namespace SF3.ModelLoaders {
     /// <summary>
     /// Used for loading, saving, reading, and modifying .BIN files.
     /// </summary>
-    public partial class ModelFileLoader : BaseModelLoader, IModelFileLoader {
-        public ModelFileLoader() {
-            _createByteData = (IModelFileLoader loader, string filename, string fileDialogFilter, Stream stream) => {
-                byte[] newData;
-                using (var memoryStream = new MemoryStream()) {
-                    stream.CopyTo(memoryStream);
-                    newData = memoryStream.ToArray();
-                }
-                return new ByteData.ByteData(new ByteArray(newData));
-            };
+    public class ModelFileLoader : ModelLoader, IModelFileLoader {
+        public ModelFileLoader() {}
+
+        public bool LoadFile(string filename, string fileDialogFilter, Func<IByteData, IBaseFile> createModel) {
+            using (var stream = new FileStream(filename, FileMode.Open, FileAccess.Read))
+                return LoadFile(filename, fileDialogFilter, stream, createModel);
         }
 
-        public ModelFileLoader(ModelFileLoaderCreateByteDataDelegate createByteData) {
-            _createByteData = createByteData;
-        }
-
-        public virtual bool LoadFile(string filename, string fileDialogFilter, ModelFileLoaderCreateModelDelegate createModel) {
-            try {
-                using (var stream = new FileStream(filename, FileMode.Open, FileAccess.Read))
-                    return LoadFile(filename, fileDialogFilter, stream, createModel);
-            }
-            catch (Exception) {
-                return false;
-            }
-        }
-
-        public virtual bool LoadFile(string filename, string fileDialogFilter, Stream stream, ModelFileLoaderCreateModelDelegate createModel) {
-            return PerformLoad(e => {
-                try {
-                    var newData = _createByteData(this, filename, fileDialogFilter, stream);
+        public bool LoadFile(string filename, string fileDialogFilter, Stream stream, Func<IByteData, IBaseFile> createModel) {
+            return PerformLoad(
+                () => {
+                    var newData = CreateByteData(filename, fileDialogFilter, stream);
                     if (newData == null)
                         return null;
                     Filename = filename;
                     FileDialogFilter = fileDialogFilter;
                     return newData;
-                }
-                catch (Exception ex) {
-                    Logger.LogException(ex);
-                    return null;
-                }
-            }, el => {
-                try {
-                    return createModel((IModelFileLoader) el);
-                }
-                catch (Exception ex) {
-                    Logger.LogException(ex);
-                    return null;
-                }
-            });
+                },
+                () => createModel(ByteData)
+            );
         }
 
-        public virtual bool SaveFile(string filename) {
+        public bool SaveFile(string filename) {
             if (!IsLoaded)
                 throw new ModelFileLoaderNotLoadedException();
-            return PerformSave(el => {
-                try {
-                    File.WriteAllBytes(filename, el.ByteData.GetDataCopy());
-                    Filename = filename;
-                    return true;
-                }
-                catch (Exception ex) {
-                    Logger.LogException(ex);
-                    return false;
-                }
+            return PerformSave(() => {
+                File.WriteAllBytes(filename, ByteData.Data.GetDataCopyOrReference());
+                Filename = filename;
+                return true;
             });
         }
 
-        private readonly ModelFileLoaderCreateByteDataDelegate _createByteData;
+        protected IByteData CreateByteData(string filename, string fileDialogFilter, Stream stream) {
+            byte[] newData;
+            using (var memoryStream = new MemoryStream()) {
+                stream.CopyTo(memoryStream);
+                newData = memoryStream.ToArray();
+            }
+            return new ByteData.ByteData(new ByteArray(newData));
+        }
 
         private string _filename = null;
 
