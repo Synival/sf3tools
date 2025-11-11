@@ -5,7 +5,6 @@ using System.Windows.Forms;
 using BrightIdeasSoftware;
 using CommonLib.NamedValues;
 using SF3.Win.Controls;
-using SF3.Win.Extensions;
 using static CommonLib.Extensions.TypeExtensions;
 
 namespace SF3.Win.Views {
@@ -117,7 +116,6 @@ namespace SF3.Win.Views {
                 olv.AllowColumnReorder = true;
                 olv.CellEditActivation = ObjectListView.CellEditActivateMode.SingleClick;
                 olv.FullRowSelect = true;
-                olv.GridLines = true;
                 olv.HasCollapsibleGroups = false;
                 olv.HideSelection = false;
                 olv.MenuLabelGroupBy = "";

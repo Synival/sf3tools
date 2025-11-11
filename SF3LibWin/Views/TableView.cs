@@ -8,7 +8,6 @@ using CommonLib.NamedValues;
 using SF3.Models.Structs;
 using SF3.Models.Tables;
 using SF3.Win.Controls;
-using SF3.Win.Extensions;
 
 namespace SF3.Win.Views {
     public class TableView : ViewBase, ITableView {
@@ -62,7 +61,6 @@ namespace SF3.Win.Views {
                 olv.AllowColumnReorder = true;
                 olv.CellEditActivation = ObjectListView.CellEditActivateMode.SingleClick;
                 olv.FullRowSelect = true;
-                olv.GridLines = true;
                 olv.HasCollapsibleGroups = false;
                 olv.HideSelection = false;
                 olv.MenuLabelGroupBy = "";
