@@ -3,6 +3,7 @@ using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
 using static CommonLib.Win.Utils.MessageUtils;
+using System.ComponentModel;
 
 namespace DFRLib.Win.Controls {
     public partial class ApplyDFRControl : UserControl {
@@ -139,6 +140,8 @@ namespace DFRLib.Win.Controls {
         /// <summary>
         /// When set, the control will use explicit "input file" data instead of an actual file.
         /// </summary>
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public byte[]? InputData {
             get => _inputData;
             set {
@@ -157,6 +160,8 @@ namespace DFRLib.Win.Controls {
         /// When set, the editor will set its byte[] output to InMemoryOutput rather than output
         /// to a file. The output file selection options are disabled.
         /// </summary>
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public bool ApplyInMemory {
             get => _applyInMemory;
             set {

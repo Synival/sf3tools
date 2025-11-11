@@ -1,4 +1,5 @@
-﻿using System.Windows.Forms;
+﻿using System.ComponentModel;
+using System.Windows.Forms;
 
 namespace SF3.Win.Controls {
 
@@ -9,6 +10,8 @@ namespace SF3.Win.Controls {
             this.Maximum = int.MaxValue;
         }
 
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         new public int Value {
             get => decimal.ToInt32(base.Value);
             set => base.Value = new decimal(value);

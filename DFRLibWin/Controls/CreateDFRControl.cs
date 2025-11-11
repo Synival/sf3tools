@@ -1,4 +1,5 @@
 using System;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
@@ -22,6 +23,8 @@ namespace DFRLib.Win.Controls {
         /// <summary>
         /// When set, the control will use explicit "altered file" data instead of an actual file.
         /// </summary>
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public byte[]? AlteredData {
             get => _alteredData;
             set {

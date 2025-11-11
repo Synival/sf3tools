@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
@@ -19,6 +20,8 @@ namespace SF3.Win.Controls {
         }
 
         private StatGrowthStatisticsTable _statStatistics = null;
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public StatGrowthStatisticsTable StatGrowthStatistics {
             get => _statStatistics;
             set {

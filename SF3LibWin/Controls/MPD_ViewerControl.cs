@@ -5,6 +5,7 @@ using OpenTK.Mathematics;
 using SF3.Models.Files.MPD;
 using SF3.Win.OpenGL.MPD_File;
 using SF3.Win.Types;
+using System.ComponentModel;
 
 namespace SF3.Win.Controls {
     public partial class MPD_ViewerControl : UserControl {
@@ -118,6 +119,8 @@ namespace SF3.Win.Controls {
 
         private IMPD_File _mpdFile = null;
 
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public IMPD_File MPD_File {
             get => _mpdFile;
             set {

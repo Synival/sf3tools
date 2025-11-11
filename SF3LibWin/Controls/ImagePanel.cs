@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
 using CommonLib.Win.Utils;
@@ -16,17 +17,23 @@ namespace SF3.Win.Controls {
             btnImport.Enabled = false;
         }
 
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
         public float ImageScale {
             get => imageControl.ImageScale;
             set => imageControl.ImageScale = value;
         }
 
+        [Browsable(true)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public Image Image {
             get => imageControl.Image;
             set => imageControl.Image = value;
         }
 
         private Action _importAction = null;
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public Action ImportAction {
             get => _importAction;
             set {
@@ -36,6 +43,8 @@ namespace SF3.Win.Controls {
         }
 
         private Action _exportAction = null;
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public Action ExportAction {
             get => _exportAction;
             set {

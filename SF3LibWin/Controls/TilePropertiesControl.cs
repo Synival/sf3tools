@@ -340,6 +340,8 @@ namespace SF3.Win.Controls {
 
         private Tile _tile = null;
 
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public Tile Tile {
             get => _tile;
             set {

@@ -6,6 +6,7 @@ using CommonLib.Discovery;
 using CommonLib.Win.Utils;
 using SF3.Models.Files;
 using static CommonLib.Utils.ValueUtils;
+using System.ComponentModel;
 
 namespace SF3.Editor.Forms {
     public partial class MovePostEOFDataDialog : Form {
@@ -176,6 +177,8 @@ namespace SF3.Editor.Forms {
 
         private int _moveBy = 0;
 
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public int MoveBy {
             get => _moveBy;
             set {

@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using System.ComponentModel;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace SF3.Win.Controls {
@@ -25,9 +26,13 @@ namespace SF3.Win.Controls {
             }
         }
 
+        [Browsable(true)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
         public float ImageScale { get; set; } = 4;
 
         private Image _image = null;
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public Image Image {
             get => _image;
             set {

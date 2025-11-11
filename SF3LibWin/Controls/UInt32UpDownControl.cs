@@ -1,4 +1,5 @@
-﻿using System.Globalization;
+﻿using System.ComponentModel;
+using System.Globalization;
 using System.Windows.Forms;
 
 namespace SF3.Win.Controls {
@@ -30,6 +31,8 @@ namespace SF3.Win.Controls {
                 base.Value = valueFromValidation.Value;
         }
 
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         new public uint Value {
             get => (uint) decimal.ToUInt64(base.Value);
             set => base.Value = new decimal(value);

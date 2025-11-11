@@ -7,6 +7,7 @@ using System.Windows.Forms;
 using CommonLib.Win.Utils;
 using SF3.Models.Files;
 using static CommonLib.Utils.ValueUtils;
+using System.ComponentModel;
 
 namespace SF3.Editor.Forms {
     public partial class InsertDataDialog : Form {
@@ -249,6 +250,8 @@ namespace SF3.Editor.Forms {
 
         private int _insertAddrFile = 0;
 
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public int InsertAddrFile {
             get => _insertAddrFile;
             set {
