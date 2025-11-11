@@ -153,6 +153,19 @@ namespace SF3.Win.Controls {
             _timer.Start();
         }
 
+        protected override void PostProcessOneRow(int rowIndex, int displayIndex, OLVListItem olvi) {
+            base.PostProcessOneRow(rowIndex, displayIndex, olvi);
+            if (UseAlternatingBackColors) {
+                // OLV is silly and needs its alternate color setting corrected if specified.
+                if (displayIndex % 3 == 1)
+                    olvi.BackColor = (AlternateRowBackColor2 == Color.Empty) ? Color.LightBlue : AlternateRowBackColor2;
+                else if (displayIndex % 2 == 1)
+                    olvi.BackColor = (AlternateRowBackColor == Color.Empty) ? Color.LemonChiffon : AlternateRowBackColor;
+                else
+                    olvi.BackColor = BackColor;
+            }
+        }
+
         /// <summary>
         /// Checks to see if we're visible. This is on a timer tick because there are no events to detect for this.
         /// (This seems oddly deliberate!!!)
@@ -272,6 +285,13 @@ namespace SF3.Win.Controls {
             }
         }
 
+        private void ForAllHeaderStyles(Action<HeaderFormatStyle, OLVColumn> func) {
+            func(HeaderFormatStyle, null);
+            foreach (var lvc in AllColumns)
+                if (lvc.HeaderFormatStyle != null)
+                    func(lvc.HeaderFormatStyle, lvc);
+        }
+
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public NameGetterContextFetcherHandler NameGetterContextFetcher { get; set; }
@@ -283,5 +303,9 @@ namespace SF3.Win.Controls {
 
         private bool _wasVisible = true;
         private Timer _timer = new Timer();
+
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        public Color AlternateRowBackColor2 { get; set; } = Color.Empty;
     }
 }
