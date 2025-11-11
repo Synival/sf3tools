@@ -6,6 +6,7 @@ using System.Reflection;
 using System.Windows.Forms;
 using BrightIdeasSoftware;
 using CommonLib.Attributes;
+using CommonLib.Extensions;
 using CommonLib.NamedValues;
 using CommonLib.Utils;
 using CommonLib.ViewModels;
@@ -23,6 +24,7 @@ namespace SF3.Win.Controls {
     /// </summary>
     public class EnhancedObjectListView : ObjectListView {
         private static readonly Color _headerBackColor = Color.FromArgb(244, 244, 244);
+        private static readonly Color _readOnlyColor = Color.FromArgb(96, 96, 96);
         private static Dictionary<string, Stack<EnhancedObjectListView>> _cachedOLVControls = new Dictionary<string, Stack<EnhancedObjectListView>>();
 
         public EnhancedObjectListView(INameGetterContext nameGetterContext) : this(() => nameGetterContext) {}
@@ -169,6 +171,59 @@ namespace SF3.Win.Controls {
         public void RefreshAllItems() {
             foreach (var item in Items)
                 RefreshItem(item as OLVListItem);
+        }
+
+        public void AddColumn(OLVColumn lvc) {
+            if (!lvc.IsEditable) {
+                lvc.HeaderFormatStyle = new HeaderFormatStyle();
+                var lvcStyle = lvc.HeaderFormatStyle;
+                lvcStyle.SetFont(Control.DefaultFont);
+                lvcStyle.SetForeColor(_readOnlyColor);
+                lvcStyle.Normal.BackColor = _headerBackColor;
+            }
+
+            var headerTextWidth = TextRenderer.MeasureText(lvc.Text, lvc.HeaderFont).Width + 8;
+            var aspectTextSample = string.Format(lvc.AspectToStringFormat ?? "", 0);
+            var aspectTextWidth = TextRenderer.MeasureText(aspectTextSample, EnhancedOLVRenderer.HexFont).Width + 4;
+            lvc.Width = Math.Max(Math.Max(headerTextWidth, aspectTextWidth), lvc.Width);
+
+            // TODO: maybe put this in the columns? this is a bit extreme!!!
+            if (lvc.AspectToStringFormat == "{0:X}")
+                lvc.AspectToStringFormat = "{0:X2}";
+
+            // Add a hook to each AspectGetter that will check for a named value.
+            // If a name exists, hijack the AspectToStringConverter to use the name instead.
+            // If no name exists, use the standard AspectToStringConverter.
+            // (It would be nice if we could set one single AspectToStringConverter to check for this,
+            // but alas, it only takes one paramter (value) and that's not enough to check for a name.)
+            var oldGetter = lvc.AspectGetter;
+            lvc.AspectGetter = obj => {
+                AspectToStringConverterDelegate converter = null;
+
+                var nameContext = ((EnhancedObjectListView) lvc.ListView).NameGetterContext;
+                if (nameContext != null) {
+                    var property = obj.GetType().GetProperty(lvc.AspectName);
+                    if (property != null) {
+                        var attr = property.GetCustomAttribute<NameGetterAttribute>();
+                        if (attr != null) {
+                            var value = property.GetValue(obj);
+                            if (nameContext.CanGetName(obj, property, value, attr.Parameters))
+                                converter = v => obj.GetPropertyValueName(property, nameContext, value) ?? string.Format(lvc.AspectToStringFormat, lvc.GetAspectByName(obj));
+                        }
+                    }
+                }
+
+                lvc.AspectToStringConverter = converter;
+                return (oldGetter != null) ? oldGetter(obj) : lvc.GetAspectByName(obj);
+            };
+
+            AllColumns.Add(lvc);
+            Columns.Add(lvc);
+        }
+
+        public void AddColumns(IEnumerable<OLVColumn> lvcs) {
+            foreach (var lvc in lvcs)
+                AddColumn(lvc);
         }
 
         [Browsable(false)]

@@ -15,68 +15,6 @@ namespace SF3.Win.Extensions {
         private static readonly Color _readOnlyColor = Color.FromArgb(96, 96, 96);
 
         /// <summary>
-        /// Applies some neat extensions to the ObjectListView.
-        /// </summary>
-        /// <param name="olv">The ObjectListView to enhance.</param>
-        public static void Enhance(this ObjectListView olv) {
-            // Make sure the column can fit its text.
-            var hexFont = new Font("Courier New", Control.DefaultFont.Size);
-            foreach (var lvc in olv.AllColumns) {
-                if (!lvc.IsEditable) {
-                    lvc.HeaderFormatStyle = new HeaderFormatStyle();
-                    var lvcStyle = lvc.HeaderFormatStyle;
-                    lvcStyle.SetFont(Control.DefaultFont);
-                    lvcStyle.SetForeColor(_readOnlyColor);
-                    lvcStyle.Normal.BackColor = _headerBackColor;
-                }
-
-                var headerTextWidth = TextRenderer.MeasureText(lvc.Text, lvc.HeaderFont).Width + 8;
-                var aspectTextSample = string.Format(lvc.AspectToStringFormat ?? "", 0);
-                var aspectTextWidth = TextRenderer.MeasureText(aspectTextSample, hexFont).Width + 4;
-                lvc.Width = Math.Max(Math.Max(headerTextWidth, aspectTextWidth), lvc.Width);
-            }
-
-            foreach (var lvc in olv.AllColumns)
-                lvc.Enhance();
-        }
-
-        /// <summary>
-        /// Adds some extra functionality to a column of an ObjectListView.
-        /// </summary>
-        /// <param name="lvc">The ObjectListView column to enhance.</param>
-        public static void Enhance(this OLVColumn lvc) {
-            // TODO: maybe put this in the columns? this is a bit extreme!!!
-            if (lvc.AspectToStringFormat == "{0:X}")
-                lvc.AspectToStringFormat = "{0:X2}";
-
-            // Add a hook to each AspectGetter that will check for a named value.
-            // If a name exists, hijack the AspectToStringConverter to use the name instead.
-            // If no name exists, use the standard AspectToStringConverter.
-            // (It would be nice if we could set one single AspectToStringConverter to check for this,
-            // but alas, it only takes one paramter (value) and that's not enough to check for a name.)
-            var oldGetter = lvc.AspectGetter;
-            lvc.AspectGetter = obj => {
-                AspectToStringConverterDelegate converter = null;
-
-                var nameContext = ((EnhancedObjectListView) lvc.ListView).NameGetterContext;
-                if (nameContext != null) {
-                    var property = obj.GetType().GetProperty(lvc.AspectName);
-                    if (property != null) {
-                        var attr = property.GetCustomAttribute<NameGetterAttribute>();
-                        if (attr != null) {
-                            var value = property.GetValue(obj);
-                            if (nameContext.CanGetName(obj, property, value, attr.Parameters))
-                                converter = v => obj.GetPropertyValueName(property, nameContext, value) ?? string.Format(lvc.AspectToStringFormat, lvc.GetAspectByName(obj));
-                        }
-                    }
-                }
-
-                lvc.AspectToStringConverter = converter;
-                return (oldGetter != null) ? oldGetter(obj) : lvc.GetAspectByName(obj);
-            };
-        }
-
-        /// <summary>
         /// Adds some extra functionality to the Control created when editing an ObjectListView cell.
         /// </summary>
         /// <param name="olv">The ObjectListView whose control should be modified.</param>

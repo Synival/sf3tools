@@ -127,9 +127,7 @@ namespace SF3.Win.Views {
                 olv.UseAlternatingBackColors = true;
                 olv.UseCompatibleStateImageBehavior = false;
                 olv.View = View.Details;
-                olv.AllColumns.AddRange(lvcColumns);
-                olv.Columns.AddRange(lvcColumns.ToArray());
-                olv.Enhance();
+                olv.AddColumns(lvcColumns);
             }
             else {
                 olv.SuspendLayout();
