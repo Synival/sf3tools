@@ -56,7 +56,7 @@ namespace SF3.Win.Views {
                     lvcColumns.Add(lvc);
                 }
 
-                olv = new EnhancedObjectListView();
+                olv = new EnhancedObjectListView(NameGetterContext);
                 olv.SuspendLayout();
                 ((System.ComponentModel.ISupportInitialize) olv).BeginInit();
                 olv.AllowColumnReorder = true;
@@ -74,7 +74,7 @@ namespace SF3.Win.Views {
                 olv.View = View.Details;
                 olv.AllColumns.AddRange(lvcColumns);
                 olv.Columns.AddRange(lvcColumns.ToArray());
-                olv.Enhance(NameGetterContext);
+                olv.Enhance();
             }
             else {
                 olv.SuspendLayout();

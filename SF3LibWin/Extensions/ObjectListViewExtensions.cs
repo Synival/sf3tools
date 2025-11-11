@@ -6,20 +6,11 @@ using System.Windows.Forms;
 using BrightIdeasSoftware;
 using CommonLib.Attributes;
 using CommonLib.Extensions;
-using CommonLib.NamedValues;
 using SF3.Win.Controls;
 using static SF3.Win.Utils.ControlUtils;
 
 namespace SF3.Win.Extensions {
     public static class ObjectListViewExtensions {
-        /// <summary>
-        /// Applies some neat extensions to the ObjectListView.
-        /// </summary>
-        /// <param name="olv">The ObjectListView to enhance.</param>
-        /// <param name="nameGetterContext">Name getter context used for display and editing named values.</param>
-        public static void Enhance(this ObjectListView olv, INameGetterContext nameGetterContext)
-            => Enhance(olv, () => nameGetterContext);
-
         private static readonly Color _headerBackColor = Color.FromArgb(244, 244, 244);
         private static readonly Color _readOnlyColor = Color.FromArgb(96, 96, 96);
 
@@ -27,17 +18,9 @@ namespace SF3.Win.Extensions {
         /// Applies some neat extensions to the ObjectListView.
         /// </summary>
         /// <param name="olv">The ObjectListView to enhance.</param>
-        /// <param name="nameGetterContextFetcher">Callback function for getting the NameGetterContext associated for this ObjectListView.</param>
-        public static void Enhance(this ObjectListView olv, NameGetterContextFetcher nameGetterContextFetcher) {
-            var hexFont = new Font("Courier New", Control.DefaultFont.Size);
-            olv.HeaderUsesThemes = false;
-
-            olv.HeaderFormatStyle = new HeaderFormatStyle();
-            var olvStyle = olv.HeaderFormatStyle;
-            olvStyle.SetFont(Control.DefaultFont);
-            olvStyle.Normal.BackColor = _headerBackColor;
-
+        public static void Enhance(this ObjectListView olv) {
             // Make sure the column can fit its text.
+            var hexFont = new Font("Courier New", Control.DefaultFont.Size);
             foreach (var lvc in olv.AllColumns) {
                 if (!lvc.IsEditable) {
                     lvc.HeaderFormatStyle = new HeaderFormatStyle();
@@ -52,11 +35,6 @@ namespace SF3.Win.Extensions {
                 var aspectTextWidth = TextRenderer.MeasureText(aspectTextSample, hexFont).Width + 4;
                 lvc.Width = Math.Max(Math.Max(headerTextWidth, aspectTextWidth), lvc.Width);
             }
-
-            olv.SetNameGetterContextFetcher(nameGetterContextFetcher);
-            olv.OwnerDraw = true;
-            olv.DefaultRenderer = EnhancedOLVRenderer.Instance;
-            olv.CellEditStarting += (s, e) => olv.EnhanceOlvCellEditControl(e);
 
             foreach (var lvc in olv.AllColumns)
                 lvc.Enhance();
@@ -80,7 +58,7 @@ namespace SF3.Win.Extensions {
             lvc.AspectGetter = obj => {
                 AspectToStringConverterDelegate converter = null;
 
-                var nameContext = ((ObjectListView) lvc.ListView).GetNameGetterContext();
+                var nameContext = ((EnhancedObjectListView) lvc.ListView).NameGetterContext;
                 if (nameContext != null) {
                     var property = obj.GetType().GetProperty(lvc.AspectName);
                     if (property != null) {
@@ -157,7 +135,7 @@ namespace SF3.Win.Extensions {
         private static Control NamedValueEditorCreator(object obj, OLVColumn model, object value, EditorCreatorDelegate oldDelegate) {
             var appState = AppState.RetrieveAppState();
             if (appState.UseDropdownsForNamedValues) {
-                var nameContext = ((ObjectListView) model.ListView).GetNameGetterContext();
+                var nameContext = ((EnhancedObjectListView) model.ListView).NameGetterContext;
                 if (nameContext != null) {
                     var property = obj.GetType().GetProperty(model.AspectName);
                     if (property != null) {
@@ -213,17 +191,5 @@ namespace SF3.Win.Extensions {
                     => NamedValueEditorCreator(obj, model, value, creator));
             }
         }
-
-        public delegate INameGetterContext NameGetterContextFetcher();
-        private static Dictionary<ObjectListView, NameGetterContextFetcher> _olvNameGetterContextFetchers = new Dictionary<ObjectListView, NameGetterContextFetcher>();
-
-        public static void SetNameGetterContextFetcher(this ObjectListView olv, NameGetterContextFetcher fetcher)
-            => _olvNameGetterContextFetchers[olv] = fetcher;
-
-        public static NameGetterContextFetcher GetNameGetterContextFetcher(this ObjectListView olv)
-            => _olvNameGetterContextFetchers.TryGetValue(olv, out NameGetterContextFetcher fetcher) ? fetcher : null;
-
-        public static INameGetterContext GetNameGetterContext(this ObjectListView olv)
-            => (olv.GetNameGetterContextFetcher() is var fetcher) ? fetcher() : null;
     }
 }

@@ -21,6 +21,9 @@ namespace SF3.Win.Views {
         }
 
         private class ModelObjectListView : EnhancedObjectListView {
+            public ModelObjectListView(INameGetterContext nameGetterContext) : base(nameGetterContext) {}
+            public ModelObjectListView(NameGetterContextFetcherHandler nameGetterContextFetcher) : base(nameGetterContextFetcher) {}
+
             public override void EditSubItem(OLVListItem item, int subItemIndex) {
                 // Make sure we can't edit the actual value, not just the column.
                 if (item == null || ((ModelProperty) item.RowObject).IsReadOnly)
@@ -108,7 +111,7 @@ namespace SF3.Win.Views {
                     lvcColumns.Add(lvc);
                 }
 
-                olv = new ModelObjectListView();
+                olv = new ModelObjectListView(NameGetterContext);
                 olv.SuspendLayout();
                 ((System.ComponentModel.ISupportInitialize) olv).BeginInit();
                 olv.AllowColumnReorder = true;
@@ -126,7 +129,7 @@ namespace SF3.Win.Views {
                 olv.View = View.Details;
                 olv.AllColumns.AddRange(lvcColumns);
                 olv.Columns.AddRange(lvcColumns.ToArray());
-                olv.Enhance(NameGetterContext);
+                olv.Enhance();
             }
             else {
                 olv.SuspendLayout();

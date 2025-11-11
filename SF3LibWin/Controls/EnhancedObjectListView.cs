@@ -1,17 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Drawing;
 using System.Reflection;
 using System.Windows.Forms;
 using BrightIdeasSoftware;
 using CommonLib.Attributes;
+using CommonLib.NamedValues;
 using CommonLib.Utils;
 using CommonLib.ViewModels;
 using SF3.Models.Structs;
+using SF3.Win.Extensions;
 using SF3.Win.Views;
 
 namespace SF3.Win.Controls {
-
     /// <summary>
     /// This exists because of many layers of stupid.
     /// In short, Winforms provides no way to know when a Control is no longer visible because it's parent (like a tab) has changed.
@@ -20,6 +22,38 @@ namespace SF3.Win.Controls {
     /// Just don't make 1,000 of these things at once, okay?
     /// </summary>
     public class EnhancedObjectListView : ObjectListView {
+        private static readonly Color _headerBackColor = Color.FromArgb(244, 244, 244);
+        private static Dictionary<string, Stack<EnhancedObjectListView>> _cachedOLVControls = new Dictionary<string, Stack<EnhancedObjectListView>>();
+
+        public EnhancedObjectListView(INameGetterContext nameGetterContext) : this(() => nameGetterContext) {}
+
+        public EnhancedObjectListView(NameGetterContextFetcherHandler nameGetterContextFetcher) {
+            SuspendLayout();
+
+            CellToolTipGetter = GetCellTooltip;
+            HighlightBackgroundColor = SystemColors.Highlight;
+            UnfocusedHighlightBackgroundColor = Utils.MathHelpers.Lerp(HighlightBackgroundColor, SystemColors.Window, 0.50f);
+
+            HeaderUsesThemes = false;
+            HeaderFormatStyle = new HeaderFormatStyle();
+            var olvStyle = HeaderFormatStyle;
+            olvStyle.SetFont(DefaultFont);
+            olvStyle.Normal.BackColor = _headerBackColor;
+
+            NameGetterContextFetcher = nameGetterContextFetcher;
+            OwnerDraw = true;
+            DefaultRenderer = EnhancedOLVRenderer.Instance;
+            CellEditStarting += (s, e) => this.EnhanceOlvCellEditControl(e);
+
+            _timer.Interval = 100;
+            _timer.Tick += CheckForVisibility;
+            _timer.Start();
+
+            ResumeLayout();
+        }
+
+        public delegate INameGetterContext NameGetterContextFetcherHandler();
+
         public static void PushCachedOLV(string key, EnhancedObjectListView olv) {
             if (!_cachedOLVControls.ContainsKey(key))
                 _cachedOLVControls.Add(key, new Stack<EnhancedObjectListView>());
@@ -36,18 +70,6 @@ namespace SF3.Win.Controls {
             var olv = stack.Pop();
             olv.Show();
             return olv;
-        }
-
-        private static Dictionary<string, Stack<EnhancedObjectListView>> _cachedOLVControls = new Dictionary<string, Stack<EnhancedObjectListView>>();
-
-        public EnhancedObjectListView() {
-            CellToolTipGetter = GetCellTooltip;
-            HighlightBackgroundColor = SystemColors.Highlight;
-            UnfocusedHighlightBackgroundColor = Utils.MathHelpers.Lerp(HighlightBackgroundColor, SystemColors.Window, 0.50f);
-
-            _timer.Interval = 100;
-            _timer.Tick += CheckForVisibility;
-            _timer.Start();
         }
 
         private string GetCellTooltip(OLVColumn column, object modelObject) {
@@ -147,6 +169,15 @@ namespace SF3.Win.Controls {
         public void RefreshAllItems() {
             foreach (var item in Items)
                 RefreshItem(item as OLVListItem);
+        }
+
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public NameGetterContextFetcherHandler NameGetterContextFetcher { get; set; }
+
+        public INameGetterContext NameGetterContext {
+            get => NameGetterContextFetcher?.Invoke();
+            set => NameGetterContextFetcher = (value == null) ? null : (() => value);
         }
 
         private bool _wasVisible = true;
