@@ -45,7 +45,7 @@ namespace SF3.Win.Controls {
             NameGetterContextFetcher = nameGetterContextFetcher;
             OwnerDraw = true;
             DefaultRenderer = EnhancedOLVRenderer.Instance;
-            CellEditStarting += (s, e) => this.EnhanceOlvCellEditControl(e);
+            CellEditStarting += (s, e) => EnhanceOlvCellEditControl(e);
 
             _timer.Interval = 100;
             _timer.Tick += CheckForVisibility;
@@ -224,6 +224,52 @@ namespace SF3.Win.Controls {
         public void AddColumns(IEnumerable<OLVColumn> lvcs) {
             foreach (var lvc in lvcs)
                 AddColumn(lvc);
+        }
+
+        /// <summary>
+        /// Adds some extra functionality to the Control created when editing an ObjectListView cell.
+        /// </summary>
+        /// <param name="e">Arguments from the OlvCellEditControl event.</param>
+        private void EnhanceOlvCellEditControl(CellEditEventArgs e) {
+            // Enhance ComboBox's so values are updated any time the dropdown is closed, unless from hitting "escape".
+            if (e.Control is ComboBox) {
+                var cb = e.Control as ComboBox;
+                cb.KeyDown += (s, e2) => {
+                    if (e2.KeyCode == Keys.Escape)
+                        cb.SelectedValue = e.Column.GetValue(e.RowObject);
+                };
+                cb.DropDownClosed += (s, e2) => {
+                    e.Column.PutValue(e.RowObject, cb.SelectedValue);
+                    RefreshItem(e.ListViewItem);
+                };
+
+                // Auto-expand the ComboBox when opened.
+                // This needs to happen at a specific point: when the data is populated, and the correct item is selected.
+                // Normally we can wait for a SelectedIndexChanged event, but if the selected index is changed to 0,
+                // no change took place and the event will not trigger. In that case, just trigger on GotFocus.
+                var eValueIsNonZero = (e.Value is bool eBool) ? eBool : (e.Value as int? != 0);
+                if (eValueIsNonZero) {
+                    void selectedIndexChangedFunc(object sender, EventArgs args) {
+                        cb.DroppedDown = true;
+                        cb.SelectedIndexChanged -= selectedIndexChangedFunc;
+                    };
+                    cb.SelectedIndexChanged += selectedIndexChangedFunc;
+                }
+                else {
+                    void selectedIndexChangedFunc(object sender, EventArgs args) {
+                        cb.DroppedDown = true;
+                        cb.GotFocus -= selectedIndexChangedFunc;
+                    };
+                    cb.GotFocus += selectedIndexChangedFunc;
+                }
+            }
+            else if (e.Control is NumericUpDown control) {
+                control.Font = EnhancedOLVRenderer.GetCellFont(e.Column.AspectToStringFormat ?? "");
+
+                // Ensure that strings displayed in hex format are edited in hex format.
+                if (e.Column.AspectToStringFormat?.StartsWith("{0:X") == true)
+                    control.Hexadecimal = true;
+            }
         }
 
         [Browsable(false)]

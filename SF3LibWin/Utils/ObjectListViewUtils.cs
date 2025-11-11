@@ -1,66 +1,14 @@
 using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Reflection;
 using System.Windows.Forms;
 using BrightIdeasSoftware;
 using CommonLib.Attributes;
-using CommonLib.Extensions;
 using SF3.Win.Controls;
 using static SF3.Win.Utils.ControlUtils;
 
-namespace SF3.Win.Extensions {
-    public static class ObjectListViewExtensions {
-        private static readonly Color _headerBackColor = Color.FromArgb(244, 244, 244);
-        private static readonly Color _readOnlyColor = Color.FromArgb(96, 96, 96);
-
-        /// <summary>
-        /// Adds some extra functionality to the Control created when editing an ObjectListView cell.
-        /// </summary>
-        /// <param name="olv">The ObjectListView whose control should be modified.</param>
-        /// <param name="e">Arguments from the OlvCellEditControl event.</param>
-        public static void EnhanceOlvCellEditControl(this ObjectListView olv, CellEditEventArgs e) {
-            // Enhance ComboBox's so values are updated any time the dropdown is closed, unless from hitting "escape".
-            if (e.Control is ComboBox) {
-                var cb = e.Control as ComboBox;
-                cb.KeyDown += (s, e2) => {
-                    if (e2.KeyCode == Keys.Escape)
-                        cb.SelectedValue = e.Column.GetValue(e.RowObject);
-                };
-                cb.DropDownClosed += (s, e2) => {
-                    e.Column.PutValue(e.RowObject, cb.SelectedValue);
-                    olv.RefreshItem(e.ListViewItem);
-                };
-
-                // Auto-expand the ComboBox when opened.
-                // This needs to happen at a specific point: when the data is populated, and the correct item is selected.
-                // Normally we can wait for a SelectedIndexChanged event, but if the selected index is changed to 0,
-                // no change took place and the event will not trigger. In that case, just trigger on GotFocus.
-                var eValueIsNonZero = (e.Value is bool eBool) ? eBool : (e.Value as int? != 0);
-                if (eValueIsNonZero) {
-                    void selectedIndexChangedFunc(object sender, EventArgs args) {
-                        cb.DroppedDown = true;
-                        cb.SelectedIndexChanged -= selectedIndexChangedFunc;
-                    };
-                    cb.SelectedIndexChanged += selectedIndexChangedFunc;
-                }
-                else {
-                    void selectedIndexChangedFunc(object sender, EventArgs args) {
-                        cb.DroppedDown = true;
-                        cb.GotFocus -= selectedIndexChangedFunc;
-                    };
-                    cb.GotFocus += selectedIndexChangedFunc;
-                }
-            }
-            else if (e.Control is NumericUpDown control) {
-                control.Font = EnhancedOLVRenderer.GetCellFont(e.Column.AspectToStringFormat ?? "");
-
-                // Ensure that strings displayed in hex format are edited in hex format.
-                if (e.Column.AspectToStringFormat?.StartsWith("{0:X") == true)
-                    control.Hexadecimal = true;
-            }
-        }
-
+namespace SF3.Win.Utils {
+    public static class ObjectListViewUtils {
         /// <summary>
         /// Function to use for each EditorCreatorDelegate we're hijacking.
         /// Creates a combo box instead of the standard control if a named value is present.
