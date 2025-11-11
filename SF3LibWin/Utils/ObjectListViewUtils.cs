@@ -9,6 +9,8 @@ using static SF3.Win.Utils.ControlUtils;
 
 namespace SF3.Win.Utils {
     public static class ObjectListViewUtils {
+        private static Dictionary<string, Stack<EnhancedObjectListView>> _cachedOLVControls = new Dictionary<string, Stack<EnhancedObjectListView>>();
+
         /// <summary>
         /// Function to use for each EditorCreatorDelegate we're hijacking.
         /// Creates a combo box instead of the standard control if a named value is present.
@@ -76,6 +78,24 @@ namespace SF3.Win.Utils {
                 ObjectListView.EditorRegistry.Register(type, (obj, model, value)
                     => NamedValueEditorCreator(obj, model, value, creator));
             }
+        }
+
+        public static void PushCachedOLV(string key, EnhancedObjectListView olv) {
+            if (!_cachedOLVControls.ContainsKey(key))
+                _cachedOLVControls.Add(key, new Stack<EnhancedObjectListView>());
+            _cachedOLVControls[key].Push(olv);
+        }
+
+        public static EnhancedObjectListView PopCachedOLV(string key) {
+            if (!_cachedOLVControls.ContainsKey(key))
+                return null;
+            var stack = _cachedOLVControls[key];
+            if (stack.Count == 0)
+                return null;
+
+            var olv = stack.Pop();
+            olv.Show();
+            return olv;
         }
     }
 }

@@ -11,7 +11,6 @@ using CommonLib.NamedValues;
 using CommonLib.Utils;
 using CommonLib.ViewModels;
 using SF3.Models.Structs;
-using SF3.Win.Extensions;
 using SF3.Win.Views;
 
 namespace SF3.Win.Controls {
@@ -23,9 +22,10 @@ namespace SF3.Win.Controls {
     /// Just don't make 1,000 of these things at once, okay?
     /// </summary>
     public class EnhancedObjectListView : ObjectListView {
+        public delegate INameGetterContext NameGetterContextFetcherHandler();
+
         private static readonly Color _headerBackColor = Color.FromArgb(244, 244, 244);
         private static readonly Color _readOnlyColor = Color.FromArgb(96, 96, 96);
-        private static Dictionary<string, Stack<EnhancedObjectListView>> _cachedOLVControls = new Dictionary<string, Stack<EnhancedObjectListView>>();
 
         public EnhancedObjectListView(INameGetterContext nameGetterContext) : this(() => nameGetterContext) {}
 
@@ -54,24 +54,90 @@ namespace SF3.Win.Controls {
             ResumeLayout();
         }
 
-        public delegate INameGetterContext NameGetterContextFetcherHandler();
+        protected override void OnVisibleChanged(EventArgs e) {
+            base.OnVisibleChanged(e);
+            if (Items.Count == 0 || !Visible || Parent == null || _wasVisible)
+                return;
 
-        public static void PushCachedOLV(string key, EnhancedObjectListView olv) {
-            if (!_cachedOLVControls.ContainsKey(key))
-                _cachedOLVControls.Add(key, new Stack<EnhancedObjectListView>());
-            _cachedOLVControls[key].Push(olv);
+            // If we weren't visible before, refresh.
+            this.RefreshAllItems();
+            _wasVisible = true;
+            _timer.Start();
         }
 
-        public static EnhancedObjectListView PopCachedOLV(string key) {
-            if (!_cachedOLVControls.ContainsKey(key))
-                return null;
-            var stack = _cachedOLVControls[key];
-            if (stack.Count == 0)
-                return null;
+        protected override void PostProcessOneRow(int rowIndex, int displayIndex, OLVListItem olvi) {
+            base.PostProcessOneRow(rowIndex, displayIndex, olvi);
+            if (UseAlternatingBackColors) {
+                // OLV is silly and needs its alternate color setting corrected if specified.
+                if (displayIndex % 3 == 1)
+                    olvi.BackColor = (AlternateRowBackColor2 == Color.Empty) ? Color.LightBlue : AlternateRowBackColor2;
+                else if (displayIndex % 2 == 1)
+                    olvi.BackColor = (AlternateRowBackColor == Color.Empty) ? Color.LemonChiffon : AlternateRowBackColor;
+                else
+                    olvi.BackColor = BackColor;
+            }
+        }
 
-            var olv = stack.Pop();
-            olv.Show();
-            return olv;
+        /// <summary>
+        /// Runs RefreshItem() on all OLVListItem's in the property Items.
+        /// </summary>
+        /// <param name="olv">The ObjectListView to refresh.</param>
+        public void RefreshAllItems() {
+            foreach (var item in Items)
+                RefreshItem(item as OLVListItem);
+        }
+
+        public void AddColumn(OLVColumn lvc) {
+            if (!lvc.IsEditable) {
+                lvc.HeaderFormatStyle = new HeaderFormatStyle();
+                var lvcStyle = lvc.HeaderFormatStyle;
+                lvcStyle.SetFont(Control.DefaultFont);
+                lvcStyle.SetForeColor(_readOnlyColor);
+                lvcStyle.Normal.BackColor = _headerBackColor;
+            }
+
+            var headerTextWidth = TextRenderer.MeasureText(lvc.Text, lvc.HeaderFont).Width + 8;
+            var aspectTextSample = string.Format(lvc.AspectToStringFormat ?? "", 0);
+            var aspectTextWidth = TextRenderer.MeasureText(aspectTextSample, EnhancedOLVRenderer.HexFont).Width + 4;
+            lvc.Width = Math.Max(Math.Max(headerTextWidth, aspectTextWidth), lvc.Width);
+
+            // TODO: maybe put this in the columns? this is a bit extreme!!!
+            if (lvc.AspectToStringFormat == "{0:X}")
+                lvc.AspectToStringFormat = "{0:X2}";
+
+            // Add a hook to each AspectGetter that will check for a named value.
+            // If a name exists, hijack the AspectToStringConverter to use the name instead.
+            // If no name exists, use the standard AspectToStringConverter.
+            // (It would be nice if we could set one single AspectToStringConverter to check for this,
+            // but alas, it only takes one paramter (value) and that's not enough to check for a name.)
+            var oldGetter = lvc.AspectGetter;
+            lvc.AspectGetter = obj => {
+                AspectToStringConverterDelegate converter = null;
+
+                var nameContext = ((EnhancedObjectListView) lvc.ListView).NameGetterContext;
+                if (nameContext != null) {
+                    var property = obj.GetType().GetProperty(lvc.AspectName);
+                    if (property != null) {
+                        var attr = property.GetCustomAttribute<NameGetterAttribute>();
+                        if (attr != null) {
+                            var value = property.GetValue(obj);
+                            if (nameContext.CanGetName(obj, property, value, attr.Parameters))
+                                converter = v => obj.GetPropertyValueName(property, nameContext, value) ?? string.Format(lvc.AspectToStringFormat, lvc.GetAspectByName(obj));
+                        }
+                    }
+                }
+
+                lvc.AspectToStringConverter = converter;
+                return (oldGetter != null) ? oldGetter(obj) : lvc.GetAspectByName(obj);
+            };
+
+            AllColumns.Add(lvc);
+            Columns.Add(lvc);
+        }
+
+        public void AddColumns(IEnumerable<OLVColumn> lvcs) {
+            foreach (var lvc in lvcs)
+                AddColumn(lvc);
         }
 
         private string GetCellTooltip(OLVColumn column, object modelObject) {
@@ -142,30 +208,6 @@ namespace SF3.Win.Controls {
             return string.Join("\n", lines);
         }
 
-        protected override void OnVisibleChanged(EventArgs e) {
-            base.OnVisibleChanged(e);
-            if (Items.Count == 0 || !Visible || Parent == null || _wasVisible)
-                return;
-
-            // If we weren't visible before, refresh.
-            this.RefreshAllItems();
-            _wasVisible = true;
-            _timer.Start();
-        }
-
-        protected override void PostProcessOneRow(int rowIndex, int displayIndex, OLVListItem olvi) {
-            base.PostProcessOneRow(rowIndex, displayIndex, olvi);
-            if (UseAlternatingBackColors) {
-                // OLV is silly and needs its alternate color setting corrected if specified.
-                if (displayIndex % 3 == 1)
-                    olvi.BackColor = (AlternateRowBackColor2 == Color.Empty) ? Color.LightBlue : AlternateRowBackColor2;
-                else if (displayIndex % 2 == 1)
-                    olvi.BackColor = (AlternateRowBackColor == Color.Empty) ? Color.LemonChiffon : AlternateRowBackColor;
-                else
-                    olvi.BackColor = BackColor;
-            }
-        }
-
         /// <summary>
         /// Checks to see if we're visible. This is on a timer tick because there are no events to detect for this.
         /// (This seems oddly deliberate!!!)
@@ -175,68 +217,6 @@ namespace SF3.Win.Controls {
                 _wasVisible = false;
                 _timer.Stop();
             }
-        }
-
-        /// <summary>
-        /// Runs RefreshItem() on all OLVListItem's in the property Items.
-        /// </summary>
-        /// <param name="olv">The ObjectListView to refresh.</param>
-        public void RefreshAllItems() {
-            foreach (var item in Items)
-                RefreshItem(item as OLVListItem);
-        }
-
-        public void AddColumn(OLVColumn lvc) {
-            if (!lvc.IsEditable) {
-                lvc.HeaderFormatStyle = new HeaderFormatStyle();
-                var lvcStyle = lvc.HeaderFormatStyle;
-                lvcStyle.SetFont(Control.DefaultFont);
-                lvcStyle.SetForeColor(_readOnlyColor);
-                lvcStyle.Normal.BackColor = _headerBackColor;
-            }
-
-            var headerTextWidth = TextRenderer.MeasureText(lvc.Text, lvc.HeaderFont).Width + 8;
-            var aspectTextSample = string.Format(lvc.AspectToStringFormat ?? "", 0);
-            var aspectTextWidth = TextRenderer.MeasureText(aspectTextSample, EnhancedOLVRenderer.HexFont).Width + 4;
-            lvc.Width = Math.Max(Math.Max(headerTextWidth, aspectTextWidth), lvc.Width);
-
-            // TODO: maybe put this in the columns? this is a bit extreme!!!
-            if (lvc.AspectToStringFormat == "{0:X}")
-                lvc.AspectToStringFormat = "{0:X2}";
-
-            // Add a hook to each AspectGetter that will check for a named value.
-            // If a name exists, hijack the AspectToStringConverter to use the name instead.
-            // If no name exists, use the standard AspectToStringConverter.
-            // (It would be nice if we could set one single AspectToStringConverter to check for this,
-            // but alas, it only takes one paramter (value) and that's not enough to check for a name.)
-            var oldGetter = lvc.AspectGetter;
-            lvc.AspectGetter = obj => {
-                AspectToStringConverterDelegate converter = null;
-
-                var nameContext = ((EnhancedObjectListView) lvc.ListView).NameGetterContext;
-                if (nameContext != null) {
-                    var property = obj.GetType().GetProperty(lvc.AspectName);
-                    if (property != null) {
-                        var attr = property.GetCustomAttribute<NameGetterAttribute>();
-                        if (attr != null) {
-                            var value = property.GetValue(obj);
-                            if (nameContext.CanGetName(obj, property, value, attr.Parameters))
-                                converter = v => obj.GetPropertyValueName(property, nameContext, value) ?? string.Format(lvc.AspectToStringFormat, lvc.GetAspectByName(obj));
-                        }
-                    }
-                }
-
-                lvc.AspectToStringConverter = converter;
-                return (oldGetter != null) ? oldGetter(obj) : lvc.GetAspectByName(obj);
-            };
-
-            AllColumns.Add(lvc);
-            Columns.Add(lvc);
-        }
-
-        public void AddColumns(IEnumerable<OLVColumn> lvcs) {
-            foreach (var lvc in lvcs)
-                AddColumn(lvc);
         }
 
         /// <summary>
@@ -285,27 +265,22 @@ namespace SF3.Win.Controls {
             }
         }
 
-        private void ForAllHeaderStyles(Action<HeaderFormatStyle, OLVColumn> func) {
-            func(HeaderFormatStyle, null);
-            foreach (var lvc in AllColumns)
-                if (lvc.HeaderFormatStyle != null)
-                    func(lvc.HeaderFormatStyle, lvc);
-        }
-
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public NameGetterContextFetcherHandler NameGetterContextFetcher { get; set; }
 
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public INameGetterContext NameGetterContext {
             get => NameGetterContextFetcher?.Invoke();
             set => NameGetterContextFetcher = (value == null) ? null : (() => value);
         }
 
-        private bool _wasVisible = true;
-        private Timer _timer = new Timer();
-
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
         public Color AlternateRowBackColor2 { get; set; } = Color.Empty;
+
+        private bool _wasVisible = true;
+        private Timer _timer = new Timer();
     }
 }

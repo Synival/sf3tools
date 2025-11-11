@@ -8,6 +8,7 @@ using CommonLib.NamedValues;
 using SF3.Models.Structs;
 using SF3.Models.Tables;
 using SF3.Win.Controls;
+using SF3.Win.Utils;
 
 namespace SF3.Win.Views {
     public class TableView : ViewBase, ITableView {
@@ -25,10 +26,10 @@ namespace SF3.Win.Views {
             => "TableView_" + ModelType.FullName + "_" + NameGetterContext.Name + "_" + (DisplayGroups != null ? ("_" + string.Join("_", DisplayGroups)) : "");
 
         private EnhancedObjectListView PopCachedOLV()
-            => EnhancedObjectListView.PopCachedOLV(GetCacheKey());
+            => ObjectListViewUtils.PopCachedOLV(GetCacheKey());
 
         private void PushCachedOLV()
-            => EnhancedObjectListView.PushCachedOLV(GetCacheKey(), OLVControl);
+            => ObjectListViewUtils.PushCachedOLV(GetCacheKey(), OLVControl);
 
         private EnhancedObjectListView GetOLV() {
             var olv = PopCachedOLV();
