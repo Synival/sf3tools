@@ -3,7 +3,7 @@ using System;
 using OpenTK.Graphics.OpenGL;
 
 namespace SF3.Win.OpenGL {
-    public class Buffer {
+    public class Buffer : IDisposable {
         public Buffer() {
             Handle = GL.GenBuffer();
         }

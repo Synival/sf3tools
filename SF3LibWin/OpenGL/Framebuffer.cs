@@ -2,7 +2,7 @@
 using OpenTK.Graphics.OpenGL;
 
 namespace SF3.Win.OpenGL {
-    public class Framebuffer {
+    public class Framebuffer : IDisposable {
         public Framebuffer(int width, int height) {
             ColorTexture = new Texture(width, height, PixelInternalFormat.Rgb, PixelFormat.Rgb, PixelType.UnsignedByte);
             DepthStencilTexture = new Texture(width, height, PixelInternalFormat.Depth24Stencil8, PixelFormat.DepthStencil, PixelType.UnsignedInt248);
