@@ -3,6 +3,7 @@ using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 using DFRLib.Types;
+using System.ComponentModel;
 
 namespace DFRLib.Win.Forms {
     public partial class frmDFRTool : Form {
@@ -79,6 +80,8 @@ namespace DFRLib.Win.Forms {
         /// <summary>
         /// When set, the "Create" command will use explicit "altered file" data instead of an actual file.
         /// </summary>
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public byte[]? CreateDFRAlteredData {
             get => createDFRControl1.AlteredData;
             set => createDFRControl1.AlteredData = value;
@@ -87,6 +90,8 @@ namespace DFRLib.Win.Forms {
         /// <summary>
         /// When set, the "Apply" command will use explicit "input file" data instead of an actual file.
         /// </summary>
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public byte[]? ApplyDFRInputData {
             get => applyDFRControl1.InputData;
             set => applyDFRControl1.InputData = value;
