@@ -3,6 +3,7 @@
 namespace SF3.Editor.Forms {
     public partial class SF3EditorForm {
         private void InitViewMenu() {
+            tsmiView_DarkMode.Checked                    = _appState.DarkMode;
             tsmiView_HighlightEndcodesInTextureViews.Checked = _appState.HighlightEndCodesInTextureView;
 
             tsmiView_MPD_DrawSurfaceModel.Checked        = _appState.ViewerDrawSurfaceModel;
@@ -30,6 +31,8 @@ namespace SF3.Editor.Forms {
 
             tsmiView_MPD_EnableBlankFieldV2Controls.Checked = _appState.EnableExperimentalBlankFieldV2Brushes;
 
+            _appState.DarkModeChanged += (s, e)
+                => { tsmiView_DarkMode.Checked = _appState.DarkMode; _appState.Serialize(); };
             _appState.HighlightEndCodesInTextureViewChanged += (s, e)
                 => { tsmiView_HighlightEndcodesInTextureViews.Checked = _appState.HighlightEndCodesInTextureView; _appState.Serialize(); };
 
@@ -81,6 +84,8 @@ namespace SF3.Editor.Forms {
 
         private void tsmiView_HighlightEndcodesInTextureViews_Click(object sender, EventArgs e)
             => _appState.HighlightEndCodesInTextureView = !_appState.HighlightEndCodesInTextureView;
+        private void tsmiView_DarkMode_Click(object sender, EventArgs e)
+            => _appState.DarkMode = !_appState.DarkMode;
 
         private void tsmiView_MPD_DrawSurfaceModel_Click(object sender, EventArgs e)
             => _appState.ViewerDrawSurfaceModel = !_appState.ViewerDrawSurfaceModel;

@@ -62,6 +62,7 @@ namespace SF3.Editor.Forms {
             tsmiFile_Sep5 = new System.Windows.Forms.ToolStripSeparator();
             tsmiFile_Exit = new System.Windows.Forms.ToolStripMenuItem();
             tsmiView = new System.Windows.Forms.ToolStripMenuItem();
+            tsmiView_DarkMode = new System.Windows.Forms.ToolStripMenuItem();
             tsmiView_HighlightEndcodesInTextureViews = new System.Windows.Forms.ToolStripMenuItem();
             tsmiView_Sep1 = new System.Windows.Forms.ToolStripSeparator();
             tsmiView_MPD = new System.Windows.Forms.ToolStripMenuItem();
@@ -392,10 +393,17 @@ namespace SF3.Editor.Forms {
             // 
             // tsmiView
             // 
-            tsmiView.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { tsmiView_HighlightEndcodesInTextureViews, tsmiView_Sep1, tsmiView_MPD });
+            tsmiView.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { tsmiView_DarkMode, tsmiView_HighlightEndcodesInTextureViews, tsmiView_Sep1, tsmiView_MPD });
             tsmiView.Name = "tsmiView";
             tsmiView.Size = new Size(44, 20);
             tsmiView.Text = "&View";
+            // 
+            // tsmiView_DarkMode
+            // 
+            tsmiView_DarkMode.Name = "tsmiView_DarkMode";
+            tsmiView_DarkMode.Size = new Size(265, 22);
+            tsmiView_DarkMode.Text = "&Dark Mode";
+            tsmiView_DarkMode.Click += tsmiView_DarkMode_Click;
             // 
             // tsmiView_HighlightEndcodesInTextureViews
             // 
@@ -855,6 +863,7 @@ namespace SF3.Editor.Forms {
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            BackColor = SystemColors.Control;
             ClientSize = new Size(891, 631);
             Controls.Add(menuStrip1);
             Icon = (Icon) resources.GetObject("$this.Icon");
@@ -971,5 +980,6 @@ namespace SF3.Editor.Forms {
         private System.Windows.Forms.ToolStripMenuItem tsmiView_MPD_ApplyShadowTags;
         private System.Windows.Forms.ToolStripMenuItem tsmiView_MPD_RenderOnBlackBackground;
         private System.Windows.Forms.ToolStripMenuItem tsmiView_MPD_ApplyHideTags;
+        private System.Windows.Forms.ToolStripMenuItem tsmiView_DarkMode;
     }
 }

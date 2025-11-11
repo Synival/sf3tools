@@ -128,6 +128,16 @@ namespace SF3.Win {
         public string FileFullPath { get; private set; } = null;
 
         /// <summary>
+        /// When enabled, the user interface will use dark colors.
+        /// </summary>
+        public bool DarkMode {
+            get => _darkMode;
+            set => SetValue(ref _darkMode, value, DarkModeChanged);
+        }
+        private bool _darkMode = true;
+        public event EventHandler DarkModeChanged;
+
+        /// <summary>
         /// When enabled, the MPD Viewer will draw the surface model.
         /// </summary>
         public bool ViewerDrawSurfaceModel {
