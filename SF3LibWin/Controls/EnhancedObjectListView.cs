@@ -8,7 +8,6 @@ using CommonLib.Attributes;
 using CommonLib.Utils;
 using CommonLib.ViewModels;
 using SF3.Models.Structs;
-using SF3.Win.Extensions;
 using SF3.Win.Views;
 
 namespace SF3.Win.Controls {
@@ -139,6 +138,15 @@ namespace SF3.Win.Controls {
                 _wasVisible = false;
                 _timer.Stop();
             }
+        }
+
+        /// <summary>
+        /// Runs RefreshItem() on all OLVListItem's in the property Items.
+        /// </summary>
+        /// <param name="olv">The ObjectListView to refresh.</param>
+        public void RefreshAllItems() {
+            foreach (var item in Items)
+                RefreshItem(item as OLVListItem);
         }
 
         private bool _wasVisible = true;

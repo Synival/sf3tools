@@ -13,53 +13,6 @@ using static SF3.Win.Utils.ControlUtils;
 namespace SF3.Win.Extensions {
     public static class ObjectListViewExtensions {
         /// <summary>
-        /// Runs RefreshItem() on all OLVListItem's in the property Items.
-        /// </summary>
-        /// <param name="olv">The ObjectListView to refresh.</param>
-        public static void RefreshAllItems(this ObjectListView olv) {
-            foreach (var item in olv.Items) {
-                var olvItem = item as OLVListItem;
-                olv.RefreshItem(olvItem);
-            }
-        }
-
-        /// <summary>
-        /// Renderer that will display hex values will a special font.
-        /// </summary>
-        private class HexRenderer : BaseRenderer {
-            private static readonly Font _defaultFont = Control.DefaultFont;
-            private static readonly Font _hexFont = new Font("Courier New", Control.DefaultFont.Size);
-
-            private Font _currentRenderFont = Control.DefaultFont;
-            private Color _currentRenderColor = Color.Black;
-
-            public static Font GetCellFont(string formatString)
-                => formatString.StartsWith("{0:X") ? _hexFont : _defaultFont;
-
-            public override bool RenderSubItem(DrawListViewSubItemEventArgs e, Graphics g, Rectangle cellBounds, object rowObject) {
-                var lvc = ((ObjectListView) e.Item.ListView).GetColumn(e.ColumnIndex);
-                _ = lvc.AspectGetter(rowObject);
-
-                // If an AspectToStringConverter was supplied, this is probably a named value. Just use the default font.
-                var formatString = (lvc.AspectToStringConverter == null) ? (lvc.AspectToStringFormat ?? "") : "";
-                _currentRenderFont = GetCellFont(formatString);
-                _currentRenderColor = lvc.IsEditable ? Color.Black : _readOnlyColor;
-
-                return base.RenderSubItem(e, g, cellBounds, rowObject);
-            }
-
-            protected override Color GetForegroundColor()
-                => _currentRenderColor;
-
-            public override void Render(Graphics g, Rectangle r) {
-                Font = _currentRenderFont;
-                base.Render(g, r);
-            }
-        }
-
-        private static HexRenderer GlobalHexRenderer = new HexRenderer();
-
-        /// <summary>
         /// Applies some neat extensions to the ObjectListView.
         /// </summary>
         /// <param name="olv">The ObjectListView to enhance.</param>
@@ -102,7 +55,7 @@ namespace SF3.Win.Extensions {
 
             olv.SetNameGetterContextFetcher(nameGetterContextFetcher);
             olv.OwnerDraw = true;
-            olv.DefaultRenderer = GlobalHexRenderer;
+            olv.DefaultRenderer = EnhancedOLVRenderer.Instance;
             olv.CellEditStarting += (s, e) => olv.EnhanceOlvCellEditControl(e);
 
             foreach (var lvc in olv.AllColumns)
@@ -184,7 +137,7 @@ namespace SF3.Win.Extensions {
                 }
             }
             else if (e.Control is NumericUpDown control) {
-                control.Font = HexRenderer.GetCellFont(e.Column.AspectToStringFormat ?? "");
+                control.Font = EnhancedOLVRenderer.GetCellFont(e.Column.AspectToStringFormat ?? "");
 
                 // Ensure that strings displayed in hex format are edited in hex format.
                 if (e.Column.AspectToStringFormat?.StartsWith("{0:X") == true)
