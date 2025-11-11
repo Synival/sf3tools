@@ -78,7 +78,9 @@ namespace SF3.Editor.Forms {
                 using (var stream = new FileStream(filename, FileMode.Open, FileAccess.Read))
                     return LoadFile(filename, scenario, fileType, stream, addToRecentFiles);
             }
-            catch (Exception) {
+            catch (Exception ex) {
+                Logger.LogException(ex);
+                ErrorMessage($"Couldn't load '{filename}' for reading.\r\n\r\nException", ex);
                 return null;
             }
         }
