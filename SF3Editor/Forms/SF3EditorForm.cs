@@ -7,11 +7,12 @@ using SF3.ModelLoaders;
 using SF3.NamedValues;
 using SF3.Types;
 using SF3.Win;
+using SF3.Win.Forms;
 using SF3.Win.Views;
 using static SF3.Utils.FileUtils;
 
 namespace SF3.Editor.Forms {
-    public partial class SF3EditorForm : Form {
+    public partial class SF3EditorForm : DarkModeForm {
         public static readonly string Version = "0.2.1" + " (dev build: " + DateTime.Today.ToString("yyyy/MM/dd") + ")";
 
         private readonly Dictionary<ScenarioType, INameGetterContext> c_nameGetterContexts = Enum.GetValues<ScenarioType>()
