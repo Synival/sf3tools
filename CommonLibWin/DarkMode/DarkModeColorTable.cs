@@ -1,7 +1,7 @@
 ﻿using System.Drawing;
 using System.Windows.Forms;
 
-namespace SF3.Win.DarkMode {
+namespace CommonLib.Win.DarkMode {
     // Color table used by dark mode for tool strips and menu strips.
     public class DarkModeColorTable : ProfessionalColorTable {
         // Background colors

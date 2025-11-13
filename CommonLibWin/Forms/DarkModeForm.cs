@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
-using SF3.Win.DarkMode;
+using CommonLib.Win.DarkMode;
 
 namespace SF3.Win.Forms {
     /// <summary>

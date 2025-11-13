@@ -8,10 +8,10 @@ using BrightIdeasSoftware;
 using CommonLib.Attributes;
 using CommonLib.Extensions;
 using CommonLib.NamedValues;
-using CommonLib.Utils;
 using CommonLib.ViewModels;
+using CommonLib.Win.DarkMode;
+using CommonLib.Win.Utils;
 using SF3.Models.Structs;
-using SF3.Win.DarkMode;
 using SF3.Win.Views;
 
 namespace SF3.Win.Controls {
@@ -37,7 +37,7 @@ namespace SF3.Win.Controls {
 
             CellToolTipGetter = GetCellTooltip;
             HighlightBackgroundColor = SystemColors.Highlight;
-            UnfocusedHighlightBackgroundColor = Utils.MathHelpers.Lerp(HighlightBackgroundColor, SystemColors.Window, 0.50f);
+            UnfocusedHighlightBackgroundColor = MathHelpers.Lerp(HighlightBackgroundColor, SystemColors.Window, 0.50f);
 
             NameGetterContextFetcher = nameGetterContextFetcher;
             OwnerDraw = true;
@@ -47,7 +47,7 @@ namespace SF3.Win.Controls {
 
             HighlightBackgroundColor = SystemColors.Highlight;
             HighlightForegroundColor = SystemColors.HighlightText;
-            UnfocusedHighlightBackgroundColor = Utils.MathHelpers.Lerp(HighlightBackgroundColor, BackColor, 0.50f);
+            UnfocusedHighlightBackgroundColor = MathHelpers.Lerp(HighlightBackgroundColor, BackColor, 0.50f);
             UnfocusedHighlightForegroundColor = SystemColors.HighlightText;
             HeaderBackgroundColor = Color.FromArgb(0xF0, 0xF0, 0xF0);
 
@@ -262,7 +262,7 @@ namespace SF3.Win.Controls {
                             var value = Convert.ToInt32(valueObj);
                             lines.Add("Property Info:");
                             if (isMultiRow && modelStruct != null)
-                                lines.Add($"  Offset in Row: {ValueUtils.SignedHexStr(value - modelStruct.Address, "X2")}");
+                                lines.Add($"  Offset in Row: {CommonLib.Utils.ValueUtils.SignedHexStr(value - modelStruct.Address, "X2")}");
                             lines.Add($"  File Address: 0x{value:X4}");
                         }
                     }

@@ -1,6 +1,6 @@
 ﻿using System.Drawing;
 
-namespace SF3.Win.Utils {
+namespace CommonLib.Win.Utils {
     public static class MathHelpers {
         /// <summary>
         /// Performs linear interpolation of colors 'a' and 'b' with amount 't'.

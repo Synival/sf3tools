@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
-using SF3.Win.DarkMode;
+using CommonLib.Win.DarkMode;
 
 namespace SF3.Win.Controls {
     public partial class ImageControl : UserControl {

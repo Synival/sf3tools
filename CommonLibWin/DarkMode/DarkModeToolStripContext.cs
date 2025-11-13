@@ -1,6 +1,6 @@
 ﻿using System.Windows.Forms;
 
-namespace SF3.Win.DarkMode {
+namespace CommonLib.Win.DarkMode {
     /// <summary>
     /// Dark mode context for ToolStrip or MenuStrip.
     /// </summary>

@@ -1,5 +1,6 @@
 using System;
 using System.Windows.Forms;
+using CommonLib.Win.DarkMode;
 using SF3.Editor.Forms;
 using SF3.Win;
 using static SF3.Win.Utils.ObjectListViewUtils;
@@ -16,7 +17,10 @@ namespace SF3.Editor {
             ApplicationConfiguration.Initialize();
 
             // Fetch saved application state
-            AppState.RetrieveAppState("SF3 Editor");
+            var appState = AppState.RetrieveAppState("SF3 Editor");
+
+            // Supply a state for dark mode support
+            DarkModeContext.Observable = appState;
 
             // Add some special handles types to ObjectListView 
             RegisterNamedValues();

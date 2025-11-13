@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace SF3.Win.DarkMode {
+namespace CommonLib.Win.DarkMode {
     /// <summary>
     /// Base class for anything that can react to the enabling or disabling of dark mode.
     /// To use, create and initialize in OnHandleCreated() of the control or form.
@@ -8,6 +8,8 @@ namespace SF3.Win.DarkMode {
     /// Alternatively, you can react to the event EnabledChanged to apply changes based on the dark mode state.
     /// </summary>
     public abstract class DarkModeContext : IDisposable {
+        public static IDarkModeObservable Observable { get; set; }
+
         ~DarkModeContext() {
             Dispose(false);
         }
@@ -20,18 +22,18 @@ namespace SF3.Win.DarkMode {
         public void Init() {
             if (IsInitialized)
                 throw new InvalidOperationException("Dark mode already initialized");
+            if (Observable == null)
+                throw new InvalidOperationException($"Global '{nameof(Observable)}' is unset; please set before using dark mode");
+
             IsInitialized = true;
-
-            var appState = AppState.RetrieveAppState();
-            appState.DarkModeChanged += ToggleDarkModeHandler;
-
+            Observable.DarkModeChanged += ToggleDarkModeHandler;
             OnInit();
 
-            Enabled = appState.DarkMode;
+            Enabled = Observable.DarkMode;
         }
 
         private void ToggleDarkModeHandler(object sender, EventArgs args)
-             => Enabled = AppState.RetrieveAppState().DarkMode;
+             => Enabled = Observable.DarkMode;
 
         /// <summary>
         /// Run during OnInit(), after setting up events but before turning dark mode on if necessary.
@@ -76,7 +78,8 @@ namespace SF3.Win.DarkMode {
         protected virtual void Dispose(bool disposing) {
             if (!_disposed) {
                 if (disposing) {
-                    AppState.RetrieveAppState().DarkModeChanged -= ToggleDarkModeHandler;
+                    if (IsInitialized)
+                        Observable.DarkModeChanged -= ToggleDarkModeHandler;
                     OnDispose();
                 }
                 _disposed = true;

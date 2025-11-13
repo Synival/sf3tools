@@ -2,7 +2,8 @@
 using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
-using SF3.Win.DarkMode;
+using CommonLib.Win.DarkMode;
+using CommonLib.Win.Utils;
 
 namespace SF3.Win.Controls {
     /// <summary>
@@ -28,7 +29,22 @@ namespace SF3.Win.Controls {
         protected override void OnHandleCreated(EventArgs e) {
             base.OnHandleCreated(e);
             if (DarkModeContext == null) {
-                DarkModeContext = new DarkModeTabControlContext<EnhancedTabControl>(this);
+                OriginalHighlightedBackColor = HighlightedBackColor;
+                OriginalHighlightedForeColor = HighlightedForeColor;
+
+                DarkModeContext = new DarkModeControlContext<EnhancedTabControl>(this);
+                DarkModeContext.EnabledChanged += (s, e) => {
+                    if (DarkModeContext.Enabled) {
+                        CustomPaint = true;
+                        HighlightedBackColor = DarkModeColors.HighlightedBackColor;
+                        HighlightedForeColor = DarkModeColors.HighlightedForeColor;
+                    }
+                    else {
+                        CustomPaint = false;
+                        HighlightedBackColor = OriginalHighlightedBackColor;
+                        HighlightedForeColor = OriginalHighlightedForeColor;
+                    }
+                };
                 DarkModeContext.Init();
             }
         }
@@ -58,7 +74,7 @@ namespace SF3.Win.Controls {
             Color backColor = BackColor;
             if (e.State.HasFlag(DrawItemState.Selected)) {
                 backColor = !e.State.HasFlag(DrawItemState.Focus)
-                    ? Utils.MathHelpers.Lerp(HighlightedBackColor, BackColor, 0.50f)
+                    ? MathHelpers.Lerp(HighlightedBackColor, BackColor, 0.50f)
                     : HighlightedBackColor;
             }
 
@@ -166,7 +182,10 @@ namespace SF3.Win.Controls {
             }
         }
 
+        public Color OriginalHighlightedBackColor { get; set; }
+        public Color OriginalHighlightedForeColor { get; set; }
+
         private bool _needsDisplayRectangleFix = false;
-        private DarkModeTabControlContext<EnhancedTabControl> DarkModeContext { get; set; }
+        private DarkModeControlContext<EnhancedTabControl> DarkModeContext { get; set; }
     }
 }

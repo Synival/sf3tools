@@ -1,7 +1,7 @@
 ﻿using System.Drawing;
 using System.Windows.Forms;
 
-namespace SF3.Win.DarkMode {
+namespace CommonLib.Win.DarkMode {
     /// <summary>
     /// Dark mode renderer for ToolStrip and MenuStrip controls.
     /// </summary>

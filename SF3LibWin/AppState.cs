@@ -2,11 +2,12 @@
 using System.IO;
 using System.Linq;
 using CommonLib.Types;
+using CommonLib.Win.DarkMode;
 using Newtonsoft.Json;
 using SF3.Types;
 
 namespace SF3.Win {
-    public class AppState {
+    public class AppState : IDarkModeObservable {
         private static AppState _globalAppState = null;
 
         public AppState() { }

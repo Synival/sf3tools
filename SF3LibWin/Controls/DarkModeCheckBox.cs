@@ -2,7 +2,7 @@
 using System.Drawing;
 using System.Windows.Forms;
 using System.Windows.Forms.VisualStyles;
-using SF3.Win.DarkMode;
+using CommonLib.Win.DarkMode;
 
 namespace SF3.Win.Controls {
     public class DarkModeCheckBox : CheckBox {
