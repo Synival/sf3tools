@@ -1,14 +1,17 @@
 ﻿using System;
 using System.Drawing;
+using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using SF3.Win.DarkMode;
 
 namespace SF3.Win.Controls {
     public class DarkModeComboBox : ComboBox {
+        [DllImport("gdi32.dll")]
+        private static extern IntPtr CreateSolidBrush(int color);
+
         public DarkModeComboBox() {
             DrawItem += DrawDarkModeItem;
             DrawMode = DrawMode.OwnerDrawFixed;
-            EnabledChanged += (s, e) => DropDownStyle = Enabled ? ComboBoxStyle.DropDown : ComboBoxStyle.DropDownList;
         }
 
         protected override void OnHandleCreated(EventArgs e) {
@@ -23,11 +26,35 @@ namespace SF3.Win.Controls {
             }
         }
 
+        private static IntPtr _darkModeDisabledBackColorBrush = CreateSolidBrush(ColorTranslator.ToWin32(DarkModeColors.BackColor));
         protected override void WndProc(ref Message m) {
-            if (m.Msg == 0x000F /* WM_PAINT */ && Text != "" && Handle != IntPtr.Zero && SelectionLength > 0 && !Focused)
-                SelectionLength = 0;
+            switch (m.Msg) {
+                case 0x000F /* WM_PAINT */:
+                    if (Text != "" && Handle != IntPtr.Zero && SelectionLength > 0 && !Focused)
+                        SelectionLength = 0;
 
-            base.WndProc(ref m);
+                    base.WndProc(ref m);
+
+                    if (DarkModeContext.Enabled) {
+                        using (var g = Graphics.FromHwnd(Handle)) {
+                            using (var brush = new SolidBrush(DarkModeColors.BackColor))
+                                g.FillRectangle(brush, 0, 0, ClientRectangle.Width - SystemInformation.VerticalScrollBarWidth, ClientRectangle.Height);
+                            using (var pen = new Pen(DarkModeColors.BorderColor))
+                                g.DrawRectangle(pen, 0, 0, Width - 1, Height - 1);
+                        }
+                    }
+                    break;
+
+                case 0x0138 /* WM_CTLCOLORSTATIC */: {
+                    if (DarkModeContext.Enabled)
+                        m.Result = _darkModeDisabledBackColorBrush;
+                    break;
+                }
+
+                default:
+                    base.WndProc(ref m);
+                    break;
+            }
         }
 
         private void DrawDarkModeItem(object sender, DrawItemEventArgs e) {

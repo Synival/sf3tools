@@ -9,7 +9,7 @@ namespace SF3.Win.Utils {
         /// Creates a combo box that can be bound to a named value.
         /// </summary>
         /// <returns>A new pre-configured ComboBox.</returns>
-        public static ComboBox MakeNamedValueComboBox(INamedValueInfo info, int currentValue) {
+        public static DarkModeComboBox MakeNamedValueComboBox(INamedValueInfo info, int currentValue) {
             var values = new Dictionary<int, string>(info.ComboBoxValues);
             if (!values.ContainsKey(currentValue))
                 values.Add(currentValue, currentValue.ToString(info.FormatString));
