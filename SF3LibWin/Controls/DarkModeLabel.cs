@@ -34,8 +34,10 @@ namespace SF3.Win.Controls {
 
         protected override void OnPaint(PaintEventArgs e) {
             var textFormatFlags = ToTextFormatFlags(TextAlign);
-            if (!Enabled && DisabledColor != Color.Empty)
+            if (!Enabled && DisabledColor != Color.Empty) {
+                e.Graphics.Clear(Parent?.BackColor ?? Color.Empty);
                 TextRenderer.DrawText(e.Graphics, Text, Font, ClientRectangle, DisabledColor, textFormatFlags);
+            }
             else
                 base.OnPaint(e);
         }

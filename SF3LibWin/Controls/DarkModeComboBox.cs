@@ -23,6 +23,13 @@ namespace SF3.Win.Controls {
             }
         }
 
+        protected override void WndProc(ref Message m) {
+            if (m.Msg == 0x000F /* WM_PAINT */ && Text != "" && Handle != IntPtr.Zero && SelectionLength > 0 && !Focused)
+                SelectionLength = 0;
+
+            base.WndProc(ref m);
+        }
+
         private void DrawDarkModeItem(object sender, DrawItemEventArgs e) {
             Graphics g = e.Graphics;
             Rectangle rect = e.Bounds;
