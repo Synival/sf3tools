@@ -24,7 +24,7 @@
         /// </summary>
         private void InitializeComponent() {
             var resources = new System.ComponentModel.ComponentResourceManager(typeof(MPD_ViewerControl));
-            toolStrip1 = new System.Windows.Forms.ToolStrip();
+            toolStrip1 = new DarkModeToolStrip();
             tsbCursorSelect = new System.Windows.Forms.ToolStripButton();
             tsbCursorNavigate = new System.Windows.Forms.ToolStripButton();
             toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
@@ -56,7 +56,7 @@
             tsbToggleHelp = new System.Windows.Forms.ToolStripButton();
             tilePropertyControl1 = new TilePropertiesControl();
             mpdViewerGLControl1 = new MPD_ViewerGLControl();
-            toolStrip2 = new System.Windows.Forms.ToolStrip();
+            toolStrip2 = new DarkModeToolStrip();
             tsbDrawGrassland = new System.Windows.Forms.ToolStripButton();
             tsbDrawDirt = new System.Windows.Forms.ToolStripButton();
             tsbDrawDarkGrass = new System.Windows.Forms.ToolStripButton();
@@ -84,6 +84,7 @@
             toolStrip1.Size = new System.Drawing.Size(789, 31);
             toolStrip1.TabIndex = 0;
             toolStrip1.Text = "toolStrip1";
+            toolStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             // 
             // tsbCursorSelect
             // 
@@ -396,6 +397,7 @@
             toolStrip2.Size = new System.Drawing.Size(789, 31);
             toolStrip2.TabIndex = 3;
             toolStrip2.Text = "toolStrip2";
+            toolStrip2.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             // 
             // tsbDrawGrassland
             // 
@@ -564,7 +566,7 @@
 
         #endregion
 
-        private System.Windows.Forms.ToolStrip toolStrip1;
+        private DarkModeToolStrip toolStrip1;
         private System.Windows.Forms.ToolStripButton tsbToggleWireframe;
         private System.Windows.Forms.ToolStripButton tsbToggleHelp;
         private System.Windows.Forms.ToolStripButton tsbToggleNormals;
@@ -591,7 +593,7 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
         private System.Windows.Forms.ToolStripButton tsbApplyLighting;
         private System.Windows.Forms.ToolStripButton tsbToggleCollisions;
-        private System.Windows.Forms.ToolStrip toolStrip2;
+        private DarkModeToolStrip toolStrip2;
         private System.Windows.Forms.ToolStripButton tsbDrawNoEntry;
         private System.Windows.Forms.ToolStripButton tsbDrawWater;
         private System.Windows.Forms.ToolStripButton tsbDrawRiver;

@@ -16,6 +16,8 @@ namespace SF3.Win.DarkMode {
         public static readonly Color HighlightedForeColor = Color.FromArgb(0xFF, 0xFF, 0xFF);
         public static readonly Color HighlightedDisabledColor = Utils.MathHelpers.Lerp(HighlightedBackColor, ForeColor, 0.5f);
         public static readonly Color HalfHighlightedBackColor = Utils.MathHelpers.Lerp(HighlightedBackColor, BackColor, 0.5f);
+        public static readonly Color StrongHighlightedBackColor = Color.FromArgb(0x90, 0x90, 0x90);
+        public static readonly Color VeryStrongHighlightedBackColor = Color.FromArgb(0xC0, 0xC0, 0xC0);
 
         // Misc. colors
         public static readonly Color ImageMarginColor = Color.FromArgb(0x28, 0x28, 0x28);

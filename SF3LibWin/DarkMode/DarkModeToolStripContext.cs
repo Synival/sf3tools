@@ -6,9 +6,9 @@ namespace SF3.Win.DarkMode {
     /// </summary>
     /// <typeparam name="T">Underlying type of ToolStrip.</typeparam>
     public class DarkModeToolStripContext<T> : DarkModeControlContext<T> where T : ToolStrip {
-        private static DarkModeToolStripRenderer s_darkModeRenderer = new DarkModeToolStripRenderer();
-
-        public DarkModeToolStripContext(T control) : base(control) {}
+        public DarkModeToolStripContext(T control, bool drawBorder) : base(control) {
+            DarkModeRenderer = new DarkModeToolStripRenderer(drawBorder: drawBorder);
+        }
 
         protected override void OnInit() {
             base.OnInit();
@@ -17,7 +17,7 @@ namespace SF3.Win.DarkMode {
 
         protected override void OnDarkModeEnabled() {
             base.OnDarkModeEnabled();
-            Control.Renderer = s_darkModeRenderer;
+            Control.Renderer = DarkModeRenderer;
         }
 
         protected override void OnDarkModeDisabled() {
@@ -25,6 +25,7 @@ namespace SF3.Win.DarkMode {
             Control.Renderer = OriginalRenderer;
         }
 
+        private DarkModeToolStripRenderer DarkModeRenderer { get; set; }
         public ToolStripRenderer OriginalRenderer { get; private set; }
     }
 }

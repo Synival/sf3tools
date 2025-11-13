@@ -6,11 +6,21 @@ namespace SF3.Win.DarkMode {
     /// Dark mode renderer for ToolStrip and MenuStrip controls.
     /// </summary>
     public class DarkModeToolStripRenderer : ToolStripProfessionalRenderer {
-        public DarkModeToolStripRenderer() : base(new DarkModeColorTable()) {}
+        public bool DrawBorder { get; }
+
+        public DarkModeToolStripRenderer(bool drawBorder) : base(new DarkModeColorTable()) {
+            DrawBorder = drawBorder;
+            RoundedEdges = false;
+        }
 
         protected override void OnRenderItemText(ToolStripItemTextRenderEventArgs e) {
             e.TextColor = e.Item.Selected ? DarkModeColors.HighlightedForeColor : DarkModeColors.ForeColor;
             base.OnRenderItemText(e);
+        }
+
+        protected override void OnRenderToolStripBorder(ToolStripRenderEventArgs e) {
+            if (DrawBorder)
+                base.OnRenderToolStripBorder(e);
         }
 
         protected override void OnRenderSeparator(ToolStripSeparatorRenderEventArgs e)

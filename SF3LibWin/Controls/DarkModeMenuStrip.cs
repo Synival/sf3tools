@@ -10,7 +10,7 @@ namespace SF3.Win.Controls {
         protected override void OnHandleCreated(EventArgs e) {
             base.OnHandleCreated(e);
             if (DarkModeContext == null) {
-                DarkModeContext = new DarkModeToolStripContext<DarkModeMenuStrip>(this);
+                DarkModeContext = new DarkModeToolStripContext<DarkModeMenuStrip>(this, true);
                 DarkModeContext.Init();
             }
         }

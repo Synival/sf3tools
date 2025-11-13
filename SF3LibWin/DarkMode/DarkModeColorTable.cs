@@ -26,5 +26,29 @@ namespace SF3.Win.DarkMode {
         // Border colors
         public override Color MenuBorder => DarkModeColors.BorderColor;
         public override Color MenuItemBorder => DarkModeColors.BorderColor;
+        public override Color ToolStripBorder => DarkModeColors.BorderColor;
+
+        // Checked tool strip buttons
+        public override Color ButtonCheckedGradientBegin => DarkModeColors.StrongHighlightedBackColor;
+        public override Color ButtonCheckedGradientEnd => DarkModeColors.StrongHighlightedBackColor;
+        public override Color ButtonCheckedGradientMiddle => DarkModeColors.StrongHighlightedBackColor;
+        public override Color ButtonCheckedHighlight => DarkModeColors.StrongHighlightedBackColor;
+
+        // Hover over checked tool stip buttons / pressed buttons
+        public override Color ButtonPressedGradientBegin => DarkModeColors.VeryStrongHighlightedBackColor;
+        public override Color ButtonPressedGradientEnd => DarkModeColors.VeryStrongHighlightedBackColor;
+        public override Color ButtonPressedGradientMiddle => DarkModeColors.VeryStrongHighlightedBackColor;
+        public override Color ButtonPressedBorder => DarkModeColors.VeryStrongHighlightedBackColor;
+
+        // Hover over unchecked tool strip buttons
+        public override Color ButtonSelectedGradientBegin => DarkModeColors.HalfHighlightedBackColor;
+        public override Color ButtonSelectedGradientEnd => DarkModeColors.HalfHighlightedBackColor;
+        public override Color ButtonSelectedGradientMiddle => DarkModeColors.HalfHighlightedBackColor;
+        public override Color ButtonSelectedHighlight => DarkModeColors.HalfHighlightedBackColor;
+        public override Color ButtonSelectedHighlightBorder => DarkModeColors.HalfHighlightedBackColor;
+
+        // Misc. colors
+        public override Color GripLight => DarkModeColors.BorderColor;
+        public override Color GripDark => Utils.MathHelpers.Lerp(DarkModeColors.BackColor, GripLight, 0.50f);
     };
 }
