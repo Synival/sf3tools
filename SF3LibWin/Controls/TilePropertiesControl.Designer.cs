@@ -23,7 +23,7 @@
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent() {
-            gbMovement = new System.Windows.Forms.GroupBox();
+            gbMovement = new DarkModeGroupBox();
             cbMoveSlope = new System.Windows.Forms.CheckBox();
             nudMoveHeightmapBR = new System.Windows.Forms.NumericUpDown();
             nudMoveHeightmapBL = new System.Windows.Forms.NumericUpDown();
@@ -34,10 +34,10 @@
             labelMoveHeight = new DarkModeLabel();
             cbMoveTerrain = new DarkModeComboBox();
             labelMoveTerrain = new DarkModeLabel();
-            gbEvent = new System.Windows.Forms.GroupBox();
+            gbEvent = new DarkModeGroupBox();
             nudEventID = new System.Windows.Forms.NumericUpDown();
             labelEventID = new DarkModeLabel();
-            gbModel = new System.Windows.Forms.GroupBox();
+            gbModel = new DarkModeGroupBox();
             nudModelTextureID = new System.Windows.Forms.NumericUpDown();
             cbModelTileIsFlat = new System.Windows.Forms.CheckBox();
             cbModelRotate = new DarkModeComboBox();
@@ -351,10 +351,10 @@
 
         #endregion
 
-        private System.Windows.Forms.GroupBox gbMovement;
+        private DarkModeGroupBox gbMovement;
         private DarkModeLabel labelMoveHeight;
-        private System.Windows.Forms.GroupBox gbEvent;
-        private System.Windows.Forms.GroupBox gbModel;
+        private DarkModeGroupBox gbEvent;
+        private DarkModeGroupBox gbModel;
         private DarkModeLabel labelMoveTerrain;
         private DarkModeComboBox cbMoveTerrain;
         private DarkModeLabel labelMoveHeightmap;
