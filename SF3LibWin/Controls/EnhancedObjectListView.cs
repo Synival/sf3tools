@@ -135,6 +135,13 @@ namespace SF3.Win.Controls {
             }
         }
 
+        protected override Control MakeDefaultCellEditor(OLVColumn column) {
+            var tb = new DarkModeTextBox();
+            if (column.AutoCompleteEditor)
+                ConfigureAutoComplete(tb, column);
+            return tb;
+        }
+
         /// <summary>
         /// Runs RefreshItem() on all OLVListItem's in the property Items.
         /// </summary>

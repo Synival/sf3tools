@@ -1,0 +1,25 @@
+﻿using System;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using SF3.Win.DarkMode;
+
+namespace SF3.Win.Controls {
+    /// <summary>
+    /// TextBox with dark mode support.
+    /// </summary>
+    public class DarkModeTextBox : TextBox {
+        public DarkModeTextBox() {
+            BorderStyle = BorderStyle.FixedSingle;
+        }
+
+        protected override void OnHandleCreated(EventArgs e) {
+            base.OnHandleCreated(e);
+            if (DarkModeContext == null) {
+                DarkModeContext = new DarkModeControlContext<DarkModeTextBox>(this);
+                DarkModeContext.Init();
+            }
+        }
+
+        private DarkModeControlContext<DarkModeTextBox> DarkModeContext { get; set; }
+    }
+}
