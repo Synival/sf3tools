@@ -1,5 +1,8 @@
-﻿using System.Drawing;
+﻿using System;
+using System.ComponentModel;
+using System.Drawing;
 using System.Windows.Forms;
+using SF3.Win.DarkMode;
 
 namespace SF3.Win.Controls {
     /// <summary>
@@ -22,11 +25,45 @@ namespace SF3.Win.Controls {
             ResumeLayout();
         }
 
+        protected override void OnHandleCreated(EventArgs e) {
+            base.OnHandleCreated(e);
+            if (DarkModeContext == null) {
+                DarkModeContext = new DarkModeTabControlContext<EnhancedTabControl>(this);
+                DarkModeContext.Init();
+            }
+        }
+
+        protected override void OnPaint(PaintEventArgs e) {
+            base.OnPaint(e);
+            if (CustomPaint) {
+                for (int i = 0; i < TabCount; i++) {
+                    var bounds = GetTabRect(i);
+                    if (!bounds.IntersectsWith(e.ClipRectangle))
+                        continue;
+
+                    var drawState = DrawItemState.None;
+                    if (SelectedIndex == i)
+                        drawState |= DrawItemState.Selected;
+                    if (Focused)
+                        drawState |= DrawItemState.Focus;
+
+                    EnhancedDraw(this, new DrawItemEventArgs(e.Graphics, Font, e.ClipRectangle, i, drawState));
+                }
+            }
+        }
+
         private void EnhancedDraw(object sender, DrawItemEventArgs e) {
             var tabPage = TabPages[e.Index];
-            var foreBrush = new SolidBrush(tabPage.ForeColor);
-            var backBrush = new SolidBrush(e.State == DrawItemState.Selected ? Color.FromArgb(0xF8, 0xF8, 0xF8) : tabPage.BackColor);
+
+            Color backColor = BackColor;
+            if (e.State.HasFlag(DrawItemState.Selected)) {
+                backColor = !e.State.HasFlag(DrawItemState.Focus)
+                    ? Utils.MathHelpers.Lerp(HighlightedBackColor, BackColor, 0.50f)
+                    : HighlightedBackColor;
+            }
+
             var bounds = GetTabRect(e.Index);
+ 
             StringFormat stringFlags = new StringFormat {
                 Alignment     = StringAlignment.Center,
                 LineAlignment = StringAlignment.Center
@@ -34,11 +71,13 @@ namespace SF3.Win.Controls {
 
             // Draw the background, the text, and a focus rectangle.
             // TODO: there is quite a lot of flickering here that needs to be removed!!
-            e.Graphics.FillRectangle(backBrush, bounds);
+            using (var backBrush = new SolidBrush(backColor))
+                e.Graphics.FillRectangle(backBrush, bounds);
 
             var font = (Alignment == TabAlignment.Left || Alignment == TabAlignment.Right) ? new Font(e.Font.FontFamily, e.Font.Size * 0.85f, e.Font.Style) : e.Font;
-            e.Graphics.DrawString(tabPage.Text, font, foreBrush, bounds, stringFlags);
-            if (e.State == DrawItemState.Selected)
+            using (var foreBrush = new SolidBrush(e.State.HasFlag(DrawItemState.Selected) ? HighlightedForeColor : tabPage.ForeColor))
+                e.Graphics.DrawString(tabPage.Text, font, foreBrush, bounds, stringFlags);
+            if (!_customPaint && e.State == DrawItemState.Selected)
                 e.DrawFocusRectangle();
         }
 
@@ -56,6 +95,78 @@ namespace SF3.Win.Controls {
             base.OnLayout(levent);
         }
 
+        private Color _backColor = SystemColors.Control;
+        /// <summary>
+        /// Background color for unhighlighted tabs and, if CustomPaint is 'true', all other empty space.
+        /// </summary>
+        public override Color BackColor {
+            get => _backColor;
+            set {
+                if (_backColor != value) {
+                    _backColor = value;
+                    Invalidate();
+                    OnBackColorChanged(EventArgs.Empty);
+                }
+            }
+        }
+
+        private Color _foreColor = SystemColors.ControlText;
+        /// <summary>
+        /// Text color.
+        /// </summary>
+        public override Color ForeColor {
+            get => _foreColor;
+            set {
+                if (_foreColor != value) {
+                    _foreColor = value;
+                    Invalidate();
+                    OnForeColorChanged(EventArgs.Empty);
+                }
+            }
+        }
+
+        private Color _highlightedBackColor = Color.FromArgb(0xFF, 0xFF, 0xFF);
+        /// <summary>
+        /// Back color used for the highlighted menu item.
+        /// </summary>
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        public Color HighlightedBackColor {
+            get => _highlightedBackColor;
+            set {
+                _highlightedBackColor = value;
+                Invalidate();
+            }
+        }
+
+        private Color _highlightedForeColor = SystemColors.ControlText;
+        /// <summary>
+        /// Fore/text color used for the highlighted menu item.
+        /// </summary>
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        public Color HighlightedForeColor {
+            get => _highlightedForeColor;
+            set {
+                _highlightedForeColor = value;
+                Invalidate();
+            }
+        }
+
+        private bool _customPaint;
+        /// <summary>
+        /// When enabled, a custom managed paint method should be used.
+        /// </summary>
+        public bool CustomPaint {
+            get =>_customPaint;
+            set {
+                if (_customPaint != value) {
+                    _customPaint = value;
+                    SetStyle(ControlStyles.UserPaint | ControlStyles.AllPaintingInWmPaint, value);
+                    Invalidate();
+                }
+            }
+        }
+
         private bool _needsDisplayRectangleFix = false;
+        private DarkModeTabControlContext<EnhancedTabControl> DarkModeContext { get; set; }
     }
 }
